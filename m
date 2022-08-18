@@ -1,71 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oOUQk-0000Gv-U4
-	for mharc-qemu-riscv@gnu.org; Wed, 17 Aug 2022 21:34:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33226)
+	id 1oOWwD-0003gI-8d
+	for mharc-qemu-riscv@gnu.org; Thu, 18 Aug 2022 00:15:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57358)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <guoren@kernel.org>) id 1oOUQj-0000Gl-Dm
- for qemu-riscv@nongnu.org; Wed, 17 Aug 2022 21:34:41 -0400
-Received: from dfw.source.kernel.org ([139.178.84.217]:47370)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <guoren@kernel.org>) id 1oOUQh-0008Es-BS
- for qemu-riscv@nongnu.org; Wed, 17 Aug 2022 21:34:40 -0400
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 675AE61449
- for <qemu-riscv@nongnu.org>; Thu, 18 Aug 2022 01:34:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 383A1C4347C
- for <qemu-riscv@nongnu.org>; Thu, 18 Aug 2022 01:34:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1660786468;
- bh=kP4YOam2hByoegQxQhqeKz8KDadmZLi7KWGXkubaXe4=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=R+DtF7mF4gW5JC/nQL80DCntaf5YbVpLMJHXAK6pdHS8wdsqhTF7HHv7bT8jCzFDi
- +Bn5fY5n/zIvD652/Yd2Q37JdsEAQBo0ex2bMTowbHgd95HBEA8H8H0l+JjS4O6wtd
- ZP7GmpBPu5zTyPlVqbpgPFv64d7poWENXK+uXTFtD/PlXqLYRMKP8Zum810UFhKxIs
- qmM82d+8WtO+dGHNrcRVbZVeT673osqqEqitSSNJX7BylANr7faWnS+s9bjstzeVyq
- schScVCuO9tjX3AxPNPhpndOWX9G9XiPe7qwtbS03PPG8s0I3KTH+B1kAPxNR/nIll
- wT9Fe4s/9bURA==
-Received: by mail-oa1-f42.google.com with SMTP id
- 586e51a60fabf-11ba6e79dd1so248631fac.12
- for <qemu-riscv@nongnu.org>; Wed, 17 Aug 2022 18:34:28 -0700 (PDT)
-X-Gm-Message-State: ACgBeo3ITjnZ7mtf1IgPee9R2SRnxpcXsd88v4OkpilVLLIXbKiD87Vz
- qxhAbhzbltaqDYAofSlYmBUumhOXlhmq/3lMs3Y=
-X-Google-Smtp-Source: AA6agR4J6/us0+dWTGNwHTCn9YSwBuzEjqLrB5jaad8CPFvVq7zCyrBlCYZuLuiey4qwwj63YqloHOXjEAzz1mQNFKg=
-X-Received: by 2002:a05:6870:8a13:b0:10e:7c08:36ba with SMTP id
- p19-20020a0568708a1300b0010e7c0836bamr3039976oaq.19.1660786467200; Wed, 17
- Aug 2022 18:34:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oOWwA-0003eh-TJ; Thu, 18 Aug 2022 00:15:18 -0400
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531]:46649)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oOWw9-0006xn-CF; Thu, 18 Aug 2022 00:15:18 -0400
+Received: by mail-pg1-x531.google.com with SMTP id d71so345488pgc.13;
+ Wed, 17 Aug 2022 21:15:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc;
+ bh=w7GoYBRnrKE92xQ4JzfKsWJPoRL+jsyGzmq0T0ZxZns=;
+ b=CPy0iTkbQKWmGK3nwCBWRzRLP6HQLXX0ns3PNC64HoihTNqx8Y78eaItUNETixSMtS
+ wmW98B2ZbTtw7oGwiK7StLiLNk+wfSdLuyCE3aGl6SvhakUZgdh2gnR1bYEYMbcXr3kw
+ AfnUXotxiUnvqpv27vHGJUvW9oyWz/TIftSzxMiM0NbxXq+LN832tP0Y2APPVagtIQi9
+ dQnhWUgo6T45bIogXwM84/H8JDNC8nx1E122HUSz5B35R4fWWTpNKcxUteMvNxwq1PTe
+ uQ3gmqDgOsuQKYfoeHTqSd0Y80ZeT0rRW73TW7z46trdP0OyuN+B989iw16z0IhWTupk
+ RL1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc;
+ bh=w7GoYBRnrKE92xQ4JzfKsWJPoRL+jsyGzmq0T0ZxZns=;
+ b=tNhUZ8zt3Uq/MGgU+C0Awl2YgSqOFNgjkcCcfXTj6jNNIigwGEFS7BdUUNI7Igt6Kj
+ kjniKwyLcYtVov+T0ZyqWkd+P34xhwQS6xpSggU+l+KsXvFV6KCH1/MSUb7/NAv5c02O
+ 4nV/95B6qKWznI33aTEJt5sZYz+GshSrkb73yxdGedgdxBdCSRpcenpuV7h6Umi3LmEp
+ iU1DKlW6hIbZ77GihL8YCaDDmd7WZptGknjHGdDmzgVkI5abk09JGvYsoRiXOryGvsG9
+ ag983ebMDIE9bXXwwZ+1Saik9KYKwaiai+tG3zQkJBSPGfbXdN9oqpvQtzfwVibpceif
+ Dgpw==
+X-Gm-Message-State: ACgBeo1Nq6vEU/LThnbuKZVdNq0V7LVO6RIhiH2h3Y3PJTQg4aJU8r5r
+ svZ21sEDjt8+L24veqh3B+eHeb5IEWyB57o9y28=
+X-Google-Smtp-Source: AA6agR5djN2ApQJDtm3KPXGhNNlV06xHVenPTO8hL7vAtykb051QLbbBlLaCZbvtmzoTGdR/CgezbBEVRPcZgr1r6kc=
+X-Received: by 2002:a05:6a00:88e:b0:52c:65a3:fdb4 with SMTP id
+ q14-20020a056a00088e00b0052c65a3fdb4mr1211611pfj.83.1660796115351; Wed, 17
+ Aug 2022 21:15:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220817201212.990712-1-mail@conchuod.ie>
- <20220817201212.990712-4-mail@conchuod.ie>
-In-Reply-To: <20220817201212.990712-4-mail@conchuod.ie>
-From: Guo Ren <guoren@kernel.org>
-Date: Thu, 18 Aug 2022 09:34:14 +0800
-X-Gmail-Original-Message-ID: <CAJF2gTRRjKVOnd5Yj_btfD2UhKzmXXcJCo_1-62MVkM85A=99g@mail.gmail.com>
-Message-ID: <CAJF2gTRRjKVOnd5Yj_btfD2UhKzmXXcJCo_1-62MVkM85A=99g@mail.gmail.com>
-Subject: Re: [PATCH v3 3/4] dt-bindings: riscv: add new riscv,
- isa strings for emulators
-To: Conor Dooley <mail@conchuod.ie>
-Cc: Thomas Gleixner <tglx@linutronix.de>, Marc Zyngier <maz@kernel.org>,
- Rob Herring <robh+dt@kernel.org>, 
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Paul Walmsley <paul.walmsley@sifive.com>, Albert Ou <aou@eecs.berkeley.edu>, 
- Daniel Lezcano <daniel.lezcano@linaro.org>, Anup Patel <anup@brainfault.org>, 
- Conor Dooley <conor.dooley@microchip.com>, Sagar Kadam <sagar.kadam@sifive.com>,
- Jessica Clarke <jrtc27@jrtc27.com>, Andrew Jones <ajones@ventanamicro.com>, 
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-riscv@lists.infradead.org, qemu-riscv@nongnu.org, 
- Rob Herring <robh@kernel.org>
+References: <20220816045408.1231135-1-rpathak@ventanamicro.com>
+In-Reply-To: <20220816045408.1231135-1-rpathak@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 18 Aug 2022 14:14:49 +1000
+Message-ID: <CAKmqyKM7ZtQAFz=9SJ0bzwVVxmOCS-w0fT=+xWS3HAJVuX-C9Q@mail.gmail.com>
+Subject: Re: [PATCH v1] target/riscv: Add xicondops in ISA entry
+To: Rahul Pathak <rpathak@ventanamicro.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Anup Patel <anup@brainfault.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=139.178.84.217; envelope-from=guoren@kernel.org;
- helo=dfw.source.kernel.org
-X-Spam_score_int: -71
-X-Spam_score: -7.2
-X-Spam_bar: -------
-X-Spam_report: (-7.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.082,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x531.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -79,89 +73,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2022 01:34:41 -0000
+X-List-Received-Date: Thu, 18 Aug 2022 04:15:19 -0000
 
-On Thu, Aug 18, 2022 at 4:12 AM Conor Dooley <mail@conchuod.ie> wrote:
+On Tue, Aug 16, 2022 at 2:54 PM Rahul Pathak <rpathak@ventanamicro.com> wrote:
 >
-> From: Conor Dooley <conor.dooley@microchip.com>
+> XVentanaCondOps is Ventana custom extension. Add
+> its extension entry in the ISA Ext array
 >
-> The QEMU virt and spike machines currently export a riscv,isa string of
-> "rv64imafdcsuh",
->
-> While the RISC-V foundation has been ratifying a bunch of extenstions
-> etc, the kernel has remained relatively static with what hardware is
-> supported - but the same is not true of QEMU. Using the virt machine
-> and running dt-validate on the dumped dtb fails, partly due to the
-> unexpected isa string.
->
-> Rather than enumerate the many many possbilities, change the pattern
-> to a regex, with the following assumptions:
-> - the single letter order is fixed & we don't care about things that
->   can't even do "ima"
-> - the standard multi letter extensions are all in a "_z<foo>" format
->   where the first letter of <foo> is a valid single letter extension
-> - _s & _h are used for supervisor and hyper visor extensions.
-> - after the first two chars, a standard multi letter extension name
->   could be an english   word (ifencei anyone?) so it's not worth
->   restricting the charset
-> - vendor ISA extensions begind with _x and have no charset restrictions
-> - we don't care about an e extension from an OS pov
-> - that attempting to validate the contents of the multiletter extensions
->   with dt-validate beyond the formatting is a futile, massively verbose
->   or unwieldy exercise at best.
-> - ima are required
->
-> The following limitations also apply:
-> - multi letter extension ordering is not enforced. dt-schema does not
->   appear to allow for named match groups, so the resulting regex would
->   be even more of a headache.
-> - ditto for the numbered extensions.
->
-> Finally, add me as a maintainer of the binding so that when it breaks
-> in the future, I can be held responsible!
->
-> Reported-by: Rob Herring <robh@kernel.org>
-> Link: https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
-> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
-> ---
-> Palmer, feel free to drop the maintainer addition. I just mostly want
-> to clean up my own mess on this when they decide to ratify more
-> extensions & this comes back up again.
-> ---
->  Documentation/devicetree/bindings/riscv/cpus.yaml | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->
-> diff --git a/Documentation/devicetree/bindings/riscv/cpus.yaml b/Documentation/devicetree/bindings/riscv/cpus.yaml
-> index 873dd12f6e89..c0e0bc5dce04 100644
-> --- a/Documentation/devicetree/bindings/riscv/cpus.yaml
-> +++ b/Documentation/devicetree/bindings/riscv/cpus.yaml
-> @@ -9,6 +9,7 @@ title: RISC-V bindings for 'cpus' DT nodes
->  maintainers:
->    - Paul Walmsley <paul.walmsley@sifive.com>
->    - Palmer Dabbelt <palmer@sifive.com>
-> +  - Conor Dooley <conor@kernel.org>
-Acked-by: Guo Ren <guoren@kernel.org>
+> Signed-off-by: Rahul Pathak <rpathak@ventanamicro.com>
 
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
 >
->  description: |
->    This document uses some terminology common to the RISC-V community
-> @@ -79,9 +80,7 @@ properties:
->        insensitive, letters in the riscv,isa string must be all
->        lowercase to simplify parsing.
->      $ref: "/schemas/types.yaml#/definitions/string"
-> -    enum:
-> -      - rv64imac
-> -      - rv64imafdc
-> +    pattern: ^rv(?:64|32)imaf?d?q?c?b?v?k?h?(?:(?:_[zsh][imafdqcbvksh]|_x)(?:[a-z])+)*$
+> This patch is based on branch riscv-to-apply.next (Alistair qemu tree)
+> Based on top commit: f2a91d8b78
 >
->    # RISC-V requires 'timebase-frequency' in /cpus, so disallow it here
->    timebase-frequency: false
+>  target/riscv/cpu.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 2498b93105..27d10bd6a6 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -104,6 +104,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+>      ISA_EXT_DATA_ENTRY(svinval, true, PRIV_VERSION_1_12_0, ext_svinval),
+>      ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0, ext_svnapot),
+>      ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt),
+> +    ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_XVentanaCondOps),
+>  };
+>
+>  static bool isa_ext_is_enabled(RISCVCPU *cpu,
 > --
-> 2.37.1
+> 2.34.1
 >
-
-
--- 
-Best Regards
- Guo Ren
+>
 
