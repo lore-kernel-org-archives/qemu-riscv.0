@@ -1,81 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oOg2f-0000qv-Gm
-	for mharc-qemu-riscv@gnu.org; Thu, 18 Aug 2022 09:58:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54868)
+	id 1oOiVZ-0008L5-5v
+	for mharc-qemu-riscv@gnu.org; Thu, 18 Aug 2022 12:36:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43868)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oOg2b-0000pe-3O
- for qemu-riscv@nongnu.org; Thu, 18 Aug 2022 09:58:33 -0400
-Received: from mail-yw1-x1132.google.com ([2607:f8b0:4864:20::1132]:43592)
+ (Exim 4.90_1) (envelope-from <robherring2@gmail.com>)
+ id 1oOiVX-0008Kv-OW
+ for qemu-riscv@nongnu.org; Thu, 18 Aug 2022 12:36:35 -0400
+Received: from mail-il1-f179.google.com ([209.85.166.179]:45909)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oOg2Y-0003NJ-MZ
- for qemu-riscv@nongnu.org; Thu, 18 Aug 2022 09:58:32 -0400
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-333a4a5d495so42830937b3.10
- for <qemu-riscv@nongnu.org>; Thu, 18 Aug 2022 06:58:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc;
- bh=K+oQRARp+LdRbAs7eqfv3Fp0hIjLfgJsS5qaaREhmiU=;
- b=WkuSHMbarOinWGYjJK/Rbo9p2y1IngEOg+5psSoxstdfMnUxXkOrfTKxcETgAezU+l
- 3qsAk6xIP1NcuUcv3OF6DVwHqdY5XFq/VvWOBT9lV5rRIQ148gClnnnCErxZgyT6lZT8
- XhM68CNKskV1tX+QyfmQddiUjf5AYVe9+SKWM+ngKLy0O3q3ehIkzVzwTydBcfWsdTjh
- 5wtXZ3e9Z+1Du3v9SDjS90JAIDv3U/lQMOx7nul8huf38cRahiiXUxt1pa//tsPErhZ7
- 0dNekBncUWOTZ4vjrvP5GLkijl5HQfUV88NKqTZEV72BMoxb4KF2iYpoESqFjJIMehc/
- CxUA==
+ (Exim 4.90_1) (envelope-from <robherring2@gmail.com>)
+ id 1oOiVW-0002Qa-3F
+ for qemu-riscv@nongnu.org; Thu, 18 Aug 2022 12:36:35 -0400
+Received: by mail-il1-f179.google.com with SMTP id a9so789131ilr.12
+ for <qemu-riscv@nongnu.org>; Thu, 18 Aug 2022 09:36:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc;
- bh=K+oQRARp+LdRbAs7eqfv3Fp0hIjLfgJsS5qaaREhmiU=;
- b=lRLbl/4bVXHsuxXKTm3pzcoMnpwa0W9jxdL/3a2YjoRkvuBqegjdQfKp8zeq9pxIBH
- DkGckg+t/x4e69KaASM4w5fyspkfEyk8WkhRlyznjaWKmzkNQuLeg3EPkucWdAkvQGye
- B/5Z45+W53wv1wtO1CMlORxaa+DaxKD2y0LzYXqQgZmpNxY1ou8VpOQ1Q66FzZOEbTzs
- 4xRt6vEnkgJ5atLXHWysI7FP0QOqjUS66kV5T4FHrOhHTIiixA4zh6q+1AzYJo9g2E3P
- II084tLPOaCGQAqnLgVw8TyjPcet8Lap4Ht1KJIzzBQ9MoBXlIsTj6R4Qme+SfKXLNEy
- gSKA==
-X-Gm-Message-State: ACgBeo0buyB3Ca1vhQ3vPtCZuX8YafN9tkH87MJaTQ77JVgtAXBVW8jM
- beQ9VpsXLEzgre1+c/Jh2wNcfXhz+X6JjNuAsohhEg==
-X-Google-Smtp-Source: AA6agR7BwlwXB/p7jRZYlTmTsiOP0DfSPfc1H+XePIRreW5O0LfQttXkyv2Hi7pn3dC5rofCN2aiQinLbZ34OjvcPqw=
-X-Received: by 2002:a25:4288:0:b0:692:8c1e:2e7e with SMTP id
- p130-20020a254288000000b006928c1e2e7emr3073092yba.479.1660831109575; Thu, 18
- Aug 2022 06:58:29 -0700 (PDT)
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
+ bh=M8whQnh20c5DrO/g1DklkK8u4I+Jzv+7yqvteJMRnk4=;
+ b=geYnXDxSY2fvNB+533wor2bfmnY2NOnsf9s88gtrcrnfGZioEXYrHo6tiw1ebbZhuZ
+ yAaH5mlMkm648PnkNyw7M/OhCsnuUicmZuEZM1N/EnHBLSvoPJ1hDVzO8Xrll30gB0gs
+ sZa2ntMgSiN1Sy6K0vLN4wGkW3lW4JFd/eLgOC/FBVSlZOdZ7iZzk1TG7ViDEqvWBwqt
+ Qwda19lIPG4GwGvRGFoo0QXvmMGOX21wt+dnutNLwGbA8c5QQz988U2hLlMDKduAyqIE
+ jbvBnAtjnLUjjMSpDWwLwEhEhH/DESCnhlf4YMcUTCZQqlWsGY6vYHZ+i92mJao2Qu65
+ XnPw==
+X-Gm-Message-State: ACgBeo2WKCKoVb6of84FFtgKp3DNeNgHUpJwLJYQNgxUfVMGPjZIQual
+ UFL++nONPdRKTvSHHWvNpg==
+X-Google-Smtp-Source: AA6agR6BO8dOlPsFEFWhj5EUY+W39h9E7U+aGdI6szZ6ee6PCPM3WFIUVT1ZpBVnS1ZlkaHZq6Da7g==
+X-Received: by 2002:a05:6e02:de2:b0:2e6:691f:eda5 with SMTP id
+ m2-20020a056e020de200b002e6691feda5mr1785399ilj.279.1660840592441; 
+ Thu, 18 Aug 2022 09:36:32 -0700 (PDT)
+Received: from robh.at.kernel.org ([2607:fb90:647:4ff2:3529:f8cd:d6cd:ac54])
+ by smtp.gmail.com with ESMTPSA id
+ x10-20020a056e021bca00b002e9256ab3f6sm177238ilv.31.2022.08.18.09.36.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 Aug 2022 09:36:31 -0700 (PDT)
+Received: (nullmailer pid 1996122 invoked by uid 1000);
+ Thu, 18 Aug 2022 16:36:26 -0000
+Date: Thu, 18 Aug 2022 10:36:26 -0600
+From: Rob Herring <robh@kernel.org>
+To: Conor Dooley <mail@conchuod.ie>
+Cc: Thomas Gleixner <tglx@linutronix.de>, Marc Zyngier <maz@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley <paul.walmsley@sifive.com>,
+ Albert Ou <aou@eecs.berkeley.edu>, Daniel Lezcano <daniel.lezcano@linaro.org>,
+ Anup Patel <anup@brainfault.org>, Conor Dooley <conor.dooley@microchip.com>,
+ Guo Ren <guoren@kernel.org>, Sagar Kadam <sagar.kadam@sifive.com>,
+ Jessica Clarke <jrtc27@jrtc27.com>, Andrew Jones <ajones@ventanamicro.com>,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-riscv@lists.infradead.org, qemu-riscv@nongnu.org
+Subject: Re: [PATCH v3 1/4] dt-bindings: timer: sifive,clint: add legacy
+ riscv compatible
+Message-ID: <20220818163626.GC1978870-robh@kernel.org>
+References: <20220817201212.990712-1-mail@conchuod.ie>
+ <20220817201212.990712-2-mail@conchuod.ie>
 MIME-Version: 1.0
-References: <20220815190303.2061559-1-peter.maydell@linaro.org>
- <20220815190303.2061559-8-peter.maydell@linaro.org>
- <CAKmqyKNo15Kz6-FtXL3C2wC7+aHHLTyGG5tOKQTpnM-c-kJO=w@mail.gmail.com>
-In-Reply-To: <CAKmqyKNo15Kz6-FtXL3C2wC7+aHHLTyGG5tOKQTpnM-c-kJO=w@mail.gmail.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 18 Aug 2022 14:57:48 +0100
-Message-ID: <CAFEAcA8wbST5bc_ZMFGAsFKGyFTkYRazeEqPnwh0aL6cNp0CeQ@mail.gmail.com>
-Subject: Re: [PATCH 7/7] target/riscv: Honour -semihosting-config userspace=on
- and enable=on
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-arm <qemu-arm@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Laurent Vivier <laurent@vivier.eu>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, 
- Stefan Pejic <stefan.pejic@syrmia.com>, Chris Wulff <crwulff@gmail.com>,
- Marek Vasut <marex@denx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Max Filippov <jcmvbkbc@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Furquan Shaikh <furquan@rivosinc.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1132;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1132.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220817201212.990712-2-mail@conchuod.ie>
+Received-SPF: pass client-ip=209.85.166.179;
+ envelope-from=robherring2@gmail.com; helo=mail-il1-f179.google.com
+X-Spam_score_int: -11
+X-Spam_score: -1.2
+X-Spam_bar: -
+X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FORGED_FROMDOMAIN=0.249, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,29 +80,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2022 13:58:33 -0000
+X-List-Received-Date: Thu, 18 Aug 2022 16:36:35 -0000
 
-On Thu, 18 Aug 2022 at 05:20, Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Tue, Aug 16, 2022 at 5:11 AM Peter Maydell <peter.maydell@linaro.org> wrote:
-> >
-> > The riscv target incorrectly enabled semihosting always, whether the
-> > user asked for it or not.  Call semihosting_enabled() passing the
-> > correct value to the is_userspace argument, which fixes this and also
-> > handles the userspace=on argument.
-> >
-> > Note that this is a behaviour change: we used to default to
-> > semihosting being enabled, and now the user must pass
-> > "-semihosting-config enable=on" if they want it.
-> >
-> > Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
->
-> I agree with Richard that a check in translate would be better, but
-> this is also an improvement on the broken implementation we have now
+On Wed, Aug 17, 2022 at 09:12:10PM +0100, Conor Dooley wrote:
+> From: Conor Dooley <conor.dooley@microchip.com>
+> 
+> While "real" hardware might not use the compatible string "riscv,clint0"
+> it is present in the driver & QEMU uses it for automatically generated
+> virt machine dtbs. To avoid dt-validate problems with QEMU produced
+> dtbs, such as the following, add it to the binding.
+> 
+> riscv-virt.dtb: clint@2000000: compatible:0: 'sifive,clint0' is not one of ['sifive,fu540-c000-clint', 'starfive,jh7100-clint', 'canaan,k210-clint']
+> 
+> Reported-by: Rob Herring <robh@kernel.org>
+> Link: https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
+> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+> ---
+>  .../bindings/timer/sifive,clint.yaml           | 18 ++++++++++++------
+>  1 file changed, 12 insertions(+), 6 deletions(-)
 
-Do you have an opinion on whether there are likely to be many
-users who are using riscv semihosting without explicitly enabling it
-on the command line ?
-
--- PMM
+Reviewed-by: Rob Herring <robh@kernel.org>
 
