@@ -1,83 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oOy0r-0003gh-Ub
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Aug 2022 05:09:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52276)
+	id 1oP3dY-0004D1-2F
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Aug 2022 11:10:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:32902)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oOy0n-0003fG-90
- for qemu-riscv@nongnu.org; Fri, 19 Aug 2022 05:09:53 -0400
-Received: from mail-yw1-x1132.google.com ([2607:f8b0:4864:20::1132]:35650)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1oP3dT-000496-SH
+ for qemu-riscv@nongnu.org; Fri, 19 Aug 2022 11:10:11 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:39606)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oOy0i-0001OO-GO
- for qemu-riscv@nongnu.org; Fri, 19 Aug 2022 05:09:49 -0400
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-33365a01f29so105908087b3.2
- for <qemu-riscv@nongnu.org>; Fri, 19 Aug 2022 02:09:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1oP3dR-0001Pm-Ts
+ for qemu-riscv@nongnu.org; Fri, 19 Aug 2022 11:10:11 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id d10so4381040plr.6
+ for <qemu-riscv@nongnu.org>; Fri, 19 Aug 2022 08:10:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc;
- bh=BxjXz4id0AZ3P9P1aIFwFBd/Yi6UjFUKEmIrLdL8IE8=;
- b=w5z2brcO4xV8HKBKCq5oOye86SsQCQ7966aVI919VFTyTGPukuJzteZhOiplUHuriZ
- Fff5k/MKJO8CQgA6nBQAL9rIDjZ6DohhyZqZkpLze1J67QFZcu+0ifTSWFmx6utN3CXk
- MsvjyNP75ZjK0rgY4mh2LCuUUdHqwyk/Nu3jd+deDKF9ya8WtKAssEPcgRHcHDU3IewT
- 2BD3NEwNhY8ewIrlyoThxbdzhUTGP3NaR+DA1MQd4FY03dUAtaRZBbdLwf+hVQsLmLcX
- Q9v89o01uxNTi4DgRHHU0nvpzVGeGYv0gaB5xapmNeIn5qwQ6G4YeRiqjaQYvymlmrX1
- 5jsg==
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc; bh=FYm5k9h2xs2IWKY6g3jSJnodEna7VliHX/getQOREew=;
+ b=PLTrlEmQKLXEA+0wrXYufy+RF+rMWnwI4h9w6hH+eX8pPeMKPD/vikauJFTaIcT04t
+ KDo4Qkc1nwqgY4svVKeuxWSkTWYRCbAPet9BfPtynl+DSo4cuvSVPXhVPALjASFX0aZQ
+ Fi8AfLbIyC2Zz6rRQ9Ya1VsTfsvQ96ZbpyzF4baXifDKjbbs7KcGAVmSzQ4MTAbzQ2ql
+ uYxNmxMRQkQZnRkb2BpJg1t92bTlz02tVqob316/ngAEvU82Nqm45vv+WhFtVQZ1luhJ
+ B+YkX1kK98wLyl9NFTJOEjwxom1NnerdXPeM7Gnvm7fC1YPIp3n+UDwmkpZoQNG7pEmm
+ vvbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc;
- bh=BxjXz4id0AZ3P9P1aIFwFBd/Yi6UjFUKEmIrLdL8IE8=;
- b=ehRXvqAET4wb1uz/NvVS+ik6vpKO2RPDtY0SaReuN7K2F39ZindfQZ9DTVKQygbTe0
- oOXTH3jOuRXQ0CuFsZwIBcYdT1wWK1747oTxOrdBh00GgXhgFmKLWKWLr32PczhE64Tb
- 9TVmYixaJMir7YmawnXeZQc5S3/sdOfBVDh8N68bbkIHT9GWmx8I3YYJl8PRwO7wxR7f
- XTQZ4uURonJ3UPCVmB8ES0zVICvtH6jUcVEKWe+YPOhgYuz7kpln/rmUl+cnynGdZacc
- BzhxdnT0Oc0nFhf1ipadpBQGmzkgBqI2S3HGharzR4FTJCEWr9FVDXSxqCOMssju+Led
- escw==
-X-Gm-Message-State: ACgBeo3rxyYsIJh/88q9L2ugCIX3XXBK3xn78GemZCqbsjJiqKi5aToG
- qbvqMu0nFZTHliC9GW+z/B2B+SL5UCQRlLoAaPyzeg==
-X-Google-Smtp-Source: AA6agR404c+8xHZnXLVdm3Am7D6f83J6b7OvPCUZLEzXnydA+j/i9g4Vwf61mhYasLNQUbC7bQs5UEuye03qxYt0sog=
-X-Received: by 2002:a25:55c2:0:b0:684:4159:38f4 with SMTP id
- j185-20020a2555c2000000b00684415938f4mr6542711ybb.288.1660900187158; Fri, 19
- Aug 2022 02:09:47 -0700 (PDT)
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc;
+ bh=FYm5k9h2xs2IWKY6g3jSJnodEna7VliHX/getQOREew=;
+ b=umrrG9RQqzOeYNcKwggw276dRmC8kNMe790Iv3vPR+cim+P9EmvN+98FZ86zShRkM/
+ li16lKDWdFpIJ7U0kqRi5X+J7kFAUXic2tQITNEJmPVA8ihAX7fj5iM7v+djWG7lwNj6
+ a3D/n1RgpzSQxVvvQ7sHy2rdkC091uS7k4EU0blbXqugkoAKUWj8pZSuW4nsyNqL37v0
+ iBHBGAksZeRZsrmASakLceuAEg1binzmfGUBAVPweYBeRwWVUzcWxmUZDBphqgx8RXqG
+ iJtkfZnLRzB1QyaSTeFQINlTDzoXPJQ11cXigN6LNjGYuzGXAKZzIMs7WjTlxwXRJUZr
+ 9xxw==
+X-Gm-Message-State: ACgBeo1irgeCWLVwFscKirmXvGJNSLENkRIcSnZU2sV1lB4xRGdp+XxY
+ L3VaMBosooB6/icOCmeYECfEjg==
+X-Google-Smtp-Source: AA6agR5JUqvGzy1gp1PahCkey+xmBc1a9CPF+QeS6LsAy26eB3Zj7Op98rxfc3dLD4f/dpgkFK/TuA==
+X-Received: by 2002:a17:902:8486:b0:171:48cd:1356 with SMTP id
+ c6-20020a170902848600b0017148cd1356mr7434586plo.153.1660921808474; 
+ Fri, 19 Aug 2022 08:10:08 -0700 (PDT)
+Received: from ?IPV6:2602:47:d49d:ec01:f37:9eb9:ca02:d0cb?
+ ([2602:47:d49d:ec01:f37:9eb9:ca02:d0cb])
+ by smtp.gmail.com with ESMTPSA id
+ j15-20020a17090a31cf00b001f2e6388fe6sm5455678pjf.6.2022.08.19.08.10.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 19 Aug 2022 08:10:07 -0700 (PDT)
+Message-ID: <787bcb91-c20c-3b33-b052-95453cf6827c@linaro.org>
+Date: Fri, 19 Aug 2022 08:10:04 -0700
 MIME-Version: 1.0
-References: <20220815190303.2061559-1-peter.maydell@linaro.org>
- <20220815190303.2061559-8-peter.maydell@linaro.org>
- <CAKmqyKNo15Kz6-FtXL3C2wC7+aHHLTyGG5tOKQTpnM-c-kJO=w@mail.gmail.com>
- <CAFEAcA8wbST5bc_ZMFGAsFKGyFTkYRazeEqPnwh0aL6cNp0CeQ@mail.gmail.com>
- <CAKmqyKMqrmrhRDTn11VAa1EKEmy=fzO_d+34Qp+jWYDP0uTd3Q@mail.gmail.com>
-In-Reply-To: <CAKmqyKMqrmrhRDTn11VAa1EKEmy=fzO_d+34Qp+jWYDP0uTd3Q@mail.gmail.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 19 Aug 2022 10:09:05 +0100
-Message-ID: <CAFEAcA_Rpu78zvaHJgC9P__ARSMDRza8ZbLUto4wD=vw2AuQTw@mail.gmail.com>
-Subject: Re: [PATCH 7/7] target/riscv: Honour -semihosting-config userspace=on
- and enable=on
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-arm <qemu-arm@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Laurent Vivier <laurent@vivier.eu>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, 
- Stefan Pejic <stefan.pejic@syrmia.com>, Chris Wulff <crwulff@gmail.com>,
- Marek Vasut <marex@denx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Max Filippov <jcmvbkbc@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Furquan Shaikh <furquan@rivosinc.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1132;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1132.google.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v2] target/riscv: Use official extension names for AIA CSRs
+Content-Language: en-US
+To: Anup Patel <apatel@ventanamicro.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Andrew Jones <ajones@ventanamicro.com>
+References: <20220819073147.174790-1-apatel@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20220819073147.174790-1-apatel@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,21 +87,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2022 09:09:53 -0000
+X-List-Received-Date: Fri, 19 Aug 2022 15:10:12 -0000
 
-On Fri, 19 Aug 2022 at 01:55, Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Thu, Aug 18, 2022 at 11:58 PM Peter Maydell <peter.maydell@linaro.org> wrote:
-> > Do you have an opinion on whether there are likely to be many
-> > users who are using riscv semihosting without explicitly enabling it
-> > on the command line ?
->
-> I don't think there are many users. We have always stated that
-> semihosting had to be enabled via the command line
+On 8/19/22 00:31, Anup Patel wrote:
+>   static int aia_hmode(CPURISCVState *env, int csrno)
+>   {
+> -    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> +    CPUState *cs = env_cpu(env);
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
 
- Cool -- I'll do a v2 of this with the change RTH wants, and
-we won't go through the deprecate-and-warn process for fixing
-the "didn't pay attention to command line option" bug.
+Better as
 
--- PMM
+     RISCVCPU *cpu = env_archcpu(env);
+
+
+r~
 
