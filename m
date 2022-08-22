@@ -1,97 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oPubB-0001f1-3M
-	for mharc-qemu-riscv@gnu.org; Sun, 21 Aug 2022 19:43:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51270)
+	id 1oPxZs-00077z-3r
+	for mharc-qemu-riscv@gnu.org; Sun, 21 Aug 2022 22:54:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60858)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=225a36311=wilfred.mallawa@opensource.wdc.com>)
- id 1oPub4-0001dI-Ks
- for qemu-riscv@nongnu.org; Sun, 21 Aug 2022 19:43:15 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:43028)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=225a36311=wilfred.mallawa@opensource.wdc.com>)
- id 1oPuaz-0003CL-K6
- for qemu-riscv@nongnu.org; Sun, 21 Aug 2022 19:43:11 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1661125389; x=1692661389;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=NkXq9BEmisYvxPBBnnF+3nWPoQ4uRWizUP6v4tzOoqo=;
- b=jKyJw7X1xmtSYNxYNZD+vn9TMvN38OtkiMJCZzFn4PA1oSYMXHbjSLiM
- krk+9Wtf1qSfqRBYtnL77qNkuf+SxdaJtjnPMcD4WGZtIO0sDi54DKm48
- yju6r8NoscFQXXTmO+4BNLy2s5yFC27+AaGmBiOM22HNRJjReHNYYNYAl
- noD6Y6oecZO3/R/4THhp9X0uE3YNPalTw2uN9rt3XD1xUBMpbqWfREe2I
- kk/3f3yTo5okeD1aunLJeO8JQohBQwOlLvHuJvsgTITP6gNBwByzsbkSg
- 0QpAhX67F4MFopTEN6LhwFlsAO5BwEfx7gh2Mx0U/HKL7pMf2lNEiOiCg w==;
-X-IronPort-AV: E=Sophos;i="5.93,253,1654531200"; d="scan'208";a="209788378"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 22 Aug 2022 07:43:08 +0800
-IronPort-SDR: Iim+64lRjfJL9EDcXvSIl/F/aE6mNUJy/zS+DNPl2/HRFhCAj9vvMyGr4jARVxk//W0HxcUmin
- lTAwt8RYJcyHcvJELn33n4ZtlACV/Ya5dyyxIYnbMlsTUJtsvyq+A751cM50Ic2FT11lm2f3Tj
- /i/PUWFCXwQg2Kklf6+b1X5YKIYh0vLU2XmfCwwAF4mRcahnhdCE4u80TgfUESapJwmmud/EnQ
- svIGDE2M0pwPdrloJMLKD477tj0fDpsJE1cpaBo2MrU46zf+xvEAfuHWvUrDSZyQKej5EsxwRH
- jwgDw63IaP65S7IgZUUES+ue
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 21 Aug 2022 15:58:30 -0700
-IronPort-SDR: agTDn4XvfEHdfHO3h7/rxXxLCO4iT83JIk4nsCUhU6PyRCnFnWKQYHsINAQdIni8bGOeVz8vKE
- /tXvMO8/8T1hfuNHOlQKaVPmmqHtuRG0h+Y8HGZSmcDG7rKAhxipyyK7x+Lz80eBOv2xe9n+v8
- Z8CSLL2j+O//sTDpORPKsuVCECvDeLwb8m6E3SxY7666oJt+eLXW8F+8nUSE5Q1vnlhnD+OxxP
- QrEwbiT6xSX8TsyYEZMJOAvo4dRJX7G5xly9q8SSMsanNwx7RxDd7dD1REiwyzgwOLcoksGcX+
- Qng=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 21 Aug 2022 16:43:08 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4M9sVz6fYRz1Rw4L
- for <qemu-riscv@nongnu.org>; Sun, 21 Aug 2022 16:43:07 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:mime-version
- :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1661125387; x=1663717388; bh=NkXq9BEmisYvxPBBnn
- F+3nWPoQ4uRWizUP6v4tzOoqo=; b=FfF95BDFbFITx1aVl5x8mJUYtNy/j7oyJm
- 5EpKFFrTUWCeAZSHkem5PpKV/Jewa8QfSjidB18e2N21/SYdlKRNFLIXFCI4/Wna
- TIyVSUN3cHG1hj8gNRWpDCE3H27SV9DeDTWOl9LGLi2y3ucuoUCvmI5RBT2XSnw6
- ypKfs8zS+hiNDVoEuUtCJmKOcsBNBo/6AKkzezdIU9VczVSE8/f2zYr/aBZfGiux
- udRSdfefimCX7Y9N0QPHLBU1lsAaCrt+hiFKQHDg0Hgo77nDRS8k24Q9fIvnLCjK
- tM7jBuqb/FrkektE95cTVPDAH0HC9uJxg9fQ/vprEWSCh8gs1OUA==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id UyUoNo1ZKn8b for <qemu-riscv@nongnu.org>;
- Sun, 21 Aug 2022 16:43:07 -0700 (PDT)
-Received: from fedora.home (unknown [10.225.165.39])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4M9sVw1qqwz1RtVk;
- Sun, 21 Aug 2022 16:43:03 -0700 (PDT)
-From: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
-To: Alistair.Francis@wdc.com,
-	qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, Wilfred Mallawa <wilfred.mallawa@wdc.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 4/4] hw/ssi: ibex_spi: update reg addr
-Date: Mon, 22 Aug 2022 09:42:01 +1000
-Message-Id: <20220821234200.34052-5-wilfred.mallawa@opensource.wdc.com>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20220821234200.34052-1-wilfred.mallawa@opensource.wdc.com>
-References: <20220821234200.34052-1-wilfred.mallawa@opensource.wdc.com>
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1oPxZr-00077i-67
+ for qemu-riscv@nongnu.org; Sun, 21 Aug 2022 22:54:11 -0400
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631]:39650)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1oPxZo-0003zu-Q3
+ for qemu-riscv@nongnu.org; Sun, 21 Aug 2022 22:54:09 -0400
+Received: by mail-ej1-x631.google.com with SMTP id u15so9938771ejt.6
+ for <qemu-riscv@nongnu.org>; Sun, 21 Aug 2022 19:54:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc;
+ bh=Wy64Nk2ed1qvnaFGi/8/yjKi42pX+H4Dsft2DDhujVU=;
+ b=BkNfuAQ0qUerBPWHF5B3nl+7FsoBeK+zq1AvlXx1ZlzwWlLVjO2xhBW4ccQ5ry/vKU
+ /YdX/LY96o8cRIay4EcLnme9pja8yon/o79qPU442Q4mz2kM0hfx99sgOausGn6CSxyN
+ sXJCB6jq+/ZJO499L61dlCDNO0Fe60qso5VOe3rTTeu9nu71kyrMwg5qKvqBA19Pi0dl
+ wZaoziK/kSOaPgP/Q80qPiAsyBbMgSv8PZKX+fTt+b2+1teqNqDHkgGp3M2vxTf6UVS9
+ 8fGeZ7j/9SoRRPYyK50+erURaF2nQ45cn5v0+FrqGKNQm3JVho7kpMezAd1YkN1wzgtu
+ YPKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc;
+ bh=Wy64Nk2ed1qvnaFGi/8/yjKi42pX+H4Dsft2DDhujVU=;
+ b=8Emp9laMDqTCiRSxxu5Am+vBqvxR9rr2aaHFiT2EtBO2AmabvwDIB1xTTj5kA03Nht
+ VEE/QQmf3838nTE7tHHIOi/ivVdKmsUbJDZDcVef/+pchJdXHLaYFE+1pjyxZGTEgMIU
+ nssdOP1RNZ6h6hA/lrATZ+oJULauAbh+i9jWf+xUxah+HXqEyMe2cjo9/wCNcG4IMits
+ e4wVvp1guVJGJDHCTW0fkf8voXdhpWaTKYJVwfbKTdDvmHtE4BU4WZTq45DlU6gtLvLy
+ FQ9ivWvGpRs2+FepvuDMmXoPp9+FWTq72vFZi5fX62PsPAiTioNWCBNIoyc4ui+zRe8M
+ HTrQ==
+X-Gm-Message-State: ACgBeo1C+f62b+vGLiBRysMCGX1vHQU4pKRj/NnUw7/IrMojszhdcxTp
+ JPzQBb4fFaLyMsoGeAukJdYcMaFWfJghRm+k4H9WCw==
+X-Google-Smtp-Source: AA6agR57NeUKvpHFOB8SKtMUawaEJG1+35tKeNU+xK+R+DMnk7PmIhGcrRyuEjhd1BVzuG/Sw9ciSg5aOsm9sEzyatQ=
+X-Received: by 2002:a17:907:9495:b0:73c:b19e:ce06 with SMTP id
+ dm21-20020a170907949500b0073cb19ece06mr9019636ejc.559.1661136846458; Sun, 21
+ Aug 2022 19:54:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.71.154.45;
- envelope-from=prvs=225a36311=wilfred.mallawa@opensource.wdc.com;
- helo=esa6.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20220819071137.1140627-1-tommy.wu@sifive.com>
+In-Reply-To: <20220819071137.1140627-1-tommy.wu@sifive.com>
+From: Jim Shu <jim.shu@sifive.com>
+Date: Mon, 22 Aug 2022 10:53:55 +0800
+Message-ID: <CALw707oBLpouyEADJgk2amDFU_8A84eNxwwCM7S3nZRVYnwVSA@mail.gmail.com>
+Subject: Re: [PATCH] include/hw/riscv/sifive_e.h: Fix the type of parent_obj
+ of SiFiveEState.
+To: Tommy Wu <tommy.wu@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::631;
+ envelope-from=jim.shu@sifive.com; helo=mail-ej1-x631.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -105,35 +74,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Aug 2022 23:43:16 -0000
+X-List-Received-Date: Mon, 22 Aug 2022 02:54:11 -0000
 
-From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Reviewed-by: Jim Shu <jim.shu@sifive.com>
 
-Updates the `EVENT_ENABLE` register to offset `0x34` as per
-OpenTitan spec [1].
 
-[1] https://docs.opentitan.org/hw/ip/spi_host/doc/#Reg_event_enable
-
-Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/ssi/ibex_spi_host.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/hw/ssi/ibex_spi_host.c b/hw/ssi/ibex_spi_host.c
-index 3809febb0c..bafff8ca1f 100644
---- a/hw/ssi/ibex_spi_host.c
-+++ b/hw/ssi/ibex_spi_host.c
-@@ -93,7 +93,7 @@ REG32(ERROR_STATUS, 0x30)
-     FIELD(ERROR_STATUS, CMDINVAL, 3, 1)
-     FIELD(ERROR_STATUS, CSIDINVAL, 4, 1)
-     FIELD(ERROR_STATUS, ACCESSINVAL, 5, 1)
--REG32(EVENT_ENABLE, 0x30)
-+REG32(EVENT_ENABLE, 0x34)
-     FIELD(EVENT_ENABLE, RXFULL, 0, 1)
-     FIELD(EVENT_ENABLE, TXEMPTY, 1, 1)
-     FIELD(EVENT_ENABLE, RXWM, 2, 1)
---=20
-2.37.2
-
+On Fri, Aug 19, 2022 at 3:11 PM Tommy Wu <tommy.wu@sifive.com> wrote:
+>
+> Fix the type of parent_obj of SiFiveEState from 'SysBusDevice'
+> to 'MachineState'. Because the parent of SiFiveEState is 'MachineState'.
+>
+> Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
+> ---
+>  include/hw/riscv/sifive_e.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+> index 83604da805..24359f9fe5 100644
+> --- a/include/hw/riscv/sifive_e.h
+> +++ b/include/hw/riscv/sifive_e.h
+> @@ -41,7 +41,7 @@ typedef struct SiFiveESoCState {
+>
+>  typedef struct SiFiveEState {
+>      /*< private >*/
+> -    SysBusDevice parent_obj;
+> +    MachineState parent_obj;
+>
+>      /*< public >*/
+>      SiFiveESoCState soc;
+> --
+> 2.27.0
+>
+>
 
