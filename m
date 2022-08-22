@@ -1,60 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oPyLO-0007nB-SX
-	for mharc-qemu-riscv@gnu.org; Sun, 21 Aug 2022 23:43:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60270)
+	id 1oPyQf-0001le-Pz
+	for mharc-qemu-riscv@gnu.org; Sun, 21 Aug 2022 23:48:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59198)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oPyLL-0007mc-Ux; Sun, 21 Aug 2022 23:43:16 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630]:43523)
+ id 1oPyQe-0001kn-3g; Sun, 21 Aug 2022 23:48:44 -0400
+Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e]:40560)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oPyLJ-0002dI-Jm; Sun, 21 Aug 2022 23:43:15 -0400
-Received: by mail-pl1-x630.google.com with SMTP id 20so8780504plo.10;
- Sun, 21 Aug 2022 20:43:12 -0700 (PDT)
+ id 1oPyQc-0003Po-16; Sun, 21 Aug 2022 23:48:43 -0400
+Received: by mail-pg1-x52e.google.com with SMTP id w13so3223011pgq.7;
+ Sun, 21 Aug 2022 20:48:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc;
- bh=GnSr/ceE2a6Ym9+EOSRBNl6/RWJV2xZgOKGCWtmq6Cw=;
- b=GtR7uI2mK0nMpfeZEGxv9H/Y4WgxdJrASc+HYQ63aXlBHio3rBfqU2ee87MnHHMXBh
- 3tG+Etg6xaoek7fzol5QHts2OOaf2yPC+xTIIocDjE845ccvyfDiBKGYKo7lQ/wcAIRZ
- 03A2MhLRvmAynE1iUHVX43obPq+ftCOqPWtu0hBfr8d1Cuw8x9k+W/JJLUKzsFIpwha5
- SlP9lTowD5qwOlnAppmFw9EQfms5SRrBnhAyxNBNR2V8rM6o1NHTgWG9edSUVQGgKGn5
- GUQEqa9HVbhkwSwYkqHmX+qWp10sG9cObva6sxe0NL/YTVd0vnQ5uict/KwCfJ8v/w8O
- PBaw==
+ bh=uFl98zEOmu4MtScHdg5XAW2FOeMp0kjIzL5b1fp1gxw=;
+ b=S+6gYl84ZRMZsrNCaqhaRC4KhN7yDc3X3+IdvtYruJsTxHxDtXVfHtjLUeEWMIEu8N
+ bYsHQ6kZqGFiGzvUodiLi29D1B6zF3gZZ736nkDErqHUg+vB5a4m20kws2sbXf/Rtnyc
+ 7UNwIpvt7Q6XoLuadamGYuCnOcjYU+WUJJVb6ZKn6Y85jsZIfUZl6BWOP0QJi5/Ttbmw
+ izQDtXssTNtrQCUVGV8MhVimkh3WnxFuDJj5sctq+QC0VjQfyHMEEG1TuIWlLGK6e7zM
+ CyXBeooRDo8816adzJRxT0JfXn3937mFUOa+mwulVTQM4P0g+k3eX0jhADDEsYYad4hz
+ QeTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc;
- bh=GnSr/ceE2a6Ym9+EOSRBNl6/RWJV2xZgOKGCWtmq6Cw=;
- b=hBcSaeyOvxBErt0vM49k/JlJSymSVQLwUCbL4kUAf+bqM+lIhsdkOi5tHviMmbqa75
- wJ0YVMF797Pqj4ETh5yZ/kHYAcddLtrzqvMTR8h43DkOgYVyRstPWQuCgGVi8TiZ6mDm
- wbVzDK0n4TsPfNPeA8y201QRot3TLpvIgx0iIIxMkDJJ2PaMcea/bDTIgfHGnUO1Hg5m
- gZTQtZZdseONW4Ufv3w4vxu0nkLpA4hVg8j4dAfLYbD//bTYxsMAL5CqfAIRHF2t4U2K
- RLpQZneD433wRdT8Mk1t7N082zAMA7lX+UOzotlnLWkF42HEetTL3TIEecjvkCYnJIZd
- 46VA==
-X-Gm-Message-State: ACgBeo3E8bMAVjBOlSisa9W909SMTqANnWfFBBOkMmWyyfGUh6zopKVV
- Cpap9feB88Dd1stNhrDfnkrAW491u7VoCwg2Xbk=
-X-Google-Smtp-Source: AA6agR5ZLUnBw7pT48Zk4ntg0PkeQ4+K/7lbWdUjgeZaPNHmB9iP/kNN+P8EQ8HTBNCr4ClkbycUmy5foJRSAhKDI80=
-X-Received: by 2002:a17:90b:3b49:b0:1f4:df09:d671 with SMTP id
- ot9-20020a17090b3b4900b001f4df09d671mr20865788pjb.129.1661139791726; Sun, 21
- Aug 2022 20:43:11 -0700 (PDT)
+ bh=uFl98zEOmu4MtScHdg5XAW2FOeMp0kjIzL5b1fp1gxw=;
+ b=C4AOPt1j6nEdRFepFYWn40iH66GwLmMZYUOJfC5KYSBUbtdb5ZUoGOAvgpB8wzlJzz
+ Ye61X+pWM1WYwlv9u8lZXTYV+SDLjLUh7j2ehD6GtWbKNBtGH5LD8mg9lwR8fj7tUoPM
+ k2mwy1pXSFi2L0YlN5zU2KCAVkGvZNBCJHXafvzj5CIN/xEQd4NeIUIRTeyH4hD8WqFO
+ QP50s44WHWqS+XqjxXxfWTWskDTc9OY729iVRAjwmLIJONncsflAIbtfbslWlf4SW1qi
+ Ye/vPcqfA/MZ+vBHHq4vPH6uJapBu/4Tjc/X+PoRfKVNeC25Eg+6jeho/4/gDMo/cwKh
+ lQDA==
+X-Gm-Message-State: ACgBeo1eiY4Sa0xWFeppS5aJs2RYwnpMjwZpRQtorE6IC25l7K4YlK00
+ d2VmGS/ELPkmam08Zmfn/HF5bxDibEoI3+zNZJk=
+X-Google-Smtp-Source: AA6agR5zg9yrNwvFyFGlRI8sA85TzErMXC5SoFThE8c2gRRLUzy6FHTheQFK6FTbmvPZTjQB2J6mH0NJvIfvc8SLjpU=
+X-Received: by 2002:a63:5f49:0:b0:41d:85a1:c4da with SMTP id
+ t70-20020a635f49000000b0041d85a1c4damr15415601pgb.366.1661140119919; Sun, 21
+ Aug 2022 20:48:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220821234200.34052-1-wilfred.mallawa@opensource.wdc.com>
- <20220821234200.34052-3-wilfred.mallawa@opensource.wdc.com>
-In-Reply-To: <20220821234200.34052-3-wilfred.mallawa@opensource.wdc.com>
+References: <20220820042958.377018-1-apatel@ventanamicro.com>
+In-Reply-To: <20220820042958.377018-1-apatel@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Aug 2022 13:42:45 +1000
-Message-ID: <CAKmqyKMXNPdh9W6DLTDxA9GaKfsn+ZVvPH1mTcFpcXprB9-dvQ@mail.gmail.com>
-Subject: Re: [PATCH v3 2/4] hw/ssi: ibex_spi: fixup coverity issue
-To: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Mon, 22 Aug 2022 13:48:13 +1000
+Message-ID: <CAKmqyKO5DQK_VPmtU+5CFLcWnJkjazAmgsXAmP1eBjc3dDwCNA@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: Use official extension names for AIA CSRs
+To: Anup Patel <apatel@ventanamicro.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Atish Patra <atishp@atishpatra.org>, 
+ Anup Patel <anup@brainfault.org>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Wilfred Mallawa <wilfred.mallawa@wdc.com>, 
  Andrew Jones <ajones@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x52e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -75,282 +78,240 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Aug 2022 03:43:16 -0000
+X-List-Received-Date: Mon, 22 Aug 2022 03:48:44 -0000
 
-On Mon, Aug 22, 2022 at 9:53 AM Wilfred Mallawa
-<wilfred.mallawa@opensource.wdc.com> wrote:
+On Sat, Aug 20, 2022 at 2:30 PM Anup Patel <apatel@ventanamicro.com> wrote:
 >
-> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> The arch review of AIA spec is completed and we now have official
+> extension names for AIA: Smaia (M-mode AIA CSRs) and Ssaia (S-mode
+> AIA CSRs).
 >
-> This patch addresses the coverity issues specified in [1],
-> as suggested, `FIELD_DP32()`/`FIELD_EX32()` macros have been
-> implemented to clean up the code.
+> Refer, section 1.6 of the latest AIA v0.3.1 stable specification at
+> https://github.com/riscv/riscv-aia/releases/download/0.3.1-draft.32/riscv-interrupts-032.pdf)
 >
-> [1] https://www.mail-archive.com/qemu-devel@nongnu.org/msg887713.html
+> Based on above, we update QEMU RISC-V to:
+> 1) Have separate config options for Smaia and Ssaia extensions
+>    which replace RISCV_FEATURE_AIA in CPU features
+> 2) Not generate AIA INTC compatible string in virt machine
 >
-> Fixes: Coverity CID 1488107
->
-> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
 > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> ---
->  hw/ssi/ibex_spi_host.c | 130 +++++++++++++++++++++--------------------
->  1 file changed, 66 insertions(+), 64 deletions(-)
->
-> diff --git a/hw/ssi/ibex_spi_host.c b/hw/ssi/ibex_spi_host.c
-> index 601041d719..1298664d2b 100644
-> --- a/hw/ssi/ibex_spi_host.c
-> +++ b/hw/ssi/ibex_spi_host.c
-> @@ -108,18 +108,20 @@ static inline uint8_t div4_round_up(uint8_t dividend)
->
->  static void ibex_spi_rxfifo_reset(IbexSPIHostState *s)
->  {
-> +    uint32_t data = s->regs[IBEX_SPI_HOST_STATUS];
->      /* Empty the RX FIFO and assert RXEMPTY */
->      fifo8_reset(&s->rx_fifo);
-> -    s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_RXFULL_MASK;
-> -    s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_RXEMPTY_MASK;
-> +    data = FIELD_DP32(data, STATUS, RXEMPTY, 1);
 
-Doesn't this no longer clear the RXFULL bits?
-
-> +    s->regs[IBEX_SPI_HOST_STATUS] = data;
->  }
->
->  static void ibex_spi_txfifo_reset(IbexSPIHostState *s)
->  {
-> +    uint32_t data = s->regs[IBEX_SPI_HOST_STATUS];
->      /* Empty the TX FIFO and assert TXEMPTY */
->      fifo8_reset(&s->tx_fifo);
-> -    s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_TXFULL_MASK;
-> -    s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_TXEMPTY_MASK;
-> +    data = FIELD_DP32(data, STATUS, TXEMPTY, 1);
-
-Same here about TXFULL
-
-Otherwise the patch looks good
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> +    s->regs[IBEX_SPI_HOST_STATUS] = data;
->  }
+> ---
+> Changes since v2:
+>  - Use env_archcpu() to get RISCVCPU * from CPURISCVState *
+> Changes since v1:
+>  - Remove redundant "has_aia" parameter from riscv_cpu_pending_to_irq()
+> ---
+>  hw/intc/riscv_imsic.c     |  4 +++-
+>  hw/riscv/virt.c           | 13 ++-----------
+>  target/riscv/cpu.c        |  9 ++++-----
+>  target/riscv/cpu.h        |  4 ++--
+>  target/riscv/cpu_helper.c |  3 ++-
+>  target/riscv/csr.c        | 24 ++++++++++++++++++------
+>  6 files changed, 31 insertions(+), 26 deletions(-)
 >
->  static void ibex_spi_host_reset(DeviceState *dev)
-> @@ -162,37 +164,38 @@ static void ibex_spi_host_reset(DeviceState *dev)
->   */
->  static void ibex_spi_host_irq(IbexSPIHostState *s)
->  {
-> -    bool error_en = s->regs[IBEX_SPI_HOST_INTR_ENABLE]
-> -                    & R_INTR_ENABLE_ERROR_MASK;
-> -    bool event_en = s->regs[IBEX_SPI_HOST_INTR_ENABLE]
-> -                    & R_INTR_ENABLE_SPI_EVENT_MASK;
-> -    bool err_pending = s->regs[IBEX_SPI_HOST_INTR_STATE]
-> -                        & R_INTR_STATE_ERROR_MASK;
-> -    bool status_pending = s->regs[IBEX_SPI_HOST_INTR_STATE]
-> -                        & R_INTR_STATE_SPI_EVENT_MASK;
-> +    uint32_t intr_test_reg = s->regs[IBEX_SPI_HOST_INTR_TEST];
-> +    uint32_t intr_en_reg = s->regs[IBEX_SPI_HOST_INTR_ENABLE];
-> +    uint32_t intr_state_reg = s->regs[IBEX_SPI_HOST_INTR_STATE];
-> +
-> +    uint32_t err_en_reg = s->regs[IBEX_SPI_HOST_ERROR_ENABLE];
-> +    uint32_t event_en_reg = s->regs[IBEX_SPI_HOST_EVENT_ENABLE];
-> +    uint32_t err_status_reg = s->regs[IBEX_SPI_HOST_ERROR_STATUS];
-> +    uint32_t status_reg = s->regs[IBEX_SPI_HOST_STATUS];
-> +
-> +
-> +    bool error_en = FIELD_EX32(intr_en_reg, INTR_ENABLE, ERROR);
-> +    bool event_en = FIELD_EX32(intr_en_reg, INTR_ENABLE, SPI_EVENT);
-> +    bool err_pending = FIELD_EX32(intr_state_reg, INTR_STATE, ERROR);
-> +    bool status_pending = FIELD_EX32(intr_state_reg, INTR_STATE, SPI_EVENT);
-> +
->      int err_irq = 0, event_irq = 0;
+> diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+> index 8615e4cc1d..4d4d5b50ca 100644
+> --- a/hw/intc/riscv_imsic.c
+> +++ b/hw/intc/riscv_imsic.c
+> @@ -344,9 +344,11 @@ static void riscv_imsic_realize(DeviceState *dev, Error **errp)
 >
->      /* Error IRQ enabled and Error IRQ Cleared */
->      if (error_en && !err_pending) {
->          /* Event enabled, Interrupt Test Error */
-> -        if (s->regs[IBEX_SPI_HOST_INTR_TEST] & R_INTR_TEST_ERROR_MASK) {
-> +        if (FIELD_EX32(intr_test_reg, INTR_TEST,  ERROR)) {
->              err_irq = 1;
-> -        } else if ((s->regs[IBEX_SPI_HOST_ERROR_ENABLE]
-> -                    &  R_ERROR_ENABLE_CMDBUSY_MASK) &&
-> -                    s->regs[IBEX_SPI_HOST_ERROR_STATUS]
-> -                    & R_ERROR_STATUS_CMDBUSY_MASK) {
-> +        } else if (FIELD_EX32(err_en_reg, ERROR_ENABLE,  CMDBUSY) &&
-> +                   FIELD_EX32(err_status_reg, ERROR_STATUS,  CMDBUSY)) {
->              /* Wrote to COMMAND when not READY */
->              err_irq = 1;
-> -        } else if ((s->regs[IBEX_SPI_HOST_ERROR_ENABLE]
-> -                    &  R_ERROR_ENABLE_CMDINVAL_MASK) &&
-> -                    s->regs[IBEX_SPI_HOST_ERROR_STATUS]
-> -                    & R_ERROR_STATUS_CMDINVAL_MASK) {
-> +        } else if (FIELD_EX32(err_en_reg, ERROR_ENABLE,  CMDINVAL)  &&
-> +                   FIELD_EX32(err_status_reg, ERROR_STATUS,  CMDINVAL)) {
->              /* Invalid command segment */
->              err_irq = 1;
-> -        } else if ((s->regs[IBEX_SPI_HOST_ERROR_ENABLE]
-> -                    & R_ERROR_ENABLE_CSIDINVAL_MASK) &&
-> -                    s->regs[IBEX_SPI_HOST_ERROR_STATUS]
-> -                    & R_ERROR_STATUS_CSIDINVAL_MASK) {
-> +        } else if (FIELD_EX32(err_en_reg, ERROR_ENABLE,  CSIDINVAL) &&
-> +                   FIELD_EX32(err_status_reg, ERROR_STATUS,  CSIDINVAL)) {
->              /* Invalid value for CSID */
->              err_irq = 1;
+>      /* Force select AIA feature and setup CSR read-modify-write callback */
+>      if (env) {
+> -        riscv_set_feature(env, RISCV_FEATURE_AIA);
+>          if (!imsic->mmode) {
+> +            rcpu->cfg.ext_ssaia = true;
+>              riscv_cpu_set_geilen(env, imsic->num_pages - 1);
+> +        } else {
+> +            rcpu->cfg.ext_smaia = true;
 >          }
-> @@ -204,22 +207,19 @@ static void ibex_spi_host_irq(IbexSPIHostState *s)
+>          riscv_cpu_set_aia_ireg_rmw_fn(env, (imsic->mmode) ? PRV_M : PRV_S,
+>                                        riscv_imsic_rmw, imsic);
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index e779d399ae..b041b33afc 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -261,17 +261,8 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+>          qemu_fdt_add_subnode(mc->fdt, intc_name);
+>          qemu_fdt_setprop_cell(mc->fdt, intc_name, "phandle",
+>              intc_phandles[cpu]);
+> -        if (riscv_feature(&s->soc[socket].harts[cpu].env,
+> -                          RISCV_FEATURE_AIA)) {
+> -            static const char * const compat[2] = {
+> -                "riscv,cpu-intc-aia", "riscv,cpu-intc"
+> -            };
+> -            qemu_fdt_setprop_string_array(mc->fdt, intc_name, "compatible",
+> -                                      (char **)&compat, ARRAY_SIZE(compat));
+> -        } else {
+> -            qemu_fdt_setprop_string(mc->fdt, intc_name, "compatible",
+> -                "riscv,cpu-intc");
+> -        }
+> +        qemu_fdt_setprop_string(mc->fdt, intc_name, "compatible",
+> +            "riscv,cpu-intc");
+>          qemu_fdt_setprop(mc->fdt, intc_name, "interrupt-controller", NULL, 0);
+>          qemu_fdt_setprop_cell(mc->fdt, intc_name, "#interrupt-cells", 1);
 >
->      /* Event IRQ Enabled and Event IRQ Cleared */
->      if (event_en && !status_pending) {
-> -        if (s->regs[IBEX_SPI_HOST_INTR_TEST] & R_INTR_TEST_SPI_EVENT_MASK) {
-> +        if (FIELD_EX32(intr_test_reg, INTR_STATE,  SPI_EVENT)) {
->              /* Event enabled, Interrupt Test Event */
->              event_irq = 1;
-> -        } else if ((s->regs[IBEX_SPI_HOST_EVENT_ENABLE]
-> -                    & R_EVENT_ENABLE_READY_MASK) &&
-> -                    (s->regs[IBEX_SPI_HOST_STATUS] & R_STATUS_READY_MASK)) {
-> +        } else if (FIELD_EX32(event_en_reg, EVENT_ENABLE,  READY) &&
-> +                   FIELD_EX32(status_reg, STATUS, READY)) {
->              /* SPI Host ready for next command */
->              event_irq = 1;
-> -        } else if ((s->regs[IBEX_SPI_HOST_EVENT_ENABLE]
-> -                    & R_EVENT_ENABLE_TXEMPTY_MASK) &&
-> -                    (s->regs[IBEX_SPI_HOST_STATUS] & R_STATUS_TXEMPTY_MASK)) {
-> +        } else if (FIELD_EX32(event_en_reg, EVENT_ENABLE,  TXEMPTY) &&
-> +                   FIELD_EX32(status_reg, STATUS,  TXEMPTY)) {
->              /* SPI TXEMPTY, TXFIFO drained */
->              event_irq = 1;
-> -        } else if ((s->regs[IBEX_SPI_HOST_EVENT_ENABLE]
-> -                    & R_EVENT_ENABLE_RXFULL_MASK) &&
-> -                    (s->regs[IBEX_SPI_HOST_STATUS] & R_STATUS_RXFULL_MASK)) {
-> +        } else if (FIELD_EX32(event_en_reg, EVENT_ENABLE,  RXFULL) &&
-> +                   FIELD_EX32(status_reg, STATUS,  RXFULL)) {
->              /* SPI RXFULL, RXFIFO  full */
->              event_irq = 1;
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index d11113fbaa..3cf0c86661 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -101,6 +101,8 @@ static const struct isa_ext_data isa_edata_arr[] = {
+>      ISA_EXT_DATA_ENTRY(zve64f, true, PRIV_VERSION_1_12_0, ext_zve64f),
+>      ISA_EXT_DATA_ENTRY(zhinx, true, PRIV_VERSION_1_12_0, ext_zhinx),
+>      ISA_EXT_DATA_ENTRY(zhinxmin, true, PRIV_VERSION_1_12_0, ext_zhinxmin),
+> +    ISA_EXT_DATA_ENTRY(smaia, true, PRIV_VERSION_1_12_0, ext_smaia),
+> +    ISA_EXT_DATA_ENTRY(ssaia, true, PRIV_VERSION_1_12_0, ext_ssaia),
+>      ISA_EXT_DATA_ENTRY(sscofpmf, true, PRIV_VERSION_1_12_0, ext_sscofpmf),
+>      ISA_EXT_DATA_ENTRY(sstc, true, PRIV_VERSION_1_12_0, ext_sstc),
+>      ISA_EXT_DATA_ENTRY(svinval, true, PRIV_VERSION_1_12_0, ext_svinval),
+> @@ -669,10 +671,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
 >          }
-> @@ -232,10 +232,11 @@ static void ibex_spi_host_irq(IbexSPIHostState *s)
->
->  static void ibex_spi_host_transfer(IbexSPIHostState *s)
->  {
-> -    uint32_t rx, tx;
-> +    uint32_t rx, tx, data;
->      /* Get num of one byte transfers */
-> -    uint8_t segment_len = ((s->regs[IBEX_SPI_HOST_COMMAND] & R_COMMAND_LEN_MASK)
-> -                          >> R_COMMAND_LEN_SHIFT);
-> +    uint8_t segment_len = FIELD_EX32(s->regs[IBEX_SPI_HOST_COMMAND],
-> +                                     COMMAND,  LEN);
-> +
->      while (segment_len > 0) {
->          if (fifo8_is_empty(&s->tx_fifo)) {
->              /* Assert Stall */
-> @@ -262,22 +263,21 @@ static void ibex_spi_host_transfer(IbexSPIHostState *s)
->          --segment_len;
 >      }
 >
-> +    data = s->regs[IBEX_SPI_HOST_STATUS];
->      /* Assert Ready */
-> -    s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_READY_MASK;
-> +    data = FIELD_DP32(data, STATUS, READY, 1);
->      /* Set RXQD */
-> -    s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_RXQD_MASK;
-> -    s->regs[IBEX_SPI_HOST_STATUS] |= (R_STATUS_RXQD_MASK
-> -                                    & div4_round_up(segment_len));
-> +    data = FIELD_DP32(data, STATUS, RXQD, div4_round_up(segment_len));
->      /* Set TXQD */
-> -    s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_TXQD_MASK;
-> -    s->regs[IBEX_SPI_HOST_STATUS] |= (fifo8_num_used(&s->tx_fifo) / 4)
-> -                                    & R_STATUS_TXQD_MASK;
-> +    data = FIELD_DP32(data, STATUS, TXQD, fifo8_num_used(&s->tx_fifo) / 4);
->      /* Clear TXFULL */
-> -    s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_TXFULL_MASK;
-> -    /* Assert TXEMPTY and drop remaining bytes that exceed segment_len */
-> -    ibex_spi_txfifo_reset(s);
-> +    data = FIELD_DP32(data, STATUS, TXFULL, 0);
->      /* Reset RXEMPTY */
-> -    s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_RXEMPTY_MASK;
-> +    data = FIELD_DP32(data, STATUS, RXEMPTY, 0);
-> +    /* Update register status */
-> +    s->regs[IBEX_SPI_HOST_STATUS] = data;
-> +    /* Drop remaining bytes that exceed segment_len */
-> +    ibex_spi_txfifo_reset(s);
->
->      ibex_spi_host_irq(s);
->  }
-> @@ -340,7 +340,7 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
->  {
->      IbexSPIHostState *s = opaque;
->      uint32_t val32 = val64;
-> -    uint32_t shift_mask = 0xff;
-> +    uint32_t shift_mask = 0xff, data = 0, status = 0;
->      uint8_t txqd_len;
->
->      trace_ibex_spi_host_write(addr, size, val64);
-> @@ -397,22 +397,24 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
->          s->regs[addr] = val32;
->
->          /* STALL, IP not enabled */
-> -        if (!(s->regs[IBEX_SPI_HOST_CONTROL] & R_CONTROL_SPIEN_MASK)) {
-> +        if (!(FIELD_EX32(s->regs[IBEX_SPI_HOST_CONTROL],
-> +                         CONTROL, SPIEN))) {
->              return;
->          }
->
->          /* SPI not ready, IRQ Error */
-> -        if (!(s->regs[IBEX_SPI_HOST_STATUS] & R_STATUS_READY_MASK)) {
-> +        if (!(FIELD_EX32(s->regs[IBEX_SPI_HOST_STATUS],
-> +                         STATUS, READY))) {
->              s->regs[IBEX_SPI_HOST_ERROR_STATUS] |= R_ERROR_STATUS_CMDBUSY_MASK;
->              ibex_spi_host_irq(s);
->              return;
->          }
-> +
->          /* Assert Not Ready */
->          s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_READY_MASK;
->
-> -        if (((val32 & R_COMMAND_DIRECTION_MASK) >> R_COMMAND_DIRECTION_SHIFT)
-> -            != BIDIRECTIONAL_TRANSFER) {
-> -                qemu_log_mask(LOG_UNIMP,
-> +        if (FIELD_EX32(val32, COMMAND, DIRECTION) != BIDIRECTIONAL_TRANSFER) {
-> +            qemu_log_mask(LOG_UNIMP,
->                            "%s: Rx Only/Tx Only are not supported\n", __func__);
->          }
->
-> @@ -452,8 +454,8 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
->                  return;
->              }
->              /* Byte ordering is set by the IP */
-> -            if ((s->regs[IBEX_SPI_HOST_STATUS] &
-> -                R_STATUS_BYTEORDER_MASK) == 0) {
-> +            status = s->regs[IBEX_SPI_HOST_STATUS];
-> +            if (FIELD_EX32(status, STATUS, BYTEORDER) == 0) {
->                  /* LE: LSB transmitted first (default for ibex processor) */
->                  shift_mask = 0xff << (i * 8);
->              } else {
-> @@ -464,18 +466,18 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
->
->              fifo8_push(&s->tx_fifo, (val32 & shift_mask) >> (i * 8));
->          }
+> -    if (cpu->cfg.aia) {
+> -        riscv_set_feature(env, RISCV_FEATURE_AIA);
+> -    }
 > -
-> +        status = s->regs[IBEX_SPI_HOST_STATUS];
->          /* Reset TXEMPTY */
-> -        s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_TXEMPTY_MASK;
-> +        status = FIELD_DP32(status, STATUS, TXEMPTY, 0);
->          /* Update TXQD */
-> -        txqd_len = (s->regs[IBEX_SPI_HOST_STATUS] &
-> -                    R_STATUS_TXQD_MASK) >> R_STATUS_TXQD_SHIFT;
-> +        txqd_len = FIELD_EX32(status, STATUS, TXQD);
->          /* Partial bytes (size < 4) are padded, in words. */
->          txqd_len += 1;
-> -        s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_TXQD_MASK;
-> -        s->regs[IBEX_SPI_HOST_STATUS] |= txqd_len;
-> +        status = FIELD_DP32(status, STATUS, TXQD, txqd_len);
->          /* Assert Ready */
-> -        s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_READY_MASK;
-> +        status = FIELD_DP32(status, STATUS, READY, 1);
-> +        /* Update register status */
-> +        s->regs[IBEX_SPI_HOST_STATUS] = status;
->          break;
->      case IBEX_SPI_HOST_ERROR_ENABLE:
->          s->regs[addr] = val32;
+>      if (cpu->cfg.debug) {
+>          riscv_set_feature(env, RISCV_FEATURE_DEBUG);
+>      }
+> @@ -1058,7 +1056,8 @@ static Property riscv_cpu_extensions[] = {
+>      DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+>      /* ePMP 0.9.3 */
+>      DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+> -    DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
+> +    DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
+> +    DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
+>
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 42edfa4558..15cad73def 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -85,7 +85,6 @@ enum {
+>      RISCV_FEATURE_PMP,
+>      RISCV_FEATURE_EPMP,
+>      RISCV_FEATURE_MISA,
+> -    RISCV_FEATURE_AIA,
+>      RISCV_FEATURE_DEBUG
+>  };
+>
+> @@ -452,6 +451,8 @@ struct RISCVCPUConfig {
+>      bool ext_zve64f;
+>      bool ext_zmmul;
+>      bool ext_sscofpmf;
+> +    bool ext_smaia;
+> +    bool ext_ssaia;
+>      bool rvv_ta_all_1s;
+>      bool rvv_ma_all_1s;
+>
+> @@ -472,7 +473,6 @@ struct RISCVCPUConfig {
+>      bool mmu;
+>      bool pmp;
+>      bool epmp;
+> -    bool aia;
+>      bool debug;
+>      uint64_t resetvec;
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 81948b37dd..67e4c0efd2 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -309,6 +309,7 @@ static int riscv_cpu_pending_to_irq(CPURISCVState *env,
+>                                      int extirq, unsigned int extirq_def_prio,
+>                                      uint64_t pending, uint8_t *iprio)
+>  {
+> +    RISCVCPU *cpu = env_archcpu(env);
+>      int irq, best_irq = RISCV_EXCP_NONE;
+>      unsigned int prio, best_prio = UINT_MAX;
+>
+> @@ -317,7 +318,7 @@ static int riscv_cpu_pending_to_irq(CPURISCVState *env,
+>      }
+>
+>      irq = ctz64(pending);
+> -    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> +    if (!((extirq == IRQ_M_EXT) ? cpu->cfg.ext_smaia : cpu->cfg.ext_ssaia)) {
+>          return irq;
+>      }
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 2dcd4e5b2d..b96db1b62b 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -181,7 +181,9 @@ static RISCVException any32(CPURISCVState *env, int csrno)
+>
+>  static int aia_any(CPURISCVState *env, int csrno)
+>  {
+> -    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+> +    if (!cpu->cfg.ext_smaia) {
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+>
+> @@ -190,7 +192,9 @@ static int aia_any(CPURISCVState *env, int csrno)
+>
+>  static int aia_any32(CPURISCVState *env, int csrno)
+>  {
+> -    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+> +    if (!cpu->cfg.ext_smaia) {
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+>
+> @@ -217,7 +221,9 @@ static int smode32(CPURISCVState *env, int csrno)
+>
+>  static int aia_smode(CPURISCVState *env, int csrno)
+>  {
+> -    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+> +    if (!cpu->cfg.ext_ssaia) {
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+>
+> @@ -226,7 +232,9 @@ static int aia_smode(CPURISCVState *env, int csrno)
+>
+>  static int aia_smode32(CPURISCVState *env, int csrno)
+>  {
+> -    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+> +    if (!cpu->cfg.ext_ssaia) {
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+>
+> @@ -282,7 +290,9 @@ static RISCVException pointer_masking(CPURISCVState *env, int csrno)
+>
+>  static int aia_hmode(CPURISCVState *env, int csrno)
+>  {
+> -    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+> +    if (!cpu->cfg.ext_ssaia) {
+>          return RISCV_EXCP_ILLEGAL_INST;
+>       }
+>
+> @@ -291,7 +301,9 @@ static int aia_hmode(CPURISCVState *env, int csrno)
+>
+>  static int aia_hmode32(CPURISCVState *env, int csrno)
+>  {
+> -    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+> +    if (!cpu->cfg.ext_ssaia) {
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+>
 > --
-> 2.37.2
+> 2.34.1
 >
 >
 
