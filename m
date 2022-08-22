@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oPxZs-00077z-3r
-	for mharc-qemu-riscv@gnu.org; Sun, 21 Aug 2022 22:54:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60858)
+	id 1oPyC4-0001rN-Tz
+	for mharc-qemu-riscv@gnu.org; Sun, 21 Aug 2022 23:33:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40668)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1oPxZr-00077i-67
- for qemu-riscv@nongnu.org; Sun, 21 Aug 2022 22:54:11 -0400
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631]:39650)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oPyC3-0001pt-2g; Sun, 21 Aug 2022 23:33:39 -0400
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:36762)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1oPxZo-0003zu-Q3
- for qemu-riscv@nongnu.org; Sun, 21 Aug 2022 22:54:09 -0400
-Received: by mail-ej1-x631.google.com with SMTP id u15so9938771ejt.6
- for <qemu-riscv@nongnu.org>; Sun, 21 Aug 2022 19:54:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oPyC1-0001Sp-IZ; Sun, 21 Aug 2022 23:33:38 -0400
+Received: by mail-pj1-x102f.google.com with SMTP id
+ r14-20020a17090a4dce00b001faa76931beso12676009pjl.1; 
+ Sun, 21 Aug 2022 20:33:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc;
- bh=Wy64Nk2ed1qvnaFGi/8/yjKi42pX+H4Dsft2DDhujVU=;
- b=BkNfuAQ0qUerBPWHF5B3nl+7FsoBeK+zq1AvlXx1ZlzwWlLVjO2xhBW4ccQ5ry/vKU
- /YdX/LY96o8cRIay4EcLnme9pja8yon/o79qPU442Q4mz2kM0hfx99sgOausGn6CSxyN
- sXJCB6jq+/ZJO499L61dlCDNO0Fe60qso5VOe3rTTeu9nu71kyrMwg5qKvqBA19Pi0dl
- wZaoziK/kSOaPgP/Q80qPiAsyBbMgSv8PZKX+fTt+b2+1teqNqDHkgGp3M2vxTf6UVS9
- 8fGeZ7j/9SoRRPYyK50+erURaF2nQ45cn5v0+FrqGKNQm3JVho7kpMezAd1YkN1wzgtu
- YPKw==
+ bh=3xHEHROAWYLbGAgfpSKzjUUujlxh7e8cSX0MVBwf5CE=;
+ b=gEFnQBoQw++YXTuVQUJPJxefaeqWsLNjw3RoHHuu6ouh8jNCpZBhIlurZIYF2b7d8T
+ 7ASmqfwp5ZqvCATTKbhIzGNGuCL9LxhpcNYoF6LVVQSqqml6jOMR9n7GQgux+wNv74KK
+ 4TApnhNfzzpHvnu0p0e+pdWcp2oh/kmko97c1KnK0/OY7bcHS93UroxIE4vNjuBONaoM
+ zXRUeG77jG5fi/V1FstZpnFAu86zZa6l2deo8XeapQYeypczIL0hd13Dciyr3nmlUWYd
+ we2fbjmR3ODFiT94/Y6d+/h5O4d1Ls+kRr+0eSVruqYnXo/KvkQz7hsNvMStZLNxWSGx
+ xcDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc;
- bh=Wy64Nk2ed1qvnaFGi/8/yjKi42pX+H4Dsft2DDhujVU=;
- b=8Emp9laMDqTCiRSxxu5Am+vBqvxR9rr2aaHFiT2EtBO2AmabvwDIB1xTTj5kA03Nht
- VEE/QQmf3838nTE7tHHIOi/ivVdKmsUbJDZDcVef/+pchJdXHLaYFE+1pjyxZGTEgMIU
- nssdOP1RNZ6h6hA/lrATZ+oJULauAbh+i9jWf+xUxah+HXqEyMe2cjo9/wCNcG4IMits
- e4wVvp1guVJGJDHCTW0fkf8voXdhpWaTKYJVwfbKTdDvmHtE4BU4WZTq45DlU6gtLvLy
- FQ9ivWvGpRs2+FepvuDMmXoPp9+FWTq72vFZi5fX62PsPAiTioNWCBNIoyc4ui+zRe8M
- HTrQ==
-X-Gm-Message-State: ACgBeo1C+f62b+vGLiBRysMCGX1vHQU4pKRj/NnUw7/IrMojszhdcxTp
- JPzQBb4fFaLyMsoGeAukJdYcMaFWfJghRm+k4H9WCw==
-X-Google-Smtp-Source: AA6agR57NeUKvpHFOB8SKtMUawaEJG1+35tKeNU+xK+R+DMnk7PmIhGcrRyuEjhd1BVzuG/Sw9ciSg5aOsm9sEzyatQ=
-X-Received: by 2002:a17:907:9495:b0:73c:b19e:ce06 with SMTP id
- dm21-20020a170907949500b0073cb19ece06mr9019636ejc.559.1661136846458; Sun, 21
- Aug 2022 19:54:06 -0700 (PDT)
+ bh=3xHEHROAWYLbGAgfpSKzjUUujlxh7e8cSX0MVBwf5CE=;
+ b=jyG0xBIJ7Hh9uekpVhM+E+qxDx5csqNxWvv6Oaa629P07HEC0IqYfWCBWPKCObh1H2
+ 3OpcNSsL8LRvNXh4zsOMNJecVFt3wpgBnd64xtgAXY2GceDlCn7e8HtUZP2XL9zF+Kkd
+ 6h6AzwBodiEIQjeQRoBFnMBNz8aojh+8csKZKECJSP4yEu+/r4DnPLQ6p/ysrWd9jzRt
+ FQFH93SEUDsmhOro/WIXGiaXvCzueuudbOR98Udoavi/eFD2tbGEnrWrbe+XnPMZ9Wcy
+ kDTvO+6yC8d+dKmmmviFsd1wGFDxt6WUxRYmfJVhIk1kMoqX84FmLonPuaGgWdIPNCEb
+ bw7A==
+X-Gm-Message-State: ACgBeo1CRhSi7Ghc2MR1C5P/4CnDv63GrEtuQ38maE5ALr4ILXWJQ3dr
+ +chojJQKZMl3MoFs0amEXmUdpvKBaIS/Oi4mzBg=
+X-Google-Smtp-Source: AA6agR7tt+byKuwn/MWew23njBWZgSh30Ug7Nq5QiM4WzR2qWCRPO9QWx2YLbT1nRwsYmK6i1cEWFKFCv/zpCcxQUMA=
+X-Received: by 2002:a17:902:e5c8:b0:16f:1511:7575 with SMTP id
+ u8-20020a170902e5c800b0016f15117575mr18457454plf.83.1661139215923; Sun, 21
+ Aug 2022 20:33:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220819071137.1140627-1-tommy.wu@sifive.com>
 In-Reply-To: <20220819071137.1140627-1-tommy.wu@sifive.com>
-From: Jim Shu <jim.shu@sifive.com>
-Date: Mon, 22 Aug 2022 10:53:55 +0800
-Message-ID: <CALw707oBLpouyEADJgk2amDFU_8A84eNxwwCM7S3nZRVYnwVSA@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 22 Aug 2022 13:33:09 +1000
+Message-ID: <CAKmqyKNidxPt-Bu81-Eex=g9ZWdTJ29geBdtg+w5sMTvy4hraA@mail.gmail.com>
 Subject: Re: [PATCH] include/hw/riscv/sifive_e.h: Fix the type of parent_obj
  of SiFiveEState.
 To: Tommy Wu <tommy.wu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=jim.shu@sifive.com; helo=mail-ej1-x631.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x102f.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -74,17 +75,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Aug 2022 02:54:11 -0000
+X-List-Received-Date: Mon, 22 Aug 2022 03:33:39 -0000
 
-Reviewed-by: Jim Shu <jim.shu@sifive.com>
-
-
-On Fri, Aug 19, 2022 at 3:11 PM Tommy Wu <tommy.wu@sifive.com> wrote:
+On Fri, Aug 19, 2022 at 5:12 PM Tommy Wu <tommy.wu@sifive.com> wrote:
 >
 > Fix the type of parent_obj of SiFiveEState from 'SysBusDevice'
 > to 'MachineState'. Because the parent of SiFiveEState is 'MachineState'.
 >
 > Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
 >  include/hw/riscv/sifive_e.h | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
