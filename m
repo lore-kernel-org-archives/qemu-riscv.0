@@ -1,62 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oPyDq-0003kx-1Y
-	for mharc-qemu-riscv@gnu.org; Sun, 21 Aug 2022 23:35:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56992)
+	id 1oPyEj-0004pp-8H
+	for mharc-qemu-riscv@gnu.org; Sun, 21 Aug 2022 23:36:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37624)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oPyDo-0003jg-UO; Sun, 21 Aug 2022 23:35:28 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c]:33282)
+ id 1oPyEh-0004nG-GS; Sun, 21 Aug 2022 23:36:23 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e]:37379)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oPyDn-0001kO-90; Sun, 21 Aug 2022 23:35:28 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- ds12-20020a17090b08cc00b001fae6343d9fso4937085pjb.0; 
- Sun, 21 Aug 2022 20:35:26 -0700 (PDT)
+ id 1oPyEg-0001nl-1J; Sun, 21 Aug 2022 23:36:23 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id x15so8241043pfp.4;
+ Sun, 21 Aug 2022 20:36:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc;
- bh=/YXgJtX1zG4Y/XEzXgjAM2Md3fX5lW2S4LUS7dbSdLk=;
- b=l2GX2fzSLXyI87nq1OZFQ9PX3nZexbq9JA3WgTWQclOfXbsbMYdirlM1ktVMDpWmWJ
- SdKO/4w82svkn8gTDo61LUbCK0GwesP+eNKs/pU9xwcKYHlbWdORYsXHwEbwDO5MCZN6
- doGq+0VldV4khnU7VrA1EYCZB0eRhJufjIaAbryGSJT2kHXMzHE3GApgSw/hzoRmrK+P
- r0METwiuagmWwuMfKdDTXPCF0R3U6EiZz9HqXOiWL0GyeHRGeW2ad80tUUhJA89u6FCH
- 3YzcJJAdwdaRtdh9GSqDChGdlbXUr1uxR4LBKN7RgiFuz2NyaQOyDPzNsDd1zEyQwYFy
- iQvQ==
+ bh=xoXmjtkZay61G5A7/m9KnKrXQf2SDXVZJkMYp9GCs6Y=;
+ b=LeevP9SSQcBWjwHmvRroPe0zvEaMdtROSiXyFGVZVG4+5dOlLy1cVl9VTjsTRzmmkr
+ wpGuqBQ8X6uNayADvwm0lXgy2LFiu1B47ieezaE5W74K/IaBmwA1MKBQxtCYEP96ch86
+ R+LdcRtjQWOoOMdycfgmFbxERuId/oGKm9cz0Zc9TD1etvvsj7U/VINLDWAXRC/LTKIQ
+ ysacwTCXpnQyKiC8CVdRD96PTlduop/A0Tpv5PCgaW0eTv8LZeWyd0WmEJzfVFOhyb3p
+ DQgDffmCVcvOjDnDUfDJipL396TWgwZEjh4EqFo3IeWa2t4Pwl4gADLJa92ixwAnS5x3
+ OJSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc;
- bh=/YXgJtX1zG4Y/XEzXgjAM2Md3fX5lW2S4LUS7dbSdLk=;
- b=lvEp6W0ck01s5635SfI8jKd25hrw1XZtES+jUZ103XWGUYvVKGcX2TC9+1N6r65TLd
- 9aRHy5tD5qtqsMHe3WnR4RLf0MXeF5tqlNCdq6PVHJ7xZiMlVgCGo3eBrwTHan+vU7in
- LM+rvxriopM29jG6qXcT9B2ntGDqU6lotqPQNhKre3V3W5yUdoj8KzjrrXqDI3c6J9pi
- tCNx21mMrJNFH8UM7IzEiKVjrIA3e+LkwAZ0qdHFVNexPnlY+t8Jjf017D1Ht66KiBfm
- //AzB/BibVl0aK8ogSL1UiBIoTJcoQ0qkFVxnOZyuH5COTOoIujZ0mP1g75WCOqJx8aW
- kKJA==
-X-Gm-Message-State: ACgBeo2CbFFCa3GhuQZjsQIlis1aQir1EQ4s3GqCK8r74cfidnDUo+Ue
- sVgQc+XSm/iU4Lk74N9iOiK9TX5t3PDN2lwcZHk=
-X-Google-Smtp-Source: AA6agR5k7A4UV7ZDAX5IP+0c/5x94DAHUudBjlBU4Q+EhzG7bJuC/8IxTuChAUTgqiDm/nweduu+VQzNGK/MNDmZndM=
-X-Received: by 2002:a17:902:aa4a:b0:172:f24e:2e54 with SMTP id
- c10-20020a170902aa4a00b00172f24e2e54mr1101316plr.25.1661139325478; Sun, 21
- Aug 2022 20:35:25 -0700 (PDT)
+ bh=xoXmjtkZay61G5A7/m9KnKrXQf2SDXVZJkMYp9GCs6Y=;
+ b=vN4lk9Ft+Lu0l0g2TsDJAnp8bMYnofyHvIenpa3SBdrnj66PZJ5vadDjTRj7LwPgKx
+ Qfo7Rt0ssRtZVFPgOotIjuYtaj6IqsXoGCa8qPJRX/2rfhR0ueA/MUVoWM/i72vInKC2
+ NaWgkITTj9MZ4dlUj41wABwSqVGZ3vmwszqyo57y+/1ceNSUXpkSPi3qKUv9H9nhzCb9
+ HM00i+3AB0/kuHNiTqJsLutheNFogyx+mURlCl/oQmSmZxBZ/fal4FL486+C1IiNexPm
+ mYnExIOVqGoKW4m89f2qIOjmq5VfEcBaVBgxDxpxU6hC3KidzDxvVWXfcqv2ptzvPrn/
+ LBrA==
+X-Gm-Message-State: ACgBeo0BDGWXQovgfxwHtFs7Xv7HaQfEdbSb0T8iPrj5CgbVN+YuftqE
+ ZdDrsXgEXH5kLjIlSw+g7CN3RGeqJaUzZVnd9yc=
+X-Google-Smtp-Source: AA6agR6xf8Tdm5D9r1W5mfX8AYvcP/kYggwJthA/D45kVq6tuueS2YFdgY+yn0MBzzJ+lW7eBFjbmJhaqYF2G6+FD3c=
+X-Received: by 2002:a05:6a00:88e:b0:52c:65a3:fdb4 with SMTP id
+ q14-20020a056a00088e00b0052c65a3fdb4mr18621214pfj.83.1661139380205; Sun, 21
+ Aug 2022 20:36:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220810184612.157317-1-mail@conchuod.ie>
-In-Reply-To: <20220810184612.157317-1-mail@conchuod.ie>
+References: <20220816045408.1231135-1-rpathak@ventanamicro.com>
+In-Reply-To: <20220816045408.1231135-1-rpathak@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Aug 2022 13:34:59 +1000
-Message-ID: <CAKmqyKP0Cs-cpmX2rdNfi4UACoHzA2VOrc-ejR9cDrow2-mjMw@mail.gmail.com>
-Subject: Re: [PATCH v3 0/4] QEMU: Fix RISC-V virt & spike machines' dtbs
-To: Conor Dooley <mail@conchuod.ie>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Rob Herring <robh@kernel.org>, 
- Conor Dooley <conor.dooley@microchip.com>, Jessica Clarke <jrtc27@jrtc27.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Mon, 22 Aug 2022 13:35:54 +1000
+Message-ID: <CAKmqyKNJ-YjRvskBKZ1KaWmjKa0r3Ua2qomdqYKnhT01hKWfnw@mail.gmail.com>
+Subject: Re: [PATCH v1] target/riscv: Add xicondops in ISA entry
+To: Rahul Pathak <rpathak@ventanamicro.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- linux-riscv <linux-riscv@lists.infradead.org>
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Anup Patel <anup@brainfault.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x102c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -77,41 +73,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Aug 2022 03:35:29 -0000
+X-List-Received-Date: Mon, 22 Aug 2022 03:36:23 -0000
 
-On Thu, Aug 11, 2022 at 5:09 AM Conor Dooley <mail@conchuod.ie> wrote:
+On Tue, Aug 16, 2022 at 2:54 PM Rahul Pathak <rpathak@ventanamicro.com> wrote:
 >
-> From: Conor Dooley <conor.dooley@microchip.com>
+> XVentanaCondOps is Ventana custom extension. Add
+> its extension entry in the ISA Ext array
 >
-> The device trees produced automatically for the virt and spike machines
-> fail dt-validate on several grounds. Some of these need to be fixed in
-> the linux kernel's dt-bindings, but others are caused by bugs in QEMU.
->
-> I mostly opted for what appeared to be the smallest change that would
-> fix the warnings, partly due to my inexperience with the QEMU codebase.
-> A "sister" patchset for the kernel will clear the remaining warnings.
-> Thanks to Rob Herring for reporting these issues [1],
-> Conor.
->
-> Changes since v2:
-> - move the syscon subnodes back to the top level instead of into the
->   syscon node
-> Changes since v1:
-> - drop patch 1
->
-> To reproduce the errors:
-> ./build/qemu-system-riscv64 -nographic -machine virt,dumpdtb=qemu.dtb
-> dt-validate -p /path/to/linux/kernel/Documentation/devicetree/bindings/processed-schema.json qemu.dtb
-> (The processed schema needs to be generated first)
->
-> 0 - https://lore.kernel.org/linux-riscv/20220805162844.1554247-1-mail@conchuod.ie/
-> 1 - https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
->
-> Conor Dooley (4):
->   hw/riscv: virt: fix uart node name
->   hw/riscv: virt: fix the plic's address cells
->   hw/riscv: virt: fix syscon subnode paths
->   hw/core: fix platform bus node name
+> Signed-off-by: Rahul Pathak <rpathak@ventanamicro.com>
 
 Thanks!
 
@@ -119,16 +88,28 @@ Applied to riscv-to-apply.next
 
 Alistair
 
+> ---
 >
->  hw/core/sysbus-fdt.c    | 2 +-
->  hw/riscv/virt.c         | 8 +++++---
->  include/hw/riscv/virt.h | 1 +
->  3 files changed, 7 insertions(+), 4 deletions(-)
+> This patch is based on branch riscv-to-apply.next (Alistair qemu tree)
+> Based on top commit: f2a91d8b78
 >
+>  target/riscv/cpu.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> base-commit: 2480f3bbd03814b0651a1f74959f5c6631ee5819
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 2498b93105..27d10bd6a6 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -104,6 +104,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+>      ISA_EXT_DATA_ENTRY(svinval, true, PRIV_VERSION_1_12_0, ext_svinval),
+>      ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0, ext_svnapot),
+>      ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt),
+> +    ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_XVentanaCondOps),
+>  };
+>
+>  static bool isa_ext_is_enabled(RISCVCPU *cpu,
 > --
-> 2.37.1
+> 2.34.1
 >
 >
 
