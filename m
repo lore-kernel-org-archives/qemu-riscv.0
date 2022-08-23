@@ -1,47 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oQYj5-0001ax-0d
-	for mharc-qemu-riscv@gnu.org; Tue, 23 Aug 2022 14:34:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60698)
+	id 1oQYj8-0001c9-Lp
+	for mharc-qemu-riscv@gnu.org; Tue, 23 Aug 2022 14:34:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60702)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oQYis-0001Ua-Gp
+ (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oQYiw-0001VD-C8
  for qemu-riscv@nongnu.org; Tue, 23 Aug 2022 14:34:02 -0400
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e]:38503)
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c]:46662)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oQYiq-0004jr-Mo
- for qemu-riscv@nongnu.org; Tue, 23 Aug 2022 14:33:58 -0400
-Received: by mail-wr1-x42e.google.com with SMTP id b5so13741986wrr.5
- for <qemu-riscv@nongnu.org>; Tue, 23 Aug 2022 11:33:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oQYis-0004k3-So
+ for qemu-riscv@nongnu.org; Tue, 23 Aug 2022 14:34:00 -0400
+Received: by mail-wm1-x32c.google.com with SMTP id
+ k6-20020a05600c1c8600b003a54ecc62f6so8202422wms.5
+ for <qemu-riscv@nongnu.org>; Tue, 23 Aug 2022 11:33:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=conchuod.ie; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc;
- bh=gfYO45Fhrr292YriQBgq+GL0i0hKssdiRtp+ptuTmB8=;
- b=cxhWc3M4obppLHYQ1+1dtIkL3cRvwms6r8PwhRPdHDTBOodgqvj+O9GT+FIXT+jVHM
- cLh/Qw3HVakfK6G2nWP1Yew4MJQDEtQI7QpU+r6N0eHqbjF0wJ41mxQK6Mlb8s/QZ3fy
- SdDOP+rFnRzP1U+moj1P99yf0KdJkXioTWpwRdqUa42HEjRci3ryA21S6QskbzqnjstD
- jYKuJAKEa0RgEOdq0ZSHUh/D9OU86R7A5NtNLdP2Whs8V1ITPGcIIait/JWspTt/7gUn
- VMWDd+BN7Y836i5XYRf1P+fGFGKd5HdoE2zvCUi/n6n2FMcrbn/7MFxO7ncgmhXv1wKg
- jicA==
+ bh=zfZqIEnKLgqKdt6yEdOe5gINIOFbq6xfPYo5xvbrixM=;
+ b=f5pjcIK+H2mtPPE5b3VybQ5o01iECTvnw1E+28BxIUWO/6RjUzl2PBeS9opQx/sJtx
+ yG2ysXoQtSd7WBzuZMOdXnT8YJjxr3vYR5+T/JX7WViSSLLzyWulBQl9Ko9BJ17LqXeZ
+ ETGaCTo5yarZMm+oslfXmcNAi4epItnAZqaBYIMkIQm0At1DRkfT+iDb+SfVqSxBugml
+ /5ZzzSEfTKoyNJSdvCwfE6CeTnMSICRVyM7qDc7zTPhZyBfqGkmjUnvVx/itr2tPYaA8
+ ONtGo4StZVjqqloFXAtoKHXtIcn38GlQfWO7p9BYujiPWphKMNU0v9xU6g0zgzl9njmI
+ LYZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
- bh=gfYO45Fhrr292YriQBgq+GL0i0hKssdiRtp+ptuTmB8=;
- b=7pllj5/6Qfw1E2T27AjUllukEkRXG7UdDm9MiPKO3VRlRz4Gx++Bfprh18TQ7Bav9F
- XbfEC95z0s4z8KkTLlWdvuJuGNx5XMndVA2tykLq3ozerEMhC9Eu6QQUyjrQ/gIoTcXx
- T9KTDK2EiybRia017PKVxkBTRZcUQGSz9j94Owxu0GZAqRzD5YkwhYlOKr9f7zvZOmUh
- Z4bVdIY2gsTY19+pk82T7fJIPddR2P3OzpPUM1rQH1wxcvuvozs2xjpzOU+pTJJqz37Z
- 8yudY1jivI2IP1VmugU2mg0eph/d/5PsEoMyjE5Je/x0Gu3XiktqhB18jP1yyZjWQ30u
- FYwA==
-X-Gm-Message-State: ACgBeo1BvKDaGzDOctPc16HYYcK0FZjD7un5xMBsNcWC1iAYMwwnXxlF
- G7j15d6krWM9vtmoZSrgiL4/aw==
-X-Google-Smtp-Source: AA6agR7bBIo4WvfaTQmBmKbZYuyKOKLHUXCNnIkzR2yMddKcJrOEa3tcvpyzuyC0FL4VN5JT0BNR4A==
-X-Received: by 2002:adf:fa0d:0:b0:225:1bd4:5d8a with SMTP id
- m13-20020adffa0d000000b002251bd45d8amr14077231wrr.106.1661279634905; 
- Tue, 23 Aug 2022 11:33:54 -0700 (PDT)
+ bh=zfZqIEnKLgqKdt6yEdOe5gINIOFbq6xfPYo5xvbrixM=;
+ b=pT8A+TvucdtFdpwxPcpLSzubWWNtGCRD6TqKpD6UVTpvI2ow3AK8f9TZb8LQZ4mpL7
+ vHIo/HsWiHkDLoB8A0y98ELchNKyRVhYu7jJiBw+FkTTTXZnWx1PBRVeflrU+AUu413U
+ 1eoeU4GvBYCbDnWCfyvYEVmEb2VIGWqOdM1XjeZiOYI+t+tavI5JVjJdekk3boaMJWM7
+ A8bFCUV3OU3iFLW3pOzSCK4wW9QfT0yLQzGRRG5Sjnz/5IcI4ZMraHxTwxX6JKErLJou
+ ohFFHb1j7l3BjPZCCbgtlaD5MjmjMi1txMt5rR6bprXLquNqhzv9HXi5Qq8MoO+GH9ue
+ eVBA==
+X-Gm-Message-State: ACgBeo1VhWQWSaKAR+BYgrKoggyY5RUy3inLF8UvOwlVCI6+80anQ/UT
+ xDSbdsyk0XTwULBAgiHEGyvPOQ==
+X-Google-Smtp-Source: AA6agR5eS5/PKXnK5uN2L+sdbkehjdJJ73byQpKpkqsyKD/rDgN0AG98DD6sac0atiQVprDQeVTQwA==
+X-Received: by 2002:a1c:c91a:0:b0:3a6:38bf:2c36 with SMTP id
+ f26-20020a1cc91a000000b003a638bf2c36mr3062339wmb.38.1661279637684; 
+ Tue, 23 Aug 2022 11:33:57 -0700 (PDT)
 Received: from henark71.. ([51.37.149.245]) by smtp.gmail.com with ESMTPSA id
- p16-20020a05600c1d9000b003a5fcae64d4sm19396556wms.29.2022.08.23.11.33.53
+ p16-20020a05600c1d9000b003a5fcae64d4sm19396556wms.29.2022.08.23.11.33.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Aug 2022 11:33:54 -0700 (PDT)
+ Tue, 23 Aug 2022 11:33:57 -0700 (PDT)
 From: Conor Dooley <mail@conchuod.ie>
 To: Thomas Gleixner <tglx@linutronix.de>, Marc Zyngier <maz@kernel.org>,
  Rob Herring <robh+dt@kernel.org>,
@@ -55,17 +56,17 @@ Cc: Daniel Lezcano <daniel.lezcano@linaro.org>,
  Andrew Jones <ajones@ventanamicro.com>, linux-kernel@vger.kernel.org,
  devicetree@vger.kernel.org, linux-riscv@lists.infradead.org,
  qemu-riscv@nongnu.org, Rob Herring <robh@kernel.org>
-Subject: [PATCH v4 1/4] dt-bindings: timer: sifive,
- clint: add legacy riscv compatible
-Date: Tue, 23 Aug 2022 19:33:17 +0100
-Message-Id: <20220823183319.3314940-2-mail@conchuod.ie>
+Subject: [PATCH v4 3/4] dt-bindings: riscv: add new riscv,
+ isa strings for emulators
+Date: Tue, 23 Aug 2022 19:33:19 +0100
+Message-Id: <20220823183319.3314940-4-mail@conchuod.ie>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20220823183319.3314940-1-mail@conchuod.ie>
 References: <20220823183319.3314940-1-mail@conchuod.ie>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=mail@conchuod.ie; helo=mail-wr1-x42e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=mail@conchuod.ie; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -89,50 +90,79 @@ X-List-Received-Date: Tue, 23 Aug 2022 18:34:02 -0000
 
 From: Conor Dooley <conor.dooley@microchip.com>
 
-While "real" hardware might not use the compatible string "riscv,clint0"
-it is present in the driver & QEMU uses it for automatically generated
-virt machine dtbs. To avoid dt-validate problems with QEMU produced
-dtbs, such as the following, add it to the binding.
+The QEMU virt and spike machines currently export a riscv,isa string of
+"rv64imafdcsuh",
 
-riscv-virt.dtb: clint@2000000: compatible:0: 'sifive,clint0' is not one of ['sifive,fu540-c000-clint', 'starfive,jh7100-clint', 'canaan,k210-clint']
+While the RISC-V foundation has been ratifying a bunch of extenstions
+etc, the kernel has remained relatively static with what hardware is
+supported - but the same is not true of QEMU. Using the virt machine
+and running dt-validate on the dumped dtb fails, partly due to the
+unexpected isa string.
+
+Rather than enumerate the many many possbilities, change the pattern
+to a regex, with the following assumptions:
+- ima are required
+- the single letter order is fixed & we don't care about things that
+  can't even do "ima"
+- the standard multi letter extensions are all in a "_z<foo>" format
+  where the first letter of <foo> is a valid single letter extension
+- _s & _h are used for supervisor and hyper visor extensions
+- convention says that after the first two chars, a standard multi
+  letter extension name could be an english word (ifencei anyone?) so
+  it's not worth restricting the charset
+- as the above is just convention, don't apply any charset restrictions
+  to reduce future churn
+- vendor ISA extensions begind with _x and have no charset restrictions
+- we don't care about an e extension from an OS pov
+- that attempting to validate the contents of the multiletter extensions
+  with dt-validate beyond the formatting is a futile, massively verbose
+  or unwieldy exercise at best
+
+The following limitations also apply:
+- multi letter extension ordering is not enforced. dt-schema does not
+  appear to allow for named match groups, so the resulting regex would
+  be even more of a headache
+- ditto for the numbered extensions
+
+Finally, add me as a maintainer of the binding so that when it breaks
+in the future, I can be held responsible!
 
 Reported-by: Rob Herring <robh@kernel.org>
 Link: https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
-Reviewed-by: Rob Herring <robh@kernel.org>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Acked-by: Guo Ren <guoren@kernel.org>
 Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
 ---
- .../bindings/timer/sifive,clint.yaml           | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+Palmer, feel free to drop the maintainer addition. I just mostly want
+to clean up my own mess on this when they decide to ratify more
+extensions & this comes back up again.
+---
+ Documentation/devicetree/bindings/riscv/cpus.yaml | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/timer/sifive,clint.yaml b/Documentation/devicetree/bindings/timer/sifive,clint.yaml
-index e64f46339079..bbad24165837 100644
---- a/Documentation/devicetree/bindings/timer/sifive,clint.yaml
-+++ b/Documentation/devicetree/bindings/timer/sifive,clint.yaml
-@@ -22,12 +22,18 @@ description:
+diff --git a/Documentation/devicetree/bindings/riscv/cpus.yaml b/Documentation/devicetree/bindings/riscv/cpus.yaml
+index 873dd12f6e89..90a7cabf58fe 100644
+--- a/Documentation/devicetree/bindings/riscv/cpus.yaml
++++ b/Documentation/devicetree/bindings/riscv/cpus.yaml
+@@ -9,6 +9,7 @@ title: RISC-V bindings for 'cpus' DT nodes
+ maintainers:
+   - Paul Walmsley <paul.walmsley@sifive.com>
+   - Palmer Dabbelt <palmer@sifive.com>
++  - Conor Dooley <conor@kernel.org>
  
- properties:
-   compatible:
--    items:
--      - enum:
--          - sifive,fu540-c000-clint
--          - starfive,jh7100-clint
--          - canaan,k210-clint
--      - const: sifive,clint0
-+    oneOf:
-+      - items:
-+          - enum:
-+              - sifive,fu540-c000-clint
-+              - starfive,jh7100-clint
-+              - canaan,k210-clint
-+          - const: sifive,clint0
-+      - items:
-+          - const: sifive,clint0
-+          - const: riscv,clint0
-+        deprecated: true
-+        description: For the QEMU virt machine only
+ description: |
+   This document uses some terminology common to the RISC-V community
+@@ -79,9 +80,7 @@ properties:
+       insensitive, letters in the riscv,isa string must be all
+       lowercase to simplify parsing.
+     $ref: "/schemas/types.yaml#/definitions/string"
+-    enum:
+-      - rv64imac
+-      - rv64imafdc
++    pattern: ^rv(?:64|32)imaf?d?q?c?b?v?k?h?(?:_[hsxz](?:[a-z])+)*$
  
-     description:
-       Should be "<vendor>,<chip>-clint" and "sifive,clint<version>".
+   # RISC-V requires 'timebase-frequency' in /cpus, so disallow it here
+   timebase-frequency: false
 -- 
 2.37.1
 
