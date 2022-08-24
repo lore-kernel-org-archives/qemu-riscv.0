@@ -1,64 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oQydb-0006RS-Qs
-	for mharc-qemu-riscv@gnu.org; Wed, 24 Aug 2022 18:14:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48436)
+	id 1oQyhH-0008VC-Lx
+	for mharc-qemu-riscv@gnu.org; Wed, 24 Aug 2022 18:18:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39430)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oQyda-0006Pf-Ez
- for qemu-riscv@nongnu.org; Wed, 24 Aug 2022 18:14:14 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e]:44007)
+ id 1oQyh6-0008Pq-F5
+ for qemu-riscv@nongnu.org; Wed, 24 Aug 2022 18:18:01 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e]:38892)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oQydX-0005zX-UD
- for qemu-riscv@nongnu.org; Wed, 24 Aug 2022 18:14:14 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id 20so16879671plo.10
- for <qemu-riscv@nongnu.org>; Wed, 24 Aug 2022 15:14:11 -0700 (PDT)
+ id 1oQyh1-0006cd-QT
+ for qemu-riscv@nongnu.org; Wed, 24 Aug 2022 18:17:51 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id x19so16892717plc.5
+ for <qemu-riscv@nongnu.org>; Wed, 24 Aug 2022 15:17:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc;
- bh=4k3EJYei+FXHEZnlMb9qyuM6cA4aihnuM3sAcTAONHM=;
- b=zlS3lH6WUaXOeYpVwkaPmJFCvDwKHJDBqc5AwdHuTLWvfc635mvdYvr0y58yHIC5SW
- 7qLG+b5rslvWJMZnh2Ey4AQQu3Ix5sOL6cBHYFnoHP1U5KTFxPTF4/5iz5VM8bx9RP9z
- e6LxGlxSXYYa8K+4IWXlKS1rBoytqqfnO/SNfncbNA52q3HBvrIGEIvgZ5/Z5S8EIFYa
- F1INLwY5p5OjjLAwKYpBoMKl/9/cxBK5Nwe6aFQUunnv5rTEIkXkolIk8te0D2j1yjPC
- B+79FZ/DuTabeNmHIfYl/t0crwWhUeBUOpLI1hT10+QRcu0n13cem8zIWnIhPxfuR1VA
- LoJg==
+ bh=OmG1KkQAuW3Sra8rU8ttCLZoW+g0VRmMlyVWawrmTAY=;
+ b=aUceF0M0+u4zsPfO4b0/+Tt8Vw57D67K6GuCJVuA+djsOaohbfPNHnfRFiLvigplfh
+ N0UFjkFoz3/3NjlEIHTAMiOK0CcfMd5ZAxV+mAb36+/PBfoK3ZnQeV+TjI/nie06wVdS
+ cRj/1aStDV3lSdkl5Ei71JfxKGSHytBoegl2nWhs3YvHZdWvRTj3uMgBW8ZO2XtqlBLX
+ W7CrTS0EtyTLQyblANEf3fpSFx7zXJ41efy1vhxlw4fDfIu6mDzzB9auTwOXRFaLu6QK
+ IMKUCe9uv0BPQcQg8qE/wI1Q/4I/3QpO3du7ZoNVvDH8Q/2ac1jbh4J6cjzJRFvAGBAZ
+ 5FIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
- bh=4k3EJYei+FXHEZnlMb9qyuM6cA4aihnuM3sAcTAONHM=;
- b=uZ0GoekYKQWKlJFJeZR/9asvgrBwudHTsSUsm1ZQlQowqm8wEobMqeOAuTlEcxkxy4
- HTi+3lRGCHM9CB91MUADf+OdWeolVbm5a/8k7WepFdd7zj0hlA4lnC/qMbDrUK8drxnh
- nf4qEpMBrdbJ2+KesihxzpTTfYQVRLgc0cCzUbMTuRw1kaZbVgxszunmlL7i6BsdtuhE
- uCVYm3YWomUWAbCYupGlR8XaLS4zps+UhUt1H/ZbNMf8SEFsnHsm4hKj1Px/zoebxrlE
- T9bGGYV5zUyuFRpVvcJqMI9o451jjVBUFyvn90Fbmm6ywHlqmmhwNJesP5vV0TEra+yB
- 3q0A==
-X-Gm-Message-State: ACgBeo2mITzGyesWWg+yt5S6z4BCwlFMHyUdQb2EJaSUe9rndeqkfYJI
- bVqCmx0n68YfL56/NVmQz7Dtnw==
-X-Google-Smtp-Source: AA6agR6bvkG2W2y8Yk3LnEKgu3bVz5r58IH7OKyDwRjuUmyDSaIJELub8y539D0zHXI0IqnFAvvu6A==
-X-Received: by 2002:a17:90a:1b65:b0:1f7:4725:aa6e with SMTP id
- q92-20020a17090a1b6500b001f74725aa6emr1149048pjq.179.1661379250583; 
- Wed, 24 Aug 2022 15:14:10 -0700 (PDT)
+ bh=OmG1KkQAuW3Sra8rU8ttCLZoW+g0VRmMlyVWawrmTAY=;
+ b=jECTSI7vLwnZ+41AXCxLzEggvkO7aty23lRtH/gCL+9x/K++/Rc+omc3kbpewga/qW
+ AHeeOA6n49O/EEuc7JYwQoavUjzdvGbo9bWg3n7i1htPcetGfPwWRF7QUe4UEC5n9VTz
+ rV39XpJmOibzfLhVb2BivWAeP1KM+Hfg3gP+CQFvI6Fk1eAsH7ucNkRHuen/+b0vS7to
+ 1DENV7zI/8zu0dSRaOK0nxmSUg5ItcyGVXMZqY9HiZkew4Qu8WBydelfMVL4zRIJvc8J
+ rqqmw09heVHGC2c5gPISHyI2ZslX5dAVAvE4c3RnLAZwjvwJY3U6cjmT0Oay6ksFw0Jj
+ A5jw==
+X-Gm-Message-State: ACgBeo0J+TT5XkpkveYEJk558DLvCXyKLbKmoFEq7uy547vw2WRu+UKa
+ A76bs/9MRT1wNNNdzNZEB1+KMA==
+X-Google-Smtp-Source: AA6agR4HkhQjQVN18dG+Wzr68ro0m2Xr2dEa5uft5bjX43a4ONipXWJGeADAX9/tq/im02axIcct7g==
+X-Received: by 2002:a17:903:2286:b0:172:f8e3:6f11 with SMTP id
+ b6-20020a170903228600b00172f8e36f11mr817659plh.3.1661379466200; 
+ Wed, 24 Aug 2022 15:17:46 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- m14-20020a62a20e000000b0052d33bf14d6sm13458600pff.63.2022.08.24.15.14.09
+ h18-20020a170902f71200b0016909be39e5sm4243031plo.177.2022.08.24.15.17.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Aug 2022 15:14:10 -0700 (PDT)
+ Wed, 24 Aug 2022 15:17:45 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
-Cc: Atish Patra <atishp@rivosinc.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
-Subject: [PATCH v10  3/3] target/riscv: Add vstimecmp support
-Date: Wed, 24 Aug 2022 15:13:57 -0700
-Message-Id: <20220824221357.41070-4-atishp@rivosinc.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Atish Patra <atishp@rivosinc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
+Subject: [PATCH v14 4/5] hw/riscv: virt: Add PMU DT node to the device tree
+Date: Wed, 24 Aug 2022 15:17:00 -0700
+Message-Id: <20220824221701.41932-5-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220824221357.41070-1-atishp@rivosinc.com>
-References: <20220824221357.41070-1-atishp@rivosinc.com>
+In-Reply-To: <20220824221701.41932-1-atishp@rivosinc.com>
+References: <20220824221701.41932-1-atishp@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
@@ -81,310 +79,148 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2022 22:14:14 -0000
+X-List-Received-Date: Wed, 24 Aug 2022 22:18:02 -0000
 
-vstimecmp CSR allows the guest OS or to program the next guest timer
-interrupt directly. Thus, hypervisor no longer need to inject the
-timer interrupt to the guest if vstimecmp is used. This was ratified
-as a part of the Sstc extension.
+Qemu virt machine can support few cache events and cycle/instret counters.
+It also supports counter overflow for these events.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Add a DT node so that OpenSBI/Linux kernel is aware of the virt machine
+capabilities. There are some dummy nodes added for testing as well.
+
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Atish Patra <atish.patra@wdc.com>
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- target/riscv/cpu.h         |  4 ++
- target/riscv/cpu_bits.h    |  4 ++
- target/riscv/cpu_helper.c  | 11 +++--
- target/riscv/csr.c         | 88 ++++++++++++++++++++++++++++++++++++--
- target/riscv/machine.c     |  1 +
- target/riscv/time_helper.c | 16 +++++++
- 6 files changed, 118 insertions(+), 6 deletions(-)
+ hw/riscv/virt.c    | 16 +++++++++++++
+ target/riscv/pmu.c | 57 ++++++++++++++++++++++++++++++++++++++++++++++
+ target/riscv/pmu.h |  1 +
+ 3 files changed, 74 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index d2529b757aab..d895a0af2c6d 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -311,6 +311,8 @@ struct CPUArchState {
-     /* Sstc CSRs */
-     uint64_t stimecmp;
- 
-+    uint64_t vstimecmp;
-+
-     /* physical memory protection */
-     pmp_table_t pmp_state;
-     target_ulong mseccfg;
-@@ -365,6 +367,8 @@ struct CPUArchState {
- 
-     /* Fields from here on are preserved across CPU reset. */
-     QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
-+    QEMUTimer *vstimer; /* Internal timer for VS-mode interrupt */
-+    bool vstime_irq;
- 
-     hwaddr kernel_addr;
-     hwaddr fdt_addr;
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index ac17cf1515c0..095dab19f512 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -257,6 +257,10 @@
- #define CSR_VSIP            0x244
- #define CSR_VSATP           0x280
- 
-+/* Sstc virtual CSRs */
-+#define CSR_VSTIMECMP       0x24D
-+#define CSR_VSTIMECMPH      0x25D
-+
- #define CSR_MTINST          0x34a
- #define CSR_MTVAL2          0x34b
- 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 05c0c8d7771b..719c5d5d0209 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -346,8 +346,9 @@ uint64_t riscv_cpu_all_pending(CPURISCVState *env)
- {
-     uint32_t gein = get_field(env->hstatus, HSTATUS_VGEIN);
-     uint64_t vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
-+    uint64_t vstip = (env->vstime_irq) ? MIP_VSTIP : 0;
- 
--    return (env->mip | vsgein) & env->mie;
-+    return (env->mip | vsgein | vstip) & env->mie;
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index ff8c0df5cd47..befa9d2c26ac 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -30,6 +30,7 @@
+ #include "hw/char/serial.h"
+ #include "target/riscv/cpu.h"
+ #include "hw/core/sysbus-fdt.h"
++#include "target/riscv/pmu.h"
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/riscv/virt.h"
+ #include "hw/riscv/boot.h"
+@@ -708,6 +709,20 @@ static void create_fdt_socket_aplic(RISCVVirtState *s,
+     aplic_phandles[socket] = aplic_s_phandle;
  }
  
- int riscv_cpu_mirq_pending(CPURISCVState *env)
-@@ -606,7 +607,7 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
- {
-     CPURISCVState *env = &cpu->env;
-     CPUState *cs = CPU(cpu);
--    uint64_t gein, vsgein = 0, old = env->mip;
-+    uint64_t gein, vsgein = 0, vstip = 0, old = env->mip;
-     bool locked = false;
- 
-     if (riscv_cpu_virt_enabled(env)) {
-@@ -614,6 +615,10 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
-         vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
-     }
- 
-+    /* No need to update mip for VSTIP */
-+    mask = ((mask == MIP_VSTIP) && env->vstime_irq) ? 0 : mask;
-+    vstip = env->vstime_irq ? MIP_VSTIP : 0;
-+
-     if (!qemu_mutex_iothread_locked()) {
-         locked = true;
-         qemu_mutex_lock_iothread();
-@@ -621,7 +626,7 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
- 
-     env->mip = (env->mip & ~mask) | (value & mask);
- 
--    if (env->mip | vsgein) {
-+    if (env->mip | vsgein | vstip) {
-         cpu_interrupt(cs, CPU_INTERRUPT_HARD);
-     } else {
-         cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 04b06a238921..1a35ac48ccbe 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -820,6 +820,7 @@ static RISCVException sstc(CPURISCVState *env, int csrno)
- {
-     CPUState *cs = env_cpu(env);
-     RISCVCPU *cpu = RISCV_CPU(cs);
-+    bool hmode_check = false;
- 
-     if (!cpu->cfg.ext_sstc || !env->rdtime_fn) {
-         return RISCV_EXCP_ILLEGAL_INST;
-@@ -838,7 +839,18 @@ static RISCVException sstc(CPURISCVState *env, int csrno)
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
--    return smode(env, csrno);
-+    if (riscv_cpu_virt_enabled(env)) {
-+        if (!(get_field(env->hcounteren, COUNTEREN_TM) &
-+              get_field(env->henvcfg, HENVCFG_STCE))) {
-+            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-+        }
-+    }
-+
-+    if ((csrno == CSR_VSTIMECMP) || (csrno == CSR_VSTIMECMPH)) {
-+        hmode_check = true;
-+    }
-+
-+    return hmode_check ? hmode(env, csrno) : smode(env, csrno);
- }
- 
- static RISCVException sstc_32(CPURISCVState *env, int csrno)
-@@ -850,17 +862,72 @@ static RISCVException sstc_32(CPURISCVState *env, int csrno)
-     return sstc(env, csrno);
- }
- 
-+static RISCVException read_vstimecmp(CPURISCVState *env, int csrno,
-+                                    target_ulong *val)
++static void create_fdt_pmu(RISCVVirtState *s)
 +{
-+    *val = env->vstimecmp;
++    char *pmu_name;
++    MachineState *mc = MACHINE(s);
++    RISCVCPU hart = s->soc[0].harts[0];
 +
-+    return RISCV_EXCP_NONE;
++    pmu_name = g_strdup_printf("/soc/pmu");
++    qemu_fdt_add_subnode(mc->fdt, pmu_name);
++    qemu_fdt_setprop_string(mc->fdt, pmu_name, "compatible", "riscv,pmu");
++    riscv_pmu_generate_fdt_node(mc->fdt, hart.cfg.pmu_num, pmu_name);
++
++    g_free(pmu_name);
 +}
 +
-+static RISCVException read_vstimecmph(CPURISCVState *env, int csrno,
-+                                    target_ulong *val)
+ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+                                bool is_32_bit, uint32_t *phandle,
+                                uint32_t *irq_mmio_phandle,
+@@ -1036,6 +1051,7 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+ 
+     create_fdt_flash(s, memmap);
+     create_fdt_fw_cfg(s, memmap);
++    create_fdt_pmu(s);
+ 
+ update_bootargs:
+     if (cmdline && *cmdline) {
+diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+index a5f504e53c88..b8e56d2b7b8e 100644
+--- a/target/riscv/pmu.c
++++ b/target/riscv/pmu.c
+@@ -20,11 +20,68 @@
+ #include "cpu.h"
+ #include "pmu.h"
+ #include "sysemu/cpu-timers.h"
++#include "sysemu/device_tree.h"
+ 
+ #define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
+ #define MAKE_32BIT_MASK(shift, length) \
+         (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
+ 
++/*
++ * To keep it simple, any event can be mapped to any programmable counters in
++ * QEMU. The generic cycle & instruction count events can also be monitored
++ * using programmable counters. In that case, mcycle & minstret must continue
++ * to provide the correct value as well. Heterogeneous PMU per hart is not
++ * supported yet. Thus, number of counters are same across all harts.
++ */
++void riscv_pmu_generate_fdt_node(void *fdt, int num_ctrs, char *pmu_name)
 +{
-+    *val = env->vstimecmp >> 32;
++    uint32_t fdt_event_ctr_map[20] = {};
++    uint32_t cmask;
 +
-+    return RISCV_EXCP_NONE;
++    /* All the programmable counters can map to any event */
++    cmask = MAKE_32BIT_MASK(3, num_ctrs);
++
++   /*
++    * The event encoding is specified in the SBI specification
++    * Event idx is a 20bits wide number encoded as follows:
++    * event_idx[19:16] = type
++    * event_idx[15:0] = code
++    * The code field in cache events are encoded as follows:
++    * event_idx.code[15:3] = cache_id
++    * event_idx.code[2:1] = op_id
++    * event_idx.code[0:0] = result_id
++    */
++
++   /* SBI_PMU_HW_CPU_CYCLES: 0x01 : type(0x00) */
++   fdt_event_ctr_map[0] = cpu_to_be32(0x00000001);
++   fdt_event_ctr_map[1] = cpu_to_be32(0x00000001);
++   fdt_event_ctr_map[2] = cpu_to_be32(cmask | 1 << 0);
++
++   /* SBI_PMU_HW_INSTRUCTIONS: 0x02 : type(0x00) */
++   fdt_event_ctr_map[3] = cpu_to_be32(0x00000002);
++   fdt_event_ctr_map[4] = cpu_to_be32(0x00000002);
++   fdt_event_ctr_map[5] = cpu_to_be32(cmask | 1 << 2);
++
++   /* SBI_PMU_HW_CACHE_DTLB : 0x03 READ : 0x00 MISS : 0x00 type(0x01) */
++   fdt_event_ctr_map[6] = cpu_to_be32(0x00010019);
++   fdt_event_ctr_map[7] = cpu_to_be32(0x00010019);
++   fdt_event_ctr_map[8] = cpu_to_be32(cmask);
++
++   /* SBI_PMU_HW_CACHE_DTLB : 0x03 WRITE : 0x01 MISS : 0x00 type(0x01) */
++   fdt_event_ctr_map[9] = cpu_to_be32(0x0001001B);
++   fdt_event_ctr_map[10] = cpu_to_be32(0x0001001B);
++   fdt_event_ctr_map[11] = cpu_to_be32(cmask);
++
++   /* SBI_PMU_HW_CACHE_ITLB : 0x04 READ : 0x00 MISS : 0x00 type(0x01) */
++   fdt_event_ctr_map[12] = cpu_to_be32(0x00010021);
++   fdt_event_ctr_map[13] = cpu_to_be32(0x00010021);
++   fdt_event_ctr_map[14] = cpu_to_be32(cmask);
++
++   /* This a OpenSBI specific DT property documented in OpenSBI docs */
++   qemu_fdt_setprop(fdt, pmu_name, "riscv,event-to-mhpmcounters",
++                    fdt_event_ctr_map, sizeof(fdt_event_ctr_map));
 +}
 +
-+static RISCVException write_vstimecmp(CPURISCVState *env, int csrno,
-+                                    target_ulong val)
-+{
-+    RISCVCPU *cpu = env_archcpu(env);
-+
-+    if (riscv_cpu_mxl(env) == MXL_RV32) {
-+        env->vstimecmp = deposit64(env->vstimecmp, 0, 32, (uint64_t)val);
-+    } else {
-+        env->vstimecmp = val;
-+    }
-+
-+    riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
-+                              env->htimedelta, MIP_VSTIP);
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_vstimecmph(CPURISCVState *env, int csrno,
-+                                    target_ulong val)
-+{
-+    RISCVCPU *cpu = env_archcpu(env);
-+
-+    env->vstimecmp = deposit64(env->vstimecmp, 32, 32, (uint64_t)val);
-+    riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
-+                              env->htimedelta, MIP_VSTIP);
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
- static RISCVException read_stimecmp(CPURISCVState *env, int csrno,
-                                     target_ulong *val)
+ static bool riscv_pmu_counter_valid(RISCVCPU *cpu, uint32_t ctr_idx)
  {
--    *val = env->stimecmp;
-+    if (riscv_cpu_virt_enabled(env)) {
-+        *val = env->vstimecmp;
-+    } else {
-+        *val = env->stimecmp;
-+    }
-+
-     return RISCV_EXCP_NONE;
- }
- 
- static RISCVException read_stimecmph(CPURISCVState *env, int csrno,
-                                     target_ulong *val)
- {
--    *val = env->stimecmp >> 32;
-+    if (riscv_cpu_virt_enabled(env)) {
-+        *val = env->vstimecmp >> 32;
-+    } else {
-+        *val = env->stimecmp >> 32;
-+    }
-+
-     return RISCV_EXCP_NONE;
- }
- 
-@@ -869,6 +936,10 @@ static RISCVException write_stimecmp(CPURISCVState *env, int csrno,
- {
-     RISCVCPU *cpu = env_archcpu(env);
- 
-+    if (riscv_cpu_virt_enabled(env)) {
-+        return write_vstimecmp(env, csrno, val);
-+    }
-+
-     if (riscv_cpu_mxl(env) == MXL_RV32) {
-         env->stimecmp = deposit64(env->stimecmp, 0, 32, (uint64_t)val);
-     } else {
-@@ -885,6 +956,10 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
- {
-     RISCVCPU *cpu = env_archcpu(env);
- 
-+    if (riscv_cpu_virt_enabled(env)) {
-+        return write_vstimecmph(env, csrno, val);
-+    }
-+
-     env->stimecmp = deposit64(env->stimecmp, 32, 32, (uint64_t)val);
-     riscv_timer_write_timecmp(cpu, env->stimer, env->stimecmp, 0, MIP_STIP);
- 
-@@ -1814,6 +1889,7 @@ static RISCVException rmw_mip64(CPURISCVState *env, int csrno,
-     if (csrno != CSR_HVIP) {
-         gin = get_field(env->hstatus, HSTATUS_VGEIN);
-         old_mip |= (env->hgeip & ((target_ulong)1 << gin)) ? MIP_VSEIP : 0;
-+        old_mip |= env->vstime_irq ? MIP_VSTIP : 0;
-     }
- 
-     if (ret_val) {
-@@ -3680,6 +3756,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-                        .min_priv_ver = PRIV_VERSION_1_12_0 },
-     [CSR_STIMECMPH] = { "stimecmph", sstc_32, read_stimecmph, write_stimecmph,
-                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-+    [CSR_VSTIMECMP] = { "vstimecmp", sstc, read_vstimecmp,
-+                        write_vstimecmp,
-+                        .min_priv_ver = PRIV_VERSION_1_12_0 },
-+    [CSR_VSTIMECMPH] = { "vstimecmph", sstc_32, read_vstimecmph,
-+                         write_vstimecmph,
-+                         .min_priv_ver = PRIV_VERSION_1_12_0 },
- 
-     /* Supervisor Protection and Translation */
-     [CSR_SATP]     = { "satp",     smode, read_satp,     write_satp     },
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 622fface484e..4ba55705d147 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -92,6 +92,7 @@ static const VMStateDescription vmstate_hyper = {
-         VMSTATE_UINTTL(env.hgeie, RISCVCPU),
-         VMSTATE_UINTTL(env.hgeip, RISCVCPU),
-         VMSTATE_UINT64(env.htimedelta, RISCVCPU),
-+        VMSTATE_UINT64(env.vstimecmp, RISCVCPU),
- 
-         VMSTATE_UINTTL(env.hvictl, RISCVCPU),
-         VMSTATE_UINT8_ARRAY(env.hviprio, RISCVCPU, 64),
-diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
-index f3fb5eac7b7b..8cce667dfd47 100644
---- a/target/riscv/time_helper.c
-+++ b/target/riscv/time_helper.c
-@@ -22,6 +22,14 @@
- #include "time_helper.h"
- #include "hw/intc/riscv_aclint.h"
- 
-+static void riscv_vstimer_cb(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+    CPURISCVState *env = &cpu->env;
-+    env->vstime_irq = 1;
-+    riscv_cpu_update_mip(cpu, MIP_VSTIP, BOOL_TO_MASK(1));
-+}
-+
- static void riscv_stimer_cb(void *opaque)
- {
-     RISCVCPU *cpu = opaque;
-@@ -47,10 +55,16 @@ void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,
-          * If we're setting an stimecmp value in the "past",
-          * immediately raise the timer interrupt
-          */
-+        if (timer_irq == MIP_VSTIP) {
-+            env->vstime_irq = 1;
-+        }
-         riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(1));
-         return;
-     }
- 
-+    if (timer_irq == MIP_VSTIP) {
-+        env->vstime_irq = 0;
-+    }
-     /* Clear the [V]STIP bit in mip */
-     riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(0));
- 
-@@ -95,4 +109,6 @@ void riscv_timer_init(RISCVCPU *cpu)
-     env->stimer = timer_new_ns(QEMU_CLOCK_VIRTUAL, &riscv_stimer_cb, cpu);
-     env->stimecmp = 0;
- 
-+    env->vstimer = timer_new_ns(QEMU_CLOCK_VIRTUAL, &riscv_vstimer_cb, cpu);
-+    env->vstimecmp = 0;
- }
+     if (ctr_idx < 3 || ctr_idx >= RV_MAX_MHPMCOUNTERS ||
+diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
+index 036653627f78..3004ce37b636 100644
+--- a/target/riscv/pmu.h
++++ b/target/riscv/pmu.h
+@@ -31,5 +31,6 @@ int riscv_pmu_init(RISCVCPU *cpu, int num_counters);
+ int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
+                                uint32_t ctr_idx);
+ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
++void riscv_pmu_generate_fdt_node(void *fdt, int num_counters, char *pmu_name);
+ int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
+                           uint32_t ctr_idx);
 -- 
 2.25.1
 
