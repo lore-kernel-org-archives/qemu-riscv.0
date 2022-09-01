@@ -1,76 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oT5an-0005Ny-KT
-	for mharc-qemu-riscv@gnu.org; Tue, 30 Aug 2022 14:04:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58544)
+	id 1oTvOQ-0005Xn-Ht
+	for mharc-qemu-riscv@gnu.org; Thu, 01 Sep 2022 21:22:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40792)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <robherring2@gmail.com>)
- id 1oT5aV-0005Ik-3Y
- for qemu-riscv@nongnu.org; Tue, 30 Aug 2022 14:03:56 -0400
-Received: from mail-ot1-f42.google.com ([209.85.210.42]:34791)
+ (Exim 4.90_1) (envelope-from <tkng@rivosinc.com>) id 1oTt0t-0000Ve-RH
+ for qemu-riscv@nongnu.org; Thu, 01 Sep 2022 18:50:19 -0400
+Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c]:36380)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <robherring2@gmail.com>)
- id 1oT5aS-0005vg-FD
- for qemu-riscv@nongnu.org; Tue, 30 Aug 2022 14:03:46 -0400
-Received: by mail-ot1-f42.google.com with SMTP id
- q39-20020a056830442700b0063889adc0ddso8633093otv.1
- for <qemu-riscv@nongnu.org>; Tue, 30 Aug 2022 11:03:43 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <tkng@rivosinc.com>) id 1oTt0s-00059P-9Z
+ for qemu-riscv@nongnu.org; Thu, 01 Sep 2022 18:50:19 -0400
+Received: by mail-lj1-x22c.google.com with SMTP id z20so585696ljq.3
+ for <qemu-riscv@nongnu.org>; Thu, 01 Sep 2022 15:50:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc;
+ bh=mZlvj2dJQEf8fslm0GS4F3GXJzF4Exj+Sm9anPoC8vw=;
+ b=fwN4UrYAf4Et+E0QfQuE9TYnoSY0A8md6zErLM86ajtPfeiqkQrxuciisV8NTCtpG3
+ 0+RlzPRLnOUo6fqmUk6wBgeVXWB9P1zXZmHLTvS1/ObtRUO7DL/SdwK1SQzP7y8mCO7n
+ Q+gOwppShQ2H7rOay+c9DFZOXPaZtK5gPfp/QFxaAlSQwEC5OIi+9i5trRk2v1A0qcVe
+ gi/qsh3yVZnjzSQ88TJAqG/ufbEoVa2+spG2+QhftIg+Y8s89cnR6k2/scr+TwiS/fEQ
+ JEB0zIVvgeNIhSVF07JdiM01wP39kXCmOVdRcsyNVKpZARig/zUTNkmqe7+iGTv3s9Lg
+ Wgvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
- bh=E/aVLvibqd/b36Ng45UDa0e8w5QaN31zCJl6Jumumq4=;
- b=csLDnE7GggqcXK0sKpDMXoE78q8z1mNg1SNei5ueXyDn3lxEDK4K9fyC7cy/9MFs5l
- jOaNlr7uBSytY8+nrfbWpZM8ER4jT7EVfCnJz86Fp6dBCAFuLPfMtIvQuf/piA7cl6ga
- ZST3M1ZO1BUhsHZdNpand74o4zv/4nMFAmfdWMs19RjKhsWkPcBlB+29KTgOuOloEREW
- TbbHgav0Zh9FekBZFozjVPogJKlwiu4rSBB1smFxNLn6xNTq9CQUIFA6sv3G8iBzQgZ5
- T76RFFxkSROAm/jF0InWtfm1JuCML6aduLZpfSt1PN7mTnbnWKE/G/JBeAiwhxa7OVu8
- rQXQ==
-X-Gm-Message-State: ACgBeo3967wF1ce5hBOstkLrx+cMj9p1mHQIFu0hyLF3uCdTkiXm+wcc
- efbgH4WeKA1TCwyYJ5n1kg==
-X-Google-Smtp-Source: AA6agR5JGLNMerqnzMNRFokwD0kYQMtWsTMxX51+yE5oIJHMl04sDutLbVBGC7lLaqgSJK5sj75chQ==
-X-Received: by 2002:a9d:72d0:0:b0:638:e9cf:3e75 with SMTP id
- d16-20020a9d72d0000000b00638e9cf3e75mr8732407otk.289.1661882622846; 
- Tue, 30 Aug 2022 11:03:42 -0700 (PDT)
-Received: from robh.at.kernel.org (66-90-144-107.dyn.grandenetworks.net.
- [66.90.144.107]) by smtp.gmail.com with ESMTPSA id
- x19-20020a9d6293000000b00616dfd2c859sm7579226otk.59.2022.08.30.11.03.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Aug 2022 11:03:42 -0700 (PDT)
-Received: (nullmailer pid 1769934 invoked by uid 1000);
- Tue, 30 Aug 2022 18:03:41 -0000
-Date: Tue, 30 Aug 2022 13:03:41 -0500
-From: Rob Herring <robh@kernel.org>
-To: Conor Dooley <mail@conchuod.ie>
-Cc: Guo Ren <guoren@kernel.org>, Rob Herring <robh+dt@kernel.org>,
- linux-kernel@vger.kernel.org, Conor Dooley <conor.dooley@microchip.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Thomas Gleixner <tglx@linutronix.de>,
- Jessica Clarke <jrtc27@jrtc27.com>, Andrew Jones <ajones@ventanamicro.com>,
- Paul Walmsley <paul.walmsley@sifive.com>,
- Daniel Lezcano <daniel.lezcano@linaro.org>, qemu-riscv@nongnu.org,
- Anup Patel <anup@brainfault.org>, Albert Ou <aou@eecs.berkeley.edu>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Marc Zyngier <maz@kernel.org>, linux-riscv@lists.infradead.org,
- devicetree@vger.kernel.org, Sagar Kadam <sagar.kadam@sifive.com>
-Subject: Re: [PATCH v4 3/4] dt-bindings: riscv: add new riscv, isa strings for
- emulators
-Message-ID: <20220830180341.GA1769896-robh@kernel.org>
-References: <20220823183319.3314940-1-mail@conchuod.ie>
- <20220823183319.3314940-4-mail@conchuod.ie>
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc;
+ bh=mZlvj2dJQEf8fslm0GS4F3GXJzF4Exj+Sm9anPoC8vw=;
+ b=7Rtu2fC3rT/IoQ+Syl5uva42c2xrMhHjBeRm6uWg1mWssF2iFEgv4DkHKuZ5EuFNh3
+ mlw4LOlMuNeb1zof93I/tyDmAO23zHdyD0Spv+fO8K+XWJ/h5LArFmw89Ie6AJfdmJE5
+ 8jrWw7LjYDIhrwhh/+fToYvEqo0M249nirA4MfodSZjoR8vayLhJc7ja+N0Xwx7hUZ08
+ Ssre9oST32sXP7Ae663Zm4W33ETurJnoZaXrq58146MHCm/apZDQCaaupU41xAnyVgoY
+ wG3YSIfMHbIuhmr7kJ6sMg6mfyX6XRezxGBk/4cjNWK3M0lwPSevt8pvUt7Mtb707HQs
+ SR8g==
+X-Gm-Message-State: ACgBeo3u0H7ysRw8W4OjTYS7ht6CtPFhxbtuEMchz0D2ZmTMyqj7d7sg
+ J3wTSPID97GXVH36NIGTBqfBcj7jZi6N+lgtldGhyGpM/nQ=
+X-Google-Smtp-Source: AA6agR43oprdOzxc5esJtyCZj8MVQEDSIDaFknsWH/mQQXgsrs5J7SSgxroGz+TKJSMwOZxylIDpjmsi30/5ZH7C4NQ=
+X-Received: by 2002:a2e:9dc7:0:b0:266:8a7e:6226 with SMTP id
+ x7-20020a2e9dc7000000b002668a7e6226mr5548735ljj.276.1662072616738; Thu, 01
+ Sep 2022 15:50:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220823183319.3314940-4-mail@conchuod.ie>
-Received-SPF: pass client-ip=209.85.210.42; envelope-from=robherring2@gmail.com;
- helo=mail-ot1-f42.google.com
-X-Spam_score_int: -11
-X-Spam_score: -1.2
+From: Tyler Ng <tkng@rivosinc.com>
+Date: Thu, 1 Sep 2022 15:50:06 -0700
+Message-ID: <CAB88-qPD2OAxeg4WA65utUmFj4Y=SceeFTuStpZS4pPWevdBXA@mail.gmail.com>
+Subject: [PATCH 2/4] hw/intc: sifive_plic.c: Fix interrupt priority index.
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Alistair.Francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com, 
+ thuth@redhat.com, pbonzini@redhat.com, lvivier@redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::22c;
+ envelope-from=tkng@rivosinc.com; helo=mail-lj1-x22c.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_ENVFROM_END_DIGIT=0.25,
- FREEMAIL_FORGED_FROMDOMAIN=0.25, FREEMAIL_FROM=0.001,
- HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Thu, 01 Sep 2022 21:22:44 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,61 +68,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2022 18:04:03 -0000
+X-List-Received-Date: Thu, 01 Sep 2022 22:50:20 -0000
 
-On Tue, 23 Aug 2022 19:33:19 +0100, Conor Dooley wrote:
-> From: Conor Dooley <conor.dooley@microchip.com>
-> 
-> The QEMU virt and spike machines currently export a riscv,isa string of
-> "rv64imafdcsuh",
-> 
-> While the RISC-V foundation has been ratifying a bunch of extenstions
-> etc, the kernel has remained relatively static with what hardware is
-> supported - but the same is not true of QEMU. Using the virt machine
-> and running dt-validate on the dumped dtb fails, partly due to the
-> unexpected isa string.
-> 
-> Rather than enumerate the many many possbilities, change the pattern
-> to a regex, with the following assumptions:
-> - ima are required
-> - the single letter order is fixed & we don't care about things that
->   can't even do "ima"
-> - the standard multi letter extensions are all in a "_z<foo>" format
->   where the first letter of <foo> is a valid single letter extension
-> - _s & _h are used for supervisor and hyper visor extensions
-> - convention says that after the first two chars, a standard multi
->   letter extension name could be an english word (ifencei anyone?) so
->   it's not worth restricting the charset
-> - as the above is just convention, don't apply any charset restrictions
->   to reduce future churn
-> - vendor ISA extensions begind with _x and have no charset restrictions
-> - we don't care about an e extension from an OS pov
-> - that attempting to validate the contents of the multiletter extensions
->   with dt-validate beyond the formatting is a futile, massively verbose
->   or unwieldy exercise at best
-> 
-> The following limitations also apply:
-> - multi letter extension ordering is not enforced. dt-schema does not
->   appear to allow for named match groups, so the resulting regex would
->   be even more of a headache
-> - ditto for the numbered extensions
-> 
-> Finally, add me as a maintainer of the binding so that when it breaks
-> in the future, I can be held responsible!
-> 
-> Reported-by: Rob Herring <robh@kernel.org>
-> Link: https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> Acked-by: Guo Ren <guoren@kernel.org>
-> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
-> ---
-> Palmer, feel free to drop the maintainer addition. I just mostly want
-> to clean up my own mess on this when they decide to ratify more
-> extensions & this comes back up again.
-> ---
->  Documentation/devicetree/bindings/riscv/cpus.yaml | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
-> 
+Fixes a bug in which the index of the interrupt priority is off by 1.
+For example, using an IRQ number of 3 with a priority of 1 is supposed to set
+plic->source_priority[2] = 1, but instead it sets
+plic->source_priority[3] = 1. When an interrupt is claimed to be
+serviced, it checks the index 2 instead of 3.
 
-Reviewed-by: Rob Herring <robh@kernel.org>
+Signed-off-by: Tyler Ng <tkng@rivosinc.com>
+---
+ hw/intc/sifive_plic.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+index af4ae3630e..e75c47300a 100644
+--- a/hw/intc/sifive_plic.c
++++ b/hw/intc/sifive_plic.c
+@@ -178,7 +178,7 @@ static void sifive_plic_write(void *opaque, hwaddr
+addr, uint64_t value,
+     SiFivePLICState *plic = opaque;
+
+     if (addr_between(addr, plic->priority_base, plic->num_sources << 2)) {
+-        uint32_t irq = ((addr - plic->priority_base) >> 2) + 1;
++        uint32_t irq = ((addr - plic->priority_base) >> 2) + 0;
+
+         plic->source_priority[irq] = value & 7;
+         sifive_plic_update(plic);
+--
+2.30.2
 
