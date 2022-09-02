@@ -1,63 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oTvOR-0005ZX-7X
-	for mharc-qemu-riscv@gnu.org; Thu, 01 Sep 2022 21:22:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40800)
+	id 1oU9pJ-0000zu-NC
+	for mharc-qemu-riscv@gnu.org; Fri, 02 Sep 2022 12:47:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42290)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tkng@rivosinc.com>) id 1oTt0y-0000XA-Kr
- for qemu-riscv@nongnu.org; Thu, 01 Sep 2022 18:50:24 -0400
-Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:35329)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <tkng@rivosinc.com>) id 1oTt0x-0005CT-0z
- for qemu-riscv@nongnu.org; Thu, 01 Sep 2022 18:50:24 -0400
-Received: by mail-lf1-x129.google.com with SMTP id z25so853035lfr.2
- for <qemu-riscv@nongnu.org>; Thu, 01 Sep 2022 15:50:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc;
- bh=F8wVZOpwAJXo143Rii6ZOZtMb09Fvu3VjBq5m97dwGs=;
- b=XrtB9HDCYMyJqI1glcgQkfSSEzGx1EpzQO5TENF6O7ud3DSkhpWv3czMA1oB+YkD3I
- s/ET5IK2cW+rmA8s4XuKYaV0RkQdz5TkxZD5A+t7SK6eyUksrM8Q4kS2p9yL59YcmNQv
- umsAPAXPlhdkfPtj5I45ehAeJT8HC9hfhRBE0E4O8WckTT3kHzmA2XrYs2qJvgxvZuPg
- 3tlC0JOn9njKuWjXRX8NacRJbC5kIEG/zNkmkdSawzjx2C4qeRBOGI65CQCBCn7wW6N6
- 57qQZ/y8cnVJU27z9EVSSIgpO3Nwgz1DB8HqSyVbult9WEGwOlE4sKQjrms7NcnOslbR
- B7xQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc;
- bh=F8wVZOpwAJXo143Rii6ZOZtMb09Fvu3VjBq5m97dwGs=;
- b=0D7nb2zEz2ZZhvBXeiN5wopOYB2wT+VWwXk+twIHjQD+GSpHSkjujcqc0TfpARezTt
- onYzWxbn/4Qn+Dtb74tlcaw01TCNEHGxTdw0xRFLQ2kdSEz53yLonZ3KrpML4eZHqfmI
- JEvs802GmW96WldHnjtaynLFFV4FnxrH65dcR62oy7fHMa9qOHkRV0foJ8+40B1hMTB0
- JiMtznHnVjHvyfz/mCsjZZH+AFYc0ZAk8hGYL4EPsnvkG/RieJ83J7onag3cVj8GSIPB
- xWVzNT7u9reYX/UMrYo9OHYOp+adN7Agj0dd6PtvZV1oG4JmO7xS+GraCBnr8/YcJi6w
- mkJA==
-X-Gm-Message-State: ACgBeo1bAdaYUbQRdOWKIiT9CXGKIBjGtans3cDwiQWn9D1/6gbABtm9
- A7lJQmDqcOHhHuH01K6gxIsJQUq2DMeevwNAgcH/09lNKmY=
-X-Google-Smtp-Source: AA6agR5ANaLlr/UhJHJsLdmmbeIKX+cA/U2pVny/S0zbTF9jnVf1TlVJLKVr4RIw0ovxIxfsNsUVEGW8679CcTrWW/A=
-X-Received: by 2002:a19:e342:0:b0:494:7859:ad7a with SMTP id
- c2-20020a19e342000000b004947859ad7amr4450443lfk.347.1662072621419; Thu, 01
- Sep 2022 15:50:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <aurelien@aurel32.net>)
+ id 1oU9pD-0000y4-DK; Fri, 02 Sep 2022 12:47:24 -0400
+Received: from hall.aurel32.net ([2001:bc8:30d7:100::1]:43032)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <aurelien@aurel32.net>)
+ id 1oU9pA-0002bg-Bf; Fri, 02 Sep 2022 12:47:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=aurel32.net
+ ; s=202004.hall;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
+ Subject:Cc:To:From:Content-Type:From:Reply-To:Subject:Content-ID:
+ Content-Description:In-Reply-To:References:X-Debbugs-Cc;
+ bh=ryqa+uOQmcTDwVTPIv+WfiIxcNBcO0snYuoXuJBOnw4=; b=w1zPDbEldWzJItdPMhAQdPK1Xh
+ mZnfCeExb+hoI4VuVIPsIViqVjZr0jcMpkWTbUAtcETU0jJkZeL67Nhk5Ko70b/uZ7q6yK3BwCH06
+ r0mw0NA8rYmkEPUGLEFLgJpOtl+o6+f847CAGDlaDPr3Y71N2D6IQGwVEo2DMkbJWRgGNZlrxCxdz
+ I4qXnh+k5fjH+7xGDbSrzYUpF8mfn9TVCciKpj8JDybEm08xMYXmv+NcgbRDrpdPEAC1SKuh5hgxD
+ fHR3a+sFcck/hsN+hrVzPa2t2QKbML1eePNP8YwuzQh3R0j12ZvPbwIt14rHkgacz8oBZvnsVAdZE
+ RdfwHxMg==;
+Received: from [2a01:e34:ec5d:a741:8a4c:7c4e:dc4c:1787] (helo=ohm.rr44.fr)
+ by hall.aurel32.net with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <aurelien@aurel32.net>)
+ id 1oU9og-004uKZ-TZ; Fri, 02 Sep 2022 18:46:50 +0200
+Received: from aurel32 by ohm.rr44.fr with local (Exim 4.96)
+ (envelope-from <aurelien@aurel32.net>) id 1oU9og-00HIPQ-1J;
+ Fri, 02 Sep 2022 18:46:50 +0200
+From: Aurelien Jarno <aurelien@aurel32.net>
+To: qemu-devel@nongnu.org
+Cc: Atish Patra <atish.patra@wdc.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH] target/riscv: Implement PMU CSR predicate function for U-mode
+Date: Fri,  2 Sep 2022 18:46:49 +0200
+Message-Id: <20220902164649.4122331-1-aurelien@aurel32.net>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-From: Tyler Ng <tkng@rivosinc.com>
-Date: Thu, 1 Sep 2022 15:50:11 -0700
-Message-ID: <CAB88-qPZr7G8Lp0Q=851JSFyb5v7ub5Hi4DaD6mVQKZxFt5UOw@mail.gmail.com>
-Subject: [PATCH 3/4] hw/timer: ibex_timer.c: Update register addresses
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Alistair.Francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com, 
- thuth@redhat.com, pbonzini@redhat.com, lvivier@redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::129;
- envelope-from=tkng@rivosinc.com; helo=mail-lf1-x129.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=2001:bc8:30d7:100::1;
+ envelope-from=aurelien@aurel32.net; helo=hall.aurel32.net
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 01 Sep 2022 21:22:44 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,52 +62,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Sep 2022 22:50:24 -0000
+X-List-Received-Date: Fri, 02 Sep 2022 16:47:26 -0000
 
-Updates the register addresses to match the OpenTitan spec.
+Recently the Linux kernel started to use a non default value, for
+the scounteren CSR, which is ignored by QEMU. Fix that by implementing
+the PMU CSR predicate function for U-mode.
 
-These changes were made in this commit:
-https://github.com/lowRISC/opentitan/commit/a25e162b8f91bd0ca32258c83d1d480f93327204
-
-Signed-off-by: Tyler Ng <tkng@rivosinc.com>
+Signed-off-by: Aurelien Jarno <aurelien@aurel32.net>
 ---
- hw/timer/ibex_timer.c | 20 ++++++++++----------
- 1 file changed, 10 insertions(+), 10 deletions(-)
+ target/riscv/csr.c | 49 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
 
-diff --git a/hw/timer/ibex_timer.c b/hw/timer/ibex_timer.c
-index 8c2ca364da..9ffd4821e8 100644
---- a/hw/timer/ibex_timer.c
-+++ b/hw/timer/ibex_timer.c
-@@ -38,19 +38,19 @@ REG32(ALERT_TEST, 0x00)
-     FIELD(ALERT_TEST, FATAL_FAULT, 0, 1)
- REG32(CTRL, 0x04)
-     FIELD(CTRL, ACTIVE, 0, 1)
--REG32(CFG0, 0x100)
--    FIELD(CFG0, PRESCALE, 0, 12)
--    FIELD(CFG0, STEP, 16, 8)
--REG32(LOWER0, 0x104)
--REG32(UPPER0, 0x108)
--REG32(COMPARE_LOWER0, 0x10C)
--REG32(COMPARE_UPPER0, 0x110)
--REG32(INTR_ENABLE, 0x114)
-+REG32(INTR_ENABLE, 0x100)
-     FIELD(INTR_ENABLE, IE_0, 0, 1)
--REG32(INTR_STATE, 0x118)
-+REG32(INTR_STATE, 0x104)
-     FIELD(INTR_STATE, IS_0, 0, 1)
--REG32(INTR_TEST, 0x11C)
-+REG32(INTR_TEST, 0x108)
-     FIELD(INTR_TEST, T_0, 0, 1)
-+REG32(CFG0, 0x10C)
-+    FIELD(CFG0, PRESCALE, 0, 12)
-+    FIELD(CFG0, STEP, 16, 8)
-+REG32(LOWER0, 0x110)
-+REG32(UPPER0, 0x114)
-+REG32(COMPARE_LOWER0, 0x118)
-+REG32(COMPARE_UPPER0, 0x11C)
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 235f2a011e..8aba1b35d9 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -137,6 +137,55 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+                 break;
+             }
+         }
++    } else if (env->priv == PRV_U) {
++        switch (csrno) {
++        case CSR_CYCLE:
++            if (!get_field(env->scounteren, COUNTEREN_CY)) {
++                return RISCV_EXCP_ILLEGAL_INST;
++            }
++            break;
++        case CSR_TIME:
++            if (!get_field(env->scounteren, COUNTEREN_TM)) {
++                return RISCV_EXCP_ILLEGAL_INST;
++            }
++            break;
++        case CSR_INSTRET:
++            if (!get_field(env->scounteren, COUNTEREN_IR)) {
++                return RISCV_EXCP_ILLEGAL_INST;
++            }
++            break;
++        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
++            ctr_index = csrno - CSR_CYCLE;
++            if (!get_field(env->scounteren, 1 << ctr_index)) {
++                return RISCV_EXCP_ILLEGAL_INST;
++            }
++            break;
++        }
++        if (rv32) {
++            switch (csrno) {
++            case CSR_CYCLEH:
++                if (!get_field(env->scounteren, COUNTEREN_CY)) {
++                    return RISCV_EXCP_ILLEGAL_INST;
++                }
++                break;
++            case CSR_TIMEH:
++                if (!get_field(env->scounteren, COUNTEREN_TM)) {
++                    return RISCV_EXCP_ILLEGAL_INST;
++                }
++                break;
++            case CSR_INSTRETH:
++                if (!get_field(env->scounteren, COUNTEREN_IR)) {
++                    return RISCV_EXCP_ILLEGAL_INST;
++                }
++                break;
++            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
++                ctr_index = csrno - CSR_CYCLEH;
++                if (!get_field(env->scounteren, 1 << ctr_index)) {
++                    return RISCV_EXCP_ILLEGAL_INST;
++                }
++                break;
++            }
++        }
+     }
+ 
+     if (riscv_cpu_virt_enabled(env)) {
+-- 
+2.35.1
 
- static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
- {
---
-2.30.2
 
