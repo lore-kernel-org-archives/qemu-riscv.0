@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oVGkq-0002O6-TX
-	for mharc-qemu-riscv@gnu.org; Mon, 05 Sep 2022 14:23:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42424)
+	id 1oVGkt-0002U4-JJ
+	for mharc-qemu-riscv@gnu.org; Mon, 05 Sep 2022 14:23:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42430)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1oVGkp-0002Kr-E0
- for qemu-riscv@nongnu.org; Mon, 05 Sep 2022 14:23:27 -0400
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:53961)
+ id 1oVGkr-0002Pu-NT
+ for qemu-riscv@nongnu.org; Mon, 05 Sep 2022 14:23:29 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535]:38713)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1oVGkf-00027l-LA
- for qemu-riscv@nongnu.org; Mon, 05 Sep 2022 14:23:27 -0400
-Received: by mail-pj1-x1029.google.com with SMTP id q3so9033668pjg.3
- for <qemu-riscv@nongnu.org>; Mon, 05 Sep 2022 11:23:17 -0700 (PDT)
+ id 1oVGkj-00028n-UB
+ for qemu-riscv@nongnu.org; Mon, 05 Sep 2022 14:23:29 -0400
+Received: by mail-pg1-x535.google.com with SMTP id t70so2838538pgc.5
+ for <qemu-riscv@nongnu.org>; Mon, 05 Sep 2022 11:23:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
- bh=K9wefkWGERlorpQlskTuOFMvFh9QknFkKJmCeKsqGFs=;
- b=OOFTByAdtVlyQA5+j3potRq1HWmA+aWLFfQOrO9L3HDGVXRdmsrVhrdt4Ws58QiIma
- 1cSaqwQQdFaG42Sie6jpQwAecW3x9v09gW6Gpi02doSou3w8S/nrjUQ+aocvaL/q9XuE
- HccPeV2yYExmUJBl9Cj7uly7NzxcdAZHuinaYg+GmxJXFuEJ/hB7Nn9lPhrhmho/p6Nm
- WWo/dGdyavoiPV1ZToeh1eQRqxHMq8Ym1j4kJy4svoTUd/nmKBrYUVDx5jNs9EA9OqMN
- 9JlFKn1vIlZF+H5NRZ7zMtqvzAAvKKUZudIiifrahffeiXTrxiwQzKl9HLvRztBhEAX5
- DnfQ==
+ bh=/Hfi1dqn7aBKUskyIzQv2SXHLLV50tRsQ66eiL+Qum8=;
+ b=CSv3wy3KLWo6GFb8e25uWFTqD4WhCvkZ09VWoN8sF0xFwdeujLhmtmCfLr86cNUEGC
+ tM3UpWzHrqlIFcbRxMWHcITdva6jwDEePvf/iHkQ9GTCWMH+Xq6mpyPRZWyZkUN5mAir
+ tfjATx7V/YY1EKNrmOZAlOdLNNrd9Vzt07wFge7dlSwInsILbvFQvwQaAbEAOqLMManB
+ AkxjDy6eeU3ofFZ4ahsMd6uxTdU8RPvwcUVEz9itHbVjCeXDC1TT2tLu78SrqnwP3qjj
+ vpe9N/BwLCU7uC/U0xody4f9sP+Sr6eaQivGdJ/L0iRYvlYniggj4r0pHwOcEeUxu8Z2
+ PMYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date;
- bh=K9wefkWGERlorpQlskTuOFMvFh9QknFkKJmCeKsqGFs=;
- b=bOpsqMZVL9vpZlm7xQsdtfuyoUAJFb2EZBTZFzlIvJTi7ZNsTfTK3ghwtfOBkc3zvP
- D8uQrg+/mTOPPqmj6O3XXvUR8vTfFquAvtl0WFjZUqIOeaJqO6TQv/5HIbUncwoWFqYU
- 1zdRZwP1l+kylbKBXsznyIDIrs+Zv+bjitQEkvp0httkIRNRGT2tot8FyJfwov5um8C0
- SFeyr6SWhDirbd/EV1WbLu8wWPOiJsR7XnNg9uM0XWB8V+T2CqydCy3aKmPi/DBB1c81
- 2X8hB8zd8lZQoNY3edGnhjBgox3+uhxseAO6AarXtmtcUfg6DhPXmtIVqfLeBGY+hRFf
- ZvwA==
-X-Gm-Message-State: ACgBeo3Ge7dALRILg7J9Ohi5cx7gXrvnRV6gtEUFjbhiE82oefv6b1W0
- kztXnPiCOhf0we9wUqCk7VZPDQ==
-X-Google-Smtp-Source: AA6agR7FajmxkKPzEOR0GwHi6znkqbKFVJttC0RTBPjoEiYm/q3ccKcF8K0/LkEthRQNKdxss0ussQ==
-X-Received: by 2002:a17:902:710e:b0:170:8d34:9447 with SMTP id
- a14-20020a170902710e00b001708d349447mr50248196pll.126.1662402196308; 
- Mon, 05 Sep 2022 11:23:16 -0700 (PDT)
+ bh=/Hfi1dqn7aBKUskyIzQv2SXHLLV50tRsQ66eiL+Qum8=;
+ b=3lVxMMXuyVFevwKhzDFqrYOphiPTPv4oU0JIbNWICaVHUBD5UDvhIUzNSBXgYp2ZeN
+ KpBDZCjbDwZkp0yC2/3nBmg+j12z9Fyq2IAwESv6ZQ1bg34BYAy5lUVDHvreK7ysNhRx
+ mRDOLsbgPpOHBm776NArpzvjB+evdhAXwTBPBb0guKRzHe84W1KTUGwhzhzN+AV576lU
+ hnI+NyACG87cTv5Jq/caTEPQAWGXjcjk+14MM0j+keM7AS2mCV6jtUhuo088WjAq6MKr
+ ds//VovsfrjV1044EkjaR5xLwBPCNH4L9f4IMTtMLRzcLxFejWgJ5fazpkXy0cYjS6wC
+ RM8Q==
+X-Gm-Message-State: ACgBeo2JKP+YbPsw9+V0qCJxxLFSStyBx43E6uiD7T68hRHlnrCrfbcf
+ c2YyIOzKqV10M1mfc6sMy03YYQ==
+X-Google-Smtp-Source: AA6agR5gORXLJDzfgTDmlFMjDN7/ErZWko3JmvBNALZ6I2RqwkPdPj/f3C/IOOmwX0q7DKfxpgYHdA==
+X-Received: by 2002:a63:4b62:0:b0:421:8c8b:163c with SMTP id
+ k34-20020a634b62000000b004218c8b163cmr41032332pgl.182.1662402200491; 
+ Mon, 05 Sep 2022 11:23:20 -0700 (PDT)
 Received: from localhost.localdomain ([49.206.11.92])
  by smtp.gmail.com with ESMTPSA id
- z7-20020aa79587000000b005321340753fsm8046724pfj.103.2022.09.05.11.23.12
+ z7-20020aa79587000000b005321340753fsm8046724pfj.103.2022.09.05.11.23.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Sep 2022 11:23:16 -0700 (PDT)
+ Mon, 05 Sep 2022 11:23:20 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-arm@nongnu.org,
 	qemu-devel@nongnu.org,
@@ -60,17 +60,17 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Atish Kumar Patra <atishp@rivosinc.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH V2 2/3] hw/riscv: virt: Move create_fw_cfg() prior to loading
- kernel
-Date: Mon,  5 Sep 2022 23:52:37 +0530
-Message-Id: <20220905182238.374545-3-sunilvl@ventanamicro.com>
+Subject: [PATCH V2 3/3] hw/riscv: virt: Enable booting S-mode firmware from
+ pflash
+Date: Mon,  5 Sep 2022 23:52:38 +0530
+Message-Id: <20220905182238.374545-4-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220905182238.374545-1-sunilvl@ventanamicro.com>
 References: <20220905182238.374545-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x1029.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -90,48 +90,105 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Sep 2022 18:23:27 -0000
+X-List-Received-Date: Mon, 05 Sep 2022 18:23:30 -0000
 
-To enable both -kernel and -pflash options, the fw_cfg needs to be
-created prior to loading the kernel.
+To boot S-mode firmware payload like EDK2 from persistent
+flash storage, qemu needs to pass the flash address as the
+next_addr in fw_dynamic_info to the opensbi.
+
+When both -kernel and -pflash options are provided in command line,
+the kernel (and initrd if -initrd) will be copied to fw_cfg table.
+The S-mode FW will load the kernel/initrd from fw_cfg table.
+
+If only pflash is given but not -kernel, then it is the job of
+of the S-mode firmware to locate and load the kernel.
+
+In either case, update the kernel_entry with the flash address
+so that the opensbi can jump to the entry point of the S-mode
+firmware.
 
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 ---
- hw/riscv/virt.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ hw/riscv/boot.c         | 28 ++++++++++++++++++++++++++++
+ hw/riscv/virt.c         | 17 ++++++++++++++++-
+ include/hw/riscv/boot.h |  1 +
+ 3 files changed, 45 insertions(+), 1 deletion(-)
 
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 1ae7596873..39436b8d56 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -338,3 +338,31 @@ void riscv_setup_direct_kernel(hwaddr kernel_addr, hwaddr fdt_addr)
+         riscv_cpu->env.fdt_addr = fdt_addr;
+     }
+ }
++
++void riscv_setup_firmware_boot(MachineState *machine)
++{
++    if (machine->kernel_filename) {
++        FWCfgState *fw_cfg;
++        fw_cfg = fw_cfg_find();
++
++        assert(fw_cfg);
++        /*
++         * Expose the kernel, the command line, and the initrd in fw_cfg.
++         * We don't process them here at all, it's all left to the
++         * firmware.
++         */
++        load_image_to_fw_cfg(fw_cfg,
++                             FW_CFG_KERNEL_SIZE, FW_CFG_KERNEL_DATA,
++                             machine->kernel_filename,
++                             true);
++        load_image_to_fw_cfg(fw_cfg,
++                             FW_CFG_INITRD_SIZE, FW_CFG_INITRD_DATA,
++                             machine->initrd_filename, false);
++        if (machine->kernel_cmdline) {
++            fw_cfg_add_i32(fw_cfg, FW_CFG_CMDLINE_SIZE,
++                           strlen(machine->kernel_cmdline) + 1);
++            fw_cfg_add_string(fw_cfg, FW_CFG_CMDLINE_DATA,
++                              machine->kernel_cmdline);
++        }
++    }
++}
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index ff8c0df5cd..b6bbf03f61 100644
+index b6bbf03f61..b985df9b16 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -1251,6 +1251,13 @@ static void virt_machine_done(Notifier *notifier, void *data)
-                                     RISCV64_BIOS_BIN, start_addr, NULL);
-     }
+@@ -1258,7 +1258,22 @@ static void virt_machine_done(Notifier *notifier, void *data)
+     s->fw_cfg = create_fw_cfg(machine);
+     rom_set_fw(s->fw_cfg);
  
-+    /*
-+     * Init fw_cfg.  Must be done before riscv_load_fdt, otherwise the device
-+     * tree cannot be altered and we get FDT_ERR_NOSPACE.
-+     */
-+    s->fw_cfg = create_fw_cfg(machine);
-+    rom_set_fw(s->fw_cfg);
-+
-     if (machine->kernel_filename) {
+-    if (machine->kernel_filename) {
++    if (drive_get(IF_PFLASH, 0, 1)) {
++        /*
++         * S-mode FW like EDk2 will be kept in second plash (unit 1). When
++         * both -kernel and -pflash options are provided in command line,
++         * the kernel, initrd will be copied to fw_cfg table and opensbi
++         * will jump to flash address which is the entry point of S-mode FW.
++         * It is the job of the S-mode FW to load the kernel/initrd and launch.
++         *
++         * If only pflash is given but not -kernel, then it is the job of
++         * of the S-mode firmware to locate and load the kernel.
++         * In either case, the next_addr for opensbi will be the flash address.
++         */
++        riscv_setup_firmware_boot(machine);
++        kernel_entry = virt_memmap[VIRT_FLASH].base +
++                         virt_memmap[VIRT_FLASH].size / 2;
++    } else if (machine->kernel_filename) {
          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
                                                           firmware_end_addr);
-@@ -1284,13 +1291,6 @@ static void virt_machine_done(Notifier *notifier, void *data)
-         start_addr = virt_memmap[VIRT_FLASH].base;
-     }
  
--    /*
--     * Init fw_cfg.  Must be done before riscv_load_fdt, otherwise the device
--     * tree cannot be altered and we get FDT_ERR_NOSPACE.
--     */
--    s->fw_cfg = create_fw_cfg(machine);
--    rom_set_fw(s->fw_cfg);
--
-     /* Compute the fdt load address in dram */
-     fdt_load_addr = riscv_load_fdt(memmap[VIRT_DRAM].base,
-                                    machine->ram_size, machine->fdt);
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index a36f7618f5..93e5f8760d 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -57,5 +57,6 @@ void riscv_rom_copy_firmware_info(MachineState *machine, hwaddr rom_base,
+                                   uint32_t reset_vec_size,
+                                   uint64_t kernel_entry);
+ void riscv_setup_direct_kernel(hwaddr kernel_addr, hwaddr fdt_addr);
++void riscv_setup_firmware_boot(MachineState *machine);
+ 
+ #endif /* RISCV_BOOT_H */
 -- 
 2.25.1
 
