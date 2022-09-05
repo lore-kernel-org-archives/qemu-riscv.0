@@ -1,71 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oVBxF-00072L-St
-	for mharc-qemu-riscv@gnu.org; Mon, 05 Sep 2022 09:15:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59682)
+	id 1oVDj4-0004rL-2h
+	for mharc-qemu-riscv@gnu.org; Mon, 05 Sep 2022 11:09:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52310)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1oVBxA-0006xW-FY
- for qemu-riscv@nongnu.org; Mon, 05 Sep 2022 09:15:52 -0400
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430]:43966)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1oVDj0-0004o2-QA; Mon, 05 Sep 2022 11:09:24 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d]:42497)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1oVBx5-0005NH-Bt
- for qemu-riscv@nongnu.org; Mon, 05 Sep 2022 09:15:52 -0400
-Received: by mail-wr1-x430.google.com with SMTP id t7so6297454wrm.10
- for <qemu-riscv@nongnu.org>; Mon, 05 Sep 2022 06:15:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date;
- bh=k3VoevaX62iUyZNBaRy38B3aJTBunYT79qy2LillNdI=;
- b=a4A9U5M9LDJ0ZJ9lwNYmXuO6rPit6XBXS5F8aVfmheN6qUdV0Epi0nrkwo0MV1z3My
- K/Qk8eD4v5AMxVGxFcqXB6v2OZzo1q1zZMeoEdsl7WqsHkMozKpGHEE+Gh3esCob5RPF
- DeGP0J1bUNZLKDai0EtJT5SiQNYqGnJCyLL4yjBhUU/C4wlymZvM4v4cS2zG6wTdDcEw
- OuJAq9YuaCOr6EQrcJJMaWI2BpY0mvHX9usiXxsJhezGOSKaYqqAp6afKEDkFoqOm6L4
- aFiyzSLIS/wnfpgdy/WNGEekUYMZrx/6x+MBTIk02LLzbZl3ILj2vkOPvkz9uFYAFveZ
- QppA==
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1oVDix-0006jT-Uq; Mon, 05 Sep 2022 11:09:22 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id 14so72957pfu.9;
+ Mon, 05 Sep 2022 08:09:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :sender:from:to:cc:subject:date;
+ bh=0YNhSnzan74jkka5r5XL3euO061TUyJ1F5YOcOSilVQ=;
+ b=ggRnRbBIvhgn56N6NkhALghJENkH8W8/0Q/E0fV3hZtAgGgfHI+4r+KglPCpjQBbuX
+ +8UrZrn0qFGHmt0rROsItsp5HJ4gu7jZo9iuxkGMVe9QwhRl4rGRf+1gFWF7cIC6Zi4g
+ TeBerd314BZkgQIzMzgEulRQg+DfMsn6PJY4GmtMjgHCSNmdvVXebsRr/FNCjUAQMzvt
+ EAGb00RlXmgTgsvNSL/SXsEXQAJprUCLuPlDGeWt7fAzp1aV3q489pUvUulKTK3aR2B8
+ STXxV9Pq1ydkMp8CpNeuG/ozAxwvRpQAJhzc8baRpkz5cOE1z+aqu1/NaKaH54vfvi1F
+ Papw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
- bh=k3VoevaX62iUyZNBaRy38B3aJTBunYT79qy2LillNdI=;
- b=wMaqExBkkSq+UutmQQJ24pwZnDEsAxj78R2W/AuGGkSUb7+yqwBKTdrGgXJxGvSmwy
- 8XOtiErwrCyPJcYqlEeEZxEci9QiqWfidxXNCc6p+CQxsCfaqGF5cP3lQwzQkMIuNhz2
- KuTIOW9MxBN0O/wOfDZ84SlDFoVmA2+4aLSTpkDs5WjdTyHNAQRlv7iU/Erx08rBieRI
- rRx4wPF44QtdRbYrveY30/8ivpFo9dPnCDqjMJ7Wa+cw3YGOMxtAeQPr1f0y/aukNCKA
- hBCDvN5DJFrGPuokpv52zaCeXIc9xFVB90mG1hYNwQsFzDN0Sfqll7WoU9x2OnsWsV1r
- RHKQ==
-X-Gm-Message-State: ACgBeo2k03kFrL01KNEq/AjjF2iPX3h3ze6qmmDcogApE8RLdnwuy30B
- bvDNv3GPCnqhtiA5KD2bGCMXGg==
-X-Google-Smtp-Source: AA6agR6UmPmptBx6vnsfqeiYazB64X/rF3H2clYJNlXcHuvuzt0iCXED14jJt4mMcmoWh8BVwtLLrw==
-X-Received: by 2002:adf:f543:0:b0:228:c692:127a with SMTP id
- j3-20020adff543000000b00228c692127amr1164988wrp.246.1662383745886; 
- Mon, 05 Sep 2022 06:15:45 -0700 (PDT)
-Received: from localhost (cst2-173-61.cust.vodafone.cz. [31.30.173.61])
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :sender:x-gm-message-state:from:to:cc:subject:date;
+ bh=0YNhSnzan74jkka5r5XL3euO061TUyJ1F5YOcOSilVQ=;
+ b=PJEjaxNADoAC2pqVGcuds7UgcN8/Mjiy0EFYP+CD3Iy9ksU2KvLwIaBuPQ7bweHkiI
+ brvXa5tnmmbP0FVmsWOFp0R7oWVCF4oky1C6vF+DeFhaGCnwp8mZ6kpK51i/B9wyFX4d
+ 5Du7M46vQZTXF3ZveOYmu1ZDcTl4EgXuR1jwTWaop84hxiuy0CBIjaktm3o1HMlMmf0X
+ nTzJKNeGJhbHNRRAD6kXI7jxi7jqbQiKnjiXaN1HybkOW0eeXq/xb6Lz4M49Uz9lOu5m
+ GKi5O/5VqZga8Hkc7rzj3YWyxjWyeZnVTtB3Z+F+op1oaOm+Hq8FhNy7qnKAtzMKNVFl
+ w3xQ==
+X-Gm-Message-State: ACgBeo319ANrNioj+60flphVPuGIAakkgDtddz5IZIswXyyh3A4U9Jft
+ 0B25PcS/dGaLHK9tPT1MWxI=
+X-Google-Smtp-Source: AA6agR4qcKxAO6pIgQ7p/vzQaoNnQLiadSqE6HmnfjOiotgQE716lKIW8ABkSf0VYoOutM56lC1QGA==
+X-Received: by 2002:a63:d30b:0:b0:42b:9ca4:15f4 with SMTP id
+ b11-20020a63d30b000000b0042b9ca415f4mr37216441pgg.146.1662390557734; 
+ Mon, 05 Sep 2022 08:09:17 -0700 (PDT)
+Received: from [192.168.1.115] ([185.126.107.38])
  by smtp.gmail.com with ESMTPSA id
- k1-20020a5d6d41000000b0021db7b0162esm8943276wri.105.2022.09.05.06.15.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Sep 2022 06:15:45 -0700 (PDT)
-Date: Mon, 5 Sep 2022 15:15:44 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Tyler Ng <tkng@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Alistair.Francis@wdc.com,
- bin.meng@windriver.com, palmer@dabbelt.com, thuth@redhat.com,
- pbonzini@redhat.com, lvivier@redhat.com
-Subject: Re: [PATCH 2/4] hw/intc: sifive_plic.c: Fix interrupt priority index.
-Message-ID: <20220905131544.2xlaycrcyviufo5y@kamzik>
-References: <CAB88-qPD2OAxeg4WA65utUmFj4Y=SceeFTuStpZS4pPWevdBXA@mail.gmail.com>
+ x9-20020aa79ac9000000b0052d2cd99490sm7863689pfp.5.2022.09.05.08.09.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 05 Sep 2022 08:09:17 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Message-ID: <f24336b7-b862-88d2-7064-21699924ca55@amsat.org>
+Date: Mon, 5 Sep 2022 17:09:12 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.13.0
+Subject: Re: [PATCH 2/4] hw/intc: sifive_plic.c: Fix interrupt priority index.
+Content-Language: en-US
+To: Tyler Ng <tkng@rivosinc.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Alistair.Francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com,
+ thuth@redhat.com, pbonzini@redhat.com, lvivier@redhat.com
+References: <CAB88-qPD2OAxeg4WA65utUmFj4Y=SceeFTuStpZS4pPWevdBXA@mail.gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
 In-Reply-To: <CAB88-qPD2OAxeg4WA65utUmFj4Y=SceeFTuStpZS4pPWevdBXA@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x430.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-pf1-x42d.google.com
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-1.716,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -80,9 +84,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Sep 2022 13:15:52 -0000
+X-List-Received-Date: Mon, 05 Sep 2022 15:09:24 -0000
 
-On Thu, Sep 01, 2022 at 03:50:06PM -0700, Tyler Ng wrote:
+On 2/9/22 00:50, Tyler Ng wrote:
 > Fixes a bug in which the index of the interrupt priority is off by 1.
 > For example, using an IRQ number of 3 with a priority of 1 is supposed to set
 > plic->source_priority[2] = 1, but instead it sets
@@ -90,15 +94,9 @@ On Thu, Sep 01, 2022 at 03:50:06PM -0700, Tyler Ng wrote:
 > serviced, it checks the index 2 instead of 3.
 > 
 > Signed-off-by: Tyler Ng <tkng@rivosinc.com>
-
-Fixes tag?
-
-Thanks,
-drew
-
 > ---
->  hw/intc/sifive_plic.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>   hw/intc/sifive_plic.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
 > diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
 > index af4ae3630e..e75c47300a 100644
@@ -106,15 +104,17 @@ drew
 > +++ b/hw/intc/sifive_plic.c
 > @@ -178,7 +178,7 @@ static void sifive_plic_write(void *opaque, hwaddr
 > addr, uint64_t value,
->      SiFivePLICState *plic = opaque;
+>       SiFivePLICState *plic = opaque;
 > 
->      if (addr_between(addr, plic->priority_base, plic->num_sources << 2)) {
+>       if (addr_between(addr, plic->priority_base, plic->num_sources << 2)) {
 > -        uint32_t irq = ((addr - plic->priority_base) >> 2) + 1;
 > +        uint32_t irq = ((addr - plic->priority_base) >> 2) + 0;
 > 
->          plic->source_priority[irq] = value & 7;
->          sifive_plic_update(plic);
+>           plic->source_priority[irq] = value & 7;
+>           sifive_plic_update(plic);
 > --
 > 2.30.2
 > 
+
+What about sifive_plic_read()?
 
