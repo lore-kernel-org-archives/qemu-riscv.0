@@ -1,81 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oVQ5G-0005P0-EH
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Sep 2022 00:21:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59102)
+	id 1oVQ91-0007MP-Jr
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Sep 2022 00:25:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52474)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1oVQ5F-0005NS-7P
- for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 00:21:09 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d]:36850)
+ id 1oVQ90-0007Lu-Hl
+ for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 00:25:02 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:33521)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1oVQ53-0006NV-Hd
- for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 00:21:08 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id y136so5221545pfb.3
- for <qemu-riscv@nongnu.org>; Mon, 05 Sep 2022 21:20:57 -0700 (PDT)
+ id 1oVQ8y-0006qI-J2
+ for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 00:25:02 -0400
+Received: by mail-pl1-x634.google.com with SMTP id iw17so3486868plb.0
+ for <qemu-riscv@nongnu.org>; Mon, 05 Sep 2022 21:25:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date;
- bh=i7u3LfUeWs///DsuQsLDAMlfLOMAWy7Qt4dlAu+r3/8=;
- b=jzpdaL1bAbCYSuC/oedme8SJPJX19BTBqcqdGB82OKD3VIyRnb/ijJH8ClxadHFzeF
- mlg1s/0EsQMKRKU2NFdjZrj1xhb5MVFyyWpiPE5jqjC0/YB6/Yn9JnkeIkz1g8tNsS1Q
- 9kf15x/2CxwPhW9Zm7LwBE0ttHde8B1RtXIJtUTRZg5lWNSHarsjdiyqpZ6pZjPzE3ED
- SG9tJ+fcoRovMoyCaf2X4bYABJG3oYkGfkcMqAnaPyrFJ3q3oDVD3MfGuMeL8o4AThTB
- yy9PhZlS5MGwT2X1+tSu1481WyfsoYc9GDXySOaKgnQRgV73CvBXa1XeTjq4Tl+6aL6m
- f5TQ==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date;
+ bh=NVyfWgqcvDs/tsdWPOSvuZpI5evcK8rjqm51UITCIAg=;
+ b=LosM5ckSomxVvjMWYAnncYIdMM7OqstSGOwPeS6byqtxXoYmbrjKmCyZYJtSf//TW0
+ JEOPBmvvvLSua5pk67O9OXkxWKePASeL+QCvRZfneYqI7rgtwY4Hfoh6KNPlGHBi52I2
+ 2SmNgQ0vRrk7JhoEwDspNMCtIjaFOta4YiHGOMsc2VfPrgG+3iL0VcFUx2vNq1Q6kidV
+ PwzpRA8d6QhRIOPtNNRwUPNvUGW0U0acFdKJIb4GHNuXdIpmwjOdxAanVxUIWBUq+Hiu
+ MXduuGH3Xl2t9gz6hsb5LznDBpODQGiewN7OwK+moCOYz3igtqYdMFeFWy0SDdSxc2dG
+ JDWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
- bh=i7u3LfUeWs///DsuQsLDAMlfLOMAWy7Qt4dlAu+r3/8=;
- b=tFImdG6TY8tmqQeQHkXzwZy8a0rB+EMrKs+K7VCMUpFigOU1ONP+E5PZaARn+WYojD
- rCIz7MSQ8aNOuHhvtmIG6WYUAB8hDlkwUU/u6cep/LL748eL/6rZaNvNTg+VwdsEiZ4i
- gj8TQyULG52sQlBtWJXwAQaLiCElee3F5y3cWMSNecdFMMCd/9NaM98hHoFRrNTnV0Ub
- O5H5uUS5bCTT1IYXsCcpsrqRYX3+18uiSSM80B1NUF/Y2czPyX1BI2vl5/W1xjd1vpvX
- 9EAwKHvIIxdQAFIubXa9GYBKkwWQM6snm9AWtp7Y5sADtx6UM9jleG9Lq95SCvt+k+8S
- d6sg==
-X-Gm-Message-State: ACgBeo2W1ndr+sV5WVd47wtyRoqWG3BhXp4IkOxylEalLifrVAIwaGOC
- YorZd8ie4XEJtEMMnFNIvtAMQQ==
-X-Google-Smtp-Source: AA6agR5uvin2hKf+OclRhuBbxytWNSWRPEMDIvHusFJLJgj2g6l0VOZzW4x3Uczs/yAUYYV1PxaBSA==
-X-Received: by 2002:a05:6a00:1826:b0:537:b261:3e4d with SMTP id
- y38-20020a056a00182600b00537b2613e4dmr54278086pfa.65.1662438055909; 
- Mon, 05 Sep 2022 21:20:55 -0700 (PDT)
-Received: from sunil-laptop ([49.206.11.92]) by smtp.gmail.com with ESMTPSA id
- o125-20020a62cd83000000b005371c5859d6sm8749652pfg.60.2022.09.05.21.20.50
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date;
+ bh=NVyfWgqcvDs/tsdWPOSvuZpI5evcK8rjqm51UITCIAg=;
+ b=Og9+QVQZR8qwU3SBWZIMTYlalY/PEBiKBJYrFEvHip92iLWPFSN+EJiQPTNk+DW93d
+ tg2HMGHL3lgchcjbtHrN3CWuZbyJOQ7qYD1igsiXOMg5djG0csBAaGSk79xBZWlX0F50
+ o7a0oDaxAN7RI2BbkKdpkBpRxWsD07j4uXiJVpdXY/v6l8yVgGlHqaLJZv4hYjRiKFzZ
+ j6aL3XPVIRyJJmbERkxZV1ZGNqnEPOWm1rMLs9WIJ4Ovmwwv0VFGbJO+hI9g5iDC0BPZ
+ SJF6dJqxhGUPdqgoN3NKOm85OkFxVYj3vXPgCHhgt76XIAdhUqLeP2nO3OksSdJ+WcP8
+ l6ww==
+X-Gm-Message-State: ACgBeo3O+5umAqSpM87ZZ2tAGA/JE8BJXVPF8uVD2TDyjXQ9G/gSNW8c
+ QX1ht5ioXHTHQ0zt+xVrdHD0Sw==
+X-Google-Smtp-Source: AA6agR4STDFZ6T+bLmaAgl1+SSKrLlXh83EKQ0AWUuI2ofB82vibdK4NQuI+Jc9ibZh2LzkBm4rk/w==
+X-Received: by 2002:a17:902:cf11:b0:172:6437:412d with SMTP id
+ i17-20020a170902cf1100b001726437412dmr52240868plg.10.1662438299195; 
+ Mon, 05 Sep 2022 21:24:59 -0700 (PDT)
+Received: from localhost.localdomain ([49.206.11.92])
+ by smtp.gmail.com with ESMTPSA id
+ g10-20020aa796aa000000b00537f029c94bsm8724967pfk.183.2022.09.05.21.24.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Sep 2022 21:20:55 -0700 (PDT)
-Date: Tue, 6 Sep 2022 09:50:47 +0530
+ Mon, 05 Sep 2022 21:24:58 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- Song Gao <gaosong@loongson.cn>, Gerd Hoffmann <kraxel@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+To: qemu-arm@nongnu.org,
+	qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>, Song Gao <gaosong@loongson.cn>,
+ Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>,
  Anup Patel <apatel@ventanamicro.com>,
  Atish Kumar Patra <atishp@rivosinc.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: Re: [PATCH V2 1/3] hw/arm,loongarch: Move load_image_to_fw_cfg() to
- common location
-Message-ID: <20220906042047.GB194675@sunil-laptop>
-References: <20220905182238.374545-1-sunilvl@ventanamicro.com>
- <20220905182238.374545-2-sunilvl@ventanamicro.com>
- <CAFEAcA8QKs7foPWyf_OgEQog=zhfPNnz5dyevDXjPSXrVkh9sw@mail.gmail.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH V3 0/3] hw/riscv: virt: Enable booting S-mode firmware from
+ pflash
+Date: Tue,  6 Sep 2022 09:54:48 +0530
+Message-Id: <20220906042451.379611-1-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFEAcA8QKs7foPWyf_OgEQog=zhfPNnz5dyevDXjPSXrVkh9sw@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x42d.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,52 +87,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Sep 2022 04:21:09 -0000
+X-List-Received-Date: Tue, 06 Sep 2022 04:25:02 -0000
 
-On Mon, Sep 05, 2022 at 10:20:40PM +0100, Peter Maydell wrote:
-> On Mon, 5 Sept 2022 at 19:23, Sunil V L <sunilvl@ventanamicro.com> wrote:
-> >
-> > load_image_to_fw_cfg() is duplicated by both arm and loongarch. The same
-> > function will be required by riscv too. So, it's time to refactor and
-> > move this function to a common path.
-> >
-> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > ---
-> >  hw/arm/boot.c             | 49 ---------------------------------------
-> >  hw/loongarch/virt.c       | 33 --------------------------
-> >  hw/nvram/fw_cfg.c         | 49 +++++++++++++++++++++++++++++++++++++++
-> >  include/hw/nvram/fw_cfg.h |  3 +++
-> >  4 files changed, 52 insertions(+), 82 deletions(-)
-> 
-> 
-> > diff --git a/hw/nvram/fw_cfg.c b/hw/nvram/fw_cfg.c
-> > index d605f3f45a..3f68dae5d2 100644
-> > --- a/hw/nvram/fw_cfg.c
-> > +++ b/hw/nvram/fw_cfg.c
-> > @@ -41,6 +41,7 @@
-> >  #include "qapi/error.h"
-> >  #include "hw/acpi/aml-build.h"
-> >  #include "hw/pci/pci_bus.h"
-> > +#include "hw/loader.h"
-> >
-> >  #define FW_CFG_FILE_SLOTS_DFLT 0x20
-> >
-> > @@ -1221,6 +1222,54 @@ FWCfgState *fw_cfg_find(void)
-> >      return FW_CFG(object_resolve_path_type("", TYPE_FW_CFG, NULL));
-> >  }
-> >
-> > +/**
-> > + * load_image_to_fw_cfg() - Load an image file into an fw_cfg entry identified
-> > + *                          by key.
-> 
-> For functions declared in public header files, put the doc comment
-> in the .h file, not the .c file, please.
+This series adds the support to boot S-mode FW like EDK2 from the flash. The
+S-mode firmware should be kept in pflash unit 1.
 
-Thanks! Peter. Will send V3 with this change.
+When -kernel (and -initrd) option is also provided along with the flash,
+the kernel (and initrd) will be loaded into fw_cfg table and opensbi will
+branch to the flash address which will be the entry point of the S-mode
+firmware. The S-mode FW then loads and launches the kernel.
 
-Thanks
-Sunil
-> 
-> thanks
-> -- PMM
+When only -pflash option is provided in the command line, the kernel
+will be located and loaded in the usual way by the S-mode firmware.
+
+These patches are available in below branch.
+https://github.com/vlsunil/qemu/tree/pflash_v2
+
+The first two patches in this series are refactor patches.
+
+These changes are tested with a WIP EDK2 port for virt machine. Below
+are the instructions to build and test this feature.
+
+1) Get EDK2 sources from below branches.
+https://github.com/vlsunil/edk2/tree/virt_refactor_smode_v1
+https://github.com/vlsunil/edk2-platforms/tree/virt_refactor_smode_v1
+
+2) Build EDK2 for RISC-V
+	export WORKSPACE=`pwd`
+        export GCC5_RISCV64_PREFIX=riscv64-linux-gnu-
+        export PACKAGES_PATH=$WORKSPACE/edk2:$WORKSPACE/edk2-platforms
+        export EDK_TOOLS_PATH=$WORKSPACE/edk2/BaseTools
+        source edk2/edksetup.sh
+        make -C edk2/BaseTools clean
+        make -C edk2/BaseTools
+        make -C edk2/BaseTools/Source/C
+        source edk2/edksetup.sh BaseTools
+        build -a RISCV64  -p Platform/Qemu/RiscVVirt/RiscVVirt.dsc -t GCC5
+
+3)Make the EDK2 image size to match with what qemu flash expects
+truncate -s 32M Build/RiscVVirt/DEBUG_GCC5/FV/RISCV_VIRT.fd
+
+4) Run
+a) Boot to EFI shell (no -kernel / -initrd option)
+qemu-system-riscv64  -nographic   -drive file=Build/RiscVVirt/DEBUG_GCC5/FV/RISCV_VIRT.fd,if=pflash,format=raw,unit=1  -machine virt -M 2G
+
+b) With -kernel, -initrd and -pflash
+qemu-system-riscv64  -nographic   -drive file=Build/RiscVVirt/DEBUG_GCC5/FV/RISCV_VIRT.fd,if=pflash,format=raw,unit=1  -machine virt -M 2G -kernel arch/riscv/boot/Image.gz -initrd rootfs.cpio 
+
+
+Changes since V2:
+	1) Moved the doc comment to .h file
+
+Changes since V1:
+	1) Modified code to support the use case when both -kernel and -pflash are configured.
+	2) Refactor patches added to help (1) above.
+	3) Cover letter added with test instructions.
+
+Sunil V L (3):
+  hw/arm,loongarch: Move load_image_to_fw_cfg() to common location
+  hw/riscv: virt: Move create_fw_cfg() prior to loading kernel
+  hw/riscv: virt: Enable booting S-mode firmware from pflash
+
+ hw/arm/boot.c             | 49 ---------------------------------------
+ hw/loongarch/virt.c       | 33 --------------------------
+ hw/nvram/fw_cfg.c         | 32 +++++++++++++++++++++++++
+ hw/riscv/boot.c           | 28 ++++++++++++++++++++++
+ hw/riscv/virt.c           | 31 ++++++++++++++++++-------
+ include/hw/nvram/fw_cfg.h | 21 +++++++++++++++++
+ include/hw/riscv/boot.h   |  1 +
+ 7 files changed, 105 insertions(+), 90 deletions(-)
+
+-- 
+2.25.1
+
 
