@@ -1,69 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oVW1W-0002gv-4M
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Sep 2022 06:41:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55690)
+	id 1oVWuY-0000zE-ML
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Sep 2022 07:38:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55526)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1oVW1T-0002ZX-QV
- for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 06:41:39 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:56620)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1oVW1S-0001DC-Ak
- for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 06:41:39 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1662460897;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=zuL+cCFEWKfTQ5JgfGgEls+NkRLchxm1H06+O6Y9F9c=;
- b=d1Url5JwxqRAK6qwhWsV3fQmY1kdsGXuqcgwiLMaTjGCfomxVRYOGfCvDmdnch1+a7RbUD
- I/YmyB7scl9L6JbixzyLFyMMqiEk3ctngcfx/UcEjfpfmlTYOr7hG6GKQ3iyYSuMrpvfEG
- e0MJUibmDu5/zTkswsp5d+U6QoEuSc4=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-328-2lg3nmUUMFq8UTO1QH9tUw-1; Tue, 06 Sep 2022 06:41:31 -0400
-X-MC-Unique: 2lg3nmUUMFq8UTO1QH9tUw-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E74BE3C01DFC;
- Tue,  6 Sep 2022 10:41:30 +0000 (UTC)
-Received: from sirius.home.kraxel.org (unknown [10.39.195.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 623C8C15BBD;
- Tue,  6 Sep 2022 10:41:30 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id B24391800629; Tue,  6 Sep 2022 12:41:28 +0200 (CEST)
-Date: Tue, 6 Sep 2022 12:41:28 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- Song Gao <gaosong@loongson.cn>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: Re: [PATCH V4 0/3] hw/riscv: virt: Enable booting S-mode firmware
- from pflash
-Message-ID: <20220906104128.zlwzvbbswlzyplkc@sirius.home.kraxel.org>
-References: <20220906090219.412517-1-sunilvl@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oVWuM-0000tu-UV; Tue, 06 Sep 2022 07:38:29 -0400
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529]:44845)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oVWuK-0003Rf-AA; Tue, 06 Sep 2022 07:38:22 -0400
+Received: by mail-pg1-x529.google.com with SMTP id c24so10358095pgg.11;
+ Tue, 06 Sep 2022 04:38:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date;
+ bh=j6nQrA/+TNrrrVQl4cbrDYXY4CdHW6pYceHYJydCKiQ=;
+ b=RSZsRS0eR32Y598HBE/WEA+RwM+dABqrhR/VcjAqNBS9m0hQvtLPaUyEawHxPxNld3
+ AobaDBF51e78xEx29P8HhjVXg+9qLGg5lr7h8JpWdJxr1fKEycvm1XgeBIYffkPuBGXa
+ 69QHGOlj69vByo3ZwdDq4bmfnHw6LKl+kZwATjboSR68H76/7h6yNAhVc9KXu/Z9Zk4T
+ JEGZb6IE+QCHSJVDw9qmYkO1lZnCRtTKMT4r12BtzackPHz2S3P+jStfsa9NBFpqFD1O
+ UkxY6uL0Jc9AWRfnRmecZquS2pBl/ftmPoPGp+mCdtM4V0/iYVpLgxCk0nWaCiI63akk
+ oBkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date;
+ bh=j6nQrA/+TNrrrVQl4cbrDYXY4CdHW6pYceHYJydCKiQ=;
+ b=k6QU9udryCH3qK3iMzpYXWhVZVgeiJ1xumGamOnu21KnEi+Ja+rGw86GL1SXkyg10X
+ nlm/WRjpsPdiDbL2pka0Ye8/qi7AZMblIiR0LErg+c5HOjNM088+lSxCVbbp/beGU/NQ
+ T7QHmiYiRZ5J7eBpj1pApodPkl4v3DrCVEt4mEoKUogJ7vN+yKFXQP1Q8Ap+WPoA9paz
+ 3Gja6D1P+djRO75rPwZjMgOm4LOpStJ+xohKMQRstzLlQk96bwcYDk50hUl+Qd72v7nF
+ CNweaJDSm7m41onyDV79spaLbAdRFg1SluAxBvrruQw04s6pVCXwqZmW/kYs++IuuxiB
+ vM+w==
+X-Gm-Message-State: ACgBeo1sdvN4ryR3/80jMuh7T2Ifc21ttHD640XUkrGktlmbLUfg4uzu
+ qUONK70gLayh4ffu8mclL+y8cGH6D03K5wasHV6XrwVcwA8PSA==
+X-Google-Smtp-Source: AA6agR5R7JBX+G9vsX99AHDe+ENcKLLfbw8qGoGYfIgviRkbBU7ksGZ2kcysY2yRk1Wa/a2jLhnjzR8vAYtiCOeHAXo=
+X-Received: by 2002:a63:ed15:0:b0:430:48ac:3771 with SMTP id
+ d21-20020a63ed15000000b0043048ac3771mr24156207pgi.423.1662464297242; Tue, 06
+ Sep 2022 04:38:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220906090219.412517-1-sunilvl@ventanamicro.com>
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.8
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=kraxel@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+References: <20220905163939.1599368-1-alex.bennee@linaro.org>
+In-Reply-To: <20220905163939.1599368-1-alex.bennee@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 6 Sep 2022 13:37:50 +0200
+Message-ID: <CAKmqyKPtuT+BT7S=G3v05=s00p4OE8X+tNaccNsN7sn3yJwbcw@mail.gmail.com>
+Subject: Re: [RFC PATCH] docs/system: clean up code escape for riscv virt
+ platform
+To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x529.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,24 +74,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Sep 2022 10:41:40 -0000
+X-List-Received-Date: Tue, 06 Sep 2022 11:38:31 -0000
 
-  Hi,
+On Mon, Sep 5, 2022 at 6:39 PM Alex Benn=C3=A9e <alex.bennee@linaro.org> wr=
+ote:
+>
+> The example code is rendered slightly mangled due to missing code
+> block. Properly escape the code block and add shell prompt and qemu to
+> fit in with the other examples on the page.
+>
+> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
-> 3)Make the EDK2 image size to match with what qemu flash expects
-> truncate -s 32M Build/RiscVVirt/DEBUG_GCC5/FV/RISCV_VIRT.fd
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Hmm, we have that kind of padding on arm too (64M for code and 64M for
-vars) and only a fraction of the space is actually used, which isn't
-exactly ideal.  So not sure it is a good plan to repeat that on riscv.
+Alistair
 
-Also: Do you have support for persistent efi variables?  If that is the
-case then it makes sense to have separate pflash devices for code and
-variable store.  First because you can map the code part read-only then,
-and second because decoupling code + vars to separate files allows easy
-firmware code updates without loosing the variable store.
-
-take care,
-  Gerd
-
+> ---
+>  docs/system/riscv/virt.rst | 13 +++++++++----
+>  1 file changed, 9 insertions(+), 4 deletions(-)
+>
+> diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+> index f8ecec95f3..4b16e41d7f 100644
+> --- a/docs/system/riscv/virt.rst
+> +++ b/docs/system/riscv/virt.rst
+> @@ -168,14 +168,19 @@ Enabling TPM
+>
+>  A TPM device can be connected to the virt board by following the steps b=
+elow.
+>
+> -First launch the TPM emulator
+> +First launch the TPM emulator:
+>
+> -    swtpm socket --tpm2 -t -d --tpmstate dir=3D/tmp/tpm \
+> +.. code-block:: bash
+> +
+> +  $ swtpm socket --tpm2 -t -d --tpmstate dir=3D/tmp/tpm \
+>          --ctrl type=3Dunixio,path=3Dswtpm-sock
+>
+> -Then launch QEMU with:
+> +Then launch QEMU with some additional arguments to link a TPM device to =
+the backend:
+> +
+> +.. code-block:: bash
+>
+> -    ...
+> +  $ qemu-system-riscv64 \
+> +    ... other args .... \
+>      -chardev socket,id=3Dchrtpm,path=3Dswtpm-sock \
+>      -tpmdev emulator,id=3Dtpm0,chardev=3Dchrtpm \
+>      -device tpm-tis-device,tpmdev=3Dtpm0
+> --
+> 2.34.1
+>
+>
 
