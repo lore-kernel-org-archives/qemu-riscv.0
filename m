@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oVXc5-0005ph-7W
+	id 1oVXc5-0005py-Cq
 	for mharc-qemu-riscv@gnu.org; Tue, 06 Sep 2022 08:23:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59326)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42302)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1oVXbZ-0005d0-9r
- for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 08:23:04 -0400
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632]:43934)
+ id 1oVXbh-0005gG-RH
+ for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 08:23:11 -0400
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a]:39854)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1oVXbT-0003qU-7I
- for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 08:22:59 -0400
-Received: by mail-ej1-x632.google.com with SMTP id gb36so22773162ejc.10
- for <qemu-riscv@nongnu.org>; Tue, 06 Sep 2022 05:22:51 -0700 (PDT)
+ id 1oVXbY-0003u3-V5
+ for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 08:23:06 -0400
+Received: by mail-ej1-x62a.google.com with SMTP id fy31so22811431ejc.6
+ for <qemu-riscv@nongnu.org>; Tue, 06 Sep 2022 05:23:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
- bh=Eu+amAVVQVyWILwD4hKAaZX2BvgEHifujr+Z2o9Bj7Q=;
- b=cY3XT9/BMPmus5yNSmmyEHr2VuSdXMc8M/XqRT6trPWT4wniYwOLdg97HCjmO7H3IZ
- rn+QBy/JlfztLKCzVAGp0M8mXOoQcPtCFDWTCUGB3YBwgv6e5u7heuQH9VtqA7BA4nFB
- YRaMqce9XX5T0ntKrQskKgAFWmeXj0GycLBUOLBFKJ5UHU4YWidV6XO87Gd6clS/krJc
- ng5gnn8VciueQjc6COw1NFKI6mN6qlsyD8xPlMAPvADccIt7g+EdDPXQ4+lJ/ElHHXpH
- R6uuogm5CiH5EIOLDkreRUSh2nGQVBbE/Sh3z5lczfTIOevnxOa19TdrhreVFM55CCix
- zjxQ==
+ bh=HzcnmBZhlnyxyz+B0S5H5mHBZlHKlSltS0mBvmvwa5I=;
+ b=qznkQ0PYEEXkpUnYral+U0lnkTVZcSxzx4iowY5pUJHacnWjzhnZHy7N6YMK4YCHML
+ emz49Ef5DRdI0KMYqNXBrm9WYDhQeP6fOlZEUfcSeRpV1g79Y8yCCTeXl/6pmpZ2CKm2
+ ZO4LXV4HFnR2d2JAObJteZ1xVthwOEe5irzcYJl9lEbKNGrFEDDFArssyqIcLciHtC9I
+ zWtsr+0DwK3PKdxjr3FOJ2dxRuiFeNcjSxOj4gQ5nNBZnEskACuYXQl30GOF9n9wxG4/
+ vfQUZM5lJbShjW7uYVCcDmRBhmjCvZAwGzGgS40Nelr24w6YFSiEAobzf0kySmQYEYCP
+ 6JeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date;
- bh=Eu+amAVVQVyWILwD4hKAaZX2BvgEHifujr+Z2o9Bj7Q=;
- b=apysWtQNqWOgbznoF7pgY+Lu5w9JK73dKgh23Y4T4Els6zaUSsR7IG5oJZmc8oBdL4
- 3Iy0vb6loRv5n//cwjlz4GTayKFlZW4hdB5SF9cE9b5bhwFTXHggmQFHpx6lzBs4bqHK
- ITxBSEnmBfroucyy41M7mCzWEAC2+x3lmGSQvZo6dFm0mH99zLRmrwnY1LMciMP25FQj
- MN5fd18pOciSoal/38gurTPj2M/c6vpfJODSzW/cGScXIqV4EsdmiD1mJswAQNSrrPGz
- Su4sBtuENrRII0JpS4l0cMC48H7VISxk6etYjD9LBv/AtkLE5SxsJTsMbs7om0opoieA
- BKHA==
-X-Gm-Message-State: ACgBeo0h8MawEcQXTDEtUP5bKu9qntEtDAlG14y8xovy0TbhvN9S88Ju
- aKQTQz3XCez+54PpXeO1DYue874PCk24GzGS
-X-Google-Smtp-Source: AA6agR5vXctxHrPycrpv/F3rhzuE4y2jWpdlnR6sCae4365yHLB2fC0oYaekvD9/qMHlTnlXC4GAVQ==
-X-Received: by 2002:a17:907:c28:b0:73d:beb7:b9c2 with SMTP id
- ga40-20020a1709070c2800b0073dbeb7b9c2mr39094123ejc.336.1662466970288; 
- Tue, 06 Sep 2022 05:22:50 -0700 (PDT)
+ bh=HzcnmBZhlnyxyz+B0S5H5mHBZlHKlSltS0mBvmvwa5I=;
+ b=p7FWoSZdrQBKPEnIdZHTwHZ0Th5L3s8bmnj3hZRLksQtmTxWFnYoEzLy4K/TXk3W0A
+ zommuP1WESImjCRm4ByAr9rFKReWK57yNXogqoheDC5oB+/zKq60Y50Wp1k78NMhq7jz
+ YJ9ZKrTZprD/f6davpjLC589Qwvj0/b4IFdbBG9OJKBJhCaglg+hKbKOWcC0Kz4rR++h
+ on/wiFAAz4H9rWRRqkdou/Zu/N17ahupH1wxcZu9ABYAQBcm3HDfSv0Dy+43HvZYkEoo
+ biGhsgoj/dU9Olcq4cyj2Y0RY91FU2cUHQ3yuXgtqIWsv01cdH/LnmNOKn8zn6InyjAm
+ ncNg==
+X-Gm-Message-State: ACgBeo3NYIEZkQVsAfzgyAZXTsfyu6ocWrm/Td0ibKkswyBVMgPNx3yI
+ lgigN7BhTq2mJuCxBcb8K6UbaOmsynymZ9mc
+X-Google-Smtp-Source: AA6agR6M+Z1LArubZmJGKr8ZrnkDmYmoV9cnyFoks1aUBAeDfTcSlyXel8XD+B1GwrC/CxRKE0C/mA==
+X-Received: by 2002:a17:906:db05:b0:741:5730:270e with SMTP id
+ xj5-20020a170906db0500b007415730270emr30999693ejb.609.1662466979098; 
+ Tue, 06 Sep 2022 05:22:59 -0700 (PDT)
 Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
  [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- d21-20020a170906305500b0073d6ab5bcaasm6479034ejd.212.2022.09.06.05.22.48
+ d21-20020a170906305500b0073d6ab5bcaasm6479034ejd.212.2022.09.06.05.22.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Sep 2022 05:22:49 -0700 (PDT)
+ Tue, 06 Sep 2022 05:22:58 -0700 (PDT)
 From: Christoph Muellner <christoph.muellner@vrull.eu>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -60,24 +60,24 @@ To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Yunhai Shang <yunhai@linux.alibaba.com>,
  Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Subject: [PATCH 02/11] RISC-V: Adding T-Head CMO instructions
-Date: Tue,  6 Sep 2022 14:22:34 +0200
-Message-Id: <20220906122243.1243354-3-christoph.muellner@vrull.eu>
+Subject: [PATCH 08/11] RISC-V: Adding T-Head MemPair extension
+Date: Tue,  6 Sep 2022 14:22:40 +0200
+Message-Id: <20220906122243.1243354-9-christoph.muellner@vrull.eu>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20220906122243.1243354-1-christoph.muellner@vrull.eu>
 References: <20220906122243.1243354-1-christoph.muellner@vrull.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::632;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x632.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,243 +90,221 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Sep 2022 12:23:08 -0000
-X-List-Received-Date: Tue, 06 Sep 2022 12:23:08 -0000
+X-List-Received-Date: Tue, 06 Sep 2022 12:23:11 -0000
 
 From: Christoph Müllner <christoph.muellner@vrull.eu>
 
-This patch adds support for the T-Head CMO instructions.
-To avoid interfering with standard extensions, decoder and translation
-are in its own T-Head specific files.
-Future patches should be able to easily add additional T-Head extesions.
-
-The implementation does not have much functionality (besides accepting
-the instructions and not qualifying them as illegal instructions if
-the hart executes in the required privilege level for the instruction),
-as QEMU does not model CPU caches and instructions don't have any
-exception behaviour (at least not documented).
-
-The documentation shows, that the instructions are gated by
-mxstatus.theadisaee and mxstatus.ucme. However, since these
-settings are not changed by the upstream Linux kernel,
-we simply enable the instructions in all modes.
+This patch adds support for the T-Head MemPair instructions.
+The patch uses the T-Head specific decoder and translation.
 
 Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 ---
  target/riscv/cpu.c                         |  1 +
  target/riscv/cpu.h                         |  1 +
- target/riscv/insn_trans/trans_xthead.c.inc | 66 ++++++++++++++++++++++
+ target/riscv/insn_trans/trans_xthead.c.inc | 90 ++++++++++++++++++++++
  target/riscv/meson.build                   |  1 +
- target/riscv/translate.c                   | 11 +++-
- target/riscv/xtheadcmo.decode              | 43 ++++++++++++++
- 6 files changed, 120 insertions(+), 3 deletions(-)
- create mode 100644 target/riscv/insn_trans/trans_xthead.c.inc
- create mode 100644 target/riscv/xtheadcmo.decode
+ target/riscv/translate.c                   |  3 +
+ target/riscv/xtheadmempair.decode          | 29 +++++++
+ 6 files changed, 125 insertions(+)
+ create mode 100644 target/riscv/xtheadmempair.decode
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index ac6f82ebd0..7718ab0478 100644
+index 990a1f57af..9370722ffa 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -920,6 +920,7 @@ static Property riscv_cpu_extensions[] = {
-     DEFINE_PROP_BOOL("zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
- 
-     /* Vendor-specific custom extensions */
-+    DEFINE_PROP_BOOL("xtheadcmo", RISCVCPU, cfg.ext_xtheadcmo, false),
+@@ -926,6 +926,7 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("xtheadcmo", RISCVCPU, cfg.ext_xtheadcmo, false),
+     DEFINE_PROP_BOOL("xtheadcondmov", RISCVCPU, cfg.ext_xtheadcondmov, false),
+     DEFINE_PROP_BOOL("xtheadmac", RISCVCPU, cfg.ext_xtheadmac, false),
++    DEFINE_PROP_BOOL("xtheadmempair", RISCVCPU, cfg.ext_xtheadmempair, false),
+     DEFINE_PROP_BOOL("xtheadsync", RISCVCPU, cfg.ext_xtheadsync, false),
+     DEFINE_PROP_BOOL("xtheadxmae", RISCVCPU, cfg.ext_xtheadxmae, false),
      DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
- 
-     /* These are experimental so mark with 'x-' */
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 5c7acc055a..b7ab53b7b8 100644
+index 1982d9293f..6cc2d19075 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -440,6 +440,7 @@ struct RISCVCPUConfig {
-     uint64_t mimpid;
- 
-     /* Vendor-specific custom extensions */
-+    bool ext_xtheadcmo;
+@@ -446,6 +446,7 @@ struct RISCVCPUConfig {
+     bool ext_xtheadcmo;
+     bool ext_xtheadcondmov;
+     bool ext_xtheadmac;
++    bool ext_xtheadmempair;
+     bool ext_xtheadsync;
+     bool ext_xtheadxmae;
      bool ext_XVentanaCondOps;
- 
-     uint8_t pmu_num;
 diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
-new file mode 100644
-index 0000000000..1b1e21ab77
---- /dev/null
+index fc8307b113..a2bae249fb 100644
+--- a/target/riscv/insn_trans/trans_xthead.c.inc
 +++ b/target/riscv/insn_trans/trans_xthead.c.inc
-@@ -0,0 +1,66 @@
-+/*
-+ * RISC-V translation routines for the T-Head vendor extensions (xthead*).
-+ *
-+ * Copyright (c) 2022 VRULL GmbH.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
+@@ -284,3 +284,93 @@ static bool trans_th_mulsw(DisasContext *ctx, arg_th_mulsw *a)
+     ctx->ol = MXL_RV32;
+     return gen_th_mac(ctx, a, tcg_gen_sub_tl, NULL);
+ }
 +
-+#define REQUIRE_PRIV_MHSU(ctx)
++static bool gen_loadpair_tl(DisasContext *ctx, arg_th_pair *a, MemOp memop,
++                            int shamt)
++{
++    TCGv rd1 = dest_gpr(ctx, a->rd1);
++    TCGv rd2 = dest_gpr(ctx, a->rd2);
++    TCGv rs = get_gpr(ctx, a->rs, EXT_NONE);
++    TCGv addr1 = tcg_temp_new();
++    TCGv addr2 = tcg_temp_new();
 +
-+#ifndef CONFIG_USER_ONLY
-+#define REQUIRE_PRIV_MHS(ctx)                                   \
-+do {                                                            \
-+    if (!(ctx->priv == PRV_M ||                                 \
-+          ctx->priv == PRV_H ||                                 \
-+          ctx->priv == PRV_S)) {                                \
-+        return false;                                           \
-+    }                                                           \
-+} while (0)
-+#else
-+#define REQUIRE_PRIV_MHS(ctx)                                   \
-+  return false;
-+#endif
++    tcg_gen_movi_tl(addr1, a->sh2);
++    tcg_gen_shli_tl(addr1, addr1, shamt);
++    tcg_gen_add_tl(addr1, rs, addr1);
++    if ((memop & MO_SIZE) == MO_64) {
++        tcg_gen_addi_tl(addr2, addr1, 8);
++    } else {
++        tcg_gen_addi_tl(addr2, addr1, 4);
++    }
 +
-+#define NOP_PRIVCHECK(insn, privcheck)                          \
-+static bool trans_ ## insn(DisasContext *ctx, arg_ ## insn * a) \
-+{                                                               \
-+    (void) a;                                                   \
-+    privcheck(ctx);                                             \
-+    return true;                                                \
++    if (get_xl(ctx) == MXL_RV32) {
++        tcg_gen_ext32u_tl(addr1, addr1);
++        tcg_gen_ext32u_tl(addr2, addr2);
++    }
++
++    tcg_gen_qemu_ld_tl(rd1, addr1, ctx->mem_idx, memop);
++    tcg_gen_qemu_ld_tl(rd2, addr2, ctx->mem_idx, memop);
++    gen_set_gpr(ctx, a->rd1, rd1);
++    gen_set_gpr(ctx, a->rd2, rd2);
++
++    tcg_temp_free(addr1);
++    tcg_temp_free(addr2);
++    return true;
 +}
 +
-+NOP_PRIVCHECK(th_dcache_call, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_dcache_ciall, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_dcache_iall, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_dcache_cpa, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_dcache_cipa, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_dcache_ipa, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_dcache_cva, REQUIRE_PRIV_MHSU)
-+NOP_PRIVCHECK(th_dcache_civa, REQUIRE_PRIV_MHSU)
-+NOP_PRIVCHECK(th_dcache_iva, REQUIRE_PRIV_MHSU)
-+NOP_PRIVCHECK(th_dcache_csw, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_dcache_cisw, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_dcache_isw, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_dcache_cpal1, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_dcache_cval1, REQUIRE_PRIV_MHS)
++static bool trans_th_ldd(DisasContext *ctx, arg_th_pair *a)
++{
++    REQUIRE_64BIT(ctx);
++    return gen_loadpair_tl(ctx, a, MO_TESQ, 4);
++}
 +
-+NOP_PRIVCHECK(th_icache_iall, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_icache_ialls, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_icache_ipa, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_icache_iva, REQUIRE_PRIV_MHSU)
++static bool trans_th_lwd(DisasContext *ctx, arg_th_pair *a)
++{
++    return gen_loadpair_tl(ctx, a, MO_TESL, 3);
++}
 +
-+NOP_PRIVCHECK(th_l2cache_call, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_l2cache_ciall, REQUIRE_PRIV_MHS)
-+NOP_PRIVCHECK(th_l2cache_iall, REQUIRE_PRIV_MHS)
++static bool trans_th_lwud(DisasContext *ctx, arg_th_pair *a)
++{
++    return gen_loadpair_tl(ctx, a, MO_TEUL, 3);
++}
 +
++static bool gen_storepair_tl(DisasContext *ctx, arg_th_pair *a, MemOp memop,
++                             int shamt)
++{
++    TCGv data1 = get_gpr(ctx, a->rd1, EXT_NONE);
++    TCGv data2 = get_gpr(ctx, a->rd2, EXT_NONE);
++    TCGv rs = get_gpr(ctx, a->rs, EXT_NONE);
++    TCGv addr1 = tcg_temp_new();
++    TCGv addr2 = tcg_temp_new();
++
++    tcg_gen_movi_tl(addr1, a->sh2);
++    tcg_gen_shli_tl(addr1, addr1, shamt);
++    tcg_gen_add_tl(addr1, rs, addr1);
++    if ((memop & MO_SIZE) == MO_64) {
++        tcg_gen_addi_tl(addr2, addr1, 8);
++    } else {
++        tcg_gen_addi_tl(addr2, addr1, 4);
++    }
++
++    if (get_xl(ctx) == MXL_RV32) {
++        tcg_gen_ext32u_tl(addr1, addr1);
++        tcg_gen_ext32u_tl(addr2, addr2);
++    }
++
++    tcg_gen_qemu_st_tl(data1, addr1, ctx->mem_idx, memop);
++    tcg_gen_qemu_st_tl(data2, addr2, ctx->mem_idx, memop);
++
++    tcg_temp_free(addr1);
++    tcg_temp_free(addr2);
++    return true;
++}
++
++static bool trans_th_sdd(DisasContext *ctx, arg_th_pair *a)
++{
++    return gen_storepair_tl(ctx, a, MO_TESQ, 4);
++}
++
++static bool trans_th_swd(DisasContext *ctx, arg_th_pair *a)
++{
++    return gen_storepair_tl(ctx, a, MO_TESL, 3);
++}
 diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index 6b9435d69a..1d149e05cd 100644
+index 55c019e55b..998f0ba336 100644
 --- a/target/riscv/meson.build
 +++ b/target/riscv/meson.build
-@@ -2,6 +2,7 @@
- gen = [
-   decodetree.process('insn16.decode', extra_args: ['--static-decode=decode_insn16', '--insnwidth=16']),
-   decodetree.process('insn32.decode', extra_args: '--static-decode=decode_insn32'),
-+  decodetree.process('xtheadcmo.decode', extra_args: '--static-decode=decode_xtheadcmo'),
+@@ -8,6 +8,7 @@ gen = [
+   decodetree.process('xtheadcmo.decode', extra_args: '--static-decode=decode_xtheadcmo'),
+   decodetree.process('xtheadcondmov.decode', extra_args: '--static-decode=decode_xtheadcondmov'),
+   decodetree.process('xtheadmac.decode', extra_args: '--static-decode=decode_xtheadmac'),
++  decodetree.process('xtheadmempair.decode', extra_args: '--static-decode=decode_xtheadmempair'),
+   decodetree.process('xtheadsync.decode', extra_args: '--static-decode=decode_xtheadsync'),
    decodetree.process('XVentanaCondOps.decode', extra_args: '--static-decode=decode_XVentanaCodeOps'),
  ]
- 
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index fd241ff667..d16ae63850 100644
+index 56cc89ce4a..308de419cb 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -132,7 +132,8 @@ static bool always_true_p(DisasContext *ctx  __attribute__((__unused__)))
-         return ctx->cfg_ptr->ext_ ## ext ; \
-     }
+@@ -138,6 +138,7 @@ MATERIALISE_EXT_PREDICATE(xtheadbs)
+ MATERIALISE_EXT_PREDICATE(xtheadcmo)
+ MATERIALISE_EXT_PREDICATE(xtheadcondmov);
+ MATERIALISE_EXT_PREDICATE(xtheadmac);
++MATERIALISE_EXT_PREDICATE(xtheadmempair);
+ MATERIALISE_EXT_PREDICATE(xtheadsync)
+ MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
  
--MATERIALISE_EXT_PREDICATE(XVentanaCondOps);
-+MATERIALISE_EXT_PREDICATE(xtheadcmo)
-+MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
+@@ -731,6 +732,7 @@ static int ex_rvc_shifti(DisasContext *ctx, int imm)
+ #include "decode-xtheadcmo.c.inc"
+ #include "decode-xtheadcondmov.c.inc"
+ #include "decode-xtheadmac.c.inc"
++#include "decode-xtheadmempair.c.inc"
+ #include "decode-xtheadsync.c.inc"
+ #include "decode-XVentanaCondOps.c.inc"
  
- #ifdef TARGET_RISCV32
- #define get_xl(ctx)    MXL_RV32
-@@ -717,6 +718,10 @@ static int ex_rvc_shifti(DisasContext *ctx, int imm)
- /* Include the auto-generated decoder for 32 bit insn */
- #include "decode-insn32.c.inc"
- 
-+/* Include decoders for factored-out extensions */
-+#include "decode-xtheadcmo.c.inc"
-+#include "decode-XVentanaCondOps.c.inc"
-+
- static bool gen_logic_imm_fn(DisasContext *ctx, arg_i *a,
-                              void (*func)(TCGv, TCGv, target_long))
- {
-@@ -1018,12 +1023,11 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- #include "insn_trans/trans_rvk.c.inc"
- #include "insn_trans/trans_privileged.c.inc"
- #include "insn_trans/trans_svinval.c.inc"
-+#include "insn_trans/trans_xthead.c.inc"
- #include "insn_trans/trans_xventanacondops.c.inc"
- 
- /* Include the auto-generated decoder for 16 bit insn */
- #include "decode-insn16.c.inc"
--/* Include decoders for factored-out extensions */
--#include "decode-XVentanaCondOps.c.inc"
- 
- static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
- {
-@@ -1036,6 +1040,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-         bool (*decode_func)(DisasContext *, uint32_t);
-     } decoders[] = {
-         { always_true_p,  decode_insn32 },
-+        { has_xtheadcmo_p, decode_xtheadcmo },
+@@ -1058,6 +1060,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+         { has_xtheadcmo_p, decode_xtheadcmo },
+         { has_xtheadcondmov_p, decode_xtheadcondmov },
+         { has_xtheadmac_p, decode_xtheadmac },
++        { has_xtheadmempair_p, decode_xtheadmempair },
+         { has_xtheadsync_p, decode_xtheadsync },
          { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
      };
- 
-diff --git a/target/riscv/xtheadcmo.decode b/target/riscv/xtheadcmo.decode
+diff --git a/target/riscv/xtheadmempair.decode b/target/riscv/xtheadmempair.decode
 new file mode 100644
-index 0000000000..8ddf9b3997
+index 0000000000..135dc10a59
 --- /dev/null
-+++ b/target/riscv/xtheadcmo.decode
-@@ -0,0 +1,43 @@
++++ b/target/riscv/xtheadmempair.decode
+@@ -0,0 +1,29 @@
 +#
-+# RISC-V translation routines for the XTheadCmo extension
++# RISC-V instruction decode for the XTheadMemPair extension
 +#
 +# Copyright (c) 2022 Christoph Muellner, christoph.muellner@vrull.eu
 +#
 +# SPDX-License-Identifier: LGPL-2.1-or-later
-+#
-+# The XTheadCmo extension provides instructions for cache management.
++
++# The XTheadMemPair extension provides two-GP-register operations.
 +#
 +# It is documented in
 +# https://github.com/T-head-Semi/thead-extension-spec/releases/download/2.0.0/xthead-2022-09-05-2.0.0.pdf
 +
-+# Fields:
-+%rs1       15:5
++# Fields
++%sh2       25:2
++%rd2       20:5
++%rs        15:5
++%rd1        7:5
 +
-+# Formats
-+@sfence_vm  ....... ..... .....   ... ..... ....... %rs1
++# Argument sets
++&th_pair        rd1 rs rd2 sh2
 +
-+# *** CMO instructions
-+th_dcache_call   0000000 00001 00000 000 00000 0001011
-+th_dcache_ciall  0000000 00011 00000 000 00000 0001011
-+th_dcache_iall   0000000 00010 00000 000 00000 0001011
-+th_dcache_cpa    0000001 01001 ..... 000 00000 0001011 @sfence_vm
-+th_dcache_cipa   0000001 01011 ..... 000 00000 0001011 @sfence_vm
-+th_dcache_ipa    0000001 01010 ..... 000 00000 0001011 @sfence_vm
-+th_dcache_cva    0000001 00101 ..... 000 00000 0001011 @sfence_vm
-+th_dcache_civa   0000001 00111 ..... 000 00000 0001011 @sfence_vm
-+th_dcache_iva    0000001 00110 ..... 000 00000 0001011 @sfence_vm
-+th_dcache_csw    0000001 00001 ..... 000 00000 0001011 @sfence_vm
-+th_dcache_cisw   0000001 00011 ..... 000 00000 0001011 @sfence_vm
-+th_dcache_isw    0000001 00010 ..... 000 00000 0001011 @sfence_vm
-+th_dcache_cpal1  0000001 01000 ..... 000 00000 0001011 @sfence_vm
-+th_dcache_cval1  0000001 00100 ..... 000 00000 0001011 @sfence_vm
++# Formats:
++@th_pair     ..... .. ..... ..... ... ..... ....... &th_pair %rd1 %rs %rd2 %sh2
 +
-+th_icache_iall   0000000 10000 00000 000 00000 0001011
-+th_icache_ialls  0000000 10001 00000 000 00000 0001011
-+th_icache_ipa    0000001 11000 ..... 000 00000 0001011 @sfence_vm
-+th_icache_iva    0000001 10000 ..... 000 00000 0001011 @sfence_vm
-+
-+th_l2cache_call  0000000 10101 00000 000 00000 0001011
-+th_l2cache_ciall 0000000 10111 00000 000 00000 0001011
-+th_l2cache_iall  0000000 10110 00000 000 00000 0001011
-+
++th_ldd       11111 .. ..... ..... 100 ..... 0001011 @th_pair
++th_lwd       11100 .. ..... ..... 100 ..... 0001011 @th_pair
++th_lwud      11110 .. ..... ..... 100 ..... 0001011 @th_pair
++th_sdd       11111 .. ..... ..... 101 ..... 0001011 @th_pair
++th_swd       11100 .. ..... ..... 101 ..... 0001011 @th_pair
 -- 
 2.37.2
 
