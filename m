@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oVXcB-0005wK-MR
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Sep 2022 08:23:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42240)
+	id 1oVXcC-0005yR-A2
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Sep 2022 08:23:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42236)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1oVXbt-0005lg-96
+ id 1oVXbt-0005le-8m
  for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 08:23:28 -0400
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b]:33756)
+Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536]:33668)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1oVXbi-0003xu-Eh
- for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 08:23:20 -0400
-Received: by mail-ej1-x62b.google.com with SMTP id cu2so22934804ejb.0
- for <qemu-riscv@nongnu.org>; Tue, 06 Sep 2022 05:23:04 -0700 (PDT)
+ id 1oVXbi-0003w1-Dz
+ for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 08:23:19 -0400
+Received: by mail-ed1-x536.google.com with SMTP id w2so14976365edc.0
+ for <qemu-riscv@nongnu.org>; Tue, 06 Sep 2022 05:23:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
- bh=MSeHrtZy6/z9aLfg15MifS4M5qZYg4KlFPrRIZ3XZf0=;
- b=MIoQYfvSWNdemt6ycKWCb67ELSovsbkwArvYG4tXkGuGSxoqJRYws3p5Rb33fG4RJ9
- gaN2MuaUix/YhgkGEPHjAYgiCH8vvL1L5rpDOQWOkwuZx7oc/51bgRAGylF/BZHM9R8U
- /0uVPgYW7D85IlRhRNLGjGAos5TNtZ26tUxb/9ieAZJi9JQwInjv14Wd0zOUWHP6TVpr
- SrZdYKgsRUB0rPGTnMzuwfsMJFYNwgcLCU9x/36ajpk3UsZZDSN8j4wmdSOXyVP9jFmL
- tdAs15pOlpGqE6TnoXh/c9aleVETXuANhs7yZ9kVTP5eeRfw8eU5BGlv+8Z9eJNfdKAp
- scZw==
+ bh=Yxbn8wlTHy7WglFSTrfT8DPtvWoSWM35aNvlLv9OrwI=;
+ b=cMwc7DleCp1rKbjpPNfYfreGHZ6R1S65VSSYFEPzkBENf2QK2soXnOvc087rispmxa
+ rfWuwyDEL+dXkujjIN0VhdM2YWaOd+xxLLKNrhgvCnUBo8obJOE6aWO+y+2AHCpV0Yy1
+ CjdzA7T7iCthdRY9uU7KxpB0x1tp1iV2a2kX/jF/b0kud9ABKtLB6kRPjWLKEf0BZwP3
+ IZ5mDo3fPT7SfogNkrEKLk3pxJOrapldF7p49R2aM+05o9Erkibdokti74sHaOui/yxd
+ pA6zACMk+0UdXfvKe5j03KWcKPeq2MxStyPDc3oKsWO98yLPA/VrgMjIP+IY5uNmHu7b
+ 7ntg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date;
- bh=MSeHrtZy6/z9aLfg15MifS4M5qZYg4KlFPrRIZ3XZf0=;
- b=12vgDhM8HUHBaZskA+VQlgaXP+6+laqsVXNvR3+2rgj2VlAA67IN52fJqNpowWYacY
- b0QVnPLqwLCiiSi0MoHH8WKobQiEiUMnzbZll9Vm9fF9/dtAlnjxl1OtCm1Ty+ko5Mfz
- /Ysd2adhbrrbg3ab13DGzL1gCKyjGhgHkom0xOQo0vCfJcuC/eST4ycWd+NbLH5tlWbY
- JPDRcZlz2VfVuuSmSnzi/v7Y1st75Kv3aBR0fQICFFIMeO+bzWhtrWRpZUuXiipSJsuz
- IFPslzSc50VF0iqLGh4pccq2i8lo8zLgtmAnWeDy49RDVzhJqgKUBOhanF/0E6AAx00s
- Ol7w==
-X-Gm-Message-State: ACgBeo3EA9nkKRDOOA4OIPQi4npHhlM8aOqmSzRcpaoyWyGCuXWvlDcj
- juyjQ2+6nsqBxtCOC/OK3bP67J9zpFg/AWli
-X-Google-Smtp-Source: AA6agR6ijj5IvZhfKoNvwLqOIwMB88lXmtKHmmrran4FNtmzOVXKRc2x/1u0jChrqNWsDrPPMCywEw==
-X-Received: by 2002:a17:907:2701:b0:741:51eb:2338 with SMTP id
- w1-20020a170907270100b0074151eb2338mr32582029ejk.501.1662466983588; 
- Tue, 06 Sep 2022 05:23:03 -0700 (PDT)
+ bh=Yxbn8wlTHy7WglFSTrfT8DPtvWoSWM35aNvlLv9OrwI=;
+ b=GKB8iUgRopwDlBtAqEslmBgjSc9xTjK2m8pGPzGcs3raMRDkuBXcuSvoy/m9nEPwJi
+ I/LPGFrJ3r7NbdCZnpWP75BvIAmbAZPmm8JERlrhYNZP4ZlzCswHBqytPmzxXmaboFdm
+ 3Vq7g/Ch/h/j/QlTbJIpfsq2Ym5xELOQwiyZz0T6Gli0Z//fBXwAOS0EAw2o+bC5rd6f
+ Gw0NDAIa1auaL3wj/tKKHeEY6+QxySJeoKzNxBzpP14eJ6VN5H9L+IoRs75FIT/0yz1c
+ DCqNLqk46slCrUV6BphQ/LVsKhhB+xTYnMS30yIXj/cVMJPxafbWqhWjcUoxABkMXnCd
+ fd0Q==
+X-Gm-Message-State: ACgBeo2buLU59nYjH2hSWKWw0GRhe0sNOd6EkYNWlFv9/ZmjERyLSCdq
+ 2zxtDVFjOHXYsGDGkJ2T8IdZHB+rv6PJj/d3
+X-Google-Smtp-Source: AA6agR6Z0J1ZC6tGBDR0oClHYFURkIKD4ZWZB69yVcoxPbpycFEGmjJz1IcNz7B9X0JnupW+ogPX+Q==
+X-Received: by 2002:a05:6402:493:b0:445:b5f0:7a0f with SMTP id
+ k19-20020a056402049300b00445b5f07a0fmr46914092edv.120.1662466982099; 
+ Tue, 06 Sep 2022 05:23:02 -0700 (PDT)
 Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
  [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- d21-20020a170906305500b0073d6ab5bcaasm6479034ejd.212.2022.09.06.05.23.02
+ d21-20020a170906305500b0073d6ab5bcaasm6479034ejd.212.2022.09.06.05.23.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Sep 2022 05:23:03 -0700 (PDT)
+ Tue, 06 Sep 2022 05:23:01 -0700 (PDT)
 From: Christoph Muellner <christoph.muellner@vrull.eu>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -60,18 +60,17 @@ To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Yunhai Shang <yunhai@linux.alibaba.com>,
  Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Subject: [PATCH 11/11] RISC-V: Add initial support for T-Head C906 and C910
- CPUs
-Date: Tue,  6 Sep 2022 14:22:43 +0200
-Message-Id: <20220906122243.1243354-12-christoph.muellner@vrull.eu>
+Subject: [PATCH 10/11] RISC-V: Adding T-Head FMemIdx extension
+Date: Tue,  6 Sep 2022 14:22:42 +0200
+Message-Id: <20220906122243.1243354-11-christoph.muellner@vrull.eu>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20220906122243.1243354-1-christoph.muellner@vrull.eu>
 References: <20220906122243.1243354-1-christoph.muellner@vrull.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x62b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::536;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ed1-x536.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,104 +94,253 @@ X-List-Received-Date: Tue, 06 Sep 2022 12:23:30 -0000
 
 From: Christoph Müllner <christoph.muellner@vrull.eu>
 
-This patch adds the following T-Head CPUs to the list of known CPUs:
-* C906
-* C910
-
-Selecting those CPUs will automatically enable the available
-ISA extensions of the CPUs (incl. vendor extensions).
+This patch adds support for the T-Head FMemIdx instructions.
+The patch uses the T-Head specific decoder and translation.
 
 Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 ---
- target/riscv/cpu.c          | 32 ++++++++++++++++++++++++++++++++
- target/riscv/cpu.h          |  3 +++
- target/riscv/cpu_vendorid.h |  6 ++++++
- 3 files changed, 41 insertions(+)
- create mode 100644 target/riscv/cpu_vendorid.h
+ target/riscv/cpu.c                         |   1 +
+ target/riscv/cpu.h                         |   1 +
+ target/riscv/insn_trans/trans_xthead.c.inc | 121 +++++++++++++++++++++
+ target/riscv/meson.build                   |   1 +
+ target/riscv/translate.c                   |   3 +
+ target/riscv/xtheadfmemidx.decode          |  34 ++++++
+ 6 files changed, 161 insertions(+)
+ create mode 100644 target/riscv/xtheadfmemidx.decode
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 01d85f0f96..1db440e21f 100644
+index 0af9cc7bec..01d85f0f96 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -194,6 +194,36 @@ static void rv64_sifive_e_cpu_init(Object *obj)
-     cpu->cfg.mmu = false;
- }
- 
-+static void rv64_thead_c906_cpu_init(Object *obj)
-+{
-+    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+
-+    set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-+    set_priv_version(env, PRIV_VERSION_1_10_0);
-+
-+    cpu->cfg.ext_g = true;
-+    cpu->cfg.ext_c = true;
-+    cpu->cfg.ext_u = true;
-+    cpu->cfg.ext_s = true;
-+    cpu->cfg.ext_icsr = true;
-+    cpu->cfg.ext_zfh = true;
-+    cpu->cfg.mmu = true;
-+    cpu->cfg.ext_xtheadba = true;
-+    cpu->cfg.ext_xtheadbb = true;
-+    cpu->cfg.ext_xtheadbs = true;
-+    cpu->cfg.ext_xtheadcmo = true;
-+    cpu->cfg.ext_xtheadcondmov = true;
-+    cpu->cfg.ext_xtheadfmemidx = true;
-+    cpu->cfg.ext_xtheadmac = true;
-+    cpu->cfg.ext_xtheadmemidx = true;
-+    cpu->cfg.ext_xtheadmempair = true;
-+    cpu->cfg.ext_xtheadsync = true;
-+    cpu->cfg.ext_xtheadxmae = true;
-+
-+    cpu->cfg.mvendorid = THEAD_VENDOR_ID;
-+}
-+
- static void rv128_base_cpu_init(Object *obj)
- {
-     if (qemu_tcg_mttcg_enabled()) {
-@@ -1205,6 +1235,8 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_THEAD_C906,       rv64_thead_c906_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_THEAD_C910,       rv64_thead_c906_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE128,          rv128_base_cpu_init),
- #endif
- };
+@@ -925,6 +925,7 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("xtheadbs", RISCVCPU, cfg.ext_xtheadbs, false),
+     DEFINE_PROP_BOOL("xtheadcmo", RISCVCPU, cfg.ext_xtheadcmo, false),
+     DEFINE_PROP_BOOL("xtheadcondmov", RISCVCPU, cfg.ext_xtheadcondmov, false),
++    DEFINE_PROP_BOOL("xtheadfmemidx", RISCVCPU, cfg.ext_xtheadfmemidx, false),
+     DEFINE_PROP_BOOL("xtheadmac", RISCVCPU, cfg.ext_xtheadmac, false),
+     DEFINE_PROP_BOOL("xtheadmemidx", RISCVCPU, cfg.ext_xtheadmemidx, false),
+     DEFINE_PROP_BOOL("xtheadmempair", RISCVCPU, cfg.ext_xtheadmempair, false),
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 8b02f530a6..74b291b4e4 100644
+index 590a597f39..8b02f530a6 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -27,6 +27,7 @@
- #include "qom/object.h"
- #include "qemu/int128.h"
- #include "cpu_bits.h"
-+#include "cpu_vendorid.h"
+@@ -445,6 +445,7 @@ struct RISCVCPUConfig {
+     bool ext_xtheadbs;
+     bool ext_xtheadcmo;
+     bool ext_xtheadcondmov;
++    bool ext_xtheadfmemidx;
+     bool ext_xtheadmac;
+     bool ext_xtheadmemidx;
+     bool ext_xtheadmempair;
+diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
+index 95c6b10d77..1a91371318 100644
+--- a/target/riscv/insn_trans/trans_xthead.c.inc
++++ b/target/riscv/insn_trans/trans_xthead.c.inc
+@@ -751,3 +751,124 @@ static bool trans_th_surb(DisasContext *ctx, arg_th_memidx *a)
+     return gen_store_idx(ctx, a, MO_SB, true);
+ }
  
- #define TCG_GUEST_DEFAULT_MO 0
- 
-@@ -53,6 +54,8 @@
- #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
- #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
- #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
-+#define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
-+#define TYPE_RISCV_CPU_THEAD_C910       RISCV_CPU_TYPE_NAME("thead-c910")
- #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
- 
- #if defined(TARGET_RISCV32)
-diff --git a/target/riscv/cpu_vendorid.h b/target/riscv/cpu_vendorid.h
++/*
++ * Load 64-bit float from indexed address.
++ * If !zero_extend_offset, then address is rs1 + (rs2 << imm2).
++ * If  zero_extend_offset, then address is rs1 + (zext(rs2[31:0]) << imm2).
++ */
++static bool gen_fload_idx(DisasContext *ctx, arg_th_fmemidx *a, MemOp memop,
++                          bool zero_extend_offset)
++{
++    TCGv_i64 rd = cpu_fpr[a->rd];
++    TCGv base = get_gpr(ctx, a->rs1, EXT_NONE);
++    TCGv offs = get_gpr(ctx, a->rs2, EXT_NONE);
++    TCGv addr = tcg_temp_new();
++
++    if (zero_extend_offset) {
++        tcg_gen_extract_tl(addr, offs, 0, 32);
++    } else {
++        tcg_gen_mov_tl(addr, offs);
++    }
++    tcg_gen_shli_tl(addr, addr, a->imm2);
++    tcg_gen_add_tl(addr, base, addr);
++
++    if (get_xl(ctx) == MXL_RV32) {
++        tcg_gen_ext32u_tl(addr, addr);
++    }
++
++    tcg_gen_qemu_ld_i64(rd, addr, ctx->mem_idx, memop);
++    if ((memop & MO_SIZE) == MO_32) {
++        gen_nanbox_s(rd, rd);
++    }
++
++    mark_fs_dirty(ctx);
++    tcg_temp_free(addr);
++    return true;
++}
++
++/*
++ * Store 64-bit float to indexed address.
++ * If !zero_extend_offset, then address is rs1 + (rs2 << imm2).
++ * If  zero_extend_offset, then address is rs1 + (zext(rs2[31:0]) << imm2).
++ */
++static bool gen_fstore_idx(DisasContext *ctx, arg_th_fmemidx *a, MemOp memop,
++                           bool zero_extend_offset)
++{
++    TCGv_i64 rd = cpu_fpr[a->rd];
++    TCGv base = get_gpr(ctx, a->rs1, EXT_NONE);
++    TCGv offs = get_gpr(ctx, a->rs2, EXT_NONE);
++    TCGv addr = tcg_temp_new();
++
++    if (zero_extend_offset) {
++        tcg_gen_extract_tl(addr, offs, 0, 32);
++    } else {
++        tcg_gen_mov_tl(addr, offs);
++    }
++    tcg_gen_shli_tl(addr, addr, a->imm2);
++    tcg_gen_add_tl(addr, base, addr);
++
++    if (get_xl(ctx) == MXL_RV32) {
++        tcg_gen_ext32u_tl(addr, addr);
++    }
++
++    tcg_gen_qemu_st_i64(rd, addr, ctx->mem_idx, memop);
++
++    tcg_temp_free(addr);
++    return true;
++}
++
++static bool trans_th_flrd(DisasContext *ctx, arg_th_fmemidx *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++    return gen_fload_idx(ctx, a, MO_TEUQ, false);
++}
++
++static bool trans_th_flrw(DisasContext *ctx, arg_th_fmemidx *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVF);
++    return gen_fload_idx(ctx, a, MO_TEUL, false);
++}
++
++static bool trans_th_flurd(DisasContext *ctx, arg_th_fmemidx *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++    return gen_fload_idx(ctx, a, MO_TEUQ, true);
++}
++
++static bool trans_th_flurw(DisasContext *ctx, arg_th_fmemidx *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVF);
++    return gen_fload_idx(ctx, a, MO_TEUL, true);
++}
++
++static bool trans_th_fsrd(DisasContext *ctx, arg_th_fmemidx *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++    return gen_fstore_idx(ctx, a, MO_TEUQ, false);
++}
++
++static bool trans_th_fsrw(DisasContext *ctx, arg_th_fmemidx *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVF);
++    return gen_fstore_idx(ctx, a, MO_TEUL, false);
++}
++
++static bool trans_th_fsurd(DisasContext *ctx, arg_th_fmemidx *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVD);
++    return gen_fstore_idx(ctx, a, MO_TEUQ, true);
++}
++
++static bool trans_th_fsurw(DisasContext *ctx, arg_th_fmemidx *a)
++{
++    REQUIRE_FPU;
++    REQUIRE_EXT(ctx, RVF);
++    return gen_fstore_idx(ctx, a, MO_TEUL, true);
++}
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index 30bb4c5bab..81175b67ce 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -7,6 +7,7 @@ gen = [
+   decodetree.process('xtheadbs.decode', extra_args: '--static-decode=decode_xtheadbs'),
+   decodetree.process('xtheadcmo.decode', extra_args: '--static-decode=decode_xtheadcmo'),
+   decodetree.process('xtheadcondmov.decode', extra_args: '--static-decode=decode_xtheadcondmov'),
++  decodetree.process('xtheadfmemidx.decode', extra_args: '--static-decode=decode_xtheadfmemidx'),
+   decodetree.process('xtheadmac.decode', extra_args: '--static-decode=decode_xtheadmac'),
+   decodetree.process('xtheadmemidx.decode', extra_args: '--static-decode=decode_xtheadmemidx'),
+   decodetree.process('xtheadmempair.decode', extra_args: '--static-decode=decode_xtheadmempair'),
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 1cb0d885b8..915ac11d3b 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -137,6 +137,7 @@ MATERIALISE_EXT_PREDICATE(xtheadbb)
+ MATERIALISE_EXT_PREDICATE(xtheadbs)
+ MATERIALISE_EXT_PREDICATE(xtheadcmo)
+ MATERIALISE_EXT_PREDICATE(xtheadcondmov);
++MATERIALISE_EXT_PREDICATE(xtheadfmemidx);
+ MATERIALISE_EXT_PREDICATE(xtheadmac);
+ MATERIALISE_EXT_PREDICATE(xtheadmemidx);
+ MATERIALISE_EXT_PREDICATE(xtheadmempair);
+@@ -732,6 +733,7 @@ static int ex_rvc_shifti(DisasContext *ctx, int imm)
+ #include "decode-xtheadbs.c.inc"
+ #include "decode-xtheadcmo.c.inc"
+ #include "decode-xtheadcondmov.c.inc"
++#include "decode-xtheadfmemidx.c.inc"
+ #include "decode-xtheadmac.c.inc"
+ #include "decode-xtheadmemidx.c.inc"
+ #include "decode-xtheadmempair.c.inc"
+@@ -1061,6 +1063,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+         { has_xtheadbs_p, decode_xtheadbs },
+         { has_xtheadcmo_p, decode_xtheadcmo },
+         { has_xtheadcondmov_p, decode_xtheadcondmov },
++        { has_xtheadfmemidx_p, decode_xtheadfmemidx },
+         { has_xtheadmac_p, decode_xtheadmac },
+         { has_xtheadmemidx_p, decode_xtheadmemidx },
+         { has_xtheadmempair_p, decode_xtheadmempair },
+diff --git a/target/riscv/xtheadfmemidx.decode b/target/riscv/xtheadfmemidx.decode
 new file mode 100644
-index 0000000000..a5aa249bc9
+index 0000000000..43e0f80df8
 --- /dev/null
-+++ b/target/riscv/cpu_vendorid.h
-@@ -0,0 +1,6 @@
-+#ifndef TARGET_RISCV_CPU_VENDORID_H
-+#define TARGET_RISCV_CPU_VENDORID_H
++++ b/target/riscv/xtheadfmemidx.decode
+@@ -0,0 +1,34 @@
++#
++# RISC-V instruction decode for the XTheadMemIdx extension
++#
++# Copyright (c) 2022 Christoph Muellner, christoph.muellner@vrull.eu
++#
++# SPDX-License-Identifier: LGPL-2.1-or-later
++#
++# The XTheadFMemIdx extension provides floating-point memory operations.
++#
++# It is documented in
++# https://github.com/T-head-Semi/thead-extension-spec/releases/download/2.0.0/xthead-2022-09-05-2.0.0.pdf
 +
-+#define THEAD_VENDOR_ID         0x5b7
++# Fields
++%imm2       25:2
++%rs2        20:5
++%rs1        15:5
++%rd          7:5
 +
-+#endif /*  TARGET_RISCV_CPU_VENDORID_H */
++# Argument sets
++&th_fmemidx rd rs1 rs2 imm2
++
++# Formats
++@th_fmemidx ..... .. ..... ..... ... ..... ....... &th_fmemidx %rd %rs1 %rs2 %imm2
++
++# Instructions
++th_flrd     01100 .. ..... ..... 110 ..... 0001011 @th_fmemidx
++th_flrw     01000 .. ..... ..... 110 ..... 0001011 @th_fmemidx
++th_flurd    01110 .. ..... ..... 110 ..... 0001011 @th_fmemidx
++th_flurw    01010 .. ..... ..... 110 ..... 0001011 @th_fmemidx
++
++th_fsrd     01100 .. ..... ..... 111 ..... 0001011 @th_fmemidx
++th_fsrw     01000 .. ..... ..... 111 ..... 0001011 @th_fmemidx
++th_fsurd    01110 .. ..... ..... 111 ..... 0001011 @th_fmemidx
++th_fsurw    01010 .. ..... ..... 111 ..... 0001011 @th_fmemidx
 -- 
 2.37.2
 
