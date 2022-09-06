@@ -1,78 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oVXkW-0006yD-K1
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Sep 2022 08:32:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49840)
+	id 1oVYh4-0001Ri-1O
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Sep 2022 09:32:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58606)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1oVXkU-0006sz-FA
- for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 08:32:14 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629]:37521)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1oVYgv-0001OL-Dj; Tue, 06 Sep 2022 09:32:37 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636]:45666)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1oVXkS-00066L-GH
- for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 08:32:13 -0400
-Received: by mail-pl1-x629.google.com with SMTP id s14so1565156plr.4
- for <qemu-riscv@nongnu.org>; Tue, 06 Sep 2022 05:32:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date;
- bh=mOaRI71FQfWA04xw1hixx4MODTWCMqP/3VREdkQGoTQ=;
- b=obTj/T8nL2vtJfjjzCT6VXoOERiCp+1ugivm4/FUM4PhsjKVXRe38OSQBV4jERCsBp
- ugGLkBxK943bn9kGeNzx3oTQIjewFzShMkdiDYel004C5o33G0Wk5ljqrPcmpxC/TjWi
- 4c1znbedjNRguLE3cq1e8rCD/KMM/CV2bH5Vn44p1FjB5vMcM8w3XUbDO/u4DGCNdyBq
- LdUEv5ladW0YDSch3pSNsyxgUOkFa15BUwL6W/CYoDRKtjbpBNYEReavZbajRqAZvYvT
- 97OtcOMpZsRxLOOtRTszyQK1D2bK2nQ2hh/sQZnp5Zq5boIlUXC5JREl7qJC2QDRgASE
- vgXA==
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1oVYgt-0000YG-9g; Tue, 06 Sep 2022 09:32:36 -0400
+Received: by mail-pl1-x636.google.com with SMTP id u22so11272292plq.12;
+ Tue, 06 Sep 2022 06:32:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :sender:from:to:cc:subject:date;
+ bh=QjFr6GbZ7kTsR6HRrvoRK1F0cvlFKgJhPmOuVj/gWPM=;
+ b=Ez7FtG78iC32oIVbxbd/q3G+ZRPm87q9Kltuv61iZF8v2i62QLZRNIprsWqUX49RmE
+ ZjGF0fz2Ax0ZBsqDFar/YAGbztfqbaDG12G9FJWiEVjLvb7AybY2ExFL0Qa/YO7keSwf
+ xgTuaCONT8+u1w8n2Jx/t4W2Y68o8C5/zaVzkXPafis6UAzRbYotujlTeQ2xoZGh1sJL
+ rRUzsufX5ni4AJyCM1yBbNMAuyfvsCNICzGc0IfHwRZZC1ikJ/eJUyTJdcHMj/VJbeNe
+ 378dWJtesKTkuPVThoew2mzcmj7kHC63LZ+lYANs9wkrePUI2vhxODMq2wuQim6l8q3K
+ +kHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
- bh=mOaRI71FQfWA04xw1hixx4MODTWCMqP/3VREdkQGoTQ=;
- b=bJxvKjLk53W8n93pkLy95NjOeIbvS5Jg+2xbmz88/hZEG6OoWHp4SR+pvtGhtQnBA9
- 55E/ce762HAp0GdEvxMzxsV3ZEYqdrJhvHXjFBR7L5astVAIGGH41f7Fooo8PQH/Zh5s
- NnvU6Oyu5rAWgPQcmJrEmUqPz7YRw/LRGhKP2AZVCfoWaIqUADoPvTScJjltLtSnOaXW
- LDWDgti4cWmXNp3bXFbKIv4AJEgRVqNY5WC6+yU/9dT+fqcY49HYiVRAuwfRefWq9oXy
- Hfgs7sb02ghxRWvbGb6CxWyiv4zk/dX5r2WrX/E46TBpYluRewZP2OF1GKN5fhrCC6Pk
- cv8w==
-X-Gm-Message-State: ACgBeo3g2i3OmVBIvuzkDhxqhIgAo/5o09o/MvT2XsZaDgB/xbMfllhZ
- 8Ug5HwqQsH2o3W2l8VdKIjn3VA==
-X-Google-Smtp-Source: AA6agR5iC55Y4ksQL9+J3hn+jTD16yAHYcEX9R2AzZRwsjgaF75756oraVYS/j/hfJpE9lnY6upuZA==
-X-Received: by 2002:a17:90a:9409:b0:200:52d9:660d with SMTP id
- r9-20020a17090a940900b0020052d9660dmr11901049pjo.62.1662467531040; 
- Tue, 06 Sep 2022 05:32:11 -0700 (PDT)
-Received: from sunil-laptop ([49.206.11.92]) by smtp.gmail.com with ESMTPSA id
- v13-20020a17090a00cd00b001fa80cde150sm12368806pjd.20.2022.09.06.05.32.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Sep 2022 05:32:10 -0700 (PDT)
-Date: Tue, 6 Sep 2022 18:02:00 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- Song Gao <gaosong@loongson.cn>, Palmer Dabbelt <palmer@dabbelt.com>,
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :sender:x-gm-message-state:from:to:cc:subject:date;
+ bh=QjFr6GbZ7kTsR6HRrvoRK1F0cvlFKgJhPmOuVj/gWPM=;
+ b=FuLf3Jsfsn92wEFnnEB7ISLviaA7I+BsYgW2MGIt1is5MThLzdVicFOOYGdmwnwsZh
+ 3cOodRls+bqu5hxAo8YNWfcjI6ON6u+yyvMyG6cRyECjbeaFwBI87UqpsPgGEKyOs+as
+ z+WYEIfFiYvKP7EaUw7DMIfMc/M7ZgqItAsITtJjod7+U/RMp3YS1C0qeCn+6SH783VK
+ ll0PZchpCPHNu59OGxf2FXXqLRa3OU/hjCDnj93MhzrtGvpky37m2FVrMrVyh9WxEig8
+ 7WW6hhNgCfkEQRqKmTbxesVvZiSWxO/FIxQli1zvAyr4GTXYxah8Uoa7GGmCrrdqE00o
+ WX4Q==
+X-Gm-Message-State: ACgBeo1drsyKpDHBr4JAWpCNOSmCgrDrsEDIX2ZVqiFGRKTyEeFCQasf
+ spHXuZtK4QRg8QhFAv5MyhE=
+X-Google-Smtp-Source: AA6agR4EP8MqlQno4ULOgrPQkRnlMZYVfMBtc+gBO3dks9H0NwAtAklE6OvvvoCw3ySr0Ujiyru88A==
+X-Received: by 2002:a17:90b:384b:b0:200:71b8:ae00 with SMTP id
+ nl11-20020a17090b384b00b0020071b8ae00mr9183493pjb.125.1662471153404; 
+ Tue, 06 Sep 2022 06:32:33 -0700 (PDT)
+Received: from [192.168.1.115] ([185.126.107.38])
+ by smtp.gmail.com with ESMTPSA id
+ c16-20020a17090ab29000b002000d577cc3sm7054494pjr.55.2022.09.06.06.32.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 Sep 2022 06:32:32 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Message-ID: <89505f6f-a223-449b-3e89-ee8d59072d4e@amsat.org>
+Date: Tue, 6 Sep 2022 15:32:27 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.13.0
+Subject: Re: [PATCH V4 1/3] hw/arm,loongarch: Move load_image_to_fw_cfg() to
+ common location
+Content-Language: en-US
+To: Sunil V L <sunilvl@ventanamicro.com>, qemu-arm@nongnu.org,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>, Song Gao <gaosong@loongson.cn>,
+ Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: Re: [PATCH V4 0/3] hw/riscv: virt: Enable booting S-mode firmware
- from pflash
-Message-ID: <20220906123200.GA237800@sunil-laptop>
+ Anup Patel <apatel@ventanamicro.com>, Atish Kumar Patra <atishp@rivosinc.com>
 References: <20220906090219.412517-1-sunilvl@ventanamicro.com>
- <20220906104128.zlwzvbbswlzyplkc@sirius.home.kraxel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220906104128.zlwzvbbswlzyplkc@sirius.home.kraxel.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x629.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ <20220906090219.412517-2-sunilvl@ventanamicro.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+In-Reply-To: <20220906090219.412517-2-sunilvl@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-pl1-x636.google.com
+X-Spam_score_int: -32
+X-Spam_score: -3.3
+X-Spam_bar: ---
+X-Spam_report: (-3.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-1.752,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -87,41 +91,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Sep 2022 12:32:14 -0000
+X-List-Received-Date: Tue, 06 Sep 2022 13:32:41 -0000
 
-Hi Gerd,
-
-On Tue, Sep 06, 2022 at 12:41:28PM +0200, Gerd Hoffmann wrote:
->   Hi,
+On 6/9/22 11:02, Sunil V L wrote:
+> load_image_to_fw_cfg() is duplicated by both arm and loongarch. The same
+> function will be required by riscv too. So, it's time to refactor and
+> move this function to a common path.
 > 
-> > 3)Make the EDK2 image size to match with what qemu flash expects
-> > truncate -s 32M Build/RiscVVirt/DEBUG_GCC5/FV/RISCV_VIRT.fd
-> 
-> Hmm, we have that kind of padding on arm too (64M for code and 64M for
-> vars) and only a fraction of the space is actually used, which isn't
-> exactly ideal.  So not sure it is a good plan to repeat that on riscv.
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> ---
+>   hw/arm/boot.c             | 49 ---------------------------------------
+>   hw/loongarch/virt.c       | 33 --------------------------
+>   hw/nvram/fw_cfg.c         | 32 +++++++++++++++++++++++++
+>   include/hw/nvram/fw_cfg.h | 21 +++++++++++++++++
+>   4 files changed, 53 insertions(+), 82 deletions(-)
 
-Yeah.. but it looks like limitation from qemu flash emulation. Do you mean
-this limitation exists for arm in general on real flash also?
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
-> 
-> Also: Do you have support for persistent efi variables?  If that is the
-> case then it makes sense to have separate pflash devices for code and
-> variable store.  First because you can map the code part read-only then,
-> and second because decoupling code + vars to separate files allows easy
-> firmware code updates without loosing the variable store.
-
-Yes, we have persistent variables in my WIP branch. We can easily make it
-to create variables as separate file in EDK2. But we will need to
-enhance qemu virt machine to create more than 2 flash since the first
-one is currently reserved for machine mode firmware. This is a
-good input to enhance it in future.
-
-Thanks!
-Sunil
-
-> 
-> take care,
->   Gerd
-> 
 
