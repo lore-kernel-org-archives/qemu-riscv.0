@@ -1,53 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oVQ98-0007US-Rk
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Sep 2022 00:25:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47552)
+	id 1oVQ9E-0007Ym-Lv
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Sep 2022 00:25:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47558)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1oVQ95-0007Px-5F
- for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 00:25:07 -0400
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:37444)
+ id 1oVQ99-0007VG-0V
+ for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 00:25:11 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:40536)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1oVQ93-00072C-1W
- for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 00:25:06 -0400
-Received: by mail-pj1-x102f.google.com with SMTP id
- o2-20020a17090a9f8200b0020025a22208so6482427pjp.2
- for <qemu-riscv@nongnu.org>; Mon, 05 Sep 2022 21:25:04 -0700 (PDT)
+ id 1oVQ96-00073Y-R5
+ for qemu-riscv@nongnu.org; Tue, 06 Sep 2022 00:25:10 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ t11-20020a17090a510b00b001fac77e9d1fso13683484pjh.5
+ for <qemu-riscv@nongnu.org>; Mon, 05 Sep 2022 21:25:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
- bh=ZBm3nLoiUBu04kY2LVi2GbBxIBiGqU5xHs6XU99y0Yo=;
- b=JNktW2HrQrw0Dani8CY4KJ/fzN+hIqaH5I783ieB3f03BqUMk9bi4KeSoyjUkCCrjx
- WK+0R6S3MyksTPQE0w1fkkRtPWqMvUH7bnr97b9gnuuEJ0gaN970aZCdCx9rsTJZH0Z/
- 7okcXG/ixW9nvp5YpyCKB1XnMzPMCQYEZ5RAnOxbzeskkbZtdC5Pj2Wf0p/DqXoGD1E7
- zBE/wT++WZzFCpiLQBOwqJEDW7M4IKVAkx2CHLIlL96xRCCOnCstH1u3tYImX4nZcXcA
- bNqPsWqYp7RtqyUx5EkMnkudqJE12v0wyy+FHe0XlNdgHiSLqz3FawlgRquySFzBLoPN
- Rx4A==
+ bh=K9wefkWGERlorpQlskTuOFMvFh9QknFkKJmCeKsqGFs=;
+ b=HTLujvj53ViJ3NOAzY9LZKAptUnvqErsi9Tg9fpG/Sf8I7Oe3Paf365q4iZmno2acR
+ xEqG4ba3lI/oneW3OvbTj7EOSpWOgz1iS7T7GGl/wc+cClH6gy4rOVgVVMUhT3Dssrp1
+ w8XMfCxsDwtDsdHoy5v2qKWn3sbltaSQkJvN8Q/zm0KXBjlckpjGYaNvgxffBwZjHHCD
+ PBEsAXaqJuABCQQGAbGr/f3bFV/0ZdPaJ9iMEf+aSTjm3fsLJcBV/4n6n3QrFZ/2IOdM
+ E7J/CPJaPx6d7LGhmTuPOn3MGw3uhtJ0+MlThgYoMHy3scdhWPsGdITAmFntkg6nl1qN
+ uiRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date;
- bh=ZBm3nLoiUBu04kY2LVi2GbBxIBiGqU5xHs6XU99y0Yo=;
- b=HZM7CZNOS5QyUDwwNWsiaLWoDA6k9OSQkIAx3w/XXXhB0FPnNH50LaKJ+/FyZFgpde
- aLQqG8KySKqjbfslVpnrNkWWapS5Xnm3M99vW04woRLiwKRoya0hJ0ThaOHXqe3Ono3h
- 7Tofqv0BlokgladOOO0x13vWALV1PKcGqYoniWBAYcUNO+cSX0VaWIfPXo88nh9BQWuv
- Cs4j2x4u6Rb8JbNPXQN/L7HxyO7EFJEgxRiHwwJkzniBSSe6ELlOzCy0cCKEL5NmN69U
- Jc9UduEEBAV/VHPvAF/xaUWJHJ9PwZUZnXzX2Sict2jWXMR9rsFJQwYLmhd4X+GgyFQF
- m1LQ==
-X-Gm-Message-State: ACgBeo3BPEEk3mcFrkHVBnC8iNFT+N9WluE6veiaTl4Fw6GuOrMYj0Sk
- rgZbSRe0ygFr0l1+X7ZAfM3H2A==
-X-Google-Smtp-Source: AA6agR5GnvyItN9m5fzaptYHyReTwrUqRlVvmltOuaRPR1DXHdKcG7AUnakzTe5Zp3O2OoSksFbjMQ==
-X-Received: by 2002:a17:902:6b84:b0:172:f7cc:175 with SMTP id
- p4-20020a1709026b8400b00172f7cc0175mr50864072plk.158.1662438303483; 
- Mon, 05 Sep 2022 21:25:03 -0700 (PDT)
+ bh=K9wefkWGERlorpQlskTuOFMvFh9QknFkKJmCeKsqGFs=;
+ b=iZmwBJw/AA1gY4Mm7r7cEYC7KqwYSfhbuvDVTqsUdu5KwQ4dxUQB0EYsLFtrdD3VJO
+ uKPbMMRzLKn6kPifMGoFmuZF5je2XE8orELphodEeuPfkfabBF/jZhr+DDtab4frV9VM
+ lzpvjBWtC6D6No/77wHZX/7uMz+Pw3tJG8/8iLTaqdO+CJ9gdPKKRZnYIf+/X+Uti8WV
+ VS8Co/BADNRPCLGPq+A5mMbiznWzj1Av4Ftdtt54QFJyDddiMZSjEKheFYixqcTxLXxt
+ i9adGUMWMPqIFOD1+Amg8UItlzyv4ZQeF9fRaN9SXT39FGiJqPVrbasEkRbl4HSYl1hV
+ zZKg==
+X-Gm-Message-State: ACgBeo0tD32v54Eh14lb8ceCOpF17KDvpJAsI8AI8oSHXUb4qZzxqXZV
+ ot7M2bNieJqNp64/jX/q4eonfg==
+X-Google-Smtp-Source: AA6agR4pIxkoTStNse70DJsozeEqFrbBNNK782iKzYZ06Nma6QVQRFYTWypKBJpS/RQDgoQtBwYKrA==
+X-Received: by 2002:a17:902:edd5:b0:174:a6e6:51f4 with SMTP id
+ q21-20020a170902edd500b00174a6e651f4mr42534339plk.82.1662438307603; 
+ Mon, 05 Sep 2022 21:25:07 -0700 (PDT)
 Received: from localhost.localdomain ([49.206.11.92])
  by smtp.gmail.com with ESMTPSA id
- g10-20020aa796aa000000b00537f029c94bsm8724967pfk.183.2022.09.05.21.24.59
+ g10-20020aa796aa000000b00537f029c94bsm8724967pfk.183.2022.09.05.21.25.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Sep 2022 21:25:03 -0700 (PDT)
+ Mon, 05 Sep 2022 21:25:07 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-arm@nongnu.org,
 	qemu-devel@nongnu.org,
@@ -61,17 +61,17 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Atish Kumar Patra <atishp@rivosinc.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH V3 1/3] hw/arm,
- loongarch: Move load_image_to_fw_cfg() to common location
-Date: Tue,  6 Sep 2022 09:54:49 +0530
-Message-Id: <20220906042451.379611-2-sunilvl@ventanamicro.com>
+Subject: [PATCH V3 2/3] hw/riscv: virt: Move create_fw_cfg() prior to loading
+ kernel
+Date: Tue,  6 Sep 2022 09:54:50 +0530
+Message-Id: <20220906042451.379611-3-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220906042451.379611-1-sunilvl@ventanamicro.com>
 References: <20220906042451.379611-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -91,204 +91,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Sep 2022 04:25:07 -0000
+X-List-Received-Date: Tue, 06 Sep 2022 04:25:13 -0000
 
-load_image_to_fw_cfg() is duplicated by both arm and loongarch. The same
-function will be required by riscv too. So, it's time to refactor and
-move this function to a common path.
+To enable both -kernel and -pflash options, the fw_cfg needs to be
+created prior to loading the kernel.
 
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 ---
- hw/arm/boot.c             | 49 ---------------------------------------
- hw/loongarch/virt.c       | 33 --------------------------
- hw/nvram/fw_cfg.c         | 32 +++++++++++++++++++++++++
- include/hw/nvram/fw_cfg.h | 21 +++++++++++++++++
- 4 files changed, 53 insertions(+), 82 deletions(-)
+ hw/riscv/virt.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/hw/arm/boot.c b/hw/arm/boot.c
-index ada2717f76..704f368d9c 100644
---- a/hw/arm/boot.c
-+++ b/hw/arm/boot.c
-@@ -818,55 +818,6 @@ static void do_cpu_reset(void *opaque)
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index ff8c0df5cd..b6bbf03f61 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1251,6 +1251,13 @@ static void virt_machine_done(Notifier *notifier, void *data)
+                                     RISCV64_BIOS_BIN, start_addr, NULL);
      }
- }
  
--/**
-- * load_image_to_fw_cfg() - Load an image file into an fw_cfg entry identified
-- *                          by key.
-- * @fw_cfg:         The firmware config instance to store the data in.
-- * @size_key:       The firmware config key to store the size of the loaded
-- *                  data under, with fw_cfg_add_i32().
-- * @data_key:       The firmware config key to store the loaded data under,
-- *                  with fw_cfg_add_bytes().
-- * @image_name:     The name of the image file to load. If it is NULL, the
-- *                  function returns without doing anything.
-- * @try_decompress: Whether the image should be decompressed (gunzipped) before
-- *                  adding it to fw_cfg. If decompression fails, the image is
-- *                  loaded as-is.
-- *
-- * In case of failure, the function prints an error message to stderr and the
-- * process exits with status 1.
-- */
--static void load_image_to_fw_cfg(FWCfgState *fw_cfg, uint16_t size_key,
--                                 uint16_t data_key, const char *image_name,
--                                 bool try_decompress)
--{
--    size_t size = -1;
--    uint8_t *data;
--
--    if (image_name == NULL) {
--        return;
--    }
--
--    if (try_decompress) {
--        size = load_image_gzipped_buffer(image_name,
--                                         LOAD_IMAGE_MAX_GUNZIP_BYTES, &data);
--    }
--
--    if (size == (size_t)-1) {
--        gchar *contents;
--        gsize length;
--
--        if (!g_file_get_contents(image_name, &contents, &length, NULL)) {
--            error_report("failed to load \"%s\"", image_name);
--            exit(1);
--        }
--        size = length;
--        data = (uint8_t *)contents;
--    }
--
--    fw_cfg_add_i32(fw_cfg, size_key, size);
--    fw_cfg_add_bytes(fw_cfg, data_key, data, size);
--}
--
- static int do_arm_linux_init(Object *obj, void *opaque)
- {
-     if (object_dynamic_cast(obj, TYPE_ARM_LINUX_BOOT_IF)) {
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 5cc0b05538..eee2c193c0 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -542,39 +542,6 @@ static void reset_load_elf(void *opaque)
++    /*
++     * Init fw_cfg.  Must be done before riscv_load_fdt, otherwise the device
++     * tree cannot be altered and we get FDT_ERR_NOSPACE.
++     */
++    s->fw_cfg = create_fw_cfg(machine);
++    rom_set_fw(s->fw_cfg);
++
+     if (machine->kernel_filename) {
+         kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
+                                                          firmware_end_addr);
+@@ -1284,13 +1291,6 @@ static void virt_machine_done(Notifier *notifier, void *data)
+         start_addr = virt_memmap[VIRT_FLASH].base;
      }
- }
  
--/* Load an image file into an fw_cfg entry identified by key. */
--static void load_image_to_fw_cfg(FWCfgState *fw_cfg, uint16_t size_key,
--                                 uint16_t data_key, const char *image_name,
--                                 bool try_decompress)
--{
--    size_t size = -1;
--    uint8_t *data;
+-    /*
+-     * Init fw_cfg.  Must be done before riscv_load_fdt, otherwise the device
+-     * tree cannot be altered and we get FDT_ERR_NOSPACE.
+-     */
+-    s->fw_cfg = create_fw_cfg(machine);
+-    rom_set_fw(s->fw_cfg);
 -
--    if (image_name == NULL) {
--        return;
--    }
--
--    if (try_decompress) {
--        size = load_image_gzipped_buffer(image_name,
--                                         LOAD_IMAGE_MAX_GUNZIP_BYTES, &data);
--    }
--
--    if (size == (size_t)-1) {
--        gchar *contents;
--        gsize length;
--
--        if (!g_file_get_contents(image_name, &contents, &length, NULL)) {
--            error_report("failed to load \"%s\"", image_name);
--            exit(1);
--        }
--        size = length;
--        data = (uint8_t *)contents;
--    }
--
--    fw_cfg_add_i32(fw_cfg, size_key, size);
--    fw_cfg_add_bytes(fw_cfg, data_key, data, size);
--}
--
- static void fw_cfg_add_kernel_info(FWCfgState *fw_cfg)
- {
-     /*
-diff --git a/hw/nvram/fw_cfg.c b/hw/nvram/fw_cfg.c
-index d605f3f45a..371a45dfe2 100644
---- a/hw/nvram/fw_cfg.c
-+++ b/hw/nvram/fw_cfg.c
-@@ -41,6 +41,7 @@
- #include "qapi/error.h"
- #include "hw/acpi/aml-build.h"
- #include "hw/pci/pci_bus.h"
-+#include "hw/loader.h"
- 
- #define FW_CFG_FILE_SLOTS_DFLT 0x20
- 
-@@ -1221,6 +1222,37 @@ FWCfgState *fw_cfg_find(void)
-     return FW_CFG(object_resolve_path_type("", TYPE_FW_CFG, NULL));
- }
- 
-+void load_image_to_fw_cfg(FWCfgState *fw_cfg, uint16_t size_key,
-+                          uint16_t data_key, const char *image_name,
-+                          bool try_decompress)
-+{
-+    size_t size = -1;
-+    uint8_t *data;
-+
-+    if (image_name == NULL) {
-+        return;
-+    }
-+
-+    if (try_decompress) {
-+        size = load_image_gzipped_buffer(image_name,
-+                                         LOAD_IMAGE_MAX_GUNZIP_BYTES, &data);
-+    }
-+
-+    if (size == (size_t)-1) {
-+        gchar *contents;
-+        gsize length;
-+
-+        if (!g_file_get_contents(image_name, &contents, &length, NULL)) {
-+            error_report("failed to load \"%s\"", image_name);
-+            exit(1);
-+        }
-+        size = length;
-+        data = (uint8_t *)contents;
-+    }
-+
-+    fw_cfg_add_i32(fw_cfg, size_key, size);
-+    fw_cfg_add_bytes(fw_cfg, data_key, data, size);
-+}
- 
- static void fw_cfg_class_init(ObjectClass *klass, void *data)
- {
-diff --git a/include/hw/nvram/fw_cfg.h b/include/hw/nvram/fw_cfg.h
-index 0e7a8bc7af..c1f81a5f13 100644
---- a/include/hw/nvram/fw_cfg.h
-+++ b/include/hw/nvram/fw_cfg.h
-@@ -342,4 +342,25 @@ bool fw_cfg_dma_enabled(void *opaque);
-  */
- const char *fw_cfg_arch_key_name(uint16_t key);
- 
-+/**
-+ * load_image_to_fw_cfg() - Load an image file into an fw_cfg entry identified
-+ *                          by key.
-+ * @fw_cfg:         The firmware config instance to store the data in.
-+ * @size_key:       The firmware config key to store the size of the loaded
-+ *                  data under, with fw_cfg_add_i32().
-+ * @data_key:       The firmware config key to store the loaded data under,
-+ *                  with fw_cfg_add_bytes().
-+ * @image_name:     The name of the image file to load. If it is NULL, the
-+ *                  function returns without doing anything.
-+ * @try_decompress: Whether the image should be decompressed (gunzipped) before
-+ *                  adding it to fw_cfg. If decompression fails, the image is
-+ *                  loaded as-is.
-+ *
-+ * In case of failure, the function prints an error message to stderr and the
-+ * process exits with status 1.
-+ */
-+void load_image_to_fw_cfg(FWCfgState *fw_cfg, uint16_t size_key,
-+                          uint16_t data_key, const char *image_name,
-+                          bool try_decompress);
-+
- #endif
+     /* Compute the fdt load address in dram */
+     fdt_load_addr = riscv_load_fdt(memmap[VIRT_DRAM].base,
+                                    machine->ram_size, machine->fdt);
 -- 
 2.25.1
 
