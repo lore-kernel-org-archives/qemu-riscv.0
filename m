@@ -1,59 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oWBzm-00044q-7J
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 03:30:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48396)
+	id 1oWCDs-0000y5-C5
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 03:45:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36686)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1oWBzb-00041W-WC
- for qemu-riscv@nongnu.org; Thu, 08 Sep 2022 03:30:32 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331]:36581)
+ id 1oWCDq-0000xc-S8
+ for qemu-riscv@nongnu.org; Thu, 08 Sep 2022 03:45:14 -0400
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e]:36653)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1oWBzK-0008R1-Ju
- for qemu-riscv@nongnu.org; Thu, 08 Sep 2022 03:30:31 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- i129-20020a1c3b87000000b003b332a7acbcso311855wma.1
- for <qemu-riscv@nongnu.org>; Thu, 08 Sep 2022 00:30:02 -0700 (PDT)
+ id 1oWCDp-00037t-8y
+ for qemu-riscv@nongnu.org; Thu, 08 Sep 2022 03:45:14 -0400
+Received: by mail-wr1-x42e.google.com with SMTP id b17so11223606wrq.3
+ for <qemu-riscv@nongnu.org>; Thu, 08 Sep 2022 00:45:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date;
- bh=mRNz/jJ10FJ/aDska8sh57k0O4s10qIr6quHwEH65XE=;
- b=om9fwDu3eINUfWTwKyL5VhoKhX1nDa7fg1ipNUbvWYPwhG4r5ATAn15CHL1wjzN6N4
- SLw0P7j122QNxeBQNQiPvUHnsDqnicG6XSR2XzKNxrFLN8hIOYoMRGGP6l5dL8GIBOIg
- DeQecPNSeirSoh526gz4U+D8AlQBQ/GynWL5s8sIcoG65p++5LAHFlVlySFpEzL5f5WA
- VBmBfNSken0LlrTbszCqhnMT/pPdosovev1r48DVGBiWHOgrAZHlgBmB0OV6PG/ElMS9
- s6vWHaCcHxAkUPZCFfDQGDx7/diyyKFCu3sVQYAJd2JZxgX6xPhCTz7Xy8EcleyqreEu
- JIsA==
+ bh=4zzKIZ/+RqOdZA78fKp4w6y0CFuWcdUNpdJy1AhCoF0=;
+ b=PffCH5xmQG18nbbveiKb9csIpnesERHOmqSZR4ITprbSv+l4DXxB1soi2tlsyKmnXb
+ 9JxPPbgsRPFvJcqPILf+1OUuI/cpIhqmZxpcJ6W14ScMU4URB10QcO+b8lg/RR/RcNt3
+ 9L0nReL+WrUIF+JhquFNiJ9lVtx5CYRkZTl1zzgdkjQ0hcvKRp+nWoQ7p8DZaDfL3lyV
+ kxDXSdjMa81ghl8rv3BHVCYmr78RdtN0Jy70KMJU1KvtGndTQ2+U1Qz9eIb2jK891x52
+ Y5FSoR/Lzcxe1tq+n5y+lV5CCUZz3SXSPBW3n7jMPWXu9iywT7t1+IFGazk3AHOCefjz
+ bSMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date;
- bh=mRNz/jJ10FJ/aDska8sh57k0O4s10qIr6quHwEH65XE=;
- b=oUNv5DUMMOW1uYUUurlKeJ49udnDkOw480svGrJKoVL/El1wNaZeXKL/cHW70P/hjZ
- k4nMd08NkgFgobJWL5IYHyb52LJLlGfZ4I8/Z409VMhlk+880x5r+B++tYs5GxDyqo7F
- D+zb/eZHTBg/bIoNdxvHYX62DHZ265rbCrUud1w4/qca5JbXoweIeni+mGZdrV2qKObD
- X4gAXbdbYDoOk7qAOyViOl6qy9LK3YttFTuYsArWAyIo1uG0L3ggeRqUWySIF10t4DYm
- ZtoTFi7bK7QpOo4oy23FbuvdIpxExycsn3orPJExMG/4U0Obw2FBgSswyicG2nrMj9TB
- u/kw==
-X-Gm-Message-State: ACgBeo02IT9sZoagz6rZ3mR9qQLiuOw7k4i9IFXQimeJcX7fkf2dgAN7
- 6EWOE5JIX0P0JX2lerH9gLwSuQ==
-X-Google-Smtp-Source: AA6agR66w6IgsCQNQ65n2ij1MiujniY1IrKhIkY+agst6KdMRCn+My8KN21SgG1N4lC0ClfdnIx3wQ==
-X-Received: by 2002:a7b:cb41:0:b0:3b3:34d6:189f with SMTP id
- v1-20020a7bcb41000000b003b334d6189fmr281295wmj.6.1662622201683; 
- Thu, 08 Sep 2022 00:30:01 -0700 (PDT)
+ bh=4zzKIZ/+RqOdZA78fKp4w6y0CFuWcdUNpdJy1AhCoF0=;
+ b=yMzAs7rDlESOYaaDzysbHWTnbvBebI4tCZqOeLV3YdGFRRxQUuoWuwtLpKV6AnNMb7
+ XzrcAW887Z0EVBR87r26Vqll7QPzt4uIRM2YUIbyPzH4P/LNtz4XIP+5mqNrnFE3FDr4
+ a8Gi8qBoo5ihyUmjCKTEH7xide0720RPdhswFr5uaTm75/NGdbwomEngjiHx8/6LxgRF
+ kXikEsG4mvtcEQFQ2STWaQU5bq9/OeOeYAgAhnsx5cdC+J6oKx4+Qp1tQ2RPK7wKLu2G
+ Ykr6ipCjA5XWr3EpXTJDaf+KUy469r20yeVqu2ium0QXR20staW6bBwbtyjYiQdpA1Fb
+ DQ8A==
+X-Gm-Message-State: ACgBeo3saW9Z9ma2IJYPsv6YixbfTxxuLYrI0GJfzRoUjQz6CDBK3y5O
+ fjaZuuaio8SUJP0ihzD1HIX2nA==
+X-Google-Smtp-Source: AA6agR49ZSujlBV3Ig1Xxgh5mlmtgxBREGpKrhy/R6Tt12OuipL6N0XQKIRLbp3KazY0qCa8jP55hA==
+X-Received: by 2002:a05:6000:1881:b0:222:c899:cac6 with SMTP id
+ a1-20020a056000188100b00222c899cac6mr4008613wri.283.1662623111061; 
+ Thu, 08 Sep 2022 00:45:11 -0700 (PDT)
 Received: from [192.168.1.87] ([109.78.97.14])
  by smtp.gmail.com with ESMTPSA id
- q184-20020a1c43c1000000b003a5dde32e4bsm1615015wma.37.2022.09.08.00.30.00
+ a18-20020adffb92000000b002237fd66585sm18686348wrr.92.2022.09.08.00.45.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Sep 2022 00:30:01 -0700 (PDT)
-Message-ID: <f6c98fb6-38f7-5747-0db6-aec2c77edd9a@linaro.org>
-Date: Thu, 8 Sep 2022 08:29:57 +0100
+ Thu, 08 Sep 2022 00:45:10 -0700 (PDT)
+Message-ID: <13c9f7be-d8b8-37aa-ee99-79056e11e30c@linaro.org>
+Date: Thu, 8 Sep 2022 08:45:08 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH 03/11] RISC-V: Adding T-Head SYNC instructions
+Subject: Re: [PATCH 10/11] RISC-V: Adding T-Head FMemIdx extension
 Content-Language: en-US
 To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
@@ -66,13 +65,13 @@ To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
  Yunhai Shang <yunhai@linux.alibaba.com>,
  Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 References: <20220906122243.1243354-1-christoph.muellner@vrull.eu>
- <20220906122243.1243354-4-christoph.muellner@vrull.eu>
+ <20220906122243.1243354-11-christoph.muellner@vrull.eu>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20220906122243.1243354-4-christoph.muellner@vrull.eu>
+In-Reply-To: <20220906122243.1243354-11-christoph.muellner@vrull.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -62
 X-Spam_score: -6.3
 X-Spam_bar: ------
@@ -92,18 +91,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2022 07:30:32 -0000
+X-List-Received-Date: Thu, 08 Sep 2022 07:45:15 -0000
 
 On 9/6/22 13:22, Christoph Muellner wrote:
-> +NOP_PRIVCHECK(th_sfence_vmas, REQUIRE_PRIV_MHS)
-> +NOP_PRIVCHECK(th_sync, REQUIRE_PRIV_MHSU)
-> +NOP_PRIVCHECK(th_sync_i, REQUIRE_PRIV_MHSU)
-> +NOP_PRIVCHECK(th_sync_is, REQUIRE_PRIV_MHSU)
-> +NOP_PRIVCHECK(th_sync_s, REQUIRE_PRIV_MHSU)
+> @@ -732,6 +733,7 @@ static int ex_rvc_shifti(DisasContext *ctx, int imm)
+>   #include "decode-xtheadbs.c.inc"
+>   #include "decode-xtheadcmo.c.inc"
+>   #include "decode-xtheadcondmov.c.inc"
+> +#include "decode-xtheadfmemidx.c.inc"
+>   #include "decode-xtheadmac.c.inc"
+>   #include "decode-xtheadmemidx.c.inc"
+>   #include "decode-xtheadmempair.c.inc"
+> @@ -1061,6 +1063,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>           { has_xtheadbs_p, decode_xtheadbs },
+>           { has_xtheadcmo_p, decode_xtheadcmo },
+>           { has_xtheadcondmov_p, decode_xtheadcondmov },
+> +        { has_xtheadfmemidx_p, decode_xtheadfmemidx },
+>           { has_xtheadmac_p, decode_xtheadmac },
+>           { has_xtheadmemidx_p, decode_xtheadmemidx },
+>           { has_xtheadmempair_p, decode_xtheadmempair },
 
-These should not be nops: th_sfence_vmas requires a tlb flush; th.sync{,.i} needs to end 
-the current translation block; th.sync.{s,is} needs multiprocessor sync, which involves a 
-call to async_safe_run_on_cpu.
+I think you should have a single decoder for all of the xthread extensions, and each 
+translate function should test for the individual extension.  You know up-front that these 
+extensions do not conflict.
 
 
 r~
