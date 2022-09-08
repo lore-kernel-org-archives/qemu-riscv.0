@@ -1,67 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oWDii-0007bt-0w
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 05:21:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48634)
+	id 1oWDjZ-0001dd-78
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 05:22:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40372)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oWDiQ-0007SM-IN; Thu, 08 Sep 2022 05:20:54 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429]:46871)
+ id 1oWDjY-0001Yx-58; Thu, 08 Sep 2022 05:22:04 -0400
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:35545)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oWDiO-00011S-SV; Thu, 08 Sep 2022 05:20:54 -0400
-Received: by mail-pf1-x429.google.com with SMTP id c198so7438061pfc.13;
- Thu, 08 Sep 2022 02:20:51 -0700 (PDT)
+ id 1oWDjU-0001CY-20; Thu, 08 Sep 2022 05:22:03 -0400
+Received: by mail-pj1-x102f.google.com with SMTP id
+ m10-20020a17090a730a00b001fa986fd8eeso1778217pjk.0; 
+ Thu, 08 Sep 2022 02:21:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date;
- bh=4c6DoOOyV37wU23qcPSVaAYu8mdYtez+DKjSHLL0Rug=;
- b=IbfNqhfTIzFg7F7AWfvAQEh+znAiC+GcIjjaWEy04KHpDtqMeIMsjggxWIpzSsTw4k
- 3AJN3g4kJnd6fC3sTaTkCEHxDhaA5BagxL7xRaxzBYUpSUecGGxaHgWNZqmbaw1HAlct
- s3d4KFx7Jw7vSfq6uK8xtpcfrXjD8HzAYm8AauWMoeLdJzXoET6UuALs3zOBwzjpssk7
- +/+z0h2VvbcMt1ACSn1+4JcfZRw3UKvKvP/OoqV4B/4n2+hFZ/fD49LXwETSxKuF8a/2
- YSQSuqn+z+MVHFJsy/3N0rWYyqay6rfrl+igNemuNKiIjpLXzegJDt7n0pD01p2/6XcD
- kO1Q==
+ bh=iY4W3XvZA2T/Z8FmOnSsSixDAwf9KPY/nN37rDX+Ojs=;
+ b=gyBvaW2PYu11OT2+aqpozErilNaEsEqUDZhhu+iCsGoKhl5Zvi/ft4e1br8s/UIZe+
+ 5d/KYFLr4gnXxlMKg5kg16ChBtXflm70oEZwilQ7Kes16BCYKtMrCRuaWmBWSdg7FQA2
+ ViPjKgbVwFZ8B9UCbSnLi2uNjwZPOOz5svKEC+CeEAPNLqrxDCkDN/leNfDUS/Ye/2W4
+ VWbyIqOWGzpEAHQMZb9ej1F2DlQr6DwSODm7TVsUV/0tc4MRwjNFdOluEz/C8yd9ftYN
+ AYhS7TaIL7hAD71kiKvvvZih0FTTQ9n/yYBA5iCFYgNldOAekyZLZO+x1GyJdm4im2A6
+ qwFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=4c6DoOOyV37wU23qcPSVaAYu8mdYtez+DKjSHLL0Rug=;
- b=WeCkHCYUhKh+LIS0iC7VA727iG+hA1B8QmH72ZrlSiS5U8kYpOVyLwAKr9FWeA1jyW
- YpwbOaOR14qbzISXFjqNPvihU0IN9PPplvwJyiE8Qs7qsWKUo7blMhJ+m40xWqA0zs4E
- yA0zgTFz/FrDcKnB3jf/7SvO76T3vjAzFpGWj7puf4h/XREQbH1cZUESqCJ7AoX7g/nb
- zMxSmuXEXqBqDz1VobUEN5b9evfufFBKKqYqaisaaippH9adXbhpC5SWgH3sYT7S4wpD
- mCc04Z1I1wjpOZtgv7E8+VgB8d2EdmHemKeTmZZIYriU9vPGmYKM42UWbiis6eZE9jcb
- YtAw==
-X-Gm-Message-State: ACgBeo3Fj+vLBVLYO9gFkvDMsRGDd1bLB9cGA7cmXIXDZnmq05VC2lJq
- eK4SsORBa8Z39NGO9nlsnBlMbTbAeY8ZHnixFyK8VoVCEDLrOGRF
-X-Google-Smtp-Source: AA6agR5MyBrgsfLmlpjgtST+HwKcBy+SYusF6igRSEkTSXUtoelCTOAxt5IzntkIzvWF9hs3ZKTTL1z+bhJY4+fCVuo=
-X-Received: by 2002:a05:6a00:2402:b0:52c:81cf:8df8 with SMTP id
- z2-20020a056a00240200b0052c81cf8df8mr8272461pfh.60.1662628850440; Thu, 08 Sep
- 2022 02:20:50 -0700 (PDT)
+ bh=iY4W3XvZA2T/Z8FmOnSsSixDAwf9KPY/nN37rDX+Ojs=;
+ b=LCvAhvOhz0z7VqPBgSyRzk7J0bnEiZthTwLAzISqzqew31yN7tJHk5V2xp45iPG+G+
+ gwEVA5dEMD5zQokSIyGBYScxRzU8ffvTvw2w1V7VkJGYfWVcqKMdL6a36dgMJyZPUf73
+ Yqm44RT+QpFpkGjjCkJ86bxqD4DV55xDrCWIuyfkhosMp2qLQNxH8DrYViu0zS2vbP8Y
+ ccOd4QicL4v17HPmYeKXaNtZ9ELRouvdUGrmx2oMFNwZruyDOayU0VrfZmFCMcQlCVqA
+ wNKrIPTES3ci4d2J9XEjUPHBYs523hbr2Bbi4L0c9U1YrFfDv2xy0pYsI1x6K+XIWOsK
+ mwEw==
+X-Gm-Message-State: ACgBeo1rDIuZjrQ//5RmZVAWQHSxfsGmFgDGbcKIvM2MpcwRvVzWENvX
+ a2qFFuRqMJLK1PAeKfy/rdw7rE//R60+tJjI3Rk=
+X-Google-Smtp-Source: AA6agR6+3bs0cOaJiTTuqRMRP0JoV7tyJ7mfKvIGe/QydioWAL8bq92WJXHlPufkBOKfEVuqCfh6fbTCCfZ53vY77M0=
+X-Received: by 2002:a17:90a:474b:b0:1fd:62c3:62ef with SMTP id
+ y11-20020a17090a474b00b001fd62c362efmr3228849pjg.8.1662628918436; Thu, 08 Sep
+ 2022 02:21:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220906090219.412517-1-sunilvl@ventanamicro.com>
- <20220906090219.412517-3-sunilvl@ventanamicro.com>
-In-Reply-To: <20220906090219.412517-3-sunilvl@ventanamicro.com>
+References: <20220824145255.400040-1-rpathak@ventanamicro.com>
+In-Reply-To: <20220824145255.400040-1-rpathak@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 8 Sep 2022 11:20:23 +0200
-Message-ID: <CAKmqyKNws0a4o-aO9OzDa9DJRF9PCBP_pHWgvJgUPdxWTF=hSg@mail.gmail.com>
-Subject: Re: [PATCH V4 2/3] hw/riscv: virt: Move create_fw_cfg() prior to
- loading kernel
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: qemu-arm <qemu-arm@nongnu.org>, 
+Date: Thu, 8 Sep 2022 11:21:31 +0200
+Message-ID: <CAKmqyKO13Vxhczae33na2P+GQM-fNdU5H-BJvCtMaqtuKNtDNQ@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Remove sideleg and sedeleg
+To: Rahul Pathak <rpathak@ventanamicro.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Peter Maydell <peter.maydell@linaro.org>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>, 
- Song Gao <gaosong@loongson.cn>, Gerd Hoffmann <kraxel@redhat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>, 
- Anup Patel <apatel@ventanamicro.com>, Atish Kumar Patra <atishp@rivosinc.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+ Rahul Pathak <rpathakmailbox@gmail.com>, 
+ Andrew Jones <ajones@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x429.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -82,14 +74,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2022 09:20:55 -0000
+X-List-Received-Date: Thu, 08 Sep 2022 09:22:04 -0000
 
-On Tue, Sep 6, 2022 at 11:44 AM Sunil V L <sunilvl@ventanamicro.com> wrote:
+On Wed, Aug 24, 2022 at 4:54 PM Rahul Pathak <rpathak@ventanamicro.com> wrote:
 >
-> To enable both -kernel and -pflash options, the fw_cfg needs to be
-> created prior to loading the kernel.
+> sideleg and sedeleg csrs are not part of riscv isa spec
+> anymore, these csrs were part of N extension which
+> is removed from the riscv isa specification.
 >
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> These commits removed all traces of these csrs from
+> riscv spec (https://github.com/riscv/riscv-isa-manual) -
+>
+> commit f8d27f805b65 ("Remove or downgrade more references to N extension (#674)")
+> commit b6cade07034d ("Remove N extension chapter for now")
+>
+> Signed-off-by: Rahul Pathak <rpathak@ventanamicro.com>
 > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -97,43 +96,38 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/virt.c | 14 +++++++-------
->  1 file changed, 7 insertions(+), 7 deletions(-)
+>  disas/riscv.c           | 2 --
+>  target/riscv/cpu_bits.h | 2 --
+>  2 files changed, 4 deletions(-)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index ff8c0df5cd..b6bbf03f61 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1251,6 +1251,13 @@ static void virt_machine_done(Notifier *notifier, void *data)
->                                      RISCV64_BIOS_BIN, start_addr, NULL);
->      }
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index 7af6afc8fa..a709d66167 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -1304,8 +1304,6 @@ static const char *csr_name(int csrno)
+>      case 0x0043: return "utval";
+>      case 0x0044: return "uip";
+>      case 0x0100: return "sstatus";
+> -    case 0x0102: return "sedeleg";
+> -    case 0x0103: return "sideleg";
+>      case 0x0104: return "sie";
+>      case 0x0105: return "stvec";
+>      case 0x0106: return "scounteren";
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 6be5a9e9f0..7251121218 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -190,8 +190,6 @@
 >
-> +    /*
-> +     * Init fw_cfg.  Must be done before riscv_load_fdt, otherwise the device
-> +     * tree cannot be altered and we get FDT_ERR_NOSPACE.
-> +     */
-> +    s->fw_cfg = create_fw_cfg(machine);
-> +    rom_set_fw(s->fw_cfg);
-> +
->      if (machine->kernel_filename) {
->          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
->                                                           firmware_end_addr);
-> @@ -1284,13 +1291,6 @@ static void virt_machine_done(Notifier *notifier, void *data)
->          start_addr = virt_memmap[VIRT_FLASH].base;
->      }
->
-> -    /*
-> -     * Init fw_cfg.  Must be done before riscv_load_fdt, otherwise the device
-> -     * tree cannot be altered and we get FDT_ERR_NOSPACE.
-> -     */
-> -    s->fw_cfg = create_fw_cfg(machine);
-> -    rom_set_fw(s->fw_cfg);
-> -
->      /* Compute the fdt load address in dram */
->      fdt_load_addr = riscv_load_fdt(memmap[VIRT_DRAM].base,
->                                     machine->ram_size, machine->fdt);
+>  /* Supervisor Trap Setup */
+>  #define CSR_SSTATUS         0x100
+> -#define CSR_SEDELEG         0x102
+> -#define CSR_SIDELEG         0x103
+>  #define CSR_SIE             0x104
+>  #define CSR_STVEC           0x105
+>  #define CSR_SCOUNTEREN      0x106
 > --
-> 2.25.1
+> 2.34.1
 >
 >
 
