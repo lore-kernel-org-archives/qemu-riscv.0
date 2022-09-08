@@ -1,61 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oWGWf-0006N8-Fq
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 08:20:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34666)
+	id 1oWGhG-0000b2-A2
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 08:32:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34576)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oWGWT-0006JH-Jx; Thu, 08 Sep 2022 08:20:54 -0400
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635]:37709)
+ id 1oWGgm-0000YH-1J; Thu, 08 Sep 2022 08:31:34 -0400
+Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034]:56085)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oWGWR-0006wf-32; Thu, 08 Sep 2022 08:20:45 -0400
-Received: by mail-pl1-x635.google.com with SMTP id s14so8067122plr.4;
- Thu, 08 Sep 2022 05:20:42 -0700 (PDT)
+ id 1oWGgj-0000Kb-B8; Thu, 08 Sep 2022 08:31:23 -0400
+Received: by mail-pj1-x1034.google.com with SMTP id fs14so12823092pjb.5;
+ Thu, 08 Sep 2022 05:31:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date;
- bh=gGwciXe+KgbtQeG+qcrmvTsL0sPPNjqDqu0dnkffVqE=;
- b=qvNFEuyEWtGXE4hYf4ENU4GOxdwBPXhh86rU2FyMlP2YU+xFWAZuHPkV5F/eIiA28b
- hYFTEY/74Uzw6+6Nf7I9jFWNCFB3EGEicdMuTfEWv7IPQ9szn7z9sDiISiBDzWhyGnih
- k+kr04PId0yNLCw1CePACkpDUF+ZhQwtQKme3Og+MikEQnzRt1Tc+bK3Guu+OZgfaciD
- dHxLVyEu2/kMlBivYF9VHi3ocijdd3XqPWNh4R8p5jYlam57WJQBH/o9hrTj6eK37TR0
- 5AD3Rw6fXMQlTMmLkNrS6PNtwD/FJ77sDjkc0vC6lNNR2bg3SsIoqeza38q0BKT4wjiO
- hzqg==
+ bh=yEQm1a1GDUKF0EOYrw8XdUIuuEQzQPVcdB3MT/vDkVw=;
+ b=jy/vtKytKfIf5N6wuyAuzOeYKsHutFvGXAdm1bn04t6NWrD0tOTKz/9H3PaFISyFKp
+ dRGJp2Vza9j91ZdOEFv/tosfVE2dRxB5WmEHULga6GjgA4iLpBetsp+Kg2VNkiDtanP+
+ WmvAeZG3tygSBYjdhDsFGhwguYk0TDcPTrhqu8loWm2vS+ta095n5B0OeA4fVrp79hM0
+ J/pfoCA1MUjkp3lQ8JnhGMw8KqfbCFgzHl/yO7hnJgZM8Umt6zjcEMz2g9btHjC8F0tM
+ lmAFtNIVlhU/k7jdwEnDOmi+zEbOyEMeygYqkV3g+VHzuhwJkSJo5+omvKwU7+4UHjq9
+ LyWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=gGwciXe+KgbtQeG+qcrmvTsL0sPPNjqDqu0dnkffVqE=;
- b=laeURqbW1OO1xD4Dse2RWnCkg72IqPASGYWTQSy37hIa9LHzq2AH0QyOVCHezfM819
- BjC91xZJsoGu76ADKQiz7JsaOA6SvMztA32wZMcJSqsLd0fOqtNzHR+HgtBHUuQ4NRGV
- 56SdzIEpZMqi1HAK29MfXhDOKq3QuRxn+EsOCRrTIDg2c0pX4cUA7Fi5tQfXzYGgqxgS
- +rx3+X0CAp+C5JLpJDz0E8NP4vibwxSQ8QfVwau0AUXu/r7p02Qi10pIn7xd3Kayn71o
- 3T+ZHGExY/l2aFl5PeJN7Go9VRevnDYH2VAdPdCxfy8/1GRoAVvGx9kkSXQu9W2JA982
- xKjw==
-X-Gm-Message-State: ACgBeo3lL7A3/Ghd+s8zPvJLp1OrtaW4xQ//BQjTgujXXREhstW7o45W
- Ty7AjPBdG4L9UKbmOj6HbcmgtaZD0cMqNEIgx1s=
-X-Google-Smtp-Source: AA6agR46LCgr5H2ZvNKBy5A9ya2LmP6F1l+0izkjv5Xcw8Zaqret4Zd4tmainc0dj/8rh0vf8ELJe7Uv20XtVt3Sj8g=
-X-Received: by 2002:a17:90a:474b:b0:1fd:62c3:62ef with SMTP id
- y11-20020a17090a474b00b001fd62c362efmr4004456pjg.8.1662639641198; Thu, 08 Sep
- 2022 05:20:41 -0700 (PDT)
+ bh=yEQm1a1GDUKF0EOYrw8XdUIuuEQzQPVcdB3MT/vDkVw=;
+ b=JHdJf7a7wf0dgSWKEh8KHD8ZLmVHSfuk4FrEildfpncP54cEHDYhAR0Qsd53f+1kiE
+ CmnbduH4aG9UXkevPnYUKUjhb/6mpxqVqiHfncuhsHcm4EUQ78u9xZJ32FwpwqhVIGPQ
+ 8jbGb5xJpXmWI0xf/jW4Y9Li5VV3YGH3pLHc9GvqKC5EirrDEtAvn999rxM2XzLJ3Ysh
+ Ko+WwJ/N/UJuhYDmJoE/VAwElrVM37oyHS462gkHY+hI6uSAFFLLSIam+7wTR2r47lmc
+ LMkmlSFi+g/1h7wiNxzX8U0VLF7ibQ48vlhy/YgsPPIj8N+dDbqz6WPPl7ljqptd933P
+ Gb0g==
+X-Gm-Message-State: ACgBeo3r4v3/+dV1i0guiwithmjfaWFpY9U9tG+RzjACd1S4+nBMxvlE
+ 0Uc+c93VGqp3DrjDbJO5OOmGeNMdcrZAKuk2A4M=
+X-Google-Smtp-Source: AA6agR6LEs1lclmtt88FTUg7+dup38ifE/TklKycpM4LWWlCr3Cz8/eKab5N4jz88rH9TA9kX8jgxXgX89wxFOLmlvM=
+X-Received: by 2002:a17:902:f64f:b0:172:a790:320a with SMTP id
+ m15-20020a170902f64f00b00172a790320amr8827471plg.149.1662640278514; Thu, 08
+ Sep 2022 05:31:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAB88-qOuU=4dhQQdamqsXXwZF1kWO15SS48DK3Q7sXQ7JtWmMA@mail.gmail.com>
-In-Reply-To: <CAB88-qOuU=4dhQQdamqsXXwZF1kWO15SS48DK3Q7sXQ7JtWmMA@mail.gmail.com>
+References: <20220824145255.400040-1-rpathak@ventanamicro.com>
+In-Reply-To: <20220824145255.400040-1-rpathak@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 8 Sep 2022 14:20:14 +0200
-Message-ID: <CAKmqyKOSGGENYYq4XTUNQq51A2Eroubm1YWERyzrWE3HfFADyg@mail.gmail.com>
-Subject: Re: [PATCH 4/4] hw/timer: ibex_timer.c: Add support for writes to
- mtime
-To: Tyler Ng <tkng@rivosinc.com>
+Date: Thu, 8 Sep 2022 14:30:52 +0200
+Message-ID: <CAKmqyKPzMAugK+Q0y9CkZQwnt6h8UYXjtMU7xUBKpt119w-tNA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Remove sideleg and sedeleg
+To: Rahul Pathak <rpathak@ventanamicro.com>
 Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- Laurent Vivier <lvivier@redhat.com>
+ Rahul Pathak <rpathakmailbox@gmail.com>, 
+ Andrew Jones <ajones@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x635.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x1034.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -76,231 +73,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2022 12:20:55 -0000
+X-List-Received-Date: Thu, 08 Sep 2022 12:31:42 -0000
 
-On Fri, Sep 2, 2022 at 3:28 AM Tyler Ng <tkng@rivosinc.com> wrote:
+On Wed, Aug 24, 2022 at 4:54 PM Rahul Pathak <rpathak@ventanamicro.com> wrote:
 >
-> 1. Adds fields to hold the value of mtime in timer_upper0 and timer_lower0.
+> sideleg and sedeleg csrs are not part of riscv isa spec
+> anymore, these csrs were part of N extension which
+> is removed from the riscv isa specification.
 >
-> 2. Changes the read and write functions to use the mtime fields.
+> These commits removed all traces of these csrs from
+> riscv spec (https://github.com/riscv/riscv-isa-manual) -
 >
-> 3. Updates the value of mtime in update_mtime() by extrapolating the
-> time elapsed. This will need to change if/when the prescalar is
-> implemented.
+> commit f8d27f805b65 ("Remove or downgrade more references to N extension (#674)")
+> commit b6cade07034d ("Remove N extension chapter for now")
 >
-> Signed-off-by: Tyler Ng <tkng@rivosinc.com>
+> Signed-off-by: Rahul Pathak <rpathak@ventanamicro.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
->  hw/timer/ibex_timer.c         | 94 +++++++++++++++++++++++++----------
->  include/hw/timer/ibex_timer.h |  5 ++
->  2 files changed, 73 insertions(+), 26 deletions(-)
+>  disas/riscv.c           | 2 --
+>  target/riscv/cpu_bits.h | 2 --
+>  2 files changed, 4 deletions(-)
 >
-> diff --git a/hw/timer/ibex_timer.c b/hw/timer/ibex_timer.c
-> index 9ffd4821e8..7d0ea2db1e 100644
-> --- a/hw/timer/ibex_timer.c
-> +++ b/hw/timer/ibex_timer.c
-> @@ -52,30 +52,59 @@ REG32(UPPER0, 0x114)
->  REG32(COMPARE_LOWER0, 0x118)
->  REG32(COMPARE_UPPER0, 0x11C)
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index 7af6afc8fa..a709d66167 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -1304,8 +1304,6 @@ static const char *csr_name(int csrno)
+>      case 0x0043: return "utval";
+>      case 0x0044: return "uip";
+>      case 0x0100: return "sstatus";
+> -    case 0x0102: return "sedeleg";
+> -    case 0x0103: return "sideleg";
+>      case 0x0104: return "sie";
+>      case 0x0105: return "stvec";
+>      case 0x0106: return "scounteren";
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 6be5a9e9f0..7251121218 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -190,8 +190,6 @@
 >
-> -static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
-> +
-> +/*
-> + * The goal of this function is to:
-> + * 1. Check if the timer is enabled. If not, return false,
-> + * 2. Calculate the amount of time that has passed since.
-> + * 3. Extrapolate the number of ticks that have passed, and add it to `mtime`.
-> + * 4. Return true.
-> + */
-> +static bool update_mtime(IbexTimerState *s)
-> +{
-> +    if (!(R_CTRL & R_CTRL_ACTIVE_MASK)) {
-> +        return false;
-> +    }
-> +    /* Get the time then extrapolate the number of ticks that have elapsed */
-> +    uint64_t mtime = (s->timer_lower0) | ((uint64_t) s->timer_upper0 << 32);
-> +    int64_t now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-> +    int64_t elapsed = now - s->timer_last_update;
-> +    if (elapsed < 0) {
-> +        /* We jumped back in time. */
-> +        mtime -= muldiv64((uint64_t)(-elapsed), s->timebase_freq,
-> +                           NANOSECONDS_PER_SECOND);
-> +    } else {
-> +        mtime += muldiv64(elapsed, s->timebase_freq, NANOSECONDS_PER_SECOND);
-> +    }
-> +    s->timer_lower0 = mtime & 0xffffffff;
-> +    s->timer_upper0 = (mtime >> 32) & 0xffffffff;
-> +    /* update last-checkpoint timestamp */
-> +    s->timer_last_update = now;
-> +    return true;
-> +}
-> +
-> +static inline uint64_t cpu_riscv_read_rtc(void *opaque)
->  {
-> -    return muldiv64(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL),
-> -                    timebase_freq, NANOSECONDS_PER_SECOND);
-> +    IbexTimerState *s = opaque;
-> +    return (s->timer_lower0) | ((uint64_t) s->timer_upper0 << 32);
->  }
->
->  static void ibex_timer_update_irqs(IbexTimerState *s)
->  {
->      CPUState *cs = qemu_get_cpu(0);
->      RISCVCPU *cpu = RISCV_CPU(cs);
-> -    uint64_t value = s->timer_compare_lower0 |
-> +    uint64_t mtimecmp = s->timer_compare_lower0 |
->                           ((uint64_t)s->timer_compare_upper0 << 32);
-> -    uint64_t next, diff;
-> -    uint64_t now = cpu_riscv_read_rtc(s->timebase_freq);
-> -
-> -    if (!(s->timer_ctrl & R_CTRL_ACTIVE_MASK)) {
-> -        /* Timer isn't active */
-> +    if (!update_mtime(s)) {
-> +        /* Timer is not enabled? */
->          return;
->      }
-> +    uint64_t mtime = cpu_riscv_read_rtc(s);
->
->      /* Update the CPUs mtimecmp */
-> -    cpu->env.timecmp = value;
-> +    cpu->env.timecmp = mtimecmp;
->
-> -    if (cpu->env.timecmp <= now) {
-> +    if (cpu->env.timecmp <= mtime) {
->          /*
->           * If the mtimecmp was in the past raise the interrupt now.
->           */
-> @@ -86,18 +115,18 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
->          }
->          return;
->      }
-> -
-> +    /* Update timers */
-> +    int64_t next;
-> +    uint64_t diff;
->      /* Setup a timer to trigger the interrupt in the future */
->      qemu_irq_lower(s->m_timer_irq);
->      qemu_set_irq(s->irq, false);
-> -
-> -    diff = cpu->env.timecmp - now;
-> -    next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-> -                                 muldiv64(diff,
-> -                                          NANOSECONDS_PER_SECOND,
-> -                                          s->timebase_freq);
-> -
-> -    if (next < qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL)) {
-> +    /* Compute the difference, and set a timer for the next update. */
-> +    diff = mtimecmp - mtime;
-> +    const uint64_t now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-> +    const uint64_t towait = muldiv64(diff, NANOSECONDS_PER_SECOND,
-> s->timebase_freq);
-> +    next = now + towait;
-> +    if (next < now) {
->          /* We overflowed the timer, just set it as large as we can */
->          timer_mod(cpu->env.timer, 0x7FFFFFFFFFFFFFFF);
->      } else {
-> @@ -128,11 +157,13 @@ static void ibex_timer_reset(DeviceState *dev)
->
->      s->timer_ctrl = 0x00000000;
->      s->timer_cfg0 = 0x00010000;
-> +    s->timer_lower0 = 0x00000000;
-> +    s->timer_upper0 = 0x00000000;
->      s->timer_compare_lower0 = 0xFFFFFFFF;
->      s->timer_compare_upper0 = 0xFFFFFFFF;
->      s->timer_intr_enable = 0x00000000;
->      s->timer_intr_state = 0x00000000;
-> -
-> +    s->timer_last_update = 0x00000000;
->      ibex_timer_update_irqs(s);
->  }
->
-> @@ -140,7 +171,6 @@ static uint64_t ibex_timer_read(void *opaque, hwaddr addr,
->                                         unsigned int size)
->  {
->      IbexTimerState *s = opaque;
-> -    uint64_t now = cpu_riscv_read_rtc(s->timebase_freq);
->      uint64_t retvalue = 0;
->
->      switch (addr >> 2) {
-> @@ -155,10 +185,12 @@ static uint64_t ibex_timer_read(void *opaque, hwaddr addr,
->          retvalue = s->timer_cfg0;
->          break;
->      case R_LOWER0:
-> -        retvalue = now;
-> +        update_mtime(s);
-> +        retvalue = cpu_riscv_read_rtc(s);
->          break;
->      case R_UPPER0:
-> -        retvalue = now >> 32;
-> +        update_mtime(s);
-> +        retvalue = cpu_riscv_read_rtc(s) >> 32;
->          break;
->      case R_COMPARE_LOWER0:
->          retvalue = s->timer_compare_lower0;
-> @@ -197,16 +229,22 @@ static void ibex_timer_write(void *opaque, hwaddr addr,
->          break;
->      case R_CTRL:
->          s->timer_ctrl = val;
-> +        /* We must update IRQs, because the QEMU timer gets updated here. */
-> +        ibex_timer_update_irqs(s);
->          break;
->      case R_CFG0:
->          qemu_log_mask(LOG_UNIMP, "Changing prescale or step not supported");
->          s->timer_cfg0 = val;
->          break;
->      case R_LOWER0:
-> -        qemu_log_mask(LOG_UNIMP, "Changing timer value is not supported");
-> +        s->timer_lower0 = val;
-> +        s->timer_last_update = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-> +        ibex_timer_update_irqs(s);
->          break;
->      case R_UPPER0:
-> -        qemu_log_mask(LOG_UNIMP, "Changing timer value is not supported");
-> +        s->timer_upper0 = val;
-> +        s->timer_last_update = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-> +        ibex_timer_update_irqs(s);
->          break;
->      case R_COMPARE_LOWER0:
->          s->timer_compare_lower0 = val;
-> @@ -263,6 +301,9 @@ static const VMStateDescription vmstate_ibex_timer = {
->          VMSTATE_UINT32(timer_compare_upper0, IbexTimerState),
->          VMSTATE_UINT32(timer_intr_enable, IbexTimerState),
->          VMSTATE_UINT32(timer_intr_state, IbexTimerState),
-> +        VMSTATE_INT64(timer_last_update, IbexTimerState),
-> +        VMSTATE_UINT32(timer_lower0, IbexTimerState),
-> +        VMSTATE_UINT32(timer_upper0, IbexTimerState),
->          VMSTATE_END_OF_LIST()
->      }
->  };
-> @@ -281,6 +322,7 @@ static void ibex_timer_init(Object *obj)
->      memory_region_init_io(&s->mmio, obj, &ibex_timer_ops, s,
->                            TYPE_IBEX_TIMER, 0x400);
->      sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
-> +
->  }
->
->  static void ibex_timer_realize(DeviceState *dev, Error **errp)
-> diff --git a/include/hw/timer/ibex_timer.h b/include/hw/timer/ibex_timer.h
-> index 1a0a28d5fa..a6a1aa279a 100644
-> --- a/include/hw/timer/ibex_timer.h
-> +++ b/include/hw/timer/ibex_timer.h
-> @@ -39,6 +39,11 @@ struct IbexTimerState {
->
->      uint32_t timer_ctrl;
->      uint32_t timer_cfg0;
-> +
-> +    int64_t timer_last_update;
-> +
-> +    uint32_t timer_lower0;
-> +    uint32_t timer_upper0;
->      uint32_t timer_compare_lower0;
->      uint32_t timer_compare_upper0;
->      uint32_t timer_intr_enable;
+>  /* Supervisor Trap Setup */
+>  #define CSR_SSTATUS         0x100
+> -#define CSR_SEDELEG         0x102
+> -#define CSR_SIDELEG         0x103
+>  #define CSR_SIE             0x104
+>  #define CSR_STVEC           0x105
+>  #define CSR_SCOUNTEREN      0x106
 > --
-> 2.30.2
+> 2.34.1
+>
 >
 
