@@ -1,71 +1,84 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oVpD0-0002us-K4
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Sep 2022 03:10:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60560)
+	id 1oWBzm-00044q-7J
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 03:30:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48396)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1oVpCx-0002t3-Vh
- for qemu-riscv@nongnu.org; Wed, 07 Sep 2022 03:10:47 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:28435)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1oVpCu-00050W-HH
- for qemu-riscv@nongnu.org; Wed, 07 Sep 2022 03:10:46 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1662534643;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=ye84sSO4TJJGNbJlw+HOZp0V+DuC21ZtM5EaaO1Apb0=;
- b=A0iK1IuHoZ1Jrul+ITFXdD3QwIdXcKoeoGx+DZAMeJAYalaXZBcZeKJuOFXFtxjYlOi7Yv
- SJpvFLidBWGmmqxEpbQUOUTykFddFZVMqJqqg5CUHW9T92uhXCNzRtaDUqj3eLkTE8D+BO
- +wczQLjFnSU8QZTJO3bfw54mfBPxKSI=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-554-x_8PSx0POoqBkZY72XfdGA-1; Wed, 07 Sep 2022 03:10:40 -0400
-X-MC-Unique: x_8PSx0POoqBkZY72XfdGA-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
- [10.11.54.3])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 6EC202999B4E;
- Wed,  7 Sep 2022 07:10:39 +0000 (UTC)
-Received: from sirius.home.kraxel.org (unknown [10.39.195.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 9DA7F1121314;
- Wed,  7 Sep 2022 07:10:38 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 2FA23180039B; Wed,  7 Sep 2022 09:10:37 +0200 (CEST)
-Date: Wed, 7 Sep 2022 09:10:37 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- Song Gao <gaosong@loongson.cn>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
- Pawel Polawski <ppolawsk@redhat.com>
-Subject: Re: [PATCH V4 0/3] hw/riscv: virt: Enable booting S-mode firmware
- from pflash
-Message-ID: <20220907071037.tnnewqhi5v2xmiln@sirius.home.kraxel.org>
-References: <20220906090219.412517-1-sunilvl@ventanamicro.com>
- <20220906104128.zlwzvbbswlzyplkc@sirius.home.kraxel.org>
- <20220906123200.GA237800@sunil-laptop>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1oWBzb-00041W-WC
+ for qemu-riscv@nongnu.org; Thu, 08 Sep 2022 03:30:32 -0400
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331]:36581)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1oWBzK-0008R1-Ju
+ for qemu-riscv@nongnu.org; Thu, 08 Sep 2022 03:30:31 -0400
+Received: by mail-wm1-x331.google.com with SMTP id
+ i129-20020a1c3b87000000b003b332a7acbcso311855wma.1
+ for <qemu-riscv@nongnu.org>; Thu, 08 Sep 2022 00:30:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date;
+ bh=mRNz/jJ10FJ/aDska8sh57k0O4s10qIr6quHwEH65XE=;
+ b=om9fwDu3eINUfWTwKyL5VhoKhX1nDa7fg1ipNUbvWYPwhG4r5ATAn15CHL1wjzN6N4
+ SLw0P7j122QNxeBQNQiPvUHnsDqnicG6XSR2XzKNxrFLN8hIOYoMRGGP6l5dL8GIBOIg
+ DeQecPNSeirSoh526gz4U+D8AlQBQ/GynWL5s8sIcoG65p++5LAHFlVlySFpEzL5f5WA
+ VBmBfNSken0LlrTbszCqhnMT/pPdosovev1r48DVGBiWHOgrAZHlgBmB0OV6PG/ElMS9
+ s6vWHaCcHxAkUPZCFfDQGDx7/diyyKFCu3sVQYAJd2JZxgX6xPhCTz7Xy8EcleyqreEu
+ JIsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date;
+ bh=mRNz/jJ10FJ/aDska8sh57k0O4s10qIr6quHwEH65XE=;
+ b=oUNv5DUMMOW1uYUUurlKeJ49udnDkOw480svGrJKoVL/El1wNaZeXKL/cHW70P/hjZ
+ k4nMd08NkgFgobJWL5IYHyb52LJLlGfZ4I8/Z409VMhlk+880x5r+B++tYs5GxDyqo7F
+ D+zb/eZHTBg/bIoNdxvHYX62DHZ265rbCrUud1w4/qca5JbXoweIeni+mGZdrV2qKObD
+ X4gAXbdbYDoOk7qAOyViOl6qy9LK3YttFTuYsArWAyIo1uG0L3ggeRqUWySIF10t4DYm
+ ZtoTFi7bK7QpOo4oy23FbuvdIpxExycsn3orPJExMG/4U0Obw2FBgSswyicG2nrMj9TB
+ u/kw==
+X-Gm-Message-State: ACgBeo02IT9sZoagz6rZ3mR9qQLiuOw7k4i9IFXQimeJcX7fkf2dgAN7
+ 6EWOE5JIX0P0JX2lerH9gLwSuQ==
+X-Google-Smtp-Source: AA6agR66w6IgsCQNQ65n2ij1MiujniY1IrKhIkY+agst6KdMRCn+My8KN21SgG1N4lC0ClfdnIx3wQ==
+X-Received: by 2002:a7b:cb41:0:b0:3b3:34d6:189f with SMTP id
+ v1-20020a7bcb41000000b003b334d6189fmr281295wmj.6.1662622201683; 
+ Thu, 08 Sep 2022 00:30:01 -0700 (PDT)
+Received: from [192.168.1.87] ([109.78.97.14])
+ by smtp.gmail.com with ESMTPSA id
+ q184-20020a1c43c1000000b003a5dde32e4bsm1615015wma.37.2022.09.08.00.30.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 08 Sep 2022 00:30:01 -0700 (PDT)
+Message-ID: <f6c98fb6-38f7-5747-0db6-aec2c77edd9a@linaro.org>
+Date: Thu, 8 Sep 2022 08:29:57 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220906123200.GA237800@sunil-laptop>
-X-Scanned-By: MIMEDefang 2.78 on 10.11.54.3
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=kraxel@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH 03/11] RISC-V: Adding T-Head SYNC instructions
+Content-Language: en-US
+To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, =?UTF-8?Q?Heiko_St=c3=bcbner?=
+ <heiko.stuebner@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Nelson Chu <nelson@rivosinc.com>, Kito Cheng <kito.cheng@sifive.com>,
+ Cooper Qu <cooper.qu@linux.alibaba.com>,
+ Lifang Xia <lifang_xia@linux.alibaba.com>,
+ Yunhai Shang <yunhai@linux.alibaba.com>,
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
+References: <20220906122243.1243354-1-christoph.muellner@vrull.eu>
+ <20220906122243.1243354-4-christoph.muellner@vrull.eu>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20220906122243.1243354-4-christoph.muellner@vrull.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x331.google.com
+X-Spam_score_int: -62
+X-Spam_score: -6.3
+X-Spam_bar: ------
+X-Spam_report: (-6.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-4.199,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -79,53 +92,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Sep 2022 07:10:48 -0000
+X-List-Received-Date: Thu, 08 Sep 2022 07:30:32 -0000
 
-On Tue, Sep 06, 2022 at 06:02:00PM +0530, Sunil V L wrote:
-> Hi Gerd,
-> 
-> On Tue, Sep 06, 2022 at 12:41:28PM +0200, Gerd Hoffmann wrote:
-> >   Hi,
-> > 
-> > > 3)Make the EDK2 image size to match with what qemu flash expects
-> > > truncate -s 32M Build/RiscVVirt/DEBUG_GCC5/FV/RISCV_VIRT.fd
-> > 
-> > Hmm, we have that kind of padding on arm too (64M for code and 64M for
-> > vars) and only a fraction of the space is actually used, which isn't
-> > exactly ideal.  So not sure it is a good plan to repeat that on riscv.
-> 
-> Yeah.. but it looks like limitation from qemu flash emulation. Do you mean
-> this limitation exists for arm in general on real flash also?
+On 9/6/22 13:22, Christoph Muellner wrote:
+> +NOP_PRIVCHECK(th_sfence_vmas, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_sync, REQUIRE_PRIV_MHSU)
+> +NOP_PRIVCHECK(th_sync_i, REQUIRE_PRIV_MHSU)
+> +NOP_PRIVCHECK(th_sync_is, REQUIRE_PRIV_MHSU)
+> +NOP_PRIVCHECK(th_sync_s, REQUIRE_PRIV_MHSU)
 
-Well, at least on x86 flash devices can have odd sizes.  I don't think
-the qemu pflash emulation dictates anything here.
+These should not be nops: th_sfence_vmas requires a tlb flush; th.sync{,.i} needs to end 
+the current translation block; th.sync.{s,is} needs multiprocessor sync, which involves a 
+call to async_safe_run_on_cpu.
 
-I think the underlying problem we actually have in qemu is that the
-flash size indirectly dictates the memory layout.  We pack the flash
-devices next to each other, on x86 downwards from 4G, on arm upwards
-from zero, not sure what risc-v is dong here.
 
-edk2 arm code expects the variable store being mapped at 64m.  So
-QEMU_EFI.fd (which is actually 2M in size) gets padded to 64m, which
-has the desired effect that the next flash device (the varstore) is
-mapped at 64m.  But also has the side effect that we map 62m of zeros
-into the guest address space ...
-
-The vars file is padded to 64m for consistency with the code.  Not
-padding the vars file should have no bad side effects I think, except
-for live migration where the flash size change might cause
-compatibility problems.
-
-Not padding the code file needs some alternative way to specify the
-memory layout, to make sure the vars flash continues to be mapped at
-64m even when the code flash is smaller.  Cc'ed Pawel who investigates
-that right now.
-
-One possible option is to just hard-code the flash memory layout per
-machine type or per architecture.  Another option would be to add
-some way to configure that on the command line.
-
-take care,
-  Gerd
-
+r~
 
