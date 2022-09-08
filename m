@@ -1,59 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oWDjZ-0001dd-78
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 05:22:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40372)
+	id 1oWDms-0006K5-4d
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 05:25:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55388)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oWDjY-0001Yx-58; Thu, 08 Sep 2022 05:22:04 -0400
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:35545)
+ id 1oWDmi-0006Jb-W1; Thu, 08 Sep 2022 05:25:21 -0400
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b]:43945)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oWDjU-0001CY-20; Thu, 08 Sep 2022 05:22:03 -0400
-Received: by mail-pj1-x102f.google.com with SMTP id
- m10-20020a17090a730a00b001fa986fd8eeso1778217pjk.0; 
- Thu, 08 Sep 2022 02:21:59 -0700 (PDT)
+ id 1oWDmh-0001en-3M; Thu, 08 Sep 2022 05:25:20 -0400
+Received: by mail-pg1-x52b.google.com with SMTP id v4so16122736pgi.10;
+ Thu, 08 Sep 2022 02:25:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=iY4W3XvZA2T/Z8FmOnSsSixDAwf9KPY/nN37rDX+Ojs=;
- b=gyBvaW2PYu11OT2+aqpozErilNaEsEqUDZhhu+iCsGoKhl5Zvi/ft4e1br8s/UIZe+
- 5d/KYFLr4gnXxlMKg5kg16ChBtXflm70oEZwilQ7Kes16BCYKtMrCRuaWmBWSdg7FQA2
- ViPjKgbVwFZ8B9UCbSnLi2uNjwZPOOz5svKEC+CeEAPNLqrxDCkDN/leNfDUS/Ye/2W4
- VWbyIqOWGzpEAHQMZb9ej1F2DlQr6DwSODm7TVsUV/0tc4MRwjNFdOluEz/C8yd9ftYN
- AYhS7TaIL7hAD71kiKvvvZih0FTTQ9n/yYBA5iCFYgNldOAekyZLZO+x1GyJdm4im2A6
- qwFA==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date;
+ bh=Lzc+PT5oBaDdpy8usVnSBeDJwMn+V9sWNc1Y+I38FbY=;
+ b=o88+xJgmynbeA2SuwGjA1rTRO5xTVDL+hNvogKMUaGQr2rsP+pZOrEhLC3KN2LW1Yn
+ CIn6lMXL/kLWJu9uyHYI0xgYB9wl7JfR8weUUhd32HPI/9H0QmztxpPxRdEyS5PArd4J
+ fbA+NB3bSv9dtuu6tH/cGE1U4/t2VoBRhCRv3X+AfGMjhM4GUT6nwKTHZq8ocgXhYfg+
+ 42u+KZcMz97PVuNC+jiatPE2Jrqek7o3Cnqhnf5ica0oiBfCOhbfKbzWcC8t6m3M+/N4
+ 5xEJ8BkxHhKclHnK2IVlhiOi3Lj4YJOUE5jjLeq9ZbLlHOLMH34xjImhGWzYHLC3AqjK
+ rjsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=iY4W3XvZA2T/Z8FmOnSsSixDAwf9KPY/nN37rDX+Ojs=;
- b=LCvAhvOhz0z7VqPBgSyRzk7J0bnEiZthTwLAzISqzqew31yN7tJHk5V2xp45iPG+G+
- gwEVA5dEMD5zQokSIyGBYScxRzU8ffvTvw2w1V7VkJGYfWVcqKMdL6a36dgMJyZPUf73
- Yqm44RT+QpFpkGjjCkJ86bxqD4DV55xDrCWIuyfkhosMp2qLQNxH8DrYViu0zS2vbP8Y
- ccOd4QicL4v17HPmYeKXaNtZ9ELRouvdUGrmx2oMFNwZruyDOayU0VrfZmFCMcQlCVqA
- wNKrIPTES3ci4d2J9XEjUPHBYs523hbr2Bbi4L0c9U1YrFfDv2xy0pYsI1x6K+XIWOsK
- mwEw==
-X-Gm-Message-State: ACgBeo1rDIuZjrQ//5RmZVAWQHSxfsGmFgDGbcKIvM2MpcwRvVzWENvX
- a2qFFuRqMJLK1PAeKfy/rdw7rE//R60+tJjI3Rk=
-X-Google-Smtp-Source: AA6agR6+3bs0cOaJiTTuqRMRP0JoV7tyJ7mfKvIGe/QydioWAL8bq92WJXHlPufkBOKfEVuqCfh6fbTCCfZ53vY77M0=
-X-Received: by 2002:a17:90a:474b:b0:1fd:62c3:62ef with SMTP id
- y11-20020a17090a474b00b001fd62c362efmr3228849pjg.8.1662628918436; Thu, 08 Sep
- 2022 02:21:58 -0700 (PDT)
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date;
+ bh=Lzc+PT5oBaDdpy8usVnSBeDJwMn+V9sWNc1Y+I38FbY=;
+ b=m3TY8jn/Ehz17yWIoFseu6reD7IvDllvYRouYZtZqC53ZrT6LzDdI8F727y4BYjWQ2
+ 0/bbg/41lQA5RoM1chKJENMeV5emda/8OfFts1FE5NvSTP7aUcey+ZsaZlt9tXnno9p0
+ 0HmnLchJiM6CssuDYir7Fe9QGxDvouJBQwnIdSnqBE0o9IwsBFxMA+DE0fmWyZyWc5hk
+ aR4RufaL5XnTw5P51BCnmxi2LxPhruRi3RcfMpXM7T1TvvH+LvtCsHLKTfcSy63EDlZF
+ oxm6oOpIbzvZWBn2gTpek7Ezq4nmRhgk0JSoVFQXRcwsl3ep7qy+oV7gSVUy7650DB82
+ nYAQ==
+X-Gm-Message-State: ACgBeo3OIyFWiRwJwXM75ts9QE9JCCWbZ3Cvzd2lb/jPXgow7kpwAaUO
+ S44w3yPBU8Rwlus0+cOavX0tjbTGXNl6zre/O7o=
+X-Google-Smtp-Source: AA6agR70Vh+4EFkHxjg3/aooQPDbjvbji7YwyyFKTIhAxRDwwHrhLmCRkcrMDnqQMyGrB0Zq3AesHxpBAWAvi0/Pumo=
+X-Received: by 2002:a63:5b15:0:b0:42b:bb74:a2da with SMTP id
+ p21-20020a635b15000000b0042bbb74a2damr7074497pgb.406.1662629117174; Thu, 08
+ Sep 2022 02:25:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220824145255.400040-1-rpathak@ventanamicro.com>
-In-Reply-To: <20220824145255.400040-1-rpathak@ventanamicro.com>
+References: <20220812131304.1674484-1-philipp.tomsich@vrull.eu>
+ <20220812131304.1674484-2-philipp.tomsich@vrull.eu>
+ <CAFEAcA9tQDu_4N+6QKhX66R5PtddXWkL-zmn1vDTDdQceCtHdA@mail.gmail.com>
+ <CAAeLtUDmvuje+cLB6j+_JjUt3TQaEoJYRypjd=dMNwkFsD0sDA@mail.gmail.com>
+In-Reply-To: <CAAeLtUDmvuje+cLB6j+_JjUt3TQaEoJYRypjd=dMNwkFsD0sDA@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 8 Sep 2022 11:21:31 +0200
-Message-ID: <CAKmqyKO13Vxhczae33na2P+GQM-fNdU5H-BJvCtMaqtuKNtDNQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Remove sideleg and sedeleg
-To: Rahul Pathak <rpathak@ventanamicro.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Thu, 8 Sep 2022 11:24:50 +0200
+Message-ID: <CAKmqyKMCUyTtTarDcXjxjTDe7JapuegxMB9x57rtG+7rNELVQg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] target/riscv: fence: reconcile with specification
+To: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Peter Maydell <peter.maydell@linaro.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Rahul Pathak <rpathakmailbox@gmail.com>, 
- Andrew Jones <ajones@ventanamicro.com>
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x102f.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -74,60 +79,103 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2022 09:22:04 -0000
+X-List-Received-Date: Thu, 08 Sep 2022 09:25:24 -0000
 
-On Wed, Aug 24, 2022 at 4:54 PM Rahul Pathak <rpathak@ventanamicro.com> wrote:
+On Fri, Aug 12, 2022 at 4:19 PM Philipp Tomsich
+<philipp.tomsich@vrull.eu> wrote:
 >
-> sideleg and sedeleg csrs are not part of riscv isa spec
-> anymore, these csrs were part of N extension which
-> is removed from the riscv isa specification.
+> Happy to lower it back into the decode file.
+> However, I initially pulled it up into the trans-function to more
+> closely match the ISA specification: there is only one FENCE
+> instruction with 3 arguments (FM, PRED, and SUCC).
+> One might argue that the decode table for "RV32I Base Instruction Set"
+> in the specification lists FENCE.TSO as a separate instruction, but
+> the normative text doesn't (and FENCE overlaps FENCE.TSO in the
+> tabular representation) =E2=80=94 so I would consider the table as
+> informative.
 >
-> These commits removed all traces of these csrs from
-> riscv spec (https://github.com/riscv/riscv-isa-manual) -
->
-> commit f8d27f805b65 ("Remove or downgrade more references to N extension (#674)")
-> commit b6cade07034d ("Remove N extension chapter for now")
->
-> Signed-off-by: Rahul Pathak <rpathak@ventanamicro.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> I'll wait until we see what consensus emerges from the discussion.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+From the discussion on patch 1 it seems that QEMU ignoring these
+fields (current behaviour) is correct
 
 Alistair
 
-> ---
->  disas/riscv.c           | 2 --
->  target/riscv/cpu_bits.h | 2 --
->  2 files changed, 4 deletions(-)
 >
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index 7af6afc8fa..a709d66167 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -1304,8 +1304,6 @@ static const char *csr_name(int csrno)
->      case 0x0043: return "utval";
->      case 0x0044: return "uip";
->      case 0x0100: return "sstatus";
-> -    case 0x0102: return "sedeleg";
-> -    case 0x0103: return "sideleg";
->      case 0x0104: return "sie";
->      case 0x0105: return "stvec";
->      case 0x0106: return "scounteren";
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 6be5a9e9f0..7251121218 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -190,8 +190,6 @@
+> Philipp.
 >
->  /* Supervisor Trap Setup */
->  #define CSR_SSTATUS         0x100
-> -#define CSR_SEDELEG         0x102
-> -#define CSR_SIDELEG         0x103
->  #define CSR_SIE             0x104
->  #define CSR_STVEC           0x105
->  #define CSR_SCOUNTEREN      0x106
-> --
-> 2.34.1
->
+> On Fri, 12 Aug 2022 at 15:21, Peter Maydell <peter.maydell@linaro.org> wr=
+ote:
+> >
+> > On Fri, 12 Aug 2022 at 14:17, Philipp Tomsich <philipp.tomsich@vrull.eu=
+> wrote:
+> > >
+> > > Our decoding of fence-instructions is problematic in respect to the
+> > > RISC-V ISA specification:
+> > > - rs and rd are ignored, but need to be 0
+> > > - fm is ignored
+> > >
+> > > This change adjusts the decode pattern to enfore rs and rd being 0,
+> > > and validates the fm-field (together with pred/succ for FENCE.TSO) to
+> > > determine whether a reserved instruction is specified.
+> > >
+> > > While the specification allows UNSPECIFIED behaviour for reserved
+> > > instructions, we now always raise an illegal instruction exception.
+> > >
+> > > Signed-off-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> > >
+> > > ---
+> > >
+> > >  target/riscv/insn32.decode              |  2 +-
+> > >  target/riscv/insn_trans/trans_rvi.c.inc | 19 ++++++++++++++++++-
+> > >  2 files changed, 19 insertions(+), 2 deletions(-)
+> > >
+> > > diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> > > index 089128c3dc..4e53df1b62 100644
+> > > --- a/target/riscv/insn32.decode
+> > > +++ b/target/riscv/insn32.decode
+> > > @@ -150,7 +150,7 @@ srl      0000000 .....    ..... 101 ..... 0110011=
+ @r
+> > >  sra      0100000 .....    ..... 101 ..... 0110011 @r
+> > >  or       0000000 .....    ..... 110 ..... 0110011 @r
+> > >  and      0000000 .....    ..... 111 ..... 0110011 @r
+> > > -fence    ---- pred:4 succ:4 ----- 000 ----- 0001111
+> > > +fence    fm:4 pred:4 succ:4 00000 000 00000 0001111
+> > >  fence_i  000000000000     00000 001 00000 0001111
+> > >  csrrw    ............     ..... 001 ..... 1110011 @csr
+> > >  csrrs    ............     ..... 010 ..... 1110011 @csr
+> > > diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/i=
+nsn_trans/trans_rvi.c.inc
+> > > index ca8e3d1ea1..515bb3b22a 100644
+> > > --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> > > +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> > > @@ -795,7 +795,24 @@ static bool trans_srad(DisasContext *ctx, arg_sr=
+ad *a)
+> > >
+> > >  static bool trans_fence(DisasContext *ctx, arg_fence *a)
+> > >  {
+> > > -    /* FENCE is a full memory barrier. */
+> > > +    switch (a->fm) {
+> > > +    case 0b0000:
+> > > +         /* normal fence */
+> > > +         break;
+> > > +
+> > > +    case 0b0001:
+> > > +         /* FENCE.TSO requires PRED and SUCC to be RW */
+> > > +         if (a->pred !=3D 0xb0011 || a->succ !=3D 0b0011) {
+> > > +            return false;
+> > > +         }
+> > > +         break;
+> > > +
+> > > +    default:
+> > > +        /* reserved for future use */
+> > > +        return false;
+> > > +    }
+> >
+> > I think it would be neater to do this decode in the
+> > .decode file, rather than by hand in the trans function.
+> >
+> > thanks
+> > -- PMM
 >
 
