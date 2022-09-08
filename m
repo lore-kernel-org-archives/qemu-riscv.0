@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oWG90-0001CY-Lx
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 07:56:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42022)
+	id 1oWGWf-0006N8-Fq
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 08:20:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34666)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oWG8z-0001Bp-3n; Thu, 08 Sep 2022 07:56:29 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:45941)
+ id 1oWGWT-0006JH-Jx; Thu, 08 Sep 2022 08:20:54 -0400
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635]:37709)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oWG8x-0001eI-9P; Thu, 08 Sep 2022 07:56:28 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- p1-20020a17090a2d8100b0020040a3f75eso2170023pjd.4; 
- Thu, 08 Sep 2022 04:56:25 -0700 (PDT)
+ id 1oWGWR-0006wf-32; Thu, 08 Sep 2022 08:20:45 -0400
+Received: by mail-pl1-x635.google.com with SMTP id s14so8067122plr.4;
+ Thu, 08 Sep 2022 05:20:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date;
- bh=gM8TvyE7JT6tjCcbavNeN6EGNBBQI2oh2kvYMGfrss0=;
- b=EZ6l96cImOXkC0vpmLqwr6PLC568ahjTeodl+O6BbSIUVrYmHiDBb2lnSgUK82Sntc
- 7n9IoxhQ+LXFLOYmZE9nLQEzwIg81/nwsum1IeStr62+k+6Iql4xYSJa5TgmE+CSoeKm
- OK1VfaEsXvM8RPCa26ydO2/X7eEhSCkL6VEVc2Zji4inY9V9PA8DIQa1xHBmxOiSsMzs
- 6IQcssS0KfEwc8qs/mpyMIPE6FBClS6b350sKRt6shijmRhNEoO95FJl+dozNPrYhGrM
- P6XgH1CeeZLlE/+I+/RB9hvc5qSjv4Y/gBkFSCOyKkbniIO5/Ih/EFgw58yNpWCsH3uB
- ibVA==
+ bh=gGwciXe+KgbtQeG+qcrmvTsL0sPPNjqDqu0dnkffVqE=;
+ b=qvNFEuyEWtGXE4hYf4ENU4GOxdwBPXhh86rU2FyMlP2YU+xFWAZuHPkV5F/eIiA28b
+ hYFTEY/74Uzw6+6Nf7I9jFWNCFB3EGEicdMuTfEWv7IPQ9szn7z9sDiISiBDzWhyGnih
+ k+kr04PId0yNLCw1CePACkpDUF+ZhQwtQKme3Og+MikEQnzRt1Tc+bK3Guu+OZgfaciD
+ dHxLVyEu2/kMlBivYF9VHi3ocijdd3XqPWNh4R8p5jYlam57WJQBH/o9hrTj6eK37TR0
+ 5AD3Rw6fXMQlTMmLkNrS6PNtwD/FJ77sDjkc0vC6lNNR2bg3SsIoqeza38q0BKT4wjiO
+ hzqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=gM8TvyE7JT6tjCcbavNeN6EGNBBQI2oh2kvYMGfrss0=;
- b=gKhnZb/YwKio0bEOOnScnpxOuGQrmMU8bd4541au37aMHqg3IAKSctpvibQYORGDJl
- WBvWb3xysSIraEFppNUVgDJfDjPxQI6Ar57Dm9Ev/mujy3V0b9GqVPrtPKviG9OMplA3
- W1W5C/Lz/9cKSVC+hVSO7WRzHelDs8icmNj+P+0Ychw8ANgI7J11vQ0NnCobP7SRtKLn
- AQzHuPtr2LdWgV43tFprA5rAfIhtHZ3fQ/7jrFCBz1SJIvmd5McWTCF6hD9CdhjOveIY
- FiEstXt5p0/N8ZJkcH+pWdLbVteeBzFEuaAl7ZammFKYUP+JMXKzl6N+QU6gETU6vSrR
- Zobw==
-X-Gm-Message-State: ACgBeo0JCo5uHXwQtbAfqitXnpIU3fx7NBFqBAnzhuFVK3Z0mVZZsY3C
- GTUCNetSgLmpjwEDH8gbAaL87SOROFrcsjrs7OQ=
-X-Google-Smtp-Source: AA6agR63IvN8FYFYTqlDGkT/11DAWYNN8T9POoz3aQW1fekTNBmN4Zd0RVS2MUCLNrfZiFCEsgAkBP3HPvPYG6PLFlo=
-X-Received: by 2002:a17:902:f64f:b0:172:a790:320a with SMTP id
- m15-20020a170902f64f00b00172a790320amr8690971plg.149.1662638183621; Thu, 08
- Sep 2022 04:56:23 -0700 (PDT)
+ bh=gGwciXe+KgbtQeG+qcrmvTsL0sPPNjqDqu0dnkffVqE=;
+ b=laeURqbW1OO1xD4Dse2RWnCkg72IqPASGYWTQSy37hIa9LHzq2AH0QyOVCHezfM819
+ BjC91xZJsoGu76ADKQiz7JsaOA6SvMztA32wZMcJSqsLd0fOqtNzHR+HgtBHUuQ4NRGV
+ 56SdzIEpZMqi1HAK29MfXhDOKq3QuRxn+EsOCRrTIDg2c0pX4cUA7Fi5tQfXzYGgqxgS
+ +rx3+X0CAp+C5JLpJDz0E8NP4vibwxSQ8QfVwau0AUXu/r7p02Qi10pIn7xd3Kayn71o
+ 3T+ZHGExY/l2aFl5PeJN7Go9VRevnDYH2VAdPdCxfy8/1GRoAVvGx9kkSXQu9W2JA982
+ xKjw==
+X-Gm-Message-State: ACgBeo3lL7A3/Ghd+s8zPvJLp1OrtaW4xQ//BQjTgujXXREhstW7o45W
+ Ty7AjPBdG4L9UKbmOj6HbcmgtaZD0cMqNEIgx1s=
+X-Google-Smtp-Source: AA6agR46LCgr5H2ZvNKBy5A9ya2LmP6F1l+0izkjv5Xcw8Zaqret4Zd4tmainc0dj/8rh0vf8ELJe7Uv20XtVt3Sj8g=
+X-Received: by 2002:a17:90a:474b:b0:1fd:62c3:62ef with SMTP id
+ y11-20020a17090a474b00b001fd62c362efmr4004456pjg.8.1662639641198; Thu, 08 Sep
+ 2022 05:20:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAB88-qPZr7G8Lp0Q=851JSFyb5v7ub5Hi4DaD6mVQKZxFt5UOw@mail.gmail.com>
-In-Reply-To: <CAB88-qPZr7G8Lp0Q=851JSFyb5v7ub5Hi4DaD6mVQKZxFt5UOw@mail.gmail.com>
+References: <CAB88-qOuU=4dhQQdamqsXXwZF1kWO15SS48DK3Q7sXQ7JtWmMA@mail.gmail.com>
+In-Reply-To: <CAB88-qOuU=4dhQQdamqsXXwZF1kWO15SS48DK3Q7sXQ7JtWmMA@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 8 Sep 2022 13:55:57 +0200
-Message-ID: <CAKmqyKOCeBU5yZkW7d90vFDvL_n+M1KKSGexDZ59DN1LiY9mww@mail.gmail.com>
-Subject: Re: [PATCH 3/4] hw/timer: ibex_timer.c: Update register addresses
+Date: Thu, 8 Sep 2022 14:20:14 +0200
+Message-ID: <CAKmqyKOSGGENYYq4XTUNQq51A2Eroubm1YWERyzrWE3HfFADyg@mail.gmail.com>
+Subject: Re: [PATCH 4/4] hw/timer: ibex_timer.c: Add support for writes to
+ mtime
 To: Tyler Ng <tkng@rivosinc.com>
 Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -54,8 +54,8 @@ Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
  Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
  Laurent Vivier <lvivier@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x1033.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=alistair23@gmail.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -76,71 +76,230 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2022 11:56:29 -0000
+X-List-Received-Date: Thu, 08 Sep 2022 12:20:55 -0000
 
-On Fri, Sep 2, 2022 at 3:24 AM Tyler Ng <tkng@rivosinc.com> wrote:
+On Fri, Sep 2, 2022 at 3:28 AM Tyler Ng <tkng@rivosinc.com> wrote:
 >
-> Updates the register addresses to match the OpenTitan spec.
+> 1. Adds fields to hold the value of mtime in timer_upper0 and timer_lower0.
 >
-> These changes were made in this commit:
-> https://github.com/lowRISC/opentitan/commit/a25e162b8f91bd0ca32258c83d1d480f93327204
+> 2. Changes the read and write functions to use the mtime fields.
+>
+> 3. Updates the value of mtime in update_mtime() by extrapolating the
+> time elapsed. This will need to change if/when the prescalar is
+> implemented.
+>
+> Signed-off-by: Tyler Ng <tkng@rivosinc.com>
 
-Thanks for the patch
-
-We try to keep all OpenTitan devices in sync with each other. QEMU
-currently supports OT commit 217a0168ba118503c166a9587819e3811eeb0c0c
-
-We don't want to update a single device without updating all of them.
-If you want you are welcome to update all devices to a newer commit
-
-Also, the commits QEMU supports are generally driven by Tock, as
-that's the software running on QEMU OT. Have a look here for the board
-https://github.com/tock/tock/tree/master/boards/opentitan or here for
-the latest update (which QEMU already supports)
-https://github.com/tock/tock/pull/3056
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->
-> Signed-off-by: Tyler Ng <tkng@rivosinc.com>
 > ---
->  hw/timer/ibex_timer.c | 20 ++++++++++----------
->  1 file changed, 10 insertions(+), 10 deletions(-)
+>  hw/timer/ibex_timer.c         | 94 +++++++++++++++++++++++++----------
+>  include/hw/timer/ibex_timer.h |  5 ++
+>  2 files changed, 73 insertions(+), 26 deletions(-)
 >
 > diff --git a/hw/timer/ibex_timer.c b/hw/timer/ibex_timer.c
-> index 8c2ca364da..9ffd4821e8 100644
+> index 9ffd4821e8..7d0ea2db1e 100644
 > --- a/hw/timer/ibex_timer.c
 > +++ b/hw/timer/ibex_timer.c
-> @@ -38,19 +38,19 @@ REG32(ALERT_TEST, 0x00)
->      FIELD(ALERT_TEST, FATAL_FAULT, 0, 1)
->  REG32(CTRL, 0x04)
->      FIELD(CTRL, ACTIVE, 0, 1)
-> -REG32(CFG0, 0x100)
-> -    FIELD(CFG0, PRESCALE, 0, 12)
-> -    FIELD(CFG0, STEP, 16, 8)
-> -REG32(LOWER0, 0x104)
-> -REG32(UPPER0, 0x108)
-> -REG32(COMPARE_LOWER0, 0x10C)
-> -REG32(COMPARE_UPPER0, 0x110)
-> -REG32(INTR_ENABLE, 0x114)
-> +REG32(INTR_ENABLE, 0x100)
->      FIELD(INTR_ENABLE, IE_0, 0, 1)
-> -REG32(INTR_STATE, 0x118)
-> +REG32(INTR_STATE, 0x104)
->      FIELD(INTR_STATE, IS_0, 0, 1)
-> -REG32(INTR_TEST, 0x11C)
-> +REG32(INTR_TEST, 0x108)
->      FIELD(INTR_TEST, T_0, 0, 1)
-> +REG32(CFG0, 0x10C)
-> +    FIELD(CFG0, PRESCALE, 0, 12)
-> +    FIELD(CFG0, STEP, 16, 8)
-> +REG32(LOWER0, 0x110)
-> +REG32(UPPER0, 0x114)
-> +REG32(COMPARE_LOWER0, 0x118)
-> +REG32(COMPARE_UPPER0, 0x11C)
+> @@ -52,30 +52,59 @@ REG32(UPPER0, 0x114)
+>  REG32(COMPARE_LOWER0, 0x118)
+>  REG32(COMPARE_UPPER0, 0x11C)
 >
->  static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
+> -static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
+> +
+> +/*
+> + * The goal of this function is to:
+> + * 1. Check if the timer is enabled. If not, return false,
+> + * 2. Calculate the amount of time that has passed since.
+> + * 3. Extrapolate the number of ticks that have passed, and add it to `mtime`.
+> + * 4. Return true.
+> + */
+> +static bool update_mtime(IbexTimerState *s)
+> +{
+> +    if (!(R_CTRL & R_CTRL_ACTIVE_MASK)) {
+> +        return false;
+> +    }
+> +    /* Get the time then extrapolate the number of ticks that have elapsed */
+> +    uint64_t mtime = (s->timer_lower0) | ((uint64_t) s->timer_upper0 << 32);
+> +    int64_t now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+> +    int64_t elapsed = now - s->timer_last_update;
+> +    if (elapsed < 0) {
+> +        /* We jumped back in time. */
+> +        mtime -= muldiv64((uint64_t)(-elapsed), s->timebase_freq,
+> +                           NANOSECONDS_PER_SECOND);
+> +    } else {
+> +        mtime += muldiv64(elapsed, s->timebase_freq, NANOSECONDS_PER_SECOND);
+> +    }
+> +    s->timer_lower0 = mtime & 0xffffffff;
+> +    s->timer_upper0 = (mtime >> 32) & 0xffffffff;
+> +    /* update last-checkpoint timestamp */
+> +    s->timer_last_update = now;
+> +    return true;
+> +}
+> +
+> +static inline uint64_t cpu_riscv_read_rtc(void *opaque)
 >  {
+> -    return muldiv64(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL),
+> -                    timebase_freq, NANOSECONDS_PER_SECOND);
+> +    IbexTimerState *s = opaque;
+> +    return (s->timer_lower0) | ((uint64_t) s->timer_upper0 << 32);
+>  }
+>
+>  static void ibex_timer_update_irqs(IbexTimerState *s)
+>  {
+>      CPUState *cs = qemu_get_cpu(0);
+>      RISCVCPU *cpu = RISCV_CPU(cs);
+> -    uint64_t value = s->timer_compare_lower0 |
+> +    uint64_t mtimecmp = s->timer_compare_lower0 |
+>                           ((uint64_t)s->timer_compare_upper0 << 32);
+> -    uint64_t next, diff;
+> -    uint64_t now = cpu_riscv_read_rtc(s->timebase_freq);
+> -
+> -    if (!(s->timer_ctrl & R_CTRL_ACTIVE_MASK)) {
+> -        /* Timer isn't active */
+> +    if (!update_mtime(s)) {
+> +        /* Timer is not enabled? */
+>          return;
+>      }
+> +    uint64_t mtime = cpu_riscv_read_rtc(s);
+>
+>      /* Update the CPUs mtimecmp */
+> -    cpu->env.timecmp = value;
+> +    cpu->env.timecmp = mtimecmp;
+>
+> -    if (cpu->env.timecmp <= now) {
+> +    if (cpu->env.timecmp <= mtime) {
+>          /*
+>           * If the mtimecmp was in the past raise the interrupt now.
+>           */
+> @@ -86,18 +115,18 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
+>          }
+>          return;
+>      }
+> -
+> +    /* Update timers */
+> +    int64_t next;
+> +    uint64_t diff;
+>      /* Setup a timer to trigger the interrupt in the future */
+>      qemu_irq_lower(s->m_timer_irq);
+>      qemu_set_irq(s->irq, false);
+> -
+> -    diff = cpu->env.timecmp - now;
+> -    next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
+> -                                 muldiv64(diff,
+> -                                          NANOSECONDS_PER_SECOND,
+> -                                          s->timebase_freq);
+> -
+> -    if (next < qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL)) {
+> +    /* Compute the difference, and set a timer for the next update. */
+> +    diff = mtimecmp - mtime;
+> +    const uint64_t now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+> +    const uint64_t towait = muldiv64(diff, NANOSECONDS_PER_SECOND,
+> s->timebase_freq);
+> +    next = now + towait;
+> +    if (next < now) {
+>          /* We overflowed the timer, just set it as large as we can */
+>          timer_mod(cpu->env.timer, 0x7FFFFFFFFFFFFFFF);
+>      } else {
+> @@ -128,11 +157,13 @@ static void ibex_timer_reset(DeviceState *dev)
+>
+>      s->timer_ctrl = 0x00000000;
+>      s->timer_cfg0 = 0x00010000;
+> +    s->timer_lower0 = 0x00000000;
+> +    s->timer_upper0 = 0x00000000;
+>      s->timer_compare_lower0 = 0xFFFFFFFF;
+>      s->timer_compare_upper0 = 0xFFFFFFFF;
+>      s->timer_intr_enable = 0x00000000;
+>      s->timer_intr_state = 0x00000000;
+> -
+> +    s->timer_last_update = 0x00000000;
+>      ibex_timer_update_irqs(s);
+>  }
+>
+> @@ -140,7 +171,6 @@ static uint64_t ibex_timer_read(void *opaque, hwaddr addr,
+>                                         unsigned int size)
+>  {
+>      IbexTimerState *s = opaque;
+> -    uint64_t now = cpu_riscv_read_rtc(s->timebase_freq);
+>      uint64_t retvalue = 0;
+>
+>      switch (addr >> 2) {
+> @@ -155,10 +185,12 @@ static uint64_t ibex_timer_read(void *opaque, hwaddr addr,
+>          retvalue = s->timer_cfg0;
+>          break;
+>      case R_LOWER0:
+> -        retvalue = now;
+> +        update_mtime(s);
+> +        retvalue = cpu_riscv_read_rtc(s);
+>          break;
+>      case R_UPPER0:
+> -        retvalue = now >> 32;
+> +        update_mtime(s);
+> +        retvalue = cpu_riscv_read_rtc(s) >> 32;
+>          break;
+>      case R_COMPARE_LOWER0:
+>          retvalue = s->timer_compare_lower0;
+> @@ -197,16 +229,22 @@ static void ibex_timer_write(void *opaque, hwaddr addr,
+>          break;
+>      case R_CTRL:
+>          s->timer_ctrl = val;
+> +        /* We must update IRQs, because the QEMU timer gets updated here. */
+> +        ibex_timer_update_irqs(s);
+>          break;
+>      case R_CFG0:
+>          qemu_log_mask(LOG_UNIMP, "Changing prescale or step not supported");
+>          s->timer_cfg0 = val;
+>          break;
+>      case R_LOWER0:
+> -        qemu_log_mask(LOG_UNIMP, "Changing timer value is not supported");
+> +        s->timer_lower0 = val;
+> +        s->timer_last_update = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+> +        ibex_timer_update_irqs(s);
+>          break;
+>      case R_UPPER0:
+> -        qemu_log_mask(LOG_UNIMP, "Changing timer value is not supported");
+> +        s->timer_upper0 = val;
+> +        s->timer_last_update = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+> +        ibex_timer_update_irqs(s);
+>          break;
+>      case R_COMPARE_LOWER0:
+>          s->timer_compare_lower0 = val;
+> @@ -263,6 +301,9 @@ static const VMStateDescription vmstate_ibex_timer = {
+>          VMSTATE_UINT32(timer_compare_upper0, IbexTimerState),
+>          VMSTATE_UINT32(timer_intr_enable, IbexTimerState),
+>          VMSTATE_UINT32(timer_intr_state, IbexTimerState),
+> +        VMSTATE_INT64(timer_last_update, IbexTimerState),
+> +        VMSTATE_UINT32(timer_lower0, IbexTimerState),
+> +        VMSTATE_UINT32(timer_upper0, IbexTimerState),
+>          VMSTATE_END_OF_LIST()
+>      }
+>  };
+> @@ -281,6 +322,7 @@ static void ibex_timer_init(Object *obj)
+>      memory_region_init_io(&s->mmio, obj, &ibex_timer_ops, s,
+>                            TYPE_IBEX_TIMER, 0x400);
+>      sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
+> +
+>  }
+>
+>  static void ibex_timer_realize(DeviceState *dev, Error **errp)
+> diff --git a/include/hw/timer/ibex_timer.h b/include/hw/timer/ibex_timer.h
+> index 1a0a28d5fa..a6a1aa279a 100644
+> --- a/include/hw/timer/ibex_timer.h
+> +++ b/include/hw/timer/ibex_timer.h
+> @@ -39,6 +39,11 @@ struct IbexTimerState {
+>
+>      uint32_t timer_ctrl;
+>      uint32_t timer_cfg0;
+> +
+> +    int64_t timer_last_update;
+> +
+> +    uint32_t timer_lower0;
+> +    uint32_t timer_upper0;
+>      uint32_t timer_compare_lower0;
+>      uint32_t timer_compare_upper0;
+>      uint32_t timer_intr_enable;
 > --
 > 2.30.2
 >
