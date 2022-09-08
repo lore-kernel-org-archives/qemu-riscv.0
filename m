@@ -1,64 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oWDms-0006K5-4d
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 05:25:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55388)
+	id 1oWDq1-00083g-9r
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Sep 2022 05:28:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42824)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oWDmi-0006Jb-W1; Thu, 08 Sep 2022 05:25:21 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b]:43945)
+ id 1oWDpz-00083G-Ms; Thu, 08 Sep 2022 05:28:43 -0400
+Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030]:41501)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oWDmh-0001en-3M; Thu, 08 Sep 2022 05:25:20 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id v4so16122736pgi.10;
- Thu, 08 Sep 2022 02:25:18 -0700 (PDT)
+ id 1oWDpy-000209-2H; Thu, 08 Sep 2022 05:28:43 -0400
+Received: by mail-pj1-x1030.google.com with SMTP id
+ q15-20020a17090a304f00b002002ac83485so1806966pjl.0; 
+ Thu, 08 Sep 2022 02:28:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date;
- bh=Lzc+PT5oBaDdpy8usVnSBeDJwMn+V9sWNc1Y+I38FbY=;
- b=o88+xJgmynbeA2SuwGjA1rTRO5xTVDL+hNvogKMUaGQr2rsP+pZOrEhLC3KN2LW1Yn
- CIn6lMXL/kLWJu9uyHYI0xgYB9wl7JfR8weUUhd32HPI/9H0QmztxpPxRdEyS5PArd4J
- fbA+NB3bSv9dtuu6tH/cGE1U4/t2VoBRhCRv3X+AfGMjhM4GUT6nwKTHZq8ocgXhYfg+
- 42u+KZcMz97PVuNC+jiatPE2Jrqek7o3Cnqhnf5ica0oiBfCOhbfKbzWcC8t6m3M+/N4
- 5xEJ8BkxHhKclHnK2IVlhiOi3Lj4YJOUE5jjLeq9ZbLlHOLMH34xjImhGWzYHLC3AqjK
- rjsg==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date;
+ bh=O7ZQ8+O9U0daQBUMho2iTgKEGNmBhDMDTuX2qh4KfMs=;
+ b=GnVUeoTUTa7DbGmkE8ZCQLAuS3sfVODDkJFCrnVkWkVHmp5sHYz0oSn8mAid7hjwiY
+ dx5bftvrfFVZd9EBPwANEIKlIbO0B2j8ymSKdvfKsPVSifH+1Vtc0Tns1L2xaUmXxFWr
+ mRjUDWeV7NersEzuokQLfuCehhuVRvZRmWWi2SzHwyegm6IRd1y6TaaydZUfrrG/ZBt/
+ juWogPL9G+9LByQ4bh2KsMVPcebrwJXioTIaNQag5MtRMRfRa3zr0PW+sq9HvTF8k4lL
+ XMfpUmAkcVAT+3iadgU1sD90V/R3pShQbqnJttTWouA0KDrKCxrl59fn8aBrhvpl3jnf
+ rUHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date;
- bh=Lzc+PT5oBaDdpy8usVnSBeDJwMn+V9sWNc1Y+I38FbY=;
- b=m3TY8jn/Ehz17yWIoFseu6reD7IvDllvYRouYZtZqC53ZrT6LzDdI8F727y4BYjWQ2
- 0/bbg/41lQA5RoM1chKJENMeV5emda/8OfFts1FE5NvSTP7aUcey+ZsaZlt9tXnno9p0
- 0HmnLchJiM6CssuDYir7Fe9QGxDvouJBQwnIdSnqBE0o9IwsBFxMA+DE0fmWyZyWc5hk
- aR4RufaL5XnTw5P51BCnmxi2LxPhruRi3RcfMpXM7T1TvvH+LvtCsHLKTfcSy63EDlZF
- oxm6oOpIbzvZWBn2gTpek7Ezq4nmRhgk0JSoVFQXRcwsl3ep7qy+oV7gSVUy7650DB82
- nYAQ==
-X-Gm-Message-State: ACgBeo3OIyFWiRwJwXM75ts9QE9JCCWbZ3Cvzd2lb/jPXgow7kpwAaUO
- S44w3yPBU8Rwlus0+cOavX0tjbTGXNl6zre/O7o=
-X-Google-Smtp-Source: AA6agR70Vh+4EFkHxjg3/aooQPDbjvbji7YwyyFKTIhAxRDwwHrhLmCRkcrMDnqQMyGrB0Zq3AesHxpBAWAvi0/Pumo=
-X-Received: by 2002:a63:5b15:0:b0:42b:bb74:a2da with SMTP id
- p21-20020a635b15000000b0042bbb74a2damr7074497pgb.406.1662629117174; Thu, 08
- Sep 2022 02:25:17 -0700 (PDT)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date;
+ bh=O7ZQ8+O9U0daQBUMho2iTgKEGNmBhDMDTuX2qh4KfMs=;
+ b=t8PXY0Fd04CGlRH+0VaQL0wlfot29poT1P50sjUFwGDHQyj0+1jNgfRLhOaAAVEg6J
+ IlCcnaakF3V9wny7JyNNSxCWwD53ptWKD9cu2jMNHLwBwxWaMLHgDnG+mmUY5T/0MwlN
+ OwkrlhoQPI6NfbwR8rsvkdimSAVyrq4IUC5CIItijwwXKQs93GxD3C2QTzE9jPsVmWLi
+ FsnSocwEZ5jn+xZbhnsXkMOlJTM9wRkG+4Hc+81A3IJkxtgyp0X9nQkbtoox+FXJSKmV
+ /sIXXIGzBOarZSthOwRuzsem81HA2vG1RgEuU4kRkkvOOf9uteay5pLI2/b//z2N/WJT
+ 5RIQ==
+X-Gm-Message-State: ACgBeo1Gc7P8+vXO6k4Bg/XQVki3vp8xVBu5y/9z3X6a/x3dqxDIpfQp
+ PL21ua0ri5lsLggmdOfh6YL1TAsEaSgrONLqfHk=
+X-Google-Smtp-Source: AA6agR7ZZmR6Gr5gQWAVZmsR4yO3dml6BpZNP/czE+5NPs/gXjTV7IS0ZdeuTm6pOILi9ZMTqvU7EXFA4Kcd1kTU/30=
+X-Received: by 2002:a17:90b:314b:b0:1fd:e5ba:3cab with SMTP id
+ ip11-20020a17090b314b00b001fde5ba3cabmr3287119pjb.96.1662629319315; Thu, 08
+ Sep 2022 02:28:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220812131304.1674484-1-philipp.tomsich@vrull.eu>
- <20220812131304.1674484-2-philipp.tomsich@vrull.eu>
- <CAFEAcA9tQDu_4N+6QKhX66R5PtddXWkL-zmn1vDTDdQceCtHdA@mail.gmail.com>
- <CAAeLtUDmvuje+cLB6j+_JjUt3TQaEoJYRypjd=dMNwkFsD0sDA@mail.gmail.com>
-In-Reply-To: <CAAeLtUDmvuje+cLB6j+_JjUt3TQaEoJYRypjd=dMNwkFsD0sDA@mail.gmail.com>
+References: <20220817083756.12471-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220817083756.12471-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 8 Sep 2022 11:24:50 +0200
-Message-ID: <CAKmqyKMCUyTtTarDcXjxjTDe7JapuegxMB9x57rtG+7rNELVQg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv: fence: reconcile with specification
-To: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Peter Maydell <peter.maydell@linaro.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Thu, 8 Sep 2022 11:28:12 +0200
+Message-ID: <CAKmqyKOK3ioCNuNQZSKnjqb+QDOWwFhjZbLV+W5ArsrcSibXew@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: fix csr check for cycle{h}, instret{h}, 
+ time{h}, hpmcounter3-31{h}
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x52b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x1030.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -79,103 +77,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2022 09:25:24 -0000
+X-List-Received-Date: Thu, 08 Sep 2022 09:28:43 -0000
 
-On Fri, Aug 12, 2022 at 4:19 PM Philipp Tomsich
-<philipp.tomsich@vrull.eu> wrote:
+On Wed, Aug 17, 2022 at 10:39 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> Happy to lower it back into the decode file.
-> However, I initially pulled it up into the trans-function to more
-> closely match the ISA specification: there is only one FENCE
-> instruction with 3 arguments (FM, PRED, and SUCC).
-> One might argue that the decode table for "RV32I Base Instruction Set"
-> in the specification lists FENCE.TSO as a separate instruction, but
-> the normative text doesn't (and FENCE overlaps FENCE.TSO in the
-> tabular representation) =E2=80=94 so I would consider the table as
-> informative.
+> - modify check for mcounteren to work in all less-privilege mode
+> - modify check for scounteren to work only when S mode is enabled
+> - distinguish the exception type raised by check for scounteren between U
+> and VU mode
 >
-> I'll wait until we see what consensus emerges from the discussion.
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 
-From the discussion on patch 1 it seems that QEMU ignoring these
-fields (current behaviour) is correct
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+> v3:
+>  - remove unnecessary ()'s
 >
-> Philipp.
+> v2:
+>  - Rebase on patches v13 for "Improve PMU support"
 >
-> On Fri, 12 Aug 2022 at 15:21, Peter Maydell <peter.maydell@linaro.org> wr=
-ote:
-> >
-> > On Fri, 12 Aug 2022 at 14:17, Philipp Tomsich <philipp.tomsich@vrull.eu=
-> wrote:
-> > >
-> > > Our decoding of fence-instructions is problematic in respect to the
-> > > RISC-V ISA specification:
-> > > - rs and rd are ignored, but need to be 0
-> > > - fm is ignored
-> > >
-> > > This change adjusts the decode pattern to enfore rs and rd being 0,
-> > > and validates the fm-field (together with pred/succ for FENCE.TSO) to
-> > > determine whether a reserved instruction is specified.
-> > >
-> > > While the specification allows UNSPECIFIED behaviour for reserved
-> > > instructions, we now always raise an illegal instruction exception.
-> > >
-> > > Signed-off-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> > >
-> > > ---
-> > >
-> > >  target/riscv/insn32.decode              |  2 +-
-> > >  target/riscv/insn_trans/trans_rvi.c.inc | 19 ++++++++++++++++++-
-> > >  2 files changed, 19 insertions(+), 2 deletions(-)
-> > >
-> > > diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> > > index 089128c3dc..4e53df1b62 100644
-> > > --- a/target/riscv/insn32.decode
-> > > +++ b/target/riscv/insn32.decode
-> > > @@ -150,7 +150,7 @@ srl      0000000 .....    ..... 101 ..... 0110011=
- @r
-> > >  sra      0100000 .....    ..... 101 ..... 0110011 @r
-> > >  or       0000000 .....    ..... 110 ..... 0110011 @r
-> > >  and      0000000 .....    ..... 111 ..... 0110011 @r
-> > > -fence    ---- pred:4 succ:4 ----- 000 ----- 0001111
-> > > +fence    fm:4 pred:4 succ:4 00000 000 00000 0001111
-> > >  fence_i  000000000000     00000 001 00000 0001111
-> > >  csrrw    ............     ..... 001 ..... 1110011 @csr
-> > >  csrrs    ............     ..... 010 ..... 1110011 @csr
-> > > diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/i=
-nsn_trans/trans_rvi.c.inc
-> > > index ca8e3d1ea1..515bb3b22a 100644
-> > > --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> > > +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> > > @@ -795,7 +795,24 @@ static bool trans_srad(DisasContext *ctx, arg_sr=
-ad *a)
-> > >
-> > >  static bool trans_fence(DisasContext *ctx, arg_fence *a)
-> > >  {
-> > > -    /* FENCE is a full memory barrier. */
-> > > +    switch (a->fm) {
-> > > +    case 0b0000:
-> > > +         /* normal fence */
-> > > +         break;
-> > > +
-> > > +    case 0b0001:
-> > > +         /* FENCE.TSO requires PRED and SUCC to be RW */
-> > > +         if (a->pred !=3D 0xb0011 || a->succ !=3D 0b0011) {
-> > > +            return false;
-> > > +         }
-> > > +         break;
-> > > +
-> > > +    default:
-> > > +        /* reserved for future use */
-> > > +        return false;
-> > > +    }
-> >
-> > I think it would be neater to do this decode in the
-> > .decode file, rather than by hand in the trans function.
-> >
-> > thanks
-> > -- PMM
+>  target/riscv/csr.c | 13 +++++++++----
+>  1 file changed, 9 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 2dcd4e5b2d..ca72b5df98 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -98,17 +98,22 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+>
+>  skip_ext_pmu_check:
+>
+> -    if (((env->priv == PRV_S) && (!get_field(env->mcounteren, ctr_mask))) ||
+> -        ((env->priv == PRV_U) && (!get_field(env->scounteren, ctr_mask)))) {
+> +    if (env->priv < PRV_M && !get_field(env->mcounteren, ctr_mask)) {
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+>
+>      if (riscv_cpu_virt_enabled(env)) {
+> -        if (!get_field(env->hcounteren, ctr_mask) &&
+> -            get_field(env->mcounteren, ctr_mask)) {
+> +        if (!get_field(env->hcounteren, ctr_mask) ||
+> +            (env->priv == PRV_U && !get_field(env->scounteren, ctr_mask))) {
+>              return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+>          }
+>      }
+> +
+> +    if (riscv_has_ext(env, RVS) && env->priv == PRV_U &&
+> +        !get_field(env->scounteren, ctr_mask)) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +
+>  #endif
+>      return RISCV_EXCP_NONE;
+>  }
+> --
+> 2.17.1
+>
 >
 
