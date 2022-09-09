@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oWeHI-0007QW-Ls
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Sep 2022 09:42:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59740)
+	id 1oWeHN-0007dd-3c
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Sep 2022 09:42:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59744)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1oWeHG-0007Ky-If; Fri, 09 Sep 2022 09:42:38 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:55007)
+ id 1oWeHL-0007Wu-9A; Fri, 09 Sep 2022 09:42:43 -0400
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635]:44594)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1oWeHE-0003Hz-SA; Fri, 09 Sep 2022 09:42:38 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id o23so281937pji.4;
- Fri, 09 Sep 2022 06:42:36 -0700 (PDT)
+ id 1oWeHI-0003IW-GQ; Fri, 09 Sep 2022 09:42:42 -0400
+Received: by mail-pl1-x635.google.com with SMTP id 9so1803792plj.11;
+ Fri, 09 Sep 2022 06:42:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
- bh=Hce6YOD4G6yJWscv75mJR41gbJvGcOpIieu8G2xuK+g=;
- b=m/Yg5NgtMvqsXciQ04wCBpZnV5gMHMt+o/DGAmqLU3boVlPVMFFfKas+U/f2B0hEOO
- G1LjAfdyiL1wn94YUprINtEW4za3ncrPmgMrq4zYp/CG07irnVKsBnNvdoX4FNe/bUKd
- RZp9noNBDaW5PosMv4kyESpLiHZghiV/mQ0oYUpOfv3XSWXykmd/3xWLHCBqbT/2W/9z
- PxmiKxKt91FjLuApbzjdO/kfry/zwAGhY5TT5UEAK9U4CrrfD5HYOLIEK1tuErnAa7T6
- LWroAdd5xrp+lM9Yu9d5UqAeavmTgKG81lhmj8I6IBAE1wLTEyu5m/3lZHANIZIlRKOF
- 2gdw==
+ bh=kOqbENfjjwa1eSon1KJ9GROGFR9ZaNUpL90awTFJpIY=;
+ b=fsMTTqJhaXKehEYw8Cvbk1m1RB+mneMNcSVEwMdpXITSh3pWRk6cOsIeEpnDRvq6sv
+ U0YJsdHBEIOcAOYi1SuS3Qxl/p1mGOKOcUooJH3OVeC0lhTNo789keAhv8op6B53oJQn
+ /cG31QP8fZR8fRLl2LLt8tk3SJ8Ull7CsUCPt+ACnlnja6/6I99szSd6jf3Sphkw/WPs
+ IpGs8xO/j/d76er8wdmiB9aDBp44vokpnaTkaaz5LuP6RHP0rWyXjsHeYQC0SnhulY5r
+ gEVNaZX2T7X9Nnu1bM8K2mMCSolOitYCUOQ0gWnIzaX7twDtfpjrCSz424w9V/DQEUr1
+ C0Lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date;
- bh=Hce6YOD4G6yJWscv75mJR41gbJvGcOpIieu8G2xuK+g=;
- b=m+hyGoEtkv0dPq6FNfWBUW3PrEuyTqGHMxGEQqUpUB+HwI5hSyF6981C28MkWimFsR
- s9+ffqDInz5nHTUyPMurFdqUqg2yAWspmkCUhXbvUKkPGBfZIkr7l2DcC3Z8FC8X3rjM
- xpdzlphffokNNQPFq8L19Z52dHvJZxjsOMJNf7qX+LlAVK0oZmfqGdnjD3KYytVzVXjz
- YpI53XttgL7+w1EGdDrWfO8gSFTPUCXntF9n/Q8YeqKGBRTfbMoFiI/v3/ZOTcHYWva0
- H2FEgidVEz0pD5ONnn404EPZqHNZBg1O1fJQJX1eOHx9LIiCfkwWPL3GfLJbw92k9iT8
- RVeQ==
-X-Gm-Message-State: ACgBeo0VykbIbiTgKkRHOPwtIBtvEeYk+1EJuBwvRNfZwWbeNsI5laRO
- jWmN1uF47cDrUQnQPspqyMlrZjuGZ34=
-X-Google-Smtp-Source: AA6agR5VhZYek0aINrlgBVOhp5m4cEWXymU9oir8PQ8Zs+Ht8Mxut8s2054dVm2vTEWiKzncpi11gg==
-X-Received: by 2002:a17:903:24c:b0:172:7090:64a4 with SMTP id
- j12-20020a170903024c00b00172709064a4mr13724759plh.124.1662730954955; 
- Fri, 09 Sep 2022 06:42:34 -0700 (PDT)
+ bh=kOqbENfjjwa1eSon1KJ9GROGFR9ZaNUpL90awTFJpIY=;
+ b=aY+7BxwIIo41zk44ZDeNiRI/AqWoDSxt3TlwwXlGmjKliLl1mpIzIAMV839XsrWOBj
+ /PxfflKN61br2L60bhErxrkkG39Pur7llVkW2M5JDVVHS9uIsjd67yTUFi6k1/nqqAxy
+ mwktX69GcoSBq8uF0s5oVNDBMChneiaF5M9xJtiO2sFiRJEVrssK6FeePuqC+V8f729x
+ R+TZGSyPAtFWhBpMtgzgj11sM8OLX8MxiOkllJFrCCkqf1/q7WdmuEdTLDDEvuQQtRVR
+ VVqOhtIDt0q6Qx7ejBo8dQoTkMtlXngBNdHTI2uXLVyRUaTfiFb9Je8Oc5k0nnj0UO9U
+ cQXw==
+X-Gm-Message-State: ACgBeo03kumDBZ54//6u0QGGtjtbjCvLCT3914bPlTpT/2zOxcTfLdHk
+ rNogh3Y2OEtNGOv135HAm1Fj4Tu1gqM=
+X-Google-Smtp-Source: AA6agR7mnOqvllTTzoOIbrt80v/0rU3MQgVF+JjHjA1Li13R4ZQrsVA/6d+LN53+ulGz11qOJPPh9w==
+X-Received: by 2002:a17:90b:3ec9:b0:1f5:62d5:4157 with SMTP id
+ rm9-20020a17090b3ec900b001f562d54157mr9501132pjb.183.1662730958345; 
+ Fri, 09 Sep 2022 06:42:38 -0700 (PDT)
 Received: from ubuntu.. (144.168.56.201.16clouds.com. [144.168.56.201])
  by smtp.gmail.com with ESMTPSA id
- 196-20020a6306cd000000b0042a4612c07esm513172pgg.39.2022.09.09.06.42.32
+ 196-20020a6306cd000000b0042a4612c07esm513172pgg.39.2022.09.09.06.42.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Sep 2022 06:42:34 -0700 (PDT)
+ Fri, 09 Sep 2022 06:42:37 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Frank Chang <frank.chang@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v2 5/8] target/riscv: debug: Introduce tinfo CSR
-Date: Fri,  9 Sep 2022 21:42:12 +0800
-Message-Id: <20220909134215.1843865-6-bmeng.cn@gmail.com>
+Subject: [PATCH v2 6/8] target/riscv: debug: Create common trigger actions
+ function
+Date: Fri,  9 Sep 2022 21:42:13 +0800
+Message-Id: <20220909134215.1843865-7-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220909134215.1843865-1-bmeng.cn@gmail.com>
 References: <20220909134215.1843865-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x102a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -79,107 +80,138 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Sep 2022 13:42:39 -0000
+X-List-Received-Date: Fri, 09 Sep 2022 13:42:43 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-tinfo.info:
-  One bit for each possible type enumerated in tdata1.
-  If the bit is set, then that type is supported by the currently
-  selected trigger.
+Trigger actions are shared among all triggers. Extract to a common
+function.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+[bmeng: handle the DBG_ACTION_NONE case]
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+
 ---
 
-(no changes since v1)
+Changes in v2:
+- add handling of the DBG_ACTION_NONE case in do_trigger_action()
 
- target/riscv/cpu_bits.h |  1 +
- target/riscv/debug.h    |  2 ++
- target/riscv/csr.c      |  8 ++++++++
- target/riscv/debug.c    | 10 +++++++---
- 4 files changed, 18 insertions(+), 3 deletions(-)
+ target/riscv/debug.h | 13 ++++++++++
+ target/riscv/debug.c | 59 ++++++++++++++++++++++++++++++++++++++++++--
+ 2 files changed, 70 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 7be12cac2e..1972aee3bb 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -321,6 +321,7 @@
- #define CSR_TDATA1          0x7a1
- #define CSR_TDATA2          0x7a2
- #define CSR_TDATA3          0x7a3
-+#define CSR_TINFO           0x7a4
- 
- /* Debug Mode Registers */
- #define CSR_DCSR            0x7b0
 diff --git a/target/riscv/debug.h b/target/riscv/debug.h
-index 76146f373a..9f69c64591 100644
+index 9f69c64591..0e4859cf74 100644
 --- a/target/riscv/debug.h
 +++ b/target/riscv/debug.h
-@@ -95,6 +95,8 @@ void tselect_csr_write(CPURISCVState *env, target_ulong val);
- target_ulong tdata_csr_read(CPURISCVState *env, int tdata_index);
- void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val);
+@@ -44,6 +44,19 @@ typedef enum {
+     TRIGGER_TYPE_NUM
+ } trigger_type_t;
  
-+target_ulong tinfo_csr_read(CPURISCVState *env);
++/* actions */
++typedef enum {
++    DBG_ACTION_NONE = -1,           /* sentinel value */
++    DBG_ACTION_BP = 0,
++    DBG_ACTION_DBG_MODE,
++    DBG_ACTION_TRACE0,
++    DBG_ACTION_TRACE1,
++    DBG_ACTION_TRACE2,
++    DBG_ACTION_TRACE3,
++    DBG_ACTION_EXT_DBG0 = 8,
++    DBG_ACTION_EXT_DBG1
++} trigger_action_t;
 +
- void riscv_cpu_debug_excp_handler(CPUState *cs);
- bool riscv_cpu_debug_check_breakpoint(CPUState *cs);
- bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp);
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 3d0d8e0340..e66019048d 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -3089,6 +3089,13 @@ static RISCVException write_tdata(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
+ /* tdata1 field masks */
  
-+static RISCVException read_tinfo(CPURISCVState *env, int csrno,
-+                                 target_ulong *val)
-+{
-+    *val = tinfo_csr_read(env);
-+    return RISCV_EXCP_NONE;
-+}
-+
- /*
-  * Functions to access Pointer Masking feature registers
-  * We have to check if current priv lvl could modify
-@@ -3893,6 +3900,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_TDATA1]    =  { "tdata1",  debug, read_tdata,   write_tdata   },
-     [CSR_TDATA2]    =  { "tdata2",  debug, read_tdata,   write_tdata   },
-     [CSR_TDATA3]    =  { "tdata3",  debug, read_tdata,   write_tdata   },
-+    [CSR_TINFO]     =  { "tinfo",   debug, read_tinfo,   write_ignore  },
- 
-     /* User Pointer Masking */
-     [CSR_UMTE]    =    { "umte",    pointer_masking, read_umte,  write_umte },
+ #define RV32_TYPE(t)    ((uint32_t)(t) << 28)
 diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-index d6666164cd..7d546ace42 100644
+index 7d546ace42..7a8910f980 100644
 --- a/target/riscv/debug.c
 +++ b/target/riscv/debug.c
-@@ -37,9 +37,7 @@
-  * - tdata1
-  * - tdata2
-  * - tdata3
-- *
-- * We don't support writable 'type' field in the tdata1 register, so there is
-- * no need to implement the "tinfo" CSR.
-+ * - tinfo
-  *
-  * The following triggers are implemented:
-  *
-@@ -372,6 +370,12 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
+@@ -92,6 +92,37 @@ static inline target_ulong get_trigger_type(CPURISCVState *env,
+     return extract_trigger_type(env, env->tdata1[trigger_index]);
+ }
+ 
++static trigger_action_t get_trigger_action(CPURISCVState *env,
++                                           target_ulong trigger_index)
++{
++    target_ulong tdata1 = env->tdata1[trigger_index];
++    int trigger_type = get_trigger_type(env, trigger_index);
++    trigger_action_t action = DBG_ACTION_NONE;
++
++    switch (trigger_type) {
++    case TRIGGER_TYPE_AD_MATCH:
++        action = (tdata1 & TYPE2_ACTION) >> 12;
++        break;
++    case TRIGGER_TYPE_INST_CNT:
++    case TRIGGER_TYPE_INT:
++    case TRIGGER_TYPE_EXCP:
++    case TRIGGER_TYPE_AD_MATCH6:
++    case TRIGGER_TYPE_EXT_SRC:
++        qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n",
++                      trigger_type);
++        break;
++    case TRIGGER_TYPE_NO_EXIST:
++    case TRIGGER_TYPE_UNAVAIL:
++        qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exit\n",
++                      trigger_type);
++        break;
++    default:
++        g_assert_not_reached();
++    }
++
++    return action;
++}
++
+ static inline target_ulong build_tdata1(CPURISCVState *env,
+                                         trigger_type_t type,
+                                         bool dmode, target_ulong data)
+@@ -182,6 +213,30 @@ static inline void warn_always_zero_bit(target_ulong val, target_ulong mask,
      }
  }
  
-+target_ulong tinfo_csr_read(CPURISCVState *env)
++static void do_trigger_action(CPURISCVState *env, target_ulong trigger_index)
 +{
-+    /* assume all triggers support the same types of triggers */
-+    return BIT(TRIGGER_TYPE_AD_MATCH);
++    trigger_action_t action = get_trigger_action(env, trigger_index);
++
++    switch (action) {
++    case DBG_ACTION_NONE:
++        break;
++    case DBG_ACTION_BP:
++        riscv_raise_exception(env, RISCV_EXCP_BREAKPOINT, 0);
++        break;
++    case DBG_ACTION_DBG_MODE:
++    case DBG_ACTION_TRACE0:
++    case DBG_ACTION_TRACE1:
++    case DBG_ACTION_TRACE2:
++    case DBG_ACTION_TRACE3:
++    case DBG_ACTION_EXT_DBG0:
++    case DBG_ACTION_EXT_DBG1:
++        qemu_log_mask(LOG_UNIMP, "action: %d is not supported\n", action);
++        break;
++    default:
++        g_assert_not_reached();
++    }
 +}
 +
- void riscv_cpu_debug_excp_handler(CPUState *cs)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
+ /* type 2 trigger */
+ 
+ static uint32_t type2_breakpoint_size(CPURISCVState *env, target_ulong ctrl)
+@@ -384,11 +439,11 @@ void riscv_cpu_debug_excp_handler(CPUState *cs)
+     if (cs->watchpoint_hit) {
+         if (cs->watchpoint_hit->flags & BP_CPU) {
+             cs->watchpoint_hit = NULL;
+-            riscv_raise_exception(env, RISCV_EXCP_BREAKPOINT, 0);
++            do_trigger_action(env, DBG_ACTION_BP);
+         }
+     } else {
+         if (cpu_breakpoint_test(cs, env->pc, BP_CPU)) {
+-            riscv_raise_exception(env, RISCV_EXCP_BREAKPOINT, 0);
++            do_trigger_action(env, DBG_ACTION_BP);
+         }
+     }
+ }
 -- 
 2.34.1
 
