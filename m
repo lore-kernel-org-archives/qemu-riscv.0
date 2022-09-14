@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oYPN9-0001eO-Fy
+	id 1oYPN9-0001fG-OR
 	for mharc-qemu-riscv@gnu.org; Wed, 14 Sep 2022 06:11:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37740)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37746)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=2494fb295=alistair.francis@wdc.com>)
- id 1oYPMz-0001Yh-2i; Wed, 14 Sep 2022 06:11:49 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:25183)
+ id 1oYPN0-0001Zi-Ss; Wed, 14 Sep 2022 06:11:55 -0400
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:25189)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=2494fb295=alistair.francis@wdc.com>)
- id 1oYPMt-0005wA-Ub; Wed, 14 Sep 2022 06:11:48 -0400
+ id 1oYPMz-0005xH-3t; Wed, 14 Sep 2022 06:11:50 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1663150303; x=1694686303;
+ t=1663150308; x=1694686308;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=vzPbS2HplCpXe09+xXDoXlh+mm4sUR6+M9HJOoGMZcQ=;
- b=h0SCjjMeRdUa7ZIY0AXNfxhATUdmOcXHfZzIWNiuecFwF83/ia0j5uzA
- IUq7XQ1zoZMcGkUW8Az0oeECJSPKaUb6Ur1cZWucTcs4gkjpREPPaQ+Qv
- 7ndKoWx8jdKx1r1zR35+VtwOkyJyAnRHE3CcsBBO7CF9YYEzsQeU9rDB4
- OL9kFMMdRCscgEoIp+Mgzy/OTJzYj0LpBW2PePQNUTqDPQ1sAOPvfw3GR
- 8XL/rGbPYzUZxkoYBMM7Im3kRIKsbUzBScqlK8PzMKK04VnNCY5qVpxlI
- aWm5ze7WnT8qNOPyaqqyGjetEYvoFs9o3iZ6jdxPfu5snCbT59epwNai6 Q==;
-X-IronPort-AV: E=Sophos;i="5.93,315,1654531200"; d="scan'208";a="315604487"
+ bh=9ipMvwRnulhRPxErs5FRklIdkTOE8ARBrHTdf/sATms=;
+ b=VrwKgmfINlxCPfJ0U3Xri+BZSNSfy4FFeUw5HJuVxJ4+ItfIkL3Jzd8+
+ IU/541mF7pcndyPLvacLl+czR8+YZogBY9TL8MLM/SPl2fvsrC2MOKnKv
+ 83/kP9WCZCh31VRUQwry2fZNjiwxyShrQEqMPCyNlwUigkL1UgpI1JaWt
+ jYSiysfWIJU44FIAI00f0m3vKs3IIqG1eAHToz9FIcTytrm1bcN/3yqqT
+ Ia080bQyC5vszsxxchSHG+fSbUHL/HgNIa53mKILW53gzNZMs81PPB88I
+ 8TEIzR4vVhaAS0cv4peoNRLk8FDDDjyYJXOBIW+I5+MfCi5oN8SEwIZIg g==;
+X-IronPort-AV: E=Sophos;i="5.93,315,1654531200"; d="scan'208";a="315604495"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 14 Sep 2022 18:11:34 +0800
-IronPort-SDR: 0mWV3ONn/ZkYGyXYY1NikcPW5PPxddDD2IyKcmsmTY99AbNIXwoDEVtZXP449y+NLJ2Oh97FkF
- aj0y0f3mBqXUIHFWagJCH9eyof/Vnew9gvtes7PUMWGR+6VQ4M2oLFp2tlNeIiJOwIrP8ITqMl
- 0tzn1AnbQ2GsBDffGXdVQbQdUnNPwHsvfSWMqFzNSG95mUqAchcZQMpJAmcJwiGTAzFkHnkC5h
- KQA4fIU2oJMZNpm5wsris43l62TQPqr2rXY+0dDPfj29sKDe0n2QcywSXdsDvprM8/UFwjOqUH
- o2CfFYThvej+XNmQjNEYxtgC
+ by ob1.hgst.iphmx.com with ESMTP; 14 Sep 2022 18:11:39 +0800
+IronPort-SDR: wKbYy2ddOUULxaDX58+nGWHyEGumtDJQ128kDPU4VmKLwyjFNYiRlQzcUWqARzCOWhBMjG3xNF
+ ee3/EZUm5uvtilH4UE2WN8JjSpRxfdt4Xt+XolBPA3sWXG0K/YPm4AP527rJ5I4w2PRsKqZOBm
+ RO44KHAcUxlTGnXVIO69+1Bq69DfmK62HuHr+tXr/Z5EWFlTgWt2yPQqUnQfQacACJ8fBYYGOF
+ 6UzeR/X6ldotObMJnNt8Jr2gbtJ0IBBVII5xnd37UTI0djC2Icd1aHSbAkDAfIBFUz259lPQGL
+ LCvAKzpQWBZxVOBG6rwrof8Q
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 14 Sep 2022 02:26:20 -0700
-IronPort-SDR: 4mY/Vy40kZfdZoZOI1K2qHHAReaUP0yWRN7F/mHsfqEPorYkduav2c5Qkc+63aYAB1ozLqCaoH
- La7JN5J6xpwh5c/9q6a1Sxw0jReyPurCI2ijnjhup6ZEIoUjO8f7lLriZpAF6YCRDQJ99ReirK
- UTy5QzS/6LWtZy446xU5wtxFr40jiVWE0SMbzwfEDqZePksK5jPJtJ7ftMmAoPo8VgzjETpSiJ
- he5PBNC6tfScsSq1J4jbrezzdnFYPxHWWl1wHKIxUCTIx4OKl1oDZT29QGvRIe93bW3DSFBDtm
- Xb4=
+ 14 Sep 2022 02:26:25 -0700
+IronPort-SDR: AOPo1kKzDF9IIEFiXN4XmJsUzv5aw37xxVF4XkOGaPFYPBvYoCgf6x5MkKjF/djz3Xefjp3ivD
+ kihkvwXelALCUKljg9Tfz+H6b3Y8gmBldr3CAU0oxc0rHFEbrQlg71DCzpRXaR3/hdt5PsKczf
+ b+mnbZbLOYB0T7jCzXyPa684wFtymo3I5jKCMhI8odbE4KT5MmzpTj1RAdfkVvsmNJ2Qi1lJHU
+ HWocgH2ubyz6pE2VBUB4+eD3tq0KQgDFOgsgHoFvG5rejTb4oxOAa00mT21YfE9ylakbVpaK7i
+ Z+c=
 WDCIronportException: Internal
 Received: from unknown (HELO toolbox.wdc.com) ([10.225.167.107])
- by uls-op-cesaip02.wdc.com with ESMTP; 14 Sep 2022 03:11:33 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 14 Sep 2022 03:11:38 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
  Alistair Francis <alistair.francis@wdc.com>, bmeng.cn@gmail.com,
  Alistair Francis <Alistair.Francis@wdc.com>, alistair23@gmail.com
-Subject: [PATCH 1/3] target/riscv: Set the CPU resetvec directly
-Date: Wed, 14 Sep 2022 12:11:06 +0200
-Message-Id: <20220914101108.82571-2-alistair.francis@wdc.com>
+Subject: [PATCH 3/3] hw/riscv: opentitan: Expose the resetvec as a SoC property
+Date: Wed, 14 Sep 2022 12:11:08 +0200
+Message-Id: <20220914101108.82571-4-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20220914101108.82571-1-alistair.francis@wdc.com>
 References: <20220914101108.82571-1-alistair.francis@wdc.com>
@@ -79,112 +79,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2022 10:11:54 -0000
+X-List-Received-Date: Wed, 14 Sep 2022 10:11:56 -0000
 
-Instead of using our properties to set a config value which then might
-be used to set the resetvec (depending on your timing), let's instead
-just set the resetvec directly in the env struct.
+On the OpenTitan hardware the resetvec is fixed at the start of ROM. In
+QEMU we don't run the ROM code and instead just jump to the next stage.
+This means we need to be a little more flexible about what the resetvec
+is.
 
-This allows us to set the reset vec from the command line with:
-    -global driver=riscv.hart_array,property=resetvec,value=0x20000400
+This patch allows us to set the resetvec from the command line with
+something like this:
+    -global driver=riscv.lowrisc.ibex.soc,property=resetvec,value=0x20000400
+
+This way as the next stage changes we can update the resetvec.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.h     |  3 +--
- target/riscv/cpu.c     | 13 +++----------
- target/riscv/machine.c |  6 +++---
- 3 files changed, 7 insertions(+), 15 deletions(-)
+ include/hw/riscv/opentitan.h | 2 ++
+ hw/riscv/opentitan.c         | 8 +++++++-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 06751e1e3e..22344a620b 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -190,7 +190,7 @@ struct CPUArchState {
-     /* This contains QEMU specific information about the virt state. */
-     target_ulong virt;
-     target_ulong geilen;
--    target_ulong resetvec;
-+    uint64_t resetvec;
+diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
+index 26d960f288..6665cd5794 100644
+--- a/include/hw/riscv/opentitan.h
++++ b/include/hw/riscv/opentitan.h
+@@ -46,6 +46,8 @@ struct LowRISCIbexSoCState {
+     IbexTimerState timer;
+     IbexSPIHostState spi_host[OPENTITAN_NUM_SPI_HOSTS];
  
-     target_ulong mhartid;
-     /*
-@@ -474,7 +474,6 @@ struct RISCVCPUConfig {
-     bool pmp;
-     bool epmp;
-     bool debug;
--    uint64_t resetvec;
++    uint32_t resetvec;
++
+     MemoryRegion flash_mem;
+     MemoryRegion rom;
+     MemoryRegion flash_alias;
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index 45c92c9bbc..be7ff1eea0 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -142,7 +142,7 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+                             &error_abort);
+     object_property_set_int(OBJECT(&s->cpus), "num-harts", ms->smp.cpus,
+                             &error_abort);
+-    object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x20000400,
++    object_property_set_int(OBJECT(&s->cpus), "resetvec", s->resetvec,
+                             &error_abort);
+     sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
  
-     bool short_isa_string;
- };
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index aee14a239a..b29c88b9f0 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -228,13 +228,6 @@ static void set_vext_version(CPURISCVState *env, int vext_ver)
-     env->vext_ver = vext_ver;
+@@ -297,10 +297,16 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+         memmap[IBEX_DEV_PERI].base, memmap[IBEX_DEV_PERI].size);
  }
  
--static void set_resetvec(CPURISCVState *env, target_ulong resetvec)
--{
--#ifndef CONFIG_USER_ONLY
--    env->resetvec = resetvec;
--#endif
--}
--
- static void riscv_any_cpu_init(Object *obj)
++static Property lowrisc_ibex_soc_props[] = {
++    DEFINE_PROP_UINT32("resetvec", LowRISCIbexSoCState, resetvec, 0x20000400),
++    DEFINE_PROP_END_OF_LIST()
++};
++
+ static void lowrisc_ibex_soc_class_init(ObjectClass *oc, void *data)
  {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-@@ -336,7 +329,6 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+     DeviceClass *dc = DEVICE_CLASS(oc);
  
-     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
-     set_priv_version(env, PRIV_VERSION_1_10_0);
--    set_resetvec(env, DEFAULT_RSTVEC);
-     cpu->cfg.mmu = false;
- }
- #endif
-@@ -676,7 +668,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         riscv_set_feature(env, RISCV_FEATURE_DEBUG);
-     }
- 
--    set_resetvec(env, cpu->cfg.resetvec);
- 
- #ifndef CONFIG_USER_ONLY
-     if (cpu->cfg.ext_sstc) {
-@@ -1079,7 +1070,9 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
-     DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
- 
--    DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
-+#ifndef CONFIG_USER_ONLY
-+    DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVEC),
-+#endif
- 
-     DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
- 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 41098f6ad0..c4e6b3bba4 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -308,8 +308,8 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
- 
- const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
--    .version_id = 4,
--    .minimum_version_id = 4,
-+    .version_id = 5,
-+    .minimum_version_id = 5,
-     .post_load = riscv_cpu_post_load,
-     .fields = (VMStateField[]) {
-         VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
-@@ -331,7 +331,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         VMSTATE_UINT32(env.features, RISCVCPU),
-         VMSTATE_UINTTL(env.priv, RISCVCPU),
-         VMSTATE_UINTTL(env.virt, RISCVCPU),
--        VMSTATE_UINTTL(env.resetvec, RISCVCPU),
-+        VMSTATE_UINT64(env.resetvec, RISCVCPU),
-         VMSTATE_UINTTL(env.mhartid, RISCVCPU),
-         VMSTATE_UINT64(env.mstatus, RISCVCPU),
-         VMSTATE_UINT64(env.mip, RISCVCPU),
++    device_class_set_props(dc, lowrisc_ibex_soc_props);
+     dc->realize = lowrisc_ibex_soc_realize;
+     /* Reason: Uses serial_hds in realize function, thus can't be used twice */
+     dc->user_creatable = false;
 -- 
 2.37.2
 
