@@ -1,163 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oYtsW-0000OH-MP
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Sep 2022 14:46:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37932)
+	id 1oZ0Yx-0000nk-QA
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Sep 2022 21:54:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36826)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
- id 1oYtsU-0000J9-IR
- for qemu-riscv@nongnu.org; Thu, 15 Sep 2022 14:46:22 -0400
-Received: from esa.microchip.iphmx.com ([68.232.154.123]:53334)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1oZ0Yt-0000nA-EZ; Thu, 15 Sep 2022 21:54:36 -0400
+Received: from out30-56.freemail.mail.aliyun.com ([115.124.30.56]:48097)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
- id 1oYtsQ-0005Dj-6D
- for qemu-riscv@nongnu.org; Thu, 15 Sep 2022 14:46:21 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1663267578; x=1694803578;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=EBrre6ikUw/9vdLZ9y1d2VIBG5+IT7/EYx+sn3MeUqE=;
- b=Bfiuzeb3AV+Oi4HHkkxrSa2xRxM1cQUQivUBCI/2qn/oW3gFBzK8K5DL
- 8evqkiWwzENqjNaY1ev8LflVcSGoiDuRXObjmvwmjMtq9Z1RGaL4uQ1yl
- zqhMrKwY8LSR8B8sUttxBo03+NCC4GSH0e5LBG2HZ5/PHLzCkKe9ubkRp
- 2jdgpkNq0Ah876QcPcNN/nU83gN5NtFidsHasKLpkoVXWK+EIvZCJcDPi
- coB5fbTCTGOg05tmkacBitWduiQ6ply3fpyEdT1iMoVQDYuOPm6u6bZGJ
- McAbQDzGkkFPpaNNTGK9JYQi33HN/F8au/RyJmPoGRNFC+rbxSmwInmwd w==;
-X-IronPort-AV: E=Sophos;i="5.93,318,1654585200"; d="scan'208";a="177370092"
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256;
- 15 Sep 2022 11:45:49 -0700
-Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.12; Thu, 15 Sep 2022 11:45:49 -0700
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (10.10.215.89) by
- email.microchip.com (10.10.87.72) with Microsoft SMTP Server
- (version=TLS1_2, 
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.12 via Frontend
- Transport; Thu, 15 Sep 2022 11:45:49 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LYR5DGoVd4S59Rq21CrB7TcUuO19N/c5owTJ4OkEVjYv0s9JBOpxNdFGmyX9PPgMuEgHdIRMImKWPp0NeMnLdS17ULmO1armQLlKq/CGKLmucORg/d67jUks4nu0WrZT1Pkrkc8g07sgZgx8G9r98W4hxA8u/ielyTVWAfheURjziYvJFsXbvGy1QihD6KU8oOckIXLc6l1OTjOI0Ohlbw+a1V8qjjhMbEL2vsljefQmpkwjbJUkbhDbGHKiihNNwiz7t1Ezfs3nOSBcRkNBpHaTHpp010mBcPV0I1niI4ZPYooOXu5s2e8aa8rAGXpnK7VkcI7un3alJUgw+FT3Ng==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EBrre6ikUw/9vdLZ9y1d2VIBG5+IT7/EYx+sn3MeUqE=;
- b=EA1EO3HY3Cn+GVA9+xwtg65EmSb9P5GDHiZ2R0evBFItZySMkxFzSkZ5BztaBIL9Vu7+bnNXpKLBwyxI0wBK4qaMPJ3/VSh6zzVxXcUn2u4kbHSNYE5m0/AaGA+ye9NlSoKASxaGUfINUc+j4Iib6jxLXPtx3psmh+qrTCvwCIJrxLHnokWm2Ge8OeEVzcPN/JS2FZvIqBr/flHu4a4qjd2c6SMxHZvh2mZd70p4h6u4kw7vwxjihMoqYMdmps5JG+/aabkox3CjXDZyuT59WM1qt6sEJZjO5GVI28d2xQDhp1/qWH7i/qa2J5Xd1dV1K3SxvaK8BKvkS5+kfJESww==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microchip.com; dmarc=pass action=none
- header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=microchiptechnology.onmicrosoft.com;
- s=selector2-microchiptechnology-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EBrre6ikUw/9vdLZ9y1d2VIBG5+IT7/EYx+sn3MeUqE=;
- b=l9sci5Qizx18Yy+L0BWfO2C0efptAtfCW6pDX8BGNLL8WNuXLUhzKcEffX1jWdyeNi8giXKHO7RursqBiv9W1Ti776A8DZosNDRjTGc/vDat6RrMfiUeH0wpj4K4DZ5elV2BA2p+SUDEYwwiBUJuCzu+cEH9Qtcf/ojL3aLAhDQ=
-Received: from CO1PR11MB5154.namprd11.prod.outlook.com (2603:10b6:303:99::15)
- by BN9PR11MB5545.namprd11.prod.outlook.com (2603:10b6:408:102::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.23; Thu, 15 Sep
- 2022 18:45:47 +0000
-Received: from CO1PR11MB5154.namprd11.prod.outlook.com
- ([fe80::545a:72f5:1940:e009]) by CO1PR11MB5154.namprd11.prod.outlook.com
- ([fe80::545a:72f5:1940:e009%3]) with mapi id 15.20.5632.015; Thu, 15 Sep 2022
- 18:45:47 +0000
-From: <Conor.Dooley@microchip.com>
-To: <daniel.lezcano@linaro.org>, <tglx@linutronix.de>, <maz@kernel.org>,
- <palmer@dabbelt.com>
-CC: <robh+dt@kernel.org>, <krzysztof.kozlowski+dt@linaro.org>,
- <anup@brainfault.org>, <Conor.Dooley@microchip.com>, <guoren@kernel.org>,
- <sagar.kadam@sifive.com>, <jrtc27@jrtc27.com>, <aou@eecs.berkeley.edu>,
- <ajones@ventanamicro.com>, <linux-kernel@vger.kernel.org>,
- <devicetree@vger.kernel.org>, <linux-riscv@lists.infradead.org>,
- <qemu-riscv@nongnu.org>, <paul.walmsley@sifive.com>
-Subject: Re: [PATCH v4 0/4] Fix dt-validate issues on qemu dtbdumps due to
- dt-bindings
-Thread-Topic: [PATCH v4 0/4] Fix dt-validate issues on qemu dtbdumps due to
- dt-bindings
-Thread-Index: AQHYtx7ti7bi0aG880qkYhCwNAw2tK3g+H0A
-Date: Thu, 15 Sep 2022 18:45:47 +0000
-Message-ID: <9614efe9-d95e-fa0c-05fe-bac3fe62fa86@microchip.com>
-References: <20220823183319.3314940-1-mail@conchuod.ie>
-In-Reply-To: <20220823183319.3314940-1-mail@conchuod.ie>
-Accept-Language: en-IE, en-US
-Content-Language: en-IE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=microchip.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CO1PR11MB5154:EE_|BN9PR11MB5545:EE_
-x-ms-office365-filtering-correlation-id: 1b40aa68-1174-4818-7b9b-08da974a80f5
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: MPvvRbNG45zAK+gRxt7dGUHjpGOkn7pB+RO6ZLe3EzjOutiH3cbxVyw8vIxgMwgmG7GY/dm2H3MB0y2ca4GoeGb4rRUF3I2/VC4ESmcnjWS8CNAH+9byfHv3O4Dc8UTMtVLsFkXBqVx7Jzo2Mb9B91sQg4PRWZjf3ujSy5iAM2gzH+YltFK9A01CcHJO6LaNPXbqmdMKICW7gSalYCqUlgzmGLuS1clR9RwZ/QfwLcmg4+eONL2exlZyB7hkAyw4fkKCJYdpPC5o/dfd98tzpdP6bMVwTKRn+efwEtbYF9u86xtfDEVvvq15/EyafKyyiqA8+iWcIipKMUNc2UkZUq2zofNYkUipn3NgZbMSujcJjrJnvUIq88giPV2m3/di+yQMnd6FbLLvSpUlFigGQnI+T4ECzwDE9k+PUD8toLwqSWKptdKMHYdPAYK+yJ1YD95PPfmoBtt2mHogitJq51YIWQvlCsNygtuouvlNJTSgmKpwxFoQ5zV/cx5FH0LQKBhXz2cAUxjtpOPNw9r+ST4FSCnlqSIcqEu3BYDsVYdtx2PjW5wSxX+9B/uZ5KL6HSsg6TR4XMIuuYNXXlbwVJ6QhLUoRYfJQJ7RdUHg1o4sEzFIqPvqAEC3hdGWEQo24fcBsvCjV69wSLZ0qBTe44TT0o0XAvpAdSYoB/5at1PGespYlNknNj7To0ysVUIErHOm7PbmQ/pILr+t2zr9ZqXyFifb2EXqE59YZSwWF0ZMcgyFsn6fRozO2G1etHO+GZklfy4W62NWUjtE8zy25TEQfJ31GFw/Y5gjwSY543ap/BIAOj1oah+rsydlrXxiIwg8UOksWig0dKiK9X5ASx2kyrq3rBGqVYhcqoVLqADDa1DkKLeEjUX+zRQ52nFo3G/ZWBYGMPiOmfwHiTxrwQ==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CO1PR11MB5154.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(136003)(396003)(346002)(376002)(366004)(39860400002)(451199015)(54906003)(76116006)(110136005)(91956017)(66946007)(6486002)(66446008)(64756008)(122000001)(4326008)(86362001)(31696002)(8676002)(38100700002)(316002)(66476007)(66556008)(8936002)(53546011)(83380400001)(5660300002)(41300700001)(966005)(71200400001)(6506007)(478600001)(2616005)(186003)(26005)(38070700005)(6512007)(36756003)(31686004)(15650500001)(2906002)(7416002)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?U0Qva2p3dytQcW1xZHRaZTU2QnpXVlpwV1V4RmhmYmtIY3RDMHJoZFM3T2ox?=
- =?utf-8?B?aUVVRkNzajNpcDFSeXVLOXZnQ2g1bUVMZnpFQUNYYnBHYkFveVFuSll5WWFn?=
- =?utf-8?B?dUpVZDJlRXJ0OXdkaGpsNm9ycjhocHpHc09BN3JjOXluSGdkdVkyMmVtdXha?=
- =?utf-8?B?dFZoSlo0YzNwSmhUT3Qwa1Vmb2hXY21pTXBnTDJhWXgyRGRMaHZUWVh2MFlF?=
- =?utf-8?B?cXRLdGN3ajVTVm45bGE3U0J1WnBUUGJaWmNYL3JmY1BCNzR3MmxPUytzL1RF?=
- =?utf-8?B?S3BFMVg2cTJBRG8vUGlXcnovRU9uN1p1UzIybjBGVmtkZTdxRTVDT01wbDJV?=
- =?utf-8?B?NmNLd1FCejJhNmFHMUpYaFJIYXArMFdwWDFWdmhvK3h0ZkVVekRTZFpqczd2?=
- =?utf-8?B?Y2ZJbEFSSXg0NW40bjZzMGlNT0VHQkdyWCtZRVM2R1hqMkd3WnhQaGJQNTht?=
- =?utf-8?B?MU1ubFZhcHJER21EeDhiR2E1d1M4SFJSeDZxd0JlOXU5aUxLQ1YzMGZURXpn?=
- =?utf-8?B?ZytnWTNYQzl1aGtscmRNa0MvSzlISE9LN01jU0lUOGVCRUVIU1k4N1V0aDJI?=
- =?utf-8?B?am1uREV4S1JjQXJaaXMxYWxtcWtaVnQ1RFhxbUxaMGJ0eks2ZEVBcDBoRDg0?=
- =?utf-8?B?azRPTGNOVkZwSWMwK2phSUFSbXBDcmVUSkJyQXV2S2VVRXhWZHBSczh4blEz?=
- =?utf-8?B?d29sZG5jOEdUTWdvUkZxaGlPekI4VGR5b3ZQV1ZTTUtCa3pJbHFqNHpWalpI?=
- =?utf-8?B?eldhWUZ5bVpueUg2VkxDUDI3a0pQeUZ2eFBnU3JGMW9TNXFJaG1mbE51eGdi?=
- =?utf-8?B?ZGlBS3A4ejErVy9QZzR6bjFFNnZ3RWRjazFtN2hyZjV5ODNkd1hxYVdGWU1H?=
- =?utf-8?B?dFZTdnpHNWxFYnFDRE5EZjhmUTF1eG1QVVBLMExMNU0wdWVSZW80L0Urd0Nj?=
- =?utf-8?B?WVhIRi9iZ3ZMMEo2aTd6WWYzNFZLSGlINDRsOUV4V3E4Vkd6SU9HN2MrTEwr?=
- =?utf-8?B?cHJCYVlxaHJ2OUFMc2ZKSDM3czY0NjNGakh5MHY0RXoyd3JNR0NCeHR5alRm?=
- =?utf-8?B?d3FsMGtOL2N6c0JIZlJHcTBqbVMxNVN6YjVqSFhlYk4xc3ErUHBtOGRrd3ly?=
- =?utf-8?B?NTQ3ekkrR3E2NEF3ODJlc0N1QTV2VktMUmNJSExBL0tyR1VHQjBEcUQ1MUlm?=
- =?utf-8?B?dTgxM09iYlZWYUw1a2tDVzdZbDNELzJ3NnhCamZhK2JqSmNyT2poQWgyZjVX?=
- =?utf-8?B?MzBRRkR1T0ROZVJRV0Y1bFJyUDliOGQwdW9sTlNZWWl1NW1tb1VtcldJKzVF?=
- =?utf-8?B?MUNhUDk3cEpIWVlZMVNsNzRIUTJMNWp6SWtaV1VQRkk5SDJKZytYeU9qTTRP?=
- =?utf-8?B?RG9XMnRwSHhqUkp5VVkrM0tmSnlpcjEvNWFxbm1xWDhlUHdSTUpyeFBubnRK?=
- =?utf-8?B?UFZ5NkFxYkhsL3JlRW16RjJDY3ozeUxhZ1dsc0gzWldEdGdMNTl6WStKUjRm?=
- =?utf-8?B?ZFdKTXV1ZmxwSEhBc0Y1WFlzeUNrcVZWa3luWnF3SVFBd0RtMUlxaTNPaG1B?=
- =?utf-8?B?aW1mZnlhb0xNSDNWanMxYXpkYnQ1VTlJOWpmempoelRHWURmRzZ4QzU4ODZB?=
- =?utf-8?B?TjA4NWp5NjFXVk5memdYOXVIR0ZBTHJUV0pwUFZXazZ2RERzeEEzM1hEYTht?=
- =?utf-8?B?ellDOCtnZkhxUVlPRjl2dW8wdkNEK2ZyVXpZZkFOZnk5L2c5Q1Bicm9HUDBG?=
- =?utf-8?B?UDMrYTFUVVcrRmZVaXJ4bFVOd1VtbHZheVNDVUtUWHA4VjVJbWl4Smovb2k2?=
- =?utf-8?B?YzRsZWh3aVJYRmpNUkRHZ0xXa29ibVFvUjE1cElXbHBHODk2ZXZWNVJCdW9Q?=
- =?utf-8?B?bWQ3VGtXUFdQRkQ0cGowdDBCWEg5aWlJeXdBMWJXYTZRMlRsVXkxaGEybjYw?=
- =?utf-8?B?bWM4dUtGa2cyWFZ2eTNNajV4VGYwWkt6UUUzeTdocUg5Q0J1RWQzanhRcXRN?=
- =?utf-8?B?Y056dTJsc1NNcU1QVHZUNEVzKzFRUGZRSy8xNjA0NE4xdUFiN2dVeUtVeXFX?=
- =?utf-8?B?c21FU21aREFVa1A0b1hrTUNnSUNqOS9FSVZDZWo3ZmsvaFh0SnZqZnF3MzZM?=
- =?utf-8?B?VVNmQTI3djd3MXF0K2VLUGNGSU0zZzRGREtyVjZkTjNDL3JuckVpSEpiVlpt?=
- =?utf-8?B?dmc9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <A90C94B50077CA4787E8F88979106166@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1oZ0Yi-00024N-6A; Thu, 15 Sep 2022 21:54:27 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R841e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046050;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
+ TI=SMTPD_---0VPupd.C_1663293250; 
+Received: from 30.225.65.194(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VPupd.C_1663293250) by smtp.aliyun-inc.com;
+ Fri, 16 Sep 2022 09:54:11 +0800
+Message-ID: <ce34e972-aea6-dd10-6623-2630a1e40b67@linux.alibaba.com>
+Date: Fri, 16 Sep 2022 09:53:48 +0800
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5154.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1b40aa68-1174-4818-7b9b-08da974a80f5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Sep 2022 18:45:47.2823 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: jl30Vb05Z3Id1Qg6I/Sx8YweuZj0WiqDGka2kRHYT7fN1WE8jQdL7zNZodi/AwXjzRH9epvNJ7D6NNTJXZdcspDZKqiU35xMgIdvH7WLWTI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR11MB5545
-Received-SPF: pass client-ip=68.232.154.123;
- envelope-from=Conor.Dooley@microchip.com; helo=esa.microchip.iphmx.com
-X-Spam_score_int: -61
-X-Spam_score: -6.2
-X-Spam_bar: ------
-X-Spam_report: (-6.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.816,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+Subject: Re: [PATCH v2 1/8] target/riscv: debug: Determine the trigger type
+ from tdata1.type
+Content-Language: en-US
+To: Bin Meng <bmeng.cn@gmail.com>, qemu-devel@nongnu.org
+Cc: Frank Chang <frank.chang@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+References: <20220909134215.1843865-1-bmeng.cn@gmail.com>
+ <20220909134215.1843865-2-bmeng.cn@gmail.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20220909134215.1843865-2-bmeng.cn@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.30.56;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-56.freemail.mail.aliyun.com
+X-Spam_score_int: -116
+X-Spam_score: -11.7
+X-Spam_bar: -----------
+X-Spam_report: (-11.7 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-1.816, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -170,48 +57,416 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2022 18:46:22 -0000
+X-List-Received-Date: Fri, 16 Sep 2022 01:54:36 -0000
 
-T24gMjMvMDgvMjAyMiAxOTozMywgQ29ub3IgRG9vbGV5IHdyb3RlOg0KPiBGcm9tOiBDb25vciBE
-b29sZXkgPGNvbm9yLmRvb2xleUBtaWNyb2NoaXAuY29tPg0KPiANCj4gVGhlIGRldmljZSB0cmVl
-cyBwcm9kdWNlZCBhdXRvbWF0aWNhbGx5IGZvciB0aGUgdmlydCBhbmQgc3Bpa2UgbWFjaGluZXMN
-Cj4gZmFpbCBkdC12YWxpZGF0ZSBvbiBzZXZlcmFsIGdyb3VuZHMuIFNvbWUgb2YgdGhlc2UgbmVl
-ZCB0byBiZSBmaXhlZCBpbg0KPiB0aGUgbGludXgga2VybmVsJ3MgZHQtYmluZGluZ3MsIGJ1dCBv
-dGhlcnMgYXJlIGNhdXNlZCBieSBidWdzIGluIFFFTVUuDQo+IA0KPiBQYXRjaGVzIGJlZW4gc2Vu
-dCB0aGF0IGZpeCB0aGUgUUVNVSBpc3N1ZXMgWzBdLCBidXQgYSBjb3VwbGUgb2YgdGhlbQ0KPiBu
-ZWVkIHRvIGJlIGZpeGVkIGluIHRoZSBrZXJuZWwncyBkdC1iaW5kaW5ncy4gVGhlIGZpcnN0IHBh
-dGNoZXMgYWRkDQo+IGNvbXBhdGlibGVzIGZvciAicmlzY3Yse2NsaW50LHBsaWN9MCIgd2hpY2gg
-YXJlIHByZXNlbnQgaW4gZHJpdmVycyBhbmQNCj4gdGhlIGF1dG8gZ2VuZXJhdGVkIFFFTVUgZHRi
-cy4gVGhlIGZpbmFsIHBhdGNoIHNob3VsZCBiZSBpZ25vcmVkIGZvciBhbGwNCj4gc2VyaW91cyBw
-dXJwb3NlcyB1bmxlc3MgeW91IHdhbnQgdG8gd2FzaCB5b3VyIGV5ZXMgb3V0IGFmdGVyd2FyZHMs
-IGJ1dA0KPiBKSUMgdGhlIHZlcnNpb25lZCBleHRlbnNpb25zIGV2ZXIgY29tZSB1cCwgaXQncyB0
-aGVyZS4NCg0KQmVlbiBubyBtb3ZlbWVudCBoZXJlIGZvciBhIGZldyB3ZWVrcywgSSBhc3N1bWUg
-dGhpbmdzIGFyZSB3YWl0aW5nIGZvcg0KZWl0aGVyIEFja3MgZnJvbSBQYWxtZXIgb3IgZm9yIGhp
-bSB0byB0YWtlIHRoZSBwYXRjaGVzIGRpcmVjdGx5Pw0KDQpUaGFua3MsDQpDb25vci4NCg0KPiAN
-Cj4gVGhhbmtzIHRvIFJvYiBIZXJyaW5nIGZvciByZXBvcnRpbmcgdGhlc2UgaXNzdWVzIFsxXSwN
-Cj4gQ29ub3IuDQo+IA0KPiBUbyByZXByb2R1Y2UgdGhlIGVycm9yczoNCj4gLi9idWlsZC9xZW11
-LXN5c3RlbS1yaXNjdjY0IC1ub2dyYXBoaWMgLW1hY2hpbmUgdmlydCxkdW1wZHRiPXFlbXUuZHRi
-DQo+IGR0LXZhbGlkYXRlIC1wIC9wYXRoL3RvL2xpbnV4L2tlcm5lbC9Eb2N1bWVudGF0aW9uL2Rl
-dmljZXRyZWUvYmluZGluZ3MvcHJvY2Vzc2VkLXNjaGVtYS5qc29uIHFlbXUuZHRiDQo+IChUaGUg
-cHJvY2Vzc2VkIHNjaGVtYSBuZWVkcyB0byBiZSBnZW5lcmF0ZWQgZmlyc3QpDQo+IA0KPiAwIC0g
-aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtcmlzY3YvMjAyMjA4MTAxODQ2MTIuMTU3MzE3
-LTEtbWFpbEBjb25jaHVvZC5pZS8NCj4gMSAtIGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2xpbnV4
-LXJpc2N2LzIwMjIwODAzMTcwNTUyLkdBMjI1MDI2Ni1yb2JoQGtlcm5lbC5vcmcvDQo+IA0KPiBD
-aGFuZ2VzIHNpbmNlIHYzOg0KPiAtIGRyb3BwZWQgdGhlIGNoYXJzZXQgcmVzdHJpY3Rpb25zIGZv
-ciBzdGFuZGFyZCBtdWx0aWxldHRlciBpc2EgZXh0ZW5zaW9ucw0KPiANCj4gQ2hhbmdlcyBzaW5j
-ZSB2MjoNCj4gLSByZW1vdmVkIHRoZSBleHRyYSBwYXRjaGVzIGZyb20gdGhlIGRpcmVjdG9yeQ0K
-PiANCj4gQ2hhbmdlcyBzaW5jZSB2MToNCj4gLSBkcm9wIHRoZSAibGVnYWN5IHN5c3RlbXMiIGJp
-dCBmcm9tIHRoZSBiaW5kaW5nIGRlc2NyaXB0aW9ucw0KPiAtIGNvbnZlcnQgdG8gYSByZWdleCBm
-b3IgdGhlIGlzYSBzdHJpbmcNCj4gDQo+IENvbm9yIERvb2xleSAoNCk6DQo+ICAgZHQtYmluZGlu
-Z3M6IHRpbWVyOiBzaWZpdmUsY2xpbnQ6IGFkZCBsZWdhY3kgcmlzY3YgY29tcGF0aWJsZQ0KPiAg
-IGR0LWJpbmRpbmdzOiBpbnRlcnJ1cHQtY29udHJvbGxlcjogc2lmaXZlLHBsaWM6IGFkZCBsZWdh
-Y3kgcmlzY3YNCj4gICAgIGNvbXBhdGlibGUNCj4gICBkdC1iaW5kaW5nczogcmlzY3Y6IGFkZCBu
-ZXcgcmlzY3YsaXNhIHN0cmluZ3MgZm9yIGVtdWxhdG9ycw0KPiAgIGR0LWJpbmRpbmdzOiByaXNj
-djogaXNhIHN0cmluZyBib251cyBjb250ZW50DQo+IA0KPiAgLi4uL3NpZml2ZSxwbGljLTEuMC4w
-LnlhbWwgICAgICAgICAgICAgICAgICAgICB8ICA1ICsrKysrDQo+ICAuLi4vZGV2aWNldHJlZS9i
-aW5kaW5ncy9yaXNjdi9jcHVzLnlhbWwgICAgICAgIHwgIDkgKysrKysrLS0tDQo+ICAuLi4vYmlu
-ZGluZ3MvdGltZXIvc2lmaXZlLGNsaW50LnlhbWwgICAgICAgICAgIHwgMTggKysrKysrKysrKysr
-LS0tLS0tDQo+ICAzIGZpbGVzIGNoYW5nZWQsIDIzIGluc2VydGlvbnMoKyksIDkgZGVsZXRpb25z
-KC0pDQo+IA0KPiANCj4gYmFzZS1jb21taXQ6IDU2ODAzNWIwMWNmYjEwN2FmOGQyZTRiZDJmYjlh
-ZWEyMmNmNWI4NjgNCg==
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+
+Zhiwei
+
+On 2022/9/9 21:42, Bin Meng wrote:
+
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> Current RISC-V debug assumes that only type 2 trigger is supported.
+> To allow more types of triggers to be supported in the future
+> (e.g. type 6 trigger, which is similar to type 2 trigger with additional
+>   functionality), we should determine the trigger type from tdata1.type.
+>
+> RV_MAX_TRIGGERS is also introduced in replacement of TRIGGER_TYPE2_NUM.
+>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> [bmeng: fixed MXL_RV128 case, and moved macros to the following patch]
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+>
+> ---
+>
+> Changes in v2:
+> - fixed MXL_RV128 case
+> - moved macros to patch#2
+> - added log guest errors for TRIGGER_TYPE_{NO_EXIST,UNAVAIL}
+>
+>   target/riscv/cpu.h     |   2 +-
+>   target/riscv/debug.h   |  13 +--
+>   target/riscv/csr.c     |   2 +-
+>   target/riscv/debug.c   | 188 +++++++++++++++++++++++++++++------------
+>   target/riscv/machine.c |   2 +-
+>   5 files changed, 140 insertions(+), 67 deletions(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 06751e1e3e..4d82a3250b 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -324,7 +324,7 @@ struct CPUArchState {
+>   
+>       /* trigger module */
+>       target_ulong trigger_cur;
+> -    type2_trigger_t type2_trig[TRIGGER_TYPE2_NUM];
+> +    type2_trigger_t type2_trig[RV_MAX_TRIGGERS];
+>   
+>       /* machine specific rdtime callback */
+>       uint64_t (*rdtime_fn)(void *);
+> diff --git a/target/riscv/debug.h b/target/riscv/debug.h
+> index 27b9cac6b4..72e4edcd8c 100644
+> --- a/target/riscv/debug.h
+> +++ b/target/riscv/debug.h
+> @@ -22,13 +22,7 @@
+>   #ifndef RISCV_DEBUG_H
+>   #define RISCV_DEBUG_H
+>   
+> -/* trigger indexes implemented */
+> -enum {
+> -    TRIGGER_TYPE2_IDX_0 = 0,
+> -    TRIGGER_TYPE2_IDX_1,
+> -    TRIGGER_TYPE2_NUM,
+> -    TRIGGER_NUM = TRIGGER_TYPE2_NUM
+> -};
+> +#define RV_MAX_TRIGGERS         2
+>   
+>   /* register index of tdata CSRs */
+>   enum {
+> @@ -46,7 +40,8 @@ typedef enum {
+>       TRIGGER_TYPE_EXCP = 5,          /* exception trigger */
+>       TRIGGER_TYPE_AD_MATCH6 = 6,     /* new address/data match trigger */
+>       TRIGGER_TYPE_EXT_SRC = 7,       /* external source trigger */
+> -    TRIGGER_TYPE_UNAVAIL = 15       /* trigger exists, but unavailable */
+> +    TRIGGER_TYPE_UNAVAIL = 15,      /* trigger exists, but unavailable */
+> +    TRIGGER_TYPE_NUM
+>   } trigger_type_t;
+>   
+>   typedef struct {
+> @@ -56,7 +51,7 @@ typedef struct {
+>       struct CPUWatchpoint *wp;
+>   } type2_trigger_t;
+>   
+> -/* tdata field masks */
+> +/* tdata1 field masks */
+>   
+>   #define RV32_TYPE(t)    ((uint32_t)(t) << 28)
+>   #define RV32_TYPE_MASK  (0xf << 28)
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index b96db1b62b..3d0d8e0340 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -3065,7 +3065,7 @@ static RISCVException read_tdata(CPURISCVState *env, int csrno,
+>                                    target_ulong *val)
+>   {
+>       /* return 0 in tdata1 to end the trigger enumeration */
+> -    if (env->trigger_cur >= TRIGGER_NUM && csrno == CSR_TDATA1) {
+> +    if (env->trigger_cur >= RV_MAX_TRIGGERS && csrno == CSR_TDATA1) {
+>           *val = 0;
+>           return RISCV_EXCP_NONE;
+>       }
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index fc6e13222f..9dd468753a 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -52,8 +52,15 @@
+>   /* tdata availability of a trigger */
+>   typedef bool tdata_avail[TDATA_NUM];
+>   
+> -static tdata_avail tdata_mapping[TRIGGER_NUM] = {
+> -    [TRIGGER_TYPE2_IDX_0 ... TRIGGER_TYPE2_IDX_1] = { true, true, false },
+> +static tdata_avail tdata_mapping[TRIGGER_TYPE_NUM] = {
+> +    [TRIGGER_TYPE_NO_EXIST] = { false, false, false },
+> +    [TRIGGER_TYPE_AD_MATCH] = { true, true, true },
+> +    [TRIGGER_TYPE_INST_CNT] = { true, false, true },
+> +    [TRIGGER_TYPE_INT] = { true, true, true },
+> +    [TRIGGER_TYPE_EXCP] = { true, true, true },
+> +    [TRIGGER_TYPE_AD_MATCH6] = { true, true, true },
+> +    [TRIGGER_TYPE_EXT_SRC] = { true, false, false },
+> +    [TRIGGER_TYPE_UNAVAIL] = { true, true, true }
+>   };
+>   
+>   /* only breakpoint size 1/2/4/8 supported */
+> @@ -67,6 +74,27 @@ static int access_size[SIZE_NUM] = {
+>       [6 ... 15] = -1,
+>   };
+>   
+> +static inline target_ulong extract_trigger_type(CPURISCVState *env,
+> +                                                target_ulong tdata1)
+> +{
+> +    switch (riscv_cpu_mxl(env)) {
+> +    case MXL_RV32:
+> +        return extract32(tdata1, 28, 4);
+> +    case MXL_RV64:
+> +    case MXL_RV128:
+> +        return extract64(tdata1, 60, 4);
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +}
+> +
+> +static inline target_ulong get_trigger_type(CPURISCVState *env,
+> +                                            target_ulong trigger_index)
+> +{
+> +    target_ulong tdata1 = env->type2_trig[trigger_index].mcontrol;
+> +    return extract_trigger_type(env, tdata1);
+> +}
+> +
+>   static inline target_ulong trigger_type(CPURISCVState *env,
+>                                           trigger_type_t type)
+>   {
+> @@ -89,15 +117,17 @@ static inline target_ulong trigger_type(CPURISCVState *env,
+>   
+>   bool tdata_available(CPURISCVState *env, int tdata_index)
+>   {
+> +    int trigger_type = get_trigger_type(env, env->trigger_cur);
+> +
+>       if (unlikely(tdata_index >= TDATA_NUM)) {
+>           return false;
+>       }
+>   
+> -    if (unlikely(env->trigger_cur >= TRIGGER_NUM)) {
+> +    if (unlikely(env->trigger_cur >= RV_MAX_TRIGGERS)) {
+>           return false;
+>       }
+>   
+> -    return tdata_mapping[env->trigger_cur][tdata_index];
+> +    return tdata_mapping[trigger_type][tdata_index];
+>   }
+>   
+>   target_ulong tselect_csr_read(CPURISCVState *env)
+> @@ -137,6 +167,7 @@ static target_ulong tdata1_validate(CPURISCVState *env, target_ulong val,
+>           qemu_log_mask(LOG_GUEST_ERROR,
+>                         "ignoring type write to tdata1 register\n");
+>       }
+> +
+>       if (dmode != 0) {
+>           qemu_log_mask(LOG_UNIMP, "debug mode is not supported\n");
+>       }
+> @@ -261,9 +292,8 @@ static void type2_breakpoint_remove(CPURISCVState *env, target_ulong index)
+>   }
+>   
+>   static target_ulong type2_reg_read(CPURISCVState *env,
+> -                                   target_ulong trigger_index, int tdata_index)
+> +                                   target_ulong index, int tdata_index)
+>   {
+> -    uint32_t index = trigger_index - TRIGGER_TYPE2_IDX_0;
+>       target_ulong tdata;
+>   
+>       switch (tdata_index) {
+> @@ -280,10 +310,9 @@ static target_ulong type2_reg_read(CPURISCVState *env,
+>       return tdata;
+>   }
+>   
+> -static void type2_reg_write(CPURISCVState *env, target_ulong trigger_index,
+> +static void type2_reg_write(CPURISCVState *env, target_ulong index,
+>                               int tdata_index, target_ulong val)
+>   {
+> -    uint32_t index = trigger_index - TRIGGER_TYPE2_IDX_0;
+>       target_ulong new_val;
+>   
+>       switch (tdata_index) {
+> @@ -309,35 +338,64 @@ static void type2_reg_write(CPURISCVState *env, target_ulong trigger_index,
+>       return;
+>   }
+>   
+> -typedef target_ulong (*tdata_read_func)(CPURISCVState *env,
+> -                                        target_ulong trigger_index,
+> -                                        int tdata_index);
+> -
+> -static tdata_read_func trigger_read_funcs[TRIGGER_NUM] = {
+> -    [TRIGGER_TYPE2_IDX_0 ... TRIGGER_TYPE2_IDX_1] = type2_reg_read,
+> -};
+> -
+> -typedef void (*tdata_write_func)(CPURISCVState *env,
+> -                                 target_ulong trigger_index,
+> -                                 int tdata_index,
+> -                                 target_ulong val);
+> -
+> -static tdata_write_func trigger_write_funcs[TRIGGER_NUM] = {
+> -    [TRIGGER_TYPE2_IDX_0 ... TRIGGER_TYPE2_IDX_1] = type2_reg_write,
+> -};
+> -
+>   target_ulong tdata_csr_read(CPURISCVState *env, int tdata_index)
+>   {
+> -    tdata_read_func read_func = trigger_read_funcs[env->trigger_cur];
+> +    int trigger_type = get_trigger_type(env, env->trigger_cur);
+> +
+> +    switch (trigger_type) {
+> +    case TRIGGER_TYPE_AD_MATCH:
+> +        return type2_reg_read(env, env->trigger_cur, tdata_index);
+> +        break;
+> +    case TRIGGER_TYPE_INST_CNT:
+> +    case TRIGGER_TYPE_INT:
+> +    case TRIGGER_TYPE_EXCP:
+> +    case TRIGGER_TYPE_AD_MATCH6:
+> +    case TRIGGER_TYPE_EXT_SRC:
+> +        qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n",
+> +                      trigger_type);
+> +        break;
+> +    case TRIGGER_TYPE_NO_EXIST:
+> +    case TRIGGER_TYPE_UNAVAIL:
+> +        qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exit\n",
+> +                      trigger_type);
+> +        break;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+>   
+> -    return read_func(env, env->trigger_cur, tdata_index);
+> +    return 0;
+>   }
+>   
+>   void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
+>   {
+> -    tdata_write_func write_func = trigger_write_funcs[env->trigger_cur];
+> +    int trigger_type;
+>   
+> -    return write_func(env, env->trigger_cur, tdata_index, val);
+> +    if (tdata_index == TDATA1) {
+> +        trigger_type = extract_trigger_type(env, val);
+> +    } else {
+> +        trigger_type = get_trigger_type(env, env->trigger_cur);
+> +    }
+> +
+> +    switch (trigger_type) {
+> +    case TRIGGER_TYPE_AD_MATCH:
+> +        type2_reg_write(env, env->trigger_cur, tdata_index, val);
+> +        break;
+> +    case TRIGGER_TYPE_INST_CNT:
+> +    case TRIGGER_TYPE_INT:
+> +    case TRIGGER_TYPE_EXCP:
+> +    case TRIGGER_TYPE_AD_MATCH6:
+> +    case TRIGGER_TYPE_EXT_SRC:
+> +        qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n",
+> +                      trigger_type);
+> +        break;
+> +    case TRIGGER_TYPE_NO_EXIST:
+> +    case TRIGGER_TYPE_UNAVAIL:
+> +        qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exit\n",
+> +                      trigger_type);
+> +        break;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+>   }
+>   
+>   void riscv_cpu_debug_excp_handler(CPUState *cs)
+> @@ -364,18 +422,28 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+>       CPUBreakpoint *bp;
+>       target_ulong ctrl;
+>       target_ulong pc;
+> +    int trigger_type;
+>       int i;
+>   
+>       QTAILQ_FOREACH(bp, &cs->breakpoints, entry) {
+> -        for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
+> -            ctrl = env->type2_trig[i].mcontrol;
+> -            pc = env->type2_trig[i].maddress;
+> -
+> -            if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
+> -                /* check U/S/M bit against current privilege level */
+> -                if ((ctrl >> 3) & BIT(env->priv)) {
+> -                    return true;
+> +        for (i = 0; i < RV_MAX_TRIGGERS; i++) {
+> +            trigger_type = get_trigger_type(env, i);
+> +
+> +            switch (trigger_type) {
+> +            case TRIGGER_TYPE_AD_MATCH:
+> +                ctrl = env->type2_trig[i].mcontrol;
+> +                pc = env->type2_trig[i].maddress;
+> +
+> +                if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
+> +                    /* check U/S/M bit against current privilege level */
+> +                    if ((ctrl >> 3) & BIT(env->priv)) {
+> +                        return true;
+> +                    }
+>                   }
+> +                break;
+> +            default:
+> +                /* other trigger types are not supported or irrelevant */
+> +                break;
+>               }
+>           }
+>       }
+> @@ -389,26 +457,36 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
+>       CPURISCVState *env = &cpu->env;
+>       target_ulong ctrl;
+>       target_ulong addr;
+> +    int trigger_type;
+>       int flags;
+>       int i;
+>   
+> -    for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
+> -        ctrl = env->type2_trig[i].mcontrol;
+> -        addr = env->type2_trig[i].maddress;
+> -        flags = 0;
+> +    for (i = 0; i < RV_MAX_TRIGGERS; i++) {
+> +        trigger_type = get_trigger_type(env, i);
+>   
+> -        if (ctrl & TYPE2_LOAD) {
+> -            flags |= BP_MEM_READ;
+> -        }
+> -        if (ctrl & TYPE2_STORE) {
+> -            flags |= BP_MEM_WRITE;
+> -        }
+> +        switch (trigger_type) {
+> +        case TRIGGER_TYPE_AD_MATCH:
+> +            ctrl = env->type2_trig[i].mcontrol;
+> +            addr = env->type2_trig[i].maddress;
+> +            flags = 0;
+>   
+> -        if ((wp->flags & flags) && (wp->vaddr == addr)) {
+> -            /* check U/S/M bit against current privilege level */
+> -            if ((ctrl >> 3) & BIT(env->priv)) {
+> -                return true;
+> +            if (ctrl & TYPE2_LOAD) {
+> +                flags |= BP_MEM_READ;
+> +            }
+> +            if (ctrl & TYPE2_STORE) {
+> +                flags |= BP_MEM_WRITE;
+> +            }
+> +
+> +            if ((wp->flags & flags) && (wp->vaddr == addr)) {
+> +                /* check U/S/M bit against current privilege level */
+> +                if ((ctrl >> 3) & BIT(env->priv)) {
+> +                    return true;
+> +                }
+>               }
+> +            break;
+> +        default:
+> +            /* other trigger types are not supported */
+> +            break;
+>           }
+>       }
+>   
+> @@ -417,11 +495,11 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
+>   
+>   void riscv_trigger_init(CPURISCVState *env)
+>   {
+> -    target_ulong type2 = trigger_type(env, TRIGGER_TYPE_AD_MATCH);
+> +    target_ulong tdata1 = trigger_type(env, TRIGGER_TYPE_AD_MATCH);
+>       int i;
+>   
+> -    /* type 2 triggers */
+> -    for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
+> +    /* init to type 2 triggers */
+> +    for (i = 0; i < RV_MAX_TRIGGERS; i++) {
+>           /*
+>            * type = TRIGGER_TYPE_AD_MATCH
+>            * dmode = 0 (both debug and M-mode can write tdata)
+> @@ -435,7 +513,7 @@ void riscv_trigger_init(CPURISCVState *env)
+>            * chain = 0 (unimplemented, always 0)
+>            * match = 0 (always 0, when any compare value equals tdata2)
+>            */
+> -        env->type2_trig[i].mcontrol = type2;
+> +        env->type2_trig[i].mcontrol = tdata1;
+>           env->type2_trig[i].maddress = 0;
+>           env->type2_trig[i].bp = NULL;
+>           env->type2_trig[i].wp = NULL;
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 41098f6ad0..b8173394a2 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -247,7 +247,7 @@ static const VMStateDescription vmstate_debug = {
+>       .needed = debug_needed,
+>       .fields = (VMStateField[]) {
+>           VMSTATE_UINTTL(env.trigger_cur, RISCVCPU),
+> -        VMSTATE_STRUCT_ARRAY(env.type2_trig, RISCVCPU, TRIGGER_TYPE2_NUM,
+> +        VMSTATE_STRUCT_ARRAY(env.type2_trig, RISCVCPU, RV_MAX_TRIGGERS,
+>                                0, vmstate_debug_type2, type2_trigger_t),
+>           VMSTATE_END_OF_LIST()
+>       }
 
