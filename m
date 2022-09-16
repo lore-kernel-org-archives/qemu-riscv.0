@@ -1,49 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oZ1Jy-0004O7-Hn
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Sep 2022 22:43:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42822)
+	id 1oZ1P2-0007r1-Q5
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Sep 2022 22:48:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40600)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1oZ1Jw-0004K8-NJ; Thu, 15 Sep 2022 22:43:12 -0400
-Received: from out30-57.freemail.mail.aliyun.com ([115.124.30.57]:59087)
+ id 1oZ1P0-0007qZ-BX; Thu, 15 Sep 2022 22:48:26 -0400
+Received: from out30-56.freemail.mail.aliyun.com ([115.124.30.56]:48985)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1oZ1Jp-0006aR-6Q; Thu, 15 Sep 2022 22:43:07 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0VPv.yvf_1663296179; 
+ id 1oZ1Ot-0008Is-CB; Thu, 15 Sep 2022 22:48:22 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
+ TI=SMTPD_---0VPv8u7._1663296492; 
 Received: from 30.225.65.194(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VPv.yvf_1663296179) by smtp.aliyun-inc.com;
- Fri, 16 Sep 2022 10:43:00 +0800
-Message-ID: <3517bff5-db12-ec2f-80f4-58056983e4b4@linux.alibaba.com>
-Date: Fri, 16 Sep 2022 10:42:37 +0800
+ fp:SMTPD_---0VPv8u7._1663296492) by smtp.aliyun-inc.com;
+ Fri, 16 Sep 2022 10:48:13 +0800
+Message-ID: <d836ebee-b0e0-789c-5e0b-a4f2a14a2fe8@linux.alibaba.com>
+Date: Fri, 16 Sep 2022 10:47:50 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.2.2
-Subject: Re: [PATCH v2 1/8] target/riscv: debug: Determine the trigger type
- from tdata1.type
+Subject: Re: [PATCH 02/11] RISC-V: Adding T-Head CMO instructions
 Content-Language: en-US
-To: Bin Meng <bmeng.cn@gmail.com>, qemu-devel@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
-References: <20220909134215.1843865-1-bmeng.cn@gmail.com>
- <20220909134215.1843865-2-bmeng.cn@gmail.com>
+To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, =?UTF-8?Q?Heiko_St=c3=bcbner?=
+ <heiko.stuebner@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Nelson Chu <nelson@rivosinc.com>, Kito Cheng <kito.cheng@sifive.com>,
+ Cooper Qu <cooper.qu@linux.alibaba.com>,
+ Lifang Xia <lifang_xia@linux.alibaba.com>,
+ Yunhai Shang <yunhai@linux.alibaba.com>
+References: <20220906122243.1243354-1-christoph.muellner@vrull.eu>
+ <20220906122243.1243354-3-christoph.muellner@vrull.eu>
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20220909134215.1843865-2-bmeng.cn@gmail.com>
+In-Reply-To: <20220906122243.1243354-3-christoph.muellner@vrull.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.57;
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.56;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-57.freemail.mail.aliyun.com
+ helo=out30-56.freemail.mail.aliyun.com
 X-Spam_score_int: -116
 X-Spam_score: -11.7
 X-Spam_bar: -----------
 X-Spam_report: (-11.7 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-1.816, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ NICE_REPLY_A=-1.816, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
  USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -57,422 +61,245 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2022 02:43:13 -0000
+X-List-Received-Date: Fri, 16 Sep 2022 02:48:27 -0000
 
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-On 2022/9/9 21:42, Bin Meng wrote:
-> From: Frank Chang <frank.chang@sifive.com>
+Zhiwei
+
+On 2022/9/6 20:22, Christoph Muellner wrote:
+> From: Christoph Müllner <christoph.muellner@vrull.eu>
 >
-> Current RISC-V debug assumes that only type 2 trigger is supported.
-> To allow more types of triggers to be supported in the future
-> (e.g. type 6 trigger, which is similar to type 2 trigger with additional
->   functionality), we should determine the trigger type from tdata1.type.
+> This patch adds support for the T-Head CMO instructions.
+> To avoid interfering with standard extensions, decoder and translation
+> are in its own T-Head specific files.
+> Future patches should be able to easily add additional T-Head extesions.
 >
-> RV_MAX_TRIGGERS is also introduced in replacement of TRIGGER_TYPE2_NUM.
+> The implementation does not have much functionality (besides accepting
+> the instructions and not qualifying them as illegal instructions if
+> the hart executes in the required privilege level for the instruction),
+> as QEMU does not model CPU caches and instructions don't have any
+> exception behaviour (at least not documented).
 >
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> [bmeng: fixed MXL_RV128 case, and moved macros to the following patch]
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> The documentation shows, that the instructions are gated by
+> mxstatus.theadisaee and mxstatus.ucme. However, since these
+> settings are not changed by the upstream Linux kernel,
+> we simply enable the instructions in all modes.
 >
+> Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 > ---
+>   target/riscv/cpu.c                         |  1 +
+>   target/riscv/cpu.h                         |  1 +
+>   target/riscv/insn_trans/trans_xthead.c.inc | 66 ++++++++++++++++++++++
+>   target/riscv/meson.build                   |  1 +
+>   target/riscv/translate.c                   | 11 +++-
+>   target/riscv/xtheadcmo.decode              | 43 ++++++++++++++
+>   6 files changed, 120 insertions(+), 3 deletions(-)
+>   create mode 100644 target/riscv/insn_trans/trans_xthead.c.inc
+>   create mode 100644 target/riscv/xtheadcmo.decode
 >
-> Changes in v2:
-> - fixed MXL_RV128 case
-> - moved macros to patch#2
-> - added log guest errors for TRIGGER_TYPE_{NO_EXIST,UNAVAIL}
->
->   target/riscv/cpu.h     |   2 +-
->   target/riscv/debug.h   |  13 +--
->   target/riscv/csr.c     |   2 +-
->   target/riscv/debug.c   | 188 +++++++++++++++++++++++++++++------------
->   target/riscv/machine.c |   2 +-
->   5 files changed, 140 insertions(+), 67 deletions(-)
->
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index ac6f82ebd0..7718ab0478 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -920,6 +920,7 @@ static Property riscv_cpu_extensions[] = {
+>       DEFINE_PROP_BOOL("zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
+>   
+>       /* Vendor-specific custom extensions */
+> +    DEFINE_PROP_BOOL("xtheadcmo", RISCVCPU, cfg.ext_xtheadcmo, false),
+>       DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
+>   
+>       /* These are experimental so mark with 'x-' */
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 06751e1e3e..4d82a3250b 100644
+> index 5c7acc055a..b7ab53b7b8 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -324,7 +324,7 @@ struct CPUArchState {
+> @@ -440,6 +440,7 @@ struct RISCVCPUConfig {
+>       uint64_t mimpid;
 >   
->       /* trigger module */
->       target_ulong trigger_cur;
-> -    type2_trigger_t type2_trig[TRIGGER_TYPE2_NUM];
-> +    type2_trigger_t type2_trig[RV_MAX_TRIGGERS];
+>       /* Vendor-specific custom extensions */
+> +    bool ext_xtheadcmo;
+>       bool ext_XVentanaCondOps;
 >   
->       /* machine specific rdtime callback */
->       uint64_t (*rdtime_fn)(void *);
-> diff --git a/target/riscv/debug.h b/target/riscv/debug.h
-> index 27b9cac6b4..72e4edcd8c 100644
-> --- a/target/riscv/debug.h
-> +++ b/target/riscv/debug.h
-> @@ -22,13 +22,7 @@
->   #ifndef RISCV_DEBUG_H
->   #define RISCV_DEBUG_H
->   
-> -/* trigger indexes implemented */
-> -enum {
-> -    TRIGGER_TYPE2_IDX_0 = 0,
-> -    TRIGGER_TYPE2_IDX_1,
-> -    TRIGGER_TYPE2_NUM,
-> -    TRIGGER_NUM = TRIGGER_TYPE2_NUM
-> -};
-> +#define RV_MAX_TRIGGERS         2
->   
->   /* register index of tdata CSRs */
->   enum {
-> @@ -46,7 +40,8 @@ typedef enum {
->       TRIGGER_TYPE_EXCP = 5,          /* exception trigger */
->       TRIGGER_TYPE_AD_MATCH6 = 6,     /* new address/data match trigger */
->       TRIGGER_TYPE_EXT_SRC = 7,       /* external source trigger */
-> -    TRIGGER_TYPE_UNAVAIL = 15       /* trigger exists, but unavailable */
-> +    TRIGGER_TYPE_UNAVAIL = 15,      /* trigger exists, but unavailable */
-> +    TRIGGER_TYPE_NUM
->   } trigger_type_t;
->   
->   typedef struct {
-> @@ -56,7 +51,7 @@ typedef struct {
->       struct CPUWatchpoint *wp;
->   } type2_trigger_t;
->   
-> -/* tdata field masks */
-> +/* tdata1 field masks */
->   
->   #define RV32_TYPE(t)    ((uint32_t)(t) << 28)
->   #define RV32_TYPE_MASK  (0xf << 28)
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index b96db1b62b..3d0d8e0340 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3065,7 +3065,7 @@ static RISCVException read_tdata(CPURISCVState *env, int csrno,
->                                    target_ulong *val)
->   {
->       /* return 0 in tdata1 to end the trigger enumeration */
-> -    if (env->trigger_cur >= TRIGGER_NUM && csrno == CSR_TDATA1) {
-> +    if (env->trigger_cur >= RV_MAX_TRIGGERS && csrno == CSR_TDATA1) {
->           *val = 0;
->           return RISCV_EXCP_NONE;
->       }
-> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index fc6e13222f..9dd468753a 100644
-> --- a/target/riscv/debug.c
-> +++ b/target/riscv/debug.c
-> @@ -52,8 +52,15 @@
->   /* tdata availability of a trigger */
->   typedef bool tdata_avail[TDATA_NUM];
->   
-> -static tdata_avail tdata_mapping[TRIGGER_NUM] = {
-> -    [TRIGGER_TYPE2_IDX_0 ... TRIGGER_TYPE2_IDX_1] = { true, true, false },
-> +static tdata_avail tdata_mapping[TRIGGER_TYPE_NUM] = {
-> +    [TRIGGER_TYPE_NO_EXIST] = { false, false, false },
-> +    [TRIGGER_TYPE_AD_MATCH] = { true, true, true },
-> +    [TRIGGER_TYPE_INST_CNT] = { true, false, true },
-> +    [TRIGGER_TYPE_INT] = { true, true, true },
-> +    [TRIGGER_TYPE_EXCP] = { true, true, true },
-> +    [TRIGGER_TYPE_AD_MATCH6] = { true, true, true },
-> +    [TRIGGER_TYPE_EXT_SRC] = { true, false, false },
-> +    [TRIGGER_TYPE_UNAVAIL] = { true, true, true }
->   };
->   
->   /* only breakpoint size 1/2/4/8 supported */
-> @@ -67,6 +74,27 @@ static int access_size[SIZE_NUM] = {
->       [6 ... 15] = -1,
->   };
->   
-> +static inline target_ulong extract_trigger_type(CPURISCVState *env,
-> +                                                target_ulong tdata1)
-> +{
-> +    switch (riscv_cpu_mxl(env)) {
-> +    case MXL_RV32:
-> +        return extract32(tdata1, 28, 4);
-> +    case MXL_RV64:
-> +    case MXL_RV128:
-> +        return extract64(tdata1, 60, 4);
-> +    default:
-> +        g_assert_not_reached();
-> +    }
+>       uint8_t pmu_num;
+> diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
+> new file mode 100644
+> index 0000000000..1b1e21ab77
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_xthead.c.inc
+> @@ -0,0 +1,66 @@
+> +/*
+> + * RISC-V translation routines for the T-Head vendor extensions (xthead*).
+> + *
+> + * Copyright (c) 2022 VRULL GmbH.
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#define REQUIRE_PRIV_MHSU(ctx)
+> +
+> +#ifndef CONFIG_USER_ONLY
+> +#define REQUIRE_PRIV_MHS(ctx)                                   \
+> +do {                                                            \
+> +    if (!(ctx->priv == PRV_M ||                                 \
+> +          ctx->priv == PRV_H ||                                 \
+> +          ctx->priv == PRV_S)) {                                \
+> +        return false;                                           \
+> +    }                                                           \
+> +} while (0)
+> +#else
+> +#define REQUIRE_PRIV_MHS(ctx)                                   \
+> +  return false;
+> +#endif
+> +
+> +#define NOP_PRIVCHECK(insn, privcheck)                          \
+> +static bool trans_ ## insn(DisasContext *ctx, arg_ ## insn * a) \
+> +{                                                               \
+> +    (void) a;                                                   \
+> +    privcheck(ctx);                                             \
+> +    return true;                                                \
 > +}
 > +
-
-Maybe
-
-get_type_from_tdata
-
-> +static inline target_ulong get_trigger_type(CPURISCVState *env,
-> +                                            target_ulong trigger_index)
-> +{
-> +    target_ulong tdata1 = env->type2_trig[trigger_index].mcontrol;
-> +    return extract_trigger_type(env, tdata1);
-> +}
+> +NOP_PRIVCHECK(th_dcache_call, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_ciall, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_iall, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_cpa, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_cipa, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_ipa, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_cva, REQUIRE_PRIV_MHSU)
+> +NOP_PRIVCHECK(th_dcache_civa, REQUIRE_PRIV_MHSU)
+> +NOP_PRIVCHECK(th_dcache_iva, REQUIRE_PRIV_MHSU)
+> +NOP_PRIVCHECK(th_dcache_csw, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_cisw, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_isw, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_cpal1, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_cval1, REQUIRE_PRIV_MHS)
 > +
-
-and
-
-get_type_from_index
-
->   static inline target_ulong trigger_type(CPURISCVState *env,
->                                           trigger_type_t type)
->   {
-> @@ -89,15 +117,17 @@ static inline target_ulong trigger_type(CPURISCVState *env,
+> +NOP_PRIVCHECK(th_icache_iall, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_icache_ialls, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_icache_ipa, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_icache_iva, REQUIRE_PRIV_MHSU)
+> +
+> +NOP_PRIVCHECK(th_l2cache_call, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_l2cache_ciall, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_l2cache_iall, REQUIRE_PRIV_MHS)
+> +
+> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+> index 6b9435d69a..1d149e05cd 100644
+> --- a/target/riscv/meson.build
+> +++ b/target/riscv/meson.build
+> @@ -2,6 +2,7 @@
+>   gen = [
+>     decodetree.process('insn16.decode', extra_args: ['--static-decode=decode_insn16', '--insnwidth=16']),
+>     decodetree.process('insn32.decode', extra_args: '--static-decode=decode_insn32'),
+> +  decodetree.process('xtheadcmo.decode', extra_args: '--static-decode=decode_xtheadcmo'),
+>     decodetree.process('XVentanaCondOps.decode', extra_args: '--static-decode=decode_XVentanaCodeOps'),
+>   ]
 >   
->   bool tdata_available(CPURISCVState *env, int tdata_index)
->   {
-> +    int trigger_type = get_trigger_type(env, env->trigger_cur);
-> +
->       if (unlikely(tdata_index >= TDATA_NUM)) {
->           return false;
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index fd241ff667..d16ae63850 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -132,7 +132,8 @@ static bool always_true_p(DisasContext *ctx  __attribute__((__unused__)))
+>           return ctx->cfg_ptr->ext_ ## ext ; \
 >       }
 >   
-> -    if (unlikely(env->trigger_cur >= TRIGGER_NUM)) {
-> +    if (unlikely(env->trigger_cur >= RV_MAX_TRIGGERS)) {
->           return false;
->       }
+> -MATERIALISE_EXT_PREDICATE(XVentanaCondOps);
+> +MATERIALISE_EXT_PREDICATE(xtheadcmo)
+> +MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
 >   
-> -    return tdata_mapping[env->trigger_cur][tdata_index];
-> +    return tdata_mapping[trigger_type][tdata_index];
->   }
+>   #ifdef TARGET_RISCV32
+>   #define get_xl(ctx)    MXL_RV32
+> @@ -717,6 +718,10 @@ static int ex_rvc_shifti(DisasContext *ctx, int imm)
+>   /* Include the auto-generated decoder for 32 bit insn */
+>   #include "decode-insn32.c.inc"
 >   
->   target_ulong tselect_csr_read(CPURISCVState *env)
-> @@ -137,6 +167,7 @@ static target_ulong tdata1_validate(CPURISCVState *env, target_ulong val,
->           qemu_log_mask(LOG_GUEST_ERROR,
->                         "ignoring type write to tdata1 register\n");
->       }
+> +/* Include decoders for factored-out extensions */
+> +#include "decode-xtheadcmo.c.inc"
+> +#include "decode-XVentanaCondOps.c.inc"
 > +
->       if (dmode != 0) {
->           qemu_log_mask(LOG_UNIMP, "debug mode is not supported\n");
->       }
-> @@ -261,9 +292,8 @@ static void type2_breakpoint_remove(CPURISCVState *env, target_ulong index)
->   }
->   
->   static target_ulong type2_reg_read(CPURISCVState *env,
-> -                                   target_ulong trigger_index, int tdata_index)
-> +                                   target_ulong index, int tdata_index)
+>   static bool gen_logic_imm_fn(DisasContext *ctx, arg_i *a,
+>                                void (*func)(TCGv, TCGv, target_long))
 >   {
-> -    uint32_t index = trigger_index - TRIGGER_TYPE2_IDX_0;
->       target_ulong tdata;
+> @@ -1018,12 +1023,11 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+>   #include "insn_trans/trans_rvk.c.inc"
+>   #include "insn_trans/trans_privileged.c.inc"
+>   #include "insn_trans/trans_svinval.c.inc"
+> +#include "insn_trans/trans_xthead.c.inc"
+>   #include "insn_trans/trans_xventanacondops.c.inc"
 >   
->       switch (tdata_index) {
-> @@ -280,10 +310,9 @@ static target_ulong type2_reg_read(CPURISCVState *env,
->       return tdata;
->   }
+>   /* Include the auto-generated decoder for 16 bit insn */
+>   #include "decode-insn16.c.inc"
+> -/* Include decoders for factored-out extensions */
+> -#include "decode-XVentanaCondOps.c.inc"
 >   
-> -static void type2_reg_write(CPURISCVState *env, target_ulong trigger_index,
-> +static void type2_reg_write(CPURISCVState *env, target_ulong index,
->                               int tdata_index, target_ulong val)
+>   static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
 >   {
-> -    uint32_t index = trigger_index - TRIGGER_TYPE2_IDX_0;
->       target_ulong new_val;
+> @@ -1036,6 +1040,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>           bool (*decode_func)(DisasContext *, uint32_t);
+>       } decoders[] = {
+>           { always_true_p,  decode_insn32 },
+> +        { has_xtheadcmo_p, decode_xtheadcmo },
+>           { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
+>       };
 >   
->       switch (tdata_index) {
-> @@ -309,35 +338,64 @@ static void type2_reg_write(CPURISCVState *env, target_ulong trigger_index,
->       return;
->   }
->   
-> -typedef target_ulong (*tdata_read_func)(CPURISCVState *env,
-> -                                        target_ulong trigger_index,
-> -                                        int tdata_index);
-> -
-> -static tdata_read_func trigger_read_funcs[TRIGGER_NUM] = {
-> -    [TRIGGER_TYPE2_IDX_0 ... TRIGGER_TYPE2_IDX_1] = type2_reg_read,
-> -};
-> -
-> -typedef void (*tdata_write_func)(CPURISCVState *env,
-> -                                 target_ulong trigger_index,
-> -                                 int tdata_index,
-> -                                 target_ulong val);
-> -
-> -static tdata_write_func trigger_write_funcs[TRIGGER_NUM] = {
-> -    [TRIGGER_TYPE2_IDX_0 ... TRIGGER_TYPE2_IDX_1] = type2_reg_write,
-> -};
-> -
->   target_ulong tdata_csr_read(CPURISCVState *env, int tdata_index)
->   {
-> -    tdata_read_func read_func = trigger_read_funcs[env->trigger_cur];
-> +    int trigger_type = get_trigger_type(env, env->trigger_cur);
+> diff --git a/target/riscv/xtheadcmo.decode b/target/riscv/xtheadcmo.decode
+> new file mode 100644
+> index 0000000000..8ddf9b3997
+> --- /dev/null
+> +++ b/target/riscv/xtheadcmo.decode
+> @@ -0,0 +1,43 @@
+> +#
+> +# RISC-V translation routines for the XTheadCmo extension
+> +#
+> +# Copyright (c) 2022 Christoph Muellner, christoph.muellner@vrull.eu
+> +#
+> +# SPDX-License-Identifier: LGPL-2.1-or-later
+> +#
+> +# The XTheadCmo extension provides instructions for cache management.
+> +#
+> +# It is documented in
+> +# https://github.com/T-head-Semi/thead-extension-spec/releases/download/2.0.0/xthead-2022-09-05-2.0.0.pdf
 > +
-> +    switch (trigger_type) {
-> +    case TRIGGER_TYPE_AD_MATCH:
-> +        return type2_reg_read(env, env->trigger_cur, tdata_index);
-> +        break;
-> +    case TRIGGER_TYPE_INST_CNT:
-> +    case TRIGGER_TYPE_INT:
-> +    case TRIGGER_TYPE_EXCP:
-> +    case TRIGGER_TYPE_AD_MATCH6:
-> +    case TRIGGER_TYPE_EXT_SRC:
-> +        qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n",
-> +                      trigger_type);
-> +        break;
-> +    case TRIGGER_TYPE_NO_EXIST:
-> +    case TRIGGER_TYPE_UNAVAIL:
-> +        qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exit\n",
-> +                      trigger_type);
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
->   
-> -    return read_func(env, env->trigger_cur, tdata_index);
-> +    return 0;
->   }
->   
->   void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
->   {
-> -    tdata_write_func write_func = trigger_write_funcs[env->trigger_cur];
-> +    int trigger_type;
->   
-> -    return write_func(env, env->trigger_cur, tdata_index, val);
-> +    if (tdata_index == TDATA1) {
-> +        trigger_type = extract_trigger_type(env, val);
-> +    } else {
-> +        trigger_type = get_trigger_type(env, env->trigger_cur);
-> +    }
+> +# Fields:
+> +%rs1       15:5
 > +
-> +    switch (trigger_type) {
-> +    case TRIGGER_TYPE_AD_MATCH:
-> +        type2_reg_write(env, env->trigger_cur, tdata_index, val);
-> +        break;
-> +    case TRIGGER_TYPE_INST_CNT:
-> +    case TRIGGER_TYPE_INT:
-> +    case TRIGGER_TYPE_EXCP:
-> +    case TRIGGER_TYPE_AD_MATCH6:
-> +    case TRIGGER_TYPE_EXT_SRC:
-> +        qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n",
-> +                      trigger_type);
-> +        break;
-> +    case TRIGGER_TYPE_NO_EXIST:
-> +    case TRIGGER_TYPE_UNAVAIL:
-> +        qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exit\n",
-> +                      trigger_type);
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
->   }
->   
->   void riscv_cpu_debug_excp_handler(CPUState *cs)
-> @@ -364,18 +422,28 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
->       CPUBreakpoint *bp;
->       target_ulong ctrl;
->       target_ulong pc;
-> +    int trigger_type;
->       int i;
->   
->       QTAILQ_FOREACH(bp, &cs->breakpoints, entry) {
-> -        for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
-> -            ctrl = env->type2_trig[i].mcontrol;
-> -            pc = env->type2_trig[i].maddress;
-> -
-> -            if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
-> -                /* check U/S/M bit against current privilege level */
-> -                if ((ctrl >> 3) & BIT(env->priv)) {
-> -                    return true;
-> +        for (i = 0; i < RV_MAX_TRIGGERS; i++) {
-> +            trigger_type = get_trigger_type(env, i);
+> +# Formats
+> +@sfence_vm  ....... ..... .....   ... ..... ....... %rs1
 > +
-> +            switch (trigger_type) {
-> +            case TRIGGER_TYPE_AD_MATCH:
-> +                ctrl = env->type2_trig[i].mcontrol;
-> +                pc = env->type2_trig[i].maddress;
+> +# *** CMO instructions
+> +th_dcache_call   0000000 00001 00000 000 00000 0001011
+> +th_dcache_ciall  0000000 00011 00000 000 00000 0001011
+> +th_dcache_iall   0000000 00010 00000 000 00000 0001011
+> +th_dcache_cpa    0000001 01001 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cipa   0000001 01011 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_ipa    0000001 01010 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cva    0000001 00101 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_civa   0000001 00111 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_iva    0000001 00110 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_csw    0000001 00001 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cisw   0000001 00011 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_isw    0000001 00010 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cpal1  0000001 01000 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cval1  0000001 00100 ..... 000 00000 0001011 @sfence_vm
 > +
-> +                if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
-> +                    /* check U/S/M bit against current privilege level */
-> +                    if ((ctrl >> 3) & BIT(env->priv)) {
-> +                        return true;
-> +                    }
->                   }
-> +                break;
-> +            default:
-> +                /* other trigger types are not supported or irrelevant */
-> +                break;
->               }
->           }
->       }
-> @@ -389,26 +457,36 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
->       CPURISCVState *env = &cpu->env;
->       target_ulong ctrl;
->       target_ulong addr;
-> +    int trigger_type;
->       int flags;
->       int i;
->   
-> -    for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
-> -        ctrl = env->type2_trig[i].mcontrol;
-> -        addr = env->type2_trig[i].maddress;
-> -        flags = 0;
-> +    for (i = 0; i < RV_MAX_TRIGGERS; i++) {
-> +        trigger_type = get_trigger_type(env, i);
->   
-> -        if (ctrl & TYPE2_LOAD) {
-> -            flags |= BP_MEM_READ;
-> -        }
-> -        if (ctrl & TYPE2_STORE) {
-> -            flags |= BP_MEM_WRITE;
-> -        }
-> +        switch (trigger_type) {
-> +        case TRIGGER_TYPE_AD_MATCH:
-> +            ctrl = env->type2_trig[i].mcontrol;
-> +            addr = env->type2_trig[i].maddress;
-> +            flags = 0;
->   
-> -        if ((wp->flags & flags) && (wp->vaddr == addr)) {
-> -            /* check U/S/M bit against current privilege level */
-> -            if ((ctrl >> 3) & BIT(env->priv)) {
-> -                return true;
-> +            if (ctrl & TYPE2_LOAD) {
-> +                flags |= BP_MEM_READ;
-> +            }
-> +            if (ctrl & TYPE2_STORE) {
-> +                flags |= BP_MEM_WRITE;
-> +            }
+> +th_icache_iall   0000000 10000 00000 000 00000 0001011
+> +th_icache_ialls  0000000 10001 00000 000 00000 0001011
+> +th_icache_ipa    0000001 11000 ..... 000 00000 0001011 @sfence_vm
+> +th_icache_iva    0000001 10000 ..... 000 00000 0001011 @sfence_vm
 > +
-> +            if ((wp->flags & flags) && (wp->vaddr == addr)) {
-> +                /* check U/S/M bit against current privilege level */
-> +                if ((ctrl >> 3) & BIT(env->priv)) {
-> +                    return true;
-> +                }
->               }
-> +            break;
-> +        default:
-> +            /* other trigger types are not supported */
-> +            break;
->           }
->       }
->   
-> @@ -417,11 +495,11 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
->   
->   void riscv_trigger_init(CPURISCVState *env)
->   {
-> -    target_ulong type2 = trigger_type(env, TRIGGER_TYPE_AD_MATCH);
-> +    target_ulong tdata1 = trigger_type(env, TRIGGER_TYPE_AD_MATCH);
->       int i;
->   
-> -    /* type 2 triggers */
-> -    for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
-> +    /* init to type 2 triggers */
-> +    for (i = 0; i < RV_MAX_TRIGGERS; i++) {
->           /*
->            * type = TRIGGER_TYPE_AD_MATCH
->            * dmode = 0 (both debug and M-mode can write tdata)
-> @@ -435,7 +513,7 @@ void riscv_trigger_init(CPURISCVState *env)
->            * chain = 0 (unimplemented, always 0)
->            * match = 0 (always 0, when any compare value equals tdata2)
->            */
-> -        env->type2_trig[i].mcontrol = type2;
-> +        env->type2_trig[i].mcontrol = tdata1;
->           env->type2_trig[i].maddress = 0;
->           env->type2_trig[i].bp = NULL;
->           env->type2_trig[i].wp = NULL;
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 41098f6ad0..b8173394a2 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -247,7 +247,7 @@ static const VMStateDescription vmstate_debug = {
->       .needed = debug_needed,
->       .fields = (VMStateField[]) {
->           VMSTATE_UINTTL(env.trigger_cur, RISCVCPU),
-> -        VMSTATE_STRUCT_ARRAY(env.type2_trig, RISCVCPU, TRIGGER_TYPE2_NUM,
-> +        VMSTATE_STRUCT_ARRAY(env.type2_trig, RISCVCPU, RV_MAX_TRIGGERS,
->                                0, vmstate_debug_type2, type2_trigger_t),
->           VMSTATE_END_OF_LIST()
->       }
+> +th_l2cache_call  0000000 10101 00000 000 00000 0001011
+> +th_l2cache_ciall 0000000 10111 00000 000 00000 0001011
+> +th_l2cache_iall  0000000 10110 00000 000 00000 0001011
+> +
 
