@@ -1,54 +1,149 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oZ7Pg-0002kS-FO
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Sep 2022 05:13:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57608)
+	id 1oZM5O-0008Us-FH
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Sep 2022 20:53:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56776)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1oZ7PY-0002di-9m; Fri, 16 Sep 2022 05:13:24 -0400
-Received: from out30-43.freemail.mail.aliyun.com ([115.124.30.43]:48608)
+ (Exim 4.90_1)
+ (envelope-from <prvs=252df0604=wilfred.mallawa@wdc.com>)
+ id 1oZM5N-0008Uf-1t; Fri, 16 Sep 2022 20:53:33 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:25621)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1oZ7PN-00042R-D4; Fri, 16 Sep 2022 05:13:18 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
- TI=SMTPD_---0VPwhKoK_1663319583; 
-Received: from 30.225.65.194(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VPwhKoK_1663319583) by smtp.aliyun-inc.com;
- Fri, 16 Sep 2022 17:13:05 +0800
-Message-ID: <c099d830-6c8c-6aad-193f-b191b713a797@linux.alibaba.com>
-Date: Fri, 16 Sep 2022 17:12:41 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Subject: Re: [PATCH 04/11] RISC-V: Adding T-Head Bitmanip instructions
+ (Exim 4.90_1)
+ (envelope-from <prvs=252df0604=wilfred.mallawa@wdc.com>)
+ id 1oZM5J-00057w-Bk; Fri, 16 Sep 2022 20:53:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1663376009; x=1694912009;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=lqC2GAQzr3MPUfqLLgo/xiRN5bncTNV86Up/q/35DH0=;
+ b=PhbvOA/HO7yOO1hCiE0oqry/WZOw2a8K7b4SN2BhttIqk1xGeDEf/KQ8
+ scV7nwWRN0czC/SZxed/8XR90VBoKe3+FavXno6YIk5aFvVxc516eaE1b
+ UIHfGBE+d7b4uUNjfkUmS5eZ/myuDFyjxSabro3k9OQXrtkAOOzDqe1rh
+ b15TnOLm/Z6c/iwqTzscNQXyXyKgxYIpg5rplFG+I7o8qad/Ll1+oj2mm
+ sVVn1Tg4dr/ftP13hqnDiMQ2q4QXeZtKRsncEfY8fuNyQiR+9keRfnAIP
+ 6/UEmGJI9JH7YDdGao9fJ0T94n3S8KcObSuWiaIDVxKNVWIKb3ooOAcxN w==;
+X-IronPort-AV: E=Sophos;i="5.93,321,1654531200"; d="scan'208";a="211569348"
+Received: from mail-bn1nam07lp2048.outbound.protection.outlook.com (HELO
+ NAM02-BN1-obe.outbound.protection.outlook.com) ([104.47.51.48])
+ by ob1.hgst.iphmx.com with ESMTP; 17 Sep 2022 08:53:21 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=HjpPXPd7wRXx+f2ZZ46Osbxt92+5fyuAZNNossN7AsqFVSkMfTno7SVFcJFHb8cT8pcqzVeABxaG7MB5LivanNIkqEHIBH6r6Yx6s9UgptOsmJQjWN2N8fzvfGisdtjsmRutI6UxeqpvBQd9HmOMfxpwkdN6HNU4ZSft4wnKSHOrPksYIt2o2hbrJRk3sftbrpRGs0vbyKX8BNE9f2H5RGHv8yAMhUyi3Qutv5VjqBExGmFBzjngt36rdy0lQtYR7F8blyJwe+Pxc5i+MjijyUeaiwLxmygAe9UyuK6F4f1O82UbJKRpVR9BrJU0UCiiGzQtrUAft6/w3x10Ek2ooA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lqC2GAQzr3MPUfqLLgo/xiRN5bncTNV86Up/q/35DH0=;
+ b=PBjL7uB5MzRdTDY8sr2HG+Oh1mXV+AWisKkjZ+dLQoRDqNepqDX5dvpHGoDWGluxQZDdyv/1qP9Yk91wp7WwoF8Q6fb/I4B+pePJa2RoY27MtGKemK2q963ufxRe/+fLFF2RWp2ieO8jXKAdIXuwKN8UMqe1j8P34nwF2mk3KT7tnFrmjSqf20onos7A+aQ74474j6XaiksfHjMvDmlpRpk1F0GB6fU9VD7dV+H0hL1fs5YyF+0pfbLGa/5fUyY5/fjO+ob/CLw/4FG/atYV5m+HNhfNyo/LDRz1QCrhjFDeeIq7dOxTpTK3GuQKtpKC3QjqFZ02X1D07TM+YLX+Ow==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lqC2GAQzr3MPUfqLLgo/xiRN5bncTNV86Up/q/35DH0=;
+ b=Gh+m5simbGb+M9uDVYmOtfFqv0A9ZNd0qV0GXwj8j7LLRusVR12Am434WLxEe9+Q5HawztkdqMlSKKSzQrctb7G87zLPNFR98HY1s9C8o7FMh89NVWS4jmdUQXqtvaNWg7JL4VtqgFHRAsi7R1WDqlxY3cS4yOm+9PEYg85/M3w=
+Received: from BL0PR04MB6546.namprd04.prod.outlook.com (2603:10b6:208:1c2::14)
+ by SN6PR04MB4909.namprd04.prod.outlook.com (2603:10b6:805:95::25)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5632.16; Sat, 17 Sep
+ 2022 00:53:16 +0000
+Received: from BL0PR04MB6546.namprd04.prod.outlook.com
+ ([fe80::6ef0:1511:8fe1:d319]) by BL0PR04MB6546.namprd04.prod.outlook.com
+ ([fe80::6ef0:1511:8fe1:d319%7]) with mapi id 15.20.5632.017; Sat, 17 Sep 2022
+ 00:53:16 +0000
+From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+To: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, Alistair Francis
+ <Alistair.Francis@wdc.com>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+CC: "palmer@dabbelt.com" <palmer@dabbelt.com>, "bin.meng@windriver.com"
+ <bin.meng@windriver.com>, "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>,
+ "alistair23@gmail.com" <alistair23@gmail.com>
+Subject: Re: [PATCH 1/3] target/riscv: Set the CPU resetvec directly
+Thread-Topic: [PATCH 1/3] target/riscv: Set the CPU resetvec directly
+Thread-Index: AQHYyCLoggWFmdYQN0WMWu6PiTEqy63iz3UA
+Date: Sat, 17 Sep 2022 00:53:16 +0000
+Message-ID: <3a34fa36981e7f45229d23e63b5393b2aca31b4e.camel@wdc.com>
+References: <20220914101108.82571-1-alistair.francis@wdc.com>
+ <20220914101108.82571-2-alistair.francis@wdc.com>
+In-Reply-To: <20220914101108.82571-2-alistair.francis@wdc.com>
+Accept-Language: en-US
 Content-Language: en-US
-To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, =?UTF-8?Q?Heiko_St=c3=bcbner?=
- <heiko.stuebner@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Nelson Chu <nelson@rivosinc.com>, Kito Cheng <kito.cheng@sifive.com>,
- Cooper Qu <cooper.qu@linux.alibaba.com>,
- Lifang Xia <lifang_xia@linux.alibaba.com>,
- Yunhai Shang <yunhai@linux.alibaba.com>
-References: <20220906122243.1243354-1-christoph.muellner@vrull.eu>
- <20220906122243.1243354-5-christoph.muellner@vrull.eu>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20220906122243.1243354-5-christoph.muellner@vrull.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.43;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-43.freemail.mail.aliyun.com
-X-Spam_score_int: -116
-X-Spam_score: -11.7
-X-Spam_bar: -----------
-X-Spam_report: (-11.7 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-1.816, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BL0PR04MB6546:EE_|SN6PR04MB4909:EE_
+x-ms-office365-filtering-correlation-id: 2abd3d87-c381-40b6-b99b-08da984701e0
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: Fhpv+LbeHbML5dglqIps6Je9DX82JnDhIIKHZTuou5/Fri1wlKIVHx+18rSEXfZtjr3pHr1Boqs/+7vw4R00SYH3LvfiOe84RMSi70QpsWQ9U2qLQRCBHE9qyaBFjqp9fXqoGieYPnXDrG/Tr1cawM9PKi0c2slf3SU18jmSEXe4haSfjdpaimQaWrK6lLcxMRFgj92toRy4jjrGhRiy4ghlI+H3dZ1RvTiERmTzlS9l06YU/ICFwzywSGUu5eK3l+M5joOTTO1N+yYqUKtDLjleWFj+5QmSOrDdZlPKY3+xl+HugKbBcg9Uap1TLBXTQasBqQnSMtrFzGWp0BTwWcgBdS5eLsLpwMOtJQHXr9UO1vueIaCdcxJgkKxKCQsv6mqA/AFUVgEmFRf9mdnExurX9FcjLa6uIQjp/FGSc8BWFFfYdnimsWW/sCOvLvl/uVYVmEe2c+2bNrJ+k5sJg0O+WejRshKINf1Unm6irVWYTThSrjxsTSDi91zMmql7VPMX3XPerNVo5xyRBnh/GK3zTeX/DVDNqwBLHPWkBQcbxBCZCPTT32CazsMAqLs8e8GppZWyglDUXd0pEA9gWYOoZui32N5HQlJXw/PyaNzZJjCfVOvRzvO1rV2WRtzlTZQM2IpYAIkqhulyFFKK5fqi+htwsAyNcjSbeYZdC/yTFjJEoIPMovLzvbl5e7azta4Y20qhFjnGguTI7ObAZwAcQZcsUtFvEo8KcTwK62UtuCuyC+25wV0OL18qNoS2RyyYMVFlGKlX3y5NhMXFXg==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BL0PR04MB6546.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230022)(4636009)(366004)(396003)(136003)(39860400002)(376002)(346002)(451199015)(36756003)(2906002)(44832011)(122000001)(76116006)(66476007)(64756008)(66556008)(8676002)(4326008)(66946007)(66446008)(86362001)(5660300002)(82960400001)(38100700002)(54906003)(110136005)(316002)(8936002)(91956017)(186003)(478600001)(26005)(2616005)(38070700005)(6512007)(83380400001)(6486002)(71200400001)(41300700001)(6506007);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?amplZ0pqeDNDcUJwaUppS0ZYaXZsalhNUjJNeGI4RjJZQ0dtSzU2SjlrcE93?=
+ =?utf-8?B?YzZKeHcwRXB1cTFjTHMvYUpuSVc4N3JIbWJlRWs0SS9sUUVYNzR3ZXk0Z2F4?=
+ =?utf-8?B?QnhMTGZOY1M4SWFtdW4wS0h5a0RkT2ZJZHFZdldHQnRiTTQzNEE1ZStjcmFJ?=
+ =?utf-8?B?S3Zrb0VNQXpISzZ0Syt1dWFFdGRqeWY1amIvTGdBbXJiV2lwU2txSDJMS3p3?=
+ =?utf-8?B?VysrRUVNMG13dG5ndk9kVTVjb0pJTWNDRVZXWHYvL1czczF4NEN2SlZmS2th?=
+ =?utf-8?B?SEhBWVE5cGUyRkozZFJxQjI0bjlPQTY4bktrYm14ZGVNMHB3N3M2dEtpeDBh?=
+ =?utf-8?B?WnRnblRmUUxOcjVuU1cyQTMxUit5M2dlWlZnZDYxSkZnWGgraWVkN2RkcjZq?=
+ =?utf-8?B?c2Zia2Y3L2JSZmg2aktPVm40VitSZEdxblNSMlBtNXU2UThPaitJQ3I2TmpF?=
+ =?utf-8?B?UUlBYnBVeHFnZ0dzN24rckpXcmw3bm5Xd3RwbXI0K2taUWwvQXlhc2RFUjEr?=
+ =?utf-8?B?QU5RdXN2RlVrb0o5QlZlRU8rK09GbTFHMTcvQ0liZ1Nib05jc2tGUkpmeGdF?=
+ =?utf-8?B?cTFNZnFBZ2ltOHpXeVJYUU12dTZnR08xOFIwNFpNbXdDdWNQTnhhVjEwTWpm?=
+ =?utf-8?B?enUzZTZ1b1R0NzRRcW9HVU5wYU5hOUlxSnQvMk94dzBGVktUTU9HcUNWUUp5?=
+ =?utf-8?B?K1ZpSzlxS0tWYmNiUEVhN05hZFYwbm1INERaVjY0VmxocGdOVWJzL2MvMkZ0?=
+ =?utf-8?B?S1cweW93VzdHcnBST0FqWmhzNW1ISTZGNzc5SndnYXNFREpSWHZMbzBQQmhr?=
+ =?utf-8?B?TGN6MVV4cEN0c1VuSWpKTEJ1NXRQQjVtQ3BuYjAxa2xqMzUwZGpkS0g0cHEy?=
+ =?utf-8?B?aVVoTG9LRElGRFVaZmVHVm9KSTRGRXNpR3RmdXR0NUV1QXBjNU5GUmpkTlBj?=
+ =?utf-8?B?QnUxdHJmZi9pTWZ3OEFtTS9VaFdWNmxQM0hXVTVES2tDblFEQ1N2cjQyWG8w?=
+ =?utf-8?B?YzJUL21LTHR3Sk85NHY3bEpxUEIrWCs2WmZsSmlhQ25XL1p0SG5URTVHcXMw?=
+ =?utf-8?B?Nk9HK1c1SUJFTGR4RmYwczFHeGRCV21pUlNibkhVWDlaRDEwRzFXbU93Q2Ni?=
+ =?utf-8?B?TTBvSVJKL0NsRkEzbGZVYnoxNll3bmFEQW4xcTFYV1lEZkRUVE5JS1pkZklM?=
+ =?utf-8?B?WnQ3QW5FUjNYOWZUN3d3aW1yMWlXMTZqK3cvcWxPb2NlbjhoYXJJbVRpUExo?=
+ =?utf-8?B?WVF5U0RqZ0p0SzdlV3ZtRUk0VTdISWw4YXcwNmhRNkVxbVVTQTMyS0NqOW1T?=
+ =?utf-8?B?cldiTXRSNzk2TTVFQnE3S3J1RENJdTN4OW1DZDlJL0x6aDlIUGhUdW40UkFS?=
+ =?utf-8?B?NEFhUW5USnNNKzNiNXFoaW1YYWpmMkNBSU16U3BQcjNSM2tNWVM1VWJRSi9I?=
+ =?utf-8?B?Ujc0bi9aUXlhc3dDa3NGREJLWE1iUnhGWmE3ZE52TEtXbWM2cWJFd1dZUTBp?=
+ =?utf-8?B?QmZvTDY4eDV5cmtmWjRENGt1Wk40RlkvY0pvbjdhZ0wxK2JnQkhhZ25UZmJZ?=
+ =?utf-8?B?VXc4UVlYTU9RUjA5Qm5LWXh1YVh1TGtHMkhmbVArUG1RNnY1YkxDY3lUaS9n?=
+ =?utf-8?B?KzJQclVGV25vRW5URlRRQTdaQW0yanFJK0hmaU1xdzZZL21wVCt4WHVpMmt3?=
+ =?utf-8?B?eUVsb1JUSnM5dFprc1ZSK0h1bDF3WEd4SDd5VnFmVit2R2p1anFlYWZ6TXZU?=
+ =?utf-8?B?SUR0RGxReXZiSVpMWUVnbjZvNWlHVlp1TlJNZzh1MVYrNWpBOW5KN0lheEox?=
+ =?utf-8?B?eUY2Unowc2FWVDZPZ2xTcDdUVjZIYTkrZTRrNzdqUWhSQ0NKd0F2djdtWjR6?=
+ =?utf-8?B?cXoybU5rY2dRVlhDS0tDWUlrQVVrQTFRNTlaNWFOaldLRDFRcDIwa01BRTc4?=
+ =?utf-8?B?ZG9lSTljVllGV1Jxdjc3OGZacVZzZXVKNTI5eTFRbENmRG1MVURwNStadjR1?=
+ =?utf-8?B?YXMxbWJhVVFUY3FqYTQ3MGZPVmtjSXR2WXhaWmFTT1piM1pQOEVLdGw2Mm5n?=
+ =?utf-8?B?bE9yN1d6MWZTMUdQM2xibGZPajRmaHlVR2pJRVVWb0FDenhJMWZqallYYWs5?=
+ =?utf-8?B?RnRjZzd3NjlyT09IM1paU2N1Mnc5WHdHT3VMdVNKTTZLN0tRUE5JdlV1TU9L?=
+ =?utf-8?B?WVE9PQ==?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <AA83BB2076195E49AD1DCA257673AA4E@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BL0PR04MB6546.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2abd3d87-c381-40b6-b99b-08da984701e0
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Sep 2022 00:53:16.7170 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ha5P7wIaxTfFYVxBoe7uqmkgn8hwu3F6sXYacWFRxrUM4gSmN0T7q831mUhefGj/jCcqOWdWV8WMmi5z9DshyA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR04MB4909
+Received-SPF: pass client-ip=216.71.153.144;
+ envelope-from=prvs=252df0604=wilfred.mallawa@wdc.com; helo=esa5.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -61,412 +156,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2022 09:13:24 -0000
+X-List-Received-Date: Sat, 17 Sep 2022 00:53:33 -0000
 
-
-On 2022/9/6 20:22, Christoph Muellner wrote:
-> From: Christoph Müllner <christoph.muellner@vrull.eu>
->
-> This patch adds support for the T-Head Bitmanip instructions.
-> The patch uses the T-Head specific decoder and translation.
->
-> As the instructions are similar to those of Zb*, we can reuse
-> a lot of existing infrastructure code.
->
-> Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
-> ---
->   target/riscv/cpu.c                         |   3 +
->   target/riscv/cpu.h                         |   3 +
->   target/riscv/insn_trans/trans_xthead.c.inc | 124 +++++++++++++++++++++
->   target/riscv/meson.build                   |   3 +
->   target/riscv/translate.c                   |   9 ++
->   target/riscv/xtheadba.decode               |  46 ++++++++
->   target/riscv/xtheadbb.decode               |  62 +++++++++++
->   target/riscv/xtheadbs.decode               |  32 ++++++
->   8 files changed, 282 insertions(+)
->   create mode 100644 target/riscv/xtheadba.decode
->   create mode 100644 target/riscv/xtheadbb.decode
->   create mode 100644 target/riscv/xtheadbs.decode
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index a72722cfa6..d129a6112a 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -920,6 +920,9 @@ static Property riscv_cpu_extensions[] = {
->       DEFINE_PROP_BOOL("zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
->   
->       /* Vendor-specific custom extensions */
-> +    DEFINE_PROP_BOOL("xtheadba", RISCVCPU, cfg.ext_xtheadba, false),
-> +    DEFINE_PROP_BOOL("xtheadbb", RISCVCPU, cfg.ext_xtheadbb, false),
-> +    DEFINE_PROP_BOOL("xtheadbs", RISCVCPU, cfg.ext_xtheadbs, false),
->       DEFINE_PROP_BOOL("xtheadcmo", RISCVCPU, cfg.ext_xtheadcmo, false),
->       DEFINE_PROP_BOOL("xtheadsync", RISCVCPU, cfg.ext_xtheadsync, false),
->       DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 4ae22cf529..9e2b3d6f56 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -440,6 +440,9 @@ struct RISCVCPUConfig {
->       uint64_t mimpid;
->   
->       /* Vendor-specific custom extensions */
-> +    bool ext_xtheadba;
-> +    bool ext_xtheadbb;
-> +    bool ext_xtheadbs;
->       bool ext_xtheadcmo;
->       bool ext_xtheadsync;
->       bool ext_XVentanaCondOps;
-> diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
-> index 0a6719b2e2..b2d523b905 100644
-> --- a/target/riscv/insn_trans/trans_xthead.c.inc
-> +++ b/target/riscv/insn_trans/trans_xthead.c.inc
-> @@ -70,3 +70,127 @@ NOP_PRIVCHECK(th_sync_i, REQUIRE_PRIV_MHSU)
->   NOP_PRIVCHECK(th_sync_is, REQUIRE_PRIV_MHSU)
->   NOP_PRIVCHECK(th_sync_s, REQUIRE_PRIV_MHSU)
->   
-> +/*
-> + * th.addsl is similar to sh[123]add (from Zba), but not an
-> + * alternative encoding: while sh[123] applies the shift to rs1,
-> + * th.addsl shifts rs2.
-> + */
-> +
-> +#define GEN_TH_ADDSL(SHAMT)                                     \
-> +static void gen_th_addsl##SHAMT(TCGv ret, TCGv arg1, TCGv arg2) \
-> +{                                                               \
-> +    TCGv t = tcg_temp_new();                                    \
-> +    tcg_gen_shli_tl(t, arg2, SHAMT);                            \
-> +    tcg_gen_add_tl(ret, t, arg1);                               \
-> +    tcg_temp_free(t);                                           \
-> +}
-> +
-> +GEN_TH_ADDSL(1)
-> +GEN_TH_ADDSL(2)
-> +GEN_TH_ADDSL(3)
-> +
-> +#define GEN_TRANS_TH_ADDSL(SHAMT)                                       \
-> +static bool trans_th_addsl##SHAMT(DisasContext *ctx,                    \
-> +                                  arg_th_addsl##SHAMT * a)              \
-> +{                                                                       \
-> +    return gen_arith(ctx, a, EXT_NONE, gen_th_addsl##SHAMT, NULL);      \
-> +}
-> +
-> +GEN_TRANS_TH_ADDSL(1)
-> +GEN_TRANS_TH_ADDSL(2)
-> +GEN_TRANS_TH_ADDSL(3)
-> +
-> +
-> +/* th.srri is an alternate encoding for rori (from Zbb) */
-> +static bool trans_th_srri(DisasContext *ctx, arg_th_srri * a)
-> +{
-> +    return gen_shift_imm_fn(ctx, a, EXT_NONE, tcg_gen_rotri_tl, NULL);
-> +}
-> +
-
-We should ensure that if the instruction only exists when XLEN is 64 or 
-it can exist both when XLEN is 32 or 64.
-
-If it can exist both when XLEN is 32 or 64,  we should ensure the 
-calculation is right for both. trans_th_srri will not right when XLEN is 
-32-bit. Please refer to gen_roriw().
-
-> +/* th.srriw is an alternate encoding for roriw (from Zbb) */
-> +static bool trans_th_srriw(DisasContext *ctx, arg_th_srriw *a)
-> +{
-> +    ctx->ol = MXL_RV32;
-
-And if only exists when XLEN is 64, such as th.srriw, we should check 
-the XLEN.
-
-Thanks,
-Zhiwei
-
-> +    return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_roriw, NULL);
-> +}
-> +
-> +/* th.ext and th.extu perform signed/unsigned bitfield extraction */
-> +static bool gen_th_bfextract(DisasContext *ctx, arg_th_bfext *a,
-> +                             void (*f)(TCGv, TCGv, unsigned int, unsigned int))
-> +{
-> +    TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv source = get_gpr(ctx, a->rs1, EXT_ZERO);
-> +
-> +    if (a->lsb <= a->msb) {
-> +        f(dest, source, a->lsb, a->msb - a->lsb + 1);
-> +        gen_set_gpr(ctx, a->rd, dest);
-> +    }
-> +    return true;
-> +}
-> +
-> +static bool trans_th_ext(DisasContext *ctx, arg_th_ext *a)
-> +{
-> +    return gen_th_bfextract(ctx, a, tcg_gen_sextract_tl);
-> +}
-> +
-> +static bool trans_th_extu(DisasContext *ctx, arg_th_extu *a)
-> +{
-> +    return gen_th_bfextract(ctx, a, tcg_gen_extract_tl);
-> +}
-> +
-> +/* th.ff0: find first zero (clz on an inverted input) */
-> +static void gen_th_ff0(TCGv ret, TCGv arg1)
-> +{
-> +    TCGv t = tcg_temp_new();
-> +    tcg_gen_not_tl(t, arg1);
-> +    gen_clz(ret, t);
-> +    tcg_temp_free(t);
-> +}
-> +
-> +static bool trans_th_ff0(DisasContext *ctx, arg_th_ff0 *a)
-> +{
-> +    return gen_unary(ctx, a, EXT_NONE, gen_th_ff0);
-> +}
-> +
-> +/* th.ff1 is an alternate encoding for clz (from Zbb) */
-> +static bool trans_th_ff1(DisasContext *ctx, arg_th_ff1 *a)
-> +{
-> +    return gen_unary(ctx, a, EXT_NONE, gen_clz);
-> +}
-> +
-> +/* th.rev is an alternate encoding for the RV64 rev8 (from Zbb) */
-> +static bool trans_th_rev(DisasContext *ctx, arg_th_rev *a)
-> +{
-> +    return gen_unary(ctx, a, EXT_NONE, tcg_gen_bswap_tl);
-> +}
-> +
-> +/* th.revw is a sign-extended byte-swap of the lower word */
-> +static void gen_th_revw(TCGv ret, TCGv arg1)
-> +{
-> +    tcg_gen_bswap_tl(ret, arg1);
-> +    tcg_gen_sari_tl(ret, ret, 32);
-> +}
-> +
-> +static bool trans_th_revw(DisasContext *ctx, arg_th_revw *a)
-> +{
-> +    return gen_unary(ctx, a, EXT_NONE, gen_th_revw);
-> +}
-> +
-> +/* th.tstnbz is equivalent to an orc.b (from Zbb) with inverted result */
-> +static void gen_th_tstnbz(TCGv ret, TCGv source1)
-> +{
-> +    gen_orc_b(ret, source1);
-> +    tcg_gen_not_tl(ret, ret);
-> +}
-> +
-> +static bool trans_th_tstnbz(DisasContext *ctx, arg_th_tstnbz *a)
-> +{
-> +    return gen_unary(ctx, a, EXT_ZERO, gen_th_tstnbz);
-> +}
-> +
-> +/* th.tst is an alternate encoding for bexti (from Zbs) */
-> +static bool trans_th_tst(DisasContext *ctx, arg_th_tst *a)
-> +{
-> +    return gen_shift_imm_tl(ctx, a, EXT_NONE, gen_bext);
-> +}
-> +
-> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-> index f201cc6997..5ee37683cb 100644
-> --- a/target/riscv/meson.build
-> +++ b/target/riscv/meson.build
-> @@ -2,6 +2,9 @@
->   gen = [
->     decodetree.process('insn16.decode', extra_args: ['--static-decode=decode_insn16', '--insnwidth=16']),
->     decodetree.process('insn32.decode', extra_args: '--static-decode=decode_insn32'),
-> +  decodetree.process('xtheadba.decode', extra_args: '--static-decode=decode_xtheadba'),
-> +  decodetree.process('xtheadbb.decode', extra_args: '--static-decode=decode_xtheadbb'),
-> +  decodetree.process('xtheadbs.decode', extra_args: '--static-decode=decode_xtheadbs'),
->     decodetree.process('xtheadcmo.decode', extra_args: '--static-decode=decode_xtheadcmo'),
->     decodetree.process('xtheadsync.decode', extra_args: '--static-decode=decode_xtheadsync'),
->     decodetree.process('XVentanaCondOps.decode', extra_args: '--static-decode=decode_XVentanaCodeOps'),
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index a63cc3de46..f662e403f8 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -132,6 +132,9 @@ static bool always_true_p(DisasContext *ctx  __attribute__((__unused__)))
->           return ctx->cfg_ptr->ext_ ## ext ; \
->       }
->   
-> +MATERIALISE_EXT_PREDICATE(xtheadba)
-> +MATERIALISE_EXT_PREDICATE(xtheadbb)
-> +MATERIALISE_EXT_PREDICATE(xtheadbs)
->   MATERIALISE_EXT_PREDICATE(xtheadcmo)
->   MATERIALISE_EXT_PREDICATE(xtheadsync)
->   MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
-> @@ -720,6 +723,9 @@ static int ex_rvc_shifti(DisasContext *ctx, int imm)
->   #include "decode-insn32.c.inc"
->   
->   /* Include decoders for factored-out extensions */
-> +#include "decode-xtheadba.c.inc"
-> +#include "decode-xtheadbb.c.inc"
-> +#include "decode-xtheadbs.c.inc"
->   #include "decode-xtheadcmo.c.inc"
->   #include "decode-xtheadsync.c.inc"
->   #include "decode-XVentanaCondOps.c.inc"
-> @@ -1042,6 +1048,9 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
->           bool (*decode_func)(DisasContext *, uint32_t);
->       } decoders[] = {
->           { always_true_p,  decode_insn32 },
-> +        { has_xtheadba_p, decode_xtheadba },
-> +        { has_xtheadbb_p, decode_xtheadbb },
-> +        { has_xtheadbs_p, decode_xtheadbs },
->           { has_xtheadcmo_p, decode_xtheadcmo },
->           { has_xtheadsync_p, decode_xtheadsync },
->           { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
-> diff --git a/target/riscv/xtheadba.decode b/target/riscv/xtheadba.decode
-> new file mode 100644
-> index 0000000000..4e5e3f12f0
-> --- /dev/null
-> +++ b/target/riscv/xtheadba.decode
-> @@ -0,0 +1,46 @@
-> +#
-> +# RISC-V instruction decode for the XTheadBa extension
-> +#
-> +# Copyright (c) 2022 Dr. Philipp Tomsich, philipp.tomsich@vrull.eu
-> +#                    Christoph Muellner, christoph.muellner@vrull.eu
-> +#
-> +# SPDX-License-Identifier: LGPL-2.1-or-later
-> +#
-> +# The XTheadBa extension provides instructions for address calculations,
-> +# implementing the functional equivalent of a subset of Zba.
-> +#
-> +# It is documented in
-> +# https://github.com/T-head-Semi/thead-extension-spec/releases/download/2.0.0/xthead-2022-09-05-2.0.0.pdf
-> +#
-> +# The instruction contained in XTheadBb is:
-> +# - th.addsl      add rotate-right by immediate
-> +#                 (similar to sh[123]add, but with rs1 and rs2 switched)
-> +# This instruction reuses an existing instruction format.
-> +
-> +# Fields
-> +%rs2       20:5
-> +%rs1       15:5
-> +%rd        7:5
-> +
-> +# Argument sets
-> +&r         rd rs1 rs2		!extern
-> +
-> +# Formats:
-> +@r          ....... ..... .....  ... ..... ....... &r %rs2 %rs1 %rd
-> +
-> +# *** Bitmanip addressing instructions
-> +# Instead of defining a new encoding, we simply use the decoder to
-> +# extract the imm[0:1] field and dispatch to separate translation
-> +# functions (mirroring the `sh[123]add` instructions from Zba and
-> +# the regular RVI `add` instruction.
-> +#
-> +# The only difference between sh[123]add and addsl is that the sohift
-> +# is applied to rs1 (for addsl) instead of rs2 (for sh[123]add).
-> +#
-> +# Note that shift-by-0 is a valid operation according to the manual.
-> +# This will be equivalent to a regular add.
-> +add              0000000 ..... ..... 001 ..... 0001011 @r
-> +th_addsl1        0000001 ..... ..... 001 ..... 0001011 @r
-> +th_addsl2        0000010 ..... ..... 001 ..... 0001011 @r
-> +th_addsl3        0000011 ..... ..... 001 ..... 0001011 @r
-> +
-> diff --git a/target/riscv/xtheadbb.decode b/target/riscv/xtheadbb.decode
-> new file mode 100644
-> index 0000000000..2754a6444b
-> --- /dev/null
-> +++ b/target/riscv/xtheadbb.decode
-> @@ -0,0 +1,62 @@
-> +#
-> +# RISC-V instruction decode for the XTheadBb extension
-> +#
-> +# Copyright (c) 2022 Dr. Philipp Tomsich, philipp.tomsich@vrull.eu
-> +#                    Christoph Muellner, christoph.muellner@vrull.eu
-> +#
-> +# SPDX-License-Identifier: LGPL-2.1-or-later
-> +#
-> +# The XTheadBb extension provides basic bit-manipulation instructions,
-> +# implementing the functional equivalent of a subset of Zbb.
-> +#
-> +# It is documented in
-> +# https://github.com/T-head-Semi/thead-extension-spec/releases/download/2.0.0/xthead-2022-09-05-2.0.0.pdf
-> +#
-> +# The instructions contained in XTheadBb are:
-> +# - th.srri       rotate-right by immediate (matches rori)
-> +# - th.srriw      rotate-right by immediate, w-form (matches roriw)
-> +# - th.rev        byte-reverse register (matches RV64-form of rev8)
-> +# - th.revw       byte-reverse low word, sign-extend result (no equivalent)
-> +# - th.ext        signed bitfield-extract (no equivalent)
-> +# - th.extu       unsigned bitfield-extract (no equivalent)
-> +# - th.ff0        find-first zero (equivalent to clz on the inverted operand)
-> +# - th.ff1        find-first one (matches clz)
-> +# - th.tstnbz     test for zero-bytes (equivalent to the inverted result of orc.b)
-> +# - th.tst        test for bit (equivalent to bexti)
-> +#
-> +# These instructions generally reuse existing instruction formats.
-> +# Only the th.ext and th.ext introduce a new, vendor-defined instruction format.
-> +
-> +# Fields
-> +%rs2       20:5
-> +%rs1       15:5
-> +%rd        7:5
-> +%sh5       20:5
-> +%sh6       20:6
-> +
-> +# Argument sets
-> +&r2        rd rs1		!extern
-> +&shift     shamt rs1 rd		!extern
-> +&th_bfext  msb lsb rs1 rd
-> +
-> +# Formats:
-> +@r2         ....... ..... .....  ... ..... ....... &r2 %rs1 %rd
-> +@th_bfext   msb:6  lsb:6  .....  ... ..... ....... &th_bfext %rs1 %rd
-> +
-> +# Formats 64:
-> +@sh5        ....... ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
-> +
-> +# Formats 128:
-> +@sh6        ...... ...... .....  ... ..... ....... &shift shamt=%sh6 %rs1 %rd
-> +
-> +# *** Bitmanip instructions
-> +th_ext           ...... ...... ..... 010 ..... 0001011 @th_bfext
-> +th_extu          ...... ...... ..... 011 ..... 0001011 @th_bfext
-> +th_ff0           1000010 00000 ..... 001 ..... 0001011 @r2
-> +th_ff1           1000011 00000 ..... 001 ..... 0001011 @r2
-> +th_srri          000100 ...... ..... 001 ..... 0001011 @sh6
-> +th_srriw         0001010 ..... ..... 001 ..... 0001011 @sh5
-> +th_rev           1000001 00000 ..... 001 ..... 0001011 @r2
-> +th_revw          1001000 00000 ..... 001 ..... 0001011 @r2
-> +th_tstnbz        1000000 00000 ..... 001 ..... 0001011 @r2
-> +
-> diff --git a/target/riscv/xtheadbs.decode b/target/riscv/xtheadbs.decode
-> new file mode 100644
-> index 0000000000..7aa345b207
-> --- /dev/null
-> +++ b/target/riscv/xtheadbs.decode
-> @@ -0,0 +1,32 @@
-> +#
-> +# RISC-V instruction decode for the XTheadBb extension
-> +#
-> +# Copyright (c) 2022 Dr. Philipp Tomsich, philipp.tomsich@vrull.eu
-> +#                    Christoph Muellner, christoph.muellner@vrull.eu
-> +#
-> +# SPDX-License-Identifier: LGPL-2.1-or-later
-> +#
-> +# XTheadBs provides basic bit-manipulation instructions,
-> +# implementing the functional equivalent of a subset of Zbs.
-> +#
-> +# It is documented in
-> +# https://github.com/T-head-Semi/thead-extension-spec/releases/download/2.0.0/xthead-2022-09-05-2.0.0.pdf
-> +#
-> +# The instruction contained in XTheadBb is:
-> +# - th.tst        test if bit is set (matches bexti)
-> +#
-> +# The instruction reuses an existing instruction format.
-> +
-> +# Fields
-> +%rs1       15:5
-> +%rd        7:5
-> +%sh6       20:6
-> +
-> +# Argument sets
-> +&shift     shamt rs1 rd		!extern
-> +
-> +# Formats 128:
-> +@sh6        ...... ...... .....  ... ..... ....... &shift shamt=%sh6 %rs1 %rd
-> +
-> +# *** Bitmanip single-bit instructions
-> +th_tst           100010 ...... ..... 001 ..... 0001011 @sh6
+T24gV2VkLCAyMDIyLTA5LTE0IGF0IDEyOjExICswMjAwLCBBbGlzdGFpciBGcmFuY2lzIHZpYSB3
+cm90ZToNCj4gSW5zdGVhZCBvZiB1c2luZyBvdXIgcHJvcGVydGllcyB0byBzZXQgYSBjb25maWcg
+dmFsdWUgd2hpY2ggdGhlbg0KPiBtaWdodA0KPiBiZSB1c2VkIHRvIHNldCB0aGUgcmVzZXR2ZWMg
+KGRlcGVuZGluZyBvbiB5b3VyIHRpbWluZyksIGxldCdzIGluc3RlYWQNCj4ganVzdCBzZXQgdGhl
+IHJlc2V0dmVjIGRpcmVjdGx5IGluIHRoZSBlbnYgc3RydWN0Lg0KPiANCj4gVGhpcyBhbGxvd3Mg
+dXMgdG8gc2V0IHRoZSByZXNldCB2ZWMgZnJvbSB0aGUgY29tbWFuZCBsaW5lIHdpdGg6DQo+IMKg
+wqDCoCAtZ2xvYmFsDQo+IGRyaXZlcj1yaXNjdi5oYXJ0X2FycmF5LHByb3BlcnR5PXJlc2V0dmVj
+LHZhbHVlPTB4MjAwMDA0MDANCj4gDQo+IFNpZ25lZC1vZmYtYnk6IEFsaXN0YWlyIEZyYW5jaXMg
+PGFsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbT4NCj4gLS0tDQo+IMKgdGFyZ2V0L3Jpc2N2L2NwdS5o
+wqDCoMKgwqAgfMKgIDMgKy0tDQo+IMKgdGFyZ2V0L3Jpc2N2L2NwdS5jwqDCoMKgwqAgfCAxMyAr
+KystLS0tLS0tLS0tDQo+IMKgdGFyZ2V0L3Jpc2N2L21hY2hpbmUuYyB8wqAgNiArKystLS0NCj4g
+wqAzIGZpbGVzIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKSwgMTUgZGVsZXRpb25zKC0pDQo+IA0K
+PiBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L2NwdS5oIGIvdGFyZ2V0L3Jpc2N2L2NwdS5oDQo+
+IGluZGV4IDA2NzUxZTFlM2UuLjIyMzQ0YTYyMGIgMTAwNjQ0DQo+IC0tLSBhL3RhcmdldC9yaXNj
+di9jcHUuaA0KPiArKysgYi90YXJnZXQvcmlzY3YvY3B1LmgNCj4gQEAgLTE5MCw3ICsxOTAsNyBA
+QCBzdHJ1Y3QgQ1BVQXJjaFN0YXRlIHsNCj4gwqDCoMKgwqAgLyogVGhpcyBjb250YWlucyBRRU1V
+IHNwZWNpZmljIGluZm9ybWF0aW9uIGFib3V0IHRoZSB2aXJ0IHN0YXRlLg0KPiAqLw0KPiDCoMKg
+wqDCoCB0YXJnZXRfdWxvbmcgdmlydDsNCj4gwqDCoMKgwqAgdGFyZ2V0X3Vsb25nIGdlaWxlbjsN
+Cj4gLcKgwqDCoCB0YXJnZXRfdWxvbmcgcmVzZXR2ZWM7DQo+ICvCoMKgwqAgdWludDY0X3QgcmVz
+ZXR2ZWM7DQo+IMKgDQo+IMKgwqDCoMKgIHRhcmdldF91bG9uZyBtaGFydGlkOw0KPiDCoMKgwqDC
+oCAvKg0KPiBAQCAtNDc0LDcgKzQ3NCw2IEBAIHN0cnVjdCBSSVNDVkNQVUNvbmZpZyB7DQo+IMKg
+wqDCoMKgIGJvb2wgcG1wOw0KPiDCoMKgwqDCoCBib29sIGVwbXA7DQo+IMKgwqDCoMKgIGJvb2wg
+ZGVidWc7DQo+IC3CoMKgwqAgdWludDY0X3QgcmVzZXR2ZWM7DQo+IMKgDQo+IMKgwqDCoMKgIGJv
+b2wgc2hvcnRfaXNhX3N0cmluZzsNCj4gwqB9Ow0KPiBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2
+L2NwdS5jIGIvdGFyZ2V0L3Jpc2N2L2NwdS5jDQo+IGluZGV4IGFlZTE0YTIzOWEuLmIyOWM4OGI5
+ZjAgMTAwNjQ0DQo+IC0tLSBhL3RhcmdldC9yaXNjdi9jcHUuYw0KPiArKysgYi90YXJnZXQvcmlz
+Y3YvY3B1LmMNCj4gQEAgLTIyOCwxMyArMjI4LDYgQEAgc3RhdGljIHZvaWQgc2V0X3ZleHRfdmVy
+c2lvbihDUFVSSVNDVlN0YXRlICplbnYsDQo+IGludCB2ZXh0X3ZlcikNCj4gwqDCoMKgwqAgZW52
+LT52ZXh0X3ZlciA9IHZleHRfdmVyOw0KPiDCoH0NCj4gwqANCj4gLXN0YXRpYyB2b2lkIHNldF9y
+ZXNldHZlYyhDUFVSSVNDVlN0YXRlICplbnYsIHRhcmdldF91bG9uZyByZXNldHZlYykNCj4gLXsN
+Cj4gLSNpZm5kZWYgQ09ORklHX1VTRVJfT05MWQ0KPiAtwqDCoMKgIGVudi0+cmVzZXR2ZWMgPSBy
+ZXNldHZlYzsNCj4gLSNlbmRpZg0KPiAtfQ0KPiAtDQo+IMKgc3RhdGljIHZvaWQgcmlzY3ZfYW55
+X2NwdV9pbml0KE9iamVjdCAqb2JqKQ0KPiDCoHsNCj4gwqDCoMKgwqAgQ1BVUklTQ1ZTdGF0ZSAq
+ZW52ID0gJlJJU0NWX0NQVShvYmopLT5lbnY7DQo+IEBAIC0zMzYsNyArMzI5LDYgQEAgc3RhdGlj
+IHZvaWQgcnYzMl9pbWFmY3Vfbm9tbXVfY3B1X2luaXQoT2JqZWN0DQo+ICpvYmopDQo+IMKgDQo+
+IMKgwqDCoMKgIHNldF9taXNhKGVudiwgTVhMX1JWMzIsIFJWSSB8IFJWTSB8IFJWQSB8IFJWRiB8
+IFJWQyB8IFJWVSk7DQo+IMKgwqDCoMKgIHNldF9wcml2X3ZlcnNpb24oZW52LCBQUklWX1ZFUlNJ
+T05fMV8xMF8wKTsNCj4gLcKgwqDCoCBzZXRfcmVzZXR2ZWMoZW52LCBERUZBVUxUX1JTVFZFQyk7
+DQo+IMKgwqDCoMKgIGNwdS0+Y2ZnLm1tdSA9IGZhbHNlOw0KPiDCoH0NCj4gwqAjZW5kaWYNCj4g
+QEAgLTY3Niw3ICs2NjgsNiBAQCBzdGF0aWMgdm9pZCByaXNjdl9jcHVfcmVhbGl6ZShEZXZpY2VT
+dGF0ZSAqZGV2LA0KPiBFcnJvciAqKmVycnApDQo+IMKgwqDCoMKgwqDCoMKgwqAgcmlzY3Zfc2V0
+X2ZlYXR1cmUoZW52LCBSSVNDVl9GRUFUVVJFX0RFQlVHKTsNCj4gwqDCoMKgwqAgfQ0KPiDCoA0K
+PiAtwqDCoMKgIHNldF9yZXNldHZlYyhlbnYsIGNwdS0+Y2ZnLnJlc2V0dmVjKTsNCj4gwqANCj4g
+wqAjaWZuZGVmIENPTkZJR19VU0VSX09OTFkNCj4gwqDCoMKgwqAgaWYgKGNwdS0+Y2ZnLmV4dF9z
+c3RjKSB7DQo+IEBAIC0xMDc5LDcgKzEwNzAsOSBAQCBzdGF0aWMgUHJvcGVydHkgcmlzY3ZfY3B1
+X3Byb3BlcnRpZXNbXSA9IHsNCj4gwqDCoMKgwqAgREVGSU5FX1BST1BfVUlOVDY0KCJtYXJjaGlk
+IiwgUklTQ1ZDUFUsIGNmZy5tYXJjaGlkLA0KPiBSSVNDVl9DUFVfTUFSQ0hJRCksDQo+IMKgwqDC
+oMKgIERFRklORV9QUk9QX1VJTlQ2NCgibWltcGlkIiwgUklTQ1ZDUFUsIGNmZy5taW1waWQsDQo+
+IFJJU0NWX0NQVV9NSU1QSUQpLA0KPiDCoA0KPiAtwqDCoMKgIERFRklORV9QUk9QX1VJTlQ2NCgi
+cmVzZXR2ZWMiLCBSSVNDVkNQVSwgY2ZnLnJlc2V0dmVjLA0KPiBERUZBVUxUX1JTVFZFQyksDQo+
+ICsjaWZuZGVmIENPTkZJR19VU0VSX09OTFkNCj4gK8KgwqDCoCBERUZJTkVfUFJPUF9VSU5UNjQo
+InJlc2V0dmVjIiwgUklTQ1ZDUFUsIGVudi5yZXNldHZlYywNCj4gREVGQVVMVF9SU1RWRUMpLA0K
+PiArI2VuZGlmDQo+IMKgDQo+IMKgwqDCoMKgIERFRklORV9QUk9QX0JPT0woInNob3J0LWlzYS1z
+dHJpbmciLCBSSVNDVkNQVSwNCj4gY2ZnLnNob3J0X2lzYV9zdHJpbmcsIGZhbHNlKSwNCj4gwqAN
+Cj4gZGlmZiAtLWdpdCBhL3RhcmdldC9yaXNjdi9tYWNoaW5lLmMgYi90YXJnZXQvcmlzY3YvbWFj
+aGluZS5jDQo+IGluZGV4IDQxMDk4ZjZhZDAuLmM0ZTZiM2JiYTQgMTAwNjQ0DQo+IC0tLSBhL3Rh
+cmdldC9yaXNjdi9tYWNoaW5lLmMNCj4gKysrIGIvdGFyZ2V0L3Jpc2N2L21hY2hpbmUuYw0KPiBA
+QCAtMzA4LDggKzMwOCw4IEBAIHN0YXRpYyBjb25zdCBWTVN0YXRlRGVzY3JpcHRpb24NCj4gdm1z
+dGF0ZV9wbXVfY3RyX3N0YXRlID0gew0KPiDCoA0KPiDCoGNvbnN0IFZNU3RhdGVEZXNjcmlwdGlv
+biB2bXN0YXRlX3Jpc2N2X2NwdSA9IHsNCj4gwqDCoMKgwqAgLm5hbWUgPSAiY3B1IiwNCj4gLcKg
+wqDCoCAudmVyc2lvbl9pZCA9IDQsDQo+IC3CoMKgwqAgLm1pbmltdW1fdmVyc2lvbl9pZCA9IDQs
+DQo+ICvCoMKgwqAgLnZlcnNpb25faWQgPSA1LA0KPiArwqDCoMKgIC5taW5pbXVtX3ZlcnNpb25f
+aWQgPSA1LA0KPiDCoMKgwqDCoCAucG9zdF9sb2FkID0gcmlzY3ZfY3B1X3Bvc3RfbG9hZCwNCj4g
+wqDCoMKgwqAgLmZpZWxkcyA9IChWTVN0YXRlRmllbGRbXSkgew0KPiDCoMKgwqDCoMKgwqDCoMKg
+IFZNU1RBVEVfVUlOVFRMX0FSUkFZKGVudi5ncHIsIFJJU0NWQ1BVLCAzMiksDQo+IEBAIC0zMzEs
+NyArMzMxLDcgQEAgY29uc3QgVk1TdGF0ZURlc2NyaXB0aW9uIHZtc3RhdGVfcmlzY3ZfY3B1ID0g
+ew0KPiDCoMKgwqDCoMKgwqDCoMKgIFZNU1RBVEVfVUlOVDMyKGVudi5mZWF0dXJlcywgUklTQ1ZD
+UFUpLA0KPiDCoMKgwqDCoMKgwqDCoMKgIFZNU1RBVEVfVUlOVFRMKGVudi5wcml2LCBSSVNDVkNQ
+VSksDQo+IMKgwqDCoMKgwqDCoMKgwqAgVk1TVEFURV9VSU5UVEwoZW52LnZpcnQsIFJJU0NWQ1BV
+KSwNCj4gLcKgwqDCoMKgwqDCoMKgIFZNU1RBVEVfVUlOVFRMKGVudi5yZXNldHZlYywgUklTQ1ZD
+UFUpLA0KPiArwqDCoMKgwqDCoMKgwqAgVk1TVEFURV9VSU5UNjQoZW52LnJlc2V0dmVjLCBSSVND
+VkNQVSksDQo+IMKgwqDCoMKgwqDCoMKgwqAgVk1TVEFURV9VSU5UVEwoZW52Lm1oYXJ0aWQsIFJJ
+U0NWQ1BVKSwNCj4gwqDCoMKgwqDCoMKgwqDCoCBWTVNUQVRFX1VJTlQ2NChlbnYubXN0YXR1cywg
+UklTQ1ZDUFUpLA0KPiDCoMKgwqDCoMKgwqDCoMKgIFZNU1RBVEVfVUlOVDY0KGVudi5taXAsIFJJ
+U0NWQ1BVKSwNCg0KUmV2aWV3ZWQgYnk6IFdpbGZyZWQgTWFsbGF3YSA8d2lsZnJlZC5tYWxsYXdh
+QHdkYy5jb20+DQo=
 
