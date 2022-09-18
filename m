@@ -1,78 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oZeyf-0001wL-Gl
-	for mharc-qemu-riscv@gnu.org; Sat, 17 Sep 2022 17:03:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35512)
+	id 1oZpfs-0003Lz-7g
+	for mharc-qemu-riscv@gnu.org; Sun, 18 Sep 2022 04:29:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36652)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1oZeyd-0001sM-KV; Sat, 17 Sep 2022 17:03:51 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334]:51737)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1oZpfq-0003Lg-M4
+ for qemu-riscv@nongnu.org; Sun, 18 Sep 2022 04:29:10 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433]:42740)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1oZeyb-0002jl-St; Sat, 17 Sep 2022 17:03:51 -0400
-Received: by mail-wm1-x334.google.com with SMTP id o5so14141974wms.1;
- Sat, 17 Sep 2022 14:03:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :sender:from:to:cc:subject:date;
- bh=BLNtggHH6XibgFuPu1J9nVzAuQ3tBj4bUfsxXtPz5KE=;
- b=qapEs7kiSWe0TgZqJNrO3YY+6iJjNsComEHvI5Ni0jaY+/zZIWWRJNMNW69pje7ELB
- usWEWgZNUNgObcOcAeuMpMmEujIl4/ReAfDOPJXNt+OP7OPUb4yXcpSwWJtw/HrRklx8
- C74pHMskxs+ocx8YUYvcOArhlAH7pjLOy9SfiAwYMYh/I5Qz4PfYES42AFdlPBEraH4J
- 43we7V32pbowBvmN8ihENq7P3SnGAac8zUGK19CPUFY8HmYmiY1KvW3P0fh5ybsUnPXZ
- K+5+BOZ4GOkDId8ZA7Kd+A65b6fb8kolc2YMfcIIAWWnsIMjmrd5Pb93YlpiiQhlgjVT
- N8jg==
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1oZpfo-0003v6-Nh
+ for qemu-riscv@nongnu.org; Sun, 18 Sep 2022 04:29:09 -0400
+Received: by mail-pf1-x433.google.com with SMTP id b23so25269127pfp.9
+ for <qemu-riscv@nongnu.org>; Sun, 18 Sep 2022 01:29:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date;
+ bh=oF5jrzq09jc1ZnunLnisOmXL6et+cmuzWVeFPl2iPR0=;
+ b=NdPToHFQfNukZg5Is0/iQpnX/NFmHEehoGcVGF8z60zdx/CC/f00g3i3brH+ZYoYg6
+ 3DNSyP7Mhb/5yAdYYIna9k3WaOKE7x+Sh1jbiXPeDf0OOfYCIjsduI4MnOE/UQkb0SkR
+ eeHt4KqS5XEtm7LansjpF30gvOHb75s3eE/SPaolc7fXeNATtRyZKE/431d+I12rvtVW
+ Y+IRrMwhYgxtoqn6/DJfWDYMxo3tyYC/jmZGUuTpmuVrzi7PXPtzlPLYjSBPeGQVKODg
+ CjlDPyIru3hJF0X3YA3jq/8nJxMjAQfGntmNgKxSgWf9Bmp7LqUGAW/m9+Oftep33oGY
+ UPbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :sender:x-gm-message-state:from:to:cc:subject:date;
- bh=BLNtggHH6XibgFuPu1J9nVzAuQ3tBj4bUfsxXtPz5KE=;
- b=5iU5mZhCaMZPmf9NpgktxX5EUPvkmfMRMKmdb93HmfQx31TBI584/llNeuD69fnZ9E
- V+U16wWh+3nA77gB4Dc1BACqz7BMOz0VxChquj4Kqqy/mkhDed2lPc2+xvDvXSGi3+Uw
- Pfa3KhZTs3cBhO8Ep2WeqhNTMUIYJPSzJHDd9CGuo2Fgq/NHWMjYuiMF9nJEkuC76VHR
- U3EzU8H97yIUuaQ9UZ3OP4Ja5q+oM0HKGHH0rzDIpwuYiomwFRKLt7ycFNjePpl6M84l
- MzFVVsueZzEuOTiTlx4KeoUqCurpxotdt28Uev+Hd2c74Q37mkMH7RxZQZtJbpZVcF9Y
- VLzg==
-X-Gm-Message-State: ACrzQf3/bn4IjekLG6kXmvbe0t6U+B8KEZRjKogwdDLAnvMoAaPdJVyt
- oDafBhqVHF0/VA+IP4Gz39M=
-X-Google-Smtp-Source: AMsMyM5RjdfRMbL7Y4XIuHdwr9Kjx7Q8Ly8Q6Bx0xYrE4H9v0gi7S7I9PI3Z+KZTnsyWqX1jOKv4Ig==
-X-Received: by 2002:a05:600c:3d0e:b0:3b4:9bd1:10be with SMTP id
- bh14-20020a05600c3d0e00b003b49bd110bemr7374064wmb.101.1663448628077; 
- Sat, 17 Sep 2022 14:03:48 -0700 (PDT)
-Received: from [192.168.1.115] ([185.126.107.38])
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date;
+ bh=oF5jrzq09jc1ZnunLnisOmXL6et+cmuzWVeFPl2iPR0=;
+ b=VwTj7eTHcJ1PRTIfFA1D5eWE6Vh3+G7Ey9UaVvSCcWS3a3uqlWB8fr0itbd7O1taJk
+ HcDhzWx89HUctmFyTp8qtvw7X5uiZ9b8jTmLMDyUYY0Kok7JR4JuFZ+m+kkLIqMJB3Rq
+ Yo+QPrLzlxit3dc3yAZmOeVwlGmBIwl9fFLO3AKgQ2AUTavCW6M1H9EPqlNRXZx02S/J
+ k/CyCy0nNzkwnbQKMbSENdFVNvfNMOL9j2y5HiwVJ+XarDy3amBM5Xxeyjv+fAU4/clE
+ BRy6b0BvswOmiY/k/SVUHMDXysQb6XNTARkTkCXng2PaB0031o0TxngTs2z7Jkp9HKrv
+ KAbg==
+X-Gm-Message-State: ACrzQf1ioGPCEFQ8aAX5xinZbvqjJsQXdO+nefzsb6LBBHE2brPM6U8B
+ qiKkBn0QZ4ooJFjU68nRvU7fJA==
+X-Google-Smtp-Source: AMsMyM4o9xXCgkCdiCi3uAMGjzqnOfGGJGPlbiBkTwtpKHGUaYZqQI7Hyn/LFSHlE4ygW00vKt2E8Q==
+X-Received: by 2002:a05:6a00:8d0:b0:53b:2cbd:fab6 with SMTP id
+ s16-20020a056a0008d000b0053b2cbdfab6mr13176343pfu.3.1663489746122; 
+ Sun, 18 Sep 2022 01:29:06 -0700 (PDT)
+Received: from hsinchu16.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- e4-20020adfdbc4000000b00228c792aaaasm8702454wrj.100.2022.09.17.14.03.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 17 Sep 2022 14:03:47 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Message-ID: <f225466d-65e5-16fe-3c38-ebde601fcf4c@amsat.org>
-Date: Sat, 17 Sep 2022 23:03:46 +0200
+ w2-20020a1709026f0200b0017808db132bsm18113414plk.137.2022.09.18.01.29.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 18 Sep 2022 01:29:05 -0700 (PDT)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
+ Jim Shu <jim.shu@sifive.com>, Tommy Wu <tommy.wu@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH] target/riscv: Check the correct exception cause in vector GDB
+ stub
+Date: Sun, 18 Sep 2022 16:32:44 +0800
+Message-Id: <20220918083245.13028-1-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.13.0
-Subject: Re: [PATCH 3/3] hw/riscv: opentitan: Expose the resetvec as a SoC
- property
-Content-Language: en-US
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
- bmeng.cn@gmail.com, alistair23@gmail.com
-References: <20220914101108.82571-1-alistair.francis@wdc.com>
- <20220914101108.82571-4-alistair.francis@wdc.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-In-Reply-To: <20220914101108.82571-4-alistair.francis@wdc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x334.google.com
-X-Spam_score_int: -49
-X-Spam_score: -5.0
-X-Spam_bar: -----
-X-Spam_report: (-5.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-3.529,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x433.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -87,25 +81,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Sep 2022 21:03:51 -0000
+X-List-Received-Date: Sun, 18 Sep 2022 08:29:10 -0000
 
-On 14/9/22 12:11, Alistair Francis via wrote:
-> On the OpenTitan hardware the resetvec is fixed at the start of ROM. In
-> QEMU we don't run the ROM code and instead just jump to the next stage.
-> This means we need to be a little more flexible about what the resetvec
-> is.
-> 
-> This patch allows us to set the resetvec from the command line with
-> something like this:
->      -global driver=riscv.lowrisc.ibex.soc,property=resetvec,value=0x20000400
-> 
-> This way as the next stage changes we can update the resetvec.
-> 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   include/hw/riscv/opentitan.h | 2 ++
->   hw/riscv/opentitan.c         | 8 +++++++-
->   2 files changed, 9 insertions(+), 1 deletion(-)
+From: Frank Chang <frank.chang@sifive.com>
 
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+After RISCVException enum is introduced, riscv_csrrw_debug() returns
+RISCV_EXCP_NONE to indicate there's no error. RISC-V vector GDB stub
+should check the result against RISCV_EXCP_NONE instead of value 0.
+Otherwise, 'E14' packet would be incorrectly reported for vector CSRs
+when using "info reg vector" GDB command.
+
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Jim Shu <jim.shu@sifive.com>
+Reviewed-by: Tommy Wu <tommy.wu@sifive.com>
+---
+ target/riscv/gdbstub.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 9ed049c29e..118bd40f10 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -211,7 +211,7 @@ static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
+     target_ulong val = 0;
+     int result = riscv_csrrw_debug(env, csrno, &val, 0, 0);
+ 
+-    if (result == 0) {
++    if (result == RISCV_EXCP_NONE) {
+         return gdb_get_regl(buf, val);
+     }
+ 
+@@ -238,7 +238,7 @@ static int riscv_gdb_set_vector(CPURISCVState *env, uint8_t *mem_buf, int n)
+     target_ulong val = ldtul_p(mem_buf);
+     int result = riscv_csrrw_debug(env, csrno, NULL, val, -1);
+ 
+-    if (result == 0) {
++    if (result == RISCV_EXCP_NONE) {
+         return sizeof(target_ulong);
+     }
+ 
+-- 
+2.36.1
+
 
