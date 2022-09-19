@@ -1,58 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oaQH6-0005S2-Om
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 19:34:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52294)
+	id 1oaQJQ-0007C5-6q
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 19:36:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45102)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oaQH5-0005PC-6w; Mon, 19 Sep 2022 19:34:03 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433]:44696)
+ id 1oaQJO-00076l-GI; Mon, 19 Sep 2022 19:36:26 -0400
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531]:34769)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oaQH2-0004OH-Bg; Mon, 19 Sep 2022 19:34:01 -0400
-Received: by mail-pf1-x433.google.com with SMTP id j12so1074955pfi.11;
- Mon, 19 Sep 2022 16:33:59 -0700 (PDT)
+ id 1oaQJM-0004w5-R3; Mon, 19 Sep 2022 19:36:26 -0400
+Received: by mail-pg1-x531.google.com with SMTP id 3so833232pga.1;
+ Mon, 19 Sep 2022 16:36:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date;
- bh=sKvZVAO7JG903MhYl2Uv2uOM0RoX67nnq6UJthrCKok=;
- b=itdelNQ/GODR1N/h0oYyBjqQ+WYGOC0k2CLJjFJln73rUx1UHw124sBDBgyuMe5+yo
- 7vbwbjszj9aCqNpsbjPPHH+jipBPwC1bUlJrfqyRr0ZZD4s6sdmAHNWbjZeftgjFW0Re
- 4TNUhM0s8WMZiz4HSbV1JrVksaZEO5O3IU/EOQ7m41lk7d7qXGx92IYaLM4X1KpSSHsY
- tNL88+Z6/+uiP4To15h/9w1d3SdjP1/7kLUCeAIeB6j/Wi2sNigZPfaPXEJNB7NvpSGX
- 58nHCKRshTqV5RVSTFtapziw7Yd9MCTcjbiVZ+HOUTEc7KdMbtwxcJzfNOLZE+d2c13E
- d1/A==
+ bh=QiKzRIW8eTfYcKBbsDOwF8P6Z3t6EAph3xsqRVqXJsQ=;
+ b=JEBz2uTCaaRQJcasQFbGo1eMY58xgTBiGCnHDBJDY6SxCIZcpHkB00ZiZCmlRlIUdC
+ X4tDnisE3NB9U8mVeMvs4owW6CK3mlRW+eY+jbt7WYWooXBuwuPhjiTcOMNZv78vME6H
+ RflfXD9W4Ljgp9fhRdBGkNKpWuMDBYbkBEapM69ig37+uxFiWaicLf5K8zLwRcyjNEv0
+ t4HNo3McDacInWMjTlS4QsZnwlIifZwGu0r9xeWNDGdzo9aVwh3Ej/XVJ3xvDGCrqetr
+ 0jcVuaknRB7cgxxbs2N9ryQBik5k4YsjSAjHb8LlWkLDKueqwUVpxzsk0zE/vZyn18iD
+ HlpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=sKvZVAO7JG903MhYl2Uv2uOM0RoX67nnq6UJthrCKok=;
- b=u2wpFJt6EwxJTYIpxjUfo/bbGU4tl7y32IOHJRegtsglWiubIX78Y0UdTU9UcH2s80
- FsHBCcorQn1Mvpx+dhCP9HuGBjS+zqpIMktTpOHKaKS/syYPeYq16jzZLKH3A89dIStN
- pI+X0im7FJ05WRyjM9EwfnVO1EhiZc3lJ1wuQMgTrBNB1WLp9fpAdovJSaDEe0Be/oRD
- 1ZQl2LbpFhYU1W+keU3SMllziuCFH1ZuRDIHGEOPCUsGKToL/GVP/nEVqS0Q+reyMNSV
- RKSn+00de4ypBThIEudlM3HNjfeuaLa+55p+tpNo3gjcY0QcctC67ULa+RhkLRWyzZhi
- 0zvg==
-X-Gm-Message-State: ACrzQf2FmqFxtvXqYifVS26vlHdxTcnMe1iZFPAS+h4Du85cthsuwBP2
- X9CvtubUzapHFKtNbgMEBdF1dwcjRnUOxNZ1fN8=
-X-Google-Smtp-Source: AMsMyM5wLU/Ee7vdOki/dNvCa/vG17pVMO0Plq7crdzE7mFo6MhXuH2yXtf8K9lQux49oCIG/g4GKNxU/C7jr3rjV3w=
-X-Received: by 2002:a05:6a00:1496:b0:546:2856:6cf5 with SMTP id
- v22-20020a056a00149600b0054628566cf5mr20155315pfu.31.1663630438570; Mon, 19
- Sep 2022 16:33:58 -0700 (PDT)
+ bh=QiKzRIW8eTfYcKBbsDOwF8P6Z3t6EAph3xsqRVqXJsQ=;
+ b=sVd9YB1IYFQ3aghIaEvNeZARAZ9gMMuTD2Y4h7DaaFfKSci6HoaLzutZDrU5xygqZa
+ QBm9U9PtB2fuOMsFJ+uW/qBNTpW+7hcE+Z737zqgRt8AhCEW2uSWhBkng6MciQBh4Eal
+ hnYw3WX5IRX3nPpP/X4NOULfkiJ7PxJGPXoxUheU1OO1aY3rVck82voP2qQnYOH3zWpn
+ iTo2SAN51uSUPMEGl+T2xaajjzyjAOaaltR/3pHjkHh5uEqxVD/jnw1Umde1hXGwpXlL
+ nDW5MLfUduNAMT0BdI+1vCxj9H+L6qNvuFR11+CrSijqphQua1RsYNu79NCmICl2gYzR
+ 8ncA==
+X-Gm-Message-State: ACrzQf30xYGrJ+tXB99/pPIqlkfceb/zsDGvUkDaUMV8sfeOCzKYZvRa
+ N/Yhlky4m8Es8TvhP3ceaGvdR0yaM0bRt1LlC2/DnVc06fs=
+X-Google-Smtp-Source: AMsMyM5zhUmxU8iiMrPZBkXwCJN/BIrn7D7o3K47Uvy7lAdsb9qUqkenl9cWWdmb01cix9P1SYHgnGeC0x4np3RLuoQ=
+X-Received: by 2002:a63:db07:0:b0:439:2e24:df01 with SMTP id
+ e7-20020a63db07000000b004392e24df01mr17694235pgg.221.1663630583217; Mon, 19
+ Sep 2022 16:36:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220914101108.82571-1-alistair.francis@wdc.com>
-In-Reply-To: <20220914101108.82571-1-alistair.francis@wdc.com>
+References: <20220918083245.13028-1-frank.chang@sifive.com>
+In-Reply-To: <20220918083245.13028-1-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 20 Sep 2022 09:33:32 +1000
-Message-ID: <CAKmqyKNTcsO2XYnE3+8kdYQrx4vGLb8ozGkUFPmUyWFX8H1rFQ@mail.gmail.com>
-Subject: Re: [PATCH 0/3] hw/riscv: opentitan: Fixup resetvec issues
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Bin Meng <bin.meng@windriver.com>, Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 20 Sep 2022 09:35:56 +1000
+Message-ID: <CAKmqyKPvN-PaN9j1dfaAy=QrkkjnC0Gy7vzULNoNL4QsUG3CLg@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Check the correct exception cause in vector
+ GDB stub
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Jim Shu <jim.shu@sifive.com>, Tommy Wu <tommy.wu@sifive.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x531.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,35 +76,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2022 23:34:04 -0000
+X-List-Received-Date: Mon, 19 Sep 2022 23:36:27 -0000
 
-On Wed, Sep 14, 2022 at 8:11 PM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+On Sun, Sep 18, 2022 at 6:29 PM <frank.chang@sifive.com> wrote:
 >
-> The OpenTitan resetvec is dynamic on QEMU as we don't run the full boot
-> ROM flow. This series makes it more configurguable from the command line
-> and fixes the default.
+> From: Frank Chang <frank.chang@sifive.com>
 >
-> Alistair Francis (3):
->   target/riscv: Set the CPU resetvec directly
->   hw/riscv: opentitan: Fixup resetvec
->   hw/riscv: opentitan: Expose the resetvec as a SoC property
+> After RISCVException enum is introduced, riscv_csrrw_debug() returns
+> RISCV_EXCP_NONE to indicate there's no error. RISC-V vector GDB stub
+> should check the result against RISCV_EXCP_NONE instead of value 0.
+> Otherwise, 'E14' packet would be incorrectly reported for vector CSRs
+> when using "info reg vector" GDB command.
+>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Jim Shu <jim.shu@sifive.com>
+> Reviewed-by: Tommy Wu <tommy.wu@sifive.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/gdbstub.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
->  include/hw/riscv/opentitan.h |  2 ++
->  target/riscv/cpu.h           |  3 +--
->  hw/riscv/opentitan.c         |  8 +++++++-
->  target/riscv/cpu.c           | 13 +++----------
->  target/riscv/machine.c       |  6 +++---
->  5 files changed, 16 insertions(+), 16 deletions(-)
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 9ed049c29e..118bd40f10 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -211,7 +211,7 @@ static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
+>      target_ulong val = 0;
+>      int result = riscv_csrrw_debug(env, csrno, &val, 0, 0);
+>
+> -    if (result == 0) {
+> +    if (result == RISCV_EXCP_NONE) {
+>          return gdb_get_regl(buf, val);
+>      }
+>
+> @@ -238,7 +238,7 @@ static int riscv_gdb_set_vector(CPURISCVState *env, uint8_t *mem_buf, int n)
+>      target_ulong val = ldtul_p(mem_buf);
+>      int result = riscv_csrrw_debug(env, csrno, NULL, val, -1);
+>
+> -    if (result == 0) {
+> +    if (result == RISCV_EXCP_NONE) {
+>          return sizeof(target_ulong);
+>      }
 >
 > --
-> 2.37.2
+> 2.36.1
+>
 >
 
