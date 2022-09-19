@@ -1,49 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oaEKl-0004uL-9Q
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 06:49:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42610)
+	id 1oaOwX-00078E-NK
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 18:08:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56500)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1oaEKZ-0004qK-CX; Mon, 19 Sep 2022 06:48:53 -0400
-Received: from out30-57.freemail.mail.aliyun.com ([115.124.30.57]:45883)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1oaEKR-0001c8-5e; Mon, 19 Sep 2022 06:48:45 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R681e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0VQBUvLd_1663584511; 
-Received: from 30.225.64.225(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VQBUvLd_1663584511) by smtp.aliyun-inc.com;
- Mon, 19 Sep 2022 18:48:32 +0800
-Message-ID: <599b6472-d382-ddef-70c2-4f96620e947f@linux.alibaba.com>
-Date: Mon, 19 Sep 2022 18:48:07 +0800
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oaOwW-00077w-8e; Mon, 19 Sep 2022 18:08:44 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535]:42542)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oaOwU-00082r-8I; Mon, 19 Sep 2022 18:08:44 -0400
+Received: by mail-pg1-x535.google.com with SMTP id t190so626304pgd.9;
+ Mon, 19 Sep 2022 15:08:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date;
+ bh=pP6HKM0RiV4ogCZwVhZ/LIRsuuWvxoplmOtdGW3YJOo=;
+ b=Z6MbI3IYzNTvMxmjvpOWYAihgRqDUGy9ag6S23Zd8vonuEfEkrCTTJt9F6XbgLWvCj
+ U4QcydVKVYGjqx0i7zITOErf5g7YOa06eshjTKwl4GxzOoly+XPdQnZVufdnXpS/tvFD
+ e61BxvxJpe4etEG+BRdT9iOMM/oSELZ05hyovB6pvMHD/HgwOCyLeH6zeQtpWbcWNYcM
+ uT1//RNUkh5bdA56dCcUMvoQT4DjEc9d1504eor/pywX4NTd1QB969UUCgudzOPpMKcm
+ /YNFrdM/8CFFDH70LwjsKosUlga00wxcYiQLlb4KZl7v6Rke4kkCJtm+0eg7GXl5Fo21
+ L/Xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date;
+ bh=pP6HKM0RiV4ogCZwVhZ/LIRsuuWvxoplmOtdGW3YJOo=;
+ b=C6FWuHVBOa/+VPa+mpauftk8nmzxRedJwYHzwKW1FJLuJQr0INKw+7lSE+oTRzFUfV
+ gdtW+gsTRsSBtDvCuM3UTXuM6VXSQfyHCZxRwX0VIVUjRmNoS6KVg51j18aEoDuLBia7
+ 8yFmQDTpGt79Y+l0DegdjlU+0BOu+Nkj8XwAuN6ZXbqnwAeFMH2NqASEt9BmhnuUvsYt
+ Gizr9rz73ZMpa9QX9YwDZQf3q7VxDoNDK6r0kySQzuvKLCr9ld2/8JEyihvTDZgsqUtZ
+ wp63StrqIpkTqahWIVrjzaA0azrCtKVBAEwVXc/IUU6eCxUCaC+NNu/ZOIqxugH0rHxD
+ sw7g==
+X-Gm-Message-State: ACrzQf1PWGfDajod4FSSk7CzHCL1ifkVdBGw5jIwZBneevsvRBCmQNef
+ xnn3rn43YfioRpr7/oVS+riBA6UfP8hDdQIbjZI=
+X-Google-Smtp-Source: AMsMyM4Quz9oq9Pa02eDAzHIsJBHaJnU0sWJri7jzPPngweMjJiDPSZBwFPAUU48Jh+mCvAV5auNtloLy9iBvumSqFY=
+X-Received: by 2002:a05:6a00:1496:b0:546:2856:6cf5 with SMTP id
+ v22-20020a056a00149600b0054628566cf5mr19863596pfu.31.1663625319732; Mon, 19
+ Sep 2022 15:08:39 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Subject: Re: [PATCH] target/riscv: Check the correct exception cause in vector
- GDB stub
-Content-Language: en-US
-To: frank.chang@sifive.com, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Jim Shu <jim.shu@sifive.com>,
- Tommy Wu <tommy.wu@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-References: <20220918083245.13028-1-frank.chang@sifive.com>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20220918083245.13028-1-frank.chang@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.57;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-57.freemail.mail.aliyun.com
-X-Spam_score_int: -108
-X-Spam_score: -10.9
-X-Spam_bar: ----------
-X-Spam_report: (-10.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.952, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+References: <20220824221701.41932-1-atishp@rivosinc.com>
+In-Reply-To: <20220824221701.41932-1-atishp@rivosinc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 20 Sep 2022 08:08:12 +1000
+Message-ID: <CAKmqyKN+M9HYLo0oQ3zD5hvGX5KCLEK5y0D9Roh3qfpsBFsNdw@mail.gmail.com>
+Subject: Re: [PATCH v14 0/5] Improve PMU support
+To: Atish Patra <atishp@rivosinc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x535.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -56,48 +75,184 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2022 10:48:55 -0000
+X-List-Received-Date: Mon, 19 Sep 2022 22:08:44 -0000
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+On Thu, Aug 25, 2022 at 8:22 AM Atish Patra <atishp@rivosinc.com> wrote:
+>
+> The latest version of the SBI specification includes a Performance Monito=
+ring
+> Unit(PMU) extension[1] which allows the supervisor to start/stop/configur=
+e
+> various PMU events. The Sscofpmf ('Ss' for Privileged arch and Supervisor=
+-level
+> extensions, and 'cofpmf' for Count OverFlow and Privilege Mode Filtering)
+> extension[2] allows the perf like tool to handle overflow interrupts and
+> filtering support.
+>
+> This series implements remaining PMU infrastructure to support
+> PMU in virt machine. The first seven patches from the original series
+> have been merged already.
+>
+> This will allow us to add any PMU events in future.
+> Currently, this series enables the following omu events.
+> 1. cycle count
+> 2. instruction count
+> 3. DTLB load/store miss
+> 4. ITLB prefetch miss
+>
+> The first two are computed using host ticks while last three are counted =
+during
+> cpu_tlb_fill. We can do both sampling and count from guest userspace.
+> This series has been tested on both RV64 and RV32. Both Linux[3] and Open=
+sbi[4]
+> patches are required to get the perf working.
+>
+> Here is an output of perf stat/report while running hackbench with latest
+> OpenSBI & Linux kernel.
+>
+> Perf stat:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> [root@fedora-riscv ~]# perf stat -e cycles -e instructions -e dTLB-load-m=
+isses -e dTLB-store-misses -e iTLB-load-misses \
+> > perf bench sched messaging -g 1 -l 10
+> # Running 'sched/messaging' benchmark:
+> # 20 sender and receiver processes per group
+> # 1 groups =3D=3D 40 processes run
+>
+>      Total time: 0.265 [sec]
+>
+>  Performance counter stats for 'perf bench sched messaging -g 1 -l 10':
+>
+>      4,167,825,362      cycles
+>      4,166,609,256      instructions              #    1.00  insn per cyc=
+le
+>          3,092,026      dTLB-load-misses
+>            258,280      dTLB-store-misses
+>          2,068,966      iTLB-load-misses
+>
+>        0.585791767 seconds time elapsed
+>
+>        0.373802000 seconds user
+>        1.042359000 seconds sys
+>
+> Perf record:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> [root@fedora-riscv ~]# perf record -e cycles -e instructions \
+> > -e dTLB-load-misses -e dTLB-store-misses -e iTLB-load-misses -c 10000 \
+> > perf bench sched messaging -g 1 -l 10
+> # Running 'sched/messaging' benchmark:
+> # 20 sender and receiver processes per group
+> # 1 groups =3D=3D 40 processes run
+>
+>      Total time: 1.397 [sec]
+> [ perf record: Woken up 10 times to write data ]
+> Check IO/CPU overload!
+> [ perf record: Captured and wrote 8.211 MB perf.data (214486 samples) ]
+>
+> [root@fedora-riscv riscv]# perf report
+> Available samples
+> 107K cycles                                                              =
+      =E2=97=86
+> 107K instructions                                                        =
+      =E2=96=92
+> 250 dTLB-load-misses                                                     =
+      =E2=96=92
+> 13 dTLB-store-misses                                                     =
+      =E2=96=92
+> 172 iTLB-load-misses
+> ..
+>
+> Changes from v13->v14:
+> 1. Added sanity check for the hashtable in pmu.c
+>
+> Changes from v12->v13:
+> 1. Rebased on top of the apply-next.
+> 2. Addressed comments about space & comment block.
+>
+> Changes from v11->v12:
+> 1. Rebased on top of the apply-next.
+> 2. Aligned the write function & .min_priv to the previous line.
+> 3. Fixed the FDT generations for multi-socket scenario.
+> 4. Dropped interrupt property from the DT.
+> 5. Generate illegal instruction fault instead of virtual instruction faul=
+t
+>    for VS/VU access while mcounteren is not set.
+>
+> Changes from v10->v11:
+> 1. Rebased on top of the master where first 7 patches were already merged=
+.
+> 2. Removed unnecessary additional check in ctr predicate function.
+> 3. Removed unnecessary priv version checks in mcountinhibit read/write.
+> 4. Added Heiko's reviewed-by/tested-by tags.
+>
+> Changes from v8->v9:
+> 1. Added the write_done flags to the vmstate.
+> 2. Fixed the hpmcounter read access from M-mode.
+>
+> Changes from v7->v8:
+> 1. Removeding ordering constraints for mhpmcounter & mhpmevent.
+>
+> Changes from v6->v7:
+> 1. Fixed all the compilation errors for the usermode.
+>
+> Changes from v5->v6:
+> 1. Fixed compilation issue with PATCH 1.
+> 2. Addressed other comments.
+>
+> Changes from v4->v5:
+> 1. Rebased on top of the -next with following patches.
+>    - isa extension
+>    - priv 1.12 spec
+> 2. Addressed all the comments on v4
+> 3. Removed additional isa-ext DT node in favor of riscv,isa string update
+>
+> Changes from v3->v4:
+> 1. Removed the dummy events from pmu DT node.
+> 2. Fixed pmu_avail_counters mask generation.
+> 3. Added a patch to simplify the predicate function for counters.
+>
+> Changes from v2->v3:
+> 1. Addressed all the comments on PATCH1-4.
+> 2. Split patch1 into two separate patches.
+> 3. Added explicit comments to explain the event types in DT node.
+> 4. Rebased on latest Qemu.
+>
+> Changes from v1->v2:
+> 1. Dropped the ACks from v1 as signficant changes happened after v1.
+> 2. sscofpmf support.
+> 3. A generic counter management framework.
+>
+> [1] https://github.com/riscv-non-isa/riscv-sbi-doc/blob/master/riscv-sbi.=
+adoc
+> [2] https://drive.google.com/file/d/171j4jFjIkKdj5LWcExphq4xG_2sihbfd/edi=
+t
+> [3] https://github.com/atishp04/qemu/tree/riscv_pmu_v14
+>
+> Atish Patra (5):
+> target/riscv: Add sscofpmf extension support
+> target/riscv: Simplify counter predicate function
+> target/riscv: Add few cache related PMU events
+> hw/riscv: virt: Add PMU DT node to the device tree
+> target/riscv: Update the privilege field for sscofpmf CSRs
 
-Zhiwei
+Sorry, but this doesn't apply. Are you able to rebase it?
 
-On 2022/9/18 16:32, frank.chang@sifive.com wrote:
-> From: Frank Chang <frank.chang@sifive.com>
+Alistair
+
 >
-> After RISCVException enum is introduced, riscv_csrrw_debug() returns
-> RISCV_EXCP_NONE to indicate there's no error. RISC-V vector GDB stub
-> should check the result against RISCV_EXCP_NONE instead of value 0.
-> Otherwise, 'E14' packet would be incorrectly reported for vector CSRs
-> when using "info reg vector" GDB command.
+> hw/riscv/virt.c           |  16 ++
+> target/riscv/cpu.c        |  12 ++
+> target/riscv/cpu.h        |  25 +++
+> target/riscv/cpu_bits.h   |  55 +++++
+> target/riscv/cpu_helper.c |  25 +++
+> target/riscv/csr.c        | 304 +++++++++++++++++----------
+> target/riscv/machine.c    |   1 +
+> target/riscv/pmu.c        | 425 +++++++++++++++++++++++++++++++++++++-
+> target/riscv/pmu.h        |   8 +
+> 9 files changed, 760 insertions(+), 111 deletions(-)
 >
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Jim Shu <jim.shu@sifive.com>
-> Reviewed-by: Tommy Wu <tommy.wu@sifive.com>
-> ---
->   target/riscv/gdbstub.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+> --
+> 2.25.1
 >
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index 9ed049c29e..118bd40f10 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -211,7 +211,7 @@ static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
->       target_ulong val = 0;
->       int result = riscv_csrrw_debug(env, csrno, &val, 0, 0);
->   
-> -    if (result == 0) {
-> +    if (result == RISCV_EXCP_NONE) {
->           return gdb_get_regl(buf, val);
->       }
->   
-> @@ -238,7 +238,7 @@ static int riscv_gdb_set_vector(CPURISCVState *env, uint8_t *mem_buf, int n)
->       target_ulong val = ldtul_p(mem_buf);
->       int result = riscv_csrrw_debug(env, csrno, NULL, val, -1);
->   
-> -    if (result == 0) {
-> +    if (result == RISCV_EXCP_NONE) {
->           return sizeof(target_ulong);
->       }
->   
+>
 
