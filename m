@@ -1,67 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oZpfs-0003Lz-7g
-	for mharc-qemu-riscv@gnu.org; Sun, 18 Sep 2022 04:29:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36652)
+	id 1oaAHl-0007pz-I3
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 02:29:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46186)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1oZpfq-0003Lg-M4
- for qemu-riscv@nongnu.org; Sun, 18 Sep 2022 04:29:10 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433]:42740)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1oaAHY-0007nn-Tp
+ for qemu-riscv@nongnu.org; Mon, 19 Sep 2022 02:29:33 -0400
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:45905)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1oZpfo-0003v6-Nh
- for qemu-riscv@nongnu.org; Sun, 18 Sep 2022 04:29:09 -0400
-Received: by mail-pf1-x433.google.com with SMTP id b23so25269127pfp.9
- for <qemu-riscv@nongnu.org>; Sun, 18 Sep 2022 01:29:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1oaAHW-00005v-Fj
+ for qemu-riscv@nongnu.org; Mon, 19 Sep 2022 02:29:28 -0400
+Received: by mail-pj1-x1031.google.com with SMTP id
+ p1-20020a17090a2d8100b0020040a3f75eso5150479pjd.4
+ for <qemu-riscv@nongnu.org>; Sun, 18 Sep 2022 23:29:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date;
- bh=oF5jrzq09jc1ZnunLnisOmXL6et+cmuzWVeFPl2iPR0=;
- b=NdPToHFQfNukZg5Is0/iQpnX/NFmHEehoGcVGF8z60zdx/CC/f00g3i3brH+ZYoYg6
- 3DNSyP7Mhb/5yAdYYIna9k3WaOKE7x+Sh1jbiXPeDf0OOfYCIjsduI4MnOE/UQkb0SkR
- eeHt4KqS5XEtm7LansjpF30gvOHb75s3eE/SPaolc7fXeNATtRyZKE/431d+I12rvtVW
- Y+IRrMwhYgxtoqn6/DJfWDYMxo3tyYC/jmZGUuTpmuVrzi7PXPtzlPLYjSBPeGQVKODg
- CjlDPyIru3hJF0X3YA3jq/8nJxMjAQfGntmNgKxSgWf9Bmp7LqUGAW/m9+Oftep33oGY
- UPbw==
+ bh=Vopz/BYe+Ey6PidW4HcEje2S/QViCiaTuz0aoYDIniA=;
+ b=Iu0VnE7+LQcWMt405DjeIkm7F21RdtpqiJIhKn+6ieMArdCHDCK820YzHlQsKwoF50
+ LmCFc2JJlil8mLoUJCdJ0tevY3tA2wCROX41iwK+1v/WeeaE7mnVeodiTvW4JYKlvOO1
+ sha4plAUE9kluqu8kVpOOWoXFENTAVR2GRsXWEsE+7MdnpZbHSV41btZu/IvDJ8krm6N
+ yoqq+eDLRu8MSO63zv+eeGMVpBbuXMoNiBKICBjPyYUkn6gMtK/OqltytKr+YQhDhxbj
+ smPmXkMFmdEqLsFU32M4zur6Gj+tl1OigpBdPK/VwC0drvWZt1pJ+nRQwxH/8B5TX++F
+ 3dsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date;
- bh=oF5jrzq09jc1ZnunLnisOmXL6et+cmuzWVeFPl2iPR0=;
- b=VwTj7eTHcJ1PRTIfFA1D5eWE6Vh3+G7Ey9UaVvSCcWS3a3uqlWB8fr0itbd7O1taJk
- HcDhzWx89HUctmFyTp8qtvw7X5uiZ9b8jTmLMDyUYY0Kok7JR4JuFZ+m+kkLIqMJB3Rq
- Yo+QPrLzlxit3dc3yAZmOeVwlGmBIwl9fFLO3AKgQ2AUTavCW6M1H9EPqlNRXZx02S/J
- k/CyCy0nNzkwnbQKMbSENdFVNvfNMOL9j2y5HiwVJ+XarDy3amBM5Xxeyjv+fAU4/clE
- BRy6b0BvswOmiY/k/SVUHMDXysQb6XNTARkTkCXng2PaB0031o0TxngTs2z7Jkp9HKrv
- KAbg==
-X-Gm-Message-State: ACrzQf1ioGPCEFQ8aAX5xinZbvqjJsQXdO+nefzsb6LBBHE2brPM6U8B
- qiKkBn0QZ4ooJFjU68nRvU7fJA==
-X-Google-Smtp-Source: AMsMyM4o9xXCgkCdiCi3uAMGjzqnOfGGJGPlbiBkTwtpKHGUaYZqQI7Hyn/LFSHlE4ygW00vKt2E8Q==
-X-Received: by 2002:a05:6a00:8d0:b0:53b:2cbd:fab6 with SMTP id
- s16-20020a056a0008d000b0053b2cbdfab6mr13176343pfu.3.1663489746122; 
- Sun, 18 Sep 2022 01:29:06 -0700 (PDT)
-Received: from hsinchu16.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- w2-20020a1709026f0200b0017808db132bsm18113414plk.137.2022.09.18.01.29.03
+ bh=Vopz/BYe+Ey6PidW4HcEje2S/QViCiaTuz0aoYDIniA=;
+ b=0E/I9PM7drzUd44dBWUPl7b6wJqjr9Nbj0oCrbfkigqtT98G/UvLvmzN/y6QtAuw+d
+ gRPcEMPLj8HzkMT3Vc3r6bvd9UiDE+U+Nv0o4GYeQaTLGuMTJq4xaQUW2TpOehjHyQ4n
+ XsRAI1tt6DFEaCwANz0XGo9SrI/Ozwp1tETYc30qfY8Icf8dHbcD2oGagQ3AIvTGrqtE
+ qxUlnLIrfVfQvXsS1ls/lEQOgzMXCGH0iosAkAIMVPMZZ3OfgeRiKHRJJm9Ws0JUOF4j
+ LjzuYfX1/OFfr2ByTgz/OUbCN86Nge6sh4dKqoMYrFIaN3CyVDAvPdfCwwAIyUPfqIb4
+ 9PWQ==
+X-Gm-Message-State: ACrzQf1d3N1aS0vCnbuJ7g6WXlyny9c+slSiHPfMuddC2Q0VioUGZewP
+ 89/u/pqkriBdM/OtxAEmW1PfDg==
+X-Google-Smtp-Source: AMsMyM7lkZvdUCohcXepz1prpT7WQdqZ25m3mKSamP3y4NgdejnztWNGS4MoQOs/lzybpMxKJFKihA==
+X-Received: by 2002:a17:902:e549:b0:178:6d7c:abf6 with SMTP id
+ n9-20020a170902e54900b001786d7cabf6mr12004662plf.131.1663568957066; 
+ Sun, 18 Sep 2022 23:29:17 -0700 (PDT)
+Received: from ThinkPad-T490.dc1.ventanamicro.com ([122.169.74.146])
+ by smtp.googlemail.com with ESMTPSA id
+ y1-20020a17090264c100b001782580ce9csm17678574pli.249.2022.09.18.23.29.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 Sep 2022 01:29:05 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
- Jim Shu <jim.shu@sifive.com>, Tommy Wu <tommy.wu@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH] target/riscv: Check the correct exception cause in vector GDB
- stub
-Date: Sun, 18 Sep 2022 16:32:44 +0800
-Message-Id: <20220918083245.13028-1-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.36.1
+ Sun, 18 Sep 2022 23:29:16 -0700 (PDT)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
+	alistair.francis@wdc.com
+Subject: [PATCH v9 0/4] RISC-V Smstateen support
+Date: Mon, 19 Sep 2022 11:59:04 +0530
+Message-Id: <20220919062908.643945-1-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-pj1-x1031.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,46 +79,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Sep 2022 08:29:10 -0000
+X-List-Received-Date: Mon, 19 Sep 2022 06:29:33 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
+This series adds support for the Smstateen specification which provides a
+mechanism to plug the potential covert channels which are opened by extensions
+that add to processor state that may not get context-switched. Currently access
+to *envcfg registers and floating point(fcsr) is controlled via smstateen.
 
-After RISCVException enum is introduced, riscv_csrrw_debug() returns
-RISCV_EXCP_NONE to indicate there's no error. RISC-V vector GDB stub
-should check the result against RISCV_EXCP_NONE instead of value 0.
-Otherwise, 'E14' packet would be incorrectly reported for vector CSRs
-when using "info reg vector" GDB command.
+These patches can also be found on riscv_smstateen_v9 branch at:
+https://github.com/mdchitale/qemu.git
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Jim Shu <jim.shu@sifive.com>
-Reviewed-by: Tommy Wu <tommy.wu@sifive.com>
----
- target/riscv/gdbstub.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Changes in v9:
+- Rebase to latest riscv-to-apply.next
+- Add reviewed by in patches 2 and 4
 
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index 9ed049c29e..118bd40f10 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -211,7 +211,7 @@ static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
-     target_ulong val = 0;
-     int result = riscv_csrrw_debug(env, csrno, &val, 0, 0);
- 
--    if (result == 0) {
-+    if (result == RISCV_EXCP_NONE) {
-         return gdb_get_regl(buf, val);
-     }
- 
-@@ -238,7 +238,7 @@ static int riscv_gdb_set_vector(CPURISCVState *env, uint8_t *mem_buf, int n)
-     target_ulong val = ldtul_p(mem_buf);
-     int result = riscv_csrrw_debug(env, csrno, NULL, val, -1);
- 
--    if (result == 0) {
-+    if (result == RISCV_EXCP_NONE) {
-         return sizeof(target_ulong);
-     }
- 
+Changes in v8:
+- Rebase to latest riscv-to-apply.next
+- Fix m-mode check for hstateen
+- Fix return exception type for VU mode
+- Improve commit description for patch3
+
+Changes in v7:
+- Update smstateen check as per discussion on the following issue:
+  https://github.com/riscv/riscv-state-enable/issues/9
+- Drop the smstateen AIA patch for now.
+- Indentation and other fixes
+
+Changes in v6:
+- Sync with latest riscv-to-apply.next
+- Make separate read/write ops for m/h/s/stateen1/2/3 regs
+- Add check for mstateen.staten when reading or using h/s/stateen regs
+- Add smstateen fcsr check for all floating point operations
+- Move knobs to enable smstateen in a separate patch.
+
+Changes in v5:
+- Fix the order in which smstateen extension is added to the
+  isa_edata_arr as
+described in rule #3 the comment.
+
+Changes in v4:
+- Fix build issue with riscv32/riscv64-linux-user targets
+
+Changes in v3:
+- Fix coding style issues
+- Fix *stateen0h index calculation
+
+Changes in v2:
+- Make h/s/envcfg bits in m/h/stateen registers as writeable by default.
+
+Mayuresh Chitale (4):
+  target/riscv: Add smstateen support
+  target/riscv: smstateen check for h/s/envcfg
+  target/riscv: smstateen check for fcsr
+  target/riscv: smstateen knobs
+
+ target/riscv/cpu.c                        |   2 +
+ target/riscv/cpu.h                        |   4 +
+ target/riscv/cpu_bits.h                   |  37 ++
+ target/riscv/csr.c                        | 471 +++++++++++++++++++++-
+ target/riscv/insn_trans/trans_rvf.c.inc   |  40 +-
+ target/riscv/insn_trans/trans_rvzfh.c.inc |  12 +
+ target/riscv/machine.c                    |  21 +
+ 7 files changed, 583 insertions(+), 4 deletions(-)
+
 -- 
-2.36.1
+2.25.1
 
 
