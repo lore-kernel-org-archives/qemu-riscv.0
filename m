@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oaQ2E-0006bc-CM
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 19:18:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53254)
+	id 1oaQ2J-0006tu-QA
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 19:18:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45252)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1oaQ2B-0006Tc-Ga; Mon, 19 Sep 2022 19:18:39 -0400
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634]:43732)
+ id 1oaQ2H-0006mq-SF; Mon, 19 Sep 2022 19:18:45 -0400
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c]:35801)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1oaQ29-0001pI-Jl; Mon, 19 Sep 2022 19:18:39 -0400
-Received: by mail-ej1-x634.google.com with SMTP id lh5so2134996ejb.10;
- Mon, 19 Sep 2022 16:18:35 -0700 (PDT)
+ id 1oaQ2F-0001qa-V5; Mon, 19 Sep 2022 19:18:45 -0400
+Received: by mail-ed1-x52c.google.com with SMTP id 29so1406052edv.2;
+ Mon, 19 Sep 2022 16:18:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
- bh=ScsUFIDAHrm9/OPFECQYAYLcM3exK8eoaXsBNG48BMc=;
- b=bklrnXC+Q9cSo2FFOWfTXPpVHkz7irXkFbdyd6/BCU2xuyoZleDIoNMU8HijhM8/f/
- 12oHjj6bdYlh8ovjo9fbo/AzzIKh/s88xDprTDDu6uVtD36FZCWsn66rd086C8EY+gRS
- b3PgE5tctP66cgHs7ldVIlsIuNOVQEBmmny+GbC5huXVVzJ4n4/hjoj0ooNBMuoyC7+/
- IwvCtApFdCbrV78O3C5mq3mtM7+Rv7m08+xwa8/kKzar8suXKXKnclqYu1UxttLqEop6
- 3JIuCuLhTHc4skzYus3eB+AmX/fOGOrCA9D1UqE8mKBQsr1TgwZu8W5CRb5gZpTnS7Dn
- LqUQ==
+ bh=08Zu8gSbNoVwH6SgINHBVlRGcpHDOzJ+Q2vxMgjaChc=;
+ b=LfVaavpRhFpUWtJPmOxeHcORJMDqIlM8LXxn6uYegGeyIw7Hse/ODmgBL9aKBhrBR+
+ QDDcqQqAdIZTX3WL1AetyE3jL8Z7UfxdRlbeYmgC3KxoQ1JGUO5P/z0aHKwwmXDVbECj
+ AuFfIQm7sMB0W8Fn1uWO/41uzUy2iQROSJACK1zFtCB5Ab5h3m+zMu7WKhoWQK1NOfC6
+ FGmzCigSE7vWW/M9qBClZbQwtO4eC/7gkX0vt5SaBL49Jx2Ea8iuUqxrqNunzGJXm1oE
+ JWUZFC3ZmBZazxQinxj2ElsyYVRjc4rohZ/gwlRQDOLEWPgCW/Y5CMxXPPgmtldeeeIg
+ RE6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date;
- bh=ScsUFIDAHrm9/OPFECQYAYLcM3exK8eoaXsBNG48BMc=;
- b=o+OsrzuWNRK9PPgyfJuYgcySZYx4NVmuponWOTapWBvzAqxpn9ik3I174OrWR2y8KL
- FqUIGPa+EKRsXwxnfZDiZ8+hbzBK/Mjm+iNzxU7shOXFMZlty3KB2vCPMxcQjWNjiK/n
- 5jy0Ho53iMhJQW/3S7L5c4EjohcOteUoo4Ns7rmMh0BuX0Zts/s+NgF+ENUZeXTQTeep
- 7ZveAlG2H9MbjF4L7gnc/RFODerp0z08+yzYMIjP47BnYzI1Y91QrBLWFy9ue4k4A5C9
- 5S5H/7j1OH/VFc4N++kEMWdx0rDQD3RIAyQQofzbwQgu8VFhQmlWeCjrsgmhfPVa/Z8h
- qTEg==
-X-Gm-Message-State: ACrzQf0M16R2h1Mg6GmYg29N2ckd1g/J9bNx6gZUPRJ0A+9oRIvwkpxo
- hGu71W07PO6oXpNzfTSRg5CXNqx4sWuEUQ==
-X-Google-Smtp-Source: AMsMyM5zOFXr+h5fB5zVLEWuIudF3jkOWN1HVQ7NnRGDLPPjOGxYXkHu7b5fRJV74nWfwRAhpeBFrQ==
-X-Received: by 2002:a17:907:7207:b0:77b:3647:c24 with SMTP id
- dr7-20020a170907720700b0077b36470c24mr14030221ejc.417.1663629514343; 
- Mon, 19 Sep 2022 16:18:34 -0700 (PDT)
+ bh=08Zu8gSbNoVwH6SgINHBVlRGcpHDOzJ+Q2vxMgjaChc=;
+ b=5zbl2ILkDu/5fSqppB8uDEdZx0n7zLJ/EHq57OhkFSOpNWhrFMRsOjFtkwKMNfWIc3
+ XtctzFD7ezduG3jf0HP39VL3E38IH+a1ZL5GYcMp4kMChEZw8lit13CltjZiXXHRCuj0
+ VdTIB/B2WKKL7AC9wGqqsZZRi+1lgRQ9v446nAGUJwr4SlKBOKW0aLR8ZS8po5z12D2S
+ MhhiFqM9kzvqW1pyO0AK65tQpRm5vET9/c3MIFfchDi6PBxnUrprzBCfws4g7uAAa1R8
+ vy0nQ56QPt+IGd91hMgZkWPqbmfrpXDjlrzXD/W5IPhIjD85x+3C3Ke8qh4nsFE3CkHi
+ t1TA==
+X-Gm-Message-State: ACrzQf2ffw5PaOseO9yJV364/Za14o/pa/LH2eXyZarNoKZDTy6K0Z6P
+ qZRUQJW7bODigFjHASpstuh30cd59Lo3/Q==
+X-Google-Smtp-Source: AMsMyM6+ebOfksS7/dKAeoPOeQiFYFMU9VBsL7Wg1bKooGg4PafvZv5MknBjnq/lOyGHV8ZLR+girw==
+X-Received: by 2002:a05:6402:50ca:b0:451:a711:1389 with SMTP id
+ h10-20020a05640250ca00b00451a7111389mr17116111edb.239.1663629520004; 
+ Mon, 19 Sep 2022 16:18:40 -0700 (PDT)
 Received: from localhost.localdomain
  (dynamic-078-054-077-055.78.54.pool.telefonica.de. [78.54.77.55])
  by smtp.gmail.com with ESMTPSA id
- rn24-20020a170906d93800b00780f6071b5dsm4800926ejb.188.2022.09.19.16.18.28
+ rn24-20020a170906d93800b00780f6071b5dsm4800926ejb.188.2022.09.19.16.18.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Sep 2022 16:18:33 -0700 (PDT)
+ Mon, 19 Sep 2022 16:18:39 -0700 (PDT)
 From: Bernhard Beschow <shentey@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm <magnus.damm@gmail.com>,
@@ -106,16 +106,17 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm <magnus.damm@gmail.com>,
  Laurent Vivier <laurent@vivier.eu>,
  Alistair Francis <alistair@alistair23.me>,
  Jason Herne <jjherne@linux.ibm.com>, Bernhard Beschow <shentey@gmail.com>
-Subject: [PATCH 3/9] hw/core/sysbus: Resolve main_system_bus singleton
-Date: Tue, 20 Sep 2022 01:17:14 +0200
-Message-Id: <20220919231720.163121-4-shentey@gmail.com>
+Subject: [PATCH 4/9] hw/ppc/spapr: Fix code style problems reported by
+ checkpatch
+Date: Tue, 20 Sep 2022 01:17:15 +0200
+Message-Id: <20220919231720.163121-5-shentey@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220919231720.163121-1-shentey@gmail.com>
 References: <20220919231720.163121-1-shentey@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::634;
- envelope-from=shentey@gmail.com; helo=mail-ej1-x634.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=shentey@gmail.com; helo=mail-ed1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -135,118 +136,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2022 23:18:40 -0000
-
-In QEMU, a machine and the main_system_bus always go togehter. Usually
-the bus is part of the machine which suggsts to host it there.
-
-Since tere is already a current_machine singleton, all code that
-accesses the main_system_bus can be changed (behind the scenes) to go
-through current_machine. This resolves a singleton. Futhermore, by
-reifying it in code, the every-machine-has-exactly-one-main-system-bus
-relationship becomes very obvious.
-
-Note that the main_system_bus attribute is a value rather than a
-pointer. This trades pointer dereferences for pointer arithmetic. The
-idea is to reduce cache misses - a rule of thumb says that
-every pointer dereference causes a cache miss while arithmetic is
-basically free.
+X-List-Received-Date: Mon, 19 Sep 2022 23:18:46 -0000
 
 Signed-off-by: Bernhard Beschow <shentey@gmail.com>
 ---
- hw/core/bus.c       |  5 ++++-
- hw/core/machine.c   |  3 +++
- hw/core/sysbus.c    | 22 +++++-----------------
- include/hw/boards.h |  1 +
- 4 files changed, 13 insertions(+), 18 deletions(-)
+ include/hw/ppc/spapr.h | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/hw/core/bus.c b/hw/core/bus.c
-index c7831b5293..e3e807946c 100644
---- a/hw/core/bus.c
-+++ b/hw/core/bus.c
-@@ -129,9 +129,12 @@ static void qbus_init_internal(BusState *bus, DeviceState *parent,
-         bus->parent->num_child_bus++;
-         object_property_add_child(OBJECT(bus->parent), bus->name, OBJECT(bus));
-         object_unref(OBJECT(bus));
-+
-+        /* The only bus without a parent is the main system bus */
-+        assert(sysbus_get_default());
-     } else {
-         /* The only bus without a parent is the main system bus */
--        assert(bus == sysbus_get_default());
-+        assert(!sysbus_get_default());
-     }
- }
+diff --git a/include/hw/ppc/spapr.h b/include/hw/ppc/spapr.h
+index 530d739b1d..04a95669ab 100644
+--- a/include/hw/ppc/spapr.h
++++ b/include/hw/ppc/spapr.h
+@@ -848,7 +848,8 @@ static inline uint64_t ppc64_phys_to_real(uint64_t addr)
  
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index aa520e74a8..ebd3e0ff08 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -1097,6 +1097,9 @@ static void machine_initfn(Object *obj)
-     ms->smp.threads = 1;
- 
-     machine_copy_boot_config(ms, &(BootConfiguration){ 0 });
-+
-+    qbus_init(&ms->main_system_bus, sizeof(ms->main_system_bus),
-+              TYPE_SYSTEM_BUS, NULL, "main-system-bus");
- }
- 
- static void machine_finalize(Object *obj)
-diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
-index 05c1da3d31..16a9b4d7a0 100644
---- a/hw/core/sysbus.c
-+++ b/hw/core/sysbus.c
-@@ -20,6 +20,7 @@
- #include "qemu/osdep.h"
- #include "qapi/error.h"
- #include "qemu/module.h"
-+#include "hw/boards.h"
- #include "hw/sysbus.h"
- #include "monitor/monitor.h"
- #include "exec/address-spaces.h"
-@@ -336,26 +337,13 @@ static const TypeInfo sysbus_device_type_info = {
-     .class_init = sysbus_device_class_init,
- };
- 
--static BusState *main_system_bus;
--
--static void main_system_bus_create(void)
--{
--    /*
--     * assign main_system_bus before qbus_init()
--     * in order to make "if (bus != sysbus_get_default())" work
--     */
--    main_system_bus = g_malloc0(system_bus_info.instance_size);
--    qbus_init(main_system_bus, system_bus_info.instance_size,
--              TYPE_SYSTEM_BUS, NULL, "main-system-bus");
--    OBJECT(main_system_bus)->free = g_free;
--}
--
- BusState *sysbus_get_default(void)
+ static inline uint32_t rtas_ld(target_ulong phys, int n)
  {
--    if (!main_system_bus) {
--        main_system_bus_create();
-+    if (!current_machine) {
-+        return NULL;
-     }
--    return main_system_bus;
-+
-+    return &current_machine->main_system_bus;
+-    return ldl_be_phys(&address_space_memory, ppc64_phys_to_real(phys + 4*n));
++    return ldl_be_phys(&address_space_memory,
++                       ppc64_phys_to_real(phys + 4 * n));
  }
  
- static void sysbus_register_types(void)
-diff --git a/include/hw/boards.h b/include/hw/boards.h
-index 311ed17e18..7af940102d 100644
---- a/include/hw/boards.h
-+++ b/include/hw/boards.h
-@@ -346,6 +346,7 @@ struct MachineState {
-      */
-     MemoryRegion *ram;
-     DeviceMemoryState *device_memory;
-+    BusState main_system_bus;
+ static inline uint64_t rtas_ldq(target_ulong phys, int n)
+@@ -858,7 +859,7 @@ static inline uint64_t rtas_ldq(target_ulong phys, int n)
  
-     ram_addr_t ram_size;
-     ram_addr_t maxram_size;
+ static inline void rtas_st(target_ulong phys, int n, uint32_t val)
+ {
+-    stl_be_phys(&address_space_memory, ppc64_phys_to_real(phys + 4*n), val);
++    stl_be_phys(&address_space_memory, ppc64_phys_to_real(phys + 4 * n), val);
+ }
+ 
+ typedef void (*spapr_rtas_fn)(PowerPCCPU *cpu, SpaprMachineState *sm,
 -- 
 2.37.3
 
