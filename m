@@ -1,65 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oaAHl-0007pz-I3
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 02:29:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46186)
+	id 1oaAHm-0007sl-CA
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 02:29:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46196)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1oaAHY-0007nn-Tp
- for qemu-riscv@nongnu.org; Mon, 19 Sep 2022 02:29:33 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:45905)
+ id 1oaAHf-0007ob-DP
+ for qemu-riscv@nongnu.org; Mon, 19 Sep 2022 02:29:36 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:55926)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1oaAHW-00005v-Fj
- for qemu-riscv@nongnu.org; Mon, 19 Sep 2022 02:29:28 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id
- p1-20020a17090a2d8100b0020040a3f75eso5150479pjd.4
- for <qemu-riscv@nongnu.org>; Sun, 18 Sep 2022 23:29:18 -0700 (PDT)
+ id 1oaAHc-00008l-N0
+ for qemu-riscv@nongnu.org; Mon, 19 Sep 2022 02:29:35 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id fs14so26792811pjb.5
+ for <qemu-riscv@nongnu.org>; Sun, 18 Sep 2022 23:29:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date;
- bh=Vopz/BYe+Ey6PidW4HcEje2S/QViCiaTuz0aoYDIniA=;
- b=Iu0VnE7+LQcWMt405DjeIkm7F21RdtpqiJIhKn+6ieMArdCHDCK820YzHlQsKwoF50
- LmCFc2JJlil8mLoUJCdJ0tevY3tA2wCROX41iwK+1v/WeeaE7mnVeodiTvW4JYKlvOO1
- sha4plAUE9kluqu8kVpOOWoXFENTAVR2GRsXWEsE+7MdnpZbHSV41btZu/IvDJ8krm6N
- yoqq+eDLRu8MSO63zv+eeGMVpBbuXMoNiBKICBjPyYUkn6gMtK/OqltytKr+YQhDhxbj
- smPmXkMFmdEqLsFU32M4zur6Gj+tl1OigpBdPK/VwC0drvWZt1pJ+nRQwxH/8B5TX++F
- 3dsg==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
+ bh=i+HdEVHgTAqhX4nFnIrKeC/y1s1oaBNri9WKmxjnefM=;
+ b=nvbqUUBL8+UzFT4AYhjV4g4sROHGUMJZ+fm6QaqLxFCBb4L7F6vmJ/kD8WqaSeTPar
+ Yg0M6xtKJBCuT3SF1zrS9MHK2q4kagZMczq1mi0ntZNIdz2XRPWmqA8tbIfBVgPQkPdu
+ OIeOCXAtLG//G0667hgsMTFMx/RSFXSR6c0R9+eLavJfEe7thnAq3kOCaHloBL9Wxcbm
+ V7PWSnwtB50w6mSPOy5uxMcv2anQqdS2hB43Zf6qH2BCflQMs5Zs7cESNXPTrnyDWs7v
+ DgGhTo6yHJFKoY5C73G6yloVEIgjfXXxdXZSyeJdu3cAjvoDM1MhCXdMa7mkscA5MEHl
+ VgzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date;
- bh=Vopz/BYe+Ey6PidW4HcEje2S/QViCiaTuz0aoYDIniA=;
- b=0E/I9PM7drzUd44dBWUPl7b6wJqjr9Nbj0oCrbfkigqtT98G/UvLvmzN/y6QtAuw+d
- gRPcEMPLj8HzkMT3Vc3r6bvd9UiDE+U+Nv0o4GYeQaTLGuMTJq4xaQUW2TpOehjHyQ4n
- XsRAI1tt6DFEaCwANz0XGo9SrI/Ozwp1tETYc30qfY8Icf8dHbcD2oGagQ3AIvTGrqtE
- qxUlnLIrfVfQvXsS1ls/lEQOgzMXCGH0iosAkAIMVPMZZ3OfgeRiKHRJJm9Ws0JUOF4j
- LjzuYfX1/OFfr2ByTgz/OUbCN86Nge6sh4dKqoMYrFIaN3CyVDAvPdfCwwAIyUPfqIb4
- 9PWQ==
-X-Gm-Message-State: ACrzQf1d3N1aS0vCnbuJ7g6WXlyny9c+slSiHPfMuddC2Q0VioUGZewP
- 89/u/pqkriBdM/OtxAEmW1PfDg==
-X-Google-Smtp-Source: AMsMyM7lkZvdUCohcXepz1prpT7WQdqZ25m3mKSamP3y4NgdejnztWNGS4MoQOs/lzybpMxKJFKihA==
-X-Received: by 2002:a17:902:e549:b0:178:6d7c:abf6 with SMTP id
- n9-20020a170902e54900b001786d7cabf6mr12004662plf.131.1663568957066; 
- Sun, 18 Sep 2022 23:29:17 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date;
+ bh=i+HdEVHgTAqhX4nFnIrKeC/y1s1oaBNri9WKmxjnefM=;
+ b=sYkhL2HwiD/ZBEI7TgU99MK8kaM1bJB1ydtJ375OZM5PyfScD7zh+/w/cE294gGypd
+ VSs3QCExFb0xtmVllsW5R8Z3kZM86dqjdxg6lC5QJPrrrIoquo+IMVc3JC0di5maIggs
+ xMz2Vur81XtMscNZssD3weCSLK66y3n5YyxPPdUYxBQWnYKg7QxDzp9wIFenGWbnvjv7
+ tuJ4WnkAYdHhv2QaPoGPQvETzUsHsVZ28vDobcP2PcjzTEjXQ5DbwsuQnTiKShSWau3r
+ iM2M3XgGya0o3pu5GJ3ikH66CssTO4Rzp/rJqEBLZaNbgUKcBnFiKbgoatVE9N2izh1T
+ YGsg==
+X-Gm-Message-State: ACrzQf1iSYx4PVM+iTyl65JkBtydDsbqJf66d+FETEz4IEaHLTmyTfFK
+ XC7xLyH6+bQVoGRHtXPFQXa9fw==
+X-Google-Smtp-Source: AMsMyM70d4aJBnJH0K9I7eyvHPnWDDT6o6UeepD4KFT/reRfVxZUaC0HdhEIoNICqLJdYbaZzFUDRQ==
+X-Received: by 2002:a17:90b:350b:b0:202:8495:6275 with SMTP id
+ ls11-20020a17090b350b00b0020284956275mr29575893pjb.216.1663568971361; 
+ Sun, 18 Sep 2022 23:29:31 -0700 (PDT)
 Received: from ThinkPad-T490.dc1.ventanamicro.com ([122.169.74.146])
  by smtp.googlemail.com with ESMTPSA id
- y1-20020a17090264c100b001782580ce9csm17678574pli.249.2022.09.18.23.29.13
+ y1-20020a17090264c100b001782580ce9csm17678574pli.249.2022.09.18.23.29.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 Sep 2022 23:29:16 -0700 (PDT)
+ Sun, 18 Sep 2022 23:29:30 -0700 (PDT)
 From: Mayuresh Chitale <mchitale@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
-	alistair.francis@wdc.com
-Subject: [PATCH v9 0/4] RISC-V Smstateen support
-Date: Mon, 19 Sep 2022 11:59:04 +0530
-Message-Id: <20220919062908.643945-1-mchitale@ventanamicro.com>
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>, alistair.francis@wdc.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v9 4/4] target/riscv: smstateen knobs
+Date: Mon, 19 Sep 2022 11:59:08 +0530
+Message-Id: <20220919062908.643945-5-mchitale@ventanamicro.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220919062908.643945-1-mchitale@ventanamicro.com>
+References: <20220919062908.643945-1-mchitale@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=mchitale@ventanamicro.com; helo=mail-pj1-x1031.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -79,69 +81,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2022 06:29:33 -0000
+X-List-Received-Date: Mon, 19 Sep 2022 06:29:41 -0000
 
-This series adds support for the Smstateen specification which provides a
-mechanism to plug the potential covert channels which are opened by extensions
-that add to processor state that may not get context-switched. Currently access
-to *envcfg registers and floating point(fcsr) is controlled via smstateen.
+Add knobs to allow users to enable smstateen and also export it via the
+ISA extension string.
 
-These patches can also be found on riscv_smstateen_v9 branch at:
-https://github.com/mdchitale/qemu.git
+Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+Reviewed-by: Weiwei Li<liweiwei@iscas.ac.cn>
+---
+ target/riscv/cpu.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Changes in v9:
-- Rebase to latest riscv-to-apply.next
-- Add reviewed by in patches 2 and 4
-
-Changes in v8:
-- Rebase to latest riscv-to-apply.next
-- Fix m-mode check for hstateen
-- Fix return exception type for VU mode
-- Improve commit description for patch3
-
-Changes in v7:
-- Update smstateen check as per discussion on the following issue:
-  https://github.com/riscv/riscv-state-enable/issues/9
-- Drop the smstateen AIA patch for now.
-- Indentation and other fixes
-
-Changes in v6:
-- Sync with latest riscv-to-apply.next
-- Make separate read/write ops for m/h/s/stateen1/2/3 regs
-- Add check for mstateen.staten when reading or using h/s/stateen regs
-- Add smstateen fcsr check for all floating point operations
-- Move knobs to enable smstateen in a separate patch.
-
-Changes in v5:
-- Fix the order in which smstateen extension is added to the
-  isa_edata_arr as
-described in rule #3 the comment.
-
-Changes in v4:
-- Fix build issue with riscv32/riscv64-linux-user targets
-
-Changes in v3:
-- Fix coding style issues
-- Fix *stateen0h index calculation
-
-Changes in v2:
-- Make h/s/envcfg bits in m/h/stateen registers as writeable by default.
-
-Mayuresh Chitale (4):
-  target/riscv: Add smstateen support
-  target/riscv: smstateen check for h/s/envcfg
-  target/riscv: smstateen check for fcsr
-  target/riscv: smstateen knobs
-
- target/riscv/cpu.c                        |   2 +
- target/riscv/cpu.h                        |   4 +
- target/riscv/cpu_bits.h                   |  37 ++
- target/riscv/csr.c                        | 471 +++++++++++++++++++++-
- target/riscv/insn_trans/trans_rvf.c.inc   |  40 +-
- target/riscv/insn_trans/trans_rvzfh.c.inc |  12 +
- target/riscv/machine.c                    |  21 +
- 7 files changed, 583 insertions(+), 4 deletions(-)
-
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index aee14a239a..1252ca71b3 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -102,6 +102,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zhinx, true, PRIV_VERSION_1_12_0, ext_zhinx),
+     ISA_EXT_DATA_ENTRY(zhinxmin, true, PRIV_VERSION_1_12_0, ext_zhinxmin),
+     ISA_EXT_DATA_ENTRY(smaia, true, PRIV_VERSION_1_12_0, ext_smaia),
++    ISA_EXT_DATA_ENTRY(smstateen, true, PRIV_VERSION_1_12_0, ext_smstateen),
+     ISA_EXT_DATA_ENTRY(ssaia, true, PRIV_VERSION_1_12_0, ext_ssaia),
+     ISA_EXT_DATA_ENTRY(sscofpmf, true, PRIV_VERSION_1_12_0, ext_sscofpmf),
+     ISA_EXT_DATA_ENTRY(sstc, true, PRIV_VERSION_1_12_0, ext_sstc),
+@@ -1021,6 +1022,7 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+ 
++    DEFINE_PROP_BOOL("smstateen", RISCVCPU, cfg.ext_smstateen, false),
+     DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
+     DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+     DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
 -- 
 2.25.1
 
