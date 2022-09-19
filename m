@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oaQ2j-0007b1-Bk
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 19:19:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35490)
+	id 1oaQ2n-0007iR-Ca
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 19:19:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51856)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1oaQ2V-0007Qp-DB; Mon, 19 Sep 2022 19:19:01 -0400
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a]:41902)
+ id 1oaQ2g-0007ZG-8z; Mon, 19 Sep 2022 19:19:11 -0400
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631]:37800)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1oaQ2S-0001tJ-GC; Mon, 19 Sep 2022 19:18:57 -0400
-Received: by mail-ed1-x52a.google.com with SMTP id z97so1350973ede.8;
- Mon, 19 Sep 2022 16:18:54 -0700 (PDT)
+ id 1oaQ2e-0001u7-4b; Mon, 19 Sep 2022 19:19:09 -0400
+Received: by mail-ej1-x631.google.com with SMTP id a26so2211725ejc.4;
+ Mon, 19 Sep 2022 16:19:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
- bh=5XlQ1VpPqIV9nkbL5heHBJQIeqw1Mqo2GOdHAQq5+II=;
- b=V1Xkq1+a6hse0yYR3fG7QmZf7eJLZ9IHXShDEimvhNxJCgJXQZEhiB7rS29v8mOpv8
- P6Q/NgzpGGR1zjQswFV9oVsIkApjiLp/TuMLa8asbQeDVSJ9xcqsRDBMPPfvubQ/ud8M
- 6dma9SHs8xseeoX1geC075YVhTJkg5UYKK9V145qBxKkDYQso+5CEuESYbx9GpS5ITt/
- geAPZY2mvKURWXNpdq+82LS5ePfVg2MiJ8HHMrB93gDn3YIy3WMpYdI3RCQ1Wj2jPwFe
- D51PhycmYQXgI5PX3syysunfpaQHEnp6cVcDiO8I65JrGDV+oaRZA47creHSMX5+vVkK
- EpTg==
+ bh=GY9FLwpbhpko1ROroTaJ6wfQD1OQmuRWRFOe6XO0HkE=;
+ b=WvtWhaz7RfTahuePkkE9xIcuGxfWCiGa1wTboB9PRKNnjFohCiK5pF4LK4IJs9vf5N
+ yZ9b8tZiP/Tk5sTxggCXSX9hx4EUFuokcV4BrpDDY1zJG3SQgv2WDt7AMvozCWevYw/y
+ FMq1uucw4j5Oqi3St2U+VPdyyKPs808bAQonJw6bTfZqftbvg4Azml8efQ5tZ1HTfiv1
+ i2uAlpDSRqaRvcSiFKosYvLwQd4zFza7DGwVf1WV4BT2+jgksxTrQDJm9O6L00Q8j9I8
+ 4KmIJLgd7IBUyEMozx+cv/IZSOQLBXyIH5zHVtq82KU+JwLn3+FsLbrutbLKXuQqQsVI
+ bQYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date;
- bh=5XlQ1VpPqIV9nkbL5heHBJQIeqw1Mqo2GOdHAQq5+II=;
- b=cgcDoZl0+5pja86Whdon6QMRfuTODrn8HjzGVe3dXOLsNLmIGX+l855NcamftJM8nD
- VBFT5UEvgC8HYRmOjUXF9LgvJRlHfjd+U/lA8unXSxaM+bp0wZ5zgjQnm62pqSF7s/wM
- 853Kag8VWE0Rp7QJjMI8kldZOZwelmZbM8/1pg0DZxOYnz7XyPL6mwviO2+hzuTqezCi
- 2NJLEKp3LfnKG53zkDhmCGHFLkXWCiXeptGes+we7Aupyq7NCoSNtNvW7MzbSkeUQ221
- cXMSf2dyRFm8Js4UTKptWJQD0P1LNMLnVg3heSf91/x3CxPV9W66/8g7untU5EjVvWJa
- ODoQ==
-X-Gm-Message-State: ACrzQf0WM36YeEtpmbmI2AO6yJSE3HPfAq43rJQ4sS4o+IsfgmShNf6x
- 2KiRoLs/gLErW2eiJ36Auwg48KCmb/d6Kg==
-X-Google-Smtp-Source: AMsMyM6LQ7zX0snjJOKDhu4y1VtCyR5HxEAeYDZgQV0qmXEZF7bGIa6sBksILYTX9vlQa3QJPxyguw==
-X-Received: by 2002:a05:6402:2711:b0:451:327a:365f with SMTP id
- y17-20020a056402271100b00451327a365fmr17131653edd.315.1663629533162; 
- Mon, 19 Sep 2022 16:18:53 -0700 (PDT)
+ bh=GY9FLwpbhpko1ROroTaJ6wfQD1OQmuRWRFOe6XO0HkE=;
+ b=E6E/73EAwVdf6nMCLDBACDfkv+9fTSJGfEZWdakmo/nEmELRRM4iWScC5Zc8GKflUw
+ fybWPlQcaVexafdusk6JVKT0DceyXH3ae/jE2AwN3Xhv1MIAjpdjHQ+hL6z2yc76iMvC
+ I1arM5qQZZFf3gnu9hIbuq94Li5JtNjUQxHZY6/dRXiDB//UUGZLODGhSdyyDc6+Mlgi
+ JTjcYyivg3RqQzjR8Fi29px5TEPxbF55qIm1ywuqk96nOX0AjZ1/S2voHkqG0l7HKJ2n
+ PJi8ppgD0PtbfzI0grSMk1goAzmyybpULH6NkbcTUVF449zV0oHWzHYCMqUW3i+CB889
+ k1Mw==
+X-Gm-Message-State: ACrzQf1tF7u5HEuLZIbfcCmQUJDagHyu74DE3G5hNeXbBpvtx0z96yKM
+ 6yXM6SUIBj63K+UeuJZb50vhjlQ3x3JNKw==
+X-Google-Smtp-Source: AMsMyM4qkgaEMGM0QJXD77Pkxb2n4WftV+KsIglPwhyeQygcGRI6lNjr6tviLaBlIrFPXV7KHzllzg==
+X-Received: by 2002:a17:907:3e86:b0:6f5:917:10cc with SMTP id
+ hs6-20020a1709073e8600b006f5091710ccmr15309153ejc.53.1663629545495; 
+ Mon, 19 Sep 2022 16:19:05 -0700 (PDT)
 Received: from localhost.localdomain
  (dynamic-078-054-077-055.78.54.pool.telefonica.de. [78.54.77.55])
  by smtp.gmail.com with ESMTPSA id
- rn24-20020a170906d93800b00780f6071b5dsm4800926ejb.188.2022.09.19.16.18.46
+ rn24-20020a170906d93800b00780f6071b5dsm4800926ejb.188.2022.09.19.16.18.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Sep 2022 16:18:52 -0700 (PDT)
+ Mon, 19 Sep 2022 16:19:05 -0700 (PDT)
 From: Bernhard Beschow <shentey@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm <magnus.damm@gmail.com>,
@@ -106,16 +106,17 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm <magnus.damm@gmail.com>,
  Laurent Vivier <laurent@vivier.eu>,
  Alistair Francis <alistair@alistair23.me>,
  Jason Herne <jjherne@linux.ibm.com>, Bernhard Beschow <shentey@gmail.com>
-Subject: [PATCH 6/9] target/loongarch/cpu: Remove unneeded include directive
-Date: Tue, 20 Sep 2022 01:17:17 +0200
-Message-Id: <20220919231720.163121-7-shentey@gmail.com>
+Subject: [PATCH 8/9] softmmu/physmem: Let SysBusState absorb memory region and
+ address space singletons
+Date: Tue, 20 Sep 2022 01:17:19 +0200
+Message-Id: <20220919231720.163121-9-shentey@gmail.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220919231720.163121-1-shentey@gmail.com>
 References: <20220919231720.163121-1-shentey@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
- envelope-from=shentey@gmail.com; helo=mail-ed1-x52a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::631;
+ envelope-from=shentey@gmail.com; helo=mail-ej1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -135,29 +136,217 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2022 23:19:07 -0000
+X-List-Received-Date: Mon, 19 Sep 2022 23:19:15 -0000
 
-The cpu is used in both user and system emulation context while sysbus.h
-is system-only. Remove it since it's not needed anyway. Furthermore, it
-would cause a compile error in the next commit.
+These singletons are actually properties of the system bus but so far it
+hasn't been modelled that way. Fix this to make this relationship very
+obvious.
+
+The idea of the patch is to restrain futher proliferation of the use of
+get_system_memory() and get_system_io() which are "temprary interfaces"
+"until a proper bus interface is available". This should now be the
+case.
+
+Note that the new attributes are values rather than a pointers. This
+trades pointer dereferences for pointer arithmetic. The idea is to
+reduce cache misses - a rule of thumb says that every pointer
+dereference causes a cache miss while arithmetic is basically free.
 
 Signed-off-by: Bernhard Beschow <shentey@gmail.com>
 ---
- target/loongarch/cpu.h | 1 -
- 1 file changed, 1 deletion(-)
+ include/exec/address-spaces.h | 19 ++++++++++++---
+ include/hw/sysbus.h           |  6 +++++
+ softmmu/physmem.c             | 46 ++++++++++++++++++-----------------
+ 3 files changed, 45 insertions(+), 26 deletions(-)
 
-diff --git a/target/loongarch/cpu.h b/target/loongarch/cpu.h
-index dce999aaac..c9ed2cb3e7 100644
---- a/target/loongarch/cpu.h
-+++ b/target/loongarch/cpu.h
-@@ -13,7 +13,6 @@
- #include "hw/registerfields.h"
- #include "qemu/timer.h"
- #include "exec/memory.h"
--#include "hw/sysbus.h"
+diff --git a/include/exec/address-spaces.h b/include/exec/address-spaces.h
+index d5c8cbd718..b31bd8dcf0 100644
+--- a/include/exec/address-spaces.h
++++ b/include/exec/address-spaces.h
+@@ -23,17 +23,28 @@
  
- #define IOCSRF_TEMP             0
- #define IOCSRF_NODECNT          1
+ #ifndef CONFIG_USER_ONLY
+ 
+-/* Get the root memory region.  This interface should only be used temporarily
+- * until a proper bus interface is available.
++/**
++ * Get the root memory region.  This is a legacy function, provided for
++ * compatibility. Prefer using SysBusState::system_memory directly.
+  */
+ MemoryRegion *get_system_memory(void);
+ 
+-/* Get the root I/O port region.  This interface should only be used
+- * temporarily until a proper bus interface is available.
++/**
++ * Get the root I/O port region.  This is a legacy function, provided for
++ * compatibility. Prefer using SysBusState::system_io directly.
+  */
+ MemoryRegion *get_system_io(void);
+ 
++/**
++ * Get the root memory address space.  This is a legacy function, provided for
++ * compatibility. Prefer using SysBusState::address_space_memory directly.
++ */
+ AddressSpace *get_address_space_memory(void);
++
++/**
++ * Get the root I/O port address space.  This is a legacy function, provided
++ * for compatibility. Prefer using SysBusState::address_space_io directly.
++ */
+ AddressSpace *get_address_space_io(void);
+ 
+ #endif
+diff --git a/include/hw/sysbus.h b/include/hw/sysbus.h
+index 5bb3b88501..516e9091dc 100644
+--- a/include/hw/sysbus.h
++++ b/include/hw/sysbus.h
+@@ -17,6 +17,12 @@ struct SysBusState {
+     /*< private >*/
+     BusState parent_obj;
+     /*< public >*/
++
++    MemoryRegion system_memory;
++    MemoryRegion system_io;
++
++    AddressSpace address_space_io;
++    AddressSpace address_space_memory;
+ };
+ 
+ #define TYPE_SYS_BUS_DEVICE "sys-bus-device"
+diff --git a/softmmu/physmem.c b/softmmu/physmem.c
+index 0ac920d446..07e9a9171c 100644
+--- a/softmmu/physmem.c
++++ b/softmmu/physmem.c
+@@ -86,12 +86,6 @@
+  */
+ RAMList ram_list = { .blocks = QLIST_HEAD_INITIALIZER(ram_list.blocks) };
+ 
+-static MemoryRegion *system_memory;
+-static MemoryRegion *system_io;
+-
+-static AddressSpace address_space_io;
+-static AddressSpace address_space_memory;
+-
+ static MemoryRegion io_mem_unassigned;
+ 
+ typedef struct PhysPageEntry PhysPageEntry;
+@@ -146,7 +140,7 @@ typedef struct subpage_t {
+ #define PHYS_SECTION_UNASSIGNED 0
+ 
+ static void io_mem_init(void);
+-static void memory_map_init(void);
++static void memory_map_init(SysBusState *sysbus);
+ static void tcg_log_global_after_sync(MemoryListener *listener);
+ static void tcg_commit(MemoryListener *listener);
+ 
+@@ -2667,37 +2661,45 @@ static void tcg_commit(MemoryListener *listener)
+     tlb_flush(cpuas->cpu);
+ }
+ 
+-static void memory_map_init(void)
++static void memory_map_init(SysBusState *sysbus)
+ {
+-    system_memory = g_malloc(sizeof(*system_memory));
++    MemoryRegion *system_memory = &sysbus->system_memory;
++    MemoryRegion *system_io = &sysbus->system_io;
+ 
+     memory_region_init(system_memory, NULL, "system", UINT64_MAX);
+-    address_space_init(&address_space_memory, system_memory, "memory");
++    address_space_init(&sysbus->address_space_memory, system_memory, "memory");
+ 
+-    system_io = g_malloc(sizeof(*system_io));
+     memory_region_init_io(system_io, NULL, &unassigned_io_ops, NULL, "io",
+                           65536);
+-    address_space_init(&address_space_io, system_io, "I/O");
++    address_space_init(&sysbus->address_space_io, system_io, "I/O");
+ }
+ 
+ MemoryRegion *get_system_memory(void)
+ {
+-    return system_memory;
++    assert(current_machine);
++
++    return &current_machine->main_system_bus.system_memory;
+ }
+ 
+ MemoryRegion *get_system_io(void)
+ {
+-    return system_io;
++    assert(current_machine);
++
++    return &current_machine->main_system_bus.system_io;
+ }
+ 
+ AddressSpace *get_address_space_memory(void)
+ {
+-    return &address_space_memory;
++    assert(current_machine);
++
++    return &current_machine->main_system_bus.address_space_memory;
+ }
+ 
+ AddressSpace *get_address_space_io(void)
+ {
+-    return &address_space_io;
++    assert(current_machine);
++
++    return &current_machine->main_system_bus.address_space_io;
+ }
+ 
+ static void invalidate_and_set_dirty(MemoryRegion *mr, hwaddr addr,
+@@ -3003,7 +3005,7 @@ MemTxResult address_space_set(AddressSpace *as, hwaddr addr,
+ void cpu_physical_memory_rw(hwaddr addr, void *buf,
+                             hwaddr len, bool is_write)
+ {
+-    address_space_rw(&address_space_memory, addr, MEMTXATTRS_UNSPECIFIED,
++    address_space_rw(get_address_space_memory(), addr, MEMTXATTRS_UNSPECIFIED,
+                      buf, len, is_write);
+ }
+ 
+@@ -3074,7 +3076,7 @@ void cpu_flush_icache_range(hwaddr start, hwaddr len)
+         return;
+     }
+ 
+-    address_space_write_rom_internal(&address_space_memory,
++    address_space_write_rom_internal(get_address_space_memory(),
+                                      start, MEMTXATTRS_UNSPECIFIED,
+                                      NULL, len, FLUSH_CACHE);
+ }
+@@ -3140,7 +3142,7 @@ void cpu_exec_init_all(void)
+      */
+     finalize_target_page_bits();
+     io_mem_init();
+-    memory_map_init();
++    memory_map_init(&current_machine->main_system_bus);
+     qemu_mutex_init(&map_client_list_lock);
+ }
+ 
+@@ -3322,14 +3324,14 @@ void *cpu_physical_memory_map(hwaddr addr,
+                               hwaddr *plen,
+                               bool is_write)
+ {
+-    return address_space_map(&address_space_memory, addr, plen, is_write,
++    return address_space_map(get_address_space_memory(), addr, plen, is_write,
+                              MEMTXATTRS_UNSPECIFIED);
+ }
+ 
+ void cpu_physical_memory_unmap(void *buffer, hwaddr len,
+                                bool is_write, hwaddr access_len)
+ {
+-    return address_space_unmap(&address_space_memory, buffer, len,
++    return address_space_unmap(get_address_space_memory(), buffer, len,
+                                is_write, access_len);
+ }
+ 
+@@ -3554,7 +3556,7 @@ bool cpu_physical_memory_is_io(hwaddr phys_addr)
+     bool res;
+ 
+     RCU_READ_LOCK_GUARD();
+-    mr = address_space_translate(&address_space_memory,
++    mr = address_space_translate(get_address_space_memory(),
+                                  phys_addr, &phys_addr, &l, false,
+                                  MEMTXATTRS_UNSPECIFIED);
+ 
 -- 
 2.37.3
 
