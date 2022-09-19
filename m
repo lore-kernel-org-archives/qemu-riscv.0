@@ -1,115 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oaQFW-0004Yd-K8
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 19:32:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39512)
+	id 1oaQH6-0005S2-Om
+	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 19:34:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52294)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oaQEt-0004UY-5R; Mon, 19 Sep 2022 19:31:59 -0400
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032]:36468)
+ id 1oaQH5-0005PC-6w; Mon, 19 Sep 2022 19:34:03 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433]:44696)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oaQEn-000440-Gq; Mon, 19 Sep 2022 19:31:43 -0400
-Received: by mail-pj1-x1032.google.com with SMTP id
- s14-20020a17090a6e4e00b0020057c70943so8980805pjm.1; 
- Mon, 19 Sep 2022 16:31:37 -0700 (PDT)
+ id 1oaQH2-0004OH-Bg; Mon, 19 Sep 2022 19:34:01 -0400
+Received: by mail-pf1-x433.google.com with SMTP id j12so1074955pfi.11;
+ Mon, 19 Sep 2022 16:33:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date;
- bh=NSIvRNfXT4BgiWoAffM4RsDVDd2SOkBJz5nw83+ZE0Q=;
- b=dIO7rKlwpt1a4Rr55TM/1OaCkqXzxn5HQ5hnLXBRwWHTkpqxju5K46xUcpujcqqOhY
- UT1qtY65c18HaDPPSpvVTvhQ9+fVBIzAfgdO1ePcqTnS8abQ/ssqUdN4PA8+BBbGscY4
- zcHOxvhGd/Rw79kJ916G+ztNW9eW1CWpGEOd7bJnYuq86Ev2kMsm0q8+XzwBszG8pjQ2
- Pve2h3B9fmVc6VWU3tTQ2teTgIPA46kmE7p9DGMxzzCgzN9yNZgGgirx1IC7zm5IGED/
- gjezyCWZTWWjo3xYAtiH58mh8QAjO7bV/tNRRbQG7XhlchTkciQZvl7gHKj0RWl+10FH
- DxUg==
+ bh=sKvZVAO7JG903MhYl2Uv2uOM0RoX67nnq6UJthrCKok=;
+ b=itdelNQ/GODR1N/h0oYyBjqQ+WYGOC0k2CLJjFJln73rUx1UHw124sBDBgyuMe5+yo
+ 7vbwbjszj9aCqNpsbjPPHH+jipBPwC1bUlJrfqyRr0ZZD4s6sdmAHNWbjZeftgjFW0Re
+ 4TNUhM0s8WMZiz4HSbV1JrVksaZEO5O3IU/EOQ7m41lk7d7qXGx92IYaLM4X1KpSSHsY
+ tNL88+Z6/+uiP4To15h/9w1d3SdjP1/7kLUCeAIeB6j/Wi2sNigZPfaPXEJNB7NvpSGX
+ 58nHCKRshTqV5RVSTFtapziw7Yd9MCTcjbiVZ+HOUTEc7KdMbtwxcJzfNOLZE+d2c13E
+ d1/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=NSIvRNfXT4BgiWoAffM4RsDVDd2SOkBJz5nw83+ZE0Q=;
- b=CW1xkgtnCcCANlGFq9DS4TFDrNvhKNoBo4lrTchoWKiFutdnO+VVdeJubJdL/jwbxt
- pyUcKB1e2oKYZZCoWIUZg+fUk/YaVioNqqLRGYEQ1KbFW/DLtBQuDmzZS2Jq7WEA1Lhn
- VOtXJR6VEIJhsprFfP36z0I2cMV3i/cSiy5Yj6Kd63wt0ikJwyUN0pAOs6+qHOq0Fg4o
- 6Gcr4qlK/Sgn3LMXQjg3bpwk7goQFFlw+A4nX5IKO/peVNc1v5+yHfr/iI6EDX4zIIT8
- undGi53iOXbLPSYLOeKxy3d6qb8IbJT+qrg9IpEeBzxSAKZnVOcqejoy+2wSfjxAj8XG
- ZxjQ==
-X-Gm-Message-State: ACrzQf1oWn5cdhw6tEO7+R5Hkzzhm9E7eK7vAsCtLhxRp3t+h8QjVd6l
- EjGjd9D9CrRHTt0LR584zQWoCFQ3wXlngwlNNio=
-X-Google-Smtp-Source: AMsMyM5CNfH4JqOtjO62MVBjvYF0+2r5Smy7El5C/g8RoLI2QIg17MckqusD++UPU8lggRnlhnNJDkN9NdqBYMgnYv8=
-X-Received: by 2002:a17:90b:1b50:b0:202:f495:6b43 with SMTP id
- nv16-20020a17090b1b5000b00202f4956b43mr680878pjb.85.1663630296957; Mon, 19
- Sep 2022 16:31:36 -0700 (PDT)
+ bh=sKvZVAO7JG903MhYl2Uv2uOM0RoX67nnq6UJthrCKok=;
+ b=u2wpFJt6EwxJTYIpxjUfo/bbGU4tl7y32IOHJRegtsglWiubIX78Y0UdTU9UcH2s80
+ FsHBCcorQn1Mvpx+dhCP9HuGBjS+zqpIMktTpOHKaKS/syYPeYq16jzZLKH3A89dIStN
+ pI+X0im7FJ05WRyjM9EwfnVO1EhiZc3lJ1wuQMgTrBNB1WLp9fpAdovJSaDEe0Be/oRD
+ 1ZQl2LbpFhYU1W+keU3SMllziuCFH1ZuRDIHGEOPCUsGKToL/GVP/nEVqS0Q+reyMNSV
+ RKSn+00de4ypBThIEudlM3HNjfeuaLa+55p+tpNo3gjcY0QcctC67ULa+RhkLRWyzZhi
+ 0zvg==
+X-Gm-Message-State: ACrzQf2FmqFxtvXqYifVS26vlHdxTcnMe1iZFPAS+h4Du85cthsuwBP2
+ X9CvtubUzapHFKtNbgMEBdF1dwcjRnUOxNZ1fN8=
+X-Google-Smtp-Source: AMsMyM5wLU/Ee7vdOki/dNvCa/vG17pVMO0Plq7crdzE7mFo6MhXuH2yXtf8K9lQux49oCIG/g4GKNxU/C7jr3rjV3w=
+X-Received: by 2002:a05:6a00:1496:b0:546:2856:6cf5 with SMTP id
+ v22-20020a056a00149600b0054628566cf5mr20155315pfu.31.1663630438570; Mon, 19
+ Sep 2022 16:33:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220919231720.163121-1-shentey@gmail.com>
- <20220919231720.163121-2-shentey@gmail.com>
-In-Reply-To: <20220919231720.163121-2-shentey@gmail.com>
+References: <20220914101108.82571-1-alistair.francis@wdc.com>
+In-Reply-To: <20220914101108.82571-1-alistair.francis@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 20 Sep 2022 09:31:10 +1000
-Message-ID: <CAKmqyKN+V2R8PkED67tB8+pCZs9369ViiL8OZ9XhO3SdUCk5=Q@mail.gmail.com>
-Subject: Re: [PATCH 1/9] hw/riscv/sifive_e: Fix inheritance of SiFiveEState
-To: Bernhard Beschow <shentey@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, 
- Magnus Damm <magnus.damm@gmail.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, 
- Bandan Das <bsd@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>, 
- Daniel Henrique Barboza <danielhb413@gmail.com>, Sergio Lopez <slp@redhat.com>,
- Alexey Kardashevskiy <aik@ozlabs.ru>, Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- Cameron Esfahani <dirty@apple.com>, Michael Rolnik <mrolnik@gmail.com>,
- Song Gao <gaosong@loongson.cn>, 
- Jagannathan Raman <jag.raman@oracle.com>, Greg Kurz <groug@kaod.org>, 
- Kamil Rytarowski <kamil@netbsd.org>, Peter Xu <peterx@redhat.com>,
- Joel Stanley <joel@jms.id.au>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, haxm-team@intel.com, 
- Roman Bolshakov <r.bolshakov@yadro.com>, Markus Armbruster <armbru@redhat.com>,
- Eric Auger <eric.auger@redhat.com>, David Gibson <david@gibson.dropbear.id.au>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Stefan Hajnoczi <stefanha@redhat.com>, Qemu-block <qemu-block@nongnu.org>, 
- Eduardo Habkost <eduardo@habkost.net>,
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
- "open list:New World" <qemu-ppc@nongnu.org>, Cornelia Huck <cohuck@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Helge Deller <deller@gmx.de>, 
- Stefano Stabellini <sstabellini@kernel.org>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Stafford Horne <shorne@gmail.com>,
- Paul Durrant <paul@xen.org>, Havard Skinnemoen <hskinnemoen@google.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>, 
- Alexander Graf <agraf@csgraf.de>, Thomas Huth <thuth@redhat.com>, 
- Alex Williamson <alex.williamson@redhat.com>,
- Wenchao Wang <wenchao.wang@intel.com>, 
- Tony Krowiak <akrowiak@linux.ibm.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
- qemu-s390x <qemu-s390x@nongnu.org>,
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Eric Farman <farman@linux.ibm.com>, 
- Reinoud Zandijk <reinoud@netbsd.org>, Alexander Bulekov <alxndr@bu.edu>,
- Yanan Wang <wangyanan55@huawei.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Tyrone Ting <kfting@nuvoton.com>,
- "open list:X86" <xen-devel@lists.xenproject.org>, 
- Yoshinori Sato <ysato@users.sourceforge.jp>, John Snow <jsnow@redhat.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Darren Kenny <darren.kenny@oracle.com>, 
- "open list:Overall" <kvm@vger.kernel.org>, Qiuhao Li <Qiuhao.Li@outlook.com>, 
- John G Johnson <john.g.johnson@oracle.com>, Bin Meng <bin.meng@windriver.com>, 
- Sunil Muthuswamy <sunilmut@microsoft.com>, Max Filippov <jcmvbkbc@gmail.com>, 
- qemu-arm <qemu-arm@nongnu.org>, Marcelo Tosatti <mtosatti@redhat.com>, 
- Peter Maydell <peter.maydell@linaro.org>,
- Anthony Perard <anthony.perard@citrix.com>, 
- Andrew Jeffery <andrew@aj.id.au>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Halil Pasic <pasic@linux.ibm.com>, 
- "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>,
- Jason Wang <jasowang@redhat.com>, 
- David Hildenbrand <david@redhat.com>, Laurent Vivier <laurent@vivier.eu>, 
- Alistair Francis <alistair@alistair23.me>, Jason Herne <jjherne@linux.ibm.com>
+Date: Tue, 20 Sep 2022 09:33:32 +1000
+Message-ID: <CAKmqyKNTcsO2XYnE3+8kdYQrx4vGLb8ozGkUFPmUyWFX8H1rFQ@mail.gmail.com>
+Subject: Re: [PATCH 0/3] hw/riscv: opentitan: Fixup resetvec issues
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Bin Meng <bin.meng@windriver.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x1032.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -130,50 +73,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2022 23:32:22 -0000
+X-List-Received-Date: Mon, 19 Sep 2022 23:34:04 -0000
 
-On Tue, Sep 20, 2022 at 9:18 AM Bernhard Beschow <shentey@gmail.com> wrote:
+On Wed, Sep 14, 2022 at 8:11 PM Alistair Francis
+<alistair.francis@wdc.com> wrote:
 >
-> SiFiveEState inherits from SysBusDevice while it's TypeInfo claims it to
-> inherit from TYPE_MACHINE. This is an inconsistency which can cause
-> undefined behavior such as memory corruption.
+> The OpenTitan resetvec is dynamic on QEMU as we don't run the full boot
+> ROM flow. This series makes it more configurguable from the command line
+> and fixes the default.
 >
-> Change SiFiveEState to inherit from MachineState since it is registered
-> as a machine.
->
-> Signed-off-by: Bernhard Beschow <shentey@gmail.com>
+> Alistair Francis (3):
+>   target/riscv: Set the CPU resetvec directly
+>   hw/riscv: opentitan: Fixup resetvec
+>   hw/riscv: opentitan: Expose the resetvec as a SoC property
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  include/hw/riscv/sifive_e.h | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-> index 83604da805..d738745925 100644
-> --- a/include/hw/riscv/sifive_e.h
-> +++ b/include/hw/riscv/sifive_e.h
-> @@ -22,6 +22,7 @@
->  #include "hw/riscv/riscv_hart.h"
->  #include "hw/riscv/sifive_cpu.h"
->  #include "hw/gpio/sifive_gpio.h"
-> +#include "hw/boards.h"
+>  include/hw/riscv/opentitan.h |  2 ++
+>  target/riscv/cpu.h           |  3 +--
+>  hw/riscv/opentitan.c         |  8 +++++++-
+>  target/riscv/cpu.c           | 13 +++----------
+>  target/riscv/machine.c       |  6 +++---
+>  5 files changed, 16 insertions(+), 16 deletions(-)
 >
->  #define TYPE_RISCV_E_SOC "riscv.sifive.e.soc"
->  #define RISCV_E_SOC(obj) \
-> @@ -41,7 +42,7 @@ typedef struct SiFiveESoCState {
->
->  typedef struct SiFiveEState {
->      /*< private >*/
-> -    SysBusDevice parent_obj;
-> +    MachineState parent_obj;
->
->      /*< public >*/
->      SiFiveESoCState soc;
 > --
-> 2.37.3
->
+> 2.37.2
 >
 
