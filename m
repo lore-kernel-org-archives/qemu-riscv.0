@@ -1,62 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oadox-0004f0-M7
-	for mharc-qemu-riscv@gnu.org; Tue, 20 Sep 2022 10:01:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46176)
+	id 1oafKF-00007B-F4
+	for mharc-qemu-riscv@gnu.org; Tue, 20 Sep 2022 11:38:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52348)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <danielhb413@gmail.com>)
- id 1oadoM-0004ak-3b; Tue, 20 Sep 2022 10:01:18 -0400
-Received: from mail-ot1-x32c.google.com ([2607:f8b0:4864:20::32c]:43755)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <danielhb413@gmail.com>)
- id 1oadoJ-0001I2-LF; Tue, 20 Sep 2022 10:01:17 -0400
-Received: by mail-ot1-x32c.google.com with SMTP id
- cm7-20020a056830650700b006587fe87d1aso1763150otb.10; 
- Tue, 20 Sep 2022 07:01:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date;
- bh=obx72+8lj9qm2WhrMMX0CKsbEGig5oqUktdJe59wJ8c=;
- b=EYGsqsWfnaYLIUhNnwR+W3+HQV7e1PVwf2K+QWqXr8T8ik7uhUchYwfaPRXzwOSNdj
- Y/VehUxaTawGdfoqwV5K3tSuvfrPWqckFhn+PXkxZYghBOhI2+TO0xbTzdFFrdhpyh2x
- veDoWSvsPDca3I578Fy9amlMqEZxQtbHz3JbXHWjMiu5OfyH5uyFImUWMMUvuKamIuTS
- YG8Kte9lSMN+Y8mrfYFVvuA43odoGtzEhiO8+jo4NP0P6X2/MTgvqMcLEzX/vDtgsO9b
- Gwc7jwC79qXCaM1/HPNBUkVZGrFZS5xRrwr2Ne3iu0RW7Y6naElU5JeR1p5TlLLhSvzD
- 4tyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date;
- bh=obx72+8lj9qm2WhrMMX0CKsbEGig5oqUktdJe59wJ8c=;
- b=pNAVbaV0cdBTBX9aeYZ8R39h0Bp2hhrTwkrjEY6+7dW5Xey+HrO+YmOTdLJjRs5VLb
- RvtCLKnlMM1bhZ0UnQ0iQX67NO5zf7lKEJxWC1IboWCg/OpvR8H35i8H/92JPkqb8Za0
- ZadMSB9W8pFRN38gowU72bu80rjveWFaFspXkFMDJzdAYQJqFNGgfGwbxxM+k7PYDHYr
- +ToyOYak834RmJLBzkusXuC5NEwNOPb63UwGgc0j29iZ68DFbTx+lS/HNWx/56S1Nag0
- 5syCyV4KGYBkoV77uUQjW4lfPPoOHP0qZs+W/pGwkZtorPAAZJuUNE6/mqiXP9sDDHe0
- bveQ==
-X-Gm-Message-State: ACrzQf2dzpMK357zbVSiVzbLEuGbT2d5QP97UAT23N0TaoohkBBzvXYu
- lou87CRbDrSV/gtHkxZU76w=
-X-Google-Smtp-Source: AMsMyM7SJwY7Rzq8kp0hCW9RSDbUha/Eoq34TgM/6q2jfQ2yIYDABRMiwIOljIt9IFN/T/DE/u7ntw==
-X-Received: by 2002:a05:6830:18d8:b0:655:1f50:715f with SMTP id
- v24-20020a05683018d800b006551f50715fmr10392167ote.97.1663682472036; 
- Tue, 20 Sep 2022 07:01:12 -0700 (PDT)
-Received: from [192.168.10.102] ([191.193.2.69])
- by smtp.gmail.com with ESMTPSA id
- y22-20020a056830071600b0065892f42157sm821295ots.75.2022.09.20.07.00.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Sep 2022 07:01:10 -0700 (PDT)
-Message-ID: <8906f236-dbfc-7d51-a87d-2c02e8c506b2@gmail.com>
-Date: Tue, 20 Sep 2022 11:00:50 -0300
+ (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1oafK3-0008Sn-6D; Tue, 20 Sep 2022 11:38:07 -0400
+Received: from mail.ilande.co.uk ([2001:41c9:1:41f::167]:51486)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1oafK1-0001Zj-4n; Tue, 20 Sep 2022 11:38:06 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ilande.co.uk; s=20220518; h=Subject:Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=DxUS2wc8S5XxDbYIITAjbCY/K9B97p0z/uIdsCi89f4=; b=q8dDxxpdwWDpHEVedTNp99huTl
+ ieOauNOwBFfYBDnKcDBqCHjuV4ahcE1blChUCvnn1ld2RsCLwnoBIq1ubUWjGD1XG+OipNXhMHYV3
+ A5UVDUPeFztTSqKs6X7P+cnq84CeGwoY32GoPxxVEEcm4T6W++H/W2qq+IUbg08VbaPZn2PpQhA6G
+ bLj5usr33B5oFZ1w1pzMsxXoWw5TqXPu+p5QK2QdWpGZxnhsfad6mIAO4emRZahrJpZli75qhfkPZ
+ JidI8Md/95Pa4BTPf6Cssb8yEiTDu6oS0+mepXs9cZhYwKX0GB+Wh3jWanOFKnNugdGBTJ2negqZ5
+ kQ5zkM8I3F09Yqn2tNuiF62sq4HjlfBTtNVHH/wu5YepzmsU+yGEiv75Er59M/E1rO+t7vI3zdHhL
+ K6EOXVatICRAGXSZ2pXGTOtCsdntXKmTpLa28j5QBqhUoCSVwaSj/dnxqdkPzCQwQsRXyL4b13OSS
+ pTWzfSYUZ3XA1cZjpzVW7U3+3jDQGahsb6BDRM7yMzynJF79hN3JliPwomVGl3TlmAF9ZXbgB6v8x
+ EdBv3RhbS9nnzMB0fMo8v8PRvu4ZQAqDHvVlI+IWDk4CDXNVEIO08YEfWVoJ8mVf99CP1R3I6tydJ
+ Gl7iS5zTOghPdk9mRJyFsq8Jqasp4a0Y+B74kjNoY=;
+Received: from [2a00:23c4:8ba7:8700:f0a2:2ba9:489e:6915]
+ by mail.ilande.co.uk with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.92) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1oafGv-000Afu-Ct; Tue, 20 Sep 2022 16:34:53 +0100
+Message-ID: <49325e7d-5020-23f7-4bce-c53d8d988c95@ilande.co.uk>
+Date: Tue, 20 Sep 2022 16:36:26 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.1
-Subject: Re: [PATCH 4/9] hw/ppc/spapr: Fix code style problems reported by
- checkpatch
-To: Bernhard Beschow <shentey@gmail.com>, qemu-devel@nongnu.org
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm
- <magnus.damm@gmail.com>, Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Bandan Das <bsd@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.13.0
+Content-Language: en-US
+To: Peter Maydell <peter.maydell@linaro.org>,
+ Bernhard Beschow <shentey@gmail.com>
+Cc: qemu-devel@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
+ Magnus Damm <magnus.damm@gmail.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, Bandan Das
+ <bsd@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
  Sergio Lopez <slp@redhat.com>, Alexey Kardashevskiy <aik@ozlabs.ru>,
  Xiaojuan Yang <yangxiaojuan@loongson.cn>, Cameron Esfahani
  <dirty@apple.com>, Michael Rolnik <mrolnik@gmail.com>,
@@ -87,10 +72,9 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm
  Wenchao Wang <wenchao.wang@intel.com>, Tony Krowiak
  <akrowiak@linux.ibm.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  qemu-s390x@nongnu.org, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
- <marcandre.lureau@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Eric Farman <farman@linux.ibm.com>, Reinoud Zandijk <reinoud@netbsd.org>,
- Alexander Bulekov <alxndr@bu.edu>, Yanan Wang <wangyanan55@huawei.com>,
+ <marcandre.lureau@redhat.com>, Eric Farman <farman@linux.ibm.com>,
+ Reinoud Zandijk <reinoud@netbsd.org>, Alexander Bulekov <alxndr@bu.edu>,
+ Yanan Wang <wangyanan55@huawei.com>,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  Gerd Hoffmann <kraxel@redhat.com>, Tyrone Ting <kfting@nuvoton.com>,
  xen-devel@lists.xenproject.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
@@ -102,7 +86,6 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm
  Sunil Muthuswamy <sunilmut@microsoft.com>, Max Filippov
  <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  Marcelo Tosatti <mtosatti@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
  Anthony Perard <anthony.perard@citrix.com>, Andrew Jeffery
  <andrew@aj.id.au>, Artyom Tarasenko <atar4qemu@gmail.com>,
  Halil Pasic <pasic@linux.ibm.com>,
@@ -111,22 +94,25 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm
  Laurent Vivier <laurent@vivier.eu>, Alistair Francis
  <alistair@alistair23.me>, Jason Herne <jjherne@linux.ibm.com>
 References: <20220919231720.163121-1-shentey@gmail.com>
- <20220919231720.163121-5-shentey@gmail.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <danielhb413@gmail.com>
-In-Reply-To: <20220919231720.163121-5-shentey@gmail.com>
+ <CAFEAcA8GjXFO4WK=KybgSc8rMfqecwD9EXS0kZMKtqogNf1Tsg@mail.gmail.com>
+From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+In-Reply-To: <CAFEAcA8GjXFO4WK=KybgSc8rMfqecwD9EXS0kZMKtqogNf1Tsg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32c;
- envelope-from=danielhb413@gmail.com; helo=mail-ot1-x32c.google.com
-X-Spam_score_int: -39
-X-Spam_score: -4.0
+X-SA-Exim-Connect-IP: 2a00:23c4:8ba7:8700:f0a2:2ba9:489e:6915
+X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
+Subject: Re: [PATCH 0/9] Deprecate sysbus_get_default() and
+ get_system_memory() et. al
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on mail.ilande.co.uk)
+Received-SPF: pass client-ip=2001:41c9:1:41f::167;
+ envelope-from=mark.cave-ayland@ilande.co.uk; helo=mail.ilande.co.uk
+X-Spam_score_int: -42
+X-Spam_score: -4.3
 X-Spam_bar: ----
-X-Spam_report: (-4.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, NICE_REPLY_A=-2.182,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.182,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -139,46 +125,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Sep 2022 14:01:22 -0000
+X-List-Received-Date: Tue, 20 Sep 2022 15:38:17 -0000
 
+On 20/09/2022 10:55, Peter Maydell wrote:
 
-On 9/19/22 20:17, Bernhard Beschow wrote:
-> Signed-off-by: Bernhard Beschow <shentey@gmail.com>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <danielhb413@gmail.com>
-
-
-And I've queued it in gitlab.com/danielhb/qemu/tree/ppc-next since it's not
-tied with the rest of the series. Thanks,
-
-
-Daniel
-
->   include/hw/ppc/spapr.h | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
+> On Tue, 20 Sept 2022 at 00:18, Bernhard Beschow <shentey@gmail.com> wrote:
+>>
+>> In address-spaces.h it can be read that get_system_memory() and
+>> get_system_io() are temporary interfaces which "should only be used temporarily
+>> until a proper bus interface is available". This statement certainly extends to
+>> the address_space_memory and address_space_io singletons.
 > 
-> diff --git a/include/hw/ppc/spapr.h b/include/hw/ppc/spapr.h
-> index 530d739b1d..04a95669ab 100644
-> --- a/include/hw/ppc/spapr.h
-> +++ b/include/hw/ppc/spapr.h
-> @@ -848,7 +848,8 @@ static inline uint64_t ppc64_phys_to_real(uint64_t addr)
->   
->   static inline uint32_t rtas_ld(target_ulong phys, int n)
->   {
-> -    return ldl_be_phys(&address_space_memory, ppc64_phys_to_real(phys + 4*n));
-> +    return ldl_be_phys(&address_space_memory,
-> +                       ppc64_phys_to_real(phys + 4 * n));
->   }
->   
->   static inline uint64_t rtas_ldq(target_ulong phys, int n)
-> @@ -858,7 +859,7 @@ static inline uint64_t rtas_ldq(target_ulong phys, int n)
->   
->   static inline void rtas_st(target_ulong phys, int n, uint32_t val)
->   {
-> -    stl_be_phys(&address_space_memory, ppc64_phys_to_real(phys + 4*n), val);
-> +    stl_be_phys(&address_space_memory, ppc64_phys_to_real(phys + 4 * n), val);
->   }
->   
->   typedef void (*spapr_rtas_fn)(PowerPCCPU *cpu, SpaprMachineState *sm,
+> This is a long standing "we never really completed a cleanup"...
+> 
+>> This series attempts
+>> to stop further proliferation of their use by turning TYPE_SYSTEM_BUS into an
+>> object-oriented, "proper bus interface" inspired by PCIBus.
+>>
+>> While at it, also the main_system_bus singleton is turned into an attribute of
+>> MachineState. Together, this resolves five singletons in total, making the
+>> ownership relations much more obvious which helps comprehension.
+> 
+> ...but I don't think this is the direction we want to go.
+> Overall the reason that the "system memory" and "system IO"
+> singletons are weird is that in theory they should not be necessary
+> at all -- board code should create devices and map them into an
+> entirely arbitrary MemoryRegion or set of MemoryRegions corresponding
+> to address space(s) for the CPU and for DMA-capable devices. But we
+> keep them around because
+>   (a) there is a ton of legacy code that assumes there's only one
+>       address space in the system and this is it
+>   (b) when modelling the kind of board where there really is only
+>       one address space, having the 'system memory' global makes
+>       the APIs for creating and connecting devices a lot simpler
+> 
+> Retaining the whole-system singleton but shoving it into MachineState
+> doesn't really change much, IMHO.
+> 
+> More generally, sysbus is rather weird because it isn't really a
+> bus. Every device in the system of TYPE_SYS_BUS_DEVICE is "on"
+> the unique TYPE_SYSTEM_BUS bus, but that doesn't mean they're
+> all in the same address space or that in real hardware they'd
+> all be on the same bus. sysbus has essentially degraded into a
+> hack for having devices get reset. I really really need to make
+> some time to have another look at reset handling. If we get that
+> right then I think it's probably possible to collapse the few
+> things TYPE_SYS_BUS_DEVICE does that TYPE_DEVICE does not down
+> into TYPE_DEVICE and get rid of sysbus altogether...
+
+Following on from one of the discussion points from Alex's KVM Forum BoF session: I 
+think longer term what we need to aim for is for QEMU machines to define their own 
+address spaces, and then bind those address spaces containing memory-mapped devices 
+to one or more CPUs.
+
+Once this in place, as Peter notes above it just remains to solve the reset problem 
+and then it becomes possible to eliminate sysbus altogether as everything else can 
+already be managed by qdev/QOM.
+
+
+ATB,
+
+Mark.
 
