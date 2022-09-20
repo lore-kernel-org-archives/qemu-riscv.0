@@ -1,119 +1,132 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oabZe-0000LC-6v
-	for mharc-qemu-riscv@gnu.org; Tue, 20 Sep 2022 07:38:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47930)
+	id 1oadox-0004f0-M7
+	for mharc-qemu-riscv@gnu.org; Tue, 20 Sep 2022 10:01:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46176)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1oabYo-0000E8-Tw
- for qemu-riscv@nongnu.org; Tue, 20 Sep 2022 07:37:10 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:46980)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1oabYn-0001Vw-3A
- for qemu-riscv@nongnu.org; Tue, 20 Sep 2022 07:37:06 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1663673818;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Q9Kiy75k/GjyNcX5/jFVpAejSl+0Eo6vMfAUPlGa7+Q=;
- b=ghf9dbOqjuTleiHZGgoG/4l7pzvtOOq/oNQUQgQ6pI3HEZFuU2XL4PpjuEyKtYwKxw9h6i
- Qpc5OgW1L5noORoaE4lEuQsrCiB3l0d9CG9TcstOVJ5QVlFMSRr4lPdy7/J03Q7tONQ73j
- gw74ZN5QOtzG9o2OAzaLXUqKyGttqMY=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-49-nyyOMpweMKOJOc5LnI28Bw-1; Tue, 20 Sep 2022 07:36:52 -0400
-X-MC-Unique: nyyOMpweMKOJOc5LnI28Bw-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
- [10.11.54.3])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1C1DF3810D23;
- Tue, 20 Sep 2022 11:36:50 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.39.192.163])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id EF591112131E;
- Tue, 20 Sep 2022 11:36:48 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id A0E0D21E6900; Tue, 20 Sep 2022 13:36:47 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: Alistair Francis <alistair23@gmail.com>, Bin Meng
- <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Bernhard Beschow <shentey@gmail.com>,  "qemu-devel@nongnu.org
- Developers" <qemu-devel@nongnu.org>,  "Michael S. Tsirkin"
- <mst@redhat.com>,  Magnus Damm <magnus.damm@gmail.com>,  Aleksandar Rikalo
- <aleksandar.rikalo@syrmia.com>,  Bandan Das <bsd@redhat.com>,  Matthew
- Rosato <mjrosato@linux.ibm.com>,  Daniel Henrique Barboza
- <danielhb413@gmail.com>,  Sergio Lopez <slp@redhat.com>,  Alexey
- Kardashevskiy <aik@ozlabs.ru>,  Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- Cameron Esfahani <dirty@apple.com>,  Michael Rolnik <mrolnik@gmail.com>,
- Song Gao <gaosong@loongson.cn>,  Jagannathan Raman
- <jag.raman@oracle.com>,  Greg Kurz <groug@kaod.org>,  Kamil Rytarowski
- <kamil@netbsd.org>,  Peter Xu <peterx@redhat.com>,  Joel Stanley
- <joel@jms.id.au>,  Alistair Francis <Alistair.Francis@wdc.com>,  "Dr.
- David Alan Gilbert" <dgilbert@redhat.com>,  Paolo Bonzini
- <pbonzini@redhat.com>,  haxm-team@intel.com,  Roman Bolshakov
- <r.bolshakov@yadro.com>,  Markus Armbruster <armbru@redhat.com>,  Eric
- Auger <eric.auger@redhat.com>,  David Gibson
- <david@gibson.dropbear.id.au>,  Daniel P. =?utf-8?Q?Berrang=C3=A9?=
- <berrange@redhat.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,  =?utf-8?Q?C=C3=A9dri?=
- =?utf-8?Q?c?= Le Goater
- <clg@kaod.org>,  Stefan Hajnoczi <stefanha@redhat.com>,  Qemu-block
- <qemu-block@nongnu.org>,  Eduardo Habkost <eduardo@habkost.net>,
- =?utf-8?Q?Herv=C3=A9?=
- Poussineau <hpoussin@reactos.org>,  "open list:New World"
- <qemu-ppc@nongnu.org>,  Cornelia Huck <cohuck@redhat.com>,  Helge Deller
- <deller@gmx.de>,  Stefano Stabellini <sstabellini@kernel.org>,  Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,  "open list:RISC-V"
- <qemu-riscv@nongnu.org>,  Stafford Horne <shorne@gmail.com>,  Paul Durrant
- <paul@xen.org>,  Havard Skinnemoen <hskinnemoen@google.com>,  Elena
- Ufimtseva <elena.ufimtseva@oracle.com>,  Alexander Graf <agraf@csgraf.de>,
- Thomas Huth <thuth@redhat.com>,  Alex Williamson
- <alex.williamson@redhat.com>,  Wenchao Wang <wenchao.wang@intel.com>,
- Tony Krowiak <akrowiak@linux.ibm.com>,  Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>,  qemu-s390x <qemu-s390x@nongnu.org>,
- =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,  Mark
- Cave-Ayland
- <mark.cave-ayland@ilande.co.uk>,  Eric Farman <farman@linux.ibm.com>,
- Reinoud Zandijk <reinoud@netbsd.org>,  Alexander Bulekov <alxndr@bu.edu>,
- Yanan Wang <wangyanan55@huawei.com>,  "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>,  Gerd Hoffmann <kraxel@redhat.com>,  Tyrone
- Ting <kfting@nuvoton.com>,  "open list:X86"
- <xen-devel@lists.xenproject.org>,  Yoshinori Sato
- <ysato@users.sourceforge.jp>,  John Snow <jsnow@redhat.com>,  Richard
- Henderson <richard.henderson@linaro.org>,  Darren Kenny
- <darren.kenny@oracle.com>,  "open list:Overall" <kvm@vger.kernel.org>,
- Qiuhao Li <Qiuhao.Li@outlook.com>,  John G Johnson
- <john.g.johnson@oracle.com>,  Sunil Muthuswamy <sunilmut@microsoft.com>,
- Max Filippov <jcmvbkbc@gmail.com>,  qemu-arm <qemu-arm@nongnu.org>,
- Marcelo Tosatti <mtosatti@redhat.com>,  Peter Maydell
- <peter.maydell@linaro.org>,  Anthony Perard <anthony.perard@citrix.com>,
- Andrew Jeffery <andrew@aj.id.au>,  Artyom Tarasenko
- <atar4qemu@gmail.com>,  Halil Pasic <pasic@linux.ibm.com>,  "Maciej S.
- Szmigiero" <maciej.szmigiero@oracle.com>,  Jason Wang
- <jasowang@redhat.com>,  David Hildenbrand <david@redhat.com>,  Laurent
- Vivier <laurent@vivier.eu>,  Alistair Francis <alistair@alistair23.me>,
- Jason Herne <jjherne@linux.ibm.com>
-Subject: Re: [PATCH 1/9] hw/riscv/sifive_e: Fix inheritance of SiFiveEState
-References: <20220919231720.163121-1-shentey@gmail.com>
- <20220919231720.163121-2-shentey@gmail.com>
- <CAKmqyKN+V2R8PkED67tB8+pCZs9369ViiL8OZ9XhO3SdUCk5=Q@mail.gmail.com>
-Date: Tue, 20 Sep 2022 13:36:47 +0200
-In-Reply-To: <CAKmqyKN+V2R8PkED67tB8+pCZs9369ViiL8OZ9XhO3SdUCk5=Q@mail.gmail.com>
- (Alistair Francis's message of "Tue, 20 Sep 2022 09:31:10 +1000")
-Message-ID: <87edw6xoog.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
+ (Exim 4.90_1) (envelope-from <danielhb413@gmail.com>)
+ id 1oadoM-0004ak-3b; Tue, 20 Sep 2022 10:01:18 -0400
+Received: from mail-ot1-x32c.google.com ([2607:f8b0:4864:20::32c]:43755)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <danielhb413@gmail.com>)
+ id 1oadoJ-0001I2-LF; Tue, 20 Sep 2022 10:01:17 -0400
+Received: by mail-ot1-x32c.google.com with SMTP id
+ cm7-20020a056830650700b006587fe87d1aso1763150otb.10; 
+ Tue, 20 Sep 2022 07:01:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date;
+ bh=obx72+8lj9qm2WhrMMX0CKsbEGig5oqUktdJe59wJ8c=;
+ b=EYGsqsWfnaYLIUhNnwR+W3+HQV7e1PVwf2K+QWqXr8T8ik7uhUchYwfaPRXzwOSNdj
+ Y/VehUxaTawGdfoqwV5K3tSuvfrPWqckFhn+PXkxZYghBOhI2+TO0xbTzdFFrdhpyh2x
+ veDoWSvsPDca3I578Fy9amlMqEZxQtbHz3JbXHWjMiu5OfyH5uyFImUWMMUvuKamIuTS
+ YG8Kte9lSMN+Y8mrfYFVvuA43odoGtzEhiO8+jo4NP0P6X2/MTgvqMcLEzX/vDtgsO9b
+ Gwc7jwC79qXCaM1/HPNBUkVZGrFZS5xRrwr2Ne3iu0RW7Y6naElU5JeR1p5TlLLhSvzD
+ 4tyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date;
+ bh=obx72+8lj9qm2WhrMMX0CKsbEGig5oqUktdJe59wJ8c=;
+ b=pNAVbaV0cdBTBX9aeYZ8R39h0Bp2hhrTwkrjEY6+7dW5Xey+HrO+YmOTdLJjRs5VLb
+ RvtCLKnlMM1bhZ0UnQ0iQX67NO5zf7lKEJxWC1IboWCg/OpvR8H35i8H/92JPkqb8Za0
+ ZadMSB9W8pFRN38gowU72bu80rjveWFaFspXkFMDJzdAYQJqFNGgfGwbxxM+k7PYDHYr
+ +ToyOYak834RmJLBzkusXuC5NEwNOPb63UwGgc0j29iZ68DFbTx+lS/HNWx/56S1Nag0
+ 5syCyV4KGYBkoV77uUQjW4lfPPoOHP0qZs+W/pGwkZtorPAAZJuUNE6/mqiXP9sDDHe0
+ bveQ==
+X-Gm-Message-State: ACrzQf2dzpMK357zbVSiVzbLEuGbT2d5QP97UAT23N0TaoohkBBzvXYu
+ lou87CRbDrSV/gtHkxZU76w=
+X-Google-Smtp-Source: AMsMyM7SJwY7Rzq8kp0hCW9RSDbUha/Eoq34TgM/6q2jfQ2yIYDABRMiwIOljIt9IFN/T/DE/u7ntw==
+X-Received: by 2002:a05:6830:18d8:b0:655:1f50:715f with SMTP id
+ v24-20020a05683018d800b006551f50715fmr10392167ote.97.1663682472036; 
+ Tue, 20 Sep 2022 07:01:12 -0700 (PDT)
+Received: from [192.168.10.102] ([191.193.2.69])
+ by smtp.gmail.com with ESMTPSA id
+ y22-20020a056830071600b0065892f42157sm821295ots.75.2022.09.20.07.00.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Sep 2022 07:01:10 -0700 (PDT)
+Message-ID: <8906f236-dbfc-7d51-a87d-2c02e8c506b2@gmail.com>
+Date: Tue, 20 Sep 2022 11:00:50 -0300
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.1
+Subject: Re: [PATCH 4/9] hw/ppc/spapr: Fix code style problems reported by
+ checkpatch
+To: Bernhard Beschow <shentey@gmail.com>, qemu-devel@nongnu.org
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm
+ <magnus.damm@gmail.com>, Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Bandan Das <bsd@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
+ Sergio Lopez <slp@redhat.com>, Alexey Kardashevskiy <aik@ozlabs.ru>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>, Cameron Esfahani
+ <dirty@apple.com>, Michael Rolnik <mrolnik@gmail.com>,
+ Song Gao <gaosong@loongson.cn>, Jagannathan Raman <jag.raman@oracle.com>,
+ Greg Kurz <groug@kaod.org>, Kamil Rytarowski <kamil@netbsd.org>,
+ Peter Xu <peterx@redhat.com>, Joel Stanley <joel@jms.id.au>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, haxm-team@intel.com,
+ Roman Bolshakov <r.bolshakov@yadro.com>,
+ Markus Armbruster <armbru@redhat.com>, Eric Auger <eric.auger@redhat.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
+ Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
+ Eduardo Habkost <eduardo@habkost.net>,
+ =?UTF-8?Q?Herv=c3=a9_Poussineau?= <hpoussin@reactos.org>,
+ qemu-ppc@nongnu.org, Cornelia Huck <cohuck@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Helge Deller <deller@gmx.de>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ qemu-riscv@nongnu.org, Stafford Horne <shorne@gmail.com>,
+ Paul Durrant <paul@xen.org>, Havard Skinnemoen <hskinnemoen@google.com>,
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+ Alexander Graf <agraf@csgraf.de>, Thomas Huth <thuth@redhat.com>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Wenchao Wang <wenchao.wang@intel.com>, Tony Krowiak
+ <akrowiak@linux.ibm.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ qemu-s390x@nongnu.org, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
+ <marcandre.lureau@redhat.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Eric Farman <farman@linux.ibm.com>, Reinoud Zandijk <reinoud@netbsd.org>,
+ Alexander Bulekov <alxndr@bu.edu>, Yanan Wang <wangyanan55@huawei.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Tyrone Ting <kfting@nuvoton.com>,
+ xen-devel@lists.xenproject.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ John Snow <jsnow@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Darren Kenny <darren.kenny@oracle.com>, kvm@vger.kernel.org,
+ Qiuhao Li <Qiuhao.Li@outlook.com>, John G Johnson
+ <john.g.johnson@oracle.com>, Bin Meng <bin.meng@windriver.com>,
+ Sunil Muthuswamy <sunilmut@microsoft.com>, Max Filippov
+ <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Andrew Jeffery
+ <andrew@aj.id.au>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>,
+ Jason Wang <jasowang@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Laurent Vivier <laurent@vivier.eu>, Alistair Francis
+ <alistair@alistair23.me>, Jason Herne <jjherne@linux.ibm.com>
+References: <20220919231720.163121-1-shentey@gmail.com>
+ <20220919231720.163121-5-shentey@gmail.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <danielhb413@gmail.com>
+In-Reply-To: <20220919231720.163121-5-shentey@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32c;
+ envelope-from=danielhb413@gmail.com; helo=mail-ot1-x32c.google.com
+X-Spam_score_int: -39
+X-Spam_score: -4.0
+X-Spam_bar: ----
+X-Spam_report: (-4.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, NICE_REPLY_A=-2.182,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -126,24 +139,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Sep 2022 11:37:10 -0000
+X-List-Received-Date: Tue, 20 Sep 2022 14:01:22 -0000
 
-Alistair Francis <alistair23@gmail.com> writes:
 
-> On Tue, Sep 20, 2022 at 9:18 AM Bernhard Beschow <shentey@gmail.com> wrote:
->>
->> SiFiveEState inherits from SysBusDevice while it's TypeInfo claims it to
->> inherit from TYPE_MACHINE. This is an inconsistency which can cause
->> undefined behavior such as memory corruption.
->>
->> Change SiFiveEState to inherit from MachineState since it is registered
->> as a machine.
->>
->> Signed-off-by: Bernhard Beschow <shentey@gmail.com>
->
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+On 9/19/22 20:17, Bernhard Beschow wrote:
+> Signed-off-by: Bernhard Beschow <shentey@gmail.com>
+> ---
 
-To the SiFive maintainers: since this is a bug fix, let's merge it right
-away.
+Reviewed-by: Daniel Henrique Barboza <danielhb413@gmail.com>
 
+
+And I've queued it in gitlab.com/danielhb/qemu/tree/ppc-next since it's not
+tied with the rest of the series. Thanks,
+
+
+Daniel
+
+>   include/hw/ppc/spapr.h | 5 +++--
+>   1 file changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/include/hw/ppc/spapr.h b/include/hw/ppc/spapr.h
+> index 530d739b1d..04a95669ab 100644
+> --- a/include/hw/ppc/spapr.h
+> +++ b/include/hw/ppc/spapr.h
+> @@ -848,7 +848,8 @@ static inline uint64_t ppc64_phys_to_real(uint64_t addr)
+>   
+>   static inline uint32_t rtas_ld(target_ulong phys, int n)
+>   {
+> -    return ldl_be_phys(&address_space_memory, ppc64_phys_to_real(phys + 4*n));
+> +    return ldl_be_phys(&address_space_memory,
+> +                       ppc64_phys_to_real(phys + 4 * n));
+>   }
+>   
+>   static inline uint64_t rtas_ldq(target_ulong phys, int n)
+> @@ -858,7 +859,7 @@ static inline uint64_t rtas_ldq(target_ulong phys, int n)
+>   
+>   static inline void rtas_st(target_ulong phys, int n, uint32_t val)
+>   {
+> -    stl_be_phys(&address_space_memory, ppc64_phys_to_real(phys + 4*n), val);
+> +    stl_be_phys(&address_space_memory, ppc64_phys_to_real(phys + 4 * n), val);
+>   }
+>   
+>   typedef void (*spapr_rtas_fn)(PowerPCCPU *cpu, SpaprMachineState *sm,
 
