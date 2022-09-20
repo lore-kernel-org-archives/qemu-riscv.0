@@ -1,68 +1,132 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oaQaA-0007Lj-VN
-	for mharc-qemu-riscv@gnu.org; Mon, 19 Sep 2022 19:53:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51756)
+	id 1oaVAW-0007T4-JE
+	for mharc-qemu-riscv@gnu.org; Tue, 20 Sep 2022 00:47:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51966)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oaQa9-0007LM-8M; Mon, 19 Sep 2022 19:53:45 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:39716)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1oaVAU-0007Qh-KD; Tue, 20 Sep 2022 00:47:34 -0400
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332]:33346)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oaQa7-0007gq-J0; Mon, 19 Sep 2022 19:53:44 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- d64-20020a17090a6f4600b00202ce056566so9003158pjk.4; 
- Mon, 19 Sep 2022 16:53:42 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1oaVAS-0000Hl-Rp; Tue, 20 Sep 2022 00:47:34 -0400
+Received: by mail-wm1-x332.google.com with SMTP id
+ ay7-20020a05600c1e0700b003b49861bf48so390834wmb.0; 
+ Mon, 19 Sep 2022 21:47:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=023v+flDMWxN5iQA52EL9wQAhhagAs5eVB4gEFRAT78=;
- b=R6J9VfsySnI6dTYCCLHoZyE5IGCoA9jeS9M7+1gyYLbDXySTGRCD0kwjJmYySFZNhC
- xvdamVWzIdDCYufkWuQuGBYeqqJ3S1zOSmUGUBykfRWcM4mByUPIJVlVXn8JfZOn3WK0
- p6x2Pk1AXdLRXxw732pEtBXxVRsUrTZtlVlV9cGoMeY+AeJAdJx9KGBGUh//fe7e85cx
- J3MNl4gyaklC5T1Gz3u1CqZ3hXeLROEJDJIA7l3hlAy+ogiwmeJGs8s6x79968+fGeO0
- 7BRU9cUSS7DM5ayiMqmbOycKaSnSSDaeTREOfb4GHPctlrilASR3A+0iJoqrAFi0XR0I
- 4UBw==
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :sender:from:to:cc:subject:date;
+ bh=KtR01irQlKfoVSoywg7Q8i2vGYnSpe0gOOi9G0TIGZk=;
+ b=iy+ELMmiklQjwT1+jywydBJ5+uxMHApNzethnZSDLsOLcpqYwTl/L3jMA4qoDz8Vgt
+ w+Zblb3q8eecZv5hoyVTkxAUKOUB7SjAcJt3mU0KYDPm/VaDxqRWiQ0wC9/zbVrZZis7
+ j9gdYkWkuaAmuo0z60zuslsYYToAfBKPXwZmVQJBEG5mP6JtBMvspJdkUhGczPVSyVLW
+ AMWpvBS0kLE3Jl8TbBbkf0NLUdIlCsuxnOQtGToWq/POoImJ6W1ldYQRqwX3nm/fduu3
+ H7pHiAfteys/6W/f75pZmmz+EK8R5Vq1pd/eDZvZGiBh7iRrJr8vbFyQVn5huf1FeiG9
+ ojLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=023v+flDMWxN5iQA52EL9wQAhhagAs5eVB4gEFRAT78=;
- b=V8mwqWcS7InAVYyNgcbX+El/Mv0gQcXJ2Z8zPrBEupvinTC+F6WLKW+tXx5nK7SBv8
- nzWedXEMfrH5mgbfKOokjca7jN+mA5SA6PedXaW5IwXUCUOueizBwLwlgxCH52kWApZN
- oF8C16fqlhDZz+oKhNNkCQBPVFyCREVxAF41RpzsP4/CLn6ai6n6RK6PNeGbg3KBVCpt
- Eg8ii1rZlPHQDEMh5njd62orQXCwqAnkVz1+jIcEqqY0ovxtISj3yPomBetopo7AYRZ1
- 6Rwopg5uP2RzfxugkdfveJv1WHhrOf3ZusORWBhW5sFn6aoMWBetp4EzYUcfdAefM5nl
- kKCg==
-X-Gm-Message-State: ACrzQf2hUUwJVAbGvNub5cBaOm5CID8ehweDen6v1YEGA/xO+1IN0nxn
- H/TRgXAHTh1bNaGRmfq/JN7hl6qBcvpPmVPzzLs=
-X-Google-Smtp-Source: AMsMyM6d8rjyJctMPF9JFP4K4W5f3WzOTtmxzJPxZdoPdYG2wO7t62Rj6uZ3MqJyNUVSOknO1IK6jnR8oJ8WGlw3ZpQ=
-X-Received: by 2002:a17:903:32c4:b0:178:5206:b396 with SMTP id
- i4-20020a17090332c400b001785206b396mr2177261plr.99.1663631621627; Mon, 19 Sep
- 2022 16:53:41 -0700 (PDT)
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :sender:x-gm-message-state:from:to:cc:subject:date;
+ bh=KtR01irQlKfoVSoywg7Q8i2vGYnSpe0gOOi9G0TIGZk=;
+ b=PQioCkH7H20HzQ9DlN1IT3UECyfXdqmWozZIZXCNMiouvOyK4R7PoiDNRFLYyQBi6W
+ zwy81+E2bGXmrvCQE4z+yp/J90c91Ml4Y6cHmthKfRk5G6jbGQMssYZGPiEx3xKylLh3
+ XgjBARIKUQEfWFJlJiO1NxWi/qTg00DFy3tzFAxFACXAVaggBf+jf90IMe5tM9mGME4H
+ 3Qxjj7KdyfPSsZJ1xOqaohTe+Ib+pkWSNfdax+u/qFHV9bIkbLEWwwTB9iYNfTr2UWzv
+ iTrPwXzFUp1j1wm46984RXTPmlsyiU8IIS2Oi30fTfzuWFuiF/kdSZEFOh50XnU930he
+ XBSA==
+X-Gm-Message-State: ACrzQf2bYNp8/nb6cLmc37BpT5vVowyCXguQ7mYjrVpP87ZUbhmC35f1
+ NbCQPi668CCgVcSvpRdl+5o=
+X-Google-Smtp-Source: AMsMyM6/3r6XZlxjTcSgaP6bxzxf2Ik/wGOXJdYrZFcBlYSJNyYytY3sWi+uthO+WMCqXKrc3KkApA==
+X-Received: by 2002:a05:600c:3b94:b0:3b4:9cdc:dbd4 with SMTP id
+ n20-20020a05600c3b9400b003b49cdcdbd4mr887376wms.159.1663649248092; 
+ Mon, 19 Sep 2022 21:47:28 -0700 (PDT)
+Received: from [192.168.1.115] ([185.126.107.38])
+ by smtp.gmail.com with ESMTPSA id
+ t17-20020a5d6a51000000b0022a3517d3besm422533wrw.5.2022.09.19.21.47.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 19 Sep 2022 21:47:27 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Message-ID: <86328362-ec6c-8ff5-7533-321f2eef86fe@amsat.org>
+Date: Tue, 20 Sep 2022 06:47:22 +0200
 MIME-Version: 1.0
-References: <20220918083245.13028-1-frank.chang@sifive.com>
-In-Reply-To: <20220918083245.13028-1-frank.chang@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 20 Sep 2022 09:53:15 +1000
-Message-ID: <CAKmqyKPafB1vMPiXAR20mHqCm0jn6Fs1_7RfGx6O2c=v8ftpFw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Check the correct exception cause in vector
- GDB stub
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Jim Shu <jim.shu@sifive.com>, Tommy Wu <tommy.wu@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x1036.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.13.0
+Subject: Re: [PATCH 1/9] hw/riscv/sifive_e: Fix inheritance of SiFiveEState
+Content-Language: en-US
+To: Bernhard Beschow <shentey@gmail.com>, qemu-devel@nongnu.org,
+ Palmer Dabbelt <palmerdabbelt@google.com>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm
+ <magnus.damm@gmail.com>, Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Bandan Das <bsd@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Sergio Lopez <slp@redhat.com>, Alexey Kardashevskiy <aik@ozlabs.ru>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>, Cameron Esfahani
+ <dirty@apple.com>, Michael Rolnik <mrolnik@gmail.com>,
+ Song Gao <gaosong@loongson.cn>, Jagannathan Raman <jag.raman@oracle.com>,
+ Greg Kurz <groug@kaod.org>, Kamil Rytarowski <kamil@netbsd.org>,
+ Peter Xu <peterx@redhat.com>, Joel Stanley <joel@jms.id.au>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, haxm-team@intel.com,
+ Roman Bolshakov <r.bolshakov@yadro.com>,
+ Markus Armbruster <armbru@redhat.com>, Eric Auger <eric.auger@redhat.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
+ Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
+ Eduardo Habkost <eduardo@habkost.net>,
+ =?UTF-8?Q?Herv=c3=a9_Poussineau?= <hpoussin@reactos.org>,
+ qemu-ppc@nongnu.org, Cornelia Huck <cohuck@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Helge Deller <deller@gmx.de>,
+ Stefano Stabellini <sstabellini@kernel.org>, qemu-riscv@nongnu.org,
+ Stafford Horne <shorne@gmail.com>, Paul Durrant <paul@xen.org>,
+ Havard Skinnemoen <hskinnemoen@google.com>,
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+ Alexander Graf <agraf@csgraf.de>, Thomas Huth <thuth@redhat.com>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Wenchao Wang <wenchao.wang@intel.com>, Tony Krowiak
+ <akrowiak@linux.ibm.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ qemu-s390x@nongnu.org, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?=
+ <marcandre.lureau@redhat.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Eric Farman <farman@linux.ibm.com>, Reinoud Zandijk <reinoud@netbsd.org>,
+ Alexander Bulekov <alxndr@bu.edu>, Yanan Wang <wangyanan55@huawei.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Tyrone Ting <kfting@nuvoton.com>,
+ xen-devel@lists.xenproject.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ John Snow <jsnow@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Darren Kenny <darren.kenny@oracle.com>, kvm@vger.kernel.org,
+ Qiuhao Li <Qiuhao.Li@outlook.com>, John G Johnson
+ <john.g.johnson@oracle.com>, Bin Meng <bin.meng@windriver.com>,
+ Sunil Muthuswamy <sunilmut@microsoft.com>, Max Filippov
+ <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Andrew Jeffery
+ <andrew@aj.id.au>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>,
+ Jason Wang <jasowang@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Laurent Vivier <laurent@vivier.eu>, Alistair Francis
+ <alistair@alistair23.me>, Jason Herne <jjherne@linux.ibm.com>
+References: <20220919231720.163121-1-shentey@gmail.com>
+ <20220919231720.163121-2-shentey@gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+In-Reply-To: <20220919231720.163121-2-shentey@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x332.google.com
+X-Spam_score_int: -24
+X-Spam_score: -2.5
+X-Spam_bar: --
+X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-0.952,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -77,56 +141,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2022 23:53:45 -0000
+X-List-Received-Date: Tue, 20 Sep 2022 04:47:35 -0000
 
-On Sun, Sep 18, 2022 at 6:29 PM <frank.chang@sifive.com> wrote:
->
-> From: Frank Chang <frank.chang@sifive.com>
->
-> After RISCVException enum is introduced, riscv_csrrw_debug() returns
-> RISCV_EXCP_NONE to indicate there's no error. RISC-V vector GDB stub
-> should check the result against RISCV_EXCP_NONE instead of value 0.
-> Otherwise, 'E14' packet would be incorrectly reported for vector CSRs
-> when using "info reg vector" GDB command.
->
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Jim Shu <jim.shu@sifive.com>
-> Reviewed-by: Tommy Wu <tommy.wu@sifive.com>
-
-Thanks!
-
-Applied to riscv-to-apply.next
-
-Alistair
-
+On 20/9/22 01:17, Bernhard Beschow wrote:
+> SiFiveEState inherits from SysBusDevice while it's TypeInfo claims it to
+> inherit from TYPE_MACHINE. This is an inconsistency which can cause
+> undefined behavior such as memory corruption.
+> 
+> Change SiFiveEState to inherit from MachineState since it is registered
+> as a machine.
+> 
+> Signed-off-by: Bernhard Beschow <shentey@gmail.com>
 > ---
->  target/riscv/gdbstub.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index 9ed049c29e..118bd40f10 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -211,7 +211,7 @@ static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
->      target_ulong val = 0;
->      int result = riscv_csrrw_debug(env, csrno, &val, 0, 0);
->
-> -    if (result == 0) {
-> +    if (result == RISCV_EXCP_NONE) {
->          return gdb_get_regl(buf, val);
->      }
->
-> @@ -238,7 +238,7 @@ static int riscv_gdb_set_vector(CPURISCVState *env, uint8_t *mem_buf, int n)
->      target_ulong val = ldtul_p(mem_buf);
->      int result = riscv_csrrw_debug(env, csrno, NULL, val, -1);
->
-> -    if (result == 0) {
-> +    if (result == RISCV_EXCP_NONE) {
->          return sizeof(target_ulong);
->      }
->
-> --
-> 2.36.1
->
->
+>   include/hw/riscv/sifive_e.h | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+> index 83604da805..d738745925 100644
+> --- a/include/hw/riscv/sifive_e.h
+> +++ b/include/hw/riscv/sifive_e.h
+> @@ -22,6 +22,7 @@
+>   #include "hw/riscv/riscv_hart.h"
+>   #include "hw/riscv/sifive_cpu.h"
+>   #include "hw/gpio/sifive_gpio.h"
+> +#include "hw/boards.h"
+>   
+>   #define TYPE_RISCV_E_SOC "riscv.sifive.e.soc"
+>   #define RISCV_E_SOC(obj) \
+> @@ -41,7 +42,7 @@ typedef struct SiFiveESoCState {
+>   
+>   typedef struct SiFiveEState {
+>       /*< private >*/
+> -    SysBusDevice parent_obj;
+> +    MachineState parent_obj;
+
+Ouch.
+
+Fixes: 0869490b1c ("riscv: sifive_e: Manually define the machine")
+
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
