@@ -1,23 +1,23 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oaYxy-0000ul-Lh
-	for mharc-qemu-riscv@gnu.org; Tue, 20 Sep 2022 04:50:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44430)
+	id 1oaZ9j-000889-EQ
+	for mharc-qemu-riscv@gnu.org; Tue, 20 Sep 2022 05:03:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33168)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1oaYxL-0000n8-Hx; Tue, 20 Sep 2022 04:50:20 -0400
-Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001]:43371)
+ id 1oaZ9W-0007xS-C2; Tue, 20 Sep 2022 05:02:51 -0400
+Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001]:32424)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1oaYxH-0003he-Ex; Tue, 20 Sep 2022 04:50:14 -0400
+ id 1oaZ9T-0006LR-Ko; Tue, 20 Sep 2022 05:02:49 -0400
 Received: from zero.eik.bme.hu (blah.eik.bme.hu [152.66.115.182])
- by localhost (Postfix) with SMTP id 39177746335;
- Tue, 20 Sep 2022 10:50:02 +0200 (CEST)
+ by localhost (Postfix) with SMTP id DD37E74633E;
+ Tue, 20 Sep 2022 11:02:41 +0200 (CEST)
 Received: by zero.eik.bme.hu (Postfix, from userid 432)
- id E0C2A74632C; Tue, 20 Sep 2022 10:50:01 +0200 (CEST)
+ id 8F6AB74632B; Tue, 20 Sep 2022 11:02:41 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id DBD6474632B;
- Tue, 20 Sep 2022 10:50:01 +0200 (CEST)
-Date: Tue, 20 Sep 2022 10:50:01 +0200 (CEST)
+ by zero.eik.bme.hu (Postfix) with ESMTP id 8A79C746324;
+ Tue, 20 Sep 2022 11:02:41 +0200 (CEST)
+Date: Tue, 20 Sep 2022 11:02:41 +0200 (CEST)
 From: BALATON Zoltan <balaton@eik.bme.hu>
 To: =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <f4bug@amsat.org>
 cc: Bernhard Beschow <shentey@gmail.com>, qemu-devel@nongnu.org, 
@@ -79,16 +79,15 @@ cc: Bernhard Beschow <shentey@gmail.com>, qemu-devel@nongnu.org,
  Laurent Vivier <laurent@vivier.eu>, 
  Alistair Francis <alistair@alistair23.me>, 
  Jason Herne <jjherne@linux.ibm.com>
-Subject: Re: [PATCH 8/9] softmmu/physmem: Let SysBusState absorb memory region
- and address space singletons
-In-Reply-To: <be558812-199c-0909-d2e1-d2dd6be54dec@amsat.org>
-Message-ID: <fcb592e-a346-2ae-47e9-8af4b9f5ba3@eik.bme.hu>
+Subject: Re: [PATCH 9/9] exec/address-spaces: Inline legacy functions
+In-Reply-To: <e1ef18a0-6a85-e536-1fbd-9f8794dc0217@amsat.org>
+Message-ID: <7411d60-2bc0-f927-752-56184958c790@eik.bme.hu>
 References: <20220919231720.163121-1-shentey@gmail.com>
- <20220919231720.163121-9-shentey@gmail.com>
- <be558812-199c-0909-d2e1-d2dd6be54dec@amsat.org>
+ <20220919231720.163121-10-shentey@gmail.com>
+ <e1ef18a0-6a85-e536-1fbd-9f8794dc0217@amsat.org>
 MIME-Version: 1.0
 Content-Type: multipart/mixed;
- boundary="3866299591-1142243070-1663663801=:43449"
+ boundary="3866299591-1050215408-1663664561=:43449"
 X-Spam-Probability: 9%
 Received-SPF: pass client-ip=2001:738:2001:2001::2001;
  envelope-from=balaton@eik.bme.hu; helo=zero.eik.bme.hu
@@ -109,12 +108,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Sep 2022 08:50:44 -0000
+X-List-Received-Date: Tue, 20 Sep 2022 09:02:58 -0000
 
   This message is in MIME format.  The first part should be readable text,
   while the remaining parts are likely unreadable without MIME-aware tools.
 
---3866299591-1142243070-1663663801=:43449
+--3866299591-1050215408-1663664561=:43449
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8BIT
 
@@ -123,158 +122,130 @@ Content-Transfer-Encoding: 8BIT
 On Tue, 20 Sep 2022, Philippe Mathieu-Daudé via wrote:
 
 > On 20/9/22 01:17, Bernhard Beschow wrote:
->> These singletons are actually properties of the system bus but so far it
->> hasn't been modelled that way. Fix this to make this relationship very
->> obvious.
->> 
->> The idea of the patch is to restrain futher proliferation of the use of
->> get_system_memory() and get_system_io() which are "temprary interfaces"
+>> The functions just access a global pointer and perform some pointer
+>> arithmetic on top. Allow the compiler to see through this by inlining.
 >
-> "further", "temporary"
+> I thought about this while reviewing the previous patch, ...
 >
->> "until a proper bus interface is available". This should now be the
->> case.
->> 
->> Note that the new attributes are values rather than a pointers. This
->> trades pointer dereferences for pointer arithmetic. The idea is to
->> reduce cache misses - a rule of thumb says that every pointer
->> dereference causes a cache miss while arithmetic is basically free.
->> 
 >> Signed-off-by: Bernhard Beschow <shentey@gmail.com>
 >> ---
->>   include/exec/address-spaces.h | 19 ++++++++++++---
->>   include/hw/sysbus.h           |  6 +++++
->>   softmmu/physmem.c             | 46 ++++++++++++++++++-----------------
->>   3 files changed, 45 insertions(+), 26 deletions(-)
+>>   include/exec/address-spaces.h | 30 ++++++++++++++++++++++++++----
+>>   softmmu/physmem.c             | 28 ----------------------------
+>>   2 files changed, 26 insertions(+), 32 deletions(-)
 >> 
 >> diff --git a/include/exec/address-spaces.h b/include/exec/address-spaces.h
->> index d5c8cbd718..b31bd8dcf0 100644
+>> index b31bd8dcf0..182af27cad 100644
 >> --- a/include/exec/address-spaces.h
 >> +++ b/include/exec/address-spaces.h
->> @@ -23,17 +23,28 @@
+>> @@ -23,29 +23,51 @@
 >>     #ifndef CONFIG_USER_ONLY
->>   -/* Get the root memory region.  This interface should only be used 
->> temporarily
->> - * until a proper bus interface is available.
->> +/**
->> + * Get the root memory region.  This is a legacy function, provided for
->> + * compatibility. Prefer using SysBusState::system_memory directly.
->>    */
->>   MemoryRegion *get_system_memory(void);
+>>   +#include "hw/boards.h"
 >
->> diff --git a/include/hw/sysbus.h b/include/hw/sysbus.h
->> index 5bb3b88501..516e9091dc 100644
->> --- a/include/hw/sysbus.h
->> +++ b/include/hw/sysbus.h
->> @@ -17,6 +17,12 @@ struct SysBusState {
->>       /*< private >*/
->>       BusState parent_obj;
->>       /*< public >*/
->> +
->> +    MemoryRegion system_memory;
->> +    MemoryRegion system_io;
->> +
->> +    AddressSpace address_space_io;
->> +    AddressSpace address_space_memory;
->
-> Alternatively (renaming doc accordingly):
->
->       struct {
->           MemoryRegion mr;
->           AddressSpace as;
->       } io, memory;
+> ... but I'm not a fan of including this header here. It is restricted to 
+> system emulation, but still... Let see what the others think.
 
-Do we really need that? Isn't mr just the same as as.root so it would be 
-enough to store as only? Or is caching mr and not going through as to get 
-it saves time in accessing these? Now we'll go through SysBusState anyway 
-instead of accessing globals so is there a performance impact?
+Had the same thought first if this would break user emulation but I don't 
+know how that works (and this include is withing !CONFIG_USER_ONLY). I've 
+checked in configure now and it seems that softmmu is enabled/disabled 
+with system, which reminded me to a previous conversation where I've 
+suggested renaming softmmu to sysemu as that better shows what it's really 
+used for and maybe the real softmmu part should be split from it but I 
+don't remember the details. If it still works with --enable-user 
+--disable-system then maybe it's OK and only confusing because of 
+misnaming sysemu as softmmu.
 
-Regards,
+Reagrds,
 BALATON Zoltan
 
->>   };
->>     #define TYPE_SYS_BUS_DEVICE "sys-bus-device"
->> diff --git a/softmmu/physmem.c b/softmmu/physmem.c
->> index 0ac920d446..07e9a9171c 100644
->> --- a/softmmu/physmem.c
->> +++ b/softmmu/physmem.c
->> @@ -86,12 +86,6 @@
+>>   /**
+>>    * Get the root memory region.  This is a legacy function, provided for
+>>    * compatibility. Prefer using SysBusState::system_memory directly.
 >>    */
->>   RAMList ram_list = { .blocks = QLIST_HEAD_INITIALIZER(ram_list.blocks) };
->>   -static MemoryRegion *system_memory;
->> -static MemoryRegion *system_io;
->> -
->> -static AddressSpace address_space_io;
->> -static AddressSpace address_space_memory;
->> -
->>   static MemoryRegion io_mem_unassigned;
->>     typedef struct PhysPageEntry PhysPageEntry;
->> @@ -146,7 +140,7 @@ typedef struct subpage_t {
->>   #define PHYS_SECTION_UNASSIGNED 0
->>     static void io_mem_init(void);
->> -static void memory_map_init(void);
->> +static void memory_map_init(SysBusState *sysbus);
->>   static void tcg_log_global_after_sync(MemoryListener *listener);
->>   static void tcg_commit(MemoryListener *listener);
->>   @@ -2667,37 +2661,45 @@ static void tcg_commit(MemoryListener *listener)
->>       tlb_flush(cpuas->cpu);
->>   }
->>   -static void memory_map_init(void)
->> +static void memory_map_init(SysBusState *sysbus)
->>   {
->
-> No need to pass a singleton by argument.
->
->       assert(current_machine);
->
-> You can use get_system_memory() and get_system_io() in place :)
->
-> LGTM otherwise, great!
->
->> -    system_memory = g_malloc(sizeof(*system_memory));
->> +    MemoryRegion *system_memory = &sysbus->system_memory;
->> +    MemoryRegion *system_io = &sysbus->system_io;
->>         memory_region_init(system_memory, NULL, "system", UINT64_MAX);
->> -    address_space_init(&address_space_memory, system_memory, "memory");
->> +    address_space_init(&sysbus->address_space_memory, system_memory, 
->> "memory");
->>   -    system_io = g_malloc(sizeof(*system_io));
->>       memory_region_init_io(system_io, NULL, &unassigned_io_ops, NULL, 
->> "io",
->>                             65536);
->> -    address_space_init(&address_space_io, system_io, "I/O");
->> +    address_space_init(&sysbus->address_space_io, system_io, "I/O");
->>   }
->>     MemoryRegion *get_system_memory(void)
->>   {
->> -    return system_memory;
+>> -MemoryRegion *get_system_memory(void);
+>> +inline MemoryRegion *get_system_memory(void)
+>> +{
 >> +    assert(current_machine);
 >> +
 >> +    return &current_machine->main_system_bus.system_memory;
->>   }
->>     MemoryRegion *get_system_io(void)
->>   {
->> -    return system_io;
+>> +}
+>>     /**
+>>    * Get the root I/O port region.  This is a legacy function, provided for
+>>    * compatibility. Prefer using SysBusState::system_io directly.
+>>    */
+>> -MemoryRegion *get_system_io(void);
+>> +inline MemoryRegion *get_system_io(void)
+>> +{
 >> +    assert(current_machine);
 >> +
 >> +    return &current_machine->main_system_bus.system_io;
->>   }
->>     AddressSpace *get_address_space_memory(void)
->>   {
->> -    return &address_space_memory;
+>> +}
+>>     /**
+>>    * Get the root memory address space.  This is a legacy function, 
+>> provided for
+>>    * compatibility. Prefer using SysBusState::address_space_memory 
+>> directly.
+>>    */
+>> -AddressSpace *get_address_space_memory(void);
+>> +inline AddressSpace *get_address_space_memory(void)
+>> +{
 >> +    assert(current_machine);
 >> +
 >> +    return &current_machine->main_system_bus.address_space_memory;
->>   }
->>     AddressSpace *get_address_space_io(void)
->>   {
->> -    return &address_space_io;
+>> +}
+>>     /**
+>>    * Get the root I/O port address space.  This is a legacy function, 
+>> provided
+>>    * for compatibility. Prefer using SysBusState::address_space_io 
+>> directly.
+>>    */
+>> -AddressSpace *get_address_space_io(void);
+>> +inline AddressSpace *get_address_space_io(void)
+>> +{
 >> +    assert(current_machine);
 >> +
 >> +    return &current_machine->main_system_bus.address_space_io;
+>> +}
+>>     #endif
+>>   diff --git a/softmmu/physmem.c b/softmmu/physmem.c
+>> index 07e9a9171c..dce088f55c 100644
+>> --- a/softmmu/physmem.c
+>> +++ b/softmmu/physmem.c
+>> @@ -2674,34 +2674,6 @@ static void memory_map_init(SysBusState *sysbus)
+>>       address_space_init(&sysbus->address_space_io, system_io, "I/O");
 >>   }
+>>   -MemoryRegion *get_system_memory(void)
+>> -{
+>> -    assert(current_machine);
+>> -
+>> -    return &current_machine->main_system_bus.system_memory;
+>> -}
+>> -
+>> -MemoryRegion *get_system_io(void)
+>> -{
+>> -    assert(current_machine);
+>> -
+>> -    return &current_machine->main_system_bus.system_io;
+>> -}
+>> -
+>> -AddressSpace *get_address_space_memory(void)
+>> -{
+>> -    assert(current_machine);
+>> -
+>> -    return &current_machine->main_system_bus.address_space_memory;
+>> -}
+>> -
+>> -AddressSpace *get_address_space_io(void)
+>> -{
+>> -    assert(current_machine);
+>> -
+>> -    return &current_machine->main_system_bus.address_space_io;
+>> -}
+>> -
+>>   static void invalidate_and_set_dirty(MemoryRegion *mr, hwaddr addr,
+>>                                        hwaddr length)
+>>   {
 >
 >
 >
---3866299591-1142243070-1663663801=:43449--
+--3866299591-1050215408-1663664561=:43449--
 
