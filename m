@@ -1,68 +1,102 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oaYl1-0000tL-9E
-	for mharc-qemu-riscv@gnu.org; Tue, 20 Sep 2022 04:37:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60848)
+	id 1oaYxy-0000ul-Lh
+	for mharc-qemu-riscv@gnu.org; Tue, 20 Sep 2022 04:50:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44430)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oaYkK-0000oE-2b
- for qemu-riscv@nongnu.org; Tue, 20 Sep 2022 04:36:55 -0400
-Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f]:36693)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oaYkH-0001l6-5u
- for qemu-riscv@nongnu.org; Tue, 20 Sep 2022 04:36:47 -0400
-Received: by mail-pg1-x52f.google.com with SMTP id s206so1862571pgs.3
- for <qemu-riscv@nongnu.org>; Tue, 20 Sep 2022 01:36:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=8xut7OO+tMUA59UTrF0V0vnVS5Og/Ucefg+dtagaSCk=;
- b=ekwZh7VT5xu1NGEcs7Sl9AvBiq2gVbTaAE73XhwT6S06Xnb0JNnNEyTMGy3niK2bWT
- hDNMng0lBRCEm6qpQ2r0rPQ6PbNsguH/5nY+dxSTo697rCeET/9JWv4PovJIB3ipvHfK
- Jgv3hwmKC6nH3L+I5RMXYbiON9MZMkwepCGb1cFgI/MhO3KSTKxW5qD+iBA7jyAIx7p0
- nUIcepaJrAIIlBdA4H4WQBHZgJ5PD9egjPbJFltNpvGoguxUWi0fjRAHwFz2bvs42cIb
- 960QRzStRgIWNFy7qlgIrPw2clYH7SAldsOQMPRZiKSD5NEo5uEpqhBvS6o6fRDyiuMN
- /ETQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=8xut7OO+tMUA59UTrF0V0vnVS5Og/Ucefg+dtagaSCk=;
- b=6Ib6LVFnAuMx9wZRTu/WZBbrlMsIhNXGZkAdJ4rAxS46tuIAPU2GoTr2qED39a/3UD
- 8gWn/HI+trDorbamFnYY4uCxq5nd3on76ofySlX7brUMqBYwgaRboydVVi4HZ3OaQC71
- IqgaLCgPwga73NH8njsRnvEWCSPLDHeaRCm8L/dV38Ujyqa1frEx8SGqclMjnrALPk+H
- BbsBbPA7tRn5j1s1DhYDBDqKGGS7vxp/F7wBzdUxwJyIzymrz6BTgkk6Oxw12U9XLY7m
- BWsuE3iHPaQpsex3DjrmN88h+Wbles/uuVLYXUI80yffuBcNjrDu1HCLEYcZIXrjPfAI
- 3JWg==
-X-Gm-Message-State: ACrzQf2XSW9ZSTE9t/3j2hVfuSkvXqq2kSipxkiWxfMbyI+g1EFLqtHF
- 9WnTAaKGrZU11Na8uTyqmptG7IDk3WwfxrRWAo4i7w==
-X-Google-Smtp-Source: AMsMyM70cWYXzraaRriSURIEpWbYh4lSAtCHdAaEw/hh/LeKExPHtM5AaUevmY61170q9AkoQhFHFh0b7l3GFwXAfNQ=
-X-Received: by 2002:a63:575a:0:b0:439:169f:4b5a with SMTP id
- h26-20020a63575a000000b00439169f4b5amr19984505pgm.595.1663662999139; Tue, 20
- Sep 2022 01:36:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1oaYxL-0000n8-Hx; Tue, 20 Sep 2022 04:50:20 -0400
+Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001]:43371)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1oaYxH-0003he-Ex; Tue, 20 Sep 2022 04:50:14 -0400
+Received: from zero.eik.bme.hu (blah.eik.bme.hu [152.66.115.182])
+ by localhost (Postfix) with SMTP id 39177746335;
+ Tue, 20 Sep 2022 10:50:02 +0200 (CEST)
+Received: by zero.eik.bme.hu (Postfix, from userid 432)
+ id E0C2A74632C; Tue, 20 Sep 2022 10:50:01 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id DBD6474632B;
+ Tue, 20 Sep 2022 10:50:01 +0200 (CEST)
+Date: Tue, 20 Sep 2022 10:50:01 +0200 (CEST)
+From: BALATON Zoltan <balaton@eik.bme.hu>
+To: =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <f4bug@amsat.org>
+cc: Bernhard Beschow <shentey@gmail.com>, qemu-devel@nongnu.org, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm <magnus.damm@gmail.com>, 
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, 
+ Bandan Das <bsd@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>, 
+ Daniel Henrique Barboza <danielhb413@gmail.com>, 
+ Sergio Lopez <slp@redhat.com>, Alexey Kardashevskiy <aik@ozlabs.ru>, 
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>, 
+ Cameron Esfahani <dirty@apple.com>, Michael Rolnik <mrolnik@gmail.com>, 
+ Song Gao <gaosong@loongson.cn>, Jagannathan Raman <jag.raman@oracle.com>, 
+ Greg Kurz <groug@kaod.org>, Kamil Rytarowski <kamil@netbsd.org>, 
+ Peter Xu <peterx@redhat.com>, Joel Stanley <joel@jms.id.au>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, haxm-team@intel.com, 
+ Roman Bolshakov <r.bolshakov@yadro.com>, 
+ Markus Armbruster <armbru@redhat.com>, Eric Auger <eric.auger@redhat.com>, 
+ David Gibson <david@gibson.dropbear.id.au>, 
+ =?ISO-8859-15?Q?Daniel_P=2E_Berrang=E9?= <berrange@redhat.com>, 
+ Christian Borntraeger <borntraeger@linux.ibm.com>, 
+ =?ISO-8859-15?Q?C=E9dric_Le_Goater?= <clg@kaod.org>, 
+ Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org, 
+ Eduardo Habkost <eduardo@habkost.net>, 
+ =?ISO-8859-15?Q?Herv=E9_Poussineau?= <hpoussin@reactos.org>, 
+ qemu-ppc@nongnu.org, Cornelia Huck <cohuck@redhat.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Helge Deller <deller@gmx.de>, 
+ Stefano Stabellini <sstabellini@kernel.org>, qemu-riscv@nongnu.org, 
+ Stafford Horne <shorne@gmail.com>, Paul Durrant <paul@xen.org>, 
+ Havard Skinnemoen <hskinnemoen@google.com>, 
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>, 
+ Alexander Graf <agraf@csgraf.de>, Thomas Huth <thuth@redhat.com>, 
+ Alex Williamson <alex.williamson@redhat.com>, 
+ Wenchao Wang <wenchao.wang@intel.com>, 
+ Tony Krowiak <akrowiak@linux.ibm.com>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-s390x@nongnu.org, 
+ =?ISO-8859-15?Q?Marc-Andr=E9_Lureau?= <marcandre.lureau@redhat.com>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ Eric Farman <farman@linux.ibm.com>, Reinoud Zandijk <reinoud@netbsd.org>, 
+ Alexander Bulekov <alxndr@bu.edu>, Yanan Wang <wangyanan55@huawei.com>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ Gerd Hoffmann <kraxel@redhat.com>, Tyrone Ting <kfting@nuvoton.com>, 
+ xen-devel@lists.xenproject.org, 
+ Yoshinori Sato <ysato@users.sourceforge.jp>, John Snow <jsnow@redhat.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Darren Kenny <darren.kenny@oracle.com>, kvm@vger.kernel.org, 
+ Qiuhao Li <Qiuhao.Li@outlook.com>, 
+ John G Johnson <john.g.johnson@oracle.com>, 
+ Bin Meng <bin.meng@windriver.com>, 
+ Sunil Muthuswamy <sunilmut@microsoft.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, 
+ Marcelo Tosatti <mtosatti@redhat.com>, 
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Anthony Perard <anthony.perard@citrix.com>, 
+ Andrew Jeffery <andrew@aj.id.au>, Artyom Tarasenko <atar4qemu@gmail.com>, 
+ Halil Pasic <pasic@linux.ibm.com>, 
+ "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>, 
+ Jason Wang <jasowang@redhat.com>, David Hildenbrand <david@redhat.com>, 
+ Laurent Vivier <laurent@vivier.eu>, 
+ Alistair Francis <alistair@alistair23.me>, 
+ Jason Herne <jjherne@linux.ibm.com>
+Subject: Re: [PATCH 8/9] softmmu/physmem: Let SysBusState absorb memory region
+ and address space singletons
+In-Reply-To: <be558812-199c-0909-d2e1-d2dd6be54dec@amsat.org>
+Message-ID: <fcb592e-a346-2ae-47e9-8af4b9f5ba3@eik.bme.hu>
+References: <20220919231720.163121-1-shentey@gmail.com>
+ <20220919231720.163121-9-shentey@gmail.com>
+ <be558812-199c-0909-d2e1-d2dd6be54dec@amsat.org>
 MIME-Version: 1.0
-References: <20220824221701.41932-1-atishp@rivosinc.com>
- <CAKmqyKN+M9HYLo0oQ3zD5hvGX5KCLEK5y0D9Roh3qfpsBFsNdw@mail.gmail.com>
-In-Reply-To: <CAKmqyKN+M9HYLo0oQ3zD5hvGX5KCLEK5y0D9Roh3qfpsBFsNdw@mail.gmail.com>
-From: Atish Kumar Patra <atishp@rivosinc.com>
-Date: Tue, 20 Sep 2022 01:36:28 -0700
-Message-ID: <CAHBxVyFNyYoccndDgUD0djiXQO76uZMt00X9XJQEdE5r-4fxow@mail.gmail.com>
-Subject: Re: [PATCH v14 0/5] Improve PMU support
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: multipart/alternative; boundary="00000000000017119c05e917bac3"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
- envelope-from=atishp@rivosinc.com; helo=mail-pg1-x52f.google.com
+Content-Type: multipart/mixed;
+ boundary="3866299591-1142243070-1663663801=:43449"
+X-Spam-Probability: 9%
+Received-SPF: pass client-ip=2001:738:2001:2001::2001;
+ envelope-from=balaton@eik.bme.hu; helo=zero.eik.bme.hu
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,433 +109,172 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Sep 2022 08:37:10 -0000
+X-List-Received-Date: Tue, 20 Sep 2022 08:50:44 -0000
 
---00000000000017119c05e917bac3
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-On Mon, Sep 19, 2022 at 3:08 PM Alistair Francis <alistair23@gmail.com>
-wrote:
+--3866299591-1142243070-1663663801=:43449
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8BIT
 
-> On Thu, Aug 25, 2022 at 8:22 AM Atish Patra <atishp@rivosinc.com> wrote:
-> >
-> > The latest version of the SBI specification includes a Performance
-> Monitoring
-> > Unit(PMU) extension[1] which allows the supervisor to
-> start/stop/configure
-> > various PMU events. The Sscofpmf ('Ss' for Privileged arch and
-> Supervisor-level
-> > extensions, and 'cofpmf' for Count OverFlow and Privilege Mode Filterin=
-g)
-> > extension[2] allows the perf like tool to handle overflow interrupts an=
-d
-> > filtering support.
-> >
-> > This series implements remaining PMU infrastructure to support
-> > PMU in virt machine. The first seven patches from the original series
-> > have been merged already.
-> >
-> > This will allow us to add any PMU events in future.
-> > Currently, this series enables the following omu events.
-> > 1. cycle count
-> > 2. instruction count
-> > 3. DTLB load/store miss
-> > 4. ITLB prefetch miss
-> >
-> > The first two are computed using host ticks while last three are counte=
-d
-> during
-> > cpu_tlb_fill. We can do both sampling and count from guest userspace.
-> > This series has been tested on both RV64 and RV32. Both Linux[3] and
-> Opensbi[4]
-> > patches are required to get the perf working.
-> >
-> > Here is an output of perf stat/report while running hackbench with late=
-st
-> > OpenSBI & Linux kernel.
-> >
-> > Perf stat:
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > [root@fedora-riscv ~]# perf stat -e cycles -e instructions -e
-> dTLB-load-misses -e dTLB-store-misses -e iTLB-load-misses \
-> > > perf bench sched messaging -g 1 -l 10
-> > # Running 'sched/messaging' benchmark:
-> > # 20 sender and receiver processes per group
-> > # 1 groups =3D=3D 40 processes run
-> >
-> >      Total time: 0.265 [sec]
-> >
-> >  Performance counter stats for 'perf bench sched messaging -g 1 -l 10':
-> >
-> >      4,167,825,362      cycles
-> >      4,166,609,256      instructions              #    1.00  insn per
-> cycle
-> >          3,092,026      dTLB-load-misses
-> >            258,280      dTLB-store-misses
-> >          2,068,966      iTLB-load-misses
-> >
-> >        0.585791767 seconds time elapsed
-> >
-> >        0.373802000 seconds user
-> >        1.042359000 seconds sys
-> >
-> > Perf record:
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > [root@fedora-riscv ~]# perf record -e cycles -e instructions \
-> > > -e dTLB-load-misses -e dTLB-store-misses -e iTLB-load-misses -c 10000=
- \
-> > > perf bench sched messaging -g 1 -l 10
-> > # Running 'sched/messaging' benchmark:
-> > # 20 sender and receiver processes per group
-> > # 1 groups =3D=3D 40 processes run
-> >
-> >      Total time: 1.397 [sec]
-> > [ perf record: Woken up 10 times to write data ]
-> > Check IO/CPU overload!
-> > [ perf record: Captured and wrote 8.211 MB perf.data (214486 samples) ]
-> >
-> > [root@fedora-riscv riscv]# perf report
-> > Available samples
-> > 107K cycles
->       =E2=97=86
-> > 107K instructions
->       =E2=96=92
-> > 250 dTLB-load-misses
->        =E2=96=92
-> > 13 dTLB-store-misses
->        =E2=96=92
-> > 172 iTLB-load-misses
-> > ..
-> >
-> > Changes from v13->v14:
-> > 1. Added sanity check for the hashtable in pmu.c
-> >
-> > Changes from v12->v13:
-> > 1. Rebased on top of the apply-next.
-> > 2. Addressed comments about space & comment block.
-> >
-> > Changes from v11->v12:
-> > 1. Rebased on top of the apply-next.
-> > 2. Aligned the write function & .min_priv to the previous line.
-> > 3. Fixed the FDT generations for multi-socket scenario.
-> > 4. Dropped interrupt property from the DT.
-> > 5. Generate illegal instruction fault instead of virtual instruction
-> fault
-> >    for VS/VU access while mcounteren is not set.
-> >
-> > Changes from v10->v11:
-> > 1. Rebased on top of the master where first 7 patches were already
-> merged.
-> > 2. Removed unnecessary additional check in ctr predicate function.
-> > 3. Removed unnecessary priv version checks in mcountinhibit read/write.
-> > 4. Added Heiko's reviewed-by/tested-by tags.
-> >
-> > Changes from v8->v9:
-> > 1. Added the write_done flags to the vmstate.
-> > 2. Fixed the hpmcounter read access from M-mode.
-> >
-> > Changes from v7->v8:
-> > 1. Removeding ordering constraints for mhpmcounter & mhpmevent.
-> >
-> > Changes from v6->v7:
-> > 1. Fixed all the compilation errors for the usermode.
-> >
-> > Changes from v5->v6:
-> > 1. Fixed compilation issue with PATCH 1.
-> > 2. Addressed other comments.
-> >
-> > Changes from v4->v5:
-> > 1. Rebased on top of the -next with following patches.
-> >    - isa extension
-> >    - priv 1.12 spec
-> > 2. Addressed all the comments on v4
-> > 3. Removed additional isa-ext DT node in favor of riscv,isa string upda=
-te
-> >
-> > Changes from v3->v4:
-> > 1. Removed the dummy events from pmu DT node.
-> > 2. Fixed pmu_avail_counters mask generation.
-> > 3. Added a patch to simplify the predicate function for counters.
-> >
-> > Changes from v2->v3:
-> > 1. Addressed all the comments on PATCH1-4.
-> > 2. Split patch1 into two separate patches.
-> > 3. Added explicit comments to explain the event types in DT node.
-> > 4. Rebased on latest Qemu.
-> >
-> > Changes from v1->v2:
-> > 1. Dropped the ACks from v1 as signficant changes happened after v1.
-> > 2. sscofpmf support.
-> > 3. A generic counter management framework.
-> >
-> > [1]
-> https://github.com/riscv-non-isa/riscv-sbi-doc/blob/master/riscv-sbi.adoc
-> > [2]
-> https://drive.google.com/file/d/171j4jFjIkKdj5LWcExphq4xG_2sihbfd/edit
-> > [3] https://github.com/atishp04/qemu/tree/riscv_pmu_v14
-> >
-> > Atish Patra (5):
-> > target/riscv: Add sscofpmf extension support
-> > target/riscv: Simplify counter predicate function
-> > target/riscv: Add few cache related PMU events
-> > hw/riscv: virt: Add PMU DT node to the device tree
-> > target/riscv: Update the privilege field for sscofpmf CSRs
+
+
+On Tue, 20 Sep 2022, Philippe Mathieu-Daudé via wrote:
+
+> On 20/9/22 01:17, Bernhard Beschow wrote:
+>> These singletons are actually properties of the system bus but so far it
+>> hasn't been modelled that way. Fix this to make this relationship very
+>> obvious.
+>> 
+>> The idea of the patch is to restrain futher proliferation of the use of
+>> get_system_memory() and get_system_io() which are "temprary interfaces"
 >
-> Sorry, but this doesn't apply. Are you able to rebase it?
+> "further", "temporary"
+>
+>> "until a proper bus interface is available". This should now be the
+>> case.
+>> 
+>> Note that the new attributes are values rather than a pointers. This
+>> trades pointer dereferences for pointer arithmetic. The idea is to
+>> reduce cache misses - a rule of thumb says that every pointer
+>> dereference causes a cache miss while arithmetic is basically free.
+>> 
+>> Signed-off-by: Bernhard Beschow <shentey@gmail.com>
+>> ---
+>>   include/exec/address-spaces.h | 19 ++++++++++++---
+>>   include/hw/sysbus.h           |  6 +++++
+>>   softmmu/physmem.c             | 46 ++++++++++++++++++-----------------
+>>   3 files changed, 45 insertions(+), 26 deletions(-)
+>> 
+>> diff --git a/include/exec/address-spaces.h b/include/exec/address-spaces.h
+>> index d5c8cbd718..b31bd8dcf0 100644
+>> --- a/include/exec/address-spaces.h
+>> +++ b/include/exec/address-spaces.h
+>> @@ -23,17 +23,28 @@
+>>     #ifndef CONFIG_USER_ONLY
+>>   -/* Get the root memory region.  This interface should only be used 
+>> temporarily
+>> - * until a proper bus interface is available.
+>> +/**
+>> + * Get the root memory region.  This is a legacy function, provided for
+>> + * compatibility. Prefer using SysBusState::system_memory directly.
+>>    */
+>>   MemoryRegion *get_system_memory(void);
+>
+>> diff --git a/include/hw/sysbus.h b/include/hw/sysbus.h
+>> index 5bb3b88501..516e9091dc 100644
+>> --- a/include/hw/sysbus.h
+>> +++ b/include/hw/sysbus.h
+>> @@ -17,6 +17,12 @@ struct SysBusState {
+>>       /*< private >*/
+>>       BusState parent_obj;
+>>       /*< public >*/
+>> +
+>> +    MemoryRegion system_memory;
+>> +    MemoryRegion system_io;
+>> +
+>> +    AddressSpace address_space_io;
+>> +    AddressSpace address_space_memory;
+>
+> Alternatively (renaming doc accordingly):
+>
+>       struct {
+>           MemoryRegion mr;
+>           AddressSpace as;
+>       } io, memory;
+
+Do we really need that? Isn't mr just the same as as.root so it would be 
+enough to store as only? Or is caching mr and not going through as to get 
+it saves time in accessing these? Now we'll go through SysBusState anyway 
+instead of accessing globals so is there a performance impact?
+
+Regards,
+BALATON Zoltan
+
+>>   };
+>>     #define TYPE_SYS_BUS_DEVICE "sys-bus-device"
+>> diff --git a/softmmu/physmem.c b/softmmu/physmem.c
+>> index 0ac920d446..07e9a9171c 100644
+>> --- a/softmmu/physmem.c
+>> +++ b/softmmu/physmem.c
+>> @@ -86,12 +86,6 @@
+>>    */
+>>   RAMList ram_list = { .blocks = QLIST_HEAD_INITIALIZER(ram_list.blocks) };
+>>   -static MemoryRegion *system_memory;
+>> -static MemoryRegion *system_io;
+>> -
+>> -static AddressSpace address_space_io;
+>> -static AddressSpace address_space_memory;
+>> -
+>>   static MemoryRegion io_mem_unassigned;
+>>     typedef struct PhysPageEntry PhysPageEntry;
+>> @@ -146,7 +140,7 @@ typedef struct subpage_t {
+>>   #define PHYS_SECTION_UNASSIGNED 0
+>>     static void io_mem_init(void);
+>> -static void memory_map_init(void);
+>> +static void memory_map_init(SysBusState *sysbus);
+>>   static void tcg_log_global_after_sync(MemoryListener *listener);
+>>   static void tcg_commit(MemoryListener *listener);
+>>   @@ -2667,37 +2661,45 @@ static void tcg_commit(MemoryListener *listener)
+>>       tlb_flush(cpuas->cpu);
+>>   }
+>>   -static void memory_map_init(void)
+>> +static void memory_map_init(SysBusState *sysbus)
+>>   {
+>
+> No need to pass a singleton by argument.
+>
+>       assert(current_machine);
+>
+> You can use get_system_memory() and get_system_io() in place :)
+>
+> LGTM otherwise, great!
+>
+>> -    system_memory = g_malloc(sizeof(*system_memory));
+>> +    MemoryRegion *system_memory = &sysbus->system_memory;
+>> +    MemoryRegion *system_io = &sysbus->system_io;
+>>         memory_region_init(system_memory, NULL, "system", UINT64_MAX);
+>> -    address_space_init(&address_space_memory, system_memory, "memory");
+>> +    address_space_init(&sysbus->address_space_memory, system_memory, 
+>> "memory");
+>>   -    system_io = g_malloc(sizeof(*system_io));
+>>       memory_region_init_io(system_io, NULL, &unassigned_io_ops, NULL, 
+>> "io",
+>>                             65536);
+>> -    address_space_init(&address_space_io, system_io, "I/O");
+>> +    address_space_init(&sysbus->address_space_io, system_io, "I/O");
+>>   }
+>>     MemoryRegion *get_system_memory(void)
+>>   {
+>> -    return system_memory;
+>> +    assert(current_machine);
+>> +
+>> +    return &current_machine->main_system_bus.system_memory;
+>>   }
+>>     MemoryRegion *get_system_io(void)
+>>   {
+>> -    return system_io;
+>> +    assert(current_machine);
+>> +
+>> +    return &current_machine->main_system_bus.system_io;
+>>   }
+>>     AddressSpace *get_address_space_memory(void)
+>>   {
+>> -    return &address_space_memory;
+>> +    assert(current_machine);
+>> +
+>> +    return &current_machine->main_system_bus.address_space_memory;
+>>   }
+>>     AddressSpace *get_address_space_io(void)
+>>   {
+>> -    return &address_space_io;
+>> +    assert(current_machine);
+>> +
+>> +    return &current_machine->main_system_bus.address_space_io;
+>>   }
 >
 >
-I am a bit confused. Your PULL request on Sep 7th already included this &
-sstc series.
-I can see the patches in upstream qemu as well.
-
-
-
-> Alistair
 >
-> >
-> > hw/riscv/virt.c           |  16 ++
-> > target/riscv/cpu.c        |  12 ++
-> > target/riscv/cpu.h        |  25 +++
-> > target/riscv/cpu_bits.h   |  55 +++++
-> > target/riscv/cpu_helper.c |  25 +++
-> > target/riscv/csr.c        | 304 +++++++++++++++++----------
-> > target/riscv/machine.c    |   1 +
-> > target/riscv/pmu.c        | 425 +++++++++++++++++++++++++++++++++++++-
-> > target/riscv/pmu.h        |   8 +
-> > 9 files changed, 760 insertions(+), 111 deletions(-)
-> >
-> > --
-> > 2.25.1
-> >
-> >
->
-
---00000000000017119c05e917bac3
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Sep 19, 2022 at 3:08 PM Alist=
-air Francis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@gmail.co=
-m</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin=
-:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
->On Thu, Aug 25, 2022 at 8:22 AM Atish Patra &lt;<a href=3D"mailto:atishp@r=
-ivosinc.com" target=3D"_blank">atishp@rivosinc.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; The latest version of the SBI specification includes a Performance Mon=
-itoring<br>
-&gt; Unit(PMU) extension[1] which allows the supervisor to start/stop/confi=
-gure<br>
-&gt; various PMU events. The Sscofpmf (&#39;Ss&#39; for Privileged arch and=
- Supervisor-level<br>
-&gt; extensions, and &#39;cofpmf&#39; for Count OverFlow and Privilege Mode=
- Filtering)<br>
-&gt; extension[2] allows the perf like tool to handle overflow interrupts a=
-nd<br>
-&gt; filtering support.<br>
-&gt;<br>
-&gt; This series implements remaining PMU infrastructure to support<br>
-&gt; PMU in virt machine. The first seven patches from the original series<=
-br>
-&gt; have been merged already.<br>
-&gt;<br>
-&gt; This will allow us to add any PMU events in future.<br>
-&gt; Currently, this series enables the following omu events.<br>
-&gt; 1. cycle count<br>
-&gt; 2. instruction count<br>
-&gt; 3. DTLB load/store miss<br>
-&gt; 4. ITLB prefetch miss<br>
-&gt;<br>
-&gt; The first two are computed using host ticks while last three are count=
-ed during<br>
-&gt; cpu_tlb_fill. We can do both sampling and count from guest userspace.<=
-br>
-&gt; This series has been tested on both RV64 and RV32. Both Linux[3] and O=
-pensbi[4]<br>
-&gt; patches are required to get the perf working.<br>
-&gt;<br>
-&gt; Here is an output of perf stat/report while running hackbench with lat=
-est<br>
-&gt; OpenSBI &amp; Linux kernel.<br>
-&gt;<br>
-&gt; Perf stat:<br>
-&gt; =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-&gt; [root@fedora-riscv ~]# perf stat -e cycles -e instructions -e dTLB-loa=
-d-misses -e dTLB-store-misses -e iTLB-load-misses \<br>
-&gt; &gt; perf bench sched messaging -g 1 -l 10<br>
-&gt; # Running &#39;sched/messaging&#39; benchmark:<br>
-&gt; # 20 sender and receiver processes per group<br>
-&gt; # 1 groups =3D=3D 40 processes run<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 Total time: 0.265 [sec]<br>
-&gt;<br>
-&gt;=C2=A0 Performance counter stats for &#39;perf bench sched messaging -g=
- 1 -l 10&#39;:<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 4,167,825,362=C2=A0 =C2=A0 =C2=A0 cycles<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 4,166,609,256=C2=A0 =C2=A0 =C2=A0 instructions=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 #=C2=A0 =C2=A0 1.00=C2=A0 ins=
-n per cycle<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 3,092,026=C2=A0 =C2=A0 =C2=A0 dTLB-l=
-oad-misses<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 258,280=C2=A0 =C2=A0 =C2=A0 d=
-TLB-store-misses<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 2,068,966=C2=A0 =C2=A0 =C2=A0 iTLB-l=
-oad-misses<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 0.585791767 seconds time elapsed<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 0.373802000 seconds user<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 1.042359000 seconds sys<br>
-&gt;<br>
-&gt; Perf record:<br>
-&gt; =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
-&gt; [root@fedora-riscv ~]# perf record -e cycles -e instructions \<br>
-&gt; &gt; -e dTLB-load-misses -e dTLB-store-misses -e iTLB-load-misses -c 1=
-0000 \<br>
-&gt; &gt; perf bench sched messaging -g 1 -l 10<br>
-&gt; # Running &#39;sched/messaging&#39; benchmark:<br>
-&gt; # 20 sender and receiver processes per group<br>
-&gt; # 1 groups =3D=3D 40 processes run<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 Total time: 1.397 [sec]<br>
-&gt; [ perf record: Woken up 10 times to write data ]<br>
-&gt; Check IO/CPU overload!<br>
-&gt; [ perf record: Captured and wrote 8.211 MB perf.data (214486 samples) =
-]<br>
-&gt;<br>
-&gt; [root@fedora-riscv riscv]# perf report<br>
-&gt; Available samples<br>
-&gt; 107K cycles=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =E2=97=86<br>
-&gt; 107K instructions=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =E2=96=92<br>
-&gt; 250 dTLB-load-misses=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0=E2=96=92<br>
-&gt; 13 dTLB-store-misses=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0=E2=96=92<br>
-&gt; 172 iTLB-load-misses<br>
-&gt; ..<br>
-&gt;<br>
-&gt; Changes from v13-&gt;v14:<br>
-&gt; 1. Added sanity check for the hashtable in pmu.c<br>
-&gt;<br>
-&gt; Changes from v12-&gt;v13:<br>
-&gt; 1. Rebased on top of the apply-next.<br>
-&gt; 2. Addressed comments about space &amp; comment block.<br>
-&gt;<br>
-&gt; Changes from v11-&gt;v12:<br>
-&gt; 1. Rebased on top of the apply-next.<br>
-&gt; 2. Aligned the write function &amp; .min_priv to the previous line.<br=
->
-&gt; 3. Fixed the FDT generations for multi-socket scenario.<br>
-&gt; 4. Dropped interrupt property from the DT.<br>
-&gt; 5. Generate illegal instruction fault instead of virtual instruction f=
-ault<br>
-&gt;=C2=A0 =C2=A0 for VS/VU access while mcounteren is not set.<br>
-&gt;<br>
-&gt; Changes from v10-&gt;v11:<br>
-&gt; 1. Rebased on top of the master where first 7 patches were already mer=
-ged.<br>
-&gt; 2. Removed unnecessary additional check in ctr predicate function.<br>
-&gt; 3. Removed unnecessary priv version checks in mcountinhibit read/write=
-.<br>
-&gt; 4. Added Heiko&#39;s reviewed-by/tested-by tags.<br>
-&gt;<br>
-&gt; Changes from v8-&gt;v9:<br>
-&gt; 1. Added the write_done flags to the vmstate.<br>
-&gt; 2. Fixed the hpmcounter read access from M-mode.<br>
-&gt;<br>
-&gt; Changes from v7-&gt;v8:<br>
-&gt; 1. Removeding ordering constraints for mhpmcounter &amp; mhpmevent.<br=
->
-&gt;<br>
-&gt; Changes from v6-&gt;v7:<br>
-&gt; 1. Fixed all the compilation errors for the usermode.<br>
-&gt;<br>
-&gt; Changes from v5-&gt;v6:<br>
-&gt; 1. Fixed compilation issue with PATCH 1.<br>
-&gt; 2. Addressed other comments.<br>
-&gt;<br>
-&gt; Changes from v4-&gt;v5:<br>
-&gt; 1. Rebased on top of the -next with following patches.<br>
-&gt;=C2=A0 =C2=A0 - isa extension<br>
-&gt;=C2=A0 =C2=A0 - priv 1.12 spec<br>
-&gt; 2. Addressed all the comments on v4<br>
-&gt; 3. Removed additional isa-ext DT node in favor of riscv,isa string upd=
-ate<br>
-&gt;<br>
-&gt; Changes from v3-&gt;v4:<br>
-&gt; 1. Removed the dummy events from pmu DT node.<br>
-&gt; 2. Fixed pmu_avail_counters mask generation.<br>
-&gt; 3. Added a patch to simplify the predicate function for counters.<br>
-&gt;<br>
-&gt; Changes from v2-&gt;v3:<br>
-&gt; 1. Addressed all the comments on PATCH1-4.<br>
-&gt; 2. Split patch1 into two separate patches.<br>
-&gt; 3. Added explicit comments to explain the event types in DT node.<br>
-&gt; 4. Rebased on latest Qemu.<br>
-&gt;<br>
-&gt; Changes from v1-&gt;v2:<br>
-&gt; 1. Dropped the ACks from v1 as signficant changes happened after v1.<b=
-r>
-&gt; 2. sscofpmf support.<br>
-&gt; 3. A generic counter management framework.<br>
-&gt;<br>
-&gt; [1] <a href=3D"https://github.com/riscv-non-isa/riscv-sbi-doc/blob/mas=
-ter/riscv-sbi.adoc" rel=3D"noreferrer" target=3D"_blank">https://github.com=
-/riscv-non-isa/riscv-sbi-doc/blob/master/riscv-sbi.adoc</a><br>
-&gt; [2] <a href=3D"https://drive.google.com/file/d/171j4jFjIkKdj5LWcExphq4=
-xG_2sihbfd/edit" rel=3D"noreferrer" target=3D"_blank">https://drive.google.=
-com/file/d/171j4jFjIkKdj5LWcExphq4xG_2sihbfd/edit</a><br>
-&gt; [3] <a href=3D"https://github.com/atishp04/qemu/tree/riscv_pmu_v14" re=
-l=3D"noreferrer" target=3D"_blank">https://github.com/atishp04/qemu/tree/ri=
-scv_pmu_v14</a><br>
-&gt;<br>
-&gt; Atish Patra (5):<br>
-&gt; target/riscv: Add sscofpmf extension support<br>
-&gt; target/riscv: Simplify counter predicate function<br>
-&gt; target/riscv: Add few cache related PMU events<br>
-&gt; hw/riscv: virt: Add PMU DT node to the device tree<br>
-&gt; target/riscv: Update the privilege field for sscofpmf CSRs<br>
-<br>
-Sorry, but this doesn&#39;t apply. Are you able to rebase it?<br>
-<br></blockquote><div><br></div><div>I am a bit confused. Your PULL request=
- on Sep 7th already included this &amp; sstc series.</div><div>I can see th=
-e patches in upstream qemu as well.</div><div><br></div><div>=C2=A0<br></di=
-v><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;borde=
-r-left:1px solid rgb(204,204,204);padding-left:1ex">
-Alistair<br>
-<br>
-&gt;<br>
-&gt; hw/riscv/virt.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 16 ++<=
-br>
-&gt; target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 12 ++<br>
-&gt; target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 25 +++<br>
-&gt; target/riscv/cpu_bits.h=C2=A0 =C2=A0|=C2=A0 55 +++++<br>
-&gt; target/riscv/cpu_helper.c |=C2=A0 25 +++<br>
-&gt; target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 304 +++++++++++++++++-=
----------<br>
-&gt; target/riscv/machine.c=C2=A0 =C2=A0 |=C2=A0 =C2=A01 +<br>
-&gt; target/riscv/pmu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 | 425 ++++++++++++++++++=
-+++++++++++++++++++-<br>
-&gt; target/riscv/pmu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A08 +<br>
-&gt; 9 files changed, 760 insertions(+), 111 deletions(-)<br>
-&gt;<br>
-&gt; --<br>
-&gt; 2.25.1<br>
-&gt;<br>
-&gt;<br>
-</blockquote></div></div>
-
---00000000000017119c05e917bac3--
+--3866299591-1142243070-1663663801=:43449--
 
