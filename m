@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oaVDr-0001Kk-QO
-	for mharc-qemu-riscv@gnu.org; Tue, 20 Sep 2022 00:51:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45246)
+	id 1oaVFu-0003Ws-AV
+	for mharc-qemu-riscv@gnu.org; Tue, 20 Sep 2022 00:53:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49300)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1oaVDp-0001HP-9J; Tue, 20 Sep 2022 00:51:01 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429]:34672)
+ id 1oaVFn-0003SF-T6; Tue, 20 Sep 2022 00:53:04 -0400
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f]:40895)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1oaVDn-0000ti-HB; Tue, 20 Sep 2022 00:51:00 -0400
-Received: by mail-wr1-x429.google.com with SMTP id z6so2372589wrq.1;
- Mon, 19 Sep 2022 21:50:57 -0700 (PDT)
+ id 1oaVFl-00012I-9j; Tue, 20 Sep 2022 00:53:02 -0400
+Received: by mail-wr1-x42f.google.com with SMTP id e16so2318435wrx.7;
+ Mon, 19 Sep 2022 21:52:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :sender:from:to:cc:subject:date;
- bh=AOjdR7SFZiHY1uiELRpo0rpHv870srIhKUXZHTwkqUI=;
- b=MfFJU2m3Hp+LpkC7yASngF/y3vweUTL23ftLfII94KRq1fh9uTp6TvbPfhA5JM7g/4
- BVreu+b5bogN3xvS5EzGpIbQ3ng9dHhuRm5e0Vic64Hq0UMgtlOEtv6O2XVqLujTsiv+
- 6KwJpHbGhyeJM9cFKDzK2kyye8yL1PlPeQc88f8cJP9g1alsMDm8NjaIbYUlA7jlTSSm
- LQm1oSmvlVAB4NutamOypWH24lc9dzVMwaSgX/dOayiJh8AZara/qgGIpz+9dkwcj6y7
- O5rpwXra/Dcl72TDHgcZpvuttTtBdPNyqw9sm6ljJOpkgbDiG4P62kLG+lMBo2jwJzze
- Fw0Q==
+ bh=yXWBrA+VdOJ2eLhZR3jbWLCq6szWmV0B8FUoTOgqB0Y=;
+ b=aJV1CFqMLGvYtz55pBXOVpWmVSQoYNCnNBeTgMiTAsRFuzH5R6W2APpLLxvjT8WmD4
+ +Aq7iwdNNrStFOY9aOqRysX4Fi1hb2Ai05q9KoqfdPoBoG8CctBSGiXnl5/iVsdJ+gtv
+ G1xO0rGV43OaEcuEgmtP7LmuG+YfSqRa24lK6FNEcUouwvSx2/shKBcNCI2GLEjS+cs3
+ iopHzNjcN5/YTwRaIMxWArxIjRTpTenXmoMfOgDIkxoUoUYf8tucr0luciR3FCLpBLPl
+ nYQ3yr3DJaimwbslpab29lcOYdhw+Pw4taR5Nq2MUO+stSchiopNm0u210j4zdGi4ZvP
+ JV+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :sender:x-gm-message-state:from:to:cc:subject:date;
- bh=AOjdR7SFZiHY1uiELRpo0rpHv870srIhKUXZHTwkqUI=;
- b=SQY79fHb41mBuoBgt2iY6vH3F0U8dmhB02ya800KiM3q8D+DpY0e20Pr+GYaTusXQV
- xodqquqN9c5MzhYRp9QKVQSImFrCI2FyALCznNmXLAgbAuYk9UhNQuefd76lQuCnvDJ9
- SFaePg5CJ2L5n1JocCVZW2/+XGwdeOiMlXLvUY4EYDq87Jhc3ZOg+mTS+tetjV96D7v7
- 9puWTYL2u6Fz8rgY4r0wCK3CHZH23VJrD+Hb2miST/uJa3IG4NIdWIsb8z6ZG5QJNAVB
- sKMw0LxTVvYu/7etnw8bKZXY0len3b2fTK8Afmj6LfGWOJV/8CrH9sJlHM4PdnnnMu57
- XxuQ==
-X-Gm-Message-State: ACrzQf2eOUF0QhdBg/JvzC36aKin2c0xTGXZnCi8uxI9ywX95Xfk9/+F
- rsxnzeig0OE3Y6RJwrL7kpg=
-X-Google-Smtp-Source: AMsMyM5Zw3Yb5SwTXaejaf1oX7/x3SNh9tZo3tfn0QC4ZXWZZxDxIYm9wdK1FGZNM51fQBEYeXIOWA==
-X-Received: by 2002:a5d:550c:0:b0:22b:1942:4bf6 with SMTP id
- b12-20020a5d550c000000b0022b19424bf6mr190273wrv.520.1663649456084; 
- Mon, 19 Sep 2022 21:50:56 -0700 (PDT)
+ bh=yXWBrA+VdOJ2eLhZR3jbWLCq6szWmV0B8FUoTOgqB0Y=;
+ b=NxyEoB/JDeAEQ6qDKXlfBWAJ3I1wCkQLoDYty7nHEAbrdw2jXmTPYKBM+dU1ULRR2Q
+ qM2ckdLy6LXb0o5DvUmqnR9ZXpHF7Az8/WwKExuPezQhpD3xOR0iAJz6Vq7UODJKexdR
+ h9SIFLSURQ7sOGNsbUsiuzeW2Wai10kY7EBdOibQ4ZPJy2EpeFvUJRyEEuDcDHsI13wi
+ VF9lAwarfYEsl9KcJhJl58VRbfUwOkHxxIwWSwUOvxresWjIPtWkySk2arTaixVwnRcr
+ OQevrxv9A9KoQoaSucqGrTKb/goxvC0t1WDjUfUTkGb/l681fBRuuOl5PA5Gvv9SfpfK
+ fU7w==
+X-Gm-Message-State: ACrzQf0++miHXEPQhULw99rnKcxcMtbGPVmSlYUbw3XlCJNVN0o1vRT3
+ RTrzr8uA1MNJreLZYaK974A=
+X-Google-Smtp-Source: AMsMyM6arlbxvVjWRWfyODWA+1XBF2D6twCUtKI65uSf3S2vAcndKsZknTjHvTjJhdM7wtQh4z6qXA==
+X-Received: by 2002:a5d:4284:0:b0:22a:291e:fa8f with SMTP id
+ k4-20020a5d4284000000b0022a291efa8fmr12816362wrq.553.1663649577762; 
+ Mon, 19 Sep 2022 21:52:57 -0700 (PDT)
 Received: from [192.168.1.115] ([185.126.107.38])
  by smtp.gmail.com with ESMTPSA id
- f12-20020a05600c154c00b003a62052053csm20902170wmg.18.2022.09.19.21.50.51
+ a1-20020a05600c348100b003b477532e66sm1328087wmq.2.2022.09.19.21.52.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 19 Sep 2022 21:50:55 -0700 (PDT)
+ Mon, 19 Sep 2022 21:52:56 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Message-ID: <3fcb707c-47c3-7696-86ec-62048e39bfe1@amsat.org>
-Date: Tue, 20 Sep 2022 06:50:51 +0200
+Message-ID: <6af33d73-1e34-304d-998f-a46c8c05f4bb@amsat.org>
+Date: Tue, 20 Sep 2022 06:52:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
  Gecko/20100101 Thunderbird/91.13.0
-Subject: Re: [PATCH 2/9] exec/hwaddr.h: Add missing include
+Subject: Re: [PATCH 3/9] hw/core/sysbus: Resolve main_system_bus singleton
 Content-Language: en-US
 To: Bernhard Beschow <shentey@gmail.com>, qemu-devel@nongnu.org
 Cc: "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm
@@ -112,13 +112,13 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm
  Laurent Vivier <laurent@vivier.eu>, Alistair Francis
  <alistair@alistair23.me>, Jason Herne <jjherne@linux.ibm.com>
 References: <20220919231720.163121-1-shentey@gmail.com>
- <20220919231720.163121-3-shentey@gmail.com>
+ <20220919231720.163121-4-shentey@gmail.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-In-Reply-To: <20220919231720.163121-3-shentey@gmail.com>
+In-Reply-To: <20220919231720.163121-4-shentey@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -24
 X-Spam_score: -2.5
 X-Spam_bar: --
@@ -139,29 +139,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Sep 2022 04:51:02 -0000
+X-List-Received-Date: Tue, 20 Sep 2022 04:53:05 -0000
 
 On 20/9/22 01:17, Bernhard Beschow wrote:
-> The next commit would not compile w/o the include directive.
+> In QEMU, a machine and the main_system_bus always go togehter. Usually
+> the bus is part of the machine which suggsts to host it there.
+
+"together", "suggests"
+
+> Since tere is already a current_machine singleton, all code that
+> accesses the main_system_bus can be changed (behind the scenes) to go
+> through current_machine. This resolves a singleton. Futhermore, by
+
+"Furthermore"
+
+> reifying it in code, the every-machine-has-exactly-one-main-system-bus
+> relationship becomes very obvious.
+> 
+> Note that the main_system_bus attribute is a value rather than a
+> pointer. This trades pointer dereferences for pointer arithmetic. The
+> idea is to reduce cache misses - a rule of thumb says that
+> every pointer dereference causes a cache miss while arithmetic is
+> basically free.
 > 
 > Signed-off-by: Bernhard Beschow <shentey@gmail.com>
 > ---
->   include/exec/hwaddr.h | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/include/exec/hwaddr.h b/include/exec/hwaddr.h
-> index 8f16d179a8..616255317c 100644
-> --- a/include/exec/hwaddr.h
-> +++ b/include/exec/hwaddr.h
-> @@ -3,6 +3,7 @@
->   #ifndef HWADDR_H
->   #define HWADDR_H
+>   hw/core/bus.c       |  5 ++++-
+>   hw/core/machine.c   |  3 +++
+>   hw/core/sysbus.c    | 22 +++++-----------------
+>   include/hw/boards.h |  1 +
+>   4 files changed, 13 insertions(+), 18 deletions(-)
+
+> diff --git a/include/hw/boards.h b/include/hw/boards.h
+> index 311ed17e18..7af940102d 100644
+> --- a/include/hw/boards.h
+> +++ b/include/hw/boards.h
+
+Likely missing the BusState declaration:
+
+   #include "hw/qdev-core.h"
+
+> @@ -346,6 +346,7 @@ struct MachineState {
+>        */
+>       MemoryRegion *ram;
+>       DeviceMemoryState *device_memory;
+> +    BusState main_system_bus;
 >   
-> +#include "qemu/osdep.h"
+>       ram_addr_t ram_size;
+>       ram_addr_t maxram_size;
 
-NAck: This is an anti-pattern. "qemu/osdep.h" must not be included
-in .h, only in .c.
-
-Isn't including "hw/qdev-core.h" in "include/hw/boards.h" enough in
-the next patch?
 
