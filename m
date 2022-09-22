@@ -1,86 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1obKOK-0004rS-E3
-	for mharc-qemu-riscv@gnu.org; Thu, 22 Sep 2022 07:29:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38362)
+	id 1obObC-0007Ky-4p
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Sep 2022 11:58:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54966)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1obKOC-0004nW-CA
- for qemu-riscv@nongnu.org; Thu, 22 Sep 2022 07:29:12 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431]:37534)
+ (Exim 4.90_1) (envelope-from <tkng@rivosinc.com>) id 1obOb8-0007Hm-Uh
+ for qemu-riscv@nongnu.org; Thu, 22 Sep 2022 11:58:47 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:37724)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1obKOA-0005rk-H0
- for qemu-riscv@nongnu.org; Thu, 22 Sep 2022 07:29:08 -0400
-Received: by mail-pf1-x431.google.com with SMTP id a80so8998861pfa.4
- for <qemu-riscv@nongnu.org>; Thu, 22 Sep 2022 04:29:05 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <tkng@rivosinc.com>) id 1obOb6-0004q6-HS
+ for qemu-riscv@nongnu.org; Thu, 22 Sep 2022 11:58:46 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id
+ o99-20020a17090a0a6c00b002039c4fce53so2854287pjo.2
+ for <qemu-riscv@nongnu.org>; Thu, 22 Sep 2022 08:58:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date;
- bh=fo1pguXh35GJwhNNLgr8GCOVMf6DDqTSk5GZgvqY2vc=;
- b=b+lpv+RJFA2TNM1Oen1FGhdlyeRW3Be8+C1Mw0KR6DmzfXoVUyHWPcBwYmQhlNZ+ys
- ZQCp5HbsN4Tg5wu97qvSVdXWmPnJEa0vAW8yoWedbkr3W8pB7H73DMvB4MP+mKQKLGfV
- hI0AEC2ATJJPRmIC8voa3Uh4As2XwCsetjY7GAUZQe5TI+sl0pocTWxRJn+Zaujt3dEI
- wyWAPavI8HJTEo5L/wXQeMLr/iDvXwSINraRBpHkuNy/ISU8GLUawxd2MaxJC3Y4tMaG
- xUqrTMyE3/5/ktGPjfmyxJ3Vjz32qJlMhxv/32eQcKOzufMxDbqykr59nHqEKoUhMhQM
- nr1Q==
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date; bh=g151PNUk/a7LItKdEKf8ohvN14x9wEGJ63ngSuCRrTs=;
+ b=lp+HtylerCpz/IeNCAbBRVXtE+ErX4XtARqbs2RaW51KBZTyg2RzPYKEqMV4ZJy3Jc
+ t5ByBij5u06ZHE50WcQcVA2l+jYDf8RXy8d76fSUDGbzDb3X6xf52TT1zozEoo/VBDRJ
+ kx8R6QEtojNPs+NLRBa9/fC9WUai/RDkPy/oycyzBcAQUl7u8gvcu3ki8IIUcAunMaoF
+ FnvmCZoDBqZkZ4tiWqO4DSlDSoPrwf9CazTLdW3T48RMONzoSGb35tOpTXdrz1lBOWd5
+ eqqGzO4ISubFDeN2wUBY235i37STo+TKJprhlv2v88c+Du7Z+lQPWj3t1RNHxKqDlLJv
+ yoxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date;
- bh=fo1pguXh35GJwhNNLgr8GCOVMf6DDqTSk5GZgvqY2vc=;
- b=hJzKuyVTbVMmMUv9/h0kf4PVrf1/cXbMpLGx24b/dbvlOYIo04K01bVOKHrYUFt0n1
- iuxkO4f6jvGbn9GlGu4fStLKJ8TemO7UbKfvbZADbIakYrXjF8/9IFGIOQRQRtjs/J7I
- Q+cSSMpoyWniAZiwAQrcAWK7SX58dr+vlT5fKuFPcYsYhHfS7vlJUFAsQbT8ara3WCZ7
- WhMgASzaAdqRseZsBLKgB7H7aLQ9bbA9XP9l7RrLB0K3nrGHydCSesErgzBHc6IxX1Vk
- eUeIEYzOVXNAZApj2cq6Ly/bfqfflsBWDy+Q0Dgas6Vnb+SqfCht6ZJoGSfrB+DgIkOK
- zEuQ==
-X-Gm-Message-State: ACrzQf0DqEacai9RpdMoUyKjDziYEzxAl1niAfqeHRzcKVCdw9bJoXR+
- atx3oL22LvhfV2ZDA8fRWnXJVw==
-X-Google-Smtp-Source: AMsMyM7dN/wl7oBJUheshXt14cDXAKeGn6mbNPTJHJ+s5CQHC2zj/qS4fXA32j3cKE53QlKGVI9OIg==
-X-Received: by 2002:a63:88c8:0:b0:439:494d:fd10 with SMTP id
- l191-20020a6388c8000000b00439494dfd10mr2596274pgd.201.1663846143666; 
- Thu, 22 Sep 2022 04:29:03 -0700 (PDT)
-Received: from sunil-laptop ([49.206.11.215]) by smtp.gmail.com with ESMTPSA id
- k18-20020aa79732000000b00545832dd969sm4213443pfg.145.2022.09.22.04.28.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Sep 2022 04:29:03 -0700 (PDT)
-Date: Thu, 22 Sep 2022 16:58:54 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: gaosong <gaosong@loongson.cn>, Peter Maydell <peter.maydell@linaro.org>
-Cc: Alistair Francis <alistair23@gmail.com>, qemu-arm <qemu-arm@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: Re: [PATCH V4 1/3] hw/arm, loongarch: Move load_image_to_fw_cfg() to
- common location
-Message-ID: <YyxG9qmImWgcT0tI@sunil-laptop>
-References: <20220906090219.412517-1-sunilvl@ventanamicro.com>
- <20220906090219.412517-2-sunilvl@ventanamicro.com>
- <CAKmqyKOZSaE9CYGmYSKOEnkQkGDUkchut+i2mQjcZLSVx-qWag@mail.gmail.com>
- <YyMTpMuQ0UP9Mqaz@sunil-laptop>
- <2ecd4eff-d0a4-a140-5dd5-b4de89040189@loongson.cn>
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date;
+ bh=g151PNUk/a7LItKdEKf8ohvN14x9wEGJ63ngSuCRrTs=;
+ b=sszm+EwVmrjrU5yhaiCxVpMonoCH2hF7N3IJs7u/oYPJvUolhUjrFn2fgA40B/gYsA
+ lGbuk1TJmetH3J/fSaO0UYEWF7gTUQS1BbvjKSh27XHequ2+vuNLvz0o9sIOmOvBDrMm
+ VKdDlNJQc+kpg3Ngejlh8k7IC/C1YV9xrZXg0TWQ+q9c4EWEK5WKKgZHlPVcWFn0PcBV
+ 1qM9ZtS/Wo1OKqR2xzN3U3bJV2lx8u6pbMLYLrCs2N+sTu6u8qGZfHDx76J1GtL1xRn2
+ F86YtlEWN0GaWQhpQKN036hbWrniuWZ24bWCc1BJhI3hO5ha8TJBR6RAhJqBMLH2Rwd0
+ gZgg==
+X-Gm-Message-State: ACrzQf1gclnZLFw3F1/3FOrzLGjAXYhwsEa07CmtbrR1r2DR5q3vEGvs
+ 8R4Jdr+QAVsDHoxVb4zMducAFNDPClDwch14ldjZspUMZdwZkg==
+X-Google-Smtp-Source: AMsMyM7k+Pjy9zyPYsm+CL8pUTCbA004XssRLXx+IaSBb286JrhOIlw666ulhwKob+jzQlo/1VnzHFSGCWCSRvaoAE4=
+X-Received: by 2002:a17:902:f604:b0:172:75a4:33ea with SMTP id
+ n4-20020a170902f60400b0017275a433eamr3848235plg.7.1663862321849; Thu, 22 Sep
+ 2022 08:58:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <2ecd4eff-d0a4-a140-5dd5-b4de89040189@loongson.cn>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x431.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+From: Tyler Ng <tkng@rivosinc.com>
+Date: Thu, 22 Sep 2022 08:58:30 -0700
+Message-ID: <CAB88-qN7Uz-W-UQY1SZA2XZ7cNQPKCxCVcangrveFvxuBKdfrw@mail.gmail.com>
+Subject: [PATCH v2 0/3] Implement the Opentitan watchdog
+To: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, 
+ Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Laurent Vivier <lvivier@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=tkng@rivosinc.com; helo=mail-pj1-x1035.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -94,40 +71,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Sep 2022 11:29:15 -0000
+X-List-Received-Date: Thu, 22 Sep 2022 15:58:47 -0000
 
-On Thu, Sep 15, 2022 at 08:56:01PM +0800, gaosong wrote:
-> 
-> 在 2022/9/15 下午7:59, Sunil V L 写道:
-> > Hi,
-> > 
-> > Could maintainers of hw/arm and hw/loongarch to take a look at this? I
-> > have addressed Peter's earlier comment.
-> > 
-> > Thanks
-> > Sunil
-> > 
-> > On Thu, Sep 08, 2022 at 11:17:52AM +0200, Alistair Francis wrote:
-> > > On Tue, Sep 6, 2022 at 11:38 AM Sunil V L <sunilvl@ventanamicro.com> wrote:
-> > > > load_image_to_fw_cfg() is duplicated by both arm and loongarch. The same
-> > > > function will be required by riscv too. So, it's time to refactor and
-> > > > move this function to a common path.
-> > > > 
-> > > > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > > > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > > 
-> > > Alistair
-> Reviewed-by: Song Gao <gaosong@loongson.cn>
-> 
-> Thanks
-> Song Gao
-Thanks Song Gao.
+This patch series implements the OpenTitan Always-On Timer device, and
+includes several fixes/feature additions to existing devices.
 
-Hi Peter,
+The memory map used for reference can be found here:
+https://github.com/lowRISC/opentitan/blob/217a0168ba118503c166a9587819e3811eeb0c0c/hw/top_earlgrey/sw/autogen/top_earlgrey_memory.h
 
-Could you please provide RB or ACK if things are fine with this patch?
+The main components of this patch series are:
+1. The OpenTitan AON Timer device itself, and an associated qtest.
+2. Fix a bug found with the sifive plic device.
+3. Adds support for writes to mtime in the Ibex timer device and adds
+a qtest for it.
 
-Thanks
-Sunil
+Tyler Ng (3):
+  hw/watchdog: wdt_ibex_aon.c: Implement the watchdog for the OpenTitan
+  hw/intc: sifive_plic.c: Fix interrupt priority index.
+  hw/timer: ibex_timer.c: Add support for writes to mtime
+
+ hw/intc/sifive_plic.c              |   4 +-
+ hw/riscv/Kconfig                   |   4 +
+ hw/riscv/opentitan.c               |  21 +-
+ hw/timer/ibex_timer.c              |  98 +++++--
+ hw/watchdog/Kconfig                |   3 +
+ hw/watchdog/meson.build            |   1 +
+ hw/watchdog/wdt_ibex_aon.c         | 405 +++++++++++++++++++++++++++++
+ include/hw/riscv/opentitan.h       |   7 +-
+ include/hw/timer/ibex_timer.h      |   6 +
+ include/hw/watchdog/wdt_ibex_aon.h |  67 +++++
+ tests/qtest/ibex-aon-timer-test.c  | 189 ++++++++++++++
+ tests/qtest/ibex-timer-test.c      | 178 +++++++++++++
+ tests/qtest/meson.build            |   4 +
+ 13 files changed, 953 insertions(+), 34 deletions(-)
+ create mode 100644 hw/watchdog/wdt_ibex_aon.c
+ create mode 100644 include/hw/watchdog/wdt_ibex_aon.h
+ create mode 100644 tests/qtest/ibex-aon-timer-test.c
+ create mode 100644 tests/qtest/ibex-timer-test.c
+
+--
+2.34.1
 
