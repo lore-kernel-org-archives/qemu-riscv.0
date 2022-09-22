@@ -1,130 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1obH3G-0006rb-Iw
-	for mharc-qemu-riscv@gnu.org; Thu, 22 Sep 2022 03:55:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48962)
+	id 1obH6r-0002Ew-6H
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Sep 2022 03:59:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43284)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1obH3C-0006nD-Ms; Thu, 22 Sep 2022 03:55:14 -0400
-Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635]:34409)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1obH6p-0002CK-Ci
+ for qemu-riscv@nongnu.org; Thu, 22 Sep 2022 03:58:59 -0400
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b]:38785)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1obH3A-00053C-Uo; Thu, 22 Sep 2022 03:55:14 -0400
-Received: by mail-ej1-x635.google.com with SMTP id y3so19192507ejc.1;
- Thu, 22 Sep 2022 00:55:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:subject:cc:to:from:date:from:to:cc:subject:date;
- bh=XAn7c1pwQ/FfM7vHKOqOcGKKPoVtNy6cXXuDPbbsEMg=;
- b=KdwbP3Bc87qLjlpjsnO2AH1hFtCVaiTGJp44vkAjCHEyi2BVqdUN8ix+ddbhHaPK1r
- EqWJ5pPbZsCjVFS9e+dTsVJ0Foj6V+KoT4fRyJlz7QqnJ/8hVqxrc1Ho7ZLeIspC87hS
- EwLwWL/B0irPWwT9KoGor+fge4WF8zkBMONJ36LmRsHQ1cCTfxd9d0oVkt47Fb8ho6Yq
- vGRDgumcb7zLXHHzBCfP5aDStxiv4J7vmNbl/fZPXSp3qCOfLbaEdK0wuuYY9KcWK55E
- P9+VDLqy0HdpS4ndwVtZP2lM2k+QoDCxBOx6WyXF/QkqHcfEpOC7COF2TxEu7OhFiih6
- yxPw==
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1obH6g-0006AG-0Z
+ for qemu-riscv@nongnu.org; Thu, 22 Sep 2022 03:58:58 -0400
+Received: by mail-lf1-x12b.google.com with SMTP id f14so13345640lfg.5
+ for <qemu-riscv@nongnu.org>; Thu, 22 Sep 2022 00:58:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date;
+ bh=xhcvUZ1fDrqapZxLQdQBtI1FxreNGpAjo/E4zxr5d2s=;
+ b=JOUYBRYcm2SF0JrGAdRY8sGqUaPk+WhEZ3Y7b3Ht6x+M7bEwRqq5QilS7Ax0SxU3NY
+ IHFqdWBTnzQVDqbKyIKQJiXhPr7jIYsvGONP9pAEaPOzLIQDkWzlTFCrKzXKAneYf5yO
+ 5ELBwImRWIKrWsDThhZbwv4rEZ/u79hJMQkoL0DCoKgOqvJEe+sqVJ9LgszMt49v+JvR
+ 81+G7ChcNYSm65SWqz5W/SIBMbc1PHXSt3eJF4aOYKHJEqFlBAqSRBJjrRoOzTehik6x
+ GcQCNATwFYKRu8+SMr5dVhEsNph0I+aCgqoYNPqV2Mg1pI90koH65BiW5bweUHw4C7/f
+ BgPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date;
- bh=XAn7c1pwQ/FfM7vHKOqOcGKKPoVtNy6cXXuDPbbsEMg=;
- b=sQHE7t8K+5FGJsatA/2nyUxTJla9WOXiXYbbpZuiKztLbnx0NtWwp0QZ/TYdk0mlGu
- J3TBDnuzdijH8DlDMpWixYSSUpR686J0fAE8L1xeML6PwsUdw7obCOngK1YtmmfjEzCE
- e4GMX4dK+z6DjRCVZGe3qcrHlF7OBTWdb/roRydHn+69Zv/+b7rmfkx67RyYQQw17OFW
- ISnx4YzUYLfmWKYooJPqjRSZiek5kc6iY+LymQUkUfTvCj3hCGlsSn6LF5UCLhO/X3zB
- JkBRF+MwaBp1bga7iOaFfJZh+dNjKM7qupmcvr5X3JBeKCK9jN2Cg7quTJ3AoJKtPfKL
- EaKQ==
-X-Gm-Message-State: ACrzQf1m41bXe/S3lpGMc7oyTxnTQRFhHuixcTcZXuHfA8/yRPc1yzvc
- tGXT1G+RuPH/YGxGucki7vA=
-X-Google-Smtp-Source: AMsMyM4vh+kpWsvDAV6UjWoPXkkUVHDYB2adjnMzVWEdRb430ELqUeGucGcmkbkYyJGj0Q/DyqUmmQ==
-X-Received: by 2002:a17:906:9b93:b0:780:3b58:93e1 with SMTP id
- dd19-20020a1709069b9300b007803b5893e1mr1620475ejc.698.1663833305755; 
- Thu, 22 Sep 2022 00:55:05 -0700 (PDT)
-Received: from [127.0.0.1] (dynamic-077-191-214-084.77.191.pool.telefonica.de.
- [77.191.214.84]) by smtp.gmail.com with ESMTPSA id
- u17-20020a056402065100b0045081dc93dfsm3166610edx.78.2022.09.22.00.55.04
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 22 Sep 2022 00:55:05 -0700 (PDT)
-Date: Thu, 22 Sep 2022 07:55:01 +0000
-From: B <shentey@gmail.com>
-To: Markus Armbruster <armbru@redhat.com>
-CC: Alistair Francis <alistair23@gmail.com>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Magnus Damm <magnus.damm@gmail.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Bandan Das <bsd@redhat.com>, Matthew Rosato <mjrosato@linux.ibm.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Sergio Lopez <slp@redhat.com>, Alexey Kardashevskiy <aik@ozlabs.ru>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>, Cameron Esfahani <dirty@apple.com>, 
- Michael Rolnik <mrolnik@gmail.com>, Song Gao <gaosong@loongson.cn>,
- Jagannathan Raman <jag.raman@oracle.com>, Greg Kurz <groug@kaod.org>,
- Kamil Rytarowski <kamil@netbsd.org>, Peter Xu <peterx@redhat.com>,
- Joel Stanley <joel@jms.id.au>, Alistair Francis <Alistair.Francis@wdc.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, haxm-team@intel.com,
- Roman Bolshakov <r.bolshakov@yadro.com>, Eric Auger <eric.auger@redhat.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- =?ISO-8859-1?Q?Daniel_P=2E_Berrang=E9?= <berrange@redhat.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- =?ISO-8859-1?Q?C=E9dric_Le_Goater?= <clg@kaod.org>,
- Stefan Hajnoczi <stefanha@redhat.com>, Qemu-block <qemu-block@nongnu.org>,
- Eduardo Habkost <eduardo@habkost.net>,
- =?ISO-8859-1?Q?Herv=E9_Poussineau?= <hpoussin@reactos.org>,
- "open list:New World" <qemu-ppc@nongnu.org>,
- Cornelia Huck <cohuck@redhat.com>, Helge Deller <deller@gmx.de>,
- Stefano Stabellini <sstabellini@kernel.org>,
- =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <f4bug@amsat.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Stafford Horne <shorne@gmail.com>, Paul Durrant <paul@xen.org>,
- Havard Skinnemoen <hskinnemoen@google.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,
- Alexander Graf <agraf@csgraf.de>, Thomas Huth <thuth@redhat.com>,
- Alex Williamson <alex.williamson@redhat.com>,
- Wenchao Wang <wenchao.wang@intel.com>, Tony Krowiak <akrowiak@linux.ibm.com>, 
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- qemu-s390x <qemu-s390x@nongnu.org>,
- =?ISO-8859-1?Q?Marc-Andr=E9_Lureau?= <marcandre.lureau@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Eric Farman <farman@linux.ibm.com>, Reinoud Zandijk <reinoud@netbsd.org>,
- Alexander Bulekov <alxndr@bu.edu>, Yanan Wang <wangyanan55@huawei.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Tyrone Ting <kfting@nuvoton.com>,
- "open list:X86" <xen-devel@lists.xenproject.org>,
- Yoshinori Sato <ysato@users.sourceforge.jp>, John Snow <jsnow@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Darren Kenny <darren.kenny@oracle.com>,
- "open list:Overall" <kvm@vger.kernel.org>, Qiuhao Li <Qiuhao.Li@outlook.com>, 
- John G Johnson <john.g.johnson@oracle.com>,
- Sunil Muthuswamy <sunilmut@microsoft.com>, Max Filippov <jcmvbkbc@gmail.com>, 
- qemu-arm <qemu-arm@nongnu.org>, Marcelo Tosatti <mtosatti@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Anthony Perard <anthony.perard@citrix.com>, Andrew Jeffery <andrew@aj.id.au>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, Halil Pasic <pasic@linux.ibm.com>,
- "Maciej S. Szmigiero" <maciej.szmigiero@oracle.com>,
- Jason Wang <jasowang@redhat.com>, David Hildenbrand <david@redhat.com>,
- Laurent Vivier <laurent@vivier.eu>,
- Alistair Francis <alistair@alistair23.me>,
- Jason Herne <jjherne@linux.ibm.com>
-Subject: Re: [PATCH 1/9] hw/riscv/sifive_e: Fix inheritance of SiFiveEState
-In-Reply-To: <87a66tgwd5.fsf@pond.sub.org>
-References: <20220919231720.163121-1-shentey@gmail.com>
- <20220919231720.163121-2-shentey@gmail.com>
- <CAKmqyKN+V2R8PkED67tB8+pCZs9369ViiL8OZ9XhO3SdUCk5=Q@mail.gmail.com>
- <87edw6xoog.fsf@pond.sub.org>
- <0BBD7391-7B2D-44E7-9396-D1747784B9DA@gmail.com>
- <87a66tgwd5.fsf@pond.sub.org>
-Message-ID: <58A6CCCB-7426-41A2-9D3A-0683FBC51F47@gmail.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date;
+ bh=xhcvUZ1fDrqapZxLQdQBtI1FxreNGpAjo/E4zxr5d2s=;
+ b=TMvDdhmz6XrpQImDuF5bbc+87kU2/YBs3pjpROe7858AyYK0ufmjKCmqwRLpNtXGGB
+ Bnl6i308wcUyzX83hcmKFqcyIioSu5UjBAsbkUIAED51wqDp9HkiztbbbdLz5VKKrEw/
+ fpnQUuT6MaQOAfuImQ+DlV+iBrw5lCoMdwtg+BNDn4hWj+Lp5fIk5ERYXrTZPr2yyT4C
+ A1vOpdHjeT8TLE42AI9j8PqZnX9YFytvgxrf+P+ZpUH+MX7ujbnmvbpNNL0Km3jp/tdF
+ fRpQTULrJKGUHQn1PlVfShu/TUBUUXOUJ8zk3hjeEm+VNZOMNzF/BY/kWQFtGXu7Mu90
+ XUbQ==
+X-Gm-Message-State: ACrzQf2TbduQi1LOPPQw6TaLOlbxAoIF/qtZZOs8sEQMVPtJoDTrPQ6v
+ vX/Kp9tzxV6austxOI7xfN0C6g==
+X-Google-Smtp-Source: AMsMyM7mdocMCfeaLcCFszLGoWF6vFBae0aer5sj3eoZGrg/BPGL6rmG5EUjjm+IPLKSNwdChNeAgA==
+X-Received: by 2002:ac2:5623:0:b0:49a:d7b9:c06d with SMTP id
+ b3-20020ac25623000000b0049ad7b9c06dmr812655lff.511.1663833524955; 
+ Thu, 22 Sep 2022 00:58:44 -0700 (PDT)
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com.
+ [209.85.208.181]) by smtp.gmail.com with ESMTPSA id
+ r16-20020ac25a50000000b004984ab5956dsm809649lfn.202.2022.09.22.00.58.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 22 Sep 2022 00:58:44 -0700 (PDT)
+Received: by mail-lj1-f181.google.com with SMTP id q17so9946493lji.11;
+ Thu, 22 Sep 2022 00:58:44 -0700 (PDT)
+X-Received: by 2002:a05:651c:508:b0:26c:7297:5aa7 with SMTP id
+ o8-20020a05651c050800b0026c72975aa7mr252463ljp.93.1663833523834; Thu, 22 Sep
+ 2022 00:58:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::635;
- envelope-from=shentey@gmail.com; helo=mail-ej1-x635.google.com
+References: <20220922075232.33653-1-shentey@gmail.com>
+In-Reply-To: <20220922075232.33653-1-shentey@gmail.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Thu, 22 Sep 2022 15:58:32 +0800
+X-Gmail-Original-Message-ID: <CANzO1D1Moxf-tOqS3gc=BhHsCkOC3SO2rJNJCyRYvA2Bj5SYjw@mail.gmail.com>
+Message-ID: <CANzO1D1Moxf-tOqS3gc=BhHsCkOC3SO2rJNJCyRYvA2Bj5SYjw@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv/sifive_e: Fix inheritance of SiFiveEState
+To: Bernhard Beschow <shentey@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-stable@nongnu.org, qemu-riscv@nongnu.org, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Content-Type: multipart/alternative; boundary="00000000000027574605e93f6ec3"
+Received-SPF: pass client-ip=2a00:1450:4864:20::12b;
+ envelope-from=frank.chang@sifive.com; helo=mail-lf1-x12b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -139,46 +85,124 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Sep 2022 07:55:16 -0000
+X-List-Received-Date: Thu, 22 Sep 2022 07:58:59 -0000
 
+--00000000000027574605e93f6ec3
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+Hi Bernhard,
 
-Am 21=2E September 2022 04:55:02 UTC schrieb Markus Armbruster <armbru@red=
-hat=2Ecom>:
->Bernhard Beschow <shentey@gmail=2Ecom> writes:
+I think there's already a similar patch for this bug fix:
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg905424.html
+
+Regards,
+Frank Chang
+
+On Thu, Sep 22, 2022 at 3:53 PM Bernhard Beschow <shentey@gmail.com> wrote:
+
+> SiFiveEState inherits from SysBusDevice while it's TypeInfo claims it to
+> inherit from TYPE_MACHINE. This is an inconsistency which can cause
+> undefined behavior such as memory corruption.
 >
->> Am 20=2E September 2022 11:36:47 UTC schrieb Markus Armbruster <armbru@=
-redhat=2Ecom>:
->>>Alistair Francis <alistair23@gmail=2Ecom> writes:
->>>
->>>> On Tue, Sep 20, 2022 at 9:18 AM Bernhard Beschow <shentey@gmail=2Ecom=
-> wrote:
->>>>>
->>>>> SiFiveEState inherits from SysBusDevice while it's TypeInfo claims i=
-t to
->>>>> inherit from TYPE_MACHINE=2E This is an inconsistency which can caus=
-e
->>>>> undefined behavior such as memory corruption=2E
->>>>>
->>>>> Change SiFiveEState to inherit from MachineState since it is registe=
-red
->>>>> as a machine=2E
->>>>>
->>>>> Signed-off-by: Bernhard Beschow <shentey@gmail=2Ecom>
->>>>
->>>> Reviewed-by: Alistair Francis <alistair=2Efrancis@wdc=2Ecom>
->>>
->>>To the SiFive maintainers: since this is a bug fix, let's merge it righ=
-t
->>>away=2E
->>
->> I could repost this particular patch with the three new tags (incl=2E F=
-ixes) if desired=2E
+> Change SiFiveEState to inherit from MachineState since it is registered
+> as a machine.
 >
->Can't hurt, and could help the maintainers=2E
+> Fixes: 0869490b1c ("riscv: sifive_e: Manually define the machine")
+>
+> Signed-off-by: Bernhard Beschow <shentey@gmail.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+> ---
+>  include/hw/riscv/sifive_e.h | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+> index 83604da805..d738745925 100644
+> --- a/include/hw/riscv/sifive_e.h
+> +++ b/include/hw/riscv/sifive_e.h
+> @@ -22,6 +22,7 @@
+>  #include "hw/riscv/riscv_hart.h"
+>  #include "hw/riscv/sifive_cpu.h"
+>  #include "hw/gpio/sifive_gpio.h"
+> +#include "hw/boards.h"
+>
+>  #define TYPE_RISCV_E_SOC "riscv.sifive.e.soc"
+>  #define RISCV_E_SOC(obj) \
+> @@ -41,7 +42,7 @@ typedef struct SiFiveESoCState {
+>
+>  typedef struct SiFiveEState {
+>      /*< private >*/
+> -    SysBusDevice parent_obj;
+> +    MachineState parent_obj;
+>
+>      /*< public >*/
+>      SiFiveESoCState soc;
+> --
+> 2.37.3
+>
+>
+>
 
-[X] Done=2E
+--00000000000027574605e93f6ec3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Best regards,
-Bernhard
+<div dir=3D"ltr">Hi Bernhard,<div><br></div><div>I think there&#39;s alread=
+y a similar patch for this bug fix:<br><a href=3D"https://www.mail-archive.=
+com/qemu-devel@nongnu.org/msg905424.html">https://www.mail-archive.com/qemu=
+-devel@nongnu.org/msg905424.html</a><br></div><div><br></div><div>Regards,<=
+/div><div>Frank Chang</div></div><br><div class=3D"gmail_quote"><div dir=3D=
+"ltr" class=3D"gmail_attr">On Thu, Sep 22, 2022 at 3:53 PM Bernhard Beschow=
+ &lt;<a href=3D"mailto:shentey@gmail.com">shentey@gmail.com</a>&gt; wrote:<=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">SiFiveEState inh=
+erits from SysBusDevice while it&#39;s TypeInfo claims it to<br>
+inherit from TYPE_MACHINE. This is an inconsistency which can cause<br>
+undefined behavior such as memory corruption.<br>
+<br>
+Change SiFiveEState to inherit from MachineState since it is registered<br>
+as a machine.<br>
+<br>
+Fixes: 0869490b1c (&quot;riscv: sifive_e: Manually define the machine&quot;=
+)<br>
+<br>
+Signed-off-by: Bernhard Beschow &lt;<a href=3D"mailto:shentey@gmail.com" ta=
+rget=3D"_blank">shentey@gmail.com</a>&gt;<br>
+Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.co=
+m" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+Reviewed-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:f4bug@amsat.=
+org" target=3D"_blank">f4bug@amsat.org</a>&gt;<br>
+---<br>
+=C2=A0include/hw/riscv/sifive_e.h | 3 ++-<br>
+=C2=A01 file changed, 2 insertions(+), 1 deletion(-)<br>
+<br>
+diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h<br>
+index 83604da805..d738745925 100644<br>
+--- a/include/hw/riscv/sifive_e.h<br>
++++ b/include/hw/riscv/sifive_e.h<br>
+@@ -22,6 +22,7 @@<br>
+=C2=A0#include &quot;hw/riscv/riscv_hart.h&quot;<br>
+=C2=A0#include &quot;hw/riscv/sifive_cpu.h&quot;<br>
+=C2=A0#include &quot;hw/gpio/sifive_gpio.h&quot;<br>
++#include &quot;hw/boards.h&quot;<br>
+<br>
+=C2=A0#define TYPE_RISCV_E_SOC &quot;riscv.sifive.e.soc&quot;<br>
+=C2=A0#define RISCV_E_SOC(obj) \<br>
+@@ -41,7 +42,7 @@ typedef struct SiFiveESoCState {<br>
+<br>
+=C2=A0typedef struct SiFiveEState {<br>
+=C2=A0 =C2=A0 =C2=A0/*&lt; private &gt;*/<br>
+-=C2=A0 =C2=A0 SysBusDevice parent_obj;<br>
++=C2=A0 =C2=A0 MachineState parent_obj;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0/*&lt; public &gt;*/<br>
+=C2=A0 =C2=A0 =C2=A0SiFiveESoCState soc;<br>
+-- <br>
+2.37.3<br>
+<br>
+<br>
+</blockquote></div>
+
+--00000000000027574605e93f6ec3--
 
