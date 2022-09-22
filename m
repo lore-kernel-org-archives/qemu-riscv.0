@@ -1,67 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1obHJi-0006OA-2T
-	for mharc-qemu-riscv@gnu.org; Thu, 22 Sep 2022 04:12:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42146)
+	id 1obHlu-00082Z-RF
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Sep 2022 04:41:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41878)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
- id 1obHJf-0006Nf-QW
- for qemu-riscv@nongnu.org; Thu, 22 Sep 2022 04:12:15 -0400
-Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936]:43572)
+ id 1obHln-000822-8u
+ for qemu-riscv@nongnu.org; Thu, 22 Sep 2022 04:41:19 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533]:36569)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <tommy.wu@sifive.com>)
- id 1obHJd-0004tl-CL
- for qemu-riscv@nongnu.org; Thu, 22 Sep 2022 04:12:14 -0400
-Received: by mail-ua1-x936.google.com with SMTP id z14so3347618uam.10
- for <qemu-riscv@nongnu.org>; Thu, 22 Sep 2022 01:12:11 -0700 (PDT)
+ id 1obHll-00009m-E9
+ for qemu-riscv@nongnu.org; Thu, 22 Sep 2022 04:41:18 -0400
+Received: by mail-pg1-x533.google.com with SMTP id s206so8474504pgs.3
+ for <qemu-riscv@nongnu.org>; Thu, 22 Sep 2022 01:41:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=HLEoqaG04NdcX/RkmizrfwCh7eRWu7xGGRup7WXTCS8=;
- b=B1a4VzVFuhp+xysyHQ9f9QXJXixv7vawxoXJxuNeWvDX7ZhTNnQ2xe1kMue40a7BlI
- YFS1gOjP3TZA7ZCwNX2C8ZZKw/Sfxb8CNwhdutoHzuDmZSsUgULgaFd72UrwYW2D8Jta
- antDXkQxFsREB64YafvL3OwHI36Vv0DTUZDoPrb4YEzInNguCCOCKlgCeg8Aa6eDio8h
- Hp5Mxgaj/c0/7EoHdaZlSMUmBZySF9/GI3ouD68kFkZ4nIOAlJkK3beFTPygG+JmatM9
- MK2BKWkx+g13V7U5ND5twMzkqiissoKviUvrUAw+dqaaBn4CoHoEyPqra9ySUg/Gj+h6
- 9PsQ==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date;
+ bh=+4rim3ibIpaGXCMvpT4yqhyL8WjkihXEZjo9mLkOCyM=;
+ b=jd01xzSR98DcqZvmA1cBVRLJjgZtqcAOd8dluWM0FoU0y0HPn9TwEGpJJAcTbGBDkk
+ JfwWcSapkG7HOM8LpqYiW/NL6se324SEIO7MQxa7rPcH9SaBSBqo8FV30/GW9u4/v1dU
+ i8JpIKePJ0h1Oe5BnY/8EmjjvkDj/Qsb+9H3ksM+CkmjtmiPsZ6rWyTMDEvZw/cWGwG/
+ vnpn0ynCsGWkjot2gOI++qvXooRNaoVCjUQHojIZG7Vy3BTGtIfvWuL0RTVCHzMh0BRb
+ HOZpy3ENSt2WLHcj2JK2zgBnuQ3OAPVfLlb+gTOlpEE011CxubMXL0pLYVtr4/PKYXRn
+ nwhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=HLEoqaG04NdcX/RkmizrfwCh7eRWu7xGGRup7WXTCS8=;
- b=U10oOIr26sPNSWA3Pkidql95C8Ukfpu8gWOrZCbcAA8ehDKNW6teMYG9e083OEpSP2
- dDh+gIaKyecvPIRsS0lggTp0BiXfG166zATynUUASRHydYW+JSjRp1TctZM6h58c7WIN
- n+0ugC8/9edNq1KwJbCJqJZowUuZzw+9WJxsNRfawgkz/QPpntExhNS+5XV1Rt/7DrX3
- gVqbccwfUULWqYm5Vn0PiNsYxRmhI7+1vOAbkDK/2lDGWPdm+0du+DVx72fqd5R+ltbc
- DU7VBlEzKAVtdTovR+CZujyasjkjU6yqxYdg/6n3Xpt3sNWZV1XePXnY70jXYBZG6YrL
- gGkQ==
-X-Gm-Message-State: ACrzQf2Zw1dW5wIF9lS8M1ztDEhMLR2sVPAhmjzcyyg7ANWtEWXwcdaA
- p9oI6hKaTd8Y+jrp07xjhhoLWc6RDtdkJWpWw9OZ8g==
-X-Google-Smtp-Source: AMsMyM704WBoNGpf9w/qx4DYx3so+KDBQIBOZmFWoCYNAmyh1rSPLurX7dofCBb3ocwKUY3/BDmbmCFVI6Q1bsYjm3s=
-X-Received: by 2002:a9f:318f:0:b0:3c4:55db:a0f3 with SMTP id
- v15-20020a9f318f000000b003c455dba0f3mr793859uad.121.1663834331278; Thu, 22
- Sep 2022 01:12:11 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220819071137.1140627-1-tommy.wu@sifive.com>
- <CAKmqyKNidxPt-Bu81-Eex=g9ZWdTJ29geBdtg+w5sMTvy4hraA@mail.gmail.com>
-In-Reply-To: <CAKmqyKNidxPt-Bu81-Eex=g9ZWdTJ29geBdtg+w5sMTvy4hraA@mail.gmail.com>
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date;
+ bh=+4rim3ibIpaGXCMvpT4yqhyL8WjkihXEZjo9mLkOCyM=;
+ b=PDYqJmBB9rMm+3WbO7jOYL+NQseQoTjV7LfUx19vsfPk23sVa24tv2lVekSRX3pj8V
+ qjIdR0T6ZrWmYSRQb5aIexJqLC2cNIEMUeXzmPEiKt88MPCm7Yy3Y3QldukaFO9fGVkz
+ PcZKY4eX6pW2gP5vkxXwXxmJyEVdQF2QP2CHstr2mYQxBj09b1WIJIJ+u2SeanQwmfJP
+ BALF9Rft2EKUj256QTQiMTyX7q6qK6tpPEkwiLSiivm+Me9nXUseU3U9Je5wljwFrjND
+ EOxGAaHU5CO9XSzaKzyRYllY1gdRwKyLEBu6R3oSvYDLugbk+Zo9WA1BFO2SxHp3SAle
+ zUDA==
+X-Gm-Message-State: ACrzQf1v0aMpfdktmzc8VrqXGv/mUHoDBemyk/vdtGUH08Pudex97GQW
+ K+sfk7qF3Zj1JAzJq6CoqUFgWA==
+X-Google-Smtp-Source: AMsMyM7r6YXs3eoUSArYl1rS5EeFLFEmlVnXbr4BDfBnwIIzquhzQ6dIPNDU9FoTtvIKMVefuEb/eA==
+X-Received: by 2002:a05:6a00:1947:b0:54d:d12e:93b7 with SMTP id
+ s7-20020a056a00194700b0054dd12e93b7mr2369393pfk.77.1663836075485; 
+ Thu, 22 Sep 2022 01:41:15 -0700 (PDT)
+Received: from sw06.internal.sifive.com ([64.62.193.194])
+ by smtp.gmail.com with ESMTPSA id
+ x2-20020a17090a1f8200b0020379616053sm3239202pja.57.2022.09.22.01.41.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 Sep 2022 01:41:14 -0700 (PDT)
 From: Tommy Wu <tommy.wu@sifive.com>
-Date: Thu, 22 Sep 2022 16:12:00 +0800
-Message-ID: <CANj3q_nA5Gz82Re+-spcFXATsJ3YvtknzoULG4998=D5=pXhbw@mail.gmail.com>
-Subject: Re: [PATCH] include/hw/riscv/sifive_e.h: Fix the type of parent_obj
- of SiFiveEState.
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: multipart/alternative; boundary="00000000000048050005e93f9e74"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
- envelope-from=tommy.wu@sifive.com; helo=mail-ua1-x936.google.com
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: alistair.francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ jim.shu@sifive.com, frank.chang@sifive.com, Tommy Wu <tommy.wu@sifive.com>
+Subject: [PATCH 0/3] Implement the watchdog timer of HiFive 1 rev b.
+Date: Thu, 22 Sep 2022 01:41:04 -0700
+Message-Id: <20220922084107.2834285-1-tommy.wu@sifive.com>
+X-Mailer: git-send-email 2.27.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=tommy.wu@sifive.com; helo=mail-pg1-x533.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -76,118 +77,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Sep 2022 08:12:16 -0000
+X-List-Received-Date: Thu, 22 Sep 2022 08:41:19 -0000
 
---00000000000048050005e93f9e74
-Content-Type: text/plain; charset="UTF-8"
+The HiFive 1 rev b includes a watchdog module based on a 32-bit
+counter. The watchdog timer is in the always-on domain device of
+HiFive 1 rev b, so this patch added the AON device to the sifive_e
+machine. This patch only implemented the functionality of the 
+watchdog timer, not all the functionality of the AON device.
 
-To the maintainers:
+You can test the patchset by the QTest tests/qtest/sifive-e-aon-watchdog-test.c
 
-Thank Alistair and Jim for the review.
-Bernhard Beschow sent the same patch :
-https://lists.gnu.org/archive/html/qemu-riscv/2022-09/msg00126.html
+Tommy Wu (3):
+  hw/misc: sifive_e_aon: Support the watchdog timer of HiFive 1 rev b.
+  hw/riscv: sifive_e: Support the watchdog timer of HiFive 1 rev b.
+  tests/qtest: sifive-e-aon-watchdog-test.c : Add QTest of watchdog of
+    sifive_e
 
-It seems that this simple patch is helpful. Could you help us to merge this
-patch?
-Thanks for your great help!
+ hw/misc/Kconfig                          |   3 +
+ hw/misc/meson.build                      |   1 +
+ hw/misc/sifive_e_aon.c                   | 330 +++++++++++++++++++
+ hw/riscv/Kconfig                         |   1 +
+ hw/riscv/sifive_e.c                      |   5 +-
+ include/hw/misc/sifive_e_aon.h           |  87 +++++
+ include/hw/riscv/sifive_e.h              |   7 +-
+ tests/qtest/meson.build                  |   3 +
+ tests/qtest/sifive-e-aon-watchdog-test.c | 400 +++++++++++++++++++++++
+ 9 files changed, 832 insertions(+), 5 deletions(-)
+ create mode 100644 hw/misc/sifive_e_aon.c
+ create mode 100644 include/hw/misc/sifive_e_aon.h
+ create mode 100644 tests/qtest/sifive-e-aon-watchdog-test.c
 
-Regards,
-Tommy Wu
+-- 
+2.27.0
 
-
-
-On Mon, Aug 22, 2022 at 11:33 AM Alistair Francis <alistair23@gmail.com>
-wrote:
-
-> On Fri, Aug 19, 2022 at 5:12 PM Tommy Wu <tommy.wu@sifive.com> wrote:
-> >
-> > Fix the type of parent_obj of SiFiveEState from 'SysBusDevice'
-> > to 'MachineState'. Because the parent of SiFiveEState is 'MachineState'.
-> >
-> > Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
->
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->
-> Alistair
->
-> > ---
-> >  include/hw/riscv/sifive_e.h | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-> > index 83604da805..24359f9fe5 100644
-> > --- a/include/hw/riscv/sifive_e.h
-> > +++ b/include/hw/riscv/sifive_e.h
-> > @@ -41,7 +41,7 @@ typedef struct SiFiveESoCState {
-> >
-> >  typedef struct SiFiveEState {
-> >      /*< private >*/
-> > -    SysBusDevice parent_obj;
-> > +    MachineState parent_obj;
-> >
-> >      /*< public >*/
-> >      SiFiveESoCState soc;
-> > --
-> > 2.27.0
-> >
-> >
->
-
---00000000000048050005e93f9e74
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>To the maintainers:<br></div><div><br></div>Thank Ali=
-stair and Jim for the review.<div>Bernhard Beschow sent the same patch :=C2=
-=A0<a href=3D"https://lists.gnu.org/archive/html/qemu-riscv/2022-09/msg0012=
-6.html">https://lists.gnu.org/archive/html/qemu-riscv/2022-09/msg00126.html=
-</a></div><div><br></div><div>It seems that this simple patch is helpful. C=
-ould you help us to merge this patch?<br>Thanks for your great help!</div><=
-div><br></div><div>Regards,</div><div>Tommy Wu</div><div><br></div><div><br=
-></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
-_attr">On Mon, Aug 22, 2022 at 11:33 AM Alistair Francis &lt;<a href=3D"mai=
-lto:alistair23@gmail.com">alistair23@gmail.com</a>&gt; wrote:<br></div><blo=
-ckquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left=
-:1px solid rgb(204,204,204);padding-left:1ex">On Fri, Aug 19, 2022 at 5:12 =
-PM Tommy Wu &lt;<a href=3D"mailto:tommy.wu@sifive.com" target=3D"_blank">to=
-mmy.wu@sifive.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Fix the type of parent_obj of SiFiveEState from &#39;SysBusDevice&#39;=
-<br>
-&gt; to &#39;MachineState&#39;. Because the parent of SiFiveEState is &#39;=
-MachineState&#39;.<br>
-&gt;<br>
-&gt; Signed-off-by: Tommy Wu &lt;<a href=3D"mailto:tommy.wu@sifive.com" tar=
-get=3D"_blank">tommy.wu@sifive.com</a>&gt;<br>
-<br>
-Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.co=
-m" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
-<br>
-Alistair<br>
-<br>
-&gt; ---<br>
-&gt;=C2=A0 include/hw/riscv/sifive_e.h | 2 +-<br>
-&gt;=C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)<br>
-&gt;<br>
-&gt; diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h=
-<br>
-&gt; index 83604da805..24359f9fe5 100644<br>
-&gt; --- a/include/hw/riscv/sifive_e.h<br>
-&gt; +++ b/include/hw/riscv/sifive_e.h<br>
-&gt; @@ -41,7 +41,7 @@ typedef struct SiFiveESoCState {<br>
-&gt;<br>
-&gt;=C2=A0 typedef struct SiFiveEState {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 /*&lt; private &gt;*/<br>
-&gt; -=C2=A0 =C2=A0 SysBusDevice parent_obj;<br>
-&gt; +=C2=A0 =C2=A0 MachineState parent_obj;<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 /*&lt; public &gt;*/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 SiFiveESoCState soc;<br>
-&gt; --<br>
-&gt; 2.27.0<br>
-&gt;<br>
-&gt;<br>
-</blockquote></div>
-
---00000000000048050005e93f9e74--
 
