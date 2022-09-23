@@ -1,58 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1obaba-0004lf-If
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Sep 2022 00:48:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40650)
+	id 1obaeJ-0006M6-5h
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Sep 2022 00:50:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48790)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1obab3-0004ja-4N; Fri, 23 Sep 2022 00:47:34 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f]:35675)
+ id 1obaeF-0006Kp-Nx; Fri, 23 Sep 2022 00:50:47 -0400
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434]:44005)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1obab1-0007ye-Fd; Fri, 23 Sep 2022 00:47:28 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id t3so10742337ply.2;
- Thu, 22 Sep 2022 21:47:26 -0700 (PDT)
+ id 1obaeB-0008V2-OE; Fri, 23 Sep 2022 00:50:47 -0400
+Received: by mail-pf1-x434.google.com with SMTP id d82so11292481pfd.10;
+ Thu, 22 Sep 2022 21:50:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date;
- bh=MW5pYUnLE1OgAfclDBsAQ5YA2yJBAmj/PGJYBHN2+K4=;
- b=TSWr6wKOI5eyLlPAxdT3zukrlAdDjUK9i+B75MAMoe/bqRDSxM5sMJeaR4oRQeXryx
- 7ZQnW58OFwmPlBxtt+t2e4CRKIbUYIk7DlawwTgMED6rgk2t9UqOXvzZ6MzhXMPrGrNd
- fmVoTxE/XGHLUB2bUDlCcCNjfsMlJW6Qa4whVhgjGG5wWBLY0eyOzadlEkO07Z/+H2LQ
- i3U0lALXGfJkwL8vT+ut40Vp9TLPwkXjRvKehqoNAUVRKj4ssd/UQVoLU/SAYdvfIiBL
- doFwC8goR02DqEKeOYEnQ7ykZek8M5TrUshJUeVsiSTJJDqdmWOxoSXEUrv4PzbUcXlo
- 4sog==
+ bh=2woa+WPc4x9Ej19NiAeBmOOGZF9dSMMEsUnjDEqmbmg=;
+ b=A6Hkui1tHz6QYCS5MvvgYHrr0sER0scmUCYrm9Osjxsw28uzn0OBzZI1khy67A2x7E
+ R61fAo+eRU1ZYSGjA18vkZyDIZngfGyKWFe6gigfjxnTn7XFaXjyHo4ccHcPsVUvvuyk
+ h1deC6RBG+QE5ze97aYXUF3rpUo7HUXaNK2hfNso2nGP+dp1vNlv65jKag9WXMTGicKz
+ tEdSne/muIISASKvBjvCSc7z/CMFpbh/229ZeRpnZJO4hr/0ImjVBLlVMuwapE5BpBeG
+ PXXR18dYxGi4Jrwtn/x+6Ie1wecXeI4fleL5UU7hNaL6sbAlvAxtyrMJ0itdmhmkh/cf
+ bQlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=MW5pYUnLE1OgAfclDBsAQ5YA2yJBAmj/PGJYBHN2+K4=;
- b=0/o8SItdD/ORIoM/w2VolmsZiaW1S4HzWZRhO0XPmDU+e45eIlZH7GhFtxRtMSxkmV
- WP4M58d5XAaitDYwlhRA3XE3GCz26FxqulAvMI5pmGlnl2gg0ZC/W8jqNqN4qe/rpl/G
- +ZjPpOtLQwV13R2iv94JjUY1H+OX4CZ55CAXwDZefSWjeS0KsFD2TP97Ut/sM1V9dvvR
- ONG+6a+fp2FESWN+xjCrbMMcErYYG1/jbaSnc53CHHtn5c1QJkALO9b0n9nRs3sKpt6+
- 9EVAOajOMARApQpgRD2SOjjeHrsVlx8/n8DvdRNCBuS/Xe19TekfkM71Hj9Cv63yST9L
- d/9w==
-X-Gm-Message-State: ACrzQf3AV3wMZihNNftn3/aw/gU3bXf70564Ele5XwOEtdaWMPQULsw4
- OFRgdGz+dWHSrg+iNVY8zaIQdYG9+PXtZ4sI0G0=
-X-Google-Smtp-Source: AMsMyM6WAx6W723VIILtdSOfmaT/0fg8VMgvSg1WotVdRehR6kCoQZ3WyVztIM2ItmAfahUUIcpCygyvFY2L9xQGPKw=
-X-Received: by 2002:a17:902:f7ca:b0:178:9c90:b010 with SMTP id
- h10-20020a170902f7ca00b001789c90b010mr6588470plw.149.1663908445835; Thu, 22
- Sep 2022 21:47:25 -0700 (PDT)
+ bh=2woa+WPc4x9Ej19NiAeBmOOGZF9dSMMEsUnjDEqmbmg=;
+ b=QiC8gdSQCP/wK/drtNHtd6ilAFAFHFWOrKtaqC3r/z9CVpqddxbv4kJQI13pPbuxzU
+ 5lk4kKDa2Q8HRPPtnHf4NSiG4I+Y+9w5IYEXokBDr4U7JKg7+Buq3QPj7ObMouUdbYwd
+ z6fp+UGta9rrYdYdhxW0a5fsmbsyvh/q+4lcnggX4m7JFij3WlU9l1+xJrGRro4aHweg
+ t+RpDxFjOQPmry2QVvnhAqxBJ0zxxloCQhlxu21JTa6ASjYynrDbcx0J3I7575MmqZSp
+ YrXYPyjMngHbJ09kcOWyaCpzz/yuDY4VOL32E3fy4l2n33DGEu/rpYVCf6M+jt6DEf6L
+ VQug==
+X-Gm-Message-State: ACrzQf0VX4cZBFPG32nymjXeI+SG0qzkFYrxOvEKLOoPHlB/m7YMyzj/
+ QwaTjUsdmZupM7gRK+0waoRyzrGjFPGZf/l0Cls=
+X-Google-Smtp-Source: AMsMyM5mprpMSBxiGBsrDNxszUXnwubHNHA3dsJFY8rrBqeXpCYR5r6Rt5wo6U+h+/Gvxg96kMH0nrtHYIeUdkfzbDw=
+X-Received: by 2002:a63:1e03:0:b0:439:868c:8a7c with SMTP id
+ e3-20020a631e03000000b00439868c8a7cmr5981528pge.406.1663908641421; Thu, 22
+ Sep 2022 21:50:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220909134215.1843865-1-bmeng.cn@gmail.com>
-In-Reply-To: <20220909134215.1843865-1-bmeng.cn@gmail.com>
+References: <20220817074802.20765-1-liuyang22@iscas.ac.cn>
+In-Reply-To: <20220817074802.20765-1-liuyang22@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 23 Sep 2022 14:46:59 +1000
-Message-ID: <CAKmqyKOdRaHDO2wQznzzXF0MJofdyxmPbHOTWzq6a9e9Ea7S-g@mail.gmail.com>
-Subject: Re: [PATCH v2 0/8] target/riscv: Improve RISC-V Debug support
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Fri, 23 Sep 2022 14:50:15 +1000
+Message-ID: <CAKmqyKM+6hB6y64DXrKThiHtz-qegdeGhcgihe=WWwPGY9OkKA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: rvv-1.0: Simplify vfwredsum code
+To: Yang Liu <liuyang22@iscas.ac.cn>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, 
+ liweiwei <liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x62f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x434.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,58 +76,97 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Sep 2022 04:47:49 -0000
+X-List-Received-Date: Fri, 23 Sep 2022 04:50:48 -0000
 
-On Fri, Sep 9, 2022 at 11:48 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Thu, Aug 18, 2022 at 1:57 AM Yang Liu <liuyang22@iscas.ac.cn> wrote:
 >
-> This patchset refactors RISC-V Debug support to allow more types of
-> triggers to be extended.
+> Remove duplicate code by wrapping vfwredsum_vs's OP function.
 >
-> The initial support of type 6 trigger, which is similar to type 2
-> trigger with additional functionality, is also introduced in this
-> patchset.
->
-> This is a v2 respin of previous patch originally done by Frank Chang
-> at SiFive. I've incorperated my review comments in v2 and rebased
-> against QEMU mainline.
->
-> Changes in v2:
-> - fixed MXL_RV128 case
-> - moved macros to patch#2
-> - added log guest errors for TRIGGER_TYPE_{NO_EXIST,UNAVAIL}
-> - moved RV{32,64}_DATA_MASK definition to this patch
-> - add handling of the DBG_ACTION_NONE case in do_trigger_action()
-> - drop patch: "target/riscv: debug: Return 0 if previous value written to tselect >= number of triggers"
->
-> Frank Chang (8):
->   target/riscv: debug: Determine the trigger type from tdata1.type
->   target/riscv: debug: Introduce build_tdata1() to build tdata1 register
->     content
->   target/riscv: debug: Introduce tdata1, tdata2, and tdata3 CSRs
->   target/riscv: debug: Restrict the range of tselect value can be
->     written
->   target/riscv: debug: Introduce tinfo CSR
->   target/riscv: debug: Create common trigger actions function
->   target/riscv: debug: Check VU/VS modes for type 2 trigger
->   target/riscv: debug: Add initial support of type 6 trigger
+> Signed-off-by: Yang Liu <liuyang22@iscas.ac.cn>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/vector_helper.c | 56 +++++++-----------------------------
+>  1 file changed, 10 insertions(+), 46 deletions(-)
 >
->  target/riscv/cpu.h      |   6 +-
->  target/riscv/cpu_bits.h |   1 +
->  target/riscv/debug.h    |  55 +++--
->  target/riscv/csr.c      |  10 +-
->  target/riscv/debug.c    | 484 ++++++++++++++++++++++++++++++++--------
->  target/riscv/machine.c  |  20 +-
->  6 files changed, 445 insertions(+), 131 deletions(-)
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index a96fc49c71..fd83c0b20b 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -4655,58 +4655,22 @@ GEN_VEXT_FRED(vfredmin_vs_h, uint16_t, uint16_t, H2, H2, float16_minimum_number)
+>  GEN_VEXT_FRED(vfredmin_vs_w, uint32_t, uint32_t, H4, H4, float32_minimum_number)
+>  GEN_VEXT_FRED(vfredmin_vs_d, uint64_t, uint64_t, H8, H8, float64_minimum_number)
 >
+> -/* Vector Widening Floating-Point Reduction Instructions */
+> -/* Unordered reduce 2*SEW = 2*SEW + sum(promote(SEW)) */
+> -void HELPER(vfwredsum_vs_h)(void *vd, void *v0, void *vs1,
+> -                            void *vs2, CPURISCVState *env, uint32_t desc)
+> +/* Vector Widening Floating-Point Add Instructions */
+> +static uint32_t fwadd16(uint32_t a, uint16_t b, float_status *s)
+>  {
+> -    uint32_t vm = vext_vm(desc);
+> -    uint32_t vl = env->vl;
+> -    uint32_t esz = sizeof(uint32_t);
+> -    uint32_t vlenb = simd_maxsz(desc);
+> -    uint32_t vta = vext_vta(desc);
+> -    uint32_t i;
+> -    uint32_t s1 =  *((uint32_t *)vs1 + H4(0));
+> -
+> -    for (i = env->vstart; i < vl; i++) {
+> -        uint16_t s2 = *((uint16_t *)vs2 + H2(i));
+> -        if (!vm && !vext_elem_mask(v0, i)) {
+> -            continue;
+> -        }
+> -        s1 = float32_add(s1, float16_to_float32(s2, true, &env->fp_status),
+> -                         &env->fp_status);
+> -    }
+> -    *((uint32_t *)vd + H4(0)) = s1;
+> -    env->vstart = 0;
+> -    /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vta, esz, vlenb);
+> +    return float32_add(a, float16_to_float32(b, true, s), s);
+>  }
+>
+> -void HELPER(vfwredsum_vs_w)(void *vd, void *v0, void *vs1,
+> -                            void *vs2, CPURISCVState *env, uint32_t desc)
+> +static uint64_t fwadd32(uint64_t a, uint32_t b, float_status *s)
+>  {
+> -    uint32_t vm = vext_vm(desc);
+> -    uint32_t vl = env->vl;
+> -    uint32_t esz = sizeof(uint64_t);
+> -    uint32_t vlenb = simd_maxsz(desc);
+> -    uint32_t vta = vext_vta(desc);
+> -    uint32_t i;
+> -    uint64_t s1 =  *((uint64_t *)vs1);
+> -
+> -    for (i = env->vstart; i < vl; i++) {
+> -        uint32_t s2 = *((uint32_t *)vs2 + H4(i));
+> -        if (!vm && !vext_elem_mask(v0, i)) {
+> -            continue;
+> -        }
+> -        s1 = float64_add(s1, float32_to_float64(s2, &env->fp_status),
+> -                         &env->fp_status);
+> -    }
+> -    *((uint64_t *)vd) = s1;
+> -    env->vstart = 0;
+> -    /* set tail elements to 1s */
+> -    vext_set_elems_1s(vd, vta, esz, vlenb);
+> +    return float64_add(a, float32_to_float64(b, s), s);
+>  }
+>
+> +/* Vector Widening Floating-Point Reduction Instructions */
+> +/* Unordered reduce 2*SEW = 2*SEW + sum(promote(SEW)) */
+> +GEN_VEXT_FRED(vfwredsum_vs_h, uint32_t, uint16_t, H4, H2, fwadd16)
+> +GEN_VEXT_FRED(vfwredsum_vs_w, uint64_t, uint32_t, H8, H4, fwadd32)
+> +
+>  /*
+>   *** Vector Mask Operations
+>   */
 > --
-> 2.34.1
+> 2.30.1 (Apple Git-130)
 >
 >
 
