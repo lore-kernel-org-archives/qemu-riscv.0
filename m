@@ -1,63 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1obaBx-0004Kj-VJ
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Sep 2022 00:21:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60680)
+	id 1obaIF-0002DJ-J6
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Sep 2022 00:28:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35732)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1obaBt-0004Ix-26; Fri, 23 Sep 2022 00:21:30 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034]:56129)
+ id 1obaIE-0002Bm-HA; Fri, 23 Sep 2022 00:28:02 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:42540)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1obaBl-0008SA-Uv; Fri, 23 Sep 2022 00:21:26 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id fs14so11762336pjb.5;
- Thu, 22 Sep 2022 21:21:19 -0700 (PDT)
+ id 1obaI9-00029z-Ck; Fri, 23 Sep 2022 00:28:02 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id
+ s90-20020a17090a2f6300b00203a685a1aaso4237069pjd.1; 
+ Thu, 22 Sep 2022 21:27:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date;
- bh=V8THAERRPz14w5GWM9kYZ11IMRP9HZucyEk8EZg6Jcc=;
- b=Yb9qjCtxdY8oR8yca9YKLxjYud1BAezAxf+Fdr1Vy9d5KOQj15GPVG+GcWWHLRnWjD
- qXk9Fhu13qxL6X7Jgtgg+H4R5tyWGf8GEKIQE3WFzuuf3adtikQcYZn1SHroNznuq/XL
- K45EOVfDSiod6Fk0nmPy29TonqQ6mVDpMWSXlQTg4ojfDaRf1nUAfCebi3DRD78tK2zw
- WC8hUXDYjlyO9jM7MNRfXcCmerL1EXA0I3RS13Zk1mtiSDDQNF5Ep0ciQmes9+KkCiaK
- AZtafvRMSSsNYUBgvBncChNzoGQzFThszrnTF1msxAXRKMsX+KrNYCSqxPAYy9TGK26n
- Pb1Q==
+ bh=WCTydz1MpViVu2rLNief6DEgJYLY/NP68sqOcwvYLrI=;
+ b=adi0FCR/xFMZ5jvNTgX6ed7XKw5cGDnDXO5f16Vctt2yoIWiWXJtFTml5csceEnBcI
+ 4UtaxSC6dFOphD0fDlrAssJ9agMGfzy+IrVBJNcW+D9shJTxX6f4TvnEao7elAUGqD1B
+ w8qNJioyACZGeMv7atqp3g2X/uCL5RCLJQ6DbZYKZTGhwfpSLEOLKpAfTqhsjie+9Jcp
+ Xw0rFe7rD42cYSwY2xSmEHiV3WsD14P44mPyJKx40zEcDAY3U2Ew8j+VahtMWpZwsJOk
+ LbaPf/I5qE2pBEVD7gkCDZkQOo23RUd3+uR5ZrqD5nb8y2mnYvI8OpkeCG6/4W/orPr5
+ wrKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=V8THAERRPz14w5GWM9kYZ11IMRP9HZucyEk8EZg6Jcc=;
- b=amyuy0esPsx3ib8d7vM17Uq5faJqIK+lAVTbrXdrxw4iNOUtMXJgSVLVAwr5guO51+
- 92Gz34LMqmXnkBw2c8q2gxKhx3vCIeHiwCqTeyG9gPJrcfOdPhqlMUS7r2YoPsmHVQ7/
- mDKoDqPq2R4JjNSTfIfGbL24DG7+u0SY80Hoxr7ZF4Mm0PeDDf90xl3B+3dcqU6XKSER
- LhdTrJUbHCABygGI71q4le3llrCWWUiDvU9vNlJ3O/WHu11wNThI0GBGbQl944GZti2M
- sDIFZiZfJ0/LEXz6O9O+nrsAdtpqtDSRUDT254vOom+WtZ3Upbm3k+BZbDHENHyxdphM
- vnaw==
-X-Gm-Message-State: ACrzQf0Cbd+lO+e947CtliAMebubqet+qRO8v1lmGoiduxwBM0gEH0na
- Xu5NP0/9aD8HXzmYudwoIjb+WllUdxvWv7NlU1o=
-X-Google-Smtp-Source: AMsMyM5WgSCtReXJS3aCzIArya5AdUrXYKSGRDZGiu5D6hMLcgBry8VuPYWtSLR9ccZWZ7FJ0udciLlR9UbESrLolG0=
-X-Received: by 2002:a17:90b:3149:b0:202:e9e9:632f with SMTP id
- ip9-20020a17090b314900b00202e9e9632fmr19266715pjb.96.1663906878349; Thu, 22
- Sep 2022 21:21:18 -0700 (PDT)
+ bh=WCTydz1MpViVu2rLNief6DEgJYLY/NP68sqOcwvYLrI=;
+ b=4/xDC7+nTv9f64JCuOepm0g2ViI8IDhqPx2shhO669kuvn0XGwt4fUZPP1tmsAwJ6i
+ ocZjefXT4ngSPUHyHFYj06stljMUmc8xJqOu/zATSKtb/EIkmUDfaZflAgcbVJj7uNAy
+ /5QVYplv/ayDq2kto7MY0jIeZtzlIYqd7H0QMHa3PJkruOhBrCulIn1DnKDGYCKOOsCR
+ 6VRPAoOKduSWumP3MDeBmZiYhRMVqfCcxTbe42Q7wfEeY1uhps2v11USA/zhsfdRpcXX
+ Rl1Qg5bZSzkc4Ol0wyKvqofvv0ajUdaH/JVYJ0fIugDb8Q60UJ6HiVa/cmrvt+leJCmT
+ Mh9g==
+X-Gm-Message-State: ACrzQf1aBomtrxb4GanUVXZoORifniTG/V1I2Os3syIbiObLDbDeewEw
+ JAQmqcIFRz6p9X3IfOTSDRjR4dO8E8vw9Ldq53STri54ZgI=
+X-Google-Smtp-Source: AMsMyM5WFFTZAqZJ9SDjL4ZjaetQa4DY2p5ZtPan9ZFoE6OE/T+CwrnHerffOb5Tw/4NILJ7YslWFTrWSetVmaX7AQs=
+X-Received: by 2002:a17:90a:6405:b0:203:6eaa:4999 with SMTP id
+ g5-20020a17090a640500b002036eaa4999mr19090864pjj.8.1663907275270; Thu, 22 Sep
+ 2022 21:27:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAB88-qPy=NdFLCYuT=Z+Eu+siN_OoRe3VVp7sD_=m_u46HPWOA@mail.gmail.com>
- <CAKmqyKMDDNey2UHrpvP=_J1a+5GYpsrjm2ucuQXaVqkxD7x=nQ@mail.gmail.com>
- <CAB88-qOybbuBEzbkM+r6ZcXNTJ03Kgop+UR7WnJ=m_XNrukFOA@mail.gmail.com>
-In-Reply-To: <CAB88-qOybbuBEzbkM+r6ZcXNTJ03Kgop+UR7WnJ=m_XNrukFOA@mail.gmail.com>
+References: <20220826032258.7289-1-liuyang22@iscas.ac.cn>
+In-Reply-To: <20220826032258.7289-1-liuyang22@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 23 Sep 2022 14:20:51 +1000
-Message-ID: <CAKmqyKMa=1XpF5ZrPyUo+tswfvUxVqUztJ6LuSP5UWaMMdLMCQ@mail.gmail.com>
-Subject: Re: [PATCH 1/4] hw/watchdog: wdt_ibex_aon.c: Implement the watchdog
- for the OpenTitan
-To: Tyler Ng <tkng@rivosinc.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Fri, 23 Sep 2022 14:27:27 +1000
+Message-ID: <CAKmqyKO2p8DF-e0UujtZu8gJpH+=BE6w1KZo5fA0vkK+=mk03A@mail.gmail.com>
+Subject: Re: [PATCH v2] disas/riscv.c: rvv: Add disas support for vector
+ instructions
+To: Yang Liu <liuyang22@iscas.ac.cn>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Tommy Wu <tommy.wu@sifive.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- Laurent Vivier <lvivier@redhat.com>
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, 
+ liweiwei <liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -78,1031 +79,1593 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Sep 2022 04:21:30 -0000
+X-List-Received-Date: Fri, 23 Sep 2022 04:28:02 -0000
 
-On Fri, Sep 9, 2022 at 8:04 AM Tyler Ng <tkng@rivosinc.com> wrote:
+On Fri, Aug 26, 2022 at 1:26 PM Yang Liu <liuyang22@iscas.ac.cn> wrote:
 >
+> Tested with https://github.com/ksco/rvv-decoder-tests
 >
+> Expected checkpatch errors for consistency and brevity reasons:
 >
-> On Thu, Sep 8, 2022 at 4:52 AM Alistair Francis <alistair23@gmail.com> wrote:
->>
->> On Fri, Sep 2, 2022 at 3:29 AM Tyler Ng <tkng@rivosinc.com> wrote:
->> >
->> > This commit adds most of an implementation of the OpenTitan Always-On
->> > Timer. The documentation for this timer is found here:
->> >
->> > https://docs.opentitan.org/hw/ip/aon_timer/doc/
->> >
->> > The implementation includes most of the watchdog features; it does not
->> > implement the wakeup timer.
->> >
->> > An important note: the OpenTitan board uses the sifive_plic. The plic
->> > will not be able to claim the bark interrupt (158) because the sifive
->> > plic sets priority[158], but checks priority[157] for the priority, so
->> > it thinks that the interrupt's priority is 0 (effectively disabled).
->> >
->> > Changed Files:
->> > hw/riscv/Kconfig: Add configuration for the watchdog.
->> > hw/riscv/opentitan.c: Connect AON Timer to the OpenTitan board.
->> >
->> > hw/watchdog/Kconfig: Configuration for the watchdog.
->> > hw/watchdog/meson.build: Compile the watchdog.
->> > hw/watchdog/wdt_ibex_aon.c: The watchdog itself.
->> >
->> > include/hw/riscv/opentitan.h: Add watchdog bark/wakeup IRQs and timer.
->> > include/hw/watchdog/wdt_ibex_aon.h: Add watchdog.
->> >
->> > tests/qtest/ibex-aon-timer-test.c: Ibex Timer test.
->> > tests/qtest/meson.build: Build the timer test.
->> >
->> > Signed-off-by: Tyler Ng <tkng@rivosinc.com>
->> > ---
->> >  hw/riscv/Kconfig                   |   4 +
->> >  hw/riscv/opentitan.c               |  22 +-
->> >  hw/watchdog/Kconfig                |   3 +
->> >  hw/watchdog/meson.build            |   1 +
->> >  hw/watchdog/wdt_ibex_aon.c         | 432 +++++++++++++++++++++++++++++
->> >  include/hw/riscv/opentitan.h       |   9 +-
->> >  include/hw/watchdog/wdt_ibex_aon.h |  67 +++++
->> >  tests/qtest/ibex-aon-timer-test.c  | 189 +++++++++++++
->> >  tests/qtest/meson.build            |   3 +
->> >  9 files changed, 725 insertions(+), 5 deletions(-)
->> >  create mode 100644 hw/watchdog/wdt_ibex_aon.c
->> >  create mode 100644 include/hw/watchdog/wdt_ibex_aon.h
->> >  create mode 100644 tests/qtest/ibex-aon-timer-test.c
->> >
->> > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
->> > index 79ff61c464..72094010be 100644
->> > --- a/hw/riscv/Kconfig
->> > +++ b/hw/riscv/Kconfig
->> > @@ -4,6 +4,9 @@ config RISCV_NUMA
->> >  config IBEX
->> >      bool
->> >
->> > +config IBEX_AON
->> > +    bool
->> > +
->> >  config MICROCHIP_PFSOC
->> >      bool
->> >      select CADENCE_SDHCI
->> > @@ -20,6 +23,7 @@ config MICROCHIP_PFSOC
->> >  config OPENTITAN
->> >      bool
->> >      select IBEX
->> > +    select IBEX_AON
->> >      select UNIMP
->> >
->> >  config SHAKTI_C
->> > diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
->> > index 4495a2c039..10834b831f 100644
->> > --- a/hw/riscv/opentitan.c
->> > +++ b/hw/riscv/opentitan.c
->> > @@ -1,4 +1,5 @@
->> >  /*
->> > +    ptimer_
->> >   * QEMU RISC-V Board Compatible with OpenTitan FPGA platform
->> >   *
->> >   * Copyright (c) 2020 Western Digital
->> > @@ -47,7 +48,7 @@ static const MemMapEntry ibex_memmap[] = {
->> >      [IBEX_DEV_RSTMGR] =         {  0x40410000,  0x1000  },
->> >      [IBEX_DEV_CLKMGR] =         {  0x40420000,  0x1000  },
->> >      [IBEX_DEV_PINMUX] =         {  0x40460000,  0x1000  },
->> > -    [IBEX_DEV_PADCTRL] =        {  0x40470000,  0x1000  },
->>
->> What about the pad controller?
+> ERROR: line over 90 characters
+> ERROR: trailing statements should be on next line
+> ERROR: braces {} are necessary for all arms of this statement
 >
->
-> Can you point me to what memory map is being used in QEMU right now? I was using the top_earlgrey memory map, which has the aon timer base address at 0x4047_0000.
+> Signed-off-by: Yang Liu <liuyang22@iscas.ac.cn>
 
-We are currently targeting the memory map from
-lowRISC/opentitan@217a0168ba118503c166a9587819e3811eeb0c0c. We are
-hoping to update to a newer commit soon though
+Thanks!
 
->
->>
->>
->> > +    [IBEX_DEV_AON_TIMER] =      {  0x40470000,  0x1000  },
->> >      [IBEX_DEV_FLASH_CTRL] =     {  0x41000000,  0x1000  },
->> >      [IBEX_DEV_AES] =            {  0x41100000,  0x1000  },
->> >      [IBEX_DEV_HMAC] =           {  0x41110000,  0x1000  },
->> > @@ -121,6 +122,8 @@ static void lowrisc_ibex_soc_init(Object *obj)
->> >
->> >      object_initialize_child(obj, "timer", &s->timer, TYPE_IBEX_TIMER);
->> >
->> > +    object_initialize_child(obj, "aon_timer", &s->aon_timer,
->> > TYPE_IBEX_AON_TIMER);
->> > +
->> >      for (int i = 0; i < OPENTITAN_NUM_SPI_HOSTS; i++) {
->> >          object_initialize_child(obj, "spi_host[*]", &s->spi_host[i],
->> >                                  TYPE_IBEX_SPI_HOST);
->> > @@ -205,6 +208,7 @@ static void lowrisc_ibex_soc_realize(DeviceState
->> > *dev_soc, Error **errp)
->> >                         3, qdev_get_gpio_in(DEVICE(&s->plic),
->> >                         IBEX_UART0_RX_OVERFLOW_IRQ));
->> >
->> > +    /* RV Timer */
->> >      if (!sysbus_realize(SYS_BUS_DEVICE(&s->timer), errp)) {
->> >          return;
->> >      }
->> > @@ -215,6 +219,20 @@ static void lowrisc_ibex_soc_realize(DeviceState
->> > *dev_soc, Error **errp)
->> >      qdev_connect_gpio_out(DEVICE(&s->timer), 0,
->> >                            qdev_get_gpio_in(DEVICE(qemu_get_cpu(0)),
->> >                                             IRQ_M_TIMER));
->> > +
->> > +    /* AON Timer */
->> > +    if (!sysbus_realize(SYS_BUS_DEVICE(&s->aon_timer), errp)) {
->> > +        return;
->> > +    }
->> > +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->aon_timer), 0,
->> > memmap[IBEX_DEV_AON_TIMER].base);
->> > +    sysbus_connect_irq(SYS_BUS_DEVICE(&s->aon_timer),
->> > +                       0, qdev_get_gpio_in(DEVICE(&s->plic),
->> > +                       IBEX_AONTIMER_WDOG_BARK));
->> > +    /*
->> > +     * Note: There should be a line to pwrmgr but it's not implemented.
->> > +     * TODO: Needs a line connected in, "counter-run" (stop the watchdog if
->> > +     * debugging)
->> > +     */
->> >
->> >      /* SPI-Hosts */
->> >      for (int i = 0; i < OPENTITAN_NUM_SPI_HOSTS; ++i) {
->> > @@ -261,8 +279,6 @@ static void lowrisc_ibex_soc_realize(DeviceState
->> > *dev_soc, Error **errp)
->> >          memmap[IBEX_DEV_CLKMGR].base, memmap[IBEX_DEV_CLKMGR].size);
->> >      create_unimplemented_device("riscv.lowrisc.ibex.pinmux",
->> >          memmap[IBEX_DEV_PINMUX].base, memmap[IBEX_DEV_PINMUX].size);
->> > -    create_unimplemented_device("riscv.lowrisc.ibex.padctrl",
->> > -        memmap[IBEX_DEV_PADCTRL].base, memmap[IBEX_DEV_PADCTRL].size);
->> >      create_unimplemented_device("riscv.lowrisc.ibex.usbdev",
->> >          memmap[IBEX_DEV_USBDEV].base, memmap[IBEX_DEV_USBDEV].size);
->> >      create_unimplemented_device("riscv.lowrisc.ibex.flash_ctrl",
->> > diff --git a/hw/watchdog/Kconfig b/hw/watchdog/Kconfig
->> > index 66e1d029e3..dde6c01a8c 100644
->> > --- a/hw/watchdog/Kconfig
->> > +++ b/hw/watchdog/Kconfig
->> > @@ -20,3 +20,6 @@ config WDT_IMX2
->> >
->> >  config WDT_SBSA
->> >      bool
->> > +
->> > +config WDT_IBEX_AON
->> > +    bool
->> > diff --git a/hw/watchdog/meson.build b/hw/watchdog/meson.build
->> > index 8974b5cf4c..21e2ede28f 100644
->> > --- a/hw/watchdog/meson.build
->> > +++ b/hw/watchdog/meson.build
->> > @@ -7,3 +7,4 @@ softmmu_ss.add(when: 'CONFIG_ASPEED_SOC', if_true:
->> > files('wdt_aspeed.c'))
->> >  softmmu_ss.add(when: 'CONFIG_WDT_IMX2', if_true: files('wdt_imx2.c'))
->> >  softmmu_ss.add(when: 'CONFIG_WDT_SBSA', if_true: files('sbsa_gwdt.c'))
->> >  specific_ss.add(when: 'CONFIG_PSERIES', if_true: files('spapr_watchdog.c'))
->> > +softmmu_ss.add(when: 'CONFIG_IBEX_AON', if_true: files('wdt_ibex_aon.c'))
->> > diff --git a/hw/watchdog/wdt_ibex_aon.c b/hw/watchdog/wdt_ibex_aon.c
->> > new file mode 100644
->> > index 0000000000..871ead15dc
->> > --- /dev/null
->> > +++ b/hw/watchdog/wdt_ibex_aon.c
->> > @@ -0,0 +1,432 @@
->> > +/*
->> > + * QEMU lowRISC OpenTitan Always-On Timer device
->> > + *
->> > + * Copyright (c) 2022 Rivos Inc.
->> > + *
->> > + * For details check the documentation here:
->> > + *   https://docs.opentitan.org/hw/ip/aon_timer/doc/
->> > + *
->> > + * Permission is hereby granted, free of charge, to any person obtaining a copy
->> > + * of this software and associated documentation files (the
->> > "Software"), to deal
->> > + * in the Software without restriction, including without limitation the rights
->> > + * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
->> > + * copies of the Software, and to permit persons to whom the Software is
->> > + * furnished to do so, subject to the following conditions:
->> > + *
->> > + * The above copyright notice and this permission notice shall be included in
->> > + * all copies or substantial portions of the Software.
->> > + *
->> > + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
->> > + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
->> > + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
->> > + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
->> > + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
->> > ARISING FROM,
->> > + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
->> > + * THE SOFTWARE.
->> > + */
->> > +#include "qemu/osdep.h"
->> > +#include "qemu/timer.h"
->> > +#include "qemu/log.h"
->> > +#include "sysemu/reset.h"
->> > +#include "sysemu/watchdog.h"
->> > +#include "hw/register.h"
->> > +#include "hw/irq.h"
->> > +#include "migration/vmstate.h"
->> > +
->> > +#include "hw/watchdog/wdt_ibex_aon.h"
->> > +
->> > +REG32(ALERT_TEST,      0x00)
->> > +REG32(WKUP_CTRL,       0x04)
->> > +REG32(WKUP_THOLD,      0x08)
->> > +REG32(WKUP_COUNT,      0x0c)
->> > +REG32(WDOG_REGWEN,     0x10)
->> > +REG32(WDOG_CTRL,       0x14)
->> > +    FIELD(WDOG_CTRL, EN, 0, 1)
->> > +    FIELD(WDOG_CTRL, PIS, 1, 1) /* Pause in sleep */
->> > +REG32(WDOG_BARK_THOLD, 0x18)
->> > +REG32(WDOG_BITE_THOLD, 0x1c)
->> > +REG32(WDOG_COUNT,      0x20)
->> > +REG32(INTR_STATE,      0x24)
->> > +    FIELD(INTR_STATE, WKUP, 0, 1)
->> > +    FIELD(INTR_STATE, WDOG, 1, 1)
->> > +REG32(INTR_TEST,       0x28)
->> > +REG32(WKUP_CAUSE,      0x2c)
->> > +
->> > +/* QOM Stuff */
->> > +static void ibex_aon_class_init(ObjectClass *oc, void *data);
->> > +static void ibex_aon_init(Object *obj);
->> > +static void ibex_aon_register_types(void);
->> > +
->> > +/* DeviceClass Inherits */
->> > +static void ibex_aon_realize(DeviceState *dev, Error **errp);
->> > +static void ibex_aon_unrealize(DeviceState *dev);
->> > +
->> > +/* Resettable Interface Inherits */
->> > +static void ibex_aon_enter_reset(Object *obj, ResetType type);
->> > +static void ibex_aon_hold_reset(Object *obj);
->> > +
->> > +/* AON Timer Stuff */
->> > +static void ibex_aon_update_bark_timer(IbexAONTimerState *s);
->> > +static void ibex_aon_update_bite_timer(IbexAONTimerState *s);
->> > +static void ibex_aon_barker_expired(void *s);
->> > +static void ibex_aon_biter_expired(void *s);
->> > +static bool ibex_aon_update_count(IbexAONTimerState *s);
->> > +static uint64_t ibex_aon_read(void *opaque, hwaddr addr, unsigned int size);
->> > +static void ibex_aon_write(void *opaque, hwaddr addr, uint64_t value,
->> > +                           unsigned int size);
->>
->> Generally in QEMU we put the TypeInfo and friends at the bottom of the
->> file, so we don't need to declare functions like this.
->>
->> In future can you do that as well? It just keeps everything similar
->>
-> Will do, no problem.
->
->>
->> > +
->> > +static const TypeInfo ibex_aon_info = {
->> > +    .class_init = ibex_aon_class_init,
->> > +    .parent = TYPE_SYS_BUS_DEVICE,
->> > +    .name = TYPE_IBEX_AON_TIMER,
->> > +    .instance_size = sizeof(IbexAONTimerState),
->> > +    .instance_init = ibex_aon_init,
->> > +};
->> > +
->> > +static WatchdogTimerModel model = {
->> > +    .wdt_name = TYPE_IBEX_AON_TIMER,
->> > +    .wdt_description = "OpenTitan always-on timer"
->> > +};
->> > +
->> > +static const VMStateDescription vmstate_ibex_aon = {
->> > +    .name = "vmstate_ibex_aon",
->> > +    .version_id = 0,
->> > +    .minimum_version_id = 0,
->> > +    .fields = (VMStateField[]) {
->> > +        VMSTATE_UINT32_ARRAY(regs, IbexAONTimerState, IBEX_AONTIMER_REGCOUNT),
->> > +        VMSTATE_TIMER_PTR(barker, IbexAONTimerState),
->> > +        VMSTATE_TIMER_PTR(biter, IbexAONTimerState),
->> > +        VMSTATE_UINT64(wdog_last, IbexAONTimerState),
->> > +        VMSTATE_END_OF_LIST()
->> > +    }
->> > +};
->> > +
->> > +static const struct MemoryRegionOps ibex_aon_ops = {
->> > +    .read = ibex_aon_read,
->> > +    .write = ibex_aon_write,
->> > +    .endianness = DEVICE_NATIVE_ENDIAN
->> > +};
->> > +
->> > +static void ibex_aon_init(Object *obj)
->> > +{
->> > +    IbexAONTimerState *s = IBEX_AON_TIMER(obj);
->> > +    SysBusDevice *dev = SYS_BUS_DEVICE(obj);
->> > +    sysbus_init_mmio(dev, &s->iomem);
->> > +    sysbus_init_irq(dev, &s->bark_irq);
->> > +    memory_region_init_io(&s->iomem, obj, &ibex_aon_ops, s,
->> > +                          TYPE_IBEX_AON_TIMER, 4 * IBEX_AONTIMER_REGCOUNT);
->> > +}
->> > +
->> > +static void ibex_aon_realize(DeviceState *dev, Error **errp)
->> > +{
->> > +    IbexAONTimerState *s = IBEX_AON_TIMER(dev);
->> > +    s->barker = timer_new_ns(QEMU_CLOCK_VIRTUAL, ibex_aon_barker_expired, dev);
->> > +    s->biter = timer_new_ns(QEMU_CLOCK_VIRTUAL, ibex_aon_biter_expired, dev);
->> > +}
->> > +
->> > +static void ibex_aon_unrealize(DeviceState *dev)
->> > +{
->> > +    IbexAONTimerState *s = IBEX_AON_TIMER(dev);
->> > +
->> > +    timer_free(s->barker);
->> > +    timer_free(s->biter);
->> > +}
->> > +
->> > +
->> > +static void ibex_aon_class_init(ObjectClass *oc, void *data)
->> > +{
->> > +    DeviceClass *dc = DEVICE_CLASS(oc);
->> > +    ResettableClass *rc = RESETTABLE_CLASS(oc);
->> > +    dc->realize = ibex_aon_realize;
->> > +    dc->unrealize = ibex_aon_unrealize;
->> > +    dc->hotpluggable = false;
->> > +    set_bit(DEVICE_CATEGORY_WATCHDOG, dc->categories);
->> > +    dc->vmsd = &vmstate_ibex_aon;
->> > +    dc->desc = "opentitan always-on timer ip block";
->> > +    //Resettable class inits
->> > +    rc->phases.enter = ibex_aon_enter_reset;
->> > +    rc->phases.hold = ibex_aon_hold_reset;
->> > +}
->> > +
->> > +static void ibex_aon_enter_reset(Object *obj, ResetType type)
->> > +{
->> > +    IbexAONTimerState *s = IBEX_AON_TIMER(obj);
->> > +    s->regs[R_ALERT_TEST]      = 0x0;
->> > +    s->regs[R_WKUP_CTRL]       = 0x0;
->> > +    s->regs[R_WKUP_THOLD]      = 0x0;
->> > +    s->regs[R_WKUP_COUNT]      = 0x0;
->> > +    s->regs[R_WDOG_REGWEN]     = 0x1;
->> > +    s->regs[R_WDOG_CTRL]       = 0x0;
->> > +    s->regs[R_WDOG_BARK_THOLD] = 0x0;
->> > +    s->regs[R_WDOG_BITE_THOLD] = 0x0;
->> > +    s->regs[R_WDOG_COUNT]      = 0x0;
->> > +    s->regs[R_INTR_STATE]      = 0x0;
->> > +    s->regs[R_INTR_TEST]       = 0x0;
->> > +    s->regs[R_WKUP_CAUSE]      = 0x0;
->> > +
->> > +    uint64_t now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
->> > +    s->wdog_last = now;
->> > +
->> > +    timer_del(s->barker);
->> > +    timer_del(s->biter);
->> > +}
->> > +
->> > +static void ibex_aon_hold_reset(Object *obj)
->> > +{
->> > +    IbexAONTimerState *s = IBEX_AON_TIMER(obj);
->> > +    qemu_irq_lower(s->bark_irq);
->> > +
->>
->> Extra new line
->>
->> > +}
->> > +
->> > +static uint64_t ibex_aon_read(void *opaque, hwaddr addr, unsigned int size)
->> > +{
->> > +    IbexAONTimerState *s = IBEX_AON_TIMER(opaque);
->> > +
->> > +    uint64_t retval = 0;
->> > +    switch (addr) {
->> > +        case A_ALERT_TEST:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->>
->> There is an unimplemented mask you can use instead
->>
->> Also, you have the register you may as well return it
->>
->> > +                          "%s: Alert test not implemented", __func__);
->> > +            break;
->> > +        case A_WKUP_CTRL:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->> > +                          "%s: AON wkup not implemented", __func__);
->> > +            break;
->> > +        case A_WKUP_THOLD:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->> > +                          "%s: AON wkup not implemented", __func__);
->> > +            break;
->> > +        case A_WKUP_COUNT:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->> > +                          "%s: AON wkup not implemented", __func__);
->> > +            break;
->> > +        case A_WDOG_REGWEN:
->> > +            retval = s->regs[R_WDOG_REGWEN];
->> > +            break;
->> > +        case A_WDOG_CTRL:
->> > +            retval = s->regs[R_WDOG_CTRL];
->> > +            break;
->> > +        case A_WDOG_BARK_THOLD:
->> > +            retval = s->regs[R_WDOG_BARK_THOLD];
->> > +            break;
->> > +        case A_WDOG_BITE_THOLD:
->> > +            retval = s->regs[R_WDOG_BITE_THOLD];
->> > +            break;
->> > +        case A_WDOG_COUNT:
->> > +            /* Lazily update the wdog count. */
->> > +            ibex_aon_update_count(s);
->> > +            retval = s->regs[R_WDOG_COUNT];
->> > +            break;
->> > +        case A_INTR_STATE:
->> > +            retval = s->regs[R_INTR_STATE];
->> > +            break;
->> > +        case A_INTR_TEST:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->> > +                          "%s: Intr test not implemented", __func__);
->> > +            break;
->> > +        case A_WKUP_CAUSE:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->> > +                          "%s: Wkup cause not implemented", __func__);
->> > +            break;
->> > +    }
->> > +    return retval;
->> > +}
->> > +
->> > +static void ibex_aon_write(void *opaque,
->> > +                           hwaddr addr, uint64_t value,
->> > +                           unsigned int size)
->> > +{
->> > +    IbexAONTimerState *s = IBEX_AON_TIMER(opaque);
->>
->> New line
->>
->> > +    /* When writing, need to consider if the configuration is locked */
->> > +    switch (addr) {
->> > +        case A_ALERT_TEST:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->> > +                          "%s: Alert test not implemented", __func__);
->> > +            break;
->> > +        case A_WKUP_CTRL:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->> > +                          "%s: AON wkup not implemented", __func__);
->> > +            break;
->> > +        case A_WKUP_THOLD:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->> > +                          "%s: AON wkup not implemented", __func__);
->> > +            break;
->> > +        case A_WKUP_COUNT:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->> > +                          "%s: AON wkup not implemented", __func__);
->> > +            break;
->> > +        case A_WDOG_REGWEN:
->> > +            if (s->regs[R_WDOG_REGWEN] == IBEX_AONTIMER_WDOG_UNLOCKED) {
->> > +                s->regs[R_WDOG_REGWEN] = value &
->> > IBEX_AONTIMER_WDOG_REGWEN_MASK;
->> > +            } else {
->> > +                qemu_log_mask(LOG_GUEST_ERROR,
->> > +                              "%s: AON Timer configuration locked\n",
->> > __func__);
->>
->> You don't need __func__ here, I'm pretty sure it's added for you
->
->
-> When I try to build without __func__ the compiler complains
-
-Aw, you're right. Ignore me
-
->>
->>
->> > +            }
->> > +            break;
->> > +        case A_WDOG_CTRL:
->> > +            if (s->regs[R_WDOG_REGWEN] == IBEX_AONTIMER_WDOG_UNLOCKED) {
->> > +                s->regs[R_WDOG_CTRL] = value & IBEX_AONTIMER_WDOG_CTRL_MASK;
->> > +                ibex_aon_update_bark_timer(s);
->> > +                ibex_aon_update_bite_timer(s);
->> > +            } else {
->> > +                qemu_log_mask(LOG_GUEST_ERROR,
->> > +                              "%s: AON Timer configuration locked\n",
->> > __func__);
->>
->> Some weird line wrapping here as well
->>
->> > +            }
->> > +            break;
->> > +        case A_WDOG_BARK_THOLD:
->> > +            if (s->regs[R_WDOG_REGWEN] == IBEX_AONTIMER_WDOG_UNLOCKED) {
->> > +                s->regs[R_WDOG_BARK_THOLD] = value;
->> > +                ibex_aon_update_bark_timer(s);
->> > +            } else {
->> > +                qemu_log_mask(LOG_GUEST_ERROR,
->> > +                              "%s: AON Timer configuration locked\n",
->> > __func__);
->> > +            }
->> > +            break;
->> > +        case A_WDOG_BITE_THOLD:
->> > +            if (s->regs[R_WDOG_REGWEN] == IBEX_AONTIMER_WDOG_UNLOCKED) {
->> > +                s->regs[R_WDOG_BITE_THOLD] = value;
->> > +                ibex_aon_update_bite_timer(s);
->> > +            } else {
->> > +                qemu_log_mask(LOG_GUEST_ERROR,
->> > +                              "%s: AON Timer configuration locked\n",
->> > __func__);
->> > +            }
->> > +            break;
->> > +        case A_WDOG_COUNT:
->> > +            s->regs[R_WDOG_COUNT] = value;
->> > +            s->wdog_last = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
->> > +            ibex_aon_update_bark_timer(s);
->> > +            ibex_aon_update_bite_timer(s);
->> > +            break;
->> > +        case A_INTR_STATE:
->> > +            /* Service the IRQs by writing 1 to the appropriate field */
->> > +            if ((value & R_INTR_STATE_WDOG_MASK)) {
->> > +                qemu_irq_lower(s->bark_irq);
->> > +                ibex_aon_update_count(s);
->> > +                int64_t now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
->> > +                /*
->> > +                 * We need to make sure that COUNT < *_THOLD. If it isn't, an
->> > +                 * interrupt is generated the next clock cycle
->> > +                 */
->> > +                if (s->regs[R_WDOG_COUNT] >= s->regs[R_WDOG_BARK_THOLD]) {
->> > +                    if (now + IBEX_AONTIMER_PERIOD_NS < now) {
->> > +                        timer_mod_ns(s->barker, INT64_MAX);
->> > +                    } else {
->> > +                        timer_mod_ns(s->barker, now + IBEX_AONTIMER_PERIOD_NS);
->> > +                    }
->> > +                }
->> > +            }
->> > +            break;
->> > +        case A_INTR_TEST:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->> > +                          "%s: Intr test not implemented", __func__);
->> > +            break;
->> > +        case A_WKUP_CAUSE:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->> > +                          "%s: Wkup cause not implemented", __func__);
->> > +            break;
->> > +        default:
->> > +            qemu_log_mask(LOG_GUEST_ERROR,
->> > +                          "%s: Write to unknown address %#lx\n",
->> > __func__, addr);
->> > +            break;
->> > +    }
->> > +}
->> > +
->> > +
->> > +/*
->> > + * Update the bark timer to reflect a new value of WDOG_COUNT or
->> > + * WDOG_BARK_THOLD.
->> > + */
->> > +static void ibex_aon_update_bark_timer(IbexAONTimerState *s)
->> > +{
->> > +    if (!ibex_aon_update_count(s)) {
->> > +        return;
->> > +    }
->> > +    /* Calculate the register count remaining */
->> > +    uint64_t now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
->> > +    int64_t cur_count = (int64_t) s->regs[R_WDOG_COUNT];
->> > +    int64_t rem_bark = s->regs[R_WDOG_BARK_THOLD] - cur_count;
->> > +    /* Extrapolate realtime from count based on clock period */
->> > +    const int64_t delta_ns_bark = rem_bark * IBEX_AONTIMER_PERIOD_NS;
->> > +    /* Timer updates */
->> > +    timer_mod_ns(s->barker, now + delta_ns_bark);
->> > +}
->> > +
->> > +/*
->> > + * Update the bite timer to reflect a new value of WDOG_COUNT or
->> > + * WDOG_BITE_THOLD.
->> > + */
->> > +static void ibex_aon_update_bite_timer(IbexAONTimerState *s)
->> > +{
->> > +    if (!ibex_aon_update_count(s)) {
->> > +        return;
->> > +    }
->> > +    /* Calculate the register count remaining */
->> > +    uint64_t now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
->> > +    int64_t cur_count = (int64_t) s->regs[R_WDOG_COUNT];
->> > +    int64_t rem_bite = s->regs[R_WDOG_BITE_THOLD] - cur_count;
->> > +    /* Extrapolate realtime from count based on clock period */
->> > +    const int64_t delta_ns_bite = rem_bite * IBEX_AONTIMER_PERIOD_NS;
->> > +    //Timer updates
->> > +    timer_mod_ns(s->biter, now + delta_ns_bite);
->> > +}
->> > +
->> > +/*
->> > + * This function updates the count in the register. It depends on the last time
->> > + * a read had occurred and extrapolates the count via the clock freq and the
->> > + * time elapsed.
->> > + */
->> > +static bool ibex_aon_update_count(IbexAONTimerState *s)
->> > +{
->> > +    /* If the timer is disabled, do not update count */
->> > +    if (!(s->regs[R_WDOG_CTRL] & R_WDOG_CTRL_EN_MASK)) {
->> > +        return false;
->> > +    }
->> > +    /* Lazily update wdog count. The count is truncated to fit. */
->> > +    const int64_t now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
->> > +    /* If for some reason we went back in time, elapsed cycles is negative. */
->> > +    int64_t elapsed = now - (int64_t)s->wdog_last;
->> > +    /* Get the count. */
->> > +    const int64_t count = (elapsed / IBEX_AONTIMER_PERIOD_NS) +
->> > +                           (int64_t)s->regs[R_WDOG_COUNT];
->> > +    /* Saturate the counter. */
->> > +    if (count < 0) {
->> > +        s->regs[R_WDOG_COUNT] = 0;
->> > +    } else if (count <= UINT32_MAX) {
->> > +        s->regs[R_WDOG_COUNT] = (uint64_t) count;
->> > +    } else {
->> > +        s->regs[R_WDOG_COUNT] = UINT32_MAX;
->> > +    }
->> > +    /* Update the last-used timestamps */
->> > +    s->wdog_last = now;
->> > +    return true;
->> > +}
->> > +
->> > +/* Called when the bark timer expires */
->> > +static void ibex_aon_barker_expired(void *opaque)
->> > +{
->> > +    IbexAONTimerState *s = IBEX_AON_TIMER(opaque);
->> > +    if (ibex_aon_update_count(s) &&
->> > +        s->regs[R_WDOG_COUNT] >= s->regs[R_WDOG_BARK_THOLD]) {
->> > +        s->regs[R_INTR_STATE] |= (1 << 1);
->> > +        qemu_irq_raise(s->bark_irq);
->> > +    }
->> > +}
->> > +
->> > +/* Called when the bite timer expires */
->> > +static void ibex_aon_biter_expired(void *opaque)
->> > +{
->> > +    IbexAONTimerState *s = IBEX_AON_TIMER(opaque);
->> > +    if (ibex_aon_update_count(s) &&
->> > +        s->regs[R_WDOG_COUNT] >= s->regs[R_WDOG_BITE_THOLD]) {
->> > +        resettable_reset(opaque, RESET_TYPE_COLD);
->> > +        watchdog_perform_action();
->> > +    }
->> > +}
->> > +
->> > +static void ibex_aon_register_types(void)
->> > +{
->> > +    watchdog_add_model(&model);
->> > +    type_register_static(&ibex_aon_info);
->> > +}
->> > +
->> > +type_init(ibex_aon_register_types)
->> > \ No newline at end of file
->>
->> Missing newline here
->>
->> > diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
->> > index 68892cd8e5..0bda31f817 100644
->> > --- a/include/hw/riscv/opentitan.h
->> > +++ b/include/hw/riscv/opentitan.h
->> > @@ -24,6 +24,7 @@
->> >  #include "hw/char/ibex_uart.h"
->> >  #include "hw/timer/ibex_timer.h"
->> >  #include "hw/ssi/ibex_spi_host.h"
->> > +#include "hw/watchdog/wdt_ibex_aon.h"
->> >  #include "qom/object.h"
->> >
->> >  #define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
->> > @@ -46,6 +47,8 @@ struct LowRISCIbexSoCState {
->> >      IbexTimerState timer;
->> >      IbexSPIHostState spi_host[OPENTITAN_NUM_SPI_HOSTS];
->> >
->> > +    IbexAONTimerState aon_timer;
->> > +
->> >      MemoryRegion flash_mem;
->> >      MemoryRegion rom;
->> >      MemoryRegion flash_alias;
->> > @@ -78,7 +81,7 @@ enum {
->> >      IBEX_DEV_RSTMGR,
->> >      IBEX_DEV_CLKMGR,
->> >      IBEX_DEV_PINMUX,
->> > -    IBEX_DEV_PADCTRL,
->> > +    IBEX_DEV_AON_TIMER,
->> >      IBEX_DEV_USBDEV,
->> >      IBEX_DEV_FLASH_CTRL,
->> >      IBEX_DEV_PLIC,
->> > @@ -95,7 +98,7 @@ enum {
->> >      IBEX_DEV_OTBN,
->> >      IBEX_DEV_PERI,
->> >  };
->> > -
->> > +//See hw/top_earlgrey/sw/autogen/top_earlgrey.h
->> >  enum {
->> >      IBEX_UART0_TX_WATERMARK_IRQ   = 1,
->> >      IBEX_UART0_RX_WATERMARK_IRQ   = 2,
->> > @@ -110,6 +113,8 @@ enum {
->> >      IBEX_SPI_HOST0_SPI_EVENT_IRQ  = 151,
->> >      IBEX_SPI_HOST1_ERR_IRQ        = 152,
->> >      IBEX_SPI_HOST1_SPI_EVENT_IRQ  = 153,
->> > +    IBEX_AONTIMER_WKUP_EXPIRED = 157,
->> > +    IBEX_AONTIMER_WDOG_BARK = 158,
->> >  };
->> >
->> >  #endif
->> > diff --git a/include/hw/watchdog/wdt_ibex_aon.h
->> > b/include/hw/watchdog/wdt_ibex_aon.h
->> > new file mode 100644
->> > index 0000000000..2d7a3188d8
->> > --- /dev/null
->> > +++ b/include/hw/watchdog/wdt_ibex_aon.h
->> > @@ -0,0 +1,67 @@
->> > +/*
->> > + * QEMU lowRISC OpenTitan Always-On Timer device
->> > + *
->> > + * Copyright (c) 2022 Rivos Inc.
->> > + *
->> > + * For details check the documentation here:
->> > + *   https://docs.opentitan.org/hw/ip/aon_timer/doc/
->> > + *
->> > + * Permission is hereby granted, free of charge, to any person obtaining a copy
->> > + * of this software and associated documentation files (the
->> > "Software"), to deal
->> > + * in the Software without restriction, including without limitation the rights
->> > + * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
->> > + * copies of the Software, and to permit persons to whom the Software is
->> > + * furnished to do so, subject to the following conditions:
->> > + *
->> > + * The above copyright notice and this permission notice shall be included in
->> > + * all copies or substantial portions of the Software.
->> > + *
->> > + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
->> > + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
->> > + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
->> > + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
->> > + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
->> > ARISING FROM,
->> > + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
->> > + * THE SOFTWARE.
->> > + */
->> > +#ifndef WDT_IBEX_AON_H
->> > +#define WDT_IBEX_AON_H
->> > +
->> > +#include "hw/sysbus.h"
->> > +#include "qemu/timer.h"
->> > +#include "qom/object.h"
->> > +
->> > +#define TYPE_IBEX_AON_TIMER "ibex-aon-timer"
->> > +OBJECT_DECLARE_SIMPLE_TYPE(IbexAONTimerState, IBEX_AON_TIMER)
->> > +
->> > +#define IBEX_AONTIMER_REGCOUNT 12
->> > +#define IBEX_AONTIMER_FREQ 200000 /* 200 KHz */
->> > +#define IBEX_AONTIMER_PERIOD_NS 5000
->> > +
->> > +#define IBEX_AONTIMER_WDOG_LOCKED 0
->> > +#define IBEX_AONTIMER_WDOG_UNLOCKED 1
->> > +
->> > +#define IBEX_AONTIMER_WDOG_REGWEN_MASK 0x1
->> > +#define IBEX_AONTIMER_WDOG_CTRL_MASK 0x3
->> > +#define IBEX_AONTIMER_INTR_STATE_MASK 0x3
->> > +
->> > +struct IbexAONTimerState {
->> > +    /*< private >*/
->> > +    SysBusDevice parent_obj;
->> > +
->> > +    MemoryRegion iomem;
->> > +
->> > +    QEMUTimer *barker;
->> > +    QEMUTimer *biter;
->> > +
->> > +    qemu_irq bark_irq;
->> > +
->> > +    /* Registers */
->> > +    uint32_t regs[IBEX_AONTIMER_REGCOUNT];
->> > +    /* Last-used Timestamps */
->> > +    uint64_t wdog_last;
->> > +    /*< public >*/
->> > +};
->> > +
->> > +
->> > +#endif /* WDT_IBEX_AON_H */
->> > \ No newline at end of file
->> > diff --git a/tests/qtest/ibex-aon-timer-test.c
->> > b/tests/qtest/ibex-aon-timer-test.c
->> > new file mode 100644
->> > index 0000000000..ffd668b206
->> > --- /dev/null
->> > +++ b/tests/qtest/ibex-aon-timer-test.c
->> > @@ -0,0 +1,189 @@
->> > +/*
->> > + * Testing the OpenTitan AON Timer
->> > + *
->> > + * Copyright (c) 2022 Rivos Inc.
->> > + *
->> > + * Permission is hereby granted, free of charge, to any person obtaining a copy
->> > + * of this software and associated documentation files (the
->> > "Software"), to deal
->> > + * in the Software without restriction, including without limitation the rights
->> > + * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
->> > + * copies of the Software, and to permit persons to whom the Software is
->> > + * furnished to do so, subject to the following conditions:
->> > + *
->> > + * The above copyright notice and this permission notice shall be included in
->> > + * all copies or substantial portions of the Software.
->> > + *
->> > + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
->> > + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
->> > + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
->> > + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
->> > + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
->> > ARISING FROM,
->> > + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
->> > + * THE SOFTWARE.
->> > + */
->> > +
->> > +#include "qemu/osdep.h"
->> > +#include "libqtest.h"
->> > +#include "qapi/qmp/qdict.h"
->> > +
->> > +#define AON_BASE_ADDR (0x40470000ul)
->> > +#define AON_ADDR(addr) (AON_BASE_ADDR + addr)
->> > +#define AON_WKUP_IRQ 157
->> > +#define AON_BARK_IRQ 158
->> > +#define AON_FREQ 200000 /* 200 KHz */
->> > +#define AON_PERIOD_NS 5000
->> > +#define NANOS_PER_SECOND 1000000000LL
->>
->> Newline
->>
->> > +/* Test that reads work, and that the regs get reset to the correct value */
->> > +static void test_reads(void)
->> > +{
->> > +    QTestState *test = qtest_init("-M opentitan");
->> > +    g_assert(qtest_readl(test, AON_ADDR(0x00)) == 0);
->> > +    g_assert(qtest_readl(test, AON_ADDR(0x04)) == 0);
->> > +    g_assert(qtest_readl(test, AON_ADDR(0x08)) == 0);
->> > +    g_assert(qtest_readl(test, AON_ADDR(0x0c)) == 0);
->> > +    g_assert(qtest_readl(test, AON_ADDR(0x10)) == 1);
->> > +    g_assert(qtest_readl(test, AON_ADDR(0x14)) == 0);
->> > +    g_assert(qtest_readl(test, AON_ADDR(0x18)) == 0);
->> > +    g_assert(qtest_readl(test, AON_ADDR(0x1c)) == 0);
->> > +    g_assert(qtest_readl(test, AON_ADDR(0x20)) == 0);
->> > +    g_assert(qtest_readl(test, AON_ADDR(0x24)) == 0);
->> > +    g_assert(qtest_readl(test, AON_ADDR(0x28)) == 0);
->> > +    g_assert(qtest_readl(test, AON_ADDR(0x2c)) == 0);
->> > +
->> > +    qtest_quit(test);
->> > +}
->> > +
->> > +static void test_writes(void)
->> > +{
->> > +    /* Test that writes worked, while the config is unlocked */
->> > +    QTestState *test = qtest_init("-M opentitan");
->> > +
->> > +
->> > +    qtest_writel(test, AON_ADDR(0x18), (1 << 19)); /* WDOG_BARK_THOLD */
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x18)),
->> > +                     ==, (1 << 19));
->> > +
->> > +    qtest_writel(test, AON_ADDR(0x1c), (1 << 20)); /* WDOG_BITE_THOLD */
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x1c)),
->> > +                     ==, (1 << 20));
->> > +
->> > +    qtest_writel(test, AON_ADDR(0x14), 0x1); /* WDOG_CTRL enable */
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x14)),
->> > +                     ==, 0x1);
->> > +
->> > +    qtest_writel(test, AON_ADDR(0x10), 0x0); /* WDOG_REGWEN enable */
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x10)), ==, 0x0);
->> > +
->> > +    /*
->> > +     * Test configuration lock
->> > +     * These should not successfully write.
->> > +     */
->> > +    qtest_writel(test, AON_ADDR(0x14), 0);
->> > +    qtest_writel(test, AON_ADDR(0x18), 0);
->> > +    qtest_writel(test, AON_ADDR(0x1c), 0);
->> > +
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x14)),
->> > +                     ==, 0x1);
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x18)),
->> > +                     ==, (1 << 19));
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x1c)),
->> > +                     ==, (1 << 20));
->> > +
->> > +    /* This should not work, as it's a rw0c reg. */
->> > +    qtest_writel(test, AON_ADDR(0x10), 1);
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x10)),
->> > +                     ==, 0x0);
->> > +
->> > +    qtest_quit(test);
->> > +}
->> > +
->> > +
->> > +/* Test whether the watchdog timer works during normal operation */
->> > +static void test_operation(void)
->> > +{
->> > +    QTestState *test = qtest_init("-M opentitan");
->> > +
->> > +    /* Set up interrupts */
->> > +    qtest_irq_intercept_in(test, "/machine/soc/plic");
->> > +
->> > +    /* Setup timer */
->> > +    qtest_writel(test, AON_ADDR(0x18), (1 << 19)); /* WDOG_BARK_THOLD */
->> > +    qtest_writel(test, AON_ADDR(0x1c), (1 << 20)); /* WDOG_BITE_THOLD */
->> > +
->> > +    /* Run simulation, without enabling timer: */
->> > +    qtest_clock_step(test, NANOS_PER_SECOND * 30);
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x20)),
->> > +                     ==, 0); /* checks if WDOG_COUNT gets updated */
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x24)),
->> > +                     ==, 0); /* checks if INTR_STATE is clear */
->> > +    g_assert(!qtest_get_irq(test, AON_BARK_IRQ));
->> > +
->> > +    /* Enable the timer, and test if the count is updated correctly */
->> > +    qtest_writel(test, AON_ADDR(0x14), 0x1); /* set WDOG_CTRL = 1 */
->> > +    qtest_clock_step(test, NANOS_PER_SECOND);
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x20)),
->> > +                     ==, AON_FREQ);
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x24)),
->> > +                     ==, 0);
->> > +    g_assert(!qtest_get_irq(test, AON_BARK_IRQ));
->> > +
->> > +    /* Disable the timer, and test if the count freezes */
->> > +    qtest_writel(test, AON_ADDR(0x14), 0x0); /* set WDOG_CTRL = 0 */
->> > +    qtest_clock_step(test, NANOS_PER_SECOND);
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x20)),
->> > +                     ==, AON_FREQ);
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x24)),
->> > +                     ==, 0);
->> > +    g_assert(!qtest_get_irq(test, AON_BARK_IRQ));
->> > +
->> > +    /* Enable the timer, and run to bark */
->> > +    qtest_writel(test, AON_ADDR(0x14), 0x1); /* set WDOG_CTRL = 1 */
->> > +    qtest_clock_step(test, NANOS_PER_SECOND * 1.62145);
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x20)),
->> > +                     >=, (1 << 19));
->> > +    g_assert(qtest_get_irq(test, AON_BARK_IRQ));
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x24)),
->> > +                     ==, (1 << 1));
->> > +
->> > +    /* Disable IRQ by writing to INTR_STATE. Should bark next cycle */
->> > +    qtest_writel(test, AON_ADDR(0x24), (1 << 1));
->> > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x24)),
->> > +                     ==, (1 << 1));
->> > +    g_assert(!qtest_get_irq(test, AON_BARK_IRQ));
->> > +    qtest_clock_step(test, AON_PERIOD_NS);
->> > +    g_assert(qtest_get_irq(test, AON_BARK_IRQ));
->> > +
->> > +    /*
->> > +     * Disable IRQ again, this time by setting WDOG_COUNT = 0 (pet) and
->> > +     * writing to INTR_STATE.
->> > +     */
->> > +    qtest_writel(test, AON_ADDR(0x20), 0);
->> > +    qtest_writel(test, AON_ADDR(0x24), (1 << 1));
->> > +    g_assert(!qtest_get_irq(test, AON_BARK_IRQ));
->> > +
->> > +    /* Ensure no bite occurs, after resetting the timer. */
->> > +    qtest_clock_step(test, NANOS_PER_SECOND * 2.621436);
->> > +    QDict *resp = qtest_qmp(test, "{'execute':'query-status'}");
->> > +    g_assert(qdict_haskey(resp, "return"));
->> > +    qobject_unref(resp);
->> > +
->> > +    /* Allow test to run to bite. */
->> > +    qtest_clock_step(test, NANOS_PER_SECOND * 5.24289);
->> > +    QDict *event = qtest_qmp_eventwait_ref(test, "WATCHDOG");
->> > +    QDict *data = qdict_get_qdict(event, "data");
->> > +    g_assert_cmpstr(qdict_get_str(data, "action"), ==, "reset");
->> > +    qobject_unref(event);
->> > +    qobject_unref(data);
->> > +    qtest_quit(test);
->> > +}
->>
->> Cool! Thanks for writing qtests.
->>
->> Out of curiosity did you test this from a guest as well?
->
->
-> I used an app on ZephyrOS to run tests similar to these qtests for basic functionality.
-
-Ah cool! Is the Zephyr port public?
+Applied to riscv-to-apply.next
 
 Alistair
 
+> ---
+>  disas/riscv.c | 1432 ++++++++++++++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 1430 insertions(+), 2 deletions(-)
 >
->>
->> Alistair
->>
->> > +
->> > +
->> > +
->> > +int main(int argc, char **argv)
->> > +{
->> > +    g_test_init(&argc, &argv, NULL);
->> > +    qtest_add_func("/ibex-aon-timer/reads", test_reads);
->> > +    qtest_add_func("/ibex-aon-timer/writes", test_writes);
->> > +    qtest_add_func("/ibex-aon-timer/op", test_operation);
->> > +    return g_test_run();
->> > +}
->> > diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
->> > index be4b30dea2..2941d6be4e 100644
->> > --- a/tests/qtest/meson.build
->> > +++ b/tests/qtest/meson.build
->> > @@ -233,6 +233,9 @@ qtests_s390x = \
->> >     'cpu-plug-test',
->> >     'migration-test']
->> >
->> > +qtests_riscv32 = \
->> > +  ['ibex-aon-timer-test']
->> > +
->> >  qos_test_ss = ss.source_set()
->> >  qos_test_ss.add(
->> >    'ac97-test.c',
->> > --
->> > 2.30.2
->> >
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index 7af6afc8fa..719a5c18b8 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -158,6 +158,11 @@ typedef enum {
+>      rv_codec_css_sqsp,
+>      rv_codec_k_bs,
+>      rv_codec_k_rnum,
+> +    rv_codec_v_r,
+> +    rv_codec_v_ldst,
+> +    rv_codec_v_i,
+> +    rv_codec_vsetvli,
+> +    rv_codec_vsetivli,
+>  } rv_codec;
+>
+>  typedef enum {
+> @@ -560,6 +565,376 @@ typedef enum {
+>      rv_op_zip = 396,
+>      rv_op_xperm4 = 397,
+>      rv_op_xperm8 = 398,
+> +    rv_op_vle8_v = 399,
+> +    rv_op_vle16_v = 400,
+> +    rv_op_vle32_v = 401,
+> +    rv_op_vle64_v = 402,
+> +    rv_op_vse8_v = 403,
+> +    rv_op_vse16_v = 404,
+> +    rv_op_vse32_v = 405,
+> +    rv_op_vse64_v = 406,
+> +    rv_op_vlm_v = 407,
+> +    rv_op_vsm_v = 408,
+> +    rv_op_vlse8_v = 409,
+> +    rv_op_vlse16_v = 410,
+> +    rv_op_vlse32_v = 411,
+> +    rv_op_vlse64_v = 412,
+> +    rv_op_vsse8_v = 413,
+> +    rv_op_vsse16_v = 414,
+> +    rv_op_vsse32_v = 415,
+> +    rv_op_vsse64_v = 416,
+> +    rv_op_vluxei8_v = 417,
+> +    rv_op_vluxei16_v = 418,
+> +    rv_op_vluxei32_v = 419,
+> +    rv_op_vluxei64_v = 420,
+> +    rv_op_vloxei8_v = 421,
+> +    rv_op_vloxei16_v = 422,
+> +    rv_op_vloxei32_v = 423,
+> +    rv_op_vloxei64_v = 424,
+> +    rv_op_vsuxei8_v = 425,
+> +    rv_op_vsuxei16_v = 426,
+> +    rv_op_vsuxei32_v = 427,
+> +    rv_op_vsuxei64_v = 428,
+> +    rv_op_vsoxei8_v = 429,
+> +    rv_op_vsoxei16_v = 430,
+> +    rv_op_vsoxei32_v = 431,
+> +    rv_op_vsoxei64_v = 432,
+> +    rv_op_vle8ff_v = 433,
+> +    rv_op_vle16ff_v = 434,
+> +    rv_op_vle32ff_v = 435,
+> +    rv_op_vle64ff_v = 436,
+> +    rv_op_vl1re8_v = 437,
+> +    rv_op_vl1re16_v = 438,
+> +    rv_op_vl1re32_v = 439,
+> +    rv_op_vl1re64_v = 440,
+> +    rv_op_vl2re8_v = 441,
+> +    rv_op_vl2re16_v = 442,
+> +    rv_op_vl2re32_v = 443,
+> +    rv_op_vl2re64_v = 444,
+> +    rv_op_vl4re8_v = 445,
+> +    rv_op_vl4re16_v = 446,
+> +    rv_op_vl4re32_v = 447,
+> +    rv_op_vl4re64_v = 448,
+> +    rv_op_vl8re8_v = 449,
+> +    rv_op_vl8re16_v = 450,
+> +    rv_op_vl8re32_v = 451,
+> +    rv_op_vl8re64_v = 452,
+> +    rv_op_vs1r_v = 453,
+> +    rv_op_vs2r_v = 454,
+> +    rv_op_vs4r_v = 455,
+> +    rv_op_vs8r_v = 456,
+> +    rv_op_vadd_vv = 457,
+> +    rv_op_vadd_vx = 458,
+> +    rv_op_vadd_vi = 459,
+> +    rv_op_vsub_vv = 460,
+> +    rv_op_vsub_vx = 461,
+> +    rv_op_vrsub_vx = 462,
+> +    rv_op_vrsub_vi = 463,
+> +    rv_op_vwaddu_vv = 464,
+> +    rv_op_vwaddu_vx = 465,
+> +    rv_op_vwadd_vv = 466,
+> +    rv_op_vwadd_vx = 467,
+> +    rv_op_vwsubu_vv = 468,
+> +    rv_op_vwsubu_vx = 469,
+> +    rv_op_vwsub_vv = 470,
+> +    rv_op_vwsub_vx = 471,
+> +    rv_op_vwaddu_wv = 472,
+> +    rv_op_vwaddu_wx = 473,
+> +    rv_op_vwadd_wv = 474,
+> +    rv_op_vwadd_wx = 475,
+> +    rv_op_vwsubu_wv = 476,
+> +    rv_op_vwsubu_wx = 477,
+> +    rv_op_vwsub_wv = 478,
+> +    rv_op_vwsub_wx = 479,
+> +    rv_op_vadc_vvm = 480,
+> +    rv_op_vadc_vxm = 481,
+> +    rv_op_vadc_vim = 482,
+> +    rv_op_vmadc_vvm = 483,
+> +    rv_op_vmadc_vxm = 484,
+> +    rv_op_vmadc_vim = 485,
+> +    rv_op_vsbc_vvm = 486,
+> +    rv_op_vsbc_vxm = 487,
+> +    rv_op_vmsbc_vvm = 488,
+> +    rv_op_vmsbc_vxm = 489,
+> +    rv_op_vand_vv = 490,
+> +    rv_op_vand_vx = 491,
+> +    rv_op_vand_vi = 492,
+> +    rv_op_vor_vv = 493,
+> +    rv_op_vor_vx = 494,
+> +    rv_op_vor_vi = 495,
+> +    rv_op_vxor_vv = 496,
+> +    rv_op_vxor_vx = 497,
+> +    rv_op_vxor_vi = 498,
+> +    rv_op_vsll_vv = 499,
+> +    rv_op_vsll_vx = 500,
+> +    rv_op_vsll_vi = 501,
+> +    rv_op_vsrl_vv = 502,
+> +    rv_op_vsrl_vx = 503,
+> +    rv_op_vsrl_vi = 504,
+> +    rv_op_vsra_vv = 505,
+> +    rv_op_vsra_vx = 506,
+> +    rv_op_vsra_vi = 507,
+> +    rv_op_vnsrl_wv = 508,
+> +    rv_op_vnsrl_wx = 509,
+> +    rv_op_vnsrl_wi = 510,
+> +    rv_op_vnsra_wv = 511,
+> +    rv_op_vnsra_wx = 512,
+> +    rv_op_vnsra_wi = 513,
+> +    rv_op_vmseq_vv = 514,
+> +    rv_op_vmseq_vx = 515,
+> +    rv_op_vmseq_vi = 516,
+> +    rv_op_vmsne_vv = 517,
+> +    rv_op_vmsne_vx = 518,
+> +    rv_op_vmsne_vi = 519,
+> +    rv_op_vmsltu_vv = 520,
+> +    rv_op_vmsltu_vx = 521,
+> +    rv_op_vmslt_vv = 522,
+> +    rv_op_vmslt_vx = 523,
+> +    rv_op_vmsleu_vv = 524,
+> +    rv_op_vmsleu_vx = 525,
+> +    rv_op_vmsleu_vi = 526,
+> +    rv_op_vmsle_vv = 527,
+> +    rv_op_vmsle_vx = 528,
+> +    rv_op_vmsle_vi = 529,
+> +    rv_op_vmsgtu_vx = 530,
+> +    rv_op_vmsgtu_vi = 531,
+> +    rv_op_vmsgt_vx = 532,
+> +    rv_op_vmsgt_vi = 533,
+> +    rv_op_vminu_vv = 534,
+> +    rv_op_vminu_vx = 535,
+> +    rv_op_vmin_vv = 536,
+> +    rv_op_vmin_vx = 537,
+> +    rv_op_vmaxu_vv = 538,
+> +    rv_op_vmaxu_vx = 539,
+> +    rv_op_vmax_vv = 540,
+> +    rv_op_vmax_vx = 541,
+> +    rv_op_vmul_vv = 542,
+> +    rv_op_vmul_vx = 543,
+> +    rv_op_vmulh_vv = 544,
+> +    rv_op_vmulh_vx = 545,
+> +    rv_op_vmulhu_vv = 546,
+> +    rv_op_vmulhu_vx = 547,
+> +    rv_op_vmulhsu_vv = 548,
+> +    rv_op_vmulhsu_vx = 549,
+> +    rv_op_vdivu_vv = 550,
+> +    rv_op_vdivu_vx = 551,
+> +    rv_op_vdiv_vv = 552,
+> +    rv_op_vdiv_vx = 553,
+> +    rv_op_vremu_vv = 554,
+> +    rv_op_vremu_vx = 555,
+> +    rv_op_vrem_vv = 556,
+> +    rv_op_vrem_vx = 557,
+> +    rv_op_vwmulu_vv = 558,
+> +    rv_op_vwmulu_vx = 559,
+> +    rv_op_vwmulsu_vv = 560,
+> +    rv_op_vwmulsu_vx = 561,
+> +    rv_op_vwmul_vv = 562,
+> +    rv_op_vwmul_vx = 563,
+> +    rv_op_vmacc_vv = 564,
+> +    rv_op_vmacc_vx = 565,
+> +    rv_op_vnmsac_vv = 566,
+> +    rv_op_vnmsac_vx = 567,
+> +    rv_op_vmadd_vv = 568,
+> +    rv_op_vmadd_vx = 569,
+> +    rv_op_vnmsub_vv = 570,
+> +    rv_op_vnmsub_vx = 571,
+> +    rv_op_vwmaccu_vv = 572,
+> +    rv_op_vwmaccu_vx = 573,
+> +    rv_op_vwmacc_vv = 574,
+> +    rv_op_vwmacc_vx = 575,
+> +    rv_op_vwmaccsu_vv = 576,
+> +    rv_op_vwmaccsu_vx = 577,
+> +    rv_op_vwmaccus_vx = 578,
+> +    rv_op_vmv_v_v = 579,
+> +    rv_op_vmv_v_x = 580,
+> +    rv_op_vmv_v_i = 581,
+> +    rv_op_vmerge_vvm = 582,
+> +    rv_op_vmerge_vxm = 583,
+> +    rv_op_vmerge_vim = 584,
+> +    rv_op_vsaddu_vv = 585,
+> +    rv_op_vsaddu_vx = 586,
+> +    rv_op_vsaddu_vi = 587,
+> +    rv_op_vsadd_vv = 588,
+> +    rv_op_vsadd_vx = 589,
+> +    rv_op_vsadd_vi = 590,
+> +    rv_op_vssubu_vv = 591,
+> +    rv_op_vssubu_vx = 592,
+> +    rv_op_vssub_vv = 593,
+> +    rv_op_vssub_vx = 594,
+> +    rv_op_vaadd_vv = 595,
+> +    rv_op_vaadd_vx = 596,
+> +    rv_op_vaaddu_vv = 597,
+> +    rv_op_vaaddu_vx = 598,
+> +    rv_op_vasub_vv = 599,
+> +    rv_op_vasub_vx = 600,
+> +    rv_op_vasubu_vv = 601,
+> +    rv_op_vasubu_vx = 602,
+> +    rv_op_vsmul_vv = 603,
+> +    rv_op_vsmul_vx = 604,
+> +    rv_op_vssrl_vv = 605,
+> +    rv_op_vssrl_vx = 606,
+> +    rv_op_vssrl_vi = 607,
+> +    rv_op_vssra_vv = 608,
+> +    rv_op_vssra_vx = 609,
+> +    rv_op_vssra_vi = 610,
+> +    rv_op_vnclipu_wv = 611,
+> +    rv_op_vnclipu_wx = 612,
+> +    rv_op_vnclipu_wi = 613,
+> +    rv_op_vnclip_wv = 614,
+> +    rv_op_vnclip_wx = 615,
+> +    rv_op_vnclip_wi = 616,
+> +    rv_op_vfadd_vv = 617,
+> +    rv_op_vfadd_vf = 618,
+> +    rv_op_vfsub_vv = 619,
+> +    rv_op_vfsub_vf = 620,
+> +    rv_op_vfrsub_vf = 621,
+> +    rv_op_vfwadd_vv = 622,
+> +    rv_op_vfwadd_vf = 623,
+> +    rv_op_vfwadd_wv = 624,
+> +    rv_op_vfwadd_wf = 625,
+> +    rv_op_vfwsub_vv = 626,
+> +    rv_op_vfwsub_vf = 627,
+> +    rv_op_vfwsub_wv = 628,
+> +    rv_op_vfwsub_wf = 629,
+> +    rv_op_vfmul_vv = 630,
+> +    rv_op_vfmul_vf = 631,
+> +    rv_op_vfdiv_vv = 632,
+> +    rv_op_vfdiv_vf = 633,
+> +    rv_op_vfrdiv_vf = 634,
+> +    rv_op_vfwmul_vv = 635,
+> +    rv_op_vfwmul_vf = 636,
+> +    rv_op_vfmacc_vv = 637,
+> +    rv_op_vfmacc_vf = 638,
+> +    rv_op_vfnmacc_vv = 639,
+> +    rv_op_vfnmacc_vf = 640,
+> +    rv_op_vfmsac_vv = 641,
+> +    rv_op_vfmsac_vf = 642,
+> +    rv_op_vfnmsac_vv = 643,
+> +    rv_op_vfnmsac_vf = 644,
+> +    rv_op_vfmadd_vv = 645,
+> +    rv_op_vfmadd_vf = 646,
+> +    rv_op_vfnmadd_vv = 647,
+> +    rv_op_vfnmadd_vf = 648,
+> +    rv_op_vfmsub_vv = 649,
+> +    rv_op_vfmsub_vf = 650,
+> +    rv_op_vfnmsub_vv = 651,
+> +    rv_op_vfnmsub_vf = 652,
+> +    rv_op_vfwmacc_vv = 653,
+> +    rv_op_vfwmacc_vf = 654,
+> +    rv_op_vfwnmacc_vv = 655,
+> +    rv_op_vfwnmacc_vf = 656,
+> +    rv_op_vfwmsac_vv = 657,
+> +    rv_op_vfwmsac_vf = 658,
+> +    rv_op_vfwnmsac_vv = 659,
+> +    rv_op_vfwnmsac_vf = 660,
+> +    rv_op_vfsqrt_v = 661,
+> +    rv_op_vfrsqrt7_v = 662,
+> +    rv_op_vfrec7_v = 663,
+> +    rv_op_vfmin_vv = 664,
+> +    rv_op_vfmin_vf = 665,
+> +    rv_op_vfmax_vv = 666,
+> +    rv_op_vfmax_vf = 667,
+> +    rv_op_vfsgnj_vv = 668,
+> +    rv_op_vfsgnj_vf = 669,
+> +    rv_op_vfsgnjn_vv = 670,
+> +    rv_op_vfsgnjn_vf = 671,
+> +    rv_op_vfsgnjx_vv = 672,
+> +    rv_op_vfsgnjx_vf = 673,
+> +    rv_op_vfslide1up_vf = 674,
+> +    rv_op_vfslide1down_vf = 675,
+> +    rv_op_vmfeq_vv = 676,
+> +    rv_op_vmfeq_vf = 677,
+> +    rv_op_vmfne_vv = 678,
+> +    rv_op_vmfne_vf = 679,
+> +    rv_op_vmflt_vv = 680,
+> +    rv_op_vmflt_vf = 681,
+> +    rv_op_vmfle_vv = 682,
+> +    rv_op_vmfle_vf = 683,
+> +    rv_op_vmfgt_vf = 684,
+> +    rv_op_vmfge_vf = 685,
+> +    rv_op_vfclass_v = 686,
+> +    rv_op_vfmerge_vfm = 687,
+> +    rv_op_vfmv_v_f = 688,
+> +    rv_op_vfcvt_xu_f_v = 689,
+> +    rv_op_vfcvt_x_f_v = 690,
+> +    rv_op_vfcvt_f_xu_v = 691,
+> +    rv_op_vfcvt_f_x_v = 692,
+> +    rv_op_vfcvt_rtz_xu_f_v = 693,
+> +    rv_op_vfcvt_rtz_x_f_v = 694,
+> +    rv_op_vfwcvt_xu_f_v = 695,
+> +    rv_op_vfwcvt_x_f_v = 696,
+> +    rv_op_vfwcvt_f_xu_v = 697,
+> +    rv_op_vfwcvt_f_x_v = 698,
+> +    rv_op_vfwcvt_f_f_v = 699,
+> +    rv_op_vfwcvt_rtz_xu_f_v = 700,
+> +    rv_op_vfwcvt_rtz_x_f_v = 701,
+> +    rv_op_vfncvt_xu_f_w = 702,
+> +    rv_op_vfncvt_x_f_w = 703,
+> +    rv_op_vfncvt_f_xu_w = 704,
+> +    rv_op_vfncvt_f_x_w = 705,
+> +    rv_op_vfncvt_f_f_w = 706,
+> +    rv_op_vfncvt_rod_f_f_w = 707,
+> +    rv_op_vfncvt_rtz_xu_f_w = 708,
+> +    rv_op_vfncvt_rtz_x_f_w = 709,
+> +    rv_op_vredsum_vs = 710,
+> +    rv_op_vredand_vs = 711,
+> +    rv_op_vredor_vs = 712,
+> +    rv_op_vredxor_vs = 713,
+> +    rv_op_vredminu_vs = 714,
+> +    rv_op_vredmin_vs = 715,
+> +    rv_op_vredmaxu_vs = 716,
+> +    rv_op_vredmax_vs = 717,
+> +    rv_op_vwredsumu_vs = 718,
+> +    rv_op_vwredsum_vs = 719,
+> +    rv_op_vfredusum_vs = 720,
+> +    rv_op_vfredosum_vs = 721,
+> +    rv_op_vfredmin_vs = 722,
+> +    rv_op_vfredmax_vs = 723,
+> +    rv_op_vfwredusum_vs = 724,
+> +    rv_op_vfwredosum_vs = 725,
+> +    rv_op_vmand_mm = 726,
+> +    rv_op_vmnand_mm = 727,
+> +    rv_op_vmandn_mm = 728,
+> +    rv_op_vmxor_mm = 729,
+> +    rv_op_vmor_mm = 730,
+> +    rv_op_vmnor_mm = 731,
+> +    rv_op_vmorn_mm = 732,
+> +    rv_op_vmxnor_mm = 733,
+> +    rv_op_vcpop_m = 734,
+> +    rv_op_vfirst_m = 735,
+> +    rv_op_vmsbf_m = 736,
+> +    rv_op_vmsif_m = 737,
+> +    rv_op_vmsof_m = 738,
+> +    rv_op_viota_m = 739,
+> +    rv_op_vid_v = 740,
+> +    rv_op_vmv_x_s = 741,
+> +    rv_op_vmv_s_x = 742,
+> +    rv_op_vfmv_f_s = 743,
+> +    rv_op_vfmv_s_f = 744,
+> +    rv_op_vslideup_vx = 745,
+> +    rv_op_vslideup_vi = 746,
+> +    rv_op_vslide1up_vx = 747,
+> +    rv_op_vslidedown_vx = 748,
+> +    rv_op_vslidedown_vi = 749,
+> +    rv_op_vslide1down_vx = 750,
+> +    rv_op_vrgather_vv = 751,
+> +    rv_op_vrgatherei16_vv = 752,
+> +    rv_op_vrgather_vx = 753,
+> +    rv_op_vrgather_vi = 754,
+> +    rv_op_vcompress_vm = 755,
+> +    rv_op_vmv1r_v = 756,
+> +    rv_op_vmv2r_v = 757,
+> +    rv_op_vmv4r_v = 758,
+> +    rv_op_vmv8r_v = 759,
+> +    rv_op_vzext_vf2 = 760,
+> +    rv_op_vzext_vf4 = 761,
+> +    rv_op_vzext_vf8 = 762,
+> +    rv_op_vsext_vf2 = 763,
+> +    rv_op_vsext_vf4 = 764,
+> +    rv_op_vsext_vf8 = 765,
+> +    rv_op_vsetvli = 766,
+> +    rv_op_vsetivli = 767,
+> +    rv_op_vsetvl = 768,
+>  } rv_op;
+>
+>  /* structures */
+> @@ -581,6 +956,8 @@ typedef struct {
+>      uint8_t   rl;
+>      uint8_t   bs;
+>      uint8_t   rnum;
+> +    uint8_t   vm;
+> +    uint32_t  vzimm;
+>  } rv_decode;
+>
+>  typedef struct {
+> @@ -619,6 +996,13 @@ static const char rv_freg_name_sym[32][5] = {
+>      "fs8",  "fs9",  "fs10", "fs11", "ft8",  "ft9",  "ft10", "ft11",
+>  };
+>
+> +static const char rv_vreg_name_sym[32][4] = {
+> +    "v0",  "v1",  "v2",  "v3",  "v4",  "v5",  "v6",  "v7",
+> +    "v8",  "v9",  "v10", "v11", "v12", "v13", "v14", "v15",
+> +    "v16", "v17", "v18", "v19", "v20", "v21", "v22", "v23",
+> +    "v24", "v25", "v26", "v27", "v28", "v29", "v30", "v31"
+> +};
+> +
+>  /* instruction formats */
+>
+>  #define rv_fmt_none                   "O\t"
+> @@ -658,6 +1042,34 @@ static const char rv_freg_name_sym[32][5] = {
+>  #define rv_fmt_rs2_offset             "O\t2,o"
+>  #define rv_fmt_rs1_rs2_bs             "O\t1,2,b"
+>  #define rv_fmt_rd_rs1_rnum            "O\t0,1,n"
+> +#define rv_fmt_ldst_vd_rs1_vm         "O\tD,(1)m"
+> +#define rv_fmt_ldst_vd_rs1_rs2_vm     "O\tD,(1),2m"
+> +#define rv_fmt_ldst_vd_rs1_vs2_vm     "O\tD,(1),Fm"
+> +#define rv_fmt_vd_vs2_vs1             "O\tD,F,E"
+> +#define rv_fmt_vd_vs2_vs1_vl          "O\tD,F,El"
+> +#define rv_fmt_vd_vs2_vs1_vm          "O\tD,F,Em"
+> +#define rv_fmt_vd_vs2_rs1_vl          "O\tD,F,1l"
+> +#define rv_fmt_vd_vs2_fs1_vl          "O\tD,F,4l"
+> +#define rv_fmt_vd_vs2_rs1_vm          "O\tD,F,1m"
+> +#define rv_fmt_vd_vs2_fs1_vm          "O\tD,F,4m"
+> +#define rv_fmt_vd_vs2_imm_vl          "O\tD,F,il"
+> +#define rv_fmt_vd_vs2_imm_vm          "O\tD,F,im"
+> +#define rv_fmt_vd_vs2_uimm_vm         "O\tD,F,um"
+> +#define rv_fmt_vd_vs1_vs2_vm          "O\tD,E,Fm"
+> +#define rv_fmt_vd_rs1_vs2_vm          "O\tD,1,Fm"
+> +#define rv_fmt_vd_fs1_vs2_vm          "O\tD,4,Fm"
+> +#define rv_fmt_vd_vs1                 "O\tD,E"
+> +#define rv_fmt_vd_rs1                 "O\tD,1"
+> +#define rv_fmt_vd_fs1                 "O\tD,4"
+> +#define rv_fmt_vd_imm                 "O\tD,i"
+> +#define rv_fmt_vd_vs2                 "O\tD,F"
+> +#define rv_fmt_vd_vs2_vm              "O\tD,Fm"
+> +#define rv_fmt_rd_vs2_vm              "O\t0,Fm"
+> +#define rv_fmt_rd_vs2                 "O\t0,F"
+> +#define rv_fmt_fd_vs2                 "O\t3,F"
+> +#define rv_fmt_vd_vm                  "O\tDm"
+> +#define rv_fmt_vsetvli                "O\t0,1,v"
+> +#define rv_fmt_vsetivli               "O\t0,u,v"
+>
+>  /* pseudo-instruction constraints */
+>
+> @@ -1283,7 +1695,377 @@ const rv_opcode_data opcode_data[] = {
+>      { "unzip", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+>      { "zip", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+>      { "xperm4", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+> -    { "xperm8", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 }
+> +    { "xperm8", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+> +    { "vle8.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vle8_v, rv_op_vle8_v, 0 },
+> +    { "vle16.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vle16_v, rv_op_vle16_v, 0 },
+> +    { "vle32.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vle32_v, rv_op_vle32_v, 0 },
+> +    { "vle64.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vle64_v, rv_op_vle64_v, 0 },
+> +    { "vse8.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vse8_v, rv_op_vse8_v, 0 },
+> +    { "vse16.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vse16_v, rv_op_vse16_v, 0 },
+> +    { "vse32.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vse32_v, rv_op_vse32_v, 0 },
+> +    { "vse64.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vse64_v, rv_op_vse64_v, 0 },
+> +    { "vlm.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vlm_v, rv_op_vlm_v, 0 },
+> +    { "vsm.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vsm_v, rv_op_vsm_v, 0 },
+> +    { "vlse8.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_rs2_vm, NULL, rv_op_vlse8_v, rv_op_vlse8_v, 0 },
+> +    { "vlse16.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_rs2_vm, NULL, rv_op_vlse16_v, rv_op_vlse16_v, 0 },
+> +    { "vlse32.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_rs2_vm, NULL, rv_op_vlse32_v, rv_op_vlse32_v, 0 },
+> +    { "vlse64.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_rs2_vm, NULL, rv_op_vlse64_v, rv_op_vlse64_v, 0 },
+> +    { "vsse8.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_rs2_vm, NULL, rv_op_vsse8_v, rv_op_vsse8_v, 0 },
+> +    { "vsse16.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_rs2_vm, NULL, rv_op_vsse16_v, rv_op_vsse16_v, 0 },
+> +    { "vsse32.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_rs2_vm, NULL, rv_op_vsse32_v, rv_op_vsse32_v, 0 },
+> +    { "vsse64.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_rs2_vm, NULL, rv_op_vsse64_v, rv_op_vsse64_v, 0 },
+> +    { "vluxei8.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vluxei8_v, rv_op_vluxei8_v, 0 },
+> +    { "vluxei16.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vluxei16_v, rv_op_vluxei16_v, 0 },
+> +    { "vluxei32.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vluxei32_v, rv_op_vluxei32_v, 0 },
+> +    { "vluxei64.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vluxei64_v, rv_op_vluxei64_v, 0 },
+> +    { "vloxei8.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vloxei8_v, rv_op_vloxei8_v, 0 },
+> +    { "vloxei16.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vloxei16_v, rv_op_vloxei16_v, 0 },
+> +    { "vloxei32.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vloxei32_v, rv_op_vloxei32_v, 0 },
+> +    { "vloxei64.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vloxei64_v, rv_op_vloxei64_v, 0 },
+> +    { "vsuxei8.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vsuxei8_v, rv_op_vsuxei8_v, 0 },
+> +    { "vsuxei16.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vsuxei16_v, rv_op_vsuxei16_v, 0 },
+> +    { "vsuxei32.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vsuxei32_v, rv_op_vsuxei32_v, 0 },
+> +    { "vsuxei64.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vsuxei64_v, rv_op_vsuxei64_v, 0 },
+> +    { "vsoxei8.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vsoxei8_v, rv_op_vsoxei8_v, 0 },
+> +    { "vsoxei16.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vsoxei16_v, rv_op_vsoxei16_v, 0 },
+> +    { "vsoxei32.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vsoxei32_v, rv_op_vsoxei32_v, 0 },
+> +    { "vsoxei64.v", rv_codec_v_r, rv_fmt_ldst_vd_rs1_vs2_vm, NULL, rv_op_vsoxei64_v, rv_op_vsoxei64_v, 0 },
+> +    { "vle8ff.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vle8ff_v, rv_op_vle8ff_v, 0 },
+> +    { "vle16ff.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vle16ff_v, rv_op_vle16ff_v, 0 },
+> +    { "vle32ff.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vle32ff_v, rv_op_vle32ff_v, 0 },
+> +    { "vle64ff.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vle64ff_v, rv_op_vle64ff_v, 0 },
+> +    { "vl1re8.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl1re8_v, rv_op_vl1re8_v, 0 },
+> +    { "vl1re16.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl1re16_v, rv_op_vl1re16_v, 0 },
+> +    { "vl1re32.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl1re32_v, rv_op_vl1re32_v, 0 },
+> +    { "vl1re64.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl1re64_v, rv_op_vl1re64_v, 0 },
+> +    { "vl2re8.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl2re8_v, rv_op_vl2re8_v, 0 },
+> +    { "vl2re16.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl2re16_v, rv_op_vl2re16_v, 0 },
+> +    { "vl2re32.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl2re32_v, rv_op_vl2re32_v, 0 },
+> +    { "vl2re64.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl2re64_v, rv_op_vl2re64_v, 0 },
+> +    { "vl4re8.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl4re8_v, rv_op_vl4re8_v, 0 },
+> +    { "vl4re16.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl4re16_v, rv_op_vl4re16_v, 0 },
+> +    { "vl4re32.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl4re32_v, rv_op_vl4re32_v, 0 },
+> +    { "vl4re64.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl4re64_v, rv_op_vl4re64_v, 0 },
+> +    { "vl8re8.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl8re8_v, rv_op_vl8re8_v, 0 },
+> +    { "vl8re16.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl8re16_v, rv_op_vl8re16_v, 0 },
+> +    { "vl8re32.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl8re32_v, rv_op_vl8re32_v, 0 },
+> +    { "vl8re64.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vl8re64_v, rv_op_vl8re64_v, 0 },
+> +    { "vs1r.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vs1r_v, rv_op_vs1r_v, 0 },
+> +    { "vs2r.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vs2r_v, rv_op_vs2r_v, 0 },
+> +    { "vs4r.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vs4r_v, rv_op_vs4r_v, 0 },
+> +    { "vs8r.v", rv_codec_v_ldst, rv_fmt_ldst_vd_rs1_vm, NULL, rv_op_vs8r_v, rv_op_vs8r_v, 0 },
+> +    { "vadd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vadd_vv, rv_op_vadd_vv, 0 },
+> +    { "vadd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vadd_vx, rv_op_vadd_vx, 0 },
+> +    { "vadd.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vadd_vi, rv_op_vadd_vi, 0 },
+> +    { "vsub.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vsub_vv, rv_op_vsub_vv, 0 },
+> +    { "vsub.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vsub_vx, rv_op_vsub_vx, 0 },
+> +    { "vrsub.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vrsub_vx, rv_op_vrsub_vx, 0 },
+> +    { "vrsub.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vrsub_vi, rv_op_vrsub_vi, 0 },
+> +    { "vwaddu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwaddu_vv, rv_op_vwaddu_vv, 0 },
+> +    { "vwaddu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vwaddu_vx, rv_op_vwaddu_vx, 0 },
+> +    { "vwadd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwadd_vv, rv_op_vwadd_vv, 0 },
+> +    { "vwadd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vwadd_vx, rv_op_vwadd_vx, 0 },
+> +    { "vwsubu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwsubu_vv, rv_op_vwsubu_vv, 0 },
+> +    { "vwsubu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vwsubu_vx, rv_op_vwsubu_vx, 0 },
+> +    { "vwsub.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwsub_vv, rv_op_vwsub_vv, 0 },
+> +    { "vwsub.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vwsub_vx, rv_op_vwsub_vx, 0 },
+> +    { "vwaddu.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwaddu_wv, rv_op_vwaddu_wv, 0 },
+> +    { "vwaddu.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vwaddu_wx, rv_op_vwaddu_wx, 0 },
+> +    { "vwadd.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwadd_wv, rv_op_vwadd_wv, 0 },
+> +    { "vwadd.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vwadd_wx, rv_op_vwadd_wx, 0 },
+> +    { "vwsubu.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwsubu_wv, rv_op_vwsubu_wv, 0 },
+> +    { "vwsubu.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vwsubu_wx, rv_op_vwsubu_wx, 0 },
+> +    { "vwsub.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwsub_wv, rv_op_vwsub_wv, 0 },
+> +    { "vwsub.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vwsub_wx, rv_op_vwsub_wx, 0 },
+> +    { "vadc.vvm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vl, NULL, rv_op_vadc_vvm, rv_op_vadc_vvm, 0 },
+> +    { "vadc.vxm", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vl, NULL, rv_op_vadc_vxm, rv_op_vadc_vxm, 0 },
+> +    { "vadc.vim", rv_codec_v_i, rv_fmt_vd_vs2_imm_vl, NULL, rv_op_vadc_vim, rv_op_vadc_vim, 0 },
+> +    { "vmadc.vvm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vl, NULL, rv_op_vmadc_vvm, rv_op_vmadc_vvm, 0 },
+> +    { "vmadc.vxm", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vl, NULL, rv_op_vmadc_vxm, rv_op_vmadc_vxm, 0 },
+> +    { "vmadc.vim", rv_codec_v_i, rv_fmt_vd_vs2_imm_vl, NULL, rv_op_vmadc_vim, rv_op_vmadc_vim, 0 },
+> +    { "vsbc.vvm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vl, NULL, rv_op_vsbc_vvm, rv_op_vsbc_vvm, 0 },
+> +    { "vsbc.vxm", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vl, NULL, rv_op_vsbc_vxm, rv_op_vsbc_vxm, 0 },
+> +    { "vmsbc.vvm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vl, NULL, rv_op_vmsbc_vvm, rv_op_vmsbc_vvm, 0 },
+> +    { "vmsbc.vxm", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vl, NULL, rv_op_vmsbc_vxm, rv_op_vmsbc_vxm, 0 },
+> +    { "vand.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vand_vv, rv_op_vand_vv, 0 },
+> +    { "vand.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vand_vx, rv_op_vand_vx, 0 },
+> +    { "vand.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vand_vi, rv_op_vand_vi, 0 },
+> +    { "vor.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vor_vv, rv_op_vor_vv, 0 },
+> +    { "vor.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vor_vx, rv_op_vor_vx, 0 },
+> +    { "vor.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vor_vi, rv_op_vor_vi, 0 },
+> +    { "vxor.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vxor_vv, rv_op_vxor_vv, 0 },
+> +    { "vxor.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vxor_vx, rv_op_vxor_vx, 0 },
+> +    { "vxor.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vxor_vi, rv_op_vxor_vi, 0 },
+> +    { "vsll.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vsll_vv, rv_op_vsll_vv, 0 },
+> +    { "vsll.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vsll_vx, rv_op_vsll_vx, 0 },
+> +    { "vsll.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, rv_op_vsll_vi, rv_op_vsll_vi, 0 },
+> +    { "vsrl.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vsrl_vv, rv_op_vsrl_vv, 0 },
+> +    { "vsrl.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vsrl_vx, rv_op_vsrl_vx, 0 },
+> +    { "vsrl.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, rv_op_vsrl_vi, rv_op_vsrl_vi, 0 },
+> +    { "vsra.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vsra_vv, rv_op_vsra_vv, 0 },
+> +    { "vsra.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vsra_vx, rv_op_vsra_vx, 0 },
+> +    { "vsra.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, rv_op_vsra_vi, rv_op_vsra_vi, 0 },
+> +    { "vnsrl.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vnsrl_wv, rv_op_vnsrl_wv, 0 },
+> +    { "vnsrl.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vnsrl_wx, rv_op_vnsrl_wx, 0 },
+> +    { "vnsrl.wi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, rv_op_vnsrl_wi, rv_op_vnsrl_wi, 0 },
+> +    { "vnsra.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vnsra_wv, rv_op_vnsra_wv, 0 },
+> +    { "vnsra.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vnsra_wx, rv_op_vnsra_wx, 0 },
+> +    { "vnsra.wi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, rv_op_vnsra_wi, rv_op_vnsra_wi, 0 },
+> +    { "vmseq.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmseq_vv, rv_op_vmseq_vv, 0 },
+> +    { "vmseq.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmseq_vx, rv_op_vmseq_vx, 0 },
+> +    { "vmseq.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vmseq_vi, rv_op_vmseq_vi, 0 },
+> +    { "vmsne.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmsne_vv, rv_op_vmsne_vv, 0 },
+> +    { "vmsne.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmsne_vx, rv_op_vmsne_vx, 0 },
+> +    { "vmsne.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vmsne_vi, rv_op_vmsne_vi, 0 },
+> +    { "vmsltu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmsltu_vv, rv_op_vmsltu_vv, 0 },
+> +    { "vmsltu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmsltu_vx, rv_op_vmsltu_vx, 0 },
+> +    { "vmslt.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmslt_vv, rv_op_vmslt_vv, 0 },
+> +    { "vmslt.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmslt_vx, rv_op_vmslt_vx, 0 },
+> +    { "vmsleu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmsleu_vv, rv_op_vmsleu_vv, 0 },
+> +    { "vmsleu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmsleu_vx, rv_op_vmsleu_vx, 0 },
+> +    { "vmsleu.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vmsleu_vi, rv_op_vmsleu_vi, 0 },
+> +    { "vmsle.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmsle_vv, rv_op_vmsle_vv, 0 },
+> +    { "vmsle.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmsle_vx, rv_op_vmsle_vx, 0 },
+> +    { "vmsle.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vmsle_vi, rv_op_vmsle_vi, 0 },
+> +    { "vmsgtu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmsgtu_vx, rv_op_vmsgtu_vx, 0 },
+> +    { "vmsgtu.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vmsgtu_vi, rv_op_vmsgtu_vi, 0 },
+> +    { "vmsgt.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmsgt_vx, rv_op_vmsgt_vx, 0 },
+> +    { "vmsgt.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vmsgt_vi, rv_op_vmsgt_vi, 0 },
+> +    { "vminu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vminu_vv, rv_op_vminu_vv, 0 },
+> +    { "vminu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vminu_vx, rv_op_vminu_vx, 0 },
+> +    { "vmin.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmin_vv, rv_op_vmin_vv, 0 },
+> +    { "vmin.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmin_vx, rv_op_vmin_vx, 0 },
+> +    { "vmaxu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmaxu_vv, rv_op_vmaxu_vv, 0 },
+> +    { "vmaxu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmaxu_vx, rv_op_vmaxu_vx, 0 },
+> +    { "vmax.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmax_vv, rv_op_vmax_vv, 0 },
+> +    { "vmax.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmax_vx, rv_op_vmax_vx, 0 },
+> +    { "vmul.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmul_vv, rv_op_vmul_vv, 0 },
+> +    { "vmul.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmul_vx, rv_op_vmul_vx, 0 },
+> +    { "vmulh.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmulh_vv, rv_op_vmulh_vv, 0 },
+> +    { "vmulh.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmulh_vx, rv_op_vmulh_vx, 0 },
+> +    { "vmulhu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmulhu_vv, rv_op_vmulhu_vv, 0 },
+> +    { "vmulhu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmulhu_vx, rv_op_vmulhu_vx, 0 },
+> +    { "vmulhsu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmulhsu_vv, rv_op_vmulhsu_vv, 0 },
+> +    { "vmulhsu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vmulhsu_vx, rv_op_vmulhsu_vx, 0 },
+> +    { "vdivu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vdivu_vv, rv_op_vdivu_vv, 0 },
+> +    { "vdivu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vdivu_vx, rv_op_vdivu_vx, 0 },
+> +    { "vdiv.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vdiv_vv, rv_op_vdiv_vv, 0 },
+> +    { "vdiv.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vdiv_vx, rv_op_vdiv_vx, 0 },
+> +    { "vremu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vremu_vv, rv_op_vremu_vv, 0 },
+> +    { "vremu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vremu_vx, rv_op_vremu_vx, 0 },
+> +    { "vrem.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vrem_vv, rv_op_vrem_vv, 0 },
+> +    { "vrem.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vrem_vx, rv_op_vrem_vx, 0 },
+> +    { "vwmulu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwmulu_vv, rv_op_vwmulu_vv, 0 },
+> +    { "vwmulu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vwmulu_vx, rv_op_vwmulu_vx, 0 },
+> +    { "vwmulsu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwmulsu_vv, rv_op_vwmulsu_vv, 0 },
+> +    { "vwmulsu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vwmulsu_vx, rv_op_vwmulsu_vx, 0 },
+> +    { "vwmul.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwmul_vv, rv_op_vwmul_vv, 0 },
+> +    { "vwmul.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vwmul_vx, rv_op_vwmul_vx, 0 },
+> +    { "vmacc.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vmacc_vv, rv_op_vmacc_vv, 0 },
+> +    { "vmacc.vx", rv_codec_v_r, rv_fmt_vd_rs1_vs2_vm, NULL, rv_op_vmacc_vx, rv_op_vmacc_vx, 0 },
+> +    { "vnmsac.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vnmsac_vv, rv_op_vnmsac_vv, 0 },
+> +    { "vnmsac.vx", rv_codec_v_r, rv_fmt_vd_rs1_vs2_vm, NULL, rv_op_vnmsac_vx, rv_op_vnmsac_vx, 0 },
+> +    { "vmadd.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vmadd_vv, rv_op_vmadd_vv, 0 },
+> +    { "vmadd.vx", rv_codec_v_r, rv_fmt_vd_rs1_vs2_vm, NULL, rv_op_vmadd_vx, rv_op_vmadd_vx, 0 },
+> +    { "vnmsub.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vnmsub_vv, rv_op_vnmsub_vv, 0 },
+> +    { "vnmsub.vx", rv_codec_v_r, rv_fmt_vd_rs1_vs2_vm, NULL, rv_op_vnmsub_vx, rv_op_vnmsub_vx, 0 },
+> +    { "vwmaccu.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vwmaccu_vv, rv_op_vwmaccu_vv, 0 },
+> +    { "vwmaccu.vx", rv_codec_v_r, rv_fmt_vd_rs1_vs2_vm, NULL, rv_op_vwmaccu_vx, rv_op_vwmaccu_vx, 0 },
+> +    { "vwmacc.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vwmacc_vv, rv_op_vwmacc_vv, 0 },
+> +    { "vwmacc.vx", rv_codec_v_r, rv_fmt_vd_rs1_vs2_vm, NULL, rv_op_vwmacc_vx, rv_op_vwmacc_vx, 0 },
+> +    { "vwmaccsu.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vwmaccsu_vv, rv_op_vwmaccsu_vv, 0 },
+> +    { "vwmaccsu.vx", rv_codec_v_r, rv_fmt_vd_rs1_vs2_vm, NULL, rv_op_vwmaccsu_vx, rv_op_vwmaccsu_vx, 0 },
+> +    { "vwmaccus.vx", rv_codec_v_r, rv_fmt_vd_rs1_vs2_vm, NULL, rv_op_vwmaccus_vx, rv_op_vwmaccus_vx, 0 },
+> +    { "vmv.v.v", rv_codec_v_r, rv_fmt_vd_vs1, NULL, rv_op_vmv_v_v, rv_op_vmv_v_v, 0 },
+> +    { "vmv.v.x", rv_codec_v_r, rv_fmt_vd_rs1, NULL, rv_op_vmv_v_x, rv_op_vmv_v_x, 0 },
+> +    { "vmv.v.i", rv_codec_v_i, rv_fmt_vd_imm, NULL, rv_op_vmv_v_i, rv_op_vmv_v_i, 0 },
+> +    { "vmerge.vvm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vl, NULL, rv_op_vmerge_vvm, rv_op_vmerge_vvm, 0 },
+> +    { "vmerge.vxm", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vl, NULL, rv_op_vmerge_vxm, rv_op_vmerge_vxm, 0 },
+> +    { "vmerge.vim", rv_codec_v_i, rv_fmt_vd_vs2_imm_vl, NULL, rv_op_vmerge_vim, rv_op_vmerge_vim, 0 },
+> +    { "vsaddu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vsaddu_vv, rv_op_vsaddu_vv, 0 },
+> +    { "vsaddu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vsaddu_vx, rv_op_vsaddu_vx, 0 },
+> +    { "vsaddu.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vsaddu_vi, rv_op_vsaddu_vi, 0 },
+> +    { "vsadd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vsadd_vv, rv_op_vsadd_vv, 0 },
+> +    { "vsadd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vsadd_vx, rv_op_vsadd_vx, 0 },
+> +    { "vsadd.vi", rv_codec_v_i, rv_fmt_vd_vs2_imm_vm, NULL, rv_op_vsadd_vi, rv_op_vsadd_vi, 0 },
+> +    { "vssubu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vssubu_vv, rv_op_vssubu_vv, 0 },
+> +    { "vssubu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vssubu_vx, rv_op_vssubu_vx, 0 },
+> +    { "vssub.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vssub_vv, rv_op_vssub_vv, 0 },
+> +    { "vssub.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vssub_vx, rv_op_vssub_vx, 0 },
+> +    { "vaadd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vaadd_vv, rv_op_vaadd_vv, 0 },
+> +    { "vaadd.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vaadd_vx, rv_op_vaadd_vx, 0 },
+> +    { "vaaddu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vaaddu_vv, rv_op_vaaddu_vv, 0 },
+> +    { "vaaddu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vaaddu_vx, rv_op_vaaddu_vx, 0 },
+> +    { "vasub.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vasub_vv, rv_op_vasub_vv, 0 },
+> +    { "vasub.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vasub_vx, rv_op_vasub_vx, 0 },
+> +    { "vasubu.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vasubu_vv, rv_op_vasubu_vv, 0 },
+> +    { "vasubu.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vasubu_vx, rv_op_vasubu_vx, 0 },
+> +    { "vsmul.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vsmul_vv, rv_op_vsmul_vv, 0 },
+> +    { "vsmul.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vsmul_vx, rv_op_vsmul_vx, 0 },
+> +    { "vssrl.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vssrl_vv, rv_op_vssrl_vv, 0 },
+> +    { "vssrl.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vssrl_vx, rv_op_vssrl_vx, 0 },
+> +    { "vssrl.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, rv_op_vssrl_vi, rv_op_vssrl_vi, 0 },
+> +    { "vssra.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vssra_vv, rv_op_vssra_vv, 0 },
+> +    { "vssra.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vssra_vx, rv_op_vssra_vx, 0 },
+> +    { "vssra.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, rv_op_vssra_vi, rv_op_vssra_vi, 0 },
+> +    { "vnclipu.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vnclipu_wv, rv_op_vnclipu_wv, 0 },
+> +    { "vnclipu.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vnclipu_wx, rv_op_vnclipu_wx, 0 },
+> +    { "vnclipu.wi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, rv_op_vnclipu_wi, rv_op_vnclipu_wi, 0 },
+> +    { "vnclip.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vnclip_wv, rv_op_vnclip_wv, 0 },
+> +    { "vnclip.wx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vnclip_wx, rv_op_vnclip_wx, 0 },
+> +    { "vnclip.wi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, rv_op_vnclip_wi, rv_op_vnclip_wi, 0 },
+> +    { "vfadd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfadd_vv, rv_op_vfadd_vv, 0 },
+> +    { "vfadd.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfadd_vf, rv_op_vfadd_vf, 0 },
+> +    { "vfsub.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfsub_vv, rv_op_vfsub_vv, 0 },
+> +    { "vfsub.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfsub_vf, rv_op_vfsub_vf, 0 },
+> +    { "vfrsub.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfrsub_vf, rv_op_vfrsub_vf, 0 },
+> +    { "vfwadd.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfwadd_vv, rv_op_vfwadd_vv, 0 },
+> +    { "vfwadd.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfwadd_vf, rv_op_vfwadd_vf, 0 },
+> +    { "vfwadd.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfwadd_wv, rv_op_vfwadd_wv, 0 },
+> +    { "vfwadd.wf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfwadd_wf, rv_op_vfwadd_wf, 0 },
+> +    { "vfwsub.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfwsub_vv, rv_op_vfwsub_vv, 0 },
+> +    { "vfwsub.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfwsub_vf, rv_op_vfwsub_vf, 0 },
+> +    { "vfwsub.wv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfwsub_wv, rv_op_vfwsub_wv, 0 },
+> +    { "vfwsub.wf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfwsub_wf, rv_op_vfwsub_wf, 0 },
+> +    { "vfmul.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfmul_vv, rv_op_vfmul_vv, 0 },
+> +    { "vfmul.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfmul_vf, rv_op_vfmul_vf, 0 },
+> +    { "vfdiv.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfdiv_vv, rv_op_vfdiv_vv, 0 },
+> +    { "vfdiv.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfdiv_vf, rv_op_vfdiv_vf, 0 },
+> +    { "vfrdiv.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfrdiv_vf, rv_op_vfrdiv_vf, 0 },
+> +    { "vfwmul.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfwmul_vv, rv_op_vfwmul_vv, 0 },
+> +    { "vfwmul.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfwmul_vf, rv_op_vfwmul_vf, 0 },
+> +    { "vfmacc.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vfmacc_vv, rv_op_vfmacc_vv, 0 },
+> +    { "vfmacc.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, rv_op_vfmacc_vf, rv_op_vfmacc_vf, 0 },
+> +    { "vfnmacc.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vfnmacc_vv, rv_op_vfnmacc_vv, 0 },
+> +    { "vfnmacc.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, rv_op_vfnmacc_vf, rv_op_vfnmacc_vf, 0 },
+> +    { "vfmsac.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vfmsac_vv, rv_op_vfmsac_vv, 0 },
+> +    { "vfmsac.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, rv_op_vfmsac_vf, rv_op_vfmsac_vf, 0 },
+> +    { "vfnmsac.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vfnmsac_vv, rv_op_vfnmsac_vv, 0 },
+> +    { "vfnmsac.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, rv_op_vfnmsac_vf, rv_op_vfnmsac_vf, 0 },
+> +    { "vfmadd.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vfmadd_vv, rv_op_vfmadd_vv, 0 },
+> +    { "vfmadd.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, rv_op_vfmadd_vf, rv_op_vfmadd_vf, 0 },
+> +    { "vfnmadd.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vfnmadd_vv, rv_op_vfnmadd_vv, 0 },
+> +    { "vfnmadd.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, rv_op_vfnmadd_vf, rv_op_vfnmadd_vf, 0 },
+> +    { "vfmsub.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vfmsub_vv, rv_op_vfmsub_vv, 0 },
+> +    { "vfmsub.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, rv_op_vfmsub_vf, rv_op_vfmsub_vf, 0 },
+> +    { "vfnmsub.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vfnmsub_vv, rv_op_vfnmsub_vv, 0 },
+> +    { "vfnmsub.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, rv_op_vfnmsub_vf, rv_op_vfnmsub_vf, 0 },
+> +    { "vfwmacc.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vfwmacc_vv, rv_op_vfwmacc_vv, 0 },
+> +    { "vfwmacc.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, rv_op_vfwmacc_vf, rv_op_vfwmacc_vf, 0 },
+> +    { "vfwnmacc.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vfwnmacc_vv, rv_op_vfwnmacc_vv, 0 },
+> +    { "vfwnmacc.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, rv_op_vfwnmacc_vf, rv_op_vfwnmacc_vf, 0 },
+> +    { "vfwmsac.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vfwmsac_vv, rv_op_vfwmsac_vv, 0 },
+> +    { "vfwmsac.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, rv_op_vfwmsac_vf, rv_op_vfwmsac_vf, 0 },
+> +    { "vfwnmsac.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm, NULL, rv_op_vfwnmsac_vv, rv_op_vfwnmsac_vv, 0 },
+> +    { "vfwnmsac.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm, NULL, rv_op_vfwnmsac_vf, rv_op_vfwnmsac_vf, 0 },
+> +    { "vfsqrt.v", rv_codec_v_r, rv_fmt_vd_vs2, NULL, rv_op_vfsqrt_v, rv_op_vfsqrt_v, 0 },
+> +    { "vfrsqrt7.v", rv_codec_v_r, rv_fmt_vd_vs2, NULL, rv_op_vfrsqrt7_v, rv_op_vfrsqrt7_v, 0 },
+> +    { "vfrec7.v", rv_codec_v_r, rv_fmt_vd_vs2, NULL, rv_op_vfrec7_v, rv_op_vfrec7_v, 0 },
+> +    { "vfmin.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfmin_vv, rv_op_vfmin_vv, 0 },
+> +    { "vfmin.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfmin_vf, rv_op_vfmin_vf, 0 },
+> +    { "vfmax.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfmax_vv, rv_op_vfmax_vv, 0 },
+> +    { "vfmax.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfmax_vf, rv_op_vfmax_vf, 0 },
+> +    { "vfsgnj.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfsgnj_vv, rv_op_vfsgnj_vv, 0 },
+> +    { "vfsgnj.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfsgnj_vf, rv_op_vfsgnj_vf, 0 },
+> +    { "vfsgnjn.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfsgnjn_vv, rv_op_vfsgnjn_vv, 0 },
+> +    { "vfsgnjn.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfsgnjn_vf, rv_op_vfsgnjn_vf, 0 },
+> +    { "vfsgnjx.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfsgnjx_vv, rv_op_vfsgnjx_vv, 0 },
+> +    { "vfsgnjx.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfsgnjx_vf, rv_op_vfsgnjx_vf, 0 },
+> +    { "vfslide1up.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfslide1up_vf, rv_op_vfslide1up_vf, 0 },
+> +    { "vfslide1down.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vfslide1down_vf, rv_op_vfslide1down_vf, 0 },
+> +    { "vmfeq.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmfeq_vv, rv_op_vmfeq_vv, 0 },
+> +    { "vmfeq.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vmfeq_vf, rv_op_vmfeq_vf, 0 },
+> +    { "vmfne.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmfne_vv, rv_op_vmfne_vv, 0 },
+> +    { "vmfne.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vmfne_vf, rv_op_vmfne_vf, 0 },
+> +    { "vmflt.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmflt_vv, rv_op_vmflt_vv, 0 },
+> +    { "vmflt.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vmflt_vf, rv_op_vmflt_vf, 0 },
+> +    { "vmfle.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmfle_vv, rv_op_vmfle_vv, 0 },
+> +    { "vmfle.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vmfle_vf, rv_op_vmfle_vf, 0 },
+> +    { "vmfgt.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vmfgt_vf, rv_op_vmfgt_vf, 0 },
+> +    { "vmfge.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm, NULL, rv_op_vmfge_vf, rv_op_vmfge_vf, 0 },
+> +    { "vfclass.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfclass_v, rv_op_vfclass_v, 0 },
+> +    { "vfmerge.vfm", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vl, NULL, rv_op_vfmerge_vfm, rv_op_vfmerge_vfm, 0 },
+> +    { "vfmv.v.f", rv_codec_v_r, rv_fmt_vd_fs1, NULL, rv_op_vfmv_v_f, rv_op_vfmv_v_f, 0 },
+> +    { "vfcvt.xu.f.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfcvt_xu_f_v, rv_op_vfcvt_xu_f_v, 0 },
+> +    { "vfcvt.x.f.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfcvt_x_f_v, rv_op_vfcvt_x_f_v, 0 },
+> +    { "vfcvt.f.xu.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfcvt_f_xu_v, rv_op_vfcvt_f_xu_v, 0 },
+> +    { "vfcvt.f.x.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfcvt_f_x_v, rv_op_vfcvt_f_x_v, 0 },
+> +    { "vfcvt.rtz.xu.f.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfcvt_rtz_xu_f_v, rv_op_vfcvt_rtz_xu_f_v, 0 },
+> +    { "vfcvt.rtz.x.f.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfcvt_rtz_x_f_v, rv_op_vfcvt_rtz_x_f_v, 0 },
+> +    { "vfwcvt.xu.f.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfwcvt_xu_f_v, rv_op_vfwcvt_xu_f_v, 0 },
+> +    { "vfwcvt.x.f.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfwcvt_x_f_v, rv_op_vfwcvt_x_f_v, 0 },
+> +    { "vfwcvt.f.xu.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfwcvt_f_xu_v, rv_op_vfwcvt_f_xu_v, 0 },
+> +    { "vfwcvt.f.x.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfwcvt_f_x_v, rv_op_vfwcvt_f_x_v, 0 },
+> +    { "vfwcvt.f.f.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfwcvt_f_f_v, rv_op_vfwcvt_f_f_v, 0 },
+> +    { "vfwcvt.rtz.xu.f.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfwcvt_rtz_xu_f_v, rv_op_vfwcvt_rtz_xu_f_v, 0 },
+> +    { "vfwcvt.rtz.x.f.v", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfwcvt_rtz_x_f_v, rv_op_vfwcvt_rtz_x_f_v, 0 },
+> +    { "vfncvt.xu.f.w", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfncvt_xu_f_w, rv_op_vfncvt_xu_f_w, 0 },
+> +    { "vfncvt.x.f.w", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfncvt_x_f_w, rv_op_vfncvt_x_f_w, 0 },
+> +    { "vfncvt.f.xu.w", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfncvt_f_xu_w, rv_op_vfncvt_f_xu_w, 0 },
+> +    { "vfncvt.f.x.w", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfncvt_f_x_w, rv_op_vfncvt_f_x_w, 0 },
+> +    { "vfncvt.f.f.w", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfncvt_f_f_w, rv_op_vfncvt_f_f_w, 0 },
+> +    { "vfncvt.rod.f.f.w", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfncvt_rod_f_f_w, rv_op_vfncvt_rod_f_f_w, 0 },
+> +    { "vfncvt.rtz.xu.f.w", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfncvt_rtz_xu_f_w, rv_op_vfncvt_rtz_xu_f_w, 0 },
+> +    { "vfncvt.rtz.x.f.w", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vfncvt_rtz_x_f_w, rv_op_vfncvt_rtz_x_f_w, 0 },
+> +    { "vredsum.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vredsum_vs, rv_op_vredsum_vs, 0 },
+> +    { "vredand.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vredand_vs, rv_op_vredand_vs, 0 },
+> +    { "vredor.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vredor_vs, rv_op_vredor_vs, 0 },
+> +    { "vredxor.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vredxor_vs, rv_op_vredxor_vs, 0 },
+> +    { "vredminu.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vredminu_vs, rv_op_vredminu_vs, 0 },
+> +    { "vredmin.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vredmin_vs, rv_op_vredmin_vs, 0 },
+> +    { "vredmaxu.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vredmaxu_vs, rv_op_vredmaxu_vs, 0 },
+> +    { "vredmax.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vredmax_vs, rv_op_vredmax_vs, 0 },
+> +    { "vwredsumu.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwredsumu_vs, rv_op_vwredsumu_vs, 0 },
+> +    { "vwredsum.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vwredsum_vs, rv_op_vwredsum_vs, 0 },
+> +    { "vfredusum.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfredusum_vs, rv_op_vfredusum_vs, 0 },
+> +    { "vfredosum.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfredosum_vs, rv_op_vfredosum_vs, 0 },
+> +    { "vfredmin.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfredmin_vs, rv_op_vfredmin_vs, 0 },
+> +    { "vfredmax.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfredmax_vs, rv_op_vfredmax_vs, 0 },
+> +    { "vfwredusum.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfwredusum_vs, rv_op_vfwredusum_vs, 0 },
+> +    { "vfwredosum.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vfwredosum_vs, rv_op_vfwredosum_vs, 0 },
+> +    { "vmand.mm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmand_mm, rv_op_vmand_mm, 0 },
+> +    { "vmnand.mm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmnand_mm, rv_op_vmnand_mm, 0 },
+> +    { "vmandn.mm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmandn_mm, rv_op_vmandn_mm, 0 },
+> +    { "vmxor.mm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmxor_mm, rv_op_vmxor_mm, 0 },
+> +    { "vmor.mm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmor_mm, rv_op_vmor_mm, 0 },
+> +    { "vmnor.mm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmnor_mm, rv_op_vmnor_mm, 0 },
+> +    { "vmorn.mm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmorn_mm, rv_op_vmorn_mm, 0 },
+> +    { "vmxnor.mm", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vmxnor_mm, rv_op_vmxnor_mm, 0 },
+> +    { "vcpop.m", rv_codec_v_r, rv_fmt_rd_vs2_vm, NULL, rv_op_vcpop_m, rv_op_vcpop_m, 0 },
+> +    { "vfirst.m", rv_codec_v_r, rv_fmt_rd_vs2_vm, NULL, rv_op_vfirst_m, rv_op_vfirst_m, 0 },
+> +    { "vmsbf.m", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vmsbf_m, rv_op_vmsbf_m, 0 },
+> +    { "vmsif.m", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vmsif_m, rv_op_vmsif_m, 0 },
+> +    { "vmsof.m", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vmsof_m, rv_op_vmsof_m, 0 },
+> +    { "viota.m", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_viota_m, rv_op_viota_m, 0 },
+> +    { "vid.v", rv_codec_v_r, rv_fmt_vd_vm, NULL, rv_op_vid_v, rv_op_vid_v, 0 },
+> +    { "vmv.x.s", rv_codec_v_r, rv_fmt_rd_vs2, NULL, rv_op_vmv_x_s, rv_op_vmv_x_s, 0 },
+> +    { "vmv.s.x", rv_codec_v_r, rv_fmt_vd_rs1, NULL, rv_op_vmv_s_x, rv_op_vmv_s_x, 0 },
+> +    { "vfmv.f.s", rv_codec_v_r, rv_fmt_fd_vs2, NULL, rv_op_vfmv_f_s, rv_op_vfmv_f_s, 0 },
+> +    { "vfmv.s.f", rv_codec_v_r, rv_fmt_vd_fs1, NULL, rv_op_vfmv_s_f, rv_op_vfmv_s_f, 0 },
+> +    { "vslideup.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vslideup_vx, rv_op_vslideup_vx, 0 },
+> +    { "vslideup.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, rv_op_vslideup_vi, rv_op_vslideup_vi, 0 },
+> +    { "vslide1up.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vslide1up_vx, rv_op_vslide1up_vx, 0 },
+> +    { "vslidedown.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vslidedown_vx, rv_op_vslidedown_vx, 0 },
+> +    { "vslidedown.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, rv_op_vslidedown_vi, rv_op_vslidedown_vi, 0 },
+> +    { "vslide1down.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vslide1down_vx, rv_op_vslide1down_vx, 0 },
+> +    { "vrgather.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vrgather_vv, rv_op_vrgather_vv, 0 },
+> +    { "vrgatherei16.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm, NULL, rv_op_vrgatherei16_vv, rv_op_vrgatherei16_vv, 0 },
+> +    { "vrgather.vx", rv_codec_v_r, rv_fmt_vd_vs2_rs1_vm, NULL, rv_op_vrgather_vx, rv_op_vrgather_vx, 0 },
+> +    { "vrgather.vi", rv_codec_v_i, rv_fmt_vd_vs2_uimm_vm, NULL, rv_op_vrgather_vi, rv_op_vrgather_vi, 0 },
+> +    { "vcompress.vm", rv_codec_v_r, rv_fmt_vd_vs2_vs1, NULL, rv_op_vcompress_vm, rv_op_vcompress_vm, 0 },
+> +    { "vmv1r.v", rv_codec_v_r, rv_fmt_vd_vs2, NULL, rv_op_vmv1r_v, rv_op_vmv1r_v, 0 },
+> +    { "vmv2r.v", rv_codec_v_r, rv_fmt_vd_vs2, NULL, rv_op_vmv2r_v, rv_op_vmv2r_v, 0 },
+> +    { "vmv4r.v", rv_codec_v_r, rv_fmt_vd_vs2, NULL, rv_op_vmv4r_v, rv_op_vmv4r_v, 0 },
+> +    { "vmv8r.v", rv_codec_v_r, rv_fmt_vd_vs2, NULL, rv_op_vmv8r_v, rv_op_vmv8r_v, 0 },
+> +    { "vzext.vf2", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vzext_vf2, rv_op_vzext_vf2, 0 },
+> +    { "vzext.vf4", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vzext_vf4, rv_op_vzext_vf4, 0 },
+> +    { "vzext.vf8", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vzext_vf8, rv_op_vzext_vf8, 0 },
+> +    { "vsext.vf2", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vsext_vf2, rv_op_vsext_vf2, 0 },
+> +    { "vsext.vf4", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vsext_vf4, rv_op_vsext_vf4, 0 },
+> +    { "vsext.vf8", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vsext_vf8, rv_op_vsext_vf8, 0 },
+> +    { "vsetvli", rv_codec_vsetvli, rv_fmt_vsetvli, NULL, rv_op_vsetvli, rv_op_vsetvli, 0 },
+> +    { "vsetivli", rv_codec_vsetivli, rv_fmt_vsetivli, NULL, rv_op_vsetivli, rv_op_vsetivli, 0 },
+> +    { "vsetvl", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, rv_op_vsetvl, rv_op_vsetvl, 0 }
+>  };
+>
+>  /* CSR names */
+> @@ -1297,6 +2079,10 @@ static const char *csr_name(int csrno)
+>      case 0x0003: return "fcsr";
+>      case 0x0004: return "uie";
+>      case 0x0005: return "utvec";
+> +    case 0x0008: return "vstart";
+> +    case 0x0009: return "vxsat";
+> +    case 0x000a: return "vxrm";
+> +    case 0x000f: return "vcsr";
+>      case 0x0015: return "seed";
+>      case 0x0040: return "uscratch";
+>      case 0x0041: return "uepc";
+> @@ -1471,6 +2257,9 @@ static const char *csr_name(int csrno)
+>      case 0x0c00: return "cycle";
+>      case 0x0c01: return "time";
+>      case 0x0c02: return "instret";
+> +    case 0x0c20: return "vl";
+> +    case 0x0c21: return "vtype";
+> +    case 0x0c22: return "vlenb";
+>      case 0x0c80: return "cycleh";
+>      case 0x0c81: return "timeh";
+>      case 0x0c82: return "instreth";
+> @@ -1658,9 +2447,86 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+>              break;
+>          case 1:
+>              switch (((inst >> 12) & 0b111)) {
+> +            case 0:
+> +                switch (((inst >> 20) & 0b111111111111)) {
+> +                case 40: op = rv_op_vl1re8_v; break;
+> +                case 552: op = rv_op_vl2re8_v; break;
+> +                case 1576: op = rv_op_vl4re8_v; break;
+> +                case 3624: op = rv_op_vl8re8_v; break;
+> +                }
+> +                switch (((inst >> 26) & 0b111)) {
+> +                case 0:
+> +                    switch (((inst >> 20) & 0b11111)) {
+> +                    case 0: op = rv_op_vle8_v; break;
+> +                    case 11: op = rv_op_vlm_v; break;
+> +                    case 16: op = rv_op_vle8ff_v; break;
+> +                    }
+> +                    break;
+> +                case 1: op = rv_op_vluxei8_v; break;
+> +                case 2: op = rv_op_vlse8_v; break;
+> +                case 3: op = rv_op_vloxei8_v; break;
+> +                }
+> +                break;
+>              case 2: op = rv_op_flw; break;
+>              case 3: op = rv_op_fld; break;
+>              case 4: op = rv_op_flq; break;
+> +            case 5:
+> +                switch (((inst >> 20) & 0b111111111111)) {
+> +                case 40: op = rv_op_vl1re16_v; break;
+> +                case 552: op = rv_op_vl2re16_v; break;
+> +                case 1576: op = rv_op_vl4re16_v; break;
+> +                case 3624: op = rv_op_vl8re16_v; break;
+> +                }
+> +                switch (((inst >> 26) & 0b111)) {
+> +                case 0:
+> +                    switch (((inst >> 20) & 0b11111)) {
+> +                    case 0: op = rv_op_vle16_v; break;
+> +                    case 16: op = rv_op_vle16ff_v; break;
+> +                    }
+> +                    break;
+> +                case 1: op = rv_op_vluxei16_v; break;
+> +                case 2: op = rv_op_vlse16_v; break;
+> +                case 3: op = rv_op_vloxei16_v; break;
+> +                }
+> +                break;
+> +            case 6:
+> +                switch (((inst >> 20) & 0b111111111111)) {
+> +                case 40: op = rv_op_vl1re32_v; break;
+> +                case 552: op = rv_op_vl2re32_v; break;
+> +                case 1576: op = rv_op_vl4re32_v; break;
+> +                case 3624: op = rv_op_vl8re32_v; break;
+> +                }
+> +                switch (((inst >> 26) & 0b111)) {
+> +                case 0:
+> +                    switch (((inst >> 20) & 0b11111)) {
+> +                    case 0: op = rv_op_vle32_v; break;
+> +                    case 16: op = rv_op_vle32ff_v; break;
+> +                    }
+> +                    break;
+> +                case 1: op = rv_op_vluxei32_v; break;
+> +                case 2: op = rv_op_vlse32_v; break;
+> +                case 3: op = rv_op_vloxei32_v; break;
+> +                }
+> +                break;
+> +            case 7:
+> +                switch (((inst >> 20) & 0b111111111111)) {
+> +                case 40: op = rv_op_vl1re64_v; break;
+> +                case 552: op = rv_op_vl2re64_v; break;
+> +                case 1576: op = rv_op_vl4re64_v; break;
+> +                case 3624: op = rv_op_vl8re64_v; break;
+> +                }
+> +                switch (((inst >> 26) & 0b111)) {
+> +                case 0:
+> +                    switch (((inst >> 20) & 0b11111)) {
+> +                    case 0: op = rv_op_vle64_v; break;
+> +                    case 16: op = rv_op_vle64ff_v; break;
+> +                    }
+> +                    break;
+> +                case 1: op = rv_op_vluxei64_v; break;
+> +                case 2: op = rv_op_vlse64_v; break;
+> +                case 3: op = rv_op_vloxei64_v; break;
+> +                }
+> +                break;
+>              }
+>              break;
+>          case 3:
+> @@ -1785,9 +2651,64 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+>              break;
+>          case 9:
+>              switch (((inst >> 12) & 0b111)) {
+> +            case 0:
+> +                switch (((inst >> 20) & 0b111111111111)) {
+> +                case 40: op = rv_op_vs1r_v; break;
+> +                case 552: op = rv_op_vs2r_v; break;
+> +                case 1576: op = rv_op_vs4r_v; break;
+> +                case 3624: op = rv_op_vs8r_v; break;
+> +                }
+> +                switch (((inst >> 26) & 0b111)) {
+> +                case 0:
+> +                    switch (((inst >> 20) & 0b11111)) {
+> +                    case 0: op = rv_op_vse8_v; break;
+> +                    case 11: op = rv_op_vsm_v; break;
+> +                    }
+> +                    break;
+> +                case 1: op = rv_op_vsuxei8_v; break;
+> +                case 2: op = rv_op_vsse8_v; break;
+> +                case 3: op = rv_op_vsoxei8_v; break;
+> +                }
+> +                break;
+>              case 2: op = rv_op_fsw; break;
+>              case 3: op = rv_op_fsd; break;
+>              case 4: op = rv_op_fsq; break;
+> +            case 5:
+> +                switch (((inst >> 26) & 0b111)) {
+> +                case 0:
+> +                    switch (((inst >> 20) & 0b11111)) {
+> +                    case 0: op = rv_op_vse16_v; break;
+> +                    }
+> +                    break;
+> +                case 1: op = rv_op_vsuxei16_v; break;
+> +                case 2: op = rv_op_vsse16_v; break;
+> +                case 3: op = rv_op_vsoxei16_v; break;
+> +                }
+> +                break;
+> +            case 6:
+> +                switch (((inst >> 26) & 0b111)) {
+> +                case 0:
+> +                    switch (((inst >> 20) & 0b11111)) {
+> +                    case 0: op = rv_op_vse32_v; break;
+> +                    }
+> +                    break;
+> +                case 1: op = rv_op_vsuxei32_v; break;
+> +                case 2: op = rv_op_vsse32_v; break;
+> +                case 3: op = rv_op_vsoxei32_v; break;
+> +                }
+> +                break;
+> +            case 7:
+> +                switch (((inst >> 26) & 0b111)) {
+> +                case 0:
+> +                    switch (((inst >> 20) & 0b11111)) {
+> +                    case 0: op = rv_op_vse64_v; break;
+> +                    }
+> +                    break;
+> +                case 1: op = rv_op_vsuxei64_v; break;
+> +                case 2: op = rv_op_vsse64_v; break;
+> +                case 3: op = rv_op_vsoxei64_v; break;
+> +                }
+> +                break;
+>              }
+>              break;
+>          case 11:
+> @@ -2154,6 +3075,408 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+>                  break;
+>              }
+>              break;
+> +        case 21:
+> +            switch (((inst >> 12) & 0b111)) {
+> +            case 0:
+> +                switch (((inst >> 26) & 0b111111)) {
+> +                case 0: op = rv_op_vadd_vv; break;
+> +                case 2: op = rv_op_vsub_vv; break;
+> +                case 4: op = rv_op_vminu_vv; break;
+> +                case 5: op = rv_op_vmin_vv; break;
+> +                case 6: op = rv_op_vmaxu_vv; break;
+> +                case 7: op = rv_op_vmax_vv; break;
+> +                case 9: op = rv_op_vand_vv; break;
+> +                case 10: op = rv_op_vor_vv; break;
+> +                case 11: op = rv_op_vxor_vv; break;
+> +                case 12: op = rv_op_vrgather_vv; break;
+> +                case 14: op = rv_op_vrgatherei16_vv; break;
+> +                case 16: if (((inst >> 25) & 1) == 0) op = rv_op_vadc_vvm; break;
+> +                case 17: op = rv_op_vmadc_vvm; break;
+> +                case 18: if (((inst >> 25) & 1) == 0) op = rv_op_vsbc_vvm; break;
+> +                case 19: op = rv_op_vmsbc_vvm; break;
+> +                case 23:
+> +                    if (((inst >> 20) & 0b111111) == 32)
+> +                        op = rv_op_vmv_v_v;
+> +                    else if (((inst >> 25) & 1) == 0)
+> +                        op = rv_op_vmerge_vvm;
+> +                    break;
+> +                case 24: op = rv_op_vmseq_vv; break;
+> +                case 25: op = rv_op_vmsne_vv; break;
+> +                case 26: op = rv_op_vmsltu_vv; break;
+> +                case 27: op = rv_op_vmslt_vv; break;
+> +                case 28: op = rv_op_vmsleu_vv; break;
+> +                case 29: op = rv_op_vmsle_vv; break;
+> +                case 32: op = rv_op_vsaddu_vv; break;
+> +                case 33: op = rv_op_vsadd_vv; break;
+> +                case 34: op = rv_op_vssubu_vv; break;
+> +                case 35: op = rv_op_vssub_vv; break;
+> +                case 37: op = rv_op_vsll_vv; break;
+> +                case 39: op = rv_op_vsmul_vv; break;
+> +                case 40: op = rv_op_vsrl_vv; break;
+> +                case 41: op = rv_op_vsra_vv; break;
+> +                case 42: op = rv_op_vssrl_vv; break;
+> +                case 43: op = rv_op_vssra_vv; break;
+> +                case 44: op = rv_op_vnsrl_wv; break;
+> +                case 45: op = rv_op_vnsra_wv; break;
+> +                case 46: op = rv_op_vnclipu_wv; break;
+> +                case 47: op = rv_op_vnclip_wv; break;
+> +                case 48: op = rv_op_vwredsumu_vs; break;
+> +                case 49: op = rv_op_vwredsum_vs; break;
+> +                }
+> +                break;
+> +            case 1:
+> +                switch (((inst >> 26) & 0b111111)) {
+> +                case 0: op = rv_op_vfadd_vv; break;
+> +                case 1: op = rv_op_vfredusum_vs; break;
+> +                case 2: op = rv_op_vfsub_vv; break;
+> +                case 3: op = rv_op_vfredosum_vs; break;
+> +                case 4: op = rv_op_vfmin_vv; break;
+> +                case 5: op = rv_op_vfredmin_vs; break;
+> +                case 6: op = rv_op_vfmax_vv; break;
+> +                case 7: op = rv_op_vfredmax_vs; break;
+> +                case 8: op = rv_op_vfsgnj_vv; break;
+> +                case 9: op = rv_op_vfsgnjn_vv; break;
+> +                case 10: op = rv_op_vfsgnjx_vv; break;
+> +                case 16:
+> +                    switch (((inst >> 15) & 0b11111)) {
+> +                    case 0: if ((inst >> 25) & 1) op = rv_op_vfmv_f_s; break;
+> +                    }
+> +                    break;
+> +                case 18:
+> +                    switch (((inst >> 15) & 0b11111)) {
+> +                    case 0: op = rv_op_vfcvt_xu_f_v; break;
+> +                    case 1: op = rv_op_vfcvt_x_f_v; break;
+> +                    case 2: op = rv_op_vfcvt_f_xu_v; break;
+> +                    case 3: op = rv_op_vfcvt_f_x_v; break;
+> +                    case 6: op = rv_op_vfcvt_rtz_xu_f_v; break;
+> +                    case 7: op = rv_op_vfcvt_rtz_x_f_v; break;
+> +                    case 8: op = rv_op_vfwcvt_xu_f_v; break;
+> +                    case 9: op = rv_op_vfwcvt_x_f_v; break;
+> +                    case 10: op = rv_op_vfwcvt_f_xu_v; break;
+> +                    case 11: op = rv_op_vfwcvt_f_x_v; break;
+> +                    case 12: op = rv_op_vfwcvt_f_f_v; break;
+> +                    case 14: op = rv_op_vfwcvt_rtz_xu_f_v; break;
+> +                    case 15: op = rv_op_vfwcvt_rtz_x_f_v; break;
+> +                    case 16: op = rv_op_vfncvt_xu_f_w; break;
+> +                    case 17: op = rv_op_vfncvt_x_f_w; break;
+> +                    case 18: op = rv_op_vfncvt_f_xu_w; break;
+> +                    case 19: op = rv_op_vfncvt_f_x_w; break;
+> +                    case 20: op = rv_op_vfncvt_f_f_w; break;
+> +                    case 21: op = rv_op_vfncvt_rod_f_f_w; break;
+> +                    case 22: op = rv_op_vfncvt_rtz_xu_f_w; break;
+> +                    case 23: op = rv_op_vfncvt_rtz_x_f_w; break;
+> +                    }
+> +                    break;
+> +                case 19:
+> +                    switch (((inst >> 15) & 0b11111)) {
+> +                    case 0: op = rv_op_vfsqrt_v; break;
+> +                    case 4: op = rv_op_vfrsqrt7_v; break;
+> +                    case 5: op = rv_op_vfrec7_v; break;
+> +                    case 16: op = rv_op_vfclass_v; break;
+> +                    }
+> +                    break;
+> +                case 24: op = rv_op_vmfeq_vv; break;
+> +                case 25: op = rv_op_vmfle_vv; break;
+> +                case 27: op = rv_op_vmflt_vv; break;
+> +                case 28: op = rv_op_vmfne_vv; break;
+> +                case 32: op = rv_op_vfdiv_vv; break;
+> +                case 36: op = rv_op_vfmul_vv; break;
+> +                case 40: op = rv_op_vfmadd_vv; break;
+> +                case 41: op = rv_op_vfnmadd_vv; break;
+> +                case 42: op = rv_op_vfmsub_vv; break;
+> +                case 43: op = rv_op_vfnmsub_vv; break;
+> +                case 44: op = rv_op_vfmacc_vv; break;
+> +                case 45: op = rv_op_vfnmacc_vv; break;
+> +                case 46: op = rv_op_vfmsac_vv; break;
+> +                case 47: op = rv_op_vfnmsac_vv; break;
+> +                case 48: op = rv_op_vfwadd_vv; break;
+> +                case 49: op = rv_op_vfwredusum_vs; break;
+> +                case 50: op = rv_op_vfwsub_vv; break;
+> +                case 51: op = rv_op_vfwredosum_vs; break;
+> +                case 52: op = rv_op_vfwadd_wv; break;
+> +                case 54: op = rv_op_vfwsub_wv; break;
+> +                case 56: op = rv_op_vfwmul_vv; break;
+> +                case 60: op = rv_op_vfwmacc_vv; break;
+> +                case 61: op = rv_op_vfwnmacc_vv; break;
+> +                case 62: op = rv_op_vfwmsac_vv; break;
+> +                case 63: op = rv_op_vfwnmsac_vv; break;
+> +                }
+> +                break;
+> +            case 2:
+> +                switch (((inst >> 26) & 0b111111)) {
+> +                case 0: op = rv_op_vredsum_vs; break;
+> +                case 1: op = rv_op_vredand_vs; break;
+> +                case 2: op = rv_op_vredor_vs; break;
+> +                case 3: op = rv_op_vredxor_vs; break;
+> +                case 4: op = rv_op_vredminu_vs; break;
+> +                case 5: op = rv_op_vredmin_vs; break;
+> +                case 6: op = rv_op_vredmaxu_vs; break;
+> +                case 7: op = rv_op_vredmax_vs; break;
+> +                case 8: op = rv_op_vaaddu_vv; break;
+> +                case 9: op = rv_op_vaadd_vv; break;
+> +                case 10: op = rv_op_vasubu_vv; break;
+> +                case 11: op = rv_op_vasub_vv; break;
+> +                case 16:
+> +                    switch (((inst >> 15) & 0b11111)) {
+> +                    case 0: if ((inst >> 25) & 1) op = rv_op_vmv_x_s; break;
+> +                    case 16: op = rv_op_vcpop_m; break;
+> +                    case 17: op = rv_op_vfirst_m; break;
+> +                    }
+> +                    break;
+> +                case 18:
+> +                    switch (((inst >> 15) & 0b11111)) {
+> +                    case 2: op = rv_op_vzext_vf8; break;
+> +                    case 3: op = rv_op_vsext_vf8; break;
+> +                    case 4: op = rv_op_vzext_vf4; break;
+> +                    case 5: op = rv_op_vsext_vf4; break;
+> +                    case 6: op = rv_op_vzext_vf2; break;
+> +                    case 7: op = rv_op_vsext_vf2; break;
+> +                    }
+> +                    break;
+> +                case 20:
+> +                    switch (((inst >> 15) & 0b11111)) {
+> +                    case 1: op = rv_op_vmsbf_m;  break;
+> +                    case 2: op = rv_op_vmsof_m; break;
+> +                    case 3: op = rv_op_vmsif_m; break;
+> +                    case 16: op = rv_op_viota_m; break;
+> +                    case 17: if (((inst >> 20) & 0b11111) == 0) op = rv_op_vid_v; break;
+> +                    }
+> +                    break;
+> +                case 23: if ((inst >> 25) & 1) op = rv_op_vcompress_vm; break;
+> +                case 24: if ((inst >> 25) & 1) op = rv_op_vmandn_mm; break;
+> +                case 25: if ((inst >> 25) & 1) op = rv_op_vmand_mm; break;
+> +                case 26: if ((inst >> 25) & 1) op = rv_op_vmor_mm; break;
+> +                case 27: if ((inst >> 25) & 1) op = rv_op_vmxor_mm; break;
+> +                case 28: if ((inst >> 25) & 1) op = rv_op_vmorn_mm; break;
+> +                case 29: if ((inst >> 25) & 1) op = rv_op_vmnand_mm; break;
+> +                case 30: if ((inst >> 25) & 1) op = rv_op_vmnor_mm; break;
+> +                case 31: if ((inst >> 25) & 1) op = rv_op_vmxnor_mm; break;
+> +                case 32: op = rv_op_vdivu_vv; break;
+> +                case 33: op = rv_op_vdiv_vv; break;
+> +                case 34: op = rv_op_vremu_vv; break;
+> +                case 35: op = rv_op_vrem_vv; break;
+> +                case 36: op = rv_op_vmulhu_vv; break;
+> +                case 37: op = rv_op_vmul_vv; break;
+> +                case 38: op = rv_op_vmulhsu_vv; break;
+> +                case 39: op = rv_op_vmulh_vv; break;
+> +                case 41: op = rv_op_vmadd_vv; break;
+> +                case 43: op = rv_op_vnmsub_vv; break;
+> +                case 45: op = rv_op_vmacc_vv; break;
+> +                case 47: op = rv_op_vnmsac_vv; break;
+> +                case 48: op = rv_op_vwaddu_vv; break;
+> +                case 49: op = rv_op_vwadd_vv; break;
+> +                case 50: op = rv_op_vwsubu_vv; break;
+> +                case 51: op = rv_op_vwsub_vv; break;
+> +                case 52: op = rv_op_vwaddu_wv; break;
+> +                case 53: op = rv_op_vwadd_wv; break;
+> +                case 54: op = rv_op_vwsubu_wv; break;
+> +                case 55: op = rv_op_vwsub_wv; break;
+> +                case 56: op = rv_op_vwmulu_vv; break;
+> +                case 58: op = rv_op_vwmulsu_vv; break;
+> +                case 59: op = rv_op_vwmul_vv; break;
+> +                case 60: op = rv_op_vwmaccu_vv; break;
+> +                case 61: op = rv_op_vwmacc_vv; break;
+> +                case 63: op = rv_op_vwmaccsu_vv; break;
+> +                }
+> +                break;
+> +            case 3:
+> +                switch (((inst >> 26) & 0b111111)) {
+> +                case 0: op = rv_op_vadd_vi; break;
+> +                case 3: op = rv_op_vrsub_vi; break;
+> +                case 9: op = rv_op_vand_vi; break;
+> +                case 10: op = rv_op_vor_vi; break;
+> +                case 11: op = rv_op_vxor_vi; break;
+> +                case 12: op = rv_op_vrgather_vi; break;
+> +                case 14: op = rv_op_vslideup_vi; break;
+> +                case 15: op = rv_op_vslidedown_vi; break;
+> +                case 16: if (((inst >> 25) & 1) == 0) op = rv_op_vadc_vim; break;
+> +                case 17: op = rv_op_vmadc_vim; break;
+> +                case 23:
+> +                    if (((inst >> 20) & 0b111111) == 32)
+> +                        op = rv_op_vmv_v_i;
+> +                    else if (((inst >> 25) & 1) == 0)
+> +                        op = rv_op_vmerge_vim;
+> +                    break;
+> +                case 24: op = rv_op_vmseq_vi; break;
+> +                case 25: op = rv_op_vmsne_vi; break;
+> +                case 28: op = rv_op_vmsleu_vi; break;
+> +                case 29: op = rv_op_vmsle_vi; break;
+> +                case 30: op = rv_op_vmsgtu_vi; break;
+> +                case 31: op = rv_op_vmsgt_vi; break;
+> +                case 32: op = rv_op_vsaddu_vi; break;
+> +                case 33: op = rv_op_vsadd_vi; break;
+> +                case 37: op = rv_op_vsll_vi; break;
+> +                case 39:
+> +                    switch (((inst >> 15) & 0b11111)) {
+> +                    case 0: op = rv_op_vmv1r_v; break;
+> +                    case 1: op = rv_op_vmv2r_v; break;
+> +                    case 3: op = rv_op_vmv4r_v; break;
+> +                    case 7: op = rv_op_vmv8r_v; break;
+> +                    }
+> +                    break;
+> +                case 40: op = rv_op_vsrl_vi; break;
+> +                case 41: op = rv_op_vsra_vi; break;
+> +                case 42: op = rv_op_vssrl_vi; break;
+> +                case 43: op = rv_op_vssra_vi; break;
+> +                case 44: op = rv_op_vnsrl_wi; break;
+> +                case 45: op = rv_op_vnsra_wi; break;
+> +                case 46: op = rv_op_vnclipu_wi; break;
+> +                case 47: op = rv_op_vnclip_wi; break;
+> +                }
+> +                break;
+> +            case 4:
+> +                switch (((inst >> 26) & 0b111111)) {
+> +                case 0: op = rv_op_vadd_vx; break;
+> +                case 2: op = rv_op_vsub_vx; break;
+> +                case 3: op = rv_op_vrsub_vx; break;
+> +                case 4: op = rv_op_vminu_vx; break;
+> +                case 5: op = rv_op_vmin_vx; break;
+> +                case 6: op = rv_op_vmaxu_vx; break;
+> +                case 7: op = rv_op_vmax_vx; break;
+> +                case 9: op = rv_op_vand_vx; break;
+> +                case 10: op = rv_op_vor_vx; break;
+> +                case 11: op = rv_op_vxor_vx; break;
+> +                case 12: op = rv_op_vrgather_vx; break;
+> +                case 14: op = rv_op_vslideup_vx; break;
+> +                case 15: op = rv_op_vslidedown_vx; break;
+> +                case 16: if (((inst >> 25) & 1) == 0) op = rv_op_vadc_vxm; break;
+> +                case 17: op = rv_op_vmadc_vxm; break;
+> +                case 18: if (((inst >> 25) & 1) == 0) op = rv_op_vsbc_vxm; break;
+> +                case 19: op = rv_op_vmsbc_vxm; break;
+> +                case 23:
+> +                    if (((inst >> 20) & 0b111111) == 32)
+> +                        op = rv_op_vmv_v_x;
+> +                    else if (((inst >> 25) & 1) == 0)
+> +                        op = rv_op_vmerge_vxm;
+> +                    break;
+> +                case 24: op = rv_op_vmseq_vx; break;
+> +                case 25: op = rv_op_vmsne_vx; break;
+> +                case 26: op = rv_op_vmsltu_vx; break;
+> +                case 27: op = rv_op_vmslt_vx; break;
+> +                case 28: op = rv_op_vmsleu_vx; break;
+> +                case 29: op = rv_op_vmsle_vx; break;
+> +                case 30: op = rv_op_vmsgtu_vx; break;
+> +                case 31: op = rv_op_vmsgt_vx; break;
+> +                case 32: op = rv_op_vsaddu_vx; break;
+> +                case 33: op = rv_op_vsadd_vx; break;
+> +                case 34: op = rv_op_vssubu_vx; break;
+> +                case 35: op = rv_op_vssub_vx; break;
+> +                case 37: op = rv_op_vsll_vx; break;
+> +                case 39: op = rv_op_vsmul_vx; break;
+> +                case 40: op = rv_op_vsrl_vx; break;
+> +                case 41: op = rv_op_vsra_vx; break;
+> +                case 42: op = rv_op_vssrl_vx; break;
+> +                case 43: op = rv_op_vssra_vx; break;
+> +                case 44: op = rv_op_vnsrl_wx; break;
+> +                case 45: op = rv_op_vnsra_wx; break;
+> +                case 46: op = rv_op_vnclipu_wx; break;
+> +                case 47: op = rv_op_vnclip_wx; break;
+> +                }
+> +                break;
+> +            case 5:
+> +                switch (((inst >> 26) & 0b111111)) {
+> +                case 0: op = rv_op_vfadd_vf; break;
+> +                case 2: op = rv_op_vfsub_vf; break;
+> +                case 4: op = rv_op_vfmin_vf; break;
+> +                case 6: op = rv_op_vfmax_vf; break;
+> +                case 8: op = rv_op_vfsgnj_vf; break;
+> +                case 9: op = rv_op_vfsgnjn_vf; break;
+> +                case 10: op = rv_op_vfsgnjx_vf; break;
+> +                case 14: op = rv_op_vfslide1up_vf; break;
+> +                case 15: op = rv_op_vfslide1down_vf; break;
+> +                case 16:
+> +                    switch (((inst >> 20) & 0b11111)) {
+> +                    case 0: if ((inst >> 25) & 1) op = rv_op_vfmv_s_f; break;
+> +                    }
+> +                    break;
+> +                case 23:
+> +                    if (((inst >> 25) & 1) == 0)
+> +                        op = rv_op_vfmerge_vfm;
+> +                    else if (((inst >> 20) & 0b111111) == 32)
+> +                        op = rv_op_vfmv_v_f;
+> +                    break;
+> +                case 24: op = rv_op_vmfeq_vf; break;
+> +                case 25: op = rv_op_vmfle_vf; break;
+> +                case 27: op = rv_op_vmflt_vf; break;
+> +                case 28: op = rv_op_vmfne_vf; break;
+> +                case 29: op = rv_op_vmfgt_vf; break;
+> +                case 31: op = rv_op_vmfge_vf; break;
+> +                case 32: op = rv_op_vfdiv_vf; break;
+> +                case 33: op = rv_op_vfrdiv_vf; break;
+> +                case 36: op = rv_op_vfmul_vf; break;
+> +                case 39: op = rv_op_vfrsub_vf; break;
+> +                case 40: op = rv_op_vfmadd_vf; break;
+> +                case 41: op = rv_op_vfnmadd_vf; break;
+> +                case 42: op = rv_op_vfmsub_vf; break;
+> +                case 43: op = rv_op_vfnmsub_vf; break;
+> +                case 44: op = rv_op_vfmacc_vf; break;
+> +                case 45: op = rv_op_vfnmacc_vf; break;
+> +                case 46: op = rv_op_vfmsac_vf; break;
+> +                case 47: op = rv_op_vfnmsac_vf; break;
+> +                case 48: op = rv_op_vfwadd_vf; break;
+> +                case 50: op = rv_op_vfwsub_vf; break;
+> +                case 52: op = rv_op_vfwadd_wf; break;
+> +                case 54: op = rv_op_vfwsub_wf; break;
+> +                case 56: op = rv_op_vfwmul_vf; break;
+> +                case 60: op = rv_op_vfwmacc_vf; break;
+> +                case 61: op = rv_op_vfwnmacc_vf; break;
+> +                case 62: op = rv_op_vfwmsac_vf; break;
+> +                case 63: op = rv_op_vfwnmsac_vf; break;
+> +                }
+> +                break;
+> +            case 6:
+> +                switch (((inst >> 26) & 0b111111)) {
+> +                case 8: op = rv_op_vaaddu_vx; break;
+> +                case 9: op = rv_op_vaadd_vx; break;
+> +                case 10: op = rv_op_vasubu_vx; break;
+> +                case 11: op = rv_op_vasub_vx; break;
+> +                case 14: op = rv_op_vslide1up_vx; break;
+> +                case 15: op = rv_op_vslide1down_vx; break;
+> +                case 16:
+> +                    switch (((inst >> 20) & 0b11111)) {
+> +                    case 0: if ((inst >> 25) & 1) op = rv_op_vmv_s_x; break;
+> +                    }
+> +                    break;
+> +                case 32: op = rv_op_vdivu_vx; break;
+> +                case 33: op = rv_op_vdiv_vx; break;
+> +                case 34: op = rv_op_vremu_vx; break;
+> +                case 35: op = rv_op_vrem_vx; break;
+> +                case 36: op = rv_op_vmulhu_vx; break;
+> +                case 37: op = rv_op_vmul_vx; break;
+> +                case 38: op = rv_op_vmulhsu_vx; break;
+> +                case 39: op = rv_op_vmulh_vx; break;
+> +                case 41: op = rv_op_vmadd_vx; break;
+> +                case 43: op = rv_op_vnmsub_vx; break;
+> +                case 45: op = rv_op_vmacc_vx; break;
+> +                case 47: op = rv_op_vnmsac_vx; break;
+> +                case 48: op = rv_op_vwaddu_vx; break;
+> +                case 49: op = rv_op_vwadd_vx; break;
+> +                case 50: op = rv_op_vwsubu_vx; break;
+> +                case 51: op = rv_op_vwsub_vx; break;
+> +                case 52: op = rv_op_vwaddu_wx; break;
+> +                case 53: op = rv_op_vwadd_wx; break;
+> +                case 54: op = rv_op_vwsubu_wx; break;
+> +                case 55: op = rv_op_vwsub_wx; break;
+> +                case 56: op = rv_op_vwmulu_vx; break;
+> +                case 58: op = rv_op_vwmulsu_vx; break;
+> +                case 59: op = rv_op_vwmul_vx; break;
+> +                case 60: op = rv_op_vwmaccu_vx; break;
+> +                case 61: op = rv_op_vwmacc_vx; break;
+> +                case 62: op = rv_op_vwmaccus_vx; break;
+> +                case 63: op = rv_op_vwmaccsu_vx; break;
+> +                }
+> +                break;
+> +            case 7:
+> +                if (((inst >> 31) & 1) == 0) {
+> +                    op = rv_op_vsetvli;
+> +                } else if ((inst >> 30) & 1) {
+> +                    op = rv_op_vsetivli;
+> +                } else if (((inst >> 25) & 0b11111) == 0) {
+> +                    op = rv_op_vsetvl;
+> +                }
+> +                break;
+> +            }
+> +            break;
+>          case 22:
+>              switch (((inst >> 12) & 0b111)) {
+>              case 0: op = rv_op_addid; break;
+> @@ -2517,6 +3840,21 @@ static uint32_t operand_cimmq(rv_inst inst)
+>          ((inst << 57) >> 62) << 6;
+>  }
+>
+> +static uint32_t operand_vimm(rv_inst inst)
+> +{
+> +    return (int64_t)(inst << 44) >> 59;
+> +}
+> +
+> +static uint32_t operand_vzimm11(rv_inst inst)
+> +{
+> +    return (inst << 33) >> 53;
+> +}
+> +
+> +static uint32_t operand_vzimm10(rv_inst inst)
+> +{
+> +    return (inst << 34) >> 54;
+> +}
+> +
+>  static uint32_t operand_bs(rv_inst inst)
+>  {
+>      return (inst << 32) >> 62;
+> @@ -2527,6 +3865,11 @@ static uint32_t operand_rnum(rv_inst inst)
+>      return (inst << 40) >> 60;
+>  }
+>
+> +static uint32_t operand_vm(rv_inst inst)
+> +{
+> +    return (inst << 38) >> 63;
+> +}
+> +
+>  /* decode operands */
+>
+>  static void decode_inst_operands(rv_decode *dec)
+> @@ -2816,6 +4159,33 @@ static void decode_inst_operands(rv_decode *dec)
+>          dec->rs1 = operand_rs1(inst);
+>          dec->rnum = operand_rnum(inst);
+>          break;
+> +    case rv_codec_v_r:
+> +        dec->rd = operand_rd(inst);
+> +        dec->rs1 = operand_rs1(inst);
+> +        dec->rs2 = operand_rs2(inst);
+> +        dec->vm = operand_vm(inst);
+> +        break;
+> +    case rv_codec_v_ldst:
+> +        dec->rd = operand_rd(inst);
+> +        dec->rs1 = operand_rs1(inst);
+> +        dec->vm = operand_vm(inst);
+> +        break;
+> +    case rv_codec_v_i:
+> +        dec->rd = operand_rd(inst);
+> +        dec->rs2 = operand_rs2(inst);
+> +        dec->imm = operand_vimm(inst);
+> +        dec->vm = operand_vm(inst);
+> +        break;
+> +    case rv_codec_vsetvli:
+> +        dec->rd = operand_rd(inst);
+> +        dec->rs1 = operand_rs1(inst);
+> +        dec->vzimm = operand_vzimm11(inst);
+> +        break;
+> +    case rv_codec_vsetivli:
+> +        dec->rd = operand_rd(inst);
+> +        dec->imm = operand_vimm(inst);
+> +        dec->vzimm = operand_vzimm10(inst);
+> +        break;
+>      };
+>  }
+>
+> @@ -3012,6 +4382,10 @@ static void format_inst(char *buf, size_t buflen, size_t tab, rv_decode *dec)
+>              snprintf(tmp, sizeof(tmp), "%d", dec->imm);
+>              append(buf, tmp, buflen);
+>              break;
+> +        case 'u':
+> +            snprintf(tmp, sizeof(tmp), "%u", ((uint32_t)dec->imm & 0b11111));
+> +            append(buf, tmp, buflen);
+> +            break;
+>          case 'o':
+>              snprintf(tmp, sizeof(tmp), "%d", dec->imm);
+>              append(buf, tmp, buflen);
+> @@ -3100,6 +4474,60 @@ static void format_inst(char *buf, size_t buflen, size_t tab, rv_decode *dec)
+>                  append(buf, ".rl", buflen);
+>              }
+>              break;
+> +        case 'l':
+> +            append(buf, ",v0", buflen);
+> +            break;
+> +        case 'm':
+> +            if (dec->vm == 0) {
+> +                append(buf, ",v0.t", buflen);
+> +            }
+> +            break;
+> +        case 'D':
+> +            append(buf, rv_vreg_name_sym[dec->rd], buflen);
+> +            break;
+> +        case 'E':
+> +            append(buf, rv_vreg_name_sym[dec->rs1], buflen);
+> +            break;
+> +        case 'F':
+> +            append(buf, rv_vreg_name_sym[dec->rs2], buflen);
+> +            break;
+> +        case 'G':
+> +            append(buf, rv_vreg_name_sym[dec->rs3], buflen);
+> +            break;
+> +        case 'v': {
+> +            char nbuf[4] = {0};
+> +            const int sew = 1 << (((dec->vzimm >> 3) & 0b111) + 3);
+> +            sprintf(nbuf, "%d", sew);
+> +            const int lmul = dec->vzimm & 0b11;
+> +            const int flmul = (dec->vzimm >> 2) & 1;
+> +            const char *vta = (dec->vzimm >> 6) & 1 ? "ta" : "tu";
+> +            const char *vma = (dec->vzimm >> 7) & 1 ? "ma" : "mu";
+> +            append(buf, "e", buflen);
+> +            append(buf, nbuf, buflen);
+> +            append(buf, ",m", buflen);
+> +            if (flmul) {
+> +                switch (lmul) {
+> +                case 3:
+> +                    sprintf(nbuf, "f2");
+> +                    break;
+> +                case 2:
+> +                    sprintf(nbuf, "f4");
+> +                    break;
+> +                case 1:
+> +                    sprintf(nbuf, "f8");
+> +                break;
+> +                }
+> +                append(buf, nbuf, buflen);
+> +            } else {
+> +                sprintf(nbuf, "%d", 1 << lmul);
+> +                append(buf, nbuf, buflen);
+> +            }
+> +            append(buf, ",", buflen);
+> +            append(buf, vta, buflen);
+> +            append(buf, ",", buflen);
+> +            append(buf, vma, buflen);
+> +            break;
+> +        }
+>          default:
+>              break;
+>          }
+> @@ -3196,7 +4624,7 @@ disasm_inst(char *buf, size_t buflen, rv_isa isa, uint64_t pc, rv_inst inst)
+>      decode_inst_operands(&dec);
+>      decode_inst_decompress(&dec, isa);
+>      decode_inst_lift_pseudo(&dec);
+> -    format_inst(buf, buflen, 16, &dec);
+> +    format_inst(buf, buflen, 24, &dec);
+>  }
+>
+>  #define INST_FMT_2 "%04" PRIx64 "              "
+> --
+> 2.30.1 (Apple Git-130)
 >
 >
-> Thanks for the review. I'll make sure to address the formatting issues.
->
-> -Tyler
 
