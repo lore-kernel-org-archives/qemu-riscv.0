@@ -1,80 +1,168 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1od5yW-0004H1-DO
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Sep 2022 04:29:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43858)
+	id 1odIgw-0004hA-WC
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Sep 2022 18:04:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52420)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1od5yQ-0004AB-T6
- for qemu-riscv@nongnu.org; Tue, 27 Sep 2022 04:29:50 -0400
-Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f]:35769)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1od5yL-0001pd-W2
- for qemu-riscv@nongnu.org; Tue, 27 Sep 2022 04:29:47 -0400
-Received: by mail-lj1-x22f.google.com with SMTP id x29so10132949ljq.2
- for <qemu-riscv@nongnu.org>; Tue, 27 Sep 2022 01:29:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=Rmad2rYfZ5IW7fBzajyAFegdmVvGYsEWjisBPHInPuU=;
- b=Mi/5Xn2HhI3ATwYOIrlIiqYNTvc0r9p+v2mxeIIjX8L+tMaAwGdH5HBkAtUOk3uX/V
- ED+2QZrIgdq01mDim8ddssWjDNFkS5VDGP02usHuQZxQ2O9mfyYdW+E0tsifLvrHvAfC
- xu8kF0SDDW1U5PyWxO5F9gcduB6XK3QqgFJKLuM/riac83VS/couJgG2HZFP5ykCk6MO
- /J7uxLxh8/n4acCER8e4/NqGoiVvNhjw+GlJnTiK/LHq/SImC46doQsM5JQkRxc8ra3V
- S5hZhmjePyyL83TzZU5mPYU27WgK/QecZdwgyh3IrEwuX/7nSwrYFm6sH0xaLGB9qcof
- jEYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=Rmad2rYfZ5IW7fBzajyAFegdmVvGYsEWjisBPHInPuU=;
- b=yGye8Hb/b9qkTFwwKVksLe3gzT7ur3GSPlNue2TguNRf2dt4KnbuwMNlPvl635mVFW
- cMYiF9SfjsCcYOjS2RLrCXbUJfPr7Mqs5IvEAv9q8UIvg+im7IsNeCUZF4zrM8Ia7YIq
- 4y+P2e+i55LDc1F4wXzUCBTlKdqrXxQf1mGmT6KBfxGip5FX0IZBVARa2ykJfax3IbZW
- 3blCl4dkCYUPwVztB7pqMkO0YfMscloWXuvhChAzX1BhcVWWSaNHTxMwWmUru70YF0cz
- 2kWCce3HTPGNNa2F+XGCZKQznsITN147auSYjUwjPtPWasqOaDmo69Xt5wPhVKJISi5m
- 4xsA==
-X-Gm-Message-State: ACrzQf1IP9MVXHulakjBWqUsKtBxzqnarMQzr992VyBp5/uNCvKUwj9S
- H1y6RgTCypUmwPKnnZXmU2b+jtXxT3BbQC6hx4iwHajnNIwlk9i6q4NQXvyCgAzZI2CQghAaMwG
- Y+w4EEIcfdJRfGwuEZT/2Z8KKp6l1AmVqwLUjVE86xP3yAAbeLbeMwFIN3xxUg5amrQaopBtox6
- U=
-X-Google-Smtp-Source: AMsMyM6QuPNn7p0WQmtvLVXq4pvEeDPjjfGEg+5I+YHez3qvBrp2vvjxeYBxxo+HXMTlTBXaTYvXYA==
-X-Received: by 2002:a2e:b61c:0:b0:26c:c17:feeb with SMTP id
- r28-20020a2eb61c000000b0026c0c17feebmr9548739ljn.199.1664267383139; 
- Tue, 27 Sep 2022 01:29:43 -0700 (PDT)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com.
- [209.85.167.50]) by smtp.gmail.com with ESMTPSA id
- u28-20020a2eb81c000000b0026bf27c7056sm90960ljo.67.2022.09.27.01.29.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Sep 2022 01:29:42 -0700 (PDT)
-Received: by mail-lf1-f50.google.com with SMTP id o2so14557063lfc.10;
- Tue, 27 Sep 2022 01:29:42 -0700 (PDT)
-X-Received: by 2002:a05:6512:3d94:b0:49d:144c:9667 with SMTP id
- k20-20020a0565123d9400b0049d144c9667mr10787427lfv.50.1664267381646; Tue, 27
- Sep 2022 01:29:41 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <eddie.dong@intel.com>)
+ id 1odIgv-0004fI-V1; Tue, 27 Sep 2022 18:04:37 -0400
+Received: from mga18.intel.com ([134.134.136.126]:7707)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <eddie.dong@intel.com>)
+ id 1odIgt-0002s7-Jy; Tue, 27 Sep 2022 18:04:37 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1664316275; x=1695852275;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=fbm06furegukM36GLVuTPYNUumwMQ8MSwueCwphxaCg=;
+ b=TB2xckn1KzskGs1TVdVflWYdBz0i1dme1yRSVCyjAXSE/vo6K24wGrEA
+ DFgEwn8gpTQnDZYM9cjzu9IEmNtf29czPRKZFNMV0uzeo8DbriSCDsuRE
+ 7JfbNK25XnfAPI9BS0r35i0SkxSl52XtwVSdDb6z+IcrPkbTBgyKt1lXd
+ 0Y4bP+sled5VZvHW/AXdewyeWyaTRj1MJIuFzWadYmKS0jFANE+pu4YO9
+ d9p8B/ni0QOVjLycMDdOqTiTGVP1l11FpKICo9CIgb88EDG5aj4rGRb6L
+ c/RFz9PBra4cPPncpZiRgsyCYLEMrvB9pjgy/MPVz9JWfxSfI8X7y7SWL g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10483"; a="284570845"
+X-IronPort-AV: E=Sophos;i="5.93,350,1654585200"; d="scan'208";a="284570845"
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+ by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Sep 2022 15:04:32 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10483"; a="725686578"
+X-IronPort-AV: E=Sophos;i="5.93,350,1654585200"; d="scan'208";a="725686578"
+Received: from fmsmsx601.amr.corp.intel.com ([10.18.126.81])
+ by fmsmga002.fm.intel.com with ESMTP; 27 Sep 2022 15:04:31 -0700
+Received: from fmsmsx611.amr.corp.intel.com (10.18.126.91) by
+ fmsmsx601.amr.corp.intel.com (10.18.126.81) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Tue, 27 Sep 2022 15:04:31 -0700
+Received: from fmsmsx608.amr.corp.intel.com (10.18.126.88) by
+ fmsmsx611.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Tue, 27 Sep 2022 15:04:30 -0700
+Received: from fmsedg601.ED.cps.intel.com (10.1.192.135) by
+ fmsmsx608.amr.corp.intel.com (10.18.126.88) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31 via Frontend Transport; Tue, 27 Sep 2022 15:04:30 -0700
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (104.47.55.103)
+ by edgegateway.intel.com (192.55.55.70) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2375.31; Tue, 27 Sep 2022 15:04:30 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JTCWAxvgFX3B2XOtAKCwUqerjf5WQyZGkaCHrPncRDcx8bWu8jtdkE0//vUxu6E32aSDxJdh/fQ40Y+xAKX32YR8VUYzrdJfVp8DWfbc+ObuI7bOSRdc704QahXdMb45cLskod7ZCNt221fB98nCxSbpFIW/1hko8zOEreR9njdFP2SN0rPWxkWo+euAPFVdGfjwzNKYW5IdQE6IkX5g/u/PX689g+QwzhKu+8wERozxPIp6ZhGHRMXP8UcYZitf5lgoXxBK/xk/oE5HBRjRnidjnqWniv8fjUA8FnZzRhkrk2iIABTsXZl90DYls+U1rbOywH5G8Q5zM8WRu+mA6g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fbm06furegukM36GLVuTPYNUumwMQ8MSwueCwphxaCg=;
+ b=MgRwREMhaEV+IYsrKfcZuBeFBsoaaIcWPXVzXBI7mSuRZn+9PeMZFRqkwhVRGsBURIpn5TD062c8rQcyNGnqbIzUJDlUfh2+vSS2YT1JQ5lhgCt/rAJWG8ymAxG2KD62ihT7uv7/ZGeYaCYDa7l/U7tO8vBC+t8TfHW/FqHt5drxBmqpHYXK9EMVm1WAdhUGZBbTf9Jr6AVBeNM/APu624J9uMaK3kkSZfDjbKsOAumodyN3hxY25FlOXJpPe47jkJqxJP9gZBKCh2uzBm99hGG0KHC49Ij6cuzkwoZH8jqbLywZgOASz7tuDBbWb4cE2yJ9IrAOAOGmd3VArP1YyQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from BL0PR11MB3042.namprd11.prod.outlook.com (2603:10b6:208:78::17)
+ by MN2PR11MB4551.namprd11.prod.outlook.com (2603:10b6:208:269::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.24; Tue, 27 Sep
+ 2022 22:04:28 +0000
+Received: from BL0PR11MB3042.namprd11.prod.outlook.com
+ ([fe80::b52e:e73e:ac99:8a5]) by BL0PR11MB3042.namprd11.prod.outlook.com
+ ([fe80::b52e:e73e:ac99:8a5%3]) with mapi id 15.20.5676.017; Tue, 27 Sep 2022
+ 22:04:28 +0000
+From: "Dong, Eddie" <eddie.dong@intel.com>
+To: Tyler Ng <tkng@rivosinc.com>
+CC: "open list:RISC-V" <qemu-riscv@nongnu.org>, "qemu-devel@nongnu.org
+ Developers" <qemu-devel@nongnu.org>, Alistair Francis
+ <Alistair.Francis@wdc.com>, "Meng, Bin" <bin.meng@windriver.com>, Thomas Huth
+ <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Laurent Vivier <lvivier@redhat.com>
+Subject: RE: [PATCH v2 1/3] hw/watchdog: wdt_ibex_aon.c: Implement the
+ watchdog for the OpenTitan
+Thread-Topic: [PATCH v2 1/3] hw/watchdog: wdt_ibex_aon.c: Implement the
+ watchdog for the OpenTitan
+Thread-Index: AQHYzqCkzYowmiYXhEufWUdCK4JisK3yKLLggAA4L4CAAXZwcA==
+Date: Tue, 27 Sep 2022 22:04:28 +0000
+Message-ID: <BL0PR11MB304295EA40A39F491D8DEFA58A559@BL0PR11MB3042.namprd11.prod.outlook.com>
+References: <CAB88-qOh7dBoFP4SWcM4G5EVp6cumVnZ5j4tNRqSvMT08=dAcA@mail.gmail.com>
+ <BL0PR11MB3042E97131ADE38A3535984F8A529@BL0PR11MB3042.namprd11.prod.outlook.com>
+ <CAB88-qMZiPgFx-13WiXqJ9+EV04THXuSHkLjFxLqvZxKp5LNkA@mail.gmail.com>
+In-Reply-To: <CAB88-qMZiPgFx-13WiXqJ9+EV04THXuSHkLjFxLqvZxKp5LNkA@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-product: dlpe-windows
+dlp-reaction: no-action
+dlp-version: 11.6.500.17
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BL0PR11MB3042:EE_|MN2PR11MB4551:EE_
+x-ms-office365-filtering-correlation-id: 7167ca6d-cfb9-4446-bf2f-08daa0d43f70
+x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: JSaUfaGPjjlHRehphmMH7s9G6L7mppCqkvcW4d22DsBgXIsGIhuDXJWNpnGRMHT97glDtxdBZRh0+8H7WqYZEmh0f+iXgJzyG2ocP9z7YlTpogViZO8UqOqNKMBS88O98oMmvtoOdn4J9sHQmZd5DyjQhZgtELiJiDUdf3DqngmBQeR9w+ypY376dIIEr4FsB+lrZxPbryZ8cUgg0hN2K12g1kRH3IUz9KLHFr2cNuYQCGl3AgTkvcXKbD5nwukbop5dO5OeGO02RKJyPIodl4Q7A+/Vb9dvykNRiXrFSqDbCEC1SnskKWuGB9R3exqJDcp2jBoDo+3b6+ZyccVCYDL0sBdCQh3lC6KUjOLxhJg4ji0kmnnVFDSx5TvPa5k6VPlkwmQH3u9L+uEyz53qwVAFqDvaRJ+LACbMpAMX4j11qNsBlVJCZXkC1vSDbAzWR7YrNTJ35yw+IK3bHkmJ7vdhuBVUUpq5lVC6+XIIt4DMbhAxOGUVmFAuXTXp4joq/Ju/KMO+i/Vcgw6Hjc76uWIgVv7PJmTJC3PyaKaHsUrPNjAqKHK0s/sz7HWFY+X6MdYFewlvmdiprKTD4lPBgvf83qUi2a4AGuEfKRtfvIWcSX5bq7a0eW/bwzrxHixg0GIKGL/1LLulGojS+vtfjLBQQYnkIaQJvqcxHxp3I0XNkHuKWzpYQmbIEVxbPwgf751LEvlW4SynME/DrvqKY9NYA36qdpbFADBx87iErlX6jGr0uEybsE8H12/MAt/S6bhahGSn5iXJlcjte8+Fjg==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BL0PR11MB3042.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230022)(366004)(136003)(396003)(39860400002)(346002)(376002)(451199015)(55016003)(86362001)(71200400001)(38070700005)(33656002)(478600001)(2906002)(41300700001)(7696005)(5660300002)(6506007)(54906003)(38100700002)(6916009)(9686003)(26005)(8936002)(76116006)(82960400001)(64756008)(83380400001)(186003)(8676002)(52536014)(66556008)(66476007)(66446008)(122000001)(66946007)(316002)(4326008);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?WnhjMXI1cnpVcjFkdjdmNVhWbFREd200bTZPOWYwTGdKUkZ3WmxiSHpvdHRR?=
+ =?utf-8?B?NkRkeFZtUUJNajFCZHhINmJybzdRMVJvR2h6OVpEbnhEVy9SRFptNjlHYXRn?=
+ =?utf-8?B?NFBuWHlML3BVMzlMaW95UVlZUWFibTNzbVlSZFFvYlU3YTU0L1phcld2VTFS?=
+ =?utf-8?B?RGdFcndMQUpLYi9IMzVMYzFGcnVhdFc0cEJSVHN2S0hRbEwwQUxrQUVsWUh0?=
+ =?utf-8?B?YlU1WkxMVDZ4RVNybW9OOEN0Z05YZWhJa2pSOXNGa2RWME9QelE4OURFRmZp?=
+ =?utf-8?B?QXFMMWZWSW5pR0x0aWZxUW5ZNnhNbVAxbFFQV0R5ak9yTzNoS1B1c290K1M5?=
+ =?utf-8?B?cFY3V29HUVJZU0lPTElwalIvNnRCSFI5SUNCUC80dUp0VHZMWUlMTGxQZktC?=
+ =?utf-8?B?V2NTZC91VmY2NURJaTZuWkZDV0FWcHducC9EWjVZVGtocnB0Y3VySnd4SWxz?=
+ =?utf-8?B?ZVZkM1ZnZlNsVTJkZXg4WUVpdWJORkFLRGdUcUpaUFFheGsrYUNGQTNHWFBq?=
+ =?utf-8?B?bmxRbDBQaE9Qck9JTHd0Q1pmRTl2V0oyK083MTE0VU51VTlTZVkwTC9vMURS?=
+ =?utf-8?B?SkNvMEp2MFN5NHRRTjdqS2RFaHY0YzY3UGNSakhqQzdQSUJRRXY4NHpzTGFu?=
+ =?utf-8?B?L0I2bTJBdU5SQXdvNG50bndWbFBTNmNYcDN0Y1BsMTFFUGdhMFdjblI4ZDZh?=
+ =?utf-8?B?NmVrMTlYSG5KZXpERXZzRkptTWZYWjJBTlovZkdVemlTbk1URTlqZ0U3VFJn?=
+ =?utf-8?B?bG1OZXZWQ0xYQ1hsSnhYK283TXdqeUhrbDFkM29OS3NBbVludWwwSlFJZjdp?=
+ =?utf-8?B?MW9nK05COTBCL1ZSMWJaY1ZLTFZPOWY3Y2hOYnJvODZUU3F4UEFaVjhsajdO?=
+ =?utf-8?B?Wmp4aXhScTJUaWpCRi80NXBXdWE1Nm5rdG00KzVQNWM0RzZZRm83SWczN1BT?=
+ =?utf-8?B?bytkc3VPWHc1R1M5RWpiZkxVYURTclhsUEcycjB0bmN0cHo1MzcrSnJnZ2pF?=
+ =?utf-8?B?VTFOdGZqaE9jVWVLemhPWmVSeUM4dkh1NVk2ZVRKdUlZNWxkYm9tT0FBcG90?=
+ =?utf-8?B?SlRpZDV4M1Qyc3lQZzNweXNsdG8yQ2FZOEVrSHVuU1RmRmtWR0tHNnBxazZO?=
+ =?utf-8?B?WTA3RlkrVkNHOVNQMnNENXY1a1ZrTzV1NWZpbHg4ajY4M1hUL01MMjJHRG1H?=
+ =?utf-8?B?Q1BLOUYyc2ZocE9OUkx6TXRjN2Nud29UMFI1d1NzaGZlYlZOUVNWbVVXMVg3?=
+ =?utf-8?B?Y0pUWUVHNGh1WFd4NXVybHNEUWI0aGRQNHFzR081cVZlVnhtU09aZUNyR1kx?=
+ =?utf-8?B?V01Qd0s4dFVRNWs5MWxtdzhNZXljVHFKUUVXVENtVVZDRG5QdFc3SGV6OHRh?=
+ =?utf-8?B?RFp4UmkwWW9FQVE3Vmo4SG5BczZlbytkdmlHSjU5cTRsUHlaWVVUSTZCNm1R?=
+ =?utf-8?B?Y1VkYXo3WERTbDFGQ2lVTVJraXVJdG9EbENFcmRPS3U4NnF6amlxbzRWSUtZ?=
+ =?utf-8?B?VCtIZForbmxNQXJQTno5dDF0MUhCeDhwOTFmODBUTHQ4SXdTbXFqRkhuMHUy?=
+ =?utf-8?B?Ty9SMi9sRGtMMmUzRUNTQnJxaGpZY0RlTXdpZzJKZ0ZmVmF3K3IrUERpWVpD?=
+ =?utf-8?B?UElZMkYxSXFLaXBWajNJRmJVYUJjdzF1YlAzMmg5dUpJc0xXYVQ0MVByUm0y?=
+ =?utf-8?B?blVuU1Zya1lDTStNazJwcXRKa0FlT0EvZ21iTTVhMDBTRlh3SUtwQ2tlQjRh?=
+ =?utf-8?B?SkM5UGxLcWgzblYxQTF4U0Z0aE83M2VNTE5Id1FCQnRzUWxYTXJMUjdjWFgw?=
+ =?utf-8?B?SVNRMWRjZTk1OG5pY1BOUnpHNlJUellCK3VPanNkRWowaTd0S1BWSXorbzRu?=
+ =?utf-8?B?TDFIZGc2U3ZRNjVVdjk5M2ZDVlU0aStkVHphYkxBL2RZcmRtc3A5RHdxOHVx?=
+ =?utf-8?B?WEhoQXVCV25xeWtVTUs5YUdDTnRZT0NMd05jblhKU0lBREt4QkMwZVRxODRI?=
+ =?utf-8?B?d3JqMjlQNTMrd0FiVmV0bllLTG9vaXhNR0UxNjRPalBaRmxuTzhKRG84OTF1?=
+ =?utf-8?B?dGQrRzNnUFV1OHlRR04xaXRaTENDNGdiZXVOOHdDeGlvSzV0bWE4dlh6M0NH?=
+ =?utf-8?Q?kh2FQK4nFyAL7k6ScSTXimaSY?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20220914101108.82571-1-alistair.francis@wdc.com>
- <20220914101108.82571-2-alistair.francis@wdc.com>
-In-Reply-To: <20220914101108.82571-2-alistair.francis@wdc.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Tue, 27 Sep 2022 16:29:30 +0800
-X-Gmail-Original-Message-ID: <CANzO1D2Hh9ipmReXrbssWeg=mgZbMnXOu+2GNTWy+cEDQKEJRg@mail.gmail.com>
-Message-ID: <CANzO1D2Hh9ipmReXrbssWeg=mgZbMnXOu+2GNTWy+cEDQKEJRg@mail.gmail.com>
-Subject: Re: [PATCH 1/3] target/riscv: Set the CPU resetvec directly
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
- bmeng.cn@gmail.com, alistair23@gmail.com
-Content-Type: multipart/alternative; boundary="000000000000182c5805e9a4722d"
-Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
- envelope-from=frank.chang@sifive.com; helo=mail-lj1-x22f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BL0PR11MB3042.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7167ca6d-cfb9-4446-bf2f-08daa0d43f70
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Sep 2022 22:04:28.3586 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 94vs5ce6rWB52n5dmzKjdGSmNWdjmakghUFyuse5hKtPw94DmzBO07zrJmvhpsunHkJML3VqWMJk0SY/ZeG6EA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB4551
+X-OriginatorOrg: intel.com
+Received-SPF: pass client-ip=134.134.136.126;
+ envelope-from=eddie.dong@intel.com; helo=mga18.intel.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.082,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,271 +175,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Sep 2022 08:29:51 -0000
+X-List-Received-Date: Tue, 27 Sep 2022 22:04:38 -0000
 
---000000000000182c5805e9a4722d
-Content-Type: text/plain; charset="UTF-8"
-
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-
-On Wed, Sep 14, 2022 at 6:12 PM Alistair Francis via <qemu-riscv@nongnu.org>
-wrote:
-
-> Instead of using our properties to set a config value which then might
-> be used to set the resetvec (depending on your timing), let's instead
-> just set the resetvec directly in the env struct.
->
-> This allows us to set the reset vec from the command line with:
->     -global driver=riscv.hart_array,property=resetvec,value=0x20000400
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu.h     |  3 +--
->  target/riscv/cpu.c     | 13 +++----------
->  target/riscv/machine.c |  6 +++---
->  3 files changed, 7 insertions(+), 15 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 06751e1e3e..22344a620b 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -190,7 +190,7 @@ struct CPUArchState {
->      /* This contains QEMU specific information about the virt state. */
->      target_ulong virt;
->      target_ulong geilen;
-> -    target_ulong resetvec;
-> +    uint64_t resetvec;
->
->      target_ulong mhartid;
->      /*
-> @@ -474,7 +474,6 @@ struct RISCVCPUConfig {
->      bool pmp;
->      bool epmp;
->      bool debug;
-> -    uint64_t resetvec;
->
->      bool short_isa_string;
->  };
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index aee14a239a..b29c88b9f0 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -228,13 +228,6 @@ static void set_vext_version(CPURISCVState *env, int
-> vext_ver)
->      env->vext_ver = vext_ver;
->  }
->
-> -static void set_resetvec(CPURISCVState *env, target_ulong resetvec)
-> -{
-> -#ifndef CONFIG_USER_ONLY
-> -    env->resetvec = resetvec;
-> -#endif
-> -}
-> -
->  static void riscv_any_cpu_init(Object *obj)
->  {
->      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> @@ -336,7 +329,6 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
->
->      set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
->      set_priv_version(env, PRIV_VERSION_1_10_0);
-> -    set_resetvec(env, DEFAULT_RSTVEC);
->      cpu->cfg.mmu = false;
->  }
->  #endif
-> @@ -676,7 +668,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error
-> **errp)
->          riscv_set_feature(env, RISCV_FEATURE_DEBUG);
->      }
->
-> -    set_resetvec(env, cpu->cfg.resetvec);
->
->  #ifndef CONFIG_USER_ONLY
->      if (cpu->cfg.ext_sstc) {
-> @@ -1079,7 +1070,9 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid,
-> RISCV_CPU_MARCHID),
->      DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
->
-> -    DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec,
-> DEFAULT_RSTVEC),
-> +#ifndef CONFIG_USER_ONLY
-> +    DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec,
-> DEFAULT_RSTVEC),
-> +#endif
->
->      DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string,
-> false),
->
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 41098f6ad0..c4e6b3bba4 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -308,8 +308,8 @@ static const VMStateDescription vmstate_pmu_ctr_state
-> = {
->
->  const VMStateDescription vmstate_riscv_cpu = {
->      .name = "cpu",
-> -    .version_id = 4,
-> -    .minimum_version_id = 4,
-> +    .version_id = 5,
-> +    .minimum_version_id = 5,
->      .post_load = riscv_cpu_post_load,
->      .fields = (VMStateField[]) {
->          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
-> @@ -331,7 +331,7 @@ const VMStateDescription vmstate_riscv_cpu = {
->          VMSTATE_UINT32(env.features, RISCVCPU),
->          VMSTATE_UINTTL(env.priv, RISCVCPU),
->          VMSTATE_UINTTL(env.virt, RISCVCPU),
-> -        VMSTATE_UINTTL(env.resetvec, RISCVCPU),
-> +        VMSTATE_UINT64(env.resetvec, RISCVCPU),
->          VMSTATE_UINTTL(env.mhartid, RISCVCPU),
->          VMSTATE_UINT64(env.mstatus, RISCVCPU),
->          VMSTATE_UINT64(env.mip, RISCVCPU),
-> --
-> 2.37.2
->
->
->
-
---000000000000182c5805e9a4722d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang=
-@sifive.com">frank.chang@sifive.com</a>&gt;</div><br><div class=3D"gmail_qu=
-ote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Sep 14, 2022 at 6:12 PM =
-Alistair Francis via &lt;<a href=3D"mailto:qemu-riscv@nongnu.org">qemu-risc=
-v@nongnu.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
-g-left:1ex">Instead of using our properties to set a config value which the=
-n might<br>
-be used to set the resetvec (depending on your timing), let&#39;s instead<b=
-r>
-just set the resetvec directly in the env struct.<br>
-<br>
-This allows us to set the reset vec from the command line with:<br>
-=C2=A0 =C2=A0 -global driver=3Driscv.hart_array,property=3Dresetvec,value=
-=3D0x20000400<br>
-<br>
-Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.=
-com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
----<br>
-=C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0|=C2=A0 3 +--<br>
-=C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0| 13 +++----------<br>
-=C2=A0target/riscv/machine.c |=C2=A0 6 +++---<br>
-=C2=A03 files changed, 7 insertions(+), 15 deletions(-)<br>
-<br>
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
-index 06751e1e3e..22344a620b 100644<br>
---- a/target/riscv/cpu.h<br>
-+++ b/target/riscv/cpu.h<br>
-@@ -190,7 +190,7 @@ struct CPUArchState {<br>
-=C2=A0 =C2=A0 =C2=A0/* This contains QEMU specific information about the vi=
-rt state. */<br>
-=C2=A0 =C2=A0 =C2=A0target_ulong virt;<br>
-=C2=A0 =C2=A0 =C2=A0target_ulong geilen;<br>
--=C2=A0 =C2=A0 target_ulong resetvec;<br>
-+=C2=A0 =C2=A0 uint64_t resetvec;<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0target_ulong mhartid;<br>
-=C2=A0 =C2=A0 =C2=A0/*<br>
-@@ -474,7 +474,6 @@ struct RISCVCPUConfig {<br>
-=C2=A0 =C2=A0 =C2=A0bool pmp;<br>
-=C2=A0 =C2=A0 =C2=A0bool epmp;<br>
-=C2=A0 =C2=A0 =C2=A0bool debug;<br>
--=C2=A0 =C2=A0 uint64_t resetvec;<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0bool short_isa_string;<br>
-=C2=A0};<br>
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
-index aee14a239a..b29c88b9f0 100644<br>
---- a/target/riscv/cpu.c<br>
-+++ b/target/riscv/cpu.c<br>
-@@ -228,13 +228,6 @@ static void set_vext_version(CPURISCVState *env, int v=
-ext_ver)<br>
-=C2=A0 =C2=A0 =C2=A0env-&gt;vext_ver =3D vext_ver;<br>
-=C2=A0}<br>
-<br>
--static void set_resetvec(CPURISCVState *env, target_ulong resetvec)<br>
--{<br>
--#ifndef CONFIG_USER_ONLY<br>
--=C2=A0 =C2=A0 env-&gt;resetvec =3D resetvec;<br>
--#endif<br>
--}<br>
--<br>
-=C2=A0static void riscv_any_cpu_init(Object *obj)<br>
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0CPURISCVState *env =3D &amp;RISCV_CPU(obj)-&gt;env;<br>
-@@ -336,7 +329,6 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | R=
-VU);<br>
-=C2=A0 =C2=A0 =C2=A0set_priv_version(env, PRIV_VERSION_1_10_0);<br>
--=C2=A0 =C2=A0 set_resetvec(env, DEFAULT_RSTVEC);<br>
-=C2=A0 =C2=A0 =C2=A0cpu-&gt;cfg.mmu =3D false;<br>
-=C2=A0}<br>
-=C2=A0#endif<br>
-@@ -676,7 +668,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error *=
-*errp)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0riscv_set_feature(env, RISCV_FEATURE_DEBU=
-G);<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-<br>
--=C2=A0 =C2=A0 set_resetvec(env, cpu-&gt;cfg.resetvec);<br>
-<br>
-=C2=A0#ifndef CONFIG_USER_ONLY<br>
-=C2=A0 =C2=A0 =C2=A0if (cpu-&gt;cfg.ext_sstc) {<br>
-@@ -1079,7 +1070,9 @@ static Property riscv_cpu_properties[] =3D {<br>
-=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_UINT64(&quot;marchid&quot;, RISCVCPU, cfg.m=
-archid, RISCV_CPU_MARCHID),<br>
-=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_UINT64(&quot;mimpid&quot;, RISCVCPU, cfg.mi=
-mpid, RISCV_CPU_MIMPID),<br>
-<br>
--=C2=A0 =C2=A0 DEFINE_PROP_UINT64(&quot;resetvec&quot;, RISCVCPU, cfg.reset=
-vec, DEFAULT_RSTVEC),<br>
-+#ifndef CONFIG_USER_ONLY<br>
-+=C2=A0 =C2=A0 DEFINE_PROP_UINT64(&quot;resetvec&quot;, RISCVCPU, env.reset=
-vec, DEFAULT_RSTVEC),<br>
-+#endif<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_BOOL(&quot;short-isa-string&quot;, RISCVCPU=
-, cfg.short_isa_string, false),<br>
-<br>
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c<br>
-index 41098f6ad0..c4e6b3bba4 100644<br>
---- a/target/riscv/machine.c<br>
-+++ b/target/riscv/machine.c<br>
-@@ -308,8 +308,8 @@ static const VMStateDescription vmstate_pmu_ctr_state =
-=3D {<br>
-<br>
-=C2=A0const VMStateDescription vmstate_riscv_cpu =3D {<br>
-=C2=A0 =C2=A0 =C2=A0.name =3D &quot;cpu&quot;,<br>
--=C2=A0 =C2=A0 .version_id =3D 4,<br>
--=C2=A0 =C2=A0 .minimum_version_id =3D 4,<br>
-+=C2=A0 =C2=A0 .version_id =3D 5,<br>
-+=C2=A0 =C2=A0 .minimum_version_id =3D 5,<br>
-=C2=A0 =C2=A0 =C2=A0.post_load =3D riscv_cpu_post_load,<br>
-=C2=A0 =C2=A0 =C2=A0.fields =3D (VMStateField[]) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 3=
-2),<br>
-@@ -331,7 +331,7 @@ const VMStateDescription vmstate_riscv_cpu =3D {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT32(env.features, RISCVCPU),<b=
-r>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.priv, RISCVCPU),<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.virt, RISCVCPU),<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINTTL(env.resetvec, RISCVCPU),<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT64(env.resetvec, RISCVCPU),<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.mhartid, RISCVCPU),<br=
->
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT64(env.mstatus, RISCVCPU),<br=
->
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT64(env.mip, RISCVCPU),<br>
--- <br>
-2.37.2<br>
-<br>
-<br>
-</blockquote></div>
-
---000000000000182c5805e9a4722d--
+SGkgVHlsZXI6DQoNCj4gK30NCj4gKw0KPiArLyogQ2FsbGVkIHdoZW4gdGhlIGJhcmsgdGltZXIg
+ZXhwaXJlcyAqLyBzdGF0aWMgdm9pZA0KPiAraWJleF9hb25fYmFya2VyX2V4cGlyZWQodm9pZCAq
+b3BhcXVlKSB7DQpUaGlzIG1heSBoYXBwZW4gZHVyaW5nIGliZXhfYW9uX3VwZGF0ZV9jb3VudCgp
+LCByaWdodD8gDQoNCj4gK8KgIMKgIEliZXhBT05UaW1lclN0YXRlICpzID0gSUJFWF9BT05fVElN
+RVIob3BhcXVlKTsNCj4gK8KgIMKgIGlmIChpYmV4X2Fvbl91cGRhdGVfY291bnQocykgJiYNCiAg
+ICAgICAgVGhpcyBtYXkgaGFwcGVuIGR1cmluZyBpYmV4X2Fvbl91cGRhdGVfY291bnQoKS4NCiAg
+ICAgICAgTmVzdGVkIGNhbGwgbWF5IGxlYWQgdG8gaW5jb3JyZWN0IHMtPnJlZ3NbUl9XRE9HX0NP
+VU5UXSAmIHMtPndkb2dfbGFzdC4gDQoNCiAgICBDYW4geW91IGVsYWJvcmF0ZT8gVGhlIHRpbWVy
+cyBmb3IgYmFyayBhbmQgYml0ZSBhcmUgbm90IHVwZGF0ZWQgaW4gInVwZGF0ZV9jb3VudCIuDQoN
+CldoZW4gMXN0IGliZXhfYW9uX3VwZGF0ZV9jb3VudCgpIGlzIGV4ZWN1dGluZywgYW5kIGlzIGlu
+IHRoZSBwbGFjZSBQUFAgKGFmdGVyIHVwZGF0aW5nIHMtPnJlZ3NbUl9XRE9HX0NPVU5UXSBidXQg
+YmVmb3JlIHVwZGF0aW5nIHMtPndkb2dfbGFzdCksIGEgdGltZXIgKGJhcmtlcikgbWF5IGhhcHBl
+bi4NCkluc2lkZSBpYmV4X2Fvbl9iYXJrZXJfZXhwaXJlZCgpLCBpdCBjYWxscyBpYmV4X2Fvbl91
+cGRhdGVfY291bnQoKSBhZ2FpbiAobmVzdCBjYWxsKSwgYW5kIHVwZGF0ZSBzLT5yZWdzW1JfV0RP
+R19DT1VOVF0gJiBzLT53ZG9nX2xhc3QsIHdpdGggdGhlIG5ldyB2YWx1ZS4NCkFmdGVyIHRoZSBu
+ZXN0IGV4ZWN1dGlvbiBlbmRzLCBhbmQgcmV0dXJucyB0byB0aGUgaW5pdGlhbCBwb2ludCAoUFBQ
+KSAsIHRoZSBzLT53ZG9nX2xhc3QgaXMgdXBkYXRlZCAod2l0aCB0aGUgdmFsdWUgb2YgMXN0IGV4
+ZWN1dGlvbiB0aW1lKSwgdGhpcyBsZWFkcyB0byBtaXNtYXRjaCBvZiBzLT5yZWdzW1JfV0RPR19D
+T1VOVF0gJiBzLT53ZG9nX2xhc3QuDQoNClRoaXMgY2FzZSBtYXkgbm90IGJlIHRyaWdnZXJlZCBh
+dCBub3JtYWwgY2FzZSwgYnV0IGlmIHRoZSBndWVzdCByZWFkIEFfV0RPR19DT1VOVCwgdGhlIDFz
+dCBpYmV4X2Fvbl91cGRhdGVfY291bnQoKSBkb2VzIGV4ZWN1dGUsIGFuZCBicmluZyB0aGUgcG90
+ZW50aWFsIGlzc3VlLg0KDQpJIHRoaW5rIHdlIGNhbiBzb2x2ZSB0aGUgcHJvYmxlbSwgYnkgbm90
+IHVwZGF0aW5nIHMtPnJlZ3NbUl9XRE9HX0NPVU5UXSAmIHMtPndkb2dfbGFzdCBpbiB0aGUgdGlt
+ZXIgY2FsbCBiYWNrIEFQSS4gIFRoZSB1cGRhdGUgaXMgbm90IG5lY2Vzc2FyeSBnaXZlbiB0aGF0
+IHRoZSBzdG9yZWQgdmFsdWUgaXMgYW55d2F5IG5vdCB0aGUgY3VycmVudCBDT1VOVC4gV2Ugb25s
+eSBuZWVkIHRvIHVwZGF0ZSB3aGVuIHRoZSBndWVzdCB3cml0ZSB0aGUgQ09VTlQuDQoNCg0KPiAr
+wqAgwqAgwqAgwqAgcy0+cmVnc1tSX1dET0dfQ09VTlRdID49IHMtPnJlZ3NbUl9XRE9HX0JBUktf
+VEhPTERdKSB7DQo+ICvCoCDCoCDCoCDCoCBzLT5yZWdzW1JfSU5UUl9TVEFURV0gfD0gKDEgPDwg
+MSk7DQo+ICvCoCDCoCDCoCDCoCBxZW11X2lycV9yYWlzZShzLT5iYXJrX2lycSk7DQo+ICvCoCDC
+oCB9DQo+ICt9DQo+ICsNCg0KDQpUSFggIEVkZGllDQo=
 
