@@ -1,77 +1,91 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1od1NK-0007eO-0W
-	for mharc-qemu-riscv@gnu.org; Mon, 26 Sep 2022 23:35:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33444)
+	id 1od481-0005G1-1u
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Sep 2022 02:31:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47212)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1od1NI-0007bl-Ah
- for qemu-riscv@nongnu.org; Mon, 26 Sep 2022 23:35:12 -0400
-Received: from mail-oa1-x32.google.com ([2001:4860:4864:20::32]:35543)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1od1NF-0003UU-EK
- for qemu-riscv@nongnu.org; Mon, 26 Sep 2022 23:35:11 -0400
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-130af056397so11770860fac.2
- for <qemu-riscv@nongnu.org>; Mon, 26 Sep 2022 20:35:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date;
- bh=cTpiKMeX1kSGN77h4IpKuIZpd1OqUkwiSO/vMCf+e/s=;
- b=MXfMcL1hGOQ/PAd6xNgWrB9oi7hWTbvw+fbY0u3+j7hytgSqaT+AK02qt9UGcG3EiJ
- hag2OyiFk9LSc5ywdMZdMaCBISTQYNnI9staCYUpfrVspuY1V3CWaleTcU+VVH1mjm1x
- jrP9Ni2bw2taqfWBMiZY2y9zQfK7OmtAqqWj9PMgF+QhJ7l43L4B4eCHqfj3yv0J2mQ5
- ptt3nCJnSCSNTNAhdweVAmkUeVVJ9IWRK72nej00V3vuQv9tTZfP4DI+M6a+Qv617eyj
- YB+rhew2MkG/xef9e5dmvwmhckjrppfYNTBEiTG+SQopWd/0TEGsDKb1QKj2JOEToW2k
- lHeQ==
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1od47y-00059F-6r
+ for qemu-riscv@nongnu.org; Tue, 27 Sep 2022 02:31:34 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:26113)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1od47u-0001Hp-FB
+ for qemu-riscv@nongnu.org; Tue, 27 Sep 2022 02:31:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1664260289;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=YQTs4tfEW30qVCeD9xi5rcIrk6UTMX4QrTH9glQfXVo=;
+ b=Kmq0otpejJvsxfrv1iQATxv3l8iKoTf4+sXZRhnCpWxfyPtxPsiF0Qw8hWAto5iLsyh4ug
+ uvF/7W4XOTwY7OqChZRulYZ8dscyEoyoXMpH+Te+2tFn8m6v+SS88LHFVmt/G505kVUiga
+ Ch1tcDuIaE511f/kHq30N6xpod/heSc=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-628-aIL34NoDO66Qal-lQ1-srg-1; Tue, 27 Sep 2022 02:31:21 -0400
+X-MC-Unique: aIL34NoDO66Qal-lQ1-srg-1
+Received: by mail-wr1-f71.google.com with SMTP id
+ j16-20020adfa550000000b0022cbdfcea2dso242907wrb.19
+ for <qemu-riscv@nongnu.org>; Mon, 26 Sep 2022 23:31:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date;
- bh=cTpiKMeX1kSGN77h4IpKuIZpd1OqUkwiSO/vMCf+e/s=;
- b=2qeVfm7lGDUJJtsLHWp6gXlrz02FdtymaAVZ0B5fJ4W0wjSzSdbpBjztE5QOqfClhE
- jfS6e2A/Du76FIl3qTYk+FZaLRb06eln8iS+zYXlieJKTRtOpeHzvUkmm+XNvaqVA1J1
- QDQPYimLg0zoi3I68mXYA/FgIuzHcNTYuC7YX0HZF8uxSEurV3Q70bTOAfH87PDSAnR6
- nA9EIJWEZDcwRGAkUE21SiLCxPAOttK26lij0h9tKyMTqtfHsI3+fELWx0rLoQjkCilD
- Pljf7PIlCXr5cGRudAdPID/2Mkz59u4FLUx7jQnJEERVwkv8LLvvh5w23GYxIuCPDi15
- T11g==
-X-Gm-Message-State: ACrzQf3oBGfchri8+nf+5pgRsIB4Fl+90QBOZrX1blA89p32WnmzGCCr
- xcdSoCOPETuURhnFwsNN3g2VjJHbdotXHaA0vdnz8Q==
-X-Google-Smtp-Source: AMsMyM5cT51Sa8udV1uqA4TEpA0dAbPFd+n82rMCRngi/LHAGLghjiTitKvJaat0y/BodqdjjvQP1IIcPqHolvJxYK8=
-X-Received: by 2002:a05:6870:46a8:b0:128:b162:621a with SMTP id
- a40-20020a05687046a800b00128b162621amr1068870oap.90.1664249707217; Mon, 26
- Sep 2022 20:35:07 -0700 (PDT)
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date;
+ bh=YQTs4tfEW30qVCeD9xi5rcIrk6UTMX4QrTH9glQfXVo=;
+ b=m2qwc5zrAxKzKn/Bbr0B0zcvX0CMfoJS08DcvAUT0TILPWdnuxvqEapM0NyNeI4zHm
+ QzAmlU/+Bnflv2bt6HorbxCBa+UzSQ8q7bLM6o1JAsra8MJDwpbko3MmZXuDfD2D36Ls
+ n1Q+S2b0iklgXTd+TlwsD1LedYFu5xf+vX+UxDihBARvlAOJ44rC7W7Tx5iMOkvyH0yG
+ zprFvxv40WmncwJ2besG0HXL/FOJuIibqWG7Q0yItIu3/XwXlmZg2IblU3a/6WtHQx2d
+ mdojJJvi3X2QgwMywEiF6HpZL1FkBfDe4W4m6L8F3uPf5W8/pURoVTK0E30SwYfJRsTE
+ iOBg==
+X-Gm-Message-State: ACrzQf31O+b2pAaWKcA4gQuRoJb6dbFhr0pbmGlSj60Rbn8p8ee3rSzk
+ cYkRbzKSLB9ZAaUdZ6E4JfFq4VyQ4Ttg/KcvLJQC3aNTbQKnFtap5fbBDsPQ6dkjyZv6CKAosKx
+ 2QJ+RulByjZ423I4=
+X-Received: by 2002:adf:e383:0:b0:228:9a53:612b with SMTP id
+ e3-20020adfe383000000b002289a53612bmr16206753wrm.651.1664260280437; 
+ Mon, 26 Sep 2022 23:31:20 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM4ttaRsiIb1FEuqSTWEraLokNxZE6dO08JR3NM4noaFCzF2sr5Dr0cVzparkhVGHsBcuCM2nw==
+X-Received: by 2002:adf:e383:0:b0:228:9a53:612b with SMTP id
+ e3-20020adfe383000000b002289a53612bmr16206724wrm.651.1664260280065; 
+ Mon, 26 Sep 2022 23:31:20 -0700 (PDT)
+Received: from [192.168.0.5] (ip-109-43-179-30.web.vodafone.de.
+ [109.43.179.30]) by smtp.gmail.com with ESMTPSA id
+ bd24-20020a05600c1f1800b003a62400724bsm826993wmb.0.2022.09.26.23.31.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Sep 2022 23:31:19 -0700 (PDT)
+Message-ID: <c2773c56-2710-ae39-5009-a8d11bddb81f@redhat.com>
+Date: Tue, 27 Sep 2022 08:31:17 +0200
 MIME-Version: 1.0
-References: <CAB88-qPD2OAxeg4WA65utUmFj4Y=SceeFTuStpZS4pPWevdBXA@mail.gmail.com>
- <20220905131544.2xlaycrcyviufo5y@kamzik>
- <CAB88-qPOGVksP1ekqTjcGHbi2_iVzsW-b9wokgREEQJ8LgfU=Q@mail.gmail.com>
- <CALw707oeRt4+C9HTbzzt0RcP-FtYeh1vTh7meGY99vKQQnsktA@mail.gmail.com>
- <CAB88-qPeGqcPHhCccxgTO__gh_spbzrbVNQ4Z-340E7T4mRBCw@mail.gmail.com>
-In-Reply-To: <CAB88-qPeGqcPHhCccxgTO__gh_spbzrbVNQ4Z-340E7T4mRBCw@mail.gmail.com>
-From: Jim Shu <jim.shu@sifive.com>
-Date: Tue, 27 Sep 2022 11:34:55 +0800
-Message-ID: <CALw707rMN584L55kB2DeYhmvQ1nB6rxnasJC8f6T0Vx=sceWyw@mail.gmail.com>
-Subject: Re: [PATCH 2/4] hw/intc: sifive_plic.c: Fix interrupt priority index.
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.13.0
+Subject: Re: [PATCH v2 1/3] hw/watchdog: wdt_ibex_aon.c: Implement the
+ watchdog for the OpenTitan
 To: Tyler Ng <tkng@rivosinc.com>
-Cc: Andrew Jones <ajones@ventanamicro.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- Laurent Vivier <lvivier@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2001:4860:4864:20::32;
- envelope-from=jim.shu@sifive.com; helo=mail-oa1-x32.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Laurent Vivier <lvivier@redhat.com>
+References: <CAB88-qOh7dBoFP4SWcM4G5EVp6cumVnZ5j4tNRqSvMT08=dAcA@mail.gmail.com>
+ <55a69b23-3bea-0676-478a-d257fc4febf5@redhat.com>
+ <CAB88-qO7vw4gC6JNuX=CcnXmYznPdwdhv_nJNrejVzFXSoLQnQ@mail.gmail.com>
+From: Thomas Huth <thuth@redhat.com>
+In-Reply-To: <CAB88-qO7vw4gC6JNuX=CcnXmYznPdwdhv_nJNrejVzFXSoLQnQ@mail.gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -44
+X-Spam_score: -4.5
+X-Spam_bar: ----
+X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.082,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-2.319, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,99 +98,160 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Sep 2022 03:35:12 -0000
+X-List-Received-Date: Tue, 27 Sep 2022 06:31:35 -0000
 
-Hi Tyler,
+  Hi Tyler!
 
-Thanks for the explanation. I understand the issue here.
-I think we should align the priority base in each RISC-V platform to
-the same value (no matter 0x0 or 0x4) if they use PLIC in the same
-way.
+On 27/09/2022 01.03, Tyler Ng wrote:
+> Hi Thomas,
+> 
+> On Thu, Sep 22, 2022 at 9:17 AM Thomas Huth <thuth@redhat.com 
+> <mailto:thuth@redhat.com>> wrote:
+> 
+>     On 22/09/2022 17.58, Tyler Ng wrote:
+>      > This commit adds most of an implementation of the OpenTitan Always-On
+>      > Timer. The documentation for this timer is found here:
+>      >
+>      > https://docs.opentitan.org/hw/ip/aon_timer/doc/
+>     <https://docs.opentitan.org/hw/ip/aon_timer/doc/>
+>      >
+>      > Using commit 217a0168ba118503c166a9587819e3811eeb0c0c
+>      >
+>      > The implementation includes most of the watchdog features; it does not
+>      > implement the wakeup timer.
+>      >
+>      > An important note: the OpenTitan board uses the sifive_plic. The plic
+>      > will not be able to claim the bark interrupt (159) because the sifive
+>      > plic sets priority[159], but checks priority[158] for the priority, so
+>      > it thinks that the interrupt's priority is 0 (effectively disabled).
+>     ...
+>      > diff --git a/tests/qtest/ibex-aon-timer-test.c
+>      > b/tests/qtest/ibex-aon-timer-test.c
+>      > new file mode 100644
+>      > index 0000000000..af33feac39
+>      > --- /dev/null
+>      > +++ b/tests/qtest/ibex-aon-timer-test.c
+>      > @@ -0,0 +1,189 @@
+>      > +/*
+>      > + * Testing the OpenTitan AON Timer
+>      > + *
+>      > + * Copyright (c) 2022 Rivos Inc.
+>      > + *
+>      > + * Permission is hereby granted, free of charge, to any person
+>     obtaining a copy
+>      > + * of this software and associated documentation files (the
+>      > "Software"), to deal
+>      > + * in the Software without restriction, including without limitation
+>     the rights
+>      > + * to use, copy, modify, merge, publish, distribute, sublicense,
+>     and/or sell
+>      > + * copies of the Software, and to permit persons to whom the Software is
+>      > + * furnished to do so, subject to the following conditions:
+>      > + *
+>      > + * The above copyright notice and this permission notice shall be
+>     included in
+>      > + * all copies or substantial portions of the Software.
+>      > + *
+>      > + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+>     EXPRESS OR
+>      > + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+>     MERCHANTABILITY,
+>      > + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+>     SHALL
+>      > + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+>     OR OTHER
+>      > + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+>      > ARISING FROM,
+>      > + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+>     DEALINGS IN
+>      > + * THE SOFTWARE.
+> 
+>     Could you maybe add a SPDX license identifier at the beginning of the
+>     comment, so that it's easier to identify the license at a first glance?
+>     (also in the other new files)
+> 
+> Will do, was actually thinking of switching over to GPL-2.0-or-later as 
+> opposed to MIT.
 
+Yes, that would be the best fit for QEMU, I think.
 
-Thanks,
-Jim Shu
+>      > + */
+>      > +
+>      > +#include "qemu/osdep.h"
+>      > +#include "libqtest.h"
+>      > +#include "qapi/qmp/qdict.h"
+>      > +
+>      > +#define AON_BASE_ADDR (0x40470000ul)
+>      > +#define AON_ADDR(addr) (AON_BASE_ADDR + addr)
+>      > +#define AON_WKUP_IRQ 158
+>      > +#define AON_BARK_IRQ 159
+>      > +#define AON_FREQ 200000 /* 200 KHz */
+>      > +#define AON_PERIOD_NS 5000
+>      > +#define NANOS_PER_SECOND 1000000000LL
+>      > +/* Test that reads work, and that the regs get reset to the correct
+>     value */
+>      > +static void test_reads(void)
+>      > +{
+>      > +    QTestState *test = qtest_init("-M opentitan");
+>      > +    g_assert(qtest_readl(test, AON_ADDR(0x00)) == 0);
+>      > +    g_assert(qtest_readl(test, AON_ADDR(0x04)) == 0);
+>      > +    g_assert(qtest_readl(test, AON_ADDR(0x08)) == 0);
+>      > +    g_assert(qtest_readl(test, AON_ADDR(0x0c)) == 0);
+>      > +    g_assert(qtest_readl(test, AON_ADDR(0x10)) == 1); > +   
+>     g_assert(qtest_readl(test, AON_ADDR(0x14)) == 0);
+>      > +    g_assert(qtest_readl(test, AON_ADDR(0x18)) == 0);
+>      > +    g_assert(qtest_readl(test, AON_ADDR(0x1c)) == 0);
+>      > +    g_assert(qtest_readl(test, AON_ADDR(0x20)) == 0);
+>      > +    g_assert(qtest_readl(test, AON_ADDR(0x24)) == 0);
+>      > +    g_assert(qtest_readl(test, AON_ADDR(0x28)) == 0);
+>      > +    g_assert(qtest_readl(test, AON_ADDR(0x2c)) == 0);
+> 
+>     The read tests that check for 0 could maybe be simplified with a for-loop
+>     (or two).
+> 
+> I'm not entirely sure about what benefit this would bring after writing it out.
 
-On Tue, Sep 27, 2022 at 4:04 AM Tyler Ng <tkng@rivosinc.com> wrote:
->
-> Hi Jim,
->
-> Thanks for raising this comment. I think I understand where the confusion=
- happens and it's because in the OpenTitan machine (which uses the sifive p=
-lic), it uses 0x00 as the priority base by default, which was the source of=
- the problems. I'll drop this commit in the next version.
->
-> -Tyler
->
-> On Sun, Sep 25, 2022 at 6:47 AM Jim Shu <jim.shu@sifive.com> wrote:
->>
->> Hi Tyler,
->>
->> This fix is incorrect.
->>
->> In PLIC spec, Interrupt Source Priority Memory Map is
->> 0x000000: Reserved (interrupt source 0 does not exist)
->> 0x000004: Interrupt source 1 priority
->> 0x000008: Interrupt source 2 priority
->>
->> Current RISC-V machines (virt, sifive_u) use 0x4 as priority_base, so
->> current formula "irq =3D ((addr - plic->priority_base) >> 2) + 1" will
->> take offset 0x4 as IRQ source 1, which is correct.
->> Your fix will cause the bug in existing machines.
->>
->> Thanks,
->> Jim Shu
->>
->>
->>
->>
->> On Tue, Sep 6, 2022 at 11:21 PM Tyler Ng <tkng@rivosinc.com> wrote:
->> >
->> > Here's the patch SHA that introduced the offset: 0feb4a7129eb4f120c758=
-49ddc9e50495c50cb63
->> >
->> > -Tyler
->> >
->> > On Mon, Sep 5, 2022 at 6:15 AM Andrew Jones <ajones@ventanamicro.com> =
-wrote:
->> >>
->> >> On Thu, Sep 01, 2022 at 03:50:06PM -0700, Tyler Ng wrote:
->> >> > Fixes a bug in which the index of the interrupt priority is off by =
-1.
->> >> > For example, using an IRQ number of 3 with a priority of 1 is suppo=
-sed to set
->> >> > plic->source_priority[2] =3D 1, but instead it sets
->> >> > plic->source_priority[3] =3D 1. When an interrupt is claimed to be
->> >> > serviced, it checks the index 2 instead of 3.
->> >> >
->> >> > Signed-off-by: Tyler Ng <tkng@rivosinc.com>
->> >>
->> >> Fixes tag?
->> >>
->> >> Thanks,
->> >> drew
->> >>
->> >> > ---
->> >> >  hw/intc/sifive_plic.c | 2 +-
->> >> >  1 file changed, 1 insertion(+), 1 deletion(-)
->> >> >
->> >> > diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
->> >> > index af4ae3630e..e75c47300a 100644
->> >> > --- a/hw/intc/sifive_plic.c
->> >> > +++ b/hw/intc/sifive_plic.c
->> >> > @@ -178,7 +178,7 @@ static void sifive_plic_write(void *opaque, hwa=
-ddr
->> >> > addr, uint64_t value,
->> >> >      SiFivePLICState *plic =3D opaque;
->> >> >
->> >> >      if (addr_between(addr, plic->priority_base, plic->num_sources =
-<< 2)) {
->> >> > -        uint32_t irq =3D ((addr - plic->priority_base) >> 2) + 1;
->> >> > +        uint32_t irq =3D ((addr - plic->priority_base) >> 2) + 0;
->> >> >
->> >> >          plic->source_priority[irq] =3D value & 7;
->> >> >          sifive_plic_update(plic);
->> >> > --
->> >> > 2.30.2
->> >> >
+Mostly a matter of taste. Keep it in the current shape if you prefer that.
+
+>      > +    qtest_quit(test);
+>      > +}
+>      > +
+>      > +static void test_writes(void)
+>      > +{
+>      > +    /* Test that writes worked, while the config is unlocked */
+>      > +    QTestState *test = qtest_init("-M opentitan");
+>      > +
+>      > +
+>      > +    qtest_writel(test, AON_ADDR(0x18), (1 << 19)); /* WDOG_BARK_THOLD */
+>      > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x18)),
+>      > +                     ==, (1 << 19));
+>      > +
+>      > +    qtest_writel(test, AON_ADDR(0x1c), (1 << 20)); /* WDOG_BITE_THOLD */
+>      > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x1c)),
+>      > +                     ==, (1 << 20));
+>      > +
+>      > +    qtest_writel(test, AON_ADDR(0x14), 0x1); /* WDOG_CTRL enable */
+>      > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x14)),
+>      > +                     ==, 0x1);
+>      > +
+>      > +    qtest_writel(test, AON_ADDR(0x10), 0x0); /* WDOG_REGWEN enable */
+>      > +    g_assert_cmpuint(qtest_readl(test, AON_ADDR(0x10)), ==, 0x0);
+> 
+>     I think the above code would be better readable if you'd provide a helper
+>     function like this:
+> 
+>     static void writel_and_assert(QTestState qts, int addr, int val)
+>     {
+>           qtest_writel(qts, AON_ADDR(addr), val);
+>           g_assert_cmpuint(qtest_readl(qts, AON_ADDR(addr)), val);
+>     }
+> 
+> Thanks for the suggestion. I decided to go with a macro instead though, 
+> because it makes it easier to distinguish where an assertion failed without 
+> a debugger.
+
+That's a good idea, indeed!
+
+  Thomas
+
 
