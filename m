@@ -1,79 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1od50k-0001mT-Uh
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Sep 2022 03:28:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37548)
+	id 1od5yW-0004H1-DO
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Sep 2022 04:29:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43858)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1od50b-0001gf-EA
- for qemu-riscv@nongnu.org; Tue, 27 Sep 2022 03:28:02 -0400
-Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e]:39827)
+ id 1od5yQ-0004AB-T6
+ for qemu-riscv@nongnu.org; Tue, 27 Sep 2022 04:29:50 -0400
+Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f]:35769)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1od50Y-00011r-8O
- for qemu-riscv@nongnu.org; Tue, 27 Sep 2022 03:28:01 -0400
-Received: by mail-lj1-x22e.google.com with SMTP id b24so9942055ljk.6
- for <qemu-riscv@nongnu.org>; Tue, 27 Sep 2022 00:27:56 -0700 (PDT)
+ id 1od5yL-0001pd-W2
+ for qemu-riscv@nongnu.org; Tue, 27 Sep 2022 04:29:47 -0400
+Received: by mail-lj1-x22f.google.com with SMTP id x29so10132949ljq.2
+ for <qemu-riscv@nongnu.org>; Tue, 27 Sep 2022 01:29:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date;
- bh=OX6yHRBmvsJd5gOSoguPpyZyG1aG4raxC/B0LfHpNTE=;
- b=AkiQzS4BY4AWqKCr9WoMzLEmG5voR1H4YPEa3YdYkAoe2/Z4xNFxPqVnRUJlrQYJhD
- /MUxmz9NN5GJGeXvh48VV/b8ov6aX3UQHQAIV906v2wi0p1nCrkXzgbP/5OH5LCSD9CE
- wXPPZbmSa6YNXoV6sY6Xqlr7lJuqgB4t/Hiio4SHk/9j5IZGxlcqRC14ADlV05jaHTgU
- ErGEVyqPx9pfpMODbmtSCh+RpmNxjtG0ITBFtVV0eDCeVUTFCrIwHCainS7C7VFTof3T
- GKXBEw2wllyJo5KDb0sPA7NiHH+eokAiOC4fGCSKNquN4iPApmSNQvU6jbag6nhg05ul
- PkhA==
+ bh=Rmad2rYfZ5IW7fBzajyAFegdmVvGYsEWjisBPHInPuU=;
+ b=Mi/5Xn2HhI3ATwYOIrlIiqYNTvc0r9p+v2mxeIIjX8L+tMaAwGdH5HBkAtUOk3uX/V
+ ED+2QZrIgdq01mDim8ddssWjDNFkS5VDGP02usHuQZxQ2O9mfyYdW+E0tsifLvrHvAfC
+ xu8kF0SDDW1U5PyWxO5F9gcduB6XK3QqgFJKLuM/riac83VS/couJgG2HZFP5ykCk6MO
+ /J7uxLxh8/n4acCER8e4/NqGoiVvNhjw+GlJnTiK/LHq/SImC46doQsM5JQkRxc8ra3V
+ S5hZhmjePyyL83TzZU5mPYU27WgK/QecZdwgyh3IrEwuX/7nSwrYFm6sH0xaLGB9qcof
+ jEYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=OX6yHRBmvsJd5gOSoguPpyZyG1aG4raxC/B0LfHpNTE=;
- b=ae4hdJm9NJCfHBenDEztXwFlUtE4sLJJNuessLEfMX+Xr4DfC7R6nhcSOm28hI2gOv
- 06Cp/zhTng/P2XHksGMCI2wgw4OV6Q7fbru0aB3gWoSv/BJKg/tvhMuYFcSVpqgYcJVF
- bIjjYfsIeiDsohsxIwWW2TvoS8ds5Ndgo2lUYPA0ogkq7ACscsglxfFpHpy22hKevKfc
- /UcxW45wNU2L8BVu5hQMnrgOMSpMthgf8Soww72PN+DFwbZpu7NsrRk+5Wicv2SvuHCk
- 0jVPA5pvNCkImg4+bnUv13buHqmFIqbZ0TTG4wNgTvbSj/J0C2XWys3X1UUNAD+qzcSU
- /QUA==
-X-Gm-Message-State: ACrzQf3rM52v7gpBlPBokEmNJ2dSqiSEmRUhjqQYQmUBwg+UVnQ4LPvi
- Q3KgOBTdHZegwm7B4Ab19TanQBh9bRY/MCeC
-X-Google-Smtp-Source: AMsMyM4YITZtLVdlkaarTXqgLVESA0F9PS54B9D6dfUrvvUvo6cDygwpX++JEkNviN/NiMiU6qUIAQ==
-X-Received: by 2002:a05:651c:178e:b0:25a:4357:49cd with SMTP id
- bn14-20020a05651c178e00b0025a435749cdmr9264651ljb.123.1664263676145; 
- Tue, 27 Sep 2022 00:27:56 -0700 (PDT)
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com.
- [209.85.167.45]) by smtp.gmail.com with ESMTPSA id
- s12-20020a05651c048c00b0026da7734d7bsm77398ljc.112.2022.09.27.00.27.54
+ bh=Rmad2rYfZ5IW7fBzajyAFegdmVvGYsEWjisBPHInPuU=;
+ b=yGye8Hb/b9qkTFwwKVksLe3gzT7ur3GSPlNue2TguNRf2dt4KnbuwMNlPvl635mVFW
+ cMYiF9SfjsCcYOjS2RLrCXbUJfPr7Mqs5IvEAv9q8UIvg+im7IsNeCUZF4zrM8Ia7YIq
+ 4y+P2e+i55LDc1F4wXzUCBTlKdqrXxQf1mGmT6KBfxGip5FX0IZBVARa2ykJfax3IbZW
+ 3blCl4dkCYUPwVztB7pqMkO0YfMscloWXuvhChAzX1BhcVWWSaNHTxMwWmUru70YF0cz
+ 2kWCce3HTPGNNa2F+XGCZKQznsITN147auSYjUwjPtPWasqOaDmo69Xt5wPhVKJISi5m
+ 4xsA==
+X-Gm-Message-State: ACrzQf1IP9MVXHulakjBWqUsKtBxzqnarMQzr992VyBp5/uNCvKUwj9S
+ H1y6RgTCypUmwPKnnZXmU2b+jtXxT3BbQC6hx4iwHajnNIwlk9i6q4NQXvyCgAzZI2CQghAaMwG
+ Y+w4EEIcfdJRfGwuEZT/2Z8KKp6l1AmVqwLUjVE86xP3yAAbeLbeMwFIN3xxUg5amrQaopBtox6
+ U=
+X-Google-Smtp-Source: AMsMyM6QuPNn7p0WQmtvLVXq4pvEeDPjjfGEg+5I+YHez3qvBrp2vvjxeYBxxo+HXMTlTBXaTYvXYA==
+X-Received: by 2002:a2e:b61c:0:b0:26c:c17:feeb with SMTP id
+ r28-20020a2eb61c000000b0026c0c17feebmr9548739ljn.199.1664267383139; 
+ Tue, 27 Sep 2022 01:29:43 -0700 (PDT)
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com.
+ [209.85.167.50]) by smtp.gmail.com with ESMTPSA id
+ u28-20020a2eb81c000000b0026bf27c7056sm90960ljo.67.2022.09.27.01.29.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Sep 2022 00:27:55 -0700 (PDT)
-Received: by mail-lf1-f45.google.com with SMTP id j16so14429114lfg.1;
- Tue, 27 Sep 2022 00:27:54 -0700 (PDT)
-X-Received: by 2002:a05:6512:130a:b0:4a1:d80d:95e with SMTP id
- x10-20020a056512130a00b004a1d80d095emr2791856lfu.565.1664263673545; Tue, 27
- Sep 2022 00:27:53 -0700 (PDT)
+ Tue, 27 Sep 2022 01:29:42 -0700 (PDT)
+Received: by mail-lf1-f50.google.com with SMTP id o2so14557063lfc.10;
+ Tue, 27 Sep 2022 01:29:42 -0700 (PDT)
+X-Received: by 2002:a05:6512:3d94:b0:49d:144c:9667 with SMTP id
+ k20-20020a0565123d9400b0049d144c9667mr10787427lfv.50.1664267381646; Tue, 27
+ Sep 2022 01:29:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220922084107.2834285-1-tommy.wu@sifive.com>
- <20220922084107.2834285-4-tommy.wu@sifive.com>
-In-Reply-To: <20220922084107.2834285-4-tommy.wu@sifive.com>
+References: <20220914101108.82571-1-alistair.francis@wdc.com>
+ <20220914101108.82571-2-alistair.francis@wdc.com>
+In-Reply-To: <20220914101108.82571-2-alistair.francis@wdc.com>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Tue, 27 Sep 2022 15:27:42 +0800
-X-Gmail-Original-Message-ID: <CANzO1D1YBrniruAxJdLSWDDx7-eNyCovr8Rfmd+bBGyFdnm_7w@mail.gmail.com>
-Message-ID: <CANzO1D1YBrniruAxJdLSWDDx7-eNyCovr8Rfmd+bBGyFdnm_7w@mail.gmail.com>
-Subject: Re: [PATCH 3/3] tests/qtest: sifive-e-aon-watchdog-test.c : Add QTest
- of watchdog of sifive_e
-To: Tommy Wu <tommy.wu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- palmer@dabbelt.com, bin.meng@windriver.com, jim.shu@sifive.com, 
- frank.chang@sifive.com
-Content-Type: multipart/alternative; boundary="0000000000001308e005e9a39572"
-Received-SPF: pass client-ip=2a00:1450:4864:20::22e;
- envelope-from=frank.chang@sifive.com; helo=mail-lj1-x22e.google.com
+Date: Tue, 27 Sep 2022 16:29:30 +0800
+X-Gmail-Original-Message-ID: <CANzO1D2Hh9ipmReXrbssWeg=mgZbMnXOu+2GNTWy+cEDQKEJRg@mail.gmail.com>
+Message-ID: <CANzO1D2Hh9ipmReXrbssWeg=mgZbMnXOu+2GNTWy+cEDQKEJRg@mail.gmail.com>
+Subject: Re: [PATCH 1/3] target/riscv: Set the CPU resetvec directly
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ bmeng.cn@gmail.com, alistair23@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000182c5805e9a4722d"
+Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
+ envelope-from=frank.chang@sifive.com; helo=mail-lj1-x22f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,938 +87,271 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Sep 2022 07:28:03 -0000
+X-List-Received-Date: Tue, 27 Sep 2022 08:29:51 -0000
 
---0000000000001308e005e9a39572
+--000000000000182c5805e9a4722d
 Content-Type: text/plain; charset="UTF-8"
 
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-On Thu, Sep 22, 2022 at 4:42 PM Tommy Wu <tommy.wu@sifive.com> wrote:
+On Wed, Sep 14, 2022 at 6:12 PM Alistair Francis via <qemu-riscv@nongnu.org>
+wrote:
 
-> Add some simple tests of the watchdog timer in the always-on domain device
-> of HiFive 1 rev b.
+> Instead of using our properties to set a config value which then might
+> be used to set the resetvec (depending on your timing), let's instead
+> just set the resetvec directly in the env struct.
 >
-> Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
+> This allows us to set the reset vec from the command line with:
+>     -global driver=riscv.hart_array,property=resetvec,value=0x20000400
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  tests/qtest/meson.build                  |   3 +
->  tests/qtest/sifive-e-aon-watchdog-test.c | 400 +++++++++++++++++++++++
->  2 files changed, 403 insertions(+)
->  create mode 100644 tests/qtest/sifive-e-aon-watchdog-test.c
+>  target/riscv/cpu.h     |  3 +--
+>  target/riscv/cpu.c     | 13 +++----------
+>  target/riscv/machine.c |  6 +++---
+>  3 files changed, 7 insertions(+), 15 deletions(-)
 >
-> diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-> index e910cb32ca..446115ea34 100644
-> --- a/tests/qtest/meson.build
-> +++ b/tests/qtest/meson.build
-> @@ -234,6 +234,9 @@ qtests_s390x = \
->     'cpu-plug-test',
->     'migration-test']
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 06751e1e3e..22344a620b 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -190,7 +190,7 @@ struct CPUArchState {
+>      /* This contains QEMU specific information about the virt state. */
+>      target_ulong virt;
+>      target_ulong geilen;
+> -    target_ulong resetvec;
+> +    uint64_t resetvec;
 >
-> +qtests_riscv32 = \
-> +  (config_all_devices.has_key('CONFIG_SIFIVE_E_AON') ?
-> ['sifive-e-aon-watchdog-test'] : [])
-> +
->  qos_test_ss = ss.source_set()
->  qos_test_ss.add(
->    'ac97-test.c',
-> diff --git a/tests/qtest/sifive-e-aon-watchdog-test.c
-> b/tests/qtest/sifive-e-aon-watchdog-test.c
-> new file mode 100644
-> index 0000000000..a583539346
-> --- /dev/null
-> +++ b/tests/qtest/sifive-e-aon-watchdog-test.c
-> @@ -0,0 +1,400 @@
-> +#include "qemu/osdep.h"
-> +#include "qemu/timer.h"
-> +#include "qemu/bitops.h"
-> +#include "libqtest-single.h"
-> +#include "hw/misc/sifive_e_aon.h"
-> +
-> +#define WDOG_BASE (0x10000000)
-> +#define WDOGCFG (0x0)
-> +#define WDOGCOUNT (0x8)
-> +#define WDOGS (0x10)
-> +#define WDOGFEED (0x18)
-> +#define WDOGKEY (0x1c)
-> +#define WDOGCMP0 (0x20)
-> +
-> +#define SIFIVE_E_AON_WDOGKEY (0x51F15E)
-> +#define SIFIVE_E_AON_WDOGFEED (0xD09F00D)
-> +#define SIFIVE_E_LFCLK_DEFAULT_FREQ (32768)
-> +
-> +static void test_init(void)
-> +{
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCOUNT, 0);
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, 0);
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCMP0, 0xBEEF);
-> +}
-> +
-> +static void test_wdogcount(void)
-> +{
-> +    test_init();
-> +
-> +    uint64_t tmp;
-> +    tmp = readl(WDOG_BASE + WDOGCOUNT);
-> +    writel(WDOG_BASE + WDOGCOUNT, 0xBEEF);
-> +    g_assert(readl(WDOG_BASE + WDOGCOUNT) == tmp);
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCOUNT, 0xBEEF);
-> +    g_assert(0xBEEF == readl(WDOG_BASE + WDOGCOUNT));
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCOUNT, 0xAAAAAAAA);
-> +    g_assert(0x2AAAAAAA == readl(WDOG_BASE + WDOGCOUNT));
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGFEED, 0xAAAAAAAA);
-> +    g_assert(0x2AAAAAAA == readl(WDOG_BASE + WDOGCOUNT));
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGFEED, SIFIVE_E_AON_WDOGFEED);
-> +    g_assert(0 == readl(WDOG_BASE + WDOGCOUNT));
-> +}
-> +
-> +static void test_wdogcfg(void)
-> +{
-> +    test_init();
-> +
-> +    wdogcfg_s tmp;
-> +    tmp.value = readl(WDOG_BASE + WDOGCFG);
-> +    writel(WDOG_BASE + WDOGCFG, 0xFFFFFFFF);
-> +    g_assert(readl(WDOG_BASE + WDOGCFG) == tmp.value);
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, 0xFFFFFFFF);
-> +    g_assert(0xFFFFFFFF == readl(WDOG_BASE + WDOGCFG));
-> +
-> +    tmp.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(15 == tmp.wdogscale);
-> +    g_assert(1 == tmp.wdogrsten);
-> +    g_assert(1 == tmp.wdogzerocmp);
-> +    g_assert(1 == tmp.wdogenalways);
-> +    g_assert(1 == tmp.wdogencoreawake);
-> +    g_assert(1 == tmp.wdogip0);
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, 0);
-> +    g_assert(0 == readl(WDOG_BASE + WDOGCFG));
-> +
-> +    tmp.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(0 == tmp.wdogscale);
-> +    g_assert(0 == tmp.wdogrsten);
-> +    g_assert(0 == tmp.wdogzerocmp);
-> +    g_assert(0 == tmp.wdogenalways);
-> +    g_assert(0 == tmp.wdogencoreawake);
-> +    g_assert(0 == tmp.wdogip0);
-> +}
-> +
-> +static void test_wdogcmp0(void)
-> +{
-> +    test_init();
-> +
-> +    wdogcfg_s tmp;
-> +    tmp.value = readl(WDOG_BASE + WDOGCMP0);
-> +    writel(WDOG_BASE + WDOGCMP0, 0xBEEF);
-> +    g_assert(readl(WDOG_BASE + WDOGCMP0) == tmp.value);
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCMP0, 0xBEEF);
-> +    g_assert(0xBEEF == readl(WDOG_BASE + WDOGCMP0));
-> +}
-> +
-> +static void test_wdogkey(void)
-> +{
-> +    test_init();
-> +
-> +    g_assert(0 == readl(WDOG_BASE + WDOGKEY));
-> +
-> +    writel(WDOG_BASE + WDOGKEY, 0xFFFF);
-> +    g_assert(0 == readl(WDOG_BASE + WDOGKEY));
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    g_assert(1 == readl(WDOG_BASE + WDOGKEY));
-> +
-> +    writel(WDOG_BASE + WDOGFEED, 0xAAAAAAAA);
-> +    g_assert(0 == readl(WDOG_BASE + WDOGKEY));
-> +}
-> +
-> +static void test_wdogfeed(void)
-> +{
-> +    test_init();
-> +
-> +    g_assert(0 == readl(WDOG_BASE + WDOGFEED));
-> +
-> +    writel(WDOG_BASE + WDOGFEED, 0xFFFF);
-> +    g_assert(0 == readl(WDOG_BASE + WDOGFEED));
-> +}
-> +
-> +static void test_scaled_wdogs(void)
-> +{
-> +    test_init();
-> +
-> +    wdogcfg_s cfg;
-> +    uint32_t fake_count = 0x12345678;
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCOUNT, fake_count);
-> +    g_assert(readl(WDOG_BASE + WDOGCOUNT) == fake_count);
-> +    g_assert((uint16_t)readl(WDOG_BASE + WDOGS) ==
-> +             (uint16_t)fake_count);
-> +
-> +    for (int i = 0; i < 16; i++) {
-> +        cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +        cfg.wdogscale = i;
-> +        writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +        writel(WDOG_BASE + WDOGCFG, cfg.value);
-> +        g_assert((uint16_t)readl(WDOG_BASE + WDOGS) ==
-> +                 (uint16_t)(fake_count >> cfg.wdogscale));
-> +    }
-> +}
-> +
-> +static void test_watchdog(void)
-> +{
-> +    test_init();
-> +
-> +    wdogcfg_s cfg;
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCMP0, SIFIVE_E_LFCLK_DEFAULT_FREQ);
-> +
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    cfg.wdogscale = 0;
-> +    cfg.wdogenalways = 1;
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, cfg.value);
-> +
-> +    clock_step(NANOSECONDS_PER_SECOND);
-> +
-> +    g_assert(readl(WDOG_BASE + WDOGCOUNT) ==
-> +             SIFIVE_E_LFCLK_DEFAULT_FREQ);
-> +
-> +    g_assert(readl(WDOG_BASE + WDOGS) ==
-> +             SIFIVE_E_LFCLK_DEFAULT_FREQ);
-> +
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(0 == cfg.wdogscale);
-> +    g_assert(0 == cfg.wdogrsten);
-> +    g_assert(0 == cfg.wdogzerocmp);
-> +    g_assert(1 == cfg.wdogenalways);
-> +    g_assert(0 == cfg.wdogencoreawake);
-> +    g_assert(1 == cfg.wdogip0);
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCOUNT, 0);
-> +    cfg.wdogip0 = 0;
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, cfg.value);
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(0 == cfg.wdogip0);
-> +}
-> +
-> +static void test_scaled_watchdog(void)
-> +{
-> +    test_init();
-> +
-> +    wdogcfg_s cfg;
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCMP0, 10);
-> +
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    cfg.wdogscale = 15;
-> +    cfg.wdogenalways = 1;
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, cfg.value);
-> +
-> +    clock_step(NANOSECONDS_PER_SECOND * 10);
-> +
-> +    g_assert(readl(WDOG_BASE + WDOGCOUNT) ==
-> +             SIFIVE_E_LFCLK_DEFAULT_FREQ * 10);
-> +
-> +    g_assert(10 == readl(WDOG_BASE + WDOGS));
-> +
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(15 == cfg.wdogscale);
-> +    g_assert(0 == cfg.wdogrsten);
-> +    g_assert(0 == cfg.wdogzerocmp);
-> +    g_assert(1 == cfg.wdogenalways);
-> +    g_assert(0 == cfg.wdogencoreawake);
-> +    g_assert(1 == cfg.wdogip0);
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCOUNT, 0);
-> +    cfg.wdogip0 = 0;
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, cfg.value);
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(0 == cfg.wdogip0);
-> +}
-> +
-> +static void test_periodic_int(void)
-> +{
-> +    test_init();
-> +
-> +    wdogcfg_s cfg;
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCMP0, SIFIVE_E_LFCLK_DEFAULT_FREQ);
-> +
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    cfg.wdogscale = 0;
-> +    cfg.wdogzerocmp = 1;
-> +    cfg.wdogenalways = 1;
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, cfg.value);
-> +
-> +    clock_step(NANOSECONDS_PER_SECOND);
-> +
-> +    g_assert(0 == readl(WDOG_BASE + WDOGCOUNT));
-> +
-> +    g_assert(0 == readl(WDOG_BASE + WDOGS));
-> +
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(0 == cfg.wdogscale);
-> +    g_assert(0 == cfg.wdogrsten);
-> +    g_assert(1 == cfg.wdogzerocmp);
-> +    g_assert(1 == cfg.wdogenalways);
-> +    g_assert(0 == cfg.wdogencoreawake);
-> +    g_assert(1 == cfg.wdogip0);
-> +
-> +    cfg.wdogip0 = 0;
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, cfg.value);
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(0 == cfg.wdogip0);
-> +
-> +    clock_step(NANOSECONDS_PER_SECOND);
-> +
-> +    g_assert(0 == readl(WDOG_BASE + WDOGCOUNT));
-> +
-> +    g_assert(0 == readl(WDOG_BASE + WDOGS));
-> +
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(0 == cfg.wdogscale);
-> +    g_assert(0 == cfg.wdogrsten);
-> +    g_assert(1 == cfg.wdogzerocmp);
-> +    g_assert(1 == cfg.wdogenalways);
-> +    g_assert(0 == cfg.wdogencoreawake);
-> +    g_assert(1 == cfg.wdogip0);
-> +
-> +    cfg.wdogip0 = 0;
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, cfg.value);
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(0 == cfg.wdogip0);
-> +}
-> +
-> +static void test_enable_disable(void)
-> +{
-> +    test_init();
-> +
-> +    wdogcfg_s cfg;
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCMP0, 10);
-> +
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    cfg.wdogscale = 15;
-> +    cfg.wdogenalways = 1;
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, cfg.value);
-> +
-> +    clock_step(NANOSECONDS_PER_SECOND * 2);
-> +
-> +    g_assert(readl(WDOG_BASE + WDOGCOUNT) ==
-> +             SIFIVE_E_LFCLK_DEFAULT_FREQ * 2);
-> +
-> +    g_assert(2 == readl(WDOG_BASE + WDOGS));
-> +
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(15 == cfg.wdogscale);
-> +    g_assert(0 == cfg.wdogrsten);
-> +    g_assert(0 == cfg.wdogzerocmp);
-> +    g_assert(1 == cfg.wdogenalways);
-> +    g_assert(0 == cfg.wdogencoreawake);
-> +    g_assert(0 == cfg.wdogip0);
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    cfg.wdogenalways = 0;
-> +    writel(WDOG_BASE + WDOGCFG, cfg.value);
-> +
-> +    clock_step(NANOSECONDS_PER_SECOND * 8);
-> +
-> +    g_assert(readl(WDOG_BASE + WDOGCOUNT) ==
-> +             SIFIVE_E_LFCLK_DEFAULT_FREQ * 2);
-> +
-> +    g_assert(2 == readl(WDOG_BASE + WDOGS));
-> +
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(15 == cfg.wdogscale);
-> +    g_assert(0 == cfg.wdogrsten);
-> +    g_assert(0 == cfg.wdogzerocmp);
-> +    g_assert(0 == cfg.wdogenalways);
-> +    g_assert(0 == cfg.wdogencoreawake);
-> +    g_assert(0 == cfg.wdogip0);
-> +
-> +    cfg.wdogenalways = 1;
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, cfg.value);
-> +
-> +    clock_step(NANOSECONDS_PER_SECOND * 8);
-> +
-> +    g_assert(readl(WDOG_BASE + WDOGCOUNT) ==
-> +             SIFIVE_E_LFCLK_DEFAULT_FREQ * 10);
-> +
-> +    g_assert(10 == readl(WDOG_BASE + WDOGS));
-> +
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(15 == cfg.wdogscale);
-> +    g_assert(0 == cfg.wdogrsten);
-> +    g_assert(0 == cfg.wdogzerocmp);
-> +    g_assert(1 == cfg.wdogenalways);
-> +    g_assert(0 == cfg.wdogencoreawake);
-> +    g_assert(1 == cfg.wdogip0);
-> +
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCOUNT, 0);
-> +    cfg.wdogip0 = 0;
-> +    writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);
-> +    writel(WDOG_BASE + WDOGCFG, cfg.value);
-> +    cfg.value = readl(WDOG_BASE + WDOGCFG);
-> +    g_assert(0 == cfg.wdogip0);
-> +}
-> +
-> +int main(int argc, char *argv[])
-> +{
-> +    int r;
-> +
-> +    g_test_init(&argc, &argv, NULL);
-> +
-> +    qtest_start("-machine sifive_e");
-> +
-> +    qtest_add_func("/sifive-e-aon-watchdog-test/wdogcount",
-> +                   test_wdogcount);
-> +    qtest_add_func("/sifive-e-aon-watchdog-test/wdogcfg",
-> +                   test_wdogcfg);
-> +    qtest_add_func("/sifive-e-aon-watchdog-test/wdogcmp0",
-> +                   test_wdogcmp0);
-> +    qtest_add_func("/sifive-e-aon-watchdog-test/wdogkey",
-> +                   test_wdogkey);
-> +    qtest_add_func("/sifive-e-aon-watchdog-test/wdogfeed",
-> +                   test_wdogfeed);
-> +    qtest_add_func("/sifive-e-aon-watchdog-test/scaled_wdogs",
-> +                   test_scaled_wdogs);
-> +    qtest_add_func("/sifive-e-aon-watchdog-test/watchdog",
-> +                   test_watchdog);
-> +    qtest_add_func("/sifive-e-aon-watchdog-test/scaled_watchdog",
-> +                   test_scaled_watchdog);
-> +    qtest_add_func("/sifive-e-aon-watchdog-test/periodic_int",
-> +                   test_periodic_int);
-> +    qtest_add_func("/sifive-e-aon-watchdog-test/enable_disable",
-> +                   test_enable_disable);
-> +
-> +    r = g_test_run();
-> +
-> +    qtest_end();
-> +
-> +    return r;
-> +}
+>      target_ulong mhartid;
+>      /*
+> @@ -474,7 +474,6 @@ struct RISCVCPUConfig {
+>      bool pmp;
+>      bool epmp;
+>      bool debug;
+> -    uint64_t resetvec;
+>
+>      bool short_isa_string;
+>  };
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index aee14a239a..b29c88b9f0 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -228,13 +228,6 @@ static void set_vext_version(CPURISCVState *env, int
+> vext_ver)
+>      env->vext_ver = vext_ver;
+>  }
+>
+> -static void set_resetvec(CPURISCVState *env, target_ulong resetvec)
+> -{
+> -#ifndef CONFIG_USER_ONLY
+> -    env->resetvec = resetvec;
+> -#endif
+> -}
+> -
+>  static void riscv_any_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+> @@ -336,7 +329,6 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+>
+>      set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+> -    set_resetvec(env, DEFAULT_RSTVEC);
+>      cpu->cfg.mmu = false;
+>  }
+>  #endif
+> @@ -676,7 +668,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error
+> **errp)
+>          riscv_set_feature(env, RISCV_FEATURE_DEBUG);
+>      }
+>
+> -    set_resetvec(env, cpu->cfg.resetvec);
+>
+>  #ifndef CONFIG_USER_ONLY
+>      if (cpu->cfg.ext_sstc) {
+> @@ -1079,7 +1070,9 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid,
+> RISCV_CPU_MARCHID),
+>      DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
+>
+> -    DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec,
+> DEFAULT_RSTVEC),
+> +#ifndef CONFIG_USER_ONLY
+> +    DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec,
+> DEFAULT_RSTVEC),
+> +#endif
+>
+>      DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string,
+> false),
+>
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 41098f6ad0..c4e6b3bba4 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -308,8 +308,8 @@ static const VMStateDescription vmstate_pmu_ctr_state
+> = {
+>
+>  const VMStateDescription vmstate_riscv_cpu = {
+>      .name = "cpu",
+> -    .version_id = 4,
+> -    .minimum_version_id = 4,
+> +    .version_id = 5,
+> +    .minimum_version_id = 5,
+>      .post_load = riscv_cpu_post_load,
+>      .fields = (VMStateField[]) {
+>          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+> @@ -331,7 +331,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+>          VMSTATE_UINT32(env.features, RISCVCPU),
+>          VMSTATE_UINTTL(env.priv, RISCVCPU),
+>          VMSTATE_UINTTL(env.virt, RISCVCPU),
+> -        VMSTATE_UINTTL(env.resetvec, RISCVCPU),
+> +        VMSTATE_UINT64(env.resetvec, RISCVCPU),
+>          VMSTATE_UINTTL(env.mhartid, RISCVCPU),
+>          VMSTATE_UINT64(env.mstatus, RISCVCPU),
+>          VMSTATE_UINT64(env.mip, RISCVCPU),
 > --
-> 2.27.0
+> 2.37.2
 >
 >
 >
 
---0000000000001308e005e9a39572
+--000000000000182c5805e9a4722d
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr">Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang=
-@sifive.com">frank.chang@sifive.com</a>&gt;<br></div><br><div class=3D"gmai=
-l_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Sep 22, 2022 at 4:42=
- PM Tommy Wu &lt;<a href=3D"mailto:tommy.wu@sifive.com">tommy.wu@sifive.com=
-</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
-0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
-Add some simple tests of the watchdog timer in the always-on domain device<=
-br>
-of HiFive 1 rev b.<br>
+@sifive.com">frank.chang@sifive.com</a>&gt;</div><br><div class=3D"gmail_qu=
+ote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Sep 14, 2022 at 6:12 PM =
+Alistair Francis via &lt;<a href=3D"mailto:qemu-riscv@nongnu.org">qemu-risc=
+v@nongnu.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex">Instead of using our properties to set a config value which the=
+n might<br>
+be used to set the resetvec (depending on your timing), let&#39;s instead<b=
+r>
+just set the resetvec directly in the env struct.<br>
 <br>
-Signed-off-by: Tommy Wu &lt;<a href=3D"mailto:tommy.wu@sifive.com" target=
-=3D"_blank">tommy.wu@sifive.com</a>&gt;<br>
+This allows us to set the reset vec from the command line with:<br>
+=C2=A0 =C2=A0 -global driver=3Driscv.hart_array,property=3Dresetvec,value=
+=3D0x20000400<br>
+<br>
+Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.=
+com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
 ---<br>
-=C2=A0tests/qtest/meson.build=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A03 +<br>
-=C2=A0tests/qtest/sifive-e-aon-watchdog-test.c | 400 ++++++++++++++++++++++=
-+<br>
-=C2=A02 files changed, 403 insertions(+)<br>
-=C2=A0create mode 100644 tests/qtest/sifive-e-aon-watchdog-test.c<br>
+=C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0|=C2=A0 3 +--<br>
+=C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0| 13 +++----------<br>
+=C2=A0target/riscv/machine.c |=C2=A0 6 +++---<br>
+=C2=A03 files changed, 7 insertions(+), 15 deletions(-)<br>
 <br>
-diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build<br>
-index e910cb32ca..446115ea34 100644<br>
---- a/tests/qtest/meson.build<br>
-+++ b/tests/qtest/meson.build<br>
-@@ -234,6 +234,9 @@ qtests_s390x =3D \<br>
-=C2=A0 =C2=A0 &#39;cpu-plug-test&#39;,<br>
-=C2=A0 =C2=A0 &#39;migration-test&#39;]<br>
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
+index 06751e1e3e..22344a620b 100644<br>
+--- a/target/riscv/cpu.h<br>
++++ b/target/riscv/cpu.h<br>
+@@ -190,7 +190,7 @@ struct CPUArchState {<br>
+=C2=A0 =C2=A0 =C2=A0/* This contains QEMU specific information about the vi=
+rt state. */<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong virt;<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong geilen;<br>
+-=C2=A0 =C2=A0 target_ulong resetvec;<br>
++=C2=A0 =C2=A0 uint64_t resetvec;<br>
 <br>
-+qtests_riscv32 =3D \<br>
-+=C2=A0 (config_all_devices.has_key(&#39;CONFIG_SIFIVE_E_AON&#39;) ? [&#39;=
-sifive-e-aon-watchdog-test&#39;] : [])<br>
-+<br>
-=C2=A0qos_test_ss =3D ss.source_set()<br>
-=C2=A0qos_test_ss.add(<br>
-=C2=A0 =C2=A0&#39;ac97-test.c&#39;,<br>
-diff --git a/tests/qtest/sifive-e-aon-watchdog-test.c b/tests/qtest/sifive-=
-e-aon-watchdog-test.c<br>
-new file mode 100644<br>
-index 0000000000..a583539346<br>
---- /dev/null<br>
-+++ b/tests/qtest/sifive-e-aon-watchdog-test.c<br>
-@@ -0,0 +1,400 @@<br>
-+#include &quot;qemu/osdep.h&quot;<br>
-+#include &quot;qemu/timer.h&quot;<br>
-+#include &quot;qemu/bitops.h&quot;<br>
-+#include &quot;libqtest-single.h&quot;<br>
-+#include &quot;hw/misc/sifive_e_aon.h&quot;<br>
-+<br>
-+#define WDOG_BASE (0x10000000)<br>
-+#define WDOGCFG (0x0)<br>
-+#define WDOGCOUNT (0x8)<br>
-+#define WDOGS (0x10)<br>
-+#define WDOGFEED (0x18)<br>
-+#define WDOGKEY (0x1c)<br>
-+#define WDOGCMP0 (0x20)<br>
-+<br>
-+#define SIFIVE_E_AON_WDOGKEY (0x51F15E)<br>
-+#define SIFIVE_E_AON_WDOGFEED (0xD09F00D)<br>
-+#define SIFIVE_E_LFCLK_DEFAULT_FREQ (32768)<br>
-+<br>
-+static void test_init(void)<br>
-+{<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCOUNT, 0);<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, 0);<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCMP0, 0xBEEF);<br>
-+}<br>
-+<br>
-+static void test_wdogcount(void)<br>
-+{<br>
-+=C2=A0 =C2=A0 test_init();<br>
-+<br>
-+=C2=A0 =C2=A0 uint64_t tmp;<br>
-+=C2=A0 =C2=A0 tmp =3D readl(WDOG_BASE + WDOGCOUNT);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCOUNT, 0xBEEF);<br>
-+=C2=A0 =C2=A0 g_assert(readl(WDOG_BASE + WDOGCOUNT) =3D=3D tmp);<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCOUNT, 0xBEEF);<br>
-+=C2=A0 =C2=A0 g_assert(0xBEEF =3D=3D readl(WDOG_BASE + WDOGCOUNT));<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCOUNT, 0xAAAAAAAA);<br>
-+=C2=A0 =C2=A0 g_assert(0x2AAAAAAA =3D=3D readl(WDOG_BASE + WDOGCOUNT));<br=
->
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGFEED, 0xAAAAAAAA);<br>
-+=C2=A0 =C2=A0 g_assert(0x2AAAAAAA =3D=3D readl(WDOG_BASE + WDOGCOUNT));<br=
->
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGFEED, SIFIVE_E_AON_WDOGFEED);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D readl(WDOG_BASE + WDOGCOUNT));<br>
-+}<br>
-+<br>
-+static void test_wdogcfg(void)<br>
-+{<br>
-+=C2=A0 =C2=A0 test_init();<br>
-+<br>
-+=C2=A0 =C2=A0 wdogcfg_s tmp;<br>
-+=C2=A0 =C2=A0 tmp.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, 0xFFFFFFFF);<br>
-+=C2=A0 =C2=A0 g_assert(readl(WDOG_BASE + WDOGCFG) =3D=3D tmp.value);<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, 0xFFFFFFFF);<br>
-+=C2=A0 =C2=A0 g_assert(0xFFFFFFFF =3D=3D readl(WDOG_BASE + WDOGCFG));<br>
-+<br>
-+=C2=A0 =C2=A0 tmp.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(15 =3D=3D tmp.wdogscale);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D tmp.wdogrsten);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D tmp.wdogzerocmp);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D tmp.wdogenalways);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D tmp.wdogencoreawake);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D tmp.wdogip0);<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, 0);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D readl(WDOG_BASE + WDOGCFG));<br>
-+<br>
-+=C2=A0 =C2=A0 tmp.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D tmp.wdogscale);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D tmp.wdogrsten);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D tmp.wdogzerocmp);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D tmp.wdogenalways);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D tmp.wdogencoreawake);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D tmp.wdogip0);<br>
-+}<br>
-+<br>
-+static void test_wdogcmp0(void)<br>
-+{<br>
-+=C2=A0 =C2=A0 test_init();<br>
-+<br>
-+=C2=A0 =C2=A0 wdogcfg_s tmp;<br>
-+=C2=A0 =C2=A0 tmp.value =3D readl(WDOG_BASE + WDOGCMP0);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCMP0, 0xBEEF);<br>
-+=C2=A0 =C2=A0 g_assert(readl(WDOG_BASE + WDOGCMP0) =3D=3D tmp.value);<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCMP0, 0xBEEF);<br>
-+=C2=A0 =C2=A0 g_assert(0xBEEF =3D=3D readl(WDOG_BASE + WDOGCMP0));<br>
-+}<br>
-+<br>
-+static void test_wdogkey(void)<br>
-+{<br>
-+=C2=A0 =C2=A0 test_init();<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D readl(WDOG_BASE + WDOGKEY));<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, 0xFFFF);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D readl(WDOG_BASE + WDOGKEY));<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D readl(WDOG_BASE + WDOGKEY));<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGFEED, 0xAAAAAAAA);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D readl(WDOG_BASE + WDOGKEY));<br>
-+}<br>
-+<br>
-+static void test_wdogfeed(void)<br>
-+{<br>
-+=C2=A0 =C2=A0 test_init();<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D readl(WDOG_BASE + WDOGFEED));<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGFEED, 0xFFFF);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D readl(WDOG_BASE + WDOGFEED));<br>
-+}<br>
-+<br>
-+static void test_scaled_wdogs(void)<br>
-+{<br>
-+=C2=A0 =C2=A0 test_init();<br>
-+<br>
-+=C2=A0 =C2=A0 wdogcfg_s cfg;<br>
-+=C2=A0 =C2=A0 uint32_t fake_count =3D 0x12345678;<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCOUNT, fake_count);<br>
-+=C2=A0 =C2=A0 g_assert(readl(WDOG_BASE + WDOGCOUNT) =3D=3D fake_count);<br=
->
-+=C2=A0 =C2=A0 g_assert((uint16_t)readl(WDOG_BASE + WDOGS) =3D=3D<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(uint16_t)fake_count);<br>
-+<br>
-+=C2=A0 =C2=A0 for (int i =3D 0; i &lt; 16; i++) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 cfg.wdogscale =3D i;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGK=
-EY);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, cfg.value);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 g_assert((uint16_t)readl(WDOG_BASE + WDOGS) =
-=3D=3D<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(uint16_t)(f=
-ake_count &gt;&gt; cfg.wdogscale));<br>
-+=C2=A0 =C2=A0 }<br>
-+}<br>
-+<br>
-+static void test_watchdog(void)<br>
-+{<br>
-+=C2=A0 =C2=A0 test_init();<br>
-+<br>
-+=C2=A0 =C2=A0 wdogcfg_s cfg;<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCMP0, SIFIVE_E_LFCLK_DEFAULT_FREQ);<b=
+=C2=A0 =C2=A0 =C2=A0target_ulong mhartid;<br>
+=C2=A0 =C2=A0 =C2=A0/*<br>
+@@ -474,7 +474,6 @@ struct RISCVCPUConfig {<br>
+=C2=A0 =C2=A0 =C2=A0bool pmp;<br>
+=C2=A0 =C2=A0 =C2=A0bool epmp;<br>
+=C2=A0 =C2=A0 =C2=A0bool debug;<br>
+-=C2=A0 =C2=A0 uint64_t resetvec;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0bool short_isa_string;<br>
+=C2=A0};<br>
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
+index aee14a239a..b29c88b9f0 100644<br>
+--- a/target/riscv/cpu.c<br>
++++ b/target/riscv/cpu.c<br>
+@@ -228,13 +228,6 @@ static void set_vext_version(CPURISCVState *env, int v=
+ext_ver)<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;vext_ver =3D vext_ver;<br>
+=C2=A0}<br>
+<br>
+-static void set_resetvec(CPURISCVState *env, target_ulong resetvec)<br>
+-{<br>
+-#ifndef CONFIG_USER_ONLY<br>
+-=C2=A0 =C2=A0 env-&gt;resetvec =3D resetvec;<br>
+-#endif<br>
+-}<br>
+-<br>
+=C2=A0static void riscv_any_cpu_init(Object *obj)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0CPURISCVState *env =3D &amp;RISCV_CPU(obj)-&gt;env;<br>
+@@ -336,7 +329,6 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | R=
+VU);<br>
+=C2=A0 =C2=A0 =C2=A0set_priv_version(env, PRIV_VERSION_1_10_0);<br>
+-=C2=A0 =C2=A0 set_resetvec(env, DEFAULT_RSTVEC);<br>
+=C2=A0 =C2=A0 =C2=A0cpu-&gt;cfg.mmu =3D false;<br>
+=C2=A0}<br>
+=C2=A0#endif<br>
+@@ -676,7 +668,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error *=
+*errp)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0riscv_set_feature(env, RISCV_FEATURE_DEBU=
+G);<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+-=C2=A0 =C2=A0 set_resetvec(env, cpu-&gt;cfg.resetvec);<br>
+<br>
+=C2=A0#ifndef CONFIG_USER_ONLY<br>
+=C2=A0 =C2=A0 =C2=A0if (cpu-&gt;cfg.ext_sstc) {<br>
+@@ -1079,7 +1070,9 @@ static Property riscv_cpu_properties[] =3D {<br>
+=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_UINT64(&quot;marchid&quot;, RISCVCPU, cfg.m=
+archid, RISCV_CPU_MARCHID),<br>
+=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_UINT64(&quot;mimpid&quot;, RISCVCPU, cfg.mi=
+mpid, RISCV_CPU_MIMPID),<br>
+<br>
+-=C2=A0 =C2=A0 DEFINE_PROP_UINT64(&quot;resetvec&quot;, RISCVCPU, cfg.reset=
+vec, DEFAULT_RSTVEC),<br>
++#ifndef CONFIG_USER_ONLY<br>
++=C2=A0 =C2=A0 DEFINE_PROP_UINT64(&quot;resetvec&quot;, RISCVCPU, env.reset=
+vec, DEFAULT_RSTVEC),<br>
++#endif<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_BOOL(&quot;short-isa-string&quot;, RISCVCPU=
+, cfg.short_isa_string, false),<br>
+<br>
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c<br>
+index 41098f6ad0..c4e6b3bba4 100644<br>
+--- a/target/riscv/machine.c<br>
++++ b/target/riscv/machine.c<br>
+@@ -308,8 +308,8 @@ static const VMStateDescription vmstate_pmu_ctr_state =
+=3D {<br>
+<br>
+=C2=A0const VMStateDescription vmstate_riscv_cpu =3D {<br>
+=C2=A0 =C2=A0 =C2=A0.name =3D &quot;cpu&quot;,<br>
+-=C2=A0 =C2=A0 .version_id =3D 4,<br>
+-=C2=A0 =C2=A0 .minimum_version_id =3D 4,<br>
++=C2=A0 =C2=A0 .version_id =3D 5,<br>
++=C2=A0 =C2=A0 .minimum_version_id =3D 5,<br>
+=C2=A0 =C2=A0 =C2=A0.post_load =3D riscv_cpu_post_load,<br>
+=C2=A0 =C2=A0 =C2=A0.fields =3D (VMStateField[]) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 3=
+2),<br>
+@@ -331,7 +331,7 @@ const VMStateDescription vmstate_riscv_cpu =3D {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT32(env.features, RISCVCPU),<b=
 r>
-+<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 cfg.wdogscale =3D 0;<br>
-+=C2=A0 =C2=A0 cfg.wdogenalways =3D 1;<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, cfg.value);<br>
-+<br>
-+=C2=A0 =C2=A0 clock_step(NANOSECONDS_PER_SECOND);<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(readl(WDOG_BASE + WDOGCOUNT) =3D=3D<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0SIFIVE_E_LFCLK_DEFAULT_FRE=
-Q);<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(readl(WDOG_BASE + WDOGS) =3D=3D<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0SIFIVE_E_LFCLK_DEFAULT_FRE=
-Q);<br>
-+<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogscale);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogrsten);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogzerocmp);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogenalways);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogencoreawake);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogip0);<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCOUNT, 0);<br>
-+=C2=A0 =C2=A0 cfg.wdogip0 =3D 0;<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, cfg.value);<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogip0);<br>
-+}<br>
-+<br>
-+static void test_scaled_watchdog(void)<br>
-+{<br>
-+=C2=A0 =C2=A0 test_init();<br>
-+<br>
-+=C2=A0 =C2=A0 wdogcfg_s cfg;<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCMP0, 10);<br>
-+<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 cfg.wdogscale =3D 15;<br>
-+=C2=A0 =C2=A0 cfg.wdogenalways =3D 1;<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, cfg.value);<br>
-+<br>
-+=C2=A0 =C2=A0 clock_step(NANOSECONDS_PER_SECOND * 10);<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(readl(WDOG_BASE + WDOGCOUNT) =3D=3D<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0SIFIVE_E_LFCLK_DEFAULT_FRE=
-Q * 10);<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(10 =3D=3D readl(WDOG_BASE + WDOGS));<br>
-+<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(15 =3D=3D cfg.wdogscale);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogrsten);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogzerocmp);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogenalways);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogencoreawake);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogip0);<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCOUNT, 0);<br>
-+=C2=A0 =C2=A0 cfg.wdogip0 =3D 0;<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, cfg.value);<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogip0);<br>
-+}<br>
-+<br>
-+static void test_periodic_int(void)<br>
-+{<br>
-+=C2=A0 =C2=A0 test_init();<br>
-+<br>
-+=C2=A0 =C2=A0 wdogcfg_s cfg;<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCMP0, SIFIVE_E_LFCLK_DEFAULT_FREQ);<b=
-r>
-+<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 cfg.wdogscale =3D 0;<br>
-+=C2=A0 =C2=A0 cfg.wdogzerocmp =3D 1;<br>
-+=C2=A0 =C2=A0 cfg.wdogenalways =3D 1;<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, cfg.value);<br>
-+<br>
-+=C2=A0 =C2=A0 clock_step(NANOSECONDS_PER_SECOND);<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D readl(WDOG_BASE + WDOGCOUNT));<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D readl(WDOG_BASE + WDOGS));<br>
-+<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogscale);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogrsten);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogzerocmp);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogenalways);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogencoreawake);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogip0);<br>
-+<br>
-+=C2=A0 =C2=A0 cfg.wdogip0 =3D 0;<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, cfg.value);<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogip0);<br>
-+<br>
-+=C2=A0 =C2=A0 clock_step(NANOSECONDS_PER_SECOND);<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D readl(WDOG_BASE + WDOGCOUNT));<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D readl(WDOG_BASE + WDOGS));<br>
-+<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogscale);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogrsten);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogzerocmp);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogenalways);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogencoreawake);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogip0);<br>
-+<br>
-+=C2=A0 =C2=A0 cfg.wdogip0 =3D 0;<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, cfg.value);<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogip0);<br>
-+}<br>
-+<br>
-+static void test_enable_disable(void)<br>
-+{<br>
-+=C2=A0 =C2=A0 test_init();<br>
-+<br>
-+=C2=A0 =C2=A0 wdogcfg_s cfg;<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCMP0, 10);<br>
-+<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 cfg.wdogscale =3D 15;<br>
-+=C2=A0 =C2=A0 cfg.wdogenalways =3D 1;<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, cfg.value);<br>
-+<br>
-+=C2=A0 =C2=A0 clock_step(NANOSECONDS_PER_SECOND * 2);<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(readl(WDOG_BASE + WDOGCOUNT) =3D=3D<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0SIFIVE_E_LFCLK_DEFAULT_FRE=
-Q * 2);<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(2 =3D=3D readl(WDOG_BASE + WDOGS));<br>
-+<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(15 =3D=3D cfg.wdogscale);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogrsten);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogzerocmp);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogenalways);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogencoreawake);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogip0);<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 cfg.wdogenalways =3D 0;<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, cfg.value);<br>
-+<br>
-+=C2=A0 =C2=A0 clock_step(NANOSECONDS_PER_SECOND * 8);<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(readl(WDOG_BASE + WDOGCOUNT) =3D=3D<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0SIFIVE_E_LFCLK_DEFAULT_FRE=
-Q * 2);<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(2 =3D=3D readl(WDOG_BASE + WDOGS));<br>
-+<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(15 =3D=3D cfg.wdogscale);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogrsten);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogzerocmp);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogenalways);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogencoreawake);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogip0);<br>
-+<br>
-+=C2=A0 =C2=A0 cfg.wdogenalways =3D 1;<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, cfg.value);<br>
-+<br>
-+=C2=A0 =C2=A0 clock_step(NANOSECONDS_PER_SECOND * 8);<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(readl(WDOG_BASE + WDOGCOUNT) =3D=3D<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0SIFIVE_E_LFCLK_DEFAULT_FRE=
-Q * 10);<br>
-+<br>
-+=C2=A0 =C2=A0 g_assert(10 =3D=3D readl(WDOG_BASE + WDOGS));<br>
-+<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(15 =3D=3D cfg.wdogscale);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogrsten);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogzerocmp);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogenalways);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogencoreawake);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D cfg.wdogip0);<br>
-+<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCOUNT, 0);<br>
-+=C2=A0 =C2=A0 cfg.wdogip0 =3D 0;<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGKEY, SIFIVE_E_AON_WDOGKEY);<br>
-+=C2=A0 =C2=A0 writel(WDOG_BASE + WDOGCFG, cfg.value);<br>
-+=C2=A0 =C2=A0 cfg.value =3D readl(WDOG_BASE + WDOGCFG);<br>
-+=C2=A0 =C2=A0 g_assert(0 =3D=3D cfg.wdogip0);<br>
-+}<br>
-+<br>
-+int main(int argc, char *argv[])<br>
-+{<br>
-+=C2=A0 =C2=A0 int r;<br>
-+<br>
-+=C2=A0 =C2=A0 g_test_init(&amp;argc, &amp;argv, NULL);<br>
-+<br>
-+=C2=A0 =C2=A0 qtest_start(&quot;-machine sifive_e&quot;);<br>
-+<br>
-+=C2=A0 =C2=A0 qtest_add_func(&quot;/sifive-e-aon-watchdog-test/wdogcount&q=
-uot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0test_=
-wdogcount);<br>
-+=C2=A0 =C2=A0 qtest_add_func(&quot;/sifive-e-aon-watchdog-test/wdogcfg&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0test_=
-wdogcfg);<br>
-+=C2=A0 =C2=A0 qtest_add_func(&quot;/sifive-e-aon-watchdog-test/wdogcmp0&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0test_=
-wdogcmp0);<br>
-+=C2=A0 =C2=A0 qtest_add_func(&quot;/sifive-e-aon-watchdog-test/wdogkey&quo=
-t;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0test_=
-wdogkey);<br>
-+=C2=A0 =C2=A0 qtest_add_func(&quot;/sifive-e-aon-watchdog-test/wdogfeed&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0test_=
-wdogfeed);<br>
-+=C2=A0 =C2=A0 qtest_add_func(&quot;/sifive-e-aon-watchdog-test/scaled_wdog=
-s&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0test_=
-scaled_wdogs);<br>
-+=C2=A0 =C2=A0 qtest_add_func(&quot;/sifive-e-aon-watchdog-test/watchdog&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0test_=
-watchdog);<br>
-+=C2=A0 =C2=A0 qtest_add_func(&quot;/sifive-e-aon-watchdog-test/scaled_watc=
-hdog&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0test_=
-scaled_watchdog);<br>
-+=C2=A0 =C2=A0 qtest_add_func(&quot;/sifive-e-aon-watchdog-test/periodic_in=
-t&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0test_=
-periodic_int);<br>
-+=C2=A0 =C2=A0 qtest_add_func(&quot;/sifive-e-aon-watchdog-test/enable_disa=
-ble&quot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0test_=
-enable_disable);<br>
-+<br>
-+=C2=A0 =C2=A0 r =3D g_test_run();<br>
-+<br>
-+=C2=A0 =C2=A0 qtest_end();<br>
-+<br>
-+=C2=A0 =C2=A0 return r;<br>
-+}<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.priv, RISCVCPU),<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.virt, RISCVCPU),<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINTTL(env.resetvec, RISCVCPU),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT64(env.resetvec, RISCVCPU),<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.mhartid, RISCVCPU),<br=
+>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT64(env.mstatus, RISCVCPU),<br=
+>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT64(env.mip, RISCVCPU),<br>
 -- <br>
-2.27.0<br>
+2.37.2<br>
 <br>
 <br>
 </blockquote></div>
 
---0000000000001308e005e9a39572--
+--000000000000182c5805e9a4722d--
 
