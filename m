@@ -1,56 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1odPWe-0002MJ-F7
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Sep 2022 01:22:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33748)
+	id 1odZNb-0005EP-02
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Sep 2022 11:53:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60142)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liuyang22@iscas.ac.cn>)
- id 1odPWZ-0002Jm-Us; Wed, 28 Sep 2022 01:22:24 -0400
-Received: from smtp85.cstnet.cn ([159.226.251.85]:35060 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liuyang22@iscas.ac.cn>)
- id 1odPWX-0007t2-B0; Wed, 28 Sep 2022 01:22:23 -0400
-Received: from liuyang22$iscas.ac.cn ( [46.232.120.163] ) by
- ajax-webmail-APP-13 (Coremail) ; Wed, 28 Sep 2022 13:22:13 +0800
- (GMT+08:00)
-X-Originating-IP: [46.232.120.163]
-Date: Wed, 28 Sep 2022 13:22:13 +0800 (GMT+08:00)
-X-CM-HeaderCharset: UTF-8
-From: =?UTF-8?B?5YiY6Ziz?= <liuyang22@iscas.ac.cn>
-To: "Alistair Francis" <alistair23@gmail.com>
-Cc: "Palmer Dabbelt" <palmer@dabbelt.com>, 
- "Alistair Francis" <alistair.francis@wdc.com>, 
- "Bin Meng" <bin.meng@windriver.com>, "Tommy Wu" <tommy.wu@sifive.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
- wangjunqiang <wangjunqiang@iscas.ac.cn>, 
- =?UTF-8?Q?Wei_Wu_=28=E5=90=B4=E4=BC=9F=29?= <lazyparser@gmail.com>, 
- liweiwei <liweiwei@iscas.ac.cn>
-Subject: Re: Re: [PATCH v2] disas/riscv.c: rvv: Add disas support for vector
- instructions
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20220622(41e5976f)
- Copyright (c) 2002-2022 www.mailtech.cn cnic.cn
-In-Reply-To: <CAKmqyKNNyyC0qcPam8iYTqreAF=jYuX0=qCSe6sr2xja0g9_oQ@mail.gmail.com>
-References: <20220826032258.7289-1-liuyang22@iscas.ac.cn>
- <CAKmqyKO2p8DF-e0UujtZu8gJpH+=BE6w1KZo5fA0vkK+=mk03A@mail.gmail.com>
- <CAKmqyKNNyyC0qcPam8iYTqreAF=jYuX0=qCSe6sr2xja0g9_oQ@mail.gmail.com>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1odZNZ-0005BQ-5J
+ for qemu-riscv@nongnu.org; Wed, 28 Sep 2022 11:53:45 -0400
+Received: from mail-oa1-x2d.google.com ([2001:4860:4864:20::2d]:35522)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1odZNT-0006Dk-KB
+ for qemu-riscv@nongnu.org; Wed, 28 Sep 2022 11:53:44 -0400
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-131b7bb5077so1146312fac.2
+ for <qemu-riscv@nongnu.org>; Wed, 28 Sep 2022 08:53:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date;
+ bh=+Oc0jlT7+bSQWvAROTPIJXYXCuHcJSJ7jipGsmrxoKM=;
+ b=gf5qctYcxpxz6tMjOx/mWTrADs3KMK8isirprwKfreIdCmWRJcLuhdb8qPHXpR+4Nn
+ 1LlmZ4dS52X9uJDMEH42cmE0SLfAHldysgtTX9qm8uEnN46OZe6DLUBD/HyH/z36FAoo
+ 0EbhYevzMisNgTCLVhsX/fYWWAcB4yOoumwQDMJ68WJLWVBaQDbAxK89Hmv8eksKRqyU
+ w0fx9AVQKQTlO7EAfmGH/rikofWR3vpCyZ5Zn7k61UeRi6Dmokz2qKIhnMhhStbxIzw8
+ 70w6EliGZ5BTGepSiz2CZPCMZuJWBYScmAtTnLFT/QK9NR8wMfArnm2fDXSP/hPIKox/
+ d0GQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date;
+ bh=+Oc0jlT7+bSQWvAROTPIJXYXCuHcJSJ7jipGsmrxoKM=;
+ b=3/6m3Fvk7f2pi8Y39oRWHYxpEUJ5tMF3qvPQFVTDj3cxCIyCD1oKzJCwRUul2Q3l+j
+ n7EfBLvGt3NfJZhtESAnrtMhdOmPCFVoXoIgQNqGa+x8pUjznN8GVMyHbeu8j/rBuy4z
+ qdLJUVHQYtAe20eCpY4TJlPpJDJ5Z0TBVVvxsy7Cbua9Q+zVP0GxzuiZzlLUtKGdjtjX
+ nrTu+ezzSVBxI91laJvjKpcylq78DCWGQBqojwqUcTEYd9dgatOvwN18Dcn15YpDAc0I
+ 5/Foowgqltv0mvSHlNAY8gWDjiVmoRj7aiMrgB+eDmzyRHme5dOByC1g3KlOQgU5ASpr
+ P5iA==
+X-Gm-Message-State: ACrzQf3g+/EQ5TqwbNESqNEzXyaKoJQNxzDm6gv2c3vRM1OcD0CYe8PH
+ ZVsqSqSVTCw5BAwO1NoEjTnJLvQwYswLxbW2+JhhTQ==
+X-Google-Smtp-Source: AMsMyM5HB9Zat5ulXlg2wBTf0TYj+Fs6xKuB6Rdl9N6uloVkjHHGHo1Skxxz0UQGUKDwI8QywHRf3d6w+sM2pS6gdyw=
+X-Received: by 2002:a05:6870:a91f:b0:131:bb72:7313 with SMTP id
+ eq31-20020a056870a91f00b00131bb727313mr593450oab.90.1664380417980; Wed, 28
+ Sep 2022 08:53:37 -0700 (PDT)
 MIME-Version: 1.0
-Message-ID: <15ad96e6.24ec8.183828ba508.Coremail.liuyang22@iscas.ac.cn>
-X-Coremail-Locale: en_US
-X-CM-TRANSID: twCowACniZoG2jNjiWQDAA--.36875W
-X-CM-SenderInfo: 5olx5tdqjsjq5lvft2wodfhubq/1tbiBwcDAGMznGvNzAAAsl
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
- CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
- daVFxhVjvjDU=
-Received-SPF: pass client-ip=159.226.251.85;
- envelope-from=liuyang22@iscas.ac.cn; helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20220925132010.5336-1-jim.shu@sifive.com>
+ <CAJ307Eg7xYVKY3Yr_+BDedX0gzuCAm2RdcS5rFMv0N44+J++sw@mail.gmail.com>
+In-Reply-To: <CAJ307Eg7xYVKY3Yr_+BDedX0gzuCAm2RdcS5rFMv0N44+J++sw@mail.gmail.com>
+From: Jim Shu <jim.shu@sifive.com>
+Date: Wed, 28 Sep 2022 23:53:26 +0800
+Message-ID: <CALw707qqdcSRu3ByFqE62Uh3QZncCMt1GFB+yFGsTAZ+yRg5yQ@mail.gmail.com>
+Subject: Re: [PATCH] hw/intc: sifive_plic: fix hard-coded max priority level
+To: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ qemu-riscv@nongnu.org, Emmanuel Blot <emmanuel.blot@sifive.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2001:4860:4864:20::2d;
+ envelope-from=jim.shu@sifive.com; helo=mail-oa1-x2d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -63,71 +78,106 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Sep 2022 05:22:25 -0000
+X-List-Received-Date: Wed, 28 Sep 2022 15:53:45 -0000
 
-CgoKJmd0OyAtLS0tLU9yaWdpbmFsIE1lc3NhZ2VzLS0tLS0KJmd0OyBGcm9tOiAiQWxpc3RhaXIg
-RnJhbmNpcyIgPGFsaXN0YWlyMjNAZ21haWwuY29tPgomZ3Q7IFNlbnQgVGltZTogMjAyMi0wOS0y
-NyAwOTo1NzozOSAoVHVlc2RheSkKJmd0OyBUbzogIllhbmcgTGl1IiA8bGl1eWFuZzIyQGlzY2Fz
-LmFjLmNuPgomZ3Q7IENjOiAiUGFsbWVyIERhYmJlbHQiIDxwYWxtZXJAZGFiYmVsdC5jb20+LCAi
-QWxpc3RhaXIgRnJhbmNpcyIgPGFsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbT4sICJCaW4gTWVuZyIg
-PGJpbi5tZW5nQHdpbmRyaXZlci5jb20+LCAiVG9tbXkgV3UiIDx0b21teS53dUBzaWZpdmUuY29t
-PiwgIm9wZW4gbGlzdDpSSVNDLVYiIDxxZW11LXJpc2N2QG5vbmdudS5vcmc+LCAicWVtdS1kZXZl
-bEBub25nbnUub3JnIERldmVsb3BlcnMiIDxxZW11LWRldmVsQG5vbmdudS5vcmc+LCB3YW5nanVu
-cWlhbmcgPHdhbmdqdW5xaWFuZ0Bpc2Nhcy5hYy5jbj4sICJXZWkgV3UgKOWQtOS8nykiIDxsYXp5
-cGFyc2VyQGdtYWlsLmNvbT4sIGxpd2Vpd2VpIDxsaXdlaXdlaUBpc2Nhcy5hYy5jbj4KJmd0OyBT
-dWJqZWN0OiBSZTogW1BBVENIIHYyXSBkaXNhcy9yaXNjdi5jOiBydnY6IEFkZCBkaXNhcyBzdXBw
-b3J0IGZvciB2ZWN0b3IgaW5zdHJ1Y3Rpb25zCiZndDsgCiZndDsgT24gRnJpLCBTZXAgMjMsIDIw
-MjIgYXQgMjoyNyBQTSBBbGlzdGFpciBGcmFuY2lzIDxhbGlzdGFpcjIzQGdtYWlsLmNvbT4gd3Jv
-dGU6CiZndDsgJmd0OwomZ3Q7ICZndDsgT24gRnJpLCBBdWcgMjYsIDIwMjIgYXQgMToyNiBQTSBZ
-YW5nIExpdSA8bGl1eWFuZzIyQGlzY2FzLmFjLmNuPiB3cm90ZToKJmd0OyAmZ3Q7ICZndDsKJmd0
-OyAmZ3Q7ICZndDsgVGVzdGVkIHdpdGggaHR0cHM6Ly9naXRodWIuY29tL2tzY28vcnZ2LWRlY29k
-ZXItdGVzdHMKJmd0OyAmZ3Q7ICZndDsKJmd0OyAmZ3Q7ICZndDsgRXhwZWN0ZWQgY2hlY2twYXRj
-aCBlcnJvcnMgZm9yIGNvbnNpc3RlbmN5IGFuZCBicmV2aXR5IHJlYXNvbnM6CiZndDsgJmd0OyAm
-Z3Q7CiZndDsgJmd0OyAmZ3Q7IEVSUk9SOiBsaW5lIG92ZXIgOTAgY2hhcmFjdGVycwomZ3Q7ICZn
-dDsgJmd0OyBFUlJPUjogdHJhaWxpbmcgc3RhdGVtZW50cyBzaG91bGQgYmUgb24gbmV4dCBsaW5l
-CiZndDsgJmd0OyAmZ3Q7IEVSUk9SOiBicmFjZXMge30gYXJlIG5lY2Vzc2FyeSBmb3IgYWxsIGFy
-bXMgb2YgdGhpcyBzdGF0ZW1lbnQKJmd0OyAmZ3Q7ICZndDsKJmd0OyAmZ3Q7ICZndDsgU2lnbmVk
-LW9mZi1ieTogWWFuZyBMaXUgPGxpdXlhbmcyMkBpc2Nhcy5hYy5jbj4KJmd0OyAmZ3Q7CiZndDsg
-Jmd0OyBUaGFua3MhCiZndDsgJmd0OwomZ3Q7ICZndDsgQXBwbGllZCB0byByaXNjdi10by1hcHBs
-eS5uZXh0CiZndDsgCiZndDsgVGhpcyBwYXRjaCBmYWlscyB0byBidWlsZCB3aXRoIHRoaXMgZXJy
-b3I6CiZndDsgCiZndDsgLi4vZGlzYXMvcmlzY3YuYzogSW4gZnVuY3Rpb24gJ3ByaW50X2luc25f
-cmlzY3YnOgomZ3Q7IC4uL2Rpc2FzL3Jpc2N2LmM6NDUxMzozMDogZXJyb3I6ICdfX2J1aWx0aW5f
-X19zcHJpbnRmX2NoaycgbWF5IHdyaXRlIGEKJmd0OyB0ZXJtaW5hdGluZyBudWwgcGFzdCB0aGUg
-ZW5kIG9mIHRoZSBkZXN0aW5hdGlvbgomZ3Q7IFstV2Vycm9yPWZvcm1hdC1vdmVyZmxvdz1dCiZn
-dDsgIDQ1MTMgfCAgICAgICAgICAgICBzcHJpbnRmKG5idWYsICIlZCIsIHNldyk7CiZndDsgICAg
-ICAgfCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF4KJmd0OyBJbiBmaWxlIGluY2x1ZGVk
-IGZyb20gL3Vzci9pbmNsdWRlL3N0ZGlvLmg6OTA2LAomZ3Q7ICAgICAgICAgICAgICAgICAgZnJv
-bQomZ3Q7IC9zY3JhdGNoL2plbmtpbnMtdG1wL3dvcmtzcGFjZS9RRU1VLU11bHRpLUNvbmZpZy1C
-dWlsZC9CVUlMRF9PUFRJT05TL0dDQy9pbmNsdWRlL3FlbXUvb3NkZXAuaDo5NywKJmd0OyAgICAg
-ICAgICAgICAgICAgIGZyb20gLi4vZGlzYXMvcmlzY3YuYzoyMDoKJmd0OyBJbiBmdW5jdGlvbiAn
-c3ByaW50ZicsCiZndDsgICAgIGlubGluZWQgZnJvbSAnZm9ybWF0X2luc3QnIGF0IC4uL2Rpc2Fz
-L3Jpc2N2LmM6NDUxMzoxMywKJmd0OyAgICAgaW5saW5lZCBmcm9tICdkaXNhc21faW5zdCcgYXQg
-Li4vZGlzYXMvcmlzY3YuYzo0NjQwOjUsCiZndDsgICAgIGlubGluZWQgZnJvbSAncHJpbnRfaW5z
-bl9yaXNjdicgYXQgLi4vZGlzYXMvcmlzY3YuYzo0NjkwOjU6CiZndDsgL3Vzci9pbmNsdWRlL2Jp
-dHMvc3RkaW8yLmg6MzA6MTA6IG5vdGU6ICdfX2J1aWx0aW5fX19zcHJpbnRmX2NoaycKJmd0OyBv
-dXRwdXQgYmV0d2VlbiAyIGFuZCA1IGJ5dGVzIGludG8gYSBkZXN0aW5hdGlvbiBvZiBzaXplIDQK
-Jmd0OyAgICAzMCB8ICAgcmV0dXJuIF9fYnVpbHRpbl9fX3NwcmludGZfY2hrIChfX3MsIF9fVVNF
-X0ZPUlRJRllfTEVWRUwgLSAxLAomZ3Q7ICAgICAgIHwgICAgICAgICAgXn5+fn5+fn5+fn5+fn5+
-fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+CiZndDsgICAgMzEgfCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgX19nbGliY19vYmpzaXplIChfX3MpLCBfX2Zt
-dCwKJmd0OyAgICAgICB8ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB+fn5+fn5+
-fn5+fn5+fn5+fn5+fn5+fn5+fn5+fgomZ3Q7ICAgIDMyIHwgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIF9fdmFfYXJnX3BhY2sgKCkpOwomZ3Q7ICAgICAgIHwgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIH5+fn5+fn5+fn5+fn5+fn5+CiZndDsgCiZndDsgCiZndDsg
-QWxpc3RhaXIKJmd0OyAKClRoYW5rcyBmb3IgdGhlIHJldmlldywgSSd2ZSBzdWJtaXR0ZWQgYSB2
-MyBwYXRjaC4KCllhbmcKCiZndDsgJmd0OyAmZ3Q7ICAgICAgZGVjb2RlX2luc3Rfb3BlcmFuZHMo
-JmFtcDtkZWMpOwomZ3Q7ICZndDsgJmd0OyAgICAgIGRlY29kZV9pbnN0X2RlY29tcHJlc3MoJmFt
-cDtkZWMsIGlzYSk7CiZndDsgJmd0OyAmZ3Q7ICAgICAgZGVjb2RlX2luc3RfbGlmdF9wc2V1ZG8o
-JmFtcDtkZWMpOwomZ3Q7ICZndDsgJmd0OyAtICAgIGZvcm1hdF9pbnN0KGJ1ZiwgYnVmbGVuLCAx
-NiwgJmFtcDtkZWMpOwomZ3Q7ICZndDsgJmd0OyArICAgIGZvcm1hdF9pbnN0KGJ1ZiwgYnVmbGVu
-LCAyNCwgJmFtcDtkZWMpOwomZ3Q7ICZndDsgJmd0OyAgfQomZ3Q7ICZndDsgJmd0OwomZ3Q7ICZn
-dDsgJmd0OyAgI2RlZmluZSBJTlNUX0ZNVF8yICIlMDQiIFBSSXg2NCAiICAgICAgICAgICAgICAi
-CiZndDsgJmd0OyAmZ3Q7IC0tCiZndDsgJmd0OyAmZ3Q7IDIuMzAuMSAoQXBwbGUgR2l0LTEzMCkK
-Jmd0OyAmZ3Q7ICZndDsKJmd0OyAmZ3Q7ICZndDsKPC9saXV5YW5nMjJAaXNjYXMuYWMuY24+PC9s
-aXV5YW5nMjJAaXNjYXMuYWMuY24+PC9hbGlzdGFpcjIzQGdtYWlsLmNvbT48L2xpd2Vpd2VpQGlz
-Y2FzLmFjLmNuPjwvbGF6eXBhcnNlckBnbWFpbC5jb20+PC93YW5nanVucWlhbmdAaXNjYXMuYWMu
-Y24+PC9xZW11LWRldmVsQG5vbmdudS5vcmc+PC9xZW11LXJpc2N2QG5vbmdudS5vcmc+PC90b21t
-eS53dUBzaWZpdmUuY29tPjwvYmluLm1lbmdAd2luZHJpdmVyLmNvbT48L2FsaXN0YWlyLmZyYW5j
-aXNAd2RjLmNvbT48L3BhbG1lckBkYWJiZWx0LmNvbT48L2xpdXlhbmcyMkBpc2Nhcy5hYy5jbj48
-L2FsaXN0YWlyMjNAZ21haWwuY29tPg==
+Hi Cl=C3=A9ment,
+
+Thanks for your opinion. I think it's a good enhancement.
+
+PLIC spec [1] says that interrupt source priority registers should be
+WARL =EF=AC=81elds to allow software to determine "the number and position =
+of
+read-write bits" in each priority speci=EF=AC=81cation, if any. To simplify
+discovery of supported priority values, each priority register must
+support any combination of values in the bits that are variable within
+the register, i.e., if there are two variable bits in the register,
+all four combinations of values in those bits must operate as valid
+priority levels.
+
+I think "num_priorities + 1" should be power-of-2 and SW could
+discover available bits of interrupt source priority.
+I'll do this enhancement in the next version patch.
+
+[1] https://github.com/riscv/riscv-plic-spec/blob/master/riscv-plic.adoc#in=
+terrupt-priorities
+
+Thanks,
+Jim Shu
+
+
+
+
+On Mon, Sep 26, 2022 at 3:52 PM Cl=C3=A9ment Chigot <chigot@adacore.com> wr=
+ote:
+>
+> Hi Jim,
+>
+> On Sun, Sep 25, 2022 at 3:26 PM Jim Shu <jim.shu@sifive.com> wrote:
+> >
+> > The maximum priority level is hard-coded when writing to interrupt
+> > priority register. However, when writing to priority threshold register=
+,
+> > the maximum priority level is from num_priorities Property which is
+> > configured by platform.
+> >
+> > Also change interrupt priority register to use num_priorities Property
+> > in maximum priority level.
+> >
+> > Signed-off-by: Emmanuel Blot <emmanuel.blot@sifive.com>
+> > Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> > Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> > ---
+> >  hw/intc/sifive_plic.c | 6 ++++--
+> >  1 file changed, 4 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+> > index af4ae3630e..f864efa761 100644
+> > --- a/hw/intc/sifive_plic.c
+> > +++ b/hw/intc/sifive_plic.c
+> > @@ -180,8 +180,10 @@ static void sifive_plic_write(void *opaque, hwaddr=
+ addr, uint64_t value,
+> >      if (addr_between(addr, plic->priority_base, plic->num_sources << 2=
+)) {
+> >          uint32_t irq =3D ((addr - plic->priority_base) >> 2) + 1;
+> >
+> > -        plic->source_priority[irq] =3D value & 7;
+> > -        sifive_plic_update(plic);
+> > +        if (value <=3D plic->num_priorities) {
+> > +            plic->source_priority[irq] =3D value;
+> > +            sifive_plic_update(plic);
+> > +        }
+>
+> If I'm not mistaking the documentation [1], these registers are WARL
+> (Write-Any-Read-Legal). However, in your case, any value above
+> "num_priorities" will be ignored.
+>
+> We had an issue related to that and ended up making a local patch.
+> However, we are assuming that "num_priorities+1" is a power of 2
+> (which is currently the case)
+>
+> -        plic->source_priority[irq] =3D value & 7;
+> +        /* Interrupt Priority registers are Write-Any Read-Legal. Cleanu=
+p
+> +         * incoming values before storing them.
+> +         */
+> +        plic->source_priority[irq] =3D value % (plic->num_priorities + 1=
+);
+>
+> Note that it should also be done for target_priority a bit below.
+> -            if (value <=3D plic->num_priorities) {
+> -                plic->target_priority[addrid] =3D value;
+> -                sifive_plic_update(plic);
+> -            }
+> +            /* Priority Thresholds registers are Write-Any Read-Legal. C=
+leanup
+> +             * incoming values before storing them.
+> +             */
+> +            plic->target_priority[addrid] =3D value % (plic->num_priorit=
+ies + 1);
+> +            sifive_plic_update(plic);
+>
+> [1] https://static.dev.sifive.com/FE310-G000.pdf
+>
+> Thanks,
+> Cl=C3=A9ment
 
