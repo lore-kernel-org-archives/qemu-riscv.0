@@ -1,65 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oeC3a-0005px-3n
-	for mharc-qemu-riscv@gnu.org; Fri, 30 Sep 2022 05:11:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55408)
+	id 1oeFCL-0006Oy-3m
+	for mharc-qemu-riscv@gnu.org; Fri, 30 Sep 2022 08:32:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38458)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1oeC3Y-0005mf-QW; Fri, 30 Sep 2022 05:11:40 -0400
-Received: from mail-qk1-x731.google.com ([2607:f8b0:4864:20::731]:38578)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1oeFCJ-0006Ln-IN
+ for qemu-riscv@nongnu.org; Fri, 30 Sep 2022 08:32:55 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:50900)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1oeC3X-0003tf-FJ; Fri, 30 Sep 2022 05:11:40 -0400
-Received: by mail-qk1-x731.google.com with SMTP id 3so2436078qka.5;
- Fri, 30 Sep 2022 02:11:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=ioxSjXzaBcEi2Dy3qDV/fFxplYaUVKP4gq2QQ/TkMy0=;
- b=gG8l/RmroZgD/xloEgbHuSe3vzUrR4KrIg8BtOIhVojWHwbsv6X7KWEPBSwt6dd8Of
- FGBCNJrKWUE+/06zoUgSXzhJ9ltRsaKaXJSEUo4vowt8uzbBwMBf9JX9b0Zh9+WIEUas
- KRaqCjKJBPCgmAIYwPTO8+6yVK9Sp9mUteePHMgMI8Bje0k8SUmM9oz2OiQ2hdtp9wKI
- bJQikqfujOz5FiEXgv3kkT+KxxvKrKCN9K2fxJUFelmBkk0HRLcI26FHNRzj1ZqygDjj
- 2ydFf+HxE3Bjh2b5ydl41bshK0zITInTarzScxskG5Pe7DymwMEGtm5cuXxygCOPRiDm
- lO/w==
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1oeFCG-0003N7-Sb
+ for qemu-riscv@nongnu.org; Fri, 30 Sep 2022 08:32:55 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id lx7so4164946pjb.0
+ for <qemu-riscv@nongnu.org>; Fri, 30 Sep 2022 05:32:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date;
+ bh=EvpZGxtdQDHMpbTl0uzPjFTlaXuEhBN2xlHcSljddHY=;
+ b=Hi9OZxDmI/BpFz3hDfPFW5WZqBORstjWImooIgvxPt0TktM0t0OmzEa3B61aCMoXiq
+ JXFYll+pXelOr1j5xGACgQCS5VKqt54U89bQtC3ASia/iipRrdo2P/OWAAO2KgcGOEXQ
+ dRtW+JDA1P1N8qMo1Sy4nsE4W4rgxZGr/5KFDLW0Is17Bhte7v4dHZqrFdnXOe/kIAwn
+ SZAFsDql+y8V6vdElp9mszTeWFvoCWpMFtiZf9v2Hn4FrX/kAO4Kn5TJqKtvQZRSjzlT
+ JtDuOLuneeJnlD8F6smWGjqSrBodZ/HGEfRJ5VJtddw6vcmaleaM0ZgNt6XooPN29hlz
+ U3hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=ioxSjXzaBcEi2Dy3qDV/fFxplYaUVKP4gq2QQ/TkMy0=;
- b=C8Xo1FvbKOuM768KrvrlrNPBYooqcQSQxcg0subgsYQ+p7GGMWyFxxOnTu4b/0zPN5
- D4lOZjwbZro/NfL3Kw+q3K/XNi81YxKLWkq3ggaaWDOV/QjI48EpOtrl8wEFrDcdTdVc
- VG7Tlj+ADb5st2Q68OP+xB41PilPtR9newCcuYI8i/OJwuJuTvRYL6tbPRU3Qlk0OKUM
- 5+60oglxING1mFXy7LsdX3qUsfYkm1fte78T2mngc2bOiqRmAVQo9Ut5k172hWaEXoXg
- v+DpKcEk0WxbObjPMowUVPyaiFwLN9z8IiP/RLK/tcIcPJwKLicik20jprmOAGr207+Z
- YdLQ==
-X-Gm-Message-State: ACrzQf2ZtAa4iv0i1mFbo5Kza8U3LcZ49DYorUxc71tv8MhDLfEj8ETD
- MOZPcLo93irdOInmB4827JN5II4FFkk6JUe4CX6xh8G4
-X-Google-Smtp-Source: AMsMyM6DZCEdsOY72Y6eBqxCkzfnZpE7ft9kQeNDyQruAV0XfIsUofENLvL9FbGg/j6+cSoYllyEbGgQc8cnNP5RDBw=
-X-Received: by 2002:a05:620a:19a5:b0:6cf:4a24:cccb with SMTP id
- bm37-20020a05620a19a500b006cf4a24cccbmr5180539qkb.376.1664529097516; Fri, 30
- Sep 2022 02:11:37 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220929232339.372813-1-Jason@zx2c4.com>
- <20220929232339.372813-3-Jason@zx2c4.com>
-In-Reply-To: <20220929232339.372813-3-Jason@zx2c4.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 30 Sep 2022 17:11:26 +0800
-Message-ID: <CAEUhbmUc5D9qsBgvymRcXo+ggHQXaggD0XkfmuvGsH79m2-XOA@mail.gmail.com>
-Subject: Re: [PATCH 3/6] riscv: re-randomize rng-seed on reboot
-To: "Jason A. Donenfeld" <Jason@zx2c4.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::731;
- envelope-from=bmeng.cn@gmail.com; helo=mail-qk1-x731.google.com
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date;
+ bh=EvpZGxtdQDHMpbTl0uzPjFTlaXuEhBN2xlHcSljddHY=;
+ b=IT8Apqbgi4279lwJO3MxDfNP2Bn3BNYWVBWrkeBS7AZjhkdTdUwO+g6Lk4wb+KiETj
+ Ft/3+c4RWVKUN5vjCykRouUpmaRuoEsJ7x3VM90jh2VQrsCdxcYrqoPVRrOlh629LHIp
+ W6AP/8fqFfBc8Rd4O4fSCw7WrJDvOmHl3bsVMF26roucymdUJmwtrOxE15zzB+zLdEC/
+ yY8OgY74Z2yR60PtK399deFIaYsL5Dp0lcRk9QK+mVaWL+PppOo1ZJ9R2fF+bQ3OplRd
+ 9VG6/bzrLp+gIYpt1QI7vozxEFjQmU1UYtDNlWZhREsb+XTE1wpLPBPMNBHrUPd9qzUp
+ aJsQ==
+X-Gm-Message-State: ACrzQf1Wxgtze5nA2zwLCjlRkDRwO6mNA04HRbinrKDBuBaKYpINSKU/
+ Ejjt2+Iqiq8caYYFjqNI8EXc2Q==
+X-Google-Smtp-Source: AMsMyM4l8y37LNCaihO7PXKvRmZ2SfuRTZkAPQFQH48daszTiXUBFgp1l1JEqg7Xl3mNHyR2hqHQ+A==
+X-Received: by 2002:a17:90b:3889:b0:202:6e94:5e3e with SMTP id
+ mu9-20020a17090b388900b002026e945e3emr9254402pjb.135.1664541170871; 
+ Fri, 30 Sep 2022 05:32:50 -0700 (PDT)
+Received: from hsinchu25.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ t20-20020a62d154000000b00537aa0fbb57sm1649880pfl.51.2022.09.30.05.32.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 Sep 2022 05:32:50 -0700 (PDT)
+From: Jim Shu <jim.shu@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ chigot@adacore.com, Jim Shu <jim.shu@sifive.com>
+Subject: [PATCH v2 0/2] Enhance maximum priority support of PLIC
+Date: Fri, 30 Sep 2022 12:32:37 +0000
+Message-Id: <20220930123239.15515-1-jim.shu@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=jim.shu@sifive.com; helo=mail-pj1-x1035.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -74,24 +76,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Sep 2022 09:11:41 -0000
+X-List-Received-Date: Fri, 30 Sep 2022 12:32:55 -0000
 
-On Fri, Sep 30, 2022 at 7:24 AM Jason A. Donenfeld <Jason@zx2c4.com> wrote:
->
-> When the system reboots, the rng-seed that the FDT has should be
-> re-randomized, so that the new boot gets a new seed. Since the FDT is in
-> the ROM region at this point, we add a hook right after the ROM has been
-> added, so that we have a pointer to that copy of the FDT.
->
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
-> Cc: Alistair Francis <alistair.francis@wdc.com>
-> Cc: Bin Meng <bin.meng@windriver.com>
-> Cc: qemu-riscv@nongnu.org
-> Signed-off-by: Jason A. Donenfeld <Jason@zx2c4.com>
-> ---
->  hw/riscv/boot.c | 3 +++
->  1 file changed, 3 insertions(+)
->
+This patchset fixes hard-coded maximum priority of interrupt priority
+register and also changes this register to WARL field to align the PLIC
+spec.
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Changelog:
+
+v2:
+  * change interrupt priority register to WARL field.
+
+Jim Shu (2):
+  hw/intc: sifive_plic: fix hard-coded max priority level
+  hw/intc: sifive_plic: change interrupt priority register to WARL field
+
+ hw/intc/sifive_plic.c | 24 +++++++++++++++++++++---
+ 1 file changed, 21 insertions(+), 3 deletions(-)
+
+-- 
+2.17.1
+
 
