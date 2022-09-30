@@ -1,57 +1,96 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oe4li-00020t-ND
-	for mharc-qemu-riscv@gnu.org; Thu, 29 Sep 2022 21:24:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53798)
+	id 1oe6mb-00042v-Et
+	for mharc-qemu-riscv@gnu.org; Thu, 29 Sep 2022 23:33:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49510)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oe4lf-0001sQ-Cm; Thu, 29 Sep 2022 21:24:43 -0400
-Received: from smtp84.cstnet.cn ([159.226.251.84]:39490 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oe4lZ-00080p-N4; Thu, 29 Sep 2022 21:24:43 -0400
-Received: from localhost.localdomain (unknown [139.227.114.201])
- by APP-05 (Coremail) with SMTP id zQCowABHOHVJRTZjaraNAg--.3616S7;
- Fri, 30 Sep 2022 09:24:30 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [RFC 5/8] target/riscv: add support for Zcmt extension
-Date: Fri, 30 Sep 2022 09:23:42 +0800
-Message-Id: <20220930012345.5248-6-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220930012345.5248-1-liweiwei@iscas.ac.cn>
-References: <20220930012345.5248-1-liweiwei@iscas.ac.cn>
+ (Exim 4.90_1)
+ (envelope-from <prvs=265e2c498=wilfred.mallawa@opensource.wdc.com>)
+ id 1oe6mT-000404-KQ
+ for qemu-riscv@nongnu.org; Thu, 29 Sep 2022 23:33:41 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:4371)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=265e2c498=wilfred.mallawa@opensource.wdc.com>)
+ id 1oe6mS-0001aB-5H
+ for qemu-riscv@nongnu.org; Thu, 29 Sep 2022 23:33:41 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1664508820; x=1696044820;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=2DcQu+pC91BO5Pmhw/ct7ghDnUuC5IVKwmg5u4/jxyA=;
+ b=Ot1HFh+xrvVpVYsLiv+gpvWCwTEYuWRxTqfpqx++iauGijkfeu/F3ycW
+ 4xxnX9GBzaL20h9Ai2MbXKmwJHt8JFn1pwRLiUfsoEZ06+T2FEmwJLPiN
+ oo2+Njw6JnLuEX24mAwQWHLhAssYlYbaY8MeeaFY4u0cRuGmkCewdBhLt
+ /JiT8XJhJPlfbal8yO9NaURoi2ogdO6NjSxinnP2leYFXopGSaJayhCUw
+ kxiG2B63ORda6RIE3U8B2GbqYvc7KZkwMls0CfTHFQu1TzHBFVdU4H3EI
+ Q04sHAFW6BwU29GrMLAKbaPZRdfUZwNKQs/YC4U/vwqk+aACpNsedmaTt Q==;
+X-IronPort-AV: E=Sophos;i="5.93,357,1654531200"; d="scan'208";a="210991982"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 30 Sep 2022 11:33:28 +0800
+IronPort-SDR: YOmcu93ZK2H8AOQeyzGw3O6Gdf+A4V9+IOG9n24R3nF2jOGcHMqgBx+KumxkODOR1jPibeOZRR
+ uGtKgcb1pxIIWwCYYKz3SXG/Iu9aYjlhK06z4dMXyIM4SNHxTtIft6whqmSThI77mGocRggR/b
+ UYJFQjEEqmntYgy508Cpc+aKDYoR2fxu+TzsZDjbu4BWg4dmqQluXWNMs2LugnhhhBrIpoOe/M
+ oSHli2KbFNcbehQRH56Zg0cmylVLUbeKj6zK8TCjB9rmhWvwl7oU1DA40s4PnfHKfcZ7Ixt3i9
+ pSMnF6tSUNmX4aAAcgdElizl
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 29 Sep 2022 19:47:49 -0700
+IronPort-SDR: 8M57wOptfC6wzSBVCj87kTSW2CHO4NU4mQhSemMNdgK9DoL0kV92hhtyouqDnusXu6tApHZz4t
+ z+w0Y4cP9oGZej2U1cMjCv1Gcasjqhp4FrE49u4quzZG7k3gt69W3BTK+4HWP6Ry/v28oPd9xK
+ bJN/DmLzkVtpW9F7Q9j7yT+tsZAIkPIkW56dG3zTRj++CQvsqWrXgHvILNYoyEbE8aJBulSDK1
+ Mxir+NvdbEB/KDAk6VBJ/aqQQf819CAZ9FLFjfFnqeK6d5s6NTLt9SE7cczLPiD/hjcPrxMOH0
+ 2YQ=
+WDCIronportException: Internal
+Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
+ by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 29 Sep 2022 20:33:28 -0700
+Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4Mdwmm0Cj4z1Rwrq
+ for <qemu-riscv@nongnu.org>; Thu, 29 Sep 2022 20:33:27 -0700 (PDT)
+Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
+ reason="pass (just generated, assumed good)"
+ header.d=opensource.wdc.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ opensource.wdc.com; h=content-transfer-encoding:mime-version
+ :x-mailer:message-id:date:subject:to:from; s=dkim; t=1664508807;
+ x=1667100808; bh=2DcQu+pC91BO5Pmhw/ct7ghDnUuC5IVKwmg5u4/jxyA=; b=
+ lhjjLlFgqK1+Sp5O6HTY4CSIXrsuXuxB2HBPjkFfMNB4rnlSzPjsPiWi+1YXZKPF
+ pjgYldCQ3wZuGMPpxpGPY9mruqGcyIRHFc0316I2eN0MExDTrhnoYG5fDdPaFRuW
+ kR8A+Jmc+UG7qto+/HxFiFeXIZAPsS5yoTs9JF5IJl365WYxq8FKNw6YOw4w/7V+
+ YVyieVxM6XK9Gb2ibqw+FMpAvkRiRekgMmTG4CvHWhJ+uhT9wYWEATo22OG8X3BZ
+ bdeeAoFV/vld6Gz3JY1kGPaxc19VWToFlpj66cgCHnI9skOOOSuIUx40AhNbjWRd
+ z5F+AXXQoBuM3/696wd6Bg==
+X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
+Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
+ by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
+ port 10026) with ESMTP id U4sOz9jV-nyl for <qemu-riscv@nongnu.org>;
+ Thu, 29 Sep 2022 20:33:27 -0700 (PDT)
+Received: from fedora.wdc.com (unknown [10.225.165.55])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4Mdwmj3Jz5z1RvLy;
+ Thu, 29 Sep 2022 20:33:25 -0700 (PDT)
+From: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
+To: Alistair.Francis@wdc.com,
+	qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org,
+	Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Subject: [PATCH v5 0/2] hw/ssi/ibex_spi: bug fixes
+Date: Fri, 30 Sep 2022 13:32:40 +1000
+Message-Id: <20220930033241.206581-1-wilfred.mallawa@opensource.wdc.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABHOHVJRTZjaraNAg--.3616S7
-X-Coremail-Antispam: 1UD129KBjvJXoW3WryfZw1kWFWxArWfKr1Utrb_yoW3trW3pF
- 48C3y7GrWkJrZ7A3WftF1Yqr15Jw4rGw4UC393Aw4kJa13WFWrXr1DK3y3KFs8XFs5Wr1j
- 93Z0yFy5CrW8X3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPF14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4U
- JVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx
- 0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWU
- JVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64
- vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xFxVAFwI0_Jrv_JF1lx2IqxVAqx4xG
- 67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MI
- IYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E
- 14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
- W8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOBTY
- UUUUU
-X-Originating-IP: [139.227.114.201]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=216.71.154.42;
+ envelope-from=prvs=265e2c498=wilfred.mallawa@opensource.wdc.com;
+ helo=esa4.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -64,299 +103,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Sep 2022 01:24:43 -0000
+X-List-Received-Date: Fri, 30 Sep 2022 03:33:41 -0000
 
-Add encode, trans* functions and helper functions support for Zcmt
-instrutions
-Add support for jvt csr
+From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
----
- target/riscv/cpu.h                        |  2 ++
- target/riscv/cpu_bits.h                   |  6 ++++
- target/riscv/csr.c                        | 28 +++++++++++++++++++
- target/riscv/helper.h                     |  1 +
- target/riscv/insn16.decode                |  6 ++++
- target/riscv/insn_trans/trans_rvzce.c.inc | 25 ++++++++++++++++-
- target/riscv/machine.c                    | 19 +++++++++++++
- target/riscv/translate.c                  |  2 +-
- target/riscv/zce_helper.c                 | 34 +++++++++++++++++++++++
- 9 files changed, 121 insertions(+), 2 deletions(-)
+The remaining patches in this series address:
+	- Coverity issues for `ibex_spi`
+	- Adds rw1c functionality
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index db3eca1d8a..2782ea9546 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -181,6 +181,8 @@ struct CPUArchState {
- 
-     uint32_t features;
- 
-+    target_ulong jvt;
-+
- #ifdef CONFIG_USER_ONLY
-     uint32_t elf_flags;
- #endif
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index d8f5f0abed..37bf87f808 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -486,6 +486,9 @@
- /* Crypto Extension */
- #define CSR_SEED            0x015
- 
-+/* Zcmt Extension */
-+#define CSR_JVT             0x017
-+
- /* mstatus CSR bits */
- #define MSTATUS_UIE         0x00000001
- #define MSTATUS_SIE         0x00000002
-@@ -857,4 +860,7 @@ typedef enum RISCVException {
- #define MHPMEVENT_IDX_MASK                 0xFFFFF
- #define MHPMEVENT_SSCOF_RESVD              16
- 
-+/* JVT CSR bits */
-+#define JVT_MODE                           0x3F
-+#define JVT_BASE                           (~0x3F)
- #endif
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 5c9a7ee287..a6d8115065 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -127,6 +127,17 @@ static RISCVException ctr32(CPURISCVState *env, int csrno)
-     return ctr(env, csrno);
- }
- 
-+static RISCVException zcmt(CPURISCVState *env, int csrno)
-+{
-+    RISCVCPU *cpu = env_archcpu(env);
-+
-+    if (!cpu->cfg.ext_zcmt) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
- #if !defined(CONFIG_USER_ONLY)
- static RISCVException mctr(CPURISCVState *env, int csrno)
- {
-@@ -3634,6 +3645,20 @@ RISCVException riscv_csrrw_debug(CPURISCVState *env, int csrno,
-     return ret;
- }
- 
-+static RISCVException read_jvt(CPURISCVState *env, int csrno,
-+                               target_ulong *val)
-+{
-+    *val = env->jvt;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_jvt(CPURISCVState *env, int csrno,
-+                                target_ulong val)
-+{
-+    env->jvt = val;
-+    return RISCV_EXCP_NONE;
-+}
-+
- /* Control and Status Register function table */
- riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     /* User Floating-Point CSRs */
-@@ -3671,6 +3696,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     /* Crypto Extension */
-     [CSR_SEED] = { "seed", seed, NULL, NULL, rmw_seed },
- 
-+    /* Zcmt Extension */
-+    [CSR_JVT] = {"jvt", zcmt, read_jvt, write_jvt},
-+
- #if !defined(CONFIG_USER_ONLY)
-     /* Machine Timers and Counters */
-     [CSR_MCYCLE]    = { "mcycle",    any,   read_hpmcounter,
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 9250e01cb6..3cc1de9641 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1140,3 +1140,4 @@ DEF_HELPER_4(cm_pop, tl, env, tl, tl, tl)
- DEF_HELPER_4(cm_push, void, env, tl, tl, tl)
- DEF_HELPER_4(cm_popret, tl, env, tl, tl, tl)
- DEF_HELPER_4(cm_popretz, tl, env, tl, tl, tl)
-+DEF_HELPER_3(cm_jalt, tl, env, tl, tl)
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 941146633d..25e274d582 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -49,6 +49,7 @@
- %zcb_h_uimm  5:1                     !function=ex_shift_1
- %zcmp_spimm  2:2                     !function=ex_shift_4
- %zcmp_rlist  4:4
-+%zcmt_index  2:8
- 
- # Argument sets imported from insn32.decode:
- &empty                  !extern
-@@ -63,6 +64,7 @@
- &r2_s      rs1 rs2      !extern
- 
- &zcmp      zcmp_rlist zcmp_spimm
-+&zcmt      zcmt_index
- 
- # Formats 16:
- @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
-@@ -104,6 +106,7 @@
- @zcb_h        ... . .. ... .. ... ..  &i  imm=%zcb_h_uimm  rs1=%rs1_3 rd=%rs2_3
- @zcmp         ... ...  ........   ..  &zcmp  %zcmp_rlist   %zcmp_spimm
- @cm_mv        ... ...  ... .. ... ..  &r2_s  rs2=%sreg2    rs1=%sreg1
-+@zcmt_jt      ... ...  ........   ..  &zcmt  %zcmt_index
- 
- # *** RV32/64C Standard Extension (Quadrant 0) ***
- {
-@@ -191,6 +194,9 @@ slli              000 .  .....  ..... 10 @c_shift2
-   cm_popretz      101  11100  .... .. 10 @zcmp
-   cm_mva01s       101  011 ... 11 ... 10 @cm_mv
-   cm_mvsa01       101  011 ... 01 ... 10 @cm_mv
-+
-+  # *** RV64 and RV32 Zcmt Extension ***
-+  cm_jalt         101  000   ........ 10 @zcmt_jt
- }
- sw                110 .  .....  ..... 10 @c_swsp
- 
-diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
-index 710e572cfe..8f3c93cc6b 100644
---- a/target/riscv/insn_trans/trans_rvzce.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzce.c.inc
-@@ -1,5 +1,5 @@
- /*
-- * RISC-V translation routines for the Zcb Standard Extension.
-+ * RISC-V translation routines for the Zc[b,d,mp,mt] Standard Extension.
-  *
-  * Copyright (c) 2021-2022 PLCT Lab
-  *
-@@ -32,6 +32,11 @@
-         return false;            \
- } while (0)
- 
-+#define REQUIRE_ZCMT(ctx) do {   \
-+    if (!ctx->cfg_ptr->ext_zcmt) \
-+        return false;            \
-+} while (0)
-+
- static bool trans_c_zext_b(DisasContext *ctx, arg_c_zext_b *a)
- {
-     REQUIRE_ZCB(ctx);
-@@ -254,3 +259,21 @@ static bool trans_cm_mvsa01(DisasContext *ctx, arg_cm_mvsa01 *a)
- 
-     return true;
- }
-+
-+static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
-+{
-+    REQUIRE_ZCMT(ctx);
-+
-+    TCGv index = tcg_const_tl(a->zcmt_index);
-+    TCGv next_pc = tcg_const_tl(ctx->pc_succ_insn);
-+
-+    gen_helper_cm_jalt(cpu_pc, cpu_env, index, next_pc);
-+
-+    tcg_gen_lookup_and_goto_ptr();
-+
-+    ctx->base.is_jmp = DISAS_NORETURN;
-+
-+    tcg_temp_free(index);
-+    tcg_temp_free(next_pc);
-+    return true;
-+}
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index c2a94a82b3..138eb75d00 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -296,6 +296,24 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
-     }
- };
- 
-+static bool jvt_needed(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+
-+    return cpu->cfg.ext_zcmt;
-+}
-+
-+static const VMStateDescription vmstate_jvt = {
-+    .name = "cpu/jvt",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = jvt_needed,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_UINTTL(env.jvt, RISCVCPU),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
- const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
-     .version_id = 5,
-@@ -364,6 +382,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_kvmtimer,
-         &vmstate_envcfg,
-         &vmstate_debug,
-+        &vmstate_jvt,
-         NULL
-     }
- };
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index c4882db56b..347bc913eb 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1088,7 +1088,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-              ((opcode & 0xe003) == 0xe002))) {
-             gen_exception_illegal(ctx);
-         } else if (!(has_ext(ctx, RVC) || ctx->cfg_ptr->ext_zcd ||
--                     ctx->cfg_ptr->ext_zcmp) &&
-+                     ctx->cfg_ptr->ext_zcmp || ctx->cfg_ptr->ext_zcmt) &&
-                    (((opcode & 0xe003) == 0x2000) ||
-                     ((opcode & 0xe003) == 0x2002) ||
-                     ((opcode & 0xe003) == 0xa000) ||
-diff --git a/target/riscv/zce_helper.c b/target/riscv/zce_helper.c
-index 1346de1367..f687c6fc85 100644
---- a/target/riscv/zce_helper.c
-+++ b/target/riscv/zce_helper.c
-@@ -208,3 +208,37 @@ target_ulong HELPER(cm_popretz)(CPURISCVState *env, target_ulong sp,
- #undef X_Sn
- #undef ZCMP_POP
- #undef ZCMP_PUSH
-+
-+target_ulong HELPER(cm_jalt)(CPURISCVState *env, target_ulong index,
-+                             target_ulong next_pc)
-+{
-+    target_ulong target = next_pc;
-+    target_ulong val = 0;
-+    int xlen = riscv_cpu_xlen(env);
-+
-+    val = env->jvt;
-+
-+    uint8_t mode = get_field(val, JVT_MODE);
-+    target_ulong base = get_field(val, JVT_BASE);
-+
-+    target_ulong t0;
-+
-+    if (mode != 0) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+    }
-+
-+    if (xlen == 32) {
-+        t0 = base + (index << 2);
-+        target = cpu_ldl_code(env, t0);
-+    } else {
-+        t0 = base + (index << 3);
-+        target = cpu_ldq_code(env, t0);
-+    }
-+
-+    /* index >= 32 for cm.jalt, otherwise for cm.jt */
-+    if (index >= 32) {
-+        env->gpr[1] = next_pc;
-+    }
-+
-+    return target & ~0x1;
-+}
--- 
-2.25.1
+Changes since V4:
+	- Fixup compiler warning for unused variable `data` in [1/2]
+
+Wilfred Mallawa (2):
+  hw/ssi: ibex_spi: fixup coverity issue
+  hw/ssi: ibex_spi: fixup/add rw1c functionality
+
+ hw/ssi/ibex_spi_host.c         | 166 ++++++++++++++++++++-------------
+ include/hw/ssi/ibex_spi_host.h |   4 +-
+ 2 files changed, 102 insertions(+), 68 deletions(-)
+
+--=20
+2.37.3
 
 
