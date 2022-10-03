@@ -1,62 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ofCrC-0003bm-EG
-	for mharc-qemu-riscv@gnu.org; Mon, 03 Oct 2022 00:15:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55176)
+	id 1ofFXw-0004DM-Hv
+	for mharc-qemu-riscv@gnu.org; Mon, 03 Oct 2022 03:07:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56372)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1ofCr3-0003XE-5f
- for qemu-riscv@nongnu.org; Mon, 03 Oct 2022 00:15:03 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:45588)
+ (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
+ id 1ofFXp-0004C2-CT
+ for qemu-riscv@nongnu.org; Mon, 03 Oct 2022 03:07:18 -0400
+Received: from mail-yw1-x1133.google.com ([2607:f8b0:4864:20::1133]:40800)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1ofCqz-0006TE-QZ
- for qemu-riscv@nongnu.org; Mon, 03 Oct 2022 00:14:55 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id u24so1672210plq.12
- for <qemu-riscv@nongnu.org>; Sun, 02 Oct 2022 21:14:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date;
- bh=F7tdRk4Qrtb9mSNRqDP+OGNI6gDixPQRApuBKw62yjM=;
- b=Hh2GOPWc4NUsj6Of/i3k9A3sZXpfOPPxjE8KvEN64dNxuvde9B7vg7hZBNx/nPRV6j
- n/1hLLeIhZ8DDin+Pfbh+4+SR9hj19UyRraloquFS1J2Wi0OwDzRiN20kIt89eaTSOva
- /b/TGiBqhcpeZ4AEufZvcaUnfQ2HOC6IOHhw9Q7k0XbTgIdCVTXcGFetldmXuZbGmDf/
- qKmGeZUxl2MFjoq+uue1kw6Vvu4aM7L9lYyqFeRR4VfLv6pSozS00lLc2MvUkyyvZNa1
- dObfJoY2asz4a5hpa6dUT7h4pl/l/R4kyQE/Cnpfp7sz0zZIZEzllc7GekLQRhpFZbbg
- LISQ==
+ (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
+ id 1ofFXn-0004nZ-Ea
+ for qemu-riscv@nongnu.org; Mon, 03 Oct 2022 03:07:17 -0400
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-35ad0584879so2382937b3.7
+ for <qemu-riscv@nongnu.org>; Mon, 03 Oct 2022 00:07:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=adacore.com; s=google;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date;
+ bh=f87hFez6sBrcu4TouxT0x54d5mtW/mDiIhMa9fsI03E=;
+ b=VJnqh2Bu6Y6bmouqBjMldo2Voua/YelZTbj/0L3uOc4/2G/RCMO8j0LYhMLkO3O3so
+ 8mWLURUQAqtoZmVGdK6/LlxImGsgTmd2PtEHh+K8fKBeYluckwlomcZoFUy9xcEoaFlw
+ CJQTUDQYkCsCiEqLW0S/odeDZNEOjf9P/OUQnvOkd6CLZqqobAMrSUtPTuqW6IdViDin
+ hU104FcvFin3wV86+4bk4E0QJdo6C+UqxeNqYwxGu3NUaCZMCDm1ZPOaqHcgEQTZxw5H
+ 0jwzUAujeVdOhD25soOuF5Nh7Jvcjl94Gp7iGEe1AnHjVemvuGwf039+wU/cEbOmNbdx
+ csQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date;
- bh=F7tdRk4Qrtb9mSNRqDP+OGNI6gDixPQRApuBKw62yjM=;
- b=P0xpNJhrBZpFlcMgMhBjuaO1bYhPt7U2G3hIItcgPA/ULr2TLRTo6glRXMV/rtBstJ
- R28FmLVbxQNqOyiY9UkCVWTe2n9Fjao8grvoefwWUL81WuVR4jHvyuC5JApbObyrC8Xb
- PeS6qj+2YIwn729G9RQkC+eGs0hWQy1ELVg1Cx8sTDSWn/pJvRrXJC8+E4E4jHk0Ej07
- 1Rbqx50cf6Ok+3+PwzeWY0hYlzvlkGp/zEbl0MwKo2h3rhEPx0fcn8GmXXsmPHZRKP1A
- JtKpp0q5cf9Egaxfr0FUP89M/xGKhHOX/+eFYgeGSGt2TrO1UFp4SyCA3pcmnJQyjgPy
- 5SHA==
-X-Gm-Message-State: ACrzQf2qBBy5srOLjEOHidVnaJklEPZT0oTKZJjMqgtrb5Xsuh6AjKYm
- fCY/6ifCs43j3sHK7QG0RlxSFg==
-X-Google-Smtp-Source: AMsMyM4YECLzCPHM/GZC2uYllDhomQ2/NGzFQGs3GqnK4bPixJKuBD8s3X8vg9nYgszB0P4+z0itaw==
-X-Received: by 2002:a17:902:7c8f:b0:176:cdd8:7258 with SMTP id
- y15-20020a1709027c8f00b00176cdd87258mr19534594pll.49.1664770491323; 
- Sun, 02 Oct 2022 21:14:51 -0700 (PDT)
-Received: from hsinchu25.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- d12-20020a170902cecc00b0017732e4003bsm6108596plg.141.2022.10.02.21.14.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Oct 2022 21:14:51 -0700 (PDT)
-From: Jim Shu <jim.shu@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- chigot@adacore.com, Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v3 0/2] Enhance maximum priority support of PLIC
-Date: Mon,  3 Oct 2022 04:14:38 +0000
-Message-Id: <20221003041440.2320-1-jim.shu@sifive.com>
-X-Mailer: git-send-email 2.17.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=jim.shu@sifive.com; helo=mail-pl1-x62c.google.com
+ bh=f87hFez6sBrcu4TouxT0x54d5mtW/mDiIhMa9fsI03E=;
+ b=LZopROjLCyPepd1yriPM2l9Yjh7O1F1WxkWStDcoClSRvWqMfBe3p9EDP5aiejr/NE
+ ETVkI9qch9mT0m5IotUiFXhcwGAbNkdH4+o6C+tS971E/hoGBFHB2Spmq5wnTguD+JRy
+ 1WEVHBoo1NJW+/EW9gh1YDIx9upsbTnV4eF4q5Mi/dPbIXArGDaC+l137tndt1iB51SX
+ wkJmTjCSmLgQR4++ezoCIkRcmhBrCYAFUxG17yfUY5C0Er441HX6vmQH89tMALFqNvLM
+ UFImn80gP/55pc4UtYTjBqxpkWKUO/2JsFh8g9rWAHNzXhn5ju6Xq6+5gRgyvG9Ehyvz
+ 2Nmg==
+X-Gm-Message-State: ACrzQf1Z3F5d9YwApJFv1RoZgaBf3svAjqnjXr1Hi1rFqFHbiTehdyXW
+ Tv9SmK7I2OArOLgEp8YZgUggFPHzWN2nTgtDEBOpaw==
+X-Google-Smtp-Source: AMsMyM5frKgTZe73/HU7EDZ4dEdc3wZkM2vuh5IXMZhrYsS846JXd4IdpGq0WRzbTinb0JJGgAAFujrC8ZbvYDaFh/k=
+X-Received: by 2002:a0d:db11:0:b0:355:c221:6164 with SMTP id
+ d17-20020a0ddb11000000b00355c2216164mr15364249ywe.248.1664780833361; Mon, 03
+ Oct 2022 00:07:13 -0700 (PDT)
+MIME-Version: 1.0
+References: <20221003041440.2320-1-jim.shu@sifive.com>
+ <20221003041440.2320-3-jim.shu@sifive.com>
+In-Reply-To: <20221003041440.2320-3-jim.shu@sifive.com>
+From: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
+Date: Mon, 3 Oct 2022 09:07:02 +0200
+Message-ID: <CAJ307EjG0j8ydXk8_y5j0jsdmhqY3Fm1FqohMAY1J1hpfmvVMw@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] hw/intc: sifive_plic: change interrupt priority
+ register to WARL field
+To: Jim Shu <jim.shu@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1133;
+ envelope-from=chigot@adacore.com; helo=mail-yw1-x1133.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -76,28 +78,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Oct 2022 04:15:04 -0000
+X-List-Received-Date: Mon, 03 Oct 2022 07:07:18 -0000
 
-This patchset fixes hard-coded maximum priority of interrupt priority
-register and also changes this register to WARL field to align the PLIC
-spec.
+On Mon, Oct 3, 2022 at 6:14 AM Jim Shu <jim.shu@sifive.com> wrote:
+>
+> PLIC spec [1] requires interrupt source priority registers are WARL
+> field and the number of supported priority is power-of-2 to simplify SW
+> discovery.
+>
+> Existing QEMU RISC-V machine (e.g. shakti_c) don't strictly follow PLIC
+> spec, whose number of supported priority is not power-of-2. Just change
+> each bit of interrupt priority register to WARL field when the number of
+> supported priority is power-of-2.
+>
+> [1] https://github.com/riscv/riscv-plic-spec/blob/master/riscv-plic.adoc#=
+interrupt-priorities
+>
+> Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> ---
+>  hw/intc/sifive_plic.c | 21 +++++++++++++++++++--
+>  1 file changed, 19 insertions(+), 2 deletions(-)
+>
+> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+> index f864efa761..c2dfacf028 100644
+> --- a/hw/intc/sifive_plic.c
+> +++ b/hw/intc/sifive_plic.c
+> @@ -180,7 +180,15 @@ static void sifive_plic_write(void *opaque, hwaddr a=
+ddr, uint64_t value,
+>      if (addr_between(addr, plic->priority_base, plic->num_sources << 2))=
+ {
+>          uint32_t irq =3D ((addr - plic->priority_base) >> 2) + 1;
+>
+> -        if (value <=3D plic->num_priorities) {
+> +        if (((plic->num_priorities + 1) & plic->num_priorities) =3D=3D 0=
+) {
+> +            /*
+> +             * if "num_priorities + 1" is power-of-2, make each register=
+ bit of
+> +             * interrupt priority WARL (Write-Any-Read-Legal). Just filt=
+er
+> +             * out the access to unsupported priority bits.
+> +             */
+> +            plic->source_priority[irq] =3D value % (plic->num_priorities=
+ + 1);
+> +            sifive_plic_update(plic);
+> +        } else if (value <=3D plic->num_priorities) {
+>              plic->source_priority[irq] =3D value;
+>              sifive_plic_update(plic);
+>          }
+> @@ -207,7 +215,16 @@ static void sifive_plic_write(void *opaque, hwaddr a=
+ddr, uint64_t value,
+>          uint32_t contextid =3D (addr & (plic->context_stride - 1));
+>
+>          if (contextid =3D=3D 0) {
+> -            if (value <=3D plic->num_priorities) {
+> +            if (((plic->num_priorities + 1) & plic->num_priorities) =3D=
+=3D 0) {
+> +                /*
+> +                 * if "num_priorities + 1" is power-of-2, each register =
+bit of
+> +                 * interrupt priority is WARL (Write-Any-Read-Legal). Ju=
+st
+> +                 * filter out the access to unsupported priority bits.
+> +                 */
+> +                plic->target_priority[addrid] =3D value %
+> +                                                (plic->num_priorities + =
+1);
+> +                sifive_plic_update(plic);
+> +            } else if (value <=3D plic->num_priorities) {
+>                  plic->target_priority[addrid] =3D value;
+>                  sifive_plic_update(plic);
+>              }
+> --
+> 2.17.1
 
-Changelog:
-
-v3:
-  * fix opposite of power-of-2 max priority checking expression.
-
-v2:
-  * change interrupt priority register to WARL field.
-
-Jim Shu (2):
-  hw/intc: sifive_plic: fix hard-coded max priority level
-  hw/intc: sifive_plic: change interrupt priority register to WARL field
-
- hw/intc/sifive_plic.c | 25 ++++++++++++++++++++++---
- 1 file changed, 22 insertions(+), 3 deletions(-)
-
--- 
-2.17.1
-
+Reviewed-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
 
