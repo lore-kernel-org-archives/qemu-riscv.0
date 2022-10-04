@@ -1,68 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ofbmq-0000SR-F2
-	for mharc-qemu-riscv@gnu.org; Tue, 04 Oct 2022 02:52:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56584)
+	id 1ofe9p-00044B-Ad
+	for mharc-qemu-riscv@gnu.org; Tue, 04 Oct 2022 05:24:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33642)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1ofbmd-0000Ok-T8
- for qemu-riscv@nongnu.org; Tue, 04 Oct 2022 02:52:09 -0400
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:53801)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1ofe9m-00042X-Jd
+ for qemu-riscv@nongnu.org; Tue, 04 Oct 2022 05:24:06 -0400
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536]:42534)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1ofbmY-0000iR-Ut
- for qemu-riscv@nongnu.org; Tue, 04 Oct 2022 02:52:03 -0400
-Received: by mail-pj1-x102f.google.com with SMTP id fw14so5046824pjb.3
- for <qemu-riscv@nongnu.org>; Mon, 03 Oct 2022 23:51:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1ofe9i-0004Ls-Fm
+ for qemu-riscv@nongnu.org; Tue, 04 Oct 2022 05:24:04 -0400
+Received: by mail-pg1-x536.google.com with SMTP id e129so12215672pgc.9
+ for <qemu-riscv@nongnu.org>; Tue, 04 Oct 2022 02:24:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:user-agent:references
- :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
- :date; bh=uYcUCfxcK1MsH06I3SCNIhSOaFuiEdHlYJWDpClgBKU=;
- b=FT26xavB0fWj1KfUarEyUpvl3QPebtCZX/jc+rDKfshN04qKn+obcfubSfcA03C0V3
- mKaz0XIqO+Pys0qvKYRRJAcPrI7fKGTv7nZ5vZyGD2nkRF2kPz87SXIpRovMy6No7Fv4
- yqFS6PU8Duc6Y5WkBT+Re03X1D2X7gJOd8FTCoXG/NcdqZ3rYNeCGXFsVOWkKsS/JMV2
- h1bf9PnefhEewhF54v5z2TXbM/N+/U5QpMvm8I+vzvGUcgyTGemI9Ohaa7+OH7aQ5E87
- lD9vLD8Lx590AbeHYDgcgY4f2nSvWoxlyLvWUmzEptZFJEmQA23KEZZBNQAeIiva+vcn
- oebQ==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date;
+ bh=vMgIC3BFTqFjiZBLLZIOIfcn007DVCDGcbA2Ug7rHrY=;
+ b=MQPE3evOsO4bN12RuMuvtoAl4qadSc2gFo1iVmqmkUygMmqT0PEh14WsPEd8j9JrQG
+ EzT3QKMWPjaHXIXriKbK+MIkpXOwTcVIG04vPgdVSuEaMnwtSqAOksG0GPVwqR+PD9g+
+ WtE6U0djYsqdpgXlXDNgEENMpS1mYx7ABiUnNrbkfxQx7UNvcGdfjE+uf26bd5X566w+
+ OrnKsTUctfsyyYMUrCJg5BrXwywJ8dXIt8FbrT0T2HWqxkzmTl1mT4/zbzps7NKtrGyA
+ r5g7DGY3iL8GT6pmD8/WSF10j2ZUGS9YU4LVjhck8BJwAlC7Xqp9hjAvWfPerJTcW15R
+ qkCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:user-agent:references
- :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
- :from:to:cc:subject:date;
- bh=uYcUCfxcK1MsH06I3SCNIhSOaFuiEdHlYJWDpClgBKU=;
- b=OkivxH3n/HCkDnuXJuK/xKwXJZVwSLmnuKP/aOw2y+xZDUVvB3xYcBRHl956aAFNs6
- HG5lsps7zuMXzYwfKkQhIxVFC+UxjunE9uUbUqQlLtPeW6rfgqrkhtiDu6yxDddTOdUd
- I4uM4roiq6sfqm0hswLYXfiHAfxlTP1ZpnFPEBlphQF6gfklgpEYakRrCuWxhXWOYMhl
- oFiWCfW76X5uhEaVnM0ybF3E6JF8/m5vyKgKR0hmeex5b1QOaFC/0FIc2DnPzvIZhSVm
- i1co4UWkYEFl08mNU9Bq5rVXCkKWI0Am9wqCGaRbWZTulCZ5EWlWhjB0GAP9RhTYdsil
- AI7g==
-X-Gm-Message-State: ACrzQf3wltuNtDyPXs7sJbkZVMLpzXwYjO6Dpzlf+Wl9mbaGUrNPCjZp
- NQXDRezuH03nN47uM1sP3kZeFQ==
-X-Google-Smtp-Source: AMsMyM5+LxEs1kxMKv0naHeU7OjRVWL/Ss+/jvcypjViBgApXTtWnhnI8jzq3cODRq12b2tLWZqnnA==
-X-Received: by 2002:a17:90b:3903:b0:202:affa:1c9f with SMTP id
- ob3-20020a17090b390300b00202affa1c9fmr16266598pjb.27.1664866317144; 
- Mon, 03 Oct 2022 23:51:57 -0700 (PDT)
-Received: from [192.168.1.5] ([103.97.165.210])
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date;
+ bh=vMgIC3BFTqFjiZBLLZIOIfcn007DVCDGcbA2Ug7rHrY=;
+ b=bYky4NvdM3kdB5QCYxaFvgwJXgybED6/i5uTkH0SY7OmqcfIg65gPVahGA8v8AIq1k
+ gO67SHkFCkZOtwWTv2bt9b+OSdzxSYl6NVc/eaATSdt9dKtLJY6EMZkavdEHvJpjYJFu
+ J4/keUTCDhLGMhPjweLz4bC4X0owHcTb4AgBsX+Oosv8GBDwriE/CBw4i7ECZxHrnt3G
+ HzXVTIpIAttFjP4Wv1xEqkhF576ZD5zy6XKFjvpTH+HSqOQeSTG/koWI5NgHW3rAgbSP
+ MpJExtfaHym/YzgfMRI2mYvtuf6WoDTsu70+VPOk8hgTBOytwIg6+zFNDfrvHAgHEhsl
+ 4qCg==
+X-Gm-Message-State: ACrzQf2IspCjP8YzngF8Clx7KPBa6OvhAqj28f/f8C19ycggWFwTsKaw
+ Jyfec6CRwDfUvFdrVynpL03Jsw==
+X-Google-Smtp-Source: AMsMyM4YVWJvBYEE8i0ivHoNBxUS0zUL63jBkyPUx8TQ8r5lhhjDUTun3IfPAgQpI6LIxBmjMaqBLg==
+X-Received: by 2002:aa7:9e52:0:b0:53e:49b2:1c6e with SMTP id
+ z18-20020aa79e52000000b0053e49b21c6emr26749203pfq.70.1664875439561; 
+ Tue, 04 Oct 2022 02:23:59 -0700 (PDT)
+Received: from localhost.localdomain ([49.206.9.142])
  by smtp.gmail.com with ESMTPSA id
- b15-20020a1709027e0f00b001752216ca51sm1194562plm.39.2022.10.03.23.51.54
+ s2-20020a17090b070200b001fba4716f11sm2934551pjz.22.2022.10.04.02.23.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Oct 2022 23:51:56 -0700 (PDT)
-Message-ID: <d7c8fc4fc255a23850d78da6c937e57e85ce09c7.camel@ventanamicro.com>
-Subject: Re: [PATCH v10 4/5] target/riscv: smstateen check for fcsr
-From: mchitale@ventanamicro.com
-To: weiwei <liweiwei@iscas.ac.cn>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com
-Date: Tue, 04 Oct 2022 12:21:51 +0530
-In-Reply-To: <404205f5-9626-23b3-d388-b2288293c7d1@iscas.ac.cn>
-References: <20221003114718.30659-1-mchitale@ventanamicro.com>
- <20221003114718.30659-5-mchitale@ventanamicro.com>
- <404205f5-9626-23b3-d388-b2288293c7d1@iscas.ac.cn>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ Tue, 04 Oct 2022 02:23:58 -0700 (PDT)
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: Peter Maydell <peter.maydell@linaro.org>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>, Song Gao <gaosong@loongson.cn>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH V5 0/3] hw/riscv: virt: Enable booting S-mode firmware from
+ pflash
+Date: Tue,  4 Oct 2022 14:53:48 +0530
+Message-Id: <20221004092351.18209-1-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=mchitale@ventanamicro.com; helo=mail-pj1-x102f.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pg1-x536.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -82,214 +83,87 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Oct 2022 06:52:14 -0000
+X-List-Received-Date: Tue, 04 Oct 2022 09:24:08 -0000
 
-On Mon, 2022-10-03 at 21:02 +0800, weiwei wrote:
-> On 2022/10/3 19:47, Mayuresh Chitale wrote:
-> > If smstateen is implemented and sstateen0.fcsr is clear then the
-> > floating point
-> > operations must return illegal instruction exception or virtual
-> > instruction
-> > trap, if relevant.
-> > 
-> > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> > ---
-> >   target/riscv/csr.c                        | 23 ++++++++++++
-> >   target/riscv/insn_trans/trans_rvf.c.inc   | 43
-> > +++++++++++++++++++++--
-> >   target/riscv/insn_trans/trans_rvzfh.c.inc | 12 +++++++
-> >   3 files changed, 75 insertions(+), 3 deletions(-)
-> > 
-> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> > index 71236f2b5d..8b25f885ec 100644
-> > --- a/target/riscv/csr.c
-> > +++ b/target/riscv/csr.c
-> > @@ -84,6 +84,10 @@ static RISCVException fs(CPURISCVState *env, int
-> > csrno)
-> >           !RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
-> >           return RISCV_EXCP_ILLEGAL_INST;
-> >       }
-> > +
-> > +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-> > +        return smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR);
-> > +    }
-> >   #endif
-> >       return RISCV_EXCP_NONE;
-> >   }
-> > @@ -2023,6 +2027,9 @@ static RISCVException
-> > write_mstateen0(CPURISCVState *env, int csrno,
-> >                                         target_ulong new_val)
-> >   {
-> >       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
-> > +    if (!riscv_has_ext(env, RVF)) {
-> > +        wr_mask |= SMSTATEEN0_FCSR;
-> > +    }
-> >   
-> >       return write_mstateen(env, csrno, wr_mask, new_val);
-> >   }
-> > @@ -2059,6 +2066,10 @@ static RISCVException
-> > write_mstateen0h(CPURISCVState *env, int csrno,
-> >   {
-> >       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
-> >   
-> > +    if (!riscv_has_ext(env, RVF)) {
-> > +        wr_mask |= SMSTATEEN0_FCSR;
-> > +    }
-> > +
-> >       return write_mstateenh(env, csrno, wr_mask, new_val);
-> >   }
-> >   
-> > @@ -2096,6 +2107,10 @@ static RISCVException
-> > write_hstateen0(CPURISCVState *env, int csrno,
-> >   {
-> >       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
-> >   
-> > +    if (!riscv_has_ext(env, RVF)) {
-> > +        wr_mask |= SMSTATEEN0_FCSR;
-> > +    }
-> > +
-> >       return write_hstateen(env, csrno, wr_mask, new_val);
-> >   }
-> >   
-> > @@ -2135,6 +2150,10 @@ static RISCVException
-> > write_hstateen0h(CPURISCVState *env, int csrno,
-> >   {
-> >       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
-> >   
-> > +    if (!riscv_has_ext(env, RVF)) {
-> > +        wr_mask |= SMSTATEEN0_FCSR;
-> > +    }
-> > +
-> >       return write_hstateenh(env, csrno, wr_mask, new_val);
-> >   }
-> >   
-> > @@ -2182,6 +2201,10 @@ static RISCVException
-> > write_sstateen0(CPURISCVState *env, int csrno,
-> >   {
-> >       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
-> >   
-> > +    if (!riscv_has_ext(env, RVF)) {
-> > +        wr_mask |= SMSTATEEN0_FCSR;
-> > +    }
-> > +
-> >       return write_sstateen(env, csrno, wr_mask, new_val);
-> >   }
-> >   
-> > diff --git a/target/riscv/insn_trans/trans_rvf.c.inc
-> > b/target/riscv/insn_trans/trans_rvf.c.inc
-> > index a1d3eb52ad..93657680c6 100644
-> > --- a/target/riscv/insn_trans/trans_rvf.c.inc
-> > +++ b/target/riscv/insn_trans/trans_rvf.c.inc
-> > @@ -24,9 +24,46 @@
-> >               return false; \
-> >   } while (0)
-> >   
-> > -#define REQUIRE_ZFINX_OR_F(ctx) do {\
-> > -    if (!ctx->cfg_ptr->ext_zfinx) { \
-> > -        REQUIRE_EXT(ctx, RVF); \
-> > +#ifndef CONFIG_USER_ONLY
-> > +static inline bool smstateen_fcsr_check(DisasContext *ctx, int
-> > index)
-> > +{
-> > +    CPUState *cpu = ctx->cs;
-> > +    CPURISCVState *env = cpu->env_ptr;
-> > +    uint64_t stateen = env->mstateen[index];
-> > +
-> > +    if (!ctx->cfg_ptr->ext_smstateen || env->priv == PRV_M) {
-> > +        return true;
-> > +    }
-> > +
-> > +    if (ctx->virt_enabled) {
-> > +        stateen &= env->hstateen[index];
-> > +    }
-> > +
-> > +    if (env->priv == PRV_U && has_ext(ctx, RVS)) {
-> > +        stateen &= env->sstateen[index];
-> > +    }
-> > +
-> > +    if (!(stateen & SMSTATEEN0_FCSR)) {
-> > +        if (ctx->virt_enabled) {
-> > +            ctx->virt_inst_excp = true;
-> > +        }
-> 
-> Are there any considerations for adding  virt_inst_excp instead of
-> directly
-> 
-> "generate_exception(ctx, RISCV_EXCP_VIRT_INSTRUCTION_FAULT)" here?
-> 
-> Regards,
-> 
-> Weiwei Li
+This series adds the support to boot S-mode FW like EDK2 from the flash. The
+S-mode firmware should be kept in pflash unit 1.
 
-I had considered it but I think this is a simpler approach as the rest
-of the code path stays the same as generating an illegal instruction
-exception, for e.g setting the bins value (tval). Also we need to
-return true from all the caller trans_* functions even if the smstateen
-check has failed.
-> 
-> > +        return false;
-> > +    }
-> > +
-> > +    return true;
-> > +}
-> > +#else
-> > +#define smstateen_fcsr_check(ctx, index) (true)
-> > +#endif
-> > +
-> > +#define REQUIRE_ZFINX_OR_F(ctx) do { \
-> > +    if (!has_ext(ctx, RVF)) { \
-> > +        if (!ctx->cfg_ptr->ext_zfinx) { \
-> > +            return false; \
-> > +        } \
-> > +        if (!smstateen_fcsr_check(ctx, 0)) { \
-> > +            return false; \
-> > +        } \
-> >       } \
-> >   } while (0)
-> >   
-> > diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc
-> > b/target/riscv/insn_trans/trans_rvzfh.c.inc
-> > index 5d07150cd0..6c2e338c0a 100644
-> > --- a/target/riscv/insn_trans/trans_rvzfh.c.inc
-> > +++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
-> > @@ -20,18 +20,27 @@
-> >       if (!ctx->cfg_ptr->ext_zfh) {      \
-> >           return false;         \
-> >       }                         \
-> > +    if (!smstateen_fcsr_check(ctx, 0)) { \
-> > +        return false; \
-> > +    } \
-> >   } while (0)
-> >   
-> >   #define REQUIRE_ZHINX_OR_ZFH(ctx) do { \
-> >       if (!ctx->cfg_ptr->ext_zhinx && !ctx->cfg_ptr->ext_zfh) { \
-> >           return false;                  \
-> >       }                                  \
-> > +    if (!smstateen_fcsr_check(ctx, 0)) { \
-> > +        return false; \
-> > +    } \
-> >   } while (0)
-> >   
-> >   #define REQUIRE_ZFH_OR_ZFHMIN(ctx) do {       \
-> >       if (!(ctx->cfg_ptr->ext_zfh || ctx->cfg_ptr->ext_zfhmin)) { \
-> >           return false;                         \
-> >       }                                         \
-> > +    if (!smstateen_fcsr_check(ctx, 0)) { \
-> > +        return false; \
-> > +    } \
-> >   } while (0)
-> >   
-> >   #define REQUIRE_ZFH_OR_ZFHMIN_OR_ZHINX_OR_ZHINXMIN(ctx) do { \
-> > @@ -39,6 +48,9 @@
-> >             ctx->cfg_ptr->ext_zhinx || ctx->cfg_ptr->ext_zhinxmin)) 
-> > {     \
-> >           return false;                                        \
-> >       }                                                        \
-> > +    if (!smstateen_fcsr_check(ctx, 0)) { \
-> > +        return false; \
-> > +    } \
-> >   } while (0)
-> >   
-> >   static bool trans_flh(DisasContext *ctx, arg_flh *a)
+When -kernel (and -initrd) option is also provided along with the flash,
+the kernel (and initrd) will be loaded into fw_cfg table and opensbi will
+branch to the flash address which will be the entry point of the S-mode
+firmware. The S-mode FW then loads and launches the kernel.
+
+When only -pflash option is provided in the command line, the kernel
+will be located and loaded in the usual way by the S-mode firmware.
+
+These patches are available in below branch.
+https://github.com/vlsunil/qemu/tree/pflash_v2
+
+The first two patches in this series are refactor patches.
+
+These changes are tested with a WIP EDK2 port for virt machine. Below
+are the instructions to build and test this feature.
+
+1) Get EDK2 sources from below branches.
+https://github.com/vlsunil/edk2/tree/virt_refactor_smode_v1
+https://github.com/vlsunil/edk2-platforms/tree/virt_refactor_smode_v1
+
+2) Build EDK2 for RISC-V
+	export WORKSPACE=`pwd`
+        export GCC5_RISCV64_PREFIX=riscv64-linux-gnu-
+        export PACKAGES_PATH=$WORKSPACE/edk2:$WORKSPACE/edk2-platforms
+        export EDK_TOOLS_PATH=$WORKSPACE/edk2/BaseTools
+        source edk2/edksetup.sh
+        make -C edk2/BaseTools clean
+        make -C edk2/BaseTools
+        make -C edk2/BaseTools/Source/C
+        source edk2/edksetup.sh BaseTools
+        build -a RISCV64  -p Platform/Qemu/RiscVVirt/RiscVVirt.dsc -t GCC5
+
+3)Make the EDK2 image size to match with what qemu flash expects
+truncate -s 32M Build/RiscVVirt/DEBUG_GCC5/FV/RISCV_VIRT.fd
+
+4) Run
+a) Boot to EFI shell (no -kernel / -initrd option)
+qemu-system-riscv64  -nographic   -drive file=Build/RiscVVirt/DEBUG_GCC5/FV/RISCV_VIRT.fd,if=pflash,format=raw,unit=1  -machine virt -M 2G
+
+b) With -kernel, -initrd and -pflash
+qemu-system-riscv64  -nographic   -drive file=Build/RiscVVirt/DEBUG_GCC5/FV/RISCV_VIRT.fd,if=pflash,format=raw,unit=1  -machine virt -M 2G -kernel arch/riscv/boot/Image.gz -initrd rootfs.cpio 
+
+
+Changes since V4:
+	1) Rebased on riscv-to-apply.next branch
+	2) Added RB tags
+	3) Gerd's feedback on removing the truncate requirement will be addressed as separate
+	   patch in future.
+
+Changes since V3:
+	1) White space and comment edits
+	2) Added RB tag
+
+Changes since V2:
+	1) Moved the doc comment to .h file
+
+Changes since V1:
+	1) Modified code to support the use case when both -kernel and -pflash are configured.
+	2) Refactor patches added to help (1) above.
+	3) Cover letter added with test instructions.
+
+Sunil V L (3):
+  hw/arm,loongarch: Move load_image_to_fw_cfg() to common location
+  hw/riscv: virt: Move create_fw_cfg() prior to loading kernel
+  hw/riscv: virt: Enable booting S-mode firmware from pflash
+
+ hw/arm/boot.c             | 49 ---------------------------------------
+ hw/loongarch/virt.c       | 33 --------------------------
+ hw/nvram/fw_cfg.c         | 32 +++++++++++++++++++++++++
+ hw/riscv/boot.c           | 29 +++++++++++++++++++++++
+ hw/riscv/virt.c           | 32 ++++++++++++++++++-------
+ include/hw/nvram/fw_cfg.h | 21 +++++++++++++++++
+ include/hw/riscv/boot.h   |  1 +
+ 7 files changed, 107 insertions(+), 90 deletions(-)
+
+-- 
+2.25.1
 
 
