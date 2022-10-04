@@ -1,54 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ofidy-00035p-Kv
-	for mharc-qemu-riscv@gnu.org; Tue, 04 Oct 2022 10:11:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58362)
+	id 1ofnya-0002Fm-F3
+	for mharc-qemu-riscv@gnu.org; Tue, 04 Oct 2022 15:53:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49334)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ofidt-00032M-HW
- for qemu-riscv@nongnu.org; Tue, 04 Oct 2022 10:11:30 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433]:34554)
+ id 1ofnyT-0002B3-1N
+ for qemu-riscv@nongnu.org; Tue, 04 Oct 2022 15:53:05 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c]:54032)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ofido-0004Tp-LY
- for qemu-riscv@nongnu.org; Tue, 04 Oct 2022 10:11:29 -0400
-Received: by mail-pf1-x433.google.com with SMTP id f140so7979696pfa.1
- for <qemu-riscv@nongnu.org>; Tue, 04 Oct 2022 07:11:24 -0700 (PDT)
+ id 1ofnyO-0000IF-QX
+ for qemu-riscv@nongnu.org; Tue, 04 Oct 2022 15:53:04 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id fw14so6729836pjb.3
+ for <qemu-riscv@nongnu.org>; Tue, 04 Oct 2022 12:53:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
  bh=ct0u9b3qDBsxUF0JVELTeHrR9q6ArXqosWhP8E36ZjU=;
- b=fv9qEFljh+wNVdxMLoJ5B3JLQZzEiM7DVHSi1AGcnXFOgP3THYctusAtjAOay3t8xt
- Sw7BBpOBNJI7MFciZnsYPd3eldD9rQL6PNjxHdCTnV6fgtBlRMuKQwnYnvLvi+LxYqn8
- 7Wl5o8mjzkePR/7tD6fG8Kl7s8lJeloj6tuIkRALqpiEFZgRAHC/q+qesRX4nZ+nNsYZ
- 8tCZGRFPUCsPYdVEO1ef55du3jE2NpLeDawVO8DKkWtoYaC+3COm2OcCz2AVLiBFV2Ee
- 6fIZlvmwQohUKgFN7VoYoYh983gsGlJdUFB/+WbAcSplL+auA6aiWLN6Xd6c/0w1ztoE
- 4B3A==
+ b=HYo/2r+m6bDg6ELdubsNjdgZ8BpJeefMzQfO55lzK+GhBOb1VtODgctNeWJdEW5eDL
+ xUNPDF4tuMuqQaTwHxdMCWrwYARxNArnN/yzi8adKtl96p0Mzv88FmbeLINso4Bf4TA3
+ P6sf+sHHrsXiK9bQAuNRd1M5xtDC5ieeJSTmtfsYRxj21XYT3cpJhxN+ngJ3OqrW+TXF
+ h+PjFE3zfipKqYc5YzjRdXzMcTGih1yIkbj9bLQHxD6xgOjnlM11I0X+ktVgW41Qyt/L
+ abX1VQnYbCisuSvrVthcC0hw5JmZ4zS11wfLOj7TBwWPA/bFUyYhxbdXAPCxCCDCh/QW
+ HQhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date;
  bh=ct0u9b3qDBsxUF0JVELTeHrR9q6ArXqosWhP8E36ZjU=;
- b=ANaQmD78uny2olPCmBg8cufRa8sBEgdgkER/CJAUDMMvwfnRWu72EyGcZD3xih8yJe
- LwrezdQoPD0/hIX4jgvcRjYMZ0rPPjGDA0gaWMo6Rcfl/vtOmw8llz6DwX/yd66vD6b1
- qWgYtkpKets5CkJeeaOiCkNah/yWktkRlUDZ8sR7dWdQqlh4qdq4OkgsdTS2bn3nM3SM
- PIdmt8Ui9AryIa7RW3LRo7Wg5Ai12JlCTMKWSS2jRhwyqF/Jk0NlIOB+oZgjzzkmC5SU
- gv1gI+X8e4oWYeSZq/WMkFK4QbQRfc4KWio6582O2w0jJuhEXZR3hw5W+iFqUcwbHulV
- ESYg==
-X-Gm-Message-State: ACrzQf0P7A+QbWnb1w8WFgNPLrlFZKLtHow40MebH/YedCCi2sTljmrw
- Bn6SsIEwcF/hLgkYeyvr4o2gvQ==
-X-Google-Smtp-Source: AMsMyM7vnBkBEXWL6LLlfa6hE1oSRu6iXKnEjYjOmd3yWzq6Eo0km7CjG6uMfnX6Rs5dNbv8z8zFAg==
-X-Received: by 2002:a65:604d:0:b0:43c:9d8c:813a with SMTP id
- a13-20020a65604d000000b0043c9d8c813amr24021711pgp.572.1664892683364; 
- Tue, 04 Oct 2022 07:11:23 -0700 (PDT)
-Received: from stoup.. ([2605:ef80:8015:12b0:403e:a15b:ff5e:d439])
+ b=qRvMhOVJeUKggzdp/IIdlw/ZlbgLxk2CUgMiTS7Bi/FGtoqZj5BotFyOUdxi/eRcff
+ SY3PvFKuER9sJZsxoPMMNFEU0HMvQTUH/O0LasEWEspvULF8jpzcmbB40bU9lb5iRrXH
+ /6W28c+fWrLud7+oV/YrEwIx9HAj/OlV9VYm4kpZi1QOWhGQA3lMTIF+xuuGI4kXOBcW
+ KAQ9a/tk9drAx11YOMSW3jRASJIjEqk3SATRbeL7my5mBuOGjGh98x+AnEGQP61CRqJo
+ KxVpQ+I2FCyAKl5qgSvvJn0nrqdDzrTpBNHk4bjYP8ZpCPdOwAlJWV721szL5G343zzl
+ E/fg==
+X-Gm-Message-State: ACrzQf0XsLhc8hERR8FecQ0zTWKao2Zx+4pJZdsk1zmmb6eQtD7Ljo8M
+ ut/G3e6SSDcCctoDADEmupEutw==
+X-Google-Smtp-Source: AMsMyM6cEFG/Z/EsVkyP/c6w/96tIo9KHVguYXVf9PcOMj8egcOzPCfPx+lBBMozJ/KJEgd/u/hxfA==
+X-Received: by 2002:a17:902:b194:b0:176:d229:83bd with SMTP id
+ s20-20020a170902b19400b00176d22983bdmr27630526plr.174.1664913179367; 
+ Tue, 04 Oct 2022 12:52:59 -0700 (PDT)
+Received: from stoup.. ([2602:47:d49d:ec01:526e:3326:a84e:e5e3])
  by smtp.gmail.com with ESMTPSA id
- y5-20020aa79ae5000000b00561382a5a25sm1240357pfp.26.2022.10.04.07.11.19
+ u23-20020a1709026e1700b00172973d3cd9sm9293406plk.55.2022.10.04.12.52.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Oct 2022 07:11:22 -0700 (PDT)
+ Tue, 04 Oct 2022 12:52:58 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: alex.bennee@linaro.org, Taylor Simpson <tsimpson@quicinc.com>,
+Cc: stefanha@redhat.com, Taylor Simpson <tsimpson@quicinc.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Eduardo Habkost <eduardo@habkost.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
@@ -64,17 +65,17 @@ Cc: alex.bennee@linaro.org, Taylor Simpson <tsimpson@quicinc.com>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: [PATCH v7 16/18] hw/core: Add CPUClass.get_pc
-Date: Tue,  4 Oct 2022 07:10:49 -0700
-Message-Id: <20221004141051.110653-17-richard.henderson@linaro.org>
+Subject: [PULL 16/20] hw/core: Add CPUClass.get_pc
+Date: Tue,  4 Oct 2022 12:52:37 -0700
+Message-Id: <20221004195241.46491-17-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20221004141051.110653-1-richard.henderson@linaro.org>
-References: <20221004141051.110653-1-richard.henderson@linaro.org>
+In-Reply-To: <20221004195241.46491-1-richard.henderson@linaro.org>
+References: <20221004195241.46491-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -94,7 +95,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Oct 2022 14:11:32 -0000
+X-List-Received-Date: Tue, 04 Oct 2022 19:53:05 -0000
 
 Populate this new method for all targets.  Always match
 the result that would be given by cpu_get_tb_cpu_state,
