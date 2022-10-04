@@ -1,83 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ofL6x-0007sT-2J
-	for mharc-qemu-riscv@gnu.org; Mon, 03 Oct 2022 09:03:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33884)
+	id 1ofbmq-0000SR-F2
+	for mharc-qemu-riscv@gnu.org; Tue, 04 Oct 2022 02:52:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56584)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1ofL6v-0007qU-Vj
- for qemu-riscv@nongnu.org; Mon, 03 Oct 2022 09:03:54 -0400
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d]:37698)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1ofbmd-0000Ok-T8
+ for qemu-riscv@nongnu.org; Tue, 04 Oct 2022 02:52:09 -0400
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:53801)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1ofL6u-00048i-9S
- for qemu-riscv@nongnu.org; Mon, 03 Oct 2022 09:03:53 -0400
-Received: by mail-wr1-x42d.google.com with SMTP id bq9so16647119wrb.4
- for <qemu-riscv@nongnu.org>; Mon, 03 Oct 2022 06:03:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:from:to:cc:subject:date;
- bh=UFqZRRu6XrDL0I4YLcMEOX9P3nQT4zN+alTcspDdyA8=;
- b=osFmR7FvkhUmXpSvtPyUAlxYPEy4EvaKnRctnlIlQnBIzBCpvxEBHNYMorOfEVTFC+
- KUxr4aDwHzyeuRMx+WtSwcGgFWuFsmue9Uj/wRye9MCSz55F7bYQCgI41ItiJsUU+NFE
- 74HFi06xfU2F5x//k6avgJG/+Gl67D2dyW4ka+vJ+8DsqFQH3KlNcI4F8nuajjIOs8Cb
- k+XMA7E9j0/bRqAjLW2udap1CURpOb6k23lZJgWnEXz3vzN/RvRagenomDjcSpNCT9wC
- xNpQKr/OMirmLk9RCv4JxrH5q8fME4g+apdPv5ippvRlzyJegxb7Ea5OJiWP0l8jX7Tm
- Yjow==
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1ofbmY-0000iR-Ut
+ for qemu-riscv@nongnu.org; Tue, 04 Oct 2022 02:52:03 -0400
+Received: by mail-pj1-x102f.google.com with SMTP id fw14so5046824pjb.3
+ for <qemu-riscv@nongnu.org>; Mon, 03 Oct 2022 23:51:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:mime-version:user-agent:references
+ :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+ :date; bh=uYcUCfxcK1MsH06I3SCNIhSOaFuiEdHlYJWDpClgBKU=;
+ b=FT26xavB0fWj1KfUarEyUpvl3QPebtCZX/jc+rDKfshN04qKn+obcfubSfcA03C0V3
+ mKaz0XIqO+Pys0qvKYRRJAcPrI7fKGTv7nZ5vZyGD2nkRF2kPz87SXIpRovMy6No7Fv4
+ yqFS6PU8Duc6Y5WkBT+Re03X1D2X7gJOd8FTCoXG/NcdqZ3rYNeCGXFsVOWkKsS/JMV2
+ h1bf9PnefhEewhF54v5z2TXbM/N+/U5QpMvm8I+vzvGUcgyTGemI9Ohaa7+OH7aQ5E87
+ lD9vLD8Lx590AbeHYDgcgY4f2nSvWoxlyLvWUmzEptZFJEmQA23KEZZBNQAeIiva+vcn
+ oebQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
- :cc:subject:date;
- bh=UFqZRRu6XrDL0I4YLcMEOX9P3nQT4zN+alTcspDdyA8=;
- b=vJuwfGaZFz1WcNsSL37vI1W53CGmHzZUypwneDgbI7/KLhF5fkpW6HLbkvJbM2f03J
- ZPg697beWy569FNQC1vykV/Tz5TNXj9kkq03R+oPQmALN0g9uR5XYEPLDnfA0FesOaGz
- 4ZURMWFbgQpah+p4lPKaLZqFeWGIEk+bA41YNkYQGwfRXLYiYbhFi6zQQDCz1ojJe8QW
- 7bS6WD+xgwM+F6RWGRMURu2SDqJgmRG8mUa9ZwzeGZy7O5aYFTFUhD9Sp/U7I/m+CrIm
- YeIBOxB6oeBwigEIakCJO8U4TpsUlQ6XmB4FcgrIkgJca74Ii8rGt8/Tic1Y5OSpVZdP
- benA==
-X-Gm-Message-State: ACrzQf1EKXEakBHZAqCPy2Tx8oS462JMJTYdQai47mI7apKaI/7K8sPK
- X/ZNdHhoji6ZxEuMv+lGmdgyuw==
-X-Google-Smtp-Source: AMsMyM7BHjO5ezdH2KQrSnk+9TCxey3grFiOFDTbfQs6uvwiGuNU9swC8JYEutucPHdWOdHMNWC1iQ==
-X-Received: by 2002:adf:f90d:0:b0:20c:de32:4d35 with SMTP id
- b13-20020adff90d000000b0020cde324d35mr13020499wrr.583.1664802230871; 
- Mon, 03 Oct 2022 06:03:50 -0700 (PDT)
-Received: from zen.linaroharston ([185.81.254.11])
+ h=content-transfer-encoding:mime-version:user-agent:references
+ :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+ :from:to:cc:subject:date;
+ bh=uYcUCfxcK1MsH06I3SCNIhSOaFuiEdHlYJWDpClgBKU=;
+ b=OkivxH3n/HCkDnuXJuK/xKwXJZVwSLmnuKP/aOw2y+xZDUVvB3xYcBRHl956aAFNs6
+ HG5lsps7zuMXzYwfKkQhIxVFC+UxjunE9uUbUqQlLtPeW6rfgqrkhtiDu6yxDddTOdUd
+ I4uM4roiq6sfqm0hswLYXfiHAfxlTP1ZpnFPEBlphQF6gfklgpEYakRrCuWxhXWOYMhl
+ oFiWCfW76X5uhEaVnM0ybF3E6JF8/m5vyKgKR0hmeex5b1QOaFC/0FIc2DnPzvIZhSVm
+ i1co4UWkYEFl08mNU9Bq5rVXCkKWI0Am9wqCGaRbWZTulCZ5EWlWhjB0GAP9RhTYdsil
+ AI7g==
+X-Gm-Message-State: ACrzQf3wltuNtDyPXs7sJbkZVMLpzXwYjO6Dpzlf+Wl9mbaGUrNPCjZp
+ NQXDRezuH03nN47uM1sP3kZeFQ==
+X-Google-Smtp-Source: AMsMyM5+LxEs1kxMKv0naHeU7OjRVWL/Ss+/jvcypjViBgApXTtWnhnI8jzq3cODRq12b2tLWZqnnA==
+X-Received: by 2002:a17:90b:3903:b0:202:affa:1c9f with SMTP id
+ ob3-20020a17090b390300b00202affa1c9fmr16266598pjb.27.1664866317144; 
+ Mon, 03 Oct 2022 23:51:57 -0700 (PDT)
+Received: from [192.168.1.5] ([103.97.165.210])
  by smtp.gmail.com with ESMTPSA id
- z15-20020a7bc7cf000000b003a5537bb2besm11561455wmk.25.2022.10.03.06.03.48
+ b15-20020a1709027e0f00b001752216ca51sm1194562plm.39.2022.10.03.23.51.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Oct 2022 06:03:49 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 691F41FFB7;
- Mon,  3 Oct 2022 14:03:48 +0100 (BST)
-References: <20220930212622.108363-1-richard.henderson@linaro.org>
- <20220930212622.108363-17-richard.henderson@linaro.org>
-User-agent: mu4e 1.9.0; emacs 28.2.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: peter.maydell@linux.org, alex.bennee@linux.org, Eduardo Habkost
- <eduardo@habkost.net>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>, Yanan Wang
- <wangyanan55@huawei.com>, Michael Rolnik <mrolnik@gmail.com>, "Edgar E.
- Iglesias" <edgar.iglesias@gmail.com>, Taylor Simpson
- <tsimpson@quicinc.com>, Song Gao <gaosong@loongson.cn>, Xiaojuan Yang
- <yangxiaojuan@loongson.cn>, Laurent Vivier <laurent@vivier.eu>, Jiaxun
- Yang <jiaxun.yang@flygoat.com>, Aleksandar Rikalo
- <aleksandar.rikalo@syrmia.com>, Chris Wulff <crwulff@gmail.com>, Marek
- Vasut <marex@denx.de>, Stafford Horne <shorne@gmail.com>, Yoshinori Sato
- <ysato@users.sourceforge.jp>, Mark Cave-Ayland
- <mark.cave-ayland@ilande.co.uk>, Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>, Max Filippov <jcmvbkbc@gmail.com>,
- qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org, qemu-devel@nongnu.org
-Subject: Re: [PATCH v6 16/18] hw/core: Add CPUClass.get_pc
-Date: Mon, 03 Oct 2022 14:03:43 +0100
-In-reply-to: <20220930212622.108363-17-richard.henderson@linaro.org>
-Message-ID: <8735c5njnv.fsf@linaro.org>
+ Mon, 03 Oct 2022 23:51:56 -0700 (PDT)
+Message-ID: <d7c8fc4fc255a23850d78da6c937e57e85ce09c7.camel@ventanamicro.com>
+Subject: Re: [PATCH v10 4/5] target/riscv: smstateen check for fcsr
+From: mchitale@ventanamicro.com
+To: weiwei <liweiwei@iscas.ac.cn>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: alistair.francis@wdc.com
+Date: Tue, 04 Oct 2022 12:21:51 +0530
+In-Reply-To: <404205f5-9626-23b3-d388-b2288293c7d1@iscas.ac.cn>
+References: <20221003114718.30659-1-mchitale@ventanamicro.com>
+ <20221003114718.30659-5-mchitale@ventanamicro.com>
+ <404205f5-9626-23b3-d388-b2288293c7d1@iscas.ac.cn>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42d.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,19 +82,214 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Oct 2022 13:03:54 -0000
+X-List-Received-Date: Tue, 04 Oct 2022 06:52:14 -0000
 
+On Mon, 2022-10-03 at 21:02 +0800, weiwei wrote:
+> On 2022/10/3 19:47, Mayuresh Chitale wrote:
+> > If smstateen is implemented and sstateen0.fcsr is clear then the
+> > floating point
+> > operations must return illegal instruction exception or virtual
+> > instruction
+> > trap, if relevant.
+> > 
+> > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> > ---
+> >   target/riscv/csr.c                        | 23 ++++++++++++
+> >   target/riscv/insn_trans/trans_rvf.c.inc   | 43
+> > +++++++++++++++++++++--
+> >   target/riscv/insn_trans/trans_rvzfh.c.inc | 12 +++++++
+> >   3 files changed, 75 insertions(+), 3 deletions(-)
+> > 
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index 71236f2b5d..8b25f885ec 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -84,6 +84,10 @@ static RISCVException fs(CPURISCVState *env, int
+> > csrno)
+> >           !RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
+> >           return RISCV_EXCP_ILLEGAL_INST;
+> >       }
+> > +
+> > +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> > +        return smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR);
+> > +    }
+> >   #endif
+> >       return RISCV_EXCP_NONE;
+> >   }
+> > @@ -2023,6 +2027,9 @@ static RISCVException
+> > write_mstateen0(CPURISCVState *env, int csrno,
+> >                                         target_ulong new_val)
+> >   {
+> >       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> > +    if (!riscv_has_ext(env, RVF)) {
+> > +        wr_mask |= SMSTATEEN0_FCSR;
+> > +    }
+> >   
+> >       return write_mstateen(env, csrno, wr_mask, new_val);
+> >   }
+> > @@ -2059,6 +2066,10 @@ static RISCVException
+> > write_mstateen0h(CPURISCVState *env, int csrno,
+> >   {
+> >       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> >   
+> > +    if (!riscv_has_ext(env, RVF)) {
+> > +        wr_mask |= SMSTATEEN0_FCSR;
+> > +    }
+> > +
+> >       return write_mstateenh(env, csrno, wr_mask, new_val);
+> >   }
+> >   
+> > @@ -2096,6 +2107,10 @@ static RISCVException
+> > write_hstateen0(CPURISCVState *env, int csrno,
+> >   {
+> >       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> >   
+> > +    if (!riscv_has_ext(env, RVF)) {
+> > +        wr_mask |= SMSTATEEN0_FCSR;
+> > +    }
+> > +
+> >       return write_hstateen(env, csrno, wr_mask, new_val);
+> >   }
+> >   
+> > @@ -2135,6 +2150,10 @@ static RISCVException
+> > write_hstateen0h(CPURISCVState *env, int csrno,
+> >   {
+> >       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> >   
+> > +    if (!riscv_has_ext(env, RVF)) {
+> > +        wr_mask |= SMSTATEEN0_FCSR;
+> > +    }
+> > +
+> >       return write_hstateenh(env, csrno, wr_mask, new_val);
+> >   }
+> >   
+> > @@ -2182,6 +2201,10 @@ static RISCVException
+> > write_sstateen0(CPURISCVState *env, int csrno,
+> >   {
+> >       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> >   
+> > +    if (!riscv_has_ext(env, RVF)) {
+> > +        wr_mask |= SMSTATEEN0_FCSR;
+> > +    }
+> > +
+> >       return write_sstateen(env, csrno, wr_mask, new_val);
+> >   }
+> >   
+> > diff --git a/target/riscv/insn_trans/trans_rvf.c.inc
+> > b/target/riscv/insn_trans/trans_rvf.c.inc
+> > index a1d3eb52ad..93657680c6 100644
+> > --- a/target/riscv/insn_trans/trans_rvf.c.inc
+> > +++ b/target/riscv/insn_trans/trans_rvf.c.inc
+> > @@ -24,9 +24,46 @@
+> >               return false; \
+> >   } while (0)
+> >   
+> > -#define REQUIRE_ZFINX_OR_F(ctx) do {\
+> > -    if (!ctx->cfg_ptr->ext_zfinx) { \
+> > -        REQUIRE_EXT(ctx, RVF); \
+> > +#ifndef CONFIG_USER_ONLY
+> > +static inline bool smstateen_fcsr_check(DisasContext *ctx, int
+> > index)
+> > +{
+> > +    CPUState *cpu = ctx->cs;
+> > +    CPURISCVState *env = cpu->env_ptr;
+> > +    uint64_t stateen = env->mstateen[index];
+> > +
+> > +    if (!ctx->cfg_ptr->ext_smstateen || env->priv == PRV_M) {
+> > +        return true;
+> > +    }
+> > +
+> > +    if (ctx->virt_enabled) {
+> > +        stateen &= env->hstateen[index];
+> > +    }
+> > +
+> > +    if (env->priv == PRV_U && has_ext(ctx, RVS)) {
+> > +        stateen &= env->sstateen[index];
+> > +    }
+> > +
+> > +    if (!(stateen & SMSTATEEN0_FCSR)) {
+> > +        if (ctx->virt_enabled) {
+> > +            ctx->virt_inst_excp = true;
+> > +        }
+> 
+> Are there any considerations for adding  virt_inst_excp instead of
+> directly
+> 
+> "generate_exception(ctx, RISCV_EXCP_VIRT_INSTRUCTION_FAULT)" here?
+> 
+> Regards,
+> 
+> Weiwei Li
 
-Richard Henderson <richard.henderson@linaro.org> writes:
+I had considered it but I think this is a simpler approach as the rest
+of the code path stays the same as generating an illegal instruction
+exception, for e.g setting the bins value (tval). Also we need to
+return true from all the caller trans_* functions even if the smstateen
+check has failed.
+> 
+> > +        return false;
+> > +    }
+> > +
+> > +    return true;
+> > +}
+> > +#else
+> > +#define smstateen_fcsr_check(ctx, index) (true)
+> > +#endif
+> > +
+> > +#define REQUIRE_ZFINX_OR_F(ctx) do { \
+> > +    if (!has_ext(ctx, RVF)) { \
+> > +        if (!ctx->cfg_ptr->ext_zfinx) { \
+> > +            return false; \
+> > +        } \
+> > +        if (!smstateen_fcsr_check(ctx, 0)) { \
+> > +            return false; \
+> > +        } \
+> >       } \
+> >   } while (0)
+> >   
+> > diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc
+> > b/target/riscv/insn_trans/trans_rvzfh.c.inc
+> > index 5d07150cd0..6c2e338c0a 100644
+> > --- a/target/riscv/insn_trans/trans_rvzfh.c.inc
+> > +++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
+> > @@ -20,18 +20,27 @@
+> >       if (!ctx->cfg_ptr->ext_zfh) {      \
+> >           return false;         \
+> >       }                         \
+> > +    if (!smstateen_fcsr_check(ctx, 0)) { \
+> > +        return false; \
+> > +    } \
+> >   } while (0)
+> >   
+> >   #define REQUIRE_ZHINX_OR_ZFH(ctx) do { \
+> >       if (!ctx->cfg_ptr->ext_zhinx && !ctx->cfg_ptr->ext_zfh) { \
+> >           return false;                  \
+> >       }                                  \
+> > +    if (!smstateen_fcsr_check(ctx, 0)) { \
+> > +        return false; \
+> > +    } \
+> >   } while (0)
+> >   
+> >   #define REQUIRE_ZFH_OR_ZFHMIN(ctx) do {       \
+> >       if (!(ctx->cfg_ptr->ext_zfh || ctx->cfg_ptr->ext_zfhmin)) { \
+> >           return false;                         \
+> >       }                                         \
+> > +    if (!smstateen_fcsr_check(ctx, 0)) { \
+> > +        return false; \
+> > +    } \
+> >   } while (0)
+> >   
+> >   #define REQUIRE_ZFH_OR_ZFHMIN_OR_ZHINX_OR_ZHINXMIN(ctx) do { \
+> > @@ -39,6 +48,9 @@
+> >             ctx->cfg_ptr->ext_zhinx || ctx->cfg_ptr->ext_zhinxmin)) 
+> > {     \
+> >           return false;                                        \
+> >       }                                                        \
+> > +    if (!smstateen_fcsr_check(ctx, 0)) { \
+> > +        return false; \
+> > +    } \
+> >   } while (0)
+> >   
+> >   static bool trans_flh(DisasContext *ctx, arg_flh *a)
 
-> Populate this new method for all targets.  Always match
-> the result that would be given by cpu_get_tb_cpu_state,
-> as we will want these values to correspond in the logs.
->
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-
-Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-
---=20
-Alex Benn=C3=A9e
 
