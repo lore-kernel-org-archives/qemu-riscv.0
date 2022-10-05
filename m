@@ -1,65 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1og14j-00022S-SF
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Oct 2022 05:52:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42320)
+	id 1og4w8-0003Wy-16
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Oct 2022 09:59:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43516)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1og14f-00020n-Qf
- for qemu-riscv@nongnu.org; Wed, 05 Oct 2022 05:52:23 -0400
-Received: from out29-147.mail.aliyun.com ([115.124.29.147]:49637)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1og14c-0002nx-Q4
- for qemu-riscv@nongnu.org; Wed, 05 Oct 2022 05:52:21 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.0739051|-1;
- BR=01201311R471S17rulernew998_84748_2000303; CH=blue; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.00781825-0.00151638-0.990665;
- FP=5427639192614763938|2|1|3|0|-1|-1|-1; HT=ay29a033018047206;
- MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=2; RT=2; SR=0;
- TI=SMTPD_---.PUVKl9K_1664963210; 
-Received: from out0-129.mail.aliyun.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.PUVKl9K_1664963210) by smtp.aliyun-inc.com;
- Wed, 05 Oct 2022 17:46:50 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=alibaba-inc.com; s=default;
- t=1664963210; h=Date:From:To:Message-ID:Subject:MIME-Version:Content-Type;
- bh=MWAaWFZWVlL3GqGBsy/ZG0GfOM/k/668xZDItQSyLOM=;
- b=X5wT5vLE5cMC3n+FK3PY+yfQuiAh0tHnpxh0ZcQBfDfL0g78xUYcS0yr25FvCbo4heHftRJtlmlZyIz+XJ0BqaaoC2l6oTkT0eTsbiROEk3lweOcriiNzUHX7ZnUYprZ96hqmpdxX5l+BiPF85ZjaxQMl/kfFwpGgqygUzuaGqQ=
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.0739051|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.00781825-0.00151638-0.990665;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047202; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DA; RN=4; RT=4; SR=0;
- TI=W4_0.1.38_v5ForDingX_210DFFF4_1664962920355_o7001c1881; 
-Received: from WS-web
- (lzw194868@alibaba-inc.com[W4_0.1.38_v5ForDingX_210DFFF4_1664962920355_o7001c1881])
- at Wed, 05 Oct 2022 17:46:49 +0800
-Date: Wed, 05 Oct 2022 17:46:49 +0800
-From: "=?UTF-8?B?5YiY5b+X5Lyf?=" <zhiwei_liu@c-sky.com>
-To: "=?UTF-8?B?UGhpbGlwcGUgTWF0aGlldS1EYXVkw6k=?=" <f4bug@amsat.org>,
- "Eric Chan" <e14002270@gmail.com>, "qemu-devel" <qemu-devel@nongnu.org>
-Cc: "qemu-riscv" <qemu-riscv@nongnu.org>
-Reply-To: "=?UTF-8?B?5YiY5b+X5Lyf?=" <zhiwei_liu@c-sky.com>
-Message-ID: <5bb36d59-e112-4354-9abe-c8383002dd03.lzw194868@alibaba-inc.com>
-Subject: =?UTF-8?B?5Zue5aSN77yaUXVlc3Rpb24gYWJvdXQgUklTQy1WIGJyb20gcmVnaXN0ZXIgYTEgc2V0IHZh?=
- =?UTF-8?B?bHVl?=
-X-Mailer: [Alimail-Mailagent revision 38395113][W4_0.1.38][v5ForDingX][Chrome]
+ (Exim 4.90_1) (envelope-from <e14002270@gmail.com>)
+ id 1og22D-0007jd-Is; Wed, 05 Oct 2022 06:53:53 -0400
+Received: from mail-yw1-x112e.google.com ([2607:f8b0:4864:20::112e]:47056)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <e14002270@gmail.com>)
+ id 1og228-0003Jq-Ba; Wed, 05 Oct 2022 06:53:51 -0400
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-35711e5a5ceso119886187b3.13; 
+ Wed, 05 Oct 2022 03:53:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/b9jDzIB4jaggSCzfHz4wdD0iZ8FtFJDugL7cYa3DnE=;
+ b=A/PhdLb7lxs7X+DtfdZL7M5YjFQqkcsbj1oVa5u/hiKhD7X3C7XXsi4XkfRyHlxvKn
+ 8OkJOhaI0ggUKx0Nkgw+Z5+6RQz1yeYvaB34lLiD88njUZyIdtnufCgxWTX2itlQQUto
+ 6HdHuxGMqqDOaey9j8pwT4V6YRKPgQnHpa+Xf/+Q9g7ibyAWWnEgQyIRspclsbavHkaZ
+ NbrA3UfZZ90yKVW7R8vmvG/m8PTXSoscEg5D4Q7kt0qtmdl9aqp270u3RglpubDUp27F
+ HDOXSWyIeR24/0OEFPHsOh4KfnaKGxTp4eVQITXRLhtbpc4dHQn+43DrYce38vzke5/K
+ qq7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/b9jDzIB4jaggSCzfHz4wdD0iZ8FtFJDugL7cYa3DnE=;
+ b=t4psE8t/xDzJFiFrLjKmiDvE3gELhmsswCJS102aRnvBlRVK6Ij0i3wwoZ8ePuKf3f
+ n5j6yWvzS8dVXWSJD12XTMPB4ffB1Xk9lFBwGc7DoVEht/MJOgdysGg6uiZabLwqUYRS
+ zDnTEd5CPMNLOkXqLNqRcC4cQvD6c1kyibnhPIf4PGz4ckIN8eSc3jh7fVW+ik49Co1b
+ j9jdwFwAu+A0xZHskzDDccdjzuL8Hn1T9E2rry7mRhdxz8T2wAUk71vD+bkfqXT94kym
+ 3sjCWMZG73X3pfs6Mx+rZBXFjNTT0Wg9R0iYU1q4p4FN5N+Lu7eKNHWu/6tTUCP3g/h/
+ OsbQ==
+X-Gm-Message-State: ACrzQf21tR8jje3DTSzUIUt8mxbv6ra8SBmuOycUzECspUmEp7s7Wuy+
+ NJoOjwqbrdhcdkaPvQ4rAuXZ2daFMyF0Xu1Uc3M=
+X-Google-Smtp-Source: AMsMyM623VnFO47BhuoKlzZwb382wlXPYJZf5XoNvi6qariViE08OisWM7EIi16F3JUdDsEksKZtDEQc/lHDg18Zau8=
+X-Received: by 2002:a81:618a:0:b0:35d:1aa8:1b1c with SMTP id
+ v132-20020a81618a000000b0035d1aa81b1cmr3287433ywb.140.1664967226418; Wed, 05
+ Oct 2022 03:53:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <CACv+nXAT-tfuabs04y5+DE-R=Hn81nmM3bKsgOkVkWTOYpTHFA@mail.gmail.com>,
+References: <CACv+nXAT-tfuabs04y5+DE-R=Hn81nmM3bKsgOkVkWTOYpTHFA@mail.gmail.com>
  <659e3df0-a384-88e0-b121-7fd7416b09a7@amsat.org>
-x-aliyun-mail-creator: W4_0.1.38_v5ForDingX_LzETW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV09XNjQpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS85MS4wLjQ0NzIuMTY0IFNhZmFyaS81MzcuMzYgZGluZ3RhbGstd2luLzEuMC4wIG53KDAuMTQuNykgRGluZ1RhbGsoNi41LjMwLVJlbGVhc2UuODAwMTMpIE1vam8vMS4wLjAgTmF0aXZlIEFwcFR5cGUocmVsZWFzZSkgQ2hhbm5lbC8xNjI4NDg3OTcwNzAwIDJuZFR5cGUvZXhjbHVzaXZl2l
-In-Reply-To: <659e3df0-a384-88e0-b121-7fd7416b09a7@amsat.org>
-Content-Type: multipart/alternative;
- boundary="----=ALIBOUNDARY_5134_7f3c3c71a700_633d5289_2ff5f8"
-Received-SPF: none client-ip=115.124.29.147; envelope-from=zhiwei_liu@c-sky.com;
- helo=out29-147.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+ <5bb36d59-e112-4354-9abe-c8383002dd03.lzw194868@alibaba-inc.com>
+In-Reply-To: <5bb36d59-e112-4354-9abe-c8383002dd03.lzw194868@alibaba-inc.com>
+From: Eric Chan <e14002270@gmail.com>
+Date: Wed, 5 Oct 2022 18:53:35 +0800
+Message-ID: <CACv+nXD0guSPxPHiPBNR_r5WHjiFecZShEwxNxO_=-K1mffLqg@mail.gmail.com>
+Subject: Re: Question about RISC-V brom register a1 set value
+To: =?UTF-8?B?5YiY5b+X5Lyf?= <zhiwei_liu@c-sky.com>
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
+ qemu-devel <qemu-devel@nongnu.org>, qemu-riscv <qemu-riscv@nongnu.org>
+Content-Type: multipart/alternative; boundary="00000000000017ea7f05ea4764e2"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112e;
+ envelope-from=e14002270@gmail.com; helo=mail-yw1-x112e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 05 Oct 2022 09:59:46 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,198 +76,262 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Oct 2022 09:52:24 -0000
+X-List-Received-Date: Wed, 05 Oct 2022 10:53:54 -0000
 
-------=ALIBOUNDARY_5134_7f3c3c71a700_633d5289_2ff5f8
+--00000000000017ea7f05ea4764e2
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
 
-SSB0aGluayB0aGUgYTEgZnJvbSBRRU1VIHJlc2V0IHZlY3RvciBpcyB0aGUgZGV2aWNlIHRyZWUo
-ZmR0X2xhZGRyKSB0aG91Z2ggSSBkb24ndCBrbm93IGlmIGl0IGlzIGRpcmVjdGx5IHVzZWQgYnkg
-dGhlIE9wZW5TQkkgb3IganVzdCBwYXNzZWQgdG8gdGhlIExpbnV4IGtlcm5lbC4KVGhhbmtzLApa
-aGl3ZWkKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tCuWPkeS7tuS6uu+8mlBoaWxpcHBlIE1hdGhpZXUtRGF1ZMOpIHZpYSA8
-cWVtdS1kZXZlbEBub25nbnUub3JnPgrlj5HpgIHml7bpl7TvvJoyMDIy5bm0MTDmnIgz5pelKOaY
-n+acn+S4gCkgMjA6MzcK5pS25Lu25Lq677yaRXJpYyBDaGFuIDxlMTQwMDIyNzBAZ21haWwuY29t
-PjsgcWVtdS1kZXZlbCA8cWVtdS1kZXZlbEBub25nbnUub3JnPgrmioTjgIDpgIHvvJpxZW11LXJp
-c2N2IDxxZW11LXJpc2N2QG5vbmdudS5vcmc+CuS4u+OAgOmimO+8mlJlOiBRdWVzdGlvbiBhYm91
-dCBSSVNDLVYgYnJvbSByZWdpc3RlciBhMSBzZXQgdmFsdWUKQ2MnaW5nIHRoZSBSSVNDLVYgc3Bl
-Y2lmaWMgbWFpbGluZyBsaXN0LgpPbiAxLzEwLzIyIDAxOjQ4LCBFcmljIENoYW4gd3JvdGU6Cj4g
-SGksIHFlbXUKPiAKPiBBcyBJIGtub3csIGJyb20gd2lsbCBwYXNzIDMgcGFyYW1ldGVycyB0byB0
-aGUgbmV4dCBzdGFnZSBib290bG9hZGVyLCBleDogCj4gb3BlblNCSS4KPiBhMCB3aWxsIHBhc3Mg
-aGFydGlkLCBhMiB3aWxsIHBhc3MgZndfZHluYW1pY19pbmZvIHN0YXJ0IGFkZHJlc3MuCj4gYWx0
-aG91Z2ggYTEgZG9lc24ndCB1c2UgZGlyZWN0bHkgaW4gb3BlblNCSS4KPiBhMSByZWFkIHZhbHVl
-IGlzIGRldGVybWluZWQgaW4gY29tcGlsZSB0aW1lIHJhdGhlciB0aGFuIHJlYWQgZnJvbSB0aGUg
-Cj4gb3JpZ2luYWwgYTEgdGhhdCBwYXNzZXMgZnJvbSBicm9tLgo+IEluIHFlbXUvaHcvcmlzY3Yv
-Ym9vdC5jCj4gYm90aCAzMmJpdCBhbmQgNjRiaXQgbWFjaGluZXMgcmVhZCA0Ynl0ZSB0aGF0IG9m
-ZnNldCAzMmJ5dGUgZnJvbSB0aGUgCj4gYnJvbSBzdGFydCBhZGRyZXNzLgo+IAo+IGZvciA2NCBi
-aXRzIG1hY2hpbmU6IGExIHJlYWQgbG93IDMyYml0IGRhdGEgbWVtYmVyIG1hZ2ljIG9mIGZ3X2R5
-bmFtaWNfaW5mbywKPiB0aGUgdmFsdWUgd2lsbCBzYW1lIGFzIEZXX0RZTkFNSUNfSU5GT19NQUdJ
-Q19WQUxVRSBiZWNhdXNlIHJpc2MtdiBpcyAKPiBsaXR0bGUgZW5kaWFuLgo+IAo+IGZvciAzMmJp
-dHMgbWFjaGluZTogZWFjaCBkYXRhIG1lbWJlciBvZiBmd19keW5hbWljX2luZm8gaXMgNCBieXRl
-cywgc28gCj4gYTEgd2lsbCByZWFkIHRoZSB2ZXJzaW9uIHJhdGhlciB0aGFuIG1hZ2ljLgo+IAo+
-IERvIHRoZSAzMmJpdCBhbmQgNjRiaXQgcGFzcyBkaWZmZXJlbnQgcGFyYW1ldGVycyBhcmUgZXhw
-ZWN0ZWQ/Cj4gSWYgaXQgaXMgbm90IGV4cGVjdGVkLCBJIGd1ZXNzIHRoZSBvcmlnaW5hbCB2ZXJz
-aW9uIGlzIDY0Yml0IG1hY2hpbmUsIAo+IGFuZCB0aGVuIHN1cHBvcnRzIDMyYml0IGJ1dCBtaXNz
-ZXMgdGhpcyBkZXRhaWwsIEkgaG9wZSBJIGNhbiBoYXZlIGFuIAo+IG9wcG9ydHVuaXR5IHRvIGZp
-eCB0aGlzIHByb2JsZW0uCj4gSWYgaXQgaXMgZXhwZWN0ZWQsIHdoeSB0aGV5IG11c3QgYmUgZG9u
-ZT8KPiAKPiBUaGFua3MsCj4gRXJpYyBDaGFuCj4gCj4gcWVtdS9pbmNsdWRlL2h3L3Jpc2N2L2Jv
-b3Rfb3BlbnNiaS5oCj4gI2RlZmluZSBGV19EWU5BTUlDX0lORk9fTUFHSUNfVkFMVUUgMHg0OTQy
-NTM0Zgo+IHFlbXUvaHcvcmlzY3YvYm9vdC5jCj4gdm9pZCByaXNjdl9zZXR1cF9yb21fcmVzZXRf
-dmVjKE1hY2hpbmVTdGF0ZSAqbWFjaGluZSwgCj4gUklTQ1ZIYXJ0QXJyYXlTdGF0ZSAqaGFydHMs
-Cj4gaHdhZGRyIHN0YXJ0X2FkZHIsCj4gaHdhZGRyIHJvbV9iYXNlLCBod2FkZHIgcm9tX3NpemUs
-Cj4gdWludDY0X3Qga2VybmVsX2VudHJ5LAo+IHVpbnQ2NF90IGZkdF9sb2FkX2FkZHIpCj4gewo+
-IGludCBpOwo+IHVpbnQzMl90IHN0YXJ0X2FkZHJfaGkzMiA9IDB4MDAwMDAwMDA7Cj4gdWludDMy
-X3QgZmR0X2xvYWRfYWRkcl9oaTMyID0gMHgwMDAwMDAwMDsKPiAKPiBpZiAoIXJpc2N2X2lzXzMy
-Yml0KGhhcnRzKSkgewo+IHN0YXJ0X2FkZHJfaGkzMiA9IHN0YXJ0X2FkZHIgPj4gMzI7Cj4gZmR0
-X2xvYWRfYWRkcl9oaTMyID0gZmR0X2xvYWRfYWRkciA+PiAzMjsKPiB9Cj4gLyogcmVzZXQgdmVj
-dG9yICovCj4gdWludDMyX3QgcmVzZXRfdmVjWzEwXSA9IHsKPiAweDAwMDAwMjk3LCAvKiAxOiBh
-dWlwYyB0MCwgJXBjcmVsX2hpKGZ3X2R5bikgKi8KPiAweDAyODI4NjEzLCAvKiBhZGRpIGEyLCB0
-MCwgJXBjcmVsX2xvKDFiKSAqLwo+IDB4ZjE0MDI1NzMsIC8qIGNzcnIgYTAsIG1oYXJ0aWQgKi8K
-PiAwLAo+IDAsCj4gMHgwMDAyODA2NywgLyoganIgdDAgKi8KPiBzdGFydF9hZGRyLCAvKiBzdGFy
-dDogLmR3b3JkICovCj4gc3RhcnRfYWRkcl9oaTMyLAo+IGZkdF9sb2FkX2FkZHIsIC8qIGZkdF9s
-YWRkcjogLmR3b3JkICovCj4gZmR0X2xvYWRfYWRkcl9oaTMyLAo+IC8qIGZ3X2R5bjogKi8KPiB9
-Owo+IGlmIChyaXNjdl9pc18zMmJpdChoYXJ0cykpIHsKPiByZXNldF92ZWNbM10gPSAweDAyMDJh
-NTgzOyAvKiBsdyBhMSwgMzIodDApICovCj4gcmVzZXRfdmVjWzRdID0gMHgwMTgyYTI4MzsgLyog
-bHcgdDAsIDI0KHQwKSAqLwo+IH0gZWxzZSB7Cj4gcmVzZXRfdmVjWzNdID0gMHgwMjAyYjU4Mzsg
-LyogbGQgYTEsIDMyKHQwKSAqLwo+IHJlc2V0X3ZlY1s0XSA9IDB4MDE4MmIyODM7IC8qIGxkIHQw
-LCAyNCh0MCkgKi8KPiB9Cj4gCj4gLyogY29weSBpbiB0aGUgcmVzZXQgdmVjdG9yIGluIGxpdHRs
-ZV9lbmRpYW4gYnl0ZSBvcmRlciAqLwo+IGZvciAoaSA9IDA7IGkgPCBBUlJBWV9TSVpFKHJlc2V0
-X3ZlYyk7IGkrKykgewo+IHJlc2V0X3ZlY1tpXSA9IGNwdV90b19sZTMyKHJlc2V0X3ZlY1tpXSk7
-Cj4gfQo+IHJvbV9hZGRfYmxvYl9maXhlZF9hcygibXJvbS5yZXNldCIsIHJlc2V0X3ZlYywgc2l6
-ZW9mKHJlc2V0X3ZlYyksCj4gcm9tX2Jhc2UsICZhZGRyZXNzX3NwYWNlX21lbW9yeSk7Cj4gcmlz
-Y3Zfcm9tX2NvcHlfZmlybXdhcmVfaW5mbyhtYWNoaW5lLCByb21fYmFzZSwgcm9tX3NpemUsIHNp
-emVvZihyZXNldF92ZWMpLAo+IGtlcm5lbF9lbnRyeSk7Cj4gfQo+IAo+IG9wZW5zYmkvZmlybXdh
-cmUvZndfZHluYW1pYy5TCj4gZndfYm9vdF9oYXJ0Ogo+IC8qIFNhbml0eSBjaGVja3MgKi8KPiBs
-aSBhMSwgRldfRFlOQU1JQ19JTkZPX01BR0lDX1ZBTFVFCj4gUkVHX0wgYTAsIEZXX0RZTkFNSUNf
-SU5GT19NQUdJQ19PRkZTRVQoYTIpCj4gYm5lIGEwLCBhMSwgX2JhZF9keW5hbWljX2luZm8KPiBs
-aSBhMSwgRldfRFlOQU1JQ19JTkZPX1ZFUlNJT05fTUFYCj4gUkVHX0wgYTAsIEZXX0RZTkFNSUNf
-SU5GT19WRVJTSU9OX09GRlNFVChhMikKPiBiZ3QgYTAsIGExLCBfYmFkX2R5bmFtaWNfaW5mbwo+
-IAo+IC8qIFJlYWQgYm9vdCBIQVJUIGlkICovCj4gbGkgYTEsIEZXX0RZTkFNSUNfSU5GT19WRVJT
-SU9OXzIKPiBibHQgYTAsIGExLCAyZgo+IFJFR19MIGEwLCBGV19EWU5BTUlDX0lORk9fQk9PVF9I
-QVJUX09GRlNFVChhMikKPiByZXQKPiAyOiBsaSBhMCwgLTEKPiByZXQK
-------=ALIBOUNDARY_5134_7f3c3c71a700_633d5289_2ff5f8
+Hi  Zhiwei,
+
+thanks for your reply, I make a mistake, t0 is 0x1000 so both
+lw     a1, 32(t0) or ld     a1, 32(t0) just read from the brom offset
+32byte.
+
+Thanks,
+Eric Chan
+
+=E5=88=98=E5=BF=97=E4=BC=9F <zhiwei_liu@c-sky.com> =E6=96=BC 2022=E5=B9=B41=
+0=E6=9C=885=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=885:47=E5=AF=AB=E9=
+=81=93=EF=BC=9A
+
+> I think the a1 from QEMU reset vector is the device tree(fdt_laddr) thoug=
+h
+> I don't know if it is directly used by the OpenSBI or just passed to the
+> Linux kernel.
+>
+> Thanks,
+> Zhiwei
+>
+> ------------------------------------------------------------------
+> =E5=8F=91=E4=BB=B6=E4=BA=BA=EF=BC=9APhilippe Mathieu-Daud=C3=A9 via <qemu=
+-devel@nongnu.org>
+> =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4=EF=BC=9A2022=E5=B9=B410=E6=9C=883=E6=
+=97=A5(=E6=98=9F=E6=9C=9F=E4=B8=80) 20:37
+> =E6=94=B6=E4=BB=B6=E4=BA=BA=EF=BC=9AEric Chan <e14002270@gmail.com>; qemu=
+-devel <qemu-devel@nongnu.org>
+> =E6=8A=84 =E9=80=81=EF=BC=9Aqemu-riscv <qemu-riscv@nongnu.org>
+> =E4=B8=BB =E9=A2=98=EF=BC=9ARe: Question about RISC-V brom register a1 se=
+t value
+>
+> Cc'ing the RISC-V specific mailing list.
+>
+> On 1/10/22 01:48, Eric Chan wrote:
+> > Hi, qemu
+> >
+> > As I know, brom will pass 3 parameters to the next stage bootloader, ex=
+:
+> > openSBI.
+> > a0 will pass hartid, a2 will pass fw_dynamic_info start address.
+> > although a1 doesn't use directly in openSBI.
+> > a1 read value is determined in compile time rather than read from the
+> > original a1 that passes from brom.
+> > In qemu/hw/riscv/boot.c
+> > both 32bit and 64bit machines read 4byte that offset 32byte from the
+> > brom start address.
+> >
+> > for 64 bits machine: a1 read low 32bit data member magic of
+> fw_dynamic_info,
+> > the value will same as FW_DYNAMIC_INFO_MAGIC_VALUE because risc-v is
+> > little endian.
+> >
+> > for 32bits machine: each data member of fw_dynamic_info is 4 bytes, so
+> > a1 will read the version rather than magic.
+> >
+> > Do the 32bit and 64bit pass different parameters are expected?
+> > If it is not expected, I guess the original version is 64bit machine,
+> > and then supports 32bit but misses this detail, I hope I can have an
+> > opportunity to fix this problem.
+> > If it is expected, why they must be done?
+> >
+> > Thanks,
+> > Eric Chan
+> >
+> > qemu/include/hw/riscv/boot_opensbi.h
+> > #define FW_DYNAMIC_INFO_MAGIC_VALUE     0x4942534f
+> > qemu/hw/riscv/boot.c
+> > void riscv_setup_rom_reset_vec(MachineState *machine,
+> > RISCVHartArrayState *harts,
+> >                                 hwaddr start_addr,
+> >                                 hwaddr rom_base, hwaddr rom_size,
+> > uint64_t kernel_entry,
+> > uint64_t fdt_load_addr)
+> > {
+> > int i;
+> > uint32_t start_addr_hi32 =3D 0x00000000;
+> > uint32_t fdt_load_addr_hi32 =3D 0x00000000;
+> >
+> > if (!riscv_is_32bit(harts)) {
+> >          start_addr_hi32 =3D start_addr >> 32;
+> >          fdt_load_addr_hi32 =3D fdt_load_addr >> 32;
+> >      }
+> >      /* reset vector */
+> > uint32_t reset_vec[10] =3D {
+> > 0x00000297,                 /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
+> > 0x02828613,                 /*     addi   a2, t0, %pcrel_lo(1b) */
+> > 0xf1402573,                 /*     csrr   a0, mhartid  */
+> > 0,
+> > 0,
+> > 0x00028067,                 /*     jr     t0 */
+> >          start_addr,                 /* start: .dword */
+> >          start_addr_hi32,
+> >          fdt_load_addr,              /* fdt_laddr: .dword */
+> >          fdt_load_addr_hi32,
+> >                                       /* fw_dyn: */
+> >      };
+> > if (riscv_is_32bit(harts)) {
+> > reset_vec[3] =3D 0x0202a583;  /*     lw     a1, 32(t0) */
+> > reset_vec[4] =3D 0x0182a283;  /*     lw     t0, 24(t0) */
+> >      } else {
+> > reset_vec[3] =3D 0x0202b583;  /*     ld     a1, 32(t0) */
+> > reset_vec[4] =3D 0x0182b283;  /*     ld     t0, 24(t0) */
+> >      }
+> >
+> >      /* copy in the reset vector in little_endian byte order */
+> > for (i =3D 0; i < ARRAY_SIZE(reset_vec); i++) {
+> > reset_vec[i] =3D cpu_to_le32(reset_vec[i]);
+> >      }
+> > rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
+> >                            rom_base, &address_space_memory);
+> > riscv_rom_copy_firmware_info(machine, rom_base, rom_size,
+> sizeof(reset_vec),
+> >                                   kernel_entry);
+> > }
+> >
+> > opensbi/firmware/fw_dynamic.S
+> > fw_boot_hart:
+> > /* Sanity checks */
+> > li a1, FW_DYNAMIC_INFO_MAGIC_VALUE
+> >          REG_L a0, FW_DYNAMIC_INFO_MAGIC_OFFSET(a2)
+> > bne a0, a1, _bad_dynamic_info
+> > li a1, FW_DYNAMIC_INFO_VERSION_MAX
+> >          REG_L a0, FW_DYNAMIC_INFO_VERSION_OFFSET(a2)
+> > bgt a0, a1, _bad_dynamic_info
+> >
+> > /* Read boot HART id */
+> > li a1, FW_DYNAMIC_INFO_VERSION_2
+> > blt a0, a1, 2f
+> >          REG_L a0, FW_DYNAMIC_INFO_BOOT_HART_OFFSET(a2)
+> > ret
+> > 2: li a0, -1
+> > ret
+>
+>
+>
+
+--00000000000017ea7f05ea4764e2
 Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
 
-PGRpdiBjbGFzcz0iX19hbGl5dW5fZW1haWxfYm9keV9ibG9jayI+PGRpdiAgc3R5bGU9ImxpbmUt
-aGVpZ2h0OjEuNztmb250LWZhbWlseTpUYWhvbWEsQXJpYWwsU1RIZWl0aSxTaW1TdW47Zm9udC1z
-aXplOjE0LjBweDtjb2xvcjojMDAwMDAwOyI+PGRpdiAgc3R5bGU9ImNsZWFyOmJvdGg7Ij5JIHRo
-aW5rIHRoZSBhMSBmcm9tIFFFTVUgcmVzZXQgdmVjdG9yIGlzIHRoZSBkZXZpY2UgdHJlZShmZHRf
-bGFkZHIpIHRob3VnaCBJIGRvbid0IGtub3cgaWYgaXQgaXMgZGlyZWN0bHkgdXNlZCBieSB0aGUg
-T3BlblNCSSBvciBqdXN0IHBhc3NlZCB0byB0aGUgTGludXgga2VybmVsLjxiciA+PC9kaXY+PGRp
-diAgc3R5bGU9ImNsZWFyOmJvdGg7Ij48YnIgPjwvZGl2PjxkaXYgIHN0eWxlPSJjbGVhcjpib3Ro
-OyI+VGhhbmtzLDwvZGl2PjxkaXYgIHN0eWxlPSJjbGVhcjpib3RoOyI+Wmhpd2VpPC9kaXY+PGRp
-diAgc3R5bGU9ImNsZWFyOmJvdGg7Ij48YnIgPjwvZGl2PjxibG9ja3F1b3RlICBfcXVvdGU9IjEi
-IHN0eWxlPSJtYXJnaW4tcmlnaHQ6LjBweDttYXJnaW4tdG9wOi4wcHg7bWFyZ2luLWJvdHRvbTou
-MHB4O2ZvbnQtZmFtaWx5OlRhaG9tYSxBcmlhbCxTVEhlaXRpLFNpbVN1bjtmb250LXNpemU6MTQu
-MHB4O2NvbG9yOiMwMDAwMDA7Ij48ZGl2ICBzdHlsZT0iY2xlYXI6Ym90aDsiPi0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTwv
-ZGl2PjxkaXYgIHN0eWxlPSJjbGVhcjpib3RoOyI+5Y+R5Lu25Lq677yaUGhpbGlwcGUgTWF0aGll
-dS1EYXVkw6kgdmlhICZsdDtxZW11LWRldmVsQG5vbmdudS5vcmcmZ3Q7PC9kaXY+PGRpdiAgc3R5
-bGU9ImNsZWFyOmJvdGg7Ij7lj5HpgIHml7bpl7TvvJoyMDIy5bm0MTDmnIgz5pelKOaYn+acn+S4
-gCkgMjA6Mzc8L2Rpdj48ZGl2ICBzdHlsZT0iY2xlYXI6Ym90aDsiPuaUtuS7tuS6uu+8mkVyaWMg
-Q2hhbiAmbHQ7ZTE0MDAyMjcwQGdtYWlsLmNvbSZndDs7IHFlbXUtZGV2ZWwgJmx0O3FlbXUtZGV2
-ZWxAbm9uZ251Lm9yZyZndDs8L2Rpdj48ZGl2ICBzdHlsZT0iY2xlYXI6Ym90aDsiPuaKhOOAgOmA
-ge+8mnFlbXUtcmlzY3YgJmx0O3FlbXUtcmlzY3ZAbm9uZ251Lm9yZyZndDs8L2Rpdj48ZGl2ICBz
-dHlsZT0iY2xlYXI6Ym90aDsiPuS4u+OAgOmimO+8mlJlOiBRdWVzdGlvbiBhYm91dCBSSVNDLVYg
-YnJvbSByZWdpc3RlciBhMSBzZXQgdmFsdWU8L2Rpdj48ZGl2ICBzdHlsZT0iY2xlYXI6Ym90aDsi
-PjxiciA+PC9kaXY+Q2MnaW5nIHRoZSBSSVNDLVYgc3BlY2lmaWMgbWFpbGluZyBsaXN0LjxiciA+
-PGJyID5PbiAxLzEwLzIyIDAxOjQ4LCBFcmljIENoYW4gd3JvdGU6PGJyID4mZ3Q7IEhpLCBxZW11
-PGJyID4mZ3Q7IDxiciA+Jmd0OyBBcyBJIGtub3csIGJyb20gd2lsbCBwYXNzIDMgcGFyYW1ldGVy
-cyB0byB0aGUgbmV4dCBzdGFnZSBib290bG9hZGVyLCBleDogPGJyID4mZ3Q7IG9wZW5TQkkuPGJy
-ID4mZ3Q7IGEwIHdpbGwgcGFzcyBoYXJ0aWQsIGEyIHdpbGwgcGFzcyBmd19keW5hbWljX2luZm8g
-c3RhcnQgYWRkcmVzcy48YnIgPiZndDsgYWx0aG91Z2ggYTEgZG9lc24ndCB1c2UgZGlyZWN0bHkg
-aW4gb3BlblNCSS48YnIgPiZndDsgYTEgcmVhZCB2YWx1ZSBpcyBkZXRlcm1pbmVkIGluIGNvbXBp
-bGUgdGltZSByYXRoZXIgdGhhbiByZWFkIGZyb20gdGhlIDxiciA+Jmd0OyBvcmlnaW5hbCBhMSB0
-aGF0IHBhc3NlcyBmcm9tIGJyb20uPGJyID4mZ3Q7IEluIHFlbXUvaHcvcmlzY3YvYm9vdC5jPGJy
-ID4mZ3Q7IGJvdGggMzJiaXQgYW5kIDY0Yml0IG1hY2hpbmVzIHJlYWQgNGJ5dGUgdGhhdCBvZmZz
-ZXQgMzJieXRlIGZyb20gdGhlIDxiciA+Jmd0OyBicm9tIHN0YXJ0IGFkZHJlc3MuPGJyID4mZ3Q7
-IDxiciA+Jmd0OyBmb3IgNjQgYml0cyBtYWNoaW5lOiBhMSByZWFkIGxvdyAzMmJpdCBkYXRhIG1l
-bWJlciBtYWdpYyBvZiBmd19keW5hbWljX2luZm8sPGJyID4mZ3Q7IHRoZSB2YWx1ZSB3aWxsIHNh
-bWUgYXMgRldfRFlOQU1JQ19JTkZPX01BR0lDX1ZBTFVFIGJlY2F1c2UgcmlzYy12IGlzIDxiciA+
-Jmd0OyBsaXR0bGUgZW5kaWFuLjxiciA+Jmd0OyA8YnIgPiZndDsgZm9yIDMyYml0cyBtYWNoaW5l
-OiBlYWNoIGRhdGEgbWVtYmVyIG9mIGZ3X2R5bmFtaWNfaW5mbyBpcyA0IGJ5dGVzLCBzbyA8YnIg
-PiZndDsgYTEgd2lsbCByZWFkIHRoZSB2ZXJzaW9uIHJhdGhlciB0aGFuIG1hZ2ljLjxiciA+Jmd0
-OyA8YnIgPiZndDsgRG8gdGhlIDMyYml0IGFuZCA2NGJpdCBwYXNzIGRpZmZlcmVudCBwYXJhbWV0
-ZXJzIGFyZSBleHBlY3RlZD88YnIgPiZndDsgSWYgaXQgaXMgbm90IGV4cGVjdGVkLCBJIGd1ZXNz
-IHRoZSBvcmlnaW5hbCB2ZXJzaW9uIGlzIDY0Yml0IG1hY2hpbmUsIDxiciA+Jmd0OyBhbmQgdGhl
-biBzdXBwb3J0cyAzMmJpdCBidXQgbWlzc2VzIHRoaXMgZGV0YWlsLCBJIGhvcGUgSSBjYW4gaGF2
-ZSBhbiA8YnIgPiZndDsgb3Bwb3J0dW5pdHkgdG8gZml4IHRoaXMgcHJvYmxlbS48YnIgPiZndDsg
-SWYgaXQgaXMgZXhwZWN0ZWQsIHdoeSB0aGV5IG11c3QgYmUgZG9uZT88YnIgPiZndDsgPGJyID4m
-Z3Q7IFRoYW5rcyw8YnIgPiZndDsgRXJpYyBDaGFuPGJyID4mZ3Q7IDxiciA+Jmd0OyBxZW11L2lu
-Y2x1ZGUvaHcvcmlzY3YvYm9vdF9vcGVuc2JpLmg8YnIgPiZndDsgI2RlZmluZSBGV19EWU5BTUlD
-X0lORk9fTUFHSUNfVkFMVUUgJm5ic3A7ICZuYnNwOyAweDQ5NDI1MzRmPGJyID4mZ3Q7IHFlbXUv
-aHcvcmlzY3YvYm9vdC5jPGJyID4mZ3Q7IHZvaWQgcmlzY3Zfc2V0dXBfcm9tX3Jlc2V0X3ZlYyhN
-YWNoaW5lU3RhdGUgKm1hY2hpbmUsIDxiciA+Jmd0OyBSSVNDVkhhcnRBcnJheVN0YXRlICpoYXJ0
-cyw8YnIgPiZndDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5i
-c3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJz
-cDsgJm5ic3A7IGh3YWRkciBzdGFydF9hZGRyLDxiciA+Jmd0OyAmbmJzcDsgJm5ic3A7ICZuYnNw
-OyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7
-ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgaHdhZGRyIHJvbV9iYXNlLCBod2Fk
-ZHIgcm9tX3NpemUsPGJyID4mZ3Q7IHVpbnQ2NF90IGtlcm5lbF9lbnRyeSw8YnIgPiZndDsgdWlu
-dDY0X3QgZmR0X2xvYWRfYWRkcik8YnIgPiZndDsgezxiciA+Jmd0OyBpbnQgaTs8YnIgPiZndDsg
-dWludDMyX3Qgc3RhcnRfYWRkcl9oaTMyID0gMHgwMDAwMDAwMDs8YnIgPiZndDsgdWludDMyX3Qg
-ZmR0X2xvYWRfYWRkcl9oaTMyID0gMHgwMDAwMDAwMDs8YnIgPiZndDsgPGJyID4mZ3Q7IGlmICgh
-cmlzY3ZfaXNfMzJiaXQoaGFydHMpKSB7PGJyID4mZ3Q7Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5i
-c3A7ICZuYnNwOyBzdGFydF9hZGRyX2hpMzIgPSBzdGFydF9hZGRyICZndDsmZ3Q7IDMyOzxiciA+
-Jmd0OyZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgZmR0X2xvYWRfYWRkcl9oaTMy
-ID0gZmR0X2xvYWRfYWRkciAmZ3Q7Jmd0OyAzMjs8YnIgPiZndDsmbmJzcDsgJm5ic3A7ICZuYnNw
-OyB9PGJyID4mZ3Q7Jm5ic3A7ICZuYnNwOyAmbmJzcDsgLyogcmVzZXQgdmVjdG9yICovPGJyID4m
-Z3Q7IHVpbnQzMl90IHJlc2V0X3ZlY1sxMF0gPSB7PGJyID4mZ3Q7IDB4MDAwMDAyOTcsICZuYnNw
-OyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgLyogMTom
-bmJzcDsgYXVpcGMmbmJzcDsgdDAsICVwY3JlbF9oaShmd19keW4pICovPGJyID4mZ3Q7IDB4MDI4
-Mjg2MTMsICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAm
-bmJzcDsgLyogJm5ic3A7ICZuYnNwOyBhZGRpICZuYnNwOyBhMiwgdDAsICVwY3JlbF9sbygxYikg
-Ki88YnIgPiZndDsgMHhmMTQwMjU3MywgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNw
-OyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAvKiAmbmJzcDsgJm5ic3A7IGNzcnIgJm5ic3A7IGEwLCBt
-aGFydGlkJm5ic3A7ICovPGJyID4mZ3Q7IDAsPGJyID4mZ3Q7IDAsPGJyID4mZ3Q7IDB4MDAwMjgw
-NjcsICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJz
-cDsgLyogJm5ic3A7ICZuYnNwOyBqciAmbmJzcDsgJm5ic3A7IHQwICovPGJyID4mZ3Q7Jm5ic3A7
-ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyBzdGFydF9hZGRyLCAmbmJzcDsgJm5ic3A7ICZu
-YnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7IC8qIHN0YXJ0OiAuZHdvcmQg
-Ki88YnIgPiZndDsmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7IHN0YXJ0X2FkZHJf
-aGkzMiw8YnIgPiZndDsmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7IGZkdF9sb2Fk
-X2FkZHIsJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7IC8q
-IGZkdF9sYWRkcjogLmR3b3JkICovPGJyID4mZ3Q7Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7
-ICZuYnNwOyBmZHRfbG9hZF9hZGRyX2hpMzIsPGJyID4mZ3Q7ICZuYnNwOyAmbmJzcDsgJm5ic3A7
-ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsg
-Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAv
-KiBmd19keW46ICovPGJyID4mZ3Q7Jm5ic3A7ICZuYnNwOyAmbmJzcDsgfTs8YnIgPiZndDsgaWYg
-KHJpc2N2X2lzXzMyYml0KGhhcnRzKSkgezxiciA+Jmd0OyByZXNldF92ZWNbM10gPSAweDAyMDJh
-NTgzOyZuYnNwOyAvKiAmbmJzcDsgJm5ic3A7IGx3ICZuYnNwOyAmbmJzcDsgYTEsIDMyKHQwKSAq
-LzxiciA+Jmd0OyByZXNldF92ZWNbNF0gPSAweDAxODJhMjgzOyZuYnNwOyAvKiAmbmJzcDsgJm5i
-c3A7IGx3ICZuYnNwOyAmbmJzcDsgdDAsIDI0KHQwKSAqLzxiciA+Jmd0OyZuYnNwOyAmbmJzcDsg
-Jm5ic3A7IH0gZWxzZSB7PGJyID4mZ3Q7IHJlc2V0X3ZlY1szXSA9IDB4MDIwMmI1ODM7Jm5ic3A7
-IC8qICZuYnNwOyAmbmJzcDsgbGQgJm5ic3A7ICZuYnNwOyBhMSwgMzIodDApICovPGJyID4mZ3Q7
-IHJlc2V0X3ZlY1s0XSA9IDB4MDE4MmIyODM7Jm5ic3A7IC8qICZuYnNwOyAmbmJzcDsgbGQgJm5i
-c3A7ICZuYnNwOyB0MCwgMjQodDApICovPGJyID4mZ3Q7Jm5ic3A7ICZuYnNwOyAmbmJzcDsgfTxi
-ciA+Jmd0OyA8YnIgPiZndDsmbmJzcDsgJm5ic3A7ICZuYnNwOyAvKiBjb3B5IGluIHRoZSByZXNl
-dCB2ZWN0b3IgaW4gbGl0dGxlX2VuZGlhbiBieXRlIG9yZGVyICovPGJyID4mZ3Q7IGZvciAoaSA9
-IDA7IGkgJmx0OyBBUlJBWV9TSVpFKHJlc2V0X3ZlYyk7IGkrKykgezxiciA+Jmd0OyByZXNldF92
-ZWNbaV0gPSBjcHVfdG9fbGUzMihyZXNldF92ZWNbaV0pOzxiciA+Jmd0OyZuYnNwOyAmbmJzcDsg
-Jm5ic3A7IH08YnIgPiZndDsgcm9tX2FkZF9ibG9iX2ZpeGVkX2FzKCJtcm9tLnJlc2V0IiwgcmVz
-ZXRfdmVjLCBzaXplb2YocmVzZXRfdmVjKSw8YnIgPiZndDsmbmJzcDsgJm5ic3A7ICZuYnNwOyAm
-bmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZu
-YnNwOyAmbmJzcDsgJm5ic3A7IHJvbV9iYXNlLCAmYW1wO2FkZHJlc3Nfc3BhY2VfbWVtb3J5KTs8
-YnIgPiZndDsgcmlzY3Zfcm9tX2NvcHlfZmlybXdhcmVfaW5mbyhtYWNoaW5lLCByb21fYmFzZSwg
-cm9tX3NpemUsIHNpemVvZihyZXNldF92ZWMpLDxiciA+Jmd0OyAmbmJzcDsgJm5ic3A7ICZuYnNw
-OyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7
-ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7IGtlcm5lbF9lbnRyeSk7
-PGJyID4mZ3Q7IH08YnIgPiZndDsgPGJyID4mZ3Q7IG9wZW5zYmkvZmlybXdhcmUvZndfZHluYW1p
-Yy5TPGJyID4mZ3Q7IGZ3X2Jvb3RfaGFydDo8YnIgPiZndDsgLyogU2FuaXR5IGNoZWNrcyAqLzxi
-ciA+Jmd0OyBsaSBhMSwgRldfRFlOQU1JQ19JTkZPX01BR0lDX1ZBTFVFPGJyID4mZ3Q7Jm5ic3A7
-ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyBSRUdfTCBhMCwgRldfRFlOQU1JQ19JTkZPX01B
-R0lDX09GRlNFVChhMik8YnIgPiZndDsgYm5lIGEwLCBhMSwgX2JhZF9keW5hbWljX2luZm88YnIg
-PiZndDsgbGkgYTEsIEZXX0RZTkFNSUNfSU5GT19WRVJTSU9OX01BWDxiciA+Jmd0OyZuYnNwOyAm
-bmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgUkVHX0wgYTAsIEZXX0RZTkFNSUNfSU5GT19WRVJT
-SU9OX09GRlNFVChhMik8YnIgPiZndDsgYmd0IGEwLCBhMSwgX2JhZF9keW5hbWljX2luZm88YnIg
-PiZndDsgPGJyID4mZ3Q7IC8qIFJlYWQgYm9vdCBIQVJUIGlkICovPGJyID4mZ3Q7IGxpIGExLCBG
-V19EWU5BTUlDX0lORk9fVkVSU0lPTl8yPGJyID4mZ3Q7IGJsdCBhMCwgYTEsIDJmPGJyID4mZ3Q7
-Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyBSRUdfTCBhMCwgRldfRFlOQU1JQ19J
-TkZPX0JPT1RfSEFSVF9PRkZTRVQoYTIpPGJyID4mZ3Q7IHJldDxiciA+Jmd0OyAyOiBsaSBhMCwg
-LTE8YnIgPiZndDsgcmV0PGJyID48YnIgPjwvYmxvY2txdW90ZT48ZGl2ICBzdHlsZT0ibGluZS1o
-ZWlnaHQ6MjAuMHB4O2NsZWFyOmJvdGg7Ij48YnIgPjwvZGl2PjwvZGl2PjwvZGl2Pg==
-------=ALIBOUNDARY_5134_7f3c3c71a700_633d5289_2ff5f8--
+<div dir=3D"ltr">Hi=C2=A0
 
+<span style=3D"color:rgb(0,0,0);font-family:Tahoma,Arial,STHeiti,SimSun;fon=
+t-size:14px">Zhiwei,</span><div><font color=3D"#000000" face=3D"Tahoma, Ari=
+al, STHeiti, SimSun"><span style=3D"font-size:14px"><br></span></font><div>=
+thanks for your reply, I make a mistake, t0 is 0x1000 so both=C2=A0<br>lw =
+=C2=A0 =C2=A0 a1, 32(t0) or ld =C2=A0 =C2=A0 a1, 32(t0) just read from the =
+brom offset 32byte.<br></div></div><div><br></div><div>Thanks,</div><div>Er=
+ic Chan</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D=
+"gmail_attr">=E5=88=98=E5=BF=97=E4=BC=9F &lt;<a href=3D"mailto:zhiwei_liu@c=
+-sky.com">zhiwei_liu@c-sky.com</a>&gt; =E6=96=BC 2022=E5=B9=B410=E6=9C=885=
+=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=885:47=E5=AF=AB=E9=81=93=EF=BC=
+=9A<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
+0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div><div st=
+yle=3D"line-height:1.7;font-family:Tahoma,Arial,STHeiti,SimSun;font-size:14=
+px;color:rgb(0,0,0)"><div style=3D"clear:both">I think the a1 from QEMU res=
+et vector is the device tree(fdt_laddr) though I don&#39;t know if it is di=
+rectly used by the OpenSBI or just passed to the Linux kernel.<br></div><di=
+v style=3D"clear:both"><br></div><div style=3D"clear:both">Thanks,</div><di=
+v style=3D"clear:both">Zhiwei</div><div style=3D"clear:both"><br></div><blo=
+ckquote style=3D"margin-right:0px;margin-top:0px;margin-bottom:0px;font-fam=
+ily:Tahoma,Arial,STHeiti,SimSun;font-size:14px;color:rgb(0,0,0)"><div style=
+=3D"clear:both">-----------------------------------------------------------=
+-------</div><div style=3D"clear:both">=E5=8F=91=E4=BB=B6=E4=BA=BA=EF=BC=9A=
+Philippe Mathieu-Daud=C3=A9 via &lt;<a href=3D"mailto:qemu-devel@nongnu.org=
+" target=3D"_blank">qemu-devel@nongnu.org</a>&gt;</div><div style=3D"clear:=
+both">=E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4=EF=BC=9A2022=E5=B9=B410=E6=9C=88=
+3=E6=97=A5(=E6=98=9F=E6=9C=9F=E4=B8=80) 20:37</div><div style=3D"clear:both=
+">=E6=94=B6=E4=BB=B6=E4=BA=BA=EF=BC=9AEric Chan &lt;<a href=3D"mailto:e1400=
+2270@gmail.com" target=3D"_blank">e14002270@gmail.com</a>&gt;; qemu-devel &=
+lt;<a href=3D"mailto:qemu-devel@nongnu.org" target=3D"_blank">qemu-devel@no=
+ngnu.org</a>&gt;</div><div style=3D"clear:both">=E6=8A=84=E3=80=80=E9=80=81=
+=EF=BC=9Aqemu-riscv &lt;<a href=3D"mailto:qemu-riscv@nongnu.org" target=3D"=
+_blank">qemu-riscv@nongnu.org</a>&gt;</div><div style=3D"clear:both">=E4=B8=
+=BB=E3=80=80=E9=A2=98=EF=BC=9ARe: Question about RISC-V brom register a1 se=
+t value</div><div style=3D"clear:both"><br></div>Cc&#39;ing the RISC-V spec=
+ific mailing list.<br><br>On 1/10/22 01:48, Eric Chan wrote:<br>&gt; Hi, qe=
+mu<br>&gt; <br>&gt; As I know, brom will pass 3 parameters to the next stag=
+e bootloader, ex: <br>&gt; openSBI.<br>&gt; a0 will pass hartid, a2 will pa=
+ss fw_dynamic_info start address.<br>&gt; although a1 doesn&#39;t use direc=
+tly in openSBI.<br>&gt; a1 read value is determined in compile time rather =
+than read from the <br>&gt; original a1 that passes from brom.<br>&gt; In q=
+emu/hw/riscv/boot.c<br>&gt; both 32bit and 64bit machines read 4byte that o=
+ffset 32byte from the <br>&gt; brom start address.<br>&gt; <br>&gt; for 64 =
+bits machine: a1 read low 32bit data member magic of fw_dynamic_info,<br>&g=
+t; the value will same as FW_DYNAMIC_INFO_MAGIC_VALUE because risc-v is <br=
+>&gt; little endian.<br>&gt; <br>&gt; for 32bits machine: each data member =
+of fw_dynamic_info is 4 bytes, so <br>&gt; a1 will read the version rather =
+than magic.<br>&gt; <br>&gt; Do the 32bit and 64bit pass different paramete=
+rs are expected?<br>&gt; If it is not expected, I guess the original versio=
+n is 64bit machine, <br>&gt; and then supports 32bit but misses this detail=
+, I hope I can have an <br>&gt; opportunity to fix this problem.<br>&gt; If=
+ it is expected, why they must be done?<br>&gt; <br>&gt; Thanks,<br>&gt; Er=
+ic Chan<br>&gt; <br>&gt; qemu/include/hw/riscv/boot_opensbi.h<br>&gt; #defi=
+ne FW_DYNAMIC_INFO_MAGIC_VALUE =C2=A0 =C2=A0 0x4942534f<br>&gt; qemu/hw/ris=
+cv/boot.c<br>&gt; void riscv_setup_rom_reset_vec(MachineState *machine, <br=
+>&gt; RISCVHartArrayState *harts,<br>&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 hwaddr start_addr,<br>&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 hwad=
+dr rom_base, hwaddr rom_size,<br>&gt; uint64_t kernel_entry,<br>&gt; uint64=
+_t fdt_load_addr)<br>&gt; {<br>&gt; int i;<br>&gt; uint32_t start_addr_hi32=
+ =3D 0x00000000;<br>&gt; uint32_t fdt_load_addr_hi32 =3D 0x00000000;<br>&gt=
+; <br>&gt; if (!riscv_is_32bit(harts)) {<br>&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 start_addr_hi32 =3D start_addr &gt;&gt; 32;<br>&gt;=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 fdt_load_addr_hi32 =3D fdt_load_addr &gt;&gt; 32;<br>&=
+gt;=C2=A0 =C2=A0 =C2=A0 }<br>&gt;=C2=A0 =C2=A0 =C2=A0 /* reset vector */<br=
+>&gt; uint32_t reset_vec[10] =3D {<br>&gt; 0x00000297, =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* 1:=C2=A0 auipc=C2=A0 t0, %pcrel_hi(f=
+w_dyn) */<br>&gt; 0x02828613, =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 /* =C2=A0 =C2=A0 addi =C2=A0 a2, t0, %pcrel_lo(1b) */<br>&gt; 0x=
+f1402573, =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* =C2=A0=
+ =C2=A0 csrr =C2=A0 a0, mhartid=C2=A0 */<br>&gt; 0,<br>&gt; 0,<br>&gt; 0x00=
+028067, =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* =C2=A0 =
+=C2=A0 jr =C2=A0 =C2=A0 t0 */<br>&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sta=
+rt_addr, =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* start: =
+.dword */<br>&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 start_addr_hi32,<br>&gt=
+;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 fdt_load_addr,=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 /* fdt_laddr: .dword */<br>&gt;=C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 fdt_load_addr_hi32,<br>&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* fw_dyn: */<br>&gt;=C2=A0 =C2=A0 =C2=A0 }=
+;<br>&gt; if (riscv_is_32bit(harts)) {<br>&gt; reset_vec[3] =3D 0x0202a583;=
+=C2=A0 /* =C2=A0 =C2=A0 lw =C2=A0 =C2=A0 a1, 32(t0) */<br>&gt; reset_vec[4]=
+ =3D 0x0182a283;=C2=A0 /* =C2=A0 =C2=A0 lw =C2=A0 =C2=A0 t0, 24(t0) */<br>&=
+gt;=C2=A0 =C2=A0 =C2=A0 } else {<br>&gt; reset_vec[3] =3D 0x0202b583;=C2=A0=
+ /* =C2=A0 =C2=A0 ld =C2=A0 =C2=A0 a1, 32(t0) */<br>&gt; reset_vec[4] =3D 0=
+x0182b283;=C2=A0 /* =C2=A0 =C2=A0 ld =C2=A0 =C2=A0 t0, 24(t0) */<br>&gt;=C2=
+=A0 =C2=A0 =C2=A0 }<br>&gt; <br>&gt;=C2=A0 =C2=A0 =C2=A0 /* copy in the res=
+et vector in little_endian byte order */<br>&gt; for (i =3D 0; i &lt; ARRAY=
+_SIZE(reset_vec); i++) {<br>&gt; reset_vec[i] =3D cpu_to_le32(reset_vec[i])=
+;<br>&gt;=C2=A0 =C2=A0 =C2=A0 }<br>&gt; rom_add_blob_fixed_as(&quot;mrom.re=
+set&quot;, reset_vec, sizeof(reset_vec),<br>&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rom_=
+base, &amp;address_space_memory);<br>&gt; riscv_rom_copy_firmware_info(mach=
+ine, rom_base, rom_size, sizeof(reset_vec),<br>&gt; =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 kernel_entry);<br>&gt; }<br>&gt; <br>&gt; opensbi/=
+firmware/fw_dynamic.S<br>&gt; fw_boot_hart:<br>&gt; /* Sanity checks */<br>=
+&gt; li a1, FW_DYNAMIC_INFO_MAGIC_VALUE<br>&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 REG_L a0, FW_DYNAMIC_INFO_MAGIC_OFFSET(a2)<br>&gt; bne a0, a1, _bad_=
+dynamic_info<br>&gt; li a1, FW_DYNAMIC_INFO_VERSION_MAX<br>&gt;=C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 REG_L a0, FW_DYNAMIC_INFO_VERSION_OFFSET(a2)<br>&g=
+t; bgt a0, a1, _bad_dynamic_info<br>&gt; <br>&gt; /* Read boot HART id */<b=
+r>&gt; li a1, FW_DYNAMIC_INFO_VERSION_2<br>&gt; blt a0, a1, 2f<br>&gt;=C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 REG_L a0, FW_DYNAMIC_INFO_BOOT_HART_OFFSET(=
+a2)<br>&gt; ret<br>&gt; 2: li a0, -1<br>&gt; ret<br><br></blockquote><div s=
+tyle=3D"line-height:20px;clear:both"><br></div></div></div></blockquote></d=
+iv>
+
+--00000000000017ea7f05ea4764e2--
 
