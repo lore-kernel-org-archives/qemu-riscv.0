@@ -1,70 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1og4w8-0003Wy-16
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Oct 2022 09:59:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43516)
+	id 1og5ig-0000J1-Mz
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Oct 2022 10:49:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48862)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <e14002270@gmail.com>)
- id 1og22D-0007jd-Is; Wed, 05 Oct 2022 06:53:53 -0400
-Received: from mail-yw1-x112e.google.com ([2607:f8b0:4864:20::112e]:47056)
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1og5ie-0000Fy-E1
+ for qemu-riscv@nongnu.org; Wed, 05 Oct 2022 10:49:57 -0400
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632]:39909)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <e14002270@gmail.com>)
- id 1og228-0003Jq-Ba; Wed, 05 Oct 2022 06:53:51 -0400
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-35711e5a5ceso119886187b3.13; 
- Wed, 05 Oct 2022 03:53:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/b9jDzIB4jaggSCzfHz4wdD0iZ8FtFJDugL7cYa3DnE=;
- b=A/PhdLb7lxs7X+DtfdZL7M5YjFQqkcsbj1oVa5u/hiKhD7X3C7XXsi4XkfRyHlxvKn
- 8OkJOhaI0ggUKx0Nkgw+Z5+6RQz1yeYvaB34lLiD88njUZyIdtnufCgxWTX2itlQQUto
- 6HdHuxGMqqDOaey9j8pwT4V6YRKPgQnHpa+Xf/+Q9g7ibyAWWnEgQyIRspclsbavHkaZ
- NbrA3UfZZ90yKVW7R8vmvG/m8PTXSoscEg5D4Q7kt0qtmdl9aqp270u3RglpubDUp27F
- HDOXSWyIeR24/0OEFPHsOh4KfnaKGxTp4eVQITXRLhtbpc4dHQn+43DrYce38vzke5/K
- qq7w==
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1og5ic-0006Rl-0Y
+ for qemu-riscv@nongnu.org; Wed, 05 Oct 2022 10:49:56 -0400
+Received: by mail-ej1-x632.google.com with SMTP id b2so36013439eja.6
+ for <qemu-riscv@nongnu.org>; Wed, 05 Oct 2022 07:49:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EXf432YdLxs6LN/1SdCnkgTiHy1iNPRF9DC1hWNzFo4=;
+ b=cH0DxkuSEFwVdgeVS6cNGK4+cY8LokwB7PjH6wlJ/9z3a//Wii/qZ6f/HQrEm6ThnA
+ ICOeVyDnaBZixD0LQ7c/U3Y7AnDqR/oLEu4i3UestXYYMMDwg3nM+VKGdWrcasix14CX
+ tH/pnT3DrTooa08O4yubolwjulZ+GiL1rgFeituxQISXUTDfv3Ga69xbp3inuKQ2lTx7
+ qA+LQYEcNN6G/XYmhV5VezvwWKGimOwGh8/mlDKUgB+xaSmmeFmwdX7RgkTFPsDT6X+c
+ iavyUD2BH4soU7PE2NufVc2Bd0/DLq3yWxEP+K4SIvMEWGuRF2dbfuEgwYQUR1hcq6Wd
+ eaZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/b9jDzIB4jaggSCzfHz4wdD0iZ8FtFJDugL7cYa3DnE=;
- b=t4psE8t/xDzJFiFrLjKmiDvE3gELhmsswCJS102aRnvBlRVK6Ij0i3wwoZ8ePuKf3f
- n5j6yWvzS8dVXWSJD12XTMPB4ffB1Xk9lFBwGc7DoVEht/MJOgdysGg6uiZabLwqUYRS
- zDnTEd5CPMNLOkXqLNqRcC4cQvD6c1kyibnhPIf4PGz4ckIN8eSc3jh7fVW+ik49Co1b
- j9jdwFwAu+A0xZHskzDDccdjzuL8Hn1T9E2rry7mRhdxz8T2wAUk71vD+bkfqXT94kym
- 3sjCWMZG73X3pfs6Mx+rZBXFjNTT0Wg9R0iYU1q4p4FN5N+Lu7eKNHWu/6tTUCP3g/h/
- OsbQ==
-X-Gm-Message-State: ACrzQf21tR8jje3DTSzUIUt8mxbv6ra8SBmuOycUzECspUmEp7s7Wuy+
- NJoOjwqbrdhcdkaPvQ4rAuXZ2daFMyF0Xu1Uc3M=
-X-Google-Smtp-Source: AMsMyM623VnFO47BhuoKlzZwb382wlXPYJZf5XoNvi6qariViE08OisWM7EIi16F3JUdDsEksKZtDEQc/lHDg18Zau8=
-X-Received: by 2002:a81:618a:0:b0:35d:1aa8:1b1c with SMTP id
- v132-20020a81618a000000b0035d1aa81b1cmr3287433ywb.140.1664967226418; Wed, 05
- Oct 2022 03:53:46 -0700 (PDT)
+ bh=EXf432YdLxs6LN/1SdCnkgTiHy1iNPRF9DC1hWNzFo4=;
+ b=NfIQIO/0gIeJLE7/tKjcMs+42rfG6Lvo8DnSwPI5FwLgpn6IBHOyxB8C3XQ05dgaj9
+ 1gzUwkwuLwtAzlpOXYnoSqy1Doy13aC2pnMX/mb41w50JIGS2eZn7G2oL477C77F1Sx7
+ BwV2o1kfA8I5jkRJ1Tw33GL0hBC2+g3SBOqhOKrr8iEAYKvNnXbg2B5ylf02Jsn4kIVz
+ ERvXA90x6hcWTM5rB4FZ+cWbnJM+xrFAA9C++x4LA9LbtjF9dscMyKpVpK22gn8ZDZER
+ CdAV+TElyYX89mY/v+C1FNZYxs2OJkHYYYPPPJbLqxT+JsiDkJJjSegJKFqqkNzW/u8d
+ CDLA==
+X-Gm-Message-State: ACrzQf2KZEJEOZA8CRmuksYutXl39oxRbRdG6nh3DRoG0mBH4+QzTKpP
+ wogDMqnO7t9LO+qKYfXxHPIWP8NAcFZjyzKG
+X-Google-Smtp-Source: AMsMyM5ReyrcD9OdIVSmiJyA2qDmvp8aoZPxiDJZMJM+v2ra4+PnEz2q9a6AT6Ly9ty1VhCeHDZJ9A==
+X-Received: by 2002:a17:907:608b:b0:78b:cb91:6efd with SMTP id
+ ht11-20020a170907608b00b0078bcb916efdmr11795ejc.32.1664981391687; 
+ Wed, 05 Oct 2022 07:49:51 -0700 (PDT)
+Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
+ [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
+ q1-20020a17090609a100b00772b5835c12sm8829932eje.23.2022.10.05.07.49.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 05 Oct 2022 07:49:51 -0700 (PDT)
+From: Christoph Muellner <christoph.muellner@vrull.eu>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ =?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko.stuebner@vrull.eu>,
+ Aaron Durbin <adurbin@rivosinc.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Cc: Christoph Muellner <christoph.muellner@vrull.eu>
+Subject: [PATCH v4] RISC-V: Add Zawrs ISA extension support
+Date: Wed,  5 Oct 2022 16:49:48 +0200
+Message-Id: <20221005144948.3421504-1-christoph.muellner@vrull.eu>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-References: <CACv+nXAT-tfuabs04y5+DE-R=Hn81nmM3bKsgOkVkWTOYpTHFA@mail.gmail.com>
- <659e3df0-a384-88e0-b121-7fd7416b09a7@amsat.org>
- <5bb36d59-e112-4354-9abe-c8383002dd03.lzw194868@alibaba-inc.com>
-In-Reply-To: <5bb36d59-e112-4354-9abe-c8383002dd03.lzw194868@alibaba-inc.com>
-From: Eric Chan <e14002270@gmail.com>
-Date: Wed, 5 Oct 2022 18:53:35 +0800
-Message-ID: <CACv+nXD0guSPxPHiPBNR_r5WHjiFecZShEwxNxO_=-K1mffLqg@mail.gmail.com>
-Subject: Re: Question about RISC-V brom register a1 set value
-To: =?UTF-8?B?5YiY5b+X5Lyf?= <zhiwei_liu@c-sky.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- qemu-devel <qemu-devel@nongnu.org>, qemu-riscv <qemu-riscv@nongnu.org>
-Content-Type: multipart/alternative; boundary="00000000000017ea7f05ea4764e2"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112e;
- envelope-from=e14002270@gmail.com; helo=mail-yw1-x112e.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x632.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 05 Oct 2022 09:59:46 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,262 +83,171 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Oct 2022 10:53:54 -0000
+X-List-Received-Date: Wed, 05 Oct 2022 14:49:57 -0000
 
---00000000000017ea7f05ea4764e2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This patch adds support for the Zawrs ISA extension.
+Given the current (incomplete) implementation of reservation sets
+there seems to be no way to provide a full emulation of the WRS
+instruction (wake on reservation set invalidation or timeout or
+interrupt). Therefore, we just exit the TB and return to the main loop.
 
-Hi  Zhiwei,
+The specification can be found here:
+  https://github.com/riscv/riscv-zawrs/blob/main/zawrs.adoc
 
-thanks for your reply, I make a mistake, t0 is 0x1000 so both
-lw     a1, 32(t0) or ld     a1, 32(t0) just read from the brom offset
-32byte.
+Note, that the Zawrs extension is frozen, but not ratified yet.
 
-Thanks,
-Eric Chan
+Changes since v3:
+* Remove "RFC" since the extension is frozen
+* Rebase on master and fix integration issues
+* Fix entry ordering in extension list
 
-=E5=88=98=E5=BF=97=E4=BC=9F <zhiwei_liu@c-sky.com> =E6=96=BC 2022=E5=B9=B41=
-0=E6=9C=885=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=885:47=E5=AF=AB=E9=
-=81=93=EF=BC=9A
+Changes since v2:
+* Rebase on master and resolve conflicts
+* Adjustments according to a specification change
+* Inline REQUIRE_ZAWRS() since it has only one user
 
-> I think the a1 from QEMU reset vector is the device tree(fdt_laddr) thoug=
-h
-> I don't know if it is directly used by the OpenSBI or just passed to the
-> Linux kernel.
->
-> Thanks,
-> Zhiwei
->
-> ------------------------------------------------------------------
-> =E5=8F=91=E4=BB=B6=E4=BA=BA=EF=BC=9APhilippe Mathieu-Daud=C3=A9 via <qemu=
--devel@nongnu.org>
-> =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4=EF=BC=9A2022=E5=B9=B410=E6=9C=883=E6=
-=97=A5(=E6=98=9F=E6=9C=9F=E4=B8=80) 20:37
-> =E6=94=B6=E4=BB=B6=E4=BA=BA=EF=BC=9AEric Chan <e14002270@gmail.com>; qemu=
--devel <qemu-devel@nongnu.org>
-> =E6=8A=84 =E9=80=81=EF=BC=9Aqemu-riscv <qemu-riscv@nongnu.org>
-> =E4=B8=BB =E9=A2=98=EF=BC=9ARe: Question about RISC-V brom register a1 se=
-t value
->
-> Cc'ing the RISC-V specific mailing list.
->
-> On 1/10/22 01:48, Eric Chan wrote:
-> > Hi, qemu
-> >
-> > As I know, brom will pass 3 parameters to the next stage bootloader, ex=
-:
-> > openSBI.
-> > a0 will pass hartid, a2 will pass fw_dynamic_info start address.
-> > although a1 doesn't use directly in openSBI.
-> > a1 read value is determined in compile time rather than read from the
-> > original a1 that passes from brom.
-> > In qemu/hw/riscv/boot.c
-> > both 32bit and 64bit machines read 4byte that offset 32byte from the
-> > brom start address.
-> >
-> > for 64 bits machine: a1 read low 32bit data member magic of
-> fw_dynamic_info,
-> > the value will same as FW_DYNAMIC_INFO_MAGIC_VALUE because risc-v is
-> > little endian.
-> >
-> > for 32bits machine: each data member of fw_dynamic_info is 4 bytes, so
-> > a1 will read the version rather than magic.
-> >
-> > Do the 32bit and 64bit pass different parameters are expected?
-> > If it is not expected, I guess the original version is 64bit machine,
-> > and then supports 32bit but misses this detail, I hope I can have an
-> > opportunity to fix this problem.
-> > If it is expected, why they must be done?
-> >
-> > Thanks,
-> > Eric Chan
-> >
-> > qemu/include/hw/riscv/boot_opensbi.h
-> > #define FW_DYNAMIC_INFO_MAGIC_VALUE     0x4942534f
-> > qemu/hw/riscv/boot.c
-> > void riscv_setup_rom_reset_vec(MachineState *machine,
-> > RISCVHartArrayState *harts,
-> >                                 hwaddr start_addr,
-> >                                 hwaddr rom_base, hwaddr rom_size,
-> > uint64_t kernel_entry,
-> > uint64_t fdt_load_addr)
-> > {
-> > int i;
-> > uint32_t start_addr_hi32 =3D 0x00000000;
-> > uint32_t fdt_load_addr_hi32 =3D 0x00000000;
-> >
-> > if (!riscv_is_32bit(harts)) {
-> >          start_addr_hi32 =3D start_addr >> 32;
-> >          fdt_load_addr_hi32 =3D fdt_load_addr >> 32;
-> >      }
-> >      /* reset vector */
-> > uint32_t reset_vec[10] =3D {
-> > 0x00000297,                 /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
-> > 0x02828613,                 /*     addi   a2, t0, %pcrel_lo(1b) */
-> > 0xf1402573,                 /*     csrr   a0, mhartid  */
-> > 0,
-> > 0,
-> > 0x00028067,                 /*     jr     t0 */
-> >          start_addr,                 /* start: .dword */
-> >          start_addr_hi32,
-> >          fdt_load_addr,              /* fdt_laddr: .dword */
-> >          fdt_load_addr_hi32,
-> >                                       /* fw_dyn: */
-> >      };
-> > if (riscv_is_32bit(harts)) {
-> > reset_vec[3] =3D 0x0202a583;  /*     lw     a1, 32(t0) */
-> > reset_vec[4] =3D 0x0182a283;  /*     lw     t0, 24(t0) */
-> >      } else {
-> > reset_vec[3] =3D 0x0202b583;  /*     ld     a1, 32(t0) */
-> > reset_vec[4] =3D 0x0182b283;  /*     ld     t0, 24(t0) */
-> >      }
-> >
-> >      /* copy in the reset vector in little_endian byte order */
-> > for (i =3D 0; i < ARRAY_SIZE(reset_vec); i++) {
-> > reset_vec[i] =3D cpu_to_le32(reset_vec[i]);
-> >      }
-> > rom_add_blob_fixed_as("mrom.reset", reset_vec, sizeof(reset_vec),
-> >                            rom_base, &address_space_memory);
-> > riscv_rom_copy_firmware_info(machine, rom_base, rom_size,
-> sizeof(reset_vec),
-> >                                   kernel_entry);
-> > }
-> >
-> > opensbi/firmware/fw_dynamic.S
-> > fw_boot_hart:
-> > /* Sanity checks */
-> > li a1, FW_DYNAMIC_INFO_MAGIC_VALUE
-> >          REG_L a0, FW_DYNAMIC_INFO_MAGIC_OFFSET(a2)
-> > bne a0, a1, _bad_dynamic_info
-> > li a1, FW_DYNAMIC_INFO_VERSION_MAX
-> >          REG_L a0, FW_DYNAMIC_INFO_VERSION_OFFSET(a2)
-> > bgt a0, a1, _bad_dynamic_info
-> >
-> > /* Read boot HART id */
-> > li a1, FW_DYNAMIC_INFO_VERSION_2
-> > blt a0, a1, 2f
-> >          REG_L a0, FW_DYNAMIC_INFO_BOOT_HART_OFFSET(a2)
-> > ret
-> > 2: li a0, -1
-> > ret
->
->
->
+Changes since v1:
+* Adding zawrs to the ISA string that is passed to the kernel
 
---00000000000017ea7f05ea4764e2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+---
+ target/riscv/cpu.c                          |  7 +++
+ target/riscv/cpu.h                          |  1 +
+ target/riscv/insn32.decode                  |  4 ++
+ target/riscv/insn_trans/trans_rvzawrs.c.inc | 51 +++++++++++++++++++++
+ target/riscv/translate.c                    |  1 +
+ 5 files changed, 64 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzawrs.c.inc
 
-<div dir=3D"ltr">Hi=C2=A0
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index b29c88b9f0..b08ce94ba6 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -76,6 +76,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ext_icsr),
+     ISA_EXT_DATA_ENTRY(zifencei, true, PRIV_VERSION_1_10_0, ext_ifencei),
+     ISA_EXT_DATA_ENTRY(zihintpause, true, PRIV_VERSION_1_10_0, ext_zihintpause),
++    ISA_EXT_DATA_ENTRY(zawrs, true, PRIV_VERSION_1_12_0, ext_zawrs),
+     ISA_EXT_DATA_ENTRY(zfh, true, PRIV_VERSION_1_12_0, ext_zfh),
+     ISA_EXT_DATA_ENTRY(zfhmin, true, PRIV_VERSION_1_12_0, ext_zfhmin),
+     ISA_EXT_DATA_ENTRY(zfinx, true, PRIV_VERSION_1_12_0, ext_zfinx),
+@@ -744,6 +745,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             return;
+         }
+ 
++        if ((cpu->cfg.ext_zawrs) && !cpu->cfg.ext_a) {
++            error_setg(errp, "Zawrs extension requires A extension");
++            return;
++        }
++
+         if ((cpu->cfg.ext_zfh || cpu->cfg.ext_zfhmin) && !cpu->cfg.ext_f) {
+             error_setg(errp, "Zfh/Zfhmin extensions require F extension");
+             return;
+@@ -999,6 +1005,7 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+     DEFINE_PROP_BOOL("Zihintpause", RISCVCPU, cfg.ext_zihintpause, true),
++    DEFINE_PROP_BOOL("Zawrs", RISCVCPU, cfg.ext_zawrs, true),
+     DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
+     DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
+     DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index b131fa8c8e..2b87966373 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -446,6 +446,7 @@ struct RISCVCPUConfig {
+     bool ext_svnapot;
+     bool ext_svpbmt;
+     bool ext_zdinx;
++    bool ext_zawrs;
+     bool ext_zfh;
+     bool ext_zfhmin;
+     bool ext_zfinx;
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index d0253b8104..b7e7613ea2 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -718,6 +718,10 @@ vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm11
+ vsetivli        11 .......... ..... 111 ..... 1010111  @r2_zimm10
+ vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+ 
++# *** Zawrs Standard Extension ***
++wrs_nto    000000001101 00000 000 00000 1110011
++wrs_sto    000000011101 00000 000 00000 1110011
++
+ # *** RV32 Zba Standard Extension ***
+ sh1add     0010000 .......... 010 ..... 0110011 @r
+ sh2add     0010000 .......... 100 ..... 0110011 @r
+diff --git a/target/riscv/insn_trans/trans_rvzawrs.c.inc b/target/riscv/insn_trans/trans_rvzawrs.c.inc
+new file mode 100644
+index 0000000000..f0da2fe50a
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzawrs.c.inc
+@@ -0,0 +1,51 @@
++/*
++ * RISC-V translation routines for the RISC-V Zawrs Extension.
++ *
++ * Copyright (c) 2022 Christoph Muellner, christoph.muellner@vrull.io
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++static bool trans_wrs(DisasContext *ctx)
++{
++    if (!ctx->cfg_ptr->ext_zawrs) {
++        return false;
++    }
++
++    /*
++     * The specification says:
++     * While stalled, an implementation is permitted to occasionally
++     * terminate the stall and complete execution for any reason.
++     *
++     * So let's just exit TB and return to the main loop.
++     */
++
++    /* Clear the load reservation  (if any).  */
++    tcg_gen_movi_tl(load_res, -1);
++
++    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
++    tcg_gen_exit_tb(NULL, 0);
++    ctx->base.is_jmp = DISAS_NORETURN;
++
++    return true;
++}
++
++#define GEN_TRANS_WRS(insn)						\
++static bool trans_ ## insn(DisasContext *ctx, arg_ ## insn *a)		\
++{									\
++	(void)a;							\
++	return trans_wrs(ctx);						\
++}
++
++GEN_TRANS_WRS(wrs_nto)
++GEN_TRANS_WRS(wrs_sto)
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index db123da5ec..e22de88e97 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1029,6 +1029,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "insn_trans/trans_rvh.c.inc"
+ #include "insn_trans/trans_rvv.c.inc"
+ #include "insn_trans/trans_rvb.c.inc"
++#include "insn_trans/trans_rvzawrs.c.inc"
+ #include "insn_trans/trans_rvzfh.c.inc"
+ #include "insn_trans/trans_rvk.c.inc"
+ #include "insn_trans/trans_privileged.c.inc"
+-- 
+2.37.3
 
-<span style=3D"color:rgb(0,0,0);font-family:Tahoma,Arial,STHeiti,SimSun;fon=
-t-size:14px">Zhiwei,</span><div><font color=3D"#000000" face=3D"Tahoma, Ari=
-al, STHeiti, SimSun"><span style=3D"font-size:14px"><br></span></font><div>=
-thanks for your reply, I make a mistake, t0 is 0x1000 so both=C2=A0<br>lw =
-=C2=A0 =C2=A0 a1, 32(t0) or ld =C2=A0 =C2=A0 a1, 32(t0) just read from the =
-brom offset 32byte.<br></div></div><div><br></div><div>Thanks,</div><div>Er=
-ic Chan</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D=
-"gmail_attr">=E5=88=98=E5=BF=97=E4=BC=9F &lt;<a href=3D"mailto:zhiwei_liu@c=
--sky.com">zhiwei_liu@c-sky.com</a>&gt; =E6=96=BC 2022=E5=B9=B410=E6=9C=885=
-=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=885:47=E5=AF=AB=E9=81=93=EF=BC=
-=9A<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
-0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div><div st=
-yle=3D"line-height:1.7;font-family:Tahoma,Arial,STHeiti,SimSun;font-size:14=
-px;color:rgb(0,0,0)"><div style=3D"clear:both">I think the a1 from QEMU res=
-et vector is the device tree(fdt_laddr) though I don&#39;t know if it is di=
-rectly used by the OpenSBI or just passed to the Linux kernel.<br></div><di=
-v style=3D"clear:both"><br></div><div style=3D"clear:both">Thanks,</div><di=
-v style=3D"clear:both">Zhiwei</div><div style=3D"clear:both"><br></div><blo=
-ckquote style=3D"margin-right:0px;margin-top:0px;margin-bottom:0px;font-fam=
-ily:Tahoma,Arial,STHeiti,SimSun;font-size:14px;color:rgb(0,0,0)"><div style=
-=3D"clear:both">-----------------------------------------------------------=
--------</div><div style=3D"clear:both">=E5=8F=91=E4=BB=B6=E4=BA=BA=EF=BC=9A=
-Philippe Mathieu-Daud=C3=A9 via &lt;<a href=3D"mailto:qemu-devel@nongnu.org=
-" target=3D"_blank">qemu-devel@nongnu.org</a>&gt;</div><div style=3D"clear:=
-both">=E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4=EF=BC=9A2022=E5=B9=B410=E6=9C=88=
-3=E6=97=A5(=E6=98=9F=E6=9C=9F=E4=B8=80) 20:37</div><div style=3D"clear:both=
-">=E6=94=B6=E4=BB=B6=E4=BA=BA=EF=BC=9AEric Chan &lt;<a href=3D"mailto:e1400=
-2270@gmail.com" target=3D"_blank">e14002270@gmail.com</a>&gt;; qemu-devel &=
-lt;<a href=3D"mailto:qemu-devel@nongnu.org" target=3D"_blank">qemu-devel@no=
-ngnu.org</a>&gt;</div><div style=3D"clear:both">=E6=8A=84=E3=80=80=E9=80=81=
-=EF=BC=9Aqemu-riscv &lt;<a href=3D"mailto:qemu-riscv@nongnu.org" target=3D"=
-_blank">qemu-riscv@nongnu.org</a>&gt;</div><div style=3D"clear:both">=E4=B8=
-=BB=E3=80=80=E9=A2=98=EF=BC=9ARe: Question about RISC-V brom register a1 se=
-t value</div><div style=3D"clear:both"><br></div>Cc&#39;ing the RISC-V spec=
-ific mailing list.<br><br>On 1/10/22 01:48, Eric Chan wrote:<br>&gt; Hi, qe=
-mu<br>&gt; <br>&gt; As I know, brom will pass 3 parameters to the next stag=
-e bootloader, ex: <br>&gt; openSBI.<br>&gt; a0 will pass hartid, a2 will pa=
-ss fw_dynamic_info start address.<br>&gt; although a1 doesn&#39;t use direc=
-tly in openSBI.<br>&gt; a1 read value is determined in compile time rather =
-than read from the <br>&gt; original a1 that passes from brom.<br>&gt; In q=
-emu/hw/riscv/boot.c<br>&gt; both 32bit and 64bit machines read 4byte that o=
-ffset 32byte from the <br>&gt; brom start address.<br>&gt; <br>&gt; for 64 =
-bits machine: a1 read low 32bit data member magic of fw_dynamic_info,<br>&g=
-t; the value will same as FW_DYNAMIC_INFO_MAGIC_VALUE because risc-v is <br=
->&gt; little endian.<br>&gt; <br>&gt; for 32bits machine: each data member =
-of fw_dynamic_info is 4 bytes, so <br>&gt; a1 will read the version rather =
-than magic.<br>&gt; <br>&gt; Do the 32bit and 64bit pass different paramete=
-rs are expected?<br>&gt; If it is not expected, I guess the original versio=
-n is 64bit machine, <br>&gt; and then supports 32bit but misses this detail=
-, I hope I can have an <br>&gt; opportunity to fix this problem.<br>&gt; If=
- it is expected, why they must be done?<br>&gt; <br>&gt; Thanks,<br>&gt; Er=
-ic Chan<br>&gt; <br>&gt; qemu/include/hw/riscv/boot_opensbi.h<br>&gt; #defi=
-ne FW_DYNAMIC_INFO_MAGIC_VALUE =C2=A0 =C2=A0 0x4942534f<br>&gt; qemu/hw/ris=
-cv/boot.c<br>&gt; void riscv_setup_rom_reset_vec(MachineState *machine, <br=
->&gt; RISCVHartArrayState *harts,<br>&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 hwaddr start_addr,<br>&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 hwad=
-dr rom_base, hwaddr rom_size,<br>&gt; uint64_t kernel_entry,<br>&gt; uint64=
-_t fdt_load_addr)<br>&gt; {<br>&gt; int i;<br>&gt; uint32_t start_addr_hi32=
- =3D 0x00000000;<br>&gt; uint32_t fdt_load_addr_hi32 =3D 0x00000000;<br>&gt=
-; <br>&gt; if (!riscv_is_32bit(harts)) {<br>&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 start_addr_hi32 =3D start_addr &gt;&gt; 32;<br>&gt;=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 fdt_load_addr_hi32 =3D fdt_load_addr &gt;&gt; 32;<br>&=
-gt;=C2=A0 =C2=A0 =C2=A0 }<br>&gt;=C2=A0 =C2=A0 =C2=A0 /* reset vector */<br=
->&gt; uint32_t reset_vec[10] =3D {<br>&gt; 0x00000297, =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* 1:=C2=A0 auipc=C2=A0 t0, %pcrel_hi(f=
-w_dyn) */<br>&gt; 0x02828613, =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 /* =C2=A0 =C2=A0 addi =C2=A0 a2, t0, %pcrel_lo(1b) */<br>&gt; 0x=
-f1402573, =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* =C2=A0=
- =C2=A0 csrr =C2=A0 a0, mhartid=C2=A0 */<br>&gt; 0,<br>&gt; 0,<br>&gt; 0x00=
-028067, =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* =C2=A0 =
-=C2=A0 jr =C2=A0 =C2=A0 t0 */<br>&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sta=
-rt_addr, =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* start: =
-.dword */<br>&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 start_addr_hi32,<br>&gt=
-;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 fdt_load_addr,=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 /* fdt_laddr: .dword */<br>&gt;=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 fdt_load_addr_hi32,<br>&gt; =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* fw_dyn: */<br>&gt;=C2=A0 =C2=A0 =C2=A0 }=
-;<br>&gt; if (riscv_is_32bit(harts)) {<br>&gt; reset_vec[3] =3D 0x0202a583;=
-=C2=A0 /* =C2=A0 =C2=A0 lw =C2=A0 =C2=A0 a1, 32(t0) */<br>&gt; reset_vec[4]=
- =3D 0x0182a283;=C2=A0 /* =C2=A0 =C2=A0 lw =C2=A0 =C2=A0 t0, 24(t0) */<br>&=
-gt;=C2=A0 =C2=A0 =C2=A0 } else {<br>&gt; reset_vec[3] =3D 0x0202b583;=C2=A0=
- /* =C2=A0 =C2=A0 ld =C2=A0 =C2=A0 a1, 32(t0) */<br>&gt; reset_vec[4] =3D 0=
-x0182b283;=C2=A0 /* =C2=A0 =C2=A0 ld =C2=A0 =C2=A0 t0, 24(t0) */<br>&gt;=C2=
-=A0 =C2=A0 =C2=A0 }<br>&gt; <br>&gt;=C2=A0 =C2=A0 =C2=A0 /* copy in the res=
-et vector in little_endian byte order */<br>&gt; for (i =3D 0; i &lt; ARRAY=
-_SIZE(reset_vec); i++) {<br>&gt; reset_vec[i] =3D cpu_to_le32(reset_vec[i])=
-;<br>&gt;=C2=A0 =C2=A0 =C2=A0 }<br>&gt; rom_add_blob_fixed_as(&quot;mrom.re=
-set&quot;, reset_vec, sizeof(reset_vec),<br>&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rom_=
-base, &amp;address_space_memory);<br>&gt; riscv_rom_copy_firmware_info(mach=
-ine, rom_base, rom_size, sizeof(reset_vec),<br>&gt; =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 kernel_entry);<br>&gt; }<br>&gt; <br>&gt; opensbi/=
-firmware/fw_dynamic.S<br>&gt; fw_boot_hart:<br>&gt; /* Sanity checks */<br>=
-&gt; li a1, FW_DYNAMIC_INFO_MAGIC_VALUE<br>&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 REG_L a0, FW_DYNAMIC_INFO_MAGIC_OFFSET(a2)<br>&gt; bne a0, a1, _bad_=
-dynamic_info<br>&gt; li a1, FW_DYNAMIC_INFO_VERSION_MAX<br>&gt;=C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 REG_L a0, FW_DYNAMIC_INFO_VERSION_OFFSET(a2)<br>&g=
-t; bgt a0, a1, _bad_dynamic_info<br>&gt; <br>&gt; /* Read boot HART id */<b=
-r>&gt; li a1, FW_DYNAMIC_INFO_VERSION_2<br>&gt; blt a0, a1, 2f<br>&gt;=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 REG_L a0, FW_DYNAMIC_INFO_BOOT_HART_OFFSET(=
-a2)<br>&gt; ret<br>&gt; 2: li a0, -1<br>&gt; ret<br><br></blockquote><div s=
-tyle=3D"line-height:20px;clear:both"><br></div></div></div></blockquote></d=
-iv>
-
---00000000000017ea7f05ea4764e2--
 
