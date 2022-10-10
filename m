@@ -1,61 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ohiyk-0006l3-91
-	for mharc-qemu-riscv@gnu.org; Sun, 09 Oct 2022 22:57:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47792)
+	id 1ohk98-0000BZ-56
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Oct 2022 00:12:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60658)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ohiyi-0006ka-9j; Sun, 09 Oct 2022 22:57:16 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:35678)
+ id 1ohk94-0000A5-Vi; Mon, 10 Oct 2022 00:12:04 -0400
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:38734)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ohiyg-0002Wc-L0; Sun, 09 Oct 2022 22:57:15 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- i7-20020a17090a65c700b0020ad9666a86so11961141pjs.0; 
- Sun, 09 Oct 2022 19:57:13 -0700 (PDT)
+ id 1ohk93-0004Lv-9A; Mon, 10 Oct 2022 00:12:02 -0400
+Received: by mail-pj1-x1031.google.com with SMTP id
+ x1-20020a17090ab00100b001fda21bbc90so12016924pjq.3; 
+ Sun, 09 Oct 2022 21:12:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vBojqzeB3GBJXyOJmO903B73puF82ggIHf8D9UgjdHs=;
- b=ooLfHyU2De3efvh9BzGNMo2IR0SQ/KPB9UDhPcylgjFTbrkUD/5H1aqcCjJ746n0Up
- Nl2jta5dUUA6b58RUDp/5KXqIWryTVlMnonhIcopmJF6maRIaTHam2MLMNbIRatqHV0l
- qnCRSJBFSZ4BQAVj7v3Kg01TqahgRa7asP5dgUGITIG3kAOj8E4ueB6df6hkM/FPKMsm
- lU9hX9OHATQWXi2uLZA1zwLdTz55x/ODW0fRmROB1KNIRvhxG7F7UwaplVDD88ERaGRA
- JvvHCmVpx9T039Rt0/hjjKXI+5jZXp9XItd8YS/TOSf76W48PkES4IGXuMFJ4vW3C2Qa
- LJKw==
+ bh=gVBwyphToZBKpUWHMv0pIDbvXzh9eE1Sj16WSyMxO5g=;
+ b=lSZqYQ9NMe/B6dIEFGOdTkJ8HCW9+cwN0IitQhvGKecBB/KeiGS2b2lbM/IekAIQi7
+ ba2kn2CKFRY0ueOUTlHc0k0FdkjsqEVHdUNgonG3Zo3tVmbonqGpgMFUdedGbcTvQfks
+ 2/cHzobXnrbS8jngf9gxYjy9Hk+aODVCCko35f4vPymDgwBPwHRungTe0jWVAp7bPkVJ
+ PosFwstcTNtxBRtejcfIPcu/byWKb1s36iEwc4XRjsOoD9KIWHWY9sMyU3W0mP7F5Kfj
+ MhLV1Gts66k66Qq3jdQbPy7Lst/wPRR/WxGoTR7RhV6bOhayJtj4x736j24PslFduk16
+ cTGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vBojqzeB3GBJXyOJmO903B73puF82ggIHf8D9UgjdHs=;
- b=ARpBHpyOKjhqqXeZGCla6IaB09XJ1PXhuUbK8iy06120uZhUqf9DFClOkMsCaAuzit
- 1Q49o8UDWO4WB18lnYGjdy6e8J0YIOWkT99OnJDt6yZv9PHhzHtpkir8+8PMEdkcYpRp
- BKPgIl+TePJ62RoJem8lg3WciN7SeskezTYZGHQhsT7nNtwcgwcoFDx3FtzavCVUGKkm
- X6CCuWOITLqVBqQqPJ6hRZXu7l1czSGjDeWGZIMX4R37CNBHitGS1OEP7iaNpBqkUPXI
- omvmHaLON7LtHPLGeNJZX25ipPIK3Cy7+Kb5zIytWyS75G+InHJxAFT/bxTkEZBAb2Y3
- j8ag==
-X-Gm-Message-State: ACrzQf1BxBGr2tZ3bOuX0jS/q4G+ZTTJDytt0Jrv7qytRdMDSMmIjyKN
- kF5g4hrhje9KAJZSZ8fUHl22UuF2v3FIif5+pdg=
-X-Google-Smtp-Source: AMsMyM5gFftlYN8RwM/xcUDMYcxtjrb7tWvx7RNDVqlZN3EqQQYm14HVmVfWNXvPmixsH8R4kJWqtGsPP+FeYo1q32s=
-X-Received: by 2002:a17:90b:3149:b0:202:e9e9:632f with SMTP id
- ip9-20020a17090b314900b00202e9e9632fmr29916139pjb.96.1665370632852; Sun, 09
- Oct 2022 19:57:12 -0700 (PDT)
+ bh=gVBwyphToZBKpUWHMv0pIDbvXzh9eE1Sj16WSyMxO5g=;
+ b=j/AAcl7yEdbmaLepA7KnoD1MH/fZq8sTampCdHlJyJepo1STPKnVC/HlJoIyikscBW
+ yCFBcWAJZJ04IFUY3NlEsZ2ZqS23b217o18w/Wc+jmvE3gV9Q+FdHLkDVdhU1nWrQRQ+
+ neFZkR0PXPij3cNdNPVDbjlRDgCX5PeY4d+FpSCWyV0Dr+NFFs4e8III0ytQX2tjbI8H
+ f8gv2drRbX6OG6VDuzeXGocT2MsaTrDusMERZCtQrUVxJZ1p7Cn86wgBmOakf1sD8PzM
+ GcXwAbpMB3/yk+BkHgCLwIuPVjmHzmB5I5DGILff/jaqXKu4pJuy8GyFhHeyqQlNtMMe
+ JeXw==
+X-Gm-Message-State: ACrzQf3Gw8z2uJoss2wLnJOi0GoeX7zveEsJT28pehSmOhIdRS+AeapB
+ J700HZ7+U7wLZaygXQw03lxgwm/QhdwEXlKRN6M=
+X-Google-Smtp-Source: AMsMyM7UXZ81yQ/Gy9V7ln8+9Fi195Gnw8qmmzwLbzJDmR7d+/++HkqJLY/0vzi3Bb6U4F5SMVRj344ob0kbShru5AI=
+X-Received: by 2002:a17:90a:6405:b0:203:6eaa:4999 with SMTP id
+ g5-20020a17090a640500b002036eaa4999mr29467361pjj.8.1665375119390; Sun, 09 Oct
+ 2022 21:11:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220929232339.372813-1-Jason@zx2c4.com>
- <20220929232339.372813-3-Jason@zx2c4.com>
-In-Reply-To: <20220929232339.372813-3-Jason@zx2c4.com>
+References: <20220928051842.16207-1-liuyang22@iscas.ac.cn>
+In-Reply-To: <20220928051842.16207-1-liuyang22@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 10 Oct 2022 12:56:46 +1000
-Message-ID: <CAKmqyKMvWETo5jyVfq-PGBKK=_hqNSAEfo6fBrjyEngbodmpJA@mail.gmail.com>
-Subject: Re: [PATCH 3/6] riscv: re-randomize rng-seed on reboot
-To: "Jason A. Donenfeld" <Jason@zx2c4.com>
-Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
+Date: Mon, 10 Oct 2022 14:11:33 +1000
+Message-ID: <CAKmqyKOLpZw8Q+VmwVaNeFOt1fB7Kumex6Co6k2=o5XqFZbRmg@mail.gmail.com>
+Subject: Re: [PATCH v3] disas/riscv.c: rvv: Add disas support for vector
+ instructions
+To: Yang Liu <liuyang22@iscas.ac.cn>
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ tommy.wu@sifive.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, liweiwei@iscas.ac.cn
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x1036.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x1031.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -76,52 +75,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Oct 2022 02:57:16 -0000
+X-List-Received-Date: Mon, 10 Oct 2022 04:12:05 -0000
 
-On Fri, Sep 30, 2022 at 9:24 AM Jason A. Donenfeld <Jason@zx2c4.com> wrote:
+On Wed, Sep 28, 2022 at 3:19 PM Yang Liu <liuyang22@iscas.ac.cn> wrote:
 >
-> When the system reboots, the rng-seed that the FDT has should be
-> re-randomized, so that the new boot gets a new seed. Since the FDT is in
-> the ROM region at this point, we add a hook right after the ROM has been
-> added, so that we have a pointer to that copy of the FDT.
+> Tested with https://github.com/ksco/rvv-decoder-tests
 >
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
-> Cc: Alistair Francis <alistair.francis@wdc.com>
-> Cc: Bin Meng <bin.meng@windriver.com>
-> Cc: qemu-riscv@nongnu.org
-> Signed-off-by: Jason A. Donenfeld <Jason@zx2c4.com>
+> Expected checkpatch errors for consistency and brevity reasons:
+>
+> ERROR: line over 90 characters
+> ERROR: trailing statements should be on next line
+> ERROR: braces {} are necessary for all arms of this statement
+>
+> Signed-off-by: Yang Liu <liuyang22@iscas.ac.cn>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
-
-> ---
->  hw/riscv/boot.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index 1ae7596873..aaecf21543 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -30,6 +30,7 @@
->  #include "sysemu/device_tree.h"
->  #include "sysemu/qtest.h"
->  #include "sysemu/kvm.h"
-> +#include "sysemu/reset.h"
->
->  #include <libfdt.h>
->
-> @@ -241,6 +242,8 @@ uint64_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
->
->      rom_add_blob_fixed_as("fdt", fdt, fdtsize, fdt_addr,
->                            &address_space_memory);
-> +    qemu_register_reset(qemu_fdt_randomize_seeds,
-> +                        rom_ptr_for_as(&address_space_memory, fdt_addr, fdtsize));
->
->      return fdt_addr;
->  }
-> --
-> 2.37.3
->
->
 
