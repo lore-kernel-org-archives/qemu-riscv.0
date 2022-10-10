@@ -1,64 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ohhXB-0004Pg-2A
-	for mharc-qemu-riscv@gnu.org; Sun, 09 Oct 2022 21:24:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41354)
+	id 1ohhml-0001dG-Fy
+	for mharc-qemu-riscv@gnu.org; Sun, 09 Oct 2022 21:40:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35336)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ohhX9-0004P8-Bn; Sun, 09 Oct 2022 21:24:43 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431]:33697)
+ id 1ohhmj-0001d3-Ta; Sun, 09 Oct 2022 21:40:49 -0400
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536]:43798)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ohhX7-0006yr-HU; Sun, 09 Oct 2022 21:24:43 -0400
-Received: by mail-pf1-x431.google.com with SMTP id w2so9604412pfb.0;
- Sun, 09 Oct 2022 18:24:40 -0700 (PDT)
+ id 1ohhmi-0000ef-DT; Sun, 09 Oct 2022 21:40:49 -0400
+Received: by mail-pg1-x536.google.com with SMTP id h185so2117944pgc.10;
+ Sun, 09 Oct 2022 18:40:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3g5g6jGUkpuTr7ifn4UAprGEQT/8nQOf+1wUo1onaCc=;
- b=gAA6Rh+3sjfixQV53ioL3+rJ+a1Y9t0Y+mUv46up/lIXouT+Z1GeT1CKlt9L+aZa6r
- U4BeJR4dpFTAjefBKKLV5k5AUSG9Ar/AeRQOPCIwOjOMYaX8IKfzxAoqoI8xw/J3VkIM
- x1TCQ+a9LmOT7gJftVNXMO5gHOp/TQ0T/HfOGJhzKdgMNIabV26lWOhaPzmEurlnVWmq
- KzhjwQgdj5FKgOPvt4S+VVW66VK1wDcW22wlaJg5UprsFDx20hITmbLZQBlVnEIyHcoS
- TsEnkxsPJuGAnmEd7WHC3K7NQAHRwWXpv0Pbdm38gYklYvidmTGY8AcAyJ0J2hTCUxVA
- oEFw==
+ bh=2tPuzwyP8cSxKDnrAFtvT4LYJC47mXQ6PiM3wXLHzDE=;
+ b=Qbdmh7mdEwS6/10ncD1sjgOEWJh7Shp70oI61y/9gKUFVXgn1Yn6TCK4p2Ja7pc6dC
+ 7mdWByRr9+wUV5hbqXt5USUHKt026f46I/gkrCzWBTTli/R85MSt/GOgXgh0DPmkY9xY
+ 5XbjmtJ/zAr9PAxHo2/4x8zueVHqewJkAQKBRXuI3lrnIYZVOOp/ST2dMJrQ5fcG06hk
+ VbHvpc7ktKQSO3qhXjrVFqIKQ4rNj8A9cxOcrgHjb0MXv/Mn6rxlTT+Ovq/Z4KUIvvVz
+ /i4Cra3+v4/fmjZRcHPdORffUlb+YJv2vg3A9UcEwskbjpuX8DFS6eCnmCb4VY9dKv++
+ 86ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3g5g6jGUkpuTr7ifn4UAprGEQT/8nQOf+1wUo1onaCc=;
- b=OF16hyOPDNGtxO+cVnrHphJ9wR2r+UeZHzW//9J6A5ZPsOsAijJ6K07NIqN6N4sFzv
- 6KRlxf+Dzn56qjl58vGd9OzmW3//ieBx0yNZMJWsd4FuC687TJXvuKBWWHxLKBgW6/ph
- WLLA8PxF3OB9h9AYim67+lEH1WgHjIG4U6JUFr/qrmY4CW7I7SonfKlVwyvGyfex3xEX
- 5mXo+Q0ZQZE1a4uO7t4jINxtQEMMn++GPYmLYIrfIJxa9FkN+Hzh8n0OcHUoFqvyP/j8
- PQcp9bqVSr7lm1m0Ar+n7N+kLkco7hLT5ogl0l1rjos1tyGwxRT0MQdQ25nvaDkR6arv
- PVfw==
-X-Gm-Message-State: ACrzQf1qi9zzN8wahn2FIqGlBiYU1SgiUj0O8bemWfNhZGfuZ8x43y95
- zKftdJ/Pi6i5mQhVis0WjJt51b4DUIB265bWIEQ=
-X-Google-Smtp-Source: AMsMyM5sFRmlmuhQIJsTVRdR9zyrIxDueaearHVE+2wR/faSpWu37By81bFqCDNYrk7t6uu7gvIoUVC1pbPBDgO8UHg=
+ bh=2tPuzwyP8cSxKDnrAFtvT4LYJC47mXQ6PiM3wXLHzDE=;
+ b=pQbzZeP08WmrDDVFGd8DOeyBTz0FY6bRfE+JMm73lnr3ye29Qc0SCT+6Fd95P/Xx69
+ R0El+nEzjDGRECNXnWk6WCJPJgn0Sn3cEwxVX5W6MsJYi4YDLz7/BI6a/vXwYIIb9/X0
+ +TlDq2jeWA1zSvs0gGsNOUoi8Px7TDieumvNhrmt1sfPZhb+w+u9i0nWX2ThFms+o8Vv
+ 8e7q0E88BAG7WaFkEhMaAjXR99lzsk7UOTV1gf1dtQI/9l4Ut8Tj1CRyTfeH3FQnfoga
+ fk39R7m6PzLPl+8+TZGvnL2bJ8w4SjaC8Q054oSCt+XFGlJUx1M7wOqJo2m9R9zolPJl
+ tL3Q==
+X-Gm-Message-State: ACrzQf1K3m7dDdawi55Thd2BNsCeM7sRfN1E8nRoV0zxQL9huuel3jKJ
+ V5t5nCs3vVWHPQ1au7rkO/lNzbJx2QdVr4JeGII=
+X-Google-Smtp-Source: AMsMyM6TFLLkmQvc9g0Y+4cLa8K3+xtXb8PpDv1cwjK7btzr4QM+PyNQjYuLZbHh8yWTONgJYxU2HdtWhzf6kt6MRqg=
 X-Received: by 2002:a63:ce43:0:b0:45b:d6ed:6c2 with SMTP id
- r3-20020a63ce43000000b0045bd6ed06c2mr14491765pgi.406.1665365079358; Sun, 09
- Oct 2022 18:24:39 -0700 (PDT)
+ r3-20020a63ce43000000b0045bd6ed06c2mr14535439pgi.406.1665366046273; Sun, 09
+ Oct 2022 18:40:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20221004092351.18209-1-sunilvl@ventanamicro.com>
- <20221004092351.18209-4-sunilvl@ventanamicro.com>
-In-Reply-To: <20221004092351.18209-4-sunilvl@ventanamicro.com>
+References: <BN7PR08MB435525C92550BAC5467BE672BF219@BN7PR08MB4355.namprd08.prod.outlook.com>
+In-Reply-To: <BN7PR08MB435525C92550BAC5467BE672BF219@BN7PR08MB4355.namprd08.prod.outlook.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 10 Oct 2022 11:24:13 +1000
-Message-ID: <CAKmqyKMtqAoo2s_UOdT=WeMHxXxgHBHqP_TFVbFdfSH=_jrarQ@mail.gmail.com>
-Subject: Re: [PATCH V5 3/3] hw/riscv: virt: Enable booting S-mode firmware
- from pflash
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>, Song Gao <gaosong@loongson.cn>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Andrew Jones <ajones@ventanamicro.com>
+Date: Mon, 10 Oct 2022 11:40:20 +1000
+Message-ID: <CAKmqyKNyqun0BLM9vwAkTWL9_Zw-AgTsqJNVyG=CuWQnAJid9w@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: Update comment for qtest check in
+ riscv_find_firmware()
+To: Bin Meng <bmeng@outlook.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x431.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x536.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -79,115 +73,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Oct 2022 01:24:44 -0000
+X-List-Received-Date: Mon, 10 Oct 2022 01:40:50 -0000
 
-On Tue, Oct 4, 2022 at 7:28 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
+On Sun, Oct 9, 2022 at 11:04 PM Bin Meng <bmeng@outlook.com> wrote:
 >
-> To boot S-mode firmware payload like EDK2 from persistent
-> flash storage, qemu needs to pass the flash address as the
-> next_addr in fw_dynamic_info to the opensbi.
+> From: Bin Meng <bmeng.cn@gmail.com>
 >
-> When both -kernel and -pflash options are provided in command line,
-> the kernel (and initrd if -initrd) will be copied to fw_cfg table.
-> The S-mode FW will load the kernel/initrd from fw_cfg table.
+> Since commit 4211fc553234 ("roms/opensbi: Remove ELF images"), the
+> comment for qtest check in riscv_find_firmware() is out of date.
+> Update it to reflect the latest status.
 >
-> If only pflash is given but not -kernel, then it is the job of
-> of the S-mode firmware to locate and load the kernel.
->
-> In either case, update the kernel_entry with the flash address
-> so that the opensbi can jump to the entry point of the S-mode
-> firmware.
->
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
->  hw/riscv/boot.c         | 29 +++++++++++++++++++++++++++++
->  hw/riscv/virt.c         | 18 +++++++++++++++++-
->  include/hw/riscv/boot.h |  1 +
->  3 files changed, 47 insertions(+), 1 deletion(-)
+>
+>  hw/riscv/boot.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
 > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index 1ae7596873..fa8ad27da2 100644
+> index 1ae7596873..f6e8eafa28 100644
 > --- a/hw/riscv/boot.c
 > +++ b/hw/riscv/boot.c
-> @@ -338,3 +338,32 @@ void riscv_setup_direct_kernel(hwaddr kernel_addr, hwaddr fdt_addr)
->          riscv_cpu->env.fdt_addr = fdt_addr;
->      }
->  }
-> +
-> +void riscv_setup_firmware_boot(MachineState *machine)
-> +{
-> +    if (machine->kernel_filename) {
-> +        FWCfgState *fw_cfg;
-> +        fw_cfg = fw_cfg_find();
-> +
-> +        assert(fw_cfg);
-> +        /*
-> +         * Expose the kernel, the command line, and the initrd in fw_cfg.
-> +         * We don't process them here at all, it's all left to the
-> +         * firmware.
-> +         */
-> +        load_image_to_fw_cfg(fw_cfg,
-> +                             FW_CFG_KERNEL_SIZE, FW_CFG_KERNEL_DATA,
-> +                             machine->kernel_filename,
-> +                             true);
-> +        load_image_to_fw_cfg(fw_cfg,
-> +                             FW_CFG_INITRD_SIZE, FW_CFG_INITRD_DATA,
-> +                             machine->initrd_filename, false);
-> +
-> +        if (machine->kernel_cmdline) {
-> +            fw_cfg_add_i32(fw_cfg, FW_CFG_CMDLINE_SIZE,
-> +                           strlen(machine->kernel_cmdline) + 1);
-> +            fw_cfg_add_string(fw_cfg, FW_CFG_CMDLINE_DATA,
-> +                              machine->kernel_cmdline);
-> +        }
-> +    }
-> +}
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index de2efccebf..a5bc7353b4 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1274,7 +1274,23 @@ static void virt_machine_done(Notifier *notifier, void *data)
->      s->fw_cfg = create_fw_cfg(machine);
->      rom_set_fw(s->fw_cfg);
->
-> -    if (machine->kernel_filename) {
-> +    if (drive_get(IF_PFLASH, 0, 1)) {
-> +        /*
-> +         * S-mode FW like EDK2 will be kept in second plash (unit 1).
-> +         * When both kernel, initrd and pflash options are provided in the
-> +         * command line, the kernel and initrd will be copied to the fw_cfg
-> +         * table and opensbi will jump to the flash address which is the
-> +         * entry point of S-mode FW. It is the job of the S-mode FW to load
-> +         * the kernel and initrd using fw_cfg table.
-> +         *
-> +         * If only pflash is given but not -kernel, then it is the job of
-> +         * of the S-mode firmware to locate and load the kernel.
-> +         * In either case, the next_addr for opensbi will be the flash address.
-> +         */
-> +        riscv_setup_firmware_boot(machine);
-> +        kernel_entry = virt_memmap[VIRT_FLASH].base +
-> +                       virt_memmap[VIRT_FLASH].size / 2;
-> +    } else if (machine->kernel_filename) {
->          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
->                                                           firmware_end_addr);
->
-> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-> index a36f7618f5..93e5f8760d 100644
-> --- a/include/hw/riscv/boot.h
-> +++ b/include/hw/riscv/boot.h
-> @@ -57,5 +57,6 @@ void riscv_rom_copy_firmware_info(MachineState *machine, hwaddr rom_base,
->                                    uint32_t reset_vec_size,
->                                    uint64_t kernel_entry);
->  void riscv_setup_direct_kernel(hwaddr kernel_addr, hwaddr fdt_addr);
-> +void riscv_setup_firmware_boot(MachineState *machine);
->
->  #endif /* RISCV_BOOT_H */
+> @@ -111,8 +111,8 @@ char *riscv_find_firmware(const char *firmware_filename)
+>      if (filename == NULL) {
+>          if (!qtest_enabled()) {
+>              /*
+> -             * We only ship plain binary bios images in the QEMU source.
+> -             * With Spike machine that uses ELF images as the default bios,
+> +             * We only ship OpenSBI binary bios images in the QEMU source.
+> +             * For machines that use images other than the default bios,
+>               * running QEMU test will complain hence let's suppress the error
+>               * report for QEMU testing.
+>               */
 > --
 > 2.25.1
 >
