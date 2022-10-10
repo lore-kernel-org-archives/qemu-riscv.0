@@ -1,59 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ohiq8-0000ip-6L
-	for mharc-qemu-riscv@gnu.org; Sun, 09 Oct 2022 22:48:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56676)
+	id 1ohiyk-0006l3-91
+	for mharc-qemu-riscv@gnu.org; Sun, 09 Oct 2022 22:57:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47792)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ohiq6-0000h0-Jj; Sun, 09 Oct 2022 22:48:22 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636]:42758)
+ id 1ohiyi-0006ka-9j; Sun, 09 Oct 2022 22:57:16 -0400
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:35678)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ohiq3-0001IY-Ub; Sun, 09 Oct 2022 22:48:22 -0400
-Received: by mail-pl1-x636.google.com with SMTP id c24so9205870pls.9;
- Sun, 09 Oct 2022 19:48:19 -0700 (PDT)
+ id 1ohiyg-0002Wc-L0; Sun, 09 Oct 2022 22:57:15 -0400
+Received: by mail-pj1-x1036.google.com with SMTP id
+ i7-20020a17090a65c700b0020ad9666a86so11961141pjs.0; 
+ Sun, 09 Oct 2022 19:57:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gtZzpuO4s7LYdxOwGop9thgokRjfwbaszUedOsKjmfY=;
- b=fSSG/5nPfL0otAhwPByat0doETNHB7T0fuVNERP3S6ryhwJPOO0SIfmV8kpaR2MPXN
- +jrt71OOD38bnLFcHy6WTNULQl2kPyjMmHVRaXLpxDxED7YzZ0g2V5X1j4c8hKlpnBuu
- qaiyxICn3SzUwy43RZ1ChNWPvLn7/b8BLEn98iYkSpNy333zLABwNb5AkX7QcKiYmAOu
- GYHfasnEoMpvqjXYtf9eQgBXaZn/WBUvrxiVZxwUKqsPT9qGxiCa96wfAGSkkRKpDaKB
- O0g7rh2DkD1SdF1tNd/pvSPA5nCGJfu1+Z/tbcEey3D7cYqpo5nZulT9+qa5Nx5+kDTp
- y8MQ==
+ bh=vBojqzeB3GBJXyOJmO903B73puF82ggIHf8D9UgjdHs=;
+ b=ooLfHyU2De3efvh9BzGNMo2IR0SQ/KPB9UDhPcylgjFTbrkUD/5H1aqcCjJ746n0Up
+ Nl2jta5dUUA6b58RUDp/5KXqIWryTVlMnonhIcopmJF6maRIaTHam2MLMNbIRatqHV0l
+ qnCRSJBFSZ4BQAVj7v3Kg01TqahgRa7asP5dgUGITIG3kAOj8E4ueB6df6hkM/FPKMsm
+ lU9hX9OHATQWXi2uLZA1zwLdTz55x/ODW0fRmROB1KNIRvhxG7F7UwaplVDD88ERaGRA
+ JvvHCmVpx9T039Rt0/hjjKXI+5jZXp9XItd8YS/TOSf76W48PkES4IGXuMFJ4vW3C2Qa
+ LJKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gtZzpuO4s7LYdxOwGop9thgokRjfwbaszUedOsKjmfY=;
- b=j2DWm4nu64X+uDK3OL/0FWHM9JJK1tuTh162SK44s8UkB29dICeTmosOEV6JzwW/yO
- zfYfJwDLt+AieH25Onj7RZJCmjpajw2RXNVZ+ANd5HdZQNofySw311RtE0LCmDi9YyRr
- Hj2PrhlRNjTsZ1kklqE3Fdc+W1fD/SnmETkoFKyPVgvJKO12J77GvP2rlOuFrhTIiidy
- DXp+k5jkGd2pZm8esOu4PPamWQoyrCCjgvQqxx30ic1aSdyqKwISPtJJDBRHqs7sPER1
- QObaHs4bk8I+LBJoJ3aq1cNv8UljsFLTxWtDKUkkHpp21B2Q9xVAnUUKPQKIH5BIVtBS
- YAXQ==
-X-Gm-Message-State: ACrzQf1tnZfP7X7ocJmneLpbWuH2zs0NuVYGJhp0Ebmko7ANX0dhtkm3
- S1bEDfsu8PMEXtneR5/Bhs+doHsik/o7NcNmLTo=
-X-Google-Smtp-Source: AMsMyM7TN313OMiyz/hStKdC+wRDWXP3WhLWznpQ+dtuD5Ic0MwCtYvPky7tzP4dacvLpk2dlzOUee1Zg+Fqd68Tas0=
-X-Received: by 2002:a17:902:8693:b0:17a:f71:98fd with SMTP id
- g19-20020a170902869300b0017a0f7198fdmr16824002plo.25.1665370098325; Sun, 09
- Oct 2022 19:48:18 -0700 (PDT)
+ bh=vBojqzeB3GBJXyOJmO903B73puF82ggIHf8D9UgjdHs=;
+ b=ARpBHpyOKjhqqXeZGCla6IaB09XJ1PXhuUbK8iy06120uZhUqf9DFClOkMsCaAuzit
+ 1Q49o8UDWO4WB18lnYGjdy6e8J0YIOWkT99OnJDt6yZv9PHhzHtpkir8+8PMEdkcYpRp
+ BKPgIl+TePJ62RoJem8lg3WciN7SeskezTYZGHQhsT7nNtwcgwcoFDx3FtzavCVUGKkm
+ X6CCuWOITLqVBqQqPJ6hRZXu7l1czSGjDeWGZIMX4R37CNBHitGS1OEP7iaNpBqkUPXI
+ omvmHaLON7LtHPLGeNJZX25ipPIK3Cy7+Kb5zIytWyS75G+InHJxAFT/bxTkEZBAb2Y3
+ j8ag==
+X-Gm-Message-State: ACrzQf1BxBGr2tZ3bOuX0jS/q4G+ZTTJDytt0Jrv7qytRdMDSMmIjyKN
+ kF5g4hrhje9KAJZSZ8fUHl22UuF2v3FIif5+pdg=
+X-Google-Smtp-Source: AMsMyM5gFftlYN8RwM/xcUDMYcxtjrb7tWvx7RNDVqlZN3EqQQYm14HVmVfWNXvPmixsH8R4kJWqtGsPP+FeYo1q32s=
+X-Received: by 2002:a17:90b:3149:b0:202:e9e9:632f with SMTP id
+ ip9-20020a17090b314900b00202e9e9632fmr29916139pjb.96.1665370632852; Sun, 09
+ Oct 2022 19:57:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220928050827.319293-1-wilfred.mallawa@opensource.wdc.com>
- <20220928050827.319293-3-wilfred.mallawa@opensource.wdc.com>
-In-Reply-To: <20220928050827.319293-3-wilfred.mallawa@opensource.wdc.com>
+References: <20220929232339.372813-1-Jason@zx2c4.com>
+ <20220929232339.372813-3-Jason@zx2c4.com>
+In-Reply-To: <20220929232339.372813-3-Jason@zx2c4.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 10 Oct 2022 12:47:52 +1000
-Message-ID: <CAKmqyKOMY4xfe_WB0u7a2bYZf6dTTkfEG8TVadw-Zs=pBJadLQ@mail.gmail.com>
-Subject: Re: [PATCH v1 2/2] riscv/opentitan: connect lifecycle controller
-To: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Date: Mon, 10 Oct 2022 12:56:46 +1000
+Message-ID: <CAKmqyKMvWETo5jyVfq-PGBKK=_hqNSAEfo6fBrjyEngbodmpJA@mail.gmail.com>
+Subject: Re: [PATCH 3/6] riscv: re-randomize rng-seed on reboot
+To: "Jason A. Donenfeld" <Jason@zx2c4.com>
+Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x1036.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,83 +76,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Oct 2022 02:48:22 -0000
+X-List-Received-Date: Mon, 10 Oct 2022 02:57:16 -0000
 
-On Wed, Sep 28, 2022 at 3:13 PM Wilfred Mallawa
-<wilfred.mallawa@opensource.wdc.com> wrote:
+On Fri, Sep 30, 2022 at 9:24 AM Jason A. Donenfeld <Jason@zx2c4.com> wrote:
 >
-> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> When the system reboots, the rng-seed that the FDT has should be
+> re-randomized, so that the new boot gets a new seed. Since the FDT is in
+> the ROM region at this point, we add a hook right after the ROM has been
+> added, so that we have a pointer to that copy of the FDT.
 >
-> Connects the ibex lifecycle controller with opentitan,
-> with this change, we can now get past the lifecycle checks
-> in the boot rom.
->
-> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> Cc: Palmer Dabbelt <palmer@dabbelt.com>
+> Cc: Alistair Francis <alistair.francis@wdc.com>
+> Cc: Bin Meng <bin.meng@windriver.com>
+> Cc: qemu-riscv@nongnu.org
+> Signed-off-by: Jason A. Donenfeld <Jason@zx2c4.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/opentitan.c         | 10 ++++++++--
->  include/hw/riscv/opentitan.h |  2 ++
->  2 files changed, 10 insertions(+), 2 deletions(-)
+>  hw/riscv/boot.c | 3 +++
+>  1 file changed, 3 insertions(+)
 >
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index be7ff1eea0..73a5cef694 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -122,6 +122,8 @@ static void lowrisc_ibex_soc_init(Object *obj)
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 1ae7596873..aaecf21543 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -30,6 +30,7 @@
+>  #include "sysemu/device_tree.h"
+>  #include "sysemu/qtest.h"
+>  #include "sysemu/kvm.h"
+> +#include "sysemu/reset.h"
 >
->      object_initialize_child(obj, "timer", &s->timer, TYPE_IBEX_TIMER);
+>  #include <libfdt.h>
 >
-> +    object_initialize_child(obj, "lifetime_ctrl", &s->lc, TYPE_IBEX_LC_CTRL);
-> +
->      for (int i = 0; i < OPENTITAN_NUM_SPI_HOSTS; i++) {
->          object_initialize_child(obj, "spi_host[*]", &s->spi_host[i],
->                                  TYPE_IBEX_SPI_HOST);
-> @@ -243,6 +245,12 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->          }
->      }
+> @@ -241,6 +242,8 @@ uint64_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
 >
-> +    /* Life-Cycle Control */
-> +    if (!sysbus_realize(SYS_BUS_DEVICE(&s->lc), errp)) {
-> +        return;
-> +    }
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(&s->lc), 0, memmap[IBEX_DEV_LC_CTRL].base);
-> +
->      create_unimplemented_device("riscv.lowrisc.ibex.gpio",
->          memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.spi_device",
-> @@ -255,8 +263,6 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->          memmap[IBEX_DEV_SENSOR_CTRL].base, memmap[IBEX_DEV_SENSOR_CTRL].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.otp_ctrl",
->          memmap[IBEX_DEV_OTP_CTRL].base, memmap[IBEX_DEV_OTP_CTRL].size);
-> -    create_unimplemented_device("riscv.lowrisc.ibex.lc_ctrl",
-> -        memmap[IBEX_DEV_LC_CTRL].base, memmap[IBEX_DEV_LC_CTRL].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.pwrmgr",
->          memmap[IBEX_DEV_PWRMGR].base, memmap[IBEX_DEV_PWRMGR].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.rstmgr",
-> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-> index 6665cd5794..64b7f21339 100644
-> --- a/include/hw/riscv/opentitan.h
-> +++ b/include/hw/riscv/opentitan.h
-> @@ -24,6 +24,7 @@
->  #include "hw/char/ibex_uart.h"
->  #include "hw/timer/ibex_timer.h"
->  #include "hw/ssi/ibex_spi_host.h"
-> +#include "hw/misc/ibex_lc_ctrl.h"
->  #include "qom/object.h"
+>      rom_add_blob_fixed_as("fdt", fdt, fdtsize, fdt_addr,
+>                            &address_space_memory);
+> +    qemu_register_reset(qemu_fdt_randomize_seeds,
+> +                        rom_ptr_for_as(&address_space_memory, fdt_addr, fdtsize));
 >
->  #define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
-> @@ -44,6 +45,7 @@ struct LowRISCIbexSoCState {
->      SiFivePLICState plic;
->      IbexUartState uart;
->      IbexTimerState timer;
-> +    IbexLCState lc;
->      IbexSPIHostState spi_host[OPENTITAN_NUM_SPI_HOSTS];
->
->      uint32_t resetvec;
+>      return fdt_addr;
+>  }
 > --
 > 2.37.3
 >
