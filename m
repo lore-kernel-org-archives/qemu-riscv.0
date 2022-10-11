@@ -1,62 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oiNvK-0000AG-Vt
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Oct 2022 18:40:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37726)
+	id 1oiNxL-0002o2-Uh
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Oct 2022 18:42:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57414)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oiNvI-00006m-TO; Tue, 11 Oct 2022 18:40:28 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d]:35767)
+ id 1oiNxH-0002ii-3i; Tue, 11 Oct 2022 18:42:34 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e]:40874)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oiNvG-0001RP-TC; Tue, 11 Oct 2022 18:40:28 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id h10so14581095plb.2;
- Tue, 11 Oct 2022 15:40:25 -0700 (PDT)
+ id 1oiNxF-0001dy-KQ; Tue, 11 Oct 2022 18:42:30 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id h13so13398294pfr.7;
+ Tue, 11 Oct 2022 15:42:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=K4rENLlk1pqovVAyYJPfZUVgTvC8JwSjkTBrrydmKnE=;
- b=qHzWu3r1Moo/XGjGg5711k4vNTjd8DbxjtSRwpTQymISetPNLX36eNaJtYKB14fzNl
- ncnZIAgXGgXvCrauV90aeKty+fiiisdMQa+vNjOLRCnbBXhH60vFEAXDFekT2NFvIg0w
- t5fzz/F1ex0wmyci0dQeoso/eOz4T4XkuIMPWioo8DZ+04C5dRBqZt1gb2LMDA8onJRU
- BZ4QoBMm6scF2c8XHxRw8Yy17D7vWR9OQm58fUpQM+Wats1iefy8nx/0/41/w7QdzTEU
- gpnS++uVFRLo5Xmy4wglF1slfxGyY1aG0IOJenddOzZsqgv/oyvSajzTkCkop9Y7LuOX
- KQ3w==
+ bh=IgKH1le+MX8OgFUXk01KTFglL17/ogWw3zu8IbyzzC4=;
+ b=GsszLjfxdx3Q88xtBicOEp8OfZx6LMrPM4W7qB3Q3Xw0nC2gq1v21kjV6AdiNfifFa
+ a/GYjJ4ELnwMW7xJdrGjr/kYjBz54dlKrKvb0y88qXT6V6/ql8lLidAwk5YHXu5k1dxh
+ JVAgcaoCZX535+JGIwWYhi31bhnPVIUqOm1bswQ2n7D2jm2O2CSbgEikqLx8MMBiVS8K
+ 7a+Z/cUHzQ7EpkrHYrjsHtXIgGxmn2mNXyt8fhItQKkFyBBJWeLGVTS5PAU/sxG73H+E
+ wiNgQv7T8MC1x5ceLG2wdHHFZdoWfdOQLMhrK+UbfpyhLZKkU3Ke1lN8fl+fOZgHQjde
+ SOdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=K4rENLlk1pqovVAyYJPfZUVgTvC8JwSjkTBrrydmKnE=;
- b=mTkTx5fI/T0PtNKLMsLD7HsvNp9tegKrF2hLMMjgIhrqHtbTk3o27YMRaj5IJLE3Vl
- 5NLdtbj9aA3fnzApIRMxLu+Y68cQs0aBlvbNSyoibCxAy6/N+wjkAZVrkaCIfjIE8KmM
- nbc9/sPLB5FDD5Gi3TXJ7oSh9p5g71oUUXAgv4OakoFqkt2Fl/++nq3hkTbR2L0DE47n
- ARRPQT7l1VCku2y/iTUPreUuxJjm6viSHnz9JRgk18OpzSf5ce0uXTmXEQiPMzwroWX5
- DhO2yrGkHNQ4UiKZjt22Y+buJJzNf5OaRZiYMguqz3l7EKXl5iGQLFiSHxhOlYE76XJf
- vZfQ==
-X-Gm-Message-State: ACrzQf13ZqH5LUgYfMcL6odkJ+gQY3Y1ezT37EKZBP/UvMCsMJZmBugV
- vFwfnCs0wEGawQ+UFF7ZA5eqVIwd3JWyVQgNAVE=
-X-Google-Smtp-Source: AMsMyM7aIldt6dG18DMbEGhYFz1d3+0NkiE7UsSQSyH4Q6ePcuBgkVKt/SVsqxmen10i1eRG9N+IksJQn4mUMd+YfKw=
-X-Received: by 2002:a17:903:32c4:b0:178:5206:b396 with SMTP id
- i4-20020a17090332c400b001785206b396mr26500372plr.99.1665528024654; Tue, 11
- Oct 2022 15:40:24 -0700 (PDT)
+ bh=IgKH1le+MX8OgFUXk01KTFglL17/ogWw3zu8IbyzzC4=;
+ b=SZATmt2JpeyzM3Kem9c1tZPTNOHE0XudRKja8Q1iu28hNMJD590UFkJEwLyhNMd22A
+ m04mvE9WqYsnk763z4NE3CCRMQhpSt5WmNrknrFZV6wdpoWcem/x8arscqoHroj3pr7C
+ y+B1lZu2qeD7Z7ehzczT+7JyvevPS0bnEKzyWXcwnGUT3AE2Po688RfoBQTgfuFC/rOH
+ zcKb12lcN899haof8xCxJ2sAcp21c+flHs++jdLSCRbIwO6v9sABvlJwnDKYMsALFNDO
+ CBfomLxwhqSusgI/IdSGAiMM3wNB8OJCJrvTNLPJqkNH5ZfiJh6eBNghmqfAmNiccxMG
+ yOZw==
+X-Gm-Message-State: ACrzQf1T1htNrlIBWjVPbTglXxrbvhw+9jTZV1D1tomcPcsxJo5oOHmm
+ sBLXy3HlSTXTrV0ElVHkFsvH4RvghcuBYXhD/Mk=
+X-Google-Smtp-Source: AMsMyM4WK6R4q1j1fWh7F8v2ycd5+doudrSWbhCBtMt9yTU6JxxYFpSxd/Zmi6WTgujOMbTwwSJ1v9bgF2h82AiY06w=
+X-Received: by 2002:a63:ce43:0:b0:45b:d6ed:6c2 with SMTP id
+ r3-20020a63ce43000000b0045bd6ed06c2mr22684441pgi.406.1665528147866; Tue, 11
+ Oct 2022 15:42:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20221004092351.18209-1-sunilvl@ventanamicro.com>
-In-Reply-To: <20221004092351.18209-1-sunilvl@ventanamicro.com>
+References: <20220930033241.206581-1-wilfred.mallawa@opensource.wdc.com>
+In-Reply-To: <20220930033241.206581-1-wilfred.mallawa@opensource.wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 12 Oct 2022 08:39:57 +1000
-Message-ID: <CAKmqyKPkaDnKDwpSLZHcCgQxTg8XEiijmtJVz3opPSLoqjNvJQ@mail.gmail.com>
-Subject: Re: [PATCH V5 0/3] hw/riscv: virt: Enable booting S-mode firmware
- from pflash
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>, Song Gao <gaosong@loongson.cn>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Date: Wed, 12 Oct 2022 08:42:00 +1000
+Message-ID: <CAKmqyKNq=2LbTt63Wfg5gp5TLo6J5hPA1uu42OmvhxRP6YF6Dw@mail.gmail.com>
+Subject: Re: [PATCH v5 0/2] hw/ssi/ibex_spi: bug fixes
+To: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
+Cc: Alistair.Francis@wdc.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Wilfred Mallawa <wilfred.mallawa@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,78 +72,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Oct 2022 22:40:29 -0000
+X-List-Received-Date: Tue, 11 Oct 2022 22:42:34 -0000
 
-On Tue, Oct 4, 2022 at 7:25 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
+On Fri, Sep 30, 2022 at 1:34 PM Wilfred Mallawa
+<wilfred.mallawa@opensource.wdc.com> wrote:
 >
-> This series adds the support to boot S-mode FW like EDK2 from the flash. The
-> S-mode firmware should be kept in pflash unit 1.
+> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 >
-> When -kernel (and -initrd) option is also provided along with the flash,
-> the kernel (and initrd) will be loaded into fw_cfg table and opensbi will
-> branch to the flash address which will be the entry point of the S-mode
-> firmware. The S-mode FW then loads and launches the kernel.
->
-> When only -pflash option is provided in the command line, the kernel
-> will be located and loaded in the usual way by the S-mode firmware.
->
-> These patches are available in below branch.
-> https://github.com/vlsunil/qemu/tree/pflash_v2
->
-> The first two patches in this series are refactor patches.
->
-> These changes are tested with a WIP EDK2 port for virt machine. Below
-> are the instructions to build and test this feature.
->
-> 1) Get EDK2 sources from below branches.
-> https://github.com/vlsunil/edk2/tree/virt_refactor_smode_v1
-> https://github.com/vlsunil/edk2-platforms/tree/virt_refactor_smode_v1
->
-> 2) Build EDK2 for RISC-V
->         export WORKSPACE=`pwd`
->         export GCC5_RISCV64_PREFIX=riscv64-linux-gnu-
->         export PACKAGES_PATH=$WORKSPACE/edk2:$WORKSPACE/edk2-platforms
->         export EDK_TOOLS_PATH=$WORKSPACE/edk2/BaseTools
->         source edk2/edksetup.sh
->         make -C edk2/BaseTools clean
->         make -C edk2/BaseTools
->         make -C edk2/BaseTools/Source/C
->         source edk2/edksetup.sh BaseTools
->         build -a RISCV64  -p Platform/Qemu/RiscVVirt/RiscVVirt.dsc -t GCC5
->
-> 3)Make the EDK2 image size to match with what qemu flash expects
-> truncate -s 32M Build/RiscVVirt/DEBUG_GCC5/FV/RISCV_VIRT.fd
->
-> 4) Run
-> a) Boot to EFI shell (no -kernel / -initrd option)
-> qemu-system-riscv64  -nographic   -drive file=Build/RiscVVirt/DEBUG_GCC5/FV/RISCV_VIRT.fd,if=pflash,format=raw,unit=1  -machine virt -M 2G
->
-> b) With -kernel, -initrd and -pflash
-> qemu-system-riscv64  -nographic   -drive file=Build/RiscVVirt/DEBUG_GCC5/FV/RISCV_VIRT.fd,if=pflash,format=raw,unit=1  -machine virt -M 2G -kernel arch/riscv/boot/Image.gz -initrd rootfs.cpio
->
+> The remaining patches in this series address:
+>         - Coverity issues for `ibex_spi`
+>         - Adds rw1c functionality
 >
 > Changes since V4:
->         1) Rebased on riscv-to-apply.next branch
->         2) Added RB tags
->         3) Gerd's feedback on removing the truncate requirement will be addressed as separate
->            patch in future.
+>         - Fixup compiler warning for unused variable `data` in [1/2]
 >
-> Changes since V3:
->         1) White space and comment edits
->         2) Added RB tag
->
-> Changes since V2:
->         1) Moved the doc comment to .h file
->
-> Changes since V1:
->         1) Modified code to support the use case when both -kernel and -pflash are configured.
->         2) Refactor patches added to help (1) above.
->         3) Cover letter added with test instructions.
->
-> Sunil V L (3):
->   hw/arm,loongarch: Move load_image_to_fw_cfg() to common location
->   hw/riscv: virt: Move create_fw_cfg() prior to loading kernel
->   hw/riscv: virt: Enable booting S-mode firmware from pflash
+> Wilfred Mallawa (2):
+>   hw/ssi: ibex_spi: fixup coverity issue
+>   hw/ssi: ibex_spi: fixup/add rw1c functionality
 
 Thanks!
 
@@ -157,17 +97,12 @@ Applied to riscv-to-apply.next
 Alistair
 
 >
->  hw/arm/boot.c             | 49 ---------------------------------------
->  hw/loongarch/virt.c       | 33 --------------------------
->  hw/nvram/fw_cfg.c         | 32 +++++++++++++++++++++++++
->  hw/riscv/boot.c           | 29 +++++++++++++++++++++++
->  hw/riscv/virt.c           | 32 ++++++++++++++++++-------
->  include/hw/nvram/fw_cfg.h | 21 +++++++++++++++++
->  include/hw/riscv/boot.h   |  1 +
->  7 files changed, 107 insertions(+), 90 deletions(-)
+>  hw/ssi/ibex_spi_host.c         | 166 ++++++++++++++++++++-------------
+>  include/hw/ssi/ibex_spi_host.h |   4 +-
+>  2 files changed, 102 insertions(+), 68 deletions(-)
 >
 > --
-> 2.25.1
+> 2.37.3
 >
 >
 
