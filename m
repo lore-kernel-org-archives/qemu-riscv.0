@@ -1,68 +1,43 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oiTvW-0005tw-EM
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Oct 2022 01:05:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39468)
+	id 1oiUnV-0004qC-EI
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Oct 2022 02:00:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50200)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oiTvT-0005qB-KU; Wed, 12 Oct 2022 01:05:03 -0400
-Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a]:37815)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oiTvQ-0007QA-Tw; Wed, 12 Oct 2022 01:05:03 -0400
-Received: by mail-pf1-x42a.google.com with SMTP id 3so13929444pfw.4;
- Tue, 11 Oct 2022 22:05:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IgqjnJM3hucQ5z5R5Tux/MUljENLke8o3wZRLJ7zrnk=;
- b=JfCAsm/hE59u7/fMceJaFJ//rSrSLjJRh2vGqvv4ZmF41VqkYSxtz6NNa/wWbneqiE
- kB3EbYLhl0P1qpOm3P6qCOD+SSDx+x+o1isHiRIv3FR2VpO+VOyyE5mwQiGUIZ53m6/k
- u++nWSWusIweIZsOybliD9BH8nva0L3lDwpH91i5WQYLiee8sLkJUmx93lzREPbE//cq
- nzxA2alOZ8d7QKXURiu1rwkTxEClichxF211guRNsvRqZ5DptzBdQehnl0e0EtNu49Gh
- 7uMS7Dqxsh0nn9nB+rpgKumSBvr54YvwfkUY5Otio0msT3qJvSKp0nXbDINiomB38F1b
- fIjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=IgqjnJM3hucQ5z5R5Tux/MUljENLke8o3wZRLJ7zrnk=;
- b=rn1tUEl+PVFRnDGRULJEbzTWSa+4KkNp5iqNyev64J0JiqYnypnEsOIwqmIrDZOz8R
- uGAYFLA1nGYA2V2ArNakhoPG8BC9kWeBvbnoFr6nETwJyFKkv6sLYU2CaH79fV3wYQeR
- X/jEY2Gl79MHpfwzOCXTM82WLS5f4q8N0ohCp47KL53qMdqjvPMtYlOC1TaY9slcmEXP
- p9zzd/lgBvcl+/MYdz+5B9+OX5pCtNLyoxWhp37U7BBtGOTnqWXPDHDhQr2K9LH4cBnk
- zexYD/o7RB+5MlPCDDy9XFatK5t87vAe+ywPXXMaJBX2MHibw5m9TGUpduj70wQP0dAX
- 939g==
-X-Gm-Message-State: ACrzQf1ATLd3A2hM10WXFIJ4d1iDtpIiRLaH1VbuzfDo8bZNIEd9lkB+
- E4BQAQUGYz2/FtAGmDbjw5OHx1moumnFkbTmFINSV5+3Prk=
-X-Google-Smtp-Source: AMsMyM5vsIlRKAhck8/9NOQvZ+Kv5LTQJT9vskSSTP29A66Q64z4TXnZO2C7peCZA5pVzWkTp12IOPzLD38gyFaZvc8=
-X-Received: by 2002:a63:ce43:0:b0:45b:d6ed:6c2 with SMTP id
- r3-20020a63ce43000000b0045bd6ed06c2mr23789884pgi.406.1665551099406; Tue, 11
- Oct 2022 22:04:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1oiUnJ-0004mJ-0u; Wed, 12 Oct 2022 02:00:43 -0400
+Received: from out30-57.freemail.mail.aliyun.com ([115.124.30.57]:39465)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1oiUn5-00070s-Jv; Wed, 12 Oct 2022 02:00:30 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R911e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=6; SR=0;
+ TI=SMTPD_---0VS-Gtii_1665554418; 
+Received: from
+ roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VS-Gtii_1665554418) by smtp.aliyun-inc.com;
+ Wed, 12 Oct 2022 14:00:19 +0800
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH] target/riscv: Fix PMP propagation for tlb
+Date: Wed, 12 Oct 2022 14:00:16 +0800
+Message-Id: <20221012060016.30856-1-zhiwei_liu@linux.alibaba.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20221011204645.1160916-1-Jason@zx2c4.com>
- <20221011204645.1160916-4-Jason@zx2c4.com>
-In-Reply-To: <20221011204645.1160916-4-Jason@zx2c4.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 12 Oct 2022 15:04:33 +1000
-Message-ID: <CAKmqyKMYPcf+T4BtGGnUHXoUWBptwuMzUH5-Lwe1XmS5c+QgZw@mail.gmail.com>
-Subject: Re: [PATCH v2 3/8] riscv: re-randomize rng-seed on reboot
-To: "Jason A. Donenfeld" <Jason@zx2c4.com>
-Cc: peter.maydell@linaro.org, pbonzini@redhat.com, qemu-devel@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x42a.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.57;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-57.freemail.mail.aliyun.com
+X-Spam_score_int: -98
+X-Spam_score: -9.9
+X-Spam_bar: ---------
+X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,52 +50,235 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2022 05:05:04 -0000
+X-List-Received-Date: Wed, 12 Oct 2022 06:00:50 -0000
 
-On Wed, Oct 12, 2022 at 6:55 AM Jason A. Donenfeld <Jason@zx2c4.com> wrote:
->
-> When the system reboots, the rng-seed that the FDT has should be
-> re-randomized, so that the new boot gets a new seed. Since the FDT is in
-> the ROM region at this point, we add a hook right after the ROM has been
-> added, so that we have a pointer to that copy of the FDT.
->
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
-> Cc: Alistair Francis <alistair.francis@wdc.com>
-> Cc: Bin Meng <bin.meng@windriver.com>
-> Cc: qemu-riscv@nongnu.org
-> Signed-off-by: Jason A. Donenfeld <Jason@zx2c4.com>
+Only the pmp index that be checked by pmp_hart_has_privs can be used
+by pmp_get_tlb_size to avoid an error pmp index.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Before modification, we may use an error pmp index. For example,
+we check address 0x4fc, and the size 0x4 in pmp_hart_has_privs. If there
+is an pmp rule, valid range is [0x4fc, 0x500), then pmp_hart_has_privs
+will return true;
 
-Alistair
+However, this checked pmp index is discarded as pmp_hart_has_privs
+return bool value. In pmp_is_range_in_tlb, it will traverse all pmp
+rules. The tlb_sa will be 0x0, and tlb_ea will be 0xfff. If there is
+a pmp rule [0x10, 0x14), it will be misused as it is legal in
+pmp_get_tlb_size.
 
-> ---
->  hw/riscv/boot.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index 1ae7596873..aaecf21543 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -30,6 +30,7 @@
->  #include "sysemu/device_tree.h"
->  #include "sysemu/qtest.h"
->  #include "sysemu/kvm.h"
-> +#include "sysemu/reset.h"
->
->  #include <libfdt.h>
->
-> @@ -241,6 +242,8 @@ uint64_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
->
->      rom_add_blob_fixed_as("fdt", fdt, fdtsize, fdt_addr,
->                            &address_space_memory);
-> +    qemu_register_reset(qemu_fdt_randomize_seeds,
-> +                        rom_ptr_for_as(&address_space_memory, fdt_addr, fdtsize));
->
->      return fdt_addr;
->  }
-> --
-> 2.37.3
->
->
+As we have already known the correct pmp index, just remove the
+remove the pmp_is_range_in_tlb and get tlb size directly from
+pmp_get_tlb_size.
+
+Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+---
+ target/riscv/cpu_helper.c | 16 ++++---
+ target/riscv/pmp.c        | 90 +++++++++++++--------------------------
+ target/riscv/pmp.h        |  6 +--
+ 3 files changed, 42 insertions(+), 70 deletions(-)
+
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 278d163803..5d66246c2c 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -706,24 +706,26 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
+                                     int mode)
+ {
+     pmp_priv_t pmp_priv;
+-    target_ulong tlb_size_pmp = 0;
++    int pmp_index = -1;
+ 
+     if (!riscv_feature(env, RISCV_FEATURE_PMP)) {
+         *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
+         return TRANSLATE_SUCCESS;
+     }
+ 
+-    if (!pmp_hart_has_privs(env, addr, size, 1 << access_type, &pmp_priv,
+-                            mode)) {
++    pmp_index = pmp_hart_has_privs(env, addr, size, 1 << access_type,
++                                   &pmp_priv, mode);
++    if (pmp_index < 0) {
+         *prot = 0;
+         return TRANSLATE_PMP_FAIL;
+     }
+ 
+     *prot = pmp_priv_to_page_prot(pmp_priv);
+-    if (tlb_size != NULL) {
+-        if (pmp_is_range_in_tlb(env, addr & ~(*tlb_size - 1), &tlb_size_pmp)) {
+-            *tlb_size = tlb_size_pmp;
+-        }
++    if ((tlb_size != NULL) && pmp_index != MAX_RISCV_PMPS) {
++        target_ulong tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
++        target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
++
++        *tlb_size = pmp_get_tlb_size(env, pmp_index, tlb_sa, tlb_ea);
+     }
+ 
+     return TRANSLATE_SUCCESS;
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 2b43e399b8..d1126a6066 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -292,8 +292,11 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
+ 
+ /*
+  * Check if the address has required RWX privs to complete desired operation
++ * Return PMP rule index if a pmp rule match
++ * Return MAX_RISCV_PMPS if default match
++ * Return negtive value if no match
+  */
+-bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
++int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+     target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
+     target_ulong mode)
+ {
+@@ -305,8 +308,10 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+ 
+     /* Short cut if no rules */
+     if (0 == pmp_get_num_rules(env)) {
+-        return pmp_hart_has_privs_default(env, addr, size, privs,
+-                                          allowed_privs, mode);
++        if (pmp_hart_has_privs_default(env, addr, size, privs,
++                                       allowed_privs, mode)) {
++            ret = MAX_RISCV_PMPS;
++        }
+     }
+ 
+     if (size == 0) {
+@@ -333,7 +338,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+         if ((s + e) == 1) {
+             qemu_log_mask(LOG_GUEST_ERROR,
+                           "pmp violation - access is partially inside\n");
+-            ret = 0;
++            ret = -1;
+             break;
+         }
+ 
+@@ -436,18 +441,22 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+                 }
+             }
+ 
+-            ret = ((privs & *allowed_privs) == privs);
++            if ((privs & *allowed_privs) == privs) {
++                ret = i;
++            }
+             break;
+         }
+     }
+ 
+     /* No rule matched */
+     if (ret == -1) {
+-        return pmp_hart_has_privs_default(env, addr, size, privs,
+-                                          allowed_privs, mode);
++        if (pmp_hart_has_privs_default(env, addr, size, privs,
++                                       allowed_privs, mode)) {
++            ret = MAX_RISCV_PMPS;
++        }
+     }
+ 
+-    return ret == 1 ? true : false;
++    return ret;
+ }
+ 
+ /*
+@@ -586,64 +595,25 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
+  * Calculate the TLB size if the start address or the end address of
+  * PMP entry is presented in the TLB page.
+  */
+-static target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
+-                                     target_ulong tlb_sa, target_ulong tlb_ea)
++target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
++                              target_ulong tlb_sa, target_ulong tlb_ea)
+ {
+     target_ulong pmp_sa = env->pmp_state.addr[pmp_index].sa;
+     target_ulong pmp_ea = env->pmp_state.addr[pmp_index].ea;
+ 
+-    if (pmp_sa >= tlb_sa && pmp_ea <= tlb_ea) {
+-        return pmp_ea - pmp_sa + 1;
+-    }
+-
+-    if (pmp_sa >= tlb_sa && pmp_sa <= tlb_ea && pmp_ea >= tlb_ea) {
+-        return tlb_ea - pmp_sa + 1;
+-    }
+-
+-    if (pmp_ea <= tlb_ea && pmp_ea >= tlb_sa && pmp_sa <= tlb_sa) {
+-        return pmp_ea - tlb_sa + 1;
+-    }
+-
+-    return 0;
+-}
+-
+-/*
+- * Check is there a PMP entry which range covers this page. If so,
+- * try to find the minimum granularity for the TLB size.
+- */
+-bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
+-                         target_ulong *tlb_size)
+-{
+-    int i;
+-    target_ulong val;
+-    target_ulong tlb_ea = (tlb_sa + TARGET_PAGE_SIZE - 1);
+-
+-    for (i = 0; i < MAX_RISCV_PMPS; i++) {
+-        val = pmp_get_tlb_size(env, i, tlb_sa, tlb_ea);
+-        if (val) {
+-            if (*tlb_size == 0 || *tlb_size > val) {
+-                *tlb_size = val;
+-            }
+-        }
+-    }
+-
+-    if (*tlb_size != 0) {
++    if (pmp_sa <= tlb_sa && pmp_ea >= tlb_ea) {
++        return TARGET_PAGE_SIZE;
++    } else {
+         /*
+-         * At this point we have a tlb_size that is the smallest possible size
+-         * That fits within a TARGET_PAGE_SIZE and the PMP region.
+-         *
+-         * If the size is less then TARGET_PAGE_SIZE we drop the size to 1.
+-         * This means the result isn't cached in the TLB and is only used for
+-         * a single translation.
+-         */
+-        if (*tlb_size < TARGET_PAGE_SIZE) {
+-            *tlb_size = 1;
+-        }
+-
+-        return true;
++        * At this point we have a tlb_size that is the smallest possible size
++        * That fits within a TARGET_PAGE_SIZE and the PMP region.
++        *
++        * If the size is less then TARGET_PAGE_SIZE we drop the size to 1.
++        * This means the result isn't cached in the TLB and is only used for
++        * a single translation.
++        */
++        return 1;
+     }
+-
+-    return false;
+ }
+ 
+ /*
+diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+index a8dd797476..da32c61c85 100644
+--- a/target/riscv/pmp.h
++++ b/target/riscv/pmp.h
+@@ -72,11 +72,11 @@ target_ulong mseccfg_csr_read(CPURISCVState *env);
+ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
+     target_ulong val);
+ target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
+-bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
++int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+     target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
+     target_ulong mode);
+-bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
+-                         target_ulong *tlb_size);
++target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
++                              target_ulong tlb_sa, target_ulong tlb_ea);
+ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
+ void pmp_update_rule_nums(CPURISCVState *env);
+ uint32_t pmp_get_num_rules(CPURISCVState *env);
+-- 
+2.25.1
+
 
