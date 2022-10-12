@@ -1,65 +1,95 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oiO2S-0000GL-VJ
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Oct 2022 18:47:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45380)
+	id 1oiQL4-0008Ii-Fq
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Oct 2022 21:15:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41682)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oiO2O-0000E0-Qd; Tue, 11 Oct 2022 18:47:48 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:39679)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oiO2N-0002IL-Aa; Tue, 11 Oct 2022 18:47:48 -0400
-Received: by mail-pg1-x530.google.com with SMTP id b5so14020076pgb.6;
- Tue, 11 Oct 2022 15:47:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JNSFSo/tU2B/IZHtWZrE1Nhh6Knjfk3qbnOYraD9jzU=;
- b=gWFkMXh40Rtha2Cc5gSdgn+OYC/pp7aW5GenS9Iy308NBynU8eRnv0rykbhoaGC/cl
- kmzVmAqOFrZKR9yuZTa/cO3lkN2lMU493OAmQLmWnDQ1nSaBDPNgrGNKibwYlvNb5Ct+
- XpfHdWFJjZkKou+mL/Z7EWpvd/x6zzKbgtoLk9vq/GqWYoRfEoT3wUf5THY0ZKJ80f74
- lLtW/H78EujKt775ghUycLhklNaV69LgPScy9HGINsB2J2eWhRpOOBsG1KFQLdlZQH23
- LrVo/9ppro4SqWlXaHKuWn0cjB0BazxK2VlRiktHrdwtW25t3nWeuVdNB1OBYO+DO+tF
- dKxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JNSFSo/tU2B/IZHtWZrE1Nhh6Knjfk3qbnOYraD9jzU=;
- b=EKvpXyTrIH0GTmCagUr9K9cOdd9Ba76FYFnVtT0pbHJI9adjHzsyoukiYd0kzUFT1i
- phldNw7cS64txdR6ns9voXdnt8S4SQ10o/rOBnhrCNjdughXstqOtdFttJg+hYlk7SkC
- foKXFlRYcTLKexYiaP3gQ7vyeKwlkDqbMSSQ74aX5M+OtPKEgPbyYRBUx72wDPJrKgzr
- MOTiwssSN1W8MFx3Q8HA+ubfO8QDM9wyOMDSpjHsG5lHEHdQxgMQ8rWP2RNfrSpkYD9g
- zaL6PbB+ktmBEghXLlyZK1oEbvGkIUaRIjV6vxexlc3wNYQj0kcVNQQG1UE/A/OzpQXb
- RPGg==
-X-Gm-Message-State: ACrzQf30+hFeVOS1n/oL2edhn7rG2tE90oulsp5ehPPBm+5If46nZu4S
- aqwglaYPPK1xiIQgq626h7ADUgr0KDBKPwC3abc=
-X-Google-Smtp-Source: AMsMyM4CNY6SUTj2jz2+kPZPtzJsUp2pEW4iPqh/fiuz02wSR9sR4uhGSb5UNdjYM1nzizmfe4dv0DIuHGcdP+pxC08=
-X-Received: by 2002:a63:ce43:0:b0:45b:d6ed:6c2 with SMTP id
- r3-20020a63ce43000000b0045bd6ed06c2mr22698829pgi.406.1665528465803; Tue, 11
- Oct 2022 15:47:45 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=277d47975=alistair.francis@opensource.wdc.com>)
+ id 1oiQL2-0008IL-2n
+ for qemu-riscv@nongnu.org; Tue, 11 Oct 2022 21:15:12 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:23146)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=277d47975=alistair.francis@opensource.wdc.com>)
+ id 1oiQKy-00079x-UN
+ for qemu-riscv@nongnu.org; Tue, 11 Oct 2022 21:15:11 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1665537308; x=1697073308;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=+OpQTEF8UgNdGDhyzHmfDFQFjpK4Tr4WQ2QIYAH5hro=;
+ b=L6gjbCGDrlDmGQfez41/neS4V1+T0Zo+chsElI1IYvPZdIXFvEnB/vfp
+ e3ZYM9+3lwLstrL580GLTG64rto+oAukuXBfM+E5etNtJxq9BV9tia/zg
+ e4GnCmmVkzARwwitxEjVv3xBSIkKf/+uqcy4ZC9FrRDCWFuA67JDs4TKz
+ 32lDdy92sAW63yP75r11KUUmU3BlkAdNOCcvrfkvC12n1V2NLxxDWeeIl
+ VTWFL+jsdHbEPKZ67OnE8hvs2C461eV0eJZ56hZd95/ONPE30FQ4r67cQ
+ JmdRLdoOAlvXkD16AOM7UDaDgbkjKyjLcLaOr/fhJPLYTe1/25pgG3OGV A==;
+X-IronPort-AV: E=Sophos;i="5.95,177,1661788800"; d="scan'208";a="213551683"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 12 Oct 2022 09:15:02 +0800
+IronPort-SDR: 3dRLgfPo+2N2Rh46q25kE4LTWqwQu0NWxpPu0LEk0+qQrnyHBGSWg7npNFErqP0W76KlHbV+TK
+ NotjqQAlneF+QYgXnm9WcAyoyr0xseMWPrKCUGs0O36rMptgzWCY9XD5g3YJsL3Lv/CkNnWvEp
+ AbdaVQtRR4s2OjdR+bHrIPVGNxn9QbNcDRMyGcwClbOA80JTmcx3LrTT35IF+n8I6MbWMd5Wnb
+ kz7i6Ht0lhmGKyF83hWQ9KR/pk1BEpKdQM2Vn83j9RhXk5cztZjSbOpoJzDRzfgxz4S8Mw5D1A
+ CiCxxOY0vaEaz0Nme0v6HFiT
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 11 Oct 2022 17:34:41 -0700
+IronPort-SDR: MuqFldRepnMFWKTTWZ/qfXEqzcslGKxeUhVAj4ASt6DVDdf029KGP/7kkbVF3pFQAUNM51Lr0v
+ It0OyzqV/rkGYfiLyOqAjyEd1f5kax1yg3AXUWa13cpXtZFKQZip5DKy6wcdaPsHamXf5s05AS
+ u/YeK1/CEAwrY0u/sLr0pTZzklwudGXOtosysVknLRwkN0TL2ET8hsC+iA+gOXM8UnzP+mYnxZ
+ 5cKgfatl1fM0QL1P6Ij7a5BSdzPwNNLMCCrmfr2PErEiahcSC3UyCvv+V33hDjZH+7F8vLEfI4
+ Uo8=
+WDCIronportException: Internal
+Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
+ by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 11 Oct 2022 18:15:03 -0700
+Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4MnF7V3TZXz1Rwrq
+ for <qemu-riscv@nongnu.org>; Tue, 11 Oct 2022 18:15:02 -0700 (PDT)
+Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
+ reason="pass (just generated, assumed good)"
+ header.d=opensource.wdc.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ opensource.wdc.com; h=content-transfer-encoding:mime-version
+ :x-mailer:message-id:date:subject:to:from; s=dkim; t=1665537301;
+ x=1668129302; bh=+OpQTEF8UgNdGDhyzHmfDFQFjpK4Tr4WQ2QIYAH5hro=; b=
+ hwTmuvurrhYQVDftXtM7sEKbknMud5RkYlS4OHKE4PxFINccE+nzIq34sILOwf+g
+ VMFcTdEjLtw1kCfW8/4wiGx16w98IJtS7AV2beDY2+fSVGDGh20hlVz9b8Q80iJu
+ t3qHtn4Zf0c6Ge3LKJr4XvAnMwU2KWtobMPTdVvJw/+7RAZFDL+MwbWgXfsM7Ocu
+ conVN8yrD56Tnmc4AUX6JVs/RIUc5Lpo68gotBY5rSZAo1pWwLMpCr82V7uWf2SG
+ pq3XG1SQZYapf8DYub7vnkdrnSpT1POQBAt7pn5n1nD/xVsVW630O2MC4f7SuzF1
+ Neu5PJtTw0oldp87YZqEQA==
+X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
+Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
+ by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
+ port 10026) with ESMTP id VrVLv8EoPwKs for <qemu-riscv@nongnu.org>;
+ Tue, 11 Oct 2022 18:15:01 -0700 (PDT)
+Received: from toolbox.wdc.com (unknown [10.225.167.19])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4MnF7Q30FYz1RvLy;
+ Tue, 11 Oct 2022 18:14:57 -0700 (PDT)
+From: Alistair Francis <alistair.francis@opensource.wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com, richard.henderson@linaro.org
+Subject: [PATCH] target/riscv: pmp: Fixup TLB size calculation
+Date: Wed, 12 Oct 2022 11:14:49 +1000
+Message-Id: <20221012011449.506928-1-alistair.francis@opensource.wdc.com>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-References: <20221003041440.2320-1-jim.shu@sifive.com>
-In-Reply-To: <20221003041440.2320-1-jim.shu@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 12 Oct 2022 08:47:19 +1000
-Message-ID: <CAKmqyKPz6TK0H3erMChb-PNB4Vtiu8-W3QY+H7BiemPN+QkMeg@mail.gmail.com>
-Subject: Re: [PATCH v3 0/2] Enhance maximum priority support of PLIC
-To: Jim Shu <jim.shu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, chigot@adacore.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x530.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=216.71.153.144;
+ envelope-from=prvs=277d47975=alistair.francis@opensource.wdc.com;
+ helo=esa5.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -73,38 +103,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Oct 2022 22:47:49 -0000
+X-List-Received-Date: Wed, 12 Oct 2022 01:15:12 -0000
 
-On Mon, Oct 3, 2022 at 2:18 PM Jim Shu <jim.shu@sifive.com> wrote:
->
-> This patchset fixes hard-coded maximum priority of interrupt priority
-> register and also changes this register to WARL field to align the PLIC
-> spec.
->
-> Changelog:
->
-> v3:
->   * fix opposite of power-of-2 max priority checking expression.
->
-> v2:
->   * change interrupt priority register to WARL field.
->
-> Jim Shu (2):
->   hw/intc: sifive_plic: fix hard-coded max priority level
->   hw/intc: sifive_plic: change interrupt priority register to WARL field
+From: Alistair Francis <alistair.francis@wdc.com>
 
-Thanks!
+Since commit 4047368938f6 "accel/tcg: Introduce tlb_set_page_full" we
+have been seeing this assert
 
-Applied to riscv-to-apply.next
+    ../accel/tcg/cputlb.c:1294: tlb_set_page_with_attrs: Assertion `is_po=
+wer_of_2(size)' failed.
 
-Alistair
+When running Tock on the OpenTitan machine.
 
->
->  hw/intc/sifive_plic.c | 25 ++++++++++++++++++++++---
->  1 file changed, 22 insertions(+), 3 deletions(-)
->
-> --
-> 2.17.1
->
->
+The issue is that pmp_get_tlb_size() would return a TLB size that wasn't
+a power of 2. The size was also smaller then TARGET_PAGE_SIZE.
+
+This patch ensures that any TLB size less then TARGET_PAGE_SIZE is
+rounded down to 1 to ensure it's a valid size.
+
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+This is based on advice from Richard:
+https://patchwork.kernel.org/project/qemu-devel/patch/20221004141051.1106=
+53-9-richard.henderson@linaro.org/#25043166
+
+ target/riscv/pmp.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index ea2b67d947..2b43e399b8 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -628,6 +628,18 @@ bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr =
+tlb_sa,
+     }
+=20
+     if (*tlb_size !=3D 0) {
++        /*
++         * At this point we have a tlb_size that is the smallest possibl=
+e size
++         * That fits within a TARGET_PAGE_SIZE and the PMP region.
++         *
++         * If the size is less then TARGET_PAGE_SIZE we drop the size to=
+ 1.
++         * This means the result isn't cached in the TLB and is only use=
+d for
++         * a single translation.
++         */
++        if (*tlb_size < TARGET_PAGE_SIZE) {
++            *tlb_size =3D 1;
++        }
++
+         return true;
+     }
+=20
+--=20
+2.37.3
+
 
