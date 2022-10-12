@@ -1,42 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oiUnV-0004qC-EI
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Oct 2022 02:00:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50200)
+	id 1oiUrR-00074Z-MQ
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Oct 2022 02:04:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49210)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1oiUnJ-0004mJ-0u; Wed, 12 Oct 2022 02:00:43 -0400
-Received: from out30-57.freemail.mail.aliyun.com ([115.124.30.57]:39465)
+ id 1oiUrI-00072R-AE; Wed, 12 Oct 2022 02:04:51 -0400
+Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131]:34840)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1oiUn5-00070s-Jv; Wed, 12 Oct 2022 02:00:30 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R911e4; CH=green; DM=||false|;
+ id 1oiUr5-0007NK-2U; Wed, 12 Oct 2022 02:04:37 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
  DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=6; SR=0;
- TI=SMTPD_---0VS-Gtii_1665554418; 
-Received: from
- roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VS-Gtii_1665554418) by smtp.aliyun-inc.com;
- Wed, 12 Oct 2022 14:00:19 +0800
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH] target/riscv: Fix PMP propagation for tlb
-Date: Wed, 12 Oct 2022 14:00:16 +0800
-Message-Id: <20221012060016.30856-1-zhiwei_liu@linux.alibaba.com>
-X-Mailer: git-send-email 2.25.1
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
+ TI=SMTPD_---0VS-WcGO_1665554666; 
+Received: from 30.221.98.87(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VS-WcGO_1665554666) by smtp.aliyun-inc.com;
+ Wed, 12 Oct 2022 14:04:27 +0800
+Message-ID: <582d408f-fe54-8954-854d-d3d46d2247d6@linux.alibaba.com>
+Date: Wed, 12 Oct 2022 14:04:25 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.2
+Subject: Re: [PATCH] target/riscv: pmp: Fixup TLB size calculation
+Content-Language: en-US
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <alistair.francis@opensource.wdc.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, bmeng.cn@gmail.com,
+ palmer@dabbelt.com, alistair.francis@wdc.com, richard.henderson@linaro.org
+References: <20221012011449.506928-1-alistair.francis@opensource.wdc.com>
+ <8ac0e17f-b902-6553-acdb-6ec0c4bfafab@linux.alibaba.com>
+ <CAKmqyKOCXPCK7U5ro09X4sw68YeEbprUH193VZL-traezH+nBg@mail.gmail.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <CAKmqyKOCXPCK7U5ro09X4sw68YeEbprUH193VZL-traezH+nBg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.57;
+Received-SPF: pass client-ip=115.124.30.131;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-57.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001,
+ helo=out30-131.freemail.mail.aliyun.com
+X-Spam_score_int: -127
+X-Spam_score: -12.8
+X-Spam_bar: ------------
+X-Spam_report: (-12.8 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-2.934, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
  USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -50,235 +56,89 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2022 06:00:50 -0000
+X-List-Received-Date: Wed, 12 Oct 2022 06:04:52 -0000
 
-Only the pmp index that be checked by pmp_hart_has_privs can be used
-by pmp_get_tlb_size to avoid an error pmp index.
 
-Before modification, we may use an error pmp index. For example,
-we check address 0x4fc, and the size 0x4 in pmp_hart_has_privs. If there
-is an pmp rule, valid range is [0x4fc, 0x500), then pmp_hart_has_privs
-will return true;
+On 2022/10/12 11:09, Alistair Francis wrote:
+> On Wed, Oct 12, 2022 at 12:50 PM LIU Zhiwei
+> <zhiwei_liu@linux.alibaba.com> wrote:
+>> Reviewed-by: LIU Zhiwei<zhiwei_liu@linux.alibaba.com>
+> Thanks!
+>
+>> By the way, we missed one related patch that once had been picked to riscv-next patch.
+>>
+>> The patch v3:
+>> https://lore.kernel.org/all/ceeb4037-6d17-0a09-f35a-eaf3280339bb@c-sky.com/T/#m183e4430bda408bc3a2b2751aa94eff7fc02e23c
+> So this was applied but caused boot failures so it was dropped from my
+> RISC-V tree
+>
+>> The patch v4:
+>> https://lists.gnu.org/archive/html/qemu-devel/2021-12/msg02854.html
+> I think I misunderstood this comment [1] as applying to v4 and it
+> never got applied.
+>
+> Do you mind resending the patch?
 
-However, this checked pmp index is discarded as pmp_hart_has_privs
-return bool value. In pmp_is_range_in_tlb, it will traverse all pmp
-rules. The tlb_sa will be 0x0, and tlb_ea will be 0xfff. If there is
-a pmp rule [0x10, 0x14), it will be misused as it is legal in
-pmp_get_tlb_size.
+Sure. I have  rebased it to your patch and sent it to the mail list.
 
-As we have already known the correct pmp index, just remove the
-remove the pmp_is_range_in_tlb and get tlb size directly from
-pmp_get_tlb_size.
+Thanks,
+Zhiwei
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
----
- target/riscv/cpu_helper.c | 16 ++++---
- target/riscv/pmp.c        | 90 +++++++++++++--------------------------
- target/riscv/pmp.h        |  6 +--
- 3 files changed, 42 insertions(+), 70 deletions(-)
-
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 278d163803..5d66246c2c 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -706,24 +706,26 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
-                                     int mode)
- {
-     pmp_priv_t pmp_priv;
--    target_ulong tlb_size_pmp = 0;
-+    int pmp_index = -1;
- 
-     if (!riscv_feature(env, RISCV_FEATURE_PMP)) {
-         *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
-         return TRANSLATE_SUCCESS;
-     }
- 
--    if (!pmp_hart_has_privs(env, addr, size, 1 << access_type, &pmp_priv,
--                            mode)) {
-+    pmp_index = pmp_hart_has_privs(env, addr, size, 1 << access_type,
-+                                   &pmp_priv, mode);
-+    if (pmp_index < 0) {
-         *prot = 0;
-         return TRANSLATE_PMP_FAIL;
-     }
- 
-     *prot = pmp_priv_to_page_prot(pmp_priv);
--    if (tlb_size != NULL) {
--        if (pmp_is_range_in_tlb(env, addr & ~(*tlb_size - 1), &tlb_size_pmp)) {
--            *tlb_size = tlb_size_pmp;
--        }
-+    if ((tlb_size != NULL) && pmp_index != MAX_RISCV_PMPS) {
-+        target_ulong tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
-+        target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
-+
-+        *tlb_size = pmp_get_tlb_size(env, pmp_index, tlb_sa, tlb_ea);
-     }
- 
-     return TRANSLATE_SUCCESS;
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 2b43e399b8..d1126a6066 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -292,8 +292,11 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
- 
- /*
-  * Check if the address has required RWX privs to complete desired operation
-+ * Return PMP rule index if a pmp rule match
-+ * Return MAX_RISCV_PMPS if default match
-+ * Return negtive value if no match
-  */
--bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-+int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-     target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
-     target_ulong mode)
- {
-@@ -305,8 +308,10 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
- 
-     /* Short cut if no rules */
-     if (0 == pmp_get_num_rules(env)) {
--        return pmp_hart_has_privs_default(env, addr, size, privs,
--                                          allowed_privs, mode);
-+        if (pmp_hart_has_privs_default(env, addr, size, privs,
-+                                       allowed_privs, mode)) {
-+            ret = MAX_RISCV_PMPS;
-+        }
-     }
- 
-     if (size == 0) {
-@@ -333,7 +338,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-         if ((s + e) == 1) {
-             qemu_log_mask(LOG_GUEST_ERROR,
-                           "pmp violation - access is partially inside\n");
--            ret = 0;
-+            ret = -1;
-             break;
-         }
- 
-@@ -436,18 +441,22 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-                 }
-             }
- 
--            ret = ((privs & *allowed_privs) == privs);
-+            if ((privs & *allowed_privs) == privs) {
-+                ret = i;
-+            }
-             break;
-         }
-     }
- 
-     /* No rule matched */
-     if (ret == -1) {
--        return pmp_hart_has_privs_default(env, addr, size, privs,
--                                          allowed_privs, mode);
-+        if (pmp_hart_has_privs_default(env, addr, size, privs,
-+                                       allowed_privs, mode)) {
-+            ret = MAX_RISCV_PMPS;
-+        }
-     }
- 
--    return ret == 1 ? true : false;
-+    return ret;
- }
- 
- /*
-@@ -586,64 +595,25 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
-  * Calculate the TLB size if the start address or the end address of
-  * PMP entry is presented in the TLB page.
-  */
--static target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
--                                     target_ulong tlb_sa, target_ulong tlb_ea)
-+target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
-+                              target_ulong tlb_sa, target_ulong tlb_ea)
- {
-     target_ulong pmp_sa = env->pmp_state.addr[pmp_index].sa;
-     target_ulong pmp_ea = env->pmp_state.addr[pmp_index].ea;
- 
--    if (pmp_sa >= tlb_sa && pmp_ea <= tlb_ea) {
--        return pmp_ea - pmp_sa + 1;
--    }
--
--    if (pmp_sa >= tlb_sa && pmp_sa <= tlb_ea && pmp_ea >= tlb_ea) {
--        return tlb_ea - pmp_sa + 1;
--    }
--
--    if (pmp_ea <= tlb_ea && pmp_ea >= tlb_sa && pmp_sa <= tlb_sa) {
--        return pmp_ea - tlb_sa + 1;
--    }
--
--    return 0;
--}
--
--/*
-- * Check is there a PMP entry which range covers this page. If so,
-- * try to find the minimum granularity for the TLB size.
-- */
--bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
--                         target_ulong *tlb_size)
--{
--    int i;
--    target_ulong val;
--    target_ulong tlb_ea = (tlb_sa + TARGET_PAGE_SIZE - 1);
--
--    for (i = 0; i < MAX_RISCV_PMPS; i++) {
--        val = pmp_get_tlb_size(env, i, tlb_sa, tlb_ea);
--        if (val) {
--            if (*tlb_size == 0 || *tlb_size > val) {
--                *tlb_size = val;
--            }
--        }
--    }
--
--    if (*tlb_size != 0) {
-+    if (pmp_sa <= tlb_sa && pmp_ea >= tlb_ea) {
-+        return TARGET_PAGE_SIZE;
-+    } else {
-         /*
--         * At this point we have a tlb_size that is the smallest possible size
--         * That fits within a TARGET_PAGE_SIZE and the PMP region.
--         *
--         * If the size is less then TARGET_PAGE_SIZE we drop the size to 1.
--         * This means the result isn't cached in the TLB and is only used for
--         * a single translation.
--         */
--        if (*tlb_size < TARGET_PAGE_SIZE) {
--            *tlb_size = 1;
--        }
--
--        return true;
-+        * At this point we have a tlb_size that is the smallest possible size
-+        * That fits within a TARGET_PAGE_SIZE and the PMP region.
-+        *
-+        * If the size is less then TARGET_PAGE_SIZE we drop the size to 1.
-+        * This means the result isn't cached in the TLB and is only used for
-+        * a single translation.
-+        */
-+        return 1;
-     }
--
--    return false;
- }
- 
- /*
-diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-index a8dd797476..da32c61c85 100644
---- a/target/riscv/pmp.h
-+++ b/target/riscv/pmp.h
-@@ -72,11 +72,11 @@ target_ulong mseccfg_csr_read(CPURISCVState *env);
- void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
-     target_ulong val);
- target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
--bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-+int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-     target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
-     target_ulong mode);
--bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
--                         target_ulong *tlb_size);
-+target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
-+                              target_ulong tlb_sa, target_ulong tlb_ea);
- void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
- void pmp_update_rule_nums(CPURISCVState *env);
- uint32_t pmp_get_num_rules(CPURISCVState *env);
--- 
-2.25.1
-
+>
+> 1: https://lore.kernel.org/all/ceeb4037-6d17-0a09-f35a-eaf3280339bb@c-sky.com/T/#m5e958d702d9905169a941f2ae59fdf7ac4a02383
+>
+> Alistair
+>
+>> I think the patch v4 should be taken at the same time with this patch.
+>>
+>> Thanks,
+>> Zhiwei
+>>
+>> On 2022/10/12 9:14, Alistair Francis wrote:
+>>> From: Alistair Francis <alistair.francis@wdc.com>
+>>>
+>>> Since commit 4047368938f6 "accel/tcg: Introduce tlb_set_page_full" we
+>>> have been seeing this assert
+>>>
+>>>       ../accel/tcg/cputlb.c:1294: tlb_set_page_with_attrs: Assertion `is_power_of_2(size)' failed.
+>>>
+>>> When running Tock on the OpenTitan machine.
+>>>
+>>> The issue is that pmp_get_tlb_size() would return a TLB size that wasn't
+>>> a power of 2. The size was also smaller then TARGET_PAGE_SIZE.
+>>>
+>>> This patch ensures that any TLB size less then TARGET_PAGE_SIZE is
+>>> rounded down to 1 to ensure it's a valid size.
+>>>
+>>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+>>> ---
+>>> This is based on advice from Richard:
+>>> https://patchwork.kernel.org/project/qemu-devel/patch/20221004141051.110653-9-richard.henderson@linaro.org/#25043166
+>>>
+>>>    target/riscv/pmp.c | 12 ++++++++++++
+>>>    1 file changed, 12 insertions(+)
+>>>
+>>> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+>>> index ea2b67d947..2b43e399b8 100644
+>>> --- a/target/riscv/pmp.c
+>>> +++ b/target/riscv/pmp.c
+>>> @@ -628,6 +628,18 @@ bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
+>>>        }
+>>>
+>>>        if (*tlb_size != 0) {
+>>> +        /*
+>>> +         * At this point we have a tlb_size that is the smallest possible size
+>>> +         * That fits within a TARGET_PAGE_SIZE and the PMP region.
+>>> +         *
+>>> +         * If the size is less then TARGET_PAGE_SIZE we drop the size to 1.
+>>> +         * This means the result isn't cached in the TLB and is only used for
+>>> +         * a single translation.
+>>> +         */
+>>> +        if (*tlb_size < TARGET_PAGE_SIZE) {
+>>> +            *tlb_size = 1;
+>>> +        }
+>>> +
+>>>            return true;
+>>>        }
+>>>
 
