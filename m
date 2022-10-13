@@ -1,49 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oiUrR-00074Z-MQ
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Oct 2022 02:04:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49210)
+	id 1oiqZw-0008S5-Ul
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Oct 2022 01:16:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45140)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1oiUrI-00072R-AE; Wed, 12 Oct 2022 02:04:51 -0400
-Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131]:34840)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1oiUr5-0007NK-2U; Wed, 12 Oct 2022 02:04:37 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0VS-WcGO_1665554666; 
-Received: from 30.221.98.87(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VS-WcGO_1665554666) by smtp.aliyun-inc.com;
- Wed, 12 Oct 2022 14:04:27 +0800
-Message-ID: <582d408f-fe54-8954-854d-d3d46d2247d6@linux.alibaba.com>
-Date: Wed, 12 Oct 2022 14:04:25 +0800
+ (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
+ id 1oiqZr-0008Qo-Os
+ for qemu-riscv@nongnu.org; Thu, 13 Oct 2022 01:16:16 -0400
+Received: from mail-vk1-xa33.google.com ([2607:f8b0:4864:20::a33]:43827)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
+ id 1oiqZf-000131-8r
+ for qemu-riscv@nongnu.org; Thu, 13 Oct 2022 01:16:15 -0400
+Received: by mail-vk1-xa33.google.com with SMTP id g85so292220vkf.10
+ for <qemu-riscv@nongnu.org>; Wed, 12 Oct 2022 22:16:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=to:from:cc:content-transfer-encoding:mime-version:date:message-id
+ :subject:references:in-reply-to:from:to:cc:subject:date:message-id
+ :reply-to; bh=8jjzSbquCGIpZBdOT7nOgHDr2hdlUw8WRIsF1vsL4Nk=;
+ b=UKqxWkfM/aMOqDYiA3dhhALbROWYdi3V8SUNyNVkCs0PTqmV52wr8cxoold1Ip2j70
+ njd8Rq9HVQ1M6N4IJJj3lh1ZGnFJekZ0LqTJYq6odww9cAWdgqs8aNs1BwLvtH2jD68a
+ UFjMmiUXXyDntoXChizYt9EfaT+oVLKmOQrS4H/IxbGj4yu6QhHnDV4Tb0tbIhMOZBGq
+ +XB4Gw4YMwWBqMDS7PeTnlVTsqil42mhqHIDek3b4/uJC8SDS2x1yRWenHwmrpyxl482
+ 6tnDZ8GmiKAI6/wm4fXhUTwSXyfg6J6T+cS8eWTeM7dAmkh9ScweSoudEiHi21BFahja
+ MTNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=to:from:cc:content-transfer-encoding:mime-version:date:message-id
+ :subject:references:in-reply-to:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8jjzSbquCGIpZBdOT7nOgHDr2hdlUw8WRIsF1vsL4Nk=;
+ b=Zj9F/RY9MVL9YdBJHuTA/3h++JmDmi5unPnGDccvBlCXQdVcwZkSseKTx/O+MGii/1
+ 0PzBruMSegBlbPa3VgX3y8oFb6mkHe7ih6cjBCdnp3xGeqDMVb8HEhSi+ESa8Il5hB+v
+ SIeIT91oVIcUD0iJj9MeOBagWcuqYChv0ehgT/Ax4EQtNNixGPle02uiu7FLLUUulm43
+ s1kJeI1bGSSaIZB6bED2qRd6v5sQ2oFLiZ9VzL2N4/3q70gNP1UebKPOuobLbKe1ishV
+ NiIc4hilQ1rw4kdSTr0Y5R967CUYZ7OwueojStEskvJKvZmDqQTRYTyP0NzR8JvWHkyY
+ 676w==
+X-Gm-Message-State: ACrzQf1C0L2pkPJtOgRPSk+iXWEYtxdCaXsj6xcCTB6dOFUE7jOxmPb9
+ AHi9Oslv4TG7Oco0Je/TNj8rjP2DzOz5KY78
+X-Google-Smtp-Source: AMsMyM7n13PJvUAYFtfq5Tw2ZISk2AiYMgqsFCw4SHVk4/QZn3nYBJI6UNk4g+wo3EqfDTnMhqMd4w==
+X-Received: by 2002:a17:902:ef51:b0:180:7922:ce40 with SMTP id
+ e17-20020a170902ef5100b001807922ce40mr28773522plx.8.1665638149701; 
+ Wed, 12 Oct 2022 22:15:49 -0700 (PDT)
+Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
+ 24-20020a631558000000b0045feab454f6sm8632449pgv.51.2022.10.12.22.15.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 12 Oct 2022 22:15:49 -0700 (PDT)
+In-Reply-To: <20220823183319.3314940-1-mail@conchuod.ie>
+References: <20220823183319.3314940-1-mail@conchuod.ie>
+Subject: Re: (subset) [PATCH v4 0/4] Fix dt-validate issues on qemu dtbdumps
+ due to dt-bindings
+Message-Id: <166563815015.20405.16941289599227550003.b4-ty@rivosinc.com>
+Date: Wed, 12 Oct 2022 22:15:50 -0700
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.2
-Subject: Re: [PATCH] target/riscv: pmp: Fixup TLB size calculation
-Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <alistair.francis@opensource.wdc.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, bmeng.cn@gmail.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, richard.henderson@linaro.org
-References: <20221012011449.506928-1-alistair.francis@opensource.wdc.com>
- <8ac0e17f-b902-6553-acdb-6ec0c4bfafab@linux.alibaba.com>
- <CAKmqyKOCXPCK7U5ro09X4sw68YeEbprUH193VZL-traezH+nBg@mail.gmail.com>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <CAKmqyKOCXPCK7U5ro09X4sw68YeEbprUH193VZL-traezH+nBg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.131;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-131.freemail.mail.aliyun.com
-X-Spam_score_int: -127
-X-Spam_score: -12.8
-X-Spam_bar: ------------
-X-Spam_report: (-12.8 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-2.934, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+X-Mailer: b4 0.11.0-dev-2a85d
+Cc: Conor Dooley <conor.dooley@microchip.com>, linux-riscv@lists.infradead.org,
+ Guo Ren <guoren@kernel.org>, Jessica Clarke <jrtc27@jrtc27.com>,
+ Anup Patel <anup@brainfault.org>, 
+ Daniel Lezcano <daniel.lezcano@linaro.org>, linux-kernel@vger.kernel.org,
+ Andrew Jones <ajones@ventanamicro.com>, 
+ Sagar Kadam <sagar.kadam@sifive.com>, qemu-riscv@nongnu.org,
+ devicetree@vger.kernel.org
+From: Palmer Dabbelt <palmer@rivosinc.com>
+To: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Conor Dooley <mail@conchuod.ie>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Albert Ou <aou@eecs.berkeley.edu>, 
+ Rob Herring <robh+dt@kernel.org>, Marc Zyngier <maz@kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>, 
+ Paul Walmsley <paul.walmsley@sifive.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a33;
+ envelope-from=palmer@rivosinc.com; helo=mail-vk1-xa33.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -56,89 +90,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2022 06:04:52 -0000
+X-List-Received-Date: Thu, 13 Oct 2022 05:16:16 -0000
 
+On Tue, 23 Aug 2022 19:33:16 +0100, Conor Dooley wrote:
+> From: Conor Dooley <conor.dooley@microchip.com>
+> 
+> The device trees produced automatically for the virt and spike machines
+> fail dt-validate on several grounds. Some of these need to be fixed in
+> the linux kernel's dt-bindings, but others are caused by bugs in QEMU.
+> 
+> Patches been sent that fix the QEMU issues [0], but a couple of them
+> need to be fixed in the kernel's dt-bindings. The first patches add
+> compatibles for "riscv,{clint,plic}0" which are present in drivers and
+> the auto generated QEMU dtbs. The final patch should be ignored for all
+> serious purposes unless you want to wash your eyes out afterwards, but
+> JIC the versioned extensions ever come up, it's there.
+> 
+> [...]
 
-On 2022/10/12 11:09, Alistair Francis wrote:
-> On Wed, Oct 12, 2022 at 12:50 PM LIU Zhiwei
-> <zhiwei_liu@linux.alibaba.com> wrote:
->> Reviewed-by: LIU Zhiwei<zhiwei_liu@linux.alibaba.com>
-> Thanks!
->
->> By the way, we missed one related patch that once had been picked to riscv-next patch.
->>
->> The patch v3:
->> https://lore.kernel.org/all/ceeb4037-6d17-0a09-f35a-eaf3280339bb@c-sky.com/T/#m183e4430bda408bc3a2b2751aa94eff7fc02e23c
-> So this was applied but caused boot failures so it was dropped from my
-> RISC-V tree
->
->> The patch v4:
->> https://lists.gnu.org/archive/html/qemu-devel/2021-12/msg02854.html
-> I think I misunderstood this comment [1] as applying to v4 and it
-> never got applied.
->
-> Do you mind resending the patch?
+Applied, thanks!
 
-Sure. I have  rebased it to your patch and sent it to the mail list.
+[1/4] dt-bindings: timer: sifive,clint: add legacy riscv compatible
+      https://git.kernel.org/palmer/c/826249942679
+[2/4] dt-bindings: interrupt-controller: sifive,plic: add legacy riscv compatible
+      https://git.kernel.org/palmer/c/6e965c9bd738
+[3/4] dt-bindings: riscv: add new riscv,isa strings for emulators
+      https://git.kernel.org/palmer/c/299824e68bd0
 
-Thanks,
-Zhiwei
-
->
-> 1: https://lore.kernel.org/all/ceeb4037-6d17-0a09-f35a-eaf3280339bb@c-sky.com/T/#m5e958d702d9905169a941f2ae59fdf7ac4a02383
->
-> Alistair
->
->> I think the patch v4 should be taken at the same time with this patch.
->>
->> Thanks,
->> Zhiwei
->>
->> On 2022/10/12 9:14, Alistair Francis wrote:
->>> From: Alistair Francis <alistair.francis@wdc.com>
->>>
->>> Since commit 4047368938f6 "accel/tcg: Introduce tlb_set_page_full" we
->>> have been seeing this assert
->>>
->>>       ../accel/tcg/cputlb.c:1294: tlb_set_page_with_attrs: Assertion `is_power_of_2(size)' failed.
->>>
->>> When running Tock on the OpenTitan machine.
->>>
->>> The issue is that pmp_get_tlb_size() would return a TLB size that wasn't
->>> a power of 2. The size was also smaller then TARGET_PAGE_SIZE.
->>>
->>> This patch ensures that any TLB size less then TARGET_PAGE_SIZE is
->>> rounded down to 1 to ensure it's a valid size.
->>>
->>> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
->>> ---
->>> This is based on advice from Richard:
->>> https://patchwork.kernel.org/project/qemu-devel/patch/20221004141051.110653-9-richard.henderson@linaro.org/#25043166
->>>
->>>    target/riscv/pmp.c | 12 ++++++++++++
->>>    1 file changed, 12 insertions(+)
->>>
->>> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
->>> index ea2b67d947..2b43e399b8 100644
->>> --- a/target/riscv/pmp.c
->>> +++ b/target/riscv/pmp.c
->>> @@ -628,6 +628,18 @@ bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
->>>        }
->>>
->>>        if (*tlb_size != 0) {
->>> +        /*
->>> +         * At this point we have a tlb_size that is the smallest possible size
->>> +         * That fits within a TARGET_PAGE_SIZE and the PMP region.
->>> +         *
->>> +         * If the size is less then TARGET_PAGE_SIZE we drop the size to 1.
->>> +         * This means the result isn't cached in the TLB and is only used for
->>> +         * a single translation.
->>> +         */
->>> +        if (*tlb_size < TARGET_PAGE_SIZE) {
->>> +            *tlb_size = 1;
->>> +        }
->>> +
->>>            return true;
->>>        }
->>>
+Best regards,
+-- 
+Palmer Dabbelt <palmer@rivosinc.com>
 
