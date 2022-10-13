@@ -1,48 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oirqO-0002Vw-PA
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Oct 2022 02:37:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56590)
+	id 1oj2ld-00022T-9u
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Oct 2022 14:17:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59248)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1oirqG-0002Rr-DU; Thu, 13 Oct 2022 02:37:17 -0400
-Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131]:60457)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1oirqD-0004L2-FN; Thu, 13 Oct 2022 02:37:15 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046050;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=11; SR=0;
- TI=SMTPD_---0VS2XrPN_1665642714; 
-Received: from
- roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VS2XrPN_1665642714) by smtp.aliyun-inc.com;
- Thu, 13 Oct 2022 14:31:55 +0800
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- sergey.matyukevich@syntacore.com, vladimir.isaev@syntacore.com,
- anatoly.parshintsev@syntacore.com, philipp.tomsich@vrull.eu,
- zhiwei_liu@c-sky.com, LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v1 4/4] target/riscv: Add itrigger_enabled field to
- CPURISCVState
-Date: Thu, 13 Oct 2022 14:29:46 +0800
-Message-Id: <20221013062946.7530-5-zhiwei_liu@linux.alibaba.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221013062946.7530-1-zhiwei_liu@linux.alibaba.com>
-References: <20221013062946.7530-1-zhiwei_liu@linux.alibaba.com>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1oj2lS-00020h-5n
+ for qemu-riscv@nongnu.org; Thu, 13 Oct 2022 14:17:07 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629]:38697)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1oj2lP-0006Xi-Nj
+ for qemu-riscv@nongnu.org; Thu, 13 Oct 2022 14:17:01 -0400
+Received: by mail-pl1-x629.google.com with SMTP id o21so131687ple.5
+ for <qemu-riscv@nongnu.org>; Thu, 13 Oct 2022 11:16:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=iJeu/I31b6hVJSCC8AsqCZpMYRa3PtYLoTet6p+YpGA=;
+ b=Vg0t8Y+Lk4K08y5s/mQwgRn09L5i2n5Hu0BzO3XPZxsMLTK+dNB3SAgubXXR4/CKwX
+ shc6ZQ396q9FVtx3mzGNz99rnuORtt4xCUYUeSaGgUoRthUun1mklJjF0M5kHJuH0rq0
+ rRC6F10QGU2Gaf9+fJmTu9dPYWxITE7QBJE7+Vxnj/yWlXmI2WHUX0Vhj8Bxgb9uCCeO
+ ART45ttbn4sgjmwvnFwBNrFN8fDwIHvMInSDt8OGfuhCRYcVxQ73S4mdT38Upl7tUGXH
+ ADIA5PjkImRfK+UTLgjN0XGyfoUgG23FZQEJ2MSxxRolej7aNkhK7KvTVcVJ/Xvj6NX4
+ UpWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=iJeu/I31b6hVJSCC8AsqCZpMYRa3PtYLoTet6p+YpGA=;
+ b=vNCt/wI/DYTQ4JZWq3IwBFh9+GIzT1nRCtbUgGdiHYEjHulBuBRvHXENwMaPz+P6yb
+ VXGUA98kHOoVsS4fpuDNRM8sH61vLybzOiLSsFYtyYdMw24AwFVxJUeTwzZGFtRSYbQ8
+ Ji/VONMU8NjAv4zdYevatMC99zn0ztaD6NkmR7XxZqJQ+H9edoJMCaoPW+iJofGBUtnh
+ V0QyvGqzT6uxwlvvOi+r4cMdbn9xdorkmEZJtK79/ESozFfzXP76vzVhc5QvxIy+pe8H
+ wmOnhdJraNiqKTBnFAgjnN4H01cShRUIUQEzQ4WomiWpM7MZCIp8u2eL7NmzJIYcDycv
+ MV7g==
+X-Gm-Message-State: ACrzQf3BBzzO3xLvhergVuNl67Nzx3gjjhQDtFzKssfEnaYgz9qUOs/D
+ ZcsEqhGRUrB23USgd86JyO/AZA==
+X-Google-Smtp-Source: AMsMyM66stNhRsBtUyVzFhSvI2TTHt8VWE7GxQAVdBYYa2xp8Cg9Flhi5C9u1LOSEeaeAIueuW3o4w==
+X-Received: by 2002:a17:902:c952:b0:184:ba4f:af39 with SMTP id
+ i18-20020a170902c95200b00184ba4faf39mr1167159pla.58.1665685018156; 
+ Thu, 13 Oct 2022 11:16:58 -0700 (PDT)
+Received: from [10.1.28.222] (110-175-13-142.static.tpgi.com.au.
+ [110.175.13.142]) by smtp.gmail.com with ESMTPSA id
+ b124-20020a62cf82000000b00562b752b38asm6734pfg.145.2022.10.13.11.16.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 13 Oct 2022 11:16:57 -0700 (PDT)
+Message-ID: <24a38a9e-b8e3-9076-8e5e-05b24ada5e34@linaro.org>
+Date: Fri, 14 Oct 2022 05:16:50 +1100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.131;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-131.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+Subject: Re: [PATCH] target/riscv: pmp: Fixup TLB size calculation
+Content-Language: en-US
+To: Alistair Francis <alistair.francis@opensource.wdc.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com
+References: <20221012011449.506928-1-alistair.francis@opensource.wdc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20221012011449.506928-1-alistair.francis@opensource.wdc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x629.google.com
+X-Spam_score_int: -33
+X-Spam_score: -3.4
+X-Spam_bar: ---
+X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.25,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -55,107 +84,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2022 06:37:20 -0000
+X-List-Received-Date: Thu, 13 Oct 2022 18:17:11 -0000
 
-Avoid calling riscv_itrigger_enabled() when calculate the tbflags.
-As the itrigger enable status can only be changed when write
-tdata1, migration load or itrigger fire, update env->itrigger_enabled
-at these places.
+On 10/12/22 18:14, Alistair Francis wrote:
+> From: Alistair Francis<alistair.francis@wdc.com>
+> 
+> Since commit 4047368938f6 "accel/tcg: Introduce tlb_set_page_full" we
+> have been seeing this assert
+> 
+>      ../accel/tcg/cputlb.c:1294: tlb_set_page_with_attrs: Assertion `is_power_of_2(size)' failed.
+> 
+> When running Tock on the OpenTitan machine.
+> 
+> The issue is that pmp_get_tlb_size() would return a TLB size that wasn't
+> a power of 2. The size was also smaller then TARGET_PAGE_SIZE.
+> 
+> This patch ensures that any TLB size less then TARGET_PAGE_SIZE is
+> rounded down to 1 to ensure it's a valid size.
+> 
+> Signed-off-by: Alistair Francis<alistair.francis@wdc.com>
+> ---
+> This is based on advice from Richard:
+> https://patchwork.kernel.org/project/qemu-devel/patch/20221004141051.110653-9-richard.henderson@linaro.org/#25043166
+> 
+>   target/riscv/pmp.c | 12 ++++++++++++
+>   1 file changed, 12 insertions(+)
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
----
- target/riscv/cpu.h        |  1 +
- target/riscv/cpu_helper.c |  3 +--
- target/riscv/debug.c      |  3 +++
- target/riscv/machine.c    | 15 +++++++++++++++
- 4 files changed, 20 insertions(+), 2 deletions(-)
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 13ca0f20ae..44499df9da 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -331,6 +331,7 @@ struct CPUArchState {
-     struct CPUWatchpoint *cpu_watchpoint[RV_MAX_TRIGGERS];
-     QEMUTimer *itrigger_timer[RV_MAX_TRIGGERS];
-     int64_t last_icount;
-+    bool itrigger_enabled;
- 
-     /* machine specific rdtime callback */
-     uint64_t (*rdtime_fn)(void *);
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 7d8089b218..95c766aec0 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -106,8 +106,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-                            get_field(env->mstatus_hs, MSTATUS_VS));
-     }
-     if (riscv_feature(env, RISCV_FEATURE_DEBUG) && !icount_enabled()) {
--        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER,
--                           riscv_itrigger_enabled(env));
-+        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
-     }
- #endif
- 
-diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-index db7745d4a3..2c0c8b18db 100644
---- a/target/riscv/debug.c
-+++ b/target/riscv/debug.c
-@@ -565,6 +565,7 @@ void helper_itrigger_match(CPURISCVState *env)
-         }
-         itrigger_set_count(env, i, count--);
-         if (!count) {
-+            env->itrigger_enabled = riscv_itrigger_enabled(env);
-             do_trigger_action(env, i);
-         }
-     }
-@@ -662,6 +663,8 @@ static void itrigger_reg_write(CPURISCVState *env, target_ulong index,
-                 /* set the count to timer */
-                 timer_mod(env->itrigger_timer[index],
-                           env->last_icount + itrigger_get_count(env, index));
-+            } else {
-+                env->itrigger_enabled = riscv_itrigger_enabled(env);
-             }
-         }
-         break;
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index c2a94a82b3..cd32a52e19 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -21,6 +21,8 @@
- #include "qemu/error-report.h"
- #include "sysemu/kvm.h"
- #include "migration/cpu.h"
-+#include "sysemu/cpu-timers.h"
-+#include "debug.h"
- 
- static bool pmp_needed(void *opaque)
- {
-@@ -229,11 +231,24 @@ static bool debug_needed(void *opaque)
-     return riscv_feature(env, RISCV_FEATURE_DEBUG);
- }
- 
-+static int debug_post_load(void *opaque, int version_id)
-+{
-+    RISCVCPU *cpu = opaque;
-+    CPURISCVState *env = &cpu->env;
-+
-+    if (icount_enabled()) {
-+        env->itrigger_enabled = riscv_itrigger_enabled(env);
-+    }
-+
-+    return 0;
-+}
-+
- static const VMStateDescription vmstate_debug = {
-     .name = "cpu/debug",
-     .version_id = 2,
-     .minimum_version_id = 2,
-     .needed = debug_needed,
-+    .post_load = debug_post_load,
-     .fields = (VMStateField[]) {
-         VMSTATE_UINTTL(env.trigger_cur, RISCVCPU),
-         VMSTATE_UINTTL_ARRAY(env.tdata1, RISCVCPU, RV_MAX_TRIGGERS),
--- 
-2.17.1
 
+r~
 
