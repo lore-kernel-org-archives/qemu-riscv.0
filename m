@@ -1,77 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oj2ld-00022T-9u
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Oct 2022 14:17:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59248)
+	id 1ojAGH-0000Ys-W3
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Oct 2022 22:17:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37710)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1oj2lS-00020h-5n
- for qemu-riscv@nongnu.org; Thu, 13 Oct 2022 14:17:07 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629]:38697)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1oj2lP-0006Xi-Nj
- for qemu-riscv@nongnu.org; Thu, 13 Oct 2022 14:17:01 -0400
-Received: by mail-pl1-x629.google.com with SMTP id o21so131687ple.5
- for <qemu-riscv@nongnu.org>; Thu, 13 Oct 2022 11:16:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=iJeu/I31b6hVJSCC8AsqCZpMYRa3PtYLoTet6p+YpGA=;
- b=Vg0t8Y+Lk4K08y5s/mQwgRn09L5i2n5Hu0BzO3XPZxsMLTK+dNB3SAgubXXR4/CKwX
- shc6ZQ396q9FVtx3mzGNz99rnuORtt4xCUYUeSaGgUoRthUun1mklJjF0M5kHJuH0rq0
- rRC6F10QGU2Gaf9+fJmTu9dPYWxITE7QBJE7+Vxnj/yWlXmI2WHUX0Vhj8Bxgb9uCCeO
- ART45ttbn4sgjmwvnFwBNrFN8fDwIHvMInSDt8OGfuhCRYcVxQ73S4mdT38Upl7tUGXH
- ADIA5PjkImRfK+UTLgjN0XGyfoUgG23FZQEJ2MSxxRolej7aNkhK7KvTVcVJ/Xvj6NX4
- UpWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=iJeu/I31b6hVJSCC8AsqCZpMYRa3PtYLoTet6p+YpGA=;
- b=vNCt/wI/DYTQ4JZWq3IwBFh9+GIzT1nRCtbUgGdiHYEjHulBuBRvHXENwMaPz+P6yb
- VXGUA98kHOoVsS4fpuDNRM8sH61vLybzOiLSsFYtyYdMw24AwFVxJUeTwzZGFtRSYbQ8
- Ji/VONMU8NjAv4zdYevatMC99zn0ztaD6NkmR7XxZqJQ+H9edoJMCaoPW+iJofGBUtnh
- V0QyvGqzT6uxwlvvOi+r4cMdbn9xdorkmEZJtK79/ESozFfzXP76vzVhc5QvxIy+pe8H
- wmOnhdJraNiqKTBnFAgjnN4H01cShRUIUQEzQ4WomiWpM7MZCIp8u2eL7NmzJIYcDycv
- MV7g==
-X-Gm-Message-State: ACrzQf3BBzzO3xLvhergVuNl67Nzx3gjjhQDtFzKssfEnaYgz9qUOs/D
- ZcsEqhGRUrB23USgd86JyO/AZA==
-X-Google-Smtp-Source: AMsMyM66stNhRsBtUyVzFhSvI2TTHt8VWE7GxQAVdBYYa2xp8Cg9Flhi5C9u1LOSEeaeAIueuW3o4w==
-X-Received: by 2002:a17:902:c952:b0:184:ba4f:af39 with SMTP id
- i18-20020a170902c95200b00184ba4faf39mr1167159pla.58.1665685018156; 
- Thu, 13 Oct 2022 11:16:58 -0700 (PDT)
-Received: from [10.1.28.222] (110-175-13-142.static.tpgi.com.au.
- [110.175.13.142]) by smtp.gmail.com with ESMTPSA id
- b124-20020a62cf82000000b00562b752b38asm6734pfg.145.2022.10.13.11.16.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Oct 2022 11:16:57 -0700 (PDT)
-Message-ID: <24a38a9e-b8e3-9076-8e5e-05b24ada5e34@linaro.org>
-Date: Fri, 14 Oct 2022 05:16:50 +1100
+ (Exim 4.90_1)
+ (envelope-from <SRS0=NTzD=2P=zx2c4.com=Jason@kernel.org>)
+ id 1ojAGC-0000UV-GH; Thu, 13 Oct 2022 22:17:16 -0400
+Received: from ams.source.kernel.org ([145.40.68.75]:57302)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <SRS0=NTzD=2P=zx2c4.com=Jason@kernel.org>)
+ id 1ojAGA-0001gF-Hz; Thu, 13 Oct 2022 22:17:15 -0400
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id F251DB81FAF;
+ Fri, 14 Oct 2022 02:17:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F38EAC433C1;
+ Fri, 14 Oct 2022 02:17:10 +0000 (UTC)
+Authentication-Results: smtp.kernel.org;
+ dkim=pass (1024-bit key) header.d=zx2c4.com header.i=@zx2c4.com
+ header.b="fgDUkXR5"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zx2c4.com; s=20210105; 
+ t=1665713829;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=o3CHHWL+09QBXEI6UPML1iroTw5xcsHKjGxWAQYGoP8=;
+ b=fgDUkXR5Q8rqucKKjINy9q5+ja6AIPkTY2REFSViezI3Vjbhxp8nMhlrIXcjtPkXYbSCZc
+ YTG1pBZucgR9XwoKO2/qErF7u70lp+MJbnEkXJ/+YE47VXrM1Q53aAFP0oMRwOGZ3pT8Up
+ f5Tz5kKsuMw1BkeOzFgM2tUY1Xg6Hn8=
+Received: by mail.zx2c4.com (ZX2C4 Mail Server) with ESMTPSA id 7c3c3390
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Fri, 14 Oct 2022 02:17:09 +0000 (UTC)
+From: "Jason A. Donenfeld" <Jason@zx2c4.com>
+To: peter.maydell@linaro.org, pbonzini@redhat.com, qemu-devel@nongnu.org,
+ richard.henderson@linaro.org
+Cc: "Jason A. Donenfeld" <Jason@zx2c4.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
+Subject: [PATCH v3 5/8] riscv: re-randomize rng-seed on reboot
+Date: Thu, 13 Oct 2022 20:16:50 -0600
+Message-Id: <20221014021653.1461512-6-Jason@zx2c4.com>
+In-Reply-To: <20221014021653.1461512-1-Jason@zx2c4.com>
+References: <20221014021653.1461512-1-Jason@zx2c4.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Subject: Re: [PATCH] target/riscv: pmp: Fixup TLB size calculation
-Content-Language: en-US
-To: Alistair Francis <alistair.francis@opensource.wdc.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-References: <20221012011449.506928-1-alistair.francis@opensource.wdc.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20221012011449.506928-1-alistair.francis@opensource.wdc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x629.google.com
-X-Spam_score_int: -33
-X-Spam_score: -3.4
-X-Spam_bar: ---
-X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.25,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=145.40.68.75;
+ envelope-from=SRS0=NTzD=2P=zx2c4.com=Jason@kernel.org;
+ helo=ams.source.kernel.org
+X-Spam_score_int: -67
+X-Spam_score: -6.8
+X-Spam_bar: ------
+X-Spam_report: (-6.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,34 +70,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2022 18:17:11 -0000
+X-List-Received-Date: Fri, 14 Oct 2022 02:17:17 -0000
 
-On 10/12/22 18:14, Alistair Francis wrote:
-> From: Alistair Francis<alistair.francis@wdc.com>
-> 
-> Since commit 4047368938f6 "accel/tcg: Introduce tlb_set_page_full" we
-> have been seeing this assert
-> 
->      ../accel/tcg/cputlb.c:1294: tlb_set_page_with_attrs: Assertion `is_power_of_2(size)' failed.
-> 
-> When running Tock on the OpenTitan machine.
-> 
-> The issue is that pmp_get_tlb_size() would return a TLB size that wasn't
-> a power of 2. The size was also smaller then TARGET_PAGE_SIZE.
-> 
-> This patch ensures that any TLB size less then TARGET_PAGE_SIZE is
-> rounded down to 1 to ensure it's a valid size.
-> 
-> Signed-off-by: Alistair Francis<alistair.francis@wdc.com>
-> ---
-> This is based on advice from Richard:
-> https://patchwork.kernel.org/project/qemu-devel/patch/20221004141051.110653-9-richard.henderson@linaro.org/#25043166
-> 
->   target/riscv/pmp.c | 12 ++++++++++++
->   1 file changed, 12 insertions(+)
+When the system reboots, the rng-seed that the FDT has should be
+re-randomized, so that the new boot gets a new seed. Since the FDT is in
+the ROM region at this point, we add a hook right after the ROM has been
+added, so that we have a pointer to that copy of the FDT.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Bin Meng <bin.meng@windriver.com>
+Cc: qemu-riscv@nongnu.org
+Signed-off-by: Jason A. Donenfeld <Jason@zx2c4.com>
+---
+ hw/riscv/boot.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 1ae7596873..c389edb3cd 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -30,6 +30,7 @@
+ #include "sysemu/device_tree.h"
+ #include "sysemu/qtest.h"
+ #include "sysemu/kvm.h"
++#include "sysemu/reset.h"
+ 
+ #include <libfdt.h>
+ 
+@@ -241,6 +242,8 @@ uint64_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
+ 
+     rom_add_blob_fixed_as("fdt", fdt, fdtsize, fdt_addr,
+                           &address_space_memory);
++    qemu_register_reset_nosnapshotload(qemu_fdt_randomize_seeds,
++                        rom_ptr_for_as(&address_space_memory, fdt_addr, fdtsize));
+ 
+     return fdt_addr;
+ }
+-- 
+2.37.3
 
-r~
 
