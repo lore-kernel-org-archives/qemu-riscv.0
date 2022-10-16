@@ -1,66 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ok33Q-0005f2-7u
-	for mharc-qemu-riscv@gnu.org; Sun, 16 Oct 2022 08:47:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41396)
+	id 1ok33i-0005mM-Tl
+	for mharc-qemu-riscv@gnu.org; Sun, 16 Oct 2022 08:48:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52190)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1ok33O-0005cm-Gx
- for qemu-riscv@nongnu.org; Sun, 16 Oct 2022 08:47:42 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:52030)
+ id 1ok33b-0005l2-Fc
+ for qemu-riscv@nongnu.org; Sun, 16 Oct 2022 08:47:55 -0400
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536]:44650)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1ok33M-0003Pj-NV
- for qemu-riscv@nongnu.org; Sun, 16 Oct 2022 08:47:42 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id cl1so8724461pjb.1
- for <qemu-riscv@nongnu.org>; Sun, 16 Oct 2022 05:47:39 -0700 (PDT)
+ id 1ok33Z-0003QI-O8
+ for qemu-riscv@nongnu.org; Sun, 16 Oct 2022 08:47:55 -0400
+Received: by mail-pg1-x536.google.com with SMTP id q1so8253660pgl.11
+ for <qemu-riscv@nongnu.org>; Sun, 16 Oct 2022 05:47:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=qAGhXdl9JGSoervBWAtHALAsd3VD7kIj0ZvC7dtIcJQ=;
- b=iuzs8HlcC8Qv1oKLk8fo4O8xRieCINuALDkRNLGm0lbumwPXBmMJlOxr3JyGzgMYLx
- kAftRjNxLmhbGbsScg7E4q2XYa0UvVOU5WyDpDS58IsjwdabJ3+BbbhZa9AEJdXcNIfD
- G6DdNGJ7ssA8b6wjf1u0YExfIQu6/meTtSAy0J07ZngdNekOol2QFwkvx3auAbSOhAtq
- 4omt7vi9h921Rd0l1Xph/euZpRrtppzreQEaDLc/pg3Z3m5/Tzzrw/8BikHYg1f/eO/B
- WRfQs024UxhKqe1o/3Y6br49SsKS3HPOdEV24u5QCiM+BVOKcLgrfv6BvXxFCiXHb3LP
- q5cw==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nToIkILD/15nTSvsldNT6OwMyl6phQA7S45D5T9fkTc=;
+ b=gKid5Fmfgwt1D2u4Q02222n7UF7Pt3bxsj+5Kow4Jt23B1f6AmGtEoZoNXh6nfB3pg
+ mCWDF8qF9lrj9sGXlp7zNXwwnFgXq4l9+9ohfnEDyWI30OlZKVsLfF21BwGnjm71lu1q
+ np4SVAykMgsA4BHKye+54+d7k6q8m7Y/Cs39t/Fz1dYd0KBeTL1++dCKU1XycObABkxe
+ m5OpTXSExLOUa7nBvb7H1xBXlkaXeO70dD79H7oyKTUkeIGnU/6m8lw54/2pSf41xLV6
+ ZOTie/aCVxktSuMvM9gF+ePDasv8zAfPnD67qqBS5VRSpjjC9eS3nY+jDYWTPYIKA48j
+ N3Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qAGhXdl9JGSoervBWAtHALAsd3VD7kIj0ZvC7dtIcJQ=;
- b=QP9tcem7Xrh8Jv4043sSZMQ2UFrJx3jad3bNLfvjZXPeVpg3PeixGQQMOUBr44bCDK
- i8jZ6zb3HOv4Tw3SldmUJI0Pu1NBzPArGJdc5Oi1Cu4hRQajag2SGayPPeTyWXq0XIeg
- 86wgDI+u5VzR27TCCnOdfkj255WSsCkUYuj91IQjyAar5i2ckchHonhh8Im2J0dO0ZE2
- AtLnivo4VXkLMZD+ClqrzjSw7nT3Cmc48uuc9OpyereF9QBcS6n4mYr2cyKUY4owVHyM
- v20cJra88JMLQdLoD5ZXVYMgIB8jKqlAr+IwU3bBSzyoANOuCOdpiIoPmPDr516hpiMa
- Sjvw==
-X-Gm-Message-State: ACrzQf0W3qBVrxkSnpcOyYRnaxRtM0nI/6Oh4UPWU4b30OjGz2toFdLE
- D01FjTibmsGS6VkIWx5fdJyfQQ==
-X-Google-Smtp-Source: AMsMyM4E7CRVMXeIHXPCHENkYOv8om/41WMwldZVybkDrTD69yzxteayiw+wKYYFxxCSAoNyokB3IA==
-X-Received: by 2002:a17:902:70c7:b0:183:3e66:fe48 with SMTP id
- l7-20020a17090270c700b001833e66fe48mr6865547plt.165.1665924458473; 
- Sun, 16 Oct 2022 05:47:38 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nToIkILD/15nTSvsldNT6OwMyl6phQA7S45D5T9fkTc=;
+ b=E8uhaBjPPxY0sIgK7YjUuhiQHI96B0DbqzfgerbnsA9cZfC0oxrKnUcav/UXYsT1nx
+ ZWAZqoM+NmnclfqBFtHB5Z/lIs4D362nWWCAJbfa0iBZ2RveJrxM4Tbd2MkESC9dMJ0n
+ tb6ZalsfaKBlytjttmMi8XRdPRbQptQ3F3e5/s0zIxoERFhZcZyN26nWqQaXizbc0VaV
+ Q/klHWrXLvlKSchIxOzGy5/iBMhNA8dk8dXPpWe0VSq2Me/5gMKlWiy6ohvXHe6yZ9vE
+ /UwTTmz95+VZqn0WujATgp4bUmQRyVUdn5c+S6eo8NpL9Oc0TqVqOfH+3riAoKghUhvC
+ r8pg==
+X-Gm-Message-State: ACrzQf3HG8SnKpWdoEmmkzbb0/UAs0u73DAutKNlJ1MJRp5pm0piO+OX
+ vpKYJbqWVQjxRx9SAKZFsXFw4w==
+X-Google-Smtp-Source: AMsMyM7N6AQLluI6iGZE73hY9MOp/mebLo5nNK3Mh6g+sVSdvSRacovGCyFTrBAyjIdDQ3y9+3eDeA==
+X-Received: by 2002:a05:6a00:10cf:b0:563:34ce:4138 with SMTP id
+ d15-20020a056a0010cf00b0056334ce4138mr7397776pfu.6.1665924471144; 
+ Sun, 16 Oct 2022 05:47:51 -0700 (PDT)
 Received: from ThinkPad-T490.dc1.ventanamicro.com
  ([2401:4900:57ef:25d:3187:d4f6:127:22d3])
  by smtp.googlemail.com with ESMTPSA id
- v18-20020a634812000000b0043b565cb57csm4444894pga.73.2022.10.16.05.47.34
+ v18-20020a634812000000b0043b565cb57csm4444894pga.73.2022.10.16.05.47.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Oct 2022 05:47:37 -0700 (PDT)
+ Sun, 16 Oct 2022 05:47:50 -0700 (PDT)
 From: Mayuresh Chitale <mchitale@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
-	alistair.francis@wdc.com
-Subject: [PATCH v11 0/5] RISC-V Smstateen support
-Date: Sun, 16 Oct 2022 18:17:21 +0530
-Message-Id: <20221016124726.102129-1-mchitale@ventanamicro.com>
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>, alistair.francis@wdc.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v11 2/5] target/riscv: smstateen check for h/s/envcfg
+Date: Sun, 16 Oct 2022 18:17:23 +0530
+Message-Id: <20221016124726.102129-3-mchitale@ventanamicro.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20221016124726.102129-1-mchitale@ventanamicro.com>
+References: <20221016124726.102129-1-mchitale@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=mchitale@ventanamicro.com; helo=mail-pj1-x102a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-pg1-x536.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -80,81 +83,197 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Oct 2022 12:47:42 -0000
+X-List-Received-Date: Sun, 16 Oct 2022 12:47:55 -0000
 
-This series adds support for the Smstateen specification which provides a
-mechanism to plug the potential covert channels which are opened by extensions
-that add to processor state that may not get context-switched. Currently access
-to *envcfg registers and floating point(fcsr) is controlled via smstateen.
+Accesses to henvcfg, henvcfgh and senvcfg are allowed only if the corresponding
+bit in mstateen0/hstateen0 is enabled. Otherwise an illegal instruction trap is
+generated.
 
-These patches can also be found on riscv_smstateen_v11 branch at:
-https://github.com/mdchitale/qemu.git
+Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+Reviewed-by: Weiwei Li<liweiwei@iscas.ac.cn>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/csr.c | 87 ++++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 80 insertions(+), 7 deletions(-)
 
-Changes in v11:
-- Rebase to latest riscv-to-apply.next
-- set virt_inst_excp at the begining of decode_opc
-- Add reviewed by in patch 4
-
-Changes in v10:
-- Add support to generate virt instruction exception after decode failure.
-  Use this change for smstateen fcsr failure when virt is enabled.
-- Implement single write function for *smstateen1 to *smstateen3 registers.
-
-Changes in v9:
-- Rebase to latest riscv-to-apply.next
-- Add reviewed by in patches 2 and 4
-
-Changes in v8:
-- Rebase to latest riscv-to-apply.next
-- Fix m-mode check for hstateen
-- Fix return exception type for VU mode
-- Improve commit description for patch3
-
-Changes in v7:
-- Update smstateen check as per discussion on the following issue:
-  https://github.com/riscv/riscv-state-enable/issues/9
-- Drop the smstateen AIA patch for now.
-- Indentation and other fixes
-
-Changes in v6:
-- Sync with latest riscv-to-apply.next
-- Make separate read/write ops for m/h/s/stateen1/2/3 regs
-- Add check for mstateen.staten when reading or using h/s/stateen regs
-- Add smstateen fcsr check for all floating point operations
-- Move knobs to enable smstateen in a separate patch.
-
-Changes in v5:
-- Fix the order in which smstateen extension is added to the
-  isa_edata_arr as
-described in rule #3 the comment.
-
-Changes in v4:
-- Fix build issue with riscv32/riscv64-linux-user targets
-
-Changes in v3:
-- Fix coding style issues
-- Fix *stateen0h index calculation
-
-Changes in v2:
-- Make h/s/envcfg bits in m/h/stateen registers as writeable by default.
-
-Mayuresh Chitale (5):
-  target/riscv: Add smstateen support
-  target/riscv: smstateen check for h/s/envcfg
-  target/riscv: generate virtual instruction exception
-  target/riscv: smstateen check for fcsr
-  target/riscv: smstateen knobs
-
- target/riscv/cpu.c                        |   2 +
- target/riscv/cpu.h                        |   4 +
- target/riscv/cpu_bits.h                   |  37 ++
- target/riscv/csr.c                        | 414 +++++++++++++++++++++-
- target/riscv/insn_trans/trans_rvf.c.inc   |  43 ++-
- target/riscv/insn_trans/trans_rvzfh.c.inc |  12 +
- target/riscv/machine.c                    |  21 ++
- target/riscv/translate.c                  |   8 +-
- 8 files changed, 536 insertions(+), 5 deletions(-)
-
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index c861424e85..71236f2b5d 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -41,6 +41,42 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+ }
+ 
+ /* Predicates */
++#if !defined(CONFIG_USER_ONLY)
++static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
++                                       uint64_t bit)
++{
++    bool virt = riscv_cpu_virt_enabled(env);
++    CPUState *cs = env_cpu(env);
++    RISCVCPU *cpu = RISCV_CPU(cs);
++
++    if (env->priv == PRV_M || !cpu->cfg.ext_smstateen) {
++        return RISCV_EXCP_NONE;
++    }
++
++    if (!(env->mstateen[index] & bit)) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    if (virt) {
++        if (!(env->hstateen[index] & bit)) {
++            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++        }
++
++        if (env->priv == PRV_U && !(env->sstateen[index] & bit)) {
++            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++        }
++    }
++
++    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
++        if (!(env->sstateen[index] & bit)) {
++            return RISCV_EXCP_ILLEGAL_INST;
++        }
++    }
++
++    return RISCV_EXCP_NONE;
++}
++#endif
++
+ static RISCVException fs(CPURISCVState *env, int csrno)
+ {
+ #if !defined(CONFIG_USER_ONLY)
+@@ -1874,6 +1910,13 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+ static RISCVException read_senvcfg(CPURISCVState *env, int csrno,
+                                  target_ulong *val)
+ {
++    RISCVException ret;
++
++    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
++
+     *val = env->senvcfg;
+     return RISCV_EXCP_NONE;
+ }
+@@ -1882,15 +1925,27 @@ static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
+                                   target_ulong val)
+ {
+     uint64_t mask = SENVCFG_FIOM | SENVCFG_CBIE | SENVCFG_CBCFE | SENVCFG_CBZE;
++    RISCVException ret;
+ 
+-    env->senvcfg = (env->senvcfg & ~mask) | (val & mask);
++    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
+ 
++    env->senvcfg = (env->senvcfg & ~mask) | (val & mask);
+     return RISCV_EXCP_NONE;
+ }
+ 
+ static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
+                                  target_ulong *val)
+ {
++    RISCVException ret;
++
++    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
++
+     *val = env->henvcfg;
+     return RISCV_EXCP_NONE;
+ }
+@@ -1899,6 +1954,12 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+                                   target_ulong val)
+ {
+     uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
++    RISCVException ret;
++
++    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
+ 
+     if (riscv_cpu_mxl(env) == MXL_RV64) {
+         mask |= HENVCFG_PBMTE | HENVCFG_STCE;
+@@ -1912,6 +1973,13 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+ static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
+                                  target_ulong *val)
+ {
++    RISCVException ret;
++
++    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
++
+     *val = env->henvcfg >> 32;
+     return RISCV_EXCP_NONE;
+ }
+@@ -1921,9 +1989,14 @@ static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
+ {
+     uint64_t mask = HENVCFG_PBMTE | HENVCFG_STCE;
+     uint64_t valh = (uint64_t)val << 32;
++    RISCVException ret;
+ 
+-    env->henvcfg = (env->henvcfg & ~mask) | (valh & mask);
++    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
+ 
++    env->henvcfg = (env->henvcfg & ~mask) | (valh & mask);
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -1949,7 +2022,7 @@ static RISCVException write_mstateen(CPURISCVState *env, int csrno,
+ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
+                                       target_ulong new_val)
+ {
+-    uint64_t wr_mask = SMSTATEEN_STATEEN;
++    uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+ 
+     return write_mstateen(env, csrno, wr_mask, new_val);
+ }
+@@ -1984,7 +2057,7 @@ static RISCVException write_mstateenh(CPURISCVState *env, int csrno,
+ static RISCVException write_mstateen0h(CPURISCVState *env, int csrno,
+                                       target_ulong new_val)
+ {
+-    uint64_t wr_mask = SMSTATEEN_STATEEN;
++    uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+ 
+     return write_mstateenh(env, csrno, wr_mask, new_val);
+ }
+@@ -2021,7 +2094,7 @@ static RISCVException write_hstateen(CPURISCVState *env, int csrno,
+ static RISCVException write_hstateen0(CPURISCVState *env, int csrno,
+                                       target_ulong new_val)
+ {
+-    uint64_t wr_mask = SMSTATEEN_STATEEN;
++    uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+ 
+     return write_hstateen(env, csrno, wr_mask, new_val);
+ }
+@@ -2060,7 +2133,7 @@ static RISCVException write_hstateenh(CPURISCVState *env, int csrno,
+ static RISCVException write_hstateen0h(CPURISCVState *env, int csrno,
+                                        target_ulong new_val)
+ {
+-    uint64_t wr_mask = SMSTATEEN_STATEEN;
++    uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+ 
+     return write_hstateenh(env, csrno, wr_mask, new_val);
+ }
+@@ -2107,7 +2180,7 @@ static RISCVException write_sstateen(CPURISCVState *env, int csrno,
+ static RISCVException write_sstateen0(CPURISCVState *env, int csrno,
+                                       target_ulong new_val)
+ {
+-    uint64_t wr_mask = SMSTATEEN_STATEEN;
++    uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+ 
+     return write_sstateen(env, csrno, wr_mask, new_val);
+ }
 -- 
 2.25.1
 
