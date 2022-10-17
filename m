@@ -1,89 +1,91 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1okJ1M-0004fN-M1
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Oct 2022 01:50:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59746)
+	id 1okJ2F-00053P-Ax
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Oct 2022 01:51:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43788)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=282226d84=wilfred.mallawa@opensource.wdc.com>)
- id 1okJ1L-0004cL-40
- for qemu-riscv@nongnu.org; Mon, 17 Oct 2022 01:50:39 -0400
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:22885)
+ id 1okJ1n-0004z3-6l
+ for qemu-riscv@nongnu.org; Mon, 17 Oct 2022 01:51:14 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:9654)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=282226d84=wilfred.mallawa@opensource.wdc.com>)
- id 1okJ1J-0002DO-6l
- for qemu-riscv@nongnu.org; Mon, 17 Oct 2022 01:50:38 -0400
+ id 1okJ1l-0002L5-IR
+ for qemu-riscv@nongnu.org; Mon, 17 Oct 2022 01:51:06 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1665985837; x=1697521837;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=gEa1XWL3Yu2VGlCN50EFgUunW1wW+ROV5F6mSaE0/Fk=;
- b=T8VLe9UjolJl+Fpr++fdw7xJOl2cs0EIGFqYXwn39Z8pMoYl4uXosuJN
- 6hhQltTTKhDi2GTHb+seE5bREpnSTn/vJUmZiENl1CY4omo1OBnL/Ng9h
- WfWENRtD+oPzmQLyTJTuIHBwuU3K+UA569KE3KaDOj8MB8RYSdriZMMTe
- pRddB8aik9KYOtNbbGSkdzJmzyyErti9lbrwWgSsa9uLIURArLdESfZyP
- hxlKQfExqefm/B97hx6N3p5txhE8HXeDUMOPGvoQslrKIeBPL2GGYo3N+
- e83Xf/BSjU/fr+aZYfq3W6QZ+vFRgXI7deeps4g0HQScvS9T5S3n8t+hq w==;
-X-IronPort-AV: E=Sophos;i="5.95,190,1661788800"; d="scan'208";a="219145799"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ t=1665985865; x=1697521865;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=7zFLMnHdeWGesZyvBbsBwbJgj9esHPllX/QUB1wEyYg=;
+ b=rvX2FuKAMDKIYA2LTIAtxlCzjzq5afyYRzudd2023C3YRYRrSHr0wzwE
+ JkB34Cy1+aVGZRZUt0O2UuRQwMaQNzXf8F+8SqZ7OkI875a5wmOncM7aR
+ 5diVSZz49PYK5X9e+BZsmDRYBaSi/bdKY/Y2FTv5Xa20ld7LsZmO4snGA
+ Qz/Gz9NwnvVbXJFIrYBQPvHNM13ipDNYHK2Se8SwNreP7wMZCO6PM6VN9
+ XZAS40KjDcfYjPq0v4t1Nv4GSeovU6/3KwNBsgXt5r9VT0yoHqycvI7uj
+ ZIE48bGrsKc+zuWi0v3AkOi+nRrAGX+pyXjTGTN70Jm/GbNq3ffI2IGiq w==;
+X-IronPort-AV: E=Sophos;i="5.95,190,1661788800"; d="scan'208";a="326095578"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 17 Oct 2022 13:50:15 +0800
-IronPort-SDR: dbnweSKbwy0igfDXO95YiqoZ/3ky33d+Dmd0o7Xw49z0WPBxjDPXiBnmRKO2iR3oXXBjBE+Wd2
- IuYvDOwFxJawi4j1SABMzu3XHtT3zm7hEQCIDb9fFAFE25ji7EvXi1/Tu1KduaWW9Orct2myGm
- 8lQiVenEQyQpGZJJQfOPEbCd9POYbURN8WOEYzDRt6p8oOwQVlvSOsN6KfBWI1X0+I7fNunYdY
- izl4D8HdYpGg6wl9cXeSeD5Yf3/eg7RUTSsTWXVkNJ9yejHVF0BDamHLoRxneepBgWUeEDIuat
- +1VL/WeO/Qz9NsW740haClNK
+ by ob1.hgst.iphmx.com with ESMTP; 17 Oct 2022 13:51:00 +0800
+IronPort-SDR: fyEEqtwf0K6gRa1eKvk9hdg0876Eem3Ddf6Ta/U8B7+Jq3xhtcNwmKlPAClFWcAveVctrllzi4
+ 9w4wX7EcsZ7V3NVKrSBXYMqAh5Sx8RBVikpKtleRZDWsU4OZB2UIBuNUifGcu3OsKNhDDwLTSE
+ TelRrAI+9l5RspWJxXR9VmDw4Pf+ItNZOgWCdD0FqK4HDd4qGPtsTEOmtLA0xg4Q4b63RrGzIC
+ 56mnIWPszWl5myHJEYY6VY7rOwzx0PpRB+CNmCM0DtundBEne5sz3y7SPA333PSnwhrqIhQ3aP
+ LNz94A89908Qm54jmLLscrt4
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 16 Oct 2022 22:09:48 -0700
-IronPort-SDR: 91M5fpgp78rzsW9hZWgcUi3UViP5kG3vHioCFg1eUvu8d41FN2ZcY/oZZ2H5n31Opj44y6OcV7
- P7SjgBgybquc+cd/JqFo4LUY6Syd2F7fJnYXNGu7neX7TO5GVHHU8OLYdxnnyxzuN5CxEkwvV1
- A9inKsuFxEJ2CLKOK6kBwDl9CrbgZJZNp2YWaAaNjOZxh0uQ5/lP7pUN3lygzJCxJmnY1o/8tK
- bHt8w2vgGsB9WkdgQOC7RgpzAESl/bXSnOP7jl2BNgPa/rJShB1YhTmgtTzO9VHBlcVp2FbDag
- 6qw=
+ 16 Oct 2022 22:10:33 -0700
+IronPort-SDR: WKCXC5MbFtTdsLsewMOUUMsQKxuS21iDYJHeh5rZ6/5F8Xz/RKe1gHk7Bi8ABQ+aZXUjOkQIvI
+ P0rJ15M+DkahV+egQhQZdw6uDS2O6CH1Z1iyZEQUOmmlgYGjrNqMIwXt30hMXfDIJpicryYj5L
+ IAEN5X6AnJSRH/DqzHGAhNipsoHTCcBWoN5i/9PWxZw4chH4vylY6IA+yv5dfy5Q5lpSTdJr1r
+ WiViWjl9K3gPxkZ69fb6m+6nBJOaseXew1TLMNva0WoSbPihe7Zc/29Zed6BMuA6Wo961Y5/Bh
+ 4BE=
 WDCIronportException: Internal
 Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
  by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 16 Oct 2022 22:50:15 -0700
+ 16 Oct 2022 22:51:00 -0700
 Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4MrR0k5GcMz1RwqL
- for <qemu-riscv@nongnu.org>; Sun, 16 Oct 2022 22:50:14 -0700 (PDT)
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4MrR1b42fVz1Rwrq
+ for <qemu-riscv@nongnu.org>; Sun, 16 Oct 2022 22:50:59 -0700 (PDT)
 Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
  reason="pass (just generated, assumed good)"
  header.d=opensource.wdc.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
  opensource.wdc.com; h=content-transfer-encoding:mime-version
- :x-mailer:message-id:date:subject:to:from; s=dkim; t=1665985814;
- x=1668577815; bh=gEa1XWL3Yu2VGlCN50EFgUunW1wW+ROV5F6mSaE0/Fk=; b=
- UEcN3d631J9ToiSBEO+NOjXRPpAN+WQ3uXpsNEyTA7aZqa8YhJNrZOUS/5LClTSb
- v3AqgR8NAfO/8SHE8vBmTo0FB3ZCWlaNKBolAnfKDXyH9GDoRcncF/ItXEjcorRr
- ydWZ2yAmQNM2GYLgmeBhM7a/5zLiPUYmanKuyj26NDQTdeVfbNp3jln7dCZ8VY3K
- ovnsnxvR4aoh+s+lxuPkG7kDdRZ2K1JJ0rQETsTVuQT1roAlkQ/qVinc00oVxHde
- vlKYAKXepJMEmR4x3bhM2mr4LzpZwBzp7OlQFczT0OpoRdrYOtAYuzmGRUQqVwI0
- qwUJs0YCcp7tFjFDf7Ur8w==
+ :references:in-reply-to:x-mailer:message-id:date:subject:to
+ :from; s=dkim; t=1665985859; x=1668577860; bh=7zFLMnHdeWGesZyvBb
+ sBwbJgj9esHPllX/QUB1wEyYg=; b=CRWIaK5lzHohje7wVOQEBw7qH0cWxYox7T
+ APgxKmGtegRUZkkg0RaRxb3Wr9e0IFt9tW7AV5epebqjRrAolpoZia5KdLPW8dXc
+ mvQjFEMdCRDys4uIbGaKdedwm9ec38dLHdegMjn1Tdq0qXU8/p4RbBR8ZBrpDeAs
+ n/S2+BG+wBVBgQIrhEoBf0iNUaSb0oBNpPCYlEe4LgNSt8WE+BvcRXS/nKu//o5Y
+ X1xXKgqoQuluQkf4ghyU0jeXdK3r36HDgT1E1cJLb2aXlyvQc4JTF8ZT+u+OkCwG
+ vfLGSX2jvvni+ArmmouL8Kw5dmLsWWSEmo+mwjZjs64FwfnJd+IA==
 X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
 Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
  by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id V3hRyeQUl_HH for <qemu-riscv@nongnu.org>;
- Sun, 16 Oct 2022 22:50:14 -0700 (PDT)
+ port 10026) with ESMTP id uU2zaRsPZrnt for <qemu-riscv@nongnu.org>;
+ Sun, 16 Oct 2022 22:50:59 -0700 (PDT)
 Received: from oni.wdc.com (unknown [10.225.165.69])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4MrR0g74mbz1RvLy;
- Sun, 16 Oct 2022 22:50:11 -0700 (PDT)
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4MrR1X6jXRz1RvLy;
+ Sun, 16 Oct 2022 22:50:56 -0700 (PDT)
 From: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
 To: alistair@alistair23.me,
 	qemu-riscv@nongnu.org
 Cc: qemu-devel@nongnu.org,
 	Wilfred Mallawa <wilfred.mallawa@wdc.com>
-Subject: [PATCH v3 0/2] implement `FIELDx_1CLEAR() macro
-Date: Mon, 17 Oct 2022 15:49:49 +1000
-Message-Id: <20221017054950.317584-1-wilfred.mallawa@opensource.wdc.com>
+Subject: [PATCH v3 1/2] hw/registerfields: add `FIELDx_1CLEAR()` macro
+Date: Mon, 17 Oct 2022 15:49:51 +1000
+Message-Id: <20221017054950.317584-2-wilfred.mallawa@opensource.wdc.com>
 X-Mailer: git-send-email 2.37.3
+In-Reply-To: <20221017054950.317584-1-wilfred.mallawa@opensource.wdc.com>
+References: <20221017054950.317584-1-wilfred.mallawa@opensource.wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.71.153.141;
+Received-SPF: pass client-ip=68.232.141.245;
  envelope-from=prvs=282226d84=wilfred.mallawa@opensource.wdc.com;
- helo=esa3.hgst.iphmx.com
+ helo=esa1.hgst.iphmx.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -103,34 +105,72 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Oct 2022 05:50:39 -0000
+X-List-Received-Date: Mon, 17 Oct 2022 05:51:15 -0000
 
 From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 
-This patch series implements a `FIELDx_1CLEAR()` macro and implements it
-in the `hw/ssi/ibex_spi.c` model.
+Adds a helper macro that implements the register `w1c`
+functionality.
 
-		    *** Changelog ***
-Since v2:
-	- change the macro arguments name to match
-	  the existing macros.
-	 (reg_val, reg, field) -> (storage, reg, field)
-=09
-	- Add the use of this macro to `ibex_spi`
+Ex:
+  uint32_t data =3D FIELD32_1CLEAR(val, REG, FIELD);
 
-Since v1:=20
-	- Instead of needing all field bits to be set=20
-	  we clear the field if any are set.
-	  If the field is 0/clear then no change.
+If ANY bits of the specified `FIELD` is set
+then the respective field is cleared and returned to `data`.
 
-Wilfred Mallawa (2):
-  hw/registerfields: add `FIELDx_1CLEAR()` macro
-  hw/ssi/ibex_spi:  implement `FIELD32_1CLEAR` macro
+If the field is cleared (0), then no change and
+val is returned.
 
- hw/ssi/ibex_spi_host.c      | 21 +++++++++------------
+Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+---
  include/hw/registerfields.h | 22 ++++++++++++++++++++++
- 2 files changed, 31 insertions(+), 12 deletions(-)
+ 1 file changed, 22 insertions(+)
 
+diff --git a/include/hw/registerfields.h b/include/hw/registerfields.h
+index 1330ca77de..0b8404c2f7 100644
+--- a/include/hw/registerfields.h
++++ b/include/hw/registerfields.h
+@@ -115,6 +115,28 @@
+                   R_ ## reg ## _ ## field ## _LENGTH, _v.v);            =
+  \
+     _d; })
+=20
++/*
++ * Clear the specified field in storage if
++ * any field bits are set, else no changes made. Implements
++ * single/multi-bit `w1c`
++ *
++ */
++#define FIELD8_1CLEAR(storage, reg, field)                              =
+  \
++    (FIELD_EX8(storage, reg, field) ?                                   =
+  \
++    FIELD_DP8(storage, reg, field, 0x00) : storage)
++
++#define FIELD16_1CLEAR(storage, reg, field)                             =
+  \
++    (FIELD_EX16(storage, reg, field) ?                                  =
+  \
++    FIELD_DP16(storage, reg, field, 0x00) : storage)
++
++#define FIELD32_1CLEAR(storage, reg, field)                             =
+  \
++    (FIELD_EX32(storage, reg, field) ?                                  =
+  \
++    FIELD_DP32(storage, reg, field, 0x00) : storage)
++
++#define FIELD64_1CLEAR(storage, reg, field)                             =
+  \
++    (FIELD_EX64(storage, reg, field) ?                                  =
+  \
++    FIELD_DP64(storage, reg, field, 0x00) : storage)
++
+ #define FIELD_SDP8(storage, reg, field, val) ({                         =
+  \
+     struct {                                                            =
+  \
+         signed int v:R_ ## reg ## _ ## field ## _LENGTH;                =
+  \
 --=20
 2.37.3
 
