@@ -1,80 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1okvcq-0007Z9-OC
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Oct 2022 19:03:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43536)
+	id 1ol7jP-0004wt-W0
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Oct 2022 07:59:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52108)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1okvcn-0007Yi-Ua
- for qemu-riscv@nongnu.org; Tue, 18 Oct 2022 19:03:53 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:55029)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1okvcm-0003rr-Ac
- for qemu-riscv@nongnu.org; Tue, 18 Oct 2022 19:03:53 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id 70so15409831pjo.4
- for <qemu-riscv@nongnu.org>; Tue, 18 Oct 2022 16:03:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=4l+Wu65I5JWP2zR087cUq9KLDVYyOAtNJz+60HIKh2M=;
- b=G5qd4RUpviMqb++hbnmuOrDGjmVgkfcKWv1zYLr5fSwqXj2XT+mHC47ET8S/BgyyfG
- NpbenvUsAFOLfTY11tpivzUxNT37Da+8SJuXOz6IFXGsA8ZfCWYZhxfAdjDxhEMtdHNw
- ywanAl/NFJEXS5k55WfByCOE0cyviSEdv5ihk3+pidyx88g8Q/68G7lAlRbzkV4Xxpv3
- eMrYIyb0BjpLTSI9Cj0yZ/+5/FJnXgiU1l2OhSk4DmnZ7kZJwZTMhblku1Ui4BRzKgS3
- AfYTdGI3je5GVZaKY4KUf3fGiBnNTXfoY45GxxAKPt0Otp+s1WP8TaP+4EpoX1uZanbR
- UMYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4l+Wu65I5JWP2zR087cUq9KLDVYyOAtNJz+60HIKh2M=;
- b=bBBjiPZl1mrFdDvIkW4VYH3Jxj4WvIfAFMpT10ycEDvgYQrDbraY3IINkKUtMDk4ny
- m9mmexq+aUMCSr+kWTJkxvXQuM4W9PKVazO5yLrYjJrqdo9M/dqESEn3D6iW500lSWwL
- B9fGdRPc5EVqOOo+SKpAu02jKuWEsMri5xo6rZO9ELRDZGyV+uOLFhAMseas/L5+h/0V
- pTt4MzxWg4pbNBfRQenA/SYQVywOe1rEP+l0Z5ZmTauvSTwAf0Rf43ZR3iUbLABgRRyK
- P8VZ38zTKIjqU2SC0m5yXNWEfcnDqqJ+8HztAFyspwa7Zt7WPu5QsQgCJASq8UpA50Oj
- KhWQ==
-X-Gm-Message-State: ACrzQf3Ym11gQvW3Kh0HJ3kDpJp5Txe2RNBO31ZN+UywWXijyOOy5Peh
- S6PkNorI7nYSKQnUOsko/Wk9Kg==
-X-Google-Smtp-Source: AMsMyM4djnCqF0XqZOSfDyAKYRdAKHlt6oj2S8AkD4EtPS/2g0wwjyhZPnehPlooIZdM35g+EAbf1g==
-X-Received: by 2002:a17:902:d2c3:b0:185:3bda:46f8 with SMTP id
- n3-20020a170902d2c300b001853bda46f8mr5228136plc.58.1666134228867; 
- Tue, 18 Oct 2022 16:03:48 -0700 (PDT)
-Received: from [192.168.1.107] ([149.135.10.35])
- by smtp.gmail.com with ESMTPSA id
- k5-20020aa79985000000b0054223a0185asm9746302pfh.161.2022.10.18.16.03.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Oct 2022 16:03:47 -0700 (PDT)
-Message-ID: <ca09e907-e0d2-f64c-e72e-7cbf343a8e4d@linaro.org>
-Date: Wed, 19 Oct 2022 09:03:09 +1000
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1ol7jO-0004wQ-Cx; Wed, 19 Oct 2022 07:59:30 -0400
+Received: from out30-45.freemail.mail.aliyun.com ([115.124.30.45]:54843)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1ol7jI-0000o3-Ad; Wed, 19 Oct 2022 07:59:30 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=5; SR=0;
+ TI=SMTPD_---0VSajwNM_1666180750; 
+Received: from 30.13.184.69(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VSajwNM_1666180750) by smtp.aliyun-inc.com;
+ Wed, 19 Oct 2022 19:59:11 +0800
+Content-Type: multipart/alternative;
+ boundary="------------ZLsBu9kZuheHF6WVzEkhce90"
+Message-ID: <020dc51f-793b-bf20-41e8-5b1447711864@linux.alibaba.com>
+Date: Wed, 19 Oct 2022 19:59:10 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.3
 Subject: Re: Question about TCG backend correctness
-To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
-Cc: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
+Content-Language: en-US
+To: Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
  Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org
 References: <4672400c-0084-3bf3-a596-7a42115301f0@linux.alibaba.com>
  <87lepeeno0.fsf@linaro.org>
  <4841b154-bd05-c677-cfb4-46a350ddd0aa@linux.alibaba.com>
- <b97a7b1a-f8cd-b0d5-bbde-1a06049281dd@linaro.org> <87v8ohcwm0.fsf@linaro.org>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <87v8ohcwm0.fsf@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ <b97a7b1a-f8cd-b0d5-bbde-1a06049281dd@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <b97a7b1a-f8cd-b0d5-bbde-1a06049281dd@linaro.org>
+Received-SPF: pass client-ip=115.124.30.45;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-45.freemail.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, T_SPF_TEMPERROR=0.01,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,43 +57,202 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2022 23:03:54 -0000
+X-List-Received-Date: Wed, 19 Oct 2022 11:59:30 -0000
 
-On 10/18/22 19:22, Alex Bennée wrote:
-> I'm not wedded to the idea - but it could be a super simple processor
-> with a lot less extra baggage than a full ISA - purely for throwing TCG
-> ops at rather than decoding any machine code.
-
-I'd be surprised if you don't wind up with a similar amount of code as for a full ISA, and 
-a lot more baggage on the side besides.  But feel free to prove me wrong...
-
-OTOH, if we really did split out a libtcg, disconnected from any target and parameterized, 
-that would make the sort of non-ISA unit testing you're thinking about vastly easier, 
-because you'd be able to write a driver program that isn't "qemu", without all of the 
-target baggage that would currently make this infeasible.
-
-And, very most likely, such a parameterized libtcg will be required for full heterogeneous 
-emulation...
-
-> Can we detect optimisation failures with guest tests?
-
-No, and that's where some sort of specific harness might be helpful.
-
-> Is it worth doing anything to lower the barrier of entry for these small
-> micro tests or is the current check-tcg framework enough?
-
-I think the current check-tcg framework probably sufficient.
-Generally I think
-
-int main()
-{
-    asm("test");
-    assert(result);
-    return 0;
-}
-
-is what these micro tests should be aiming for.
+This is a multi-part message in MIME format.
+--------------ZLsBu9kZuheHF6WVzEkhce90
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
 
-r~
+On 2022/10/18 13:22, Richard Henderson wrote:
+> On 10/18/22 01:27, LIU Zhiwei wrote:
+>> Maybe I can run RISU on qemu-aarch64(x86) and qemu-aarch64(risc-v) to 
+>> check the RISC-V backend.
+>
+> This is a good start for debugging a tcg backend. 
+
+After fixing some bugs, RISU can run  some instructions now. Thanks.
+
+
+IMHO,  the next 2 requests should be satisfied for TCG test.
+
+1. Add a unit test case for any lower level and small function is easy.
+
+    For example, the function in risc-v backend,
+
+    static bool tcg_out_mov(TCGContext *s, TCGType type, TCGReg ret,
+    TCGReg arg)
+      {
+          if (ret == arg) {
+              return true;
+          }
+          switch (type) {
+          case TCG_TYPE_I32:
+          case TCG_TYPE_I64:
+              tcg_out_opc_imm(s, OPC_ADDI, ret, arg, 0);
+              break;
+          default:
+              g_assert_not_reached();
+          }
+          return true;
+      }
+
+    Write a unit test case for it is not easy currently.  I don't know
+    how to fill the TCGContext struct and other parameters.
+    And there is no test framework where I can reuse.
+
+    The others may say that we can run a lot of benchmark to ensure we
+    have a good coverage and don't
+    need such a low level test case. Some reasonable. But it will lead
+    to a very high test burden and it is very hard to get
+    a good coverage only through high level test.
+
+
+2. Add a unit test case for any high level function is easy, such as 
+tcg_gen_code.
+
+    The check-tcg test belongs to the high level testing.
+
+Best Regards，
+Zhiwei
+
+> It's not comprehensive, because RISU executes one instruction at a 
+> time then raises an exception to check the results.  This means that 
+> the tcg optimizer doesn't have much to work with, which means that the 
+> tcg backend is not as stressed as it could be.
+>
+>>> I've long wanted to have the ability to have TCG unit tests where a
+>>> virtual processor could be defined for the purpose of directly
+>>> exercising TCG.
+>>
+>> We already have many ISAs as the front end of TCG. Will the virtual 
+>> processor here be some
+>> different?
+>
+> It wouldn't.  This is my argument against creating a new virtual 
+> processor.
+>
+> I do think we should be better about creating regression tests for 
+> bugs fixed, in the form of small focused assembly test cases which get 
+> run via check-tcg.
+>
+>
+> r~
+--------------ZLsBu9kZuheHF6WVzEkhce90
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2022/10/18 13:22, Richard Henderson
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:b97a7b1a-f8cd-b0d5-bbde-1a06049281dd@linaro.org">On
+      10/18/22 01:27, LIU Zhiwei wrote:
+      <br>
+      <blockquote type="cite">Maybe I can run RISU on qemu-aarch64(x86)
+        and qemu-aarch64(risc-v) to check the RISC-V backend.
+        <br>
+      </blockquote>
+      <br>
+      This is a good start for debugging a tcg backend. </blockquote>
+    <p>After fixing some bugs, RISU can run  some instructions now.
+      Thanks.</p>
+    <p><br>
+    </p>
+    <p>IMHO,  the next 2 requests should be satisfied for TCG test.<br>
+    </p>
+    <p>1. Add a unit test case for any lower level and small function is
+      easy. <br>
+    </p>
+    <blockquote>
+      <p>For example, the function in risc-v backend, <br>
+      </p>
+      <p><font face="monospace">static bool tcg_out_mov(TCGContext *s,
+          TCGType type, TCGReg ret, TCGReg arg)<br>
+           {<br>
+               if (ret == arg) {<br>
+                   return true;<br>
+               }<br>
+               switch (type) {<br>
+               case TCG_TYPE_I32:<br>
+               case TCG_TYPE_I64:<br>
+                   tcg_out_opc_imm(s, OPC_ADDI, ret, arg, 0);<br>
+                   break;<br>
+               default:<br>
+                   g_assert_not_reached();<br>
+               }<br>
+               return true;<br>
+           }</font><br>
+      </p>
+      <p>Write a unit test case for it is not easy currently.  I don't
+        know how to fill the TCGContext struct and other parameters.<br>
+        And there is no test framework where I can reuse.</p>
+      <p>The others may say that we can run a lot of benchmark to ensure
+        we have a good coverage and don't<br>
+        need such a low level test case. Some reasonable. But it will
+        lead to a very high test burden and it is very hard to get<br>
+        a good coverage only through high level test.</p>
+    </blockquote>
+    <p><br>
+    </p>
+    <p>2. Add a unit test case for any high level function is easy, such
+      as tcg_gen_code. <br>
+    </p>
+    <blockquote>
+      <p>The check-tcg test belongs to the high level testing. <br>
+      </p>
+    </blockquote>
+    <p>Best Regards，<br>
+      Zhiwei<br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:b97a7b1a-f8cd-b0d5-bbde-1a06049281dd@linaro.org">It's
+      not comprehensive, because RISU executes one instruction at a time
+      then raises an exception to check the results.  This means that
+      the tcg optimizer doesn't have much to work with, which means that
+      the tcg backend is not as stressed as it could be.
+      <br>
+      <br>
+      <blockquote type="cite">
+        <blockquote type="cite">I've long wanted to have the ability to
+          have TCG unit tests where a
+          <br>
+          virtual processor could be defined for the purpose of directly
+          <br>
+          exercising TCG.
+          <br>
+        </blockquote>
+        <br>
+        We already have many ISAs as the front end of TCG. Will the
+        virtual processor here be some
+        <br>
+        different?
+        <br>
+      </blockquote>
+      <br>
+      It wouldn't.  This is my argument against creating a new virtual
+      processor.
+      <br>
+      <br>
+      I do think we should be better about creating regression tests for
+      bugs fixed, in the form of small focused assembly test cases which
+      get run via check-tcg.
+      <br>
+      <br>
+      <br>
+      r~
+      <br>
+    </blockquote>
+  </body>
+</html>
+
+--------------ZLsBu9kZuheHF6WVzEkhce90--
 
