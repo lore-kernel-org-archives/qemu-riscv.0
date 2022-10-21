@@ -1,25 +1,25 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oll32-00016U-RD
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Oct 2022 01:58:24 -0400
+	id 1oll33-00016p-AK
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Oct 2022 01:58:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ben@luna.fluff.org>)
- id 1oll2v-00011a-RW; Fri, 21 Oct 2022 01:58:17 -0400
+ id 1oll2w-00011h-2V; Fri, 21 Oct 2022 01:58:18 -0400
 Received: from cpc152649-stkp13-2-0-cust121.10-2.cable.virginm.net
  ([86.15.83.122] helo=luna)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ben@luna.fluff.org>)
- id 1oll2u-00074Q-2q; Fri, 21 Oct 2022 01:58:17 -0400
+ id 1oll2u-00074P-4C; Fri, 21 Oct 2022 01:58:17 -0400
 Received: from ben by luna with local (Exim 4.96)
- (envelope-from <ben@luna.fluff.org>) id 1oll2n-001R0O-2H;
+ (envelope-from <ben@luna.fluff.org>) id 1oll2n-001R0a-2i;
  Fri, 21 Oct 2022 06:58:09 +0100
 From: Ben Dooks <qemu@ben.fluff.org>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, alistair@alistair23.me, peter.maydell@linaro.org,
  qemu-riscv@nongnu.org, Ben Dooks <qemu@ben.fluff.org>
-Subject: [PATCH v5 1/6] device_tree: add qemu_fdt_setprop_strings() helper
-Date: Fri, 21 Oct 2022 06:58:03 +0100
-Message-Id: <20221021055808.342055-2-qemu@ben.fluff.org>
+Subject: [PATCH v5 5/6] hw/mips: use qemu_fdt_setprop_strings()
+Date: Fri, 21 Oct 2022 06:58:07 +0100
+Message-Id: <20221021055808.342055-6-qemu@ben.fluff.org>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20221021055808.342055-1-qemu@ben.fluff.org>
 References: <20221021055808.342055-1-qemu@ben.fluff.org>
@@ -48,59 +48,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 21 Oct 2022 05:58:18 -0000
 
-Add a helper to set a property from a set of strings
-to reduce the following code:
-
-    static const char * const clint_compat[2] = {
-        "sifive,clint0", "riscv,clint0"
-    };
-
-    qemu_fdt_setprop_string_array(fdt, nodename, "compatible",
-        (char **)&clint_compat, ARRAY_SIZE(clint_compat));
+Change to using qemu_fdt_setprop_strings() helper in hw/mips.
 
 Signed-off-by: Ben Dooks <qemu@ben.fluff.org>
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 ---
-v4:
- - go back to the non-return call, no-one is using the result
-v3;
- - fix return value for the call
- - add better help text
-v2:
- - fix node/path in comment
----
- include/sysemu/device_tree.h | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ hw/mips/boston.c | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/include/sysemu/device_tree.h b/include/sysemu/device_tree.h
-index e7c5441f56..cb49df471b 100644
---- a/include/sysemu/device_tree.h
-+++ b/include/sysemu/device_tree.h
-@@ -87,6 +87,25 @@ int qemu_fdt_setprop_string(void *fdt, const char *node_path,
- int qemu_fdt_setprop_string_array(void *fdt, const char *node_path,
-                                   const char *prop, char **array, int len);
+diff --git a/hw/mips/boston.c b/hw/mips/boston.c
+index d2ab9da1a0..759f6daafe 100644
+--- a/hw/mips/boston.c
++++ b/hw/mips/boston.c
+@@ -515,9 +515,6 @@ static const void *create_fdt(BostonState *s,
+     MachineState *mc = s->mach;
+     uint32_t platreg_ph, gic_ph, clk_ph;
+     char *name, *gic_name, *platreg_name, *stdout_name;
+-    static const char * const syscon_compat[2] = {
+-        "img,boston-platform-regs", "syscon"
+-    };
  
-+/**
-+ * qemu_fdt_setprop_strings: set a property from a set of strings
-+ *
-+ * @fdt: pointer to the dt blob
-+ * @path: node name
-+ * @prop: property array
-+ *
-+ * This is a helper for the qemu_fdt_setprop_string_array() function
-+ * which takes a va-arg set of strings instead of having to setup a
-+ * single use string array.
-+ */
-+#define qemu_fdt_setprop_strings(fdt, path, prop, ...)          \
-+    do {                                                        \
-+        static const char * const __strs[] = { __VA_ARGS__ };   \
-+        qemu_fdt_setprop_string_array(fdt, path, prop,          \
-+                (char **)&__strs, ARRAY_SIZE(__strs));          \
-+     } while(0)
-+
-+
- int qemu_fdt_setprop_phandle(void *fdt, const char *node_path,
-                              const char *property,
-                              const char *target_node_path);
+     fdt = create_device_tree(dt_size);
+     if (!fdt) {
+@@ -608,9 +605,8 @@ static const void *create_fdt(BostonState *s,
+     platreg_name = g_strdup_printf("/soc/system-controller@%" HWADDR_PRIx,
+                                    memmap[BOSTON_PLATREG].base);
+     qemu_fdt_add_subnode(fdt, platreg_name);
+-    qemu_fdt_setprop_string_array(fdt, platreg_name, "compatible",
+-                                 (char **)&syscon_compat,
+-                                 ARRAY_SIZE(syscon_compat));
++    qemu_fdt_setprop_strings(fdt, platreg_name, "compatible",
++                             "img,boston-platform-regs", "syscon");
+     qemu_fdt_setprop_cells(fdt, platreg_name, "reg",
+                            memmap[BOSTON_PLATREG].base,
+                            memmap[BOSTON_PLATREG].size);
 -- 
 2.35.1
 
