@@ -1,25 +1,26 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oll33-00016p-AK
+	id 1oll33-000173-HQ
 	for mharc-qemu-riscv@gnu.org; Fri, 21 Oct 2022 01:58:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ben@luna.fluff.org>)
- id 1oll2w-00011h-2V; Fri, 21 Oct 2022 01:58:18 -0400
+ id 1oll2w-00011g-1b; Fri, 21 Oct 2022 01:58:18 -0400
 Received: from cpc152649-stkp13-2-0-cust121.10-2.cable.virginm.net
  ([86.15.83.122] helo=luna)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ben@luna.fluff.org>)
- id 1oll2u-00074P-4C; Fri, 21 Oct 2022 01:58:17 -0400
+ id 1oll2u-00074N-5h; Fri, 21 Oct 2022 01:58:17 -0400
 Received: from ben by luna with local (Exim 4.96)
- (envelope-from <ben@luna.fluff.org>) id 1oll2n-001R0a-2i;
+ (envelope-from <ben@luna.fluff.org>) id 1oll2n-001R0R-2O;
  Fri, 21 Oct 2022 06:58:09 +0100
 From: Ben Dooks <qemu@ben.fluff.org>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, alistair@alistair23.me, peter.maydell@linaro.org,
  qemu-riscv@nongnu.org, Ben Dooks <qemu@ben.fluff.org>
-Subject: [PATCH v5 5/6] hw/mips: use qemu_fdt_setprop_strings()
-Date: Fri, 21 Oct 2022 06:58:07 +0100
-Message-Id: <20221021055808.342055-6-qemu@ben.fluff.org>
+Subject: [PATCH v5 2/6] hw/core: don't check return on
+ qemu_fdt_setprop_string_array()
+Date: Fri, 21 Oct 2022 06:58:04 +0100
+Message-Id: <20221021055808.342055-3-qemu@ben.fluff.org>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20221021055808.342055-1-qemu@ben.fluff.org>
 References: <20221021055808.342055-1-qemu@ben.fluff.org>
@@ -48,40 +49,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 21 Oct 2022 05:58:18 -0000
 
-Change to using qemu_fdt_setprop_strings() helper in hw/mips.
+The qemu_fdt_setprop_string_array() does not return error codes and
+will call exit() if any of the fdt calls fails (and should print an
+error with the node being altered). This is done to prepare for the
+change for qemu_fdt_setprop_strings() helper which does not return
+any error codes (hw/core/guest-loader.c is the only place where an
+return is checked).
 
 Signed-off-by: Ben Dooks <qemu@ben.fluff.org>
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 ---
- hw/mips/boston.c | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
+ hw/core/guest-loader.c | 22 +++++++---------------
+ 1 file changed, 7 insertions(+), 15 deletions(-)
 
-diff --git a/hw/mips/boston.c b/hw/mips/boston.c
-index d2ab9da1a0..759f6daafe 100644
---- a/hw/mips/boston.c
-+++ b/hw/mips/boston.c
-@@ -515,9 +515,6 @@ static const void *create_fdt(BostonState *s,
-     MachineState *mc = s->mach;
-     uint32_t platreg_ph, gic_ph, clk_ph;
-     char *name, *gic_name, *platreg_name, *stdout_name;
--    static const char * const syscon_compat[2] = {
--        "img,boston-platform-regs", "syscon"
--    };
+diff --git a/hw/core/guest-loader.c b/hw/core/guest-loader.c
+index 391c875a29..c61ebc4144 100644
+--- a/hw/core/guest-loader.c
++++ b/hw/core/guest-loader.c
+@@ -57,25 +57,17 @@ static void loader_insert_platform_data(GuestLoaderState *s, int size,
  
-     fdt = create_device_tree(dt_size);
-     if (!fdt) {
-@@ -608,9 +605,8 @@ static const void *create_fdt(BostonState *s,
-     platreg_name = g_strdup_printf("/soc/system-controller@%" HWADDR_PRIx,
-                                    memmap[BOSTON_PLATREG].base);
-     qemu_fdt_add_subnode(fdt, platreg_name);
--    qemu_fdt_setprop_string_array(fdt, platreg_name, "compatible",
--                                 (char **)&syscon_compat,
--                                 ARRAY_SIZE(syscon_compat));
-+    qemu_fdt_setprop_strings(fdt, platreg_name, "compatible",
-+                             "img,boston-platform-regs", "syscon");
-     qemu_fdt_setprop_cells(fdt, platreg_name, "reg",
-                            memmap[BOSTON_PLATREG].base,
-                            memmap[BOSTON_PLATREG].size);
+     if (s->kernel) {
+         const char *compat[2] = { "multiboot,module", "multiboot,kernel" };
+-        if (qemu_fdt_setprop_string_array(fdt, node, "compatible",
+-                                          (char **) &compat,
+-                                          ARRAY_SIZE(compat)) < 0) {
+-            error_setg(errp, "couldn't set %s/compatible", node);
+-            return;
+-        }
++        qemu_fdt_setprop_string_array(fdt, node, "compatible",
++                                      (char **) &compat,
++                                      ARRAY_SIZE(compat));
+         if (s->args) {
+-            if (qemu_fdt_setprop_string(fdt, node, "bootargs", s->args) < 0) {
+-                error_setg(errp, "couldn't set %s/bootargs", node);
+-            }
++            qemu_fdt_setprop_string(fdt, node, "bootargs", s->args);
+         }
+     } else if (s->initrd) {
+         const char *compat[2] = { "multiboot,module", "multiboot,ramdisk" };
+-        if (qemu_fdt_setprop_string_array(fdt, node, "compatible",
+-                                          (char **) &compat,
+-                                          ARRAY_SIZE(compat)) < 0) {
+-            error_setg(errp, "couldn't set %s/compatible", node);
+-            return;
+-        }
++        qemu_fdt_setprop_string_array(fdt, node, "compatible",
++                                      (char **) &compat,
++                                      ARRAY_SIZE(compat));
+     }
+ }
+ 
 -- 
 2.35.1
 
