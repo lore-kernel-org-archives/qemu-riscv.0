@@ -1,76 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1olnyf-0006zS-F6
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Oct 2022 05:06:06 -0400
+	id 1olnzg-0007L6-Rt
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Oct 2022 05:07:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1olnxu-0006dO-Bn
- for qemu-riscv@nongnu.org; Fri, 21 Oct 2022 05:05:20 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1olnyL-0006kn-1D
+ for qemu-riscv@nongnu.org; Fri, 21 Oct 2022 05:05:56 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1olnxd-0006uh-Eh
- for qemu-riscv@nongnu.org; Fri, 21 Oct 2022 05:05:18 -0400
-Received: by mail-wr1-x429.google.com with SMTP id n12so3756270wrp.10
- for <qemu-riscv@nongnu.org>; Fri, 21 Oct 2022 02:04:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1olnyG-0007AI-Kx
+ for qemu-riscv@nongnu.org; Fri, 21 Oct 2022 05:05:44 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ fn7-20020a05600c688700b003b4fb113b86so1586709wmb.0
+ for <qemu-riscv@nongnu.org>; Fri, 21 Oct 2022 02:05:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=y7UgkPpVzTuScWF5Q96hwc28pMPHkRMxjYk8/0j1FrI=;
- b=zT9svUu7elHRGluminfWonbfuDstvLNYfoJsMttme5Oacylsz/6UfM0cjYxOUx/9e/
- SLiZBeebNscTLi5JKp/3p7jhE0tUp1W1zyM+fWucfTdoEEjAblgKznRQgXCMonPPRo5v
- viM8XCutW8U4uEYTX9K8jjU51CNtfiBPfGuFkkI7UqvwCYljUMDn7nu/lAkzFdB/sLvh
- MAoyGIRCd15rljP/GPYy4v9JTaMZKoHZqrE6ou6IaZZ6g9UoEXrZSkgjKzI4uoU07qn3
- 42LeMYVsqptXlNEJ9hpgE/s5M80vt8ZtV+9ZPctiwBhXVmDc4ZBb5HahoCnIEAV/WAcI
- jqJA==
+ bh=X2dtBxxRHBB7DauWuQoMygKfYOJfO1vsAHNlY5BLQ9w=;
+ b=d351lmrYxep+j+mK8HQuRCuO03UZouD4g0LQ1AjWQ2gSttzjza07PxmIhHCj+UV9Tb
+ ahveu+lnmsJDa6SJ+oaEY3eOuBO2gJp2XqbC4MoSeVetCK1a/eZ3vIyEkDqOtmeRQrJa
+ T8KQc1LjoaONi2xoOOaBiudkX5ArCYVelTS06CTSvSUQaLt4iamPyj6t93qr2TBeRbNe
+ 9GbKNeZ0rKPhoDh7jvEb2tEOLyDmHgyru9B9wZ9QRURlTemcxqf6nUcINl9vJPDCSBcI
+ R36h5zyJQkLTZzYrI7DCBpoaxyk9dTjkNF82bGRK9ryAjO7YfF/9cdbx+hD0ucyEi2D5
+ FV1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=y7UgkPpVzTuScWF5Q96hwc28pMPHkRMxjYk8/0j1FrI=;
- b=kfsM6Ju7XF05dbqd0ZPbRjng4u6pREPJUITYbjaml4BAateZvWAWQDcl2+G+JOb9RS
- AIuEZ7WLcrzm5JV5Miocl8K/mqOH3f7H5mS53hWIZJqVUnA/YogOGxVyLJDr+IG4AjbB
- LSRVVy2kMtDdPVh+1fND00gWrJFJ8EdM9+7eywdyLswzax1bCCybGIwOaduVPD3xxLrW
- 0FwYSI2Dn6Il308E564nEoubbaiRa5oh9L0A4ZS4xDvypUKxGkiCHtg3k2Y/f8W8ZSaz
- rCFWKVl4RZrGeBmtErcQT2aSF/1cRi4C7gKy+qReKOC4kBkql9XA4+m+MacqAQ1XPL5P
- iWZA==
-X-Gm-Message-State: ACrzQf27zqnA41F6THnZERIGPQgTFlbTSBpN7zBgdM+0Eoy+UV5eNRCP
- fucOMSa+Et4VWYKB8GszLWZLQw==
-X-Google-Smtp-Source: AMsMyM5Rn0lOzOp8MPuN+SXnUVmT3b3rSGOdjesNZy5boLelVPOgo8XiBA+IH6IYNmqc6kKCFE15Zw==
-X-Received: by 2002:adf:ed91:0:b0:22e:4f88:a9fc with SMTP id
- c17-20020adfed91000000b0022e4f88a9fcmr10930385wro.669.1666343097128; 
- Fri, 21 Oct 2022 02:04:57 -0700 (PDT)
+ bh=X2dtBxxRHBB7DauWuQoMygKfYOJfO1vsAHNlY5BLQ9w=;
+ b=wkZYL1WPY2TLgK6VeF1+bsNqOIViSwMuOLNNyyaA8q+eC6ur2z/qZfewrm/vGKd3D7
+ NA/j6bBtXvhlYQ8xtjqH/KwXLBuuIW7L7m+jTShPwyYWa4izYNsU7b47yv1KOdy9XMUV
+ pBh7+A8lhm/Q8sHu98nlY0Wl/NC6CIi1QZbdor1XrUE4hk5YaDmg0VBjKFkH6OXZuViW
+ PFu8vBEaBzKx72v7Igbe3tkkxGrvJ+nPUAt9FFCWbIFBXpSho266x+cNwwCma8Qz8KCI
+ M6VootdOOcU+acuyJnZZJ82jahHHJUeH25wsec7Ki/qBmGMVDR1bQGe2AnE3Y+RnnndX
+ VcrQ==
+X-Gm-Message-State: ACrzQf3GFdP2Q2Age0JVX8RGUV3BkPSubmDXQeOCjedEE4CWbLxNr8SL
+ Ak1GBvbTFpDckYQoKKh6zqnVOw==
+X-Google-Smtp-Source: AMsMyM6a6wPDooiWEoeZcyTnt3TfobZUSU8PE8jv1LAr1rC9g+tX04KbKaeAt3nNooWGyy1cau0Dqw==
+X-Received: by 2002:a05:600c:3511:b0:3b4:bb85:f1e3 with SMTP id
+ h17-20020a05600c351100b003b4bb85f1e3mr33722635wmq.0.1666343137846; 
+ Fri, 21 Oct 2022 02:05:37 -0700 (PDT)
 Received: from [10.50.0.10]
  (ec2-54-194-108-71.eu-west-1.compute.amazonaws.com. [54.194.108.71])
  by smtp.gmail.com with ESMTPSA id
- u12-20020a5d6acc000000b0022ae0965a8asm17972793wrw.24.2022.10.21.02.04.55
+ h5-20020adfe985000000b002322bff5b3bsm22287680wrm.54.2022.10.21.02.05.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 21 Oct 2022 02:04:56 -0700 (PDT)
-Message-ID: <cb274017-85af-c603-778f-f2017e59e1d4@linaro.org>
-Date: Fri, 21 Oct 2022 11:04:54 +0200
+ Fri, 21 Oct 2022 02:05:37 -0700 (PDT)
+Message-ID: <d47ca14f-1dd8-8dff-bdce-6e8223f0b2e5@linaro.org>
+Date: Fri, 21 Oct 2022 11:05:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.3.2
-Subject: Re: add qemu_fdt_setprop_strings
+Subject: Re: [PATCH v5 5/6] hw/mips: use qemu_fdt_setprop_strings()
 Content-Language: en-US
-To: Andrew Jones <ajones@ventanamicro.com>, Ben Dooks <qemu@ben.fluff.org>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, alistair@alistair23.me,
- peter.maydell@linaro.org, qemu-riscv@nongnu.org
+To: Ben Dooks <qemu@ben.fluff.org>, qemu-arm@nongnu.org
+Cc: qemu-devel@nongnu.org, alistair@alistair23.me, peter.maydell@linaro.org,
+ qemu-riscv@nongnu.org
 References: <20221021055808.342055-1-qemu@ben.fluff.org>
- <20221021070047.225ngzlqqwsvgbqw@kamzik>
+ <20221021055808.342055-6-qemu@ben.fluff.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20221021070047.225ngzlqqwsvgbqw@kamzik>
+In-Reply-To: <20221021055808.342055-6-qemu@ben.fluff.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- SPF_PASS=-0.001,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,22 +84,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2022 09:05:46 -0000
+X-List-Received-Date: Fri, 21 Oct 2022 09:06:05 -0000
 
-On 21/10/22 09:00, Andrew Jones wrote:
-> On Fri, Oct 21, 2022 at 06:58:02AM +0100, Ben Dooks wrote:
->> Add a qemu_fdt_setprop_strings to set a string array into a device-tree.
->>
->> Only minor updates from v4 to fix a couple of minor patch issues.
+On 21/10/22 07:58, Ben Dooks wrote:
+> Change to using qemu_fdt_setprop_strings() helper in hw/mips.
 > 
-> Please see the comments I made on patch 1 of the v4 series, they should
-> be addressed. Also, I'm pretty sure I gave r-b's on most, or the rest,
-> of the series, but I don't see those here in v5. And, please CC previous
-> reviewers when sending out new versions. Finally, why not generate this
-> cover letter with git-format-patch?
+> Signed-off-by: Ben Dooks <qemu@ben.fluff.org>
+> Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+> ---
+>   hw/mips/boston.c | 8 ++------
+>   1 file changed, 2 insertions(+), 6 deletions(-)
 
-Or git-publish:
-
-https://github.com/stefanha/git-publish
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
