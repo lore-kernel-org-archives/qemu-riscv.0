@@ -1,25 +1,25 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oll31-000160-E5
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Oct 2022 01:58:23 -0400
+	id 1oll32-00016U-RD
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Oct 2022 01:58:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ben@luna.fluff.org>)
- id 1oll2w-00011f-1U; Fri, 21 Oct 2022 01:58:18 -0400
+ id 1oll2v-00011a-RW; Fri, 21 Oct 2022 01:58:17 -0400
 Received: from cpc152649-stkp13-2-0-cust121.10-2.cable.virginm.net
  ([86.15.83.122] helo=luna)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ben@luna.fluff.org>)
- id 1oll2u-00074S-61; Fri, 21 Oct 2022 01:58:17 -0400
+ id 1oll2u-00074Q-2q; Fri, 21 Oct 2022 01:58:17 -0400
 Received: from ben by luna with local (Exim 4.96)
- (envelope-from <ben@luna.fluff.org>) id 1oll2n-001R0X-2b;
+ (envelope-from <ben@luna.fluff.org>) id 1oll2n-001R0O-2H;
  Fri, 21 Oct 2022 06:58:09 +0100
 From: Ben Dooks <qemu@ben.fluff.org>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, alistair@alistair23.me, peter.maydell@linaro.org,
  qemu-riscv@nongnu.org, Ben Dooks <qemu@ben.fluff.org>
-Subject: [PATCH v5 4/6] hw/core: use qemu_fdt_setprop_strings()
-Date: Fri, 21 Oct 2022 06:58:06 +0100
-Message-Id: <20221021055808.342055-5-qemu@ben.fluff.org>
+Subject: [PATCH v5 1/6] device_tree: add qemu_fdt_setprop_strings() helper
+Date: Fri, 21 Oct 2022 06:58:03 +0100
+Message-Id: <20221021055808.342055-2-qemu@ben.fluff.org>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20221021055808.342055-1-qemu@ben.fluff.org>
 References: <20221021055808.342055-1-qemu@ben.fluff.org>
@@ -48,42 +48,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 21 Oct 2022 05:58:18 -0000
 
-Change to using the qemu_fdt_setprop_strings() helper in
-hw/core code.
+Add a helper to set a property from a set of strings
+to reduce the following code:
+
+    static const char * const clint_compat[2] = {
+        "sifive,clint0", "riscv,clint0"
+    };
+
+    qemu_fdt_setprop_string_array(fdt, nodename, "compatible",
+        (char **)&clint_compat, ARRAY_SIZE(clint_compat));
 
 Signed-off-by: Ben Dooks <qemu@ben.fluff.org>
 ---
- hw/core/guest-loader.c | 13 +++++--------
- 1 file changed, 5 insertions(+), 8 deletions(-)
+v4:
+ - go back to the non-return call, no-one is using the result
+v3;
+ - fix return value for the call
+ - add better help text
+v2:
+ - fix node/path in comment
+---
+ include/sysemu/device_tree.h | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-diff --git a/hw/core/guest-loader.c b/hw/core/guest-loader.c
-index c61ebc4144..7b8e32e06f 100644
---- a/hw/core/guest-loader.c
-+++ b/hw/core/guest-loader.c
-@@ -56,18 +56,15 @@ static void loader_insert_platform_data(GuestLoaderState *s, int size,
-     qemu_fdt_setprop(fdt, node, "reg", &reg_attr, sizeof(reg_attr));
+diff --git a/include/sysemu/device_tree.h b/include/sysemu/device_tree.h
+index e7c5441f56..cb49df471b 100644
+--- a/include/sysemu/device_tree.h
++++ b/include/sysemu/device_tree.h
+@@ -87,6 +87,25 @@ int qemu_fdt_setprop_string(void *fdt, const char *node_path,
+ int qemu_fdt_setprop_string_array(void *fdt, const char *node_path,
+                                   const char *prop, char **array, int len);
  
-     if (s->kernel) {
--        const char *compat[2] = { "multiboot,module", "multiboot,kernel" };
--        qemu_fdt_setprop_string_array(fdt, node, "compatible",
--                                      (char **) &compat,
--                                      ARRAY_SIZE(compat));
-+        qemu_fdt_setprop_strings(fdt, node, "compatible",
-+                                 "multiboot,module", "multiboot,kernel");
++/**
++ * qemu_fdt_setprop_strings: set a property from a set of strings
++ *
++ * @fdt: pointer to the dt blob
++ * @path: node name
++ * @prop: property array
++ *
++ * This is a helper for the qemu_fdt_setprop_string_array() function
++ * which takes a va-arg set of strings instead of having to setup a
++ * single use string array.
++ */
++#define qemu_fdt_setprop_strings(fdt, path, prop, ...)          \
++    do {                                                        \
++        static const char * const __strs[] = { __VA_ARGS__ };   \
++        qemu_fdt_setprop_string_array(fdt, path, prop,          \
++                (char **)&__strs, ARRAY_SIZE(__strs));          \
++     } while(0)
 +
-         if (s->args) {
-             qemu_fdt_setprop_string(fdt, node, "bootargs", s->args);
-         }
-     } else if (s->initrd) {
--        const char *compat[2] = { "multiboot,module", "multiboot,ramdisk" };
--        qemu_fdt_setprop_string_array(fdt, node, "compatible",
--                                      (char **) &compat,
--                                      ARRAY_SIZE(compat));
-+        qemu_fdt_setprop_strings(fdt, node, "compatible",
-+                                 "multiboot,module", "multiboot,ramdisk");
-     }
- }
- 
++
+ int qemu_fdt_setprop_phandle(void *fdt, const char *node_path,
+                              const char *property,
+                              const char *target_node_path);
 -- 
 2.35.1
 
