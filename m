@@ -1,25 +1,26 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oll34-00017k-2K
+	id 1oll34-00017y-8m
 	for mharc-qemu-riscv@gnu.org; Fri, 21 Oct 2022 01:58:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ben@luna.fluff.org>)
- id 1oll2x-00013k-Sn; Fri, 21 Oct 2022 01:58:19 -0400
+ id 1oll2x-00013G-9R; Fri, 21 Oct 2022 01:58:19 -0400
 Received: from cpc152649-stkp13-2-0-cust121.10-2.cable.virginm.net
  ([86.15.83.122] helo=luna)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ben@luna.fluff.org>)
- id 1oll2u-00074R-3e; Fri, 21 Oct 2022 01:58:19 -0400
+ id 1oll2u-00074T-2z; Fri, 21 Oct 2022 01:58:19 -0400
 Received: from ben by luna with local (Exim 4.96)
- (envelope-from <ben@luna.fluff.org>) id 1oll2n-001R0d-2p;
+ (envelope-from <ben@luna.fluff.org>) id 1oll2n-001R0U-2V;
  Fri, 21 Oct 2022 06:58:09 +0100
 From: Ben Dooks <qemu@ben.fluff.org>
 To: qemu-arm@nongnu.org
 Cc: qemu-devel@nongnu.org, alistair@alistair23.me, peter.maydell@linaro.org,
  qemu-riscv@nongnu.org, Ben Dooks <qemu@ben.fluff.org>
-Subject: [PATCH v5 6/6] hw/arm: change to use qemu_fdt_setprop_strings()
-Date: Fri, 21 Oct 2022 06:58:08 +0100
-Message-Id: <20221021055808.342055-7-qemu@ben.fluff.org>
+Subject: [PATCH v5 3/6] hw/riscv: use qemu_fdt_setprop_strings() for string
+ arrays
+Date: Fri, 21 Oct 2022 06:58:05 +0100
+Message-Id: <20221021055808.342055-4-qemu@ben.fluff.org>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20221021055808.342055-1-qemu@ben.fluff.org>
 References: <20221021055808.342055-1-qemu@ben.fluff.org>
@@ -48,304 +49,156 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 21 Oct 2022 05:58:20 -0000
 
-Change to using qemu_fdt_setprop_strings() instead of using
-\0 separated string arrays. Note, also there were a few places
-where qemu_fdt_setprop_string() can be used in the same areas.
+Use the qemu_fdt_setprop_strings() in sifve_u.c to simplify the code.
 
 Signed-off-by: Ben Dooks <qemu@ben.fluff.org>
 ---
-v4:
- - fixed checkpatch errors with string
- - fixed patch subject
+v5: fix re-ordering in sifive_u
 ---
- hw/arm/boot.c             |  8 +++---
- hw/arm/virt.c             | 28 +++++++++------------
- hw/arm/xlnx-versal-virt.c | 51 ++++++++++++++++-----------------------
- 3 files changed, 37 insertions(+), 50 deletions(-)
+ hw/riscv/sifive_u.c | 18 +++++-------------
+ hw/riscv/spike.c    |  7 ++-----
+ hw/riscv/virt.c     | 25 ++++++-------------------
+ 3 files changed, 13 insertions(+), 37 deletions(-)
 
-diff --git a/hw/arm/boot.c b/hw/arm/boot.c
-index b0b92af188..8cce4e0f4d 100644
---- a/hw/arm/boot.c
-+++ b/hw/arm/boot.c
-@@ -490,11 +490,11 @@ static void fdt_add_psci_node(void *fdt)
-     qemu_fdt_add_subnode(fdt, "/psci");
-     if (armcpu->psci_version >= QEMU_PSCI_VERSION_0_2) {
-         if (armcpu->psci_version < QEMU_PSCI_VERSION_1_0) {
--            const char comp[] = "arm,psci-0.2\0arm,psci";
--            qemu_fdt_setprop(fdt, "/psci", "compatible", comp, sizeof(comp));
-+            qemu_fdt_setprop_strings(fdt, "/psci", "compatible",
-+                                     "arm,psci-0.2", "arm,psci");
-         } else {
--            const char comp[] = "arm,psci-1.0\0arm,psci-0.2\0arm,psci";
--            qemu_fdt_setprop(fdt, "/psci", "compatible", comp, sizeof(comp));
-+            qemu_fdt_setprop_strings(fdt, "/psci", "compatible",
-+                                     "arm,psci-1.0", "arm,psci-0.2", "arm,psci");
-         }
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index b139824aab..2e0e78cbee 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -103,13 +103,6 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+     char *nodename;
+     uint32_t plic_phandle, prci_phandle, gpio_phandle, phandle = 1;
+     uint32_t hfclk_phandle, rtcclk_phandle, phy_phandle;
+-    static const char * const ethclk_names[2] = { "pclk", "hclk" };
+-    static const char * const clint_compat[2] = {
+-        "sifive,clint0", "riscv,clint0"
+-    };
+-    static const char * const plic_compat[2] = {
+-        "sifive,plic-1.0.0", "riscv,plic0"
+-    };
  
-         cpu_off_fn = QEMU_PSCI_0_2_FN_CPU_OFF;
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index cda9defe8f..1917929e6a 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -345,9 +345,8 @@ static void fdt_add_timer_nodes(const VirtMachineState *vms)
+     if (ms->dtb) {
+         fdt = s->fdt = load_device_tree(ms->dtb, &s->fdt_size);
+@@ -221,8 +214,8 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+     nodename = g_strdup_printf("/soc/clint@%lx",
+         (long)memmap[SIFIVE_U_DEV_CLINT].base);
+     qemu_fdt_add_subnode(fdt, nodename);
+-    qemu_fdt_setprop_string_array(fdt, nodename, "compatible",
+-        (char **)&clint_compat, ARRAY_SIZE(clint_compat));
++    qemu_fdt_setprop_strings(fdt, nodename, "compatible",
++                             "sifive,clint0", "riscv,clint0");
+     qemu_fdt_setprop_cells(fdt, nodename, "reg",
+         0x0, memmap[SIFIVE_U_DEV_CLINT].base,
+         0x0, memmap[SIFIVE_U_DEV_CLINT].size);
+@@ -279,8 +272,8 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+         (long)memmap[SIFIVE_U_DEV_PLIC].base);
+     qemu_fdt_add_subnode(fdt, nodename);
+     qemu_fdt_setprop_cell(fdt, nodename, "#interrupt-cells", 1);
+-    qemu_fdt_setprop_string_array(fdt, nodename, "compatible",
+-        (char **)&plic_compat, ARRAY_SIZE(plic_compat));
++    qemu_fdt_setprop_strings(fdt, nodename, "compatbile",
++                             "sifive,plic-1.0.0", "riscv,plic0");
+     qemu_fdt_setprop(fdt, nodename, "interrupt-controller", NULL, 0);
+     qemu_fdt_setprop(fdt, nodename, "interrupts-extended",
+         cells, (ms->smp.cpus * 4 - 2) * sizeof(uint32_t));
+@@ -426,8 +419,7 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+     qemu_fdt_setprop_cell(fdt, nodename, "interrupts", SIFIVE_U_GEM_IRQ);
+     qemu_fdt_setprop_cells(fdt, nodename, "clocks",
+         prci_phandle, PRCI_CLK_GEMGXLPLL, prci_phandle, PRCI_CLK_GEMGXLPLL);
+-    qemu_fdt_setprop_string_array(fdt, nodename, "clock-names",
+-        (char **)&ethclk_names, ARRAY_SIZE(ethclk_names));
++    qemu_fdt_setprop_strings(fdt, nodename, "clock-names", "pclk", "hclk");
+     qemu_fdt_setprop(fdt, nodename, "local-mac-address",
+         s->soc.gem.conf.macaddr.a, ETH_ALEN);
+     qemu_fdt_setprop_cell(fdt, nodename, "#address-cells", 1);
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 1e1d752c00..80480d4ab4 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -61,9 +61,6 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+     uint32_t cpu_phandle, intc_phandle, phandle = 1;
+     char *name, *mem_name, *clint_name, *clust_name;
+     char *core_name, *cpu_name, *intc_name;
+-    static const char * const clint_compat[2] = {
+-        "sifive,clint0", "riscv,clint0"
+-    };
  
-     armcpu = ARM_CPU(qemu_get_cpu(0));
-     if (arm_feature(&armcpu->env, ARM_FEATURE_V8)) {
--        const char compat[] = "arm,armv8-timer\0arm,armv7-timer";
--        qemu_fdt_setprop(ms->fdt, "/timer", "compatible",
--                         compat, sizeof(compat));
-+        qemu_fdt_setprop_strings(ms->fdt, "/timer", "compatible",
-+                                 "arm,armv8-timer", "arm,armv7-timer");
-     } else {
-         qemu_fdt_setprop_string(ms->fdt, "/timer", "compatible",
-                                 "arm,armv7-timer");
-@@ -846,8 +845,6 @@ static void create_uart(const VirtMachineState *vms, int uart,
-     hwaddr base = vms->memmap[uart].base;
-     hwaddr size = vms->memmap[uart].size;
-     int irq = vms->irqmap[uart];
--    const char compat[] = "arm,pl011\0arm,primecell";
--    const char clocknames[] = "uartclk\0apb_pclk";
-     DeviceState *dev = qdev_new(TYPE_PL011);
-     SysBusDevice *s = SYS_BUS_DEVICE(dev);
-     MachineState *ms = MACHINE(vms);
-@@ -861,8 +858,8 @@ static void create_uart(const VirtMachineState *vms, int uart,
-     nodename = g_strdup_printf("/pl011@%" PRIx64, base);
-     qemu_fdt_add_subnode(ms->fdt, nodename);
-     /* Note that we can't use setprop_string because of the embedded NUL */
--    qemu_fdt_setprop(ms->fdt, nodename, "compatible",
--                         compat, sizeof(compat));
-+    qemu_fdt_setprop_strings(ms->fdt, nodename, "compatible",
-+                             "arm,pl011", "arm,primecell");
-     qemu_fdt_setprop_sized_cells(ms->fdt, nodename, "reg",
-                                      2, base, 2, size);
-     qemu_fdt_setprop_cells(ms->fdt, nodename, "interrupts",
-@@ -870,8 +867,8 @@ static void create_uart(const VirtMachineState *vms, int uart,
-                                GIC_FDT_IRQ_FLAGS_LEVEL_HI);
-     qemu_fdt_setprop_cells(ms->fdt, nodename, "clocks",
-                                vms->clock_phandle, vms->clock_phandle);
--    qemu_fdt_setprop(ms->fdt, nodename, "clock-names",
--                         clocknames, sizeof(clocknames));
-+    qemu_fdt_setprop_strings(ms->fdt, nodename, "clock-names",
-+                             "uartclk", "apb_pclk");
+     fdt = s->fdt = create_device_tree(&s->fdt_size);
+     if (!fdt) {
+@@ -161,8 +158,8 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+             (memmap[SPIKE_CLINT].size * socket);
+         clint_name = g_strdup_printf("/soc/clint@%lx", clint_addr);
+         qemu_fdt_add_subnode(fdt, clint_name);
+-        qemu_fdt_setprop_string_array(fdt, clint_name, "compatible",
+-            (char **)&clint_compat, ARRAY_SIZE(clint_compat));
++        qemu_fdt_setprop_strings(fdt, clint_name, "compatible",
++                                 "sifive,clint0", "riscv,clint0");
+         qemu_fdt_setprop_cells(fdt, clint_name, "reg",
+             0x0, clint_addr, 0x0, memmap[SPIKE_CLINT].size);
+         qemu_fdt_setprop(fdt, clint_name, "interrupts-extended",
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index a5bc7353b4..5c644212a2 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -303,9 +303,6 @@ static void create_fdt_socket_clint(RISCVVirtState *s,
+     uint32_t *clint_cells;
+     unsigned long clint_addr;
+     MachineState *mc = MACHINE(s);
+-    static const char * const clint_compat[2] = {
+-        "sifive,clint0", "riscv,clint0"
+-    };
  
-     if (uart == VIRT_UART) {
-         qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", nodename);
-@@ -893,14 +890,14 @@ static void create_rtc(const VirtMachineState *vms)
-     hwaddr base = vms->memmap[VIRT_RTC].base;
-     hwaddr size = vms->memmap[VIRT_RTC].size;
-     int irq = vms->irqmap[VIRT_RTC];
--    const char compat[] = "arm,pl031\0arm,primecell";
-     MachineState *ms = MACHINE(vms);
+     clint_cells = g_new0(uint32_t, s->soc[socket].num_harts * 4);
  
-     sysbus_create_simple("pl031", base, qdev_get_gpio_in(vms->gic, irq));
+@@ -319,9 +316,8 @@ static void create_fdt_socket_clint(RISCVVirtState *s,
+     clint_addr = memmap[VIRT_CLINT].base + (memmap[VIRT_CLINT].size * socket);
+     clint_name = g_strdup_printf("/soc/clint@%lx", clint_addr);
+     qemu_fdt_add_subnode(mc->fdt, clint_name);
+-    qemu_fdt_setprop_string_array(mc->fdt, clint_name, "compatible",
+-                                  (char **)&clint_compat,
+-                                  ARRAY_SIZE(clint_compat));
++    qemu_fdt_setprop_strings(mc->fdt, clint_name, "compatible",
++                             "sifive,clint0", "riscv,clint0");
+     qemu_fdt_setprop_cells(mc->fdt, clint_name, "reg",
+         0x0, clint_addr, 0x0, memmap[VIRT_CLINT].size);
+     qemu_fdt_setprop(mc->fdt, clint_name, "interrupts-extended",
+@@ -430,9 +426,6 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
+     uint32_t *plic_cells;
+     unsigned long plic_addr;
+     MachineState *mc = MACHINE(s);
+-    static const char * const plic_compat[2] = {
+-        "sifive,plic-1.0.0", "riscv,plic0"
+-    };
  
-     nodename = g_strdup_printf("/pl031@%" PRIx64, base);
-     qemu_fdt_add_subnode(ms->fdt, nodename);
--    qemu_fdt_setprop(ms->fdt, nodename, "compatible", compat, sizeof(compat));
-+    qemu_fdt_setprop_strings(ms->fdt, nodename, "compatible",
-+                             "arm,pl031", "arm,primecell");
-     qemu_fdt_setprop_sized_cells(ms->fdt, nodename, "reg",
-                                  2, base, 2, size);
-     qemu_fdt_setprop_cells(ms->fdt, nodename, "interrupts",
-@@ -986,7 +983,6 @@ static void create_gpio_devices(const VirtMachineState *vms, int gpio,
-     hwaddr base = vms->memmap[gpio].base;
-     hwaddr size = vms->memmap[gpio].size;
-     int irq = vms->irqmap[gpio];
--    const char compat[] = "arm,pl061\0arm,primecell";
-     SysBusDevice *s;
-     MachineState *ms = MACHINE(vms);
- 
-@@ -1004,7 +1000,8 @@ static void create_gpio_devices(const VirtMachineState *vms, int gpio,
-     qemu_fdt_add_subnode(ms->fdt, nodename);
-     qemu_fdt_setprop_sized_cells(ms->fdt, nodename, "reg",
-                                  2, base, 2, size);
--    qemu_fdt_setprop(ms->fdt, nodename, "compatible", compat, sizeof(compat));
-+    qemu_fdt_setprop_strings(ms->fdt, nodename, "compatible",
-+                             "arm,pl061", "arm,primecell");
-     qemu_fdt_setprop_cell(ms->fdt, nodename, "#gpio-cells", 2);
-     qemu_fdt_setprop(ms->fdt, nodename, "gpio-controller", NULL, 0);
-     qemu_fdt_setprop_cells(ms->fdt, nodename, "interrupts",
-@@ -1328,7 +1325,6 @@ static void create_smmu(const VirtMachineState *vms,
-     int i;
-     hwaddr base = vms->memmap[VIRT_SMMU].base;
-     hwaddr size = vms->memmap[VIRT_SMMU].size;
--    const char irq_names[] = "eventq\0priq\0cmdq-sync\0gerror";
-     DeviceState *dev;
-     MachineState *ms = MACHINE(vms);
- 
-@@ -1358,8 +1354,8 @@ static void create_smmu(const VirtMachineState *vms,
-             GIC_FDT_IRQ_TYPE_SPI, irq + 2, GIC_FDT_IRQ_FLAGS_EDGE_LO_HI,
-             GIC_FDT_IRQ_TYPE_SPI, irq + 3, GIC_FDT_IRQ_FLAGS_EDGE_LO_HI);
- 
--    qemu_fdt_setprop(ms->fdt, node, "interrupt-names", irq_names,
--                     sizeof(irq_names));
-+    qemu_fdt_setprop_strings(ms->fdt, node, "interrupt-names",
-+                             "eventq", "priq", "cmdq-sync", "gerror");
- 
-     qemu_fdt_setprop(ms->fdt, node, "dma-coherent", NULL, 0);
- 
-diff --git a/hw/arm/xlnx-versal-virt.c b/hw/arm/xlnx-versal-virt.c
-index 37fc9b919c..20ae5b0eb1 100644
---- a/hw/arm/xlnx-versal-virt.c
-+++ b/hw/arm/xlnx-versal-virt.c
-@@ -153,7 +153,6 @@ static void fdt_add_timer_nodes(VersalVirt *s)
- 
- static void fdt_add_usb_xhci_nodes(VersalVirt *s)
- {
--    const char clocknames[] = "bus_clk\0ref_clk";
-     const char irq_name[] = "dwc_usb3";
-     const char compatVersalDWC3[] = "xlnx,versal-dwc3";
-     const char compatDWC3[] = "snps,dwc3";
-@@ -165,8 +164,8 @@ static void fdt_add_usb_xhci_nodes(VersalVirt *s)
-     qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
-                                  2, MM_USB2_CTRL_REGS,
-                                  2, MM_USB2_CTRL_REGS_SIZE);
--    qemu_fdt_setprop(s->fdt, name, "clock-names",
--                         clocknames, sizeof(clocknames));
-+    qemu_fdt_setprop_strings(s->fdt, name, "clock-names",
-+                             "bus_clk", "ref_clk");
-     qemu_fdt_setprop_cells(s->fdt, name, "clocks",
-                                s->phandle.clk_25Mhz, s->phandle.clk_125Mhz);
-     qemu_fdt_setprop(s->fdt, name, "ranges", NULL, 0);
-@@ -205,8 +204,6 @@ static void fdt_add_uart_nodes(VersalVirt *s)
- {
-     uint64_t addrs[] = { MM_UART1, MM_UART0 };
-     unsigned int irqs[] = { VERSAL_UART1_IRQ_0, VERSAL_UART0_IRQ_0 };
--    const char compat[] = "arm,pl011\0arm,sbsa-uart";
--    const char clocknames[] = "uartclk\0apb_pclk";
-     int i;
- 
-     for (i = 0; i < ARRAY_SIZE(addrs); i++) {
-@@ -215,16 +212,16 @@ static void fdt_add_uart_nodes(VersalVirt *s)
-         qemu_fdt_setprop_cell(s->fdt, name, "current-speed", 115200);
-         qemu_fdt_setprop_cells(s->fdt, name, "clocks",
-                                s->phandle.clk_125Mhz, s->phandle.clk_125Mhz);
--        qemu_fdt_setprop(s->fdt, name, "clock-names",
--                         clocknames, sizeof(clocknames));
-+        qemu_fdt_setprop_strings(s->fdt, name, "clock-names",
-+                                 "uartclk", "apb_pclk");
- 
-         qemu_fdt_setprop_cells(s->fdt, name, "interrupts",
-                                GIC_FDT_IRQ_TYPE_SPI, irqs[i],
-                                GIC_FDT_IRQ_FLAGS_LEVEL_HI);
-         qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
-                                      2, addrs[i], 2, 0x1000);
--        qemu_fdt_setprop(s->fdt, name, "compatible",
--                         compat, sizeof(compat));
-+        qemu_fdt_setprop_strings(s->fdt, name, "compatible",
-+                                 "arm,pl011", "arm,sbsa-uart");
-         qemu_fdt_setprop(s->fdt, name, "u-boot,dm-pre-reloc", NULL, 0);
- 
-         if (addrs[i] == MM_UART0) {
-@@ -251,8 +248,6 @@ static void fdt_add_gem_nodes(VersalVirt *s)
- {
-     uint64_t addrs[] = { MM_GEM1, MM_GEM0 };
-     unsigned int irqs[] = { VERSAL_GEM1_IRQ_0, VERSAL_GEM0_IRQ_0 };
--    const char clocknames[] = "pclk\0hclk\0tx_clk\0rx_clk";
--    const char compat_gem[] = "cdns,zynqmp-gem\0cdns,gem";
-     int i;
- 
-     for (i = 0; i < ARRAY_SIZE(addrs); i++) {
-@@ -266,8 +261,8 @@ static void fdt_add_gem_nodes(VersalVirt *s)
-         qemu_fdt_setprop_cells(s->fdt, name, "clocks",
-                                s->phandle.clk_25Mhz, s->phandle.clk_25Mhz,
-                                s->phandle.clk_125Mhz, s->phandle.clk_125Mhz);
--        qemu_fdt_setprop(s->fdt, name, "clock-names",
--                         clocknames, sizeof(clocknames));
-+        qemu_fdt_setprop_strings(s->fdt, name, "clock-names",
-+                                 "pclk", "hclk", "tx_clk", "rx_clk");
-         qemu_fdt_setprop_cells(s->fdt, name, "interrupts",
-                                GIC_FDT_IRQ_TYPE_SPI, irqs[i],
-                                GIC_FDT_IRQ_FLAGS_LEVEL_HI,
-@@ -275,8 +270,8 @@ static void fdt_add_gem_nodes(VersalVirt *s)
-                                GIC_FDT_IRQ_FLAGS_LEVEL_HI);
-         qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
-                                      2, addrs[i], 2, 0x1000);
--        qemu_fdt_setprop(s->fdt, name, "compatible",
--                         compat_gem, sizeof(compat_gem));
-+        qemu_fdt_setprop_strings(s->fdt, name, "compatible",
-+                                 "cdns,zynqmp-gem", "cdns,gem");
-         qemu_fdt_setprop_cell(s->fdt, name, "#address-cells", 1);
-         qemu_fdt_setprop_cell(s->fdt, name, "#size-cells", 0);
-         g_free(name);
-@@ -285,8 +280,6 @@ static void fdt_add_gem_nodes(VersalVirt *s)
- 
- static void fdt_add_zdma_nodes(VersalVirt *s)
- {
--    const char clocknames[] = "clk_main\0clk_apb";
--    const char compat[] = "xlnx,zynqmp-dma-1.0";
-     int i;
- 
-     for (i = XLNX_VERSAL_NR_ADMAS - 1; i >= 0; i--) {
-@@ -298,22 +291,21 @@ static void fdt_add_zdma_nodes(VersalVirt *s)
-         qemu_fdt_setprop_cell(s->fdt, name, "xlnx,bus-width", 64);
-         qemu_fdt_setprop_cells(s->fdt, name, "clocks",
-                                s->phandle.clk_25Mhz, s->phandle.clk_25Mhz);
--        qemu_fdt_setprop(s->fdt, name, "clock-names",
--                         clocknames, sizeof(clocknames));
-+        qemu_fdt_setprop_strings(s->fdt, name, "clock-names",
-+                                 "clk_main", "clk_apb");
-         qemu_fdt_setprop_cells(s->fdt, name, "interrupts",
-                                GIC_FDT_IRQ_TYPE_SPI, VERSAL_ADMA_IRQ_0 + i,
-                                GIC_FDT_IRQ_FLAGS_LEVEL_HI);
-         qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
-                                      2, addr, 2, 0x1000);
--        qemu_fdt_setprop(s->fdt, name, "compatible", compat, sizeof(compat));
-+        qemu_fdt_setprop_string(s->fdt, name, "compatible",
-+                                "xlnx,zynqmp-dma-1.0");
-         g_free(name);
-     }
- }
- 
- static void fdt_add_sd_nodes(VersalVirt *s)
- {
--    const char clocknames[] = "clk_xin\0clk_ahb";
--    const char compat[] = "arasan,sdhci-8.9a";
-     int i;
- 
-     for (i = ARRAY_SIZE(s->soc.pmc.iou.sd) - 1; i >= 0; i--) {
-@@ -324,22 +316,21 @@ static void fdt_add_sd_nodes(VersalVirt *s)
- 
-         qemu_fdt_setprop_cells(s->fdt, name, "clocks",
-                                s->phandle.clk_25Mhz, s->phandle.clk_25Mhz);
--        qemu_fdt_setprop(s->fdt, name, "clock-names",
--                         clocknames, sizeof(clocknames));
-+        qemu_fdt_setprop_strings(s->fdt, name, "clock-names",
-+                                 "clk_xin", "clk_ahb");
-         qemu_fdt_setprop_cells(s->fdt, name, "interrupts",
-                                GIC_FDT_IRQ_TYPE_SPI, VERSAL_SD0_IRQ_0 + i * 2,
-                                GIC_FDT_IRQ_FLAGS_LEVEL_HI);
-         qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
-                                      2, addr, 2, MM_PMC_SD0_SIZE);
--        qemu_fdt_setprop(s->fdt, name, "compatible", compat, sizeof(compat));
-+        qemu_fdt_setprop_string(s->fdt, name, "compatible",
-+                                "arasan,sdhci-8.9a");
-         g_free(name);
-     }
- }
- 
- static void fdt_add_rtc_node(VersalVirt *s)
- {
--    const char compat[] = "xlnx,zynqmp-rtc";
--    const char interrupt_names[] = "alarm\0sec";
-     char *name = g_strdup_printf("/rtc@%x", MM_PMC_RTC);
- 
-     qemu_fdt_add_subnode(s->fdt, name);
-@@ -349,11 +340,11 @@ static void fdt_add_rtc_node(VersalVirt *s)
-                            GIC_FDT_IRQ_FLAGS_LEVEL_HI,
-                            GIC_FDT_IRQ_TYPE_SPI, VERSAL_RTC_SECONDS_IRQ,
-                            GIC_FDT_IRQ_FLAGS_LEVEL_HI);
--    qemu_fdt_setprop(s->fdt, name, "interrupt-names",
--                     interrupt_names, sizeof(interrupt_names));
-+    qemu_fdt_setprop_strings(s->fdt, name, "interrupt-names",
-+                             "alarm", "sec");
-     qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
-                                  2, MM_PMC_RTC, 2, MM_PMC_RTC_SIZE);
--    qemu_fdt_setprop(s->fdt, name, "compatible", compat, sizeof(compat));
-+    qemu_fdt_setprop_string(s->fdt, name, "compatible", "xlnx,zynqmp-rtc");
-     g_free(name);
- }
- 
+     if (kvm_enabled()) {
+         plic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
+@@ -460,9 +453,8 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
+         "#interrupt-cells", FDT_PLIC_INT_CELLS);
+     qemu_fdt_setprop_cell(mc->fdt, plic_name,
+         "#address-cells", FDT_PLIC_ADDR_CELLS);
+-    qemu_fdt_setprop_string_array(mc->fdt, plic_name, "compatible",
+-                                  (char **)&plic_compat,
+-                                  ARRAY_SIZE(plic_compat));
++    qemu_fdt_setprop_strings(mc->fdt, plic_name, "compatible",
++                             "sifive,plic-1.0.0", "riscv,plic0");
+     qemu_fdt_setprop(mc->fdt, plic_name, "interrupt-controller", NULL, 0);
+     qemu_fdt_setprop(mc->fdt, plic_name, "interrupts-extended",
+         plic_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
+@@ -890,13 +882,8 @@ static void create_fdt_reset(RISCVVirtState *s, const MemMapEntry *memmap,
+     name = g_strdup_printf("/soc/test@%lx",
+         (long)memmap[VIRT_TEST].base);
+     qemu_fdt_add_subnode(mc->fdt, name);
+-    {
+-        static const char * const compat[3] = {
+-            "sifive,test1", "sifive,test0", "syscon"
+-        };
+-        qemu_fdt_setprop_string_array(mc->fdt, name, "compatible",
+-                                      (char **)&compat, ARRAY_SIZE(compat));
+-    }
++    qemu_fdt_setprop_strings(mc->fdt, name, "compatible",
++                             "sifive,test1", "sifive,test0", "syscon");
+     qemu_fdt_setprop_cells(mc->fdt, name, "reg",
+         0x0, memmap[VIRT_TEST].base, 0x0, memmap[VIRT_TEST].size);
+     qemu_fdt_setprop_cell(mc->fdt, name, "phandle", test_phandle);
 -- 
 2.35.1
 
