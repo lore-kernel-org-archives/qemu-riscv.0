@@ -1,75 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1olnzg-0007L6-Rt
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Oct 2022 05:07:10 -0400
+	id 1omBHY-0004Zz-6F
+	for mharc-qemu-riscv@gnu.org; Sat, 22 Oct 2022 05:59:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1olnyL-0006kn-1D
- for qemu-riscv@nongnu.org; Fri, 21 Oct 2022 05:05:56 -0400
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1omBHV-0004Zo-VS
+ for qemu-riscv@nongnu.org; Sat, 22 Oct 2022 05:59:05 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1olnyG-0007AI-Kx
- for qemu-riscv@nongnu.org; Fri, 21 Oct 2022 05:05:44 -0400
-Received: by mail-wm1-x329.google.com with SMTP id
- fn7-20020a05600c688700b003b4fb113b86so1586709wmb.0
- for <qemu-riscv@nongnu.org>; Fri, 21 Oct 2022 02:05:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1omBHU-0008FB-Cp
+ for qemu-riscv@nongnu.org; Sat, 22 Oct 2022 05:59:05 -0400
+Received: by mail-pf1-x435.google.com with SMTP id y13so306899pfp.7
+ for <qemu-riscv@nongnu.org>; Sat, 22 Oct 2022 02:59:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=X2dtBxxRHBB7DauWuQoMygKfYOJfO1vsAHNlY5BLQ9w=;
- b=d351lmrYxep+j+mK8HQuRCuO03UZouD4g0LQ1AjWQ2gSttzjza07PxmIhHCj+UV9Tb
- ahveu+lnmsJDa6SJ+oaEY3eOuBO2gJp2XqbC4MoSeVetCK1a/eZ3vIyEkDqOtmeRQrJa
- T8KQc1LjoaONi2xoOOaBiudkX5ArCYVelTS06CTSvSUQaLt4iamPyj6t93qr2TBeRbNe
- 9GbKNeZ0rKPhoDh7jvEb2tEOLyDmHgyru9B9wZ9QRURlTemcxqf6nUcINl9vJPDCSBcI
- R36h5zyJQkLTZzYrI7DCBpoaxyk9dTjkNF82bGRK9ryAjO7YfF/9cdbx+hD0ucyEi2D5
- FV1g==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=RU8/5HTo8+baKMeHrUEQiBWbmsr/936MisDwlU3iBGk=;
+ b=m+HclE7BndO+171z9rIM5f+KdAsuQQwcekZv5h0GAIUIYxV1BvJndK+zpQZPe4T7sa
+ o4LdYXvgfBlEduVXcPXw8z0G7MAkDMTXkonGjlM1uL5YC1CmJ9GBnfx4Jsc8wjpCFeKh
+ 5rZiy9WR0936WanKNzwHeudWvmwBdswwKVxnJhdB/HoNqIxjgfmP24lDPgrZxEIdmpM0
+ rvx7ZM32MWjhn/TgBFOEXr1BQZGYWPJ7/8WvX8AdWplTzcjPbRXllTATwrzhPAEEgvMa
+ xeUomqcp10JpVUIXfygszLOXgpQWOFb1EoGEGhuSosK1+vQ0FUO68gtcCI+OVwc40TiH
+ glIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=X2dtBxxRHBB7DauWuQoMygKfYOJfO1vsAHNlY5BLQ9w=;
- b=wkZYL1WPY2TLgK6VeF1+bsNqOIViSwMuOLNNyyaA8q+eC6ur2z/qZfewrm/vGKd3D7
- NA/j6bBtXvhlYQ8xtjqH/KwXLBuuIW7L7m+jTShPwyYWa4izYNsU7b47yv1KOdy9XMUV
- pBh7+A8lhm/Q8sHu98nlY0Wl/NC6CIi1QZbdor1XrUE4hk5YaDmg0VBjKFkH6OXZuViW
- PFu8vBEaBzKx72v7Igbe3tkkxGrvJ+nPUAt9FFCWbIFBXpSho266x+cNwwCma8Qz8KCI
- M6VootdOOcU+acuyJnZZJ82jahHHJUeH25wsec7Ki/qBmGMVDR1bQGe2AnE3Y+RnnndX
- VcrQ==
-X-Gm-Message-State: ACrzQf3GFdP2Q2Age0JVX8RGUV3BkPSubmDXQeOCjedEE4CWbLxNr8SL
- Ak1GBvbTFpDckYQoKKh6zqnVOw==
-X-Google-Smtp-Source: AMsMyM6a6wPDooiWEoeZcyTnt3TfobZUSU8PE8jv1LAr1rC9g+tX04KbKaeAt3nNooWGyy1cau0Dqw==
-X-Received: by 2002:a05:600c:3511:b0:3b4:bb85:f1e3 with SMTP id
- h17-20020a05600c351100b003b4bb85f1e3mr33722635wmq.0.1666343137846; 
- Fri, 21 Oct 2022 02:05:37 -0700 (PDT)
-Received: from [10.50.0.10]
- (ec2-54-194-108-71.eu-west-1.compute.amazonaws.com. [54.194.108.71])
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RU8/5HTo8+baKMeHrUEQiBWbmsr/936MisDwlU3iBGk=;
+ b=cxxmpPWH5vWs8dX/TARFKnxYr5asOjIG4wHORKokSS/mQ7PId7R2kpgHbDnOsp2gc5
+ YPiXfHW9Hrd6yYzTh2G+3fRB26euqJghBpkR9DLARXEQd4KXx5Mpot/HTtnjEqIadXN9
+ EnkOUHeuu4imLENsoorzbggrMwqt8a/QBJf4t+XwMZ0633z5sO30d7oYQGLGc/ryjpZ3
+ J2VjGSqdOKkLXV1uey4CDa4AHNpq/Eu3d0IjGLZUBDdmg1tKWe+2yY57+OQKFheQIg2H
+ FyNagKP2DXeUglcc59SU/kjyd/H0TCLuOt/i7rlCgJN3vMFwDaxLHkzVggRVn9odg0LA
+ ytdQ==
+X-Gm-Message-State: ACrzQf0/SlJa8RjdpiQq7V9fJ9hGrAVCx17tXyiKaEmlmDDgTEmr/xYD
+ vTfEXReD+RYwT4DvT0sLUBloVQ==
+X-Google-Smtp-Source: AMsMyM7wpT23k+x74M/B8jO4WigDRTCxoZaYInGTBWeodb80VqIvB7Iq+88z3waJiUVBEua9mpZc+A==
+X-Received: by 2002:a05:6a00:174c:b0:565:c73a:9117 with SMTP id
+ j12-20020a056a00174c00b00565c73a9117mr23288425pfc.23.1666432741344; 
+ Sat, 22 Oct 2022 02:59:01 -0700 (PDT)
+Received: from localhost.localdomain ([149.135.10.35])
  by smtp.gmail.com with ESMTPSA id
- h5-20020adfe985000000b002322bff5b3bsm22287680wrm.54.2022.10.21.02.05.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 21 Oct 2022 02:05:37 -0700 (PDT)
-Message-ID: <d47ca14f-1dd8-8dff-bdce-6e8223f0b2e5@linaro.org>
-Date: Fri, 21 Oct 2022 11:05:35 +0200
+ 129-20020a621987000000b0056b3c863950sm2021564pfz.8.2022.10.22.02.58.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 22 Oct 2022 02:59:00 -0700 (PDT)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Alistair.Francis@wdc.com, qemu-riscv@nongnu.org, palmer@dabbelt.com,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH] tcg/riscv: Fix range matched by TCG_CT_CONST_M12
+Date: Sat, 22 Oct 2022 19:58:21 +1000
+Message-Id: <20221022095821.2441874-1-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.3.2
-Subject: Re: [PATCH v5 5/6] hw/mips: use qemu_fdt_setprop_strings()
-Content-Language: en-US
-To: Ben Dooks <qemu@ben.fluff.org>, qemu-arm@nongnu.org
-Cc: qemu-devel@nongnu.org, alistair@alistair23.me, peter.maydell@linaro.org,
- qemu-riscv@nongnu.org
-References: <20221021055808.342055-1-qemu@ben.fluff.org>
- <20221021055808.342055-6-qemu@ben.fluff.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20221021055808.342055-6-qemu@ben.fluff.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -84,17 +77,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2022 09:06:05 -0000
+X-List-Received-Date: Sat, 22 Oct 2022 09:59:06 -0000
 
-On 21/10/22 07:58, Ben Dooks wrote:
-> Change to using qemu_fdt_setprop_strings() helper in hw/mips.
-> 
-> Signed-off-by: Ben Dooks <qemu@ben.fluff.org>
-> Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
-> ---
->   hw/mips/boston.c | 8 ++------
->   1 file changed, 2 insertions(+), 6 deletions(-)
+We were matching a signed 13-bit range, not a 12-bit range.
+Expand the commentary within the function and be explicit
+about all of the ranges.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reported-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ tcg/riscv/tcg-target.c.inc | 19 ++++++++++++++++---
+ 1 file changed, 16 insertions(+), 3 deletions(-)
+
+diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+index 1cdaf7b57b..2a84c57bec 100644
+--- a/tcg/riscv/tcg-target.c.inc
++++ b/tcg/riscv/tcg-target.c.inc
+@@ -154,13 +154,26 @@ static bool tcg_target_const_match(int64_t val, TCGType type, int ct)
+     if ((ct & TCG_CT_CONST_ZERO) && val == 0) {
+         return 1;
+     }
+-    if ((ct & TCG_CT_CONST_S12) && val == sextreg(val, 0, 12)) {
++    /*
++     * Sign extended from 12 bits: [-0x800, 0x7ff].
++     * Used for most arithmetic, as this is the isa field.
++     */
++    if ((ct & TCG_CT_CONST_S12) && val >= -0x800 && val <= 0x7ff) {
+         return 1;
+     }
+-    if ((ct & TCG_CT_CONST_N12) && -val == sextreg(-val, 0, 12)) {
++    /*
++     * Sign extended from 12 bits, negated: [-0x7ff, 0x800].
++     * Used for subtraction, where a constant must be handled by ADDI.
++     */
++    if ((ct & TCG_CT_CONST_N12) && val >= -0x7ff && val <= 0x800) {
+         return 1;
+     }
+-    if ((ct & TCG_CT_CONST_M12) && val >= -0xfff && val <= 0xfff) {
++    /*
++     * Sign extended from 12 bits, +/- matching: [-0x7ff, 0x7ff].
++     * Used by addsub2, which may need the negative operation,
++     * and requires the modified constant to be representable.
++     */
++    if ((ct & TCG_CT_CONST_M12) && val >= -0x7ff && val <= 0x7ff) {
+         return 1;
+     }
+     return 0;
+-- 
+2.34.1
 
 
