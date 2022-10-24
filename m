@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1omo6E-0006eA-79
-	for mharc-qemu-riscv@gnu.org; Sun, 23 Oct 2022 23:26:06 -0400
+	id 1omo7b-0008Dg-3P
+	for mharc-qemu-riscv@gnu.org; Sun, 23 Oct 2022 23:27:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1omo6A-0006aF-G5; Sun, 23 Oct 2022 23:26:01 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ id 1omo7W-00083L-7A; Sun, 23 Oct 2022 23:27:22 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1omo5o-0001Zj-MS; Sun, 23 Oct 2022 23:25:46 -0400
-Received: by mail-pl1-x636.google.com with SMTP id p3so6491505pld.10;
- Sun, 23 Oct 2022 20:25:35 -0700 (PDT)
+ id 1omo7U-0001t2-K7; Sun, 23 Oct 2022 23:27:21 -0400
+Received: by mail-pg1-x530.google.com with SMTP id s196so7684010pgs.3;
+ Sun, 23 Oct 2022 20:27:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5rjPEz86fPIHcidXh5wqatbRTv+juo3Cx/ntGnvnqXE=;
- b=BOpMaLdzRkU4/r5TQyuDY5QlWAO69KvKKt49k3IgNHFXphmF1P0yhbm3pBa2q5inO+
- FKk21wEkUqTIFEOLDHNkSISf6+L7sSxXPh1miePMkswiEy16teHlosjtKKbQ2rRaxHj/
- RTeOPsTN72J5i62dU7C4nSOimgnULzCLlqnJKp8jj5fu/yPaI46wGW97rmnT9NJP5Go3
- H4euNItjzSfOGOcqATReaAtspD7dBbNDcoAXVkZAr3Ni/M651Is1Y9gxvbRv2AHAHjcz
- KTwYoGbd9pmCrFV7SjmIjzPL1ellSH6yFAI47dLtDMlcvJstKEgM2u94/Su8mVSltm9k
- YjSw==
+ bh=IhU68T7agwgraIc4LW22Ga9zMClSUDXVB/0nz9E9o1U=;
+ b=OxyW6d9VLP5471ymPjmEe3w0ZHJqi2uqGppk8/56lKiFf83J1LXCntNd3Dzh54Ex+D
+ JhFnOrndnDtIM6/78HsZmQibMbVKlh6BFZ7NmwaNH+BJfgJqagbg5u5g3s2y6sW+zYiw
+ ZiZcnqlXT69w1LGTLLyczplxwZm86k9eSwInv/u0CxFSYnZjJ3mJSfhTqQKFfuxfeQbZ
+ +Xx7HI5MYHNuuoDNDIoBduaAZOV5p3G4f8OAIEzNAn4UvPN6+39f9kPWzEw+jb28XXVK
+ ShEZXMVk0sC5dXkqwAjXyR1G2mVpZBlj7mvJXrLx3ShzrVFyCFeyWLDDr3QoJaE6dqLU
+ Y56Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5rjPEz86fPIHcidXh5wqatbRTv+juo3Cx/ntGnvnqXE=;
- b=2rCXDe7lBV8GA1VraVp7Uv2eEfiPNMNZBHJ26WmkpUjFLXfhNRklzosSMMOlHizo7a
- xIhZMgV5n5GdOWUoTVDMVZXfnnokpjPYaJoCRIg7sikl8hiwgzsOw5nYGFxazgHqGixb
- GIOBLX0fBDi6fHp1rB6mOnSBoKbMKX6jdv74whoOfAP6m03yV8aEzP7qyV+QI3l5Fey9
- bhd3S/Um89bRu/VZHYpZsfgmtvnpeOFCMGPCY97q0x90+EdjQhv5rf8J/M480mjlnftI
- 2Ll1FejWQIkFvpXxk7LPPGPSXsYdCJpUWxOcmBf9Y3E3JnpwbMfPzgvJTVi9OUtfs3Ne
- sAZg==
-X-Gm-Message-State: ACrzQf0AJCRWquTrPKtCj9IYkEPyeV67L4Fam5Gy/eWnr63snrFBifNL
- /pLh3Z//1Wbn/vHMPPOcu+aikvQnzXh/ZqKolGI=
-X-Google-Smtp-Source: AMsMyM7Gs/uhUcbdzZx4BvCkYwRnLYwQAG+Sj+SPHLBlG1ig8V4q6jNdcVQCvrDxMbpCN3ClWymNUzoC09Z3KEut7M0=
-X-Received: by 2002:a17:902:8693:b0:17a:f71:98fd with SMTP id
- g19-20020a170902869300b0017a0f7198fdmr31522116plo.25.1666581934711; Sun, 23
- Oct 2022 20:25:34 -0700 (PDT)
+ bh=IhU68T7agwgraIc4LW22Ga9zMClSUDXVB/0nz9E9o1U=;
+ b=7WiZIUV5HwdruBwbyT8Axor58lze8f6KMYqE0UrgSyXMZFkA9FZKwAkofNNV5DRtB6
+ n5OTqK+lNfzeKyLA4fl7UdLnmj6t7Ft524cEHowNswKmvCjCSBBChokPTGNlpk5nmMhz
+ UuTrifFIieub9zXm+scBuXSFoqlbkzAGshMui4zlWteNSq7tU8uCBB4jGEDOFifb5ptL
+ HI20hycnt3wjCezhkziUBc4Kg0X19APEcBC7P+41Ix7fagSQd/rL2t6P+Oo3A2WI9/j/
+ pqADBQL8eKDe0dW6gGBmuR3VbXsqjGs7fw9McosWv8sxllYdfyjeM6vmloXLq6/jE82u
+ FA6Q==
+X-Gm-Message-State: ACrzQf2pdEd85nWctjRi1PtKKuOHHMDSXNoaMCk3klyPI2cAbAI2DI9E
+ Q4FBxZOqok/m0yo3u3e+lxyJjRxzkZCjFlcfH1Kd+VqchATn+A==
+X-Google-Smtp-Source: AMsMyM6/yyCdmpvD8TwcAs/US4FpN4Er0m5my/NhWnYhHdAnwEvV0h9scGqhkoX4uhETFMRfEn8089I6iwDnb6dvXG4=
+X-Received: by 2002:a63:ce43:0:b0:45b:d6ed:6c2 with SMTP id
+ r3-20020a63ce43000000b0045bd6ed06c2mr26337068pgi.406.1666582038913; Sun, 23
+ Oct 2022 20:27:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <20221017054950.317584-1-wilfred.mallawa@opensource.wdc.com>
- <20221017054950.317584-3-wilfred.mallawa@opensource.wdc.com>
-In-Reply-To: <20221017054950.317584-3-wilfred.mallawa@opensource.wdc.com>
+ <20221017054950.317584-2-wilfred.mallawa@opensource.wdc.com>
+In-Reply-To: <20221017054950.317584-2-wilfred.mallawa@opensource.wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 24 Oct 2022 13:25:08 +1000
-Message-ID: <CAKmqyKOZ9_kyvuEjTeMVADbAY35NwVpe8y+oFPDR-shi_n5UMA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] hw/ssi/ibex_spi: implement `FIELD32_1CLEAR` macro
+Date: Mon, 24 Oct 2022 13:26:52 +1000
+Message-ID: <CAKmqyKMYrRSDvmKG1Kz1AAMPWyE93PkKD8hFpA7HpD9kjm=fsg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] hw/registerfields: add `FIELDx_1CLEAR()` macro
 To: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
 Cc: alistair@alistair23.me, qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
  Wilfred Mallawa <wilfred.mallawa@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x530.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,17 +73,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Oct 2022 03:26:01 -0000
+X-List-Received-Date: Mon, 24 Oct 2022 03:27:24 -0000
 
-On Mon, Oct 17, 2022 at 3:55 PM Wilfred Mallawa
+On Mon, Oct 17, 2022 at 3:59 PM Wilfred Mallawa
 <wilfred.mallawa@opensource.wdc.com> wrote:
 >
 > From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 >
-> use the `FIELD32_1CLEAR` macro to implement register
-> `rw1c` functionality to `ibex_spi`.
+> Adds a helper macro that implements the register `w1c`
+> functionality.
 >
-> This change was tested by running the `SPI_HOST` from TockOS.
+> Ex:
+>   uint32_t data = FIELD32_1CLEAR(val, REG, FIELD);
+>
+> If ANY bits of the specified `FIELD` is set
+> then the respective field is cleared and returned to `data`.
+>
+> If the field is cleared (0), then no change and
+> val is returned.
 >
 > Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 
@@ -92,71 +99,42 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/ssi/ibex_spi_host.c | 21 +++++++++------------
->  1 file changed, 9 insertions(+), 12 deletions(-)
+>  include/hw/registerfields.h | 22 ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
 >
-> diff --git a/hw/ssi/ibex_spi_host.c b/hw/ssi/ibex_spi_host.c
-> index 57df462e3c..0a456cd1ed 100644
-> --- a/hw/ssi/ibex_spi_host.c
-> +++ b/hw/ssi/ibex_spi_host.c
-> @@ -342,7 +342,7 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
->  {
->      IbexSPIHostState *s = opaque;
->      uint32_t val32 = val64;
-> -    uint32_t shift_mask = 0xff, status = 0, data = 0;
-> +    uint32_t shift_mask = 0xff, status = 0;
->      uint8_t txqd_len;
+> diff --git a/include/hw/registerfields.h b/include/hw/registerfields.h
+> index 1330ca77de..0b8404c2f7 100644
+> --- a/include/hw/registerfields.h
+> +++ b/include/hw/registerfields.h
+> @@ -115,6 +115,28 @@
+>                    R_ ## reg ## _ ## field ## _LENGTH, _v.v);              \
+>      _d; })
 >
->      trace_ibex_spi_host_write(addr, size, val64);
-> @@ -355,12 +355,11 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
->      case IBEX_SPI_HOST_INTR_STATE:
->          /* rw1c status register */
->          if (FIELD_EX32(val32, INTR_STATE, ERROR)) {
-> -            data = FIELD_DP32(data, INTR_STATE, ERROR, 0);
-> +            s->regs[addr] = FIELD32_1CLEAR(s->regs[addr], INTR_STATE, ERROR);
->          }
->          if (FIELD_EX32(val32, INTR_STATE, SPI_EVENT)) {
-> -            data = FIELD_DP32(data, INTR_STATE, SPI_EVENT, 0);
-> +            s->regs[addr] = FIELD32_1CLEAR(s->regs[addr], INTR_STATE, SPI_EVENT);
->          }
-> -        s->regs[addr] = data;
->          break;
->      case IBEX_SPI_HOST_INTR_ENABLE:
->          s->regs[addr] = val32;
-> @@ -505,27 +504,25 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
->       *  When an error occurs, the corresponding bit must be cleared
->       *  here before issuing any further commands
->       */
-> -        status = s->regs[addr];
->          /* rw1c status register */
->          if (FIELD_EX32(val32, ERROR_STATUS, CMDBUSY)) {
-> -            status = FIELD_DP32(status, ERROR_STATUS, CMDBUSY, 0);
-> +            s->regs[addr] = FIELD32_1CLEAR(s->regs[addr], ERROR_STATUS, CMDBUSY);
->          }
->          if (FIELD_EX32(val32, ERROR_STATUS, OVERFLOW)) {
-> -            status = FIELD_DP32(status, ERROR_STATUS, OVERFLOW, 0);
-> +            s->regs[addr] = FIELD32_1CLEAR(s->regs[addr], ERROR_STATUS, OVERFLOW);
->          }
->          if (FIELD_EX32(val32, ERROR_STATUS, UNDERFLOW)) {
-> -            status = FIELD_DP32(status, ERROR_STATUS, UNDERFLOW, 0);
-> +            s->regs[addr] = FIELD32_1CLEAR(s->regs[addr], ERROR_STATUS, UNDERFLOW);
->          }
->          if (FIELD_EX32(val32, ERROR_STATUS, CMDINVAL)) {
-> -            status = FIELD_DP32(status, ERROR_STATUS, CMDINVAL, 0);
-> +            s->regs[addr] = FIELD32_1CLEAR(s->regs[addr], ERROR_STATUS, CMDINVAL);
->          }
->          if (FIELD_EX32(val32, ERROR_STATUS, CSIDINVAL)) {
-> -            status = FIELD_DP32(status, ERROR_STATUS, CSIDINVAL, 0);
-> +            s->regs[addr] = FIELD32_1CLEAR(s->regs[addr], ERROR_STATUS, CSIDINVAL);
->          }
->          if (FIELD_EX32(val32, ERROR_STATUS, ACCESSINVAL)) {
-> -            status = FIELD_DP32(status, ERROR_STATUS, ACCESSINVAL, 0);
-> +            s->regs[addr] = FIELD32_1CLEAR(s->regs[addr], ERROR_STATUS, ACCESSINVAL);
->          }
-> -        s->regs[addr] = status;
->          break;
->      case IBEX_SPI_HOST_EVENT_ENABLE:
->      /* Controls which classes of SPI events raise an interrupt. */
+> +/*
+> + * Clear the specified field in storage if
+> + * any field bits are set, else no changes made. Implements
+> + * single/multi-bit `w1c`
+> + *
+> + */
+> +#define FIELD8_1CLEAR(storage, reg, field)                                \
+> +    (FIELD_EX8(storage, reg, field) ?                                     \
+> +    FIELD_DP8(storage, reg, field, 0x00) : storage)
+> +
+> +#define FIELD16_1CLEAR(storage, reg, field)                               \
+> +    (FIELD_EX16(storage, reg, field) ?                                    \
+> +    FIELD_DP16(storage, reg, field, 0x00) : storage)
+> +
+> +#define FIELD32_1CLEAR(storage, reg, field)                               \
+> +    (FIELD_EX32(storage, reg, field) ?                                    \
+> +    FIELD_DP32(storage, reg, field, 0x00) : storage)
+> +
+> +#define FIELD64_1CLEAR(storage, reg, field)                               \
+> +    (FIELD_EX64(storage, reg, field) ?                                    \
+> +    FIELD_DP64(storage, reg, field, 0x00) : storage)
+> +
+>  #define FIELD_SDP8(storage, reg, field, val) ({                           \
+>      struct {                                                              \
+>          signed int v:R_ ## reg ## _ ## field ## _LENGTH;                  \
 > --
 > 2.37.3
 >
