@@ -1,57 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1omtRw-0007pg-Re
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Oct 2022 05:08:48 -0400
+	id 1omtS7-0007qJ-0N
+	for mharc-qemu-riscv@gnu.org; Mon, 24 Oct 2022 05:08:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1omrtg-0007Lj-L8; Mon, 24 Oct 2022 03:29:24 -0400
-Received: from bg4.exmail.qq.com ([43.155.65.254])
+ (Exim 4.90_1) (envelope-from <pisa@cmp.felk.cvut.cz>)
+ id 1omsf0-0006G5-Ae; Mon, 24 Oct 2022 04:18:21 -0400
+Received: from mailgw.felk.cvut.cz ([147.32.82.15])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1omrtc-0003PW-Bq; Mon, 24 Oct 2022 03:29:20 -0400
-X-QQ-mid: bizesmtp74t1666596488tdnds4lz
-Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Mon, 24 Oct 2022 15:28:06 +0800 (CST)
-X-QQ-SSF: 01200000000000103000000A0000000
-X-QQ-FEAT: 7jw2iSiCazp9ia2sp4s8/XglSjZ59qFOB91BAFXtQ2dGdA9sLiljTVFHH1UOM
- fER6DgMUzku3xWyJoK/8Lg9YTro+cKHW8fywMXR/MvY/42zSi8T8ig9j1iNMgKy8MPwCweN
- ytBVaTWq6sWznBHh1HkEpDmJbs6SDEvuLJS2jStjELosnc3B61BvS639Z9ScT1E0ssnAS3E
- Tyc0gsCB0ctObReFY1KdM1GmncXaENyABl4o2RaicOmIrj/o30zklbsxmod84tth4up9Sp7
- QVihjUB5Isc45Z0t6Q5k0fQq1SHip4VaRDrn9YLuEW7Fsi8Nm6vD/0KFJCP8DPXw36Dt1Xb
- bOdqrRiRly4+ShZDKvjDGZqvYlIE8pnb/etLOZw
-X-QQ-GoodBg: 0
-From: Bin Meng <bmeng@tinylab.org>
-To: qemu-devel@nongnu.org,
-	qemu-trivial@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
+ (Exim 4.90_1) (envelope-from <pisa@cmp.felk.cvut.cz>)
+ id 1omsep-0005xB-Hq; Mon, 24 Oct 2022 04:18:08 -0400
+Received: from mailgw.felk.cvut.cz (localhost.localdomain [127.0.0.1])
+ by mailgw.felk.cvut.cz (Proxmox) with ESMTP id 019E530B295F;
+ Mon, 24 Oct 2022 10:17:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ cmp.felk.cvut.cz; h=cc:cc:content-transfer-encoding:content-type
+ :content-type:date:from:from:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to; s=felkmail; bh=OpivM
+ Pimy9uqEgZO+2MV5XjVRs/s41WV3GonaK+h8k0=; b=DzoB07Vck/1zEbjNgOW11
+ U/avwviKRjVNuuqzp9kI6ADUKCMs2txj4t3TgdGp2IGhJaV1jAbV86WJ7XnCrNru
+ SGM1g3h77KRDJCYOZbg9D4+kUTu2C1nEUVDdHl5NUoMy+DMFVwoD45NmZd/zQJr8
+ 01BV452HiQeqCP34j8E2lVBMQvJ7VR6UXqI5hRz98q6vfaYP6LjVQZrpfr1pnnJQ
+ r4CtumoToTgBVvOqJRVU3N2njVBIDyvyDeYMrwehWRF3/aLBOT1vemTvs2oA5+AB
+ htYPws3zBlJtluvEX11XC7DwIiJBL1pTHe2CCslRehBcueP3x2CjMgZu4xdg10cV
+ Q==
+Received: from cmp.felk.cvut.cz (haar.felk.cvut.cz [147.32.84.19])
+ by mailgw.felk.cvut.cz (Proxmox) with ESMTPS id 2C08730ADE53;
+ Mon, 24 Oct 2022 10:17:46 +0200 (CEST)
+Received: from haar.felk.cvut.cz (localhost [127.0.0.1])
+ by cmp.felk.cvut.cz (8.14.0/8.12.3/SuSE Linux 0.6) with ESMTP id
+ 29O8Hjpb026444; Mon, 24 Oct 2022 10:17:45 +0200
+Received: (from pisa@localhost)
+ by haar.felk.cvut.cz (8.14.0/8.13.7/Submit) id 29O8HjdN026443;
+ Mon, 24 Oct 2022 10:17:45 +0200
+X-Authentication-Warning: haar.felk.cvut.cz: pisa set sender to
+ pisa@cmp.felk.cvut.cz using -f
+From: Pavel Pisa <pisa@cmp.felk.cvut.cz>
+To: Bin Meng <bmeng@tinyclub.github.io>
+Subject: Re: [PATCH] treewide: Remove the unnecessary space before semicolon
+Date: Mon, 24 Oct 2022 10:17:39 +0200
+User-Agent: KMail/1.9.10
+Cc: qemu-devel@nongnu.org, qemu-trivial@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>,
  Christian Schoenebeck <qemu_oss@crudebyte.com>,
  Gerd Hoffmann <kraxel@redhat.com>, Greg Kurz <groug@kaod.org>,
  Jason Wang <jasowang@redhat.com>, Magnus Damm <magnus.damm@gmail.com>,
  "Michael S. Tsirkin" <mst@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Pavel Pisa <pisa@cmp.felk.cvut.cz>,
  Peter Maydell <peter.maydell@linaro.org>,
  Vikram Garhwal <fnu.vikram@xilinx.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>, qemu-arm@nongnu.org,
+ Yoshinori Sato <ysato@users.osdn.me>, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH] treewide: Remove the unnecessary space before semicolon
-Date: Mon, 24 Oct 2022 15:28:02 +0800
-Message-Id: <20221024072802.457832-1-bmeng@tinylab.org>
-X-Mailer: git-send-email 2.25.1
+References: <20221024072802.457832-1-bmeng@tinylab.org>
+In-Reply-To: <20221024072802.457832-1-bmeng@tinylab.org>
+X-KMail-QuotePrefix: > 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=43.155.65.254; envelope-from=bmeng@tinylab.org;
- helo=bg4.exmail.qq.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+Message-Id: <202210241017.39626.pisa@cmp.felk.cvut.cz>
+Received-SPF: none client-ip=147.32.82.15; envelope-from=pisa@cmp.felk.cvut.cz;
+ helo=mailgw.felk.cvut.cz
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, NICE_REPLY_A=-0.001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 24 Oct 2022 05:08:48 -0400
+X-Mailman-Approved-At: Mon, 24 Oct 2022 05:08:50 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,201 +80,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Oct 2022 07:29:28 -0000
+X-List-Received-Date: Mon, 24 Oct 2022 08:18:22 -0000
 
-%s/return ;/return;
+Hllo Bin Meng,
 
-Signed-off-by: Bin Meng <bmeng@tinylab.org>
----
+I ACK the change for SJA1000.
 
- include/hw/elf_ops.h         | 2 +-
- hw/9pfs/9p.c                 | 2 +-
- hw/dma/pl330.c               | 2 +-
- hw/net/can/can_sja1000.c     | 2 +-
- hw/timer/renesas_cmt.c       | 2 +-
- hw/timer/renesas_tmr.c       | 8 ++++----
- hw/virtio/virtio-pci.c       | 2 +-
- target/riscv/vector_helper.c | 2 +-
- target/rx/op_helper.c        | 4 ++--
- ui/vnc-jobs.c                | 2 +-
- ui/vnc.c                     | 2 +-
- 11 files changed, 15 insertions(+), 15 deletions(-)
+On Monday 24 of October 2022 09:28:02 Bin Meng wrote:
+> %s/return ;/return;
+>
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> ---
+>
+>  include/hw/elf_ops.h         | 2 +-
+>  hw/9pfs/9p.c                 | 2 +-
+>  hw/dma/pl330.c               | 2 +-
 
-diff --git a/include/hw/elf_ops.h b/include/hw/elf_ops.h
-index 7c3b1d0f6c..fbe0b1e956 100644
---- a/include/hw/elf_ops.h
-+++ b/include/hw/elf_ops.h
-@@ -117,7 +117,7 @@ static void glue(load_symbols, SZ)(struct elfhdr *ehdr, int fd, int must_swab,
-     shdr_table = load_at(fd, ehdr->e_shoff,
-                          sizeof(struct elf_shdr) * ehdr->e_shnum);
-     if (!shdr_table) {
--        return ;
-+        return;
-     }
- 
-     if (must_swab) {
-diff --git a/hw/9pfs/9p.c b/hw/9pfs/9p.c
-index aebadeaa03..76c591a01b 100644
---- a/hw/9pfs/9p.c
-+++ b/hw/9pfs/9p.c
-@@ -1786,7 +1786,7 @@ static void coroutine_fn v9fs_walk(void *opaque)
-     err = pdu_unmarshal(pdu, offset, "ddw", &fid, &newfid, &nwnames);
-     if (err < 0) {
-         pdu_complete(pdu, err);
--        return ;
-+        return;
-     }
-     offset += err;
- 
-diff --git a/hw/dma/pl330.c b/hw/dma/pl330.c
-index 08e5938ec7..e5d521c329 100644
---- a/hw/dma/pl330.c
-+++ b/hw/dma/pl330.c
-@@ -1328,7 +1328,7 @@ static void pl330_debug_exec(PL330State *s)
-     }
-     if (!insn) {
-         pl330_fault(ch, PL330_FAULT_UNDEF_INSTR | PL330_FAULT_DBG_INSTR);
--        return ;
-+        return;
-     }
-     ch->stall = 0;
-     insn->exec(ch, opcode, args, insn->size - 1);
-diff --git a/hw/net/can/can_sja1000.c b/hw/net/can/can_sja1000.c
-index e0f76d3eb3..73201f9139 100644
---- a/hw/net/can/can_sja1000.c
-+++ b/hw/net/can/can_sja1000.c
-@@ -431,7 +431,7 @@ void can_sja_mem_write(CanSJA1000State *s, hwaddr addr, uint64_t val,
-             (unsigned long long)val, (unsigned int)addr);
- 
-     if (addr > CAN_SJA_MEM_SIZE) {
--        return ;
-+        return;
-     }
- 
-     if (s->clock & 0x80) { /* PeliCAN Mode */
-diff --git a/hw/timer/renesas_cmt.c b/hw/timer/renesas_cmt.c
-index 2e0fd21a36..69eabc678a 100644
---- a/hw/timer/renesas_cmt.c
-+++ b/hw/timer/renesas_cmt.c
-@@ -57,7 +57,7 @@ static void update_events(RCMTState *cmt, int ch)
- 
-     if ((cmt->cmstr & (1 << ch)) == 0) {
-         /* count disable, so not happened next event. */
--        return ;
-+        return;
-     }
-     next_time = cmt->cmcor[ch] - cmt->cmcnt[ch];
-     next_time *= NANOSECONDS_PER_SECOND;
-diff --git a/hw/timer/renesas_tmr.c b/hw/timer/renesas_tmr.c
-index d96002e1ee..c15f654738 100644
---- a/hw/timer/renesas_tmr.c
-+++ b/hw/timer/renesas_tmr.c
-@@ -67,18 +67,18 @@ static void update_events(RTMRState *tmr, int ch)
-     int i, event;
- 
-     if (tmr->tccr[ch] == 0) {
--        return ;
-+        return;
-     }
-     if (FIELD_EX8(tmr->tccr[ch], TCCR, CSS) == 0) {
-         /* external clock mode */
-         /* event not happened */
--        return ;
-+        return;
-     }
-     if (FIELD_EX8(tmr->tccr[0], TCCR, CSS) == CSS_CASCADING) {
-         /* cascading mode */
-         if (ch == 1) {
-             tmr->next[ch] = none;
--            return ;
-+            return;
-         }
-         diff[cmia] = concat_reg(tmr->tcora) - concat_reg(tmr->tcnt);
-         diff[cmib] = concat_reg(tmr->tcorb) - concat_reg(tmr->tcnt);
-@@ -384,7 +384,7 @@ static void timer_events(RTMRState *tmr, int ch)
-                                     tmr->tcorb[ch]) & 0xff;
-     } else {
-         if (ch == 1) {
--            return ;
-+            return;
-         }
-         tcnt = issue_event(tmr, ch, 16,
-                            concat_reg(tmr->tcnt),
-diff --git a/hw/virtio/virtio-pci.c b/hw/virtio/virtio-pci.c
-index e7d80242b7..34db51e241 100644
---- a/hw/virtio/virtio-pci.c
-+++ b/hw/virtio/virtio-pci.c
-@@ -1675,7 +1675,7 @@ static void virtio_pci_device_plugged(DeviceState *d, Error **errp)
-         if (virtio_host_has_feature(vdev, VIRTIO_F_IOMMU_PLATFORM)) {
-             error_setg(errp, "VIRTIO_F_IOMMU_PLATFORM was supported by"
-                        " neither legacy nor transitional device");
--            return ;
-+            return;
-         }
-         /*
-          * Legacy and transitional devices use specific subsystem IDs.
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index b94f809eb3..0020b9a95d 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -211,7 +211,7 @@ static void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
-         return;
-     }
-     if (tot - cnt == 0) {
--        return ;
-+        return;
-     }
-     memset(base + cnt, -1, tot - cnt);
- }
-diff --git a/target/rx/op_helper.c b/target/rx/op_helper.c
-index 9ca32dcc82..acce650185 100644
---- a/target/rx/op_helper.c
-+++ b/target/rx/op_helper.c
-@@ -286,7 +286,7 @@ void helper_suntil(CPURXState *env, uint32_t sz)
-     uint32_t tmp;
-     tcg_debug_assert(sz < 3);
-     if (env->regs[3] == 0) {
--        return ;
-+        return;
-     }
-     do {
-         tmp = cpu_ldufn[sz](env, env->regs[1], GETPC());
-@@ -305,7 +305,7 @@ void helper_swhile(CPURXState *env, uint32_t sz)
-     uint32_t tmp;
-     tcg_debug_assert(sz < 3);
-     if (env->regs[3] == 0) {
--        return ;
-+        return;
-     }
-     do {
-         tmp = cpu_ldufn[sz](env, env->regs[1], GETPC());
-diff --git a/ui/vnc-jobs.c b/ui/vnc-jobs.c
-index 4562bf8928..886f9bf611 100644
---- a/ui/vnc-jobs.c
-+++ b/ui/vnc-jobs.c
-@@ -373,7 +373,7 @@ void vnc_start_worker_thread(void)
-     VncJobQueue *q;
- 
-     if (vnc_worker_thread_running())
--        return ;
-+        return;
- 
-     q = vnc_queue_init();
-     qemu_thread_create(&q->thread, "vnc_worker", vnc_worker_thread, q,
-diff --git a/ui/vnc.c b/ui/vnc.c
-index acb3629cd8..88f55cbf3c 100644
---- a/ui/vnc.c
-+++ b/ui/vnc.c
-@@ -3085,7 +3085,7 @@ static void vnc_rect_updated(VncDisplay *vd, int x, int y, struct timeval * tv)
- 
-     rect = vnc_stat_rect(vd, x, y);
-     if (rect->updated) {
--        return ;
-+        return;
-     }
-     rect->times[rect->idx] = *tv;
-     rect->idx = (rect->idx + 1) % ARRAY_SIZE(rect->times);
+>  hw/net/can/can_sja1000.c     | 2 +-
+
+Acked-by: Pave Pisa <pisa@cmp.felk.cvut.cz>
+
+>  hw/timer/renesas_cmt.c       | 2 +-
+>  hw/timer/renesas_tmr.c       | 8 ++++----
+>  hw/virtio/virtio-pci.c       | 2 +-
+>  target/riscv/vector_helper.c | 2 +-
+>  target/rx/op_helper.c        | 4 ++--
+>  ui/vnc-jobs.c                | 2 +-
+>  ui/vnc.c                     | 2 +-
+>  11 files changed, 15 insertions(+), 15 deletions(-)
+>
+
+> diff --git a/hw/net/can/can_sja1000.c b/hw/net/can/can_sja1000.c
+> index e0f76d3eb3..73201f9139 100644
+> --- a/hw/net/can/can_sja1000.c
+> +++ b/hw/net/can/can_sja1000.c
+> @@ -431,7 +431,7 @@ void can_sja_mem_write(CanSJA1000State *s, hwaddr addr,
+> uint64_t val, (unsigned long long)val, (unsigned int)addr);
+>
+>      if (addr > CAN_SJA_MEM_SIZE) {
+> -        return ;
+> +        return;
+>      }
+>
+>      if (s->clock & 0x80) { /* PeliCAN Mode */
+
 -- 
-2.25.1
+
+                Pavel Pisa
+    phone:      +420 603531357
+    e-mail:     pisa@cmp.felk.cvut.cz
+    Department of Control Engineering FEE CVUT
+    Karlovo namesti 13, 121 35, Prague 2
+    university: http://control.fel.cvut.cz/
+    personal:   http://cmp.felk.cvut.cz/~pisa
+    projects:   https://www.openhub.net/accounts/ppisa
+    CAN related:http://canbus.pages.fel.cvut.cz/
+    RISC-V education: https://comparch.edu.cvut.cz/
+    Open Technologies Research Education and Exchange Services
+    https://gitlab.fel.cvut.cz/otrees/org/-/wikis/home
 
 
