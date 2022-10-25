@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1onSgq-0000Wm-DZ
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Oct 2022 18:46:32 -0400
+	id 1onTRt-0008L9-Gc
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Oct 2022 19:35:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1onSgo-0000GH-Py; Tue, 25 Oct 2022 18:46:30 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1onTRs-0008J0-1n; Tue, 25 Oct 2022 19:35:08 -0400
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1onSgm-0002tu-7r; Tue, 25 Oct 2022 18:46:30 -0400
-Received: by mail-pf1-x433.google.com with SMTP id y13so8874897pfp.7;
- Tue, 25 Oct 2022 15:46:25 -0700 (PDT)
+ id 1onTRq-0000kJ-5t; Tue, 25 Oct 2022 19:35:07 -0400
+Received: by mail-pg1-x529.google.com with SMTP id e129so13099449pgc.9;
+ Tue, 25 Oct 2022 16:35:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xL5pju1ZGlr10niKOO7BDyu/UjM6zSvTW38fF30MvtU=;
- b=nv8TVrAzyGpdvn5ziUMtQQ3BYnpm18hxPLfn/y2Hvk//QcNkUvuJReGBz3IJEUIf1m
- j1xnYLY3gjomE9JFSh1pHQfqNywxMQ/0WaCNBgcS9a0KgQMWba/dg4v9UWTMz2NjWIod
- n03UT8Te6LK18tCcj1xY2YQKBlOuUoYBADHjuDfHUvZSO02xqYb76V7dAHWqRRNC3gCD
- Ec10e7JC2rbvLSIEj5jmofkvvQh5fQ/ncFtkfnUyzB3RZYxk4RtWlQbCyNzobr2ZyDs6
- RUL7lXzFnOEf0txh/haT+zk8tyicLT/8RmCrUEpPF+p+WMiPb2k13yNcfLc40VLpmlaC
- xxgg==
+ bh=jC+zLcb5OVzxScl55vgS23DVPSKaPNsDvR/tNZn88Jk=;
+ b=dZGCAIbWvTeCIMvP0BeAkpEjgpJH9kjMVJBVqTo85piv2VcUCv1Qi3y4xm5KlAoq07
+ tDlmc7WCRCxKwrOgF57vQe3zRKLAGftL1tnKIBeW54SGMSExqD+iXNK2OjTzISnIERoX
+ ZUQMRU9gvx2u/hxz84Yvus7HpyhUaDRB/h48gkLwI5bc5CCnpZibGfArkAvWxPBZE9SN
+ DFQsZ2gdj2x7qktbfTrDYYVgIaNvBVMlCnjT8yc+xcJjBiBoH1oZuYTBWbw1SldgXwWz
+ kIE/doKH4URK2fsz2E7t7/qT6sq5yaXMpdbTwTReaWzPd7sJ+bJ0LnzDkCWCFxslfE9/
+ IMLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xL5pju1ZGlr10niKOO7BDyu/UjM6zSvTW38fF30MvtU=;
- b=CyFKWtEcBRSNR13oHtBvxm1tlheZY2Ebbku0d/OpF4ox9MslQo0Vd5eSZbrZTycXsR
- 1cM289OM7x1xlXEfkLXh52ctd36nbaza5nsVOgRsJNHHp3Vdi7MxFB5XARbwT/03v49F
- io5GuRVq0OdByOGj5n2B+2aUbetfmbUVgB57WAmW/BaSFViRgv+qhxgdcDZJxecjnHWK
- iOC9yvEFXgzXkX1/aR6pBmCOgOtFoRaAODYkXr245P+5WCujUp0d8kZhm9m4/L2Io1Ri
- w7Zq5jULyVPkDqCH2r58FRcBubEyEWpA3dPXnSLtQi7S+6cqgtiEgxBiZmcTKALSoXUG
- Ao9Q==
-X-Gm-Message-State: ACrzQf3rKvLOUu/sR5tu3m9E1NTRWjWUlYiaj5LvFnPCoBWZZnuImwFp
- 1Pt7i2JtFoX2fo51hr3K7KcdvHgw4n3FcAFKUBE=
-X-Google-Smtp-Source: AMsMyM7BFYHTHlgvzp9sWHOWsCgl3ASk+rgmQqjglwaJFO10MNu+u9uZTtkV2M8X32OLD8W7CgBb821EZu1QbHe4Cxw=
-X-Received: by 2002:a65:604e:0:b0:43c:428d:16a9 with SMTP id
- a14-20020a65604e000000b0043c428d16a9mr7360198pgp.423.1666737983575; Tue, 25
- Oct 2022 15:46:23 -0700 (PDT)
+ bh=jC+zLcb5OVzxScl55vgS23DVPSKaPNsDvR/tNZn88Jk=;
+ b=y5+5lzrdXRKyDR2da6gi4MPV+9IQ7ktJd7/fehTCUKm5q3vDhs5go1gVb8At+/h8lF
+ Ajxj1SBFxsvx3GGD/+v+0Gqwq5XOEBhCWzUYWlT0r+2rMvubt9b7tIt91eWWH4raaz1B
+ so8xhc6kW/tEGbfs73toKEo8uDIi26zNafBoFgnA2gj12s4Uqn7wMxE+X7nFlUEId7LK
+ 955VpMfmuZ9ttvMKzcMzCELKgW1DdFagWP7LgnmPac8EbKbtqsb88wMjKIXtxSZCypbL
+ +p0ewDACvDWgczHrcTqdAJb42uN2YYdVq3mdwEEtTj39VGWB4LXvtlU842TNBxLWkpjH
+ CKIw==
+X-Gm-Message-State: ACrzQf0aB7FaEF4ZVnyI5rAgIKt3PjzEaEfxMxOaPcmbZ3DS/xYcZS+t
+ pNYyJ7wLWQIrJYBxJIYAPzPI0gNthlI4Kvh7fKA=
+X-Google-Smtp-Source: AMsMyM5716UCk1gXoYAmz5t+HrQ0t8d9cnEviPbsjXwKwJda6o8oCV59RxToye1h/sa+aqg3PxeXENmtIPZ6AEKSnck=
+X-Received: by 2002:a63:1a65:0:b0:460:d5db:8688 with SMTP id
+ a37-20020a631a65000000b00460d5db8688mr34759223pgm.221.1666740904178; Tue, 25
+ Oct 2022 16:35:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <20221023233337.2846860-1-richard.henderson@linaro.org>
 In-Reply-To: <20221023233337.2846860-1-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 26 Oct 2022 08:45:56 +1000
-Message-ID: <CAKmqyKNUrA+jUEYc0hxSbq-kUwjyhwJRfLO0aXb4t+Y=4MzawQ@mail.gmail.com>
+Date: Wed, 26 Oct 2022 09:34:37 +1000
+Message-ID: <CAKmqyKOW1NcT8+yNoeX9A-yecwEfJJ35EB4iR+GKYkXK4DQocA@mail.gmail.com>
 Subject: Re: [PATCH] tcg/riscv: Fix base register for user-only qemu_ld/st
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x529.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,7 +72,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2022 22:46:31 -0000
+X-List-Received-Date: Tue, 25 Oct 2022 23:35:08 -0000
 
 On Mon, Oct 24, 2022 at 1:26 PM Richard Henderson
 <richard.henderson@linaro.org> wrote:
@@ -91,7 +91,9 @@ On Mon, Oct 24, 2022 at 1:26 PM Richard Henderson
 > Reported-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
