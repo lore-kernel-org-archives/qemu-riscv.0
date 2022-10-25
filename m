@@ -1,98 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1onBeU-0000ub-TH
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Oct 2022 00:34:58 -0400
+	id 1onDEZ-000834-HT
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Oct 2022 02:16:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=290a5aa6e=wilfred.mallawa@opensource.wdc.com>)
- id 1onBeT-0000uB-Fp
- for qemu-riscv@nongnu.org; Tue, 25 Oct 2022 00:34:57 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144])
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1onDDh-0005QR-OV; Tue, 25 Oct 2022 02:15:25 -0400
+Received: from out30-56.freemail.mail.aliyun.com ([115.124.30.56])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=290a5aa6e=wilfred.mallawa@opensource.wdc.com>)
- id 1onBeR-0000i4-Td
- for qemu-riscv@nongnu.org; Tue, 25 Oct 2022 00:34:57 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1666672496; x=1698208496;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=Pn3ibjEmihEkpBwT9Ubys6jav8KKBBU6KHGHwtsVuJ4=;
- b=Xxyw+6FhhmDYi+kYsHB40mPdZDTyHLQfMhHNZUYyO1Jw+FPdCLeyV8k8
- AhxkCaqtVkQ+xTzyThyQsIl09TbKsU3wW6q6lNFEiN56Kokt6e4Igbyog
- T14aOexzvBO04ac19JoXCpQ9HuKY/8FLVWk7AvTYautRRWpH1fNpMCp3f
- dAu2e0PhAdOGjYHKdE7C9FMwX78NkiCmhDpzcmcU5mgQrJiAOz9iYO1Gm
- BODYSQppREHKfclBwnK1qtT9x58OWCXWoUUY3lVi5bv87av49S2xOOR/w
- kOqqNWe5rwTTfsRQWCXa3oFrKLWY978IeUG/9g623NlPMtC6SRdfX4Ja/ A==;
-X-IronPort-AV: E=Sophos;i="5.95,211,1661788800"; d="scan'208";a="214652156"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 25 Oct 2022 12:34:50 +0800
-IronPort-SDR: dH+12mY1itFlXdIrqi9NLpFWs24CDl7pmWHTd3LToWKdE5bgYgedAOzR9y508xOka8CqkeZfXq
- l0Eg/2gsdPhM1R4OC9OgFJjAlNpdk8fgzNrnueT6H1qBwmFxOTffUtWzjHB/GUjmPr5bRZGbHn
- P8yQIwwXmA3lUXAKemHehE0CXb73fYa1n6nst4X9L+YSIhiZIVb/QVNEpZhVkgHEI9sCkCWZtP
- QkE8zWmPy+Qszh546TyIPm6dy3kS8V6TvxXEH6l654fZozApgbouCQywIm90rAqphOtiQTVeEK
- pZvem6R/DxH2K70L2Y9A5FvE
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 24 Oct 2022 20:48:31 -0700
-IronPort-SDR: gVfBjX0cf2YaZ/R792TD7fBQ0f8Fbk/tGul7qWwJw49VeMXyW0/VZoooRTcYe7gbhh+FNNY72L
- /C4dtzwV26SGxYcNiONWTsNFMFdSy6Gvabh78KjqdzWmv1Raq2zt+2OKhgdS55CjalWbUhAFJ+
- EI5wHe301U7LPI6de2jUhXDcB/3oYWfT5vOoV7+d2l/sySUQzgUACM06WkkZ2NRaUcDyNSu2Zj
- s6SUj/01bCWqE3a8vChmsIzU4k5pkXQ3ND1Kc5bWTZg2sNZtlfbFgaZ+h2rNRp0nfW+g2UrwBq
- wzQ=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 24 Oct 2022 21:34:49 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4MxJy109bVz1Rwtm
- for <qemu-riscv@nongnu.org>; Mon, 24 Oct 2022 21:34:49 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:mime-version
- :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1666672488; x=1669264489; bh=Pn3ibjEmihEkpBwT9U
- bys6jav8KKBBU6KHGHwtsVuJ4=; b=IcDaMVduu439P71HuSD4cjB9U1BcJnAkKB
- D9tAmtX3gBdbTByKGAR7Vx/7nPMxJkK5EIXtcU4m8m+2jewIzYGLvWdqmHzFbZLV
- r64tKG6TlZXNXjtKNT4InkJvCw+2c0CI1ijPiKBjdRD8sxLQ9bZFf0IvY5txi6ua
- e9EEA+tVU6u1vatYEh7x11FFiNV4RUOuaaP/dFQ7ptGKKrk7NTKW5ptpdFzeavDM
- wZDNtcJVJc2TVAvyvb3MbHAvfEEtO/E+qj5UzZTtIf6wuzZbHH3LYe/IP2wko0wC
- VWcL4WEwyVDfo8a+xI8AhvkaK975UWWnDh3F6aXAKJgSM1/xP33w==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id fpm7WBRchxRY for <qemu-riscv@nongnu.org>;
- Mon, 24 Oct 2022 21:34:48 -0700 (PDT)
-Received: from oni.wdc.com (unknown [10.225.165.78])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4MxJxx0VLlz1RvLy;
- Mon, 24 Oct 2022 21:34:44 -0700 (PDT)
-From: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
-To: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, Wilfred Mallawa <wilfred.mallawa@wdc.com>,
- Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v1 2/2] hw/riscv/opentitan: add aon_timer base unimpl
-Date: Tue, 25 Oct 2022 14:33:37 +1000
-Message-Id: <20221025043335.339815-3-wilfred.mallawa@opensource.wdc.com>
-X-Mailer: git-send-email 2.37.3
-In-Reply-To: <20221025043335.339815-1-wilfred.mallawa@opensource.wdc.com>
-References: <20221025043335.339815-1-wilfred.mallawa@opensource.wdc.com>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1onDDe-0007W5-HY; Tue, 25 Oct 2022 02:15:25 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=3; SR=0;
+ TI=SMTPD_---0VT1k6bm_1666678192; 
+Received: from 30.221.97.225(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VT1k6bm_1666678192) by smtp.aliyun-inc.com;
+ Tue, 25 Oct 2022 14:09:52 +0800
+Message-ID: <76c59d7d-ef83-a28b-6c83-03cbddd4399c@linux.alibaba.com>
+Date: Tue, 25 Oct 2022 14:09:51 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.71.153.144;
- envelope-from=prvs=290a5aa6e=wilfred.mallawa@opensource.wdc.com;
- helo=esa5.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.0
+Subject: Re: [PATCH] tcg/riscv: Fix base register for user-only qemu_ld/st
+Content-Language: en-US
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org
+References: <20221023233337.2846860-1-richard.henderson@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20221023233337.2846860-1-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.56;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-56.freemail.mail.aliyun.com
+X-Spam_score_int: -98
+X-Spam_score: -9.9
+X-Spam_bar: ---------
+X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,57 +52,139 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2022 04:34:57 -0000
+X-List-Received-Date: Tue, 25 Oct 2022 06:15:26 -0000
+X-List-Received-Date: Tue, 25 Oct 2022 06:15:26 -0000
 
-From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 
-Adds the updated `aon_timer` base as an unimplemented device. This is
-used by TockOS, patch ensures the guest doesn't hit load faults.
+On 2022/10/24 7:33, Richard Henderson wrote:
+> When guest_base != 0, we were not coordinating the usage of
+> TCG_REG_TMP0 as base properly, leading to a previous zero-extend
+> of the input address being discarded.
+>
+> Shuffle the alignment check to the front, because that does not
+> depend on the zero-extend, and it keeps the register usage clear.
+> Set base after each step of the address arithmetic instead of before.
+>
+> Return the base register used from tcg_out_tlb_load, so as to
+> keep that register choice localized to that function.
+>
+> Reported-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/opentitan.c         | 3 +++
- include/hw/riscv/opentitan.h | 1 +
- 2 files changed, 4 insertions(+)
+Reviewed-by:  LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index 92493c629d..78f895d773 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -56,6 +56,7 @@ static const MemMapEntry ibex_memmap[] =3D {
-     [IBEX_DEV_RSTMGR] =3D         {  0x40410000,  0x1000  },
-     [IBEX_DEV_CLKMGR] =3D         {  0x40420000,  0x1000  },
-     [IBEX_DEV_PINMUX] =3D         {  0x40460000,  0x1000  },
-+    [IBEX_DEV_AON_TIMER] =3D      {  0x40470000,  0x1000  },
-     [IBEX_DEV_SENSOR_CTRL] =3D    {  0x40490000,  0x1000  },
-     [IBEX_DEV_FLASH_CTRL] =3D     {  0x41000000,  0x1000  },
-     [IBEX_DEV_AES] =3D            {  0x41100000,  0x1000  },
-@@ -272,6 +273,8 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev=
-_soc, Error **errp)
-         memmap[IBEX_DEV_CLKMGR].base, memmap[IBEX_DEV_CLKMGR].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.pinmux",
-         memmap[IBEX_DEV_PINMUX].base, memmap[IBEX_DEV_PINMUX].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.aon_timer",
-+        memmap[IBEX_DEV_AON_TIMER].base, memmap[IBEX_DEV_AON_TIMER].size=
-);
-     create_unimplemented_device("riscv.lowrisc.ibex.usbdev",
-         memmap[IBEX_DEV_USBDEV].base, memmap[IBEX_DEV_USBDEV].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.flash_ctrl",
-diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-index 1fc055cdff..7659d1bc5b 100644
---- a/include/hw/riscv/opentitan.h
-+++ b/include/hw/riscv/opentitan.h
-@@ -81,6 +81,7 @@ enum {
-     IBEX_DEV_RSTMGR,
-     IBEX_DEV_CLKMGR,
-     IBEX_DEV_PINMUX,
-+    IBEX_DEV_AON_TIMER,
-     IBEX_DEV_USBDEV,
-     IBEX_DEV_FLASH_CTRL,
-     IBEX_DEV_PLIC,
---=20
-2.37.3
+Thanks,
+Zhiwei
 
+> ---
+>   tcg/riscv/tcg-target.c.inc | 39 +++++++++++++++++++++-----------------
+>   1 file changed, 22 insertions(+), 17 deletions(-)
+>
+> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+> index 2a84c57bec..e3b608034f 100644
+> --- a/tcg/riscv/tcg-target.c.inc
+> +++ b/tcg/riscv/tcg-target.c.inc
+> @@ -923,9 +923,9 @@ static void tcg_out_goto(TCGContext *s, const tcg_insn_unit *target)
+>       tcg_debug_assert(ok);
+>   }
+>   
+> -static void tcg_out_tlb_load(TCGContext *s, TCGReg addrl,
+> -                             TCGReg addrh, MemOpIdx oi,
+> -                             tcg_insn_unit **label_ptr, bool is_load)
+> +static TCGReg tcg_out_tlb_load(TCGContext *s, TCGReg addrl,
+> +                               TCGReg addrh, MemOpIdx oi,
+> +                               tcg_insn_unit **label_ptr, bool is_load)
+>   {
+>       MemOp opc = get_memop(oi);
+>       unsigned s_bits = opc & MO_SIZE;
+> @@ -975,6 +975,7 @@ static void tcg_out_tlb_load(TCGContext *s, TCGReg addrl,
+>           addrl = TCG_REG_TMP0;
+>       }
+>       tcg_out_opc_reg(s, OPC_ADD, TCG_REG_TMP0, TCG_REG_TMP2, addrl);
+> +    return TCG_REG_TMP0;
+>   }
+>   
+>   static void add_qemu_ldst_label(TCGContext *s, int is_ld, MemOpIdx oi,
+> @@ -1177,7 +1178,7 @@ static void tcg_out_qemu_ld(TCGContext *s, const TCGArg *args, bool is_64)
+>   #else
+>       unsigned a_bits;
+>   #endif
+> -    TCGReg base = TCG_REG_TMP0;
+> +    TCGReg base;
+>   
+>       data_regl = *args++;
+>       data_regh = (TCG_TARGET_REG_BITS == 32 && is_64 ? *args++ : 0);
+> @@ -1187,23 +1188,25 @@ static void tcg_out_qemu_ld(TCGContext *s, const TCGArg *args, bool is_64)
+>       opc = get_memop(oi);
+>   
+>   #if defined(CONFIG_SOFTMMU)
+> -    tcg_out_tlb_load(s, addr_regl, addr_regh, oi, label_ptr, 1);
+> +    base = tcg_out_tlb_load(s, addr_regl, addr_regh, oi, label_ptr, 1);
+>       tcg_out_qemu_ld_direct(s, data_regl, data_regh, base, opc, is_64);
+>       add_qemu_ldst_label(s, 1, oi,
+>                           (is_64 ? TCG_TYPE_I64 : TCG_TYPE_I32),
+>                           data_regl, data_regh, addr_regl, addr_regh,
+>                           s->code_ptr, label_ptr);
+>   #else
+> -    if (TCG_TARGET_REG_BITS > TARGET_LONG_BITS) {
+> -        tcg_out_ext32u(s, base, addr_regl);
+> -        addr_regl = base;
+> -    }
+>       a_bits = get_alignment_bits(opc);
+>       if (a_bits) {
+>           tcg_out_test_alignment(s, true, addr_regl, a_bits);
+>       }
+> +    base = addr_regl;
+> +    if (TCG_TARGET_REG_BITS > TARGET_LONG_BITS) {
+> +        tcg_out_ext32u(s, TCG_REG_TMP0, base);
+> +        base = TCG_REG_TMP0;
+> +    }
+>       if (guest_base != 0) {
+> -        tcg_out_opc_reg(s, OPC_ADD, base, TCG_GUEST_BASE_REG, addr_regl);
+> +        tcg_out_opc_reg(s, OPC_ADD, TCG_REG_TMP0, TCG_GUEST_BASE_REG, base);
+> +        base = TCG_REG_TMP0;
+>       }
+>       tcg_out_qemu_ld_direct(s, data_regl, data_regh, base, opc, is_64);
+>   #endif
+> @@ -1249,7 +1252,7 @@ static void tcg_out_qemu_st(TCGContext *s, const TCGArg *args, bool is_64)
+>   #else
+>       unsigned a_bits;
+>   #endif
+> -    TCGReg base = TCG_REG_TMP0;
+> +    TCGReg base;
+>   
+>       data_regl = *args++;
+>       data_regh = (TCG_TARGET_REG_BITS == 32 && is_64 ? *args++ : 0);
+> @@ -1259,23 +1262,25 @@ static void tcg_out_qemu_st(TCGContext *s, const TCGArg *args, bool is_64)
+>       opc = get_memop(oi);
+>   
+>   #if defined(CONFIG_SOFTMMU)
+> -    tcg_out_tlb_load(s, addr_regl, addr_regh, oi, label_ptr, 0);
+> +    base = tcg_out_tlb_load(s, addr_regl, addr_regh, oi, label_ptr, 0);
+>       tcg_out_qemu_st_direct(s, data_regl, data_regh, base, opc);
+>       add_qemu_ldst_label(s, 0, oi,
+>                           (is_64 ? TCG_TYPE_I64 : TCG_TYPE_I32),
+>                           data_regl, data_regh, addr_regl, addr_regh,
+>                           s->code_ptr, label_ptr);
+>   #else
+> -    if (TCG_TARGET_REG_BITS > TARGET_LONG_BITS) {
+> -        tcg_out_ext32u(s, base, addr_regl);
+> -        addr_regl = base;
+> -    }
+>       a_bits = get_alignment_bits(opc);
+>       if (a_bits) {
+>           tcg_out_test_alignment(s, false, addr_regl, a_bits);
+>       }
+> +    base = addr_regl;
+> +    if (TCG_TARGET_REG_BITS > TARGET_LONG_BITS) {
+> +        tcg_out_ext32u(s, TCG_REG_TMP0, base);
+> +        base = TCG_REG_TMP0;
+> +    }
+>       if (guest_base != 0) {
+> -        tcg_out_opc_reg(s, OPC_ADD, base, TCG_GUEST_BASE_REG, addr_regl);
+> +        tcg_out_opc_reg(s, OPC_ADD, TCG_REG_TMP0, TCG_GUEST_BASE_REG, base);
+> +        base = TCG_REG_TMP0;
+>       }
+>       tcg_out_qemu_st_direct(s, data_regl, data_regh, base, opc);
+>   #endif
 
