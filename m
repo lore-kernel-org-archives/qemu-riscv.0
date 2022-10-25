@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1onAnc-0005to-Ka
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Oct 2022 23:40:20 -0400
+	id 1onBC2-0003Gi-TA
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Oct 2022 00:05:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1onAna-0005jS-2N; Mon, 24 Oct 2022 23:40:18 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ id 1onBC0-00038R-Nn; Tue, 25 Oct 2022 00:05:32 -0400
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1onAnY-0001OM-Ip; Mon, 24 Oct 2022 23:40:17 -0400
-Received: by mail-pf1-x430.google.com with SMTP id 192so3564419pfx.5;
- Mon, 24 Oct 2022 20:40:15 -0700 (PDT)
+ id 1onBBy-0004nE-IH; Tue, 25 Oct 2022 00:05:32 -0400
+Received: by mail-pg1-x52a.google.com with SMTP id e129so10425417pgc.9;
+ Mon, 24 Oct 2022 21:05:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mWpix6oiFchR5n4B3BCuqe3+9hAamN2i1PjX+p83xfA=;
- b=drBUYNRg+YhUkQjzc+KHvBC/sblePPRG0nVwkadchK9T1dHCIp0ARYUGcdgJV+zZz7
- XGu9Fkmp6bO7UKGOnmNY2otvvOxb2/gKjFtLCDpYlAxnfdgpDFrfwwwhhJSs1a6ewkhb
- oZIEhbe35lxPT3Iqq84rGW3mrLyPy9BZo29flBksgu6p4JyqY8vMfNZg9M1BtDbQ6Hg6
- 8rLjZHMFHlccRaOn3Xy6bUkomZj+NklmVk+Yd9OnSplCUHfD6uUuGrb0DKxuqlnwg44Q
- LwJXcbjvnw/7HQ48vwXDpy+sf3p62gKnhxs5rflz/B3/MtM9d1/kLEIObKMWnwuGmfjk
- 4eNA==
+ bh=/Gft0Jz5UqOzPlW3irMTOndiPqvb3eeYdituwaLftOA=;
+ b=dw7AEdvJ0hRki7gFXkIpQeh6AnlIUMGeCHGFyn9bCZFzbyNAtiK/MGD1J4XB0Bpn2Q
+ tO5LMtGE5G32n6IPOmE/uupgblELHs+i6Pwfj9XWVc4juTjtImKE2k5NlxK04K3g2m9c
+ 8kyiL5/mfWJXxh8LrPlc14vjAquhEuSjTSbV80lD/NJunjUrx9GlURrhMKXo9Z0/9u3o
+ 7GidhUTcrWyFwGbEVMRk6MAAwG9VwGZAIZR93QBWtjoPEwCQopDGvC8e/NBNJ6ARSwel
+ 8RxqbrkJj2hWop+EIq99FnM1Xki2lHRjbCbHgB0kMScg/zAbDW+vZWRFl5jI+Q9Jps1n
+ P89g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mWpix6oiFchR5n4B3BCuqe3+9hAamN2i1PjX+p83xfA=;
- b=mVwL7mHsNnkyDCWeisx2hIlukd5pqsUn0dArpbrMDB8AayJb9eY+nv0+f38lZf3XVI
- UAOiIqBGuV4GqkAS+JSRrqFs3IbQCDGDsdexG40OqbzytlA2AA/6Df1Et3s5voKlxw96
- y414Di4R+tlG7cMyoS17tgJW4bh/MWbK4UdOKNYLbxceWpvVn3369xJkkqlDU4bN77ak
- xbeLfy3Etq+u24TS61gDjrepAiChzLqM1Y0Be3AKGUQ/M922rDDvsMeDm/6G49IG0W2c
- 9384MENCiaM7hrPr/G9sa8c1T2W5JIoUe7rN5nEG7rRMHnq8CCif8cWhG8AxWZWbSqww
- xIfg==
-X-Gm-Message-State: ACrzQf00rVaZPWGodJVaMT12TQgMMIPGjsgg/HHC5lGv1zp+FPk/4rJX
- 3JiJs1bsgAFAaPiHPNxpFv4YomukjjYarJK4Id8=
-X-Google-Smtp-Source: AMsMyM60zISq0CxF164p8Ge8piSc6SmgcVEVU18D1bFiiy5GzmntHrD6HIND99001Bhj7eMM+hfvNOU4hTkI15fCqjg=
-X-Received: by 2002:a63:ce43:0:b0:45b:d6ed:6c2 with SMTP id
- r3-20020a63ce43000000b0045bd6ed06c2mr30850425pgi.406.1666669213973; Mon, 24
- Oct 2022 20:40:13 -0700 (PDT)
+ bh=/Gft0Jz5UqOzPlW3irMTOndiPqvb3eeYdituwaLftOA=;
+ b=ou8GJ9JsZeZNorrUdfmkP+5ssJTljwFE6iuEj/0u1Uc1JDlyKxkMa0/1VSZsMzztDA
+ GTV6UiMFesgfIez+UJz1mTi0U378ZLk3pTihfnpnu8eYIbGXEAIotMTmihCO9xEgyQ16
+ fzztBFdJElFtlsllpbkJuqqBeXoBZMb+BQpYjjR5CwxyjrocxpDgGmeEE0Y3Wc/Kq6KJ
+ kumseSyYgJm6nTcA+YcL98o3Q83g2zW51f4Fh57Molu9IluJj8BwYkDyKiilydUcwr3j
+ a+0Z9RO+UOBn/rqSYjiBidZmk+F6gsQv2IjVVvI+NTF20eCYQpqrpHSomgLvOYGQPPtE
+ WcJg==
+X-Gm-Message-State: ACrzQf0agoSDspOcWBK8476QStDGPmP7vmP99cLOQw4o8q5OQDzeZrgv
+ Rl1ilbCf6SoHSY2EVd++U4q8ydIT++wJyCC5MZw=
+X-Google-Smtp-Source: AMsMyM4Ud1YVffb+5x94rQfBXlSKAGQ3ZxOlUpaxC+rP19oxQOr1ciuqtp/9ZoeRZy/86yEYSgsHMPXfKwK1ZYo0H1o=
+X-Received: by 2002:a05:6a00:1a88:b0:566:8d0e:30eb with SMTP id
+ e8-20020a056a001a8800b005668d0e30ebmr37252232pfv.13.1666670728709; Mon, 24
+ Oct 2022 21:05:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220930012345.5248-1-liweiwei@iscas.ac.cn>
- <20220930012345.5248-8-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220930012345.5248-8-liweiwei@iscas.ac.cn>
+References: <20221025011040.246503-1-wilfred.mallawa@opensource.wdc.com>
+ <20221025011040.246503-2-wilfred.mallawa@opensource.wdc.com>
+In-Reply-To: <20221025011040.246503-2-wilfred.mallawa@opensource.wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 25 Oct 2022 13:39:47 +1000
-Message-ID: <CAKmqyKPHK7qKia8VayjLogUeXf3jiZpHRdk5bObmx6hbrLAuoA@mail.gmail.com>
-Subject: Re: [RFC 7/8] target/riscv: expose properties for Zc* extension
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, wangjunqiang@iscas.ac.cn, 
- lazyparser@gmail.com
+Date: Tue, 25 Oct 2022 14:05:02 +1000
+Message-ID: <CAKmqyKPMWXmtgVvcP-CsFD8A67BncuWOdVBgGOJ5tQ3Ab2X-7w@mail.gmail.com>
+Subject: Re: [PATCH v0 1/2] hw/riscv/opentitan: bump opentitan
+To: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Wilfred Mallawa <wilfred.mallawa@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x430.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x52a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,56 +74,124 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2022 03:40:18 -0000
+X-List-Received-Date: Tue, 25 Oct 2022 04:05:33 -0000
 
-On Fri, Sep 30, 2022 at 11:29 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Tue, Oct 25, 2022 at 11:18 AM Wilfred Mallawa
+<wilfred.mallawa@opensource.wdc.com> wrote:
 >
-> Expose zca,zcb,zcf,zcd,zcmp,zcmt properties
+> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 >
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> This patch updates the OpenTitan model to match
+> the specified register layout as per [1]. Which is also the latest
+> commit of OpenTitan supported by TockOS.
+>
+> Note: Pinmux and Padctrl has been merged into Pinmux [2][3], this patch removes
+> any references to Padctrl. Note: OpenTitan doc [2] has not yet specified
+> much detail regarding this, except for a note that states `TODO: this
+> section needs to be updated to reflect the pinmux/padctrl merger`
+>
+> [1] https://github.com/lowRISC/opentitan/blob/d072ac505f82152678d6e04be95c72b728a347b8/hw/top_earlgrey/sw/autogen/top_earlgrey_memory.h
+> [2] https://docs.opentitan.org/hw/top_earlgrey/doc/design/
+> [3] https://docs.opentitan.org/hw/ip/pinmux/doc/#overview
+>
+> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+
+Can you add a comment to the OpenTitan machine in QEMU specifying what
+git SHA of OT we are targeting?
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
+>  hw/riscv/opentitan.c         | 13 +++++--------
+>  include/hw/riscv/opentitan.h |  9 ++++-----
+>  2 files changed, 9 insertions(+), 13 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 7da3de1725..e6f722278c 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -80,6 +80,12 @@ static const struct isa_ext_data isa_edata_arr[] = {
->      ISA_EXT_DATA_ENTRY(zfhmin, true, PRIV_VERSION_1_12_0, ext_zfhmin),
->      ISA_EXT_DATA_ENTRY(zfinx, true, PRIV_VERSION_1_12_0, ext_zfinx),
->      ISA_EXT_DATA_ENTRY(zdinx, true, PRIV_VERSION_1_12_0, ext_zdinx),
-> +    ISA_EXT_DATA_ENTRY(zca, true, PRIV_VERSION_1_12_0, ext_zca),
-> +    ISA_EXT_DATA_ENTRY(zcb, true, PRIV_VERSION_1_12_0, ext_zcb),
-> +    ISA_EXT_DATA_ENTRY(zcf, true, PRIV_VERSION_1_12_0, ext_zcf),
-> +    ISA_EXT_DATA_ENTRY(zcd, true, PRIV_VERSION_1_12_0, ext_zcd),
-> +    ISA_EXT_DATA_ENTRY(zcmp, true, PRIV_VERSION_1_12_0, ext_zcmp),
-> +    ISA_EXT_DATA_ENTRY(zcmt, true, PRIV_VERSION_1_12_0, ext_zcmt),
->      ISA_EXT_DATA_ENTRY(zba, true, PRIV_VERSION_1_12_0, ext_zba),
->      ISA_EXT_DATA_ENTRY(zbb, true, PRIV_VERSION_1_12_0, ext_zbb),
->      ISA_EXT_DATA_ENTRY(zbc, true, PRIV_VERSION_1_12_0, ext_zbc),
-> @@ -1070,6 +1076,13 @@ static Property riscv_cpu_extensions[] = {
+> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> index be7ff1eea0..373fed36b6 100644
+> --- a/hw/riscv/opentitan.c
+> +++ b/hw/riscv/opentitan.c
+> @@ -29,7 +29,7 @@
+>  #include "sysemu/sysemu.h"
 >
->      /* These are experimental so mark with 'x-' */
->      DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
-> +
-> +    DEFINE_PROP_BOOL("x-zca", RISCVCPU, cfg.ext_zca, false),
-> +    DEFINE_PROP_BOOL("x-zcb", RISCVCPU, cfg.ext_zcb, false),
-> +    DEFINE_PROP_BOOL("x-zcd", RISCVCPU, cfg.ext_zcd, false),
-> +    DEFINE_PROP_BOOL("x-zcf", RISCVCPU, cfg.ext_zcf, false),
-> +    DEFINE_PROP_BOOL("x-zcmp", RISCVCPU, cfg.ext_zcmp, false),
-> +    DEFINE_PROP_BOOL("x-zcmt", RISCVCPU, cfg.ext_zcmt, false),
->      /* ePMP 0.9.3 */
->      DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
->      DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
+>  static const MemMapEntry ibex_memmap[] = {
+> -    [IBEX_DEV_ROM] =            {  0x00008000,   0x8000 },
+> +    [IBEX_DEV_ROM] =            {  0x00008000,  0x8000 },
+>      [IBEX_DEV_RAM] =            {  0x10000000,  0x20000 },
+>      [IBEX_DEV_FLASH] =          {  0x20000000,  0x100000 },
+>      [IBEX_DEV_UART] =           {  0x40000000,  0x1000  },
+> @@ -38,17 +38,17 @@ static const MemMapEntry ibex_memmap[] = {
+>      [IBEX_DEV_I2C] =            {  0x40080000,  0x1000  },
+>      [IBEX_DEV_PATTGEN] =        {  0x400e0000,  0x1000  },
+>      [IBEX_DEV_TIMER] =          {  0x40100000,  0x1000  },
+> -    [IBEX_DEV_SENSOR_CTRL] =    {  0x40110000,  0x1000  },
+>      [IBEX_DEV_OTP_CTRL] =       {  0x40130000,  0x4000  },
+>      [IBEX_DEV_LC_CTRL] =        {  0x40140000,  0x1000  },
+> -    [IBEX_DEV_USBDEV] =         {  0x40150000,  0x1000  },
+> +    [IBEX_DEV_ALERT_HANDLER] =  {  0x40150000,  0x1000  },
+>      [IBEX_DEV_SPI_HOST0] =      {  0x40300000,  0x1000  },
+>      [IBEX_DEV_SPI_HOST1] =      {  0x40310000,  0x1000  },
+> +    [IBEX_DEV_USBDEV] =         {  0x40320000,  0x1000  },
+>      [IBEX_DEV_PWRMGR] =         {  0x40400000,  0x1000  },
+>      [IBEX_DEV_RSTMGR] =         {  0x40410000,  0x1000  },
+>      [IBEX_DEV_CLKMGR] =         {  0x40420000,  0x1000  },
+>      [IBEX_DEV_PINMUX] =         {  0x40460000,  0x1000  },
+> -    [IBEX_DEV_PADCTRL] =        {  0x40470000,  0x1000  },
+> +    [IBEX_DEV_SENSOR_CTRL] =    {  0x40490000,  0x1000  },
+>      [IBEX_DEV_FLASH_CTRL] =     {  0x41000000,  0x1000  },
+>      [IBEX_DEV_AES] =            {  0x41100000,  0x1000  },
+>      [IBEX_DEV_HMAC] =           {  0x41110000,  0x1000  },
+> @@ -59,10 +59,9 @@ static const MemMapEntry ibex_memmap[] = {
+>      [IBEX_DEV_ENTROPY] =        {  0x41160000,  0x1000  },
+>      [IBEX_DEV_EDNO] =           {  0x41170000,  0x1000  },
+>      [IBEX_DEV_EDN1] =           {  0x41180000,  0x1000  },
+> -    [IBEX_DEV_ALERT_HANDLER] =  {  0x411b0000,  0x1000  },
+>      [IBEX_DEV_NMI_GEN] =        {  0x411c0000,  0x1000  },
+>      [IBEX_DEV_PERI] =           {  0x411f0000,  0x10000 },
+> -    [IBEX_DEV_PLIC] =           {  0x48000000,  0x4005000  },
+> +    [IBEX_DEV_PLIC] =           {  0x48000000,  0x4005000 },
+>      [IBEX_DEV_FLASH_VIRTUAL] =  {  0x80000000,  0x80000 },
+>  };
+>
+> @@ -265,8 +264,6 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+>          memmap[IBEX_DEV_CLKMGR].base, memmap[IBEX_DEV_CLKMGR].size);
+>      create_unimplemented_device("riscv.lowrisc.ibex.pinmux",
+>          memmap[IBEX_DEV_PINMUX].base, memmap[IBEX_DEV_PINMUX].size);
+> -    create_unimplemented_device("riscv.lowrisc.ibex.padctrl",
+> -        memmap[IBEX_DEV_PADCTRL].base, memmap[IBEX_DEV_PADCTRL].size);
+>      create_unimplemented_device("riscv.lowrisc.ibex.usbdev",
+>          memmap[IBEX_DEV_USBDEV].base, memmap[IBEX_DEV_USBDEV].size);
+>      create_unimplemented_device("riscv.lowrisc.ibex.flash_ctrl",
+> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
+> index 6665cd5794..1fc055cdff 100644
+> --- a/include/hw/riscv/opentitan.h
+> +++ b/include/hw/riscv/opentitan.h
+> @@ -81,7 +81,6 @@ enum {
+>      IBEX_DEV_RSTMGR,
+>      IBEX_DEV_CLKMGR,
+>      IBEX_DEV_PINMUX,
+> -    IBEX_DEV_PADCTRL,
+>      IBEX_DEV_USBDEV,
+>      IBEX_DEV_FLASH_CTRL,
+>      IBEX_DEV_PLIC,
+> @@ -109,10 +108,10 @@ enum {
+>      IBEX_UART0_RX_TIMEOUT_IRQ     = 7,
+>      IBEX_UART0_RX_PARITY_ERR_IRQ  = 8,
+>      IBEX_TIMER_TIMEREXPIRED0_0    = 127,
+> -    IBEX_SPI_HOST0_ERR_IRQ        = 151,
+> -    IBEX_SPI_HOST0_SPI_EVENT_IRQ  = 152,
+> -    IBEX_SPI_HOST1_ERR_IRQ        = 153,
+> -    IBEX_SPI_HOST1_SPI_EVENT_IRQ  = 154,
+> +    IBEX_SPI_HOST0_ERR_IRQ        = 134,
+> +    IBEX_SPI_HOST0_SPI_EVENT_IRQ  = 135,
+> +    IBEX_SPI_HOST1_ERR_IRQ        = 136,
+> +    IBEX_SPI_HOST1_SPI_EVENT_IRQ  = 137,
+>  };
+>
+>  #endif
 > --
-> 2.25.1
+> 2.37.3
 >
 >
 
