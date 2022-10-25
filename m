@@ -1,62 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1on9Y8-0001z9-JN
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Oct 2022 22:20:16 -0400
+	id 1onAPF-0006ea-UK
+	for mharc-qemu-riscv@gnu.org; Mon, 24 Oct 2022 23:15:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1on9Y7-0001yx-TL; Mon, 24 Oct 2022 22:20:15 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
+ id 1onAPE-0006eL-Ry; Mon, 24 Oct 2022 23:15:08 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1on9Y6-00041m-0O; Mon, 24 Oct 2022 22:20:15 -0400
-Received: by mail-pg1-x530.google.com with SMTP id q71so10262517pgq.8;
- Mon, 24 Oct 2022 19:20:13 -0700 (PDT)
+ id 1onAPD-0005Vz-7M; Mon, 24 Oct 2022 23:15:08 -0400
+Received: by mail-pl1-x634.google.com with SMTP id io19so5160921plb.8;
+ Mon, 24 Oct 2022 20:15:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Uv/wE81/zWTfnFs2ZgkIgNycUuOUxvgfJh+AfaDNfFo=;
- b=jW4OVkCvxm3TSM1u2fZFAAWPxE1pftmrqnGGx9CLIqjvzMu9RfMqVFmBFj0lNhIK0H
- Ph0DM/jGQ2e60k2ddvUfkWfDIwP5MfaKjTz4BFs+n7XvaD/dvMMIt5w05aAViq+icx32
- r/DpVgAEZv9PDQedvqip/h+gnzqTdyOWRY5i5L88h/W6D2pEQb+8UtkntFQn8xzDtju3
- wqKxXayCn8ehEzA6iNBx/S6cF0Fz8YWfwvsIltO9I2QonDzr7aGbUYeXqVDgH0/4001+
- q+p/dZVOEJN9uKRjUDR1IlKZTGmyvYh0dl8B1bGMzqroZ090ZqpUmwsoTkMO2Ybgta0W
- ysUw==
+ bh=9wIZ78HQDMvz1jZS1CHa6ZYxTI/ZdHrNsmpcXQDgKHA=;
+ b=Lo0pnKx6HPTVB5TDWseVwdEWKIZsOUV6MZsF4/t6k44kzl1NSC3RITOVYJ4mBI5ptv
+ 12VfpAvd7/UIB0y70RzUwmIOjUA3fmH8/cs7QtH8oAsZLmSeLI9wHlU0pB0186kAeHFw
+ N6UzNAY0T8Q+gawjDd6y9pgl6f2c4EeD9dcuZa9manksmHzYWBDqjjhFsJ43LxmXDGoo
+ 9igB+sr1Awb54neVtfqR+OP6/fKPJH3/8YnFJQd2ANdeJbepW/PestQNC6vYoAURAdUN
+ XOpi4rBjXfBVy3P521Id1AIeLuP92foTTFOVxZ1CwRUHTgeQnazgQ+av/YfTg6ORdrPt
+ 7RQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Uv/wE81/zWTfnFs2ZgkIgNycUuOUxvgfJh+AfaDNfFo=;
- b=k/xpBtuKlbOOboafKFxBLoxHMtef5lCweHrjnKapwCwq/Mym0+Rbf4azC6dJEYLsWs
- fptzsdIuDZSOjTsSAuwqsp+3Ffa5N7y6RjNWHN2IWHihsbhK02aVL6yGg8oOtc44dAS1
- RtwzbPQ4W39UQysKb4DG91/Fp88gP6cpZZZ9qNPzSyIdxsd2uU6AwSwFa0Yn+KJnntZM
- xAIOKJGV0Cs8JIhmMIkQnS7EkCmky1tZjnNVco+x54Im0L3QgWBV/M12HwdWUuHGiHSX
- hPbZK2MZS7cfjI7qvwMgl/anJ7NTlY8a4gmfAz3DhdwUrKylpQQVW/upAju/idOmoPNy
- /izg==
-X-Gm-Message-State: ACrzQf14hkFO5q/ngDn1hI6UiQUO1HQU6YPOB7D4792G1qWpK8SHsTuA
- SUdyp63uo21yjmE8hn/7qDs2/KcGaayQC7jZ7gQ=
-X-Google-Smtp-Source: AMsMyM4LxXsYSj3Rzu5Q1B6J+eiCjP2UCz3r+WoQL369B9kTBSM6mOMSuwk00jyBauPUp5njorTT8ZarbZ3LaMjhYKs=
-X-Received: by 2002:a63:ce43:0:b0:45b:d6ed:6c2 with SMTP id
- r3-20020a63ce43000000b0045bd6ed06c2mr30608055pgi.406.1666664411977; Mon, 24
- Oct 2022 19:20:11 -0700 (PDT)
+ bh=9wIZ78HQDMvz1jZS1CHa6ZYxTI/ZdHrNsmpcXQDgKHA=;
+ b=4P6vU+Pd5NTP90o376nEGEkd6Obuf8XooGoIBNwYhfGUiGK5e8IN9b0MHOo7bjhGlz
+ gNuE6QKA9Mb/BT+hwPbSTs/wF3p2TWBHZ3jBl2bs8sIAzmnvFGMmZxzls8OGGWPvV9MO
+ s97yE7qPNWUEG0wAUD355rFZe7N0gojP+UT4R+/P6TyXxXv2pEJgtoVpBNHFzoxtkqwr
+ C+IUqMCB29wUBr8vAA7dy8m1vsry6e1iPj7WANOuiLKvLvGCSPkNZ6fLytlcWxxCLciq
+ 2kHXipK8tnTmCGqpoRX0g2G7aMy8gCFtbJhj9sssjHH6paHM6QFxB7HcLd3ssVHX2BGg
+ jzjg==
+X-Gm-Message-State: ACrzQf2ACSDVdy7CiSQ1kp1FbXctQ8RLO35Gq3iirz5A8pwqblU+BnsK
+ 9/1MURxsfvlx/LdRKJgkBR5Ijt+xMAceTLKAhRQ=
+X-Google-Smtp-Source: AMsMyM78/4a6w7nv4OE7MSLW8efah4QZ44+75dDqshxIHvNQ0sVJaZJLenD0hk9K1/gNZ4hYA9exxqdpSoY3ONdua7I=
+X-Received: by 2002:a17:903:32cd:b0:185:5421:a5d6 with SMTP id
+ i13-20020a17090332cd00b001855421a5d6mr36815644plr.99.1666667704396; Mon, 24
+ Oct 2022 20:15:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220909152258.2568942-1-leon@is.currently.online>
- <CAKmqyKMfZXarM1g8PdhAqcgZzDyq6RY3R94cYhOo80WXiCv5aA@mail.gmail.com>
- <8735bjqz8f.fsf@silicon.host.schuermann.io>
-In-Reply-To: <8735bjqz8f.fsf@silicon.host.schuermann.io>
+References: <20220930012345.5248-1-liweiwei@iscas.ac.cn>
+ <20220930012345.5248-2-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220930012345.5248-2-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 25 Oct 2022 12:19:35 +1000
-Message-ID: <CAKmqyKO7=LS9JbMyCKg3C5U3-vNJiQTEDR59atwMGoCSpF3C2g@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv/pmp: fix non-translated page size address
- checks w/ MPU
-To: Leon Schuermann <leon@is.currently.online>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Date: Tue, 25 Oct 2022 13:14:37 +1000
+Message-ID: <CAKmqyKNWTyzS9Zb4ipS6fscf_W2E3fFJPVnOLiPuU4RnpUZW5w@mail.gmail.com>
+Subject: Re: [RFC 1/8] target/riscv: add cfg properties for Zc* extension
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, wangjunqiang@iscas.ac.cn, 
+ lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x530.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=alistair23@gmail.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,113 +74,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2022 02:20:16 -0000
+X-List-Received-Date: Tue, 25 Oct 2022 03:15:09 -0000
 
-On Thu, Oct 20, 2022 at 7:29 AM Leon Schuermann
-<leon@is.currently.online> wrote:
+On Fri, Sep 30, 2022 at 11:28 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> Alistair Francis <alistair23@gmail.com> writes:
-> >> @@ -310,10 +311,17 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-> >>      }
-> >>
-> >>      if (size == 0) {
-> >> -        if (riscv_feature(env, RISCV_FEATURE_MMU)) {
-> >> +        if (riscv_cpu_mxl(env) == MXL_RV32) {
-> >> +            satp_mode = SATP32_MODE;
-> >> +        } else {
-> >> +            satp_mode = SATP64_MODE;
-> >> +        }
-> >> +
-> >> +        if (riscv_feature(env, RISCV_FEATURE_MMU)
-> >> +            && get_field(env->satp, satp_mode)) {
-> >>              /*
-> >> -             * If size is unknown (0), assume that all bytes
-> >> -             * from addr to the end of the page will be accessed.
-> >> +             * If size is unknown (0) and virtual memory is enabled, assume that
-> >> +             * all bytes from addr to the end of the page will be accessed.
-> >>               */
-> >>              pmp_size = -(addr | TARGET_PAGE_MASK);
-> >
-> > I'm not sure if we need this at all.
-> >
-> > This function is only called from get_physical_address_pmp() which
-> > then calculates the maximum size using pmp_is_range_in_tlb().
+> Add properties for Zca,Zcb,Zcf,Zcd,Zcmp,Zcmt extension
+> Add check for these properties
 >
-> I'm by no means an expert on QEMU and the TCG, so I've spun up GDB to
-> trace down why exactly this function is called with a `size = 0`
-> argument. It seems that there are, generally, two code paths to this
-> function for instruction fetching:
->
-> 1. From `get_page_addr_code`: this will invoke `tlb_fill` with
->    `size = 0` to check whether an entire page is accessible and can be
->    translated given the current MMU / PMP configuration. In my
->    particular example, it may rightfully fail then. `get_page_addr_code`
->    can handle this and will subsequently cause an MMU protection check
->    to be run for each instruction translated.
->
-> 2. From `riscv_tr_translate_insn` through `cpu_lduw_code`, which will
->    execute `tlb_fill` with `size = 2` (to try and decode a compressed
->    instruction), assuming that the above check failed.
->
-> So far, so good. In this context, it actually makes sense for
-> `pmp_hart_has_privs` to interpret `size = 0` to mean whether the entire
-> page is allowed to be accessed.
->
-> > I suspect that we could just use sizeof(target_ulong) as the fallback
-> > for every time size == 0. Then pmp_is_range_in_tlb() will set the
-> > tlb_size to the maximum possible size of the PMP region.
->
-> Given the above, I don't think that this is correct either. The PMP
-> check would pass even for non-page sized regions, but the entire page
-> would be accessible through the TCG's TLB, as a consequence of
-> `get_page_addr_code`.
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 
-If we pass a size smaller than the page, it won't be cached in the
-TLB, so that should be ok.
-
-A few PMP improvements have gone into
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next. It might
-be worth checking to see if that fixes the issue you are seeing.
-Otherwise I think defaulting to the xlen should be ok.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu.c | 24 ++++++++++++++++++++++++
+>  target/riscv/cpu.h |  6 ++++++
+>  2 files changed, 30 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index b29c88b9f0..7da3de1725 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -782,6 +782,30 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              }
+>          }
+>
+> +        if (env->misa_mxl_max != MXL_RV32 && cpu->cfg.ext_zcf) {
+> +            error_setg(errp, "Zcf is only relevant to RV32");
+> +            return;
+> +        }
+> +
+> +        if ((cpu->cfg.ext_zcf || cpu->cfg.ext_zcd || cpu->cfg.ext_zcb ||
+> +             cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt) && !cpu->cfg.ext_zca) {
+> +            error_setg(errp, "Zcf/Zcd/Zcb/Zcmp/Zcmt require Zca extension");
+> +            return;
+> +        }
+> +
+> +        if ((((env->misa_ext & RVD) && (env->misa_ext & RVC)) ||
+> +             cpu->cfg.ext_zcd) && (cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt)) {
+> +            error_setg(errp,
+> +                       "Zcmp/Zcmt are incompatible with Zcd, which is "
+> +                       "included when C and D extensions are both present");
+> +            return;
+> +        }
+> +
+> +        if (cpu->cfg.ext_zcmt && !cpu->cfg.ext_icsr) {
+> +            error_setg(errp, "Zcmt extension requires Zicsr");
+> +            return;
+> +        }
+> +
+>          if (cpu->cfg.ext_zk) {
+>              cpu->cfg.ext_zkn = true;
+>              cpu->cfg.ext_zkr = true;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index b131fa8c8e..db3eca1d8a 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -428,6 +428,12 @@ struct RISCVCPUConfig {
+>      bool ext_zbkc;
+>      bool ext_zbkx;
+>      bool ext_zbs;
+> +    bool ext_zca;
+> +    bool ext_zcb;
+> +    bool ext_zcd;
+> +    bool ext_zcf;
+> +    bool ext_zcmp;
+> +    bool ext_zcmt;
+>      bool ext_zk;
+>      bool ext_zkn;
+>      bool ext_zknd;
+> --
+> 2.25.1
 >
 >
-> In the current implementation, `get_page_addr_code_hostp` calls
-> `tlb_fill`, which in turn invokes the RISC-V TCG op `tlb_fill` with the
-> parameter `probe = false`. This in turn raises a PMP exception in the
-> CPU, whereas `get_page_addr_code` would seem to expect this a failing
-> `tlb_fill` to be side-effect free, such that the MMU protection checks
-> can be re-run per instruction in the TCG code generation phase.
->
-> I think that this is sufficient evidence to conclude that my initial
-> patch is actually incorrect, however I am unsure as to how this issue
-> can be solved proper. One approach which seems to work is to change
-> `get_page_addr_code_hostp` to use a non-faulting page-table read
-> instead:
->
-> @@ -1510,11 +1510,15 @@ tb_page_addr_t get_page_addr_code_hostp(CPUArchState *env, target_ulong addr,
->      uintptr_t mmu_idx = cpu_mmu_index(env, true);
->      uintptr_t index = tlb_index(env, mmu_idx, addr);
->      CPUTLBEntry *entry = tlb_entry(env, mmu_idx, addr);
-> +    CPUState *cs = env_cpu(env);
-> +    CPUClass *cc = CPU_GET_CLASS(cs);
->      void *p;
->
->      if (unlikely(!tlb_hit(entry->addr_code, addr))) {
->          if (!VICTIM_TLB_HIT(addr_code, addr)) {
-> -            tlb_fill(env_cpu(env), addr, 0, MMU_INST_FETCH, mmu_idx, 0);
-> +            // Nonfaulting page-table read:
-> +            cc->tcg_ops->tlb_fill(cs, addr, 0, MMU_INST_FETCH, mmu_idx, true,
-> +                                  0);
->              index = tlb_index(env, mmu_idx, addr);
->              entry = tlb_entry(env, mmu_idx, addr);
->
->
-> However, given this touches the generic TCG implementation, I cannot
-> judge whether this is correct or has any unintended side effects for
-> other targets. If this is correct, I'd be happy to send a proper patch.
->
-> -Leon
 
