@@ -1,59 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1onAPF-0006ea-UK
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Oct 2022 23:15:09 -0400
+	id 1onAnN-000584-3Z
+	for mharc-qemu-riscv@gnu.org; Mon, 24 Oct 2022 23:40:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1onAPE-0006eL-Ry; Mon, 24 Oct 2022 23:15:08 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ id 1onAnF-0004tg-MG; Mon, 24 Oct 2022 23:40:01 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1onAPD-0005Vz-7M; Mon, 24 Oct 2022 23:15:08 -0400
-Received: by mail-pl1-x634.google.com with SMTP id io19so5160921plb.8;
- Mon, 24 Oct 2022 20:15:05 -0700 (PDT)
+ id 1onAnD-00019w-0h; Mon, 24 Oct 2022 23:39:56 -0400
+Received: by mail-pl1-x633.google.com with SMTP id k23so38718pls.7;
+ Mon, 24 Oct 2022 20:39:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9wIZ78HQDMvz1jZS1CHa6ZYxTI/ZdHrNsmpcXQDgKHA=;
- b=Lo0pnKx6HPTVB5TDWseVwdEWKIZsOUV6MZsF4/t6k44kzl1NSC3RITOVYJ4mBI5ptv
- 12VfpAvd7/UIB0y70RzUwmIOjUA3fmH8/cs7QtH8oAsZLmSeLI9wHlU0pB0186kAeHFw
- N6UzNAY0T8Q+gawjDd6y9pgl6f2c4EeD9dcuZa9manksmHzYWBDqjjhFsJ43LxmXDGoo
- 9igB+sr1Awb54neVtfqR+OP6/fKPJH3/8YnFJQd2ANdeJbepW/PestQNC6vYoAURAdUN
- XOpi4rBjXfBVy3P521Id1AIeLuP92foTTFOVxZ1CwRUHTgeQnazgQ+av/YfTg6ORdrPt
- 7RQg==
+ bh=6MfBaXYRj/yUo0jfnU1L/WIyBOfKxTAVeTphoys5qXs=;
+ b=NVQnDutURozmRF07i5tFCjBucNgu19EWo+FNumPjBq6cpTjlJ7oKG7Pstqxc9cPPCs
+ H/5Vk1hxU1EekoG1XZJNqfUl1feVBCCO7z/9rrZIbwnXtJXvtmqzlBJSqSEirW+amGFw
+ 5skVwqGyZu0R7HyaCaSX5UMpk3NRymRKwDZrg7152LYNaS0PiHB3pIJTt8Z0RfN+qbIn
+ pAsh+1xwL/NSX8NZtLQ1VmrjbiHRnan7GewwbQrjXdIWThGX76Ukvf92fqJFDDPluD68
+ TeSxTREcoJ5pseF78Vxztteh/F3TwFNBOEYFOTdjQDhnhEptOk5+6R/dHghbAkdePAsj
+ uMWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9wIZ78HQDMvz1jZS1CHa6ZYxTI/ZdHrNsmpcXQDgKHA=;
- b=4P6vU+Pd5NTP90o376nEGEkd6Obuf8XooGoIBNwYhfGUiGK5e8IN9b0MHOo7bjhGlz
- gNuE6QKA9Mb/BT+hwPbSTs/wF3p2TWBHZ3jBl2bs8sIAzmnvFGMmZxzls8OGGWPvV9MO
- s97yE7qPNWUEG0wAUD355rFZe7N0gojP+UT4R+/P6TyXxXv2pEJgtoVpBNHFzoxtkqwr
- C+IUqMCB29wUBr8vAA7dy8m1vsry6e1iPj7WANOuiLKvLvGCSPkNZ6fLytlcWxxCLciq
- 2kHXipK8tnTmCGqpoRX0g2G7aMy8gCFtbJhj9sssjHH6paHM6QFxB7HcLd3ssVHX2BGg
- jzjg==
-X-Gm-Message-State: ACrzQf2ACSDVdy7CiSQ1kp1FbXctQ8RLO35Gq3iirz5A8pwqblU+BnsK
- 9/1MURxsfvlx/LdRKJgkBR5Ijt+xMAceTLKAhRQ=
-X-Google-Smtp-Source: AMsMyM78/4a6w7nv4OE7MSLW8efah4QZ44+75dDqshxIHvNQ0sVJaZJLenD0hk9K1/gNZ4hYA9exxqdpSoY3ONdua7I=
-X-Received: by 2002:a17:903:32cd:b0:185:5421:a5d6 with SMTP id
- i13-20020a17090332cd00b001855421a5d6mr36815644plr.99.1666667704396; Mon, 24
- Oct 2022 20:15:04 -0700 (PDT)
+ bh=6MfBaXYRj/yUo0jfnU1L/WIyBOfKxTAVeTphoys5qXs=;
+ b=V0HZ4GF+bvnPq8FDV5l2UnwUvNYPEM6/l+NcrgmlxpoEB/SvJjxWF/CK2xVK0kR/Ra
+ uTsYkF7hVQUW9O/SkAPQ0ySCVVTwGYCdOsJio8rvmwFJhv9qI4yUQalYwpBwMnA8llfD
+ rFp8rbIp2XjZ6RtOsmaK4L0W1xOpzV9M293u6Q95OChh8YBIdnNDMCP7kN+lx5UxXmw0
+ juvl93SO8j5bLbjnUkXpoYM5hbLBTOPugQtMZU1vGd5e4O457xGoAtJEHpM4Wm/MUJ0s
+ +yiu0vBGKA2MJrdsKuzjFTPHsad6T2vLxGigYGOg1sf1/UwtFxYyNBPF+Z39dUDoUJxh
+ 5K/A==
+X-Gm-Message-State: ACrzQf1vu4q0znoJYG0BqzNbs1QepXTlxqEXGOZHtuCVBHpfGme3eAuE
+ G+DA/X2ly2ka9Nqv4/S4BIb1B5YWDX8Rw4uURCo=
+X-Google-Smtp-Source: AMsMyM6C3UOFyCvGEopsA5x5D7RfQQ/m1rls0jWo3qTohpZU7AtS07bQ0+gwtCNhUPLls+iNjNai8UyT/+5AXm98XAQ=
+X-Received: by 2002:a17:902:8693:b0:17a:f71:98fd with SMTP id
+ g19-20020a170902869300b0017a0f7198fdmr36764803plo.25.1666669191573; Mon, 24
+ Oct 2022 20:39:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220930012345.5248-1-liweiwei@iscas.ac.cn>
- <20220930012345.5248-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220930012345.5248-2-liweiwei@iscas.ac.cn>
+ <20220930012345.5248-7-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220930012345.5248-7-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 25 Oct 2022 13:14:37 +1000
-Message-ID: <CAKmqyKNWTyzS9Zb4ipS6fscf_W2E3fFJPVnOLiPuU4RnpUZW5w@mail.gmail.com>
-Subject: Re: [RFC 1/8] target/riscv: add cfg properties for Zc* extension
+Date: Tue, 25 Oct 2022 13:39:23 +1000
+Message-ID: <CAKmqyKORk8eDQz-GU0CR9Ch9wmtdB9Fc6EGmPHcgSp9Dsr7bWQ@mail.gmail.com>
+Subject: Re: [RFC 6/8] target/riscv: delete redundant check for zcd
+ instructions in decode_opc
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org, wangjunqiang@iscas.ac.cn, 
  lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=alistair23@gmail.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,77 +75,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2022 03:15:09 -0000
+X-List-Received-Date: Tue, 25 Oct 2022 03:40:03 -0000
 
 On Fri, Sep 30, 2022 at 11:28 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> Add properties for Zca,Zcb,Zcf,Zcd,Zcmp,Zcmt extension
-> Add check for these properties
+> All the check for Zcd instructions have been done in their trans function
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> ---
+>  target/riscv/translate.c | 7 -------
+>  1 file changed, 7 deletions(-)
+>
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 347bc913eb..a55b4a7849 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -1087,13 +1087,6 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>               ((opcode & 0xe003) == 0xe000) ||
+>               ((opcode & 0xe003) == 0xe002))) {
+>              gen_exception_illegal(ctx);
+> -        } else if (!(has_ext(ctx, RVC) || ctx->cfg_ptr->ext_zcd ||
+> -                     ctx->cfg_ptr->ext_zcmp || ctx->cfg_ptr->ext_zcmt) &&
+> -                   (((opcode & 0xe003) == 0x2000) ||
+> -                    ((opcode & 0xe003) == 0x2002) ||
+> -                    ((opcode & 0xe003) == 0xa000) ||
+> -                    ((opcode & 0xe003) == 0xa002))) {
+> -            gen_exception_illegal(ctx);
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+It's probably best to never add this in the first place.
+
+Remember that the extension can't be enabled until the last patch, so
+it's ok if we don't support it all in one go
 
 Alistair
 
-> ---
->  target/riscv/cpu.c | 24 ++++++++++++++++++++++++
->  target/riscv/cpu.h |  6 ++++++
->  2 files changed, 30 insertions(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b29c88b9f0..7da3de1725 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -782,6 +782,30 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->              }
->          }
->
-> +        if (env->misa_mxl_max != MXL_RV32 && cpu->cfg.ext_zcf) {
-> +            error_setg(errp, "Zcf is only relevant to RV32");
-> +            return;
-> +        }
-> +
-> +        if ((cpu->cfg.ext_zcf || cpu->cfg.ext_zcd || cpu->cfg.ext_zcb ||
-> +             cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt) && !cpu->cfg.ext_zca) {
-> +            error_setg(errp, "Zcf/Zcd/Zcb/Zcmp/Zcmt require Zca extension");
-> +            return;
-> +        }
-> +
-> +        if ((((env->misa_ext & RVD) && (env->misa_ext & RVC)) ||
-> +             cpu->cfg.ext_zcd) && (cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt)) {
-> +            error_setg(errp,
-> +                       "Zcmp/Zcmt are incompatible with Zcd, which is "
-> +                       "included when C and D extensions are both present");
-> +            return;
-> +        }
-> +
-> +        if (cpu->cfg.ext_zcmt && !cpu->cfg.ext_icsr) {
-> +            error_setg(errp, "Zcmt extension requires Zicsr");
-> +            return;
-> +        }
-> +
->          if (cpu->cfg.ext_zk) {
->              cpu->cfg.ext_zkn = true;
->              cpu->cfg.ext_zkr = true;
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index b131fa8c8e..db3eca1d8a 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -428,6 +428,12 @@ struct RISCVCPUConfig {
->      bool ext_zbkc;
->      bool ext_zbkx;
->      bool ext_zbs;
-> +    bool ext_zca;
-> +    bool ext_zcb;
-> +    bool ext_zcd;
-> +    bool ext_zcf;
-> +    bool ext_zcmp;
-> +    bool ext_zcmt;
->      bool ext_zk;
->      bool ext_zkn;
->      bool ext_zknd;
+>          } else {
+>              ctx->opcode = opcode;
+>              ctx->pc_succ_insn = ctx->base.pc_next + 2;
 > --
 > 2.25.1
 >
