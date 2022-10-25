@@ -1,60 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1onAnN-000584-3Z
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Oct 2022 23:40:07 -0400
+	id 1onAnc-0005to-Ka
+	for mharc-qemu-riscv@gnu.org; Mon, 24 Oct 2022 23:40:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1onAnF-0004tg-MG; Mon, 24 Oct 2022 23:40:01 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ id 1onAna-0005jS-2N; Mon, 24 Oct 2022 23:40:18 -0400
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1onAnD-00019w-0h; Mon, 24 Oct 2022 23:39:56 -0400
-Received: by mail-pl1-x633.google.com with SMTP id k23so38718pls.7;
- Mon, 24 Oct 2022 20:39:52 -0700 (PDT)
+ id 1onAnY-0001OM-Ip; Mon, 24 Oct 2022 23:40:17 -0400
+Received: by mail-pf1-x430.google.com with SMTP id 192so3564419pfx.5;
+ Mon, 24 Oct 2022 20:40:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6MfBaXYRj/yUo0jfnU1L/WIyBOfKxTAVeTphoys5qXs=;
- b=NVQnDutURozmRF07i5tFCjBucNgu19EWo+FNumPjBq6cpTjlJ7oKG7Pstqxc9cPPCs
- H/5Vk1hxU1EekoG1XZJNqfUl1feVBCCO7z/9rrZIbwnXtJXvtmqzlBJSqSEirW+amGFw
- 5skVwqGyZu0R7HyaCaSX5UMpk3NRymRKwDZrg7152LYNaS0PiHB3pIJTt8Z0RfN+qbIn
- pAsh+1xwL/NSX8NZtLQ1VmrjbiHRnan7GewwbQrjXdIWThGX76Ukvf92fqJFDDPluD68
- TeSxTREcoJ5pseF78Vxztteh/F3TwFNBOEYFOTdjQDhnhEptOk5+6R/dHghbAkdePAsj
- uMWw==
+ bh=mWpix6oiFchR5n4B3BCuqe3+9hAamN2i1PjX+p83xfA=;
+ b=drBUYNRg+YhUkQjzc+KHvBC/sblePPRG0nVwkadchK9T1dHCIp0ARYUGcdgJV+zZz7
+ XGu9Fkmp6bO7UKGOnmNY2otvvOxb2/gKjFtLCDpYlAxnfdgpDFrfwwwhhJSs1a6ewkhb
+ oZIEhbe35lxPT3Iqq84rGW3mrLyPy9BZo29flBksgu6p4JyqY8vMfNZg9M1BtDbQ6Hg6
+ 8rLjZHMFHlccRaOn3Xy6bUkomZj+NklmVk+Yd9OnSplCUHfD6uUuGrb0DKxuqlnwg44Q
+ LwJXcbjvnw/7HQ48vwXDpy+sf3p62gKnhxs5rflz/B3/MtM9d1/kLEIObKMWnwuGmfjk
+ 4eNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6MfBaXYRj/yUo0jfnU1L/WIyBOfKxTAVeTphoys5qXs=;
- b=V0HZ4GF+bvnPq8FDV5l2UnwUvNYPEM6/l+NcrgmlxpoEB/SvJjxWF/CK2xVK0kR/Ra
- uTsYkF7hVQUW9O/SkAPQ0ySCVVTwGYCdOsJio8rvmwFJhv9qI4yUQalYwpBwMnA8llfD
- rFp8rbIp2XjZ6RtOsmaK4L0W1xOpzV9M293u6Q95OChh8YBIdnNDMCP7kN+lx5UxXmw0
- juvl93SO8j5bLbjnUkXpoYM5hbLBTOPugQtMZU1vGd5e4O457xGoAtJEHpM4Wm/MUJ0s
- +yiu0vBGKA2MJrdsKuzjFTPHsad6T2vLxGigYGOg1sf1/UwtFxYyNBPF+Z39dUDoUJxh
- 5K/A==
-X-Gm-Message-State: ACrzQf1vu4q0znoJYG0BqzNbs1QepXTlxqEXGOZHtuCVBHpfGme3eAuE
- G+DA/X2ly2ka9Nqv4/S4BIb1B5YWDX8Rw4uURCo=
-X-Google-Smtp-Source: AMsMyM6C3UOFyCvGEopsA5x5D7RfQQ/m1rls0jWo3qTohpZU7AtS07bQ0+gwtCNhUPLls+iNjNai8UyT/+5AXm98XAQ=
-X-Received: by 2002:a17:902:8693:b0:17a:f71:98fd with SMTP id
- g19-20020a170902869300b0017a0f7198fdmr36764803plo.25.1666669191573; Mon, 24
- Oct 2022 20:39:51 -0700 (PDT)
+ bh=mWpix6oiFchR5n4B3BCuqe3+9hAamN2i1PjX+p83xfA=;
+ b=mVwL7mHsNnkyDCWeisx2hIlukd5pqsUn0dArpbrMDB8AayJb9eY+nv0+f38lZf3XVI
+ UAOiIqBGuV4GqkAS+JSRrqFs3IbQCDGDsdexG40OqbzytlA2AA/6Df1Et3s5voKlxw96
+ y414Di4R+tlG7cMyoS17tgJW4bh/MWbK4UdOKNYLbxceWpvVn3369xJkkqlDU4bN77ak
+ xbeLfy3Etq+u24TS61gDjrepAiChzLqM1Y0Be3AKGUQ/M922rDDvsMeDm/6G49IG0W2c
+ 9384MENCiaM7hrPr/G9sa8c1T2W5JIoUe7rN5nEG7rRMHnq8CCif8cWhG8AxWZWbSqww
+ xIfg==
+X-Gm-Message-State: ACrzQf00rVaZPWGodJVaMT12TQgMMIPGjsgg/HHC5lGv1zp+FPk/4rJX
+ 3JiJs1bsgAFAaPiHPNxpFv4YomukjjYarJK4Id8=
+X-Google-Smtp-Source: AMsMyM60zISq0CxF164p8Ge8piSc6SmgcVEVU18D1bFiiy5GzmntHrD6HIND99001Bhj7eMM+hfvNOU4hTkI15fCqjg=
+X-Received: by 2002:a63:ce43:0:b0:45b:d6ed:6c2 with SMTP id
+ r3-20020a63ce43000000b0045bd6ed06c2mr30850425pgi.406.1666669213973; Mon, 24
+ Oct 2022 20:40:13 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220930012345.5248-1-liweiwei@iscas.ac.cn>
- <20220930012345.5248-7-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220930012345.5248-7-liweiwei@iscas.ac.cn>
+ <20220930012345.5248-8-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220930012345.5248-8-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 25 Oct 2022 13:39:23 +1000
-Message-ID: <CAKmqyKORk8eDQz-GU0CR9Ch9wmtdB9Fc6EGmPHcgSp9Dsr7bWQ@mail.gmail.com>
-Subject: Re: [RFC 6/8] target/riscv: delete redundant check for zcd
- instructions in decode_opc
+Date: Tue, 25 Oct 2022 13:39:47 +1000
+Message-ID: <CAKmqyKPHK7qKia8VayjLogUeXf3jiZpHRdk5bObmx6hbrLAuoA@mail.gmail.com>
+Subject: Re: [RFC 7/8] target/riscv: expose properties for Zc* extension
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org, wangjunqiang@iscas.ac.cn, 
  lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x430.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,44 +74,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2022 03:40:03 -0000
+X-List-Received-Date: Tue, 25 Oct 2022 03:40:18 -0000
 
-On Fri, Sep 30, 2022 at 11:28 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Fri, Sep 30, 2022 at 11:29 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> All the check for Zcd instructions have been done in their trans function
+> Expose zca,zcb,zcf,zcd,zcmp,zcmt properties
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> ---
->  target/riscv/translate.c | 7 -------
->  1 file changed, 7 deletions(-)
->
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 347bc913eb..a55b4a7849 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -1087,13 +1087,6 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
->               ((opcode & 0xe003) == 0xe000) ||
->               ((opcode & 0xe003) == 0xe002))) {
->              gen_exception_illegal(ctx);
-> -        } else if (!(has_ext(ctx, RVC) || ctx->cfg_ptr->ext_zcd ||
-> -                     ctx->cfg_ptr->ext_zcmp || ctx->cfg_ptr->ext_zcmt) &&
-> -                   (((opcode & 0xe003) == 0x2000) ||
-> -                    ((opcode & 0xe003) == 0x2002) ||
-> -                    ((opcode & 0xe003) == 0xa000) ||
-> -                    ((opcode & 0xe003) == 0xa002))) {
-> -            gen_exception_illegal(ctx);
 
-It's probably best to never add this in the first place.
-
-Remember that the extension can't be enabled until the last patch, so
-it's ok if we don't support it all in one go
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->          } else {
->              ctx->opcode = opcode;
->              ctx->pc_succ_insn = ctx->base.pc_next + 2;
+> ---
+>  target/riscv/cpu.c | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 7da3de1725..e6f722278c 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -80,6 +80,12 @@ static const struct isa_ext_data isa_edata_arr[] = {
+>      ISA_EXT_DATA_ENTRY(zfhmin, true, PRIV_VERSION_1_12_0, ext_zfhmin),
+>      ISA_EXT_DATA_ENTRY(zfinx, true, PRIV_VERSION_1_12_0, ext_zfinx),
+>      ISA_EXT_DATA_ENTRY(zdinx, true, PRIV_VERSION_1_12_0, ext_zdinx),
+> +    ISA_EXT_DATA_ENTRY(zca, true, PRIV_VERSION_1_12_0, ext_zca),
+> +    ISA_EXT_DATA_ENTRY(zcb, true, PRIV_VERSION_1_12_0, ext_zcb),
+> +    ISA_EXT_DATA_ENTRY(zcf, true, PRIV_VERSION_1_12_0, ext_zcf),
+> +    ISA_EXT_DATA_ENTRY(zcd, true, PRIV_VERSION_1_12_0, ext_zcd),
+> +    ISA_EXT_DATA_ENTRY(zcmp, true, PRIV_VERSION_1_12_0, ext_zcmp),
+> +    ISA_EXT_DATA_ENTRY(zcmt, true, PRIV_VERSION_1_12_0, ext_zcmt),
+>      ISA_EXT_DATA_ENTRY(zba, true, PRIV_VERSION_1_12_0, ext_zba),
+>      ISA_EXT_DATA_ENTRY(zbb, true, PRIV_VERSION_1_12_0, ext_zbb),
+>      ISA_EXT_DATA_ENTRY(zbc, true, PRIV_VERSION_1_12_0, ext_zbc),
+> @@ -1070,6 +1076,13 @@ static Property riscv_cpu_extensions[] = {
+>
+>      /* These are experimental so mark with 'x-' */
+>      DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+> +
+> +    DEFINE_PROP_BOOL("x-zca", RISCVCPU, cfg.ext_zca, false),
+> +    DEFINE_PROP_BOOL("x-zcb", RISCVCPU, cfg.ext_zcb, false),
+> +    DEFINE_PROP_BOOL("x-zcd", RISCVCPU, cfg.ext_zcd, false),
+> +    DEFINE_PROP_BOOL("x-zcf", RISCVCPU, cfg.ext_zcf, false),
+> +    DEFINE_PROP_BOOL("x-zcmp", RISCVCPU, cfg.ext_zcmp, false),
+> +    DEFINE_PROP_BOOL("x-zcmt", RISCVCPU, cfg.ext_zcmt, false),
+>      /* ePMP 0.9.3 */
+>      DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+>      DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
 > --
 > 2.25.1
 >
