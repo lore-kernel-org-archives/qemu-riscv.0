@@ -1,98 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1on8aA-000408-Hc
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Oct 2022 21:18:18 -0400
+	id 1on8n3-00066T-47
+	for mharc-qemu-riscv@gnu.org; Mon, 24 Oct 2022 21:31:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=290a5aa6e=wilfred.mallawa@opensource.wdc.com>)
- id 1on8Zx-0003ZB-OS
- for qemu-riscv@nongnu.org; Mon, 24 Oct 2022 21:18:08 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=290a5aa6e=wilfred.mallawa@opensource.wdc.com>)
- id 1on8Zv-0002MV-MW
- for qemu-riscv@nongnu.org; Mon, 24 Oct 2022 21:18:05 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1666660683; x=1698196683;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=2IoVntvzUZfdQw0F/4ik/CJ/v5mblgi9D5PP7I1U8vI=;
- b=QIYivfcP/uXamih1D32sJQu84XW/WvMxJiXQo/HdWW+FUgfmo9+JYQ0w
- rxMcdXBigTFNZb80oLbMnwcHi+RQfasqqhKXmdB2/R7vAQpCXgRW5xKLK
- xfVZGqgmmDryeZ945cqdbYys1y/ZJIGIWLV/lUGPSPecg9H+k7i1ak5bE
- Pu0LfZJgX8mawLp2iMb/pXXaDKCMWATRYgfgZc0pDa4ue/Y4ZG75y4Lcg
- Jf1OrUe3h5ubPRRIib4a9VzXkykuhTGrmZSrgoQQR2YC3euW34vrqVqv7
- 4TuOAO04+fyG5ups8w0KnTp6tJ2Z8+GUliz+FrOvZichALrQPMjVjfqVk Q==;
-X-IronPort-AV: E=Sophos;i="5.95,210,1661788800"; d="scan'208";a="212946919"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 25 Oct 2022 09:17:56 +0800
-IronPort-SDR: p0Iuq70Jtmbvlh+T9z43WX1X2o1h7xVj+6LoynDZm/SqLMdSt9RQD2c7cYuBjWkPVIZIw8qxKI
- 5By+yqb+Cly5O0iFKo8Q9i+MBP2dA6S7LRGibGD407T9s9PSlnQ4OuYqPZHq4rh0tUVT+/1KGe
- +VhjeaWMSOpAG60Buz3Bnbudr7hXhEql2qrhowttRhmfu6Mxsr3vXkIkqxG0jcYW+C+AXS2PRU
- jshwxl/OySfx/xcCPFgc/QxJD4Eugkj+gzqW8rDQFzg8wXy5QczJY/OJFqA3JwncgSSjBKVIuV
- aTomypAnwMdTGiUDzPBWAw7a
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 24 Oct 2022 17:37:19 -0700
-IronPort-SDR: 7a5qnhmYMhBNVrZxtKfcouQ1ym+9viqm+6CQu9z4xnmEWJH/ivEKh65HDBP68T5mFys40qJVcL
- mXXz6dRng1zjSNhNbMxH02Oa9pUOhl+tI0yGCOG9PZUb9dueJg8q0IvtosGAyMlWuJhRAf3dJp
- fq5FM/6fTNAZXgqGSqJoEzV7F18wd+w2z5DZU0kDrLczLRYsFfOG90/DtGH2W4RiCOrF3RGbfK
- hpWcaVb+7e+EL8O1T7MKSLqNwjazqnobzoDu8zY6BognA7UlNEsxV5rJjvfGM8eKyD2ZaVJ6Iz
- YVg=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 24 Oct 2022 18:11:55 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4MxDRv2FdPz1RvTr
- for <qemu-riscv@nongnu.org>; Mon, 24 Oct 2022 18:11:55 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:mime-version
- :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1666660314; x=1669252315; bh=2IoVntvzUZfdQw0F/4
- ik/CJ/v5mblgi9D5PP7I1U8vI=; b=sfz5kofCtp2FBa4/ZUTrK/LEKFozwpoB9a
- r9tVMUy22+HyAQP6Lj3N4qsDgKNvXgxAMsJ74FMBVEj1lSgzH7IodxSp0bovXXbK
- X3sH+tVUUmNbMsXqVMk9ts8nhN+YflRgBnudxiNDVcNTH1GW5KxghcR9DKQw08q2
- RyVz2RXcq3VxNNfNTZLOe6+ATF9uSoDLJcTvIn4JX+Zd/UtAjGf4TtqsKRpd5uLF
- cPAdtGOi6t1MGvutmuC9lS2Zi2OgLz7MAu1LdmJdiWysl3qt1IrEWTQo54Fsjvzx
- TxAunlUTcMsbkrd6HRbkPiS3z1TO3sBEVx4z2NXvcPzL+8DZKMSQ==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id tYEDQwxJRf0H for <qemu-riscv@nongnu.org>;
- Mon, 24 Oct 2022 18:11:54 -0700 (PDT)
-Received: from oni.wdc.com (unknown [10.225.165.77])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4MxDRq6rVVz1RvLy;
- Mon, 24 Oct 2022 18:11:51 -0700 (PDT)
-From: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
-To: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org,
-	Wilfred Mallawa <wilfred.mallawa@wdc.com>
-Subject: [PATCH v0 2/2] hw/riscv/opentitan: add aon_timer base unimpl
-Date: Tue, 25 Oct 2022 11:10:43 +1000
-Message-Id: <20221025011040.246503-3-wilfred.mallawa@opensource.wdc.com>
-X-Mailer: git-send-email 2.37.3
-In-Reply-To: <20221025011040.246503-1-wilfred.mallawa@opensource.wdc.com>
-References: <20221025011040.246503-1-wilfred.mallawa@opensource.wdc.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1on8mm-0005zF-VE; Mon, 24 Oct 2022 21:31:35 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1on8mh-00057F-Jz; Mon, 24 Oct 2022 21:31:19 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id g16so5068845pfr.12;
+ Mon, 24 Oct 2022 18:31:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=X0p5Lhp/Tyf4bCn01XKS87P7rnw9OYV9hJ0M5RywRhc=;
+ b=Pmm28HgOQcxY1AC5XuaPSohFEX4k/ulPjImFNj5CgXKVzxxpQfN/veV9gWd5tRGRXt
+ aT4WPtIYxWgJ7CjY122yxr581sbgOVIuSoShxEMOqxxpWYOLTecZ292pc9WF0iVqgdpo
+ KHfv8KXIZVqYuWck+j5YvdqzuKIBJju0OyLBCZSGet/B+h6Eo0KV82+AZngeEJL9+vs9
+ 2Pr0BQBgMxFz78b05cJzNgCL83mDwkh6pPFNlw2OCRcLikr5RScUI7aHy62rI9NygWbC
+ 1wZHjNUEAqqh8JMHPu0jV149rf3D3HhqwcTDaBcuyi2N7GDTPmaPyGbZw7o17fw9jFvK
+ Svkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=X0p5Lhp/Tyf4bCn01XKS87P7rnw9OYV9hJ0M5RywRhc=;
+ b=l/4WCvmDKz8a8fzQ9fwfXdCN7QDEf+46/wkyZ3hJNZtlDrfbzIVlDTAke+6gDE6/8H
+ bg1dI08c0dUyh3PP1wl8CO3PIF1dKLxrvYGQnzHvEudhP+krBfvnRlOVjn6m8meTSx47
+ bw4gJ2SVMRywTvscWl0SWYUE9UTznChFB3SAZ7H14SNwVsnRkXc3U2Vq9wgTP594ox23
+ 6qOgSisnPcfOl4gzqj1XGpdUe/iSGYs/zsWKbkvGEh1OwzEytHarjp16U8ktMw9pP6Dk
+ TbF/yd2fHS+8fyk2IvnaTn3hG5y2UMgbhBFr7IbLsT5UBjfWbR9I4c6p0A5jY07B1gml
+ IKFw==
+X-Gm-Message-State: ACrzQf1WhBnsk86Q9No/KpERaD2s4Vyhb1cFWIQKW2llzlmeGFzpFuOf
+ jDW89etZka2MSroAka9/Fj3cMd3K8ZQiRk8dliU=
+X-Google-Smtp-Source: AMsMyM6sIUfewicUPomXNGbbyQGiQIc8CZo4tkTptaE1Pi7fw26qXeTfEOPtEkMeXAEO7mJyXOHKHIhmaZf64XZnjk0=
+X-Received: by 2002:a63:1a65:0:b0:460:d5db:8688 with SMTP id
+ a37-20020a631a65000000b00460d5db8688mr30466788pgm.221.1666661473720; Mon, 24
+ Oct 2022 18:31:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.71.154.42;
- envelope-from=prvs=290a5aa6e=wilfred.mallawa@opensource.wdc.com;
- helo=esa4.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20221022095821.2441874-1-richard.henderson@linaro.org>
+In-Reply-To: <20221022095821.2441874-1-richard.henderson@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 25 Oct 2022 11:30:47 +1000
+Message-ID: <CAKmqyKO-GxXDn07T98jpYRd4+VbeAUd8jLq+-Our4z8_B1PuKw@mail.gmail.com>
+Subject: Re: [PATCH] tcg/riscv: Fix range matched by TCG_CT_CONST_M12
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, qemu-riscv@nongnu.org, 
+ palmer@dabbelt.com, LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x42d.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,55 +72,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2022 01:18:12 -0000
+X-List-Received-Date: Tue, 25 Oct 2022 01:31:36 -0000
 
-From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+On Sat, Oct 22, 2022 at 8:19 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> We were matching a signed 13-bit range, not a 12-bit range.
+> Expand the commentary within the function and be explicit
+> about all of the ranges.
+>
+> Reported-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-Adds the updated `aon_timer` base as an unimplemented device. This is
-used by TockOS, patch ensures the guest doesn't hit load faults.
+Thanks!
 
-Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
----
- hw/riscv/opentitan.c         | 3 +++
- include/hw/riscv/opentitan.h | 1 +
- 2 files changed, 4 insertions(+)
+Applied to riscv-to-apply.next
 
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index 373fed36b6..50452f792a 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -48,6 +48,7 @@ static const MemMapEntry ibex_memmap[] =3D {
-     [IBEX_DEV_RSTMGR] =3D         {  0x40410000,  0x1000  },
-     [IBEX_DEV_CLKMGR] =3D         {  0x40420000,  0x1000  },
-     [IBEX_DEV_PINMUX] =3D         {  0x40460000,  0x1000  },
-+    [IBEX_DEV_AON_TIMER] =3D      {  0x40470000,  0x1000  },
-     [IBEX_DEV_SENSOR_CTRL] =3D    {  0x40490000,  0x1000  },
-     [IBEX_DEV_FLASH_CTRL] =3D     {  0x41000000,  0x1000  },
-     [IBEX_DEV_AES] =3D            {  0x41100000,  0x1000  },
-@@ -264,6 +265,8 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev=
-_soc, Error **errp)
-         memmap[IBEX_DEV_CLKMGR].base, memmap[IBEX_DEV_CLKMGR].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.pinmux",
-         memmap[IBEX_DEV_PINMUX].base, memmap[IBEX_DEV_PINMUX].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.aon_timer",
-+        memmap[IBEX_DEV_AON_TIMER].base, memmap[IBEX_DEV_AON_TIMER].size=
-);
-     create_unimplemented_device("riscv.lowrisc.ibex.usbdev",
-         memmap[IBEX_DEV_USBDEV].base, memmap[IBEX_DEV_USBDEV].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.flash_ctrl",
-diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-index 1fc055cdff..7659d1bc5b 100644
---- a/include/hw/riscv/opentitan.h
-+++ b/include/hw/riscv/opentitan.h
-@@ -81,6 +81,7 @@ enum {
-     IBEX_DEV_RSTMGR,
-     IBEX_DEV_CLKMGR,
-     IBEX_DEV_PINMUX,
-+    IBEX_DEV_AON_TIMER,
-     IBEX_DEV_USBDEV,
-     IBEX_DEV_FLASH_CTRL,
-     IBEX_DEV_PLIC,
---=20
-2.37.3
+Alistair
 
+> ---
+>  tcg/riscv/tcg-target.c.inc | 19 ++++++++++++++++---
+>  1 file changed, 16 insertions(+), 3 deletions(-)
+>
+> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+> index 1cdaf7b57b..2a84c57bec 100644
+> --- a/tcg/riscv/tcg-target.c.inc
+> +++ b/tcg/riscv/tcg-target.c.inc
+> @@ -154,13 +154,26 @@ static bool tcg_target_const_match(int64_t val, TCGType type, int ct)
+>      if ((ct & TCG_CT_CONST_ZERO) && val == 0) {
+>          return 1;
+>      }
+> -    if ((ct & TCG_CT_CONST_S12) && val == sextreg(val, 0, 12)) {
+> +    /*
+> +     * Sign extended from 12 bits: [-0x800, 0x7ff].
+> +     * Used for most arithmetic, as this is the isa field.
+> +     */
+> +    if ((ct & TCG_CT_CONST_S12) && val >= -0x800 && val <= 0x7ff) {
+>          return 1;
+>      }
+> -    if ((ct & TCG_CT_CONST_N12) && -val == sextreg(-val, 0, 12)) {
+> +    /*
+> +     * Sign extended from 12 bits, negated: [-0x7ff, 0x800].
+> +     * Used for subtraction, where a constant must be handled by ADDI.
+> +     */
+> +    if ((ct & TCG_CT_CONST_N12) && val >= -0x7ff && val <= 0x800) {
+>          return 1;
+>      }
+> -    if ((ct & TCG_CT_CONST_M12) && val >= -0xfff && val <= 0xfff) {
+> +    /*
+> +     * Sign extended from 12 bits, +/- matching: [-0x7ff, 0x7ff].
+> +     * Used by addsub2, which may need the negative operation,
+> +     * and requires the modified constant to be representable.
+> +     */
+> +    if ((ct & TCG_CT_CONST_M12) && val >= -0x7ff && val <= 0x7ff) {
+>          return 1;
+>      }
+>      return 0;
+> --
+> 2.34.1
+>
+>
 
