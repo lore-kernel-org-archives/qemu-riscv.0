@@ -1,78 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oo63U-00081K-OU
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Oct 2022 12:48:32 -0400
+	id 1ooC0S-0007RM-V0
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Oct 2022 19:09:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1oo63R-0007Xr-9G
- for qemu-riscv@nongnu.org; Thu, 27 Oct 2022 12:48:30 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ooC0R-0007RA-Qq; Thu, 27 Oct 2022 19:09:47 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1oo63P-0002RA-El
- for qemu-riscv@nongnu.org; Thu, 27 Oct 2022 12:48:29 -0400
-Received: by mail-pg1-x530.google.com with SMTP id q1so2020053pgl.11
- for <qemu-riscv@nongnu.org>; Thu, 27 Oct 2022 09:48:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SFXOtEFct7aZBn9qsLOf6vADmM9nDSRAlMOl6gM3bOU=;
- b=NgM3usz7gaZwahJwl7XaEMDjn9O+nOnWVafU7CTkss0He3rapu0w7ETyvr+CghP95a
- Qtnmckg0CZGlItPGyQrO/+17M2jOA8RG+VrOhomlfbrgV4RgoCpomz1erm7FtthaiG30
- ED9mpStEkbGhxLD/eh9HcMYVEtFUpcHMcHLZA92M/Hm3Ip6mNrWzUqvHMcmxX4w0n0O+
- HLiKyPpxUy4+xh7LG1jV7AZv32S/lWvqAHGwsQEB47emShiFAF8svcPlwPscGlnVG77Q
- oSEiNUjMrUPAzPXavd3rePL01Or82+TbAveqIcFSCKoNLayht0YqckZmZUO8gPWCJbtM
- tQ+A==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ooC0P-0003kU-77; Thu, 27 Oct 2022 19:09:46 -0400
+Received: by mail-pf1-x436.google.com with SMTP id d10so3254299pfh.6;
+ Thu, 27 Oct 2022 16:09:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=CpcmgDljznbEuECx79wDHdpCI1KBI6CJPnorIT788PI=;
+ b=Qxc4oZ4r1UjLwATWpAJN5moOmbSS4LmLn1GG/mzrTcOtbEXCiCIJ0BAIwNyquo4owu
+ haWTJMy/T+S2cDsy77q0RaBD/KUEPdhUAhs2jUjoBqU50HzvExYgVq/AW+uISE3Dz0nF
+ Ncmtigl4Qn2y/vN0QhR0zr9GvbhxbUCLIm666+nsrqg7IL4umK/Yuq6mdL5n6pCkPr3K
+ g+86rlLAuEVPUNYSIf8XXG/yu5WuNRFP/QCxpQwGdrH3SV8/rabSCBhy6JBOuCp65XQ7
+ +oqzNXAWubZu/10GjEVeOrdVp8NCjvRccw2MyszK14RDy/lnVyP2R7WNuEnz59YUSezq
+ pCaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SFXOtEFct7aZBn9qsLOf6vADmM9nDSRAlMOl6gM3bOU=;
- b=EdYsdQr5/oE7IYMMrX8xwJ1ITQIVaV3S548jNVa4dSH80hpCbDpON4tsFdM2NOXIJT
- UVw+UDBZ/MOZInd+7nWw+mUL6injmcf3hn8V3TsRHAsRLWBC/rFskctsL9LjeMzpXPN4
- r2OLZzOK6f8k2S6a/WkO3EGwTmRax8cVVr/1Ow8KaivlS1+JDPum1uLTZ9n0dfbmpi6k
- uX9okzkJ0qUmJjgG3N/kpspuN1n0p/+A+UPm8KOdkV8HrymsMKEg2I8Mk3R76ZH+CNDB
- qyw8F3zDP4qa2LjVE6FmUeM1GOlkRbaBPnLHtchOH+oFXw2Ji6GRYKhNvDdTEs04HK+C
- bkIw==
-X-Gm-Message-State: ACrzQf1RSt8ZFkwWlw7eaEDXZ3YWneIU5TFCFWWTcvhTKGkAt2kvqNlL
- 4ODamFVlIcv2SvcwX6jagq8JnQ==
-X-Google-Smtp-Source: AMsMyM4KHOqpJw3kbTDRPLN5EmHcktY8uvzNP69XS7bp4+uNSL+TRKf4u4nGjxdawcmmuoMyWt9GmA==
-X-Received: by 2002:a05:6a00:16c4:b0:535:890:d4a with SMTP id
- l4-20020a056a0016c400b0053508900d4amr50513833pfc.0.1666889306091; 
- Thu, 27 Oct 2022 09:48:26 -0700 (PDT)
-Received: from anup-ubuntu64-vm.. ([103.97.165.210])
- by smtp.gmail.com with ESMTPSA id
- b8-20020a17090a9bc800b00212e5fe09d7sm1212543pjw.10.2022.10.27.09.48.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Oct 2022 09:48:25 -0700 (PDT)
-From: Anup Patel <apatel@ventanamicro.com>
-To: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Atish Patra <atishp@atishpatra.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>
-Subject: [PATCH 5/5] target/riscv: Ensure opcode is saved for all relevant
- instructions
-Date: Thu, 27 Oct 2022 22:17:43 +0530
-Message-Id: <20221027164743.194265-6-apatel@ventanamicro.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20221027164743.194265-1-apatel@ventanamicro.com>
-References: <20221027164743.194265-1-apatel@ventanamicro.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CpcmgDljznbEuECx79wDHdpCI1KBI6CJPnorIT788PI=;
+ b=MG5iRw1yDkOL6M1etgCrmApWFIn3Vwr8W4VQLJpJI2PfXmIDx7vQjXgYEEywuFLiky
+ z/vlKmpWZJrFz/v7QKNh7sTQ8AzO3xxb/grTdyVY7q9hx0Ifk1TKBb6w+0MmgdbSAWOu
+ Dfm+xRcax1eZCnCfY9/fdH6nJ98FXd5Sug//Znz+iwnYPQyVeJSbktV9BZtwU7zEm9e6
+ Qm85RiDdNlu1+L2Jjff6D/EOhikwjSgf/JqY9duA6kZGuOHLfSlaDMO79xVZh3+7P1Xm
+ AEBM58T2oi715Qu92RsILPE+GezWY61ZD5+1bJWZl9OGEkjiTAW8r7CHu2PCA62ken1j
+ Treg==
+X-Gm-Message-State: ACrzQf088lttpaH4FMYz1WWON2Nsn6vL+Dn2b83vuCsCM415W8rvE2Y/
+ AGeC7FPgaROCJEU0T0e5gXpgLMgSfQ8+Ev0gxpc=
+X-Google-Smtp-Source: AMsMyM6l4NVvM4cb6F0yxcvltauJzMNce23flJZDaM7Z6SBU9sbfK/duLYJJ3ZjDulUNic178ROaCM1rjAQ0cr80D5Q=
+X-Received: by 2002:a63:ce43:0:b0:45b:d6ed:6c2 with SMTP id
+ r3-20020a63ce43000000b0045bd6ed06c2mr43870616pgi.406.1666912183127; Thu, 27
+ Oct 2022 16:09:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=apatel@ventanamicro.com; helo=mail-pg1-x530.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20221027054649.69228-1-mchitale@ventanamicro.com>
+ <20221027054649.69228-3-mchitale@ventanamicro.com>
+In-Reply-To: <20221027054649.69228-3-mchitale@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 28 Oct 2022 09:09:16 +1000
+Message-ID: <CAKmqyKPVbujUa96C_8Lrk_EmZxTuheeQ0QUkRo4yzC1bnuRMgA@mail.gmail.com>
+Subject: Re: [PATCH v1 2/3] target/riscv: Extend isa_ext_data for single
+ letter extensions
+To: Mayuresh Chitale <mchitale@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x436.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -87,202 +73,110 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Oct 2022 16:48:30 -0000
+X-List-Received-Date: Thu, 27 Oct 2022 23:09:48 -0000
 
-We should call decode_save_opc() for all relevant instructions which
-can potentially generate a virtual instruction fault or a guest page
-fault because generating transformed instruction upon guest page fault
-expects opcode to be available. Without this, hypervisor will see
-transformed instruction as zero in htinst CSR for guest MMIO emulation
-which makes MMIO emulation in hypervisor slow and also breaks nested
-virtualization.
+On Thu, Oct 27, 2022 at 3:50 PM Mayuresh Chitale
+<mchitale@ventanamicro.com> wrote:
+>
+> Currently the ISA string for a CPU is generated from two different
+> arrays, one for single letter extensions and another for multi letter
+> extensions. Add all the single letter extensions to the isa_ext_data
+> array and use it for generating the ISA string. Also drop 'P' and 'Q'
+> extensions from the list of single letter extensions as those are not
+> supported yet.
+>
+> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
 
-Fixes: a9814e3e08d2 ("target/riscv: Minimize the calls to decode_save_opc")
-Signed-off-by: Anup Patel <apatel@ventanamicro.com>
----
- target/riscv/insn_trans/trans_rva.c.inc     | 10 +++++++---
- target/riscv/insn_trans/trans_rvd.c.inc     |  2 ++
- target/riscv/insn_trans/trans_rvf.c.inc     |  2 ++
- target/riscv/insn_trans/trans_rvh.c.inc     |  3 +++
- target/riscv/insn_trans/trans_rvi.c.inc     |  2 ++
- target/riscv/insn_trans/trans_rvzfh.c.inc   |  2 ++
- target/riscv/insn_trans/trans_svinval.c.inc |  3 +++
- 7 files changed, 21 insertions(+), 3 deletions(-)
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
-index 45db82c9be..5f194a447b 100644
---- a/target/riscv/insn_trans/trans_rva.c.inc
-+++ b/target/riscv/insn_trans/trans_rva.c.inc
-@@ -20,8 +20,10 @@
- 
- static bool gen_lr(DisasContext *ctx, arg_atomic *a, MemOp mop)
- {
--    TCGv src1 = get_address(ctx, a->rs1, 0);
-+    TCGv src1;
- 
-+    decode_save_opc(ctx);
-+    src1 = get_address(ctx, a->rs1, 0);
-     if (a->rl) {
-         tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-     }
-@@ -43,6 +45,7 @@ static bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
-     TCGLabel *l1 = gen_new_label();
-     TCGLabel *l2 = gen_new_label();
- 
-+    decode_save_opc(ctx);
-     src1 = get_address(ctx, a->rs1, 0);
-     tcg_gen_brcond_tl(TCG_COND_NE, load_res, src1, l1);
- 
-@@ -81,9 +84,10 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
-                     MemOp mop)
- {
-     TCGv dest = dest_gpr(ctx, a->rd);
--    TCGv src1 = get_address(ctx, a->rs1, 0);
--    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+    TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
- 
-+    decode_save_opc(ctx);
-+    src1 = get_address(ctx, a->rs1, 0);
-     func(dest, src1, src2, ctx->mem_idx, mop);
- 
-     gen_set_gpr(ctx, a->rd, dest);
-diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
-index 1397c1ce1c..6e3159b797 100644
---- a/target/riscv/insn_trans/trans_rvd.c.inc
-+++ b/target/riscv/insn_trans/trans_rvd.c.inc
-@@ -38,6 +38,7 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
-+    decode_save_opc(ctx);
-     addr = get_address(ctx, a->rs1, a->imm);
-     tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], addr, ctx->mem_idx, MO_TEUQ);
- 
-@@ -52,6 +53,7 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
-+    decode_save_opc(ctx);
-     addr = get_address(ctx, a->rs1, a->imm);
-     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEUQ);
-     return true;
-diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-index a1d3eb52ad..965e1f8d11 100644
---- a/target/riscv/insn_trans/trans_rvf.c.inc
-+++ b/target/riscv/insn_trans/trans_rvf.c.inc
-@@ -38,6 +38,7 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVF);
- 
-+    decode_save_opc(ctx);
-     addr = get_address(ctx, a->rs1, a->imm);
-     dest = cpu_fpr[a->rd];
-     tcg_gen_qemu_ld_i64(dest, addr, ctx->mem_idx, MO_TEUL);
-@@ -54,6 +55,7 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVF);
- 
-+    decode_save_opc(ctx);
-     addr = get_address(ctx, a->rs1, a->imm);
-     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEUL);
-     return true;
-diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
-index 4f8aecddc7..9248b48c36 100644
---- a/target/riscv/insn_trans/trans_rvh.c.inc
-+++ b/target/riscv/insn_trans/trans_rvh.c.inc
-@@ -36,6 +36,7 @@ static bool do_hlv(DisasContext *ctx, arg_r2 *a, MemOp mop)
- #ifdef CONFIG_USER_ONLY
-     return false;
- #else
-+    decode_save_opc(ctx);
-     if (check_access(ctx)) {
-         TCGv dest = dest_gpr(ctx, a->rd);
-         TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-@@ -82,6 +83,7 @@ static bool do_hsv(DisasContext *ctx, arg_r2_s *a, MemOp mop)
- #ifdef CONFIG_USER_ONLY
-     return false;
- #else
-+    decode_save_opc(ctx);
-     if (check_access(ctx)) {
-         TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-         TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
-@@ -135,6 +137,7 @@ static bool trans_hsv_d(DisasContext *ctx, arg_hsv_d *a)
- static bool do_hlvx(DisasContext *ctx, arg_r2 *a,
-                     void (*func)(TCGv, TCGv_env, TCGv))
- {
-+    decode_save_opc(ctx);
-     if (check_access(ctx)) {
-         TCGv dest = dest_gpr(ctx, a->rd);
-         TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index c49dbec0eb..1665efb639 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -261,6 +261,7 @@ static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
- 
- static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
- {
-+    decode_save_opc(ctx);
-     if (get_xl(ctx) == MXL_RV128) {
-         return gen_load_i128(ctx, a, memop);
-     } else {
-@@ -350,6 +351,7 @@ static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
- 
- static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
- {
-+    decode_save_opc(ctx);
-     if (get_xl(ctx) == MXL_RV128) {
-         return gen_store_i128(ctx, a, memop);
-     } else {
-diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
-index 5d07150cd0..2ad5716312 100644
---- a/target/riscv/insn_trans/trans_rvzfh.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
-@@ -49,6 +49,7 @@ static bool trans_flh(DisasContext *ctx, arg_flh *a)
-     REQUIRE_FPU;
-     REQUIRE_ZFH_OR_ZFHMIN(ctx);
- 
-+    decode_save_opc(ctx);
-     t0 = get_gpr(ctx, a->rs1, EXT_NONE);
-     if (a->imm) {
-         TCGv temp = temp_new(ctx);
-@@ -71,6 +72,7 @@ static bool trans_fsh(DisasContext *ctx, arg_fsh *a)
-     REQUIRE_FPU;
-     REQUIRE_ZFH_OR_ZFHMIN(ctx);
- 
-+    decode_save_opc(ctx);
-     t0 = get_gpr(ctx, a->rs1, EXT_NONE);
-     if (a->imm) {
-         TCGv temp = tcg_temp_new();
-diff --git a/target/riscv/insn_trans/trans_svinval.c.inc b/target/riscv/insn_trans/trans_svinval.c.inc
-index 2682bd969f..f3cd7d5c0b 100644
---- a/target/riscv/insn_trans/trans_svinval.c.inc
-+++ b/target/riscv/insn_trans/trans_svinval.c.inc
-@@ -28,6 +28,7 @@ static bool trans_sinval_vma(DisasContext *ctx, arg_sinval_vma *a)
-     /* Do the same as sfence.vma currently */
-     REQUIRE_EXT(ctx, RVS);
- #ifndef CONFIG_USER_ONLY
-+    decode_save_opc(ctx);
-     gen_helper_tlb_flush(cpu_env);
-     return true;
- #endif
-@@ -56,6 +57,7 @@ static bool trans_hinval_vvma(DisasContext *ctx, arg_hinval_vvma *a)
-     /* Do the same as hfence.vvma currently */
-     REQUIRE_EXT(ctx, RVH);
- #ifndef CONFIG_USER_ONLY
-+    decode_save_opc(ctx);
-     gen_helper_hyp_tlb_flush(cpu_env);
-     return true;
- #endif
-@@ -68,6 +70,7 @@ static bool trans_hinval_gvma(DisasContext *ctx, arg_hinval_gvma *a)
-     /* Do the same as hfence.gvma currently */
-     REQUIRE_EXT(ctx, RVH);
- #ifndef CONFIG_USER_ONLY
-+    decode_save_opc(ctx);
-     gen_helper_hyp_gvma_tlb_flush(cpu_env);
-     return true;
- #endif
--- 
-2.34.1
+Alistair
 
+> ---
+>  target/riscv/cpu.c | 41 +++++++++++++++++++++++------------------
+>  1 file changed, 23 insertions(+), 18 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index e6d9c706bb..35320a8547 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -41,8 +41,6 @@
+>                               (QEMU_VERSION_MICRO))
+>  #define RISCV_CPU_MIMPID    RISCV_CPU_MARCHID
+>
+> -static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
+> -
+>  struct isa_ext_data {
+>      const char *name;
+>      bool multi_letter;
+> @@ -71,6 +69,13 @@ struct isa_ext_data {
+>   *    extensions by an underscore.
+>   */
+>  static const struct isa_ext_data isa_edata_arr[] = {
+> +    ISA_EXT_DATA_ENTRY(i, false, PRIV_VERSION_1_10_0, ext_i),
+> +    ISA_EXT_DATA_ENTRY(e, false, PRIV_VERSION_1_10_0, ext_e),
+> +    ISA_EXT_DATA_ENTRY(m, false, PRIV_VERSION_1_10_0, ext_m),
+> +    ISA_EXT_DATA_ENTRY(a, false, PRIV_VERSION_1_10_0, ext_a),
+> +    ISA_EXT_DATA_ENTRY(f, false, PRIV_VERSION_1_10_0, ext_f),
+> +    ISA_EXT_DATA_ENTRY(d, false, PRIV_VERSION_1_10_0, ext_d),
+> +    ISA_EXT_DATA_ENTRY(c, false, PRIV_VERSION_1_10_0, ext_c),
+>      ISA_EXT_DATA_ENTRY(h, false, PRIV_VERSION_1_12_0, ext_h),
+>      ISA_EXT_DATA_ENTRY(v, false, PRIV_VERSION_1_12_0, ext_v),
+>      ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ext_icsr),
+> @@ -1182,16 +1187,23 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+>      device_class_set_props(dc, riscv_cpu_properties);
+>  }
+>
+> -static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
+> +static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str)
+>  {
+>      char *old = *isa_str;
+>      char *new = *isa_str;
+>      int i;
+>
+>      for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
+> -        if (isa_edata_arr[i].multi_letter &&
+> -            isa_ext_is_enabled(cpu, &isa_edata_arr[i])) {
+> -            new = g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
+> +        if (isa_ext_is_enabled(cpu, &isa_edata_arr[i])) {
+> +            if (isa_edata_arr[i].multi_letter) {
+> +                if (cpu->cfg.short_isa_string) {
+> +                    continue;
+> +                }
+> +                new = g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
+> +            } else {
+> +                new = g_strconcat(old, isa_edata_arr[i].name, NULL);
+> +            }
+> +
+>              g_free(old);
+>              old = new;
+>          }
+> @@ -1202,19 +1214,12 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
+>
+>  char *riscv_isa_string(RISCVCPU *cpu)
+>  {
+> -    int i;
+> -    const size_t maxlen = sizeof("rv128") + sizeof(riscv_single_letter_exts);
+> +    const size_t maxlen = sizeof("rv128");
+>      char *isa_str = g_new(char, maxlen);
+> -    char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+> -    for (i = 0; i < sizeof(riscv_single_letter_exts) - 1; i++) {
+> -        if (cpu->env.misa_ext & RV(riscv_single_letter_exts[i])) {
+> -            *p++ = qemu_tolower(riscv_single_letter_exts[i]);
+> -        }
+> -    }
+> -    *p = '\0';
+> -    if (!cpu->cfg.short_isa_string) {
+> -        riscv_isa_string_ext(cpu, &isa_str, maxlen);
+> -    }
+> +
+> +    snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+> +    riscv_isa_string_ext(cpu, &isa_str);
+> +
+>      return isa_str;
+>  }
+>
+> --
+> 2.34.1
+>
+>
 
