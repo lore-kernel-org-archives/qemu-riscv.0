@@ -1,59 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1onTUz-0008Fu-H4
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Oct 2022 19:38:21 -0400
+	id 1ontIv-0004yd-Lg
+	for mharc-qemu-riscv@gnu.org; Wed, 26 Oct 2022 23:11:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1onTUw-0008EO-8M; Tue, 25 Oct 2022 19:38:18 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ id 1ontIt-0004e4-Qt; Wed, 26 Oct 2022 23:11:35 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1onTUu-0001IE-6J; Tue, 25 Oct 2022 19:38:17 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- m6-20020a17090a5a4600b00212f8dffec9so562530pji.0; 
- Tue, 25 Oct 2022 16:38:15 -0700 (PDT)
+ id 1ontIr-0007oq-Le; Wed, 26 Oct 2022 23:11:35 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id 4so126053pli.0;
+ Wed, 26 Oct 2022 20:11:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/eH2094a61xp2ZKeBbfDM1XFXtuTt9DlJsfA+u/YX0Q=;
- b=hSoLzVPHG4f28ieob8wKYb4uo6/DFzaLmh/R/w2dP9Q4oAcw7CliWYxEedbSD6aA6G
- HM/4GAIEiZz/xdVKzgbu+eAJUEdylJW4dQy3nkiiUraDFwS/Eqh68OYlQ3d24zbHyHDa
- 9NElP9crdVLKYDtfYNOnDhW+ohy/Nw08C7fmgNXdH6L7VrDLwG6NJgixLtejPCvnQlIP
- RVWm1ctkXnfo5RLB33tXV37/YJGej0t+LtR1BxUIp5x1UQstL+j5DxlmUoOY9y44Fxkl
- P5z/bOq5uiMy+EpeNu9qZJlrY05oSg08Ewck+9O2Vm7s5yluh0BVu/atrAVUtKPzkfyk
- 6n4g==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=avIdSGVesf/tq+o0KdPMytyGSHV9BEH4NO1Mx6lrS6c=;
+ b=Atuu5NJjabvqtpWc4PwUxtxnrC8skBEEs4Si2Cm5GXBlOlpyfeFxPASk1xTJBncyRg
+ 2zbA4V/xllo7mAQvUutvCa9lHbJSUpqqt9+Wq9oSQR4OHB6h8zo6UsZORdfrX0v39WfX
+ Q6KbFiAYCS6iSds2dOR0vgJfuwEO0TdUwPOTY8JS51NwUXXsrVkRNEsBB/ASUYOz+KUv
+ /QmTJk+2UsZ/m0KIjlY6T8zZybeQFOBxl/7fpZBKQpLMUSEyaYCNstDTwaMFRTYlownH
+ E2ZCPvTqG08eKg/YqBK2I1bKBpPK72/aoKTbBWxTpal63JNU9Vc4bKFIWxDS84XlRbn2
+ mtsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/eH2094a61xp2ZKeBbfDM1XFXtuTt9DlJsfA+u/YX0Q=;
- b=hWYKUO2PWVZLCacB23GKqE6w2l7Sejc9NkSxSEgrv8W4zKr4FVxZKNBMDCaCwxPVQ/
- Ua3czMkDILNFL5pfVNQfuBuSq152G41lBZvdwPbqGTcJjvKGHU74nmZtwUEw9xsEasVH
- j1T72OxWpZuvhiSokht1NiKseDvMXZV1IEAWMtmf77SYGBZdhLS3wNwkguMeJVhTv451
- 6DZzGlk398EOTwJswrxA/1kIVQ5PmwYoUzFe23u/jSpSUtHaxT0/+wB7MTb/rsKsAFHR
- /3uVweCVusSNvqtzwtsqhwdjNlZkBr7/FGjzNSU0bEsmx8wwcfqf9QYXN4i9Da1uRuns
- HEJQ==
-X-Gm-Message-State: ACrzQf3+PLfIzVG43QskpHuPSXqKki/xNZAm5G6+vpOkKBGHDasPHDQv
- NvarErB9NniA4t11Z11JnewrhYdz5vdZI/P+CaQ=
-X-Google-Smtp-Source: AMsMyM6UsgtLzxuhD2PDeFLDH33jcXXeOzdSnTlkzEOHz87vdfOyPMPseFu54OdTYswK2xNkEX3cQV1vCz0uJK+otXs=
-X-Received: by 2002:a17:90b:314a:b0:20d:904b:18a8 with SMTP id
- ip10-20020a17090b314a00b0020d904b18a8mr912973pjb.96.1666741094404; Tue, 25
- Oct 2022 16:38:14 -0700 (PDT)
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=avIdSGVesf/tq+o0KdPMytyGSHV9BEH4NO1Mx6lrS6c=;
+ b=TV84VKwmBX2x+nkcBHh4TgLdZ7m9gU/qaqpI2ABbwowdCY/V9Ba4ins/VTQeeCmCVB
+ jA9P/fQeG+XTjAml1WQoAwwr3ufXT6R9S8f4B7ew6SrRav9ZJYT+QvaGgTfnVJxfsQ3U
+ VY+9xv5lNQ323ZhWSz50uC9mbNG44RML4qpeZTVzOlDpsz/JIO8ybMG85wM9z86Madhs
+ MvArNKfhX0kdnIhULKLsn51gpGE2sLl6rDqGb26SwNqKm0ExBSWEkS/q6tb0tN8JvaFv
+ 6Xv6Hm8zRe/gv6PiWbbml0qqGSz5rLeS4upfrI6pfTZcvpqNLZLMYNzPdgkLlM0hhXD3
+ Aaww==
+X-Gm-Message-State: ACrzQf1b+QtlQoYUVtCb2T/Hr+9dplf6SIPS6doVZ5URUnqtN3faC37K
+ r20a3K9axeYTPo0urBmNHoSzmE7UmkvshI+Lax4=
+X-Google-Smtp-Source: AMsMyM6P//IFxq1Zt6AD7rHwh6xqMX2s6oiUniqokmgEQTJsBEz0Xn7bFz7domKJUAjaqF/MfZAEi6KapkIRmkfCEeE=
+X-Received: by 2002:a17:902:8693:b0:17a:f71:98fd with SMTP id
+ g19-20020a170902869300b0017a0f7198fdmr47397341plo.25.1666840291061; Wed, 26
+ Oct 2022 20:11:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20221025043335.339815-1-wilfred.mallawa@opensource.wdc.com>
-In-Reply-To: <20221025043335.339815-1-wilfred.mallawa@opensource.wdc.com>
+References: <20221005144948.3421504-1-christoph.muellner@vrull.eu>
+In-Reply-To: <20221005144948.3421504-1-christoph.muellner@vrull.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 26 Oct 2022 09:37:47 +1000
-Message-ID: <CAKmqyKMpiGeq5iomRrKMNU_Edh1p+JXgokq7wAuOQNX3Yr-Fbg@mail.gmail.com>
-Subject: Re: [PATCH v1 0/2] hw/riscv/opentitan: bump opentitan version
-To: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Date: Thu, 27 Oct 2022 13:11:04 +1000
+Message-ID: <CAKmqyKP++EL4C1wtRWthLtXNxBco5Lv2qxjJkPBsuFsnfnRDGg@mail.gmail.com>
+Subject: Re: [PATCH v4] RISC-V: Add Zawrs ISA extension support
+To: Christoph Muellner <christoph.muellner@vrull.eu>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko.stuebner@vrull.eu>, 
+ Aaron Durbin <adurbin@rivosinc.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Richard Henderson <richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x1033.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=alistair23@gmail.com; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,46 +78,191 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2022 23:38:18 -0000
+X-List-Received-Date: Thu, 27 Oct 2022 03:11:36 -0000
 
-On Tue, Oct 25, 2022 at 2:36 PM Wilfred Mallawa
-<wilfred.mallawa@opensource.wdc.com> wrote:
+On Thu, Oct 6, 2022 at 12:52 AM Christoph Muellner
+<christoph.muellner@vrull.eu> wrote:
 >
-> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> This patch adds support for the Zawrs ISA extension.
+> Given the current (incomplete) implementation of reservation sets
+> there seems to be no way to provide a full emulation of the WRS
+> instruction (wake on reservation set invalidation or timeout or
+> interrupt). Therefore, we just exit the TB and return to the main loop.
 >
-> This patch provides updates to the OpenTitan model to bump to RTL
-> version <d072ac505f82152678d6e04be95c72b728a347b8>.
+> The specification can be found here:
+>   https://github.com/riscv/riscv-zawrs/blob/main/zawrs.adoc
 >
-> A unique change here is the merger of hwip `padctrl` into `pinmux`, to
-> reflect this change, any references to `padctrl` are removed.
-> Additionally, an unimplemented device for `aon_timer` is added and IRQ
-> numbers are updated.
+> Note, that the Zawrs extension is frozen, but not ratified yet.
 >
-> Patch was tested by running the latest master of
-> TockOS as of this patch.
+> Changes since v3:
+> * Remove "RFC" since the extension is frozen
+> * Rebase on master and fix integration issues
+> * Fix entry ordering in extension list
 >
-> Changelog V1:
->   - Added a comment specifying what
-> git SHA of OT we are targeting in [1/2].
+> Changes since v2:
+> * Rebase on master and resolve conflicts
+> * Adjustments according to a specification change
+> * Inline REQUIRE_ZAWRS() since it has only one user
 >
-> Wilfred Mallawa (2):
->   hw/riscv/opentitan: bump opentitan
->   hw/riscv/opentitan: add aon_timer base unimpl
+> Changes since v1:
+> * Adding zawrs to the ISA string that is passed to the kernel
+>
+> Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 
-Thanks!
-
-Applied to riscv-to-apply.next
-
-For future patches, versioning starts at v1 (which can just be
-[PATCH]) and then goes to v2 ([PATCH v2])
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu.c                          |  7 +++
+>  target/riscv/cpu.h                          |  1 +
+>  target/riscv/insn32.decode                  |  4 ++
+>  target/riscv/insn_trans/trans_rvzawrs.c.inc | 51 +++++++++++++++++++++
+>  target/riscv/translate.c                    |  1 +
+>  5 files changed, 64 insertions(+)
+>  create mode 100644 target/riscv/insn_trans/trans_rvzawrs.c.inc
 >
->  hw/riscv/opentitan.c         | 24 ++++++++++++++++--------
->  include/hw/riscv/opentitan.h | 10 +++++-----
->  2 files changed, 21 insertions(+), 13 deletions(-)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index b29c88b9f0..b08ce94ba6 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -76,6 +76,7 @@ static const struct isa_ext_data isa_edata_arr[] =3D {
+>      ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ext_icsr),
+>      ISA_EXT_DATA_ENTRY(zifencei, true, PRIV_VERSION_1_10_0, ext_ifencei)=
+,
+>      ISA_EXT_DATA_ENTRY(zihintpause, true, PRIV_VERSION_1_10_0, ext_zihin=
+tpause),
+> +    ISA_EXT_DATA_ENTRY(zawrs, true, PRIV_VERSION_1_12_0, ext_zawrs),
+>      ISA_EXT_DATA_ENTRY(zfh, true, PRIV_VERSION_1_12_0, ext_zfh),
+>      ISA_EXT_DATA_ENTRY(zfhmin, true, PRIV_VERSION_1_12_0, ext_zfhmin),
+>      ISA_EXT_DATA_ENTRY(zfinx, true, PRIV_VERSION_1_12_0, ext_zfinx),
+> @@ -744,6 +745,11 @@ static void riscv_cpu_realize(DeviceState *dev, Erro=
+r **errp)
+>              return;
+>          }
 >
+> +        if ((cpu->cfg.ext_zawrs) && !cpu->cfg.ext_a) {
+> +            error_setg(errp, "Zawrs extension requires A extension");
+> +            return;
+> +        }
+> +
+>          if ((cpu->cfg.ext_zfh || cpu->cfg.ext_zfhmin) && !cpu->cfg.ext_f=
+) {
+>              error_setg(errp, "Zfh/Zfhmin extensions require F extension"=
+);
+>              return;
+> @@ -999,6 +1005,7 @@ static Property riscv_cpu_extensions[] =3D {
+>      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+>      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+>      DEFINE_PROP_BOOL("Zihintpause", RISCVCPU, cfg.ext_zihintpause, true)=
+,
+> +    DEFINE_PROP_BOOL("Zawrs", RISCVCPU, cfg.ext_zawrs, true),
+>      DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
+>      DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
+>      DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index b131fa8c8e..2b87966373 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -446,6 +446,7 @@ struct RISCVCPUConfig {
+>      bool ext_svnapot;
+>      bool ext_svpbmt;
+>      bool ext_zdinx;
+> +    bool ext_zawrs;
+>      bool ext_zfh;
+>      bool ext_zfhmin;
+>      bool ext_zfinx;
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index d0253b8104..b7e7613ea2 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -718,6 +718,10 @@ vsetvli         0 ........... ..... 111 ..... 101011=
+1  @r2_zimm11
+>  vsetivli        11 .......... ..... 111 ..... 1010111  @r2_zimm10
+>  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+>
+> +# *** Zawrs Standard Extension ***
+> +wrs_nto    000000001101 00000 000 00000 1110011
+> +wrs_sto    000000011101 00000 000 00000 1110011
+> +
+>  # *** RV32 Zba Standard Extension ***
+>  sh1add     0010000 .......... 010 ..... 0110011 @r
+>  sh2add     0010000 .......... 100 ..... 0110011 @r
+> diff --git a/target/riscv/insn_trans/trans_rvzawrs.c.inc b/target/riscv/i=
+nsn_trans/trans_rvzawrs.c.inc
+> new file mode 100644
+> index 0000000000..f0da2fe50a
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_rvzawrs.c.inc
+> @@ -0,0 +1,51 @@
+> +/*
+> + * RISC-V translation routines for the RISC-V Zawrs Extension.
+> + *
+> + * Copyright (c) 2022 Christoph Muellner, christoph.muellner@vrull.io
+> + *
+> + * This program is free software; you can redistribute it and/or modify =
+it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOU=
+T
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
+ for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License alo=
+ng with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +static bool trans_wrs(DisasContext *ctx)
+> +{
+> +    if (!ctx->cfg_ptr->ext_zawrs) {
+> +        return false;
+> +    }
+> +
+> +    /*
+> +     * The specification says:
+> +     * While stalled, an implementation is permitted to occasionally
+> +     * terminate the stall and complete execution for any reason.
+> +     *
+> +     * So let's just exit TB and return to the main loop.
+> +     */
+> +
+> +    /* Clear the load reservation  (if any).  */
+> +    tcg_gen_movi_tl(load_res, -1);
+> +
+> +    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
+> +    tcg_gen_exit_tb(NULL, 0);
+> +    ctx->base.is_jmp =3D DISAS_NORETURN;
+> +
+> +    return true;
+> +}
+> +
+> +#define GEN_TRANS_WRS(insn)                                            \
+> +static bool trans_ ## insn(DisasContext *ctx, arg_ ## insn *a)         \
+> +{                                                                      \
+> +       (void)a;                                                        \
+> +       return trans_wrs(ctx);                                          \
+> +}
+> +
+> +GEN_TRANS_WRS(wrs_nto)
+> +GEN_TRANS_WRS(wrs_sto)
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index db123da5ec..e22de88e97 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -1029,6 +1029,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase,=
+ target_ulong pc)
+>  #include "insn_trans/trans_rvh.c.inc"
+>  #include "insn_trans/trans_rvv.c.inc"
+>  #include "insn_trans/trans_rvb.c.inc"
+> +#include "insn_trans/trans_rvzawrs.c.inc"
+>  #include "insn_trans/trans_rvzfh.c.inc"
+>  #include "insn_trans/trans_rvk.c.inc"
+>  #include "insn_trans/trans_privileged.c.inc"
 > --
 > 2.37.3
 >
