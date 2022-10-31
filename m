@@ -1,53 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1opItO-00054d-RP
-	for mharc-qemu-riscv@gnu.org; Sun, 30 Oct 2022 20:43:06 -0400
+	id 1opIvj-0005vQ-5E
+	for mharc-qemu-riscv@gnu.org; Sun, 30 Oct 2022 20:45:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1opItO-00054S-87; Sun, 30 Oct 2022 20:43:06 -0400
-Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
+ id 1opIvh-0005vB-LJ; Sun, 30 Oct 2022 20:45:29 -0400
+Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1opItM-00020r-C6; Sun, 30 Oct 2022 20:43:05 -0400
-Received: by mail-pg1-x536.google.com with SMTP id h2so9413725pgp.4;
- Sun, 30 Oct 2022 17:43:03 -0700 (PDT)
+ id 1opIvg-0002oK-3S; Sun, 30 Oct 2022 20:45:29 -0400
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 3-20020a17090a0f8300b00212d5cd4e5eso14510622pjz.4; 
+ Sun, 30 Oct 2022 17:45:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dv7RV+2jE11/zRwrhRGq17uD3u722NLv1XHaLp3qGZ0=;
- b=IfPA9OUZgEtkJiHXkyGRUqByrLjdvLCboxJ5Cc+NVlkY4w4bWUVjBkequeKhSrBBbJ
- KEnKL7DPlMeQbQ9RKDQiy81pFpI/BBzqkhr7Mm6nqdRrYCkA5YXDzqKphEW0pY90s+or
- vWRj3fwVKyhS+8dwY9m+LMxG4OWPiK1Our0mtHj6P2HJU8KKgrSeLMYXc16sBVZ+H0h8
- 6nfF0MGd5OvvPvUT2dr2GMA3op3qejWem3hmJtB0y32bMS2zfdV1CMIPSp7PZ7EL7Rwn
- Lr5Oq87ijicaHMyFF0cU4vNNY4h4ZhUjBjO3siOtT8nUlLYS7j822vKds0yaScayCkoO
- DZIg==
+ bh=A2M15mjYDnaTvpxVqj65HghXm4eKXw4o/c73VZEVCyA=;
+ b=IXpQz+wLVtugYYA9CH0gwzSrz5QPxgO2ExMzmsW+j+Ghsxr3b6gAejJydhqinON36o
+ YPW6ZdIXT//cZXTgDdDNdgEanLUnK/6GUxusmHffv8ewv9sSiXDmFJizj3xq8Pjzg0uw
+ h/lgPuV0EPDpaGkI2Lb3cZmew45n03bR2Xzry0XIqogh0+84FEfiROC03GjlP0+KUGoz
+ 3d8I3zw1bSfQo1f7ud+nVMMJB3MRULFeOx6uYe3qT9mKmjo09kN0LP4tn1fATy9M+LqY
+ 9H6A1rV9UhWG2NWFG4QH/PxuLKIGwvk6DrWpmTiHaldEWRACf4GPMDHFUVlTPXIpLEBr
+ Ajcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dv7RV+2jE11/zRwrhRGq17uD3u722NLv1XHaLp3qGZ0=;
- b=DO11ZYdG/1CTsIdOdL//RvX+dIr9YSmSGuOwcP43wfc8mk0RYGM91AKFAO5xAc18Iq
- uj090+D9wRiBwAUkPJjwW/4/XQCY+M717lZGeHhNRy504BSSDfa4TGDSgNHGSrdcAoPo
- Zmkk0kiWaep+VfvYR8lrQqmGBzqRIn+1i773KDixvlOPBZWYn3JAxNvaPTuRJbAQcrQg
- 96LnALhKmI1zkltTaQXChYRLPTrRY9uCzPe9lbe4LpD6Gfko+uBpZdwc0XPomJwkzH1u
- m98i5bhEjZq7+aaH1iQ1n30cLzY9uK4CP+bb3GwT+SJqxlVwkoZl1A9yFd4x69J5oTpm
- SHew==
-X-Gm-Message-State: ACrzQf2dAtSqmNJx0btC6Pfrq8zx/i8HpV1LtEwhbcjg89w+/IiLaqzm
- BBEjGBDralWW5Gly2oiQc4ev1kpLycsWt0Y1dL8=
-X-Google-Smtp-Source: AMsMyM5+JEoX3JUnk2hLrPy7AXnJMG1tg4tfnrn5/z1KKEG8gwjdvwpd+L+pukzXlnC2dBCtHArLej+UL+0Mihz50q8=
-X-Received: by 2002:a05:6a00:1a94:b0:56d:267e:a200 with SMTP id
- e20-20020a056a001a9400b0056d267ea200mr8703282pfv.13.1667176982562; Sun, 30
- Oct 2022 17:43:02 -0700 (PDT)
+ bh=A2M15mjYDnaTvpxVqj65HghXm4eKXw4o/c73VZEVCyA=;
+ b=M8i00TxXpont+VOdYWpOfnrAjIvRO/UOZnntfaxVXI5kSkemXTDdVSpNEHHvXyqPFz
+ mJXtifp2ddmE13JbsosndOCOWHNJP95VRyCUUC7dS0tAXfkU3g+R9f9vJdbPSlfeWHAP
+ u+KhotqC6PRJLFPJcK72jYEbgEymEaQcsdbJeh7vXCeFjRf6OjP0H8jUxCuVlf2zCdB8
+ GiFTU5sVkgjHdhuhk5rktiJl+3zFBHCR4b5DePD02Y11NKDBNik7jPEoWT0CPdXYfbIv
+ doSJoQV0eji/ptaQDd03r6ewS3LSCRnx80PiTQmelSfrFFJIn++x6Kwj9I3VCXgGx5JA
+ T53w==
+X-Gm-Message-State: ACrzQf2fZIxu+TozPxlWWQQry0ljhtTX8pr1ms/1Sto8Po+4XdHUFYeu
+ 2+0VN/4oIss3kY5ErD4MepDIJqrMxCzwh9dEIak=
+X-Google-Smtp-Source: AMsMyM68ovHa1Bb9t2F1k2mfuf/vsURMCtNEgH9tcmTrfT+dAa7Cu8punr3gnr/2Da+ARvofnIhIvr4dRqjD+WwdOtk=
+X-Received: by 2002:a17:902:7294:b0:187:146c:316f with SMTP id
+ d20-20020a170902729400b00187146c316fmr6149273pll.149.1667177126331; Sun, 30
+ Oct 2022 17:45:26 -0700 (PDT)
 MIME-Version: 1.0
 References: <20221027164743.194265-1-apatel@ventanamicro.com>
- <20221027164743.194265-3-apatel@ventanamicro.com>
-In-Reply-To: <20221027164743.194265-3-apatel@ventanamicro.com>
+ <20221027164743.194265-4-apatel@ventanamicro.com>
+In-Reply-To: <20221027164743.194265-4-apatel@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 31 Oct 2022 10:42:36 +1000
-Message-ID: <CAKmqyKOC429UT17ZmtsLNK8wyBVVOE6iFCLJLU=1_7fJ_LYX7Q@mail.gmail.com>
-Subject: Re: [PATCH 2/5] target/riscv: Update VS timer whenever htimedelta
- changes
+Date: Mon, 31 Oct 2022 10:44:59 +1000
+Message-ID: <CAKmqyKP9pXUKkfMAj_RJa8LbJ870ExgzM6vc96_Pq0B+GtErew@mail.gmail.com>
+Subject: Re: [PATCH 3/5] target/riscv: Don't clear mask in
+ riscv_cpu_update_mip() for VSTIP
 To: Anup Patel <apatel@ventanamicro.com>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -57,8 +58,8 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>, 
  Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x536.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x1034.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -79,12 +80,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2022 00:43:06 -0000
+X-List-Received-Date: Mon, 31 Oct 2022 00:45:29 -0000
 
 On Fri, Oct 28, 2022 at 2:52 AM Anup Patel <apatel@ventanamicro.com> wrote:
 >
-> The htimedelta[h] CSR has impact on the VS timer comparison so we
-> should call riscv_timer_write_timecmp() whenever htimedelta changes.
+> Instead of clearing mask in riscv_cpu_update_mip() for VSTIP, we
+> should call riscv_cpu_update_mip() with mask == 0 from timer_helper.c
+> for VSTIP.
 >
 > Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp suppor")
 > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
@@ -94,55 +96,60 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/csr.c | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
+>  target/riscv/cpu_helper.c  |  2 --
+>  target/riscv/time_helper.c | 12 ++++++++----
+>  2 files changed, 8 insertions(+), 6 deletions(-)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 716f9d960e..4b1a608260 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -2722,6 +2722,8 @@ static RISCVException read_htimedelta(CPURISCVState *env, int csrno,
->  static RISCVException write_htimedelta(CPURISCVState *env, int csrno,
->                                         target_ulong val)
->  {
-> +    RISCVCPU *cpu = env_archcpu(env);
-> +
->      if (!env->rdtime_fn) {
->          return RISCV_EXCP_ILLEGAL_INST;
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 5d66246c2c..a403825e49 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -617,8 +617,6 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
+>          vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
 >      }
-> @@ -2731,6 +2733,12 @@ static RISCVException write_htimedelta(CPURISCVState *env, int csrno,
->      } else {
->          env->htimedelta = val;
->      }
-> +
-> +    if (cpu->cfg.ext_sstc && env->rdtime_fn) {
-> +        riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
-> +                                  env->htimedelta, MIP_VSTIP);
-> +    }
-> +
->      return RISCV_EXCP_NONE;
+>
+> -    /* No need to update mip for VSTIP */
+> -    mask = ((mask == MIP_VSTIP) && env->vstime_irq) ? 0 : mask;
+>      vstip = env->vstime_irq ? MIP_VSTIP : 0;
+>
+>      if (!qemu_mutex_iothread_locked()) {
+> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
+> index 8cce667dfd..4fb2a471a9 100644
+> --- a/target/riscv/time_helper.c
+> +++ b/target/riscv/time_helper.c
+> @@ -27,7 +27,7 @@ static void riscv_vstimer_cb(void *opaque)
+>      RISCVCPU *cpu = opaque;
+>      CPURISCVState *env = &cpu->env;
+>      env->vstime_irq = 1;
+> -    riscv_cpu_update_mip(cpu, MIP_VSTIP, BOOL_TO_MASK(1));
+> +    riscv_cpu_update_mip(cpu, 0, BOOL_TO_MASK(1));
 >  }
 >
-> @@ -2748,11 +2756,19 @@ static RISCVException read_htimedeltah(CPURISCVState *env, int csrno,
->  static RISCVException write_htimedeltah(CPURISCVState *env, int csrno,
->                                          target_ulong val)
->  {
-> +    RISCVCPU *cpu = env_archcpu(env);
-> +
->      if (!env->rdtime_fn) {
->          return RISCV_EXCP_ILLEGAL_INST;
+>  static void riscv_stimer_cb(void *opaque)
+> @@ -57,16 +57,20 @@ void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,
+>           */
+>          if (timer_irq == MIP_VSTIP) {
+>              env->vstime_irq = 1;
+> +            riscv_cpu_update_mip(cpu, 0, BOOL_TO_MASK(1));
+> +        } else {
+> +            riscv_cpu_update_mip(cpu, MIP_STIP, BOOL_TO_MASK(1));
+>          }
+> -        riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(1));
+>          return;
 >      }
 >
->      env->htimedelta = deposit64(env->htimedelta, 32, 32, (uint64_t)val);
-> +
-> +    if (cpu->cfg.ext_sstc && env->rdtime_fn) {
-> +        riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
-> +                                  env->htimedelta, MIP_VSTIP);
-> +    }
-> +
->      return RISCV_EXCP_NONE;
->  }
+> +    /* Clear the [VS|S]TIP bit in mip */
+>      if (timer_irq == MIP_VSTIP) {
+>          env->vstime_irq = 0;
+> +        riscv_cpu_update_mip(cpu, 0, BOOL_TO_MASK(0));
+> +    } else {
+> +        riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(0));
+>      }
+> -    /* Clear the [V]STIP bit in mip */
+> -    riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(0));
 >
+>      /* otherwise, set up the future timer interrupt */
+>      diff = timecmp - rtc_r;
 > --
 > 2.34.1
 >
