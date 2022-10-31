@@ -1,52 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1opIrl-0004Md-CV
-	for mharc-qemu-riscv@gnu.org; Sun, 30 Oct 2022 20:41:25 -0400
+	id 1opItO-00054d-RP
+	for mharc-qemu-riscv@gnu.org; Sun, 30 Oct 2022 20:43:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1opIrj-0004MN-B3; Sun, 30 Oct 2022 20:41:23 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
+ id 1opItO-00054S-87; Sun, 30 Oct 2022 20:43:06 -0400
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1opIrh-0001YR-OD; Sun, 30 Oct 2022 20:41:23 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id b29so9329860pfp.13;
- Sun, 30 Oct 2022 17:41:19 -0700 (PDT)
+ id 1opItM-00020r-C6; Sun, 30 Oct 2022 20:43:05 -0400
+Received: by mail-pg1-x536.google.com with SMTP id h2so9413725pgp.4;
+ Sun, 30 Oct 2022 17:43:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Xa2BGEYBM42lzBiDHEBCI2RRWrikjCI5my/i9sol0p8=;
- b=KGxVCtUfWVoyQb8TM6JFtj1Rq7KMcP1v+xCgVJWH4lkXY2kb073aEwjj+Rs5mC4Qy0
- 0FWxW3ia4y2azVitauRz1fsU5bvj07w3lHAv5yAMcZWNHdBUx8o5jqlNNk1cacm5Eblc
- AAwhCvkAE7n3nkFWzaownDvuZ2Fh4aG4rhn0Ufcu4T4hQbe71AdgGTZkYmpXr6+XK7m1
- ePSlxOE2XvQV+RX9ht4fyvn2h7mm2/tbd4C2JyfiDw1j7RerDoG8MwihNqvBwEmO75v+
- AlTmLcIVwx3TF4hVyEZcdCdZftpHSkdxreh3lXzDuqqFwVXryXWN3QVGrn3No6yLJAcx
- ntQQ==
+ bh=dv7RV+2jE11/zRwrhRGq17uD3u722NLv1XHaLp3qGZ0=;
+ b=IfPA9OUZgEtkJiHXkyGRUqByrLjdvLCboxJ5Cc+NVlkY4w4bWUVjBkequeKhSrBBbJ
+ KEnKL7DPlMeQbQ9RKDQiy81pFpI/BBzqkhr7Mm6nqdRrYCkA5YXDzqKphEW0pY90s+or
+ vWRj3fwVKyhS+8dwY9m+LMxG4OWPiK1Our0mtHj6P2HJU8KKgrSeLMYXc16sBVZ+H0h8
+ 6nfF0MGd5OvvPvUT2dr2GMA3op3qejWem3hmJtB0y32bMS2zfdV1CMIPSp7PZ7EL7Rwn
+ Lr5Oq87ijicaHMyFF0cU4vNNY4h4ZhUjBjO3siOtT8nUlLYS7j822vKds0yaScayCkoO
+ DZIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Xa2BGEYBM42lzBiDHEBCI2RRWrikjCI5my/i9sol0p8=;
- b=xW+ejD3j/rh+iYorL+TNmAafbooTE0cAWcedeOjDh5Jyygm4knigsZgyJZzY4xwmf1
- fcY3o+3BCh/2JtMGTDvyjq0+37RGr258/Zb+4No1KJ6VKrjk4aq561pR7NTl2xWwtORF
- ja43M+vWC2phUoGVPQemrgG2SiW82f8IQ1YLW4thZvSMSoJ2nRij/8Fb0+WTnWaBodqu
- KzG2UKTezkzHdP4z0oqmzBSewfzCKnXjH2o+FiygZ9feOYRJQlNogzLGwu7IAki/67i0
- idAcpgwRE5aRIK5s2QyAW97v4RuKghWgVgxeHiS+qQd5oxQmsKEnXenjFCj7yQtdAtDQ
- SQLw==
-X-Gm-Message-State: ACrzQf2tZZ8FstuN4X8vjFIZitdfDH1aEAOzK5RGQAZBQLg/uDPz40Dx
- C7GveOPgY/zlLBs+YsAIgJpNThvCOc2oXPbF3bg=
-X-Google-Smtp-Source: AMsMyM6LR/sZTNfeXSI7eKeqlejxYeJefkrH6PNw+85i+dncijqL/3B7RU+h9cdfaUr6QieQSapcdPNeBzxLIQ6pwNw=
-X-Received: by 2002:a05:6a00:2402:b0:52c:81cf:8df8 with SMTP id
- z2-20020a056a00240200b0052c81cf8df8mr11988662pfh.60.1667176878392; Sun, 30
- Oct 2022 17:41:18 -0700 (PDT)
+ bh=dv7RV+2jE11/zRwrhRGq17uD3u722NLv1XHaLp3qGZ0=;
+ b=DO11ZYdG/1CTsIdOdL//RvX+dIr9YSmSGuOwcP43wfc8mk0RYGM91AKFAO5xAc18Iq
+ uj090+D9wRiBwAUkPJjwW/4/XQCY+M717lZGeHhNRy504BSSDfa4TGDSgNHGSrdcAoPo
+ Zmkk0kiWaep+VfvYR8lrQqmGBzqRIn+1i773KDixvlOPBZWYn3JAxNvaPTuRJbAQcrQg
+ 96LnALhKmI1zkltTaQXChYRLPTrRY9uCzPe9lbe4LpD6Gfko+uBpZdwc0XPomJwkzH1u
+ m98i5bhEjZq7+aaH1iQ1n30cLzY9uK4CP+bb3GwT+SJqxlVwkoZl1A9yFd4x69J5oTpm
+ SHew==
+X-Gm-Message-State: ACrzQf2dAtSqmNJx0btC6Pfrq8zx/i8HpV1LtEwhbcjg89w+/IiLaqzm
+ BBEjGBDralWW5Gly2oiQc4ev1kpLycsWt0Y1dL8=
+X-Google-Smtp-Source: AMsMyM5+JEoX3JUnk2hLrPy7AXnJMG1tg4tfnrn5/z1KKEG8gwjdvwpd+L+pukzXlnC2dBCtHArLej+UL+0Mihz50q8=
+X-Received: by 2002:a05:6a00:1a94:b0:56d:267e:a200 with SMTP id
+ e20-20020a056a001a9400b0056d267ea200mr8703282pfv.13.1667176982562; Sun, 30
+ Oct 2022 17:43:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <20221027164743.194265-1-apatel@ventanamicro.com>
- <20221027164743.194265-2-apatel@ventanamicro.com>
-In-Reply-To: <20221027164743.194265-2-apatel@ventanamicro.com>
+ <20221027164743.194265-3-apatel@ventanamicro.com>
+In-Reply-To: <20221027164743.194265-3-apatel@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 31 Oct 2022 10:40:51 +1000
-Message-ID: <CAKmqyKP5b3niJnm7f2yhpHxApm-ePVgNNee-OBvhksrAFE-FUA@mail.gmail.com>
-Subject: Re: [PATCH 1/5] target/riscv: Typo fix in sstc() predicate
+Date: Mon, 31 Oct 2022 10:42:36 +1000
+Message-ID: <CAKmqyKOC429UT17ZmtsLNK8wyBVVOE6iFCLJLU=1_7fJ_LYX7Q@mail.gmail.com>
+Subject: Re: [PATCH 2/5] target/riscv: Update VS timer whenever htimedelta
+ changes
 To: Anup Patel <apatel@ventanamicro.com>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -56,8 +57,8 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>, 
  Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x42f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x536.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -78,12 +79,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2022 00:41:23 -0000
+X-List-Received-Date: Mon, 31 Oct 2022 00:43:06 -0000
 
 On Fri, Oct 28, 2022 at 2:52 AM Anup Patel <apatel@ventanamicro.com> wrote:
 >
-> We should use "&&" instead of "&" when checking hcounteren.TM and
-> henvcfg.STCE bits.
+> The htimedelta[h] CSR has impact on the VS timer comparison so we
+> should call riscv_timer_write_timecmp() whenever htimedelta changes.
 >
 > Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp suppor")
 > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
@@ -93,22 +94,55 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/csr.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  target/riscv/csr.c | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
 >
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 5c9a7ee287..716f9d960e 100644
+> index 716f9d960e..4b1a608260 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -838,7 +838,7 @@ static RISCVException sstc(CPURISCVState *env, int csrno)
+> @@ -2722,6 +2722,8 @@ static RISCVException read_htimedelta(CPURISCVState *env, int csrno,
+>  static RISCVException write_htimedelta(CPURISCVState *env, int csrno,
+>                                         target_ulong val)
+>  {
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+>      if (!env->rdtime_fn) {
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+> @@ -2731,6 +2733,12 @@ static RISCVException write_htimedelta(CPURISCVState *env, int csrno,
+>      } else {
+>          env->htimedelta = val;
+>      }
+> +
+> +    if (cpu->cfg.ext_sstc && env->rdtime_fn) {
+> +        riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
+> +                                  env->htimedelta, MIP_VSTIP);
+> +    }
+> +
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> @@ -2748,11 +2756,19 @@ static RISCVException read_htimedeltah(CPURISCVState *env, int csrno,
+>  static RISCVException write_htimedeltah(CPURISCVState *env, int csrno,
+>                                          target_ulong val)
+>  {
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+>      if (!env->rdtime_fn) {
+>          return RISCV_EXCP_ILLEGAL_INST;
 >      }
 >
->      if (riscv_cpu_virt_enabled(env)) {
-> -        if (!(get_field(env->hcounteren, COUNTEREN_TM) &
-> +        if (!(get_field(env->hcounteren, COUNTEREN_TM) &&
->                get_field(env->henvcfg, HENVCFG_STCE))) {
->              return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
->          }
+>      env->htimedelta = deposit64(env->htimedelta, 32, 32, (uint64_t)val);
+> +
+> +    if (cpu->cfg.ext_sstc && env->rdtime_fn) {
+> +        riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
+> +                                  env->htimedelta, MIP_VSTIP);
+> +    }
+> +
+>      return RISCV_EXCP_NONE;
+>  }
+>
 > --
 > 2.34.1
 >
