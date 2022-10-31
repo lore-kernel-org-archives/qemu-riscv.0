@@ -1,54 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1opJ5e-0007Y0-04
-	for mharc-qemu-riscv@gnu.org; Sun, 30 Oct 2022 20:55:46 -0400
+	id 1opLni-0006z9-EO
+	for mharc-qemu-riscv@gnu.org; Sun, 30 Oct 2022 23:49:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1opJ5b-0007Xk-RF; Sun, 30 Oct 2022 20:55:43 -0400
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1opLnh-0006yv-0V
+ for qemu-riscv@nongnu.org; Sun, 30 Oct 2022 23:49:25 -0400
+Received: from mail-oa1-x30.google.com ([2001:4860:4864:20::30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1opJ5a-0005mu-7J; Sun, 30 Oct 2022 20:55:43 -0400
-Received: by mail-pj1-x102d.google.com with SMTP id b11so9107921pjp.2;
- Sun, 30 Oct 2022 17:55:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1opLnf-00041O-D0
+ for qemu-riscv@nongnu.org; Sun, 30 Oct 2022 23:49:24 -0400
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-1322d768ba7so12338693fac.5
+ for <qemu-riscv@nongnu.org>; Sun, 30 Oct 2022 20:49:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rgG1Ldr0XoLz1BbBGOo5LCY8RORshy9ORtNKdZkw5sA=;
- b=nS4OSx8/BHEtyEF29/trFbisJtk0p2KdU5nLUjoO1jK6Ni5rUEU2/4ylTgD2xwe4MC
- 4OK1yI4WAB1XS0rIxjE+kg31AjmrapAd3kostyhdBh5V0MZLrxfGuA2jQyUs/r7SZ0N0
- VCtIQZ0htJXZqA4Ca7dcJ+V3Q075D2mjTLRDXQe3KuwO01mJVtwjnw6NnKItj6crQ0hO
- cXYZQK+lgavi4n2YlqhcCwnLxpBdBDHx/y7LRPPUfW8LEOrqmydJv9vr28mq4URqLKIT
- dlbz0Lu2TQZ4cwNmRnWTQUJxjLH7rMye420QD3YOZfMXPg69Wi7N5guIiMj6Ea9KdCql
- HMuA==
+ bh=fgwRn2JOA14md2/X+3voFUSGVJ65KgI7d3f6Y+z8F0E=;
+ b=De+y8in8l1XNWhWMJ7Qs8OSSVD/LV2Y3pBAHuawRh5ns8TdBplCD4ZGWDpeb/hnxid
+ Juji/f0M+s+B1zX77beSZznkNPlgDrZm78IVBvfJ/VzecVxDyi/xESEh83pQkNn/XcOa
+ IOEEgaWWWBlLIrFEYTZbiE66kQ8Z7A+7f4Q7+hdOkvBlV6yMPHbSMA0CMEfehOMkj51s
+ siuXnEyO3NrCu2d+VSCPWhspHcveAvtrS+TuVrM2rMPwTvYlMfG9cMlqfw9iYCG0dGhw
+ e4aialGE1OMOQrtXBDlTC+FCZ0IpjZxYnlsXnp+Ka8EfAt1h4u/BI+JmRlLr5T7nBLJ6
+ 9Dwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rgG1Ldr0XoLz1BbBGOo5LCY8RORshy9ORtNKdZkw5sA=;
- b=JDlJwzDk6y/kZNEj6JotP9dgDMZd9yBprELh8KBbSP95HyU+opUBGnubB4dzol9+aK
- mtQ7O+2cImd/ZBjr6JTzVHmr5+plp1+luR4P4soFQWIoiUqu1C7WCFKm5dH44gXEO5N+
- 4FbGowsCwYaJo18/z8lIeM8NVI2rZl+Nc6/vOQwD8aKe4i6TReZ+guHNaLwXS8IxjZfe
- QNavFAbvb4/fzjk6jwZA1cTXchvMGv/KbSVTdI8+O5aDnHhaRgZadFeO3F0xx7F9ec+I
- URBnLwrLiChhR+Bl+VJdAWb8dqXp+kcGYKVgiCWAWbQs9/MbjIXQDMNTew7DYLaKsiU8
- WnpQ==
-X-Gm-Message-State: ACrzQf0g9eVKlNrV0lMM8oYaeudlgpEJ5bYyOT6+WCU0pDlalup/zx2H
- Lwmx2uTTR0CSRKCGX1qhf2l3YZSMRn3CPUvHE5M=
-X-Google-Smtp-Source: AMsMyM4eB1FTFZqWIjcSbu5R2Ih02nXukrDpen8ru06a3FY0LSBOwckUD1u4o+tV1kZkOYfTWr1R93HpLRYReh+lIOw=
-X-Received: by 2002:a17:90a:2d8b:b0:213:b314:4652 with SMTP id
- p11-20020a17090a2d8b00b00213b3144652mr9743039pjd.96.1667177740365; Sun, 30
- Oct 2022 17:55:40 -0700 (PDT)
+ bh=fgwRn2JOA14md2/X+3voFUSGVJ65KgI7d3f6Y+z8F0E=;
+ b=OoTp671GuSiBH5abH+2T/MGBEn89JFbZCA+z2bWDt3cK/7z/NyxXUcMFeqPCl5P7TV
+ z8GOvlcC9WnULM2jA2MCy+/7E50J9pDt7xLwuArS2fT8XIvvEqY+Oy0qRtQdfkPFfmDl
+ laxnKBWYs1kzIQsjDT3qZvz5J/R5am6CT4Ac9/Za9OkjOnoni3qmGZrA3xeBpKkpr9Te
+ H+Aer5WrQ4eTTc6bv3wxpivVdM5QWPTcmfM7bX0wuLl73UJckBYSFf9e4rHWGlayGpSa
+ FifclMtw0CswFNoT8j8Ilu6ixQl09XL8L549cF909eWAdVHvxcBpsXtXUgC1YYlZ6D3j
+ PE6Q==
+X-Gm-Message-State: ACrzQf2jena0+6k5Hd9DoA5KjSOVAQGIqZ+2HDzaeSFhK9XTtqaTvpzL
+ b0mFnf1vBhhZgPTCXAVR8+hqIfKvgUB6+xyflFsADg==
+X-Google-Smtp-Source: AMsMyM5zqQP31dc29Wp/R14/0422CKv2bysXEPWHx69i1xGxV0u096fubBpQQhMtwcw86N+/iKosZDmWynmcR8F/2Tg=
+X-Received: by 2002:a05:6870:6593:b0:13b:c1a:e8ac with SMTP id
+ fp19-20020a056870659300b0013b0c1ae8acmr6255919oab.271.1667188161573; Sun, 30
+ Oct 2022 20:49:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20221027164743.194265-1-apatel@ventanamicro.com>
  <20221027164743.194265-5-apatel@ventanamicro.com>
-In-Reply-To: <20221027164743.194265-5-apatel@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 31 Oct 2022 10:55:14 +1000
-Message-ID: <CAKmqyKNWdJCQvT-5ddjQBjwMJ=uqBZv_+zG7TSAwqAS1p8oTkQ@mail.gmail.com>
+ <CAKmqyKNWdJCQvT-5ddjQBjwMJ=uqBZv_+zG7TSAwqAS1p8oTkQ@mail.gmail.com>
+In-Reply-To: <CAKmqyKNWdJCQvT-5ddjQBjwMJ=uqBZv_+zG7TSAwqAS1p8oTkQ@mail.gmail.com>
+From: Anup Patel <apatel@ventanamicro.com>
+Date: Mon, 31 Oct 2022 09:19:11 +0530
+Message-ID: <CAK9=C2WjjYsvi3VCOk8NGms+BupQKCbu3SUGqPNjEdzR9eVpag@mail.gmail.com>
 Subject: Re: [PATCH 4/5] target/riscv: No need to re-start QEMU timer when
  timecmp == UINT64_MAX
-To: Anup Patel <apatel@ventanamicro.com>
+To: Alistair Francis <alistair23@gmail.com>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <Alistair.Francis@wdc.com>,
@@ -57,14 +62,13 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>, 
  Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x102d.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2001:4860:4864:20::30;
+ envelope-from=apatel@ventanamicro.com; helo=mail-oa1-x30.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -79,48 +83,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2022 00:55:44 -0000
+X-List-Received-Date: Mon, 31 Oct 2022 03:49:25 -0000
 
-On Fri, Oct 28, 2022 at 2:53 AM Anup Patel <apatel@ventanamicro.com> wrote:
+On Mon, Oct 31, 2022 at 6:25 AM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> The time CSR will wrap-around immediately after reaching UINT64_MAX
-> so we don't need to re-start QEMU timer when timecmp == UINT64_MAX
-> in riscv_timer_write_timecmp().
+> On Fri, Oct 28, 2022 at 2:53 AM Anup Patel <apatel@ventanamicro.com> wrote:
+> >
+> > The time CSR will wrap-around immediately after reaching UINT64_MAX
+> > so we don't need to re-start QEMU timer when timecmp == UINT64_MAX
+> > in riscv_timer_write_timecmp().
+>
+> I'm not clear what this is fixing?
+>
+> If the guest sets a timer for UINT64_MAX shouldn't that still trigger
+> an event at some point?
 
-I'm not clear what this is fixing?
+Here's what Sstc says about timer interrupt using Sstc:
+"A supervisor timer interrupt becomes pending - as reflected in the
+STIP bit in the mip and sip registers - whenever time contains a
+value greater than or equal to stimecmp, treating the values as
+unsigned integers. Writes to stimecmp are guaranteed to be
+reflected in STIP eventually, but not necessarily immediately.
+The interrupt remains posted until stimecmp becomes greater
+than time - typically as a result of writing stimecmp."
 
-If the guest sets a timer for UINT64_MAX shouldn't that still trigger
-an event at some point?
+When timecmp = UINT64_MAX, the time CSR will eventually reach
+timecmp value but on next timer tick the time CSR will wrap-around
+and become zero which is less than UINT64_MAX. Now, the timer
+interrupt behaves like a level triggered interrupt so it will become 1
+when time = timecmp = UINT64_MAX and next timer tick it will
+become 0 again because time = 0 < timecmp = UINT64_MAX.
 
-Alistair
+This time CSR wrap-around comparison with timecmp is natural
+to implement in HW but not straight forward in QEMU hence this
+patch.
+
+Software can potentially use timecmp = UINT64_MAX as a way
+to clear the timer interrupt and keep timer disabled instead of
+enabling/disabling sie.STIP. This timecmp = UINT64_MAX helps:
+1) Linux RISC-V timer driver keep timer interrupt enable/disable
+    state in-sync with Linux interrupt subsystem.
+2) Reduce number of traps taken when emulating Sstc for the
+    "Nested Guest" (i.e. Guest running under some "Guest Hypervisor"
+    which in-turn runs under a "Host Hypervisor").
+
+In fact, the SBI set_timer() call also defines similar mechanism to
+disable timer: "If the supervisor wishes to clear the timer interrupt
+without scheduling the next timer event, it can either request a timer
+interrupt infinitely far into the future (i.e., (uint64_t)-1), ...".
+
+Regards,
+Anup
 
 >
-> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-> ---
->  target/riscv/time_helper.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
+> Alistair
 >
-> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
-> index 4fb2a471a9..1ee9f94813 100644
-> --- a/target/riscv/time_helper.c
-> +++ b/target/riscv/time_helper.c
-> @@ -72,6 +72,14 @@ void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,
->          riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(0));
->      }
->
-> +    /*
-> +     * Don't re-start the QEMU timer when timecmp == UINT64_MAX because
-> +     * time CSR will wrap-around immediately after reaching UINT64_MAX.
-> +     */
-> +    if (timecmp == UINT64_MAX) {
-> +        return;
-> +    }
-> +
->      /* otherwise, set up the future timer interrupt */
->      diff = timecmp - rtc_r;
->      /* back to ns (note args switched in muldiv64) */
-> --
-> 2.34.1
->
->
+> >
+> > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> > ---
+> >  target/riscv/time_helper.c | 8 ++++++++
+> >  1 file changed, 8 insertions(+)
+> >
+> > diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
+> > index 4fb2a471a9..1ee9f94813 100644
+> > --- a/target/riscv/time_helper.c
+> > +++ b/target/riscv/time_helper.c
+> > @@ -72,6 +72,14 @@ void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,
+> >          riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(0));
+> >      }
+> >
+> > +    /*
+> > +     * Don't re-start the QEMU timer when timecmp == UINT64_MAX because
+> > +     * time CSR will wrap-around immediately after reaching UINT64_MAX.
+> > +     */
+> > +    if (timecmp == UINT64_MAX) {
+> > +        return;
+> > +    }
+> > +
+> >      /* otherwise, set up the future timer interrupt */
+> >      diff = timecmp - rtc_r;
+> >      /* back to ns (note args switched in muldiv64) */
+> > --
+> > 2.34.1
+> >
+> >
 
