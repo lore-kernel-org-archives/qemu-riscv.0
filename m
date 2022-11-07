@@ -1,66 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1os1lq-00059A-MZ
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Nov 2022 08:02:34 -0500
+	id 1os1q5-000058-1U
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Nov 2022 08:06:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1os1lp-000589-RM
- for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 08:02:33 -0500
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1os1q2-0008Ur-HP
+ for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 08:06:54 -0500
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1os1lj-0004Ao-5X
- for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 08:02:33 -0500
-Received: by mail-pf1-x432.google.com with SMTP id y13so10530853pfp.7
- for <qemu-riscv@nongnu.org>; Mon, 07 Nov 2022 05:02:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=uRFPEI8kvtsy+NGQppELQegZunU3RMiKEpi3ky3RyzI=;
- b=lC0qahGzuR67tbXfwQPc6nnNzduChpd/VQEY7IT9VBEJi3c+WvNa3Zlzis2giAY6dQ
- GU3q+cRMbUwb5omw/1Lyq2PzIf96fHA97pwx9PQo9cspxpUMGm3B9KXuqqVPkiL5E9Gd
- rlnnnpx/jbkaLg2rfVPJQN/E6YSfSrnTnja5Qjr6cPcTCrAkU3bp+AyyiJt23rzZnjzN
- IJlvPc8/4uiuEfkAc+z913id2IwmLWoGBEKPfwySNuU2DYBQuzXQFyiKOfkclXJ/uEfo
- nFpZ6d3WaG13CkXTvyq+dB+G1r/AyvR7Fz6qb+0+HQVnjPI2shraxDzCuqVZnnY7qCmp
- Tflw==
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1os1pz-00047z-TA
+ for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 08:06:54 -0500
+Received: by mail-pl1-x62a.google.com with SMTP id g24so11014101plq.3
+ for <qemu-riscv@nongnu.org>; Mon, 07 Nov 2022 05:06:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=CokQCthltXArHgeXeP+mG0lge6iFcoJC2pAhsLLTxeA=;
+ b=mVtZPraq26J/agFjfITLb8VIqzreaup6RzDLpoWd0VGr0/mh35ZNPG3ARxIitnwu4V
+ XrtBxeQ1Mvin9Bo+Fz1KLjEmg+wJE6Oq93wcK9E7mbEVhaz9/8sdqnu8KV4hVxwfePGY
+ 8pfd4IG4SKQdcnRn2Vcj/fUqWNQc2AlZ/usLwnwuzqHPsc9fkH21v9sBYBQkhHDk1RqH
+ D9RWfRXT+dujNRRMi7v0iGvdWPhUAXxJLrG5HFhtyTCNwk8kP4880dsG4pqkMw3ghGDl
+ iwCqdwxmkSkdHZplXUDL0LJq/t+hB42uY8shC1EZPMHmFd8i0hYPKticbo49rx/Uy8pF
+ nsWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uRFPEI8kvtsy+NGQppELQegZunU3RMiKEpi3ky3RyzI=;
- b=6PGTo+8Wxnx5BtXVBqQdIxLs27wWiE+UkN43uLUNhoTHbBaqknZvN1V57ySKLGxS2N
- Ng25ydfufXjkNTMsh4NRehR2seCEqdeFl5ceCFcSRXKtibcapDPNox/jSdSZsfWs4613
- R/FpDDdcFJF511uNzSWmVB4LPdLaqmHKDBXTit/tQAPoV7VLZkd9DPuzZ/igu1EU2eU+
- 8U8R6qRP+yvpQeGo8vCIoTGKr88bG/MjkB6065Cd5dnPBbwR9CZxeYDCniTlANTwEeNE
- dgcJjeupUQR/R+YdRRWicp0qlOssvs+QQ6H9gI5vNG80d1COsRTZBHcqnmNHAsH3fHJK
- mTyQ==
-X-Gm-Message-State: ACrzQf2B8klmWhjpJQgBIjrDOu/C6Es78Ep8uJhUWIZkAkbS8yKaPyNx
- fKI85E9ZRApctS4hwuR7kbHEbg==
-X-Google-Smtp-Source: AMsMyM50fFp/EvawO6l5zZrr0za64dWV5qlrCHbCgOS4Ut9CBV5WEUPyAFNTpSPV6WlowxzbG12l4g==
-X-Received: by 2002:a63:81c2:0:b0:46f:f73e:127e with SMTP id
- t185-20020a6381c2000000b0046ff73e127emr27962639pgd.250.1667826145717; 
- Mon, 07 Nov 2022 05:02:25 -0800 (PST)
-Received: from localhost.localdomain ([49.206.12.236])
- by smtp.gmail.com with ESMTPSA id
- l8-20020a17090a4d4800b0021301a63e86sm6076967pjh.18.2022.11.07.05.02.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Nov 2022 05:02:24 -0800 (PST)
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Gerd Hoffmann <kraxel@redhat.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH V2] hw/riscv: virt: Remove size restriction for pflash
-Date: Mon,  7 Nov 2022 18:32:17 +0530
-Message-Id: <20221107130217.2243815-1-sunilvl@ventanamicro.com>
-X-Mailer: git-send-email 2.38.0
+ bh=CokQCthltXArHgeXeP+mG0lge6iFcoJC2pAhsLLTxeA=;
+ b=Dlrpo9gWLiVTCMlzvhBG0U1dHD1E7296Jz1C73iF+YnsNRRyyUHs+bCaTdX7rwu8/6
+ lwj0MGBAQrGyncK7XFmdMo8PVFMUrfxyrV1nO3PZlAe7Trav61kfIC0/pJDoD6E5kdpS
+ tLifVMiQZqL/uwanMNzalXcQX8K14iErhMsu9by8am6JLvXr6acRd+gzoWLzVy6wZPs2
+ vP4b8PIo8ZGOAy6EzCCTupEnj6LyGJt3Xm2i2E6iG+KFQwR7VvJtxlQM1ZHK6wHMyW6I
+ wXKxcsaKehcSFzUB4pThR9nbfd7CYJ/U+HE8wbS/PVyN4vB+q1uyK9YKb6erYYNlfZ8M
+ larw==
+X-Gm-Message-State: ACrzQf1Qb/1HHdG+MZLluNT6EIF3UQHeF8KtfCqom/ltqFBB+2r8BH4P
+ 2ATYIGF5z4Cmrb9Z0tpREcYFcZTwRmGcY0P0AEaC7g==
+X-Google-Smtp-Source: AMsMyM6aKbmjq9PeiipeRGlVf9xgWWW7n1WdC7LnK9ySZnYBIPzEw3Kr9K8OI+uYTpPoUqj5DHNsTP7LQykiuWUcA+A=
+X-Received: by 2002:a17:903:4d7:b0:178:8564:f754 with SMTP id
+ jm23-20020a17090304d700b001788564f754mr50482166plb.60.1667826410317; Mon, 07
+ Nov 2022 05:06:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x432.google.com
+References: <20221107130217.2243815-1-sunilvl@ventanamicro.com>
+In-Reply-To: <20221107130217.2243815-1-sunilvl@ventanamicro.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 7 Nov 2022 13:06:38 +0000
+Message-ID: <CAFEAcA8X3Q7s6qZ=ojE9fTLG464rrZw+FX=4hmMOhwR-Q4n2sA@mail.gmail.com>
+Subject: Re: [PATCH V2] hw/riscv: virt: Remove size restriction for pflash
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=peter.maydell@linaro.org; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -80,142 +75,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2022 13:02:34 -0000
+X-List-Received-Date: Mon, 07 Nov 2022 13:06:55 -0000
 
-The pflash implementation currently assumes fixed size of the
-backend storage. Due to this, the backend storage file needs to be
-exactly of size 32M. Otherwise, there will be an error like below.
+On Mon, 7 Nov 2022 at 13:03, Sunil V L <sunilvl@ventanamicro.com> wrote:
+>
+> The pflash implementation currently assumes fixed size of the
+> backend storage. Due to this, the backend storage file needs to be
+> exactly of size 32M. Otherwise, there will be an error like below.
+>
+> "device requires 33554432 bytes, block backend provides 4194304 bytes"
+>
+> Fix this issue by using the actual size of the backing store.
+>
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> ---
 
-"device requires 33554432 bytes, block backend provides 4194304 bytes"
+Do you really want the flash device size presented to the guest
+to be variable depending on what the user passed as a block backend?
+I don't think this is how we handle flash devices on other boards...
 
-Fix this issue by using the actual size of the backing store.
-
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
----
-
-Changes since V1:
-	1) Handle the case when blk_getlength() returns failure.
-	2) Added assertion to check actual size doesn't exceed the limit
-	3) Updated virt_machine_done() to find the flash base dynamically
-	4) Added code comments as suggested by Drew
-
- hw/riscv/virt.c | 59 ++++++++++++++++++++++++++++++++++++++++---------
- 1 file changed, 48 insertions(+), 11 deletions(-)
-
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index a5bc7353b4..b8ab1fd358 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -49,6 +49,7 @@
- #include "hw/pci/pci.h"
- #include "hw/pci-host/gpex.h"
- #include "hw/display/ramfb.h"
-+#include "sysemu/block-backend.h"
- 
- /*
-  * The virt machine physical address space used by some of the devices
-@@ -140,14 +141,32 @@ static void virt_flash_create(RISCVVirtState *s)
- }
- 
- static void virt_flash_map1(PFlashCFI01 *flash,
--                            hwaddr base, hwaddr size,
-+                            hwaddr base, hwaddr max_size,
-                             MemoryRegion *sysmem)
- {
-     DeviceState *dev = DEVICE(flash);
-+    BlockBackend *blk;
-+    int64_t flash_size;
- 
--    assert(QEMU_IS_ALIGNED(size, VIRT_FLASH_SECTOR_SIZE));
--    assert(size / VIRT_FLASH_SECTOR_SIZE <= UINT32_MAX);
--    qdev_prop_set_uint32(dev, "num-blocks", size / VIRT_FLASH_SECTOR_SIZE);
-+    blk = pflash_cfi01_get_blk(flash);
-+
-+    if (blk) {
-+        flash_size = blk_getlength(blk);
-+        if (flash_size < 0) {
-+            error_report("can't get size of block device %s: %s",
-+                         blk_name(blk), strerror(-flash_size));
-+            exit(1);
-+        }
-+    } else {
-+        flash_size = max_size;
-+    }
-+
-+    assert(flash_size > 0);
-+    assert(flash_size <= max_size);
-+    assert(QEMU_IS_ALIGNED(flash_size, VIRT_FLASH_SECTOR_SIZE));
-+    assert(flash_size / VIRT_FLASH_SECTOR_SIZE <= UINT32_MAX);
-+    qdev_prop_set_uint32(dev, "num-blocks",
-+                         flash_size / VIRT_FLASH_SECTOR_SIZE);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
- 
-     memory_region_add_subregion(sysmem, base,
-@@ -161,6 +180,14 @@ static void virt_flash_map(RISCVVirtState *s,
-     hwaddr flashsize = virt_memmap[VIRT_FLASH].size / 2;
-     hwaddr flashbase = virt_memmap[VIRT_FLASH].base;
- 
-+    /*
-+     * The flash devices are created at fixed base addresses passed
-+     * to virt_flash_map1().
-+     * However, the flashsize passed here to virt_flash_map1()
-+     * is the maximum size of the flash possible. The actual size
-+     * is determined inside virt_flash_map1() and can be smaller
-+     * than this maximum size based on the backend file size.
-+     */
-     virt_flash_map1(s->flash[0], flashbase, flashsize,
-                     sysmem);
-     virt_flash_map1(s->flash[1], flashbase + flashsize, flashsize,
-@@ -971,15 +998,24 @@ static void create_fdt_flash(RISCVVirtState *s, const MemMapEntry *memmap)
- {
-     char *name;
-     MachineState *mc = MACHINE(s);
--    hwaddr flashsize = virt_memmap[VIRT_FLASH].size / 2;
--    hwaddr flashbase = virt_memmap[VIRT_FLASH].base;
-+    MemoryRegion *flash_mem;
-+    hwaddr flashsize[2];
-+    hwaddr flashbase[2];
-+
-+    flash_mem = pflash_cfi01_get_memory(s->flash[0]);
-+    flashbase[0] = flash_mem->addr;
-+    flashsize[0] = flash_mem->size;
-+
-+    flash_mem = pflash_cfi01_get_memory(s->flash[1]);
-+    flashbase[1] = flash_mem->addr;
-+    flashsize[1] = flash_mem->size;
- 
--    name = g_strdup_printf("/flash@%" PRIx64, flashbase);
-+    name = g_strdup_printf("/flash@%" PRIx64, flashbase[0]);
-     qemu_fdt_add_subnode(mc->fdt, name);
-     qemu_fdt_setprop_string(mc->fdt, name, "compatible", "cfi-flash");
-     qemu_fdt_setprop_sized_cells(mc->fdt, name, "reg",
--                                 2, flashbase, 2, flashsize,
--                                 2, flashbase + flashsize, 2, flashsize);
-+                                 2, flashbase[0], 2, flashsize[0],
-+                                 2, flashbase[1], 2, flashsize[1]);
-     qemu_fdt_setprop_cell(mc->fdt, name, "bank-width", 4);
-     g_free(name);
- }
-@@ -1242,6 +1278,7 @@ static void virt_machine_done(Notifier *notifier, void *data)
-     target_ulong firmware_end_addr, kernel_start_addr;
-     uint32_t fdt_load_addr;
-     uint64_t kernel_entry;
-+    MemoryRegion *flash_mem;
- 
-     /*
-      * Only direct boot kernel is currently supported for KVM VM,
-@@ -1288,8 +1325,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
-          * In either case, the next_addr for opensbi will be the flash address.
-          */
-         riscv_setup_firmware_boot(machine);
--        kernel_entry = virt_memmap[VIRT_FLASH].base +
--                       virt_memmap[VIRT_FLASH].size / 2;
-+        flash_mem = pflash_cfi01_get_memory(s->flash[1]);
-+        kernel_entry = flash_mem->addr;
-     } else if (machine->kernel_filename) {
-         kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
-                                                          firmware_end_addr);
--- 
-2.38.0
-
+thanks
+-- PMM
 
