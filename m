@@ -1,64 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1os2n4-0006o4-BP
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Nov 2022 09:07:54 -0500
+	id 1os2ne-0006xr-2O
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Nov 2022 09:08:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <maobibo@loongson.cn>)
- id 1orytE-0002R0-LB; Mon, 07 Nov 2022 04:58:00 -0500
-Received: from mail.loongson.cn ([114.242.206.163] helo=loongson.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <maobibo@loongson.cn>)
- id 1orytC-0004VH-83; Mon, 07 Nov 2022 04:58:00 -0500
-Received: from loongson.cn (unknown [10.20.42.170])
- by gateway (Coremail) with SMTP id _____8AxTbeZ1mhjyAEFAA--.4838S3;
- Mon, 07 Nov 2022 17:57:45 +0800 (CST)
-Received: from [10.20.42.170] (unknown [10.20.42.170])
- by localhost.localdomain (Coremail) with SMTP id
- AQAAf8Dxd1eZ1mhj_WUOAA--.22038S3; 
- Mon, 07 Nov 2022 17:57:45 +0800 (CST)
-Message-ID: <80ccc060-32a7-bc38-bf2b-2ef5959a7e0c@loongson.cn>
-Date: Mon, 7 Nov 2022 17:57:45 +0800
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1os2nU-0006uL-TJ
+ for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 09:08:21 -0500
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1os2nS-0000to-5s
+ for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 09:08:20 -0500
+Received: by mail-wm1-x32f.google.com with SMTP id
+ v124-20020a1cac82000000b003cf7a4ea2caso9697970wme.5
+ for <qemu-riscv@nongnu.org>; Mon, 07 Nov 2022 06:08:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=0pEsKtTcmK6Ge/i5EQBQ6LfASf28dXHI1IPLk/HalPo=;
+ b=sBV/FN+Pq/5l4vCp+iGbbnJpyW7zw+rEetyTd5hBTnob0XdvqgIJZhLr3tfgYH0yaH
+ SejTUv3OOu4KIn9wyK7mZ0YBgBKpDUGzXGvHa8frsQE8EF1Xc7QgtOKNdEOy34mhGhpv
+ ZS6JBueJ9VmUTKZ3I/KBkt8vPj1uQrhbetW887Iuvk1t3rJfjkbCsOf+vfWJIJfOJP3A
+ fjEtR9LXme++xdFnsyZb4O1TkCiJz+FzL1S/XOUji1O2JAygCPfujKmCS+k0X1YkzQdc
+ ZzQoZGFr+y7Hkz7Ov+qoOceQhSAC1YjPiZdQvjYSQ52LR3Tm5yQVuGppFM682wXrJ2YF
+ yzPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=0pEsKtTcmK6Ge/i5EQBQ6LfASf28dXHI1IPLk/HalPo=;
+ b=wXkq+lr0OWifjpELhRJu2FdF8K1XUaVMa3GKm7DdUates/jW2LeETC/yIwTu3CNq0d
+ vPy7lv0Mg6gZUn/tNVuKy3EA0rj4s3mXR5nxkca5QxcyPlly/O9VZF75fgxUWly79dra
+ jW21/sHRPce4ckZbQdpM1RVE0krbBhVrsOZAdoQdmmpsB/H5Fu/3llmoKAzlA9vK45Ga
+ qmCOpILyZmbnJQclbjMAuEXIGYpB/NFOiPBZ1TMpYLeCcPbg01mLHD8sY9wIzFUwPswZ
+ x7jDiZ7cIJasJB2Y00NHwUOs5LH6HP+rZmX+W7o7T/jk2lBbWbuZIBgONEXa7UW0/kKm
+ wc6Q==
+X-Gm-Message-State: ACrzQf3jd4/He9OLk66j1w+BMNwCEHS4qqjF2/sbMFaOBqcmDmNGMZrp
+ rNsEA+ljXay4FBcveQSjPNA7kA==
+X-Google-Smtp-Source: AMsMyM48c5G4Zf6qxAQhzdhZEm5+6P01MPokmYhExFsdKmZGTgu2hjFS+CYWpaq8usiMrMbmJH8dQw==
+X-Received: by 2002:a05:600c:15c9:b0:3cf:6054:3b3b with SMTP id
+ v9-20020a05600c15c900b003cf60543b3bmr36236680wmf.167.1667830095900; 
+ Mon, 07 Nov 2022 06:08:15 -0800 (PST)
+Received: from [192.168.1.115] ([185.126.107.38])
+ by smtp.gmail.com with ESMTPSA id
+ hn3-20020a05600ca38300b003cf78aafdd7sm8142716wmb.39.2022.11.07.06.08.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 07 Nov 2022 06:08:15 -0800 (PST)
+Message-ID: <93096c36-fd3a-2e2f-4ae9-3bf9e4287204@linaro.org>
+Date: Mon, 7 Nov 2022 15:08:13 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.0
-Subject: Re: [PATCH] hw/riscv: virt: Remove size restriction for pflash
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.4.1
+Subject: Re: [PATCH V2] hw/riscv: virt: Remove size restriction for pflash
 Content-Language: en-US
-To: Sunil V L <sunilvl@ventanamicro.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Gerd Hoffmann <kraxel@redhat.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20221106143900.2229449-1-sunilvl@ventanamicro.com>
-From: maobibo <maobibo@loongson.cn>
-In-Reply-To: <20221106143900.2229449-1-sunilvl@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf8Dxd1eZ1mhj_WUOAA--.22038S3
-X-CM-SenderInfo: xpdruxter6z05rqj20fqof0/
-X-Coremail-Antispam: 1Uk129KBjvJXoWxCrW5ZFyxAw15ZF1rtw48Xrb_yoW5Zw4rpF
- WFkFs3Jr1kJFn7ur1xGw43G345Gw1fJF1UWrWI9w40kr13W3W2gFWrKa48Gry0yr1DXFyD
- CF98JrZFkFs7XrJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
- qI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUIcSsGvfJTRUUU
- bI8YFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s
- 1l1IIY67AEw4v_JrI_Jryl8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
- wVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
- x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l
- e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0cIa020Ex4CE44I27wAqx4xG64xvF2
- IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4U
- McvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCYjI0SjxkI62AI1cAE67vIY487Mx
- AIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_
- Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwI
- xGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8
- JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcV
- C2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUzZ2-UUUUU
-Received-SPF: pass client-ip=114.242.206.163; envelope-from=maobibo@loongson.cn;
- helo=loongson.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+To: Peter Maydell <peter.maydell@linaro.org>,
+ Sunil V L <sunilvl@ventanamicro.com>, Markus Armbruster <armbru@redhat.com>,
+ Bernhard Beschow <shentey@gmail.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20221107130217.2243815-1-sunilvl@ventanamicro.com>
+ <CAFEAcA8X3Q7s6qZ=ojE9fTLG464rrZw+FX=4hmMOhwR-Q4n2sA@mail.gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <CAFEAcA8X3Q7s6qZ=ojE9fTLG464rrZw+FX=4hmMOhwR-Q4n2sA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 07 Nov 2022 09:07:53 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,96 +87,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2022 09:58:01 -0000
+X-List-Received-Date: Mon, 07 Nov 2022 14:08:27 -0000
 
-
-
-在 2022/11/6 22:39, Sunil V L 写道:
-> The pflash implementation currently assumes fixed size of the
-> backend storage. Due to this, the backend storage file needs to be
-> exactly of size 32M. Otherwise, there will be an error like below.
+On 7/11/22 14:06, Peter Maydell wrote:
+> On Mon, 7 Nov 2022 at 13:03, Sunil V L <sunilvl@ventanamicro.com> wrote:
+>>
+>> The pflash implementation currently assumes fixed size of the
+>> backend storage. Due to this, the backend storage file needs to be
+>> exactly of size 32M. Otherwise, there will be an error like below.
+>>
+>> "device requires 33554432 bytes, block backend provides 4194304 bytes"
+>>
+>> Fix this issue by using the actual size of the backing store.
+>>
+>> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+>> ---
 > 
-> "device requires 33554432 bytes, block backend provides 3145728 bytes"
-> 
-> Fix this issue by using the actual size of the backing store.
-> 
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> ---
->  hw/riscv/virt.c | 33 +++++++++++++++++++++++++--------
->  1 file changed, 25 insertions(+), 8 deletions(-)
-> 
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index a5bc7353b4..aad175fa31 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -49,6 +49,7 @@
->  #include "hw/pci/pci.h"
->  #include "hw/pci-host/gpex.h"
->  #include "hw/display/ramfb.h"
-> +#include "sysemu/block-backend.h"
->  
->  /*
->   * The virt machine physical address space used by some of the devices
-> @@ -144,10 +145,17 @@ static void virt_flash_map1(PFlashCFI01 *flash,
->                              MemoryRegion *sysmem)
->  {
->      DeviceState *dev = DEVICE(flash);
-> +    BlockBackend *blk;
-> +    hwaddr real_size;
->  
-> -    assert(QEMU_IS_ALIGNED(size, VIRT_FLASH_SECTOR_SIZE));
-> -    assert(size / VIRT_FLASH_SECTOR_SIZE <= UINT32_MAX);
-> -    qdev_prop_set_uint32(dev, "num-blocks", size / VIRT_FLASH_SECTOR_SIZE);
-> +    blk = pflash_cfi01_get_blk(flash);
-> +
-> +    real_size = blk ? blk_getlength(blk): size;
-> +
-> +    assert(real_size);
-> +    assert(QEMU_IS_ALIGNED(real_size, VIRT_FLASH_SECTOR_SIZE));
-> +    assert(real_size / VIRT_FLASH_SECTOR_SIZE <= UINT32_MAX);
-How about add one sentence?
-       assert(real_size <= size);   
+> Do you really want the flash device size presented to the guest
+> to be variable depending on what the user passed as a block backend?
+> I don't think this is how we handle flash devices on other boards...
 
-As defined VIRT_FLASH memory space, the total memory space size 64M,
-Pflash0/Pflash1 cannot be more than 32M. Supposing real size of pflash0
-is 33M, there will be conflict with address space of pflash1.
+Ideally handling smaller/bigger backend size should be transparent for
+machine frontend, but we never agreed on what are user expectations and
+how to deal with such cases.
 
-regards
-bibo, mao
+Long term I'd go for:
 
-> +    qdev_prop_set_uint32(dev, "num-blocks", real_size / VIRT_FLASH_SECTOR_SIZE);
->      sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
->  
->      memory_region_add_subregion(sysmem, base,
-> @@ -971,15 +979,24 @@ static void create_fdt_flash(RISCVVirtState *s, const MemMapEntry *memmap)
->  {
->      char *name;
->      MachineState *mc = MACHINE(s);
-> -    hwaddr flashsize = virt_memmap[VIRT_FLASH].size / 2;
-> -    hwaddr flashbase = virt_memmap[VIRT_FLASH].base;
-> +    MemoryRegion *flash_mem;
-> +    hwaddr flashsize[2];
-> +    hwaddr flashbase[2];
-> +
-> +    flash_mem = pflash_cfi01_get_memory(s->flash[0]);
-> +    flashbase[0] = flash_mem->addr;
-> +    flashsize[0] = flash_mem->size;
-> +
-> +    flash_mem = pflash_cfi01_get_memory(s->flash[1]);
-> +    flashbase[1] = flash_mem->addr;
-> +    flashsize[1] = flash_mem->size;
->  
-> -    name = g_strdup_printf("/flash@%" PRIx64, flashbase);
-> +    name = g_strdup_printf("/flash@%" PRIx64, flashbase[0]);
->      qemu_fdt_add_subnode(mc->fdt, name);
->      qemu_fdt_setprop_string(mc->fdt, name, "compatible", "cfi-flash");
->      qemu_fdt_setprop_sized_cells(mc->fdt, name, "reg",
-> -                                 2, flashbase, 2, flashsize,
-> -                                 2, flashbase + flashsize, 2, flashsize);
-> +                                 2, flashbase[0], 2, flashsize[0],
-> +                                 2, flashbase[1], 2, flashsize[1]);
->      qemu_fdt_setprop_cell(mc->fdt, name, "bank-width", 4);
->      g_free(name);
->  }
+- if flash is read-only
 
+   a/ bigger backend: display a warning and ignore extra backend data.
+
+   b/ smaller backend: assume flash block is in erased state and fill
+      missing gap with -1 (the default erase value), displaying a warning
+      on startup.
+
+- if flash is read-write
+
+   a/ bigger backend: display a warning and ignore extra backend data.
+
+   b/ smaller backend: add a property to pflash device to handle missing
+      gap as erased data. If this flag is not set, display a hint and
+      exit with an error.
+
+In Sunil particular case, I suppose the issue comes from commit
+334c388f25 ("hw/block/pflash_cfi0{1, 2}: Error out if device length
+isn't a power of two") which I'm going to revert because the code
+base is not ready for such check:
+
+https://lore.kernel.org/qemu-devel/78b914c5-ce7e-1d4a-0a67-450f286eb869@linaro.org/
+
+Regards,
+
+Phil.
 
