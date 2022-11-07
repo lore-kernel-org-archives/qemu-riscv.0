@@ -1,71 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1os4f6-0003l6-R4
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Nov 2022 11:07:48 -0500
+	id 1os4g8-00040D-Ql
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Nov 2022 11:08:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1os4f5-0003kt-2U
- for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 11:07:47 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1os4f3-0006a8-Bp
- for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 11:07:46 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1667837257;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Kku/MWx+p0+KSkRxtDsiSH5gshNM0P6rpM78NN3h3I0=;
- b=A6frlYlHDCGzboQgFzuch9H/FZfGKOFn9VCpqH9lq+ZIF1PzyoFpp2AUytRNLs/65ON0kQ
- kZb5vTciinBzjhEdQmtzO4NfZKbjcdnNAi+56wquIjk3+B5iNVR/TMM3pZJOqiUr15zEWT
- 207G3VHMbCFBnPU5/i5oCz+nKZoqNwE=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-8-k_zm4mZ6MjeBuR0b9fDBrw-1; Mon, 07 Nov 2022 11:07:34 -0500
-X-MC-Unique: k_zm4mZ6MjeBuR0b9fDBrw-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E244C1C08963;
- Mon,  7 Nov 2022 16:07:33 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.39.193.175])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 5F56540C6FA1;
- Mon,  7 Nov 2022 16:07:33 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 2F88E21E6921; Mon,  7 Nov 2022 17:07:32 +0100 (CET)
-From: Markus Armbruster <armbru@redhat.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: Peter Maydell <peter.maydell@linaro.org>,  Sunil V L
- <sunilvl@ventanamicro.com>,  Markus Armbruster <armbru@redhat.com>,
- Bernhard Beschow <shentey@gmail.com>,  Palmer Dabbelt
- <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,  Bin
- Meng <bin.meng@windriver.com>,  Gerd Hoffmann <kraxel@redhat.com>,
- qemu-riscv@nongnu.org,  qemu-devel@nongnu.org
-Subject: Re: [PATCH V2] hw/riscv: virt: Remove size restriction for pflash
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1os4g0-0003yb-Nu
+ for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 11:08:45 -0500
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1os4fw-0006qF-OD
+ for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 11:08:43 -0500
+Received: by mail-pj1-x1031.google.com with SMTP id
+ e7-20020a17090a77c700b00216928a3917so10229186pjs.4
+ for <qemu-riscv@nongnu.org>; Mon, 07 Nov 2022 08:08:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=oKTyNf0hulrdI9MhJjylaUZHswoIVZvqvxXF6/Tspcc=;
+ b=to+7NjBq5148e7sR68PUnrPVYUq3fI6RDfDou8WrkfWrz/9M8fJ3Z+u1poO/8iWVCf
+ /wrIKJccuA3L4A5bxanqjaIVWtTSQIGniF4/Mr8KgQvbsEFHAgMk8BkbhMIwfFFwpaBc
+ tgfG1eEZZ6TYSH49dhnsnMsgLZyR8nFoLReCMC3KkhxAoAionedPuUCzz7iqKfB0hCpM
+ yS8AFkQh3T9VA138AQi9lOkp+rJYSTkbGK0TrpmhPMQVp7Id42vekLe2I6BNLAZFEjWH
+ WSKaHnzVlk7IBOyGi39lM2DR3nJM5cHluMBbVLM1N+EzUXk+ogsFqjciPVBYI8rytY9m
+ 3TIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oKTyNf0hulrdI9MhJjylaUZHswoIVZvqvxXF6/Tspcc=;
+ b=yrWzis8W1NzWFIYzGXO4vo4bV8RR9LUk90bCUgUQ92SkYgx8yzj5fXEqIel7A+sHhb
+ cCsJt7L8ZJxsIA0UhX3+txFsC7Lv97HPw9lvRd3lFugObnzRtFggZT8A5n1feq16AYTb
+ JIdTN8qIFnieoXLgllKXbxj6Qa3S6Wih09QUwgOU1shOuz0BEVGY8521n1WQSN3A8Eeh
+ 9mIVV69dP4z7WmU9eeN3zdCY2NkkV+QxHgZdZ61DHSwDtgqsMSxc0w7dJ1rGQRjYkiQt
+ M5X+4/LsFzZ9OgzieWz2idB2yNXaYb6iIcsOu2O0IsqwJpN/vgiVCdAbWZXCDQOWVfGh
+ jlKw==
+X-Gm-Message-State: ACrzQf36Lw2BN0XST/ifbXsfsKfuK767Ln0kh2g5OBiZCYBz/omt+BfH
+ hMbZyszsHfhU7jvo7b7KapgW2yQK2d2+P+AUVaLUTw==
+X-Google-Smtp-Source: AMsMyM4aliTTMvwWsyVSlMxQ3+x8Y5mXYn86sdZe3MDv1ikO3pQdl6kGMlxnCmDCdqcFqXFI8bXbdlAQZuyuhMay1Wc=
+X-Received: by 2002:a17:90b:4b81:b0:213:341d:3ea6 with SMTP id
+ lr1-20020a17090b4b8100b00213341d3ea6mr51988030pjb.19.1667837319251; Mon, 07
+ Nov 2022 08:08:39 -0800 (PST)
+MIME-Version: 1.0
 References: <20221107130217.2243815-1-sunilvl@ventanamicro.com>
  <CAFEAcA8X3Q7s6qZ=ojE9fTLG464rrZw+FX=4hmMOhwR-Q4n2sA@mail.gmail.com>
- <93096c36-fd3a-2e2f-4ae9-3bf9e4287204@linaro.org>
-Date: Mon, 07 Nov 2022 17:07:32 +0100
-In-Reply-To: <93096c36-fd3a-2e2f-4ae9-3bf9e4287204@linaro.org> ("Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Mon, 7 Nov 2022 15:08:13
- +0100")
-Message-ID: <87bkpipx2z.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+ <Y2kRWNnk7wDxPnBK@sunil-laptop>
+In-Reply-To: <Y2kRWNnk7wDxPnBK@sunil-laptop>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 7 Nov 2022 16:08:27 +0000
+Message-ID: <CAFEAcA-121P8gwOHRsbp4swP9ah1CZO8rVP75+WyvgF1pou8Aw@mail.gmail.com>
+Subject: Re: [PATCH V2] hw/riscv: virt: Remove size restriction for pflash
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=peter.maydell@linaro.org; helo=mail-pj1-x1031.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,126 +78,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2022 16:07:47 -0000
+X-List-Received-Date: Mon, 07 Nov 2022 16:08:46 -0000
 
-Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
-
-> On 7/11/22 14:06, Peter Maydell wrote:
->> On Mon, 7 Nov 2022 at 13:03, Sunil V L <sunilvl@ventanamicro.com> wrote:
->>>
->>> The pflash implementation currently assumes fixed size of the
->>> backend storage.
-
-Intentional.
-
-commit 06f1521795207359a395996c253c306f4ab7586e
-Author: Markus Armbruster <armbru@redhat.com>
-Date:   Tue Mar 19 17:35:50 2019 +0100
-
-    pflash: Require backend size to match device, improve errors
-=20=20=20=20
-    We reject undersized backends with a rather enigmatic "failed to read
-    the initial flash content" error.  For instance:
-=20=20=20=20
-        $ qemu-system-ppc64 -S -display none -M sam460ex -drive if=3Dpflash=
-,format=3Draw,file=3Deins.img
-        qemu-system-ppc64: Initialization of device cfi.pflash02 failed: fa=
-iled to read the initial flash content
-=20=20=20=20
-    We happily accept oversized images, ignoring their tail.  Throwing
-    away parts of firmware that way is pretty much certain to end in an
-    even more enigmatic failure to boot.
-=20=20=20=20
-    Require the backend's size to match the device's size exactly.  Report
-    mismatch like this:
-=20=20=20=20
-        qemu-system-ppc64: Initialization of device cfi.pflash01 failed: de=
-vice requires 1048576 bytes, block backend provides 512 bytes
-=20=20=20=20
-    Improve the error for actual read failures to "can't read block
-    backend".
-=20=20=20=20
-    To avoid duplicating even more code between the two pflash device
-    models, do all that in new helper blk_check_size_and_read_all().
-=20=20=20=20
-    The error reporting can still be confusing.  For instance:
-=20=20=20=20
-        qemu-system-ppc64 -S -display none -M taihu -drive if=3Dpflash,form=
-at=3Draw,file=3Deins.img  -drive if=3Dpflash,unit=3D1,format=3Draw,file=3Dz=
-wei.img
-        qemu-system-ppc64: Initialization of device cfi.pflash02 failed: de=
-vice requires 2097152 bytes, block backend provides 512 bytes
-=20=20=20=20
-    Leaves the user guessing which of the two -drive is wrong.  Mention
-    the issue in a TODO comment.
-=20=20=20=20
-    Suggested-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-    Signed-off-by: Markus Armbruster <armbru@redhat.com>
-    Message-Id: <20190319163551.32499-2-armbru@redhat.com>
-    Reviewed-by: Laszlo Ersek <lersek@redhat.com>
-    Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-    Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-
->>>                  Due to this, the backend storage file needs to be
->>> exactly of size 32M. Otherwise, there will be an error like below.
->>>
->>> "device requires 33554432 bytes, block backend provides 4194304 bytes"
-
-Why is that a problem?  Genuine question!
-
->>> Fix this issue by using the actual size of the backing store.
->>>
->>> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
->>> ---
->> Do you really want the flash device size presented to the guest
->> to be variable depending on what the user passed as a block backend?
->> I don't think this is how we handle flash devices on other boards...
-
-Flash device is generally a property of the machine type.  Similar to
-physical machines.  Not an accident.
-
-> Ideally handling smaller/bigger backend size should be transparent for
-> machine frontend, but we never agreed on what are user expectations and
-> how to deal with such cases.
+On Mon, 7 Nov 2022 at 14:08, Sunil V L <sunilvl@ventanamicro.com> wrote:
 >
-> Long term I'd go for:
->
-> - if flash is read-only
->
->   a/ bigger backend: display a warning and ignore extra backend data.
+> On Mon, Nov 07, 2022 at 01:06:38PM +0000, Peter Maydell wrote:
+> > On Mon, 7 Nov 2022 at 13:03, Sunil V L <sunilvl@ventanamicro.com> wrote:
+> > >
+> > > The pflash implementation currently assumes fixed size of the
+> > > backend storage. Due to this, the backend storage file needs to be
+> > > exactly of size 32M. Otherwise, there will be an error like below.
+> > >
+> > > "device requires 33554432 bytes, block backend provides 4194304 bytes"
+> > >
+> > > Fix this issue by using the actual size of the backing store.
+> > >
+> > > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> > > ---
+> >
+> > Do you really want the flash device size presented to the guest
+> > to be variable depending on what the user passed as a block backend?
+> > I don't think this is how we handle flash devices on other boards...
+> >
 
-Truncating images seems unlikely to be useful.
+> x86 appears to support variable flash but arm doesn't. What is
+> the reason for not supporting variable size flash in arm?
 
->   b/ smaller backend: assume flash block is in erased state and fill
->      missing gap with -1 (the default erase value), displaying a warning
->      on startup.
+Mostly, that that's the straightforward thing to code.
+Partly, that it avoids weird cases (eg you can have a backing
+file that's an odd number of bytes but you can't have a
+flash that size).
 
-Padding has a better chance to work.  But is it worth the trouble?
+If x86 has a standard way of handling this then I'm all
+in favour of being consistent across platforms. What's
+the x86 board doing there?
 
->
-> - if flash is read-write
->
->   a/ bigger backend: display a warning and ignore extra backend data.
->
->   b/ smaller backend: add a property to pflash device to handle missing
->      gap as erased data. If this flag is not set, display a hint and
->      exit with an error.
-
-What happens when the guest writes to the part that isn't backed by the
-backend?
-
-Is this worth the trouble?
-
-> In Sunil particular case, I suppose the issue comes from commit
-> 334c388f25 ("hw/block/pflash_cfi0{1, 2}: Error out if device length
-> isn't a power of two") which I'm going to revert because the code
-> base is not ready for such check:
->
-> https://lore.kernel.org/qemu-devel/78b914c5-ce7e-1d4a-0a67-450f286eb869@l=
-inaro.org/
->
-> Regards,
->
-> Phil.
-
+thanks
+-- PMM
 
