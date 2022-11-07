@@ -1,78 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1os2ne-0006xr-2O
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Nov 2022 09:08:30 -0500
+	id 1os2ni-00071D-MX
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Nov 2022 09:08:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1os2nU-0006uL-TJ
- for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 09:08:21 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1os2ni-00070o-5m
+ for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 09:08:34 -0500
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1os2nS-0000to-5s
- for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 09:08:20 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id
- v124-20020a1cac82000000b003cf7a4ea2caso9697970wme.5
- for <qemu-riscv@nongnu.org>; Mon, 07 Nov 2022 06:08:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=0pEsKtTcmK6Ge/i5EQBQ6LfASf28dXHI1IPLk/HalPo=;
- b=sBV/FN+Pq/5l4vCp+iGbbnJpyW7zw+rEetyTd5hBTnob0XdvqgIJZhLr3tfgYH0yaH
- SejTUv3OOu4KIn9wyK7mZ0YBgBKpDUGzXGvHa8frsQE8EF1Xc7QgtOKNdEOy34mhGhpv
- ZS6JBueJ9VmUTKZ3I/KBkt8vPj1uQrhbetW887Iuvk1t3rJfjkbCsOf+vfWJIJfOJP3A
- fjEtR9LXme++xdFnsyZb4O1TkCiJz+FzL1S/XOUji1O2JAygCPfujKmCS+k0X1YkzQdc
- ZzQoZGFr+y7Hkz7Ov+qoOceQhSAC1YjPiZdQvjYSQ52LR3Tm5yQVuGppFM682wXrJ2YF
- yzPg==
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1os2ng-00010N-FG
+ for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 09:08:33 -0500
+Received: by mail-pl1-x629.google.com with SMTP id j12so11156218plj.5
+ for <qemu-riscv@nongnu.org>; Mon, 07 Nov 2022 06:08:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=lOcqtD2BP4tyB/GtYPI7EiqQoPm8QHujQwf9AHtESSc=;
+ b=PvWCSIIv+bSt1l6xhMnesgTPlfoRwSBdpZy6Ft0spbqBf39k8DWz5GiQKhTem04sqN
+ /3YOF8KT426dp3Wt6+4+bNLJ5O1b31cIVLh30D0dA6WY+4JAkjfPsJ/ejpPD2d+9i69w
+ dFvQ8ggybgvyWUg70bQGlD0miZFSNBnQ9AbKOho9Du3+DjoKVAnJYrFcaCpVjP8Z4CgC
+ uuVKSJD1+RCkoTWhdIXEqjA/1LU1fvOTx5HWFlu9iJp3l6woYMRojG5mkM9bSmccBZU9
+ KKfhC4uiT9B0fhyX0bDpCd2HjgJA4L7Oxq9aLBTJdOv2OS6MwS92mpEGcMgJVV8Un7Al
+ aIJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0pEsKtTcmK6Ge/i5EQBQ6LfASf28dXHI1IPLk/HalPo=;
- b=wXkq+lr0OWifjpELhRJu2FdF8K1XUaVMa3GKm7DdUates/jW2LeETC/yIwTu3CNq0d
- vPy7lv0Mg6gZUn/tNVuKy3EA0rj4s3mXR5nxkca5QxcyPlly/O9VZF75fgxUWly79dra
- jW21/sHRPce4ckZbQdpM1RVE0krbBhVrsOZAdoQdmmpsB/H5Fu/3llmoKAzlA9vK45Ga
- qmCOpILyZmbnJQclbjMAuEXIGYpB/NFOiPBZ1TMpYLeCcPbg01mLHD8sY9wIzFUwPswZ
- x7jDiZ7cIJasJB2Y00NHwUOs5LH6HP+rZmX+W7o7T/jk2lBbWbuZIBgONEXa7UW0/kKm
- wc6Q==
-X-Gm-Message-State: ACrzQf3jd4/He9OLk66j1w+BMNwCEHS4qqjF2/sbMFaOBqcmDmNGMZrp
- rNsEA+ljXay4FBcveQSjPNA7kA==
-X-Google-Smtp-Source: AMsMyM48c5G4Zf6qxAQhzdhZEm5+6P01MPokmYhExFsdKmZGTgu2hjFS+CYWpaq8usiMrMbmJH8dQw==
-X-Received: by 2002:a05:600c:15c9:b0:3cf:6054:3b3b with SMTP id
- v9-20020a05600c15c900b003cf60543b3bmr36236680wmf.167.1667830095900; 
- Mon, 07 Nov 2022 06:08:15 -0800 (PST)
-Received: from [192.168.1.115] ([185.126.107.38])
- by smtp.gmail.com with ESMTPSA id
- hn3-20020a05600ca38300b003cf78aafdd7sm8142716wmb.39.2022.11.07.06.08.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Nov 2022 06:08:15 -0800 (PST)
-Message-ID: <93096c36-fd3a-2e2f-4ae9-3bf9e4287204@linaro.org>
-Date: Mon, 7 Nov 2022 15:08:13 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.4.1
-Subject: Re: [PATCH V2] hw/riscv: virt: Remove size restriction for pflash
-Content-Language: en-US
-To: Peter Maydell <peter.maydell@linaro.org>,
- Sunil V L <sunilvl@ventanamicro.com>, Markus Armbruster <armbru@redhat.com>,
- Bernhard Beschow <shentey@gmail.com>
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lOcqtD2BP4tyB/GtYPI7EiqQoPm8QHujQwf9AHtESSc=;
+ b=ySTdDpA6PDqvauclnxmviLVmtd9QPzqYCAsP2tcWu00h7kDGMTjnhHrrKn/KesQUQm
+ gqRIOropr6tqkAI4kNgkEQQa1HWLkK/csjT5Fu9kH+sC0sPneZrgrlWrdbGGZOIyCohs
+ vlU+9KzNLMCSZK2CJHrl3J2PvrRhjIEFMK+wwf7l1WJIBfl7pt/bI7/7OUiERdAa0RmU
+ 7GlaPmILzlv/DZKGKo27z/KVBTpjBTC0UQ1Z0KuoVdspDwYbB+STxiGBIafJCqEnN09U
+ g9d0ksyjcqNr5zKmvIP629jp+hWHGlEjUrYpgudic++Y0jtextXY4ov6v+bN/r8Zujyk
+ qytw==
+X-Gm-Message-State: ACrzQf1jKNJqGYjB/AfD2aBQsnEz2Nky1UBYyeW1jAo8n7pCTlO7MrGU
+ 5IqCvkQ3Aho/fF7RWLcpJ49Byw==
+X-Google-Smtp-Source: AMsMyM4+V6Er7lGfaHrgpK1v0uXtMfOZMYDyFVYCnhKf66GQiBgr4aVu2luHrL9ENjZkUEAMmhkGuQ==
+X-Received: by 2002:a17:902:e84e:b0:186:b699:d4ab with SMTP id
+ t14-20020a170902e84e00b00186b699d4abmr50210109plg.116.1667830111201; 
+ Mon, 07 Nov 2022 06:08:31 -0800 (PST)
+Received: from sunil-laptop ([49.206.12.236]) by smtp.gmail.com with ESMTPSA id
+ g74-20020a62524d000000b0055f209690c0sm4537805pfb.50.2022.11.07.06.08.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Nov 2022 06:08:30 -0800 (PST)
+Date: Mon, 7 Nov 2022 19:38:24 +0530
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: Peter Maydell <peter.maydell@linaro.org>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Gerd Hoffmann <kraxel@redhat.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+ Bin Meng <bin.meng@windriver.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Subject: Re: [PATCH V2] hw/riscv: virt: Remove size restriction for pflash
+Message-ID: <Y2kRWNnk7wDxPnBK@sunil-laptop>
 References: <20221107130217.2243815-1-sunilvl@ventanamicro.com>
  <CAFEAcA8X3Q7s6qZ=ojE9fTLG464rrZw+FX=4hmMOhwR-Q4n2sA@mail.gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 In-Reply-To: <CAFEAcA8X3Q7s6qZ=ojE9fTLG464rrZw+FX=4hmMOhwR-Q4n2sA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -87,56 +83,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2022 14:08:27 -0000
+X-List-Received-Date: Mon, 07 Nov 2022 14:08:34 -0000
 
-On 7/11/22 14:06, Peter Maydell wrote:
+On Mon, Nov 07, 2022 at 01:06:38PM +0000, Peter Maydell wrote:
 > On Mon, 7 Nov 2022 at 13:03, Sunil V L <sunilvl@ventanamicro.com> wrote:
->>
->> The pflash implementation currently assumes fixed size of the
->> backend storage. Due to this, the backend storage file needs to be
->> exactly of size 32M. Otherwise, there will be an error like below.
->>
->> "device requires 33554432 bytes, block backend provides 4194304 bytes"
->>
->> Fix this issue by using the actual size of the backing store.
->>
->> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
->> ---
+> >
+> > The pflash implementation currently assumes fixed size of the
+> > backend storage. Due to this, the backend storage file needs to be
+> > exactly of size 32M. Otherwise, there will be an error like below.
+> >
+> > "device requires 33554432 bytes, block backend provides 4194304 bytes"
+> >
+> > Fix this issue by using the actual size of the backing store.
+> >
+> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> > ---
 > 
 > Do you really want the flash device size presented to the guest
 > to be variable depending on what the user passed as a block backend?
 > I don't think this is how we handle flash devices on other boards...
+> 
 
-Ideally handling smaller/bigger backend size should be transparent for
-machine frontend, but we never agreed on what are user expectations and
-how to deal with such cases.
+Hi Peter,
 
-Long term I'd go for:
+x86 appears to support variable flash but arm doesn't. What is
+the reason for not supporting variable size flash in arm?
 
-- if flash is read-only
-
-   a/ bigger backend: display a warning and ignore extra backend data.
-
-   b/ smaller backend: assume flash block is in erased state and fill
-      missing gap with -1 (the default erase value), displaying a warning
-      on startup.
-
-- if flash is read-write
-
-   a/ bigger backend: display a warning and ignore extra backend data.
-
-   b/ smaller backend: add a property to pflash device to handle missing
-      gap as erased data. If this flag is not set, display a hint and
-      exit with an error.
-
-In Sunil particular case, I suppose the issue comes from commit
-334c388f25 ("hw/block/pflash_cfi0{1, 2}: Error out if device length
-isn't a power of two") which I'm going to revert because the code
-base is not ready for such check:
-
-https://lore.kernel.org/qemu-devel/78b914c5-ce7e-1d4a-0a67-450f286eb869@linaro.org/
-
-Regards,
-
-Phil.
+Thanks
+Sunil
 
