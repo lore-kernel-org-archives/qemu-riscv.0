@@ -1,79 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ory7r-0008G8-E9
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Nov 2022 04:09:03 -0500
+	id 1os0Em-00058e-8M
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Nov 2022 06:24:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1ory7k-0008F3-P6
- for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 04:08:59 -0500
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ id 1os0Eb-00057c-8i
+ for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 06:24:13 -0500
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1ory7i-0007x7-Um
- for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 04:08:56 -0500
-Received: by mail-pj1-x1033.google.com with SMTP id gw22so9962635pjb.3
- for <qemu-riscv@nongnu.org>; Mon, 07 Nov 2022 01:08:50 -0800 (PST)
+ id 1os0EU-0001YO-G7
+ for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 06:24:07 -0500
+Received: by mail-pj1-x1029.google.com with SMTP id
+ r61-20020a17090a43c300b00212f4e9cccdso14243737pjg.5
+ for <qemu-riscv@nongnu.org>; Mon, 07 Nov 2022 03:24:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rd2lq5ksElHgZ+7844aSdBRInH9/UWMQ4PhblAlVBWM=;
- b=EI8e036vnbQDC8UHToH/x4yw4T9MkCJ3l5oP0ChJDUkmlZkrzzzl1Kqgz63HzaJoFU
- P/s6fu6i7HZrpyahkX9V5MD1yr9vXjyeIF0JLIDJExFxtyXbDBzR/go3E7tjR6gFZ02Q
- okGOF8BOCY24h4NhtuYM4VarSlXRvJSLiksi5k9nYP/Npf6QFH1+L3WmnuMRs/Shh6fh
- /1zvEAEirKWfk+kM61Z4EcyAVH9ur6jgBqn/GcpV+/vRBhou+jIaJXbkg5VQkNq0K7ub
- gdONoh8DhB4XO/w9kbqsfo2GaVbkp847tG+nf2k7C3nFEQ24L+obbZ/fG/RwrKKdVirQ
- fVNw==
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=In7EM83NQpw5FRQfyQChh1DJYtJcwIhOwu3buUisba0=;
+ b=i9htem0j9rpPBVFI3RGz3ePVC+6QW3DgpOsleM+gGndF4wpKT0M07Ii38LvkGQzgW+
+ aTZtULwgGECFLRAnpTC0yYj1a2XcMreM9guJS1Xs8k/33Q67qWKtuuEA6i/Q2EC2CHUa
+ tUBySY49t38GhshNc/MuYv0rQtPsarFGXeopgUGEe8TYDV1gAvY3saW6yjcklQpl6Kr2
+ Gu3Xw8m1KBWDWL6r1lE6tWkZaeBkBhzH0HlHoXQOWMqtJi7LCq1fDWMFLS7cdSFUzFr7
+ pUwEtXf0ha0McCN60JX9yomyfuiI7YlSnGaeIzR9Rj9x2smt4Q429sBfd3CjcraiySMX
+ TiSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rd2lq5ksElHgZ+7844aSdBRInH9/UWMQ4PhblAlVBWM=;
- b=Ehf06vGeS0kWACBOAMoyO1mrk9kEvw3HH2VVInEJababiPGIVpz2kNxRa0HXAi3cbT
- Ywez2yRp7p8amJ9I5nlJ+MDBqif2IeCKlU6JkTyR1imB4vcepJ7lQS1ALI8+jtSKzwGN
- e4JAqFrYcuV19NOj7ZtQMk5+8er4UbsIh6tR725dj2nQyTLEHKSAVf6g3HRadiPMnYIn
- EVWHQRZEpFtdSEYObHlNxbRvnsCAo4eZb43VDgAN49dNiYOMbiapRbugEkA07oszQ3wI
- fKjk7WRK6egJuDJ1eySNzvybzgjYJzfHOXaxF4lazVPPLfCrV+9ER/c0ITLggTboDmXS
- sPTA==
-X-Gm-Message-State: ACrzQf2FvVxVjIDENYHWKNJsiGiwb4xqaCiymaND9bfh6jSHqHNeTwxL
- 3YBYT6aUA8hwEyEq59oZpYsgsw==
-X-Google-Smtp-Source: AMsMyM4vhc9qdjYpm9zaPBYq6di48YJ7yLAJLpVZCVstr6WAHjpQl72KdUhFykeAkoE1kyKQz9nomg==
-X-Received: by 2002:a17:90b:254e:b0:20b:7e26:f0a0 with SMTP id
- nw14-20020a17090b254e00b0020b7e26f0a0mr66166683pjb.203.1667812129374; 
- Mon, 07 Nov 2022 01:08:49 -0800 (PST)
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=In7EM83NQpw5FRQfyQChh1DJYtJcwIhOwu3buUisba0=;
+ b=aDIpoSP4QXnTPFxOhl4aysvX+buP1B5GzFG7XLZ+fMvUbBetRyTV/jgV9JFa4VETPD
+ v/G5iJIYj7Fe9G0QUiEbq1WstvAPChnVWil/pwfzqONzzi94wz1sgyt/1WaMWVxAjpVS
+ kv0eiLN+ktP91GdjB2CZNk1Z0awZ1RnCdjLRncBio13k3c5oW1yeF3JbLH14OdvM6VFh
+ HqS1wS1gKX7oC9Hxk/bcgwZoLDZtV3pjWrLX556IfwmMegrG4o8JkjlcTsO1gSVsaTu+
+ 4UMY2J34TeUZxDhkhKJzjSVkMWq4b2BwWC3R7iB6mXbOB76Wm/6I/4H1kYFhhswo/uEi
+ nM5w==
+X-Gm-Message-State: ACrzQf2tQngROkEz48FHiyiABXfRfXFTyfw3jdpRtQz2vRyXY3UraVNW
+ 2OBOx9zrWBLy9Tda4j/ZlbkN8g==
+X-Google-Smtp-Source: AMsMyM6pPTmvT8O9NiCp5VWcK4eBDUJNhOhco/jMSnLOE5adwu1HcixUiUH1zgtS4rj+2ykNM4Vg0g==
+X-Received: by 2002:a17:902:cecf:b0:187:fd2:79c3 with SMTP id
+ d15-20020a170902cecf00b001870fd279c3mr33374706plg.34.1667820241118; 
+ Mon, 07 Nov 2022 03:24:01 -0800 (PST)
 Received: from sunil-laptop ([49.206.12.236]) by smtp.gmail.com with ESMTPSA id
- ch8-20020a17090af40800b002086ac07041sm3775910pjb.44.2022.11.07.01.08.45
+ j12-20020a170902da8c00b00186b04776b0sm4783848plx.118.2022.11.07.03.23.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Nov 2022 01:08:48 -0800 (PST)
-Date: Mon, 7 Nov 2022 14:38:41 +0530
+ Mon, 07 Nov 2022 03:24:00 -0800 (PST)
+Date: Mon, 7 Nov 2022 16:53:53 +0530
 From: Sunil V L <sunilvl@ventanamicro.com>
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: Mike Maslenkin <mike.maslenkin@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+To: maobibo <maobibo@loongson.cn>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>,
  Gerd Hoffmann <kraxel@redhat.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Pawel Polawski <ppolawsk@redhat.com>
+ qemu-devel@nongnu.org
 Subject: Re: [PATCH] hw/riscv: virt: Remove size restriction for pflash
-Message-ID: <Y2jLGV6xZxPNGrHR@sunil-laptop>
+Message-ID: <Y2jqyYsiZPh1+TzE@sunil-laptop>
 References: <20221106143900.2229449-1-sunilvl@ventanamicro.com>
- <CAL77WPADAWY8+2FZSQ=4PRcuUrwuUQ22CU+NoVLABM_r+px0pw@mail.gmail.com>
- <Y2ibaoOzna0iT7Sa@sunil-laptop>
- <20221107084803.myuc77xssykljyxv@kamzik>
+ <80ccc060-32a7-bc38-bf2b-2ef5959a7e0c@loongson.cn>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20221107084803.myuc77xssykljyxv@kamzik>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x1033.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <80ccc060-32a7-bc38-bf2b-2ef5959a7e0c@loongson.cn>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x1029.google.com
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,31 +85,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2022 09:09:01 -0000
+X-List-Received-Date: Mon, 07 Nov 2022 11:24:14 -0000
 
-On Mon, Nov 07, 2022 at 09:48:03AM +0100, Andrew Jones wrote:
-> On Mon, Nov 07, 2022 at 11:16:00AM +0530, Sunil V L wrote:
-> > On Sun, Nov 06, 2022 at 10:20:57PM +0300, Mike Maslenkin wrote:
-> > > Hello Sunil!
-> > > 
-> > > What about virt_machine_done() function?
-> > > kernel_entry variable still points to the second flash started from
-> > > virt_memmap[VIRT_FLASH].size / 2.
-> > > 
+On Mon, Nov 07, 2022 at 05:57:45PM +0800, maobibo wrote:
+> 
+> 
+> 在 2022/11/6 22:39, Sunil V L 写道:
+> > The pflash implementation currently assumes fixed size of the
+> > backend storage. Due to this, the backend storage file needs to be
+> > exactly of size 32M. Otherwise, there will be an error like below.
 > > 
-> > The base address of the flash has not changed to keep things flexible. So, I
-> > didn't change this portion of the code to keep the changes minimal.
+> > "device requires 33554432 bytes, block backend provides 3145728 bytes"
+> > 
+> > Fix this issue by using the actual size of the backing store.
+> > 
+> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> > ---
+> >  hw/riscv/virt.c | 33 +++++++++++++++++++++++++--------
+> >  1 file changed, 25 insertions(+), 8 deletions(-)
+> > 
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index a5bc7353b4..aad175fa31 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -49,6 +49,7 @@
+> >  #include "hw/pci/pci.h"
+> >  #include "hw/pci-host/gpex.h"
+> >  #include "hw/display/ramfb.h"
+> > +#include "sysemu/block-backend.h"
+> >  
+> >  /*
+> >   * The virt machine physical address space used by some of the devices
+> > @@ -144,10 +145,17 @@ static void virt_flash_map1(PFlashCFI01 *flash,
+> >                              MemoryRegion *sysmem)
+> >  {
+> >      DeviceState *dev = DEVICE(flash);
+> > +    BlockBackend *blk;
+> > +    hwaddr real_size;
+> >  
+> > -    assert(QEMU_IS_ALIGNED(size, VIRT_FLASH_SECTOR_SIZE));
+> > -    assert(size / VIRT_FLASH_SECTOR_SIZE <= UINT32_MAX);
+> > -    qdev_prop_set_uint32(dev, "num-blocks", size / VIRT_FLASH_SECTOR_SIZE);
+> > +    blk = pflash_cfi01_get_blk(flash);
+> > +
+> > +    real_size = blk ? blk_getlength(blk): size;
+> > +
+> > +    assert(real_size);
+> > +    assert(QEMU_IS_ALIGNED(real_size, VIRT_FLASH_SECTOR_SIZE));
+> > +    assert(real_size / VIRT_FLASH_SECTOR_SIZE <= UINT32_MAX);
+> How about add one sentence?
+>        assert(real_size <= size);   
 > 
-> I think we should change virt_machine_done() to be consistent with
-> create_fdt_flash() and also add a comment in virt_flash_map() explaining
-> the base addresses are statically determined from virt_memmap[VIRT_FLASH],
-> but the sizes are variable and determined in virt_flash_map1().
+> As defined VIRT_FLASH memory space, the total memory space size 64M,
+> Pflash0/Pflash1 cannot be more than 32M. Supposing real size of pflash0
+> is 33M, there will be conflict with address space of pflash1.
+> 
+> regards
+> bibo, mao
 > 
 
-Sure Drew. Let me update and send V2.
+Good catch!. Thank you. Will add it in V2.
 
 Thanks
 Sunil
-> Thanks,
-> drew
 
