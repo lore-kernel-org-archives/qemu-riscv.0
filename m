@@ -1,58 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1osPur-0004Op-M7
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Nov 2022 09:49:29 -0500
+	id 1osQ9F-00051v-GC
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Nov 2022 10:04:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1osPup-0004Od-QS
- for qemu-riscv@nongnu.org; Tue, 08 Nov 2022 09:49:27 -0500
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1osPuk-0007l9-Tz
- for qemu-riscv@nongnu.org; Tue, 08 Nov 2022 09:49:27 -0500
-Received: by mail-ed1-x531.google.com with SMTP id 21so22867632edv.3
- for <qemu-riscv@nongnu.org>; Tue, 08 Nov 2022 06:49:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=TX55RcZFODLRpBQp7mImEqmVNrtuS2jiyxO2W/P4eis=;
- b=JB6Er2b+Q1N3wD2RnI6Jv5jRdkTPCVdIbLZqMP0sZ8OAnotyTieHnuAOE4j2hklPss
- l7XS16oCOXfZe31u+JTwGYOXXrTaKS/SLT5Kz+IORdPPU6UjiYzGwxiYWBfG8+loqUHO
- 1bm4rDkIKBR78txerWN6sRx7HgG1cr3908D7V3AYi2tcTyckJOoECpyVOQEuMt22q1/C
- 06GY3QuQSrTNUU04GWphytYhFA5XxznTQkaURijAwuv5AT9L4the8G+gsXHxRwDciLRb
- Iz4xiJXoA+tvidNy3ijcEXVFl8+geKQPxvQuka25IeKPFmrspTcnmKOU9SQo89nSZMvc
- Zckg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TX55RcZFODLRpBQp7mImEqmVNrtuS2jiyxO2W/P4eis=;
- b=FvabIazQQPQMK7SGpmWAcKj+3dhlcTQo27tvRKe7Nmy8ZvkkFsT++/yTHmBaCO9Ua8
- L4C9+a/dHeh6sEg4BA39iNgChb+LFY1Hoc/VaR13T3RfqS6vw+2/0c9fO9+AHDtGTXr0
- OEFGUp13I7IRDn+58UuDvYnSQ4SEuRZEmhFHpiJ6a1Yf1bWn7V26DHQ7NzANd5oqD/Mv
- VhgYSrrsrEjIY/DJl9Y1kItVraSoM1BnQdW+c07Wz+qG+L+wALocYs/Ki52wcYm7t2ft
- YXoFMPl6E1j3uTEdHn6tZu8LFq3vb+xxLqiJaQKTMkcdnHq+lMmztG/rFtLgxjvTEyXm
- KruA==
-X-Gm-Message-State: ACrzQf2S1eF7Ofj8FQMpn4rwXW+kGy9zk0WyGaTwpo/IhVpZdedzdJwy
- tpyR8Rr/wfoS1jNhZ6NqvxvpJg==
-X-Google-Smtp-Source: AMsMyM6OQH+4V9TOArlqFNFRbiEozUGbbqIY35xXDej6oQp9ZgT88shaW+hq/mLqJ+ijHP2o1FPXaw==
-X-Received: by 2002:a50:e616:0:b0:461:fc07:b630 with SMTP id
- y22-20020a50e616000000b00461fc07b630mr55893499edm.219.1667918961166; 
- Tue, 08 Nov 2022 06:49:21 -0800 (PST)
-Received: from localhost (2001-1ae9-1c2-4c00-748-2a9a-a2a6-1362.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:748:2a9a:a2a6:1362])
- by smtp.gmail.com with ESMTPSA id
- k14-20020a056402048e00b00456c6b4b777sm5591188edv.69.2022.11.08.06.49.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Nov 2022 06:49:20 -0800 (PST)
-Date: Tue, 8 Nov 2022 15:49:19 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1osQ92-0004vM-R0
+ for qemu-riscv@nongnu.org; Tue, 08 Nov 2022 10:04:14 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1osQ90-0005R5-I9
+ for qemu-riscv@nongnu.org; Tue, 08 Nov 2022 10:04:08 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1667919845;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=jxQOX9qI5Q816weuY2735uu256Gb8VOPiCr6mUMaQKY=;
+ b=QH7TrWIHP1EKJgYIMQFjHmTwsvagP65Vdc0MHEvV9tIrRzzPf4PbbYKCm5JuujG1rEmJ8D
+ pRUVdwlEphmM0JYzSOdlsgLIBd+Wxwc7lUN6ab4QNQMH+3rAVXyHNy71RFqADl51r1zpyf
+ bc6glHHZ9q8qH1ZiNxE8eVVC1jsW1k8=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-171-EtURvIGBM92myZ9me_qNLg-1; Tue, 08 Nov 2022 10:04:01 -0500
+X-MC-Unique: EtURvIGBM92myZ9me_qNLg-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.1])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1B640185A7A9;
+ Tue,  8 Nov 2022 15:04:01 +0000 (UTC)
+Received: from redhat.com (unknown [10.33.36.36])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id E833640C2064;
+ Tue,  8 Nov 2022 15:03:58 +0000 (UTC)
+Date: Tue, 8 Nov 2022 15:03:56 +0000
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>,
+Cc: Andrew Jones <ajones@ventanamicro.com>,
  Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Sunil V L <sunilvl@ventanamicro.com>,
  Peter Maydell <peter.maydell@linaro.org>,
@@ -62,7 +49,8 @@ Cc: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>,
  Gerd Hoffmann <kraxel@redhat.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, David Edmondson <david.edmondson@oracle.com>
 Subject: Re: [PATCH V2] hw/riscv: virt: Remove size restriction for pflash
-Message-ID: <20221108144919.3t2ryv5mbzfvgm3k@kamzik>
+Message-ID: <Y2pv3M5voj2iLqTo@redhat.com>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 References: <20221107130217.2243815-1-sunilvl@ventanamicro.com>
  <CAFEAcA8X3Q7s6qZ=ojE9fTLG464rrZw+FX=4hmMOhwR-Q4n2sA@mail.gmail.com>
  <Y2kRWNnk7wDxPnBK@sunil-laptop> <871qqehib4.fsf@linaro.org>
@@ -71,19 +59,21 @@ References: <20221107130217.2243815-1-sunilvl@ventanamicro.com>
  <Y2lBnPuUA4bgKCLL@redhat.com>
  <934d7560-daee-9f7e-2abb-640575768b2f@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 In-Reply-To: <934d7560-daee-9f7e-2abb-640575768b2f@linaro.org>
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x531.google.com
+User-Agent: Mutt/2.2.7 (2022-08-07)
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.1
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,13 +86,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Nov 2022 14:49:28 -0000
+X-List-Received-Date: Tue, 08 Nov 2022 15:04:14 -0000
 
-On Tue, Nov 08, 2022 at 03:12:42PM +0100, Philippe Mathieu-Daudé wrote:
-> On 7/11/22 18:34, Daniel P. Berrangé wrote:
+On Tue, Nov 08, 2022 at 03:12:42PM +0100, Philippe Mathieu-DaudÃ© wrote:
+> On 7/11/22 18:34, Daniel P. BerrangÃ© wrote:
 > > On Mon, Nov 07, 2022 at 06:32:01PM +0100, Andrew Jones wrote:
-> > > On Mon, Nov 07, 2022 at 04:19:10PM +0000, Daniel P. Berrangé wrote:
-> > > > On Mon, Nov 07, 2022 at 03:50:44PM +0000, Alex Bennée wrote:
+> > > On Mon, Nov 07, 2022 at 04:19:10PM +0000, Daniel P. BerrangÃ© wrote:
+> > > > On Mon, Nov 07, 2022 at 03:50:44PM +0000, Alex BennÃ©e wrote:
 > > > > > 
 > > > > > Sunil V L <sunilvl@ventanamicro.com> writes:
 > > > > > 
@@ -163,15 +153,6 @@ On Tue, Nov 08, 2022 at 03:12:42PM +0100, Philippe Mathieu-Daudé wrote:
 > Drew might be referring to:
 > 
 > https://lore.kernel.org/qemu-devel/20210810134050.396747-1-david.edmondson@oracle.com/
-
-I was thinking of a different one, but thanks for the reference to this
-one. Daniel's qcow2 proposal sounds like something worth investigating,
-since some padding makes sense, but the guess for how much will likely
-be wrong one direction or the other.
-
-Thanks,
-drew
-
 > 
 >  > Currently ARM UEFI images are typically built as 2MB/768kB flash
 >  > images for code and variables respectively. These images are both
@@ -193,5 +174,18 @@ drew
 > https://www.mail-archive.com/qemu-devel@nongnu.org/msg760065.html
 > - Red Hat
 > https://www.mail-archive.com/qemu-block@nongnu.org/msg81714.html
-> 
+
+I've not looked at the patch series above in detail, but I'm thinking
+that even if the file is 64 MB in size, it should never read all 64 MB
+of data. The block layer APIs have ability to detect and report holes,
+so it ought to be possible to only read the data which is non-zero,
+and thus avoid dirtying more than 3 MB of useful
+
+With regards,
+Daniel
+-- 
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
+
 
