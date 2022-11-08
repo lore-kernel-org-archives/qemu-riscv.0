@@ -1,71 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1osQ9F-00051v-GC
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Nov 2022 10:04:34 -0500
+	id 1osR2V-0005Z3-M9
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Nov 2022 11:01:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1osQ92-0004vM-R0
- for qemu-riscv@nongnu.org; Tue, 08 Nov 2022 10:04:14 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1osR2R-0005XM-7R
+ for qemu-riscv@nongnu.org; Tue, 08 Nov 2022 11:01:23 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1osQ90-0005R5-I9
- for qemu-riscv@nongnu.org; Tue, 08 Nov 2022 10:04:08 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1osR2P-00009x-5f
+ for qemu-riscv@nongnu.org; Tue, 08 Nov 2022 11:01:22 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1667919845;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
+ s=mimecast20190719; t=1667923279;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=jxQOX9qI5Q816weuY2735uu256Gb8VOPiCr6mUMaQKY=;
- b=QH7TrWIHP1EKJgYIMQFjHmTwsvagP65Vdc0MHEvV9tIrRzzPf4PbbYKCm5JuujG1rEmJ8D
- pRUVdwlEphmM0JYzSOdlsgLIBd+Wxwc7lUN6ab4QNQMH+3rAVXyHNy71RFqADl51r1zpyf
- bc6glHHZ9q8qH1ZiNxE8eVVC1jsW1k8=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=en6scsxl1Eh3dQCJGQHarbFsO16HbysKIN+t5ajiUSQ=;
+ b=SQtPK1IJimW870LrfMEfk6EUmu6LryGtJpqT/Hxyev3IVP/wDRLLcco/GKKdVw0X253G97
+ eGs6BvaU75AV2bj6ucegbAYaZfvJv/tSTkq8aX8Qvv6jMKebnaLiVxyIoKb7hOYOdYRBfu
+ 0JUr5QEmmvW9QmV0oWwmLpI+cqNtChA=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-171-EtURvIGBM92myZ9me_qNLg-1; Tue, 08 Nov 2022 10:04:01 -0500
-X-MC-Unique: EtURvIGBM92myZ9me_qNLg-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
- [10.11.54.1])
+ us-mta-613-0UuHnuniM5KlnDMTNsVNJg-1; Tue, 08 Nov 2022 11:01:14 -0500
+X-MC-Unique: 0UuHnuniM5KlnDMTNsVNJg-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1B640185A7A9;
- Tue,  8 Nov 2022 15:04:01 +0000 (UTC)
-Received: from redhat.com (unknown [10.33.36.36])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id E833640C2064;
- Tue,  8 Nov 2022 15:03:58 +0000 (UTC)
-Date: Tue, 8 Nov 2022 15:03:56 +0000
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: Andrew Jones <ajones@ventanamicro.com>,
- Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Gerd Hoffmann <kraxel@redhat.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, David Edmondson <david.edmondson@oracle.com>
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 867613C1E730;
+ Tue,  8 Nov 2022 16:01:13 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.193.175])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id BD3ECC15BB5;
+ Tue,  8 Nov 2022 16:01:11 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 144A821E6921; Tue,  8 Nov 2022 17:01:08 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Sunil V L <sunilvl@ventanamicro.com>,  Palmer Dabbelt
+ <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,  Bin
+ Meng <bin.meng@windriver.com>,  Gerd Hoffmann <kraxel@redhat.com>,
+ qemu-riscv@nongnu.org,  qemu-devel@nongnu.org
 Subject: Re: [PATCH V2] hw/riscv: virt: Remove size restriction for pflash
-Message-ID: <Y2pv3M5voj2iLqTo@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 References: <20221107130217.2243815-1-sunilvl@ventanamicro.com>
  <CAFEAcA8X3Q7s6qZ=ojE9fTLG464rrZw+FX=4hmMOhwR-Q4n2sA@mail.gmail.com>
- <Y2kRWNnk7wDxPnBK@sunil-laptop> <871qqehib4.fsf@linaro.org>
- <Y2kv/k5oKGOd+90w@redhat.com>
- <20221107173201.343hkqqugkzdzqcf@kamzik>
- <Y2lBnPuUA4bgKCLL@redhat.com>
- <934d7560-daee-9f7e-2abb-640575768b2f@linaro.org>
+ <Y2kRWNnk7wDxPnBK@sunil-laptop>
+ <CAFEAcA-121P8gwOHRsbp4swP9ah1CZO8rVP75+WyvgF1pou8Aw@mail.gmail.com>
+Date: Tue, 08 Nov 2022 17:01:08 +0100
+In-Reply-To: <CAFEAcA-121P8gwOHRsbp4swP9ah1CZO8rVP75+WyvgF1pou8Aw@mail.gmail.com>
+ (Peter Maydell's message of "Mon, 7 Nov 2022 16:08:27 +0000")
+Message-ID: <87tu395tbv.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <934d7560-daee-9f7e-2abb-640575768b2f@linaro.org>
-User-Agent: Mutt/2.2.7 (2022-08-07)
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.1
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -86,106 +74,106 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Nov 2022 15:04:14 -0000
+X-List-Received-Date: Tue, 08 Nov 2022 16:01:23 -0000
 
-On Tue, Nov 08, 2022 at 03:12:42PM +0100, Philippe Mathieu-Daudé wrote:
-> On 7/11/22 18:34, Daniel P. Berrangé wrote:
-> > On Mon, Nov 07, 2022 at 06:32:01PM +0100, Andrew Jones wrote:
-> > > On Mon, Nov 07, 2022 at 04:19:10PM +0000, Daniel P. Berrangé wrote:
-> > > > On Mon, Nov 07, 2022 at 03:50:44PM +0000, Alex Bennée wrote:
-> > > > > 
-> > > > > Sunil V L <sunilvl@ventanamicro.com> writes:
-> > > > > 
-> > > > > > On Mon, Nov 07, 2022 at 01:06:38PM +0000, Peter Maydell wrote:
-> > > > > > > On Mon, 7 Nov 2022 at 13:03, Sunil V L <sunilvl@ventanamicro.com> wrote:
-> > > > > > > > 
-> > > > > > > > The pflash implementation currently assumes fixed size of the
-> > > > > > > > backend storage. Due to this, the backend storage file needs to be
-> > > > > > > > exactly of size 32M. Otherwise, there will be an error like below.
-> > > > > > > > 
-> > > > > > > > "device requires 33554432 bytes, block backend provides 4194304 bytes"
-> > > > > > > > 
-> > > > > > > > Fix this issue by using the actual size of the backing store.
-> > > > > > > > 
-> > > > > > > > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > > > > > > > ---
-> > > > > > > 
-> > > > > > > Do you really want the flash device size presented to the guest
-> > > > > > > to be variable depending on what the user passed as a block backend?
-> > > > > > > I don't think this is how we handle flash devices on other boards...
-> > > > > > > 
-> > > > > > 
-> > > > > > Hi Peter,
-> > > > > > 
-> > > > > > x86 appears to support variable flash but arm doesn't. What is
-> > > > > > the reason for not supporting variable size flash in arm?
-> > > > > 
-> > > > > If I recall from the last time we went around this is was the question
-> > > > > of what you should pad it with.
-> > > > 
-> > > > Padding is a very good thing from the POV of upgrades. Firmware has shown
-> > > > a tendancy to change (grow) over time, and the size has an impact of the
-> > > > guest ABI/live migration state.
-> > > > 
-> > > > To be able to live migrate, or save/restore to/from files, then the machine
-> > > > firmware size needs to be sufficient to cope with future size changes of
-> > > > the firmware. The best way to deal with this is to not use the firmware
-> > > > binaries' minimum compiled size, but instead to pad it upto a higher
-> > > > boundary.
-> > > > 
-> > > > Enforcing such padding is a decent way to prevent users from inadvertantly
-> > > > painting themselves into a corner with a very specific firmware binary
-> > > > size at initial boot.
-> > > 
-> > > Padding is a good idea, but too much causes other problems. When building
-> > > lightweight VMs which may pull the firmware image from a network,
-> > > AArch64 VMs require 64MB of mostly zeros to be transferred first, which
-> > > can become a substantial amount of the overall boot time[*]. Being able to
-> > > create images smaller than the total flash device size, but still add some
-> > > pad for later growth, seems like the happy-medium to shoot for.
-> > 
-> > QEMU configures the firmware using -blockdev, so can use any file
-> > format that QEMU supports at the block layer.  IOW, you can store
-> > the firmware in a qcow2 file and thus you will never fetch any
-> > of the padding zeros to be transferred.  That said I'm not sure
-> > that libvirt supports anything other than a raw file today.
-> 
-> Drew might be referring to:
-> 
-> https://lore.kernel.org/qemu-devel/20210810134050.396747-1-david.edmondson@oracle.com/
-> 
->  > Currently ARM UEFI images are typically built as 2MB/768kB flash
->  > images for code and variables respectively. These images are both
->  > then padded out to 64MB before being loaded by QEMU.
->  >
->  > Because the images are 64MB each, QEMU allocates 128MB of memory to
->  > read them, and then proceeds to read all 128MB from disk (dirtying
->  > the memory). Of this 128MB less than 3MB is useful - the rest is
->  > zero padding.
->  >
->  > On a machine with 100 VMs this wastes over 12GB of memory.
-> 
-> See previous attempts:
-> - Huawei
-> https://www.mail-archive.com/qemu-devel@nongnu.org/msg607292.html
-> - Tencent
-> https://www.mail-archive.com/qemu-devel@nongnu.org/msg742066.html
-> - Oracle
-> https://www.mail-archive.com/qemu-devel@nongnu.org/msg760065.html
-> - Red Hat
-> https://www.mail-archive.com/qemu-block@nongnu.org/msg81714.html
+Peter Maydell <peter.maydell@linaro.org> writes:
 
-I've not looked at the patch series above in detail, but I'm thinking
-that even if the file is 64 MB in size, it should never read all 64 MB
-of data. The block layer APIs have ability to detect and report holes,
-so it ought to be possible to only read the data which is non-zero,
-and thus avoid dirtying more than 3 MB of useful
+> On Mon, 7 Nov 2022 at 14:08, Sunil V L <sunilvl@ventanamicro.com> wrote:
+>>
+>> On Mon, Nov 07, 2022 at 01:06:38PM +0000, Peter Maydell wrote:
+>> > On Mon, 7 Nov 2022 at 13:03, Sunil V L <sunilvl@ventanamicro.com> wrote:
+>> > >
+>> > > The pflash implementation currently assumes fixed size of the
+>> > > backend storage. Due to this, the backend storage file needs to be
+>> > > exactly of size 32M. Otherwise, there will be an error like below.
+>> > >
+>> > > "device requires 33554432 bytes, block backend provides 4194304 bytes"
+>> > >
+>> > > Fix this issue by using the actual size of the backing store.
+>> > >
+>> > > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+>> > > ---
+>> >
+>> > Do you really want the flash device size presented to the guest
+>> > to be variable depending on what the user passed as a block backend?
+>> > I don't think this is how we handle flash devices on other boards...
+>> >
+>
+>> x86 appears to support variable flash but arm doesn't. What is
+>> the reason for not supporting variable size flash in arm?
+>
+> Mostly, that that's the straightforward thing to code.
+> Partly, that it avoids weird cases (eg you can have a backing
+> file that's an odd number of bytes but you can't have a
+> flash that size).
+>
+> If x86 has a standard way of handling this then I'm all
+> in favour of being consistent across platforms. What's
+> the x86 board doing there?
 
-With regards,
-Daniel
--- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
+I'm hardly the expert here, but I messed with it at some time... I guess
+I can try to answer.
+
+It's complicated.  More often than not, long development history + need
+for backward compatibility = complicated.  Which makes it (in my
+opinion) not a useful example to follow.
+
+We use either ROM or flash device(s) to hold the BIOS.
+
+The flash option exists since v1.1.
+
+The user interface for picking one or the other, and configure contents
+has a long and complicated history.  I'll spare you the details.
+
+ROM contents comes from an image file.  Configurable with -bios.
+Default depends on the machine type.
+
+ROM size is the image file size.  It's mapped so it ends right before
+address 2^32.
+
+It's mapped a second time so it ends right before 2^20.  If the image
+file is larger than 128KiB, only the last 128KiB are mapped there.
+
+Flash contents comes from a block backend.  Configurable with machine
+properties "pflash0" and "pflash1" (or legacy -drive if=pflash).  There
+is no default.  If you don't configure flash contents, you get ROM
+instead.
+
+Flash device size is the block backend size.  Must be a multiple of
+4KiB.
+
+If "pflash0" is configured, we create a flash device so it ends right
+before address 2^32.  If "pflash1" is also configured, we create a
+second flash device so it ends right before the first one (no gap).
+Combined size must not exceed a limit that depends on the machine type.
+
+Aside: why two flash devices?  A physical machine has just one...  Well,
+we need a read-only part for the code, and a read-write part for
+persistent configuration ("varstore" in UEFI parlance).  Physical flash
+devices let you write-protect partially, but our device models don't
+implement that, it's all or nothing.  So we use two.  Kludge.
+
+Again, there's a second mapping that ends right before 2^20, limited to
+128KiB.
+
+
+In my opinion, setting flash or ROM size to the size of the block
+backend or image file is a bad idea.  It tangles up configuration of
+frontend and backend.  We used to do this a lot (e.g. -drive).
+Untangling (e.g. -device and -blockdev) was a lot of work.  With the
+tangle kept around for compatibility.
+
+Doug McIlroy's quip applies: "KISS became MICAHI: make it complicated
+and hide it."
+
+A physical machine has a fixed flash memory size.
+
+A virtual machine models a physical machine.  It has a fixed flash
+memory size, too.
+
+If we want a machine type to model multiple variations of a physical
+machine, say multiple flash sizes, the configuration knob really belongs
+to the machine type.  Hiding it somewhere on the file system instead is
+a bad idea.
 
 
