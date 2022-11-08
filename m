@@ -1,76 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1os616-0004op-L5
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Nov 2022 12:34:36 -0500
+	id 1osDub-00069D-Qi
+	for mharc-qemu-riscv@gnu.org; Mon, 07 Nov 2022 21:00:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1os613-0004iU-1R
- for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 12:34:35 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1osDuM-000662-Rw; Mon, 07 Nov 2022 21:00:11 -0500
+Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1os611-0004q0-6M
- for qemu-riscv@nongnu.org; Mon, 07 Nov 2022 12:34:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1667842470;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=PEd3y9yQliodAttTxpeOjyz0tJTkJKzdnrRi7PdGEnc=;
- b=BUr6CdAK/YYOZr/WIO/uCcq2sY91a0c2oVLOKeFEAs9zOtBpYBX8VixQG4+c1hNF/pc4bp
- wA1GPYLuQKDPpMxvvaBZheYgncpnAtk5a/rystRwYtt54Qcprmp2ZnfUpqTvAK9DabsiAn
- f/10FUwauBLNGaeZuo1ZBugGPDeodWI=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-385-GkZrjLHqMEq2d8cqUYnffQ-1; Mon, 07 Nov 2022 12:34:26 -0500
-X-MC-Unique: GkZrjLHqMEq2d8cqUYnffQ-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
- [10.11.54.3])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 554451C07596;
- Mon,  7 Nov 2022 17:34:26 +0000 (UTC)
-Received: from redhat.com (unknown [10.33.36.58])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id E41CD1121314;
- Mon,  7 Nov 2022 17:34:23 +0000 (UTC)
-Date: Mon, 7 Nov 2022 17:34:20 +0000
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Gerd Hoffmann <kraxel@redhat.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Subject: Re: [PATCH V2] hw/riscv: virt: Remove size restriction for pflash
-Message-ID: <Y2lBnPuUA4bgKCLL@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-References: <20221107130217.2243815-1-sunilvl@ventanamicro.com>
- <CAFEAcA8X3Q7s6qZ=ojE9fTLG464rrZw+FX=4hmMOhwR-Q4n2sA@mail.gmail.com>
- <Y2kRWNnk7wDxPnBK@sunil-laptop> <871qqehib4.fsf@linaro.org>
- <Y2kv/k5oKGOd+90w@redhat.com>
- <20221107173201.343hkqqugkzdzqcf@kamzik>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1osDuJ-0005Hq-JA; Mon, 07 Nov 2022 21:00:10 -0500
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R921e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=12; SR=0;
+ TI=SMTPD_---0VUGoIP6_1667872486; 
+Received: from 30.221.97.117(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VUGoIP6_1667872486) by smtp.aliyun-inc.com;
+ Tue, 08 Nov 2022 09:54:47 +0800
+Content-Type: multipart/alternative;
+ boundary="------------SP66Zx5wG9YOW8Nhqp0S9P8J"
+Message-ID: <062197b1-7eb0-9cdd-663e-a0fae1389fae@linux.alibaba.com>
+Date: Tue, 8 Nov 2022 09:54:38 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20221107173201.343hkqqugkzdzqcf@kamzik>
-User-Agent: Mutt/2.2.7 (2022-08-07)
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.1
+Subject: Re: [PATCH v1 1/4] target/riscv: Add itrigger support when icount is
+ not enabled
+Content-Language: en-US
+To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
+Cc: Alistair Francis <alistair23@gmail.com>, qemu-riscv@nongnu.org,
+ Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ sergey.matyukevich@syntacore.com, vladimir.isaev@syntacore.com,
+ anatoly.parshintsev@syntacore.com, philipp.tomsich@vrull.eu,
+ zhiwei_liu@c-sky.com, qemu-devel@nongnu.org
+References: <20221013062946.7530-1-zhiwei_liu@linux.alibaba.com>
+ <20221013062946.7530-2-zhiwei_liu@linux.alibaba.com>
+ <CAKmqyKNTyCvjjYOrgAttW36ygGBibTHjA_f1b5AAWp+pF-xAiA@mail.gmail.com>
+ <ebdbec47-9dbe-e1a2-5033-9421710debb6@linux.alibaba.com>
+ <87wn86g3i2.fsf@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <87wn86g3i2.fsf@linaro.org>
+Received-SPF: pass client-ip=115.124.30.131;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-131.freemail.mail.aliyun.com
+X-Spam_score_int: -98
+X-Spam_score: -9.9
+X-Spam_bar: ---------
+X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ HTML_MESSAGE=0.001, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,73 +61,131 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2022 17:34:35 -0000
+X-List-Received-Date: Tue, 08 Nov 2022 02:00:15 -0000
 
-On Mon, Nov 07, 2022 at 06:32:01PM +0100, Andrew Jones wrote:
-> On Mon, Nov 07, 2022 at 04:19:10PM +0000, Daniel P. Berrangé wrote:
-> > On Mon, Nov 07, 2022 at 03:50:44PM +0000, Alex Bennée wrote:
-> > > 
-> > > Sunil V L <sunilvl@ventanamicro.com> writes:
-> > > 
-> > > > On Mon, Nov 07, 2022 at 01:06:38PM +0000, Peter Maydell wrote:
-> > > >> On Mon, 7 Nov 2022 at 13:03, Sunil V L <sunilvl@ventanamicro.com> wrote:
-> > > >> >
-> > > >> > The pflash implementation currently assumes fixed size of the
-> > > >> > backend storage. Due to this, the backend storage file needs to be
-> > > >> > exactly of size 32M. Otherwise, there will be an error like below.
-> > > >> >
-> > > >> > "device requires 33554432 bytes, block backend provides 4194304 bytes"
-> > > >> >
-> > > >> > Fix this issue by using the actual size of the backing store.
-> > > >> >
-> > > >> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > > >> > ---
-> > > >> 
-> > > >> Do you really want the flash device size presented to the guest
-> > > >> to be variable depending on what the user passed as a block backend?
-> > > >> I don't think this is how we handle flash devices on other boards...
-> > > >> 
-> > > >
-> > > > Hi Peter,
-> > > >
-> > > > x86 appears to support variable flash but arm doesn't. What is
-> > > > the reason for not supporting variable size flash in arm?
-> > > 
-> > > If I recall from the last time we went around this is was the question
-> > > of what you should pad it with.
-> > 
-> > Padding is a very good thing from the POV of upgrades. Firmware has shown
-> > a tendancy to change (grow) over time, and the size has an impact of the
-> > guest ABI/live migration state.
-> > 
-> > To be able to live migrate, or save/restore to/from files, then the machine
-> > firmware size needs to be sufficient to cope with future size changes of
-> > the firmware. The best way to deal with this is to not use the firmware
-> > binaries' minimum compiled size, but instead to pad it upto a higher
-> > boundary.
-> > 
-> > Enforcing such padding is a decent way to prevent users from inadvertantly
-> > painting themselves into a corner with a very specific firmware binary
-> > size at initial boot.
-> 
-> Padding is a good idea, but too much causes other problems. When building
-> lightweight VMs which may pull the firmware image from a network,
-> AArch64 VMs require 64MB of mostly zeros to be transferred first, which
-> can become a substantial amount of the overall boot time[*]. Being able to
-> create images smaller than the total flash device size, but still add some
-> pad for later growth, seems like the happy-medium to shoot for.
+This is a multi-part message in MIME format.
+--------------SP66Zx5wG9YOW8Nhqp0S9P8J
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-QEMU configures the firmware using -blockdev, so can use any file
-format that QEMU supports at the block layer.  IOW, you can store
-the firmware in a qcow2 file and thus you will never fetch any
-of the padding zeros to be transferred.  That said I'm not sure
-that libvirt supports anything other than a raw file today. 
 
-With regards,
-Daniel
--- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
+On 2022/11/7 23:58, Alex Bennée wrote:
+> LIU Zhiwei<zhiwei_liu@linux.alibaba.com>  writes:
+>
+>> On 2022/11/7 9:37, Alistair Francis wrote:
+>>> On Thu, Oct 13, 2022 at 4:32 PM LIU Zhiwei<zhiwei_liu@linux.alibaba.com>  wrote:
+>>>> When icount is not enabled, there is no API in QEMU that can get the
+>>>> guest instruction number.
+>>>>
+>>>> Translate the guest code in a way that each TB only has one instruction.
+>>> I don't think this is a great idea.
+>>>
+>>> Why can't we just require icount be enabled if a user wants this? Or singlestep?
+>> This feature will only be used by users who want to  run the native
+>> gdb on Linux. If we run QEMU as a service,  after booting the kernel,
+>> we can't predicate whether the users will use native gdb.
+>>
+>> Besides, icount can't be enabled on MTTCG currently (I am working on
+>> this problem)
+> I'm curious as to what your approach is going to be to solve this one?
 
+Yes, I am interested in this problem.  But actually, I don't find a 
+clear way.
+
+For RR or MTTCG, timers using QEMU_CLOCK_VIRTUAL will set the total 
+icount_budget.
+
+  * For RR smp, every cpu has configured the total icount_budget.
+
+  * For MTTCG smp, every cpu can't be configured the total
+    icount_budget.  But we can split the icount_budget, such as divide
+    by smp.cpus, to each core. If one core consumed its budget, it will
+    wait for other cores.  Another way is to kick other cores and split
+    the remaining icount_budget.
+
+I am not sure if there are many other problems related.  It a difficult 
+problem. Looking forward to your advice.
+
+Thanks,
+Zhiwei
+
+>
+--------------SP66Zx5wG9YOW8Nhqp0S9P8J
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2022/11/7 23:58, Alex Bennée wrote:<br>
+    </div>
+    <blockquote type="cite" cite="mid:87wn86g3i2.fsf@linaro.org">
+      <pre class="moz-quote-pre" wrap="">
+LIU Zhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@linux.alibaba.com">&lt;zhiwei_liu@linux.alibaba.com&gt;</a> writes:
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">On 2022/11/7 9:37, Alistair Francis wrote:
+</pre>
+        <blockquote type="cite">
+          <pre class="moz-quote-pre" wrap="">On Thu, Oct 13, 2022 at 4:32 PM LIU Zhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@linux.alibaba.com">&lt;zhiwei_liu@linux.alibaba.com&gt;</a> wrote:
+</pre>
+          <blockquote type="cite">
+            <pre class="moz-quote-pre" wrap="">When icount is not enabled, there is no API in QEMU that can get the
+guest instruction number.
+
+Translate the guest code in a way that each TB only has one instruction.
+</pre>
+          </blockquote>
+          <pre class="moz-quote-pre" wrap="">I don't think this is a great idea.
+
+Why can't we just require icount be enabled if a user wants this? Or singlestep?
+</pre>
+        </blockquote>
+        <pre class="moz-quote-pre" wrap="">
+This feature will only be used by users who want to  run the native
+gdb on Linux. If we run QEMU as a service,  after booting the kernel,
+we can't predicate whether the users will use native gdb.
+
+Besides, icount can't be enabled on MTTCG currently (I am working on
+this problem)
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+I'm curious as to what your approach is going to be to solve this one?</pre>
+    </blockquote>
+    <p>Yes, I am interested in this problem.  But actually, I don't find
+      a clear way.<br>
+    </p>
+    <p>For RR or MTTCG, timers using QEMU_CLOCK_VIRTUAL will set the
+      total icount_budget. </p>
+    <ul>
+      <li>For RR smp, every cpu has configured the total icount_budget.</li>
+    </ul>
+    <ul>
+      <li>For MTTCG smp, every cpu can't be configured the total
+        icount_budget.  But we can split the icount_budget, such as
+        divide by smp.cpus, to each core. If one core consumed its
+        budget, it will wait for other cores.  Another way is to kick
+        other cores and split the remaining icount_budget.<br>
+      </li>
+    </ul>
+    <p>I am not sure if there are many other problems related.  It a
+      difficult problem. Looking forward to your advice.</p>
+    <p>Thanks,<br>
+      Zhiwei<br>
+    </p>
+    <blockquote type="cite" cite="mid:87wn86g3i2.fsf@linaro.org">
+      <pre class="moz-quote-pre" wrap="">
+
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------SP66Zx5wG9YOW8Nhqp0S9P8J--
 
