@@ -1,66 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1osuK9-0008Vx-1C
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Nov 2022 18:17:37 -0500
+	id 1osuLL-0000tF-FF
+	for mharc-qemu-riscv@gnu.org; Wed, 09 Nov 2022 18:18:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1osuK6-0008RH-J0; Wed, 09 Nov 2022 18:17:34 -0500
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1osuLK-0000p8-6M
+ for qemu-riscv@nongnu.org; Wed, 09 Nov 2022 18:18:50 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1osuK4-0003f2-RL; Wed, 09 Nov 2022 18:17:34 -0500
-Received: by mail-pg1-x52e.google.com with SMTP id o13so53400pgu.7;
- Wed, 09 Nov 2022 15:17:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=P4J8rXGUOT05Jc0hge0ob+XRsdso3FnkgfkbRpAnEDE=;
- b=EwYcrynLwmyCzm0fwMzqNTYEcuYbAFfmusoPpr3oi8TO7CVKD2TNzR7csPj5+eJsQ+
- lS5B12TO4OcR8knrx6s1O06mHNYyENLpT1n2+NAwovEHgwnTQbOmv5ssJIrb2AeCXIAy
- 4c9FFmeeYHJa6ew848QkqWORJW6H+4HVbWgikkjqcug7UUS6+aN+vKj0u0w+LD6eFY81
- rofSlAhm5UzYE5y15FKc67kT/a3wVBOZZeSpRwxPO4Noh5095VQwkJKKy+9XwGKSbPO6
- Uy4eWhq9vKCG8j8WZEpGHqkE0L2LE7ZougqfYY7MEDz45k0kjq+WKOqXGTiqMCf+4k3c
- kPFw==
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1osuLI-0007hi-1C
+ for qemu-riscv@nongnu.org; Wed, 09 Nov 2022 18:18:49 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id cl5so28074917wrb.9
+ for <qemu-riscv@nongnu.org>; Wed, 09 Nov 2022 15:18:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=2Z0VD6BlSiTBx28CLGg60j5M+TbeL+/X3PnEJb0NTk4=;
+ b=btHRxyGmp+t/ReM7JjDa4dGDl+ZfeJDj2H66BI/PRuXxXQ7OiOepYwicz4OluNllhw
+ qnYHR+EPgn4QF+OY7KLp8Yswh1lvqBlhObEazBkMdF8ozeguBjs9FIFCS1p93yWw1Jyr
+ Q1cjWe+Xs+E5kT5QeoeKuqTbie7fRl9yPr2IBN0HIVbjJgLXqMW9Q4/m8MyQql8orP+y
+ 3HIvK1fADxQR2curbDX3JUH4Xgivv3EL+0TLPac+ZQV1WWGx6f9jSvVhV6dy/TxssaFd
+ 2GN3RWK6dMgiT4KdGq5YbH0UtexgHfvtoKEMtnGRRmEaJGMPYmh4Vg5yR+tb34igrRoC
+ GB4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=P4J8rXGUOT05Jc0hge0ob+XRsdso3FnkgfkbRpAnEDE=;
- b=7JwlJpcryJaLd5ej2yS1Ta5mavmDFyu8V84pet0C33oiKbKjRndlLpN+jSvOQXtKZi
- 59zwmC7Fup2GS7etSHoh2b2MWFaT/l3Y+3TB06YsmQnRQcf0Mr+NEhxKrOUPU+RSEOl+
- FxKM/jiksBJay38BL/DAru88Qlcy+h5b4nXbUqVnbwz2U57/+ruvFn6iWbwaVLkr1vVw
- g3u0dCUxLM9Rv+53a/wuvN5rHTxkn1B8AIHRxFBfsQv6gXuIB3prQQwMO2VDQZEbnQLx
- 8FldhQE1YEiiWynfwlh4gWTG1oeK/9KoljzzDpHpwdHNEOom4t1xhXmeR5cOrqHenUgT
- aIAA==
-X-Gm-Message-State: ACrzQf2HLhWOJtU9HqAUAcbrn+3fwbDR6Myn5CSz+oPwu27vrpzHmq/3
- MAtr5EpWrIncstGf1rrRGCOuk7HKJLWagf2AgM44ifXDZfrc7iFq
-X-Google-Smtp-Source: AMsMyM7Cg/ITZ97qKrtyr9x2ygyoH7m1nFuqtipZLN33NCPvup0RlmfwcS7BbtsgFj51tEyVFhbnduhr+IePZHCyxYc=
-X-Received: by 2002:aa7:92c7:0:b0:557:ef5e:6db3 with SMTP id
- k7-20020aa792c7000000b00557ef5e6db3mr1312572pfa.13.1668035850851; Wed, 09 Nov
- 2022 15:17:30 -0800 (PST)
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=2Z0VD6BlSiTBx28CLGg60j5M+TbeL+/X3PnEJb0NTk4=;
+ b=sVedTId77BTsrNay/ffNo3BsihM8J9vzSeoDECIYOmk7a/NQYqt5Rle7A54oR/NjRf
+ Q09hIXQzF+QRJ3LWnoa3g0EhLHWIKfE32tkFJGmjkYq93N7UgXo9SBFQckZ0KWKKwnZn
+ DVAgQBjmf5EBrdBuzUNWQeu7fhiWIirly3d99bLoJQZnmuRQBIkU+b4M9dDZGut7TfqB
+ FQo2wd2AyMGQlF2vWI592nFhihchdLmFjk5bSLRfI05J+IDf67Pat2zGLPsai/Jy/TQs
+ HqUnMcrmWAf1PL9yjviI5tuyWdVqscghKPM4xaaJlW88HZ6atEmx0vWyEdOA02/nPDLX
+ BEyg==
+X-Gm-Message-State: ACrzQf2DfwliBZluLVVsUk9B8at9Wi9Tk9QB9jEDY2EyXwJYSi/H5mfR
+ /SM4khDF8mn5XN5mNpUdlE0/UQ==
+X-Google-Smtp-Source: AMsMyM6qDrvSQyiEpYady8rN1w1onJJxPbzw0/oysxodXA4QO4u87QUW/kHPjegw8FERFYefUob6QA==
+X-Received: by 2002:a5d:58f1:0:b0:236:b588:1e07 with SMTP id
+ f17-20020a5d58f1000000b00236b5881e07mr39465724wrd.612.1668035926224; 
+ Wed, 09 Nov 2022 15:18:46 -0800 (PST)
+Received: from [192.168.1.115] ([185.126.107.38])
+ by smtp.gmail.com with ESMTPSA id
+ be6-20020a05600c1e8600b003cf78aafdd7sm3077767wmb.39.2022.11.09.15.18.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 09 Nov 2022 15:18:45 -0800 (PST)
+Message-ID: <84b8985a-6fab-ff76-7058-f702203474c0@linaro.org>
+Date: Thu, 10 Nov 2022 00:18:44 +0100
 MIME-Version: 1.0
-References: <20221016124726.102129-1-mchitale@ventanamicro.com>
- <20221016124726.102129-4-mchitale@ventanamicro.com>
-In-Reply-To: <20221016124726.102129-4-mchitale@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 10 Nov 2022 09:17:04 +1000
-Message-ID: <CAKmqyKMPpDsWF6xgXvy=Bu4fLtSz+AznGCzEjp78HcOUZXB1wA@mail.gmail.com>
-Subject: Re: [PATCH v11 3/5] target/riscv: generate virtual instruction
- exception
-To: Mayuresh Chitale <mchitale@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x52e.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.4.1
+Subject: Re: [PATCH] hw/misc/pfsoc: add fabric clocks to ioscb
+Content-Language: en-US
+To: Conor Dooley <conor@kernel.org>, Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Conor Dooley <conor.dooley@microchip.com>
+References: <20221109190849.1556711-1-conor@kernel.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20221109190849.1556711-1-conor@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,60 +82,108 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2022 23:17:35 -0000
+X-List-Received-Date: Wed, 09 Nov 2022 23:18:50 -0000
 
-On Sun, Oct 16, 2022 at 10:58 PM Mayuresh Chitale
-<mchitale@ventanamicro.com> wrote:
->
-> This patch adds a mechanism to generate a virtual instruction
-> instruction exception instead of an illegal instruction exception
-> during instruction decode when virt is enabled.
->
-> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+Hi Conor,
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+On 9/11/22 20:08, Conor Dooley wrote:
+> From: Conor Dooley <conor.dooley@microchip.com>
+> 
+> On PolarFire SoC, some peripherals (eg the PCI root port) are clocked by
+> "Clock Conditioning Circuitry" in the FPGA. The specific clock depends
+> on the FPGA bitstream & can be locked to one particular {D,P}LL - in the
+> Icicle Kit Reference Design v2022.09 or later this is/will be the case.
+> 
+> Linux v6.1+ will have a driver for this peripheral and devicetrees that
+> previously relied on "fixed-frequency" clock nodes have been switched
+> over to clock-controller nodes. The IOSCB region is represented in QEMU,
+> but the specific region of it that the CCCs occupy has not so v6.1-rcN
+> kernels fail to boot in QEMU.
+> 
+> Add the regions as unimplemented so that the status-quo in terms of boot
+> is maintained.
+> 
+> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
 > ---
->  target/riscv/translate.c | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index db123da5ec..8b0bd38bb2 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -76,6 +76,7 @@ typedef struct DisasContext {
->         to reset this known value.  */
->      int frm;
->      RISCVMXL ol;
-> +    bool virt_inst_excp;
->      bool virt_enabled;
->      const RISCVCPUConfig *cfg_ptr;
->      bool hlsx;
-> @@ -243,7 +244,11 @@ static void gen_exception_illegal(DisasContext *ctx)
->  {
->      tcg_gen_st_i32(tcg_constant_i32(ctx->opcode), cpu_env,
->                     offsetof(CPURISCVState, bins));
-> -    generate_exception(ctx, RISCV_EXCP_ILLEGAL_INST);
-> +    if (ctx->virt_inst_excp) {
-> +        generate_exception(ctx, RISCV_EXCP_VIRT_INSTRUCTION_FAULT);
-> +    } else {
-> +        generate_exception(ctx, RISCV_EXCP_ILLEGAL_INST);
-> +    }
->  }
->
->  static void gen_exception_inst_addr_mis(DisasContext *ctx)
-> @@ -1062,6 +1067,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
->          { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
->      };
->
-> +    ctx->virt_inst_excp = false;
->      /* Check for compressed insn */
->      if (insn_len(opcode) == 2) {
->          if (!has_ext(ctx, RVC)) {
-> --
-> 2.25.1
->
->
+> The last line there is a white lie. v6.1-rcN has both v2022.09 and
+> v2022.10 reference design changes. This patch only accounts for the
+> v2022.09 changes. The FPGA design is a moving target and I am not
+> really sure how to handle that in QEMU. For v2022.10 a bunch of stuff
+> got changed, including the addresses that DDR lies at which I am not
+> sure how to handle yet.
+> 
+> That puts my todo list of broken things to:
+> - MMC (only direct kernel boot works), pre v2022.09 reference issue
+
+How do you start without 'direct kernel boot'?
+
+> - PCI root port address, address changed in v2022.09 but from a cursory
+>    check, I didn't see any PCI support in the first place. It's connected
+>    to a FIC, so I think it can just be made into an unimplemented region.
+> - DDR address changes, 2022.10 issue. Looks like a straightforward
+>    change to hw/riscv/pfsoc.c but I don't think it'll be backwards
+>    compatible.
+> - hwrng breaks boot. Tipping away at this one, hopefully I'll have a fix
+>    for it soon. Need to implement the irq side of the mailbox for it.
+> 
+> I'll send some more patches as I work through them.
+> 
+>   hw/misc/mchp_pfsoc_ioscb.c         | 6 ++++++
+>   include/hw/misc/mchp_pfsoc_ioscb.h | 1 +
+>   2 files changed, 7 insertions(+)
+> 
+> diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
+> index f4fd55a0e5..f976e42f72 100644
+> --- a/hw/misc/mchp_pfsoc_ioscb.c
+> +++ b/hw/misc/mchp_pfsoc_ioscb.c
+> @@ -33,6 +33,7 @@
+>    */
+>   #define IOSCB_WHOLE_REG_SIZE        0x10000000
+>   #define IOSCB_SUBMOD_REG_SIZE       0x1000
+> +#define IOSCB_CCC_REG_SIZE          0x2000000
+>   
+>   /*
+>    * There are many sub-modules in the IOSCB module.
+> @@ -45,6 +46,7 @@
+>   #define IOSCB_LANE23_BASE           0x06510000
+>   #define IOSCB_CTRL_BASE             0x07020000
+>   #define IOSCB_CFG_BASE              0x07080000
+> +#define IOSCB_CCC_BASE              0x08000000
+>   #define IOSCB_PLL_MSS_BASE          0x0E001000
+>   #define IOSCB_CFM_MSS_BASE          0x0E002000
+>   #define IOSCB_PLL_DDR_BASE          0x0E010000
+> @@ -168,6 +170,10 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
+>                             "mchp.pfsoc.ioscb.cfg", IOSCB_SUBMOD_REG_SIZE);
+>       memory_region_add_subregion(&s->container, IOSCB_CFG_BASE, &s->cfg);
+>   
+> +    memory_region_init_io(&s->ccc, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
+> +                          "mchp.pfsoc.ioscb.ccc", IOSCB_CCC_REG_SIZE);
+> +    memory_region_add_subregion(&s->container, IOSCB_CCC_BASE, &s->ccc);
+
+Unrelated but using the TYPE_UNIMPLEMENTED_DEVICE would ease tracing all
+these block accesses, as the block name would appear before the 
+address/size. See for example aspeed_mmio_map_unimplemented();
+
+Otherwise LGTM.
+
+Regards,
+
+Phil.
+
+>       memory_region_init_io(&s->pll_mss, OBJECT(s), &mchp_pfsoc_pll_ops, s,
+>                             "mchp.pfsoc.ioscb.pll_mss", IOSCB_SUBMOD_REG_SIZE);
+>       memory_region_add_subregion(&s->container, IOSCB_PLL_MSS_BASE, &s->pll_mss);
+> diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_pfsoc_ioscb.h
+> index 9235523e33..687b213742 100644
+> --- a/include/hw/misc/mchp_pfsoc_ioscb.h
+> +++ b/include/hw/misc/mchp_pfsoc_ioscb.h
+> @@ -30,6 +30,7 @@ typedef struct MchpPfSoCIoscbState {
+>       MemoryRegion lane23;
+>       MemoryRegion ctrl;
+>       MemoryRegion cfg;
+> +    MemoryRegion ccc;
+>       MemoryRegion pll_mss;
+>       MemoryRegion cfm_mss;
+>       MemoryRegion pll_ddr;
+
 
