@@ -1,65 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1osuQk-00039H-6o
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Nov 2022 18:24:26 -0500
+	id 1osuWm-0005qa-K6
+	for mharc-qemu-riscv@gnu.org; Wed, 09 Nov 2022 18:30:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1osuQi-000390-Tr; Wed, 09 Nov 2022 18:24:24 -0500
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1osuQg-0003Dc-TC; Wed, 09 Nov 2022 18:24:24 -0500
-Received: by mail-pl1-x62e.google.com with SMTP id io19so104977plb.8;
- Wed, 09 Nov 2022 15:24:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WeNoqBxfPr+NKyZ6LVxOGbm4CdTiTbH7v/Ss9SlOjok=;
- b=awFAoqOBsuF3gJczlm7I9TOHQZ/3wcnZ23v1zWbrScBLDdlmHbuvOsJcy2meDd4kyn
- mK4oAU1++TEMYnAAZG2mie/eEb7Sb9QNJ/N4QRUWphFTaNh3SsZRCnA2Eiw4uLgSpUNS
- x/lm06Vrn059diLY4kb/46XkNJIPa8eKXWI1f4FXaBPnqQKDfhiT5h34lrDnkEZNlR+S
- AcksgXDmbm07AQCaQ8f/3yEKDCcLzsCeQA4hpRMp96AENGrJ56CDUExaDcPoioQ35Ncz
- qLjVk3XOI5wMT1k+JNwBVKMeK7TFjslohn/BAk51/1kChV8ZxZfXm3QsV2qx+LddaZ+N
- junQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WeNoqBxfPr+NKyZ6LVxOGbm4CdTiTbH7v/Ss9SlOjok=;
- b=ZyD8+nXMOclMUEwrbFrtVFrdHBKazvnPM1pm+eEV+KpgAERFRHLRSzdqqzGwT1P12E
- KLGSqJvGBq21dBJZ0CTPgHD5O40q1YQwOvEnae6gp+6EfaT8aBJJIlIhIpVrbYqJi4R4
- pHlLJXWp+iquGK9ng54mNODSQOlrEggMaPB5m208gaeq6VzDJaX9T9EYjdIvhoTQYYKn
- /QrBivxUerckQvm8B2K/ebf+K4iznOhGQxt6A0zPs3xpK5DEDhWRiaFwU5t3B3NYyWDO
- QQfRynGs0Vh2bBH92GCk/7UzHfEqvXQKzToIr8LLjQFKuwuzr7jfxifRP48fwH2c0kEn
- xK0g==
-X-Gm-Message-State: ACrzQf1E9ONwTd/O92445SQMFXZ8XEUSNEEHt/xDDKfDdGfdPeAfUG3h
- jlO6QdNQZPV3pFBq3tLEqvxuWQAjIBHVDFH69yM=
-X-Google-Smtp-Source: AMsMyM4dOJe/5YWyjERCIX5D5FwE1yCZdhQZrGZsx4L0/pFy5d/2uAo7xRxmnOSxj+PId4ksCiRdUy1TOgB/X4vV1bM=
-X-Received: by 2002:a17:902:7294:b0:187:146c:316f with SMTP id
- d20-20020a170902729400b00187146c316fmr57189994pll.149.1668036260857; Wed, 09
- Nov 2022 15:24:20 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1osuWj-0005qB-46; Wed, 09 Nov 2022 18:30:37 -0500
+Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1osuWh-00021x-7n; Wed, 09 Nov 2022 18:30:36 -0500
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 6E9BE61D22;
+ Wed,  9 Nov 2022 23:30:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B1EAC433D6;
+ Wed,  9 Nov 2022 23:30:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1668036631;
+ bh=ExRzSHy55vSQc7H7NEGr4HN/FkfFIhRcSib8XYzZx2Y=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=nkN+kI+GtEa6PZgqJrHGesS1KLlngdMDlrZrSZNeijc9z2TdnRUJpMDNsTUZHkjcq
+ iDinuJluofHQkacPhNuJGPLXEhuxRtWKY7xPSRRwhdOiziqUbEdcyuSUUvT/W96vPu
+ b3rOdEVCWrR/Dd63vrMgnJNFrOuogdatDhztC0ptmFKPoqs1CRMof/vGTTu/ZvnFFx
+ 0qIPhfypb7BayFzn3n1kLpNrlBn6zvtqkWdlXSgEx++/mfFNB9rsUmNlzhjc858pTh
+ 7tjNAhWmaDidoPsvsvnpQp2DVarF9ZGKp0oLOJ6gOUQJRmicU8HDI46pzMtt0fzBNC
+ UGeApalMMY93A==
+Date: Wed, 9 Nov 2022 23:30:28 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
+Cc: Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Conor Dooley <conor.dooley@microchip.com>
+Subject: Re: [PATCH] hw/misc/pfsoc: add fabric clocks to ioscb
+Message-ID: <Y2w4FOfeLnHqNkd2@spud>
+References: <20221109190849.1556711-1-conor@kernel.org>
+ <84b8985a-6fab-ff76-7058-f702203474c0@linaro.org>
 MIME-Version: 1.0
-References: <20221016124726.102129-1-mchitale@ventanamicro.com>
- <20221016124726.102129-5-mchitale@ventanamicro.com>
-In-Reply-To: <20221016124726.102129-5-mchitale@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 10 Nov 2022 09:23:54 +1000
-Message-ID: <CAKmqyKMFeWWA+pLvKbxLiHV1C65fyhBWpB2B4E-DeiaOkBus0A@mail.gmail.com>
-Subject: Re: [PATCH v11 4/5] target/riscv: smstateen check for fcsr
-To: Mayuresh Chitale <mchitale@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- Weiwei Li <liweiwei@iscas.ac.cn>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x62e.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <84b8985a-6fab-ff76-7058-f702203474c0@linaro.org>
+Received-SPF: pass client-ip=2604:1380:4641:c500::1;
+ envelope-from=conor@kernel.org; helo=dfw.source.kernel.org
+X-Spam_score_int: -70
+X-Spam_score: -7.1
+X-Spam_bar: -------
+X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -73,195 +62,116 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2022 23:24:25 -0000
+X-List-Received-Date: Wed, 09 Nov 2022 23:30:37 -0000
 
-On Sun, Oct 16, 2022 at 11:09 PM Mayuresh Chitale
-<mchitale@ventanamicro.com> wrote:
->
-> If smstateen is implemented and sstateen0.fcsr is clear then the floating point
-> operations must return illegal instruction exception or virtual instruction
-> trap, if relevant.
->
-> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+On Thu, Nov 10, 2022 at 12:18:44AM +0100, Philippe Mathieu-Daudé wrote:
+> On 9/11/22 20:08, Conor Dooley wrote:
+> > From: Conor Dooley <conor.dooley@microchip.com>
+> > 
+> > On PolarFire SoC, some peripherals (eg the PCI root port) are clocked by
+> > "Clock Conditioning Circuitry" in the FPGA. The specific clock depends
+> > on the FPGA bitstream & can be locked to one particular {D,P}LL - in the
+> > Icicle Kit Reference Design v2022.09 or later this is/will be the case.
+> > 
+> > Linux v6.1+ will have a driver for this peripheral and devicetrees that
+> > previously relied on "fixed-frequency" clock nodes have been switched
+> > over to clock-controller nodes. The IOSCB region is represented in QEMU,
+> > but the specific region of it that the CCCs occupy has not so v6.1-rcN
+> > kernels fail to boot in QEMU.
+> > 
+> > Add the regions as unimplemented so that the status-quo in terms of boot
+> > is maintained.
+> > 
+> > Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+> > ---
+> > The last line there is a white lie. v6.1-rcN has both v2022.09 and
+> > v2022.10 reference design changes. This patch only accounts for the
+> > v2022.09 changes. The FPGA design is a moving target and I am not
+> > really sure how to handle that in QEMU. For v2022.10 a bunch of stuff
+> > got changed, including the addresses that DDR lies at which I am not
+> > sure how to handle yet.
+> > 
+> > That puts my todo list of broken things to:
+> > - MMC (only direct kernel boot works), pre v2022.09 reference issue
+> 
+> How do you start without 'direct kernel boot'?
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+You used to be able to load the "bios" etc and follow the boot flow [0].
+This no longer works, and has not for at least a year. I assume it still
+works if you check out the (fossilised) versions mentioned in that doc.
+Think I said it last time I sent patches, but we had some floating around
+internally that I know /did/ work at some point about this time last year
+but I was never able to figure out the correct alignment of the stars to
+get working myself. It required pretty decent changes to the sdhci driver,
+which, I'm hoping cease to be required with the v2022.10 reference
+design that I mentioned else where in this patch.
+But one problem at a time ;)
 
-Alistair
+0 - https://www.qemu.org/docs/master/system/riscv/microchip-icicle-kit.html
 
-> ---
->  target/riscv/csr.c                        | 23 ++++++++++++
->  target/riscv/insn_trans/trans_rvf.c.inc   | 43 +++++++++++++++++++++--
->  target/riscv/insn_trans/trans_rvzfh.c.inc | 12 +++++++
->  3 files changed, 75 insertions(+), 3 deletions(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 71236f2b5d..8b25f885ec 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -84,6 +84,10 @@ static RISCVException fs(CPURISCVState *env, int csrno)
->          !RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
->          return RISCV_EXCP_ILLEGAL_INST;
->      }
-> +
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-> +        return smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR);
-> +    }
->  #endif
->      return RISCV_EXCP_NONE;
->  }
-> @@ -2023,6 +2027,9 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
->                                        target_ulong new_val)
->  {
->      uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
-> +    if (!riscv_has_ext(env, RVF)) {
-> +        wr_mask |= SMSTATEEN0_FCSR;
-> +    }
->
->      return write_mstateen(env, csrno, wr_mask, new_val);
->  }
-> @@ -2059,6 +2066,10 @@ static RISCVException write_mstateen0h(CPURISCVState *env, int csrno,
->  {
->      uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
->
-> +    if (!riscv_has_ext(env, RVF)) {
-> +        wr_mask |= SMSTATEEN0_FCSR;
-> +    }
-> +
->      return write_mstateenh(env, csrno, wr_mask, new_val);
->  }
->
-> @@ -2096,6 +2107,10 @@ static RISCVException write_hstateen0(CPURISCVState *env, int csrno,
->  {
->      uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
->
-> +    if (!riscv_has_ext(env, RVF)) {
-> +        wr_mask |= SMSTATEEN0_FCSR;
-> +    }
-> +
->      return write_hstateen(env, csrno, wr_mask, new_val);
->  }
->
-> @@ -2135,6 +2150,10 @@ static RISCVException write_hstateen0h(CPURISCVState *env, int csrno,
->  {
->      uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
->
-> +    if (!riscv_has_ext(env, RVF)) {
-> +        wr_mask |= SMSTATEEN0_FCSR;
-> +    }
-> +
->      return write_hstateenh(env, csrno, wr_mask, new_val);
->  }
->
-> @@ -2182,6 +2201,10 @@ static RISCVException write_sstateen0(CPURISCVState *env, int csrno,
->  {
->      uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
->
-> +    if (!riscv_has_ext(env, RVF)) {
-> +        wr_mask |= SMSTATEEN0_FCSR;
-> +    }
-> +
->      return write_sstateen(env, csrno, wr_mask, new_val);
->  }
->
-> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-> index a1d3eb52ad..93657680c6 100644
-> --- a/target/riscv/insn_trans/trans_rvf.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvf.c.inc
-> @@ -24,9 +24,46 @@
->              return false; \
->  } while (0)
->
-> -#define REQUIRE_ZFINX_OR_F(ctx) do {\
-> -    if (!ctx->cfg_ptr->ext_zfinx) { \
-> -        REQUIRE_EXT(ctx, RVF); \
-> +#ifndef CONFIG_USER_ONLY
-> +static inline bool smstateen_fcsr_check(DisasContext *ctx, int index)
-> +{
-> +    CPUState *cpu = ctx->cs;
-> +    CPURISCVState *env = cpu->env_ptr;
-> +    uint64_t stateen = env->mstateen[index];
-> +
-> +    if (!ctx->cfg_ptr->ext_smstateen || env->priv == PRV_M) {
-> +        return true;
-> +    }
-> +
-> +    if (ctx->virt_enabled) {
-> +        stateen &= env->hstateen[index];
-> +    }
-> +
-> +    if (env->priv == PRV_U && has_ext(ctx, RVS)) {
-> +        stateen &= env->sstateen[index];
-> +    }
-> +
-> +    if (!(stateen & SMSTATEEN0_FCSR)) {
-> +        if (ctx->virt_enabled) {
-> +            ctx->virt_inst_excp = true;
-> +        }
-> +        return false;
-> +    }
-> +
-> +    return true;
-> +}
-> +#else
-> +#define smstateen_fcsr_check(ctx, index) (true)
-> +#endif
-> +
-> +#define REQUIRE_ZFINX_OR_F(ctx) do { \
-> +    if (!has_ext(ctx, RVF)) { \
-> +        if (!ctx->cfg_ptr->ext_zfinx) { \
-> +            return false; \
-> +        } \
-> +        if (!smstateen_fcsr_check(ctx, 0)) { \
-> +            return false; \
-> +        } \
->      } \
->  } while (0)
->
-> diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
-> index 5d07150cd0..6c2e338c0a 100644
-> --- a/target/riscv/insn_trans/trans_rvzfh.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
-> @@ -20,18 +20,27 @@
->      if (!ctx->cfg_ptr->ext_zfh) {      \
->          return false;         \
->      }                         \
-> +    if (!smstateen_fcsr_check(ctx, 0)) { \
-> +        return false; \
-> +    } \
->  } while (0)
->
->  #define REQUIRE_ZHINX_OR_ZFH(ctx) do { \
->      if (!ctx->cfg_ptr->ext_zhinx && !ctx->cfg_ptr->ext_zfh) { \
->          return false;                  \
->      }                                  \
-> +    if (!smstateen_fcsr_check(ctx, 0)) { \
-> +        return false; \
-> +    } \
->  } while (0)
->
->  #define REQUIRE_ZFH_OR_ZFHMIN(ctx) do {       \
->      if (!(ctx->cfg_ptr->ext_zfh || ctx->cfg_ptr->ext_zfhmin)) { \
->          return false;                         \
->      }                                         \
-> +    if (!smstateen_fcsr_check(ctx, 0)) { \
-> +        return false; \
-> +    } \
->  } while (0)
->
->  #define REQUIRE_ZFH_OR_ZFHMIN_OR_ZHINX_OR_ZHINXMIN(ctx) do { \
-> @@ -39,6 +48,9 @@
->            ctx->cfg_ptr->ext_zhinx || ctx->cfg_ptr->ext_zhinxmin)) {     \
->          return false;                                        \
->      }                                                        \
-> +    if (!smstateen_fcsr_check(ctx, 0)) { \
-> +        return false; \
-> +    } \
->  } while (0)
->
->  static bool trans_flh(DisasContext *ctx, arg_flh *a)
-> --
-> 2.25.1
->
->
+> > - PCI root port address, address changed in v2022.09 but from a cursory
+> >    check, I didn't see any PCI support in the first place. It's connected
+> >    to a FIC, so I think it can just be made into an unimplemented region.
+> > - DDR address changes, 2022.10 issue. Looks like a straightforward
+> >    change to hw/riscv/pfsoc.c but I don't think it'll be backwards
+> >    compatible.
+> > - hwrng breaks boot. Tipping away at this one, hopefully I'll have a fix
+> >    for it soon. Need to implement the irq side of the mailbox for it.
+> > 
+> > I'll send some more patches as I work through them.
+> > 
+> >   hw/misc/mchp_pfsoc_ioscb.c         | 6 ++++++
+> >   include/hw/misc/mchp_pfsoc_ioscb.h | 1 +
+> >   2 files changed, 7 insertions(+)
+> > 
+> > diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
+> > index f4fd55a0e5..f976e42f72 100644
+> > --- a/hw/misc/mchp_pfsoc_ioscb.c
+> > +++ b/hw/misc/mchp_pfsoc_ioscb.c
+> > @@ -33,6 +33,7 @@
+> >    */
+> >   #define IOSCB_WHOLE_REG_SIZE        0x10000000
+> >   #define IOSCB_SUBMOD_REG_SIZE       0x1000
+> > +#define IOSCB_CCC_REG_SIZE          0x2000000
+> >   /*
+> >    * There are many sub-modules in the IOSCB module.
+> > @@ -45,6 +46,7 @@
+> >   #define IOSCB_LANE23_BASE           0x06510000
+> >   #define IOSCB_CTRL_BASE             0x07020000
+> >   #define IOSCB_CFG_BASE              0x07080000
+> > +#define IOSCB_CCC_BASE              0x08000000
+> >   #define IOSCB_PLL_MSS_BASE          0x0E001000
+> >   #define IOSCB_CFM_MSS_BASE          0x0E002000
+> >   #define IOSCB_PLL_DDR_BASE          0x0E010000
+> > @@ -168,6 +170,10 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
+> >                             "mchp.pfsoc.ioscb.cfg", IOSCB_SUBMOD_REG_SIZE);
+> >       memory_region_add_subregion(&s->container, IOSCB_CFG_BASE, &s->cfg);
+> > +    memory_region_init_io(&s->ccc, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
+> > +                          "mchp.pfsoc.ioscb.ccc", IOSCB_CCC_REG_SIZE);
+> > +    memory_region_add_subregion(&s->container, IOSCB_CCC_BASE, &s->ccc);
+> 
+> Unrelated but using the TYPE_UNIMPLEMENTED_DEVICE would ease tracing all
+> these block accesses, as the block name would appear before the
+> address/size. See for example aspeed_mmio_map_unimplemented();
+
+I just copy pasted what was already here. Follow on patch for the
+conversions since most of what's in this file is effectively
+unimplemented?
+
+> >       memory_region_init_io(&s->pll_mss, OBJECT(s), &mchp_pfsoc_pll_ops, s,
+> >                             "mchp.pfsoc.ioscb.pll_mss", IOSCB_SUBMOD_REG_SIZE);
+> >       memory_region_add_subregion(&s->container, IOSCB_PLL_MSS_BASE, &s->pll_mss);
+> > diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_pfsoc_ioscb.h
+> > index 9235523e33..687b213742 100644
+> > --- a/include/hw/misc/mchp_pfsoc_ioscb.h
+> > +++ b/include/hw/misc/mchp_pfsoc_ioscb.h
+> > @@ -30,6 +30,7 @@ typedef struct MchpPfSoCIoscbState {
+> >       MemoryRegion lane23;
+> >       MemoryRegion ctrl;
+> >       MemoryRegion cfg;
+> > +    MemoryRegion ccc;
+> >       MemoryRegion pll_mss;
+> >       MemoryRegion cfm_mss;
+> >       MemoryRegion pll_ddr;
+> 
 
