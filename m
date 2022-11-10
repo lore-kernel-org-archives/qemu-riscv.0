@@ -1,63 +1,84 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1osxAu-0004by-K2
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Nov 2022 21:20:16 -0500
+	id 1ot0Dp-0004rQ-7s
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Nov 2022 00:35:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1osxAr-0004ai-U9; Wed, 09 Nov 2022 21:20:13 -0500
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1ot0Di-0004qK-LY
+ for qemu-riscv@nongnu.org; Thu, 10 Nov 2022 00:35:22 -0500
+Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1osxAq-0002wt-0V; Wed, 09 Nov 2022 21:20:13 -0500
-Received: by mail-pj1-x1035.google.com with SMTP id
- u8-20020a17090a5e4800b002106dcdd4a0so3590309pji.1; 
- Wed, 09 Nov 2022 18:20:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZScouAwTxaDxDb9chSVnibZWUq+ZYPBEN0iDOjCSd4k=;
- b=QqOQEKAv+rFsJnzqnTmZi7QY2+hnMfktslTM1cMcVFQTmscTIveKr9CAGJs6vN9Qn3
- W2nLAJqiebdh/Ph0uXQB/V5l7jq+W7priD+TYZ43zkZ5Ek8GOnVNrcaMjwjKrhGzH4nf
- trDNIqksWnYYV8B6A9Af7BC693nGzxy9BMRgHKQiIMufc7vlMDez359kvW8DAexp5m8L
- IG4mjdwKmEIBeEKWG+jgEzMAFgbl/NWVkddBz/6pNnNet0ciC4drsnCuLYkfW/2ZKTVn
- CHmGLa/Uc3fZ+0vJWXya0YVyUnrz+HbZvKgTBnZBcpELtVUBvzDR+No5dVZrD99Ou53X
- EYsg==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1ot0Dg-0005oW-G6
+ for qemu-riscv@nongnu.org; Thu, 10 Nov 2022 00:35:21 -0500
+Received: by mail-pg1-x52e.google.com with SMTP id 78so737026pgb.13
+ for <qemu-riscv@nongnu.org>; Wed, 09 Nov 2022 21:35:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=hS80PFJNkQO/b4awyP7kAlZxb51VMB6sjaXZbXuXW0w=;
+ b=vL+fZG4FuYBJuZvKOLKsKwDwm5/oeSTyQkC7xbeKYUZwNBLmVUm9G/ri979rPtIu6k
+ Xr2j5jEY9n5rqXxHXlrMT3D4rQjms3QoctWyGLHMqSLaSQgoqYSoAjPLThjHArWIdVNJ
+ P+jwVtDhkmqM0nKNdPSLac1Qonc8LyUFDfoZ1YfBnuKvSj0MKV5epMHRK6fLcuje+Aaj
+ G39EPT7eGvj2j3oA/bd4nxhGyBcNVhxCkq8uGgsCEzBrp9MDUCnOca77fGLaL9M6G3Ch
+ c6OrwAPHH4iZ3klZyALkOp+y1t30GhgskAamsY5vu5qkDq/5+TYhKt4FyAc1xZgah4Rc
+ beeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZScouAwTxaDxDb9chSVnibZWUq+ZYPBEN0iDOjCSd4k=;
- b=EMzXMIlYd9ynmIezR3RJftWcB0zSKCVX02FputIs+n3FsBgmT9mlCs77TbKV46VYdl
- iif8tkxlpy1OOtXUU+ERPXfUVONUMA6L5Bba7+CjRYGmBrB9e5MeTWepXniCnls42gtw
- 7mOhwe3Hz1vyPctck5fpByjIjTAr3bfpW2JqOZjfrPZf0i8eFZ9/xkuQD7Y0uM0VASlJ
- 29JDDq+71+PjSYZKEWXQWw7esIdMNIlzuvzaVtt7AwcL94ZAsCAW2JynujGAvqcAFUCP
- p3Obrs9G3TUo9gkq0WzC/PCqe+b4V/uNv9GkIeXpC0pXCUDUPdLjycipYLVsJhCPRmNu
- iLNw==
-X-Gm-Message-State: ACrzQf04rRujQ4Z5C85DeUIc3mUwugsK8m4VOZ/Fx8J/Pkb6xjpTsgmi
- /sFPUkNbxQW1zWekGC1KzG/2e7VNSFroJ8aXNGo=
-X-Google-Smtp-Source: AMsMyM5+dEdb5q6xwZWg/wOqK6YwTqX0RkXifS0QZPE9FutMCg8SER190fKcF3u7Qe3VtY0uU9TCk0lw76426k2IDII=
-X-Received: by 2002:a17:902:7294:b0:187:146c:316f with SMTP id
- d20-20020a170902729400b00187146c316fmr57586185pll.149.1668046809121; Wed, 09
- Nov 2022 18:20:09 -0800 (PST)
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=hS80PFJNkQO/b4awyP7kAlZxb51VMB6sjaXZbXuXW0w=;
+ b=3DyqT8EUKLfv/PiMMKCNWo2z+OcwD6t56uMNzKh8fZ63AvXV53VvEX9bR3mfw55m6Q
+ buWxsReQ2k4Zs2lja67WBobkDWWE6ZYfWFEHkU7WFPy/vv/veC47XTanoiEzMP5WbT1M
+ KYlnQgbKe0/A8sam4HKvFq1c4Pfgjqxipm6Bg/Kf7WKQILg6ALRL1KI9GKIoej0CMJOF
+ DtqE7XlJdvBs75h8zLL4bNMC5n8La3Wy2unUgiVHeMcUPi41RpGMzOvav3EnI35B+6hb
+ m6hthgvIrQbKvLgNS1PCq43C0NkBBZNa78Woc1x6LyGpoQZvkGd9jE/NCSoOxCaHhykX
+ 4rHQ==
+X-Gm-Message-State: ACrzQf3obNXh3wYjLCQ+iwWZgGjjxp4flnHjSGwSv3UQs3skheIS2EVW
+ +zC184Q39HeUZciKpdd+/w6+AA==
+X-Google-Smtp-Source: AMsMyM5yU+MnYp5Rj5qjvLsjauHACbevH/xkJRFH24riUTCc8n2V4z3VrNbtp8Jsxvjhc4WsJ6hJPw==
+X-Received: by 2002:a62:cdcc:0:b0:56b:a319:7b52 with SMTP id
+ o195-20020a62cdcc000000b0056ba3197b52mr1843655pfg.21.1668058516948; 
+ Wed, 09 Nov 2022 21:35:16 -0800 (PST)
+Received: from ?IPV6:2001:44b8:2176:c800:cc47:10aa:3fa4:e6ca?
+ (2001-44b8-2176-c800-cc47-10aa-3fa4-e6ca.static.ipv6.internode.on.net.
+ [2001:44b8:2176:c800:cc47:10aa:3fa4:e6ca])
+ by smtp.gmail.com with ESMTPSA id
+ e3-20020aa798c3000000b0056b9d9e2521sm9558058pfm.177.2022.11.09.21.35.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 09 Nov 2022 21:35:16 -0800 (PST)
+Message-ID: <f9600317-b40a-50fc-3f85-8ccae0c6790e@linaro.org>
+Date: Thu, 10 Nov 2022 16:35:07 +1100
 MIME-Version: 1.0
-References: <20221016124726.102129-1-mchitale@ventanamicro.com>
-In-Reply-To: <20221016124726.102129-1-mchitale@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 10 Nov 2022 12:19:42 +1000
-Message-ID: <CAKmqyKPWCDRrAT8g5OmdmKeX1v6VK-a-0vNJc65oTeg2m7NF8Q@mail.gmail.com>
-Subject: Re: [PATCH v11 0/5] RISC-V Smstateen support
-To: Mayuresh Chitale <mchitale@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x1035.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+Subject: Re: [PATCH v1 4/4] target/riscv: Add itrigger_enabled field to
+ CPURISCVState
+Content-Language: en-US
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Alistair.Francis@wdc.com,
+ palmer@dabbelt.com, bin.meng@windriver.com,
+ sergey.matyukevich@syntacore.com, vladimir.isaev@syntacore.com,
+ anatoly.parshintsev@syntacore.com, philipp.tomsich@vrull.eu,
+ zhiwei_liu@c-sky.com
+References: <20221013062946.7530-1-zhiwei_liu@linux.alibaba.com>
+ <20221013062946.7530-5-zhiwei_liu@linux.alibaba.com>
+ <CAKmqyKO0EUKg7k95RGnk3_=4BXynECBPfV5-_2VPW4A7p45daw@mail.gmail.com>
+ <4fb639df-889f-a76d-6c62-126ec4d9e5e1@linux.alibaba.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <4fb639df-889f-a76d-6c62-126ec4d9e5e1@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -72,93 +93,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Nov 2022 02:20:15 -0000
+X-List-Received-Date: Thu, 10 Nov 2022 05:35:23 -0000
 
-On Sun, Oct 16, 2022 at 10:48 PM Mayuresh Chitale
-<mchitale@ventanamicro.com> wrote:
->
-> This series adds support for the Smstateen specification which provides a
-> mechanism to plug the potential covert channels which are opened by extensions
-> that add to processor state that may not get context-switched. Currently access
-> to *envcfg registers and floating point(fcsr) is controlled via smstateen.
->
-> These patches can also be found on riscv_smstateen_v11 branch at:
-> https://github.com/mdchitale/qemu.git
->
-> Changes in v11:
-> - Rebase to latest riscv-to-apply.next
-> - set virt_inst_excp at the begining of decode_opc
-> - Add reviewed by in patch 4
->
-> Changes in v10:
-> - Add support to generate virt instruction exception after decode failure.
->   Use this change for smstateen fcsr failure when virt is enabled.
-> - Implement single write function for *smstateen1 to *smstateen3 registers.
->
-> Changes in v9:
-> - Rebase to latest riscv-to-apply.next
-> - Add reviewed by in patches 2 and 4
->
-> Changes in v8:
-> - Rebase to latest riscv-to-apply.next
-> - Fix m-mode check for hstateen
-> - Fix return exception type for VU mode
-> - Improve commit description for patch3
->
-> Changes in v7:
-> - Update smstateen check as per discussion on the following issue:
->   https://github.com/riscv/riscv-state-enable/issues/9
-> - Drop the smstateen AIA patch for now.
-> - Indentation and other fixes
->
-> Changes in v6:
-> - Sync with latest riscv-to-apply.next
-> - Make separate read/write ops for m/h/s/stateen1/2/3 regs
-> - Add check for mstateen.staten when reading or using h/s/stateen regs
-> - Add smstateen fcsr check for all floating point operations
-> - Move knobs to enable smstateen in a separate patch.
->
-> Changes in v5:
-> - Fix the order in which smstateen extension is added to the
->   isa_edata_arr as
-> described in rule #3 the comment.
->
-> Changes in v4:
-> - Fix build issue with riscv32/riscv64-linux-user targets
->
-> Changes in v3:
-> - Fix coding style issues
-> - Fix *stateen0h index calculation
->
-> Changes in v2:
-> - Make h/s/envcfg bits in m/h/stateen registers as writeable by default.
->
-> Mayuresh Chitale (5):
->   target/riscv: Add smstateen support
->   target/riscv: smstateen check for h/s/envcfg
->   target/riscv: generate virtual instruction exception
->   target/riscv: smstateen check for fcsr
->   target/riscv: smstateen knobs
+On 11/10/22 13:15, LIU Zhiwei wrote:
+>>> +static int debug_post_load(void *opaque, int version_id)
+>>> +{
+>>> +    RISCVCPU *cpu = opaque;
+>>> +    CPURISCVState *env = &cpu->env;
+>>> +
+>>> +    if (icount_enabled()) {
+>>> +        env->itrigger_enabled = riscv_itrigger_enabled(env);
+>>> +    }
+>>> +
+>>> +    return 0;
+>>> +}
+>>> +
+>>>   static const VMStateDescription vmstate_debug = {
+>>>       .name = "cpu/debug",
+>>>       .version_id = 2,
+>>>       .minimum_version_id = 2,
+>> The versions here should be bumped
+> 
+> Hi Alistair and Richard,
+> 
+> I am not sure if we should bump versions when just add post_load callback without adding 
+> new fields.  I once upstreamed a patch
+> with a similar change but not bumping version.
 
-Thanks!
+Simply adding a post_load does not require a version bump.
 
-Applied to riscv-to-apply.next
 
-Alistair
-
->
->  target/riscv/cpu.c                        |   2 +
->  target/riscv/cpu.h                        |   4 +
->  target/riscv/cpu_bits.h                   |  37 ++
->  target/riscv/csr.c                        | 414 +++++++++++++++++++++-
->  target/riscv/insn_trans/trans_rvf.c.inc   |  43 ++-
->  target/riscv/insn_trans/trans_rvzfh.c.inc |  12 +
->  target/riscv/machine.c                    |  21 ++
->  target/riscv/translate.c                  |   8 +-
->  8 files changed, 536 insertions(+), 5 deletions(-)
->
-> --
-> 2.25.1
->
->
+r~
 
