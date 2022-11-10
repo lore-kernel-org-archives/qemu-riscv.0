@@ -1,55 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1osuWm-0005qa-K6
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Nov 2022 18:30:41 -0500
+	id 1osx6r-0002yt-5k
+	for mharc-qemu-riscv@gnu.org; Wed, 09 Nov 2022 21:16:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1osuWj-0005qB-46; Wed, 09 Nov 2022 18:30:37 -0500
-Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1osx6o-0002yH-Pt; Wed, 09 Nov 2022 21:16:02 -0500
+Received: from out30-57.freemail.mail.aliyun.com ([115.124.30.57])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1osuWh-00021x-7n; Wed, 09 Nov 2022 18:30:36 -0500
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6E9BE61D22;
- Wed,  9 Nov 2022 23:30:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B1EAC433D6;
- Wed,  9 Nov 2022 23:30:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1668036631;
- bh=ExRzSHy55vSQc7H7NEGr4HN/FkfFIhRcSib8XYzZx2Y=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=nkN+kI+GtEa6PZgqJrHGesS1KLlngdMDlrZrSZNeijc9z2TdnRUJpMDNsTUZHkjcq
- iDinuJluofHQkacPhNuJGPLXEhuxRtWKY7xPSRRwhdOiziqUbEdcyuSUUvT/W96vPu
- b3rOdEVCWrR/Dd63vrMgnJNFrOuogdatDhztC0ptmFKPoqs1CRMof/vGTTu/ZvnFFx
- 0qIPhfypb7BayFzn3n1kLpNrlBn6zvtqkWdlXSgEx++/mfFNB9rsUmNlzhjc858pTh
- 7tjNAhWmaDidoPsvsvnpQp2DVarF9ZGKp0oLOJ6gOUQJRmicU8HDI46pzMtt0fzBNC
- UGeApalMMY93A==
-Date: Wed, 9 Nov 2022 23:30:28 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
-Cc: Bin Meng <bin.meng@windriver.com>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Conor Dooley <conor.dooley@microchip.com>
-Subject: Re: [PATCH] hw/misc/pfsoc: add fabric clocks to ioscb
-Message-ID: <Y2w4FOfeLnHqNkd2@spud>
-References: <20221109190849.1556711-1-conor@kernel.org>
- <84b8985a-6fab-ff76-7058-f702203474c0@linaro.org>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1osx6m-0007cJ-PA; Wed, 09 Nov 2022 21:16:02 -0500
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=12; SR=0;
+ TI=SMTPD_---0VUQOu09_1668046551; 
+Received: from 30.221.97.70(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VUQOu09_1668046551) by smtp.aliyun-inc.com;
+ Thu, 10 Nov 2022 10:15:53 +0800
+Message-ID: <4fb639df-889f-a76d-6c62-126ec4d9e5e1@linux.alibaba.com>
+Date: Thu, 10 Nov 2022 10:15:42 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.1
+Subject: Re: [PATCH v1 4/4] target/riscv: Add itrigger_enabled field to
+ CPURISCVState
+To: Alistair Francis <alistair23@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Alistair.Francis@wdc.com,
+ palmer@dabbelt.com, bin.meng@windriver.com,
+ sergey.matyukevich@syntacore.com, vladimir.isaev@syntacore.com,
+ anatoly.parshintsev@syntacore.com, philipp.tomsich@vrull.eu,
+ zhiwei_liu@c-sky.com
+References: <20221013062946.7530-1-zhiwei_liu@linux.alibaba.com>
+ <20221013062946.7530-5-zhiwei_liu@linux.alibaba.com>
+ <CAKmqyKO0EUKg7k95RGnk3_=4BXynECBPfV5-_2VPW4A7p45daw@mail.gmail.com>
+Content-Language: en-US
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <CAKmqyKO0EUKg7k95RGnk3_=4BXynECBPfV5-_2VPW4A7p45daw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <84b8985a-6fab-ff76-7058-f702203474c0@linaro.org>
-Received-SPF: pass client-ip=2604:1380:4641:c500::1;
- envelope-from=conor@kernel.org; helo=dfw.source.kernel.org
-X-Spam_score_int: -70
-X-Spam_score: -7.1
-X-Spam_bar: -------
-X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.57;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-57.freemail.mail.aliyun.com
+X-Spam_score_int: -98
+X-Spam_score: -9.9
+X-Spam_bar: ---------
+X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -62,116 +60,126 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2022 23:30:37 -0000
+X-List-Received-Date: Thu, 10 Nov 2022 02:16:03 -0000
 
-On Thu, Nov 10, 2022 at 12:18:44AM +0100, Philippe Mathieu-Daudé wrote:
-> On 9/11/22 20:08, Conor Dooley wrote:
-> > From: Conor Dooley <conor.dooley@microchip.com>
-> > 
-> > On PolarFire SoC, some peripherals (eg the PCI root port) are clocked by
-> > "Clock Conditioning Circuitry" in the FPGA. The specific clock depends
-> > on the FPGA bitstream & can be locked to one particular {D,P}LL - in the
-> > Icicle Kit Reference Design v2022.09 or later this is/will be the case.
-> > 
-> > Linux v6.1+ will have a driver for this peripheral and devicetrees that
-> > previously relied on "fixed-frequency" clock nodes have been switched
-> > over to clock-controller nodes. The IOSCB region is represented in QEMU,
-> > but the specific region of it that the CCCs occupy has not so v6.1-rcN
-> > kernels fail to boot in QEMU.
-> > 
-> > Add the regions as unimplemented so that the status-quo in terms of boot
-> > is maintained.
-> > 
-> > Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
-> > ---
-> > The last line there is a white lie. v6.1-rcN has both v2022.09 and
-> > v2022.10 reference design changes. This patch only accounts for the
-> > v2022.09 changes. The FPGA design is a moving target and I am not
-> > really sure how to handle that in QEMU. For v2022.10 a bunch of stuff
-> > got changed, including the addresses that DDR lies at which I am not
-> > sure how to handle yet.
-> > 
-> > That puts my todo list of broken things to:
-> > - MMC (only direct kernel boot works), pre v2022.09 reference issue
-> 
-> How do you start without 'direct kernel boot'?
 
-You used to be able to load the "bios" etc and follow the boot flow [0].
-This no longer works, and has not for at least a year. I assume it still
-works if you check out the (fossilised) versions mentioned in that doc.
-Think I said it last time I sent patches, but we had some floating around
-internally that I know /did/ work at some point about this time last year
-but I was never able to figure out the correct alignment of the stars to
-get working myself. It required pretty decent changes to the sdhci driver,
-which, I'm hoping cease to be required with the v2022.10 reference
-design that I mentioned else where in this patch.
-But one problem at a time ;)
+On 2022/11/10 6:55, Alistair Francis wrote:
+> On Thu, Oct 13, 2022 at 4:51 PM LIU Zhiwei <zhiwei_liu@linux.alibaba.com> wrote:
+>> Avoid calling riscv_itrigger_enabled() when calculate the tbflags.
+>> As the itrigger enable status can only be changed when write
+>> tdata1, migration load or itrigger fire, update env->itrigger_enabled
+>> at these places.
+>>
+>> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+>> ---
+>>   target/riscv/cpu.h        |  1 +
+>>   target/riscv/cpu_helper.c |  3 +--
+>>   target/riscv/debug.c      |  3 +++
+>>   target/riscv/machine.c    | 15 +++++++++++++++
+>>   4 files changed, 20 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index 13ca0f20ae..44499df9da 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -331,6 +331,7 @@ struct CPUArchState {
+>>       struct CPUWatchpoint *cpu_watchpoint[RV_MAX_TRIGGERS];
+>>       QEMUTimer *itrigger_timer[RV_MAX_TRIGGERS];
+>>       int64_t last_icount;
+>> +    bool itrigger_enabled;
+>>
+>>       /* machine specific rdtime callback */
+>>       uint64_t (*rdtime_fn)(void *);
+>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>> index 7d8089b218..95c766aec0 100644
+>> --- a/target/riscv/cpu_helper.c
+>> +++ b/target/riscv/cpu_helper.c
+>> @@ -106,8 +106,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+>>                              get_field(env->mstatus_hs, MSTATUS_VS));
+>>       }
+>>       if (riscv_feature(env, RISCV_FEATURE_DEBUG) && !icount_enabled()) {
+>> -        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER,
+>> -                           riscv_itrigger_enabled(env));
+>> +        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
+>>       }
+>>   #endif
+>>
+>> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+>> index db7745d4a3..2c0c8b18db 100644
+>> --- a/target/riscv/debug.c
+>> +++ b/target/riscv/debug.c
+>> @@ -565,6 +565,7 @@ void helper_itrigger_match(CPURISCVState *env)
+>>           }
+>>           itrigger_set_count(env, i, count--);
+>>           if (!count) {
+>> +            env->itrigger_enabled = riscv_itrigger_enabled(env);
+>>               do_trigger_action(env, i);
+>>           }
+>>       }
+>> @@ -662,6 +663,8 @@ static void itrigger_reg_write(CPURISCVState *env, target_ulong index,
+>>                   /* set the count to timer */
+>>                   timer_mod(env->itrigger_timer[index],
+>>                             env->last_icount + itrigger_get_count(env, index));
+>> +            } else {
+>> +                env->itrigger_enabled = riscv_itrigger_enabled(env);
+>>               }
+>>           }
+>>           break;
+>> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+>> index c2a94a82b3..cd32a52e19 100644
+>> --- a/target/riscv/machine.c
+>> +++ b/target/riscv/machine.c
+>> @@ -21,6 +21,8 @@
+>>   #include "qemu/error-report.h"
+>>   #include "sysemu/kvm.h"
+>>   #include "migration/cpu.h"
+>> +#include "sysemu/cpu-timers.h"
+>> +#include "debug.h"
+>>
+>>   static bool pmp_needed(void *opaque)
+>>   {
+>> @@ -229,11 +231,24 @@ static bool debug_needed(void *opaque)
+>>       return riscv_feature(env, RISCV_FEATURE_DEBUG);
+>>   }
+>>
+>> +static int debug_post_load(void *opaque, int version_id)
+>> +{
+>> +    RISCVCPU *cpu = opaque;
+>> +    CPURISCVState *env = &cpu->env;
+>> +
+>> +    if (icount_enabled()) {
+>> +        env->itrigger_enabled = riscv_itrigger_enabled(env);
+>> +    }
+>> +
+>> +    return 0;
+>> +}
+>> +
+>>   static const VMStateDescription vmstate_debug = {
+>>       .name = "cpu/debug",
+>>       .version_id = 2,
+>>       .minimum_version_id = 2,
+> The versions here should be bumped
 
-0 - https://www.qemu.org/docs/master/system/riscv/microchip-icicle-kit.html
+Hi Alistair and Richard,
 
-> > - PCI root port address, address changed in v2022.09 but from a cursory
-> >    check, I didn't see any PCI support in the first place. It's connected
-> >    to a FIC, so I think it can just be made into an unimplemented region.
-> > - DDR address changes, 2022.10 issue. Looks like a straightforward
-> >    change to hw/riscv/pfsoc.c but I don't think it'll be backwards
-> >    compatible.
-> > - hwrng breaks boot. Tipping away at this one, hopefully I'll have a fix
-> >    for it soon. Need to implement the irq side of the mailbox for it.
-> > 
-> > I'll send some more patches as I work through them.
-> > 
-> >   hw/misc/mchp_pfsoc_ioscb.c         | 6 ++++++
-> >   include/hw/misc/mchp_pfsoc_ioscb.h | 1 +
-> >   2 files changed, 7 insertions(+)
-> > 
-> > diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
-> > index f4fd55a0e5..f976e42f72 100644
-> > --- a/hw/misc/mchp_pfsoc_ioscb.c
-> > +++ b/hw/misc/mchp_pfsoc_ioscb.c
-> > @@ -33,6 +33,7 @@
-> >    */
-> >   #define IOSCB_WHOLE_REG_SIZE        0x10000000
-> >   #define IOSCB_SUBMOD_REG_SIZE       0x1000
-> > +#define IOSCB_CCC_REG_SIZE          0x2000000
-> >   /*
-> >    * There are many sub-modules in the IOSCB module.
-> > @@ -45,6 +46,7 @@
-> >   #define IOSCB_LANE23_BASE           0x06510000
-> >   #define IOSCB_CTRL_BASE             0x07020000
-> >   #define IOSCB_CFG_BASE              0x07080000
-> > +#define IOSCB_CCC_BASE              0x08000000
-> >   #define IOSCB_PLL_MSS_BASE          0x0E001000
-> >   #define IOSCB_CFM_MSS_BASE          0x0E002000
-> >   #define IOSCB_PLL_DDR_BASE          0x0E010000
-> > @@ -168,6 +170,10 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
-> >                             "mchp.pfsoc.ioscb.cfg", IOSCB_SUBMOD_REG_SIZE);
-> >       memory_region_add_subregion(&s->container, IOSCB_CFG_BASE, &s->cfg);
-> > +    memory_region_init_io(&s->ccc, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
-> > +                          "mchp.pfsoc.ioscb.ccc", IOSCB_CCC_REG_SIZE);
-> > +    memory_region_add_subregion(&s->container, IOSCB_CCC_BASE, &s->ccc);
-> 
-> Unrelated but using the TYPE_UNIMPLEMENTED_DEVICE would ease tracing all
-> these block accesses, as the block name would appear before the
-> address/size. See for example aspeed_mmio_map_unimplemented();
+I am not sure if we should bump versions when just add post_load 
+callback without adding new fields.Â  I once upstreamed a patch
+with a similar change but not bumping version.
 
-I just copy pasted what was already here. Follow on patch for the
-conversions since most of what's in this file is effectively
-unimplemented?
+Could you give some principles for bumping versions?
 
-> >       memory_region_init_io(&s->pll_mss, OBJECT(s), &mchp_pfsoc_pll_ops, s,
-> >                             "mchp.pfsoc.ioscb.pll_mss", IOSCB_SUBMOD_REG_SIZE);
-> >       memory_region_add_subregion(&s->container, IOSCB_PLL_MSS_BASE, &s->pll_mss);
-> > diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_pfsoc_ioscb.h
-> > index 9235523e33..687b213742 100644
-> > --- a/include/hw/misc/mchp_pfsoc_ioscb.h
-> > +++ b/include/hw/misc/mchp_pfsoc_ioscb.h
-> > @@ -30,6 +30,7 @@ typedef struct MchpPfSoCIoscbState {
-> >       MemoryRegion lane23;
-> >       MemoryRegion ctrl;
-> >       MemoryRegion cfg;
-> > +    MemoryRegion ccc;
-> >       MemoryRegion pll_mss;
-> >       MemoryRegion cfm_mss;
-> >       MemoryRegion pll_ddr;
-> 
+Thanks,
+Zhiwei
+
+> Alistair
+>
+>>       .needed = debug_needed,
+>> +    .post_load = debug_post_load,
+>>       .fields = (VMStateField[]) {
+>>           VMSTATE_UINTTL(env.trigger_cur, RISCVCPU),
+>>           VMSTATE_UINTTL_ARRAY(env.tdata1, RISCVCPU, RV_MAX_TRIGGERS),
+>> --
+>> 2.17.1
+>>
+>>
 
