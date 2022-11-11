@@ -1,65 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1otIKE-0005IK-EC
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Nov 2022 19:55:18 -0500
+	id 1otMf9-0005o6-5W
+	for mharc-qemu-riscv@gnu.org; Fri, 11 Nov 2022 00:33:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1otIKC-00056e-7B; Thu, 10 Nov 2022 19:55:16 -0500
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ id 1otMet-0005n0-Mi; Fri, 11 Nov 2022 00:32:57 -0500
+Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1otIKA-0001y8-F6; Thu, 10 Nov 2022 19:55:15 -0500
-Received: by mail-pf1-x430.google.com with SMTP id q9so3565923pfg.5;
- Thu, 10 Nov 2022 16:55:13 -0800 (PST)
+ id 1otMeq-0000Jk-02; Fri, 11 Nov 2022 00:32:54 -0500
+Received: by mail-vs1-xe31.google.com with SMTP id k67so4315502vsk.2;
+ Thu, 10 Nov 2022 21:32:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UjvqnLjstwcuGX56iIcCKGJ3BEuf6YuY+U4Mik4ITnc=;
- b=oqC3E0gvI/KfL7FRB+BWVMAzHq0fasdoiuOSHOxVTqmAQG0L9RZRHEaoiZ0TeqyNyr
- 0mehjbzjXqd6dDk5NpJhn9QhxOh/7tzispFepHusyJojQK2imgslk09X91mqvpR2Y+C0
- YbldejGkTw1b2yA1z8smVK2c0r+cyj9aBRlY+r/+Nh5iwk5PXfCo0gXE5u2zUlZjP5Dl
- hFbo1ZKf4gOmv16HWBmsKkdJ/z1A3hpSCoxaftJEPpX5aJuLCl9g/LsYWGwREOQ+iH35
- 34Bdje4UbgkBpbrvbOegMJO/5zvbkoRQIorDQGnKD1IaClS5UuJbOiTTuCo0xO6sHDQk
- rYHQ==
+ bh=nNUvZzjb2uOhPtX++Yg4Zw8QeEN21wgTb01S1CTt2xU=;
+ b=Gex8E3RbpMuTPVZhGoiLwJJYNqzHihOLNf5sCkGdxzsXpRmU5je/RDQdskp+A8oHs5
+ o28uBUVq95XHldgQ+ZAJJ1AFZbQLWK08/xsaWu83HMz2CmAoIEGnUGm6vxfPmJN0HMVS
+ qSDjH1VBqat8xZe4iIBE2f7J6RfIXQQdD63ZqyyAw41x2jOvyv6WTUVsLU3+cfdfN3mp
+ 8rgbQxtrlUu9y8y93fYsTYokcLoYc0Ip64W4KNCd7SSQTnu07EY2/ECvbcTY21efDAHY
+ rb6zJgNdvm9JtezG/tCy/eGYtKTUnxfJDtmxiCRUjz7mYpA6/8UkFbumDuMWkNSnJbx9
+ TaKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UjvqnLjstwcuGX56iIcCKGJ3BEuf6YuY+U4Mik4ITnc=;
- b=ofhv93SjX6TLDzR6hc1+fz4jjbwMKci0+jr1zWNvHaj3j+mR/VMBQXszVtfNxD3C9X
- 6g9e2p8SDTBO8DSm7RD5kKmgrT0gHqUhxgEs1YTyROHQO7LFhfTbTiaBHWSd+WI1u89x
- cr5v7wwD+LaGVwQeGpTkRkHhsQWSsIxtwWh0CFpss3NIv/Bx3hxh+dPFBcI5qKrdqSm8
- R6z6s0SnLob4rn1c+WRsQnFPZ9y+DWwsDDzqEvGinqIUEdTwJ/g3dWlHnvONkAifHIu1
- N+DhGfTr6HCgjcfo6qyn0XuK5+pGRcujceCnBx1gWghVN7cGmgbQXx0fEeLAfR4TMAal
- H7Kw==
-X-Gm-Message-State: ACrzQf2fPHiFuUkI1ds0xLLMJC3NVGe0lVdP5iiurILjcxmwgjIm7W4m
- fPEDA17ohep5pT+Hn5ZF2luovWNQkIdmpnDwC7A=
-X-Google-Smtp-Source: AMsMyM42qusSBWdsmEqV4B3ee7ajhXfClmPKSkWPqyYK2tHI6DAbVHwbz4yd59u1nQXgCnc1IdJyWManFM8exxiCQtc=
-X-Received: by 2002:a63:64c4:0:b0:46b:3c3d:f618 with SMTP id
- y187-20020a6364c4000000b0046b3c3df618mr3901729pgb.423.1668128112011; Thu, 10
- Nov 2022 16:55:12 -0800 (PST)
+ bh=nNUvZzjb2uOhPtX++Yg4Zw8QeEN21wgTb01S1CTt2xU=;
+ b=CbSj5X+H/Rp9Cxc2eJGHcuLI36fie2UR/OzLBpaMcxdMQQvNgdrr5Bx9AH5cEho8Vc
+ B3sLfrTFnDN0xnwuL8iYxg//mGCep6VcNkXTfznswu+5X0OS7myrjIuGSyPUCToFTUxl
+ 6106ewHiaUJupOldE1vn3owKlu4FVKBb43NVCZGI/9XxcfNtU2Hd9IOP3cfAgdgO9zfI
+ xEzxRuBR+S8z2IDq7hyZ6NuCktJKaTFfPGBg0/QwRIq04hncYaAgPYFI9fPYv73wGeEl
+ i3YmvYN4pswDY0Sabc4zMB3Mr5JvoK7YZffBKN3dQblC95n7nYB7DnUG2+F1FMP//+f1
+ r11g==
+X-Gm-Message-State: ANoB5pkjLNYcE5ZiyJD0MPRLvjV1OIBwIcx1G+6rtH40/g0RYKl9kLo1
+ snocbPZUCOfZC7UIy5cE5TLkNCfLttGQK7nfn9o=
+X-Google-Smtp-Source: AA0mqf52YLUryPyJWQGzr3fmG3c09Oi8Q5G52mvd0ZtHOG9eMTZNig4gLRrEdd5whBHbX9hlKQJdMhpCSHal556uTMY=
+X-Received: by 2002:a67:d60d:0:b0:3a6:eec3:b246 with SMTP id
+ n13-20020a67d60d000000b003a6eec3b246mr97678vsj.64.1668144769523; Thu, 10 Nov
+ 2022 21:32:49 -0800 (PST)
 MIME-Version: 1.0
 References: <20221013062946.7530-1-zhiwei_liu@linux.alibaba.com>
- <20221013062946.7530-5-zhiwei_liu@linux.alibaba.com>
- <CAKmqyKO0EUKg7k95RGnk3_=4BXynECBPfV5-_2VPW4A7p45daw@mail.gmail.com>
- <4fb639df-889f-a76d-6c62-126ec4d9e5e1@linux.alibaba.com>
- <f9600317-b40a-50fc-3f85-8ccae0c6790e@linaro.org>
-In-Reply-To: <f9600317-b40a-50fc-3f85-8ccae0c6790e@linaro.org>
+In-Reply-To: <20221013062946.7530-1-zhiwei_liu@linux.alibaba.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Nov 2022 10:54:45 +1000
-Message-ID: <CAKmqyKMfDvjAedv2TgnMUSiwRawvBVV5CbabkGh6=dnipM11ng@mail.gmail.com>
-Subject: Re: [PATCH v1 4/4] target/riscv: Add itrigger_enabled field to
- CPURISCVState
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org, 
- qemu-riscv@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com, 
- bin.meng@windriver.com, sergey.matyukevich@syntacore.com, 
+Date: Fri, 11 Nov 2022 15:31:00 +1000
+Message-ID: <CAKmqyKPXK6Zk8PBzAUz4utLvM+hgKBa4gKDF7MZSm=5vRhrhCw@mail.gmail.com>
+Subject: Re: [PATCH v1 0/4] Support native debug icount trigger
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Alistair.Francis@wdc.com, 
+ palmer@dabbelt.com, bin.meng@windriver.com, sergey.matyukevich@syntacore.com, 
  vladimir.isaev@syntacore.com, anatoly.parshintsev@syntacore.com, 
  philipp.tomsich@vrull.eu, zhiwei_liu@c-sky.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x430.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -80,45 +74,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2022 00:55:16 -0000
+X-List-Received-Date: Fri, 11 Nov 2022 05:32:59 -0000
 
-On Thu, Nov 10, 2022 at 3:35 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Thu, Oct 13, 2022 at 4:34 PM LIU Zhiwei <zhiwei_liu@linux.alibaba.com> wrote:
 >
-> On 11/10/22 13:15, LIU Zhiwei wrote:
-> >>> +static int debug_post_load(void *opaque, int version_id)
-> >>> +{
-> >>> +    RISCVCPU *cpu = opaque;
-> >>> +    CPURISCVState *env = &cpu->env;
-> >>> +
-> >>> +    if (icount_enabled()) {
-> >>> +        env->itrigger_enabled = riscv_itrigger_enabled(env);
-> >>> +    }
-> >>> +
-> >>> +    return 0;
-> >>> +}
-> >>> +
-> >>>   static const VMStateDescription vmstate_debug = {
-> >>>       .name = "cpu/debug",
-> >>>       .version_id = 2,
-> >>>       .minimum_version_id = 2,
-> >> The versions here should be bumped
-> >
-> > Hi Alistair and Richard,
-> >
-> > I am not sure if we should bump versions when just add post_load callback without adding
-> > new fields.  I once upstreamed a patch
-> > with a similar change but not bumping version.
+> icount trigger set an instruction count. After one instruction retired,
+> the count will be decreased by 1. If the count decreased to 0, the icount
+> trigger will fire.
 >
-> Simply adding a post_load does not require a version bump.
+> icount trigger is needed by single step ptrace system call and the native
+> GDB.
+>
+> In this patch set, change the translation when icount trigger enabled in the
+> way that instruction executes one by one. After executing one instruction,
+> call a helper function to decrease the count for itrigger.
+>
+>
+> It also provides an accelebrated way. If QEMU executes with -icount parameter,
+> itrigger is simulated by a timer with the count in itrigger as the deadline.
+>
+> Note the count in itrigger will only decrease when the priviledge matches, which
+> is also processed in this patch set.
+>
+>
+> After merging this patch set, QEMU will support type2/type6 trigger(needed by
+> breakpoint and watchpoint) and icount trigger(needed by single step),
+> which is enough for a PoC of native debug.
+>
+> LIU Zhiwei (4):
+>   target/riscv: Add itrigger support when icount is not enabled
+>   target/riscv: Add itrigger support when icount is enabled
+>   target/riscv: Enable native debug itrigger
+>   target/riscv: Add itrigger_enabled field to CPURISCVState
 
-Ah, my mistake then
+Thanks!
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Applied to riscv-to-apply.next
 
 Alistair
 
 >
+>  target/riscv/cpu.h                            |   5 +
+>  target/riscv/cpu_helper.c                     |   8 +
+>  target/riscv/debug.c                          | 205 ++++++++++++++++++
+>  target/riscv/debug.h                          |  13 ++
+>  target/riscv/helper.h                         |   2 +
+>  .../riscv/insn_trans/trans_privileged.c.inc   |   4 +-
+>  target/riscv/insn_trans/trans_rvi.c.inc       |   8 +-
+>  target/riscv/insn_trans/trans_rvv.c.inc       |   4 +-
+>  target/riscv/machine.c                        |  15 ++
+>  target/riscv/translate.c                      |  33 ++-
+>  10 files changed, 286 insertions(+), 11 deletions(-)
 >
-> r~
+> --
+> 2.17.1
+>
+>
 
