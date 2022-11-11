@@ -1,96 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1otT0k-0000U2-MA
-	for mharc-qemu-riscv@gnu.org; Fri, 11 Nov 2022 07:19:54 -0500
+	id 1otYj1-0008Ae-8t
+	for mharc-qemu-riscv@gnu.org; Fri, 11 Nov 2022 13:25:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1otT0i-0000TV-SQ; Fri, 11 Nov 2022 07:19:52 -0500
-Received: from black.elm.relay.mailchannels.net ([23.83.212.19])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1otT0g-0000Kx-Ai; Fri, 11 Nov 2022 07:19:52 -0500
-X-Sender-Id: hostpapa|x-authuser|frederic@petrot.fr
-Received: from relay.mailchannels.net (localhost [127.0.0.1])
- by relay.mailchannels.net (Postfix) with ESMTP id 823913C1BD3;
- Fri, 11 Nov 2022 12:19:39 +0000 (UTC)
-Received: from hp220.hostpapa.com (unknown [127.0.0.6])
- (Authenticated sender: hostpapa)
- by relay.mailchannels.net (Postfix) with ESMTPA id 35C193C237E;
- Fri, 11 Nov 2022 12:19:38 +0000 (UTC)
-ARC-Seal: i=1; s=arc-2022; d=mailchannels.net; t=1668169178; a=rsa-sha256;
- cv=none;
- b=a+yAEgXR8bqVNwXzptZKXi8HCe7XkwvuBG1wai/rLStmlwNr1IpDSeVcnOcUjaNbBP8TQr
- S+Epoop8d6eAt3ojdI0ch/yoV+bhx5BA43WrcyRb9nyUm4dHoRZnzKGTZfR9t97beJORCE
- p99sHdN5DcWq768SaYtaTWMeC6CHZPxHtJjQ8zqbTTYmSJ+NBps20wAdcNqGXPV/ZAxoEe
- c+bc9ti595TfPeg3cN4IDnH300IagUJnpXZ5oGX4m98OdiTLPE1arZXgE6JQvguBFDl9pw
- ThzWVUhYeo1uKbA29DDAcReSmJa11GKD+ZCWgg2SkNfxSEgbjO0vORED4LoaBA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mailchannels.net; s=arc-2022; t=1668169178;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:dkim-signature;
- bh=r1FwpW/EPReNfmClr960YSQTrnH6dDDn3pT0s93/prc=;
- b=6hwtooWmPnUE0ekPcew/GYIDVE9VXAPBVp7pgwOdDfOmqJDS0yPDAc3AqpsU76i7oth6IJ
- owFbQkcP/tYmTMebynoTvz2shk12ea4ES8JuQ0/atXLMQCDv7yz7Nc6yzRhY22fvynvHKQ
- zgJ9v9waeIYTqNJ6jFXVhJJulU4O5GgKOKQlIsYQojYAI+Q3byHR7vr/X/k2rHcpVRd1Iw
- NBHQRqWi4W5xw9sjUr0CUaH4GwAYUVsajarl8T6UbY6l7w0hTQmmDLEU0NtP1D6hJeJ75T
- 8NThqXZHCvSJYrZdv7+yRtiUQjGiyI3Vi+NJO3Lnqpc2YjSnPCs/0cBOcZVu6A==
-ARC-Authentication-Results: i=1; rspamd-7f9bbcf788-nvvnz;
- auth=pass smtp.auth=hostpapa
- smtp.mailfrom=frederic.petrot@univ-grenoble-alpes.fr
-X-Sender-Id: hostpapa|x-authuser|frederic@petrot.fr
-X-MC-Relay: Neutral
-X-MailChannels-SenderId: hostpapa|x-authuser|frederic@petrot.fr
-X-MailChannels-Auth-Id: hostpapa
-X-Stretch-Invention: 6a0f6a7c5d536f90_1668169179184_2628334900
-X-MC-Loop-Signature: 1668169179184:4102703633
-X-MC-Ingress-Time: 1668169179184
-Received: from hp220.hostpapa.com (hp220.hostpapa.com [69.90.161.120])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384)
- by 100.123.200.111 (trex/6.7.1); Fri, 11 Nov 2022 12:19:39 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=petrot.fr; 
- s=default;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=3R/kYYYKj94ju+Pw9Fg0tLhS12GjyBLodX3wjlW+hAw=; b=XS/mbq/YWzLG0x9/Hxcf8fpiEv
- kgf0b9givc+5Fm1YtvMq5kF9fVfubhXMgXSSLm/3JZmWe8RFf6O6WY9jORjcN/I/txwUwgTOBzuyz
- wnPaoW3ZYIHv22yetERmvU0TI7vNvYj2BuBzp4F/U2w7350H7epFIgbaKy9WpX3DtvyfTcUyWR5Q/
- EBNJF6c2Tu3yDf4Atf50KjggBxCO5gK1ZdYbGV0e2f9EDtLYXZo0VLvD/mr8C9webjFNBuR4MNyNo
- akUKRnSj0VVJFAX7sUpDlTvi7K7L8L84TfOPecuhZHhkK8vrE46C8g2bwr3RWOn9VyWX6Ki8vgzuJ
- NuVvAW9A==;
-Received: from pers-184-216.vpn-inp.grenoble-inp.fr ([147.171.184.216]:55290
- helo=palmier.grenoble-inp.fr)
- by hp220.hostpapa.com with esmtpa (Exim 4.95)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1otT0U-002f2u-LE; Fri, 11 Nov 2022 13:19:37 +0100
-From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-To: Alistair.Francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH] hw/intc: sifive_plic: Renumber the S irqs for numa support
-Date: Fri, 11 Nov 2022 13:19:13 +0100
-Message-Id: <20221111121913.1531030-1-frederic.petrot@univ-grenoble-alpes.fr>
-X-Mailer: git-send-email 2.37.2
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1otYit-000861-3O
+ for qemu-riscv@nongnu.org; Fri, 11 Nov 2022 13:25:53 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1otYim-0005Gd-Fx
+ for qemu-riscv@nongnu.org; Fri, 11 Nov 2022 13:25:49 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ t25-20020a1c7719000000b003cfa34ea516so5894669wmi.1
+ for <qemu-riscv@nongnu.org>; Fri, 11 Nov 2022 10:25:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kIPHK6op8WfT+LuyUEUjPy9me25/GAi6rKKy/+XKxJ0=;
+ b=XDQdgaEEYl9OP3SbewpFNKKQCGkTSxrf959z8bsOyzzLTs5GgxAOXfAnNbBMTs2R43
+ Ot91xlWiiHI69BMXBErNw8/a4MQCrXtDKCSYnX91ntnCzja2dkznCtDNZ56AgEBLOA8k
+ fN5Y8YqV/J8HDu+vtt0hNUbW0mo4xhS+u/9RiRbLqBAYf2pMfMu6hTt66sYrvhXaE1FU
+ gQ/QHXNpWrMwWn31s0EWU0ItkIYg6miPOS66nNKpGOxqimA1QQTIqXsWcr+zqTyDi/vf
+ jTZ/M3ttY04jghepwxpW7C8C8o3MjjfCi522QcoYLGUdKYeKR0Z5mwIDudSyraPPZtD/
+ rH8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=kIPHK6op8WfT+LuyUEUjPy9me25/GAi6rKKy/+XKxJ0=;
+ b=a9M1KJqtoTYffLPzX5kSGfJIKOGnolWBTsfrXEH7edg1bvbWlrDOmeXtyaguyaPVDe
+ BTbmtSaHoBgg7qjmPR6YJZaMTS35YVb1IxEh5f8W9nTQRoPw5/5UFLBLFJ9mbIXIawE3
+ JkvGvg4cTe1waLWkr46QmQL3Q+R97WZ5+89UccdMWQ72aJx1eVBJ9kPS4drXF3fNN6Dk
+ P2T1p+5A337oDZPPhVQHOSwieemYtu+DLG6NswHt6CPrE2ZoTx0l08Rhs7LtypPc1xYH
+ 9PW1XAjq13IeVbaMOv5jIpFpUvWw+h5Qx8FCwR5g3J4rgdpwYhb1MxFsW2lo7OTmPSAM
+ V5fw==
+X-Gm-Message-State: ANoB5plvJcqx6ebhURK36MIaCnJhEWZtxRMjlfZGypyrgEtzSSXGap6F
+ iDJ0iz63ahvVxHteBgef5hHfOARwB3AMrQ==
+X-Google-Smtp-Source: AA0mqf5p/4IItR+2i45oxsv2ufuvpmReAF2wpmKiqDajbJ1STalmURi1Hda3uUniBmR/3xQivaKZVg==
+X-Received: by 2002:a05:600c:511d:b0:3cf:9a6a:c72a with SMTP id
+ o29-20020a05600c511d00b003cf9a6ac72amr2161651wms.168.1668191142863; 
+ Fri, 11 Nov 2022 10:25:42 -0800 (PST)
+Received: from zen.linaroharston ([185.81.254.11])
+ by smtp.gmail.com with ESMTPSA id
+ f20-20020a05600c155400b003c6f3e5ba42sm11363679wmg.46.2022.11.11.10.25.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 11 Nov 2022 10:25:39 -0800 (PST)
+Received: from zen.lan (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id D05821FFC3;
+ Fri, 11 Nov 2022 18:25:36 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: f4bug@amsat.org, =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH  v5 12/20] target/riscv: initialise MemTxAttrs for CPU access
+Date: Fri, 11 Nov 2022 18:25:27 +0000
+Message-Id: <20221111182535.64844-13-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20221111182535.64844-1-alex.bennee@linaro.org>
+References: <20221111182535.64844-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-AuthUser: frederic@petrot.fr
-Received-SPF: neutral client-ip=23.83.212.19;
- envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
- helo=black.elm.relay.mailchannels.net
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,46 +88,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2022 12:19:53 -0000
+X-List-Received-Date: Fri, 11 Nov 2022 18:25:54 -0000
 
-Commit 40244040 changed the way the S irqs are numbered. This breaks when
-using numa configuration, e.g.:
-./qemu-system-riscv64 -nographic -machine virt,dumpdtb=numa-tree.dtb \
-                      -m 2G -smp cpus=16 \
-		      -object memory-backend-ram,id=mem0,size=512M \
-		      -object memory-backend-ram,id=mem1,size=512M \
-		      -object memory-backend-ram,id=mem2,size=512M \
-		      -object memory-backend-ram,id=mem3,size=512M \
-		      -numa node,cpus=0-3,memdev=mem0,nodeid=0 \
-		      -numa node,cpus=4-7,memdev=mem1,nodeid=1 \
-		      -numa node,cpus=8-11,memdev=mem2,nodeid=2 \
-		      -numa node,cpus=12-15,memdev=mem3,nodeid=3
-leads to:
-Unexpected error in object_property_find_err() at ../qom/object.c:1304:
-qemu-system-riscv64: Property 'riscv.sifive.plic.unnamed-gpio-out[8]' not
-found
+get_physical_address works in the CPU context. Use the new
+MEMTXATTRS_CPU constructor to ensure the correct CPU id is filled in
+should it ever be needed by any devices later.
 
-This patch makes the nubering of the S irqs identical to what it was before.
+Currently the tlb_fill function isn't using the set with attributes
+function so IO accesses from the softmmu slow-path will not be tagged
+as coming from the CPU.
 
-Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- hw/intc/sifive_plic.c | 2 +-
+ target/riscv/cpu_helper.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-index c2dfacf028..89d2122742 100644
---- a/hw/intc/sifive_plic.c
-+++ b/hw/intc/sifive_plic.c
-@@ -480,7 +480,7 @@ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
-                                   qdev_get_gpio_in(DEVICE(cpu), IRQ_M_EXT));
-         }
-         if (plic->addr_config[i].mode == PLICMode_S) {
--            qdev_connect_gpio_out(dev, cpu_num,
-+            qdev_connect_gpio_out(dev, cpu_num - plic->hartid_base,
-                                   qdev_get_gpio_in(DEVICE(cpu), IRQ_S_EXT));
-         }
-     }
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 278d163803..e661f9e68a 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -761,7 +761,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+      * correct, but the value visible to the exception handler
+      * (riscv_cpu_do_interrupt) is correct */
+     MemTxResult res;
+-    MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
++    MemTxAttrs attrs = MEMTXATTRS_CPU(env_cpu(env));
+     int mode = mmu_idx & TB_FLAGS_PRIV_MMU_MASK;
+     bool use_background = false;
+     hwaddr ppn;
 -- 
-2.37.2
+2.34.1
 
 
