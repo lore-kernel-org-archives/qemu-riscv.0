@@ -1,81 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1otYj1-0008Ae-8t
-	for mharc-qemu-riscv@gnu.org; Fri, 11 Nov 2022 13:25:59 -0500
+	id 1otaPL-0003vZ-6u
+	for mharc-qemu-riscv@gnu.org; Fri, 11 Nov 2022 15:13:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1otYit-000861-3O
- for qemu-riscv@nongnu.org; Fri, 11 Nov 2022 13:25:53 -0500
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1otaPJ-0003vI-VG
+ for qemu-riscv@nongnu.org; Fri, 11 Nov 2022 15:13:45 -0500
+Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1otYim-0005Gd-Fx
- for qemu-riscv@nongnu.org; Fri, 11 Nov 2022 13:25:49 -0500
-Received: by mail-wm1-x32e.google.com with SMTP id
- t25-20020a1c7719000000b003cfa34ea516so5894669wmi.1
- for <qemu-riscv@nongnu.org>; Fri, 11 Nov 2022 10:25:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kIPHK6op8WfT+LuyUEUjPy9me25/GAi6rKKy/+XKxJ0=;
- b=XDQdgaEEYl9OP3SbewpFNKKQCGkTSxrf959z8bsOyzzLTs5GgxAOXfAnNbBMTs2R43
- Ot91xlWiiHI69BMXBErNw8/a4MQCrXtDKCSYnX91ntnCzja2dkznCtDNZ56AgEBLOA8k
- fN5Y8YqV/J8HDu+vtt0hNUbW0mo4xhS+u/9RiRbLqBAYf2pMfMu6hTt66sYrvhXaE1FU
- gQ/QHXNpWrMwWn31s0EWU0ItkIYg6miPOS66nNKpGOxqimA1QQTIqXsWcr+zqTyDi/vf
- jTZ/M3ttY04jghepwxpW7C8C8o3MjjfCi522QcoYLGUdKYeKR0Z5mwIDudSyraPPZtD/
- rH8w==
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1otaPI-0004Cq-7y
+ for qemu-riscv@nongnu.org; Fri, 11 Nov 2022 15:13:45 -0500
+Received: by mail-pg1-x52e.google.com with SMTP id 78so5179935pgb.13
+ for <qemu-riscv@nongnu.org>; Fri, 11 Nov 2022 12:13:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/hIUxVxO8TjvOlxq4eDg++WCGB24oDt5Olj4d0qqwrY=;
+ b=n3sMmr8a4bpR3jx3xhGJ7B8Mm8DHYDie6Hx5EowziyDL3hS5qKFzi2/VRdQySb4wgD
+ C5BdEhexss4wR3s59iXuobf4nLICU6Crx/kwG2Ry51x914l9GJ25Uo8JKE82hRg3kjUO
+ rIDGg90xjEB0mXeN1bvvKsyNXUdv/M8wPsQmE1a6LswarCYSy2oDPQMvGiiL6r76Ql9T
+ AtbtCEACpgoOyd0w3dw5b7ZkQ/OYW8vEFcn5Ryv6NK/UwB/gcbLFj3u9MUZ9I5ZfKmJq
+ DuqCFJzy78UmVcHgUSOBD60uafU642pprvs5yiw+9bhJPfAocGAajbqooaO78OXAibr2
+ z2KQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kIPHK6op8WfT+LuyUEUjPy9me25/GAi6rKKy/+XKxJ0=;
- b=a9M1KJqtoTYffLPzX5kSGfJIKOGnolWBTsfrXEH7edg1bvbWlrDOmeXtyaguyaPVDe
- BTbmtSaHoBgg7qjmPR6YJZaMTS35YVb1IxEh5f8W9nTQRoPw5/5UFLBLFJ9mbIXIawE3
- JkvGvg4cTe1waLWkr46QmQL3Q+R97WZ5+89UccdMWQ72aJx1eVBJ9kPS4drXF3fNN6Dk
- P2T1p+5A337oDZPPhVQHOSwieemYtu+DLG6NswHt6CPrE2ZoTx0l08Rhs7LtypPc1xYH
- 9PW1XAjq13IeVbaMOv5jIpFpUvWw+h5Qx8FCwR5g3J4rgdpwYhb1MxFsW2lo7OTmPSAM
- V5fw==
-X-Gm-Message-State: ANoB5plvJcqx6ebhURK36MIaCnJhEWZtxRMjlfZGypyrgEtzSSXGap6F
- iDJ0iz63ahvVxHteBgef5hHfOARwB3AMrQ==
-X-Google-Smtp-Source: AA0mqf5p/4IItR+2i45oxsv2ufuvpmReAF2wpmKiqDajbJ1STalmURi1Hda3uUniBmR/3xQivaKZVg==
-X-Received: by 2002:a05:600c:511d:b0:3cf:9a6a:c72a with SMTP id
- o29-20020a05600c511d00b003cf9a6ac72amr2161651wms.168.1668191142863; 
- Fri, 11 Nov 2022 10:25:42 -0800 (PST)
-Received: from zen.linaroharston ([185.81.254.11])
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/hIUxVxO8TjvOlxq4eDg++WCGB24oDt5Olj4d0qqwrY=;
+ b=EGjaz0FSazTzINqgb0b+CZAZm2umGzN4dybx2R4CT5+kAIYk2ZM+CZSpi8/lI4h5cI
+ YbXv2RUtkWhcRtCVfjMg93m4hkQza1PBgC1V6gDXDz6tNNZ4aWBdzilzfNr7vTnCje+R
+ i2YjLaUbDXEIRXIUaXN/Vw9aqqpHMDb/ZPhJcK70D/BDEuMe5bjwkb6qNPAqsuHyKPyV
+ kVYGs1s8pI3mI4cj6ffp+FTaA7pqxv/7T1ppajKK89YNxcFDDRb63azMIw/3xpRaMoN5
+ t1dkLk909nOimGJvUrTd6EiHNc5+MHUB7yH+BoLhpxcF2vsXj2WtevW+KykK++TNjmag
+ cW8A==
+X-Gm-Message-State: ANoB5pm4y44HpkRbw65heIq34Me/jABu7vQs7UNPQCE4pyHTanGr6wl3
+ C6HWn+LNGb3Dm7Ccc+VEuHyoXg==
+X-Google-Smtp-Source: AA0mqf7iCrw8tEQkVYVpOPjqpZlQGpR8P1ZYTlljFzh80HFnkqmUAgNq9qx++8AjFceFL0vIVxng1Q==
+X-Received: by 2002:a05:6a00:1488:b0:53b:f208:d7db with SMTP id
+ v8-20020a056a00148800b0053bf208d7dbmr4240134pfu.42.1668197622002; 
+ Fri, 11 Nov 2022 12:13:42 -0800 (PST)
+Received: from atishp.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- f20-20020a05600c155400b003c6f3e5ba42sm11363679wmg.46.2022.11.11.10.25.38
+ h7-20020aa796c7000000b0056c410fd03fsm1979915pfq.40.2022.11.11.12.13.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Nov 2022 10:25:39 -0800 (PST)
-Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id D05821FFC3;
- Fri, 11 Nov 2022 18:25:36 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+ Fri, 11 Nov 2022 12:13:41 -0800 (PST)
+From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
-Cc: f4bug@amsat.org, =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: Atish Patra <atishp@rivosinc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH  v5 12/20] target/riscv: initialise MemTxAttrs for CPU access
-Date: Fri, 11 Nov 2022 18:25:27 +0000
-Message-Id: <20221111182535.64844-13-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20221111182535.64844-1-alex.bennee@linaro.org>
-References: <20221111182535.64844-1-alex.bennee@linaro.org>
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Anup Patel <apatel@ventanamicro.com>, qemu-riscv@nongnu.org
+Subject: [PATCH] hw/riscv: virt: Remove the redundant ipi-id property
+Date: Fri, 11 Nov 2022 12:13:37 -0800
+Message-Id: <20221111201337.3320349-1-atishp@rivosinc.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
+ envelope-from=atishp@rivosinc.com; helo=mail-pg1-x52e.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,35 +79,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Nov 2022 18:25:54 -0000
+X-List-Received-Date: Fri, 11 Nov 2022 20:13:46 -0000
 
-get_physical_address works in the CPU context. Use the new
-MEMTXATTRS_CPU constructor to ensure the correct CPU id is filled in
-should it ever be needed by any devices later.
+The imsic DT binding has changed and no longer require an ipi-id.
+The latest IMSIC driver dynamically allocates ipi id if slow-ipi
+is not defined.
 
-Currently the tlb_fill function isn't using the set with attributes
-function so IO accesses from the softmmu slow-path will not be tagged
-as coming from the CPU.
+Get rid of the unused dt property which may lead to confusion.
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- target/riscv/cpu_helper.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/riscv/virt.c         | 2 --
+ include/hw/riscv/virt.h | 1 -
+ 2 files changed, 3 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 278d163803..e661f9e68a 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -761,7 +761,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-      * correct, but the value visible to the exception handler
-      * (riscv_cpu_do_interrupt) is correct */
-     MemTxResult res;
--    MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
-+    MemTxAttrs attrs = MEMTXATTRS_CPU(env_cpu(env));
-     int mode = mmu_idx & TB_FLAGS_PRIV_MMU_MASK;
-     bool use_background = false;
-     hwaddr ppn;
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index a5bc7353b412..0bc0964e42a8 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -546,8 +546,6 @@ static void create_fdt_imsic(RISCVVirtState *s, const MemMapEntry *memmap,
+         riscv_socket_count(mc) * sizeof(uint32_t) * 4);
+     qemu_fdt_setprop_cell(mc->fdt, imsic_name, "riscv,num-ids",
+         VIRT_IRQCHIP_NUM_MSIS);
+-    qemu_fdt_setprop_cells(mc->fdt, imsic_name, "riscv,ipi-id",
+-        VIRT_IRQCHIP_IPI_MSI);
+     if (riscv_socket_count(mc) > 1) {
+         qemu_fdt_setprop_cell(mc->fdt, imsic_name, "riscv,hart-index-bits",
+             imsic_num_bits(imsic_max_hart_per_socket));
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index be4ab8fe7f71..62513e075c47 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -93,7 +93,6 @@ enum {
+ 
+ #define VIRT_PLATFORM_BUS_NUM_IRQS 32
+ 
+-#define VIRT_IRQCHIP_IPI_MSI 1
+ #define VIRT_IRQCHIP_NUM_MSIS 255
+ #define VIRT_IRQCHIP_NUM_SOURCES VIRTIO_NDEV
+ #define VIRT_IRQCHIP_NUM_PRIO_BITS 3
 -- 
-2.34.1
+2.25.1
 
 
