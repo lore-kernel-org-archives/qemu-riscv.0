@@ -1,66 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1otefO-0007GJ-0b
-	for mharc-qemu-riscv@gnu.org; Fri, 11 Nov 2022 19:46:38 -0500
+	id 1otqPv-0001HK-GA
+	for mharc-qemu-riscv@gnu.org; Sat, 12 Nov 2022 08:19:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1otefM-0007G7-V5; Fri, 11 Nov 2022 19:46:37 -0500
-Received: from mail-qk1-x72a.google.com ([2607:f8b0:4864:20::72a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1otefK-0001N8-Bj; Fri, 11 Nov 2022 19:46:36 -0500
-Received: by mail-qk1-x72a.google.com with SMTP id d7so1727033qkk.3;
- Fri, 11 Nov 2022 16:46:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hOWnhd9jB4qEfiDpej8jJQjB4Q/arkI6gFLu4bmVV+U=;
- b=e/AEuuVEfEXKDiz5l+KcJRJ/ZaDaFbn2ivZuOcw07WFXExk4vSnxRCQT45sMsj8p4C
- lYR3iigsPYZQ/bgmzkHyEyeMW+UoceCbs3uhNmYynZyihhoNFG5/DBKfbvZe4gWaJa6p
- 2OFszsgWdctd8kIlLxIhI7cZnd4JqnvN9QLTUbpvNWA8doNqtSkvem43VdVWJGyi41QZ
- MW9Vm2jqmIexFUiidQJ+i0i3lOdXkYDnjsF8y2FdWTKrDhVGCmK1b04TxUIHnclqwM1E
- 1K/zYtX5Jj/hoSK61xei5MSno1NffCq1DSz2CWyal+8J1VGWtPk7Kh80lIroZ8jNqhk/
- WdXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hOWnhd9jB4qEfiDpej8jJQjB4Q/arkI6gFLu4bmVV+U=;
- b=SNBvQXCyjTGbehwYEtbnIscQ8SodA34FAIt2mKbCHtqX8TppEN+bJyHNnddKF1g0CV
- HYz1FxfqDP7geM9WFn1dgMwZtcZt7At3oUwEQGW7DpY8ActXz1Fgr7/ArIYGCpNgBas8
- TR+Op2FSz8WCAl2o8AsU7oB1dbVK+sZ+1x9HfPZkxxNwS9UlVdcfxT5aDB3m60lxFXdN
- jz53YIFg0aK3OculZ+JUZs+QMqPdb2oOjdKEU2J4U+g+iArUPf1IMG9w3RQy1QxAvFQ0
- j4ciGSH+0Is8bLtP7aJoZ86AYCu1+4r6YfHYCdPX3GFWzGrIyaY4MLjYnRUKwwacnERx
- vIdA==
-X-Gm-Message-State: ANoB5plm/DqHrS4gRfo8SHuHRLH3ZD9jGP79arVt4xltzKjQVqSFXlR0
- 1Ui03GMs1vFR9xcI27Vu4+7+cV/+0Pa+Xke63vo=
-X-Google-Smtp-Source: AA0mqf7nx2r7EhBWoy7WWfiP5zQ2W9srtYNaExq47UzpM+1LtmbFU2liQEX4gL++nBpUfm7/Gj4jpC6NbiJ3qbDeito=
-X-Received: by 2002:a37:b007:0:b0:6f8:cdc2:b7a2 with SMTP id
- z7-20020a37b007000000b006f8cdc2b7a2mr3269861qke.132.1668213992974; Fri, 11
- Nov 2022 16:46:32 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1otqPr-0001Gs-KS; Sat, 12 Nov 2022 08:19:23 -0500
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1otqPo-0007Zt-9M; Sat, 12 Nov 2022 08:19:22 -0500
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 760EFB80835;
+ Sat, 12 Nov 2022 13:19:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A4BF3C433C1;
+ Sat, 12 Nov 2022 13:19:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1668259156;
+ bh=8CbbZTc1dKmRR7XuKYBTS4aTXWD7UoJaTExxqJCRIOM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=ndThsmi7UNSHGF6oxbGaG//Jr8ZA0/Z2/JxhBqAIRzxgp8u2ZBLn96XL3Gs1/8j8e
+ +XjZ7i8ijf/v8xLEmpCDqeFIgKhaMQVeL4ggOWoXh+x5Vi5I5Qp+SUmIrpfyG6l1aD
+ Eq2OdjZGNbThW4qrgGntoTctvpQ3KyZafoUg5Oba7LYOFkh6Mv06d+GBwsgbTjn8fW
+ OOqWDTplI5ygQy6lPC3RtxwUFICGL9M0elVq4qrtJeoMT9YtO+ObNix/B5FHD9dF7v
+ 42AlKqIEFkgyBctxq07bjtH2XkAEVEWcLeInaG/CL3bvSTL+kAV4Zilv5rLLhEtH06
+ lA9QQC50iEs1g==
+Date: Sat, 12 Nov 2022 13:19:12 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Conor Dooley <conor.dooley@microchip.com>
+Subject: Re: [PATCH] hw/misc/pfsoc: add fabric clocks to ioscb
+Message-ID: <Y2+dUCpd8OP52/DJ@spud>
+References: <20221109190849.1556711-1-conor@kernel.org>
+ <84b8985a-6fab-ff76-7058-f702203474c0@linaro.org>
+ <Y27pKpA0jo67Ntlz@spud>
+ <CAEUhbmUoken26s8n95fn9jdVkCiz-vPrWzt6G-z7Q23AfZ3gWw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20221111201337.3320349-1-atishp@rivosinc.com>
- <CAEUhbmV5ZJ0YnrGEtqTJ9PCCdGsLjxpVnK2qHhc7H9XBDHDkhA@mail.gmail.com>
- <CAHBxVyEjk1WVDOi6jSz86gLXV50-aEnFmaYjDvQu7PSdng_NLQ@mail.gmail.com>
-In-Reply-To: <CAHBxVyEjk1WVDOi6jSz86gLXV50-aEnFmaYjDvQu7PSdng_NLQ@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sat, 12 Nov 2022 08:46:22 +0800
-Message-ID: <CAEUhbmV9u_yJOvcVR8HwmSbtTe9Hk3LWb81zc=HAcDSWrhE5Sw@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: virt: Remove the redundant ipi-id property
-To: Atish Kumar Patra <atishp@rivosinc.com>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Anup Patel <apatel@ventanamicro.com>, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::72a;
- envelope-from=bmeng.cn@gmail.com; helo=mail-qk1-x72a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAEUhbmUoken26s8n95fn9jdVkCiz-vPrWzt6G-z7Q23AfZ3gWw@mail.gmail.com>
+Received-SPF: pass client-ip=145.40.68.75; envelope-from=conor@kernel.org;
+ helo=ams.source.kernel.org
+X-Spam_score_int: -70
+X-Spam_score: -7.1
+X-Spam_bar: -------
+X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -74,47 +65,90 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Nov 2022 00:46:37 -0000
+X-List-Received-Date: Sat, 12 Nov 2022 13:19:24 -0000
 
-On Sat, Nov 12, 2022 at 8:42 AM Atish Kumar Patra <atishp@rivosinc.com> wrote:
->
->
->
-> On Fri, Nov 11, 2022 at 4:39 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->>
->> On Sat, Nov 12, 2022 at 4:14 AM Atish Patra <atishp@rivosinc.com> wrote:
->> >
->> > The imsic DT binding has changed and no longer require an ipi-id.
->>
->> requires
->>
->
-> Sure. Will fix it.
->
->>
->> Could you please put a link here to the upstream imsic DT binding for reference?
->>
->
-> It's not merged yet. Here is the latest version:
->
-> https://lore.kernel.org/lkml/20221111044207.1478350-5-apatel@ventanamicro.com/
+On Sat, Nov 12, 2022 at 08:37:38AM +0800, Bin Meng wrote:
+> Hi Conor,
+> 
+> On Sat, Nov 12, 2022 at 8:31 AM Conor Dooley <conor@kernel.org> wrote:
+> >
+> > On Thu, Nov 10, 2022 at 12:18:44AM +0100, Philippe Mathieu-Daudé wrote:
+> > > Hi Conor,
+> > >
+> > > On 9/11/22 20:08, Conor Dooley wrote:
+> > > > From: Conor Dooley <conor.dooley@microchip.com>
+> > > >
+> > > > @@ -168,6 +170,10 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
+> > > >                             "mchp.pfsoc.ioscb.cfg", IOSCB_SUBMOD_REG_SIZE);
+> > > >       memory_region_add_subregion(&s->container, IOSCB_CFG_BASE, &s->cfg);
+> > > > +    memory_region_init_io(&s->ccc, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
+> > > > +                          "mchp.pfsoc.ioscb.ccc", IOSCB_CCC_REG_SIZE);
+> > > > +    memory_region_add_subregion(&s->container, IOSCB_CCC_BASE, &s->ccc);
+> > >
+> > > Unrelated but using the TYPE_UNIMPLEMENTED_DEVICE would ease tracing all
+> > > these block accesses, as the block name would appear before the
+> > > address/size. See for example aspeed_mmio_map_unimplemented();
+> >
+> > Certainly looks like a nice idea, and I gave it a go but kept running
+> > into issues due to my lack of understanding of QEMU :) I'm going to add
+> > this to my todo pile - while I have a v2 of this lined up, I'd rather
+> > not hold up adding the regions that prevent booting Linux etc as I
+> > fumble around trying to understand the hierarchy of devices required to
+> > set up something similar to your aspeed example.
+> >
+> 
+> Do you plan to bring QEMU support to the latest MSS_LINUX configuration [1]
 
-Thanks. Putting this link in the commit message helps a lot.
+"Yes". Our goal is to merge both the LINUX and BAREMETAL configurations
+in an upcoming reference design release. Notably absent from anything
+that I have sent here is any changes to the DDR configuration (and that
+and how the PCI root port is connected to the MSS are the only real
+differences between the two).
 
->
->>
->> > The latest IMSIC driver dynamically allocates ipi id if slow-ipi
->> > is not defined.
->> >
->> > Get rid of the unused dt property which may lead to confusion.
->> >
->> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
->> > ---
->> >  hw/riscv/virt.c         | 2 --
->> >  include/hw/riscv/virt.h | 1 -
->> >  2 files changed, 3 deletions(-)
->> >
+Currently, the LINUX one has 2 GiB of DDR at 0x10_0000_0000 & that's
+what the vendor kernel uses. None of upstream Linux, U-Boot or QEMU
+support that configuration. The baremetal one has 1 GiB at 0x8000_0000
+and 1 GiB at 0x10_0000_0000. When the two are merged, it'll be 1 GiB
+at 0x8000_0000 and 1 GiB at 0x10_4000_0000 - there's currently a
+v2022.10 reference design job file on [1] that's got this configuration
+but we are waiting for a corresponding release of Libero to properly
+release the tcl scripts etc. We're upstreaming U-Boot and Linux support
+for that configuration at the moment - but it's just a dts change there
+so no real concern about breaking any backwards compat as the older
+devicetrees will continue to work.
 
-Regards,
-Bin
+> Currently QEMU is supporting the MSS_BAREMETAL configuration. Do you
+> think it makes sense to support both?
+> [1] https://github.com/polarfire-soc/icicle-kit-reference-design
+
+I was kinda hoping to leave that part of things as-is for now and wait
+for the merged configuration. My main question with that is: do the
+older reference design configurations need to remain supported?
+
+The PCI root port stuff likely doesn't matter since it's not modelled
+(yet) by QEMU anyway but the DDR bit is going to be incompatible.
+The addresses at which DDR lies are controlled by the seg registers.
+These are briefly documented in the TRM (4.5 Segmentation Blocks) but
+IMO pretty badly explained there.
+IIUC, for bare metal applications that's set by the HAL from the XML
+exported by MSS configurator & for anything started via the HSS, the HSS
+does it instead.
+I was thinking something like defaulting the DDR configuration to the
+new, merged configuration & then if someone writes to the seg registers
+(which, IIUC, a bare-metal app does) changing the addresses at which
+QEMU places the DDR at runtime.
+That's what the hardware does, but I have put approximately zero thought
+into how to implement that.
+Without something like that, idk how we'd keep both newer and older
+reference designs working in QEMU.
+
+> Do you plan to bring QEMU support to the latest MSS_LINUX configuration
+
+Either way, any plans are dependant on me finding the time. I'm mostly
+just upstreaming the small changes that I need to make so that QEMU
+remains usable as a debugging tool for Linux stuff.
+
+Thanks,
+Conor.
+
 
