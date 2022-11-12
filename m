@@ -1,63 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oteWy-0004Gx-SR
-	for mharc-qemu-riscv@gnu.org; Fri, 11 Nov 2022 19:37:58 -0500
+	id 1oteYg-0005G8-Ig
+	for mharc-qemu-riscv@gnu.org; Fri, 11 Nov 2022 19:39:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1oteWu-0004GE-QP; Fri, 11 Nov 2022 19:37:52 -0500
-Received: from mail-qv1-xf34.google.com ([2607:f8b0:4864:20::f34])
+ id 1oteYc-0005Fe-N9; Fri, 11 Nov 2022 19:39:41 -0500
+Received: from mail-qv1-xf36.google.com ([2607:f8b0:4864:20::f36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1oteWt-0007mJ-0y; Fri, 11 Nov 2022 19:37:52 -0500
-Received: by mail-qv1-xf34.google.com with SMTP id x15so4423276qvp.1;
- Fri, 11 Nov 2022 16:37:50 -0800 (PST)
+ id 1oteYa-0008Ey-6L; Fri, 11 Nov 2022 19:39:37 -0500
+Received: by mail-qv1-xf36.google.com with SMTP id h10so4403218qvq.7;
+ Fri, 11 Nov 2022 16:39:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=USg1Aag3wg9LFrigYRWoUppoxdh/+k904378jVDPTZ8=;
- b=c4YElFLxMqdH/kWHGZ+NyOM1sTETij5ZPo/9smzjA0IkjpKKp6ObJVdxPIymEy3dsw
- lTLda5MVPVZjTglkZhNrjhXPyQ4rRAb9SDi/eNQWq6A+wbb23Rw6+DLmc4WpkLRXIfCY
- TzJFYy+G+YHJ1HImyI3npB8pKw0mC16tP2qmnwKMlBbDoBMD/CGlDdTEzo06MAy0JQkx
- Wp0OxaC/6/tG0fx1BmT1+eiEy1vwATx0jrQKiNYZya1N/K4VqprALKtkNaZnwWcKJmFL
- vaMdvH+g0RYehpGz5fgVWZ3RoyNSwqK/UnZRvCi5xOVYPcoauhNV/TTg6L6CQP3XkL12
- 9VWw==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=eTEcolD+Pva5e8+WteOkxUV8ymR+9oj49/bupPLJlB4=;
+ b=GYW+TeEiB/vzSGisKAkP56ZOm5HT/SxgNp9vKobAtfeHGpMtbEdM194Ya2YIv5pD1/
+ bwl/i5jmjyYZdWoRItSUK/1gD4ITjvDccseH5Mh02fopsZw5ykL7V8/K5XVCWe+1M3Kp
+ R3FMBYjhIcvneWtuPDdztzF0qJHo8xnjwEqHcWX6d9bcIP3Srr5gxlDbwMqt+cu8w6Y/
+ nb1GpvHXdGskTUYOUjK7KXZJnp0VvyrEI3dCUyZYw/PFx4MrbOGsgtrB6yVthleW8VVF
+ 8tVevrZGGmEvcnpOZ8/HmbO/osSl7WrdSF49THKSErIDNPFbz08ONETZbcmWKrx84j6c
+ J6hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=USg1Aag3wg9LFrigYRWoUppoxdh/+k904378jVDPTZ8=;
- b=5Y12iwil7oO3Jxm4AuDfyYYpaYgu8VlkhGNwqLOirrb/vl7E3SLFXja/nvFj/ibLF9
- D09Va+a7n/WDT2c6uztypvy8RZZNnVEuP/C3twbxBXld5J9H1l1vjBsXveOxJWB5CzGY
- d84WqSbqd+WHffsNGnyTsFTPpXLN0A6jFytIgEIowFnCW3G968Bjhx+KAcZqttVrsBOu
- NOa3V0ZrXpr6wgkKnqoXENaoluvChSFqKBvRwwOJ5UDiymlxf4BYGnRjYYyOAmu6kAOo
- j/UAmaTLAXi9MSImjtyy9KwVgpzrTo/KvFCLFrgD0V+pGNfeK1tsP3yrQCuyU+830L7h
- nasQ==
-X-Gm-Message-State: ANoB5pkqz4wiYWkYgaujqEL+60OxY4QYuvEFjQbxKBr6yk0RD97enoPE
- yk9HLQdVhcXUP1qIxTXUTrPCEh1wFFZOteZF3TE=
-X-Google-Smtp-Source: AA0mqf5XfDYAtYQdTNAiFAcamMJAzmmX0uRihKXGEfdCJJh0EWf1VCeOaELT7OO+4ClR21voInse449umQaw8yNwYA0=
-X-Received: by 2002:a05:6214:2f13:b0:4b1:9317:fd3c with SMTP id
- od19-20020a0562142f1300b004b19317fd3cmr4151706qvb.114.1668213469553; Fri, 11
- Nov 2022 16:37:49 -0800 (PST)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eTEcolD+Pva5e8+WteOkxUV8ymR+9oj49/bupPLJlB4=;
+ b=6lUqclkT7hQ44D15yZ5eezJplTnrTg5XSlnAyN2U5FCZ5efVMXzvJyiuUaUSq0z8e4
+ LV07LvC5HFStwtdSOxHUOLWPqLmcOYNkRPfIuunSUhyp0NvDG0bxdctNFacKn5XTUXc9
+ iW5Gm/FtNcRwhdir9iM1gP3Wh7P8a7wTFCtaBEfrTklkdF2oAlRqSAiv6Ke3j7K3QO5G
+ 9CelIj10NrevTm5UDaFscy55G1mx/OWaaflVYYC208GWYmEeA+RKd9/ETl0nzy5XoFZd
+ tAW2zVv17rQbtZvhvfDwwgQGOEbhyn0zlg4L4W4P5XlALShyGhyBrF3LeOJnwQfF8htS
+ kBpg==
+X-Gm-Message-State: ANoB5pk6awu5Kf4YQsLSelIbmThUUMKfygu+LJtA6kPnkUGSEuC1XiJ6
+ Seam+Ydvftlw5fTLKb06QJe/LEVMHdHIlq/SSB4=
+X-Google-Smtp-Source: AA0mqf4epZSsmMFjZ5+6rtmibYWQMkylwIp00w+lw5jhKzSXLiSzUWf8bvRQocWkBT3sHrZ/0MT6FzjHEvXuvb+M2O8=
+X-Received: by 2002:a05:6214:2b87:b0:4c6:1edf:39d2 with SMTP id
+ kr7-20020a0562142b8700b004c61edf39d2mr4110084qvb.122.1668213574920; Fri, 11
+ Nov 2022 16:39:34 -0800 (PST)
 MIME-Version: 1.0
-References: <20221109190849.1556711-1-conor@kernel.org>
- <84b8985a-6fab-ff76-7058-f702203474c0@linaro.org>
- <Y27pKpA0jo67Ntlz@spud>
-In-Reply-To: <Y27pKpA0jo67Ntlz@spud>
+References: <20221111201337.3320349-1-atishp@rivosinc.com>
+In-Reply-To: <20221111201337.3320349-1-atishp@rivosinc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sat, 12 Nov 2022 08:37:38 +0800
-Message-ID: <CAEUhbmUoken26s8n95fn9jdVkCiz-vPrWzt6G-z7Q23AfZ3gWw@mail.gmail.com>
-Subject: Re: [PATCH] hw/misc/pfsoc: add fabric clocks to ioscb
-To: Conor Dooley <conor@kernel.org>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Bin Meng <bin.meng@windriver.com>, Alistair Francis <alistair.francis@wdc.com>,
- qemu-riscv@nongnu.org, 
- qemu-devel@nongnu.org, Conor Dooley <conor.dooley@microchip.com>
+Date: Sat, 12 Nov 2022 08:39:24 +0800
+Message-ID: <CAEUhbmV5ZJ0YnrGEtqTJ9PCCdGsLjxpVnK2qHhc7H9XBDHDkhA@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: virt: Remove the redundant ipi-id property
+To: Atish Patra <atishp@rivosinc.com>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Anup Patel <apatel@ventanamicro.com>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f34;
- envelope-from=bmeng.cn@gmail.com; helo=mail-qv1-xf34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f36;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qv1-xf36.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,51 +72,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Nov 2022 00:37:53 -0000
+X-List-Received-Date: Sat, 12 Nov 2022 00:39:41 -0000
 
-Hi Conor,
-
-On Sat, Nov 12, 2022 at 8:31 AM Conor Dooley <conor@kernel.org> wrote:
+On Sat, Nov 12, 2022 at 4:14 AM Atish Patra <atishp@rivosinc.com> wrote:
 >
-> On Thu, Nov 10, 2022 at 12:18:44AM +0100, Philippe Mathieu-Daud=C3=A9 wro=
-te:
-> > Hi Conor,
-> >
-> > On 9/11/22 20:08, Conor Dooley wrote:
-> > > From: Conor Dooley <conor.dooley@microchip.com>
-> > >
-> > > @@ -168,6 +170,10 @@ static void mchp_pfsoc_ioscb_realize(DeviceState=
- *dev, Error **errp)
-> > >                             "mchp.pfsoc.ioscb.cfg", IOSCB_SUBMOD_REG_=
-SIZE);
-> > >       memory_region_add_subregion(&s->container, IOSCB_CFG_BASE, &s->=
-cfg);
-> > > +    memory_region_init_io(&s->ccc, OBJECT(s), &mchp_pfsoc_dummy_ops,=
- s,
-> > > +                          "mchp.pfsoc.ioscb.ccc", IOSCB_CCC_REG_SIZE=
-);
-> > > +    memory_region_add_subregion(&s->container, IOSCB_CCC_BASE, &s->c=
-cc);
-> >
-> > Unrelated but using the TYPE_UNIMPLEMENTED_DEVICE would ease tracing al=
-l
-> > these block accesses, as the block name would appear before the
-> > address/size. See for example aspeed_mmio_map_unimplemented();
+> The imsic DT binding has changed and no longer require an ipi-id.
+
+requires
+
+Could you please put a link here to the upstream imsic DT binding for reference?
+
+> The latest IMSIC driver dynamically allocates ipi id if slow-ipi
+> is not defined.
 >
-> Certainly looks like a nice idea, and I gave it a go but kept running
-> into issues due to my lack of understanding of QEMU :) I'm going to add
-> this to my todo pile - while I have a v2 of this lined up, I'd rather
-> not hold up adding the regions that prevent booting Linux etc as I
-> fumble around trying to understand the hierarchy of devices required to
-> set up something similar to your aspeed example.
+> Get rid of the unused dt property which may lead to confusion.
 >
-
-Do you plan to bring QEMU support to the latest MSS_LINUX configuration [1]
-
-Currently QEMU is supporting the MSS_BAREMETAL configuration. Do you
-think it makes sense to support both?
-
-[1] https://github.com/polarfire-soc/icicle-kit-reference-design
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> ---
+>  hw/riscv/virt.c         | 2 --
+>  include/hw/riscv/virt.h | 1 -
+>  2 files changed, 3 deletions(-)
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index a5bc7353b412..0bc0964e42a8 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -546,8 +546,6 @@ static void create_fdt_imsic(RISCVVirtState *s, const MemMapEntry *memmap,
+>          riscv_socket_count(mc) * sizeof(uint32_t) * 4);
+>      qemu_fdt_setprop_cell(mc->fdt, imsic_name, "riscv,num-ids",
+>          VIRT_IRQCHIP_NUM_MSIS);
+> -    qemu_fdt_setprop_cells(mc->fdt, imsic_name, "riscv,ipi-id",
+> -        VIRT_IRQCHIP_IPI_MSI);
+>      if (riscv_socket_count(mc) > 1) {
+>          qemu_fdt_setprop_cell(mc->fdt, imsic_name, "riscv,hart-index-bits",
+>              imsic_num_bits(imsic_max_hart_per_socket));
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index be4ab8fe7f71..62513e075c47 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -93,7 +93,6 @@ enum {
+>
+>  #define VIRT_PLATFORM_BUS_NUM_IRQS 32
+>
+> -#define VIRT_IRQCHIP_IPI_MSI 1
+>  #define VIRT_IRQCHIP_NUM_MSIS 255
+>  #define VIRT_IRQCHIP_NUM_SOURCES VIRTIO_NDEV
+>  #define VIRT_IRQCHIP_NUM_PRIO_BITS 3
+> --
 
 Regards,
 Bin
