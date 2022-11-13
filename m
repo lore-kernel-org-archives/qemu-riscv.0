@@ -1,56 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ouKOo-0003CD-Qr
-	for mharc-qemu-riscv@gnu.org; Sun, 13 Nov 2022 16:20:18 -0500
+	id 1ouKiI-0003Fw-10
+	for mharc-qemu-riscv@gnu.org; Sun, 13 Nov 2022 16:40:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1ouKOn-0003Bt-R0; Sun, 13 Nov 2022 16:20:17 -0500
-Received: from ams.source.kernel.org ([145.40.68.75])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1ouKOm-0007dj-3i; Sun, 13 Nov 2022 16:20:17 -0500
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id E465CB80CAC;
- Sun, 13 Nov 2022 21:20:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EAE98C433D6;
- Sun, 13 Nov 2022 21:20:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1668374403;
- bh=H0qUQK1f78qfV8xrWBHn4cZRqhXPbDntHAsiGRfLiec=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=B0eFsGmmqWLyutT57128wHndGVH/IH1ttep8neCPYrZP0yvI/Db561Re05CFX2nUG
- mofmQKG82JXMvqT32oxjt2rBZvRgxWlzcvHfiwoBmh/tkrgBdSA7Imo37J7pYKAsBj
- LfhjzxL9VqZoo6LE8i4rZKJd3h/MdSi86V4eXX/xzypdbUJwwZfIoESwlA5hNw0VwL
- ePEaehTz4EShEBUgXNnmvKQttPSaMYbeWg/+2j3IsV8701c248qe2E4RnmAxlQKGvK
- 0mDhd6LEhgt05YyaYsnRL9EW3BkXnbobV7LcM9yrrtoq3TS2WFBObdvsIcqmAn1yAm
- 8UDrpwt5EOORQ==
-Date: Sun, 13 Nov 2022 21:19:59 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
-Cc: Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Conor Dooley <conor.dooley@microchip.com>
-Subject: Re: [PATCH v2 3/3] hw/{misc, riscv}: pfsoc: add system controller as
- unimplemented
-Message-ID: <Y3Fff6710GfvPrgc@spud>
-References: <20221112133414.262448-1-conor@kernel.org>
- <20221112133414.262448-4-conor@kernel.org>
- <ded28709-24c7-0e41-f507-277fccfbfecf@linaro.org>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1ouKiG-0003FN-Lz
+ for qemu-riscv@nongnu.org; Sun, 13 Nov 2022 16:40:24 -0500
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1ouKiF-0002j1-6m
+ for qemu-riscv@nongnu.org; Sun, 13 Nov 2022 16:40:24 -0500
+Received: by mail-pl1-x633.google.com with SMTP id 4so8505001pli.0
+ for <qemu-riscv@nongnu.org>; Sun, 13 Nov 2022 13:40:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=p7rHYzGzpjl6aIG4jMRa3R2I2CqnQPCIiqf99H58yUA=;
+ b=ZE0IekjL+SsROFzcez8ArYlDVhDNffFKXhQ72hijt8GzpeswzcbsIuIxPpnKF81xCh
+ 9XzjfUtKFgBejL81asBUB8F2ZMQZB6MtUVYF8T5FpAbgcF6JxsWxTPYIr4adpxcS46UZ
+ S8z8tZvVG4RngLntmOQuGx4sb2jzsqHP76uh74WMdyXKgZpQ/uQ5Y6PVqofyncbmg8Oc
+ kW1I0KgTtOj9X1qBKLs8Kk07Up05e7LcRpKC9mxonjPqT2dk9LtRJ8jmoCnU5oyrKbo8
+ xv/kXF4s0pijYjVP1sYORNtGhVUIvmWm/BOfSxwY8nXNWj6pwbA3akb/nBS3MUwd6l7S
+ V3/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=p7rHYzGzpjl6aIG4jMRa3R2I2CqnQPCIiqf99H58yUA=;
+ b=sWf3WmG2zlzrz/CehTY3p5ZQ3wojq/bqdQlcIHhrh4uG9oDrD0wBFqjYYlqejDyjhN
+ +6LK2QubttDz37U21waw4Bf0su9RxhYvCnTE2PC5OG7oImNpb4rI8lHaEYWDMisFSpg7
+ 03xqdiHEOvCsIZr9P8fXC1MsELHP+ByP3g45POMtpGPjTg5ZJRTCCM9nKU9JTcahAjsY
+ AUl0FROiDhvDEVgDvYHgQu1QznTon7wAEJVBK+TqaNC1UF7ZMfwHQ6oyF0Q6vZTvmU8j
+ fyiUW2vru6wfv0tBxORqr8wG4PLhuJ83Uh5KTt54qlokrt0hzRU2nb4tnFzavJ12HGxt
+ YZpQ==
+X-Gm-Message-State: ANoB5pkW3rHgL0WN/SEYkVgWU/iay619J6GSVlXfbaAOHodjbD0m/NsV
+ cmgtSsK4LLUvvAonrJZFDlH47g==
+X-Google-Smtp-Source: AA0mqf6uo96SWGYuJFdGRu2lcrzG1xDEgeBm+rGeWjOjwvOH/Se4KgSYOs388LSq5Nde+2/Mai+lyA==
+X-Received: by 2002:a17:90b:48c8:b0:212:e8da:fc3f with SMTP id
+ li8-20020a17090b48c800b00212e8dafc3fmr10749330pjb.189.1668375621069; 
+ Sun, 13 Nov 2022 13:40:21 -0800 (PST)
+Received: from [10.0.0.228] (119-18-35-77.771223.bne.static.aussiebb.net.
+ [119.18.35.77]) by smtp.gmail.com with ESMTPSA id
+ u18-20020a170903125200b001869efb722csm5659487plh.215.2022.11.13.13.40.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 13 Nov 2022 13:40:20 -0800 (PST)
+Message-ID: <f41a1fe4-a564-5ca6-b52c-c3c4256ad241@linaro.org>
+Date: Mon, 14 Nov 2022 07:40:12 +1000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <ded28709-24c7-0e41-f507-277fccfbfecf@linaro.org>
-Received-SPF: pass client-ip=145.40.68.75; envelope-from=conor@kernel.org;
- helo=ams.source.kernel.org
-X-Spam_score_int: -70
-X-Spam_score: -7.1
-X-Spam_bar: -------
-X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Subject: Re: [PATCH v2 2/8] target/riscv: add support for Zca and Zcf
+ extensions
+To: Weiwei Li <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20221113023251.11047-1-liweiwei@iscas.ac.cn>
+ <20221113023251.11047-3-liweiwei@iscas.ac.cn>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20221113023251.11047-3-liweiwei@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x633.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -64,69 +86,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Nov 2022 21:20:18 -0000
+X-List-Received-Date: Sun, 13 Nov 2022 21:40:24 -0000
 
-On Sun, Nov 13, 2022 at 08:30:42PM +0100, Philippe Mathieu-Daudé wrote:
-> Hi Conor,
-> 
-> On 12/11/22 14:34, Conor Dooley wrote:
-> > From: Conor Dooley <conor.dooley@microchip.com>
-> > 
-> > The system controller on PolarFire SoC is access via a mailbox. The
-> > control registers for this mailbox lie in the "IOSCB" region & the
-> > interrupt is cleared via write to the "SYSREG" region. It also has a
-> > QSPI controller, usually connected to a flash chip, that is used for
-> > storing FPGA bitstreams and used for In-Application Programming (IAP).
-> > 
-> > Linux has an implementation of the system controller, through which the
-> > hwrng is accessed, leading to load/store access faults.
-> > 
-> > Add the QSPI as unimplemented and a very basic (effectively
-> > unimplemented) version of the system controller's mailbox. Rather than
-> > purely marking the regions as unimplemented, service the mailbox
-> > requests by reporting failures and raising the interrupt so a guest can
-> > better handle the lack of support.
-> > 
-> > Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
-> > ---
-> >   hw/misc/mchp_pfsoc_ioscb.c          | 59 ++++++++++++++++++++++++++++-
-> >   hw/misc/mchp_pfsoc_sysreg.c         | 19 ++++++++--
-> >   hw/riscv/microchip_pfsoc.c          |  6 +++
-> >   include/hw/misc/mchp_pfsoc_ioscb.h  |  3 ++
-> >   include/hw/misc/mchp_pfsoc_sysreg.h |  1 +
-> >   include/hw/riscv/microchip_pfsoc.h  |  1 +
-> >   6 files changed, 83 insertions(+), 6 deletions(-)
-> 
-> > @@ -52,10 +54,18 @@ static uint64_t mchp_pfsoc_sysreg_read(void *opaque, hwaddr offset,
-> >   static void mchp_pfsoc_sysreg_write(void *opaque, hwaddr offset,
-> >                                       uint64_t value, unsigned size)
-> >   {
-> > -    qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
-> > -                  "(size %d, value 0x%" PRIx64
-> > -                  ", offset 0x%" HWADDR_PRIx ")\n",
-> > -                  __func__, size, value, offset);
-> > +    MchpPfSoCSysregState *s = opaque;
-> > +    qemu_irq_lower(s->irq);
-> 
-> Is this always lowered IRQ line wanted? ...
-> 
-> > +    switch (offset) {
-> > +    case MESSAGE_INT:
-> > +        qemu_irq_lower(s->irq);
-> 
-> ... since we do it here.
+On 11/13/22 12:32, Weiwei Li wrote:
+> +        } else if ((get_xl_max(ctx) == MXL_RV32) &&
+> +            !ctx->cfg_ptr->ext_zcf &&
+> +            (((opcode & 0xe003) == 0x6000) ||
+> +             ((opcode & 0xe003) == 0x6002) ||
+> +             ((opcode & 0xe003) == 0xe000) ||
+> +             ((opcode & 0xe003) == 0xe002))) {
+>               gen_exception_illegal(ctx);
 
-Probably just me pressing the y key instead of the d one.
-I'll sort that out for v3, thanks!
+Why aren't you using the same c_flw solution that you do for Zcd?
 
-> > +        break;
-> > +    default:
-> > +        qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
-> > +                      "(size %d, value 0x%" PRIx64
-> > +                      ", offset 0x%" HWADDR_PRIx ")\n",
-> > +                      __func__, size, value, offset);
-> > +    }
-> >   }
-> 
-> 
+
+r~
 
