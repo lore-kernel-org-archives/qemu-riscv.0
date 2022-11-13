@@ -1,55 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1otqfG-0005ou-3n
-	for mharc-qemu-riscv@gnu.org; Sat, 12 Nov 2022 08:35:18 -0500
+	id 1ou2q1-00033f-Vn
+	for mharc-qemu-riscv@gnu.org; Sat, 12 Nov 2022 21:35:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1otqex-0005jh-DF; Sat, 12 Nov 2022 08:35:02 -0500
-Received: from ams.source.kernel.org ([2604:1380:4601:e00::1])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1otqet-00020S-Nt; Sat, 12 Nov 2022 08:34:58 -0500
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id D875BB808C9;
- Sat, 12 Nov 2022 13:34:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 351F0C433C1;
- Sat, 12 Nov 2022 13:34:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1668260092;
- bh=vY/wLB6i21MCFKVGQwf0NgPOgWfgkX7OqbmnNQog3X0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Mn0xWlQnG2Q32w1fk/AS/fXU2AOjIqywnmmYggVvHtPIKEeKWAYOFlURLKpkT9ABT
- R8XSH1kVRKttK7g3HeKv+3I5qyHg9cDrd7+PEeUVT9u1FYR/6Y1fkPykXF9BgRe/Ta
- kFhxS/X5kp2FuF63U9alm+Nbn0RnHML+C1wBhCaoP6eN9vuCO8XefRHmJV0T7t0kGM
- G19Ujh29+kJ4aDtj/YEalfWISIVDeL+ElZW9V7fiTA93cOTdziaAXAByhRh9e+Xk5b
- sYgWwBClCb0VGAMbwatwfJsN5wgEKE5YafQTlLHX75pwCrlI0iDqpJgw7UZoYfiwq5
- a5UykWzT6fFsg==
-From: Conor Dooley <conor@kernel.org>
-To: Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Conor Dooley <conor.dooley@microchip.com>
-Subject: [PATCH v2 3/3] hw/{misc,
- riscv}: pfsoc: add system controller as unimplemented
-Date: Sat, 12 Nov 2022 13:34:15 +0000
-Message-Id: <20221112133414.262448-4-conor@kernel.org>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20221112133414.262448-1-conor@kernel.org>
-References: <20221112133414.262448-1-conor@kernel.org>
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1ou2q1-00033J-D3; Sat, 12 Nov 2022 21:35:13 -0500
+Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1ou2py-0006Sl-GO; Sat, 12 Nov 2022 21:35:12 -0500
+Received: from localhost.localdomain (unknown [180.165.240.202])
+ by APP-01 (Coremail) with SMTP id qwCowABH6GnNV3BjuIN9CQ--.57556S5;
+ Sun, 13 Nov 2022 10:35:02 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 3/8] target/riscv: add support for Zcd extension
+Date: Sun, 13 Nov 2022 10:32:46 +0800
+Message-Id: <20221113023251.11047-4-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20221113023251.11047-1-liweiwei@iscas.ac.cn>
+References: <20221113023251.11047-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2604:1380:4601:e00::1;
- envelope-from=conor@kernel.org; helo=ams.source.kernel.org
-X-Spam_score_int: -70
-X-Spam_score: -7.1
-X-Spam_bar: -------
-X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-CM-TRANSID: qwCowABH6GnNV3BjuIN9CQ--.57556S5
+X-Coremail-Antispam: 1UD129KBjvJXoW7Aw1UuFW8GFy3Kryrtw13Jwb_yoW8tr1rp3
+ W8Cw17GrZ8CryfZa13tF45JF1UJFs3Gry8t3sIywn5Gay5GF45Zr1UtFy3tr4UXFWkZr4Y
+ 9F1DA39xC395trDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9v14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
+ x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
+ ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UM2AI
+ xVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20x
+ vE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xv
+ r2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxAIw28IcxkI7VAKI48JMxC20s
+ 026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_
+ JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14
+ v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xva
+ j40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JV
+ W8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbJ73DUUUUU==
+X-Originating-IP: [180.165.240.202]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -62,260 +63,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Nov 2022 13:35:04 -0000
+X-List-Received-Date: Sun, 13 Nov 2022 02:35:13 -0000
 
-From: Conor Dooley <conor.dooley@microchip.com>
+Separate c_fld/c_fsd from fld/fsd to add additional check for
+c.fld{sp}/c.fsd{sp} which is useful for zcmp/zcmt to reuse
+their encodings
 
-The system controller on PolarFire SoC is access via a mailbox. The
-control registers for this mailbox lie in the "IOSCB" region & the
-interrupt is cleared via write to the "SYSREG" region. It also has a
-QSPI controller, usually connected to a flash chip, that is used for
-storing FPGA bitstreams and used for In-Application Programming (IAP).
-
-Linux has an implementation of the system controller, through which the
-hwrng is accessed, leading to load/store access faults.
-
-Add the QSPI as unimplemented and a very basic (effectively
-unimplemented) version of the system controller's mailbox. Rather than
-purely marking the regions as unimplemented, service the mailbox
-requests by reporting failures and raising the interrupt so a guest can
-better handle the lack of support.
-
-Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 ---
- hw/misc/mchp_pfsoc_ioscb.c          | 59 ++++++++++++++++++++++++++++-
- hw/misc/mchp_pfsoc_sysreg.c         | 19 ++++++++--
- hw/riscv/microchip_pfsoc.c          |  6 +++
- include/hw/misc/mchp_pfsoc_ioscb.h  |  3 ++
- include/hw/misc/mchp_pfsoc_sysreg.h |  1 +
- include/hw/riscv/microchip_pfsoc.h  |  1 +
- 6 files changed, 83 insertions(+), 6 deletions(-)
+ target/riscv/insn16.decode              |  8 ++++----
+ target/riscv/insn_trans/trans_rvd.c.inc | 18 ++++++++++++++++++
+ 2 files changed, 22 insertions(+), 4 deletions(-)
 
-diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
-index f976e42f72..d7f27b4402 100644
---- a/hw/misc/mchp_pfsoc_ioscb.c
-+++ b/hw/misc/mchp_pfsoc_ioscb.c
-@@ -24,6 +24,7 @@
- #include "qemu/bitops.h"
- #include "qemu/log.h"
- #include "qapi/error.h"
-+#include "hw/irq.h"
- #include "hw/sysbus.h"
- #include "hw/misc/mchp_pfsoc_ioscb.h"
+diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
+index ccfe59f294..c32cfe1543 100644
+--- a/target/riscv/insn16.decode
++++ b/target/riscv/insn16.decode
+@@ -97,12 +97,12 @@
+ }
+ {
+   lq              001  ... ... .. ... 00 @cl_q
+-  fld             001  ... ... .. ... 00 @cl_d
++  c_fld           001  ... ... .. ... 00 @cl_d
+ }
+ lw                010  ... ... .. ... 00 @cl_w
+ {
+   sq              101  ... ... .. ... 00 @cs_q
+-  fsd             101  ... ... .. ... 00 @cs_d
++  c_fsd           101  ... ... .. ... 00 @cs_d
+ }
+ sw                110  ... ... .. ... 00 @cs_w
  
-@@ -34,6 +35,9 @@
- #define IOSCB_WHOLE_REG_SIZE        0x10000000
- #define IOSCB_SUBMOD_REG_SIZE       0x1000
- #define IOSCB_CCC_REG_SIZE          0x2000000
-+#define IOSCB_CTRL_REG_SIZE         0x800
-+#define IOSCB_QSPIXIP_REG_SIZE      0x200
+@@ -148,7 +148,7 @@ addw              100 1 11 ... 01 ... 01 @cs_2
+ slli              000 .  .....  ..... 10 @c_shift2
+ {
+   lq              001  ... ... .. ... 10 @c_lqsp
+-  fld             001 .  .....  ..... 10 @c_ldsp
++  c_fld           001 .  .....  ..... 10 @c_ldsp
+ }
+ {
+   illegal         010 -  00000  ----- 10 # c.lwsp, RES rd=0
+@@ -166,7 +166,7 @@ slli              000 .  .....  ..... 10 @c_shift2
+ }
+ {
+   sq              101  ... ... .. ... 10 @c_sqsp
+-  fsd             101   ......  ..... 10 @c_sdsp
++  c_fsd           101   ......  ..... 10 @c_sdsp
+ }
+ sw                110 .  .....  ..... 10 @c_swsp
+ 
+diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
+index 1397c1ce1c..def0d7abfe 100644
+--- a/target/riscv/insn_trans/trans_rvd.c.inc
++++ b/target/riscv/insn_trans/trans_rvd.c.inc
+@@ -31,6 +31,12 @@
+     } \
+ } while (0)
+ 
++#define REQUIRE_ZCD(ctx) do { \
++    if (!ctx->cfg_ptr->ext_zcd) {  \
++        return false;     \
++    } \
++} while (0)
 +
+ static bool trans_fld(DisasContext *ctx, arg_fld *a)
+ {
+     TCGv addr;
+@@ -57,6 +63,18 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
+     return true;
+ }
  
- /*
-  * There are many sub-modules in the IOSCB module.
-@@ -45,6 +49,8 @@
- #define IOSCB_LANE01_BASE           0x06500000
- #define IOSCB_LANE23_BASE           0x06510000
- #define IOSCB_CTRL_BASE             0x07020000
-+#define IOSCB_QSPIXIP_BASE          0x07020100
-+#define IOSCB_MAILBOX_BASE          0x07020800
- #define IOSCB_CFG_BASE              0x07080000
- #define IOSCB_CCC_BASE              0x08000000
- #define IOSCB_PLL_MSS_BASE          0x0E001000
-@@ -143,6 +149,45 @@ static const MemoryRegionOps mchp_pfsoc_io_calib_ddr_ops = {
-     .endianness = DEVICE_LITTLE_ENDIAN,
- };
- 
-+#define SERVICES_SR 0x54
-+
-+static uint64_t mchp_pfsoc_ctrl_read(void *opaque, hwaddr offset,
-+                                     unsigned size)
++static bool trans_c_fld(DisasContext *ctx, arg_fld *a)
 +{
-+    MchpPfSoCIoscbState *s = opaque;
-+    uint32_t val = 0;
-+
-+    switch (offset) {
-+    case SERVICES_SR:
-+        /*
-+         * Although some services have no error codes, most do. All services
-+         * that do implement errors, begin their error codes at 1. Treat all
-+         * service requests as failures & return 1.
-+         * See the "PolarFire® FPGA and PolarFire SoC FPGA System Services"
-+         * user guide for more information on service error codes.
-+         */
-+        val = 1;
-+        qemu_irq_raise(s->irq);
-+        break;
-+    default:
-+        qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
-+                      "(size %d, offset 0x%" HWADDR_PRIx ")\n",
-+                      __func__, size, offset);
-+    }
-+
-+    return val;
++    REQUIRE_ZCD(ctx);
++    return trans_fld(ctx, a);
 +}
 +
-+/*
-+ * use the dummy write, since we are always going to report a failed message
-+ * and therefore do not care what service is actually requested
-+ */
-+static const MemoryRegionOps mchp_pfsoc_ctrl_ops = {
-+    .read = mchp_pfsoc_ctrl_read,
-+    .write = mchp_pfsoc_dummy_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+};
++static bool trans_c_fsd(DisasContext *ctx, arg_fsd *a)
++{
++    REQUIRE_ZCD(ctx);
++    return trans_fsd(ctx, a);
++}
 +
- static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
+ static bool trans_fmadd_d(DisasContext *ctx, arg_fmadd_d *a)
  {
-     MchpPfSoCIoscbState *s = MCHP_PFSOC_IOSCB(dev);
-@@ -162,10 +207,18 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
-                           "mchp.pfsoc.ioscb.lane23", IOSCB_SUBMOD_REG_SIZE);
-     memory_region_add_subregion(&s->container, IOSCB_LANE23_BASE, &s->lane23);
- 
--    memory_region_init_io(&s->ctrl, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
--                          "mchp.pfsoc.ioscb.ctrl", IOSCB_SUBMOD_REG_SIZE);
-+    memory_region_init_io(&s->ctrl, OBJECT(s), &mchp_pfsoc_ctrl_ops, s,
-+                          "mchp.pfsoc.ioscb.ctrl", IOSCB_CTRL_REG_SIZE);
-     memory_region_add_subregion(&s->container, IOSCB_CTRL_BASE, &s->ctrl);
- 
-+    memory_region_init_io(&s->qspixip, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
-+                          "mchp.pfsoc.ioscb.qspixip", IOSCB_QSPIXIP_REG_SIZE);
-+    memory_region_add_subregion(&s->container, IOSCB_QSPIXIP_BASE, &s->qspixip);
-+
-+    memory_region_init_io(&s->mailbox, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
-+                          "mchp.pfsoc.ioscb.mailbox", IOSCB_SUBMOD_REG_SIZE);
-+    memory_region_add_subregion(&s->container, IOSCB_MAILBOX_BASE, &s->mailbox);
-+
-     memory_region_init_io(&s->cfg, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
-                           "mchp.pfsoc.ioscb.cfg", IOSCB_SUBMOD_REG_SIZE);
-     memory_region_add_subregion(&s->container, IOSCB_CFG_BASE, &s->cfg);
-@@ -222,6 +275,8 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
-                           IOSCB_SUBMOD_REG_SIZE);
-     memory_region_add_subregion(&s->container, IOSCB_IO_CALIB_SGMII_BASE,
-                                 &s->io_calib_sgmii);
-+
-+    sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq);
- }
- 
- static void mchp_pfsoc_ioscb_class_init(ObjectClass *klass, void *data)
-diff --git a/hw/misc/mchp_pfsoc_sysreg.c b/hw/misc/mchp_pfsoc_sysreg.c
-index 89571eded5..9822fb05fd 100644
---- a/hw/misc/mchp_pfsoc_sysreg.c
-+++ b/hw/misc/mchp_pfsoc_sysreg.c
-@@ -24,10 +24,12 @@
- #include "qemu/bitops.h"
- #include "qemu/log.h"
- #include "qapi/error.h"
-+#include "hw/irq.h"
- #include "hw/sysbus.h"
- #include "hw/misc/mchp_pfsoc_sysreg.h"
- 
- #define ENVM_CR         0xb8
-+#define MESSAGE_INT     0x118c
- 
- static uint64_t mchp_pfsoc_sysreg_read(void *opaque, hwaddr offset,
-                                        unsigned size)
-@@ -52,10 +54,18 @@ static uint64_t mchp_pfsoc_sysreg_read(void *opaque, hwaddr offset,
- static void mchp_pfsoc_sysreg_write(void *opaque, hwaddr offset,
-                                     uint64_t value, unsigned size)
- {
--    qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
--                  "(size %d, value 0x%" PRIx64
--                  ", offset 0x%" HWADDR_PRIx ")\n",
--                  __func__, size, value, offset);
-+    MchpPfSoCSysregState *s = opaque;
-+    qemu_irq_lower(s->irq);
-+    switch (offset) {
-+    case MESSAGE_INT:
-+        qemu_irq_lower(s->irq);
-+        break;
-+    default:
-+        qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
-+                      "(size %d, value 0x%" PRIx64
-+                      ", offset 0x%" HWADDR_PRIx ")\n",
-+                      __func__, size, value, offset);
-+    }
- }
- 
- static const MemoryRegionOps mchp_pfsoc_sysreg_ops = {
-@@ -73,6 +83,7 @@ static void mchp_pfsoc_sysreg_realize(DeviceState *dev, Error **errp)
-                           "mchp.pfsoc.sysreg",
-                           MCHP_PFSOC_SYSREG_REG_SIZE);
-     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->sysreg);
-+    sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq);
- }
- 
- static void mchp_pfsoc_sysreg_class_init(ObjectClass *klass, void *data)
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index 2a24e3437a..b10321b564 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -306,6 +306,9 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-     sysbus_realize(SYS_BUS_DEVICE(&s->sysreg), errp);
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->sysreg), 0,
-                     memmap[MICROCHIP_PFSOC_SYSREG].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sysreg), 0,
-+                       qdev_get_gpio_in(DEVICE(s->plic),
-+                       MICROCHIP_PFSOC_MAILBOX_IRQ));
- 
-     /* AXISW */
-     create_unimplemented_device("microchip.pfsoc.axisw",
-@@ -459,6 +462,9 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-     sysbus_realize(SYS_BUS_DEVICE(&s->ioscb), errp);
-     sysbus_mmio_map(SYS_BUS_DEVICE(&s->ioscb), 0,
-                     memmap[MICROCHIP_PFSOC_IOSCB].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->ioscb), 0,
-+                       qdev_get_gpio_in(DEVICE(s->plic),
-+                       MICROCHIP_PFSOC_MAILBOX_IRQ));
- 
-     /* FPGA Fabric */
-     create_unimplemented_device("microchip.pfsoc.fabricfic3",
-diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_pfsoc_ioscb.h
-index 687b213742..a1104862c8 100644
---- a/include/hw/misc/mchp_pfsoc_ioscb.h
-+++ b/include/hw/misc/mchp_pfsoc_ioscb.h
-@@ -29,6 +29,8 @@ typedef struct MchpPfSoCIoscbState {
-     MemoryRegion lane01;
-     MemoryRegion lane23;
-     MemoryRegion ctrl;
-+    MemoryRegion qspixip;
-+    MemoryRegion mailbox;
-     MemoryRegion cfg;
-     MemoryRegion ccc;
-     MemoryRegion pll_mss;
-@@ -41,6 +43,7 @@ typedef struct MchpPfSoCIoscbState {
-     MemoryRegion cfm_sgmii;
-     MemoryRegion bc_sgmii;
-     MemoryRegion io_calib_sgmii;
-+    qemu_irq irq;
- } MchpPfSoCIoscbState;
- 
- #define TYPE_MCHP_PFSOC_IOSCB "mchp.pfsoc.ioscb"
-diff --git a/include/hw/misc/mchp_pfsoc_sysreg.h b/include/hw/misc/mchp_pfsoc_sysreg.h
-index 546ba68f6a..3cebe40ea9 100644
---- a/include/hw/misc/mchp_pfsoc_sysreg.h
-+++ b/include/hw/misc/mchp_pfsoc_sysreg.h
-@@ -28,6 +28,7 @@
- typedef struct MchpPfSoCSysregState {
-     SysBusDevice parent;
-     MemoryRegion sysreg;
-+    qemu_irq irq;
- } MchpPfSoCSysregState;
- 
- #define TYPE_MCHP_PFSOC_SYSREG "mchp.pfsoc.sysreg"
-diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-index 7e7950dd36..69a686b54a 100644
---- a/include/hw/riscv/microchip_pfsoc.h
-+++ b/include/hw/riscv/microchip_pfsoc.h
-@@ -147,6 +147,7 @@ enum {
-     MICROCHIP_PFSOC_MMUART2_IRQ = 92,
-     MICROCHIP_PFSOC_MMUART3_IRQ = 93,
-     MICROCHIP_PFSOC_MMUART4_IRQ = 94,
-+    MICROCHIP_PFSOC_MAILBOX_IRQ = 96,
- };
- 
- #define MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT    1
+     REQUIRE_FPU;
 -- 
-2.37.2
+2.25.1
 
 
