@@ -1,77 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ouKiI-0003Fw-10
-	for mharc-qemu-riscv@gnu.org; Sun, 13 Nov 2022 16:40:26 -0500
+	id 1ouO84-0007pT-3Z
+	for mharc-qemu-riscv@gnu.org; Sun, 13 Nov 2022 20:19:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ouKiG-0003FN-Lz
- for qemu-riscv@nongnu.org; Sun, 13 Nov 2022 16:40:24 -0500
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ouO82-0007pB-JC; Sun, 13 Nov 2022 20:19:14 -0500
+Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ouKiF-0002j1-6m
- for qemu-riscv@nongnu.org; Sun, 13 Nov 2022 16:40:24 -0500
-Received: by mail-pl1-x633.google.com with SMTP id 4so8505001pli.0
- for <qemu-riscv@nongnu.org>; Sun, 13 Nov 2022 13:40:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=p7rHYzGzpjl6aIG4jMRa3R2I2CqnQPCIiqf99H58yUA=;
- b=ZE0IekjL+SsROFzcez8ArYlDVhDNffFKXhQ72hijt8GzpeswzcbsIuIxPpnKF81xCh
- 9XzjfUtKFgBejL81asBUB8F2ZMQZB6MtUVYF8T5FpAbgcF6JxsWxTPYIr4adpxcS46UZ
- S8z8tZvVG4RngLntmOQuGx4sb2jzsqHP76uh74WMdyXKgZpQ/uQ5Y6PVqofyncbmg8Oc
- kW1I0KgTtOj9X1qBKLs8Kk07Up05e7LcRpKC9mxonjPqT2dk9LtRJ8jmoCnU5oyrKbo8
- xv/kXF4s0pijYjVP1sYORNtGhVUIvmWm/BOfSxwY8nXNWj6pwbA3akb/nBS3MUwd6l7S
- V3/g==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ouO80-0004zP-G7; Sun, 13 Nov 2022 20:19:14 -0500
+Received: by mail-vs1-xe36.google.com with SMTP id d185so10143386vsd.0;
+ Sun, 13 Nov 2022 17:19:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ms2A5ZgoU6HBQMxpJjTZDXlrQMLiMlo7hi3HMn4tt1c=;
+ b=IrFOnD0f27H+3Mjn77TLjPyJgbTCEWurmbFyeIHuKAOyRCKDUHzcfRa43UpANhiUTu
+ 3eloodUEr7z2lyHB2SqrOk8PfrV8BvHb5nAyIS8h85cy9b1hJaMRicTUqJvcS93ptlf5
+ vTsnJnUZIse8QTf1QtwmskV5z/3PkFTr1bL7gZALiJxpu3eEAlfLAyucSXaorAlh67nr
+ 1A/Zpod7xPH0IsMMHFJ7uABMkFqvgU7ITaDgEYmzKQrnK/d1U2nn/JaZ064Sw5kP6aBR
+ PpfRV0ahMlUfwwVuAjSjhq6xJQZf23PWARZ0y6VpgTZIErIvu6s9AOEtbUm/JGT/jWla
+ T7kA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=p7rHYzGzpjl6aIG4jMRa3R2I2CqnQPCIiqf99H58yUA=;
- b=sWf3WmG2zlzrz/CehTY3p5ZQ3wojq/bqdQlcIHhrh4uG9oDrD0wBFqjYYlqejDyjhN
- +6LK2QubttDz37U21waw4Bf0su9RxhYvCnTE2PC5OG7oImNpb4rI8lHaEYWDMisFSpg7
- 03xqdiHEOvCsIZr9P8fXC1MsELHP+ByP3g45POMtpGPjTg5ZJRTCCM9nKU9JTcahAjsY
- AUl0FROiDhvDEVgDvYHgQu1QznTon7wAEJVBK+TqaNC1UF7ZMfwHQ6oyF0Q6vZTvmU8j
- fyiUW2vru6wfv0tBxORqr8wG4PLhuJ83Uh5KTt54qlokrt0hzRU2nb4tnFzavJ12HGxt
- YZpQ==
-X-Gm-Message-State: ANoB5pkW3rHgL0WN/SEYkVgWU/iay619J6GSVlXfbaAOHodjbD0m/NsV
- cmgtSsK4LLUvvAonrJZFDlH47g==
-X-Google-Smtp-Source: AA0mqf6uo96SWGYuJFdGRu2lcrzG1xDEgeBm+rGeWjOjwvOH/Se4KgSYOs388LSq5Nde+2/Mai+lyA==
-X-Received: by 2002:a17:90b:48c8:b0:212:e8da:fc3f with SMTP id
- li8-20020a17090b48c800b00212e8dafc3fmr10749330pjb.189.1668375621069; 
- Sun, 13 Nov 2022 13:40:21 -0800 (PST)
-Received: from [10.0.0.228] (119-18-35-77.771223.bne.static.aussiebb.net.
- [119.18.35.77]) by smtp.gmail.com with ESMTPSA id
- u18-20020a170903125200b001869efb722csm5659487plh.215.2022.11.13.13.40.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 13 Nov 2022 13:40:20 -0800 (PST)
-Message-ID: <f41a1fe4-a564-5ca6-b52c-c3c4256ad241@linaro.org>
-Date: Mon, 14 Nov 2022 07:40:12 +1000
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ms2A5ZgoU6HBQMxpJjTZDXlrQMLiMlo7hi3HMn4tt1c=;
+ b=R6nq/4aRK7FY1G8f9BqfRMPmkSAJ6HtCQveYsDGewQP+6+0ax1lm6jvMKvZ4ENI59b
+ UtonXtkgg8V1LR2kMknw6YBWRe1Rcn0P+tRE9GhKK9llkFpAvw4f7TD29ygXVzJlG8jk
+ 4Jy8sS4VVNazGT4cm+Bj/jcKlpcIYJisVs6rRHaPjq0WyXA+DRXFO6q3aNG8uQJFUnNj
+ Xj1X0D6dIAVNzqv08oasgbx34RxTKAo2woDc7YBtBJ7mmEVEpuym8AtVYZASXLcKz/Kt
+ y07W7djxj5mB9sfdsb+R2qTYhG4fHYx1HG7beFCyBzjDk+sMQijz4h3l+oqC4TWgn0Hm
+ p4Hw==
+X-Gm-Message-State: ANoB5pnEURuccYDHIFRAC3rd+3L7YkdrRx6wJKyFWkhg9p+zmyQGjmfp
+ 71Jd/2VB4WP+VOx0Sc6YNArLPE9TTOPqQh4sfA8=
+X-Google-Smtp-Source: AA0mqf5uv8GWAAZlpiW+2ExSi0q2XH6Bz8fTQoSsucmsTUoZom9pibEMTHhnqfAC+KbDyh6I0H1W7YUEvHCSnB3oQQs=
+X-Received: by 2002:a67:fb19:0:b0:3a6:fde0:cf74 with SMTP id
+ d25-20020a67fb19000000b003a6fde0cf74mr4644732vsr.73.1668388750642; Sun, 13
+ Nov 2022 17:19:10 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [PATCH v2 2/8] target/riscv: add support for Zca and Zcf
- extensions
-To: Weiwei Li <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20221113023251.11047-1-liweiwei@iscas.ac.cn>
- <20221113023251.11047-3-liweiwei@iscas.ac.cn>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20221113023251.11047-3-liweiwei@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x633.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+References: <20221111121913.1531030-1-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20221111121913.1531030-1-frederic.petrot@univ-grenoble-alpes.fr>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 14 Nov 2022 11:18:44 +1000
+Message-ID: <CAKmqyKODzdSWPn8O7i1meVDdjKEQ-5G427a2nX-BdT4aK4U1fg@mail.gmail.com>
+Subject: Re: [PATCH] hw/intc: sifive_plic: Renumber the S irqs for numa support
+To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
+Cc: Alistair.Francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -86,19 +75,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Nov 2022 21:40:24 -0000
+X-List-Received-Date: Mon, 14 Nov 2022 01:19:14 -0000
 
-On 11/13/22 12:32, Weiwei Li wrote:
-> +        } else if ((get_xl_max(ctx) == MXL_RV32) &&
-> +            !ctx->cfg_ptr->ext_zcf &&
-> +            (((opcode & 0xe003) == 0x6000) ||
-> +             ((opcode & 0xe003) == 0x6002) ||
-> +             ((opcode & 0xe003) == 0xe000) ||
-> +             ((opcode & 0xe003) == 0xe002))) {
->               gen_exception_illegal(ctx);
+On Fri, Nov 11, 2022 at 10:20 PM Fr=C3=A9d=C3=A9ric P=C3=A9trot
+<frederic.petrot@univ-grenoble-alpes.fr> wrote:
+>
+> Commit 40244040 changed the way the S irqs are numbered. This breaks when
+> using numa configuration, e.g.:
+> ./qemu-system-riscv64 -nographic -machine virt,dumpdtb=3Dnuma-tree.dtb \
+>                       -m 2G -smp cpus=3D16 \
+>                       -object memory-backend-ram,id=3Dmem0,size=3D512M \
+>                       -object memory-backend-ram,id=3Dmem1,size=3D512M \
+>                       -object memory-backend-ram,id=3Dmem2,size=3D512M \
+>                       -object memory-backend-ram,id=3Dmem3,size=3D512M \
+>                       -numa node,cpus=3D0-3,memdev=3Dmem0,nodeid=3D0 \
+>                       -numa node,cpus=3D4-7,memdev=3Dmem1,nodeid=3D1 \
+>                       -numa node,cpus=3D8-11,memdev=3Dmem2,nodeid=3D2 \
+>                       -numa node,cpus=3D12-15,memdev=3Dmem3,nodeid=3D3
+> leads to:
+> Unexpected error in object_property_find_err() at ../qom/object.c:1304:
+> qemu-system-riscv64: Property 'riscv.sifive.plic.unnamed-gpio-out[8]' not
+> found
+>
+> This patch makes the nubering of the S irqs identical to what it was befo=
+re.
+>
+> Signed-off-by: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-greno=
+ble-alpes.fr>
 
-Why aren't you using the same c_flw solution that you do for Zcd?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
+Alistair
 
-r~
+> ---
+>  hw/intc/sifive_plic.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+> index c2dfacf028..89d2122742 100644
+> --- a/hw/intc/sifive_plic.c
+> +++ b/hw/intc/sifive_plic.c
+> @@ -480,7 +480,7 @@ DeviceState *sifive_plic_create(hwaddr addr, char *ha=
+rt_config,
+>                                    qdev_get_gpio_in(DEVICE(cpu), IRQ_M_EX=
+T));
+>          }
+>          if (plic->addr_config[i].mode =3D=3D PLICMode_S) {
+> -            qdev_connect_gpio_out(dev, cpu_num,
+> +            qdev_connect_gpio_out(dev, cpu_num - plic->hartid_base,
+>                                    qdev_get_gpio_in(DEVICE(cpu), IRQ_S_EX=
+T));
+>          }
+>      }
+> --
+> 2.37.2
+>
+>
 
