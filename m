@@ -1,74 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ouilv-0006MZ-Md
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Nov 2022 18:21:47 -0500
+	id 1ouimG-0006aJ-8U
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Nov 2022 18:22:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ouifz-0006MO-FJ
- for qemu-riscv@nongnu.org; Mon, 14 Nov 2022 18:15:43 -0500
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ouV0m-0007iK-U6
- for qemu-riscv@nongnu.org; Mon, 14 Nov 2022 03:40:23 -0500
-Received: by mail-wr1-x432.google.com with SMTP id cl5so16763954wrb.9
- for <qemu-riscv@nongnu.org>; Mon, 14 Nov 2022 00:40:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Ak2u6iPYyyGsUX3po+0Xb46H7FHfYDGvM9I35aDqK4E=;
- b=SMMiRH2El5oVSEpmMPzj/vK5eq1FLH9ZeTrPXIurNCrUjcCVtNfb/ICux+89RjJMJ5
- 83KKZdqwi0Kyld5aZFNFqsV/Iyn5gAO8bae6fSq8leLYlYgQeolVy0wq2t8e0tyzTV1Y
- wmJG4MwLdHvpqhqxIJb/lmSSX1BoFJw+4cJkd34O+GIZ8OVCqu7qnsjm12jC2k34t+tb
- 2fyWNjh/idalEpEk4I0pzDKGTldHiS0PV2moH+L0uLJiroGbc3+t9ZNw2vy1NNyM3NWR
- SLmi0EYshoJz5rMG7AxUKKj8+7D1gnhHhHsG/ifsMi0LUrm7johdzm+ls72GA9tofvB3
- DnwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Ak2u6iPYyyGsUX3po+0Xb46H7FHfYDGvM9I35aDqK4E=;
- b=Zn4P2nRhi5DA0OaEbDLIwLRDerN+EQ+YLRGTf9lS2i8qz3Eb3Wcy8Imn7l7+vChWdU
- EgZgV9q/rD3VffJ4NX6Pl924fh9GMfy6ksQsX51gZUI5aarLs0zuQVijoBrWrAsoJrnV
- VdSOBmE/6Un2vnJKeIgC6BiqWFKIEcw9f2PC0eXe/Pnuf7Vqiv6796FBMpKqdtFCZCyG
- XvOxHtuB/42lIucjNH9bWzb7PvyqXdf27G7TC0ySGvirciabnkmS46dDWzukiMmbKTzp
- fVaArjKvUNVJ0DcxZMJcc87N+4TJRT2Q+lfJRUFVaq4AIyMMb+lvvBknYSlGv3+RJzC2
- BHCw==
-X-Gm-Message-State: ANoB5plyTRmUq1N7gwHUnQ9fzlIIyK2ZuyW2IsTg0rlDhEH63ivzCY1N
- 4o1isI10s8rIVhhosgSVOyMoZQ==
-X-Google-Smtp-Source: AA0mqf4nGkgjGubMBfUyzbv3RMR//maUMSa7xB3R1Or0HXXLfAInNVDkKlEytPxDo+rFqQbY6vYqYw==
-X-Received: by 2002:a5d:63d1:0:b0:236:71f9:95db with SMTP id
- c17-20020a5d63d1000000b0023671f995dbmr6742142wrw.551.1668415209764; 
- Mon, 14 Nov 2022 00:40:09 -0800 (PST)
-Received: from [192.168.1.115] ([185.126.107.38])
- by smtp.gmail.com with ESMTPSA id
- k5-20020adff5c5000000b0022e344a63c7sm8910139wrp.92.2022.11.14.00.40.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Nov 2022 00:40:09 -0800 (PST)
-Message-ID: <48729f3f-80eb-8c7b-7bbb-7cd6bfa65a3e@linaro.org>
-Date: Mon, 14 Nov 2022 09:40:08 +0100
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1ouigH-0005tn-IJ; Mon, 14 Nov 2022 18:16:07 -0500
+Received: from smtp84.cstnet.cn ([159.226.251.84] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1ouPyh-0008Cx-22; Sun, 13 Nov 2022 22:17:46 -0500
+Received: from [192.168.3.6] (unknown [180.165.240.202])
+ by APP-05 (Coremail) with SMTP id zQCowAD3_LRIs3Fj0Kl6CQ--.45314S2;
+ Mon, 14 Nov 2022 11:17:30 +0800 (CST)
+Message-ID: <abd875a9-7dda-8c73-8481-47d383ddc0c8@iscas.ac.cn>
+Date: Mon, 14 Nov 2022 11:17:27 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.4.2
-Subject: Re: [PATCH] hw/intc: sifive_plic: Renumber the S irqs for numa support
-Content-Language: en-US
-To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>, Alistair.Francis@wdc.com,
- bin.meng@windriver.com, palmer@dabbelt.com, qemu-riscv@nongnu.org,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Cc: liweiwei@iscas.ac.cn, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+Subject: Re: [PATCH v2 2/8] target/riscv: add support for Zca and Zcf
+ extensions
+To: Richard Henderson <richard.henderson@linaro.org>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
-References: <20221111121913.1531030-1-frederic.petrot@univ-grenoble-alpes.fr>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20221111121913.1531030-1-frederic.petrot@univ-grenoble-alpes.fr>
+References: <20221113023251.11047-1-liweiwei@iscas.ac.cn>
+ <20221113023251.11047-3-liweiwei@iscas.ac.cn>
+ <f41a1fe4-a564-5ca6-b52c-c3c4256ad241@linaro.org>
+Content-Language: en-US
+From: weiwei <liweiwei@iscas.ac.cn>
+In-Reply-To: <f41a1fe4-a564-5ca6-b52c-c3c4256ad241@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x432.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-CM-TRANSID: zQCowAD3_LRIs3Fj0Kl6CQ--.45314S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrur4xZFWxGr48Cw4Utw43ZFb_yoWfuFc_Jr
+ 4UGr1UXw1jvr4rtr17Gr1UXry7Cr1jyw4Utr4Yya18XF1UJFn8Aws8C3s5Ar1UKa15Jr17
+ Cr15Ja13JF1UtjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUb48FF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+ Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVWxJr
+ 0_GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+ 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+ W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7I2V7IY0VAS07AlzVAY
+ IcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14
+ v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkG
+ c2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI
+ 0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4U
+ MIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7VUbXdbUUUUU
+ U==
+X-Originating-IP: [180.165.240.202]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,75 +69,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2022 23:15:48 -0000
+X-List-Received-Date: Mon, 14 Nov 2022 23:16:17 -0000
 
-On 11/11/22 13:19, Frédéric Pétrot wrote:
-> Commit 40244040 changed the way the S irqs are numbered. This breaks when
 
-40244040a7 in case?
+On 2022/11/14 05:40, Richard Henderson wrote:
+> On 11/13/22 12:32, Weiwei Li wrote:
+>> +        } else if ((get_xl_max(ctx) == MXL_RV32) &&
+>> +            !ctx->cfg_ptr->ext_zcf &&
+>> +            (((opcode & 0xe003) == 0x6000) ||
+>> +             ((opcode & 0xe003) == 0x6002) ||
+>> +             ((opcode & 0xe003) == 0xe000) ||
+>> +             ((opcode & 0xe003) == 0xe002))) {
+>>               gen_exception_illegal(ctx);
+>
+> Why aren't you using the same c_flw solution that you do for Zcd?
+Yeah, it's OK for zcf intructions to use the c_flw solution.
 
-> using numa configuration, e.g.:
-> ./qemu-system-riscv64 -nographic -machine virt,dumpdtb=numa-tree.dtb \
->                        -m 2G -smp cpus=16 \
-> 		      -object memory-backend-ram,id=mem0,size=512M \
-> 		      -object memory-backend-ram,id=mem1,size=512M \
-> 		      -object memory-backend-ram,id=mem2,size=512M \
-> 		      -object memory-backend-ram,id=mem3,size=512M \
-> 		      -numa node,cpus=0-3,memdev=mem0,nodeid=0 \
-> 		      -numa node,cpus=4-7,memdev=mem1,nodeid=1 \
-> 		      -numa node,cpus=8-11,memdev=mem2,nodeid=2 \
-> 		      -numa node,cpus=12-15,memdev=mem3,nodeid=3
-> leads to:
-> Unexpected error in object_property_find_err() at ../qom/object.c:1304:
-> qemu-system-riscv64: Property 'riscv.sifive.plic.unnamed-gpio-out[8]' not
-> found
-> 
-> This patch makes the nubering of the S irqs identical to what it was before.
-> 
-> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-> ---
->   hw/intc/sifive_plic.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-> index c2dfacf028..89d2122742 100644
-> --- a/hw/intc/sifive_plic.c
-> +++ b/hw/intc/sifive_plic.c
-> @@ -480,7 +480,7 @@ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
->                                     qdev_get_gpio_in(DEVICE(cpu), IRQ_M_EXT));
->           }
->           if (plic->addr_config[i].mode == PLICMode_S) {
-> -            qdev_connect_gpio_out(dev, cpu_num,
-> +            qdev_connect_gpio_out(dev, cpu_num - plic->hartid_base,
->                                     qdev_get_gpio_in(DEVICE(cpu), IRQ_S_EXT));
->           }
->       }
+I tried to remain the original logic for Zcf and Zcd instructions, 
+However, this way is not suitable for Zcd instructions
 
-Oops.
+since zcmp/zcmt instructions will overlap their encodings(but not the 
+same).  So I changed the way of Zcd instructions.
 
-Eventually we could unify the style:
+Regards,
 
--- >8 --
-@@ -476,11 +476,11 @@ DeviceState *sifive_plic_create(hwaddr addr, char 
-*hart_config,
-          CPUState *cpu = qemu_get_cpu(cpu_num);
+Weiwei Li
 
-          if (plic->addr_config[i].mode == PLICMode_M) {
--            qdev_connect_gpio_out(dev, num_harts - plic->hartid_base + 
-cpu_num,
-+            qdev_connect_gpio_out(dev, cpu_num - hartid_base + num_harts,
-                                    qdev_get_gpio_in(DEVICE(cpu), 
-IRQ_M_EXT));
-          }
-          if (plic->addr_config[i].mode == PLICMode_S) {
--            qdev_connect_gpio_out(dev, cpu_num,
-+            qdev_connect_gpio_out(dev, cpu_num - hartid_base,
-                                    qdev_get_gpio_in(DEVICE(cpu), 
-IRQ_S_EXT));
-          }
-      }
----
-
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>
+>
+> r~
 
 
