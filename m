@@ -1,66 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ouO84-0007pT-3Z
-	for mharc-qemu-riscv@gnu.org; Sun, 13 Nov 2022 20:19:16 -0500
+	id 1ouiks-0005IN-HK
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Nov 2022 18:20:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ouO82-0007pB-JC; Sun, 13 Nov 2022 20:19:14 -0500
-Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ouifW-0005tR-UC
+ for qemu-riscv@nongnu.org; Mon, 14 Nov 2022 18:15:18 -0500
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ouO80-0004zP-G7; Sun, 13 Nov 2022 20:19:14 -0500
-Received: by mail-vs1-xe36.google.com with SMTP id d185so10143386vsd.0;
- Sun, 13 Nov 2022 17:19:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ms2A5ZgoU6HBQMxpJjTZDXlrQMLiMlo7hi3HMn4tt1c=;
- b=IrFOnD0f27H+3Mjn77TLjPyJgbTCEWurmbFyeIHuKAOyRCKDUHzcfRa43UpANhiUTu
- 3eloodUEr7z2lyHB2SqrOk8PfrV8BvHb5nAyIS8h85cy9b1hJaMRicTUqJvcS93ptlf5
- vTsnJnUZIse8QTf1QtwmskV5z/3PkFTr1bL7gZALiJxpu3eEAlfLAyucSXaorAlh67nr
- 1A/Zpod7xPH0IsMMHFJ7uABMkFqvgU7ITaDgEYmzKQrnK/d1U2nn/JaZ064Sw5kP6aBR
- PpfRV0ahMlUfwwVuAjSjhq6xJQZf23PWARZ0y6VpgTZIErIvu6s9AOEtbUm/JGT/jWla
- T7kA==
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ouYW4-0004Eh-N8
+ for qemu-riscv@nongnu.org; Mon, 14 Nov 2022 07:24:46 -0500
+Received: by mail-wm1-x334.google.com with SMTP id
+ v124-20020a1cac82000000b003cf7a4ea2caso10539537wme.5
+ for <qemu-riscv@nongnu.org>; Mon, 14 Nov 2022 04:24:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JQZ0w7BBOuzs1TWd474FOkYAGshwH2dUWhpkOrTyXt4=;
+ b=XnpkQpgQe5YFzEvyLyLSzR6qA7E0dxH3R/dLCI+R1fkp/LFU6VgLiIQM7sX1P6EI9d
+ yFoGUVqDqA9FHuIobAAkMrKlxcioKrTBWXgskkNbcX/54iWk8FDIkCO+SPmdpTp0NpPm
+ XB0BrmFT5AD/jD3kt7ca8TxLIBwrycMhfHaJqtlcM1daCL49QItoax+wp0RMbKYGOikg
+ HPH5gspNyyq4t05YuQpyRooTqiMCOHQZc8MXuK52VBJl9GDrWgkb+6zZ2icuA0l1I9MD
+ I6/R5yt5sBwbnl/NHuwDYm7ob4uq6KBp1p7PRDcPuS7Jk+EBYdt4P78O+Gvdpvcfa2HV
+ 36kQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ms2A5ZgoU6HBQMxpJjTZDXlrQMLiMlo7hi3HMn4tt1c=;
- b=R6nq/4aRK7FY1G8f9BqfRMPmkSAJ6HtCQveYsDGewQP+6+0ax1lm6jvMKvZ4ENI59b
- UtonXtkgg8V1LR2kMknw6YBWRe1Rcn0P+tRE9GhKK9llkFpAvw4f7TD29ygXVzJlG8jk
- 4Jy8sS4VVNazGT4cm+Bj/jcKlpcIYJisVs6rRHaPjq0WyXA+DRXFO6q3aNG8uQJFUnNj
- Xj1X0D6dIAVNzqv08oasgbx34RxTKAo2woDc7YBtBJ7mmEVEpuym8AtVYZASXLcKz/Kt
- y07W7djxj5mB9sfdsb+R2qTYhG4fHYx1HG7beFCyBzjDk+sMQijz4h3l+oqC4TWgn0Hm
- p4Hw==
-X-Gm-Message-State: ANoB5pnEURuccYDHIFRAC3rd+3L7YkdrRx6wJKyFWkhg9p+zmyQGjmfp
- 71Jd/2VB4WP+VOx0Sc6YNArLPE9TTOPqQh4sfA8=
-X-Google-Smtp-Source: AA0mqf5uv8GWAAZlpiW+2ExSi0q2XH6Bz8fTQoSsucmsTUoZom9pibEMTHhnqfAC+KbDyh6I0H1W7YUEvHCSnB3oQQs=
-X-Received: by 2002:a67:fb19:0:b0:3a6:fde0:cf74 with SMTP id
- d25-20020a67fb19000000b003a6fde0cf74mr4644732vsr.73.1668388750642; Sun, 13
- Nov 2022 17:19:10 -0800 (PST)
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JQZ0w7BBOuzs1TWd474FOkYAGshwH2dUWhpkOrTyXt4=;
+ b=mtdwqpkV4W4bh0LTgAE4SV7+VAHLYUIwfuDlOm56iw6cmhZa8oNoSRNvPrJrHLPrvX
+ IX1qBjDTyFmkyBG2kov1EnlJVtULb04EmGLHd7yPLg7GmXBp3+EjQAMQ1Xe09C1zGwUH
+ FT7DhycKaQK0Ch2g2YXZOVb7vdblC6V1mQWsXIV/2quapGMUgATknObLQ3xe97ROep23
+ 9jwMK40WeTQeStdEECo8u5foC6IJdSKLJzYURi9+6hJEv72DTgHUtmREizNYohEPWvzz
+ MBAc0zFzd6GrEvqAqww/C2qzgX0W+J/J2y8gwTBdJBbrMTThrx4G9aAV5fMK1Ee2t+Gx
+ Ncpg==
+X-Gm-Message-State: ANoB5pnukKnUAnJUymIMKt11jUpUfKLmf0VhqOf3CvPT7658P6Upxcf/
+ SvOlqMqJc8DDJwNsACuJS8L73w==
+X-Google-Smtp-Source: AA0mqf7myNLz9GyRLRgyx/VASU1bp8ZZW5PztG5I9cMZgSK6yiXDljyxm9cVeb/cqTUKBjnh4bfgPg==
+X-Received: by 2002:a7b:cd07:0:b0:3cf:75f4:794a with SMTP id
+ f7-20020a7bcd07000000b003cf75f4794amr7729735wmj.16.1668428682742; 
+ Mon, 14 Nov 2022 04:24:42 -0800 (PST)
+Received: from [192.168.1.115] ([185.126.107.38])
+ by smtp.gmail.com with ESMTPSA id
+ h5-20020a1ccc05000000b003cf7292c553sm11989984wmb.13.2022.11.14.04.24.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 14 Nov 2022 04:24:40 -0800 (PST)
+Message-ID: <ed19482f-e825-ac35-544d-1d2d102d2837@linaro.org>
+Date: Mon, 14 Nov 2022 13:24:36 +0100
 MIME-Version: 1.0
-References: <20221111121913.1531030-1-frederic.petrot@univ-grenoble-alpes.fr>
-In-Reply-To: <20221111121913.1531030-1-frederic.petrot@univ-grenoble-alpes.fr>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 14 Nov 2022 11:18:44 +1000
-Message-ID: <CAKmqyKODzdSWPn8O7i1meVDdjKEQ-5G427a2nX-BdT4aK4U1fg@mail.gmail.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.4.2
 Subject: Re: [PATCH] hw/intc: sifive_plic: Renumber the S irqs for numa support
+Content-Language: en-US
 To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Cc: Alistair.Francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ <frederic.petrot@univ-grenoble-alpes.fr>, Alistair.Francis@wdc.com,
+ bin.meng@windriver.com, palmer@dabbelt.com, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+References: <20221111121913.1531030-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <48729f3f-80eb-8c7b-7bbb-7cd6bfa65a3e@linaro.org>
+ <d87890a7-023f-ba7c-4a61-aa085d0134de@univ-grenoble-alpes.fr>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <d87890a7-023f-ba7c-4a61-aa085d0134de@univ-grenoble-alpes.fr>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -75,60 +85,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2022 01:19:14 -0000
+X-List-Received-Date: Mon, 14 Nov 2022 23:15:20 -0000
 
-On Fri, Nov 11, 2022 at 10:20 PM Fr=C3=A9d=C3=A9ric P=C3=A9trot
-<frederic.petrot@univ-grenoble-alpes.fr> wrote:
->
-> Commit 40244040 changed the way the S irqs are numbered. This breaks when
-> using numa configuration, e.g.:
-> ./qemu-system-riscv64 -nographic -machine virt,dumpdtb=3Dnuma-tree.dtb \
->                       -m 2G -smp cpus=3D16 \
->                       -object memory-backend-ram,id=3Dmem0,size=3D512M \
->                       -object memory-backend-ram,id=3Dmem1,size=3D512M \
->                       -object memory-backend-ram,id=3Dmem2,size=3D512M \
->                       -object memory-backend-ram,id=3Dmem3,size=3D512M \
->                       -numa node,cpus=3D0-3,memdev=3Dmem0,nodeid=3D0 \
->                       -numa node,cpus=3D4-7,memdev=3Dmem1,nodeid=3D1 \
->                       -numa node,cpus=3D8-11,memdev=3Dmem2,nodeid=3D2 \
->                       -numa node,cpus=3D12-15,memdev=3Dmem3,nodeid=3D3
-> leads to:
-> Unexpected error in object_property_find_err() at ../qom/object.c:1304:
-> qemu-system-riscv64: Property 'riscv.sifive.plic.unnamed-gpio-out[8]' not
-> found
->
-> This patch makes the nubering of the S irqs identical to what it was befo=
-re.
->
-> Signed-off-by: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-greno=
-ble-alpes.fr>
+On 14/11/22 11:34, Frédéric Pétrot wrote:
+> Le 14/11/2022 à 09:40, Philippe Mathieu-Daudé a écrit :
+>> On 11/11/22 13:19, Frédéric Pétrot wrote:
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Alistair
+>> Eventually we could unify the style:
+>>
+>> -- >8 --
+>> @@ -476,11 +476,11 @@ DeviceState *sifive_plic_create(hwaddr addr, 
+>> char *hart_config,
+>>           CPUState *cpu = qemu_get_cpu(cpu_num);
+>>
+>>           if (plic->addr_config[i].mode == PLICMode_M) {
+>> -            qdev_connect_gpio_out(dev, num_harts - plic->hartid_base 
+>> + cpu_num,
+>> +            qdev_connect_gpio_out(dev, cpu_num - hartid_base + 
+>> num_harts,
+>>                                     qdev_get_gpio_in(DEVICE(cpu), 
+>> IRQ_M_EXT));
+>>           }
+>>           if (plic->addr_config[i].mode == PLICMode_S) {
+>> -            qdev_connect_gpio_out(dev, cpu_num,
+>> +            qdev_connect_gpio_out(dev, cpu_num - hartid_base,hartid_base
+>>                                     qdev_get_gpio_in(DEVICE(cpu), 
+>> IRQ_S_EXT));
+>>           }
+>>       }
+>> ---
+> 
+>    IIUC hartid_base is used to set plic->hartid_base, so agreed, along 
+> with the
+>    style unification.
+>    I'll send a v2, then.
+>    Since Alistair already queued the patch, how shall I proceed?
 
-> ---
->  hw/intc/sifive_plic.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-> index c2dfacf028..89d2122742 100644
-> --- a/hw/intc/sifive_plic.c
-> +++ b/hw/intc/sifive_plic.c
-> @@ -480,7 +480,7 @@ DeviceState *sifive_plic_create(hwaddr addr, char *ha=
-rt_config,
->                                    qdev_get_gpio_in(DEVICE(cpu), IRQ_M_EX=
-T));
->          }
->          if (plic->addr_config[i].mode =3D=3D PLICMode_S) {
-> -            qdev_connect_gpio_out(dev, cpu_num,
-> +            qdev_connect_gpio_out(dev, cpu_num - plic->hartid_base,
->                                    qdev_get_gpio_in(DEVICE(cpu), IRQ_S_EX=
-T));
->          }
->      }
-> --
-> 2.37.2
->
->
+I didn't notice Alistair queued (he usually send a notification by
+responding "queued" to the patches). If it is queued, then too late
+(and not a big deal) -- you can still post the v2 and let him pick
+it :)
 
