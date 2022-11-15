@@ -1,58 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ouinW-0007sS-Sl
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Nov 2022 18:23:26 -0500
+	id 1ounAk-0005Ll-8e
+	for mharc-qemu-riscv@gnu.org; Mon, 14 Nov 2022 23:03:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ouihh-0004sK-0a; Mon, 14 Nov 2022 18:17:25 -0500
-Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
+ id 1ounAi-0005LX-9j; Mon, 14 Nov 2022 23:03:40 -0500
+Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ouQTD-00051S-GY; Sun, 13 Nov 2022 22:49:17 -0500
-Received: by mail-vs1-xe2d.google.com with SMTP id t14so10256387vsr.9;
- Sun, 13 Nov 2022 19:49:14 -0800 (PST)
+ id 1ounAh-0002G8-0V; Mon, 14 Nov 2022 23:03:40 -0500
+Received: by mail-vk1-xa31.google.com with SMTP id g16so5994311vkl.11;
+ Mon, 14 Nov 2022 20:03:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Tj0OglJFYBK6ir0ZAItWmnnVwojk+hPz9GAH8lBZy1w=;
- b=PvmHsEGdmk25aEM1blp/oppyKxnxT1/TTmxMYOgJ1MeeTuRBf8kecJJKKYpnQm1wjn
- KoRoBOx/R/SZBL9zY8cKkFslLvgePCr7c7JfFtQ8RyncaOhPKJl89sVsC+dRjWUvQVTO
- Oav8LhVeGBqhzsHKI3fAiOJmPo+R2cUbFEJ6zTRVDzl9Gsz0Ut+7/g1kamRGO3eKaJQ+
- +MlIViEU8jWdD9EmJGerAO0RHOCePf5DYJ+lI0HELGSyljbA6gWWf4DBOmSxL6VeEAKe
- 6M7Z96aOM4m31ve6DVpoxf+s9OTukxrVh0GrkCXRBr3S6SgFysWrxB9woI1EzKBX0RnR
- LQsg==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=H6nTkbLyaFYTmiH8HhHmv6xAMnUzme0LMawLHlYhgjA=;
+ b=p8Y9O4Sm/WsU7AnVTSImq3OYyq0q/XFpGkBbCbZBHQdxW5GSijDCmswaXlFlfOioEj
+ 4z+mR0SRMB+IH4jLgIGAGq33UZmoQaehuQnosJQGKMd8t7wWFWN7HC50EAV0hEso7Mcn
+ gEfb//yOfB1e3q97K6iPmTkLggLc/BU8EOkEobnBUvM8JqdQk8M7mJNpX0daxcumHUQ0
+ rUzEjJKYvO3PR+ZFE3t7I7o0x5XPfs8qHbsTAmlxjRpDQRDx6fuQ9163HzU6pTgJJPIx
+ OEcjNTx+MEaD+L2LdGqcdXs+ZoeCbT0ajnNfHLePrh1w0qKJebulsLRZMfaUkG/abCQ0
+ pejA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Tj0OglJFYBK6ir0ZAItWmnnVwojk+hPz9GAH8lBZy1w=;
- b=vUWnsCfoNVVkNXCiUDz42dIBedFmjkab5wY57krvEoXFgplkemeTNAWaHL66wyMBwy
- Wko7eUWNf/VPGaAREDLaLciX4VX2Hb/uON36n89LUWlFHimEHipyCXuJk0ACazE2TRky
- 3Af8Wqr8hvVoo4LqFvXmaTnAfDSuDwqd4PV58cN7kwJAbDmtfE8F+8PRXoRObfIjlEGm
- lej0DHjwWIKHCKno7Ghq6DLIWr80Bt8oDGjnr37Sl2bGAig5txJOSlfW9TCT2GNjmmap
- 5G7Jkj4mOj0V8p5PfJHlezFVqCPlwPjz1IffHxACGZ5jWC3eM1kBxaVysr5CCIg7BSvx
- G1zQ==
-X-Gm-Message-State: ANoB5pma42hxXFMULKPL/G+QfXdlNLbfkwiVhavo+QHtBRt7Ic/KX5DG
- PbHTO5W7EdHbZubJjTpKSVp3NQMJ29xifqIkCMZbZONjZl7zNQ==
-X-Google-Smtp-Source: AA0mqf5djTgaRD+AW0QZiWsTOdCxT87uWSmdziuABCCDlo8sLns8Lxfti/wTjT/Fxj2sSpvWRxBa6aehZs0kNPneQfc=
-X-Received: by 2002:a67:fb19:0:b0:3a6:fde0:cf74 with SMTP id
- d25-20020a67fb19000000b003a6fde0cf74mr4791379vsr.73.1668397753965; Sun, 13
- Nov 2022 19:49:13 -0800 (PST)
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=H6nTkbLyaFYTmiH8HhHmv6xAMnUzme0LMawLHlYhgjA=;
+ b=nVBEf6wjLtQX+RGqC1rccPWdDjDkESpSHEegBzXAX/bGMOvmaGdnoGjbxjwJG1VVO3
+ NDdB9wXaOSy1L6trV8in6+gJ7gBk5nSbn5Hh+IsiImXDAzAIhvv3cSLSZBnHVGpRSDkJ
+ Cj4KwKKfNzqs/O/Xst90/Qaui7KvHAS2roCZZn5V+iIavguFvUsh/0E2XlOQk8GAYCb6
+ IyG3G5kJvk9t32OxtV0OWl6wTbKGOmZP7ZnzGAkdxwVfk9UMmH2gXzmRawkMRdKbJk/S
+ MmvhY+A3QEBtvYA6s5oohmp6+pBzN4WFZpbEa5opdaGo67PFqe0I4Y+0lSnTlfxes2P/
+ dRHg==
+X-Gm-Message-State: ANoB5pljqIbDGaOuolpaZ21KNS5UwrgVa1Q06mTkkKiUeMVnb407fWXx
+ IacohQvtETwyIQrazbwBnp2oPFAuM07546AuuXk=
+X-Google-Smtp-Source: AA0mqf7E41CgGA8SuiCMEjO7CesLNM0aM/iCXeq0MlTIX2Lz5q+rjW4CAH4/eI7rSZPMNMS/ld9mG8b+YqlcxyHj1Kg=
+X-Received: by 2002:a1f:9fcb:0:b0:3bb:eb83:7ab7 with SMTP id
+ i194-20020a1f9fcb000000b003bbeb837ab7mr7601996vke.30.1668485017109; Mon, 14
+ Nov 2022 20:03:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20221027054649.69228-1-mchitale@ventanamicro.com>
- <20221027054649.69228-4-mchitale@ventanamicro.com>
-In-Reply-To: <20221027054649.69228-4-mchitale@ventanamicro.com>
+References: <20221111121913.1531030-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <48729f3f-80eb-8c7b-7bbb-7cd6bfa65a3e@linaro.org>
+ <d87890a7-023f-ba7c-4a61-aa085d0134de@univ-grenoble-alpes.fr>
+ <ed19482f-e825-ac35-544d-1d2d102d2837@linaro.org>
+In-Reply-To: <ed19482f-e825-ac35-544d-1d2d102d2837@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 14 Nov 2022 13:48:47 +1000
-Message-ID: <CAKmqyKOpCvVUwdaKDdTWw7kpw_xp2+iJAtCGd6EimDCTye_aEw@mail.gmail.com>
-Subject: Re: [PATCH v1 3/3] target/riscv: kvm: Support selecting VCPU
- extensions
-To: Mayuresh Chitale <mchitale@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
+Date: Tue, 15 Nov 2022 14:03:10 +1000
+Message-ID: <CAKmqyKNiqTfrX_4DkPGTpka3eXgpky6VeW=gKi0iE_3PHgfwWg@mail.gmail.com>
+Subject: Re: [PATCH] hw/intc: sifive_plic: Renumber the S irqs for numa support
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, 
+ Alistair.Francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,177 +79,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2022 23:17:32 -0000
+X-List-Received-Date: Tue, 15 Nov 2022 04:03:40 -0000
 
-On Thu, Oct 27, 2022 at 3:53 PM Mayuresh Chitale
-<mchitale@ventanamicro.com> wrote:
+On Tue, Nov 15, 2022 at 9:56 AM Philippe Mathieu-Daud=C3=A9
+<philmd@linaro.org> wrote:
 >
-> Set the state of each ISA extension on the vcpu depending on what
-> is set in the CPU property and what is allowed by KVM for that extension.
+> On 14/11/22 11:34, Fr=C3=A9d=C3=A9ric P=C3=A9trot wrote:
+> > Le 14/11/2022 =C3=A0 09:40, Philippe Mathieu-Daud=C3=A9 a =C3=A9crit :
+> >> On 11/11/22 13:19, Fr=C3=A9d=C3=A9ric P=C3=A9trot wrote:
 >
-> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+>
+> >> Eventually we could unify the style:
+> >>
+> >> -- >8 --
+> >> @@ -476,11 +476,11 @@ DeviceState *sifive_plic_create(hwaddr addr,
+> >> char *hart_config,
+> >>           CPUState *cpu =3D qemu_get_cpu(cpu_num);
+> >>
+> >>           if (plic->addr_config[i].mode =3D=3D PLICMode_M) {
+> >> -            qdev_connect_gpio_out(dev, num_harts - plic->hartid_base
+> >> + cpu_num,
+> >> +            qdev_connect_gpio_out(dev, cpu_num - hartid_base +
+> >> num_harts,
+> >>                                     qdev_get_gpio_in(DEVICE(cpu),
+> >> IRQ_M_EXT));
+> >>           }
+> >>           if (plic->addr_config[i].mode =3D=3D PLICMode_S) {
+> >> -            qdev_connect_gpio_out(dev, cpu_num,
+> >> +            qdev_connect_gpio_out(dev, cpu_num - hartid_base,hartid_b=
+ase
+> >>                                     qdev_get_gpio_in(DEVICE(cpu),
+> >> IRQ_S_EXT));
+> >>           }
+> >>       }
+> >> ---
+> >
+> >    IIUC hartid_base is used to set plic->hartid_base, so agreed, along
+> > with the
+> >    style unification.
+> >    I'll send a v2, then.
+> >    Since Alistair already queued the patch, how shall I proceed?
+>
+> I didn't notice Alistair queued (he usually send a notification by
+> responding "queued" to the patches). If it is queued, then too late
+> (and not a big deal) -- you can still post the v2 and let him pick
+> it :)
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Yep! I'll drop it from my queue and take the v2
 
 Alistair
 
-> ---
->  target/riscv/cpu.c       | 11 ++++-
->  target/riscv/kvm.c       | 88 ++++++++++++++++++++++++++++++++++------
->  target/riscv/kvm_riscv.h |  2 +-
->  3 files changed, 87 insertions(+), 14 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 35320a8547..e52577d59d 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1191,10 +1191,19 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str)
->  {
->      char *old = *isa_str;
->      char *new = *isa_str;
-> -    int i;
-> +    int i, offset;
->
->      for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
->          if (isa_ext_is_enabled(cpu, &isa_edata_arr[i])) {
-> +            offset = isa_edata_arr[i].ext_enable_offset;
-> +            if (kvm_enabled() && !kvm_riscv_ext_supported(offset)) {
-> +#ifndef CONFIG_USER_ONLY
-> +                info_report("disabling %s extension for hart 0x%lx because "
-> +                            "kvm does not support it", isa_edata_arr[i].name,
-> +                            (unsigned long)cpu->env.mhartid);
-> +#endif
-> +                    continue;
-> +            }
->              if (isa_edata_arr[i].multi_letter) {
->                  if (cpu->cfg.short_isa_string) {
->                      continue;
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 30f21453d6..ea0715c9e4 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -42,6 +42,29 @@
->  #include "migration/migration.h"
->  #include "sysemu/runstate.h"
->
-> +struct isa_ext_info {
-> +    const char *name;
-> +    target_ulong misa_bit;
-> +    int ext_enable_offset;
-> +};
-> +
-> +#define ISA_EXT_DATA_ENTRY(_name, _bit, _prop) \
-> +    {#_name, _bit, offsetof(struct RISCVCPUConfig, _prop)}
-> +
-> +static const struct isa_ext_info isa_info_arr[] = {
-> +    ISA_EXT_DATA_ENTRY(a, RVA, ext_a),
-> +    ISA_EXT_DATA_ENTRY(c, RVC, ext_c),
-> +    ISA_EXT_DATA_ENTRY(d, RVD, ext_d),
-> +    ISA_EXT_DATA_ENTRY(f, RVF, ext_f),
-> +    ISA_EXT_DATA_ENTRY(h, RVH, ext_h),
-> +    ISA_EXT_DATA_ENTRY(i, RVI, ext_i),
-> +    ISA_EXT_DATA_ENTRY(m, RVM, ext_m),
-> +    ISA_EXT_DATA_ENTRY(svpbmt, 0, ext_svpbmt),
-> +    ISA_EXT_DATA_ENTRY(sstc, 0, ext_sstc),
-> +    ISA_EXT_DATA_ENTRY(svinval, 0, ext_svinval),
-> +    ISA_EXT_DATA_ENTRY(zihintpause, 0, ext_zihintpause),
-> +};
-> +
->  static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type,
->                                   uint64_t idx)
->  {
-> @@ -394,25 +417,66 @@ void kvm_arch_init_irq_routing(KVMState *s)
->  {
->  }
->
-> +bool kvm_riscv_ext_supported(int offset)
-> +{
-> +    int i;
-> +
-> +    for (i = 0; i < KVM_RISCV_ISA_EXT_MAX; ++i) {
-> +        if (isa_info_arr[i].ext_enable_offset == offset) {
-> +            return true;
-> +        }
-> +    }
-> +    return false;
-> +}
-> +
-> +static void kvm_riscv_set_isa_ext(CPUState *cs, CPURISCVState *env)
-> +{
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +    unsigned long isa_ext_out;
-> +    bool *ext_state;
-> +    uint64_t id;
-> +    int i, ret;
-> +
-> +    env->misa_ext = 0;
-> +    for (i = 0; i < ARRAY_SIZE(isa_info_arr); i++) {
-> +        ext_state = (void *)&cpu->cfg + isa_info_arr[i].ext_enable_offset;
-> +        id = kvm_riscv_reg_id(env, KVM_REG_RISCV_ISA_EXT, i);
-> +        ret = kvm_get_one_reg(cs, id, &isa_ext_out);
-> +        if (ret) {
-> +            warn_report("Disabling ext %s due to failure.",
-> +                        isa_info_arr[i].name);
-> +            *ext_state = false;
-> +            continue;
-> +        }
-> +        if (isa_ext_out != (*ext_state)) {
-> +            isa_ext_out = *ext_state;
-> +            ret = kvm_set_one_reg(cs, id, &isa_ext_out);
-> +            if (ret) {
-> +                warn_report("Could not %s ext %s.",
-> +                            (isa_ext_out ? "enable" : "disable"),
-> +                            isa_info_arr[i].name);
-> +                *ext_state = !isa_ext_out;
-> +            }
-> +        }
-> +        /*
-> +         * If the sigle letter extension is supported by KVM then set
-> +         * the corresponding misa bit for the guest vcpu.
-> +         */
-> +        if (isa_info_arr[i].misa_bit && (*ext_state)) {
-> +            env->misa_ext |= isa_info_arr[i].misa_bit;
-> +        }
-> +    }
-> +}
-> +
->  int kvm_arch_init_vcpu(CPUState *cs)
->  {
-> -    int ret = 0;
-> -    target_ulong isa;
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      CPURISCVState *env = &cpu->env;
-> -    uint64_t id;
->
->      qemu_add_vm_change_state_handler(kvm_riscv_vm_state_change, cs);
->
-> -    id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
-> -                          KVM_REG_RISCV_CONFIG_REG(isa));
-> -    ret = kvm_get_one_reg(cs, id, &isa);
-> -    if (ret) {
-> -        return ret;
-> -    }
-> -    env->misa_ext = isa;
-> -
-> -    return ret;
-> +    kvm_riscv_set_isa_ext(cs, env);
-> +    return 0;
->  }
->
->  int kvm_arch_msi_data_to_gsi(uint32_t data)
-> diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
-> index ed281bdce0..bdcccc0da4 100644
-> --- a/target/riscv/kvm_riscv.h
-> +++ b/target/riscv/kvm_riscv.h
-> @@ -21,5 +21,5 @@
->
->  void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
->  void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
-> -
-> +bool kvm_riscv_ext_supported(int offset);
->  #endif
-> --
-> 2.34.1
->
 >
 
