@@ -1,71 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ouvOo-0002Kx-8z
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Nov 2022 07:50:46 -0500
+	id 1ouwEu-000068-32
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Nov 2022 08:44:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ouvOc-0002CK-4L
- for qemu-riscv@nongnu.org; Tue, 15 Nov 2022 07:50:44 -0500
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ id 1ouwEr-0008V2-Hk
+ for qemu-riscv@nongnu.org; Tue, 15 Nov 2022 08:44:33 -0500
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ouvOa-00038h-D8
- for qemu-riscv@nongnu.org; Tue, 15 Nov 2022 07:50:33 -0500
-Received: by mail-pl1-x62e.google.com with SMTP id io19so13058701plb.8
- for <qemu-riscv@nongnu.org>; Tue, 15 Nov 2022 04:50:31 -0800 (PST)
+ id 1ouwEo-00064R-Nz
+ for qemu-riscv@nongnu.org; Tue, 15 Nov 2022 08:44:33 -0500
+Received: by mail-pj1-x1031.google.com with SMTP id h14so13352851pjv.4
+ for <qemu-riscv@nongnu.org>; Tue, 15 Nov 2022 05:44:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=M1fCuhFTHf5E8jIF/ijZAweB+kSzyX1RDHh+ip2GFjk=;
- b=g+jfKxu9Lerg8OaJr9yTixR7apt9k3TWCJTWpbWvKe2rRqYdyZxDJTmix43uDj5bFU
- sDykTy5Xo0lGtB+SUgRnkbjYKKn/lYKZPA3nkh6bmoIG8qpZSenu+SZiWm2cdogyxL2H
- 8oJCuXZwTy6lp6tZD71l7RrkYuIZ/fzD+pqB/cfE1BaY6SldwjIkTZDz2jsEMQSpa2u3
- QvEADqFFY93xk5r+yFXTuEktkh7Cuja9WDcgXBwxG2fseW/d6XgpnN7t4aEtF4kogpqQ
- haL7VKwzVX8LntyA2tp7+6Zgoax2eHGUxcGChAeQOmx5ZvvoYYpF+olG4dGYp/0H3Jem
- 6XPA==
+ bh=mzS68UimMW9fo+GAmYC11Uqd9MCO+hbECaAOBmmClvo=;
+ b=EhFnihoL4/e+N+I4WUgfmF9OeWBKSPpnV6BEwqTLe0+POy1T7yppdZDXjBtOKvxXBl
+ F1qWvz9XUjpROu5vVRtAapIC2TJMj4sR/oTY44a2FFqRkfGY6Xe2pDQTFqlDfNz3qs4E
+ AMKc/Yy62yN3allSvw0bzrxV9EGInh53DCydvJTRiuuDRRLAtegMbG3VnUCouFQ+mFnH
+ ep8sr7KLbIFlXRSWZyrbdYWct6OavCP+8Z4wkSRFCpk+1z520WOnltu3FmxERPA4STJ8
+ StGIViZrqC1Vh6oQ9JX5/oWMjc6d0ufK4ZEmq6fem3hQFThmPlxfdgd7ISz4oA9eG7fk
+ cT1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=M1fCuhFTHf5E8jIF/ijZAweB+kSzyX1RDHh+ip2GFjk=;
- b=yIJVlLX0onuP8+8XjKPsc4hso9eh1Fb9tpSxuXb9t1xD0rrqeTXEWPCtz8bP06Tp2l
- 5XljssGJ9G73vhp9dCF/l31aIcS7yWr/ncgTkSPpod8L6x4GLaKqeLNSS6C9eL5T+wmq
- mFigKaHZhXA8Cm/qwmEMp32zSiLz1FP9F4uymi180/rkCRmRpB3PC0k2WRlB67Gi5rMD
- 4a95blmLFtQZUJfZ5qPaOhZMs4fFnwJtW4KlRsJXgeG/pOSPvKr612D4XLtGya5Eeesc
- sY49h+RLGvdeYEmhIUyPyWa20+V322+AbhPD1vAbWXc7NUZAeozKZvPBPhtBjChCq97N
- uEgQ==
-X-Gm-Message-State: ANoB5pkxX+96jypcGf99sX1w5zsq45yAvXUuXgRqYdLiK7P4ELeYTKKh
- n5HOUHf8c9FmHlfH/1CX0bsT0w==
-X-Google-Smtp-Source: AA0mqf6byH0H1DnmaZRH4riOXAR+bER6QqDQHayrVmibl5eSMFg/ih/+hNAyYuQeYEIIG72Plhn0Nw==
-X-Received: by 2002:a17:90a:f412:b0:212:d636:1543 with SMTP id
- ch18-20020a17090af41200b00212d6361543mr466058pjb.33.1668516630818; 
- Tue, 15 Nov 2022 04:50:30 -0800 (PST)
+ bh=mzS68UimMW9fo+GAmYC11Uqd9MCO+hbECaAOBmmClvo=;
+ b=U6MI/DKc+/eUc2Wmzt3IQ8L56v+IoiwhEBlpn6q8pAZvXwoulYjCSb5cAylqwSpLfn
+ Okrm5sOq9WyIUMhWl0/pwiNEJ7ODjPy5baiVjuXbxH6xV5M+5WVAXbaMeuaWHv47mMZT
+ LeW+RfAoyJY5cHvI+W2wD7vc1xXuGk02aB3tF2uy5mcpTydErh9mZkM7LVHM8w/WGVnx
+ ICb/pb5X5SrtnEIpd+K3BdV24l/i36y9u2rdOfUh2pSaYPNCMk9yEKrF+eVHF/ySFA7P
+ vhUYePnyfq6l2K5gMElfaT6VzEsiBZ/24cdrW63cDSz3fnJbYY/TA1qZqAlmTDwnUdhl
+ +jFA==
+X-Gm-Message-State: ANoB5pmZHOsIdqmrGMlI7uYPCpWB2YpzFA9nPNpHVx173uqblgDWcfCo
+ cUcyvm2jaO0UaDQf3NbCYof8Ow==
+X-Google-Smtp-Source: AA0mqf4zmbxuE5ldXMSRABg+SUxcabeOI5LMDAF5iF9E+AcgHgPG/gVDYoX0sexfPM2Ugq+W8WLDWA==
+X-Received: by 2002:a17:90a:fd06:b0:213:5c5f:f440 with SMTP id
+ cv6-20020a17090afd0600b002135c5ff440mr2400187pjb.15.1668519867696; 
+ Tue, 15 Nov 2022 05:44:27 -0800 (PST)
 Received: from [10.0.0.228] (119-18-35-77.771223.bne.static.aussiebb.net.
  [119.18.35.77]) by smtp.gmail.com with ESMTPSA id
- s30-20020a17090a69a100b00217cdc4b0a5sm11533175pjj.16.2022.11.15.04.50.25
+ h13-20020a170902f54d00b0017f7c4e2604sm9862159plf.296.2022.11.15.05.44.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 15 Nov 2022 04:50:28 -0800 (PST)
-Message-ID: <df537c45-3d28-1d64-972f-e7a7d75f7ac2@linaro.org>
-Date: Tue, 15 Nov 2022 22:50:21 +1000
+ Tue, 15 Nov 2022 05:44:27 -0800 (PST)
+Message-ID: <9713c707-2828-5436-dbd4-60fbd18985f6@linaro.org>
+Date: Tue, 15 Nov 2022 23:44:19 +1000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
-Subject: Re: [PATCH v2 3/8] target/riscv: add support for Zcd extension
+Subject: Re: [PATCH v2 5/8] target/riscv: add support for Zcmp extension
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20221113023251.11047-1-liweiwei@iscas.ac.cn>
- <20221113023251.11047-4-liweiwei@iscas.ac.cn>
+ <20221113023251.11047-6-liweiwei@iscas.ac.cn>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20221113023251.11047-4-liweiwei@iscas.ac.cn>
+In-Reply-To: <20221113023251.11047-6-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1031.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -85,21 +85,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Nov 2022 12:50:44 -0000
+X-List-Received-Date: Tue, 15 Nov 2022 13:44:34 -0000
 
 On 11/13/22 12:32, Weiwei Li wrote:
-> Separate c_fld/c_fsd from fld/fsd to add additional check for
-> c.fld{sp}/c.fsd{sp} which is useful for zcmp/zcmt to reuse
-> their encodings
-> 
-> Signed-off-by: Weiwei Li<liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang<wangjunqiang@iscas.ac.cn>
-> ---
->   target/riscv/insn16.decode              |  8 ++++----
->   target/riscv/insn_trans/trans_rvd.c.inc | 18 ++++++++++++++++++
->   2 files changed, 22 insertions(+), 4 deletions(-)
+>   {
+>     sq              101  ... ... .. ... 10 @c_sqsp
+>     c_fsd           101   ......  ..... 10 @c_sdsp
+> +
+> +  # *** RV64 and RV32 Zcmp Extension ***
+> +  cm_push         101  11000  .... .. 10 @zcmp
+> +  cm_pop          101  11010  .... .. 10 @zcmp
+> +  cm_popret       101  11110  .... .. 10 @zcmp
+> +  cm_popretz      101  11100  .... .. 10 @zcmp
+> +  cm_mva01s       101  011 ... 11 ... 10 @cm_mv
+> +  cm_mvsa01       101  011 ... 01 ... 10 @cm_mv
+>   }
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+There is no overlap in these, so they should be within nested [].
+
+
+> diff --git a/target/riscv/zce_helper.c b/target/riscv/zce_helper.c
+> new file mode 100644
+> index 0000000000..1346de1367
+> --- /dev/null
+> +++ b/target/riscv/zce_helper.c
+> @@ -0,0 +1,210 @@
+> +/*
+> + * RISC-V Zc* extension Helpers for QEMU.
+> + *
+> + * Copyright (c) 2021-2022 PLCT Lab
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+
+The entire contents of this helper file should be handled at translation time.
+
 
 r~
 
