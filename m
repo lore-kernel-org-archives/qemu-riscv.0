@@ -1,72 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ounAk-0005Ll-8e
-	for mharc-qemu-riscv@gnu.org; Mon, 14 Nov 2022 23:03:42 -0500
+	id 1ouvOo-0002Kx-8z
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Nov 2022 07:50:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ounAi-0005LX-9j; Mon, 14 Nov 2022 23:03:40 -0500
-Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1ouvOc-0002CK-4L
+ for qemu-riscv@nongnu.org; Tue, 15 Nov 2022 07:50:44 -0500
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ounAh-0002G8-0V; Mon, 14 Nov 2022 23:03:40 -0500
-Received: by mail-vk1-xa31.google.com with SMTP id g16so5994311vkl.11;
- Mon, 14 Nov 2022 20:03:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=H6nTkbLyaFYTmiH8HhHmv6xAMnUzme0LMawLHlYhgjA=;
- b=p8Y9O4Sm/WsU7AnVTSImq3OYyq0q/XFpGkBbCbZBHQdxW5GSijDCmswaXlFlfOioEj
- 4z+mR0SRMB+IH4jLgIGAGq33UZmoQaehuQnosJQGKMd8t7wWFWN7HC50EAV0hEso7Mcn
- gEfb//yOfB1e3q97K6iPmTkLggLc/BU8EOkEobnBUvM8JqdQk8M7mJNpX0daxcumHUQ0
- rUzEjJKYvO3PR+ZFE3t7I7o0x5XPfs8qHbsTAmlxjRpDQRDx6fuQ9163HzU6pTgJJPIx
- OEcjNTx+MEaD+L2LdGqcdXs+ZoeCbT0ajnNfHLePrh1w0qKJebulsLRZMfaUkG/abCQ0
- pejA==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1ouvOa-00038h-D8
+ for qemu-riscv@nongnu.org; Tue, 15 Nov 2022 07:50:33 -0500
+Received: by mail-pl1-x62e.google.com with SMTP id io19so13058701plb.8
+ for <qemu-riscv@nongnu.org>; Tue, 15 Nov 2022 04:50:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=M1fCuhFTHf5E8jIF/ijZAweB+kSzyX1RDHh+ip2GFjk=;
+ b=g+jfKxu9Lerg8OaJr9yTixR7apt9k3TWCJTWpbWvKe2rRqYdyZxDJTmix43uDj5bFU
+ sDykTy5Xo0lGtB+SUgRnkbjYKKn/lYKZPA3nkh6bmoIG8qpZSenu+SZiWm2cdogyxL2H
+ 8oJCuXZwTy6lp6tZD71l7RrkYuIZ/fzD+pqB/cfE1BaY6SldwjIkTZDz2jsEMQSpa2u3
+ QvEADqFFY93xk5r+yFXTuEktkh7Cuja9WDcgXBwxG2fseW/d6XgpnN7t4aEtF4kogpqQ
+ haL7VKwzVX8LntyA2tp7+6Zgoax2eHGUxcGChAeQOmx5ZvvoYYpF+olG4dGYp/0H3Jem
+ 6XPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=H6nTkbLyaFYTmiH8HhHmv6xAMnUzme0LMawLHlYhgjA=;
- b=nVBEf6wjLtQX+RGqC1rccPWdDjDkESpSHEegBzXAX/bGMOvmaGdnoGjbxjwJG1VVO3
- NDdB9wXaOSy1L6trV8in6+gJ7gBk5nSbn5Hh+IsiImXDAzAIhvv3cSLSZBnHVGpRSDkJ
- Cj4KwKKfNzqs/O/Xst90/Qaui7KvHAS2roCZZn5V+iIavguFvUsh/0E2XlOQk8GAYCb6
- IyG3G5kJvk9t32OxtV0OWl6wTbKGOmZP7ZnzGAkdxwVfk9UMmH2gXzmRawkMRdKbJk/S
- MmvhY+A3QEBtvYA6s5oohmp6+pBzN4WFZpbEa5opdaGo67PFqe0I4Y+0lSnTlfxes2P/
- dRHg==
-X-Gm-Message-State: ANoB5pljqIbDGaOuolpaZ21KNS5UwrgVa1Q06mTkkKiUeMVnb407fWXx
- IacohQvtETwyIQrazbwBnp2oPFAuM07546AuuXk=
-X-Google-Smtp-Source: AA0mqf7E41CgGA8SuiCMEjO7CesLNM0aM/iCXeq0MlTIX2Lz5q+rjW4CAH4/eI7rSZPMNMS/ld9mG8b+YqlcxyHj1Kg=
-X-Received: by 2002:a1f:9fcb:0:b0:3bb:eb83:7ab7 with SMTP id
- i194-20020a1f9fcb000000b003bbeb837ab7mr7601996vke.30.1668485017109; Mon, 14
- Nov 2022 20:03:37 -0800 (PST)
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=M1fCuhFTHf5E8jIF/ijZAweB+kSzyX1RDHh+ip2GFjk=;
+ b=yIJVlLX0onuP8+8XjKPsc4hso9eh1Fb9tpSxuXb9t1xD0rrqeTXEWPCtz8bP06Tp2l
+ 5XljssGJ9G73vhp9dCF/l31aIcS7yWr/ncgTkSPpod8L6x4GLaKqeLNSS6C9eL5T+wmq
+ mFigKaHZhXA8Cm/qwmEMp32zSiLz1FP9F4uymi180/rkCRmRpB3PC0k2WRlB67Gi5rMD
+ 4a95blmLFtQZUJfZ5qPaOhZMs4fFnwJtW4KlRsJXgeG/pOSPvKr612D4XLtGya5Eeesc
+ sY49h+RLGvdeYEmhIUyPyWa20+V322+AbhPD1vAbWXc7NUZAeozKZvPBPhtBjChCq97N
+ uEgQ==
+X-Gm-Message-State: ANoB5pkxX+96jypcGf99sX1w5zsq45yAvXUuXgRqYdLiK7P4ELeYTKKh
+ n5HOUHf8c9FmHlfH/1CX0bsT0w==
+X-Google-Smtp-Source: AA0mqf6byH0H1DnmaZRH4riOXAR+bER6QqDQHayrVmibl5eSMFg/ih/+hNAyYuQeYEIIG72Plhn0Nw==
+X-Received: by 2002:a17:90a:f412:b0:212:d636:1543 with SMTP id
+ ch18-20020a17090af41200b00212d6361543mr466058pjb.33.1668516630818; 
+ Tue, 15 Nov 2022 04:50:30 -0800 (PST)
+Received: from [10.0.0.228] (119-18-35-77.771223.bne.static.aussiebb.net.
+ [119.18.35.77]) by smtp.gmail.com with ESMTPSA id
+ s30-20020a17090a69a100b00217cdc4b0a5sm11533175pjj.16.2022.11.15.04.50.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 15 Nov 2022 04:50:28 -0800 (PST)
+Message-ID: <df537c45-3d28-1d64-972f-e7a7d75f7ac2@linaro.org>
+Date: Tue, 15 Nov 2022 22:50:21 +1000
 MIME-Version: 1.0
-References: <20221111121913.1531030-1-frederic.petrot@univ-grenoble-alpes.fr>
- <48729f3f-80eb-8c7b-7bbb-7cd6bfa65a3e@linaro.org>
- <d87890a7-023f-ba7c-4a61-aa085d0134de@univ-grenoble-alpes.fr>
- <ed19482f-e825-ac35-544d-1d2d102d2837@linaro.org>
-In-Reply-To: <ed19482f-e825-ac35-544d-1d2d102d2837@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 15 Nov 2022 14:03:10 +1000
-Message-ID: <CAKmqyKNiqTfrX_4DkPGTpka3eXgpky6VeW=gKi0iE_3PHgfwWg@mail.gmail.com>
-Subject: Re: [PATCH] hw/intc: sifive_plic: Renumber the S irqs for numa support
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>, 
- Alistair.Francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Subject: Re: [PATCH v2 3/8] target/riscv: add support for Zcd extension
+Content-Language: en-US
+To: Weiwei Li <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20221113023251.11047-1-liweiwei@iscas.ac.cn>
+ <20221113023251.11047-4-liweiwei@iscas.ac.cn>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20221113023251.11047-4-liweiwei@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -79,55 +85,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Nov 2022 04:03:40 -0000
+X-List-Received-Date: Tue, 15 Nov 2022 12:50:44 -0000
 
-On Tue, Nov 15, 2022 at 9:56 AM Philippe Mathieu-Daud=C3=A9
-<philmd@linaro.org> wrote:
->
-> On 14/11/22 11:34, Fr=C3=A9d=C3=A9ric P=C3=A9trot wrote:
-> > Le 14/11/2022 =C3=A0 09:40, Philippe Mathieu-Daud=C3=A9 a =C3=A9crit :
-> >> On 11/11/22 13:19, Fr=C3=A9d=C3=A9ric P=C3=A9trot wrote:
->
->
-> >> Eventually we could unify the style:
-> >>
-> >> -- >8 --
-> >> @@ -476,11 +476,11 @@ DeviceState *sifive_plic_create(hwaddr addr,
-> >> char *hart_config,
-> >>           CPUState *cpu =3D qemu_get_cpu(cpu_num);
-> >>
-> >>           if (plic->addr_config[i].mode =3D=3D PLICMode_M) {
-> >> -            qdev_connect_gpio_out(dev, num_harts - plic->hartid_base
-> >> + cpu_num,
-> >> +            qdev_connect_gpio_out(dev, cpu_num - hartid_base +
-> >> num_harts,
-> >>                                     qdev_get_gpio_in(DEVICE(cpu),
-> >> IRQ_M_EXT));
-> >>           }
-> >>           if (plic->addr_config[i].mode =3D=3D PLICMode_S) {
-> >> -            qdev_connect_gpio_out(dev, cpu_num,
-> >> +            qdev_connect_gpio_out(dev, cpu_num - hartid_base,hartid_b=
-ase
-> >>                                     qdev_get_gpio_in(DEVICE(cpu),
-> >> IRQ_S_EXT));
-> >>           }
-> >>       }
-> >> ---
-> >
-> >    IIUC hartid_base is used to set plic->hartid_base, so agreed, along
-> > with the
-> >    style unification.
-> >    I'll send a v2, then.
-> >    Since Alistair already queued the patch, how shall I proceed?
->
-> I didn't notice Alistair queued (he usually send a notification by
-> responding "queued" to the patches). If it is queued, then too late
-> (and not a big deal) -- you can still post the v2 and let him pick
-> it :)
+On 11/13/22 12:32, Weiwei Li wrote:
+> Separate c_fld/c_fsd from fld/fsd to add additional check for
+> c.fld{sp}/c.fsd{sp} which is useful for zcmp/zcmt to reuse
+> their encodings
+> 
+> Signed-off-by: Weiwei Li<liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang<wangjunqiang@iscas.ac.cn>
+> ---
+>   target/riscv/insn16.decode              |  8 ++++----
+>   target/riscv/insn_trans/trans_rvd.c.inc | 18 ++++++++++++++++++
+>   2 files changed, 22 insertions(+), 4 deletions(-)
 
-Yep! I'll drop it from my queue and take the v2
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Alistair
-
->
+r~
 
