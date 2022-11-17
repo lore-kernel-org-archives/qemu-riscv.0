@@ -1,47 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ovnnS-0001oo-CQ
-	for mharc-qemu-riscv@gnu.org; Thu, 17 Nov 2022 17:55:50 -0500
+	id 1ovnnW-0001qX-Qz
+	for mharc-qemu-riscv@gnu.org; Thu, 17 Nov 2022 17:55:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1ovnnR-0001no-E4; Thu, 17 Nov 2022 17:55:49 -0500
-Received: from ams.source.kernel.org ([145.40.68.75])
+ id 1ovnnR-0001oL-NN; Thu, 17 Nov 2022 17:55:49 -0500
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1ovnnP-0001FN-AK; Thu, 17 Nov 2022 17:55:49 -0500
+ id 1ovnnP-0001FV-Kc; Thu, 17 Nov 2022 17:55:49 -0500
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 4BEECB82210;
- Thu, 17 Nov 2022 22:55:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E61FC433D6;
- Thu, 17 Nov 2022 22:55:42 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 225F8621A3;
+ Thu, 17 Nov 2022 22:55:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66567C43141;
+ Thu, 17 Nov 2022 22:55:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1668725744;
- bh=zR0jCnbJnp3LkN8QZW4X2GqLM7t7O2qej/bQ26ETpVk=;
+ s=k20201202; t=1668725745;
+ bh=EszqmYpUjCR7b2utA3vNBGRBQrCxqby49ePn6jzbhGs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=hfvE4WOX6spx8Lfv+pWceJM/Sw0UNEAC6xfrBzzGGbsE/0kLIIxXtDkYERIP2pYV2
- mvvAcJ2LzJnR4EqecJ5zJBMRj83UBnICpDznR0zt/eeNNIK1d5Q0+cERjBTPtW+eND
- MFLpG70AxJaf6clTTK9dLUqwsrHcqGF/tD4tIdiVW6dWyK0CSsYnaEXxMjOEwEaNbX
- glDdk63awx+SJuZg85CjsuJLGoZ/h7JJhO9ZuYl6qHrA+w9AZjMzalt3dEWrkPUTqX
- blYH12RI4JsKeizYvgmy/N/kkgP+vajpFTBZqOVwzFzgYfRsbnMwbIpBTWEL5B2dXQ
- ZqiBI/gnN4luA==
+ b=dIHlGIeA5cVHK//cKuZ9UzBlx2QK+JYhgWoZ0qpUWv8TfKmTC1+KXuZwoENesK6Qo
+ Hd4etoOxp9ysU9kKMEMOND7Ev64WoxjaPmOWW5xgy4lo+pYGGIcvgKIBfgtA1b8V2w
+ BVBLpU39fnyjc9LGzIc/f2rRcIOe6Ir9yXlGi7zsBiLx7qbTulhEAovR+Dh5zkeA8+
+ R7YCbI9WefsaenrSdS2O952nTtKdIFY92S4ggI+dtTDe2BSBsrU2fJl9DUPanb3cV0
+ wY91hIINLfu96VeMDKEqUN3cS+GsniKvv2CDw1z01CTMNeZMv+7yox2lFH0xsWdVCv
+ yGkq5mgj0sTRg==
 From: Conor Dooley <conor@kernel.org>
 To: Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>
 Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Conor Dooley <conor.dooley@microchip.com>
-Subject: [PATCH v3 2/3] hw/riscv: pfsoc: add missing FICs as unimplemented
-Date: Thu, 17 Nov 2022 22:55:17 +0000
-Message-Id: <20221117225518.4102575-3-conor@kernel.org>
+Subject: [PATCH v3 3/3] hw/{misc,
+ riscv}: pfsoc: add system controller as unimplemented
+Date: Thu, 17 Nov 2022 22:55:18 +0000
+Message-Id: <20221117225518.4102575-4-conor@kernel.org>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20221117225518.4102575-1-conor@kernel.org>
 References: <20221117225518.4102575-1-conor@kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=145.40.68.75; envelope-from=conor@kernel.org;
- helo=ams.source.kernel.org
+Received-SPF: pass client-ip=139.178.84.217; envelope-from=conor@kernel.org;
+ helo=dfw.source.kernel.org
 X-Spam_score_int: -70
 X-Spam_score: -7.1
 X-Spam_bar: -------
@@ -61,174 +63,271 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2022 22:55:49 -0000
+X-List-Received-Date: Thu, 17 Nov 2022 22:55:50 -0000
 
 From: Conor Dooley <conor.dooley@microchip.com>
 
-The Fabric Interconnect Controllers provide interfaces between the FPGA
-fabric and the core complex. There are 5 FICs on PolarFire SoC, numbered
-0 through 4. FIC2 is an AXI4 slave interface from the FPGA fabric and
-does not show up on the MSS memory map. FIC4 is dedicated to the User
-Crypto Processor and does not show up on the MSS memory map either.
+The system controller on PolarFire SoC is access via a mailbox. The
+control registers for this mailbox lie in the "IOSCB" region & the
+interrupt is cleared via write to the "SYSREG" region. It also has a
+QSPI controller, usually connected to a flash chip, that is used for
+storing FPGA bitstreams and used for In-Application Programming (IAP).
 
-FIC 0, 1 & 3 do show up in the MSS memory map and neither FICs 0 or 1
-are represented in QEMU, leading to load access violations while booting
-Linux for Icicle if PCIe is enabled as the root port is connected via
-either FIC 0 or 1.
+Linux has an implementation of the system controller, through which the
+hwrng is accessed, leading to load/store access faults.
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Add the QSPI as unimplemented and a very basic (effectively
+unimplemented) version of the system controller's mailbox. Rather than
+purely marking the regions as unimplemented, service the mailbox
+requests by reporting failures and raising the interrupt so a guest can
+better handle the lack of support.
+
 Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
 ---
- hw/riscv/microchip_pfsoc.c         | 115 ++++++++++++++++-------------
- include/hw/riscv/microchip_pfsoc.h |   2 +
- 2 files changed, 65 insertions(+), 52 deletions(-)
+ hw/misc/mchp_pfsoc_ioscb.c          | 72 ++++++++++++++++++++++++++++-
+ hw/misc/mchp_pfsoc_sysreg.c         | 18 ++++++--
+ hw/riscv/microchip_pfsoc.c          |  6 +++
+ include/hw/misc/mchp_pfsoc_ioscb.h  |  3 ++
+ include/hw/misc/mchp_pfsoc_sysreg.h |  1 +
+ include/hw/riscv/microchip_pfsoc.h  |  1 +
+ 6 files changed, 95 insertions(+), 6 deletions(-)
 
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index a821263d4f..2a24e3437a 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -86,58 +86,61 @@
-  *     describes the complete IOSCB modules memory maps
-  */
- static const MemMapEntry microchip_pfsoc_memmap[] = {
--    [MICROCHIP_PFSOC_RSVD0] =           {        0x0,      0x100 },
--    [MICROCHIP_PFSOC_DEBUG] =           {      0x100,      0xf00 },
--    [MICROCHIP_PFSOC_E51_DTIM] =        {  0x1000000,     0x2000 },
--    [MICROCHIP_PFSOC_BUSERR_UNIT0] =    {  0x1700000,     0x1000 },
--    [MICROCHIP_PFSOC_BUSERR_UNIT1] =    {  0x1701000,     0x1000 },
--    [MICROCHIP_PFSOC_BUSERR_UNIT2] =    {  0x1702000,     0x1000 },
--    [MICROCHIP_PFSOC_BUSERR_UNIT3] =    {  0x1703000,     0x1000 },
--    [MICROCHIP_PFSOC_BUSERR_UNIT4] =    {  0x1704000,     0x1000 },
--    [MICROCHIP_PFSOC_CLINT] =           {  0x2000000,    0x10000 },
--    [MICROCHIP_PFSOC_L2CC] =            {  0x2010000,     0x1000 },
--    [MICROCHIP_PFSOC_DMA] =             {  0x3000000,   0x100000 },
--    [MICROCHIP_PFSOC_L2LIM] =           {  0x8000000,  0x2000000 },
--    [MICROCHIP_PFSOC_PLIC] =            {  0xc000000,  0x4000000 },
--    [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
--    [MICROCHIP_PFSOC_WDOG0] =           { 0x20001000,     0x1000 },
--    [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
--    [MICROCHIP_PFSOC_AXISW] =           { 0x20004000,     0x1000 },
--    [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
--    [MICROCHIP_PFSOC_FMETER] =          { 0x20006000,     0x1000 },
--    [MICROCHIP_PFSOC_DDR_SGMII_PHY] =   { 0x20007000,     0x1000 },
--    [MICROCHIP_PFSOC_EMMC_SD] =         { 0x20008000,     0x1000 },
--    [MICROCHIP_PFSOC_DDR_CFG] =         { 0x20080000,    0x40000 },
--    [MICROCHIP_PFSOC_MMUART1] =         { 0x20100000,     0x1000 },
--    [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
--    [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
--    [MICROCHIP_PFSOC_MMUART4] =         { 0x20106000,     0x1000 },
--    [MICROCHIP_PFSOC_WDOG1] =           { 0x20101000,     0x1000 },
--    [MICROCHIP_PFSOC_WDOG2] =           { 0x20103000,     0x1000 },
--    [MICROCHIP_PFSOC_WDOG3] =           { 0x20105000,     0x1000 },
--    [MICROCHIP_PFSOC_WDOG4] =           { 0x20106000,     0x1000 },
--    [MICROCHIP_PFSOC_SPI0] =            { 0x20108000,     0x1000 },
--    [MICROCHIP_PFSOC_SPI1] =            { 0x20109000,     0x1000 },
--    [MICROCHIP_PFSOC_I2C0] =            { 0x2010a000,     0x1000 },
--    [MICROCHIP_PFSOC_I2C1] =            { 0x2010b000,     0x1000 },
--    [MICROCHIP_PFSOC_CAN0] =            { 0x2010c000,     0x1000 },
--    [MICROCHIP_PFSOC_CAN1] =            { 0x2010d000,     0x1000 },
--    [MICROCHIP_PFSOC_GEM0] =            { 0x20110000,     0x2000 },
--    [MICROCHIP_PFSOC_GEM1] =            { 0x20112000,     0x2000 },
--    [MICROCHIP_PFSOC_GPIO0] =           { 0x20120000,     0x1000 },
--    [MICROCHIP_PFSOC_GPIO1] =           { 0x20121000,     0x1000 },
--    [MICROCHIP_PFSOC_GPIO2] =           { 0x20122000,     0x1000 },
--    [MICROCHIP_PFSOC_RTC] =             { 0x20124000,     0x1000 },
--    [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
--    [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
--    [MICROCHIP_PFSOC_USB] =             { 0x20201000,     0x1000 },
--    [MICROCHIP_PFSOC_QSPI_XIP] =        { 0x21000000,  0x1000000 },
--    [MICROCHIP_PFSOC_IOSCB] =           { 0x30000000, 0x10000000 },
--    [MICROCHIP_PFSOC_FABRIC_FIC3] =     { 0x40000000, 0x20000000 },
--    [MICROCHIP_PFSOC_DRAM_LO] =         { 0x80000000, 0x40000000 },
--    [MICROCHIP_PFSOC_DRAM_LO_ALIAS] =   { 0xc0000000, 0x40000000 },
--    [MICROCHIP_PFSOC_DRAM_HI] =       { 0x1000000000,        0x0 },
--    [MICROCHIP_PFSOC_DRAM_HI_ALIAS] = { 0x1400000000,        0x0 },
-+    [MICROCHIP_PFSOC_RSVD0] =           {        0x0,        0x100 },
-+    [MICROCHIP_PFSOC_DEBUG] =           {      0x100,        0xf00 },
-+    [MICROCHIP_PFSOC_E51_DTIM] =        {  0x1000000,       0x2000 },
-+    [MICROCHIP_PFSOC_BUSERR_UNIT0] =    {  0x1700000,       0x1000 },
-+    [MICROCHIP_PFSOC_BUSERR_UNIT1] =    {  0x1701000,       0x1000 },
-+    [MICROCHIP_PFSOC_BUSERR_UNIT2] =    {  0x1702000,       0x1000 },
-+    [MICROCHIP_PFSOC_BUSERR_UNIT3] =    {  0x1703000,       0x1000 },
-+    [MICROCHIP_PFSOC_BUSERR_UNIT4] =    {  0x1704000,       0x1000 },
-+    [MICROCHIP_PFSOC_CLINT] =           {  0x2000000,      0x10000 },
-+    [MICROCHIP_PFSOC_L2CC] =            {  0x2010000,       0x1000 },
-+    [MICROCHIP_PFSOC_DMA] =             {  0x3000000,     0x100000 },
-+    [MICROCHIP_PFSOC_L2LIM] =           {  0x8000000,    0x2000000 },
-+    [MICROCHIP_PFSOC_PLIC] =            {  0xc000000,    0x4000000 },
-+    [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,       0x1000 },
-+    [MICROCHIP_PFSOC_WDOG0] =           { 0x20001000,       0x1000 },
-+    [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,       0x2000 },
-+    [MICROCHIP_PFSOC_AXISW] =           { 0x20004000,       0x1000 },
-+    [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,       0x1000 },
-+    [MICROCHIP_PFSOC_FMETER] =          { 0x20006000,       0x1000 },
-+    [MICROCHIP_PFSOC_DDR_SGMII_PHY] =   { 0x20007000,       0x1000 },
-+    [MICROCHIP_PFSOC_EMMC_SD] =         { 0x20008000,       0x1000 },
-+    [MICROCHIP_PFSOC_DDR_CFG] =         { 0x20080000,      0x40000 },
-+    [MICROCHIP_PFSOC_MMUART1] =         { 0x20100000,       0x1000 },
-+    [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,       0x1000 },
-+    [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,       0x1000 },
-+    [MICROCHIP_PFSOC_MMUART4] =         { 0x20106000,       0x1000 },
-+    [MICROCHIP_PFSOC_WDOG1] =           { 0x20101000,       0x1000 },
-+    [MICROCHIP_PFSOC_WDOG2] =           { 0x20103000,       0x1000 },
-+    [MICROCHIP_PFSOC_WDOG3] =           { 0x20105000,       0x1000 },
-+    [MICROCHIP_PFSOC_WDOG4] =           { 0x20106000,       0x1000 },
-+    [MICROCHIP_PFSOC_SPI0] =            { 0x20108000,       0x1000 },
-+    [MICROCHIP_PFSOC_SPI1] =            { 0x20109000,       0x1000 },
-+    [MICROCHIP_PFSOC_I2C0] =            { 0x2010a000,       0x1000 },
-+    [MICROCHIP_PFSOC_I2C1] =            { 0x2010b000,       0x1000 },
-+    [MICROCHIP_PFSOC_CAN0] =            { 0x2010c000,       0x1000 },
-+    [MICROCHIP_PFSOC_CAN1] =            { 0x2010d000,       0x1000 },
-+    [MICROCHIP_PFSOC_GEM0] =            { 0x20110000,       0x2000 },
-+    [MICROCHIP_PFSOC_GEM1] =            { 0x20112000,       0x2000 },
-+    [MICROCHIP_PFSOC_GPIO0] =           { 0x20120000,       0x1000 },
-+    [MICROCHIP_PFSOC_GPIO1] =           { 0x20121000,       0x1000 },
-+    [MICROCHIP_PFSOC_GPIO2] =           { 0x20122000,       0x1000 },
-+    [MICROCHIP_PFSOC_RTC] =             { 0x20124000,       0x1000 },
-+    [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,       0x1000 },
-+    [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,      0x20000 },
-+    [MICROCHIP_PFSOC_USB] =             { 0x20201000,       0x1000 },
-+    [MICROCHIP_PFSOC_QSPI_XIP] =        { 0x21000000,    0x1000000 },
-+    [MICROCHIP_PFSOC_IOSCB] =           { 0x30000000,   0x10000000 },
-+    [MICROCHIP_PFSOC_FABRIC_FIC0] =   { 0x2000000000, 0x1000000000 },
-+    [MICROCHIP_PFSOC_FABRIC_FIC1] =   { 0x3000000000, 0x1000000000 },
-+    [MICROCHIP_PFSOC_FABRIC_FIC3] =     { 0x40000000,   0x20000000 },
-+    [MICROCHIP_PFSOC_DRAM_LO] =         { 0x80000000,   0x40000000 },
-+    [MICROCHIP_PFSOC_DRAM_LO_ALIAS] =   { 0xc0000000,   0x40000000 },
-+    [MICROCHIP_PFSOC_DRAM_HI] =       { 0x1000000000,          0x0 },
-+    [MICROCHIP_PFSOC_DRAM_HI_ALIAS] = { 0x1400000000,          0x0 },
+diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
+index f976e42f72..a71d134295 100644
+--- a/hw/misc/mchp_pfsoc_ioscb.c
++++ b/hw/misc/mchp_pfsoc_ioscb.c
+@@ -24,6 +24,7 @@
+ #include "qemu/bitops.h"
+ #include "qemu/log.h"
+ #include "qapi/error.h"
++#include "hw/irq.h"
+ #include "hw/sysbus.h"
+ #include "hw/misc/mchp_pfsoc_ioscb.h"
+ 
+@@ -34,6 +35,9 @@
+ #define IOSCB_WHOLE_REG_SIZE        0x10000000
+ #define IOSCB_SUBMOD_REG_SIZE       0x1000
+ #define IOSCB_CCC_REG_SIZE          0x2000000
++#define IOSCB_CTRL_REG_SIZE         0x800
++#define IOSCB_QSPIXIP_REG_SIZE      0x200
 +
+ 
+ /*
+  * There are many sub-modules in the IOSCB module.
+@@ -45,6 +49,8 @@
+ #define IOSCB_LANE01_BASE           0x06500000
+ #define IOSCB_LANE23_BASE           0x06510000
+ #define IOSCB_CTRL_BASE             0x07020000
++#define IOSCB_QSPIXIP_BASE          0x07020100
++#define IOSCB_MAILBOX_BASE          0x07020800
+ #define IOSCB_CFG_BASE              0x07080000
+ #define IOSCB_CCC_BASE              0x08000000
+ #define IOSCB_PLL_MSS_BASE          0x0E001000
+@@ -143,6 +149,58 @@ static const MemoryRegionOps mchp_pfsoc_io_calib_ddr_ops = {
+     .endianness = DEVICE_LITTLE_ENDIAN,
  };
  
- static void microchip_pfsoc_soc_instance_init(Object *obj)
-@@ -461,6 +464,14 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-     create_unimplemented_device("microchip.pfsoc.fabricfic3",
-         memmap[MICROCHIP_PFSOC_FABRIC_FIC3].base,
-         memmap[MICROCHIP_PFSOC_FABRIC_FIC3].size);
-+    /* FPGA Fabric */
-+    create_unimplemented_device("microchip.pfsoc.fabricfic0",
-+        memmap[MICROCHIP_PFSOC_FABRIC_FIC0].base,
-+        memmap[MICROCHIP_PFSOC_FABRIC_FIC0].size);
-+    /* FPGA Fabric */
-+    create_unimplemented_device("microchip.pfsoc.fabricfic1",
-+        memmap[MICROCHIP_PFSOC_FABRIC_FIC1].base,
-+        memmap[MICROCHIP_PFSOC_FABRIC_FIC1].size);
++#define SERVICES_CR             0x50
++#define SERVICES_SR             0x54
++#define SERVICES_STATUS_SHIFT   16
++
++static uint64_t mchp_pfsoc_ctrl_read(void *opaque, hwaddr offset,
++                                     unsigned size)
++{
++    uint32_t val = 0;
++
++    switch (offset) {
++    case SERVICES_SR:
++        /*
++         * Although some services have no error codes, most do. All services
++         * that do implement errors, begin their error codes at 1. Treat all
++         * service requests as failures & return 1.
++         * See the "PolarFire® FPGA and PolarFire SoC FPGA System Services"
++         * user guide for more information on service error codes.
++         */
++        val = 1u << SERVICES_STATUS_SHIFT;
++        break;
++    default:
++        qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
++                      "(size %d, offset 0x%" HWADDR_PRIx ")\n",
++                      __func__, size, offset);
++    }
++
++    return val;
++}
++
++static void mchp_pfsoc_ctrl_write(void *opaque, hwaddr offset,
++                                  uint64_t value, unsigned size)
++{
++    MchpPfSoCIoscbState *s = opaque;
++
++    switch (offset) {
++    case SERVICES_CR:
++        qemu_irq_raise(s->irq);
++        break;
++    default:
++        qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
++                      "(size %d, value 0x%" PRIx64
++                      ", offset 0x%" HWADDR_PRIx ")\n",
++                      __func__, size, value, offset);
++    }
++}
++
++static const MemoryRegionOps mchp_pfsoc_ctrl_ops = {
++    .read = mchp_pfsoc_ctrl_read,
++    .write = mchp_pfsoc_ctrl_write,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++};
++
+ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
+ {
+     MchpPfSoCIoscbState *s = MCHP_PFSOC_IOSCB(dev);
+@@ -162,10 +220,18 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
+                           "mchp.pfsoc.ioscb.lane23", IOSCB_SUBMOD_REG_SIZE);
+     memory_region_add_subregion(&s->container, IOSCB_LANE23_BASE, &s->lane23);
  
-     /* QSPI Flash */
-     memory_region_init_rom(qspi_xip_mem, OBJECT(dev),
+-    memory_region_init_io(&s->ctrl, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
+-                          "mchp.pfsoc.ioscb.ctrl", IOSCB_SUBMOD_REG_SIZE);
++    memory_region_init_io(&s->ctrl, OBJECT(s), &mchp_pfsoc_ctrl_ops, s,
++                          "mchp.pfsoc.ioscb.ctrl", IOSCB_CTRL_REG_SIZE);
+     memory_region_add_subregion(&s->container, IOSCB_CTRL_BASE, &s->ctrl);
+ 
++    memory_region_init_io(&s->qspixip, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
++                          "mchp.pfsoc.ioscb.qspixip", IOSCB_QSPIXIP_REG_SIZE);
++    memory_region_add_subregion(&s->container, IOSCB_QSPIXIP_BASE, &s->qspixip);
++
++    memory_region_init_io(&s->mailbox, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
++                          "mchp.pfsoc.ioscb.mailbox", IOSCB_SUBMOD_REG_SIZE);
++    memory_region_add_subregion(&s->container, IOSCB_MAILBOX_BASE, &s->mailbox);
++
+     memory_region_init_io(&s->cfg, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
+                           "mchp.pfsoc.ioscb.cfg", IOSCB_SUBMOD_REG_SIZE);
+     memory_region_add_subregion(&s->container, IOSCB_CFG_BASE, &s->cfg);
+@@ -222,6 +288,8 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
+                           IOSCB_SUBMOD_REG_SIZE);
+     memory_region_add_subregion(&s->container, IOSCB_IO_CALIB_SGMII_BASE,
+                                 &s->io_calib_sgmii);
++
++    sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq);
+ }
+ 
+ static void mchp_pfsoc_ioscb_class_init(ObjectClass *klass, void *data)
+diff --git a/hw/misc/mchp_pfsoc_sysreg.c b/hw/misc/mchp_pfsoc_sysreg.c
+index 89571eded5..7876fe0c5b 100644
+--- a/hw/misc/mchp_pfsoc_sysreg.c
++++ b/hw/misc/mchp_pfsoc_sysreg.c
+@@ -24,10 +24,12 @@
+ #include "qemu/bitops.h"
+ #include "qemu/log.h"
+ #include "qapi/error.h"
++#include "hw/irq.h"
+ #include "hw/sysbus.h"
+ #include "hw/misc/mchp_pfsoc_sysreg.h"
+ 
+ #define ENVM_CR         0xb8
++#define MESSAGE_INT     0x118c
+ 
+ static uint64_t mchp_pfsoc_sysreg_read(void *opaque, hwaddr offset,
+                                        unsigned size)
+@@ -52,10 +54,17 @@ static uint64_t mchp_pfsoc_sysreg_read(void *opaque, hwaddr offset,
+ static void mchp_pfsoc_sysreg_write(void *opaque, hwaddr offset,
+                                     uint64_t value, unsigned size)
+ {
+-    qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
+-                  "(size %d, value 0x%" PRIx64
+-                  ", offset 0x%" HWADDR_PRIx ")\n",
+-                  __func__, size, value, offset);
++    MchpPfSoCSysregState *s = opaque;
++    switch (offset) {
++    case MESSAGE_INT:
++        qemu_irq_lower(s->irq);
++        break;
++    default:
++        qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
++                      "(size %d, value 0x%" PRIx64
++                      ", offset 0x%" HWADDR_PRIx ")\n",
++                      __func__, size, value, offset);
++    }
+ }
+ 
+ static const MemoryRegionOps mchp_pfsoc_sysreg_ops = {
+@@ -73,6 +82,7 @@ static void mchp_pfsoc_sysreg_realize(DeviceState *dev, Error **errp)
+                           "mchp.pfsoc.sysreg",
+                           MCHP_PFSOC_SYSREG_REG_SIZE);
+     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->sysreg);
++    sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq);
+ }
+ 
+ static void mchp_pfsoc_sysreg_class_init(ObjectClass *klass, void *data)
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index 2a24e3437a..b10321b564 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -306,6 +306,9 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     sysbus_realize(SYS_BUS_DEVICE(&s->sysreg), errp);
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->sysreg), 0,
+                     memmap[MICROCHIP_PFSOC_SYSREG].base);
++    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sysreg), 0,
++                       qdev_get_gpio_in(DEVICE(s->plic),
++                       MICROCHIP_PFSOC_MAILBOX_IRQ));
+ 
+     /* AXISW */
+     create_unimplemented_device("microchip.pfsoc.axisw",
+@@ -459,6 +462,9 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     sysbus_realize(SYS_BUS_DEVICE(&s->ioscb), errp);
+     sysbus_mmio_map(SYS_BUS_DEVICE(&s->ioscb), 0,
+                     memmap[MICROCHIP_PFSOC_IOSCB].base);
++    sysbus_connect_irq(SYS_BUS_DEVICE(&s->ioscb), 0,
++                       qdev_get_gpio_in(DEVICE(s->plic),
++                       MICROCHIP_PFSOC_MAILBOX_IRQ));
+ 
+     /* FPGA Fabric */
+     create_unimplemented_device("microchip.pfsoc.fabricfic3",
+diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_pfsoc_ioscb.h
+index 687b213742..a1104862c8 100644
+--- a/include/hw/misc/mchp_pfsoc_ioscb.h
++++ b/include/hw/misc/mchp_pfsoc_ioscb.h
+@@ -29,6 +29,8 @@ typedef struct MchpPfSoCIoscbState {
+     MemoryRegion lane01;
+     MemoryRegion lane23;
+     MemoryRegion ctrl;
++    MemoryRegion qspixip;
++    MemoryRegion mailbox;
+     MemoryRegion cfg;
+     MemoryRegion ccc;
+     MemoryRegion pll_mss;
+@@ -41,6 +43,7 @@ typedef struct MchpPfSoCIoscbState {
+     MemoryRegion cfm_sgmii;
+     MemoryRegion bc_sgmii;
+     MemoryRegion io_calib_sgmii;
++    qemu_irq irq;
+ } MchpPfSoCIoscbState;
+ 
+ #define TYPE_MCHP_PFSOC_IOSCB "mchp.pfsoc.ioscb"
+diff --git a/include/hw/misc/mchp_pfsoc_sysreg.h b/include/hw/misc/mchp_pfsoc_sysreg.h
+index 546ba68f6a..3cebe40ea9 100644
+--- a/include/hw/misc/mchp_pfsoc_sysreg.h
++++ b/include/hw/misc/mchp_pfsoc_sysreg.h
+@@ -28,6 +28,7 @@
+ typedef struct MchpPfSoCSysregState {
+     SysBusDevice parent;
+     MemoryRegion sysreg;
++    qemu_irq irq;
+ } MchpPfSoCSysregState;
+ 
+ #define TYPE_MCHP_PFSOC_SYSREG "mchp.pfsoc.sysreg"
 diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-index a757b240e0..7e7950dd36 100644
+index 7e7950dd36..69a686b54a 100644
 --- a/include/hw/riscv/microchip_pfsoc.h
 +++ b/include/hw/riscv/microchip_pfsoc.h
-@@ -121,6 +121,8 @@ enum {
-     MICROCHIP_PFSOC_USB,
-     MICROCHIP_PFSOC_QSPI_XIP,
-     MICROCHIP_PFSOC_IOSCB,
-+    MICROCHIP_PFSOC_FABRIC_FIC0,
-+    MICROCHIP_PFSOC_FABRIC_FIC1,
-     MICROCHIP_PFSOC_FABRIC_FIC3,
-     MICROCHIP_PFSOC_DRAM_LO,
-     MICROCHIP_PFSOC_DRAM_LO_ALIAS,
+@@ -147,6 +147,7 @@ enum {
+     MICROCHIP_PFSOC_MMUART2_IRQ = 92,
+     MICROCHIP_PFSOC_MMUART3_IRQ = 93,
+     MICROCHIP_PFSOC_MMUART4_IRQ = 94,
++    MICROCHIP_PFSOC_MAILBOX_IRQ = 96,
+ };
+ 
+ #define MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT    1
 -- 
 2.37.2
 
