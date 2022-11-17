@@ -1,70 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ov8Xw-00022r-Qp
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Nov 2022 21:53:04 -0500
+	id 1ovYxh-0005Hz-KJ
+	for mharc-qemu-riscv@gnu.org; Thu, 17 Nov 2022 02:05:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ov8Xv-00022M-E6; Tue, 15 Nov 2022 21:53:03 -0500
-Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ov8Xs-0000HK-VT; Tue, 15 Nov 2022 21:53:02 -0500
-Received: by mail-vs1-xe29.google.com with SMTP id n68so16684420vsc.3;
- Tue, 15 Nov 2022 18:53:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Id8SW6ayY9IIaWZn87VC9lEfr7681YG6OGi7GUdNPL0=;
- b=DAgTQ3fwID3DddIeIr4wdCKQ+JFejIAr9m7WpyRv+mUuhW4MZO3YT3YFy/kOL+minS
- 85w+gu6kh1loisTbhf/8XQR2BCJr6lT8gKVqHvBGZY3pYn7yVleTYADtOZTukFRoL8U8
- AC85QrssD7A5qpseTGVkDHUi2vKXm87ZkucwwOOf94ijoAEA3Q5Ug7VaRv+ZQOcPqH/w
- e+0r505X38jA3DgsWiqb/qW2SOZCxZRZpLKL9AVhZTnQTDeHoTOgBuvWlMU67YGIGw5C
- 1e2PkdlgjaOhXfszNtPnpGu4hGNsjmTkAjL9uLUm27SZ/R/O82eKxHhW6Kf5NfdhSAiL
- GUww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Id8SW6ayY9IIaWZn87VC9lEfr7681YG6OGi7GUdNPL0=;
- b=Sqdc0uJ2C/93uRpJhsq7p6y5dxzrov53em+2FLK4jg+E31HYmsQMDvja6/CokpPxKN
- MhzeqrMomHD8/58S0fogCbjK7dI31prKeTjiqnztabcAGoDyPxIu35hJojfc+b//ofgK
- Egt5gbdbPx3rrTeTp97klhJUKGq/Wm5Y7N4bJkTWxfKiH/SZ8UifSvgYRp0lnX3asrzN
- +YTgWvG6gg6uIWR3hz6KaoxyPn7y2Mknk0dyH9rKWjP0m4gzOVAymz/2ojhgP4RO5xVb
- GSGUGn+AmG1kZivXY+sSbbOoCYeiXj2O33xvdHEL5aRdjRG6f4ua/kMYbVvOjqsaj62l
- kHxg==
-X-Gm-Message-State: ANoB5pnqvdJJUV0fPxSCnNEP2OfmxvPkyHTSrZMjRrR5sVhFhWRI4WaI
- TXQshkz6Z2d7qQrpweZcL9ci/yvER0yda4RTJvs=
-X-Google-Smtp-Source: AA0mqf5LViJtnPz4GrQsxOxeCYSi26gbbd3/rK8xvXwjrDiEkMjZ7OVb7mIZW28BqSyy83Xc7nmPC11ZyqKbc6CJ/zE=
-X-Received: by 2002:a67:d60d:0:b0:3a6:eec3:b246 with SMTP id
- n13-20020a67d60d000000b003a6eec3b246mr9729384vsj.64.1668567179326; Tue, 15
- Nov 2022 18:52:59 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1ovYxg-0005HN-Fq; Thu, 17 Nov 2022 02:05:24 -0500
+Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1ovYxc-00011s-Lh; Thu, 17 Nov 2022 02:05:23 -0500
+Received: from localhost.localdomain (unknown [180.165.240.202])
+ by APP-01 (Coremail) with SMTP id qwCowABnbvIh3XVjJEYjCg--.9312S7;
+ Thu, 17 Nov 2022 15:05:15 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v3 5/9] target/riscv: add support for Zcb extension
+Date: Thu, 17 Nov 2022 15:03:12 +0800
+Message-Id: <20221117070316.58447-6-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20221117070316.58447-1-liweiwei@iscas.ac.cn>
+References: <20221117070316.58447-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-References: <20221114135122.1668703-1-frederic.petrot@univ-grenoble-alpes.fr>
-In-Reply-To: <20221114135122.1668703-1-frederic.petrot@univ-grenoble-alpes.fr>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 16 Nov 2022 12:52:33 +1000
-Message-ID: <CAKmqyKM1a5f5nwyMH9ga0SeskbZ46i5VNEEq5920sQK6Zx5syA@mail.gmail.com>
-Subject: Re: [PATCH v2] hw/intc: sifive_plic: Renumber the S irqs for numa
- support
-To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Cc: Alistair.Francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e29;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe29.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: qwCowABnbvIh3XVjJEYjCg--.9312S7
+X-Coremail-Antispam: 1UD129KBjvJXoW3Jw1Dtw13Cr18try7tF15XFb_yoW7ury5pF
+ 1xCry7GFyqgFWIyayfKF13XF17Wr4fWrWUK39xAw1kGayYgFWDJr1DK3y3Ka1DXr4DWr4j
+ 93WDAayUJ3y0qa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl
+ 6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x
+ IIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_
+ Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxAIw28IcxkI7VAKI4
+ 8JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xv
+ wVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjx
+ v20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k2
+ 6cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxV
+ AFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQSdkUUUUU=
+X-Originating-IP: [180.165.240.202]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,72 +63,192 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Nov 2022 02:53:03 -0000
+X-List-Received-Date: Thu, 17 Nov 2022 07:05:24 -0000
 
-On Tue, Nov 15, 2022 at 10:12 AM Fr=C3=A9d=C3=A9ric P=C3=A9trot
-<frederic.petrot@univ-grenoble-alpes.fr> wrote:
->
-> Commit 40244040a7a changed the way the S irqs are numbered. This breaks w=
-hen
-> using numa configuration, e.g.:
-> ./qemu-system-riscv64 -nographic -machine virt,dumpdtb=3Dnuma-tree.dtb \
->                       -m 2G -smp cpus=3D16 \
->                       -object memory-backend-ram,id=3Dmem0,size=3D512M \
->                       -object memory-backend-ram,id=3Dmem1,size=3D512M \
->                       -object memory-backend-ram,id=3Dmem2,size=3D512M \
->                       -object memory-backend-ram,id=3Dmem3,size=3D512M \
->                       -numa node,cpus=3D0-3,memdev=3Dmem0,nodeid=3D0 \
->                       -numa node,cpus=3D4-7,memdev=3Dmem1,nodeid=3D1 \
->                       -numa node,cpus=3D8-11,memdev=3Dmem2,nodeid=3D2 \
->                       -numa node,cpus=3D12-15,memdev=3Dmem3,nodeid=3D3
-> leads to:
-> Unexpected error in object_property_find_err() at ../qom/object.c:1304:
-> qemu-system-riscv64: Property 'riscv.sifive.plic.unnamed-gpio-out[8]' not
-> found
->
-> This patch makes the nubering of the S irqs identical to what it was befo=
-re.
->
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> Signed-off-by: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-greno=
-ble-alpes.fr>
+Add encode and trans* functions support for Zcb instructions
 
-Thanks!
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+---
+ target/riscv/insn16.decode                |  24 ++++++
+ target/riscv/insn_trans/trans_rvzce.c.inc | 100 ++++++++++++++++++++++
+ target/riscv/translate.c                  |   2 +
+ 3 files changed, 126 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzce.c.inc
 
-Applied to riscv-to-apply.next
+diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
+index b62664b6af..47603ec1e0 100644
+--- a/target/riscv/insn16.decode
++++ b/target/riscv/insn16.decode
+@@ -43,6 +43,8 @@
+ %imm_addi16sp  12:s1 3:2 5:1 2:1 6:1 !function=ex_shift_4
+ %imm_lui       12:s1 2:5             !function=ex_shift_12
+ 
++%zcb_b_uimm  5:1 6:1
++%zcb_h_uimm  5:1                     !function=ex_shift_1
+ 
+ # Argument sets imported from insn32.decode:
+ &empty                  !extern
+@@ -53,6 +55,7 @@
+ &b         imm rs2 rs1  !extern
+ &u         imm rd       !extern
+ &shift     shamt rs1 rd !extern
++&r2        rd rs1       !extern
+ 
+ 
+ # Formats 16:
+@@ -89,6 +92,13 @@
+ 
+ @c_andi         ... . .. ... ..... .. &i imm=%imm_ci rs1=%rs1_3 rd=%rs1_3
+ 
++@zcb_unary    ... ...  ... .. ... ..  &r2                  rs1=%rs1_3 rd=%rs1_3
++@zcb_binary   ... ...  ... .. ... ..  &r  rs2=%rs2_3       rs1=%rs1_3 rd=%rs1_3
++@zcb_lb       ... . .. ... .. ... ..  &i  imm=%zcb_b_uimm  rs1=%rs1_3 rd=%rs2_3
++@zcb_lh       ... . .. ... .. ... ..  &i  imm=%zcb_h_uimm  rs1=%rs1_3 rd=%rs2_3
++@zcb_sb       ... . .. ... .. ... ..  &s  imm=%zcb_b_uimm  rs1=%rs1_3 rs2=%rs2_3
++@zcb_sh       ... . .. ... .. ... ..  &s  imm=%zcb_h_uimm  rs1=%rs1_3 rs2=%rs2_3
++
+ # *** RV32/64C Standard Extension (Quadrant 0) ***
+ {
+   # Opcode of all zeros is illegal; rd != 0, nzuimm == 0 is reserved.
+@@ -180,3 +190,17 @@ sw                110 .  .....  ..... 10 @c_swsp
+   sd              111 .  .....  ..... 10 @c_sdsp
+   c_fsw           111 .  .....  ..... 10 @c_swsp
+ }
++
++# *** RV64 and RV32 Zcb Extension ***
++c_zext_b          100 111  ... 11 000 01 @zcb_unary
++c_sext_b          100 111  ... 11 001 01 @zcb_unary
++c_zext_h          100 111  ... 11 010 01 @zcb_unary
++c_sext_h          100 111  ... 11 011 01 @zcb_unary
++c_zext_w          100 111  ... 11 100 01 @zcb_unary
++c_not             100 111  ... 11 101 01 @zcb_unary
++c_mul             100 111  ... 10 ... 01 @zcb_binary
++c_lbu             100 000  ... .. ... 00 @zcb_lb
++c_lhu             100 001  ... 0. ... 00 @zcb_lh
++c_lh              100 001  ... 1. ... 00 @zcb_lh
++c_sb              100 010  ... .. ... 00 @zcb_sb
++c_sh              100 011  ... 0. ... 00 @zcb_sh
+diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
+new file mode 100644
+index 0000000000..de96c4afaf
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzce.c.inc
+@@ -0,0 +1,100 @@
++/*
++ * RISC-V translation routines for the Zcb Standard Extension.
++ *
++ * Copyright (c) 2021-2022 PLCT Lab
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#define REQUIRE_ZCB(ctx) do {   \
++    if (!ctx->cfg_ptr->ext_zcb) \
++        return false;           \
++} while (0)
++
++static bool trans_c_zext_b(DisasContext *ctx, arg_c_zext_b *a)
++{
++    REQUIRE_ZCB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext8u_tl);
++}
++
++static bool trans_c_zext_h(DisasContext *ctx, arg_c_zext_h *a)
++{
++    REQUIRE_ZCB(ctx);
++    REQUIRE_ZBB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext16u_tl);
++}
++
++static bool trans_c_sext_b(DisasContext *ctx, arg_c_sext_b *a)
++{
++    REQUIRE_ZCB(ctx);
++    REQUIRE_ZBB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext8s_tl);
++}
++
++static bool trans_c_sext_h(DisasContext *ctx, arg_c_sext_h *a)
++{
++    REQUIRE_ZCB(ctx);
++    REQUIRE_ZBB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext16s_tl);
++}
++
++static bool trans_c_zext_w(DisasContext *ctx, arg_c_zext_w *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_ZCB(ctx);
++    REQUIRE_ZBA(ctx);
++    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext32u_tl);
++}
++
++static bool trans_c_not(DisasContext *ctx, arg_c_not *a)
++{
++    REQUIRE_ZCB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, tcg_gen_not_tl);
++}
++
++static bool trans_c_mul(DisasContext *ctx, arg_c_mul *a)
++{
++    REQUIRE_ZCB(ctx);
++    REQUIRE_M_OR_ZMMUL(ctx);
++    return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, NULL);
++}
++
++static bool trans_c_lbu(DisasContext *ctx, arg_c_lbu *a)
++{
++    REQUIRE_ZCB(ctx);
++    return gen_load(ctx, a, MO_UB);
++}
++
++static bool trans_c_lhu(DisasContext *ctx, arg_c_lhu *a)
++{
++    REQUIRE_ZCB(ctx);
++    return gen_load(ctx, a, MO_UW);
++}
++
++static bool trans_c_lh(DisasContext *ctx, arg_c_lh *a)
++{
++    REQUIRE_ZCB(ctx);
++    return gen_load(ctx, a, MO_SW);
++}
++
++static bool trans_c_sb(DisasContext *ctx, arg_c_sb *a)
++{
++    REQUIRE_ZCB(ctx);
++    return gen_store(ctx, a, MO_UB);
++}
++
++static bool trans_c_sh(DisasContext *ctx, arg_c_sh *a)
++{
++    REQUIRE_ZCB(ctx);
++    return gen_store(ctx, a, MO_UW);
++}
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index ee24b451e3..ca01da3309 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1069,6 +1069,8 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ 
+ /* Include the auto-generated decoder for 16 bit insn */
+ #include "decode-insn16.c.inc"
++#include "insn_trans/trans_rvzce.c.inc"
++
+ /* Include decoders for factored-out extensions */
+ #include "decode-XVentanaCondOps.c.inc"
+ 
+-- 
+2.25.1
 
-Alistair
-
-> ---
->  hw/intc/sifive_plic.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-> index c2dfacf028..b4949bef97 100644
-> --- a/hw/intc/sifive_plic.c
-> +++ b/hw/intc/sifive_plic.c
-> @@ -476,11 +476,11 @@ DeviceState *sifive_plic_create(hwaddr addr, char *=
-hart_config,
->          CPUState *cpu =3D qemu_get_cpu(cpu_num);
->
->          if (plic->addr_config[i].mode =3D=3D PLICMode_M) {
-> -            qdev_connect_gpio_out(dev, num_harts - plic->hartid_base + c=
-pu_num,
-> +            qdev_connect_gpio_out(dev, cpu_num - hartid_base + num_harts=
-,
->                                    qdev_get_gpio_in(DEVICE(cpu), IRQ_M_EX=
-T));
->          }
->          if (plic->addr_config[i].mode =3D=3D PLICMode_S) {
-> -            qdev_connect_gpio_out(dev, cpu_num,
-> +            qdev_connect_gpio_out(dev, cpu_num - hartid_base,
->                                    qdev_get_gpio_in(DEVICE(cpu), IRQ_S_EX=
-T));
->          }
->      }
-> --
-> 2.37.2
->
->
 
