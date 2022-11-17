@@ -1,56 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ovYy7-0005Te-O1
-	for mharc-qemu-riscv@gnu.org; Thu, 17 Nov 2022 02:05:51 -0500
+	id 1ovZKw-00055k-N6
+	for mharc-qemu-riscv@gnu.org; Thu, 17 Nov 2022 02:29:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ovYxn-0005LN-7L; Thu, 17 Nov 2022 02:05:31 -0500
-Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ovYxk-000179-7f; Thu, 17 Nov 2022 02:05:30 -0500
-Received: from localhost.localdomain (unknown [180.165.240.202])
- by APP-01 (Coremail) with SMTP id qwCowABnbvIh3XVjJEYjCg--.9312S8;
- Thu, 17 Nov 2022 15:05:17 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v3 6/9] target/riscv: add support for Zcmp extension
-Date: Thu, 17 Nov 2022 15:03:13 +0800
-Message-Id: <20221117070316.58447-7-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221117070316.58447-1-liweiwei@iscas.ac.cn>
-References: <20221117070316.58447-1-liweiwei@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1ovZKm-000531-Ek
+ for qemu-riscv@nongnu.org; Thu, 17 Nov 2022 02:29:17 -0500
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1ovZKf-00063K-Vg
+ for qemu-riscv@nongnu.org; Thu, 17 Nov 2022 02:29:14 -0500
+Received: by mail-wr1-x42d.google.com with SMTP id g12so2162178wrs.10
+ for <qemu-riscv@nongnu.org>; Wed, 16 Nov 2022 23:28:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=tUo/HWJ9DTBOSNb6YtT6Nn4j7jMqb3um6nY4jQGK85k=;
+ b=SWhaER9lC1qGfL3nViTlHYje7/39CwbSg98IDqKUR9DOPt4xS7IR0IdhefBOfby/BY
+ ON30eABjOgcAEnwr/bIP3OfBTq9sx6Ks9q/luOH0OX66Es4sIvPOf//jANYdFcS/+8Mx
+ GyR15Y8qYJ0Iem7SgWAtQPUMUYJplfbJa+7Gqlqrg+BTquUjMKBF/vOp8uNMa0/+KudZ
+ QcsZUHeS5ioCOWyCzDlyYDKIyYM3vd8jl2gVVHghX6zgsFLUdmqDmPl1kJhvbs81XL5P
+ Z88+qNZaFg74z96xByKFIJJNo0SOIHT8qUCvwsV91WeFucBUTgu44TEdZP1VPSDsqLja
+ xMtQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tUo/HWJ9DTBOSNb6YtT6Nn4j7jMqb3um6nY4jQGK85k=;
+ b=C5e0uN4/KTtL84bTm0B82k3IvIq1vDYwa5IDO6zUIMxU7YhqVWgnaEfvdJAOzCuCMl
+ MjTtGdSc/Hk+2UIerhZR4hBj8gL86IQr5ucZS6SL9WyDvkWYS/ir6YL+mTZHa3/qhEBv
+ HlRMwBQiJKxJvTSW+C4ncbVACvYCFwftnRlutDByfXnTVgbEDAHBd9nX3QYCJMRtKwAp
+ qGYKhODx0cC/uF1FolUquWka4jq74Czp9s0gk3XKm+PEel9S+K7j6HIpt4WRXShKK7H9
+ lc/PHQxMyawU1zUG3CU/JcncPocBNYQSNFBp0UNzIehXk9fwQ39WB/IyNHzQA1VUqMJI
+ gMtQ==
+X-Gm-Message-State: ANoB5pm6ucFZPC22uu2Edg7ka2zf7ADdiBpkNxadM87at/9hdWIQs4ZT
+ WzGnhOdQQKHchgS7EGfgkpqvPA==
+X-Google-Smtp-Source: AA0mqf6U2NvdyYCS3S4/TVkL77Hr1kFBjkTzcYicRp84NALtAXIYewlNs5KFCOnndgKvsqnOb07F5Q==
+X-Received: by 2002:a5d:6642:0:b0:236:6a28:eeda with SMTP id
+ f2-20020a5d6642000000b002366a28eedamr604611wrw.315.1668670128667; 
+ Wed, 16 Nov 2022 23:28:48 -0800 (PST)
+Received: from alex-rivos.ba.rivosinc.com
+ (lfbn-gre-1-201-46.w90-112.abo.wanadoo.fr. [90.112.163.46])
+ by smtp.gmail.com with ESMTPSA id
+ r4-20020adfce84000000b0023691d62cffsm134085wrn.70.2022.11.16.23.28.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Nov 2022 23:28:48 -0800 (PST)
+From: Alexandre Ghiti <alexghiti@rivosinc.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: Alexandre Ghiti <alexghiti@rivosinc.com>, Ludovic Henry <git@ludovic.dev>
+Subject: [PATCH] riscv: Add RISCVCPUConfig.satp_mode to set sv48, sv57, etc.
+Date: Thu, 17 Nov 2022 08:28:41 +0100
+Message-Id: <20221117072841.240839-1-alexghiti@rivosinc.com>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowABnbvIh3XVjJEYjCg--.9312S8
-X-Coremail-Antispam: 1UD129KBjvJXoWxuw4DWw1xtw1kAw1UuFWUCFg_yoW3urykpF
- 4rC3y7WrWUZFWIyayxKFs5CrnIqr4fWrW0k3sxKw1kC3yagFWxJFn8t34avF4UGFWkZrWU
- Ca98AFWqk3y5XwUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl
- 6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x
- IIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_
- Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxAIw28IcxkI7VAKI4
- 8JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xv
- wVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjx
- v20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k2
- 6cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxV
- AFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQSdkUUUUU=
-X-Originating-IP: [180.165.240.202]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=alexghiti@rivosinc.com; helo=mail-wr1-x42d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -63,355 +80,164 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2022 07:05:32 -0000
+X-List-Received-Date: Thu, 17 Nov 2022 07:29:23 -0000
 
-Add encode, trans* functions for Zcmp instructions
+RISC-V specifies multiple sizes for addressable memory and Linux probes for
+the machine's support at startup via the satp CSR register (done in
+csr.c:validate_vm).
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+As per the specification, sv64 must support sv57, which in turn must
+support sv48...etc. So we can restrict machine support by simply setting the
+"highest" supported mode in the satp_mode property. And the bare mode is
+always supported.
+
+You can set this new property as follows:
+-cpu rv64,satp-mode=sv48 # Linux will boot using sv48 scheme
+-cpu rv64,satp-mode=sv39 # Linux will boot using sv39 scheme
+
+In addition, we now correctly set the device-tree entry 'mmu-type' using
+this new satp_mode property.
+
+Co-Developed-by: Ludovic Henry <git@ludovic.dev>
+Signed-off-by: Ludovic Henry <git@ludovic.dev>
+Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
 ---
- target/riscv/insn16.decode                |  18 ++
- target/riscv/insn_trans/trans_rvzce.c.inc | 242 +++++++++++++++++++++-
- target/riscv/translate.c                  |   5 +
- 3 files changed, 264 insertions(+), 1 deletion(-)
+ hw/riscv/virt.c    | 15 ++++++---------
+ target/riscv/cpu.c | 45 +++++++++++++++++++++++++++++++++++++++++++++
+ target/riscv/cpu.h |  3 +++
+ target/riscv/csr.c |  6 ++++--
+ 4 files changed, 58 insertions(+), 11 deletions(-)
 
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 47603ec1e0..4654c23052 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -21,6 +21,8 @@
- %rs1_3     7:3                !function=ex_rvc_register
- %rs2_3     2:3                !function=ex_rvc_register
- %rs2_5     2:5
-+%sreg1     7:3                !function=ex_sreg_register
-+%sreg2     2:3                !function=ex_sreg_register
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index a5bc7353b4..77484b5cae 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -228,7 +228,7 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+     int cpu;
+     uint32_t cpu_phandle;
+     MachineState *mc = MACHINE(s);
+-    char *name, *cpu_name, *core_name, *intc_name;
++    char *name, *cpu_name, *core_name, *intc_name, *sv_name;
  
- # Immediates:
- %imm_ci        12:s1 2:5
-@@ -45,6 +47,8 @@
+     for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
+         cpu_phandle = (*phandle)++;
+@@ -236,14 +236,11 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+         cpu_name = g_strdup_printf("/cpus/cpu@%d",
+             s->soc[socket].hartid_base + cpu);
+         qemu_fdt_add_subnode(mc->fdt, cpu_name);
+-        if (riscv_feature(&s->soc[socket].harts[cpu].env,
+-                          RISCV_FEATURE_MMU)) {
+-            qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type",
+-                                    (is_32_bit) ? "riscv,sv32" : "riscv,sv48");
+-        } else {
+-            qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type",
+-                                    "riscv,none");
+-        }
++
++        sv_name = g_strdup_printf("riscv,%s",
++                                  s->soc[socket].harts[cpu].cfg.satp_mode_str);
++        qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type", sv_name);
++
+         name = riscv_isa_string(&s->soc[socket].harts[cpu]);
+         qemu_fdt_setprop_string(mc->fdt, cpu_name, "riscv,isa", name);
+         g_free(name);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index d14e95c9dc..efdb530ad9 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -907,6 +907,48 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+      }
+ #endif
  
- %zcb_b_uimm  5:1 6:1
- %zcb_h_uimm  5:1                     !function=ex_shift_1
-+%zcmp_spimm  2:2                     !function=ex_shift_4
-+%zcmp_rlist  4:4
- 
- # Argument sets imported from insn32.decode:
- &empty                  !extern
-@@ -56,7 +60,9 @@
- &u         imm rd       !extern
- &shift     shamt rs1 rd !extern
- &r2        rd rs1       !extern
-+&r2_s      rs1 rs2      !extern
- 
-+&zcmp      zcmp_rlist zcmp_spimm
- 
- # Formats 16:
- @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
-@@ -98,6 +104,8 @@
- @zcb_lh       ... . .. ... .. ... ..  &i  imm=%zcb_h_uimm  rs1=%rs1_3 rd=%rs2_3
- @zcb_sb       ... . .. ... .. ... ..  &s  imm=%zcb_b_uimm  rs1=%rs1_3 rs2=%rs2_3
- @zcb_sh       ... . .. ... .. ... ..  &s  imm=%zcb_h_uimm  rs1=%rs1_3 rs2=%rs2_3
-+@zcmp         ... ...  ........   ..  &zcmp  %zcmp_rlist   %zcmp_spimm
-+@cm_mv        ... ...  ... .. ... ..  &r2_s  rs2=%sreg2    rs1=%sreg1
- 
- # *** RV32/64C Standard Extension (Quadrant 0) ***
- {
-@@ -177,6 +185,16 @@ slli              000 .  .....  ..... 10 @c_shift2
- {
-   sq              101  ... ... .. ... 10 @c_sqsp
-   c_fsd           101   ......  ..... 10 @c_sdsp
-+
-+  # *** RV64 and RV32 Zcmp Extension ***
-+  [
-+    cm_push         101  11000  .... .. 10 @zcmp
-+    cm_pop          101  11010  .... .. 10 @zcmp
-+    cm_popret       101  11110  .... .. 10 @zcmp
-+    cm_popretz      101  11100  .... .. 10 @zcmp
-+    cm_mva01s       101  011 ... 11 ... 10 @cm_mv
-+    cm_mvsa01       101  011 ... 01 ... 10 @cm_mv
-+  ]
- }
- sw                110 .  .....  ..... 10 @c_swsp
- 
-diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
-index de96c4afaf..f45224e388 100644
---- a/target/riscv/insn_trans/trans_rvzce.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzce.c.inc
-@@ -1,5 +1,5 @@
- /*
-- * RISC-V translation routines for the Zcb Standard Extension.
-+ * RISC-V translation routines for the Zc[b,mp] Standard Extension.
-  *
-  * Copyright (c) 2021-2022 PLCT Lab
-  *
-@@ -21,6 +21,11 @@
-         return false;           \
- } while (0)
- 
-+#define REQUIRE_ZCMP(ctx) do {   \
-+    if (!ctx->cfg_ptr->ext_zcmp) \
-+        return false;            \
-+} while (0)
-+
- static bool trans_c_zext_b(DisasContext *ctx, arg_c_zext_b *a)
- {
-     REQUIRE_ZCB(ctx);
-@@ -98,3 +103,238 @@ static bool trans_c_sh(DisasContext *ctx, arg_c_sh *a)
-     REQUIRE_ZCB(ctx);
-     return gen_store(ctx, a, MO_UW);
- }
-+
-+static bool gen_zcmp_check(DisasContext *ctx, arg_zcmp *a)
-+{
-+    /* rlist 0 to 3 are reserved for future EABI variant */
-+    if (a->zcmp_rlist < 4) {
-+        return false;
-+    }
-+
-+    /* rlist <= 6 when RV32E/RV64E */
-+    if (ctx->cfg_ptr->ext_e && a->zcmp_rlist > 6) {
-+        return false;
-+    }
-+
-+    return true;
-+}
-+
-+#define X_S0    8
-+#define X_S1    9
-+#define X_Sn    16
-+
-+static inline void update_push_pop_list(target_ulong rlist, bool *xreg_list)
-+{
-+    switch (rlist) {
-+    case 15:
-+        xreg_list[X_Sn + 11] = true;
-+        xreg_list[X_Sn + 10] = true;
-+        /* FALL THROUGH */
-+    case 14:
-+        xreg_list[X_Sn + 9] = true;
-+        /* FALL THROUGH */
-+    case 13:
-+        xreg_list[X_Sn + 8] = true;
-+        /* FALL THROUGH */
-+    case 12:
-+        xreg_list[X_Sn + 7] = true;
-+        /* FALL THROUGH */
-+    case 11:
-+        xreg_list[X_Sn + 6] = true;
-+        /* FALL THROUGH */
-+    case 10:
-+        xreg_list[X_Sn + 5] = true;
-+        /* FALL THROUGH */
-+    case 9:
-+        xreg_list[X_Sn + 4] = true;
-+        /* FALL THROUGH */
-+    case 8:
-+        xreg_list[X_Sn + 3] = true;
-+        /* FALL THROUGH */
-+    case 7:
-+        xreg_list[X_Sn + 2] = true;
-+        /* FALL THROUGH */
-+    case 6:
-+        xreg_list[X_S1] = true;
-+        /* FALL THROUGH */
-+    case 5:
-+        xreg_list[X_S0] = true;
-+        /* FALL THROUGH */
-+    case 4:
-+        xreg_list[xRA] = true;
-+        break;
-+    }
-+}
-+
-+static inline target_ulong caculate_stack_adj(int bytes, target_ulong rlist,
-+                                              target_ulong spimm)
-+{
-+    target_ulong stack_adj_base = 0;
-+    switch (rlist) {
-+    case 15:
-+        stack_adj_base = bytes == 4 ? 64 : 112;
-+        break;
-+    case 14:
-+        stack_adj_base = bytes == 4 ? 48 : 96;
-+        break;
-+    case 13:
-+    case 12:
-+        stack_adj_base = bytes == 4 ? 48 : 80;
-+        break;
-+    case 11:
-+    case 10:
-+        stack_adj_base = bytes == 4 ? 32 : 64;
-+        break;
-+    case 9:
-+    case 8:
-+        stack_adj_base = bytes == 4 ? 32 : 48;
-+        break;
-+    case 7:
-+    case 6:
-+        stack_adj_base = bytes == 4 ? 16 : 32;
-+        break;
-+    case 5:
-+    case 4:
-+        stack_adj_base = 16;
-+        break;
-+    }
-+
-+    return stack_adj_base + spimm;
-+}
-+
-+static bool gen_pop(DisasContext *ctx, arg_zcmp *a, bool ret, bool ret_val)
-+{
-+    REQUIRE_ZCMP(ctx);
-+
-+    if (!gen_zcmp_check(ctx, a)) {
-+        return false;
-+    }
-+
-+    bool xreg_list[32] = {false};
-+    int bytes = get_ol(ctx) == MXL_RV32 ? 4 : 8;
-+    target_ulong stack_adj = caculate_stack_adj(bytes, a->zcmp_rlist,
-+                                                a->zcmp_spimm);
-+    TCGv sp = dest_gpr(ctx, xSP);
-+    TCGv addr = tcg_temp_new();
-+    int i;
-+
-+    update_push_pop_list(a->zcmp_rlist, xreg_list);
-+    tcg_gen_addi_tl(addr, sp, stack_adj - bytes);
-+
-+    for (i = X_Sn + 11; i >= 0; i--) {
-+        if (xreg_list[i]) {
-+            TCGv dest = dest_gpr(ctx, i);
-+            switch (bytes) {
-+            case 4:
-+                tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, MO_32);
-+                break;
-+            case 8:
-+                tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, MO_64);
-+                break;
-+            default:
-+                break;
++    /*
++     * Either a cpu sets its supported satp_mode in XXX_cpu_init
++     * or the user sets this value using satp_mode property.
++     */
++    bool rv32 = riscv_cpu_mxl(&cpu->env) == MXL_RV32;
++    if (cpu->cfg.satp_mode_str) {
++        if (!g_strcmp0(cpu->cfg.satp_mode_str, "none"))
++            cpu->cfg.satp_mode = VM_1_10_MBARE;
++        else if (!g_strcmp0(cpu->cfg.satp_mode_str, "sv32") && rv32)
++            cpu->cfg.satp_mode = VM_1_10_SV32;
++        else if (!g_strcmp0(cpu->cfg.satp_mode_str, "sv39") && !rv32)
++            cpu->cfg.satp_mode = VM_1_10_SV39;
++        else if (!g_strcmp0(cpu->cfg.satp_mode_str, "sv48") && !rv32)
++            cpu->cfg.satp_mode = VM_1_10_SV48;
++        else if (!g_strcmp0(cpu->cfg.satp_mode_str, "sv57") && !rv32)
++            cpu->cfg.satp_mode = VM_1_10_SV57;
++        else if (!g_strcmp0(cpu->cfg.satp_mode_str, "sv64") && !rv32)
++            cpu->cfg.satp_mode = VM_1_10_SV64;
++        else {
++            error_report("Unknown option for satp_mode: %s",
++                         cpu->cfg.satp_mode_str);
++            exit(EXIT_FAILURE);
++        }
++    } else {
++        /*
++         * If unset by both the user and the cpu, we fallback to sv32 for 32-bit
++         * or sv57 for 64-bit when a MMU is present, and bare otherwise.
++         */
++        if (riscv_feature(&cpu->env, RISCV_FEATURE_MMU)) {
++            if (rv32) {
++                cpu->cfg.satp_mode_str = g_strdup("sv32");
++                cpu->cfg.satp_mode = VM_1_10_SV32;
++            } else {
++                cpu->cfg.satp_mode_str = g_strdup("sv57");
++                cpu->cfg.satp_mode = VM_1_10_SV57;
 +            }
-+            gen_set_gpr(ctx, i, dest);
-+            tcg_gen_subi_tl(addr, addr, bytes);
++        } else {
++            cpu->cfg.satp_mode_str = g_strdup("none");
++            cpu->cfg.satp_mode = VM_1_10_MBARE;
 +        }
 +    }
 +
-+    tcg_gen_addi_tl(sp, sp, stack_adj);
-+    gen_set_gpr(ctx, xSP, sp);
+     riscv_cpu_register_gdb_regs_for_features(cs);
+ 
+     qemu_init_vcpu(cs);
+@@ -1094,6 +1136,9 @@ static Property riscv_cpu_properties[] = {
+ 
+     DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false),
+     DEFINE_PROP_BOOL("rvv_ma_all_1s", RISCVCPU, cfg.rvv_ma_all_1s, false),
 +
-+    if (ret_val) {
-+        gen_set_gpr(ctx, xA0, ctx->zero);
-+    }
++    DEFINE_PROP_STRING("satp-mode", RISCVCPU, cfg.satp_mode_str),
 +
-+    if (ret) {
-+        TCGv ret_addr = get_gpr(ctx, xRA, EXT_NONE);
-+        gen_set_pc(ctx, ret_addr);
-+        tcg_gen_lookup_and_goto_ptr();
-+        ctx->base.is_jmp = DISAS_NORETURN;
-+    }
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 3a9e25053f..a6c229470b 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -480,6 +480,9 @@ struct RISCVCPUConfig {
+     bool debug;
+ 
+     bool short_isa_string;
 +
-+    tcg_temp_free(addr);
-+    return true;
-+}
++    uint8_t satp_mode;
++    char *satp_mode_str;
+ };
+ 
+ typedef struct RISCVCPUConfig RISCVCPUConfig;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 5c9a7ee287..d26b830f1a 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1109,10 +1109,12 @@ static RISCVException read_mstatus(CPURISCVState *env, int csrno,
+ 
+ static int validate_vm(CPURISCVState *env, target_ulong vm)
+ {
++    vm &= 0xf;
 +
-+static bool trans_cm_push(DisasContext *ctx, arg_cm_push *a)
-+{
-+    REQUIRE_ZCMP(ctx);
-+
-+    if (!gen_zcmp_check(ctx, a)) {
-+        return false;
-+    }
-+
-+    bool xreg_list[32] = {false};
-+    int bytes = get_ol(ctx) == MXL_RV32 ? 4 : 8;
-+    target_ulong stack_adj = caculate_stack_adj(bytes, a->zcmp_rlist,
-+                                                a->zcmp_spimm);
-+    TCGv sp = dest_gpr(ctx, xSP);
-+    TCGv addr = tcg_temp_new();
-+    int i;
-+
-+    update_push_pop_list(a->zcmp_rlist, xreg_list);
-+    tcg_gen_subi_tl(addr, sp, bytes);
-+
-+    for (i = X_Sn + 11; i >= 0; i--) {
-+        if (xreg_list[i]) {
-+            TCGv val = get_gpr(ctx, i, EXT_NONE);
-+            switch (bytes) {
-+            case 4:
-+                tcg_gen_qemu_st_tl(val, addr, ctx->mem_idx, MO_32);
-+                break;
-+            case 8:
-+                tcg_gen_qemu_st_tl(val, addr, ctx->mem_idx, MO_64);
-+                break;
-+            default:
-+                break;
-+            }
-+            tcg_gen_subi_tl(addr, addr, bytes);
-+        }
-+    }
-+
-+    tcg_gen_subi_tl(sp, sp, stack_adj);
-+    gen_set_gpr(ctx, xSP, sp);
-+    return true;
-+}
-+
-+static bool trans_cm_pop(DisasContext *ctx, arg_cm_pop *a)
-+{
-+    return gen_pop(ctx, a, false, false);
-+}
-+
-+static bool trans_cm_popret(DisasContext *ctx, arg_cm_popret *a)
-+{
-+    return gen_pop(ctx, a, true, false);
-+}
-+
-+static bool trans_cm_popretz(DisasContext *ctx, arg_cm_popret *a)
-+{
-+    return gen_pop(ctx, a, true, true);
-+}
-+
-+static bool trans_cm_mva01s(DisasContext *ctx, arg_cm_mva01s *a)
-+{
-+    REQUIRE_ZCMP(ctx);
-+
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_set_gpr(ctx, xA0, src1);
-+    gen_set_gpr(ctx, xA1, src2);
-+
-+    return true;
-+}
-+
-+static bool trans_cm_mvsa01(DisasContext *ctx, arg_cm_mvsa01 *a)
-+{
-+    REQUIRE_ZCMP(ctx);
-+
-+    TCGv a0 = get_gpr(ctx, xA0, EXT_NONE);
-+    TCGv a1 = get_gpr(ctx, xA1, EXT_NONE);
-+
-+    gen_set_gpr(ctx, a->rs1, a0);
-+    gen_set_gpr(ctx, a->rs2, a1);
-+
-+    return true;
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index ca01da3309..1b2515650f 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -738,6 +738,11 @@ static int ex_rvc_register(DisasContext *ctx, int reg)
-     return 8 + reg;
+     if (riscv_cpu_mxl(env) == MXL_RV32) {
+-        return valid_vm_1_10_32[vm & 0xf];
++        return valid_vm_1_10_32[vm] && (vm <= RISCV_CPU(env_cpu(env))->cfg.satp_mode);
+     } else {
+-        return valid_vm_1_10_64[vm & 0xf];
++        return valid_vm_1_10_64[vm] && (vm <= RISCV_CPU(env_cpu(env))->cfg.satp_mode);
+     }
  }
  
-+static int ex_sreg_register(DisasContext *ctx, int reg)
-+{
-+    return reg < 2 ? reg + 8 : reg + 16;
-+}
-+
- static int ex_rvc_shiftli(DisasContext *ctx, int imm)
- {
-     /* For RV128 a shamt of 0 means a shift by 64. */
 -- 
-2.25.1
+2.37.2
 
 
