@@ -1,41 +1,43 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ovnnP-0001m3-KV
-	for mharc-qemu-riscv@gnu.org; Thu, 17 Nov 2022 17:55:47 -0500
+	id 1ovnnR-0001na-7d
+	for mharc-qemu-riscv@gnu.org; Thu, 17 Nov 2022 17:55:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1ovnnN-0001kK-Pr; Thu, 17 Nov 2022 17:55:45 -0500
+ id 1ovnnP-0001ky-5s; Thu, 17 Nov 2022 17:55:47 -0500
 Received: from ams.source.kernel.org ([2604:1380:4601:e00::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1ovnnL-0001F0-SK; Thu, 17 Nov 2022 17:55:45 -0500
+ id 1ovnnN-0001FB-EQ; Thu, 17 Nov 2022 17:55:46 -0500
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 585AFB821FA;
- Thu, 17 Nov 2022 22:55:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E4ECC433C1;
- Thu, 17 Nov 2022 22:55:38 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 4DF42B82215;
+ Thu, 17 Nov 2022 22:55:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 766B5C433D7;
+ Thu, 17 Nov 2022 22:55:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1668725740;
- bh=E3al29BtMyefxqNER7R22B0f9ENoa8wya6Bqsj2TUX8=;
- h=From:To:Cc:Subject:Date:From;
- b=nxytlhLZvUHHVVHjMqXInor0C73so9Ykun0rFW1folpNCaYX+8Qcy2ic7e1bSzZul
- qscXDfk5FKANG6Fy6VQQsPXqDW8sq/BTr/O2iREgLOqWkmMV5FH6pozO0juNtks3fE
- G83UaQd0QRF6l9c+n2pvXFSfGjXMmmPnuwgY/BjHJ+h6jTBy8CuL2GrpZijeTPLpzT
- ga2Bh6HxkOQwJPhBH0y9+Fqe2fBSXxhaGRARv/KC7FaLus9/KnvNw15Ro7H1Oy7cO+
- hR7CRI5sn3E0u3XIEIdv+xtbDGcERyxQx4Y3Hxt+xgDihx5WlX3rP15EUlbtP+qYrK
- B3baof500KjgA==
+ s=k20201202; t=1668725742;
+ bh=gcBR3PcE64Fy0FURKocOq9fPRjlgdDpwDDupKQTbfwM=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=ueObJZkuB58bPtkcAMkYjkHQVmhxdstGknIte8/YBq8ENWayZ88u4SXdB09Fj5Z5y
+ EbUq0HYcCxyybrXD4WwXYzWwIU+CXC/wXSPcJlW6c6zyQx3nC5Agj6yzp8kEgBe8nw
+ jv4UcThh4XsoyYjG0LyMUkKu6inFZ+OPPTLINSK9WqNOD85uo8o60Cef+1WEfAQTAi
+ MPq386qNLukMUbO+t5QWdz8WfOgwVTHMXZRM9vogEqtgPAXqvQSMiR5gXd5Mdd+HIj
+ UfHHpI9SuLO2T+C7/TCEhZVQJiqtHk/usn1nfJZtLBl5l3uBzBTG0lG84W+ik2WqXz
+ 4WeBNdiV/ZqJw==
 From: Conor Dooley <conor@kernel.org>
 To: Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>
 Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Conor Dooley <conor.dooley@microchip.com>
-Subject: [PATCH v3 0/3] Add (more) missing PolarFire SoC io regions
-Date: Thu, 17 Nov 2022 22:55:15 +0000
-Message-Id: <20221117225518.4102575-1-conor@kernel.org>
+Subject: [PATCH v3 1/3] hw/misc: pfsoc: add fabric clocks to ioscb
+Date: Thu, 17 Nov 2022 22:55:16 +0000
+Message-Id: <20221117225518.4102575-2-conor@kernel.org>
 X-Mailer: git-send-email 2.37.2
+In-Reply-To: <20221117225518.4102575-1-conor@kernel.org>
+References: <20221117225518.4102575-1-conor@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2604:1380:4601:e00::1;
@@ -59,53 +61,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2022 22:55:46 -0000
+X-List-Received-Date: Thu, 17 Nov 2022 22:55:47 -0000
 
 From: Conor Dooley <conor.dooley@microchip.com>
 
-Hey all,
-Apart from DDR (see [1]), these should be the last bits needed to get
-recent Linux kernels booting again for Icicle/PolarFire SoC. Previously,
-I had been disabling the hwrng and PCI but I keep forgetting that is
-required and decided to fix that.
+On PolarFire SoC, some peripherals (eg the PCI root port) are clocked by
+"Clock Conditioning Circuitry" in the FPGA. The specific clock depends
+on the FPGA bitstream & can be locked to one particular {D,P}LL - in the
+Icicle Kit Reference Design v2022.09 or later this is/will be the case.
 
-I'm not entirely sure if I have done some sort of no-no thing by
-registering the same interrupt with both the IOSCB and SYSREG regions.
-The interrupt is raised after the system controller handles a service
-via the mailbox. The mailbox's status, control and mailbox registers
-are all part of the IOSCB region. It's cleared by a write to a register
-in the SYSREG region.
-Since my goal here is to add the regions/peripherals without actually
-implementing them so that Linux etc, I'm just raising an interrupt
-once a guest requests a service & reporting a status indicating that the
-service request failed.
+Linux v6.1+ will have a driver for this peripheral and devicetrees that
+previously relied on "fixed-frequency" clock nodes have been switched
+over to clock-controller nodes. The IOSCB region is represented in QEMU,
+but the specific region of it that the CCCs occupy has not so v6.1-rcN
+kernels fail to boot in QEMU.
 
-Thanks,
-Conor.
+Add the regions as unimplemented so that the status-quo in terms of boot
+is maintained.
 
-1 - https://lore.kernel.org/all/Y2+dUCpd8OP52%2FDJ@spud/
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+ hw/misc/mchp_pfsoc_ioscb.c         | 6 ++++++
+ include/hw/misc/mchp_pfsoc_ioscb.h | 1 +
+ 2 files changed, 7 insertions(+)
 
-Changes since v2:
-- fix the actual bits in the register used for the service return
-  status
-- remove a duplicate irq_lower() in the sysreg bits of patch 3
-- move the irq raise to a write function, raising it in the read one was
-  causing the irq to get raised twice by the linux driver that works
-  properly with the actual hardware. oops.
-
-Conor Dooley (3):
-  hw/misc: pfsoc: add fabric clocks to ioscb
-  hw/riscv: pfsoc: add missing FICs as unimplemented
-  hw/{misc,riscv}: pfsoc: add system controller as unimplemented
-
- hw/misc/mchp_pfsoc_ioscb.c          |  78 +++++++++++++++++-
- hw/misc/mchp_pfsoc_sysreg.c         |  18 ++++-
- hw/riscv/microchip_pfsoc.c          | 121 ++++++++++++++++------------
- include/hw/misc/mchp_pfsoc_ioscb.h  |   4 +
- include/hw/misc/mchp_pfsoc_sysreg.h |   1 +
- include/hw/riscv/microchip_pfsoc.h  |   3 +
- 6 files changed, 167 insertions(+), 58 deletions(-)
-
+diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
+index f4fd55a0e5..f976e42f72 100644
+--- a/hw/misc/mchp_pfsoc_ioscb.c
++++ b/hw/misc/mchp_pfsoc_ioscb.c
+@@ -33,6 +33,7 @@
+  */
+ #define IOSCB_WHOLE_REG_SIZE        0x10000000
+ #define IOSCB_SUBMOD_REG_SIZE       0x1000
++#define IOSCB_CCC_REG_SIZE          0x2000000
+ 
+ /*
+  * There are many sub-modules in the IOSCB module.
+@@ -45,6 +46,7 @@
+ #define IOSCB_LANE23_BASE           0x06510000
+ #define IOSCB_CTRL_BASE             0x07020000
+ #define IOSCB_CFG_BASE              0x07080000
++#define IOSCB_CCC_BASE              0x08000000
+ #define IOSCB_PLL_MSS_BASE          0x0E001000
+ #define IOSCB_CFM_MSS_BASE          0x0E002000
+ #define IOSCB_PLL_DDR_BASE          0x0E010000
+@@ -168,6 +170,10 @@ static void mchp_pfsoc_ioscb_realize(DeviceState *dev, Error **errp)
+                           "mchp.pfsoc.ioscb.cfg", IOSCB_SUBMOD_REG_SIZE);
+     memory_region_add_subregion(&s->container, IOSCB_CFG_BASE, &s->cfg);
+ 
++    memory_region_init_io(&s->ccc, OBJECT(s), &mchp_pfsoc_dummy_ops, s,
++                          "mchp.pfsoc.ioscb.ccc", IOSCB_CCC_REG_SIZE);
++    memory_region_add_subregion(&s->container, IOSCB_CCC_BASE, &s->ccc);
++
+     memory_region_init_io(&s->pll_mss, OBJECT(s), &mchp_pfsoc_pll_ops, s,
+                           "mchp.pfsoc.ioscb.pll_mss", IOSCB_SUBMOD_REG_SIZE);
+     memory_region_add_subregion(&s->container, IOSCB_PLL_MSS_BASE, &s->pll_mss);
+diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_pfsoc_ioscb.h
+index 9235523e33..687b213742 100644
+--- a/include/hw/misc/mchp_pfsoc_ioscb.h
++++ b/include/hw/misc/mchp_pfsoc_ioscb.h
+@@ -30,6 +30,7 @@ typedef struct MchpPfSoCIoscbState {
+     MemoryRegion lane23;
+     MemoryRegion ctrl;
+     MemoryRegion cfg;
++    MemoryRegion ccc;
+     MemoryRegion pll_mss;
+     MemoryRegion cfm_mss;
+     MemoryRegion pll_ddr;
 -- 
 2.37.2
 
