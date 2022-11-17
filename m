@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ovYxh-0005Hz-KJ
-	for mharc-qemu-riscv@gnu.org; Thu, 17 Nov 2022 02:05:25 -0500
+	id 1ovYxj-0005Jw-Vt
+	for mharc-qemu-riscv@gnu.org; Thu, 17 Nov 2022 02:05:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ovYxg-0005HN-Fq; Thu, 17 Nov 2022 02:05:24 -0500
+ id 1ovYxh-0005Hn-Bs; Thu, 17 Nov 2022 02:05:25 -0500
 Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ovYxc-00011s-Lh; Thu, 17 Nov 2022 02:05:23 -0500
+ id 1ovYxd-00010N-0M; Thu, 17 Nov 2022 02:05:25 -0500
 Received: from localhost.localdomain (unknown [180.165.240.202])
- by APP-01 (Coremail) with SMTP id qwCowABnbvIh3XVjJEYjCg--.9312S7;
- Thu, 17 Nov 2022 15:05:15 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowABnbvIh3XVjJEYjCg--.9312S5;
+ Thu, 17 Nov 2022 15:05:12 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v3 5/9] target/riscv: add support for Zcb extension
-Date: Thu, 17 Nov 2022 15:03:12 +0800
-Message-Id: <20221117070316.58447-6-liweiwei@iscas.ac.cn>
+Subject: [PATCH v3 3/9] target/riscv: add support for Zcf extension
+Date: Thu, 17 Nov 2022 15:03:10 +0800
+Message-Id: <20221117070316.58447-4-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221117070316.58447-1-liweiwei@iscas.ac.cn>
 References: <20221117070316.58447-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowABnbvIh3XVjJEYjCg--.9312S7
-X-Coremail-Antispam: 1UD129KBjvJXoW3Jw1Dtw13Cr18try7tF15XFb_yoW7ury5pF
- 1xCry7GFyqgFWIyayfKF13XF17Wr4fWrWUK39xAw1kGayYgFWDJr1DK3y3Ka1DXr4DWr4j
- 93WDAayUJ3y0qa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl
- 6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x
- IIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_
- Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxAIw28IcxkI7VAKI4
- 8JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xv
- wVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjx
- v20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k2
- 6cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxV
- AFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQSdkUUUUU=
+X-CM-TRANSID: qwCowABnbvIh3XVjJEYjCg--.9312S5
+X-Coremail-Antispam: 1UD129KBjvJXoW7uF43Zr43ZrWDCFyUWFyrCrg_yoW8uFy5pr
+ 18Cay7Grs0kryfAa1ftF45Xr1Utrs3Kry8K3sxtw1kGayUGFs8Zw1qqr17tr4UXFyvqr1Y
+ kF18A39xC3ykJFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9l14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
+ x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
+ 8EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
+ e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
+ 8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
+ jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vIr41l4I
+ 8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AK
+ xVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcV
+ AFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8I
+ cIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r
+ 4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUojjgUUUUU
 X-Originating-IP: [180.165.240.202]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
@@ -63,191 +63,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2022 07:05:24 -0000
+X-List-Received-Date: Thu, 17 Nov 2022 07:05:25 -0000
 
-Add encode and trans* functions support for Zcb instructions
+Separate c_flw/c_fsw from flw/fsw to add check for Zcf extension
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 ---
- target/riscv/insn16.decode                |  24 ++++++
- target/riscv/insn_trans/trans_rvzce.c.inc | 100 ++++++++++++++++++++++
- target/riscv/translate.c                  |   2 +
- 3 files changed, 126 insertions(+)
- create mode 100644 target/riscv/insn_trans/trans_rvzce.c.inc
+ target/riscv/insn16.decode              |  8 ++++----
+ target/riscv/insn_trans/trans_rvf.c.inc | 18 ++++++++++++++++++
+ 2 files changed, 22 insertions(+), 4 deletions(-)
 
 diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index b62664b6af..47603ec1e0 100644
+index ccfe59f294..f3ea650325 100644
 --- a/target/riscv/insn16.decode
 +++ b/target/riscv/insn16.decode
-@@ -43,6 +43,8 @@
- %imm_addi16sp  12:s1 3:2 5:1 2:1 6:1 !function=ex_shift_4
- %imm_lui       12:s1 2:5             !function=ex_shift_12
- 
-+%zcb_b_uimm  5:1 6:1
-+%zcb_h_uimm  5:1                     !function=ex_shift_1
- 
- # Argument sets imported from insn32.decode:
- &empty                  !extern
-@@ -53,6 +55,7 @@
- &b         imm rs2 rs1  !extern
- &u         imm rd       !extern
- &shift     shamt rs1 rd !extern
-+&r2        rd rs1       !extern
- 
- 
- # Formats 16:
-@@ -89,6 +92,13 @@
- 
- @c_andi         ... . .. ... ..... .. &i imm=%imm_ci rs1=%rs1_3 rd=%rs1_3
- 
-+@zcb_unary    ... ...  ... .. ... ..  &r2                  rs1=%rs1_3 rd=%rs1_3
-+@zcb_binary   ... ...  ... .. ... ..  &r  rs2=%rs2_3       rs1=%rs1_3 rd=%rs1_3
-+@zcb_lb       ... . .. ... .. ... ..  &i  imm=%zcb_b_uimm  rs1=%rs1_3 rd=%rs2_3
-+@zcb_lh       ... . .. ... .. ... ..  &i  imm=%zcb_h_uimm  rs1=%rs1_3 rd=%rs2_3
-+@zcb_sb       ... . .. ... .. ... ..  &s  imm=%zcb_b_uimm  rs1=%rs1_3 rs2=%rs2_3
-+@zcb_sh       ... . .. ... .. ... ..  &s  imm=%zcb_h_uimm  rs1=%rs1_3 rs2=%rs2_3
-+
- # *** RV32/64C Standard Extension (Quadrant 0) ***
+@@ -109,11 +109,11 @@ sw                110  ... ... .. ... 00 @cs_w
+ # *** RV32C and RV64C specific Standard Extension (Quadrant 0) ***
  {
-   # Opcode of all zeros is illegal; rd != 0, nzuimm == 0 is reserved.
-@@ -180,3 +190,17 @@ sw                110 .  .....  ..... 10 @c_swsp
-   sd              111 .  .....  ..... 10 @c_sdsp
-   c_fsw           111 .  .....  ..... 10 @c_swsp
+   ld              011  ... ... .. ... 00 @cl_d
+-  flw             011  ... ... .. ... 00 @cl_w
++  c_flw           011  ... ... .. ... 00 @cl_w
  }
-+
-+# *** RV64 and RV32 Zcb Extension ***
-+c_zext_b          100 111  ... 11 000 01 @zcb_unary
-+c_sext_b          100 111  ... 11 001 01 @zcb_unary
-+c_zext_h          100 111  ... 11 010 01 @zcb_unary
-+c_sext_h          100 111  ... 11 011 01 @zcb_unary
-+c_zext_w          100 111  ... 11 100 01 @zcb_unary
-+c_not             100 111  ... 11 101 01 @zcb_unary
-+c_mul             100 111  ... 10 ... 01 @zcb_binary
-+c_lbu             100 000  ... .. ... 00 @zcb_lb
-+c_lhu             100 001  ... 0. ... 00 @zcb_lh
-+c_lh              100 001  ... 1. ... 00 @zcb_lh
-+c_sb              100 010  ... .. ... 00 @zcb_sb
-+c_sh              100 011  ... 0. ... 00 @zcb_sh
-diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
-new file mode 100644
-index 0000000000..de96c4afaf
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvzce.c.inc
-@@ -0,0 +1,100 @@
-+/*
-+ * RISC-V translation routines for the Zcb Standard Extension.
-+ *
-+ * Copyright (c) 2021-2022 PLCT Lab
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#define REQUIRE_ZCB(ctx) do {   \
-+    if (!ctx->cfg_ptr->ext_zcb) \
-+        return false;           \
+ {
+   sd              111  ... ... .. ... 00 @cs_d
+-  fsw             111  ... ... .. ... 00 @cs_w
++  c_fsw           111  ... ... .. ... 00 @cs_w
+ }
+ 
+ # *** RV32/64C Standard Extension (Quadrant 1) ***
+@@ -174,9 +174,9 @@ sw                110 .  .....  ..... 10 @c_swsp
+ {
+   c64_illegal     011 -  00000  ----- 10 # c.ldsp, RES rd=0
+   ld              011 .  .....  ..... 10 @c_ldsp
+-  flw             011 .  .....  ..... 10 @c_lwsp
++  c_flw           011 .  .....  ..... 10 @c_lwsp
+ }
+ {
+   sd              111 .  .....  ..... 10 @c_sdsp
+-  fsw             111 .  .....  ..... 10 @c_swsp
++  c_fsw           111 .  .....  ..... 10 @c_swsp
+ }
+diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
+index 93657680c6..426518957b 100644
+--- a/target/riscv/insn_trans/trans_rvf.c.inc
++++ b/target/riscv/insn_trans/trans_rvf.c.inc
+@@ -24,6 +24,12 @@
+             return false; \
+ } while (0)
+ 
++#define REQUIRE_ZCF(ctx) do {                  \
++    if (!ctx->cfg_ptr->ext_zcf) {              \
++        return false;                          \
++    }                                          \
 +} while (0)
 +
-+static bool trans_c_zext_b(DisasContext *ctx, arg_c_zext_b *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext8u_tl);
-+}
-+
-+static bool trans_c_zext_h(DisasContext *ctx, arg_c_zext_h *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    REQUIRE_ZBB(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext16u_tl);
-+}
-+
-+static bool trans_c_sext_b(DisasContext *ctx, arg_c_sext_b *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    REQUIRE_ZBB(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext8s_tl);
-+}
-+
-+static bool trans_c_sext_h(DisasContext *ctx, arg_c_sext_h *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    REQUIRE_ZBB(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext16s_tl);
-+}
-+
-+static bool trans_c_zext_w(DisasContext *ctx, arg_c_zext_w *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZCB(ctx);
-+    REQUIRE_ZBA(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext32u_tl);
-+}
-+
-+static bool trans_c_not(DisasContext *ctx, arg_c_not *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, tcg_gen_not_tl);
-+}
-+
-+static bool trans_c_mul(DisasContext *ctx, arg_c_mul *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    REQUIRE_M_OR_ZMMUL(ctx);
-+    return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, NULL);
-+}
-+
-+static bool trans_c_lbu(DisasContext *ctx, arg_c_lbu *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_load(ctx, a, MO_UB);
-+}
-+
-+static bool trans_c_lhu(DisasContext *ctx, arg_c_lhu *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_load(ctx, a, MO_UW);
-+}
-+
-+static bool trans_c_lh(DisasContext *ctx, arg_c_lh *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_load(ctx, a, MO_SW);
-+}
-+
-+static bool trans_c_sb(DisasContext *ctx, arg_c_sb *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_store(ctx, a, MO_UB);
-+}
-+
-+static bool trans_c_sh(DisasContext *ctx, arg_c_sh *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_store(ctx, a, MO_UW);
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index ee24b451e3..ca01da3309 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1069,6 +1069,8 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #ifndef CONFIG_USER_ONLY
+ static inline bool smstateen_fcsr_check(DisasContext *ctx, int index)
+ {
+@@ -96,6 +102,18 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
+     return true;
+ }
  
- /* Include the auto-generated decoder for 16 bit insn */
- #include "decode-insn16.c.inc"
-+#include "insn_trans/trans_rvzce.c.inc"
++static bool trans_c_flw(DisasContext *ctx, arg_flw *a)
++{
++    REQUIRE_ZCF(ctx);
++    return trans_flw(ctx, a);
++}
 +
- /* Include decoders for factored-out extensions */
- #include "decode-XVentanaCondOps.c.inc"
- 
++static bool trans_c_fsw(DisasContext *ctx, arg_fsw *a)
++{
++    REQUIRE_ZCF(ctx);
++    return trans_fsw(ctx, a);
++}
++
+ static bool trans_fmadd_s(DisasContext *ctx, arg_fmadd_s *a)
+ {
+     REQUIRE_FPU;
 -- 
 2.25.1
 
