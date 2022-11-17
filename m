@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ovYy4-0005Pv-Cc
-	for mharc-qemu-riscv@gnu.org; Thu, 17 Nov 2022 02:05:48 -0500
+	id 1ovYy5-0005RV-IR
+	for mharc-qemu-riscv@gnu.org; Thu, 17 Nov 2022 02:05:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ovYxh-0005Hm-Bb; Thu, 17 Nov 2022 02:05:25 -0500
+ id 1ovYxl-0005LJ-Pb; Thu, 17 Nov 2022 02:05:31 -0500
 Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ovYxc-0000zP-N1; Thu, 17 Nov 2022 02:05:25 -0500
+ id 1ovYxj-00016l-O7; Thu, 17 Nov 2022 02:05:29 -0500
 Received: from localhost.localdomain (unknown [180.165.240.202])
- by APP-01 (Coremail) with SMTP id qwCowABnbvIh3XVjJEYjCg--.9312S4;
- Thu, 17 Nov 2022 15:05:10 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowABnbvIh3XVjJEYjCg--.9312S10;
+ Thu, 17 Nov 2022 15:05:21 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v3 2/9] target/riscv: add support for Zca extension
-Date: Thu, 17 Nov 2022 15:03:09 +0800
-Message-Id: <20221117070316.58447-3-liweiwei@iscas.ac.cn>
+Subject: [PATCH v3 8/9] target/riscv: expose properties for Zc* extension
+Date: Thu, 17 Nov 2022 15:03:15 +0800
+Message-Id: <20221117070316.58447-9-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221117070316.58447-1-liweiwei@iscas.ac.cn>
 References: <20221117070316.58447-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowABnbvIh3XVjJEYjCg--.9312S4
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZF13tF18Ww4rGw1kWF1ftFb_yoW8uF1kpr
- WFkrW7KrZ5Jr93Aa93KF4Utr17Jw4Sgr48Jw1vvwn5JFW3Xr45ZF4DK343KrWUXFsaqryY
- 9FZ0yF98uw48XaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9l14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
- x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
- e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
- 8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
- jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vIr41l4I
- 8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AK
- xVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcV
- AFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8I
- cIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r
- 4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU8BMNUUUUU
+X-CM-TRANSID: qwCowABnbvIh3XVjJEYjCg--.9312S10
+X-Coremail-Antispam: 1UD129KBjvJXoW7uw1fCFWDtw1fXFW3CFW5GFg_yoW8uF47pr
+ y5Ga47Kw15Jr13Gwnxtr1DJ3yrCw4rA3s7K3ySv3Z7XrZ3KrZrXwnrC39rW3yrtF4rZr4S
+ gF13Zr1xCrs5ta7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl
+ 6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x
+ IIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_
+ Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxAIw28IcxkI7VAKI4
+ 8JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xv
+ wVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjx
+ v20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k2
+ 6cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxV
+ AFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQSdkUUUUU=
 X-Originating-IP: [180.165.240.202]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
@@ -63,65 +63,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2022 07:05:25 -0000
+X-List-Received-Date: Thu, 17 Nov 2022 07:05:32 -0000
 
-Modify the check for C extension to Zca (C implies Zca)
+Expose zca,zcb,zcf,zcd,zcmp,zcmt properties
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvi.c.inc | 4 ++--
- target/riscv/translate.c                | 8 ++++++--
- 2 files changed, 8 insertions(+), 4 deletions(-)
+ target/riscv/cpu.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 5c69b88d1e..0d73b919ce 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -56,7 +56,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
-     tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1ab04ab246..b9e41df96c 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -81,6 +81,12 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zfhmin, true, PRIV_VERSION_1_12_0, ext_zfhmin),
+     ISA_EXT_DATA_ENTRY(zfinx, true, PRIV_VERSION_1_12_0, ext_zfinx),
+     ISA_EXT_DATA_ENTRY(zdinx, true, PRIV_VERSION_1_12_0, ext_zdinx),
++    ISA_EXT_DATA_ENTRY(zca, true, PRIV_VERSION_1_12_0, ext_zca),
++    ISA_EXT_DATA_ENTRY(zcb, true, PRIV_VERSION_1_12_0, ext_zcb),
++    ISA_EXT_DATA_ENTRY(zcf, true, PRIV_VERSION_1_12_0, ext_zcf),
++    ISA_EXT_DATA_ENTRY(zcd, true, PRIV_VERSION_1_12_0, ext_zcd),
++    ISA_EXT_DATA_ENTRY(zcmp, true, PRIV_VERSION_1_12_0, ext_zcmp),
++    ISA_EXT_DATA_ENTRY(zcmt, true, PRIV_VERSION_1_12_0, ext_zcmt),
+     ISA_EXT_DATA_ENTRY(zba, true, PRIV_VERSION_1_12_0, ext_zba),
+     ISA_EXT_DATA_ENTRY(zbb, true, PRIV_VERSION_1_12_0, ext_zbb),
+     ISA_EXT_DATA_ENTRY(zbc, true, PRIV_VERSION_1_12_0, ext_zbc),
+@@ -1114,6 +1120,13 @@ static Property riscv_cpu_extensions[] = {
  
-     gen_set_pc(ctx, cpu_pc);
--    if (!has_ext(ctx, RVC)) {
-+    if (!ctx->cfg_ptr->ext_zca) {
-         TCGv t0 = tcg_temp_new();
- 
-         misaligned = gen_new_label();
-@@ -178,7 +178,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
- 
-     gen_set_label(l); /* branch taken */
- 
--    if (!has_ext(ctx, RVC) && ((ctx->base.pc_next + a->imm) & 0x3)) {
-+    if (!ctx->cfg_ptr->ext_zca && ((ctx->base.pc_next + a->imm) & 0x3)) {
-         /* misaligned */
-         gen_exception_inst_addr_mis(ctx);
-     } else {
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 2ab8772ebe..ee24b451e3 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -557,7 +557,7 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
- 
-     /* check misaligned: */
-     next_pc = ctx->base.pc_next + imm;
--    if (!has_ext(ctx, RVC)) {
-+    if (!ctx->cfg_ptr->ext_zca) {
-         if ((next_pc & 0x3) != 0) {
-             gen_exception_inst_addr_mis(ctx);
-             return;
-@@ -1097,7 +1097,11 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-     ctx->virt_inst_excp = false;
-     /* Check for compressed insn */
-     if (insn_len(opcode) == 2) {
--        if (!has_ext(ctx, RVC)) {
-+        /*
-+         * Zca support all of the existing C extension, excluding all
-+         * compressed floating point loads and stores
-+         */
-+        if (!ctx->cfg_ptr->ext_zca) {
-             gen_exception_illegal(ctx);
-         } else {
-             ctx->opcode = opcode;
+     /* These are experimental so mark with 'x-' */
+     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
++
++    DEFINE_PROP_BOOL("x-zca", RISCVCPU, cfg.ext_zca, false),
++    DEFINE_PROP_BOOL("x-zcb", RISCVCPU, cfg.ext_zcb, false),
++    DEFINE_PROP_BOOL("x-zcd", RISCVCPU, cfg.ext_zcd, false),
++    DEFINE_PROP_BOOL("x-zcf", RISCVCPU, cfg.ext_zcf, false),
++    DEFINE_PROP_BOOL("x-zcmp", RISCVCPU, cfg.ext_zcmp, false),
++    DEFINE_PROP_BOOL("x-zcmt", RISCVCPU, cfg.ext_zcmt, false),
+     /* ePMP 0.9.3 */
+     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+     DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
 -- 
 2.25.1
 
