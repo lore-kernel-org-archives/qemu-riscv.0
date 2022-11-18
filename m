@@ -1,35 +1,35 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ovvd6-0006bz-5O
+	id 1ovvd6-0006ca-Q8
 	for mharc-qemu-riscv@gnu.org; Fri, 18 Nov 2022 02:17:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ovvcu-0006VT-15; Fri, 18 Nov 2022 02:17:29 -0500
+ id 1ovvcu-0006VS-1s; Fri, 18 Nov 2022 02:17:29 -0500
 Received: from smtp84.cstnet.cn ([159.226.251.84] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ovvco-00047N-1O; Fri, 18 Nov 2022 02:17:24 -0500
+ id 1ovvco-000498-Vt; Fri, 18 Nov 2022 02:17:25 -0500
 Received: from localhost.localdomain (unknown [180.165.240.202])
- by APP-05 (Coremail) with SMTP id zQCowAAHDbVzMXdjkmwiCg--.64051S8;
- Fri, 18 Nov 2022 15:17:16 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowAAHDbVzMXdjkmwiCg--.64051S11;
+ Fri, 18 Nov 2022 15:17:19 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v4 6/9] target/riscv: add support for Zcmp extension
-Date: Fri, 18 Nov 2022 15:17:01 +0800
-Message-Id: <20221118071704.26959-7-liweiwei@iscas.ac.cn>
+Subject: [PATCH v4 9/9] disas/riscv.c: add disasm support for Zc*
+Date: Fri, 18 Nov 2022 15:17:04 +0800
+Message-Id: <20221118071704.26959-10-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221118071704.26959-1-liweiwei@iscas.ac.cn>
 References: <20221118071704.26959-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowAAHDbVzMXdjkmwiCg--.64051S8
-X-Coremail-Antispam: 1UD129KBjvJXoWxuw4DWw1xtw1kAw1UuFWUCFg_yoWxKw4rpF
- 1UC34xWr48ZFWSy3y8KFyrCFnIqrn3KrWj934Skw1kCa9xWFWDJr18KrW3tF48WFykuFW5
- CFZ8Cayjv3y5XFUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9E14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: zQCowAAHDbVzMXdjkmwiCg--.64051S11
+X-Coremail-Antispam: 1UD129KBjvJXoW3trWrWr15WFW3AryUWF13twb_yoWDWr4DpF
+ yrG343JrWj9a4Sq3WfAFW8AasxtrW8Wr47JaySy3Z5u3srZ34furyjq3yavFykG3y0kr47
+ uFsxWF4jg3Z7JrUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
  z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
@@ -40,8 +40,8 @@ X-Coremail-Antispam: 1UD129KBjvJXoWxuw4DWw1xtw1kAw1UuFWUCFg_yoWxKw4rpF
  1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
  67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
  8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20E
- Y4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267
- AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbmZX7UUUUU==
+ Y4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267
+ AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQSdkUUUUU=
 X-Originating-IP: [180.165.240.202]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
@@ -65,299 +65,404 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 18 Nov 2022 07:17:31 -0000
 
-Add encode, trans* functions for Zcmp instructions
+Zcmp/Zcmt instructions will override disasm for c.fld*/c.fsd*
+instructions currently
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 ---
- target/riscv/insn16.decode                |  18 +++
- target/riscv/insn_trans/trans_rvzce.c.inc | 189 +++++++++++++++++++++-
- target/riscv/translate.c                  |   5 +
- 3 files changed, 211 insertions(+), 1 deletion(-)
+ disas/riscv.c | 287 +++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 286 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 47603ec1e0..4654c23052 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -21,6 +21,8 @@
- %rs1_3     7:3                !function=ex_rvc_register
- %rs2_3     2:3                !function=ex_rvc_register
- %rs2_5     2:5
-+%sreg1     7:3                !function=ex_sreg_register
-+%sreg2     2:3                !function=ex_sreg_register
+diff --git a/disas/riscv.c b/disas/riscv.c
+index d216b9c39b..81369063b5 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -163,6 +163,13 @@ typedef enum {
+     rv_codec_v_i,
+     rv_codec_vsetvli,
+     rv_codec_vsetivli,
++    rv_codec_zcb_ext,
++    rv_codec_zcb_mul,
++    rv_codec_zcb_lb,
++    rv_codec_zcb_lh,
++    rv_codec_zcmp_cm_pushpop,
++    rv_codec_zcmp_cm_mv,
++    rv_codec_zcmt_jt,
+ } rv_codec;
  
- # Immediates:
- %imm_ci        12:s1 2:5
-@@ -45,6 +47,8 @@
+ typedef enum {
+@@ -935,6 +942,26 @@ typedef enum {
+     rv_op_vsetvli = 766,
+     rv_op_vsetivli = 767,
+     rv_op_vsetvl = 768,
++    rv_op_c_zext_b = 769,
++    rv_op_c_sext_b = 770,
++    rv_op_c_zext_h = 771,
++    rv_op_c_sext_h = 772,
++    rv_op_c_zext_w = 773,
++    rv_op_c_not = 774,
++    rv_op_c_mul = 775,
++    rv_op_c_lbu = 776,
++    rv_op_c_lhu = 777,
++    rv_op_c_lh = 778,
++    rv_op_c_sb = 779,
++    rv_op_c_sh = 780,
++    rv_op_cm_push = 781,
++    rv_op_cm_pop = 782,
++    rv_op_cm_popret = 783,
++    rv_op_cm_popretz = 784,
++    rv_op_cm_mva01s = 785,
++    rv_op_cm_mvsa01 = 786,
++    rv_op_cm_jt = 787,
++    rv_op_cm_jalt = 788,
+ } rv_op;
  
- %zcb_b_uimm  5:1 6:1
- %zcb_h_uimm  5:1                     !function=ex_shift_1
-+%zcmp_spimm  2:2                     !function=ex_shift_4
-+%zcmp_rlist  4:4
+ /* structures */
+@@ -958,6 +985,7 @@ typedef struct {
+     uint8_t   rnum;
+     uint8_t   vm;
+     uint32_t  vzimm;
++    uint8_t   rlist;
+ } rv_decode;
  
- # Argument sets imported from insn32.decode:
- &empty                  !extern
-@@ -56,7 +60,9 @@
- &u         imm rd       !extern
- &shift     shamt rs1 rd !extern
- &r2        rd rs1       !extern
-+&r2_s      rs1 rs2      !extern
+ typedef struct {
+@@ -1070,6 +1098,10 @@ static const char rv_vreg_name_sym[32][4] = {
+ #define rv_fmt_vd_vm                  "O\tDm"
+ #define rv_fmt_vsetvli                "O\t0,1,v"
+ #define rv_fmt_vsetivli               "O\t0,u,v"
++#define rv_fmt_rs1_rs2_zce_ldst       "O\t2,i(1)"
++#define rv_fmt_push_rlist             "O\tx,-i"
++#define rv_fmt_pop_rlist              "O\tx,i"
++#define rv_fmt_zcmt_index             "O\ti"
  
-+&zcmp      zcmp_rlist zcmp_spimm
+ /* pseudo-instruction constraints */
  
- # Formats 16:
- @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
-@@ -98,6 +104,8 @@
- @zcb_lh       ... . .. ... .. ... ..  &i  imm=%zcb_h_uimm  rs1=%rs1_3 rd=%rs2_3
- @zcb_sb       ... . .. ... .. ... ..  &s  imm=%zcb_b_uimm  rs1=%rs1_3 rs2=%rs2_3
- @zcb_sh       ... . .. ... .. ... ..  &s  imm=%zcb_h_uimm  rs1=%rs1_3 rs2=%rs2_3
-+@zcmp         ... ...  ........   ..  &zcmp  %zcmp_rlist   %zcmp_spimm
-+@cm_mv        ... ...  ... .. ... ..  &r2_s  rs2=%sreg2    rs1=%sreg1
+@@ -2065,7 +2097,27 @@ const rv_opcode_data opcode_data[] = {
+     { "vsext.vf8", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vsext_vf8, rv_op_vsext_vf8, 0 },
+     { "vsetvli", rv_codec_vsetvli, rv_fmt_vsetvli, NULL, rv_op_vsetvli, rv_op_vsetvli, 0 },
+     { "vsetivli", rv_codec_vsetivli, rv_fmt_vsetivli, NULL, rv_op_vsetivli, rv_op_vsetivli, 0 },
+-    { "vsetvl", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, rv_op_vsetvl, rv_op_vsetvl, 0 }
++    { "vsetvl", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, rv_op_vsetvl, rv_op_vsetvl, 0 },
++    { "c.zext.b", rv_codec_zcb_ext, rv_fmt_rd, NULL, 0 },
++    { "c.sext.b", rv_codec_zcb_ext, rv_fmt_rd, NULL, 0 },
++    { "c.zext.h", rv_codec_zcb_ext, rv_fmt_rd, NULL, 0 },
++    { "c.sext.h", rv_codec_zcb_ext, rv_fmt_rd, NULL, 0 },
++    { "c.zext.w", rv_codec_zcb_ext, rv_fmt_rd, NULL, 0 },
++    { "c.not", rv_codec_zcb_ext, rv_fmt_rd, NULL, 0 },
++    { "c.mul", rv_codec_zcb_mul, rv_fmt_rd_rs2, NULL, 0, 0 },
++    { "c.lbu", rv_codec_zcb_lb, rv_fmt_rs1_rs2_zce_ldst, NULL, 0, 0, 0 },
++    { "c.lhu", rv_codec_zcb_lh, rv_fmt_rs1_rs2_zce_ldst, NULL, 0, 0, 0 },
++    { "c.lh", rv_codec_zcb_lh, rv_fmt_rs1_rs2_zce_ldst, NULL, 0, 0, 0 },
++    { "c.sb", rv_codec_zcb_lb, rv_fmt_rs1_rs2_zce_ldst, NULL, 0, 0, 0 },
++    { "c.sh", rv_codec_zcb_lh, rv_fmt_rs1_rs2_zce_ldst, NULL, 0, 0, 0 },
++    { "cm.push", rv_codec_zcmp_cm_pushpop, rv_fmt_push_rlist, NULL, 0, 0 },
++    { "cm.pop", rv_codec_zcmp_cm_pushpop, rv_fmt_pop_rlist, NULL, 0, 0 },
++    { "cm.popret", rv_codec_zcmp_cm_pushpop, rv_fmt_pop_rlist, NULL, 0, 0, 0 },
++    { "cm.popretz", rv_codec_zcmp_cm_pushpop, rv_fmt_pop_rlist, NULL, 0, 0 },
++    { "cm.mva01s", rv_codec_zcmp_cm_mv, rv_fmt_rd_rs2, NULL, 0, 0, 0 },
++    { "cm.mvsa01", rv_codec_zcmp_cm_mv, rv_fmt_rd_rs2, NULL, 0, 0, 0 },
++    { "cm.jt", rv_codec_zcmt_jt, rv_fmt_zcmt_index, NULL, 0 },
++    { "cm.jalt", rv_codec_zcmt_jt, rv_fmt_zcmt_index, NULL, 0 },
+ };
  
- # *** RV32/64C Standard Extension (Quadrant 0) ***
- {
-@@ -177,6 +185,16 @@ slli              000 .  .....  ..... 10 @c_shift2
- {
-   sq              101  ... ... .. ... 10 @c_sqsp
-   c_fsd           101   ......  ..... 10 @c_sdsp
-+
-+  # *** RV64 and RV32 Zcmp Extension ***
-+  [
-+    cm_push         101  11000  .... .. 10 @zcmp
-+    cm_pop          101  11010  .... .. 10 @zcmp
-+    cm_popret       101  11110  .... .. 10 @zcmp
-+    cm_popretz      101  11100  .... .. 10 @zcmp
-+    cm_mva01s       101  011 ... 11 ... 10 @cm_mv
-+    cm_mvsa01       101  011 ... 01 ... 10 @cm_mv
-+  ]
+ /* CSR names */
+@@ -2084,6 +2136,7 @@ static const char *csr_name(int csrno)
+     case 0x000a: return "vxrm";
+     case 0x000f: return "vcsr";
+     case 0x0015: return "seed";
++    case 0x0017: return "jvt";
+     case 0x0040: return "uscratch";
+     case 0x0041: return "uepc";
+     case 0x0042: return "ucause";
+@@ -2306,6 +2359,24 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                 op = rv_op_c_ld;
+             }
+             break;
++        case 4:
++            switch ((inst >> 10) & 0b111) {
++            case 0: op = rv_op_c_lbu; break;
++            case 1:
++                if (((inst >> 6) & 1) == 0) {
++                    op = rv_op_c_lhu;
++                } else {
++                    op = rv_op_c_lh;
++                }
++                break;
++            case 2: op = rv_op_c_sb; break;
++            case 3:
++                if (((inst >> 6) & 1) == 0) {
++                    op = rv_op_c_sh;
++                }
++                break;
++            }
++            break;
+         case 5:
+             if (isa == rv128) {
+                 op = rv_op_c_sq;
+@@ -2362,6 +2433,17 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                 case 3: op = rv_op_c_and; break;
+                 case 4: op = rv_op_c_subw; break;
+                 case 5: op = rv_op_c_addw; break;
++                case 6: op = rv_op_c_mul; break;
++                case 7:
++                    switch ((inst >> 2) & 0b111) {
++                    case 0: op = rv_op_c_zext_b; break;
++                    case 1: op = rv_op_c_sext_b; break;
++                    case 2: op = rv_op_c_zext_h; break;
++                    case 3: op = rv_op_c_sext_h; break;
++                    case 4: op = rv_op_c_zext_w; break;
++                    case 5: op = rv_op_c_not; break;
++                    }
++                    break;
+                 }
+                 break;
+             }
+@@ -2417,6 +2499,30 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+                 op = rv_op_c_sqsp;
+             } else {
+                 op = rv_op_c_fsdsp;
++                if (((inst >> 12) & 0b01)) {
++                    switch ((inst >> 8) & 0b01111) {
++                    case 8: op = rv_op_cm_push; break;
++                    case 10: op = rv_op_cm_pop; break;
++                    case 12: op = rv_op_cm_popretz; break;
++                    case 14: op = rv_op_cm_popret; break;
++                    }
++                } else {
++                    switch ((inst >> 10) & 0b011) {
++                    case 0:
++                        if (((inst >> 2) & 0xFF) >= 32) {
++                            op = rv_op_cm_jalt;
++                        } else {
++                            op = rv_op_cm_jt;
++                        }
++                        break;
++                    case 3:
++                        switch ((inst >> 5) & 0b011) {
++                        case 1: op = rv_op_cm_mvsa01; break;
++                        case 3: op = rv_op_cm_mva01s; break;
++                        }
++                        break;
++                    }
++                }
+             }
+             break;
+         case 6: op = rv_op_c_swsp; break;
+@@ -3661,6 +3767,21 @@ static uint32_t operand_crs2q(rv_inst inst)
+     return (inst << 59) >> 61;
  }
- sw                110 .  .....  ..... 10 @c_swsp
  
-diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
-index de96c4afaf..f647b6ed15 100644
---- a/target/riscv/insn_trans/trans_rvzce.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzce.c.inc
-@@ -1,5 +1,5 @@
- /*
-- * RISC-V translation routines for the Zcb Standard Extension.
-+ * RISC-V translation routines for the Zc[b,mp] Standard Extension.
-  *
-  * Copyright (c) 2021-2022 PLCT Lab
-  *
-@@ -21,6 +21,11 @@
-         return false;           \
- } while (0)
- 
-+#define REQUIRE_ZCMP(ctx) do {   \
-+    if (!ctx->cfg_ptr->ext_zcmp) \
-+        return false;            \
-+} while (0)
-+
- static bool trans_c_zext_b(DisasContext *ctx, arg_c_zext_b *a)
- {
-     REQUIRE_ZCB(ctx);
-@@ -98,3 +103,185 @@ static bool trans_c_sh(DisasContext *ctx, arg_c_sh *a)
-     REQUIRE_ZCB(ctx);
-     return gen_store(ctx, a, MO_UW);
- }
-+
-+#define X_S0    8
-+#define X_S1    9
-+#define X_Sn    16
-+
-+static uint32_t decode_push_pop_list(DisasContext *ctx, target_ulong rlist)
++static uint32_t calculate_xreg(uint32_t sreg)
 +{
-+    uint32_t reg_bitmap = 0;
-+
-+    if (ctx->cfg_ptr->ext_e && rlist > 6) {
-+        return 0;
-+    }
-+
-+    switch (rlist) {
-+    case 15:
-+        reg_bitmap |=  1 << (X_Sn + 11) ;
-+        reg_bitmap |=  1 << (X_Sn + 10) ;
-+        /* FALL THROUGH */
-+    case 14:
-+        reg_bitmap |=  1 << (X_Sn + 9) ;
-+        /* FALL THROUGH */
-+    case 13:
-+        reg_bitmap |=  1 << (X_Sn + 8) ;
-+        /* FALL THROUGH */
-+    case 12:
-+        reg_bitmap |=  1 << (X_Sn + 7) ;
-+        /* FALL THROUGH */
-+    case 11:
-+        reg_bitmap |=  1 << (X_Sn + 6) ;
-+        /* FALL THROUGH */
-+    case 10:
-+        reg_bitmap |=  1 << (X_Sn + 5) ;
-+        /* FALL THROUGH */
-+    case 9:
-+        reg_bitmap |=  1 << (X_Sn + 4) ;
-+        /* FALL THROUGH */
-+    case 8:
-+        reg_bitmap |=  1 << (X_Sn + 3) ;
-+        /* FALL THROUGH */
-+    case 7:
-+        reg_bitmap |=  1 << (X_Sn + 2) ;
-+        /* FALL THROUGH */
-+    case 6:
-+        reg_bitmap |=  1 << X_S1 ;
-+        /* FALL THROUGH */
-+    case 5:
-+        reg_bitmap |= 1 << X_S0;
-+        /* FALL THROUGH */
-+    case 4:
-+        reg_bitmap |= 1 << xRA;
-+        break;
-+    default:
-+        break;
-+    }
-+
-+    return reg_bitmap;
++    return sreg < 2 ? sreg + 8 : sreg + 16;
 +}
 +
-+static bool gen_pop(DisasContext *ctx, arg_zcmp *a, bool ret, bool ret_val)
++static uint32_t operand_sreg1(rv_inst inst)
 +{
-+    REQUIRE_ZCMP(ctx);
++    return calculate_xreg((inst << 54) >> 61);
++}
 +
-+    uint32_t reg_bitmap = decode_push_pop_list(ctx, a->zcmp_rlist);
-+    if (reg_bitmap == 0) {
-+        return false;
-+    }
++static uint32_t operand_sreg2(rv_inst inst)
++{
++    return calculate_xreg((inst << 59) >> 61);
++}
 +
-+    MemOp memop = get_ol(ctx) == MXL_RV32 ? MO_TEUL : MO_TEUQ;
-+    int reg_size = memop_size(memop);
-+    target_ulong stack_adj = ROUND_UP(ctpop32(reg_bitmap) * reg_size, 16) +
-+                             a->zcmp_spimm;
-+    TCGv sp = dest_gpr(ctx, xSP);
-+    TCGv addr = tcg_temp_new();
-+    int i;
+ static uint32_t operand_crd(rv_inst inst)
+ {
+     return (inst << 52) >> 59;
+@@ -3883,6 +4004,97 @@ static uint32_t operand_vm(rv_inst inst)
+     return (inst << 38) >> 63;
+ }
+ 
++static uint32_t operand_uimm_c_lb(rv_inst inst)
++{
++    return (((inst << 58) >> 63) << 1) |
++        ((inst << 57) >> 63);
++}
 +
-+    tcg_gen_addi_tl(addr, sp, stack_adj - reg_size);
++static uint32_t operand_uimm_c_lh(rv_inst inst)
++{
++    return (((inst << 58) >> 63) << 1);
++}
 +
-+    for (i = X_Sn + 11; i >= 0; i--) {
-+        if (reg_bitmap & (1 << i)) {
-+            TCGv dest = dest_gpr(ctx, i);
-+            tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
-+            gen_set_gpr(ctx, i, dest);
-+            tcg_gen_subi_tl(addr, addr, reg_size);
++static uint32_t operand_zcmp_spimm(rv_inst inst)
++{
++    return ((inst << 60) >> 62) << 4;
++}
++
++static uint32_t operand_zcmp_rlist(rv_inst inst)
++{
++    return ((inst << 56) >> 60);
++}
++
++static uint32_t calculate_stack_adj(rv_isa isa, uint32_t rlist, uint32_t spimm)
++{
++    uint32_t stack_adj_base = 0;
++    if (isa == rv64) {
++        switch (rlist) {
++        case 15:
++            stack_adj_base = 112;
++            break;
++        case 14:
++            stack_adj_base = 96;
++            break;
++        case 13:
++        case 12:
++            stack_adj_base = 80;
++            break;
++        case 11:
++        case 10:
++            stack_adj_base = 64;
++            break;
++        case 9:
++        case 8:
++            stack_adj_base = 48;
++            break;
++        case 7:
++        case 6:
++            stack_adj_base = 32;
++            break;
++        case 5:
++        case 4:
++            stack_adj_base = 16;
++            break;
++        }
++    } else {
++        switch (rlist) {
++        case 15:
++            stack_adj_base = 64;
++            break;
++        case 14:
++        case 13:
++        case 12:
++            stack_adj_base = 48;
++            break;
++        case 11:
++        case 10:
++        case 9:
++        case 8:
++            stack_adj_base = 32;
++            break;
++        case 7:
++        case 6:
++        case 5:
++        case 4:
++            stack_adj_base = 16;
++            break;
 +        }
 +    }
-+
-+    tcg_gen_addi_tl(sp, sp, stack_adj);
-+    gen_set_gpr(ctx, xSP, sp);
-+
-+    if (ret_val) {
-+        gen_set_gpr(ctx, xA0, ctx->zero);
-+    }
-+
-+    if (ret) {
-+        TCGv ret_addr = get_gpr(ctx, xRA, EXT_NONE);
-+        gen_set_pc(ctx, ret_addr);
-+        tcg_gen_lookup_and_goto_ptr();
-+        ctx->base.is_jmp = DISAS_NORETURN;
-+    }
-+
-+    tcg_temp_free(addr);
-+    return true;
++    return stack_adj_base + spimm;
 +}
 +
-+static bool trans_cm_push(DisasContext *ctx, arg_cm_push *a)
++static uint32_t operand_zcmp_stack_adj(rv_inst inst, rv_isa isa)
 +{
-+    REQUIRE_ZCMP(ctx);
-+
-+    uint32_t reg_bitmap = decode_push_pop_list(ctx, a->zcmp_rlist);
-+    if (reg_bitmap == 0) {
-+        return false;
-+    }
-+
-+    MemOp memop = get_ol(ctx) == MXL_RV32 ? MO_TEUL : MO_TEUQ;
-+    int reg_size = memop_size(memop);
-+    target_ulong stack_adj = ROUND_UP(ctpop32(reg_bitmap) * reg_size, 16) +
-+                             a->zcmp_spimm;
-+    TCGv sp = dest_gpr(ctx, xSP);
-+    TCGv addr = tcg_temp_new();
-+    int i;
-+
-+    tcg_gen_subi_tl(addr, sp, reg_size);
-+
-+    for (i = X_Sn + 11; i >= 0; i--) {
-+        if (reg_bitmap & (1 << i)) {
-+            TCGv val = get_gpr(ctx, i, EXT_NONE);
-+            tcg_gen_qemu_st_tl(val, addr, ctx->mem_idx, memop);
-+            tcg_gen_subi_tl(addr, addr, reg_size);
-+        }
-+    }
-+
-+    tcg_gen_subi_tl(sp, sp, stack_adj);
-+    gen_set_gpr(ctx, xSP, sp);
-+
-+    tcg_temp_free(addr);
-+    return true;
++    return calculate_stack_adj(isa, operand_zcmp_rlist(inst),
++                              operand_zcmp_spimm(inst));
 +}
 +
-+static bool trans_cm_pop(DisasContext *ctx, arg_cm_pop *a)
++static uint32_t operand_tbl_index(rv_inst inst)
 +{
-+    return gen_pop(ctx, a, false, false);
++    return ((inst << 54) >> 56);
 +}
 +
-+static bool trans_cm_popret(DisasContext *ctx, arg_cm_popret *a)
-+{
-+    return gen_pop(ctx, a, true, false);
-+}
-+
-+static bool trans_cm_popretz(DisasContext *ctx, arg_cm_popret *a)
-+{
-+    return gen_pop(ctx, a, true, true);
-+}
-+
-+static bool trans_cm_mva01s(DisasContext *ctx, arg_cm_mva01s *a)
-+{
-+    REQUIRE_ZCMP(ctx);
-+
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_set_gpr(ctx, xA0, src1);
-+    gen_set_gpr(ctx, xA1, src2);
-+
-+    return true;
-+}
-+
-+static bool trans_cm_mvsa01(DisasContext *ctx, arg_cm_mvsa01 *a)
-+{
-+    REQUIRE_ZCMP(ctx);
-+
-+    if (a->rs1 == a->rs2) {
-+        return false;
-+    }
-+
-+    TCGv a0 = get_gpr(ctx, xA0, EXT_NONE);
-+    TCGv a1 = get_gpr(ctx, xA1, EXT_NONE);
-+
-+    gen_set_gpr(ctx, a->rs1, a0);
-+    gen_set_gpr(ctx, a->rs2, a1);
-+
-+    return true;
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index ca01da3309..1b2515650f 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -738,6 +738,11 @@ static int ex_rvc_register(DisasContext *ctx, int reg)
-     return 8 + reg;
+ /* decode operands */
+ 
+ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+@@ -4199,6 +4411,34 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+         dec->imm = operand_vimm(inst);
+         dec->vzimm = operand_vzimm10(inst);
+         break;
++    case rv_codec_zcb_lb:
++        dec->rs1 = operand_crs1q(inst) + 8;
++        dec->rs2 = operand_crs2q(inst) + 8;
++        dec->imm = operand_uimm_c_lb(inst);
++        break;
++    case rv_codec_zcb_lh:
++        dec->rs1 = operand_crs1q(inst) + 8;
++        dec->rs2 = operand_crs2q(inst) + 8;
++        dec->imm = operand_uimm_c_lh(inst);
++        break;
++    case rv_codec_zcb_ext:
++        dec->rd = operand_crs1q(inst) + 8;
++        break;
++    case rv_codec_zcb_mul:
++        dec->rd = operand_crs1rdq(inst) + 8;
++        dec->rs2 = operand_crs2q(inst) + 8;
++        break;
++    case rv_codec_zcmp_cm_pushpop:
++        dec->imm = operand_zcmp_stack_adj(inst, isa);
++        dec->rlist = operand_zcmp_rlist(inst);
++        break;
++    case rv_codec_zcmp_cm_mv:
++        dec->rd = operand_sreg1(inst);
++        dec->rs2 = operand_sreg2(inst);
++        break;
++    case rv_codec_zcmt_jt:
++        dec->imm = operand_tbl_index(inst);
++        break;
+     };
  }
  
-+static int ex_sreg_register(DisasContext *ctx, int reg)
-+{
-+    return reg < 2 ? reg + 8 : reg + 16;
-+}
-+
- static int ex_rvc_shiftli(DisasContext *ctx, int imm)
- {
-     /* For RV128 a shamt of 0 means a shift by 64. */
+@@ -4358,6 +4598,9 @@ static void format_inst(char *buf, size_t buflen, size_t tab, rv_decode *dec)
+         case ')':
+             append(buf, ")", buflen);
+             break;
++        case '-':
++            append(buf, "-", buflen);
++            break;
+         case 'b':
+             snprintf(tmp, sizeof(tmp), "%d", dec->bs);
+             append(buf, tmp, buflen);
+@@ -4541,6 +4784,48 @@ static void format_inst(char *buf, size_t buflen, size_t tab, rv_decode *dec)
+             append(buf, vma, buflen);
+             break;
+         }
++        case 'x': {
++            switch(dec->rlist) {
++            case 4:
++                snprintf(tmp, sizeof(tmp), "{ra}");
++                break;
++            case 5:
++                snprintf(tmp, sizeof(tmp), "{ra, s0}");
++                break;
++            case 6:
++                snprintf(tmp, sizeof(tmp), "{ra, s0-s1}");
++                break;
++            case 7:
++                snprintf(tmp, sizeof(tmp), "{ra, s0-s2}");
++                break;
++            case 8:
++                snprintf(tmp, sizeof(tmp), "{ra, s0-s3}");
++                break;
++            case 9:
++                snprintf(tmp, sizeof(tmp), "{ra, s0-s4}");
++                break;
++            case 10:
++                snprintf(tmp, sizeof(tmp), "{ra, s0-s5}");
++                break;
++            case 11:
++                snprintf(tmp, sizeof(tmp), "{ra, s0-s6}");
++                break;
++            case 12:
++                snprintf(tmp, sizeof(tmp), "{ra, s0-s7}");
++                break;
++            case 13:
++                snprintf(tmp, sizeof(tmp), "{ra, s0-s8}");
++                break;
++            case 14:
++                snprintf(tmp, sizeof(tmp), "{ra, s0-s9}");
++                break;
++            case 15:
++                snprintf(tmp, sizeof(tmp), "{ra, s0-s11}");
++                break;
++            }
++            append(buf, tmp, buflen);
++            break;
++        }
+         default:
+             break;
+         }
 -- 
 2.25.1
 
