@@ -1,63 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ovsQH-00015V-68
-	for mharc-qemu-riscv@gnu.org; Thu, 17 Nov 2022 22:52:13 -0500
+	id 1ovvQm-0005Xb-15
+	for mharc-qemu-riscv@gnu.org; Fri, 18 Nov 2022 02:04:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ovsQG-00015J-C4; Thu, 17 Nov 2022 22:52:12 -0500
-Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ovsQD-000843-Ni; Thu, 17 Nov 2022 22:52:12 -0500
-Received: from [192.168.3.6] (unknown [180.165.240.202])
- by APP-01 (Coremail) with SMTP id qwCowACHjXVfAXdjGJ9KCg--.27781S2;
- Fri, 18 Nov 2022 11:52:00 +0800 (CST)
-Message-ID: <40bb95cf-774f-f124-6a0c-774695ce5bcb@iscas.ac.cn>
-Date: Fri, 18 Nov 2022 11:51:58 +0800
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ovvQF-0005Qb-Cz
+ for qemu-riscv@nongnu.org; Fri, 18 Nov 2022 02:04:26 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ovvQB-0002BV-OL
+ for qemu-riscv@nongnu.org; Fri, 18 Nov 2022 02:04:21 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ l39-20020a05600c1d2700b003cf93c8156dso3358124wms.4
+ for <qemu-riscv@nongnu.org>; Thu, 17 Nov 2022 23:04:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=utXhzwEiqB7KpE/tore07NskHKcYii5n6w26QQgjgoQ=;
+ b=jXyiN/m2z8a4PfQqMRndRzA66OykXKtRAoJaS7AnV3mM9vaOKhDhVMWKsM4nauo1mw
+ WkyJ3lDwUq1J8Hw0ifPvsBgtiV/TBs3YUaVDBMXFlZieP+2KrfNfVuqIxUxDT5qndQzm
+ 6UMDgTDp/cCF+hEUfvoXqmPamNP+QvYBGMDE84FP0vlzDfLbaeh0pRxyYEPqW5VFEiZU
+ /Df3wBWbmEjgwo6obWfG3oAVtoejz0j4GfvpWhB2cHXdW6rLlmeY4DUScGgSomm3cVFo
+ DpyX+qOdLqssgQUPVpCl6+8kcHacV43essfHdq7VOWRS6igCA2ZAQfBIQMy5+RirCb++
+ Ce3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=utXhzwEiqB7KpE/tore07NskHKcYii5n6w26QQgjgoQ=;
+ b=WAvOP1NhQfQpG/l2DU1gvEdyl0HbEeYQCe4lLOGH4clXU8VG+PkoMiR0YgdzDd0zMn
+ Kf+IWjabcl8+IPAKQkVnpmgiwqVG4M+IRMxDUclCWEh86CkIHpgcdP5WgDb5zMD7wZuC
+ 7VXBs6y1Q6PZ+ef/jXs0xKd7hAn+X3XpWk+y4oe4fDLx35+dhOGtZaztpLjL6V6//EPv
+ DlywicpAvr0A5FaDeTQ4cjoEsw5nt3BgzBd1dYDcnV4URa3n6RXt3x1j6SoJ2pKKoZrq
+ QozCVUbmrsauYYYzI0XQDOTgLQEXW0B3b+lTlCHV7CNevncJfB50kT7B1sZJOclS+Otg
+ BHxw==
+X-Gm-Message-State: ANoB5pmPcm6sibM/jAVn3RpQ1KbX20ygRnOpGzYItixpN7shgwAaaTE+
+ aRSQB1KvKbWONZlOCxVB1UhosQ==
+X-Google-Smtp-Source: AA0mqf5UM9jiILINX851VdudMdtc59fpbjjUUnJIFE8KUhFePPEPlghyCcwXcF3VWgUZNYe+8lNqTw==
+X-Received: by 2002:a05:600c:3d99:b0:3cf:cab4:a42b with SMTP id
+ bi25-20020a05600c3d9900b003cfcab4a42bmr7494360wmb.36.1668755057922; 
+ Thu, 17 Nov 2022 23:04:17 -0800 (PST)
+Received: from [192.168.230.175] (34.red-88-29-175.dynamicip.rima-tde.net.
+ [88.29.175.34]) by smtp.gmail.com with ESMTPSA id
+ v11-20020adfebcb000000b002368424f89esm2796948wrn.67.2022.11.17.23.04.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 17 Nov 2022 23:04:17 -0800 (PST)
+Message-ID: <8b6ead5d-aba4-1ed0-d72f-3a3a5889f29c@linaro.org>
+Date: Fri, 18 Nov 2022 08:04:15 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Cc: liweiwei@iscas.ac.cn, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-Subject: Re: [PATCH v3 7/9] target/riscv: add support for Zcmt extension
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.4.2
+Subject: Re: [PATCH v2 3/3] hw/{misc, riscv}: pfsoc: add system controller as
+ unimplemented
 Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, mchitale@ventanamicro.com
-References: <20221117070316.58447-1-liweiwei@iscas.ac.cn>
- <20221117070316.58447-8-liweiwei@iscas.ac.cn>
- <da87af96-b8e0-d6d1-02d3-a4d3afe8edf0@linaro.org>
- <c117741e-f804-6796-796d-da9cf73dfe8a@iscas.ac.cn>
- <6e529a49-9f1f-d561-e494-de62a0970a0f@linaro.org>
- <69b96731-6e36-bdf8-8a5e-e5ef4dff50b0@iscas.ac.cn>
- <78aac7ea-f204-d18e-1139-5b5785c25543@linaro.org>
-From: weiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <78aac7ea-f204-d18e-1139-5b5785c25543@linaro.org>
+To: Conor Dooley <conor@kernel.org>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Conor Dooley <conor.dooley@microchip.com>
+References: <20221112133414.262448-1-conor@kernel.org>
+ <20221112133414.262448-4-conor@kernel.org> <Y3ZokxEWl64iIIp/@spud>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <Y3ZokxEWl64iIIp/@spud>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACHjXVfAXdjGJ9KCg--.27781S2
-X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
- VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUYg7AC8VAFwI0_Gr0_Xr1l1xkIjI8I6I8E
- 6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28Cjx
- kF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8I
- cVCY1x0267AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87
- Iv6xkF7I0E14v26F4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAK
- zVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx
- 8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwAC
- I402YVCY1x02628vn2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxAIw28IcxkI7VAKI4
- 8JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xv
- wVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjx
- v20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20E
- Y4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267
- AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbXdbUUUUUU==
-X-Originating-IP: [180.165.240.202]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -71,23 +86,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2022 03:52:12 -0000
+X-List-Received-Date: Fri, 18 Nov 2022 07:04:34 -0000
+
+On 17/11/22 18:00, Conor Dooley wrote:
+> On Sat, Nov 12, 2022 at 01:34:15PM +0000, Conor Dooley wrote:
+>> From: Conor Dooley <conor.dooley@microchip.com>
+>>
+>> The system controller on PolarFire SoC is access via a mailbox. The
+>> control registers for this mailbox lie in the "IOSCB" region & the
+>> interrupt is cleared via write to the "SYSREG" region. It also has a
+>> QSPI controller, usually connected to a flash chip, that is used for
+>> storing FPGA bitstreams and used for In-Application Programming (IAP).
+>>
+>> Linux has an implementation of the system controller, through which the
+>> hwrng is accessed, leading to load/store access faults.
+>>
+>> Add the QSPI as unimplemented and a very basic (effectively
+>> unimplemented) version of the system controller's mailbox. Rather than
+>> purely marking the regions as unimplemented, service the mailbox
+>> requests by reporting failures and raising the interrupt so a guest can
+>> better handle the lack of support.
+>>
+>> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+>> ---
+>>   hw/misc/mchp_pfsoc_ioscb.c          | 59 ++++++++++++++++++++++++++++-
+>>   hw/misc/mchp_pfsoc_sysreg.c         | 19 ++++++++--
+>>   hw/riscv/microchip_pfsoc.c          |  6 +++
+>>   include/hw/misc/mchp_pfsoc_ioscb.h  |  3 ++
+>>   include/hw/misc/mchp_pfsoc_sysreg.h |  1 +
+>>   include/hw/riscv/microchip_pfsoc.h  |  1 +
+>>   6 files changed, 83 insertions(+), 6 deletions(-)
 
 
-On 2022/11/18 10:51, Richard Henderson wrote:
-> I don't think any processor will support overlapping, mutual exclusive 
-> extensions.  The decode within the processor would be wildly 
-> complicated by that.
->
-> While you might be able to get away with returning false in this 
-> particular case right now, it's incorrect usage of the tool and might 
-> just come back to cause bugs in the future. 
+>> @@ -143,6 +149,45 @@ static const MemoryRegionOps mchp_pfsoc_io_calib_ddr_ops = {
+>>       .endianness = DEVICE_LITTLE_ENDIAN,
+>>   };
+>>   
+>> +#define SERVICES_SR 0x54
+>> +
+>> +static uint64_t mchp_pfsoc_ctrl_read(void *opaque, hwaddr offset,
+>> +                                     unsigned size)
+>> +{
+>> +    MchpPfSoCIoscbState *s = opaque;
+>> +    uint32_t val = 0;
+>> +
+>> +    switch (offset) {
+>> +    case SERVICES_SR:
+>> +        /*
+>> +         * Although some services have no error codes, most do. All services
+>> +         * that do implement errors, begin their error codes at 1. Treat all
+>> +         * service requests as failures & return 1.
+>> +         * See the "PolarFire® FPGA and PolarFire SoC FPGA System Services"
+>> +         * user guide for more information on service error codes.
+>> +         */
+>> +        val = 1;
+> 
+> Another issue I just spotted here, this should not be returning 1, but
+> rather 1 << 16. The status bits are 31:16 & I was just getting lucky
+> b/c of something wrong with the Linux driver exercising it!
 
-  Yeah, my previous assumption seems not very reasonable.  I'll try to 
-take the check into the cm_jalt helper.
+So your implementation expects 32-bit accesses, thus ...
 
-Regards,
+>> +        qemu_irq_raise(s->irq);
+>> +        break;
+>> +    default:
+>> +        qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
+>> +                      "(size %d, offset 0x%" HWADDR_PRIx ")\n",
+>> +                      __func__, size, offset);
+>> +    }
+>> +
+>> +    return val;
+>> +}
+>> +
+>> +/*
+>> + * use the dummy write, since we are always going to report a failed message
+>> + * and therefore do not care what service is actually requested
+>> + */
+>> +static const MemoryRegionOps mchp_pfsoc_ctrl_ops = {
+>> +    .read = mchp_pfsoc_ctrl_read,
+>> +    .write = mchp_pfsoc_dummy_write,
+>> +    .endianness = DEVICE_LITTLE_ENDIAN,
 
-Weiwei Li
+... you might want to complete this with (at least):
+
+         .impl.min_access_size = 4,
+
+And eventually if this region is only accessible as 32-bit:
+
+         .valid.min_access_size = 4,
+
+>> +};
 
 
