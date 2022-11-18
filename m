@@ -1,78 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ovvQm-0005Xb-15
-	for mharc-qemu-riscv@gnu.org; Fri, 18 Nov 2022 02:04:56 -0500
+	id 1ovvd5-0006at-Ap
+	for mharc-qemu-riscv@gnu.org; Fri, 18 Nov 2022 02:17:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ovvQF-0005Qb-Cz
- for qemu-riscv@nongnu.org; Fri, 18 Nov 2022 02:04:26 -0500
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ovvQB-0002BV-OL
- for qemu-riscv@nongnu.org; Fri, 18 Nov 2022 02:04:21 -0500
-Received: by mail-wm1-x331.google.com with SMTP id
- l39-20020a05600c1d2700b003cf93c8156dso3358124wms.4
- for <qemu-riscv@nongnu.org>; Thu, 17 Nov 2022 23:04:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=utXhzwEiqB7KpE/tore07NskHKcYii5n6w26QQgjgoQ=;
- b=jXyiN/m2z8a4PfQqMRndRzA66OykXKtRAoJaS7AnV3mM9vaOKhDhVMWKsM4nauo1mw
- WkyJ3lDwUq1J8Hw0ifPvsBgtiV/TBs3YUaVDBMXFlZieP+2KrfNfVuqIxUxDT5qndQzm
- 6UMDgTDp/cCF+hEUfvoXqmPamNP+QvYBGMDE84FP0vlzDfLbaeh0pRxyYEPqW5VFEiZU
- /Df3wBWbmEjgwo6obWfG3oAVtoejz0j4GfvpWhB2cHXdW6rLlmeY4DUScGgSomm3cVFo
- DpyX+qOdLqssgQUPVpCl6+8kcHacV43essfHdq7VOWRS6igCA2ZAQfBIQMy5+RirCb++
- Ce3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=utXhzwEiqB7KpE/tore07NskHKcYii5n6w26QQgjgoQ=;
- b=WAvOP1NhQfQpG/l2DU1gvEdyl0HbEeYQCe4lLOGH4clXU8VG+PkoMiR0YgdzDd0zMn
- Kf+IWjabcl8+IPAKQkVnpmgiwqVG4M+IRMxDUclCWEh86CkIHpgcdP5WgDb5zMD7wZuC
- 7VXBs6y1Q6PZ+ef/jXs0xKd7hAn+X3XpWk+y4oe4fDLx35+dhOGtZaztpLjL6V6//EPv
- DlywicpAvr0A5FaDeTQ4cjoEsw5nt3BgzBd1dYDcnV4URa3n6RXt3x1j6SoJ2pKKoZrq
- QozCVUbmrsauYYYzI0XQDOTgLQEXW0B3b+lTlCHV7CNevncJfB50kT7B1sZJOclS+Otg
- BHxw==
-X-Gm-Message-State: ANoB5pmPcm6sibM/jAVn3RpQ1KbX20ygRnOpGzYItixpN7shgwAaaTE+
- aRSQB1KvKbWONZlOCxVB1UhosQ==
-X-Google-Smtp-Source: AA0mqf5UM9jiILINX851VdudMdtc59fpbjjUUnJIFE8KUhFePPEPlghyCcwXcF3VWgUZNYe+8lNqTw==
-X-Received: by 2002:a05:600c:3d99:b0:3cf:cab4:a42b with SMTP id
- bi25-20020a05600c3d9900b003cfcab4a42bmr7494360wmb.36.1668755057922; 
- Thu, 17 Nov 2022 23:04:17 -0800 (PST)
-Received: from [192.168.230.175] (34.red-88-29-175.dynamicip.rima-tde.net.
- [88.29.175.34]) by smtp.gmail.com with ESMTPSA id
- v11-20020adfebcb000000b002368424f89esm2796948wrn.67.2022.11.17.23.04.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 17 Nov 2022 23:04:17 -0800 (PST)
-Message-ID: <8b6ead5d-aba4-1ed0-d72f-3a3a5889f29c@linaro.org>
-Date: Fri, 18 Nov 2022 08:04:15 +0100
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1ovvcp-0006Tv-EI; Fri, 18 Nov 2022 02:17:26 -0500
+Received: from smtp84.cstnet.cn ([159.226.251.84] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1ovvcm-00046w-I7; Fri, 18 Nov 2022 02:17:23 -0500
+Received: from localhost.localdomain (unknown [180.165.240.202])
+ by APP-05 (Coremail) with SMTP id zQCowAAHDbVzMXdjkmwiCg--.64051S3;
+ Fri, 18 Nov 2022 15:17:10 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v4 1/9] target/riscv: add cfg properties for Zc* extension
+Date: Fri, 18 Nov 2022 15:16:56 +0800
+Message-Id: <20221118071704.26959-2-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20221118071704.26959-1-liweiwei@iscas.ac.cn>
+References: <20221118071704.26959-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.4.2
-Subject: Re: [PATCH v2 3/3] hw/{misc, riscv}: pfsoc: add system controller as
- unimplemented
-Content-Language: en-US
-To: Conor Dooley <conor@kernel.org>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Conor Dooley <conor.dooley@microchip.com>
-References: <20221112133414.262448-1-conor@kernel.org>
- <20221112133414.262448-4-conor@kernel.org> <Y3ZokxEWl64iIIp/@spud>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <Y3ZokxEWl64iIIp/@spud>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-CM-TRANSID: zQCowAAHDbVzMXdjkmwiCg--.64051S3
+X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF1DurykXw45KF1Utrb_yoW8KrWrpr
+ 48G3yYkrWDJr17C3yfXF1UK3Z8Wwn2kayIg392q3WxuFW7ArW5XF1vkw1UWF45tFs5Xa1a
+ 9F17CFy5CwsrJa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9l14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+ x26xkF7I0E14v26r1I6r4UM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJw
+ A2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
+ e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
+ 8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
+ jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vIr41l4I
+ 8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AK
+ xVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcV
+ AFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8I
+ cIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r
+ 4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU5SoXUUUUU
+X-Originating-IP: [180.165.240.202]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -86,95 +63,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2022 07:04:34 -0000
+X-List-Received-Date: Fri, 18 Nov 2022 07:17:29 -0000
 
-On 17/11/22 18:00, Conor Dooley wrote:
-> On Sat, Nov 12, 2022 at 01:34:15PM +0000, Conor Dooley wrote:
->> From: Conor Dooley <conor.dooley@microchip.com>
->>
->> The system controller on PolarFire SoC is access via a mailbox. The
->> control registers for this mailbox lie in the "IOSCB" region & the
->> interrupt is cleared via write to the "SYSREG" region. It also has a
->> QSPI controller, usually connected to a flash chip, that is used for
->> storing FPGA bitstreams and used for In-Application Programming (IAP).
->>
->> Linux has an implementation of the system controller, through which the
->> hwrng is accessed, leading to load/store access faults.
->>
->> Add the QSPI as unimplemented and a very basic (effectively
->> unimplemented) version of the system controller's mailbox. Rather than
->> purely marking the regions as unimplemented, service the mailbox
->> requests by reporting failures and raising the interrupt so a guest can
->> better handle the lack of support.
->>
->> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
->> ---
->>   hw/misc/mchp_pfsoc_ioscb.c          | 59 ++++++++++++++++++++++++++++-
->>   hw/misc/mchp_pfsoc_sysreg.c         | 19 ++++++++--
->>   hw/riscv/microchip_pfsoc.c          |  6 +++
->>   include/hw/misc/mchp_pfsoc_ioscb.h  |  3 ++
->>   include/hw/misc/mchp_pfsoc_sysreg.h |  1 +
->>   include/hw/riscv/microchip_pfsoc.h  |  1 +
->>   6 files changed, 83 insertions(+), 6 deletions(-)
+Add properties for Zca,Zcb,Zcf,Zcd,Zcmp,Zcmt extension
+Add check for these properties
 
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/cpu.c | 43 +++++++++++++++++++++++++++++++++++++++++++
+ target/riscv/cpu.h |  6 ++++++
+ 2 files changed, 49 insertions(+)
 
->> @@ -143,6 +149,45 @@ static const MemoryRegionOps mchp_pfsoc_io_calib_ddr_ops = {
->>       .endianness = DEVICE_LITTLE_ENDIAN,
->>   };
->>   
->> +#define SERVICES_SR 0x54
->> +
->> +static uint64_t mchp_pfsoc_ctrl_read(void *opaque, hwaddr offset,
->> +                                     unsigned size)
->> +{
->> +    MchpPfSoCIoscbState *s = opaque;
->> +    uint32_t val = 0;
->> +
->> +    switch (offset) {
->> +    case SERVICES_SR:
->> +        /*
->> +         * Although some services have no error codes, most do. All services
->> +         * that do implement errors, begin their error codes at 1. Treat all
->> +         * service requests as failures & return 1.
->> +         * See the "PolarFire® FPGA and PolarFire SoC FPGA System Services"
->> +         * user guide for more information on service error codes.
->> +         */
->> +        val = 1;
-> 
-> Another issue I just spotted here, this should not be returning 1, but
-> rather 1 << 16. The status bits are 31:16 & I was just getting lucky
-> b/c of something wrong with the Linux driver exercising it!
-
-So your implementation expects 32-bit accesses, thus ...
-
->> +        qemu_irq_raise(s->irq);
->> +        break;
->> +    default:
->> +        qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
->> +                      "(size %d, offset 0x%" HWADDR_PRIx ")\n",
->> +                      __func__, size, offset);
->> +    }
->> +
->> +    return val;
->> +}
->> +
->> +/*
->> + * use the dummy write, since we are always going to report a failed message
->> + * and therefore do not care what service is actually requested
->> + */
->> +static const MemoryRegionOps mchp_pfsoc_ctrl_ops = {
->> +    .read = mchp_pfsoc_ctrl_read,
->> +    .write = mchp_pfsoc_dummy_write,
->> +    .endianness = DEVICE_LITTLE_ENDIAN,
-
-... you might want to complete this with (at least):
-
-         .impl.min_access_size = 4,
-
-And eventually if this region is only accessible as 32-bit:
-
-         .valid.min_access_size = 4,
-
->> +};
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 042fd541b4..1ab04ab246 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -805,6 +805,49 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             }
+         }
+ 
++        if (cpu->cfg.ext_c) {
++            cpu->cfg.ext_zca = true;
++            if (cpu->cfg.ext_f && env->misa_mxl_max == MXL_RV32) {
++                cpu->cfg.ext_zcf = true;
++            }
++            if (cpu->cfg.ext_d) {
++                cpu->cfg.ext_zcd = true;
++            }
++        }
++
++        if (env->misa_mxl_max != MXL_RV32 && cpu->cfg.ext_zcf) {
++            error_setg(errp, "Zcf extension is only relevant to RV32");
++            return;
++        }
++
++        if (!cpu->cfg.ext_f && cpu->cfg.ext_zcf) {
++            error_setg(errp, "Zcf extension requires F extension");
++            return;
++        }
++
++        if (!cpu->cfg.ext_d && cpu->cfg.ext_zcd) {
++            error_setg(errp, "Zcd extensionrequires D extension");
++            return;
++        }
++
++        if ((cpu->cfg.ext_zcf || cpu->cfg.ext_zcd || cpu->cfg.ext_zcb ||
++             cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt) && !cpu->cfg.ext_zca) {
++            error_setg(errp, "Zcf/Zcd/Zcb/Zcmp/Zcmt extensions require Zca "
++                             "extension");
++            return;
++        }
++
++        if (cpu->cfg.ext_zcd && (cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt)) {
++            error_setg(errp, "Zcmp/Zcmt extensions are incompatible with "
++                             "Zcd extension");
++            return;
++        }
++
++        if (cpu->cfg.ext_zcmt && !cpu->cfg.ext_icsr) {
++            error_setg(errp, "Zcmt extension requires Zicsr extension");
++            return;
++        }
++
+         if (cpu->cfg.ext_zk) {
+             cpu->cfg.ext_zkn = true;
+             cpu->cfg.ext_zkr = true;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 9bd539d77a..6e915b6937 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -434,6 +434,12 @@ struct RISCVCPUConfig {
+     bool ext_zbkc;
+     bool ext_zbkx;
+     bool ext_zbs;
++    bool ext_zca;
++    bool ext_zcb;
++    bool ext_zcd;
++    bool ext_zcf;
++    bool ext_zcmp;
++    bool ext_zcmt;
+     bool ext_zk;
+     bool ext_zkn;
+     bool ext_zknd;
+-- 
+2.25.1
 
 
