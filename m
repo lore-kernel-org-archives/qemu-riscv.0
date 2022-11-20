@@ -1,59 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1owtaH-0006ZC-6S
-	for mharc-qemu-riscv@gnu.org; Sun, 20 Nov 2022 18:18:45 -0500
+	id 1owtqy-0001Be-Rm
+	for mharc-qemu-riscv@gnu.org; Sun, 20 Nov 2022 18:36:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1owtaF-0006Yy-Sj; Sun, 20 Nov 2022 18:18:43 -0500
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
+ id 1owtqx-0001BF-9D; Sun, 20 Nov 2022 18:35:59 -0500
+Received: from mail-ua1-x92e.google.com ([2607:f8b0:4864:20::92e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1owtaE-00011r-E3; Sun, 20 Nov 2022 18:18:43 -0500
-Received: by mail-vs1-xe34.google.com with SMTP id i2so9696223vsc.1;
- Sun, 20 Nov 2022 15:18:41 -0800 (PST)
+ id 1owtqu-0003XG-4F; Sun, 20 Nov 2022 18:35:58 -0500
+Received: by mail-ua1-x92e.google.com with SMTP id s16so933342uaq.12;
+ Sun, 20 Nov 2022 15:35:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nRH3xzOacrcCG6lAxQ2xyNzBkLHbMcDLa574MWWnVyg=;
- b=f6y7TdLL7U/a3ToMsATtailShanbA1/GHEt0GVUs4ETylBej1cDzgtPUPT5k1gY/pc
- BYVRVF6caffMG2IlMFwCrUcVOkuv3/LT7oE6QVJoYfzN9d2PCnuXA53f/vGklWJUsZUM
- 9HNSssPeOGZa0KmWWuyRsg5aaGu7RVCRdmoM+7NUrtbBrYaASd5Ii/hKFPlJlzqo8DFG
- he8YWTMIbZfHnEyRY1/qMKHKVrLCpwa/nUB5NUwIy1YWm+JQzIcPesxmsdaKEdywr/tN
- yMYnO8FfP0+EDpNwucNR8fXlTjPo83lKmWXv8ZSt/m8GK+tqFtEcOiOYZgpwqUyn1yV2
- YdOg==
+ bh=LHqEGr3sz58ePSttMR3vEQdMMqcRjIG75xfKL9omUuc=;
+ b=ejaLKF1HKkyCJl+E+5z92yQuGp0DjIOmGoJEznfe+dwL85XE6tAkIWMbptFSu+Edkr
+ 4K4Ch8go7AkT+t+zy+Jca7I274xEzbOma99/klUCTuQ/fesULDpUxQ67fIb8c3IaJ7H+
+ dqJNCbH6Pl+CD47wtU8cWCNFU0OpKeKFGeYq2cLwJfSqMZrhdT3SVN5eqW2VdKil4pMK
+ 7ydXK5ZAC7JTd8ngnw1gVSsfK6bD3UoC5MiC7BnIEAVsOJPpJQldiBmFEFGFRctITwod
+ 4TbSc9cV8WUwAT/EunwjuFFDxaIjk5rTqHoyol2c7/SFACV+KIIxLgR05RtogdujHaca
+ OD3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nRH3xzOacrcCG6lAxQ2xyNzBkLHbMcDLa574MWWnVyg=;
- b=C1KYss1OAu1vrq81lITuQf1VZxTEDERda95+mbFyFJoH7QECiANE3l5SfwrkQaDWeH
- xCYPiA3FCS2RtnZoEzrFSMyRcroTVsx6wL/v3NtGO9cgPwRoB8gnlCp8n73/idK6H/DV
- Mr9pwACsKC0Yq6bdbrOSeDqNI7t6WnT0aZyqqwkjRtG1VZRv5sDfcRrhq9zW78FEE5jb
- lmyXWwnoziHoGdS5FNjXc50cenSgx/6bNTUwlkL8kDWJJuObczaYRfa0bi3nn7FCinYZ
- q6ebOAgvNdPnk76s70I3J4h46FTjHfAqpJFhNd4s/TSz9c0XvTwTlSIdxAiU8v9rgIMc
- 60IA==
-X-Gm-Message-State: ANoB5pmyXSJ/ErsF+eeD8wc3anTJcvimvxXRpx7eRkBfsMiAdoBAd83o
- /k41wu14RN42SdO/C1UMl3vBzSNU5OEyPUpcU8EdnkQNmMY=
-X-Google-Smtp-Source: AA0mqf5YYiESMOBIG2ef/gMc1efTn+wOrJ5JewHIz35XX3scQ74WJW7x2fO85g85OhYpgok11pHr6Sdn+0LyzHu9ZtQ=
-X-Received: by 2002:a05:6102:3bc1:b0:3a7:9b8c:2e4c with SMTP id
- a1-20020a0561023bc100b003a79b8c2e4cmr7707850vsv.72.1668986320712; Sun, 20 Nov
- 2022 15:18:40 -0800 (PST)
+ bh=LHqEGr3sz58ePSttMR3vEQdMMqcRjIG75xfKL9omUuc=;
+ b=Rqlr+IXeo5GLW7r+F0pgDXURrhVZjgcPSaqhV7YYiuB+smquMYyYdTSqCI52n2ujZp
+ JMif8JR0FBjVYv+omduZkSDcvp/s/enKHVwx7STRR9ohMN49kr4qgDmg6uptvhHKy48W
+ +/DBdjjUMBPQ15wpFtYLxVbrdI3aWYqQrxot7Um/j9sxEGQWjNv6T/9Vz+6jpHYPcHov
+ TUFD9m9izkwGLpb5hYUl8wukJUFC4EG+Av2AL+RGcST9x7p6p0a0rKiEN/8FpXU6vH+C
+ nmbSdTPycWBOmnW/lXAMXVw0w40LajTebY0aykAsZUqNx80b+YkDX5hKdjf2PpvL7l6a
+ 9FuQ==
+X-Gm-Message-State: ANoB5pnw+TPuS7ZaGhRMG2bAu2zXghoV7Tr122++PZqT2NguX8fqqbqi
+ Nfwet+BedVP3O7CE28Z7Xa6byDMoUTYrUZpXJ2YVfMw5N39f1w==
+X-Google-Smtp-Source: AA0mqf6Vuq/GVwgoEelq4Qozgrajpl7TOLRW00cPQwO0YNKUDs9sKpRNutkU2rLOkdKXadJU5yY+N9Tn5mA5Fhg2iwI=
+X-Received: by 2002:ab0:2a53:0:b0:3d8:d599:ef49 with SMTP id
+ p19-20020ab02a53000000b003d8d599ef49mr8026146uar.96.1668987354597; Sun, 20
+ Nov 2022 15:35:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20221118091858.242569-1-richard.henderson@linaro.org>
- <20221118091858.242569-6-richard.henderson@linaro.org>
-In-Reply-To: <20221118091858.242569-6-richard.henderson@linaro.org>
+References: <20221016124726.102129-1-mchitale@ventanamicro.com>
+ <20221016124726.102129-5-mchitale@ventanamicro.com>
+In-Reply-To: <20221016124726.102129-5-mchitale@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 21 Nov 2022 09:18:14 +1000
-Message-ID: <CAKmqyKP3DxdtPOM4q3GjXpazck8kCoTJiiAPwmoL21QQrVE3aA@mail.gmail.com>
-Subject: Re: [PATCH for-8.0 5/7] target/riscv: Use QEMU_IOTHREAD_LOCK_GUARD in
- riscv_cpu_update_mip
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
+Date: Mon, 21 Nov 2022 09:35:28 +1000
+Message-ID: <CAKmqyKO+HQ7dtGQwaJFG481vkyMfX-tXrux2rmrGkfAz54dBbQ@mail.gmail.com>
+Subject: Re: [PATCH v11 4/5] target/riscv: smstateen check for fcsr
+To: Mayuresh Chitale <mchitale@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ Weiwei Li <liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92e;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,62 +73,116 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Nov 2022 23:18:44 -0000
+X-List-Received-Date: Sun, 20 Nov 2022 23:35:59 -0000
 
-On Fri, Nov 18, 2022 at 7:22 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Sun, Oct 16, 2022 at 11:09 PM Mayuresh Chitale
+<mchitale@ventanamicro.com> wrote:
 >
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+> If smstateen is implemented and sstateen0.fcsr is clear then the floating point
+> operations must return illegal instruction exception or virtual instruction
+> trap, if relevant.
+>
+> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > ---
-> Cc: Alistair Francis <alistair.francis@wdc.com>
-> Cc: Bin Meng <bin.meng@windriver.com>
-> Cc: qemu-riscv@nongnu.org
-> ---
->  target/riscv/cpu_helper.c | 10 +---------
->  1 file changed, 1 insertion(+), 9 deletions(-)
+>  target/riscv/csr.c                        | 23 ++++++++++++
+>  target/riscv/insn_trans/trans_rvf.c.inc   | 43 +++++++++++++++++++++--
+>  target/riscv/insn_trans/trans_rvzfh.c.inc | 12 +++++++
+>  3 files changed, 75 insertions(+), 3 deletions(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 278d163803..241d06bab8 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -610,7 +610,6 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
->      CPURISCVState *env = &cpu->env;
->      CPUState *cs = CPU(cpu);
->      uint64_t gein, vsgein = 0, vstip = 0, old = env->mip;
-> -    bool locked = false;
->
->      if (riscv_cpu_virt_enabled(env)) {
->          gein = get_field(env->hstatus, HSTATUS_VGEIN);
-> @@ -621,10 +620,7 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
->      mask = ((mask == MIP_VSTIP) && env->vstime_irq) ? 0 : mask;
->      vstip = env->vstime_irq ? MIP_VSTIP : 0;
->
-> -    if (!qemu_mutex_iothread_locked()) {
-> -        locked = true;
-> -        qemu_mutex_lock_iothread();
-> -    }
-> +    QEMU_IOTHREAD_LOCK_GUARD();
->
->      env->mip = (env->mip & ~mask) | (value & mask);
->
-> @@ -634,10 +630,6 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
->          cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 71236f2b5d..8b25f885ec 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -84,6 +84,10 @@ static RISCVException fs(CPURISCVState *env, int csrno)
+>          !RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
+>          return RISCV_EXCP_ILLEGAL_INST;
 >      }
+> +
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> +        return smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR);
+> +    }
+>  #endif
+>      return RISCV_EXCP_NONE;
+>  }
+> @@ -2023,6 +2027,9 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
+>                                        target_ulong new_val)
+>  {
+>      uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |= SMSTATEEN0_FCSR;
+> +    }
 >
-> -    if (locked) {
-> -        qemu_mutex_unlock_iothread();
-> -    }
-> -
->      return old;
+>      return write_mstateen(env, csrno, wr_mask, new_val);
+>  }
+> @@ -2059,6 +2066,10 @@ static RISCVException write_mstateen0h(CPURISCVState *env, int csrno,
+>  {
+>      uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+>
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |= SMSTATEEN0_FCSR;
+> +    }
+> +
+>      return write_mstateenh(env, csrno, wr_mask, new_val);
 >  }
 >
-> --
-> 2.34.1
+> @@ -2096,6 +2107,10 @@ static RISCVException write_hstateen0(CPURISCVState *env, int csrno,
+>  {
+>      uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
 >
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |= SMSTATEEN0_FCSR;
+> +    }
+> +
+>      return write_hstateen(env, csrno, wr_mask, new_val);
+>  }
 >
+> @@ -2135,6 +2150,10 @@ static RISCVException write_hstateen0h(CPURISCVState *env, int csrno,
+>  {
+>      uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+>
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |= SMSTATEEN0_FCSR;
+> +    }
+> +
+>      return write_hstateenh(env, csrno, wr_mask, new_val);
+>  }
+>
+> @@ -2182,6 +2201,10 @@ static RISCVException write_sstateen0(CPURISCVState *env, int csrno,
+>  {
+>      uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+>
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |= SMSTATEEN0_FCSR;
+> +    }
+> +
+>      return write_sstateen(env, csrno, wr_mask, new_val);
+>  }
+>
+> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
+> index a1d3eb52ad..93657680c6 100644
+> --- a/target/riscv/insn_trans/trans_rvf.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvf.c.inc
+> @@ -24,9 +24,46 @@
+>              return false; \
+>  } while (0)
+>
+> -#define REQUIRE_ZFINX_OR_F(ctx) do {\
+> -    if (!ctx->cfg_ptr->ext_zfinx) { \
+> -        REQUIRE_EXT(ctx, RVF); \
+> +#ifndef CONFIG_USER_ONLY
+> +static inline bool smstateen_fcsr_check(DisasContext *ctx, int index)
+> +{
+> +    CPUState *cpu = ctx->cs;
+> +    CPURISCVState *env = cpu->env_ptr;
+> +    uint64_t stateen = env->mstateen[index];
+
+Sorry I missed this the first time around. You can't access env here
+
+Richard pointed it out here:
+https://patchwork.kernel.org/project/qemu-devel/patch/20221117070316.58447-8-liweiwei@iscas.ac.cn/#25095773
+
+I'm going to drop this patch and patch v5
+
+Alistair
 
