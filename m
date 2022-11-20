@@ -1,60 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1owtyu-0002mh-8z
-	for mharc-qemu-riscv@gnu.org; Sun, 20 Nov 2022 18:44:12 -0500
+	id 1owu0A-0003DV-5R
+	for mharc-qemu-riscv@gnu.org; Sun, 20 Nov 2022 18:45:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1owtys-0002mT-Vb; Sun, 20 Nov 2022 18:44:11 -0500
-Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
+ id 1owu00-0003By-SP; Sun, 20 Nov 2022 18:45:22 -0500
+Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1owtyq-0004pS-TC; Sun, 20 Nov 2022 18:44:10 -0500
-Received: by mail-vs1-xe35.google.com with SMTP id q127so9723834vsa.7;
- Sun, 20 Nov 2022 15:44:08 -0800 (PST)
+ id 1owtzy-00056Q-5H; Sun, 20 Nov 2022 18:45:19 -0500
+Received: by mail-ua1-x92f.google.com with SMTP id y15so3523065uan.6;
+ Sun, 20 Nov 2022 15:45:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H27bgExd3YJaD77DXbefeV216L4Ggd2vSj44q93Rlic=;
- b=aHb8LUt1QYci7gB+LY3rtsjZ47mMEAl7ze7w1oCqD+eIMbTZLeDYxAqMFhCakBZx6O
- kPv3LIiCI+XgWslu1kB0ymGqut18buyWSq/XhBeUF83BgqXlnc6Vuj3/h4olHAXDYj0J
- aHs3QRYLrv/Wvhcobj8BthgN/vBpSjYe8SMBDrAFnNOUu0aot6IK93VwrmSWTV04K704
- EncGFjLTJ56mwN+y8c7jBcMzAEuKc7qGxIJUhTuzLEkCn80jhko8YLgTWwu9cJxN7ex/
- 6IdWvsTOAYn9RDj7hhrWkEp/iVLRkdFC08d5eZtw75r1dcbF+UFZq6fyKSdXy7xuQ8ss
- oP9w==
+ bh=0rqkzyxvGJzv05iKHkaZZIaa1mj/Roj3+0MDeJwAIrI=;
+ b=oX6GmNE1nwhpp18jBgFTgWFCqGg+S60ZyS0FCmzgIhBYzFdFPobnn6Tzc4r24ngirF
+ hdzBK5DwCSo9FbWUPlyYw8TZVy59f5aJxLgVopjb9S5fifh1mSOf5Iqkv7wzj3XYjOtg
+ 41IC0HHJkG058hOvLoT8BcagdORuXEnuwTOM20ESP6jcwy5vD7JZ+fUo5R8RAj5JfZEL
+ AhW9yEHXZonC4ou+92fjuaDgmTifqWuaI502Lmu3PDmmXvo0+Tq8KP891BqrJE3sgeUK
+ +2OTfQW+5rp+fyvTcMdMmLXNerSFrpLf7zjrPlEeqs3i91zELlphf+rrjJm0uK0QcHHK
+ 4DWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=H27bgExd3YJaD77DXbefeV216L4Ggd2vSj44q93Rlic=;
- b=j3mfaTF1Dtk7UALx5Kn7QWQPeDipfhA32wm8gx7KNsX0UuCh90LQdg3nFWLlu9dqXL
- wE/v4Qn1j7ik47nD9Y79d/4H3SsGz/WNBFPPXl8309iUQLyZF0+ltV6f9MrSS6vIWBvD
- xkiyTYv3f5CK5KF+suVk9DCYBHUH4NyVu8bZAtOwRk7nqrMF9s4e892dZg4i5s+Ceiwr
- 3Eux5Y/WYfbzwawVsnLHrTF1eGOkLuVpvrI5gtqm0xTsV8Yj2czKA8ZL9dhN3mZGpttj
- DQsnyq6h+GGICVRdQiwKjlMAZnz+Sor5DMODneMM+NkpWq0ohloa+dt+vobMtFDK7fSg
- NUPQ==
-X-Gm-Message-State: ANoB5pnKRQMj5cDnSJS30PnBTwCeL7qdskFhBuB68uRusTRJIx72eIxT
- ZXibSYeERwBgrAXRfDjjELVw7BIhUfCh5uHbTPI=
-X-Google-Smtp-Source: AA0mqf5NjkkHhUKAScS+pHbKFor4bY800ydlsHzlRJ36JGxjwasEs/Brb8ZEloFLYFMgHysT3n7BvlRR+VPHMTZbVuI=
-X-Received: by 2002:a67:f7d8:0:b0:358:3594:dfad with SMTP id
- a24-20020a67f7d8000000b003583594dfadmr8447398vsp.54.1668987847535; Sun, 20
- Nov 2022 15:44:07 -0800 (PST)
+ bh=0rqkzyxvGJzv05iKHkaZZIaa1mj/Roj3+0MDeJwAIrI=;
+ b=Q1b3A5dkAJZf6/Wj8zRYAM03mZ0ezH91s4CztyxbUd65uWPNtdaUKBQxooxGbGcvce
+ gnPZ0CfX1WJktyWvGNFK40QkUeppREo4IDg+py3Au3EugOhHiCRlCNExS46hQAQL4ez2
+ w8o+/8bgv7UQGFjLON2KZp/thjXXnAS4h2RPsjtPvbHphTzNfX520//io0l2upuR0WFZ
+ +scPffVmg0p0H26299xOeJR9epu3SM3Xu8IKMfKcy0OFxHpl4iSO65cTnpfguXk4Y3Vj
+ HspS/9eI6WS8OwIs8lshJxSK7bsIRffgO1bwA5oEd9XY6yrtqglNB9CIR2Z4Jzxe8ky1
+ nc5w==
+X-Gm-Message-State: ANoB5pnSl5ebk8GCcLl4ybt0Jh1uVlcUagN3KJJwiCqJsZI5mvj1bhFE
+ oabZ9gj68Evk/C6whOxh/JnrwYeiUeeuKC6eWtg=
+X-Google-Smtp-Source: AA0mqf6yRwxrcJboSSiavde1nBXmWqk98RyWDYUwYeY2K5jVovLSXNskZ0mPkFJMgsceSdeDUVSdaCKxbYK8hf0Sf3Q=
+X-Received: by 2002:ab0:6592:0:b0:408:fefb:c1a9 with SMTP id
+ v18-20020ab06592000000b00408fefbc1a9mr7955949uam.38.1668987916679; Sun, 20
+ Nov 2022 15:45:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20221117072841.240839-1-alexghiti@rivosinc.com>
-In-Reply-To: <20221117072841.240839-1-alexghiti@rivosinc.com>
+References: <20221113095101.3395628-1-atishp@rivosinc.com>
+In-Reply-To: <20221113095101.3395628-1-atishp@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 21 Nov 2022 09:43:41 +1000
-Message-ID: <CAKmqyKPU0TidBvwKxgAO0FhgizFMO3W3EEvGLGgN+=MMZ7iB_w@mail.gmail.com>
-Subject: Re: [PATCH] riscv: Add RISCVCPUConfig.satp_mode to set sv48, sv57,
- etc.
-To: Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Ludovic Henry <git@ludovic.dev>
+Date: Mon, 21 Nov 2022 09:44:50 +1000
+Message-ID: <CAKmqyKPgC+Jwn=-sq0MQaVyhYq75+6a3EY1r7tgqdg0PacZC7w@mail.gmail.com>
+Subject: Re: [PATCH v2] hw/riscv: virt: Remove the redundant ipi-id property
+To: Atish Patra <atishp@rivosinc.com>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,172 +73,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Nov 2022 23:44:11 -0000
+X-List-Received-Date: Sun, 20 Nov 2022 23:45:24 -0000
 
-On Fri, Nov 18, 2022 at 12:26 AM Alexandre Ghiti <alexghiti@rivosinc.com> wrote:
+On Sun, Nov 13, 2022 at 7:52 PM Atish Patra <atishp@rivosinc.com> wrote:
 >
-> RISC-V specifies multiple sizes for addressable memory and Linux probes for
-> the machine's support at startup via the satp CSR register (done in
-> csr.c:validate_vm).
+> The imsic DT binding[1] has changed and no longer require an ipi-id.
+> The latest IMSIC driver dynamically allocates ipi id if slow-ipi
+> is not defined.
 >
-> As per the specification, sv64 must support sv57, which in turn must
-> support sv48...etc. So we can restrict machine support by simply setting the
-> "highest" supported mode in the satp_mode property. And the bare mode is
-> always supported.
+> Get rid of the unused dt property which may lead to confusion.
 >
-> You can set this new property as follows:
-> -cpu rv64,satp-mode=sv48 # Linux will boot using sv48 scheme
-> -cpu rv64,satp-mode=sv39 # Linux will boot using sv39 scheme
+> [1] https://lore.kernel.org/lkml/20221111044207.1478350-5-apatel@ventanamicro.com/
 >
-> In addition, we now correctly set the device-tree entry 'mmu-type' using
-> this new satp_mode property.
->
-> Co-Developed-by: Ludovic Henry <git@ludovic.dev>
-> Signed-off-by: Ludovic Henry <git@ludovic.dev>
-> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> ---
->  hw/riscv/virt.c    | 15 ++++++---------
->  target/riscv/cpu.c | 45 +++++++++++++++++++++++++++++++++++++++++++++
->  target/riscv/cpu.h |  3 +++
->  target/riscv/csr.c |  6 ++++--
->  4 files changed, 58 insertions(+), 11 deletions(-)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index a5bc7353b4..77484b5cae 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -228,7 +228,7 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
->      int cpu;
->      uint32_t cpu_phandle;
->      MachineState *mc = MACHINE(s);
-> -    char *name, *cpu_name, *core_name, *intc_name;
-> +    char *name, *cpu_name, *core_name, *intc_name, *sv_name;
->
->      for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
->          cpu_phandle = (*phandle)++;
-> @@ -236,14 +236,11 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
->          cpu_name = g_strdup_printf("/cpus/cpu@%d",
->              s->soc[socket].hartid_base + cpu);
->          qemu_fdt_add_subnode(mc->fdt, cpu_name);
-> -        if (riscv_feature(&s->soc[socket].harts[cpu].env,
-> -                          RISCV_FEATURE_MMU)) {
-> -            qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type",
-> -                                    (is_32_bit) ? "riscv,sv32" : "riscv,sv48");
-> -        } else {
-> -            qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type",
-> -                                    "riscv,none");
-> -        }
-> +
-> +        sv_name = g_strdup_printf("riscv,%s",
-> +                                  s->soc[socket].harts[cpu].cfg.satp_mode_str);
-> +        qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type", sv_name);
-> +
->          name = riscv_isa_string(&s->soc[socket].harts[cpu]);
->          qemu_fdt_setprop_string(mc->fdt, cpu_name, "riscv,isa", name);
->          g_free(name);
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index d14e95c9dc..efdb530ad9 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -907,6 +907,48 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->       }
->  #endif
->
-> +    /*
-> +     * Either a cpu sets its supported satp_mode in XXX_cpu_init
-> +     * or the user sets this value using satp_mode property.
-> +     */
-> +    bool rv32 = riscv_cpu_mxl(&cpu->env) == MXL_RV32;
-> +    if (cpu->cfg.satp_mode_str) {
-> +        if (!g_strcmp0(cpu->cfg.satp_mode_str, "none"))
-> +            cpu->cfg.satp_mode = VM_1_10_MBARE;
-> +        else if (!g_strcmp0(cpu->cfg.satp_mode_str, "sv32") && rv32)
-> +            cpu->cfg.satp_mode = VM_1_10_SV32;
-> +        else if (!g_strcmp0(cpu->cfg.satp_mode_str, "sv39") && !rv32)
-> +            cpu->cfg.satp_mode = VM_1_10_SV39;
-> +        else if (!g_strcmp0(cpu->cfg.satp_mode_str, "sv48") && !rv32)
-> +            cpu->cfg.satp_mode = VM_1_10_SV48;
-> +        else if (!g_strcmp0(cpu->cfg.satp_mode_str, "sv57") && !rv32)
-> +            cpu->cfg.satp_mode = VM_1_10_SV57;
-> +        else if (!g_strcmp0(cpu->cfg.satp_mode_str, "sv64") && !rv32)
-> +            cpu->cfg.satp_mode = VM_1_10_SV64;
-> +        else {
-> +            error_report("Unknown option for satp_mode: %s",
-> +                         cpu->cfg.satp_mode_str);
-> +            exit(EXIT_FAILURE);
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
 
-You should use error_setg() and return here instead
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> +        }
-> +    } else {
-> +        /*
-> +         * If unset by both the user and the cpu, we fallback to sv32 for 32-bit
-> +         * or sv57 for 64-bit when a MMU is present, and bare otherwise.
-> +         */
-> +        if (riscv_feature(&cpu->env, RISCV_FEATURE_MMU)) {
-> +            if (rv32) {
-> +                cpu->cfg.satp_mode_str = g_strdup("sv32");
-> +                cpu->cfg.satp_mode = VM_1_10_SV32;
-> +            } else {
-> +                cpu->cfg.satp_mode_str = g_strdup("sv57");
-> +                cpu->cfg.satp_mode = VM_1_10_SV57;
-> +            }
-> +        } else {
-> +            cpu->cfg.satp_mode_str = g_strdup("none");
-> +            cpu->cfg.satp_mode = VM_1_10_MBARE;
-> +        }
-> +    }
-> +
->      riscv_cpu_register_gdb_regs_for_features(cs);
+> ---
+>  hw/riscv/virt.c         | 2 --
+>  include/hw/riscv/virt.h | 1 -
+>  2 files changed, 3 deletions(-)
 >
->      qemu_init_vcpu(cs);
-> @@ -1094,6 +1136,9 @@ static Property riscv_cpu_properties[] = {
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index a5bc7353b412..0bc0964e42a8 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -546,8 +546,6 @@ static void create_fdt_imsic(RISCVVirtState *s, const MemMapEntry *memmap,
+>          riscv_socket_count(mc) * sizeof(uint32_t) * 4);
+>      qemu_fdt_setprop_cell(mc->fdt, imsic_name, "riscv,num-ids",
+>          VIRT_IRQCHIP_NUM_MSIS);
+> -    qemu_fdt_setprop_cells(mc->fdt, imsic_name, "riscv,ipi-id",
+> -        VIRT_IRQCHIP_IPI_MSI);
+>      if (riscv_socket_count(mc) > 1) {
+>          qemu_fdt_setprop_cell(mc->fdt, imsic_name, "riscv,hart-index-bits",
+>              imsic_num_bits(imsic_max_hart_per_socket));
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index be4ab8fe7f71..62513e075c47 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -93,7 +93,6 @@ enum {
 >
->      DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false),
->      DEFINE_PROP_BOOL("rvv_ma_all_1s", RISCVCPU, cfg.rvv_ma_all_1s, false),
-> +
-> +    DEFINE_PROP_STRING("satp-mode", RISCVCPU, cfg.satp_mode_str),
-> +
->      DEFINE_PROP_END_OF_LIST(),
->  };
+>  #define VIRT_PLATFORM_BUS_NUM_IRQS 32
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 3a9e25053f..a6c229470b 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -480,6 +480,9 @@ struct RISCVCPUConfig {
->      bool debug;
->
->      bool short_isa_string;
-> +
-> +    uint8_t satp_mode;
-> +    char *satp_mode_str;
->  };
->
->  typedef struct RISCVCPUConfig RISCVCPUConfig;
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 5c9a7ee287..d26b830f1a 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1109,10 +1109,12 @@ static RISCVException read_mstatus(CPURISCVState *env, int csrno,
->
->  static int validate_vm(CPURISCVState *env, target_ulong vm)
->  {
-> +    vm &= 0xf;
-> +
->      if (riscv_cpu_mxl(env) == MXL_RV32) {
-> -        return valid_vm_1_10_32[vm & 0xf];
-> +        return valid_vm_1_10_32[vm] && (vm <= RISCV_CPU(env_cpu(env))->cfg.satp_mode);
->      } else {
-> -        return valid_vm_1_10_64[vm & 0xf];
-> +        return valid_vm_1_10_64[vm] && (vm <= RISCV_CPU(env_cpu(env))->cfg.satp_mode);
->      }
->  }
->
+> -#define VIRT_IRQCHIP_IPI_MSI 1
+>  #define VIRT_IRQCHIP_NUM_MSIS 255
+>  #define VIRT_IRQCHIP_NUM_SOURCES VIRTIO_NDEV
+>  #define VIRT_IRQCHIP_NUM_PRIO_BITS 3
 > --
-> 2.37.2
+> 2.25.1
 >
 >
 
