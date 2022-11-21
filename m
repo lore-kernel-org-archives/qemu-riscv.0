@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ox161-000517-5Q
-	for mharc-qemu-riscv@gnu.org; Mon, 21 Nov 2022 02:20:02 -0500
+	id 1ox17C-00064W-Ta
+	for mharc-qemu-riscv@gnu.org; Mon, 21 Nov 2022 02:21:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ox160-00050T-8l; Mon, 21 Nov 2022 02:20:00 -0500
-Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929])
+ id 1ox17B-00061J-V9; Mon, 21 Nov 2022 02:21:13 -0500
+Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ox15y-0007D0-OL; Mon, 21 Nov 2022 02:20:00 -0500
-Received: by mail-ua1-x929.google.com with SMTP id h11so683587uar.4;
- Sun, 20 Nov 2022 23:19:58 -0800 (PST)
+ id 1ox178-0007aB-1Y; Mon, 21 Nov 2022 02:21:12 -0500
+Received: by mail-vs1-xe2c.google.com with SMTP id p4so10356145vsa.11;
+ Sun, 20 Nov 2022 23:21:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8d+pWw2j4EB1Vf39qXDAYwIuTnVYV45JZkZZ5KG1gw8=;
- b=CvE0Te013Oz57soyjwToWyKhbo2xILEBeqcQyW2BAr9LStOKPe2ahPq6WJKOFuqQsZ
- UGEHV2Ct7c51Zs05A1wcDgkVaM5Evzl/KAn0ELlveqBEuw73m03mpUiFu7Avw4+3t+dJ
- 3izI741Vepe3lo3/Tg4Ri8XNJJJ8Dj9OpkASHLPtwRhGuK/CfPqUYF9Ps0tRj+zKPLbQ
- SOnXya8FHycP+UVMGHCDSfcA3QGmSpXVWo72AOhh+E9OBvP1lZ0sXcxRmClz45Fot/38
- IF3s1jYOthUn+2/B+IXv3HPE0lrn+r8LYJp0k4pCXuQnC7Tljo1ggXVc7hMarTyqL2Hv
- hUPQ==
+ bh=YfgFvdlKn85PiEBEgBb+6Rnv2J2SWfU0TtDFciMICX8=;
+ b=UOJBga2aKMHzp/ihcW7RqT4tsw7pPZbcIO4YqC0XtAh1lCzicKeas8hV9BNprSTT51
+ 728UqOdtRA3S8wMuXuu/XwVWRz6r11ECNmZKPq9o8zx99/ygaNUbn2tzlxWEtAyQT9P4
+ z+If35ZyEuyXYTftoQrmt6D4k8Oz3hFYn02HSzAEmb3S0TUKCJfv7dmuJOuGG2BwdRBU
+ gcyGAfL87RlIv2gjM9gexrrGYfwuQ6o43D+M93Rm3ntTN54SO+h6CI5Ek9XkbK/sMvyD
+ i1BXowAES62GiqC/hpj0TDuR+HEdPiaG+75Ip0CFaffFu1By/6LmBfAnOzioIr/Gu+dj
+ 42HA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8d+pWw2j4EB1Vf39qXDAYwIuTnVYV45JZkZZ5KG1gw8=;
- b=q7oxqAGwQ6SV6iDGz0YcHKByQ5R96Ejt2IqxN7o4oBiAwCov/wCs3b85bg9T3Nn7d3
- N/PN2DiC504lmsS/mnKJtlHniY4wY38laZ4oli35VKUfkNDlp2M8OwVfu/soRZdCm+zu
- 1AcKfW79PvOwUvLbLjKZTIoiSBr1G7yW0xgXHxatjkOldd6gBSJQxkzPrHAPL6DlXaQo
- AR2uLXCqNO1h3+fWlnj1Zdv+G4y0DezGUBdxu2OFdyT7zL2AulamklbZT5QducPsW8Q0
- bFCkUDWLpI6W/jj334Iuw5Rpyyjc/ba0MU4ukHk8+BDAdgOHvCLHoWKyVAeo2X/GAv3y
- zNWg==
-X-Gm-Message-State: ANoB5pls/nhmAOa39Vg9oDYWsgG6ChQQJVHPDHCARE6GH3HTmnD3LsgW
- U1KXQx8EJNDHuwrrP9rcG5T4gE2TvpF7qCdAZ0U=
-X-Google-Smtp-Source: AA0mqf4DfQlktcTfpkvwUaOsigCKDu3P3q/p0tpSOsgnxS6KVjLlwRVQUyC1cAKek9d3SVp2k0ZSxGnhxIAfwWHUaMo=
-X-Received: by 2002:ab0:650d:0:b0:40d:468:3e79 with SMTP id
- w13-20020ab0650d000000b0040d04683e79mr9292756uam.11.1669015197271; Sun, 20
- Nov 2022 23:19:57 -0800 (PST)
+ bh=YfgFvdlKn85PiEBEgBb+6Rnv2J2SWfU0TtDFciMICX8=;
+ b=KpV975C9M2PIiXLlJpid3v6RIDnz6uoLG0TPQe11KiE/RN2TbAzd3smHb114rukigv
+ 3x0Jie2mmHr/10ftH5jLAI8PCrEIDfEnzMD0Ryy6pHy+jUI2SkDLxkeo1ukE8eI0ORJp
+ QN1lHkAKPu/t+vZCfOmnBByUXsrh8OdCBiEF4S2z8w1PkOyFz5G7t71S+FdmxxmDU5iu
+ Ny/5cNLMfzexcO3ozT038fwRSpXs7p9icq3vMOdcW2pEEl+k5YIvcaPzdU/SI3QJZCro
+ BBzEX+U6wAnM5zBuWNGlbCI/RaiNJlzDDVwm79yc+fCKyDwwoBkSYw9rkS7GscsAIAVo
+ 3HlQ==
+X-Gm-Message-State: ANoB5pn5kjzWiuGNZGuP8kHaCiHnpQ7Cjmq2nrjxz/AX4gHmfkeYNwP/
+ 7UIvAlvk5Eu/jlBFQua00jX+El2E54QQqb8GX1Q=
+X-Google-Smtp-Source: AA0mqf4GkWgi3HOI9I9sNKBh37G++TLaIiFR5GuBv2rd2CGhx0EavHNKk92W/xADonrJFTl2EhEES8N/BwxQCq563NM=
+X-Received: by 2002:a05:6102:11f1:b0:3a6:fde0:cf74 with SMTP id
+ e17-20020a05610211f100b003a6fde0cf74mr1316236vsg.73.1669015267227; Sun, 20
+ Nov 2022 23:21:07 -0800 (PST)
 MIME-Version: 1.0
 References: <20221118123728.49319-1-liweiwei@iscas.ac.cn>
- <20221118123728.49319-4-liweiwei@iscas.ac.cn>
-In-Reply-To: <20221118123728.49319-4-liweiwei@iscas.ac.cn>
+ <20221118123728.49319-5-liweiwei@iscas.ac.cn>
+In-Reply-To: <20221118123728.49319-5-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 21 Nov 2022 17:19:30 +1000
-Message-ID: <CAKmqyKMrEgE=BycjfdvQM84nMz3kaoWO-PnjaEKWfzXr+U9C4w@mail.gmail.com>
-Subject: Re: [PATCH v5 3/9] target/riscv: add support for Zcf extension
+Date: Mon, 21 Nov 2022 17:20:40 +1000
+Message-ID: <CAKmqyKMRd3nvxqjz6VNhw-LHmLA52THnwiqV0+tBf02Jsqq8ew@mail.gmail.com>
+Subject: Re: [PATCH v5 4/9] target/riscv: add support for Zcd extension
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::929;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x929.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,11 +74,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2022 07:20:00 -0000
+X-List-Received-Date: Mon, 21 Nov 2022 07:21:14 -0000
 
-On Fri, Nov 18, 2022 at 10:44 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Fri, Nov 18, 2022 at 10:40 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> Separate c_flw/c_fsw from flw/fsw to add check for Zcf extension
+> Separate c_fld/c_fsd from fld/fsd to add additional check for
+> c.fld{sp}/c.fsd{sp} which is useful for zcmp/zcmt to reuse
+> their encodings
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
@@ -90,73 +92,80 @@ Alistair
 
 > ---
 >  target/riscv/insn16.decode              |  8 ++++----
->  target/riscv/insn_trans/trans_rvf.c.inc | 18 ++++++++++++++++++
+>  target/riscv/insn_trans/trans_rvd.c.inc | 18 ++++++++++++++++++
 >  2 files changed, 22 insertions(+), 4 deletions(-)
 >
 > diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-> index ccfe59f294..f3ea650325 100644
+> index f3ea650325..b62664b6af 100644
 > --- a/target/riscv/insn16.decode
 > +++ b/target/riscv/insn16.decode
-> @@ -109,11 +109,11 @@ sw                110  ... ... .. ... 00 @cs_w
->  # *** RV32C and RV64C specific Standard Extension (Quadrant 0) ***
->  {
->    ld              011  ... ... .. ... 00 @cl_d
-> -  flw             011  ... ... .. ... 00 @cl_w
-> +  c_flw           011  ... ... .. ... 00 @cl_w
+> @@ -97,12 +97,12 @@
 >  }
 >  {
->    sd              111  ... ... .. ... 00 @cs_d
-> -  fsw             111  ... ... .. ... 00 @cs_w
-> +  c_fsw           111  ... ... .. ... 00 @cs_w
+>    lq              001  ... ... .. ... 00 @cl_q
+> -  fld             001  ... ... .. ... 00 @cl_d
+> +  c_fld           001  ... ... .. ... 00 @cl_d
 >  }
+>  lw                010  ... ... .. ... 00 @cl_w
+>  {
+>    sq              101  ... ... .. ... 00 @cs_q
+> -  fsd             101  ... ... .. ... 00 @cs_d
+> +  c_fsd           101  ... ... .. ... 00 @cs_d
+>  }
+>  sw                110  ... ... .. ... 00 @cs_w
 >
->  # *** RV32/64C Standard Extension (Quadrant 1) ***
-> @@ -174,9 +174,9 @@ sw                110 .  .....  ..... 10 @c_swsp
+> @@ -148,7 +148,7 @@ addw              100 1 11 ... 01 ... 01 @cs_2
+>  slli              000 .  .....  ..... 10 @c_shift2
 >  {
->    c64_illegal     011 -  00000  ----- 10 # c.ldsp, RES rd=0
->    ld              011 .  .....  ..... 10 @c_ldsp
-> -  flw             011 .  .....  ..... 10 @c_lwsp
-> +  c_flw           011 .  .....  ..... 10 @c_lwsp
+>    lq              001  ... ... .. ... 10 @c_lqsp
+> -  fld             001 .  .....  ..... 10 @c_ldsp
+> +  c_fld           001 .  .....  ..... 10 @c_ldsp
 >  }
 >  {
->    sd              111 .  .....  ..... 10 @c_sdsp
-> -  fsw             111 .  .....  ..... 10 @c_swsp
-> +  c_fsw           111 .  .....  ..... 10 @c_swsp
+>    illegal         010 -  00000  ----- 10 # c.lwsp, RES rd=0
+> @@ -166,7 +166,7 @@ slli              000 .  .....  ..... 10 @c_shift2
 >  }
-> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-> index 93657680c6..426518957b 100644
-> --- a/target/riscv/insn_trans/trans_rvf.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvf.c.inc
-> @@ -24,6 +24,12 @@
->              return false; \
+>  {
+>    sq              101  ... ... .. ... 10 @c_sqsp
+> -  fsd             101   ......  ..... 10 @c_sdsp
+> +  c_fsd           101   ......  ..... 10 @c_sdsp
+>  }
+>  sw                110 .  .....  ..... 10 @c_swsp
+>
+> diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
+> index 1397c1ce1c..def0d7abfe 100644
+> --- a/target/riscv/insn_trans/trans_rvd.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvd.c.inc
+> @@ -31,6 +31,12 @@
+>      } \
 >  } while (0)
 >
-> +#define REQUIRE_ZCF(ctx) do {                  \
-> +    if (!ctx->cfg_ptr->ext_zcf) {              \
-> +        return false;                          \
-> +    }                                          \
+> +#define REQUIRE_ZCD(ctx) do { \
+> +    if (!ctx->cfg_ptr->ext_zcd) {  \
+> +        return false;     \
+> +    } \
 > +} while (0)
 > +
->  #ifndef CONFIG_USER_ONLY
->  static inline bool smstateen_fcsr_check(DisasContext *ctx, int index)
+>  static bool trans_fld(DisasContext *ctx, arg_fld *a)
 >  {
-> @@ -96,6 +102,18 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
+>      TCGv addr;
+> @@ -57,6 +63,18 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
 >      return true;
 >  }
 >
-> +static bool trans_c_flw(DisasContext *ctx, arg_flw *a)
+> +static bool trans_c_fld(DisasContext *ctx, arg_fld *a)
 > +{
-> +    REQUIRE_ZCF(ctx);
-> +    return trans_flw(ctx, a);
+> +    REQUIRE_ZCD(ctx);
+> +    return trans_fld(ctx, a);
 > +}
 > +
-> +static bool trans_c_fsw(DisasContext *ctx, arg_fsw *a)
+> +static bool trans_c_fsd(DisasContext *ctx, arg_fsd *a)
 > +{
-> +    REQUIRE_ZCF(ctx);
-> +    return trans_fsw(ctx, a);
+> +    REQUIRE_ZCD(ctx);
+> +    return trans_fsd(ctx, a);
 > +}
 > +
->  static bool trans_fmadd_s(DisasContext *ctx, arg_fmadd_s *a)
+>  static bool trans_fmadd_d(DisasContext *ctx, arg_fmadd_d *a)
 >  {
 >      REQUIRE_FPU;
 > --
