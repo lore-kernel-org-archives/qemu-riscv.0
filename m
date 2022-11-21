@@ -1,58 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1owv45-0005iP-HK
-	for mharc-qemu-riscv@gnu.org; Sun, 20 Nov 2022 19:53:37 -0500
+	id 1owv8n-0006y1-Rh
+	for mharc-qemu-riscv@gnu.org; Sun, 20 Nov 2022 19:58:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1owv44-0005iC-0d; Sun, 20 Nov 2022 19:53:36 -0500
-Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29])
+ id 1owv8l-0006xi-5t; Sun, 20 Nov 2022 19:58:27 -0500
+Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1owv42-0001zE-0y; Sun, 20 Nov 2022 19:53:35 -0500
-Received: by mail-vs1-xe29.google.com with SMTP id m4so9815622vsc.6;
- Sun, 20 Nov 2022 16:53:33 -0800 (PST)
+ id 1owv8T-00038T-Cb; Sun, 20 Nov 2022 19:58:25 -0500
+Received: by mail-ua1-x92c.google.com with SMTP id s16so973676uaq.12;
+ Sun, 20 Nov 2022 16:58:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8wJIn3mQyY4S/+yrbsCXpBkfFX2C44WYPqLK4tvv1Ww=;
- b=o0HZiXaLC4Wnh1eGbB7tg+1BpAXfFHOrVEz/vyZbsC5voSx1g/e+AWvmQfVv2pS5c7
- B72ZUuWWUayBAMJboDPa4iGGTBbU1BOUI3w0c2yjw8WKBM+nXAiGep95PqVOhssskIoF
- qbqXwtKtaLa6IDfQjzaarSKeWCjQrLC4XT6VMXFnhKzN6Vb4GtZhz597Pk7A1nnvlGKX
- LFLhXPbwIYxl5uf8RguN4yxZpxFAGM+6vRluQu0+1SN6rGsYahGM3XnSeHgEHJfXFUre
- ACfmoJI1+HeyHxT0Sq0qayYitoBbWdYqgJhusN+HsjXo4MRBRoIDV7qxs1SN1KwLMYW5
- I0HQ==
+ bh=cljo0DK9nJn3h4zsdwNHSrSRcJv9iJ65L3L9BoON1Ts=;
+ b=CLax/u4cNNL7/SJhShtQ0erTXgfZHSXCUW7vb7iQCmKEK9jFrD9ZJa/HDsXtGv813n
+ 7Xtk6LYlsWBEkOcjMB9QV496i4Nit+BWWhCaBAHCo3zS095nSPuSTeQ8u1PVqd9gS6rQ
+ uPCh0SynhPuEnoULCRnd32CnJHMNCAjreZrbQB2y+wETSKjSIoGZ8HMuINQIkyyJ1Sxb
+ 4AWDvExA+38D4J3hLu64P0JaDSXwNgF4PqekLruATV8M11xO6v/iPE2H6yAdpeu7dKWe
+ hF3D+b8US8//zYURXPc/G+CpmjjU7X+5E2jlQCXM1hFuz2UBZuhDkk3D1ESi08mWRlUh
+ Rr4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8wJIn3mQyY4S/+yrbsCXpBkfFX2C44WYPqLK4tvv1Ww=;
- b=YaWTYfJPXgSiaYNgJE9M58h3tYVIBKW2mPpQ928tXlOWCui9FR+o0gTKySLLSWIrLA
- zIyxCsDDUqNaU+tJiRIkvv8vxdLtL7ZRSP4HPz/gFKmHxbO+PeVm1Cn0o8xmqMHZo9VE
- qr+nHBiMiqLPujVpZ3iZJT1zXJgVtFcfU7YrQXzP9BLPTejQFytIVeniuYm3AI15oPVl
- 06WHgCmk75T0qnZ56oko1nwbxxqWs5oISR/Y4//az+6GFGXJY2PxdeoQamLLPOTnSlHT
- ycUQIUsj4ogPY7uhMpWG1HSs5Crc7LpewKR0UTg4jiRYRqfbZ1AE7tOsF4OOl5jXBJMb
- fyxg==
-X-Gm-Message-State: ANoB5plrrYaoiqFJ8MMoXN+A6pYCar05dhYuJ6aW2mk15O9wAw02TgZA
- 3mR6RYHUnKCoGrJhdKWkvYxF09jmuq3pL3E4URM=
-X-Google-Smtp-Source: AA0mqf4DcPI2uJaW7LHsATPoxdjmoANgymqRZYYXLeWIG8aBNvGaJVQVAxZIaMaLJCcmhqgdRvH45Kst50X0VoZ1o6g=
-X-Received: by 2002:a67:fe52:0:b0:3ad:c930:b9bb with SMTP id
- m18-20020a67fe52000000b003adc930b9bbmr38655vsr.10.1668992012278; Sun, 20 Nov
- 2022 16:53:32 -0800 (PST)
+ bh=cljo0DK9nJn3h4zsdwNHSrSRcJv9iJ65L3L9BoON1Ts=;
+ b=cQ7Dt69bOMpL3HfbdsCsz4NACsUqjY69XOp+E1xoRjQidIH4cbPSf28X7MSViyvhUR
+ UIB8RKmMpHq9TT5QcIogcmqcQIoR1m/AafP0HgxnYiUkkq+M+bKjnpY258XlYOtJ1MY+
+ TH29WlP1sQHWp+7I0QBeFAIEakbUSyuVIj9mXxiq7RYJClCl8awoaiUy/Zsk0CTGamL0
+ mZbmYTkSMQTAQ92eTWEewHWg8mrQhFGYVpAzRCQCFcvcao1CPXWrrDr8drSanI+aHNcT
+ D9WwIC4xevTG6bvtg0buDsZvA1H7REEusPKXNLWTKNaKjvTc8GOERK97CC+S3geVUQSO
+ zLwA==
+X-Gm-Message-State: ANoB5plSdragxud2i7J6zNCMYlGf3wRCFaeiExoe5/PIgNn/X4Zyodld
+ VUGnQXWSdrnJI35k35PPnqBq6wrP+yX8nOo5TZI=
+X-Google-Smtp-Source: AA0mqf5KxvUBONGSvXtcYz9TRYzxyXcFbc1xTSkKnxGlBrFnJHOQsn7Sf8YCdJIm0UuUB5L3mFn62sVQuRA6VmRcfZk=
+X-Received: by 2002:a9f:3605:0:b0:3e5:cdde:61d7 with SMTP id
+ r5-20020a9f3605000000b003e5cdde61d7mr8327120uad.23.1668992287923; Sun, 20 Nov
+ 2022 16:58:07 -0800 (PST)
 MIME-Version: 1.0
-References: <20221113095101.3395628-1-atishp@rivosinc.com>
-In-Reply-To: <20221113095101.3395628-1-atishp@rivosinc.com>
+References: <20221118123728.49319-1-liweiwei@iscas.ac.cn>
+ <20221118123728.49319-2-liweiwei@iscas.ac.cn>
+In-Reply-To: <20221118123728.49319-2-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 21 Nov 2022 10:53:06 +1000
-Message-ID: <CAKmqyKMn=kFgP6a4zeir-hYfxzfKD462+VZqO0tHgDTwnAq50g@mail.gmail.com>
-Subject: Re: [PATCH v2] hw/riscv: virt: Remove the redundant ipi-id property
-To: Atish Patra <atishp@rivosinc.com>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
+Date: Mon, 21 Nov 2022 10:57:41 +1000
+Message-ID: <CAKmqyKODj=z0nQ2YafQMzZUrj91kwGLM-v+FYiqD2QdkDnZuRA@mail.gmail.com>
+Subject: Re: [PATCH v5 1/9] target/riscv: add cfg properties for Zc* extension
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e29;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,56 +74,98 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2022 00:53:36 -0000
+X-List-Received-Date: Mon, 21 Nov 2022 00:58:27 -0000
 
-On Sun, Nov 13, 2022 at 7:52 PM Atish Patra <atishp@rivosinc.com> wrote:
+On Fri, Nov 18, 2022 at 10:45 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> The imsic DT binding[1] has changed and no longer require an ipi-id.
-> The latest IMSIC driver dynamically allocates ipi id if slow-ipi
-> is not defined.
+> Add properties for Zca,Zcb,Zcf,Zcd,Zcmp,Zcmt extension
+> Add check for these properties
 >
-> Get rid of the unused dt property which may lead to confusion.
->
-> [1] https://lore.kernel.org/lkml/20221111044207.1478350-5-apatel@ventanamicro.com/
->
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Cc: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/virt.c         | 2 --
->  include/hw/riscv/virt.h | 1 -
->  2 files changed, 3 deletions(-)
+>  target/riscv/cpu.c | 43 +++++++++++++++++++++++++++++++++++++++++++
+>  target/riscv/cpu.h |  6 ++++++
+>  2 files changed, 49 insertions(+)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index a5bc7353b412..0bc0964e42a8 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -546,8 +546,6 @@ static void create_fdt_imsic(RISCVVirtState *s, const MemMapEntry *memmap,
->          riscv_socket_count(mc) * sizeof(uint32_t) * 4);
->      qemu_fdt_setprop_cell(mc->fdt, imsic_name, "riscv,num-ids",
->          VIRT_IRQCHIP_NUM_MSIS);
-> -    qemu_fdt_setprop_cells(mc->fdt, imsic_name, "riscv,ipi-id",
-> -        VIRT_IRQCHIP_IPI_MSI);
->      if (riscv_socket_count(mc) > 1) {
->          qemu_fdt_setprop_cell(mc->fdt, imsic_name, "riscv,hart-index-bits",
->              imsic_num_bits(imsic_max_hart_per_socket));
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index be4ab8fe7f71..62513e075c47 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -93,7 +93,6 @@ enum {
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 042fd541b4..1ab04ab246 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -805,6 +805,49 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              }
+>          }
 >
->  #define VIRT_PLATFORM_BUS_NUM_IRQS 32
->
-> -#define VIRT_IRQCHIP_IPI_MSI 1
->  #define VIRT_IRQCHIP_NUM_MSIS 255
->  #define VIRT_IRQCHIP_NUM_SOURCES VIRTIO_NDEV
->  #define VIRT_IRQCHIP_NUM_PRIO_BITS 3
+> +        if (cpu->cfg.ext_c) {
+> +            cpu->cfg.ext_zca = true;
+> +            if (cpu->cfg.ext_f && env->misa_mxl_max == MXL_RV32) {
+> +                cpu->cfg.ext_zcf = true;
+> +            }
+> +            if (cpu->cfg.ext_d) {
+> +                cpu->cfg.ext_zcd = true;
+> +            }
+> +        }
+> +
+> +        if (env->misa_mxl_max != MXL_RV32 && cpu->cfg.ext_zcf) {
+> +            error_setg(errp, "Zcf extension is only relevant to RV32");
+> +            return;
+> +        }
+> +
+> +        if (!cpu->cfg.ext_f && cpu->cfg.ext_zcf) {
+> +            error_setg(errp, "Zcf extension requires F extension");
+> +            return;
+> +        }
+> +
+> +        if (!cpu->cfg.ext_d && cpu->cfg.ext_zcd) {
+> +            error_setg(errp, "Zcd extensionrequires D extension");
+> +            return;
+> +        }
+> +
+> +        if ((cpu->cfg.ext_zcf || cpu->cfg.ext_zcd || cpu->cfg.ext_zcb ||
+> +             cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt) && !cpu->cfg.ext_zca) {
+> +            error_setg(errp, "Zcf/Zcd/Zcb/Zcmp/Zcmt extensions require Zca "
+> +                             "extension");
+> +            return;
+> +        }
+> +
+> +        if (cpu->cfg.ext_zcd && (cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt)) {
+> +            error_setg(errp, "Zcmp/Zcmt extensions are incompatible with "
+> +                             "Zcd extension");
+> +            return;
+> +        }
+> +
+> +        if (cpu->cfg.ext_zcmt && !cpu->cfg.ext_icsr) {
+> +            error_setg(errp, "Zcmt extension requires Zicsr extension");
+> +            return;
+> +        }
+> +
+>          if (cpu->cfg.ext_zk) {
+>              cpu->cfg.ext_zkn = true;
+>              cpu->cfg.ext_zkr = true;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 9bd539d77a..6e915b6937 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -434,6 +434,12 @@ struct RISCVCPUConfig {
+>      bool ext_zbkc;
+>      bool ext_zbkx;
+>      bool ext_zbs;
+> +    bool ext_zca;
+> +    bool ext_zcb;
+> +    bool ext_zcd;
+> +    bool ext_zcf;
+> +    bool ext_zcmp;
+> +    bool ext_zcmt;
+>      bool ext_zk;
+>      bool ext_zkn;
+>      bool ext_zknd;
 > --
 > 2.25.1
 >
