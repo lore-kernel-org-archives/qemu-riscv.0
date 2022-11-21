@@ -1,84 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ox7fu-0001JK-IU
-	for mharc-qemu-riscv@gnu.org; Mon, 21 Nov 2022 09:21:30 -0500
+	id 1ox7v8-0007Db-Ho
+	for mharc-qemu-riscv@gnu.org; Mon, 21 Nov 2022 09:37:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <like.xu.linux@gmail.com>)
- id 1ox0Vu-0004TU-In; Mon, 21 Nov 2022 01:42:43 -0500
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1ox7v5-0007CV-UX
+ for qemu-riscv@nongnu.org; Mon, 21 Nov 2022 09:37:11 -0500
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <like.xu.linux@gmail.com>)
- id 1ox0Vs-0007bN-KO; Mon, 21 Nov 2022 01:42:42 -0500
-Received: by mail-pj1-x102c.google.com with SMTP id b11so9604466pjp.2;
- Sun, 20 Nov 2022 22:42:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=nIn/dq+22PWaLv4hHMDs3f3KAdqnytvpjqipVfySebg=;
- b=AWiMixJCpFyWPBEJXHdf7HWjJyHvbXhLMGk+mOjs0xnQYpIsFf66uMAcg5YVl/EIsZ
- 4uOMbVTRm1oZskMdV2SP9Z/PznA8Vxs49gV7HRlD+233vh2k5lkmCCd6db4xcrolRLvO
- Udn63wNkw8DoyqzYG0065+J/3jSrFyL4JawTNwBErVvBknBl4N/Zq5H2LGDHGRH+rALF
- 6lq/8F2h/xL18440sxn7c0SWSAz8vqHAon02eJggvLmYjWN9PX50Fl82rR4Tn3DTPSRl
- Dkb8wByATyxBMi/xCv+puY7/wnjleMs5VJukq06pzqjHCtv+LSw09a6kQcx3BKRakcn/
- mLLw==
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1ox7v3-0004LW-23
+ for qemu-riscv@nongnu.org; Mon, 21 Nov 2022 09:37:11 -0500
+Received: by mail-pg1-x533.google.com with SMTP id 62so11285121pgb.13
+ for <qemu-riscv@nongnu.org>; Mon, 21 Nov 2022 06:37:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=MF0QvKrp6hOQBtpvzpbZb9Nyv7bn72nzIE9/cJbusOs=;
+ b=gAF9+h1FXftdn93KZTEjjDjaUCyTsHBSfToTrxl4r+YHMi8217bNdmt8rUp15v69yz
+ pJobNxAirgRt/WgG8aM2N9KWOH38GLcekaDFXyvNucTfg3VMCIR1/wW3ZD1A1EQTFOXa
+ HJFiAiKwOwDK2L1loNXFrILdB6Cl+9GipWvvJ4ALhi/BT/LMmi0yoXZzfHbUb2H0Z+0x
+ OyJ+cTLxJi1qhIBIRGnUuNIpd1czWWcgm58y1co5I0A44i9Y5aIgPBhIwo4fdBEp0u0o
+ Lb/JRsVglFquVnJi6KlZXPCmzemQRNxdpoNdo6U7Qng0qy1m+qjI8IFNczK7FKNs1Bva
+ R7AA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=nIn/dq+22PWaLv4hHMDs3f3KAdqnytvpjqipVfySebg=;
- b=rHRFEFdyu9i1atkikvzE/pBQj6fSEesmsT91NnwQjJYt2Zv1NNbs/vzlm8ElZ24EFe
- q5RckGDvYDivXeg9LOmvvUnTaxLkIftlDjjWkAC8FzQpuc6oYNvSuXBCIRxmhbDlYXIw
- 0AjuAUWzDaPvDpC9anqNPvj4gehlHSYkjhcWQ9EMUgF3ZWF+gescmemkknC1AQZFYsW0
- ehmqZOJRHmOF0MkkNNjAB/rLz3/iDGbt9AdjJW1ZrgiHTHtdMSd8DQr4vaybZHCzaWm6
- kA0vNihACABurjZvsjCPRESxf4HcLgpyL02P6g0a7+zPTDQ/nF679t07zltTz7KX/uQG
- bVVQ==
-X-Gm-Message-State: ANoB5pneTlx0c9FttQDdOguUcdGcAv89/uon5L845tyuFW4fIXLei9cX
- 67oqTCwla5eUYy3aqvcQxiM=
-X-Google-Smtp-Source: AA0mqf7f9fasqIo0Dos5ZFaGunB3NGyXpA+iFnajmnNiKYLYBEr3Su/T/9qCplxrj2ZqAiODZEgaUg==
-X-Received: by 2002:a17:90a:4fc1:b0:213:16b5:f45e with SMTP id
- q59-20020a17090a4fc100b0021316b5f45emr24562450pjh.170.1669012955526; 
- Sun, 20 Nov 2022 22:42:35 -0800 (PST)
-Received: from [192.168.255.10] ([103.7.29.32])
- by smtp.gmail.com with ESMTPSA id
- y19-20020a1709027c9300b0017f9db0236asm8805479pll.82.2022.11.20.22.42.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 20 Nov 2022 22:42:35 -0800 (PST)
-Message-ID: <187668e7-f32e-b509-8ce1-4b35d98c7d31@gmail.com>
-Date: Mon, 21 Nov 2022 14:42:20 +0800
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MF0QvKrp6hOQBtpvzpbZb9Nyv7bn72nzIE9/cJbusOs=;
+ b=rvCA+TwT92Rqv6pDLvq2tQUyYhEojDjYCysU9x7ZPlY2rEpFQPh1DZmpU+y6FjmKy6
+ ZW7Qyo+3Fbk+biKB/M4WZRZOL4p041tnPf9p8ReVYo3GcsN2EMAoEtwHDg5ecKjx3Dxl
+ 3SlNL29DwlQ0ChALrVpF5Z2Qo2bmKB7Itdz9HOMTnCGUzthsmMKCM6w/MlrfDoYP0uDQ
+ V45TcyLHJ0F5T75FgRv7J3Cyv0c5V1Ac4+NxOth7OntuyrpQrL79956huFE6lIO12cbj
+ wMiuzucSjj/mxhJqAcadqtoS4NHEtBn3vUdbkLTpQ6khLggN2kMEjEoAHwbzTON0Yc7n
+ ebNA==
+X-Gm-Message-State: ANoB5pl/71a3aEX022OUc/Ux346zbnfDTgpweVRjgSlgIKyeDU81fy+I
+ eiY5lwAf+uGivtIYBL8SaJnIswGiJ3oeFsIqR9H9/A==
+X-Google-Smtp-Source: AA0mqf7XWU9N5SiHEU9iGBhv7ygjljT7Go21HzZUO70MXU3z+uR5++ls9lOhi4M698xezvBVrH05aD10d6fkEhiYkHE=
+X-Received: by 2002:a65:45c5:0:b0:46b:2753:2a60 with SMTP id
+ m5-20020a6545c5000000b0046b27532a60mr1819319pgr.192.1669041427555; Mon, 21
+ Nov 2022 06:37:07 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.5.0
-Subject: Re: [PATCH 0/3] kvm: fix two svm pmu virtualization bugs
-To: Dongli Zhang <dongli.zhang@oracle.com>
-Cc: pbonzini@redhat.com, peter.maydell@linaro.org, mtosatti@redhat.com,
- chenhuacai@kernel.org, philmd@linaro.org, aurelien@aurel32.net,
- jiaxun.yang@flygoat.com, aleksandar.rikalo@syrmia.com,
- danielhb413@gmail.com, clg@kaod.org, david@gibson.dropbear.id.au,
- groug@kaod.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, pasic@linux.ibm.com, borntraeger@linux.ibm.com,
- richard.henderson@linaro.org, david@redhat.com, iii@linux.ibm.com,
- thuth@redhat.com, joe.jin@oracle.com, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
- kvm list <kvm@vger.kernel.org>, qemu-devel@nongnu.org
-References: <20221119122901.2469-1-dongli.zhang@oracle.com>
-Content-Language: en-US
-From: Like Xu <like.xu.linux@gmail.com>
-In-Reply-To: <20221119122901.2469-1-dongli.zhang@oracle.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=like.xu.linux@gmail.com; helo=mail-pj1-x102c.google.com
+References: <20221121140121.1079100-1-armbru@redhat.com>
+In-Reply-To: <20221121140121.1079100-1-armbru@redhat.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 21 Nov 2022 14:36:56 +0000
+Message-ID: <CAFEAcA_jnbp36Trjd3qJYzbf5-6SNNrirG7q2_-wKXkcX49ptg@mail.gmail.com>
+Subject: Re: [PATCH] cleanup: Tweak and re-run return_directly.cocci
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org, fam@euphon.net, kwolf@redhat.com, hreitz@redhat.com,
+ groug@kaod.org, qemu_oss@crudebyte.com, Alistair.Francis@wdc.com, 
+ bin.meng@windriver.com, palmer@dabbelt.com, marcandre.lureau@redhat.com, 
+ pbonzini@redhat.com, yuval.shaia.ml@gmail.com, marcel.apfelbaum@gmail.com, 
+ mst@redhat.com, quintela@redhat.com, dgilbert@redhat.com, 
+ pavel.dovgaluk@ispras.ru, alex.bennee@linaro.org, peterx@redhat.com, 
+ david@redhat.com, philmd@linaro.org, mrolnik@gmail.com, gaosong@loongson.cn, 
+ yangxiaojuan@loongson.cn, aurelien@aurel32.net, jiaxun.yang@flygoat.com, 
+ aleksandar.rikalo@syrmia.com, jcmvbkbc@gmail.com, berrange@redhat.com, 
+ thuth@redhat.com, lvivier@redhat.com, suhang16@mails.ucas.ac.cn, 
+ chen.zhang@intel.com, lizhijian@fujitsu.com, stefanha@redhat.com, 
+ qemu-block@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, 
+ virtio-fs@redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=peter.maydell@linaro.org; helo=mail-pg1-x533.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 21 Nov 2022 09:21:29 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,103 +84,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2022 06:42:45 -0000
+X-List-Received-Date: Mon, 21 Nov 2022 14:37:12 -0000
 
-On 19/11/2022 8:28 pm, Dongli Zhang wrote:
-> This patchset is to fix two svm pmu virtualization bugs.
-> 
-> 1. The 1st bug is that "-cpu,-pmu" cannot disable svm pmu virtualization.
-> 
-> To use "-cpu EPYC" or "-cpu host,-pmu" cannot disable the pmu
-> virtualization. There is still below at the VM linux side ...
+On Mon, 21 Nov 2022 at 14:03, Markus Armbruster <armbru@redhat.com> wrote:
+>
+> Tweak the semantic patch to drop redundant parenthesis around the
+> return expression.
+>
+> Coccinelle drops comments in hw/rdma/vmw/pvrdma_cmd.c; restored
+> manually.
+>
+> Coccinelle messes up vmdk_co_create(), not sure why.  Transformed
+> manually.
+>
+> Line breaks in target/avr/cpu.h and hw/rdma/vmw/pvrdma_cmd.c tidied up
+> manually.
+>
+> Whitespace in fuse_reply_iov() tidied up manually.
+>
+> checkpatch.pl complains "return of an errno should typically be -ve"
+> two times for hw/9pfs/9p-synth.c.  Preexisting, the patch merely makes
+> it visible to checkpatch.pl.
+>
+> checkpatch.pl complains "return is not a function, parentheses are not
+> required" three times for target/mips/tcg/dsp_helper.c.  False
+> positives.
+>
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
 
-Many QEMU vendor forks already have similar fixes, and
-thanks for bringing this issue back to the mainline.
+>  .../user/ase/msa/bit-count/test_msa_nloc_b.c  |   9 +-
+>  .../user/ase/msa/bit-count/test_msa_nloc_d.c  |   9 +-
+[snip long list of other mips test files]
 
-> 
-> [    0.510611] Performance Events: Fam17h+ core perfctr, AMD PMU driver.
-> 
-> ... although we expect something like below.
-> 
-> [    0.596381] Performance Events: PMU not available due to virtualization, using software events only.
-> [    0.600972] NMI watchdog: Perf NMI watchdog permanently disabled
-> 
-> The patch 1-2 is to disable the pmu virtualization via KVM_PMU_CAP_DISABLE
-> if the per-vcpu "pmu" property is disabled.
-> 
-> I considered 'KVM_X86_SET_MSR_FILTER' initially.
-> Since both KVM_X86_SET_MSR_FILTER and KVM_PMU_CAP_DISABLE are VM ioctl. I
-> finally used the latter because it is easier to use.
-> 
-> 
-> 2. The 2nd bug is that un-reclaimed perf events (after QEMU system_reset)
-> at the KVM side may inject random unwanted/unknown NMIs to the VM.
-> 
-> The svm pmu registers are not reset during QEMU system_reset.
-> 
-> (1). The VM resets (e.g., via QEMU system_reset or VM kdump/kexec) while it
-> is running "perf top". The pmu registers are not disabled gracefully.
-> 
-> (2). Although the x86_cpu_reset() resets many registers to zero, the
-> kvm_put_msrs() does not puts AMD pmu registers to KVM side. As a result,
-> some pmu events are still enabled at the KVM side.
-> 
-> (3). The KVM pmc_speculative_in_use() always returns true so that the events
-> will not be reclaimed. The kvm_pmc->perf_event is still active.
+>  328 files changed, 989 insertions(+), 2099 deletions(-)
 
-I'm not sure if you're saying KVM doing something wrong, I don't think so
-because KVM doesn't sense the system_reset defined by QEME or other user space,
-AMD's vPMC will continue to be enabled (if it was enabled before), generating pmi
-injection into the guest, and the newly started guest doesn't realize the 
-counter is still
-enabled and blowing up the error log.
+This patch seems to almost entirely be huge because of these
+mips test case files. Are they specific to QEMU or are they
+effectively a 3rd-party import that it doesn't make sense
+to make local changes to?
 
-> 
-> (4). After the reboot, the VM kernel reports below error:
-> 
-> [    0.092011] Performance Events: Fam17h+ core perfctr, Broken BIOS detected, complain to your hardware vendor.
-> [    0.092023] [Firmware Bug]: the BIOS has corrupted hw-PMU resources (MSR c0010200 is 530076)
-> 
-> (5). In a worse case, the active kvm_pmc->perf_event is still able to
-> inject unknown NMIs randomly to the VM kernel.
-> 
-> [...] Uhhuh. NMI received for unknown reason 30 on CPU 0.
-> 
-> The patch 3 is to fix the issue by resetting AMD pmu registers as well as
-> Intel registers.
+I definitely don't think you should put manual tidying changes
+in the same patch as 3000 lines of automated changes: that
+is in my opinion un-reviewable.
 
-This fix idea looks good, it does require syncing the new changed device state 
-of QEMU to KVM.
-
-> 
-> 
-> This patchset does cover does not cover PerfMonV2, until the below patchset
-> is merged into the KVM side.
-> 
-> [PATCH v3 0/8] KVM: x86: Add AMD Guest PerfMonV2 PMU support
-> https://lore.kernel.org/all/20221111102645.82001-1-likexu@tencent.com/
-> 
-> 
-> Dongli Zhang (3):
->        kvm: introduce a helper before creating the 1st vcpu
->        i386: kvm: disable KVM_CAP_PMU_CAPABILITY if "pmu" is disabled
->        target/i386/kvm: get and put AMD pmu registers
-> 
->   accel/kvm/kvm-all.c    |   7 ++-
->   include/sysemu/kvm.h   |   2 +
->   target/arm/kvm64.c     |   4 ++
->   target/i386/cpu.h      |   5 +++
->   target/i386/kvm/kvm.c  | 104 +++++++++++++++++++++++++++++++++++++++++++-
->   target/mips/kvm.c      |   4 ++
->   target/ppc/kvm.c       |   4 ++
->   target/riscv/kvm.c     |   4 ++
->   target/s390x/kvm/kvm.c |   4 ++
->   9 files changed, 134 insertions(+), 4 deletions(-)
-> 
-> Thank you very much!
-> 
-> Dongli Zhang
-> 
-> 
-> 
+thanks
+-- PMM
 
