@@ -1,79 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oxUnm-0007Qz-OY
-	for mharc-qemu-riscv@gnu.org; Tue, 22 Nov 2022 10:03:10 -0500
+	id 1oxUqQ-0000Ni-JD
+	for mharc-qemu-riscv@gnu.org; Tue, 22 Nov 2022 10:05:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1oxUnm-0007Qb-4I
- for qemu-riscv@nongnu.org; Tue, 22 Nov 2022 10:03:10 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1oxUqN-0000MX-DP
+ for qemu-riscv@nongnu.org; Tue, 22 Nov 2022 10:05:51 -0500
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1oxUnj-0003mZ-79
- for qemu-riscv@nongnu.org; Tue, 22 Nov 2022 10:03:09 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- a11-20020a05600c2d4b00b003cf6f5fd9f1so11496837wmg.2
- for <qemu-riscv@nongnu.org>; Tue, 22 Nov 2022 07:03:06 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1oxUqJ-0004Qa-NE
+ for qemu-riscv@nongnu.org; Tue, 22 Nov 2022 10:05:50 -0500
+Received: by mail-wm1-x330.google.com with SMTP id
+ v124-20020a1cac82000000b003cf7a4ea2caso15434737wme.5
+ for <qemu-riscv@nongnu.org>; Tue, 22 Nov 2022 07:05:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=1cG7JjZKrDJMJiFBZz4LFWA1swu2frAZNVzdjz69N8g=;
- b=vFt++CBA+6wZ8Bc/+CrSx929SKa3a14SLbJc66HUCRCwK0uMTwXUw7yBZJxsSjjXLq
- QIlxt2snSfdPqycssCGhCOS6itQAT0ld3atsOSs+sOh9cW+FJnW4cmaL54hUu/ML1Jp0
- txqbmQxX6MRKld+o6rlckro0O/xJXs5Q1LpJIO4TfM38rMI5SVkf1ST6n4Abur98Gxpj
- +5BXEspfChP3+uPkGEBITZNTKj5VNMoeAAaU99JE/EgbIeTgZt0qeP59hwlL485DQg2P
- MifhBtCWXe+JSEimVzyxYJcQqrl2WP81AMLvC5Q97MiMosUppkDXWJgEBlxc2/x7R9v2
- Ywyg==
+ bh=520OhGqupNZR20qXPew608iecNLLax9WTeOJwvrzNq8=;
+ b=ADhsMwZ1Vl9F8K0T3Te4SY85k6hqTwIDJgt4GfQV9sTGNx9bZawSFxer+77Vy/Pmft
+ tfNa/jYEpIZcpfT9xOH7/qoFn3pk43oPACsID95lLXj1QvyNw27ISytXefg8o0VlJ4lW
+ FRG3rxRBMLP3z1U92N8X7duGX3YSIK824llKXagdX2oMS9vBOrisO8SUyaYGt2ejXw+X
+ veLJEcro30jwVDAJeWq5L7tvbh896UOhVrfwnYNcpmNWDCA9yHRCRhUB890Q+f3Q7fGu
+ jnHvK2TLlES2Af5nDxL5kAj1zUMedXbgUoWAQ0UTkC8Iwz+MhiGfOiTSFQx0242vzemR
+ PWpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1cG7JjZKrDJMJiFBZz4LFWA1swu2frAZNVzdjz69N8g=;
- b=Yrnd+6UWwwelO/putc7j2W/YLNeBL+rSCVm+hQIzkIV2EeoU+WuJe9EAgqfTszh5li
- bs1HHx7QUlKFRGpr8e0oHAAea30Dv6deMZoin/fngV0c4QO9a4vajcgYAp76EFmPlcka
- cK9UHwnJFtHjAXdXACdY/4Nf5V8A1P3KyxUkVRAPiIvQ0CSsC1yme3wrIDcD73bIf7fh
- 4SAbRcwLKLR6VwZoXs8OaJTTPgD1tONnjwIFFO1nZhCuOSU8ceoUd3gVPN1PWn9uLTJd
- ZEx9r/Kl8s21dkOiRoktdB8MjzOb9TyHzhbst8HAvJsw29jjXtOD8Q69+rZLWx4Kolkq
- 5Bfw==
-X-Gm-Message-State: ANoB5pmvUejuh5xRtcDQH0JdtYUOvd69YR68LhaAR975wRvdLJqKGR/W
- rG/AxVetx17L+VetsInXJZ8pYQ==
-X-Google-Smtp-Source: AA0mqf40N+nxtt5mODcVyTIwvzVjIYRVuF+NeVQUiZmfqWhgfHBzMks+PRX47j6dxuCqBJ0ckzp2Mw==
-X-Received: by 2002:a7b:ce05:0:b0:3cf:7c1b:3c29 with SMTP id
- m5-20020a7bce05000000b003cf7c1b3c29mr6124578wmc.23.1669129385495; 
- Tue, 22 Nov 2022 07:03:05 -0800 (PST)
+ bh=520OhGqupNZR20qXPew608iecNLLax9WTeOJwvrzNq8=;
+ b=Gspjf1ZtqJ7zB8skJ+v301Tz83GHd/Iz+sbpEI0CCnslqOc3ty5Hc9nn1mP26+eSJ1
+ Kjm6y9r05ygLgxK8eeh0mxrGuNDWx0rS3VcjB+I3rFjP3r80CL/LgnRLlNXOgKaxmT6p
+ 5YoXy2nzjXSpZXfn7B3bFNeMov+IiG3jGYvBafu4CmEeeesgpig6UxaA3jDuvzpziqN6
+ 8R3iF2zJL+dx6aP5IhGty7kgjjwdedgmlk6XpJjUcmQk4AAOLojhDbsWTMHB0fLMB2d4
+ spMFoMFbIiPdjeGVE1rLk7fJNa2E+VlRRw7NvOWsVghbOtaTcxH7Gi0FzaRvhKal3JV0
+ ZMCg==
+X-Gm-Message-State: ANoB5pl9PxBt5v4Z2oJiBJ9JmCWPywIlESHW79IrRxR4dhghrzheUcYZ
+ uAgEjUZHsjJ7J3oiVHkrzHZX1Q==
+X-Google-Smtp-Source: AA0mqf7CF0YfblnJ3lMa0settnjqKlw9dGmz+EZsK0oec+B13to0x24Y3gAqknYscRPZBz2qMa+tsQ==
+X-Received: by 2002:a05:600c:19cc:b0:3cf:7bdd:e014 with SMTP id
+ u12-20020a05600c19cc00b003cf7bdde014mr10494102wmq.1.1669129546070; 
+ Tue, 22 Nov 2022 07:05:46 -0800 (PST)
 Received: from [192.168.1.115] ([185.126.107.38])
  by smtp.gmail.com with ESMTPSA id
- r24-20020adfa158000000b00236b2804d79sm14811403wrr.2.2022.11.22.07.03.02
+ r13-20020a056000014d00b0024165454262sm14219634wrx.11.2022.11.22.07.05.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Nov 2022 07:03:04 -0800 (PST)
-Message-ID: <506afd42-89ab-cc6a-42d7-4544244f8672@linaro.org>
-Date: Tue, 22 Nov 2022 16:03:02 +0100
+ Tue, 22 Nov 2022 07:05:45 -0800 (PST)
+Message-ID: <98e366c2-704a-cd21-0ae6-4ded79f21641@linaro.org>
+Date: Tue, 22 Nov 2022 16:05:42 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.5.0
-Subject: Re: [PATCH] cleanup: Tweak and re-run return_directly.cocci
+Subject: Re: [PATCH v2 2/2] block/vmdk: Simplify vmdk_co_create() to return
+ directly
 Content-Language: en-US
-To: Max Filippov <jcmvbkbc@gmail.com>, Markus Armbruster <armbru@redhat.com>
-Cc: qemu-devel@nongnu.org, fam@euphon.net, kwolf@redhat.com,
- hreitz@redhat.com, groug@kaod.org, qemu_oss@crudebyte.com,
- Alistair.Francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com,
- marcandre.lureau@redhat.com, pbonzini@redhat.com, yuval.shaia.ml@gmail.com,
- marcel.apfelbaum@gmail.com, mst@redhat.com, quintela@redhat.com,
- dgilbert@redhat.com, pavel.dovgaluk@ispras.ru, alex.bennee@linaro.org,
- peterx@redhat.com, david@redhat.com, mrolnik@gmail.com, gaosong@loongson.cn,
+To: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org
+Cc: groug@kaod.org, qemu_oss@crudebyte.com, Alistair.Francis@wdc.com,
+ bin.meng@windriver.com, palmer@dabbelt.com, marcandre.lureau@redhat.com,
+ pbonzini@redhat.com, yuval.shaia.ml@gmail.com, marcel.apfelbaum@gmail.com,
+ mst@redhat.com, quintela@redhat.com, dgilbert@redhat.com,
+ pavel.dovgaluk@ispras.ru, alex.bennee@linaro.org, peterx@redhat.com,
+ david@redhat.com, mrolnik@gmail.com, gaosong@loongson.cn,
  yangxiaojuan@loongson.cn, aurelien@aurel32.net, jiaxun.yang@flygoat.com,
  aleksandar.rikalo@syrmia.com, berrange@redhat.com, thuth@redhat.com,
  lvivier@redhat.com, suhang16@mails.ucas.ac.cn, chen.zhang@intel.com,
- lizhijian@fujitsu.com, stefanha@redhat.com, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, virtio-fs@redhat.com
-References: <20221121140121.1079100-1-armbru@redhat.com>
- <CAMo8BfKxve8=RKqT6S8XXy1E7hczF0VO9XXZeUpha_4xNSV6WA@mail.gmail.com>
+ lizhijian@fujitsu.com, stefanha@redhat.com, qemu-riscv@nongnu.org,
+ qemu-ppc@nongnu.org, virtio-fs@redhat.com, Fam Zheng <fam@euphon.net>,
+ Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
+ qemu-block@nongnu.org
+References: <20221122134917.1217307-1-armbru@redhat.com>
+ <20221122134917.1217307-3-armbru@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <CAMo8BfKxve8=RKqT6S8XXy1E7hczF0VO9XXZeUpha_4xNSV6WA@mail.gmail.com>
+In-Reply-To: <20221122134917.1217307-3-armbru@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -93,29 +95,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Nov 2022 15:03:10 -0000
+X-List-Received-Date: Tue, 22 Nov 2022 15:05:51 -0000
 
-On 21/11/22 17:42, Max Filippov wrote:
-> On Mon, Nov 21, 2022 at 6:01 AM Markus Armbruster <armbru@redhat.com> wrote:
->>   .../xtensa/core-dsp3400/xtensa-modules.c.inc  | 136 +++++-------------
->>   target/xtensa/core-lx106/xtensa-modules.c.inc |  16 +--
-> 
-> These files are generated and were imported from xtensa configuration
-> overlays, they're not supposed to be changed.
+On 22/11/22 14:49, Markus Armbruster wrote:
+> Cc: Fam Zheng <fam@euphon.net>
+> Cc: Kevin Wolf <kwolf@redhat.com>
+> Cc: Hanna Reitz <hreitz@redhat.com>
+> Cc: qemu-block@nongnu.org
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> ---
+>   block/vmdk.c | 28 +++++++++++-----------------
+>   1 file changed, 11 insertions(+), 17 deletions(-)
 
-Tools can get the repository file list using 'git ls-files', which
-itself support file pattern exclusion [*].
-
-We can create i.e. 'scripts/imported-files.txt' with:
-
-   linux-headers/
-   target/hexagon/imported/
-   target/xtensa/core*
-   tests/tcg/mips/user/
-
-Then use 'git ls-files --exclude-from=scripts/imported-files.txt' ...
-
-[*] 
-https://git-scm.com/docs/git-ls-files#Documentation/git-ls-files.txt---exclude-fromltfilegt
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
