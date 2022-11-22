@@ -1,58 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oxMUx-0001EN-EV
-	for mharc-qemu-riscv@gnu.org; Tue, 22 Nov 2022 01:11:11 -0500
+	id 1oxMl5-000403-A8
+	for mharc-qemu-riscv@gnu.org; Tue, 22 Nov 2022 01:27:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oxMUv-0001Da-If; Tue, 22 Nov 2022 01:11:09 -0500
-Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
+ id 1oxMl4-0003zr-Di; Tue, 22 Nov 2022 01:27:50 -0500
+Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oxMUq-0008Jj-M9; Tue, 22 Nov 2022 01:11:06 -0500
-Received: by mail-ua1-x933.google.com with SMTP id y24so4620495uaq.3;
- Mon, 21 Nov 2022 22:11:04 -0800 (PST)
+ id 1oxMl2-00060D-4r; Tue, 22 Nov 2022 01:27:50 -0500
+Received: by mail-vk1-xa29.google.com with SMTP id j24so6773126vkk.0;
+ Mon, 21 Nov 2022 22:27:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=C3yJO/7bPCepdMxeX5CUNWrqwOslRhbCz+NeUFhvguY=;
- b=DKfvCmj47P/yHislx9k6RLV6FeeNY/uU6TDQ0yoQEb8bG1TVFHqun5nl5iOP5Ghnx6
- SqzhLXT856JWLA0F0/GdcWC7rvSRNn53LQelw4mXk9oclkG5vPcaqnbDd+rRp6FDZ/xt
- V0AoiZmruX7mWFKEi6+waai7d9ialj48W6z3PB8/ySZOv/HPbOXvPpZZVJ+52ms1m5J0
- QFa7z/VxnB+X373OINk6wLD81B6v3DtpynbES9d+1AdSfw/c1BrbmPVo5PH70N9E9b00
- RfTEmH/o4oAPRlEpTEpa4YT8YNo3RErnYJOacdA9wGDgUHm5pb5RGoAsOXrwmSbnJOpT
- 04Kg==
+ bh=TfXmZOtcJi6Wj3n8aEguNIbIvy4nYEZMrVpc3nuYpbk=;
+ b=VJ4fFwuqjvmyegptljHFKnLvjd20TBBan6A76bBWAzquhLlff5t2qSXHpzXid5aiDV
+ oQiFj7CBN6XBJqO4GDyO8my7BLUW2a1hUHOqbAcKrF8UNpm6vnHcxjBEvlBqwmv3HVn/
+ nG8P1UQ8OAZTvufCht5ug0g+O+mDQx+3nPTNwKX0rB+ViCtA1lkCbnvDjIB+CjtkeM0j
+ 4jRp2UUzXYERU1DaMS76uDICFMHYDf+AYsUse9Iv1z7A/udDLQFso1ZMpHZ7ZrCJhLsL
+ fcu265TQ0RXGhL0J+eA7tjiiXn1q1vThKkVAS+21qhn7zKRcVB2PKl9vcOOldDaiytlS
+ qi3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=C3yJO/7bPCepdMxeX5CUNWrqwOslRhbCz+NeUFhvguY=;
- b=A9P0Nuym1PlibSygWK15hSdKuiWfPSlUrFQeCwb02zvT604pnXQ3BQwNggK8V+/BwO
- 80WsAe+b6fbFMlBqeX6fzPVU30Ay4eOCSAwkpHqxUMZFbak9ayo9n43g8dQ4NhDcZQJi
- 3znlj/dxlBv6PgzaD2Xa70Imf65izPqWASAIwNtRTT78Een34hAuAZrQRt7DGZmsyC53
- gw0faKsGzrX8HFZlhDVuZH8g1fCCrAj0lr9o+Cm6v2Sjtg34leBWP5zDbqiPjEhbzkYV
- Fpu3PBHUBx5Z36gNWO8UJ1QkiJBSo4wvpacJdTlbrCwfXF7zTGOh59EDZSJzoJHJGhji
- lB8w==
-X-Gm-Message-State: ANoB5pkE9FS9dXe8U1yJALavaNW9pNwXjXLT3VxtJyr88NoyDDk73hiS
- noTgwsf60WzUnliyv5749M4P83+S/EObCBFvw5g=
-X-Google-Smtp-Source: AA0mqf6mDmkSdH6dW25+9Lc/axa8p7b1NyYpByaoLxLDKTbjjCtGmhpL8LaqBRRspDgmtTQ3P2BZWqVBtRvJjO2rxxA=
-X-Received: by 2002:ab0:2a53:0:b0:3d8:d599:ef49 with SMTP id
- p19-20020ab02a53000000b003d8d599ef49mr1695849uar.96.1669097461887; Mon, 21
- Nov 2022 22:11:01 -0800 (PST)
+ bh=TfXmZOtcJi6Wj3n8aEguNIbIvy4nYEZMrVpc3nuYpbk=;
+ b=UPqSeZMZ74TlTEpK43+nH2CrIqfFK53ZlYGQjVisuGjHidk3bOaoTO1xFGRuiOBdMH
+ vvdtx7FhdhCLqmTpV2jRVo24YBWRjCqWPObbpBV9nDbVAZIxExULiqLSOpfTaKf76NMM
+ Lx+EE0PdZOKSDfc/eWQrpVPW1Bn8nzuAc1PeyXlLYi3l8lCtyFkr+FL3Kzc0CuXso1eQ
+ szbBc84pYedy8ILhFvnz6bMMjizMou6pkb1yhUDGcostpeHzgtKim0LAK1572mwMJD0a
+ AuXDL7TaUYIiI4kvXxt0R9CJWzhs7ELolBwNOGlWHZnINcP5e8N1huVZh6GGgf7fndm9
+ ekVA==
+X-Gm-Message-State: ANoB5pk/X8YseuayAy1vD0MxYGcwfLmHDpiO+IIFT1tykL+vrEPk7Cu/
+ vGd72DshPxUlob/FQDggo281GgaZbm26y/Vxe2M=
+X-Google-Smtp-Source: AA0mqf7uYmXwO4jjFe8tsP9HUdTR0T4T0jeWPEjNEZcQjdH6FQehiNt7PDwsh1Lc1qaUdWzwa6bK5C1Hdeoki0eynsM=
+X-Received: by 2002:a1f:e3c6:0:b0:3b8:ba98:bd43 with SMTP id
+ a189-20020a1fe3c6000000b003b8ba98bd43mr4417770vkh.34.1669098465648; Mon, 21
+ Nov 2022 22:27:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20221113095101.3395628-1-atishp@rivosinc.com>
-In-Reply-To: <20221113095101.3395628-1-atishp@rivosinc.com>
+References: <20221118123728.49319-1-liweiwei@iscas.ac.cn>
+ <20221118123728.49319-7-liweiwei@iscas.ac.cn>
+In-Reply-To: <20221118123728.49319-7-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 22 Nov 2022 16:10:35 +1000
-Message-ID: <CAKmqyKP-+5hOjn7p_30MfYgK1ANx9P_Y0SE7+NSq6T-GMpYyFg@mail.gmail.com>
-Subject: Re: [PATCH v2] hw/riscv: virt: Remove the redundant ipi-id property
-To: Atish Patra <atishp@rivosinc.com>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
+Date: Tue, 22 Nov 2022 16:27:19 +1000
+Message-ID: <CAKmqyKOcER1mRcGnogUfhGDjEj80ZczACFeeqmO8FG1m2kzvbA@mail.gmail.com>
+Subject: Re: [PATCH v5 6/9] target/riscv: add support for Zcmp extension
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa29.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,56 +74,309 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Nov 2022 06:11:10 -0000
+X-List-Received-Date: Tue, 22 Nov 2022 06:27:50 -0000
 
-On Sun, Nov 13, 2022 at 7:52 PM Atish Patra <atishp@rivosinc.com> wrote:
+On Fri, Nov 18, 2022 at 10:51 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> The imsic DT binding[1] has changed and no longer require an ipi-id.
-> The latest IMSIC driver dynamically allocates ipi id if slow-ipi
-> is not defined.
+> Add encode, trans* functions for Zcmp instructions
 >
-> Get rid of the unused dt property which may lead to confusion.
->
-> [1] https://lore.kernel.org/lkml/20221111044207.1478350-5-apatel@ventanamicro.com/
->
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> ---
->  hw/riscv/virt.c         | 2 --
->  include/hw/riscv/virt.h | 1 -
->  2 files changed, 3 deletions(-)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index a5bc7353b412..0bc0964e42a8 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -546,8 +546,6 @@ static void create_fdt_imsic(RISCVVirtState *s, const MemMapEntry *memmap,
->          riscv_socket_count(mc) * sizeof(uint32_t) * 4);
->      qemu_fdt_setprop_cell(mc->fdt, imsic_name, "riscv,num-ids",
->          VIRT_IRQCHIP_NUM_MSIS);
-> -    qemu_fdt_setprop_cells(mc->fdt, imsic_name, "riscv,ipi-id",
-> -        VIRT_IRQCHIP_IPI_MSI);
->      if (riscv_socket_count(mc) > 1) {
->          qemu_fdt_setprop_cell(mc->fdt, imsic_name, "riscv,hart-index-bits",
->              imsic_num_bits(imsic_max_hart_per_socket));
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index be4ab8fe7f71..62513e075c47 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -93,7 +93,6 @@ enum {
->
->  #define VIRT_PLATFORM_BUS_NUM_IRQS 32
->
-> -#define VIRT_IRQCHIP_IPI_MSI 1
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-This is used elsewhere with a different "riscv,ipi-id" and this fails to compile
-
-I have dropped this patch
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->  #define VIRT_IRQCHIP_NUM_MSIS 255
->  #define VIRT_IRQCHIP_NUM_SOURCES VIRTIO_NDEV
->  #define VIRT_IRQCHIP_NUM_PRIO_BITS 3
+> ---
+>  target/riscv/insn16.decode                |  18 +++
+>  target/riscv/insn_trans/trans_rvzce.c.inc | 189 +++++++++++++++++++++-
+>  target/riscv/translate.c                  |   5 +
+>  3 files changed, 211 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
+> index 47603ec1e0..4654c23052 100644
+> --- a/target/riscv/insn16.decode
+> +++ b/target/riscv/insn16.decode
+> @@ -21,6 +21,8 @@
+>  %rs1_3     7:3                !function=ex_rvc_register
+>  %rs2_3     2:3                !function=ex_rvc_register
+>  %rs2_5     2:5
+> +%sreg1     7:3                !function=ex_sreg_register
+> +%sreg2     2:3                !function=ex_sreg_register
+>
+>  # Immediates:
+>  %imm_ci        12:s1 2:5
+> @@ -45,6 +47,8 @@
+>
+>  %zcb_b_uimm  5:1 6:1
+>  %zcb_h_uimm  5:1                     !function=ex_shift_1
+> +%zcmp_spimm  2:2                     !function=ex_shift_4
+> +%zcmp_rlist  4:4
+>
+>  # Argument sets imported from insn32.decode:
+>  &empty                  !extern
+> @@ -56,7 +60,9 @@
+>  &u         imm rd       !extern
+>  &shift     shamt rs1 rd !extern
+>  &r2        rd rs1       !extern
+> +&r2_s      rs1 rs2      !extern
+>
+> +&zcmp      zcmp_rlist zcmp_spimm
+>
+>  # Formats 16:
+>  @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
+> @@ -98,6 +104,8 @@
+>  @zcb_lh       ... . .. ... .. ... ..  &i  imm=%zcb_h_uimm  rs1=%rs1_3 rd=%rs2_3
+>  @zcb_sb       ... . .. ... .. ... ..  &s  imm=%zcb_b_uimm  rs1=%rs1_3 rs2=%rs2_3
+>  @zcb_sh       ... . .. ... .. ... ..  &s  imm=%zcb_h_uimm  rs1=%rs1_3 rs2=%rs2_3
+> +@zcmp         ... ...  ........   ..  &zcmp  %zcmp_rlist   %zcmp_spimm
+> +@cm_mv        ... ...  ... .. ... ..  &r2_s  rs2=%sreg2    rs1=%sreg1
+>
+>  # *** RV32/64C Standard Extension (Quadrant 0) ***
+>  {
+> @@ -177,6 +185,16 @@ slli              000 .  .....  ..... 10 @c_shift2
+>  {
+>    sq              101  ... ... .. ... 10 @c_sqsp
+>    c_fsd           101   ......  ..... 10 @c_sdsp
+> +
+> +  # *** RV64 and RV32 Zcmp Extension ***
+> +  [
+> +    cm_push         101  11000  .... .. 10 @zcmp
+> +    cm_pop          101  11010  .... .. 10 @zcmp
+> +    cm_popret       101  11110  .... .. 10 @zcmp
+> +    cm_popretz      101  11100  .... .. 10 @zcmp
+> +    cm_mva01s       101  011 ... 11 ... 10 @cm_mv
+> +    cm_mvsa01       101  011 ... 01 ... 10 @cm_mv
+> +  ]
+>  }
+>  sw                110 .  .....  ..... 10 @c_swsp
+>
+> diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
+> index de96c4afaf..f647b6ed15 100644
+> --- a/target/riscv/insn_trans/trans_rvzce.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvzce.c.inc
+> @@ -1,5 +1,5 @@
+>  /*
+> - * RISC-V translation routines for the Zcb Standard Extension.
+> + * RISC-V translation routines for the Zc[b,mp] Standard Extension.
+>   *
+>   * Copyright (c) 2021-2022 PLCT Lab
+>   *
+> @@ -21,6 +21,11 @@
+>          return false;           \
+>  } while (0)
+>
+> +#define REQUIRE_ZCMP(ctx) do {   \
+> +    if (!ctx->cfg_ptr->ext_zcmp) \
+> +        return false;            \
+> +} while (0)
+> +
+>  static bool trans_c_zext_b(DisasContext *ctx, arg_c_zext_b *a)
+>  {
+>      REQUIRE_ZCB(ctx);
+> @@ -98,3 +103,185 @@ static bool trans_c_sh(DisasContext *ctx, arg_c_sh *a)
+>      REQUIRE_ZCB(ctx);
+>      return gen_store(ctx, a, MO_UW);
+>  }
+> +
+> +#define X_S0    8
+> +#define X_S1    9
+> +#define X_Sn    16
+> +
+> +static uint32_t decode_push_pop_list(DisasContext *ctx, target_ulong rlist)
+> +{
+> +    uint32_t reg_bitmap = 0;
+> +
+> +    if (ctx->cfg_ptr->ext_e && rlist > 6) {
+> +        return 0;
+> +    }
+> +
+> +    switch (rlist) {
+> +    case 15:
+> +        reg_bitmap |=  1 << (X_Sn + 11) ;
+> +        reg_bitmap |=  1 << (X_Sn + 10) ;
+> +        /* FALL THROUGH */
+> +    case 14:
+> +        reg_bitmap |=  1 << (X_Sn + 9) ;
+> +        /* FALL THROUGH */
+> +    case 13:
+> +        reg_bitmap |=  1 << (X_Sn + 8) ;
+> +        /* FALL THROUGH */
+> +    case 12:
+> +        reg_bitmap |=  1 << (X_Sn + 7) ;
+> +        /* FALL THROUGH */
+> +    case 11:
+> +        reg_bitmap |=  1 << (X_Sn + 6) ;
+> +        /* FALL THROUGH */
+> +    case 10:
+> +        reg_bitmap |=  1 << (X_Sn + 5) ;
+> +        /* FALL THROUGH */
+> +    case 9:
+> +        reg_bitmap |=  1 << (X_Sn + 4) ;
+> +        /* FALL THROUGH */
+> +    case 8:
+> +        reg_bitmap |=  1 << (X_Sn + 3) ;
+> +        /* FALL THROUGH */
+> +    case 7:
+> +        reg_bitmap |=  1 << (X_Sn + 2) ;
+> +        /* FALL THROUGH */
+> +    case 6:
+> +        reg_bitmap |=  1 << X_S1 ;
+> +        /* FALL THROUGH */
+> +    case 5:
+> +        reg_bitmap |= 1 << X_S0;
+> +        /* FALL THROUGH */
+> +    case 4:
+> +        reg_bitmap |= 1 << xRA;
+> +        break;
+> +    default:
+> +        break;
+> +    }
+> +
+> +    return reg_bitmap;
+> +}
+> +
+> +static bool gen_pop(DisasContext *ctx, arg_zcmp *a, bool ret, bool ret_val)
+> +{
+> +    REQUIRE_ZCMP(ctx);
+> +
+> +    uint32_t reg_bitmap = decode_push_pop_list(ctx, a->zcmp_rlist);
+> +    if (reg_bitmap == 0) {
+> +        return false;
+> +    }
+> +
+> +    MemOp memop = get_ol(ctx) == MXL_RV32 ? MO_TEUL : MO_TEUQ;
+> +    int reg_size = memop_size(memop);
+> +    target_ulong stack_adj = ROUND_UP(ctpop32(reg_bitmap) * reg_size, 16) +
+> +                             a->zcmp_spimm;
+> +    TCGv sp = dest_gpr(ctx, xSP);
+> +    TCGv addr = tcg_temp_new();
+> +    int i;
+> +
+> +    tcg_gen_addi_tl(addr, sp, stack_adj - reg_size);
+> +
+> +    for (i = X_Sn + 11; i >= 0; i--) {
+> +        if (reg_bitmap & (1 << i)) {
+> +            TCGv dest = dest_gpr(ctx, i);
+> +            tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
+> +            gen_set_gpr(ctx, i, dest);
+> +            tcg_gen_subi_tl(addr, addr, reg_size);
+> +        }
+> +    }
+> +
+> +    tcg_gen_addi_tl(sp, sp, stack_adj);
+> +    gen_set_gpr(ctx, xSP, sp);
+> +
+> +    if (ret_val) {
+> +        gen_set_gpr(ctx, xA0, ctx->zero);
+> +    }
+> +
+> +    if (ret) {
+> +        TCGv ret_addr = get_gpr(ctx, xRA, EXT_NONE);
+> +        gen_set_pc(ctx, ret_addr);
+> +        tcg_gen_lookup_and_goto_ptr();
+> +        ctx->base.is_jmp = DISAS_NORETURN;
+> +    }
+> +
+> +    tcg_temp_free(addr);
+> +    return true;
+> +}
+> +
+> +static bool trans_cm_push(DisasContext *ctx, arg_cm_push *a)
+> +{
+> +    REQUIRE_ZCMP(ctx);
+> +
+> +    uint32_t reg_bitmap = decode_push_pop_list(ctx, a->zcmp_rlist);
+> +    if (reg_bitmap == 0) {
+> +        return false;
+> +    }
+> +
+> +    MemOp memop = get_ol(ctx) == MXL_RV32 ? MO_TEUL : MO_TEUQ;
+> +    int reg_size = memop_size(memop);
+> +    target_ulong stack_adj = ROUND_UP(ctpop32(reg_bitmap) * reg_size, 16) +
+> +                             a->zcmp_spimm;
+> +    TCGv sp = dest_gpr(ctx, xSP);
+> +    TCGv addr = tcg_temp_new();
+> +    int i;
+> +
+> +    tcg_gen_subi_tl(addr, sp, reg_size);
+> +
+> +    for (i = X_Sn + 11; i >= 0; i--) {
+> +        if (reg_bitmap & (1 << i)) {
+> +            TCGv val = get_gpr(ctx, i, EXT_NONE);
+> +            tcg_gen_qemu_st_tl(val, addr, ctx->mem_idx, memop);
+> +            tcg_gen_subi_tl(addr, addr, reg_size);
+> +        }
+> +    }
+> +
+> +    tcg_gen_subi_tl(sp, sp, stack_adj);
+> +    gen_set_gpr(ctx, xSP, sp);
+> +
+> +    tcg_temp_free(addr);
+> +    return true;
+> +}
+> +
+> +static bool trans_cm_pop(DisasContext *ctx, arg_cm_pop *a)
+> +{
+> +    return gen_pop(ctx, a, false, false);
+> +}
+> +
+> +static bool trans_cm_popret(DisasContext *ctx, arg_cm_popret *a)
+> +{
+> +    return gen_pop(ctx, a, true, false);
+> +}
+> +
+> +static bool trans_cm_popretz(DisasContext *ctx, arg_cm_popret *a)
+> +{
+> +    return gen_pop(ctx, a, true, true);
+> +}
+> +
+> +static bool trans_cm_mva01s(DisasContext *ctx, arg_cm_mva01s *a)
+> +{
+> +    REQUIRE_ZCMP(ctx);
+> +
+> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
+> +    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
+> +
+> +    gen_set_gpr(ctx, xA0, src1);
+> +    gen_set_gpr(ctx, xA1, src2);
+> +
+> +    return true;
+> +}
+> +
+> +static bool trans_cm_mvsa01(DisasContext *ctx, arg_cm_mvsa01 *a)
+> +{
+> +    REQUIRE_ZCMP(ctx);
+> +
+> +    if (a->rs1 == a->rs2) {
+> +        return false;
+> +    }
+> +
+> +    TCGv a0 = get_gpr(ctx, xA0, EXT_NONE);
+> +    TCGv a1 = get_gpr(ctx, xA1, EXT_NONE);
+> +
+> +    gen_set_gpr(ctx, a->rs1, a0);
+> +    gen_set_gpr(ctx, a->rs2, a1);
+> +
+> +    return true;
+> +}
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index ca01da3309..1b2515650f 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -738,6 +738,11 @@ static int ex_rvc_register(DisasContext *ctx, int reg)
+>      return 8 + reg;
+>  }
+>
+> +static int ex_sreg_register(DisasContext *ctx, int reg)
+> +{
+> +    return reg < 2 ? reg + 8 : reg + 16;
+> +}
+> +
+>  static int ex_rvc_shiftli(DisasContext *ctx, int imm)
+>  {
+>      /* For RV128 a shamt of 0 means a shift by 64. */
 > --
 > 2.25.1
 >
