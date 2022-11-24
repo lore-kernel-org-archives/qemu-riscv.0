@@ -1,52 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oyAkR-0003O8-H9
-	for mharc-qemu-riscv@gnu.org; Thu, 24 Nov 2022 06:50:31 -0500
+	id 1oyAkb-0003WW-NK
+	for mharc-qemu-riscv@gnu.org; Thu, 24 Nov 2022 06:50:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oyAkP-0003Ld-UB
- for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:30 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ id 1oyAkU-0003S3-Lz
+ for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:34 -0500
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oyAkO-0004ow-4I
- for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:29 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- p13-20020a05600c468d00b003cf8859ed1bso1077000wmo.1
- for <qemu-riscv@nongnu.org>; Thu, 24 Nov 2022 03:50:27 -0800 (PST)
+ id 1oyAkQ-0004pi-Ew
+ for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:33 -0500
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 83-20020a1c0256000000b003d03017c6efso3077966wmc.4
+ for <qemu-riscv@nongnu.org>; Thu, 24 Nov 2022 03:50:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=uuMgKH+3fxzrMAWB3ctjGbRmQ7Bt4fbv5IUickRCrxw=;
- b=BB++zy2w2VqVmaabat7qSgdOI39bEbIx2kWIePXP9cbOvAK78MkkVm37XABBRDF6vj
- OlnCYQSEZdLO+0VuQC7+xUROY7KKpgFOGeOGVNmtK6UxwIBZq3IhG5gXuyWbf5SgU5Gd
- XILAJCgVg/gvSYIsFIJLdv14B09nFXPwggKzNrIKydYwgKGzH1smiC9RkU7a4U9g+dVX
- 49NPsBI8YnCzPks1UZYValv86KPn3BpIJyjNaDFktuJUOt095g9T3jBXW/0u7hHp1QiG
- jeqS1depmZ2B4vqCVUhDn/yhH7wvU1v55tpESvXyMeg22hFtDK6z/d273H4rJp27MFbo
- KAzA==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vD0Cc37CcTxWt1/XvjfCLN/FjuSOyiDDi2JBPJBu9j0=;
+ b=PN9AIoAzVOhCzrAvNZ9QRUizpKlM/aPILjX4u46Uc53R+0j5SujJ3+p/yZTTkWuj2g
+ tRHOhwKuPjflHLYVhjMWBPIhUPJaObv3LWDptzur0zFIavKY2gC8vsLRtuUV8OIpIRXz
+ Z8+TeUpqFjQpctgVTv3PxWEQAAHkRkGEUUQlHai8/B1KvqmPZxvJ5Y7iFgzUZw11SqGI
+ ML93Y+O30DR0t/pURqmMqXHpNuivbXnXdoeUn1e9Ts8RLgBKEjkxZAlIRzofVQjYKDVI
+ vHkI5RQ6pTHXJ4rDqOCrzM1cf6Z46W4bA6xNkfsorH5fEArKI+FIWJ107KovFMriTdjm
+ l7+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=uuMgKH+3fxzrMAWB3ctjGbRmQ7Bt4fbv5IUickRCrxw=;
- b=3u+WrmAC8QaK5drV+FIe0zCM5h5cNd20dHxxQpdYGwsNVO9ILgadk8dPgGfOwx0Xpn
- s4wZVopf/5/PAMZOKujSJ4WAJSI/lazgDnCTG+I9LH/MLj434Utq5xVs0yTi+bb0KV1L
- LThkI918JF6hUcRuTwqhr5g8NO2CEkub08b1kzXLRc9fTuB4DVfRXpQ/JSI4lGlylpPP
- mX4bKF4DhzHMCrNOXzW0fuGY8f20OVo6FGNekRJYp72TnXUKyF5N/L2rIxqgwlQXl9DZ
- 4IndJdpQ9wLklqC2zFUukY60AdKy52we24nGmQOs3fBfkNam/GE/5tEg+POPwKey0W7j
- rhTw==
-X-Gm-Message-State: ANoB5plJA5tceOIaCrb7dfg4gDNWj582uKfh6v0OxUDmDmbAdCXf/R6K
- XrcIIy9/x8jiM57Ecl0xrxdlsw==
-X-Google-Smtp-Source: AA0mqf53mW7KIw+TvwqPtV751NhcTPCKzg2AFJ7rrnusUE35k6ONGPXSVcwPd39PHp/aTQcv9KznTg==
-X-Received: by 2002:a05:600c:35c8:b0:3cf:cf89:2f02 with SMTP id
- r8-20020a05600c35c800b003cfcf892f02mr12691218wmq.2.1669290626201; 
- Thu, 24 Nov 2022 03:50:26 -0800 (PST)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vD0Cc37CcTxWt1/XvjfCLN/FjuSOyiDDi2JBPJBu9j0=;
+ b=ybcptVZc3Dn0DKaKOrjjmnU+2urPI4l1brbjdHtt1IBAQITO7tRmVYo5kO9KVc0txE
+ +ULhNRvU3Wrb5g8V6nQE2TSRAtjYmUAJ8CfuluSojg1dDMkKVGJvGt8D61WBlZQ36F4t
+ 1EWWIAFArO3AkWfi9TxgVMXdgWWvDTrfRsq9eZhmtOhxUHB6d2+jewY5VzOpF76YAyqx
+ mqaiZied0af4gfjupy2xI5+kmLK1LeWELif1LxYhL0UcUJuzDr+GqBh5hDSDiVp6cbhK
+ 2xuhrJ7695+URvxA0MzNckAIfrDKr/IVsNR1QB7AhTuk4H8XlbLrnC8BWtsnOQPO4hPZ
+ SvAQ==
+X-Gm-Message-State: ANoB5pmNOEX2XzcRiWB4enhSimhozBDoy5PSMsG+VlbZGblCc57n4ots
+ TEFACgyt8kegI+66vEBKA/LHtA==
+X-Google-Smtp-Source: AA0mqf4f/lwwcuISKRk0uY674d4zrtbTIq0I9RR6IVUEBsRckUPPZCb5feD8ENyq4u68GK/aO3cKjQ==
+X-Received: by 2002:a05:600c:19d0:b0:3cf:e7b7:d87d with SMTP id
+ u16-20020a05600c19d000b003cfe7b7d87dmr9177192wmq.95.1669290627821; 
+ Thu, 24 Nov 2022 03:50:27 -0800 (PST)
 Received: from orth.archaic.org.uk (orth.archaic.org.uk. [2001:8b0:1d0::2])
  by smtp.gmail.com with ESMTPSA id
- f14-20020a05600c154e00b003c6f3e5ba42sm6212559wmg.46.2022.11.24.03.50.24
+ f14-20020a05600c154e00b003c6f3e5ba42sm6212559wmg.46.2022.11.24.03.50.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Nov 2022 03:50:25 -0800 (PST)
+ Thu, 24 Nov 2022 03:50:27 -0800 (PST)
 From: Peter Maydell <peter.maydell@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -73,21 +74,24 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org
-Subject: [PATCH for-8.0 00/19] Convert most CPU classes to 3-phase reset
-Date: Thu, 24 Nov 2022 11:50:03 +0000
-Message-Id: <20221124115023.2437291-1-peter.maydell@linaro.org>
+Subject: [PATCH for-8.0 01/19] hw/core/cpu-common: Convert TYPE_CPU class to
+ 3-phase reset
+Date: Thu, 24 Nov 2022 11:50:04 +0000
+Message-Id: <20221124115023.2437291-2-peter.maydell@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20221124115023.2437291-1-peter.maydell@linaro.org>
+References: <20221124115023.2437291-1-peter.maydell@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=peter.maydell@linaro.org; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=peter.maydell@linaro.org; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,89 +104,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2022 11:50:30 -0000
+X-List-Received-Date: Thu, 24 Nov 2022 11:50:35 -0000
 
-This patchset converts the TYPE_CPU base class and most subclasses
-to use 3-phase reset. (The exception is s390, which is doing
-something a bit odd with its reset, so the conversion there isn't
-going to be simple like these others. So I'll do that one
-separately.)
+Convert the parent class TYPE_CPU to 3-phase reset. This
+is a necessary prerequisite to converting the subclasses.
 
-The rationale here is that we should be able to get rid of
-all the remaining uses of device_class_set_parent_reset()
-and remove/simplify some of the transitional code that's
-currently bridging between "legacy" reset and 3-phase reset.
+Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
+---
+ hw/core/cpu-common.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-NB: even with this series, it's not possible to usefully do
-anything requiring 3-phase reset of a CPU yet, because all
-CPU objects get ad-hoc reset by some code somewhere doing
-a cpu_reset() call on them, which will just do all 3 phases
-in order. I would like to try to address that eventually,
-but it's not trivial.
-
-thanks
--- PMM
-
-Peter Maydell (19):
-  hw/core/cpu-common: Convert TYPE_CPU class to 3-phase reset
-  target/arm: Convert to 3-phase reset
-  target/avr: Convert to 3-phase reset
-  target/cris: Convert to 3-phase reset
-  target/hexagon: Convert to 3-phase reset
-  target/i386: Convert to 3-phase reset
-  target/loongarch: Convert to 3-phase reset
-  target/m68k: Convert to 3-phase reset
-  target/microblaze: Convert to 3-phase reset
-  target/mips: Convert to 3-phase reset
-  target/nios2: Convert to 3-phase reset
-  target/openrisc: Convert to 3-phase reset
-  target/ppc: Convert to 3-phase reset
-  target/riscv: Convert to 3-phase reset
-  target/rx: Convert to 3-phase reset
-  target/sh4: Convert to 3-phase reset
-  target/sparc: Convert to 3-phase reset
-  target/tricore: Convert to 3-phase reset
-  target/xtensa: Convert to 3-phase reset
-
- target/arm/cpu-qom.h        |  4 ++--
- target/avr/cpu-qom.h        |  4 ++--
- target/cris/cpu-qom.h       |  4 ++--
- target/hexagon/cpu.h        |  2 +-
- target/i386/cpu-qom.h       |  4 ++--
- target/loongarch/cpu.h      |  4 ++--
- target/m68k/cpu-qom.h       |  4 ++--
- target/microblaze/cpu-qom.h |  4 ++--
- target/mips/cpu-qom.h       |  4 ++--
- target/nios2/cpu.h          |  4 ++--
- target/openrisc/cpu.h       |  4 ++--
- target/ppc/cpu-qom.h        |  4 ++--
- target/riscv/cpu.h          |  4 ++--
- target/rx/cpu-qom.h         |  4 ++--
- target/sh4/cpu-qom.h        |  4 ++--
- target/sparc/cpu-qom.h      |  4 ++--
- target/tricore/cpu-qom.h    |  2 +-
- target/xtensa/cpu-qom.h     |  4 ++--
- hw/core/cpu-common.c        |  7 ++++---
- target/arm/cpu.c            | 13 +++++++++----
- target/avr/cpu.c            | 13 +++++++++----
- target/cris/cpu.c           | 12 ++++++++----
- target/hexagon/cpu.c        | 12 ++++++++----
- target/i386/cpu.c           | 12 ++++++++----
- target/loongarch/cpu.c      | 12 ++++++++----
- target/m68k/cpu.c           | 12 ++++++++----
- target/microblaze/cpu.c     | 12 ++++++++----
- target/mips/cpu.c           | 12 ++++++++----
- target/nios2/cpu.c          | 12 ++++++++----
- target/openrisc/cpu.c       | 12 ++++++++----
- target/ppc/cpu_init.c       | 12 ++++++++----
- target/riscv/cpu.c          | 12 ++++++++----
- target/rx/cpu.c             | 13 ++++++++-----
- target/sh4/cpu.c            | 12 ++++++++----
- target/sparc/cpu.c          | 12 ++++++++----
- target/tricore/cpu.c        | 12 ++++++++----
- target/xtensa/cpu.c         | 12 ++++++++----
- 37 files changed, 184 insertions(+), 110 deletions(-)
-
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index f9fdd46b9d7..78b5f350a00 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -116,9 +116,9 @@ void cpu_reset(CPUState *cpu)
+     trace_guest_cpu_reset(cpu);
+ }
+ 
+-static void cpu_common_reset(DeviceState *dev)
++static void cpu_common_reset_hold(Object *obj)
+ {
+-    CPUState *cpu = CPU(dev);
++    CPUState *cpu = CPU(obj);
+     CPUClass *cc = CPU_GET_CLASS(cpu);
+ 
+     if (qemu_loglevel_mask(CPU_LOG_RESET)) {
+@@ -259,6 +259,7 @@ static int64_t cpu_common_get_arch_id(CPUState *cpu)
+ static void cpu_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
++    ResettableClass *rc = RESETTABLE_CLASS(klass);
+     CPUClass *k = CPU_CLASS(klass);
+ 
+     k->parse_features = cpu_common_parse_features;
+@@ -269,7 +270,7 @@ static void cpu_class_init(ObjectClass *klass, void *data)
+     set_bit(DEVICE_CATEGORY_CPU, dc->categories);
+     dc->realize = cpu_common_realizefn;
+     dc->unrealize = cpu_common_unrealizefn;
+-    dc->reset = cpu_common_reset;
++    rc->phases.hold = cpu_common_reset_hold;
+     cpu_class_init_props(dc);
+     /*
+      * Reason: CPUs still need special care by board code: wiring up
 -- 
 2.25.1
 
