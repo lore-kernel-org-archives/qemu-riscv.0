@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oyAkx-00043R-C8
-	for mharc-qemu-riscv@gnu.org; Thu, 24 Nov 2022 06:51:03 -0500
+	id 1oyAky-00045K-Ay
+	for mharc-qemu-riscv@gnu.org; Thu, 24 Nov 2022 06:51:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oyAkm-0003dP-G4
- for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:52 -0500
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ id 1oyAks-0003qr-1o
+ for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:58 -0500
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oyAkf-0004wd-Gj
- for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:52 -0500
-Received: by mail-wr1-x435.google.com with SMTP id i12so2187121wrb.0
- for <qemu-riscv@nongnu.org>; Thu, 24 Nov 2022 03:50:43 -0800 (PST)
+ id 1oyAkm-0004uu-83
+ for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:57 -0500
+Received: by mail-wr1-x433.google.com with SMTP id i12so2187631wrb.0
+ for <qemu-riscv@nongnu.org>; Thu, 24 Nov 2022 03:50:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rwpZITjHgQ8cOpxT8gQYzyXjPVENzbqAFCPuHxyLkQ8=;
- b=YSQmtuXfYmEMyAZJQQx+sMhkzkfMFBPjsg9Pck+3XE3HU+6t0j/AlUltMb6n7+C8pC
- dLGyyLj+ugYh1v5AQ6O+lBduwFbV7kjIQI8flwycMuqWCDa8SsShqH2fI7lnpAaT4zYs
- XGvfIj1Y75A1gIcfXeZDfhI6Gosxvvt4tZK9c4itdlC/lXatRR6+mlDRMKpw3zqx085M
- q6pF/ux9lcNk4X1zjjI0DrkHP72OEqrnnEGyvjRu8rYKLaaMlMUGNGbYmn5qpQorcGqn
- PWCB6LTMcxLiKjNUcblCYWFW2qRuwjrcfBR5aeaWSIDG0ibgnSY6BqHzezSJryqW8S2s
- dPrg==
+ bh=ZpPOhWgTJeRtGlJ/Bb9mJkWWu83x48fPXZ9qUrHHGz0=;
+ b=RBQx5v8NdoZVOHTk82/TeT0jLfN8OFur+hGOOdDp70zHx09Vu9fTBYXEo6BblxdzQp
+ X6nxWJ0CYHaAIy0KTq8U5BV226hVzPVgAXLbqqPGqM3h2PxCp6eMmgdRCHm9jt/JHgXB
+ exIFC+goYjYzJTs6MvAjq2/U0TuT9uYDx72PaF+PyVMusn4XcnkdCGD9DZsgZVn804PC
+ 8jkrJKKFzBHMelvclFxnLPJAGkBd1Kk0kM6MC9/Ib8bRKP4x29tAVxcnPnp7BSUEUqLy
+ BYRqGyC7q0WPWJOVe0rC3qJUbOOqYoQnCeHXxrdVSk7eME1nnfjISaaqy/RVR4uWEXZq
+ Q61g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rwpZITjHgQ8cOpxT8gQYzyXjPVENzbqAFCPuHxyLkQ8=;
- b=R/ZjU3EM+6BLmu73jtsnlgpr/l4MpF5vJ8HClyeXbARTOzvvcioZCJQde5Yz3qoR83
- wSyVk1l3rcVz4A5QQwYReOpYGlOQbHFMO4kPd6b0JL5mUHtbwxjmq5tkC0VD04qO3t39
- 83m1zmgfh/4g4MhkV4zu+sztUYyRW/BFZcZtrzQwmKtvAJsVCoX/kul81Xrr8ZL2cJhO
- fKHiSr2By5U4puqL1KqK6V+cw8O7lIhRR7zbleC5oAzhO4z8lc5hq2lpCHOS5iOmsnjY
- oIzj85Q73EmDTEm6EK+NCbk8a1YKVBjSw0GUYNNMV5voDvnAL+k1udzGNDUUmEN/mrW1
- uIiw==
-X-Gm-Message-State: ANoB5pmkbXrho4wYry7LMABTf20y3d4KBDU3X9XRaKlSOmb0TYs3l7z4
- HoMnevd4gaESN0FnCohKs7GOog==
-X-Google-Smtp-Source: AA0mqf4+cbYCBnf5xToYwVN2in68msjw4bswxPTNWXxWpShznlbY3IVUeprSuPmofHA4Cc+6lZZiAA==
-X-Received: by 2002:adf:c64e:0:b0:236:78cd:f3d2 with SMTP id
- u14-20020adfc64e000000b0023678cdf3d2mr20645442wrg.719.1669290642870; 
- Thu, 24 Nov 2022 03:50:42 -0800 (PST)
+ bh=ZpPOhWgTJeRtGlJ/Bb9mJkWWu83x48fPXZ9qUrHHGz0=;
+ b=8B7j5yDVoIGOQVO8N8gA5XvVTsWgpkCNec22fMtQDe7OfkLDNnRTYgpbSHIwJvOU2L
+ K4RfFrXsz3GYX5p2hno8/MG1eTnAfEeXkkrfFqvrRG/vEutfD2XGe/tAadyDTISondsQ
+ tfsX4xCXE4rBJAh0frN7iJT8rAZvGyHXN8qyhoGsolTAMCN/y2RaKh9TU9LIU+qPKncR
+ gANsf0nHjR8DDnbBqe/MiH0VP+2cD01edIigSL7hzXZTJY0/Zr178kFTckpM4uLQb36p
+ n19lFAJukjlB0GoZaYtyBEnPOkx3fhepqh4jZNlvGqchtsr5pl6jbcJKECkT9wN3qE3X
+ JU1w==
+X-Gm-Message-State: ANoB5pmmfHvJB6/nH+GJj1bWavcrOIcb6a87XnFyiWw/MzG7Nt3Fq8la
+ b1lsuXnoCf7641HF6+q1wYv1Zg==
+X-Google-Smtp-Source: AA0mqf6XRo+GAoVTDQtA0kJgkPOysOHUUpgDac0yrZz2SESn5hIgZPdLOqq/OPY/xtboiujMF0deXw==
+X-Received: by 2002:a05:6000:78d:b0:22e:3d63:80bc with SMTP id
+ bu13-20020a056000078d00b0022e3d6380bcmr20933017wrb.30.1669290651334; 
+ Thu, 24 Nov 2022 03:50:51 -0800 (PST)
 Received: from orth.archaic.org.uk (orth.archaic.org.uk. [2001:8b0:1d0::2])
  by smtp.gmail.com with ESMTPSA id
- f14-20020a05600c154e00b003c6f3e5ba42sm6212559wmg.46.2022.11.24.03.50.41
+ f14-20020a05600c154e00b003c6f3e5ba42sm6212559wmg.46.2022.11.24.03.50.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Nov 2022 03:50:42 -0800 (PST)
+ Thu, 24 Nov 2022 03:50:50 -0800 (PST)
 From: Peter Maydell <peter.maydell@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -73,23 +73,23 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org
-Subject: [PATCH for-8.0 11/19] target/nios2: Convert to 3-phase reset
-Date: Thu, 24 Nov 2022 11:50:14 +0000
-Message-Id: <20221124115023.2437291-12-peter.maydell@linaro.org>
+Subject: [PATCH for-8.0 17/19] target/sparc: Convert to 3-phase reset
+Date: Thu, 24 Nov 2022 11:50:20 +0000
+Message-Id: <20221124115023.2437291-18-peter.maydell@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221124115023.2437291-1-peter.maydell@linaro.org>
 References: <20221124115023.2437291-1-peter.maydell@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=peter.maydell@linaro.org; helo=mail-wr1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=peter.maydell@linaro.org; helo=mail-wr1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,78 +102,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2022 11:50:53 -0000
+X-List-Received-Date: Thu, 24 Nov 2022 11:50:58 -0000
 
-Convert the nios2 CPU class to use 3-phase reset, so it doesn't
+Convert the sparc CPU class to use 3-phase reset, so it doesn't
 need to use device_class_set_parent_reset() any more.
 
 Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
 ---
- target/nios2/cpu.h |  4 ++--
- target/nios2/cpu.c | 12 ++++++++----
+ target/sparc/cpu-qom.h |  4 ++--
+ target/sparc/cpu.c     | 12 ++++++++----
  2 files changed, 10 insertions(+), 6 deletions(-)
 
-diff --git a/target/nios2/cpu.h b/target/nios2/cpu.h
-index f85581ee560..b1a55490747 100644
---- a/target/nios2/cpu.h
-+++ b/target/nios2/cpu.h
-@@ -37,7 +37,7 @@ OBJECT_DECLARE_CPU_TYPE(Nios2CPU, Nios2CPUClass, NIOS2_CPU)
- 
+diff --git a/target/sparc/cpu-qom.h b/target/sparc/cpu-qom.h
+index 86ed37d9333..78bf00b9a23 100644
+--- a/target/sparc/cpu-qom.h
++++ b/target/sparc/cpu-qom.h
+@@ -35,7 +35,7 @@ typedef struct sparc_def_t sparc_def_t;
  /**
-  * Nios2CPUClass:
+  * SPARCCPUClass:
+  * @parent_realize: The parent class' realize handler.
 - * @parent_reset: The parent class' reset handler.
 + * @parent_phases: The parent class' reset phase handlers.
   *
-  * A Nios2 CPU model.
+  * A SPARC CPU model.
   */
-@@ -47,7 +47,7 @@ struct Nios2CPUClass {
+@@ -45,7 +45,7 @@ struct SPARCCPUClass {
      /*< public >*/
  
      DeviceRealize parent_realize;
 -    DeviceReset parent_reset;
 +    ResettablePhases parent_phases;
+     sparc_def_t *cpu_def;
  };
  
- #define TARGET_HAS_ICE 1
-diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
-index 9a5351bc81d..cff30823dad 100644
---- a/target/nios2/cpu.c
-+++ b/target/nios2/cpu.c
-@@ -57,14 +57,16 @@ static bool nios2_cpu_has_work(CPUState *cs)
-     return cs->interrupt_request & CPU_INTERRUPT_HARD;
- }
+diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
+index 4c3d08a8751..1734ef8dc6b 100644
+--- a/target/sparc/cpu.c
++++ b/target/sparc/cpu.c
+@@ -28,14 +28,16 @@
  
--static void nios2_cpu_reset(DeviceState *dev)
-+static void nios2_cpu_reset_hold(Object *obj)
+ //#define DEBUG_FEATURES
+ 
+-static void sparc_cpu_reset(DeviceState *dev)
++static void sparc_cpu_reset_hold(Object *obj)
  {
--    CPUState *cs = CPU(dev);
-+    CPUState *cs = CPU(obj);
-     Nios2CPU *cpu = NIOS2_CPU(cs);
-     Nios2CPUClass *ncc = NIOS2_CPU_GET_CLASS(cpu);
-     CPUNios2State *env = &cpu->env;
+-    CPUState *s = CPU(dev);
++    CPUState *s = CPU(obj);
+     SPARCCPU *cpu = SPARC_CPU(s);
+     SPARCCPUClass *scc = SPARC_CPU_GET_CLASS(cpu);
+     CPUSPARCState *env = &cpu->env;
  
--    ncc->parent_reset(dev);
-+    if (ncc->parent_phases.hold) {
-+        ncc->parent_phases.hold(obj);
+-    scc->parent_reset(dev);
++    if (scc->parent_phases.hold) {
++        scc->parent_phases.hold(obj);
 +    }
  
-     memset(env->ctrl, 0, sizeof(env->ctrl));
-     env->pc = cpu->reset_addr;
-@@ -371,11 +373,13 @@ static void nios2_cpu_class_init(ObjectClass *oc, void *data)
-     DeviceClass *dc = DEVICE_CLASS(oc);
+     memset(env, 0, offsetof(CPUSPARCState, end_reset_fields));
+     env->cwp = 0;
+@@ -889,12 +891,14 @@ static void sparc_cpu_class_init(ObjectClass *oc, void *data)
+     SPARCCPUClass *scc = SPARC_CPU_CLASS(oc);
      CPUClass *cc = CPU_CLASS(oc);
-     Nios2CPUClass *ncc = NIOS2_CPU_CLASS(oc);
+     DeviceClass *dc = DEVICE_CLASS(oc);
 +    ResettableClass *rc = RESETTABLE_CLASS(oc);
  
-     device_class_set_parent_realize(dc, nios2_cpu_realizefn,
-                                     &ncc->parent_realize);
-     device_class_set_props(dc, nios2_properties);
--    device_class_set_parent_reset(dc, nios2_cpu_reset, &ncc->parent_reset);
-+    resettable_class_set_parent_phases(rc, NULL, nios2_cpu_reset_hold, NULL,
-+                                       &ncc->parent_phases);
+     device_class_set_parent_realize(dc, sparc_cpu_realizefn,
+                                     &scc->parent_realize);
+     device_class_set_props(dc, sparc_cpu_properties);
  
-     cc->class_by_name = nios2_cpu_class_by_name;
-     cc->has_work = nios2_cpu_has_work;
+-    device_class_set_parent_reset(dc, sparc_cpu_reset, &scc->parent_reset);
++    resettable_class_set_parent_phases(rc, NULL, sparc_cpu_reset_hold, NULL,
++                                       &scc->parent_phases);
+ 
+     cc->class_by_name = sparc_cpu_class_by_name;
+     cc->parse_features = sparc_cpu_parse_features;
 -- 
 2.25.1
 
