@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oyAko-0003h1-0W
-	for mharc-qemu-riscv@gnu.org; Thu, 24 Nov 2022 06:50:54 -0500
+	id 1oyAkr-0003ol-6T
+	for mharc-qemu-riscv@gnu.org; Thu, 24 Nov 2022 06:50:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oyAkd-0003Wu-HZ
- for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:45 -0500
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ id 1oyAkk-0003b3-TD
+ for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:51 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oyAkY-0004u4-UG
- for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:42 -0500
-Received: by mail-wr1-x42d.google.com with SMTP id n7so2093365wrr.13
- for <qemu-riscv@nongnu.org>; Thu, 24 Nov 2022 03:50:38 -0800 (PST)
+ id 1oyAkd-0004wG-85
+ for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:45 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id q7so1232528wrr.8
+ for <qemu-riscv@nongnu.org>; Thu, 24 Nov 2022 03:50:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6ZF6j0QSh9sYA2HgkILcyWukmhzzkxCNhgIX/8WMk28=;
- b=NAT4FHh2y5rfoCsN2LOyaBHUjKRRBGr4i2n+kh6KKWC9FTpJO2uKeVXKlXd67RYKfP
- 1OcT1jIORmWT+rkZaYG4r9ZM2pMa75XvwYxq4h2d5Js4HqalHq4Dy3f7Kp91qEBiaVex
- hlc+82YG/1xfezhc/951gCNyri7JysQt4mpLodDf+8gGXagB5G+wnRrNXq4Cj5jrn/4V
- XGO0xAHBZRDm4JAjovVfnk1Ln4iic7UR+VoiwK7kh6b2lLsJFHWmqKQ4M3yIuTeGuG9A
- 3CTA2in20ok/RxmkqYkVC/t7NMgwNqHrA/FrEWkeJS+MilCaJtjPjWeByuGIfuxM7o9x
- XWsg==
+ bh=hsda7Zq3jpyzptb9XynNFoMbGolRoFCYCg8lAZ1ErIY=;
+ b=idcImeyGPJcbrfK80jQE5KdO0ppMXgOCpgoGsyDlc0mbIS5e906iZvS8oWRxdmjWWw
+ INBIjkBKlsQ8SGXP15u7ME3hXSKa0Sn9gx9C5RP8rQi19r0JoS9bLY9kQIbZtMQek/ep
+ 4W7s/NWFM8qY54k/O6wiieiaSAMz2L+pUgtWJoNXJD9VnaVz5X6PQul286voFwFsJe1o
+ KjPiUdAWXQqC1ICGdlXVo3fOl1/EbgoGID4hda7K8TF3pSwvqNDxvTllpnc8PZ0MlWtw
+ RfowLrCRx8aGBNe23g843Vu4YolLbyBOIDs2ofrZVFH2stAx1FnueWINyGGUV7UmwOQq
+ Jfow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6ZF6j0QSh9sYA2HgkILcyWukmhzzkxCNhgIX/8WMk28=;
- b=yRBLCZuYYwGJcZSMWKC7nw3Xl/VW1PyG1S/UfCb9GWnTyW8eaXnNuRM4xTPpFluVKx
- Hp3/SHEc9uEKjxUkTpP0M/k5lWV/Df+Re5zqU8igl8ZCei5wC0JLSUHrQiT1pUaZjWGq
- IFBuhOOplKhxelaQmoGY/X+qnnwgSEpZ0eDq1pI7hpgJvyobo0C+A6b8cMY2AR0Hhm9u
- 7NJJr7YIh4XNH4vjGLjThujHZ47jQXOZkp30SlkCob4RTzFp7a9vrFSVn10nVP+B59b+
- E/gVXHJ7DNtfYlyqdFnhpI4KcKXbhQkGyb7Hen5pbm7FBgErND0zPnRolY/D68Nw+N/F
- IvIw==
-X-Gm-Message-State: ANoB5pkVG1S993Jh7/v792SZDOwFxvzjPPHchEivcOrNaDeLKMn43LX5
- IDZpMSpC6TUPBr7aOp5Dwu5OzQ==
-X-Google-Smtp-Source: AA0mqf7y3HAlyjrUnoy5KKdKEnubU9vlYS0e+UWj1AMCjANf18MWxcGzbeb1b1j3hJG5h0rLKV158g==
-X-Received: by 2002:a05:6000:12c7:b0:241:c876:773c with SMTP id
- l7-20020a05600012c700b00241c876773cmr14540856wrx.95.1669290637064; 
- Thu, 24 Nov 2022 03:50:37 -0800 (PST)
+ bh=hsda7Zq3jpyzptb9XynNFoMbGolRoFCYCg8lAZ1ErIY=;
+ b=YHTgZe74XVR8qwq8rhy1rQQZOM2S7TNxvl6kvrTrWgH8aRchb9j1zmKCBZepaii428
+ ji6k28QjnYtoByZYDLrYcOvzJSxUVLL3p1xjopJd5YA5xvDUagE6XZERWiiQ1NDMywP1
+ v5bSjhLqvaPhPBFYeudAAv8NyEczhovJP2PGHQ99Sg+hgTOknD+VQ8TCroCKr8Q1Ht7M
+ TO70WetC0rNcedOdi2ZRnE4/VOgbPipU1Bud9YTYpBrGVFqmmoBntYFl3DvkNWVRaBDC
+ 2Fc8iZMgJDiwjKn6l4buyPhrLj2X7em5P49tbo70xd4eBJCFaI1xPbo+c7ER4Y3UxVl1
+ ZG1w==
+X-Gm-Message-State: ANoB5pkKVpBnOsDWTP8XLFQdQl3MBu0H1uDK8MZ42w68aASKyKCZAkE+
+ xK8A2lDq+nu3oRczY7hoTq6qYQ==
+X-Google-Smtp-Source: AA0mqf6ey5ZPdpQbpXVy+hxj0i+WKQpNNkI5xaWiG3YViikjRUKOCMwtzrTKEecD6wATpO+LO/Ihlw==
+X-Received: by 2002:a5d:4533:0:b0:241:d13a:1d52 with SMTP id
+ j19-20020a5d4533000000b00241d13a1d52mr13278689wra.270.1669290641533; 
+ Thu, 24 Nov 2022 03:50:41 -0800 (PST)
 Received: from orth.archaic.org.uk (orth.archaic.org.uk. [2001:8b0:1d0::2])
  by smtp.gmail.com with ESMTPSA id
- f14-20020a05600c154e00b003c6f3e5ba42sm6212559wmg.46.2022.11.24.03.50.35
+ f14-20020a05600c154e00b003c6f3e5ba42sm6212559wmg.46.2022.11.24.03.50.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Nov 2022 03:50:36 -0800 (PST)
+ Thu, 24 Nov 2022 03:50:40 -0800 (PST)
 From: Peter Maydell <peter.maydell@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -73,16 +73,16 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org
-Subject: [PATCH for-8.0 07/19] target/loongarch: Convert to 3-phase reset
-Date: Thu, 24 Nov 2022 11:50:10 +0000
-Message-Id: <20221124115023.2437291-8-peter.maydell@linaro.org>
+Subject: [PATCH for-8.0 10/19] target/mips: Convert to 3-phase reset
+Date: Thu, 24 Nov 2022 11:50:13 +0000
+Message-Id: <20221124115023.2437291-11-peter.maydell@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221124115023.2437291-1-peter.maydell@linaro.org>
 References: <20221124115023.2437291-1-peter.maydell@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=peter.maydell@linaro.org; helo=mail-wr1-x42d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=peter.maydell@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,77 +102,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2022 11:50:48 -0000
+X-List-Received-Date: Thu, 24 Nov 2022 11:50:51 -0000
 
-Convert the loongarch CPU class to use 3-phase reset, so it doesn't
+Convert the mips CPU class to use 3-phase reset, so it doesn't
 need to use device_class_set_parent_reset() any more.
 
 Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
 ---
- target/loongarch/cpu.h |  4 ++--
- target/loongarch/cpu.c | 12 ++++++++----
+ target/mips/cpu-qom.h |  4 ++--
+ target/mips/cpu.c     | 12 ++++++++----
  2 files changed, 10 insertions(+), 6 deletions(-)
 
-diff --git a/target/loongarch/cpu.h b/target/loongarch/cpu.h
-index e15c633b0bf..e35cf655975 100644
---- a/target/loongarch/cpu.h
-+++ b/target/loongarch/cpu.h
-@@ -356,7 +356,7 @@ OBJECT_DECLARE_CPU_TYPE(LoongArchCPU, LoongArchCPUClass,
+diff --git a/target/mips/cpu-qom.h b/target/mips/cpu-qom.h
+index e28b5296073..0dffab453b2 100644
+--- a/target/mips/cpu-qom.h
++++ b/target/mips/cpu-qom.h
+@@ -34,7 +34,7 @@ OBJECT_DECLARE_CPU_TYPE(MIPSCPU, MIPSCPUClass, MIPS_CPU)
  /**
-  * LoongArchCPUClass:
+  * MIPSCPUClass:
   * @parent_realize: The parent class' realize handler.
 - * @parent_reset: The parent class' reset handler.
 + * @parent_phases: The parent class' reset phase handlers.
   *
-  * A LoongArch CPU model.
+  * A MIPS CPU model.
   */
-@@ -366,7 +366,7 @@ struct LoongArchCPUClass {
+@@ -44,7 +44,7 @@ struct MIPSCPUClass {
      /*< public >*/
  
      DeviceRealize parent_realize;
 -    DeviceReset parent_reset;
 +    ResettablePhases parent_phases;
- };
+     const struct mips_def_t *cpu_def;
  
- /*
-diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
-index 46b04cbdad1..e8c42f17a54 100644
---- a/target/loongarch/cpu.c
-+++ b/target/loongarch/cpu.c
-@@ -452,14 +452,16 @@ void loongarch_cpu_list(void)
-     g_slist_free(list);
- }
+     /* Used for the jazz board to modify mips_cpu_do_transaction_failed. */
+diff --git a/target/mips/cpu.c b/target/mips/cpu.c
+index 7a565466cb3..c614b04607a 100644
+--- a/target/mips/cpu.c
++++ b/target/mips/cpu.c
+@@ -182,14 +182,16 @@ static bool mips_cpu_has_work(CPUState *cs)
  
--static void loongarch_cpu_reset(DeviceState *dev)
-+static void loongarch_cpu_reset_hold(Object *obj)
+ #include "cpu-defs.c.inc"
+ 
+-static void mips_cpu_reset(DeviceState *dev)
++static void mips_cpu_reset_hold(Object *obj)
  {
 -    CPUState *cs = CPU(dev);
 +    CPUState *cs = CPU(obj);
-     LoongArchCPU *cpu = LOONGARCH_CPU(cs);
-     LoongArchCPUClass *lacc = LOONGARCH_CPU_GET_CLASS(cpu);
-     CPULoongArchState *env = &cpu->env;
+     MIPSCPU *cpu = MIPS_CPU(cs);
+     MIPSCPUClass *mcc = MIPS_CPU_GET_CLASS(cpu);
+     CPUMIPSState *env = &cpu->env;
  
--    lacc->parent_reset(dev);
-+    if (lacc->parent_phases.hold) {
-+        lacc->parent_phases.hold(obj);
+-    mcc->parent_reset(dev);
++    if (mcc->parent_phases.hold) {
++        mcc->parent_phases.hold(obj);
 +    }
  
-     env->fcsr0_mask = FCSR0_M1 | FCSR0_M2 | FCSR0_M3;
-     env->fcsr0 = 0x0;
-@@ -696,10 +698,12 @@ static void loongarch_cpu_class_init(ObjectClass *c, void *data)
-     LoongArchCPUClass *lacc = LOONGARCH_CPU_CLASS(c);
+     memset(env, 0, offsetof(CPUMIPSState, end_reset_fields));
+ 
+@@ -562,10 +564,12 @@ static void mips_cpu_class_init(ObjectClass *c, void *data)
+     MIPSCPUClass *mcc = MIPS_CPU_CLASS(c);
      CPUClass *cc = CPU_CLASS(c);
      DeviceClass *dc = DEVICE_CLASS(c);
 +    ResettableClass *rc = RESETTABLE_CLASS(c);
  
-     device_class_set_parent_realize(dc, loongarch_cpu_realizefn,
-                                     &lacc->parent_realize);
--    device_class_set_parent_reset(dc, loongarch_cpu_reset, &lacc->parent_reset);
-+    resettable_class_set_parent_phases(rc, NULL, loongarch_cpu_reset_hold, NULL,
-+                                       &lacc->parent_phases);
+     device_class_set_parent_realize(dc, mips_cpu_realizefn,
+                                     &mcc->parent_realize);
+-    device_class_set_parent_reset(dc, mips_cpu_reset, &mcc->parent_reset);
++    resettable_class_set_parent_phases(rc, NULL, mips_cpu_reset_hold, NULL,
++                                       &mcc->parent_phases);
  
-     cc->class_by_name = loongarch_cpu_class_by_name;
-     cc->has_work = loongarch_cpu_has_work;
+     cc->class_by_name = mips_cpu_class_by_name;
+     cc->has_work = mips_cpu_has_work;
 -- 
 2.25.1
 
