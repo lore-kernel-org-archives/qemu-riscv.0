@@ -1,53 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oyAkw-00041E-R5
-	for mharc-qemu-riscv@gnu.org; Thu, 24 Nov 2022 06:51:02 -0500
+	id 1oyAkx-00043R-C8
+	for mharc-qemu-riscv@gnu.org; Thu, 24 Nov 2022 06:51:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oyAkf-0003XP-UV
- for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:48 -0500
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ id 1oyAkm-0003dP-G4
+ for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:52 -0500
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oyAka-0004or-RW
- for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:45 -0500
-Received: by mail-wm1-x32b.google.com with SMTP id
- o7-20020a05600c510700b003cffc0b3374so1091680wms.0
- for <qemu-riscv@nongnu.org>; Thu, 24 Nov 2022 03:50:40 -0800 (PST)
+ id 1oyAkf-0004wd-Gj
+ for qemu-riscv@nongnu.org; Thu, 24 Nov 2022 06:50:52 -0500
+Received: by mail-wr1-x435.google.com with SMTP id i12so2187121wrb.0
+ for <qemu-riscv@nongnu.org>; Thu, 24 Nov 2022 03:50:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YH5A0XgSQ+x7lqY+JmUugpzZ5SHd9m7aavem37GWINU=;
- b=uysoE+ljouGnQ5ASsQhEK0UBx1Xru4DBOsbetk0ixTQF5fGYKtqYw7YO1upKLRGXfp
- 3lekh1OyKhtMXg4GmIrgJGWi3lbcqmW6oq6oc3N9rtrk1x5z3W3f+6obEnPC8i6SWxt6
- YAcE+Q83VF+ks3p1FGqwr3aK2Dy7JssibAsN42gyI/rgyJHKyt/XgnRwcdwisY7Z4zEF
- lkJJf1aO8lWtHbf+izUuvlvv3uww/BXroyDyZnrdsKyJhPay70He3NlwGYSvXAtPqJtH
- 1wjebi9bqHMk8yDoKpZH5JUrbulkTWpz32Y1lLC3dxqFR1jBQkKx86lhu4fVnMB95wAF
- /WCA==
+ bh=rwpZITjHgQ8cOpxT8gQYzyXjPVENzbqAFCPuHxyLkQ8=;
+ b=YSQmtuXfYmEMyAZJQQx+sMhkzkfMFBPjsg9Pck+3XE3HU+6t0j/AlUltMb6n7+C8pC
+ dLGyyLj+ugYh1v5AQ6O+lBduwFbV7kjIQI8flwycMuqWCDa8SsShqH2fI7lnpAaT4zYs
+ XGvfIj1Y75A1gIcfXeZDfhI6Gosxvvt4tZK9c4itdlC/lXatRR6+mlDRMKpw3zqx085M
+ q6pF/ux9lcNk4X1zjjI0DrkHP72OEqrnnEGyvjRu8rYKLaaMlMUGNGbYmn5qpQorcGqn
+ PWCB6LTMcxLiKjNUcblCYWFW2qRuwjrcfBR5aeaWSIDG0ibgnSY6BqHzezSJryqW8S2s
+ dPrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YH5A0XgSQ+x7lqY+JmUugpzZ5SHd9m7aavem37GWINU=;
- b=CR2Bu+VrXM9ZV8E5fb8L5IeVTHuCmhhCz4ohCK4WMAoZf1hMf06GxSdktCmqqsdOiv
- B2TeC2qrWIIfILMdr4AJp5EnSodN/kKO5bAOMjBnNY+A47QCwneCVSDiPNMFLwSUl5zn
- lw3kM+LSJf6NnNvuOoHRIGLt6exTtbz23IuaJxcbM7wu6ULd/sfpP3qEqpFbWNVhJFNV
- 9zXn8hY5t7zBJxtSXflSK5EKBL4wFE7SN83s0tLXJE1qqjiNIwRXVauPcOPARkHPD5qV
- 3vFQK7/9n9iroqUJP1H99/DO4j9Zst8YoP/x/ZbQB3WYE2yDubNdOj4ar0eTJugh3Lxb
- 5d4w==
-X-Gm-Message-State: ANoB5pmrJx+fa3ODaAx7EuoJDYXCQBpoiNfsSMcY5Akit+erpDGlhOc3
- mCtKiOkoNgN21ebD1AXj6AnJKw==
-X-Google-Smtp-Source: AA0mqf71DwbHt5cW/l1+eEggiP1m+7BT0oZX+XrsPjB4HwciNFz8awwvaz9vZKDY/b43CKyBNgP41A==
-X-Received: by 2002:a05:600c:4e0b:b0:3cf:e850:4437 with SMTP id
- b11-20020a05600c4e0b00b003cfe8504437mr12993161wmq.51.1669290640170; 
- Thu, 24 Nov 2022 03:50:40 -0800 (PST)
+ bh=rwpZITjHgQ8cOpxT8gQYzyXjPVENzbqAFCPuHxyLkQ8=;
+ b=R/ZjU3EM+6BLmu73jtsnlgpr/l4MpF5vJ8HClyeXbARTOzvvcioZCJQde5Yz3qoR83
+ wSyVk1l3rcVz4A5QQwYReOpYGlOQbHFMO4kPd6b0JL5mUHtbwxjmq5tkC0VD04qO3t39
+ 83m1zmgfh/4g4MhkV4zu+sztUYyRW/BFZcZtrzQwmKtvAJsVCoX/kul81Xrr8ZL2cJhO
+ fKHiSr2By5U4puqL1KqK6V+cw8O7lIhRR7zbleC5oAzhO4z8lc5hq2lpCHOS5iOmsnjY
+ oIzj85Q73EmDTEm6EK+NCbk8a1YKVBjSw0GUYNNMV5voDvnAL+k1udzGNDUUmEN/mrW1
+ uIiw==
+X-Gm-Message-State: ANoB5pmkbXrho4wYry7LMABTf20y3d4KBDU3X9XRaKlSOmb0TYs3l7z4
+ HoMnevd4gaESN0FnCohKs7GOog==
+X-Google-Smtp-Source: AA0mqf4+cbYCBnf5xToYwVN2in68msjw4bswxPTNWXxWpShznlbY3IVUeprSuPmofHA4Cc+6lZZiAA==
+X-Received: by 2002:adf:c64e:0:b0:236:78cd:f3d2 with SMTP id
+ u14-20020adfc64e000000b0023678cdf3d2mr20645442wrg.719.1669290642870; 
+ Thu, 24 Nov 2022 03:50:42 -0800 (PST)
 Received: from orth.archaic.org.uk (orth.archaic.org.uk. [2001:8b0:1d0::2])
  by smtp.gmail.com with ESMTPSA id
- f14-20020a05600c154e00b003c6f3e5ba42sm6212559wmg.46.2022.11.24.03.50.38
+ f14-20020a05600c154e00b003c6f3e5ba42sm6212559wmg.46.2022.11.24.03.50.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Nov 2022 03:50:39 -0800 (PST)
+ Thu, 24 Nov 2022 03:50:42 -0800 (PST)
 From: Peter Maydell <peter.maydell@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -74,16 +73,16 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org
-Subject: [PATCH for-8.0 09/19] target/microblaze: Convert to 3-phase reset
-Date: Thu, 24 Nov 2022 11:50:12 +0000
-Message-Id: <20221124115023.2437291-10-peter.maydell@linaro.org>
+Subject: [PATCH for-8.0 11/19] target/nios2: Convert to 3-phase reset
+Date: Thu, 24 Nov 2022 11:50:14 +0000
+Message-Id: <20221124115023.2437291-12-peter.maydell@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221124115023.2437291-1-peter.maydell@linaro.org>
 References: <20221124115023.2437291-1-peter.maydell@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=peter.maydell@linaro.org; helo=mail-wm1-x32b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=peter.maydell@linaro.org; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,31 +102,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2022 11:50:50 -0000
+X-List-Received-Date: Thu, 24 Nov 2022 11:50:53 -0000
 
-Convert the microblaze CPU class to use 3-phase reset, so it doesn't
+Convert the nios2 CPU class to use 3-phase reset, so it doesn't
 need to use device_class_set_parent_reset() any more.
 
 Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
 ---
- target/microblaze/cpu-qom.h |  4 ++--
- target/microblaze/cpu.c     | 12 ++++++++----
+ target/nios2/cpu.h |  4 ++--
+ target/nios2/cpu.c | 12 ++++++++----
  2 files changed, 10 insertions(+), 6 deletions(-)
 
-diff --git a/target/microblaze/cpu-qom.h b/target/microblaze/cpu-qom.h
-index 255b39a45df..cda9220fa99 100644
---- a/target/microblaze/cpu-qom.h
-+++ b/target/microblaze/cpu-qom.h
-@@ -30,7 +30,7 @@ OBJECT_DECLARE_CPU_TYPE(MicroBlazeCPU, MicroBlazeCPUClass, MICROBLAZE_CPU)
+diff --git a/target/nios2/cpu.h b/target/nios2/cpu.h
+index f85581ee560..b1a55490747 100644
+--- a/target/nios2/cpu.h
++++ b/target/nios2/cpu.h
+@@ -37,7 +37,7 @@ OBJECT_DECLARE_CPU_TYPE(Nios2CPU, Nios2CPUClass, NIOS2_CPU)
+ 
  /**
-  * MicroBlazeCPUClass:
-  * @parent_realize: The parent class' realize handler.
+  * Nios2CPUClass:
 - * @parent_reset: The parent class' reset handler.
 + * @parent_phases: The parent class' reset phase handlers.
   *
-  * A MicroBlaze CPU model.
+  * A Nios2 CPU model.
   */
-@@ -40,7 +40,7 @@ struct MicroBlazeCPUClass {
+@@ -47,7 +47,7 @@ struct Nios2CPUClass {
      /*< public >*/
  
      DeviceRealize parent_realize;
@@ -135,45 +134,46 @@ index 255b39a45df..cda9220fa99 100644
 +    ResettablePhases parent_phases;
  };
  
- 
-diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
-index 89e493f3ff7..817681f9b21 100644
---- a/target/microblaze/cpu.c
-+++ b/target/microblaze/cpu.c
-@@ -162,14 +162,16 @@ static void microblaze_cpu_set_irq(void *opaque, int irq, int level)
+ #define TARGET_HAS_ICE 1
+diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
+index 9a5351bc81d..cff30823dad 100644
+--- a/target/nios2/cpu.c
++++ b/target/nios2/cpu.c
+@@ -57,14 +57,16 @@ static bool nios2_cpu_has_work(CPUState *cs)
+     return cs->interrupt_request & CPU_INTERRUPT_HARD;
  }
- #endif
  
--static void mb_cpu_reset(DeviceState *dev)
-+static void mb_cpu_reset_hold(Object *obj)
+-static void nios2_cpu_reset(DeviceState *dev)
++static void nios2_cpu_reset_hold(Object *obj)
  {
--    CPUState *s = CPU(dev);
-+    CPUState *s = CPU(obj);
-     MicroBlazeCPU *cpu = MICROBLAZE_CPU(s);
-     MicroBlazeCPUClass *mcc = MICROBLAZE_CPU_GET_CLASS(cpu);
-     CPUMBState *env = &cpu->env;
+-    CPUState *cs = CPU(dev);
++    CPUState *cs = CPU(obj);
+     Nios2CPU *cpu = NIOS2_CPU(cs);
+     Nios2CPUClass *ncc = NIOS2_CPU_GET_CLASS(cpu);
+     CPUNios2State *env = &cpu->env;
  
--    mcc->parent_reset(dev);
-+    if (mcc->parent_phases.hold) {
-+        mcc->parent_phases.hold(obj);
+-    ncc->parent_reset(dev);
++    if (ncc->parent_phases.hold) {
++        ncc->parent_phases.hold(obj);
 +    }
  
-     memset(env, 0, offsetof(CPUMBState, end_reset_fields));
-     env->res_addr = RES_ADDR_NONE;
-@@ -399,10 +401,12 @@ static void mb_cpu_class_init(ObjectClass *oc, void *data)
+     memset(env->ctrl, 0, sizeof(env->ctrl));
+     env->pc = cpu->reset_addr;
+@@ -371,11 +373,13 @@ static void nios2_cpu_class_init(ObjectClass *oc, void *data)
      DeviceClass *dc = DEVICE_CLASS(oc);
      CPUClass *cc = CPU_CLASS(oc);
-     MicroBlazeCPUClass *mcc = MICROBLAZE_CPU_CLASS(oc);
+     Nios2CPUClass *ncc = NIOS2_CPU_CLASS(oc);
 +    ResettableClass *rc = RESETTABLE_CLASS(oc);
  
-     device_class_set_parent_realize(dc, mb_cpu_realizefn,
-                                     &mcc->parent_realize);
--    device_class_set_parent_reset(dc, mb_cpu_reset, &mcc->parent_reset);
-+    resettable_class_set_parent_phases(rc, NULL, mb_cpu_reset_hold, NULL,
-+                                       &mcc->parent_phases);
+     device_class_set_parent_realize(dc, nios2_cpu_realizefn,
+                                     &ncc->parent_realize);
+     device_class_set_props(dc, nios2_properties);
+-    device_class_set_parent_reset(dc, nios2_cpu_reset, &ncc->parent_reset);
++    resettable_class_set_parent_phases(rc, NULL, nios2_cpu_reset_hold, NULL,
++                                       &ncc->parent_phases);
  
-     cc->class_by_name = mb_cpu_class_by_name;
-     cc->has_work = mb_cpu_has_work;
+     cc->class_by_name = nios2_cpu_class_by_name;
+     cc->has_work = nios2_cpu_has_work;
 -- 
 2.25.1
 
