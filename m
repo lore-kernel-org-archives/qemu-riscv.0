@@ -1,60 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oyQzW-000232-W6
-	for mharc-qemu-riscv@gnu.org; Fri, 25 Nov 2022 00:11:11 -0500
+	id 1oyR38-00038w-Jd
+	for mharc-qemu-riscv@gnu.org; Fri, 25 Nov 2022 00:14:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oyQzU-00022C-QO; Fri, 25 Nov 2022 00:11:08 -0500
-Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
+ id 1oyR37-00038j-N7; Fri, 25 Nov 2022 00:14:53 -0500
+Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oyQzT-0003aq-42; Fri, 25 Nov 2022 00:11:08 -0500
-Received: by mail-vs1-xe32.google.com with SMTP id k67so3192255vsk.2;
- Thu, 24 Nov 2022 21:11:06 -0800 (PST)
+ id 1oyR36-0004FV-CG; Fri, 25 Nov 2022 00:14:53 -0500
+Received: by mail-ua1-x92d.google.com with SMTP id c26so1186127uak.5;
+ Thu, 24 Nov 2022 21:14:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cDWuCxUwnj7jGmhP9U5LDvLA2peEBm5pg8c+Bn5FWuI=;
- b=XFiJ28nPe/lPuxAEsz2YQSZrL/uwo+GcLFqeR17E7TEdvIp9crnc7CWldb/ZXDmWHv
- SgfAFCOsAr/DH44T7mzIVKwF/093iyXU1arxxMURStuQS8+zZAxbjGo1QsecJHKkuPHg
- EEZhA33cfuTeZz6N/eUrPwNqL0U2NTR4vEzAGeajbyFA1SUIdD2m/hlulwaxaY4bWVG7
- rFeebv5X5oBOrUt0Q6X7F1LDcpabzfjyEvV01U7R79CQMOaunU5VCvxWxavNqDK1c8g5
- Q/vOP3NhrN6yFxx1Bzjxfu/lHCQnw6CU5BAHWqfTB+oRhTetQtqAWZkwS2NIzDyllyKg
- 4Inw==
+ bh=wcOcgu7nkB3LJQDS9LHA4u1QyGvq+fU5PlUw6sjvaYg=;
+ b=qVhHY0JTB5L4fIpK54ti6dTGFexq8txLiT+uKIwNtosWvGxJLouiFmpP8wZlS//J21
+ Jm8xPduf9vi64wzUlutRFtMW+0w2+SeLd3a/XTCbs2GpDoikZ/caruKhjCPIYuo7Rf3y
+ TyrRAchYxD9ZgxWvAGb3ydDuW4fTtPGJLIEgbqu4jFjmII8XbYwbZKDEyZZ7IgfkRvnE
+ T8OCbaFJSCwz7sInEODwmqTrc3Q43LTbFkY6ywWSctLbDxNt/mIg5FjXrSeOH2uUqWU8
+ 3Se6A7e/+cy3B2AZqeeSdCq8UFSCi08IpYtjoXin3D1RQb9wwgfN/Saq8GqMvrF+Gkve
+ oydQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cDWuCxUwnj7jGmhP9U5LDvLA2peEBm5pg8c+Bn5FWuI=;
- b=NXXqSPIg7il29i4nDyiJaqTTkxXnVwh3/1G+s8xc00WM4kWOESX4kUoNjyK9fXEizh
- OLuxT+IM5BiC+TMumJQziUQZs70L7kGLVfsYpHs02Sn6vdYIHlJvvVe0d1H+cva5AfYB
- RCygP+JcL4JW30wH5laU4D13r790P/AS7LGMY29ZygDmpzrYa8quPnLd1j0dvdFg5QRY
- FBK3GBV1uc0vB5Dr9+A+1TzbE8EK4G3uJx9FSvJZxUYJRpbifkRj86iqEoDkqz0D+BM7
- hF72nKSkZOcD1ZVQ31EV8P9SEIMBP7NgPzOLhUfSfUWq+Tsrv5cFcYJyhoiEn35aQ9OA
- KKqQ==
-X-Gm-Message-State: ANoB5plkJy+V2Iw5SOTlvTgumeV+CgFMqvHJDWWdKQ14m7is+oWRHdim
- xNzKk1VmP/1Wyn4GumjqCo7ydoxTOYTRVMELRlI=
-X-Google-Smtp-Source: AA0mqf7rTYrPKzf9C4ICV/MKaztVNn4XZxUvBFLpw3EAui2YkUd6NBa8gEcUudUIINPT8IuLYlCJ7+ajGx1iCuwWgDE=
-X-Received: by 2002:a05:6102:f09:b0:3a6:eec3:b246 with SMTP id
- v9-20020a0561020f0900b003a6eec3b246mr19325028vss.64.1669353065668; Thu, 24
- Nov 2022 21:11:05 -0800 (PST)
+ bh=wcOcgu7nkB3LJQDS9LHA4u1QyGvq+fU5PlUw6sjvaYg=;
+ b=FgKmBEDRZLySvE+gU6DHx9Ou9tKDyIVzwqRRBWJHDAVp8HIyV0DA0y/8vRcuQ97Ojn
+ wvLh0VgR7No45XqIx3g4c/WhMnVk8ObJ1Co1Q4a/BZtFc/BjPCiPszXjvpV7TsU939HQ
+ RTidkHrSHIuyq21FDgTA0CFcTRVwG52Zw2H2qIzkOslfqSKNHvCyB3OlCr21YwkvKjaj
+ BbI5qEQJRK5b4EnVjUSv8XW38TwTnJGxrLBNxtJCijpucFLe56k+pPZEg63N6yHWc/B2
+ qecBk2NvmFTaG8QFWQ2LjhIe8+csg/HjXryiMpRAHA1bfYXaCq0jz3kq1Ovbuh37p8n3
+ Z9OQ==
+X-Gm-Message-State: ANoB5pn55nUBdhE5z5eqyWcay6V6u1Yl0iisVYtOTPAXGQsOuC6Cij3S
+ zyANFl1Kt9fnv0TtdjM7+vnBcilIOBrTrzWFrwqL753/KsY=
+X-Google-Smtp-Source: AA0mqf5PoD7IsZTJuLvacUuJBejvdBnTeWg4nIbw/Fw2f3X4lKoknBFWLA1VMZazBmIqEKp1GDx4j1QrZyo9Danwgyg=
+X-Received: by 2002:ab0:65cc:0:b0:418:f104:2ca7 with SMTP id
+ n12-20020ab065cc000000b00418f1042ca7mr5601225uaq.70.1669353290895; Thu, 24
+ Nov 2022 21:14:50 -0800 (PST)
 MIME-Version: 1.0
-References: <20221123090635.6574-1-jim.shu@sifive.com>
-In-Reply-To: <20221123090635.6574-1-jim.shu@sifive.com>
+References: <20221125050354.3166023-1-bmeng@tinylab.org>
+In-Reply-To: <20221125050354.3166023-1-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 25 Nov 2022 15:10:39 +1000
-Message-ID: <CAKmqyKNggb-SdS24+dFUhLNZozmhLNaU9PY034p_LED8UqCOjw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: support cache-related PMU events in virtual
- mode
-To: Jim Shu <jim.shu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>
+Date: Fri, 25 Nov 2022 15:14:24 +1000
+Message-ID: <CAKmqyKNDVg+U-tbEBcoGZyVZCD9YFjFukDrfmtBVBanbL7qw0g@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Add some comments for sstatus CSR in
+ riscv_cpu_dump_state()
+To: Bin Meng <bmeng@tinylab.org>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,48 +74,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Nov 2022 05:11:09 -0000
+X-List-Received-Date: Fri, 25 Nov 2022 05:14:54 -0000
 
-On Wed, Nov 23, 2022 at 7:07 PM Jim Shu <jim.shu@sifive.com> wrote:
+On Fri, Nov 25, 2022 at 3:05 PM Bin Meng <bmeng@tinylab.org> wrote:
 >
-> let tlb_fill() function also increments PMU counter when it is from
-> two-stage translation, so QEMU could also monitor these PMU events when
-> CPU runs in VS/VU mode (like running guest OS).
+> sstatus register dump is currently missing in riscv_cpu_dump_state().
+> As sstatus is a copy of mstatus, which is described in the priv spec,
+> it seems redundant to print the same information twice.
 >
-> Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> Add some comments for this to let people know this is intentional.
+>
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu_helper.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 278d163803..a52a9b14d7 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1248,6 +1248,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->          }
->      }
+> Changes in v2:
+> - Add some comments for missing sstatus
 >
-> +    pmu_tlb_fill_incr_ctr(cpu, access_type);
->      if (riscv_cpu_virt_enabled(env) ||
->          ((riscv_cpu_two_stage_lookup(mmu_idx) || two_stage_lookup) &&
->           access_type != MMU_INST_FETCH)) {
-> @@ -1311,7 +1312,6 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->              }
->          }
->      } else {
-> -        pmu_tlb_fill_incr_ctr(cpu, access_type);
->          /* Single stage lookup */
->          ret = get_physical_address(env, &pa, &prot, address, NULL,
->                                     access_type, mmu_idx, true, false, false);
+>  target/riscv/cpu.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index d14e95c9dc..a6c27977c5 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -382,6 +382,10 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+>              CSR_MHARTID,
+>              CSR_MSTATUS,
+>              CSR_MSTATUSH,
+> +            /*
+> +             * CSR_SSTATUS is intentionally omitted here as its value
+> +             * can be figured out by looking at CSR_MSTATUS
+> +             */
+>              CSR_HSTATUS,
+>              CSR_VSSTATUS,
+>              CSR_MIP,
 > --
-> 2.17.1
+> 2.34.1
 >
 >
 
