@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ozQ8n-0006Mv-FU
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Nov 2022 17:28:49 -0500
+	id 1ozQ9y-00073i-Ty
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Nov 2022 17:30:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ozQ8l-0006Lr-Iv; Sun, 27 Nov 2022 17:28:47 -0500
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ id 1ozQ9w-00071k-0i; Sun, 27 Nov 2022 17:30:00 -0500
+Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ozQ8k-0002WZ-2O; Sun, 27 Nov 2022 17:28:47 -0500
-Received: by mail-vk1-xa32.google.com with SMTP id r13so4449188vkf.2;
- Sun, 27 Nov 2022 14:28:44 -0800 (PST)
+ id 1ozQ9u-0002fg-DD; Sun, 27 Nov 2022 17:29:59 -0500
+Received: by mail-vs1-xe33.google.com with SMTP id i2so8948514vsc.1;
+ Sun, 27 Nov 2022 14:29:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E332JKBxic/sOxyM4XfOS2wIJPbv5BGKPgOKsPtgdz8=;
- b=S81cSmys6NmbRBVPBlUwK9kbIOIVUVGzvq23+9SHVZUTOYNuVUHnuYh7mshKpxr7oc
- oCExPqmseiBLFDRgCREP8T5sWW/T3mXfYJ7fc3hoYDTG3UeKG5LZAP5d6DQpiCC3o5xl
- on6YByxtbhBbN0ZotlJRNwGwkFH4knDVMp1GhWz4zoxij2FCdhIERWj5XfYJSERj49+s
- Ihv/qf4pLDs7MLRVMpxd582iyyGP+qsKV8LvebXtWncAUI8eVS1F1fP5Ae0AD/LMxKnc
- HrtuQ62IeRLoNEWYq2DvV+90KKuWx9gqk2ocFce8ubB0626s0Q82f8IzXTmLi9lP5Ki+
- qPdw==
+ bh=DeawGyKlbs/HWTPi9657JgmmdY9fM82ujCs3ypnIWuU=;
+ b=GUf0NWPDme/yqj+lLJVRGM1Yl2MpG2iFEBPKOAlCjpysp+K2g/x9G2pSql3xaJuxzx
+ 4y1nSWWYc+eCz3MfHXdBCFeTBHPpP9KvRhixcEFXH2WDpV4flPJLSxFtaC4SrTdDQWWU
+ ZqCoYHpfwMbgTGDQ9D2IFX8/LyXYOrXEKP9JZQbKJX+dO+PGxRjAvT8IBlDzh/1v/Doh
+ UslmwL1eqIriagimPA2B7s8uJD5aU6SUx6ZVK/6SstbYSVac/yNxHb7uB757huPtCb3h
+ f3sfdujNc6vJrCLSTkWW7qClUjVs4gbfJr0kZO7NV3OBLVWffp6LowYlRWCcRd+lYp69
+ bqxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=E332JKBxic/sOxyM4XfOS2wIJPbv5BGKPgOKsPtgdz8=;
- b=syKEqYDAfJXPifHdOl7Z2Mjpi1VTqLQDv6JgyTSf5LAktxmYarNt+6xOW1AUZFxO1u
- fYsWzFZ6AgK3Te1dpzf2O2Wd3iCxt34D/gekp5Sm4bSwYCR0+QhFIKP6brcds7x09SwK
- ZP7JyuJSjuTnii2kQ/aJK1YWfbs52QBNr5J6dbHLsW/jvuejvbaRPecH24vySrxR+8h6
- TMNPr6PaT8JSNZ6qhQk5fRjAT7xBMbLKllplBruV/fb6MgiD07vfw7h2lj7svCjtAkxW
- TzpUwbF0WRWH9j7QxThy8stTmrTjO+f1pof+KG5y6QDJkS5qWUCtOxjD9Uv1XDV0xx1k
- 6bTg==
-X-Gm-Message-State: ANoB5pnfO0Zgo8G7KtmArIgMfgqBmVeMXISx/ybyZwuNe22LDdXDe3Tf
- LWGEm69+IHAVMib0JvMkiEEbK3L1+h5YKUKqIWo=
-X-Google-Smtp-Source: AA0mqf5QUlIW9vfzwDsh6LEAbEd7Hi6DNDEvA/P/+1rZcVvEyKC1ikmMzf+tJQhGChIcBmHS/hLMEKYIJCemcv9zC9I=
-X-Received: by 2002:a1f:3846:0:b0:3bc:c843:c7b5 with SMTP id
- f67-20020a1f3846000000b003bcc843c7b5mr3086832vka.30.1669588123681; Sun, 27
- Nov 2022 14:28:43 -0800 (PST)
+ bh=DeawGyKlbs/HWTPi9657JgmmdY9fM82ujCs3ypnIWuU=;
+ b=o39vqi1nh31e7f1ab0oroqTTS8xJoU99OBp3GP0/3zUu3lHG+VgXxjAFCat2AKG4Wa
+ 2epOzJq/R5o7AYqawgASkNu0pOyTgRI0qkvZYLbwQvM4M9Zwr3B8b35gqyNGtWE4TJpF
+ iuNYMiEgXxw+CNYBLkcFwApp7UBvxQbmvmjgKwTYaww0ns195wrzxH4OcCc2351KqYzx
+ vza5wMSQ1/6hDc5cHzuHw5rw0BK8strIzk6IMEWg3tauxZ4y7CyHqbwk68geJRtIgXxq
+ dghOWKZPZ1Hsex3WQQSzc2hu3WC+N7SEuYS32XNKWVWGwU2Gr5kl8J6BQJ4OroxDsGmD
+ dHuA==
+X-Gm-Message-State: ANoB5pnKmQRRSoWTeWK/kOAK7uhAn6AS9z6NTt9kk8s8pC3K0gorqVGy
+ ArxmDZEiFL2V+v5wmBJVt8Ays+DXQJJjr2bqdXA=
+X-Google-Smtp-Source: AA0mqf4+0FU/LV49fOARAMmSPiQNQ9aMjZWKchPQ1IZupWVdy9w9NpMxGcXe33+RY26qwj4O7BAgOBZFBRw1cB0p0/M=
+X-Received: by 2002:a05:6102:f09:b0:3a6:eec3:b246 with SMTP id
+ v9-20020a0561020f0900b003a6eec3b246mr25844703vss.64.1669588195533; Sun, 27
+ Nov 2022 14:29:55 -0800 (PST)
 MIME-Version: 1.0
 References: <20221124115023.2437291-1-peter.maydell@linaro.org>
- <20221124115023.2437291-3-peter.maydell@linaro.org>
-In-Reply-To: <20221124115023.2437291-3-peter.maydell@linaro.org>
+ <20221124115023.2437291-15-peter.maydell@linaro.org>
+In-Reply-To: <20221124115023.2437291-15-peter.maydell@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 28 Nov 2022 08:28:17 +1000
-Message-ID: <CAKmqyKNHZoCERV6_aso_hif0fMC2fBm3LX75Qp=NkYwUZShTdw@mail.gmail.com>
-Subject: Re: [PATCH for-8.0 02/19] target/arm: Convert to 3-phase reset
+Date: Mon, 28 Nov 2022 08:29:29 +1000
+Message-ID: <CAKmqyKPSVgOCuFjSAi0rjWZemmH5vTPhRxh3Cw2f0rUgpvy6Gg@mail.gmail.com>
+Subject: Re: [PATCH for-8.0 14/19] target/riscv: Convert to 3-phase reset
 To: Peter Maydell <peter.maydell@linaro.org>
 Cc: qemu-devel@nongnu.org, Michael Rolnik <mrolnik@gmail.com>, 
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
@@ -70,8 +70,8 @@ Cc: qemu-devel@nongnu.org, Michael Rolnik <mrolnik@gmail.com>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, 
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -92,11 +92,11 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Nov 2022 22:28:48 -0000
+X-List-Received-Date: Sun, 27 Nov 2022 22:30:00 -0000
 
-On Thu, Nov 24, 2022 at 9:58 PM Peter Maydell <peter.maydell@linaro.org> wrote:
+On Thu, Nov 24, 2022 at 10:00 PM Peter Maydell <peter.maydell@linaro.org> wrote:
 >
-> Convert the Arm CPU class to use 3-phase reset, so it doesn't
+> Convert the riscv CPU class to use 3-phase reset, so it doesn't
 > need to use device_class_set_parent_reset() any more.
 >
 > Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
@@ -106,73 +106,75 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/arm/cpu-qom.h |  4 ++--
->  target/arm/cpu.c     | 13 +++++++++----
->  2 files changed, 11 insertions(+), 6 deletions(-)
+>  target/riscv/cpu.h |  4 ++--
+>  target/riscv/cpu.c | 12 ++++++++----
+>  2 files changed, 10 insertions(+), 6 deletions(-)
 >
-> diff --git a/target/arm/cpu-qom.h b/target/arm/cpu-qom.h
-> index 64c44cef2dd..514c22ced9b 100644
-> --- a/target/arm/cpu-qom.h
-> +++ b/target/arm/cpu-qom.h
-> @@ -43,7 +43,7 @@ void aarch64_cpu_register(const ARMCPUInfo *info);
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 3a9e25053f8..443d15a47c0 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -395,7 +395,7 @@ OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
 >  /**
->   * ARMCPUClass:
+>   * RISCVCPUClass:
 >   * @parent_realize: The parent class' realize handler.
 > - * @parent_reset: The parent class' reset handler.
 > + * @parent_phases: The parent class' reset phase handlers.
 >   *
->   * An ARM CPU model.
+>   * A RISCV CPU model.
 >   */
-> @@ -54,7 +54,7 @@ struct ARMCPUClass {
->
->      const ARMCPUInfo *info;
+> @@ -404,7 +404,7 @@ struct RISCVCPUClass {
+>      CPUClass parent_class;
+>      /*< public >*/
 >      DeviceRealize parent_realize;
 > -    DeviceReset parent_reset;
 > +    ResettablePhases parent_phases;
 >  };
 >
->
-> diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-> index a021df9e9e8..5bad065579f 100644
-> --- a/target/arm/cpu.c
-> +++ b/target/arm/cpu.c
-> @@ -202,14 +202,16 @@ static void cp_reg_check_reset(gpointer key, gpointer value,  gpointer opaque)
->      assert(oldvalue == newvalue);
+>  struct RISCVCPUConfig {
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index d14e95c9dc1..6fe176e4833 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -519,18 +519,20 @@ static void riscv_restore_state_to_opc(CPUState *cs,
+>      env->bins = data[1];
 >  }
 >
-> -static void arm_cpu_reset(DeviceState *dev)
-> +static void arm_cpu_reset_hold(Object *obj)
+> -static void riscv_cpu_reset(DeviceState *dev)
+> +static void riscv_cpu_reset_hold(Object *obj)
 >  {
-> -    CPUState *s = CPU(dev);
-> +    CPUState *s = CPU(obj);
->      ARMCPU *cpu = ARM_CPU(s);
->      ARMCPUClass *acc = ARM_CPU_GET_CLASS(cpu);
->      CPUARMState *env = &cpu->env;
+>  #ifndef CONFIG_USER_ONLY
+>      uint8_t iprio;
+>      int i, irq, rdzero;
+>  #endif
+> -    CPUState *cs = CPU(dev);
+> +    CPUState *cs = CPU(obj);
+>      RISCVCPU *cpu = RISCV_CPU(cs);
+>      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
+>      CPURISCVState *env = &cpu->env;
 >
-> -    acc->parent_reset(dev);
-> +    if (acc->parent_phases.hold) {
-> +        acc->parent_phases.hold(obj);
+> -    mcc->parent_reset(dev);
+> +    if (mcc->parent_phases.hold) {
+> +        mcc->parent_phases.hold(obj);
 > +    }
+>  #ifndef CONFIG_USER_ONLY
+>      env->misa_mxl = env->misa_mxl_max;
+>      env->priv = PRV_M;
+> @@ -1161,11 +1163,13 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+>      RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
+>      CPUClass *cc = CPU_CLASS(c);
+>      DeviceClass *dc = DEVICE_CLASS(c);
+> +    ResettableClass *rc = RESETTABLE_CLASS(c);
 >
->      memset(env, 0, offsetof(CPUARMState, end_reset_fields));
+>      device_class_set_parent_realize(dc, riscv_cpu_realize,
+>                                      &mcc->parent_realize);
 >
-> @@ -2210,12 +2212,15 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
->      ARMCPUClass *acc = ARM_CPU_CLASS(oc);
->      CPUClass *cc = CPU_CLASS(acc);
->      DeviceClass *dc = DEVICE_CLASS(oc);
-> +    ResettableClass *rc = RESETTABLE_CLASS(oc);
+> -    device_class_set_parent_reset(dc, riscv_cpu_reset, &mcc->parent_reset);
+> +    resettable_class_set_parent_phases(rc, NULL, riscv_cpu_reset_hold, NULL,
+> +                                       &mcc->parent_phases);
 >
->      device_class_set_parent_realize(dc, arm_cpu_realizefn,
->                                      &acc->parent_realize);
->
->      device_class_set_props(dc, arm_cpu_properties);
-> -    device_class_set_parent_reset(dc, arm_cpu_reset, &acc->parent_reset);
-> +
-> +    resettable_class_set_parent_phases(rc, NULL, arm_cpu_reset_hold, NULL,
-> +                                       &acc->parent_phases);
->
->      cc->class_by_name = arm_cpu_class_by_name;
->      cc->has_work = arm_cpu_has_work;
+>      cc->class_by_name = riscv_cpu_class_by_name;
+>      cc->has_work = riscv_cpu_has_work;
 > --
 > 2.25.1
 >
