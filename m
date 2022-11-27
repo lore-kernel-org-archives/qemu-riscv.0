@@ -1,52 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ozQ9y-00073i-Ty
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Nov 2022 17:30:02 -0500
+	id 1ozQAw-0007oM-BN
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Nov 2022 17:31:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ozQ9w-00071k-0i; Sun, 27 Nov 2022 17:30:00 -0500
-Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
+ id 1ozQAV-0007TG-3M; Sun, 27 Nov 2022 17:30:35 -0500
+Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ozQ9u-0002fg-DD; Sun, 27 Nov 2022 17:29:59 -0500
-Received: by mail-vs1-xe33.google.com with SMTP id i2so8948514vsc.1;
- Sun, 27 Nov 2022 14:29:57 -0800 (PST)
+ id 1ozQAS-0002uM-Iq; Sun, 27 Nov 2022 17:30:33 -0500
+Received: by mail-vk1-xa31.google.com with SMTP id o24so4437600vkl.9;
+ Sun, 27 Nov 2022 14:30:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DeawGyKlbs/HWTPi9657JgmmdY9fM82ujCs3ypnIWuU=;
- b=GUf0NWPDme/yqj+lLJVRGM1Yl2MpG2iFEBPKOAlCjpysp+K2g/x9G2pSql3xaJuxzx
- 4y1nSWWYc+eCz3MfHXdBCFeTBHPpP9KvRhixcEFXH2WDpV4flPJLSxFtaC4SrTdDQWWU
- ZqCoYHpfwMbgTGDQ9D2IFX8/LyXYOrXEKP9JZQbKJX+dO+PGxRjAvT8IBlDzh/1v/Doh
- UslmwL1eqIriagimPA2B7s8uJD5aU6SUx6ZVK/6SstbYSVac/yNxHb7uB757huPtCb3h
- f3sfdujNc6vJrCLSTkWW7qClUjVs4gbfJr0kZO7NV3OBLVWffp6LowYlRWCcRd+lYp69
- bqxw==
+ bh=IzLELE2/eXDuGDIW1pSyUFcbsTjmOMUlxGZOw4MnXt4=;
+ b=iR1HuCLw1NEH3dIEmPiavxIz3sP1GJ3BFvUaZgTwy51DKVxNBUbbhUMq2U5SRGwIcl
+ zYmFouk274xwe+wo4Ok0PrgmneeJbHIBZvlpbpZ3p2OTWBIMqv2lm5v3GX0Oz5GI6Ybc
+ za8VX6SHQzXNCSQgePeJh0VGas0hYEHmLzwSaCTz5BzZf+Ki66KUF9rhkrwui32tWPyp
+ uciPTCeeFWXIqOxAl6AUpniYSPhJnuxnyQZmAyVbwFaAcjd9trBjRW2efrq3rnG5dhY1
+ eoHH0Fe6KifDA8Yp/yBolE7WxiATk+K1FeFXz4jblGnQutLB1w1VwX2srgWTBSZp/crk
+ Swew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DeawGyKlbs/HWTPi9657JgmmdY9fM82ujCs3ypnIWuU=;
- b=o39vqi1nh31e7f1ab0oroqTTS8xJoU99OBp3GP0/3zUu3lHG+VgXxjAFCat2AKG4Wa
- 2epOzJq/R5o7AYqawgASkNu0pOyTgRI0qkvZYLbwQvM4M9Zwr3B8b35gqyNGtWE4TJpF
- iuNYMiEgXxw+CNYBLkcFwApp7UBvxQbmvmjgKwTYaww0ns195wrzxH4OcCc2351KqYzx
- vza5wMSQ1/6hDc5cHzuHw5rw0BK8strIzk6IMEWg3tauxZ4y7CyHqbwk68geJRtIgXxq
- dghOWKZPZ1Hsex3WQQSzc2hu3WC+N7SEuYS32XNKWVWGwU2Gr5kl8J6BQJ4OroxDsGmD
- dHuA==
-X-Gm-Message-State: ANoB5pnKmQRRSoWTeWK/kOAK7uhAn6AS9z6NTt9kk8s8pC3K0gorqVGy
- ArxmDZEiFL2V+v5wmBJVt8Ays+DXQJJjr2bqdXA=
-X-Google-Smtp-Source: AA0mqf4+0FU/LV49fOARAMmSPiQNQ9aMjZWKchPQ1IZupWVdy9w9NpMxGcXe33+RY26qwj4O7BAgOBZFBRw1cB0p0/M=
-X-Received: by 2002:a05:6102:f09:b0:3a6:eec3:b246 with SMTP id
- v9-20020a0561020f0900b003a6eec3b246mr25844703vss.64.1669588195533; Sun, 27
- Nov 2022 14:29:55 -0800 (PST)
+ bh=IzLELE2/eXDuGDIW1pSyUFcbsTjmOMUlxGZOw4MnXt4=;
+ b=AcTeXjLZ+w8cYtOBROmoRH2TDfJxKxpjXf9FoaNV1JHlEVs8wO7RJ783JAtOoanbaG
+ DPjuvZIsb4g4N2VVbQQaJDoycCwAOcCdekzDYvOoaFX+2yUWW0DxWa4Mqp1kVkKVqi2/
+ lpMfpx2XW2+kQcwc+5bnAKL2GKXQudoBDo5uzKOhYt8JVXYutN18RXZCAJCqqjWvZKvm
+ 5k3PNzrxXpjH0TCuDRPYxzu0TFOb3TNeDVoRpa4mx7QylEZofVKFrXbk/aSaSdam+Mn8
+ QCiQrQVwh2WsEZF3PFh9fqqA+ENxB18wuHHz8BKVhAeCaRzmrmMM2j1RkeJiSQh8og1Q
+ Uebg==
+X-Gm-Message-State: ANoB5pn+7d7iUkqztdDooobracQrZMP+B7Yyem8FTOlaEwGbXX2BGalt
+ tjt801xlu0Wv/oB97TlQbrZpUM2ZEpdx7mb9ZdU=
+X-Google-Smtp-Source: AA0mqf6lrqL7VAdf8Pd+TbG3lolx39NMKymR9BQN2wm7wtjGCcsm2DNlVYGVGQN611fz7SQ2p1X3Ifrqxs+8Ehb/f/U=
+X-Received: by 2002:a05:6122:c97:b0:3b7:cbb8:bbf1 with SMTP id
+ ba23-20020a0561220c9700b003b7cbb8bbf1mr27461531vkb.25.1669588230018; Sun, 27
+ Nov 2022 14:30:30 -0800 (PST)
 MIME-Version: 1.0
 References: <20221124115023.2437291-1-peter.maydell@linaro.org>
- <20221124115023.2437291-15-peter.maydell@linaro.org>
-In-Reply-To: <20221124115023.2437291-15-peter.maydell@linaro.org>
+ <20221124115023.2437291-2-peter.maydell@linaro.org>
+In-Reply-To: <20221124115023.2437291-2-peter.maydell@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 28 Nov 2022 08:29:29 +1000
-Message-ID: <CAKmqyKPSVgOCuFjSAi0rjWZemmH5vTPhRxh3Cw2f0rUgpvy6Gg@mail.gmail.com>
-Subject: Re: [PATCH for-8.0 14/19] target/riscv: Convert to 3-phase reset
+Date: Mon, 28 Nov 2022 08:30:03 +1000
+Message-ID: <CAKmqyKPYFJ-0bQDtRAFZTrV0TOMc314Mq=LEDfkrJ84arr_WdA@mail.gmail.com>
+Subject: Re: [PATCH for-8.0 01/19] hw/core/cpu-common: Convert TYPE_CPU class
+ to 3-phase reset
 To: Peter Maydell <peter.maydell@linaro.org>
 Cc: qemu-devel@nongnu.org, Michael Rolnik <mrolnik@gmail.com>, 
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
@@ -70,8 +71,8 @@ Cc: qemu-devel@nongnu.org, Michael Rolnik <mrolnik@gmail.com>,
  Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, 
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -92,12 +93,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Nov 2022 22:30:00 -0000
+X-List-Received-Date: Sun, 27 Nov 2022 22:30:39 -0000
 
-On Thu, Nov 24, 2022 at 10:00 PM Peter Maydell <peter.maydell@linaro.org> wrote:
+On Thu, Nov 24, 2022 at 9:57 PM Peter Maydell <peter.maydell@linaro.org> wrote:
 >
-> Convert the riscv CPU class to use 3-phase reset, so it doesn't
-> need to use device_class_set_parent_reset() any more.
+> Convert the parent class TYPE_CPU to 3-phase reset. This
+> is a necessary prerequisite to converting the subclasses.
 >
 > Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
 
@@ -106,75 +107,42 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.h |  4 ++--
->  target/riscv/cpu.c | 12 ++++++++----
->  2 files changed, 10 insertions(+), 6 deletions(-)
+>  hw/core/cpu-common.c | 7 ++++---
+>  1 file changed, 4 insertions(+), 3 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 3a9e25053f8..443d15a47c0 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -395,7 +395,7 @@ OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
->  /**
->   * RISCVCPUClass:
->   * @parent_realize: The parent class' realize handler.
-> - * @parent_reset: The parent class' reset handler.
-> + * @parent_phases: The parent class' reset phase handlers.
->   *
->   * A RISCV CPU model.
->   */
-> @@ -404,7 +404,7 @@ struct RISCVCPUClass {
->      CPUClass parent_class;
->      /*< public >*/
->      DeviceRealize parent_realize;
-> -    DeviceReset parent_reset;
-> +    ResettablePhases parent_phases;
->  };
->
->  struct RISCVCPUConfig {
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index d14e95c9dc1..6fe176e4833 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -519,18 +519,20 @@ static void riscv_restore_state_to_opc(CPUState *cs,
->      env->bins = data[1];
+> diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+> index f9fdd46b9d7..78b5f350a00 100644
+> --- a/hw/core/cpu-common.c
+> +++ b/hw/core/cpu-common.c
+> @@ -116,9 +116,9 @@ void cpu_reset(CPUState *cpu)
+>      trace_guest_cpu_reset(cpu);
 >  }
 >
-> -static void riscv_cpu_reset(DeviceState *dev)
-> +static void riscv_cpu_reset_hold(Object *obj)
+> -static void cpu_common_reset(DeviceState *dev)
+> +static void cpu_common_reset_hold(Object *obj)
 >  {
->  #ifndef CONFIG_USER_ONLY
->      uint8_t iprio;
->      int i, irq, rdzero;
->  #endif
-> -    CPUState *cs = CPU(dev);
-> +    CPUState *cs = CPU(obj);
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
->      CPURISCVState *env = &cpu->env;
+> -    CPUState *cpu = CPU(dev);
+> +    CPUState *cpu = CPU(obj);
+>      CPUClass *cc = CPU_GET_CLASS(cpu);
 >
-> -    mcc->parent_reset(dev);
-> +    if (mcc->parent_phases.hold) {
-> +        mcc->parent_phases.hold(obj);
-> +    }
->  #ifndef CONFIG_USER_ONLY
->      env->misa_mxl = env->misa_mxl_max;
->      env->priv = PRV_M;
-> @@ -1161,11 +1163,13 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
->      RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
->      CPUClass *cc = CPU_CLASS(c);
->      DeviceClass *dc = DEVICE_CLASS(c);
-> +    ResettableClass *rc = RESETTABLE_CLASS(c);
+>      if (qemu_loglevel_mask(CPU_LOG_RESET)) {
+> @@ -259,6 +259,7 @@ static int64_t cpu_common_get_arch_id(CPUState *cpu)
+>  static void cpu_class_init(ObjectClass *klass, void *data)
+>  {
+>      DeviceClass *dc = DEVICE_CLASS(klass);
+> +    ResettableClass *rc = RESETTABLE_CLASS(klass);
+>      CPUClass *k = CPU_CLASS(klass);
 >
->      device_class_set_parent_realize(dc, riscv_cpu_realize,
->                                      &mcc->parent_realize);
->
-> -    device_class_set_parent_reset(dc, riscv_cpu_reset, &mcc->parent_reset);
-> +    resettable_class_set_parent_phases(rc, NULL, riscv_cpu_reset_hold, NULL,
-> +                                       &mcc->parent_phases);
->
->      cc->class_by_name = riscv_cpu_class_by_name;
->      cc->has_work = riscv_cpu_has_work;
+>      k->parse_features = cpu_common_parse_features;
+> @@ -269,7 +270,7 @@ static void cpu_class_init(ObjectClass *klass, void *data)
+>      set_bit(DEVICE_CATEGORY_CPU, dc->categories);
+>      dc->realize = cpu_common_realizefn;
+>      dc->unrealize = cpu_common_unrealizefn;
+> -    dc->reset = cpu_common_reset;
+> +    rc->phases.hold = cpu_common_reset_hold;
+>      cpu_class_init_props(dc);
+>      /*
+>       * Reason: CPUs still need special care by board code: wiring up
 > --
 > 2.25.1
 >
