@@ -1,100 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ozgXh-0003ES-Jz
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Nov 2022 10:59:37 -0500
+	id 1ozkYm-00087k-F1
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Nov 2022 15:17:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <quintela@redhat.com>)
- id 1ozgXg-0003DU-93
- for qemu-riscv@nongnu.org; Mon, 28 Nov 2022 10:59:36 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <quintela@redhat.com>)
- id 1ozgXe-00066h-Vg
- for qemu-riscv@nongnu.org; Mon, 28 Nov 2022 10:59:36 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1669651173;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/1IzXla6DDb3kJifsStnlw4Qa7gNI9PODBtyiQ/YSzk=;
- b=CZmDQfRngwvmOyLuYae7syfJMhHmrak3XCPuOk+rTlIO3pyQOC2stg9tW96yep2tjyto0a
- T/vtMoNyXVOuQYCusPRgnQOASaYC1S7ayaokAOc6Zc9cqQGYidCBiOT7LgjID0zEnPUylD
- 03YYMoP2mdr/gWsBHMk5J2PDXUTxDQ0=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-461-4pKZg5lgNNCFsrVG4h-I8w-1; Mon, 28 Nov 2022 10:59:30 -0500
-X-MC-Unique: 4pKZg5lgNNCFsrVG4h-I8w-1
-Received: by mail-wr1-f69.google.com with SMTP id
- e19-20020adfa453000000b0024209415034so1334401wra.18
- for <qemu-riscv@nongnu.org>; Mon, 28 Nov 2022 07:59:29 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1ozkYl-00086b-1t
+ for qemu-riscv@nongnu.org; Mon, 28 Nov 2022 15:16:59 -0500
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1ozkYh-0000fN-7M
+ for qemu-riscv@nongnu.org; Mon, 28 Nov 2022 15:16:58 -0500
+Received: by mail-pg1-x52a.google.com with SMTP id w37so5816388pga.5
+ for <qemu-riscv@nongnu.org>; Mon, 28 Nov 2022 12:16:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YZHA0nNzUWeJr4n+F5kZ2FgmIlbVbUeqlnGABeul0SI=;
+ b=IijJUjRIFdwQekCkquO4+3bthCfg2TkmF0tb+vVSJvfRba29inT6M6iXKnWsIhAYUB
+ nGQDjyHFCVEzPKLAnUL+rgCmpSipQ0rch6RsqNg+pMryxEvgy4BigE3hfayHX7YK9OUB
+ 7w0+Jt5plyza4/7vk59GwnbU6ESQj9ME+b0EfFhK8qux7DmQBs18QKIcOnAPn5C/Bdp2
+ IJhc+2tlfgvpBREmlXSlafHQWE/z2SCmVL27xQg01lBjlC3Mu9tarTScd74/WXfvuYMM
+ qsAiypgQU7SjRGJfX5Vr/hbTeq1tg8y7vsXhfdRpXkF94mARTbEJ/H+NW/QxcxlAT1p5
+ Dtxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:reply-to
- :user-agent:references:in-reply-to:subject:cc:to:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/1IzXla6DDb3kJifsStnlw4Qa7gNI9PODBtyiQ/YSzk=;
- b=X2OEEOnuto8xU5ZTGdVCc1IY7j3VX7AFMoJ0I48a/qC7kcLTi/MVhAt+6i6vWLL8MD
- 3pltcG/Y0uXGrwEy+c8oDhQRjtk2E9uFs8lUF8XSBC2Be64qY96CgAu7d8Bfk1rfJF8M
- V+l+RLAJTLmkqqvyU2LSFQCkEOP/HODWlDCyEMHV0LudxwamTlV524Hh7MRcjMiw5wOQ
- 7PePW1Qkb8Gtqi7/nuNdOrJeGacVjGYH6C4Tk6jK4NGz1Xcv8MN9WLu+bko6DEpXHR8A
- i3ymX67UmUS8RAbORq8FuyOQLAyeiFM/Dtw/6lDpiOQWmocYX0m/nyJP+O0oLQqSzWVj
- 32Vg==
-X-Gm-Message-State: ANoB5pmaE96k0IEs/RWaeXTt+qpklNYrTPVUvcxK6NSy/hpp4fYpMZpY
- CtTql32bYMUxVULiyfDSg8xW7EyOmaPs1uP2ffYcu6AO880TnBdItDenPOk7AuzGG3roB22+uqB
- w50kaXt4dVId6RmU=
-X-Received: by 2002:adf:ed01:0:b0:241:b4cc:4e9e with SMTP id
- a1-20020adfed01000000b00241b4cc4e9emr20798392wro.287.1669651168993; 
- Mon, 28 Nov 2022 07:59:28 -0800 (PST)
-X-Google-Smtp-Source: AA0mqf4OYViHyloJT8wO2lk37YjauITxsemI5W1bX5ZkalWXYJlfkWYuNcq4Xj9CUpcvq3NkKcVeGA==
-X-Received: by 2002:adf:ed01:0:b0:241:b4cc:4e9e with SMTP id
- a1-20020adfed01000000b00241b4cc4e9emr20798373wro.287.1669651168767; 
- Mon, 28 Nov 2022 07:59:28 -0800 (PST)
-Received: from localhost ([31.4.242.188]) by smtp.gmail.com with ESMTPSA id
- k17-20020a05600c1c9100b003c6b874a0dfsm20387267wms.14.2022.11.28.07.59.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Nov 2022 07:59:28 -0800 (PST)
-From: Juan Quintela <quintela@redhat.com>
-To: Markus Armbruster <armbru@redhat.com>
-Cc: qemu-devel@nongnu.org,  Alistair.Francis@wdc.com,
- bin.meng@windriver.com,  palmer@dabbelt.com,
- marcandre.lureau@redhat.com,  pbonzini@redhat.com,
- yuval.shaia.ml@gmail.com,  marcel.apfelbaum@gmail.com,  mst@redhat.com,
- dgilbert@redhat.com,  pavel.dovgaluk@ispras.ru,  alex.bennee@linaro.org,
- peterx@redhat.com,  david@redhat.com,  philmd@linaro.org,
- mrolnik@gmail.com,  gaosong@loongson.cn,  yangxiaojuan@loongson.cn,
- aurelien@aurel32.net,  jiaxun.yang@flygoat.com,
- aleksandar.rikalo@syrmia.com,  berrange@redhat.com,  thuth@redhat.com,
- lvivier@redhat.com,  suhang16@mails.ucas.ac.cn,  chen.zhang@intel.com,
- lizhijian@fujitsu.com,  stefanha@redhat.com,  qemu-riscv@nongnu.org,
- qemu-ppc@nongnu.org,  virtio-fs@redhat.com,  BALATON Zoltan
- <balaton@eik.bme.hu>
-Subject: Re: [PATCH v3 3/3] ppc4xx_sdram: Simplify sdram_ddr_size() to
- return directly
-In-Reply-To: <20221128094138.2824623-4-armbru@redhat.com> (Markus Armbruster's
- message of "Mon, 28 Nov 2022 10:41:38 +0100")
-References: <20221128094138.2824623-1-armbru@redhat.com>
- <20221128094138.2824623-4-armbru@redhat.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.1 (gnu/linux)
-Reply-To: quintela@redhat.com
-Date: Mon, 28 Nov 2022 16:59:25 +0100
-Message-ID: <8735a3kr36.fsf@secure.mitica>
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YZHA0nNzUWeJr4n+F5kZ2FgmIlbVbUeqlnGABeul0SI=;
+ b=NJMoQAskSJP5r9t3jSbdecmnhUphCm6/KLhRN1dJNdFd65Z6GmBT5BQUYFNvqslTv+
+ YxqL6ttx0Gh1mxqJiESUjVzgPyJReSap1h8zoaQAoqALwGASu3Z9HkqRpYFQVqtQuRqL
+ xKmZj6hThqjihHTHf6MsrMzN56ySJzdw+FmQh44MbOLB41LWaCwfbMUJmeEZI/yWg9Jk
+ iw1wWwOP1yfZxgGWVPT8Fw9OGG/K9A4B2Y4o1XoyKUWtm5Q89khvBIOlPKENnl+c6EaJ
+ Rd49PN/7Us78Td611TlbwHEeGMKphWY/LIscY95U66Ebv2yOqy+aBnwbqQaKEM6WNA12
+ JBKw==
+X-Gm-Message-State: ANoB5plmVA08BmKQ5KsckBnVCviumfPGKi3dUoXiqFS37AkHnbOxtMvs
+ CROEvAQNNZ+V4C+oBF4wM+4YhCQhnXUQFKKGDcmsDA==
+X-Google-Smtp-Source: AA0mqf5etGTxJ1SSX4DPf0txPdHcxxcGdmkBB1Xs/i2QuWYmHeVVxKZrQSgQpHyHzOw8c8qUwJ87ykSZUVUX6QMF7kM=
+X-Received: by 2002:a65:4688:0:b0:477:7aee:a464 with SMTP id
+ h8-20020a654688000000b004777aeea464mr32854012pgr.595.1669666612258; Mon, 28
+ Nov 2022 12:16:52 -0800 (PST)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
+References: <20220824221701.41932-1-atishp@rivosinc.com>
+ <20220824221701.41932-5-atishp@rivosinc.com>
+ <Y39urpX82uO85AAb@wendy>
+In-Reply-To: <Y39urpX82uO85AAb@wendy>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Mon, 28 Nov 2022 12:16:41 -0800
+Message-ID: <CAHBxVyFhrkdhWpc4xB-_a4c5GnDu=d01-bk2zM2nCraeq_Xr_A@mail.gmail.com>
+Subject: Re: [PATCH v14 4/5] hw/riscv: virt: Add PMU DT node to the device tree
+To: Conor Dooley <conor.dooley@microchip.com>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=quintela@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=atishp@rivosinc.com; helo=mail-pg1-x52a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,14 +78,199 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2022 15:59:36 -0000
+X-List-Received-Date: Mon, 28 Nov 2022 20:16:59 -0000
 
-Markus Armbruster <armbru@redhat.com> wrote:
-> Suggested-by: BALATON Zoltan <balaton@eik.bme.hu>
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> Reviewed-by: BALATON Zoltan <balaton@eik.bme.hu>
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+On Thu, Nov 24, 2022 at 5:17 AM Conor Dooley <conor.dooley@microchip.com> w=
+rote:
+>
+> On Wed, Aug 24, 2022 at 03:17:00PM -0700, Atish Patra wrote:
+> > Qemu virt machine can support few cache events and cycle/instret counte=
+rs.
+> > It also supports counter overflow for these events.
+> >
+> > Add a DT node so that OpenSBI/Linux kernel is aware of the virt machine
+> > capabilities. There are some dummy nodes added for testing as well.
+>
+> Hey Atish!
+>
+> I was fiddling with dumping the virt machine dtb again today to check
+> some dt-binding changes I was making for the isa string would play
+> nicely with the virt machine & I noticed that this patch has introduced
+> a new validation failure:
+>
+> ./build/qemu-system-riscv64 -nographic -machine virt,dumpdtb=3Dqemu.dtb
+>
+> dt-validate -p ../linux/Documentation/devicetree/bindings/processed-schem=
+a.json qemu.dtb
+> /home/conor/stuff/qemu/qemu.dtb: soc: pmu: {'riscv,event-to-mhpmcounters'=
+: [[1, 1, 524281, 2, 2, 524284, 65561, 65561, 524280, 65563, 65563, 524280,=
+ 65569, 65569, 524280, 0, 0, 0, 0, 0]], 'compatible': ['riscv,pmu']} should=
+ not be valid under {'type': 'object'}
+>         From schema: /home/conor/.local/lib/python3.10/site-packages/dtsc=
+hema/schemas/simple-bus.yaml
+>
+> I assume this is the aforementioned "dummy" node & you have no intention
+> of creating a binding for this?
+>
 
-Reviewed-by: Juan Quintela <quintela@redhat.com>
+It is a dummy node from Linux kernel perspective. OpenSbi use this
+node to figure out the hpmcounter mappings.
 
+> Thanks,
+> Conor.
+>
+> > Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> > Signed-off-by: Atish Patra <atish.patra@wdc.com>
+> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> > ---
+> >  hw/riscv/virt.c    | 16 +++++++++++++
+> >  target/riscv/pmu.c | 57 ++++++++++++++++++++++++++++++++++++++++++++++
+> >  target/riscv/pmu.h |  1 +
+> >  3 files changed, 74 insertions(+)
+> >
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index ff8c0df5cd47..befa9d2c26ac 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -30,6 +30,7 @@
+> >  #include "hw/char/serial.h"
+> >  #include "target/riscv/cpu.h"
+> >  #include "hw/core/sysbus-fdt.h"
+> > +#include "target/riscv/pmu.h"
+> >  #include "hw/riscv/riscv_hart.h"
+> >  #include "hw/riscv/virt.h"
+> >  #include "hw/riscv/boot.h"
+> > @@ -708,6 +709,20 @@ static void create_fdt_socket_aplic(RISCVVirtState=
+ *s,
+> >      aplic_phandles[socket] =3D aplic_s_phandle;
+> >  }
+> >
+> > +static void create_fdt_pmu(RISCVVirtState *s)
+> > +{
+> > +    char *pmu_name;
+> > +    MachineState *mc =3D MACHINE(s);
+> > +    RISCVCPU hart =3D s->soc[0].harts[0];
+> > +
+> > +    pmu_name =3D g_strdup_printf("/soc/pmu");
+> > +    qemu_fdt_add_subnode(mc->fdt, pmu_name);
+> > +    qemu_fdt_setprop_string(mc->fdt, pmu_name, "compatible", "riscv,pm=
+u");
+> > +    riscv_pmu_generate_fdt_node(mc->fdt, hart.cfg.pmu_num, pmu_name);
+> > +
+> > +    g_free(pmu_name);
+> > +}
+> > +
+> >  static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *m=
+emmap,
+> >                                 bool is_32_bit, uint32_t *phandle,
+> >                                 uint32_t *irq_mmio_phandle,
+> > @@ -1036,6 +1051,7 @@ static void create_fdt(RISCVVirtState *s, const M=
+emMapEntry *memmap,
+> >
+> >      create_fdt_flash(s, memmap);
+> >      create_fdt_fw_cfg(s, memmap);
+> > +    create_fdt_pmu(s);
+> >
+> >  update_bootargs:
+> >      if (cmdline && *cmdline) {
+> > diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+> > index a5f504e53c88..b8e56d2b7b8e 100644
+> > --- a/target/riscv/pmu.c
+> > +++ b/target/riscv/pmu.c
+> > @@ -20,11 +20,68 @@
+> >  #include "cpu.h"
+> >  #include "pmu.h"
+> >  #include "sysemu/cpu-timers.h"
+> > +#include "sysemu/device_tree.h"
+> >
+> >  #define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
+> >  #define MAKE_32BIT_MASK(shift, length) \
+> >          (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
+> >
+> > +/*
+> > + * To keep it simple, any event can be mapped to any programmable coun=
+ters in
+> > + * QEMU. The generic cycle & instruction count events can also be moni=
+tored
+> > + * using programmable counters. In that case, mcycle & minstret must c=
+ontinue
+> > + * to provide the correct value as well. Heterogeneous PMU per hart is=
+ not
+> > + * supported yet. Thus, number of counters are same across all harts.
+> > + */
+> > +void riscv_pmu_generate_fdt_node(void *fdt, int num_ctrs, char *pmu_na=
+me)
+> > +{
+> > +    uint32_t fdt_event_ctr_map[20] =3D {};
+> > +    uint32_t cmask;
+> > +
+> > +    /* All the programmable counters can map to any event */
+> > +    cmask =3D MAKE_32BIT_MASK(3, num_ctrs);
+> > +
+> > +   /*
+> > +    * The event encoding is specified in the SBI specification
+> > +    * Event idx is a 20bits wide number encoded as follows:
+> > +    * event_idx[19:16] =3D type
+> > +    * event_idx[15:0] =3D code
+> > +    * The code field in cache events are encoded as follows:
+> > +    * event_idx.code[15:3] =3D cache_id
+> > +    * event_idx.code[2:1] =3D op_id
+> > +    * event_idx.code[0:0] =3D result_id
+> > +    */
+> > +
+> > +   /* SBI_PMU_HW_CPU_CYCLES: 0x01 : type(0x00) */
+> > +   fdt_event_ctr_map[0] =3D cpu_to_be32(0x00000001);
+> > +   fdt_event_ctr_map[1] =3D cpu_to_be32(0x00000001);
+> > +   fdt_event_ctr_map[2] =3D cpu_to_be32(cmask | 1 << 0);
+> > +
+> > +   /* SBI_PMU_HW_INSTRUCTIONS: 0x02 : type(0x00) */
+> > +   fdt_event_ctr_map[3] =3D cpu_to_be32(0x00000002);
+> > +   fdt_event_ctr_map[4] =3D cpu_to_be32(0x00000002);
+> > +   fdt_event_ctr_map[5] =3D cpu_to_be32(cmask | 1 << 2);
+> > +
+> > +   /* SBI_PMU_HW_CACHE_DTLB : 0x03 READ : 0x00 MISS : 0x00 type(0x01) =
+*/
+> > +   fdt_event_ctr_map[6] =3D cpu_to_be32(0x00010019);
+> > +   fdt_event_ctr_map[7] =3D cpu_to_be32(0x00010019);
+> > +   fdt_event_ctr_map[8] =3D cpu_to_be32(cmask);
+> > +
+> > +   /* SBI_PMU_HW_CACHE_DTLB : 0x03 WRITE : 0x01 MISS : 0x00 type(0x01)=
+ */
+> > +   fdt_event_ctr_map[9] =3D cpu_to_be32(0x0001001B);
+> > +   fdt_event_ctr_map[10] =3D cpu_to_be32(0x0001001B);
+> > +   fdt_event_ctr_map[11] =3D cpu_to_be32(cmask);
+> > +
+> > +   /* SBI_PMU_HW_CACHE_ITLB : 0x04 READ : 0x00 MISS : 0x00 type(0x01) =
+*/
+> > +   fdt_event_ctr_map[12] =3D cpu_to_be32(0x00010021);
+> > +   fdt_event_ctr_map[13] =3D cpu_to_be32(0x00010021);
+> > +   fdt_event_ctr_map[14] =3D cpu_to_be32(cmask);
+> > +
+> > +   /* This a OpenSBI specific DT property documented in OpenSBI docs *=
+/
+> > +   qemu_fdt_setprop(fdt, pmu_name, "riscv,event-to-mhpmcounters",
+> > +                    fdt_event_ctr_map, sizeof(fdt_event_ctr_map));
+> > +}
+> > +
+> >  static bool riscv_pmu_counter_valid(RISCVCPU *cpu, uint32_t ctr_idx)
+> >  {
+> >      if (ctr_idx < 3 || ctr_idx >=3D RV_MAX_MHPMCOUNTERS ||
+> > diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
+> > index 036653627f78..3004ce37b636 100644
+> > --- a/target/riscv/pmu.h
+> > +++ b/target/riscv/pmu.h
+> > @@ -31,5 +31,6 @@ int riscv_pmu_init(RISCVCPU *cpu, int num_counters);
+> >  int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
+> >                                 uint32_t ctr_idx);
+> >  int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_i=
+dx);
+> > +void riscv_pmu_generate_fdt_node(void *fdt, int num_counters, char *pm=
+u_name);
+> >  int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
+> >                            uint32_t ctr_idx);
+> > --
+> > 2.25.1
+> >
+> >
+> >
 
