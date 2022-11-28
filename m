@@ -1,54 +1,101 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ozdHK-0005Le-Cu
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Nov 2022 07:30:31 -0500
+	id 1ozgX7-00038A-A3
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Nov 2022 10:59:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ozdHD-0005KM-VE; Mon, 28 Nov 2022 07:30:25 -0500
-Received: from smtp84.cstnet.cn ([159.226.251.84] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ozdGx-00020Y-0T; Mon, 28 Nov 2022 07:30:23 -0500
-Received: from localhost.localdomain (unknown [180.175.30.174])
- by APP-05 (Coremail) with SMTP id zQCowAC3v_fCqYRj_UQNAw--.18159S2;
- Mon, 28 Nov 2022 20:29:55 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v6 0/9] support subsets of code size reduction extension
-Date: Mon, 28 Nov 2022 20:29:04 +0800
-Message-Id: <20221128122913.55611-1-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1) (envelope-from <quintela@redhat.com>)
+ id 1ozgX5-00037G-SG
+ for qemu-riscv@nongnu.org; Mon, 28 Nov 2022 10:58:59 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <quintela@redhat.com>)
+ id 1ozgX4-00064D-Iu
+ for qemu-riscv@nongnu.org; Mon, 28 Nov 2022 10:58:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1669651138;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=UN0ku+WTjV7mhjtZkap0R4CwBi6nC5merXOuLJZzUgY=;
+ b=WF3fYtgfnIO75XFMHQi9cEEq1gqk8lGln8C8yNgFhjuZlFlP6aBz6wdSyWPxZz8HYB8O3O
+ BLpBjNjU0gtH+QWYIwraHrb0DQW7qBJC+eDjngMwStLkI/YtWmgohhdLNVdxad799dljNb
+ 5Ei7vZWljyuzIzbzOLfclsW9QwzZMhU=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-350-Hys_35yqOZ6dup_OKGxofQ-1; Mon, 28 Nov 2022 10:58:54 -0500
+X-MC-Unique: Hys_35yqOZ6dup_OKGxofQ-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ bi19-20020a05600c3d9300b003cf9d6c4016so8755965wmb.8
+ for <qemu-riscv@nongnu.org>; Mon, 28 Nov 2022 07:58:54 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:reply-to
+ :user-agent:references:in-reply-to:subject:cc:to:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=UN0ku+WTjV7mhjtZkap0R4CwBi6nC5merXOuLJZzUgY=;
+ b=b399/oVqKIAcdGUcYS4497Vc83uAm6Kz/rXVVFq3RmJmPEs+clH/WA53Nq9CCg3jmS
+ T/QLQkG5Pap50u76jCaOR71J/RR+wtHUeIhZfkDjJ7SvgRAe0n3dHRywTTMTwGJ2XMaL
+ Abn1lbWMiwLeuNkNCgXCnFefrBKhamXju4todOYfN0qeQI8RElSwBMiPyiZm3Nu5jQgZ
+ O7qh6OCgGTVDKYwYap6E59c+LtHw5OxWJtyg+HuxF47x2wiWZZqK+hirLVZLP7L7ASiE
+ FcjLperCnIIEjXo+CalkJ0wlyPi415YlZIsAdfGfIsW4VwEtno9fDgcU6rOeFUEkt2ay
+ nmqA==
+X-Gm-Message-State: ANoB5pkvqkwOZxpkQNy47+ZXxwvXasaumYj3DswK1DvTcxwqJjtOiuXO
+ 4M3Eua9cCFxGQj0aD62qUyk5RPPpbNSj3Nf5wmeEjl/yBuMDomevwTKg0VxYZsfiZ21llb/0cJc
+ 7+fv1Bz37tAcIXls=
+X-Received: by 2002:a1c:4b12:0:b0:3cf:5237:c0be with SMTP id
+ y18-20020a1c4b12000000b003cf5237c0bemr37140995wma.163.1669651133800; 
+ Mon, 28 Nov 2022 07:58:53 -0800 (PST)
+X-Google-Smtp-Source: AA0mqf6sDt2/YarcW5Yi5WbLGw0L8xMd/mn3Vr3VhWcN5EaeaIIBHL6gDN9k9OjR2uPHGYGYYDZFlg==
+X-Received: by 2002:a1c:4b12:0:b0:3cf:5237:c0be with SMTP id
+ y18-20020a1c4b12000000b003cf5237c0bemr37140957wma.163.1669651133599; 
+ Mon, 28 Nov 2022 07:58:53 -0800 (PST)
+Received: from localhost ([31.4.242.188]) by smtp.gmail.com with ESMTPSA id
+ u22-20020a7bc056000000b003c6c1686b10sm18924790wmc.7.2022.11.28.07.58.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Nov 2022 07:58:53 -0800 (PST)
+From: Juan Quintela <quintela@redhat.com>
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org,  Alistair.Francis@wdc.com,
+ bin.meng@windriver.com,  palmer@dabbelt.com,
+ marcandre.lureau@redhat.com,  pbonzini@redhat.com,
+ yuval.shaia.ml@gmail.com,  marcel.apfelbaum@gmail.com,  mst@redhat.com,
+ dgilbert@redhat.com,  pavel.dovgaluk@ispras.ru,  alex.bennee@linaro.org,
+ peterx@redhat.com,  david@redhat.com,  philmd@linaro.org,
+ mrolnik@gmail.com,  gaosong@loongson.cn,  yangxiaojuan@loongson.cn,
+ aurelien@aurel32.net,  jiaxun.yang@flygoat.com,
+ aleksandar.rikalo@syrmia.com,  berrange@redhat.com,  thuth@redhat.com,
+ lvivier@redhat.com,  suhang16@mails.ucas.ac.cn,  chen.zhang@intel.com,
+ lizhijian@fujitsu.com,  stefanha@redhat.com,  qemu-riscv@nongnu.org,
+ qemu-ppc@nongnu.org,  virtio-fs@redhat.com,  Fam Zheng <fam@euphon.net>,
+ Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz <hreitz@redhat.com>,
+ qemu-block@nongnu.org,  Peter Maydell <peter.maydell@linaro.org>
+Subject: Re: [PATCH v3 2/3] block/vmdk: Simplify vmdk_co_create() to return
+ directly
+In-Reply-To: <20221128094138.2824623-3-armbru@redhat.com> (Markus Armbruster's
+ message of "Mon, 28 Nov 2022 10:41:37 +0100")
+References: <20221128094138.2824623-1-armbru@redhat.com>
+ <20221128094138.2824623-3-armbru@redhat.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.1 (gnu/linux)
+Reply-To: quintela@redhat.com
+Date: Mon, 28 Nov 2022 16:58:51 +0100
+Message-ID: <877czfkr44.fsf@secure.mitica>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowAC3v_fCqYRj_UQNAw--.18159S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7uryDKFW5KryrWw4xWF48JFb_yoW5JrW8pr
- WrC3yakrZ8tFWxJw4ftF1DJw15Ar4rWr45Awn7Jw1kJay3ArW5Jrn7K3W3G3WxJF18WrnF
- 93WUCw13u3yUJFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUyv14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCF04k20xvY0x0EwIxG
- rwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4
- vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IY
- x2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26c
- xKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAF
- wI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7VUbXdbUUUUUU==
-X-Originating-IP: [180.175.30.174]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=quintela@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -61,72 +108,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2022 12:30:25 -0000
+X-List-Received-Date: Mon, 28 Nov 2022 15:59:00 -0000
 
-This patchset implements RISC-V Zc* extension v1.0.0.RC5.7 version instructions.
+Markus Armbruster <armbru@redhat.com> wrote:
+> Cc: Fam Zheng <fam@euphon.net>
+> Cc: Kevin Wolf <kwolf@redhat.com>
+> Cc: Hanna Reitz <hreitz@redhat.com>
+> Cc: qemu-block@nongnu.org
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
-Specification:
-https://github.com/riscv/riscv-code-size-reduction/tree/main/Zc-specification
+Reviewed-by: Juan Quintela <quintela@redhat.com>
 
-The port is available here:
-https://github.com/plctlab/plct-qemu/tree/plct-zce-upstream-v6
-
-To test Zc* implementation, specify cpu argument with 'x-zca=true,x-zcb=true,x-zcf=true,f=true" and "x-zcd=true,d=true" (or "x-zcmp=true,x-zcmt=true" with c or d=false) to enable Zca/Zcb/Zcf and Zcd(or Zcmp,Zcmt) extension support.
-
-
-This implementation can pass the basic zc tests from https://github.com/yulong-plct/zc-test
-
-v6：
-* fix base address for jump table in Patch 7
-* rebase on riscv-to-apply.next
-
-v5:
-* fix exception unwind problem for cpu_ld*_code in helper of cm_jalt
-
-v4:
-* improve Zcmp suggested by Richard
-* fix stateen related check for Zcmt
-
-v3:
-* update the solution for Zcf to the way of Zcd
-* update Zcb to reuse gen_load/store
-* use trans function instead of helper for push/pop
-
-v2:
-* add check for relationship between Zca/Zcf/Zcd with C/F/D based on related discussion in review of Zc* spec
-* separate c.fld{sp}/fsd{sp} with fld{sp}/fsd{sp} before support of zcmp/zcmt
-
-Weiwei Li (9):
-  target/riscv: add cfg properties for Zc* extension
-  target/riscv: add support for Zca extension
-  target/riscv: add support for Zcf extension
-  target/riscv: add support for Zcd extension
-  target/riscv: add support for Zcb extension
-  target/riscv: add support for Zcmp extension
-  target/riscv: add support for Zcmt extension
-  target/riscv: expose properties for Zc* extension
-  disas/riscv.c: add disasm support for Zc*
-
- disas/riscv.c                             | 287 +++++++++++++++++++-
- target/riscv/cpu.c                        |  56 ++++
- target/riscv/cpu.h                        |  10 +
- target/riscv/cpu_bits.h                   |   7 +
- target/riscv/csr.c                        |  38 ++-
- target/riscv/helper.h                     |   3 +
- target/riscv/insn16.decode                |  63 ++++-
- target/riscv/insn_trans/trans_rvd.c.inc   |  18 ++
- target/riscv/insn_trans/trans_rvf.c.inc   |  18 ++
- target/riscv/insn_trans/trans_rvi.c.inc   |   4 +-
- target/riscv/insn_trans/trans_rvzce.c.inc | 313 ++++++++++++++++++++++
- target/riscv/machine.c                    |  19 ++
- target/riscv/meson.build                  |   3 +-
- target/riscv/translate.c                  |  15 +-
- target/riscv/zce_helper.c                 |  55 ++++
- 15 files changed, 893 insertions(+), 16 deletions(-)
- create mode 100644 target/riscv/insn_trans/trans_rvzce.c.inc
- create mode 100644 target/riscv/zce_helper.c
-
--- 
-2.25.1
+goto, uninitialized variable at declaraton and can use return directly.
+Not bad at all.
 
 
