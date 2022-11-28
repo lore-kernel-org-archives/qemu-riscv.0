@@ -1,34 +1,34 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ozdH2-0005EZ-3F
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Nov 2022 07:30:12 -0500
+	id 1ozdH4-0005GH-Ex
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Nov 2022 07:30:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ozdH0-0005E0-GG; Mon, 28 Nov 2022 07:30:10 -0500
+ id 1ozdH2-0005Ef-4e; Mon, 28 Nov 2022 07:30:12 -0500
 Received: from smtp84.cstnet.cn ([159.226.251.84] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ozdGw-00020c-UM; Mon, 28 Nov 2022 07:30:09 -0500
+ id 1ozdGx-00021E-09; Mon, 28 Nov 2022 07:30:11 -0500
 Received: from localhost.localdomain (unknown [180.175.30.174])
- by APP-05 (Coremail) with SMTP id zQCowAC3v_fCqYRj_UQNAw--.18159S7;
- Mon, 28 Nov 2022 20:29:58 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowAC3v_fCqYRj_UQNAw--.18159S9;
+ Mon, 28 Nov 2022 20:29:59 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v6 5/9] target/riscv: add support for Zcb extension
-Date: Mon, 28 Nov 2022 20:29:09 +0800
-Message-Id: <20221128122913.55611-6-liweiwei@iscas.ac.cn>
+Subject: [PATCH v6 7/9] target/riscv: add support for Zcmt extension
+Date: Mon, 28 Nov 2022 20:29:11 +0800
+Message-Id: <20221128122913.55611-8-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221128122913.55611-1-liweiwei@iscas.ac.cn>
 References: <20221128122913.55611-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowAC3v_fCqYRj_UQNAw--.18159S7
-X-Coremail-Antispam: 1UD129KBjvJXoW3Jw1Dtw13Cr18try7tF15XFb_yoW7trWrpF
- 1xCry7GFyqgFyIyayfKF13XF17Wr4fWrWUK39xAw1kGayYgFWDJr1DKay3Ka1DXr4DWr4j
- 93WDAayUJ3y0qa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: zQCowAC3v_fCqYRj_UQNAw--.18159S9
+X-Coremail-Antispam: 1UD129KBjvJXoW3KrWDZF17Jry3JFyUKF1rWFg_yoWDuw1fpF
+ 4rC3y7GrW8JFZ7Aa4fKF45tF15Jw4rGayUCws3Jws5Ja13JFWrJr1DKw13KF4DXFZ5ur4j
+ 93Z0yFy5ArW8ZFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUU9K14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
@@ -63,82 +63,315 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2022 12:30:10 -0000
+X-List-Received-Date: Mon, 28 Nov 2022 12:30:12 -0000
 
-Add encode and trans* functions support for Zcb instructions
+Add encode, trans* functions and helper functions support for Zcmt
+instrutions
+Add support for jvt csr
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn16.decode                |  24 ++++++
- target/riscv/insn_trans/trans_rvzce.c.inc | 100 ++++++++++++++++++++++
- target/riscv/translate.c                  |   2 +
- 3 files changed, 126 insertions(+)
- create mode 100644 target/riscv/insn_trans/trans_rvzce.c.inc
+ target/riscv/cpu.h                        |  4 ++
+ target/riscv/cpu_bits.h                   |  7 +++
+ target/riscv/csr.c                        | 38 +++++++++++++++-
+ target/riscv/helper.h                     |  3 ++
+ target/riscv/insn16.decode                |  7 ++-
+ target/riscv/insn_trans/trans_rvzce.c.inc | 28 +++++++++++-
+ target/riscv/machine.c                    | 19 ++++++++
+ target/riscv/meson.build                  |  3 +-
+ target/riscv/zce_helper.c                 | 55 +++++++++++++++++++++++
+ 9 files changed, 159 insertions(+), 5 deletions(-)
+ create mode 100644 target/riscv/zce_helper.c
 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 6e915b6937..7bcedc7467 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -181,6 +181,8 @@ struct CPUArchState {
+ 
+     uint32_t features;
+ 
++    target_ulong jvt;
++
+ #ifdef CONFIG_USER_ONLY
+     uint32_t elf_flags;
+ #endif
+@@ -600,6 +602,8 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
+                                                  target_ulong new_val,
+                                                  target_ulong write_mask),
+                                    void *rmw_fn_arg);
++
++RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit);
+ #endif
+ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv);
+ 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 8b0d7e20ea..ce347e5575 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -319,6 +319,7 @@
+ #define SMSTATEEN_MAX_COUNT 4
+ #define SMSTATEEN0_CS       (1ULL << 0)
+ #define SMSTATEEN0_FCSR     (1ULL << 1)
++#define SMSTATEEN0_JVT      (1ULL << 2)
+ #define SMSTATEEN0_HSCONTXT (1ULL << 57)
+ #define SMSTATEEN0_IMSIC    (1ULL << 58)
+ #define SMSTATEEN0_AIA      (1ULL << 59)
+@@ -523,6 +524,9 @@
+ /* Crypto Extension */
+ #define CSR_SEED            0x015
+ 
++/* Zcmt Extension */
++#define CSR_JVT             0x017
++
+ /* mstatus CSR bits */
+ #define MSTATUS_UIE         0x00000001
+ #define MSTATUS_SIE         0x00000002
+@@ -894,4 +898,7 @@ typedef enum RISCVException {
+ #define MHPMEVENT_IDX_MASK                 0xFFFFF
+ #define MHPMEVENT_SSCOF_RESVD              16
+ 
++/* JVT CSR bits */
++#define JVT_MODE                           0x3F
++#define JVT_BASE                           (~0x3F)
+ #endif
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index e6f8250929..a752e8b215 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -42,8 +42,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+ 
+ /* Predicates */
+ #if !defined(CONFIG_USER_ONLY)
+-static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
+-                                       uint64_t bit)
++RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit)
+ {
+     bool virt = riscv_cpu_virt_enabled(env);
+     CPUState *cs = env_cpu(env);
+@@ -163,6 +162,24 @@ static RISCVException ctr32(CPURISCVState *env, int csrno)
+     return ctr(env, csrno);
+ }
+ 
++static RISCVException zcmt(CPURISCVState *env, int csrno)
++{
++    RISCVCPU *cpu = env_archcpu(env);
++
++    if (!cpu->cfg.ext_zcmt) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++#if !defined(CONFIG_USER_ONLY)
++    RISCVException ret = smstateen_acc_ok(env, 0, SMSTATEEN0_JVT);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
++#endif
++
++    return RISCV_EXCP_NONE;
++}
++
+ #if !defined(CONFIG_USER_ONLY)
+ static RISCVException mctr(CPURISCVState *env, int csrno)
+ {
+@@ -3980,6 +3997,20 @@ RISCVException riscv_csrrw_debug(CPURISCVState *env, int csrno,
+     return ret;
+ }
+ 
++static RISCVException read_jvt(CPURISCVState *env, int csrno,
++                               target_ulong *val)
++{
++    *val = env->jvt;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_jvt(CPURISCVState *env, int csrno,
++                                target_ulong val)
++{
++    env->jvt = val;
++    return RISCV_EXCP_NONE;
++}
++
+ /* Control and Status Register function table */
+ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* User Floating-Point CSRs */
+@@ -4017,6 +4048,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* Crypto Extension */
+     [CSR_SEED] = { "seed", seed, NULL, NULL, rmw_seed },
+ 
++    /* Zcmt Extension */
++    [CSR_JVT] = {"jvt", zcmt, read_jvt, write_jvt},
++
+ #if !defined(CONFIG_USER_ONLY)
+     /* Machine Timers and Counters */
+     [CSR_MCYCLE]    = { "mcycle",    any,   read_hpmcounter,
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 227c7122ef..d979f0bfc4 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1136,3 +1136,6 @@ DEF_HELPER_FLAGS_1(aes64im, TCG_CALL_NO_RWG_SE, tl, tl)
+ 
+ DEF_HELPER_FLAGS_3(sm4ed, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
+ DEF_HELPER_FLAGS_3(sm4ks, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
++
++/* Zce helper */
++DEF_HELPER_FLAGS_2(cm_jalt, TCG_CALL_NO_WG, tl, env, i32)
 diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index b62664b6af..47603ec1e0 100644
+index 4654c23052..c359c574ab 100644
 --- a/target/riscv/insn16.decode
 +++ b/target/riscv/insn16.decode
-@@ -43,6 +43,8 @@
- %imm_addi16sp  12:s1 3:2 5:1 2:1 6:1 !function=ex_shift_4
- %imm_lui       12:s1 2:5             !function=ex_shift_12
- 
-+%zcb_b_uimm  5:1 6:1
-+%zcb_h_uimm  5:1                     !function=ex_shift_1
+@@ -49,6 +49,7 @@
+ %zcb_h_uimm  5:1                     !function=ex_shift_1
+ %zcmp_spimm  2:2                     !function=ex_shift_4
+ %zcmp_rlist  4:4
++%zcmt_index  2:8
  
  # Argument sets imported from insn32.decode:
  &empty                  !extern
-@@ -53,6 +55,7 @@
- &b         imm rs2 rs1  !extern
- &u         imm rd       !extern
- &shift     shamt rs1 rd !extern
-+&r2        rd rs1       !extern
+@@ -63,6 +64,7 @@
+ &r2_s      rs1 rs2      !extern
  
+ &zcmp      zcmp_rlist zcmp_spimm
++&zcmt      zcmt_index
  
  # Formats 16:
-@@ -89,6 +92,13 @@
+ @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
+@@ -106,6 +108,7 @@
+ @zcb_sh       ... . .. ... .. ... ..  &s  imm=%zcb_h_uimm  rs1=%rs1_3 rs2=%rs2_3
+ @zcmp         ... ...  ........   ..  &zcmp  %zcmp_rlist   %zcmp_spimm
+ @cm_mv        ... ...  ... .. ... ..  &r2_s  rs2=%sreg2    rs1=%sreg1
++@zcmt_jt      ... ...  ........   ..  &zcmt  %zcmt_index
  
- @c_andi         ... . .. ... ..... .. &i imm=%imm_ci rs1=%rs1_3 rd=%rs1_3
- 
-+@zcb_unary    ... ...  ... .. ... ..  &r2                  rs1=%rs1_3 rd=%rs1_3
-+@zcb_binary   ... ...  ... .. ... ..  &r  rs2=%rs2_3       rs1=%rs1_3 rd=%rs1_3
-+@zcb_lb       ... . .. ... .. ... ..  &i  imm=%zcb_b_uimm  rs1=%rs1_3 rd=%rs2_3
-+@zcb_lh       ... . .. ... .. ... ..  &i  imm=%zcb_h_uimm  rs1=%rs1_3 rd=%rs2_3
-+@zcb_sb       ... . .. ... .. ... ..  &s  imm=%zcb_b_uimm  rs1=%rs1_3 rs2=%rs2_3
-+@zcb_sh       ... . .. ... .. ... ..  &s  imm=%zcb_h_uimm  rs1=%rs1_3 rs2=%rs2_3
-+
  # *** RV32/64C Standard Extension (Quadrant 0) ***
  {
-   # Opcode of all zeros is illegal; rd != 0, nzuimm == 0 is reserved.
-@@ -180,3 +190,17 @@ sw                110 .  .....  ..... 10 @c_swsp
-   sd              111 .  .....  ..... 10 @c_sdsp
-   c_fsw           111 .  .....  ..... 10 @c_swsp
+@@ -186,7 +189,7 @@ slli              000 .  .....  ..... 10 @c_shift2
+   sq              101  ... ... .. ... 10 @c_sqsp
+   c_fsd           101   ......  ..... 10 @c_sdsp
+ 
+-  # *** RV64 and RV32 Zcmp Extension ***
++  # *** RV64 and RV32 Zcmp/Zcmt Extension ***
+   [
+     cm_push         101  11000  .... .. 10 @zcmp
+     cm_pop          101  11010  .... .. 10 @zcmp
+@@ -194,6 +197,8 @@ slli              000 .  .....  ..... 10 @c_shift2
+     cm_popretz      101  11100  .... .. 10 @zcmp
+     cm_mva01s       101  011 ... 11 ... 10 @cm_mv
+     cm_mvsa01       101  011 ... 01 ... 10 @cm_mv
++
++    cm_jalt         101  000   ........ 10 @zcmt_jt
+   ]
+ }
+ sw                110 .  .....  ..... 10 @c_swsp
+diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
+index f647b6ed15..43cbd822c5 100644
+--- a/target/riscv/insn_trans/trans_rvzce.c.inc
++++ b/target/riscv/insn_trans/trans_rvzce.c.inc
+@@ -1,5 +1,5 @@
+ /*
+- * RISC-V translation routines for the Zc[b,mp] Standard Extension.
++ * RISC-V translation routines for the Zc[b,mp,mt] Standard Extension.
+  *
+  * Copyright (c) 2021-2022 PLCT Lab
+  *
+@@ -26,6 +26,11 @@
+         return false;            \
+ } while (0)
+ 
++#define REQUIRE_ZCMT(ctx) do {   \
++    if (!ctx->cfg_ptr->ext_zcmt) \
++        return false;            \
++} while (0)
++
+ static bool trans_c_zext_b(DisasContext *ctx, arg_c_zext_b *a)
+ {
+     REQUIRE_ZCB(ctx);
+@@ -285,3 +290,24 @@ static bool trans_cm_mvsa01(DisasContext *ctx, arg_cm_mvsa01 *a)
+ 
+     return true;
  }
 +
-+# *** RV64 and RV32 Zcb Extension ***
-+c_zext_b          100 111  ... 11 000 01 @zcb_unary
-+c_sext_b          100 111  ... 11 001 01 @zcb_unary
-+c_zext_h          100 111  ... 11 010 01 @zcb_unary
-+c_sext_h          100 111  ... 11 011 01 @zcb_unary
-+c_zext_w          100 111  ... 11 100 01 @zcb_unary
-+c_not             100 111  ... 11 101 01 @zcb_unary
-+c_mul             100 111  ... 10 ... 01 @zcb_binary
-+c_lbu             100 000  ... .. ... 00 @zcb_lb
-+c_lhu             100 001  ... 0. ... 00 @zcb_lh
-+c_lh              100 001  ... 1. ... 00 @zcb_lh
-+c_sb              100 010  ... .. ... 00 @zcb_sb
-+c_sh              100 011  ... 0. ... 00 @zcb_sh
-diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
++static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
++{
++    REQUIRE_ZCMT(ctx);
++
++    /*
++     * Update pc to current for the non-unwinding exception
++     * that might come from cpu_ld*_code() in the helper.
++     */
++    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
++    gen_helper_cm_jalt(cpu_pc, cpu_env, tcg_constant_i32(a->zcmt_index));
++
++    /* c.jt vs c.jalt depends on the index. */
++    if (a->zcmt_index >= 32) {
++        gen_set_gpri(ctx, xRA, ctx->pc_succ_insn);
++    }
++
++    tcg_gen_lookup_and_goto_ptr();
++    ctx->base.is_jmp = DISAS_NORETURN;
++    return true;
++}
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 65a8549ec2..ee3a2deab6 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -331,6 +331,24 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
+     }
+ };
+ 
++static bool jvt_needed(void *opaque)
++{
++    RISCVCPU *cpu = opaque;
++
++    return cpu->cfg.ext_zcmt;
++}
++
++static const VMStateDescription vmstate_jvt = {
++    .name = "cpu/jvt",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .needed = jvt_needed,
++    .fields = (VMStateField[]) {
++        VMSTATE_UINTTL(env.jvt, RISCVCPU),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
+ const VMStateDescription vmstate_riscv_cpu = {
+     .name = "cpu",
+     .version_id = 5,
+@@ -400,6 +418,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+         &vmstate_envcfg,
+         &vmstate_debug,
+         &vmstate_smstateen,
++        &vmstate_jvt,
+         NULL
+     }
+ };
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index ba25164d74..4bf9c9e632 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -18,7 +18,8 @@ riscv_ss.add(files(
+   'bitmanip_helper.c',
+   'translate.c',
+   'm128_helper.c',
+-  'crypto_helper.c'
++  'crypto_helper.c',
++  'zce_helper.c'
+ ))
+ riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'), if_false: files('kvm-stub.c'))
+ 
+diff --git a/target/riscv/zce_helper.c b/target/riscv/zce_helper.c
 new file mode 100644
-index 0000000000..de96c4afaf
+index 0000000000..e02c41defa
 --- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvzce.c.inc
-@@ -0,0 +1,100 @@
++++ b/target/riscv/zce_helper.c
+@@ -0,0 +1,55 @@
 +/*
-+ * RISC-V translation routines for the Zcb Standard Extension.
++ * RISC-V Zc* extension Helpers for QEMU.
 + *
 + * Copyright (c) 2021-2022 PLCT Lab
 + *
@@ -155,101 +388,43 @@ index 0000000000..de96c4afaf
 + * this program.  If not, see <http://www.gnu.org/licenses/>.
 + */
 +
-+#define REQUIRE_ZCB(ctx) do {   \
-+    if (!ctx->cfg_ptr->ext_zcb) \
-+        return false;           \
-+} while (0)
++#include "qemu/osdep.h"
++#include "cpu.h"
++#include "exec/exec-all.h"
++#include "exec/helper-proto.h"
++#include "exec/cpu_ldst.h"
 +
-+static bool trans_c_zext_b(DisasContext *ctx, arg_c_zext_b *a)
++target_ulong HELPER(cm_jalt)(CPURISCVState *env, uint32_t index)
 +{
-+    REQUIRE_ZCB(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext8u_tl);
-+}
 +
-+static bool trans_c_zext_h(DisasContext *ctx, arg_c_zext_h *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    REQUIRE_ZBB(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext16u_tl);
-+}
++#if !defined(CONFIG_USER_ONLY)
++    RISCVException ret = smstateen_acc_ok(env, 0, SMSTATEEN0_JVT);
++    if (ret != RISCV_EXCP_NONE) {
++        riscv_raise_exception(env, ret, 0);
++    }
++#endif
 +
-+static bool trans_c_sext_b(DisasContext *ctx, arg_c_sext_b *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    REQUIRE_ZBB(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext8s_tl);
-+}
++    target_ulong target;
++    target_ulong val = env->jvt;
++    int xlen = riscv_cpu_xlen(env);
++    uint8_t mode = get_field(val, JVT_MODE);
++    target_ulong base = val & JVT_BASE;
++    target_ulong t0;
 +
-+static bool trans_c_sext_h(DisasContext *ctx, arg_c_sext_h *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    REQUIRE_ZBB(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext16s_tl);
-+}
++    if (mode != 0) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, 0);
++    }
 +
-+static bool trans_c_zext_w(DisasContext *ctx, arg_c_zext_w *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZCB(ctx);
-+    REQUIRE_ZBA(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext32u_tl);
-+}
++    if (xlen == 32) {
++        t0 = base + (index << 2);
++        target = cpu_ldl_code(env, t0);
++    } else {
++        t0 = base + (index << 3);
++        target = cpu_ldq_code(env, t0);
++    }
 +
-+static bool trans_c_not(DisasContext *ctx, arg_c_not *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, tcg_gen_not_tl);
++    return target & ~0x1;
 +}
-+
-+static bool trans_c_mul(DisasContext *ctx, arg_c_mul *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    REQUIRE_M_OR_ZMMUL(ctx);
-+    return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, NULL);
-+}
-+
-+static bool trans_c_lbu(DisasContext *ctx, arg_c_lbu *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_load(ctx, a, MO_UB);
-+}
-+
-+static bool trans_c_lhu(DisasContext *ctx, arg_c_lhu *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_load(ctx, a, MO_UW);
-+}
-+
-+static bool trans_c_lh(DisasContext *ctx, arg_c_lh *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_load(ctx, a, MO_SW);
-+}
-+
-+static bool trans_c_sb(DisasContext *ctx, arg_c_sb *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_store(ctx, a, MO_UB);
-+}
-+
-+static bool trans_c_sh(DisasContext *ctx, arg_c_sh *a)
-+{
-+    REQUIRE_ZCB(ctx);
-+    return gen_store(ctx, a, MO_UW);
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index ee24b451e3..ca01da3309 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1069,6 +1069,8 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- 
- /* Include the auto-generated decoder for 16 bit insn */
- #include "decode-insn16.c.inc"
-+#include "insn_trans/trans_rvzce.c.inc"
-+
- /* Include decoders for factored-out extensions */
- #include "decode-XVentanaCondOps.c.inc"
- 
 -- 
 2.25.1
 
