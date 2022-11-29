@@ -1,55 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ozqbP-0002KB-CH
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Nov 2022 21:44:07 -0500
+	id 1ozujC-0006mp-Iz
+	for mharc-qemu-riscv@gnu.org; Tue, 29 Nov 2022 02:08:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ozqbK-0002Et-Tx; Mon, 28 Nov 2022 21:44:02 -0500
-Received: from smtp84.cstnet.cn ([159.226.251.84] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ozqbE-0005QP-AH; Mon, 28 Nov 2022 21:43:59 -0500
-Received: from localhost.localdomain (unknown [180.175.30.174])
- by APP-05 (Coremail) with SMTP id zQCowABHT_ficYVjZgs3Aw--.22376S5;
- Tue, 29 Nov 2022 10:43:48 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v7 3/9] target/riscv: add support for Zcf extension
-Date: Tue, 29 Nov 2022 10:43:37 +0800
-Message-Id: <20221129024343.20384-4-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221129024343.20384-1-liweiwei@iscas.ac.cn>
-References: <20221129024343.20384-1-liweiwei@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1ozujB-0006jS-F8
+ for qemu-riscv@nongnu.org; Tue, 29 Nov 2022 02:08:25 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1ozuj9-0005Z4-DF
+ for qemu-riscv@nongnu.org; Tue, 29 Nov 2022 02:08:25 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id v1so20546406wrt.11
+ for <qemu-riscv@nongnu.org>; Mon, 28 Nov 2022 23:08:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=3cSHdcWlvmNpCXuBmOL4KsVaEwCsXy0npif128TWXQY=;
+ b=SNItKNF4kZGCPW1bseGPVE95M+gT7PeaMIOilh9dKaLc1LCC7ysmswBeQNQxTjAsTX
+ xzXqIEIDU3STs6ERqfasQ/x36ibMdtyl3oMvTv6ybotF1+NK4dC0ukBH5hpfY/BAqzm9
+ BHR1SzoqgPd5orqsUc2risyul1TBtCXxvWbJeMm5Q9A1vSIgqX98fRDybwAONgpLP6zE
+ iC5e9kM4kYc9Hc03nCZmeLORz9xkXFnBfrRgQH+HY/7lx2wFSHy2n/ePW1lb+RUcaQOd
+ HD1Ep3T8Uls6ix6ATVTrXN1Tq2Kt4l3ngkcpkicvkJIqc+oBP+ScHleLnoAqqu1OK0W5
+ jwfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3cSHdcWlvmNpCXuBmOL4KsVaEwCsXy0npif128TWXQY=;
+ b=it0RGLgEoMgSTj9rS3Jv2HKiZI2JC83Tb5mtS9+BUH3vyYMzErnKwPu/7MIjPqL+FR
+ KKlEMU/7flDIvpMAgdreilfQMn8anTzUqH8hhxTO6q5y1oQAzNTtC4TZGXvc7N0dDo1Y
+ xd12kWGQ0DHFPC8DdBK+7y822uZolwK1Z5Hh2k9seq3hNxTPGbckMhbhE13kuefKGTGb
+ sTEanBwBLnqXVhv5YNTaxcTgywnx9lL/PwL7v8ce4OP4JjfNaIPIGKvdU8jbgamsBJV+
+ dI/aD97aj4aDhLQ99fDjYHxS/yT17Jxhmb0wCIagKun9tFqogTb0y17E5VbBw2xfE7Je
+ CrnA==
+X-Gm-Message-State: ANoB5pmeMit1ibziRGmGD3atr3FX7mfLsm57/XGlJ249x+NZa7g6xy3T
+ sP9Mv9SFLLiHhqlmz3nY0aAWNQ==
+X-Google-Smtp-Source: AA0mqf5TkVBAEEYUpXpOuNjRf5g0zN67MsVkX1X8NTTx7FhWSN/rv6fIdgyNXHUAKMWLnrfo+S9vsA==
+X-Received: by 2002:adf:ed8e:0:b0:241:d7ce:4395 with SMTP id
+ c14-20020adfed8e000000b00241d7ce4395mr25239479wro.553.1669705701573; 
+ Mon, 28 Nov 2022 23:08:21 -0800 (PST)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ by smtp.gmail.com with ESMTPSA id
+ x8-20020adff0c8000000b00241f632c90fsm14548621wro.117.2022.11.28.23.08.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Nov 2022 23:08:21 -0800 (PST)
+Date: Tue, 29 Nov 2022 08:08:20 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Conor.Dooley@microchip.com
+Cc: atishp@rivosinc.com, qemu-devel@nongnu.org, alistair.francis@wdc.com,
+ bin.meng@windriver.com, palmer@dabbelt.com, qemu-riscv@nongnu.org,
+ Samuel Holland <samuel@sholland.org>
+Subject: Re: [PATCH v14 4/5] hw/riscv: virt: Add PMU DT node to the device tree
+Message-ID: <20221129070820.7varmruxjkhdwoc6@kamzik>
+References: <20220824221701.41932-1-atishp@rivosinc.com>
+ <20220824221701.41932-5-atishp@rivosinc.com>
+ <Y39urpX82uO85AAb@wendy>
+ <CAHBxVyFhrkdhWpc4xB-_a4c5GnDu=d01-bk2zM2nCraeq_Xr_A@mail.gmail.com>
+ <a3c7174d-6d33-5a34-0cd5-8ac340c052c3@microchip.com>
+ <CAHBxVyGVigqBLLS9vqas+uq=Joyr2F6ir0zqtg+0y2GaTCyX-A@mail.gmail.com>
+ <b42e75c6-8c52-025e-35ef-326537ccc90b@microchip.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABHT_ficYVjZgs3Aw--.22376S5
-X-Coremail-Antispam: 1UD129KBjvJXoW7uF43Zr43Zry3AFW8trW3GFg_yoW8trWxpr
- 18C3y7GrWUAryfA3Z3tF45Xr1UJrs2gry8t39Iyw1kGa15GFs8Zw1qqr13tr4UXFyvqr1Y
- kF18A39xC3yktrDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9C14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
- x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j6F4U
- JwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
- IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
- M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCF04k20xvY0x0EwIxGrw
- CFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE
- 14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2
- IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxK
- x2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI
- 0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd8n5UUUUU=
-X-Originating-IP: [180.175.30.174]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <b42e75c6-8c52-025e-35ef-326537ccc90b@microchip.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -63,86 +87,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Nov 2022 02:44:03 -0000
+X-List-Received-Date: Tue, 29 Nov 2022 07:08:25 -0000
 
-Separate c_flw/c_fsw from flw/fsw to add check for Zcf extension
+On Mon, Nov 28, 2022 at 09:10:03PM +0000, Conor.Dooley@microchip.com wrote:
+> On 28/11/2022 20:41, Atish Kumar Patra wrote:
+> > EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
+> > 
+> > On Mon, Nov 28, 2022 at 12:38 PM <Conor.Dooley@microchip.com> wrote:
+> >>
+> >> On 28/11/2022 20:16, Atish Kumar Patra wrote:
+> >>> On Thu, Nov 24, 2022 at 5:17 AM Conor Dooley <conor.dooley@microchip.com> wrote:
+> >>>>
+> >>>> On Wed, Aug 24, 2022 at 03:17:00PM -0700, Atish Patra wrote:
+> >>>>> Qemu virt machine can support few cache events and cycle/instret counters.
+> >>>>> It also supports counter overflow for these events.
+> >>>>>
+> >>>>> Add a DT node so that OpenSBI/Linux kernel is aware of the virt machine
+> >>>>> capabilities. There are some dummy nodes added for testing as well.
+> >>>>
+> >>>> Hey Atish!
+> >>>>
+> >>>> I was fiddling with dumping the virt machine dtb again today to check
+> >>>> some dt-binding changes I was making for the isa string would play
+> >>>> nicely with the virt machine & I noticed that this patch has introduced
+> >>>> a new validation failure:
+> >>>>
+> >>>> ./build/qemu-system-riscv64 -nographic -machine virt,dumpdtb=qemu.dtb
+> >>>>
+> >>>> dt-validate -p ../linux/Documentation/devicetree/bindings/processed-schema.json qemu.dtb
+> >>>> /home/conor/stuff/qemu/qemu.dtb: soc: pmu: {'riscv,event-to-mhpmcounters': [[1, 1, 524281, 2, 2, 524284, 65561, 65561, 524280, 65563, 65563, 524280, 65569, 65569, 524280, 0, 0, 0, 0, 0]], 'compatible': ['riscv,pmu']} should not be valid under {'type': 'object'}
+> >>>>         From schema: /home/conor/.local/lib/python3.10/site-packages/dtschema/schemas/simple-bus.yaml
+> >>>>
+> >>>> I assume this is the aforementioned "dummy" node & you have no intention
+> >>>> of creating a binding for this?
+> >>>>
+> >>>
+> >>> It is a dummy node from Linux kernel perspective. OpenSbi use this
+> >>> node to figure out the hpmcounter mappings.
+> >>
+> >> Aye, but should it not have a binding anyway, since they're not
+> >> meant to be linux specific?
+> >>
+> > It is documented in OpenSBI.
+> > https://github.com/riscv-software-src/opensbi/blob/master/docs/pmu_support.md
+> > 
+> > Are you suggesting that any non-Linux specific DT nodes should be part
+> > of Linux DT binding as well ?
+> 
+> I thought the point was that they were *not* meant to be linux specific,
+> just happening to be housed there.
+>
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/insn16.decode              |  8 ++++----
- target/riscv/insn_trans/trans_rvf.c.inc | 18 ++++++++++++++++++
- 2 files changed, 22 insertions(+), 4 deletions(-)
+I'm not sure if there's an official policy on where DT nodes should be
+specified, but it looks like Samuel's opinion is that they should live
+in the Linux kernel, whether they're used there or not [1].
 
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index ccfe59f294..f3ea650325 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -109,11 +109,11 @@ sw                110  ... ... .. ... 00 @cs_w
- # *** RV32C and RV64C specific Standard Extension (Quadrant 0) ***
- {
-   ld              011  ... ... .. ... 00 @cl_d
--  flw             011  ... ... .. ... 00 @cl_w
-+  c_flw           011  ... ... .. ... 00 @cl_w
- }
- {
-   sd              111  ... ... .. ... 00 @cs_d
--  fsw             111  ... ... .. ... 00 @cs_w
-+  c_fsw           111  ... ... .. ... 00 @cs_w
- }
- 
- # *** RV32/64C Standard Extension (Quadrant 1) ***
-@@ -174,9 +174,9 @@ sw                110 .  .....  ..... 10 @c_swsp
- {
-   c64_illegal     011 -  00000  ----- 10 # c.ldsp, RES rd=0
-   ld              011 .  .....  ..... 10 @c_ldsp
--  flw             011 .  .....  ..... 10 @c_lwsp
-+  c_flw           011 .  .....  ..... 10 @c_lwsp
- }
- {
-   sd              111 .  .....  ..... 10 @c_sdsp
--  fsw             111 .  .....  ..... 10 @c_swsp
-+  c_fsw           111 .  .....  ..... 10 @c_swsp
- }
-diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-index 965e1f8d11..5df9c148dc 100644
---- a/target/riscv/insn_trans/trans_rvf.c.inc
-+++ b/target/riscv/insn_trans/trans_rvf.c.inc
-@@ -30,6 +30,12 @@
-     } \
- } while (0)
- 
-+#define REQUIRE_ZCF(ctx) do {                  \
-+    if (!ctx->cfg_ptr->ext_zcf) {              \
-+        return false;                          \
-+    }                                          \
-+} while (0)
-+
- static bool trans_flw(DisasContext *ctx, arg_flw *a)
- {
-     TCGv_i64 dest;
-@@ -61,6 +67,18 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
-     return true;
- }
- 
-+static bool trans_c_flw(DisasContext *ctx, arg_flw *a)
-+{
-+    REQUIRE_ZCF(ctx);
-+    return trans_flw(ctx, a);
-+}
-+
-+static bool trans_c_fsw(DisasContext *ctx, arg_fsw *a)
-+{
-+    REQUIRE_ZCF(ctx);
-+    return trans_fsw(ctx, a);
-+}
-+
- static bool trans_fmadd_s(DisasContext *ctx, arg_fmadd_s *a)
- {
-     REQUIRE_FPU;
--- 
-2.25.1
+[1] http://lists.infradead.org/pipermail/opensbi/2022-October/003522.html
 
+Thanks,
+drew
 
