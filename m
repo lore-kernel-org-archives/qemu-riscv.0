@@ -1,35 +1,34 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p0kFF-0008H4-UP
-	for mharc-qemu-riscv@gnu.org; Thu, 01 Dec 2022 09:08:57 -0500
+	id 1p0kFL-0008Ib-Iz
+	for mharc-qemu-riscv@gnu.org; Thu, 01 Dec 2022 09:09:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p0kFC-0008FE-G5; Thu, 01 Dec 2022 09:08:54 -0500
+ id 1p0kFG-0008HV-6z; Thu, 01 Dec 2022 09:08:59 -0500
 Received: from bg4.exmail.qq.com ([43.154.221.58])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p0kFA-0008EV-GM; Thu, 01 Dec 2022 09:08:54 -0500
-X-QQ-mid: bizesmtp72t1669903720t5p1cc9u
+ id 1p0kFD-0008Eo-1s; Thu, 01 Dec 2022 09:08:57 -0500
+X-QQ-mid: bizesmtp72t1669903722t4obvrvc
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Thu, 01 Dec 2022 22:08:39 +0800 (CST)
+ id ; Thu, 01 Dec 2022 22:08:41 +0800 (CST)
 X-QQ-SSF: 01200000002000B0B000B00A0000000
-X-QQ-FEAT: oGOjGSUjcuBhlTi/fePYdBfOQ1Ad5AYxlrq264TLF4qygLJZBXQlO+8InmazZ
- sL/YBHsBkaqd3oYmTCYhwBQI93k6PCYoQIB9PocFKO7tCxswOVe70BrIcAUf36Bd4kyimIk
- /I4FbB0QN7TaNI2W3eU0CyZ/uk++k+k9XULQGOQinB26OF/ejdvIhuZqvrLoKMkGr8soOyH
- EZ78lxb/un8wXIOCBlxm7bm+H5R2dd9wx/pB35hkCfHQlvmbmwyJHADGLBlJ4AbuT+INpBT
- 7l+oeqbKdwI51TTf2eplpO9VtTd4fK7PaPKJ8x/JK3oMIL4meEtKjDQyfm4358IoLfVnh6i
- 0COFFx9AEIfgWzomPF6sRV+xoPDgJ6sPmJHy/+wnl56r9unZnc=
+X-QQ-FEAT: inqCuoEDTHIRURCC9RU8h9oXy3mhMjNaNIS7UgZ+8p1KuHKwy/1OOyOHJZjPk
+ xerYgKzGrx82tEIpGey3Ag4/hBQ0GAUDk/HPlSdRIqmb/JcRCUGKy5cUkdVeqFdwED+Ay8N
+ DK8SEb3q7rW2gNvWsCHYNqaR9V1NBkOygdGLBiZLmkmM2J6gzilK7QWluIv+AYlOMtrz7dR
+ b+uur0xWGmcZzChfKiK4eRViyEltyOiw/GZEvJIjIGKQmI7ExC1oEEnbQJ/Xb0oeuQTTwG8
+ x2nlqeKpNIrxwXZapt+xLqQSujfcia4dnzGO6XfkoUXhBFCdBT9Ngw01xYeAjtO/js9NXzQ
+ DTbEYNa1HKu30v3LAz/5XiLJAb05w6JOzZtkfy5JD3Cfzi8a0c=
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
 	qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
-Subject: [PATCH 12/15] hw/riscv: virt: Fix the value of "riscv,
- ndev" in the dtb
-Date: Thu,  1 Dec 2022 22:08:08 +0800
-Message-Id: <20221201140811.142123-12-bmeng@tinylab.org>
+Cc: Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Vijai Kumar K <vijai@behindbytes.com>, qemu-riscv@nongnu.org
+Subject: [PATCH 13/15] hw/intc: sifive_plic: Change "priority-base" to start
+ from interrupt source 0
+Date: Thu,  1 Dec 2022 22:08:09 +0800
+Message-Id: <20221201140811.142123-13-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20221201140811.142123-1-bmeng@tinylab.org>
 References: <20221201140811.142123-1-bmeng@tinylab.org>
@@ -56,62 +55,126 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Dec 2022 14:08:55 -0000
+X-List-Received-Date: Thu, 01 Dec 2022 14:09:00 -0000
 
-Commit 28d8c281200f ("hw/riscv: virt: Add optional AIA IMSIC support to virt machine")
-changed the value of VIRT_IRQCHIP_NUM_SOURCES from 127 to 53, which
-is VIRTIO_NDEV and also used as the value of "riscv,ndev" property
-in the dtb. Unfortunately this is wrong as VIRT_IRQCHIP_NUM_SOURCES
-should include interrupt source 0 but "riscv,ndev" does not.
+At present the SiFive PLIC model "priority-base" expects interrupt
+priority register base starting from source 1 instead source 0,
+that's why on most platforms "priority-base" is set to 0x04 except
+'opentitan' machine. 'opentitan' should have set "priority-base"
+to 0x04 too.
 
-While we are here, we also fix the comments of platform bus irq range
-which is now "64 to 96", but should be "64 to 95", introduced since
-commit 1832b7cb3f64 ("hw/riscv: virt: Create a platform bus").
+Note the irq number calculation in sifive_plic_{read,write} is
+correct as the codes make up for the irq number by adding 1.
 
-Fixes: 28d8c281200f ("hw/riscv: virt: Add optional AIA IMSIC support to virt machine")
+Let's simply update "priority-base" to start from interrupt source
+0 and add a comment to make it crystal clear.
+
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
 ---
 
- include/hw/riscv/virt.h | 5 ++---
- hw/riscv/virt.c         | 3 ++-
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ include/hw/riscv/microchip_pfsoc.h | 2 +-
+ include/hw/riscv/shakti_c.h        | 2 +-
+ include/hw/riscv/sifive_e.h        | 2 +-
+ include/hw/riscv/sifive_u.h        | 2 +-
+ include/hw/riscv/virt.h            | 2 +-
+ hw/intc/sifive_plic.c              | 5 +++--
+ 6 files changed, 8 insertions(+), 7 deletions(-)
 
+diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+index 9720bac2d5..c10d87a601 100644
+--- a/include/hw/riscv/microchip_pfsoc.h
++++ b/include/hw/riscv/microchip_pfsoc.h
+@@ -152,7 +152,7 @@ enum {
+ 
+ #define MICROCHIP_PFSOC_PLIC_NUM_SOURCES        187
+ #define MICROCHIP_PFSOC_PLIC_NUM_PRIORITIES     7
+-#define MICROCHIP_PFSOC_PLIC_PRIORITY_BASE      0x04
++#define MICROCHIP_PFSOC_PLIC_PRIORITY_BASE      0x00
+ #define MICROCHIP_PFSOC_PLIC_PENDING_BASE       0x1000
+ #define MICROCHIP_PFSOC_PLIC_ENABLE_BASE        0x2000
+ #define MICROCHIP_PFSOC_PLIC_ENABLE_STRIDE      0x80
+diff --git a/include/hw/riscv/shakti_c.h b/include/hw/riscv/shakti_c.h
+index daf0aae13f..539fe1156d 100644
+--- a/include/hw/riscv/shakti_c.h
++++ b/include/hw/riscv/shakti_c.h
+@@ -65,7 +65,7 @@ enum {
+ #define SHAKTI_C_PLIC_NUM_SOURCES 28
+ /* Excluding Priority 0 */
+ #define SHAKTI_C_PLIC_NUM_PRIORITIES 2
+-#define SHAKTI_C_PLIC_PRIORITY_BASE 0x04
++#define SHAKTI_C_PLIC_PRIORITY_BASE 0x00
+ #define SHAKTI_C_PLIC_PENDING_BASE 0x1000
+ #define SHAKTI_C_PLIC_ENABLE_BASE 0x2000
+ #define SHAKTI_C_PLIC_ENABLE_STRIDE 0x80
+diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+index 9e58247fd8..b824a79e2d 100644
+--- a/include/hw/riscv/sifive_e.h
++++ b/include/hw/riscv/sifive_e.h
+@@ -89,7 +89,7 @@ enum {
+  */
+ #define SIFIVE_E_PLIC_NUM_SOURCES 53
+ #define SIFIVE_E_PLIC_NUM_PRIORITIES 7
+-#define SIFIVE_E_PLIC_PRIORITY_BASE 0x04
++#define SIFIVE_E_PLIC_PRIORITY_BASE 0x00
+ #define SIFIVE_E_PLIC_PENDING_BASE 0x1000
+ #define SIFIVE_E_PLIC_ENABLE_BASE 0x2000
+ #define SIFIVE_E_PLIC_ENABLE_STRIDE 0x80
+diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+index 8f63a183c4..e680d61ece 100644
+--- a/include/hw/riscv/sifive_u.h
++++ b/include/hw/riscv/sifive_u.h
+@@ -158,7 +158,7 @@ enum {
+ 
+ #define SIFIVE_U_PLIC_NUM_SOURCES 54
+ #define SIFIVE_U_PLIC_NUM_PRIORITIES 7
+-#define SIFIVE_U_PLIC_PRIORITY_BASE 0x04
++#define SIFIVE_U_PLIC_PRIORITY_BASE 0x00
+ #define SIFIVE_U_PLIC_PENDING_BASE 0x1000
+ #define SIFIVE_U_PLIC_ENABLE_BASE 0x2000
+ #define SIFIVE_U_PLIC_ENABLE_STRIDE 0x80
 diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index be4ab8fe7f..7c23aea4a0 100644
+index 7c23aea4a0..37819c168c 100644
 --- a/include/hw/riscv/virt.h
 +++ b/include/hw/riscv/virt.h
-@@ -87,15 +87,14 @@ enum {
-     VIRTIO_IRQ = 1, /* 1 to 8 */
-     VIRTIO_COUNT = 8,
-     PCIE_IRQ = 0x20, /* 32 to 35 */
--    VIRT_PLATFORM_BUS_IRQ = 64, /* 64 to 96 */
--    VIRTIO_NDEV = 96 /* Arbitrary maximum number of interrupts */
-+    VIRT_PLATFORM_BUS_IRQ = 64, /* 64 to 95 */
- };
- 
- #define VIRT_PLATFORM_BUS_NUM_IRQS 32
- 
- #define VIRT_IRQCHIP_IPI_MSI 1
- #define VIRT_IRQCHIP_NUM_MSIS 255
--#define VIRT_IRQCHIP_NUM_SOURCES VIRTIO_NDEV
-+#define VIRT_IRQCHIP_NUM_SOURCES 96
- #define VIRT_IRQCHIP_NUM_PRIO_BITS 3
+@@ -99,7 +99,7 @@ enum {
  #define VIRT_IRQCHIP_MAX_GUESTS_BITS 3
  #define VIRT_IRQCHIP_MAX_GUESTS ((1U << VIRT_IRQCHIP_MAX_GUESTS_BITS) - 1U)
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index a5bc7353b4..c4ee489a80 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -468,7 +468,8 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
-         plic_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
-     qemu_fdt_setprop_cells(mc->fdt, plic_name, "reg",
-         0x0, plic_addr, 0x0, memmap[VIRT_PLIC].size);
--    qemu_fdt_setprop_cell(mc->fdt, plic_name, "riscv,ndev", VIRTIO_NDEV);
-+    qemu_fdt_setprop_cell(mc->fdt, plic_name, "riscv,ndev",
-+                          VIRT_IRQCHIP_NUM_SOURCES - 1);
-     riscv_socket_fdt_write_id(mc, mc->fdt, plic_name, socket);
-     qemu_fdt_setprop_cell(mc->fdt, plic_name, "phandle",
-         plic_phandles[socket]);
+ 
+-#define VIRT_PLIC_PRIORITY_BASE 0x04
++#define VIRT_PLIC_PRIORITY_BASE 0x00
+ #define VIRT_PLIC_PENDING_BASE 0x1000
+ #define VIRT_PLIC_ENABLE_BASE 0x2000
+ #define VIRT_PLIC_ENABLE_STRIDE 0x80
+diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+index 2bd292410d..7a6a358c57 100644
+--- a/hw/intc/sifive_plic.c
++++ b/hw/intc/sifive_plic.c
+@@ -140,7 +140,7 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned size)
+     SiFivePLICState *plic = opaque;
+ 
+     if (addr_between(addr, plic->priority_base, plic->num_sources << 2)) {
+-        uint32_t irq = ((addr - plic->priority_base) >> 2) + 1;
++        uint32_t irq = (addr - plic->priority_base) >> 2;
+ 
+         return plic->source_priority[irq];
+     } else if (addr_between(addr, plic->pending_base, plic->num_sources >> 3)) {
+@@ -187,7 +187,7 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
+     SiFivePLICState *plic = opaque;
+ 
+     if (addr_between(addr, plic->priority_base, plic->num_sources << 2)) {
+-        uint32_t irq = ((addr - plic->priority_base) >> 2) + 1;
++        uint32_t irq = (addr - plic->priority_base) >> 2;
+ 
+         if (((plic->num_priorities + 1) & plic->num_priorities) == 0) {
+             /*
+@@ -428,6 +428,7 @@ static Property sifive_plic_properties[] = {
+     /* number of interrupt sources including interrupt source 0 */
+     DEFINE_PROP_UINT32("num-sources", SiFivePLICState, num_sources, 1),
+     DEFINE_PROP_UINT32("num-priorities", SiFivePLICState, num_priorities, 0),
++    /* interrupt priority register base starting from source 0 */
+     DEFINE_PROP_UINT32("priority-base", SiFivePLICState, priority_base, 0),
+     DEFINE_PROP_UINT32("pending-base", SiFivePLICState, pending_base, 0),
+     DEFINE_PROP_UINT32("enable-base", SiFivePLICState, enable_base, 0),
 -- 
 2.34.1
 
