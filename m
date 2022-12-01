@@ -1,40 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p0kF7-0008Ae-IR
-	for mharc-qemu-riscv@gnu.org; Thu, 01 Dec 2022 09:08:49 -0500
+	id 1p0kF8-0008B9-0m
+	for mharc-qemu-riscv@gnu.org; Thu, 01 Dec 2022 09:08:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p0kF4-00087v-Az; Thu, 01 Dec 2022 09:08:46 -0500
-Received: from bg4.exmail.qq.com ([43.154.221.58])
+ id 1p0kF5-00088x-6L; Thu, 01 Dec 2022 09:08:47 -0500
+Received: from bg4.exmail.qq.com ([43.155.65.254])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p0kEy-0008BK-BF; Thu, 01 Dec 2022 09:08:46 -0500
-X-QQ-mid: bizesmtp72t1669903693t45f858h
+ id 1p0kEz-0008Bw-Vn; Thu, 01 Dec 2022 09:08:46 -0500
+X-QQ-mid: bizesmtp72t1669903705tcqq5qud
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Thu, 01 Dec 2022 22:08:12 +0800 (CST)
+ id ; Thu, 01 Dec 2022 22:08:25 +0800 (CST)
 X-QQ-SSF: 01200000002000B0B000B00A0000000
-X-QQ-FEAT: 3M0okmaRx3iPqdN9Kd7vjXivN+tn3SOVru4bSsv1j3hB7lOab58yj4OBZqHst
- ReVla93Hw6SD+VkU7Z8gh5zUQd9GukirADO8wt8sz60FLgPZvAsiMwzVqVzFER1BHSJdmOq
- /xz2d3OtnFCbfnwM7c1bhc9ihNxR0M9Ccd1Wr87ogT3db93BxSMrExP3DD0dno7/Rw2MeUm
- jmTEWy1y/B1AzJBHR6aJFbmMfVPLQBhwvLe1ODyRrHz54lWYHvK4jHqGvE5oIYOoE1IR9Or
- 3M7JhIxeuJ4oADLMVxSVzYup84qDeuis30gH0EfynChD016gXbxRwZ1e/8eUAmHPzWfCU9H
- UxoA5K11qFRc2SWlafgLH1USOn+/A==
+X-QQ-FEAT: 9fp+MOMfZT2RWOZTgnMJnAtziaS9fXVsXnxRGI0Hp5lZ7QTjqn4nTC2wDyrX1
+ 0vKvX8d/mhGXjkMmnLMRMpGgea79VelBerLMyjhWBMe2yYKv5//IUzfQ9+V1SeuMJsCgd+2
+ FqUETgqPVjie5cH+aeXU6Z8IaPdOc6N493ELnp0TXeLL54atOr560q1v8Xmw4l+FMom0sni
+ F0sJUa7GCp6oY6jak88OIfVe707yi6y4kGmGsYDFDPNCbGaw9q4S6ekDZQf1pzvZzsGD3A3
+ DpeIAepu83MbaaF3BkZf8/+R6vQpSbchKHNH4kpnPNRT1/pzghlBlkJnSZ7bqCDDdvFF1sW
+ BuQVtyky2pK3FhRH9/Gx4NxGiBTAk9gQnvc9foZ
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
 	qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH 01/15] hw/riscv: Select MSI_NONBROKEN in SIFIVE_PLIC
-Date: Thu,  1 Dec 2022 22:07:57 +0800
-Message-Id: <20221201140811.142123-1-bmeng@tinylab.org>
+Subject: [PATCH 06/15] hw/intc: sifive_plic: Drop PLICMode_H
+Date: Thu,  1 Dec 2022 22:08:02 +0800
+Message-Id: <20221201140811.142123-6-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20221201140811.142123-1-bmeng@tinylab.org>
+References: <20221201140811.142123-1-bmeng@tinylab.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
+Received-SPF: pass client-ip=43.155.65.254; envelope-from=bmeng@tinylab.org;
  helo=bg4.exmail.qq.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -53,77 +54,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Dec 2022 14:08:46 -0000
+X-List-Received-Date: Thu, 01 Dec 2022 14:08:47 -0000
 
-hw/pci/Kconfig says MSI_NONBROKEN should be selected by interrupt
-controllers regardless of how MSI is implemented. msi_nonbroken is
-initialized to true in sifive_plic_realize().
-
-Let SIFIVE_PLIC select MSI_NONBROKEN and drop the selection from
-RISC-V machines.
+H-mode has been removed since priv spec 1.10. Drop it.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
 ---
 
- hw/intc/Kconfig  | 1 +
- hw/riscv/Kconfig | 5 -----
- 2 files changed, 1 insertion(+), 5 deletions(-)
+ include/hw/intc/sifive_plic.h | 1 -
+ hw/intc/sifive_plic.c         | 1 -
+ 2 files changed, 2 deletions(-)
 
-diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
-index ecd2883ceb..1d4573e803 100644
---- a/hw/intc/Kconfig
-+++ b/hw/intc/Kconfig
-@@ -78,6 +78,7 @@ config RISCV_IMSIC
+diff --git a/include/hw/intc/sifive_plic.h b/include/hw/intc/sifive_plic.h
+index 134cf39a96..d3f45ec248 100644
+--- a/include/hw/intc/sifive_plic.h
++++ b/include/hw/intc/sifive_plic.h
+@@ -33,7 +33,6 @@ DECLARE_INSTANCE_CHECKER(SiFivePLICState, SIFIVE_PLIC,
+ typedef enum PLICMode {
+     PLICMode_U,
+     PLICMode_S,
+-    PLICMode_H,
+     PLICMode_M
+ } PLICMode;
  
- config SIFIVE_PLIC
-     bool
-+    select MSI_NONBROKEN
- 
- config GOLDFISH_PIC
-     bool
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 79ff61c464..167dc4cca6 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -11,7 +11,6 @@ config MICROCHIP_PFSOC
-     select MCHP_PFSOC_IOSCB
-     select MCHP_PFSOC_MMUART
-     select MCHP_PFSOC_SYSREG
--    select MSI_NONBROKEN
-     select RISCV_ACLINT
-     select SIFIVE_PDMA
-     select SIFIVE_PLIC
-@@ -37,7 +36,6 @@ config RISCV_VIRT
-     imply TPM_TIS_SYSBUS
-     select RISCV_NUMA
-     select GOLDFISH_RTC
--    select MSI_NONBROKEN
-     select PCI
-     select PCI_EXPRESS_GENERIC_BRIDGE
-     select PFLASH_CFI01
-@@ -53,7 +51,6 @@ config RISCV_VIRT
- 
- config SIFIVE_E
-     bool
--    select MSI_NONBROKEN
-     select RISCV_ACLINT
-     select SIFIVE_GPIO
-     select SIFIVE_PLIC
-@@ -64,7 +61,6 @@ config SIFIVE_E
- config SIFIVE_U
-     bool
-     select CADENCE
--    select MSI_NONBROKEN
-     select RISCV_ACLINT
-     select SIFIVE_GPIO
-     select SIFIVE_PDMA
-@@ -82,6 +78,5 @@ config SPIKE
-     bool
-     select RISCV_NUMA
-     select HTIF
--    select MSI_NONBROKEN
-     select RISCV_ACLINT
-     select SIFIVE_PLIC
+diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+index 1cf156cf85..3f6ffb1d70 100644
+--- a/hw/intc/sifive_plic.c
++++ b/hw/intc/sifive_plic.c
+@@ -42,7 +42,6 @@ static PLICMode char_to_mode(char c)
+     switch (c) {
+     case 'U': return PLICMode_U;
+     case 'S': return PLICMode_S;
+-    case 'H': return PLICMode_H;
+     case 'M': return PLICMode_M;
+     default:
+         error_report("plic: invalid mode '%c'", c);
 -- 
 2.34.1
 
