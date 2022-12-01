@@ -1,74 +1,149 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p0kqa-0002lF-PA
-	for mharc-qemu-riscv@gnu.org; Thu, 01 Dec 2022 09:47:32 -0500
+	id 1p0t6T-0005Z8-47
+	for mharc-qemu-riscv@gnu.org; Thu, 01 Dec 2022 18:36:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1p0kqW-0002kX-Sk
- for qemu-riscv@nongnu.org; Thu, 01 Dec 2022 09:47:30 -0500
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1p0kqU-0005Vd-E8
- for qemu-riscv@nongnu.org; Thu, 01 Dec 2022 09:47:28 -0500
-Received: by mail-ej1-x631.google.com with SMTP id ha10so4775193ejb.3
- for <qemu-riscv@nongnu.org>; Thu, 01 Dec 2022 06:47:25 -0800 (PST)
+ (Exim 4.90_1)
+ (envelope-from <prvs=327315efa=wilfred.mallawa@wdc.com>)
+ id 1p0t6P-0005VQ-3v; Thu, 01 Dec 2022 18:36:25 -0500
+Received: from esa6.hgst.iphmx.com ([216.71.154.45])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=327315efa=wilfred.mallawa@wdc.com>)
+ id 1p0t6M-0004tB-49; Thu, 01 Dec 2022 18:36:24 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1669937782; x=1701473782;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=3JHy2oNQ/9Pw+Jo2gywDL3q9l7UhzkjMN6iKfECC96c=;
+ b=YdwtoNQJeILKL0OG0pPSzO6K6+0hZfaXOv+bTQoRy/ezZwIleUQdh4Ck
+ CMsFpnHT/mPdukkpXa3YxCx6LQLIfqYsx+7yisyYr1hK6jcGn0o05kAg9
+ rlrjFWdar3Sx8RgfXFdBzyJpEsyzLF+c/FHvh2njkwGevziyD+Ir55dT4
+ pGGpMBxi8+cGBeSFKuwibiMdh7RYDaC4os4tBrDbc2GA9pslCEVd8save
+ pTHkC61+wmE3t/6snHLv9doVdgjt2JLBlvHoCndVAeVZLUrsJoA1zvjvY
+ zQ0AEGlTkUfTUjlj9g3fzjXPTr815GJ0QlhrTVeak8ZBtwwA/NlbEet3g g==;
+X-IronPort-AV: E=Sophos;i="5.96,210,1665417600"; d="scan'208";a="217984622"
+Received: from mail-bn7nam10lp2107.outbound.protection.outlook.com (HELO
+ NAM10-BN7-obe.outbound.protection.outlook.com) ([104.47.70.107])
+ by ob1.hgst.iphmx.com with ESMTP; 02 Dec 2022 07:36:15 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=a/6y5iTzpf+NBWcmpDVqRtoDjADKvNtLQ5bwBzFaAD/1VWbkUnUeRKJ50BRPHnKkSNjqvEmu54Ks6hxw3maCFuBQIbhP8QVaTQk3IdvxIc7pbc12dMoJvU2ieN3V8i7YqYT6p9xozzuLUEUJ4IOOqxYtbYBdz9tFVBH3EblQK12uYYCNX2a2jT0ErT8v8f7crSDPd7ecCdp+gkOq7FXu52j5n9KhEtxCxHwWoe/tL9znOZTOMeUD/W68pxxDnbHHfKe/geSK3T2EA4//96MGgQ/+tA2QObByj48Uay3Sbh2ey+5yr7bOFTeSi/70tRvvvVwb/+zs+G+gUsac6C+QMw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3JHy2oNQ/9Pw+Jo2gywDL3q9l7UhzkjMN6iKfECC96c=;
+ b=TlAa/v/a6ZLqORuOjpuSJzRnwVMVRPzYw678IscfwUQAzB2VgZIAlfj67CvmkFsZ2lFvllrD92Fj6olMpeYK7PZpxEmn+TX8OFVX9KviPYXAO3+ZOYZ0/76TyzkTPupAfUPocNTwH1rN2/TkYyH8PbxWMcYjXXhibrs2Fi8CKo16lk7KJIYZySAkBoGCHNeassbQVonX4+AkBjB34fauIYSqDr4CRPcoEJIU1sVs3EXHo54QJDGa3pZ0cvDjk7lkRMwOD3lSs7eS9Lp8hy/phhe43hkcLGGKJ2/ZjLsYQyJowtbM7NEHWRL30BRmNxm6WkKEZsOLadsDtkFO+sTWbw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yxooa9xcpOrEbl1qS4V88aIq/s/qQxpHgqsbE4lqu9s=;
- b=jrUMBEfWH2wGuAMrzZ6T8EteySSIEOJ2B18bOebquTvGRMThXJJdufoKAZYdtEgw39
- 5PXycFWJ1unEQ/8LEWM9tuEqmhzPGXg//eta1n3pEnqIuvrV+rR7HPihIAA4NV3izbzs
- ouep3ed5S4/KyGIEkQHtF+wCWQJ3wDMUT01rAgW+vJ0a0N7Gc8qhg8rmRvczYzTWob0c
- bHrFC8wl27MgOg8CWXnGHhzen1sfHmrziDKoqDktaYv8dLWQJq8LU4jF3q3MgmE1Ct39
- qXCd5uzWgc4NpCXk967FZmRFRAkHmDG5M//fA8N9Bd76OT/LplVNK0x+gpoO6uGjMj6s
- vlbw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yxooa9xcpOrEbl1qS4V88aIq/s/qQxpHgqsbE4lqu9s=;
- b=kqzY0s7jYIR0zynvn/Nel8RVP/EaTOt90HHMD3j8B6PE7OrYsqq4uZYyiVgkMDmmgz
- KDODxiLh82auS49fnurHp8KON9mPIOOQHQoglRACpiigQEYeXsREiOdyLmgDsIQstXbM
- 0v7yXvSBLPJ//6xXpzTA0XsjAASLkBuxyZXYPIZwbUtvCInVGcmikjkN5faxZ3HMr6iR
- I6chmkLODC3Dn1Hx2lvelhUcuyvbQFkCz1qf7se8PpJXVvoJbgeVtF2pIGzam4+UccCf
- +6OOqjjEsnwfy3y5pB1Q3zICcFUygan73AUAudKswBH7Mqt8d0I3wtp5ABgVboTsFOMN
- /pSg==
-X-Gm-Message-State: ANoB5pkR9FhDPcWnfr5YbJaRQMarU0vtqlOszx3Ck2Qm+uucDIo2/Gjm
- C66anUpyiI2eiLLgB89AXvTCPg==
-X-Google-Smtp-Source: AA0mqf6k6ptIsY2EcD15LqP125dn7yDzk57V1yE8HIXvJzseL2v26GYT/7wrE3Y1SpoRjWDeEpYqzg==
-X-Received: by 2002:a17:907:c208:b0:7ad:79c0:547a with SMTP id
- ti8-20020a170907c20800b007ad79c0547amr2754297ejc.41.1669906044145; 
- Thu, 01 Dec 2022 06:47:24 -0800 (PST)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- 9-20020a170906200900b007c0688a68cbsm1825085ejo.176.2022.12.01.06.47.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Dec 2022 06:47:23 -0800 (PST)
-Date: Thu, 1 Dec 2022 15:47:22 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Ludovic Henry <ludovic@rivosinc.com>
-Subject: Re: [PATCH v3] riscv: Allow user to set the satp mode
-Message-ID: <20221201144722.aq4pfmdehrghaoy2@kamzik>
-References: <20221201093623.1394747-1-alexghiti@rivosinc.com>
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3JHy2oNQ/9Pw+Jo2gywDL3q9l7UhzkjMN6iKfECC96c=;
+ b=rvukpbXQOD08wx4tycXoft1Qsshd7/ec7GUEVBid/y27frKqRuGOWDXHFmvEOThFdBjXgPcrg2EK5xOnpMgen2dxI88PVdEXHaQsi9aoKzT+68NXf/SciMaOVRgNylsMoDfUwS6i/+J3YM1avLAqLORMj9R2TBAdXnChqA1qS4A=
+Received: from CY4PR04MB0359.namprd04.prod.outlook.com (2603:10b6:903:b3::19)
+ by BN7PR04MB3988.namprd04.prod.outlook.com (2603:10b6:406:c9::28)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5857.23; Thu, 1 Dec
+ 2022 23:36:12 +0000
+Received: from CY4PR04MB0359.namprd04.prod.outlook.com
+ ([fe80::6068:b90:7b94:c255]) by CY4PR04MB0359.namprd04.prod.outlook.com
+ ([fe80::6068:b90:7b94:c255%5]) with mapi id 15.20.5857.023; Thu, 1 Dec 2022
+ 23:36:12 +0000
+From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+To: "bmeng@tinylab.org" <bmeng@tinylab.org>, Alistair Francis
+ <Alistair.Francis@wdc.com>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+CC: "bin.meng@windriver.com" <bin.meng@windriver.com>, "palmer@dabbelt.com"
+ <palmer@dabbelt.com>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Subject: Re: [PATCH 03/15] hw/riscv: Fix opentitan dependency to SIFIVE_PLIC
+Thread-Topic: [PATCH 03/15] hw/riscv: Fix opentitan dependency to SIFIVE_PLIC
+Thread-Index: AQHZBY7DEAheFkjf4k2I8s74Yv3Dua5ZsEIA
+Date: Thu, 1 Dec 2022 23:36:12 +0000
+Message-ID: <7460541cf49a4acd3f5881d9eade40a35c58e858.camel@wdc.com>
+References: <20221201140811.142123-1-bmeng@tinylab.org>
+ <20221201140811.142123-3-bmeng@tinylab.org>
+In-Reply-To: <20221201140811.142123-3-bmeng@tinylab.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: CY4PR04MB0359:EE_|BN7PR04MB3988:EE_
+x-ms-office365-filtering-correlation-id: d833c2c7-351b-4d50-0eee-08dad3f4d4fb
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: gocDohsJmHcf1e49fBVt3iCcUv7jUlHyMzMdk38grxDaptBY8rssZcjC9woL0VrEcPu2oCp6pwDvw38s/ZtFZtPEknOWiNtjCdA//4wxzzuzJ3VkxhBNuyv/XR/A089zi/2HyHGpuDPtifd8gsmA+emsla5vtSchECDO9jwggLB1Tkt70cry/QG/zl45/5sQaMK1cbd22KRGbaGN/q13lr+3MUDygm6QX8wcIQfZiD7+mwuh9vyV7gh1Me24N4X0MCRJWxtx6T569wZs83v8mzmKGhszCSYTGHQiuIrotsh6zPip3H8AfEpjEgtUnxRMq7caaERvuUib708Sdcmp2miBtnlc5h7kxugC/0vf1Y5lWvIiRinv72DkwVyoMQxm9PY+RSfMGU163mQvb5D+53ermYNMzeZNocV7/9uSp0X42dqDGdUPc4rmeExwIcNEfn3axz31eMdsPXuPzD838QruLMcEjMtV33XjgYhqKds4IsT1aYo+vSEY7sQhwsZscgqN7cR5az8VM8//JrrGrZz1N+yw7n/5ezOnSj2Gl36uzRs0gsugKsqHDbVbYzgLnESo7N8TJ/BqMh0yd41+di0D2Ie8eoyQZsYdYnVeA7gulidJxF+TIZav88ZOw2CWgB87Bu89QNsJT4ysyNgN65zyfVKzu6zOxnSrMr9WF/mv+gGOQc3cqP6gADH3i4OsVQHAQYFmW212jkE1NKVwtg==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CY4PR04MB0359.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230022)(4636009)(346002)(136003)(396003)(366004)(39860400002)(376002)(451199015)(4326008)(83380400001)(64756008)(76116006)(91956017)(8676002)(66446008)(110136005)(66476007)(316002)(66556008)(86362001)(66946007)(54906003)(6486002)(38070700005)(5660300002)(38100700002)(82960400001)(122000001)(4744005)(44832011)(8936002)(2616005)(2906002)(41300700001)(36756003)(186003)(6506007)(6512007)(26005)(71200400001)(478600001);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?SzdGRzBRSnhjcjBoYk1UZzdsL3ZJSGQ1TkNIYWFWSEVMRUhKS2tQTlY4MU01?=
+ =?utf-8?B?eTk2bHdwVzdsNEhKZ0lZZUxDYlhmcnlHaSszekt4c1Z4U2hMSEJSUEN1Rnpv?=
+ =?utf-8?B?RjdTY09EY2ZTa1IwbDAxcU05SEhXN1AzMTdjY0tPNjNHM1NrZ3hrOEZ3b29M?=
+ =?utf-8?B?TzNaMDI4OXN4MGltMW1KRjZCa1FhT3AxU2t6OTB1NFdHSWsxaVZDNEhRd3k1?=
+ =?utf-8?B?cDFvYU9ZSVF6WWc3aXVBQ2lEbGFhbTBrdEN3ZzhpdUpzTVJocjI4cmFFMDlJ?=
+ =?utf-8?B?UXdxbnlHckpYa3ZwRnN2eUtsZ0NjektMSjlJc2JjM0NPcjk3Q0htSWpLQUsx?=
+ =?utf-8?B?UlJnSFhaTld2anpVZEJLQVZTb1g0RytIN2QwVDhEZHpkcWpMeVZOLzVGdlRF?=
+ =?utf-8?B?VjVWQ09SMVRYRTQ5WnBrcUJrTlBJT0U5SHNOcjRrdTNuYkNWSVkvZ1luVFZj?=
+ =?utf-8?B?Z3RsNlE0Q0FwVVFWQUtpNk8rNmdEYnc1ZGx5cnM3YW0zeWlwK2diZld4MHZ0?=
+ =?utf-8?B?U1A0VW9OUVJlYzlIbEJvd1R2Q1o1RlY0M3JaQURPNU9sbkJRUE9RL21BaHVy?=
+ =?utf-8?B?eGcxMkVHTTVENnhLay9adWlhMDNjSDdVTG1FaFhRTCs1ck5KbzBqaEhFYnI4?=
+ =?utf-8?B?RjhMLzJ6SHBjRnE5YU9IS3NYRksvZFFmQjNNZ2VmQmpkbkM4Qmd6QStmaDN3?=
+ =?utf-8?B?RlUyVk5lYTZzMDFGb2N2NzBIQVBONGhzK0Q3NUlqaWo3Sm02ZTl6cUdmY0xG?=
+ =?utf-8?B?SjMzTGZxNnBaTU1xWU1zcFZTZXlwZDZTT2RKU0h0L3NReFZiaUVNSVF6azA0?=
+ =?utf-8?B?c2ZhUFN5aWZBM0VseUhSZndQNmNUSlpKYXUwK1k5bzREaFFNVkZtVmllSmox?=
+ =?utf-8?B?UjV6VHhPbTZaQVQzZzZZa0FpK3B0dFdvNHZBVERhZmZodGhKTitvZUNsN29k?=
+ =?utf-8?B?bHJTUU1Kb3FKYmhIMFZ0eEwySFY4MzY1ZzVzbWtiNGUxY3d1c3A2V2Nld2g5?=
+ =?utf-8?B?aXVnaXZ5SHlsa0lGRkduMmFraWt0SzN5aEpZbzdjYVgrUjUzVFZwZi9uWHYz?=
+ =?utf-8?B?cldPWE05Q0VyeVFyYnI1K3V5anF4NkZUb2R5RmwwYnhYMW02ek43SEw4eGhG?=
+ =?utf-8?B?TGw1R2M1cDN1S2pUZ0dHcTR6WTVUcGZtL0dQTWxNbjhHNmhkS0hKTWVTOC9k?=
+ =?utf-8?B?V0RxdzJSSzcvTVVOVjNGeURTeDZTZ09RVzFHTmJsaU9qNkVFQ21XM2NTVXk3?=
+ =?utf-8?B?SXBkVFBWem9oa3FBMzcrUzNNWlg2WUFzK1B0dC9PeTNtdW14aWR3VmsvL2NF?=
+ =?utf-8?B?Qk5BY0d6T3VLMWxmSmU5NlBoSHdGUmtTelFjNVNLUVBmR05jOHhvOXQ5SXhC?=
+ =?utf-8?B?QUtKYUJNS1owdC9vT3FydzBSSW8rMkE4Ny81NTFaY1IxVFNYVlJwOEpCbmJt?=
+ =?utf-8?B?SVRPVjZJTWFVQ2hnMlNkZlltdk5IL3k4VUlDRUFpQXlZVkNwMmVZd09QNmhO?=
+ =?utf-8?B?V3dvOHZuejNLZ3dENXhGdmFkRVZnRHVTYVU0SE4yRy9hamdOejQrN0k3N2Y5?=
+ =?utf-8?B?VTJyMEZwVThDd1kyZjBFaE5PTFNHSVBjZzhpK1lBOGpQMTZZOFJqWlcvZFBt?=
+ =?utf-8?B?VE1RVy9rRU9xK0V1YjV0T05kYkhJVXluR3l3YnVCa09aNzVzd1FNejA1UUsr?=
+ =?utf-8?B?UktCS3QrZ1cxRDQrdkp3aFlDdGZKYjIwRmxiejZTSSszN3BhRG1jR1NyMG9s?=
+ =?utf-8?B?dVdpYnd0QVNFdHpVd2syREZTcEJUUjBwTHpFRysyOTROd1pIRDVtc1VJSHZK?=
+ =?utf-8?B?N1BOMzk4bWtwL1hNZmM4cUtqSHQxSEJaV01KN3NnL1ZsOGp4ckRpZytxemNx?=
+ =?utf-8?B?ZnB1ZXREYTRyUGJhOGsxU0VQL3dmRWRNUG5LQUM5T3JxNkFDY1hadlQ0cG5n?=
+ =?utf-8?B?Z3hDWmZnMXh0VlZZZE51VVkzbU9QSmpjY3RiWitKL3dBa2NvYWNyT29MdzRR?=
+ =?utf-8?B?ckVKbHBjTFRsc2ZKQ2lscCtrQ3Y4VlJ6dkNCdFJ5UXlEMHlKWHpXUWY0Q2Rp?=
+ =?utf-8?B?cXdrS2RNK0x0MjdmbVNzQkFGTWV6ZWV5dHJBQ0NFQTB5ZFBmWkVXdy9QMU9O?=
+ =?utf-8?B?SjJSZ0xSOWVWeEhNdFZ6c211VnU1eHl5RUNwT1lLR1NnalU2TW9ZQTJNMzNC?=
+ =?utf-8?B?c3c9PQ==?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <8B39B1F5C6A6EB49A801EECADDBB5B23@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20221201093623.1394747-1-alexghiti@rivosinc.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x631.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: cDi5QPaVnkbXOuG/0BfVcDrBHQpzpgFF9T6iW5MarkUVrXQ6HueF77ja3J4/wIIJ5A9WDNC+l47lPdewdrejqmFgM57Z85HXY26HHA4BnHjd4tH1rpIxgfLPYB4dVaXoKrDJKO6BuKOxa96Tx1MjAAliy/ieemAd7QPeLE/ODvhS5tjau+VKwTWHtJxcWrTNstOMKJUNf0Wlsnm4h2idgjiZWdXeoEobKHWMmpFGQY0cTHpn7tx4p4DE5Jv7FtkAnAACNrXpE7Kzh22Qx7fuV3nIBqdJ/CN/vT3ZL9LRYTvC/e8qXg934CoPf4lNlsUFx0KY4Dagn9/he6EF+flNgQlBqZqJs/QudH64fcPDHLD7rZEHvvI0WEi6i4TPIdoFd3ZzXDcHt4b7OiQhP0RyzvOSj0WfVx+Qoxhz9xcom6RUgm4ollc2K06TrPjUTd74L62nw1FEtcgotkJN2CWkGLV5OcmhB35SCer97BHWBpALd7e2RTPfHKwUVlg69eatBkqJNbGqqmPiDuHIgUBQRMwCmWXDGZGrKRWf0o6duIXOYL/KkvLCgvwJrcOMrcC22yJpQAEFfFMXqT6nGzDOKrliKsy/YuwIahhnCiOrzgEfdRKaAyB3Wxn9r/MBGeDIWOnIYmsKGxTwDa2Fpw3iXKpJ4lzgogwLnt5nTRJ1ydhjIFJQsioYiTlao4NOICu8Jj9i52qMZ7B6Js40WFxOOdxw1v5VXYRNCwo4c0Nv1NA2mOVmcF4mMCcckMv3V2QPKbzuTJZ4WHaNkX8QtgJ29dlNiK1dioptFb+RLhOopJ6oDQpR4mCzhQC+hbQsIFhUvzLXuHRS3RTPnjBsraAuErRqku13Y1VZ6Xp+dZaKmjIsMxZEr/ytogPYnSiDLNgF+TEIm5WQ4QNfCZGFdf2SYA==
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: CY4PR04MB0359.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d833c2c7-351b-4d50-0eee-08dad3f4d4fb
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Dec 2022 23:36:12.4738 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: p4l52V4Xds0csYp65RYScEyEiAtfja9c5WUd4n2dj/msmnUI5XlA3W+oTQhsOQENo46UMd5tOxnx/mV7pwo8ig==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN7PR04MB3988
+Received-SPF: pass client-ip=216.71.154.45;
+ envelope-from=prvs=327315efa=wilfred.mallawa@wdc.com; helo=esa6.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -82,385 +157,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Dec 2022 14:47:30 -0000
+X-List-Received-Date: Thu, 01 Dec 2022 23:36:27 -0000
 
-On Thu, Dec 01, 2022 at 10:36:23AM +0100, Alexandre Ghiti wrote:
-> RISC-V specifies multiple sizes for addressable memory and Linux probes for
-> the machine's support at startup via the satp CSR register (done in
-> csr.c:validate_vm).
-> 
-> As per the specification, sv64 must support sv57, which in turn must
-> support sv48...etc. So we can restrict machine support by simply setting the
-> "highest" supported mode and the bare mode is always supported.
-> 
-> You can set the satp mode using the new properties "mbare", "sv32",
-> "sv39", "sv48", "sv57" and "sv64" as follows:
-> -cpu rv64,sv57=on # Linux will boot using sv57 scheme
-> -cpu rv64,sv39=on # Linux will boot using sv39 scheme
-> 
-> We take the highest level set by the user:
-> -cpu rv64,sv48=on,sv57=on # Linux will boot using sv57 scheme
-> 
-> We make sure that invalid configurations are rejected:
-> -cpu rv64,sv32=on # Can't enable 32-bit satp mode in 64-bit
-> -cpu rv64,sv39=off,sv48=on # sv39 must be supported if higher modes are
-> 			   # enabled
-> 
-> We accept "redundant" configurations:
-> -cpu rv64,sv48=on,sv57=off # sv39 must be supported if higher modes are
-> 
-> In addition, we now correctly set the device-tree entry 'mmu-type' using
-> those new properties.
-> 
-> Co-Developed-by: Ludovic Henry <ludovic@rivosinc.com>
-> Signed-off-by: Ludovic Henry <ludovic@rivosinc.com>
-> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> ---
-> v3:
-> - Free sv_name as pointed by Bin
-> - Replace satp-mode with boolean properties as suggested by Andrew
-> - Removed RB from Atish as the patch considerably changed
-> 
-> v2:
-> - Use error_setg + return as suggested by Alistair
-> - Add RB from Atish
-> - Fixed checkpatch issues missed in v1
-> - Replaced Ludovic email address with the rivos one
-> 
->  hw/riscv/virt.c         |  16 ++--
->  target/riscv/cpu.c      | 164 ++++++++++++++++++++++++++++++++++++++++
->  target/riscv/cpu.h      |   8 ++
->  target/riscv/cpu_bits.h |   1 +
->  target/riscv/csr.c      |   8 +-
->  5 files changed, 186 insertions(+), 11 deletions(-)
-> 
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index a5bc7353b4..bb7c739a74 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -228,7 +228,7 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
->      int cpu;
->      uint32_t cpu_phandle;
->      MachineState *mc = MACHINE(s);
-> -    char *name, *cpu_name, *core_name, *intc_name;
-> +    char *name, *cpu_name, *core_name, *intc_name, *sv_name;
->  
->      for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
->          cpu_phandle = (*phandle)++;
-> @@ -236,14 +236,12 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
->          cpu_name = g_strdup_printf("/cpus/cpu@%d",
->              s->soc[socket].hartid_base + cpu);
->          qemu_fdt_add_subnode(mc->fdt, cpu_name);
-> -        if (riscv_feature(&s->soc[socket].harts[cpu].env,
-> -                          RISCV_FEATURE_MMU)) {
-> -            qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type",
-> -                                    (is_32_bit) ? "riscv,sv32" : "riscv,sv48");
-> -        } else {
-> -            qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type",
-> -                                    "riscv,none");
-> -        }
-> +
-> +        sv_name = g_strdup_printf("riscv,%s",
-> +                                  s->soc[socket].harts[cpu].cfg.satp_mode_str);
-> +        qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type", sv_name);
-> +        g_free(sv_name);
-> +
->          name = riscv_isa_string(&s->soc[socket].harts[cpu]);
->          qemu_fdt_setprop_string(mc->fdt, cpu_name, "riscv,isa", name);
->          g_free(name);
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index d14e95c9dc..51c06ed057 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -907,6 +907,66 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->       }
->  #endif
->  
-> +    /*
-> +     * Either a cpu sets its supported satp_mode in XXX_cpu_init
-> +     * or the user sets this value using satp_mode property.
-
-using the sv* and mbare properties.
-
-> +     */
-> +    bool rv32 = riscv_cpu_mxl(&cpu->env) == MXL_RV32;
-> +
-> +    cpu->cfg.satp_mode = VM_1_10_UNDEF;
-
-Could probably just use -1 here instead of introducing VM_1_10_UNDEF.
-
-> +
-> +    if (rv32) {
-> +        if (cpu->cfg.sv32 == ON_OFF_AUTO_ON) {
-> +            cpu->cfg.satp_mode_str = g_strdup("sv32");
-
-No need to allocate memory, satp_mode_str = "sv32".
-
-Also I'm not sure we need to keep mode_str in CPUConfig. Providing a
-function with a switch on VM_1_10_SV* cases to get it should be enough
-for its one usecase.
-
-> +            cpu->cfg.satp_mode = VM_1_10_SV32;
-> +        } else if (cpu->cfg.mbare == ON_OFF_AUTO_ON) {
-> +            cpu->cfg.satp_mode_str = g_strdup("none");
-> +            cpu->cfg.satp_mode = VM_1_10_MBARE;
-> +        }
-> +    } else {
-> +        if (cpu->cfg.sv64 == ON_OFF_AUTO_ON) {
-> +            cpu->cfg.satp_mode_str = g_strdup("sv64");
-> +            cpu->cfg.satp_mode = VM_1_10_SV64;
-> +        } else if (cpu->cfg.sv57 == ON_OFF_AUTO_ON) {
-> +            cpu->cfg.satp_mode_str = g_strdup("sv57");
-> +            cpu->cfg.satp_mode = VM_1_10_SV57;
-> +        } else if (cpu->cfg.sv48 == ON_OFF_AUTO_ON) {
-> +            cpu->cfg.satp_mode_str = g_strdup("sv48");
-> +            cpu->cfg.satp_mode = VM_1_10_SV48;
-> +        } else if (cpu->cfg.sv39 == ON_OFF_AUTO_ON) {
-> +            cpu->cfg.satp_mode_str = g_strdup("sv39");
-> +            cpu->cfg.satp_mode = VM_1_10_SV39;
-> +        } else if (cpu->cfg.mbare == ON_OFF_AUTO_ON) {
-> +            cpu->cfg.satp_mode_str = g_strdup("none");
-> +            cpu->cfg.satp_mode = VM_1_10_MBARE;
-> +        }
-> +    }
-> +
-> +    /*
-> +     * If unset by both the user and the cpu, we fallback to sv32 for 32-bit
-> +     * or sv57 for 64-bit when a MMU is present, and bare otherwise.
-> +     */
-> +    if (cpu->cfg.satp_mode == VM_1_10_UNDEF) {
-> +        if (riscv_feature(&cpu->env, RISCV_FEATURE_MMU)) {
-> +            if (rv32) {
-> +                cpu->cfg.satp_mode_str = g_strdup("sv32");
-> +                cpu->cfg.satp_mode = VM_1_10_SV32;
-> +            } else {
-> +                cpu->cfg.satp_mode_str = g_strdup("sv57");
-> +                cpu->cfg.satp_mode = VM_1_10_SV57;
-> +            }
-> +        } else {
-> +            cpu->cfg.satp_mode_str = g_strdup("none");
-> +            cpu->cfg.satp_mode = VM_1_10_MBARE;
-> +        }
-> +    }
-> +
-> +    riscv_cpu_finalize_features(cpu, &local_err);
-> +    if (local_err != NULL) {
-> +        error_propagate(errp, local_err);
-> +        return;
-> +    }
-> +
->      riscv_cpu_register_gdb_regs_for_features(cs);
->  
->      qemu_init_vcpu(cs);
-> @@ -915,6 +975,102 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->      mcc->parent_realize(dev, errp);
->  }
->  
-> +void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp)
-> +{
-> +    bool rv32 = riscv_cpu_mxl(&cpu->env) == MXL_RV32;
-> +
-> +    /* First, get rid of 32-bit/64-bit incompatibilities */
-> +    if (rv32) {
-> +        if (cpu->cfg.sv39 == ON_OFF_AUTO_ON
-> +                || cpu->cfg.sv48 == ON_OFF_AUTO_ON
-> +                || cpu->cfg.sv57 == ON_OFF_AUTO_ON
-> +                || cpu->cfg.sv64 == ON_OFF_AUTO_ON) {
-> +            error_setg(errp, "cannot enable 64-bit satp modes "
-> +                       "(sv39/sv48/sv57/sv64)");
-> +            error_append_hint(errp, "cpu is in 32-bit mode, 64-bit satp modes "
-> +                              "can't be enabled\n");
-> +            return;
-> +        }
-> +    } else {
-> +        if (cpu->cfg.sv32 == ON_OFF_AUTO_ON) {
-> +            error_setg(errp, "cannot enable 32-bit satp mode (sv32)");
-> +            error_append_hint(errp, "cpu is in 64-bit mode, 32-bit satp mode "
-> +                              "can't be enabled\n");
-> +            return;
-> +        }
-> +    }
-> +
-> +    /*
-> +     * Then make sure the user did not ask for an invalid configuration as per
-> +     * the specification.
-> +     */
-> +    switch (cpu->cfg.satp_mode) {
-> +    case VM_1_10_SV32:
-> +        if (cpu->cfg.mbare == ON_OFF_AUTO_OFF) {
-> +            error_setg(errp, "cannot disable mbare satp mode");
-> +            error_append_hint(errp, "mbare satp mode must be enabled if sv32 "
-> +                              "is enabled\n");
-> +            return;
-> +        }
-> +
-> +        break;
-> +    case VM_1_10_SV39:
-> +        if (cpu->cfg.mbare == ON_OFF_AUTO_OFF) {
-> +            error_setg(errp, "cannot disable mbare satp mode");
-> +            error_append_hint(errp, "mbare satp mode must be enabled if sv39 "
-> +                              "is enabled\n");
-> +            return;
-> +        }
-> +
-> +        break;
-> +    case VM_1_10_SV48:
-> +        if (cpu->cfg.mbare == ON_OFF_AUTO_OFF
-> +                || cpu->cfg.sv39 == ON_OFF_AUTO_OFF) {
-> +            error_setg(errp, "cannot disable mbare/sv39 satp modes");
-> +            error_append_hint(errp, "mbare/sv39 satp modes must be enabled if "
-> +                              "sv48 is enabled\n");
-
-Combined errors like this make the user look to see which one it is. I
-think we can we reorganize this switch to fall through from largest to
-smallest allowing the checks for smaller widths and mbare to be shared.
-If a user has more than one problem then they'll only see an error for the
-larger first, but then they'll try again and see the next one. In each
-case they'll see exactly what needs to be fixed, though.
-
-> +            return;
-> +        }
-> +
-> +        break;
-> +    case VM_1_10_SV57:
-> +        if (cpu->cfg.mbare == ON_OFF_AUTO_OFF
-> +                || cpu->cfg.sv39 == ON_OFF_AUTO_OFF
-> +                || cpu->cfg.sv48 == ON_OFF_AUTO_OFF) {
-> +            error_setg(errp, "cannot disable mbare/sv39/sv48 satp modes");
-> +            error_append_hint(errp, "mbare/sv39/sv48 satp modes must be "
-> +                              "enabled if sv57 is enabled\n");
-> +            return;
-> +        }
-> +
-> +        break;
-> +    case VM_1_10_SV64:
-> +        if (cpu->cfg.mbare == ON_OFF_AUTO_OFF
-> +                || cpu->cfg.sv39 == ON_OFF_AUTO_OFF
-> +                || cpu->cfg.sv48 == ON_OFF_AUTO_OFF
-> +                || cpu->cfg.sv57 == ON_OFF_AUTO_OFF) {
-> +            error_setg(errp, "cannot disable mbare/sv39/sv48/sv57 satp "
-> +                       "modes");
-> +            error_append_hint(errp, "mbare/sv39/sv48/sv57 satp modes must be "
-> +                              "enabled if sv57 is enabled\n");
-> +            return;
-> +        }
-> +
-> +        break;
-> +    }
-> +}
-> +
-> +void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
-> +{
-> +    Error *local_err = NULL;
-> +
-> +    riscv_cpu_satp_mode_finalize(cpu, &local_err);
-> +    if (local_err != NULL) {
-> +        error_propagate(errp, local_err);
-> +        return;
-> +    }
-> +}
-> +
->  #ifndef CONFIG_USER_ONLY
->  static void riscv_cpu_set_irq(void *opaque, int irq, int level)
->  {
-> @@ -1094,6 +1250,14 @@ static Property riscv_cpu_properties[] = {
->  
->      DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false),
->      DEFINE_PROP_BOOL("rvv_ma_all_1s", RISCVCPU, cfg.rvv_ma_all_1s, false),
-> +
-> +    DEFINE_PROP_ON_OFF_AUTO("mbare", RISCVCPU, cfg.mbare, ON_OFF_AUTO_AUTO),
-> +    DEFINE_PROP_ON_OFF_AUTO("sv32", RISCVCPU, cfg.sv32, ON_OFF_AUTO_AUTO),
-> +    DEFINE_PROP_ON_OFF_AUTO("sv39", RISCVCPU, cfg.sv39, ON_OFF_AUTO_AUTO),
-> +    DEFINE_PROP_ON_OFF_AUTO("sv48", RISCVCPU, cfg.sv48, ON_OFF_AUTO_AUTO),
-> +    DEFINE_PROP_ON_OFF_AUTO("sv57", RISCVCPU, cfg.sv57, ON_OFF_AUTO_AUTO),
-> +    DEFINE_PROP_ON_OFF_AUTO("sv64", RISCVCPU, cfg.sv64, ON_OFF_AUTO_AUTO),
-
-I'm not sure what types of issues may arise mixing booleans and OnOffAutos
-in a future cpu-model-expansion. I also think we can simplify things by
-using arm's sve* boolean properties as a pattern. For that, each property
-is a boolean which shares the same get and set accessors. The set accessor
-not only sets the property to true/false, but also tracks that the user
-did the setting, allowing for sanity checks at finalize time.
-
-Using a pair of bitmaps for the sv properties, where VM_1_10_SV* are used
-for the bit numbers, should work well. Validating input will likely reduce
-to some bitmap comparing operations. It would also drop all the extra cfg
-state. In fact, one of the temporary bitmaps could use the satp_mode
-member, before the final result gets written to it. So, only a single
-extra uint8_t for the other bitmap is needed.
-
-> +
->      DEFINE_PROP_END_OF_LIST(),
->  };
->  
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 3a9e25053f..dcdde1e0b7 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -27,6 +27,7 @@
->  #include "qom/object.h"
->  #include "qemu/int128.h"
->  #include "cpu_bits.h"
-> +#include "qapi/qapi-types-common.h"
->  
->  #define TCG_GUEST_DEFAULT_MO 0
->  
-> @@ -480,6 +481,10 @@ struct RISCVCPUConfig {
->      bool debug;
->  
->      bool short_isa_string;
-> +
-> +    OnOffAuto mbare, sv32, sv39, sv48, sv57, sv64;
-> +    uint8_t satp_mode;
-> +    char *satp_mode_str;
->  };
->  
->  typedef struct RISCVCPUConfig RISCVCPUConfig;
-> @@ -789,4 +794,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
->  
->  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
->  
-> +void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp);
-> +void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
-> +
->  #endif /* RISCV_CPU_H */
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index d8f5f0abed..3e67a815d5 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -590,6 +590,7 @@ typedef enum {
->  #define VM_1_10_SV48        9
->  #define VM_1_10_SV57        10
->  #define VM_1_10_SV64        11
-> +#define VM_1_10_UNDEF       16
->  
->  /* Page table entry (PTE) fields */
->  #define PTE_V               0x001 /* Valid */
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 5c9a7ee287..d2aab1627e 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1109,10 +1109,14 @@ static RISCVException read_mstatus(CPURISCVState *env, int csrno,
->  
->  static int validate_vm(CPURISCVState *env, target_ulong vm)
->  {
-> +    vm &= 0xf;
-> +
->      if (riscv_cpu_mxl(env) == MXL_RV32) {
-> -        return valid_vm_1_10_32[vm & 0xf];
-> +        return valid_vm_1_10_32[vm] &&
-> +            (vm <= RISCV_CPU(env_cpu(env))->cfg.satp_mode);
->      } else {
-> -        return valid_vm_1_10_64[vm & 0xf];
-> +        return valid_vm_1_10_64[vm] &&
-> +            (vm <= RISCV_CPU(env_cpu(env))->cfg.satp_mode);
->      }
->  }
->  
-> -- 
-> 2.37.2
->
-
-Thanks,
-drew
+T24gVGh1LCAyMDIyLTEyLTAxIGF0IDIyOjA3ICswODAwLCBCaW4gTWVuZyB3cm90ZToNCj4gU2lu
+Y2UgY29tbWl0IGVmNjMxMDA2NDgyMCAoImh3L3Jpc2N2OiBvcGVudGl0YW46IFVwZGF0ZSB0byB0
+aGUgbGF0ZXN0DQo+IGJ1aWxkIikNCj4gdGhlIElCRVggUExJQyBtb2RlbCB3YXMgcmVwbGFjZWQg
+d2l0aCB0aGUgU2lGaXZlIFBMSUMgbW9kZWwgaW4gdGhlDQo+ICdvcGVudGl0YW4nIG1hY2hpbmUg
+YnV0IHdlIGZvcmdvdCB0aGUgYWRkIHRoZSBkZXBlbmRlbmN5IHRoZXJlLg0KPiANCj4gU2lnbmVk
+LW9mZi1ieTogQmluIE1lbmcgPGJtZW5nQHRpbnlsYWIub3JnPg0KPiAtLS0NCj4gDQo+IMKgaHcv
+cmlzY3YvS2NvbmZpZyB8IDEgKw0KPiDCoDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKQ0K
+PiANClJldmlld2VkLWJ5OiBXaWxmcmVkIE1hbGxhd2EgPHdpbGZyZWQubWFsbGF3YUB3ZGMuY29t
+Pg0KPiBkaWZmIC0tZ2l0IGEvaHcvcmlzY3YvS2NvbmZpZyBiL2h3L3Jpc2N2L0tjb25maWcNCj4g
+aW5kZXggMTY3ZGM0Y2NhNi4uMWU0YjU4MDI0ZiAxMDA2NDQNCj4gLS0tIGEvaHcvcmlzY3YvS2Nv
+bmZpZw0KPiArKysgYi9ody9yaXNjdi9LY29uZmlnDQo+IEBAIC0xOSw2ICsxOSw3IEBAIGNvbmZp
+ZyBNSUNST0NISVBfUEZTT0MNCj4gwqBjb25maWcgT1BFTlRJVEFODQo+IMKgwqDCoMKgIGJvb2wN
+Cj4gwqDCoMKgwqAgc2VsZWN0IElCRVgNCj4gK8KgwqDCoCBzZWxlY3QgU0lGSVZFX1BMSUMNCj4g
+wqDCoMKgwqAgc2VsZWN0IFVOSU1QDQo+IMKgDQo+IMKgY29uZmlnIFNIQUtUSV9DDQoNCg==
 
