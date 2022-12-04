@@ -1,60 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p1xQ1-0001lm-HN
-	for mharc-qemu-riscv@gnu.org; Sun, 04 Dec 2022 17:25:07 -0500
+	id 1p1xQl-0002bl-Bn
+	for mharc-qemu-riscv@gnu.org; Sun, 04 Dec 2022 17:25:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p1xPr-0001jz-50; Sun, 04 Dec 2022 17:24:56 -0500
-Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
+ id 1p1xQd-0002Yl-2e; Sun, 04 Dec 2022 17:25:44 -0500
+Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p1xPo-00050a-Tj; Sun, 04 Dec 2022 17:24:54 -0500
-Received: by mail-vs1-xe33.google.com with SMTP id 125so9492998vsi.9;
- Sun, 04 Dec 2022 14:24:51 -0800 (PST)
+ id 1p1xQb-0005M4-8D; Sun, 04 Dec 2022 17:25:42 -0500
+Received: by mail-ua1-x92c.google.com with SMTP id q6so3347355uao.9;
+ Sun, 04 Dec 2022 14:25:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gZscQJGKEL6OtXFpqM9DtwPlaW7OKg/MayZ4kgfXHA0=;
- b=Q0t0aX35Fxr9Qk561ghDjO08jydLp6XRsZOQWpcD2pvmxizvbJsNe1eM1IXMvR1zPk
- iCLppSqcowg3jsa4qgqadpiBd2fdxFRYeP0QWt28nABOz87WffLfZC87bcQxNmypDZVi
- C+RW7Qb5reCv+Mg/0vtEReiTXKjRGnmBK09oiD3NEMXYhvIpiL7J/vjEos+AyNyp4PfT
- igsYxkbrXmIOg8mvp3aG5kBtiOwqz7x70YRI3tvb19gsM9duX8L0ooIlPO+M5AhNRdrI
- 6rzm9PXPAwbzprbydUIdT2LYokFpVyXiOosA8sEyqzwUrN4MQZxBGUch5bkfSWNW+84I
- hvjQ==
+ bh=w4ucDnQHPCYkQuCa6pqFOfZvoEbW7H1N4VMPSNiNopQ=;
+ b=R26EGkGkA9jSRRR+fKmWmfk8SVGvM7tqVLhYPV5/ze42AxL4Zkriy9ESvjvgRIFoM5
+ /VpaZguZHhuvT1mRslDB+kJscWxDm3ziBigCW3fz3NiqwH5wWvanI8edo2zM+SMQkMJu
+ qVY2t8XLcfvhSIGZ3qEgdzLOO2oOmLGzeuB7q6xsP/e1zKswq+cVpwxsjWTTHz3Go1SD
+ cYS7dcypiwT8wfLRHqbSMBx3WYZ5GAg7kdJTDeEs9l+0I+yBF2kswdkMpkqPFuckSkvO
+ 5ZC9ekfzZDrddtNxRw6+SOxiSPchS/SdaYa+G0Tmrla3D2sLJH/UvGDhdKG+FOQmvA+7
+ 0syw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gZscQJGKEL6OtXFpqM9DtwPlaW7OKg/MayZ4kgfXHA0=;
- b=yvMF098b5tcnQWykqMs4J9LlxCsVfdLPyMuRkO+uVRkz1OT7BQwu0TBPASympTaXbe
- g5pjVeOrYsF0a6RkTVohce3PTWPWKF7kcuLfQn1sLtt90ctsV2qJSHpwQV72bUbyVIVd
- hIzvxbSugb2kUr/iZ96RTKo+2qlckUFMgoSMl9H82+8O2zSF07vKsBIfWN33u0RcASFW
- 4RoooIGLEf/5/+gMUYLEuBIq+1wSEgupDoHYFgz2BRTVjTj7lFUoMOCNOkP+4ESbTdAs
- EnYVw0/01ERSpGzDMHyX87FSPeIpf1dmBVX4ydnXPbTHfkROp9G7f4bJnJkdfqiOTSjO
- uydg==
-X-Gm-Message-State: ANoB5plvLm9DfTtp/jfW0PwBU7tkMg2FkL7tpG+BprtdTNR4h3kplWfl
- KVSVbO0MGYbGvXGJgs3jkWX8RbEdi8HOx8rnHI8=
-X-Google-Smtp-Source: AA0mqf6LV30BetaeIo57SJGbp9EwbkJu6ukC7YZmGSExuejHq9VcxBsTOmmRFJQo2IIPQa6+Qf3d7uPWSxSYCjmWfs0=
-X-Received: by 2002:a67:c519:0:b0:3b1:2b83:1861 with SMTP id
- e25-20020a67c519000000b003b12b831861mr2814969vsk.10.1670192690888; Sun, 04
- Dec 2022 14:24:50 -0800 (PST)
+ bh=w4ucDnQHPCYkQuCa6pqFOfZvoEbW7H1N4VMPSNiNopQ=;
+ b=PEklxhvYNu/pBrJhKxZIAHMF4tDScCbiRmSlZshTZxaNUbcY8lIPZCKOr641RodcKC
+ plrAgwqfWMF/Eq6xGttmxx/Gqe0Z8IFq48R0MFjnOEVBUsDnVxQk5EAw0l048aEyjAkB
+ ySXEHKTmFDBuYMtHqjv2SDvohG815N+8Ww+ySIIYxt7wD+KF9OIN1KhPFK1tefqKFlvO
+ SEB7nvtQ8DP+ll37b22o6vpgEcjxQMH85TPhv0r6VKiLGavN6/WZTXWmZOxDYxxVVUrU
+ v3uXOoSTBZZv87SM6DzN291jItereWQOlGl00wZzJolg1LVc83ArzejTqNbnkkpLFIer
+ HR5w==
+X-Gm-Message-State: ANoB5ply7IUEY0J/UmFqGVyGo2KU/ul+ZxjfRCD6T9hVsDNoUbIdCRry
+ SKaISly4keV/6cr1DHZdoY4dVujXbhFEOv+Dvr0=
+X-Google-Smtp-Source: AA0mqf5ie1mvcva6VNIhGzEg5T+KoDayDBr0k/bhAXVnpJ2HNJrX74ISakG9EaGc8EmWpTPXWenu7DyHstEZBh4jOlM=
+X-Received: by 2002:ab0:21ca:0:b0:419:8314:8a79 with SMTP id
+ u10-20020ab021ca000000b0041983148a79mr8319078uan.23.1670192738873; Sun, 04
+ Dec 2022 14:25:38 -0800 (PST)
 MIME-Version: 1.0
 References: <20221201140811.142123-1-bmeng@tinylab.org>
- <20221201140811.142123-4-bmeng@tinylab.org>
-In-Reply-To: <20221201140811.142123-4-bmeng@tinylab.org>
+ <20221201140811.142123-5-bmeng@tinylab.org>
+In-Reply-To: <20221201140811.142123-5-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 5 Dec 2022 08:24:24 +1000
-Message-ID: <CAKmqyKPo4eb8P9MyhUKZf79pgNwWHP100k9S-SZNTEHUeng5kg@mail.gmail.com>
-Subject: Re: [PATCH 04/15] hw/riscv: Sort machines Kconfig options in
- alphabetical order
+Date: Mon, 5 Dec 2022 08:25:12 +1000
+Message-ID: <CAKmqyKNx6wVU-akr-OdRZs3P4Sc-RCDd_HNwOUpLKAgp5OQ=dQ@mail.gmail.com>
+Subject: Re: [PATCH 05/15] hw/riscv: spike: Remove misleading comments
 To: Bin Meng <bmeng@tinylab.org>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, 
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,11 +74,11 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Dec 2022 22:24:58 -0000
+X-List-Received-Date: Sun, 04 Dec 2022 22:25:48 -0000
 
 On Fri, Dec 2, 2022 at 12:14 AM Bin Meng <bmeng@tinylab.org> wrote:
 >
-> SHAKTI_C machine Kconfig option was inserted in disorder. Fix it.
+> PLIC is not included in the 'spike' machine.
 >
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
@@ -89,50 +88,21 @@ Alistair
 
 > ---
 >
->  hw/riscv/Kconfig | 16 +++++++++-------
->  1 file changed, 9 insertions(+), 7 deletions(-)
+>  hw/riscv/spike.c | 1 -
+>  1 file changed, 1 deletion(-)
 >
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index 1e4b58024f..4550b3b938 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -4,6 +4,8 @@ config RISCV_NUMA
->  config IBEX
->      bool
->
-> +# RISC-V machines in alphabetical order
-> +
->  config MICROCHIP_PFSOC
->      bool
->      select CADENCE_SDHCI
-> @@ -22,13 +24,6 @@ config OPENTITAN
->      select SIFIVE_PLIC
->      select UNIMP
->
-> -config SHAKTI_C
-> -    bool
-> -    select UNIMP
-> -    select SHAKTI_UART
-> -    select RISCV_ACLINT
-> -    select SIFIVE_PLIC
-> -
->  config RISCV_VIRT
->      bool
->      imply PCI_DEVICES
-> @@ -50,6 +45,13 @@ config RISCV_VIRT
->      select FW_CFG_DMA
->      select PLATFORM_BUS
->
-> +config SHAKTI_C
-> +    bool
-> +    select RISCV_ACLINT
-> +    select SHAKTI_UART
-> +    select SIFIVE_PLIC
-> +    select UNIMP
-> +
->  config SIFIVE_E
->      bool
->      select RISCV_ACLINT
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index 1e1d752c00..13946acf0d 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -8,7 +8,6 @@
+>   *
+>   * 0) HTIF Console and Poweroff
+>   * 1) CLINT (Timer and IPI)
+> - * 2) PLIC (Platform Level Interrupt Controller)
+>   *
+>   * This program is free software; you can redistribute it and/or modify it
+>   * under the terms and conditions of the GNU General Public License,
 > --
 > 2.34.1
 >
