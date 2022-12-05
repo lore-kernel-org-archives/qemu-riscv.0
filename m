@@ -1,69 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p26jk-0007jC-Bu
-	for mharc-qemu-riscv@gnu.org; Mon, 05 Dec 2022 03:22:04 -0500
+	id 1p28ff-0001Qs-VS
+	for mharc-qemu-riscv@gnu.org; Mon, 05 Dec 2022 05:26:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1p26ji-0007ii-2K; Mon, 05 Dec 2022 03:22:02 -0500
-Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1p28fY-0001KS-Te
+ for qemu-riscv@nongnu.org; Mon, 05 Dec 2022 05:25:53 -0500
+Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1p26jg-0001zn-FC; Mon, 05 Dec 2022 03:22:01 -0500
-Received: by mail-lf1-x130.google.com with SMTP id p36so12990543lfa.12;
- Mon, 05 Dec 2022 00:21:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TA/nR2VNlZpy/ClWcXj3g/NAn/1SG9KkZcZZxSl6Lpc=;
- b=C9V6S/YpHcvaS+jhG4FTMhf7yxz055DS2hz2OkwiIK7efsYTll+QdqA4gCwsuLUItG
- UJxbdlR0qawy+GM2jDy9i0oDxiEKfz9HRfi9ZJECFRGSxZIkPR4hvs16CVQBAzf2Hnvq
- wzRQXSuwqVDEV0zjjrJ+le673QIB0P5CxY86+VIpTzf/i3GwsXAoEFpqpv+byfRE9KWs
- 8YmL8TpFu2uIRUMfKXJ5Lljhn3r588sX3QUoegzcOXMvLBmQernWM6et+dzdOwVhEtI8
- 5sxuEP00nBehfheEHm3eJVr2Z7CO9vr9K1eqEsBiRB8O7IDxPxjShDlOa1nHAGujEeu9
- PA/w==
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1p28fX-0006cp-3H
+ for qemu-riscv@nongnu.org; Mon, 05 Dec 2022 05:25:52 -0500
+Received: by mail-pj1-x102b.google.com with SMTP id
+ z8-20020a17090abd8800b00219ed30ce47so118372pjr.3
+ for <qemu-riscv@nongnu.org>; Mon, 05 Dec 2022 02:25:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JOiFQ+VDr28lfLOOmW8pLV87sBU1U/rvv/jp9D7wkWA=;
+ b=K8LjfkBLh2TksaRHdweAU3RYfRNLRgXnpixTjLHdSL2nHACKYM+Z3wepImTPVYfWbO
+ +7aZuvcG22FqWUu7OPwU6JSJuGVl+UGYEo2+pelCQYKiUSFyw1VEs4O+0JBXxKzpW7+v
+ PbFPse+5A4QqPW84sXrdqf6Z5wU5QdYIGnCDWvQ/4BfASaImMP4pGPXmh7qTlKESHrzd
+ pwA/7Vw2/6LCfizJv/Af65yaY/J/UjqpCysaOxb0Dl6X13etShS/MgN9OTwNGeIKQYHV
+ /fvqz/m9NiTCaEic4H5go4x2btrPViu5b+2EdJKMfcRkmM9aIIndkk6cYlx1xCr3nRn2
+ P1Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TA/nR2VNlZpy/ClWcXj3g/NAn/1SG9KkZcZZxSl6Lpc=;
- b=avFPin0eRLiKltBPYGbgEkg8hl/qhs9PvTR5lUwMucAIU14co2mPPssG2HVMa5ittE
- w5H7klAPkFHuSei3ORBKKX7LKWfT1bpQR5Irccqrkiq9OdySATu6UdZS3ctDePOQdSHM
- PcMpn8lUuMzSfpbbbE46s8Pu/dVpcacVM9oxX99DUQRYFab6t6nV1NKhMKLEyvwUstq0
- /psCnN3yUXgmfAJvVsUM3KSkGsNL9ZpOQNu6slJB78oJPrsUoXukAn1ZybZMfBcpfbKo
- PaBmCOXaiFHQE5ZZtFhpGncJdWmiRU7cFEAG6f1RF74W6fiBTNGaaMuuq7KyeUF2pR0D
- L1qw==
-X-Gm-Message-State: ANoB5plGDhP70AA+LpmQJqEjql15vEdNZ4pJqDTLJsX62Yu3mXXhMiBM
- u7sPlAmdzQKOix9SjamB4joJHlMPeOsUE00/bh0=
-X-Google-Smtp-Source: AA0mqf4tLRg6YDNsnuC/ucGb1putMCQZ0Kg35uhaSaOFeLFoCrlpfWfm2tyRZGwy69F4VqBlc8s34dnxuNsRheo6pUk=
-X-Received: by 2002:a05:6512:3f96:b0:4b5:478d:821e with SMTP id
- x22-20020a0565123f9600b004b5478d821emr5002298lfa.250.1670228517739; Mon, 05
- Dec 2022 00:21:57 -0800 (PST)
+ bh=JOiFQ+VDr28lfLOOmW8pLV87sBU1U/rvv/jp9D7wkWA=;
+ b=WRkF6L5CAO+/GS+wQ9opJY38/fw5bgtmW6fvJa4xzPXVm0jy7sYNdK8dp8ztMKhgi4
+ 3O0KD3ZJP39wfyYHfJiDEQ22qAXePZfQIG8ArKnUxog+TkqwJW2yCQKwxPK2ZwJ93LdN
+ m29T5r4rCBetEg+naUYLgQesctjkiqtWYkdGurcJqfeHpKp+sID75+R+pukAVlmpKnJy
+ tRayS3fSDpr2lXAorYZHn7r1GADCgMnm3dpKtN4ui4Qf5E+qEt4Klmk5/7K9jxmB1RI4
+ O7pnaKnyfHie4gt+I6EXBaOfCM/fxugWrs5IULc4Q0iSf+6amqOPjruXJIh29DeEPK+l
+ cV8Q==
+X-Gm-Message-State: ANoB5pn4fVomB2oH8Z2pTQmeIn9nQrOM8kI+hL9BbpJAMAYg+ZZzVZI2
+ Bygw4voqF1l5GmUxDoVRaYe9OA==
+X-Google-Smtp-Source: AA0mqf6nabh0hUBjZPmoNc/QG7ovLqiW4Ly5Jb5sc7QvMjy597DPXlYy1SBfVzRBpYFRhb8WfIcXbg==
+X-Received: by 2002:a17:902:c1cd:b0:189:6b31:dc53 with SMTP id
+ c13-20020a170902c1cd00b001896b31dc53mr48176049plc.58.1670235946418; 
+ Mon, 05 Dec 2022 02:25:46 -0800 (PST)
+Received: from ThinkPad-T490.dc1.ventanamicro.com ([103.97.165.210])
+ by smtp.googlemail.com with ESMTPSA id
+ ca12-20020a17090af30c00b0020bfd6586c6sm8905807pjb.7.2022.12.05.02.25.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Dec 2022 02:25:46 -0800 (PST)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v2 0/3] target/riscv: Apply KVM policy to ISA extensions
+Date: Mon,  5 Dec 2022 15:55:06 +0530
+Message-Id: <20221205102509.504520-1-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20221201140811.142123-1-bmeng@tinylab.org>
- <20221201140811.142123-15-bmeng@tinylab.org>
- <4d2fa372f88dda106d80bd26806bc32c2a92d784.camel@wdc.com>
-In-Reply-To: <4d2fa372f88dda106d80bd26806bc32c2a92d784.camel@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 5 Dec 2022 16:21:46 +0800
-Message-ID: <CAEUhbmVO-OL9Awds3Q19gGhGC-agdq7JqxR28i3W+0CS0K76uw@mail.gmail.com>
-Subject: Re: [PATCH 15/15] hw/intc: sifive_plic: Fix the pending register
- range check
-To: Wilfred Mallawa <wilfred.mallawa@wdc.com>
-Cc: "bmeng@tinylab.org" <bmeng@tinylab.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- "bin.meng@windriver.com" <bin.meng@windriver.com>, 
- "palmer@dabbelt.com" <palmer@dabbelt.com>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::130;
- envelope-from=bmeng.cn@gmail.com; helo=mail-lf1-x130.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-pj1-x102b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -78,43 +80,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Dec 2022 08:22:02 -0000
+X-List-Received-Date: Mon, 05 Dec 2022 10:25:55 -0000
 
-On Fri, Dec 2, 2022 at 8:28 AM Wilfred Mallawa <wilfred.mallawa@wdc.com> wrote:
->
-> On Thu, 2022-12-01 at 22:08 +0800, Bin Meng wrote:
-> > The pending register upper limit is currently set to
-> > plic->num_sources >> 3, which is wrong, e.g.: considering
-> > plic->num_sources is 7, the upper limit becomes 0 which fails
-> > the range check if reading the pending register at pending_base.
-> >
-> > Fixes: 1e24429e40df ("SiFive RISC-V PLIC Block")
-> > Signed-off-by: Bin Meng <bmeng@tinylab.org>
-> >
-> > ---
-> >
-> >  hw/intc/sifive_plic.c | 5 +++--
-> >  1 file changed, 3 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-> > index 7a6a358c57..a3fc8222c7 100644
-> > --- a/hw/intc/sifive_plic.c
-> > +++ b/hw/intc/sifive_plic.c
-> > @@ -143,7 +143,8 @@ static uint64_t sifive_plic_read(void *opaque,
-> > hwaddr addr, unsigned size)
-> >          uint32_t irq = (addr - plic->priority_base) >> 2;
-> >
-> >          return plic->source_priority[irq];
-> > -    } else if (addr_between(addr, plic->pending_base, plic-
-> > >num_sources >> 3)) {
-> > +    } else if (addr_between(addr, plic->pending_base,
-> > +                            (plic->num_sources + 31) >> 3)) {
-> why does adding specifically 31 work here?
->
+Currently the single and multi letter ISA extensions exposed to the guest vcpu
+don't confirm to the KVM policies. This patchset updates the kvm headers and
+applies policies set in KVM to the extensions exposed to the guest.
 
-Each pending register is 32-bit for 32 interrupt sources. Adding 31 is
-to round up to next pending register offset.
+These patches can also be found on riscv_kvm_ext_v2 branch at:
+https://github.com/mdchitale/qemu.git
 
-Regards,
-Bin
+Changes in v2:
+- Rebase to latest riscv-to-apply.next
+- Update linux headers to version 6.1-rc8
+- Add reviewed by tags
+
+Mayuresh Chitale (3):
+  update-linux-headers: Version 6.1-rc8
+  target/riscv: Extend isa_ext_data for single letter extensions
+  target/riscv: kvm: Support selecting VCPU extensions
+
+ include/standard-headers/drm/drm_fourcc.h     |  34 ++++-
+ include/standard-headers/linux/ethtool.h      |  63 +++++++-
+ include/standard-headers/linux/fuse.h         |   6 +-
+ .../linux/input-event-codes.h                 |   1 +
+ include/standard-headers/linux/virtio_blk.h   |  19 +++
+ linux-headers/asm-generic/hugetlb_encode.h    |  26 ++--
+ linux-headers/asm-generic/mman-common.h       |   2 +
+ linux-headers/asm-mips/mman.h                 |   2 +
+ linux-headers/asm-riscv/kvm.h                 |   4 +
+ linux-headers/linux/kvm.h                     |   1 +
+ linux-headers/linux/psci.h                    |  14 ++
+ linux-headers/linux/userfaultfd.h             |   4 +
+ linux-headers/linux/vfio.h                    | 142 ++++++++++++++++++
+ target/riscv/cpu.c                            |  52 ++++---
+ target/riscv/kvm.c                            |  88 +++++++++--
+ target/riscv/kvm_riscv.h                      |   2 +-
+ 16 files changed, 408 insertions(+), 52 deletions(-)
+
+-- 
+2.34.1
+
 
