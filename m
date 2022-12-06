@@ -1,77 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2R8X-0005fQ-Pp
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Dec 2022 01:09:01 -0500
+	id 1p2RuE-0004KC-VE
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Dec 2022 01:58:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1p2R8V-0005f0-PL
- for qemu-riscv@nongnu.org; Tue, 06 Dec 2022 01:08:59 -0500
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1p2Ru5-0004JW-2t; Tue, 06 Dec 2022 01:58:11 -0500
+Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1p2R8T-0004wh-AF
- for qemu-riscv@nongnu.org; Tue, 06 Dec 2022 01:08:59 -0500
-Received: by mail-ed1-x532.google.com with SMTP id c66so12562429edf.5
- for <qemu-riscv@nongnu.org>; Mon, 05 Dec 2022 22:08:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/kRxiM0y+JXo87+7ZeugmiITWgTgyolajs60qKmx6m4=;
- b=NBNQC8XvUnCjjElMWLBb8fYrIWqgHAriiRVyD9iR9OGngRkCxOfbBytr1H43vxty5E
- LMr0d3L7InojCNfryNqqd41ZeLw3bit7kIjoWY++2WsxrlFSB06/YF9EsOlQ/FC27eVE
- qyoND7GpzrrxTRMac3ecK1VYjp2nwOMz406MgP8bPIximGUu/7C0Aoge08j5geo8lmSd
- z/qA4tOvnGl0GPFDVA/4ziMD86YL0QhgGaHFugM996DW2J1BJtOEVDYyD88OhAZm2bjF
- xSgQwd0Fs4belHq7KIPeYI3utKs35o9ShaoXm2jdd9tpkwSq9VMNIceTGf3YGxxYCC6e
- ZoDA==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1p2Rty-0007HC-QR; Tue, 06 Dec 2022 01:58:05 -0500
+Received: by mail-vs1-xe2e.google.com with SMTP id m4so13337753vsc.6;
+ Mon, 05 Dec 2022 22:58:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=KFhvCmtT7gE2DKmZYKqCs4608DBrXGp70qTHAwZGXQ8=;
+ b=av3F5gzEg6aSjYrQmthL5dK7BQhIVklpGXLjWzMMSrXcQtLz8FVX80LMrUlEEebf5B
+ SK90DSQPjn6oOOrTRgNFYpW3fpJjjHClDz6jHMiTJ1SM1bumJ3FzTX+K+AlndvDQpjbq
+ 4C4arX6HaRCed7aK3PchScvlbVSfCregTfUk+9oVpJKNIUumj2PCJh7vCP2hFUJ/thLR
+ +sVO3xT42RCT8imVdE0M4PrWJjbl5Qo26V47BITzAxEa45o0SsiN5ySO2OJo431h17n2
+ nbp9K8PMLKnDVp5UwKQp8Np763NhJsH81vBgkokrOxn5vk/XDYwBzmx+AER4d3fG/DuD
+ j26w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/kRxiM0y+JXo87+7ZeugmiITWgTgyolajs60qKmx6m4=;
- b=YnoaONztRHchCGGWluMDJDxZj9WacQcdzKJ+CoY0KS5E6v6YoqEwchbGdsryqMgb8O
- gYf/YDziUJ79JQKszHTsm2uagtSdfcBYjz+0CZw7eexWS1uz51rsRXBNPkwqbC2fkBh6
- mTrRlUfd0JCRNvOzm0W0ufQdaQSgzYJbIOLzJnBmjUzQ6l3oa0NX7sqvSXTgDOm3E5Qf
- HUfg67s47h3PHMQ6VpB8PGENzBr9RkVG844BvJGTpAHmOyxnv1TSZrSuulNeFU8kmk2S
- J797H2RSk67rPPaWLz6neTvezI/X+A7TsJthwOD2o47wwQ5XAcIUntf8ljgnjTjEQzRU
- XpyA==
-X-Gm-Message-State: ANoB5pkF5lt61cvYhOBdRWCCm7BxpRwIo5u4Z1VCxTjWgqnjBWgMr34R
- sc7o71ykbZnyEG9rQ85AmBULEA==
-X-Google-Smtp-Source: AA0mqf7FQbcYVHYH7NDs2kLbORRVTGw+VgF2bQ1FK6wdSTDZ7ME/BNhsbayGVKewV8ONBpwLbQ/OnA==
-X-Received: by 2002:aa7:d613:0:b0:46a:ed3c:a31d with SMTP id
- c19-20020aa7d613000000b0046aed3ca31dmr39697918edr.368.1670306935240; 
- Mon, 05 Dec 2022 22:08:55 -0800 (PST)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- e24-20020a50fb98000000b004615e1bbaf4sm578187edq.87.2022.12.05.22.08.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Dec 2022 22:08:54 -0800 (PST)
-Date: Tue, 6 Dec 2022 07:08:53 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Ludovic Henry <ludovic@rivosinc.com>
-Subject: Re: [PATCH v3] riscv: Allow user to set the satp mode
-Message-ID: <20221206060853.yztiqdthlmvn6cfp@kamzik>
-References: <20221201093623.1394747-1-alexghiti@rivosinc.com>
- <20221201144722.aq4pfmdehrghaoy2@kamzik>
- <CAHVXubgp5G6HO4v8GwGx4KaDegPqc2mZH2BQzYqM+T1Hxx6bxQ@mail.gmail.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KFhvCmtT7gE2DKmZYKqCs4608DBrXGp70qTHAwZGXQ8=;
+ b=m1kHwX02Si7sOBu3yxA14Dgm9Zj6X09M1b6yEFm4jnen6W+fo07UaHVUWQj+7LrAXq
+ 9nsmS5LrIjAyaIlGQkBoY+1jvdK+oi2oy7PnX8yxiLjJ8VRTwKHmlkHQK79hNcYU89k6
+ hmg6TKFcAbnhWdpNrNlHilalFwyuwOwGSKxUjCGdPmkrTb1TQGORm/JH7QJulR+7iIK7
+ qlcVRZwxuDiEhswO6Eg70umYXXOPz3oEXhWezRowl5uHSTgL92ipBxtulm7Ey1RpGvwH
+ hW7AAMznYmgqIOGz197+ufTlAuf4ndqSjb1gdQXfR1Gwoe+z6qiCnOOFmDfM5Lzwgcy2
+ PbXg==
+X-Gm-Message-State: ANoB5pkTbz8++yX1oKax6yy7PS3D0o0S8zt1stL4mkVQm3Djy6/FhuxQ
+ 2ru44YUp0vwIyqQDtoYS5r7EQCF5exEe3VqpAP4=
+X-Google-Smtp-Source: AA0mqf6r/Hf9wtYPetJ5J6gXP+zJhvxW2pNeHCpls9x76wMfUna8xSwe4GrvpIQhpSO26kbdM/O5zuUva0bNueik3Os=
+X-Received: by 2002:a67:d009:0:b0:3b1:4aad:9c47 with SMTP id
+ r9-20020a67d009000000b003b14aad9c47mr2915916vsi.73.1670309878190; Mon, 05 Dec
+ 2022 22:57:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAHVXubgp5G6HO4v8GwGx4KaDegPqc2mZH2BQzYqM+T1Hxx6bxQ@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x532.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20221117225518.4102575-1-conor@kernel.org>
+In-Reply-To: <20221117225518.4102575-1-conor@kernel.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 6 Dec 2022 16:57:31 +1000
+Message-ID: <CAKmqyKPySsh_h4LhmNihDNwZmCmh6yryhp-qnhsCH1BfeAC2Yw@mail.gmail.com>
+Subject: Re: [PATCH v3 0/3] Add (more) missing PolarFire SoC io regions
+To: Conor Dooley <conor@kernel.org>
+Cc: Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Conor Dooley <conor.dooley@microchip.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,17 +75,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Dec 2022 06:09:00 -0000
+X-List-Received-Date: Tue, 06 Dec 2022 06:58:14 -0000
 
-On Tue, Dec 06, 2022 at 06:57:39AM +0100, Alexandre Ghiti wrote:
-> 
-> I can't find the sve* properties you're talking about, can you point them
-> to me?
+On Fri, Nov 18, 2022 at 8:57 AM Conor Dooley <conor@kernel.org> wrote:
 >
+> From: Conor Dooley <conor.dooley@microchip.com>
+>
+> Hey all,
+> Apart from DDR (see [1]), these should be the last bits needed to get
+> recent Linux kernels booting again for Icicle/PolarFire SoC. Previously,
+> I had been disabling the hwrng and PCI but I keep forgetting that is
+> required and decided to fix that.
+>
+> I'm not entirely sure if I have done some sort of no-no thing by
+> registering the same interrupt with both the IOSCB and SYSREG regions.
+> The interrupt is raised after the system controller handles a service
+> via the mailbox. The mailbox's status, control and mailbox registers
+> are all part of the IOSCB region. It's cleared by a write to a register
+> in the SYSREG region.
+> Since my goal here is to add the regions/peripherals without actually
+> implementing them so that Linux etc, I'm just raising an interrupt
+> once a guest requests a service & reporting a status indicating that the
+> service request failed.
+>
+> Thanks,
+> Conor.
+>
+> 1 - https://lore.kernel.org/all/Y2+dUCpd8OP52%2FDJ@spud/
+>
+> Changes since v2:
+> - fix the actual bits in the register used for the service return
+>   status
+> - remove a duplicate irq_lower() in the sysreg bits of patch 3
+> - move the irq raise to a write function, raising it in the read one was
+>   causing the irq to get raised twice by the linux driver that works
+>   properly with the actual hardware. oops.
+>
+> Conor Dooley (3):
+>   hw/misc: pfsoc: add fabric clocks to ioscb
+>   hw/riscv: pfsoc: add missing FICs as unimplemented
+>   hw/{misc,riscv}: pfsoc: add system controller as unimplemented
 
-target/arm/cpu64.c: cpu_arm_get/set_vq() and arm_cpu_sve_finalize() and
-aarch64_add_sve_properties().
+Thanks!
 
-Thanks,
-drew
+Applied to riscv-to-apply.next
+
+Alistair
+
+>
+>  hw/misc/mchp_pfsoc_ioscb.c          |  78 +++++++++++++++++-
+>  hw/misc/mchp_pfsoc_sysreg.c         |  18 ++++-
+>  hw/riscv/microchip_pfsoc.c          | 121 ++++++++++++++++------------
+>  include/hw/misc/mchp_pfsoc_ioscb.h  |   4 +
+>  include/hw/misc/mchp_pfsoc_sysreg.h |   1 +
+>  include/hw/riscv/microchip_pfsoc.h  |   3 +
+>  6 files changed, 167 insertions(+), 58 deletions(-)
+>
+> --
+> 2.37.2
+>
+>
 
