@@ -1,35 +1,36 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2rHo-0004Xx-Bd
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 05:04:20 -0500
+	id 1p2rHt-0004bH-ID
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 05:04:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p2rHj-0004SH-0R; Wed, 07 Dec 2022 05:04:17 -0500
+ id 1p2rHr-0004a1-8H; Wed, 07 Dec 2022 05:04:23 -0500
 Received: from bg4.exmail.qq.com ([43.154.221.58])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p2rHf-0005Qc-Nt; Wed, 07 Dec 2022 05:04:13 -0500
-X-QQ-mid: bizesmtp63t1670407434tgqkxgoa
+ id 1p2rHn-0005rE-E7; Wed, 07 Dec 2022 05:04:23 -0500
+X-QQ-mid: bizesmtp63t1670407446tc09wn27
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Wed, 07 Dec 2022 18:03:53 +0800 (CST)
+ id ; Wed, 07 Dec 2022 18:04:05 +0800 (CST)
 X-QQ-SSF: 01200000000000B0B000000A0000000
-X-QQ-FEAT: FwowAM4HOqDeOYl6fTM2rbUy0nAlwA4gkI/W1xh57lzFvpPAZ77SS/zeGkqrf
- MkxV4TUNC2by/fSt2ji9jaUGRrVorHEJWdrV5eroc4T5xP4MQz8pot/cymfeyvROWKV1eU2
- XkntlvQ7iCyTURT2rd8YilNLSKyWKpxrcAdzXLzwxhiGWL/clKaMkY2wU21zwQMl5dRbtTi
- jNM8xitXZ1e58jKTVwAF9bOkiCBIlDp5wWjS97JeZdWYO1xzGXW7wItp1qGj8AuRR0DwMwD
- e0K6+HyphCIcBCLR+K5NS2QEmsx8ZC10NW4MLt/XVvsV5utdufa6MvXdbQeJoinoqFnqgFd
- WjPCMfSkSLw0Gm2FiECtOXyDIvsfFwK6PNM6c5BZcc81xKdtI8=
+X-QQ-FEAT: CEO3k+BsRkIAUuBXM7JEPeNKoQwu8Fi13FhefNBWoTeutJKCKGFWntDkSoM+h
+ LhpQof9BrU2BwyKfA+rbN3KXnHehwOI4g5Wwgub4RpOmLnaLgPhChlKsY9JtfftvT97Rbxq
+ IInou+06Z91X9x7u9VuXZokhtJKTbG+Ry2zyuIMpMFb3xlTJMEnEk+HPytfaWSp0g2HT1z9
+ aoxMmGQDXc3CUtQzgUUBnDapdTT8njyI+zGJyZylk79yVMZJJoubjkSp6mEFmmH8oFNz9TJ
+ s9vor9+aPapF9wkvFyLCBbFWEy7e11XTiFbG6VrbF/OkaOZX34vt+OIA8oPSq9SxhrUnm9Z
+ E2ia6DOWeDlscLrVzC2kheZFE5NGD1LXHgB72aQ50KQFMg5lrPamJ0XO4tbsw==
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
+Cc: Wilfred Mallawa <wilfred.mallawa@wdc.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v2 07/16] hw/intc: sifive_plic: Improve robustness of the PLIC
- config parser
-Date: Wed,  7 Dec 2022 18:03:26 +0800
-Message-Id: <20221207100335.290481-7-bmeng@tinylab.org>
+Subject: [PATCH v2 11/16] hw/riscv: sifive_e: Fix the number of interrupt
+ sources of PLIC
+Date: Wed,  7 Dec 2022 18:03:30 +0800
+Message-Id: <20221207100335.290481-11-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20221207100335.290481-1-bmeng@tinylab.org>
 References: <20221207100335.290481-1-bmeng@tinylab.org>
@@ -56,86 +57,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2022 10:04:18 -0000
+X-List-Received-Date: Wed, 07 Dec 2022 10:04:23 -0000
 
-At present the PLIC config parser can only handle legal config string
-like "MS,MS". However if a config string like ",MS,MS,,MS,MS,," is
-given the parser won't get the correct configuration.
+Per chapter 10 in Freedom E310 manuals [1][2][3], E310 G002 and G003
+supports 52 interrupt sources while G000 supports 51 interrupt sources.
 
-This commit improves the config parser to make it more robust.
+We use the value of G002 and G003, so it is 53 (including source 0).
 
+[1] G000 manual:
+https://sifive.cdn.prismic.io/sifive/4faf3e34-4a42-4c2f-be9e-c77baa4928c7_fe310-g000-manual-v3p2.pdf
+
+[2] G002 manual:
+https://sifive.cdn.prismic.io/sifive/034760b5-ac6a-4b1c-911c-f4148bb2c4a5_fe310-g002-v1p5.pdf
+
+[3] G003 manual:
+https://sifive.cdn.prismic.io/sifive/3af39c59-6498-471e-9dab-5355a0d539eb_fe310-g003-manual.pdf
+
+Fixes: eb637edb1241 ("SiFive Freedom E Series RISC-V Machine")
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 
 (no changes since v1)
 
- hw/intc/sifive_plic.c | 24 ++++++++++++++++--------
- 1 file changed, 16 insertions(+), 8 deletions(-)
+ include/hw/riscv/sifive_e.h | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-index 936dcf74bc..c9af94a888 100644
---- a/hw/intc/sifive_plic.c
-+++ b/hw/intc/sifive_plic.c
-@@ -290,7 +290,7 @@ static void sifive_plic_reset(DeviceState *dev)
-  */
- static void parse_hart_config(SiFivePLICState *plic)
- {
--    int addrid, hartid, modes;
-+    int addrid, hartid, modes, m;
-     const char *p;
-     char c;
+diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+index d738745925..9e58247fd8 100644
+--- a/include/hw/riscv/sifive_e.h
++++ b/include/hw/riscv/sifive_e.h
+@@ -82,7 +82,12 @@ enum {
+ };
  
-@@ -299,11 +299,13 @@ static void parse_hart_config(SiFivePLICState *plic)
-     p = plic->hart_config;
-     while ((c = *p++)) {
-         if (c == ',') {
--            addrid += ctpop8(modes);
--            modes = 0;
--            hartid++;
-+            if (modes) {
-+                addrid += ctpop8(modes);
-+                hartid++;
-+                modes = 0;
-+            }
-         } else {
--            int m = 1 << char_to_mode(c);
-+            m = 1 << char_to_mode(c);
-             if (modes == (modes | m)) {
-                 error_report("plic: duplicate mode '%c' in config: %s",
-                              c, plic->hart_config);
-@@ -314,8 +316,9 @@ static void parse_hart_config(SiFivePLICState *plic)
-     }
-     if (modes) {
-         addrid += ctpop8(modes);
-+        hartid++;
-+        modes = 0;
-     }
--    hartid++;
- 
-     plic->num_addrs = addrid;
-     plic->num_harts = hartid;
-@@ -326,11 +329,16 @@ static void parse_hart_config(SiFivePLICState *plic)
-     p = plic->hart_config;
-     while ((c = *p++)) {
-         if (c == ',') {
--            hartid++;
-+            if (modes) {
-+                hartid++;
-+                modes = 0;
-+            }
-         } else {
-+            m = char_to_mode(c);
-             plic->addr_config[addrid].addrid = addrid;
-             plic->addr_config[addrid].hartid = hartid;
--            plic->addr_config[addrid].mode = char_to_mode(c);
-+            plic->addr_config[addrid].mode = m;
-+            modes |= (1 << m);
-             addrid++;
-         }
-     }
+ #define SIFIVE_E_PLIC_HART_CONFIG "M"
+-#define SIFIVE_E_PLIC_NUM_SOURCES 127
++/*
++ * Freedom E310 G002 and G003 supports 52 interrupt sources while
++ * Freedom E310 G000 supports 51 interrupt sources. We use the value
++ * of G002 and G003, so it is 53 (including interrupt source 0).
++ */
++#define SIFIVE_E_PLIC_NUM_SOURCES 53
+ #define SIFIVE_E_PLIC_NUM_PRIORITIES 7
+ #define SIFIVE_E_PLIC_PRIORITY_BASE 0x04
+ #define SIFIVE_E_PLIC_PENDING_BASE 0x1000
 -- 
 2.34.1
-
 
 
