@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2n7S-0001Db-8w
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 00:37:25 -0500
+	id 1p2oC2-0005cG-Uz
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 01:46:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p2n7L-0001CY-EB; Wed, 07 Dec 2022 00:37:15 -0500
-Received: from mail-vk1-xa36.google.com ([2607:f8b0:4864:20::a36])
+ id 1p2oBw-0005aB-1P; Wed, 07 Dec 2022 01:46:04 -0500
+Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p2n7J-0000lG-Hh; Wed, 07 Dec 2022 00:37:15 -0500
-Received: by mail-vk1-xa36.google.com with SMTP id bi15so7788877vkb.11;
- Tue, 06 Dec 2022 21:37:12 -0800 (PST)
+ id 1p2oBu-0001K4-8w; Wed, 07 Dec 2022 01:46:03 -0500
+Received: by mail-vs1-xe2a.google.com with SMTP id 128so16334659vsz.12;
+ Tue, 06 Dec 2022 22:46:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=f5hPAj7G9UJcFf7AumwPBH5BsSFgTA1asv5/4HiTtiU=;
- b=FEAgJtrYBrqhKDKFBRFGiH9NEU7rZdxouZc180bqQbIHu6Py0iviH+Zonhz6j6/Ifi
- tMbLKlle17CnHs34lvWOzrzJBXvRfSfYcWsPOCYbiS8tULFdDkuNqzEDrZEvvaRR0PeR
- XulXBJmCRaHlNiAmCPRIha1651wS3XITzVQ6cq6MnUA71V9IXUNXoS4dnszfVbeDruT0
- mNO7m9FprRYfafC8YZGw34uu+ucLcSziAjeMlr1kA4AC7hI0gYKAd1OP2uCJe32xS0a2
- Ty7m74/+Wqd3FMX6pfYD+WcrxmUFPv71CC3EzsBeeJroyDwZeaK5B/6srYehbP6Dt3EY
- giug==
+ bh=wi7ZTaUz1zcdIGcRxSB3KRPsckvGVaoLQg06IOUu7h0=;
+ b=HORshVzqmAIl1jlqMbpYXZTGqUhs+AvRML2BbPA/EhR3C45aDHq9jT6iHfi0/d6FH4
+ Pif5g1ResN/38V3y6U58hGf9I1nb+ElFH1RWibPG4JtaRj60MYSYTUnRGQ+6oFL5WReP
+ 30ZGHKmAuaO/Gf9JARCgPkEJShmb07zYKEziEjFKoDVmfvrL9DAlP4muVgADASskOdyT
+ MS2YM23GNmz19UW2DOdSw6g2Rt9YuxoQ9aWcph8PGmRjAModTa0w3WEDk8CC2RV68Jxv
+ WKSYNk0ia61PCQH0gqz+NeIQHbiAZkhShJHxD+gvuonNOtjNgRERmgtNTLMIibPWbIT+
+ q9Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=f5hPAj7G9UJcFf7AumwPBH5BsSFgTA1asv5/4HiTtiU=;
- b=Tp7L/fr9FfzKQXwei6wv+ehM8sB3jHr9aJ9ucrNKr1zifq+C5dmqApJiNoDF2lEjrc
- ZaNuZmNyhsKjOH8RQVevcjLU1mZ9ub+ldKQ7xwXs4YdarKRkdIleYu1DqxQ5AjPrRfNj
- jgK3b2BwRO3yLDCs969gbuM4YcFHmZ2M/eu3TY8EhYD5Ua9UKzmUBftkAXPvoRZ6fUBD
- E+dc6fcsFLRZbjnURR3TdD0aB/GRyFUZJvVYY4Y1Yqgvm+rfWX++XSnQ9GOQG/czwcJb
- 3NM2oo+t5Ew+5KOzQLQKKAsFssQBUEbmHeTLgSIH5WIeyeJDh7tE3Q1pCNw9AaXz1i1A
- hLOw==
-X-Gm-Message-State: ANoB5pmE3av61cMGIu/NLFY/EMc/4d/KYTKMDU6FkfI9wvFLpUKyKzOT
- O4AkOOYic9Bu5PhCszVKVC4aiFNWBQtoN6KuUoA=
-X-Google-Smtp-Source: AA0mqf5QZmrw7dzCgGVfr5Z4oYesbyVk+7dKEMqvWQiDH6iJfacVrhOFrkd/oD/azcyd6eUrEPYqudVKB0EaL3t6Pc4=
-X-Received: by 2002:a1f:e3c6:0:b0:3b8:ba98:bd43 with SMTP id
- a189-20020a1fe3c6000000b003b8ba98bd43mr43113937vkh.34.1670391431704; Tue, 06
- Dec 2022 21:37:11 -0800 (PST)
+ bh=wi7ZTaUz1zcdIGcRxSB3KRPsckvGVaoLQg06IOUu7h0=;
+ b=cRtgQe9Kp4Mex8+xbAsrpPto9KQaz0qh0FFPI6E8SBePSueFkfvPwI7C9vjxIXQV+P
+ TNdVCQaLjaGC1MXMwq7wvzDStbOJ4zabxQT27sw+22EHdGu7UsGeGLhkanqF/fupX4aG
+ W2t/YlmsLgLrWTB6yc/jRlMle0IXHX79rSNarj4V97zibUXxiH6KxzzhCsKjHSG4Vsdy
+ pzyclnlS8r2xEAn8smP4jOSWqQCMztv4G0jnC09MFJ0y1Vot72F0uMhhkZ/XuVCUrbK3
+ VBKxybRYi8M7LgN5IxOeRFzRPnkXVFGRSIjPP/j/VOV3cogwE4sLlw2xDCWXTr5vtYlc
+ HJcA==
+X-Gm-Message-State: ANoB5pngUSpMSmHTecy+5umhermvbFUt4kRYye7fJnxhebVcbcynRc70
+ lLqo1LxySYT+hvSHrlXXsFPe045ywSREh7lvSC4loCEeW7E=
+X-Google-Smtp-Source: AA0mqf5/Z1jMmLD3Ds+wdp7SvvCxawyN7+b1KsNHghx4Ci8DQzl5ETDl/jk6hFMB1wUojdVDkIHfw7G+jMaUVk/VSys=
+X-Received: by 2002:a05:6102:3bc1:b0:3a7:9b8c:2e4c with SMTP id
+ a1-20020a0561023bc100b003a79b8c2e4cmr37026981vsv.72.1670395559489; Tue, 06
+ Dec 2022 22:45:59 -0800 (PST)
 MIME-Version: 1.0
 References: <20221203175744.151365-1-richard.henderson@linaro.org>
 In-Reply-To: <20221203175744.151365-1-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 7 Dec 2022 15:36:45 +1000
-Message-ID: <CAKmqyKMBuNoGcxoU1jUZigM7kQqSfDCN4pY=1Ki45wy_qct20A@mail.gmail.com>
+Date: Wed, 7 Dec 2022 16:45:33 +1000
+Message-ID: <CAKmqyKMBFxTzutQGADWcZgf=fJqjrTtS9kuoiHgrpwb1qv+WQQ@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Set pc_succ_insn for !rvc illegal insn
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, alistair.francis@wdc.com, bin.meng@windriver.com, 
  qemu-riscv@nongnu.org, qemu-stable@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a36;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,7 +72,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2022 05:37:16 -0000
+X-List-Received-Date: Wed, 07 Dec 2022 06:46:06 -0000
 
 On Sun, Dec 4, 2022 at 3:58 AM Richard Henderson
 <richard.henderson@linaro.org> wrote:
@@ -84,7 +84,9 @@ On Sun, Dec 4, 2022 at 3:58 AM Richard Henderson
 > Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1224
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
