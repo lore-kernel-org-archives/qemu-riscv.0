@@ -1,74 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2oPz-00081z-P7
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 02:00:36 -0500
+	id 1p2po6-0004r5-AZ
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 03:29:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p2oPq-00080p-Ai
- for qemu-riscv@nongnu.org; Wed, 07 Dec 2022 02:00:33 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p2oPn-00009A-Kn
- for qemu-riscv@nongnu.org; Wed, 07 Dec 2022 02:00:25 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- h8-20020a1c2108000000b003d1efd60b65so388209wmh.0
- for <qemu-riscv@nongnu.org>; Tue, 06 Dec 2022 23:00:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=I18epeLpw50esSdUOLnd6DwcxshhgMSh+Zo9m+jL/JQ=;
- b=v5Sr5WpOJFVeufhCfLnJhCDrc9UyysCyRE+QFC7lRw/9lX2ymkDbOQibU7M89c5l0g
- sNC15aJSbPt9+Q3aYhYZefnJNZGzJZwHCm+tkFZBEjN9rDb43ohIjC220cdRDy63P+7I
- Vtk5ENsaaF8IYCRA8D10QgrweygvkWUS8EW4Pvc98LPPZ4HYGMSDqnZpAEEb3vBrxafz
- yS4dA3G5O7yYOcN6K6NjkrM57y5qlN0vw41Id+O6A0t9bfJiJBqc8SbbZDXzv1LrF68g
- D5NGReTqsCJ1p9wvomdfs5BEO4jj/FhNmKRTQ11Qhky2wsDyS60K1qNQeDFhB4CZOjUh
- d64g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=I18epeLpw50esSdUOLnd6DwcxshhgMSh+Zo9m+jL/JQ=;
- b=ft4yUbnnvxI8ZdHPQvp4l0NAgQNzsp8gire+a23Jwi0Qwg1PznN7/Jsr2tAO0fE6V3
- 8RJ+UYhRsC6xYjAHrFEq9PQ9NZBpGrDlvR3bK2fdzZIOjhLoo8e+q3k9YIIHEZx2In1s
- ibaR+Fzu3RCXWJH/fdTfcq5PU9E9iNJ1I2PsqNPKaZzff//VOnRjX++tWnzccI4eIQCO
- efXC0G9YxIdzOuNrF8/iZC1RsVdQ6Xv/Lw2lx6nhT11BdCPHVa7pbBelPevO0rb12PHT
- +YZ1jmkaWSsyXj259VumXZS2x955YHDkdeSVit2WWh73UO8eaKxiRiU7yzr6AXlxFKmU
- Qk2A==
-X-Gm-Message-State: ANoB5pnl9smYyU7/hfKH3D8BvKgKYH2r/bv2apy2dB8bMgddTIdGcCUv
- 7bd4W6YfPwGRYMqmepKQIgQbxw==
-X-Google-Smtp-Source: AA0mqf6ytC5Off81jpjE6VIV/Y/3iAplEQ7gPCJn2BhR+hQSe0y6USwYbNIF/P5gc76Ug0PKspvslQ==
-X-Received: by 2002:a05:600c:4f82:b0:3cf:aa11:9394 with SMTP id
- n2-20020a05600c4f8200b003cfaa119394mr52965115wmq.183.1670396420334; 
- Tue, 06 Dec 2022 23:00:20 -0800 (PST)
-Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- bd10-20020a05600c1f0a00b003cf774c31a0sm671156wmb.16.2022.12.06.23.00.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Dec 2022 23:00:19 -0800 (PST)
-Message-ID: <bedfefae-fe78-2c1e-6219-20ccb90f34b4@linaro.org>
-Date: Wed, 7 Dec 2022 08:00:18 +0100
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1p2po4-0004qg-3K; Wed, 07 Dec 2022 03:29:32 -0500
+Received: from ams.source.kernel.org ([145.40.68.75])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1p2po2-0007DK-6O; Wed, 07 Dec 2022 03:29:31 -0500
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id D9FD1B8074C;
+ Wed,  7 Dec 2022 08:29:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 304F9C433B5;
+ Wed,  7 Dec 2022 08:29:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1670401763;
+ bh=DMcKk6bIK0ql1DMkSVpiC2h+8c892tw+BLBgFJ74zFE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Vn0CFnGQaHHxxTrNRZH5mkkzzgjgCUl3fUSGHSuulpoam0R5LYrioudVJrcxwQ1L2
+ 31lz/xtIN8YYNxbaOUTYPMusQbO36Pnu8zbJUuwRWLwTnRVQSkPspsmwg5IjhIqlcQ
+ jy8L/hTQC/hOXK0YyhZhGfnJIqkwlq/xYZ+nNhAkZu8zRrkf5b3L2juuRy3yEQbAHh
+ guufuLSG0wymH1uEbPRf+5AuzJASHPIrTXk+cPeb+xVaLGQbMIrXPrDlzekkDOJgeb
+ UEorApM4QpJct+n/e+ewiM/xuN3LBnOkmydnaMcWFbdpc4EviFDUfodJJQJUsFJ301
+ 1dnYVfHqUKsjA==
+Date: Wed, 7 Dec 2022 08:29:19 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Bin Meng <bmeng@tinylab.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
+Subject: Re: [PATCH 09/15] hw/riscv: microchip_pfsoc: Fix the number of
+ interrupt sources of PLIC
+Message-ID: <Y5BO39xT91oj+q8c@spud>
+References: <20221201140811.142123-1-bmeng@tinylab.org>
+ <20221201140811.142123-9-bmeng@tinylab.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.5.1
-Subject: Re: [PATCH] target/riscv: Set pc_succ_insn for !rvc illegal insn
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
- qemu-stable@nongnu.org
-References: <20221203175744.151365-1-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20221203175744.151365-1-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.27,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="Ghc8nsIDADhHRmx5"
+Content-Disposition: inline
+In-Reply-To: <20221201140811.142123-9-bmeng@tinylab.org>
+Received-SPF: pass client-ip=145.40.68.75; envelope-from=conor@kernel.org;
+ helo=ams.source.kernel.org
+X-Spam_score_int: -70
+X-Spam_score: -7.1
+X-Spam_bar: -------
+X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,22 +63,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2022 07:00:33 -0000
+X-List-Received-Date: Wed, 07 Dec 2022 08:29:32 -0000
 
-On 3/12/22 18:57, Richard Henderson wrote:
-> Failure to set pc_succ_insn may result in a TB covering zero bytes,
-> which triggers an assert within the code generator.
-> 
-> Cc: qemu-stable@nongnu.org
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1224
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+
+--Ghc8nsIDADhHRmx5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Dec 01, 2022 at 10:08:05PM +0800, Bin Meng wrote:
+> Per chapter 6.5.2 in [1], the number of interupt sources including
+> interrupt source 0 should be 187.
+>=20
+> [1] PolarFire SoC MSS TRM:
+> https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/ProductDo=
+cuments/ReferenceManuals/PolarFire_SoC_FPGA_MSS_Technical_Reference_Manual_=
+VC.pdf
+
+Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
+Thanks!
+
+>=20
+> Fixes: 56f6e31e7b7e ("hw/riscv: Initial support for Microchip PolarFire S=
+oC Icicle Kit board")
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
 > ---
->   target/riscv/translate.c          | 12 ++++--------
->   tests/tcg/Makefile.target         |  2 ++
->   tests/tcg/riscv64/Makefile.target |  5 +++++
->   tests/tcg/riscv64/test-noc.S      | 32 +++++++++++++++++++++++++++++++
->   4 files changed, 43 insertions(+), 8 deletions(-)
->   create mode 100644 tests/tcg/riscv64/test-noc.S
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>=20
+>  include/hw/riscv/microchip_pfsoc.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microc=
+hip_pfsoc.h
+> index a757b240e0..9720bac2d5 100644
+> --- a/include/hw/riscv/microchip_pfsoc.h
+> +++ b/include/hw/riscv/microchip_pfsoc.h
+> @@ -150,7 +150,7 @@ enum {
+>  #define MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT    1
+>  #define MICROCHIP_PFSOC_COMPUTE_CPU_COUNT       4
+> =20
+> -#define MICROCHIP_PFSOC_PLIC_NUM_SOURCES        185
+> +#define MICROCHIP_PFSOC_PLIC_NUM_SOURCES        187
+>  #define MICROCHIP_PFSOC_PLIC_NUM_PRIORITIES     7
+>  #define MICROCHIP_PFSOC_PLIC_PRIORITY_BASE      0x04
+>  #define MICROCHIP_PFSOC_PLIC_PENDING_BASE       0x1000
+> --=20
+> 2.34.1
+>=20
+>=20
+>=20
 
+--Ghc8nsIDADhHRmx5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCY5BO3wAKCRB4tDGHoIJi
+0lCWAP9JWmovmKE763uJvggq41lOoyfmAz1He32aRYALbRHVBAEAk1s2D3bL1guN
+/Otw/Coba0MJZ0QAJvI7UC/8A2nC1AU=
+=klRN
+-----END PGP SIGNATURE-----
+
+--Ghc8nsIDADhHRmx5--
 
