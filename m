@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2m5T-0002ql-0Q
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Dec 2022 23:31:15 -0500
+	id 1p2m6D-00030b-OW
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Dec 2022 23:32:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p2m5P-0002qN-Hk; Tue, 06 Dec 2022 23:31:13 -0500
-Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
+ id 1p2m63-0002tx-SQ; Tue, 06 Dec 2022 23:31:59 -0500
+Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p2m5N-0005Jj-Rt; Tue, 06 Dec 2022 23:31:11 -0500
-Received: by mail-vs1-xe2d.google.com with SMTP id t5so16169362vsh.8;
- Tue, 06 Dec 2022 20:31:08 -0800 (PST)
+ id 1p2m5z-0005NR-Gh; Tue, 06 Dec 2022 23:31:48 -0500
+Received: by mail-vk1-xa34.google.com with SMTP id o5so5445034vkn.7;
+ Tue, 06 Dec 2022 20:31:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0zxh1DovzUYD3vbtHwGLbQle5lO4Uxz9yI1GeM1F0Hk=;
- b=H89G2FgIiw/WVi16uX4jqv71Udjowu9BZKvCENx853MRcN2R0LTRaK7YZ3xA5n9CWX
- xEjUa8OCtieh6RgRmIZOVHBplPXxXHlIN4hanneTBmOazKcF3SdPERjD96QvpTPSLGjj
- q/qDFgw5MZRD8wNjT3rS9aWp9ftEkdD0+cMeyqiti1NSuNkh+ReaijlAJD3p/IwN2azC
- Q7eZHfjXps4suL5UpsqwHOGqsiFmwcW4mQD8wPwhEMCtTKMCp6r5FAusMgFkdsZphdpc
- Z4NwiuhEkNBT02kkZH4C/ribZzj8diwcaK3WLdJUFyfhlKhhLhSBS56Naa+gyBC2tPkO
- BNSw==
+ bh=Sme55OwCecG8q78kMdFz74nNhAWiLwvh5VxRVS5lOuc=;
+ b=J66iqjIy4rlYRunZA3R7HWnehA0S36bKzev5WRkvBQYXFqA0B3YuT/Epmr6Q7JeJRh
+ apSpQAeb03PNKL+aI8T/cbibtpesCmk/yoF2+kHLhMaOS3wOD65HDasT24Ly6E7rtko6
+ iuBBD22llGThw2Q301Z0xfGDIAvi6on0y/a/I6XMWVokNQ621GHVl1mPMGpjol0Hr93s
+ +jHS/BgR0d6ZY2iPt7DVCU8s6wgcNLy88bpFIl1qeaMgv/TJQ/xhN3YF1ouJC3qFDo3O
+ fskLYRv+hknpsEANlToGhL7b1Eki7/MecfsbSh2WfO29a3C11p3o0+U/ZNlfhHuvvh33
+ mD5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0zxh1DovzUYD3vbtHwGLbQle5lO4Uxz9yI1GeM1F0Hk=;
- b=B5NVtqPWhyEwJA05Bpkb/X8tYkHLsiXKXljMvFp3NYfzzPLDl+pTUpClAiFTxIOvEC
- 7Ko+7l2OwdMBna8UZkAlRsWGlatmeU+50GlBBTi7PjJ6piDy1vYo+KtUGygLF8BBil6X
- CgoBHwzIau24IZVLlCsT+aChH5kwWxo2GRolUu/8skL4Sc10nyJZl/1KOBKuFqLJe/Hr
- sUpVQOVOVqHvj1nFsNybIo0BXfCqlSbstCngT7gbzrnbYoRfY6xPOn6eyheo9YcCshxJ
- +JFnZr0+tZEN3v5c8Go/DYArCK3KN1fuMLwr61xY5zd2qxNA/WFhOV3x0nyJ23zjEs9O
- XoGw==
-X-Gm-Message-State: ANoB5pkQVjYG5jKVLXxlhUELS9v7PvT/ENuXFXgb8uADQEOLmQwz4Hs0
- fjpHhifxH8vJYuNvQZMqr3SNF5NiAHx9iJcHWgzNjmh0Xb0=
-X-Google-Smtp-Source: AA0mqf77wIo2pjjgzSGEWBGlOSmxg3aQUh7mkk2Feq7nP4n1/s3OznnDEwTxktbqYEPOh98KxbWnnT1nNyKaAXE5IqU=
-X-Received: by 2002:a05:6102:302b:b0:3b0:f936:788b with SMTP id
- v11-20020a056102302b00b003b0f936788bmr14067536vsa.54.1670387468165; Tue, 06
- Dec 2022 20:31:08 -0800 (PST)
+ bh=Sme55OwCecG8q78kMdFz74nNhAWiLwvh5VxRVS5lOuc=;
+ b=JeWkAMtbooX2duNmjmrwWduadusLzJc8c1dZlLh5ZHpfsYxDXEmgcp+RYUF042Tx+m
+ WVXnnNRy1N/qFsoj+BOT5Z2eLNtpCx9wW8dYbONwlR2W8QjbAndaMmkSLcGC0DN+ZZEe
+ F9CLNLqPdjofFXtRFB46dkrrvqotSJAFkJKihCZo2ZURduOSuF/goBCOHuXnFHw99z3c
+ p3L5+TlFHEKm/883gi5B95B7TyElwOSjc5GoblMYR8xS9Yjlp10QO6H8gKAKXql7iI62
+ q0MvTgUBgEv85yQhDX5xfNbKvQAFdpdUlayb+0yUr9bgL/Hk1NFQdbnCsZTMsCoPtLFs
+ c8bQ==
+X-Gm-Message-State: ANoB5pmbiwVpvkiVFHIDHDsAUMM8I5vxWII91/qaPI72vLi1FZw5SYpu
+ gLHDhf+ZPt8ruphA34K9w/lp69RCjzCscs1VNbo=
+X-Google-Smtp-Source: AA0mqf79mAMq2mK9KckIQ+uvBzOI+xV+TSz7cGHAmfaIemGzAjE+OVx6YnENKuk/bCTRTyH0DKsXqhwKxQz4O61aOA4=
+X-Received: by 2002:a1f:3846:0:b0:3bc:c843:c7b5 with SMTP id
+ f67-20020a1f3846000000b003bcc843c7b5mr26241383vka.30.1670387506056; Tue, 06
+ Dec 2022 20:31:46 -0800 (PST)
 MIME-Version: 1.0
 References: <20221201140811.142123-1-bmeng@tinylab.org>
- <20221201140811.142123-9-bmeng@tinylab.org>
-In-Reply-To: <20221201140811.142123-9-bmeng@tinylab.org>
+ <20221201140811.142123-10-bmeng@tinylab.org>
+In-Reply-To: <20221201140811.142123-10-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 7 Dec 2022 14:30:41 +1000
-Message-ID: <CAKmqyKO_=Fp9cc8Z4z94zLPjgpOZbNnZzW5BOf42+dRWw2ij7Q@mail.gmail.com>
-Subject: Re: [PATCH 09/15] hw/riscv: microchip_pfsoc: Fix the number of
- interrupt sources of PLIC
+Date: Wed, 7 Dec 2022 14:31:19 +1000
+Message-ID: <CAKmqyKNM1Ng=ud0MyWQPhY_jQ+0qgJ4zSX5WraHhgXKSfUutAQ@mail.gmail.com>
+Subject: Re: [PATCH 10/15] hw/riscv: sifive_e: Fix the number of interrupt
+ sources of PLIC
 To: Bin Meng <bmeng@tinylab.org>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, 
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,17 +75,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2022 04:31:13 -0000
+X-List-Received-Date: Wed, 07 Dec 2022 04:32:00 -0000
 
-On Fri, Dec 2, 2022 at 12:11 AM Bin Meng <bmeng@tinylab.org> wrote:
+On Fri, Dec 2, 2022 at 12:12 AM Bin Meng <bmeng@tinylab.org> wrote:
 >
-> Per chapter 6.5.2 in [1], the number of interupt sources including
-> interrupt source 0 should be 187.
+> Per chapter 10 in Freedom E310 manuals [1][2][3], E310 G002 and G003
+> supports 52 interrupt sources while G000 supports 51 interrupt sources.
 >
-> [1] PolarFire SoC MSS TRM:
-> https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/ProductDocuments/ReferenceManuals/PolarFire_SoC_FPGA_MSS_Technical_Reference_Manual_VC.pdf
+> We use the value of G002 and G003, so it is 53 (including source 0).
 >
-> Fixes: 56f6e31e7b7e ("hw/riscv: Initial support for Microchip PolarFire SoC Icicle Kit board")
+> [1] G000 manual:
+> https://sifive.cdn.prismic.io/sifive/4faf3e34-4a42-4c2f-be9e-c77baa4928c7_fe310-g000-manual-v3p2.pdf
+>
+> [2] G002 manual:
+> https://sifive.cdn.prismic.io/sifive/034760b5-ac6a-4b1c-911c-f4148bb2c4a5_fe310-g002-v1p5.pdf
+>
+> [3] G003 manual:
+> https://sifive.cdn.prismic.io/sifive/3af39c59-6498-471e-9dab-5355a0d539eb_fe310-g003-manual.pdf
+>
+> Fixes: eb637edb1241 ("SiFive Freedom E Series RISC-V Machine")
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -94,22 +102,27 @@ Alistair
 
 > ---
 >
->  include/hw/riscv/microchip_pfsoc.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  include/hw/riscv/sifive_e.h | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
 >
-> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
-> index a757b240e0..9720bac2d5 100644
-> --- a/include/hw/riscv/microchip_pfsoc.h
-> +++ b/include/hw/riscv/microchip_pfsoc.h
-> @@ -150,7 +150,7 @@ enum {
->  #define MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT    1
->  #define MICROCHIP_PFSOC_COMPUTE_CPU_COUNT       4
+> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+> index d738745925..9e58247fd8 100644
+> --- a/include/hw/riscv/sifive_e.h
+> +++ b/include/hw/riscv/sifive_e.h
+> @@ -82,7 +82,12 @@ enum {
+>  };
 >
-> -#define MICROCHIP_PFSOC_PLIC_NUM_SOURCES        185
-> +#define MICROCHIP_PFSOC_PLIC_NUM_SOURCES        187
->  #define MICROCHIP_PFSOC_PLIC_NUM_PRIORITIES     7
->  #define MICROCHIP_PFSOC_PLIC_PRIORITY_BASE      0x04
->  #define MICROCHIP_PFSOC_PLIC_PENDING_BASE       0x1000
+>  #define SIFIVE_E_PLIC_HART_CONFIG "M"
+> -#define SIFIVE_E_PLIC_NUM_SOURCES 127
+> +/*
+> + * Freedom E310 G002 and G003 supports 52 interrupt sources while
+> + * Freedom E310 G000 supports 51 interrupt sources. We use the value
+> + * of G002 and G003, so it is 53 (including interrupt source 0).
+> + */
+> +#define SIFIVE_E_PLIC_NUM_SOURCES 53
+>  #define SIFIVE_E_PLIC_NUM_PRIORITIES 7
+>  #define SIFIVE_E_PLIC_PRIORITY_BASE 0x04
+>  #define SIFIVE_E_PLIC_PENDING_BASE 0x1000
 > --
 > 2.34.1
 >
