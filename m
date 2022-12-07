@@ -1,35 +1,34 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2rHm-0004Sr-2e
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 05:04:18 -0500
+	id 1p2rHn-0004UB-7D
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 05:04:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p2rHb-0004M4-Rp; Wed, 07 Dec 2022 05:04:09 -0500
+ id 1p2rHk-0004Se-T1; Wed, 07 Dec 2022 05:04:17 -0500
 Received: from bg4.exmail.qq.com ([43.154.221.58])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p2rHa-0005Fm-3e; Wed, 07 Dec 2022 05:04:07 -0500
-X-QQ-mid: bizesmtp63t1670407431tyjoqs48
+ id 1p2rHh-0005Ur-LK; Wed, 07 Dec 2022 05:04:15 -0500
+X-QQ-mid: bizesmtp63t1670407437tj8ehx7y
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Wed, 07 Dec 2022 18:03:50 +0800 (CST)
+ id ; Wed, 07 Dec 2022 18:03:56 +0800 (CST)
 X-QQ-SSF: 01200000000000B0B000000A0000000
-X-QQ-FEAT: 4MPk5pQyRCVYX0ek3eYgkAbLjjH8AGe3Md3+nGwGgSHLJ+eW9R16Zne5ER58X
- eNa/3BYP2BJe7BflqxBeK/GNhiYSjiQq7BpBUWaVUqdVU55Q0JryUar6Y8/HFDdB2CW5xAT
- SUCGpva9wHfgYhLq+XkWyShVWVRFayAH0fKRzaad2EGflI9RZATc4HBI5ubsVklxaWlDcmp
- aamdvBTcue2xP+RL3dPbIK1X5RVDpfBcBwYUZML6K8au+pII9ry9us9IfseecIm9Ya9Ly04
- 7ff2p+0d0lpLG+XjFJvO/Uscyn7PYGPNrr4sugpQAUX0ohVYtGXUMxc4ugu3gf0AlINOLAH
- 2Rj329i7BXUAqcjVVQe0cuIYAQPvK6XoXu1eX0Y
+X-QQ-FEAT: f+ZzKTjTzV3kuvRgkydlCISIFB4Iu1/5xhbBsW/dCBu9Urt8DndUAlGbbCvnF
+ KivxeotxlhCUeMBExHwka7I/KWXXuB9Yu7UQNtyOmAi77IP3D0HKik4DTENG/PyYVyHjpUf
+ S6pX7brvqmqHJLhI8gVZyZFT83vHAvvg/Rgqul1ApGHw7fgaIlvRMxV2jR4EKXDbU6Ys9vr
+ BegEAA6pDwgZW6FLBW6FNwEa43RaCQ8tkhBAwBfO8dsEsiiB6NoK4symKBCxCbutqCNcAJF
+ PEF5jjHyegACEJKe2VuXhc2+7Nl9LD97mokvIdC3es+5SDJsSFGyJaYp3LXCSgeHceXYjsn
+ 9auIU0BPzKY2OoiRfVw/TNnWnraK/ra7J7nC32XbFWmPW14qX8=
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
-Cc: Wilfred Mallawa <wilfred.mallawa@wdc.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v2 06/16] hw/intc: sifive_plic: Drop PLICMode_H
-Date: Wed,  7 Dec 2022 18:03:25 +0800
-Message-Id: <20221207100335.290481-6-bmeng@tinylab.org>
+Subject: [PATCH v2 08/16] hw/intc: sifive_plic: Use error_setg() to propagate
+ the error up via errp in sifive_plic_realize()
+Date: Wed,  7 Dec 2022 18:03:27 +0800
+Message-Id: <20221207100335.290481-8-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20221207100335.290481-1-bmeng@tinylab.org>
 References: <20221207100335.290481-1-bmeng@tinylab.org>
@@ -56,45 +55,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2022 10:04:11 -0000
+X-List-Received-Date: Wed, 07 Dec 2022 10:04:18 -0000
 
-H-mode has been removed since priv spec 1.10. Drop it.
+The realize() callback has an errp for us to propagate the error up.
+While we are here, corret the wrong multi-line comment format.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
 ---
 
-(no changes since v1)
+Changes in v2:
+- new patch: "hw/intc: sifive_plic: Use error_setg() to propagate the error up via errp in sifive_plic_realize()"
 
- include/hw/intc/sifive_plic.h | 1 -
- hw/intc/sifive_plic.c         | 1 -
- 2 files changed, 2 deletions(-)
+ hw/intc/sifive_plic.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/include/hw/intc/sifive_plic.h b/include/hw/intc/sifive_plic.h
-index 134cf39a96..d3f45ec248 100644
---- a/include/hw/intc/sifive_plic.h
-+++ b/include/hw/intc/sifive_plic.h
-@@ -33,7 +33,6 @@ DECLARE_INSTANCE_CHECKER(SiFivePLICState, SIFIVE_PLIC,
- typedef enum PLICMode {
-     PLICMode_U,
-     PLICMode_S,
--    PLICMode_H,
-     PLICMode_M
- } PLICMode;
- 
 diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-index 0c7696520d..936dcf74bc 100644
+index c9af94a888..9cb4c6d6d4 100644
 --- a/hw/intc/sifive_plic.c
 +++ b/hw/intc/sifive_plic.c
-@@ -42,7 +42,6 @@ static PLICMode char_to_mode(char c)
-     switch (c) {
-     case 'U': return PLICMode_U;
-     case 'S': return PLICMode_S;
--    case 'H': return PLICMode_H;
-     case 'M': return PLICMode_M;
-     default:
-         error_report("plic: invalid mode '%c'", c);
+@@ -379,7 +379,8 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
+     s->m_external_irqs = g_malloc(sizeof(qemu_irq) * s->num_harts);
+     qdev_init_gpio_out(dev, s->m_external_irqs, s->num_harts);
+ 
+-    /* We can't allow the supervisor to control SEIP as this would allow the
++    /*
++     * We can't allow the supervisor to control SEIP as this would allow the
+      * supervisor to clear a pending external interrupt which will result in
+      * lost a interrupt in the case a PLIC is attached. The SEIP bit must be
+      * hardware controlled when a PLIC is attached.
+@@ -387,8 +388,8 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
+     for (i = 0; i < s->num_harts; i++) {
+         RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(s->hartid_base + i));
+         if (riscv_cpu_claim_interrupts(cpu, MIP_SEIP) < 0) {
+-            error_report("SEIP already claimed");
+-            exit(1);
++            error_setg(errp, "SEIP already claimed");
++            return;
+         }
+     }
+ 
 -- 
 2.34.1
 
