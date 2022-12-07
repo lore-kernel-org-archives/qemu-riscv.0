@@ -1,49 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2rIL-000533-UR
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 05:04:53 -0500
+	id 1p2rPJ-0006F1-FI
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 05:12:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p2rIC-0004tG-Rx; Wed, 07 Dec 2022 05:04:45 -0500
-Received: from bg4.exmail.qq.com ([43.154.221.58])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p2rI3-0006Us-S4; Wed, 07 Dec 2022 05:04:39 -0500
-X-QQ-mid: bizesmtp63t1670407461tbqb1ehp
-Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Wed, 07 Dec 2022 18:04:20 +0800 (CST)
-X-QQ-SSF: 01200000000000B0B000000A0000000
-X-QQ-FEAT: znfcQSa1hKbrnh3DHwcdETMeaIfmzR5u5zEaim5mVoYk7/OU/53gM9dzIO3zd
- alxAR9Gd5ZgV2pwALk+huiPucofFs22TQYbVo4DSRDlHjgLy+V609oIjJ5gOM7hpgryacnt
- ZtdGcixSepHTAPpEWIJm8rvUIwKjNPiQk+8k5ZCb0VQB5skoC//ISBniw4lAee+aFdeP7Yi
- iDfVnoSrn7UhBZ9EJqgyyJK4JiqH/mq2o3FAIB4YcamdOSdke9pPg/2oTmieHReVQZbGMu/
- gLCk18WXMGRl4FmLsHjFwEqwBdcqOT0LKeszK0pZ086fxpVfJXTeYbFx5+wQ0IuOCBheBSa
- euIAqs9d/m4OiZ5TnvbhYX0kgN9ZbesaGmQKg548JlxJRmPXNeKv22HdQLjuA==
-X-QQ-GoodBg: 0
-From: Bin Meng <bmeng@tinylab.org>
-To: qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1p2rP8-000684-Ir; Wed, 07 Dec 2022 05:11:57 -0500
+Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1p2rOs-0001mS-1w; Wed, 07 Dec 2022 05:11:54 -0500
+Received: by mail-lf1-x12c.google.com with SMTP id 1so14305851lfz.4;
+ Wed, 07 Dec 2022 02:11:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PQb2ACBdfNxeza8zs12UmsyMha/7qmmvpjD2Kj7qyiM=;
+ b=TU1gkdENIofduDPbJ92XkTnOsvS9MUgjUdhyTfILEZFyGsjzfctXOMTX6Y9NbXM0OZ
+ PjQXID2g9jod5iw9daxsG9F6MpnuKq2j35q7EBkHESCh5/jMmN25YB3CDvbnP84zMTUk
+ B/e/XXcvpX9mg6hRmJojwWYxDqjsl2xLpZEWeF+u6IIIUxX+l36bkuQduuIxoXMY9VKr
+ 7vriHNHUcQXA+WPd3feheilOrkvPUMgCjBM3fuO+RIwuvZz+7YOhsZT9MdPWbDj7nKqb
+ Kbl4khhd7qGmnA3jLIpks5xJtfLQLT/XHAFFZsrnRkkaku+RLH6Xm2HHSxKFm/xg+XQR
+ cudA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PQb2ACBdfNxeza8zs12UmsyMha/7qmmvpjD2Kj7qyiM=;
+ b=HgNJCOvtmDX7X4Zn6hCdZATstrMC4lNBjPdYm0CttxUpXAfVNf+6xtRhz2ldJDaDcY
+ x6wDcNvUrz/bEHIaoVotpqmtDPe8/87cQV+RfM9Q1jCfBU+d4ewV2u3PtmGIg4qNO8+c
+ iw4vkI6zCo3UDgkwDpT/t77LfVAWFikf2c/Qcz5Bp3+5XabShp5r8pyzdnI/OMRNlqqJ
+ O+ZL9aEXHMXgZXbMGIOrtJoHQtrI9jizBgSzGiUdz7UEUzwsMc8HSZGpuHBRFFE27tDW
+ yugK3t5uDuOjZZiAg8EQ0YLtFsgNINW/dxyD3849Yavz6sH32EUw/AxWNPbGFEn9KmJe
+ DlfA==
+X-Gm-Message-State: ANoB5plLmM57J2o108a+Z1RzlLnHTleBYa1VgaKGOP4r1oNWrBrdfF5r
+ O+3BfADHERv3h06Uu/L/X8yt8kagZPSvXm6zuIA=
+X-Google-Smtp-Source: AA0mqf5r/0js/DA3f73u7AAYqxggMOTAD+K+R8p3rXY/UvY06xETvk0B+6LzzvNTlna0koalfaGFpiBINhDBG2K+1YQ=
+X-Received: by 2002:a05:6512:3f96:b0:4b5:478d:821e with SMTP id
+ x22-20020a0565123f9600b004b5478d821emr7834621lfa.250.1670407895274; Wed, 07
+ Dec 2022 02:11:35 -0800 (PST)
+MIME-Version: 1.0
+References: <20221201140811.142123-1-bmeng@tinylab.org>
+ <20221201140811.142123-14-bmeng@tinylab.org>
+ <CAKmqyKOu+f8PjYMmyXRktMJCR1BnSb1qG0gAA_CaDztU=kuHxg@mail.gmail.com>
+In-Reply-To: <CAKmqyKOu+f8PjYMmyXRktMJCR1BnSb1qG0gAA_CaDztU=kuHxg@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 7 Dec 2022 18:11:23 +0800
+Message-ID: <CAEUhbmV6mMdy6Og3-mnP=4zq_YfG6sQpQy8ZbeH-Z2DHMaP0Og@mail.gmail.com>
+Subject: Re: [PATCH 14/15] hw/riscv: opentitan: Drop "hartid-base" and
+ "priority-base" initialization
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Bin Meng <bmeng@tinylab.org>, Alistair Francis <Alistair.Francis@wdc.com>,
+ qemu-devel@nongnu.org, 
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v2 16/16] hw/intc: sifive_plic: Fix the pending register range
- check
-Date: Wed,  7 Dec 2022 18:03:35 +0800
-Message-Id: <20221207100335.290481-16-bmeng@tinylab.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20221207100335.290481-1-bmeng@tinylab.org>
-References: <20221207100335.290481-1-bmeng@tinylab.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
- helo=bg4.exmail.qq.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::12c;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-lf1-x12c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ SPF_PASS=-0.001, T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -56,48 +75,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2022 10:04:49 -0000
+X-List-Received-Date: Wed, 07 Dec 2022 10:12:03 -0000
 
-The pending register upper limit is currently set to
-plic->num_sources >> 3, which is wrong, e.g.: considering
-plic->num_sources is 7, the upper limit becomes 0 which fails
-the range check if reading the pending register at pending_base.
+Hi Alistair,
 
-Fixes: 1e24429e40df ("SiFive RISC-V PLIC Block")
-Signed-off-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+On Wed, Dec 7, 2022 at 12:38 PM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Fri, Dec 2, 2022 at 12:09 AM Bin Meng <bmeng@tinylab.org> wrote:
+> >
+> > "hartid-base" and "priority-base" are zero by default. There is no
+> > need to initialize them to zero again.
+>
+> What is the defaults change though? I feel like these are worth leaving in
+>
 
----
+If the defaults change we should review all codes that use this model
+and do necessary change accordingly. I just see no need to
+re-initialize them to the default value, that's why we have a default
+one assigned. But I am fine to keep these codes if you think it's
+worth it.
 
-(no changes since v1)
-
- hw/intc/sifive_plic.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-index 1a792cc3f5..5522ede2cf 100644
---- a/hw/intc/sifive_plic.c
-+++ b/hw/intc/sifive_plic.c
-@@ -143,7 +143,8 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned size)
-         uint32_t irq = (addr - plic->priority_base) >> 2;
- 
-         return plic->source_priority[irq];
--    } else if (addr_between(addr, plic->pending_base, plic->num_sources >> 3)) {
-+    } else if (addr_between(addr, plic->pending_base,
-+                            (plic->num_sources + 31) >> 3)) {
-         uint32_t word = (addr - plic->pending_base) >> 2;
- 
-         return plic->pending[word];
-@@ -202,7 +203,7 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
-             sifive_plic_update(plic);
-         }
-     } else if (addr_between(addr, plic->pending_base,
--                            plic->num_sources >> 3)) {
-+                            (plic->num_sources + 31) >> 3)) {
-         qemu_log_mask(LOG_GUEST_ERROR,
-                       "%s: invalid pending write: 0x%" HWADDR_PRIx "",
-                       __func__, addr);
--- 
-2.34.1
-
+Regards,
+Bin
 
