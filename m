@@ -1,34 +1,34 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2rHh-0004R5-7p
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 05:04:13 -0500
+	id 1p2rHi-0004Rk-KB
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 05:04:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p2rHX-0004DF-17; Wed, 07 Dec 2022 05:04:03 -0500
+ id 1p2rHY-0004HP-1g; Wed, 07 Dec 2022 05:04:04 -0500
 Received: from bg4.exmail.qq.com ([43.155.65.254])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p2rHT-0005Dy-Sh; Wed, 07 Dec 2022 05:04:02 -0500
-X-QQ-mid: bizesmtp63t1670407426tis0p0de
+ id 1p2rHV-0005E5-II; Wed, 07 Dec 2022 05:04:03 -0500
+X-QQ-mid: bizesmtp63t1670407428tf1rcyrm
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Wed, 07 Dec 2022 18:03:45 +0800 (CST)
+ id ; Wed, 07 Dec 2022 18:03:48 +0800 (CST)
 X-QQ-SSF: 01200000000000B0B000000A0000000
-X-QQ-FEAT: gTLdG/Pttc2gZn3DQQ1zn2Kac7Ugc5YJ5uVC4V2Lx7s9ODGpunB8F9UC9EYkW
- 2HpkJr77nKvdcOQsOzXV+PQntbbxKQDuO40miXjmfodrd/j99dSYdU6FwlH8ZnfX25uQFEV
- nuYruR69BsoqRK2k83LTyedOKR8xHVhbrmiIBFLbWRrY7TDS70SsXmxJDqdSZ8A1tX7aD0N
- Y+5DXT4CQ8ygwo/OUvJVJM7oXx4wu1vxvWUl/qRa/41E7trr76pPoWXJMVCtuYg4IhYBoWY
- wSlNgRKlgR2HUIKrdV1TPDsTOnZfI5L8AUjqs/m1v495ELDuShdwD4xhqX970bhvymfssKe
- jDP9i8ZL5YBiPj5UjO4QDmvqwDR1ILWyTPgEthj
+X-QQ-FEAT: CEO3k+BsRkIzzVUpxnBOhrhzJqAYJ88AEkTip6yUho3mpdziIIOjNCwINmTp6
+ 5OeEcFrV6pKa7zPHUUWL71djqRRvdAD425Ct2iOT0qHuvM5UsDpzSIk7UoYDR2pJRFQwN3J
+ BJAVTruGl9DXo5PrClCSq7I2Um2kTaU3ExsUKkLaoij5L/3X92wlHeyETWmjGALeebqS/hy
+ wnwXurtnr/pgFj3b0mNvu/PcA/YiRhyBKHWcm6tX85r+8JxSaVHmOZ05/YHP+tSGZZU5wC/
+ KGRSbztozjt60D7z+VTLXSbI/4KC5efL0k+Rz6SGWg93lKo1mlDjDdmBd8hTIivAWaO/TKr
+ IsQvTTnmxv6ppQ4K3tYzfzyXgHzwq5R1YQz3fhu
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
+Cc: Wilfred Mallawa <wilfred.mallawa@wdc.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v2 04/16] hw/riscv: Sort machines Kconfig options in
- alphabetical order
-Date: Wed,  7 Dec 2022 18:03:23 +0800
-Message-Id: <20221207100335.290481-4-bmeng@tinylab.org>
+Subject: [PATCH v2 05/16] hw/riscv: spike: Remove misleading comments
+Date: Wed,  7 Dec 2022 18:03:24 +0800
+Message-Id: <20221207100335.290481-5-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20221207100335.290481-1-bmeng@tinylab.org>
 References: <20221207100335.290481-1-bmeng@tinylab.org>
@@ -55,60 +55,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2022 10:04:03 -0000
+X-List-Received-Date: Wed, 07 Dec 2022 10:04:05 -0000
 
-SHAKTI_C machine Kconfig option was inserted in disorder. Fix it.
+PLIC is not included in the 'spike' machine.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
+Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 
 (no changes since v1)
 
- hw/riscv/Kconfig | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
+ hw/riscv/spike.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 1e4b58024f..4550b3b938 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -4,6 +4,8 @@ config RISCV_NUMA
- config IBEX
-     bool
- 
-+# RISC-V machines in alphabetical order
-+
- config MICROCHIP_PFSOC
-     bool
-     select CADENCE_SDHCI
-@@ -22,13 +24,6 @@ config OPENTITAN
-     select SIFIVE_PLIC
-     select UNIMP
- 
--config SHAKTI_C
--    bool
--    select UNIMP
--    select SHAKTI_UART
--    select RISCV_ACLINT
--    select SIFIVE_PLIC
--
- config RISCV_VIRT
-     bool
-     imply PCI_DEVICES
-@@ -50,6 +45,13 @@ config RISCV_VIRT
-     select FW_CFG_DMA
-     select PLATFORM_BUS
- 
-+config SHAKTI_C
-+    bool
-+    select RISCV_ACLINT
-+    select SHAKTI_UART
-+    select SIFIVE_PLIC
-+    select UNIMP
-+
- config SIFIVE_E
-     bool
-     select RISCV_ACLINT
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 1e1d752c00..13946acf0d 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -8,7 +8,6 @@
+  *
+  * 0) HTIF Console and Poweroff
+  * 1) CLINT (Timer and IPI)
+- * 2) PLIC (Platform Level Interrupt Controller)
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms and conditions of the GNU General Public License,
 -- 
 2.34.1
 
