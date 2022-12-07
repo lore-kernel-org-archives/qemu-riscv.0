@@ -1,43 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2qJH-000747-0N
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 04:01:47 -0500
+	id 1p2rHa-0004Li-FU
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 05:04:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p2qJD-00072I-Cq; Wed, 07 Dec 2022 04:01:43 -0500
-Received: from smtpbgau2.qq.com ([54.206.34.216])
+ id 1p2rHX-0004DA-0q; Wed, 07 Dec 2022 05:04:03 -0500
+Received: from bg4.exmail.qq.com ([43.154.221.58])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p2qJA-00074u-Vw; Wed, 07 Dec 2022 04:01:43 -0500
-X-QQ-mid: bizesmtp64t1670403640t9aau4ii
+ id 1p2rHT-00054q-Qo; Wed, 07 Dec 2022 05:04:02 -0500
+X-QQ-mid: bizesmtp63t1670407423tj85ezu2
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Wed, 07 Dec 2022 17:00:39 +0800 (CST)
+ id ; Wed, 07 Dec 2022 18:03:42 +0800 (CST)
 X-QQ-SSF: 01200000000000B0C000000A0000000
+X-QQ-FEAT: 7jw2iSiCazppgmdPBDJvDCrTKnNXsO+M/tblZoUphj52pfso7dXzKD8qdiasG
+ CkW0xezf9EIo4Hge6qVBrRMza/QWoUaGGZO8d0hAa1LnQAd4t/6Dbski2UKnpyKHej+L8Rz
+ 5VtdlL1vIxjT7jynLMlWdNG8copuG7eE+fENS5XNbE8Vr+hcsDXGG5IgojmfyK8mSsXuPjV
+ sKM32zGzMaa3bXI7XFBTpoR8w6DJ1SteVEvy0BgwTm0sbtONqRX6dxJT+FMmzbES0EVCU/7
+ JkkFYFo0SJza+dPuihtQkTi1QYH58PxQbWC9f+Y0pXHWh7lgaXGC1v3ok50fqoaHHVY7rqS
+ Rv/3+me9985jSsshxupogyhQEjTJUM1BRsM7NYEZfvYBjeZ4Ps=
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
+Cc: Wilfred Mallawa <wilfred.mallawa@wdc.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH 2/2] target/riscv: Clear mstatus.MPRV when leaving M-mode for
- priv spec 1.12+
-Date: Wed,  7 Dec 2022 17:00:37 +0800
-Message-Id: <20221207090037.281452-2-bmeng@tinylab.org>
+Subject: [PATCH v2 03/16] hw/riscv: Fix opentitan dependency to SIFIVE_PLIC
+Date: Wed,  7 Dec 2022 18:03:22 +0800
+Message-Id: <20221207100335.290481-3-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20221207090037.281452-1-bmeng@tinylab.org>
-References: <20221207090037.281452-1-bmeng@tinylab.org>
+In-Reply-To: <20221207100335.290481-1-bmeng@tinylab.org>
+References: <20221207100335.290481-1-bmeng@tinylab.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=54.206.34.216; envelope-from=bmeng@tinylab.org;
- helo=smtpbgau2.qq.com
+Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
+ helo=bg4.exmail.qq.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -50,43 +55,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2022 09:01:45 -0000
+X-List-Received-Date: Wed, 07 Dec 2022 10:04:03 -0000
 
-Since priv spec v1.12, MRET and SRET now clear mstatus.MPRV when
-leaving M-mode.
+Since commit ef6310064820 ("hw/riscv: opentitan: Update to the latest build")
+the IBEX PLIC model was replaced with the SiFive PLIC model in the
+'opentitan' machine but we forgot the add the dependency there.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
-
+Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 
- target/riscv/op_helper.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+(no changes since v1)
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index a047d38152..878bcb03b8 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -154,6 +154,9 @@ target_ulong helper_sret(CPURISCVState *env)
-                         get_field(mstatus, MSTATUS_SPIE));
-     mstatus = set_field(mstatus, MSTATUS_SPIE, 1);
-     mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
-+    if (env->priv_ver >= PRIV_VERSION_1_12_0) {
-+        mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
-+    }
-     env->mstatus = mstatus;
+ hw/riscv/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index 167dc4cca6..1e4b58024f 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -19,6 +19,7 @@ config MICROCHIP_PFSOC
+ config OPENTITAN
+     bool
+     select IBEX
++    select SIFIVE_PLIC
+     select UNIMP
  
-     if (riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
-@@ -203,6 +206,9 @@ target_ulong helper_mret(CPURISCVState *env)
-     mstatus = set_field(mstatus, MSTATUS_MPIE, 1);
-     mstatus = set_field(mstatus, MSTATUS_MPP, PRV_U);
-     mstatus = set_field(mstatus, MSTATUS_MPV, 0);
-+    if ((env->priv_ver >= PRIV_VERSION_1_12_0) && (prev_priv != PRV_M)) {
-+        mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
-+    }
-     env->mstatus = mstatus;
-     riscv_cpu_set_mode(env, prev_priv);
- 
+ config SHAKTI_C
 -- 
 2.34.1
+
 
 
