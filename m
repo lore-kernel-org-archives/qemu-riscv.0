@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2mAT-0005Qn-AS
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Dec 2022 23:36:25 -0500
+	id 1p2mBW-0006CB-3R
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Dec 2022 23:37:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p2mAQ-0005QJ-A1; Tue, 06 Dec 2022 23:36:22 -0500
-Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
+ id 1p2mBR-0006Bi-FX; Tue, 06 Dec 2022 23:37:25 -0500
+Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p2mAO-00069M-LG; Tue, 06 Dec 2022 23:36:22 -0500
-Received: by mail-vk1-xa34.google.com with SMTP id r3so3126337vkq.13;
- Tue, 06 Dec 2022 20:36:18 -0800 (PST)
+ id 1p2mBP-0006J2-OK; Tue, 06 Dec 2022 23:37:25 -0500
+Received: by mail-vs1-xe2f.google.com with SMTP id c184so16200394vsc.3;
+ Tue, 06 Dec 2022 20:37:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SLjrn7IBUfvP+lb4fdZhRhof0Jg0nVmbesdWAZwaMfY=;
- b=OPoFbgZjTTBJwW7GW0iLRziaqtDjH1g3y+kqOZt22MLJWezPgNoLe7EEmc4bJYese2
- Ox/w1HbKX9R7W8rZFGEjwFOsMSzT91p0HhJzTI0yIx+HSyL+ptVoDEF1SAcfXJ9iLo8U
- Eeze3rtJM52QONMKGOwJrHYUsyMBzVKyZSU1XmAk0R0S/GHhzEJvTLiVOXUrPUSFi87x
- 6nHudlc9B7ROAMc/n6B0H8a1PFPn5MJhR77nq8njZLFf4IXsZTLSlYtpWBUJZJThKCiK
- aFewAm8yI3NdhQjqBD2o0MelQadBRajKYNdqisgyUurXpYThEzy0xgMP/vyT/RHPxjJu
- EjzA==
+ bh=ZDtXIs0EQco77cIvAxnupDSnH/4kZ25vj9ikCpe3wIk=;
+ b=U6dMjVjyjk860VeYGdUBqcNwnIWYbsbZrJZC1jlOBv4M3PHwkQo3sb+rnNveO267aZ
+ yZf/zhWs51bN9VgFQ6fwGeXnpGRidzAh4q6Vdcuu4xaGJRbcYBMY+OCzav4zBMEHmlqq
+ VWAhDpAp2n6326vGMHa23Aq0913ZRuyz3SrdQWI70YZYc1VIZedbLTZLUlY5QE3JaPpU
+ mC5GKp+K5d9SMeMkSzgw2Jd1rh+UN7vMErpMhxhaeetW8yfZTyM0g60almMHVTYhg+m3
+ 3zQo+bF7qqglELB0HsE9TLCQpmIj1GAgh5GWNe/ozA+BMzmfzzxBJk9TYC17JJ4KPqzb
+ mLpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SLjrn7IBUfvP+lb4fdZhRhof0Jg0nVmbesdWAZwaMfY=;
- b=6q+ljw1VBwalYi9bPJen0y8G/ZQmTRWhtdJY6GD5doyEj26+8fi3nSsjV7hjtCmVZQ
- IELkjTDrPghdWPqXELVvR5azcQx9mB4fYhyMVv1OG9qPU4KtPUR/Iuab0Lyn4ErNI6QU
- yfbTR6HO79MTNolusya9ewQjJVsBdDHw2Vl4N1W1EgB7apL6KsV9Hpn3S0o2q5fY42zA
- wuciK4JPRbW8wn0iRy6UzGoz7DOIqn/StXSbpiCzjJfDEZrKL/36+RCYV2bZmFPXaTUd
- Ci0N+S2Jj3kqivopmxDaW1f+TtK0DZhKlsiluObfWo4CE+J4UNwQVtGJ1zdj/0tEeXrF
- NUQg==
-X-Gm-Message-State: ANoB5pn1x0/lR1VGAiqHjOBWGDbPeFOF4VCtsTwXGMYTX2l9eJu5vwlb
- 9kF+hCQE/wv9TQJRJ8nFJs6Pbwe10I6yHxfuYtw=
-X-Google-Smtp-Source: AA0mqf7Fjar332l5g/vSIkIhD7PRApWzLqoYame7yhhhRPU+59xh4frbVW/qv66rk154v9LAd7wLb03jmoD2dEb5AtI=
-X-Received: by 2002:a1f:e3c6:0:b0:3b8:ba98:bd43 with SMTP id
- a189-20020a1fe3c6000000b003b8ba98bd43mr43049873vkh.34.1670387777974; Tue, 06
- Dec 2022 20:36:17 -0800 (PST)
+ bh=ZDtXIs0EQco77cIvAxnupDSnH/4kZ25vj9ikCpe3wIk=;
+ b=DLcPVQW6xzCZnqMQFLIXWahwwug20z+dEO/wXbsiwQCRjiAgKJzGDcMvslLe1I495u
+ kNUoVhi6H/UcT9MFgNEx2E3fPdBvPhklyeTov+6f8RFgpMapDFaTbu8XWXGtod8UW4YZ
+ J3xxf/3PsmtoOL6Ynjf5sKYWA1GbLLqJcHOnrxQvpNXHHhoku+gxAOuMdyKpdAFdKZZ4
+ C9WbNeiXWQO7YIMY0fH5iUKYg2JxBmrVzpqBuFeUNNxxFBa5Ejy85Qxtzzcf9PKAD+DP
+ Egm4LfQ29ujzfWlxteyNOtQwUG4rCPeYQmyuwzsvLXxSpizJL4rnYuhla/xPpisYeSCU
+ wTKw==
+X-Gm-Message-State: ANoB5pkFGv4xbujUpY9nTjXOixmL86h7h3GyZsIDaZPDUvuDCXPajyXe
+ 1Q3A5mIzg+u8hepZgfLml0BTpM/rT4zjK/hP+yXb/RXnJ0w=
+X-Google-Smtp-Source: AA0mqf5lSJjnyt3S7UVy7KQ0+fLp8xq8+grsreilT1+mapYEjsWBrZbNKz3ciw6vxtGxfqA5ipWrHf8OBNJbi0YbMUQ=
+X-Received: by 2002:a05:6102:302b:b0:3b0:f936:788b with SMTP id
+ v11-20020a056102302b00b003b0f936788bmr14073458vsa.54.1670387842314; Tue, 06
+ Dec 2022 20:37:22 -0800 (PST)
 MIME-Version: 1.0
 References: <20221201140811.142123-1-bmeng@tinylab.org>
- <20221201140811.142123-12-bmeng@tinylab.org>
-In-Reply-To: <20221201140811.142123-12-bmeng@tinylab.org>
+ <20221201140811.142123-13-bmeng@tinylab.org>
+In-Reply-To: <20221201140811.142123-13-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 7 Dec 2022 14:35:51 +1000
-Message-ID: <CAKmqyKP2Z+WgtfqoZMy+WZWU6PWthQe26AXArsBBuxnC8j9+JQ@mail.gmail.com>
-Subject: Re: [PATCH 12/15] hw/riscv: virt: Fix the value of "riscv, ndev" in
- the dtb
+Date: Wed, 7 Dec 2022 14:36:56 +1000
+Message-ID: <CAKmqyKM7LQ7wPgyhz-6tZ=wXFvFzebxnUu41s_pN7pxM5HPxiA@mail.gmail.com>
+Subject: Re: [PATCH 13/15] hw/intc: sifive_plic: Change "priority-base" to
+ start from interrupt source 0
 To: Bin Meng <bmeng@tinylab.org>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Vijai Kumar K <vijai@behindbytes.com>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,21 +75,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2022 04:36:22 -0000
+X-List-Received-Date: Wed, 07 Dec 2022 04:37:27 -0000
 
-On Fri, Dec 2, 2022 at 12:11 AM Bin Meng <bmeng@tinylab.org> wrote:
+On Fri, Dec 2, 2022 at 12:10 AM Bin Meng <bmeng@tinylab.org> wrote:
 >
-> Commit 28d8c281200f ("hw/riscv: virt: Add optional AIA IMSIC support to virt machine")
-> changed the value of VIRT_IRQCHIP_NUM_SOURCES from 127 to 53, which
-> is VIRTIO_NDEV and also used as the value of "riscv,ndev" property
-> in the dtb. Unfortunately this is wrong as VIRT_IRQCHIP_NUM_SOURCES
-> should include interrupt source 0 but "riscv,ndev" does not.
+> At present the SiFive PLIC model "priority-base" expects interrupt
+> priority register base starting from source 1 instead source 0,
+> that's why on most platforms "priority-base" is set to 0x04 except
+> 'opentitan' machine. 'opentitan' should have set "priority-base"
+> to 0x04 too.
 >
-> While we are here, we also fix the comments of platform bus irq range
-> which is now "64 to 96", but should be "64 to 95", introduced since
-> commit 1832b7cb3f64 ("hw/riscv: virt: Create a platform bus").
+> Note the irq number calculation in sifive_plic_{read,write} is
+> correct as the codes make up for the irq number by adding 1.
 >
-> Fixes: 28d8c281200f ("hw/riscv: virt: Add optional AIA IMSIC support to virt machine")
+> Let's simply update "priority-base" to start from interrupt source
+> 0 and add a comment to make it crystal clear.
+>
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -98,46 +99,109 @@ Alistair
 
 > ---
 >
->  include/hw/riscv/virt.h | 5 ++---
->  hw/riscv/virt.c         | 3 ++-
->  2 files changed, 4 insertions(+), 4 deletions(-)
+>  include/hw/riscv/microchip_pfsoc.h | 2 +-
+>  include/hw/riscv/shakti_c.h        | 2 +-
+>  include/hw/riscv/sifive_e.h        | 2 +-
+>  include/hw/riscv/sifive_u.h        | 2 +-
+>  include/hw/riscv/virt.h            | 2 +-
+>  hw/intc/sifive_plic.c              | 5 +++--
+>  6 files changed, 8 insertions(+), 7 deletions(-)
 >
+> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+> index 9720bac2d5..c10d87a601 100644
+> --- a/include/hw/riscv/microchip_pfsoc.h
+> +++ b/include/hw/riscv/microchip_pfsoc.h
+> @@ -152,7 +152,7 @@ enum {
+>
+>  #define MICROCHIP_PFSOC_PLIC_NUM_SOURCES        187
+>  #define MICROCHIP_PFSOC_PLIC_NUM_PRIORITIES     7
+> -#define MICROCHIP_PFSOC_PLIC_PRIORITY_BASE      0x04
+> +#define MICROCHIP_PFSOC_PLIC_PRIORITY_BASE      0x00
+>  #define MICROCHIP_PFSOC_PLIC_PENDING_BASE       0x1000
+>  #define MICROCHIP_PFSOC_PLIC_ENABLE_BASE        0x2000
+>  #define MICROCHIP_PFSOC_PLIC_ENABLE_STRIDE      0x80
+> diff --git a/include/hw/riscv/shakti_c.h b/include/hw/riscv/shakti_c.h
+> index daf0aae13f..539fe1156d 100644
+> --- a/include/hw/riscv/shakti_c.h
+> +++ b/include/hw/riscv/shakti_c.h
+> @@ -65,7 +65,7 @@ enum {
+>  #define SHAKTI_C_PLIC_NUM_SOURCES 28
+>  /* Excluding Priority 0 */
+>  #define SHAKTI_C_PLIC_NUM_PRIORITIES 2
+> -#define SHAKTI_C_PLIC_PRIORITY_BASE 0x04
+> +#define SHAKTI_C_PLIC_PRIORITY_BASE 0x00
+>  #define SHAKTI_C_PLIC_PENDING_BASE 0x1000
+>  #define SHAKTI_C_PLIC_ENABLE_BASE 0x2000
+>  #define SHAKTI_C_PLIC_ENABLE_STRIDE 0x80
+> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+> index 9e58247fd8..b824a79e2d 100644
+> --- a/include/hw/riscv/sifive_e.h
+> +++ b/include/hw/riscv/sifive_e.h
+> @@ -89,7 +89,7 @@ enum {
+>   */
+>  #define SIFIVE_E_PLIC_NUM_SOURCES 53
+>  #define SIFIVE_E_PLIC_NUM_PRIORITIES 7
+> -#define SIFIVE_E_PLIC_PRIORITY_BASE 0x04
+> +#define SIFIVE_E_PLIC_PRIORITY_BASE 0x00
+>  #define SIFIVE_E_PLIC_PENDING_BASE 0x1000
+>  #define SIFIVE_E_PLIC_ENABLE_BASE 0x2000
+>  #define SIFIVE_E_PLIC_ENABLE_STRIDE 0x80
+> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> index 8f63a183c4..e680d61ece 100644
+> --- a/include/hw/riscv/sifive_u.h
+> +++ b/include/hw/riscv/sifive_u.h
+> @@ -158,7 +158,7 @@ enum {
+>
+>  #define SIFIVE_U_PLIC_NUM_SOURCES 54
+>  #define SIFIVE_U_PLIC_NUM_PRIORITIES 7
+> -#define SIFIVE_U_PLIC_PRIORITY_BASE 0x04
+> +#define SIFIVE_U_PLIC_PRIORITY_BASE 0x00
+>  #define SIFIVE_U_PLIC_PENDING_BASE 0x1000
+>  #define SIFIVE_U_PLIC_ENABLE_BASE 0x2000
+>  #define SIFIVE_U_PLIC_ENABLE_STRIDE 0x80
 > diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index be4ab8fe7f..7c23aea4a0 100644
+> index 7c23aea4a0..37819c168c 100644
 > --- a/include/hw/riscv/virt.h
 > +++ b/include/hw/riscv/virt.h
-> @@ -87,15 +87,14 @@ enum {
->      VIRTIO_IRQ = 1, /* 1 to 8 */
->      VIRTIO_COUNT = 8,
->      PCIE_IRQ = 0x20, /* 32 to 35 */
-> -    VIRT_PLATFORM_BUS_IRQ = 64, /* 64 to 96 */
-> -    VIRTIO_NDEV = 96 /* Arbitrary maximum number of interrupts */
-> +    VIRT_PLATFORM_BUS_IRQ = 64, /* 64 to 95 */
->  };
->
->  #define VIRT_PLATFORM_BUS_NUM_IRQS 32
->
->  #define VIRT_IRQCHIP_IPI_MSI 1
->  #define VIRT_IRQCHIP_NUM_MSIS 255
-> -#define VIRT_IRQCHIP_NUM_SOURCES VIRTIO_NDEV
-> +#define VIRT_IRQCHIP_NUM_SOURCES 96
->  #define VIRT_IRQCHIP_NUM_PRIO_BITS 3
+> @@ -99,7 +99,7 @@ enum {
 >  #define VIRT_IRQCHIP_MAX_GUESTS_BITS 3
 >  #define VIRT_IRQCHIP_MAX_GUESTS ((1U << VIRT_IRQCHIP_MAX_GUESTS_BITS) - 1U)
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index a5bc7353b4..c4ee489a80 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -468,7 +468,8 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
->          plic_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
->      qemu_fdt_setprop_cells(mc->fdt, plic_name, "reg",
->          0x0, plic_addr, 0x0, memmap[VIRT_PLIC].size);
-> -    qemu_fdt_setprop_cell(mc->fdt, plic_name, "riscv,ndev", VIRTIO_NDEV);
-> +    qemu_fdt_setprop_cell(mc->fdt, plic_name, "riscv,ndev",
-> +                          VIRT_IRQCHIP_NUM_SOURCES - 1);
->      riscv_socket_fdt_write_id(mc, mc->fdt, plic_name, socket);
->      qemu_fdt_setprop_cell(mc->fdt, plic_name, "phandle",
->          plic_phandles[socket]);
+>
+> -#define VIRT_PLIC_PRIORITY_BASE 0x04
+> +#define VIRT_PLIC_PRIORITY_BASE 0x00
+>  #define VIRT_PLIC_PENDING_BASE 0x1000
+>  #define VIRT_PLIC_ENABLE_BASE 0x2000
+>  #define VIRT_PLIC_ENABLE_STRIDE 0x80
+> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+> index 2bd292410d..7a6a358c57 100644
+> --- a/hw/intc/sifive_plic.c
+> +++ b/hw/intc/sifive_plic.c
+> @@ -140,7 +140,7 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned size)
+>      SiFivePLICState *plic = opaque;
+>
+>      if (addr_between(addr, plic->priority_base, plic->num_sources << 2)) {
+> -        uint32_t irq = ((addr - plic->priority_base) >> 2) + 1;
+> +        uint32_t irq = (addr - plic->priority_base) >> 2;
+>
+>          return plic->source_priority[irq];
+>      } else if (addr_between(addr, plic->pending_base, plic->num_sources >> 3)) {
+> @@ -187,7 +187,7 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
+>      SiFivePLICState *plic = opaque;
+>
+>      if (addr_between(addr, plic->priority_base, plic->num_sources << 2)) {
+> -        uint32_t irq = ((addr - plic->priority_base) >> 2) + 1;
+> +        uint32_t irq = (addr - plic->priority_base) >> 2;
+>
+>          if (((plic->num_priorities + 1) & plic->num_priorities) == 0) {
+>              /*
+> @@ -428,6 +428,7 @@ static Property sifive_plic_properties[] = {
+>      /* number of interrupt sources including interrupt source 0 */
+>      DEFINE_PROP_UINT32("num-sources", SiFivePLICState, num_sources, 1),
+>      DEFINE_PROP_UINT32("num-priorities", SiFivePLICState, num_priorities, 0),
+> +    /* interrupt priority register base starting from source 0 */
+>      DEFINE_PROP_UINT32("priority-base", SiFivePLICState, priority_base, 0),
+>      DEFINE_PROP_UINT32("pending-base", SiFivePLICState, pending_base, 0),
+>      DEFINE_PROP_UINT32("enable-base", SiFivePLICState, enable_base, 0),
 > --
 > 2.34.1
 >
