@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2S2C-0007BA-Dd
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Dec 2022 02:06:32 -0500
+	id 1p2keo-0001pg-C9
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Dec 2022 21:59:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p2S1q-0006zR-6t; Tue, 06 Dec 2022 02:06:10 -0500
-Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
+ id 1p2kek-0001pA-J2; Tue, 06 Dec 2022 21:59:34 -0500
+Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p2S1o-0000SP-Bk; Tue, 06 Dec 2022 02:06:09 -0500
-Received: by mail-vs1-xe30.google.com with SMTP id q128so13324373vsa.13;
- Mon, 05 Dec 2022 23:06:04 -0800 (PST)
+ id 1p2kei-00053t-NW; Tue, 06 Dec 2022 21:59:34 -0500
+Received: by mail-vs1-xe2a.google.com with SMTP id k185so16065433vsc.2;
+ Tue, 06 Dec 2022 18:59:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XcqP69H7M8h20Oke/Zb/63PVRm6MLB+zw6z4Mmx26F8=;
- b=BLyfwb6oAkyoQOUHfznTFgSEElm1Na3kMvqiokfuVUTETZ6D/E3rOCNvyAQHbL/+Z4
- OLnR69Xj/1sYG3rDKZFEs4W1f4xrR0o9ncOzRAHV3VpZo8nf6Vj8S3d5Ai+QLRLPp32E
- sv+6w+cbCg5GcylLUwX4/ur957K9qQgxucpRSaa3Kt8Sjasw0NdpcKl4USh0SwFCKeXO
- 0tQX82LQ32AGmk9kFEuGO5juykIwKs73nZ89dHj3eAcjWoSdAipUYl1YKMA1ihaaFevO
- gwqo/JiXOEEZs6N57wqoOcO7nUUQ1BWLYIHcqZJ189WITiLdCiNch+E0voFxPFPXMY4T
- iXOw==
+ bh=Q/0N2oN4PJdypTQv4uAHblAqUp/HDR2yVblJlWHyO+0=;
+ b=N/Tp7e8r3GXnlQne86fBVLuI2txl3ugo8P3Rb6KGO2oYHE92mxoR1xiB/DbNlmZqz/
+ 1jMip0whtWItp1IIpWcBfug1DQqyV6oc24023xC99alLRlDvVXcXzcp4aD0kh231RC1j
+ FHMtR9DNx7OPAANFeA1GqADkU6ou8yEMs0d5+zK2Xa36Wc+ZG31stpFkbyjOyRaoa8ea
+ FnaPJuXJ8KbqyBIitbHu6jLtisrF4QznZoSceaIPVSLfggit6VuB4dr92frZYOTjXOfT
+ CcKLfnB7F8PENdQugDBeqM9kG9OdCRcLz8BUijLLrCzmIdDjZ09Mxej5qQ7wz0zFPHJP
+ N1Aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=XcqP69H7M8h20Oke/Zb/63PVRm6MLB+zw6z4Mmx26F8=;
- b=z+HWuxOLKbAnv7NxJkKBY6reIFFuPyUlmGLOTO8o7Vt2CmVsbxXMPOFy4RJkAzRVGw
- 8VWXpRv02EAnjE1AToLSXaw/5MUDNMW6OpcHCaWO1fmdFxXuukNzJDJAE0PGJ6XvMOBh
- j2F8McsdaW3Jx5uk9eT0DvbQXx61uXJDaJFiypPg21+PkzeY10W+HQcJboMqdhpdtR9V
- TGilObcLyQaisRb1iTuxYGx2SLPEuQUiwQ8AygEblN2FQmxbFrhMk4GOlHu3+nWdJIta
- 2rsjx1juUUHzx7HITzw+HsrqyldpVzAtsTkGAzOkLQlkein3KPwx9Hg5UmlMy++g+btn
- FN9A==
-X-Gm-Message-State: ANoB5plqWsWqiuGiS3mHD84k70K7821YMjbVSo4vLZU8lOTa0YHl103p
- JMoCvjZZNmy1btgmR6hh+WKbb27j5uzL456Ejj8=
-X-Google-Smtp-Source: AA0mqf7St4C13viAAf2JXUvpURaCk7ywfVncZmfAknhYnyO82ozCh8fpsX8F50I15v2RZcUt4h+f1HfiFk+1k2KYqAw=
-X-Received: by 2002:a67:c519:0:b0:3b1:2b83:1861 with SMTP id
- e25-20020a67c519000000b003b12b831861mr5897148vsk.10.1670310363287; Mon, 05
- Dec 2022 23:06:03 -0800 (PST)
+ bh=Q/0N2oN4PJdypTQv4uAHblAqUp/HDR2yVblJlWHyO+0=;
+ b=HS2XdSgA2bjBGNTKGLz0ySW37gqm/XzD9JjAYP8HMupaLjmEdpqrZZXvrYZchZ4b4/
+ /PgYZGgNZPnyrZ1eWiFW53odzZ+uu9sS1EGQbt+1C0Yy85XsZvePLKC0V/I+5gFe0PHE
+ uNLxPG8zP68DUVclAsIjJ8kb6WLFVywrAK8Uqayc3n+aZDOhTQI+YehFyi3emT82bsx5
+ 0xOLUxWA+cub8ZJk+w/zFI1tsDMDRPPuTtzRlCPy56XyiadmNRdVozGpiuD9NfTN5eCZ
+ pmuXwqz8onaMMkPw2XEU0Mjexgk2YGiNaAlEHwMM07XKz5yc/MRCMXnz8IFkku5WMUG7
+ 8kjQ==
+X-Gm-Message-State: ANoB5plZUUd59oqQeAk3qfNoRcHU8yN0RFWUEQkWCzco51nvggkKW2mQ
+ vgxBBR2mPMoRMlAGx6Ex0EFgz1J2e0TrzVG604o=
+X-Google-Smtp-Source: AA0mqf5M2PfgPfQ9Qu0O9fFhtN2/CyGyux6Zduu90aZGZ8LAAGfS01oMEyAZdT0O6BIQc5mb7xPqmdi/FI8ri8k/Hhs=
+X-Received: by 2002:a05:6102:3bc1:b0:3a7:9b8c:2e4c with SMTP id
+ a1-20020a0561023bc100b003a79b8c2e4cmr36824665vsv.72.1670381970530; Tue, 06
+ Dec 2022 18:59:30 -0800 (PST)
 MIME-Version: 1.0
-References: <20221205065303.204095-1-bmeng@tinylab.org>
-In-Reply-To: <20221205065303.204095-1-bmeng@tinylab.org>
+References: <20221127165753.30533-1-jim.shu@sifive.com>
+In-Reply-To: <20221127165753.30533-1-jim.shu@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 6 Dec 2022 17:05:37 +1000
-Message-ID: <CAKmqyKM-F=ENKQ_onOmFBPnzuhiLZcXGQcujCEdusrpa1GwiBw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Fix mret exception cause when no pmp rule
- is configured
-To: Bin Meng <bmeng@tinylab.org>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
+Date: Wed, 7 Dec 2022 12:59:04 +1000
+Message-ID: <CAKmqyKPhd4a0FSuvFfW_a4AfBFOENM-1xZ-2TorxbF-05APkuw@mail.gmail.com>
+Subject: Re: [PATCH] hw/intc: sifive_plic: fix out-of-bound access of
+ source_priority array
+To: Jim Shu <jim.shu@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,47 +74,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Dec 2022 07:06:29 -0000
+X-List-Received-Date: Wed, 07 Dec 2022 02:59:36 -0000
 
-On Mon, Dec 5, 2022 at 4:54 PM Bin Meng <bmeng@tinylab.org> wrote:
+On Mon, Nov 28, 2022 at 2:59 AM Jim Shu <jim.shu@sifive.com> wrote:
 >
-> The priv spec v1.12 says:
+> If the number of interrupt is not multiple of 32, PLIC will have
+> out-of-bound access to source_priority array. Compute the number of
+> interrupt in the last word to avoid this out-of-bound access of array.
 >
->   If no PMP entry matches an M-mode access, the access succeeds. If
->   no PMP entry matches an S-mode or U-mode access, but at least one
->   PMP entry is implemented, the access fails. Failed accesses generate
->   an instruction, load, or store access-fault exception.
->
-> At present the exception cause is set to 'illegal instruction' but
-> should have been 'instruction access fault'.
->
-> Fixes: d102f19a2085 ("target/riscv/pmp: Raise exception if no PMP entry is configured")
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> Signed-off-by: Jim Shu <jim.shu@sifive.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
+>  hw/intc/sifive_plic.c | 12 +++++++++++-
+>  1 file changed, 11 insertions(+), 1 deletion(-)
 >
->  target/riscv/op_helper.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+> index c2dfacf028..1cf156cf85 100644
+> --- a/hw/intc/sifive_plic.c
+> +++ b/hw/intc/sifive_plic.c
+> @@ -78,6 +78,7 @@ static uint32_t sifive_plic_claimed(SiFivePLICState *plic, uint32_t addrid)
+>      uint32_t max_irq = 0;
+>      uint32_t max_prio = plic->target_priority[addrid];
+>      int i, j;
+> +    int num_irq_in_word = 32;
 >
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 09f1f5185d..d7af7f056b 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -202,7 +202,7 @@ target_ulong helper_mret(CPURISCVState *env)
+>      for (i = 0; i < plic->bitfield_words; i++) {
+>          uint32_t pending_enabled_not_claimed =
+> @@ -88,7 +89,16 @@ static uint32_t sifive_plic_claimed(SiFivePLICState *plic, uint32_t addrid)
+>              continue;
+>          }
 >
->      if (riscv_feature(env, RISCV_FEATURE_PMP) &&
->          !pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
-> -        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> +        riscv_raise_exception(env, RISCV_EXCP_INST_ACCESS_FAULT, GETPC());
->      }
->
->      target_ulong prev_virt = get_field(env->mstatus, MSTATUS_MPV);
+> -        for (j = 0; j < 32; j++) {
+> +        if (i == (plic->bitfield_words - 1)) {
+> +            /*
+> +             * If plic->num_sources is not multiple of 32, num-of-irq in last
+> +             * word is not 32. Compute the num-of-irq of last word to avoid
+> +             * out-of-bound access of source_priority array.
+> +             */
+> +            num_irq_in_word = plic->num_sources - ((plic->bitfield_words - 1) << 5);
+> +        }
+> +
+> +        for (j = 0; j < num_irq_in_word; j++) {
+>              int irq = (i << 5) + j;
+>              uint32_t prio = plic->source_priority[irq];
+>              int enabled = pending_enabled_not_claimed & (1 << j);
 > --
-> 2.34.1
+> 2.17.1
 >
 >
 
