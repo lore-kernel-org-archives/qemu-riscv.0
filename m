@@ -1,37 +1,34 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2rHa-0004Li-FU
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 05:04:07 -0500
+	id 1p2rHc-0004M7-9A
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 05:04:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p2rHX-0004DA-0q; Wed, 07 Dec 2022 05:04:03 -0500
+ id 1p2rHX-0004EN-A4; Wed, 07 Dec 2022 05:04:03 -0500
 Received: from bg4.exmail.qq.com ([43.154.221.58])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p2rHT-00054q-Qo; Wed, 07 Dec 2022 05:04:02 -0500
-X-QQ-mid: bizesmtp63t1670407423tj85ezu2
+ id 1p2rHT-0004vp-Px; Wed, 07 Dec 2022 05:04:03 -0500
+X-QQ-mid: bizesmtp63t1670407417tkq1vw0z
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Wed, 07 Dec 2022 18:03:42 +0800 (CST)
+ id ; Wed, 07 Dec 2022 18:03:35 +0800 (CST)
 X-QQ-SSF: 01200000000000B0C000000A0000000
-X-QQ-FEAT: 7jw2iSiCazppgmdPBDJvDCrTKnNXsO+M/tblZoUphj52pfso7dXzKD8qdiasG
- CkW0xezf9EIo4Hge6qVBrRMza/QWoUaGGZO8d0hAa1LnQAd4t/6Dbski2UKnpyKHej+L8Rz
- 5VtdlL1vIxjT7jynLMlWdNG8copuG7eE+fENS5XNbE8Vr+hcsDXGG5IgojmfyK8mSsXuPjV
- sKM32zGzMaa3bXI7XFBTpoR8w6DJ1SteVEvy0BgwTm0sbtONqRX6dxJT+FMmzbES0EVCU/7
- JkkFYFo0SJza+dPuihtQkTi1QYH58PxQbWC9f+Y0pXHWh7lgaXGC1v3ok50fqoaHHVY7rqS
- Rv/3+me9985jSsshxupogyhQEjTJUM1BRsM7NYEZfvYBjeZ4Ps=
+X-QQ-FEAT: C46Rb8GPIEexEfiLwJv0OxyXuNwQCENeWQBpW07fyYQv/mfRLImNHiALkqe9u
+ GpDK0o+1xf1CcrG8umQ7hBWMKwL3nMLrMF/iOfofvXEp6GuRCSfA5gmchjnQZIveEaRHB55
+ TjETCE2PczrZZZCtmPAMdqVaBirLg2vmIDI1lbV99y5o5WihrfVCENFqsbC0F+k70d61jHu
+ B+w0vhIvkhxYFGcAysdkR/OtyBEAWV6Tn40+itJN9dXZKYcXIwdNQTCFBqYC/CpJ3ucohSz
+ H8ZMFGBJ40pGk6F9qH0SbL9v/5dfwR4If+KZ+Ph/iclhdimMAVMSVQj1nr/AwYOgMu/9hSc
+ GcYgJzOvs2YMeA2NZNT/Tsn6AVUqiDQFgSsGOMKkcEOFTfh1Vk=
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
-Cc: Wilfred Mallawa <wilfred.mallawa@wdc.com>,
- Alistair Francis <alistair.francis@wdc.com>,
+Cc: Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v2 03/16] hw/riscv: Fix opentitan dependency to SIFIVE_PLIC
-Date: Wed,  7 Dec 2022 18:03:22 +0800
-Message-Id: <20221207100335.290481-3-bmeng@tinylab.org>
+Subject: [PATCH v2 01/16] hw/riscv: Select MSI_NONBROKEN in SIFIVE_PLIC
+Date: Wed,  7 Dec 2022 18:03:20 +0800
+Message-Id: <20221207100335.290481-1-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20221207100335.290481-1-bmeng@tinylab.org>
-References: <20221207100335.290481-1-bmeng@tinylab.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
@@ -57,34 +54,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 07 Dec 2022 10:04:03 -0000
 
-Since commit ef6310064820 ("hw/riscv: opentitan: Update to the latest build")
-the IBEX PLIC model was replaced with the SiFive PLIC model in the
-'opentitan' machine but we forgot the add the dependency there.
+hw/pci/Kconfig says MSI_NONBROKEN should be selected by interrupt
+controllers regardless of how MSI is implemented. msi_nonbroken is
+initialized to true in sifive_plic_realize().
+
+Let SIFIVE_PLIC select MSI_NONBROKEN and drop the selection from
+RISC-V machines.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
 
 (no changes since v1)
 
- hw/riscv/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ hw/intc/Kconfig  | 1 +
+ hw/riscv/Kconfig | 5 -----
+ 2 files changed, 1 insertion(+), 5 deletions(-)
 
+diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
+index ecd2883ceb..1d4573e803 100644
+--- a/hw/intc/Kconfig
++++ b/hw/intc/Kconfig
+@@ -78,6 +78,7 @@ config RISCV_IMSIC
+ 
+ config SIFIVE_PLIC
+     bool
++    select MSI_NONBROKEN
+ 
+ config GOLDFISH_PIC
+     bool
 diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 167dc4cca6..1e4b58024f 100644
+index 79ff61c464..167dc4cca6 100644
 --- a/hw/riscv/Kconfig
 +++ b/hw/riscv/Kconfig
-@@ -19,6 +19,7 @@ config MICROCHIP_PFSOC
- config OPENTITAN
-     bool
-     select IBEX
-+    select SIFIVE_PLIC
-     select UNIMP
+@@ -11,7 +11,6 @@ config MICROCHIP_PFSOC
+     select MCHP_PFSOC_IOSCB
+     select MCHP_PFSOC_MMUART
+     select MCHP_PFSOC_SYSREG
+-    select MSI_NONBROKEN
+     select RISCV_ACLINT
+     select SIFIVE_PDMA
+     select SIFIVE_PLIC
+@@ -37,7 +36,6 @@ config RISCV_VIRT
+     imply TPM_TIS_SYSBUS
+     select RISCV_NUMA
+     select GOLDFISH_RTC
+-    select MSI_NONBROKEN
+     select PCI
+     select PCI_EXPRESS_GENERIC_BRIDGE
+     select PFLASH_CFI01
+@@ -53,7 +51,6 @@ config RISCV_VIRT
  
- config SHAKTI_C
+ config SIFIVE_E
+     bool
+-    select MSI_NONBROKEN
+     select RISCV_ACLINT
+     select SIFIVE_GPIO
+     select SIFIVE_PLIC
+@@ -64,7 +61,6 @@ config SIFIVE_E
+ config SIFIVE_U
+     bool
+     select CADENCE
+-    select MSI_NONBROKEN
+     select RISCV_ACLINT
+     select SIFIVE_GPIO
+     select SIFIVE_PDMA
+@@ -82,6 +78,5 @@ config SPIKE
+     bool
+     select RISCV_NUMA
+     select HTIF
+-    select MSI_NONBROKEN
+     select RISCV_ACLINT
+     select SIFIVE_PLIC
 -- 
 2.34.1
-
 
 
