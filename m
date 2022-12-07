@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p2m6D-00030b-OW
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Dec 2022 23:32:01 -0500
+	id 1p2m8W-0004MQ-Fs
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Dec 2022 23:34:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p2m63-0002tx-SQ; Tue, 06 Dec 2022 23:31:59 -0500
-Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
+ id 1p2m8U-0004M8-LR; Tue, 06 Dec 2022 23:34:22 -0500
+Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p2m5z-0005NR-Gh; Tue, 06 Dec 2022 23:31:48 -0500
-Received: by mail-vk1-xa34.google.com with SMTP id o5so5445034vkn.7;
- Tue, 06 Dec 2022 20:31:46 -0800 (PST)
+ id 1p2m8T-0005hq-A6; Tue, 06 Dec 2022 23:34:22 -0500
+Received: by mail-vs1-xe36.google.com with SMTP id k185so16193090vsc.2;
+ Tue, 06 Dec 2022 20:34:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Sme55OwCecG8q78kMdFz74nNhAWiLwvh5VxRVS5lOuc=;
- b=J66iqjIy4rlYRunZA3R7HWnehA0S36bKzev5WRkvBQYXFqA0B3YuT/Epmr6Q7JeJRh
- apSpQAeb03PNKL+aI8T/cbibtpesCmk/yoF2+kHLhMaOS3wOD65HDasT24Ly6E7rtko6
- iuBBD22llGThw2Q301Z0xfGDIAvi6on0y/a/I6XMWVokNQ621GHVl1mPMGpjol0Hr93s
- +jHS/BgR0d6ZY2iPt7DVCU8s6wgcNLy88bpFIl1qeaMgv/TJQ/xhN3YF1ouJC3qFDo3O
- fskLYRv+hknpsEANlToGhL7b1Eki7/MecfsbSh2WfO29a3C11p3o0+U/ZNlfhHuvvh33
- mD5A==
+ bh=7ujKlZAmvEdF81wlyE62kYTq+WCfoP64C8ycrw2cZts=;
+ b=moWirwEw/2D8dBudjTpFy2GKpiNq36ZhdESbI8qwclLJ0lfUMNaG/TpNuz6GqCUSXm
+ PGnsGoWXSlfVupgOyJW+AND0kUWU6PTYiC/qMrK3k9v2K+RRATbYSBHgoOdB+8sRqct2
+ YzisCq6XtedoVANldL1IwnDdShAtR3assk5bODp507y4OAdVjYpiDTpIO9mpJbDPvRIj
+ fuRy9Pei1bgkxNIC/1syy5hNXEJwinAgLgoxIwDmSThGymjGBafJCszrxgFHPNU33Dtx
+ BPQSnUiFC1DW9OI7YcmbnGfCkJUgeejQp4cDzz4jc7hFPGoAiHei1NpSRwJJSr2SMBvu
+ ZEsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Sme55OwCecG8q78kMdFz74nNhAWiLwvh5VxRVS5lOuc=;
- b=JeWkAMtbooX2duNmjmrwWduadusLzJc8c1dZlLh5ZHpfsYxDXEmgcp+RYUF042Tx+m
- WVXnnNRy1N/qFsoj+BOT5Z2eLNtpCx9wW8dYbONwlR2W8QjbAndaMmkSLcGC0DN+ZZEe
- F9CLNLqPdjofFXtRFB46dkrrvqotSJAFkJKihCZo2ZURduOSuF/goBCOHuXnFHw99z3c
- p3L5+TlFHEKm/883gi5B95B7TyElwOSjc5GoblMYR8xS9Yjlp10QO6H8gKAKXql7iI62
- q0MvTgUBgEv85yQhDX5xfNbKvQAFdpdUlayb+0yUr9bgL/Hk1NFQdbnCsZTMsCoPtLFs
- c8bQ==
-X-Gm-Message-State: ANoB5pmbiwVpvkiVFHIDHDsAUMM8I5vxWII91/qaPI72vLi1FZw5SYpu
- gLHDhf+ZPt8ruphA34K9w/lp69RCjzCscs1VNbo=
-X-Google-Smtp-Source: AA0mqf79mAMq2mK9KckIQ+uvBzOI+xV+TSz7cGHAmfaIemGzAjE+OVx6YnENKuk/bCTRTyH0DKsXqhwKxQz4O61aOA4=
-X-Received: by 2002:a1f:3846:0:b0:3bc:c843:c7b5 with SMTP id
- f67-20020a1f3846000000b003bcc843c7b5mr26241383vka.30.1670387506056; Tue, 06
- Dec 2022 20:31:46 -0800 (PST)
+ bh=7ujKlZAmvEdF81wlyE62kYTq+WCfoP64C8ycrw2cZts=;
+ b=OoNu3Tbt15w0a08OjkAbjz/M6K90G0xq11cia9nzXUQfmeV41Qjq4RbmRVB8hlPU0h
+ nzV8qFic3vRATbJbwK/h9oas9W260sJiWL96lR6qdKrZGGLSkYNM0OkrlcFSA7gOPMKq
+ 3hC+9TwAzPEQOu4fKQfspBoD3CKuvfXByYO/pFB8weIqxjPdcqzjviKHVN8/KNNL0ZPP
+ +aU0rb3zp7PTGj91YvEU3LZMbvAl/s98h2uqXQ8bcq0qK3+N9/gonFf4xK2KZ+ohfrUT
+ Oz3JzRY1t1988IuDP/j22t/fUtSYO1Y9w63ewRAw/iiteXiVN9lYKGROK64xyR19/7n0
+ dTIw==
+X-Gm-Message-State: ANoB5pmCv+tQxh4LkwTzfY+f18mXBaODl2s+1HMuZoEWhbv7q7eDNRRX
+ sHifpHHIl6w6540iaSSZBM2Mk8+1AFYZP7rUILriCZf+5YA=
+X-Google-Smtp-Source: AA0mqf5gw5cKAMA9E0EskUQJmxj+dCs3tpEcaEQ8Qn3vd/4pR5gpbJRwAEJxvf+1H9rWh3GkSsqU3FNoryInbE4dW4s=
+X-Received: by 2002:a05:6102:302b:b0:3b0:f936:788b with SMTP id
+ v11-20020a056102302b00b003b0f936788bmr14070592vsa.54.1670387659822; Tue, 06
+ Dec 2022 20:34:19 -0800 (PST)
 MIME-Version: 1.0
 References: <20221201140811.142123-1-bmeng@tinylab.org>
- <20221201140811.142123-10-bmeng@tinylab.org>
-In-Reply-To: <20221201140811.142123-10-bmeng@tinylab.org>
+ <20221201140811.142123-11-bmeng@tinylab.org>
+In-Reply-To: <20221201140811.142123-11-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 7 Dec 2022 14:31:19 +1000
-Message-ID: <CAKmqyKNM1Ng=ud0MyWQPhY_jQ+0qgJ4zSX5WraHhgXKSfUutAQ@mail.gmail.com>
-Subject: Re: [PATCH 10/15] hw/riscv: sifive_e: Fix the number of interrupt
- sources of PLIC
+Date: Wed, 7 Dec 2022 14:33:53 +1000
+Message-ID: <CAKmqyKMfw4d_n2wtWwvbSmApFBvW+FUV5Zp=JN=o7+=n8ndN5A@mail.gmail.com>
+Subject: Re: [PATCH 11/15] hw/riscv: sifive_u: Avoid using magic number for
+ "riscv, ndev"
 To: Bin Meng <bmeng@tinylab.org>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, 
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,25 +75,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2022 04:32:00 -0000
+X-List-Received-Date: Wed, 07 Dec 2022 04:34:23 -0000
 
-On Fri, Dec 2, 2022 at 12:12 AM Bin Meng <bmeng@tinylab.org> wrote:
+On Fri, Dec 2, 2022 at 12:11 AM Bin Meng <bmeng@tinylab.org> wrote:
 >
-> Per chapter 10 in Freedom E310 manuals [1][2][3], E310 G002 and G003
-> supports 52 interrupt sources while G000 supports 51 interrupt sources.
+> At present magic number is used to create "riscv,ndev" property
+> in the dtb. Let's use the macro SIFIVE_U_PLIC_NUM_SOURCES that
+> is used to instantiate the PLIC model instead.
 >
-> We use the value of G002 and G003, so it is 53 (including source 0).
->
-> [1] G000 manual:
-> https://sifive.cdn.prismic.io/sifive/4faf3e34-4a42-4c2f-be9e-c77baa4928c7_fe310-g000-manual-v3p2.pdf
->
-> [2] G002 manual:
-> https://sifive.cdn.prismic.io/sifive/034760b5-ac6a-4b1c-911c-f4148bb2c4a5_fe310-g002-v1p5.pdf
->
-> [3] G003 manual:
-> https://sifive.cdn.prismic.io/sifive/3af39c59-6498-471e-9dab-5355a0d539eb_fe310-g003-manual.pdf
->
-> Fixes: eb637edb1241 ("SiFive Freedom E Series RISC-V Machine")
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -102,27 +91,23 @@ Alistair
 
 > ---
 >
->  include/hw/riscv/sifive_e.h | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
+>  hw/riscv/sifive_u.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
-> index d738745925..9e58247fd8 100644
-> --- a/include/hw/riscv/sifive_e.h
-> +++ b/include/hw/riscv/sifive_e.h
-> @@ -82,7 +82,12 @@ enum {
->  };
->
->  #define SIFIVE_E_PLIC_HART_CONFIG "M"
-> -#define SIFIVE_E_PLIC_NUM_SOURCES 127
-> +/*
-> + * Freedom E310 G002 and G003 supports 52 interrupt sources while
-> + * Freedom E310 G000 supports 51 interrupt sources. We use the value
-> + * of G002 and G003, so it is 53 (including interrupt source 0).
-> + */
-> +#define SIFIVE_E_PLIC_NUM_SOURCES 53
->  #define SIFIVE_E_PLIC_NUM_PRIORITIES 7
->  #define SIFIVE_E_PLIC_PRIORITY_BASE 0x04
->  #define SIFIVE_E_PLIC_PENDING_BASE 0x1000
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index b139824aab..b40a4767e2 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -287,7 +287,8 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+>      qemu_fdt_setprop_cells(fdt, nodename, "reg",
+>          0x0, memmap[SIFIVE_U_DEV_PLIC].base,
+>          0x0, memmap[SIFIVE_U_DEV_PLIC].size);
+> -    qemu_fdt_setprop_cell(fdt, nodename, "riscv,ndev", 0x35);
+> +    qemu_fdt_setprop_cell(fdt, nodename, "riscv,ndev",
+> +                          SIFIVE_U_PLIC_NUM_SOURCES - 1);
+>      qemu_fdt_setprop_cell(fdt, nodename, "phandle", plic_phandle);
+>      plic_phandle = qemu_fdt_get_phandle(fdt, nodename);
+>      g_free(cells);
 > --
 > 2.34.1
 >
