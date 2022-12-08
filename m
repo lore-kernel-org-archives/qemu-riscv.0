@@ -1,68 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p39h2-0001lF-Bc
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Dec 2022 00:43:36 -0500
+	id 1p3CTV-0000Zr-OU
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Dec 2022 03:41:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p39h0-0001kj-6T; Thu, 08 Dec 2022 00:43:34 -0500
-Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1p3CTU-0000Yx-Ao
+ for qemu-riscv@nongnu.org; Thu, 08 Dec 2022 03:41:48 -0500
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p39gy-0002FW-MA; Thu, 08 Dec 2022 00:43:33 -0500
-Received: by mail-vs1-xe31.google.com with SMTP id 128so512630vsz.12;
- Wed, 07 Dec 2022 21:43:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1p3CTR-0007PG-1O
+ for qemu-riscv@nongnu.org; Thu, 08 Dec 2022 03:41:48 -0500
+Received: by mail-pf1-x42b.google.com with SMTP id a14so766177pfa.1
+ for <qemu-riscv@nongnu.org>; Thu, 08 Dec 2022 00:41:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1zoId/LSkJyvk3mDzuouTOGpECZBDRpZm0kKm87iEBM=;
- b=aiihWZnsibJo7ypKwjCkqxE+xvl2NNRmwBz8aitKdxnlIQ3PxB8smmZr1xua0DF7fM
- HwOqRkTge0s5lQC/E6Hh+1JG+iqxhd+wH/BiYNQjVhgCX5h3wQ3nnJsD4xxfuScBP+uo
- eVdZ/3gFsc9AkTRh/evCYEQ3basPl6k/sNMvcKVdFLpRonIY3jyoQL1QCf0TEDBhsY+z
- 2K5uZNXdguOY4xT8CPrnqlVE0lehXQ27L4EDzLPtOqIeAdxIeH15TU3Bd+DLHxl4Amp+
- OC03apHUSeIP8oG3WcALzfMS4sKEl380xuRL7H0k24iJ8PRe2y3M8S+EZ7Fe9vC4U7Xf
- jjCQ==
+ bh=VuPEUQgQaW4Rj2N1z/kxif8EtCaljFE1MDNF1Zfnlqk=;
+ b=hNa/CsQP/0jxhcOEHgwF38cuW9S1yBQ2j2xRroUSrg5EIHJrBdMFuXKCIk4bOynWWG
+ YoZTeHxETOfn9K3Rcdndip4SE2sFvA69oifyfhbcG9nVg5/ZboFQAUTT29ji+8JSa0Xi
+ 0/faKiAB8ZghIjQ9LNp6dFokHppmPzVw8u7TiC1BblW4tdsxNDUI7TViicfytw0tHFyf
+ e2L6FVOI4VT9UFT/q1uK3ZSOb9udeRZmLc0vhtBTTbHycjJAqJg8GhrA2dQrtH9tPdbg
+ j9LoN+0+/Va/COJgWATOKJl82CMXQKpveUni0nt+ZE1dGnr6jLhRu3ot64CqzDug2rKG
+ t7HA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1zoId/LSkJyvk3mDzuouTOGpECZBDRpZm0kKm87iEBM=;
- b=xdTX3V2Rn5DHXt7Lo2bID1Xmb2r11tHZWksZaa1wwI3RvyzvNWjU7BQVKJf0uRVl/I
- w8IqRWUbvaHqDn6SUeg0FecJdS4mlNMTrWn6YRMjIZeX5WifoK/HbV2eEQoU0wAqthAW
- TqI1gwu9zbP9udEX5DMgs4mkgppMNFUbbM4NUFVRag8da3M3eUANbIVBfmwwGSTR04P0
- j3EK/RfBKlzYucZKmju9tGKcDrGVC9yMNEpPEmBJsZB0yp8eUcKerHkSS+5AoK55A3VO
- AApaS3K7Cg0IVBsB57+BwaB8deagxoHkYVnoy+UsREW/WDct+hQpbrItEby/j4rLZKj3
- 9icQ==
-X-Gm-Message-State: ANoB5pmb0k6kwRz+u9hB/HeM1yCHvulEEpXrwSEdvcHwvNo+3sBKyciD
- yM1Zdn6oOkTAbv8fg1GxlvnkDKimBFCH6DtjNj4=
-X-Google-Smtp-Source: AA0mqf67JV+jJ3BXQHz9ugE8QWP4Os8drcjLN5D6xj6jcQj/t/FDk/vMLck3b/aTNUr2IYerxSGTutILFoJNyl+aOdo=
-X-Received: by 2002:a67:d009:0:b0:3b1:4aad:9c47 with SMTP id
- r9-20020a67d009000000b003b14aad9c47mr7022382vsi.73.1670478211199; Wed, 07 Dec
- 2022 21:43:31 -0800 (PST)
+ bh=VuPEUQgQaW4Rj2N1z/kxif8EtCaljFE1MDNF1Zfnlqk=;
+ b=4EDksoqrxOiA2kbaCeWLRzFlXC4r0neorhhccp0/61oauDO0/Ii8Fg8ZYV+LvZush2
+ ZaAQ+dFmq13l91RsCODse+yOKgS+Xyc2MiA3ztTnpQpneAYhTk4tz4KkVlLxMBXmYLgm
+ 4mizHnS7L/UMhHsYBMV+aWjR9gd1SRhLxzhOGMZdsPvhoIgJYEpEaHTKqJgNN4vwFUan
+ k5kZ2qULghZpzne1DXuamZMng+kh7JSZOa2xrmMVpc4CnvZQwGzwT/C5MsW+XXPWKWST
+ a0N+jRwWWQf/0+dQsCL3L9NWkQC1A8D14pNqiUCgDUr0wPlWS+h76cTIxhc3XhfzAfg1
+ 44nw==
+X-Gm-Message-State: ANoB5pl6oSrlpaFw5MZGvrbrlmKRJGnlySVfE7KYDcpHsCOc9yXEvpSL
+ k7DARnaXXXv5UhLB6VnHYGiizb5X3+7qQdXldupcKQ==
+X-Google-Smtp-Source: AA0mqf6WCEO78PdD6eb7intsfnq1rCYP/6CXLnQA5b16jKDnZnXiSwbJIrAQwIQFEHWaojY2QoTbQ1AKxJERvh5ClNQ=
+X-Received: by 2002:a05:6a00:290f:b0:56b:e15a:7215 with SMTP id
+ cg15-20020a056a00290f00b0056be15a7215mr75995213pfb.27.1670488882065; Thu, 08
+ Dec 2022 00:41:22 -0800 (PST)
 MIME-Version: 1.0
-References: <20221207090037.281452-1-bmeng@tinylab.org>
- <20221207090037.281452-2-bmeng@tinylab.org>
-In-Reply-To: <20221207090037.281452-2-bmeng@tinylab.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 8 Dec 2022 15:43:04 +1000
-Message-ID: <CAKmqyKOE63U4qn=uCKSX6jwzWowE9=Uc1PUJSq9gUHRpev+=XA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv: Clear mstatus.MPRV when leaving M-mode
- for priv spec 1.12+
-To: Bin Meng <bmeng@tinylab.org>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
+References: <20221108125703.1463577-1-apatel@ventanamicro.com>
+ <20221108125703.1463577-3-apatel@ventanamicro.com>
+ <CAKmqyKP+hc4N6Z2AqkQpCmF=oyTE_rf-XfSsTHChwcUWRE5gsg@mail.gmail.com>
+In-Reply-To: <CAKmqyKP+hc4N6Z2AqkQpCmF=oyTE_rf-XfSsTHChwcUWRE5gsg@mail.gmail.com>
+From: Anup Patel <apatel@ventanamicro.com>
+Date: Thu, 8 Dec 2022 14:11:10 +0530
+Message-ID: <CAK9=C2Uu1bCcZht+ydiazSmgnkD_hhLetXP4WcA92DypE4m9=A@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] target/riscv: Update VS timer whenever htimedelta
+ changes
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Atish Patra <atishp@atishpatra.org>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=apatel@ventanamicro.com; helo=mail-pf1-x42b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,53 +82,111 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Dec 2022 05:43:34 -0000
+X-List-Received-Date: Thu, 08 Dec 2022 08:41:48 -0000
 
-On Wed, Dec 7, 2022 at 7:11 PM Bin Meng <bmeng@tinylab.org> wrote:
+On Thu, Dec 8, 2022 at 9:00 AM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> Since priv spec v1.12, MRET and SRET now clear mstatus.MPRV when
-> leaving M-mode.
+> On Tue, Nov 8, 2022 at 11:07 PM Anup Patel <apatel@ventanamicro.com> wrote:
+> >
+> > The htimedelta[h] CSR has impact on the VS timer comparison so we
+> > should call riscv_timer_write_timecmp() whenever htimedelta changes.
+> >
+> > Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp suppor")
+> > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 >
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> This patch breaks my Xvisor test. When running OpenSBI and Xvisor like this:
+>
+> qemu-system-riscv64 -machine virt \
+>     -m 1G -serial mon:stdio -serial null -nographic \
+>     -append 'vmm.console=uart@10000000 vmm.bootcmd="vfs mount initrd
+> /;vfs run /boot.xscript;vfs cat /system/banner.txt; guest kick guest0;
+> vserial bind guest0/uart0"' \
+>     -smp 4 -d guest_errors \
+>     -bios none \
+>     -device loader,file=./images/qemuriscv64/vmm.bin,addr=0x80200000 \
+>     -kernel ./images/qemuriscv64/fw_jump.elf \
+>     -initrd ./images/qemuriscv64/vmm-disk-linux.img -cpu rv64,h=true
+>
+> Running:
+>
+> Xvisor v0.3.0-129-gbc33f339 (Jan  1 1970 00:00:00)
+>
+> I see this failure:
+>
+> INIT: bootcmd:  guest kick guest0
+>
+> guest0: Kicked
+>
+> INIT: bootcmd:  vserial bind guest0/uart0
+>
+> [guest0/uart0] cpu_vcpu_stage2_map: guest_phys=0x000000003B9AC000
+> size=0x4096 map failed
+>
+> do_error: CPU3: VCPU=guest0/vcpu0 page fault failed (error -1)
+>
+>        zero=0x0000000000000000          ra=0x0000000080001B4E
+>
+>          sp=0x000000008001CF80          gp=0x0000000000000000
+>
+>          tp=0x0000000000000000          s0=0x000000008001CFB0
+>
+>          s1=0x0000000000000000          a0=0x0000000010001048
+>
+>          a1=0x0000000000000000          a2=0x0000000000989680
+>
+>          a3=0x000000003B9ACA00          a4=0x0000000000000048
+>
+>          a5=0x0000000000000000          a6=0x0000000000019000
+>
+>          a7=0x0000000000000000          s2=0x0000000000000000
+>
+>          s3=0x0000000000000000          s4=0x0000000000000000
+>
+>          s5=0x0000000000000000          s6=0x0000000000000000
+>
+>          s7=0x0000000000000000          s8=0x0000000000000000
+>
+>          s9=0x0000000000000000         s10=0x0000000000000000
+>
+>         s11=0x0000000000000000          t0=0x0000000000004000
+>
+>          t1=0x0000000000000100          t2=0x0000000000000000
+>
+>          t3=0x0000000000000000          t4=0x0000000000000000
+>
+>          t5=0x0000000000000000          t6=0x0000000000000000
+>
+>        sepc=0x0000000080001918     sstatus=0x0000000200004120
+>
+>     hstatus=0x00000002002001C0     sp_exec=0x0000000010A64000
+>
+>      scause=0x0000000000000017       stval=0x000000003B9ACAF8
+>
+>       htval=0x000000000EE6B2BE      htinst=0x0000000000D03021
+>
+> I have tried updating to a newer Xvisor release, but with that I don't
+> get any serial output.
+>
+> Can you help get the Xvisor tests back up and running?
 
-Thanks!
+I tried the latest Xvisor-next (https://github.com/avpatel/xvisor-next)
+with your QEMU riscv-to-apply.next branch and it works fine (both
+with and without Sstc).
 
-Applied to riscv-to-apply.next
+Here's the QEMU command which I use:
 
-Alistair
+qemu-system-riscv64 -M virt -m 512M -nographic \
+-bios opensbi/build/platform/generic/firmware/fw_jump.bin \
+-kernel ../xvisor-next/build/vmm.bin \
+-initrd rbd_v64.img \
+-append "vmm.bootcmd=\"vfs mount initrd /;vfs run /boot.xscript;vfs
+cat /system/banner.txt\"" \
+-smp 4
 
->
-> ---
->
->  target/riscv/op_helper.c | 6 ++++++
->  1 file changed, 6 insertions(+)
->
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index a047d38152..878bcb03b8 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -154,6 +154,9 @@ target_ulong helper_sret(CPURISCVState *env)
->                          get_field(mstatus, MSTATUS_SPIE));
->      mstatus = set_field(mstatus, MSTATUS_SPIE, 1);
->      mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
-> +    if (env->priv_ver >= PRIV_VERSION_1_12_0) {
-> +        mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
-> +    }
->      env->mstatus = mstatus;
->
->      if (riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
-> @@ -203,6 +206,9 @@ target_ulong helper_mret(CPURISCVState *env)
->      mstatus = set_field(mstatus, MSTATUS_MPIE, 1);
->      mstatus = set_field(mstatus, MSTATUS_MPP, PRV_U);
->      mstatus = set_field(mstatus, MSTATUS_MPV, 0);
-> +    if ((env->priv_ver >= PRIV_VERSION_1_12_0) && (prev_priv != PRV_M)) {
-> +        mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
-> +    }
->      env->mstatus = mstatus;
->      riscv_cpu_set_mode(env, prev_priv);
->
-> --
-> 2.34.1
->
->
+Also, I will be releasing Xvisor-0.3.2 by the end of Dec 2022 so I
+suggest using this upcoming release in your test.
+
+Regards,
+Anup
 
