@@ -1,69 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p3EKD-0007wO-PE
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Dec 2022 05:40:23 -0500
+	id 1p3EKT-00086Y-AL
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Dec 2022 05:40:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p3EK5-0007u5-MG
- for qemu-riscv@nongnu.org; Thu, 08 Dec 2022 05:40:15 -0500
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p3EKR-000857-V9
+ for qemu-riscv@nongnu.org; Thu, 08 Dec 2022 05:40:36 -0500
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p3EK3-0008Mv-JO
- for qemu-riscv@nongnu.org; Thu, 08 Dec 2022 05:40:12 -0500
-Received: by mail-wr1-x431.google.com with SMTP id m14so1098763wrh.7
- for <qemu-riscv@nongnu.org>; Thu, 08 Dec 2022 02:40:11 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p3EKP-00010c-Ah
+ for qemu-riscv@nongnu.org; Thu, 08 Dec 2022 05:40:35 -0500
+Received: by mail-wr1-x435.google.com with SMTP id u12so1088770wrr.11
+ for <qemu-riscv@nongnu.org>; Thu, 08 Dec 2022 02:40:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=7brmFa4TPoN8NgdW3pxFpw8YbOgy6q2ICxw9s3y/QH8=;
- b=mfIqygBT9oLdXJbqOhuKgnN0qWK7Bk4uXNUdcwUCYNuJbHXDJnXN5HqOo/MTgZ90/n
- iA1+VFKhPeL1eR08Egu1qjWZfhNfxMtl/RAc+VLb2DAWVoXrFssYbmNidkfXz/Co4dZY
- l45HC2e1Feg+wqn7HHY+CBWyi5VEgeNQ/wi6wW3ZXOkYPVh/AAVGglOxhgCLTNafxgde
- aU26AqZZnVP/CVL2vh0NIEWKTwRe4aLYmQSIJHOkxEexVq5otxUtpQWTOkfaJ6iIY1mJ
- cqzOIJhOxiy53bgaWFiXcl5lUiuy/RbRs0nzaDEwqtISINPz8mlJfdpool2Pf21ASrdj
- ghTg==
+ bh=buO6cdpVNYldtS+BpUsbSi0LMhvAA2lrJ/Ry0K5pkBQ=;
+ b=agaK2Y7QXB9VUQEB9UuIoUBSRSFn9/QJfNGhAZ70Vp7ufOCTeU3hdKV3PfOwaHXMdH
+ dm/Siae+aqEb0tNpe66YRsbDN8mTPKjPcp9EVyzLIF7fVl8jlxzAZCG1yLYpAGW2gMoX
+ 5PFe6LDpgLWvdRSm253jjr6+uhvksZBj70t8dI6Xt/ujZijMDOfhk9Y9rYM/3kq4gug4
+ j9Qc/IYMnaLABolefoUUNid8/Orzk9oKCn7Eq5u0cxZ0Vru7gcLypI7xRBgHggsCQ6vO
+ /Hwhlr9suHqR5XsGEg6YVx5KTQz4GFBxOXoDLWB6t7lc+jIHHUU54HaA4OcEdzotZKzP
+ zmuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7brmFa4TPoN8NgdW3pxFpw8YbOgy6q2ICxw9s3y/QH8=;
- b=1PVUiQwXnMaHANXY/Xm0YVJZ2gC6Qh/Mnl4BIbtn9azC+r1LApusMbpvuEpNs4TcBP
- zDiZ2SgowYXGDivWmWqHX/UdhEwAGhk94RdUYKz15Meq2LKuTlqwWF/CXJa81PCLYJMd
- J1Ud6tm0ib09nxQG8bT7yq16SC1KTYz/DeF8kAznsfScPKfwOSDxHpiryhbtZK64lrSU
- U67HzXNFp5Rzq2CHnEfq/abWtOEygFoIfbIdepyOOmk6fOrMae380bXl/5xXmQhvLlBS
- i+yqNHCAcQ0FTlgVAu5aA5ZQ744FvJ94/TkJG3zzOjmkcg/ZTDNceMqSpNPdXN0my2DF
- nObw==
-X-Gm-Message-State: ANoB5pnNK8v+6FgFiamj0sNp4+ZskoBbGIbQIoEJsPzsHEEIiGlepbGC
- mqI5FRoYpkPYoYTwmbHhtQ5WIsYQhWToIFk5Jtg=
-X-Google-Smtp-Source: AA0mqf79/9CnnL7dLKqPrXZ1Mx/SXIbBC6Py+M6P7a3pVMowyxTGOEI/scQ02vyauLcnK6Ur5OEwqg==
-X-Received: by 2002:adf:df8b:0:b0:242:56ae:63b7 with SMTP id
- z11-20020adfdf8b000000b0024256ae63b7mr11886046wrl.90.1670496010174; 
- Thu, 08 Dec 2022 02:40:10 -0800 (PST)
+ bh=buO6cdpVNYldtS+BpUsbSi0LMhvAA2lrJ/Ry0K5pkBQ=;
+ b=lenXBTKiZq1QxNku0G8OMCRwQ3j8e8+rNQxLwgL95VHqvYQqC3MSubx5lc/KeRP5Fq
+ WtxO1Bz4nR3PM2rh4NR5OZ3pZVsaZKJWPXLHad+uWUWsWEsxv/rp7o1gW6yD2vx/ojCL
+ WsUxmpiDij3niQI/vfpJt8LvtI6iBidaxKWA3X1gTPwbKqMHzfLU5KrYL2Y7MDJamcvi
+ r3ZKEJqWC0S1vYZXpF5gAV8R+XvpOVb0fB03/74XAGDGS8N/acgrfYOosw4h/w3L1/fQ
+ CiW460g/DuR46WJsLOz0f6MwzF7s1qUfR2pcwoxJsH1lKCTxdvHgkepwy6onqo60k2c3
+ smbQ==
+X-Gm-Message-State: ANoB5pntRkvOtTll/AGQUgRQeDKJch5UtDZ9a0iZRaDn6apnNIcdceiG
+ FooHqpV1oO5NERwGy3Bvg7iwxA==
+X-Google-Smtp-Source: AA0mqf44cBmXYC8vz7gVbfjldVJvDyD7w3rK2PaCUsXyvlLE59ONqNz0laSS96ftookB9cO7WmRyjg==
+X-Received: by 2002:adf:de86:0:b0:242:442c:8ea3 with SMTP id
+ w6-20020adfde86000000b00242442c8ea3mr15675294wrl.380.1670496030205; 
+ Thu, 08 Dec 2022 02:40:30 -0800 (PST)
 Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- z12-20020a5d44cc000000b002362f6fcaf5sm21818942wrr.48.2022.12.08.02.40.08
+ h5-20020a05600c2ca500b003c6bbe910fdsm5626404wmc.9.2022.12.08.02.40.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Dec 2022 02:40:09 -0800 (PST)
-Message-ID: <c1db9755-1c78-0a21-5869-6630f4829409@linaro.org>
-Date: Thu, 8 Dec 2022 11:40:08 +0100
+ Thu, 08 Dec 2022 02:40:29 -0800 (PST)
+Message-ID: <ea5ce917-9d27-e22d-2ba8-22439c6b6147@linaro.org>
+Date: Thu, 8 Dec 2022 11:40:28 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.5.1
-Subject: Re: [PATCH v2 08/16] hw/intc: sifive_plic: Use error_setg() to
- propagate the error up via errp in sifive_plic_realize()
+Subject: Re: [PATCH v2 04/16] hw/riscv: Sort machines Kconfig options in
+ alphabetical order
 Content-Language: en-US
 To: Bin Meng <bmeng@tinylab.org>, qemu-devel@nongnu.org
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+Cc: Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
 References: <20221207100335.290481-1-bmeng@tinylab.org>
- <20221207100335.290481-8-bmeng@tinylab.org>
+ <20221207100335.290481-4-bmeng@tinylab.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20221207100335.290481-8-bmeng@tinylab.org>
+In-Reply-To: <20221207100335.290481-4-bmeng@tinylab.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
@@ -83,24 +83,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Dec 2022 10:40:15 -0000
+X-List-Received-Date: Thu, 08 Dec 2022 10:40:36 -0000
 
 On 7/12/22 11:03, Bin Meng wrote:
-> The realize() callback has an errp for us to propagate the error up.
-> While we are here, corret the wrong multi-line comment format.
-
-Typo "correct"
-
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> SHAKTI_C machine Kconfig option was inserted in disorder. Fix it.
 > 
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
 > 
-> Changes in v2:
-> - new patch: "hw/intc: sifive_plic: Use error_setg() to propagate the error up via errp in sifive_plic_realize()"
+> (no changes since v1)
 > 
->   hw/intc/sifive_plic.c | 7 ++++---
->   1 file changed, 4 insertions(+), 3 deletions(-)
+>   hw/riscv/Kconfig | 16 +++++++++-------
+>   1 file changed, 9 insertions(+), 7 deletions(-)
+
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
