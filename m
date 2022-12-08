@@ -1,64 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p37cF-0007Xl-Ez
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 22:30:31 -0500
+	id 1p38LS-0007AL-Bs
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 23:17:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p37cE-0007WE-8y; Wed, 07 Dec 2022 22:30:30 -0500
-Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
+ id 1p38LM-00079k-5H; Wed, 07 Dec 2022 23:17:09 -0500
+Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p37cC-00051X-MG; Wed, 07 Dec 2022 22:30:29 -0500
-Received: by mail-vs1-xe2e.google.com with SMTP id 124so353230vsv.4;
- Wed, 07 Dec 2022 19:30:27 -0800 (PST)
+ id 1p38LD-0006aW-9i; Wed, 07 Dec 2022 23:17:05 -0500
+Received: by mail-vs1-xe29.google.com with SMTP id q128so394194vsa.13;
+ Wed, 07 Dec 2022 20:16:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+20EnLF279aUNxt8lAbLvak+Bjt4ZfVPwBMq7w9KoAQ=;
- b=eKpIzoPYzqdPo4Y+uZgE1pMThgB2P+HM6feYLLmC/2/dqtPjWuK5xrtMSR9y/eZKxR
- KnXJCOEkpxsmQP8JKbWDWG1ttFSiBzvdYHBCyQ8EMZDiy5BwMqOOyfXkKiTrmXdkl5Wl
- Yf3ilTYm5obfVLtFVlfDRN56/gYCP8w/5j1idPFggB72stCzA2klpRKo+Vso7w6eXZWn
- Jm1KJBPK7qiurDzsxlo8bzwwrsVr/kCPfBfXqt39mtRlFtmoYJJ0tXLXUHtyGElw6Nny
- sI+Pdr1WPO0p5b+T63CDlCN9TLPBghwSX7JwzSgW+xWuH8irevLeFRLnTlzrRjsWxorL
- 2L1w==
+ bh=AZNhtBZRjveedD4xJkNVcq2nk+AeKZz9V3HT4Z8/by0=;
+ b=nt74wQurAkdPbweCfmbiAL8p3ZrU8PSwcjBfHGPhDMibmFUfh4XA5nTKkPXngb+0/A
+ uq7sPbkJ2IE86scKGrzYeNZk5pGQ+qi5GE8uVkzJ0sOxFs/qgEIjNQIbgHvxystIHB0J
+ LTuI6pNeVUthEqdQ7OiwnnQQTSe4xfnHXsO3ZK+1qjRu4D2yZyVG0/BzBLXMUSLIUwqF
+ 7XJitRjYcG76e1EjGzNYzKoJQcgxoMBqdHjJ5Rg4bjeMoeIDRvS8+PFvng00pjCfFncf
+ IzLYRfjii9zR/6zjCdzFAzw+xs69SGUyVDQM50r1EOCLK2toQ4vS4ZpaaCrhjhbVUskB
+ dpAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+20EnLF279aUNxt8lAbLvak+Bjt4ZfVPwBMq7w9KoAQ=;
- b=M9YnqRBO3UaouodvjDVgnvMlyWMqAGglCfAgfPkpifmxnJkOmpjXgp/E6qPW5sejV5
- 3P3pRl4PDhSetrAdlM086+HNUgzg5CQZ32d8CPUJdjWcsJ1TVIURxP5H3UoYYf2SagcW
- YHO+9uAnmZEZCu1bFxCIOgPg5+t29aie5nOwCNb7S0OgRm9kR1Ln8hC7cdnEv3q3Kf7s
- Cd1qfp+lOh4oiBeCw7bKyVjB1/hJbCyYjGQf03p/okVxkZinRcWU9G6ICwsu32Z1IgvI
- p0SKNpkPcrlrU3GfzU87tud/kxZ5AjyVntj64AVVZ584h+39KcFfTXmF9EDEwl+MukrW
- V1Tg==
-X-Gm-Message-State: ANoB5pnNJ2cXgDLQ82PTDk+rOHFUGGoXxaaLqHsoIxlE9VoMGLInHkHU
- fCQCVdov9nNNLwhJm1WoecAG59JGDjv5N397Upk=
-X-Google-Smtp-Source: AA0mqf4ZE2HXpbX7vCTRS9Sc7l+C5/BGTYgHjHFk5sPLJpduhRZdQNLRl51fnSZDN34Oduy4BvC9m8FgC1m1G7wtMTo=
-X-Received: by 2002:a05:6102:3bc1:b0:3a7:9b8c:2e4c with SMTP id
- a1-20020a0561023bc100b003a79b8c2e4cmr38809827vsv.72.1670470226330; Wed, 07
- Dec 2022 19:30:26 -0800 (PST)
+ bh=AZNhtBZRjveedD4xJkNVcq2nk+AeKZz9V3HT4Z8/by0=;
+ b=WviI4NgqRiEgT4XuHoqi6vUlebzS9g1psbuHvypR6rKeaqRCBVVStKB9zDmgKOPV+j
+ TPRdlwh+qypxu7/G1GkCowdZW8dIE7pPPlDAEJeYuVGOyAQ4x2d2MnAcDQJM4w8r5WNv
+ eTxlhkSawXeuKuvWImybvrzXCaH5Tfmdvsmo5x/cpP06ANE08veXSY9kNC7Iqw5mzSfE
+ az7z7UXFwmJK0fClMRPOI4c/ehY3P+mHXE3XA90sgOxYBmdsfHuyQyL7EgN6e/CKdQMQ
+ kawhZ11SGZjiVFBufC4pTh2oXauJcnrYpZGLgbqny9j5lDNgKjNKTCBZ95m5yRXjbaeR
+ ndQw==
+X-Gm-Message-State: ANoB5pmzH+lU1ixtXqLDEYLF82CdOOh00yf9qFvZGYcIofB+gMmlowMW
+ D8QMd3K7zwQZYBGtTT0TTqLiFbHDfxbBZqicVvn1R43kTxY=
+X-Google-Smtp-Source: AA0mqf6nzDtUv3Wf3l1xfeG+yn0aiGlyM/elvpYibgOqZZnxNjter82FaozQcUNjAuIx1vvO0K4LHj+G7t9iMxvYCA8=
+X-Received: by 2002:a67:c519:0:b0:3b1:2b83:1861 with SMTP id
+ e25-20020a67c519000000b003b12b831861mr10283946vsk.10.1670473010423; Wed, 07
+ Dec 2022 20:16:50 -0800 (PST)
 MIME-Version: 1.0
-References: <20221108125703.1463577-1-apatel@ventanamicro.com>
- <20221108125703.1463577-3-apatel@ventanamicro.com>
-In-Reply-To: <20221108125703.1463577-3-apatel@ventanamicro.com>
+References: <20221207090037.281452-1-bmeng@tinylab.org>
+In-Reply-To: <20221207090037.281452-1-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 8 Dec 2022 13:29:59 +1000
-Message-ID: <CAKmqyKP+hc4N6Z2AqkQpCmF=oyTE_rf-XfSsTHChwcUWRE5gsg@mail.gmail.com>
-Subject: Re: [PATCH v2 2/5] target/riscv: Update VS timer whenever htimedelta
- changes
-To: Anup Patel <apatel@ventanamicro.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atishp@atishpatra.org>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Thu, 8 Dec 2022 14:16:24 +1000
+Message-ID: <CAKmqyKPmxVQUmonnatU-xdnWF517fR0TLBYwoQmY=NnGRCnfyg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Simplify helper_sret() a little bit
+To: Bin Meng <bmeng@tinylab.org>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e29;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe29.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -79,91 +73,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Dec 2022 03:30:30 -0000
+X-List-Received-Date: Thu, 08 Dec 2022 04:17:12 -0000
 
-On Tue, Nov 8, 2022 at 11:07 PM Anup Patel <apatel@ventanamicro.com> wrote:
+On Wed, Dec 7, 2022 at 7:05 PM Bin Meng <bmeng@tinylab.org> wrote:
 >
-> The htimedelta[h] CSR has impact on the VS timer comparison so we
-> should call riscv_timer_write_timecmp() whenever htimedelta changes.
+> There are 2 paths in helper_sret() and the same mstatus update codes
+> are replicated. Extract the common parts to simplify it a little bit.
 >
-> Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp suppor")
-> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
-This patch breaks my Xvisor test. When running OpenSBI and Xvisor like this:
-
-qemu-system-riscv64 -machine virt \
-    -m 1G -serial mon:stdio -serial null -nographic \
-    -append 'vmm.console=uart@10000000 vmm.bootcmd="vfs mount initrd
-/;vfs run /boot.xscript;vfs cat /system/banner.txt; guest kick guest0;
-vserial bind guest0/uart0"' \
-    -smp 4 -d guest_errors \
-    -bios none \
-    -device loader,file=./images/qemuriscv64/vmm.bin,addr=0x80200000 \
-    -kernel ./images/qemuriscv64/fw_jump.elf \
-    -initrd ./images/qemuriscv64/vmm-disk-linux.img -cpu rv64,h=true
-
-Running:
-
-Xvisor v0.3.0-129-gbc33f339 (Jan  1 1970 00:00:00)
-
-I see this failure:
-
-INIT: bootcmd:  guest kick guest0
-
-guest0: Kicked
-
-INIT: bootcmd:  vserial bind guest0/uart0
-
-[guest0/uart0] cpu_vcpu_stage2_map: guest_phys=0x000000003B9AC000
-size=0x4096 map failed
-
-do_error: CPU3: VCPU=guest0/vcpu0 page fault failed (error -1)
-
-       zero=0x0000000000000000          ra=0x0000000080001B4E
-
-         sp=0x000000008001CF80          gp=0x0000000000000000
-
-         tp=0x0000000000000000          s0=0x000000008001CFB0
-
-         s1=0x0000000000000000          a0=0x0000000010001048
-
-         a1=0x0000000000000000          a2=0x0000000000989680
-
-         a3=0x000000003B9ACA00          a4=0x0000000000000048
-
-         a5=0x0000000000000000          a6=0x0000000000019000
-
-         a7=0x0000000000000000          s2=0x0000000000000000
-
-         s3=0x0000000000000000          s4=0x0000000000000000
-
-         s5=0x0000000000000000          s6=0x0000000000000000
-
-         s7=0x0000000000000000          s8=0x0000000000000000
-
-         s9=0x0000000000000000         s10=0x0000000000000000
-
-        s11=0x0000000000000000          t0=0x0000000000004000
-
-         t1=0x0000000000000100          t2=0x0000000000000000
-
-         t3=0x0000000000000000          t4=0x0000000000000000
-
-         t5=0x0000000000000000          t6=0x0000000000000000
-
-       sepc=0x0000000080001918     sstatus=0x0000000200004120
-
-    hstatus=0x00000002002001C0     sp_exec=0x0000000010A64000
-
-     scause=0x0000000000000017       stval=0x000000003B9ACAF8
-
-      htval=0x000000000EE6B2BE      htinst=0x0000000000D03021
-
-I have tried updating to a newer Xvisor release, but with that I don't
-get any serial output.
-
-Can you help get the Xvisor tests back up and running?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
+
+> ---
+>
+>  target/riscv/op_helper.c | 20 ++++++--------------
+>  1 file changed, 6 insertions(+), 14 deletions(-)
+>
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index d7af7f056b..a047d38152 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -149,21 +149,21 @@ target_ulong helper_sret(CPURISCVState *env)
+>      }
+>
+>      mstatus = env->mstatus;
+> +    prev_priv = get_field(mstatus, MSTATUS_SPP);
+> +    mstatus = set_field(mstatus, MSTATUS_SIE,
+> +                        get_field(mstatus, MSTATUS_SPIE));
+> +    mstatus = set_field(mstatus, MSTATUS_SPIE, 1);
+> +    mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
+> +    env->mstatus = mstatus;
+>
+>      if (riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
+>          /* We support Hypervisor extensions and virtulisation is disabled */
+>          target_ulong hstatus = env->hstatus;
+>
+> -        prev_priv = get_field(mstatus, MSTATUS_SPP);
+>          prev_virt = get_field(hstatus, HSTATUS_SPV);
+>
+>          hstatus = set_field(hstatus, HSTATUS_SPV, 0);
+> -        mstatus = set_field(mstatus, MSTATUS_SPP, 0);
+> -        mstatus = set_field(mstatus, SSTATUS_SIE,
+> -                            get_field(mstatus, SSTATUS_SPIE));
+> -        mstatus = set_field(mstatus, SSTATUS_SPIE, 1);
+>
+> -        env->mstatus = mstatus;
+>          env->hstatus = hstatus;
+>
+>          if (prev_virt) {
+> @@ -171,14 +171,6 @@ target_ulong helper_sret(CPURISCVState *env)
+>          }
+>
+>          riscv_cpu_set_virt_enabled(env, prev_virt);
+> -    } else {
+> -        prev_priv = get_field(mstatus, MSTATUS_SPP);
+> -
+> -        mstatus = set_field(mstatus, MSTATUS_SIE,
+> -                            get_field(mstatus, MSTATUS_SPIE));
+> -        mstatus = set_field(mstatus, MSTATUS_SPIE, 1);
+> -        mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
+> -        env->mstatus = mstatus;
+>      }
+>
+>      riscv_cpu_set_mode(env, prev_priv);
+> --
+> 2.34.1
+>
+>
 
