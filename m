@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p38NE-0008FV-47
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 23:19:04 -0500
+	id 1p39h2-0001lF-Bc
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Dec 2022 00:43:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p38NB-0008EF-L9; Wed, 07 Dec 2022 23:19:01 -0500
-Received: from mail-ua1-x92e.google.com ([2607:f8b0:4864:20::92e])
+ id 1p39h0-0001kj-6T; Thu, 08 Dec 2022 00:43:34 -0500
+Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p38NA-0007sK-0P; Wed, 07 Dec 2022 23:19:01 -0500
-Received: by mail-ua1-x92e.google.com with SMTP id 97so95877uam.0;
- Wed, 07 Dec 2022 20:18:59 -0800 (PST)
+ id 1p39gy-0002FW-MA; Thu, 08 Dec 2022 00:43:33 -0500
+Received: by mail-vs1-xe31.google.com with SMTP id 128so512630vsz.12;
+ Wed, 07 Dec 2022 21:43:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qGQ5vD/30nSBWbrHatJS+Fz1po/tqH5JcWp3EKWbla8=;
- b=NHC7pEUI24zipqic0Rjzthw8yC8GgckoTK74e7vUwy7ojmVktASdPq4gNxeRtPwfK1
- gmJiyTRLNXdPYTRpFcBLSOBuRauG7+/nLH6IlhEbjm6e2n+x8DbfBUtx3jqdDdiZk7J7
- kVathrXz2Keunzj+yKxMOH3DcZSZj+rvgo3sqXO1NYgD5zQ9WCxG3p1PC1aaX03WjuK9
- K7QPEgmbhvNbvFzqJMFb8pOjHCB7ZxarOdwdkJdAHbN38419R7jks2AfAM3D9XL/eOpm
- WVzn0q8qCO5PDCG5+WnrFfMTt6RHbYtIWJtpoDsg5szuQm/zyuSrHdgFpExWs5Qx1R60
- WkKA==
+ bh=1zoId/LSkJyvk3mDzuouTOGpECZBDRpZm0kKm87iEBM=;
+ b=aiihWZnsibJo7ypKwjCkqxE+xvl2NNRmwBz8aitKdxnlIQ3PxB8smmZr1xua0DF7fM
+ HwOqRkTge0s5lQC/E6Hh+1JG+iqxhd+wH/BiYNQjVhgCX5h3wQ3nnJsD4xxfuScBP+uo
+ eVdZ/3gFsc9AkTRh/evCYEQ3basPl6k/sNMvcKVdFLpRonIY3jyoQL1QCf0TEDBhsY+z
+ 2K5uZNXdguOY4xT8CPrnqlVE0lehXQ27L4EDzLPtOqIeAdxIeH15TU3Bd+DLHxl4Amp+
+ OC03apHUSeIP8oG3WcALzfMS4sKEl380xuRL7H0k24iJ8PRe2y3M8S+EZ7Fe9vC4U7Xf
+ jjCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qGQ5vD/30nSBWbrHatJS+Fz1po/tqH5JcWp3EKWbla8=;
- b=zuvr4Omzu24aiXlfycjAt4imDEWHiOnG6t7klgSyQv62WkeV+ZO/iVliiB0g77ywGG
- xEs22+gMmhUt1kwkgOu4TpiD8CuPjyQ+Q1tuMFgYsKBj4sx1ErHj+seMIYFWXkHfPEge
- 8/ewq54rDj5nP1UtIVs5o+2Lg4Sel4spz2KFa7rKvo0bUbzOWWQP1u57fVtSiLXF/Vx+
- Sr4zLTxr78muM+MV2QUCWpti3oxuMFficnCircBalSTPePcpznD4V36XsX1iLt8kt3AC
- ApFm8Enc68MtEJWKif0Evn5XSM5UBf4YjnFNdhh+rjewv/UJV786YDmx51lTBxzCwnmx
- cbjw==
-X-Gm-Message-State: ANoB5pnelwquaa2s9Rx42198+YI9eyXTSacw1l4Kvl/eA6tahZnBlAKV
- DstGniz0b5CjLsmuInV2px4JFxHHSw5nnLQXeMGwiPoryPY=
-X-Google-Smtp-Source: AA0mqf5D0VXa1Sv+COlPxpHeOtI/sgJKR5NwYFJ8g6j0rbODRQ8DOij3hmee6/UCdtucYSDAVJ8DmAp2L3sLRS/b2ow=
-X-Received: by 2002:ab0:6f52:0:b0:419:1fa3:9618 with SMTP id
- r18-20020ab06f52000000b004191fa39618mr28390098uat.11.1670473138445; Wed, 07
- Dec 2022 20:18:58 -0800 (PST)
+ bh=1zoId/LSkJyvk3mDzuouTOGpECZBDRpZm0kKm87iEBM=;
+ b=xdTX3V2Rn5DHXt7Lo2bID1Xmb2r11tHZWksZaa1wwI3RvyzvNWjU7BQVKJf0uRVl/I
+ w8IqRWUbvaHqDn6SUeg0FecJdS4mlNMTrWn6YRMjIZeX5WifoK/HbV2eEQoU0wAqthAW
+ TqI1gwu9zbP9udEX5DMgs4mkgppMNFUbbM4NUFVRag8da3M3eUANbIVBfmwwGSTR04P0
+ j3EK/RfBKlzYucZKmju9tGKcDrGVC9yMNEpPEmBJsZB0yp8eUcKerHkSS+5AoK55A3VO
+ AApaS3K7Cg0IVBsB57+BwaB8deagxoHkYVnoy+UsREW/WDct+hQpbrItEby/j4rLZKj3
+ 9icQ==
+X-Gm-Message-State: ANoB5pmb0k6kwRz+u9hB/HeM1yCHvulEEpXrwSEdvcHwvNo+3sBKyciD
+ yM1Zdn6oOkTAbv8fg1GxlvnkDKimBFCH6DtjNj4=
+X-Google-Smtp-Source: AA0mqf67JV+jJ3BXQHz9ugE8QWP4Os8drcjLN5D6xj6jcQj/t/FDk/vMLck3b/aTNUr2IYerxSGTutILFoJNyl+aOdo=
+X-Received: by 2002:a67:d009:0:b0:3b1:4aad:9c47 with SMTP id
+ r9-20020a67d009000000b003b14aad9c47mr7022382vsi.73.1670478211199; Wed, 07 Dec
+ 2022 21:43:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20221207100335.290481-1-bmeng@tinylab.org>
- <20221207100335.290481-8-bmeng@tinylab.org>
-In-Reply-To: <20221207100335.290481-8-bmeng@tinylab.org>
+References: <20221207090037.281452-1-bmeng@tinylab.org>
+ <20221207090037.281452-2-bmeng@tinylab.org>
+In-Reply-To: <20221207090037.281452-2-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 8 Dec 2022 14:18:32 +1000
-Message-ID: <CAKmqyKPu=MMh6n2oLq8ZfHmaKXN+piTtvbnGBkH9xHjOeU2-kA@mail.gmail.com>
-Subject: Re: [PATCH v2 08/16] hw/intc: sifive_plic: Use error_setg() to
- propagate the error up via errp in sifive_plic_realize()
+Date: Thu, 8 Dec 2022 15:43:04 +1000
+Message-ID: <CAKmqyKOE63U4qn=uCKSX6jwzWowE9=Uc1PUJSq9gUHRpev+=XA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] target/riscv: Clear mstatus.MPRV when leaving M-mode
+ for priv spec 1.12+
 To: Bin Meng <bmeng@tinylab.org>
-Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>, 
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92e;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,52 +75,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Dec 2022 04:19:02 -0000
+X-List-Received-Date: Thu, 08 Dec 2022 05:43:34 -0000
 
-On Wed, Dec 7, 2022 at 8:06 PM Bin Meng <bmeng@tinylab.org> wrote:
+On Wed, Dec 7, 2022 at 7:11 PM Bin Meng <bmeng@tinylab.org> wrote:
 >
-> The realize() callback has an errp for us to propagate the error up.
-> While we are here, corret the wrong multi-line comment format.
+> Since priv spec v1.12, MRET and SRET now clear mstatus.MPRV when
+> leaving M-mode.
 >
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 >
 > ---
 >
-> Changes in v2:
-> - new patch: "hw/intc: sifive_plic: Use error_setg() to propagate the error up via errp in sifive_plic_realize()"
+>  target/riscv/op_helper.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 >
->  hw/intc/sifive_plic.c | 7 ++++---
->  1 file changed, 4 insertions(+), 3 deletions(-)
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index a047d38152..878bcb03b8 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -154,6 +154,9 @@ target_ulong helper_sret(CPURISCVState *env)
+>                          get_field(mstatus, MSTATUS_SPIE));
+>      mstatus = set_field(mstatus, MSTATUS_SPIE, 1);
+>      mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
+> +    if (env->priv_ver >= PRIV_VERSION_1_12_0) {
+> +        mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
+> +    }
+>      env->mstatus = mstatus;
 >
-> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-> index c9af94a888..9cb4c6d6d4 100644
-> --- a/hw/intc/sifive_plic.c
-> +++ b/hw/intc/sifive_plic.c
-> @@ -379,7 +379,8 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
->      s->m_external_irqs = g_malloc(sizeof(qemu_irq) * s->num_harts);
->      qdev_init_gpio_out(dev, s->m_external_irqs, s->num_harts);
->
-> -    /* We can't allow the supervisor to control SEIP as this would allow the
-> +    /*
-> +     * We can't allow the supervisor to control SEIP as this would allow the
->       * supervisor to clear a pending external interrupt which will result in
->       * lost a interrupt in the case a PLIC is attached. The SEIP bit must be
->       * hardware controlled when a PLIC is attached.
-> @@ -387,8 +388,8 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
->      for (i = 0; i < s->num_harts; i++) {
->          RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(s->hartid_base + i));
->          if (riscv_cpu_claim_interrupts(cpu, MIP_SEIP) < 0) {
-> -            error_report("SEIP already claimed");
-> -            exit(1);
-> +            error_setg(errp, "SEIP already claimed");
-> +            return;
->          }
->      }
+>      if (riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
+> @@ -203,6 +206,9 @@ target_ulong helper_mret(CPURISCVState *env)
+>      mstatus = set_field(mstatus, MSTATUS_MPIE, 1);
+>      mstatus = set_field(mstatus, MSTATUS_MPP, PRV_U);
+>      mstatus = set_field(mstatus, MSTATUS_MPV, 0);
+> +    if ((env->priv_ver >= PRIV_VERSION_1_12_0) && (prev_priv != PRV_M)) {
+> +        mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
+> +    }
+>      env->mstatus = mstatus;
+>      riscv_cpu_set_mode(env, prev_priv);
 >
 > --
 > 2.34.1
