@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p3EBw-0003u0-Hz
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Dec 2022 05:31:48 -0500
+	id 1p3EIQ-0005tR-DY
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Dec 2022 05:38:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p3EBv-0003ta-8s
- for qemu-riscv@nongnu.org; Thu, 08 Dec 2022 05:31:47 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p3EIM-0005sn-Ql
+ for qemu-riscv@nongnu.org; Thu, 08 Dec 2022 05:38:28 -0500
 Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p3EBl-0006Gv-Bt
- for qemu-riscv@nongnu.org; Thu, 08 Dec 2022 05:31:40 -0500
-Received: by mail-wm1-x332.google.com with SMTP id bg10so723381wmb.1
- for <qemu-riscv@nongnu.org>; Thu, 08 Dec 2022 02:31:32 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p3EIL-0007Ak-4X
+ for qemu-riscv@nongnu.org; Thu, 08 Dec 2022 05:38:26 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ j5-20020a05600c410500b003cfa9c0ea76so692126wmi.3
+ for <qemu-riscv@nongnu.org>; Thu, 08 Dec 2022 02:38:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=qOfUPJE+/WqOb3J+ozCG4eX4qkN6yoB56S9HL9xN4f4=;
- b=s/RvpTGlYlqaA6pdzBg2iPpDFio8vMux/s5qHsJRufIHJXnLDdeWzzYABjMTK7kIrm
- vsJV+XkO0Qkk8r1FmPE2fMaBoxy1ki8mb3N7kB45Vt5fGkMyXQ7sxfgmag6IsbOwz4k3
- 0puZ7+lW2405KRwCpRUhf0H5drEMPFExLC/ZtfBd2u5Pxjd558/Ih19rS0XrTct24LQO
- YgQJSwEc/BTx+gWMoydMC8Pp/iIWwHhOBE7IiMdkzIAfsZ9pCw1fCiE7IWTAQtckyy3j
- o0ASX3OzJBaT5QQrfiCJsTccaobf5abGlAkR7ycPc9sfZIAPwqUn7HW3e0cnW7BwGKdk
- g/BA==
+ bh=ajxUG1uNemcbOAGNzD2GhzVxVvzgvXZWBkmyDijuG04=;
+ b=IIoDgdGP7ltZWCUgrEt4BCumKbliNOENRz6/w9VEbTCdUoD+Ad8anXUtgHzQU46HCd
+ auzQV41/eQNlzK0qnCShjZ/3+rTPzbGDdKeS4Nu17hq4cE1oetAbgYp04Gij45q1ChTx
+ bL048Ib7kOv6O6364WsJ8rIuQQ6zqVGXxBaDzcJeigBq/Wt/DwzzVqQi9GUlb6+euKu9
+ 7vHbU2BE5lATtQf/Tsxi9JTtkjc6sgH974eJQmgjm51ViWZaKsSKD+dKTcsUHHbeb0/D
+ /xKJguFh0E03WPunQmp7f1n9ooAlgmwi5iGPXLnZfkSanhs1cEPeT7y76LtE04aHMtmL
+ WbOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qOfUPJE+/WqOb3J+ozCG4eX4qkN6yoB56S9HL9xN4f4=;
- b=PTpMCt3fXYIVIVjEnPGclPQc6IpfGCUN2ua1fjk3oh6565EMheb3WHZoPxPMDUhES5
- AQ0yKFFAIuAQccFc2p73236xFfVt9C2CvInHlC8bToVmVFoXZhh6tVg76CXKN2jvaPUi
- KcmXGfSnVo3epBL9dw6/anSlXZogSUBu/9nr9CSKbOUiB3hA5Awq++t2+0gxZ+5xvQwP
- dGpQhAKmxw4gVyJF1r+S7dHQtjCZjSk1hOfAhGDsXFEzIdHDIVEl8Fe3TWrlkw92AsVw
- ZMngO6900mri8coaN/f7rcESyZhLz4oFB3uXL3kQj1TtYQaCamCUWsWFQnzfU2Gk2dUd
- Zxtg==
-X-Gm-Message-State: ANoB5pmsg2N/jJu1X3Hc2KVnQqeJr+TkNJpptwZ1lgkjT4qHSexxu16r
- 3Rt5G/31tnNUiEPO4h9AVNiZCA==
-X-Google-Smtp-Source: AA0mqf7iJQjMtAp1a/1LyDjCYeeyspune0wUDS/qwyCvoDmfL1nlLrj18EdSuocGIpfphwfgrQX+5A==
-X-Received: by 2002:a05:600c:213:b0:3d0:869a:4e59 with SMTP id
- 19-20020a05600c021300b003d0869a4e59mr18229348wmi.169.1670495491611; 
- Thu, 08 Dec 2022 02:31:31 -0800 (PST)
+ bh=ajxUG1uNemcbOAGNzD2GhzVxVvzgvXZWBkmyDijuG04=;
+ b=x3Crn7ma5LxSAPRtwQO1pGN19Kd9DGWrkofG2hgpXp3LEfXtE1Uqhk9xWhHEkyC7//
+ kMYYOT3SwPE1dwGBSn3oclfUwWzc7X6izDouVEXgDZm7XIThKtPuuRgN39iiXJPqjxgA
+ EVArNAM+uNNCBYlZQhIjnvv8NeDnaF4TL+U7XLyTt+4NV5TB/H/uOszbF5tkIeJhzcNE
+ hke1DxxiczoG3VAQyGoGykOjELcYgrNScGBUUCr8jbpMpIz7eGttosS6qAcWwW+1WmJJ
+ BfaiArZBV4Zwn3du+tPb8dwEOds5PS28k24m62YP9Yr5Kj8v1+NrnGUR812bhLmG+wnl
+ zD9g==
+X-Gm-Message-State: ANoB5pkmueHInu6pvvV6y1MMqfW5l1Xsrs+RFJ6j2neLFLvZWic5qTeM
+ 5iMWQGMGIt5XoCPKaUAnLKh54w==
+X-Google-Smtp-Source: AA0mqf54aYG/JctxdKc4+7cBWhqzod77UghJ+4aJVG60dBg2b4yxpqzXkasd60/PjLM1/4BEKezZ+w==
+X-Received: by 2002:a05:600c:298:b0:3d0:a768:a6f5 with SMTP id
+ 24-20020a05600c029800b003d0a768a6f5mr14159793wmk.117.1670495903231; 
+ Thu, 08 Dec 2022 02:38:23 -0800 (PST)
 Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- f13-20020a7bcd0d000000b003b47ff307e1sm4315894wmj.31.2022.12.08.02.31.30
+ 6-20020a1c0206000000b003d1e90717ccsm4426482wmc.30.2022.12.08.02.38.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Dec 2022 02:31:31 -0800 (PST)
-Message-ID: <ab6b5e11-90ed-a7f3-93d6-904d131dd5dc@linaro.org>
-Date: Thu, 8 Dec 2022 11:31:29 +0100
+ Thu, 08 Dec 2022 02:38:22 -0800 (PST)
+Message-ID: <f68a41a9-b615-07c1-ef94-04f48018ba0e@linaro.org>
+Date: Thu, 8 Dec 2022 11:38:21 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.5.1
-Subject: Re: [PATCH 0/1] hw/nvme: shadow doorbells broken on riscv64
+Subject: Re: [PATCH v2 01/16] hw/riscv: Select MSI_NONBROKEN in SIFIVE_PLIC
 Content-Language: en-US
-To: Klaus Jensen <its@irrelevant.dk>, qemu-devel@nongnu.org
-Cc: Keith Busch <kbusch@kernel.org>, qemu-block@nongnu.org,
- Jinhao Fan <fanjinhao21s@ict.ac.cn>, Guenter Roeck <linux@roeck-us.net>,
- Klaus Jensen <k.jensen@samsung.com>, qemu-riscv@nongnu.org
-References: <20221208082955.51732-1-its@irrelevant.dk>
+To: Bin Meng <bmeng@tinylab.org>, qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+References: <20221207100335.290481-1-bmeng@tinylab.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20221208082955.51732-1-its@irrelevant.dk>
+In-Reply-To: <20221207100335.290481-1-bmeng@tinylab.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2a00:1450:4864:20::332;
  envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -23
@@ -81,31 +82,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Dec 2022 10:31:47 -0000
+X-List-Received-Date: Thu, 08 Dec 2022 10:38:29 -0000
 
-On 8/12/22 09:29, Klaus Jensen wrote:
-> From: Klaus Jensen <k.jensen@samsung.com>
+On 7/12/22 11:03, Bin Meng wrote:
+> hw/pci/Kconfig says MSI_NONBROKEN should be selected by interrupt
+> controllers regardless of how MSI is implemented. msi_nonbroken is
+> initialized to true in sifive_plic_realize().
 > 
-> Guenter reports[1] that hw/nvme is broken on riscv64.
-> 
-> This is a regression since 7.1, so this does not warrent an rc5 for 7.2.
-> I'm sure Guenter can carry this patch in his tree, and maybe we can get
-> this out in a stable release.
+> Let SIFIVE_PLIC select MSI_NONBROKEN and drop the selection from
+> RISC-V machines.
 
-Delaying to 8.0 and adding a 'Cc: qemu-stable@' tag seems wise.
+12 years with this inverted logic... *sigh*.
 
-Cc'ing riscv list in case.
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-> I really wonder why this issue only shows up on riscv64. We have not
-> observed this on other platforms (yet).
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
 > 
->    [1]: https://lore.kernel.org/qemu-devel/20221207174918.GA1151796@roeck-us.net/
+> (no changes since v1)
 > 
-> Klaus Jensen (1):
->    hw/nvme: fix missing cq eventidx update
-> 
->   hw/nvme/ctrl.c | 8 ++++++++
->   1 file changed, 8 insertions(+)
-> 
+>   hw/intc/Kconfig  | 1 +
+>   hw/riscv/Kconfig | 5 -----
+>   2 files changed, 1 insertion(+), 5 deletions(-)
+
 
 
