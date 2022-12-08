@@ -1,58 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p38LS-0007AL-Bs
-	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 23:17:14 -0500
+	id 1p38Me-0007mW-20
+	for mharc-qemu-riscv@gnu.org; Wed, 07 Dec 2022 23:18:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p38LM-00079k-5H; Wed, 07 Dec 2022 23:17:09 -0500
-Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29])
+ id 1p38Mb-0007mD-Ti; Wed, 07 Dec 2022 23:18:25 -0500
+Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p38LD-0006aW-9i; Wed, 07 Dec 2022 23:17:05 -0500
-Received: by mail-vs1-xe29.google.com with SMTP id q128so394194vsa.13;
- Wed, 07 Dec 2022 20:16:51 -0800 (PST)
+ id 1p38Ma-0007nA-C9; Wed, 07 Dec 2022 23:18:25 -0500
+Received: by mail-vs1-xe2c.google.com with SMTP id t5so407631vsh.8;
+ Wed, 07 Dec 2022 20:18:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AZNhtBZRjveedD4xJkNVcq2nk+AeKZz9V3HT4Z8/by0=;
- b=nt74wQurAkdPbweCfmbiAL8p3ZrU8PSwcjBfHGPhDMibmFUfh4XA5nTKkPXngb+0/A
- uq7sPbkJ2IE86scKGrzYeNZk5pGQ+qi5GE8uVkzJ0sOxFs/qgEIjNQIbgHvxystIHB0J
- LTuI6pNeVUthEqdQ7OiwnnQQTSe4xfnHXsO3ZK+1qjRu4D2yZyVG0/BzBLXMUSLIUwqF
- 7XJitRjYcG76e1EjGzNYzKoJQcgxoMBqdHjJ5Rg4bjeMoeIDRvS8+PFvng00pjCfFncf
- IzLYRfjii9zR/6zjCdzFAzw+xs69SGUyVDQM50r1EOCLK2toQ4vS4ZpaaCrhjhbVUskB
- dpAg==
+ bh=RlMf9rGuHZ16LLvx2ikQSiMbHWxcqc5L7k0LK8zBdiM=;
+ b=eTNkxdkgODfZ5/QUkvYGV9L2KCirjP8/A1mrGU5hp9jyvEkY5DsFJC2ybPJhuX1Lbx
+ 2RJ0z0u2c9pBrF4TMXpIY5i8InIzTV6z+AifpsAyucf1/CxfO71bROBSErFPiV0XUMBt
+ m+SARn3uu0h2J4v5VgGntBZsFmYETWWM3wKcudSxbbY1bRsxFnv0Hs0RSXA0gDt3T8Me
+ IUbqsIoZQLJsA9Jg39HS6QM3RQ237v64ft3kyOukrIm+c6dhjnwbqJzpNL8dkzYA5gDJ
+ dlpj7z1mQMxHJeIeqyJZJDoYSLHg29CHpgN6+sm1IfOaaj+atyGX1MtxPb1lwGYqmX7I
+ GBiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=AZNhtBZRjveedD4xJkNVcq2nk+AeKZz9V3HT4Z8/by0=;
- b=WviI4NgqRiEgT4XuHoqi6vUlebzS9g1psbuHvypR6rKeaqRCBVVStKB9zDmgKOPV+j
- TPRdlwh+qypxu7/G1GkCowdZW8dIE7pPPlDAEJeYuVGOyAQ4x2d2MnAcDQJM4w8r5WNv
- eTxlhkSawXeuKuvWImybvrzXCaH5Tfmdvsmo5x/cpP06ANE08veXSY9kNC7Iqw5mzSfE
- az7z7UXFwmJK0fClMRPOI4c/ehY3P+mHXE3XA90sgOxYBmdsfHuyQyL7EgN6e/CKdQMQ
- kawhZ11SGZjiVFBufC4pTh2oXauJcnrYpZGLgbqny9j5lDNgKjNKTCBZ95m5yRXjbaeR
- ndQw==
-X-Gm-Message-State: ANoB5pmzH+lU1ixtXqLDEYLF82CdOOh00yf9qFvZGYcIofB+gMmlowMW
- D8QMd3K7zwQZYBGtTT0TTqLiFbHDfxbBZqicVvn1R43kTxY=
-X-Google-Smtp-Source: AA0mqf6nzDtUv3Wf3l1xfeG+yn0aiGlyM/elvpYibgOqZZnxNjter82FaozQcUNjAuIx1vvO0K4LHj+G7t9iMxvYCA8=
-X-Received: by 2002:a67:c519:0:b0:3b1:2b83:1861 with SMTP id
- e25-20020a67c519000000b003b12b831861mr10283946vsk.10.1670473010423; Wed, 07
- Dec 2022 20:16:50 -0800 (PST)
+ bh=RlMf9rGuHZ16LLvx2ikQSiMbHWxcqc5L7k0LK8zBdiM=;
+ b=NmPOcNJvnVcGEcsG84OwUBh8FyQH3HYxopzwCxiNbB9KKrYdaeTmrxWczIFK0oIgwx
+ KZCOPqgENQ4+rXGfgccf2WHWJOfmVBjQ2dglu1ac7p8bQ8rpHnCWNdMsoqB42Lis86D8
+ 0uMr5Moztb3TQ9ECfKoxWF9lZWBKNu4KHb0YxDAJ1louu8QZkCtuyItdZSPgBJk09Qv7
+ 3ZnYZD5fr6BZhNd5+DSfPhoTjUGHEAejSnYGC3oqIHiy4W5z5HjxSE0X+EJdWiS0YsvW
+ lKvY0HgsAlXz7kk6tamssOlPAnCZJhdr0kS696kFvGL1ybxADTRcNxzU9NpgtqSdDL9D
+ s9Uw==
+X-Gm-Message-State: ANoB5pksdYexQZK6bs57+ftgJ84cc1+LwTHMJ672NSCPcMbtr/pHTLBB
+ pXu9kZEEvAbT8o/iGojWhFCaTfCSHrhK2zv6rXY7mBNk+Ac=
+X-Google-Smtp-Source: AA0mqf51FmfSRh6YL7JXlC8iCyI927KJKGhJDTaAmFbSWS0znmXJWGIZuAKx0+wGtQSS9B2o4x7LhNwe/rFnW4tZXqc=
+X-Received: by 2002:a67:d009:0:b0:3b1:4aad:9c47 with SMTP id
+ r9-20020a67d009000000b003b14aad9c47mr6967677vsi.73.1670473102989; Wed, 07 Dec
+ 2022 20:18:22 -0800 (PST)
 MIME-Version: 1.0
 References: <20221207090037.281452-1-bmeng@tinylab.org>
-In-Reply-To: <20221207090037.281452-1-bmeng@tinylab.org>
+ <20221207090037.281452-2-bmeng@tinylab.org>
+In-Reply-To: <20221207090037.281452-2-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 8 Dec 2022 14:16:24 +1000
-Message-ID: <CAKmqyKPmxVQUmonnatU-xdnWF517fR0TLBYwoQmY=NnGRCnfyg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/riscv: Simplify helper_sret() a little bit
+Date: Thu, 8 Dec 2022 14:17:56 +1000
+Message-ID: <CAKmqyKMeNgcWWGCag9D7TNjmEm_QBfcL04wadP-BjreiscK1ww@mail.gmail.com>
+Subject: Re: [PATCH 2/2] target/riscv: Clear mstatus.MPRV when leaving M-mode
+ for priv spec 1.12+
 To: Bin Meng <bmeng@tinylab.org>
 Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e29;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,12 +75,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Dec 2022 04:17:12 -0000
+X-List-Received-Date: Thu, 08 Dec 2022 04:18:26 -0000
 
-On Wed, Dec 7, 2022 at 7:05 PM Bin Meng <bmeng@tinylab.org> wrote:
+On Wed, Dec 7, 2022 at 7:11 PM Bin Meng <bmeng@tinylab.org> wrote:
 >
-> There are 2 paths in helper_sret() and the same mstatus update codes
-> are replicated. Extract the common parts to simplify it a little bit.
+> Since priv spec v1.12, MRET and SRET now clear mstatus.MPRV when
+> leaving M-mode.
 >
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
@@ -86,58 +88,36 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+>
 > ---
 >
->  target/riscv/op_helper.c | 20 ++++++--------------
->  1 file changed, 6 insertions(+), 14 deletions(-)
+>  target/riscv/op_helper.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 >
 > diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index d7af7f056b..a047d38152 100644
+> index a047d38152..878bcb03b8 100644
 > --- a/target/riscv/op_helper.c
 > +++ b/target/riscv/op_helper.c
-> @@ -149,21 +149,21 @@ target_ulong helper_sret(CPURISCVState *env)
->      }
->
->      mstatus = env->mstatus;
-> +    prev_priv = get_field(mstatus, MSTATUS_SPP);
-> +    mstatus = set_field(mstatus, MSTATUS_SIE,
-> +                        get_field(mstatus, MSTATUS_SPIE));
-> +    mstatus = set_field(mstatus, MSTATUS_SPIE, 1);
-> +    mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
-> +    env->mstatus = mstatus;
+> @@ -154,6 +154,9 @@ target_ulong helper_sret(CPURISCVState *env)
+>                          get_field(mstatus, MSTATUS_SPIE));
+>      mstatus = set_field(mstatus, MSTATUS_SPIE, 1);
+>      mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
+> +    if (env->priv_ver >= PRIV_VERSION_1_12_0) {
+> +        mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
+> +    }
+>      env->mstatus = mstatus;
 >
 >      if (riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
->          /* We support Hypervisor extensions and virtulisation is disabled */
->          target_ulong hstatus = env->hstatus;
->
-> -        prev_priv = get_field(mstatus, MSTATUS_SPP);
->          prev_virt = get_field(hstatus, HSTATUS_SPV);
->
->          hstatus = set_field(hstatus, HSTATUS_SPV, 0);
-> -        mstatus = set_field(mstatus, MSTATUS_SPP, 0);
-> -        mstatus = set_field(mstatus, SSTATUS_SIE,
-> -                            get_field(mstatus, SSTATUS_SPIE));
-> -        mstatus = set_field(mstatus, SSTATUS_SPIE, 1);
->
-> -        env->mstatus = mstatus;
->          env->hstatus = hstatus;
->
->          if (prev_virt) {
-> @@ -171,14 +171,6 @@ target_ulong helper_sret(CPURISCVState *env)
->          }
->
->          riscv_cpu_set_virt_enabled(env, prev_virt);
-> -    } else {
-> -        prev_priv = get_field(mstatus, MSTATUS_SPP);
-> -
-> -        mstatus = set_field(mstatus, MSTATUS_SIE,
-> -                            get_field(mstatus, MSTATUS_SPIE));
-> -        mstatus = set_field(mstatus, MSTATUS_SPIE, 1);
-> -        mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
-> -        env->mstatus = mstatus;
->      }
->
+> @@ -203,6 +206,9 @@ target_ulong helper_mret(CPURISCVState *env)
+>      mstatus = set_field(mstatus, MSTATUS_MPIE, 1);
+>      mstatus = set_field(mstatus, MSTATUS_MPP, PRV_U);
+>      mstatus = set_field(mstatus, MSTATUS_MPV, 0);
+> +    if ((env->priv_ver >= PRIV_VERSION_1_12_0) && (prev_priv != PRV_M)) {
+> +        mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
+> +    }
+>      env->mstatus = mstatus;
 >      riscv_cpu_set_mode(env, prev_priv);
+>
 > --
 > 2.34.1
 >
