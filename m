@@ -1,48 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p3Tuu-0001mg-Hg
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Dec 2022 22:19:16 -0500
+	id 1p404j-0005UA-Ox
+	for mharc-qemu-riscv@gnu.org; Sat, 10 Dec 2022 08:39:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1p3Tur-0001mE-KC; Thu, 08 Dec 2022 22:19:14 -0500
-Received: from out30-1.freemail.mail.aliyun.com ([115.124.30.1])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1p404e-0005SU-Je
+ for qemu-riscv@nongnu.org; Sat, 10 Dec 2022 08:39:29 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1p3Tup-0002zR-AF; Thu, 08 Dec 2022 22:19:13 -0500
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
- MF=zhiwei_liu@linux.alibaba.com; NM=0; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0VWsduJU_1670555941; 
-Received: from 30.221.97.222(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VWsduJU_1670555941) by smtp.aliyun-inc.com;
- Fri, 09 Dec 2022 11:19:02 +0800
-Message-ID: <0b1aacd6-e1a4-4261-6da4-e59d8ce8967a@linux.alibaba.com>
-Date: Fri, 9 Dec 2022 11:18:47 +0800
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1p404b-0005lu-Uh
+ for qemu-riscv@nongnu.org; Sat, 10 Dec 2022 08:39:28 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1670679564;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=6XWI7v9ZGslokbyHWaV533+cNnkX5zeauW58/eQhQBA=;
+ b=XRnPzQ+3ZHklIzkNF718GacR16VSHxtJBB2mWjfWPdgqwIw5fJtWtF/eDlOH2XYkXJY51Y
+ froL/ljdiNkr1w+VGCUZwCsTlMTK9nNFhB61jrA29FUlBybBwJ2eRkRUXqP7tBNukAXT54
+ 3aAKre2IIq6ty1XxygwoHeyVPHQE3kw=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-495-LNx24vWGOZCexWMVcaaT4w-1; Sat, 10 Dec 2022 08:39:21 -0500
+X-MC-Unique: LNx24vWGOZCexWMVcaaT4w-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4FF49101A52A;
+ Sat, 10 Dec 2022 13:39:20 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.195.144])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id A5A3C1121331;
+ Sat, 10 Dec 2022 13:39:18 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 9487921E6930; Sat, 10 Dec 2022 14:39:15 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: mst@redhat.com, imammedo@redhat.com, ani@anisinha.ca,
+ peter.maydell@linaro.org, laurent@vivier.eu, edgar.iglesias@gmail.com,
+ Alistair.Francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com,
+ marcel.apfelbaum@gmail.com, yangxiaojuan@loongson.cn, gaosong@loongson.cn,
+ richard.henderson@linaro.org, deller@gmx.de, jasowang@redhat.com,
+ vikram.garhwal@amd.com, francisco.iglesias@amd.com, clg@kaod.org,
+ kraxel@redhat.com, marcandre.lureau@redhat.com, riku.voipio@iki.fi,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
+ crwulff@gmail.com, marex@denx.de
+Subject: [PATCH 1/2] include/hw/virtio: Break inclusion loop
+Date: Sat, 10 Dec 2022 14:39:14 +0100
+Message-Id: <20221210133915.4104305-2-armbru@redhat.com>
+In-Reply-To: <20221210133915.4104305-1-armbru@redhat.com>
+References: <20221210133915.4104305-1-armbru@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.1
-Subject: Re: [RFC PATCH] RISC-V: Save mmu_idx using FIELD_DP32 not OR
-Content-Language: en-US
-To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>
-References: <20221208151159.1155471-1-christoph.muellner@vrull.eu>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20221208151159.1155471-1-christoph.muellner@vrull.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-type: text/plain
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.1;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-1.freemail.mail.aliyun.com
-X-Spam_score_int: -101
-X-Spam_score: -10.2
-X-Spam_bar: ----------
-X-Spam_report: (-10.2 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.266, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -55,52 +76,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2022 03:19:15 -0000
+X-List-Received-Date: Sat, 10 Dec 2022 13:39:29 -0000
 
+hw/virtio/virtio.h and hw/virtio/vhost.h include each other.  The
+former doesn't actually need the latter, so drop that inclusion to
+break the loop.
 
-On 2022/12/8 23:11, Christoph Muellner wrote:
-> From: Christoph Müllner <christoph.muellner@vrull.eu>
->
-> Setting flags using OR might work, but is not optimal
-> for a couple of reasons:
-> * No way grep for stores to the field MEM_IDX.
-> * The return value of cpu_mmu_index() is not masked
->    (not a real problem as long as cpu_mmu_index() returns only valid values).
-> * If the offset of MEM_IDX would get moved to non-0, then this code
->    would not work anymore.
->
-> Let's use the FIELD_DP32() macro instead of the OR, which is already
-> used for most other flags.
->
-> Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
-> ---
->   target/riscv/cpu_helper.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 278d163803..d68b6b351d 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -80,7 +80,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->       flags |= TB_FLAGS_MSTATUS_FS;
->       flags |= TB_FLAGS_MSTATUS_VS;
->   #else
-> -    flags |= cpu_mmu_index(env, 0);
-> +    flags = FIELD_DP32(flags, TB_FLAGS, MEM_IDX, cpu_mmu_index(env, 0));
-> +
->       if (riscv_cpu_fp_enabled(env)) {
->           flags |= env->mstatus & MSTATUS_FS;
->       }
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+---
+ include/hw/virtio/virtio.h | 1 -
+ hw/virtio/virtio.c         | 1 +
+ 2 files changed, 1 insertion(+), 1 deletion(-)
 
-We may should rename cpu_mmu_index to cpu_mem_idx and 
-TB_FLAGS_PRIV_MMU_MASK to TB_FLAGS_PRIV_MEM_MASK.
-
-We can also remove the TB_FLAGS_PRIV_MMU_MASK as the position of MEM_IDX 
-in tb_flags may change in the future.
-
-
-Otherwise, this patch looks good to me,
-
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+diff --git a/include/hw/virtio/virtio.h b/include/hw/virtio/virtio.h
+index a973811cbf..8b68b69e00 100644
+--- a/include/hw/virtio/virtio.h
++++ b/include/hw/virtio/virtio.h
+@@ -22,7 +22,6 @@
+ #include "standard-headers/linux/virtio_config.h"
+ #include "standard-headers/linux/virtio_ring.h"
+ #include "qom/object.h"
+-#include "hw/virtio/vhost.h"
+ 
+ /*
+  * A guest should never accept this. It implies negotiation is broken
+diff --git a/hw/virtio/virtio.c b/hw/virtio/virtio.c
+index eb6347ab5d..faedf886da 100644
+--- a/hw/virtio/virtio.c
++++ b/hw/virtio/virtio.c
+@@ -26,6 +26,7 @@
+ #include "qemu/module.h"
+ #include "qom/object_interfaces.h"
+ #include "hw/virtio/virtio.h"
++#include "hw/virtio/vhost.h"
+ #include "migration/qemu-file-types.h"
+ #include "qemu/atomic.h"
+ #include "hw/virtio/virtio-bus.h"
+-- 
+2.37.3
 
 
