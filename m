@@ -1,35 +1,35 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p4CqK-00046f-I8
-	for mharc-qemu-riscv@gnu.org; Sat, 10 Dec 2022 22:17:32 -0500
+	id 1p4CqU-0004Fo-Do
+	for mharc-qemu-riscv@gnu.org; Sat, 10 Dec 2022 22:17:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p4Cph-0003fR-OQ; Sat, 10 Dec 2022 22:16:53 -0500
-Received: from bg4.exmail.qq.com ([43.154.221.58])
+ id 1p4Cpj-0003gB-Lg; Sat, 10 Dec 2022 22:17:17 -0500
+Received: from bg4.exmail.qq.com ([43.155.65.254])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p4Cpf-0000cz-RJ; Sat, 10 Dec 2022 22:16:53 -0500
-X-QQ-mid: bizesmtp68t1670728151to75gqap
+ id 1p4Cph-0000gT-SL; Sat, 10 Dec 2022 22:16:55 -0500
+X-QQ-mid: bizesmtp68t1670728153tqdqf2ji
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Sun, 11 Dec 2022 11:09:10 +0800 (CST)
+ id ; Sun, 11 Dec 2022 11:09:13 +0800 (CST)
 X-QQ-SSF: 01200000000000B0C000000A0000000
-X-QQ-FEAT: aBOeTvM9AwmbvSh1kZZLqYFz5RZMQZRQleTTo3uNpgZOVgrLcYyqRJL5UEKSX
- RUkELjQ42M726sE14VviMYVHOiIfHa2DAh8yT8NrqoA7np4D9vtamn4ZMrMmpL92RKNzlXy
- SGd3/qvd5SEZ5iKET7qvqpayinh3pxqoPCVuWlmXekWL0edudGlNUSkNmFvSHo0pspKpY2V
- IjxfWyAis6MA6rP5Wa8stEpC6G20H46oi7fynk+BDMw61ketwmS73YDDfxaA30/xYnXQpYK
- wXvJLUH8GdHWdHhquEvqJCKloHv9zeS5drosP60KvofpKfqpf2PFmZ+TWphk2teycBqAjwg
- nSDWDc79ZZ+n9c5DlNFNpdhLxvkqJbpC2IZQB83
+X-QQ-FEAT: XBN7tc9DADLXpOiDo2GZ5V2QGVFOJwr3unszH6OsGP0VVXHgZ8YWoHwZmSzy7
+ WIH1UYTgvw5WN5U2Kpr+45mIRsV0/gDd+N2vYTD+N14qMmpixj44QeTwX/BjleehOukVVmb
+ 2bnkfwlsZC31DK3Nk8QSnCN+/cXltF+g7wGMG+2QKO5Ll2SoV0pspg7mqCWE8b1xntp/5Ka
+ NR6ExRqaXdoCj995cN9GoDCnNj9wS7COBW0ksCn8JCsM4izwZ+yQVGyDAc8jVBJFbiz4+U5
+ PIOvUIWM61U6qD1p+j5LjsMc/9twke6eifduNwtkWtuQrFtXtu0yeCPpi1EFE6J7bU5byRH
+ Yz6EKVUu4mfwo84k6Fw8TYOqxCtg9owjjmJa+iIB4DE9eMlIUo=
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
-Cc: Wilfred Mallawa <wilfred.mallawa@wdc.com>,
+Cc: Alistair Francis <alistair.francis@wdc.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v3 15/16] hw/riscv: opentitan: Drop "hartid-base" and
- "priority-base" initialization
-Date: Sun, 11 Dec 2022 11:08:28 +0800
-Message-Id: <20221211030829.802437-15-bmeng@tinylab.org>
+Subject: [PATCH v3 16/16] hw/intc: sifive_plic: Fix the pending register range
+ check
+Date: Sun, 11 Dec 2022 11:08:29 +0800
+Message-Id: <20221211030829.802437-16-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20221211030829.802437-1-bmeng@tinylab.org>
 References: <20221211030829.802437-1-bmeng@tinylab.org>
@@ -37,7 +37,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
+Received-SPF: pass client-ip=43.155.65.254; envelope-from=bmeng@tinylab.org;
  helo=bg4.exmail.qq.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -56,35 +56,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Dec 2022 03:17:22 -0000
+X-List-Received-Date: Sun, 11 Dec 2022 03:17:28 -0000
 
-"hartid-base" and "priority-base" are zero by default. There is no
-need to initialize them to zero again.
+The pending register upper limit is currently set to
+plic->num_sources >> 3, which is wrong, e.g.: considering
+plic->num_sources is 7, the upper limit becomes 0 which fails
+the range check if reading the pending register at pending_base.
 
+Fixes: 1e24429e40df ("SiFive RISC-V PLIC Block")
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
 ---
 
 (no changes since v1)
 
- hw/riscv/opentitan.c | 2 --
- 1 file changed, 2 deletions(-)
+ hw/intc/sifive_plic.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index 78f895d773..85ffdac5be 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -173,10 +173,8 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+index 1a792cc3f5..5522ede2cf 100644
+--- a/hw/intc/sifive_plic.c
++++ b/hw/intc/sifive_plic.c
+@@ -143,7 +143,8 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned size)
+         uint32_t irq = (addr - plic->priority_base) >> 2;
  
-     /* PLIC */
-     qdev_prop_set_string(DEVICE(&s->plic), "hart-config", "M");
--    qdev_prop_set_uint32(DEVICE(&s->plic), "hartid-base", 0);
-     qdev_prop_set_uint32(DEVICE(&s->plic), "num-sources", 180);
-     qdev_prop_set_uint32(DEVICE(&s->plic), "num-priorities", 3);
--    qdev_prop_set_uint32(DEVICE(&s->plic), "priority-base", 0x00);
-     qdev_prop_set_uint32(DEVICE(&s->plic), "pending-base", 0x1000);
-     qdev_prop_set_uint32(DEVICE(&s->plic), "enable-base", 0x2000);
-     qdev_prop_set_uint32(DEVICE(&s->plic), "enable-stride", 32);
+         return plic->source_priority[irq];
+-    } else if (addr_between(addr, plic->pending_base, plic->num_sources >> 3)) {
++    } else if (addr_between(addr, plic->pending_base,
++                            (plic->num_sources + 31) >> 3)) {
+         uint32_t word = (addr - plic->pending_base) >> 2;
+ 
+         return plic->pending[word];
+@@ -202,7 +203,7 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
+             sifive_plic_update(plic);
+         }
+     } else if (addr_between(addr, plic->pending_base,
+-                            plic->num_sources >> 3)) {
++                            (plic->num_sources + 31) >> 3)) {
+         qemu_log_mask(LOG_GUEST_ERROR,
+                       "%s: invalid pending write: 0x%" HWADDR_PRIx "",
+                       __func__, addr);
 -- 
 2.34.1
 
