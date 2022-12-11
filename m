@@ -1,24 +1,24 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p4CpC-0003Tr-Sc
-	for mharc-qemu-riscv@gnu.org; Sat, 10 Dec 2022 22:16:22 -0500
+	id 1p4CpE-0003UT-4F
+	for mharc-qemu-riscv@gnu.org; Sat, 10 Dec 2022 22:16:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p4CpA-0003RO-U9; Sat, 10 Dec 2022 22:16:20 -0500
-Received: from bg4.exmail.qq.com ([43.155.65.254])
+ id 1p4CpA-0003RG-JU; Sat, 10 Dec 2022 22:16:20 -0500
+Received: from bg4.exmail.qq.com ([43.154.221.58])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p4Cp9-0007Wl-4X; Sat, 10 Dec 2022 22:16:20 -0500
-X-QQ-mid: bizesmtp68t1670728119t0ghsmmn
+ id 1p4Cp8-0007Wg-8B; Sat, 10 Dec 2022 22:16:20 -0500
+X-QQ-mid: bizesmtp68t1670728110tx1pmwpw
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Sun, 11 Dec 2022 11:08:38 +0800 (CST)
+ id ; Sun, 11 Dec 2022 11:08:29 +0800 (CST)
 X-QQ-SSF: 00200000000000B0C000000A0000000
-X-QQ-FEAT: zX46NWeZQGHoHS66B3Jgp9avNVV9u++s/YTUUQ5Rs0XJy2BTZlYgCvVs4gQoW
- xXu7KeZW2QQAWGcdNCyD2WEoeonjaJl9BhtCjcTIhy1NpQ7Pkj8dqju5/0QM1dLS4OuInV2
- VmAGn1UX050N6mDTAZgJM0BS7AVyZ0dSljaV9oPgnGw22IPNT2FOwegIph5mOqwnthEQ7ku
- FpBoGmvurOoWN77w+3OXdTYt33p3RtvroKeSztFvAm8qJbFRul4wBzMnsmhZwqPKp7pN09V
- /3qU+8iZqhv99p5fBW8YpHzQbEaY9vNAbNAr+bxlv/JjqZvChkkX/27yqBRr91wRi9qRvB7
- yrQlh8OlWrhLy/4fY4h3drJrVNDJg==
+X-QQ-FEAT: XBN7tc9DADJqvexO6rI5B1p2fLY19wLNDS5rGT+S3Thr+Oeyk50kfF8rUUA7N
+ ejGfnsuVIDYfQtVgsT6kIgD0eFjPPhyJYQY7+VGN7XlaL1E3SP+9/yOf0Mxdl5qIr+OR/E1
+ QgfBdmnn9zgs/uzaTLTsfgO9Oi7pU9+blZEGmtX+40ogUJ13DencYb8z90GQpX/K0tQFpnd
+ t7qi4SMsmAfOIMXWxWgcg4rJRzitFafkkL5hQ7koK6+bZINFPBYyVzrJOp5P4YGEAtzgVj+
+ kS4U984ROnqzge0EZRWS/iW1YagkUwV7edP7raDaeK1XzsJoYh3+/nwj8MfhZv5s3Ke0wkN
+ 4RNtiWk6mwAUVrMVY0=
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
@@ -27,19 +27,16 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Wilfred Mallawa <wilfred.mallawa@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v3 04/16] hw/riscv: Sort machines Kconfig options in
- alphabetical order
-Date: Sun, 11 Dec 2022 11:08:17 +0800
-Message-Id: <20221211030829.802437-4-bmeng@tinylab.org>
+Subject: [PATCH v3 01/16] hw/riscv: Select MSI_NONBROKEN in SIFIVE_PLIC
+Date: Sun, 11 Dec 2022 11:08:14 +0800
+Message-Id: <20221211030829.802437-1-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20221211030829.802437-1-bmeng@tinylab.org>
-References: <20221211030829.802437-1-bmeng@tinylab.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=43.155.65.254; envelope-from=bmeng@tinylab.org;
+Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
  helo=bg4.exmail.qq.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -60,7 +57,12 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sun, 11 Dec 2022 03:16:21 -0000
 
-SHAKTI_C machine Kconfig option was inserted in disorder. Fix it.
+hw/pci/Kconfig says MSI_NONBROKEN should be selected by interrupt
+controllers regardless of how MSI is implemented. msi_nonbroken is
+initialized to true in sifive_plic_realize().
+
+Let SIFIVE_PLIC select MSI_NONBROKEN and drop the selection from
+RISC-V machines.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -70,50 +72,65 @@ Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 
 (no changes since v1)
 
- hw/riscv/Kconfig | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
+ hw/intc/Kconfig  | 1 +
+ hw/riscv/Kconfig | 5 -----
+ 2 files changed, 1 insertion(+), 5 deletions(-)
 
+diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
+index ecd2883ceb..1d4573e803 100644
+--- a/hw/intc/Kconfig
++++ b/hw/intc/Kconfig
+@@ -78,6 +78,7 @@ config RISCV_IMSIC
+ 
+ config SIFIVE_PLIC
+     bool
++    select MSI_NONBROKEN
+ 
+ config GOLDFISH_PIC
+     bool
 diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 1e4b58024f..4550b3b938 100644
+index 79ff61c464..167dc4cca6 100644
 --- a/hw/riscv/Kconfig
 +++ b/hw/riscv/Kconfig
-@@ -4,6 +4,8 @@ config RISCV_NUMA
- config IBEX
-     bool
- 
-+# RISC-V machines in alphabetical order
-+
- config MICROCHIP_PFSOC
-     bool
-     select CADENCE_SDHCI
-@@ -22,13 +24,6 @@ config OPENTITAN
+@@ -11,7 +11,6 @@ config MICROCHIP_PFSOC
+     select MCHP_PFSOC_IOSCB
+     select MCHP_PFSOC_MMUART
+     select MCHP_PFSOC_SYSREG
+-    select MSI_NONBROKEN
+     select RISCV_ACLINT
+     select SIFIVE_PDMA
      select SIFIVE_PLIC
-     select UNIMP
+@@ -37,7 +36,6 @@ config RISCV_VIRT
+     imply TPM_TIS_SYSBUS
+     select RISCV_NUMA
+     select GOLDFISH_RTC
+-    select MSI_NONBROKEN
+     select PCI
+     select PCI_EXPRESS_GENERIC_BRIDGE
+     select PFLASH_CFI01
+@@ -53,7 +51,6 @@ config RISCV_VIRT
  
--config SHAKTI_C
--    bool
--    select UNIMP
--    select SHAKTI_UART
--    select RISCV_ACLINT
--    select SIFIVE_PLIC
--
- config RISCV_VIRT
-     bool
-     imply PCI_DEVICES
-@@ -50,6 +45,13 @@ config RISCV_VIRT
-     select FW_CFG_DMA
-     select PLATFORM_BUS
- 
-+config SHAKTI_C
-+    bool
-+    select RISCV_ACLINT
-+    select SHAKTI_UART
-+    select SIFIVE_PLIC
-+    select UNIMP
-+
  config SIFIVE_E
      bool
+-    select MSI_NONBROKEN
      select RISCV_ACLINT
+     select SIFIVE_GPIO
+     select SIFIVE_PLIC
+@@ -64,7 +61,6 @@ config SIFIVE_E
+ config SIFIVE_U
+     bool
+     select CADENCE
+-    select MSI_NONBROKEN
+     select RISCV_ACLINT
+     select SIFIVE_GPIO
+     select SIFIVE_PDMA
+@@ -82,6 +78,5 @@ config SPIKE
+     bool
+     select RISCV_NUMA
+     select HTIF
+-    select MSI_NONBROKEN
+     select RISCV_ACLINT
+     select SIFIVE_PLIC
 -- 
 2.34.1
 
