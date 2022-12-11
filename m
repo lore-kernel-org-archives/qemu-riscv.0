@@ -1,45 +1,43 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p4CpZ-0003aK-O1
-	for mharc-qemu-riscv@gnu.org; Sat, 10 Dec 2022 22:16:46 -0500
+	id 1p4Cpc-0003bc-PO
+	for mharc-qemu-riscv@gnu.org; Sat, 10 Dec 2022 22:16:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p4CpN-0003Yd-W0; Sat, 10 Dec 2022 22:16:41 -0500
-Received: from bg4.exmail.qq.com ([43.155.65.254])
+ id 1p4CpO-0003Ye-Oj; Sat, 10 Dec 2022 22:16:41 -0500
+Received: from bg4.exmail.qq.com ([43.154.221.58])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p4CpL-000871-Vu; Sat, 10 Dec 2022 22:16:33 -0500
-X-QQ-mid: bizesmtp68t1670728131tr62qmyp
+ id 1p4CpM-00089R-Pp; Sat, 10 Dec 2022 22:16:34 -0500
+X-QQ-mid: bizesmtp68t1670728133toeojcbf
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Sun, 11 Dec 2022 11:08:50 +0800 (CST)
-X-QQ-SSF: 00200000000000B0C000000A0000000
-X-QQ-FEAT: kg0HbTcTClHrnuLFV1s52/rUJcH4acwmLOd1dll/BlsgXeIOyzPs9nPs2C4yB
- HOVW9vXo1enBULq84QY4OulyopySHBVtjgfMTFu1L19ZRwVJUAyJTSxgeh2q1x+3BeBmH2+
- gNFrGzhtj6kEVeG5lmIEdEZxxWgJtTEYSpTh7+yYCFbPSnAToVkTXOkNoi8FpH5Is4aYVoB
- 9EG1a14h074r3vkCAcFpo96R5skmrFHQ6e8ShUxi8dtss3WdTyc0kMYwNvU9Uqg5VMA7QFC
- e2GUhwaG8goaYcOcC4tNp/aAwts7atbt6DhBf0tEVObL86mHLUyDGlXXDmFUmNALUJhyqMT
- aVYe5+eplMlaxbE3dALYrwe4dep+GLbx9B0oHNRvpRwIW8pyHg=
+ id ; Sun, 11 Dec 2022 11:08:53 +0800 (CST)
+X-QQ-SSF: 01200000000000B0C000000A0000000
+X-QQ-FEAT: swyrzWPvyR0HQ9x1Sj8nFAIZ7J1JkeyN5l4hVf5VjhJUF04+OKWHMy5JmR6Ts
+ VyMgWpmE8G/85qCuXSo7AyLD+xZP2WEQkFl5KhP+4GmmYCAb1kZqln5cFqyK8zrPV/upoYD
+ njr9dg4DchJBfuyNx9zfDMbj/xJYtfj6mqvD5osHAqTlH84FrM2TE3yQq9MQzLeO5i8bzxe
+ mESxnaY9A7Qf4l46XJHMccDVgZbopSZ/hYMRehZ4WvUr55iJpXaNQdT5qYLiTABVUVMB+jS
+ IYLfHzZU1SuIc3iJ8CeHBPqYPZUaYTGE6I6PoM5BG9uy4HGA9x6vYazPKoE3IQ5x5gOwcsA
+ 85lIAk5tDikbIVG11SRiJJthrfFqFRY0wg57kNVDJFOgYnAeyI=
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v3 08/16] hw/intc: sifive_plic: Use error_setg() to propagate
- the error up via errp in sifive_plic_realize()
-Date: Sun, 11 Dec 2022 11:08:21 +0800
-Message-Id: <20221211030829.802437-8-bmeng@tinylab.org>
+Subject: [PATCH v3 09/16] hw/intc: sifive_plic: Update "num-sources" property
+ default value
+Date: Sun, 11 Dec 2022 11:08:22 +0800
+Message-Id: <20221211030829.802437-9-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20221211030829.802437-1-bmeng@tinylab.org>
 References: <20221211030829.802437-1-bmeng@tinylab.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=43.155.65.254; envelope-from=bmeng@tinylab.org;
+Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
  helo=bg4.exmail.qq.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -60,51 +58,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sun, 11 Dec 2022 03:16:42 -0000
 
-The realize() callback has an errp for us to propagate the error up.
-While we are here, correct the wrong multi-line comment format.
+At present the default value of "num-sources" property is zero,
+which does not make a lot of sense, as in sifive_plic_realize()
+we see s->bitfield_words is calculated by:
+
+  s->bitfield_words = (s->num_sources + 31) >> 5;
+
+if the we don't configure "num-sources" property its default value
+zero makes s->bitfield_words zero too, which isn't true because
+interrupt source 0 still occupies one word.
+
+Let's change the default value to 1 meaning that only interrupt
+source 0 is supported by default and a sanity check in realize().
+
+While we are here, add a comment to describe the exact meaning of
+this property that the number should include interrupt source 0.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 ---
 
-Changes in v3:
-- Fix the typo in the commit message
+(no changes since v2)
 
 Changes in v2:
-- new patch: "hw/intc: sifive_plic: Use error_setg() to propagate the error up via errp in sifive_plic_realize()"
+- use error_setg() to propagate the error up via errp instead
 
- hw/intc/sifive_plic.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ hw/intc/sifive_plic.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
 diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-index c9af94a888..9cb4c6d6d4 100644
+index 9cb4c6d6d4..1edeb1e1ed 100644
 --- a/hw/intc/sifive_plic.c
 +++ b/hw/intc/sifive_plic.c
-@@ -379,7 +379,8 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
-     s->m_external_irqs = g_malloc(sizeof(qemu_irq) * s->num_harts);
-     qdev_init_gpio_out(dev, s->m_external_irqs, s->num_harts);
+@@ -363,6 +363,11 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
  
--    /* We can't allow the supervisor to control SEIP as this would allow the
-+    /*
-+     * We can't allow the supervisor to control SEIP as this would allow the
-      * supervisor to clear a pending external interrupt which will result in
-      * lost a interrupt in the case a PLIC is attached. The SEIP bit must be
-      * hardware controlled when a PLIC is attached.
-@@ -387,8 +388,8 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
-     for (i = 0; i < s->num_harts; i++) {
-         RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(s->hartid_base + i));
-         if (riscv_cpu_claim_interrupts(cpu, MIP_SEIP) < 0) {
--            error_report("SEIP already claimed");
--            exit(1);
-+            error_setg(errp, "SEIP already claimed");
-+            return;
-         }
-     }
+     parse_hart_config(s);
  
++    if (!s->num_sources) {
++        error_setg(errp, "plic: invalid number of interrupt sources");
++        return;
++    }
++
+     s->bitfield_words = (s->num_sources + 31) >> 5;
+     s->num_enables = s->bitfield_words * s->num_addrs;
+     s->source_priority = g_new0(uint32_t, s->num_sources);
+@@ -420,7 +425,8 @@ static const VMStateDescription vmstate_sifive_plic = {
+ static Property sifive_plic_properties[] = {
+     DEFINE_PROP_STRING("hart-config", SiFivePLICState, hart_config),
+     DEFINE_PROP_UINT32("hartid-base", SiFivePLICState, hartid_base, 0),
+-    DEFINE_PROP_UINT32("num-sources", SiFivePLICState, num_sources, 0),
++    /* number of interrupt sources including interrupt source 0 */
++    DEFINE_PROP_UINT32("num-sources", SiFivePLICState, num_sources, 1),
+     DEFINE_PROP_UINT32("num-priorities", SiFivePLICState, num_priorities, 0),
+     DEFINE_PROP_UINT32("priority-base", SiFivePLICState, priority_base, 0),
+     DEFINE_PROP_UINT32("pending-base", SiFivePLICState, pending_base, 0),
 -- 
 2.34.1
-
 
 
