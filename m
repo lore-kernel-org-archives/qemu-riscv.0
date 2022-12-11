@@ -1,36 +1,36 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p4Cpd-0003eF-Tl
-	for mharc-qemu-riscv@gnu.org; Sat, 10 Dec 2022 22:16:49 -0500
+	id 1p4Cpg-0003fD-4X
+	for mharc-qemu-riscv@gnu.org; Sat, 10 Dec 2022 22:16:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p4CpX-0003Zt-Qk; Sat, 10 Dec 2022 22:16:44 -0500
-Received: from bg4.exmail.qq.com ([43.155.65.254])
+ id 1p4CpW-0003ZU-0j; Sat, 10 Dec 2022 22:16:42 -0500
+Received: from bg4.exmail.qq.com ([43.154.221.58])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1p4CpV-0000B0-Th; Sat, 10 Dec 2022 22:16:43 -0500
-X-QQ-mid: bizesmtp68t1670728142ti9f4g4u
+ id 1p4CpT-000075-QA; Sat, 10 Dec 2022 22:16:41 -0500
+X-QQ-mid: bizesmtp68t1670728136tabkocsb
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Sun, 11 Dec 2022 11:09:01 +0800 (CST)
+ id ; Sun, 11 Dec 2022 11:08:55 +0800 (CST)
 X-QQ-SSF: 01200000000000B0C000000A0000000
-X-QQ-FEAT: Xz3VOcA7Mr1CNgl934T2T0ZMcHTEOn7Ggyl57is+ZeNvYWUnB/hfDyPMgqDJe
- mB4/tMJ1fmV+iSIC3YiZT0NoRoWVQ08FVDV+B4W5Plj94Kkbaamo05XddJOIdFp6om+YOkN
- A1f2sBcX/1oFCZNkpuaUyO4OGvjulNfNMSTfXR/qpHnBAPFFHsQgpKWVMndDBpcF0NUAFgX
- czPyKzB2FN/UCqF3DgISs/7cNig8tHYCmuWLoZiUDN4tM0Th15xBTVV06QPZjXRlCQBOFLW
- jt4L7hMSNthP8YUBP1gTw4jR6EqutwtdOuRgiAitGB7g0Y1jeWwMxM7ZJKkNGRIvkCjgcp/
- 7kmhTw2ooQCOjBwi/SQrDL9k+ooH/MuFqHTWul1c9IR25egGnM=
+X-QQ-FEAT: uGhnJwy6xZLcg2lLg+Pu2d1ews1CSomWPjNsV0kYmcsPbP2gT2YM8cVpUV5vT
+ LcVTSDZTCF87eQoGFNXyjDCAaRxD0fCBgEk7G7Q0lGnwDx5mkAcmuYVCZccieqEvjr3NDME
+ u5cpGvrR3bpbCHIj0RE7l9zp8lo4wua+WTYpiW0n7LdoZo/fqk8ewPcLt4QlwFYOPJ/3da/
+ e4e8ocnuiEsbZDmV1N7QIo/3fdGQRAx4oHgzNfyq1hXrbwhEd91KxX12bLEEMu18Qywh/hR
+ KiDQ+UxTYJU79UOciaDuWqcVtNfNdILbEt+6qnj5jAtCezMWEIQhDaRSCpLZS6+hX1nqGnp
+ Q4a2IUfNTsplRdrPT2dzcJcFoNDIBVYeenKezgnAzg7llR9Rug=
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
 Cc: Wilfred Mallawa <wilfred.mallawa@wdc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v3 12/16] hw/riscv: sifive_u: Avoid using magic number for
- "riscv, ndev"
-Date: Sun, 11 Dec 2022 11:08:25 +0800
-Message-Id: <20221211030829.802437-12-bmeng@tinylab.org>
+Subject: [PATCH v3 10/16] hw/riscv: microchip_pfsoc: Fix the number of
+ interrupt sources of PLIC
+Date: Sun, 11 Dec 2022 11:08:23 +0800
+Message-Id: <20221211030829.802437-10-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20221211030829.802437-1-bmeng@tinylab.org>
 References: <20221211030829.802437-1-bmeng@tinylab.org>
@@ -38,7 +38,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=43.155.65.254; envelope-from=bmeng@tinylab.org;
+Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
  helo=bg4.exmail.qq.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -59,34 +59,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sun, 11 Dec 2022 03:16:45 -0000
 
-At present magic number is used to create "riscv,ndev" property
-in the dtb. Let's use the macro SIFIVE_U_PLIC_NUM_SOURCES that
-is used to instantiate the PLIC model instead.
+Per chapter 6.5.2 in [1], the number of interupt sources including
+interrupt source 0 should be 187.
 
+[1] PolarFire SoC MSS TRM:
+https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/ProductDocuments/ReferenceManuals/PolarFire_SoC_FPGA_MSS_Technical_Reference_Manual_VC.pdf
+
+Fixes: 56f6e31e7b7e ("hw/riscv: Initial support for Microchip PolarFire SoC Icicle Kit board")
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
 Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
 ---
 
 (no changes since v1)
 
- hw/riscv/sifive_u.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ include/hw/riscv/microchip_pfsoc.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index b139824aab..b40a4767e2 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -287,7 +287,8 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
-     qemu_fdt_setprop_cells(fdt, nodename, "reg",
-         0x0, memmap[SIFIVE_U_DEV_PLIC].base,
-         0x0, memmap[SIFIVE_U_DEV_PLIC].size);
--    qemu_fdt_setprop_cell(fdt, nodename, "riscv,ndev", 0x35);
-+    qemu_fdt_setprop_cell(fdt, nodename, "riscv,ndev",
-+                          SIFIVE_U_PLIC_NUM_SOURCES - 1);
-     qemu_fdt_setprop_cell(fdt, nodename, "phandle", plic_phandle);
-     plic_phandle = qemu_fdt_get_phandle(fdt, nodename);
-     g_free(cells);
+diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+index 69a686b54a..577efad0c4 100644
+--- a/include/hw/riscv/microchip_pfsoc.h
++++ b/include/hw/riscv/microchip_pfsoc.h
+@@ -153,7 +153,7 @@ enum {
+ #define MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT    1
+ #define MICROCHIP_PFSOC_COMPUTE_CPU_COUNT       4
+ 
+-#define MICROCHIP_PFSOC_PLIC_NUM_SOURCES        185
++#define MICROCHIP_PFSOC_PLIC_NUM_SOURCES        187
+ #define MICROCHIP_PFSOC_PLIC_NUM_PRIORITIES     7
+ #define MICROCHIP_PFSOC_PLIC_PRIORITY_BASE      0x04
+ #define MICROCHIP_PFSOC_PLIC_PENDING_BASE       0x1000
 -- 
 2.34.1
 
