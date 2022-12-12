@@ -1,57 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p4bdg-0006Gu-C7
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Dec 2022 00:46:08 -0500
+	id 1p4be3-0006Tw-Kl
+	for mharc-qemu-riscv@gnu.org; Mon, 12 Dec 2022 00:46:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p4bdY-0006Dz-BN; Mon, 12 Dec 2022 00:46:00 -0500
+ id 1p4be1-0006SV-3Q; Mon, 12 Dec 2022 00:46:29 -0500
 Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p4bdW-0006jr-SP; Mon, 12 Dec 2022 00:46:00 -0500
-Received: by mail-vs1-xe32.google.com with SMTP id h26so10167799vsr.5;
- Sun, 11 Dec 2022 21:45:56 -0800 (PST)
+ id 1p4bdy-0006jr-3o; Mon, 12 Dec 2022 00:46:27 -0500
+Received: by mail-vs1-xe32.google.com with SMTP id h26so10168580vsr.5;
+ Sun, 11 Dec 2022 21:46:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MzFJnwjXjfVhxBZI+liKe0vwbxTAUty4M9Dc7fH7HNw=;
- b=HjOqTCjX+L5Nz59xFfwUUbgYnOIHdBTVCOke5mf9fYKWo05vYSd7bnr1p2kVYlhQBX
- pBOTEeS2t07DHEW4l6lj9+/Yue98pDj08xyE9vaz5i6bGkOHvploqu1cxyhj0036qMJG
- jOYdgKgl+9DiHfF7FDtTWtdU4Rp9e0d+KjLmu0y2oxKXSlMYQQPMp1AGxrKtKP2K8NYG
- yxiSz7c6CHXOgf602pizyUMFTh/gLv/VJnS5W3EYjl0uraO4EHSssnTSok01D//QusLp
- MDNackOFuGIPXYFAkItPmCgS46Py4pTSwNUmptWm4EiroxgWDILlx+7c2wBL0lyFkyTM
- 5nCw==
+ bh=XWJsj2XdMtZ0sHSuqqPIhYhdNnh9XgITFjD9tnJmWk0=;
+ b=aBlwkwYRcZe+Ztqg20zVSzDGofNvKEtN0YLXY46p53BjhxE9dbf6Vwko8gVLZz6Ucb
+ g/ZtZ0pTUQJuaxJDbtmDre7XKRg46vXdx8kUz2iNJ0OG1ouaK2FlfUvF6aYgCfy7CWKC
+ nzO9ohRIe37n5gZQr8td2aC25+4KP2XXqXTzLYq4IrAvgmgh7ZYseajMiYQX3Sn0Iuuz
+ tlKkZ1Rv1q6XgxDpSQSmbaUZjPzifMnOtXV0W90XN4ezWx1EHN+qXA9317BYtpGIMyu5
+ SuW/BWdKiID4/kWqv4/KEGvq6wsPgaXpvwLfJtGUCEPBrbsa5hmXQ5q3d6w0WjCmI0Me
+ rA0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MzFJnwjXjfVhxBZI+liKe0vwbxTAUty4M9Dc7fH7HNw=;
- b=wcoxQngBaKfahrM7fCm31rRJvvp6CozkDDOipniNvy5EUluB39XMJpTV8L2MWQM3u6
- vDzoY9nNJUx86ixzzsFBl2lJQzx1kngYcJQoPmHzxCy654tfWgTq8z/fdh3P6n0VYYhL
- kIHmuWA89/P45A0Vgv7Mf7LMK+vojcjkIZrTEj208JN9/f+XKZm9I2cyP/458VBtR6O/
- m/xPO5/i0yyYx6+aCul1iP6U81nOLAr+obgH6zqBR8L3IwRtOEHO5upwFxA+eryPV7G9
- UuDx/ZhaADaEj7qfaWR4kAUtXXXOX4F1C4TUGhwA5+8gvDRjrXgYJimwRymPNscQfxsR
- tEAA==
-X-Gm-Message-State: ANoB5pkuYhRO5dw/x3BkvLZbcX6tcBXJ2A9sDS7BzaDVixlwrOdA/aGp
- wT9j9FjwxEARC0dNZl06QgYBR2CLvFyusISuo44c6iJaIWU=
-X-Google-Smtp-Source: AA0mqf42KLwkXCzSzGvvF9bORrFKbpW+5gR8mnkbBbTPOR8tSmqhsnL9/qIsPtxZe5wnXGdGnB0L4L5h69OW+BCqAdA=
-X-Received: by 2002:a05:6102:302b:b0:3b0:f936:788b with SMTP id
- v11-20020a056102302b00b003b0f936788bmr18356064vsa.54.1670823955586; Sun, 11
- Dec 2022 21:45:55 -0800 (PST)
+ bh=XWJsj2XdMtZ0sHSuqqPIhYhdNnh9XgITFjD9tnJmWk0=;
+ b=kv3Vt/7XCRUqLRAT+jdfWiwyQ/dzYLvPtw5MIrRfafyL0TRobzS+F5V9uILA8TcnoW
+ qezLVL8NLn7MrW8YlV6D+OTYCAZhQzyzCKF4p9DoS/I/gA8AXsZvBT7Rbj5VqHLVjNpZ
+ eYI0i6aktIvUc6HoWcWUFFns+H/Y/sCY/Y4u+/vEzrQodCx99NjvVO5QzcfNneAKLrEu
+ ngGvfeKRUKx+jzZJ1eMJwABtbYKQC1r6ThLCem1wLWKpQ/Yn+UGmApHTCxr5WYNMYB01
+ Im/41pomB7/S960qP8/hHpRGkFHQJwWqu/Of2wnlxOzTTxufqeA7nYMBj8SPsW/cDUSw
+ DNkQ==
+X-Gm-Message-State: ANoB5pmeXHwTV2hOe6YdlBLS4y1CC5KdO4xujKWdRRHi91H43QGn7ZCQ
+ EqMrXYfgkXStAa2E+tyH5BKS6RmQHIK6F7NM7QlKBTqwnLs=
+X-Google-Smtp-Source: AA0mqf6rRoi2TUDVHQRDzedc/tkJuo8bvm+ItUMHCl2smYjYlmCvtnBSyKomPivOLc5eBlhpTA9fu8PrIFbKh6PyxUY=
+X-Received: by 2002:a05:6102:f09:b0:3a6:eec3:b246 with SMTP id
+ v9-20020a0561020f0900b003a6eec3b246mr51493854vss.64.1670823984240; Sun, 11
+ Dec 2022 21:46:24 -0800 (PST)
 MIME-Version: 1.0
-References: <20221211030829.802437-1-bmeng@tinylab.org>
- <20221211030829.802437-15-bmeng@tinylab.org>
-In-Reply-To: <20221211030829.802437-15-bmeng@tinylab.org>
+References: <20221210133915.4104305-1-armbru@redhat.com>
+ <20221210133915.4104305-2-armbru@redhat.com>
+In-Reply-To: <20221210133915.4104305-2-armbru@redhat.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 12 Dec 2022 15:45:29 +1000
-Message-ID: <CAKmqyKN_mWDCvwfvBoghcnHN2RnoAnGGv_xLSu6pdhhKGHLX+g@mail.gmail.com>
-Subject: Re: [PATCH v3 15/16] hw/riscv: opentitan: Drop "hartid-base" and
- "priority-base" initialization
-To: Bin Meng <bmeng@tinylab.org>
-Cc: qemu-devel@nongnu.org, Wilfred Mallawa <wilfred.mallawa@wdc.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
+Date: Mon, 12 Dec 2022 15:45:58 +1000
+Message-ID: <CAKmqyKMxg1S=93=nrj9e=CkuKQXW7tOhaw2dpx29ahOX8bB3_Q@mail.gmail.com>
+Subject: Re: [PATCH 1/2] include/hw/virtio: Break inclusion loop
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org, mst@redhat.com, imammedo@redhat.com, 
+ ani@anisinha.ca, peter.maydell@linaro.org, laurent@vivier.eu, 
+ edgar.iglesias@gmail.com, Alistair.Francis@wdc.com, bin.meng@windriver.com, 
+ palmer@dabbelt.com, marcel.apfelbaum@gmail.com, yangxiaojuan@loongson.cn, 
+ gaosong@loongson.cn, richard.henderson@linaro.org, deller@gmx.de, 
+ jasowang@redhat.com, vikram.garhwal@amd.com, francisco.iglesias@amd.com, 
+ clg@kaod.org, kraxel@redhat.com, marcandre.lureau@redhat.com, 
+ riku.voipio@iki.fi, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
+ qemu-ppc@nongnu.org, crwulff@gmail.com, marex@denx.de
 Content-Type: text/plain; charset="UTF-8"
 Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
  envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
@@ -75,44 +80,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2022 05:46:05 -0000
+X-List-Received-Date: Mon, 12 Dec 2022 05:46:30 -0000
 
-On Sun, Dec 11, 2022 at 1:22 PM Bin Meng <bmeng@tinylab.org> wrote:
+On Sat, Dec 10, 2022 at 11:42 PM Markus Armbruster <armbru@redhat.com> wrote:
 >
-> "hartid-base" and "priority-base" are zero by default. There is no
-> need to initialize them to zero again.
+> hw/virtio/virtio.h and hw/virtio/vhost.h include each other.  The
+> former doesn't actually need the latter, so drop that inclusion to
+> break the loop.
 >
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
-> Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
+>  include/hw/virtio/virtio.h | 1 -
+>  hw/virtio/virtio.c         | 1 +
+>  2 files changed, 1 insertion(+), 1 deletion(-)
 >
-> (no changes since v1)
+> diff --git a/include/hw/virtio/virtio.h b/include/hw/virtio/virtio.h
+> index a973811cbf..8b68b69e00 100644
+> --- a/include/hw/virtio/virtio.h
+> +++ b/include/hw/virtio/virtio.h
+> @@ -22,7 +22,6 @@
+>  #include "standard-headers/linux/virtio_config.h"
+>  #include "standard-headers/linux/virtio_ring.h"
+>  #include "qom/object.h"
+> -#include "hw/virtio/vhost.h"
 >
->  hw/riscv/opentitan.c | 2 --
->  1 file changed, 2 deletions(-)
->
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 78f895d773..85ffdac5be 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -173,10 +173,8 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->
->      /* PLIC */
->      qdev_prop_set_string(DEVICE(&s->plic), "hart-config", "M");
-> -    qdev_prop_set_uint32(DEVICE(&s->plic), "hartid-base", 0);
->      qdev_prop_set_uint32(DEVICE(&s->plic), "num-sources", 180);
->      qdev_prop_set_uint32(DEVICE(&s->plic), "num-priorities", 3);
-> -    qdev_prop_set_uint32(DEVICE(&s->plic), "priority-base", 0x00);
->      qdev_prop_set_uint32(DEVICE(&s->plic), "pending-base", 0x1000);
->      qdev_prop_set_uint32(DEVICE(&s->plic), "enable-base", 0x2000);
->      qdev_prop_set_uint32(DEVICE(&s->plic), "enable-stride", 32);
+>  /*
+>   * A guest should never accept this. It implies negotiation is broken
+> diff --git a/hw/virtio/virtio.c b/hw/virtio/virtio.c
+> index eb6347ab5d..faedf886da 100644
+> --- a/hw/virtio/virtio.c
+> +++ b/hw/virtio/virtio.c
+> @@ -26,6 +26,7 @@
+>  #include "qemu/module.h"
+>  #include "qom/object_interfaces.h"
+>  #include "hw/virtio/virtio.h"
+> +#include "hw/virtio/vhost.h"
+>  #include "migration/qemu-file-types.h"
+>  #include "qemu/atomic.h"
+>  #include "hw/virtio/virtio-bus.h"
 > --
-> 2.34.1
+> 2.37.3
 >
 >
 
