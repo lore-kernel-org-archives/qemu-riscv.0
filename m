@@ -1,79 +1,86 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p4hA6-00043H-Uv
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Dec 2022 06:39:59 -0500
+	id 1p4hEQ-00065C-UH
+	for mharc-qemu-riscv@gnu.org; Mon, 12 Dec 2022 06:44:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <its@irrelevant.dk>)
- id 1p4hA1-00041g-UI; Mon, 12 Dec 2022 06:39:56 -0500
+ id 1p4hEN-0005zl-VD; Mon, 12 Dec 2022 06:44:23 -0500
 Received: from out5-smtp.messagingengine.com ([66.111.4.29])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <its@irrelevant.dk>)
- id 1p4hA0-0002ID-BV; Mon, 12 Dec 2022 06:39:53 -0500
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id 808675C00A2;
- Mon, 12 Dec 2022 06:39:50 -0500 (EST)
+ id 1p4hEM-0003Ml-D6; Mon, 12 Dec 2022 06:44:23 -0500
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailout.nyi.internal (Postfix) with ESMTP id 128125C0151;
+ Mon, 12 Dec 2022 06:44:21 -0500 (EST)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Mon, 12 Dec 2022 06:39:50 -0500
+ by compute6.internal (MEProxy); Mon, 12 Dec 2022 06:44:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irrelevant.dk;
- h=cc:cc:content-type:date:date:from:from:in-reply-to
- :in-reply-to:message-id:mime-version:references:reply-to:sender
- :subject:subject:to:to; s=fm1; t=1670845190; x=1670931590; bh=j7
- e4fCadnwlksvcgN0S6QDOmE7UW/EzPjW87V5ui2go=; b=NPfd5Sd/BwVkYlLtt6
- 1m6mLI/Gb4xos21zfDrmTBnNYpqJoMber6UTRcpFef9i2npdpXhvcJov6cgv4mfi
- C1ko0Oc+ujE9TwYWws6jRhjLPzic/O87Uj5nqUReFKvHrqjDZeBRkDY1xv/EgW7v
- MxNTBlLVVuuye9Ypmyl0ypKnmzThnE+uFHG/hQS3hmyvhGYGkE2p2cco1tZ4l+R6
- 8QnRlasJ9FWPotobkVg2ul7Ww4FW6gSSanSparPo5vRYmUIZJLHl18fKlZcq+s9E
- 0buuS4MBjccQe8dYQQ50fH8PJturNNPOO0TJJ+Ody32RdmJuri9M8lZHoIUZ7K4H
- /zcQ==
+ h=cc:cc:content-transfer-encoding:date:date:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:sender:subject:subject:to:to; s=fm1; t=1670845461; x=
+ 1670931861; bh=vZ+OOsnZYJL8GkKEt4CioC1k5V+A7SG820NOYkn+cXE=; b=U
+ 14bREhcVi6EtRbfAQW4+7TQ28+TFq/nADAUj6470Fy+aggfWqa5HmeO5Q4K7jO7b
+ nG9UURV0IScRg/7MtoP/IQFjpx5CgLgBeLgp/pYosXE2DKZOtFX02SGJsAyjq8Tj
+ rKSk1YLdVQwtw1dNBTZfd+ZuD82PP9Imea8ikjf4HMr6iN3KHrORIDPCGq1HHlAC
+ CUxp/6dAM9k/kYBrlNejCACFwaQ2T3E/ikQeq1fyuwAVD91laL7TFxd4VDLxrcou
+ MZv2+YMf5JaMTExLhxXTwVqi1r6vXLQLcLLgLu+JcVsa7LYnC1XzvrchBCLgrRYC
+ VNnoZLApSXhjmTenEcUZw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
- :feedback-id:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:sender:subject:subject:to:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1670845190; x=1670931590; bh=j7e4fCadnwlksvcgN0S6QDOmE7UW
- /EzPjW87V5ui2go=; b=ey+ZCjRefG00U8SlahvWOhyTuKUXrltYqu9ZlFF1L1gf
- my21SP253efzm6qH+ZllBrYFRX/4AleQPZHgPh1M3Z+HQlOcGi1kYMYEMhvPj/xB
- vSrFzTL+0QwijW3gGEEkL9c2UKDiZJBgDElgCxd2sl1KNXQN8kjvA6KX8Sh7Hvqq
- WlUvtFZM/rOBCpgJWgMCDgawgnW80hWfIaLl5nr1mF5wAHrsKWy+8/z1A2QaEMFd
- kwjxGfqA4BizDEveo3qNVpCM2BLjCgq4QbVrmHAp/hOZwNuBDStxFj0ocj2vvx5V
- tt08B9vfxHkM3eo9OhiBHo4dAGPFT9ybInSTp9n6gA==
-X-ME-Sender: <xms:BhOXY7RhiyAI3MatqziwF_3Dnf0wTfI1GZ5hQVayNIri1SAMAQuMEg>
- <xme:BhOXY8xtBocPpeAPzud3DRi1yZwdn0tp7Khr7larwqC-b6xJY7PKqqkef-Q4IHawB
- cmtA7Kl3H2ua7xQwpY>
-X-ME-Received: <xmr:BhOXYw1g0lursLGciTs1-ibaFR5KOnl4bu9u_OI5Lbgp6taYobBxfZMQNMVQmltCtYd0gF0lEAEFwHZAQMIrVHEqIp18Ag>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrvdekgddtjecutefuodetggdotefrodftvf
+ messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm2; t=1670845461; x=1670931861; bh=vZ+OOsnZYJL8G
+ kKEt4CioC1k5V+A7SG820NOYkn+cXE=; b=upg01wsIGAzAUSSK+jLA+bykhog5q
+ w2mjsmbMHfouQIXin6013T70lrTyo3w4nHxnBd2KR3C24htK4uph60DwD2PYaARd
+ Ahk30iGRTQcj9v7kZ3+LoIqSUSNrv36SOrZxILvEHLHZP/WodY8bChHbA2YjdXdY
+ XZUGD/90XQXMDgCcIEP819WRwrGLBGYW4Ryy8lIikzX+ZHEA63BHqM+ncJsSzxuj
+ cZZ82mNKaXWnkG0RUvUoyqKA0fbQjZHvDhO4Fd892OgUFgFmivtNeJY5CFbuQrtZ
+ lOoNKqOAodZzegXCIH1IMlmVqELv1iQO4/xhijNwDmWG8mXejRJ4M/Jhg==
+X-ME-Sender: <xms:FBSXY2xreXBSMQzNY7K9jgqtiN3dGuk8VXRDZ8HvmaJ3GqFt5UanvQ>
+ <xme:FBSXYyThu_ESiPpUyyxgMhL7bdEoUnWVz9shM-oWMyQ6ct9d8gl6C0AbvSfuv_cCc
+ OM5yzXbiKufsCavkjQ>
+X-ME-Received: <xmr:FBSXY4WM1XV5XJzUlPuVzoQSI9mlGeOwWs7t_xpQg3KQSc8FfAppTaQLT9Hs8DVcylu5dfRk1CctqUYrv90_hS_--5SGH795LkydtQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrvdekgddtkecutefuodetggdotefrodftvf
  curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
  uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpefmlhgruhhs
+ fjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefmlhgruhhs
  ucflvghnshgvnhcuoehithhssehirhhrvghlvghvrghnthdrughkqeenucggtffrrghtth
- gvrhhnpeejgfejfeffvdeuhfeifefhgffgueelhedukeevjeevtdduudegieegteffffej
- veenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehith
+ gvrhhnpeejgfeilefgieevheekueevheehkeefveegiefgheefgfejjeehffefgedujedu
+ geenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehith
  hssehirhhrvghlvghvrghnthdrughk
-X-ME-Proxy: <xmx:BhOXY7D_vTFUOK5KQeQwV8tbBBpNQgIuGNEHZYsQ8axCHcapyahMNQ>
- <xmx:BhOXY0jCIXQLtTtFT2HJtMQhHtItpAAuAT0q-YEG8-aT09QvJMWxTg>
- <xmx:BhOXY_oEM9IEfvkd-iQRXzWwH15npaVPdAhO85fXk3X8sz6-7B3lqA>
- <xmx:BhOXY9VlvZI8NMRJf0Bh8E28K8ZtHH20BvZTSfYAZJs44OjcbyXhOA>
+X-ME-Proxy: <xmx:FBSXY8i-qy0RQMJXKBLyESkhciApFv7HgkVw0w_cl86UeSRurd2Y2g>
+ <xmx:FBSXY4CvK0y9rT_sTw1UnFZIcyREMFxmNS4eHYQsMFeqG5TVaD42ww>
+ <xmx:FBSXY9JVLflRpS6SA4dnBjWHei5_mQQx6b6bp45FPXu141aH6-I9pg>
+ <xmx:FRSXY2D8L08fUqA0_vPM6VCirTnneFOOzvH-eB5_sRezUjAYRYFgLQ>
 Feedback-ID: idc91472f:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 12 Dec 2022 06:39:48 -0500 (EST)
-Date: Mon, 12 Dec 2022 12:39:46 +0100
+ 12 Dec 2022 06:44:19 -0500 (EST)
 From: Klaus Jensen <its@irrelevant.dk>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-block@nongnu.org,
+To: qemu-devel@nongnu.org
+Cc: qemu-block@nongnu.org, Klaus Jensen <its@irrelevant.dk>,
  Keith Busch <kbusch@kernel.org>, Jinhao Fan <fanjinhao21s@ict.ac.cn>,
- Guenter Roeck <linux@roeck-us.net>,
- Klaus Jensen <k.jensen@samsung.com>, qemu-stable@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: Re: [PATCH v3 4/4] hw/nvme: fix missing cq eventidx update
-Message-ID: <Y5cTAtSanJicK5FM@cormorant.local>
-References: <20221212113215.33135-1-its@irrelevant.dk>
- <20221212113215.33135-5-its@irrelevant.dk>
- <93658dff-fcba-590e-ba53-e5fdb3d841c1@linaro.org>
+ Guenter Roeck <linux@roeck-us.net>, Klaus Jensen <k.jensen@samsung.com>,
+ qemu-stable@nongnu.org, qemu-riscv@nongnu.org
+Subject: [PATCH v4 4/4] hw/nvme: fix missing cq eventidx update
+Date: Mon, 12 Dec 2022 12:44:09 +0100
+Message-Id: <20221212114409.34972-5-its@irrelevant.dk>
+X-Mailer: git-send-email 2.38.1
+In-Reply-To: <20221212114409.34972-1-its@irrelevant.dk>
+References: <20221212114409.34972-1-its@irrelevant.dk>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Maq7jjWapbkfJdLr"
-Content-Disposition: inline
-In-Reply-To: <93658dff-fcba-590e-ba53-e5fdb3d841c1@linaro.org>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1368; i=k.jensen@samsung.com;
+ h=from:subject; bh=aoxzJKx0O6Lh8Uwyoz0I0J6X3ZQ9AYZS1frBhrJxaH8=;
+ b=owJ4nAFtAZL+kA0DAAoBTeGvMW1PDekByyZiAGOXFAn4JT/RXbSN0djv0q7720auhySmj6ZktG2k
+ oNtrDeicEYkBMwQAAQoAHRYhBFIoM6p14tzmokdmwE3hrzFtTw3pBQJjlxQJAAoJEE3hrzFtTw3pR2
+ gH/3Hip0LUeBk37fBjirn7KRFbkooCOW3s23ATqkwvHonUmHsCdVwtNcixh1xRgmVKFHmn5dweCIU9
+ P4VjtQawawuIGvoH0tecvf73b9TvJGqHXI+ef5Ij6w8Y3OpoiHj8EtBBBIlM1q3KNN8XUTH+CYZhS+
+ ML+tuvEW8g7A7lNO0iqYmI7rOY86XIcgo7SbFKDOjSkdQhqbsYPZb+wZrKhEtoMP8ycX+okfjrPly3
+ 8xXgcmJYQPfgtuWTHkxLeADSCz9TxNRsZ09WJ2uXLIOxZZ7QdIfR+W/Pd6WF5+71zqJJ2HVQ2dC1Xq
+ /I5u4xlAEZnWVGRVg6Jb4BSRoL78LJRdJlFa3C
+X-Developer-Key: i=k.jensen@samsung.com; a=openpgp;
+ fpr=DDCA4D9C9EF931CC3468427263D56FC5E55DA838
+Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=66.111.4.29; envelope-from=its@irrelevant.dk;
  helo=out5-smtp.messagingengine.com
 X-Spam_score_int: -27
@@ -95,73 +102,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2022 11:39:57 -0000
+X-List-Received-Date: Mon, 12 Dec 2022 11:44:25 -0000
 
+From: Klaus Jensen <k.jensen@samsung.com>
 
---Maq7jjWapbkfJdLr
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Prior to reading the shadow doorbell cq head, we have to update the
+eventidx. Otherwise, we risk that the driver will skip an mmio doorbell
+write. This happens on riscv64, as reported by Guenter.
 
-On Dec 12 12:37, Philippe Mathieu-Daud=C3=A9 wrote:
-> On 12/12/22 12:32, Klaus Jensen wrote:
-> > From: Klaus Jensen <k.jensen@samsung.com>
-> >=20
-> > Prior to reading the shadow doorbell cq head, we have to update the
-> > eventidx. Otherwise, we risk that the driver will skip an mmio doorbell
-> > write. This happens on riscv64, as reported by Guenter.
-> >=20
-> > Adding the missing update to the cq eventidx fixes the issue.
-> >=20
-> > Fixes: 3f7fe8de3d49 ("hw/nvme: Implement shadow doorbell buffer support=
-")
-> > Cc: qemu-stable@nongnu.org
-> > Cc: qemu-riscv@nongnu.org
-> > Reported-by: Guenter Roeck <linux@roeck-us.net>
-> > Signed-off-by: Klaus Jensen <k.jensen@samsung.com>
-> > ---
-> >   hw/nvme/ctrl.c | 17 +++++++++++++++--
-> >   1 file changed, 15 insertions(+), 2 deletions(-)
-> >=20
-> > diff --git a/hw/nvme/ctrl.c b/hw/nvme/ctrl.c
-> > index 8af70f0216f0..3df29ea68b2f 100644
-> > --- a/hw/nvme/ctrl.c
-> > +++ b/hw/nvme/ctrl.c
-> > @@ -1334,10 +1334,22 @@ static inline void nvme_blk_write(BlockBackend =
-*blk, int64_t offset,
-> >       }
-> >   }
->=20
->=20
-> >   static void nvme_update_cq_head(NvmeCQueue *cq)
-> >   {
-> > -    pci_dma_read(PCI_DEVICE(cq->ctrl), cq->db_addr, &cq->head,
-> > -                 sizeof(cq->head));
-> > +    uint32_t v;
-> > +
-> > +    pci_dma_read(PCI_DEVICE(cq->ctrl), cq->db_addr, &v, sizeof(v));
-> > +
-> > +    cq->head =3D le32_to_cpu(v);
->=20
-> Isn't this be part of the previous patch?
->=20
+Adding the missing update to the cq eventidx fixes the issue.
 
-Argh, I screwed it up. I'll fix it.
+Fixes: 3f7fe8de3d49 ("hw/nvme: Implement shadow doorbell buffer support")
+Cc: qemu-stable@nongnu.org
+Cc: qemu-riscv@nongnu.org
+Reported-by: Guenter Roeck <linux@roeck-us.net>
+Signed-off-by: Klaus Jensen <k.jensen@samsung.com>
+---
+ hw/nvme/ctrl.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
---Maq7jjWapbkfJdLr
-Content-Type: application/pgp-signature; name="signature.asc"
+diff --git a/hw/nvme/ctrl.c b/hw/nvme/ctrl.c
+index bb505131f5f9..3df29ea68b2f 100644
+--- a/hw/nvme/ctrl.c
++++ b/hw/nvme/ctrl.c
+@@ -1334,6 +1334,15 @@ static inline void nvme_blk_write(BlockBackend *blk, int64_t offset,
+     }
+ }
+ 
++static void nvme_update_cq_eventidx(const NvmeCQueue *cq)
++{
++    uint32_t v = cpu_to_le32(cq->head);
++
++    trace_pci_nvme_update_cq_eventidx(cq->cqid, cq->head);
++
++    pci_dma_write(PCI_DEVICE(cq->ctrl), cq->ei_addr, &v, sizeof(v));
++}
++
+ static void nvme_update_cq_head(NvmeCQueue *cq)
+ {
+     uint32_t v;
+@@ -1358,6 +1367,7 @@ static void nvme_post_cqes(void *opaque)
+         hwaddr addr;
+ 
+         if (n->dbbuf_enabled) {
++            nvme_update_cq_eventidx(cq);
+             nvme_update_cq_head(cq);
+         }
+ 
+-- 
+2.38.1
 
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEUigzqnXi3OaiR2bATeGvMW1PDekFAmOXEwIACgkQTeGvMW1P
-DemicAgAuNwa4OA+dA7AvWBKT58pEpX+O+0Gjk8X8massui6cLX1PtHp9w1usuMH
-AGnYnk8mdetMawjz98A04IBVAAASjvkq2Y66YTqP/q+/GWvc9OjHX1/uGJDSm6Gd
-eEErU70aD6CHXBk/bxSdE4DxRVrKqx5F9nvqUnT8yP93TXHGOFXNKbqAASV+eSzK
-ykxcnwPdGv8iwlV8Ja2b6rv1FBb/VQi0esymgKe3nz24bunoNonzHEQ3uoYXTYNm
-aNQBmF9G427rquNj3a8ZC0KxoLhP2HIC+BhOljxr+31mDuvvT47uGPSRYl9cpTPz
-FpzN6Lm1A8MqX+4efo4z2EwmRsPSng==
-=cwN7
------END PGP SIGNATURE-----
-
---Maq7jjWapbkfJdLr--
 
