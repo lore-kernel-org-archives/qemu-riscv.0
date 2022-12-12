@@ -1,67 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p4c2s-0000Yb-WE
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Dec 2022 01:12:11 -0500
+	id 1p4crl-0003Y3-MK
+	for mharc-qemu-riscv@gnu.org; Mon, 12 Dec 2022 02:04:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p4c2q-0000Y8-Vm; Mon, 12 Dec 2022 01:12:09 -0500
-Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p4c2p-0005I9-Ap; Mon, 12 Dec 2022 01:12:08 -0500
-Received: by mail-vk1-xa31.google.com with SMTP id f68so5003333vkc.8;
- Sun, 11 Dec 2022 22:12:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rchOpqelyiDC+hFlq8o4W1DSxH1mwbC+KTYPlKqHtkE=;
- b=I/0a1dUVwCZXFxGIR27JuKx/F4etj2v1LZiXraHtL/doCcZIsAojk3NjGMVJ8VwWU6
- PggTvfjlS4EJk07XtB8KF7/bGOrJzxWOZI9QHEN6HtcwZNlrDCSV2mcCIE+iBxwnBcqk
- 8vrNpJLB1bEWO87Q1/M0w87yAr4R7xfsVGXssJ8iEvthspUBfwGi63/pAVsiP0KhWFzL
- eQ8fLq0y7bysEbsVXlbEiwtf8r31weEbHrh0uhH5PEOCEFbtRTncYZRxHc6dEhYUIU2P
- k8yduQwNJhHYr2RzvlBngI00zhNQuUKhYko/0TALmK2VnvCKBRo/FhXhqnc/bVPERm4R
- NyXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rchOpqelyiDC+hFlq8o4W1DSxH1mwbC+KTYPlKqHtkE=;
- b=CP7QfOgANVraAMCBcPK59V1x0j5DDqAMTY41a8O5I82KS+/dZ+kevPh/jJdXkjpQto
- ruTHEVeGA41pBsWC72jiCB8mElHOuaU0rEZ27eBfYATH9vy/xvgCGeRI0NgO6MXYtZ7z
- CMAA/T9ehkJ8UIt3uMcd7kNJEmWMZRl6i/rnpf7jVjwctOgKEE1WZnfOJ9gU6z1VFcIN
- 45woYhpnEkF/OR4HSyf6S31jWbv3jQPX01bpiXoFNBQFZ5m9aTh+Ah3MA6lK+uFYge7S
- kBCGAzb1B6bgJzBCvUYpzWf/yNgJra/Aun5kFa+zL8nHU1WkI0WsC3W15GQP8sW3hAFY
- tvmQ==
-X-Gm-Message-State: ANoB5plUIp1hheP4ccCO0E1fJwxsq0MFCvUmHYtYglzf+HujECwL0KgA
- HHujymEo0o67EphVYufXYedQZJ+GXmcCfgGGyA0=
-X-Google-Smtp-Source: AA0mqf6MMlwT04gZ2COAcq88GpUq241OnEFvcXlCFYlTR1xgHao6zJSaOi0DHmGmwzp11MlJ+xvImqogZkXqG4KHG/w=
-X-Received: by 2002:a1f:1409:0:b0:3c1:2fa:82e1 with SMTP id
- 9-20020a1f1409000000b003c102fa82e1mr149233vku.7.1670825525940; Sun, 11 Dec
- 2022 22:12:05 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1p4cri-0003Xb-IS
+ for qemu-riscv@nongnu.org; Mon, 12 Dec 2022 02:04:42 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1p4crg-0006LL-L8
+ for qemu-riscv@nongnu.org; Mon, 12 Dec 2022 02:04:42 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1670828679;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=WWALxUfQCpa383poR110/D0s7IoIHYpt8D5fWWOmDgA=;
+ b=GxTGumVB33a8FGIr8tAspnzb7ulpF44zPHtFiCsGzFLjFWtPNX2oa7RVdWcr4T2bJEFyYj
+ FVWUzCgSlWg8rALNIlXnT3QhbcTr1tpjZwNmPywGIIuR7BJiuourR+lYv4oPJS0ji3AmLj
+ qKXrRea7Sk2/1uBSsi/hovxTnd8ha9k=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-590-mlzsDVEiOvmPSITZRLbzMw-1; Mon, 12 Dec 2022 02:04:37 -0500
+X-MC-Unique: mlzsDVEiOvmPSITZRLbzMw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 18D681C068F4;
+ Mon, 12 Dec 2022 07:04:37 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.195.144])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 5C2D51121333;
+ Mon, 12 Dec 2022 07:04:35 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id E6C2721E6900; Mon, 12 Dec 2022 08:04:31 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: imp@bsdimp.com, kevans@freebsd.org, berrange@redhat.com,
+ jonathan.cameron@huawei.com, kbastian@mail.uni-paderborn.de,
+ jasowang@redhat.com, michael.roth@amd.com, kkostiuk@redhat.com,
+ tsimpson@quicinc.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org
+Subject: [PATCH] include: Don't include qemu/osdep.h
+Date: Mon, 12 Dec 2022 08:04:31 +0100
+Message-Id: <20221212070431.306727-1-armbru@redhat.com>
 MIME-Version: 1.0
-References: <20221211030829.802437-1-bmeng@tinylab.org>
- <20221211030829.802437-16-bmeng@tinylab.org>
-In-Reply-To: <20221211030829.802437-16-bmeng@tinylab.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 12 Dec 2022 16:11:39 +1000
-Message-ID: <CAKmqyKOwHaQCuohCdr5WfL4uDzCeq2W64ECAKequAqKpdni-cg@mail.gmail.com>
-Subject: Re: [PATCH v3 16/16] hw/intc: sifive_plic: Fix the pending register
- range check
-To: Bin Meng <bmeng@tinylab.org>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-type: text/plain
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -75,58 +69,184 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2022 06:12:09 -0000
+X-List-Received-Date: Mon, 12 Dec 2022 07:04:42 -0000
 
-On Sun, Dec 11, 2022 at 1:21 PM Bin Meng <bmeng@tinylab.org> wrote:
->
-> The pending register upper limit is currently set to
-> plic->num_sources >> 3, which is wrong, e.g.: considering
-> plic->num_sources is 7, the upper limit becomes 0 which fails
-> the range check if reading the pending register at pending_base.
->
-> Fixes: 1e24429e40df ("SiFive RISC-V PLIC Block")
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+docs/devel/style.rst mandates:
 
-Thanks!
+    The "qemu/osdep.h" header contains preprocessor macros that affect
+    the behavior of core system headers like <stdint.h>.  It must be
+    the first include so that core system headers included by external
+    libraries get the preprocessor macros that QEMU depends on.
 
-Applied to riscv-to-apply.next
+    Do not include "qemu/osdep.h" from header files since the .c file
+    will have already included it.
 
-Alistair
+A few violations have crept in.  Fix them.
 
->
-> ---
->
-> (no changes since v1)
->
->  hw/intc/sifive_plic.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-> index 1a792cc3f5..5522ede2cf 100644
-> --- a/hw/intc/sifive_plic.c
-> +++ b/hw/intc/sifive_plic.c
-> @@ -143,7 +143,8 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned size)
->          uint32_t irq = (addr - plic->priority_base) >> 2;
->
->          return plic->source_priority[irq];
-> -    } else if (addr_between(addr, plic->pending_base, plic->num_sources >> 3)) {
-> +    } else if (addr_between(addr, plic->pending_base,
-> +                            (plic->num_sources + 31) >> 3)) {
->          uint32_t word = (addr - plic->pending_base) >> 2;
->
->          return plic->pending[word];
-> @@ -202,7 +203,7 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
->              sifive_plic_update(plic);
->          }
->      } else if (addr_between(addr, plic->pending_base,
-> -                            plic->num_sources >> 3)) {
-> +                            (plic->num_sources + 31) >> 3)) {
->          qemu_log_mask(LOG_GUEST_ERROR,
->                        "%s: invalid pending write: 0x%" HWADDR_PRIx "",
->                        __func__, addr);
-> --
-> 2.34.1
->
->
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+---
+ bsd-user/qemu.h                 | 1 -
+ crypto/block-luks-priv.h        | 1 -
+ include/hw/cxl/cxl_host.h       | 1 -
+ include/hw/input/pl050.h        | 1 -
+ include/hw/tricore/triboard.h   | 1 -
+ include/qemu/userfaultfd.h      | 1 -
+ net/vmnet_int.h                 | 1 -
+ qga/cutils.h                    | 1 -
+ target/hexagon/hex_arch_types.h | 1 -
+ target/hexagon/mmvec/macros.h   | 1 -
+ target/riscv/pmu.h              | 1 -
+ qga/cutils.c                    | 3 ++-
+ 12 files changed, 2 insertions(+), 12 deletions(-)
+
+diff --git a/bsd-user/qemu.h b/bsd-user/qemu.h
+index be6105385e..0ceecfb6df 100644
+--- a/bsd-user/qemu.h
++++ b/bsd-user/qemu.h
+@@ -17,7 +17,6 @@
+ #ifndef QEMU_H
+ #define QEMU_H
+ 
+-#include "qemu/osdep.h"
+ #include "cpu.h"
+ #include "qemu/units.h"
+ #include "exec/cpu_ldst.h"
+diff --git a/crypto/block-luks-priv.h b/crypto/block-luks-priv.h
+index 90a20d432b..1066df0307 100644
+--- a/crypto/block-luks-priv.h
++++ b/crypto/block-luks-priv.h
+@@ -18,7 +18,6 @@
+  *
+  */
+ 
+-#include "qemu/osdep.h"
+ #include "qapi/error.h"
+ #include "qemu/bswap.h"
+ 
+diff --git a/include/hw/cxl/cxl_host.h b/include/hw/cxl/cxl_host.h
+index a1b662ce40..c9bc9c7c50 100644
+--- a/include/hw/cxl/cxl_host.h
++++ b/include/hw/cxl/cxl_host.h
+@@ -7,7 +7,6 @@
+  * COPYING file in the top-level directory.
+  */
+ 
+-#include "qemu/osdep.h"
+ #include "hw/cxl/cxl.h"
+ #include "hw/boards.h"
+ 
+diff --git a/include/hw/input/pl050.h b/include/hw/input/pl050.h
+index 89ec4fafc9..4cb8985f31 100644
+--- a/include/hw/input/pl050.h
++++ b/include/hw/input/pl050.h
+@@ -10,7 +10,6 @@
+ #ifndef HW_PL050_H
+ #define HW_PL050_H
+ 
+-#include "qemu/osdep.h"
+ #include "hw/sysbus.h"
+ #include "migration/vmstate.h"
+ #include "hw/input/ps2.h"
+diff --git a/include/hw/tricore/triboard.h b/include/hw/tricore/triboard.h
+index 094c8bd563..4fdd2d7d97 100644
+--- a/include/hw/tricore/triboard.h
++++ b/include/hw/tricore/triboard.h
+@@ -18,7 +18,6 @@
+  * License along with this library; if not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#include "qemu/osdep.h"
+ #include "qapi/error.h"
+ #include "hw/boards.h"
+ #include "sysemu/sysemu.h"
+diff --git a/include/qemu/userfaultfd.h b/include/qemu/userfaultfd.h
+index 6b74f92792..55c95998e8 100644
+--- a/include/qemu/userfaultfd.h
++++ b/include/qemu/userfaultfd.h
+@@ -13,7 +13,6 @@
+ #ifndef USERFAULTFD_H
+ #define USERFAULTFD_H
+ 
+-#include "qemu/osdep.h"
+ #include "exec/hwaddr.h"
+ #include <linux/userfaultfd.h>
+ 
+diff --git a/net/vmnet_int.h b/net/vmnet_int.h
+index adf6e8c20d..d0b90594f2 100644
+--- a/net/vmnet_int.h
++++ b/net/vmnet_int.h
+@@ -10,7 +10,6 @@
+ #ifndef VMNET_INT_H
+ #define VMNET_INT_H
+ 
+-#include "qemu/osdep.h"
+ #include "vmnet_int.h"
+ #include "clients.h"
+ 
+diff --git a/qga/cutils.h b/qga/cutils.h
+index f0f30a7d28..2bfaf554a8 100644
+--- a/qga/cutils.h
++++ b/qga/cutils.h
+@@ -1,7 +1,6 @@
+ #ifndef CUTILS_H_
+ #define CUTILS_H_
+ 
+-#include "qemu/osdep.h"
+ 
+ int qga_open_cloexec(const char *name, int flags, mode_t mode);
+ 
+diff --git a/target/hexagon/hex_arch_types.h b/target/hexagon/hex_arch_types.h
+index 885f68f760..52a7f2b2f3 100644
+--- a/target/hexagon/hex_arch_types.h
++++ b/target/hexagon/hex_arch_types.h
+@@ -18,7 +18,6 @@
+ #ifndef HEXAGON_HEX_ARCH_TYPES_H
+ #define HEXAGON_HEX_ARCH_TYPES_H
+ 
+-#include "qemu/osdep.h"
+ #include "mmvec/mmvec.h"
+ #include "qemu/int128.h"
+ 
+diff --git a/target/hexagon/mmvec/macros.h b/target/hexagon/mmvec/macros.h
+index 8345753580..6a463a7db3 100644
+--- a/target/hexagon/mmvec/macros.h
++++ b/target/hexagon/mmvec/macros.h
+@@ -18,7 +18,6 @@
+ #ifndef HEXAGON_MMVEC_MACROS_H
+ #define HEXAGON_MMVEC_MACROS_H
+ 
+-#include "qemu/osdep.h"
+ #include "qemu/host-utils.h"
+ #include "arch.h"
+ #include "mmvec/system_ext_mmvec.h"
+diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
+index 3004ce37b6..0c819ca983 100644
+--- a/target/riscv/pmu.h
++++ b/target/riscv/pmu.h
+@@ -16,7 +16,6 @@
+  * this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#include "qemu/osdep.h"
+ #include "qemu/log.h"
+ #include "cpu.h"
+ #include "qemu/main-loop.h"
+diff --git a/qga/cutils.c b/qga/cutils.c
+index b8e142ef64..b21bcf3683 100644
+--- a/qga/cutils.c
++++ b/qga/cutils.c
+@@ -2,8 +2,9 @@
+  * This work is licensed under the terms of the GNU GPL, version 2 or later.
+  * See the COPYING file in the top-level directory.
+  */
+-#include "cutils.h"
+ 
++#include "qemu/osdep.h"
++#include "cutils.h"
+ #include "qapi/error.h"
+ 
+ /**
+-- 
+2.37.3
+
 
