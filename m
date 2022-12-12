@@ -1,57 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p4buM-0005uv-8b
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Dec 2022 01:03:23 -0500
+	id 1p4c2s-0000Yb-WE
+	for mharc-qemu-riscv@gnu.org; Mon, 12 Dec 2022 01:12:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p4bti-0005gh-4h; Mon, 12 Dec 2022 01:02:48 -0500
-Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
+ id 1p4c2q-0000Y8-Vm; Mon, 12 Dec 2022 01:12:09 -0500
+Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p4btI-0007I5-7s; Mon, 12 Dec 2022 01:02:41 -0500
-Received: by mail-vs1-xe36.google.com with SMTP id i2so10199870vsc.1;
- Sun, 11 Dec 2022 22:02:12 -0800 (PST)
+ id 1p4c2p-0005I9-Ap; Mon, 12 Dec 2022 01:12:08 -0500
+Received: by mail-vk1-xa31.google.com with SMTP id f68so5003333vkc.8;
+ Sun, 11 Dec 2022 22:12:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wClejFOUkN3OisgEGRA8xE8OMNVCY2COnJ88bhaPun4=;
- b=DXQsZiKQzg0Xv2sp6XOFcDWE+ww9XULk5SvYZPkofkIgGv+kV6lgAYZiUbqtJF9GXD
- brLQUfGNdCtZSViyyYDPitFKNSxnLj9oX9+uCtPdF9rvwv2+kibehzeNCPfbhBCgbqB1
- JAyofHD4cWKOzuvQ7xBmT9BNNg4+OsC1rdxhQceeWnMgzPGVnfFAZSRH8fR2OmSbpdv9
- 45iGHJAXfcOD56dXnsn6x8DmIaAmZP+dQJp/nb4uJif7Vh6+EtC/HH+xCuVsu5IgPh/r
- U1mqzv8ET1hNT2YzMIJpO6DU4xAtGVnKXMOc6+Gu1fKRjKnMg3/JMptPcelgBivt2ItP
- G4mQ==
+ bh=rchOpqelyiDC+hFlq8o4W1DSxH1mwbC+KTYPlKqHtkE=;
+ b=I/0a1dUVwCZXFxGIR27JuKx/F4etj2v1LZiXraHtL/doCcZIsAojk3NjGMVJ8VwWU6
+ PggTvfjlS4EJk07XtB8KF7/bGOrJzxWOZI9QHEN6HtcwZNlrDCSV2mcCIE+iBxwnBcqk
+ 8vrNpJLB1bEWO87Q1/M0w87yAr4R7xfsVGXssJ8iEvthspUBfwGi63/pAVsiP0KhWFzL
+ eQ8fLq0y7bysEbsVXlbEiwtf8r31weEbHrh0uhH5PEOCEFbtRTncYZRxHc6dEhYUIU2P
+ k8yduQwNJhHYr2RzvlBngI00zhNQuUKhYko/0TALmK2VnvCKBRo/FhXhqnc/bVPERm4R
+ NyXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wClejFOUkN3OisgEGRA8xE8OMNVCY2COnJ88bhaPun4=;
- b=jCUcBsMSt5nSBFbiUKrJX8gGCZzHYkeGlM1pKfKRomtc0cWlfY2mqHBWTL/uHNyji1
- W+w0Jp04rgJSyERCMRkqNOWagSwmHxoZ5eBgUvF+Mikgkip3yLyb7DgCLqXn3w4hPvO5
- pBKWs2XDxmEeq3Am99GV5GFd786H8UaEGlLFSc8K/4PRBiY62itGuENgvFr2v6oIw3Hg
- CcKTuyHaZtCIoe3n+wxmBqgV5fcldZmRV0///ZHLDSR9/Bxvrcic7OEVifFxVn0KS4WX
- krj2HJzAc2bm6/WgI6VCANvGK82fBX8yhwTRv0nsB7pWeRK/GJ3slIP3NZGgTgC6BFzf
- Ljsg==
-X-Gm-Message-State: ANoB5pndztfNjk6siUO9wmUK1GRU7LU53Mst3HLZHHqYGFxRYqZadQRz
- 1MuxVLvJ9Oh1HRPEqRwUYqfSpwUICWMOj7bWOl4=
-X-Google-Smtp-Source: AA0mqf6LPwTcvu9sS+gEQhQfdn7LF4gVyQWzF6/lrUBMv+ZKz+hWp2c8gLNEpJIV9Ak4tlfeZDCjdZ9o7Ea1Czxduew=
-X-Received: by 2002:a05:6102:302b:b0:3b0:f936:788b with SMTP id
- v11-20020a056102302b00b003b0f936788bmr18360616vsa.54.1670824931257; Sun, 11
- Dec 2022 22:02:11 -0800 (PST)
+ bh=rchOpqelyiDC+hFlq8o4W1DSxH1mwbC+KTYPlKqHtkE=;
+ b=CP7QfOgANVraAMCBcPK59V1x0j5DDqAMTY41a8O5I82KS+/dZ+kevPh/jJdXkjpQto
+ ruTHEVeGA41pBsWC72jiCB8mElHOuaU0rEZ27eBfYATH9vy/xvgCGeRI0NgO6MXYtZ7z
+ CMAA/T9ehkJ8UIt3uMcd7kNJEmWMZRl6i/rnpf7jVjwctOgKEE1WZnfOJ9gU6z1VFcIN
+ 45woYhpnEkF/OR4HSyf6S31jWbv3jQPX01bpiXoFNBQFZ5m9aTh+Ah3MA6lK+uFYge7S
+ kBCGAzb1B6bgJzBCvUYpzWf/yNgJra/Aun5kFa+zL8nHU1WkI0WsC3W15GQP8sW3hAFY
+ tvmQ==
+X-Gm-Message-State: ANoB5plUIp1hheP4ccCO0E1fJwxsq0MFCvUmHYtYglzf+HujECwL0KgA
+ HHujymEo0o67EphVYufXYedQZJ+GXmcCfgGGyA0=
+X-Google-Smtp-Source: AA0mqf6MMlwT04gZ2COAcq88GpUq241OnEFvcXlCFYlTR1xgHao6zJSaOi0DHmGmwzp11MlJ+xvImqogZkXqG4KHG/w=
+X-Received: by 2002:a1f:1409:0:b0:3c1:2fa:82e1 with SMTP id
+ 9-20020a1f1409000000b003c102fa82e1mr149233vku.7.1670825525940; Sun, 11 Dec
+ 2022 22:12:05 -0800 (PST)
 MIME-Version: 1.0
-References: <20221208145411.122799-1-mchitale@ventanamicro.com>
-In-Reply-To: <20221208145411.122799-1-mchitale@ventanamicro.com>
+References: <20221211030829.802437-1-bmeng@tinylab.org>
+ <20221211030829.802437-16-bmeng@tinylab.org>
+In-Reply-To: <20221211030829.802437-16-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 12 Dec 2022 16:01:45 +1000
-Message-ID: <CAKmqyKPAPB2we33p_oyzdhHRVzJumzsbAukeAXfWsUPoTbPD1w@mail.gmail.com>
-Subject: Re: [PATCH v3 0/3] target/riscv: Apply KVM policy to ISA extensions
-To: Mayuresh Chitale <mchitale@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
+Date: Mon, 12 Dec 2022 16:11:39 +1000
+Message-ID: <CAKmqyKOwHaQCuohCdr5WfL4uDzCeq2W64ECAKequAqKpdni-cg@mail.gmail.com>
+Subject: Re: [PATCH v3 16/16] hw/intc: sifive_plic: Fix the pending register
+ range check
+To: Bin Meng <bmeng@tinylab.org>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,30 +75,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2022 06:03:10 -0000
+X-List-Received-Date: Mon, 12 Dec 2022 06:12:09 -0000
 
-On Fri, Dec 9, 2022 at 12:57 AM Mayuresh Chitale
-<mchitale@ventanamicro.com> wrote:
+On Sun, Dec 11, 2022 at 1:21 PM Bin Meng <bmeng@tinylab.org> wrote:
 >
-> Currently the single and multi letter ISA extensions exposed to the
-> guest vcpu don't confirm to the KVM policies. This patchset updates the kvm headers
-> and applies policies set in KVM to the extensions exposed to the guest.
+> The pending register upper limit is currently set to
+> plic->num_sources >> 3, which is wrong, e.g.: considering
+> plic->num_sources is 7, the upper limit becomes 0 which fails
+> the range check if reading the pending register at pending_base.
 >
-> These patches can also be found on riscv_kvm_ext_v3 branch at:
-> https://github.com/mdchitale/qemu.git
->
-> Changes in v3:
-> - Address comments from Bin Meng
->
-> Changes in v2:
-> - Rebase to latest riscv-to-apply.next
-> - Update linux headers to version 6.1-rc8
-> - Add reviewed by tags
->
-> Mayuresh Chitale (3):
->   update-linux-headers: Version 6.1-rc8
->   target/riscv: Extend isa_ext_data for single letter extensions
->   target/riscv: kvm: Support selecting VCPU extensions
+> Fixes: 1e24429e40df ("SiFive RISC-V PLIC Block")
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Thanks!
 
@@ -104,24 +95,36 @@ Applied to riscv-to-apply.next
 Alistair
 
 >
->  include/standard-headers/drm/drm_fourcc.h     |  34 ++++-
->  include/standard-headers/linux/ethtool.h      |  63 +++++++-
->  include/standard-headers/linux/fuse.h         |   6 +-
->  .../linux/input-event-codes.h                 |   1 +
->  include/standard-headers/linux/virtio_blk.h   |  19 +++
->  linux-headers/asm-generic/hugetlb_encode.h    |  26 ++--
->  linux-headers/asm-generic/mman-common.h       |   2 +
->  linux-headers/asm-mips/mman.h                 |   2 +
->  linux-headers/asm-riscv/kvm.h                 |   4 +
->  linux-headers/linux/kvm.h                     |   1 +
->  linux-headers/linux/psci.h                    |  14 ++
->  linux-headers/linux/userfaultfd.h             |   4 +
->  linux-headers/linux/vfio.h                    | 142 ++++++++++++++++++
->  target/riscv/cpu.c                            |  52 ++++---
->  target/riscv/kvm.c                            |  88 +++++++++--
->  target/riscv/kvm_riscv.h                      |   2 +-
->  16 files changed, 408 insertions(+), 52 deletions(-)
+> ---
 >
+> (no changes since v1)
+>
+>  hw/intc/sifive_plic.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+> index 1a792cc3f5..5522ede2cf 100644
+> --- a/hw/intc/sifive_plic.c
+> +++ b/hw/intc/sifive_plic.c
+> @@ -143,7 +143,8 @@ static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned size)
+>          uint32_t irq = (addr - plic->priority_base) >> 2;
+>
+>          return plic->source_priority[irq];
+> -    } else if (addr_between(addr, plic->pending_base, plic->num_sources >> 3)) {
+> +    } else if (addr_between(addr, plic->pending_base,
+> +                            (plic->num_sources + 31) >> 3)) {
+>          uint32_t word = (addr - plic->pending_base) >> 2;
+>
+>          return plic->pending[word];
+> @@ -202,7 +203,7 @@ static void sifive_plic_write(void *opaque, hwaddr addr, uint64_t value,
+>              sifive_plic_update(plic);
+>          }
+>      } else if (addr_between(addr, plic->pending_base,
+> -                            plic->num_sources >> 3)) {
+> +                            (plic->num_sources + 31) >> 3)) {
+>          qemu_log_mask(LOG_GUEST_ERROR,
+>                        "%s: invalid pending write: 0x%" HWADDR_PRIx "",
+>                        __func__, addr);
 > --
 > 2.34.1
 >
