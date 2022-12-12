@@ -1,77 +1,95 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p4gjj-00047b-HQ
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Dec 2022 06:12:45 -0500
+	id 1p4h3A-0000bG-Bp
+	for mharc-qemu-riscv@gnu.org; Mon, 12 Dec 2022 06:32:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1p4gjd-00045j-8w
- for qemu-riscv@nongnu.org; Mon, 12 Dec 2022 06:12:37 -0500
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1p4gja-0006uf-9t
- for qemu-riscv@nongnu.org; Mon, 12 Dec 2022 06:12:37 -0500
-Received: by mail-pj1-x1032.google.com with SMTP id o12so11641568pjo.4
- for <qemu-riscv@nongnu.org>; Mon, 12 Dec 2022 03:12:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Sf0UZ4il3EIhaGajJ2rvWe7Dl58A73/cedFrnuwjG08=;
- b=PRuDDf1HhlHba/vvO3gF3zTNRLe1CS2Rpna8bw2SSZDdP6O2/uegZiqAd6BniD5USO
- 426/Z5udjVctDgUQH+AvutwE8Cchjqs2CDLMA6k0uZPUnw1+pBBuZtP5aoN5/YwBYXol
- x6D3oEoBximzOPTpl5W4qoyaHtDZkAWp1pBQHLR4ssDMAMpNGekmZlBzxWl2WO0iafyr
- bPIcQzyAZ8JdNQ6p/EPoXqVfmIr5VUIBmGlB+ZzV5xM1BdX71cMi0mkGoCQD3vPtsril
- SYhc73DnRoq+7Wla4tOZekVzJtCMUu7hhUd1hNTu9xu3kE0RolaG7AjJJ8ywRS7ht3GL
- fvfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Sf0UZ4il3EIhaGajJ2rvWe7Dl58A73/cedFrnuwjG08=;
- b=ikQiMWFgqvexOXWXUR8yne9K2cRQc/RdcGrsAM+j8DVU3qSNMWYUmDnubRYGTOfAfW
- VEGMwzA3ZqfI3jTKjLo6+lM2Nz+z5wz9iP9xC7r2GHw+PuC8vdL8abEFoHxr8imcAlw1
- Ho2+90eD32jkgrPTwPp5AddvAEBx/EVm1Si9uJ3mx5eIhqYMY/4XZU6yrwsIB8PZ+xEK
- FETgEQNaYDNep56tje7i/hb0ljuDfEgFlz3Cpogvd4uOuuBQSljQH+r0qkyxi0Rv5Rqx
- cxO+7XmeqAE8fbXEhwCPl7t4jDiiY9WTF1PrP4NGvSx9XfLVKW5nV/3hOQ1PEb8V8i6a
- vEwQ==
-X-Gm-Message-State: ANoB5pm53Ykfh+qSoGPh39F8CRNk3snOhCvHEI87yu5usLKk+PNC48CW
- njbwFbdXtsvrnsbg57XtWBLg88tMNFEW0uu8hrn+/w==
-X-Google-Smtp-Source: AA0mqf5MbfgeRYacJ8mUXlp6WHN1olo7vTfYtMPGA76fP+aoX5jf4Du/kZCbBwCrBTNKJn5WrnlR78TR8aeuVEvtnVA=
-X-Received: by 2002:a17:902:e20c:b0:189:a934:ee37 with SMTP id
- u12-20020a170902e20c00b00189a934ee37mr41671013plb.141.1670843552126; Mon, 12
- Dec 2022 03:12:32 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <its@irrelevant.dk>)
+ id 1p4h2v-0000X6-7c; Mon, 12 Dec 2022 06:32:35 -0500
+Received: from out5-smtp.messagingengine.com ([66.111.4.29])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <its@irrelevant.dk>)
+ id 1p4h2t-0000LA-Mg; Mon, 12 Dec 2022 06:32:32 -0500
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.nyi.internal (Postfix) with ESMTP id 36F375C00CE;
+ Mon, 12 Dec 2022 06:32:29 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute2.internal (MEProxy); Mon, 12 Dec 2022 06:32:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irrelevant.dk;
+ h=cc:cc:content-transfer-encoding:date:date:from:from
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:sender:subject:subject:to:to; s=fm1; t=1670844749; x=
+ 1670931149; bh=5qSyIRFlQNDojhqxnNy8ca/Qu7HNQXyk6am+DhLFLE4=; b=F
+ JZUqDZexPaaYnNUqwXc2JBCcAM5/dTEBuiJZRaNbd3GiVNITHIFYnYDY22Uvmpid
+ LFSCfE3NWwNJOm61umMT20vIELenh1POLnF9ICQvnbp43A7t6P2dx/4/ubclfEFF
+ QF3W3NFpyy88EYEsxCxYK4NwHujkhxXwVF/AsL68fzSF6ZpE92MPkDMrS6AifQ/v
+ +LHmqWR/hzLCIhRK/QPzlBcpnq1tt96vTOu/eFTK70/ux0V3kqCn6nylcEZc5OJf
+ hSzMwjJ33l60nfS0CI9oLh0YU/UuzxCCyfLNEbrRv74Z96kMBZ5uygINvoKqzzPh
+ /4SOK6wVZ2U+1uLK5MOmQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm2; t=1670844749; x=1670931149; bh=5qSyIRFlQNDoj
+ hqxnNy8ca/Qu7HNQXyk6am+DhLFLE4=; b=gsHZQqtsuQ8/FYhc0wSZhIFNP+mxO
+ zonwNHBqoOK/idnueQ07kripGAW4ROP2NmKzVYmSSqe7YCd+uJ0i7McCKJ4vGX6g
+ PPTdVuBwlY1yrSNS3jBjhIut0OzFeiif13Y1s9026xypIw0eVJaWRh/sNgMV/uZj
+ VIogSaWSjsKLaWCfCdNe/na/XwM0FR6YMdDrjBHpAqY7sA3FmaXEF1A1YGJ8AVcM
+ yCuPDRxXmw8fE4mx+VPoRi+A6JkDCqG08AFX3mhkKjr9tgJ+MZlG3QoXIuicfyLV
+ RKudRD7YTNqgG2tahllM31B5yst/1A0xF4VVA8DLcunK/N3bGNO1CksSg==
+X-ME-Sender: <xms:TRGXY4O7XSNNoYlL8ZczWnJj5opWi6E4r0703gG-3HCC2IlcZMy82g>
+ <xme:TRGXY--kGgTTqCg59XvZrDAUdx9ExXE4EhlyGc4CIKmMPvwo_kqUv0W6-gnmS7cRZ
+ GtAWNSwXzqLOy1BRyU>
+X-ME-Received: <xmr:TRGXY_RLO_UUP0Fp1_gAc_QuY3k5hi2vML-nVqBQLY5tMFpuQmggEctrjuqM4BYEzpWDYpv_-9-yw-17L0Fkn32mAjZ8U3UyUnYlCQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrvdekgddthecutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefmlhgruhhs
+ ucflvghnshgvnhcuoehithhssehirhhrvghlvghvrghnthdrughkqeenucggtffrrghtth
+ gvrhhnpeejgfeilefgieevheekueevheehkeefveegiefgheefgfejjeehffefgedujedu
+ geenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehith
+ hssehirhhrvghlvghvrghnthdrughk
+X-ME-Proxy: <xmx:TRGXYwv7T5LOlHyqXt_Svo0likmUfFht0yj5W4ltSMv7x6tfkq2eMA>
+ <xmx:TRGXYweKAVxogkYP5kL6xU1NPneQRCRrHUTR2jd6Tp4a4K1HlY3jZg>
+ <xmx:TRGXY02rBGAOo4gtX6B5dyaJoVC52Ybj88JxY48S3IIgvNSm5xf9yw>
+ <xmx:TRGXY-tIw45rpOom1zLBVU70qpRptp6aaQR8bla9ByQfsdiiImwYoA>
+Feedback-ID: idc91472f:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 12 Dec 2022 06:32:26 -0500 (EST)
+From: Klaus Jensen <its@irrelevant.dk>
+To: qemu-devel@nongnu.org
+Cc: qemu-block@nongnu.org, Keith Busch <kbusch@kernel.org>,
+ Jinhao Fan <fanjinhao21s@ict.ac.cn>, Klaus Jensen <its@irrelevant.dk>,
+ Guenter Roeck <linux@roeck-us.net>, Klaus Jensen <k.jensen@samsung.com>,
+ qemu-stable@nongnu.org, qemu-riscv@nongnu.org
+Subject: [PATCH v3 4/4] hw/nvme: fix missing cq eventidx update
+Date: Mon, 12 Dec 2022 12:32:15 +0100
+Message-Id: <20221212113215.33135-5-its@irrelevant.dk>
+X-Mailer: git-send-email 2.38.1
+In-Reply-To: <20221212113215.33135-1-its@irrelevant.dk>
+References: <20221212113215.33135-1-its@irrelevant.dk>
 MIME-Version: 1.0
-References: <20221108125703.1463577-1-apatel@ventanamicro.com>
- <20221108125703.1463577-3-apatel@ventanamicro.com>
- <CAKmqyKP+hc4N6Z2AqkQpCmF=oyTE_rf-XfSsTHChwcUWRE5gsg@mail.gmail.com>
- <CAK9=C2Uu1bCcZht+ydiazSmgnkD_hhLetXP4WcA92DypE4m9=A@mail.gmail.com>
- <CAKmqyKPw54F0uVy+7SjoY16o7RYyW6qwLhaYaKR7aNpP4Nz27Q@mail.gmail.com>
-In-Reply-To: <CAKmqyKPw54F0uVy+7SjoY16o7RYyW6qwLhaYaKR7aNpP4Nz27Q@mail.gmail.com>
-From: Anup Patel <apatel@ventanamicro.com>
-Date: Mon, 12 Dec 2022 16:42:20 +0530
-Message-ID: <CAK9=C2V21JcgyUKub1JGVT0DEaeyzJ1GXQYcyaZy4Xv26F5fyA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/5] target/riscv: Update VS timer whenever htimedelta
- changes
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atishp@atishpatra.org>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=apatel@ventanamicro.com; helo=mail-pj1-x1032.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1668; i=k.jensen@samsung.com;
+ h=from:subject; bh=QySrk9WhTbWu6XNMhQzYbxR/1t4pP58Rjfply+gZbuU=;
+ b=owJ4nAFtAZL+kA0DAAoBTeGvMW1PDekByyZiAGOXET9wquV5lGNd7teXduh1iyp3H6Y7hbDugi7T
+ av4fZ+p25IkBMwQAAQoAHRYhBFIoM6p14tzmokdmwE3hrzFtTw3pBQJjlxE/AAoJEE3hrzFtTw3pdF
+ 0IAId2dej3g1abSR1v5g6mflu9UGbI4ZSiLzeqTEj9S8geecRbaVtfwVgfoFU1xkX2wo5t5Ci2ioL2
+ ojGWUgFY71J/wGuLfjxxGCOZ6mAG/EiJog7A9/l/zf9Fzj43Q2PWHym9+ci5l2JsdrJpNuxd2anM9y
+ AmuV1Zu/7Ytv1n7EXeSGXiVFWIJr6OZK5+CZO4cW6Ik/pZnANUhUJ63/TzAtpcp4lid+8wp899Tmp9
+ U0RMh/BRfSBdSVI7EEt1VQwNtZowhPS7XA2/vyKSbsJbALK9jSbVjbHdLxk4uOTr+iYotQGzm4MhSt
+ Hrv72GvMRbAk0c4wd/tbuUH4nKqE5jsa2wtKyp
+X-Developer-Key: i=k.jensen@samsung.com; a=openpgp;
+ fpr=DDCA4D9C9EF931CC3468427263D56FC5E55DA838
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=66.111.4.29; envelope-from=its@irrelevant.dk;
+ helo=out5-smtp.messagingengine.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,127 +102,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2022 11:12:39 -0000
+X-List-Received-Date: Mon, 12 Dec 2022 11:32:46 -0000
 
-On Mon, Dec 12, 2022 at 11:23 AM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Thu, Dec 8, 2022 at 6:41 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> >
-> > On Thu, Dec 8, 2022 at 9:00 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > >
-> > > On Tue, Nov 8, 2022 at 11:07 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> > > >
-> > > > The htimedelta[h] CSR has impact on the VS timer comparison so we
-> > > > should call riscv_timer_write_timecmp() whenever htimedelta changes.
-> > > >
-> > > > Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp suppor")
-> > > > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-> > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > >
-> > > This patch breaks my Xvisor test. When running OpenSBI and Xvisor like this:
-> > >
-> > > qemu-system-riscv64 -machine virt \
-> > >     -m 1G -serial mon:stdio -serial null -nographic \
-> > >     -append 'vmm.console=uart@10000000 vmm.bootcmd="vfs mount initrd
-> > > /;vfs run /boot.xscript;vfs cat /system/banner.txt; guest kick guest0;
-> > > vserial bind guest0/uart0"' \
-> > >     -smp 4 -d guest_errors \
-> > >     -bios none \
-> > >     -device loader,file=./images/qemuriscv64/vmm.bin,addr=0x80200000 \
-> > >     -kernel ./images/qemuriscv64/fw_jump.elf \
-> > >     -initrd ./images/qemuriscv64/vmm-disk-linux.img -cpu rv64,h=true
-> > >
-> > > Running:
-> > >
-> > > Xvisor v0.3.0-129-gbc33f339 (Jan  1 1970 00:00:00)
-> > >
-> > > I see this failure:
-> > >
-> > > INIT: bootcmd:  guest kick guest0
-> > >
-> > > guest0: Kicked
-> > >
-> > > INIT: bootcmd:  vserial bind guest0/uart0
-> > >
-> > > [guest0/uart0] cpu_vcpu_stage2_map: guest_phys=0x000000003B9AC000
-> > > size=0x4096 map failed
-> > >
-> > > do_error: CPU3: VCPU=guest0/vcpu0 page fault failed (error -1)
-> > >
-> > >        zero=0x0000000000000000          ra=0x0000000080001B4E
-> > >
-> > >          sp=0x000000008001CF80          gp=0x0000000000000000
-> > >
-> > >          tp=0x0000000000000000          s0=0x000000008001CFB0
-> > >
-> > >          s1=0x0000000000000000          a0=0x0000000010001048
-> > >
-> > >          a1=0x0000000000000000          a2=0x0000000000989680
-> > >
-> > >          a3=0x000000003B9ACA00          a4=0x0000000000000048
-> > >
-> > >          a5=0x0000000000000000          a6=0x0000000000019000
-> > >
-> > >          a7=0x0000000000000000          s2=0x0000000000000000
-> > >
-> > >          s3=0x0000000000000000          s4=0x0000000000000000
-> > >
-> > >          s5=0x0000000000000000          s6=0x0000000000000000
-> > >
-> > >          s7=0x0000000000000000          s8=0x0000000000000000
-> > >
-> > >          s9=0x0000000000000000         s10=0x0000000000000000
-> > >
-> > >         s11=0x0000000000000000          t0=0x0000000000004000
-> > >
-> > >          t1=0x0000000000000100          t2=0x0000000000000000
-> > >
-> > >          t3=0x0000000000000000          t4=0x0000000000000000
-> > >
-> > >          t5=0x0000000000000000          t6=0x0000000000000000
-> > >
-> > >        sepc=0x0000000080001918     sstatus=0x0000000200004120
-> > >
-> > >     hstatus=0x00000002002001C0     sp_exec=0x0000000010A64000
-> > >
-> > >      scause=0x0000000000000017       stval=0x000000003B9ACAF8
-> > >
-> > >       htval=0x000000000EE6B2BE      htinst=0x0000000000D03021
-> > >
-> > > I have tried updating to a newer Xvisor release, but with that I don't
-> > > get any serial output.
-> > >
-> > > Can you help get the Xvisor tests back up and running?
-> >
-> > I tried the latest Xvisor-next (https://github.com/avpatel/xvisor-next)
-> > with your QEMU riscv-to-apply.next branch and it works fine (both
-> > with and without Sstc).
->
-> Does it work with the latest release?
+From: Klaus Jensen <k.jensen@samsung.com>
 
-Yes, the latest Xvisor-next repo works for QEMU v7.2.0-rc4 and
-your riscv-to-apply.next branch (commit 51bb9de2d188)
+Prior to reading the shadow doorbell cq head, we have to update the
+eventidx. Otherwise, we risk that the driver will skip an mmio doorbell
+write. This happens on riscv64, as reported by Guenter.
 
-Regards,
-Anup
+Adding the missing update to the cq eventidx fixes the issue.
 
->
-> Alistair
->
-> >
-> > Here's the QEMU command which I use:
-> >
-> > qemu-system-riscv64 -M virt -m 512M -nographic \
-> > -bios opensbi/build/platform/generic/firmware/fw_jump.bin \
-> > -kernel ../xvisor-next/build/vmm.bin \
-> > -initrd rbd_v64.img \
-> > -append "vmm.bootcmd=\"vfs mount initrd /;vfs run /boot.xscript;vfs
-> > cat /system/banner.txt\"" \
-> > -smp 4
-> >
-> > Also, I will be releasing Xvisor-0.3.2 by the end of Dec 2022 so I
-> > suggest using this upcoming release in your test.
-> >
-> > Regards,
-> > Anup
+Fixes: 3f7fe8de3d49 ("hw/nvme: Implement shadow doorbell buffer support")
+Cc: qemu-stable@nongnu.org
+Cc: qemu-riscv@nongnu.org
+Reported-by: Guenter Roeck <linux@roeck-us.net>
+Signed-off-by: Klaus Jensen <k.jensen@samsung.com>
+---
+ hw/nvme/ctrl.c | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
+
+diff --git a/hw/nvme/ctrl.c b/hw/nvme/ctrl.c
+index 8af70f0216f0..3df29ea68b2f 100644
+--- a/hw/nvme/ctrl.c
++++ b/hw/nvme/ctrl.c
+@@ -1334,10 +1334,22 @@ static inline void nvme_blk_write(BlockBackend *blk, int64_t offset,
+     }
+ }
+ 
++static void nvme_update_cq_eventidx(const NvmeCQueue *cq)
++{
++    uint32_t v = cpu_to_le32(cq->head);
++
++    trace_pci_nvme_update_cq_eventidx(cq->cqid, cq->head);
++
++    pci_dma_write(PCI_DEVICE(cq->ctrl), cq->ei_addr, &v, sizeof(v));
++}
++
+ static void nvme_update_cq_head(NvmeCQueue *cq)
+ {
+-    pci_dma_read(PCI_DEVICE(cq->ctrl), cq->db_addr, &cq->head,
+-                 sizeof(cq->head));
++    uint32_t v;
++
++    pci_dma_read(PCI_DEVICE(cq->ctrl), cq->db_addr, &v, sizeof(v));
++
++    cq->head = le32_to_cpu(v);
+ 
+     trace_pci_nvme_update_cq_head(cq->cqid, cq->head);
+ }
+@@ -1355,6 +1367,7 @@ static void nvme_post_cqes(void *opaque)
+         hwaddr addr;
+ 
+         if (n->dbbuf_enabled) {
++            nvme_update_cq_eventidx(cq);
+             nvme_update_cq_head(cq);
+         }
+ 
+-- 
+2.38.1
+
 
