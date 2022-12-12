@@ -1,66 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p4blJ-0002p4-Gf
-	for mharc-qemu-riscv@gnu.org; Mon, 12 Dec 2022 00:54:01 -0500
+	id 1p4buM-0005uv-8b
+	for mharc-qemu-riscv@gnu.org; Mon, 12 Dec 2022 01:03:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p4blH-0002om-M3; Mon, 12 Dec 2022 00:53:59 -0500
-Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
+ id 1p4bti-0005gh-4h; Mon, 12 Dec 2022 01:02:48 -0500
+Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p4blF-00033q-El; Mon, 12 Dec 2022 00:53:59 -0500
-Received: by mail-vs1-xe2d.google.com with SMTP id q128so10150657vsa.13;
- Sun, 11 Dec 2022 21:53:56 -0800 (PST)
+ id 1p4btI-0007I5-7s; Mon, 12 Dec 2022 01:02:41 -0500
+Received: by mail-vs1-xe36.google.com with SMTP id i2so10199870vsc.1;
+ Sun, 11 Dec 2022 22:02:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RAtr/IBOYg7DG51YhAODZK7Kmh1R8/yw/CRZWDy0C58=;
- b=o4yXUr3Hbhzoafio1+ZJFrZhWRJTGGwoHe4vYH3Af9qi0+gdpzRa9PB5tjpzTUJmM4
- iZ+vlFv/1JIH53RJ08g9TEi16L5Ig5rBdUKYjOi81WKFjh5T++MLSsf5Fog3PiYIPSpS
- dfbtmONZ8ky3x3LKVu5SxkCHFwtAGR/Owyzvf7OLy6JzpOZ0a//Ln+GbEOkHSBUwHqSy
- 9jDqzJdf+4RYoydxiV3K8cM5HDF2Gtix6w3yIvPVYNcw9fFNFCwvKT4ZbnCfwaqmvRBN
- S3Dx7/wLrnDWpIU1Vjt80V2YJi50Iu+/grrbSWGicWqMUXMJFlzhdTHdKpNeJ008q2nD
- 8T9g==
+ bh=wClejFOUkN3OisgEGRA8xE8OMNVCY2COnJ88bhaPun4=;
+ b=DXQsZiKQzg0Xv2sp6XOFcDWE+ww9XULk5SvYZPkofkIgGv+kV6lgAYZiUbqtJF9GXD
+ brLQUfGNdCtZSViyyYDPitFKNSxnLj9oX9+uCtPdF9rvwv2+kibehzeNCPfbhBCgbqB1
+ JAyofHD4cWKOzuvQ7xBmT9BNNg4+OsC1rdxhQceeWnMgzPGVnfFAZSRH8fR2OmSbpdv9
+ 45iGHJAXfcOD56dXnsn6x8DmIaAmZP+dQJp/nb4uJif7Vh6+EtC/HH+xCuVsu5IgPh/r
+ U1mqzv8ET1hNT2YzMIJpO6DU4xAtGVnKXMOc6+Gu1fKRjKnMg3/JMptPcelgBivt2ItP
+ G4mQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RAtr/IBOYg7DG51YhAODZK7Kmh1R8/yw/CRZWDy0C58=;
- b=Exx8N7R/egE9AaLrQyCGJVs6AmdJ6gmqZ3Y5VUdJ5Eet9waVmOihlNi5SOPEiGS1DS
- NpOBtCJ9Zb5NNV75kihL5yjxHgFKcA82WeGhIJ7gHLCQhfm13NwPA7giGtxuHVVZ/5FS
- ALsyujbYa11xYkx42KHithW60GSEvzrabL9GDSEHbFw62Ja5NO82BI18ymJPxnFwhxBc
- L0+nnHHC//GNuMA13SueNixF2QmxnfFpWxPfAVmyQhRGL7V5y6YIJ56sxirZr77K8XsO
- MwuoopuZNhkRnmRM4fnZBsgBcZkPdL5HxkJpYhBUNysENCG7MKiUd7LPXBvQkBA48Gs+
- 08Yw==
-X-Gm-Message-State: ANoB5pn0xcSntQ5Rsrzexu/5xd4N1fEI2C37BGAQfcTcof4oIttONOW6
- xCzQPmUVGNzcugl0j8ba3i8bJvAAsh2hJK27cSo=
-X-Google-Smtp-Source: AA0mqf6CGoGUiEOGzC2dKtXCQg0Hhutm68Rf/dYnwIp9qDPhCvTXMSkXtYv4IThZ4mypuliaRGarDj6kxb4d7fqdxSo=
-X-Received: by 2002:a05:6102:3d8e:b0:3b3:7675:d423 with SMTP id
- h14-20020a0561023d8e00b003b37675d423mr194082vsv.72.1670824436114; Sun, 11 Dec
- 2022 21:53:56 -0800 (PST)
+ bh=wClejFOUkN3OisgEGRA8xE8OMNVCY2COnJ88bhaPun4=;
+ b=jCUcBsMSt5nSBFbiUKrJX8gGCZzHYkeGlM1pKfKRomtc0cWlfY2mqHBWTL/uHNyji1
+ W+w0Jp04rgJSyERCMRkqNOWagSwmHxoZ5eBgUvF+Mikgkip3yLyb7DgCLqXn3w4hPvO5
+ pBKWs2XDxmEeq3Am99GV5GFd786H8UaEGlLFSc8K/4PRBiY62itGuENgvFr2v6oIw3Hg
+ CcKTuyHaZtCIoe3n+wxmBqgV5fcldZmRV0///ZHLDSR9/Bxvrcic7OEVifFxVn0KS4WX
+ krj2HJzAc2bm6/WgI6VCANvGK82fBX8yhwTRv0nsB7pWeRK/GJ3slIP3NZGgTgC6BFzf
+ Ljsg==
+X-Gm-Message-State: ANoB5pndztfNjk6siUO9wmUK1GRU7LU53Mst3HLZHHqYGFxRYqZadQRz
+ 1MuxVLvJ9Oh1HRPEqRwUYqfSpwUICWMOj7bWOl4=
+X-Google-Smtp-Source: AA0mqf6LPwTcvu9sS+gEQhQfdn7LF4gVyQWzF6/lrUBMv+ZKz+hWp2c8gLNEpJIV9Ak4tlfeZDCjdZ9o7Ea1Czxduew=
+X-Received: by 2002:a05:6102:302b:b0:3b0:f936:788b with SMTP id
+ v11-20020a056102302b00b003b0f936788bmr18360616vsa.54.1670824931257; Sun, 11
+ Dec 2022 22:02:11 -0800 (PST)
 MIME-Version: 1.0
-References: <20221108125703.1463577-1-apatel@ventanamicro.com>
- <20221108125703.1463577-3-apatel@ventanamicro.com>
- <CAKmqyKP+hc4N6Z2AqkQpCmF=oyTE_rf-XfSsTHChwcUWRE5gsg@mail.gmail.com>
- <CAK9=C2Uu1bCcZht+ydiazSmgnkD_hhLetXP4WcA92DypE4m9=A@mail.gmail.com>
-In-Reply-To: <CAK9=C2Uu1bCcZht+ydiazSmgnkD_hhLetXP4WcA92DypE4m9=A@mail.gmail.com>
+References: <20221208145411.122799-1-mchitale@ventanamicro.com>
+In-Reply-To: <20221208145411.122799-1-mchitale@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 12 Dec 2022 15:53:30 +1000
-Message-ID: <CAKmqyKPw54F0uVy+7SjoY16o7RYyW6qwLhaYaKR7aNpP4Nz27Q@mail.gmail.com>
-Subject: Re: [PATCH v2 2/5] target/riscv: Update VS timer whenever htimedelta
- changes
-To: Anup Patel <apatel@ventanamicro.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atishp@atishpatra.org>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Mon, 12 Dec 2022 16:01:45 +1000
+Message-ID: <CAKmqyKPAPB2we33p_oyzdhHRVzJumzsbAukeAXfWsUPoTbPD1w@mail.gmail.com>
+Subject: Re: [PATCH v3 0/3] target/riscv: Apply KVM policy to ISA extensions
+To: Mayuresh Chitale <mchitale@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -81,118 +72,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Dec 2022 05:53:59 -0000
+X-List-Received-Date: Mon, 12 Dec 2022 06:03:10 -0000
 
-On Thu, Dec 8, 2022 at 6:41 PM Anup Patel <apatel@ventanamicro.com> wrote:
+On Fri, Dec 9, 2022 at 12:57 AM Mayuresh Chitale
+<mchitale@ventanamicro.com> wrote:
 >
-> On Thu, Dec 8, 2022 at 9:00 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Tue, Nov 8, 2022 at 11:07 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> > >
-> > > The htimedelta[h] CSR has impact on the VS timer comparison so we
-> > > should call riscv_timer_write_timecmp() whenever htimedelta changes.
-> > >
-> > > Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp suppor")
-> > > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> >
-> > This patch breaks my Xvisor test. When running OpenSBI and Xvisor like this:
-> >
-> > qemu-system-riscv64 -machine virt \
-> >     -m 1G -serial mon:stdio -serial null -nographic \
-> >     -append 'vmm.console=uart@10000000 vmm.bootcmd="vfs mount initrd
-> > /;vfs run /boot.xscript;vfs cat /system/banner.txt; guest kick guest0;
-> > vserial bind guest0/uart0"' \
-> >     -smp 4 -d guest_errors \
-> >     -bios none \
-> >     -device loader,file=./images/qemuriscv64/vmm.bin,addr=0x80200000 \
-> >     -kernel ./images/qemuriscv64/fw_jump.elf \
-> >     -initrd ./images/qemuriscv64/vmm-disk-linux.img -cpu rv64,h=true
-> >
-> > Running:
-> >
-> > Xvisor v0.3.0-129-gbc33f339 (Jan  1 1970 00:00:00)
-> >
-> > I see this failure:
-> >
-> > INIT: bootcmd:  guest kick guest0
-> >
-> > guest0: Kicked
-> >
-> > INIT: bootcmd:  vserial bind guest0/uart0
-> >
-> > [guest0/uart0] cpu_vcpu_stage2_map: guest_phys=0x000000003B9AC000
-> > size=0x4096 map failed
-> >
-> > do_error: CPU3: VCPU=guest0/vcpu0 page fault failed (error -1)
-> >
-> >        zero=0x0000000000000000          ra=0x0000000080001B4E
-> >
-> >          sp=0x000000008001CF80          gp=0x0000000000000000
-> >
-> >          tp=0x0000000000000000          s0=0x000000008001CFB0
-> >
-> >          s1=0x0000000000000000          a0=0x0000000010001048
-> >
-> >          a1=0x0000000000000000          a2=0x0000000000989680
-> >
-> >          a3=0x000000003B9ACA00          a4=0x0000000000000048
-> >
-> >          a5=0x0000000000000000          a6=0x0000000000019000
-> >
-> >          a7=0x0000000000000000          s2=0x0000000000000000
-> >
-> >          s3=0x0000000000000000          s4=0x0000000000000000
-> >
-> >          s5=0x0000000000000000          s6=0x0000000000000000
-> >
-> >          s7=0x0000000000000000          s8=0x0000000000000000
-> >
-> >          s9=0x0000000000000000         s10=0x0000000000000000
-> >
-> >         s11=0x0000000000000000          t0=0x0000000000004000
-> >
-> >          t1=0x0000000000000100          t2=0x0000000000000000
-> >
-> >          t3=0x0000000000000000          t4=0x0000000000000000
-> >
-> >          t5=0x0000000000000000          t6=0x0000000000000000
-> >
-> >        sepc=0x0000000080001918     sstatus=0x0000000200004120
-> >
-> >     hstatus=0x00000002002001C0     sp_exec=0x0000000010A64000
-> >
-> >      scause=0x0000000000000017       stval=0x000000003B9ACAF8
-> >
-> >       htval=0x000000000EE6B2BE      htinst=0x0000000000D03021
-> >
-> > I have tried updating to a newer Xvisor release, but with that I don't
-> > get any serial output.
-> >
-> > Can you help get the Xvisor tests back up and running?
+> Currently the single and multi letter ISA extensions exposed to the
+> guest vcpu don't confirm to the KVM policies. This patchset updates the kvm headers
+> and applies policies set in KVM to the extensions exposed to the guest.
 >
-> I tried the latest Xvisor-next (https://github.com/avpatel/xvisor-next)
-> with your QEMU riscv-to-apply.next branch and it works fine (both
-> with and without Sstc).
+> These patches can also be found on riscv_kvm_ext_v3 branch at:
+> https://github.com/mdchitale/qemu.git
+>
+> Changes in v3:
+> - Address comments from Bin Meng
+>
+> Changes in v2:
+> - Rebase to latest riscv-to-apply.next
+> - Update linux headers to version 6.1-rc8
+> - Add reviewed by tags
+>
+> Mayuresh Chitale (3):
+>   update-linux-headers: Version 6.1-rc8
+>   target/riscv: Extend isa_ext_data for single letter extensions
+>   target/riscv: kvm: Support selecting VCPU extensions
 
-Does it work with the latest release?
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 >
-> Here's the QEMU command which I use:
+>  include/standard-headers/drm/drm_fourcc.h     |  34 ++++-
+>  include/standard-headers/linux/ethtool.h      |  63 +++++++-
+>  include/standard-headers/linux/fuse.h         |   6 +-
+>  .../linux/input-event-codes.h                 |   1 +
+>  include/standard-headers/linux/virtio_blk.h   |  19 +++
+>  linux-headers/asm-generic/hugetlb_encode.h    |  26 ++--
+>  linux-headers/asm-generic/mman-common.h       |   2 +
+>  linux-headers/asm-mips/mman.h                 |   2 +
+>  linux-headers/asm-riscv/kvm.h                 |   4 +
+>  linux-headers/linux/kvm.h                     |   1 +
+>  linux-headers/linux/psci.h                    |  14 ++
+>  linux-headers/linux/userfaultfd.h             |   4 +
+>  linux-headers/linux/vfio.h                    | 142 ++++++++++++++++++
+>  target/riscv/cpu.c                            |  52 ++++---
+>  target/riscv/kvm.c                            |  88 +++++++++--
+>  target/riscv/kvm_riscv.h                      |   2 +-
+>  16 files changed, 408 insertions(+), 52 deletions(-)
 >
-> qemu-system-riscv64 -M virt -m 512M -nographic \
-> -bios opensbi/build/platform/generic/firmware/fw_jump.bin \
-> -kernel ../xvisor-next/build/vmm.bin \
-> -initrd rbd_v64.img \
-> -append "vmm.bootcmd=\"vfs mount initrd /;vfs run /boot.xscript;vfs
-> cat /system/banner.txt\"" \
-> -smp 4
+> --
+> 2.34.1
 >
-> Also, I will be releasing Xvisor-0.3.2 by the end of Dec 2022 so I
-> suggest using this upcoming release in your test.
 >
-> Regards,
-> Anup
 
