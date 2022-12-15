@@ -1,29 +1,29 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAXUw-0002VU-MN
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 09:33:38 -0500
+	id 1pAXUx-0002WF-Cg
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 09:33:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1pAQeL-0000ra-J3; Wed, 28 Dec 2022 02:14:53 -0500
+ id 1pAQRU-0006XE-AV; Wed, 28 Dec 2022 02:01:36 -0500
 Received: from mail-b.sr.ht ([173.195.146.151])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1pAQeK-0004pE-4v; Wed, 28 Dec 2022 02:14:53 -0500
+ id 1pAQRS-000887-UH; Wed, 28 Dec 2022 02:01:36 -0500
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id BB13D11EF1B;
- Wed, 28 Dec 2022 07:14:40 +0000 (UTC)
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 1C77611EF1B;
+ Wed, 28 Dec 2022 07:01:33 +0000 (UTC)
 From: ~elta <elta@git.sr.ht>
 Date: Thu, 15 Dec 2022 16:27:14 +0800
 Subject: [PATCH qemu] target/riscv/cpu.c: Fix elen check
-Message-ID: <167221168069.10371.13797275537678987977-0@git.sr.ht>
+Message-ID: <167221089290.19963.15278757025657303819-0@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~elta <503386372@qq.com>
 To: qemu-devel <qemu-devel@nongnu.org>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Dongxue Zhang <elta.era@gmail.com>
+ qemu-devel@nongnu.org
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
@@ -48,7 +48,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2022 07:14:54 -0000
+X-List-Received-Date: Wed, 28 Dec 2022 07:01:36 -0000
 
 From: Dongxue Zhang <elta.era@gmail.com>
 
