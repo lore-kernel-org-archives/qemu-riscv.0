@@ -1,47 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p5zga-0005jb-4t
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Dec 2022 20:38:52 -0500
+	id 1p5zj2-00072f-MR
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Dec 2022 20:41:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1p5zgY-0005iY-KS; Thu, 15 Dec 2022 20:38:50 -0500
-Received: from out30-56.freemail.mail.aliyun.com ([115.124.30.56])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1p5zgU-0006ml-2T; Thu, 15 Dec 2022 20:38:49 -0500
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R171e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046050;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=6; SR=0;
- TI=SMTPD_---0VXOX1Sl_1671154711; 
-Received: from 30.221.96.117(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VXOX1Sl_1671154711) by smtp.aliyun-inc.com;
- Fri, 16 Dec 2022 09:38:32 +0800
-Message-ID: <bcdd7992-e3ff-de17-22c4-1319e3816e8b@linux.alibaba.com>
-Date: Fri, 16 Dec 2022 09:38:16 +0800
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1p5zix-00071t-Hy; Thu, 15 Dec 2022 20:41:21 -0500
+Received: from mail-vk1-xa33.google.com ([2607:f8b0:4864:20::a33])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1p5ziv-00084P-GN; Thu, 15 Dec 2022 20:41:19 -0500
+Received: by mail-vk1-xa33.google.com with SMTP id q7so504317vka.7;
+ Thu, 15 Dec 2022 17:41:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=8z/juQoJxDOI3WKwuo6PCIYScZH/OkEYTR44zcb0XNs=;
+ b=ilcjDf5168tJZGai6Ihtwxy45BSkZ3vNWf9mBgaQTDizJQUD2dcQdlnFUjXBBJeqI9
+ xwKo9LzQuSfarWnhUwh+IH5exj52U/WI3EAfGXFU8xJ53++w+v+A8ZO/I/5j5JUKf/Ll
+ hQhiHGpqSneU0Z1UguF0oSyjldPVBR58IE3GhQRz8IqiEncf50MzOshN4uxWhMjoMiZj
+ w7H6t4GJqOaFi4JEO3AGQIu5vAPVmZVpTNiO6FsdiCIgpemLRWjqiUvKRFfBUrwm0/9l
+ eBA0tR+IVPyD366niftMR5VLJGnoOC6/GohYgvrt3Vd1t5LBKIrOWjWRXDFr4f4gmjML
+ 6pcw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8z/juQoJxDOI3WKwuo6PCIYScZH/OkEYTR44zcb0XNs=;
+ b=TEtv3VYh+ho80dxNag8IRA3lXdO6bBVIFhLRVGgrE/mHlOpQ2EWkNrhh+ryEbSwhN2
+ ye51enTr+IAzOKk33gZKIGtyzqwH8hZQrOdmqcG3XTOvAlvVdgVSURvh6MQlOLElj3KS
+ j00D3htXM+res9HAVPUjaL9VVY09c81Y6Vs01Dwde/MQZG1WITnFx9a9CKt0qrICTozj
+ AKw/pwmzaX8VDe2UMukwg56A0KGzdnVncYDJaxZmMdjSn65rq9bdqj3PfOv0cIOOw46y
+ X0e+tVRkg+5Xt33LVnkQu/5KQGUSqs2xGU0bTiv9FbJACddqLvNOs7tWlokVtjOGT2hn
+ 7zUQ==
+X-Gm-Message-State: ANoB5plU8B5VYnNJkxWgK3YsAv7Sy6EGhNGTckf27UpoJfRfWzHWUcCa
+ MYIgHna6ziQdndL1JdsiygZ7fglZuRVw+r0kWBA=
+X-Google-Smtp-Source: AA0mqf4e7/p/ClDgPrwLrS0wkGwp2wVIXXFapVj6U54UETkTWqUoLeczFzZ712BytkBqJbOWsJmX9vo41rxF0sGYwqI=
+X-Received: by 2002:a05:6122:c97:b0:3b7:cbb8:bbf1 with SMTP id
+ ba23-20020a0561220c9700b003b7cbb8bbf1mr57233416vkb.25.1671154874847; Thu, 15
+ Dec 2022 17:41:14 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Subject: Re: [PATCH] target/riscv/cpu.c: Fix elen check
-Content-Language: en-US
-To: Elta <503386372@qq.com>, qemu-devel <qemu-devel@nongnu.org>
-Cc: palmer <palmer@dabbelt.com>, "alistair.francis"
- <alistair.francis@wdc.com>, "bin.meng" <bin.meng@windriver.com>,
- qemu-riscv <qemu-riscv@nongnu.org>
-References: <tencent_60E46E9E0EA5052F26E07A56520177BE0008@qq.com>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <tencent_60E46E9E0EA5052F26E07A56520177BE0008@qq.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.56;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-56.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+References: <20221208145411.122799-1-mchitale@ventanamicro.com>
+ <20221208145411.122799-3-mchitale@ventanamicro.com>
+In-Reply-To: <20221208145411.122799-3-mchitale@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 16 Dec 2022 11:40:48 +1000
+Message-ID: <CAKmqyKMtKP+ED652UxME6aoAFjfuFdY+9L7RHup-C-i-=W4i2A@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] target/riscv: Extend isa_ext_data for single
+ letter extensions
+To: Mayuresh Chitale <mchitale@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Andrew Jones <ajones@ventanamicro.com>, Bin Meng <bmeng@tinylab.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a33;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa33.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -54,40 +75,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2022 01:38:51 -0000
+X-List-Received-Date: Fri, 16 Dec 2022 01:41:22 -0000
 
-
-On 2022/12/15 16:46, Elta wrote:
-> Should be cpu->cfg.elen in range [8, 64].
+On Fri, Dec 9, 2022 at 12:58 AM Mayuresh Chitale
+<mchitale@ventanamicro.com> wrote:
 >
-> Signed-off-by: Dongxue Zhang <elta.era@gmail.com>
+> Currently the ISA string for a CPU is generated from two different
+> arrays, one for single letter extensions and another for multi letter
+> extensions. Add all the single letter extensions to the isa_ext_data
+> array and use it for generating the ISA string. Also drop 'P' and 'Q'
+> extensions from the list of single letter extensions as those are not
+> supported yet.
+>
+> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Bin Meng <bmeng@tinylab.org>
+
+This breaks the SiFive CPUs (as well as others). A large number of
+CPUs set these single letter extensions just with set_misa(), so the
+cfg values are never actually set.
+
+We probably want to add something like this (does not compile):
+
+@@ -222,6 +225,10 @@ static void set_misa(CPURISCVState *env, RISCVMXL
+mxl, uint32_t ext)
+{
+    env->misa_mxl_max = env->misa_mxl = mxl;
+    env->misa_ext_mask = env->misa_ext = ext;
++
++    if (ext & RVI == RVI) {
++        cpu->cfg.ext_i = true;
++    }
+}
+
+Alistair
+
 > ---
->  target/riscv/cpu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  target/riscv/cpu.c | 41 +++++++++++++++++++++++------------------
+>  1 file changed, 23 insertions(+), 18 deletions(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index d14e95c9dc..1e8032c969 100644
+> index 042fd541b4..8c8f085a80 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -870,7 +870,7 @@ static void riscv_cpu_realize(DeviceState *dev, 
-> Error **errp)
->                          "Vector extension ELEN must be power of 2");
->                  return;
->              }
-> -            if (cpu->cfg.elen > 64 || cpu->cfg.vlen < 8) {
-> +            if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
-
-Oops. You are right.
-
-Reviewed-by: LIU Zhiwei <zhiwe_liu@linux.alibaba.com>
-
-Zhiwei
-
->                  error_setg(errp,
->                          "Vector extension implementation only 
-> supports ELEN "
->                          "in the range [8, 64]");
-> -- 
-> 2.17.1
+> @@ -41,8 +41,6 @@
+>                               (QEMU_VERSION_MICRO))
+>  #define RISCV_CPU_MIMPID    RISCV_CPU_MARCHID
+>
+> -static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
+> -
+>  struct isa_ext_data {
+>      const char *name;
+>      bool multi_letter;
+> @@ -71,6 +69,13 @@ struct isa_ext_data {
+>   *    extensions by an underscore.
+>   */
+>  static const struct isa_ext_data isa_edata_arr[] = {
+> +    ISA_EXT_DATA_ENTRY(i, false, PRIV_VERSION_1_10_0, ext_i),
+> +    ISA_EXT_DATA_ENTRY(e, false, PRIV_VERSION_1_10_0, ext_e),
+> +    ISA_EXT_DATA_ENTRY(m, false, PRIV_VERSION_1_10_0, ext_m),
+> +    ISA_EXT_DATA_ENTRY(a, false, PRIV_VERSION_1_10_0, ext_a),
+> +    ISA_EXT_DATA_ENTRY(f, false, PRIV_VERSION_1_10_0, ext_f),
+> +    ISA_EXT_DATA_ENTRY(d, false, PRIV_VERSION_1_10_0, ext_d),
+> +    ISA_EXT_DATA_ENTRY(c, false, PRIV_VERSION_1_10_0, ext_c),
+>      ISA_EXT_DATA_ENTRY(h, false, PRIV_VERSION_1_12_0, ext_h),
+>      ISA_EXT_DATA_ENTRY(v, false, PRIV_VERSION_1_12_0, ext_v),
+>      ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ext_icsr),
+> @@ -1196,16 +1201,23 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+>      device_class_set_props(dc, riscv_cpu_properties);
+>  }
+>
+> -static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
+> +static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str)
+>  {
+>      char *old = *isa_str;
+>      char *new = *isa_str;
+>      int i;
+>
+>      for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
+> -        if (isa_edata_arr[i].multi_letter &&
+> -            isa_ext_is_enabled(cpu, &isa_edata_arr[i])) {
+> -            new = g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
+> +        if (isa_ext_is_enabled(cpu, &isa_edata_arr[i])) {
+> +            if (isa_edata_arr[i].multi_letter) {
+> +                if (cpu->cfg.short_isa_string) {
+> +                    continue;
+> +                }
+> +                new = g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
+> +            } else {
+> +                new = g_strconcat(old, isa_edata_arr[i].name, NULL);
+> +            }
+> +
+>              g_free(old);
+>              old = new;
+>          }
+> @@ -1216,19 +1228,12 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
+>
+>  char *riscv_isa_string(RISCVCPU *cpu)
+>  {
+> -    int i;
+> -    const size_t maxlen = sizeof("rv128") + sizeof(riscv_single_letter_exts);
+> +    const size_t maxlen = sizeof("rv128");
+>      char *isa_str = g_new(char, maxlen);
+> -    char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+> -    for (i = 0; i < sizeof(riscv_single_letter_exts) - 1; i++) {
+> -        if (cpu->env.misa_ext & RV(riscv_single_letter_exts[i])) {
+> -            *p++ = qemu_tolower(riscv_single_letter_exts[i]);
+> -        }
+> -    }
+> -    *p = '\0';
+> -    if (!cpu->cfg.short_isa_string) {
+> -        riscv_isa_string_ext(cpu, &isa_str, maxlen);
+> -    }
+> +
+> +    snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+> +    riscv_isa_string_ext(cpu, &isa_str);
+> +
+>      return isa_str;
+>  }
+>
+> --
+> 2.34.1
+>
 >
 
