@@ -1,78 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p6DAl-000640-Rv
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Dec 2022 11:02:55 -0500
+	id 1p6Ig4-0003gO-6Z
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Dec 2022 16:55:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1p6DAL-0005vA-LE
- for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 11:02:35 -0500
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p6Ifw-0003et-N8
+ for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 16:55:29 -0500
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1p6DAE-0002ae-OL
- for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 11:02:28 -0500
-Received: by mail-pj1-x102e.google.com with SMTP id
- hd14-20020a17090b458e00b0021909875bccso8722280pjb.1
- for <qemu-riscv@nongnu.org>; Fri, 16 Dec 2022 08:02:20 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p6Ifs-00038T-Q0
+ for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 16:55:27 -0500
+Received: by mail-ej1-x632.google.com with SMTP id x22so9163831ejs.11
+ for <qemu-riscv@nongnu.org>; Fri, 16 Dec 2022 13:55:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G2uzTTUrRfi6yVvNFXy6d8wz5hUA4IqTWNOJxStvF4I=;
- b=bwR5leDS9+EJFu7+AI80ExjhpVokFvhWtiTQQPMZPK3UIu4C8Lb+TBZBlG0P84Le9C
- 0J0u8wMi3RBP2Pe+tVkMkkjSc6U9Me0gGErXXruLT0kaZ0ozgAn4DkqtGq0Z6t7DWpO+
- b8IH55vNU5KFkYRRJa4nTs0X5YVLXGSxjluZHI+1murENjpebu4C5k6rPRytnJahXOwa
- dZQpQ/EIL++jQKakkp1lzXWsf9xAAncJPSy13PJfS+ggrAgFVe248Ytbr5tBBmH9/mue
- /Jo+wkH6D7zy3/nGDNC8FVPSFr/2ImuCca59I+s3xL6pPLmZ3csoYIpQBX0sJcTQbxgq
- 1l2w==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hDjaN8eJVHHHAcFnMzr9A5qx6nMta47BhVSDkoRkjiY=;
+ b=koVIL3cKjIUh0I9iexsK0DqWfQr49gTESlxiAo8T9vnX2CJ4QixeCzMydRIRBOKWbx
+ +R5klEOuw0jjsMOseiyYra2DmM7xugL01wBlJceq+pr1ETQMYuEF+l2nrxerxSyoOukk
+ EE8047bs8JQBm+dUp3FUQQC1qnfqTHK47keip65hJwdx3mwendQAsAQLaIBR2pRzqlvf
+ NqOH4fAeX01aJpH0nqGWNSKzukViznSJY7eNEFluBWjQzNLupunEjytyMWUMkkzTPBA2
+ KPTKjr9ShUXrdrTne0thHjnLliuX8/iEm2579930rtW//wgEDKCU8+iqi5HVgULV6x0O
+ iFTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=G2uzTTUrRfi6yVvNFXy6d8wz5hUA4IqTWNOJxStvF4I=;
- b=e8qa1p77wrWON0yeSQAXNj7Tn4UQaPqZBin7YkOJ+mZxQSDFrcvFG245MqOi0LR3l0
- 0tK4etWX6H1aeri8tUE4zFIYmBBvc/td48k3MrtU7+VQF5YqzhFY5EQEE8wVgCKZz3o7
- ur+454GeHp53/Kk9iDR3fKU5gX/0bhaVwbfomfLRc36266uXPjvZhnCvodz+jgiv5tWW
- KdVmflgDHs7yLHPkWUGNiDrjlWgw2HI46wcynxFcg+Ey0zY8IIVJigX9UnIjUaLzzPiI
- tMH4wLebCFEpEqC/8F9SmK2Z1aLn4jzTG26zM9+rV8HK9sbE2aeDfONHej2f+ApTHVvU
- s8uA==
-X-Gm-Message-State: AFqh2ko7dU/jJ7sIzl64WzE/xY2gfAknjborI4AyMF6GChfwIoP9Uugz
- R7YfgtnMjtxHROPE3lVt8zyTt/pSi7kjcBhCsSAYsg==
-X-Google-Smtp-Source: AMrXdXtBKmxAn5PIzsLZ+XxfFaMeS0Vs98IDtPuipzWHHgRZKVDhGzX6x6KoX0o8fovEJFYwpy+LRpnGDjAcvoDMkfQ=
-X-Received: by 2002:a17:90b:146:b0:219:94b2:2004 with SMTP id
- em6-20020a17090b014600b0021994b22004mr1009716pjb.215.1671206538915; Fri, 16
- Dec 2022 08:02:18 -0800 (PST)
-MIME-Version: 1.0
-References: <20221124115023.2437291-1-peter.maydell@linaro.org>
-In-Reply-To: <20221124115023.2437291-1-peter.maydell@linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 16 Dec 2022 16:02:07 +0000
-Message-ID: <CAFEAcA95bGDsVEcF89MwqStPM6z7yyUFc=QhNw4rv1zNrvVQTg@mail.gmail.com>
-Subject: Re: [PATCH for-8.0 00/19] Convert most CPU classes to 3-phase reset
+ bh=hDjaN8eJVHHHAcFnMzr9A5qx6nMta47BhVSDkoRkjiY=;
+ b=o3aWLZm4IBp8QRYkr6Ss5Y94jMvaJFBely0SZofn+uDX/MmHFNQfE18Ux6P4HifrbL
+ 5y75AX8AmKqxP/CqcYcbHh+/beoeVFUo65OSnXCaI/2+O/9y0mA/KF5KA1movf3svywG
+ +ElPPGGP5PRV/ZRq2cMGRlGWTAynSqEQfSJ57Kx/fDGsxsM/mldrTSetalmSgUeGsbEZ
+ 24t0mUeup1ZfwjFEkA1tele/3FVyQmrAmHgOOeQe3Xy/QP5qTuzHUyYbHo171q4Mv4zI
+ c2b/SzZ7IRWEctiKtAXKFZX5WqtUk1T87aknj5DrRfFVuePnVHkI47dyMmKB8ZWD+Amp
+ HGag==
+X-Gm-Message-State: ANoB5pm3lBcxC+etMXxEWxoevyfZou/fqYjp7YjnnPECrejq/IMbIFU4
+ JQtTISKcnskXEyRWoF/ofzfoMA==
+X-Google-Smtp-Source: AA0mqf44m9uRz2q1p7VXh76chobt7pep0KjNv3fyOdRMxmPyqai4zHyqi15eXjf/Z+1BI3Gb+0JNtQ==
+X-Received: by 2002:a17:906:8385:b0:7c4:f348:3b1f with SMTP id
+ p5-20020a170906838500b007c4f3483b1fmr10710690ejx.44.1671227722936; 
+ Fri, 16 Dec 2022 13:55:22 -0800 (PST)
+Received: from localhost.localdomain ([185.126.107.38])
+ by smtp.gmail.com with ESMTPSA id
+ f22-20020a17090631d600b007aece68483csm1261840ejf.193.2022.12.16.13.55.20
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 16 Dec 2022 13:55:22 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: Michael Rolnik <mrolnik@gmail.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Taylor Simpson <tsimpson@quicinc.com>, Song Gao <gaosong@loongson.cn>, 
- Xiaojuan Yang <yangxiaojuan@loongson.cn>, Laurent Vivier <laurent@vivier.eu>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Aurelien Jarno <aurelien@aurel32.net>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Chris Wulff <crwulff@gmail.com>, 
- Marek Vasut <marex@denx.de>, Stafford Horne <shorne@gmail.com>, 
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- David Gibson <david@gibson.dropbear.id.au>, Greg Kurz <groug@kaod.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Yoshinori Sato <ysato@users.sourceforge.jp>,
+Cc: Greg Kurz <groug@kaod.org>, qemu-ppc@nongnu.org,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-arm@nongnu.org, 
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=peter.maydell@linaro.org; helo=mail-pj1-x102e.google.com
+ Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-arm@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Marek Vasut <marex@denx.de>,
+ Bin Meng <bin.meng@windriver.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ qemu-riscv@nongnu.org, kvm@vger.kernel.org,
+ Stafford Horne <shorne@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Chris Wulff <crwulff@gmail.com>
+Subject: [PATCH v3 0/5] target/cpu: System/User cleanups around hwaddr/vaddr
+Date: Fri, 16 Dec 2022 22:55:14 +0100
+Message-Id: <20221216215519.5522-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.38.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -92,19 +96,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2022 16:02:44 -0000
+X-List-Received-Date: Fri, 16 Dec 2022 21:55:30 -0000
 
-On Thu, 24 Nov 2022 at 11:50, Peter Maydell <peter.maydell@linaro.org> wrote:
->
-> This patchset converts the TYPE_CPU base class and most subclasses
-> to use 3-phase reset. (The exception is s390, which is doing
-> something a bit odd with its reset, so the conversion there isn't
-> going to be simple like these others. So I'll do that one
-> separately.)
+Missing review: #1
 
-I plan to pick these up and send them in in a pullreq with
-various other reset-related patches of mine.
+We are not supposed to use the 'hwaddr' type on user emulation.
 
-thanks
--- PMM
+This series is a preparatory cleanup before few refactors to
+isolate further System vs User code.
+
+Since v1:
+- only restrict SavedIOTLB in header (Alex)
+- convert insert/remove_breakpoint implementations (Peter)
+
+Since v2:
+- added 'dump' patch
+- collected R-b tags
+
+Philippe Mathieu-Daudé (5):
+  dump: Include missing "cpu.h" header for tswap32/tswap64()
+    declarations
+  cputlb: Restrict SavedIOTLB to system emulation
+  gdbstub: Use vaddr type for generic insert/remove_breakpoint() API
+  target/cpu: Restrict cpu_get_phys_page_debug() handlers to sysemu
+  target/cpu: Restrict do_transaction_failed() handlers to sysemu
+
+ accel/kvm/kvm-all.c        |  4 ++--
+ accel/kvm/kvm-cpus.h       |  4 ++--
+ accel/tcg/tcg-accel-ops.c  |  4 ++--
+ dump/dump.c                |  1 +
+ gdbstub/gdbstub.c          |  1 -
+ gdbstub/internals.h        |  6 ++++--
+ gdbstub/softmmu.c          |  5 ++---
+ gdbstub/user.c             |  5 ++---
+ include/hw/core/cpu.h      |  6 ++++--
+ include/sysemu/accel-ops.h |  6 +++---
+ target/alpha/cpu.h         |  2 +-
+ target/arm/cpu.h           |  2 +-
+ target/arm/internals.h     |  2 ++
+ target/cris/cpu.h          |  3 +--
+ target/hppa/cpu.h          |  2 +-
+ target/i386/cpu.h          |  5 ++---
+ target/m68k/cpu.h          |  4 +++-
+ target/microblaze/cpu.h    |  4 ++--
+ target/nios2/cpu.h         |  2 +-
+ target/openrisc/cpu.h      |  3 ++-
+ target/ppc/cpu.h           |  2 +-
+ target/riscv/cpu.h         | 12 ++++++------
+ target/rx/cpu.h            |  2 +-
+ target/rx/helper.c         |  4 ++--
+ target/sh4/cpu.h           |  2 +-
+ target/sparc/cpu.h         |  3 ++-
+ target/xtensa/cpu.h        |  2 +-
+ 27 files changed, 52 insertions(+), 46 deletions(-)
+
+-- 
+2.38.1
+
 
