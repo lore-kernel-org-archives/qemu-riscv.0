@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p6IqS-0000QK-Ax
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Dec 2022 17:06:20 -0500
+	id 1p6Iqp-0000fl-FH
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Dec 2022 17:06:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p6IqQ-0000NW-RS
- for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 17:06:18 -0500
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p6Iqb-0000Xe-3v
+ for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 17:06:37 -0500
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p6IqP-0005if-6K
- for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 17:06:18 -0500
-Received: by mail-ej1-x634.google.com with SMTP id tz12so9245450ejc.9
- for <qemu-riscv@nongnu.org>; Fri, 16 Dec 2022 14:06:16 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p6IqY-0005lO-6l
+ for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 17:06:28 -0500
+Received: by mail-ej1-x62c.google.com with SMTP id m18so9290128eji.5
+ for <qemu-riscv@nongnu.org>; Fri, 16 Dec 2022 14:06:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PsKnVXEUFtle2sBljg3GOYibf5GE3DbmvaOh7ghHHi0=;
- b=SaHJd9A4VDZlslJV3RgBgsdMQtyCPmvC/H7J1wtW9neQsb8tqHigvVMGtPJ7SzZj1u
- h/tRBNl3ORng14Ede7NZubaB0Lv11EqZK3Cr1SiVasnX/rkh68TjB23btbC+0EnBUa1M
- LsYfELPINBRP+Bk65l9cQNZx4q0dfUAEYYkYvYQBhowqK0grQ9L1zY4jP3rGKGRp7gDe
- pxujFnQsZ+alERakUZZFfVWKRX1CIt+wRSc3K39cqhbBgycf2q+7yXxQ2Z5bILKexc1r
- t1csA3PaTuJTQ8F5lAGZP+1smlp5FJ4qBZ9vvabgGi+NAi2UPe8eQl+yhHYbcltsZf1Q
- j5Sw==
+ bh=qRl0NH1dSa5ezBWLNBBiop31vMlIv2LnSrGHXpwTSes=;
+ b=BPWMBNrCxEqKXqHbAwUyvnZOXnk6iVhxS5JrSeVM1xqvsGTyjbjBmW+fhvK8bW4WV2
+ ZVtIa/iQdove3R6oh25YI61MauXGG2PgXZmvnR/4DEP2l21hjSPR7KzRryJm1O0kH5ig
+ qkGkMz3ptMAR8b1eSqT8k1ZXZvSJYm8fbYoIjXy2IUKvugFPjD0TBC+qLi7qzfUjRgWd
+ /TwkA4t+RW1G3/ftVG4RnMl19sjdUOAV9MSbA4r2o1zaCYPwXnOrKQv1ppcG/0Tfxt9Z
+ WivV81t/PPRgWMvnFHgJMbZe2kagx3oMNU9v5LtKlgFghhEhn4CcVERngoHUILld0zlk
+ 9X6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PsKnVXEUFtle2sBljg3GOYibf5GE3DbmvaOh7ghHHi0=;
- b=Fp3vggi5Ari73HmOinxvPvhTO+2eGIsuCuwm2pxtLbxylCQaWlGv+Qe1RTndYB4YOJ
- vCcBUlrxSbaPTe8P/T0Dj1CLSd3cqICyQGKRRSw0OSXvpCEaIa0Y40+Ch+XDKtDhE8hH
- Ap/qu1rPVdNdoLelU/CdSslNeDpXNh4yBdK3vpYiXlL7r/t+MSE7Qzwxxq6QveiuE+JG
- 4sz7qV4UbEbfWOBeTRPnt83B16bQ6zBDVznjB92Wlh7uhXsFPvcQAw+D54dEXi+pu12B
- lSokrpcfQZz1uhhhntOR5IFSvTksyDclI0WkJIfcuWIwNT1OpJDRkHhOtnLesf+7mZcd
- VNdw==
-X-Gm-Message-State: ANoB5pkFn47GpHzCsuktFH5jRGpxyCS4Rm8ERHlL++++S9zqrnhjZV56
- QAte1bE9wBIiuCUPgSWXgcKH0w==
-X-Google-Smtp-Source: AA0mqf4DBZ8NZJkv8tXTiNxf3jZypbI40DgyEO+yHGyk3RwSlPCjhaRf7/Q9CeC4AaI9q+amXrhWbQ==
-X-Received: by 2002:a17:906:3810:b0:7bc:bf29:c58 with SMTP id
- v16-20020a170906381000b007bcbf290c58mr28222249ejc.2.1671228376255; 
- Fri, 16 Dec 2022 14:06:16 -0800 (PST)
+ bh=qRl0NH1dSa5ezBWLNBBiop31vMlIv2LnSrGHXpwTSes=;
+ b=zj6ml79mERRGWMxDueRrI6pkf/r1D467mZrcuRrwY47GnsKtdKkCrn7P8CLZy0LBER
+ KWC7fYBDXhCiAi+hM0k+VsQQ9GuXzuSAu7mYZxboZxXevl2uRd+XKuGBiU5aWW6/aou+
+ Q1MFpTHFhqV2dMFSUJxnCEQtmmuL4XwwL4cxfCrEqPG0umrDG9Kho5/vOQzdV1XcJEIT
+ IhoBZJp+K5aCbaHUQMROgbYj8p71MlXPbOZHUFvwTSK5x8xv0Y6gg1/D6Q330k5OG5zu
+ Dm9ulTf+ZxniHy/WBu4EIJMFYGii4vOismHFEAA1kL9V+R7qpyDW/P+6Z2l1EPmis75f
+ j/ZQ==
+X-Gm-Message-State: AFqh2kpE9qGGzzwBjqTTIuZIjzb6pRv0f5YuQnJlWGkASLOyXtMdSFDM
+ Y2vgZ75pBEuhfMwBtAB0qGr9bg==
+X-Google-Smtp-Source: AMrXdXutRLmdPKrKMpaQ0Y+b9MZx7EX/ATWP8xzzY+7ya7Ot7smT7XkDPLndy0vD8ElHkvPbI8PSnA==
+X-Received: by 2002:a17:906:8d86:b0:7cd:ffd:51f2 with SMTP id
+ ry6-20020a1709068d8600b007cd0ffd51f2mr11198643ejc.57.1671228384400; 
+ Fri, 16 Dec 2022 14:06:24 -0800 (PST)
 Received: from localhost.localdomain ([185.126.107.38])
  by smtp.gmail.com with ESMTPSA id
- fr33-20020a170906892100b007c09da0d773sm1289223ejc.100.2022.12.16.14.06.14
+ lb2-20020a170907784200b0078db5bddd9csm1289247ejc.22.2022.12.16.14.06.21
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 16 Dec 2022 14:06:15 -0800 (PST)
+ Fri, 16 Dec 2022 14:06:24 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <danielhb413@gmail.com>,
@@ -61,24 +61,24 @@ Cc: Daniel Henrique Barboza <danielhb413@gmail.com>,
  Taylor Simpson <tsimpson@quicinc.com>, Greg Kurz <groug@kaod.org>,
  qemu-riscv@nongnu.org, Max Filippov <jcmvbkbc@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 05/10] target/m68k/helper: Include missing "cpu.h" header
-Date: Fri, 16 Dec 2022 23:05:34 +0100
-Message-Id: <20221216220539.7065-6-philmd@linaro.org>
+Subject: [PATCH 06/10] target/ppc/helper: Include missing "cpu.h" header
+Date: Fri, 16 Dec 2022 23:05:35 +0100
+Message-Id: <20221216220539.7065-7-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221216220539.7065-1-philmd@linaro.org>
 References: <20221216220539.7065-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::634;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x634.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,25 +91,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2022 22:06:19 -0000
+X-List-Received-Date: Fri, 16 Dec 2022 22:06:39 -0000
 
-'dh_ctype_fp' is defined as 'FPReg *', itself declared in "cpu.h".
+'dh_ctype_*' are defined as 'ppc_avr_t/ppc_vsr_t/ppc_acc_t',
+themselves declared in "cpu.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/m68k/helper.h | 2 ++
+ target/ppc/helper.h | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/target/m68k/helper.h b/target/m68k/helper.h
-index c9bed2b884..aaf0e1668e 100644
---- a/target/m68k/helper.h
-+++ b/target/m68k/helper.h
+diff --git a/target/ppc/helper.h b/target/ppc/helper.h
+index 8dd22a35e4..a02db8d893 100644
+--- a/target/ppc/helper.h
++++ b/target/ppc/helper.h
 @@ -1,3 +1,5 @@
 +#include "cpu.h"
 +
- DEF_HELPER_1(bitrev, i32, i32)
- DEF_HELPER_1(ff1, i32, i32)
- DEF_HELPER_FLAGS_2(sats, TCG_CALL_NO_RWG_SE, i32, i32, i32)
+ DEF_HELPER_FLAGS_3(raise_exception_err, TCG_CALL_NO_WG, noreturn, env, i32, i32)
+ DEF_HELPER_FLAGS_2(raise_exception, TCG_CALL_NO_WG, noreturn, env, i32)
+ DEF_HELPER_FLAGS_4(tw, TCG_CALL_NO_WG, void, env, tl, tl, i32)
 -- 
 2.38.1
 
