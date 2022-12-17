@@ -1,86 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p6bUQ-0004NU-9g
-	for mharc-qemu-riscv@gnu.org; Sat, 17 Dec 2022 13:00:50 -0500
+	id 1p6bov-0004Lo-VH
+	for mharc-qemu-riscv@gnu.org; Sat, 17 Dec 2022 13:22:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p6bUF-0004MZ-V1
- for qemu-riscv@nongnu.org; Sat, 17 Dec 2022 13:00:39 -0500
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p6bou-0004LI-DR
+ for qemu-riscv@nongnu.org; Sat, 17 Dec 2022 13:22:00 -0500
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p6bUE-00083t-DW
- for qemu-riscv@nongnu.org; Sat, 17 Dec 2022 13:00:39 -0500
-Received: by mail-ej1-x630.google.com with SMTP id qk9so13064814ejc.3
- for <qemu-riscv@nongnu.org>; Sat, 17 Dec 2022 10:00:33 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p6bos-0003BQ-IP
+ for qemu-riscv@nongnu.org; Sat, 17 Dec 2022 13:21:59 -0500
+Received: by mail-ej1-x62a.google.com with SMTP id fc4so13017928ejc.12
+ for <qemu-riscv@nongnu.org>; Sat, 17 Dec 2022 10:21:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ndLWuqAvCr/hGakOhPr7FEj9ImjoVuc+iQuTEZusliI=;
- b=LVJXXUAE3fxvSktcLLgo/S768tk26LF3SxfofL4k4/QlHqkdy5cpoGkRXcBboVvbFD
- qSUFd+tAbtMO5TP3I0oQuyBJ+o2f6MPX3EiM2Hx0ZZiSUQ+xSwVikoqKBDHVYtfwlsd8
- xqi5hcPFf/UwLpz6EgDqhr2uMoRhTJ/rGceXhgGhugowKFK1Yk8pZMis+GmkTJSva7tY
- TEH1hfMO41k/7WDYFxbJ3ldhlCpAZUHpdwRds8A8RpOTM8VuS9p+8qecohuGpND1MrzM
- BRQ9oMymWPRqH9oDLU/pFnVJoZhYGBW+kIdkQRN8PF1gNObJwCo3IYRox11CaVmF4U9+
- gStA==
+ bh=hCDbeK1ydBYPvIImx9zIe08Zc6llPRZLRtqbvVac4iM=;
+ b=oNV0DE5xbbWO9NIKzFZHG2B0b1Exxq6qEwBfWIjpUbLFg03WJ4Px7m+HcXzMWq6jwV
+ zteVKcZEBmSrw12pxa7WjcwtDHznTWUAyT0nueXUnU7hUACRqKmrMwIZc57yFH8JCMIM
+ VWMovNO7iX8cE143FCIY6czvmdjBEmJCDH+xUVRo+3LLPzYgSim0HLGhI+sxXSNPfYnX
+ KS0iOCbKRAh3azxFyGmhhu2ynGEdGGrmkmrppcFzbtUy88rF7rnXn1SGfHIIyDdJQ7w8
+ TRT9zWbJPwCXZPvC+BTG291LEiudJV2GZl/C4oxzHIs6O9+DhXzuavRPNA2tXLTL+tjx
+ O1Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ndLWuqAvCr/hGakOhPr7FEj9ImjoVuc+iQuTEZusliI=;
- b=XbbJ/8Me/zfG167GgtQHxPQ71uKXZWy3vstGSOyH4edJBJ9FGEt1156GcZsSv8ME4y
- kz+gYFZ0vOytwFVuuXiAiWxHoDjAumHoLe3FrGzuKT8dyiw6UyTjllNc+3RPzK1g/bAu
- qnblTLVx0RegKEbQP1nwUkp5g3jZMi0S8uc9oPMQ9NcAeW7KHH4LpqY7LlBxzNNFNuZe
- qSZOp346wQJ+ACfcII5sbeb0MCR58SL2pfSe98L42dqXFa2de60kmLxTBN8NEZX8AVaB
- B4wi9vHqvjD1+S+FZHUKThIhnzR4xBxsaDLn0/wJOlzgqKxwniNZIvtnPXTEASvFi+5T
- iAxQ==
-X-Gm-Message-State: ANoB5pnoDB/KnshRD3QVVIRJfLApPTkjuZ3vwaSq3fZF1vQuDI4jw6Ry
- 7AhfOTa1MpeYQUZhv6Xh+YJvaQ==
-X-Google-Smtp-Source: AA0mqf6YGT+U7xv4NsbHurOjK5ywmBrofBYwOxV17htJVQqhRlnzd22Do41Sk0Z1m+IMP+8TNvwbKw==
-X-Received: by 2002:a17:907:1719:b0:7c0:f9ef:23a2 with SMTP id
- le25-20020a170907171900b007c0f9ef23a2mr51798333ejc.30.1671300032662; 
- Sat, 17 Dec 2022 10:00:32 -0800 (PST)
+ bh=hCDbeK1ydBYPvIImx9zIe08Zc6llPRZLRtqbvVac4iM=;
+ b=sf2wlUlRCOZ6DFuuXL+LaJsiFxbGHFTxDoRl9Cj2djyxzKGC99ZxnWCyV/Zj2So4sF
+ 8vhv2/r9uzfA3Erb/6ZIJB96lksjYp4x4qeW49XslyYMVQPA5vfPCbNPx8UUwYG9Ikc3
+ ECrWaKh0hckfoJ2gP4DaGIQre5u553ArpfkFb/UM0GV13tBEQWXGZirV3S3URKZIDy7Q
+ n0Ra+6qnqt8Ck3k9kpxg82dsZQ370XrJMKJCUbHm0QNps+RUU/OEzcTeQWQMyX0U44tF
+ t5i1dl7B8qCs9vVeF0lqeVnZJ1YLo6j6tdFkiNLt06+lLk4OQcgcB0ix5MNJxj3vLWYs
+ Qr0w==
+X-Gm-Message-State: ANoB5pkdeGeBJrIbmjFdgDwkc7vwLaxz/sEFPiIjZZNOqSLuo7uASg4D
+ DFkM8Ht//PqlMMyqpbzVBMde+w==
+X-Google-Smtp-Source: AA0mqf7sjfmofz7LtR6/Kln3IBwo2V5bIF15UFuZkXFmTE3F86kuKN/bBYg7NhHhw5yGaMrV8Oqnag==
+X-Received: by 2002:a17:906:298c:b0:7c1:9eb:845b with SMTP id
+ x12-20020a170906298c00b007c109eb845bmr30495391eje.16.1671301316822; 
+ Sat, 17 Dec 2022 10:21:56 -0800 (PST)
 Received: from [192.168.1.115] ([185.126.107.38])
  by smtp.gmail.com with ESMTPSA id
- 21-20020a170906329500b0078d3f96d293sm2219532ejw.30.2022.12.17.10.00.29
+ p18-20020a17090653d200b007c1651aeeacsm2219985ejo.181.2022.12.17.10.21.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 17 Dec 2022 10:00:31 -0800 (PST)
-Message-ID: <0ba898f6-fcf5-e539-a6c6-ff665602fd9f@linaro.org>
-Date: Sat, 17 Dec 2022 19:00:28 +0100
+ Sat, 17 Dec 2022 10:21:56 -0800 (PST)
+Message-ID: <44ff8209-236d-cd2f-25cd-d608303ad96f@linaro.org>
+Date: Sat, 17 Dec 2022 19:21:53 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.5.1
-Subject: Re: [PATCH v2 7/9] target/riscv/cpu: Restrict some sysemu-specific
- fields from CPUArchState
+Subject: Re: [PATCH v12 08/61] target/riscv: add fault-only-first unit stride
+ load
 Content-Language: en-US
-To: qemu-devel@nongnu.org
-Cc: Max Filippov <jcmvbkbc@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Bin Meng <bin.meng@windriver.com>, kvm@vger.kernel.org, qemu-ppc@nongnu.org,
- Greg Kurz <groug@kaod.org>, Daniel Henrique Barboza <danielhb413@gmail.com>,
- Bernhard Beschow <shentey@gmail.com>, qemu-riscv@nongnu.org,
- Song Gao <gaosong@loongson.cn>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Laurent Vivier <laurent@vivier.eu>,
- Alistair Francis <alistair.francis@wdc.com>, =?UTF-8?Q?C=c3=a9dric_Le_Goate?=
- =?UTF-8?Q?r?= <clg@kaod.org>, David Gibson <david@gibson.dropbear.id.au>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>
-References: <20221217172907.8364-1-philmd@linaro.org>
- <20221217172907.8364-8-philmd@linaro.org>
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: richard.henderson@linaro.org, wxy194768@alibaba-inc.com,
+ wenmeng_zhang@c-sky.com, Alistair Francis <alistair.francis@wdc.com>,
+ palmer@dabbelt.com, Laurent Vivier <laurent@vivier.eu>
+References: <20200701152549.1218-1-zhiwei_liu@c-sky.com>
+ <20200701152549.1218-9-zhiwei_liu@c-sky.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20221217172907.8364-8-philmd@linaro.org>
+In-Reply-To: <20200701152549.1218-9-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x630.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,36 +85,105 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Dec 2022 18:00:40 -0000
+X-List-Received-Date: Sat, 17 Dec 2022 18:22:00 -0000
 
-On 17/12/22 18:29, Philippe Mathieu-Daudé wrote:
-> The 'hwaddr' type is only available / meaningful on system emulation.
+(unburying an old patch)
+
+On 1/7/20 17:24, LIU Zhiwei wrote:
+> The unit-stride fault-only-fault load instructions are used to
+> vectorize loops with data-dependent exit conditions(while loops).
+> These instructions execute as a regular load except that they
+> will only take a trap on element 0.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   target/riscv/cpu.h | 17 ++++++++++-------
->   1 file changed, 10 insertions(+), 7 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 05fafebff7..71ea1bb411 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -370,7 +370,7 @@ struct CPUArchState {
->       uint64_t menvcfg;
->       target_ulong senvcfg;
->       uint64_t henvcfg;
-> -#endif
-> +
->       target_ulong cur_pmmask;
->       target_ulong cur_pmbase;
->   
-> @@ -388,6 +388,7 @@ struct CPUArchState {
->       uint64_t kvm_timer_compare;
->       uint64_t kvm_timer_state;
->       uint64_t kvm_timer_frequency;
-> +#endif
->   };
+>   target/riscv/helper.h                   |  22 +++++
+>   target/riscv/insn32.decode              |   7 ++
+>   target/riscv/insn_trans/trans_rvv.inc.c |  73 ++++++++++++++++
+>   target/riscv/vector_helper.c            | 110 ++++++++++++++++++++++++
+>   4 files changed, 212 insertions(+)
 
-Sorry this patch is not complete, as various of these fields are
-in use in common emulation code (so build fails on linux-user) :/
+> +/*
+> + *** unit-stride fault-only-fisrt load instructions
+> + */
+> +static inline void
+> +vext_ldff(void *vd, void *v0, target_ulong base,
+> +          CPURISCVState *env, uint32_t desc,
+> +          vext_ldst_elem_fn *ldst_elem,
+> +          clear_fn *clear_elem,
+> +          uint32_t esz, uint32_t msz, uintptr_t ra)
+> +{
+> +    void *host;
+> +    uint32_t i, k, vl = 0;
+> +    uint32_t mlen = vext_mlen(desc);
+> +    uint32_t nf = vext_nf(desc);
+> +    uint32_t vm = vext_vm(desc);
+> +    uint32_t vlmax = vext_maxsz(desc) / esz;
+> +    target_ulong addr, offset, remain;
+> +
+> +    /* probe every access*/
+> +    for (i = 0; i < env->vl; i++) {
+> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {
+> +            continue;
+> +        }
+> +        addr = base + nf * i * msz;
+> +        if (i == 0) {
+> +            probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
+
+Shouldn't we check page_check_range() in user-mode here?
+
+> +        } else {
+> +            /* if it triggers an exception, no need to check watchpoint */
+> +            remain = nf * msz;
+> +            while (remain > 0) {
+> +                offset = -(addr | TARGET_PAGE_MASK);
+> +                host = tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD,
+> +                                         cpu_mmu_index(env, false));
+> +                if (host) {
+> +#ifdef CONFIG_USER_ONLY
+> +                    if (page_check_range(addr, nf * msz, PAGE_READ) < 0) {
+> +                        vl = i;
+> +                        goto ProbeSuccess;
+> +                    }
+> +#else
+> +                    probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
+> +#endif
+> +                } else {
+> +                    vl = i;
+> +                    goto ProbeSuccess;
+> +                }
+> +                if (remain <=  offset) {
+> +                    break;
+> +                }
+> +                remain -= offset;
+> +                addr += offset;
+> +            }
+> +        }
+> +    }
+> +ProbeSuccess:
+> +    /* load bytes from guest memory */
+> +    if (vl != 0) {
+> +        env->vl = vl;
+> +    }
+> +    for (i = 0; i < env->vl; i++) {
+> +        k = 0;
+> +        if (!vm && !vext_elem_mask(v0, mlen, i)) {
+> +            continue;
+> +        }
+> +        while (k < nf) {
+> +            target_ulong addr = base + (i * nf + k) * msz;
+> +            ldst_elem(env, addr, i + k * vlmax, vd, ra);
+> +            k++;
+> +        }
+> +    }
+> +    /* clear tail elements */
+> +    if (vl != 0) {
+> +        return;
+> +    }
+> +    for (k = 0; k < nf; k++) {
+> +        clear_elem(vd, env->vl + k * vlmax, env->vl * esz, vlmax * esz);
+> +    }
+> +}
 
