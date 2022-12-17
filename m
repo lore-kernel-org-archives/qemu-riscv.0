@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p6LE7-0007Q1-74
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Dec 2022 19:38:55 -0500
+	id 1p6LFR-0000Pa-PL
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Dec 2022 19:40:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1p6LE1-0007Ma-Hz
- for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 19:38:49 -0500
-Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
+ id 1p6LFK-0000Nd-0l
+ for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 19:40:10 -0500
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1p6LDy-0005HU-Qm
- for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 19:38:49 -0500
-Received: by mail-pg1-x531.google.com with SMTP id f9so2843073pgf.7
- for <qemu-riscv@nongnu.org>; Fri, 16 Dec 2022 16:38:46 -0800 (PST)
+ id 1p6LFH-0005eG-8O
+ for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 19:40:09 -0500
+Received: by mail-pf1-x433.google.com with SMTP id w26so2845579pfj.6
+ for <qemu-riscv@nongnu.org>; Fri, 16 Dec 2022 16:40:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=iZ7t150LD+fHFcVkoHUY4qdqwU8UWj1E+gqLmH6I/EE=;
- b=GMNos0pBK5YBIMoKQS3Ymay1SCIwr/ZQEGZq/NCxfj9tHnVBMMQYz5T9swoMoy0I0Q
- Sktu0bKQriT+ZG52ui+sQRoVwOrd5xs90Y5kcWJ7BuvJd/xgKHs7w1XOcshIKKHr2N/U
- WgXXfV3nlttpkSKp41uqcCmFkVlacxFrb5e17Nv01iCuNsRhnVHBhi3NcY14jexNn6Xj
- A85zExGuN4BKvNPzvBKJB5ybDuNIguv6sLROpf2hxNKPlamuRn0aCGKEQtc0PC5RR3OR
- s9TPbAVec1gTSbEi3jwr37l9xwu4mETNxoGy4wFAfPW+H+p2cmf/UeD936rwlLr9QPQo
- 7HfA==
+ bh=jghR/KN8Mxstogtc1na7VoaWWs7m/MAHQG9pSqMvyL4=;
+ b=Rv/mOyw7Ah8LF6nR6IQXyfaVfNdPkMUjID6JUw7mzNS8huYc6nELsImhDR4oP5B41g
+ tQnbV3XAWiB45Y2fpEy3WrZL5jtb0b6uaBBVVdr458T9/LXN6SvubEyQFOTZVKCSdnfK
+ 9KUTEbzMSUiwfHkw0jRVeOSY/8A+vrQKFG7dtY38vUWfvqapH5lkg/VQGO4F7g78S7B2
+ q60r43W9vRK/Zcz09B1ko6qn1kTnvoxCA/sgvc90BJ5eTWfv9Mr4v2PfNzukgidsWCfs
+ 5XziQdLT/616w1s802Jw/51cRCvNkUyNNfKz2lKg0AVKWlkUqqu8xQ7k0p+M2REfwcRq
+ MAjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=iZ7t150LD+fHFcVkoHUY4qdqwU8UWj1E+gqLmH6I/EE=;
- b=2KK6lNdVbg6s9Vg81f7qgUoXjMR49dqhCsIGjFNUnqCpfMlqNS2dCK9pRXN1OQSngS
- m/tdU9z1kYfBSPFmo/uKHqHEMquw85CN9XZS8OApTdoPjBO8PAL55XNHVSxKf4Ra2eja
- Qn0I8GO4rhpbgwhnMnLpu8hW1U75VM0Tzqc3MZ/AbfurwVJSLJbRP2k33MWDPWod6WKm
- s654HGybVhvSQz2XjOonunn2VUiMkPFOOyC2yTmcgJgqZeyJl5fGT/gzXJLG5mVUG7Tr
- YpFDxuWdh1R4C5ebM7oibNOFQp76DWJkchuGRZU1o7dFdYII/glSHXXTxKVJb4AXcjfB
- N5Fw==
-X-Gm-Message-State: ANoB5pmje7yp2qnu0O+5taE3Vtmr04jc3S6tN4T8zOZUoxWlzy9gKEF5
- QWMmpcDTK5EtmM0+JxzeIkyIpg==
-X-Google-Smtp-Source: AA0mqf6/qpPwiLD2/H4bc7cnsJ4tYlMqYGdPQVN/nFfkgupuAOsC9wbNKNzN/7bXayMuqv84+/pGWA==
-X-Received: by 2002:aa7:82d7:0:b0:575:a4f5:7812 with SMTP id
- f23-20020aa782d7000000b00575a4f57812mr33286755pfn.4.1671237525350; 
- Fri, 16 Dec 2022 16:38:45 -0800 (PST)
+ bh=jghR/KN8Mxstogtc1na7VoaWWs7m/MAHQG9pSqMvyL4=;
+ b=7qZaCF6T7GIyg+PQuQRovmu/xzr7juo2SFYBAKZylbSV6B6MMxzcaXLOiW5GeRByd2
+ cZlZJ+o6smTjZiVUVm5+ed6v8nPyIVviEWoU6Yg6bL0Ujl36lMFAoL1mTnRhGq/vJVYY
+ FyOqFOHCYjuTRwxdgkgyfbngbXgBIRek+P2o5zt36c7jVHyHI+NtqQnk8yqLm38sGeSo
+ eiamn9KqiBvyhfUyOEuKPqbXAONalS2ScjPSwYOs8czXkYs6ojD4M45TF71MvrSPPRkl
+ PNOoizJ0M4sKnpX4hWyvQWVmkhDmimikzs1hr7RnS+J++7nyk07Ev2zbOgaS4cY2HPC6
+ OPMw==
+X-Gm-Message-State: AFqh2koZeiQEdDFEynI442sXzlfD06clpWB6bBEaGfUPZhcs10Igfd4p
+ b0PzSg53Ga63GGbgtAHyv+8Nsg==
+X-Google-Smtp-Source: AMrXdXt0BN5omY/y2JUnMKWZX9iGWkWdY15VO889Yol5mIsNQOWnG0q4NS3c0416bLxpvRxnxBFm8w==
+X-Received: by 2002:a62:4ecd:0:b0:57a:69d1:c15b with SMTP id
+ c196-20020a624ecd000000b0057a69d1c15bmr389828pfb.21.1671237605594; 
+ Fri, 16 Dec 2022 16:40:05 -0800 (PST)
 Received: from ?IPV6:2602:47:d48c:8101:c606:9489:98df:6a3b?
  ([2602:47:d48c:8101:c606:9489:98df:6a3b])
  by smtp.gmail.com with ESMTPSA id
- c20-20020aa79534000000b005779110635asm2064557pfp.51.2022.12.16.16.38.44
+ y184-20020a6264c1000000b00576d4d69909sm2067625pfb.8.2022.12.16.16.40.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Dec 2022 16:38:44 -0800 (PST)
-Message-ID: <112ddce1-ffc4-d50b-9cc8-72578faba11d@linaro.org>
-Date: Fri, 16 Dec 2022 16:38:43 -0800
+ Fri, 16 Dec 2022 16:40:05 -0800 (PST)
+Message-ID: <b4a14228-2f7c-e53b-30aa-3833d5d80992@linaro.org>
+Date: Fri, 16 Dec 2022 16:40:03 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
-Subject: Re: [PATCH 07/10] target/ppc/internal: Restrict MMU declarations to
- sysemu
+Subject: Re: [PATCH 08/10] target/riscv/cpu: Restrict sysemu-specific fields
+ from CPUArchState
 Content-Language: en-US
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
@@ -70,13 +70,13 @@ Cc: Daniel Henrique Barboza <danielhb413@gmail.com>,
  Greg Kurz <groug@kaod.org>, qemu-riscv@nongnu.org,
  Max Filippov <jcmvbkbc@gmail.com>
 References: <20221216220539.7065-1-philmd@linaro.org>
- <20221216220539.7065-8-philmd@linaro.org>
+ <20221216220539.7065-9-philmd@linaro.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20221216220539.7065-8-philmd@linaro.org>
+In-Reply-To: <20221216220539.7065-9-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x531.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,42 +96,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Dec 2022 00:38:54 -0000
+X-List-Received-Date: Sat, 17 Dec 2022 00:40:12 -0000
 
 On 12/16/22 14:05, Philippe Mathieu-Daudé wrote:
+> The 'hwaddr' type is only available / meaningful on system emulation.
+> 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   target/ppc/internal.h | 5 +++++
->   1 file changed, 5 insertions(+)
+>   target/riscv/cpu.h | 34 ++++++++++++++++++----------------
+>   1 file changed, 18 insertions(+), 16 deletions(-)
 > 
-> diff --git a/target/ppc/internal.h b/target/ppc/internal.h
-> index 337a362205..901bae6d39 100644
-> --- a/target/ppc/internal.h
-> +++ b/target/ppc/internal.h
-> @@ -242,9 +242,12 @@ static inline int prot_for_access_type(MMUAccessType access_type)
->       g_assert_not_reached();
->   }
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index fc1f72e5c3..bd4e16d946 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -368,16 +368,6 @@ struct CPUArchState {
+>       uint64_t menvcfg;
+>       target_ulong senvcfg;
+>       uint64_t henvcfg;
+> -#endif
+> -    target_ulong cur_pmmask;
+> -    target_ulong cur_pmbase;
+> -
+> -    float_status fp_status;
+> -
+> -    /* Fields from here on are preserved across CPU reset. */
+> -    QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
+> -    QEMUTimer *vstimer; /* Internal timer for VS-mode interrupt */
+> -    bool vstime_irq;
 >   
-> +#ifndef CONFIG_USER_ONLY
+>       hwaddr kernel_addr;
+>       hwaddr fdt_addr;
+> @@ -388,6 +378,16 @@ struct CPUArchState {
+>       uint64_t kvm_timer_compare;
+>       uint64_t kvm_timer_state;
+>       uint64_t kvm_timer_frequency;
+> +#endif
+> +    target_ulong cur_pmmask;
+> +    target_ulong cur_pmbase;
 > +
->   /* PowerPC MMU emulation */
->   
->   typedef struct mmu_ctx_t mmu_ctx_t;
+> +    float_status fp_status;
 > +
->   bool ppc_xlate(PowerPCCPU *cpu, vaddr eaddr, MMUAccessType access_type,
->                         hwaddr *raddrp, int *psizep, int *protp,
->                         int mmu_idx, bool guest_visible);
-> @@ -266,6 +269,8 @@ struct mmu_ctx_t {
->       int nx;                        /* Non-execute area          */
+> +    /* Fields from here on are preserved across CPU reset. */
+> +    QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
+> +    QEMUTimer *vstimer; /* Internal timer for VS-mode interrupt */
+> +    bool vstime_irq;
 >   };
->   
-> +#endif /* !CONFIG_USER_ONLY */
 
-Eh.  I suppose.
-
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Except for fp_status, all of the other fields that you move are sysemu specific.
 
 
 r~
-
 
