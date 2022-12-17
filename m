@@ -1,84 +1,84 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p6UpL-0000x1-Qh
-	for mharc-qemu-riscv@gnu.org; Sat, 17 Dec 2022 05:53:59 -0500
+	id 1p6WHT-0001zY-QF
+	for mharc-qemu-riscv@gnu.org; Sat, 17 Dec 2022 07:27:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p6UpJ-0000wY-Rw
- for qemu-riscv@nongnu.org; Sat, 17 Dec 2022 05:53:57 -0500
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
+ id 1p6WHQ-0001xH-K9; Sat, 17 Dec 2022 07:27:04 -0500
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p6UpI-0007xf-87
- for qemu-riscv@nongnu.org; Sat, 17 Dec 2022 05:53:57 -0500
-Received: by mail-ej1-x62f.google.com with SMTP id n20so11728484ejh.0
- for <qemu-riscv@nongnu.org>; Sat, 17 Dec 2022 02:53:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=leRoeg2JyyWwrLYxvKN6D5nxyvTtDm+03xFPfnxHWR4=;
- b=ms7piSkEX5wizNMNMlbSgpYSab9FfhqiVGRsXM5mE/GVxTg/5BGbvBfd/gd0gIfmdj
- wrOh+2WluZkMVoZctrDC6hg//DgHrgl3WmkO3O9h4Py9HpzTxIRChKL5ahbv+VOfgQYQ
- lrW9QOH7pGiI/TtRM/18a77QyHyGl+2Dv4AUqyNrI/ddGfsLapyxkMrKsx8k5+WYJ+nK
- qzzmZ9z2kQAggG43wiw8r7L+c8QJsd7UBCivff1IqXoQ+S8c9T4I43knKFQZsgBNOb6S
- RWb2PrzYkviqf5WV/MhP5gLU816RRhcMByZLeRoeZ9aXvtuL8g/ZL++wwAbaEHr5QU1U
- Hl2w==
+ (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
+ id 1p6WHO-0007uF-Ui; Sat, 17 Dec 2022 07:27:04 -0500
+Received: by mail-ej1-x632.google.com with SMTP id kw15so11850601ejc.10;
+ Sat, 17 Dec 2022 04:27:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8aRbhXy9tIzrGl/bEMD2TEHuE+lr9h8q/D7habQUvi0=;
+ b=ODYAirCg+VwrcNaTnOqr9bW3U9Rnax75L6uWISGLT9MezMslDqDg/5uhTk8OSvYIi+
+ YtU+tQ2RO0EPUsGA9pHL82Y/wiMfWL5PTIAKf4/BdlbvwmdMzJEQLT97bDfK7TVFRetM
+ HqDUKoxNJHcmE7pwuz9uqqvcmYaVI6XB5uiIrVXAERsHUYUuOoKYIhiFwTBqsL1QsE20
+ 8mazR9PRgIA+Jteks9uevZlzmjBmFu9eOdlJ6b/02UqjS7mjzJe8IHMFUyVGTAfZ8nQ1
+ SiWFCd6b4yRRmYXTQTgrjIGGQWE/F22v0jl3W6l9O4ZIAOu2zDwbaDYfz8LGltp5fCc4
+ GBlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=leRoeg2JyyWwrLYxvKN6D5nxyvTtDm+03xFPfnxHWR4=;
- b=2lQuV17w8ohy0hQUQJ/bPp25YBCDhrX8XZSVxqQ1SLJcPLe9l4POrbY5IqcAg6EE+s
- CBoA9vGaBub8wh/N+n6c9coTmXyVTvRSvRTQQisIaFV1Xqc+Fg+eXh0zWQ36eJeaqccu
- mV8wGxtpP5mpAGI12C7g9UWxbDQcNzUIiS/ccaqS6CsxaHGoOs3K1XHTeLblOu140MgZ
- OduSujrL9DvkuvBpqdzem9TVYcR2yBbvwyKC2rgttdahax/uFDaWH0Bb0IlyyHJORpGP
- rRdzPkJiFdmiHaJOHdYwp3V4kKJR4zQZBS6y0Qq5zoYEtH581bxJNpmjQkaC4AMIrmDL
- m0DQ==
-X-Gm-Message-State: ANoB5pmNHyUPJm76u7SC4GjygjZIsHJNwbawAsJ4A1ly+u/cFVGnQRGC
- ngwADrrLiDmdu7SYXn7xUskmhQ==
-X-Google-Smtp-Source: AA0mqf5YPVaNbwfFuzorPX7/yxAlszOcV9I9je+uBLG7I0M+RJRx6nQefI9DTP8E9CbPFQQ28dwSmg==
-X-Received: by 2002:a17:906:c24f:b0:7c0:c316:6abf with SMTP id
- bl15-20020a170906c24f00b007c0c3166abfmr31269378ejb.50.1671274434740; 
- Sat, 17 Dec 2022 02:53:54 -0800 (PST)
-Received: from [192.168.1.115] ([185.126.107.38])
- by smtp.gmail.com with ESMTPSA id
- n6-20020a05640204c600b004702caff4f6sm1844637edw.73.2022.12.17.02.53.52
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8aRbhXy9tIzrGl/bEMD2TEHuE+lr9h8q/D7habQUvi0=;
+ b=o6ItaVw6HpIkkoT5GmQywNZIGlx+iXrVfP+S6BWapN1RpVZUQrD5tOcx/bWooMqRBF
+ ZX7Zt7h2V5xdyyihzAFpmCAX1Yye88wA3Ek6wEibI0vnpixoc40ufU68EfpHg0l/4tfg
+ I0cY4zkIHY5YR78Cws4QcDEeinXEbBPXM9dW9k7JizxiJbTGfW89XK7c4ZTfgTfHIzVx
+ xARmxZwYgYEQgjiyhi36ULQuI7Y43JaclL4+cKQrtofSRai/Cv3CKclgr7pmRP95i4d4
+ e5URia80PDwX+kuxZZXoLk1cno9fvnocUSe5/mJmV76DB15SWSSyNRpdqp0rU5edVXUu
+ u/8w==
+X-Gm-Message-State: AFqh2koUmVyZsJDxEj0EU2PlZoKUtNJ1rDc77Smzbtq/Y/R5aqAI+gOz
+ 4vaBgr2WA5V38I26VCmoTlVXFBVWZrA=
+X-Google-Smtp-Source: AMrXdXshT7B94nqh9ixHiZjpkriJCvqkuWTVrd/ilEekEGT7SyMwgMasaudTeo1QP1jyRG2vwgmDQQ==
+X-Received: by 2002:a17:907:a092:b0:7e6:bae:fa0f with SMTP id
+ hu18-20020a170907a09200b007e60baefa0fmr5101064ejc.58.1671280020015; 
+ Sat, 17 Dec 2022 04:27:00 -0800 (PST)
+Received: from [127.0.0.1] (dynamic-077-191-115-237.77.191.pool.telefonica.de.
+ [77.191.115.237]) by smtp.gmail.com with ESMTPSA id
+ ux12-20020a170907cf8c00b0073c10031dc9sm1913855ejc.80.2022.12.17.04.26.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 17 Dec 2022 02:53:54 -0800 (PST)
-Message-ID: <a7b1a878-7a59-128c-9523-cdcc497526c2@linaro.org>
-Date: Sat, 17 Dec 2022 11:53:52 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.5.1
-Subject: Re: [PATCH 07/10] target/ppc/internal: Restrict MMU declarations to
- sysemu
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Sat, 17 Dec 2022 04:26:59 -0800 (PST)
+Date: Sat, 17 Dec 2022 12:26:53 +0000
+From: Bernhard Beschow <shentey@gmail.com>
+To: qemu-devel@nongnu.org,
+ =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>
+CC: Daniel Henrique Barboza <danielhb413@gmail.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Xiaojuan Yang <yangxiaojuan@loongson.cn>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Bin Meng <bin.meng@windriver.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
- =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ =?ISO-8859-1?Q?C=E9dric_Le_Goater?= <clg@kaod.org>,
  Song Gao <gaosong@loongson.cn>, Alistair Francis <alistair.francis@wdc.com>,
  qemu-ppc@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
  Palmer Dabbelt <palmer@dabbelt.com>, Taylor Simpson <tsimpson@quicinc.com>,
  Greg Kurz <groug@kaod.org>, qemu-riscv@nongnu.org,
  Max Filippov <jcmvbkbc@gmail.com>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_03/10=5D_target/loongarch/?=
+ =?US-ASCII?Q?cpu=3A_Remove_unused_=22sysbus=2Eh=22_header?=
+In-Reply-To: <20221216220539.7065-4-philmd@linaro.org>
 References: <20221216220539.7065-1-philmd@linaro.org>
- <20221216220539.7065-8-philmd@linaro.org>
- <112ddce1-ffc4-d50b-9cc8-72578faba11d@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <112ddce1-ffc4-d50b-9cc8-72578faba11d@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62f.google.com
+ <20221216220539.7065-4-philmd@linaro.org>
+Message-ID: <58744897-B124-49DA-9EA1-79403F319038@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=shentey@gmail.com; helo=mail-ej1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -93,46 +93,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Dec 2022 10:53:58 -0000
+X-List-Received-Date: Sat, 17 Dec 2022 12:27:06 -0000
 
-On 17/12/22 01:38, Richard Henderson wrote:
-> On 12/16/22 14:05, Philippe Mathieu-Daudé wrote:
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> ---
->>   target/ppc/internal.h | 5 +++++
->>   1 file changed, 5 insertions(+)
->>
->> diff --git a/target/ppc/internal.h b/target/ppc/internal.h
->> index 337a362205..901bae6d39 100644
->> --- a/target/ppc/internal.h
->> +++ b/target/ppc/internal.h
->> @@ -242,9 +242,12 @@ static inline int 
->> prot_for_access_type(MMUAccessType access_type)
->>       g_assert_not_reached();
->>   }
->> +#ifndef CONFIG_USER_ONLY
->> +
->>   /* PowerPC MMU emulation */
->>   typedef struct mmu_ctx_t mmu_ctx_t;
->> +
->>   bool ppc_xlate(PowerPCCPU *cpu, vaddr eaddr, MMUAccessType access_type,
->>                         hwaddr *raddrp, int *psizep, int *protp,
->>                         int mmu_idx, bool guest_visible);
->> @@ -266,6 +269,8 @@ struct mmu_ctx_t {
->>       int nx;                        /* Non-execute area          */
->>   };
->> +#endif /* !CONFIG_USER_ONLY */
-> 
-> Eh.  I suppose.
 
-I forgot the justification:
 
-'''
-The 'hwaddr' type is only available / meaningful on system emulation.
-'''
+Am 16=2E Dezember 2022 22:05:32 UTC schrieb "Philippe Mathieu-Daud=C3=A9" =
+<philmd@linaro=2Eorg>:
+>Nothing requires SysBus declarations here=2E
+>
+>Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro=2Eorg>
+>---
+> target/loongarch/cpu=2Eh | 1 -
+> 1 file changed, 1 deletion(-)
+>
+>diff --git a/target/loongarch/cpu=2Eh b/target/loongarch/cpu=2Eh
+>index e15c633b0b=2E=2Ec8612f5466 100644
+>--- a/target/loongarch/cpu=2Eh
+>+++ b/target/loongarch/cpu=2Eh
+>@@ -13,7 +13,6 @@
+> #include "hw/registerfields=2Eh"
+> #include "qemu/timer=2Eh"
+> #include "exec/memory=2Eh"
+>-#include "hw/sysbus=2Eh"
+> #include "cpu-csr=2Eh"
+>=20
+> #define IOCSRF_TEMP             0
 
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+https://lists=2Enongnu=2Eorg/archive/html/qemu-devel/2022-09/msg02628=2Eht=
+ml
 
-Thanks!
+\o/
 
+Reviewed-by: Bernhard Beschow <shentey@gmail=2Ecom>
 
