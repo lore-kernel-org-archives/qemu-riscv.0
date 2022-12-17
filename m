@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p6LFR-0000Pa-PL
-	for mharc-qemu-riscv@gnu.org; Fri, 16 Dec 2022 19:40:21 -0500
+	id 1p6LH4-0001kI-3I
+	for mharc-qemu-riscv@gnu.org; Fri, 16 Dec 2022 19:41:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1p6LFK-0000Nd-0l
- for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 19:40:10 -0500
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1p6LH2-0001jk-So
+ for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 19:41:57 -0500
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1p6LFH-0005eG-8O
- for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 19:40:09 -0500
-Received: by mail-pf1-x433.google.com with SMTP id w26so2845579pfj.6
- for <qemu-riscv@nongnu.org>; Fri, 16 Dec 2022 16:40:06 -0800 (PST)
+ id 1p6LH0-0006Ma-BK
+ for qemu-riscv@nongnu.org; Fri, 16 Dec 2022 19:41:56 -0500
+Received: by mail-pj1-x1032.google.com with SMTP id
+ z8-20020a17090abd8800b00219ed30ce47so7692257pjr.3
+ for <qemu-riscv@nongnu.org>; Fri, 16 Dec 2022 16:41:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=jghR/KN8Mxstogtc1na7VoaWWs7m/MAHQG9pSqMvyL4=;
- b=Rv/mOyw7Ah8LF6nR6IQXyfaVfNdPkMUjID6JUw7mzNS8huYc6nELsImhDR4oP5B41g
- tQnbV3XAWiB45Y2fpEy3WrZL5jtb0b6uaBBVVdr458T9/LXN6SvubEyQFOTZVKCSdnfK
- 9KUTEbzMSUiwfHkw0jRVeOSY/8A+vrQKFG7dtY38vUWfvqapH5lkg/VQGO4F7g78S7B2
- q60r43W9vRK/Zcz09B1ko6qn1kTnvoxCA/sgvc90BJ5eTWfv9Mr4v2PfNzukgidsWCfs
- 5XziQdLT/616w1s802Jw/51cRCvNkUyNNfKz2lKg0AVKWlkUqqu8xQ7k0p+M2REfwcRq
- MAjA==
+ bh=iHMfgcJ27mHobZfw2i+QqcqBFZLqxaTDvDgPVYSK/Gs=;
+ b=IV90rSZeI+X+b71xJwvuSM4jeFsayik/aGUOLIayQt6UfMfvcsoysxZmaQLbu5jUtD
+ 2E6Fcd+znKtlr3oTw9pdGYzkolKp1AtZJkuTjP7lStRgQ1pkrL4fL7TkXnVLp/jOZ/jD
+ eNSdcyuInLTCJ/EuS1aACiNtrKRYE8s5PjIL26QGunHH0+WqJEFl51jopMtjbuJzSqT9
+ SK3K522C+0LYx7ycRlCRPcMlEfIx8qk+tooOZD/XhpFy0+0ATMlvoCUlTxGIKSuUlG+k
+ hqqCrTU6SsMdHmwsg9eQO+v90BiM32iY0kHLQmIuvOKXjerOQD5eoPOAMUBQvOnT17AO
+ XGUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jghR/KN8Mxstogtc1na7VoaWWs7m/MAHQG9pSqMvyL4=;
- b=7qZaCF6T7GIyg+PQuQRovmu/xzr7juo2SFYBAKZylbSV6B6MMxzcaXLOiW5GeRByd2
- cZlZJ+o6smTjZiVUVm5+ed6v8nPyIVviEWoU6Yg6bL0Ujl36lMFAoL1mTnRhGq/vJVYY
- FyOqFOHCYjuTRwxdgkgyfbngbXgBIRek+P2o5zt36c7jVHyHI+NtqQnk8yqLm38sGeSo
- eiamn9KqiBvyhfUyOEuKPqbXAONalS2ScjPSwYOs8czXkYs6ojD4M45TF71MvrSPPRkl
- PNOoizJ0M4sKnpX4hWyvQWVmkhDmimikzs1hr7RnS+J++7nyk07Ev2zbOgaS4cY2HPC6
- OPMw==
-X-Gm-Message-State: AFqh2koZeiQEdDFEynI442sXzlfD06clpWB6bBEaGfUPZhcs10Igfd4p
- b0PzSg53Ga63GGbgtAHyv+8Nsg==
-X-Google-Smtp-Source: AMrXdXt0BN5omY/y2JUnMKWZX9iGWkWdY15VO889Yol5mIsNQOWnG0q4NS3c0416bLxpvRxnxBFm8w==
-X-Received: by 2002:a62:4ecd:0:b0:57a:69d1:c15b with SMTP id
- c196-20020a624ecd000000b0057a69d1c15bmr389828pfb.21.1671237605594; 
- Fri, 16 Dec 2022 16:40:05 -0800 (PST)
+ bh=iHMfgcJ27mHobZfw2i+QqcqBFZLqxaTDvDgPVYSK/Gs=;
+ b=3R0VlP3pJX1YiYm1ut3BkByyr1LSmM3W6bUvUpxOHSJcXsG2TFgKcJ0Q8c0kkl1gKz
+ yNZzMqqIfHkiMs9V9b1CJIPB2B7Wo12Mo6RcpreJKu6ofMsnz8a7OKZqV8bU/uxwC57x
+ cDMnE3khTg2FmpyQ7KvgPoPGDqpzfdjzTUrFxxfa8tvJFSgmqpvNsaRFctO6rLJY0b2T
+ TtSpUsYwH3zGM/jEuYX8AfktguvCmVQvZHPpCDR8xUJRxUAURmV7ay9OaWuMX5wqojeA
+ o1wP7bg2E7R6RA5qgzy7TT6ZFqxHErxaISDDKRxEfh7NDf17PfYurDJA/UbONNKXX1kl
+ XmcQ==
+X-Gm-Message-State: ANoB5pkunU5mRTTlzRub4cycZ/H/7kwm8Yp73c4f7KGDkTLwmKfsBMx3
+ VAZIcpVkEx8G24M70N/GhlA75w==
+X-Google-Smtp-Source: AA0mqf6uTH/UGr/SZu5nUREN9+9OrwnoFUCeKOMyOIfFnSgIcOtXAn2HBQzZASSdNxSVqSyXZEMXpQ==
+X-Received: by 2002:a17:902:c3c6:b0:18c:cee:b265 with SMTP id
+ j6-20020a170902c3c600b0018c0ceeb265mr22308290plj.53.1671237712825; 
+ Fri, 16 Dec 2022 16:41:52 -0800 (PST)
 Received: from ?IPV6:2602:47:d48c:8101:c606:9489:98df:6a3b?
  ([2602:47:d48c:8101:c606:9489:98df:6a3b])
  by smtp.gmail.com with ESMTPSA id
- y184-20020a6264c1000000b00576d4d69909sm2067625pfb.8.2022.12.16.16.40.04
+ a14-20020a170902ecce00b00188b5d25438sm2234152plh.35.2022.12.16.16.41.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Dec 2022 16:40:05 -0800 (PST)
-Message-ID: <b4a14228-2f7c-e53b-30aa-3833d5d80992@linaro.org>
-Date: Fri, 16 Dec 2022 16:40:03 -0800
+ Fri, 16 Dec 2022 16:41:52 -0800 (PST)
+Message-ID: <12a2f05c-16c6-d1b9-c151-e33739ed6397@linaro.org>
+Date: Fri, 16 Dec 2022 16:41:50 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
-Subject: Re: [PATCH 08/10] target/riscv/cpu: Restrict sysemu-specific fields
- from CPUArchState
+Subject: Re: [PATCH 10/10] target/xtensa/cpu: Include missing "memory.h" header
 Content-Language: en-US
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
@@ -70,13 +70,13 @@ Cc: Daniel Henrique Barboza <danielhb413@gmail.com>,
  Greg Kurz <groug@kaod.org>, qemu-riscv@nongnu.org,
  Max Filippov <jcmvbkbc@gmail.com>
 References: <20221216220539.7065-1-philmd@linaro.org>
- <20221216220539.7065-9-philmd@linaro.org>
+ <20221216220539.7065-11-philmd@linaro.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20221216220539.7065-9-philmd@linaro.org>
+In-Reply-To: <20221216220539.7065-11-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1032.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,55 +96,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Dec 2022 00:40:12 -0000
+X-List-Received-Date: Sat, 17 Dec 2022 00:41:57 -0000
 
 On 12/16/22 14:05, Philippe Mathieu-Daudé wrote:
-> The 'hwaddr' type is only available / meaningful on system emulation.
+> Under system emulation, xtensa_cpu_initfn() calls
+> memory_region_init_io(), itself declared in "exec/memory.h".
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   target/riscv/cpu.h | 34 ++++++++++++++++++----------------
->   1 file changed, 18 insertions(+), 16 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index fc1f72e5c3..bd4e16d946 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -368,16 +368,6 @@ struct CPUArchState {
->       uint64_t menvcfg;
->       target_ulong senvcfg;
->       uint64_t henvcfg;
-> -#endif
-> -    target_ulong cur_pmmask;
-> -    target_ulong cur_pmbase;
-> -
-> -    float_status fp_status;
-> -
-> -    /* Fields from here on are preserved across CPU reset. */
-> -    QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
-> -    QEMUTimer *vstimer; /* Internal timer for VS-mode interrupt */
-> -    bool vstime_irq;
->   
->       hwaddr kernel_addr;
->       hwaddr fdt_addr;
-> @@ -388,6 +378,16 @@ struct CPUArchState {
->       uint64_t kvm_timer_compare;
->       uint64_t kvm_timer_state;
->       uint64_t kvm_timer_frequency;
-> +#endif
-> +    target_ulong cur_pmmask;
-> +    target_ulong cur_pmbase;
-> +
-> +    float_status fp_status;
-> +
-> +    /* Fields from here on are preserved across CPU reset. */
-> +    QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
-> +    QEMUTimer *vstimer; /* Internal timer for VS-mode interrupt */
-> +    bool vstime_irq;
->   };
+>   target/xtensa/cpu.c | 3 +++
+>   1 file changed, 3 insertions(+)
 
-Except for fp_status, all of the other fields that you move are sysemu specific.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
 r~
+
 
