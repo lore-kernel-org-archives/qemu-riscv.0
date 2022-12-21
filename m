@@ -1,69 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p83ka-00087l-4E
+	id 1p83ka-00088B-Er
 	for mharc-qemu-riscv@gnu.org; Wed, 21 Dec 2022 13:23:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1p83kU-00083Y-OH
- for qemu-riscv@nongnu.org; Wed, 21 Dec 2022 13:23:28 -0500
-Received: from mail-oa1-x2b.google.com ([2001:4860:4864:20::2b])
+ id 1p83kY-00086W-C2
+ for qemu-riscv@nongnu.org; Wed, 21 Dec 2022 13:23:30 -0500
+Received: from mail-oa1-x2f.google.com ([2001:4860:4864:20::2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1p83kT-0007q9-53
- for qemu-riscv@nongnu.org; Wed, 21 Dec 2022 13:23:26 -0500
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-142b72a728fso20120181fac.9
- for <qemu-riscv@nongnu.org>; Wed, 21 Dec 2022 10:23:24 -0800 (PST)
+ id 1p83kW-0007og-RE
+ for qemu-riscv@nongnu.org; Wed, 21 Dec 2022 13:23:30 -0500
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-12c8312131fso20141650fac.4
+ for <qemu-riscv@nongnu.org>; Wed, 21 Dec 2022 10:23:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7RkRJF9o2c3C5CMhU+t5ZhyG4d5D3mhoMdfolGfNI5A=;
- b=l3X1279vNzRS9eoA1217HxROrlF3YdTMbtlmZL0aAd3rwwFAOSfsZO2nliQdgR+D2B
- gZ5vwP6aLAC7dcNV5YHkkVDPJy6Kk3oVHoJ0ivvVF5FPigAY9mMl5CQYhCjSKgy/NwiM
- 2jXsIcAqBv1bD+Abq6wAEo/KQGx+Rrg/4BAI9JIaKSyd0aoFD2MB7MqSp2+ML7oPap0P
- eO35vKlLR29gDUQ4B1+lWB/lQHytsQlw/6ZbwG9WS7T9wlx+CTK9by1mO522SJCaS4Ak
- 6rSb9gWzwzxRUMILZ2lrsxTa1ZLfFfxNRcTBiiI0+VV8qjXqEsIg+Jd1Xa/YMehQRNI9
- ZDXg==
+ bh=tRuVtqu0y6HSFA/62eqdmXWh2hHPYGAd1pNKzZ7sbeQ=;
+ b=G9mhRDhC/3y6Dc0dx3bWSGjJLdcFG3rBFAPpRXw/Axc6YuBI8NeRIywyJHj1KpZ6Q4
+ gmhbUnbd+UxbMl5lbkjYTuLCsCqYC0mbWlWm/3DGFqLyEKUROTKbgTlsssb4rhT199Ss
+ I/fNSl5PYC4BmMoyrANRIP3ip2o3UV+XgKZIjSFSe7Jri2y09RlapDm7uEm9gy6XN7kA
+ TjFGyJqC8H35F6l0BL//Qn1uboTClLeW/O3Mf3Q5rKBBkjFf4kF9bK016nxIfqnPJY3u
+ 76K8Ry5ghcLiYeWpNIJz5BAWxJLYlKQ1HQT2oz6fyx5W64N3RGt4LydR+pXLROswHbOD
+ LdbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7RkRJF9o2c3C5CMhU+t5ZhyG4d5D3mhoMdfolGfNI5A=;
- b=Dr5Beid7jCwhUDWprkKwMXn0uiv/2HnKzZKyBKeJoxIOpiisk9l59iGfH1wYBTWfTe
- giW24H/nCkype3nN2CmJBMuY6naCeXIr9sjfLrqI5KkM3QxCu+baw54dCUdI0NZTp2Ym
- 2ymgTk51b7xRrfVzN9Dj2F92R5WsIhr3ZEFowZh27eRT2JnO7LMymC197AZzdDlfSAV1
- b4VTDP/E364mGK+zPEbBHNzYo6KszrgMLxMIDD2qUsZjZvAaMkjInRiZxIQeN2wgtFj6
- Y03snzeV5qZYB+L4aMvBTmTRdoIaeSJHTcCiAf5e0/6d1TUrCRnTbrmfFRh+4dwwuBYG
- xy1Q==
-X-Gm-Message-State: AFqh2kothlQWOUMdiD3F3ojyaodlG2sIOM44uBD0URk/hSVqOeUjBGQS
- 1N5/8a4gg/uoq7UInjuvvMhoQg==
-X-Google-Smtp-Source: AMrXdXtkO/6paE+LYEq5GnKwbTjr8zmBocj31mBuFluQuGG0URpBMEUiUaY9gvYtpN3u4jIFzZokFw==
-X-Received: by 2002:a05:6870:910f:b0:14b:cdc5:879 with SMTP id
- o15-20020a056870910f00b0014bcdc50879mr1390732oae.8.1671647003425; 
- Wed, 21 Dec 2022 10:23:23 -0800 (PST)
+ bh=tRuVtqu0y6HSFA/62eqdmXWh2hHPYGAd1pNKzZ7sbeQ=;
+ b=32c5yWtJAgjOQuTZRunKGa8d7KzpqKFFQzPxtJRaBcYbptJJWeqT6B3d7gwe8OjwMb
+ dZcTXcry5OW1f64Vxamvkwj3Gs6PvOIUAl4QQ0NIuviohmaBZ6/ilWlt8OUpnLc0L+wS
+ 9HCRfZnjae0ojOjS2vST+LoZjxauivA8dbQ8jsHrzyPStWFuLNUGeePQe3GusSPPxikP
+ 7dq74pSepv5yic27uztOlGdY1Rx/Ji5F+W12j1Jbmbuss+PWq+jWmL5+cgvbl6jHFXWq
+ u5bpFKfPZlsVYMv5Zb75SzOUIyKWqy2kQYXJmXfALgFoP6m7RTuQdWN7PFoKl+bel6sK
+ xIQA==
+X-Gm-Message-State: AFqh2kqceWTemQ/XJWc6VZ+vXCRMYMAnOMxqhOFBijsYcDwCwubKHvR2
+ FAoiM3yRpGF3DdjUhrUfZOZ5pA==
+X-Google-Smtp-Source: AMrXdXsCRiPATMchVfMqj/9I+RyKRDzUMUpQx4yBTQDts9L2Z3CxW2qBINTUSTSz+lyohZYqhYMQJw==
+X-Received: by 2002:a05:6870:cd11:b0:144:b4d6:4df1 with SMTP id
+ qk17-20020a056870cd1100b00144b4d64df1mr1002408oab.30.1671647008143; 
+ Wed, 21 Dec 2022 10:23:28 -0800 (PST)
 Received: from fedora.. (201-43-103-101.dsl.telesp.net.br. [201.43.103.101])
  by smtp.gmail.com with ESMTPSA id
- w8-20020a056871060800b0014c8685f229sm514577oan.10.2022.12.21.10.23.21
+ w8-20020a056871060800b0014c8685f229sm514577oan.10.2022.12.21.10.23.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Dec 2022 10:23:23 -0800 (PST)
+ Wed, 21 Dec 2022 10:23:27 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 04/15] hw/riscv/boot.c: make riscv_find_firmware() static
-Date: Wed, 21 Dec 2022 15:22:49 -0300
-Message-Id: <20221221182300.307900-5-dbarboza@ventanamicro.com>
+Subject: [PATCH 06/15] hw/riscv/spike.c: load initrd right after
+ riscv_load_kernel()
+Date: Wed, 21 Dec 2022 15:22:51 -0300
+Message-Id: <20221221182300.307900-7-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221221182300.307900-1-dbarboza@ventanamicro.com>
 References: <20221221182300.307900-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2b.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,91 +84,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2022 18:23:28 -0000
+X-List-Received-Date: Wed, 21 Dec 2022 18:23:30 -0000
 
-The only caller is riscv_find_and_load_firmware(), which is in the same
-file.
+This will make the code more in line with what the other boards are
+doing. We'll also avoid an extra check to machine->kernel_filename since
+we already checked that before executing riscv_load_kernel().
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- hw/riscv/boot.c         | 44 ++++++++++++++++++++---------------------
- include/hw/riscv/boot.h |  1 -
- 2 files changed, 22 insertions(+), 23 deletions(-)
+ hw/riscv/spike.c | 31 +++++++++++++++----------------
+ 1 file changed, 15 insertions(+), 16 deletions(-)
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index ebd351c840..7361d5c0d8 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -75,6 +75,28 @@ target_ulong riscv_calc_kernel_start_addr(RISCVHartArrayState *harts,
-     }
- }
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 43341c20b6..f37a9bebbf 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -257,6 +257,10 @@ static void spike_board_init(MachineState *machine)
+     memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
+                                 mask_rom);
  
-+static char *riscv_find_firmware(const char *firmware_filename)
-+{
-+    char *filename;
++    /* Create device tree */
++    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
++               riscv_is_32bit(&s->soc[0]));
 +
-+    filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, firmware_filename);
-+    if (filename == NULL) {
-+        if (!qtest_enabled()) {
-+            /*
-+             * We only ship OpenSBI binary bios images in the QEMU source.
-+             * For machines that use images other than the default bios,
-+             * running QEMU test will complain hence let's suppress the error
-+             * report for QEMU testing.
-+             */
-+            error_report("Unable to load the RISC-V firmware \"%s\"",
-+                         firmware_filename);
-+            exit(1);
+     /*
+      * Not like other RISC-V machines that use plain binary bios images,
+      * keeping ELF files here was intentional because BIN files don't work
+@@ -275,6 +279,17 @@ static void spike_board_init(MachineState *machine)
+         kernel_entry = riscv_load_kernel(machine->kernel_filename,
+                                          kernel_start_addr,
+                                          htif_symbol_callback);
++
++        if (machine->initrd_filename) {
++            hwaddr start;
++            hwaddr end = riscv_load_initrd(machine->initrd_filename,
++                                           machine->ram_size, kernel_entry,
++                                           &start);
++            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
++                                  "linux,initrd-start", start);
++            qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
++                                  end);
 +        }
-+    }
-+
-+    return filename;
-+}
-+
- target_ulong riscv_find_and_load_firmware(MachineState *machine,
-                                           const char *default_machine_firmware,
-                                           hwaddr firmware_load_addr,
-@@ -104,28 +126,6 @@ target_ulong riscv_find_and_load_firmware(MachineState *machine,
-     return firmware_end_addr;
- }
+     } else {
+        /*
+         * If dynamic firmware is used, it doesn't know where is the next mode
+@@ -283,22 +298,6 @@ static void spike_board_init(MachineState *machine)
+         kernel_entry = 0;
+     }
  
--char *riscv_find_firmware(const char *firmware_filename)
--{
--    char *filename;
+-    /* Create device tree */
+-    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
+-               riscv_is_32bit(&s->soc[0]));
 -
--    filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, firmware_filename);
--    if (filename == NULL) {
--        if (!qtest_enabled()) {
--            /*
--             * We only ship OpenSBI binary bios images in the QEMU source.
--             * For machines that use images other than the default bios,
--             * running QEMU test will complain hence let's suppress the error
--             * report for QEMU testing.
--             */
--            error_report("Unable to load the RISC-V firmware \"%s\"",
--                         firmware_filename);
--            exit(1);
--        }
+-    /* Load initrd */
+-    if (machine->kernel_filename && machine->initrd_filename) {
+-        hwaddr start;
+-        hwaddr end = riscv_load_initrd(machine->initrd_filename,
+-                                       machine->ram_size, kernel_entry,
+-                                       &start);
+-        qemu_fdt_setprop_cell(machine->fdt, "/chosen",
+-                              "linux,initrd-start", start);
+-        qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
+-                              end);
 -    }
 -
--    return filename;
--}
--
- target_ulong riscv_load_firmware(const char *firmware_filename,
-                                  hwaddr firmware_load_addr,
-                                  symbol_fn_t sym_cb)
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index 93e5f8760d..c03e4e74c5 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -37,7 +37,6 @@ target_ulong riscv_find_and_load_firmware(MachineState *machine,
-                                           const char *default_machine_firmware,
-                                           hwaddr firmware_load_addr,
-                                           symbol_fn_t sym_cb);
--char *riscv_find_firmware(const char *firmware_filename);
- target_ulong riscv_load_firmware(const char *firmware_filename,
-                                  hwaddr firmware_load_addr,
-                                  symbol_fn_t sym_cb);
+     /* Compute the fdt load address in dram */
+     fdt_load_addr = riscv_load_fdt(memmap[SPIKE_DRAM].base,
+                                    machine->ram_size, machine->fdt);
 -- 
 2.38.1
 
