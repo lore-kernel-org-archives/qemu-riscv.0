@@ -1,71 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p8L7s-0005Ni-Rc
-	for mharc-qemu-riscv@gnu.org; Thu, 22 Dec 2022 07:56:44 -0500
+	id 1p8MVg-0007lM-U1
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Dec 2022 09:25:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1p8L7q-0005N9-20; Thu, 22 Dec 2022 07:56:42 -0500
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p8MVa-0007kN-2a
+ for qemu-riscv@nongnu.org; Thu, 22 Dec 2022 09:25:20 -0500
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1p8L7o-00055n-6h; Thu, 22 Dec 2022 07:56:41 -0500
-Received: by mail-ej1-x62f.google.com with SMTP id t17so4741670eju.1;
- Thu, 22 Dec 2022 04:56:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vtnEIeUzciqTDpSYBpUyzbnmyUfiG+8RUPG3J2cUkQo=;
- b=ZeoZgdSV6C0T+qU/DwuNEASwysLVCOxcRBDJdESxcOLEcWoutFGHGsyJdI8YLKlZgB
- mR7tmPLfCjgtytrgjH7Yf4TROs/ns0vPnl0XXbfeu83Tf0wp6oq1momObA6NSDIYEHzU
- ErWKGf/p+IvYaO2FM+7ljhLb5QaBvJLlNt58q+gIBG9l67mOu82clc1BaB31Y1v2LxXv
- 41wbPUDAITC+ZyNVm2yMfxP3djv3J6W2o3bdV13IJ7GeU3RoFb/DqrqdELfRveEyrNyN
- LtgqWky4zHLuTQL3s8OeRtRREV3WePgiKbiV0Ms/2j7F6HhwH9q23LN3oCfnf/IZddBq
- FivQ==
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p8MVY-000687-5q
+ for qemu-riscv@nongnu.org; Thu, 22 Dec 2022 09:25:17 -0500
+Received: by mail-wm1-x334.google.com with SMTP id m19so1509084wms.5
+ for <qemu-riscv@nongnu.org>; Thu, 22 Dec 2022 06:25:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=IenfgQXRReZpGHZHQHXrcB/uJH9iXh0IVb93SrI1Wd0=;
+ b=b+AkD9YXtdmkHgfVSs14IvD3QUdRhrPb+qLyJ1aYmUFBGlelqIl1SIwfDn1C8fM6hH
+ BTF3bdhbf0wTRIcFJCmpSLpAUr8uLdjugbPIzX4biLiJmtvdLYAVUvIIAE9NC9vnDJQX
+ 35zvTXj/KzCCiUXo5iM+v8LCY9h+kgMjYnwSowPoZ4cHbUJv1bvXAyMcgfl+mwM/1nyQ
+ gb2z1Ltyfh40s5YfBO/8an4JArJgQzwM8B6KwGt+3Z0wmfC1gGBUbCOJi+ZyjD2AaCSM
+ bMn2W2J7Np4tE70UEHhP+Ec1a0eCigcwpZMIXrB9uzw7KkbgInWREdO598X33d0/w7H6
+ Qp9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vtnEIeUzciqTDpSYBpUyzbnmyUfiG+8RUPG3J2cUkQo=;
- b=B5CFENmV7YbJRWM5d7slnpfXT62Z6d4iTidKKZ1nMV05RXzmoDI5n2XqetmrjrVpLY
- vUgbqQBH6fWdDsJWL7+TtMT//PMW5I4Gt9PkhD8vnFKQXSiWlBKq7CUkFriOJRu5TpUM
- A+oM+mYSxx2BcZkejOYSRDPdXORa8i5K8mXObcaQ72aX/3c7jTx6aHvLr1wtkXtMnzW4
- Zbh/d5hZmTnDIXIgoNZ3FuEw/9rYq31fHJnJ2h2BPA87nFUvUvAYj7mWQvgHIJXpokrj
- 4r82QsFCPYL7OhvLWm38EWd6eARuf9oubJJdG64/68uXNJlBpHzTWikXKthF0Bj9G451
- WG7w==
-X-Gm-Message-State: AFqh2krLDK9IWQU42P1cfFrWvaEZr7aIrjp0NUzQX+yQ/Yj1ScSqg8df
- QZllXZGHwO33+XC7+6X0rgU17Z/sWHt4gzoNadA=
-X-Google-Smtp-Source: AMrXdXukThHewEdOIx/ox6i4ni9C4m3x6RVHEX1yMEHsq/yVmRhIr96+d9Y9O9lS1dsZy4lmSb1XdbCuU+2byO1sEco=
-X-Received: by 2002:a17:906:1945:b0:7c0:bb4c:e792 with SMTP id
- b5-20020a170906194500b007c0bb4ce792mr465261eje.618.1671713798351; Thu, 22 Dec
- 2022 04:56:38 -0800 (PST)
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=IenfgQXRReZpGHZHQHXrcB/uJH9iXh0IVb93SrI1Wd0=;
+ b=YjXivSvBZ8nmxAAIs2u6FNBOt8p5mcPNFpW+UCxogst+P3yKPqRpIhwBHbGvOmc1Mw
+ fXssv8Ik62XCRLMxGKG22cAkRElD3ZfcPGCDcEF9Gn+bFN3qrR1GBiIdnsXmKgy1SMC8
+ wKIjaJl0i/UyhcmE9ThXgbhPUAWI3atUfH/YDvXvMn6n71nDxHc084duJxVDVGBks7sS
+ PCmzpx4PYO9Wh2yDQ7vk+T80IQbWIvDSMKhyOucCPbZowgZVhHAZVdMc0OMbNwWwzb/3
+ aj8eQc1svcXlYhdzjViO9uml1lUPxGNHwjOa1YXYblgTRjMQYCwIBZAbdEwTYyDxwxWV
+ TK5w==
+X-Gm-Message-State: AFqh2kqbiIjKQW2MlIjvsnBcCbMMU0r3ill+2Ka/GJMTMJgr6WXTMnyG
+ WD3J7IgFbnjqP/xI5Wzv7oUOIg==
+X-Google-Smtp-Source: AMrXdXsltapmm4b+gfmgMdE3Z1mllA3WRrvRLRzDxVkVnFB1kuQOB4EU0oaoUkJxB/SM7qilUuMucA==
+X-Received: by 2002:a05:600c:3209:b0:3cf:5fd2:87a0 with SMTP id
+ r9-20020a05600c320900b003cf5fd287a0mr4572859wmp.40.1671719114263; 
+ Thu, 22 Dec 2022 06:25:14 -0800 (PST)
+Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
+ l6-20020a05600c4f0600b003d351a9db76sm6612866wmq.30.2022.12.22.06.25.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 22 Dec 2022 06:25:13 -0800 (PST)
+Message-ID: <35c460e1-8e4d-eb1a-c25c-71f1a6d7d094@linaro.org>
+Date: Thu, 22 Dec 2022 15:25:12 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.6.0
+Subject: Re: [PATCH 02/15] hw/riscv/spike: use 'fdt' from MachineState
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ Bin Meng <bin.meng@windriver.com>
 References: <20221221182300.307900-1-dbarboza@ventanamicro.com>
- <20221221182300.307900-2-dbarboza@ventanamicro.com>
- <CAEUhbmX03QVTCOyeMZy6_=RSOZUAz84_WDyTbQMUKJ0Dec2v2Q@mail.gmail.com>
- <c8c87014-0c50-1649-2889-fa54a6110c19@ventanamicro.com>
-In-Reply-To: <c8c87014-0c50-1649-2889-fa54a6110c19@ventanamicro.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 22 Dec 2022 20:56:27 +0800
-Message-ID: <CAEUhbmVPt2uN-=OGg6qu2HVAm1zc83hO3MpAbnQsBnTAOm1YYg@mail.gmail.com>
-Subject: Re: [PATCH 01/15] tests/avocado: add RISC-V opensbi boot test
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- Bin Meng <bin.meng@windriver.com>, Cleber Rosa <crosa@redhat.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Beraldo Leal <bleal@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ <20221221182300.307900-3-dbarboza@ventanamicro.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20221221182300.307900-3-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.148,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -80,140 +81,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2022 12:56:43 -0000
+X-List-Received-Date: Thu, 22 Dec 2022 14:25:20 -0000
 
-On Thu, Dec 22, 2022 at 6:47 PM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
->
->
-> On 12/22/22 07:24, Bin Meng wrote:
-> > On Thu, Dec 22, 2022 at 2:29 AM Daniel Henrique Barboza
-> > <dbarboza@ventanamicro.com> wrote:
-> >> This test is used to do a quick sanity check to ensure that we're able
-> >> to run the existing QEMU FW image.
-> >>
-> >> 'sifive_u', 'spike' and 'virt' riscv64 machines, and 'sifive_u' and
-> >> 'virt' 32 bit machines are able to run the default RISCV64_BIOS_BIN |
-> >> RISCV32_BIOS_BIN firmware with minimal options.
-> >>
-> >> Cc: Cleber Rosa <crosa@redhat.com>
-> >> Cc: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> >> Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>
-> >> Cc: Beraldo Leal <bleal@redhat.com>
-> >> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> >> ---
-> >>   tests/avocado/riscv_opensbi.py | 65 ++++++++++++++++++++++++++++++++=
-++
-> >>   1 file changed, 65 insertions(+)
-> >>   create mode 100644 tests/avocado/riscv_opensbi.py
-> >>
-> >> diff --git a/tests/avocado/riscv_opensbi.py b/tests/avocado/riscv_open=
-sbi.py
-> >> new file mode 100644
-> >> index 0000000000..abc99ced30
-> >> --- /dev/null
-> >> +++ b/tests/avocado/riscv_opensbi.py
-> >> @@ -0,0 +1,65 @@
-> >> +# opensbi boot test for RISC-V machines
-> >> +#
-> >> +# Copyright (c) 2022, Ventana Micro
-> >> +#
-> >> +# This work is licensed under the terms of the GNU GPL, version 2 or
-> >> +# later.  See the COPYING file in the top-level directory.
-> >> +
-> >> +from avocado_qemu import QemuSystemTest
-> >> +from avocado_qemu import wait_for_console_pattern
-> >> +
-> >> +class RiscvOpensbi(QemuSystemTest):
-> >> +    """
-> >> +    :avocado: tags=3Daccel:tcg
-> >> +    """
-> >> +    timeout =3D 5
-> >> +
-> >> +    def test_riscv64_virt(self):
-> >> +        """
-> >> +        :avocado: tags=3Darch:riscv64
-> >> +        :avocado: tags=3Dmachine:virt
-> >> +        """
-> >> +        self.vm.set_console()
-> >> +        self.vm.launch()
-> >> +        wait_for_console_pattern(self, 'Platform Name')
-> >> +        wait_for_console_pattern(self, 'Boot HART MEDELEG')
-> >> +
-> >> +    def test_riscv64_spike(self):
-> >> +        """
-> >> +        :avocado: tags=3Darch:riscv64
-> >> +        :avocado: tags=3Dmachine:spike
-> >> +        """
-> >> +        self.vm.set_console()
-> >> +        self.vm.launch()
-> >> +        wait_for_console_pattern(self, 'Platform Name')
-> >> +        wait_for_console_pattern(self, 'Boot HART MEDELEG')
-> >> +
-> >> +    def test_riscv64_sifive_u(self):
-> >> +        """
-> >> +        :avocado: tags=3Darch:riscv64
-> >> +        :avocado: tags=3Dmachine:sifive_u
-> >> +        """
-> >> +        self.vm.set_console()
-> >> +        self.vm.launch()
-> >> +        wait_for_console_pattern(self, 'Platform Name')
-> >> +        wait_for_console_pattern(self, 'Boot HART MEDELEG')
-> >> +
-> >> +    def test_riscv32_virt(self):
-> >> +        """
-> >> +        :avocado: tags=3Darch:riscv32
-> >> +        :avocado: tags=3Dmachine:virt
-> >> +        """
-> >> +        self.vm.set_console()
-> >> +        self.vm.launch()
-> >> +        wait_for_console_pattern(self, 'Platform Name')
-> >> +        wait_for_console_pattern(self, 'Boot HART MEDELEG')
-> > How about testing riscv32_spike too?
->
->
-> I didn't manage to make it work. This riscv64 spark command line boots op=
-ensbi:
->
->
-> $ ./qemu-system-riscv64 -nographic -display none -vga none -machine spike
->
-> OpenSBI v1.1
->     ____                    _____ ____ _____
->    / __ \                  / ____|  _ \_   _|
->   | |  | |_ __   ___ _ __ | (___ | |_) || |
->   | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
->   | |__| | |_) |  __/ | | |____) | |_) || |_
->    \____/| .__/ \___|_| |_|_____/|____/_____|
->          | |
->          |_|
->
-> (...)
->
-> The same command line doesn't boot riscv32 spark:
->
-> ./qemu-system-riscv32 -nographic -display none -vga none -machine spike
-> (--- hangs indefinitely ---)
->
-> I debugged it a bit and, as far as boot code goes, it goes all the way an=
-d loads the
-> opensbi 32bit binary.
->
-> After that I tried to found any command line example that boots spike wit=
-h riscv32
-> bit and didn't find any.  So I gave up digging it further because I becam=
-e unsure
-> about whether 32-bit spike works.
->
-> If someone can verify that yes, 32-bit spike is supposed to work, then I =
-believe it's
-> worth investigating why it's not the case ATM.
->
+On 21/12/22 19:22, Daniel Henrique Barboza wrote:
+> The MachineState object provides a 'fdt' pointer that is already being
+> used by other RISC-V machines, and it's also used by the 'dumpdtb' QMP
+> command.
+> 
+> Remove the 'fdt' pointer from SpikeState and use MachineState::fdt
+> instead.
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>   hw/riscv/spike.c         | 12 +++++-------
+>   include/hw/riscv/spike.h |  2 --
+>   2 files changed, 5 insertions(+), 9 deletions(-)
+> 
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index 13946acf0d..d96f013e2e 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -52,6 +52,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+>                          uint64_t mem_size, const char *cmdline, bool is_32_bit)
+>   {
+>       void *fdt;
+> +    int fdt_size;
+>       uint64_t addr, size;
+>       unsigned long clint_addr;
+>       int cpu, socket;
+> @@ -64,7 +65,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+>           "sifive,clint0", "riscv,clint0"
+>       };
+>   
+> -    fdt = s->fdt = create_device_tree(&s->fdt_size);
+> +    fdt = mc->fdt = create_device_tree(&fdt_size);
 
-+Anup who might know if QEMU spike 32-bit machine works with opensbi
-32-bit generic image.
+We use 'ms' for MachineState and 'mc' for MachineClass. I first got
+scared while looking at that patch that a class field was used. The
+variable is simply badly named. Possible future cleanup: s/mc/ms/.
 
-Regards,
-Bin
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+
 
