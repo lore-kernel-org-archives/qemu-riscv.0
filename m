@@ -1,74 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p8MZP-0001PN-Kh
-	for mharc-qemu-riscv@gnu.org; Thu, 22 Dec 2022 09:29:15 -0500
+	id 1p8Of9-0008Cf-EC
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Dec 2022 11:43:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p8MZJ-0001Jh-Mw
- for qemu-riscv@nongnu.org; Thu, 22 Dec 2022 09:29:10 -0500
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1p8Of8-0008CP-LT
+ for qemu-riscv@nongnu.org; Thu, 22 Dec 2022 11:43:18 -0500
+Received: from mail-ot1-x334.google.com ([2607:f8b0:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1p8MZI-0006iH-7D
- for qemu-riscv@nongnu.org; Thu, 22 Dec 2022 09:29:09 -0500
-Received: by mail-wr1-x42e.google.com with SMTP id y8so1789162wrl.13
- for <qemu-riscv@nongnu.org>; Thu, 22 Dec 2022 06:29:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1p8Of7-0006Dm-67
+ for qemu-riscv@nongnu.org; Thu, 22 Dec 2022 11:43:18 -0500
+Received: by mail-ot1-x334.google.com with SMTP id
+ k7-20020a056830168700b0067832816190so1391254otr.1
+ for <qemu-riscv@nongnu.org>; Thu, 22 Dec 2022 08:43:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=SO2XheO8YJfqLCfc91OBL3JWp1dxvx2bT04GTmFnMaE=;
- b=u+oPZ4dQShNmu5dmBhnTmP9KUOX5K5IERidPYjOHcy2bL6jP/wrZpHYa+62c8xcsIg
- 4JkvFcFWJ95uFsLerxwqrdm6uxnBqbexNhuxO8S8WT5TKyp+gzsMPNj8sAbZh/rZ0Trn
- 8g8hcfPs+PuFxu0Ozn1UFt9TOnBHksXfydHG2wESUjKoCrNDNqM0fT4nOEbXjREtRXBB
- gf7DSUMkWwf3FOe1jssY1O6+Uwfrxnc0/R5xWNd3HI+XC1BnrNHb+KBRCPDsPxKHGAUP
- dVmTN+9KLWuqtHwXD5CTkbvQq5poCiMPRq4Pjkqo9xn2/5M5gRj4GrbNzd5mhEWuAg4R
- UZYg==
+ bh=D7CeV4LQPIdS4asdff7A/4pMHgEB5AUJeW4I1/atzR4=;
+ b=hg+v8v9S0qnF4muH69EFjA6a1rGF1rsl8bFSzMLAdndr33ULLYbB6f/G27DU6MpthE
+ bBNoxLDffP/VqI6QaGsmDX1CaCDlqhdXIgnCX706UtBvweHDuF1JW0roRqeUGLfS6yQ6
+ E9IbSHd3oGP5vXKCNoa98+q530dSshZreJ3pjwNqXjHUE4ZMfqJrLo6SRjAL1QmBKF2Y
+ vxN5I45P8JkyCAppOYdqCQXryzsGpPp9ZuCx73t23RcsWRX5k86XLvblScOAz4scCgqS
+ j4muJgm6Hu+LpyRZBZNKeWDG8huXFwRri8VD4w+EucXtZBV+0WQ5ynIyIHG7b7MjEYMe
+ tXXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=SO2XheO8YJfqLCfc91OBL3JWp1dxvx2bT04GTmFnMaE=;
- b=Za12oEAGvTZDH+VJA5qm0gdQGskN+ENlrwStpO4G5azEFQ1QqkhTqfORzzZTtcrAdn
- DLoJnio++yxFl6eaL6fORXkhvDKeW7nxDjU7PY6bBEAdQhHnL1SKxrjbQy1Bdr12fMj6
- OLrDOYX6peqc4RzKRGfCC0xaOhLnTU6QHI6qm8F6qPZaQueMfFbOHOHvUxi52owFznP4
- nwcEj13QlWS1L+3bykjmoM3N2iH//cUtrYNb6H/6b5apN5vd23XYk7Uow4ScLyxQ92nL
- mi02Bt+c+UMWPWsMiyjkUjq3clAT0G4xs3ieEtK67QHLhaLJZkGirpzFHTXDscy7vtGe
- DpmA==
-X-Gm-Message-State: AFqh2kqcZBc8DjNqT7EZHjpCz/ZdWhZOd6qM1iIZjQEjSgrqPxiepn7e
- FTWaFrs7cNI4trujjj5tstNb/Q==
-X-Google-Smtp-Source: AMrXdXtIIt3QKwzOOSvNhm9872Fj45paxh4dIUtN+VNZtvsm4TFW7DOxzrUJO7E7k9YUCvAApE/jXA==
-X-Received: by 2002:adf:aa89:0:b0:248:2d6e:aa3c with SMTP id
- h9-20020adfaa89000000b002482d6eaa3cmr4290687wrc.58.1671719344865; 
- Thu, 22 Dec 2022 06:29:04 -0800 (PST)
-Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- u13-20020a5d468d000000b00241e4bff85asm654689wrq.100.2022.12.22.06.29.04
+ bh=D7CeV4LQPIdS4asdff7A/4pMHgEB5AUJeW4I1/atzR4=;
+ b=YP2z3c4O/yPejzYh8+J0sE21VliccsaE7GE7pXKoIa//BrGKCnFv5P+C/6ma1w312G
+ X0kVmt86BTnUZlDMm1MsdLnINnyxD66P8ZexzOPfP7BBNkQ9YTo0u75Q6uJPBNrlHEnp
+ hXGXOshFmH6qw2raJwGRkyereNK0hSIs4D9wHQeH3InB6y/aKEjSpRXW4l3hHux6M6NT
+ IljWOYMADpI2J5IxAwdMe/0VrTpkH0TK7fH9ELLNjGq3H+OwK5n8jwSjAdh23DFEplCb
+ 1TLI0siqkV1E4LGYTnqgwBcginLFNjXLFSEgEGDzLPtxohzQSqJadmSWVhzUHvSOi7nT
+ Ev4Q==
+X-Gm-Message-State: AFqh2kom2TmnvU8jnaF9Pnukr3aveM06OEjFX7YAu4oelWswhQFjTA7G
+ bGOwj9VkQNKqnOCIkZuG6EBMDQ==
+X-Google-Smtp-Source: AMrXdXs3A/lDeyUngFX8FmN0FRVg8ZcEwhIgU8BE1A6KO850tRLpXfCAyGjHeYQie5+KOG066QB8SQ==
+X-Received: by 2002:a9d:5510:0:b0:66e:64c8:2a3 with SMTP id
+ l16-20020a9d5510000000b0066e64c802a3mr3021541oth.38.1671727395797; 
+ Thu, 22 Dec 2022 08:43:15 -0800 (PST)
+Received: from [192.168.68.106] (201-43-103-101.dsl.telesp.net.br.
+ [201.43.103.101]) by smtp.gmail.com with ESMTPSA id
+ d12-20020a0568301b6c00b006391adb6034sm503189ote.72.2022.12.22.08.43.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 Dec 2022 06:29:04 -0800 (PST)
-Message-ID: <7eb28821-eb6b-a7a5-b29c-bdc081d89b28@linaro.org>
-Date: Thu, 22 Dec 2022 15:29:03 +0100
+ Thu, 22 Dec 2022 08:43:15 -0800 (PST)
+Message-ID: <0476f44e-f5ca-6262-6574-ae9d39d7ef02@ventanamicro.com>
+Date: Thu, 22 Dec 2022 13:43:11 -0300
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.6.0
-Subject: Re: [PATCH 12/15] hw/riscv/boot.c: make riscv_load_initrd() static
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.0
+Subject: Re: [PATCH 02/15] hw/riscv/spike: use 'fdt' from MachineState
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  Bin Meng <bin.meng@windriver.com>
 References: <20221221182300.307900-1-dbarboza@ventanamicro.com>
- <20221221182300.307900-13-dbarboza@ventanamicro.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20221221182300.307900-13-dbarboza@ventanamicro.com>
+ <20221221182300.307900-3-dbarboza@ventanamicro.com>
+ <35c460e1-8e4d-eb1a-c25c-71f1a6d7d094@linaro.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <35c460e1-8e4d-eb1a-c25c-71f1a6d7d094@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::334;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x334.google.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
 X-Spam_bar: ---
 X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.148,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,18 +88,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2022 14:29:10 -0000
+X-List-Received-Date: Thu, 22 Dec 2022 16:43:18 -0000
 
-On 21/12/22 19:22, Daniel Henrique Barboza wrote:
-> The only remaining caller is riscv_load_kernel() which belongs to the
-> same file.
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   hw/riscv/boot.c         | 76 ++++++++++++++++++++---------------------
->   include/hw/riscv/boot.h |  1 -
->   2 files changed, 38 insertions(+), 39 deletions(-)
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+
+On 12/22/22 11:25, Philippe Mathieu-Daudé wrote:
+> On 21/12/22 19:22, Daniel Henrique Barboza wrote:
+>> The MachineState object provides a 'fdt' pointer that is already being
+>> used by other RISC-V machines, and it's also used by the 'dumpdtb' QMP
+>> command.
+>>
+>> Remove the 'fdt' pointer from SpikeState and use MachineState::fdt
+>> instead.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   hw/riscv/spike.c         | 12 +++++-------
+>>   include/hw/riscv/spike.h |  2 --
+>>   2 files changed, 5 insertions(+), 9 deletions(-)
+>>
+>> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+>> index 13946acf0d..d96f013e2e 100644
+>> --- a/hw/riscv/spike.c
+>> +++ b/hw/riscv/spike.c
+>> @@ -52,6 +52,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+>>                          uint64_t mem_size, const char *cmdline, bool is_32_bit)
+>>   {
+>>       void *fdt;
+>> +    int fdt_size;
+>>       uint64_t addr, size;
+>>       unsigned long clint_addr;
+>>       int cpu, socket;
+>> @@ -64,7 +65,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+>>           "sifive,clint0", "riscv,clint0"
+>>       };
+>>   -    fdt = s->fdt = create_device_tree(&s->fdt_size);
+>> +    fdt = mc->fdt = create_device_tree(&fdt_size);
+>
+> We use 'ms' for MachineState and 'mc' for MachineClass. I first got
+> scared while looking at that patch that a class field was used. The
+> variable is simply badly named. Possible future cleanup: s/mc/ms/.
+
+Thanks for the ack Phil!
+
+
+And yeah, I think I'll drop a patch with your suggestion later on.
+
+
+Daniel
+
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>
 
 
