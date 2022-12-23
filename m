@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p8YUV-0004ub-65
-	for mharc-qemu-riscv@gnu.org; Thu, 22 Dec 2022 22:12:59 -0500
+	id 1p8YVA-0005Xy-Ke
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Dec 2022 22:13:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p8YUP-0004tu-94; Thu, 22 Dec 2022 22:12:53 -0500
-Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
+ id 1p8YV9-0005WS-3Q; Thu, 22 Dec 2022 22:13:39 -0500
+Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p8YUK-0006Pp-3G; Thu, 22 Dec 2022 22:12:49 -0500
-Received: by mail-vs1-xe35.google.com with SMTP id q14so2857188vsr.1;
- Thu, 22 Dec 2022 19:12:47 -0800 (PST)
+ id 1p8YV7-0007oY-Eb; Thu, 22 Dec 2022 22:13:38 -0500
+Received: by mail-vs1-xe2d.google.com with SMTP id k11so3488396vsr.4;
+ Thu, 22 Dec 2022 19:13:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BsyDDBQcJgUCyED0ZrXp6mx5E0o6xaXwgRS3sl6h3E4=;
- b=AOPpCiIToES1i06E56ElK5RFfMItcsm4BfqRwCsVW0lb3AGt80RpAyT2NnFHMYwZe7
- BXY8/5O48gMeKUsHKTrt55jvVS01PtvMCxZDu8+oFWqirVx0Zu7MglpKy6jGrR/1Oeyr
- h/qMzBkNhdt4//3k+ynQbpZclotRgo8j5Jb1uavGhzWWPRjCBdW9mx+RNtHjNXxQaumT
- YjgRBq+vepdkKahKuabRPStgQ927Kl1N/KAbzdobHalCvHH/TJe5ZbAsg4x0wjx2Mdqi
- kbXWUp9IwXZZ+fJ1hzQleWQvSzav/E/RmcNfIdwhmN3Mk3XrucfETpCLcsDJRcvVGnTa
- GyJA==
+ bh=LWuFGZ6ZvsWYaPluiF6ieS2aYuSHfr46g5GHMG2bXJ8=;
+ b=CVJZVmgt9ZUKkPs/VDKkIRtA5UIwQ2ucNGUqz2/qYm3hkLs9+e3aMzTyvikDeomK61
+ JiF1RhL3p6t7RbKoFcjVtkFtqAu9BADrVZahRjWxhLqcSy3xoU7ImNSzL7HdLWUVz9fz
+ Idx1dbC8+Yu8ErI98eaTLhWUtvFurhNkp5DYiQsj7qk8P8lnZzwz2GHJ1F/Iyv1loqlc
+ lxzQuB3DjNzfIYuyBSt/LMKbuljGeSdUpUjyijZp5cL/ZWetasbInUTpnP/qP0tsWNPv
+ Opsm6NL1doBKH/oQCPErfm6/EYqyq6l6Ly8g4US217MY7jKBuN+Xlc6k9tyt8e0VaJ4h
+ C/nA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BsyDDBQcJgUCyED0ZrXp6mx5E0o6xaXwgRS3sl6h3E4=;
- b=TOIeB/zf4+zyko4JbjUsmfKQ8Htv44BFGZFTO3AQMUorTXRkgcOzCCLdlvLIX2DTnX
- P+b3H+/BrsyxFz5QTJfVmIJrmfR6eQIRZubsRXcQPiMM8za0USVSCIaGlrgm482N9+0B
- T+CkXWCYXJdFPmZKvQnYOpIaL9SrCceWcns0TKjGC3UUGzFKyjRgz9ffF5WL2ixtR50d
- cHwDhDs3wFLikEVXrtSBF0ss4zoNg6qAsq2xEKaPHBefNEMZS6GjiSxEjEbAU5D55/90
- Nv9DFrN0f0KPzKmCS6IE613A1FAUuAZRhFOHdfqMWM0v1NKb20dUP0MbDOJJSoM7Hyui
- HqbA==
-X-Gm-Message-State: AFqh2ko5BQUKBU87/lvRCScHTVckVdb/Bs5qwxl7mfeTzcqRb4jNikTC
- cXU5MACdgbtMtyBTLhrGZ/pskDjTxQm+hS4SRSw=
-X-Google-Smtp-Source: AMrXdXsonYS+yVzOZ+dcjyePaZmaU2apy+QxR69wt4vYgJZ4FQISmYbaYQ9clq9u/PR3vtEbr4yRwHNdN+BYazBq7Yg=
-X-Received: by 2002:a05:6102:510e:b0:3b1:2b83:1861 with SMTP id
- bm14-20020a056102510e00b003b12b831861mr937897vsb.10.1671765166672; Thu, 22
- Dec 2022 19:12:46 -0800 (PST)
+ bh=LWuFGZ6ZvsWYaPluiF6ieS2aYuSHfr46g5GHMG2bXJ8=;
+ b=jVFTz7+OJxXqDSKt7K7bQGExs64MV4adlYICAY4CSfor2QGPNfJCEM1gronopj44yn
+ g3S+B/Zjw1zMefsx/xzUzy923lILzJZC8jmshRv80RQ/QDwfzIf7sKpON+jhB6sb7Oo4
+ w2XN7qsJrqnQBorKuzy1/9LmPdi/S7ScVGfdCb02a/dMbwZYhQ0J6ZIYMI1sle9gujyO
+ Q71C9JfF81OS8rjN2I/tAvm3D+sEhSr/8m3s/nEpelnhFNvpNyAOUkSJI9xBq6/DrG/Y
+ obtBam7/09tg2je9fdxIjfb/T3koAuYmC9mtrAopvCXxo2zX3iZ4sO1zwqlWaCOqf+R1
+ kXpg==
+X-Gm-Message-State: AFqh2kp+XjXK1ZLPXdFjYYa6Ew0als5iLBGoqdtf+OBUvFSsZcD5zPO/
+ y9uX39UUF5KquFLZTwc8VXJU3Mlihy+ekkQRn0dJ7/9WTb2Zpw==
+X-Google-Smtp-Source: AMrXdXsjSLWLMUY58EsY0EqxUQs0/kRuXkIdJa60tbZV1Qb3GqJBrXu6b8F+MmnfZUx/PDOkvWMF2eb4U+N1eagNg2s=
+X-Received: by 2002:a05:6102:105:b0:3b1:4aad:9c47 with SMTP id
+ z5-20020a056102010500b003b14aad9c47mr986151vsq.73.1671765215784; Thu, 22 Dec
+ 2022 19:13:35 -0800 (PST)
 MIME-Version: 1.0
 References: <20221221182300.307900-1-dbarboza@ventanamicro.com>
- <20221221182300.307900-4-dbarboza@ventanamicro.com>
-In-Reply-To: <20221221182300.307900-4-dbarboza@ventanamicro.com>
+ <20221221182300.307900-5-dbarboza@ventanamicro.com>
+In-Reply-To: <20221221182300.307900-5-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 23 Dec 2022 13:12:20 +1000
-Message-ID: <CAKmqyKO_S=KO4mTGbPzCZ+o_AKAmsJvSPCCPfbsmbcSmofzM9w@mail.gmail.com>
-Subject: Re: [PATCH 03/15] hw/riscv/sifive_u: use 'fdt' from MachineState
+Date: Fri, 23 Dec 2022 13:13:08 +1000
+Message-ID: <CAKmqyKMdQFefTHdtKRbTMih8OVq5kHkeYNsGW-iHJCSpkjBX8g@mail.gmail.com>
+Subject: Re: [PATCH 04/15] hw/riscv/boot.c: make riscv_find_firmware() static
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
+ Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,19 +73,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2022 03:12:54 -0000
+X-List-Received-Date: Fri, 23 Dec 2022 03:13:39 -0000
 
-On Thu, Dec 22, 2022 at 4:29 AM Daniel Henrique Barboza
+On Thu, Dec 22, 2022 at 4:26 AM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> The MachineState object provides a 'fdt' pointer that is already being
-> used by other RISC-V machines, and it's also used by the 'dumpdtb' QMP
-> command.
+> The only caller is riscv_find_and_load_firmware(), which is in the same
+> file.
 >
-> Remove the 'fdt' pointer from SiFiveUState and use MachineState::fdt
-> instead.
->
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -93,82 +88,84 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/sifive_u.c         | 15 ++++++---------
->  include/hw/riscv/sifive_u.h |  3 ---
->  2 files changed, 6 insertions(+), 12 deletions(-)
+>  hw/riscv/boot.c         | 44 ++++++++++++++++++++---------------------
+>  include/hw/riscv/boot.h |  1 -
+>  2 files changed, 22 insertions(+), 23 deletions(-)
 >
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index b40a4767e2..9cf66957ab 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -98,7 +98,7 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
->  {
->      MachineState *ms = MACHINE(qdev_get_machine());
->      void *fdt;
-> -    int cpu;
-> +    int cpu, fdt_size;
->      uint32_t *cells;
->      char *nodename;
->      uint32_t plic_phandle, prci_phandle, gpio_phandle, phandle = 1;
-> @@ -112,14 +112,14 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
->      };
->
->      if (ms->dtb) {
-> -        fdt = s->fdt = load_device_tree(ms->dtb, &s->fdt_size);
-> +        fdt = ms->fdt = load_device_tree(ms->dtb, &fdt_size);
->          if (!fdt) {
->              error_report("load_device_tree() failed");
->              exit(1);
->          }
->          goto update_bootargs;
->      } else {
-> -        fdt = s->fdt = create_device_tree(&s->fdt_size);
-> +        fdt = ms->fdt = create_device_tree(&fdt_size);
->          if (!fdt) {
->              error_report("create_device_tree() failed");
->              exit(1);
-> @@ -615,9 +615,9 @@ static void sifive_u_machine_init(MachineState *machine)
->              hwaddr end = riscv_load_initrd(machine->initrd_filename,
->                                             machine->ram_size, kernel_entry,
->                                             &start);
-> -            qemu_fdt_setprop_cell(s->fdt, "/chosen",
-> +            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
->                                    "linux,initrd-start", start);
-> -            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
-> +            qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
->                                    end);
->          }
->      } else {
-> @@ -630,14 +630,11 @@ static void sifive_u_machine_init(MachineState *machine)
->
->      /* Compute the fdt load address in dram */
->      fdt_load_addr = riscv_load_fdt(memmap[SIFIVE_U_DEV_DRAM].base,
-> -                                   machine->ram_size, s->fdt);
-> +                                   machine->ram_size, machine->fdt);
->      if (!riscv_is_32bit(&s->soc.u_cpus)) {
->          start_addr_hi32 = (uint64_t)start_addr >> 32;
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index ebd351c840..7361d5c0d8 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -75,6 +75,28 @@ target_ulong riscv_calc_kernel_start_addr(RISCVHartArrayState *harts,
 >      }
+>  }
 >
-> -    /* Set machine->fdt for 'dumpdtb' QMP/HMP command */
-> -    machine->fdt = s->fdt;
-> -
->      /* reset vector */
->      uint32_t reset_vec[12] = {
->          s->msel,                       /* MSEL pin state */
-> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> index e680d61ece..4a8828a30e 100644
-> --- a/include/hw/riscv/sifive_u.h
-> +++ b/include/hw/riscv/sifive_u.h
-> @@ -67,9 +67,6 @@ typedef struct SiFiveUState {
->      /*< public >*/
->      SiFiveUSoCState soc;
+> +static char *riscv_find_firmware(const char *firmware_filename)
+> +{
+> +    char *filename;
+> +
+> +    filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, firmware_filename);
+> +    if (filename == NULL) {
+> +        if (!qtest_enabled()) {
+> +            /*
+> +             * We only ship OpenSBI binary bios images in the QEMU source.
+> +             * For machines that use images other than the default bios,
+> +             * running QEMU test will complain hence let's suppress the error
+> +             * report for QEMU testing.
+> +             */
+> +            error_report("Unable to load the RISC-V firmware \"%s\"",
+> +                         firmware_filename);
+> +            exit(1);
+> +        }
+> +    }
+> +
+> +    return filename;
+> +}
+> +
+>  target_ulong riscv_find_and_load_firmware(MachineState *machine,
+>                                            const char *default_machine_firmware,
+>                                            hwaddr firmware_load_addr,
+> @@ -104,28 +126,6 @@ target_ulong riscv_find_and_load_firmware(MachineState *machine,
+>      return firmware_end_addr;
+>  }
 >
-> -    void *fdt;
-> -    int fdt_size;
+> -char *riscv_find_firmware(const char *firmware_filename)
+> -{
+> -    char *filename;
 > -
->      bool start_in_flash;
->      uint32_t msel;
->      uint32_t serial;
+> -    filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, firmware_filename);
+> -    if (filename == NULL) {
+> -        if (!qtest_enabled()) {
+> -            /*
+> -             * We only ship OpenSBI binary bios images in the QEMU source.
+> -             * For machines that use images other than the default bios,
+> -             * running QEMU test will complain hence let's suppress the error
+> -             * report for QEMU testing.
+> -             */
+> -            error_report("Unable to load the RISC-V firmware \"%s\"",
+> -                         firmware_filename);
+> -            exit(1);
+> -        }
+> -    }
+> -
+> -    return filename;
+> -}
+> -
+>  target_ulong riscv_load_firmware(const char *firmware_filename,
+>                                   hwaddr firmware_load_addr,
+>                                   symbol_fn_t sym_cb)
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index 93e5f8760d..c03e4e74c5 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -37,7 +37,6 @@ target_ulong riscv_find_and_load_firmware(MachineState *machine,
+>                                            const char *default_machine_firmware,
+>                                            hwaddr firmware_load_addr,
+>                                            symbol_fn_t sym_cb);
+> -char *riscv_find_firmware(const char *firmware_filename);
+>  target_ulong riscv_load_firmware(const char *firmware_filename,
+>                                   hwaddr firmware_load_addr,
+>                                   symbol_fn_t sym_cb);
 > --
 > 2.38.1
 >
