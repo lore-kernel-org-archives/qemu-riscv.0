@@ -1,59 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p8evJ-0003mz-TV
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Dec 2022 05:05:06 -0500
+	id 1p8f6A-0007WQ-7a
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Dec 2022 05:16:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1p8ev2-0003ho-2t; Fri, 23 Dec 2022 05:04:50 -0500
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ id 1p8f67-0007Vo-K6; Fri, 23 Dec 2022 05:16:15 -0500
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1p8euy-0003DF-HU; Fri, 23 Dec 2022 05:04:45 -0500
-Received: by mail-ej1-x630.google.com with SMTP id x22so10945346ejs.11;
- Fri, 23 Dec 2022 02:04:42 -0800 (PST)
+ id 1p8f65-0001VA-NL; Fri, 23 Dec 2022 05:16:15 -0500
+Received: by mail-ej1-x62b.google.com with SMTP id bj12so10971588ejb.13;
+ Fri, 23 Dec 2022 02:16:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=i1LJ/VTQXoiL6dak8tUDfJfgzTnYpLMX1F80eadLzaA=;
- b=DGVjjRTDrL89J7+M54RfP4m2cQmrLX/hH39Tq6xj6PadjV7xm+vcCxc40tYC01BDjn
- Mp8PXMDxCYkkRKKzxHToUjIphQKPQs+EM67OwAHiY54LaEFZfn3NttGBR8dtqvaisoqq
- ootOIO/nIsmNezi2dAXQZUJ/aoz9CkYzJnqxfWXiDZ9MJG2Pp++wNXxz9TiGZ7uZ7+/A
- BgJLvicp71KnfjFQYbcDr1B70NkdCsxjnk5hy7QruUkb6DVtU9bUofA2f8w9bz1O3kXM
- zVDNgtBk9AuAcDtuwWzYv2TUp0JiZUNxj6Vh2WOX88ni0yIrWfgkIwAxSXz8TrRLMOt7
- jh9A==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jNukg/4W4A+BB84b5h9dwHWkwu0FFGF1cB5dfNq5YaM=;
+ b=itEWeTXQ5qSlP2oEV+waKa3/+W6onVWvU7CLr1i2JHh/ESkfTgo1Z5pji9eCj840/P
+ IoSRUV2CyHOjW67SY4DpHyCS7YF8us1f25sHwqEan7PFLUWnPQrrqUGzkathZDnxr3ec
+ 7gffGDjrgXgLqrgTlpAzgY4nWARTNBGoYgD7BqWD74LczpmRs8wa26EeidqKwg2Xwvuu
+ s09hOkxwftgnL8+cz2mJCW8xBELR7scVtQlqhk4BSKXv66UaMLuieUzH8Tuoytkpmkc/
+ J7NpJh7jilV6S9Scgyu4mzt5qEsE6XtVU2sw1F09n4gI2Hy5B431JSdz2IXjsZpJ4nY8
+ IkjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=i1LJ/VTQXoiL6dak8tUDfJfgzTnYpLMX1F80eadLzaA=;
- b=Rtoe3AMuObN0o1XH5Y8n/X47IUSwCHWW32YT8qzWKE1CLJ/GeAR0ZNPAhy8LaYrCO6
- zIIZiyAmTJIu6ZwxXw5U00R2Gjs/fGb3MrbsVHbxEHmiR3cioVrFAKmlvDzf1DXwXlIm
- suWIaTiCoHPgwfHnmoGGoqoTlwwcvnWI3D331YOrNL1P9qtyMmR3ds8zOd+aTWXK4Ed9
- CGVMdn2Mue174CTWzoIW4DdS0+NR/EKVIufZM5tzDaI6VemVzcaD0l4M7kWqmhU7HaEC
- yA/HvPfmMN4pSdUIjovQUOzb6mOwRlTXlBBZjQMYG7qVvEnFE4YReBJIo8rdOAJ4S2uI
- mFrA==
-X-Gm-Message-State: AFqh2koKDbS3hRzpzdCgr5SZ8v4/tVAXqFIid/exRVfRTxWI4upYfjOF
- mxDX8HT59v3oEj5raeCg8zs+rE/KiaUbWdcYdJg=
-X-Google-Smtp-Source: AMrXdXusn33ubpeT3BBbiumPcSyOtrQB0fZub5S+0BIGqQ3xhssfwU97fZ32BTCGC9L/sqgRGoc7sw+MbFfoxFPgP4w=
-X-Received: by 2002:a17:907:7782:b0:7c0:e380:3d44 with SMTP id
- ky2-20020a170907778200b007c0e3803d44mr839052ejc.498.1671789881798; Fri, 23
- Dec 2022 02:04:41 -0800 (PST)
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jNukg/4W4A+BB84b5h9dwHWkwu0FFGF1cB5dfNq5YaM=;
+ b=AjzjWm5yPW4eDdcFpp/vSS61nBiagS4n36wGtdv7WlxlOeoOPbiE9e4laihyUDPQhn
+ SmGdBRy3LwMZBkkIW6QYB1lb16IQq89R2DbQaw6u4ISkRF4UulM0RZXP69FVuZp6ksJN
+ /pBhZIYvPmP+HQap+AAPoKYeWQMcsEtg+7uEQDlnQnc/Hcu5RkAlhkdQFhoCOVRNzOUO
+ mO/sor9CBzn8ODtuKoNTysJ4+Wh3GHDjElXH72SlqkjGA038WQGZxYOYq9xAv9fBlMPC
+ dXxfKz9BY5QevIRzImRju9OHi/B2qNOjJtNgW3EIm2xDwmPnAyvQWxExHUWSTzEZ+8op
+ AAwg==
+X-Gm-Message-State: AFqh2ko2S9lbtSTK04jkrlRUlRKzHFemwFEzl41lmUeiuj1L8RpOycZE
+ k+eyS0OlOmyMhA2Qoj2DxcNGeK1+juJrml51pYo=
+X-Google-Smtp-Source: AMrXdXslU7RJDh5CdbijLBvD3grZX4olmyXZT5vlZK3rAtUxeydRoImpwgX4NdaSAHscyMR9x9LttniZ6bsE7xbXh6s=
+X-Received: by 2002:a17:906:5798:b0:7c0:dcb3:718b with SMTP id
+ k24-20020a170906579800b007c0dcb3718bmr558360ejq.711.1671790571534; Fri, 23
+ Dec 2022 02:16:11 -0800 (PST)
 MIME-Version: 1.0
 References: <20221221182300.307900-1-dbarboza@ventanamicro.com>
- <20221221182300.307900-7-dbarboza@ventanamicro.com>
-In-Reply-To: <20221221182300.307900-7-dbarboza@ventanamicro.com>
+ <20221221182300.307900-8-dbarboza@ventanamicro.com>
+In-Reply-To: <20221221182300.307900-8-dbarboza@ventanamicro.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 23 Dec 2022 18:04:30 +0800
-Message-ID: <CAEUhbmWxGAb_AtjW74nW7sYjT7-j8NwqQxQpmShuaurSMOerzQ@mail.gmail.com>
-Subject: Re: [PATCH 06/15] hw/riscv/spike.c: load initrd right after
- riscv_load_kernel()
+Date: Fri, 23 Dec 2022 18:15:59 +0800
+Message-ID: <CAEUhbmUwvj5BV9CS3v-V+cLuLY-uOWSu9082tZv8q5DfM-i0OA@mail.gmail.com>
+Subject: Re: [PATCH 07/15] hw/riscv: write initrd 'chosen' FDT inside
+ riscv_load_initrd()
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- Bin Meng <bin.meng@windriver.com>
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x630.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -73,19 +75,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2022 10:05:03 -0000
+X-List-Received-Date: Fri, 23 Dec 2022 10:16:16 -0000
 
-On Thu, Dec 22, 2022 at 2:28 AM Daniel Henrique Barboza
+On Thu, Dec 22, 2022 at 2:24 AM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> This will make the code more in line with what the other boards are
-> doing. We'll also avoid an extra check to machine->kernel_filename since
-> we already checked that before executing riscv_load_kernel().
+> riscv_load_initrd() returns the initrd end addr while also writing a
+> 'start' var to mark the addr start. These informations are being used
+> just to write the initrd FDT node. Every existing caller of
+> riscv_load_initrd() is writing the FDT in the same manner.
 >
+> We can simplify things by writing the FDT inside riscv_load_initrd(),
+> sparing callers from having to manage start/end addrs to write the FDT
+> themselves.
+>
+> An 'if (fdt)' check is already inserted at the end of the function
+> because we'll end up using it later on with other boards that doesn=C2=B4=
+t
+
+doesn't
+
+> have a FDT.
+>
+> Cc: Palmer Dabbelt <palmer@dabbelt.com>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  hw/riscv/spike.c | 31 +++++++++++++++----------------
->  1 file changed, 15 insertions(+), 16 deletions(-)
+>  hw/riscv/boot.c            | 18 ++++++++++++------
+>  hw/riscv/microchip_pfsoc.c | 10 ++--------
+>  hw/riscv/sifive_u.c        | 10 ++--------
+>  hw/riscv/spike.c           | 10 ++--------
+>  hw/riscv/virt.c            | 10 ++--------
+>  include/hw/riscv/boot.h    |  4 ++--
+>  6 files changed, 22 insertions(+), 40 deletions(-)
 >
 
 Reviewed-by: Bin Meng <bmeng@tinylab.org>
