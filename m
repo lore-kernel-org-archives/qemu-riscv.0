@@ -1,79 +1,84 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p8hsf-0004mP-Q1
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Dec 2022 08:14:33 -0500
+	id 1p8mLT-00083A-Qt
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Dec 2022 13:00:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1p8hsd-0004lv-Av
- for qemu-riscv@nongnu.org; Fri, 23 Dec 2022 08:14:31 -0500
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1p8mLL-0007z5-IN
+ for qemu-riscv@nongnu.org; Fri, 23 Dec 2022 13:00:28 -0500
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1p8hsb-0003t5-9c
- for qemu-riscv@nongnu.org; Fri, 23 Dec 2022 08:14:30 -0500
-Received: by mail-pl1-x634.google.com with SMTP id m4so4961766pls.4
- for <qemu-riscv@nongnu.org>; Fri, 23 Dec 2022 05:14:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xZwpp7wORyVxvzjSJDxgFbwYtl9gEVY+3MSt3sfKY4Q=;
- b=Wmypqz1LgFRk2lFbR0H0o/1UGZ1Pu57a9xZDudJ9Mw0YSRzbfQxfq/ZXBVMaoOlfOQ
- HR8aSBDyLjG0k+mfD1EVz1yVqiHVwiKqm3w2aYeJQdhV9A5WytftD+moXz5pCpdHZ9cd
- NV1U6uikZa+OKr3DwUw+k4n39X9MgdIDiKssuH4SCuQdCAQPjtjeKFJrY82URZqprTXl
- HBy8QQUPV5WAuyGZqZYcKmrfxDCIZgcBezvlyqdUSrEXaRMZJU7SSK6pjLZg0Ume1vBC
- cAJgtoGkh8BgFonLm0vIE35PKh2K5Cl3e4vmQeeoul4t3snv3TmQr1knb2qE1G5IYYFF
- vjzQ==
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1p8mLI-0003Gt-Px
+ for qemu-riscv@nongnu.org; Fri, 23 Dec 2022 13:00:27 -0500
+Received: by mail-ej1-x635.google.com with SMTP id x22so13497872ejs.11
+ for <qemu-riscv@nongnu.org>; Fri, 23 Dec 2022 10:00:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=m/JkjjjoUmWCEdqir3TIkzQlV2iOrx71DPtwgEpvMMA=;
+ b=QugYm3rZkCl/P84rCX+6NOTJvc4SC5FcTKKQIDPoQA34UPSIbsA8GeabbcNUjy7OSv
+ OTafeZSra0YHmuJwNG8bEmOYSZjCKnOUPikL/mJfTo5vRP2lbO3krpW9NCQLjv7DGU5B
+ gjCS+8rtizvZao7Sz8K3F1MSOKGgKQypHG3P9g8fwk8JeIm16wQtLeS8vi3LXqKaW6FB
+ OXSok/tqePr8EWnHDUkIncZBOnCYyxCxeBpPrwREibua/vW+mzzOHlfTcOy/2rPLCBIT
+ jMAfAXaatxMKJKUoECYf+ucBiEGOt/qceVB94L1v3cwqaPvcQER9+pAUY1vMyoYi15iN
+ ZhQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xZwpp7wORyVxvzjSJDxgFbwYtl9gEVY+3MSt3sfKY4Q=;
- b=QFXNBJBGfgjZbhUPomhC0Zy1SaeeAwG3ODhYZYHBprLAUySmgl0qcdObwWpB6Gq1OB
- OlGZ+uL7+i8IVhQDu+rg7cSsu3M3SmN03mBkRG0UgQwY/siNc/mG/lnq6R/ajk7iDj84
- U1q96nqbWWWTdp9O/n5W6drtUNY4O2sSM/WjXGeTPZvJuwmoNt25caauv/TPEH05MbmX
- 6JxJZpSRpJ8KHfMyWKih4mvjFUc68kmKlJhhTF1QTynETEKPKLhxrU/au5h4mj85ZS5d
- A57tfH1IaDnYOPixdUasv5UoaYAg+7hSIgrP9+KXstvI9xwh1cwFDc/0uKZswoRdCebt
- ZxtA==
-X-Gm-Message-State: AFqh2ko/AN1+RUyHSKJIf3eOG89BnxpJlmJAHYrveGZoDoXWA+96iB2F
- QpmwpAIFKEgvUKYL2ygOwYVm0SKp1BKNhvy2Pt8eRg==
-X-Google-Smtp-Source: AMrXdXsiwh+KVpOgmoT5bkCaeI9i9LIwMXK9hSMrEPuuSrY3BwjIqCKwZRSzosaOORi/qVWeIBui0hXSQsDvEb65lHk=
-X-Received: by 2002:a17:90a:985:b0:219:dd30:8e8d with SMTP id
- 5-20020a17090a098500b00219dd308e8dmr1054411pjo.158.1671801266999; Fri, 23 Dec
- 2022 05:14:26 -0800 (PST)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=m/JkjjjoUmWCEdqir3TIkzQlV2iOrx71DPtwgEpvMMA=;
+ b=mknt+82pr8inEVQedxfOWpdbJ6eb/o0TAU7s4a7sin11mYjb9OUaE8AVre9TsLnGoP
+ nnVhWUGr3Q95YGp0G0hQtyg2YhWt7Qn3zRv7DDk7VCEiE1ncUwuaSvvWtOVj3VCrgc0B
+ zwg8IxgC7e+/SFCAe2QvKm8IqyVChGjqXcPFoOQhJqJzokpxocZTeQX7mWCDdVhV3ysk
+ OX6/FcfcTdumU4IV/2/po98vEhRsHahde5PohoDxKYOpMkwHGZijOIO256vqIJDycGTP
+ +GoRMx7h7Z+N8v1MIuhaqdxn4rMnd9hcbdziDcSmRlTiRqPDDaIdUbOJYQeyELdIBFP/
+ aKJw==
+X-Gm-Message-State: AFqh2kqC6Vfzq0REvLk39qrqGO6+Src2jvY8eHtQVlKnry3rJ9VVfOv5
+ VGE6WDXSVYBEXOm/CUOhIYNpd5DoAawCPoRc
+X-Google-Smtp-Source: AMrXdXv+JNioNydotqTYqYtlR0/3cS6vIcOKePd2aCwvtbze9VCLekM7PaiyaYxAlbRjZFv52zmxsQ==
+X-Received: by 2002:a17:906:30ca:b0:7c1:6091:e73 with SMTP id
+ b10-20020a17090630ca00b007c160910e73mr11251146ejb.1.1671818422799; 
+ Fri, 23 Dec 2022 10:00:22 -0800 (PST)
+Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
+ [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
+ p14-20020a056402154e00b0047d4685878esm1734937edx.51.2022.12.23.10.00.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 23 Dec 2022 10:00:22 -0800 (PST)
+From: Christoph Muellner <christoph.muellner@vrull.eu>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ =?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko.stuebner@vrull.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Nelson Chu <nelson@rivosinc.com>, Kito Cheng <kito.cheng@sifive.com>,
+ Cooper Qu <cooper.qu@linux.alibaba.com>,
+ Lifang Xia <lifang_xia@linux.alibaba.com>,
+ Yunhai Shang <yunhai@linux.alibaba.com>,
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
+Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
+Subject: [PATCH v2 02/15] RISC-V: Adding XTheadSync ISA extension
+Date: Fri, 23 Dec 2022 19:00:02 +0100
+Message-Id: <20221223180016.2068508-3-christoph.muellner@vrull.eu>
+X-Mailer: git-send-email 2.38.1
+In-Reply-To: <20221223180016.2068508-1-christoph.muellner@vrull.eu>
+References: <20221223180016.2068508-1-christoph.muellner@vrull.eu>
 MIME-Version: 1.0
-References: <20221108125703.1463577-1-apatel@ventanamicro.com>
- <20221108125703.1463577-3-apatel@ventanamicro.com>
- <CAKmqyKP+hc4N6Z2AqkQpCmF=oyTE_rf-XfSsTHChwcUWRE5gsg@mail.gmail.com>
- <CAK9=C2Uu1bCcZht+ydiazSmgnkD_hhLetXP4WcA92DypE4m9=A@mail.gmail.com>
- <CAKmqyKPw54F0uVy+7SjoY16o7RYyW6qwLhaYaKR7aNpP4Nz27Q@mail.gmail.com>
- <CAK9=C2V21JcgyUKub1JGVT0DEaeyzJ1GXQYcyaZy4Xv26F5fyA@mail.gmail.com>
- <CAKmqyKOc+xKEy1nhp6vCOtVHspfQ5WY7oE6wx5aGURhxQOrdqQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKOc+xKEy1nhp6vCOtVHspfQ5WY7oE6wx5aGURhxQOrdqQ@mail.gmail.com>
-From: Anup Patel <apatel@ventanamicro.com>
-Date: Fri, 23 Dec 2022 18:44:15 +0530
-Message-ID: <CAK9=C2VA-1c8J-t8Sqp-8+eW9-0xaALgbG8LORd06--Jb-gTAw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/5] target/riscv: Update VS timer whenever htimedelta
- changes
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atishp@atishpatra.org>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=apatel@ventanamicro.com; helo=mail-pl1-x634.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,156 +91,237 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2022 13:14:33 -0000
+X-List-Received-Date: Fri, 23 Dec 2022 18:00:30 -0000
 
-On Thu, Dec 15, 2022 at 8:55 AM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Mon, Dec 12, 2022 at 9:12 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> >
-> > On Mon, Dec 12, 2022 at 11:23 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > >
-> > > On Thu, Dec 8, 2022 at 6:41 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> > > >
-> > > > On Thu, Dec 8, 2022 at 9:00 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > > >
-> > > > > On Tue, Nov 8, 2022 at 11:07 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> > > > > >
-> > > > > > The htimedelta[h] CSR has impact on the VS timer comparison so we
-> > > > > > should call riscv_timer_write_timecmp() whenever htimedelta changes.
-> > > > > >
-> > > > > > Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp suppor")
-> > > > > > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-> > > > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > >
-> > > > > This patch breaks my Xvisor test. When running OpenSBI and Xvisor like this:
-> > > > >
-> > > > > qemu-system-riscv64 -machine virt \
-> > > > >     -m 1G -serial mon:stdio -serial null -nographic \
-> > > > >     -append 'vmm.console=uart@10000000 vmm.bootcmd="vfs mount initrd
-> > > > > /;vfs run /boot.xscript;vfs cat /system/banner.txt; guest kick guest0;
-> > > > > vserial bind guest0/uart0"' \
-> > > > >     -smp 4 -d guest_errors \
-> > > > >     -bios none \
-> > > > >     -device loader,file=./images/qemuriscv64/vmm.bin,addr=0x80200000 \
-> > > > >     -kernel ./images/qemuriscv64/fw_jump.elf \
-> > > > >     -initrd ./images/qemuriscv64/vmm-disk-linux.img -cpu rv64,h=true
-> > > > >
-> > > > > Running:
-> > > > >
-> > > > > Xvisor v0.3.0-129-gbc33f339 (Jan  1 1970 00:00:00)
-> > > > >
-> > > > > I see this failure:
-> > > > >
-> > > > > INIT: bootcmd:  guest kick guest0
-> > > > >
-> > > > > guest0: Kicked
-> > > > >
-> > > > > INIT: bootcmd:  vserial bind guest0/uart0
-> > > > >
-> > > > > [guest0/uart0] cpu_vcpu_stage2_map: guest_phys=0x000000003B9AC000
-> > > > > size=0x4096 map failed
-> > > > >
-> > > > > do_error: CPU3: VCPU=guest0/vcpu0 page fault failed (error -1)
-> > > > >
-> > > > >        zero=0x0000000000000000          ra=0x0000000080001B4E
-> > > > >
-> > > > >          sp=0x000000008001CF80          gp=0x0000000000000000
-> > > > >
-> > > > >          tp=0x0000000000000000          s0=0x000000008001CFB0
-> > > > >
-> > > > >          s1=0x0000000000000000          a0=0x0000000010001048
-> > > > >
-> > > > >          a1=0x0000000000000000          a2=0x0000000000989680
-> > > > >
-> > > > >          a3=0x000000003B9ACA00          a4=0x0000000000000048
-> > > > >
-> > > > >          a5=0x0000000000000000          a6=0x0000000000019000
-> > > > >
-> > > > >          a7=0x0000000000000000          s2=0x0000000000000000
-> > > > >
-> > > > >          s3=0x0000000000000000          s4=0x0000000000000000
-> > > > >
-> > > > >          s5=0x0000000000000000          s6=0x0000000000000000
-> > > > >
-> > > > >          s7=0x0000000000000000          s8=0x0000000000000000
-> > > > >
-> > > > >          s9=0x0000000000000000         s10=0x0000000000000000
-> > > > >
-> > > > >         s11=0x0000000000000000          t0=0x0000000000004000
-> > > > >
-> > > > >          t1=0x0000000000000100          t2=0x0000000000000000
-> > > > >
-> > > > >          t3=0x0000000000000000          t4=0x0000000000000000
-> > > > >
-> > > > >          t5=0x0000000000000000          t6=0x0000000000000000
-> > > > >
-> > > > >        sepc=0x0000000080001918     sstatus=0x0000000200004120
-> > > > >
-> > > > >     hstatus=0x00000002002001C0     sp_exec=0x0000000010A64000
-> > > > >
-> > > > >      scause=0x0000000000000017       stval=0x000000003B9ACAF8
-> > > > >
-> > > > >       htval=0x000000000EE6B2BE      htinst=0x0000000000D03021
-> > > > >
-> > > > > I have tried updating to a newer Xvisor release, but with that I don't
-> > > > > get any serial output.
-> > > > >
-> > > > > Can you help get the Xvisor tests back up and running?
-> > > >
-> > > > I tried the latest Xvisor-next (https://github.com/avpatel/xvisor-next)
-> > > > with your QEMU riscv-to-apply.next branch and it works fine (both
-> > > > with and without Sstc).
-> > >
-> > > Does it work with the latest release?
-> >
-> > Yes, the latest Xvisor-next repo works for QEMU v7.2.0-rc4 and
-> > your riscv-to-apply.next branch (commit 51bb9de2d188)
->
-> I can't get anything to work with this patch. I have dropped this and
-> the patches after this.
->
-> I'm building the latest Xvisor release with:
->
-> export CROSS_COMPILE=riscv64-linux-gnu-
-> ARCH=riscv make generic-64b-defconfig
-> make
->
-> and running it as above, yet nothing. What am I missing here?
+From: Christoph Müllner <christoph.muellner@vrull.eu>
 
-I tried multiple times with the latest Xvisor on different machines but
-still can't reproduce the issue you are seeing.
+This patch adds support for the XTheadSync ISA extension.
+The patch uses the T-Head specific decoder and translation.
 
-We generally provide pre-built binaries with every Xvisor release
-so I will share with you pre-built binaries of the upcoming Xvisor-0.3.2
-release. Maybe that would help you ?
+The implementation introduces a helper to execute synchronization tasks:
+helper_tlb_flush_all() performs a synchronized TLB flush on all CPUs.
 
-Regards,
-Anup
+Changes in v2:
+- Add ISA_EXT_DATA_ENTRY()
+- Use helper to synchronize CPUs and perform TLB flushes
+- Change implemenation to follow latest spec update
+- Use single decoder for XThead extensions
 
->
-> Alistair
->
-> >
-> > Regards,
-> > Anup
-> >
-> > >
-> > > Alistair
-> > >
-> > > >
-> > > > Here's the QEMU command which I use:
-> > > >
-> > > > qemu-system-riscv64 -M virt -m 512M -nographic \
-> > > > -bios opensbi/build/platform/generic/firmware/fw_jump.bin \
-> > > > -kernel ../xvisor-next/build/vmm.bin \
-> > > > -initrd rbd_v64.img \
-> > > > -append "vmm.bootcmd=\"vfs mount initrd /;vfs run /boot.xscript;vfs
-> > > > cat /system/banner.txt\"" \
-> > > > -smp 4
-> > > >
-> > > > Also, I will be releasing Xvisor-0.3.2 by the end of Dec 2022 so I
-> > > > suggest using this upcoming release in your test.
-> > > >
-> > > > Regards,
-> > > > Anup
+Co-developed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+---
+ target/riscv/cpu.c                         |  2 +
+ target/riscv/cpu.h                         |  1 +
+ target/riscv/helper.h                      |  1 +
+ target/riscv/insn_trans/trans_xthead.c.inc | 86 ++++++++++++++++++++++
+ target/riscv/op_helper.c                   |  6 ++
+ target/riscv/translate.c                   |  2 +-
+ target/riscv/xthead.decode                 |  9 +++
+ 7 files changed, 106 insertions(+), 1 deletion(-)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index a90b82c5c5..a848836d2e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -109,6 +109,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0, ext_svnapot),
+     ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt),
+     ISA_EXT_DATA_ENTRY(xtheadcmo, true, PRIV_VERSION_1_11_0, ext_xtheadcmo),
++    ISA_EXT_DATA_ENTRY(xtheadsync, true, PRIV_VERSION_1_11_0, ext_xtheadsync),
+     ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_XVentanaCondOps),
+ };
+ 
+@@ -1062,6 +1063,7 @@ static Property riscv_cpu_extensions[] = {
+ 
+     /* Vendor-specific custom extensions */
+     DEFINE_PROP_BOOL("xtheadcmo", RISCVCPU, cfg.ext_xtheadcmo, false),
++    DEFINE_PROP_BOOL("xtheadsync", RISCVCPU, cfg.ext_xtheadsync, false),
+     DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
+ 
+     /* These are experimental so mark with 'x-' */
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index ad1c19f870..4d3da2acfa 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -466,6 +466,7 @@ struct RISCVCPUConfig {
+ 
+     /* Vendor-specific custom extensions */
+     bool ext_xtheadcmo;
++    bool ext_xtheadsync;
+     bool ext_XVentanaCondOps;
+ 
+     uint8_t pmu_num;
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index a03014fe67..ecfb8c280f 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -109,6 +109,7 @@ DEF_HELPER_1(sret, tl, env)
+ DEF_HELPER_1(mret, tl, env)
+ DEF_HELPER_1(wfi, void, env)
+ DEF_HELPER_1(tlb_flush, void, env)
++DEF_HELPER_1(tlb_flush_all, void, env)
+ #endif
+ 
+ /* Hypervisor functions */
+diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
+index 00e75c7dca..6009d61c81 100644
+--- a/target/riscv/insn_trans/trans_xthead.c.inc
++++ b/target/riscv/insn_trans/trans_xthead.c.inc
+@@ -22,6 +22,12 @@
+     }                                            \
+ } while (0)
+ 
++#define REQUIRE_XTHEADSYNC(ctx) do {             \
++    if (!ctx->cfg_ptr->ext_xtheadsync) {         \
++        return false;                            \
++    }                                            \
++} while (0)
++
+ /* XTheadCmo */
+ 
+ static inline int priv_level(DisasContext *ctx)
+@@ -87,3 +93,83 @@ NOP_PRIVCHECK(th_icache_iva, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHSU)
+ NOP_PRIVCHECK(th_l2cache_call, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+ NOP_PRIVCHECK(th_l2cache_ciall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+ NOP_PRIVCHECK(th_l2cache_iall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
++
++/* XTheadSync */
++
++static bool trans_th_sfence_vmas(DisasContext *ctx, arg_th_sfence_vmas *a)
++{
++    (void) a;
++    REQUIRE_XTHEADSYNC(ctx);
++
++#ifndef CONFIG_USER_ONLY
++    REQUIRE_PRIV_MHS(ctx);
++    decode_save_opc(ctx);
++    gen_helper_tlb_flush_all(cpu_env);
++    return true;
++#else
++    return false;
++#endif
++}
++
++#ifndef CONFIG_USER_ONLY
++static void gen_th_sync_local(DisasContext *ctx)
++{
++    /*
++     * Emulate out-of-order barriers with pipeline flush
++     * by exiting the translation block.
++     */
++    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
++    tcg_gen_exit_tb(NULL, 0);
++    ctx->base.is_jmp = DISAS_NORETURN;
++}
++#endif
++
++static bool trans_th_sync(DisasContext *ctx, arg_th_sync *a)
++{
++    (void) a;
++    REQUIRE_XTHEADSYNC(ctx);
++
++#ifndef CONFIG_USER_ONLY
++    REQUIRE_PRIV_MHSU(ctx);
++
++    /*
++     * th.sync is an out-of-order barrier.
++     */
++    gen_th_sync_local(ctx);
++
++    return true;
++#else
++    return false;
++#endif
++}
++
++static bool trans_th_sync_i(DisasContext *ctx, arg_th_sync_i *a)
++{
++    (void) a;
++    REQUIRE_XTHEADSYNC(ctx);
++
++#ifndef CONFIG_USER_ONLY
++    REQUIRE_PRIV_MHSU(ctx);
++
++    /*
++     * th.sync.i is th.sync plus pipeline flush.
++     */
++    gen_th_sync_local(ctx);
++
++    return true;
++#else
++    return false;
++#endif
++}
++
++static bool trans_th_sync_is(DisasContext *ctx, arg_th_sync_is *a)
++{
++    /* This instruction has the same behaviour like th.sync.i. */
++    return trans_th_sync_i(ctx, a);
++}
++
++static bool trans_th_sync_s(DisasContext *ctx, arg_th_sync_s *a)
++{
++    /* This instruction has the same behaviour like th.sync. */
++    return trans_th_sync(ctx, a);
++}
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 09f1f5185d..9e3c3f6bf1 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -260,6 +260,12 @@ void helper_tlb_flush(CPURISCVState *env)
+     }
+ }
+ 
++void helper_tlb_flush_all(CPURISCVState *env)
++{
++    CPUState *cs = env_cpu(env);
++    tlb_flush_all_cpus_synced(cs);
++}
++
+ void helper_hyp_tlb_flush(CPURISCVState *env)
+ {
+     CPUState *cs = env_cpu(env);
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 14d9116975..c40617662a 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -127,7 +127,7 @@ static bool always_true_p(DisasContext *ctx  __attribute__((__unused__)))
+ 
+ static bool has_xthead_p(DisasContext *ctx  __attribute__((__unused__)))
+ {
+-    return ctx->cfg_ptr->ext_xtheadcmo;
++    return ctx->cfg_ptr->ext_xtheadcmo || ctx->cfg_ptr->ext_xtheadsync;
+ }
+ 
+ #define MATERIALISE_EXT_PREDICATE(ext)  \
+diff --git a/target/riscv/xthead.decode b/target/riscv/xthead.decode
+index 30533a66f5..1d86f3a012 100644
+--- a/target/riscv/xthead.decode
++++ b/target/riscv/xthead.decode
+@@ -10,9 +10,11 @@
+ 
+ # Fields:
+ %rs1       15:5
++%rs2       20:5
+ 
+ # Formats
+ @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
++@rs2_s      ....... ..... ..... ... ..... .......   %rs2 %rs1
+ 
+ # XTheadCmo
+ th_dcache_call   0000000 00001 00000 000 00000 0001011
+@@ -36,3 +38,10 @@ th_icache_iva    0000001 10000 ..... 000 00000 0001011 @sfence_vm
+ th_l2cache_call  0000000 10101 00000 000 00000 0001011
+ th_l2cache_ciall 0000000 10111 00000 000 00000 0001011
+ th_l2cache_iall  0000000 10110 00000 000 00000 0001011
++
++# XTheadSync
++th_sfence_vmas   0000010 ..... ..... 000 00000 0001011 @rs2_s
++th_sync          0000000 11000 00000 000 00000 0001011
++th_sync_i        0000000 11010 00000 000 00000 0001011
++th_sync_is       0000000 11011 00000 000 00000 0001011
++th_sync_s        0000000 11001 00000 000 00000 0001011
+-- 
+2.38.1
+
 
