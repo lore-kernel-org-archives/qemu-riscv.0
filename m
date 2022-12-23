@@ -1,77 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p8mLm-0008EM-MS
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Dec 2022 13:00:54 -0500
+	id 1p8rfV-00014r-DZ
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Dec 2022 18:41:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1p8mLZ-000855-TA
- for qemu-riscv@nongnu.org; Fri, 23 Dec 2022 13:00:42 -0500
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1p8rfR-00014B-82
+ for qemu-riscv@nongnu.org; Fri, 23 Dec 2022 18:41:33 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1p8mLX-0003OT-LO
- for qemu-riscv@nongnu.org; Fri, 23 Dec 2022 13:00:41 -0500
-Received: by mail-ed1-x533.google.com with SMTP id r26so2787221edc.5
- for <qemu-riscv@nongnu.org>; Fri, 23 Dec 2022 10:00:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1p8rfO-0000As-2A
+ for qemu-riscv@nongnu.org; Fri, 23 Dec 2022 18:41:32 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id bs20so3639019wrb.3
+ for <qemu-riscv@nongnu.org>; Fri, 23 Dec 2022 15:41:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LI/n4u5LUhjp6De0boykaSc6l5EIrMwbdsuLyGbuI4c=;
- b=jkDRWmGfjbRCeMzkzSuhuqfD2i0hv6iOZiznnfHdTrvjtGeC0awCAEELb5/+9cXSbn
- 6XFx6g35DveQHyeCIftsk9aiyRBv8ok0V8Zxlzhsb4CnQOgNhsSOoIvdbQKTc4eJVWZY
- NydVAaco5+31DELNjbAEzGfR6iCeP+yW38XU9mIUd6OUJuk2McPcW58FlliWBg6+h4kx
- mA4f4ILQmspYGwmXBTH7T8rj5Gz6qJSFONLUBIiCdS9l+xX510//yGfBh0iytt/rtuTE
- eWH6ZvOqCFK8K9FYnODg/Lf1qCm+3wPL2hhRXQ6w5MW7qR+IMtNoN3BLyjjgN5FyYPTN
- p0uQ==
+ bh=5gpahDuJWUWdaHB7Nl9lRsGkTTBRbFH14rQ90vY17Ws=;
+ b=leq/XOSsqU3H3pWFPfCLChVmN9OPPKvfNtJG8JIDYYGGcaDOueZ56Gh4uB51WdW87o
+ rjTJVLa4eQM8evhgL1wv0brgJKNlA6riit3qB34PB/iUvjJXFQ+XILoPhLu7K4TZuXT4
+ eCMUogTdRYCI46Ew6Nz4INVRW/N4UM0Xbxg+1YszZICgjoBMwhWzAxVOS/x+9GdpguI4
+ jk6QNYPQyMmqM5R45W4nvxpiM+n3EcxtO8zardKytTkiO39HpxhDXaGZ3/dd9jRD2E9X
+ KdEYLWAuytLCaV2LEF4mpoxrJCTkp9FLAh7uX0MfIARfzqRr1APyGgK8iU1ou/jD6dLX
+ PkGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LI/n4u5LUhjp6De0boykaSc6l5EIrMwbdsuLyGbuI4c=;
- b=3sBNylMtCFx3l/9HlUUr7iV9C0BhGKlLhsW63OBXI0voQFOIGj2DndwmHBzi7XJYkB
- He/y8Xgpk0j985My5f2YUcGd++lB+ocnwLJwb+GO0BT0kVZscuGNxf3i2xBPTr0o4+4d
- W0i3OiE5h1qdAjGlBVu44/8W+9sYPjf2gE+H/p25VtfEK5IkepP4/e8gdRBmZ+QlKA3Y
- RkZEy6ouZP6J5ikpwOWfmJvEs3/O5WdoiLgR6vVLProV5dWIEcx9rg/GZOMhFFP2USMr
- SlipOOzys8JJvB/ow9x81PL0PU4dVIMHt5Le/f/cub2p9VoJ/m02hhedjcyVO3JaoGdh
- cBUw==
-X-Gm-Message-State: AFqh2koZ7E7dCTy2N6S87LFYvSZ/zwBOc2lKr76ZIJgAvM38aghpO+yR
- 86oh2+eso1d7M891r6akVIyMinZDYRnW9YUW
-X-Google-Smtp-Source: AMrXdXv94nltIRWAmhWM3Ju+D75lddwACNXtD9MLXEctcg8c7OecdXS4KZriGlLxAZLpLNKe8YQ7PA==
-X-Received: by 2002:a05:6402:380d:b0:47e:eaae:9a5b with SMTP id
- es13-20020a056402380d00b0047eeaae9a5bmr6639557edb.42.1671818437908; 
- Fri, 23 Dec 2022 10:00:37 -0800 (PST)
-Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
- [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- p14-20020a056402154e00b0047d4685878esm1734937edx.51.2022.12.23.10.00.36
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=5gpahDuJWUWdaHB7Nl9lRsGkTTBRbFH14rQ90vY17Ws=;
+ b=bOLouI5rCsxeJ4Tre8TX5Fg0qxbLvN4IdAHEoBNVBQXD0Bm2reN2eAn87JH2M8CrNc
+ uXcENViVLM2vcb4MrQdy1Oah47aDJbG2qDS1hj93KfbPWmTEZJxNCypy8RDDY8z/tjJ2
+ nNexBPtwA0z+Vo6jD3BsXAgukSh2z/XRu8bcIK/KrQtvemrfzeeV+tGFAHieZOhkn8fC
+ q5VdiPrjRvqvfGYl9hHMYoXeDQ6Pkh8nRFZHYvi0+3VdzpkRfFR4kjbvB6pBfkqSt9Ub
+ 6GLXZoBKr89mIvRzszqrWsryEuTRisH3MwnDDfJRy6kE8F6wMl606Q2SnY0TrQojN/FA
+ EtfQ==
+X-Gm-Message-State: AFqh2kqIXv3CEdSRiidScq7yniC9drK9UKpk6m4u/EqCEjdHjeudeKW6
+ 8WPsvc39zIIYvbgAzQkFtvVXxQ==
+X-Google-Smtp-Source: AMrXdXsWPKlA8uq/kEblFcIK2UwQ4uD5wsx56+qqkzEYhjxfD6w5PTOmg6o/0QflIrYbN3R0GSNfcw==
+X-Received: by 2002:a5d:4b03:0:b0:254:1039:a2b5 with SMTP id
+ v3-20020a5d4b03000000b002541039a2b5mr7044350wrq.54.1671838887863; 
+ Fri, 23 Dec 2022 15:41:27 -0800 (PST)
+Received: from zen.linaroharston ([185.81.254.11])
+ by smtp.gmail.com with ESMTPSA id
+ c4-20020adfe704000000b00241b5af8697sm4172574wrm.85.2022.12.23.15.41.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Dec 2022 10:00:37 -0800 (PST)
-From: Christoph Muellner <christoph.muellner@vrull.eu>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- =?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko.stuebner@vrull.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Nelson Chu <nelson@rivosinc.com>, Kito Cheng <kito.cheng@sifive.com>,
- Cooper Qu <cooper.qu@linux.alibaba.com>,
- Lifang Xia <lifang_xia@linux.alibaba.com>,
- Yunhai Shang <yunhai@linux.alibaba.com>,
- Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
-Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Subject: [PATCH v2 13/15] RISC-V: Add initial support for T-Head C906
-Date: Fri, 23 Dec 2022 19:00:13 +0100
-Message-Id: <20221223180016.2068508-14-christoph.muellner@vrull.eu>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20221223180016.2068508-1-christoph.muellner@vrull.eu>
-References: <20221223180016.2068508-1-christoph.muellner@vrull.eu>
+ Fri, 23 Dec 2022 15:41:27 -0800 (PST)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 959141FFB7;
+ Fri, 23 Dec 2022 23:41:26 +0000 (GMT)
+References: <20221222120813.727830-1-armbru@redhat.com>
+ <20221222120813.727830-5-armbru@redhat.com>
+User-agent: mu4e 1.9.7; emacs 29.0.60
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org, mst@redhat.com, imammedo@redhat.com,
+ ani@anisinha.ca, peter.maydell@linaro.org, laurent@vivier.eu,
+ edgar.iglesias@gmail.com, Alistair.Francis@wdc.com,
+ bin.meng@windriver.com, palmer@dabbelt.com, marcel.apfelbaum@gmail.com,
+ yangxiaojuan@loongson.cn, gaosong@loongson.cn,
+ richard.henderson@linaro.org, deller@gmx.de, jasowang@redhat.com,
+ vikram.garhwal@amd.com, francisco.iglesias@amd.com, clg@kaod.org,
+ kraxel@redhat.com, marcandre.lureau@redhat.com, riku.voipio@iki.fi,
+ qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, crwulff@gmail.com,
+ marex@denx.de, Bernhard Beschow <shentey@gmail.com>, qemu-arm@nongnu.org
+Subject: Re: [PATCH v2 4/4] docs/devel: Rules on #include in headers
+Date: Fri, 23 Dec 2022 23:41:08 +0000
+In-reply-to: <20221222120813.727830-5-armbru@redhat.com>
+Message-ID: <87cz89y9g9.fsf@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ed1-x533.google.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -91,111 +93,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2022 18:00:43 -0000
+X-List-Received-Date: Fri, 23 Dec 2022 23:41:34 -0000
 
-From: Christoph Müllner <christoph.muellner@vrull.eu>
 
-This patch adds the T-Head C906 to the list of known CPUs.
-Selecting this CPUs will automatically enable the available
-ISA extensions of the CPUs (incl. vendor extensions).
+Markus Armbruster <armbru@redhat.com> writes:
 
-Co-developed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+> Rules for headers were proposed a long time ago, and generally liked:
+>
+>     Message-ID: <87h9g8j57d.fsf@blackfin.pond.sub.org>
+>     https://lists.nongnu.org/archive/html/qemu-devel/2016-03/msg03345.html
+>
+> Wortk them into docs/devel/style.rst.
 
-Changes in v2:
-- Drop C910 as it does not differ from C906
-- Set priv version to 1.11 (new fmin/fmax behaviour)
+nit: spelling Work
 
-Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
----
- target/riscv/cpu.c          | 31 +++++++++++++++++++++++++++++++
- target/riscv/cpu.h          |  2 ++
- target/riscv/cpu_vendorid.h |  6 ++++++
- 3 files changed, 39 insertions(+)
- create mode 100644 target/riscv/cpu_vendorid.h
+>
+> Suggested-by: Bernhard Beschow <shentey@gmail.com>
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a38127365e..d3d8587710 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -279,6 +279,36 @@ static void rv64_sifive_e_cpu_init(Object *obj)
-     cpu->cfg.mmu = false;
- }
- 
-+static void rv64_thead_c906_cpu_init(Object *obj)
-+{
-+    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+
-+    set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-+    set_priv_version(env, PRIV_VERSION_1_11_0);
-+
-+    cpu->cfg.ext_g = true;
-+    cpu->cfg.ext_c = true;
-+    cpu->cfg.ext_u = true;
-+    cpu->cfg.ext_s = true;
-+    cpu->cfg.ext_icsr = true;
-+    cpu->cfg.ext_zfh = true;
-+    cpu->cfg.mmu = true;
-+    cpu->cfg.ext_xtheadba = true;
-+    cpu->cfg.ext_xtheadbb = true;
-+    cpu->cfg.ext_xtheadbs = true;
-+    cpu->cfg.ext_xtheadcmo = true;
-+    cpu->cfg.ext_xtheadcondmov = true;
-+    cpu->cfg.ext_xtheadfmemidx = true;
-+    cpu->cfg.ext_xtheadmac = true;
-+    cpu->cfg.ext_xtheadmemidx = true;
-+    cpu->cfg.ext_xtheadmempair = true;
-+    cpu->cfg.ext_xtheadsync = true;
-+    cpu->cfg.ext_xtheadxmae = true;
-+
-+    cpu->cfg.mvendorid = THEAD_VENDOR_ID;
-+}
-+
- static void rv128_base_cpu_init(Object *obj)
- {
-     if (qemu_tcg_mttcg_enabled()) {
-@@ -1311,6 +1341,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_THEAD_C906,       rv64_thead_c906_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE128,          rv128_base_cpu_init),
- #endif
- };
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 897962f107..28184bbe40 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -27,6 +27,7 @@
- #include "qom/object.h"
- #include "qemu/int128.h"
- #include "cpu_bits.h"
-+#include "cpu_vendorid.h"
- 
- #define TCG_GUEST_DEFAULT_MO 0
- 
-@@ -53,6 +54,7 @@
- #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
- #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
- #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
-+#define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
- #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
- 
- #if defined(TARGET_RISCV32)
-diff --git a/target/riscv/cpu_vendorid.h b/target/riscv/cpu_vendorid.h
-new file mode 100644
-index 0000000000..a5aa249bc9
---- /dev/null
-+++ b/target/riscv/cpu_vendorid.h
-@@ -0,0 +1,6 @@
-+#ifndef TARGET_RISCV_CPU_VENDORID_H
-+#define TARGET_RISCV_CPU_VENDORID_H
-+
-+#define THEAD_VENDOR_ID         0x5b7
-+
-+#endif /*  TARGET_RISCV_CPU_VENDORID_H */
--- 
-2.38.1
+Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
+> ---
+>  docs/devel/style.rst | 7 +++++++
+>  1 file changed, 7 insertions(+)
+>
+> diff --git a/docs/devel/style.rst b/docs/devel/style.rst
+> index 7ddd42b6c2..68aa776930 100644
+> --- a/docs/devel/style.rst
+> +++ b/docs/devel/style.rst
+> @@ -293,6 +293,13 @@ that QEMU depends on.
+>  Do not include "qemu/osdep.h" from header files since the .c file will h=
+ave
+>  already included it.
+>=20=20
+> +Headers should normally include everything they need beyond osdep.h.
+> +If exceptions are needed for some reason, they must be documented in
+> +the header.  If all that's needed from a header is typedefs, consider
+> +putting those into qemu/typedefs.h instead of including the header.
+> +
+> +Cyclic inclusion is forbidden.
+> +
+>  C types
+>  =3D=3D=3D=3D=3D=3D=3D
+
+
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
