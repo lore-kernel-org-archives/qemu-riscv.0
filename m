@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p8mLg-00088t-9L
+	id 1p8mLg-00089L-O1
 	for mharc-qemu-riscv@gnu.org; Fri, 23 Dec 2022 13:00:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1p8mLO-000800-4O
- for qemu-riscv@nongnu.org; Fri, 23 Dec 2022 13:00:34 -0500
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
+ id 1p8mLV-00083E-8h
+ for qemu-riscv@nongnu.org; Fri, 23 Dec 2022 13:00:39 -0500
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1p8mLL-0003IM-O3
- for qemu-riscv@nongnu.org; Fri, 23 Dec 2022 13:00:29 -0500
-Received: by mail-ed1-x535.google.com with SMTP id b88so731297edf.6
- for <qemu-riscv@nongnu.org>; Fri, 23 Dec 2022 10:00:27 -0800 (PST)
+ id 1p8mLS-0003Hd-Ej
+ for qemu-riscv@nongnu.org; Fri, 23 Dec 2022 13:00:37 -0500
+Received: by mail-ed1-x534.google.com with SMTP id c17so7969566edj.13
+ for <qemu-riscv@nongnu.org>; Fri, 23 Dec 2022 10:00:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uT04uWiViekVEpzCTZPyMaJ5LbyKYJuWTn9XIKbzLG0=;
- b=HwQCs+azvz4x58O8PtVvmcrB+Drzc5OSMuuWwChhi0ziMT8boLsiWvHXk4gsJHruBZ
- o0a5g8sc5pIGGdYyZbbA7WIoGyzphuALCmPiaPlVelpUvEQUsVDlbdMoMj3sOK5F+3dl
- Rgb1NNJgGm3h/7DCbdpzXAKuFiprMEgWpnT9PfyVeizWVRnFcX1F891WteItXkR5Hk69
- ispvdTsmjA/J7DNiKWdveDuLU0wy7c+trBlUluEwwYne+VlR82SF0lGk/pAhGupMC/XG
- 3YOwOjCCvO0G02n1Fyrn75XiDlDteKQVmE0zNCHr52UOE3MYUs6wIkEHCipy6jnPUqMx
- 7otw==
+ bh=AiDJk/rypTtq1eIKa0jbjJNINAj+KhAteswTtVhdQZc=;
+ b=SdGHwERxClD0BzaO1j4sxR+2acsjrcMcSeGLnwhcAx5dPttdWyjqzHHg5cWMQLhWOU
+ MQ5s6tPhfiwQV1dys2qTXmE6I5B22xkGPW/jaftZ4AwsdVAqkqynxdRstdhEsAQjdtBY
+ X3v1geQgW9RLk/MKXxy1wWI0mfAC+Ia+kcc3VpW4IFMz0XD9/4Zh3Iz+sRi63jHd2s9F
+ eRXp+11gVqhPmaL7lYHwt1xCLIi6k9W1IGMgGHgZnhGnPnsmquVvPGVcZCB7yAm/bbXi
+ 4XXLBolsm5dVu75m0UURz28KA0SwkUoBEO5tRG+RfAoJQYSXVWnJcZ0iZGYXZ6DeW1eC
+ mhoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uT04uWiViekVEpzCTZPyMaJ5LbyKYJuWTn9XIKbzLG0=;
- b=S9SoEF73ibEVofI+TDvp0gf3m2tfhbfygnoAD5TS0CsnXLpZgtW4ot8k3eJtsaDt3v
- VG58zOgUSlCpUyT2Gr4egvDYdUNz8Jzy6S49bSgGuZQEZBO/1Xtv0AsZhmg9y6Ntxj7U
- r9nPsXD+To/iyrs5hmzwcUDYnPRO9dR8fFfp6Cqo4B1icWuMaoupmAtC3Ru6LrJVcd2i
- cWOJjHhRKWfmgILouNSO7iskjOMZHu0KHXbzt8HilN+JEnMQqo26NgdZOVW0QsfFD4H6
- cgsa/EU0MeIUuEVS7x0iP0EUYnrTjYaiYlJ+wbpXHlYSXeARSrRIWuAXHADhtyDJzF7G
- oo5A==
-X-Gm-Message-State: AFqh2kpp74SvakS3Hn04IXQv6R/CwFOcPZZgVqtyjkASZW3MH7C3BFdH
- 8sxA17ifGPCgoc87gPOTgPVUP83z9NRYDi9E
-X-Google-Smtp-Source: AMrXdXufgamu0ZeM15GJoVaz6bj4zEg/r4kb728YoSR6GegpSGZn2MESraiVqc1BR6KCwuEV05bLVg==
-X-Received: by 2002:a05:6402:4015:b0:46a:3bd0:4784 with SMTP id
- d21-20020a056402401500b0046a3bd04784mr10253851eda.7.1671818425720; 
- Fri, 23 Dec 2022 10:00:25 -0800 (PST)
+ bh=AiDJk/rypTtq1eIKa0jbjJNINAj+KhAteswTtVhdQZc=;
+ b=asco/gQe2SVD2VxVteMiS30FkCvmY4dt34d4tZa5hzBApt3DAFkH2kVEyrH1HMCVqV
+ bmSrAgWO7F5h7JGsJIuzjkV/GtTXt5ZHiaH8IP6RSsqIYckE9QI3HVOEC1NhtGWopblR
+ 1Wa15XY3+q+THvgPeYuJ4g/f3lTXOCbRLbBRG4U+XLEJjCFJjYI1HbC2rfkKgYxKo621
+ nYbFp2fxGq/ajvyUEvjpOwgSYIgFJw+HdhM8GntKY2sDMEGJAuQejz97/fzyFJeZfnXx
+ a/jqaN6oTVd5iV0nN557rYBus75r2r4hRVmRWje1aZzb+v11PZ03+PQ1QfIi0UiSfC/f
+ egUw==
+X-Gm-Message-State: AFqh2krMxsSgOOrgaYtMu/DbHELgTbs+5lvp7ekqJDvO6oKy0GLsTYtP
+ CmMG2X9XoEbhxUoeDcOvpRxRHsqYxjR1oXgV
+X-Google-Smtp-Source: AMrXdXuulMuRhw8x80E0kkhlmmRNRM91e7UVuHTUAFBnYjeIioFNT4/w8/gHzwJSTQfJ4juBsQzI/Q==
+X-Received: by 2002:aa7:c398:0:b0:47f:14a6:a24b with SMTP id
+ k24-20020aa7c398000000b0047f14a6a24bmr6267762edq.21.1671818432519; 
+ Fri, 23 Dec 2022 10:00:32 -0800 (PST)
 Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
  [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- p14-20020a056402154e00b0047d4685878esm1734937edx.51.2022.12.23.10.00.24
+ p14-20020a056402154e00b0047d4685878esm1734937edx.51.2022.12.23.10.00.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Dec 2022 10:00:25 -0800 (PST)
+ Fri, 23 Dec 2022 10:00:32 -0800 (PST)
 From: Christoph Muellner <christoph.muellner@vrull.eu>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -61,17 +61,17 @@ To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Yunhai Shang <yunhai@linux.alibaba.com>,
  Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Subject: [PATCH v2 04/15] RISC-V: Adding XTheadBb ISA extension
-Date: Fri, 23 Dec 2022 19:00:04 +0100
-Message-Id: <20221223180016.2068508-5-christoph.muellner@vrull.eu>
+Subject: [PATCH v2 09/15] RISC-V: Adding T-Head MemIdx extension
+Date: Fri, 23 Dec 2022 19:00:09 +0100
+Message-Id: <20221223180016.2068508-10-christoph.muellner@vrull.eu>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221223180016.2068508-1-christoph.muellner@vrull.eu>
 References: <20221223180016.2068508-1-christoph.muellner@vrull.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ed1-x535.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -91,265 +91,592 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2022 18:00:35 -0000
+X-List-Received-Date: Fri, 23 Dec 2022 18:00:39 -0000
 
 From: Christoph Müllner <christoph.muellner@vrull.eu>
 
-This patch adds support for the XTheadBb ISA extension.
+This patch adds support for the T-Head MemIdx instructions.
 The patch uses the T-Head specific decoder and translation.
 
 Changes in v2:
 - Add ISA_EXT_DATA_ENTRY()
-- Split XtheadB* extension into individual commits
-- Make implementation compatible with RV32.
 - Use single decoder for XThead extensions
+- Avoid signed-bitfield-extraction by using signed immediate field imm5
+- Use get_address() to calculate addresses
+- Introduce helper get_th_address_indexed for rs1+(rs2<<imm2) calculation
+- Introduce get_address_indexed() for register offsets (like get_address())
 
-Co-developed-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
 Co-developed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 ---
  target/riscv/cpu.c                         |   2 +
  target/riscv/cpu.h                         |   1 +
- target/riscv/insn_trans/trans_xthead.c.inc | 124 +++++++++++++++++++++
- target/riscv/translate.c                   |   4 +-
- target/riscv/xthead.decode                 |  20 ++++
- 5 files changed, 149 insertions(+), 2 deletions(-)
+ target/riscv/insn_trans/trans_xthead.c.inc | 377 +++++++++++++++++++++
+ target/riscv/translate.c                   |  21 +-
+ target/riscv/xthead.decode                 |  54 +++
+ 5 files changed, 454 insertions(+), 1 deletion(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 809b6eb4ed..b5285fb7a7 100644
+index de00f69710..1fbfb7ccc3 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -109,6 +109,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0, ext_svnapot),
-     ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt),
-     ISA_EXT_DATA_ENTRY(xtheadba, true, PRIV_VERSION_1_11_0, ext_xtheadba),
-+    ISA_EXT_DATA_ENTRY(xtheadbb, true, PRIV_VERSION_1_11_0, ext_xtheadbb),
+@@ -114,6 +114,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
      ISA_EXT_DATA_ENTRY(xtheadcmo, true, PRIV_VERSION_1_11_0, ext_xtheadcmo),
+     ISA_EXT_DATA_ENTRY(xtheadcondmov, true, PRIV_VERSION_1_11_0, ext_xtheadcondmov),
+     ISA_EXT_DATA_ENTRY(xtheadmac, true, PRIV_VERSION_1_11_0, ext_xtheadmac),
++    ISA_EXT_DATA_ENTRY(xtheadmemidx, true, PRIV_VERSION_1_11_0, ext_xtheadmemidx),
+     ISA_EXT_DATA_ENTRY(xtheadmempair, true, PRIV_VERSION_1_11_0, ext_xtheadmempair),
      ISA_EXT_DATA_ENTRY(xtheadsync, true, PRIV_VERSION_1_11_0, ext_xtheadsync),
      ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_XVentanaCondOps),
-@@ -1064,6 +1065,7 @@ static Property riscv_cpu_extensions[] = {
- 
-     /* Vendor-specific custom extensions */
-     DEFINE_PROP_BOOL("xtheadba", RISCVCPU, cfg.ext_xtheadba, false),
-+    DEFINE_PROP_BOOL("xtheadbb", RISCVCPU, cfg.ext_xtheadbb, false),
+@@ -1074,6 +1075,7 @@ static Property riscv_cpu_extensions[] = {
      DEFINE_PROP_BOOL("xtheadcmo", RISCVCPU, cfg.ext_xtheadcmo, false),
+     DEFINE_PROP_BOOL("xtheadcondmov", RISCVCPU, cfg.ext_xtheadcondmov, false),
+     DEFINE_PROP_BOOL("xtheadmac", RISCVCPU, cfg.ext_xtheadmac, false),
++    DEFINE_PROP_BOOL("xtheadmemidx", RISCVCPU, cfg.ext_xtheadmemidx, false),
+     DEFINE_PROP_BOOL("xtheadmempair", RISCVCPU, cfg.ext_xtheadmempair, false),
      DEFINE_PROP_BOOL("xtheadsync", RISCVCPU, cfg.ext_xtheadsync, false),
      DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index ec2588a0f0..0ac1d3f5ef 100644
+index 836445115e..965dc46591 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -466,6 +466,7 @@ struct RISCVCPUConfig {
- 
-     /* Vendor-specific custom extensions */
-     bool ext_xtheadba;
-+    bool ext_xtheadbb;
+@@ -471,6 +471,7 @@ struct RISCVCPUConfig {
      bool ext_xtheadcmo;
+     bool ext_xtheadcondmov;
+     bool ext_xtheadmac;
++    bool ext_xtheadmemidx;
+     bool ext_xtheadmempair;
      bool ext_xtheadsync;
      bool ext_XVentanaCondOps;
 diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
-index 79e1f5bde9..a55d1491fa 100644
+index 49314306eb..02b82ac327 100644
 --- a/target/riscv/insn_trans/trans_xthead.c.inc
 +++ b/target/riscv/insn_trans/trans_xthead.c.inc
-@@ -22,6 +22,12 @@
+@@ -52,6 +52,12 @@
      }                                            \
  } while (0)
  
-+#define REQUIRE_XTHEADBB(ctx) do {               \
-+    if (!ctx->cfg_ptr->ext_xtheadbb) {           \
++#define REQUIRE_XTHEADMEMIDX(ctx) do {           \
++    if (!ctx->cfg_ptr->ext_xtheadmemidx) {       \
 +        return false;                            \
 +    }                                            \
 +} while (0)
 +
- #define REQUIRE_XTHEADCMO(ctx) do {              \
-     if (!ctx->cfg_ptr->ext_xtheadcmo) {          \
+ #define REQUIRE_XTHEADMEMPAIR(ctx) do {          \
+     if (!ctx->cfg_ptr->ext_xtheadmempair) {      \
          return false;                            \
-@@ -67,6 +73,124 @@ GEN_TRANS_TH_ADDSL(1)
- GEN_TRANS_TH_ADDSL(2)
- GEN_TRANS_TH_ADDSL(3)
+@@ -64,6 +70,30 @@
+     }                                            \
+ } while (0)
  
-+/* XTheadBb */
-+
-+/* th.srri is an alternate encoding for rori (from Zbb) */
-+static bool trans_th_srri(DisasContext *ctx, arg_th_srri * a)
++/*
++ * Calculate and return the address for indexed mem operations:
++ * If !zext_offs, then the address is rs1 + (rs2 << imm2).
++ * If  zext_offs, then the address is rs1 + (zext(rs2[31:0]) << imm2).
++ */
++static TCGv get_th_address_indexed(DisasContext *ctx, int rs1, int rs2,
++                                   int imm2, bool zext_offs)
 +{
-+    REQUIRE_XTHEADBB(ctx);
-+    return gen_shift_imm_fn_per_ol(ctx, a, EXT_NONE,
-+                                   tcg_gen_rotri_tl, gen_roriw, NULL);
-+}
++    TCGv src2 = get_gpr(ctx, rs2, EXT_NONE);
++    TCGv offs = tcg_temp_new();
 +
-+/* th.srriw is an alternate encoding for roriw (from Zbb) */
-+static bool trans_th_srriw(DisasContext *ctx, arg_th_srriw *a)
-+{
-+    REQUIRE_XTHEADBB(ctx);
-+    REQUIRE_64BIT(ctx);
-+    ctx->ol = MXL_RV32;
-+    return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_roriw, NULL);
-+}
-+
-+/* th.ext and th.extu perform signed/unsigned bitfield extraction */
-+static bool gen_th_bfextract(DisasContext *ctx, arg_th_bfext *a,
-+                             void (*f)(TCGv, TCGv, unsigned int, unsigned int))
-+{
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv source = get_gpr(ctx, a->rs1, EXT_ZERO);
-+
-+    if (a->lsb <= a->msb) {
-+        f(dest, source, a->lsb, a->msb - a->lsb + 1);
-+        gen_set_gpr(ctx, a->rd, dest);
-+    }
-+    return true;
-+}
-+
-+static bool trans_th_ext(DisasContext *ctx, arg_th_ext *a)
-+{
-+    REQUIRE_XTHEADBB(ctx);
-+    return gen_th_bfextract(ctx, a, tcg_gen_sextract_tl);
-+}
-+
-+static bool trans_th_extu(DisasContext *ctx, arg_th_extu *a)
-+{
-+    REQUIRE_XTHEADBB(ctx);
-+    return gen_th_bfextract(ctx, a, tcg_gen_extract_tl);
-+}
-+
-+/* th.ff0: find first zero (clz on an inverted input) */
-+static bool gen_th_ff0(DisasContext *ctx, arg_th_ff0 *a, DisasExtend ext)
-+{
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, ext);
-+
-+    int olen = get_olen(ctx);
-+    TCGv t = tcg_temp_new();
-+
-+    tcg_gen_not_tl(t, src1);
-+    if (olen != TARGET_LONG_BITS) {
-+        if (olen == 32) {
-+            gen_clzw(dest, t);
-+        } else {
-+            g_assert_not_reached();
-+        }
++    if (zext_offs) {
++        tcg_gen_extract_tl(offs, src2, 0, 32);
++        tcg_gen_shli_tl(offs, offs, imm2);
 +    } else {
-+        gen_clz(dest, t);
++        tcg_gen_shli_tl(offs, src2, imm2);
 +    }
 +
-+    tcg_temp_free(t);
-+    gen_set_gpr(ctx, a->rd, dest);
++    TCGv addr = get_address_indexed(ctx, rs1, offs);
++
++    tcg_temp_free(offs);
++    return addr;
++}
++
+ /* XTheadBa */
+ 
+ /*
+@@ -396,6 +426,353 @@ static bool trans_th_mulsw(DisasContext *ctx, arg_th_mulsw *a)
+     return gen_th_mac(ctx, a, tcg_gen_sub_tl, NULL);
+ }
+ 
++/* XTheadMemIdx */
++
++/*
++ * Load with memop from indexed address and add (imm5 << imm2) to rs1.
++ * If !preinc, then the load address is rs1.
++ * If  preinc, then the load address is rs1 + (imm5) << imm2).
++ */
++static bool gen_load_inc(DisasContext *ctx, arg_th_meminc *a, MemOp memop,
++                         bool preinc)
++{
++    TCGv rd = dest_gpr(ctx, a->rd);
++    TCGv addr = get_address(ctx, a->rs1, preinc ? a->imm5 << a->imm2 : 0);
++
++    tcg_gen_qemu_ld_tl(rd, addr, ctx->mem_idx, memop);
++    addr = get_address(ctx, a->rs1, !preinc ? a->imm5 << a->imm2 : 0);
++    gen_set_gpr(ctx, a->rd, rd);
++    gen_set_gpr(ctx, a->rs1, addr);
 +
 +    return true;
 +}
 +
-+static bool trans_th_ff0(DisasContext *ctx, arg_th_ff0 *a)
++/*
++ * Store with memop to indexed address and add (imm5 << imm2) to rs1.
++ * If !preinc, then the store address is rs1.
++ * If  preinc, then the store address is rs1 + (imm5) << imm2).
++ */
++static bool gen_store_inc(DisasContext *ctx, arg_th_meminc *a, MemOp memop,
++                          bool preinc)
 +{
-+    REQUIRE_XTHEADBB(ctx);
-+    return gen_th_ff0(ctx, a, EXT_NONE);
++    TCGv data = get_gpr(ctx, a->rd, EXT_NONE);
++    TCGv addr = get_address(ctx, a->rs1, preinc ? a->imm5 << a->imm2 : 0);
++
++    tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
++    addr = get_address(ctx, a->rs1, !preinc ? a->imm5 << a->imm2 : 0);
++    gen_set_gpr(ctx, a->rs1, addr);
++
++    return true;
 +}
 +
-+/* th.ff1 is an alternate encoding for clz (from Zbb) */
-+static bool trans_th_ff1(DisasContext *ctx, arg_th_ff1 *a)
++static bool trans_th_ldia(DisasContext *ctx, arg_th_meminc *a)
 +{
-+    REQUIRE_XTHEADBB(ctx);
-+    return gen_unary_per_ol(ctx, a, EXT_NONE, gen_clz, gen_clzw);
-+}
-+
-+static void gen_th_revw(TCGv ret, TCGv arg1)
-+{
-+    tcg_gen_bswap32_tl(ret, arg1, TCG_BSWAP_OS);
-+}
-+
-+/* th.rev is an alternate encoding for the RV64 rev8 (from Zbb) */
-+static bool trans_th_rev(DisasContext *ctx, arg_th_rev *a)
-+{
-+    REQUIRE_XTHEADBB(ctx);
-+
-+    return gen_unary_per_ol(ctx, a, EXT_NONE, tcg_gen_bswap_tl, gen_th_revw);
-+}
-+
-+/* th.revw is a sign-extended byte-swap of the lower word */
-+static bool trans_th_revw(DisasContext *ctx, arg_th_revw *a)
-+{
-+    REQUIRE_XTHEADBB(ctx);
++    REQUIRE_XTHEADMEMIDX(ctx);
 +    REQUIRE_64BIT(ctx);
-+    return gen_unary(ctx, a, EXT_NONE, gen_th_revw);
++    return gen_load_inc(ctx, a, MO_TESQ, false);
 +}
 +
-+/* th.tstnbz is equivalent to an orc.b (from Zbb) with inverted result */
-+static void gen_th_tstnbz(TCGv ret, TCGv source1)
++static bool trans_th_ldib(DisasContext *ctx, arg_th_meminc *a)
 +{
-+    gen_orc_b(ret, source1);
-+    tcg_gen_not_tl(ret, ret);
++    REQUIRE_XTHEADMEMIDX(ctx);
++    REQUIRE_64BIT(ctx);
++    return gen_load_inc(ctx, a, MO_TESQ, true);
 +}
 +
-+static bool trans_th_tstnbz(DisasContext *ctx, arg_th_tstnbz *a)
++static bool trans_th_lwia(DisasContext *ctx, arg_th_meminc *a)
 +{
-+    REQUIRE_XTHEADBB(ctx);
-+    return gen_unary(ctx, a, EXT_ZERO, gen_th_tstnbz);
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_inc(ctx, a, MO_TESL, false);
 +}
 +
- /* XTheadCmo */
++static bool trans_th_lwib(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_inc(ctx, a, MO_TESL, true);
++}
++
++static bool trans_th_lwuia(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    REQUIRE_64BIT(ctx);
++    return gen_load_inc(ctx, a, MO_TEUL, false);
++}
++
++static bool trans_th_lwuib(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    REQUIRE_64BIT(ctx);
++    return gen_load_inc(ctx, a, MO_TEUL, true);
++}
++
++static bool trans_th_lhia(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_inc(ctx, a, MO_TESW, false);
++}
++
++static bool trans_th_lhib(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_inc(ctx, a, MO_TESW, true);
++}
++
++static bool trans_th_lhuia(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_inc(ctx, a, MO_TEUW, false);
++}
++
++static bool trans_th_lhuib(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_inc(ctx, a, MO_TEUW, true);
++}
++
++static bool trans_th_lbia(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_inc(ctx, a, MO_SB, false);
++}
++
++static bool trans_th_lbib(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_inc(ctx, a, MO_SB, true);
++}
++
++static bool trans_th_lbuia(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_inc(ctx, a, MO_UB, false);
++}
++
++static bool trans_th_lbuib(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_inc(ctx, a, MO_UB, true);
++}
++
++static bool trans_th_sdia(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    REQUIRE_64BIT(ctx);
++    return gen_store_inc(ctx, a, MO_TESQ, false);
++}
++
++static bool trans_th_sdib(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    REQUIRE_64BIT(ctx);
++    return gen_store_inc(ctx, a, MO_TESQ, true);
++}
++
++static bool trans_th_swia(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_store_inc(ctx, a, MO_TESL, false);
++}
++
++static bool trans_th_swib(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_store_inc(ctx, a, MO_TESL, true);
++}
++
++static bool trans_th_shia(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_store_inc(ctx, a, MO_TESW, false);
++}
++
++static bool trans_th_shib(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_store_inc(ctx, a, MO_TESW, true);
++}
++
++static bool trans_th_sbia(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_store_inc(ctx, a, MO_SB, false);
++}
++
++static bool trans_th_sbib(DisasContext *ctx, arg_th_meminc *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_store_inc(ctx, a, MO_SB, true);
++}
++
++/*
++ * Load with memop from indexed address.
++ * If !zext_offs, then address is rs1 + (rs2 << imm2).
++ * If  zext_offs, then address is rs1 + (zext(rs2[31:0]) << imm2).
++ */
++static bool gen_load_idx(DisasContext *ctx, arg_th_memidx *a, MemOp memop,
++                         bool zext_offs)
++{
++    TCGv rd = dest_gpr(ctx, a->rd);
++    TCGv addr = get_th_address_indexed(ctx, a->rs1, a->rs2, a->imm2, zext_offs);
++
++    tcg_gen_qemu_ld_tl(rd, addr, ctx->mem_idx, memop);
++    gen_set_gpr(ctx, a->rd, rd);
++
++    return true;
++}
++
++/*
++ * Store with memop to indexed address.
++ * If !zext_offs, then address is rs1 + (rs2 << imm2).
++ * If  zext_offs, then address is rs1 + (zext(rs2[31:0]) << imm2).
++ */
++static bool gen_store_idx(DisasContext *ctx, arg_th_memidx *a, MemOp memop,
++                          bool zext_offs)
++{
++    TCGv data = get_gpr(ctx, a->rd, EXT_NONE);
++    TCGv addr = get_th_address_indexed(ctx, a->rs1, a->rs2, a->imm2, zext_offs);
++
++    tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
++
++    return true;
++}
++
++static bool trans_th_lrd(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    REQUIRE_64BIT(ctx);
++    return gen_load_idx(ctx, a, MO_TESQ, false);
++}
++
++static bool trans_th_lrw(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_idx(ctx, a, MO_TESL, false);
++}
++
++static bool trans_th_lrwu(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    REQUIRE_64BIT(ctx);
++    return gen_load_idx(ctx, a, MO_TEUL, false);
++}
++
++static bool trans_th_lrh(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_idx(ctx, a, MO_TESW, false);
++}
++
++static bool trans_th_lrhu(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_idx(ctx, a, MO_TEUW, false);
++}
++
++static bool trans_th_lrb(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_idx(ctx, a, MO_SB, false);
++}
++
++static bool trans_th_lrbu(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_idx(ctx, a, MO_UB, false);
++}
++
++static bool trans_th_srd(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    REQUIRE_64BIT(ctx);
++    return gen_store_idx(ctx, a, MO_TESQ, false);
++}
++
++static bool trans_th_srw(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_store_idx(ctx, a, MO_TESL, false);
++}
++
++static bool trans_th_srh(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_store_idx(ctx, a, MO_TESW, false);
++}
++
++static bool trans_th_srb(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_store_idx(ctx, a, MO_SB, false);
++}
++static bool trans_th_lurd(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    REQUIRE_64BIT(ctx);
++    return gen_load_idx(ctx, a, MO_TESQ, true);
++}
++
++static bool trans_th_lurw(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_idx(ctx, a, MO_TESL, true);
++}
++
++static bool trans_th_lurwu(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    REQUIRE_64BIT(ctx);
++    return gen_load_idx(ctx, a, MO_TEUL, true);
++}
++
++static bool trans_th_lurh(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_idx(ctx, a, MO_TESW, true);
++}
++
++static bool trans_th_lurhu(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_idx(ctx, a, MO_TEUW, true);
++}
++
++static bool trans_th_lurb(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_idx(ctx, a, MO_SB, true);
++}
++
++static bool trans_th_lurbu(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_load_idx(ctx, a, MO_UB, true);
++}
++
++static bool trans_th_surd(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    REQUIRE_64BIT(ctx);
++    return gen_store_idx(ctx, a, MO_TESQ, true);
++}
++
++static bool trans_th_surw(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_store_idx(ctx, a, MO_TESL, true);
++}
++
++static bool trans_th_surh(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_store_idx(ctx, a, MO_TESW, true);
++}
++
++static bool trans_th_surb(DisasContext *ctx, arg_th_memidx *a)
++{
++    REQUIRE_XTHEADMEMIDX(ctx);
++    return gen_store_idx(ctx, a, MO_SB, true);
++}
++
+ /* XTheadMemPair */
  
- static inline int priv_level(DisasContext *ctx)
+ static bool gen_loadpair_tl(DisasContext *ctx, arg_th_pair *a, MemOp memop,
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 7b35f1d71b..8439ff0bf4 100644
+index 348fe511e1..f5a870a2ac 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -127,8 +127,8 @@ static bool always_true_p(DisasContext *ctx  __attribute__((__unused__)))
- 
- static bool has_xthead_p(DisasContext *ctx  __attribute__((__unused__)))
- {
--    return ctx->cfg_ptr->ext_xtheadba || ctx->cfg_ptr->ext_xtheadcmo ||
--           ctx->cfg_ptr->ext_xtheadsync;
-+    return ctx->cfg_ptr->ext_xtheadba || ctx->cfg_ptr->ext_xtheadbb ||
-+           ctx->cfg_ptr->ext_xtheadcmo || ctx->cfg_ptr->ext_xtheadsync;
+@@ -130,7 +130,8 @@ static bool has_xthead_p(DisasContext *ctx  __attribute__((__unused__)))
+     return ctx->cfg_ptr->ext_xtheadba || ctx->cfg_ptr->ext_xtheadbb ||
+            ctx->cfg_ptr->ext_xtheadbs || ctx->cfg_ptr->ext_xtheadcmo ||
+            ctx->cfg_ptr->ext_xtheadcondmov || ctx->cfg_ptr->ext_xtheadmac ||
+-           ctx->cfg_ptr->ext_xtheadmempair || ctx->cfg_ptr->ext_xtheadsync;
++           ctx->cfg_ptr->ext_xtheadmemidx || ctx->cfg_ptr->ext_xtheadmempair ||
++           ctx->cfg_ptr->ext_xtheadsync;
  }
  
  #define MATERIALISE_EXT_PREDICATE(ext)  \
+@@ -564,6 +565,24 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
+     return addr;
+ }
+ 
++/* Compute a canonical address from a register plus reg offset. */
++static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
++{
++    TCGv addr = temp_new(ctx);
++    TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
++
++    tcg_gen_add_tl(addr, src1, offs);
++    if (ctx->pm_mask_enabled) {
++        tcg_gen_andc_tl(addr, addr, pm_mask);
++    } else if (get_xl(ctx) == MXL_RV32) {
++        tcg_gen_ext32u_tl(addr, addr);
++    }
++    if (ctx->pm_base_enabled) {
++        tcg_gen_or_tl(addr, addr, pm_base);
++    }
++    return addr;
++}
++
+ #ifndef CONFIG_USER_ONLY
+ /* The states of mstatus_fs are:
+  * 0 = disabled, 1 = initial, 2 = clean, 3 = dirty
 diff --git a/target/riscv/xthead.decode b/target/riscv/xthead.decode
-index b149f13018..8cd140891b 100644
+index ff2a83b56d..69e40f22dc 100644
 --- a/target/riscv/xthead.decode
 +++ b/target/riscv/xthead.decode
-@@ -13,14 +13,23 @@
- %rd        7:5
- %rs1       15:5
+@@ -17,8 +17,10 @@
+ %rd2       20:5
  %rs2       20:5
-+%sh5       20:5
-+%sh6       20:6
+ %sh5       20:5
++%imm5      20:s5
+ %sh6       20:6
+ %sh2       25:2
++%imm2      25:2
  
  # Argument sets
  &r         rd rs1 rs2                               !extern
-+&r2        rd rs1                                   !extern
-+&shift     shamt rs1 rd                             !extern
-+&th_bfext  msb lsb rs1 rd
+@@ -26,6 +28,8 @@
+ &shift     shamt rs1 rd                             !extern
+ &th_bfext  msb lsb rs1 rd
+ &th_pair   rd1 rs rd2 sh2
++&th_memidx rd rs1 rs2 imm2
++&th_meminc rd rs1 imm5 imm2
  
  # Formats
  @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
- @rs2_s      ....... ..... ..... ... ..... .......   %rs2 %rs1
- @r          ....... ..... .....  ... ..... .......  &r %rs2 %rs1 %rd
-+@r2         ....... ..... .....  ... ..... .......  &r2 %rs1 %rd
-+@th_bfext   msb:6  lsb:6  .....  ... ..... .......  &th_bfext %rs1 %rd
-+@sh5        ....... ..... .....  ... ..... .......  &shift  shamt=%sh5      %rs1 %rd
-+@sh6        ...... ...... .....  ... ..... .......  &shift shamt=%sh6 %rs1 %rd
+@@ -36,6 +40,8 @@
+ @sh5        ....... ..... .....  ... ..... .......  &shift  shamt=%sh5      %rs1 %rd
+ @sh6        ...... ...... .....  ... ..... .......  &shift shamt=%sh6 %rs1 %rd
+ @th_pair    ..... .. ..... ..... ... ..... .......  &th_pair %rd1 %rs %rd2 %sh2
++@th_memidx  ..... .. ..... ..... ... ..... .......  &th_memidx %rd %rs1 %rs2 %imm2
++@th_meminc  ..... .. ..... ..... ... ..... .......  &th_meminc %rd %rs1 %imm5 %imm2
  
  # XTheadBa
  # Instead of defining a new encoding, we simply use the decoder to
-@@ -38,6 +47,17 @@ th_addsl1        0000001 ..... ..... 001 ..... 0001011 @r
- th_addsl2        0000010 ..... ..... 001 ..... 0001011 @r
- th_addsl3        0000011 ..... ..... 001 ..... 0001011 @r
+@@ -102,6 +108,54 @@ th_muls          00100 01 ..... ..... 001 ..... 0001011 @r
+ th_mulsh         00101 01 ..... ..... 001 ..... 0001011 @r
+ th_mulsw         00100 11 ..... ..... 001 ..... 0001011 @r
  
-+# XTheadBb
-+th_ext           ...... ...... ..... 010 ..... 0001011 @th_bfext
-+th_extu          ...... ...... ..... 011 ..... 0001011 @th_bfext
-+th_ff0           1000010 00000 ..... 001 ..... 0001011 @r2
-+th_ff1           1000011 00000 ..... 001 ..... 0001011 @r2
-+th_srri          000100 ...... ..... 001 ..... 0001011 @sh6
-+th_srriw         0001010 ..... ..... 001 ..... 0001011 @sh5
-+th_rev           1000001 00000 ..... 001 ..... 0001011 @r2
-+th_revw          1001000 00000 ..... 001 ..... 0001011 @r2
-+th_tstnbz        1000000 00000 ..... 001 ..... 0001011 @r2
++# XTheadMemIdx
++th_ldia          01111 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_ldib          01101 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_lwia          01011 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_lwib          01001 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_lwuia         11011 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_lwuib         11001 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_lhia          00111 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_lhib          00101 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_lhuia         10111 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_lhuib         10101 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_lbia          00011 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_lbib          00001 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_lbuia         10011 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_lbuib         10001 .. ..... ..... 100 ..... 0001011 @th_meminc
++th_sdia          01111 .. ..... ..... 101 ..... 0001011 @th_meminc
++th_sdib          01101 .. ..... ..... 101 ..... 0001011 @th_meminc
++th_swia          01011 .. ..... ..... 101 ..... 0001011 @th_meminc
++th_swib          01001 .. ..... ..... 101 ..... 0001011 @th_meminc
++th_shia          00111 .. ..... ..... 101 ..... 0001011 @th_meminc
++th_shib          00101 .. ..... ..... 101 ..... 0001011 @th_meminc
++th_sbia          00011 .. ..... ..... 101 ..... 0001011 @th_meminc
++th_sbib          00001 .. ..... ..... 101 ..... 0001011 @th_meminc
 +
- # XTheadCmo
- th_dcache_call   0000000 00001 00000 000 00000 0001011
- th_dcache_ciall  0000000 00011 00000 000 00000 0001011
++th_lrd           01100 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_lrw           01000 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_lrwu          11000 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_lrh           00100 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_lrhu          10100 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_lrb           00000 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_lrbu          10000 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_srd           01100 .. ..... ..... 101 ..... 0001011 @th_memidx
++th_srw           01000 .. ..... ..... 101 ..... 0001011 @th_memidx
++th_srh           00100 .. ..... ..... 101 ..... 0001011 @th_memidx
++th_srb           00000 .. ..... ..... 101 ..... 0001011 @th_memidx
++
++th_lurd          01110 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_lurw          01010 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_lurwu         11010 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_lurh          00110 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_lurhu         10110 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_lurb          00010 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_lurbu         10010 .. ..... ..... 100 ..... 0001011 @th_memidx
++th_surd          01110 .. ..... ..... 101 ..... 0001011 @th_memidx
++th_surw          01010 .. ..... ..... 101 ..... 0001011 @th_memidx
++th_surh          00110 .. ..... ..... 101 ..... 0001011 @th_memidx
++th_surb          00010 .. ..... ..... 101 ..... 0001011 @th_memidx
++
+ # XTheadMemPair
+ th_ldd           11111 .. ..... ..... 100 ..... 0001011 @th_pair
+ th_lwd           11100 .. ..... ..... 100 ..... 0001011 @th_pair
 -- 
 2.38.1
 
