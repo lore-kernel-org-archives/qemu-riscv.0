@@ -1,65 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1p8Yb7-0007HN-UG
-	for mharc-qemu-riscv@gnu.org; Thu, 22 Dec 2022 22:19:49 -0500
+	id 1p8YmT-0000xh-1U
+	for mharc-qemu-riscv@gnu.org; Thu, 22 Dec 2022 22:31:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p8Yb6-0007H3-It; Thu, 22 Dec 2022 22:19:48 -0500
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
+ (Exim 4.90_1) (envelope-from <edgar.iglesias@gmail.com>)
+ id 1p8YmR-0000xJ-U7; Thu, 22 Dec 2022 22:31:31 -0500
+Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1p8Yaw-0003Ez-D1; Thu, 22 Dec 2022 22:19:43 -0500
-Received: by mail-vs1-xe34.google.com with SMTP id m2so3475129vsv.9;
- Thu, 22 Dec 2022 19:19:37 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <edgar.iglesias@gmail.com>)
+ id 1p8YmP-0008F8-CR; Thu, 22 Dec 2022 22:31:31 -0500
+Received: by mail-lf1-x132.google.com with SMTP id f34so5458331lfv.10;
+ Thu, 22 Dec 2022 19:31:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YMeICoaABifER8ncBwj1Ia/yU4N05iJ40CGgYEUQ9Z0=;
- b=k+TKULjaoXoiS0vcqAISYb+BQSrqDqIkRrsCOtmWtRVFBGeAfwISuc0QD6dcoejeQS
- EAisVob0BmgM03PczA0SwpSRIzgob3eP4aEnkxlGwk/S55EGeJOsHMVmVkNsZwi8ofLA
- /ryKSwcqJqFp16ht9/Aw7oF1xM0JIPeQVXxmFC+20Ae/TaAfGyUBaMMXu9A3D3fv/KfG
- c1kItfeTtY9cBjRHVTq3nb6MDQ4h5hT32XleU6kktnH9VMeVGMczoCIqFZVLD4Svehdy
- lqb/SJ4Ezh4FJvttY3PDUn9SRj042QkkrW3P7f6LkNovKOiGh6yymq6mQ5m/CWuV+DgY
- DnNA==
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=/E6/UokYpkkrQBRRyePReZjeOa8Wqmm98azdchBfnP0=;
+ b=Cv5uxFZQ4Fq6PPEB/2I9k1Bh+4WxaDiP+03AgubOCSW1uwoK+Z6eLYcZOj3pJpk4mM
+ aiBLqi7dVowE+he6GdkgkilVzblATFSaxBocnlgrAW9d/InKfUYSDndoJfoxLi76VqnC
+ DpbhcjbwlhtLrAztOWCvvzOe2+0rFPxpHxnnVclbqrt5LFbNpGkE6bTZAmri40WnOxyN
+ r3pZVLoLWiMR8f0P44K86YlO+AP0piX4yvohap3wxUUG7Y4MxjWZS+dkhHCh+vB+6UAq
+ YUiPxOKrNyhsvVDcMH54mL8UTk6HPchCvjdxAN1F00EjFpKDzqn4dTsPrXh+pNZySedp
+ fpKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YMeICoaABifER8ncBwj1Ia/yU4N05iJ40CGgYEUQ9Z0=;
- b=IWbwAcPymVWWQrDuIKSrV/XNH0439vP2xF7e/PcKPA1D4B7gJK1bd4bIUpwUizvGxC
- nuCr8jZy+n6ssC7b6p7Q+SMwU1xAdMNkbsewauawMxZv9P4ne2GyQrv/RLcJ/A1cPmaU
- 46rRnYE5jlY+5FYOzb0KYmCwk4NBJx7bySuCpqDkxdLZ7GB3i7RYv7AtOQHqjVyK4Hu+
- S/KI5BpzDlaNANXQ9ptngNK87dP7Yt9OXOanfUvQmV7VletZJPrSyxoAfD9BohzMR4bu
- LTGGCHl6euuBDCC9XhxJF7cHly8uCQLkHR5fPd4W8ymNukBRCwAIA3orECAwqwbuAAqV
- PvNQ==
-X-Gm-Message-State: AFqh2kqn2pX98YAg27Jie2Or19y4XesXZ97he4nx8+oI9yE8UJEFci4w
- f5AqyNaFKwDEff0g31yQ+HLH9L6+Y2vjrf15/V67ZKVYbudjMA==
-X-Google-Smtp-Source: AMrXdXsHfWradt1AUnA7HH/DFsYk+pqIiZmf8cPSjoINR7RLa+XjgC4cfyBomAD1udoyL84jbfu/15SjGG3+q94lnFo=
-X-Received: by 2002:a67:e208:0:b0:3ba:8fa7:5f9e with SMTP id
- g8-20020a67e208000000b003ba8fa75f9emr833233vsa.64.1671765576980; Thu, 22 Dec
- 2022 19:19:36 -0800 (PST)
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/E6/UokYpkkrQBRRyePReZjeOa8Wqmm98azdchBfnP0=;
+ b=TWhwxkJZXaCSRpKkU537ngf+43Ofq3tkgqmPVKykrn7PHo1XA7SKbQRKRnxHbRBhBs
+ rC+QKcitJyY+K+Jk7TWroMgubtMJuoToVfOt8Y3Krg9cVPQKoI6WIrO2GQMoDZ87K8Tb
+ C0+vYY07fZB5dJYsl7FoFyuMk4Xqdvz095X5yJcN7qxJloWVLBoD5VnUkABCsQelJRUs
+ Bnas1vZEzIrk3Od5o3V61oV4LsBJ21ogU3D1w0byYMTpMDZLsCmcRFQBOJVjzgHVYDK2
+ QxhT31q4aXjDEdrlNiVfjd9QAQ977cctYR4QebBHEzzECJT+hoA5kOIZDdoJnwygElgU
+ Gt5Q==
+X-Gm-Message-State: AFqh2kpfxHp7DBv5S9ViTTrDFr/aTkwxaD4du4Kub1o7xVenX5epLhpY
+ V2PIy58nQT7FwLnsZ3Akwyg=
+X-Google-Smtp-Source: AMrXdXtnUPbvcyYVs62dSggSSzsRa6ztv9ucRG2ckFHtyVbk6d0P9SUVUfF9arafFbPbZ5KR219xFg==
+X-Received: by 2002:a05:6512:3b2a:b0:4b5:5efb:7d26 with SMTP id
+ f42-20020a0565123b2a00b004b55efb7d26mr3280813lfv.37.1671766285709; 
+ Thu, 22 Dec 2022 19:31:25 -0800 (PST)
+Received: from gmail.com (81-232-4-135-no39.tbcn.telia.com. [81.232.4.135])
+ by smtp.gmail.com with ESMTPSA id
+ q14-20020a056512210e00b004a2c447598fsm324598lfr.159.2022.12.22.19.31.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 Dec 2022 19:31:25 -0800 (PST)
+Date: Fri, 23 Dec 2022 04:31:24 +0100
+From: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+To: Jason Wang <jasowang@redhat.com>
+Cc: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org,
+ mst@redhat.com, imammedo@redhat.com, ani@anisinha.ca,
+ peter.maydell@linaro.org, laurent@vivier.eu,
+ Alistair.Francis@wdc.com, bin.meng@windriver.com,
+ palmer@dabbelt.com, marcel.apfelbaum@gmail.com,
+ yangxiaojuan@loongson.cn, gaosong@loongson.cn,
+ richard.henderson@linaro.org, deller@gmx.de, vikram.garhwal@amd.com,
+ francisco.iglesias@amd.com, clg@kaod.org, kraxel@redhat.com,
+ marcandre.lureau@redhat.com, riku.voipio@iki.fi,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
+ crwulff@gmail.com, marex@denx.de,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Stefano Garzarella <sgarzare@redhat.com>
+Subject: Re: [PATCH v2 1/4] include/hw/virtio: Break inclusion loop
+Message-ID: <Y6UhDBkMSSoLm9G0@toto>
+References: <20221222120813.727830-1-armbru@redhat.com>
+ <20221222120813.727830-2-armbru@redhat.com>
+ <CACGkMEs6R45JkYm294ms33yWJheD0oB6Zs3gvC1d7sv+-oHufA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20221221182300.307900-1-dbarboza@ventanamicro.com>
- <20221221182300.307900-7-dbarboza@ventanamicro.com>
-In-Reply-To: <20221221182300.307900-7-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 23 Dec 2022 13:19:10 +1000
-Message-ID: <CAKmqyKOpKZ4anXZS4XA3do+C_LgSeg-kx5sdBqj57Y000oa2sQ@mail.gmail.com>
-Subject: Re: [PATCH 06/15] hw/riscv/spike.c: load initrd right after
- riscv_load_kernel()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CACGkMEs6R45JkYm294ms33yWJheD0oB6Zs3gvC1d7sv+-oHufA@mail.gmail.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::132;
+ envelope-from=edgar.iglesias@gmail.com; helo=mail-lf1-x132.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -74,83 +92,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2022 03:19:49 -0000
+X-List-Received-Date: Fri, 23 Dec 2022 03:31:32 -0000
 
-On Thu, Dec 22, 2022 at 4:28 AM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> This will make the code more in line with what the other boards are
-> doing. We'll also avoid an extra check to machine->kernel_filename since
-> we already checked that before executing riscv_load_kernel().
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+On Fri, Dec 23, 2022 at 10:58:06AM +0800, Jason Wang wrote:
+> On Thu, Dec 22, 2022 at 8:08 PM Markus Armbruster <armbru@redhat.com> wrote:
+> >
+> > hw/virtio/virtio.h and hw/virtio/vhost.h include each other.  The
+> > former doesn't actually need the latter, so drop that inclusion to
+> > break the loop.
+> >
+> > Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> > Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Edgar E. Iglesias <edgar@zeroasic.com>
 
-Alistair
 
-> ---
->  hw/riscv/spike.c | 31 +++++++++++++++----------------
->  1 file changed, 15 insertions(+), 16 deletions(-)
->
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 43341c20b6..f37a9bebbf 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -257,6 +257,10 @@ static void spike_board_init(MachineState *machine)
->      memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
->                                  mask_rom);
->
-> +    /* Create device tree */
-> +    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
-> +               riscv_is_32bit(&s->soc[0]));
-> +
->      /*
->       * Not like other RISC-V machines that use plain binary bios images,
->       * keeping ELF files here was intentional because BIN files don't work
-> @@ -275,6 +279,17 @@ static void spike_board_init(MachineState *machine)
->          kernel_entry = riscv_load_kernel(machine->kernel_filename,
->                                           kernel_start_addr,
->                                           htif_symbol_callback);
-> +
-> +        if (machine->initrd_filename) {
-> +            hwaddr start;
-> +            hwaddr end = riscv_load_initrd(machine->initrd_filename,
-> +                                           machine->ram_size, kernel_entry,
-> +                                           &start);
-> +            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
-> +                                  "linux,initrd-start", start);
-> +            qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
-> +                                  end);
-> +        }
->      } else {
->         /*
->          * If dynamic firmware is used, it doesn't know where is the next mode
-> @@ -283,22 +298,6 @@ static void spike_board_init(MachineState *machine)
->          kernel_entry = 0;
->      }
->
-> -    /* Create device tree */
-> -    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
-> -               riscv_is_32bit(&s->soc[0]));
-> -
-> -    /* Load initrd */
-> -    if (machine->kernel_filename && machine->initrd_filename) {
-> -        hwaddr start;
-> -        hwaddr end = riscv_load_initrd(machine->initrd_filename,
-> -                                       machine->ram_size, kernel_entry,
-> -                                       &start);
-> -        qemu_fdt_setprop_cell(machine->fdt, "/chosen",
-> -                              "linux,initrd-start", start);
-> -        qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
-> -                              end);
-> -    }
-> -
->      /* Compute the fdt load address in dram */
->      fdt_load_addr = riscv_load_fdt(memmap[SPIKE_DRAM].base,
->                                     machine->ram_size, machine->fdt);
-> --
-> 2.38.1
->
->
+
+
+> 
+> Acked-by: Jason Wang <jasowang@redhat.com>
+> 
+> Thanks
+> 
+> > ---
+> >  include/hw/virtio/virtio.h | 1 -
+> >  hw/virtio/virtio-qmp.c     | 1 +
+> >  hw/virtio/virtio.c         | 1 +
+> >  3 files changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/include/hw/virtio/virtio.h b/include/hw/virtio/virtio.h
+> > index 24561e933a..48ab2117b5 100644
+> > --- a/include/hw/virtio/virtio.h
+> > +++ b/include/hw/virtio/virtio.h
+> > @@ -22,7 +22,6 @@
+> >  #include "standard-headers/linux/virtio_config.h"
+> >  #include "standard-headers/linux/virtio_ring.h"
+> >  #include "qom/object.h"
+> > -#include "hw/virtio/vhost.h"
+> >
+> >  /*
+> >   * A guest should never accept this. It implies negotiation is broken
+> > diff --git a/hw/virtio/virtio-qmp.c b/hw/virtio/virtio-qmp.c
+> > index 8e7282658f..3d4497da99 100644
+> > --- a/hw/virtio/virtio-qmp.c
+> > +++ b/hw/virtio/virtio-qmp.c
+> > @@ -11,6 +11,7 @@
+> >
+> >  #include "qemu/osdep.h"
+> >  #include "hw/virtio/virtio.h"
+> > +#include "hw/virtio/vhost.h"
+> >  #include "virtio-qmp.h"
+> >
+> >  #include "standard-headers/linux/virtio_ids.h"
+> > diff --git a/hw/virtio/virtio.c b/hw/virtio/virtio.c
+> > index 289eb71045..0ec6ff9ae4 100644
+> > --- a/hw/virtio/virtio.c
+> > +++ b/hw/virtio/virtio.c
+> > @@ -25,6 +25,7 @@
+> >  #include "qom/object_interfaces.h"
+> >  #include "hw/core/cpu.h"
+> >  #include "hw/virtio/virtio.h"
+> > +#include "hw/virtio/vhost.h"
+> >  #include "migration/qemu-file-types.h"
+> >  #include "qemu/atomic.h"
+> >  #include "hw/virtio/virtio-bus.h"
+> > --
+> > 2.38.1
+> >
+> 
 
