@@ -1,65 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAPGy-0004Tu-Ns
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 00:46:41 -0500
+	id 1pAPo5-0000TJ-TI
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 01:20:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pAPGq-0004T1-Es; Wed, 28 Dec 2022 00:46:33 -0500
-Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pAPGo-0002Zd-Dw; Wed, 28 Dec 2022 00:46:31 -0500
-Received: by mail-vs1-xe35.google.com with SMTP id a66so14642721vsa.6;
- Tue, 27 Dec 2022 21:46:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pfY6x0eckhnmkEYpbGAOTahWWnAvo1WRZbPUi5siheE=;
- b=heWkDEUflSK9pLqlFKF2OTf6nKoN4wg5YOfcIq65R0zJZIpok9m618BP82bGmnadMu
- sXSUPTnGPuS793pGzpFzvXoE+T2D9le5mttR5y+pr4MJPMxSVRHLyLFuCyU9Fv/hR0fo
- jukK+R3l4JJn48cbgTI74jmO2QXpxWwwZpGDQUTPn1o2U+MVodQwISsoj9EbSj+CW/aa
- EkuyaE0fkF6wWPQJnh4WhGmb8wy0csP5E3iufxjAAB/oHgYtLzvgWfMAmrRAacJPBvUT
- p2CXwqHEJ+OvLp80/JlWZLCRgmazurz19SpoudWUhv8rzgM/LdcfqG6hDseNpzSiRg7n
- TDEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pfY6x0eckhnmkEYpbGAOTahWWnAvo1WRZbPUi5siheE=;
- b=fGQ6uUI4XCcvPjzaRWXF2nyks8hsl+pxdCBlKja05IMgW8xOEM9FghOOxFPxJjENIT
- F1z7aTzrSMnyevMUjtlMYd2TjwIbMmoj6jHzbdvDRrrs5nECyn0oLDM9VL01QMcGNx58
- P5xvngpTI2J/YKY2z896aX4n74UBrrijfy9WwUwVqqot+4jlaf2EJ6L1QCon0Z4BO+s7
- z5y/NSEVJdriCDYWa11/iBr7PATsTtrJXNApEHsl2URnb0mmntM+lPYPILP6rOKQyvrM
- 8jAzgjI1FXKDfoayjq26frlhCP1DFg7WQ3zVEZtIcYYIhFetDf4JqiayhL+B9UTq+Ia4
- aQuQ==
-X-Gm-Message-State: AFqh2koWHBafvyUXLLVMGUahxoomkBxUCaPDJxnI+J5lasyTQFDunmZM
- II1xQwL+USlMYng7EQOIEv8SwpDuVPKdae5sTqg=
-X-Google-Smtp-Source: AMrXdXuJGyo3LDebmQg+s5DaTUk2QX+GZN0DAIlEDFOWgJ8sMN1vUOHpB2Y6YfR6JrsjqUUighX3d+w9y0naVMiHC4Y=
-X-Received: by 2002:a67:dc10:0:b0:3b3:7675:d423 with SMTP id
- x16-20020a67dc10000000b003b37675d423mr2702123vsj.72.1672206389059; Tue, 27
- Dec 2022 21:46:29 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pAPo4-0000Rq-0V; Wed, 28 Dec 2022 01:20:52 -0500
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pAPo0-0000vo-Tw; Wed, 28 Dec 2022 01:20:51 -0500
+Received: from localhost.localdomain (unknown [61.165.33.198])
+ by APP-01 (Coremail) with SMTP id qwCowABX2ewx4KtjqJCSCQ--.53263S10;
+ Wed, 28 Dec 2022 14:20:41 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v9 8/9] target/riscv: expose properties for Zc* extension
+Date: Wed, 28 Dec 2022 14:20:27 +0800
+Message-Id: <20221228062028.29415-9-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20221228062028.29415-1-liweiwei@iscas.ac.cn>
+References: <20221228062028.29415-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-References: <tencent_60E46E9E0EA5052F26E07A56520177BE0008@qq.com>
-In-Reply-To: <tencent_60E46E9E0EA5052F26E07A56520177BE0008@qq.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 28 Dec 2022 15:46:02 +1000
-Message-ID: <CAKmqyKPhK9DpeSN0K45TBTs8T9Wo7ECSr3Bp1n=Mb-w0rm5dbA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv/cpu.c: Fix elen check
-To: Elta <503386372@qq.com>
-Cc: qemu-devel <qemu-devel@nongnu.org>, palmer <palmer@dabbelt.com>, 
- "alistair.francis" <alistair.francis@wdc.com>,
- "bin.meng" <bin.meng@windriver.com>, qemu-riscv <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: qwCowABX2ewx4KtjqJCSCQ--.53263S10
+X-Coremail-Antispam: 1UD129KBjvJXoW7uw1fCFWDtw1rZr1kWF43trb_yoW8uF47pr
+ y5Ga47Kw15Jr13Gwnxtr1DJw4rCw4rA3s7K3ySv3Z7XrZ7KrZrX3ZrC39ru3yrtF4rZr4S
+ gF13Zr1xCrs5ta7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9E14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
+ 3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
+ x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
+ JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vIr4
+ 1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
+ 67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
+ 8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20E
+ Y4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267
+ AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbmZX7UUUUU==
+X-Originating-IP: [61.165.33.198]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -73,43 +63,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2022 05:46:35 -0000
+X-List-Received-Date: Wed, 28 Dec 2022 06:20:52 -0000
 
-On Fri, Dec 16, 2022 at 1:10 AM Elta <503386372@qq.com> wrote:
->
-> Should be cpu->cfg.elen in range [8, 64].
->
-> Signed-off-by: Dongxue Zhang <elta.era@gmail.com>
+Expose zca,zcb,zcf,zcd,zcmp,zcmt properties
 
-Thanks for the patch!
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-I'm seeing weird formatting issues though, it looks like the encoding
-is incorrect.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 4f421130aa..bc954d9b85 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -81,6 +81,12 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zfhmin, true, PRIV_VERSION_1_12_0, ext_zfhmin),
+     ISA_EXT_DATA_ENTRY(zfinx, true, PRIV_VERSION_1_12_0, ext_zfinx),
+     ISA_EXT_DATA_ENTRY(zdinx, true, PRIV_VERSION_1_12_0, ext_zdinx),
++    ISA_EXT_DATA_ENTRY(zca, true, PRIV_VERSION_1_12_0, ext_zca),
++    ISA_EXT_DATA_ENTRY(zcb, true, PRIV_VERSION_1_12_0, ext_zcb),
++    ISA_EXT_DATA_ENTRY(zcf, true, PRIV_VERSION_1_12_0, ext_zcf),
++    ISA_EXT_DATA_ENTRY(zcd, true, PRIV_VERSION_1_12_0, ext_zcd),
++    ISA_EXT_DATA_ENTRY(zcmp, true, PRIV_VERSION_1_12_0, ext_zcmp),
++    ISA_EXT_DATA_ENTRY(zcmt, true, PRIV_VERSION_1_12_0, ext_zcmt),
+     ISA_EXT_DATA_ENTRY(zba, true, PRIV_VERSION_1_12_0, ext_zba),
+     ISA_EXT_DATA_ENTRY(zbb, true, PRIV_VERSION_1_12_0, ext_zbb),
+     ISA_EXT_DATA_ENTRY(zbc, true, PRIV_VERSION_1_12_0, ext_zbc),
+@@ -1118,6 +1124,13 @@ static Property riscv_cpu_extensions[] = {
+ 
+     /* These are experimental so mark with 'x-' */
+     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
++
++    DEFINE_PROP_BOOL("x-zca", RISCVCPU, cfg.ext_zca, false),
++    DEFINE_PROP_BOOL("x-zcb", RISCVCPU, cfg.ext_zcb, false),
++    DEFINE_PROP_BOOL("x-zcd", RISCVCPU, cfg.ext_zcd, false),
++    DEFINE_PROP_BOOL("x-zcf", RISCVCPU, cfg.ext_zcf, false),
++    DEFINE_PROP_BOOL("x-zcmp", RISCVCPU, cfg.ext_zcmp, false),
++    DEFINE_PROP_BOOL("x-zcmt", RISCVCPU, cfg.ext_zcmt, false),
+     /* ePMP 0.9.3 */
+     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+     DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
+-- 
+2.25.1
 
-Did you use `git send-email` to send the patch? If not can you try
-sending it again following the instructions here
-https://www.qemu.org/docs/master/devel/submitting-a-patch.html#submitting-your-patches
-
-Alistair
-
-> ---
->  target/riscv/cpu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index d14e95c9dc..1e8032c969 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -870,7 +870,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->                          "Vector extension ELEN must be power of 2");
->                  return;
->              }
-> -            if (cpu->cfg.elen > 64 || cpu->cfg.vlen < 8) {
-> +            if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
->                  error_setg(errp,
->                          "Vector extension implementation only supports ELEN "
->                          "in the range [8, 64]");
-> --
-> 2.17.1
->
 
