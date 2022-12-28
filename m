@@ -1,95 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAL88-0004m8-3G
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Dec 2022 20:21:16 -0500
+	id 1pANCo-0006zn-Qc
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Dec 2022 22:34:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wainersm@redhat.com>)
- id 1pAJ1L-0000bc-G8
- for qemu-riscv@nongnu.org; Tue, 27 Dec 2022 18:06:07 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wainersm@redhat.com>)
- id 1pAJ1H-0003ON-IS
- for qemu-riscv@nongnu.org; Tue, 27 Dec 2022 18:06:07 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1672182361;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=tXVyQqDkxu1fM+EkJnDNhfTB/82eh947s37iNeKwGH4=;
- b=cyB+r9GKrLMl16eHLCvvyBG0IjHIHh6FL1JsMw/dkhS1ZVHNCqITeCJzXkzPanigu6pxKB
- lcPyvvs1UqQYCSB4KYLTvtAhWm8IpXEe+J4XVSBnjdSxQXcdA3b01aYeviLxogqN1SQU9J
- a9uSYwoSbNUfJUGFmGfn0Ih4MhqFJ9Q=
-Received: from mail-ot1-f71.google.com (mail-ot1-f71.google.com
- [209.85.210.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-641-XmcRFp7dPOOZLQAwl2O_9A-1; Tue, 27 Dec 2022 18:04:27 -0500
-X-MC-Unique: XmcRFp7dPOOZLQAwl2O_9A-1
-Received: by mail-ot1-f71.google.com with SMTP id
- u11-20020a9d4d8b000000b006782ebb9bf5so8325580otk.11
- for <qemu-riscv@nongnu.org>; Tue, 27 Dec 2022 15:04:27 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pANCm-0006ub-M6; Tue, 27 Dec 2022 22:34:12 -0500
+Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pANCl-0004Hj-1O; Tue, 27 Dec 2022 22:34:12 -0500
+Received: by mail-vs1-xe2a.google.com with SMTP id k4so10371428vsc.4;
+ Tue, 27 Dec 2022 19:34:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vG4pclImSVJBqrYwLDUKcSVN4T35KUaUPedZmhQ2+fs=;
+ b=cGfZrYaoXO5pMRxSdAqeGsglQoAnrc3F5H3vcS07F5PoBkQ9BR4mSkiwctx0oBobLT
+ lNLapTyzgIZlclYGm9H8MCFemWQ2a3cNFbxA7EZQAn322lP9Lj71CPzsRIsKjbO1Hci1
+ 9V5Nz7DzJdkXMZx7R3NO2iVbx8FauDEAzPztbuXU+UbWsdoFmVr2clYwni50D52CRM7Z
+ 5dVlslMt0LXqCdnuRZY8PYQe3eC3CpmBKfsvChPS/wzRFGrtz3p3aZvlHfAYn+5w8WP8
+ A+mzSjXi64Gg7+pKDZ44GQUzxQnWCcX9OH+UGqVkjP2MQHNzYRc8h5enTdAzt5q1NuVT
+ mUGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:reply-to:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=tXVyQqDkxu1fM+EkJnDNhfTB/82eh947s37iNeKwGH4=;
- b=NBQZXyVu7+qO6h0dNKuUPLw5tYhjfwVYmDGLyNJ9cG6RYljXwRHNF3eQp57h+7mb4J
- LxPU9qrBEsfBlerlA6RIjg8GlQcwfuA8ZcmA1smUm4pHSJ/E9e6JoBi21uafMUqPBTNj
- +dWF+Fwbd97JSiXZLmKt8yL04/iWVXrBGSH5epaH7xbQN6HNtzfPzp1t/1SE3lh2XDxL
- 4tl/f2UsMYLQ11HAaimDCzoomAC6R2g1LgzUNUtMgj3HDHmL+K01nQBv5YnFJnpFCcyo
- MaTyDcpuG4TdOXuwRBfLrI/LabGvb+PyprqkSuz6akiIK4UQ6I0xgEJpgdCzYvOrOrjn
- 5ckQ==
-X-Gm-Message-State: AFqh2kpLYRuTfQBNpQ4OHIPmkfBYde1h4ueDGPsDb+5edV2/WzOwpn1N
- ceWOOnudNbS41n9CJyH62TLYibdreg62hj+xq6L3lWyZGy4aHhPEqmgHHetP78SA5s2C9BgOm3V
- 5CL0TkVqV0PM3iu4=
-X-Received: by 2002:a05:6871:4595:b0:143:95b0:26e7 with SMTP id
- nl21-20020a056871459500b0014395b026e7mr10441759oab.54.1672182266788; 
- Tue, 27 Dec 2022 15:04:26 -0800 (PST)
-X-Google-Smtp-Source: AMrXdXv0uiUyOImN/HL+0CJBl2eJKp2Fvo33FTWTtnx6WjcWui3GMXxC6lAtcPaRXLbFdRz33wMAxg==
-X-Received: by 2002:a05:6871:4595:b0:143:95b0:26e7 with SMTP id
- nl21-20020a056871459500b0014395b026e7mr10441745oab.54.1672182266491; 
- Tue, 27 Dec 2022 15:04:26 -0800 (PST)
-Received: from [192.168.1.107] ([187.23.180.75])
- by smtp.gmail.com with ESMTPSA id
- z36-20020a056870462400b00144e6ffe9e5sm6638168oao.47.2022.12.27.15.04.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Dec 2022 15:04:25 -0800 (PST)
-Message-ID: <d8d4abc7-b4b1-7c63-c02d-76ef9776947b@redhat.com>
-Date: Tue, 27 Dec 2022 20:04:20 -0300
+ bh=vG4pclImSVJBqrYwLDUKcSVN4T35KUaUPedZmhQ2+fs=;
+ b=uV230OazRPf+RcIPkPF8Sk/ZGgxhXiAesy48ZG1qNdM3D7ChoBTbwCRZURo4nomi/E
+ 6OGJ2mdMNYutVD7ebQpcfDQshIiCyAfhH7CDRgsEub3Y6ZJfLedeT8STn52020MR7twe
+ FxBOf178ENE4eytDtrYkIEdUpG4dHgCPkk77VC6i4/jDwjgNfh0qS0RRU4QTo+UN1Z1u
+ PLfOp/jgmE+RvC/fh60vdDxJ3aWUuzFsUMdp0XvbqXMFp1pVtLVxH3xjjiKSV8VQlvqt
+ kCDXVBKEPKGBvw6qyjClZv02SpfTjZWp5nXCPouE+TNeMXuobJuMNTvNHSF5LYnGJCkq
+ 1AAA==
+X-Gm-Message-State: AFqh2kpsG7GEN7epthnwY4DGuVLWJ3jcYkq3R1fTw7p/JgKZRxyEQzcW
+ lwq2ufRmMHD4EjeTuz7RNWMjLtIlsFrPcVsTkuGqo5CK4Z8=
+X-Google-Smtp-Source: AMrXdXsp6KboD+4O4fPJNp89pS7PGmc7oWMiQwYVAxVqi4AsUD1t+89LhrUbMDsnqYi/iQvpvl2vaVB9t0NtMGIkdiU=
+X-Received: by 2002:a67:be0f:0:b0:3c7:c5d9:b841 with SMTP id
+ x15-20020a67be0f000000b003c7c5d9b841mr869178vsq.64.1672198449745; Tue, 27 Dec
+ 2022 19:34:09 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.0
-Reply-To: wainersm@redhat.com
-Subject: Re: [PATCH 01/15] tests/avocado: add RISC-V opensbi boot test
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- Bin Meng <bin.meng@windriver.com>, Cleber Rosa <crosa@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- Beraldo Leal <bleal@redhat.com>
-References: <20221221182300.307900-1-dbarboza@ventanamicro.com>
- <20221221182300.307900-2-dbarboza@ventanamicro.com>
-From: Wainer dos Santos Moschetta <wainersm@redhat.com>
-In-Reply-To: <20221221182300.307900-2-dbarboza@ventanamicro.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=wainersm@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -31
-X-Spam_score: -3.2
-X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- NICE_REPLY_A=-1.147, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20221227064812.1903326-1-bmeng@tinylab.org>
+ <20221227064812.1903326-4-bmeng@tinylab.org>
+In-Reply-To: <20221227064812.1903326-4-bmeng@tinylab.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 28 Dec 2022 13:33:43 +1000
+Message-ID: <CAKmqyKNRk4LL7wdUp=-pf7QoS8zZ+=ux-26YdOp6JjwPQmea3w@mail.gmail.com>
+Subject: Re: [PATCH 03/12] hw/char: riscv_htif: Drop useless assignment of
+ memory region
+To: Bin Meng <bmeng@tinylab.org>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Bin Meng <bin.meng@windriver.com>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 27 Dec 2022 20:21:13 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,103 +78,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Dec 2022 23:06:07 -0000
+X-List-Received-Date: Wed, 28 Dec 2022 03:34:13 -0000
 
-Hi Daniel,
+On Tue, Dec 27, 2022 at 4:50 PM Bin Meng <bmeng@tinylab.org> wrote:
+>
+> struct HTIFState has 3 members for address space and memory region,
+> and are initialized during htif_mm_init(). But they are actually
+> useless. Drop them.
+>
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
-On 12/21/22 15:22, Daniel Henrique Barboza wrote:
-> This test is used to do a quick sanity check to ensure that we're able
-> to run the existing QEMU FW image.
->
-> 'sifive_u', 'spike' and 'virt' riscv64 machines, and 'sifive_u' and
-> 'virt' 32 bit machines are able to run the default RISCV64_BIOS_BIN |
-> RISCV32_BIOS_BIN firmware with minimal options.
->
-> Cc: Cleber Rosa <crosa@redhat.com>
-> Cc: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>
-> Cc: Beraldo Leal <bleal@redhat.com>
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
->   tests/avocado/riscv_opensbi.py | 65 ++++++++++++++++++++++++++++++++++
->   1 file changed, 65 insertions(+)
->   create mode 100644 tests/avocado/riscv_opensbi.py
-
-It looks good to me. Thanks!
-
-Reviewed-by: Wainer dos Santos Moschetta <wainersm@redhat.com>
-
 >
-> diff --git a/tests/avocado/riscv_opensbi.py b/tests/avocado/riscv_opensbi.py
-> new file mode 100644
-> index 0000000000..abc99ced30
-> --- /dev/null
-> +++ b/tests/avocado/riscv_opensbi.py
-> @@ -0,0 +1,65 @@
-> +# opensbi boot test for RISC-V machines
-> +#
-> +# Copyright (c) 2022, Ventana Micro
-> +#
-> +# This work is licensed under the terms of the GNU GPL, version 2 or
-> +# later.  See the COPYING file in the top-level directory.
-> +
-> +from avocado_qemu import QemuSystemTest
-> +from avocado_qemu import wait_for_console_pattern
-> +
-> +class RiscvOpensbi(QemuSystemTest):
-> +    """
-> +    :avocado: tags=accel:tcg
-> +    """
-> +    timeout = 5
-> +
-> +    def test_riscv64_virt(self):
-> +        """
-> +        :avocado: tags=arch:riscv64
-> +        :avocado: tags=machine:virt
-> +        """
-> +        self.vm.set_console()
-> +        self.vm.launch()
-> +        wait_for_console_pattern(self, 'Platform Name')
-> +        wait_for_console_pattern(self, 'Boot HART MEDELEG')
-> +
-> +    def test_riscv64_spike(self):
-> +        """
-> +        :avocado: tags=arch:riscv64
-> +        :avocado: tags=machine:spike
-> +        """
-> +        self.vm.set_console()
-> +        self.vm.launch()
-> +        wait_for_console_pattern(self, 'Platform Name')
-> +        wait_for_console_pattern(self, 'Boot HART MEDELEG')
-> +
-> +    def test_riscv64_sifive_u(self):
-> +        """
-> +        :avocado: tags=arch:riscv64
-> +        :avocado: tags=machine:sifive_u
-> +        """
-> +        self.vm.set_console()
-> +        self.vm.launch()
-> +        wait_for_console_pattern(self, 'Platform Name')
-> +        wait_for_console_pattern(self, 'Boot HART MEDELEG')
-> +
-> +    def test_riscv32_virt(self):
-> +        """
-> +        :avocado: tags=arch:riscv32
-> +        :avocado: tags=machine:virt
-> +        """
-> +        self.vm.set_console()
-> +        self.vm.launch()
-> +        wait_for_console_pattern(self, 'Platform Name')
-> +        wait_for_console_pattern(self, 'Boot HART MEDELEG')
-> +
-> +    def test_riscv32_sifive_u(self):
-> +        """
-> +        :avocado: tags=arch:riscv32
-> +        :avocado: tags=machine:sifive_u
-> +        """
-> +        self.vm.set_console()
-> +        self.vm.launch()
-> +        wait_for_console_pattern(self, 'Platform Name')
-> +        wait_for_console_pattern(self, 'Boot HART MEDELEG')
-
+>  include/hw/char/riscv_htif.h | 7 ++-----
+>  hw/char/riscv_htif.c         | 7 ++-----
+>  hw/riscv/spike.c             | 5 ++---
+>  3 files changed, 6 insertions(+), 13 deletions(-)
+>
+> diff --git a/include/hw/char/riscv_htif.h b/include/hw/char/riscv_htif.h
+> index 3eccc1914f..6d172ebd6d 100644
+> --- a/include/hw/char/riscv_htif.h
+> +++ b/include/hw/char/riscv_htif.h
+> @@ -34,9 +34,6 @@ typedef struct HTIFState {
+>      hwaddr tohost_offset;
+>      hwaddr fromhost_offset;
+>      MemoryRegion mmio;
+> -    MemoryRegion *address_space;
+> -    MemoryRegion *main_mem;
+> -    void *main_mem_ram_ptr;
+>
+>      CPURISCVState *env;
+>      CharBackend chr;
+> @@ -54,7 +51,7 @@ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
+>  bool htif_uses_elf_symbols(void);
+>
+>  /* legacy pre qom */
+> -HTIFState *htif_mm_init(MemoryRegion *address_space, MemoryRegion *main_mem,
+> -    CPURISCVState *env, Chardev *chr, uint64_t nonelf_base);
+> +HTIFState *htif_mm_init(MemoryRegion *address_space, CPURISCVState *env,
+> +                        Chardev *chr, uint64_t nonelf_base);
+>
+>  #endif
+> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+> index 088556bb04..e7e319ca1d 100644
+> --- a/hw/char/riscv_htif.c
+> +++ b/hw/char/riscv_htif.c
+> @@ -265,8 +265,8 @@ bool htif_uses_elf_symbols(void)
+>      return (address_symbol_set == 3) ? true : false;
+>  }
+>
+> -HTIFState *htif_mm_init(MemoryRegion *address_space, MemoryRegion *main_mem,
+> -    CPURISCVState *env, Chardev *chr, uint64_t nonelf_base)
+> +HTIFState *htif_mm_init(MemoryRegion *address_space, CPURISCVState *env,
+> +                        Chardev *chr, uint64_t nonelf_base)
+>  {
+>      uint64_t base, size, tohost_offset, fromhost_offset;
+>
+> @@ -281,9 +281,6 @@ HTIFState *htif_mm_init(MemoryRegion *address_space, MemoryRegion *main_mem,
+>      fromhost_offset = fromhost_addr - base;
+>
+>      HTIFState *s = g_new0(HTIFState, 1);
+> -    s->address_space = address_space;
+> -    s->main_mem = main_mem;
+> -    s->main_mem_ram_ptr = memory_region_get_ram_ptr(main_mem);
+>      s->env = env;
+>      s->tohost_offset = tohost_offset;
+>      s->fromhost_offset = fromhost_offset;
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index 1e1d752c00..82cf41ac27 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -317,9 +317,8 @@ static void spike_board_init(MachineState *machine)
+>                                fdt_load_addr);
+>
+>      /* initialize HTIF using symbols found in load_kernel */
+> -    htif_mm_init(system_memory, mask_rom,
+> -                 &s->soc[0].harts[0].env, serial_hd(0),
+> -                 memmap[SPIKE_HTIF].base);
+> +    htif_mm_init(system_memory, &s->soc[0].harts[0].env,
+> +                 serial_hd(0), memmap[SPIKE_HTIF].base);
+>  }
+>
+>  static void spike_machine_instance_init(Object *obj)
+> --
+> 2.34.1
+>
+>
 
