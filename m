@@ -1,66 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAVmC-0005Jm-PT
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 07:43:20 -0500
+	id 1pAVmC-0005KH-VQ
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 07:43:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pAVm2-00059A-U6
- for qemu-riscv@nongnu.org; Wed, 28 Dec 2022 07:43:11 -0500
+ id 1pAVlo-00057s-OZ
+ for qemu-riscv@nongnu.org; Wed, 28 Dec 2022 07:42:58 -0500
 Received: from mail-ot1-x32a.google.com ([2607:f8b0:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pAVlz-0007f5-CE
- for qemu-riscv@nongnu.org; Wed, 28 Dec 2022 07:43:09 -0500
+ id 1pAVll-0007f5-R5
+ for qemu-riscv@nongnu.org; Wed, 28 Dec 2022 07:42:55 -0500
 Received: by mail-ot1-x32a.google.com with SMTP id
- x25-20020a056830115900b00670932eff32so9808970otq.3
- for <qemu-riscv@nongnu.org>; Wed, 28 Dec 2022 04:43:06 -0800 (PST)
+ x25-20020a056830115900b00670932eff32so9808694otq.3
+ for <qemu-riscv@nongnu.org>; Wed, 28 Dec 2022 04:42:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oikBKkKahhZEdm4ld5dwcA6luVTj35JLzUpMpaRato4=;
- b=dqQqwxEvnvsZs/t/upjdEtcqCKvzbZow44P4ATJ5elYRajV2/zAAis+waJvFbdxujp
- rQm2GN1jSdAPDkFz/Jg3IoMy7kzxkpcqd0R5TdD3iQV+TaQoagaCmve5bW9zyAWeKd9h
- 5K/sBtKyWTSKm6l0UivTyKIOZi4R1LCzxGC/cfIFQSx34WShl+Z8icIrMenVo7x7iiUR
- Pc753H0Ht4yB+jj0L4NytNNnGBEvFwRE0HEcrysZRJ0mm4zjHnriEAJVPsy2Isc1GxsR
- HQ2SBNxqsaZfx7/2Lk2OvkVXJsrtXxxVn+EXeLDoeMblzHCaM30kuK9ksEbE0elYNxVS
- Q2YQ==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WMy08FaZTs+K5MtyubSAO77LRTPhzUaXpfVFuFCVOvI=;
+ b=PDQkKfvG27LbXkKGOKPu7wGEmJW6MR7pEqFQdVnajIpuPVyzr8s5xqo5HE+p0GAwkZ
+ iq5i11Jqy0GNQA8qPADos0tWYs3pl2ikEFcd9Tjbka0lbc1/YxM1XNkFc0erBZP2r/C9
+ p/hdyu4gct8nDTdiH58kEnR704NFFI0onyTsBT9gP9hdFmY7tm7kenL6m3ppR8qDt7N4
+ ylavXAaKFrV0YA45TbNHcFbdlRehBA3qxpAslkJrEX4qW+3Nrta/PNaFL6Zy7yGohId8
+ y18gP25GVZrkbx9sVp+QzsIiaoOQoDVHQZeUs19J4zhVZKSzHxhKKsJIw5UchyXVk8YW
+ z8aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oikBKkKahhZEdm4ld5dwcA6luVTj35JLzUpMpaRato4=;
- b=Jk9GBviWe5aC9fsY1j9dYr+AxWMmznaI7HtAYsNMuuwTwvow13ZP5mewPAYiOw+cOP
- aWOmMqX2eZ4Bi1HOj8ibmEG6boAdxVOksdIrhlaMZoj35OS/TngFHRUN0uCmOKP0sINM
- iJ6UgJsTwpg0lkMSx44OH6zgo4JImA6Lz/F/mp5GpF3gXK1y4TUBGZ6q4hDayTxuszkM
- QoVPOFQFkorXg3QYQTuKojl/NCnoBMBvPPCIR677DdSmWSY6h7QG22mlAUAHyySwXyuf
- zTb6iY4pwAqNTLcF5lYAPYhlY6gzuqSLGZB6MbDenvAEA2dv6Gxq8QvfIAt+kuOfg1xb
- NukQ==
-X-Gm-Message-State: AFqh2kp74MLL+KO1wItg6Wcl0mmh/o5SIdcjBcRbancgHPEZOsftdCx5
- jUa9r0okp/U1ieC0otNmYWdXECee3DAMlSwB
-X-Google-Smtp-Source: AMrXdXs4GkppRt3XW8NM2KITOL8uq7/lYeEesN6kMMrDLepr/yOngPWAziCKRA1D8soQZJf1m9mTBQ==
-X-Received: by 2002:a05:6830:3358:b0:67a:a7ad:29ee with SMTP id
- l24-20020a056830335800b0067aa7ad29eemr11517468ott.18.1672231386573; 
- Wed, 28 Dec 2022 04:43:06 -0800 (PST)
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WMy08FaZTs+K5MtyubSAO77LRTPhzUaXpfVFuFCVOvI=;
+ b=Za51YRErkzu/hyBpzCQNRPOm2Cy1Lp1gaQoc4arCo1t3IE+KudSKFeeyVkNp9Y5fuF
+ wLUSBrt7tuEV/OoWlf2kVTBSHsJFfhUGq0oS/RvZvviAyRWLq9z3BzKNv/d10pfeHJJp
+ HLO6ZQOeOo+0EZMOSuMcIPvmSOBNEmf+OqiufaacGjeToDthz7mWb8Z9VyndN1kuL6Ra
+ HWOECkveWl03m7O3Wr7VTXs+dN7rUHxjbMmUZGP8tXZCc5PAjZcq84jqdsxBpO4SsEgE
+ gN6rvTlyN7NOEfOXkXUsHA8MM2NJAKxyXtqyn3dXqkI4AncJt/oR2joL4qHkrzI+JlIr
+ wIow==
+X-Gm-Message-State: AFqh2krYEDE3iloTmGCuNlrjdU4k7mER7Z0WGYz496ujaaxuZA3hyRd5
+ 71cq8b7mRElz7NfsElSpX+DzZw==
+X-Google-Smtp-Source: AMrXdXvT8JS+gEZFs11lYumT17XnhqCxTdhWnPpN32xECSQPB7mFr33aTK+iG6QKEDOVpDPN/UqcUQ==
+X-Received: by 2002:a9d:7397:0:b0:661:dfeb:ea4b with SMTP id
+ j23-20020a9d7397000000b00661dfebea4bmr13446949otk.10.1672231372026; 
+ Wed, 28 Dec 2022 04:42:52 -0800 (PST)
 Received: from fedora.. ([191.17.222.139]) by smtp.gmail.com with ESMTPSA id
- cj5-20020a056830640500b0066f09567827sm7689333otb.78.2022.12.28.04.43.04
+ cj5-20020a056830640500b0066f09567827sm7689333otb.78.2022.12.28.04.42.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Dec 2022 04:43:06 -0800 (PST)
+ Wed, 28 Dec 2022 04:42:51 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Bin Meng <bmeng@tinylab.org>
-Subject: [PATCH v2 05/10] hw/riscv: write initrd 'chosen' FDT inside
- riscv_load_initrd()
-Date: Wed, 28 Dec 2022 09:42:37 -0300
-Message-Id: <20221228124242.184784-6-dbarboza@ventanamicro.com>
+ Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH v2 00/10] riscv: opensbi boot test and cleanups
+Date: Wed, 28 Dec 2022 09:42:32 -0300
+Message-Id: <20221228124242.184784-1-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20221228124242.184784-1-dbarboza@ventanamicro.com>
-References: <20221228124242.184784-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -85,177 +80,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2022 12:43:11 -0000
+X-List-Received-Date: Wed, 28 Dec 2022 12:43:00 -0000
 
-riscv_load_initrd() returns the initrd end addr while also writing a
-'start' var to mark the addr start. These informations are being used
-just to write the initrd FDT node. Every existing caller of
-riscv_load_initrd() is writing the FDT in the same manner.
+Hi,
 
-We can simplify things by writing the FDT inside riscv_load_initrd(),
-sparing callers from having to manage start/end addrs to write the FDT
-themselves.
+In this new version I rebased the patches on top of
 
-An 'if (fdt)' check is already inserted at the end of the function
-because we'll end up using it later on with other boards that doesn´t
-have a FDT.
+"[PATCH 00/12] hw/riscv: Improve Spike HTIF emulation fidelity"
 
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Bin Meng <bmeng@tinylab.org>
----
- hw/riscv/boot.c            | 18 ++++++++++++------
- hw/riscv/microchip_pfsoc.c | 10 ++--------
- hw/riscv/sifive_u.c        | 10 ++--------
- hw/riscv/spike.c           | 10 ++--------
- hw/riscv/virt.c            | 10 ++--------
- include/hw/riscv/boot.h    |  4 ++--
- 6 files changed, 22 insertions(+), 40 deletions(-)
+from Bin Meng. Patches 4 and 5 from v1 got removed since Bin picked
+them in the HTIF changes.
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 98b80af51b..d3c71b3f0b 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -204,9 +204,10 @@ target_ulong riscv_load_kernel(const char *kernel_filename,
-     exit(1);
- }
- 
--hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
--                         uint64_t kernel_entry, hwaddr *start)
-+void riscv_load_initrd(const char *filename, uint64_t mem_size,
-+                       uint64_t kernel_entry, void *fdt)
- {
-+    hwaddr start, end;
-     ssize_t size;
- 
-     /*
-@@ -220,18 +221,23 @@ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
-      * halfway into RAM, and for boards with 256MB of RAM or more we put
-      * the initrd at 128MB.
-      */
--    *start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
-+    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
- 
--    size = load_ramdisk(filename, *start, mem_size - *start);
-+    size = load_ramdisk(filename, start, mem_size - start);
-     if (size == -1) {
--        size = load_image_targphys(filename, *start, mem_size - *start);
-+        size = load_image_targphys(filename, start, mem_size - start);
-         if (size == -1) {
-             error_report("could not load ramdisk '%s'", filename);
-             exit(1);
-         }
-     }
- 
--    return *start + size;
-+    /* Some RISC-V machines (e.g. opentitan) don't have a fdt. */
-+    if (fdt) {
-+        end = start + size;
-+        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-start", start);
-+        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end", end);
-+    }
- }
- 
- uint64_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index b10321b564..593a799549 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -633,14 +633,8 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
-                                          kernel_start_addr, NULL);
- 
-         if (machine->initrd_filename) {
--            hwaddr start;
--            hwaddr end = riscv_load_initrd(machine->initrd_filename,
--                                           machine->ram_size, kernel_entry,
--                                           &start);
--            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
--                                  "linux,initrd-start", start);
--            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
--                                  "linux,initrd-end", end);
-+            riscv_load_initrd(machine->initrd_filename, machine->ram_size,
-+                              kernel_entry, machine->fdt);
-         }
- 
-         if (machine->kernel_cmdline && *machine->kernel_cmdline) {
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index ddceb750ea..37f5087172 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -608,14 +608,8 @@ static void sifive_u_machine_init(MachineState *machine)
-                                          kernel_start_addr, NULL);
- 
-         if (machine->initrd_filename) {
--            hwaddr start;
--            hwaddr end = riscv_load_initrd(machine->initrd_filename,
--                                           machine->ram_size, kernel_entry,
--                                           &start);
--            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
--                                  "linux,initrd-start", start);
--            qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
--                                  end);
-+            riscv_load_initrd(machine->initrd_filename, machine->ram_size,
-+                              kernel_entry, machine->fdt);
-         }
-     } else {
-        /*
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 0d2feea930..360bf83564 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -311,14 +311,8 @@ static void spike_board_init(MachineState *machine)
-                                          htif_symbol_callback);
- 
-         if (machine->initrd_filename) {
--            hwaddr start;
--            hwaddr end = riscv_load_initrd(machine->initrd_filename,
--                                           machine->ram_size, kernel_entry,
--                                           &start);
--            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
--                                  "linux,initrd-start", start);
--            qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
--                                  end);
-+            riscv_load_initrd(machine->initrd_filename, machine->ram_size,
-+                              kernel_entry, machine->fdt);
-         }
-     } else {
-        /*
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 408f7a2256..5967b136b4 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1291,14 +1291,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
-                                          kernel_start_addr, NULL);
- 
-         if (machine->initrd_filename) {
--            hwaddr start;
--            hwaddr end = riscv_load_initrd(machine->initrd_filename,
--                                           machine->ram_size, kernel_entry,
--                                           &start);
--            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
--                                  "linux,initrd-start", start);
--            qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
--                                  end);
-+            riscv_load_initrd(machine->initrd_filename, machine->ram_size,
-+                              kernel_entry, machine->fdt);
-         }
-     } else {
-        /*
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index b273ab22f7..e37e1d1238 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -46,8 +46,8 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
- target_ulong riscv_load_kernel(const char *kernel_filename,
-                                target_ulong firmware_end_addr,
-                                symbol_fn_t sym_cb);
--hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
--                         uint64_t kernel_entry, hwaddr *start);
-+void riscv_load_initrd(const char *filename, uint64_t mem_size,
-+                       uint64_t kernel_entry, void *fdt);
- uint64_t riscv_load_fdt(hwaddr dram_start, uint64_t dram_size, void *fdt);
- void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
-                                hwaddr saddr,
+I also removed patches 13, 14 and 15 because I have another cleanup
+already planned for the create_fdt() functions and these 3 patches are
+more suitable there.
+
+The actual change made from v1 was on patch 1, where I added a riscv32
+spike test that is being skipped. The idea is that the skipped test will
+be a reminder that we already have a spike riscv32 test that can be
+reenabled as soon as the Opensib ROM has the appropriate fix:
+
+ (11/18) tests/avocado/riscv_opensbi.py:RiscvOpensbi.test_riscv32_spike: SKIP: requires OpenSBI fix to work
+
+
+Patch without reviews: 1
+
+Changes from v1:
+- patches were rebased with [1]
+- patches 13-15: removed
+  * will be re-sent in a follow-up series
+- patches 4-5: removed since they're picked by Bin in [1]
+- patch 1:
+  - added a 'skip' riscv32 spike test
+
+
+Based-on: <20221227064812.1903326-1-bmeng@tinylab.org>
+
+[1] https://patchwork.ozlabs.org/project/qemu-devel/list/?series=334159
+
+
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Bin Meng <bin.meng@windriver.com>
+
+Daniel Henrique Barboza (10):
+  tests/avocado: add RISC-V opensbi boot test
+  hw/riscv/spike: use 'fdt' from MachineState
+  hw/riscv/sifive_u: use 'fdt' from MachineState
+  hw/riscv/spike.c: load initrd right after riscv_load_kernel()
+  hw/riscv: write initrd 'chosen' FDT inside riscv_load_initrd()
+  hw/riscv: write bootargs 'chosen' FDT after riscv_load_kernel()
+  hw/riscv/boot.c: use MachineState in riscv_load_initrd()
+  hw/riscv/boot.c: use MachineState in riscv_load_kernel()
+  hw/riscv/boot.c: consolidate all kernel init in riscv_load_kernel()
+  hw/riscv/boot.c: make riscv_load_initrd() static
+
+ hw/riscv/boot.c                | 84 ++++++++++++++++++++++------------
+ hw/riscv/microchip_pfsoc.c     | 19 +-------
+ hw/riscv/opentitan.c           |  3 +-
+ hw/riscv/sifive_e.c            |  3 +-
+ hw/riscv/sifive_u.c            | 31 ++-----------
+ hw/riscv/spike.c               | 35 ++++----------
+ hw/riscv/virt.c                | 20 +-------
+ include/hw/riscv/boot.h        |  4 +-
+ include/hw/riscv/sifive_u.h    |  3 --
+ include/hw/riscv/spike.h       |  2 -
+ tests/avocado/riscv_opensbi.py | 77 +++++++++++++++++++++++++++++++
+ 11 files changed, 149 insertions(+), 132 deletions(-)
+ create mode 100644 tests/avocado/riscv_opensbi.py
+
 -- 
 2.38.1
 
