@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAO6J-00016s-Sy
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Dec 2022 23:31:35 -0500
+	id 1pAOBA-0002kL-VZ
+	for mharc-qemu-riscv@gnu.org; Tue, 27 Dec 2022 23:36:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pAO6D-00010e-7z; Tue, 27 Dec 2022 23:31:32 -0500
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
+ id 1pAOB1-0002je-3d; Tue, 27 Dec 2022 23:36:27 -0500
+Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pAO6A-000098-Fx; Tue, 27 Dec 2022 23:31:27 -0500
-Received: by mail-vs1-xe34.google.com with SMTP id m129so8741541vsc.11;
- Tue, 27 Dec 2022 20:31:25 -0800 (PST)
+ id 1pAOAy-00014z-3O; Tue, 27 Dec 2022 23:36:25 -0500
+Received: by mail-ua1-x92f.google.com with SMTP id q3so2537643uao.2;
+ Tue, 27 Dec 2022 20:36:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y9KL7J593K41LzeWTqjmfysLuCtXaN9UMskkMZ2j73A=;
- b=EiyYtEls21653OwbwfgPNRF6JRrhUVt7o44LWEvG3Du4B1Rrpaeak+9luipaTs9+Cz
- qe9PMNc4oZrywY+4xbCVsC5kzgNg5kcJ5HDW2MVJykJOQEdcgwawlww/AXy2xXR/7o0v
- /9Pm5HfY/HTYy+yFhqxChaeWrv27/uVLPzM06eIYXDKbbnF6q0yB7eQIhF0m/v8HI8UU
- ToRuwcw+22mxdQGM9yz+YVVcq9QbawsQfZl+w5Ekb+llRSXSK+NtsJH2ivHbtDh0xDix
- gZBfGlXl4YY/r1KK1INSdRqTqFt2kaq6HhwfaG4SpPzrNDtaRrFiEE5IAtdvuXq84Z1v
- 3q+Q==
+ bh=DLNYJzGRLnjtNR4T5XuYRIR7rcNohA3Zjt4JKbnfvf0=;
+ b=kdOoX28ro4O7voblLnH94/PTcTd3MAeLEPDip7AnA9+MjcR1zDmM/zUAoa7w/wpIfs
+ WRPU4O18qJYX4Dz29VQrBBp7G9iF5MnL+EsvecZQzdMn8GBayiDxiQ/VpziPYzKoxA9t
+ tEI56KoYpRE2a045PZL12zQ4k5W+//gHj5mIwe1ZLO6vZRKmYXrz9bhOFshZiymb8qDm
+ SooWvxJsTUUAFGgIa86t/W1ePsRNTVHLE1gXj99Ae1mSh3ogSfWI1KKomnNjnyrhjcOt
+ 9Lp86Co3+O5gaLGsXhu77dii9jhfsd3K6FLhRSCa1oCJbG+8a4RsjvUovWAsewDvJ/BO
+ Vmww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Y9KL7J593K41LzeWTqjmfysLuCtXaN9UMskkMZ2j73A=;
- b=UPaPtQAd8nsmNNN8XTz6jIW+zBNgYrFPEEXw6lev0OkIw7oKJCnCc3QzbhXWzYfniE
- 6qN62JafYZQeJmNopVvkUS775u+N6bme12qM2zSzy3Hd00HBRGNyi/hHtWqPoe54JOii
- i/ulfT7SG3hvB7iNEPd5MYx/A2diRzzcFJCqY9nkFVFecizEU0eYgV2JYVy5Z9AT0+q9
- VmNGFhnag08wGGnehDnzWV3x9F9/jWoyJXs2z4P4xjdp6tEAOXTlbEiyoQMBOiWfGvFH
- uFKCtWcXAAriKkI6QSWqpDp5NkowLi3aNNyz0Uk0bFHLZxUnU1K6J+4EDWW+Gdv+2m0F
- 2edQ==
-X-Gm-Message-State: AFqh2krmeN/u8RBgDFzfutQgy+rXVxYatXU0VfBQtCe5kPMtkewg08q5
- 8HyKDP+odRX6HUhZqD8DL7LFsl2bEt9tJgDDa6k=
-X-Google-Smtp-Source: AMrXdXuaXKXnzdhQ6VgOZETLAhRplzcKeh8RBTJKdaa/AQOsoAvwWZW7xY7oWR2E0p1YFoSnednULigWwyCmkDsjKz4=
-X-Received: by 2002:a67:dc10:0:b0:3b3:7675:d423 with SMTP id
- x16-20020a67dc10000000b003b37675d423mr2684495vsj.72.1672201884866; Tue, 27
- Dec 2022 20:31:24 -0800 (PST)
+ bh=DLNYJzGRLnjtNR4T5XuYRIR7rcNohA3Zjt4JKbnfvf0=;
+ b=lCutelBP/oW/a3WbtOopX9wZI5AuJOqxbvQo1gybbplY5Rmld5Jf26wBIErz8qn4/e
+ w2r+2gdgzM/35bMbwElq60gyojiW9D5RNEten1MNxAWvCtZa27FJi94uXZ4yowgOURE8
+ EZZsbohR1Vw2RLkYXijFSHfqGSW0cvd8k+IYITkczJjuxWUJVReRMhm9EiLCeD9onXq3
+ X2O9cRcJZ4P2sLZNTCKWshqIjPmI7fIhctrhZjd8yyEx3k/bBDfJKQZW1ltDYkEWRhYE
+ SyHbNtomzJR4jA5HpfMuzgFHVccXBp5JtoIdeOCN46KAYrJJewkxUwDHLcuLswITwr1l
+ j3/w==
+X-Gm-Message-State: AFqh2kot0+afITVAlSsTLkhebOhQUoOyVQFtcbzQW5wJeSZ4yBm+oaeV
+ 588sePwklIGoR9md5/71O0RU5Ln6SXESv9WF/7o=
+X-Google-Smtp-Source: AMrXdXsVGxxbhbyMHctvCo+ikVlkaM6qotk8IiwkIui3lEO1u1BcRGak4xopSrtwa8DdthrOy1BoXz4btDtiX+uqe2k=
+X-Received: by 2002:ab0:6812:0:b0:43f:487c:b2fb with SMTP id
+ z18-20020ab06812000000b0043f487cb2fbmr2134707uar.96.1672202182418; Tue, 27
+ Dec 2022 20:36:22 -0800 (PST)
 MIME-Version: 1.0
 References: <20221227064812.1903326-1-bmeng@tinylab.org>
- <20221227064812.1903326-9-bmeng@tinylab.org>
-In-Reply-To: <20221227064812.1903326-9-bmeng@tinylab.org>
+ <20221227064812.1903326-12-bmeng@tinylab.org>
+In-Reply-To: <20221227064812.1903326-12-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 28 Dec 2022 14:30:58 +1000
-Message-ID: <CAKmqyKOqYdd7G6juPzNPfmePS4_3YUfN1nhR0zpSQmpvatwSrA@mail.gmail.com>
-Subject: Re: [PATCH 08/12] hw/riscv: spike: Remove the out-of-date comments
+Date: Wed, 28 Dec 2022 14:35:56 +1000
+Message-ID: <CAKmqyKPBQ98YN6HA3kREW2QWovU5FZJAva29__6RwLz3auOLSA@mail.gmail.com>
+Subject: Re: [PATCH 11/12] hw/riscv/boot.c: Introduce riscv_find_firmware()
 To: Bin Meng <bmeng@tinylab.org>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Bin Meng <bin.meng@windriver.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,12 +75,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2022 04:31:33 -0000
+X-List-Received-Date: Wed, 28 Dec 2022 04:36:28 -0000
 
-On Tue, Dec 27, 2022 at 4:54 PM Bin Meng <bmeng@tinylab.org> wrote:
+On Tue, Dec 27, 2022 at 4:55 PM Bin Meng <bmeng@tinylab.org> wrote:
 >
-> Spike machine now supports OpenSBI plain binary bios image, so the
-> comments are no longer valid.
+> Rename previous riscv_find_firmware() to riscv_find_bios(), and
+> introduce a new riscv_find_firmware() to implement the first half
+> part of the work done in riscv_find_and_load_firmware().
+>
+> This new API is helpful for machine that wants to know the final
+> chosen firmware file name but does not want to load it.
 >
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
@@ -90,25 +94,99 @@ Alistair
 
 > ---
 >
->  hw/riscv/spike.c | 5 -----
->  1 file changed, 5 deletions(-)
+>  include/hw/riscv/boot.h |  2 ++
+>  hw/riscv/boot.c         | 39 +++++++++++++++++++++++++--------------
+>  2 files changed, 27 insertions(+), 14 deletions(-)
 >
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 8606331f61..ab0a945f8b 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -256,11 +256,6 @@ static void spike_board_init(MachineState *machine)
->      memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
->                                  mask_rom);
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index 60cf320c88..b273ab22f7 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -38,6 +38,8 @@ target_ulong riscv_find_and_load_firmware(MachineState *machine,
+>                                            hwaddr firmware_load_addr,
+>                                            symbol_fn_t sym_cb);
+>  const char *riscv_default_firmware_name(RISCVHartArrayState *harts);
+> +char *riscv_find_firmware(const char *firmware_filename,
+> +                          const char *default_machine_firmware);
+>  target_ulong riscv_load_firmware(const char *firmware_filename,
+>                                   hwaddr firmware_load_addr,
+>                                   symbol_fn_t sym_cb);
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index e1a544b1d9..98b80af51b 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -84,11 +84,11 @@ const char *riscv_default_firmware_name(RISCVHartArrayState *harts)
+>      return RISCV64_BIOS_BIN;
+>  }
 >
-> -    /*
-> -     * Not like other RISC-V machines that use plain binary bios images,
-> -     * keeping ELF files here was intentional because BIN files don't work
-> -     * for the Spike machine as HTIF emulation depends on ELF parsing.
-> -     */
->      if (riscv_is_32bit(&s->soc[0])) {
->          firmware_end_addr = riscv_find_and_load_firmware(machine,
->                                      RISCV32_BIOS_BIN, memmap[SPIKE_DRAM].base,
+> -static char *riscv_find_firmware(const char *firmware_filename)
+> +static char *riscv_find_bios(const char *bios_filename)
+>  {
+>      char *filename;
+>
+> -    filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, firmware_filename);
+> +    filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, bios_filename);
+>      if (filename == NULL) {
+>          if (!qtest_enabled()) {
+>              /*
+> @@ -97,8 +97,8 @@ static char *riscv_find_firmware(const char *firmware_filename)
+>               * running QEMU test will complain hence let's suppress the error
+>               * report for QEMU testing.
+>               */
+> -            error_report("Unable to load the RISC-V firmware \"%s\"",
+> -                         firmware_filename);
+> +            error_report("Unable to find the RISC-V BIOS \"%s\"",
+> +                         bios_filename);
+>              exit(1);
+>          }
+>      }
+> @@ -106,25 +106,36 @@ static char *riscv_find_firmware(const char *firmware_filename)
+>      return filename;
+>  }
+>
+> -target_ulong riscv_find_and_load_firmware(MachineState *machine,
+> -                                          const char *default_machine_firmware,
+> -                                          hwaddr firmware_load_addr,
+> -                                          symbol_fn_t sym_cb)
+> +char *riscv_find_firmware(const char *firmware_filename,
+> +                          const char *default_machine_firmware)
+>  {
+> -    char *firmware_filename = NULL;
+> -    target_ulong firmware_end_addr = firmware_load_addr;
+> +    char *filename = NULL;
+>
+> -    if ((!machine->firmware) || (!strcmp(machine->firmware, "default"))) {
+> +    if ((!firmware_filename) || (!strcmp(firmware_filename, "default"))) {
+>          /*
+>           * The user didn't specify -bios, or has specified "-bios default".
+>           * That means we are going to load the OpenSBI binary included in
+>           * the QEMU source.
+>           */
+> -        firmware_filename = riscv_find_firmware(default_machine_firmware);
+> -    } else if (strcmp(machine->firmware, "none")) {
+> -        firmware_filename = riscv_find_firmware(machine->firmware);
+> +        filename = riscv_find_bios(default_machine_firmware);
+> +    } else if (strcmp(firmware_filename, "none")) {
+> +        filename = riscv_find_bios(firmware_filename);
+>      }
+>
+> +    return filename;
+> +}
+> +
+> +target_ulong riscv_find_and_load_firmware(MachineState *machine,
+> +                                          const char *default_machine_firmware,
+> +                                          hwaddr firmware_load_addr,
+> +                                          symbol_fn_t sym_cb)
+> +{
+> +    char *firmware_filename;
+> +    target_ulong firmware_end_addr = firmware_load_addr;
+> +
+> +    firmware_filename = riscv_find_firmware(machine->firmware,
+> +                                            default_machine_firmware);
+> +
+>      if (firmware_filename) {
+>          /* If not "none" load the firmware */
+>          firmware_end_addr = riscv_load_firmware(firmware_filename,
 > --
 > 2.34.1
 >
