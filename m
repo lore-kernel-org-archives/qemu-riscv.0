@@ -1,69 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAVyv-0006r1-Qy
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 07:56:29 -0500
+	id 1pAW2d-0001iW-Fv
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 08:00:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pAVyu-0006p7-9k
- for qemu-riscv@nongnu.org; Wed, 28 Dec 2022 07:56:28 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pAW2Q-0001dl-6s
+ for qemu-riscv@nongnu.org; Wed, 28 Dec 2022 08:00:11 -0500
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pAVys-0007zP-JI
- for qemu-riscv@nongnu.org; Wed, 28 Dec 2022 07:56:28 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id l26so9609474wme.5
- for <qemu-riscv@nongnu.org>; Wed, 28 Dec 2022 04:56:12 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pAW2M-0008Q2-2O
+ for qemu-riscv@nongnu.org; Wed, 28 Dec 2022 08:00:04 -0500
+Received: by mail-wm1-x329.google.com with SMTP id
+ k26-20020a05600c1c9a00b003d972646a7dso8024435wms.5
+ for <qemu-riscv@nongnu.org>; Wed, 28 Dec 2022 05:00:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=3WdzzZycU+vR+d9eO9QQfdyeu4bWjnJ5VcHJO1cmyl0=;
- b=kVdycoyBDukfo8XpCsw6EfBOGbu18x2LebbYQr/PtbDyUHEju6hXyJlVj8uAM3X26j
- lDT3KKRbLero/UdZonhqtDPPnrZmDzUCUyu2/I5PNwx3M/cf9l+QcN0C6jx94ooRGXZ4
- j9T2px+gzf5GaE7ZC2AfGC0akY2rksrred0Wxc+hC3kVn9XuoVTpyWMh18b1buZbNg8a
- oPfobjvMMizPPwl6OMY/gfvsy54DAwMLyu4kvyBQ7JK8wKvfRfHjmOTGJs+IerUHB1ZW
- H5GnC5RNgbKIQL95yfnFWO1UKPJUTYReyk15LPHmPkYveo0C1qnCBgc3GmjMQgudvDVv
- sqng==
+ bh=844kbkEnp9o4+AaVH1vt05kFMxYhf24pDvrl/MtOXlI=;
+ b=v0c3vuozIu2ZU8mRLFZilYRK103pkkAM3RLdiW1rSxfuv4TiJyHy8u/24vZSbnJEFv
+ CJ/ZwUoRocBNeFDFe0JTSV9zQnw4kXFHJRQNwki7JY2G+0BsCp51u+9dPgbAAML1hBhD
+ ytI037H9AlpuQD4hp8HhzPOaHdY+eT81rgtM7YFMBec1t49RiU/2SXdWwLx2pTdNTrwF
+ 0WLggg9zcFrmpX62iWnsvqCQMxwnAKIt6w7MmBhvVfude7VakowpuGrbHR08CNnPygRQ
+ 8KyTg6Wg6GmjtMtP1v8mHLGZlgVLVe8V9veGY1zls3kE/Mkz+rWDNwI/PJj/G906PUTd
+ n/yA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3WdzzZycU+vR+d9eO9QQfdyeu4bWjnJ5VcHJO1cmyl0=;
- b=bZITiZfZatqa9ZmkAsDc7WfkkqgnFPhp8N4NGl0KNK3V4AxftTxNU5bAzHMSzootbZ
- oM28m8eXHJ3MyR6bNWZVgkzxwMBfHre+E/7nDqxINVINucqsGaQkyc2bDrk2hqc53iIx
- tsFCpJWClPkp5Awz/kInxEwZSSccdxrYzvxJ3YrjeJAfml/qUyuVJkIOGqm0euNJN8Ye
- 5vkyGjxeepEYzn+U1uVhgez+plWKTaL5MMsPEINYSX2EPVo/gI5woCTKZXRM6WLMSpQy
- z7MjAyp5WOJWpbWAWZ/6dc9wasdR6CP+viRiCo41Vr6/pj/Ug5XX4T8X6fZOnywyW4lT
- wP9w==
-X-Gm-Message-State: AFqh2kokfHmAOSCmZrg3yy2RKOvdX2Ifq8JBI1qhgwkfDTvZEWq/qa4o
- 8eNl/ia1t7bvy80cBlmjlOFLpQ==
-X-Google-Smtp-Source: AMrXdXuN9xUnDcP1uMb5d4/9CHja2/ZsBdXSTeY82kSxuURVJgTPtfVittmcqVmei8cUfHbp9lElEw==
-X-Received: by 2002:a05:600c:3d0e:b0:3d3:4aa6:4fd0 with SMTP id
- bh14-20020a05600c3d0e00b003d34aa64fd0mr17775434wmb.6.1672232171423; 
- Wed, 28 Dec 2022 04:56:11 -0800 (PST)
+ bh=844kbkEnp9o4+AaVH1vt05kFMxYhf24pDvrl/MtOXlI=;
+ b=eiR2OaotW5lsUDe4W7yWHiEQhc6Do0vR3Jy/xKaH9+7aK2sWZ1pzRnJzO9sTGzlt3N
+ Oz6sNMRNVaoPueUfbLrTjCOMbKCxNr4mMufJH/s8ZyaWV9wqoX8HlVlcD7XiQUuW0zkl
+ 1J6lj8w3u/ykstoIOO2deW5g4czd0u3XMyHWNVfHTZrqYYEIbnEB3NMEq90wAmWh/uTw
+ iS+bxSVcXw9b6mfHwUxF2l5Hgvjaljx78lrNoWqAzw0RWs0xujUAvmQxiBnMtyb4eKjS
+ sPu2j3ClG7MzEKEVy8aWlfuP7I0u3KnEr+iX3Y+9sou8eZ6LjQmWTWHA9jRHEjIjUVeO
+ RB9w==
+X-Gm-Message-State: AFqh2koDaYtyr2GOkLDcw0j57dpVgAhjUhs6SHJ35A70nKyagNbovpOT
+ OHq42D3COX16EiFKAGbl2zsG2w==
+X-Google-Smtp-Source: AMrXdXvphywdBJrw8wrxxpQR8/HzXS5VrMDpkLpfxvMx5xfpE/48C9995SpzxWoSKlZG05LD7BSiCw==
+X-Received: by 2002:a05:600c:3844:b0:3d3:4406:8a3a with SMTP id
+ s4-20020a05600c384400b003d344068a3amr22626455wmr.30.1672232399511; 
+ Wed, 28 Dec 2022 04:59:59 -0800 (PST)
 Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- t15-20020a5d534f000000b002365254ea42sm15543180wrv.1.2022.12.28.04.56.10
+ r13-20020a05600c458d00b003d34f170487sm32092769wmo.0.2022.12.28.04.59.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Dec 2022 04:56:11 -0800 (PST)
-Message-ID: <77a6f2da-e56e-a099-e0a1-6a99c4a9f7c9@linaro.org>
-Date: Wed, 28 Dec 2022 13:56:09 +0100
+ Wed, 28 Dec 2022 04:59:59 -0800 (PST)
+Message-ID: <1ff3c774-edaf-74cf-df57-ebcc7d75363f@linaro.org>
+Date: Wed, 28 Dec 2022 13:59:57 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.6.1
-Subject: Re: [PATCH v2 09/10] hw/riscv/boot.c: consolidate all kernel init in
- riscv_load_kernel()
+Subject: Re: [PATCH v2 01/10] tests/avocado: add RISC-V opensbi boot test
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Bin Meng <bmeng@tinylab.org>
+ Bin Meng <bin.meng@windriver.com>, Cleber Rosa <crosa@redhat.com>
 References: <20221228124242.184784-1-dbarboza@ventanamicro.com>
- <20221228124242.184784-10-dbarboza@ventanamicro.com>
+ <20221228124242.184784-2-dbarboza@ventanamicro.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20221228124242.184784-10-dbarboza@ventanamicro.com>
+In-Reply-To: <20221228124242.184784-2-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
 X-Spam_bar: ---
@@ -83,81 +82,97 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2022 12:56:28 -0000
+X-List-Received-Date: Wed, 28 Dec 2022 13:00:11 -0000
 
 On 28/12/22 13:42, Daniel Henrique Barboza wrote:
-> The microchip_icicle_kit, sifive_u, spike and virt boards are now doing
-> the same steps when '-kernel' is used:
+> This test is used to do a quick sanity check to ensure that we're able
+> to run the existing QEMU FW image.
 > 
-> - execute load_kernel()
-> - load init_rd()
-> - write kernel_cmdline
+> 'sifive_u', 'spike' and 'virt' riscv64 machines, and 'sifive_u' and
+> 'virt' 32 bit machines are able to run the default RISCV64_BIOS_BIN |
+> RISCV32_BIOS_BIN firmware with minimal options.
 > 
-> Let's fold everything inside riscv_load_kernel() to avoid code
-> repetition. Every other board that uses riscv_load_kernel() will have
-> this same behavior, including boards that doesn't have a valid FDT, so
-> we need to take care to not do FDT operations without checking it first.
+> The riscv32 'spike' machine isn't bootable at this moment, requiring an
+> Opensbi fix [1] and QEMU side changes [2]. We could just leave at that
+> or add a 'skip' test to remind us about it. To work as a reminder that
+> we have a riscv32 'spike' test that should be enabled as soon as Opensbi
+> QEMU rom receives the fix, we're adding a 'skip' test:
 > 
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
+> (11/18) tests/avocado/riscv_opensbi.py:RiscvOpensbi.test_riscv32_spike:
+>          SKIP: requires OpenSBI fix to work
+> 
+> [1] https://patchwork.ozlabs.org/project/opensbi/patch/20221226033603.1860569-1-bmeng@tinylab.org/
+> [2] https://patchwork.ozlabs.org/project/qemu-devel/list/?series=334159
+> 
+> Cc: Cleber Rosa <crosa@redhat.com>
+> Cc: Philippe Mathieu-Daudé <philmd@linaro.org>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Bin Meng <bmeng@tinylab.org>
 > ---
->   hw/riscv/boot.c            | 21 ++++++++++++++++++---
->   hw/riscv/microchip_pfsoc.c |  9 ---------
->   hw/riscv/sifive_u.c        |  9 ---------
->   hw/riscv/spike.c           |  9 ---------
->   hw/riscv/virt.c            |  9 ---------
->   5 files changed, 18 insertions(+), 39 deletions(-)
+>   tests/avocado/riscv_opensbi.py | 77 ++++++++++++++++++++++++++++++++++
+>   1 file changed, 77 insertions(+)
+>   create mode 100644 tests/avocado/riscv_opensbi.py
 > 
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index cd9c989edb..95f780a228 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -177,6 +177,7 @@ target_ulong riscv_load_kernel(MachineState *machine,
->   {
->       const char *kernel_filename = machine->kernel_filename;
->       uint64_t kernel_load_base, kernel_entry;
-> +    void *fdt = machine->fdt;
->   
->       /*
->        * NB: Use low address not ELF entry point to ensure that the fw_dynamic
-> @@ -188,21 +189,35 @@ target_ulong riscv_load_kernel(MachineState *machine,
->       if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
->                            NULL, &kernel_load_base, NULL, NULL, 0,
->                            EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
-> -        return kernel_load_base;
-> +        kernel_entry = kernel_load_base;
-> +        goto out;
->       }
->   
->       if (load_uimage_as(kernel_filename, &kernel_entry, NULL, NULL,
->                          NULL, NULL, NULL) > 0) {
-> -        return kernel_entry;
-> +        goto out;
->       }
->   
->       if (load_image_targphys_as(kernel_filename, kernel_start_addr,
->                                  current_machine->ram_size, NULL) > 0) {
-> -        return kernel_start_addr;
-> +        kernel_entry = kernel_start_addr;
-> +        goto out;
->       }
->   
->       error_report("could not load kernel '%s'", kernel_filename);
->       exit(1);
-> +
-> +out:
-> +    if (machine->initrd_filename) {
-> +        riscv_load_initrd(machine, kernel_entry);
-> +    }
-> +
-> +    if (fdt && machine->kernel_cmdline && *machine->kernel_cmdline) {
-> +        qemu_fdt_setprop_string(fdt, "/chosen", "bootargs",
-> +                                machine->kernel_cmdline);
-> +    }
-> +
-> +    return kernel_entry;
->   }
+> diff --git a/tests/avocado/riscv_opensbi.py b/tests/avocado/riscv_opensbi.py
+> new file mode 100644
+> index 0000000000..64fcf3c774
+> --- /dev/null
+> +++ b/tests/avocado/riscv_opensbi.py
+> @@ -0,0 +1,77 @@
+> +# opensbi boot test for RISC-V machines
 
-Worth renaming as riscv_load_kernel_and_initrd()?
+s/opensbi/OpenSBI/
+
+> +#
+> +# Copyright (c) 2022, Ventana Micro
+> +#
+> +# This work is licensed under the terms of the GNU GPL, version 2 or
+> +# later.  See the COPYING file in the top-level directory.
+> +
+> +from avocado_qemu import QemuSystemTest
+> +from avocado import skip
+> +from avocado_qemu import wait_for_console_pattern
+> +
+> +class RiscvOpensbi(QemuSystemTest):
+> +    """
+> +    :avocado: tags=accel:tcg
+> +    """
+> +    timeout = 5
+
+Easier to review common code once:
+
+        def boot_opensbi(self):
+            self.vm.set_console()
+            self.vm.launch()
+            wait_for_console_pattern(self, 'Platform Name')
+            wait_for_console_pattern(self, 'Boot HART MEDELEG')
+
+> +
+> +    def test_riscv64_virt(self):
+> +        """
+> +        :avocado: tags=arch:riscv64
+> +        :avocado: tags=machine:virt
+> +        """
+
+            self.boot_opensbi()
+
+> +    def test_riscv64_spike(self):
+> +        """
+> +        :avocado: tags=arch:riscv64
+> +        :avocado: tags=machine:spike
+> +        """
+
+            self.boot_opensbi()
+
+[...]
+
+> +    @skip("requires OpenSBI fix to work")
+> +    def test_riscv32_spike(self):
+> +        """
+> +        :avocado: tags=arch:riscv32
+> +        :avocado: tags=machine:spike
+> +        """
+
+            self.boot_opensbi()
+
+
 
