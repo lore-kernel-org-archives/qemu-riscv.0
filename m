@@ -1,70 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAP9T-0002Gj-Hc
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 00:38:55 -0500
+	id 1pAPDT-0003KI-3i
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 00:43:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pAP9S-0002GV-AT; Wed, 28 Dec 2022 00:38:54 -0500
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
+ id 1pAPDR-0003K4-Br; Wed, 28 Dec 2022 00:43:01 -0500
+Received: from mail-vk1-xa36.google.com ([2607:f8b0:4864:20::a36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pAP9Q-0008DS-En; Wed, 28 Dec 2022 00:38:54 -0500
-Received: by mail-vs1-xe34.google.com with SMTP id 128so14606982vsz.12;
- Tue, 27 Dec 2022 21:38:51 -0800 (PST)
+ id 1pAPDP-0001rM-Ej; Wed, 28 Dec 2022 00:43:01 -0500
+Received: by mail-vk1-xa36.google.com with SMTP id i84so149152vke.7;
+ Tue, 27 Dec 2022 21:42:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AoGLHyqSK5DFhmIoljd+/g+zW87eTtl2QdgdFurPWbM=;
- b=c6FDyfBAMuw7T9U5Ceu+kOjSLC0IoKZbMTj0f+JSDRLLSSVwPUuY10cDjiNaaXkyQF
- 6g1Qd7TBsId1Eyaa7XFVOwpoFgTXzz0R6TgEgWzfD4EXPJDgfxpX3Tf6SnxBTf2ltVzy
- 9GPHg8EnpwOOHlc5e4ndZP1+QKCIP5qxpMunfLtUrdRM2TJkitzDMtomFuWKyVBIL+Lw
- xFgNDNJF4FoHIiuunstDtkGXIa8qtHXzSQoSzxi7eKfWdz/39PYJEmLn/KeLxZed5Ne2
- lPVxBnOJ0BdTfjzjhtLNo4xpxKjZGybnmrti46A2x4uJs7sWWtlFRsbOcgMTbiVpAzkG
- 838Q==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I45P6+0Tjclvu/5c/iDu/ILb+R3pHqV4V8ja7p1OqVI=;
+ b=aM40hbpWsWdTTOmDO8mEcRUpdvXin+qKC5aAdEsyNAp8x1IpxW9EsZx6b+511dD01Q
+ UCy67tGQok6O6DXL8KTMv6lZezVvpVDDZ7wkUYZs9Fw33f0lRl922fL9cIWa+UEMI7se
+ tYxmeM9EMfXZen1+gpqrFs04kmc1wrgKYQElOUubL0UHyqEZ11r2ujWKW/XTXZv1Z2X3
+ YR/WRAQjZZgjO0Q6kZl3yqzQGD8HM43/Cwtjl/UuXAQYHS73rXUoxaxNDf4kS5tg3FQf
+ T9P2DMjT7xmyaU0MUOCSOlx0YQvM+vH+bkPf5S3IHILe8lq1Q4Ri4W5exGyhspz0aMMV
+ JIFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AoGLHyqSK5DFhmIoljd+/g+zW87eTtl2QdgdFurPWbM=;
- b=57zQpMnzC6Ovse+8XTTADIenWQrfFnNyeYo2EqTmZrY+2Zvz5dMDysG9JJSv9WqGdo
- EgsZ6et+aW2X8FusekZHC1g3DUBpA3Mu+YFZ1m3rlFZqOpu/22yFrKSSMTmdrNYGKJNh
- grWmQpQEkQSr73Ugc4YT5G6QP2eJKnohLhuXUuwiTxbFzgkHUbjgu2+yY2lB2vNoJ91f
- v50pbmxEZ+zVRR8z3+ZPKVn9RzRC2zwbeM1ShmwsVtz1dlTSz91vkih43MWSVPrJEBjQ
- NczVzy+J/Mk2onUYCIlQq4HF0bag/rpOpyxzPLxL9KcOWNWv4/gwoz7ywLFi6cbSslpE
- TIiA==
-X-Gm-Message-State: AFqh2kqzH686IpGMS6OOKofxCT/lt3BijL9F2GNLXLQjJQMArIFIFstm
- HYjnj0v8T5pU6plBuLzWVoq9yehhfOm9NTUUn7o=
-X-Google-Smtp-Source: AMrXdXui05wgqnELAFqYDg6qfb8zerp9qFvFCh0W6GyEEFfEHG+/me+j6QICZpcigRViSyRaqlf+6/fE0qO8sytLBgw=
-X-Received: by 2002:a67:dc10:0:b0:3b3:7675:d423 with SMTP id
- x16-20020a67dc10000000b003b37675d423mr2700468vsj.72.1672205931096; Tue, 27
- Dec 2022 21:38:51 -0800 (PST)
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=I45P6+0Tjclvu/5c/iDu/ILb+R3pHqV4V8ja7p1OqVI=;
+ b=Dmec7wY9SYf7H+0MET4S6CCjp7GSJPvKQV4uXP2PNepS6jvtvHE2n3a/lAgVe2kcXU
+ rKtJqN3nmN9C9tFtJQYshc7lU1Xetoty8wRZ2EWSWhB2a5c5tj19UL4rw61mnoUZ5JDR
+ 070mRfIGGh+K/Gyr2JmanVCl7MyaBhAa6MSpoKMvJ66uzs7snRjhLwtnUbXt0PB2HzFm
+ lD2S12FpiXq0JLCYsLqItaZbJHj4kNft327wxLVgDabcbLBK5Z6lsYcw22XfWxRyfWMA
+ /DGpVewcsmPcZUqGtmGgX/+5VQjQwU5IT6OTS5vveJ7QVeEmswwwlZsnBw/NDm9WI6c5
+ uz9w==
+X-Gm-Message-State: AFqh2kpnSKH9Y96mmMIbOfdp5OygvK9riMSZdZkt1mb03Q5ocfeBGNXe
+ K4h0IocI5USvmI1MSL3D3tQhLcvqi7RIOxz+dzg=
+X-Google-Smtp-Source: AMrXdXuR5NuAscsz2AzVRjDVajpWG2SzCc80FXyLzjJRglkO9fouMW6PLzldjxdj311Voh9KSNBe3xLcjIH9XnoN37Y=
+X-Received: by 2002:a1f:a954:0:b0:3b8:ba98:bd43 with SMTP id
+ s81-20020a1fa954000000b003b8ba98bd43mr2660335vke.34.1672206177912; Tue, 27
+ Dec 2022 21:42:57 -0800 (PST)
 MIME-Version: 1.0
-References: <20221108125703.1463577-1-apatel@ventanamicro.com>
- <20221108125703.1463577-3-apatel@ventanamicro.com>
- <CAKmqyKP+hc4N6Z2AqkQpCmF=oyTE_rf-XfSsTHChwcUWRE5gsg@mail.gmail.com>
- <CAK9=C2Uu1bCcZht+ydiazSmgnkD_hhLetXP4WcA92DypE4m9=A@mail.gmail.com>
- <CAKmqyKPw54F0uVy+7SjoY16o7RYyW6qwLhaYaKR7aNpP4Nz27Q@mail.gmail.com>
- <CAK9=C2V21JcgyUKub1JGVT0DEaeyzJ1GXQYcyaZy4Xv26F5fyA@mail.gmail.com>
- <CAKmqyKOc+xKEy1nhp6vCOtVHspfQ5WY7oE6wx5aGURhxQOrdqQ@mail.gmail.com>
- <CAK9=C2VA-1c8J-t8Sqp-8+eW9-0xaALgbG8LORd06--Jb-gTAw@mail.gmail.com>
-In-Reply-To: <CAK9=C2VA-1c8J-t8Sqp-8+eW9-0xaALgbG8LORd06--Jb-gTAw@mail.gmail.com>
+References: <20221130075001.19130-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20221130075001.19130-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 28 Dec 2022 15:38:24 +1000
-Message-ID: <CAKmqyKMQ7VJeeh0Rm3gjv8wDNgqsP5ShgbK2FaJstFSGAZgf8Q@mail.gmail.com>
-Subject: Re: [PATCH v2 2/5] target/riscv: Update VS timer whenever htimedelta
- changes
-To: Anup Patel <apatel@ventanamicro.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atishp@atishpatra.org>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Wed, 28 Dec 2022 15:42:31 +1000
+Message-ID: <CAKmqyKO0BpPbd7onPybSeyXaPxrMWm4tODjVj94ynKC7+aGdUg@mail.gmail.com>
+Subject: Re: [PATCH v8 0/9] support subsets of code size reduction extension
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a36;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa36.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -85,136 +75,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2022 05:38:54 -0000
+X-List-Received-Date: Wed, 28 Dec 2022 05:43:01 -0000
 
-On Fri, Dec 23, 2022 at 11:14 PM Anup Patel <apatel@ventanamicro.com> wrote:
+On Wed, Nov 30, 2022 at 5:53 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> On Thu, Dec 15, 2022 at 8:55 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Mon, Dec 12, 2022 at 9:12 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> > >
-> > > On Mon, Dec 12, 2022 at 11:23 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > >
-> > > > On Thu, Dec 8, 2022 at 6:41 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> > > > >
-> > > > > On Thu, Dec 8, 2022 at 9:00 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > > > >
-> > > > > > On Tue, Nov 8, 2022 at 11:07 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> > > > > > >
-> > > > > > > The htimedelta[h] CSR has impact on the VS timer comparison so we
-> > > > > > > should call riscv_timer_write_timecmp() whenever htimedelta changes.
-> > > > > > >
-> > > > > > > Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp suppor")
-> > > > > > > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-> > > > > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > > >
-> > > > > > This patch breaks my Xvisor test. When running OpenSBI and Xvisor like this:
-> > > > > >
-> > > > > > qemu-system-riscv64 -machine virt \
-> > > > > >     -m 1G -serial mon:stdio -serial null -nographic \
-> > > > > >     -append 'vmm.console=uart@10000000 vmm.bootcmd="vfs mount initrd
-> > > > > > /;vfs run /boot.xscript;vfs cat /system/banner.txt; guest kick guest0;
-> > > > > > vserial bind guest0/uart0"' \
-> > > > > >     -smp 4 -d guest_errors \
-> > > > > >     -bios none \
-> > > > > >     -device loader,file=./images/qemuriscv64/vmm.bin,addr=0x80200000 \
-> > > > > >     -kernel ./images/qemuriscv64/fw_jump.elf \
-> > > > > >     -initrd ./images/qemuriscv64/vmm-disk-linux.img -cpu rv64,h=true
-> > > > > >
-> > > > > > Running:
-> > > > > >
-> > > > > > Xvisor v0.3.0-129-gbc33f339 (Jan  1 1970 00:00:00)
-> > > > > >
-> > > > > > I see this failure:
-> > > > > >
-> > > > > > INIT: bootcmd:  guest kick guest0
-> > > > > >
-> > > > > > guest0: Kicked
-> > > > > >
-> > > > > > INIT: bootcmd:  vserial bind guest0/uart0
-> > > > > >
-> > > > > > [guest0/uart0] cpu_vcpu_stage2_map: guest_phys=0x000000003B9AC000
-> > > > > > size=0x4096 map failed
-> > > > > >
-> > > > > > do_error: CPU3: VCPU=guest0/vcpu0 page fault failed (error -1)
-> > > > > >
-> > > > > >        zero=0x0000000000000000          ra=0x0000000080001B4E
-> > > > > >
-> > > > > >          sp=0x000000008001CF80          gp=0x0000000000000000
-> > > > > >
-> > > > > >          tp=0x0000000000000000          s0=0x000000008001CFB0
-> > > > > >
-> > > > > >          s1=0x0000000000000000          a0=0x0000000010001048
-> > > > > >
-> > > > > >          a1=0x0000000000000000          a2=0x0000000000989680
-> > > > > >
-> > > > > >          a3=0x000000003B9ACA00          a4=0x0000000000000048
-> > > > > >
-> > > > > >          a5=0x0000000000000000          a6=0x0000000000019000
-> > > > > >
-> > > > > >          a7=0x0000000000000000          s2=0x0000000000000000
-> > > > > >
-> > > > > >          s3=0x0000000000000000          s4=0x0000000000000000
-> > > > > >
-> > > > > >          s5=0x0000000000000000          s6=0x0000000000000000
-> > > > > >
-> > > > > >          s7=0x0000000000000000          s8=0x0000000000000000
-> > > > > >
-> > > > > >          s9=0x0000000000000000         s10=0x0000000000000000
-> > > > > >
-> > > > > >         s11=0x0000000000000000          t0=0x0000000000004000
-> > > > > >
-> > > > > >          t1=0x0000000000000100          t2=0x0000000000000000
-> > > > > >
-> > > > > >          t3=0x0000000000000000          t4=0x0000000000000000
-> > > > > >
-> > > > > >          t5=0x0000000000000000          t6=0x0000000000000000
-> > > > > >
-> > > > > >        sepc=0x0000000080001918     sstatus=0x0000000200004120
-> > > > > >
-> > > > > >     hstatus=0x00000002002001C0     sp_exec=0x0000000010A64000
-> > > > > >
-> > > > > >      scause=0x0000000000000017       stval=0x000000003B9ACAF8
-> > > > > >
-> > > > > >       htval=0x000000000EE6B2BE      htinst=0x0000000000D03021
-> > > > > >
-> > > > > > I have tried updating to a newer Xvisor release, but with that I don't
-> > > > > > get any serial output.
-> > > > > >
-> > > > > > Can you help get the Xvisor tests back up and running?
-> > > > >
-> > > > > I tried the latest Xvisor-next (https://github.com/avpatel/xvisor-next)
-> > > > > with your QEMU riscv-to-apply.next branch and it works fine (both
-> > > > > with and without Sstc).
-> > > >
-> > > > Does it work with the latest release?
-> > >
-> > > Yes, the latest Xvisor-next repo works for QEMU v7.2.0-rc4 and
-> > > your riscv-to-apply.next branch (commit 51bb9de2d188)
-> >
-> > I can't get anything to work with this patch. I have dropped this and
-> > the patches after this.
-> >
-> > I'm building the latest Xvisor release with:
-> >
-> > export CROSS_COMPILE=riscv64-linux-gnu-
-> > ARCH=riscv make generic-64b-defconfig
-> > make
-> >
-> > and running it as above, yet nothing. What am I missing here?
+> This patchset implements RISC-V Zc* extension v1.0.0.RC5.7 version instru=
+ctions.
 >
-> I tried multiple times with the latest Xvisor on different machines but
-> still can't reproduce the issue you are seeing.
-
-Odd
-
+> Specification:
+> https://github.com/riscv/riscv-code-size-reduction/tree/main/Zc-specifica=
+tion
 >
-> We generally provide pre-built binaries with every Xvisor release
-> so I will share with you pre-built binaries of the upcoming Xvisor-0.3.2
-> release. Maybe that would help you ?
+> The port is available here:
+> https://github.com/plctlab/plct-qemu/tree/plct-zce-upstream-v8
+>
+> To test Zc* implementation, specify cpu argument with 'x-zca=3Dtrue,x-zcb=
+=3Dtrue,x-zcf=3Dtrue,f=3Dtrue" and "x-zcd=3Dtrue,d=3Dtrue" (or "x-zcmp=3Dtr=
+ue,x-zcmt=3Dtrue" with c or d=3Dfalse) to enable Zca/Zcb/Zcf and Zcd(or Zcm=
+p,Zcmt) extensions support.
+>
+>
+> This implementation can pass the basic zc tests from https://github.com/y=
+ulong-plct/zc-test
+>
+> v8:
+> * improve disas support in Patch 9
+>
+> v7:
+> * Fix description for Zca
+>
+> v6=EF=BC=9A
+> * fix base address for jump table in Patch 7
+> * rebase on riscv-to-apply.next
+>
+> v5:
+> * fix exception unwind problem for cpu_ld*_code in helper of cm_jalt
+>
+> v4:
+> * improve Zcmp suggested by Richard
+> * fix stateen related check for Zcmt
+>
+> v3:
+> * update the solution for Zcf to the way of Zcd
+> * update Zcb to reuse gen_load/store
+> * use trans function instead of helper for push/pop
+>
+> v2:
+> * add check for relationship between Zca/Zcf/Zcd with C/F/D based on rela=
+ted discussion in review of Zc* spec
+> * separate c.fld{sp}/fsd{sp} with fld{sp}/fsd{sp} before support of zcmp/=
+zcmt
+>
+> Weiwei Li (9):
+>   target/riscv: add cfg properties for Zc* extension
+>   target/riscv: add support for Zca extension
+>   target/riscv: add support for Zcf extension
+>   target/riscv: add support for Zcd extension
+>   target/riscv: add support for Zcb extension
+>   target/riscv: add support for Zcmp extension
+>   target/riscv: add support for Zcmt extension
+>   target/riscv: expose properties for Zc* extension
+>   disas/riscv.c: add disasm support for Zc*
 
-That would work. Let me know when the release happens and I can update
-my images.
+I think this series has been fully reviewed. Do you mind rebasing it
+on https://github.com/alistair23/qemu/tree/riscv-to-apply.next and
+then I'll apply it
 
 Alistair
+
+>
+>  disas/riscv.c                             | 228 +++++++++++++++-
+>  target/riscv/cpu.c                        |  56 ++++
+>  target/riscv/cpu.h                        |  10 +
+>  target/riscv/cpu_bits.h                   |   7 +
+>  target/riscv/csr.c                        |  38 ++-
+>  target/riscv/helper.h                     |   3 +
+>  target/riscv/insn16.decode                |  63 ++++-
+>  target/riscv/insn_trans/trans_rvd.c.inc   |  18 ++
+>  target/riscv/insn_trans/trans_rvf.c.inc   |  18 ++
+>  target/riscv/insn_trans/trans_rvi.c.inc   |   4 +-
+>  target/riscv/insn_trans/trans_rvzce.c.inc | 313 ++++++++++++++++++++++
+>  target/riscv/machine.c                    |  19 ++
+>  target/riscv/meson.build                  |   3 +-
+>  target/riscv/translate.c                  |  15 +-
+>  target/riscv/zce_helper.c                 |  55 ++++
+>  15 files changed, 834 insertions(+), 16 deletions(-)
+>  create mode 100644 target/riscv/insn_trans/trans_rvzce.c.inc
+>  create mode 100644 target/riscv/zce_helper.c
+>
+> --
+> 2.25.1
+>
+>
 
