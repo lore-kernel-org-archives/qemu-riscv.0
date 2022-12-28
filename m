@@ -1,60 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAOBA-0002kL-VZ
-	for mharc-qemu-riscv@gnu.org; Tue, 27 Dec 2022 23:36:37 -0500
+	id 1pAP9T-0002Gj-Hc
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 00:38:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pAOB1-0002je-3d; Tue, 27 Dec 2022 23:36:27 -0500
-Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
+ id 1pAP9S-0002GV-AT; Wed, 28 Dec 2022 00:38:54 -0500
+Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pAOAy-00014z-3O; Tue, 27 Dec 2022 23:36:25 -0500
-Received: by mail-ua1-x92f.google.com with SMTP id q3so2537643uao.2;
- Tue, 27 Dec 2022 20:36:23 -0800 (PST)
+ id 1pAP9Q-0008DS-En; Wed, 28 Dec 2022 00:38:54 -0500
+Received: by mail-vs1-xe34.google.com with SMTP id 128so14606982vsz.12;
+ Tue, 27 Dec 2022 21:38:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DLNYJzGRLnjtNR4T5XuYRIR7rcNohA3Zjt4JKbnfvf0=;
- b=kdOoX28ro4O7voblLnH94/PTcTd3MAeLEPDip7AnA9+MjcR1zDmM/zUAoa7w/wpIfs
- WRPU4O18qJYX4Dz29VQrBBp7G9iF5MnL+EsvecZQzdMn8GBayiDxiQ/VpziPYzKoxA9t
- tEI56KoYpRE2a045PZL12zQ4k5W+//gHj5mIwe1ZLO6vZRKmYXrz9bhOFshZiymb8qDm
- SooWvxJsTUUAFGgIa86t/W1ePsRNTVHLE1gXj99Ae1mSh3ogSfWI1KKomnNjnyrhjcOt
- 9Lp86Co3+O5gaLGsXhu77dii9jhfsd3K6FLhRSCa1oCJbG+8a4RsjvUovWAsewDvJ/BO
- Vmww==
+ bh=AoGLHyqSK5DFhmIoljd+/g+zW87eTtl2QdgdFurPWbM=;
+ b=c6FDyfBAMuw7T9U5Ceu+kOjSLC0IoKZbMTj0f+JSDRLLSSVwPUuY10cDjiNaaXkyQF
+ 6g1Qd7TBsId1Eyaa7XFVOwpoFgTXzz0R6TgEgWzfD4EXPJDgfxpX3Tf6SnxBTf2ltVzy
+ 9GPHg8EnpwOOHlc5e4ndZP1+QKCIP5qxpMunfLtUrdRM2TJkitzDMtomFuWKyVBIL+Lw
+ xFgNDNJF4FoHIiuunstDtkGXIa8qtHXzSQoSzxi7eKfWdz/39PYJEmLn/KeLxZed5Ne2
+ lPVxBnOJ0BdTfjzjhtLNo4xpxKjZGybnmrti46A2x4uJs7sWWtlFRsbOcgMTbiVpAzkG
+ 838Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DLNYJzGRLnjtNR4T5XuYRIR7rcNohA3Zjt4JKbnfvf0=;
- b=lCutelBP/oW/a3WbtOopX9wZI5AuJOqxbvQo1gybbplY5Rmld5Jf26wBIErz8qn4/e
- w2r+2gdgzM/35bMbwElq60gyojiW9D5RNEten1MNxAWvCtZa27FJi94uXZ4yowgOURE8
- EZZsbohR1Vw2RLkYXijFSHfqGSW0cvd8k+IYITkczJjuxWUJVReRMhm9EiLCeD9onXq3
- X2O9cRcJZ4P2sLZNTCKWshqIjPmI7fIhctrhZjd8yyEx3k/bBDfJKQZW1ltDYkEWRhYE
- SyHbNtomzJR4jA5HpfMuzgFHVccXBp5JtoIdeOCN46KAYrJJewkxUwDHLcuLswITwr1l
- j3/w==
-X-Gm-Message-State: AFqh2kot0+afITVAlSsTLkhebOhQUoOyVQFtcbzQW5wJeSZ4yBm+oaeV
- 588sePwklIGoR9md5/71O0RU5Ln6SXESv9WF/7o=
-X-Google-Smtp-Source: AMrXdXsVGxxbhbyMHctvCo+ikVlkaM6qotk8IiwkIui3lEO1u1BcRGak4xopSrtwa8DdthrOy1BoXz4btDtiX+uqe2k=
-X-Received: by 2002:ab0:6812:0:b0:43f:487c:b2fb with SMTP id
- z18-20020ab06812000000b0043f487cb2fbmr2134707uar.96.1672202182418; Tue, 27
- Dec 2022 20:36:22 -0800 (PST)
+ bh=AoGLHyqSK5DFhmIoljd+/g+zW87eTtl2QdgdFurPWbM=;
+ b=57zQpMnzC6Ovse+8XTTADIenWQrfFnNyeYo2EqTmZrY+2Zvz5dMDysG9JJSv9WqGdo
+ EgsZ6et+aW2X8FusekZHC1g3DUBpA3Mu+YFZ1m3rlFZqOpu/22yFrKSSMTmdrNYGKJNh
+ grWmQpQEkQSr73Ugc4YT5G6QP2eJKnohLhuXUuwiTxbFzgkHUbjgu2+yY2lB2vNoJ91f
+ v50pbmxEZ+zVRR8z3+ZPKVn9RzRC2zwbeM1ShmwsVtz1dlTSz91vkih43MWSVPrJEBjQ
+ NczVzy+J/Mk2onUYCIlQq4HF0bag/rpOpyxzPLxL9KcOWNWv4/gwoz7ywLFi6cbSslpE
+ TIiA==
+X-Gm-Message-State: AFqh2kqzH686IpGMS6OOKofxCT/lt3BijL9F2GNLXLQjJQMArIFIFstm
+ HYjnj0v8T5pU6plBuLzWVoq9yehhfOm9NTUUn7o=
+X-Google-Smtp-Source: AMrXdXui05wgqnELAFqYDg6qfb8zerp9qFvFCh0W6GyEEFfEHG+/me+j6QICZpcigRViSyRaqlf+6/fE0qO8sytLBgw=
+X-Received: by 2002:a67:dc10:0:b0:3b3:7675:d423 with SMTP id
+ x16-20020a67dc10000000b003b37675d423mr2700468vsj.72.1672205931096; Tue, 27
+ Dec 2022 21:38:51 -0800 (PST)
 MIME-Version: 1.0
-References: <20221227064812.1903326-1-bmeng@tinylab.org>
- <20221227064812.1903326-12-bmeng@tinylab.org>
-In-Reply-To: <20221227064812.1903326-12-bmeng@tinylab.org>
+References: <20221108125703.1463577-1-apatel@ventanamicro.com>
+ <20221108125703.1463577-3-apatel@ventanamicro.com>
+ <CAKmqyKP+hc4N6Z2AqkQpCmF=oyTE_rf-XfSsTHChwcUWRE5gsg@mail.gmail.com>
+ <CAK9=C2Uu1bCcZht+ydiazSmgnkD_hhLetXP4WcA92DypE4m9=A@mail.gmail.com>
+ <CAKmqyKPw54F0uVy+7SjoY16o7RYyW6qwLhaYaKR7aNpP4Nz27Q@mail.gmail.com>
+ <CAK9=C2V21JcgyUKub1JGVT0DEaeyzJ1GXQYcyaZy4Xv26F5fyA@mail.gmail.com>
+ <CAKmqyKOc+xKEy1nhp6vCOtVHspfQ5WY7oE6wx5aGURhxQOrdqQ@mail.gmail.com>
+ <CAK9=C2VA-1c8J-t8Sqp-8+eW9-0xaALgbG8LORd06--Jb-gTAw@mail.gmail.com>
+In-Reply-To: <CAK9=C2VA-1c8J-t8Sqp-8+eW9-0xaALgbG8LORd06--Jb-gTAw@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 28 Dec 2022 14:35:56 +1000
-Message-ID: <CAKmqyKPBQ98YN6HA3kREW2QWovU5FZJAva29__6RwLz3auOLSA@mail.gmail.com>
-Subject: Re: [PATCH 11/12] hw/riscv/boot.c: Introduce riscv_find_firmware()
-To: Bin Meng <bmeng@tinylab.org>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Bin Meng <bin.meng@windriver.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
+Date: Wed, 28 Dec 2022 15:38:24 +1000
+Message-ID: <CAKmqyKMQ7VJeeh0Rm3gjv8wDNgqsP5ShgbK2FaJstFSGAZgf8Q@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] target/riscv: Update VS timer whenever htimedelta
+ changes
+To: Anup Patel <apatel@ventanamicro.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Atish Patra <atishp@atishpatra.org>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,120 +85,136 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2022 04:36:28 -0000
+X-List-Received-Date: Wed, 28 Dec 2022 05:38:54 -0000
 
-On Tue, Dec 27, 2022 at 4:55 PM Bin Meng <bmeng@tinylab.org> wrote:
+On Fri, Dec 23, 2022 at 11:14 PM Anup Patel <apatel@ventanamicro.com> wrote:
 >
-> Rename previous riscv_find_firmware() to riscv_find_bios(), and
-> introduce a new riscv_find_firmware() to implement the first half
-> part of the work done in riscv_find_and_load_firmware().
+> On Thu, Dec 15, 2022 at 8:55 AM Alistair Francis <alistair23@gmail.com> wrote:
+> >
+> > On Mon, Dec 12, 2022 at 9:12 PM Anup Patel <apatel@ventanamicro.com> wrote:
+> > >
+> > > On Mon, Dec 12, 2022 at 11:23 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > > >
+> > > > On Thu, Dec 8, 2022 at 6:41 PM Anup Patel <apatel@ventanamicro.com> wrote:
+> > > > >
+> > > > > On Thu, Dec 8, 2022 at 9:00 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > > > > >
+> > > > > > On Tue, Nov 8, 2022 at 11:07 PM Anup Patel <apatel@ventanamicro.com> wrote:
+> > > > > > >
+> > > > > > > The htimedelta[h] CSR has impact on the VS timer comparison so we
+> > > > > > > should call riscv_timer_write_timecmp() whenever htimedelta changes.
+> > > > > > >
+> > > > > > > Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp suppor")
+> > > > > > > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> > > > > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > > > > >
+> > > > > > This patch breaks my Xvisor test. When running OpenSBI and Xvisor like this:
+> > > > > >
+> > > > > > qemu-system-riscv64 -machine virt \
+> > > > > >     -m 1G -serial mon:stdio -serial null -nographic \
+> > > > > >     -append 'vmm.console=uart@10000000 vmm.bootcmd="vfs mount initrd
+> > > > > > /;vfs run /boot.xscript;vfs cat /system/banner.txt; guest kick guest0;
+> > > > > > vserial bind guest0/uart0"' \
+> > > > > >     -smp 4 -d guest_errors \
+> > > > > >     -bios none \
+> > > > > >     -device loader,file=./images/qemuriscv64/vmm.bin,addr=0x80200000 \
+> > > > > >     -kernel ./images/qemuriscv64/fw_jump.elf \
+> > > > > >     -initrd ./images/qemuriscv64/vmm-disk-linux.img -cpu rv64,h=true
+> > > > > >
+> > > > > > Running:
+> > > > > >
+> > > > > > Xvisor v0.3.0-129-gbc33f339 (Jan  1 1970 00:00:00)
+> > > > > >
+> > > > > > I see this failure:
+> > > > > >
+> > > > > > INIT: bootcmd:  guest kick guest0
+> > > > > >
+> > > > > > guest0: Kicked
+> > > > > >
+> > > > > > INIT: bootcmd:  vserial bind guest0/uart0
+> > > > > >
+> > > > > > [guest0/uart0] cpu_vcpu_stage2_map: guest_phys=0x000000003B9AC000
+> > > > > > size=0x4096 map failed
+> > > > > >
+> > > > > > do_error: CPU3: VCPU=guest0/vcpu0 page fault failed (error -1)
+> > > > > >
+> > > > > >        zero=0x0000000000000000          ra=0x0000000080001B4E
+> > > > > >
+> > > > > >          sp=0x000000008001CF80          gp=0x0000000000000000
+> > > > > >
+> > > > > >          tp=0x0000000000000000          s0=0x000000008001CFB0
+> > > > > >
+> > > > > >          s1=0x0000000000000000          a0=0x0000000010001048
+> > > > > >
+> > > > > >          a1=0x0000000000000000          a2=0x0000000000989680
+> > > > > >
+> > > > > >          a3=0x000000003B9ACA00          a4=0x0000000000000048
+> > > > > >
+> > > > > >          a5=0x0000000000000000          a6=0x0000000000019000
+> > > > > >
+> > > > > >          a7=0x0000000000000000          s2=0x0000000000000000
+> > > > > >
+> > > > > >          s3=0x0000000000000000          s4=0x0000000000000000
+> > > > > >
+> > > > > >          s5=0x0000000000000000          s6=0x0000000000000000
+> > > > > >
+> > > > > >          s7=0x0000000000000000          s8=0x0000000000000000
+> > > > > >
+> > > > > >          s9=0x0000000000000000         s10=0x0000000000000000
+> > > > > >
+> > > > > >         s11=0x0000000000000000          t0=0x0000000000004000
+> > > > > >
+> > > > > >          t1=0x0000000000000100          t2=0x0000000000000000
+> > > > > >
+> > > > > >          t3=0x0000000000000000          t4=0x0000000000000000
+> > > > > >
+> > > > > >          t5=0x0000000000000000          t6=0x0000000000000000
+> > > > > >
+> > > > > >        sepc=0x0000000080001918     sstatus=0x0000000200004120
+> > > > > >
+> > > > > >     hstatus=0x00000002002001C0     sp_exec=0x0000000010A64000
+> > > > > >
+> > > > > >      scause=0x0000000000000017       stval=0x000000003B9ACAF8
+> > > > > >
+> > > > > >       htval=0x000000000EE6B2BE      htinst=0x0000000000D03021
+> > > > > >
+> > > > > > I have tried updating to a newer Xvisor release, but with that I don't
+> > > > > > get any serial output.
+> > > > > >
+> > > > > > Can you help get the Xvisor tests back up and running?
+> > > > >
+> > > > > I tried the latest Xvisor-next (https://github.com/avpatel/xvisor-next)
+> > > > > with your QEMU riscv-to-apply.next branch and it works fine (both
+> > > > > with and without Sstc).
+> > > >
+> > > > Does it work with the latest release?
+> > >
+> > > Yes, the latest Xvisor-next repo works for QEMU v7.2.0-rc4 and
+> > > your riscv-to-apply.next branch (commit 51bb9de2d188)
+> >
+> > I can't get anything to work with this patch. I have dropped this and
+> > the patches after this.
+> >
+> > I'm building the latest Xvisor release with:
+> >
+> > export CROSS_COMPILE=riscv64-linux-gnu-
+> > ARCH=riscv make generic-64b-defconfig
+> > make
+> >
+> > and running it as above, yet nothing. What am I missing here?
 >
-> This new API is helpful for machine that wants to know the final
-> chosen firmware file name but does not want to load it.
->
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> I tried multiple times with the latest Xvisor on different machines but
+> still can't reproduce the issue you are seeing.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Odd
+
+>
+> We generally provide pre-built binaries with every Xvisor release
+> so I will share with you pre-built binaries of the upcoming Xvisor-0.3.2
+> release. Maybe that would help you ?
+
+That would work. Let me know when the release happens and I can update
+my images.
 
 Alistair
-
-> ---
->
->  include/hw/riscv/boot.h |  2 ++
->  hw/riscv/boot.c         | 39 +++++++++++++++++++++++++--------------
->  2 files changed, 27 insertions(+), 14 deletions(-)
->
-> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-> index 60cf320c88..b273ab22f7 100644
-> --- a/include/hw/riscv/boot.h
-> +++ b/include/hw/riscv/boot.h
-> @@ -38,6 +38,8 @@ target_ulong riscv_find_and_load_firmware(MachineState *machine,
->                                            hwaddr firmware_load_addr,
->                                            symbol_fn_t sym_cb);
->  const char *riscv_default_firmware_name(RISCVHartArrayState *harts);
-> +char *riscv_find_firmware(const char *firmware_filename,
-> +                          const char *default_machine_firmware);
->  target_ulong riscv_load_firmware(const char *firmware_filename,
->                                   hwaddr firmware_load_addr,
->                                   symbol_fn_t sym_cb);
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index e1a544b1d9..98b80af51b 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -84,11 +84,11 @@ const char *riscv_default_firmware_name(RISCVHartArrayState *harts)
->      return RISCV64_BIOS_BIN;
->  }
->
-> -static char *riscv_find_firmware(const char *firmware_filename)
-> +static char *riscv_find_bios(const char *bios_filename)
->  {
->      char *filename;
->
-> -    filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, firmware_filename);
-> +    filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, bios_filename);
->      if (filename == NULL) {
->          if (!qtest_enabled()) {
->              /*
-> @@ -97,8 +97,8 @@ static char *riscv_find_firmware(const char *firmware_filename)
->               * running QEMU test will complain hence let's suppress the error
->               * report for QEMU testing.
->               */
-> -            error_report("Unable to load the RISC-V firmware \"%s\"",
-> -                         firmware_filename);
-> +            error_report("Unable to find the RISC-V BIOS \"%s\"",
-> +                         bios_filename);
->              exit(1);
->          }
->      }
-> @@ -106,25 +106,36 @@ static char *riscv_find_firmware(const char *firmware_filename)
->      return filename;
->  }
->
-> -target_ulong riscv_find_and_load_firmware(MachineState *machine,
-> -                                          const char *default_machine_firmware,
-> -                                          hwaddr firmware_load_addr,
-> -                                          symbol_fn_t sym_cb)
-> +char *riscv_find_firmware(const char *firmware_filename,
-> +                          const char *default_machine_firmware)
->  {
-> -    char *firmware_filename = NULL;
-> -    target_ulong firmware_end_addr = firmware_load_addr;
-> +    char *filename = NULL;
->
-> -    if ((!machine->firmware) || (!strcmp(machine->firmware, "default"))) {
-> +    if ((!firmware_filename) || (!strcmp(firmware_filename, "default"))) {
->          /*
->           * The user didn't specify -bios, or has specified "-bios default".
->           * That means we are going to load the OpenSBI binary included in
->           * the QEMU source.
->           */
-> -        firmware_filename = riscv_find_firmware(default_machine_firmware);
-> -    } else if (strcmp(machine->firmware, "none")) {
-> -        firmware_filename = riscv_find_firmware(machine->firmware);
-> +        filename = riscv_find_bios(default_machine_firmware);
-> +    } else if (strcmp(firmware_filename, "none")) {
-> +        filename = riscv_find_bios(firmware_filename);
->      }
->
-> +    return filename;
-> +}
-> +
-> +target_ulong riscv_find_and_load_firmware(MachineState *machine,
-> +                                          const char *default_machine_firmware,
-> +                                          hwaddr firmware_load_addr,
-> +                                          symbol_fn_t sym_cb)
-> +{
-> +    char *firmware_filename;
-> +    target_ulong firmware_end_addr = firmware_load_addr;
-> +
-> +    firmware_filename = riscv_find_firmware(machine->firmware,
-> +                                            default_machine_firmware);
-> +
->      if (firmware_filename) {
->          /* If not "none" load the firmware */
->          firmware_end_addr = riscv_load_firmware(firmware_filename,
-> --
-> 2.34.1
->
->
 
