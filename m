@@ -1,56 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAPoO-0000aT-Ck
-	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 01:21:12 -0500
+	id 1pAPse-0006Ob-A3
+	for mharc-qemu-riscv@gnu.org; Wed, 28 Dec 2022 01:25:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pAPo6-0000TT-1s; Wed, 28 Dec 2022 01:20:54 -0500
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pAPo1-0000wA-2b; Wed, 28 Dec 2022 01:20:53 -0500
-Received: from localhost.localdomain (unknown [61.165.33.198])
- by APP-01 (Coremail) with SMTP id qwCowABX2ewx4KtjqJCSCQ--.53263S9;
- Wed, 28 Dec 2022 14:20:40 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v9 7/9] target/riscv: add support for Zcmt extension
-Date: Wed, 28 Dec 2022 14:20:26 +0800
-Message-Id: <20221228062028.29415-8-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221228062028.29415-1-liweiwei@iscas.ac.cn>
-References: <20221228062028.29415-1-liweiwei@iscas.ac.cn>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowABX2ewx4KtjqJCSCQ--.53263S9
-X-Coremail-Antispam: 1UD129KBjvJXoW3KrWDZF17Jry3JFyUKF1rWFg_yoWDuw1kpF
- 4rC3y7GrW8JrZ7Aa4fKF45tF15Jw4rGayUCws3Jws5Ja13JFWrJr1DKw13KF4DXFZ5ur4j
- 93Z0yFy5ArW8ZFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9E14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
- 3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
- x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
- JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vIr4
- 1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
- 67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
- 8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20E
- Y4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267
- AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbmZX7UUUUU==
-X-Originating-IP: [61.165.33.198]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <503386372@qq.com>)
+ id 1pAPsc-0006MA-H1; Wed, 28 Dec 2022 01:25:34 -0500
+Received: from out162-62-57-64.mail.qq.com ([162.62.57.64])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <503386372@qq.com>)
+ id 1pAPsW-0001xT-2C; Wed, 28 Dec 2022 01:25:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1672208715; bh=PycctqZ75LViXQjsVYDxOPRIRofpQBSxpDYwXam8WLM=;
+ h=From:To:Cc:Subject:Date;
+ b=NnBCrCvGu9zs3xJUrNEb6tJX5uvt3UxvZedz9NfHMfcNnU/AUTgiTD9Ux9TjPwvca
+ xJwqNCG5arXggC4y6CpQe/7PBiLl/N8RruU4uF7LabB0njhIRrpM8LJZQaXuR3YeNY
+ 1gQkbExjWLL8+Bi/VfI/RQttXvpOijxCx86OOC8o=
+X-QQ-XMAILINFO: NSdk79fbXCzSquUl27zCYmZnJ4MZC4N/Qo/N0I/yWd2Fv0Mb1JyX+1JfvIawBz
+ /vhgYgKAjsQAjkp8UTAKGHM+XBxdUEg999aBSohdt5EvbbIWFXTPkMezaJ6uxZYX7OxjYlieORM4V
+ 9c6wDLYswdA+Z8OOErkXGq7uSETXLkK43cccjRC4vwiclAxe6jYYjinkVs3WK6AwXQIFZ7dUrj3O6
+ I2MCWH+NDNI7q1L4cHT9pXCAU0/pj18dSJUX0cQTHiN6aqEgXd/RIwE3ub9NRmzwMFaLX7wDpi8UK
+ hGtg1Dwt62ldMl8S+nS4ZfbqXqTAgUSpKrDBL+qHVYoDtNFJBYMps2cBM38bjABpcePtg4923fzek
+ RzjLz1yOIABIws//6nx+CXU+Gev07UBss2tPWDHUnVOF4S0XCINa4jm3TTcPWGGFVPJNjJJeuVjV0
+ s47DimCSnimHbiwn/W1jir05aV8fnXYBcgZDaFm6aKdlmZf61jdXaA+Z7GAQA2OdwINWMvcB9I+Rp
+ sf781EKqV2C5qp6n6KACLDAsSiXTIBgZiOSzXZLYRQheYR99uajyMF349EmSs/zUrgR4otl7p4ebr
+ NslgVpFqlOm1aLUZUhF7w5WfHgzSITtdEeIF/CMQVgvu245zHPwCwAdAa6YIAwUsn4WwDc2IoFYcl
+ A6DwjFa/aRsWVvZTCb51//SBCvJSJ0ShCVYObrp5mNWqjN0cUEk2qvtC/VIkaLokW78GjsBOMcXAh
+ Jrgo8A7kWy3HTEfObv28OAeU8OKb+G4z8pKn4fZRzgpnX+B9gCf8RYECdopsXZa5WPzF8rYoID95v
+ EFlxLtYSEQ8PzxD7+FIhNKra0O8jR6W5axnweoikhKLi5mlpVlngaiNox66IwC5J7UAO8C7QaiP40
+ y7A9VsMcOZZ1xqx5nzWE9vWFsyAZ1Cl3Y7CMh237KHZctSNMi812/er9FPvwcdE6+ZX+5I5pYM42V
+ FF0ImVEFtIXS1SdxdhFw1MxcFl+wHIYZcooDkDYPHycvMlc/pp8NFbOMIpAT7fyuMOljNcfA==
+From: "=?utf-8?B?NTAzMzg2Mzcy?=" <503386372@qq.com>
+To: "=?utf-8?B?NTAzMzg2Mzcy?=" <503386372@qq.com>,
+ "=?utf-8?B?YWxpc3RhaXIyMw==?=" <alistair23@gmail.com>
+Cc: "=?utf-8?B?cWVtdS1kZXZlbA==?=" <qemu-devel@nongnu.org>,
+ "=?utf-8?B?cGFsbWVy?=" <palmer@dabbelt.com>,
+ "=?utf-8?B?YWxpc3RhaXIuZnJhbmNpcw==?=" <alistair.francis@wdc.com>,
+ "=?utf-8?B?YmluLm1lbmc=?=" <bin.meng@windriver.com>,
+ "=?utf-8?B?cWVtdS1yaXNjdg==?=" <qemu-riscv@nongnu.org>
+Subject: re:Re: [PATCH] target/riscv/cpu.c: Fix elen check
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="----=_NextPart_63ABE104_4ED33440_71621EE4"
+Content-Transfer-Encoding: 8Bit
+Date: Wed, 28 Dec 2022 14:24:04 +0800
+X-Priority: 3
+Message-ID: <tencent_21C1EAD87616BB36013654A6@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+X-QQ-mid: xmmaszb1-0t1672208644t8406duzb
+Received-SPF: pass client-ip=162.62.57.64; envelope-from=503386372@qq.com;
+ helo=out162-62-57-64.mail.qq.com
+X-Spam_score_int: 21
+X-Spam_score: 2.1
+X-Spam_bar: ++
+X-Spam_report: (2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FROM=0.001, FROM_EXCESS_BASE64=0.001, HELO_DYNAMIC_IPADDR=1.951,
+ HTML_MESSAGE=0.001, NO_FM_NAME_IP_HOSTN=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H2=-0.001, RDNS_DYNAMIC=0.982, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, TO_EQ_FM_DIRECT_MX=1 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -63,369 +72,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2022 06:20:54 -0000
+X-List-Received-Date: Wed, 28 Dec 2022 06:25:35 -0000
 
-Add encode, trans* functions and helper functions support for Zcmt
-instrutions
-Add support for jvt csr
+This is a multi-part message in MIME format.
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.h                        |  4 ++
- target/riscv/cpu_bits.h                   |  7 +++
- target/riscv/csr.c                        | 38 +++++++++++++++-
- target/riscv/helper.h                     |  3 ++
- target/riscv/insn16.decode                |  7 ++-
- target/riscv/insn_trans/trans_rvzce.c.inc | 28 +++++++++++-
- target/riscv/machine.c                    | 19 ++++++++
- target/riscv/meson.build                  |  3 +-
- target/riscv/zce_helper.c                 | 55 +++++++++++++++++++++++
- 9 files changed, 159 insertions(+), 5 deletions(-)
- create mode 100644 target/riscv/zce_helper.c
+------=_NextPart_63ABE104_4ED33440_71621EE4
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 71545041a0..c7b8e7f238 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -181,6 +181,8 @@ struct CPUArchState {
- 
-     uint32_t features;
- 
-+    target_ulong jvt;
-+
- #ifdef CONFIG_USER_ONLY
-     uint32_t elf_flags;
- #endif
-@@ -600,6 +602,8 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
-                                                  target_ulong new_val,
-                                                  target_ulong write_mask),
-                                    void *rmw_fn_arg);
-+
-+RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit);
- #endif
- void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv);
- 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 8b0d7e20ea..ce347e5575 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -319,6 +319,7 @@
- #define SMSTATEEN_MAX_COUNT 4
- #define SMSTATEEN0_CS       (1ULL << 0)
- #define SMSTATEEN0_FCSR     (1ULL << 1)
-+#define SMSTATEEN0_JVT      (1ULL << 2)
- #define SMSTATEEN0_HSCONTXT (1ULL << 57)
- #define SMSTATEEN0_IMSIC    (1ULL << 58)
- #define SMSTATEEN0_AIA      (1ULL << 59)
-@@ -523,6 +524,9 @@
- /* Crypto Extension */
- #define CSR_SEED            0x015
- 
-+/* Zcmt Extension */
-+#define CSR_JVT             0x017
-+
- /* mstatus CSR bits */
- #define MSTATUS_UIE         0x00000001
- #define MSTATUS_SIE         0x00000002
-@@ -894,4 +898,7 @@ typedef enum RISCVException {
- #define MHPMEVENT_IDX_MASK                 0xFFFFF
- #define MHPMEVENT_SSCOF_RESVD              16
- 
-+/* JVT CSR bits */
-+#define JVT_MODE                           0x3F
-+#define JVT_BASE                           (~0x3F)
- #endif
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index e6f8250929..a752e8b215 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -42,8 +42,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
- 
- /* Predicates */
- #if !defined(CONFIG_USER_ONLY)
--static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
--                                       uint64_t bit)
-+RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit)
- {
-     bool virt = riscv_cpu_virt_enabled(env);
-     CPUState *cs = env_cpu(env);
-@@ -163,6 +162,24 @@ static RISCVException ctr32(CPURISCVState *env, int csrno)
-     return ctr(env, csrno);
- }
- 
-+static RISCVException zcmt(CPURISCVState *env, int csrno)
-+{
-+    RISCVCPU *cpu = env_archcpu(env);
-+
-+    if (!cpu->cfg.ext_zcmt) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+#if !defined(CONFIG_USER_ONLY)
-+    RISCVException ret = smstateen_acc_ok(env, 0, SMSTATEEN0_JVT);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+#endif
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
- #if !defined(CONFIG_USER_ONLY)
- static RISCVException mctr(CPURISCVState *env, int csrno)
- {
-@@ -3980,6 +3997,20 @@ RISCVException riscv_csrrw_debug(CPURISCVState *env, int csrno,
-     return ret;
- }
- 
-+static RISCVException read_jvt(CPURISCVState *env, int csrno,
-+                               target_ulong *val)
-+{
-+    *val = env->jvt;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_jvt(CPURISCVState *env, int csrno,
-+                                target_ulong val)
-+{
-+    env->jvt = val;
-+    return RISCV_EXCP_NONE;
-+}
-+
- /* Control and Status Register function table */
- riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     /* User Floating-Point CSRs */
-@@ -4017,6 +4048,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     /* Crypto Extension */
-     [CSR_SEED] = { "seed", seed, NULL, NULL, rmw_seed },
- 
-+    /* Zcmt Extension */
-+    [CSR_JVT] = {"jvt", zcmt, read_jvt, write_jvt},
-+
- #if !defined(CONFIG_USER_ONLY)
-     /* Machine Timers and Counters */
-     [CSR_MCYCLE]    = { "mcycle",    any,   read_hpmcounter,
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 227c7122ef..d979f0bfc4 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1136,3 +1136,6 @@ DEF_HELPER_FLAGS_1(aes64im, TCG_CALL_NO_RWG_SE, tl, tl)
- 
- DEF_HELPER_FLAGS_3(sm4ed, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
- DEF_HELPER_FLAGS_3(sm4ks, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
-+
-+/* Zce helper */
-+DEF_HELPER_FLAGS_2(cm_jalt, TCG_CALL_NO_WG, tl, env, i32)
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 4654c23052..c359c574ab 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -49,6 +49,7 @@
- %zcb_h_uimm  5:1                     !function=ex_shift_1
- %zcmp_spimm  2:2                     !function=ex_shift_4
- %zcmp_rlist  4:4
-+%zcmt_index  2:8
- 
- # Argument sets imported from insn32.decode:
- &empty                  !extern
-@@ -63,6 +64,7 @@
- &r2_s      rs1 rs2      !extern
- 
- &zcmp      zcmp_rlist zcmp_spimm
-+&zcmt      zcmt_index
- 
- # Formats 16:
- @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
-@@ -106,6 +108,7 @@
- @zcb_sh       ... . .. ... .. ... ..  &s  imm=%zcb_h_uimm  rs1=%rs1_3 rs2=%rs2_3
- @zcmp         ... ...  ........   ..  &zcmp  %zcmp_rlist   %zcmp_spimm
- @cm_mv        ... ...  ... .. ... ..  &r2_s  rs2=%sreg2    rs1=%sreg1
-+@zcmt_jt      ... ...  ........   ..  &zcmt  %zcmt_index
- 
- # *** RV32/64C Standard Extension (Quadrant 0) ***
- {
-@@ -186,7 +189,7 @@ slli              000 .  .....  ..... 10 @c_shift2
-   sq              101  ... ... .. ... 10 @c_sqsp
-   c_fsd           101   ......  ..... 10 @c_sdsp
- 
--  # *** RV64 and RV32 Zcmp Extension ***
-+  # *** RV64 and RV32 Zcmp/Zcmt Extension ***
-   [
-     cm_push         101  11000  .... .. 10 @zcmp
-     cm_pop          101  11010  .... .. 10 @zcmp
-@@ -194,6 +197,8 @@ slli              000 .  .....  ..... 10 @c_shift2
-     cm_popretz      101  11100  .... .. 10 @zcmp
-     cm_mva01s       101  011 ... 11 ... 10 @cm_mv
-     cm_mvsa01       101  011 ... 01 ... 10 @cm_mv
-+
-+    cm_jalt         101  000   ........ 10 @zcmt_jt
-   ]
- }
- sw                110 .  .....  ..... 10 @c_swsp
-diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
-index 30b53a9509..957bd23ead 100644
---- a/target/riscv/insn_trans/trans_rvzce.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzce.c.inc
-@@ -1,5 +1,5 @@
- /*
-- * RISC-V translation routines for the Zc[b,mp] Standard Extensions.
-+ * RISC-V translation routines for the Zc[b,mp,mt] Standard Extensions.
-  *
-  * Copyright (c) 2021-2022 PLCT Lab
-  *
-@@ -26,6 +26,11 @@
-         return false;            \
- } while (0)
- 
-+#define REQUIRE_ZCMT(ctx) do {   \
-+    if (!ctx->cfg_ptr->ext_zcmt) \
-+        return false;            \
-+} while (0)
-+
- static bool trans_c_zext_b(DisasContext *ctx, arg_c_zext_b *a)
- {
-     REQUIRE_ZCB(ctx);
-@@ -285,3 +290,24 @@ static bool trans_cm_mvsa01(DisasContext *ctx, arg_cm_mvsa01 *a)
- 
-     return true;
- }
-+
-+static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
-+{
-+    REQUIRE_ZCMT(ctx);
-+
-+    /*
-+     * Update pc to current for the non-unwinding exception
-+     * that might come from cpu_ld*_code() in the helper.
-+     */
-+    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
-+    gen_helper_cm_jalt(cpu_pc, cpu_env, tcg_constant_i32(a->zcmt_index));
-+
-+    /* c.jt vs c.jalt depends on the index. */
-+    if (a->zcmt_index >= 32) {
-+        gen_set_gpri(ctx, xRA, ctx->pc_succ_insn);
-+    }
-+
-+    tcg_gen_lookup_and_goto_ptr();
-+    ctx->base.is_jmp = DISAS_NORETURN;
-+    return true;
-+}
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 65a8549ec2..ee3a2deab6 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -331,6 +331,24 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
-     }
- };
- 
-+static bool jvt_needed(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+
-+    return cpu->cfg.ext_zcmt;
-+}
-+
-+static const VMStateDescription vmstate_jvt = {
-+    .name = "cpu/jvt",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = jvt_needed,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_UINTTL(env.jvt, RISCVCPU),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
- const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
-     .version_id = 5,
-@@ -400,6 +418,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_envcfg,
-         &vmstate_debug,
-         &vmstate_smstateen,
-+        &vmstate_jvt,
-         NULL
-     }
- };
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index ba25164d74..4bf9c9e632 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -18,7 +18,8 @@ riscv_ss.add(files(
-   'bitmanip_helper.c',
-   'translate.c',
-   'm128_helper.c',
--  'crypto_helper.c'
-+  'crypto_helper.c',
-+  'zce_helper.c'
- ))
- riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'), if_false: files('kvm-stub.c'))
- 
-diff --git a/target/riscv/zce_helper.c b/target/riscv/zce_helper.c
-new file mode 100644
-index 0000000000..b433bda16d
---- /dev/null
-+++ b/target/riscv/zce_helper.c
-@@ -0,0 +1,55 @@
-+/*
-+ * RISC-V Zcmt Extension Helper for QEMU.
-+ *
-+ * Copyright (c) 2021-2022 PLCT Lab
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "cpu.h"
-+#include "exec/exec-all.h"
-+#include "exec/helper-proto.h"
-+#include "exec/cpu_ldst.h"
-+
-+target_ulong HELPER(cm_jalt)(CPURISCVState *env, uint32_t index)
-+{
-+
-+#if !defined(CONFIG_USER_ONLY)
-+    RISCVException ret = smstateen_acc_ok(env, 0, SMSTATEEN0_JVT);
-+    if (ret != RISCV_EXCP_NONE) {
-+        riscv_raise_exception(env, ret, 0);
-+    }
-+#endif
-+
-+    target_ulong target;
-+    target_ulong val = env->jvt;
-+    int xlen = riscv_cpu_xlen(env);
-+    uint8_t mode = get_field(val, JVT_MODE);
-+    target_ulong base = val & JVT_BASE;
-+    target_ulong t0;
-+
-+    if (mode != 0) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, 0);
-+    }
-+
-+    if (xlen == 32) {
-+        t0 = base + (index << 2);
-+        target = cpu_ldl_code(env, t0);
-+    } else {
-+        t0 = base + (index << 3);
-+        target = cpu_ldq_code(env, t0);
-+    }
-+
-+    return target & ~0x1;
-+}
--- 
-2.25.1
+c29ycnkmbmJzcDtmb3ImbmJzcDt0aGF0LCZuYnNwO2kmbmJzcDt3aWxsJm5ic3A7dHJ5Jm5i
+c3A7YWdhaW4mbmJzcDt3aXRoJm5ic3A7Z2l0LnNyLnRoLg0KDQoNCi0tLS0tLS0tLS0tLS0t
+LS0tLSDljp/lp4vpgq7ku7YgLS0tLS0tLS0tLS0tLS0tLS0tDQrlj5Hku7bkuro6ICJBbGlz
+dGFpciBGcmFuY2lzIjsNCuWPkeS7tuaXtumXtDogMjAyMi0xMi0yOCAxMzo0Ng0K5pS25Lu2
+5Lq6OiAiRWx0YSI8NTAzMzg2MzcyQHFxLmNvbSZndDs7DQrmlLbku7bkuro6IA0KInFlbXUt
+ZGV2ZWwiOyJwYWxtZXIiOyJhbGlzdGFpci5mcmFuY2lzIjsiYmluLm1lbmciOyJxZW11LXJp
+c2N2IjsNCuS4u+mimDogUmU6IFtQQVRDSF0gdGFyZ2V0L3Jpc2N2L2NwdS5jOiBGaXggZWxl
+biBjaGVjaw0KDQoNCg0KT24gRnJpLCBEZWMgMTYsIDIwMjIgYXQgMToxMCBBTSBFbHRhIDw1
+MDMzODYzNzJAcXEuY29tJmd0OyB3cm90ZToNCiZndDsNCiZndDsgU2hvdWxkIGJlIGNwdS0m
+Z3Q7Y2ZnLmVsZW4gaW4gcmFuZ2UgWzgsIDY0XS4NCiZndDsNCiZndDsgU2lnbmVkLW9mZi1i
+eTogRG9uZ3h1ZSBaaGFuZyANCg0KVGhhbmtzIGZvciB0aGUgcGF0Y2ghDQoNCkknbSBzZWVp
+bmcgd2VpcmQgZm9ybWF0dGluZyBpc3N1ZXMgdGhvdWdoLCBpdCBsb29rcyBsaWtlIHRoZSBl
+bmNvZGluZw0KaXMgaW5jb3JyZWN0Lg0KDQpEaWQgeW91IHVzZSBgZ2l0IHNlbmQtZW1haWxg
+IHRvIHNlbmQgdGhlIHBhdGNoPyBJZiBub3QgY2FuIHlvdSB0cnkNCnNlbmRpbmcgaXQgYWdh
+aW4gZm9sbG93aW5nIHRoZSBpbnN0cnVjdGlvbnMgaGVyZQ0KaHR0cHM6Ly93d3cucWVtdS5v
+cmcvZG9jcy9tYXN0ZXIvZGV2ZWwvc3VibWl0dGluZy1hLXBhdGNoLmh0bWwjc3VibWl0dGlu
+Zy15b3VyLXBhdGNoZXMNCg0KQWxpc3RhaXINCg0KJmd0OyAtLS0NCiZndDsgIHRhcmdldC9y
+aXNjdi9jcHUuYyB8IDIgKy0NCiZndDsgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigr
+KSwgMSBkZWxldGlvbigtKQ0KJmd0Ow0KJmd0OyBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2
+L2NwdS5jIGIvdGFyZ2V0L3Jpc2N2L2NwdS5jDQomZ3Q7IGluZGV4IGQxNGU5NWM5ZGMuLjFl
+ODAzMmM5NjkgMTAwNjQ0DQomZ3Q7IC0tLSBhL3RhcmdldC9yaXNjdi9jcHUuYw0KJmd0OyAr
+KysgYi90YXJnZXQvcmlzY3YvY3B1LmMNCiZndDsgQEAgLTg3MCw3ICs4NzAsNyBAQCBzdGF0
+aWMgdm9pZCByaXNjdl9jcHVfcmVhbGl6ZShEZXZpY2VTdGF0ZSAqZGV2LCBFcnJvciAqKmVy
+cnApDQomZ3Q7ICAgICAgICAgICAgICAgICAgICAgICAgICAiVmVjdG9yIGV4dGVuc2lvbiBF
+TEVOIG11c3QgYmUgcG93ZXIgb2YgMiIpOw0KJmd0OyAgICAgICAgICAgICAgICAgIHJldHVy
+bjsNCiZndDsgICAgICAgICAgICAgIH0NCiZndDsgLSAgICAgICAgICAgIGlmIChjcHUtJmd0
+O2NmZy5lbGVuICZndDsgNjQgfHwgY3B1LSZndDtjZmcudmxlbiA8IDgpIHsNCiZndDsgKyAg
+ICAgICAgICAgIGlmIChjcHUtJmd0O2NmZy5lbGVuICZndDsgNjQgfHwgY3B1LSZndDtjZmcu
+ZWxlbiA8IDgpIHsNCiZndDsgICAgICAgICAgICAgICAgICBlcnJvcl9zZXRnKGVycnAsDQom
+Z3Q7ICAgICAgICAgICAgICAgICAgICAgICAgICAiVmVjdG9yIGV4dGVuc2lvbiBpbXBsZW1l
+bnRhdGlvbiBvbmx5IHN1cHBvcnRzIEVMRU4gIg0KJmd0OyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgImluIHRoZSByYW5nZSBbOCwgNjRdIik7DQomZ3Q7IC0tDQomZ3Q7IDIuMTcuMQ0K
+Jmd0Ow==
+
+------=_NextPart_63ABE104_4ED33440_71621EE4
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
+
+PHA+c29ycnkmbmJzcDtmb3ImbmJzcDt0aGF0LCZuYnNwO2kmbmJzcDt3aWxsJm5ic3A7dHJ5
+Jm5ic3A7YWdhaW4mbmJzcDt3aXRoJm5ic3A7Z2l0LnNyLnRoLjwvcD48YnIgIC8+PGJyICAv
+Pi0tLS0tLS0tLS0tLS0tLS0tLSDljp/lp4vpgq7ku7YgLS0tLS0tLS0tLS0tLS0tLS0tPGJy
+ICAvPjxkaXYgc3R5bGU9ImZvbnQtc2l6ZTogMTJweDsgYmFja2dyb3VuZDogbm9uZSByZXBl
+YXQgc2Nyb2xsIDAlIHJnYigyMzksIDIzOSwgMjM5KTsgcGFkZGluZzogOHB4OyI+PGRpdj48
+Yj7lj5Hku7bkuro6IDwvYj4iQWxpc3RhaXIgRnJhbmNpcyI8YWxpc3RhaXIyM0BnbWFpbC5j
+b20+PC9hbGlzdGFpcjIzQGdtYWlsLmNvbT47PC9kaXY+PGRpdj48Yj7lj5Hku7bml7bpl7Q6
+IDwvYj4yMDIyLTEyLTI4IDEzOjQ2PC9kaXY+PGRpdj48Yj7mlLbku7bkuro6IDwvYj4iRWx0
+YSImbHQ7NTAzMzg2MzcyQHFxLmNvbSZndDs7PC9kaXY+PGRpdj48Yj7mlLbku7bkuro6IDwv
+Yj48cD4icWVtdS1kZXZlbCI8cWVtdS1kZXZlbEBub25nbnUub3JnPjwvcWVtdS1kZXZlbEBu
+b25nbnUub3JnPjsicGFsbWVyIjxwYWxtZXJAZGFiYmVsdC5jb20+PC9wYWxtZXJAZGFiYmVs
+dC5jb20+OyJhbGlzdGFpci5mcmFuY2lzIjxhbGlzdGFpci5mcmFuY2lzQHdkYy5jb20+PC9h
+bGlzdGFpci5mcmFuY2lzQHdkYy5jb20+OyJiaW4ubWVuZyI8YmluLm1lbmdAd2luZHJpdmVy
+LmNvbT48L2Jpbi5tZW5nQHdpbmRyaXZlci5jb20+OyJxZW11LXJpc2N2IjxxZW11LXJpc2N2
+QG5vbmdudS5vcmc+PC9xZW11LXJpc2N2QG5vbmdudS5vcmc+OzwvZGl2PjxkaXY+PGI+5Li7
+6aKYOiA8L2I+UmU6IFtQQVRDSF0gdGFyZ2V0L3Jpc2N2L2NwdS5jOiBGaXggZWxlbiBjaGVj
+azwvZGl2PjwvZGl2PjxiciAgLz48YnIgIC8+T24gRnJpLCBEZWMgMTYsIDIwMjIgYXQgMTox
+MCBBTSBFbHRhICZsdDs1MDMzODYzNzJAcXEuY29tJmd0OyB3cm90ZTo8YnIgIC8+Jmd0Ozxi
+ciAgLz4mZ3Q7IFNob3VsZCBiZSBjcHUtJmd0O2NmZy5lbGVuIGluIHJhbmdlIFs4LCA2NF0u
+PGJyICAvPiZndDs8YnIgIC8+Jmd0OyBTaWduZWQtb2ZmLWJ5OiBEb25neHVlIFpoYW5nIDxl
+bHRhLmVyYUBnbWFpbC5jb20+PC9lbHRhLmVyYUBnbWFpbC5jb20+PGJyICAvPjxiciAgLz5U
+aGFua3MgZm9yIHRoZSBwYXRjaCE8YnIgIC8+PGJyICAvPkknbSBzZWVpbmcgd2VpcmQgZm9y
+bWF0dGluZyBpc3N1ZXMgdGhvdWdoLCBpdCBsb29rcyBsaWtlIHRoZSBlbmNvZGluZzxiciAg
+Lz5pcyBpbmNvcnJlY3QuPGJyICAvPjxiciAgLz5EaWQgeW91IHVzZSBgZ2l0IHNlbmQtZW1h
+aWxgIHRvIHNlbmQgdGhlIHBhdGNoPyBJZiBub3QgY2FuIHlvdSB0cnk8YnIgIC8+c2VuZGlu
+ZyBpdCBhZ2FpbiBmb2xsb3dpbmcgdGhlIGluc3RydWN0aW9ucyBoZXJlPGJyICAvPmh0dHBz
+Oi8vd3d3LnFlbXUub3JnL2RvY3MvbWFzdGVyL2RldmVsL3N1Ym1pdHRpbmctYS1wYXRjaC5o
+dG1sI3N1Ym1pdHRpbmcteW91ci1wYXRjaGVzPGJyICAvPjxiciAgLz5BbGlzdGFpcjxiciAg
+Lz48YnIgIC8+Jmd0OyAtLS08YnIgIC8+Jmd0OyAgdGFyZ2V0L3Jpc2N2L2NwdS5jIHwgMiAr
+LTxiciAgLz4mZ3Q7ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRp
+b24oLSk8YnIgIC8+Jmd0OzxiciAgLz4mZ3Q7IGRpZmYgLS1naXQgYS90YXJnZXQvcmlzY3Yv
+Y3B1LmMgYi90YXJnZXQvcmlzY3YvY3B1LmM8YnIgIC8+Jmd0OyBpbmRleCBkMTRlOTVjOWRj
+Li4xZTgwMzJjOTY5IDEwMDY0NDxiciAgLz4mZ3Q7IC0tLSBhL3RhcmdldC9yaXNjdi9jcHUu
+YzxiciAgLz4mZ3Q7ICsrKyBiL3RhcmdldC9yaXNjdi9jcHUuYzxiciAgLz4mZ3Q7IEBAIC04
+NzAsNyArODcwLDcgQEAgc3RhdGljIHZvaWQgcmlzY3ZfY3B1X3JlYWxpemUoRGV2aWNlU3Rh
+dGUgKmRldiwgRXJyb3IgKiplcnJwKTxiciAgLz4mZ3Q7ICAgICAgICAgICAgICAgICAgICAg
+ICAgICAiVmVjdG9yIGV4dGVuc2lvbiBFTEVOIG11c3QgYmUgcG93ZXIgb2YgMiIpOzxiciAg
+Lz4mZ3Q7ICAgICAgICAgICAgICAgICAgcmV0dXJuOzxiciAgLz4mZ3Q7ICAgICAgICAgICAg
+ICB9PGJyICAvPiZndDsgLSAgICAgICAgICAgIGlmIChjcHUtJmd0O2NmZy5lbGVuICZndDsg
+NjQgfHwgY3B1LSZndDtjZmcudmxlbiAmbHQ7IDgpIHs8YnIgIC8+Jmd0OyArICAgICAgICAg
+ICAgaWYgKGNwdS0mZ3Q7Y2ZnLmVsZW4gJmd0OyA2NCB8fCBjcHUtJmd0O2NmZy5lbGVuICZs
+dDsgOCkgezxiciAgLz4mZ3Q7ICAgICAgICAgICAgICAgICAgZXJyb3Jfc2V0ZyhlcnJwLDxi
+ciAgLz4mZ3Q7ICAgICAgICAgICAgICAgICAgICAgICAgICAiVmVjdG9yIGV4dGVuc2lvbiBp
+bXBsZW1lbnRhdGlvbiBvbmx5IHN1cHBvcnRzIEVMRU4gIjxiciAgLz4mZ3Q7ICAgICAgICAg
+ICAgICAgICAgICAgICAgICAiaW4gdGhlIHJhbmdlIFs4LCA2NF0iKTs8YnIgIC8+Jmd0OyAt
+LTxiciAgLz4mZ3Q7IDIuMTcuMTxiciAgLz4mZ3Q7
+
+------=_NextPart_63ABE104_4ED33440_71621EE4--
 
 
