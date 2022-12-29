@@ -1,82 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAtkJ-000164-Je
-	for mharc-qemu-riscv@gnu.org; Thu, 29 Dec 2022 09:18:59 -0500
+	id 1pAxDV-0004Bl-RX
+	for mharc-qemu-riscv@gnu.org; Thu, 29 Dec 2022 13:01:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pAtk3-00013w-Kh
- for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 09:18:55 -0500
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pAxDP-0004AG-3b
+ for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 13:01:15 -0500
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pAtk1-0007nN-QK
- for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 09:18:43 -0500
-Received: by mail-wr1-x431.google.com with SMTP id n3so16759187wrc.5
- for <qemu-riscv@nongnu.org>; Thu, 29 Dec 2022 06:18:39 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pAxDN-00065P-3S
+ for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 13:01:14 -0500
+Received: by mail-ej1-x629.google.com with SMTP id kw15so46595749ejc.10
+ for <qemu-riscv@nongnu.org>; Thu, 29 Dec 2022 10:01:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nrfj30j79pAUBcHR2oTif20hYY/cMNFQ8JpYCcyj0qw=;
- b=L50ThA7fxi6E0ylNYRVpC07yVVtcLI3FBUWocF4BuYYDFsnUsUISNHWewiRYocrUDG
- m4EumLI6oGCw5uRmv8QvRgL5pi9qr0fTXBIUoMZZmdHdEDnIVGvszVli7GB1mEXs3vhy
- lpZel2gZSKAGsowoG7pLA7A5IGocWYMUXgbQ8024dzExc9HLqQaecAVm8ug+jtOI7wUe
- s2xahDsp2vyBdGtPCaL5S7KCxPPZBV+oV69xwT0ym+LuABc0lLfHJfOCeMR6P0bjLjRG
- tZtmGVKwtAj9ph5AeZAAEYZWl9J0lvsLa5BwtfpOf44htAhrKtrFsXoB3vZ8mYs3eULB
- rbog==
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=L3l9whsmmdTnr68eVWxsOO1sL2/p8Aoo/iYFNbZr8Go=;
+ b=rAc7anHUwy7+0nbHp3HZdGpn0DU2yMhkTVaXMvWLkMRoFvnLD/D4eyDyc57p+IEnHL
+ fIdOGOMc7Ss8hDL6lj4uycZRmcdz6kZdXCPOC8qaDbDGkTMBWRATxIpg3/uNbu25Ld7m
+ HvkerMAsuRgnkJJwfcw2wDPImq6m1Vv/lvYKHf8id0+pwbdXt+KuPUQZbJmVNI6uuV+W
+ hS42TsJxgo/0XikMY3hcfeB6Lc0xRVjSSEAfi1TuENspi50l93C+7/mb5bXDS1Phesr/
+ +6qVRstqXQ06tU3Y2u/VKB556ZuabvMJsZaY8wKWU9NXXOMG8Pj/u6TWXulF1cdvb+Fc
+ BtWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=nrfj30j79pAUBcHR2oTif20hYY/cMNFQ8JpYCcyj0qw=;
- b=N7ITQiPJok1Kmz1equyL1EJ1fDBYKpbzbhT5PM1C93UkRweVPrnKDHoTzYfBJsWGTX
- q2hEDFirSRrgysMRCurUVT9FH8WzyD7LYK8yFyYUpxrKy30Q6EcRAC0azk4/HFFiuXNm
- 8bDpxXy6fzOepmIDiVIpDuus+7kJP38s4r5rlfg2KgWZZmGO/J/rJILyGkMnzmBBGE+I
- bYeAGMCYdhxNF/WBqBRB5Hm8C65SdEF8pVMjdhSvQkroX991ZDE2Y8LKMyfS6qduwhiM
- 3SBsD6/26gdA0hZd5wYeCFL+rOGtYlNCn6+cX+6Aw5csqjzkiEfwU0rP8ULbQSxJVYBJ
- FQOw==
-X-Gm-Message-State: AFqh2kogn88N5lpyyTcnBoHvS2qatAkTXfYV3kLGixP3ty4lFf0xtRc+
- w8SQeyhlG5UMUXC82Cc3/J8f6w==
-X-Google-Smtp-Source: AMrXdXvN/dRUO58VBb3VdsiLCaS7Q8vOqFv2rrHCeBF6BmHOIGQhfXxIFPJcIt+n4mmN9J5jUF/PSQ==
-X-Received: by 2002:a05:6000:5ca:b0:24f:11eb:2988 with SMTP id
- bh10-20020a05600005ca00b0024f11eb2988mr17065038wrb.71.1672323518536; 
- Thu, 29 Dec 2022 06:18:38 -0800 (PST)
-Received: from zen.linaroharston ([185.81.254.11])
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=L3l9whsmmdTnr68eVWxsOO1sL2/p8Aoo/iYFNbZr8Go=;
+ b=yYj+ncXsZXnlli0ki1A6JRR/nh/uoFsLiuo3XyasFq2mOYXSJ1T5/WdZ9RblkNphQm
+ G2EurVXJm52mu3CakwWegOc9mmvWe9r4ece7wrd5R3Dj6lDxfSSoXOyXG7vuASnwZ55J
+ epwpgjHy62UjvOP9rebR8I1uDaV6WhiBD6afBtw6wiHtJjzxYjIHWEH3O6YRmibFFfeo
+ sSe/xI5PrlAzGCSFwuOfIsLsfdDKR6VQVDNA575hLcLdx5z1o4MQ6U5TD3NAONqFlpJv
+ 3QjmINvfvPcMWMJRUUO7CYMgB5fj065rj6padH3jN9jkzerxZP02r8sRSSaEFjvpZ+cf
+ hHHA==
+X-Gm-Message-State: AFqh2kpn4yhfeFBPb/jc/exFDCB+qsMwCLmEb7lJGMTF+h7NQfzR6UCW
+ UzNxtMVVj50lZ8OqbY+8gQcmPA==
+X-Google-Smtp-Source: AMrXdXvY0UsETBbUBfshadg/E7nTuUhNq+W+UPZZps1eKhO0+cOhUAuWrIcryNgOGiF+NaxhT5AIDg==
+X-Received: by 2002:a17:907:d50e:b0:81f:fc05:2ba0 with SMTP id
+ wb14-20020a170907d50e00b0081ffc052ba0mr25848961ejc.2.1672336871369; 
+ Thu, 29 Dec 2022 10:01:11 -0800 (PST)
+Received: from [192.168.1.115] ([185.126.107.38])
  by smtp.gmail.com with ESMTPSA id
- g3-20020a5d6983000000b00287da7ee033sm4270741wru.46.2022.12.29.06.18.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Dec 2022 06:18:37 -0800 (PST)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 503091FFB7;
- Thu, 29 Dec 2022 14:18:37 +0000 (GMT)
-References: <20221228133336.197467-1-dbarboza@ventanamicro.com>
- <20221228133336.197467-8-dbarboza@ventanamicro.com>
- <bebabfa6-483c-a604-fe8d-9d0585f505db@linaro.org>
- <70a0cd63-48e0-a79b-995b-fd34104c64a6@ventanamicro.com>
-User-agent: mu4e 1.9.7; emacs 29.0.60
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-riscv@nongnu.org,
- alistair.francis@wdc.com, Bin Meng <bin.meng@windriver.com>, Palmer
- Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng@tinylab.org>,
- qemu-devel@nongnu.org
-Subject: Re: [PATCH v3 07/10] hw/riscv/boot.c: use MachineState in
- riscv_load_initrd()
-Date: Thu, 29 Dec 2022 14:17:51 +0000
-In-reply-to: <70a0cd63-48e0-a79b-995b-fd34104c64a6@ventanamicro.com>
-Message-ID: <87r0wipa2q.fsf@linaro.org>
+ y4-20020a17090668c400b007aed2057eacsm8772493ejr.221.2022.12.29.10.01.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 29 Dec 2022 10:01:10 -0800 (PST)
+Message-ID: <04f01f1b-525b-ef99-4560-3a68f3bea15f@linaro.org>
+Date: Thu, 29 Dec 2022 19:01:08 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x431.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.6.1
+Subject: Re: [PATCH] riscv: do not set the rounding mode via `gen_set_rm`
+To: Saleem Abdulrasool <abdulras@google.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, frank.chang@sifive.com,
+ Saleem Abdulrasool <compnerd@compnerd.org>
+References: <20221229173743.123894-1-abdulras@google.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20221229173743.123894-1-abdulras@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x629.google.com
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.149,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -91,80 +82,154 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Dec 2022 14:18:57 -0000
+X-List-Received-Date: Thu, 29 Dec 2022 18:01:16 -0000
 
+On 29/12/22 18:37, Saleem Abdulrasool wrote:
+> From: Saleem Abdulrasool <compnerd@compnerd.org>
+> 
+> Setting the rounding mode via the `gen_set_rm` call would alter the
+> state of the disassembler, resetting the `TransOp` in the assembler
+> context.  When we subsequently set the rounding mode to the desired
+> value, we would trigger an assertion in `decode_save_opc`.  Instead
+> we can set the rounding mode via the `gen_helper_set_rounding_mode`
+> which will still trigger the exception in the case of an invalid RM
+> without altering the CPU disassembler state.
+> 
+> Signed-off-by: Saleem Abdulrasool <compnerd@compnerd.org>
+> ---
+>   target/riscv/insn_trans/trans_rvv.c.inc | 69 +++++++++++++------------
+>   1 file changed, 36 insertions(+), 33 deletions(-)
+> 
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 4dea4413ae..73f6fab1c5 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -2679,8 +2679,10 @@ static bool do_opfv(DisasContext *s, arg_rmr *a,
+>                       int rm)
+>   {
+>       if (checkfn(s, a)) {
+> +        // the helper will raise an exception if the rounding mode is invalid
+>           if (rm != RISCV_FRM_DYN) {
+> -            gen_set_rm(s, RISCV_FRM_DYN);
+> +            gen_helper_set_rounding_mode(cpu_env,
+> +                                         tcg_constant_i32(RISCV_FRM_DYN));
+>           }
+>   
+>           uint32_t data = 0;
+> @@ -3001,38 +3003,39 @@ static bool opffv_narrow_check(DisasContext *s, arg_rmr *a)
+>              require_scale_zve64f(s);
+>   }
+>   
+> -#define GEN_OPFV_NARROW_TRANS(NAME, CHECK, HELPER, FRM)            \
+> -static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+> -{                                                                  \
+> -    if (CHECK(s, a)) {                                             \
+> -        if (FRM != RISCV_FRM_DYN) {                                \
+> -            gen_set_rm(s, RISCV_FRM_DYN);                          \
+> -        }                                                          \
+> -                                                                   \
+> -        uint32_t data = 0;                                         \
+> -        static gen_helper_gvec_3_ptr * const fns[2] = {            \
+> -            gen_helper_##HELPER##_h,                               \
+> -            gen_helper_##HELPER##_w,                               \
+> -        };                                                         \
+> -        TCGLabel *over = gen_new_label();                          \
+> -        gen_set_rm(s, FRM);                                        \
+> -        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> -        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+> -                                                                   \
+> -        data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+> -        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> -        data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
+> -        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
+> -        tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+> -                           vreg_ofs(s, a->rs2), cpu_env,           \
+> -                           s->cfg_ptr->vlen / 8,                   \
+> -                           s->cfg_ptr->vlen / 8, data,             \
+> -                           fns[s->sew - 1]);                       \
+> -        mark_vs_dirty(s);                                          \
+> -        gen_set_label(over);                                       \
+> -        return true;                                               \
+> -    }                                                              \
+> -    return false;                                                  \
+> +#define GEN_OPFV_NARROW_TRANS(NAME, CHECK, HELPER, FRM)                     \
+> +static bool trans_##NAME(DisasContext *s, arg_rmr *a)                       \
+> +{                                                                           \
+> +    if (CHECK(s, a)) {                                                      \
+> +        if (FRM != RISCV_FRM_DYN) {                                         \
+> +            gen_helper_set_rounding_mode(cpu_env,                           \
+> +                                         tcg_constant_i32(RISCV_FRM_DYN));  \
+> +        }                                                                   \
+> +                                                                            \
+> +        uint32_t data = 0;                                                  \
+> +        static gen_helper_gvec_3_ptr * const fns[2] = {                     \
+> +            gen_helper_##HELPER##_h,                                        \
+> +            gen_helper_##HELPER##_w,                                        \
+> +        };                                                                  \
+> +        TCGLabel *over = gen_new_label();                                   \
+> +        gen_set_rm(s, FRM);                                                 \
+> +        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);                   \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);          \
+> +                                                                            \
+> +        data = FIELD_DP32(data, VDATA, VM, a->vm);                          \
+> +        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                      \
+> +        data = FIELD_DP32(data, VDATA, VTA, s->vta);                        \
+> +        data = FIELD_DP32(data, VDATA, VMA, s->vma);                        \
+> +        tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),              \
+> +                           vreg_ofs(s, a->rs2), cpu_env,                    \
+> +                           s->cfg_ptr->vlen / 8,                            \
+> +                           s->cfg_ptr->vlen / 8, data,                      \
+> +                           fns[s->sew - 1]);                                \
+> +        mark_vs_dirty(s);                                                   \
+> +        gen_set_label(over);                                                \
+> +        return true;                                                        \
+> +    }                                                                       \
+> +    return false;                                                           \
+>   }
 
-Daniel Henrique Barboza <dbarboza@ventanamicro.com> writes:
+Perfect example of why I don't like aligned '\' formatting in macros,
+and prefer using a single unaligned space + '\'.
 
-> On 12/28/22 12:51, Philippe Mathieu-Daud=C3=A9 wrote:
->> On 28/12/22 14:33, Daniel Henrique Barboza wrote:
->>> 'filename', 'mem_size' and 'fdt' from riscv_load_initrd() can all be
->>> retrieved by the MachineState object for all callers.
->>>
->>> Cc: Palmer Dabbelt <palmer@dabbelt.com>
->>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
->>> Reviewed-by: Bin Meng <bmeng@tinylab.org>
->>> ---
->>> =C2=A0 hw/riscv/boot.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 | 6 ++++--
->>> =C2=A0 hw/riscv/microchip_pfsoc.c | 3 +--
->>> =C2=A0 hw/riscv/sifive_u.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | =
-3 +--
->>> =C2=A0 hw/riscv/spike.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 | 3 +--
->>> =C2=A0 hw/riscv/virt.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 | 3 +--
->>> =C2=A0 include/hw/riscv/boot.h=C2=A0=C2=A0=C2=A0 | 3 +--
->>> =C2=A0 6 files changed, 9 insertions(+), 12 deletions(-)
->>>
->>> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
->>> index d3c71b3f0b..f7e806143a 100644
->>> --- a/hw/riscv/boot.c
->>> +++ b/hw/riscv/boot.c
->>> @@ -204,9 +204,11 @@ target_ulong riscv_load_kernel(const char *kernel_=
-filename,
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 exit(1);
->>> =C2=A0 }
->>> =C2=A0 -void riscv_load_initrd(const char *filename, uint64_t mem_size,
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint64_t ke=
-rnel_entry, void *fdt)
->>> +void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
->>> =C2=A0 {
->>> +=C2=A0=C2=A0=C2=A0 const char *filename =3D machine->initrd_filename;
->>
->> Do we want to check for missing -initrd here? Or simply return quietly
->> if not provided?
->
-> This function is always called after a "if (!machine->initrd_filename)", =
-so we can
-> be certain that -initrd will always be present if the function is
-> called.
+Anyhow, looking at this patch with 'git-diff --ignore-all-space' we get
+a 2 lines change:
 
-If that is an API guarantee we should assert that is the case then as
-calling without machine->initrd_filename would be a bug.=20
+-- >8 --
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc 
+b/target/riscv/insn_trans/trans_rvv.c.inc
+index 4dea4413ae..73f6fab1c5 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -2679,8 +2679,10 @@ static bool do_opfv(DisasContext *s, arg_rmr *a,
+                      int rm)
+  {
+      if (checkfn(s, a)) {
++        // the helper will raise an exception if the rounding mode is 
+invalid
+          if (rm != RISCV_FRM_DYN) {
+-            gen_set_rm(s, RISCV_FRM_DYN);
++            gen_helper_set_rounding_mode(cpu_env,
++                                         tcg_constant_i32(RISCV_FRM_DYN));
+          }
 
->
-> Perhaps one thing that we could do is to remove this check and fold it in=
-side the
-> function, right at the start, to make the function behavior independent o=
-f what
-> the caller is doing. We could do that at patch 9/10 where we'll end up wi=
-th a single
-> caller instead of 4-5.
->
->
-> Daniel
->
->>
->>> +=C2=A0=C2=A0=C2=A0 uint64_t mem_size =3D machine->ram_size;
->>> +=C2=A0=C2=A0=C2=A0 void *fdt =3D machine->fdt;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hwaddr start, end;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ssize_t size;
-
-
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+          uint32_t data = 0;
+@@ -3006,7 +3008,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmr 
+*a)              \
+  { 
+      \
+      if (CHECK(s, a)) { 
+      \
+          if (FRM != RISCV_FRM_DYN) { 
+      \
+-            gen_set_rm(s, RISCV_FRM_DYN);                          \
++            gen_helper_set_rounding_mode(cpu_env, 
+     \
++ 
+tcg_constant_i32(RISCV_FRM_DYN));  \
+          } 
+      \
+ 
+      \
+          uint32_t data = 0; 
+      \
+---
 
