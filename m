@@ -1,71 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAxNl-0006wK-KT
-	for mharc-qemu-riscv@gnu.org; Thu, 29 Dec 2022 13:11:57 -0500
+	id 1pAxNo-0006xr-Tj
+	for mharc-qemu-riscv@gnu.org; Thu, 29 Dec 2022 13:12:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pAxNk-0006u7-2a
- for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 13:11:56 -0500
-Received: from mail-ot1-x331.google.com ([2607:f8b0:4864:20::331])
+ id 1pAxNm-0006xG-CK
+ for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 13:11:58 -0500
+Received: from mail-ot1-x32b.google.com ([2607:f8b0:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pAxNi-0003c0-Ea
- for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 13:11:55 -0500
-Received: by mail-ot1-x331.google.com with SMTP id
- r2-20020a9d7cc2000000b006718a7f7fbaso11872880otn.2
- for <qemu-riscv@nongnu.org>; Thu, 29 Dec 2022 10:11:54 -0800 (PST)
+ id 1pAxNk-0003dA-PW
+ for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 13:11:58 -0500
+Received: by mail-ot1-x32b.google.com with SMTP id
+ m7-20020a9d73c7000000b00683e2f36c18so6845947otk.0
+ for <qemu-riscv@nongnu.org>; Thu, 29 Dec 2022 10:11:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sHU/59DX/o1/r0pnySH91c8qF73tF/MEtRKTLilJBpE=;
- b=OxlMGRtfDDu92hLHRbIzFqc2zAAdqLeiQMPKsEXZMyEuPo67lMQDM0jV2poh7DJ/N2
- TUtsxqNhIUBaJI5dWemQbA4cL6udqTbjIimU2sP4cDTU+4/oeIeANFxUHL96cJPR5K41
- I1VPdwJLb1YZ/RpGfifNHTF1ZWCtMP30/vad8OJX/QuZvCh5c+jElOb95TJkhWVYwEGn
- uvjF28QPtSAB3VgoC4+Ed21wd4RKoek+jktAV0YL2FF4sKlvQfPQdAl4rUaK3E7I120m
- SRQN+Vl5pAE/RCuxPKPXMxHSGbtmTo3Ogc2Q30wguBl1kflOv2IF5u3KBzzzsWDK0gAR
- VWBw==
+ bh=IHy65YgYZ7EFTsqj5jqz5XI2px8pxCQwfSaXjdiH0SQ=;
+ b=El8aA8ppoXiamW9bbv4fJ+2XAfwQYQwOrMAjPNxIebV4vVq35ebvoVnzkberlbNMqC
+ JzWNd+m5vuiMam/hfKOtWYTU+X8dpoInKdQb+L2b+5U0TbrKfoDFAQNzqOwtwcCjrObd
+ rwMcp9SApOvuLTV9iKJ5BkMbLhiowJOEIpnDtcFqP3rBcntqI9STn+WiqW8gAQV4oqN9
+ u+UYNxPbbOTHwmFQ8qfBe491qx5H5JcubCjxiMyiRYNUTPBA+sOePKNmgKNBT67cCrco
+ ljj+PLL8Xlg49RVEmwivU0eGCKqudT6JM4mtQMm5y3G6nOs/mm6RTjHkALbAUVWC+SE0
+ 7R1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sHU/59DX/o1/r0pnySH91c8qF73tF/MEtRKTLilJBpE=;
- b=zVyi9fcyVxs5EfwBww0a3d9fmoRbkmUWzEL4VvyXtfw55CBgEXm/6Y4uQbCvfQpCx/
- x0Q9kc0l/6rbM7D5KwMekBnxjtA8020QoQ4rBWsHDTRqzV9+QgIpvq1vGEVdyKi7Gf+k
- OasBqa03Uhr3gP3dCOCH7+ML2QcVqVXt9X505H4WSeq4UXdbjrr2VDGUgKvCz4mo8iUq
- r9qDM9pnk9Mewp0kAZd9+/DleN9Km4Llcj9ogZtlHDyzVEXcA1ZZ4QwOIMPFWnbt30Dc
- 9yC8ggtZFIk2rtZ3Lqd83axlZvqBcKODtjQx+Yh/mHV+OEnf0tpmKyv0WBI2WEWnW7mU
- YEbw==
-X-Gm-Message-State: AFqh2koWkaVnzKRrljFU9yG1gGYb97ZlWmIn9u0qBL3UJFPx2rZRXu4Z
- GvBSz8uJ2PSx1dc0EN1bEUaqe4wjfEG6uP0c
-X-Google-Smtp-Source: AMrXdXsZ584Uciol/KgkFvWhimEG9hP2EbmAqZxNVj5CkIlrjzacfavSqPOh+DChnzEW7gsYKZ8FHg==
-X-Received: by 2002:a9d:6f90:0:b0:66c:5842:637c with SMTP id
- h16-20020a9d6f90000000b0066c5842637cmr23895569otq.21.1672337513244; 
- Thu, 29 Dec 2022 10:11:53 -0800 (PST)
+ bh=IHy65YgYZ7EFTsqj5jqz5XI2px8pxCQwfSaXjdiH0SQ=;
+ b=MuYoDhgYpU5ElEQPSJlROZ/JMKNGRZ0qs7mHd1hSVptA8HcUBhQ9MGhjfeYMVOsFl2
+ e3gEMFvk/MYsRF1jCcjjsmqkly8+0kkl0YOucGSGMtcKCk5wlX0aEyHMZNZO3ll8jfpj
+ 1fyX2g4uNxUMNnpLF2pRL42m8UoCjguewVw4h9UZzXKnWQaVw+A8Xk5LMuRHZCCsZ+I0
+ R8FKV+6l8BcvGgXXCkPqswnoN7mrSJpSsBrHqm9ktqhBPK0mCJyotnWyYNG94uiLnblx
+ mricARP8a21FsW3MKfwuVcO0cnUBmr8CmCwoGoEPIUv/voa90rcY/EOMihBjnHRISPCS
+ oMyw==
+X-Gm-Message-State: AFqh2kptK1aVkHqgWJa/fJHjptgK4HVKexqERjzY6JwanrSpG8fKRcI3
+ pX5/P1qkZG72FZ14Ij8rAgRB1A==
+X-Google-Smtp-Source: AMrXdXs49f/f49p1ar2kODabYXUeMRxP+5nOTWs7yFJR2QDexl0FLfPy5OGGF2o8LyTwunAJ4dqxMw==
+X-Received: by 2002:a05:6830:39df:b0:674:f9e9:8ee5 with SMTP id
+ bt31-20020a05683039df00b00674f9e98ee5mr14170175otb.3.1672337515781; 
+ Thu, 29 Dec 2022 10:11:55 -0800 (PST)
 Received: from fedora.. ([191.17.222.139]) by smtp.gmail.com with ESMTPSA id
- d20-20020a056830139400b0066db09fb1b5sm9267205otq.66.2022.12.29.10.11.50
+ d20-20020a056830139400b0066db09fb1b5sm9267205otq.66.2022.12.29.10.11.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Dec 2022 10:11:52 -0800 (PST)
+ Thu, 29 Dec 2022 10:11:55 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Bin Meng <bmeng@tinylab.org>
-Subject: [PATCH v4 03/11] hw/riscv/sifive_u: use 'fdt' from MachineState
-Date: Thu, 29 Dec 2022 15:11:27 -0300
-Message-Id: <20221229181135.270661-4-dbarboza@ventanamicro.com>
+ Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+Subject: [PATCH v4 04/11] hw/riscv/boot.c: exit early if filename is NULL in
+ load_(kernel|initrd)
+Date: Thu, 29 Dec 2022 15:11:28 -0300
+Message-Id: <20221229181135.270661-5-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221229181135.270661-1-dbarboza@ventanamicro.com>
 References: <20221229181135.270661-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::331;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x331.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -85,97 +85,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Dec 2022 18:11:56 -0000
+X-List-Received-Date: Thu, 29 Dec 2022 18:11:58 -0000
 
-The MachineState object provides a 'fdt' pointer that is already being
-used by other RISC-V machines, and it's also used by the 'dumpdtb' QMP
-command.
+riscv_load_kernel() and riscv_load_initrd() works under the assumption
+that 'kernel_filename' and 'filename' are not NULL.
 
-Remove the 'fdt' pointer from SiFiveUState and use MachineState::fdt
-instead.
+This is currently the case since all callers of both functions are
+checking for NULL before calling them. Put an assert in both to make
+sure that a NULL value for both cases would be considered a bug.
 
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Suggested-by: Alex Bennée <alex.bennee@linaro.org>
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bmeng@tinylab.org>
 ---
- hw/riscv/sifive_u.c         | 15 ++++++---------
- include/hw/riscv/sifive_u.h |  3 ---
- 2 files changed, 6 insertions(+), 12 deletions(-)
+ hw/riscv/boot.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index a58ddb36ac..ddceb750ea 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -98,7 +98,7 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 98b80af51b..ad196f0fe4 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -177,6 +177,8 @@ target_ulong riscv_load_kernel(const char *kernel_filename,
  {
-     MachineState *ms = MACHINE(qdev_get_machine());
-     void *fdt;
--    int cpu;
-+    int cpu, fdt_size;
-     uint32_t *cells;
-     char *nodename;
-     uint32_t plic_phandle, prci_phandle, gpio_phandle, phandle = 1;
-@@ -112,14 +112,14 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
-     };
+     uint64_t kernel_load_base, kernel_entry;
  
-     if (ms->dtb) {
--        fdt = s->fdt = load_device_tree(ms->dtb, &s->fdt_size);
-+        fdt = ms->fdt = load_device_tree(ms->dtb, &fdt_size);
-         if (!fdt) {
-             error_report("load_device_tree() failed");
-             exit(1);
-         }
-         goto update_bootargs;
-     } else {
--        fdt = s->fdt = create_device_tree(&s->fdt_size);
-+        fdt = ms->fdt = create_device_tree(&fdt_size);
-         if (!fdt) {
-             error_report("create_device_tree() failed");
-             exit(1);
-@@ -612,9 +612,9 @@ static void sifive_u_machine_init(MachineState *machine)
-             hwaddr end = riscv_load_initrd(machine->initrd_filename,
-                                            machine->ram_size, kernel_entry,
-                                            &start);
--            qemu_fdt_setprop_cell(s->fdt, "/chosen",
-+            qemu_fdt_setprop_cell(machine->fdt, "/chosen",
-                                   "linux,initrd-start", start);
--            qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
-+            qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
-                                   end);
-         }
-     } else {
-@@ -627,14 +627,11 @@ static void sifive_u_machine_init(MachineState *machine)
++    g_assert(kernel_filename != NULL);
++
+     /*
+      * NB: Use low address not ELF entry point to ensure that the fw_dynamic
+      * behaviour when loading an ELF matches the fw_payload, fw_jump and BBL
+@@ -209,6 +211,8 @@ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+ {
+     ssize_t size;
  
-     /* Compute the fdt load address in dram */
-     fdt_load_addr = riscv_load_fdt(memmap[SIFIVE_U_DEV_DRAM].base,
--                                   machine->ram_size, s->fdt);
-+                                   machine->ram_size, machine->fdt);
-     if (!riscv_is_32bit(&s->soc.u_cpus)) {
-         start_addr_hi32 = (uint64_t)start_addr >> 32;
-     }
- 
--    /* Set machine->fdt for 'dumpdtb' QMP/HMP command */
--    machine->fdt = s->fdt;
--
-     /* reset vector */
-     uint32_t reset_vec[12] = {
-         s->msel,                       /* MSEL pin state */
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index e680d61ece..4a8828a30e 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -67,9 +67,6 @@ typedef struct SiFiveUState {
-     /*< public >*/
-     SiFiveUSoCState soc;
- 
--    void *fdt;
--    int fdt_size;
--
-     bool start_in_flash;
-     uint32_t msel;
-     uint32_t serial;
++    g_assert(filename != NULL);
++
+     /*
+      * We want to put the initrd far enough into RAM that when the
+      * kernel is uncompressed it will not clobber the initrd. However
 -- 
 2.38.1
 
