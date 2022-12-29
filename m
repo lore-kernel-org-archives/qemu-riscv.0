@@ -1,46 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAp45-0008Cc-Az
-	for mharc-qemu-riscv@gnu.org; Thu, 29 Dec 2022 04:19:05 -0500
+	id 1pAp4P-0008Gm-21
+	for mharc-qemu-riscv@gnu.org; Thu, 29 Dec 2022 04:19:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1pAp43-0008Bj-4u; Thu, 29 Dec 2022 04:19:03 -0500
-Received: from bg4.exmail.qq.com ([43.155.65.254])
+ id 1pAp41-0008BS-Mi; Thu, 29 Dec 2022 04:19:02 -0500
+Received: from bg4.exmail.qq.com ([43.154.221.58])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1pAp41-00078A-1Q; Thu, 29 Dec 2022 04:19:02 -0500
-X-QQ-mid: bizesmtp73t1672305519tyghhks4
+ id 1pAp3y-0006vw-QW; Thu, 29 Dec 2022 04:19:01 -0500
+X-QQ-mid: bizesmtp73t1672305510tyg69441
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Thu, 29 Dec 2022 17:18:38 +0800 (CST)
+ id ; Thu, 29 Dec 2022 17:18:28 +0800 (CST)
 X-QQ-SSF: 01200000000000C0C000000A0000000
-X-QQ-FEAT: zX46NWeZQGEQzNy9OYEEUi6HdoGPcqEsSi/HYEU6gYrNVrGL9hP7947HYUhnn
- HIfZxifnDFSzSu9ziUy6UI4N43xoudHuVU+LpN2rywCW0XgH7m+VxVqCpw/G2QjVUAd+uB0
- FRqpIctmNPULtMJ7XP/n+wsHDA664aN4i1zRd2aBriEocapqSsmHi4ZjyA/p2E84jiDMpB2
- ha+JDNI/1rsu8h8666bh1KP6fMK05LeOwLwGXEXrPxGgcg8MMXi8l+u6iNqhGnCI/8bPmDa
- fLFz9X3y+/cP5oTBxoH0L26JY3WwtFGKXjgGzzLgIg7vn3v1R0ytKgUokFOPa1gzwAuu1Ag
- xYmwVbzuOnCMZilp1zkgY7nRUHtkTCKiy0g8c/C
+X-QQ-FEAT: PsQCk6chbj4XbdEaS9QsOkESbQPB814qm/cJ1b7qWZuvunjbw3FC9nN4E28CA
+ /IKZg0HlWcsfiDu0Ssm5Sdz9ZQY2NwDj4kSvLbSzZtoYLPUWoxoVVWCgOmJgS6K2H1mWYLr
+ 1YJC/HQbpgHjiq9AO/R+xx85GpVQ7Yurj5QICjAjPirLBLw3YpQr5dbd/6v2U9cDJ4f+0g1
+ tMINHlkS3ipldBdmNt1YQVaA9ZwRF9rPn3nux262c0RbPXsd9tCLL/IpMwz5g+AbP9TH4rS
+ ZOdW5ZTOoKj/t3u278worAOM0d3EC2LDyZMMITWT2P78Q94FTNONOjV7sPdK7AvLZSTvh66
+ hv14EzjLPYo35gUusA=
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
 	qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
+ Anup Patel <apatel@ventanamicro.com>, Bin Meng <bin.meng@windriver.com>,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v2 03/12] hw/char: riscv_htif: Drop useless assignment of
- memory region
-Date: Thu, 29 Dec 2022 17:18:19 +0800
-Message-Id: <20221229091828.1945072-4-bmeng@tinylab.org>
+Subject: [PATCH v2 00/12] hw/riscv: Improve Spike HTIF emulation fidelity
+Date: Thu, 29 Dec 2022 17:18:16 +0800
+Message-Id: <20221229091828.1945072-1-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20221229091828.1945072-1-bmeng@tinylab.org>
-References: <20221229091828.1945072-1-bmeng@tinylab.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=43.155.65.254; envelope-from=bmeng@tinylab.org;
+Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
  helo=bg4.exmail.qq.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -61,87 +59,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 29 Dec 2022 09:19:03 -0000
 
-struct HTIFState has 3 members for address space and memory region,
-and are initialized during htif_mm_init(). But they are actually
-useless. Drop them.
+At present the 32-bit OpenSBI generic firmware image does not boot on
+Spike, only 64-bit image can. This is due to the HTIF emulation does
+not implement the proxy syscall interface which is required for the
+32-bit HTIF console output.
 
-Signed-off-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
+An OpenSBI bug fix [1] is also needed when booting the plain binary image.
 
-(no changes since v1)
+With this series plus the above OpenSBI fix, both 32-bit OpenSBI BIN & ELF
+images can boot on QEMU 'spike' machine.
 
- include/hw/char/riscv_htif.h | 7 ++-----
- hw/char/riscv_htif.c         | 7 ++-----
- hw/riscv/spike.c             | 5 ++---
- 3 files changed, 6 insertions(+), 13 deletions(-)
+[1] https://patchwork.ozlabs.org/project/opensbi/patch/20221226033603.1860569-1-bmeng@tinylab.org/
 
-diff --git a/include/hw/char/riscv_htif.h b/include/hw/char/riscv_htif.h
-index 3eccc1914f..6d172ebd6d 100644
---- a/include/hw/char/riscv_htif.h
-+++ b/include/hw/char/riscv_htif.h
-@@ -34,9 +34,6 @@ typedef struct HTIFState {
-     hwaddr tohost_offset;
-     hwaddr fromhost_offset;
-     MemoryRegion mmio;
--    MemoryRegion *address_space;
--    MemoryRegion *main_mem;
--    void *main_mem_ram_ptr;
- 
-     CPURISCVState *env;
-     CharBackend chr;
-@@ -54,7 +51,7 @@ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
- bool htif_uses_elf_symbols(void);
- 
- /* legacy pre qom */
--HTIFState *htif_mm_init(MemoryRegion *address_space, MemoryRegion *main_mem,
--    CPURISCVState *env, Chardev *chr, uint64_t nonelf_base);
-+HTIFState *htif_mm_init(MemoryRegion *address_space, CPURISCVState *env,
-+                        Chardev *chr, uint64_t nonelf_base);
- 
- #endif
-diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-index 088556bb04..e7e319ca1d 100644
---- a/hw/char/riscv_htif.c
-+++ b/hw/char/riscv_htif.c
-@@ -265,8 +265,8 @@ bool htif_uses_elf_symbols(void)
-     return (address_symbol_set == 3) ? true : false;
- }
- 
--HTIFState *htif_mm_init(MemoryRegion *address_space, MemoryRegion *main_mem,
--    CPURISCVState *env, Chardev *chr, uint64_t nonelf_base)
-+HTIFState *htif_mm_init(MemoryRegion *address_space, CPURISCVState *env,
-+                        Chardev *chr, uint64_t nonelf_base)
- {
-     uint64_t base, size, tohost_offset, fromhost_offset;
- 
-@@ -281,9 +281,6 @@ HTIFState *htif_mm_init(MemoryRegion *address_space, MemoryRegion *main_mem,
-     fromhost_offset = fromhost_addr - base;
- 
-     HTIFState *s = g_new0(HTIFState, 1);
--    s->address_space = address_space;
--    s->main_mem = main_mem;
--    s->main_mem_ram_ptr = memory_region_get_ram_ptr(main_mem);
-     s->env = env;
-     s->tohost_offset = tohost_offset;
-     s->fromhost_offset = fromhost_offset;
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 1e1d752c00..82cf41ac27 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -317,9 +317,8 @@ static void spike_board_init(MachineState *machine)
-                               fdt_load_addr);
- 
-     /* initialize HTIF using symbols found in load_kernel */
--    htif_mm_init(system_memory, mask_rom,
--                 &s->soc[0].harts[0].env, serial_hd(0),
--                 memmap[SPIKE_HTIF].base);
-+    htif_mm_init(system_memory, &s->soc[0].harts[0].env,
-+                 serial_hd(0), memmap[SPIKE_HTIF].base);
- }
- 
- static void spike_machine_instance_init(Object *obj)
+Changes in v2:
+- fix 2 typos in the commit message
+- initialize firmware_end_addr to memmap[SPIKE_DRAM].base
+- rework the htif_custom_base detection logic
+
+Bin Meng (10):
+  hw/char: riscv_htif: Avoid using magic numbers
+  hw/char: riscv_htif: Drop {to,from}host_size in HTIFState
+  hw/char: riscv_htif: Drop useless assignment of memory region
+  hw/char: riscv_htif: Use conventional 's' for HTIFState
+  hw/char: riscv_htif: Move registers from CPUArchState to HTIFState
+  hw/char: riscv_htif: Remove forward declarations for non-existent
+    variables
+  hw/char: riscv_htif: Support console output via proxy syscall
+  hw/riscv: spike: Remove the out-of-date comments
+  hw/riscv/boot.c: Introduce riscv_find_firmware()
+  hw/riscv: spike: Decouple create_fdt() dependency to ELF loading
+
+Daniel Henrique Barboza (2):
+  hw/riscv/boot.c: make riscv_find_firmware() static
+  hw/riscv/boot.c: introduce riscv_default_firmware_name()
+
+ include/hw/char/riscv_htif.h |  19 +---
+ include/hw/riscv/boot.h      |   4 +-
+ target/riscv/cpu.h           |   4 -
+ hw/char/riscv_htif.c         | 172 +++++++++++++++++++++--------------
+ hw/riscv/boot.c              |  76 ++++++++++------
+ hw/riscv/sifive_u.c          |  11 +--
+ hw/riscv/spike.c             |  64 +++++++++----
+ hw/riscv/virt.c              |  10 +-
+ target/riscv/machine.c       |   6 +-
+ 9 files changed, 217 insertions(+), 149 deletions(-)
+
 -- 
 2.34.1
 
