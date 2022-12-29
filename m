@@ -1,77 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAxO9-0007Kr-I9
-	for mharc-qemu-riscv@gnu.org; Thu, 29 Dec 2022 13:12:21 -0500
+	id 1pB1Sj-0001Bz-Qu
+	for mharc-qemu-riscv@gnu.org; Thu, 29 Dec 2022 17:33:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pAxO7-0007K0-Ju
- for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 13:12:19 -0500
-Received: from mail-oi1-x232.google.com ([2607:f8b0:4864:20::232])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pB1Sh-0001BO-Rv; Thu, 29 Dec 2022 17:33:19 -0500
+Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pAxO5-0003iu-PH
- for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 13:12:19 -0500
-Received: by mail-oi1-x232.google.com with SMTP id j130so12084368oif.4
- for <qemu-riscv@nongnu.org>; Thu, 29 Dec 2022 10:12:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=u7+22eHsp/sdotkCxCWkv/b53OuOxZgFQ9IjPprCZ4c=;
- b=CsMOHZ7zViJZmZtVXioghJKfRh/z5ngdGx8nlNgk2q4mnouh7i8se/4COYX7twxMFB
- tDwkcjAS0pZ//tETIofTG9dKu6a8HOLk3D7TEdrFkWOuurGhn9nhk13RRnQ4BpP3I/pP
- xnqKDHdVYqzlOTx+BvzxGG71tBwiPH3hl6As+pVuItULGKu6htYYhvGlYXjut3Y6GjAT
- KhROLj1WulmblsZnbfl+Be22tg9h8Cq7U+COx2axKnRgcupnNC05SrFp+/R410a1DNyr
- R/XzRwgcVr+YBkMXyEpLDij1FBeyYaU8n26VV4qm6mYvgrckcURgkxAp3WLVgxZNtLJi
- NvVQ==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pB1Sf-0001h7-KW; Thu, 29 Dec 2022 17:33:19 -0500
+Received: by mail-vs1-xe32.google.com with SMTP id h27so6065229vsq.3;
+ Thu, 29 Dec 2022 14:33:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=u/Hj8yLAE6eL6Ywx6KMsE9l8eI5QjS6kzFJSYql0Wp0=;
+ b=EcguO+EJ0K06nY8/itmYt4MwUYeL/9UWaxtJUfBwD+14OotXSebwli6WCgIdTLV4BK
+ BjVs75Gt3ec/83FV7iSL/ahXevyU0KUsX2OgEqPi5rOGjVtS5tlrsLFjv5FGl+7NorI6
+ UHQmPNQzW8XcPp9NjjE55LzJBy2N/07RdZZ2oq0QSenrRAiK2rK8hp1i7pro4s3/6RUY
+ RD1FmnHQCWL5xhrvdSWVXmrH9YwlbbF1MIQvD+iwaGY8uKlee6cWRpcLc/H2ny8R3tFY
+ q1ePpTem5uipjIZo+1gd7/R0V+D2IIVjxL2XWQf3UZufwAJ+csVXncONFNr1zlc8F17O
+ wjCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=u7+22eHsp/sdotkCxCWkv/b53OuOxZgFQ9IjPprCZ4c=;
- b=GVOBV/6jHhleFxT6P9sbcSY83VBshsocseFTwBAfLPjkXHz+jK44x0ewtPUtmv/L12
- 4T1SPpIfqhbpU0WlbC1WRYy5XprZbOBJV2ys9/1nhGnObqGMD1CIPVqNS2sX7BEaoAcx
- a/WuUqewDgoHRf3KZ5tuZI+0eCe+u3FlOgJduQAU+LlJzhbI/e6pv1chl6X3Ka4KufYi
- rvm4dQQ09aubZfYUTobc1fmuRFGvJrwqq0wg0uZN/iR1x0IWdMBZJqCEMWE5BXVhLytw
- OefOXJ837iCgGjYedYlcunLKr6/vaM2neKqExD5y3zTfmHsv7WB1QAbPOEWx0xkrBdjA
- PcFA==
-X-Gm-Message-State: AFqh2kpKMsWPYE+9RWF7BV2mReyhsHPZRJ8htKrJNpVvpXtb9lCIs8u8
- B65wIV2NhXX1MKN43Mqz4tFGsA==
-X-Google-Smtp-Source: AMrXdXuXMHsAl9AdXMVRQE4cvAR4Z98GoFaWYhVOkFIzlGviwamDky8Upr1RJegw78iOL47RnJsM2Q==
-X-Received: by 2002:a05:6808:638e:b0:360:d0db:d3c2 with SMTP id
- ec14-20020a056808638e00b00360d0dbd3c2mr15030408oib.15.1672337536691; 
- Thu, 29 Dec 2022 10:12:16 -0800 (PST)
-Received: from fedora.. ([191.17.222.139]) by smtp.gmail.com with ESMTPSA id
- d20-20020a056830139400b0066db09fb1b5sm9267205otq.66.2022.12.29.10.12.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Dec 2022 10:12:16 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Bin Meng <bin.meng@windriver.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Bin Meng <bmeng@tinylab.org>
-Subject: [PATCH v4 11/11] hw/riscv/boot.c: make riscv_load_initrd() static
-Date: Thu, 29 Dec 2022 15:11:35 -0300
-Message-Id: <20221229181135.270661-12-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20221229181135.270661-1-dbarboza@ventanamicro.com>
-References: <20221229181135.270661-1-dbarboza@ventanamicro.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=u/Hj8yLAE6eL6Ywx6KMsE9l8eI5QjS6kzFJSYql0Wp0=;
+ b=j2Ls9ET4CShjBzQrqccJ/ix/bEgMI0/q7rIp+fILAOpD/VKHDGky0qXyS1GhtP2gpM
+ TMDVRAQutF8x+MrIQ3SBuZsBKU0keR3qaed6Mlo7MHF1UKkllob27v9DXJWgAZEnq6fH
+ pBHhbhhTg6Gazfk3svgLxXvhFIu7IJHuwz8iQfZ4USJSyf1LyWVrRh/4k08tp5R8lKdu
+ 4XjWuxixLRnvqI0RiOx9q41NG9gZLwThKqPQDaHNfHK4gzE3dyLE3OGhqtbq6r5XOs+9
+ wYgzecmPTazPr7jwEzeMtTg7sEa9Gj3ss+EDirL2Lvond0c7QYE9nyIQFajarWymVL5p
+ knOw==
+X-Gm-Message-State: AFqh2kobcZTYX6uRVtSbFSy3pM2LnVLA0wtibGdT+QWS6EdcaOx+OETM
+ u4AjfGJcpnVsHpllJ8wJc+G6S4sytOzvvSx8ya0=
+X-Google-Smtp-Source: AMrXdXvlk0gxyLc0iSOpLoLxjbqAiOvWwoAjNDtd2DPpjV7+1R0qA7HOVGD8xIkTz3zq0c2DvhzU8qH3T3fTEenhhw0=
+X-Received: by 2002:a05:6102:f8c:b0:3c9:8cc2:dd04 with SMTP id
+ e12-20020a0561020f8c00b003c98cc2dd04mr1457890vsv.73.1672353187803; Thu, 29
+ Dec 2022 14:33:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::232;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x232.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <167221089290.19963.15278757025657303819-0@git.sr.ht>
+In-Reply-To: <167221089290.19963.15278757025657303819-0@git.sr.ht>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 30 Dec 2022 08:32:41 +1000
+Message-ID: <CAKmqyKPALG0ojtAMzR1-fvNCBMzz_UFtJDRyk20=giw5Ca=yVg@mail.gmail.com>
+Subject: Re: [PATCH qemu] target/riscv/cpu.c: Fix elen check
+To: "~elta" <503386372@qq.com>
+Cc: qemu-devel <qemu-devel@nongnu.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,130 +73,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Dec 2022 18:12:20 -0000
+X-List-Received-Date: Thu, 29 Dec 2022 22:33:20 -0000
 
-The only remaining caller is riscv_load_kernel_and_initrd() which
-belongs to the same file.
+On Thu, Dec 29, 2022 at 12:34 AM ~elta <elta@git.sr.ht> wrote:
+>
+> From: Dongxue Zhang <elta.era@gmail.com>
+>
+> Should be cpu->cfg.elen in range [8, 64].
+>
+> Signed-off-by: Dongxue Zhang <elta.era@gmail.com>
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Bin Meng <bmeng@tinylab.org>
----
- hw/riscv/boot.c         | 80 ++++++++++++++++++++---------------------
- include/hw/riscv/boot.h |  1 -
- 2 files changed, 40 insertions(+), 41 deletions(-)
+When sending a new version can you please add any previous reviewed tags.
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index d18262c302..1f7f13758c 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -171,6 +171,46 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
-     exit(1);
- }
- 
-+static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
-+{
-+    const char *filename = machine->initrd_filename;
-+    uint64_t mem_size = machine->ram_size;
-+    void *fdt = machine->fdt;
-+    hwaddr start, end;
-+    ssize_t size;
-+
-+    g_assert(filename != NULL);
-+
-+    /*
-+     * We want to put the initrd far enough into RAM that when the
-+     * kernel is uncompressed it will not clobber the initrd. However
-+     * on boards without much RAM we must ensure that we still leave
-+     * enough room for a decent sized initrd, and on boards with large
-+     * amounts of RAM we must avoid the initrd being so far up in RAM
-+     * that it is outside lowmem and inaccessible to the kernel.
-+     * So for boards with less  than 256MB of RAM we put the initrd
-+     * halfway into RAM, and for boards with 256MB of RAM or more we put
-+     * the initrd at 128MB.
-+     */
-+    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
-+
-+    size = load_ramdisk(filename, start, mem_size - start);
-+    if (size == -1) {
-+        size = load_image_targphys(filename, start, mem_size - start);
-+        if (size == -1) {
-+            error_report("could not load ramdisk '%s'", filename);
-+            exit(1);
-+        }
-+    }
-+
-+    /* Some RISC-V machines (e.g. opentitan) don't have a fdt. */
-+    if (fdt) {
-+        end = start + size;
-+        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-start", start);
-+        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end", end);
-+    }
-+}
-+
- target_ulong riscv_load_kernel_and_initrd(MachineState *machine,
-                                           target_ulong kernel_start_addr,
-                                           symbol_fn_t sym_cb)
-@@ -222,46 +262,6 @@ out:
-     return kernel_entry;
- }
- 
--void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
--{
--    const char *filename = machine->initrd_filename;
--    uint64_t mem_size = machine->ram_size;
--    void *fdt = machine->fdt;
--    hwaddr start, end;
--    ssize_t size;
--
--    g_assert(filename != NULL);
--
--    /*
--     * We want to put the initrd far enough into RAM that when the
--     * kernel is uncompressed it will not clobber the initrd. However
--     * on boards without much RAM we must ensure that we still leave
--     * enough room for a decent sized initrd, and on boards with large
--     * amounts of RAM we must avoid the initrd being so far up in RAM
--     * that it is outside lowmem and inaccessible to the kernel.
--     * So for boards with less  than 256MB of RAM we put the initrd
--     * halfway into RAM, and for boards with 256MB of RAM or more we put
--     * the initrd at 128MB.
--     */
--    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
--
--    size = load_ramdisk(filename, start, mem_size - start);
--    if (size == -1) {
--        size = load_image_targphys(filename, start, mem_size - start);
--        if (size == -1) {
--            error_report("could not load ramdisk '%s'", filename);
--            exit(1);
--        }
--    }
--
--    /* Some RISC-V machines (e.g. opentitan) don't have a fdt. */
--    if (fdt) {
--        end = start + size;
--        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-start", start);
--        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end", end);
--    }
--}
--
- uint64_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
- {
-     uint64_t temp, fdt_addr;
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index 16b86450d3..9c2bd92eff 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -46,7 +46,6 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
- target_ulong riscv_load_kernel_and_initrd(MachineState *machine,
-                                           target_ulong firmware_end_addr,
-                                           symbol_fn_t sym_cb);
--void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry);
- uint64_t riscv_load_fdt(hwaddr dram_start, uint64_t dram_size, void *fdt);
- void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
-                                hwaddr saddr,
--- 
-2.38.1
+Alistair
 
+> ---
+>  target/riscv/cpu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6fe176e483..5dc51f7912 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -872,7 +872,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>                          "Vector extension ELEN must be power of 2");
+>                  return;
+>              }
+> -            if (cpu->cfg.elen > 64 || cpu->cfg.vlen < 8) {
+> +            if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
+>                  error_setg(errp,
+>                          "Vector extension implementation only supports ELEN "
+>                          "in the range [8, 64]");
+> --
+> 2.34.5
+>
 
