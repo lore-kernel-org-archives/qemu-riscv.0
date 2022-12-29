@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAxMK-0006CV-Nt
-	for mharc-qemu-riscv@gnu.org; Thu, 29 Dec 2022 13:10:28 -0500
+	id 1pAxML-0006Cm-2X
+	for mharc-qemu-riscv@gnu.org; Thu, 29 Dec 2022 13:10:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from
- <3cdCtYwgKCuwOPRiZfOgUccUZS.QcaeSai-fWgQjbcbUbi.cfU@flex--abdulras.bounces.google.com>)
- id 1pAwqr-0006t7-MT
- for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 12:37:57 -0500
-Received: from mail-pj1-x104a.google.com ([2607:f8b0:4864:20::104a])
+ <3Ds6tYwgKCoUjkm3u0j1pxxpun.lxvznv3-0r1l4wxwpw3.x0p@flex--abdulras.bounces.google.com>)
+ id 1pAwh1-0002Bt-Q1
+ for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 12:27:47 -0500
+Received: from mail-yw1-x1149.google.com ([2607:f8b0:4864:20::1149])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from
- <3cdCtYwgKCuwOPRiZfOgUccUZS.QcaeSai-fWgQjbcbUbi.cfU@flex--abdulras.bounces.google.com>)
- id 1pAwqp-0007QP-Rd
- for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 12:37:57 -0500
-Received: by mail-pj1-x104a.google.com with SMTP id
- s4-20020a17090a2f0400b00225cb4e761cso5525056pjd.3
- for <qemu-riscv@nongnu.org>; Thu, 29 Dec 2022 09:37:55 -0800 (PST)
+ <3Ds6tYwgKCoUjkm3u0j1pxxpun.lxvznv3-0r1l4wxwpw3.x0p@flex--abdulras.bounces.google.com>)
+ id 1pAwgz-0002Ys-QX
+ for qemu-riscv@nongnu.org; Thu, 29 Dec 2022 12:27:47 -0500
+Received: by mail-yw1-x1149.google.com with SMTP id
+ 00721157ae682-47ede4426e1so94388377b3.7
+ for <qemu-riscv@nongnu.org>; Thu, 29 Dec 2022 09:27:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20210112;
  h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
  :date:message-id:reply-to;
  bh=Cac1QtDTwybK/HIvFLlmk/EkE8UUKb1WJ/dIXW9vIrY=;
- b=KcKrh0cuGe3gzjkNVwN1jz+96VWZxkgUQfULKltU8gnN+ZP/HLnmowlWzgBvbDtm8H
- QtWckM84JnyekQ+dYCZQs74fS9v3yjXvGlL4v3JPIJsNK7fBGUCFK9ZLOjcb48B0q1Yh
- bdPZ/Z0xfPfncbaySogx2U6CBp7Ea6hx1OhTPMUaH08MCn3gplRHdTB8LLfpydv6I8ow
- iBilkeFYKe+HqCZTjYGlE6Xg1T10tsYXQWAy31X445dmTKvjmSs3C/GMv0zjKeEDOMhC
- B7C5LB942DfqPJPGGMKHJwYc+5VBzDlN9tVKmMduk00SBqRoy3EpYBOvdxNV3jUdlFo1
- dKBQ==
+ b=BCw+TSHjKd3CF2Fl8ZsG1RTWMrrh5tWCsi5Xth/fvZIKj63571iF1+OFRpivpgSLgW
+ JUfQtVPwsKwwZauJeRJgGeG95pmepUzDdwWgexLcTe08DPxPBYqiuOGOKm7tjEgujvnf
+ OPPA+l4FbPHRz4TF8ld2bxcXjyAy0jYr5FBFwfhF++4vVL1Hv4GEG3p0BwxgHTms9gaE
+ hlFLMG+5u18J+A2/uYwYbB12YszIbZXBQwcGAGYwxZGDuQqdNYXCBVhJGT7BnpXHJBiy
+ KrYarOU7TpFDZKd7rL8grofStiBV1P75dmE0bLO0GhE1Rio4WJndKyeww74FNBC6FDei
+ s1fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
  bh=Cac1QtDTwybK/HIvFLlmk/EkE8UUKb1WJ/dIXW9vIrY=;
- b=HGCnIRl+d8YG4nBurOSDZ7l1PoxOccDvhyYkUNxBK+MlIsevhGZddJJZmEM7kT9kc1
- /YS1P8cT5F8BurMLVgq6LITbr+YMeh5ZgY7lYadBYf/kg9SPyYH6Rtof4o1wxeQ3pq/d
- mz02X1AKDwAzFSxirCuUr8+gIwPqwaOIxBmotq3lziYtYRKxJLTHTz7Cm1Hg9DXPgsj1
- n0k5lZ7pTPl9bCO8YMErjXALW8J+L2jP2iZ8ivVhozZ04Mrv9Ya6jo5kSUu2FxAW8MMM
- qBPw2nxLzlqN5kHdchz1c3vdMa9NUUwx5heXv2RoRDxnqeetqugE2TC/XoGcJ3sCR0aG
- E2nw==
-X-Gm-Message-State: AFqh2kq8UvvE+0nny9J7yuOoKoBb+eNs+Gbg6Crvri21BpqoDFwRrgAC
- Y1whg0K8DDE3Hy8K2z38DN5Cxq+Dm39dcg==
-X-Google-Smtp-Source: AMrXdXs0XGZck+XZNjpnDAXlU998GuMzsoRsgSZ6pT7qrE61zlKNKTesiNPW81qWb7D21eX+iubEUbL7bYT0hw==
+ b=UVXHpA2dhuvBZM7OdOTB091aodww96VXGiHJojsll9h1WBZkBMxqrmGTY8P9FXZlzN
+ P7lbiSqa5auKcB5NrhOZQwHvoXfjju9M+OqBtm6MdMZrtcuZ7G2cDH6lWnqqqmLFe14U
+ eKQdYN5Be0ZjcKW7uOHU5UQsi51kJAQemV1qwftVKa/U/vf1dfFRGa4b4xPdOEWqFiNk
+ fAw2WHI0Wj/Zb9RN/nM9S+ON1i8y40TGH3jkbBNBRxqjsgh5pHSNWiaYibeyRgrHqu0f
+ qdKEd7hrwJdb988Pjqiq4bQNGU6pYaPpS8Kd85mNNt6hdzCn1ISyr+y9bqyzIpzpII2M
+ 4sSw==
+X-Gm-Message-State: AFqh2kqcxxk7IK4YgMVjf+WpA9eKpzddpoBujBGtKfa5IuC23HhJjdkP
+ iBZjBUa3Pzx1RGPuMbMBvu491z+o/HWjKg==
+X-Google-Smtp-Source: AMrXdXsMfS4b95UasDVVfnD5/UuA2HM53COWvUUWnNB99DSgO1CtC7L1XjkkjAjKJgomPzYrU5gHZD/iTmMbsw==
 X-Received: from abdulras-llvm.c.googlers.com
  ([fda3:e722:ac3:cc00:7f:e700:c0a8:219b])
- (user=abdulras job=sendgmr) by 2002:a17:90a:15c9:b0:219:8464:84e3 with SMTP
- id w9-20020a17090a15c900b00219846484e3mr2814907pjd.232.1672335473856; Thu, 29
- Dec 2022 09:37:53 -0800 (PST)
-Date: Thu, 29 Dec 2022 17:37:43 +0000
+ (user=abdulras job=sendgmr) by 2002:a25:4f03:0:b0:722:24a8:f05b with SMTP id
+ d3-20020a254f03000000b0072224a8f05bmr2717503ybb.418.1672334862995; Thu, 29
+ Dec 2022 09:27:42 -0800 (PST)
+Date: Thu, 29 Dec 2022 17:27:34 +0000
 Mime-Version: 1.0
 X-Mailer: git-send-email 2.39.0.314.g84b9a713c41-goog
-Message-ID: <20221229173743.123894-1-abdulras@google.com>
+Message-ID: <20221229172734.119600-1-abdulras@google.com>
 Subject: [PATCH] riscv: do not set the rounding mode via `gen_set_rm`
 From: Saleem Abdulrasool <abdulras@google.com>
 To: qemu-devel@nongnu.org
@@ -56,18 +56,18 @@ Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, frank.chang@sifive.com, 
  Saleem Abdulrasool <compnerd@compnerd.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::104a;
- envelope-from=3cdCtYwgKCuwOPRiZfOgUccUZS.QcaeSai-fWgQjbcbUbi.cfU@flex--abdulras.bounces.google.com;
- helo=mail-pj1-x104a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1149;
+ envelope-from=3Ds6tYwgKCoUjkm3u0j1pxxpun.lxvznv3-0r1l4wxwpw3.x0p@flex--abdulras.bounces.google.com;
+ helo=mail-yw1-x1149.google.com
 X-Spam_score_int: -95
 X-Spam_score: -9.6
 X-Spam_bar: ---------
 X-Spam_report: (-9.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- USER_IN_DEF_DKIM_WL=-7.5 autolearn=ham autolearn_force=no
+ USER_IN_DEF_DKIM_WL=-7.5 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 29 Dec 2022 13:10:27 -0500
+X-Mailman-Approved-At: Thu, 29 Dec 2022 13:10:26 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,7 +79,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Dec 2022 17:37:58 -0000
+X-List-Received-Date: Thu, 29 Dec 2022 17:27:48 -0000
 
 From: Saleem Abdulrasool <compnerd@compnerd.org>
 
