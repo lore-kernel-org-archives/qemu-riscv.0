@@ -1,37 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pAp8A-0003Zg-Co
-	for mharc-qemu-riscv@gnu.org; Thu, 29 Dec 2022 04:23:18 -0500
+	id 1pAp8G-0003dB-UK
+	for mharc-qemu-riscv@gnu.org; Thu, 29 Dec 2022 04:23:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1pAp7t-0003Vp-QD; Thu, 29 Dec 2022 04:23:02 -0500
-Received: from bg4.exmail.qq.com ([43.154.221.58])
+ id 1pAp89-0003ZX-Ch; Thu, 29 Dec 2022 04:23:18 -0500
+Received: from bg4.exmail.qq.com ([43.155.65.254])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1pAp7o-0002hW-D3; Thu, 29 Dec 2022 04:23:00 -0500
+ id 1pAp7z-0002iE-Eg; Thu, 29 Dec 2022 04:23:10 -0500
 X-QQ-Spam: true
-X-QQ-mid: bizesmtp73t1672305534tbza5eg3
+X-QQ-mid: bizesmtp73t1672305537tje3xs78
 Received: from ubuntu.. ( [111.196.135.79]) by bizesmtp.qq.com (ESMTP) with 
- id ; Thu, 29 Dec 2022 17:18:53 +0800 (CST)
-X-QQ-SSF: 01200000000000C0C000000A0000000
+ id ; Thu, 29 Dec 2022 17:18:56 +0800 (CST)
+X-QQ-SSF: 00200000000000C0C000000A0000000
 From: Bin Meng <bmeng@tinylab.org>
 To: Alistair Francis <Alistair.Francis@wdc.com>,
 	qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v2 08/12] hw/riscv: spike: Remove the out-of-date comments
-Date: Thu, 29 Dec 2022 17:18:24 +0800
-Message-Id: <20221229091828.1945072-9-bmeng@tinylab.org>
+Subject: [PATCH v2 09/12] hw/riscv/boot.c: make riscv_find_firmware() static
+Date: Thu, 29 Dec 2022 17:18:25 +0800
+Message-Id: <20221229091828.1945072-10-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20221229091828.1945072-1-bmeng@tinylab.org>
 References: <20221229091828.1945072-1-bmeng@tinylab.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
+Received-SPF: pass client-ip=43.155.65.254; envelope-from=bmeng@tinylab.org;
  helo=bg4.exmail.qq.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -50,37 +52,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Dec 2022 09:23:15 -0000
+X-List-Received-Date: Thu, 29 Dec 2022 09:23:23 -0000
 
-Spike machine now supports OpenSBI plain binary bios image, so the
-comments are no longer valid.
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Signed-off-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+The only caller is riscv_find_and_load_firmware(), which is in the same
+file.
+
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bmeng@tinylab.org>
+Message-Id: <20221221182300.307900-5-dbarboza@ventanamicro.com>
+Signed-off-by: Bin Meng <bmeng@tinylab.org>
 ---
 
 (no changes since v1)
 
- hw/riscv/spike.c | 5 -----
- 1 file changed, 5 deletions(-)
+ include/hw/riscv/boot.h |  1 -
+ hw/riscv/boot.c         | 44 ++++++++++++++++++++---------------------
+ 2 files changed, 22 insertions(+), 23 deletions(-)
 
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 8606331f61..ab0a945f8b 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -256,11 +256,6 @@ static void spike_board_init(MachineState *machine)
-     memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
-                                 mask_rom);
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index 93e5f8760d..c03e4e74c5 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -37,7 +37,6 @@ target_ulong riscv_find_and_load_firmware(MachineState *machine,
+                                           const char *default_machine_firmware,
+                                           hwaddr firmware_load_addr,
+                                           symbol_fn_t sym_cb);
+-char *riscv_find_firmware(const char *firmware_filename);
+ target_ulong riscv_load_firmware(const char *firmware_filename,
+                                  hwaddr firmware_load_addr,
+                                  symbol_fn_t sym_cb);
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index ebd351c840..7361d5c0d8 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -75,6 +75,28 @@ target_ulong riscv_calc_kernel_start_addr(RISCVHartArrayState *harts,
+     }
+ }
  
--    /*
--     * Not like other RISC-V machines that use plain binary bios images,
--     * keeping ELF files here was intentional because BIN files don't work
--     * for the Spike machine as HTIF emulation depends on ELF parsing.
--     */
-     if (riscv_is_32bit(&s->soc[0])) {
-         firmware_end_addr = riscv_find_and_load_firmware(machine,
-                                     RISCV32_BIOS_BIN, memmap[SPIKE_DRAM].base,
++static char *riscv_find_firmware(const char *firmware_filename)
++{
++    char *filename;
++
++    filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, firmware_filename);
++    if (filename == NULL) {
++        if (!qtest_enabled()) {
++            /*
++             * We only ship OpenSBI binary bios images in the QEMU source.
++             * For machines that use images other than the default bios,
++             * running QEMU test will complain hence let's suppress the error
++             * report for QEMU testing.
++             */
++            error_report("Unable to load the RISC-V firmware \"%s\"",
++                         firmware_filename);
++            exit(1);
++        }
++    }
++
++    return filename;
++}
++
+ target_ulong riscv_find_and_load_firmware(MachineState *machine,
+                                           const char *default_machine_firmware,
+                                           hwaddr firmware_load_addr,
+@@ -104,28 +126,6 @@ target_ulong riscv_find_and_load_firmware(MachineState *machine,
+     return firmware_end_addr;
+ }
+ 
+-char *riscv_find_firmware(const char *firmware_filename)
+-{
+-    char *filename;
+-
+-    filename = qemu_find_file(QEMU_FILE_TYPE_BIOS, firmware_filename);
+-    if (filename == NULL) {
+-        if (!qtest_enabled()) {
+-            /*
+-             * We only ship OpenSBI binary bios images in the QEMU source.
+-             * For machines that use images other than the default bios,
+-             * running QEMU test will complain hence let's suppress the error
+-             * report for QEMU testing.
+-             */
+-            error_report("Unable to load the RISC-V firmware \"%s\"",
+-                         firmware_filename);
+-            exit(1);
+-        }
+-    }
+-
+-    return filename;
+-}
+-
+ target_ulong riscv_load_firmware(const char *firmware_filename,
+                                  hwaddr firmware_load_addr,
+                                  symbol_fn_t sym_cb)
 -- 
 2.34.1
 
