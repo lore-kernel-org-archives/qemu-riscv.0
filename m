@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pCJN7-0007AL-Ea
-	for mharc-qemu-riscv@gnu.org; Mon, 02 Jan 2023 06:52:53 -0500
+	id 1pCJNA-0007Dj-2J
+	for mharc-qemu-riscv@gnu.org; Mon, 02 Jan 2023 06:52:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pCJN6-00077I-J1
- for qemu-riscv@nongnu.org; Mon, 02 Jan 2023 06:52:52 -0500
+ id 1pCJN8-0007Av-Hu
+ for qemu-riscv@nongnu.org; Mon, 02 Jan 2023 06:52:54 -0500
 Received: from mail-oa1-x2c.google.com ([2001:4860:4864:20::2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pCJN4-0002uA-Rz
- for qemu-riscv@nongnu.org; Mon, 02 Jan 2023 06:52:52 -0500
+ id 1pCJN7-0002uA-1W
+ for qemu-riscv@nongnu.org; Mon, 02 Jan 2023 06:52:54 -0500
 Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-12c8312131fso33457358fac.4
- for <qemu-riscv@nongnu.org>; Mon, 02 Jan 2023 03:52:50 -0800 (PST)
+ 586e51a60fabf-12c8312131fso33457460fac.4
+ for <qemu-riscv@nongnu.org>; Mon, 02 Jan 2023 03:52:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AvvnqdKprjFIvB9f/200clWrEJhsrPRPWkNdtTFIhes=;
- b=d5KD1i+Dnr0FcWIBqX0Bi+QmoX2mZsMigqjOIa8JilANGjA9FTfAh9x8qRg4aJXQn/
- n7pq7iB9m24JCk+Mz6es2un0VlivvcjZ42t6FVMvBftee3bpAHSZt2atBWs6dCcnEPtM
- PUkL8zsA9HKQOU0PRz3kAlXF+mhWFY/r5mx+mImb6toGPsM4aaHmYMZsDfqvt2VK1GFc
- CTDrqWXErAD6+2dwQJr3iilbi6oytCWbsyTVkHqcb9nkxbLpfkoi1WKJT984MKwCjDaM
- mOAv+RUUdcgksGILV/8GWpt9VuKKy6fg6f0dZnkkzlnaZO3JH1UlAijHxUrdffL8FFIh
- Q5mw==
+ bh=8tYhCgeu+CUPdU0tlNGR+x3OI3mYmG0ZDZI1kUqM/1s=;
+ b=UdT6ilTSt972XE81gYaspt6L9Aw4du3Wot7oNrmNBiPh2CRo+Lb49xTG/jKAYT0i+o
+ aONB4VNBwRd8NtSPswjQ0tCcbNZ1x4R+nJIBH0j5ZerV5LaSL9nr5QM4FGvCDo6+XcWj
+ /gBWGL2lYuiLR3t3RMVuUTHxcdnIRucJUedPaW54XOsi/kEu12rQ0/SA3upz4D+sMjKF
+ b2+txD923m+ryFDauxHm2Dfc4ZBxq3gh1HoBflCl/RdSk8veSB0roiIH4F+vd9rqs453
+ 408w1fziScmJclRi7QxXAEDxsq9RG0WvVMs+9IXp9iTVlbGr2p8BY1Wo17dYGB9RYETl
+ 5wwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AvvnqdKprjFIvB9f/200clWrEJhsrPRPWkNdtTFIhes=;
- b=pgkydDH2+RKNQBzkW/QEIjVsByZ4lg1Xu3OJoCNdwuzoROCtmC/HXQI75Klb4+mo/C
- uCle+0cMq4gvR3DNPHCYVTj3wAxgPgEHG81HTrMhTyp6ctgOdNdBzfE57Jy0+2M0W+cW
- YqdSkgmJbjPfLCnRy+bEVwqc7gpy4Kp+e4N/JCtX3GtrJq5FjSfx2opx3RaTk+kuHr6y
- GzBsNB1hO28t1d4o/xaWPAcqtQt5pDrjkzEPqL+FmLfxUuDyxEmYeosrnuXxE5kSv91w
- uz8fLL5DAFjs0vbk0zdxqty5rKlErZscrJz6/ul1pOJpEV7XYjyZAkRhDFJnT3tjx1yD
- WpZA==
-X-Gm-Message-State: AFqh2kqICqm2FfYgj3P33aqdEKCIdT0iAumP9TyPhJT6ykWyxwFQSomp
- qxacUSYULQeKEMZsRKlAVnnj8Q==
-X-Google-Smtp-Source: AMrXdXt/kxwM0Acr0Sw/CiUO6Q3YACXnL5N2CoS55xnlzkCIOvZoUfzOgRXlh8KaYTdGX49Mzr9TSQ==
-X-Received: by 2002:a05:6871:93:b0:143:e045:7082 with SMTP id
- u19-20020a056871009300b00143e0457082mr5330728oaa.58.1672660369788; 
- Mon, 02 Jan 2023 03:52:49 -0800 (PST)
+ bh=8tYhCgeu+CUPdU0tlNGR+x3OI3mYmG0ZDZI1kUqM/1s=;
+ b=N61caA5MxqYU/0S1Ek2/zkHxb58YcbUZFZW6fl1uFox1q5vXHoyopqs67105azorQw
+ mAbMKqgKS4vefW82GlRbPKps1l3lftHyHe8E0Si5DrN7AI31OdcLic0STxKr0/7kSVga
+ Um25gqZK7Sce9s942MHeW4WaR2wqGfNKkfMtLFJ2pDKPWk0m9UDMMKwjfgcyvwPPfu8W
+ mE/tqe6tHctzHTYRXqVHzoFcwFZlABUgRwkieAUCp7XrmLRFBMrAm3sYSc4IyivfrTZn
+ uhgWxYN2xnxx6pvDa5PYkJUuwMPRiVxnoqJO3jcQbERe4uht9HC3+6zYIdrVrgH24xPj
+ WwNg==
+X-Gm-Message-State: AFqh2kqj/4/9NqUDFQndTwkJaqabxG7PzI8syh1IDaQ2n+JUUx8eZAYz
+ VzueAYainNeiCZbASP6i8WEgIA==
+X-Google-Smtp-Source: AMrXdXu7jwkKbzqaZ4NJ7RMjItpnBS69O3IKBMEGkTuNUe5iggof9qujNOzW9MxAgasW5UT5rbhH7Q==
+X-Received: by 2002:a05:6870:b6a7:b0:144:7395:2140 with SMTP id
+ cy39-20020a056870b6a700b0014473952140mr22269021oab.35.1672660372462; 
+ Mon, 02 Jan 2023 03:52:52 -0800 (PST)
 Received: from grind.. ([191.17.222.139]) by smtp.gmail.com with ESMTPSA id
- l39-20020a05687106a700b0014fb4bdc746sm11354475oao.8.2023.01.02.03.52.47
+ l39-20020a05687106a700b0014fb4bdc746sm11354475oao.8.2023.01.02.03.52.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jan 2023 03:52:49 -0800 (PST)
+ Mon, 02 Jan 2023 03:52:52 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Bin Meng <bin.meng@windriver.com>, Cleber Rosa <crosa@redhat.com>,
+ Bin Meng <bin.meng@windriver.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Bin Meng <bmeng@tinylab.org>
-Subject: [PATCH v5 01/11] tests/avocado: add RISC-V OpenSBI boot test
-Date: Mon,  2 Jan 2023 08:52:31 -0300
-Message-Id: <20230102115241.25733-2-dbarboza@ventanamicro.com>
+Subject: [PATCH v5 02/11] hw/riscv/spike: use 'fdt' from MachineState
+Date: Mon,  2 Jan 2023 08:52:32 -0300
+Message-Id: <20230102115241.25733-3-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230102115241.25733-1-dbarboza@ventanamicro.com>
 References: <20230102115241.25733-1-dbarboza@ventanamicro.com>
@@ -85,109 +85,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jan 2023 11:52:52 -0000
+X-List-Received-Date: Mon, 02 Jan 2023 11:52:54 -0000
 
-This test is used to do a quick sanity check to ensure that we're able
-to run the existing QEMU FW image.
+The MachineState object provides a 'fdt' pointer that is already being
+used by other RISC-V machines, and it's also used by the 'dumpdtb' QMP
+command.
 
-'sifive_u', 'spike' and 'virt' riscv64 machines, and 'sifive_u' and
-'virt' 32 bit machines are able to run the default RISCV64_BIOS_BIN |
-RISCV32_BIOS_BIN firmware with minimal options.
+Remove the 'fdt' pointer from SpikeState and use MachineState::fdt
+instead.
 
-The riscv32 'spike' machine isn't bootable at this moment, requiring an
-OpenSBI fix [1] and QEMU side changes [2]. We could just leave at that
-or add a 'skip' test to remind us about it. To work as a reminder that
-we have a riscv32 'spike' test that should be enabled as soon as OpenSBI
-QEMU rom receives the fix, we're adding a 'skip' test:
-
-(06/18) tests/avocado/riscv_opensbi.py:RiscvOpenSBI.test_riscv32_spike:
-        SKIP: requires OpenSBI fix to work
-
-[1] https://patchwork.ozlabs.org/project/opensbi/patch/20221226033603.1860569-1-bmeng@tinylab.org/
-[2] https://patchwork.ozlabs.org/project/qemu-devel/list/?series=334159
-
-Cc: Cleber Rosa <crosa@redhat.com>
-Cc: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Bin Meng <bmeng@tinylab.org>
-Tested-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bmeng@tinylab.org>
 ---
- tests/avocado/riscv_opensbi.py | 65 ++++++++++++++++++++++++++++++++++
- 1 file changed, 65 insertions(+)
- create mode 100644 tests/avocado/riscv_opensbi.py
+ hw/riscv/spike.c         | 12 +++++-------
+ include/hw/riscv/spike.h |  2 --
+ 2 files changed, 5 insertions(+), 9 deletions(-)
 
-diff --git a/tests/avocado/riscv_opensbi.py b/tests/avocado/riscv_opensbi.py
-new file mode 100644
-index 0000000000..e02f0d404a
---- /dev/null
-+++ b/tests/avocado/riscv_opensbi.py
-@@ -0,0 +1,65 @@
-+# OpenSBI boot test for RISC-V machines
-+#
-+# Copyright (c) 2022, Ventana Micro
-+#
-+# This work is licensed under the terms of the GNU GPL, version 2 or
-+# later.  See the COPYING file in the top-level directory.
-+
-+from avocado_qemu import QemuSystemTest
-+from avocado import skip
-+from avocado_qemu import wait_for_console_pattern
-+
-+class RiscvOpenSBI(QemuSystemTest):
-+    """
-+    :avocado: tags=accel:tcg
-+    """
-+    timeout = 5
-+
-+    def boot_opensbi(self):
-+        self.vm.set_console()
-+        self.vm.launch()
-+        wait_for_console_pattern(self, 'Platform Name')
-+        wait_for_console_pattern(self, 'Boot HART MEDELEG')
-+
-+    @skip("requires OpenSBI fix to work")
-+    def test_riscv32_spike(self):
-+        """
-+        :avocado: tags=arch:riscv32
-+        :avocado: tags=machine:spike
-+        """
-+        self.boot_opensbi()
-+
-+    def test_riscv64_spike(self):
-+        """
-+        :avocado: tags=arch:riscv64
-+        :avocado: tags=machine:spike
-+        """
-+        self.boot_opensbi()
-+
-+    def test_riscv32_sifive_u(self):
-+        """
-+        :avocado: tags=arch:riscv32
-+        :avocado: tags=machine:sifive_u
-+        """
-+        self.boot_opensbi()
-+
-+    def test_riscv64_sifive_u(self):
-+        """
-+        :avocado: tags=arch:riscv64
-+        :avocado: tags=machine:sifive_u
-+        """
-+        self.boot_opensbi()
-+
-+    def test_riscv32_virt(self):
-+        """
-+        :avocado: tags=arch:riscv32
-+        :avocado: tags=machine:virt
-+        """
-+        self.boot_opensbi()
-+
-+    def test_riscv64_virt(self):
-+        """
-+        :avocado: tags=arch:riscv64
-+        :avocado: tags=machine:virt
-+        """
-+        self.boot_opensbi()
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 1679c325d5..25c5420ee6 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -53,6 +53,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+                        bool is_32_bit, bool htif_custom_base)
+ {
+     void *fdt;
++    int fdt_size;
+     uint64_t addr, size;
+     unsigned long clint_addr;
+     int cpu, socket;
+@@ -65,7 +66,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+         "sifive,clint0", "riscv,clint0"
+     };
+ 
+-    fdt = s->fdt = create_device_tree(&s->fdt_size);
++    fdt = mc->fdt = create_device_tree(&fdt_size);
+     if (!fdt) {
+         error_report("create_device_tree() failed");
+         exit(1);
+@@ -327,18 +328,15 @@ static void spike_board_init(MachineState *machine)
+         hwaddr end = riscv_load_initrd(machine->initrd_filename,
+                                        machine->ram_size, kernel_entry,
+                                        &start);
+-        qemu_fdt_setprop_cell(s->fdt, "/chosen",
++        qemu_fdt_setprop_cell(machine->fdt, "/chosen",
+                               "linux,initrd-start", start);
+-        qemu_fdt_setprop_cell(s->fdt, "/chosen", "linux,initrd-end",
++        qemu_fdt_setprop_cell(machine->fdt, "/chosen", "linux,initrd-end",
+                               end);
+     }
+ 
+     /* Compute the fdt load address in dram */
+     fdt_load_addr = riscv_load_fdt(memmap[SPIKE_DRAM].base,
+-                                   machine->ram_size, s->fdt);
+-
+-    /* Set machine->fdt for 'dumpdtb' QMP/HMP command */
+-    machine->fdt = s->fdt;
++                                   machine->ram_size, machine->fdt);
+ 
+     /* load the reset vector */
+     riscv_setup_rom_reset_vec(machine, &s->soc[0], memmap[SPIKE_DRAM].base,
+diff --git a/include/hw/riscv/spike.h b/include/hw/riscv/spike.h
+index 73d69234de..d13a147942 100644
+--- a/include/hw/riscv/spike.h
++++ b/include/hw/riscv/spike.h
+@@ -37,8 +37,6 @@ struct SpikeState {
+ 
+     /*< public >*/
+     RISCVHartArrayState soc[SPIKE_SOCKETS_MAX];
+-    void *fdt;
+-    int fdt_size;
+ };
+ 
+ enum {
 -- 
 2.39.0
 
