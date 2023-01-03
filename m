@@ -1,69 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pCJNn-0007W0-9I
-	for mharc-qemu-riscv@gnu.org; Mon, 02 Jan 2023 06:53:36 -0500
+	id 1pCjvK-0006kP-V3
+	for mharc-qemu-riscv@gnu.org; Tue, 03 Jan 2023 11:13:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pCJNb-0007Mn-BI
- for qemu-riscv@nongnu.org; Mon, 02 Jan 2023 06:53:24 -0500
-Received: from mail-oa1-x35.google.com ([2001:4860:4864:20::35])
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1pCjvI-0006k5-GZ
+ for qemu-riscv@nongnu.org; Tue, 03 Jan 2023 11:13:56 -0500
+Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pCJNX-0002xC-7g
- for qemu-riscv@nongnu.org; Mon, 02 Jan 2023 06:53:22 -0500
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-15027746720so18369874fac.13
- for <qemu-riscv@nongnu.org>; Mon, 02 Jan 2023 03:53:15 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1pCjvE-0000JI-MW
+ for qemu-riscv@nongnu.org; Tue, 03 Jan 2023 11:13:55 -0500
+Received: by mail-ua1-x936.google.com with SMTP id x13so1064898uau.10
+ for <qemu-riscv@nongnu.org>; Tue, 03 Jan 2023 08:13:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gYxSVYjQZGu2VngPkKm+KpuQK9qUuKEGr99kdASAZGo=;
- b=HzzlDPWAZCtd+ptGdcbrnLSEixOBhhPKhZlad1l3UIuJgPj2u8GvUzdpMMhYG27Vqn
- aAubH9nhgk/dVs9JqKmzE9F4P1ZkJZ79jvrtAMCoknnRBEzUIG9lik1l1XjQPzpL08Qs
- RvYROz2RgD83Sr6RhvLIXIxaFFHkfYssNr3IlkOIb5vSJ/F4zhUzZyHJmM9e0U81xK8A
- 5uXFLSLWIOnUxHHfETv0W+7er2qZX92tAM/a7zHanfgB5gPk9DltvPspHcjlmOFKgXZf
- NGtHwTg6VRVazblMpmZistDqrTmqPW427nhIohxeI+pKqBAhHmw6ZNqwhXy7VW82Ld1Z
- qdfg==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vLNQ6sF6aDeP0/n0o5ND+JlPyXPXypiipBqDvpGjuEI=;
+ b=N1KQmif7sluRIx5ErsBk+2R0Soc2NBkahbG4wNPpN5xvh8joWspw3DF97hqPqhtZsq
+ Quz5E5jDXx1Sq1NQw/H0xcQACpXeQZWNKmc5Uxt8qvIGQrW1sDXaU5cr/EZ0MCxfMytk
+ uyQbf6bVKGfLH96BNEznAw/S29rjb95Aev0Hbi/EejTsqNQ9xIez73cmE0duvtYuZtdS
+ EbDK7ndbG1w+5dmV3A09aIUUGEEg2/T5yC+EpUW+cnM4nrlcD3+I8B5R/TxenAhNr5R/
+ W6ZM8nIR+Qo++b/fGG44m72jJmeQg+tnxb3h2+tYTBVK6o9w8rcJGS/I1AJeiF2os7CZ
+ NhMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gYxSVYjQZGu2VngPkKm+KpuQK9qUuKEGr99kdASAZGo=;
- b=NX8rWqQeN6z1++bFCZpuDv3zdG2KXxbkqBrcL64/dtLY7++2BPdUZV/1Dc3LrLcAfw
- ndT3F10/Tyrw9RsndZn8z0FUn48QRurS1FOCE6KDc21bC25cK3uP06aOJsbsU786sR//
- 1NDDVyjwDSML5B4DbaZC9M5+vfndPnsh746GMUWjOO3oiAdVmkbsOXuHADxXsXECrnfK
- UeoVheBz4gLO5ExkcuwV9olXcBUcDe4535yCpv8x8OknO1LhAadrQMmXPI4r0RvaYNUH
- 9kqAO9sY7/j/ge0Nz2P+lAQEyWDh41hrTxB4v7fuyUo57tppmtuaBm+fBwxXCs2Caguw
- NsVw==
-X-Gm-Message-State: AFqh2krrB1NPllVrPjLHwU6bL89w6cNtw/cyAOdLfuLFqI4nhWcvcgh/
- SoZLJ1cClyln1Ek9hERkAh9Blw==
-X-Google-Smtp-Source: AMrXdXsaJ5xg2+o2gZmwf9CIEkXvFcTZC2QVXwBQOS8NZY5G85E110aK/seAZJXCEEBXoZyzEqf0Aw==
-X-Received: by 2002:a05:6870:b624:b0:13b:1f84:b7d7 with SMTP id
- cm36-20020a056870b62400b0013b1f84b7d7mr21388452oab.13.1672660394858; 
- Mon, 02 Jan 2023 03:53:14 -0800 (PST)
-Received: from grind.. ([191.17.222.139]) by smtp.gmail.com with ESMTPSA id
- l39-20020a05687106a700b0014fb4bdc746sm11354475oao.8.2023.01.02.03.53.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Jan 2023 03:53:14 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v5 10/11] hw/riscv/boot.c: consolidate all kernel init in
- riscv_load_kernel()
-Date: Mon,  2 Jan 2023 08:52:40 -0300
-Message-Id: <20230102115241.25733-11-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230102115241.25733-1-dbarboza@ventanamicro.com>
-References: <20230102115241.25733-1-dbarboza@ventanamicro.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vLNQ6sF6aDeP0/n0o5ND+JlPyXPXypiipBqDvpGjuEI=;
+ b=XVq4BbkTCjbSpNJpnNeSs15/CmeZu5pl1+pnO1aTqh5svRbZ8GJVHXtJ9EAY5ZNu6/
+ DIOn0n7SRciVJD8ZzxfUGbhACGsoV+9r9ONVREsYu/cFohWSZXBBrVc7fhlFCf5rjyYF
+ NjJMLA51m+ZHbXR2LUTngu46DFiZcoCDZ/DqX4xZcVcTJVsor+QR3aY6xxpWzLouVq8Q
+ 28HNopUjx98owVCbHxBMcBNIPkYybN78tgFg7QfeyJPzUm8CmN4jR0hIfMgMzMedZh3x
+ Vu0GsT2LpF3DR4CN8/R4g8qiKonNHXRit6LUDNNS3vraXTBPtL1ZexREJYWNCE5cR7cG
+ OM3w==
+X-Gm-Message-State: AFqh2kp1w5OxeKmX6R3k9tXeqiAYCPPvRGFAhWqKMDwEpfgLAPOkhZMN
+ Rm5t61oCDiP0pfZhQ+fDHsMaa/MnC2KoaOs2j5Iyaw==
+X-Google-Smtp-Source: AMrXdXt5V9T8MU/RkmkUq5IWmLELzvewe46K1y/6QOhJAxvSIeCYvsoUloKbBin1nEYOAFE6wIdwADvy8e5wf5Io0wk=
+X-Received: by 2002:ab0:64ca:0:b0:478:b785:affb with SMTP id
+ j10-20020ab064ca000000b00478b785affbmr3989526uaq.52.1672762430654; Tue, 03
+ Jan 2023 08:13:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::35;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x35.google.com
+References: <20221108125703.1463577-1-apatel@ventanamicro.com>
+ <20221108125703.1463577-3-apatel@ventanamicro.com>
+ <CAKmqyKP+hc4N6Z2AqkQpCmF=oyTE_rf-XfSsTHChwcUWRE5gsg@mail.gmail.com>
+ <CAK9=C2Uu1bCcZht+ydiazSmgnkD_hhLetXP4WcA92DypE4m9=A@mail.gmail.com>
+ <CAKmqyKPw54F0uVy+7SjoY16o7RYyW6qwLhaYaKR7aNpP4Nz27Q@mail.gmail.com>
+ <CAK9=C2V21JcgyUKub1JGVT0DEaeyzJ1GXQYcyaZy4Xv26F5fyA@mail.gmail.com>
+ <CAKmqyKOc+xKEy1nhp6vCOtVHspfQ5WY7oE6wx5aGURhxQOrdqQ@mail.gmail.com>
+ <CAK9=C2VA-1c8J-t8Sqp-8+eW9-0xaALgbG8LORd06--Jb-gTAw@mail.gmail.com>
+ <CAKmqyKMQ7VJeeh0Rm3gjv8wDNgqsP5ShgbK2FaJstFSGAZgf8Q@mail.gmail.com>
+In-Reply-To: <CAKmqyKMQ7VJeeh0Rm3gjv8wDNgqsP5ShgbK2FaJstFSGAZgf8Q@mail.gmail.com>
+From: Anup Patel <apatel@ventanamicro.com>
+Date: Tue, 3 Jan 2023 21:43:38 +0530
+Message-ID: <CAK9=C2VY_c=1CSjnUDRGLw3pLN1L_9ta1xRYjwVGiH8t4bqzSw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] target/riscv: Update VS timer whenever htimedelta
+ changes
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Atish Patra <atishp@atishpatra.org>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
+ envelope-from=apatel@ventanamicro.com; helo=mail-ua1-x936.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,220 +88,159 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jan 2023 11:53:25 -0000
+X-List-Received-Date: Tue, 03 Jan 2023 16:13:56 -0000
 
-The microchip_icicle_kit, sifive_u, spike and virt boards are now doing
-the same steps when '-kernel' is used:
+Hi Alistair,
 
-- execute load_kernel()
-- load init_rd()
-- write kernel_cmdline
+On Wed, Dec 28, 2022 at 11:08 AM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Fri, Dec 23, 2022 at 11:14 PM Anup Patel <apatel@ventanamicro.com> wrote:
+> >
+> > On Thu, Dec 15, 2022 at 8:55 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > >
+> > > On Mon, Dec 12, 2022 at 9:12 PM Anup Patel <apatel@ventanamicro.com> wrote:
+> > > >
+> > > > On Mon, Dec 12, 2022 at 11:23 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > > > >
+> > > > > On Thu, Dec 8, 2022 at 6:41 PM Anup Patel <apatel@ventanamicro.com> wrote:
+> > > > > >
+> > > > > > On Thu, Dec 8, 2022 at 9:00 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > > > > > >
+> > > > > > > On Tue, Nov 8, 2022 at 11:07 PM Anup Patel <apatel@ventanamicro.com> wrote:
+> > > > > > > >
+> > > > > > > > The htimedelta[h] CSR has impact on the VS timer comparison so we
+> > > > > > > > should call riscv_timer_write_timecmp() whenever htimedelta changes.
+> > > > > > > >
+> > > > > > > > Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp suppor")
+> > > > > > > > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> > > > > > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > > > > > >
+> > > > > > > This patch breaks my Xvisor test. When running OpenSBI and Xvisor like this:
+> > > > > > >
+> > > > > > > qemu-system-riscv64 -machine virt \
+> > > > > > >     -m 1G -serial mon:stdio -serial null -nographic \
+> > > > > > >     -append 'vmm.console=uart@10000000 vmm.bootcmd="vfs mount initrd
+> > > > > > > /;vfs run /boot.xscript;vfs cat /system/banner.txt; guest kick guest0;
+> > > > > > > vserial bind guest0/uart0"' \
+> > > > > > >     -smp 4 -d guest_errors \
+> > > > > > >     -bios none \
+> > > > > > >     -device loader,file=./images/qemuriscv64/vmm.bin,addr=0x80200000 \
+> > > > > > >     -kernel ./images/qemuriscv64/fw_jump.elf \
+> > > > > > >     -initrd ./images/qemuriscv64/vmm-disk-linux.img -cpu rv64,h=true
+> > > > > > >
+> > > > > > > Running:
+> > > > > > >
+> > > > > > > Xvisor v0.3.0-129-gbc33f339 (Jan  1 1970 00:00:00)
+> > > > > > >
+> > > > > > > I see this failure:
+> > > > > > >
+> > > > > > > INIT: bootcmd:  guest kick guest0
+> > > > > > >
+> > > > > > > guest0: Kicked
+> > > > > > >
+> > > > > > > INIT: bootcmd:  vserial bind guest0/uart0
+> > > > > > >
+> > > > > > > [guest0/uart0] cpu_vcpu_stage2_map: guest_phys=0x000000003B9AC000
+> > > > > > > size=0x4096 map failed
+> > > > > > >
+> > > > > > > do_error: CPU3: VCPU=guest0/vcpu0 page fault failed (error -1)
+> > > > > > >
+> > > > > > >        zero=0x0000000000000000          ra=0x0000000080001B4E
+> > > > > > >
+> > > > > > >          sp=0x000000008001CF80          gp=0x0000000000000000
+> > > > > > >
+> > > > > > >          tp=0x0000000000000000          s0=0x000000008001CFB0
+> > > > > > >
+> > > > > > >          s1=0x0000000000000000          a0=0x0000000010001048
+> > > > > > >
+> > > > > > >          a1=0x0000000000000000          a2=0x0000000000989680
+> > > > > > >
+> > > > > > >          a3=0x000000003B9ACA00          a4=0x0000000000000048
+> > > > > > >
+> > > > > > >          a5=0x0000000000000000          a6=0x0000000000019000
+> > > > > > >
+> > > > > > >          a7=0x0000000000000000          s2=0x0000000000000000
+> > > > > > >
+> > > > > > >          s3=0x0000000000000000          s4=0x0000000000000000
+> > > > > > >
+> > > > > > >          s5=0x0000000000000000          s6=0x0000000000000000
+> > > > > > >
+> > > > > > >          s7=0x0000000000000000          s8=0x0000000000000000
+> > > > > > >
+> > > > > > >          s9=0x0000000000000000         s10=0x0000000000000000
+> > > > > > >
+> > > > > > >         s11=0x0000000000000000          t0=0x0000000000004000
+> > > > > > >
+> > > > > > >          t1=0x0000000000000100          t2=0x0000000000000000
+> > > > > > >
+> > > > > > >          t3=0x0000000000000000          t4=0x0000000000000000
+> > > > > > >
+> > > > > > >          t5=0x0000000000000000          t6=0x0000000000000000
+> > > > > > >
+> > > > > > >        sepc=0x0000000080001918     sstatus=0x0000000200004120
+> > > > > > >
+> > > > > > >     hstatus=0x00000002002001C0     sp_exec=0x0000000010A64000
+> > > > > > >
+> > > > > > >      scause=0x0000000000000017       stval=0x000000003B9ACAF8
+> > > > > > >
+> > > > > > >       htval=0x000000000EE6B2BE      htinst=0x0000000000D03021
+> > > > > > >
+> > > > > > > I have tried updating to a newer Xvisor release, but with that I don't
+> > > > > > > get any serial output.
+> > > > > > >
+> > > > > > > Can you help get the Xvisor tests back up and running?
+> > > > > >
+> > > > > > I tried the latest Xvisor-next (https://github.com/avpatel/xvisor-next)
+> > > > > > with your QEMU riscv-to-apply.next branch and it works fine (both
+> > > > > > with and without Sstc).
+> > > > >
+> > > > > Does it work with the latest release?
+> > > >
+> > > > Yes, the latest Xvisor-next repo works for QEMU v7.2.0-rc4 and
+> > > > your riscv-to-apply.next branch (commit 51bb9de2d188)
+> > >
+> > > I can't get anything to work with this patch. I have dropped this and
+> > > the patches after this.
+> > >
+> > > I'm building the latest Xvisor release with:
+> > >
+> > > export CROSS_COMPILE=riscv64-linux-gnu-
+> > > ARCH=riscv make generic-64b-defconfig
+> > > make
+> > >
+> > > and running it as above, yet nothing. What am I missing here?
+> >
+> > I tried multiple times with the latest Xvisor on different machines but
+> > still can't reproduce the issue you are seeing.
+>
+> Odd
+>
+> >
+> > We generally provide pre-built binaries with every Xvisor release
+> > so I will share with you pre-built binaries of the upcoming Xvisor-0.3.2
+> > release. Maybe that would help you ?
+>
+> That would work. Let me know when the release happens and I can update
+> my images.
 
-Let's fold everything inside riscv_load_kernel() to avoid code
-repetition. To not change the behavior of boards that aren't calling
-riscv_load_init(), add an 'load_initrd' flag to riscv_load_kernel() and
-allow these boards to opt out from initrd loading.
+Please download the Xvisor v0.3.2 pre-built binary tarball from:
+https://xhypervisor.org/tarball/xvisor-0.3.2-bins.tar.xz
 
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- hw/riscv/boot.c            | 22 +++++++++++++++++++---
- hw/riscv/microchip_pfsoc.c | 12 ++----------
- hw/riscv/opentitan.c       |  2 +-
- hw/riscv/sifive_e.c        |  3 ++-
- hw/riscv/sifive_u.c        | 12 ++----------
- hw/riscv/spike.c           | 11 +----------
- hw/riscv/virt.c            | 12 ++----------
- include/hw/riscv/boot.h    |  1 +
- 8 files changed, 30 insertions(+), 45 deletions(-)
+After untarring the above tarball, you can try the following command:
+$ qemu-system-riscv64 -M virt -m 512M -nographic -bios
+opensbi/build/platform/generic/firmware/fw_jump.bin -kernel
+xvisor-0.3.2-bins/riscv/rv64/xvisor/vmm.bin -initrd
+xvisor-0.3.2-bins/riscv/rv64/guest/virt64/disk-linux-6.1.1-one_guest_virt64.ext2
+-append "vmm.bootcmd=\"vfs mount initrd /;vfs run /boot.xscript;vfs
+cat /system/banner.txt\""
+OR
+$ qemu-system-riscv32 -M virt -m 512M -nographic -bios
+opensbi/build/platform/generic/firmware/fw_jump.bin -kernel
+xvisor-0.3.2-bins/riscv/rv32/xvisor/vmm.bin -initrd
+xvisor-0.3.2-bins/riscv/rv32/guest/virt32/disk-linux-6.1.1-one_guest_virt32.ext2
+-append "vmm.bootcmd=\"vfs mount initrd /;vfs run /boot.xscript;vfs
+cat /system/banner.txt\""
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 2594276223..4888d5c1e0 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -175,10 +175,12 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
- 
- target_ulong riscv_load_kernel(MachineState *machine,
-                                target_ulong kernel_start_addr,
-+                               bool load_initrd,
-                                symbol_fn_t sym_cb)
- {
-     const char *kernel_filename = machine->kernel_filename;
-     uint64_t kernel_load_base, kernel_entry;
-+    void *fdt = machine->fdt;
- 
-     g_assert(kernel_filename != NULL);
- 
-@@ -192,21 +194,35 @@ target_ulong riscv_load_kernel(MachineState *machine,
-     if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
-                          NULL, &kernel_load_base, NULL, NULL, 0,
-                          EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
--        return kernel_load_base;
-+        kernel_entry = kernel_load_base;
-+        goto out;
-     }
- 
-     if (load_uimage_as(kernel_filename, &kernel_entry, NULL, NULL,
-                        NULL, NULL, NULL) > 0) {
--        return kernel_entry;
-+        goto out;
-     }
- 
-     if (load_image_targphys_as(kernel_filename, kernel_start_addr,
-                                current_machine->ram_size, NULL) > 0) {
--        return kernel_start_addr;
-+        kernel_entry = kernel_start_addr;
-+        goto out;
-     }
- 
-     error_report("could not load kernel '%s'", kernel_filename);
-     exit(1);
-+
-+out:
-+    if (load_initrd && machine->initrd_filename) {
-+        riscv_load_initrd(machine, kernel_entry);
-+    }
-+
-+    if (fdt && machine->kernel_cmdline && *machine->kernel_cmdline) {
-+        qemu_fdt_setprop_string(fdt, "/chosen", "bootargs",
-+                                machine->kernel_cmdline);
-+    }
-+
-+    return kernel_entry;
- }
- 
- void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index 82ae5e7023..c45023a2b1 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -629,16 +629,8 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
-         kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc.u_cpus,
-                                                          firmware_end_addr);
- 
--        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
--
--        if (machine->initrd_filename) {
--            riscv_load_initrd(machine, kernel_entry);
--        }
--
--        if (machine->kernel_cmdline && *machine->kernel_cmdline) {
--            qemu_fdt_setprop_string(machine->fdt, "/chosen",
--                                    "bootargs", machine->kernel_cmdline);
--        }
-+        kernel_entry = riscv_load_kernel(machine, kernel_start_addr,
-+                                         true, NULL);
- 
-         /* Compute the fdt load address in dram */
-         fdt_load_addr = riscv_load_fdt(memmap[MICROCHIP_PFSOC_DRAM_LO].base,
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index 64d5d435b9..f6fd9725a5 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -101,7 +101,7 @@ static void opentitan_board_init(MachineState *machine)
-     }
- 
-     if (machine->kernel_filename) {
--        riscv_load_kernel(machine, memmap[IBEX_DEV_RAM].base, NULL);
-+        riscv_load_kernel(machine, memmap[IBEX_DEV_RAM].base, false, NULL);
-     }
- }
- 
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index 3e3f4b0088..6835d1c807 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -114,7 +114,8 @@ static void sifive_e_machine_init(MachineState *machine)
-                           memmap[SIFIVE_E_DEV_MROM].base, &address_space_memory);
- 
-     if (machine->kernel_filename) {
--        riscv_load_kernel(machine, memmap[SIFIVE_E_DEV_DTIM].base, NULL);
-+        riscv_load_kernel(machine, memmap[SIFIVE_E_DEV_DTIM].base,
-+                          false, NULL);
-     }
- }
- 
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index bac394c959..9a75d4aa62 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -598,16 +598,8 @@ static void sifive_u_machine_init(MachineState *machine)
-         kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc.u_cpus,
-                                                          firmware_end_addr);
- 
--        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
--
--        if (machine->initrd_filename) {
--            riscv_load_initrd(machine, kernel_entry);
--        }
--
--        if (machine->kernel_cmdline && *machine->kernel_cmdline) {
--            qemu_fdt_setprop_string(machine->fdt, "/chosen", "bootargs",
--                                    machine->kernel_cmdline);
--        }
-+        kernel_entry = riscv_load_kernel(machine, kernel_start_addr,
-+                                         true, NULL);
-     } else {
-        /*
-         * If dynamic firmware is used, it doesn't know where is the next mode
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index bff9475686..c517885e6e 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -308,16 +308,7 @@ static void spike_board_init(MachineState *machine)
-                                                          firmware_end_addr);
- 
-         kernel_entry = riscv_load_kernel(machine, kernel_start_addr,
--                                         htif_symbol_callback);
--
--        if (machine->initrd_filename) {
--            riscv_load_initrd(machine, kernel_entry);
--        }
--
--        if (machine->kernel_cmdline && *machine->kernel_cmdline) {
--            qemu_fdt_setprop_string(machine->fdt, "/chosen", "bootargs",
--                                    machine->kernel_cmdline);
--        }
-+                                         true, htif_symbol_callback);
-     } else {
-        /*
-         * If dynamic firmware is used, it doesn't know where is the next mode
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index c8e35f861e..a931ed05ab 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1281,16 +1281,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
-         kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
-                                                          firmware_end_addr);
- 
--        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
--
--        if (machine->initrd_filename) {
--            riscv_load_initrd(machine, kernel_entry);
--        }
--
--        if (machine->kernel_cmdline && *machine->kernel_cmdline) {
--            qemu_fdt_setprop_string(machine->fdt, "/chosen", "bootargs",
--                                    machine->kernel_cmdline);
--        }
-+        kernel_entry = riscv_load_kernel(machine, kernel_start_addr,
-+                                         true, NULL);
-     } else {
-        /*
-         * If dynamic firmware is used, it doesn't know where is the next mode
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index f94653a09b..c3de897371 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -45,6 +45,7 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
-                                  symbol_fn_t sym_cb);
- target_ulong riscv_load_kernel(MachineState *machine,
-                                target_ulong firmware_end_addr,
-+                               bool load_initrd,
-                                symbol_fn_t sym_cb);
- void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry);
- uint64_t riscv_load_fdt(hwaddr dram_start, uint64_t dram_size, void *fdt);
--- 
-2.39.0
-
+Regards,
+Anup
 
