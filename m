@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pDBt8-0008Vj-FL
-	for mharc-qemu-riscv@gnu.org; Wed, 04 Jan 2023 17:05:34 -0500
+	id 1pDBtB-0000Cb-Et
+	for mharc-qemu-riscv@gnu.org; Wed, 04 Jan 2023 17:05:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBsw-0008Me-7B
- for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:05:30 -0500
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBt7-0008UW-Lu
+ for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:05:33 -0500
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBsu-0004zW-7A
- for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:05:21 -0500
-Received: by mail-ej1-x636.google.com with SMTP id tz12so85977518ejc.9
- for <qemu-riscv@nongnu.org>; Wed, 04 Jan 2023 14:05:19 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBt4-0005NC-07
+ for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:05:33 -0500
+Received: by mail-ed1-x533.google.com with SMTP id g1so36311188edj.8
+ for <qemu-riscv@nongnu.org>; Wed, 04 Jan 2023 14:05:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q1t0N0tRAGBLSXopdQ2aZCaW6j+7EYMB+a4S4Z0Ax+Y=;
- b=NXf3buTStLj5mF9iDdLM4ngVyygOioxIe/xuES/sr9NLX5/CtT3WQ5ZbROOxphqbuZ
- pu8TXJxrUJ6i6Ylgnnqp4IzgWAvmtIFWy81GrLzYuJbH6abGiz56jhJLh1CO1f/j5VZZ
- bTrtFJKTAeyzRRki2347nW2sesuA5LDORBnOIwRMwI5Hd/J2PM0WtrfZ57FfwOPnfD4B
- lo5HOXw9mamm0MGTn7YKM1CNtiI+ErsLP8A0ukev0HVHpQ9am4HEqj6X/ej/L+0D/XCY
- 7RnrMieLoHrnvfTM/TNomDDJjF2tAY2W22haF7X+l+OPja8I7ASA6Bze7cIB5/Xw4Q43
- 7lHQ==
+ bh=Qmw6mVPGSBueqZ8PeN/WPt3EaFW2iGA5QNW2jlN+kis=;
+ b=Cn18Ln+rBBUV7QcJMsZOyJFmLFK2lBcawTwo43OtNIbV5GAVcaIZ/cSeBVaaeTqrfW
+ GcHoSlur4IX4UaanV7v697LOCYlLJAlflesIIWWEI3AodA+3kJZxBMqxHglqCdD34Ahh
+ GCoumHYH0BeyXnZOAOTyBKCWtfD6yt7TpXrfLLmnoj/bCA9xD32ImcGTQNpa7v/AwBcL
+ tZEt0CRzukWztAHlkjx+wBsrRtx1rUtbDW0N6FwpKr0nn+NheHfLwxvFih4UWmiTpUQB
+ 761AM+5t4ACtsY9vtP1Q6AkEOMEcWtYYnv+3PFiFgLFg4jeTwXgft162AXx8apyk53cs
+ 2WMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Q1t0N0tRAGBLSXopdQ2aZCaW6j+7EYMB+a4S4Z0Ax+Y=;
- b=JrqOtNo69GMFhcosENIS5KU3HeX+sfgRfZB1scZZ5c//dpIx6b4ghlj7ku6YmABgzs
- pOfPqYOj8VRKN6alr7kbRUHBDYOZ47FVajpbKBLDqFSEgINb3qT+38CXAh0oLOYgFd8w
- Syxx02kAdcKdW/Q/aSIsjngwRhSjjaBTtu0zW0koc+SFKBWvw8ZEUexnR6Jlo1Amn8Rj
- DyQZiZLppdlwc30+smm425HbEQHfAbaXSGEiTGHdyT5HK/ugos8iK28CURe2rQsZLhP0
- 6FHFtok04DrNxK21hWxEIH9+mkTfKo/+N5spzrIgqSnj7zLJK3ldUywJeY8gBEjlQiDd
- KEgg==
-X-Gm-Message-State: AFqh2kplVc7ItO/edQcBMUubAGyFA6tmLX2DqYyCKnwLHLbm5xqYE31i
- WI76oDWXd3ctlOzranTnn4gtYA==
-X-Google-Smtp-Source: AMrXdXssHSSa5LiZHMRjBPw73fsqOkTnCPxsejVZc1PpyeXODCALtBNGsF5vzhF+IBIy0pARlQEmxw==
-X-Received: by 2002:a17:906:d217:b0:7c1:6fc:6048 with SMTP id
- w23-20020a170906d21700b007c106fc6048mr40619376ejz.24.1672869919140; 
- Wed, 04 Jan 2023 14:05:19 -0800 (PST)
+ bh=Qmw6mVPGSBueqZ8PeN/WPt3EaFW2iGA5QNW2jlN+kis=;
+ b=REhWK1l1nHCPGE20VPsL6m/FQYMMnYB07RRnriWu6KE3XcBJHvjcX1NFaXTku6fIJC
+ ciIt5cTGDitXfwqbX+cYoKRA8sdrG4TfqK+9RBfFnH72xYafO4pVNOzirIxan3Y8ukto
+ JZmBjn4qIQ5AnjZSk9bPVn8MiKNQGdsW7hkc84AHBkoXX2z6L8l8W34U/s8LcnEAj2hW
+ 8DrtXSK0ESgHwK4hTgL5vM3UiKSyJMamBXaRV5PVjsQpY7foRRdqAi0iBrmBqnlqgtS7
+ tcfmlB0N9n7gvDuDc1Hk9pbvc6KNalfMVPVeN1sytI871P2NE+sXe1YLK36MQehY5Qy2
+ prIA==
+X-Gm-Message-State: AFqh2koVV7i+fRwq8kkzqvQ626oKcv2mKoLkodafHuan3mx9WVqzPI/L
+ fL2Bqzn7+gJErc1IDqrbSb5e+A==
+X-Google-Smtp-Source: AMrXdXt2FKPWJ0RL3eX5vY6bOkmuLuKsfPeWtPBkzVHmZ/GehDSvSBpdOdvvdqm/XRfPYYsZ9kW5+A==
+X-Received: by 2002:a05:6402:2932:b0:47e:bdb8:9133 with SMTP id
+ ee50-20020a056402293200b0047ebdb89133mr48601228edb.38.1672869927788; 
+ Wed, 04 Jan 2023 14:05:27 -0800 (PST)
 Received: from localhost.localdomain ([185.126.107.38])
  by smtp.gmail.com with ESMTPSA id
- 1-20020a170906200100b007ae1e528390sm15617822ejo.163.2023.01.04.14.05.15
+ h25-20020aa7de19000000b00463b9d47e1fsm15290614edv.71.2023.01.04.14.05.23
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 04 Jan 2023 14:05:18 -0800 (PST)
+ Wed, 04 Jan 2023 14:05:27 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Song Gao <gaosong@loongson.cn>, Antony Pavlov <antonynpavlov@gmail.com>,
@@ -69,17 +69,17 @@ Cc: Song Gao <gaosong@loongson.cn>, Antony Pavlov <antonynpavlov@gmail.com>,
  qemu-riscv@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Alistair Francis <alistair@alistair23.me>, qemu-arm@nongnu.org,
  Leif Lindholm <quic_llindhol@quicinc.com>, Kevin Wolf <kwolf@redhat.com>
-Subject: [PATCH 03/20] hw/block: Pass DeviceState to pflash_cfi01_get_memory()
-Date: Wed,  4 Jan 2023 23:04:32 +0100
-Message-Id: <20230104220449.41337-4-philmd@linaro.org>
+Subject: [PATCH 04/20] hw/arm: Use generic DeviceState instead of PFlashCFI01
+Date: Wed,  4 Jan 2023 23:04:33 +0100
+Message-Id: <20230104220449.41337-5-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230104220449.41337-1-philmd@linaro.org>
 References: <20230104220449.41337-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::636;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x636.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::533;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x533.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,107 +99,193 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2023 22:05:30 -0000
+X-List-Received-Date: Wed, 04 Jan 2023 22:05:34 -0000
 
-The point of a getter() function is to not expose the structure
-internal fields. Otherwise callers could simply access the
-PFlashCFI01::mem field.
-
-Have the callers pass a DeviceState* argument. The QOM
-type check is done in the callee.
+Nothing here requires access to PFlashCFI01 internal fields:
+use the inherited generic DeviceState.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/block/pflash_cfi01.c  | 4 +++-
- hw/i386/pc_sysfw.c       | 2 +-
- hw/mips/malta.c          | 3 ++-
- hw/ppc/e500.c            | 2 +-
- hw/xtensa/xtfpga.c       | 2 +-
- include/hw/block/flash.h | 2 +-
- 6 files changed, 9 insertions(+), 6 deletions(-)
+ hw/arm/sbsa-ref.c     | 12 ++++++------
+ hw/arm/vexpress.c     | 12 +++++-------
+ hw/arm/virt.c         | 10 +++++-----
+ include/hw/arm/virt.h |  3 +--
+ 4 files changed, 17 insertions(+), 20 deletions(-)
 
-diff --git a/hw/block/pflash_cfi01.c b/hw/block/pflash_cfi01.c
-index 8beba24989..866ea596ea 100644
---- a/hw/block/pflash_cfi01.c
-+++ b/hw/block/pflash_cfi01.c
-@@ -991,8 +991,10 @@ BlockBackend *pflash_cfi01_get_blk(DeviceState *dev)
-     return fl->blk;
- }
+diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
+index 1d29e8ca7f..8e60e0e58d 100644
+--- a/hw/arm/sbsa-ref.c
++++ b/hw/arm/sbsa-ref.c
+@@ -91,7 +91,7 @@ struct SBSAMachineState {
+     int fdt_size;
+     int psci_conduit;
+     DeviceState *gic;
+-    PFlashCFI01 *flash[2];
++    DeviceState *flash[2];
+ };
  
--MemoryRegion *pflash_cfi01_get_memory(PFlashCFI01 *fl)
-+MemoryRegion *pflash_cfi01_get_memory(DeviceState *dev)
+ #define TYPE_SBSA_MACHINE   MACHINE_TYPE_NAME("sbsa-ref")
+@@ -264,7 +264,7 @@ static void create_fdt(SBSAMachineState *sms)
+ 
+ #define SBSA_FLASH_SECTOR_SIZE (256 * KiB)
+ 
+-static PFlashCFI01 *sbsa_flash_create1(SBSAMachineState *sms,
++static DeviceState *sbsa_flash_create1(SBSAMachineState *sms,
+                                         const char *name,
+                                         const char *alias_prop_name)
  {
-+    PFlashCFI01 *fl = PFLASH_CFI01(dev);
-+
-     return &fl->mem;
+@@ -286,7 +286,7 @@ static PFlashCFI01 *sbsa_flash_create1(SBSAMachineState *sms,
+     object_property_add_child(OBJECT(sms), name, OBJECT(dev));
+     object_property_add_alias(OBJECT(sms), alias_prop_name,
+                               OBJECT(dev), "drive");
+-    return PFLASH_CFI01(dev);
++    return dev;
  }
  
-diff --git a/hw/i386/pc_sysfw.c b/hw/i386/pc_sysfw.c
-index c08cba6628..60db0efb41 100644
---- a/hw/i386/pc_sysfw.c
-+++ b/hw/i386/pc_sysfw.c
-@@ -187,7 +187,7 @@ static void pc_system_flash_map(PCMachineState *pcms,
-                         0x100000000ULL - total_size);
+ static void sbsa_flash_create(SBSAMachineState *sms)
+@@ -295,7 +295,7 @@ static void sbsa_flash_create(SBSAMachineState *sms)
+     sms->flash[1] = sbsa_flash_create1(sms, "sbsa.flash1", "pflash1");
+ }
  
-         if (i == 0) {
--            flash_mem = pflash_cfi01_get_memory(system_flash);
-+            flash_mem = pflash_cfi01_get_memory(DEVICE(system_flash));
-             pc_isa_bios_init(rom_memory, flash_mem, size);
+-static void sbsa_flash_map1(PFlashCFI01 *flash,
++static void sbsa_flash_map1(DeviceState *flash,
+                             hwaddr base, hwaddr size,
+                             MemoryRegion *sysmem)
+ {
+@@ -340,13 +340,13 @@ static bool sbsa_firmware_init(SBSAMachineState *sms,
  
-             /* Encrypt the pflash boot ROM */
-diff --git a/hw/mips/malta.c b/hw/mips/malta.c
-index c0a2e0ab04..43fbb97799 100644
---- a/hw/mips/malta.c
-+++ b/hw/mips/malta.c
-@@ -1291,7 +1291,8 @@ void mips_malta_init(MachineState *machine)
-                                dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
-                                65536,
-                                4, 0x0000, 0x0000, 0x0000, 0x0000, be);
--    bios = pflash_cfi01_get_memory(fl);
-+    dev = DEVICE(fl);
-+    bios = pflash_cfi01_get_memory(dev);
-     fl_idx++;
-     if (kernel_filename) {
-         ram_low_size = MIN(ram_size, 256 * MiB);
-diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
-index 9fa1f8e6cf..b127068431 100644
---- a/hw/ppc/e500.c
-+++ b/hw/ppc/e500.c
-@@ -1144,7 +1144,7 @@ void ppce500_init(MachineState *machine)
-         sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
- 
-         memory_region_add_subregion(&pms->pbus_dev->mmio, 0,
--                                    pflash_cfi01_get_memory(PFLASH_CFI01(dev)));
-+                                    pflash_cfi01_get_memory(dev));
+     /* Map legacy -drive if=pflash to machine properties */
+     for (i = 0; i < ARRAY_SIZE(sms->flash); i++) {
+-        pflash_cfi01_legacy_drive(DEVICE(sms->flash[i]),
++        pflash_cfi01_legacy_drive(sms->flash[i],
+                                   drive_get(IF_PFLASH, 0, i));
      }
  
-     /*
-diff --git a/hw/xtensa/xtfpga.c b/hw/xtensa/xtfpga.c
-index 2a5556a35f..bce3a543b0 100644
---- a/hw/xtensa/xtfpga.c
-+++ b/hw/xtensa/xtfpga.c
-@@ -459,7 +459,7 @@ static void xtfpga_init(const XtfpgaBoardDesc *board, MachineState *machine)
-         }
-     } else {
-         if (flash) {
--            MemoryRegion *flash_mr = pflash_cfi01_get_memory(flash);
-+            MemoryRegion *flash_mr = pflash_cfi01_get_memory(DEVICE(flash));
-             MemoryRegion *flash_io = g_malloc(sizeof(*flash_io));
-             uint32_t size = env->config->sysrom.location[0].size;
+     sbsa_flash_map(sms, sysmem, secure_sysmem);
  
-diff --git a/include/hw/block/flash.h b/include/hw/block/flash.h
-index 701a2c1701..25affdf7a5 100644
---- a/include/hw/block/flash.h
-+++ b/include/hw/block/flash.h
-@@ -22,7 +22,7 @@ PFlashCFI01 *pflash_cfi01_register(hwaddr base,
-                                    uint16_t id2, uint16_t id3,
-                                    int be);
- BlockBackend *pflash_cfi01_get_blk(DeviceState *dev);
--MemoryRegion *pflash_cfi01_get_memory(PFlashCFI01 *fl);
-+MemoryRegion *pflash_cfi01_get_memory(DeviceState *dev);
- void pflash_cfi01_legacy_drive(DeviceState *dev, DriveInfo *dinfo);
+-    pflash_blk0 = pflash_cfi01_get_blk(DEVICE(sms->flash[0]));
++    pflash_blk0 = pflash_cfi01_get_blk(sms->flash[0]);
  
- /* pflash_cfi02.c */
+     bios_name = MACHINE(sms)->firmware;
+     if (bios_name) {
+diff --git a/hw/arm/vexpress.c b/hw/arm/vexpress.c
+index e1d1983ae6..94eeff73d9 100644
+--- a/hw/arm/vexpress.c
++++ b/hw/arm/vexpress.c
+@@ -508,7 +508,7 @@ static void vexpress_modify_dtb(const struct arm_boot_info *info, void *fdt)
+ /* Open code a private version of pflash registration since we
+  * need to set non-default device width for VExpress platform.
+  */
+-static PFlashCFI01 *ve_pflash_cfi01_register(hwaddr base, const char *name,
++static DeviceState *ve_pflash_cfi01_register(hwaddr base, const char *name,
+                                              DriveInfo *di)
+ {
+     DeviceState *dev = qdev_new(TYPE_PFLASH_CFI01);
+@@ -531,7 +531,7 @@ static PFlashCFI01 *ve_pflash_cfi01_register(hwaddr base, const char *name,
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, base);
+-    return PFLASH_CFI01(dev);
++    return dev;
+ }
+ 
+ static void vexpress_common_init(MachineState *machine)
+@@ -543,7 +543,6 @@ static void vexpress_common_init(MachineState *machine)
+     qemu_irq pic[64];
+     uint32_t sys_id;
+     DriveInfo *dinfo;
+-    PFlashCFI01 *pflash0;
+     I2CBus *i2c;
+     ram_addr_t vram_size, sram_size;
+     MemoryRegion *sysmem = get_system_memory();
+@@ -657,16 +656,15 @@ static void vexpress_common_init(MachineState *machine)
+     sysbus_create_simple("pl111", map[VE_CLCD], pic[14]);
+ 
+     dinfo = drive_get(IF_PFLASH, 0, 0);
+-    pflash0 = ve_pflash_cfi01_register(map[VE_NORFLASH0], "vexpress.flash0",
+-                                       dinfo);
+-    if (!pflash0) {
++    dev = ve_pflash_cfi01_register(map[VE_NORFLASH0], "vexpress.flash0", dinfo);
++    if (!dev) {
+         error_report("vexpress: error registering flash 0");
+         exit(1);
+     }
+ 
+     if (map[VE_NORFLASHALIAS] != -1) {
+         /* Map flash 0 as an alias into low memory */
+-        flash0mem = sysbus_mmio_get_region(SYS_BUS_DEVICE(pflash0), 0);
++        flash0mem = sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0);
+         memory_region_init_alias(flashalias, NULL, "vexpress.flashalias",
+                                  flash0mem, 0, VEXPRESS_FLASH_SIZE);
+         memory_region_add_subregion(sysmem, map[VE_NORFLASHALIAS], flashalias);
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index 57726b0f52..e47070105d 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -1105,7 +1105,7 @@ static void create_virtio_devices(const VirtMachineState *vms)
+ 
+ #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
+ 
+-static PFlashCFI01 *virt_flash_create1(VirtMachineState *vms,
++static DeviceState *virt_flash_create1(VirtMachineState *vms,
+                                         const char *name,
+                                         const char *alias_prop_name)
+ {
+@@ -1127,7 +1127,7 @@ static PFlashCFI01 *virt_flash_create1(VirtMachineState *vms,
+     object_property_add_child(OBJECT(vms), name, OBJECT(dev));
+     object_property_add_alias(OBJECT(vms), alias_prop_name,
+                               OBJECT(dev), "drive");
+-    return PFLASH_CFI01(dev);
++    return dev;
+ }
+ 
+ static void virt_flash_create(VirtMachineState *vms)
+@@ -1136,7 +1136,7 @@ static void virt_flash_create(VirtMachineState *vms)
+     vms->flash[1] = virt_flash_create1(vms, "virt.flash1", "pflash1");
+ }
+ 
+-static void virt_flash_map1(PFlashCFI01 *flash,
++static void virt_flash_map1(DeviceState *flash,
+                             hwaddr base, hwaddr size,
+                             MemoryRegion *sysmem)
+ {
+@@ -1227,13 +1227,13 @@ static bool virt_firmware_init(VirtMachineState *vms,
+ 
+     /* Map legacy -drive if=pflash to machine properties */
+     for (i = 0; i < ARRAY_SIZE(vms->flash); i++) {
+-        pflash_cfi01_legacy_drive(DEVICE(vms->flash[i]),
++        pflash_cfi01_legacy_drive(vms->flash[i],
+                                   drive_get(IF_PFLASH, 0, i));
+     }
+ 
+     virt_flash_map(vms, sysmem, secure_sysmem);
+ 
+-    pflash_blk0 = pflash_cfi01_get_blk(DEVICE(vms->flash[0]));
++    pflash_blk0 = pflash_cfi01_get_blk(vms->flash[0]);
+ 
+     bios_name = MACHINE(vms)->firmware;
+     if (bios_name) {
+diff --git a/include/hw/arm/virt.h b/include/hw/arm/virt.h
+index c7dd59d7f1..817b43b248 100644
+--- a/include/hw/arm/virt.h
++++ b/include/hw/arm/virt.h
+@@ -34,7 +34,6 @@
+ #include "qemu/notify.h"
+ #include "hw/boards.h"
+ #include "hw/arm/boot.h"
+-#include "hw/block/flash.h"
+ #include "sysemu/kvm.h"
+ #include "hw/intc/arm_gicv3_common.h"
+ #include "qom/object.h"
+@@ -142,7 +141,7 @@ struct VirtMachineState {
+     Notifier machine_done;
+     DeviceState *platform_bus_dev;
+     FWCfgState *fw_cfg;
+-    PFlashCFI01 *flash[2];
++    DeviceState *flash[2];
+     bool secure;
+     bool highmem;
+     bool highmem_compact;
 -- 
 2.38.1
 
