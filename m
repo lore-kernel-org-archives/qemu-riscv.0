@@ -1,74 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pCjvK-0006kP-V3
-	for mharc-qemu-riscv@gnu.org; Tue, 03 Jan 2023 11:13:59 -0500
+	id 1pDBss-0008Kz-Fi
+	for mharc-qemu-riscv@gnu.org; Wed, 04 Jan 2023 17:05:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1pCjvI-0006k5-GZ
- for qemu-riscv@nongnu.org; Tue, 03 Jan 2023 11:13:56 -0500
-Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBsZ-0008BU-QD
+ for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:05:04 -0500
+Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1pCjvE-0000JI-MW
- for qemu-riscv@nongnu.org; Tue, 03 Jan 2023 11:13:55 -0500
-Received: by mail-ua1-x936.google.com with SMTP id x13so1064898uau.10
- for <qemu-riscv@nongnu.org>; Tue, 03 Jan 2023 08:13:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vLNQ6sF6aDeP0/n0o5ND+JlPyXPXypiipBqDvpGjuEI=;
- b=N1KQmif7sluRIx5ErsBk+2R0Soc2NBkahbG4wNPpN5xvh8joWspw3DF97hqPqhtZsq
- Quz5E5jDXx1Sq1NQw/H0xcQACpXeQZWNKmc5Uxt8qvIGQrW1sDXaU5cr/EZ0MCxfMytk
- uyQbf6bVKGfLH96BNEznAw/S29rjb95Aev0Hbi/EejTsqNQ9xIez73cmE0duvtYuZtdS
- EbDK7ndbG1w+5dmV3A09aIUUGEEg2/T5yC+EpUW+cnM4nrlcD3+I8B5R/TxenAhNr5R/
- W6ZM8nIR+Qo++b/fGG44m72jJmeQg+tnxb3h2+tYTBVK6o9w8rcJGS/I1AJeiF2os7CZ
- NhMQ==
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBsW-0004zW-Km
+ for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:04:59 -0500
+Received: by mail-ej1-x636.google.com with SMTP id tz12so85975429ejc.9
+ for <qemu-riscv@nongnu.org>; Wed, 04 Jan 2023 14:04:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TFfnwjftSBTQtlrSBz3RLCltb8prEkxU+BRsjCrCgtQ=;
+ b=pCKy3Vgcn9frgL1Z6PKfnlIn4yF3aXjidG7SLKuNXzFpa3mU8tY2cNUadw4pji+k0F
+ jvpcI50AwZiG3VGGcq9ma6u2qDa7eHF+2i8kQFHVey8/mdD64bhVe9IxFoIN7pJgyEf9
+ 2c7BWfk0pHq4Ja3VgwFKR6baxop3v5zgBfBmdwkLjZCalagvZxady8XUc2k0Biwihz8s
+ CEJEEa6hlHhcbuSTswJ32VaW4KbPzupRCjO94mOhv0UuY/HIlezodfZJvRsu2ij2a1NM
+ oKjxWkEjZPwRP+CDs82l4DPEDA57dMMt1e/I0mPPx/wMggcz0N8AyNqo2FMG0IOfNmG3
+ hv2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vLNQ6sF6aDeP0/n0o5ND+JlPyXPXypiipBqDvpGjuEI=;
- b=XVq4BbkTCjbSpNJpnNeSs15/CmeZu5pl1+pnO1aTqh5svRbZ8GJVHXtJ9EAY5ZNu6/
- DIOn0n7SRciVJD8ZzxfUGbhACGsoV+9r9ONVREsYu/cFohWSZXBBrVc7fhlFCf5rjyYF
- NjJMLA51m+ZHbXR2LUTngu46DFiZcoCDZ/DqX4xZcVcTJVsor+QR3aY6xxpWzLouVq8Q
- 28HNopUjx98owVCbHxBMcBNIPkYybN78tgFg7QfeyJPzUm8CmN4jR0hIfMgMzMedZh3x
- Vu0GsT2LpF3DR4CN8/R4g8qiKonNHXRit6LUDNNS3vraXTBPtL1ZexREJYWNCE5cR7cG
- OM3w==
-X-Gm-Message-State: AFqh2kp1w5OxeKmX6R3k9tXeqiAYCPPvRGFAhWqKMDwEpfgLAPOkhZMN
- Rm5t61oCDiP0pfZhQ+fDHsMaa/MnC2KoaOs2j5Iyaw==
-X-Google-Smtp-Source: AMrXdXt5V9T8MU/RkmkUq5IWmLELzvewe46K1y/6QOhJAxvSIeCYvsoUloKbBin1nEYOAFE6wIdwADvy8e5wf5Io0wk=
-X-Received: by 2002:ab0:64ca:0:b0:478:b785:affb with SMTP id
- j10-20020ab064ca000000b00478b785affbmr3989526uaq.52.1672762430654; Tue, 03
- Jan 2023 08:13:50 -0800 (PST)
+ bh=TFfnwjftSBTQtlrSBz3RLCltb8prEkxU+BRsjCrCgtQ=;
+ b=T4EUbvkoK0VepBPUTgMkYA5vagOukXBmMCWqtLUW1TV+xGIfraEbH+AkP/ffToZ8mT
+ QRRnMAauUWv5kQcClsmhLOwcW8+E1Gtx9/woTrI6af1vTY+HomYhaNjLF6nH7bH7FzB1
+ bPrD+L0D1U17/lyk1yV0l3tGpfdIIuAHCFzAi2hxLC3gki6I04ZHoeGvoT+t5YYtrcYN
+ y+yyHmyKD0hE68kL6eJ/DSlCSyhMIATLRaVkzBNqppVmcaADF1hSuyZ1LRkN64YtbVw5
+ thE4vpAs6UQizHG2nTl89SZRRFR/LsjdDa3Si6lxLRfkR9gUxUFw2l60vC8CtbNVGq/4
+ lDFw==
+X-Gm-Message-State: AFqh2kp+3S4arcCIQAiIyZvAbX4+XTOoPQpzzXTZOe6wBm+MhJuif6zr
+ ZRVlRBpOYgOl4Alq9y6r1WkByA==
+X-Google-Smtp-Source: AMrXdXv8vYeyfvNZ6wMfRLyd7GkFBEmpWbZ4qZ0RgO9hI3ghNmrgaXrH0twPL68Bf7bsOSPFBGU6ow==
+X-Received: by 2002:a17:907:c48d:b0:7c0:fe60:be12 with SMTP id
+ tp13-20020a170907c48d00b007c0fe60be12mr38960273ejc.25.1672869894693; 
+ Wed, 04 Jan 2023 14:04:54 -0800 (PST)
+Received: from localhost.localdomain ([185.126.107.38])
+ by smtp.gmail.com with ESMTPSA id
+ i16-20020a170906115000b008373f9ea148sm15784340eja.71.2023.01.04.14.04.50
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Wed, 04 Jan 2023 14:04:54 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Song Gao <gaosong@loongson.cn>, Antony Pavlov <antonynpavlov@gmail.com>,
+ Jan Kiszka <jan.kiszka@web.de>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Hanna Reitz <hreitz@redhat.com>, Bernhard Beschow <shentey@gmail.com>,
+ BALATON Zoltan <balaton@eik.bme.hu>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-ppc@nongnu.org,
+ Mark Burton <mburton@qti.qualcomm.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Magnus Damm <magnus.damm@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Bin Meng <bin.meng@windriver.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Eduardo Habkost <eduardo@habkost.net>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Radoslaw Biernacki <rad@semihalf.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-block@nongnu.org,
+ qemu-riscv@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Alistair Francis <alistair@alistair23.me>, qemu-arm@nongnu.org,
+ Leif Lindholm <quic_llindhol@quicinc.com>, Kevin Wolf <kwolf@redhat.com>
+Subject: [PATCH 00/20] hw: Remove implicit sysbus_mmio_map() from pflash APIs
+Date: Wed,  4 Jan 2023 23:04:29 +0100
+Message-Id: <20230104220449.41337-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-References: <20221108125703.1463577-1-apatel@ventanamicro.com>
- <20221108125703.1463577-3-apatel@ventanamicro.com>
- <CAKmqyKP+hc4N6Z2AqkQpCmF=oyTE_rf-XfSsTHChwcUWRE5gsg@mail.gmail.com>
- <CAK9=C2Uu1bCcZht+ydiazSmgnkD_hhLetXP4WcA92DypE4m9=A@mail.gmail.com>
- <CAKmqyKPw54F0uVy+7SjoY16o7RYyW6qwLhaYaKR7aNpP4Nz27Q@mail.gmail.com>
- <CAK9=C2V21JcgyUKub1JGVT0DEaeyzJ1GXQYcyaZy4Xv26F5fyA@mail.gmail.com>
- <CAKmqyKOc+xKEy1nhp6vCOtVHspfQ5WY7oE6wx5aGURhxQOrdqQ@mail.gmail.com>
- <CAK9=C2VA-1c8J-t8Sqp-8+eW9-0xaALgbG8LORd06--Jb-gTAw@mail.gmail.com>
- <CAKmqyKMQ7VJeeh0Rm3gjv8wDNgqsP5ShgbK2FaJstFSGAZgf8Q@mail.gmail.com>
-In-Reply-To: <CAKmqyKMQ7VJeeh0Rm3gjv8wDNgqsP5ShgbK2FaJstFSGAZgf8Q@mail.gmail.com>
-From: Anup Patel <apatel@ventanamicro.com>
-Date: Tue, 3 Jan 2023 21:43:38 +0530
-Message-ID: <CAK9=C2VY_c=1CSjnUDRGLw3pLN1L_9ta1xRYjwVGiH8t4bqzSw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/5] target/riscv: Update VS timer whenever htimedelta
- changes
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atishp@atishpatra.org>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
- envelope-from=apatel@ventanamicro.com; helo=mail-ua1-x936.google.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::636;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -88,159 +96,97 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Jan 2023 16:13:56 -0000
+X-List-Received-Date: Wed, 04 Jan 2023 22:05:10 -0000
 
-Hi Alistair,
+Paving the road toward heterogeneous QEMU, the limitations of
+having a single machine sysbus become more apparent.
 
-On Wed, Dec 28, 2022 at 11:08 AM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Fri, Dec 23, 2022 at 11:14 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> >
-> > On Thu, Dec 15, 2022 at 8:55 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > >
-> > > On Mon, Dec 12, 2022 at 9:12 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> > > >
-> > > > On Mon, Dec 12, 2022 at 11:23 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > > >
-> > > > > On Thu, Dec 8, 2022 at 6:41 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> > > > > >
-> > > > > > On Thu, Dec 8, 2022 at 9:00 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > > > > >
-> > > > > > > On Tue, Nov 8, 2022 at 11:07 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> > > > > > > >
-> > > > > > > > The htimedelta[h] CSR has impact on the VS timer comparison so we
-> > > > > > > > should call riscv_timer_write_timecmp() whenever htimedelta changes.
-> > > > > > > >
-> > > > > > > > Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp suppor")
-> > > > > > > > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-> > > > > > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > > > >
-> > > > > > > This patch breaks my Xvisor test. When running OpenSBI and Xvisor like this:
-> > > > > > >
-> > > > > > > qemu-system-riscv64 -machine virt \
-> > > > > > >     -m 1G -serial mon:stdio -serial null -nographic \
-> > > > > > >     -append 'vmm.console=uart@10000000 vmm.bootcmd="vfs mount initrd
-> > > > > > > /;vfs run /boot.xscript;vfs cat /system/banner.txt; guest kick guest0;
-> > > > > > > vserial bind guest0/uart0"' \
-> > > > > > >     -smp 4 -d guest_errors \
-> > > > > > >     -bios none \
-> > > > > > >     -device loader,file=./images/qemuriscv64/vmm.bin,addr=0x80200000 \
-> > > > > > >     -kernel ./images/qemuriscv64/fw_jump.elf \
-> > > > > > >     -initrd ./images/qemuriscv64/vmm-disk-linux.img -cpu rv64,h=true
-> > > > > > >
-> > > > > > > Running:
-> > > > > > >
-> > > > > > > Xvisor v0.3.0-129-gbc33f339 (Jan  1 1970 00:00:00)
-> > > > > > >
-> > > > > > > I see this failure:
-> > > > > > >
-> > > > > > > INIT: bootcmd:  guest kick guest0
-> > > > > > >
-> > > > > > > guest0: Kicked
-> > > > > > >
-> > > > > > > INIT: bootcmd:  vserial bind guest0/uart0
-> > > > > > >
-> > > > > > > [guest0/uart0] cpu_vcpu_stage2_map: guest_phys=0x000000003B9AC000
-> > > > > > > size=0x4096 map failed
-> > > > > > >
-> > > > > > > do_error: CPU3: VCPU=guest0/vcpu0 page fault failed (error -1)
-> > > > > > >
-> > > > > > >        zero=0x0000000000000000          ra=0x0000000080001B4E
-> > > > > > >
-> > > > > > >          sp=0x000000008001CF80          gp=0x0000000000000000
-> > > > > > >
-> > > > > > >          tp=0x0000000000000000          s0=0x000000008001CFB0
-> > > > > > >
-> > > > > > >          s1=0x0000000000000000          a0=0x0000000010001048
-> > > > > > >
-> > > > > > >          a1=0x0000000000000000          a2=0x0000000000989680
-> > > > > > >
-> > > > > > >          a3=0x000000003B9ACA00          a4=0x0000000000000048
-> > > > > > >
-> > > > > > >          a5=0x0000000000000000          a6=0x0000000000019000
-> > > > > > >
-> > > > > > >          a7=0x0000000000000000          s2=0x0000000000000000
-> > > > > > >
-> > > > > > >          s3=0x0000000000000000          s4=0x0000000000000000
-> > > > > > >
-> > > > > > >          s5=0x0000000000000000          s6=0x0000000000000000
-> > > > > > >
-> > > > > > >          s7=0x0000000000000000          s8=0x0000000000000000
-> > > > > > >
-> > > > > > >          s9=0x0000000000000000         s10=0x0000000000000000
-> > > > > > >
-> > > > > > >         s11=0x0000000000000000          t0=0x0000000000004000
-> > > > > > >
-> > > > > > >          t1=0x0000000000000100          t2=0x0000000000000000
-> > > > > > >
-> > > > > > >          t3=0x0000000000000000          t4=0x0000000000000000
-> > > > > > >
-> > > > > > >          t5=0x0000000000000000          t6=0x0000000000000000
-> > > > > > >
-> > > > > > >        sepc=0x0000000080001918     sstatus=0x0000000200004120
-> > > > > > >
-> > > > > > >     hstatus=0x00000002002001C0     sp_exec=0x0000000010A64000
-> > > > > > >
-> > > > > > >      scause=0x0000000000000017       stval=0x000000003B9ACAF8
-> > > > > > >
-> > > > > > >       htval=0x000000000EE6B2BE      htinst=0x0000000000D03021
-> > > > > > >
-> > > > > > > I have tried updating to a newer Xvisor release, but with that I don't
-> > > > > > > get any serial output.
-> > > > > > >
-> > > > > > > Can you help get the Xvisor tests back up and running?
-> > > > > >
-> > > > > > I tried the latest Xvisor-next (https://github.com/avpatel/xvisor-next)
-> > > > > > with your QEMU riscv-to-apply.next branch and it works fine (both
-> > > > > > with and without Sstc).
-> > > > >
-> > > > > Does it work with the latest release?
-> > > >
-> > > > Yes, the latest Xvisor-next repo works for QEMU v7.2.0-rc4 and
-> > > > your riscv-to-apply.next branch (commit 51bb9de2d188)
-> > >
-> > > I can't get anything to work with this patch. I have dropped this and
-> > > the patches after this.
-> > >
-> > > I'm building the latest Xvisor release with:
-> > >
-> > > export CROSS_COMPILE=riscv64-linux-gnu-
-> > > ARCH=riscv make generic-64b-defconfig
-> > > make
-> > >
-> > > and running it as above, yet nothing. What am I missing here?
-> >
-> > I tried multiple times with the latest Xvisor on different machines but
-> > still can't reproduce the issue you are seeing.
->
-> Odd
->
-> >
-> > We generally provide pre-built binaries with every Xvisor release
-> > so I will share with you pre-built binaries of the upcoming Xvisor-0.3.2
-> > release. Maybe that would help you ?
->
-> That would work. Let me know when the release happens and I can update
-> my images.
+The sysbus_mmio_map() API forces the caller to map a sysbus
+device to an address on the system bus (system bus here is
+the root MemoryRegion returned by get_system_memory() ).
 
-Please download the Xvisor v0.3.2 pre-built binary tarball from:
-https://xhypervisor.org/tarball/xvisor-0.3.2-bins.tar.xz
+This is not practical when each core has its own address
+space and group of cores have access to a part of the
+peripherals.
 
-After untarring the above tarball, you can try the following command:
-$ qemu-system-riscv64 -M virt -m 512M -nographic -bios
-opensbi/build/platform/generic/firmware/fw_jump.bin -kernel
-xvisor-0.3.2-bins/riscv/rv64/xvisor/vmm.bin -initrd
-xvisor-0.3.2-bins/riscv/rv64/guest/virt64/disk-linux-6.1.1-one_guest_virt64.ext2
--append "vmm.bootcmd=\"vfs mount initrd /;vfs run /boot.xscript;vfs
-cat /system/banner.txt\""
-OR
-$ qemu-system-riscv32 -M virt -m 512M -nographic -bios
-opensbi/build/platform/generic/firmware/fw_jump.bin -kernel
-xvisor-0.3.2-bins/riscv/rv32/xvisor/vmm.bin -initrd
-xvisor-0.3.2-bins/riscv/rv32/guest/virt32/disk-linux-6.1.1-one_guest_virt32.ext2
--append "vmm.bootcmd=\"vfs mount initrd /;vfs run /boot.xscript;vfs
-cat /system/banner.txt\""
+Experimenting with the PFLASH devices. Here the fix is
+quite easy, we split the pflash_cfi_register() -- which
+does the implicit sysbus mapping -- into an explicit qdev
+pflash_cfi_create() followed by the sysbus_mmio_map() call.
 
-Regards,
-Anup
+Since we were touching the PFLASH API, we restricted the
+PFlashCFI0X structures to their models. The API now deals
+with a generic qdev pointer (DeviceState*).
+
+First 15 patches deal with the CFI type 1 model, then the
+last 5 with the type 2.
+
+The patch logic is mostly:
+
+- extract pflash_cfi_create() from pflash_cfi_register()
+- open-code pflash_cfi_register() for each hw/${ARCH}/
+- remove unused pflash_cfi_register()
+- reduce PFlashCFI0x structure scope
+
+Please review,
+
+Phil.
+
+Philippe Mathieu-Daudé (20):
+  hw/block: Pass DeviceState to pflash_cfi01_get_blk()
+  hw/block: Use pflash_cfi01_get_blk() in pflash_cfi01_legacy_drive()
+  hw/block: Pass DeviceState to pflash_cfi01_get_memory()
+  hw/arm: Use generic DeviceState instead of PFlashCFI01
+  hw/loongarch: Use generic DeviceState instead of PFlashCFI01
+  hw/riscv: Use generic DeviceState instead of PFlashCFI01
+  hw/i386: Use generic DeviceState instead of PFlashCFI01
+  hw/xtensa: Use generic DeviceState instead of PFlashCFI01
+  hw/block: Factor pflash_cfi01_create() out of pflash_cfi01_register()
+  hw/arm: Open-code pflash_cfi01_register()
+  hw/microblaze: Open-code pflash_cfi01_register()
+  hw/mips: Open-code pflash_cfi01_register()
+  hw/ppc: Open-code pflash_cfi01_register()
+  hw/block: Remove unused pflash_cfi01_register()
+  hw/block: Make PFlashCFI01 QOM declaration internal
+  hw/block: Factor pflash_cfi02_create() out of pflash_cfi02_register()
+  hw/arm: Open-code pflash_cfi02_register()
+  hw/sh4: Open-code pflash_cfi02_register()
+  hw/block: Remove unused pflash_cfi02_register()
+  hw/block: Make PFlashCFI02 QOM declaration internal
+
+ hw/arm/collie.c                          | 15 ++++---
+ hw/arm/digic_boards.c                    | 14 +++---
+ hw/arm/gumstix.c                         | 19 +++++---
+ hw/arm/mainstone.c                       | 13 +++---
+ hw/arm/musicpal.c                        | 13 +++---
+ hw/arm/omap_sx1.c                        | 22 +++++----
+ hw/arm/sbsa-ref.c                        |  8 ++--
+ hw/arm/versatilepb.c                     | 13 +++---
+ hw/arm/vexpress.c                        | 12 +++--
+ hw/arm/virt.c                            |  6 +--
+ hw/arm/xilinx_zynq.c                     | 10 ++---
+ hw/arm/z2.c                              | 10 +++--
+ hw/block/pflash_cfi01.c                  | 35 ++++++++-------
+ hw/block/pflash_cfi02.c                  | 25 +++++------
+ hw/i386/pc_sysfw.c                       |  6 +--
+ hw/loongarch/virt.c                      |  9 ++--
+ hw/microblaze/petalogix_ml605_mmu.c      |  8 ++--
+ hw/microblaze/petalogix_s3adsp1800_mmu.c |  8 ++--
+ hw/mips/malta.c                          | 13 +++---
+ hw/ppc/e500.c                            |  2 +-
+ hw/ppc/sam460ex.c                        | 12 +++--
+ hw/ppc/virtex_ml507.c                    |  7 +--
+ hw/riscv/virt.c                          |  7 +--
+ hw/sh4/r2d.c                             |  9 ++--
+ hw/xtensa/xtfpga.c                       |  6 +--
+ include/hw/arm/virt.h                    |  3 +-
+ include/hw/block/flash.h                 | 57 ++++++++++++------------
+ include/hw/i386/pc.h                     |  3 +-
+ include/hw/loongarch/virt.h              |  3 +-
+ include/hw/riscv/virt.h                  |  3 +-
+ 30 files changed, 200 insertions(+), 171 deletions(-)
+
+-- 
+2.38.1
+
 
