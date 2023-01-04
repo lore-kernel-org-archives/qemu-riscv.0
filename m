@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pDBuD-0001aM-JZ
-	for mharc-qemu-riscv@gnu.org; Wed, 04 Jan 2023 17:06:41 -0500
+	id 1pDBur-000235-GN
+	for mharc-qemu-riscv@gnu.org; Wed, 04 Jan 2023 17:07:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBuB-0001Vp-L4
- for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:06:39 -0500
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBuJ-0001sO-J0
+ for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:06:58 -0500
+Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBu8-0005fU-66
- for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:06:39 -0500
-Received: by mail-ej1-x62d.google.com with SMTP id u9so86132128ejo.0
- for <qemu-riscv@nongnu.org>; Wed, 04 Jan 2023 14:06:35 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBuH-0006Qq-B6
+ for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:06:47 -0500
+Received: by mail-ej1-x633.google.com with SMTP id qk9so85784533ejc.3
+ for <qemu-riscv@nongnu.org>; Wed, 04 Jan 2023 14:06:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KN4KqLlugVC+0veh/qHwh2dos/FPn9LDhOhs/UvtQDw=;
- b=z1BU4aoIPYdDRqTnlx0V3zv0CD9t+NMAhobtS9j6dghWzkl+GBC3imIxlMpvEMyTyU
- lH9DINmyyjI0M06yICDcJ0uuJfyxGMn6C6buPS+HRN243d7qRriWbRLUs8VQGni7kkJ4
- jsmxMl+qeS9DoEuv+rX6n/5MX7uVBrdRy33dmARiikb6K+I2xUVS44eVKFStxOZn7XQ4
- 4AWA5tW0P5HYeFms0rGALBKAVKOI4O/Hyvtl5b3KCEfAsaJB/O3NTHvs/bH5U18E1E7a
- TLhTQ95AueMkRyXyfe82e94wv8pwaHGl30G0WfbMv71x1G5BHTcLXi5SWwnRZOeDA9rh
- WpJg==
+ bh=zslv5ettm0BZ6lahZKOwlTaXvhF8s2DyuA1mWPRzCMs=;
+ b=NxbffoqprVv6NlWkQCdargfgN3AeDlp6F+mpEaeWmQJ9ILjz/zFWD5ly8WRoPmkc71
+ 4O6RFG8PVjxFBO+xcP/suLGBeAD8GRcijOfILkqzCTB7E6cA3TER+4DbOPaj3sWoPSbv
+ cqWMRBmc4KN/9N54hPVhfJIbrWzAK3Rblemr4+XOAAPZn1po/drvH/LapmVhbEzcCDAc
+ b/P6/+JMraod5BtNeBlYPXkLA0/atgTBPKFmzXC6BPYlBIIJLNWlIboPQ3bMaQ2Q4SpW
+ R2IVQuu6WQAqZ8wkuTlLgqQFpMHS6GZ72Vce4/VGxWWf1Sl3j+Be2wV4njDWwcJxRfI+
+ 8Ubw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KN4KqLlugVC+0veh/qHwh2dos/FPn9LDhOhs/UvtQDw=;
- b=wukSoshJR5rqPWPkPGB4UKDBoZ9uW/3OJw1Kq0bCRmXu53xIywWjTLJvm+xUJu4qYU
- ddnr1LnHiZGcUeB8JJ9rWkuVZmXJz3qtFf9JsMquUc044Ca2hM4wPilKcWyMxuQkxJyi
- RTnRBJPBelweHIps6uvJuJ0ur8l2olKmp572n0xA0wwIVu42LdVKDiv9dxVKXWvMutNl
- B28UcEZaGu/33p6IM9WH6T5CcrRucYKBEGRuj0FVF5u08LM3dtZupVMEKpMhsBr8TeY3
- oth9QUu0T6uWRz5xcVUe9hOginT4klSn6n4ZP7jer1Cbt3fqvgJnR0X0o4zkEbMQJAJh
- xnxQ==
-X-Gm-Message-State: AFqh2krqeucYp6cJrjAKcYBNzdCiOZW/g/F61kjH81PbB3XlO+6MZP+A
- Pj/pCbLDnoJY1dNrQpY4NZIKQg==
-X-Google-Smtp-Source: AMrXdXvMFX4IDRqLxsTznid+IJtag64ozPayTo6+BU6tYMCWpu4S/A12KD1SQSXRgAWs02blwKTeNA==
-X-Received: by 2002:a17:907:d387:b0:7c1:6fd3:1ef3 with SMTP id
- vh7-20020a170907d38700b007c16fd31ef3mr41602526ejc.33.1672869995411; 
- Wed, 04 Jan 2023 14:06:35 -0800 (PST)
+ bh=zslv5ettm0BZ6lahZKOwlTaXvhF8s2DyuA1mWPRzCMs=;
+ b=jY56knFNhF9kVt7m72TC7ioWVVEjLImLaUA+SZiIXD+89cuk8n8sBDRShE6eQWpE7g
+ RtE6mgxUEGL1BOKA+PO1fnGVct1PUY9H+G4/cm5NpiOvuQJCB/wfXkh0eJNW5lpLS2hO
+ XCPBkuEG9VgDqu6c1fFCfzCTqWQjmyZXOUZiVOT6azKO2w5Z0alw5x8XtvYRGZ3AZY7Z
+ Ay3R/LdiN59FkFckciNpFEm7q6hUlEV8wcQ57vUyTO4snwJ1cTK5II7s83Nj2zx55N5h
+ 6RZvm5TAbD/aU4stlm/CrGKBQLdlvYdBaqA4+QwvVAWmp8q+Z06gGQkSgXZokD3H3+kt
+ TjxA==
+X-Gm-Message-State: AFqh2kr4UaTV9fv8rPIrp6kAtpzk42GSfzMRGYiwKIy5dK78JZspZUoe
+ c77ore2g0XywcQ4yEtCxPZ+ClQ==
+X-Google-Smtp-Source: AMrXdXtnKaw3mdJpb/NCzwKmXotk21jsO6EmRs6LLpgJgj2NT5YQutKoFUcGi80d2lpWO8uBFYeyJg==
+X-Received: by 2002:a17:906:700f:b0:7c0:b79c:7d5f with SMTP id
+ n15-20020a170906700f00b007c0b79c7d5fmr55349078ejj.68.1672870004011; 
+ Wed, 04 Jan 2023 14:06:44 -0800 (PST)
 Received: from localhost.localdomain ([185.126.107.38])
  by smtp.gmail.com with ESMTPSA id
- co5-20020a0564020c0500b00483dd234ac6sm12958847edb.96.2023.01.04.14.06.31
+ hz8-20020a1709072ce800b007b839689adesm15807413ejc.166.2023.01.04.14.06.39
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 04 Jan 2023 14:06:35 -0800 (PST)
+ Wed, 04 Jan 2023 14:06:43 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Song Gao <gaosong@loongson.cn>, Antony Pavlov <antonynpavlov@gmail.com>,
@@ -69,17 +69,17 @@ Cc: Song Gao <gaosong@loongson.cn>, Antony Pavlov <antonynpavlov@gmail.com>,
  qemu-riscv@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Alistair Francis <alistair@alistair23.me>, qemu-arm@nongnu.org,
  Leif Lindholm <quic_llindhol@quicinc.com>, Kevin Wolf <kwolf@redhat.com>
-Subject: [PATCH 12/20] hw/mips: Open-code pflash_cfi01_register()
-Date: Wed,  4 Jan 2023 23:04:41 +0100
-Message-Id: <20230104220449.41337-13-philmd@linaro.org>
+Subject: [PATCH 13/20] hw/ppc: Open-code pflash_cfi01_register()
+Date: Wed,  4 Jan 2023 23:04:42 +0100
+Message-Id: <20230104220449.41337-14-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230104220449.41337-1-philmd@linaro.org>
 References: <20230104220449.41337-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::633;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,7 +99,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2023 22:06:40 -0000
+X-List-Received-Date: Wed, 04 Jan 2023 22:07:10 -0000
 
 pflash_cfi01_register() hides an implicit sysbus mapping of
 MMIO region #0. This is not practical in a heterogeneous world
@@ -110,39 +110,62 @@ sysbus mapping.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/mips/malta.c | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+ hw/ppc/sam460ex.c     | 12 ++++++++----
+ hw/ppc/virtex_ml507.c |  7 ++++---
+ 2 files changed, 12 insertions(+), 7 deletions(-)
 
-diff --git a/hw/mips/malta.c b/hw/mips/malta.c
-index 43fbb97799..e690f13bdb 100644
---- a/hw/mips/malta.c
-+++ b/hw/mips/malta.c
-@@ -1222,7 +1222,6 @@ void mips_malta_init(MachineState *machine)
-     const char *kernel_cmdline = machine->kernel_cmdline;
-     const char *initrd_filename = machine->initrd_filename;
-     char *filename;
--    PFlashCFI01 *fl;
-     MemoryRegion *system_memory = get_system_memory();
-     MemoryRegion *ram_low_preio = g_new(MemoryRegion, 1);
-     MemoryRegion *ram_low_postio;
-@@ -1286,12 +1285,11 @@ void mips_malta_init(MachineState *machine)
+diff --git a/hw/ppc/sam460ex.c b/hw/ppc/sam460ex.c
+index 4a22ce3761..a82c9e0642 100644
+--- a/hw/ppc/sam460ex.c
++++ b/hw/ppc/sam460ex.c
+@@ -82,6 +82,8 @@ struct boot_info {
  
-     /* Load firmware in flash / BIOS. */
-     dinfo = drive_get(IF_PFLASH, 0, fl_idx);
--    fl = pflash_cfi01_register(FLASH_ADDRESS, "mips_malta.bios",
--                               FLASH_SIZE,
+ static int sam460ex_load_uboot(void)
+ {
++    DeviceState *dev;
++
+     /*
+      * This first creates 1MiB of flash memory mapped at the end of
+      * the 32-bit address space (0xFFF00000..0xFFFFFFFF).
+@@ -103,14 +105,16 @@ static int sam460ex_load_uboot(void)
+     DriveInfo *dinfo;
+ 
+     dinfo = drive_get(IF_PFLASH, 0, 0);
+-    if (!pflash_cfi01_register(FLASH_BASE | ((hwaddr)FLASH_BASE_H << 32),
+-                               "sam460ex.flash", FLASH_SIZE,
 -                               dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
--                               65536,
--                               4, 0x0000, 0x0000, 0x0000, 0x0000, be);
--    dev = DEVICE(fl);
-+    dev = pflash_cfi01_create("mips_malta.bios", FLASH_SIZE,
+-                               64 * KiB, 1, 0x89, 0x18, 0x0000, 0x0, 1)) {
++    dev = pflash_cfi01_create("sam460ex.flash", FLASH_SIZE,
 +                              dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
-+                              65536, 4,
-+                              0x0000, 0x0000, 0x0000, 0x0000, be);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, FLASH_ADDRESS);
-     bios = pflash_cfi01_get_memory(dev);
-     fl_idx++;
-     if (kernel_filename) {
++                              64 * KiB, 1, 0x89, 0x18, 0x0000, 0x0, 1);
++    if (!dev) {
+         error_report("Error registering flash memory");
+         /* XXX: return an error instead? */
+         exit(1);
+     }
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0,
++                    FLASH_BASE | ((hwaddr)FLASH_BASE_H << 32));
+ 
+     if (!dinfo) {
+         /*error_report("No flash image given with the 'pflash' parameter,"
+diff --git a/hw/ppc/virtex_ml507.c b/hw/ppc/virtex_ml507.c
+index f2f81bd425..ee211664a8 100644
+--- a/hw/ppc/virtex_ml507.c
++++ b/hw/ppc/virtex_ml507.c
+@@ -233,9 +233,10 @@ static void virtex_init(MachineState *machine)
+     memory_region_add_subregion(address_space_mem, ram_base, machine->ram);
+ 
+     dinfo = drive_get(IF_PFLASH, 0, 0);
+-    pflash_cfi01_register(PFLASH_BASEADDR, "virtex.flash", FLASH_SIZE,
+-                          dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
+-                          64 * KiB, 1, 0x89, 0x18, 0x0000, 0x0, 1);
++    dev = pflash_cfi01_create("virtex.flash", FLASH_SIZE,
++                              dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
++                              64 * KiB, 1, 0x89, 0x18, 0x0000, 0x0, 1);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, PFLASH_BASEADDR);
+ 
+     cpu_irq = qdev_get_gpio_in(DEVICE(cpu), PPC40x_INPUT_INT);
+     dev = qdev_new("xlnx.xps-intc");
 -- 
 2.38.1
 
