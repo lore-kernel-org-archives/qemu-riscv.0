@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pDBu5-0001Il-UK
-	for mharc-qemu-riscv@gnu.org; Wed, 04 Jan 2023 17:06:33 -0500
+	id 1pDBu6-0001LN-UK
+	for mharc-qemu-riscv@gnu.org; Wed, 04 Jan 2023 17:06:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBtv-00019I-GU
- for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:06:23 -0500
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBu5-0001Hl-D1
+ for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:06:33 -0500
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBts-0005ca-7f
- for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:06:22 -0500
-Received: by mail-ej1-x62f.google.com with SMTP id kw15so85845792ejc.10
- for <qemu-riscv@nongnu.org>; Wed, 04 Jan 2023 14:06:19 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBtz-0005fT-MW
+ for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:06:33 -0500
+Received: by mail-ej1-x632.google.com with SMTP id ud5so86069447ejc.4
+ for <qemu-riscv@nongnu.org>; Wed, 04 Jan 2023 14:06:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aHv6Wehw0g+45GGNmqAyiTzJjY7rKpnoc/CB10RjduA=;
- b=YXqVHRuRauV2FTHspnWhI7PYHTyp0b6ghk3RspSmeTEuENEJqSVmXR4haMbyMJbxEL
- TDsqLx61IKKuI+nPtwOwYC3CkC6zMczqRYEDfwPtmc6+0vIpxL5o4lHqv1xsq1Y8if96
- 5XTLBhr5Goe9C3LjfZ9CxYPp1AS4inL/JCc9xEUwJC/RwqnGB210wgdumbcODEhNZwbj
- 3V4kFlxysHZJMF3zV2nWpNOKNyA0U6GO6iY/aedMHqbqA0Ocq6bD7/GVoruh3b9w2jyy
- 4i+GZZgJJ6vHW9+g1AwEghIa7uVpdXGLmjZK7+mhceNnDY/Qe8Fo7rNN1N09KcelsGcS
- 4xCw==
+ bh=eRH2/Q6+taaY1C0mf1jUv5OrxulMB7iM/Sfo6HL2IVQ=;
+ b=nEDbMFtYiuO1tEPpkdBXhy5oQT831LiUY2iJK+y3FXzANhPxIRXugZteugbGJtczIU
+ wxk9hW2bT12/v8IrT5Z65Xkhd+ABeve3HRZ6aQeaw++II7ljORjep1OVHv6bURhYyF6U
+ 2ljIr4BXQitZtVzV2B6tgLnF+lIAB1yCgrbobDTMZRoWQhDu1muauHwZg3ZVnMr78rAd
+ t+GJa9IMINib8sQFgtLZBscBE/cKQxRSq5/+pueGDxdF8P8qIDcq3NZtYGgMJeqUzQbr
+ QrThF7plmTpACKFaVtYnIhTP06J/IbOkPLPzOkG35qCT27eMLrHgoadrp6Vm0jFjKFx+
+ 2CMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aHv6Wehw0g+45GGNmqAyiTzJjY7rKpnoc/CB10RjduA=;
- b=nRjeX/vQi9nRG7CSIg+Mu2qapxOtS2R4GmAEeFhQFayhk1PF30fjR2FwEd34mt468X
- hs92ySRjQI+cTTE7SEoGbgdhRDR+ftvACauz4SaEOAmSLeq4D9lIGt5zNZkOKbWh2PWX
- 64/CAGRMwaGCJLxMBiLd6CwGIKX415CSngLqjd02/5tKz6YpvYBoSjTC7qCEimfqFnOW
- DabcLvqUy4l7EU1mguV7uysmngBEe4GBGxWEZYYdPrQoSYR142ZhIB1Hx0SQMr+MAfkg
- I7xtCwZyRH/29AbwY97xq8SYFUJL4+fDi3wU09AR4/ebOpCI3jx0T3ByElAa0O25UMtU
- sLHg==
-X-Gm-Message-State: AFqh2koP2p5MrWBvaGe26J8/O32Xu9w3gkpoRflknVwvU3pqoGVCQebf
- aBc8ssBrwrS+q4f2jKgidSW+Lw==
-X-Google-Smtp-Source: AMrXdXuXXaV8YLVZZ+aVLTVjG53pmj4E+cu1/MPnhTlzQD4K6vtc7W/t/doGkw+IvQs3dowqa2rmtA==
-X-Received: by 2002:a17:907:d50e:b0:7b1:316c:38f5 with SMTP id
- wb14-20020a170907d50e00b007b1316c38f5mr43308789ejc.30.1672869978920; 
- Wed, 04 Jan 2023 14:06:18 -0800 (PST)
+ bh=eRH2/Q6+taaY1C0mf1jUv5OrxulMB7iM/Sfo6HL2IVQ=;
+ b=GRAJ2lZ3lZQtSEUzBSl531U1yAVnxQtkIOlx53nJi/Rt52ORLnMbRdrVltpdXQasdh
+ M6wbegrMQtBC/2GnP0RRyaKOYeHV/a2bDHLUWcstnBJU5nLsB00nT79T2UWQmrAJkQhi
+ yny3kJ6Xk+dPvnvLpH6c3pW4PvS4WKRIuIkKiBv+q1b0l3C0EQbjTAPT6TRgz/catPYR
+ nnRfFaXOZdaHCn6toRHYlI0BsKiw+EabyCZmmSmvjxw5BgINRHXcAWKlgmL+GWlxhEDw
+ 2yRBZLhaosjVAEI8PZxVkWZseqSNgcS55OwJtq/Djc/g+Z9eDs3BzHRmyXcLTihrRfr6
+ /ycw==
+X-Gm-Message-State: AFqh2konx3JgkF7gnNi09NAMuuPyqD03v7rem8FhxHthHXMPPUJ5aVAE
+ RvZbsrDp9a/awennpEPlFdQoqg==
+X-Google-Smtp-Source: AMrXdXvvA01RJqv8oimb3A41Jl9v5nfQM3M6y1vT9mQAXVPWc/Tif+z0vVOVkkealNwvS6JmLvFduQ==
+X-Received: by 2002:a17:907:3f9d:b0:7c1:1c4:5eaf with SMTP id
+ hr29-20020a1709073f9d00b007c101c45eafmr60776998ejc.49.1672869986450; 
+ Wed, 04 Jan 2023 14:06:26 -0800 (PST)
 Received: from localhost.localdomain ([185.126.107.38])
  by smtp.gmail.com with ESMTPSA id
- k22-20020a170906129600b007c10fe64c5dsm15736366ejb.86.2023.01.04.14.06.15
+ 10-20020a170906218a00b0073d796a1043sm15640103eju.123.2023.01.04.14.06.23
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 04 Jan 2023 14:06:18 -0800 (PST)
+ Wed, 04 Jan 2023 14:06:26 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Song Gao <gaosong@loongson.cn>, Antony Pavlov <antonynpavlov@gmail.com>,
@@ -69,17 +69,17 @@ Cc: Song Gao <gaosong@loongson.cn>, Antony Pavlov <antonynpavlov@gmail.com>,
  qemu-riscv@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Alistair Francis <alistair@alistair23.me>, qemu-arm@nongnu.org,
  Leif Lindholm <quic_llindhol@quicinc.com>, Kevin Wolf <kwolf@redhat.com>
-Subject: [PATCH 10/20] hw/arm: Open-code pflash_cfi01_register()
-Date: Wed,  4 Jan 2023 23:04:39 +0100
-Message-Id: <20230104220449.41337-11-philmd@linaro.org>
+Subject: [PATCH 11/20] hw/microblaze: Open-code pflash_cfi01_register()
+Date: Wed,  4 Jan 2023 23:04:40 +0100
+Message-Id: <20230104220449.41337-12-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230104220449.41337-1-philmd@linaro.org>
 References: <20230104220449.41337-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,7 +99,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2023 22:06:23 -0000
+X-List-Received-Date: Wed, 04 Jan 2023 22:06:33 -0000
 
 pflash_cfi01_register() hides an implicit sysbus mapping of
 MMIO region #0. This is not practical in a heterogeneous world
@@ -110,255 +110,48 @@ sysbus mapping.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/arm/collie.c      | 15 +++++++++------
- hw/arm/gumstix.c     | 19 +++++++++++++------
- hw/arm/mainstone.c   | 13 ++++++++-----
- hw/arm/omap_sx1.c    | 22 ++++++++++++++--------
- hw/arm/versatilepb.c | 13 ++++++++-----
- hw/arm/z2.c          | 10 +++++++---
- 6 files changed, 59 insertions(+), 33 deletions(-)
+ hw/microblaze/petalogix_ml605_mmu.c      | 8 ++++----
+ hw/microblaze/petalogix_s3adsp1800_mmu.c | 8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/hw/arm/collie.c b/hw/arm/collie.c
-index 8df31e2793..1fbb1a5773 100644
---- a/hw/arm/collie.c
-+++ b/hw/arm/collie.c
-@@ -39,6 +39,7 @@ static void collie_init(MachineState *machine)
-     DriveInfo *dinfo;
-     MachineClass *mc = MACHINE_GET_CLASS(machine);
-     CollieMachineState *cms = COLLIE_MACHINE(machine);
-+    DeviceState *dev;
- 
-     if (machine->ram_size != mc->default_ram_size) {
-         char *sz = size_to_str(mc->default_ram_size);
-@@ -52,14 +53,16 @@ static void collie_init(MachineState *machine)
-     memory_region_add_subregion(get_system_memory(), SA_SDCS0, machine->ram);
- 
+diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
+index a24fadddca..d5ff71218d 100644
+--- a/hw/microblaze/petalogix_ml605_mmu.c
++++ b/hw/microblaze/petalogix_ml605_mmu.c
+@@ -105,10 +105,10 @@ petalogix_ml605_init(MachineState *machine)
      dinfo = drive_get(IF_PFLASH, 0, 0);
--    pflash_cfi01_register(SA_CS0, "collie.fl1", 0x02000000,
--                    dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
--                    64 * KiB, 4, 0x00, 0x00, 0x00, 0x00, 0);
-+    dev = pflash_cfi01_create("collie.fl1", 0x02000000,
-+                              dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
-+                              64 * KiB, 4, 0x00, 0x00, 0x00, 0x00, 0);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, SA_CS0);
- 
-     dinfo = drive_get(IF_PFLASH, 0, 1);
--    pflash_cfi01_register(SA_CS1, "collie.fl2", 0x02000000,
--                    dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
--                    64 * KiB, 4, 0x00, 0x00, 0x00, 0x00, 0);
-+    dev = pflash_cfi01_create("collie.fl2", 0x02000000,
-+                              dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
-+                              64 * KiB, 4, 0x00, 0x00, 0x00, 0x00, 0);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, SA_CS1);
- 
-     sysbus_create_simple("scoop", 0x40800000, NULL);
- 
-diff --git a/hw/arm/gumstix.c b/hw/arm/gumstix.c
-index 3a4bc332c4..7b80a7d0a4 100644
---- a/hw/arm/gumstix.c
-+++ b/hw/arm/gumstix.c
-@@ -40,6 +40,7 @@
- #include "net/net.h"
- #include "hw/block/flash.h"
- #include "hw/net/smc91c111.h"
-+#include "hw/sysbus.h"
- #include "hw/boards.h"
- #include "exec/address-spaces.h"
- #include "sysemu/qtest.h"
-@@ -51,6 +52,7 @@ static void connex_init(MachineState *machine)
- {
-     PXA2xxState *cpu;
-     DriveInfo *dinfo;
-+    DeviceState *dev;
-     MemoryRegion *address_space_mem = get_system_memory();
- 
-     uint32_t connex_rom = 0x01000000;
-@@ -65,12 +67,14 @@ static void connex_init(MachineState *machine)
-         exit(1);
-     }
- 
--    if (!pflash_cfi01_register(0x00000000, "connext.rom", connex_rom,
--                               dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
--                               sector_len, 2, 0, 0, 0, 0, 0)) {
-+    dev = pflash_cfi01_create("connext.rom", connex_rom,
-+                              dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
-+                              sector_len, 2, 0, 0, 0, 0, 0);
-+    if (!dev) {
-         error_report("Error registering flash memory");
-         exit(1);
-     }
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0x00000000);
- 
-     /* Interrupt line of NIC is connected to GPIO line 36 */
-     smc91c111_init(&nd_table[0], 0x04000300,
-@@ -81,6 +85,7 @@ static void verdex_init(MachineState *machine)
- {
-     PXA2xxState *cpu;
-     DriveInfo *dinfo;
-+    DeviceState *dev;
-     MemoryRegion *address_space_mem = get_system_memory();
- 
-     uint32_t verdex_rom = 0x02000000;
-@@ -95,12 +100,14 @@ static void verdex_init(MachineState *machine)
-         exit(1);
-     }
- 
--    if (!pflash_cfi01_register(0x00000000, "verdex.rom", verdex_rom,
--                               dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
--                               sector_len, 2, 0, 0, 0, 0, 0)) {
-+    dev = pflash_cfi01_create("verdex.rom", verdex_rom,
-+                              dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
-+                              sector_len, 2, 0, 0, 0, 0, 0);
-+    if (!dev) {
-         error_report("Error registering flash memory");
-         exit(1);
-     }
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0x00000000);
- 
-     /* Interrupt line of NIC is connected to GPIO line 99 */
-     smc91c111_init(&nd_table[0], 0x04000300,
-diff --git a/hw/arm/mainstone.c b/hw/arm/mainstone.c
-index 8454b65458..ac34be3709 100644
---- a/hw/arm/mainstone.c
-+++ b/hw/arm/mainstone.c
-@@ -129,15 +129,18 @@ static void mainstone_common_init(MemoryRegion *address_space_mem,
- 
-     /* There are two 32MiB flash devices on the board */
-     for (i = 0; i < 2; i ++) {
-+        DeviceState *dev;
-+
-         dinfo = drive_get(IF_PFLASH, 0, i);
--        if (!pflash_cfi01_register(mainstone_flash_base[i],
--                                   i ? "mainstone.flash1" : "mainstone.flash0",
--                                   MAINSTONE_FLASH,
--                                   dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
--                                   sector_len, 4, 0, 0, 0, 0, 0)) {
-+        dev = pflash_cfi01_create(i ? "mainstone.flash1" : "mainstone.flash0",
-+                                  MAINSTONE_FLASH,
-+                                  dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
-+                                  sector_len, 4, 0, 0, 0, 0, 0);
-+        if (!dev) {
-             error_report("Error registering flash memory");
-             exit(1);
-         }
-+        sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, mainstone_flash_base[i]);
-     }
- 
-     mst_irq = sysbus_create_simple("mainstone-fpga", MST_FPGA_PHYS,
-diff --git a/hw/arm/omap_sx1.c b/hw/arm/omap_sx1.c
-index 57829b3744..718e50c062 100644
---- a/hw/arm/omap_sx1.c
-+++ b/hw/arm/omap_sx1.c
-@@ -30,6 +30,7 @@
- #include "ui/console.h"
- #include "hw/arm/omap.h"
- #include "hw/boards.h"
-+#include "hw/sysbus.h"
- #include "hw/arm/boot.h"
- #include "hw/block/flash.h"
- #include "sysemu/qtest.h"
-@@ -114,6 +115,7 @@ static void sx1_init(MachineState *machine, const int version)
-     DriveInfo *dinfo;
-     int fl_idx;
-     uint32_t flash_size = flash0_size;
-+    DeviceState *dev;
- 
-     if (machine->ram_size != mc->default_ram_size) {
-         char *sz = size_to_str(mc->default_ram_size);
-@@ -153,10 +155,12 @@ static void sx1_init(MachineState *machine, const int version)
- 
-     fl_idx = 0;
-     if ((dinfo = drive_get(IF_PFLASH, 0, fl_idx)) != NULL) {
--        if (!pflash_cfi01_register(OMAP_CS0_BASE,
--                                   "omap_sx1.flash0-1", flash_size,
--                                   blk_by_legacy_dinfo(dinfo),
--                                   sector_size, 4, 0, 0, 0, 0, 0)) {
-+        dev = pflash_cfi01_create("omap_sx1.flash0-1", flash_size,
-+                                  blk_by_legacy_dinfo(dinfo),
-+                                  sector_size, 4, 0, 0, 0, 0, 0);
-+        if (dev) {
-+            sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, OMAP_CS0_BASE);
-+        } else {
-             fprintf(stderr, "qemu: Error registering flash memory %d.\n",
-                            fl_idx);
-         }
-@@ -175,10 +179,12 @@ static void sx1_init(MachineState *machine, const int version)
-         memory_region_add_subregion(address_space,
-                                 OMAP_CS1_BASE + flash1_size, &cs[1]);
- 
--        if (!pflash_cfi01_register(OMAP_CS1_BASE,
--                                   "omap_sx1.flash1-1", flash1_size,
--                                   blk_by_legacy_dinfo(dinfo),
--                                   sector_size, 4, 0, 0, 0, 0, 0)) {
-+        dev = pflash_cfi01_create("omap_sx1.flash1-1", flash1_size,
-+                                  blk_by_legacy_dinfo(dinfo),
-+                                  sector_size, 4, 0, 0, 0, 0, 0);
-+        if (dev) {
-+            sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, OMAP_CS1_BASE);
-+        } else {
-             fprintf(stderr, "qemu: Error registering flash memory %d.\n",
-                            fl_idx);
-         }
-diff --git a/hw/arm/versatilepb.c b/hw/arm/versatilepb.c
-index ecc1f6cf74..c5c7cf6dde 100644
---- a/hw/arm/versatilepb.c
-+++ b/hw/arm/versatilepb.c
-@@ -385,11 +385,14 @@ static void versatile_init(MachineState *machine, int board_id)
-     /* 0x34000000 NOR Flash */
- 
-     dinfo = drive_get(IF_PFLASH, 0, 0);
--    if (!pflash_cfi01_register(VERSATILE_FLASH_ADDR, "versatile.flash",
--                          VERSATILE_FLASH_SIZE,
+     /* 5th parameter 2 means bank-width
+      * 10th paremeter 0 means little-endian */
+-    pflash_cfi01_register(FLASH_BASEADDR, "petalogix_ml605.flash", FLASH_SIZE,
 -                          dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
--                          VERSATILE_FLASH_SECT_SIZE,
--                          4, 0x0089, 0x0018, 0x0000, 0x0, 0)) {
-+    dev = pflash_cfi01_create("versatile.flash",
-+                              VERSATILE_FLASH_SIZE,
+-                          64 * KiB, 2, 0x89, 0x18, 0x0000, 0x0, 0);
+-
++    dev = pflash_cfi01_create("petalogix_ml605.flash", FLASH_SIZE,
 +                              dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
-+                              VERSATILE_FLASH_SECT_SIZE,
-+                              4, 0x0089, 0x0018, 0x0000, 0x0, 0);
-+    if (dev) {
-+        sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, VERSATILE_FLASH_ADDR);
-+    } else {
-         fprintf(stderr, "qemu: Error registering flash memory.\n");
-     }
++                              64 * KiB, 2, 0x89, 0x18, 0x0000, 0x0, 0);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, FLASH_BASEADDR);
  
-diff --git a/hw/arm/z2.c b/hw/arm/z2.c
-index 9c1e876207..d28d75aa0f 100644
---- a/hw/arm/z2.c
-+++ b/hw/arm/z2.c
-@@ -18,6 +18,7 @@
- #include "hw/irq.h"
- #include "hw/ssi/ssi.h"
- #include "migration/vmstate.h"
-+#include "hw/sysbus.h"
- #include "hw/boards.h"
- #include "hw/block/flash.h"
- #include "ui/console.h"
-@@ -306,17 +307,20 @@ static void z2_init(MachineState *machine)
-     void *z2_lcd;
-     I2CBus *bus;
-     DeviceState *wm;
-+    DeviceState *dev;
- 
-     /* Setup CPU & memory */
-     mpu = pxa270_init(address_space_mem, z2_binfo.ram_size, machine->cpu_type);
+     dev = qdev_new("xlnx.xps-intc");
+     qdev_prop_set_uint32(dev, "kind-of-intr", 1 << TIMER_IRQ);
+diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/petalogix_s3adsp1800_mmu.c
+index 9d959d1ad8..426ff1de93 100644
+--- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
++++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
+@@ -84,10 +84,10 @@ petalogix_s3adsp1800_init(MachineState *machine)
+     memory_region_add_subregion(sysmem, ddr_base, phys_ram);
  
      dinfo = drive_get(IF_PFLASH, 0, 0);
--    if (!pflash_cfi01_register(Z2_FLASH_BASE, "z2.flash0", Z2_FLASH_SIZE,
--                               dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
--                               sector_len, 4, 0, 0, 0, 0, 0)) {
-+    dev = pflash_cfi01_create("z2.flash0", Z2_FLASH_SIZE,
+-    pflash_cfi01_register(FLASH_BASEADDR,
+-                          "petalogix_s3adsp1800.flash", FLASH_SIZE,
+-                          dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
+-                          64 * KiB, 1, 0x89, 0x18, 0x0000, 0x0, 1);
++    dev = pflash_cfi01_create("petalogix_s3adsp1800.flash", FLASH_SIZE,
 +                              dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
-+                              sector_len, 4, 0, 0, 0, 0, 0);
-+    if (!dev) {
-         error_report("Error registering flash memory");
-         exit(1);
-     }
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, Z2_FLASH_BASE);
++                              64 * KiB, 1, 0x89, 0x18, 0x0000, 0x0, 1);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, FLASH_BASEADDR);
  
-     /* setup keypad */
-     pxa27x_register_keypad(mpu->kp, map, 0x100);
+     dev = qdev_new("xlnx.xps-intc");
+     qdev_prop_set_uint32(dev, "kind-of-intr",
 -- 
 2.38.1
 
