@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pDBvd-0002PR-J5
+	id 1pDBvd-0002QK-Qj
 	for mharc-qemu-riscv@gnu.org; Wed, 04 Jan 2023 17:08:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBut-00023r-D7
- for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:07:31 -0500
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBvC-0002B0-Nf
+ for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:07:42 -0500
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBuq-0000Gj-O6
- for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:07:22 -0500
-Received: by mail-ed1-x535.google.com with SMTP id z11so34711988ede.1
- for <qemu-riscv@nongnu.org>; Wed, 04 Jan 2023 14:07:20 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBv9-0000Le-Kd
+ for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:07:42 -0500
+Received: by mail-ej1-x635.google.com with SMTP id qk9so85788917ejc.3
+ for <qemu-riscv@nongnu.org>; Wed, 04 Jan 2023 14:07:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HGtrWT3unMzGntIEiVbM1rKZ5m/rzhrczSjLQVOtSwU=;
- b=L8VYetCIidIpU/fp3MEWcHl7I1novORjIpl4CrXZ6tYviaBK4F95OwPJUnovX7s/cQ
- PM4jjnE9ZgBPJX0E0Hjhaunoldy74xxEVGsqlinc210RI/Q/TRS3rl43oe/c1L7b4uAF
- CNUpji0DFrN9eZewo1tHOzGlPfeDGnjjFQBo63HRb/9LZlcaSBQ/+6mjAEaW7LQDKhKO
- lmFDFvmb6sSYfed4mPCgvue5s0dcbDShs1RUbw7W1qxMWXvHIDqW6sY8h3pGdGe9ISGq
- 2ll1WEDup5OxmQgbwOmDyY6Fab00CS1tgtosPIkNsTuotUv22SQJDKxsUG6A3zzqcMT5
- m0yA==
+ bh=1aa33f3a7n9BSTQqA7U/LbCvTvRWLOt7Nts6p8HXsEU=;
+ b=HF8qRByTAVk8VS2Xa8Bogk8aJuJWs1R6Jucp9qhx2tprzLDSWbbvnoJYLiy9Oz3x7E
+ qdkFnt5GpbXnBAAQvXgn/Ydp0wxSxRK8V0vfeGZtXQoWyrDqlEHRQpfKv3uGm69LEhMF
+ uEIh95xePAgB91KA5Jc3djKwW4tGt068OiKwrxJIBG2PfdtYsLrbhUdJCVIDlztQz9/m
+ 8u7ZC9EBr5AQYvvYsAhmhORW87fYg9g+HPLbkHIhlO2adM3HgvU1gqhyEwMqLM0jG+Xr
+ XYR+ijDKJVJMDF5sC0HZHQzTVGetnjIvIoZBSXWgP3aUBZ5LgoYLmzGt4C9Y3lL7bQXO
+ YUYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HGtrWT3unMzGntIEiVbM1rKZ5m/rzhrczSjLQVOtSwU=;
- b=Bmd+RHrjkBb73QWic2+ZNmn2i3SXdWCyJqyGejEGBjvPAzWbuzZd/DGibX/1cQVT83
- 1PMPAPquTgP7YI1PG3Iv3KPmlSh9araStgVTR1o8vNz0V5QeeiAPyEhXbzb8ekE3ikiO
- 3XmtoIIFEYzk8hNnNmo+Kjljv7nTr8QKuaD0wfWUwRJiE+6ZQ5vb/ef3t6oE1hYN21aj
- OT3/nOVwpUjvr6ElegI5+lOQ8WkmuQhsGZR2ssj1CUZLYQMsO2M2j+vP71Z0y4auNpVf
- gfWOLU51X8NxLok4R35YDvnSx+IgmjRZ6rUIPLHoO8JLIr6JOZhi/Pl44akNgRUVCw/K
- HNcQ==
-X-Gm-Message-State: AFqh2kp/ocCE4wPtbEcuaFrX1YoB4GFDLBStMQRXF/aHfoX4jPjY6zFH
- /BE96xhYgJ/fZuuLgKGQTVq/7w==
-X-Google-Smtp-Source: AMrXdXvFa31/5RG9b1OrjE3ODUivWLjwdIoMhA4EZhRaFx35WdWBe2cxRCU0pDK1KTxcxs3aWcIxPQ==
-X-Received: by 2002:a05:6402:2488:b0:46b:34a:3945 with SMTP id
- q8-20020a056402248800b0046b034a3945mr50941348eda.31.1672870039232; 
- Wed, 04 Jan 2023 14:07:19 -0800 (PST)
+ bh=1aa33f3a7n9BSTQqA7U/LbCvTvRWLOt7Nts6p8HXsEU=;
+ b=OIrgEGNJosWqpm+7r66/QgvIiIK7ks1VEnYmh2dY2NbRJS077EzOIRBJ9V761tkeBp
+ CnsSUdCc5mJKF2ussSdXbg07GY8gjMWNgkiWDsDL0aAZ4gqN3gsrp4Oajmpz1l6wUvMq
+ 0UwV/Y1iDYSohJDS/Ra9srEb558mzaTk/0DENtaZRZ4ZZnS3In68Ccql2Goc9miOsWHv
+ o9Bh6rErRscK1R/0WZR/Ay/D9if+Xg73xh0ZUz9FEG5F0pgE7Gl1aUL1ueoUC/Q/5k0H
+ D7dV5KN7gPaVTpyjo8GqAikhV/4cwTte4065FTv23KsM9o1nokdSN7auwH0jIFrjfqgB
+ M+rQ==
+X-Gm-Message-State: AFqh2koru1awtj6v+qGbcWPLUdQL/2Z/CWMd7A1TxJKo7iQyHdpiIZhM
+ /ea6BZ937O0+rS2XiiNMg8+qoA==
+X-Google-Smtp-Source: AMrXdXuggiq8Uz7L/duNqOAgZ/VTLKuh0RN8DCz6J5ifs76v3BLgG/8TypnZIqcASxUNSc1bdjge/Q==
+X-Received: by 2002:a17:907:8b98:b0:840:a6a3:41c7 with SMTP id
+ tb24-20020a1709078b9800b00840a6a341c7mr44366000ejc.50.1672870057438; 
+ Wed, 04 Jan 2023 14:07:37 -0800 (PST)
 Received: from localhost.localdomain ([185.126.107.38])
  by smtp.gmail.com with ESMTPSA id
- fj12-20020a0564022b8c00b004722d7e8c7csm15042914edb.14.2023.01.04.14.07.14
+ f11-20020a17090631cb00b0084c465709b7sm12959809ejf.74.2023.01.04.14.07.32
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 04 Jan 2023 14:07:18 -0800 (PST)
+ Wed, 04 Jan 2023 14:07:37 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Song Gao <gaosong@loongson.cn>, Antony Pavlov <antonynpavlov@gmail.com>,
@@ -69,17 +69,17 @@ Cc: Song Gao <gaosong@loongson.cn>, Antony Pavlov <antonynpavlov@gmail.com>,
  qemu-riscv@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Alistair Francis <alistair@alistair23.me>, qemu-arm@nongnu.org,
  Leif Lindholm <quic_llindhol@quicinc.com>, Kevin Wolf <kwolf@redhat.com>
-Subject: [PATCH 17/20] hw/arm: Open-code pflash_cfi02_register()
-Date: Wed,  4 Jan 2023 23:04:46 +0100
-Message-Id: <20230104220449.41337-18-philmd@linaro.org>
+Subject: [PATCH 19/20] hw/block: Remove unused pflash_cfi02_register()
+Date: Wed,  4 Jan 2023 23:04:48 +0100
+Message-Id: <20230104220449.41337-20-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230104220449.41337-1-philmd@linaro.org>
 References: <20230104220449.41337-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x535.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,93 +99,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2023 22:07:33 -0000
+X-List-Received-Date: Wed, 04 Jan 2023 22:07:43 -0000
 
-pflash_cfi02_register() hides an implicit sysbus mapping of
-MMIO region #0. This is not practical in a heterogeneous world
-where multiple cores use different address spaces. In order to
-remove to remove pflash_cfi02_register() from the pflash API,
-open-code it as a qdev creation call followed by an explicit
-sysbus mapping.
+We converted all caller of pflash_cfi02_register() by open
+coding a call to pflash_cfi02_create() followed by an explicit
+call to sysbus_mmio_map(); we can now remove it.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/arm/digic_boards.c | 14 ++++++++------
- hw/arm/musicpal.c     | 13 +++++++------
- hw/arm/xilinx_zynq.c  | 10 +++++-----
- 3 files changed, 20 insertions(+), 17 deletions(-)
+ hw/block/pflash_cfi02.c  | 22 ----------------------
+ include/hw/block/flash.h | 12 ------------
+ 2 files changed, 34 deletions(-)
 
-diff --git a/hw/arm/digic_boards.c b/hw/arm/digic_boards.c
-index 4093af09cb..98b0002d16 100644
---- a/hw/arm/digic_boards.c
-+++ b/hw/arm/digic_boards.c
-@@ -115,13 +115,15 @@ static void digic4_add_k8p3215uqb_rom(DigicState *s, hwaddr addr,
- {
- #define FLASH_K8P3215UQB_SIZE (4 * 1024 * 1024)
- #define FLASH_K8P3215UQB_SECTOR_SIZE (64 * 1024)
-+    DeviceState *dev;
+diff --git a/hw/block/pflash_cfi02.c b/hw/block/pflash_cfi02.c
+index 176f93b512..a9dcabdeb2 100644
+--- a/hw/block/pflash_cfi02.c
++++ b/hw/block/pflash_cfi02.c
+@@ -1024,25 +1024,3 @@ DeviceState *pflash_cfi02_create(const char *name, hwaddr size,
  
--    pflash_cfi02_register(addr, "pflash", FLASH_K8P3215UQB_SIZE,
--                          NULL, FLASH_K8P3215UQB_SECTOR_SIZE,
--                          DIGIC4_ROM_MAX_SIZE / FLASH_K8P3215UQB_SIZE,
--                          4,
--                          0x00EC, 0x007E, 0x0003, 0x0001,
--                          0x0555, 0x2aa, 0);
-+    dev = pflash_cfi02_create("pflash", FLASH_K8P3215UQB_SIZE,
-+                              NULL, FLASH_K8P3215UQB_SECTOR_SIZE,
-+                              DIGIC4_ROM_MAX_SIZE / FLASH_K8P3215UQB_SIZE,
-+                              4,
-+                              0x00EC, 0x007E, 0x0003, 0x0001,
-+                              0x0555, 0x2aa, 0);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
- 
-     digic_load_rom(s, addr, FLASH_K8P3215UQB_SIZE, filename);
+     return dev;
  }
-diff --git a/hw/arm/musicpal.c b/hw/arm/musicpal.c
-index b65c020115..9f75d69b7f 100644
---- a/hw/arm/musicpal.c
-+++ b/hw/arm/musicpal.c
-@@ -1275,12 +1275,13 @@ static void musicpal_init(MachineState *machine)
-          * 0xFF800000 (if there is 8 MB flash). So remap flash access if the
-          * image is smaller than 32 MB.
-          */
--        pflash_cfi02_register(0x100000000ULL - MP_FLASH_SIZE_MAX,
--                              "musicpal.flash", flash_size,
--                              blk, 0x10000,
--                              MP_FLASH_SIZE_MAX / flash_size,
--                              2, 0x00BF, 0x236D, 0x0000, 0x0000,
--                              0x5555, 0x2AAA, 0);
-+        dev = pflash_cfi02_create("musicpal.flash", flash_size,
-+                                  blk, 0x10000,
-+                                  MP_FLASH_SIZE_MAX / flash_size,
-+                                  2, 0x00BF, 0x236D, 0x0000, 0x0000,
-+                                  0x5555, 0x2AAA, 0);
-+        sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0,
-+                        0x100000000ULL - MP_FLASH_SIZE_MAX);
-     }
-     sysbus_create_simple(TYPE_MV88W8618_FLASHCFG, MP_FLASHCFG_BASE, NULL);
+-
+-PFlashCFI02 *pflash_cfi02_register(hwaddr base,
+-                                   const char *name,
+-                                   hwaddr size,
+-                                   BlockBackend *blk,
+-                                   uint32_t sector_len,
+-                                   int nb_mappings, int width,
+-                                   uint16_t id0, uint16_t id1,
+-                                   uint16_t id2, uint16_t id3,
+-                                   uint16_t unlock_addr0,
+-                                   uint16_t unlock_addr1,
+-                                   int be)
+-{
+-    DeviceState *dev;
+-
+-    dev = pflash_cfi02_create(name, size, blk, sector_len,
+-                              nb_mappings, width, id0, id1, id2, id3,
+-                              unlock_addr0, unlock_addr1, be);
+-    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, base);
+-
+-    return PFLASH_CFI02(dev);
+-}
+diff --git a/include/hw/block/flash.h b/include/hw/block/flash.h
+index 78b078955e..64ee40c561 100644
+--- a/include/hw/block/flash.h
++++ b/include/hw/block/flash.h
+@@ -45,18 +45,6 @@ DeviceState *pflash_cfi02_create(const char *name, hwaddr size,
+                                  uint16_t id2, uint16_t id3,
+                                  uint16_t unlock_addr0, uint16_t unlock_addr1,
+                                  int be);
+-PFlashCFI02 *pflash_cfi02_register(hwaddr base,
+-                                   const char *name,
+-                                   hwaddr size,
+-                                   BlockBackend *blk,
+-                                   uint32_t sector_len,
+-                                   int nb_mappings,
+-                                   int width,
+-                                   uint16_t id0, uint16_t id1,
+-                                   uint16_t id2, uint16_t id3,
+-                                   uint16_t unlock_addr0,
+-                                   uint16_t unlock_addr1,
+-                                   int be);
  
-diff --git a/hw/arm/xilinx_zynq.c b/hw/arm/xilinx_zynq.c
-index 3190cc0b8d..e55aff5532 100644
---- a/hw/arm/xilinx_zynq.c
-+++ b/hw/arm/xilinx_zynq.c
-@@ -218,11 +218,11 @@ static void zynq_init(MachineState *machine)
-     DriveInfo *dinfo = drive_get(IF_PFLASH, 0, 0);
- 
-     /* AMD */
--    pflash_cfi02_register(0xe2000000, "zynq.pflash", FLASH_SIZE,
--                          dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
--                          FLASH_SECTOR_SIZE, 1,
--                          1, 0x0066, 0x0022, 0x0000, 0x0000, 0x0555, 0x2aa,
--                          0);
-+    dev = pflash_cfi02_create("zynq.pflash", FLASH_SIZE,
-+                              dinfo ? blk_by_legacy_dinfo(dinfo) : NULL,
-+                              FLASH_SECTOR_SIZE, 1, 1,
-+                              0x0066, 0x0022, 0x0000, 0x0000, 0x0555, 0x2aa, 0);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, 0xe2000000);
- 
-     /* Create the main clock source, and feed slcr with it */
-     zynq_machine->ps_clk = CLOCK(object_new(TYPE_CLOCK));
+ /* nand.c */
+ DeviceState *nand_init(BlockBackend *blk, int manf_id, int chip_id);
 -- 
 2.38.1
 
