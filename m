@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pDBtE-0000Na-LG
-	for mharc-qemu-riscv@gnu.org; Wed, 04 Jan 2023 17:05:40 -0500
+	id 1pDBtO-0000eC-8s
+	for mharc-qemu-riscv@gnu.org; Wed, 04 Jan 2023 17:05:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBtC-0000HA-Fb
- for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:05:38 -0500
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBtL-0000cK-Sh
+ for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:05:47 -0500
+Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBtA-0005Bu-MM
- for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:05:38 -0500
-Received: by mail-ej1-x636.google.com with SMTP id x22so85912636ejs.11
- for <qemu-riscv@nongnu.org>; Wed, 04 Jan 2023 14:05:36 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDBtJ-0004zY-8m
+ for qemu-riscv@nongnu.org; Wed, 04 Jan 2023 17:05:47 -0500
+Received: by mail-ej1-x630.google.com with SMTP id t17so85835764eju.1
+ for <qemu-riscv@nongnu.org>; Wed, 04 Jan 2023 14:05:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4Yfck/dkEQ1qiQRqZ2doov1ZobzOuy108Vmk2yEOlvU=;
- b=a2p5k6oBfHIIcb9Uw1m2zAqimXZm+gdGar5jbK8cQ26Amd7fVl7cxi0GM0EIfzCWnd
- 2AGsY7wwodH2MSr4W0+FfmwTZmKjU3yfjK6bcczpgCG3Pyp99DRqAT7xiZKIy6wsdhNJ
- nQ23jF+yj00wW66C/4odJ9g8tq8mySZ/lY0Hxxb+vNkz21NA7pCuwoYFqWfygeyRrpec
- WDCntx851w9pjiA1kKdSmZZFd6M/1VXeUafv7g6C7sTQAePzQ4jbukY5tAOy9Ptdadz7
- S6xvuwTIosDwQp9hdJip2cOj4nGKOKLZqCDH0xsW/QiDCxvWJeNvU+svZhCVs2gXZUeb
- y9+A==
+ bh=ostFdFduA8VJQbdYun/a8v7V9oLZ2nQ4qLyqomH/nUo=;
+ b=cZ1cbmjQ9ajzsj/qRRfezodu3WDXPkdUOzcyfLhMAGZk/ZZsnQX8L58azDOnW26nY2
+ d77GDNdgpJpNRgzpyqOvYsPjXCT9i/J5aoH5EdSbqseARnUzFrWVm2GA9VYtWyislI8P
+ +d9MHiwMsAtUNES2ptR/KpU1jEI7ykv/SxgED3znEp8cuE4lbh+0NIqCIlRqN6hOsVHc
+ NBUKvTYJgFphynebyrrdNuPY2rAx1ixETvE84bufagH96rg/QteKoQNu25PnT8ao0Itk
+ iFYhlmoXrwxKIGXX0gElKp+LoXToMt7F4Ms+lSflR+x3iy+PLgU/r1payraLhASTbpaN
+ rtxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4Yfck/dkEQ1qiQRqZ2doov1ZobzOuy108Vmk2yEOlvU=;
- b=jurENwDm2b9qgJC18FstGE57vzA7DqZXwVG6NaUzEhH3xc5ymsU7BVWyRfTU319Vfx
- sj2v35RIQfsALfxLjM4fvNUlrzg2C1jV60vJRbsRxn1mLPNfOBOF5UohFP4dMWWzc4Fr
- rLyaCwf1PPjyJ/Jwc9YsnfTN9iDT7/RDR3EZJAg0ydkpl8s7MzL3zVx1bP8SLyXN0ss5
- FantT1EAwiPDEmHj0VJYWUj8XqEF3alXPT5fHCDow9PIMLzzJs6Nalhh9kmnol/qye9b
- N5i9WEAhryl9WrdpO02s3W4lponT+TmaQaBztl3yiU1cZJXjAD4gGhsKnYYHvFcBY9wl
- hS/A==
-X-Gm-Message-State: AFqh2kr6LWD6PxRIXtmknUleh6/6oKpsFDc05r188bZWBlaIHwcH8Wfp
- Xnd71GhUPMlJe2Vw3x6CzN/OSg==
-X-Google-Smtp-Source: AMrXdXuJhY2ilLZ7JEub0KMh8iCKA1cr7XDA14f+0MQOeAydGCbmE7lmqRfA2T3Z73IqwVT5+socjw==
-X-Received: by 2002:a17:907:76cc:b0:842:cd68:4943 with SMTP id
- kf12-20020a17090776cc00b00842cd684943mr43315948ejc.11.1672869935936; 
- Wed, 04 Jan 2023 14:05:35 -0800 (PST)
+ bh=ostFdFduA8VJQbdYun/a8v7V9oLZ2nQ4qLyqomH/nUo=;
+ b=Y7f+FYTPB/5ANIzuW0vX/YOibJRmGrSlxAQq+QCId+36t9nZhsjk+kdgm+JQN8u33q
+ uYjPP8ammIbXUpQcmTECqtm6ouMDDUSm6fAZbg0qLRhHus991IL1yBYQKLB6oCvwqJoO
+ 1hyRjazF3zohzXWXQwI9yXf8LfMrLyZswZRkmpSTO6np+TqcIXyEWkzmOKubPnxUDxCV
+ 5DoYCFjhWa6Qgwke3o9abCCLObdOxC3ZOIy0cLdgPc5pHYAAEdghmgaM1TIADRZ4BdOT
+ S4652apNYgPMRQZBvTFkOZu/WAMVO8zt5wuG+t5+gvlk0BuBlUbTzMsXe9UyykwbK6+H
+ gNDw==
+X-Gm-Message-State: AFqh2krwTre06oKrzH/dNpKnnk5MBRYvchOyO5vn2X+CbrjFz8YbKamj
+ dL36a6o4EO6EP423iZveWszt2w==
+X-Google-Smtp-Source: AMrXdXtP0Ui0b2hBx7NHtBze8v+zdSqTXs6aUE7faqv0xwYoEZhCWQ/aBwDwRmY3x3v8mwVBFvbpLA==
+X-Received: by 2002:a17:906:5012:b0:7c1:2e19:ba3f with SMTP id
+ s18-20020a170906501200b007c12e19ba3fmr47063708ejj.57.1672869944488; 
+ Wed, 04 Jan 2023 14:05:44 -0800 (PST)
 Received: from localhost.localdomain ([185.126.107.38])
  by smtp.gmail.com with ESMTPSA id
- ue3-20020a170907c68300b0084c7f96d023sm9207905ejc.147.2023.01.04.14.05.32
+ b10-20020a1709063caa00b007bd28b50305sm15541696ejh.200.2023.01.04.14.05.40
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 04 Jan 2023 14:05:35 -0800 (PST)
+ Wed, 04 Jan 2023 14:05:44 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Song Gao <gaosong@loongson.cn>, Antony Pavlov <antonynpavlov@gmail.com>,
@@ -69,18 +69,17 @@ Cc: Song Gao <gaosong@loongson.cn>, Antony Pavlov <antonynpavlov@gmail.com>,
  qemu-riscv@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Alistair Francis <alistair@alistair23.me>, qemu-arm@nongnu.org,
  Leif Lindholm <quic_llindhol@quicinc.com>, Kevin Wolf <kwolf@redhat.com>
-Subject: [PATCH 05/20] hw/loongarch: Use generic DeviceState instead of
- PFlashCFI01
-Date: Wed,  4 Jan 2023 23:04:34 +0100
-Message-Id: <20230104220449.41337-6-philmd@linaro.org>
+Subject: [PATCH 06/20] hw/riscv: Use generic DeviceState instead of PFlashCFI01
+Date: Wed,  4 Jan 2023 23:04:35 +0100
+Message-Id: <20230104220449.41337-7-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230104220449.41337-1-philmd@linaro.org>
 References: <20230104220449.41337-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::636;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x636.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::630;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,77 +99,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2023 22:05:38 -0000
+X-List-Received-Date: Wed, 04 Jan 2023 22:05:48 -0000
 
 Nothing here requires access to PFlashCFI01 internal fields:
 use the inherited generic DeviceState.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/loongarch/virt.c         | 9 ++++-----
- include/hw/loongarch/virt.h | 3 +--
- 2 files changed, 5 insertions(+), 7 deletions(-)
+ hw/riscv/virt.c         | 9 +++++----
+ include/hw/riscv/virt.h | 3 +--
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index c8a495ea30..cd5aa26f49 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -45,7 +45,7 @@
- #include "sysemu/block-backend.h"
- #include "hw/block/flash.h"
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 400bd9329f..b421a9dc12 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -46,6 +46,7 @@
+ #include "sysemu/sysemu.h"
+ #include "sysemu/kvm.h"
+ #include "sysemu/tpm.h"
++#include "hw/block/flash.h"
+ #include "hw/pci/pci.h"
+ #include "hw/pci-host/gpex.h"
+ #include "hw/display/ramfb.h"
+@@ -106,7 +107,7 @@ static MemMapEntry virt_high_pcie_memmap;
  
--static void virt_flash_create(LoongArchMachineState *lams)
-+static DeviceState *virt_flash_create(LoongArchMachineState *lams)
+ #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
+ 
+-static PFlashCFI01 *virt_flash_create1(RISCVVirtState *s,
++static DeviceState *virt_flash_create1(RISCVVirtState *s,
+                                        const char *name,
+                                        const char *alias_prop_name)
  {
-     DeviceState *dev = qdev_new(TYPE_PFLASH_CFI01);
- 
-@@ -62,14 +62,13 @@ static void virt_flash_create(LoongArchMachineState *lams)
-     object_property_add_alias(OBJECT(lams), "pflash",
+@@ -130,7 +131,7 @@ static PFlashCFI01 *virt_flash_create1(RISCVVirtState *s,
+     object_property_add_alias(OBJECT(s), alias_prop_name,
                                OBJECT(dev), "drive");
  
--    lams->flash = PFLASH_CFI01(dev);
+-    return PFLASH_CFI01(dev);
 +    return dev;
  }
  
- static void virt_flash_map(LoongArchMachineState *lams,
-                            MemoryRegion *sysmem)
- {
--    PFlashCFI01 *flash = lams->flash;
--    DeviceState *dev = DEVICE(flash);
-+    DeviceState *dev = lams->flash;
-     hwaddr base = VIRT_FLASH_BASE;
-     hwaddr size = VIRT_FLASH_SIZE;
- 
-@@ -899,7 +898,7 @@ static void loongarch_machine_initfn(Object *obj)
-     lams->acpi = ON_OFF_AUTO_AUTO;
-     lams->oem_id = g_strndup(ACPI_BUILD_APPNAME6, 6);
-     lams->oem_table_id = g_strndup(ACPI_BUILD_APPNAME8, 8);
--    virt_flash_create(lams);
-+    lams->flash = virt_flash_create(lams);
+ static void virt_flash_create(RISCVVirtState *s)
+@@ -139,7 +140,7 @@ static void virt_flash_create(RISCVVirtState *s)
+     s->flash[1] = virt_flash_create1(s, "virt.flash1", "pflash1");
  }
  
- static bool memhp_type_supported(DeviceState *dev)
-diff --git a/include/hw/loongarch/virt.h b/include/hw/loongarch/virt.h
-index f5f818894e..519b25c722 100644
---- a/include/hw/loongarch/virt.h
-+++ b/include/hw/loongarch/virt.h
-@@ -12,7 +12,6 @@
- #include "hw/boards.h"
- #include "qemu/queue.h"
- #include "hw/intc/loongarch_ipi.h"
+-static void virt_flash_map1(PFlashCFI01 *flash,
++static void virt_flash_map1(DeviceState *flash,
+                             hwaddr base, hwaddr size,
+                             MemoryRegion *sysmem)
+ {
+@@ -1517,7 +1518,7 @@ static void virt_machine_init(MachineState *machine)
+ 
+     for (i = 0; i < ARRAY_SIZE(s->flash); i++) {
+         /* Map legacy -drive if=pflash to machine properties */
+-        pflash_cfi01_legacy_drive(DEVICE(s->flash[i]),
++        pflash_cfi01_legacy_drive(s->flash[i],
+                                   drive_get(IF_PFLASH, 0, i));
+     }
+     virt_flash_map(s, system_memory);
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index be4ab8fe7f..b700a46763 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -21,7 +21,6 @@
+ 
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/sysbus.h"
 -#include "hw/block/flash.h"
+ #include "qom/object.h"
  
- #define LOONGARCH_MAX_VCPUS     4
- 
-@@ -52,7 +51,7 @@ struct LoongArchMachineState {
-     int          fdt_size;
+ #define VIRT_CPUS_MAX_BITS             9
+@@ -49,7 +48,7 @@ struct RISCVVirtState {
      DeviceState *platform_bus_dev;
-     PCIBus       *pci_bus;
--    PFlashCFI01  *flash;
-+    DeviceState  *flash;
- };
+     RISCVHartArrayState soc[VIRT_SOCKETS_MAX];
+     DeviceState *irqchip[VIRT_SOCKETS_MAX];
+-    PFlashCFI01 *flash[2];
++    DeviceState *flash[2];
+     FWCfgState *fw_cfg;
  
- #define TYPE_LOONGARCH_MACHINE  MACHINE_TYPE_NAME("virt")
+     int fdt_size;
 -- 
 2.38.1
 
