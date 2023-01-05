@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pDU2n-0005cn-Jq
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Jan 2023 12:28:45 -0500
+	id 1pDU4u-0000qF-MG
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Jan 2023 12:30:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDU2k-0005PC-97
- for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 12:28:42 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDU4t-0000l8-ER
+ for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 12:30:55 -0500
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDU2i-00017s-K1
- for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 12:28:41 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id ja17so28540125wmb.3
- for <qemu-riscv@nongnu.org>; Thu, 05 Jan 2023 09:28:40 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDU4q-0001zH-BU
+ for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 12:30:55 -0500
+Received: by mail-wm1-x329.google.com with SMTP id l26so26954169wme.5
+ for <qemu-riscv@nongnu.org>; Thu, 05 Jan 2023 09:30:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=xLc3h8yqPnvvcE3JzSjb8mPuQCKVOGDC88RCNMEdEBI=;
- b=KwSIzupnOaRjU7pDIFTrJ/Gs8FzxZk9o6Ayv+7BqF+1P7MKPtPAaTjFNO+O7KncIRt
- wpSiNyWy5ibCAdKlsoxsvUsuocAhA1Ilz4m+xGOpeMNNw08vhqNjj5CN7GdyEb03PE5F
- tfZHnRGb/F6JGUuO1yo45zPTrcR2vRsa/T7+h7O+aWvqgCsTjPR/BP/T+mHO+mbIyJeG
- I5nxi4zOEeYJZz47k1CHN998L56TY0Ajc1dM68Dg8B9KFF3dh0RY3KaTQEdWKyX0P8IF
- FnAbNVkJxYC65weSWL9xpVKqBxRTg2eM7nkjv/T9WFuQ5eUNrk6xhY+bmQ88SKqjwRPo
- njsw==
+ bh=1XSMKE/5EB1bpbXcBjrkxqRLay8QBqdRXQ4g4OxlKas=;
+ b=IF3iR0QlAzQbtNh5PZvukBynNxG6WmcjaC+y5AYGPVFiffqpNkPNurBB6n+7OUKaMS
+ RhtBuGxJyN0rFlS4EFpLP0ipdciXkBniWFAy9l3/luaNTohi1FyZPtCJ36SAB1BNZ51m
+ sinBBGFINSlLcfemBVSuhwiYPc+KLpC1HpSzeAtqHeHzQWxgOIr45+txY4Jcy6EN9jGH
+ X9UZA2QGtkvAaCtVzLI1vQLr9y7h75+9qSF23NvCVGV+0Gd+2/wgRArQJiHO9BHEjEvk
+ 52NBZVFki1sW+LFiAJuiQj9CUrG0HB9ZDsW/mF4IjbWdTXvbbZqvOxJPGtoFP9v6KYtv
+ SS4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xLc3h8yqPnvvcE3JzSjb8mPuQCKVOGDC88RCNMEdEBI=;
- b=Dwcu0xRiXGBKnjnG0BQChMXlZRbCOrDv09Qj5S/cg1iv3Bl0I/UA7+P3Cdg///SCDN
- wftEOPi9McepcEtQpp3hlJaC3Gwpkn5cG77SHmohRqK8jmiUauQEo7DMe/LL/I7Naxir
- xIf6bOkqGgSLi5YutguqZIRC2HaMMSQ9TLkZUFfMhGScfvpHgSE3eioa6f0xxCiXoQIb
- e9L8+KWIo1ntc/0cMuVNIzOUlMwBuFh0ofxVcDqvb659O7J6egWVzKQaiql4t0idMTM6
- R09u1Edspa+T2/7mxROeSek6w8Uh+Dz462yJVIuwaGxtMv0GRB3ewnqeWdQcaMYnh59Z
- KXEg==
-X-Gm-Message-State: AFqh2kpfS3aS0+lTm5Omb/DkuLek3o8F2jZjdviiTdfMG2W4pfUp5xdr
- us7uyd6NWcc0YbVsHuRsKGr9Eg==
-X-Google-Smtp-Source: AMrXdXsF0Bc9tPrumh0aEI/VQiagz31RjL4K54DzQvbwkaUt8OmYanPtii91U7p06dGyCd8PCxDItg==
-X-Received: by 2002:a05:600c:3b93:b0:3d3:43ae:4d10 with SMTP id
- n19-20020a05600c3b9300b003d343ae4d10mr39659064wms.11.1672939719323; 
- Thu, 05 Jan 2023 09:28:39 -0800 (PST)
+ bh=1XSMKE/5EB1bpbXcBjrkxqRLay8QBqdRXQ4g4OxlKas=;
+ b=y0aODpVjbg1BcFlPy7Ds4imJmwgWz7Zds0+BDQ6iioaxUsJEAwFQAap0NYt6eLpm9v
+ T7yvYRoIYmww2nZ4OSue2PeFvOKSxpQUH4MktuNjVkUbp279/1Hk71lFMui6LiCJ8v46
+ VSZ0gzJtsa9BeKcFz3BL0PElU993ZyWIt2b1Kc+rShi4Zza1ZOV39w9MGSwn8dmxSnZV
+ Yr3GO6MhBldUfInHc6yHb/7Eh1vYNXCDo2G1+Gr6TC98VB8Q8h+OunKrhPRnLl9N6Zrc
+ l3+kKW6X901oGHl0DJPTroI13QZsKiZuCkmUxRHJi0/xem2HazvRrXLxJ1Zw8Ykg7Hsv
+ HV8Q==
+X-Gm-Message-State: AFqh2kr5OWetpaXc6fMbIyD/1YoXPhd/TJZxvtnrkTTpZlqe+PePepb0
+ I8DE4WjVuCtZwQESYY2qTG9Grg==
+X-Google-Smtp-Source: AMrXdXullybworR9QQQLRTJsj7FIQUrHdLLVkmcuoAHB2iNZk9CVkB0nL7sUfBxwS0clQa/mjPWYBg==
+X-Received: by 2002:a05:600c:8a9:b0:3cf:6e85:eda7 with SMTP id
+ l41-20020a05600c08a900b003cf6e85eda7mr37622567wmp.14.1672939850822; 
+ Thu, 05 Jan 2023 09:30:50 -0800 (PST)
 Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- h15-20020a05600c314f00b003d99469ece1sm3410678wmo.24.2023.01.05.09.28.36
+ s35-20020a05600c31a300b003cfa81e2eb4sm2886611wmp.38.2023.01.05.09.30.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Jan 2023 09:28:38 -0800 (PST)
-Message-ID: <7d8fc0af-93ba-c79f-4c53-0cb52db40fa5@linaro.org>
-Date: Thu, 5 Jan 2023 18:28:35 +0100
+ Thu, 05 Jan 2023 09:30:50 -0800 (PST)
+Message-ID: <63479354-031b-add3-72b5-f32719f33f3a@linaro.org>
+Date: Thu, 5 Jan 2023 18:30:47 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.6.1
-Subject: Re: [PATCH v2 18/21] gdbstub: don't use target_ulong while handling
- registers
+Subject: Re: [PATCH v2 19/21] gdbstub: move register helpers into standalone
+ include
 Content-Language: en-US
 To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org, alex.bennee@gmail.com
@@ -82,13 +82,13 @@ Cc: David Hildenbrand <david@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Xiaojuan Yang <yangxiaojuan@loongson.cn>, qemu-arm@nongnu.org
 References: <20230105164320.2164095-1-alex.bennee@linaro.org>
- <20230105164320.2164095-19-alex.bennee@linaro.org>
+ <20230105164320.2164095-20-alex.bennee@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230105164320.2164095-19-alex.bennee@linaro.org>
+In-Reply-To: <20230105164320.2164095-20-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -49
 X-Spam_score: -5.0
 X-Spam_bar: -----
@@ -108,49 +108,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2023 17:28:43 -0000
+X-List-Received-Date: Thu, 05 Jan 2023 17:30:56 -0000
 
 On 5/1/23 17:43, Alex Bennée wrote:
-> This is a hangover from the original code. addr is misleading as it is
-> only a really a register id. While len will never exceed
-
-"a really"?
-
-> MAX_PACKET_LENGTH I've used size_t as that is what strlen returns.
+> These inline helpers are all used by target specific code so move them
+> out of the general header so we don't needlessly pollute the rest of
+> the API with target specific stuff.
+> 
+> Note we have to include cpu.h in semihosting as it was relying on a
+> side effect before.
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   gdbstub/gdbstub.c | 17 ++++++++++-------
->   1 file changed, 10 insertions(+), 7 deletions(-)
-> 
-> diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-> index 4547ca3367..c50c2f8e0f 100644
-> --- a/gdbstub/gdbstub.c
-> +++ b/gdbstub/gdbstub.c
-> @@ -1192,7 +1192,8 @@ static void handle_read_mem(GArray *params, void *user_ctx)
->   
->   static void handle_write_all_regs(GArray *params, void *user_ctx)
->   {
-> -    target_ulong addr, len;
-> +    int reg_id;
+>   include/exec/gdbstub.h                 |  86 ---------------------
+>   include/gdbstub/helpers.h              | 103 +++++++++++++++++++++++++
+>   semihosting/syscalls.c                 |   1 +
+>   target/alpha/gdbstub.c                 |   2 +-
+>   target/arm/gdbstub.c                   |   1 +
+>   target/arm/gdbstub64.c                 |   2 +-
+>   target/arm/helper-a64.c                |   2 +-
+>   target/arm/m_helper.c                  |   2 +-
+>   target/avr/gdbstub.c                   |   2 +-
+>   target/cris/gdbstub.c                  |   2 +-
+>   target/hexagon/gdbstub.c               |   2 +-
+>   target/hppa/gdbstub.c                  |   2 +-
+>   target/i386/gdbstub.c                  |   2 +-
+>   target/i386/whpx/whpx-all.c            |   2 +-
+>   target/loongarch/gdbstub.c             |   1 +
+>   target/m68k/gdbstub.c                  |   2 +-
+>   target/m68k/helper.c                   |   1 +
+>   target/m68k/m68k-semi.c                |   1 +
+>   target/microblaze/gdbstub.c            |   2 +-
+>   target/mips/gdbstub.c                  |   2 +-
+>   target/mips/tcg/sysemu/mips-semi.c     |   1 +
+>   target/nios2/cpu.c                     |   2 +-
+>   target/nios2/nios2-semi.c              |   1 +
+>   target/openrisc/gdbstub.c              |   2 +-
+>   target/openrisc/interrupt.c            |   2 +-
+>   target/openrisc/mmu.c                  |   2 +-
+>   target/ppc/cpu_init.c                  |   2 +-
+>   target/ppc/gdbstub.c                   |   1 +
+>   target/riscv/gdbstub.c                 |   1 +
+>   target/rx/gdbstub.c                    |   2 +-
+>   target/s390x/gdbstub.c                 |   1 +
+>   target/s390x/helper.c                  |   2 +-
+>   target/sh4/gdbstub.c                   |   2 +-
+>   target/sparc/gdbstub.c                 |   2 +-
+>   target/tricore/gdbstub.c               |   2 +-
+>   target/xtensa/core-dc232b.c            |   2 +-
+>   target/xtensa/core-dc233c.c            |   2 +-
+>   target/xtensa/core-de212.c             |   2 +-
+>   target/xtensa/core-de233_fpu.c         |   2 +-
+>   target/xtensa/core-dsp3400.c           |   2 +-
+>   target/xtensa/core-fsf.c               |   2 +-
+>   target/xtensa/core-lx106.c             |   2 +-
+>   target/xtensa/core-sample_controller.c |   2 +-
+>   target/xtensa/core-test_kc705_be.c     |   2 +-
+>   target/xtensa/core-test_mmuhifi_c3.c   |   2 +-
+>   target/xtensa/gdbstub.c                |   2 +-
+>   target/xtensa/helper.c                 |   2 +-
+>   47 files changed, 148 insertions(+), 121 deletions(-)
+>   create mode 100644 include/gdbstub/helpers.h
 
-'unsigned'?
-
-> +    size_t len;
->       uint8_t *registers;
->       int reg_size;
->   
-> @@ -1204,9 +1205,10 @@ static void handle_write_all_regs(GArray *params, void *user_ctx)
->       len = strlen(get_param(params, 0)->data) / 2;
->       gdb_hextomem(gdbserver_state.mem_buf, get_param(params, 0)->data, len);
->       registers = gdbserver_state.mem_buf->data;
-> -    for (addr = 0; addr < gdbserver_state.g_cpu->gdb_num_g_regs && len > 0;
-> -         addr++) {
-> -        reg_size = gdb_write_register(gdbserver_state.g_cpu, registers, addr);
-> +    for (reg_id = 0;
-> +         reg_id < gdbserver_state.g_cpu->gdb_num_g_regs && len > 0;
-> +         reg_id++) {
-Regardless:
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
