@@ -1,95 +1,108 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pDMMT-0003Q5-9F
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Jan 2023 04:16:34 -0500
+	id 1pDTL0-0006tJ-6S
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Jan 2023 11:43:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1pDMMP-0003Ni-Sl
- for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 04:16:30 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1pDMMN-0007cB-Vy
- for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 04:16:29 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1672910187;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=EFOIoQLNbqm54L5Do76w2NAFyZTxILsaJK5E5Fz584A=;
- b=Jo2Tjsrb7lBll6Y+9mtsKUJqp34DxI2HyXlK82plFOb8BAinTThKYDkKELAn6auDwDn9Ff
- 4GCviqHf7EF4NYV84HM8euZ4BAyhEZXN3wkJpMTTLlzNqceFtEXZUGmZJdcFYmDphmMxLR
- gFGTZIgM9qHm5ZUkI65Pf8lOdiDN+Ng=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-197-4LIqUWScMma5GldKFs1ikg-1; Thu, 05 Jan 2023 04:16:24 -0500
-X-MC-Unique: 4LIqUWScMma5GldKFs1ikg-1
-Received: by mail-wr1-f72.google.com with SMTP id
- c21-20020adfa315000000b0029ae4de27efso1758203wrb.6
- for <qemu-riscv@nongnu.org>; Thu, 05 Jan 2023 01:16:24 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1pDTKy-0006rh-8r
+ for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 11:43:28 -0500
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1pDTKt-0006wM-F4
+ for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 11:43:27 -0500
+Received: by mail-wm1-x32a.google.com with SMTP id
+ z8-20020a05600c220800b003d33b0bda11so2727769wml.0
+ for <qemu-riscv@nongnu.org>; Thu, 05 Jan 2023 08:43:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cVDgWVfU9UuFFIzuYyi6pmmim2xRdLyJJ3WToGnxjwc=;
+ b=uthMc/2Q1iZ3HRZvJA8mMWbATqkfzlwfMLQQfthPEdUE45PO5xBYMSwducWMJ2TOvM
+ 5Koq+ATLBkOtcS1nCATIC38iFhnt0/JYtwHig2x2UAF8yufpbWFq/wogmfdrwR5/rIga
+ Snt6An5Bj7KGDb7fP2LVZpJzMp7Utzc4MOYpmSJqbQRG44aDJDHTHAB0y/eOdenTsOpO
+ 29naaPUgVvXyCwexDN53LXCN5+ySljNqNidu3G0FZ7SfaaqMbtUwSeOJgTdxJb3f8cAL
+ eCkgMQ3qLZ09wsemVk6LhFBAKaOJtLz3AJ8RvsUPlkfBI0QvtRcFgZzLI6A0LjC4B5ZV
+ 48JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=EFOIoQLNbqm54L5Do76w2NAFyZTxILsaJK5E5Fz584A=;
- b=061ok1N5z4EpDWRLyOuZNTdgwwPasIaA0VmyMUfI0FTmAxtlhnrWpqAFbC4+paQ4fH
- UvlQ2Yv/A8iHON++ldXhp6sLncpEqh+CFRA83R91NCh8MF9T58jADiZWWwYVMJZy9kzv
- oZgh+XrHCoYCKnlf/L/RcYNRxEpP4BqjEGEmheg/I9R8bU8Ufg9q5rPmv6laHKchw2sa
- cBzj3VZQAlrXV6BuI8PGmDxNc9tU2Pwrv4ze8bvXnFgNGAcfSTBXP0+ULk5X/JA5YpPD
- i3buBklzEMN7bKVXLJZCFr583RFaqIszgJWSQG3baCPlh9hBO/wetT/N6ShFeL7yveC8
- KIpw==
-X-Gm-Message-State: AFqh2krr3CJEsKoIiIzbRoRx9be2A9eiLbMiV8Wq/EZwYDMy+TCLXRPq
- S4XXdI5qWw29NXCIxK/mx6QYReMzFYoXVDW5+Zf3AV78+eJc1t/P+JY+2Y/s8Pv5YS4aJPsof/K
- Qh4kcWOjjSIoC3J8=
-X-Received: by 2002:a05:600c:1d18:b0:3d9:73fe:9744 with SMTP id
- l24-20020a05600c1d1800b003d973fe9744mr27399268wms.26.1672910183253; 
- Thu, 05 Jan 2023 01:16:23 -0800 (PST)
-X-Google-Smtp-Source: AMrXdXtVuPI8Vox1U4kqZB1U3vQi1ZwUCt0811Ii6xGYdnL8bJaBoF8QAepnLpmi3w3uGL5Ox1KdUg==
-X-Received: by 2002:a05:600c:1d18:b0:3d9:73fe:9744 with SMTP id
- l24-20020a05600c1d1800b003d973fe9744mr27399256wms.26.1672910183029; 
- Thu, 05 Jan 2023 01:16:23 -0800 (PST)
-Received: from redhat.com ([2.52.151.85]) by smtp.gmail.com with ESMTPSA id
- i6-20020a5d55c6000000b00283c7b5ee3bsm24702583wrw.101.2023.01.05.01.16.20
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cVDgWVfU9UuFFIzuYyi6pmmim2xRdLyJJ3WToGnxjwc=;
+ b=Cs36al1uepeRlU2LLI94z5YvFiYy0phaUXY2i/Poy28FLxKLohbiyCd2DxUAOtjvBG
+ 8ZqMlyY/NyEBZDKLf5JFNvTGzJGrHSE6dbrNu8h0KchciCFoL6Agu5tTpWv8U27NWbAB
+ rx88aI5oL4LMMFwXlVbYVSzMieTdP5B3zT+H/cdZiM98TKt2Tv2Rd2hIDMTOd76rI80k
+ DxawFI6DPq2b3ye4MihfPf521EvAo6fTSLx9EGbc1lpyd1b4GoO1URzRCHZgjMpAS1E7
+ rOmRPZX/QJQKtCYSuNv+VOvMq785O3T5rK1s2XfThhA8kpl/WEOWP4d1IexE32wiv1gZ
+ DSuQ==
+X-Gm-Message-State: AFqh2kpaKjCZD9vd0PHQrcFu/eob/cMjD0PydtDVJzU5RqjLgw0Vh79u
+ A0YqLreprBkMplk93PCH3spc5Q==
+X-Google-Smtp-Source: AMrXdXsvLQatva7Ex5ZRDF8FTPU2gDkvGfc0OZUrNay7bV0Yd4XvFgjgnX+VPZ/7uwnEf6BCSyrsRA==
+X-Received: by 2002:a7b:ca4f:0:b0:3d3:56ce:5673 with SMTP id
+ m15-20020a7bca4f000000b003d356ce5673mr39139973wml.6.1672937001907; 
+ Thu, 05 Jan 2023 08:43:21 -0800 (PST)
+Received: from zen.linaroharston ([185.81.254.11])
+ by smtp.gmail.com with ESMTPSA id
+ g41-20020a05600c4ca900b003cfd0bd8c0asm2675127wmp.30.2023.01.05.08.43.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Jan 2023 01:16:22 -0800 (PST)
-Date: Thu, 5 Jan 2023 04:16:18 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Markus Armbruster <armbru@redhat.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, Taylor Simpson <tsimpson@quicinc.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Warner Losh <imp@bsdimp.com>, Kyle Evans <kevans@freebsd.org>,
- Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>,
- Ben Widawsky <ben.widawsky@intel.com>,
- Jonathan Cameron <jonathan.cameron@huawei.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Jason Wang <jasowang@redhat.com>, Michael Roth <michael.roth@amd.com>,
- Konstantin Kostiuk <kkostiuk@redhat.com>,
+ Thu, 05 Jan 2023 08:43:20 -0800 (PST)
+Received: from zen.lan (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 7C1F31FFBA;
+ Thu,  5 Jan 2023 16:43:20 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org,
+	alex.bennee@gmail.com
+Cc: David Hildenbrand <david@redhat.com>,
+ Sunil Muthuswamy <sunilmut@microsoft.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Michael Rolnik <mrolnik@gmail.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Greg Kurz <groug@kaod.org>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Thomas Huth <thuth@redhat.com>, qemu-ppc@nongnu.org,
+ Laurent Vivier <laurent@vivier.eu>, Max Filippov <jcmvbkbc@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>, Marek Vasut <marex@denx.de>,
+ Stafford Horne <shorne@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
-Subject: [PULL 36/51] include: Don't include qemu/osdep.h
-Message-ID: <20230105091310.263867-37-mst@redhat.com>
-References: <20230105091310.263867-1-mst@redhat.com>
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Taylor Simpson <tsimpson@quicinc.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, Chris Wulff <crwulff@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>, Song Gao <gaosong@loongson.cn>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Bin Meng <bin.meng@windriver.com>, Mahmoud Mandour <ma.mandourr@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>, qemu-arm@nongnu.org
+Subject: [PATCH v2 02/21] target/arm: fix handling of HLT semihosting in
+ system mode
+Date: Thu,  5 Jan 2023 16:43:01 +0000
+Message-Id: <20230105164320.2164095-3-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230105164320.2164095-1-alex.bennee@linaro.org>
+References: <20230105164320.2164095-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <20230105091310.263867-1-mst@redhat.com>
-X-Mailer: git-send-email 2.27.0.106.g8ac3dc51b1
-X-Mutt-Fcc: =sent
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -103,193 +116,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2023 09:16:30 -0000
+X-List-Received-Date: Thu, 05 Jan 2023 16:43:28 -0000
 
-From: Markus Armbruster <armbru@redhat.com>
+The check semihosting_enabled() wants to know if the guest is
+currently in user mode. Unlike the other cases the test was inverted
+causing us to block semihosting calls in non-EL0 modes.
 
-docs/devel/style.rst mandates:
-
-    The "qemu/osdep.h" header contains preprocessor macros that affect
-    the behavior of core system headers like <stdint.h>.  It must be
-    the first include so that core system headers included by external
-    libraries get the preprocessor macros that QEMU depends on.
-
-    Do not include "qemu/osdep.h" from header files since the .c file
-    will have already included it.
-
-A few violations have crept in.  Fix them.
-
-Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Taylor Simpson <tsimpson@quicinc.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Message-Id: <20221222120813.727830-4-armbru@redhat.com>
-Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+Fixes: 19b26317e9 (target/arm: Honour -semihosting-config userspace=on)
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- bsd-user/qemu.h                 | 1 -
- crypto/block-luks-priv.h        | 1 -
- include/hw/cxl/cxl_host.h       | 1 -
- include/hw/input/pl050.h        | 1 -
- include/hw/tricore/triboard.h   | 1 -
- include/qemu/userfaultfd.h      | 1 -
- net/vmnet_int.h                 | 1 -
- qga/cutils.h                    | 1 -
- target/hexagon/hex_arch_types.h | 1 -
- target/hexagon/mmvec/macros.h   | 1 -
- target/riscv/pmu.h              | 1 -
- qga/cutils.c                    | 3 ++-
- 12 files changed, 2 insertions(+), 12 deletions(-)
+ target/arm/translate.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/bsd-user/qemu.h b/bsd-user/qemu.h
-index be6105385e..0ceecfb6df 100644
---- a/bsd-user/qemu.h
-+++ b/bsd-user/qemu.h
-@@ -17,7 +17,6 @@
- #ifndef QEMU_H
- #define QEMU_H
- 
--#include "qemu/osdep.h"
- #include "cpu.h"
- #include "qemu/units.h"
- #include "exec/cpu_ldst.h"
-diff --git a/crypto/block-luks-priv.h b/crypto/block-luks-priv.h
-index 90a20d432b..1066df0307 100644
---- a/crypto/block-luks-priv.h
-+++ b/crypto/block-luks-priv.h
-@@ -18,7 +18,6 @@
-  *
-  */
- 
--#include "qemu/osdep.h"
- #include "qapi/error.h"
- #include "qemu/bswap.h"
- 
-diff --git a/include/hw/cxl/cxl_host.h b/include/hw/cxl/cxl_host.h
-index a1b662ce40..c9bc9c7c50 100644
---- a/include/hw/cxl/cxl_host.h
-+++ b/include/hw/cxl/cxl_host.h
-@@ -7,7 +7,6 @@
-  * COPYING file in the top-level directory.
-  */
- 
--#include "qemu/osdep.h"
- #include "hw/cxl/cxl.h"
- #include "hw/boards.h"
- 
-diff --git a/include/hw/input/pl050.h b/include/hw/input/pl050.h
-index 89ec4fafc9..4cb8985f31 100644
---- a/include/hw/input/pl050.h
-+++ b/include/hw/input/pl050.h
-@@ -10,7 +10,6 @@
- #ifndef HW_PL050_H
- #define HW_PL050_H
- 
--#include "qemu/osdep.h"
- #include "hw/sysbus.h"
- #include "migration/vmstate.h"
- #include "hw/input/ps2.h"
-diff --git a/include/hw/tricore/triboard.h b/include/hw/tricore/triboard.h
-index 094c8bd563..4fdd2d7d97 100644
---- a/include/hw/tricore/triboard.h
-+++ b/include/hw/tricore/triboard.h
-@@ -18,7 +18,6 @@
-  * License along with this library; if not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#include "qemu/osdep.h"
- #include "qapi/error.h"
- #include "hw/boards.h"
- #include "sysemu/sysemu.h"
-diff --git a/include/qemu/userfaultfd.h b/include/qemu/userfaultfd.h
-index 6b74f92792..55c95998e8 100644
---- a/include/qemu/userfaultfd.h
-+++ b/include/qemu/userfaultfd.h
-@@ -13,7 +13,6 @@
- #ifndef USERFAULTFD_H
- #define USERFAULTFD_H
- 
--#include "qemu/osdep.h"
- #include "exec/hwaddr.h"
- #include <linux/userfaultfd.h>
- 
-diff --git a/net/vmnet_int.h b/net/vmnet_int.h
-index adf6e8c20d..d0b90594f2 100644
---- a/net/vmnet_int.h
-+++ b/net/vmnet_int.h
-@@ -10,7 +10,6 @@
- #ifndef VMNET_INT_H
- #define VMNET_INT_H
- 
--#include "qemu/osdep.h"
- #include "vmnet_int.h"
- #include "clients.h"
- 
-diff --git a/qga/cutils.h b/qga/cutils.h
-index f0f30a7d28..2bfaf554a8 100644
---- a/qga/cutils.h
-+++ b/qga/cutils.h
-@@ -1,7 +1,6 @@
- #ifndef CUTILS_H_
- #define CUTILS_H_
- 
--#include "qemu/osdep.h"
- 
- int qga_open_cloexec(const char *name, int flags, mode_t mode);
- 
-diff --git a/target/hexagon/hex_arch_types.h b/target/hexagon/hex_arch_types.h
-index 885f68f760..52a7f2b2f3 100644
---- a/target/hexagon/hex_arch_types.h
-+++ b/target/hexagon/hex_arch_types.h
-@@ -18,7 +18,6 @@
- #ifndef HEXAGON_HEX_ARCH_TYPES_H
- #define HEXAGON_HEX_ARCH_TYPES_H
- 
--#include "qemu/osdep.h"
- #include "mmvec/mmvec.h"
- #include "qemu/int128.h"
- 
-diff --git a/target/hexagon/mmvec/macros.h b/target/hexagon/mmvec/macros.h
-index 8c864e8c68..1201d778d0 100644
---- a/target/hexagon/mmvec/macros.h
-+++ b/target/hexagon/mmvec/macros.h
-@@ -18,7 +18,6 @@
- #ifndef HEXAGON_MMVEC_MACROS_H
- #define HEXAGON_MMVEC_MACROS_H
- 
--#include "qemu/osdep.h"
- #include "qemu/host-utils.h"
- #include "arch.h"
- #include "mmvec/system_ext_mmvec.h"
-diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
-index 3004ce37b6..0c819ca983 100644
---- a/target/riscv/pmu.h
-+++ b/target/riscv/pmu.h
-@@ -16,7 +16,6 @@
-  * this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#include "qemu/osdep.h"
- #include "qemu/log.h"
- #include "cpu.h"
- #include "qemu/main-loop.h"
-diff --git a/qga/cutils.c b/qga/cutils.c
-index b8e142ef64..b21bcf3683 100644
---- a/qga/cutils.c
-+++ b/qga/cutils.c
-@@ -2,8 +2,9 @@
-  * This work is licensed under the terms of the GNU GPL, version 2 or later.
-  * See the COPYING file in the top-level directory.
-  */
--#include "cutils.h"
- 
-+#include "qemu/osdep.h"
-+#include "cutils.h"
- #include "qapi/error.h"
- 
- /**
+diff --git a/target/arm/translate.c b/target/arm/translate.c
+index 74a903072f..1dcaefb8e7 100644
+--- a/target/arm/translate.c
++++ b/target/arm/translate.c
+@@ -1184,7 +1184,7 @@ static inline void gen_hlt(DisasContext *s, int imm)
+      * semihosting, to provide some semblance of security
+      * (and for consistency with our 32-bit semihosting).
+      */
+-    if (semihosting_enabled(s->current_el != 0) &&
++    if (semihosting_enabled(s->current_el == 0) &&
+         (imm == (s->thumb ? 0x3c : 0xf000))) {
+         gen_exception_internal_insn(s, EXCP_SEMIHOST);
+         return;
 -- 
-MST
+2.34.1
 
 
