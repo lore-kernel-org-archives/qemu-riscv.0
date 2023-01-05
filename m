@@ -1,54 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pDTL4-00070p-UF
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Jan 2023 11:43:34 -0500
+	id 1pDTL7-00072p-0G
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Jan 2023 11:43:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pDTL2-0006y8-JG
- for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 11:43:32 -0500
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
+ id 1pDTL4-000702-Ak
+ for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 11:43:34 -0500
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pDTKu-0006xM-Sc
- for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 11:43:32 -0500
-Received: by mail-wr1-x42b.google.com with SMTP id bk16so23489700wrb.11
- for <qemu-riscv@nongnu.org>; Thu, 05 Jan 2023 08:43:24 -0800 (PST)
+ id 1pDTKv-0006yK-U8
+ for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 11:43:34 -0500
+Received: by mail-wm1-x334.google.com with SMTP id
+ m8-20020a05600c3b0800b003d96f801c48so1756741wms.0
+ for <qemu-riscv@nongnu.org>; Thu, 05 Jan 2023 08:43:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Gy0/zYZetKWbyUE6WFREVjvsOrbcepCm3I2qjMJQWPs=;
- b=bWGIh4n5W0WXN1S+Duq3L8i3fjlHKGKmzaM11j5lC326ME8APPMaCO2+WYAbfMCv/p
- C6hPzerTl0i1D8oaDV8hYRpUMzolCt8X2JWmnx8FXif1Wxt48j0HwrJKEFpyRZQiFnUm
- m4YKa5D9Z5cCHSk4LyE/QDQ2Vsrv/vUf11TW7+5ssPiY4a7mPuI5J8GDyhbET9gKNEKw
- QsPWrYPHXUAogHu1uaX8oQkx1/DNifGffQbYFyx5uWxVcBYZDXijJD4OzoZBR/yjVCbO
- /TJEgw6RTZtc3VX+tPN+eXbIlISa3bUpMHWoNy32TEkOlv0E71CXFH1kSnabb59LyULf
- f6fQ==
+ bh=TLd5g4iuKDGI8GqVRVcMJw8OLSB9d+X+S79K8IqAr5U=;
+ b=JZlF4xVL0DZbE6YHARHBXTfNzEGQ9egipQL7UtCEXYMOJy3s3cypJ4/+X1vQF6VFsf
+ uvSGF/knRwbiqqrONbLExgxItcYrF5J9exNorp2I+zPJVKqPGVPnW5YaStlaSkYTH0qZ
+ tqpRmZClp1dFVgzaxyZoAsLJC+hI4O92GEkH/LLpIDpvj1k95lRltJlCkDS+3akluKXA
+ Ln6Tae1r49pgl5pNYADVbdkPBqBfpREogEKiiLew7AOOVGGHB/f/M5vltJiIPZYN+O5n
+ aWVX7bdc0VrQ0O5lcRec/6aCwalY7bPF9NKMm1AcEcuPgRxYaxNCCRnr3AUPc/uZiv6+
+ roBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Gy0/zYZetKWbyUE6WFREVjvsOrbcepCm3I2qjMJQWPs=;
- b=JIX5VINLcqX3mfRzU8oDYD4d/ZJzqvUSJtaxpZ6MtlUVkBfDTUFljJ9h/4KPr09fRI
- 1G8rwDCPX6UH2rBjwp9SaRbeRRx64aL1oW/pKlDsEY71D3EHn3zlxg14/mHYNMY40V5/
- 9GlylCZTl7PQmBo6OFu8EYyhSOfRGPRQhYZToSO90RSiat+FIaKPTPNWuFn9osw8oe0p
- 9+zwGeLXyNgCAO88/quCmzrlsXmVY6IRM8PSWzeTC9ZwCtHcxEe27OVkiFlBFLrj6jKe
- 9Ej+B9f56naQdWttGLVg3dFLcphDq2YtXvAkA/RRjIPNMqg86iL7wb3SwPCgkVKO8jhQ
- knQQ==
-X-Gm-Message-State: AFqh2krm/9FGCawjxE8nSzs5Bfjore6+TVBHiwmMFYJHBSFbngn2XKty
- DC7c2BgfB5RpVj2TdLa49RM/tg==
-X-Google-Smtp-Source: AMrXdXu7qU9YBK4/mrQHdpveZw8jkJM/B4BWs89GyVnrPAUqTIKKWOVKeqLyd/KpK36Rh55TN84fag==
-X-Received: by 2002:a5d:5b18:0:b0:28d:f043:490f with SMTP id
- bx24-20020a5d5b18000000b0028df043490fmr18704223wrb.71.1672937003380; 
- Thu, 05 Jan 2023 08:43:23 -0800 (PST)
+ bh=TLd5g4iuKDGI8GqVRVcMJw8OLSB9d+X+S79K8IqAr5U=;
+ b=vFzbvIk5KAOsawyojYRYxumEJhEAOenWRgAyjgIlGvp96Sr20leGxwZ+gDHGDojO9u
+ HbQy+u+5QL5WBOkrBWuyhDg4Z/Apbyd8437vuCfx+Z2R4kxU7+YFZtkgfMWGaeb+5Gfq
+ gppUPOxHbYMgDX9xGJCOfGn4WMLHTv2Xvdv364IWzcLsVHO3ecMImzJ9bfLaiOZHUYLT
+ yq3Q+3S2YfmlMQLzgzuflYCf2gHa1y8HaQkUSGhCbiQOuZPNkRo2rew/E8E42r+EVuZt
+ 6Q54Iit4hqHxgAQFVoxwzeojtsV+ixot75kmmHPlojtEcxJc/lZXMefYr+ae299XDWue
+ C/Zg==
+X-Gm-Message-State: AFqh2krrikp3Fjx7po32ziBEuS1jmXjDp2XYD4tiz841iBiJcWWlLBkC
+ UUXHECAg+1j4BPkZsYuBNgyM/Q==
+X-Google-Smtp-Source: AMrXdXsTlU/bRGIynypzbXG7MH8Y1EOYPrWGduxJOPuPlM3Ms+abtx+J2VQ8kmewlIbIu21/QV70Rg==
+X-Received: by 2002:a05:600c:3b87:b0:3d2:813:138a with SMTP id
+ n7-20020a05600c3b8700b003d20813138amr40251224wms.35.1672937004490; 
+ Thu, 05 Jan 2023 08:43:24 -0800 (PST)
 Received: from zen.linaroharston ([185.81.254.11])
  by smtp.gmail.com with ESMTPSA id
- o15-20020a5d684f000000b00286ad197346sm23886829wrw.70.2023.01.05.08.43.20
+ p12-20020a05600c358c00b003d237d60318sm3423082wmq.2.2023.01.05.08.43.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 05 Jan 2023 08:43:22 -0800 (PST)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 9A9361FFBC;
+ by zen.linaroharston (Postfix) with ESMTP id B93A31FFBE;
  Thu,  5 Jan 2023 16:43:20 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org,
@@ -84,18 +85,17 @@ Cc: David Hildenbrand <david@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Xiaojuan Yang <yangxiaojuan@loongson.cn>, qemu-arm@nongnu.org
-Subject: [PATCH v2 04/21] gdbstub: Make syscall_complete/[gs]et_reg
- target-agnostic typedefs
-Date: Thu,  5 Jan 2023 16:43:03 +0000
-Message-Id: <20230105164320.2164095-5-alex.bennee@linaro.org>
+Subject: [PATCH v2 06/21] gdbstub: move GDBState to shared internals header
+Date: Thu,  5 Jan 2023 16:43:05 +0000
+Message-Id: <20230105164320.2164095-7-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230105164320.2164095-1-alex.bennee@linaro.org>
 References: <20230105164320.2164095-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -115,53 +115,209 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2023 16:43:32 -0000
+X-List-Received-Date: Thu, 05 Jan 2023 16:43:34 -0000
 
-From: Philippe Mathieu-Daudé <philmd@linaro.org>
+We are about to split softmmu and user mode helpers into different
+files. To facilitate this we will need to share access to the GDBState
+between those files.
 
-Prototypes using gdb_syscall_complete_cb() or gdb_?et_reg_cb()
-don't depend on "cpu.h", thus are not target-specific.
+To keep building we have to temporarily define CONFIG_USER_ONLY just
+before we include internals.h for the user-mode side of things. This
+will get removed once the state is fully moved.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20221214143659.62133-1-philmd@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- include/exec/gdbstub.h | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ gdbstub/internals.h | 69 +++++++++++++++++++++++++++++++++++++++++++++
+ gdbstub/gdbstub.c   | 60 ---------------------------------------
+ gdbstub/softmmu.c   |  2 ++
+ gdbstub/user.c      |  2 ++
+ 4 files changed, 73 insertions(+), 60 deletions(-)
 
-diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
-index f667014888..1636fb3841 100644
---- a/include/exec/gdbstub.h
-+++ b/include/exec/gdbstub.h
-@@ -71,9 +71,6 @@ struct gdb_timeval {
-   uint64_t tv_usec;   /* microsecond */
- } QEMU_PACKED;
+diff --git a/gdbstub/internals.h b/gdbstub/internals.h
+index b444f24ef5..9784db2dc5 100644
+--- a/gdbstub/internals.h
++++ b/gdbstub/internals.h
+@@ -9,6 +9,75 @@
+ #ifndef GDBSTUB_INTERNALS_H
+ #define GDBSTUB_INTERNALS_H
  
--#ifdef NEED_CPU_H
--#include "cpu.h"
--
- typedef void (*gdb_syscall_complete_cb)(CPUState *cpu, uint64_t ret, int err);
- 
- /**
-@@ -126,6 +123,7 @@ int gdb_handlesig(CPUState *, int);
- void gdb_signalled(CPUArchState *, int);
- void gdbserver_fork(CPUState *);
++#define MAX_PACKET_LENGTH 4096
++
++/*
++ * Shared structures and definitions
++ */
++
++typedef struct GDBProcess {
++    uint32_t pid;
++    bool attached;
++
++    char target_xml[1024];
++} GDBProcess;
++
++enum RSState {
++    RS_INACTIVE,
++    RS_IDLE,
++    RS_GETLINE,
++    RS_GETLINE_ESC,
++    RS_GETLINE_RLE,
++    RS_CHKSUM1,
++    RS_CHKSUM2,
++};
++
++/* Temporary home */
++#ifdef CONFIG_USER_ONLY
++typedef struct {
++    int fd;
++    char *socket_path;
++    int running_state;
++} GDBUserState;
++#else
++typedef struct {
++    CharBackend chr;
++    Chardev *mon_chr;
++} GDBSystemState;
++#endif
++
++typedef struct GDBState {
++    bool init;       /* have we been initialised? */
++    CPUState *c_cpu; /* current CPU for step/continue ops */
++    CPUState *g_cpu; /* current CPU for other ops */
++    CPUState *query_cpu; /* for q{f|s}ThreadInfo */
++    enum RSState state; /* parsing state */
++    char line_buf[MAX_PACKET_LENGTH];
++    int line_buf_index;
++    int line_sum; /* running checksum */
++    int line_csum; /* checksum at the end of the packet */
++    GByteArray *last_packet;
++    int signal;
++#ifdef CONFIG_USER_ONLY
++    GDBUserState user;
++#else
++    GDBSystemState system;
++#endif
++    bool multiprocess;
++    GDBProcess *processes;
++    int process_num;
++    char syscall_buf[256];
++    gdb_syscall_complete_cb current_syscall_cb;
++    GString *str_buf;
++    GByteArray *mem_buf;
++    int sstep_flags;
++    int supported_sstep_flags;
++} GDBState;
++
++/*
++ * Break/Watch point support - there is an implementation for softmmu
++ * and user mode.
++ */
+ bool gdb_supports_guest_debug(void);
+ int gdb_breakpoint_insert(CPUState *cs, int type, hwaddr addr, hwaddr len);
+ int gdb_breakpoint_remove(CPUState *cs, int type, hwaddr addr, hwaddr len);
+diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+index 42ae13b344..505beafad7 100644
+--- a/gdbstub/gdbstub.c
++++ b/gdbstub/gdbstub.c
+@@ -41,8 +41,6 @@
+ #include "hw/boards.h"
  #endif
-+
- /* Get or set a register.  Returns the size of the register.  */
- typedef int (*gdb_get_reg_cb)(CPUArchState *env, GByteArray *buf, int reg);
- typedef int (*gdb_set_reg_cb)(CPUArchState *env, uint8_t *buf, int reg);
-@@ -133,6 +131,9 @@ void gdb_register_coprocessor(CPUState *cpu,
-                               gdb_get_reg_cb get_reg, gdb_set_reg_cb set_reg,
-                               int num_regs, const char *xml, int g_pos);
  
-+#ifdef NEED_CPU_H
-+#include "cpu.h"
-+
- /*
-  * The GDB remote protocol transfers values in target byte order. As
-  * the gdbstub may be batching up several register values we always
+-#define MAX_PACKET_LENGTH 4096
+-
+ #include "qemu/sockets.h"
+ #include "sysemu/hw_accel.h"
+ #include "sysemu/runstate.h"
+@@ -326,64 +324,6 @@ typedef struct GDBRegisterState {
+     struct GDBRegisterState *next;
+ } GDBRegisterState;
+ 
+-typedef struct GDBProcess {
+-    uint32_t pid;
+-    bool attached;
+-
+-    char target_xml[1024];
+-} GDBProcess;
+-
+-enum RSState {
+-    RS_INACTIVE,
+-    RS_IDLE,
+-    RS_GETLINE,
+-    RS_GETLINE_ESC,
+-    RS_GETLINE_RLE,
+-    RS_CHKSUM1,
+-    RS_CHKSUM2,
+-};
+-
+-#ifdef CONFIG_USER_ONLY
+-typedef struct {
+-    int fd;
+-    char *socket_path;
+-    int running_state;
+-} GDBUserState;
+-#else
+-typedef struct {
+-    CharBackend chr;
+-    Chardev *mon_chr;
+-} GDBSystemState;
+-#endif
+-
+-typedef struct GDBState {
+-    bool init;       /* have we been initialised? */
+-    CPUState *c_cpu; /* current CPU for step/continue ops */
+-    CPUState *g_cpu; /* current CPU for other ops */
+-    CPUState *query_cpu; /* for q{f|s}ThreadInfo */
+-    enum RSState state; /* parsing state */
+-    char line_buf[MAX_PACKET_LENGTH];
+-    int line_buf_index;
+-    int line_sum; /* running checksum */
+-    int line_csum; /* checksum at the end of the packet */
+-    GByteArray *last_packet;
+-    int signal;
+-#ifdef CONFIG_USER_ONLY
+-    GDBUserState user;
+-#else
+-    GDBSystemState system;
+-#endif
+-    bool multiprocess;
+-    GDBProcess *processes;
+-    int process_num;
+-    char syscall_buf[256];
+-    gdb_syscall_complete_cb current_syscall_cb;
+-    GString *str_buf;
+-    GByteArray *mem_buf;
+-    int sstep_flags;
+-    int supported_sstep_flags;
+-} GDBState;
+-
+ static GDBState gdbserver_state;
+ 
+ static void init_gdbserver_state(void)
+diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
+index 183dfb40e4..696894243b 100644
+--- a/gdbstub/softmmu.c
++++ b/gdbstub/softmmu.c
+@@ -14,6 +14,8 @@
+ #include "exec/gdbstub.h"
+ #include "exec/hwaddr.h"
+ #include "sysemu/cpus.h"
++#include "chardev/char.h"
++#include "chardev/char-fe.h"
+ #include "internals.h"
+ 
+ bool gdb_supports_guest_debug(void)
+diff --git a/gdbstub/user.c b/gdbstub/user.c
+index a5f370bcf9..4c2b41eefa 100644
+--- a/gdbstub/user.c
++++ b/gdbstub/user.c
+@@ -13,6 +13,8 @@
+ #include "exec/hwaddr.h"
+ #include "exec/gdbstub.h"
+ #include "hw/core/cpu.h"
++/* temp hack */
++#define CONFIG_USER_ONLY 1
+ #include "internals.h"
+ 
+ bool gdb_supports_guest_debug(void)
 -- 
 2.34.1
 
