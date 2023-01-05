@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pDTL0-0006tJ-6S
+	id 1pDTL0-0006th-B9
 	for mharc-qemu-riscv@gnu.org; Thu, 05 Jan 2023 11:43:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pDTKy-0006rh-8r
+ id 1pDTKy-0006s2-KK
  for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 11:43:28 -0500
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pDTKt-0006wM-F4
- for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 11:43:27 -0500
-Received: by mail-wm1-x32a.google.com with SMTP id
- z8-20020a05600c220800b003d33b0bda11so2727769wml.0
+ id 1pDTKt-0006vi-G8
+ for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 11:43:28 -0500
+Received: by mail-wm1-x335.google.com with SMTP id
+ m26-20020a05600c3b1a00b003d9811fcaafso1774087wms.5
  for <qemu-riscv@nongnu.org>; Thu, 05 Jan 2023 08:43:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cVDgWVfU9UuFFIzuYyi6pmmim2xRdLyJJ3WToGnxjwc=;
- b=uthMc/2Q1iZ3HRZvJA8mMWbATqkfzlwfMLQQfthPEdUE45PO5xBYMSwducWMJ2TOvM
- 5Koq+ATLBkOtcS1nCATIC38iFhnt0/JYtwHig2x2UAF8yufpbWFq/wogmfdrwR5/rIga
- Snt6An5Bj7KGDb7fP2LVZpJzMp7Utzc4MOYpmSJqbQRG44aDJDHTHAB0y/eOdenTsOpO
- 29naaPUgVvXyCwexDN53LXCN5+ySljNqNidu3G0FZ7SfaaqMbtUwSeOJgTdxJb3f8cAL
- eCkgMQ3qLZ09wsemVk6LhFBAKaOJtLz3AJ8RvsUPlkfBI0QvtRcFgZzLI6A0LjC4B5ZV
- 48JA==
+ bh=JPkl1ua/jXIj//qrN71d3DFOxM8PoMBDQnDzXwdNRYQ=;
+ b=EIE/DgcCLUkfzhMtyivozCdgrPG/pDKtQ+peiYZgWjE+DQqx9+bXf06ohG8KvhQp/T
+ /JJm82kOcW0Suj8d1CwAFM3mX6oLBHEc7fXVXZvi2ks5dh5V6JUetaBKWFNQT1Xp14DA
+ z84saW4tJTKyGNSfG8gvw6vznrjgi8KRizrjw0fuVcQlnIpT5hczwQvro19wN3AYcJzr
+ gmenat8rlvcEHEEKwG++ETz/Va4awjHkhPojqmLIgAuZzzO6ymLmkTrx5zq0eeN/vmP8
+ LPk+70K4UNtyuGTa7lO5W6SGnf2K8oER8ogfYGZkGunRfABcsfE6hGDHnW4F9zx3XuA9
+ gSDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cVDgWVfU9UuFFIzuYyi6pmmim2xRdLyJJ3WToGnxjwc=;
- b=Cs36al1uepeRlU2LLI94z5YvFiYy0phaUXY2i/Poy28FLxKLohbiyCd2DxUAOtjvBG
- 8ZqMlyY/NyEBZDKLf5JFNvTGzJGrHSE6dbrNu8h0KchciCFoL6Agu5tTpWv8U27NWbAB
- rx88aI5oL4LMMFwXlVbYVSzMieTdP5B3zT+H/cdZiM98TKt2Tv2Rd2hIDMTOd76rI80k
- DxawFI6DPq2b3ye4MihfPf521EvAo6fTSLx9EGbc1lpyd1b4GoO1URzRCHZgjMpAS1E7
- rOmRPZX/QJQKtCYSuNv+VOvMq785O3T5rK1s2XfThhA8kpl/WEOWP4d1IexE32wiv1gZ
- DSuQ==
-X-Gm-Message-State: AFqh2kpaKjCZD9vd0PHQrcFu/eob/cMjD0PydtDVJzU5RqjLgw0Vh79u
- A0YqLreprBkMplk93PCH3spc5Q==
-X-Google-Smtp-Source: AMrXdXsvLQatva7Ex5ZRDF8FTPU2gDkvGfc0OZUrNay7bV0Yd4XvFgjgnX+VPZ/7uwnEf6BCSyrsRA==
-X-Received: by 2002:a7b:ca4f:0:b0:3d3:56ce:5673 with SMTP id
- m15-20020a7bca4f000000b003d356ce5673mr39139973wml.6.1672937001907; 
+ bh=JPkl1ua/jXIj//qrN71d3DFOxM8PoMBDQnDzXwdNRYQ=;
+ b=b5J37hPQH6M7TC7D5SKyidFk4fcsnHVpCBscTFMlaiI9fmwNKbLhwkolBrlpTF3Nk7
+ /B9zskLv9Ul4S3LN7aoNp6nOPT42C+D12qtYoD65+EB+ZFrU2KX4bu3bc811m/BrHd40
+ p3WgJyqfewICbYOyWAZUWeNobStVDcHZ/d67J7hr4xeLfGFVpiEN5qoKjrdV98axmUOn
+ Li4u/cfnmpnZGfj0Q9yLzYWaHugAUEeWQ7w9A6cuzZ3+VRQ2eVt/shKj5o4+gVVaQO+g
+ /NoFzGSKMcLOxwA8Gz9vSV0tFu+F0DKAAje5NVvnTdhoiJOD6dhJQDtGccNtXAzMpLuj
+ mGqA==
+X-Gm-Message-State: AFqh2konOA4oT9b+2qGovZi04YsS6NsGBQVlsdk4g6zq0NzgxWIE0eC+
+ 5UVTBfSsKbZuAUbhA6tuO+/TcQ==
+X-Google-Smtp-Source: AMrXdXsgJgdyAayDcGuvCHfEMZCmIa9JozZ1tiQzcgqolYH3JUV2+BpcTL3c89a/vQxklPJXrJjk5Q==
+X-Received: by 2002:a05:600c:34ce:b0:3cf:614e:b587 with SMTP id
+ d14-20020a05600c34ce00b003cf614eb587mr40207474wmq.26.1672937001167; 
  Thu, 05 Jan 2023 08:43:21 -0800 (PST)
 Received: from zen.linaroharston ([185.81.254.11])
  by smtp.gmail.com with ESMTPSA id
- g41-20020a05600c4ca900b003cfd0bd8c0asm2675127wmp.30.2023.01.05.08.43.20
+ j1-20020a05600c1c0100b003cfaae07f68sm3417832wms.17.2023.01.05.08.43.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 05 Jan 2023 08:43:20 -0800 (PST)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 7C1F31FFBA;
+ by zen.linaroharston (Postfix) with ESMTP id 6C4301FFB8;
  Thu,  5 Jan 2023 16:43:20 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org,
@@ -85,18 +85,17 @@ Cc: David Hildenbrand <david@redhat.com>,
  David Gibson <david@gibson.dropbear.id.au>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Xiaojuan Yang <yangxiaojuan@loongson.cn>, qemu-arm@nongnu.org
-Subject: [PATCH v2 02/21] target/arm: fix handling of HLT semihosting in
- system mode
-Date: Thu,  5 Jan 2023 16:43:01 +0000
-Message-Id: <20230105164320.2164095-3-alex.bennee@linaro.org>
+Subject: [PATCH v2 01/21] gdbstub/internals.h: clean up include guard
+Date: Thu,  5 Jan 2023 16:43:00 +0000
+Message-Id: <20230105164320.2164095-2-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230105164320.2164095-1-alex.bennee@linaro.org>
 References: <20230105164320.2164095-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -118,29 +117,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 05 Jan 2023 16:43:28 -0000
 
-The check semihosting_enabled() wants to know if the guest is
-currently in user mode. Unlike the other cases the test was inverted
-causing us to block semihosting calls in non-EL0 modes.
+Use something more specific to avoid name clashes.
 
-Fixes: 19b26317e9 (target/arm: Honour -semihosting-config userspace=on)
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- target/arm/translate.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ gdbstub/internals.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/target/arm/translate.c b/target/arm/translate.c
-index 74a903072f..1dcaefb8e7 100644
---- a/target/arm/translate.c
-+++ b/target/arm/translate.c
-@@ -1184,7 +1184,7 @@ static inline void gen_hlt(DisasContext *s, int imm)
-      * semihosting, to provide some semblance of security
-      * (and for consistency with our 32-bit semihosting).
-      */
--    if (semihosting_enabled(s->current_el != 0) &&
-+    if (semihosting_enabled(s->current_el == 0) &&
-         (imm == (s->thumb ? 0x3c : 0xf000))) {
-         gen_exception_internal_insn(s, EXCP_SEMIHOST);
-         return;
+diff --git a/gdbstub/internals.h b/gdbstub/internals.h
+index eabb0341d1..b444f24ef5 100644
+--- a/gdbstub/internals.h
++++ b/gdbstub/internals.h
+@@ -6,12 +6,12 @@
+  * SPDX-License-Identifier: GPL-2.0-or-later
+  */
+ 
+-#ifndef _INTERNALS_H_
+-#define _INTERNALS_H_
++#ifndef GDBSTUB_INTERNALS_H
++#define GDBSTUB_INTERNALS_H
+ 
+ bool gdb_supports_guest_debug(void);
+ int gdb_breakpoint_insert(CPUState *cs, int type, hwaddr addr, hwaddr len);
+ int gdb_breakpoint_remove(CPUState *cs, int type, hwaddr addr, hwaddr len);
+ void gdb_breakpoint_remove_all(CPUState *cs);
+ 
+-#endif /* _INTERNALS_H_ */
++#endif /* GDBSTUB_INTERNALS_H */
 -- 
 2.34.1
 
