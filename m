@@ -1,56 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pDTxB-0007hd-F7
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Jan 2023 12:22:57 -0500
+	id 1pDU05-0001SC-LV
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Jan 2023 12:25:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDTxA-0007hE-CM
- for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 12:22:56 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDU03-0001OV-8G
+ for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 12:25:56 -0500
 Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDTx8-0007Uu-Pe
- for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 12:22:56 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- c65-20020a1c3544000000b003cfffd00fc0so1841018wma.1
- for <qemu-riscv@nongnu.org>; Thu, 05 Jan 2023 09:22:54 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDU01-0008Ey-F5
+ for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 12:25:54 -0500
+Received: by mail-wm1-x330.google.com with SMTP id ay40so28572413wmb.2
+ for <qemu-riscv@nongnu.org>; Thu, 05 Jan 2023 09:25:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ylKcpkWHZgkHqciFS3PTc6pROI+nTj0vsfG4lupU4fc=;
- b=Qtak04rDs48iN0UbCFzj6sXIS7Qf/4vd8+ZYPRl7qUEI2qkDAuGraPFkMW72WV9dyC
- XK/4BswCGE1EJq8kGp1RJPwtiewgFtSfWlSzjZNUvUVzmVpPR9x+31W00IcFjgtWZNsi
- nwj4WdKjtJYTsfJCd8HSjnXlGHwhhu9TFwz5UwY9pVZsNqK8p3qO0KqS2TAfMnE515VA
- e67hNR1sW1Q9tgN3U7VwNVR/A2vQtVK4bkteholyPmnRoNWkCi9DRzAAcVpE57SWE82i
- Mdc9yJmNXgRiyhiy85dlj+9uDNNy8zEJqfTftJ9B0Vfba0BeQVjuQcxVlp+lL7tC96vQ
- aQxw==
+ bh=3T91HwQOAnWIpRn3SvTRnOAfUKhwZ/jeHHmRfduj66s=;
+ b=quMu6EnVbim77rg8p+wR/ErN2PVaJe6qBy1KNSodJi9NcQDJdhB2ABvMzqYXcvyfPn
+ Zs5h7Aivn93mFTn8iHCGJOA5hf6uhT0xlc9JO7Pf2X1KX2Xv0xFKe+ZT9aBI37LU1HRK
+ XxOQY0/SSkaPehewXM/yhDXZTof2aqyp4FD0NIBVhy8kSFfPewIe2gVnAsNdM2LcZfi0
+ krWOZdLTMzjWUJePkf29e6gxj9PeoumBDIYhD26F/wFg4vHsSQBpnFymSyKSUbP8NBgK
+ d0swAkVoEoUjWMTNeBQxeqGf9tOTtG+o7hXeQ8qU8+xaaXOzNdBOCJlw+LAszPOBwdt1
+ /xWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ylKcpkWHZgkHqciFS3PTc6pROI+nTj0vsfG4lupU4fc=;
- b=2MNQqeCNRuxTriLYCDbvtS5jSP/F0cMAuHzUXbRCNZCbyjvuxDzJDUaaj+Rw5BBRUr
- itPAd9GsUVr99wmy/rW0sPr3ZnaOXPVeBFgcv0so9ZEdPV3aVR1RIzNbduXJOUOh+tLA
- JZij9C0sTo1l7BWUnlNDbv7dMzi/ASR0D3mfih11SvywVprnbt9PupTvIRLkse259c9p
- y8UzomuImD2JM5LBK5fYHnvabToVnwORyv/O9I6iEAZ9zbda+9/lyWUsAK98cBOOfjCS
- eMtXVdheHvbWZMVfYgWUJjngMREbjYUWgdRCd+KIH60uCJKVBq3o14HiacL805a7pX+h
- p2hA==
-X-Gm-Message-State: AFqh2krw/c8ZmkkllRBENwjNPpUuBRCECKz9fU0+oJHetIE2WanEUjbc
- DE2GuC13VWerhz4dJ9yHlG05yg==
-X-Google-Smtp-Source: AMrXdXvEeWn7Xu7HP8yM4dJdtXlej7ArIR+fWdPsZg+GugRgOgv1vRf8kEtdaVGKN6RzWw2EgFN/WQ==
-X-Received: by 2002:a05:600c:34d4:b0:3cf:a39f:eb2a with SMTP id
- d20-20020a05600c34d400b003cfa39feb2amr36839330wmq.11.1672939373107; 
- Thu, 05 Jan 2023 09:22:53 -0800 (PST)
+ bh=3T91HwQOAnWIpRn3SvTRnOAfUKhwZ/jeHHmRfduj66s=;
+ b=6NxAJ1xaR1Y305vFQQ63LhqIo7FEE2/YsWKW/wFWcObLW+ldh1JshFzLBYr1ftjob5
+ r8LWMyO39zAHo5N31Zyp7Iz96iy+ImNQzRpka/wgVv+FZRKFvLOMBTsaybp1CvwLroCI
+ j4qxRfn8nR1Y019Sd7QesugFzvCUE/kzCXudWeKgeRexb7mhlMH4hHaAYhPmu9amUx+Z
+ fTl9LqZ2MnJIBI6suE9a4Fjhi66bYd6lWbH+3JPzxTQX8MTNf8EQRidmcjsstbzdlWum
+ wBdOlo095gg+cEAaJwqc/GadrC5lnIQEE6+ad6dzwnwRQUZsclhcbvABaoJ0PDnyQQFk
+ H8Kw==
+X-Gm-Message-State: AFqh2koIbXOkGIZ44jyphqVqkO9hEGpSZiPSa4axvBJUejvT1u+1BUrZ
+ JYRR+kC22G4HajCzofAcx6iBww==
+X-Google-Smtp-Source: AMrXdXvsHBe9d9GUMJ95WBX2h+TeF4Aisk1ydk+fuVdZmjxULJqBXMxuCgLrZGU3vG1D7A4Ueus7Hw==
+X-Received: by 2002:a05:600c:4e53:b0:3c6:e60f:3f4a with SMTP id
+ e19-20020a05600c4e5300b003c6e60f3f4amr35763244wmq.1.1672939552111; 
+ Thu, 05 Jan 2023 09:25:52 -0800 (PST)
 Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- l14-20020a05600c4f0e00b003d96c811d6dsm3321992wmq.30.2023.01.05.09.22.49
+ m7-20020a05600c3b0700b003cfd4cf0761sm3611995wms.1.2023.01.05.09.25.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Jan 2023 09:22:52 -0800 (PST)
-Message-ID: <3aed1547-aedd-7856-7ab4-4d2ee9176c1b@linaro.org>
-Date: Thu, 5 Jan 2023 18:22:48 +0100
+ Thu, 05 Jan 2023 09:25:51 -0800 (PST)
+Message-ID: <460dc896-f3bf-26ac-5c0d-95ebe1e3ecfd@linaro.org>
+Date: Thu, 5 Jan 2023 18:25:48 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.6.1
-Subject: Re: [PATCH v2 13/21] gdbstub: specialise handle_query_attached
+Subject: Re: [PATCH v2 16/21] gdbstub: specialise stub_can_reverse
 Content-Language: en-US
 To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org, alex.bennee@gmail.com
@@ -82,9 +81,9 @@ Cc: David Hildenbrand <david@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Xiaojuan Yang <yangxiaojuan@loongson.cn>, qemu-arm@nongnu.org
 References: <20230105164320.2164095-1-alex.bennee@linaro.org>
- <20230105164320.2164095-14-alex.bennee@linaro.org>
+ <20230105164320.2164095-17-alex.bennee@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230105164320.2164095-14-alex.bennee@linaro.org>
+In-Reply-To: <20230105164320.2164095-17-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2a00:1450:4864:20::330;
@@ -95,7 +94,7 @@ X-Spam_bar: -----
 X-Spam_report: (-5.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.939,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,20 +107,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2023 17:22:56 -0000
+X-List-Received-Date: Thu, 05 Jan 2023 17:25:56 -0000
 
 On 5/1/23 17:43, Alex Bennée wrote:
-> In both user and softmmu cases we are just replying with a constant.
-> If the linker is paying attention it may even be able to sort optimise
-> the call.
+> Currently we only support replay for softmmu mode so it is a constant
+> false for user-mode.
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   gdbstub/internals.h |  4 +++-
->   gdbstub/gdbstub.c   | 15 ++-------------
+>   gdbstub/internals.h |  1 +
+>   gdbstub/gdbstub.c   | 13 ++-----------
 >   gdbstub/softmmu.c   |  5 +++++
 >   gdbstub/user.c      |  5 +++++
->   4 files changed, 15 insertions(+), 14 deletions(-)
+>   4 files changed, 13 insertions(+), 11 deletions(-)
+> 
+> diff --git a/gdbstub/internals.h b/gdbstub/internals.h
+> index a371373c1d..1def9dfc9c 100644
+> --- a/gdbstub/internals.h
+> +++ b/gdbstub/internals.h
+> @@ -126,6 +126,7 @@ CPUState *gdb_first_attached_cpu(void);
+>   void gdb_append_thread_id(CPUState *cpu, GString *buf);
+>   int gdb_get_cpu_index(CPUState *cpu);
+>   unsigned int gdb_get_max_cpus(void); /* both */
+> +bool gdb_stub_can_reverse(void); /* softmmu, stub for user */
+Maybe without the 'stub', gdb_can_reverse()?
+
+Anyhow,
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
