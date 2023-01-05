@@ -1,57 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pDTk5-0002Hn-NK
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Jan 2023 12:09:25 -0500
+	id 1pDToj-0000aP-E1
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Jan 2023 12:14:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDTk4-0002Dw-07
- for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 12:09:24 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDToc-0000TK-Ma
+ for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 12:14:10 -0500
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDTk1-0007C2-3R
- for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 12:09:23 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id
- k22-20020a05600c1c9600b003d1ee3a6289so1834138wms.2
- for <qemu-riscv@nongnu.org>; Thu, 05 Jan 2023 09:09:20 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pDToZ-0000FU-Ou
+ for qemu-riscv@nongnu.org; Thu, 05 Jan 2023 12:14:06 -0500
+Received: by mail-wr1-x42d.google.com with SMTP id az7so12388111wrb.5
+ for <qemu-riscv@nongnu.org>; Thu, 05 Jan 2023 09:14:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=CWmgURgVvT3HkVgRo206lKNbnitmtJNybOYPrf7FVHA=;
- b=t0RahvRtCKTVBiC3ODDBBpwR2I4ctkh78vTjxkDFo9mxLY4Ni6dlq0nO35xlnCTIDn
- wHpWm5pe0eQcvHxvxl9mqogm7lY0Ww28CngjiHEf9nxR7jPGqhd1KE3EK83WivqjEZVy
- 0O3XLjrxMpUkfEV2C9x4FizprG6GRlmGeGTksKdwDahrT3qh5PUxQm0od1vGfK/nznR0
- d86PpVEnzRk8Dxi7QXbONqSIeuiHyCzO0FLtbSu028XPCOtjGUiV2Rg6qrq0ByHOJXl/
- oRXgGyuc7KTc/aOFvSAB1JqVyA1qBsveB1lTU6qX+ttN1+LSU7lOY4zNc3v+jF0Wj+3T
- IDoQ==
+ bh=Vf8r8dUCl69AOMhjLwN+zUZ5SufaucXG+NCekgjiuMw=;
+ b=k+BySVUDQFoHBSl+qLgzP5BSNP39RyLjQBeBZdR5cL8TbzSgEVykYQkDupsunTKIw0
+ +bYT9R/ep2jNDfxFFL7zZvYewa6VH58UBQCDRb19/JkhOekRR4jD+wavihhtry1zDdaW
+ Abwy3BZ+TE8Dqn1qPzvC8hYCx6NXV73JT33kf9IbP2CASWt5qAJ5NuAVsJTEc8+M6Ssx
+ Y4ygmEAK+xpktJdvYuJxzR3H5APCQabXsAkljKZpJ2IQujGWe/32jZW+fETQtV4qfDgh
+ eJG0Lmo+Am05BR+VTQabeKASFuh2/wveXFcni+G6d9M1bBBNrlHjw1p3Fru6bldWLSF0
+ k/yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CWmgURgVvT3HkVgRo206lKNbnitmtJNybOYPrf7FVHA=;
- b=m5jvY/b64fS3X0y/1iQbfw3ALO2DZBxW//hLbc+S2dJDs3Kx1l8Hlx3i3y7UvoZOq/
- sl51GBlaaKH+UioDqN0VZvhIhLEhAcSz88mCrMcdr5ZHKLy8mHvXqTNqGHnUxKJ1k6wF
- kMsaFEclqs8hk2Zc7s2VSROSD9AKe9A1eSh373prpMEx+2EExONaG4t9N2qBS58PwGRG
- qkLXGwPlNvx4Z94sVhLEzjgsP5Fb66zK4YE8GPhelceHeYeDO7gHICZotrKQn71OsJdV
- FSNGaYj8MhfoP+ef0Dq9qE2XpCx2Tl2Bd9lb8odU9v0ZjzRrql/QIViVQ3cNq4ybbBcH
- on1g==
-X-Gm-Message-State: AFqh2kpDvZsp7uSsUnhMJcOc78Xo8sRtX40ckpliJ9H7W+87XbG2AVfs
- pwSBrUz4AoqcGdRbk0FjiG3urQ==
-X-Google-Smtp-Source: AMrXdXvHkOYnZr7eQ/ugslrmQ+p+ngw764iMWu0RkcvptaEQkwPEVd43YAIXhbHAJWd9egKMqsen9A==
-X-Received: by 2002:a05:600c:1911:b0:3d9:8635:a916 with SMTP id
- j17-20020a05600c191100b003d98635a916mr31504778wmq.9.1672938559250; 
- Thu, 05 Jan 2023 09:09:19 -0800 (PST)
+ bh=Vf8r8dUCl69AOMhjLwN+zUZ5SufaucXG+NCekgjiuMw=;
+ b=XwhikCDwxfEFOUQjjelBKXuta/lRJ+bjl3HpCZ1NtiAfKnxJTuENZRsyROeq3V/F3h
+ xR7lAN8O58HRHt8AUJKBwTRT50FElU+Adp0TNq0Nn/L9NIgjdq70Hygb2dWm0ifxSlt4
+ 4FMCI93mXNFMnxyKu3yZCjk4djkPD7474mgfMZ5GMxqLA3rn5Ay89HGKhlmRCHLA0pQq
+ 3kVnW/KV3U8UAM2OleqAJAgcG2Rn2S4edZN5a5yxWOmIV0KNxFTd0YoTXopOleuYzFGq
+ uoaSUmHUmrdolWdD+OTQEP8/Wzhi+gCZnYf9ex2mSjDfJeVDl3BV9wbSM0CZeTpVr4k0
+ GrmQ==
+X-Gm-Message-State: AFqh2krmxAHsTwZAxtZZORI5z4ch4EAWL2KlNYEsbiCi1k4X1vdLP01q
+ z3X4esBFvSMI0+Sh6kotLJCQTQ==
+X-Google-Smtp-Source: AMrXdXtblv5x/dcf+pWl6BYX+YPaXXjG7qp/ZPdTsXGXiMVFgjbb5iIBoGu+RgFdu2iYZsDi6wLzGA==
+X-Received: by 2002:adf:f143:0:b0:2ae:b451:a0f7 with SMTP id
+ y3-20020adff143000000b002aeb451a0f7mr2479033wro.5.1672938841012; 
+ Thu, 05 Jan 2023 09:14:01 -0800 (PST)
 Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- o5-20020a05600c510500b003b4ff30e566sm7814600wms.3.2023.01.05.09.09.16
+ b14-20020a05600010ce00b0023c8026841csm36822861wrx.23.2023.01.05.09.13.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Jan 2023 09:09:18 -0800 (PST)
-Message-ID: <65ef72d7-1d7d-d6d4-a10f-fe854a34d39a@linaro.org>
-Date: Thu, 5 Jan 2023 18:09:15 +0100
+ Thu, 05 Jan 2023 09:14:00 -0800 (PST)
+Message-ID: <27a8f6ef-b78e-31ae-6bba-eb3f106de9f7@linaro.org>
+Date: Thu, 5 Jan 2023 18:13:57 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.6.1
-Subject: Re: [PATCH v2 09/21] gdbstub: make various helpers visible to the
- rest of the module
+Subject: Re: [PATCH v2 12/21] gdbstub: abstract target specific details from
+ gdb_put_packet_binary
 Content-Language: en-US
 To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org, alex.bennee@gmail.com
@@ -83,13 +82,13 @@ Cc: David Hildenbrand <david@redhat.com>,
  Yoshinori Sato <ysato@users.sourceforge.jp>,
  Xiaojuan Yang <yangxiaojuan@loongson.cn>, qemu-arm@nongnu.org
 References: <20230105164320.2164095-1-alex.bennee@linaro.org>
- <20230105164320.2164095-10-alex.bennee@linaro.org>
+ <20230105164320.2164095-13-alex.bennee@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230105164320.2164095-10-alex.bennee@linaro.org>
+In-Reply-To: <20230105164320.2164095-13-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
 X-Spam_score_int: -49
 X-Spam_score: -5.0
 X-Spam_bar: -----
@@ -109,47 +108,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2023 17:09:24 -0000
+X-List-Received-Date: Thu, 05 Jan 2023 17:14:11 -0000
 
 On 5/1/23 17:43, Alex Bennée wrote:
-> We will be needing to use these helpers between the user and softmmu
-> files so declare them in the headers, add a system prefix and remove
-
-"system prefix" -> "'gdb_' prefix"
-
-> static from the implementations.
+> We unfortunately handle the checking of packet acknowledgement
+> differently for user and softmmu modes. Abstract the user mode stuff
+> behind gdb_got_immediate_ack with a stub for softmmu.
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   gdbstub/internals.h |  25 ++++
->   gdbstub/gdbstub.c   | 271 ++++++++++++++++++++++----------------------
->   2 files changed, 161 insertions(+), 135 deletions(-)
+>   gdbstub/internals.h | 15 +++++++++++++++
+>   gdbstub/gdbstub.c   | 10 ++--------
+>   gdbstub/softmmu.c   |  8 ++++++++
+>   gdbstub/user.c      | 19 +++++++++++++++++++
+>   4 files changed, 44 insertions(+), 8 deletions(-)
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-
-> +/*
-> + * Connection helpers for both softmmu and user backends
-> + */
-> +
-> +void gdb_put_strbuf(void);
-> +int gdb_put_packet(const char *buf);
-> +int gdb_put_packet_binary(const char *buf, int len, bool dump);
-> +void gdb_hextomem(GByteArray *mem, const char *buf, int len);
-> +void gdb_memtohex(GString *buf, const uint8_t *mem, int len);
-> +void gdb_memtox(GString *buf, const char *mem, int len);
-> +void gdb_read_byte(uint8_t ch);
-> +
-> +/* utility helpers */
-> +CPUState *gdb_first_attached_cpu(void);
-> +void gdb_append_thread_id(CPUState *cpu, GString *buf);
-> +int gdb_get_cpu_index(CPUState *cpu);
-> +
-> +void gdb_init_gdbserver_state(void);
-> +void gdb_create_default_process(GDBState *s);
-> +
-> +/*
-> + * Helpers with separate softmmu and user implementations
-> + */
-> +void gdb_put_buffer(const uint8_t *buf, int len);
 
 
