@@ -1,58 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pEMjR-0004La-Hq
-	for mharc-qemu-riscv@gnu.org; Sat, 07 Jan 2023 22:52:25 -0500
+	id 1pEOLl-000606-E9
+	for mharc-qemu-riscv@gnu.org; Sun, 08 Jan 2023 00:36:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pEMjQ-0004LH-1z; Sat, 07 Jan 2023 22:52:24 -0500
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ id 1pEOLi-0005z6-AR; Sun, 08 Jan 2023 00:36:02 -0500
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pEMjN-0008Lc-Kn; Sat, 07 Jan 2023 22:52:23 -0500
-Received: by mail-ej1-x62e.google.com with SMTP id hw16so370330ejc.10;
- Sat, 07 Jan 2023 19:52:20 -0800 (PST)
+ id 1pEOLf-0003cw-Nf; Sun, 08 Jan 2023 00:36:00 -0500
+Received: by mail-ej1-x631.google.com with SMTP id tz12so12513569ejc.9;
+ Sat, 07 Jan 2023 21:35:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I5sNx7TX9ACxlUPDc7jdGO70mReEt4uLX6fgAA91hvo=;
- b=WAjYiIAgEsaR6ngiji5aTm2R+ImB6tOiclrRhCx2ZaKZutkfgDqPFgY5s/iM8+3RYs
- sJweG9FK5dx9J55rmGGIKIJyFC7KnKqw04INnq77oUkYpZwwy8YKtWb8ODaq9DygNsdB
- T1QZcm4zdE/NKJDZjcXAcQrMW6qdC1KLKVa1uke/1Sl2p+YgaLNl/azp0/A1w/fouF0n
- gcDIwidAUTheyfEtv79GbVdBe8zYXYvBTYZC5KtmFLsIYab8wxCoAKsJQn5S8RJli+U3
- jlwu+Y0KGVz90cYOhGOtn4GPTpgw9w1xAnBbqcYidzeiEGB9bGL6hYLcrKFD0RffrBc0
- /UtQ==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3xZ6SKNWfaZZc73rws7zd+R9khWnHie2ztD0YJo19aM=;
+ b=PbydBjvaPNjDouLoJY++EIqxe5K5hVeiwi58ozDvoLyMoaARAg/v8x+YVCGipGs7m+
+ jvfGlP0E8VgVGl+EWnkDmHELtvGeDhh0i5TDIY+snrGlsk54ITxhE34VLneVwysPut1I
+ YFc8dsHL3Pdm/nxNh+VK82eHbWDyKz59OzbCWG9353yiuzeVy3St2LyTlKghAztoDEoY
+ X4iSdg082JQc/nOjvXF027SFZie09cIaBDKjIVxJBeG1v3HKlKlXSY62WNwCu2Q9xlDY
+ cdibVwEZ3KvTDvBC/ydKbraiwXU+PCcxwPWbR5o4ZjfBStvMwePveoKjQms95LurxqU3
+ pL0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=I5sNx7TX9ACxlUPDc7jdGO70mReEt4uLX6fgAA91hvo=;
- b=JkYncS+bnfZf+wD1+ohHDgQSPgDCl/HT+boBLZzvINbWGzHL55fWYiLSLPxwT/2KtT
- FjQQqTSSjfNAUZHYQdvrJ8en2PXBcemGQK4X4O/U6N9D8il3Amts7FswaIhesFLC9U9L
- aNjEfldvG8F7ewDj5ezLLRWXAR9rkxMOmcNYdVbJQFVpH1hmGFlxoZW6CQ+3CBNBKDfB
- oi/LzXnADtKRn3JzUZSTx1u5g+gW5+HJ6haax1oWeIVFm2PYKIDWYl5VrZ/4Zfvis+xM
- qsitCRKpx4rFiZjdfSjZWRyvZ9GGJN+p7zNLHmldShKpmCgZWEAwUI6y2LPjJ1eOijUr
- tgKA==
-X-Gm-Message-State: AFqh2koMumB/NxTODtoqG0cDhz1tTlun24IfluhyQkwDT+CwUlt+rV0b
- f2EMemUdmtVegJ2dLKyN9K12f1qhbTuN6sfoSq0=
-X-Google-Smtp-Source: AMrXdXtJbMJ1ZvY6xP5s+/qq59gTpJD7SW3yOPrRjOmb41XDe+EkwYXtj6Mm7PMOY9PCw1v5OtBD/qNQfKxsBtXVlDw=
-X-Received: by 2002:a17:907:7782:b0:7c0:e380:3d44 with SMTP id
- ky2-20020a170907778200b007c0e3803d44mr5195971ejc.498.1673149939578; Sat, 07
- Jan 2023 19:52:19 -0800 (PST)
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3xZ6SKNWfaZZc73rws7zd+R9khWnHie2ztD0YJo19aM=;
+ b=WD9cJ+xAH/keTGFW3tJaMmAVix4T3DniH3HCr9ZJo2Vn6FaNQKYCdUZ3NNqqV8X3x6
+ 0GPSBVaFmD8e37MaTQf5CHRrycymIvLfBk8/CG8q2j60J620ue1RgkGZ7KeI3us/Cp/4
+ htuQaxqmpIDF66CkE9cDeoxcCiJapaNPxcGwSTu5zk3rO6D5tGeOEGz7zyn8KjOQcMdY
+ 03h9pppI8Ar0hBfCeGmp8XIRlo8ADNUs12axlaHb1r8YFVbM+6cdTPzhpW64yq+PZvnM
+ 9lCs8TbBwTzm8m/xXzs7SaWzKjfeWhw6Stpbij2a1/U0/Wrq/QWyR/ijaqnogr5yDoaj
+ cTIw==
+X-Gm-Message-State: AFqh2kqwn5Y/OZlrw06vbS35U5VFTcUcadr+DnTwL11/1hNBiXKG+xS5
+ FWazS/tVWHRQvUx8Qc4e4y7Vc2M5YidBiVAZf1s=
+X-Google-Smtp-Source: AMrXdXuN59YN8PLpBjvyhZGCySTz+QTPqhYQQM2eprKf2vxjz8/EkpWcEWGZCLRdCNDtSKi2jli9yUFwnXs5OKERMKQ=
+X-Received: by 2002:a17:907:6d29:b0:84d:ed8:b9df with SMTP id
+ sa41-20020a1709076d2900b0084d0ed8b9dfmr1154874ejc.26.1673156157041; Sat, 07
+ Jan 2023 21:35:57 -0800 (PST)
 MIME-Version: 1.0
-References: <20221229172734.119600-1-abdulras@google.com>
-In-Reply-To: <20221229172734.119600-1-abdulras@google.com>
+References: <20230104220449.41337-1-philmd@linaro.org>
+ <20230104220449.41337-11-philmd@linaro.org>
+In-Reply-To: <20230104220449.41337-11-philmd@linaro.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sun, 8 Jan 2023 11:52:08 +0800
-Message-ID: <CAEUhbmW5_5htR53nXHJEv+FShz2-+94CROV8JpGRBMhLqTRUWQ@mail.gmail.com>
-Subject: Re: [PATCH] riscv: do not set the rounding mode via `gen_set_rm`
-To: Saleem Abdulrasool <abdulras@google.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, frank.chang@sifive.com, 
- Saleem Abdulrasool <compnerd@compnerd.org>
+Date: Sun, 8 Jan 2023 13:35:46 +0800
+Message-ID: <CAEUhbmWPLgsa53KWSSbJK4hL==UdreOr0EVSkTuWHgvbnkENxA@mail.gmail.com>
+Subject: Re: [PATCH 10/20] hw/arm: Open-code pflash_cfi01_register()
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, Song Gao <gaosong@loongson.cn>, 
+ Antony Pavlov <antonynpavlov@gmail.com>, Jan Kiszka <jan.kiszka@web.de>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Hanna Reitz <hreitz@redhat.com>,
+ Bernhard Beschow <shentey@gmail.com>, BALATON Zoltan <balaton@eik.bme.hu>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-ppc@nongnu.org, 
+ Mark Burton <mburton@qti.qualcomm.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Magnus Damm <magnus.damm@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
+ Bin Meng <bin.meng@windriver.com>, Max Filippov <jcmvbkbc@gmail.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>, Eduardo Habkost <eduardo@habkost.net>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Radoslaw Biernacki <rad@semihalf.com>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ Xiaojuan Yang <yangxiaojuan@loongson.cn>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ qemu-block@nongnu.org, qemu-riscv@nongnu.org, 
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Alistair Francis <alistair@alistair23.me>, qemu-arm@nongnu.org, 
+ Leif Lindholm <quic_llindhol@quicinc.com>, Kevin Wolf <kwolf@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62e.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::631;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -72,120 +92,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Jan 2023 03:52:24 -0000
+X-List-Received-Date: Sun, 08 Jan 2023 05:36:03 -0000
 
-On Fri, Dec 30, 2022 at 2:20 AM Saleem Abdulrasool <abdulras@google.com> wrote:
+On Thu, Jan 5, 2023 at 6:43 AM Philippe Mathieu-Daud=C3=A9 <philmd@linaro.o=
+rg> wrote:
 >
-> From: Saleem Abdulrasool <compnerd@compnerd.org>
+> pflash_cfi01_register() hides an implicit sysbus mapping of
+> MMIO region #0. This is not practical in a heterogeneous world
+> where multiple cores use different address spaces. In order to
+> remove to remove pflash_cfi01_register() from the pflash API,
+
+duplicated "to remove"
+
+> open-code it as a qdev creation call followed by an explicit
+> sysbus mapping.
 >
-> Setting the rounding mode via the `gen_set_rm` call would alter the
-> state of the disassembler, resetting the `TransOp` in the assembler
-> context.  When we subsequently set the rounding mode to the desired
-> value, we would trigger an assertion in `decode_save_opc`.  Instead
-> we can set the rounding mode via the `gen_helper_set_rounding_mode`
-> which will still trigger the exception in the case of an invalid RM
-> without altering the CPU disassembler state.
->
-> Signed-off-by: Saleem Abdulrasool <compnerd@compnerd.org>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > ---
->  target/riscv/insn_trans/trans_rvv.c.inc | 69 +++++++++++++------------
->  1 file changed, 36 insertions(+), 33 deletions(-)
+>  hw/arm/collie.c      | 15 +++++++++------
+>  hw/arm/gumstix.c     | 19 +++++++++++++------
+>  hw/arm/mainstone.c   | 13 ++++++++-----
+>  hw/arm/omap_sx1.c    | 22 ++++++++++++++--------
+>  hw/arm/versatilepb.c | 13 ++++++++-----
+>  hw/arm/z2.c          | 10 +++++++---
+>  6 files changed, 59 insertions(+), 33 deletions(-)
 >
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 4dea4413ae..73f6fab1c5 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -2679,8 +2679,10 @@ static bool do_opfv(DisasContext *s, arg_rmr *a,
->                      int rm)
->  {
->      if (checkfn(s, a)) {
-> +        // the helper will raise an exception if the rounding mode is invalid
 
-nits: use /* */
-
->          if (rm != RISCV_FRM_DYN) {
-> -            gen_set_rm(s, RISCV_FRM_DYN);
-> +            gen_helper_set_rounding_mode(cpu_env,
-> +                                         tcg_constant_i32(RISCV_FRM_DYN));
->          }
->
->          uint32_t data = 0;
-> @@ -3001,38 +3003,39 @@ static bool opffv_narrow_check(DisasContext *s, arg_rmr *a)
->             require_scale_zve64f(s);
->  }
->
-> -#define GEN_OPFV_NARROW_TRANS(NAME, CHECK, HELPER, FRM)            \
-> -static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
-> -{                                                                  \
-> -    if (CHECK(s, a)) {                                             \
-> -        if (FRM != RISCV_FRM_DYN) {                                \
-> -            gen_set_rm(s, RISCV_FRM_DYN);                          \
-> -        }                                                          \
-> -                                                                   \
-> -        uint32_t data = 0;                                         \
-> -        static gen_helper_gvec_3_ptr * const fns[2] = {            \
-> -            gen_helper_##HELPER##_h,                               \
-> -            gen_helper_##HELPER##_w,                               \
-> -        };                                                         \
-> -        TCGLabel *over = gen_new_label();                          \
-> -        gen_set_rm(s, FRM);                                        \
-> -        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
-> -        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
-> -                                                                   \
-> -        data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
-> -        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-> -        data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
-> -        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
-> -        tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-> -                           vreg_ofs(s, a->rs2), cpu_env,           \
-> -                           s->cfg_ptr->vlen / 8,                   \
-> -                           s->cfg_ptr->vlen / 8, data,             \
-> -                           fns[s->sew - 1]);                       \
-> -        mark_vs_dirty(s);                                          \
-> -        gen_set_label(over);                                       \
-> -        return true;                                               \
-> -    }                                                              \
-> -    return false;                                                  \
-> +#define GEN_OPFV_NARROW_TRANS(NAME, CHECK, HELPER, FRM)                     \
-> +static bool trans_##NAME(DisasContext *s, arg_rmr *a)                       \
-> +{                                                                           \
-> +    if (CHECK(s, a)) {                                                      \
-> +        if (FRM != RISCV_FRM_DYN) {                                         \
-> +            gen_helper_set_rounding_mode(cpu_env,                           \
-> +                                         tcg_constant_i32(RISCV_FRM_DYN));  \
-> +        }                                                                   \
-> +                                                                            \
-> +        uint32_t data = 0;                                                  \
-> +        static gen_helper_gvec_3_ptr * const fns[2] = {                     \
-> +            gen_helper_##HELPER##_h,                                        \
-> +            gen_helper_##HELPER##_w,                                        \
-> +        };                                                                  \
-> +        TCGLabel *over = gen_new_label();                                   \
-> +        gen_set_rm(s, FRM);                                                 \
-> +        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);                   \
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);          \
-> +                                                                            \
-> +        data = FIELD_DP32(data, VDATA, VM, a->vm);                          \
-> +        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                      \
-> +        data = FIELD_DP32(data, VDATA, VTA, s->vta);                        \
-> +        data = FIELD_DP32(data, VDATA, VMA, s->vma);                        \
-> +        tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),              \
-> +                           vreg_ofs(s, a->rs2), cpu_env,                    \
-> +                           s->cfg_ptr->vlen / 8,                            \
-> +                           s->cfg_ptr->vlen / 8, data,                      \
-> +                           fns[s->sew - 1]);                                \
-> +        mark_vs_dirty(s);                                                   \
-> +        gen_set_label(over);                                                \
-> +        return true;                                                        \
-> +    }                                                                       \
-> +    return false;                                                           \
->  }
->
->  GEN_OPFV_NARROW_TRANS(vfncvt_f_xu_w, opfxv_narrow_check, vfncvt_f_xu_w,
-> --
-
-Is it possible to create a test case (tests/tcg/riscv64) for this?
-
-Regards,
-Bin
+Otherwise,
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
