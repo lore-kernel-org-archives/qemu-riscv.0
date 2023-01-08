@@ -1,63 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pEMOR-0000tM-U9
-	for mharc-qemu-riscv@gnu.org; Sat, 07 Jan 2023 22:30:43 -0500
+	id 1pEMRe-0001mZ-OT
+	for mharc-qemu-riscv@gnu.org; Sat, 07 Jan 2023 22:34:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pEMOQ-0000sm-2F; Sat, 07 Jan 2023 22:30:42 -0500
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ id 1pEMRd-0001mF-6O; Sat, 07 Jan 2023 22:34:01 -0500
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pEMOJ-0002Qv-WF; Sat, 07 Jan 2023 22:30:41 -0500
-Received: by mail-ed1-x530.google.com with SMTP id z11so7719625ede.1;
- Sat, 07 Jan 2023 19:30:34 -0800 (PST)
+ id 1pEMRZ-0002rn-Vk; Sat, 07 Jan 2023 22:34:00 -0500
+Received: by mail-ed1-x52b.google.com with SMTP id j16so7662986edw.11;
+ Sat, 07 Jan 2023 19:33:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RMYQVCrCY7oa8m6P8HZtqr54QkW0vIb4olvZBCakXRA=;
- b=SKh47xUqM/rFbv54PD2/Wwb/bMo1kTXdjlz6ibpNRX/5hyGhgAnrbXqZEstwmejDYD
- Vg4gcJ/fzUwjgj3TZmpdtSxzzPXnh+CCvkmpoyE7tSxOUh5YRjLHn9pSeIDP0ApfsdfI
- rlpS0z746aC/xuqzDzHG67rukTG8Gt5rYnvECf/AUQVMki6gI/5o+zDLNpUH+42a8gNT
- IfMlEjvhMIdF74BrZz0W24lL2JBIdKxIx1nWW1qz9jiLiM8qpF/kjr8Z7VoKLFIOv/V2
- giy3BgBAkDCTBNLIjHSNrM8prjlj+0s8R7dsPq2WB1hL51wlzsQwK2VwkLU5aR/wX+OV
- /kxg==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=o1oFPtFyKAhBTQvfqqjrhngFuAaO5XhD7x1bAFZHIvA=;
+ b=kkPiViqBmsu+MI4GavyzoQkOqiFqbFX0+2ZS1XUYIJ5hSCMl3e3ybGkCWOLyT6+BqZ
+ Cd8ztN/LRUj1XyKlitYF+dMFJrzYft1kXLaNTviWx8qyc/INFYsn+RLVxCsQHlPE/gIr
+ wwQMcyCSRVr4v0+pGUGf0r6WilulzPaNAqjkxASo7VfRPyGrnpx6B+EWAafC6xRBlv7o
+ 7JWeUHSGIHWHrLbPreNqEQ7owxz4gWqzT0Q7lkWAHf5lsRa2gAQOqrUOGkReChYdpmMD
+ FlCQ8uollYWah8w82X6lruN7aqnD04mDNu/A3XT7lKCBd3+E0mNfkxNRR23QjR8VOsRk
+ acug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RMYQVCrCY7oa8m6P8HZtqr54QkW0vIb4olvZBCakXRA=;
- b=qeULvcdRWQyQZu/RbvF0neleFqJ4Xjrytq+1shj4aFlqoGyUOkydUPqzQH1tbAFdY+
- 1UDNQn4sIPwAft2pqlJDswIKxgMryWZKkCqUrq3McUSRDb4/ubrKMOnQeXOCaBwFhX0p
- 42afi0tTjsur9F4Hb9GqhmFZK3J+q7hIihUM1GdJbUVhmKOSKK34ifKfiIYmsNkfdIBt
- SD+R+DhrsXPTCzEPuJ5nXmBbbpnCSfC5BJI5wvqzafw8SwluXH2W89jDu9RiAdLSwMRj
- MSQ9q9m4izYuI8qOQNPwQD59wakUoXfPpXj531euXoB84Bz3ofMqdMYNPbijAenuGIpC
- LUgA==
-X-Gm-Message-State: AFqh2kp/eOSvTm7IUJ/b3QhAuxfQ60k8+QVyHdknI++9idRKUUtVY7j7
- jN7AeA9fqDyqoE7Zbg3kCD2a38pJfOFisIt7NPA=
-X-Google-Smtp-Source: AMrXdXuB5E0XjfuCvocCQPtVFZ7wvL3Mz48aVqw5V20qC/sd0v6w2r537JGUoUBsiWcTaGAdsOUH5xTDhZn6MpyZQks=
-X-Received: by 2002:aa7:d80f:0:b0:499:dfa:1c6b with SMTP id
- v15-20020aa7d80f000000b004990dfa1c6bmr249675edq.202.1673148633826; Sat, 07
- Jan 2023 19:30:33 -0800 (PST)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=o1oFPtFyKAhBTQvfqqjrhngFuAaO5XhD7x1bAFZHIvA=;
+ b=NMIsjGnPZK4wqLps93acuVynTouLI+4s49h/M29ZSsGHfcdGO0fUrza8G6NFdq/eA4
+ kMUUe+/QDFsN6yoTCzXaKv2BcHYq4XfCse7WRiLy9zGsWu1w1rASnGFPmMlKJyxSCaZN
+ tf7BcemXF/johQPsYVjI0+Yj43ikjGXyZbaCIyJd2BpQXnt8RKIhiFq6hsiBU7805lSy
+ lJWdqzbOE4NJAusi57/inf/UejFF8RWsQIgObnqe5GNuuWPNS8KfOHRYZgpF08VdWBaC
+ 5KbC0i5zp3D4Ri0d8BMbZdjBK22IzNTz6BItNW4wbn05vMUv90AXNjlfq5VsBO+0yNVr
+ a0Og==
+X-Gm-Message-State: AFqh2kpg4GUVWNEaVOf0qihsxCU3J4wZVx+gdQ6UNGHyVkKFRZSW9QOy
+ Mh5BoAvgUi5F2s2Hmn4v8q8UgpthqSKW1ZRRtWc=
+X-Google-Smtp-Source: AMrXdXuZZRgJzFtnPdMLWSOHzaIMZqdw119+dYyiegh2J8R6bD7NxAkIU3LBEqDwVKXrTaUwOutqe52D2y6Wuzo7lOE=
+X-Received: by 2002:a05:6402:1843:b0:46b:1d60:f60a with SMTP id
+ v3-20020a056402184300b0046b1d60f60amr6810212edy.193.1673148836232; Sat, 07
+ Jan 2023 19:33:56 -0800 (PST)
 MIME-Version: 1.0
 References: <20230102115241.25733-1-dbarboza@ventanamicro.com>
- <20230102115241.25733-5-dbarboza@ventanamicro.com>
-In-Reply-To: <20230102115241.25733-5-dbarboza@ventanamicro.com>
+ <20230102115241.25733-11-dbarboza@ventanamicro.com>
+In-Reply-To: <20230102115241.25733-11-dbarboza@ventanamicro.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sun, 8 Jan 2023 11:30:23 +0800
-Message-ID: <CAEUhbmXiBh+JVpGZ4w7G-yYfTj+qeynMzJm9GB=QBPaid2SLfA@mail.gmail.com>
-Subject: Re: [PATCH v5 04/11] hw/riscv/boot.c: exit early if filename is NULL
- in load functions
+Date: Sun, 8 Jan 2023 11:33:46 +0800
+Message-ID: <CAEUhbmUfWbssTO1w8q_VdrWDHE4JLdJvZGkkt_w+KChsR5P32g@mail.gmail.com>
+Subject: Re: [PATCH v5 10/11] hw/riscv/boot.c: consolidate all kernel init in
+ riscv_load_kernel()
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- Bin Meng <bin.meng@windriver.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x530.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,25 +73,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Jan 2023 03:30:42 -0000
+X-List-Received-Date: Sun, 08 Jan 2023 03:34:01 -0000
 
-On Mon, Jan 2, 2023 at 7:54 PM Daniel Henrique Barboza
+On Mon, Jan 2, 2023 at 7:55 PM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> riscv_load_firmware(), riscv_load_initrd() and riscv_load_kernel() works
-> under the assumption that a 'filename' parameter is always not NULL.
+> The microchip_icicle_kit, sifive_u, spike and virt boards are now doing
+> the same steps when '-kernel' is used:
 >
-> This is currently the case since all callers of these functions are
-> checking for NULL before calling them. Add an g_assert() to make sure
-> that a NULL value in these cases are to be considered a bug.
+> - execute load_kernel()
+> - load init_rd()
+> - write kernel_cmdline
 >
-> Suggested-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Let's fold everything inside riscv_load_kernel() to avoid code
+> repetition. To not change the behavior of boards that aren't calling
+> riscv_load_init(), add an 'load_initrd' flag to riscv_load_kernel() and
+
+typo: should be riscv_load_initrd()
+
+> allow these boards to opt out from initrd loading.
+>
+> Cc: Palmer Dabbelt <palmer@dabbelt.com>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  hw/riscv/boot.c | 6 ++++++
->  1 file changed, 6 insertions(+)
+>  hw/riscv/boot.c            | 22 +++++++++++++++++++---
+>  hw/riscv/microchip_pfsoc.c | 12 ++----------
+>  hw/riscv/opentitan.c       |  2 +-
+>  hw/riscv/sifive_e.c        |  3 ++-
+>  hw/riscv/sifive_u.c        | 12 ++----------
+>  hw/riscv/spike.c           | 11 +----------
+>  hw/riscv/virt.c            | 12 ++----------
+>  include/hw/riscv/boot.h    |  1 +
+>  8 files changed, 30 insertions(+), 45 deletions(-)
 >
 
+Otherwise,
 Reviewed-by: Bin Meng <bmeng@tinylab.org>
 
