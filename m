@@ -1,84 +1,88 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pEOLl-000606-E9
-	for mharc-qemu-riscv@gnu.org; Sun, 08 Jan 2023 00:36:06 -0500
+	id 1pEPVD-0001sN-OE
+	for mharc-qemu-riscv@gnu.org; Sun, 08 Jan 2023 01:49:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pEOLi-0005z6-AR; Sun, 08 Jan 2023 00:36:02 -0500
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pEOLf-0003cw-Nf; Sun, 08 Jan 2023 00:36:00 -0500
-Received: by mail-ej1-x631.google.com with SMTP id tz12so12513569ejc.9;
- Sat, 07 Jan 2023 21:35:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3xZ6SKNWfaZZc73rws7zd+R9khWnHie2ztD0YJo19aM=;
- b=PbydBjvaPNjDouLoJY++EIqxe5K5hVeiwi58ozDvoLyMoaARAg/v8x+YVCGipGs7m+
- jvfGlP0E8VgVGl+EWnkDmHELtvGeDhh0i5TDIY+snrGlsk54ITxhE34VLneVwysPut1I
- YFc8dsHL3Pdm/nxNh+VK82eHbWDyKz59OzbCWG9353yiuzeVy3St2LyTlKghAztoDEoY
- X4iSdg082JQc/nOjvXF027SFZie09cIaBDKjIVxJBeG1v3HKlKlXSY62WNwCu2Q9xlDY
- cdibVwEZ3KvTDvBC/ydKbraiwXU+PCcxwPWbR5o4ZjfBStvMwePveoKjQms95LurxqU3
- pL0Q==
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1pEPVC-0001ro-I1
+ for qemu-riscv@nongnu.org; Sun, 08 Jan 2023 01:49:54 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1pEPVA-0003Jb-9t
+ for qemu-riscv@nongnu.org; Sun, 08 Jan 2023 01:49:53 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1673160590;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=qNGDwUtYWMQMmQOpmqEBoEHP4xA1cItNiHsnSACei78=;
+ b=e67Ej8yG10IBfqjdPDxAyYZcNaGrgbyUBn1+wQOcwfFXKEYHh65u6nsVMpDzpsqJ07RRQH
+ 1N2b4gbvhtYvCfLT8DmbeEwIdtIKoJOj/XUq+8vOGP+G4NOtxacvbzGtKeVXGb2ryGvTmS
+ YSfWEuZ3+1UbBmw27JV6l5cS+sPfsuc=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-634-v5uXAmgGPra0pfv8uHMgNA-1; Sun, 08 Jan 2023 01:49:48 -0500
+X-MC-Unique: v5uXAmgGPra0pfv8uHMgNA-1
+Received: by mail-wr1-f72.google.com with SMTP id
+ l18-20020adfa392000000b002bbd5c680a3so201631wrb.14
+ for <qemu-riscv@nongnu.org>; Sat, 07 Jan 2023 22:49:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3xZ6SKNWfaZZc73rws7zd+R9khWnHie2ztD0YJo19aM=;
- b=WD9cJ+xAH/keTGFW3tJaMmAVix4T3DniH3HCr9ZJo2Vn6FaNQKYCdUZ3NNqqV8X3x6
- 0GPSBVaFmD8e37MaTQf5CHRrycymIvLfBk8/CG8q2j60J620ue1RgkGZ7KeI3us/Cp/4
- htuQaxqmpIDF66CkE9cDeoxcCiJapaNPxcGwSTu5zk3rO6D5tGeOEGz7zyn8KjOQcMdY
- 03h9pppI8Ar0hBfCeGmp8XIRlo8ADNUs12axlaHb1r8YFVbM+6cdTPzhpW64yq+PZvnM
- 9lCs8TbBwTzm8m/xXzs7SaWzKjfeWhw6Stpbij2a1/U0/Wrq/QWyR/ijaqnogr5yDoaj
- cTIw==
-X-Gm-Message-State: AFqh2kqwn5Y/OZlrw06vbS35U5VFTcUcadr+DnTwL11/1hNBiXKG+xS5
- FWazS/tVWHRQvUx8Qc4e4y7Vc2M5YidBiVAZf1s=
-X-Google-Smtp-Source: AMrXdXuN59YN8PLpBjvyhZGCySTz+QTPqhYQQM2eprKf2vxjz8/EkpWcEWGZCLRdCNDtSKi2jli9yUFwnXs5OKERMKQ=
-X-Received: by 2002:a17:907:6d29:b0:84d:ed8:b9df with SMTP id
- sa41-20020a1709076d2900b0084d0ed8b9dfmr1154874ejc.26.1673156157041; Sat, 07
- Jan 2023 21:35:57 -0800 (PST)
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qNGDwUtYWMQMmQOpmqEBoEHP4xA1cItNiHsnSACei78=;
+ b=Fd8msvUqn9YgeEltDmd0a3v0ym3+mmUXrCU2tHm8uGHqDC6xGuDwjm/R3SDKWlePz+
+ Qt/CKH781+q5qfOx3ohLWRS8LLunHQPKyZtQz/9tdlhBsx6t1kVVHHDaVbhTDma+oO5L
+ 9iYOczINmn4OJHoOlJr77HOBJjZFDosdfnrwoSaIaNmDct2eEKpj5KPbM3BzXuwHojCd
+ JPN4vYmNzbuJQ3O5b41WeXDei5NIi+AnPYCggQVbvp4UxtzAatmUeCiR8ftOQzhkBBsa
+ pcVKhuYwG7kzgjjtThLSfQgF2PmL5BYvVXTVktUFB1/Jrs+RTxst11fW7KW90QGNcuEE
+ Ew/Q==
+X-Gm-Message-State: AFqh2kpul+VsxsXx6v0UTfU0zhoftuoTjIEsprrJYKcUzgcQZkT9qDap
+ T+ivYiKOGmCOqo6wUmIBVOA7LXbgZW3USR+N+yliLBh/Typ4tRp+lzBEB3T+sof2sZSnj/s5mJT
+ uKLTJDq2HDDIacDg=
+X-Received: by 2002:a05:600c:4e4f:b0:3cf:9d32:db67 with SMTP id
+ e15-20020a05600c4e4f00b003cf9d32db67mr42761804wmq.3.1673160587265; 
+ Sat, 07 Jan 2023 22:49:47 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXuIUYnVUO1jrkS42MSlDmqtbYjJf7wC+ahppzvv26T0eiHn/CICQD+ZHV6RArpTllYupDf8lA==
+X-Received: by 2002:a05:600c:4e4f:b0:3cf:9d32:db67 with SMTP id
+ e15-20020a05600c4e4f00b003cf9d32db67mr42761774wmq.3.1673160587001; 
+ Sat, 07 Jan 2023 22:49:47 -0800 (PST)
+Received: from redhat.com ([2.52.141.223]) by smtp.gmail.com with ESMTPSA id
+ o9-20020a05600c510900b003c6f8d30e40sm13207546wms.31.2023.01.07.22.49.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 07 Jan 2023 22:49:46 -0800 (PST)
+Date: Sun, 8 Jan 2023 01:49:41 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org, imammedo@redhat.com, ani@anisinha.ca,
+ peter.maydell@linaro.org, laurent@vivier.eu,
+ edgar.iglesias@gmail.com, Alistair.Francis@wdc.com,
+ bin.meng@windriver.com, palmer@dabbelt.com,
+ marcel.apfelbaum@gmail.com, yangxiaojuan@loongson.cn,
+ gaosong@loongson.cn, richard.henderson@linaro.org, deller@gmx.de,
+ jasowang@redhat.com, vikram.garhwal@amd.com,
+ francisco.iglesias@amd.com, clg@kaod.org, kraxel@redhat.com,
+ marcandre.lureau@redhat.com, riku.voipio@iki.fi,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
+ crwulff@gmail.com, marex@denx.de
+Subject: Re: [PATCH v2 0/4] Clean up includes
+Message-ID: <20230108014842-mutt-send-email-mst@kernel.org>
+References: <20221222120813.727830-1-armbru@redhat.com>
 MIME-Version: 1.0
-References: <20230104220449.41337-1-philmd@linaro.org>
- <20230104220449.41337-11-philmd@linaro.org>
-In-Reply-To: <20230104220449.41337-11-philmd@linaro.org>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sun, 8 Jan 2023 13:35:46 +0800
-Message-ID: <CAEUhbmWPLgsa53KWSSbJK4hL==UdreOr0EVSkTuWHgvbnkENxA@mail.gmail.com>
-Subject: Re: [PATCH 10/20] hw/arm: Open-code pflash_cfi01_register()
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Song Gao <gaosong@loongson.cn>, 
- Antony Pavlov <antonynpavlov@gmail.com>, Jan Kiszka <jan.kiszka@web.de>, 
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Hanna Reitz <hreitz@redhat.com>,
- Bernhard Beschow <shentey@gmail.com>, BALATON Zoltan <balaton@eik.bme.hu>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-ppc@nongnu.org, 
- Mark Burton <mburton@qti.qualcomm.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Magnus Damm <magnus.damm@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
- Bin Meng <bin.meng@windriver.com>, Max Filippov <jcmvbkbc@gmail.com>, 
- Aurelien Jarno <aurelien@aurel32.net>, Eduardo Habkost <eduardo@habkost.net>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Radoslaw Biernacki <rad@semihalf.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- Peter Maydell <peter.maydell@linaro.org>, 
- qemu-block@nongnu.org, qemu-riscv@nongnu.org, 
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Alistair Francis <alistair@alistair23.me>, qemu-arm@nongnu.org, 
- Leif Lindholm <quic_llindhol@quicinc.com>, Kevin Wolf <kwolf@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x631.google.com
+In-Reply-To: <20221222120813.727830-1-armbru@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=mst@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -92,32 +96,127 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Jan 2023 05:36:03 -0000
+X-List-Received-Date: Sun, 08 Jan 2023 06:49:54 -0000
 
-On Thu, Jan 5, 2023 at 6:43 AM Philippe Mathieu-Daud=C3=A9 <philmd@linaro.o=
-rg> wrote:
->
-> pflash_cfi01_register() hides an implicit sysbus mapping of
-> MMIO region #0. This is not practical in a heterogeneous world
-> where multiple cores use different address spaces. In order to
-> remove to remove pflash_cfi01_register() from the pflash API,
+On Thu, Dec 22, 2022 at 01:08:09PM +0100, Markus Armbruster wrote:
+> Back in 2016, we discussed[1] rules for headers, and these were
+> generally liked:
+> 
+> 1. Have a carefully curated header that's included everywhere first.  We
+>    got that already thanks to Peter: osdep.h.
+> 
+> 2. Headers should normally include everything they need beyond osdep.h.
+>    If exceptions are needed for some reason, they must be documented in
+>    the header.  If all that's needed from a header is typedefs, put
+>    those into qemu/typedefs.h instead of including the header.
+> 
+> 3. Cyclic inclusion is forbidden.
+> 
+> This series fixes a number of rule violations.
 
-duplicated "to remove"
+I had to drop this for now due to failures on bsd in particular.
+See Peter's answer to my pull.
+Markus when you merge this feel free to use:
 
-> open-code it as a qdev creation call followed by an explicit
-> sysbus mapping.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> ---
->  hw/arm/collie.c      | 15 +++++++++------
->  hw/arm/gumstix.c     | 19 +++++++++++++------
->  hw/arm/mainstone.c   | 13 ++++++++-----
->  hw/arm/omap_sx1.c    | 22 ++++++++++++++--------
->  hw/arm/versatilepb.c | 13 ++++++++-----
->  hw/arm/z2.c          | 10 +++++++---
->  6 files changed, 59 insertions(+), 33 deletions(-)
->
+Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
 
-Otherwise,
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+
+> It is based on
+> 
+>     [PATCH v2 0/4] hw/ppc: Clean up includes
+>     [PATCH v2 0/7] include/hw/pci include/hw/cxl: Clean up includes
+>     [PATCH v2 0/3] block: Clean up includes
+>     [PATCH v3 0/5] coroutine: Clean up includes
+> 
+> With all of these applied, just three inclusion loops remain reachable
+> from include/:
+> 
+>     target/microblaze/cpu.h target/microblaze/mmu.h
+> 
+>     target/nios2/cpu.h target/nios2/mmu.h
+> 
+>     target/riscv/cpu.h target/riscv/pmp.h
+> 
+> Breaking them would be nice, but I'm out of steam.
+> 
+> v2:
+> * Rebased
+> * PATCH 3: v1 posted separately
+> * PATCH 4: New
+> 
+> [1] Message-ID: <87h9g8j57d.fsf@blackfin.pond.sub.org>
+>     https://lists.nongnu.org/archive/html/qemu-devel/2016-03/msg03345.html
+> 
+> Based-on: <20221222104628.659681-1-armbru@redhat.com>
+> 
+> Markus Armbruster (4):
+>   include/hw/virtio: Break inclusion loop
+>   include: Include headers where needed
+>   include: Don't include qemu/osdep.h
+>   docs/devel: Rules on #include in headers
+> 
+>  docs/devel/style.rst                        | 7 +++++++
+>  bsd-user/qemu.h                             | 1 -
+>  crypto/block-luks-priv.h                    | 1 -
+>  include/exec/plugin-gen.h                   | 1 +
+>  include/hw/acpi/erst.h                      | 3 +++
+>  include/hw/char/cmsdk-apb-uart.h            | 1 +
+>  include/hw/char/goldfish_tty.h              | 1 +
+>  include/hw/char/xilinx_uartlite.h           | 1 +
+>  include/hw/cris/etraxfs.h                   | 1 +
+>  include/hw/cxl/cxl_host.h                   | 1 -
+>  include/hw/display/macfb.h                  | 3 ++-
+>  include/hw/dma/sifive_pdma.h                | 2 ++
+>  include/hw/i386/ioapic_internal.h           | 1 +
+>  include/hw/i386/sgx-epc.h                   | 1 +
+>  include/hw/input/pl050.h                    | 1 -
+>  include/hw/intc/goldfish_pic.h              | 2 ++
+>  include/hw/intc/loongarch_pch_msi.h         | 2 ++
+>  include/hw/intc/loongarch_pch_pic.h         | 2 ++
+>  include/hw/intc/nios2_vic.h                 | 2 ++
+>  include/hw/misc/mchp_pfsoc_dmc.h            | 2 ++
+>  include/hw/misc/mchp_pfsoc_ioscb.h          | 2 ++
+>  include/hw/misc/mchp_pfsoc_sysreg.h         | 2 ++
+>  include/hw/misc/pvpanic.h                   | 1 +
+>  include/hw/misc/sifive_e_prci.h             | 3 ++-
+>  include/hw/misc/sifive_u_otp.h              | 3 ++-
+>  include/hw/misc/sifive_u_prci.h             | 3 ++-
+>  include/hw/misc/virt_ctrl.h                 | 2 ++
+>  include/hw/misc/xlnx-versal-pmc-iou-slcr.h  | 1 +
+>  include/hw/net/lasi_82596.h                 | 2 +-
+>  include/hw/net/xlnx-zynqmp-can.h            | 1 +
+>  include/hw/ppc/pnv_psi.h                    | 2 +-
+>  include/hw/riscv/boot_opensbi.h             | 2 ++
+>  include/hw/riscv/microchip_pfsoc.h          | 3 +++
+>  include/hw/riscv/numa.h                     | 1 +
+>  include/hw/riscv/sifive_u.h                 | 2 ++
+>  include/hw/riscv/spike.h                    | 2 +-
+>  include/hw/riscv/virt.h                     | 2 +-
+>  include/hw/ssi/sifive_spi.h                 | 3 +++
+>  include/hw/timer/sse-timer.h                | 1 +
+>  include/hw/tricore/triboard.h               | 1 -
+>  include/hw/usb/hcd-dwc3.h                   | 1 +
+>  include/hw/usb/hcd-musb.h                   | 2 ++
+>  include/hw/usb/xlnx-usb-subsystem.h         | 2 ++
+>  include/hw/usb/xlnx-versal-usb2-ctrl-regs.h | 3 +++
+>  include/hw/virtio/virtio-mmio.h             | 2 +-
+>  include/hw/virtio/virtio.h                  | 1 -
+>  include/qemu/plugin-memory.h                | 3 +++
+>  include/qemu/userfaultfd.h                  | 1 -
+>  include/sysemu/dirtyrate.h                  | 2 ++
+>  include/sysemu/dump.h                       | 1 +
+>  include/user/syscall-trace.h                | 1 +
+>  net/vmnet_int.h                             | 1 -
+>  qga/cutils.h                                | 1 -
+>  target/hexagon/hex_arch_types.h             | 1 -
+>  target/hexagon/mmvec/macros.h               | 1 -
+>  target/riscv/pmu.h                          | 1 -
+>  hw/virtio/virtio-qmp.c                      | 1 +
+>  hw/virtio/virtio.c                          | 1 +
+>  qga/cutils.c                                | 3 ++-
+>  59 files changed, 82 insertions(+), 22 deletions(-)
+> 
+> -- 
+> 2.38.1
+
 
