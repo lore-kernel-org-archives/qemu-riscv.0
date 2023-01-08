@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pELZw-0005YQ-FW
-	for mharc-qemu-riscv@gnu.org; Sat, 07 Jan 2023 21:38:32 -0500
+	id 1pELZy-0005bK-2K
+	for mharc-qemu-riscv@gnu.org; Sat, 07 Jan 2023 21:38:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pELZu-0005VJ-ON
- for qemu-riscv@nongnu.org; Sat, 07 Jan 2023 21:38:30 -0500
+ id 1pELZw-0005Yt-Ia
+ for qemu-riscv@nongnu.org; Sat, 07 Jan 2023 21:38:32 -0500
 Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pELZA-0004fV-5q
- for qemu-riscv@nongnu.org; Sat, 07 Jan 2023 21:38:30 -0500
-Received: by mail-pl1-x631.google.com with SMTP id 17so5917755pll.0
- for <qemu-riscv@nongnu.org>; Sat, 07 Jan 2023 18:37:43 -0800 (PST)
+ id 1pELZB-0004gb-W8
+ for qemu-riscv@nongnu.org; Sat, 07 Jan 2023 21:38:32 -0500
+Received: by mail-pl1-x631.google.com with SMTP id c6so5884813pls.4
+ for <qemu-riscv@nongnu.org>; Sat, 07 Jan 2023 18:37:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NtJttwUEQyaD1SfJG+fgMdQwRfXm20UeXRRXlRvUEX4=;
- b=VbUwq7tlCgfO36Oth8TSVLgJMqybrSeTGcCl1IdamNJ23TJWhQ4pTLvHnSb03OwH6J
- Mm/6nx+5eD3sc+wxXLs71NKAX1IgVAkWjZk92johrHQn6y0JRUeOZZ3Sq9iR+MzaO7u5
- Bw462YzSnUIF4NKdYRk5WS+E2kKtrY58N6p7QjB+240Bp0jBsE2pjy74amXiYv69jok6
- 6G8MSAnOLenX4K9LeF8dw47SvoZfwYBSkhi2jgZ2lBn9Em+xBbFRHrTDoD22KkeFKJbh
- WagiRbfFpyu4UKiDpkcb9rZPKfft/l1xAjARHDOs9Wrv9AupBbtOf6hh3J/f8chlq7Ay
- rXYA==
+ bh=LHzGWvWFa4q7FhR/Zjnl6sZxcznG5V94Bca4nmBi0Ko=;
+ b=YTwxzUVTIaPoRoMrrMr3xZVtTxHkxcoWUY/Z2XQDOSB9OBwIAea0LWF4lZprz0utdL
+ bz8oAXkZ3pbK8ENWVfDUPWyMxSf5qcWI7FdLHPzVhOdyqjkbnc7RYerBxQdmB9Sd4SNc
+ W53FcipIv/fYzM1CT+uvFYlDuvdAk2/kogBSiHH30yV1gAPucUS4CmvT7tD6r8j3GoeP
+ e3C4JRG6yLBzathSHildNLFQ87fxBqI7WxbiZTxvKKqIeunYgevwxILHvH32/SSN3Z4G
+ nJwT+chTNLjwGHbuETD1YlinuW3PASIxxePuuoD/RrS4xa3rYjivcBCSGBfLjUJGJLuQ
+ MlWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NtJttwUEQyaD1SfJG+fgMdQwRfXm20UeXRRXlRvUEX4=;
- b=GWz//Cq5zfgHL4H79jRAsaK/1of+sEjpMHkqXpEK1Kvc7JrgR/CrRO6NT8wGWqZuuA
- uMrEujGJz2HNdcKy42GpuMHIGAJumvOEw3EuXB4xGEdeVzLfuaMGyw4tASkJ8GHadiOZ
- tCYTudLaLkYqcspLTICB0aqTWb/W7Hi/DAndB+v5SNnei8DOD8ZH2UyhhCWq4mi0ZLAV
- tj3sPGoaZcyxom9QUOK56H7qF5QmnkVHMt2fMkV/JQSVlYK7VzCh93db/THyC6I57PGG
- GtJtoU0ZMk9chNVeuEgnSt5A0gEnnOwl+3FYeq6SoXj3sVaJS6rVNp6MrJ+ruhVwo5Cl
- FBgg==
-X-Gm-Message-State: AFqh2kpq/jN2ElwRktz71Z+mtEgmdEsr03HWt3jpSPKNVp5BOv6Uik0g
- /6CLksmSB6eSlCr7c7lMdbBGdg==
-X-Google-Smtp-Source: AMrXdXss8BGh5z3qj8f331v9I9FqYqmKAcV0MdGfTWZIzcd4RsPN3FtitSKJFZnDvXI4KVFEPADw+w==
-X-Received: by 2002:a17:902:c10c:b0:192:b5b1:eb1a with SMTP id
- 12-20020a170902c10c00b00192b5b1eb1amr29033572pli.69.1673145462728; 
- Sat, 07 Jan 2023 18:37:42 -0800 (PST)
+ bh=LHzGWvWFa4q7FhR/Zjnl6sZxcznG5V94Bca4nmBi0Ko=;
+ b=xmqhWeQRt72zFFxHqztAByEhHUOyaVKBYjIvYHIO6u6QjDTubhLbd4qptejQVj6wza
+ TqGpEmzlhb9K50twowJXYIL08TQiKjGKkUWX/Mkk4JY/jQcuqt3w3Grd18JL3v2BEJu1
+ YeVakKhR51GaHScAqGG+yJG+I7NR1Q8aOUP9NhEhWb110wvHhLwgBQs+C9AQII9pwXgq
+ hWJM6By94qulzIUKWH646E5CqtBnfr8Pk6FmQ5jhU13TFnH+KZeCf5KJALuHdfqcCSFv
+ loe5Cn37F26UEONaND+7x3A39ZMhulcoBFqc6ypUSlA6XJ89+Kj+bMc1ZniwWff5ErCv
+ jDrA==
+X-Gm-Message-State: AFqh2kqr6DgWL102i6ZYIdlfm76pe8LpHI5ElO0R9rDKR66Ozo/YRVC4
+ Mzjez+lHxieN1OLtFtXvX4hAGw==
+X-Google-Smtp-Source: AMrXdXtWkkVxrDI5jAepvQBu55pf/8Pkk8TEqq3iuXCppr2qwzq8jDajDuGDsPrBDdPoMgPJH321zw==
+X-Received: by 2002:a17:902:fe0c:b0:192:5c3e:8939 with SMTP id
+ g12-20020a170902fe0c00b001925c3e8939mr52348852plj.0.1673145464761; 
+ Sat, 07 Jan 2023 18:37:44 -0800 (PST)
 Received: from stoup.. ([2602:47:d48c:8101:8a2d:2011:f402:6f82])
  by smtp.gmail.com with ESMTPSA id
- o17-20020a170902d4d100b00189d4c666c8sm3394775plg.153.2023.01.07.18.37.41
+ o17-20020a170902d4d100b00189d4c666c8sm3394775plg.153.2023.01.07.18.37.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Jan 2023 18:37:42 -0800 (PST)
+ Sat, 07 Jan 2023 18:37:44 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
  qemu-riscv@nongnu.org, pbonzini@redhat.com, eduardo@habkost.net,
- Daniel Henrique Barboza <danielhb413@gmail.com>
-Subject: [PATCH v4 20/36] target/ppc: Use tcg_gen_atomic_cmpxchg_i128 for STQCX
-Date: Sat,  7 Jan 2023 18:37:03 -0800
-Message-Id: <20230108023719.2466341-21-richard.henderson@linaro.org>
+ Ilya Leoshkevich <iii@linux.ibm.com>
+Subject: [PATCH v4 22/36] tests/tcg/s390x: Add clst.c
+Date: Sat,  7 Jan 2023 18:37:05 -0800
+Message-Id: <20230108023719.2466341-23-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230108023719.2466341-1-richard.henderson@linaro.org>
 References: <20230108023719.2466341-1-richard.henderson@linaro.org>
@@ -81,238 +81,121 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Jan 2023 02:38:31 -0000
+X-List-Received-Date: Sun, 08 Jan 2023 02:38:32 -0000
 
-Note that the previous direct reference to reserve_val,
+From: Ilya Leoshkevich <iii@linux.ibm.com>
 
--   tcg_gen_ld_i64(t1, cpu_env, (ctx->le_mode
--                                ? offsetof(CPUPPCState, reserve_val2)
--                                : offsetof(CPUPPCState, reserve_val)));
+Add a basic test to prevent regressions.
 
-was incorrect because all references should have gone through
-cpu_reserve_val.  Create a cpu_reserve_val2 tcg temp to fix this.
-
+Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
+Message-Id: <20221025213008.2209006-2-iii@linux.ibm.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Daniel Henrique Barboza <danielhb413@gmail.com>
-Message-Id: <20221112061122.2720163-2-richard.henderson@linaro.org>
 ---
- target/ppc/helper.h     |   2 -
- target/ppc/mem_helper.c |  44 -----------------
- target/ppc/translate.c  | 102 ++++++++++++++++++----------------------
- 3 files changed, 47 insertions(+), 101 deletions(-)
+ tests/tcg/s390x/clst.c          | 82 +++++++++++++++++++++++++++++++++
+ tests/tcg/s390x/Makefile.target |  1 +
+ 2 files changed, 83 insertions(+)
+ create mode 100644 tests/tcg/s390x/clst.c
 
-diff --git a/target/ppc/helper.h b/target/ppc/helper.h
-index 8dd22a35e4..0beaca5c7a 100644
---- a/target/ppc/helper.h
-+++ b/target/ppc/helper.h
-@@ -818,6 +818,4 @@ DEF_HELPER_FLAGS_5(stq_le_parallel, TCG_CALL_NO_WG,
-                    void, env, tl, i64, i64, i32)
- DEF_HELPER_FLAGS_5(stq_be_parallel, TCG_CALL_NO_WG,
-                    void, env, tl, i64, i64, i32)
--DEF_HELPER_5(stqcx_le_parallel, i32, env, tl, i64, i64, i32)
--DEF_HELPER_5(stqcx_be_parallel, i32, env, tl, i64, i64, i32)
- #endif
-diff --git a/target/ppc/mem_helper.c b/target/ppc/mem_helper.c
-index d1163f316c..1578887a8f 100644
---- a/target/ppc/mem_helper.c
-+++ b/target/ppc/mem_helper.c
-@@ -413,50 +413,6 @@ void helper_stq_be_parallel(CPUPPCState *env, target_ulong addr,
-     val = int128_make128(lo, hi);
-     cpu_atomic_sto_be_mmu(env, addr, val, opidx, GETPC());
- }
--
--uint32_t helper_stqcx_le_parallel(CPUPPCState *env, target_ulong addr,
--                                  uint64_t new_lo, uint64_t new_hi,
--                                  uint32_t opidx)
--{
--    bool success = false;
--
--    /* We will have raised EXCP_ATOMIC from the translator.  */
--    assert(HAVE_CMPXCHG128);
--
--    if (likely(addr == env->reserve_addr)) {
--        Int128 oldv, cmpv, newv;
--
--        cmpv = int128_make128(env->reserve_val2, env->reserve_val);
--        newv = int128_make128(new_lo, new_hi);
--        oldv = cpu_atomic_cmpxchgo_le_mmu(env, addr, cmpv, newv,
--                                          opidx, GETPC());
--        success = int128_eq(oldv, cmpv);
--    }
--    env->reserve_addr = -1;
--    return env->so + success * CRF_EQ_BIT;
--}
--
--uint32_t helper_stqcx_be_parallel(CPUPPCState *env, target_ulong addr,
--                                  uint64_t new_lo, uint64_t new_hi,
--                                  uint32_t opidx)
--{
--    bool success = false;
--
--    /* We will have raised EXCP_ATOMIC from the translator.  */
--    assert(HAVE_CMPXCHG128);
--
--    if (likely(addr == env->reserve_addr)) {
--        Int128 oldv, cmpv, newv;
--
--        cmpv = int128_make128(env->reserve_val2, env->reserve_val);
--        newv = int128_make128(new_lo, new_hi);
--        oldv = cpu_atomic_cmpxchgo_be_mmu(env, addr, cmpv, newv,
--                                          opidx, GETPC());
--        success = int128_eq(oldv, cmpv);
--    }
--    env->reserve_addr = -1;
--    return env->so + success * CRF_EQ_BIT;
--}
- #endif
- 
- /*****************************************************************************/
-diff --git a/target/ppc/translate.c b/target/ppc/translate.c
-index edb3daa9b5..1c17d5a558 100644
---- a/target/ppc/translate.c
-+++ b/target/ppc/translate.c
-@@ -72,6 +72,7 @@ static TCGv cpu_cfar;
- static TCGv cpu_xer, cpu_so, cpu_ov, cpu_ca, cpu_ov32, cpu_ca32;
- static TCGv cpu_reserve;
- static TCGv cpu_reserve_val;
-+static TCGv cpu_reserve_val2;
- static TCGv cpu_fpscr;
- static TCGv_i32 cpu_access_type;
- 
-@@ -141,8 +142,11 @@ void ppc_translate_init(void)
-                                      offsetof(CPUPPCState, reserve_addr),
-                                      "reserve_addr");
-     cpu_reserve_val = tcg_global_mem_new(cpu_env,
--                                     offsetof(CPUPPCState, reserve_val),
--                                     "reserve_val");
-+                                         offsetof(CPUPPCState, reserve_val),
-+                                         "reserve_val");
-+    cpu_reserve_val2 = tcg_global_mem_new(cpu_env,
-+                                          offsetof(CPUPPCState, reserve_val2),
-+                                          "reserve_val2");
- 
-     cpu_fpscr = tcg_global_mem_new(cpu_env,
-                                    offsetof(CPUPPCState, fpscr), "fpscr");
-@@ -3998,78 +4002,66 @@ static void gen_lqarx(DisasContext *ctx)
- /* stqcx. */
- static void gen_stqcx_(DisasContext *ctx)
- {
-+    TCGLabel *lab_fail, *lab_over;
-     int rs = rS(ctx->opcode);
--    TCGv EA, hi, lo;
-+    TCGv EA, t0, t1;
-+    TCGv_i128 cmp, val;
- 
-     if (unlikely(rs & 1)) {
-         gen_inval_exception(ctx, POWERPC_EXCP_INVAL_INVAL);
-         return;
-     }
- 
-+    lab_fail = gen_new_label();
-+    lab_over = gen_new_label();
+diff --git a/tests/tcg/s390x/clst.c b/tests/tcg/s390x/clst.c
+new file mode 100644
+index 0000000000..ed2fe7326c
+--- /dev/null
++++ b/tests/tcg/s390x/clst.c
+@@ -0,0 +1,82 @@
++#define _GNU_SOURCE
++#include <stdio.h>
++#include <stdlib.h>
 +
-     gen_set_access_type(ctx, ACCESS_RES);
-     EA = tcg_temp_new();
-     gen_addr_reg_index(ctx, EA);
- 
-+    tcg_gen_brcond_tl(TCG_COND_NE, EA, cpu_reserve, lab_fail);
-+    tcg_temp_free(EA);
++static int clst(char sep, const char **s1, const char **s2)
++{
++    const char *r1 = *s1;
++    const char *r2 = *s2;
++    int cc;
 +
-+    cmp = tcg_temp_new_i128();
-+    val = tcg_temp_new_i128();
++    do {
++        register int r0 asm("r0") = sep;
 +
-+    tcg_gen_concat_i64_i128(cmp, cpu_reserve_val2, cpu_reserve_val);
++        asm("clst %[r1],%[r2]\n"
++            "ipm %[cc]\n"
++            "srl %[cc],28"
++            : [r1] "+r" (r1), [r2] "+r" (r2), "+r" (r0), [cc] "=r" (cc)
++            :
++            : "cc");
++        *s1 = r1;
++        *s2 = r2;
++    } while (cc == 3);
 +
-     /* Note that the low part is always in RS+1, even in LE mode.  */
--    lo = cpu_gpr[rs + 1];
--    hi = cpu_gpr[rs];
-+    tcg_gen_concat_i64_i128(val, cpu_gpr[rs + 1], cpu_gpr[rs]);
++    return cc;
++}
++
++static const struct test {
++    const char *name;
++    char sep;
++    const char *s1;
++    const char *s2;
++    int exp_cc;
++    int exp_off;
++} tests[] = {
++    {
++        .name = "cc0",
++        .sep = 0,
++        .s1 = "aa",
++        .s2 = "aa",
++        .exp_cc = 0,
++        .exp_off = 0,
++    },
++    {
++        .name = "cc1",
++        .sep = 1,
++        .s1 = "a\x01",
++        .s2 = "aa\x01",
++        .exp_cc = 1,
++        .exp_off = 1,
++    },
++    {
++        .name = "cc2",
++        .sep = 2,
++        .s1 = "abc\x02",
++        .s2 = "abb\x02",
++        .exp_cc = 2,
++        .exp_off = 2,
++    },
++};
++
++int main(void)
++{
++    const struct test *t;
++    const char *s1, *s2;
++    size_t i;
++    int cc;
++
++    for (i = 0; i < sizeof(tests) / sizeof(tests[0]); i++) {
++        t = &tests[i];
++        s1 = t->s1;
++        s2 = t->s2;
++        cc = clst(t->sep, &s1, &s2);
++        if (cc != t->exp_cc ||
++                s1 != t->s1 + t->exp_off ||
++                s2 != t->s2 + t->exp_off) {
++            fprintf(stderr, "%s\n", t->name);
++            return EXIT_FAILURE;
++        }
++    }
++
++    return EXIT_SUCCESS;
++}
+diff --git a/tests/tcg/s390x/Makefile.target b/tests/tcg/s390x/Makefile.target
+index ab7a3bcfb2..79250f31dd 100644
+--- a/tests/tcg/s390x/Makefile.target
++++ b/tests/tcg/s390x/Makefile.target
+@@ -25,6 +25,7 @@ TESTS+=signals-s390x
+ TESTS+=branch-relative-long
+ TESTS+=noexec
+ TESTS+=div
++TESTS+=clst
  
--    if (tb_cflags(ctx->base.tb) & CF_PARALLEL) {
--        if (HAVE_CMPXCHG128) {
--            TCGv_i32 oi = tcg_const_i32(DEF_MEMOP(MO_128) | MO_ALIGN);
--            if (ctx->le_mode) {
--                gen_helper_stqcx_le_parallel(cpu_crf[0], cpu_env,
--                                             EA, lo, hi, oi);
--            } else {
--                gen_helper_stqcx_be_parallel(cpu_crf[0], cpu_env,
--                                             EA, lo, hi, oi);
--            }
--            tcg_temp_free_i32(oi);
--        } else {
--            /* Restart with exclusive lock.  */
--            gen_helper_exit_atomic(cpu_env);
--            ctx->base.is_jmp = DISAS_NORETURN;
--        }
--        tcg_temp_free(EA);
--    } else {
--        TCGLabel *lab_fail = gen_new_label();
--        TCGLabel *lab_over = gen_new_label();
--        TCGv_i64 t0 = tcg_temp_new_i64();
--        TCGv_i64 t1 = tcg_temp_new_i64();
-+    tcg_gen_atomic_cmpxchg_i128(val, cpu_reserve, cmp, val, ctx->mem_idx,
-+                                DEF_MEMOP(MO_128 | MO_ALIGN));
-+    tcg_temp_free_i128(cmp);
- 
--        tcg_gen_brcond_tl(TCG_COND_NE, EA, cpu_reserve, lab_fail);
--        tcg_temp_free(EA);
-+    t0 = tcg_temp_new();
-+    t1 = tcg_temp_new();
-+    tcg_gen_extr_i128_i64(t1, t0, val);
-+    tcg_temp_free_i128(val);
- 
--        gen_qemu_ld64_i64(ctx, t0, cpu_reserve);
--        tcg_gen_ld_i64(t1, cpu_env, (ctx->le_mode
--                                     ? offsetof(CPUPPCState, reserve_val2)
--                                     : offsetof(CPUPPCState, reserve_val)));
--        tcg_gen_brcond_i64(TCG_COND_NE, t0, t1, lab_fail);
-+    tcg_gen_xor_tl(t1, t1, cpu_reserve_val2);
-+    tcg_gen_xor_tl(t0, t0, cpu_reserve_val);
-+    tcg_gen_or_tl(t0, t0, t1);
-+    tcg_temp_free(t1);
- 
--        tcg_gen_addi_i64(t0, cpu_reserve, 8);
--        gen_qemu_ld64_i64(ctx, t0, t0);
--        tcg_gen_ld_i64(t1, cpu_env, (ctx->le_mode
--                                     ? offsetof(CPUPPCState, reserve_val)
--                                     : offsetof(CPUPPCState, reserve_val2)));
--        tcg_gen_brcond_i64(TCG_COND_NE, t0, t1, lab_fail);
-+    tcg_gen_setcondi_tl(TCG_COND_EQ, t0, t0, 0);
-+    tcg_gen_shli_tl(t0, t0, CRF_EQ_BIT);
-+    tcg_gen_or_tl(t0, t0, cpu_so);
-+    tcg_gen_trunc_tl_i32(cpu_crf[0], t0);
-+    tcg_temp_free(t0);
- 
--        /* Success */
--        gen_qemu_st64_i64(ctx, ctx->le_mode ? lo : hi, cpu_reserve);
--        tcg_gen_addi_i64(t0, cpu_reserve, 8);
--        gen_qemu_st64_i64(ctx, ctx->le_mode ? hi : lo, t0);
-+    tcg_gen_br(lab_over);
-+    gen_set_label(lab_fail);
- 
--        tcg_gen_trunc_tl_i32(cpu_crf[0], cpu_so);
--        tcg_gen_ori_i32(cpu_crf[0], cpu_crf[0], CRF_EQ);
--        tcg_gen_br(lab_over);
-+    /*
-+     * Address mismatch implies failure.  But we still need to provide
-+     * the memory barrier semantics of the instruction.
-+     */
-+    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-+    tcg_gen_trunc_tl_i32(cpu_crf[0], cpu_so);
- 
--        gen_set_label(lab_fail);
--        tcg_gen_trunc_tl_i32(cpu_crf[0], cpu_so);
--
--        gen_set_label(lab_over);
--        tcg_gen_movi_tl(cpu_reserve, -1);
--        tcg_temp_free_i64(t0);
--        tcg_temp_free_i64(t1);
--    }
-+    gen_set_label(lab_over);
-+    tcg_gen_movi_tl(cpu_reserve, -1);
- }
- #endif /* defined(TARGET_PPC64) */
- 
+ Z13_TESTS=vistr
+ $(Z13_TESTS): CFLAGS+=-march=z13 -O2
 -- 
 2.34.1
 
