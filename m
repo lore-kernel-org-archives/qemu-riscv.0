@@ -1,63 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pF13k-0007Nm-Mk
-	for mharc-qemu-riscv@gnu.org; Mon, 09 Jan 2023 17:56:04 -0500
+	id 1pF1CU-0005yI-4h
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Jan 2023 18:05:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pF13S-0007GP-67; Mon, 09 Jan 2023 17:55:48 -0500
-Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29])
+ id 1pF1CH-0005pV-SW; Mon, 09 Jan 2023 18:04:54 -0500
+Received: from mail-vk1-xa30.google.com ([2607:f8b0:4864:20::a30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pF13Q-0008AA-C3; Mon, 09 Jan 2023 17:55:45 -0500
-Received: by mail-vs1-xe29.google.com with SMTP id a64so10449529vsc.2;
- Mon, 09 Jan 2023 14:55:38 -0800 (PST)
+ id 1pF1CG-0002py-5G; Mon, 09 Jan 2023 18:04:53 -0500
+Received: by mail-vk1-xa30.google.com with SMTP id l3so1675440vkk.11;
+ Mon, 09 Jan 2023 15:04:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uSd4nickcnF2PN5PBY4LlFHIMczV9y5pOQwPfKCt6bw=;
- b=R1FPlbuRYJCfqxuiWVakIP9SSLpA/THTOdIZQM6Qit+Kf+OovMleNk5llHZAvpAnEa
- hRtzZ60bbw3DQ+PhQ14WSUhAv/Zou6wb0d+m8iU5YWzM+YJAXc+2993Kf6ip92OfG0Ni
- UxFWA7qWBxJaPGWJIhEYsYu3YOZ21mjqIKjkX4GYb91IWd4XO9cBDciPCMnuuSLjfC24
- ekgoap+PYkcN0CDlhCG5PFVSIKo3L9eGajoK8BgVeOG7uh2ovnXeKkTLKqQm8M23OYVM
- wXZD0tyPE08JVtv4UYT0JjIrVqPGOJjqWTGk5YfdZ9iyvpmQKjMjjDQekBJV78caNVLS
- hKtA==
+ bh=+g3bu0AyXYGFdZfnwd/uiFeLwF7AJudu1avLJa6+/9Q=;
+ b=MNlyLDXCUVs1s+9HSpAOeUrgSdUoH+iWD05nPYiX/XOWOuq/ERIX8KN0dFkX5rt2O7
+ MKSHjxl1oiFAFnA5uKEJW7RlVbcom1xpz9ZvFYBAnud5lgyF9v2Vv4s2uR3qanI+J2NK
+ W5OAZvWnljDE8BWUX1YpOqeJ4xeYxwdLMnfThI1Lv/R5Nk+HQz2+VRI4gXqWKA2nB2mR
+ gjq9+R3FDWibsmW4/0OaCeWpSws4L+mPIOHTMSjiuNCTnimMPzAUDzzIXeuW/JbjVr1O
+ 8odjoXmLtP7KMFW6B9qrJEgY6+Ir2opmXKyZ/zH/o2R56Mo9Rciri18/WWbJxRX4tcF4
+ hMYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uSd4nickcnF2PN5PBY4LlFHIMczV9y5pOQwPfKCt6bw=;
- b=nVT0j6otVid495ExuUkwqxJfG8g6ycqcWjy6opMlxh9vvSbtgzDJhUklF3mnoIaCjO
- GUKy5lgMYa96tisX6g+IcsyJdbwFd6Em0TCgtbVZHme0js/f1k8oqbdQk5MiV0P/xkJu
- xccTEOJ4rJezzzBF9UlfQ+kfvWJ4w69iwSRiBCL442sJMy8Df7wjyMMhXmD7VW9iqRe7
- XxjIIXZLlPYIk3n8X8rnulDf5bXH1rallFVDkclySmGBpEdFC6sJ6nYlalzqWlPFB2JN
- 8mHW5lL6fJFABWEXrEFzHxnHcj0pmooD/KpgXUVGoxx+8EYhhRiGhniJ+yYsaOxKsfC3
- bUvA==
-X-Gm-Message-State: AFqh2koCFhSbBSXLqizwS3NFs8dzajpXu16Yn4tTATmQ7Plgx+8/aHcy
- UvUyxNphDyTzZQ6AMIlT7UeRns+s6KmlxpbyEx8=
-X-Google-Smtp-Source: AMrXdXvhNocXySNj0fy9H8TsyCr0WI+Phrbpwwg2h3qsQ8gdIzfoKPFNjOpDrwJmVX/b4Jk4752XZCKCBRBAnIq3WpY=
-X-Received: by 2002:a05:6102:f8c:b0:3c9:8cc2:dd04 with SMTP id
- e12-20020a0561020f8c00b003c98cc2dd04mr7211260vsv.73.1673304938058; Mon, 09
- Jan 2023 14:55:38 -0800 (PST)
+ bh=+g3bu0AyXYGFdZfnwd/uiFeLwF7AJudu1avLJa6+/9Q=;
+ b=Q2Hs5WOby7T8WR/Q10HDWcSdTEftbsS9e4AGvTN/NlE8qoF4da/OUQ3eCMmYOUJxW9
+ 1uDHGsAecy0j62vYFeu7HUAyjpRFVtTf13lyH89lUkE5m4Vkl9rkD+1IfDRyffJIbUxX
+ t/akqU4bhAIY2o4E+tRCHgMjkeDiGfZm8/HFTtn9f30eB+KRJyDz5abbHqSGcm5di5b+
+ bSggnt2/pfC0ZMJDfLNoR4egRJpS+k1nSy2osY1RCG3qN13RHb3B7Bg+s57jeKorCAnv
+ zwu2nF6pUuhSozYLD4oV6vZuI+J+hA90bz0tieVtWg5CM8TwJ8TiXUbl23Bjw/FsFUVr
+ Prag==
+X-Gm-Message-State: AFqh2kq6BXi5FmSJkNGVV+z2P0omplKC0ZLYN+85FirCB36avpCUuKBT
+ g1BSEsrtUDxTsgcDvG12QPFVKdvx2Utzfo8/0/I=
+X-Google-Smtp-Source: AMrXdXspl9qn20ncZyBj2YMupkfO7gMdfDLdZ1tw0e2jcOodnmHJXZ8OdlV9jiWBtloCH8GBJlXc0iWFvY7wuQ1n97E=
+X-Received: by 2002:ac5:ccdb:0:b0:3b7:cbb8:bbf1 with SMTP id
+ j27-20020ac5ccdb000000b003b7cbb8bbf1mr8432342vkn.25.1673305485759; Mon, 09
+ Jan 2023 15:04:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20221229091828.1945072-1-bmeng@tinylab.org>
- <20221229091828.1945072-13-bmeng@tinylab.org>
-In-Reply-To: <20221229091828.1945072-13-bmeng@tinylab.org>
+References: <167236721596.15277.2653405273227256289-0@git.sr.ht>
+In-Reply-To: <167236721596.15277.2653405273227256289-0@git.sr.ht>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 10 Jan 2023 08:55:11 +1000
-Message-ID: <CAKmqyKMpNKdgc2GsFqK+gh3U1-8H7nXB91Z1uXWhuTKpUXpOwQ@mail.gmail.com>
-Subject: Re: [PATCH v2 12/12] hw/riscv: spike: Decouple create_fdt()
- dependency to ELF loading
-To: Bin Meng <bmeng@tinylab.org>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Bin Meng <bin.meng@windriver.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-riscv@nongnu.org
+Date: Tue, 10 Jan 2023 09:04:19 +1000
+Message-ID: <CAKmqyKPoPnVaY4qZwxyc6dPRuYmWYj7wxX+ubiEF4uewiztACw@mail.gmail.com>
+Subject: Re: [PATCH qemu] target/riscv/cpu.c: Fix elen check
+To: "~elta" <503386372@qq.com>
+Cc: qemu-devel <qemu-devel@nongnu.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, 
+ Dongxue Zhang <elta.era@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e29;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a30;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa30.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -78,21 +74,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jan 2023 22:56:02 -0000
+X-List-Received-Date: Mon, 09 Jan 2023 23:04:55 -0000
 
-On Thu, Dec 29, 2022 at 8:33 PM Bin Meng <bmeng@tinylab.org> wrote:
+On Fri, Dec 30, 2022 at 12:26 PM ~elta <elta@git.sr.ht> wrote:
 >
-> At present create_fdt() calls htif_uses_elf_symbols() to determine
-> whether to insert a <reg> property for the HTIF. This unfortunately
-> creates a hidden dependency to riscv_load_{firmware,kernel} that
-> create_fdt() must be called after the ELF {firmware,kernel} image
-> has been loaded.
+> From: Dongxue Zhang <elta.era@gmail.com>
 >
-> Decouple such dependency be adding a new parameter to create_fdt(),
-> whether custom HTIF base address is used. The flag will be set if
-> non ELF {firmware,kernel} image is given by user.
+> Should be cpu->cfg.elen in range [8, 64].
 >
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> Signed-off-by: Dongxue Zhang <elta.era@gmail.com>
+> Reviewed-by: LIU Zhiwei <zhiwe_liu@linux.alibaba.com>
+> Message-ID: <bcdd7992-e3ff-de17-22c4-1319e3816e8b@linux.alibaba.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> Message-ID: <CANzO1D0du4TSza=-bnqZ+N9cGVfZ6P4xwYaiJg6doTzo7_MdYg@mail.gmail.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Thanks!
 
@@ -100,206 +96,23 @@ Applied to riscv-to-apply.next
 
 Alistair
 
->
 > ---
+>  target/riscv/cpu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> Changes in v2:
-> - initialize firmware_end_addr to memmap[SPIKE_DRAM].base
-> - rework the htif_custom_base detection logic
->
->  include/hw/char/riscv_htif.h |  5 +--
->  hw/char/riscv_htif.c         | 17 +++++-----
->  hw/riscv/spike.c             | 61 ++++++++++++++++++++++++++++++------
->  3 files changed, 59 insertions(+), 24 deletions(-)
->
-> diff --git a/include/hw/char/riscv_htif.h b/include/hw/char/riscv_htif.h
-> index 9e8ebbe017..5958c5b986 100644
-> --- a/include/hw/char/riscv_htif.h
-> +++ b/include/hw/char/riscv_htif.h
-> @@ -44,11 +44,8 @@ typedef struct HTIFState {
->  void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
->      uint64_t st_size);
->
-> -/* Check if HTIF uses ELF symbols */
-> -bool htif_uses_elf_symbols(void);
-> -
->  /* legacy pre qom */
->  HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
-> -                        uint64_t nonelf_base);
-> +                        uint64_t nonelf_base, bool custom_base);
->
->  #endif
-> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-> index 1477fc0090..098de50e35 100644
-> --- a/hw/char/riscv_htif.c
-> +++ b/hw/char/riscv_htif.c
-> @@ -52,20 +52,17 @@
->  #define PK_SYS_WRITE            64
->
->  static uint64_t fromhost_addr, tohost_addr;
-> -static int address_symbol_set;
->
->  void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
->                            uint64_t st_size)
->  {
->      if (strcmp("fromhost", st_name) == 0) {
-> -        address_symbol_set |= 1;
->          fromhost_addr = st_value;
->          if (st_size != 8) {
->              error_report("HTIF fromhost must be 8 bytes");
->              exit(1);
->          }
->      } else if (strcmp("tohost", st_name) == 0) {
-> -        address_symbol_set |= 2;
->          tohost_addr = st_value;
->          if (st_size != 8) {
->              error_report("HTIF tohost must be 8 bytes");
-> @@ -275,19 +272,19 @@ static const MemoryRegionOps htif_mm_ops = {
->      .write = htif_mm_write,
->  };
->
-> -bool htif_uses_elf_symbols(void)
-> -{
-> -    return (address_symbol_set == 3) ? true : false;
-> -}
-> -
->  HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
-> -                        uint64_t nonelf_base)
-> +                        uint64_t nonelf_base, bool custom_base)
->  {
->      uint64_t base, size, tohost_offset, fromhost_offset;
->
-> -    if (!htif_uses_elf_symbols()) {
-> +    if (custom_base) {
->          fromhost_addr = nonelf_base;
->          tohost_addr = nonelf_base + 8;
-> +    } else {
-> +        if (!fromhost_addr || !tohost_addr) {
-> +            error_report("Invalid HTIF fromhost or tohost address");
-> +            exit(1);
-> +        }
->      }
->
->      base = MIN(tohost_addr, fromhost_addr);
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 810a18f283..dd5f912e3d 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -50,7 +50,8 @@ static const MemMapEntry spike_memmap[] = {
->  };
->
->  static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
-> -                       uint64_t mem_size, const char *cmdline, bool is_32_bit)
-> +                       uint64_t mem_size, const char *cmdline,
-> +                       bool is_32_bit, bool htif_custom_base)
->  {
->      void *fdt;
->      uint64_t addr, size;
-> @@ -78,7 +79,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
->
->      qemu_fdt_add_subnode(fdt, "/htif");
->      qemu_fdt_setprop_string(fdt, "/htif", "compatible", "ucb,htif0");
-> -    if (!htif_uses_elf_symbols()) {
-> +    if (htif_custom_base) {
->          qemu_fdt_setprop_cells(fdt, "/htif", "reg",
->              0x0, memmap[SPIKE_HTIF].base, 0x0, memmap[SPIKE_HTIF].size);
->      }
-> @@ -184,18 +185,33 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
->      }
->  }
->
-> +static bool spike_test_elf_image(char *filename)
-> +{
-> +    Error *err = NULL;
-> +
-> +    load_elf_hdr(filename, NULL, NULL, &err);
-> +    if (err) {
-> +        error_free(err);
-> +        return false;
-> +    } else {
-> +        return true;
-> +    }
-> +}
-> +
->  static void spike_board_init(MachineState *machine)
->  {
->      const MemMapEntry *memmap = spike_memmap;
->      SpikeState *s = SPIKE_MACHINE(machine);
->      MemoryRegion *system_memory = get_system_memory();
->      MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
-> -    target_ulong firmware_end_addr, kernel_start_addr;
-> -    const char *firmware_name;
-> +    target_ulong firmware_end_addr = memmap[SPIKE_DRAM].base;
-> +    target_ulong kernel_start_addr;
-> +    char *firmware_name;
->      uint32_t fdt_load_addr;
->      uint64_t kernel_entry;
->      char *soc_name;
->      int i, base_hartid, hart_count;
-> +    bool htif_custom_base = false;
->
->      /* Check socket count limit */
->      if (SPIKE_SOCKETS_MAX < riscv_socket_count(machine)) {
-> @@ -257,10 +273,34 @@ static void spike_board_init(MachineState *machine)
->      memory_region_add_subregion(system_memory, memmap[SPIKE_MROM].base,
->                                  mask_rom);
->
-> -    firmware_name = riscv_default_firmware_name(&s->soc[0]);
-> -    firmware_end_addr = riscv_find_and_load_firmware(machine, firmware_name,
-> -                                                     memmap[SPIKE_DRAM].base,
-> -                                                     htif_symbol_callback);
-> +    /* Find firmware */
-> +    firmware_name = riscv_find_firmware(machine->firmware,
-> +                        riscv_default_firmware_name(&s->soc[0]));
-> +
-> +    /*
-> +     * Test the given firmware or kernel file to see if it is an ELF image.
-> +     * If it is an ELF, we assume it contains the symbols required for
-> +     * the HTIF console, otherwise we fall back to use the custom base
-> +     * passed from device tree for the HTIF console.
-> +     */
-> +    if (!firmware_name && !machine->kernel_filename) {
-> +        htif_custom_base = true;
-> +    } else {
-> +        if (firmware_name) {
-> +            htif_custom_base = !spike_test_elf_image(firmware_name);
-> +        }
-> +        if (!htif_custom_base && machine->kernel_filename) {
-> +            htif_custom_base = !spike_test_elf_image(machine->kernel_filename);
-> +        }
-> +    }
-> +
-> +    /* Load firmware */
-> +    if (firmware_name) {
-> +        firmware_end_addr = riscv_load_firmware(firmware_name,
-> +                                                memmap[SPIKE_DRAM].base,
-> +                                                htif_symbol_callback);
-> +        g_free(firmware_name);
-> +    }
->
->      /* Load kernel */
->      if (machine->kernel_filename) {
-> @@ -280,7 +320,7 @@ static void spike_board_init(MachineState *machine)
->
->      /* Create device tree */
->      create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
-> -               riscv_is_32bit(&s->soc[0]));
-> +               riscv_is_32bit(&s->soc[0]), htif_custom_base);
->
->      /* Load initrd */
->      if (machine->kernel_filename && machine->initrd_filename) {
-> @@ -308,7 +348,8 @@ static void spike_board_init(MachineState *machine)
->                                fdt_load_addr);
->
->      /* initialize HTIF using symbols found in load_kernel */
-> -    htif_mm_init(system_memory, serial_hd(0), memmap[SPIKE_HTIF].base);
-> +    htif_mm_init(system_memory, serial_hd(0), memmap[SPIKE_HTIF].base,
-> +                 htif_custom_base);
->  }
->
->  static void spike_machine_instance_init(Object *obj)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6fe176e483..5dc51f7912 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -872,7 +872,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>                          "Vector extension ELEN must be power of 2");
+>                  return;
+>              }
+> -            if (cpu->cfg.elen > 64 || cpu->cfg.vlen < 8) {
+> +            if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
+>                  error_setg(errp,
+>                          "Vector extension implementation only supports ELEN "
+>                          "in the range [8, 64]");
 > --
-> 2.34.1
->
->
+> 2.34.5
 
