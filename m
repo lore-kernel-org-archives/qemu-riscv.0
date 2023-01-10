@@ -1,67 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFNV9-0001Ta-OU
-	for mharc-qemu-riscv@gnu.org; Tue, 10 Jan 2023 17:53:51 -0500
+	id 1pFNn0-0008Ch-GG
+	for mharc-qemu-riscv@gnu.org; Tue, 10 Jan 2023 18:12:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pFNV8-0001St-6h; Tue, 10 Jan 2023 17:53:50 -0500
-Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pFNV5-0004AP-UE; Tue, 10 Jan 2023 17:53:49 -0500
-Received: by mail-vs1-xe2e.google.com with SMTP id a64so13920558vsc.2;
- Tue, 10 Jan 2023 14:53:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6MlfeehrVCzTdNgMw2QDi+A7t8HunRX1R5yrL51Cwds=;
- b=CgTzjKgBmLqT6ysG9Nnu7y2CLX8dPrnwcuwXLmjM9DA1gvDZwCEa5LifYD6NDw9Zxd
- WDzJepNuK0TRl9LTE72wkNZVx7IUAw07l2YGQJfe7bYnQS1ZaxtVoreLwT+NmgX5MCoP
- lcgacjeD4bMaSqT7Vercv7yXienkK9Fxd21mg7i00FZJLxfx1myNmhEGNzHCKTW8PHjQ
- RkqUCh7aPxj92KgAG8DBlZxKdI7/sDfC6mBixhdHu5hN58ZnVHqmzRXHY7/VZbQQKuF+
- 7+J1MdILa4f7vx3do20OTw9F1HCjL6EVoRZbeIOxJqtPNGy4/jT0qboK5rXByerL51ju
- CVqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6MlfeehrVCzTdNgMw2QDi+A7t8HunRX1R5yrL51Cwds=;
- b=LQdIPoSNASMggK95JTu8oee4rdu5TF+I+N4/UCtt+Eaivu2jiwrzRBACmf3vYlzNsh
- Ya2ShDA2077IQNHSMZNVRWucfv3e49+LrDZ6BT6/oT6xmJPwQmXiHghy9Dqo+w2dGOiV
- 1duDprHoDB5e64+LjCf6TadbZe9+D2tFzZcp7ZKztTw507L3B1ViHNl6ZiRKbaHly/a2
- cbbP2HqwmSpl/yfZYimfChQta9MFVyQdNG9sHxCkwVrvCM5wlryz13O/pCvT8JwulmNV
- XCqREWeWjN3WRnsDUHDwtDAMV97AtP/UU5CtONKoTdLcuEPNoCRdMk/pWqJkww3h5yD9
- z7fQ==
-X-Gm-Message-State: AFqh2kro6k/tMjLdqYjovoYRYn3Dl3T2iJjwd+XTBFXYvPxiffHuS6By
- JtyiSbG5mp7CuHmmmXYidLGNCRZRPNee9VEEkBU=
-X-Google-Smtp-Source: AMrXdXvtryAMpalE6nEzQ1FDoux1/fmc2ro8QPqTZV81G87ozjKukLy3F69OaKyOBn0BD/49tA1qawz2lHozZaD/Ty8=
-X-Received: by 2002:a05:6102:510e:b0:3b1:2b83:1861 with SMTP id
- bm14-20020a056102510e00b003b12b831861mr9286044vsb.10.1673391226307; Tue, 10
- Jan 2023 14:53:46 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1pFNmx-0008AT-AH; Tue, 10 Jan 2023 18:12:15 -0500
+Received: from mail.ilande.co.uk ([2001:41c9:1:41f::167])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1pFNmv-0006wE-9A; Tue, 10 Jan 2023 18:12:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ilande.co.uk; s=20220518; h=Subject:Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=zg1B3EtJUY58dvVmW5cfiUMxfR7du+pWu6Ps0f0PkMI=; b=dSlU3O8sm3+y4vZbA8X1WtVeOm
+ E88KbLRzmdR39sM/x6+3pKaXwmoMYN0OAoQafJhuugh5krmr/uz8T5Z6xAyITqsOQraOM4fsawuF6
+ 9A4Ke1PuCR0HxUrNNvYfF9tCswekYiGiEWYrX/C7SoLeEKBZ1kDXiNlCdCLakFqUmBQULvhhpT2kk
+ hYeJT+DkLz0b/y2ZO1UpvtoMWml4+A9IKVOBiNbxKk6c9ERtuSL+03b24eg2UrBTQyhaLs3zM8nor
+ H44l9CSL4PPKmkbSLb/509IlXMWr97GlJQwqX85rBAByKMpDFK5SfzNevB6f9rY8qFmeajniKrdzU
+ +lfFj7sdJd/SYuE+Ygv2UB0ffrnb3eQFWyxdxE106PwXmUfPxRjBxonNf9nsG1mx8339z7/eSIoDt
+ kdken6INCshpczEPIJIw8YsuOMUbkhg2+/ohxM3UE/+KUaZeFL7CQRKS/RVkl5Ez8942arka0zVom
+ 6XUe18+dc+sZhBZ66URiv9Y0T2XySPazZRVx12VogDyWqUx63kRdWZFqEdvJS7ydUbVfblj5I8hhp
+ AYBcXXKnF0KxATW5lDGfbbqBSRHbvEMYh7JH6HCcNxcrQhl049figJ4radkyGy8HxY0ZGjQFmpend
+ al+1HzAqZZAHXWX/ur+CaxaW90RL8dML3/i2D4nT0=;
+Received: from [2a00:23c4:8baa:d400:877:cbd2:6fe8:34fc]
+ by mail.ilande.co.uk with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.92) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1pFNmW-000959-ML; Tue, 10 Jan 2023 23:11:49 +0000
+Message-ID: <73231653-7149-6376-633c-c4f61e576c5b@ilande.co.uk>
+Date: Tue, 10 Jan 2023 23:12:08 +0000
 MIME-Version: 1.0
-References: <20230110201405.247785-1-dbarboza@ventanamicro.com>
- <20230110201405.247785-3-dbarboza@ventanamicro.com>
-In-Reply-To: <20230110201405.247785-3-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 11 Jan 2023 08:53:20 +1000
-Message-ID: <CAKmqyKMSW1UKUZ-bV4imu+QyOX=h3eEw+wNvwf=QVG=muE5LzA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv/cpu.c: do not skip misa logic in
- riscv_cpu_realize()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- richard.henderson@linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.13.0
+Content-Language: en-US
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org, pbonzini@redhat.com, eduardo@habkost.net
+References: <20230108023719.2466341-1-richard.henderson@linaro.org>
+From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+In-Reply-To: <20230108023719.2466341-1-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 2a00:23c4:8baa:d400:877:cbd2:6fe8:34fc
+X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
+Subject: Re: [PATCH v4 00/36] tcg: Support for Int128 with helpers
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on mail.ilande.co.uk)
+Received-SPF: pass client-ip=2001:41c9:1:41f::167;
+ envelope-from=mark.cave-ayland@ilande.co.uk; helo=mail.ilande.co.uk
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,541 +68,145 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jan 2023 22:53:50 -0000
+X-List-Received-Date: Tue, 10 Jan 2023 23:12:16 -0000
 
-On Wed, Jan 11, 2023 at 6:17 AM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> All RISCV CPUs are setting cpu->cfg during their cpu_init() functions,
-> meaning that there's no reason to skip all the misa validation and setup
-> if misa_ext was set beforehand - especially since we're setting an
-> updated value in set_misa() in the end.
->
-> Put this code chunk into a new riscv_cpu_validate_set_extensions()
-> helper and always execute it regardless of what the board set in
-> env->misa_ext.
->
-> This will put more responsibility in how each board is going to init
-> their attributes and extensions if they're not using the defaults.
-> It'll also allow realize() to do its job looking only at the extensions
-> enabled per se, not corner cases that some CPUs might have, and we won't
-> have to change multiple code paths to fix or change how extensions work.
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+On 08/01/2023 02:36, Richard Henderson wrote:
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Changes for v4:
+>    * About half of the v3 series has been merged,
+>    * AArch64 host requires even argument register.
+>    * target/{arm,ppc,s390x,i386} uses included here.
+> 
+> Patches requiring review:
+>    01-tcg-Define-TCG_TYPE_I128-and-related-helper-macro.patch
+>    02-tcg-Handle-dh_typecode_i128-with-TCG_CALL_-RET-AR.patch
+>    03-tcg-Allocate-objects-contiguously-in-temp_allocat.patch
+>    05-tcg-Add-TCG_CALL_-RET-ARG-_BY_REF.patch
+>    07-tcg-Add-TCG_CALL_RET_BY_VEC.patch
+>    08-include-qemu-int128-Use-Int128-structure-for-TCI.patch
+>    09-tcg-i386-Add-TCG_TARGET_CALL_-RET-ARG-_I128.patch
+>    10-tcg-tci-Fix-big-endian-return-register-ordering.patch
+>    11-tcg-tci-Add-TCG_TARGET_CALL_-RET-ARG-_I128.patch
+>    13-tcg-Add-temp-allocation-for-TCGv_i128.patch
+>    14-tcg-Add-basic-data-movement-for-TCGv_i128.patch
+>    15-tcg-Add-guest-load-store-primitives-for-TCGv_i128.patch
+>    16-tcg-Add-tcg_gen_-non-atomic_cmpxchg_i128.patch
+>    17-tcg-Split-out-tcg_gen_nonatomic_cmpxchg_i-32-64.patch
+>    24-target-s390x-Use-a-single-return-for-helper_divs3.patch
+>    31-target-s390x-Use-Int128-for-passing-float128.patch
+>    32-target-s390x-Use-tcg_gen_atomic_cmpxchg_i128-for-.patch
+>    33-target-s390x-Implement-CC_OP_NZ-in-gen_op_calc_cc.patch
+>    34-target-i386-Split-out-gen_cmpxchg8b-gen_cmpxchg16.patch
+>    35-target-i386-Inline-cmpxchg8b.patch
+>    36-target-i386-Inline-cmpxchg16b.patch
+> 
+> 
+> r~
+> 
+> 
+> Ilya Leoshkevich (2):
+>    tests/tcg/s390x: Add div.c
+>    tests/tcg/s390x: Add clst.c
+> 
+> Richard Henderson (34):
+>    tcg: Define TCG_TYPE_I128 and related helper macros
+>    tcg: Handle dh_typecode_i128 with TCG_CALL_{RET,ARG}_NORMAL
+>    tcg: Allocate objects contiguously in temp_allocate_frame
+>    tcg: Introduce tcg_out_addi_ptr
+>    tcg: Add TCG_CALL_{RET,ARG}_BY_REF
+>    tcg: Introduce tcg_target_call_oarg_reg
+>    tcg: Add TCG_CALL_RET_BY_VEC
+>    include/qemu/int128: Use Int128 structure for TCI
+>    tcg/i386: Add TCG_TARGET_CALL_{RET,ARG}_I128
+>    tcg/tci: Fix big-endian return register ordering
+>    tcg/tci: Add TCG_TARGET_CALL_{RET,ARG}_I128
+>    tcg: Add TCG_TARGET_CALL_{RET,ARG}_I128
+>    tcg: Add temp allocation for TCGv_i128
+>    tcg: Add basic data movement for TCGv_i128
+>    tcg: Add guest load/store primitives for TCGv_i128
+>    tcg: Add tcg_gen_{non}atomic_cmpxchg_i128
+>    tcg: Split out tcg_gen_nonatomic_cmpxchg_i{32,64}
+>    target/arm: Use tcg_gen_atomic_cmpxchg_i128 for STXP
+>    target/arm: Use tcg_gen_atomic_cmpxchg_i128 for CASP
+>    target/ppc: Use tcg_gen_atomic_cmpxchg_i128 for STQCX
+>    tests/tcg/s390x: Add long-double.c
+>    target/s390x: Use a single return for helper_divs32/u32
+>    target/s390x: Use a single return for helper_divs64/u64
+>    target/s390x: Use Int128 for return from CLST
+>    target/s390x: Use Int128 for return from CKSM
+>    target/s390x: Use Int128 for return from TRE
+>    target/s390x: Copy wout_x1 to wout_x1_P
+>    target/s390x: Use Int128 for returning float128
+>    target/s390x: Use Int128 for passing float128
+>    target/s390x: Use tcg_gen_atomic_cmpxchg_i128 for CDSG
+>    target/s390x: Implement CC_OP_NZ in gen_op_calc_cc
+>    target/i386: Split out gen_cmpxchg8b, gen_cmpxchg16b
+>    target/i386: Inline cmpxchg8b
+>    target/i386: Inline cmpxchg16b
+> 
+>   accel/tcg/tcg-runtime.h          |  11 +
+>   include/exec/cpu_ldst.h          |  10 +
+>   include/exec/helper-head.h       |   7 +
+>   include/qemu/atomic128.h         |  29 ++-
+>   include/qemu/int128.h            |  25 +-
+>   include/tcg/tcg-op.h             |  15 ++
+>   include/tcg/tcg.h                |  49 +++-
+>   target/arm/helper-a64.h          |   8 -
+>   target/i386/helper.h             |   6 -
+>   target/ppc/helper.h              |   2 -
+>   target/s390x/helper.h            |  54 ++---
+>   tcg/aarch64/tcg-target.h         |   2 +
+>   tcg/arm/tcg-target.h             |   2 +
+>   tcg/i386/tcg-target.h            |  10 +
+>   tcg/loongarch64/tcg-target.h     |   2 +
+>   tcg/mips/tcg-target.h            |   2 +
+>   tcg/riscv/tcg-target.h           |   3 +
+>   tcg/s390x/tcg-target.h           |   2 +
+>   tcg/sparc64/tcg-target.h         |   2 +
+>   tcg/tcg-internal.h               |  17 ++
+>   tcg/tci/tcg-target.h             |   3 +
+>   target/s390x/tcg/insn-data.h.inc |  60 ++---
+>   accel/tcg/cputlb.c               | 112 +++++++++
+>   accel/tcg/user-exec.c            |  66 ++++++
+>   target/arm/helper-a64.c          | 147 ------------
+>   target/arm/translate-a64.c       | 121 +++++-----
+>   target/i386/tcg/mem_helper.c     | 126 ----------
+>   target/i386/tcg/translate.c      | 126 ++++++++--
+>   target/ppc/mem_helper.c          |  44 ----
+>   target/ppc/translate.c           | 102 ++++----
+>   target/s390x/tcg/fpu_helper.c    | 103 ++++----
+>   target/s390x/tcg/int_helper.c    |  64 ++---
+>   target/s390x/tcg/mem_helper.c    |  77 +-----
+>   target/s390x/tcg/translate.c     | 217 +++++++++++------
+>   tcg/tcg-op.c                     | 393 ++++++++++++++++++++++++++-----
+>   tcg/tcg.c                        | 303 +++++++++++++++++++++---
+>   tcg/tci.c                        |  65 ++---
+>   tests/tcg/s390x/clst.c           |  82 +++++++
+>   tests/tcg/s390x/div.c            |  75 ++++++
+>   tests/tcg/s390x/long-double.c    |  24 ++
+>   util/int128.c                    |  42 ++++
+>   accel/tcg/atomic_common.c.inc    |  45 ++++
+>   tcg/aarch64/tcg-target.c.inc     |  17 +-
+>   tcg/arm/tcg-target.c.inc         |  30 ++-
+>   tcg/i386/tcg-target.c.inc        |  52 +++-
+>   tcg/loongarch64/tcg-target.c.inc |  17 +-
+>   tcg/mips/tcg-target.c.inc        |  17 +-
+>   tcg/ppc/tcg-target.c.inc         |  20 +-
+>   tcg/riscv/tcg-target.c.inc       |  17 +-
+>   tcg/s390x/tcg-target.c.inc       |  16 +-
+>   tcg/sparc64/tcg-target.c.inc     |  19 +-
+>   tcg/tci/tcg-target.c.inc         |  27 ++-
+>   tests/tcg/s390x/Makefile.target  |   3 +
+>   53 files changed, 1936 insertions(+), 954 deletions(-)
+>   create mode 100644 tests/tcg/s390x/clst.c
+>   create mode 100644 tests/tcg/s390x/div.c
+>   create mode 100644 tests/tcg/s390x/long-double.c
 
-Alistair
+Now that the TCG documentation is more visible, would it be possible to add a patch 
+to update the relevant parts of docs/devel/tcg-ops.rst to reflect the new Int128 support?
 
-> ---
->  target/riscv/cpu.c | 485 +++++++++++++++++++++++----------------------
->  1 file changed, 248 insertions(+), 237 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b8c1edb7c2..33ed59a1b6 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -631,6 +631,250 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
->      }
->  }
->
-> +/*
-> + * Check consistency between chosen extensions while setting
-> + * cpu->cfg accordingly, doing a set_misa() in the end.
-> + */
-> +static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-> +{
-> +    CPURISCVState *env = &cpu->env;
-> +    uint32_t ext = 0;
-> +
-> +    /* Do some ISA extension error checking */
-> +    if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
-> +                            cpu->cfg.ext_a && cpu->cfg.ext_f &&
-> +                            cpu->cfg.ext_d &&
-> +                            cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
-> +        warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
-> +        cpu->cfg.ext_i = true;
-> +        cpu->cfg.ext_m = true;
-> +        cpu->cfg.ext_a = true;
-> +        cpu->cfg.ext_f = true;
-> +        cpu->cfg.ext_d = true;
-> +        cpu->cfg.ext_icsr = true;
-> +        cpu->cfg.ext_ifencei = true;
-> +    }
-> +
-> +    if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
-> +        error_setg(errp,
-> +                   "I and E extensions are incompatible");
-> +        return;
-> +    }
-> +
-> +    if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
-> +        error_setg(errp,
-> +                   "Either I or E extension must be set");
-> +        return;
-> +    }
-> +
-> +    if (cpu->cfg.ext_s && !cpu->cfg.ext_u) {
-> +        error_setg(errp,
-> +                   "Setting S extension without U extension is illegal");
-> +        return;
-> +    }
-> +
-> +    if (cpu->cfg.ext_h && !cpu->cfg.ext_i) {
-> +        error_setg(errp,
-> +                   "H depends on an I base integer ISA with 32 x registers");
-> +        return;
-> +    }
-> +
-> +    if (cpu->cfg.ext_h && !cpu->cfg.ext_s) {
-> +        error_setg(errp, "H extension implicitly requires S-mode");
-> +        return;
-> +    }
-> +
-> +    if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
-> +        error_setg(errp, "F extension requires Zicsr");
-> +        return;
-> +    }
-> +
-> +    if ((cpu->cfg.ext_zawrs) && !cpu->cfg.ext_a) {
-> +        error_setg(errp, "Zawrs extension requires A extension");
-> +        return;
-> +    }
-> +
-> +    if ((cpu->cfg.ext_zfh || cpu->cfg.ext_zfhmin) && !cpu->cfg.ext_f) {
-> +        error_setg(errp, "Zfh/Zfhmin extensions require F extension");
-> +        return;
-> +    }
-> +
-> +    if (cpu->cfg.ext_d && !cpu->cfg.ext_f) {
-> +        error_setg(errp, "D extension requires F extension");
-> +        return;
-> +    }
-> +
-> +    if (cpu->cfg.ext_v && !cpu->cfg.ext_d) {
-> +        error_setg(errp, "V extension requires D extension");
-> +        return;
-> +    }
-> +
-> +    if ((cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) && !cpu->cfg.ext_f) {
-> +        error_setg(errp, "Zve32f/Zve64f extensions require F extension");
-> +        return;
-> +    }
-> +
-> +    /* Set the ISA extensions, checks should have happened above */
-> +    if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
-> +        cpu->cfg.ext_zhinxmin) {
-> +        cpu->cfg.ext_zfinx = true;
-> +    }
-> +
-> +    if (cpu->cfg.ext_zfinx) {
-> +        if (!cpu->cfg.ext_icsr) {
-> +            error_setg(errp, "Zfinx extension requires Zicsr");
-> +            return;
-> +        }
-> +        if (cpu->cfg.ext_f) {
-> +            error_setg(errp,
-> +                "Zfinx cannot be supported together with F extension");
-> +            return;
-> +        }
-> +    }
-> +
-> +    if (cpu->cfg.ext_c) {
-> +        cpu->cfg.ext_zca = true;
-> +        if (cpu->cfg.ext_f && env->misa_mxl_max == MXL_RV32) {
-> +            cpu->cfg.ext_zcf = true;
-> +        }
-> +        if (cpu->cfg.ext_d) {
-> +            cpu->cfg.ext_zcd = true;
-> +        }
-> +    }
-> +
-> +    if (env->misa_mxl_max != MXL_RV32 && cpu->cfg.ext_zcf) {
-> +        error_setg(errp, "Zcf extension is only relevant to RV32");
-> +        return;
-> +    }
-> +
-> +    if (!cpu->cfg.ext_f && cpu->cfg.ext_zcf) {
-> +        error_setg(errp, "Zcf extension requires F extension");
-> +        return;
-> +    }
-> +
-> +    if (!cpu->cfg.ext_d && cpu->cfg.ext_zcd) {
-> +        error_setg(errp, "Zcd extension requires D extension");
-> +        return;
-> +    }
-> +
-> +    if ((cpu->cfg.ext_zcf || cpu->cfg.ext_zcd || cpu->cfg.ext_zcb ||
-> +         cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt) && !cpu->cfg.ext_zca) {
-> +        error_setg(errp, "Zcf/Zcd/Zcb/Zcmp/Zcmt extensions require Zca "
-> +                         "extension");
-> +        return;
-> +    }
-> +
-> +    if (cpu->cfg.ext_zcd && (cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt)) {
-> +        error_setg(errp, "Zcmp/Zcmt extensions are incompatible with "
-> +                         "Zcd extension");
-> +        return;
-> +    }
-> +
-> +    if (cpu->cfg.ext_zcmt && !cpu->cfg.ext_icsr) {
-> +        error_setg(errp, "Zcmt extension requires Zicsr extension");
-> +        return;
-> +    }
-> +
-> +    if (cpu->cfg.ext_zk) {
-> +        cpu->cfg.ext_zkn = true;
-> +        cpu->cfg.ext_zkr = true;
-> +        cpu->cfg.ext_zkt = true;
-> +    }
-> +
-> +    if (cpu->cfg.ext_zkn) {
-> +        cpu->cfg.ext_zbkb = true;
-> +        cpu->cfg.ext_zbkc = true;
-> +        cpu->cfg.ext_zbkx = true;
-> +        cpu->cfg.ext_zkne = true;
-> +        cpu->cfg.ext_zknd = true;
-> +        cpu->cfg.ext_zknh = true;
-> +    }
-> +
-> +    if (cpu->cfg.ext_zks) {
-> +        cpu->cfg.ext_zbkb = true;
-> +        cpu->cfg.ext_zbkc = true;
-> +        cpu->cfg.ext_zbkx = true;
-> +        cpu->cfg.ext_zksed = true;
-> +        cpu->cfg.ext_zksh = true;
-> +    }
-> +
-> +    if (cpu->cfg.ext_i) {
-> +        ext |= RVI;
-> +    }
-> +    if (cpu->cfg.ext_e) {
-> +        ext |= RVE;
-> +    }
-> +    if (cpu->cfg.ext_m) {
-> +        ext |= RVM;
-> +    }
-> +    if (cpu->cfg.ext_a) {
-> +        ext |= RVA;
-> +    }
-> +    if (cpu->cfg.ext_f) {
-> +        ext |= RVF;
-> +    }
-> +    if (cpu->cfg.ext_d) {
-> +        ext |= RVD;
-> +    }
-> +    if (cpu->cfg.ext_c) {
-> +        ext |= RVC;
-> +    }
-> +    if (cpu->cfg.ext_s) {
-> +        ext |= RVS;
-> +    }
-> +    if (cpu->cfg.ext_u) {
-> +        ext |= RVU;
-> +    }
-> +    if (cpu->cfg.ext_h) {
-> +        ext |= RVH;
-> +    }
-> +    if (cpu->cfg.ext_v) {
-> +        int vext_version = VEXT_VERSION_1_00_0;
-> +        ext |= RVV;
-> +        if (!is_power_of_2(cpu->cfg.vlen)) {
-> +            error_setg(errp,
-> +                    "Vector extension VLEN must be power of 2");
-> +            return;
-> +        }
-> +        if (cpu->cfg.vlen > RV_VLEN_MAX || cpu->cfg.vlen < 128) {
-> +            error_setg(errp,
-> +                    "Vector extension implementation only supports VLEN "
-> +                    "in the range [128, %d]", RV_VLEN_MAX);
-> +            return;
-> +        }
-> +        if (!is_power_of_2(cpu->cfg.elen)) {
-> +            error_setg(errp,
-> +                    "Vector extension ELEN must be power of 2");
-> +            return;
-> +        }
-> +    if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
-> +        error_setg(errp,
-> +                "Vector extension implementation only supports ELEN "
-> +                "in the range [8, 64]");
-> +        return;
-> +    }
-> +    if (cpu->cfg.vext_spec) {
-> +        if (!g_strcmp0(cpu->cfg.vext_spec, "v1.0")) {
-> +            vext_version = VEXT_VERSION_1_00_0;
-> +        } else {
-> +            error_setg(errp,
-> +                   "Unsupported vector spec version '%s'",
-> +                   cpu->cfg.vext_spec);
-> +            return;
-> +        }
-> +    } else {
-> +        qemu_log("vector version is not specified, "
-> +                 "use the default value v1.0\n");
-> +    }
-> +    set_vext_version(env, vext_version);
-> +    }
-> +    if (cpu->cfg.ext_j) {
-> +        ext |= RVJ;
-> +    }
-> +
-> +    set_misa(env, env->misa_mxl, ext);
-> +}
-> +
->  static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->  {
->      CPUState *cs = CPU(dev);
-> @@ -726,243 +970,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->      }
->      assert(env->misa_mxl_max == env->misa_mxl);
->
-> -    /* If only MISA_EXT is unset for misa, then set it from properties */
-> -    if (env->misa_ext == 0) {
-> -        uint32_t ext = 0;
-> -
-> -        /* Do some ISA extension error checking */
-> -        if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
-> -                                cpu->cfg.ext_a && cpu->cfg.ext_f &&
-> -                                cpu->cfg.ext_d &&
-> -                                cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
-> -            warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
-> -            cpu->cfg.ext_i = true;
-> -            cpu->cfg.ext_m = true;
-> -            cpu->cfg.ext_a = true;
-> -            cpu->cfg.ext_f = true;
-> -            cpu->cfg.ext_d = true;
-> -            cpu->cfg.ext_icsr = true;
-> -            cpu->cfg.ext_ifencei = true;
-> -        }
-> -
-> -        if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
-> -            error_setg(errp,
-> -                       "I and E extensions are incompatible");
-> -            return;
-> -        }
-> -
-> -        if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
-> -            error_setg(errp,
-> -                       "Either I or E extension must be set");
-> -            return;
-> -        }
-> -
-> -        if (cpu->cfg.ext_s && !cpu->cfg.ext_u) {
-> -            error_setg(errp,
-> -                       "Setting S extension without U extension is illegal");
-> -            return;
-> -        }
-> -
-> -        if (cpu->cfg.ext_h && !cpu->cfg.ext_i) {
-> -            error_setg(errp,
-> -                       "H depends on an I base integer ISA with 32 x registers");
-> -            return;
-> -        }
-> -
-> -        if (cpu->cfg.ext_h && !cpu->cfg.ext_s) {
-> -            error_setg(errp, "H extension implicitly requires S-mode");
-> -            return;
-> -        }
-> -
-> -        if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
-> -            error_setg(errp, "F extension requires Zicsr");
-> -            return;
-> -        }
-> -
-> -        if ((cpu->cfg.ext_zawrs) && !cpu->cfg.ext_a) {
-> -            error_setg(errp, "Zawrs extension requires A extension");
-> -            return;
-> -        }
-> -
-> -        if ((cpu->cfg.ext_zfh || cpu->cfg.ext_zfhmin) && !cpu->cfg.ext_f) {
-> -            error_setg(errp, "Zfh/Zfhmin extensions require F extension");
-> -            return;
-> -        }
-> -
-> -        if (cpu->cfg.ext_d && !cpu->cfg.ext_f) {
-> -            error_setg(errp, "D extension requires F extension");
-> -            return;
-> -        }
-> -
-> -        if (cpu->cfg.ext_v && !cpu->cfg.ext_d) {
-> -            error_setg(errp, "V extension requires D extension");
-> -            return;
-> -        }
-> -
-> -        if ((cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) && !cpu->cfg.ext_f) {
-> -            error_setg(errp, "Zve32f/Zve64f extensions require F extension");
-> -            return;
-> -        }
-> -
-> -        /* Set the ISA extensions, checks should have happened above */
-> -        if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
-> -            cpu->cfg.ext_zhinxmin) {
-> -            cpu->cfg.ext_zfinx = true;
-> -        }
-> -
-> -        if (cpu->cfg.ext_zfinx) {
-> -            if (!cpu->cfg.ext_icsr) {
-> -                error_setg(errp, "Zfinx extension requires Zicsr");
-> -                return;
-> -            }
-> -            if (cpu->cfg.ext_f) {
-> -                error_setg(errp,
-> -                    "Zfinx cannot be supported together with F extension");
-> -                return;
-> -            }
-> -        }
-> -
-> -        if (cpu->cfg.ext_c) {
-> -            cpu->cfg.ext_zca = true;
-> -            if (cpu->cfg.ext_f && env->misa_mxl_max == MXL_RV32) {
-> -                cpu->cfg.ext_zcf = true;
-> -            }
-> -            if (cpu->cfg.ext_d) {
-> -                cpu->cfg.ext_zcd = true;
-> -            }
-> -        }
-> -
-> -        if (env->misa_mxl_max != MXL_RV32 && cpu->cfg.ext_zcf) {
-> -            error_setg(errp, "Zcf extension is only relevant to RV32");
-> -            return;
-> -        }
-> -
-> -        if (!cpu->cfg.ext_f && cpu->cfg.ext_zcf) {
-> -            error_setg(errp, "Zcf extension requires F extension");
-> -            return;
-> -        }
-> -
-> -        if (!cpu->cfg.ext_d && cpu->cfg.ext_zcd) {
-> -            error_setg(errp, "Zcd extension requires D extension");
-> -            return;
-> -        }
-> -
-> -        if ((cpu->cfg.ext_zcf || cpu->cfg.ext_zcd || cpu->cfg.ext_zcb ||
-> -             cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt) && !cpu->cfg.ext_zca) {
-> -            error_setg(errp, "Zcf/Zcd/Zcb/Zcmp/Zcmt extensions require Zca "
-> -                             "extension");
-> -            return;
-> -        }
-> -
-> -        if (cpu->cfg.ext_zcd && (cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt)) {
-> -            error_setg(errp, "Zcmp/Zcmt extensions are incompatible with "
-> -                             "Zcd extension");
-> -            return;
-> -        }
-> -
-> -        if (cpu->cfg.ext_zcmt && !cpu->cfg.ext_icsr) {
-> -            error_setg(errp, "Zcmt extension requires Zicsr extension");
-> -            return;
-> -        }
-> -
-> -        if (cpu->cfg.ext_zk) {
-> -            cpu->cfg.ext_zkn = true;
-> -            cpu->cfg.ext_zkr = true;
-> -            cpu->cfg.ext_zkt = true;
-> -        }
-> -
-> -        if (cpu->cfg.ext_zkn) {
-> -            cpu->cfg.ext_zbkb = true;
-> -            cpu->cfg.ext_zbkc = true;
-> -            cpu->cfg.ext_zbkx = true;
-> -            cpu->cfg.ext_zkne = true;
-> -            cpu->cfg.ext_zknd = true;
-> -            cpu->cfg.ext_zknh = true;
-> -        }
-> -
-> -        if (cpu->cfg.ext_zks) {
-> -            cpu->cfg.ext_zbkb = true;
-> -            cpu->cfg.ext_zbkc = true;
-> -            cpu->cfg.ext_zbkx = true;
-> -            cpu->cfg.ext_zksed = true;
-> -            cpu->cfg.ext_zksh = true;
-> -        }
-> -
-> -        if (cpu->cfg.ext_i) {
-> -            ext |= RVI;
-> -        }
-> -        if (cpu->cfg.ext_e) {
-> -            ext |= RVE;
-> -        }
-> -        if (cpu->cfg.ext_m) {
-> -            ext |= RVM;
-> -        }
-> -        if (cpu->cfg.ext_a) {
-> -            ext |= RVA;
-> -        }
-> -        if (cpu->cfg.ext_f) {
-> -            ext |= RVF;
-> -        }
-> -        if (cpu->cfg.ext_d) {
-> -            ext |= RVD;
-> -        }
-> -        if (cpu->cfg.ext_c) {
-> -            ext |= RVC;
-> -        }
-> -        if (cpu->cfg.ext_s) {
-> -            ext |= RVS;
-> -        }
-> -        if (cpu->cfg.ext_u) {
-> -            ext |= RVU;
-> -        }
-> -        if (cpu->cfg.ext_h) {
-> -            ext |= RVH;
-> -        }
-> -        if (cpu->cfg.ext_v) {
-> -            int vext_version = VEXT_VERSION_1_00_0;
-> -            ext |= RVV;
-> -            if (!is_power_of_2(cpu->cfg.vlen)) {
-> -                error_setg(errp,
-> -                        "Vector extension VLEN must be power of 2");
-> -                return;
-> -            }
-> -            if (cpu->cfg.vlen > RV_VLEN_MAX || cpu->cfg.vlen < 128) {
-> -                error_setg(errp,
-> -                        "Vector extension implementation only supports VLEN "
-> -                        "in the range [128, %d]", RV_VLEN_MAX);
-> -                return;
-> -            }
-> -            if (!is_power_of_2(cpu->cfg.elen)) {
-> -                error_setg(errp,
-> -                        "Vector extension ELEN must be power of 2");
-> -                return;
-> -            }
-> -            if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
-> -                error_setg(errp,
-> -                        "Vector extension implementation only supports ELEN "
-> -                        "in the range [8, 64]");
-> -                return;
-> -            }
-> -            if (cpu->cfg.vext_spec) {
-> -                if (!g_strcmp0(cpu->cfg.vext_spec, "v1.0")) {
-> -                    vext_version = VEXT_VERSION_1_00_0;
-> -                } else {
-> -                    error_setg(errp,
-> -                           "Unsupported vector spec version '%s'",
-> -                           cpu->cfg.vext_spec);
-> -                    return;
-> -                }
-> -            } else {
-> -                qemu_log("vector version is not specified, "
-> -                         "use the default value v1.0\n");
-> -            }
-> -            set_vext_version(env, vext_version);
-> -        }
-> -        if (cpu->cfg.ext_j) {
-> -            ext |= RVJ;
-> -        }
-> -
-> -        set_misa(env, env->misa_mxl, ext);
-> +    riscv_cpu_validate_set_extensions(cpu, &local_err);
-> +    if (local_err != NULL) {
-> +        error_propagate(errp, local_err);
-> +        return;
->      }
->
->  #ifndef CONFIG_USER_ONLY
-> --
-> 2.39.0
->
->
+
+ATB,
+
+Mark.
 
