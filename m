@@ -1,78 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFN5c-0004w0-IS
-	for mharc-qemu-riscv@gnu.org; Tue, 10 Jan 2023 17:27:28 -0500
+	id 1pFN7W-00067i-FA
+	for mharc-qemu-riscv@gnu.org; Tue, 10 Jan 2023 17:29:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pFN5a-0004vP-Gr
- for qemu-riscv@nongnu.org; Tue, 10 Jan 2023 17:27:26 -0500
-Received: from mail-oi1-x242.google.com ([2607:f8b0:4864:20::242])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pFN7R-00067B-Kb; Tue, 10 Jan 2023 17:29:25 -0500
+Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pFN5X-0000CN-8f
- for qemu-riscv@nongnu.org; Tue, 10 Jan 2023 17:27:26 -0500
-Received: by mail-oi1-x242.google.com with SMTP id h185so11349383oif.5
- for <qemu-riscv@nongnu.org>; Tue, 10 Jan 2023 14:27:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=IpoeC3L4roef9zj3oNJSECsxwrRb8L77/kWW9Ca4OjE=;
- b=M3bRd1KXmm1YAUUllfmPJS91n25kMXC0NzesyNd4hB4Uq5/95W1NObH5bRz5iHBQQN
- FvcId6jogwG4DMgPq1LAFqr2PdpyAx9hHLt7NL1LTgma0nSB1/EDGg1EwPGHi8m7ihCY
- Gdq/mnIvFDplKqDQUJCvNIP5+05E4UeoIgOExjENpacBaOwuzeXc+wUAGp70um14hyQB
- Tk8MF4F8jnqai+idLFE0Y8/dZCWIf7JIrGBhKmJ2OCQQndaH85yls1SCWA/MdSY+QTHT
- l3pKG2rDW5J59hnBhnRyJuhmJSmaJPPoWIp7Aoi9e9fvBfkQtSsPABA56IE0VTuEVAT5
- pqXw==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pFN7P-0000LU-Or; Tue, 10 Jan 2023 17:29:21 -0500
+Received: by mail-vs1-xe33.google.com with SMTP id k6so4954375vsk.1;
+ Tue, 10 Jan 2023 14:29:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AMTa7aBqaL3uQUzX7PE4u+15twaGBTQEG00lBfyFRxQ=;
+ b=OKYbKGKoJOjCQHDFJ7AeSHK4c4ZBUTxlokCLZthcJxKho7tdkArc5Kg0FPJuYC6KCR
+ BkfQlxsMy+I0LqEsbvZDO/28Z8v36MQTHqz6u3V6RyFt01CqcRQhCnPO1Z1zk1d9gGEU
+ uN3x8PIm7YX1J1K7spGQAhgisgxBtUsoZsNWx1qQTELwDERdmgODQ1b6T+p3BRSxxFx0
+ Rae7PLBC6Qw/0Xj0Ou9Y/BJbyw2gd/8MwzPgtuvHqBXuElF5dO9gorW8iEcIxVrZqEsl
+ 9Cn26S4pCCzsu7vrPiBVvvulzAZnbNl10Htdr74v8n7gnGnrIwkg4rB48oOi2YVO8d9w
+ AQEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IpoeC3L4roef9zj3oNJSECsxwrRb8L77/kWW9Ca4OjE=;
- b=cHFdV2PAjic3GDomktY91sUut8OE4zyPS5c5uyXyrvCIr4wV1ThjIs4IsAmphJlZPe
- 1lr48OR35eF7RZnOr2bEiiptx4fHMEaDDn+Tpzw4pjrgYGIqP+QlQ05DdjMaqUciU2jQ
- u45+v5PgO3J4skIL1h5Jf10mw2esrjtfPi0mRKXGaruaFXrVJarUuCcnC9Qp266RKsJL
- PhSJJ448qBuXqauwLAaEjXAjWIIw9+PgZn5p7aXXW3CyjsFV4vsBp8yjQ7FUA02N6vrB
- KJM07o259ttRGFai+YDySevHlO1JoCnYn12WvLB+jULaKeqIpDJJDn//9IIZH7IjXKng
- S8HQ==
-X-Gm-Message-State: AFqh2krntDUrYfQDLbrIm7jxak0yeGVB1ry+kB4g7Iq5A8GbzA2hQSh7
- 4jETsgrOVXsBIQ6XN01E+oy1Qg==
-X-Google-Smtp-Source: AMrXdXulFaF1xAqbNuVt6XDKi3TPC5Ums6arIcqg6x2+83NkwYTQ1ABQ8zajgXQmCYb8JYFYDTtfQA==
-X-Received: by 2002:a54:400b:0:b0:364:5ec5:bc with SMTP id
- x11-20020a54400b000000b003645ec500bcmr1565594oie.59.1673389641593; 
- Tue, 10 Jan 2023 14:27:21 -0800 (PST)
-Received: from [192.168.68.107] ([152.250.93.24])
- by smtp.gmail.com with ESMTPSA id
- g19-20020a544f93000000b00363ef79e2a1sm5876316oiy.31.2023.01.10.14.27.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Jan 2023 14:27:21 -0800 (PST)
-Message-ID: <2613669e-f535-e91d-14b8-5968094877eb@ventanamicro.com>
-Date: Tue, 10 Jan 2023 19:27:18 -0300
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AMTa7aBqaL3uQUzX7PE4u+15twaGBTQEG00lBfyFRxQ=;
+ b=aktFPgGwB/ps2nL4eo+kjODt0rISPWCBU0gLvuwh0SbeQKj1aZOGKEacqWeK4qXoe2
+ KZ6yoxMdhUb5GpmG2+w30MDmh2fcmyQFg5z9UxMLsqOqr5CJMsHzUYKNZKT/RTr8OlMn
+ P7wjyVpM9a40imIxjoEzEROvama0Ov9nB6zUWrGtK/efHeaaHbxqZmx7uCwXUWrGjvYk
+ tMVkAkEe0NrfjwGAIB7eRG2/xet5uMHrvcKwLh2dT+5tco70//1CCgniut0ceASMTve1
+ ETjtxGxT2ENkL7u2KSETNKAL//rWn8lziy+w0o7l1RZNmMDRdyTLIKfXdXMKUv3Q+vJM
+ 658Q==
+X-Gm-Message-State: AFqh2krtrI8fA0bEqaD1mf9RmQHhnw3oehz3JPRyJJuTlR0ecFj4uCfX
+ CD4D/tMH2CjjcfPBXd3FjuoFIoiyCAOQYHPDfP4=
+X-Google-Smtp-Source: AMrXdXugKD9aBVBMqD4bkN5U71eCLVFR9riIrwFrbumqXy9Guy6F8IKb+dIFjDKNIbD+EcDu4LGfBdAEoQeGr3kolJg=
+X-Received: by 2002:a67:e052:0:b0:3d0:c2e9:cb77 with SMTP id
+ n18-20020a67e052000000b003d0c2e9cb77mr717699vsl.54.1673389758054; Tue, 10 Jan
+ 2023 14:29:18 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Subject: Re: [PATCH 0/2] target/riscv/cpu: fix sifive_u 32/64bits boot in
- riscv-to-apply.next
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- richard.henderson@linaro.org
-References: <20230110201405.247785-1-dbarboza@ventanamicro.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230110201405.247785-1-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::242;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x242.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+References: <20230102115241.25733-1-dbarboza@ventanamicro.com>
+ <20230102115241.25733-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20230102115241.25733-2-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 11 Jan 2023 08:28:52 +1000
+Message-ID: <CAKmqyKOa169coHdx7QP9QVjqqKmxQLdRC=_awhTDGEZGGh60eg@mail.gmail.com>
+Subject: Re: [PATCH v5 01/11] tests/avocado: add RISC-V OpenSBI boot test
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ Bin Meng <bin.meng@windriver.com>, Cleber Rosa <crosa@redhat.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Bin Meng <bmeng@tinylab.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,78 +77,121 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jan 2023 22:27:26 -0000
+X-List-Received-Date: Tue, 10 Jan 2023 22:29:25 -0000
 
-Hi,
+On Mon, Jan 2, 2023 at 9:53 PM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> This test is used to do a quick sanity check to ensure that we're able
+> to run the existing QEMU FW image.
+>
+> 'sifive_u', 'spike' and 'virt' riscv64 machines, and 'sifive_u' and
+> 'virt' 32 bit machines are able to run the default RISCV64_BIOS_BIN |
+> RISCV32_BIOS_BIN firmware with minimal options.
+>
+> The riscv32 'spike' machine isn't bootable at this moment, requiring an
+> OpenSBI fix [1] and QEMU side changes [2]. We could just leave at that
+> or add a 'skip' test to remind us about it. To work as a reminder that
+> we have a riscv32 'spike' test that should be enabled as soon as OpenSBI
+> QEMU rom receives the fix, we're adding a 'skip' test:
+>
+> (06/18) tests/avocado/riscv_opensbi.py:RiscvOpenSBI.test_riscv32_spike:
+>         SKIP: requires OpenSBI fix to work
+>
+> [1] https://patchwork.ozlabs.org/project/opensbi/patch/20221226033603.186=
+0569-1-bmeng@tinylab.org/
+> [2] https://patchwork.ozlabs.org/project/qemu-devel/list/?series=3D334159
+>
+> Cc: Cleber Rosa <crosa@redhat.com>
+> Cc: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Reviewed-by: Bin Meng <bmeng@tinylab.org>
+> Tested-by: Bin Meng <bmeng@tinylab.org>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-I mentioned that the bug were found in riscv-to-apply.next but forgot to
-mentioned that the patches were also based on top of it as well:
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+Alistair
 
-
-Thanks,
-
-
-Daniel
-
-On 1/10/23 17:14, Daniel Henrique Barboza wrote:
-> Hi,
+> ---
+>  tests/avocado/riscv_opensbi.py | 65 ++++++++++++++++++++++++++++++++++
+>  1 file changed, 65 insertions(+)
+>  create mode 100644 tests/avocado/riscv_opensbi.py
 >
-> I found this bug when testing my avocado changes in riscv-to-apply.next.
-> The sifive_u board, both 32 and 64 bits, stopped booting OpenSBI. The
-> guest hangs indefinitely.
+> diff --git a/tests/avocado/riscv_opensbi.py b/tests/avocado/riscv_opensbi=
+.py
+> new file mode 100644
+> index 0000000000..e02f0d404a
+> --- /dev/null
+> +++ b/tests/avocado/riscv_opensbi.py
+> @@ -0,0 +1,65 @@
+> +# OpenSBI boot test for RISC-V machines
+> +#
+> +# Copyright (c) 2022, Ventana Micro
+> +#
+> +# This work is licensed under the terms of the GNU GPL, version 2 or
+> +# later.  See the COPYING file in the top-level directory.
+> +
+> +from avocado_qemu import QemuSystemTest
+> +from avocado import skip
+> +from avocado_qemu import wait_for_console_pattern
+> +
+> +class RiscvOpenSBI(QemuSystemTest):
+> +    """
+> +    :avocado: tags=3Daccel:tcg
+> +    """
+> +    timeout =3D 5
+> +
+> +    def boot_opensbi(self):
+> +        self.vm.set_console()
+> +        self.vm.launch()
+> +        wait_for_console_pattern(self, 'Platform Name')
+> +        wait_for_console_pattern(self, 'Boot HART MEDELEG')
+> +
+> +    @skip("requires OpenSBI fix to work")
+> +    def test_riscv32_spike(self):
+> +        """
+> +        :avocado: tags=3Darch:riscv32
+> +        :avocado: tags=3Dmachine:spike
+> +        """
+> +        self.boot_opensbi()
+> +
+> +    def test_riscv64_spike(self):
+> +        """
+> +        :avocado: tags=3Darch:riscv64
+> +        :avocado: tags=3Dmachine:spike
+> +        """
+> +        self.boot_opensbi()
+> +
+> +    def test_riscv32_sifive_u(self):
+> +        """
+> +        :avocado: tags=3Darch:riscv32
+> +        :avocado: tags=3Dmachine:sifive_u
+> +        """
+> +        self.boot_opensbi()
+> +
+> +    def test_riscv64_sifive_u(self):
+> +        """
+> +        :avocado: tags=3Darch:riscv64
+> +        :avocado: tags=3Dmachine:sifive_u
+> +        """
+> +        self.boot_opensbi()
+> +
+> +    def test_riscv32_virt(self):
+> +        """
+> +        :avocado: tags=3Darch:riscv32
+> +        :avocado: tags=3Dmachine:virt
+> +        """
+> +        self.boot_opensbi()
+> +
+> +    def test_riscv64_virt(self):
+> +        """
+> +        :avocado: tags=3Darch:riscv64
+> +        :avocado: tags=3Dmachine:virt
+> +        """
+> +        self.boot_opensbi()
+> --
+> 2.39.0
 >
-> Git bisect points that this patch broke things:
 >
-> 8c3f35d25e7e98655c609b6c1e9f103b9240f8f8 is the first bad commit
-> commit 8c3f35d25e7e98655c609b6c1e9f103b9240f8f8
-> Author: Weiwei Li <liweiwei@iscas.ac.cn>
-> Date:   Wed Dec 28 14:20:21 2022 +0800
->
->      target/riscv: add support for Zca extension
->      
->      Modify the check for C extension to Zca (C implies Zca)
-> (https://github.com/alistair23/qemu/commit/8c3f35d25e7e98655c609b6c1e9f103b9240f8f8)
->      
->
-> But this patch per se isn't doing anything wrong. The root of the
-> problem is that this patch makes assumptions based on the previous
-> patch:
->
-> commit a2b409aa6cadc1ed9715e1ab916ddd3dade0ba85
-> Author: Weiwei Li <liweiwei@iscas.ac.cn>
-> Date:   Wed Dec 28 14:20:20 2022 +0800
->
->      target/riscv: add cfg properties for Zc* extension
-> (https://github.com/alistair23/qemu/commit/a2b409aa6cadc1ed9715e1ab916ddd3dade0ba85)
->
-> Which added a lot of logic and assumptions that are being skipped by all
-> the SiFive boards because, during riscv_cpu_realize(), we have this
-> code:
->
->      /* If only MISA_EXT is unset for misa, then set it from properties */
->      if (env->misa_ext == 0) {
->          uint32_t ext = 0;
->          (...)
->      }
->
-> In short, we have a lot of code that are being skipped by all SiFive
-> CPUs because these CPUs are setting a non-zero value in set_misa() in
-> their respective cpu_init() functions.
->
-> It's possible to just hack in and fix the SiFive problem in isolate, but
-> I believe we can do better and allow all riscv_cpu_realize() to be executed
-> for all CPUs, regardless of what they've done during their cpu_init().
->
->
-> Daniel Henrique Barboza (2):
->    target/riscv/cpu: set cpu->cfg in register_cpu_props()
->    target/riscv/cpu.c: do not skip misa logic in riscv_cpu_realize()
->
->   target/riscv/cpu.c | 525 +++++++++++++++++++++++++--------------------
->   target/riscv/cpu.h |   4 +
->   2 files changed, 292 insertions(+), 237 deletions(-)
->
-
 
