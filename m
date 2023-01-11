@@ -1,68 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFecN-00033Q-Q9
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 12:10:27 -0500
+	id 1pFecO-000346-77
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 12:10:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pFec8-0002jv-0Z
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 12:10:15 -0500
-Received: from mail-oo1-xc2b.google.com ([2607:f8b0:4864:20::c2b])
+ id 1pFec9-0002kH-E0
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 12:10:16 -0500
+Received: from mail-oa1-x2b.google.com ([2001:4860:4864:20::2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pFec6-0006Nf-8t
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 12:10:11 -0500
-Received: by mail-oo1-xc2b.google.com with SMTP id
- d2-20020a4ab202000000b004ae3035538bso4188849ooo.12
- for <qemu-riscv@nongnu.org>; Wed, 11 Jan 2023 09:10:08 -0800 (PST)
+ id 1pFec6-0006OK-Tv
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 12:10:13 -0500
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-1433ef3b61fso16163268fac.10
+ for <qemu-riscv@nongnu.org>; Wed, 11 Jan 2023 09:10:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wJyEstskuH3VB5vAnrT5gTar803EFvBC9v6S2B7z6CM=;
- b=L2pFBYsb8J3paWXpLJNkVc1tBgbIiPh0tyuJkea24Z6f5UE1WmDF6/T5dAtxPrsMGW
- elJs6zyn4xW5hL4udW6yUMxJh0mpRQYM/dBe8nP9LG8C9USieuabHQTN00TtkUccRQHX
- ISfX69jIGr2YtqwQoxfm5T4FOKz30pKbYKtPrpgA9RplJD3t44x6nK9Q+d9B/watFB/T
- 48y0RHKMs0T55p9u4OkWx6QWyh7COmsbL3Si+e45ahwPQCtp5CxkKOmnVNEFwF8RwdYq
- mbMqx7SrUZOdgFK77xUzlh2/SYVBoGXN64EV8axAiT6r0W2luVDmobM3cvSSlnPz7vgN
- bKZg==
+ bh=5LQXvUZ8MPXYbIKFJnWO4N2K/K8eQ/j7XzvKq374hKA=;
+ b=l6BWGc83gLK/ZwVMGVb4jqEQEskLuYqSzYqQugPIrtprUWAuR93YHskwA+c/MWvYjM
+ 1iMUQRdO8vmWb36jNk3uZ28rFQ18cKyc81AqXFkI6TffxkjguHjA/N0MuWyy7TUxdSUC
+ U1ZNxu16jH/UfJR2Wf5kfkcRasuB5TxQGwd0lzHLrG5uUpMSpQFc8Iemb26ckZzoK4nc
+ keudjdsuUhtzKADLSBMiip5fGuriBBqGzXzu/ZI+Sb2V3LZfNI11vGAkTGJDlwJ5WleQ
+ 917Ki7bN1Wpa4Kxwu37GXm6iDLut9yoIE/0Z9fDHHoPcr8ow//mZsK2RdyUDnrgJhSjd
+ JUDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wJyEstskuH3VB5vAnrT5gTar803EFvBC9v6S2B7z6CM=;
- b=fHcFdWwjj/i+KzjN6gUhzXqr++0de1u1w1TeBtpD8w80k3A8cWtTlUNQow43sKMlUz
- oK3vCMapZnhqeDbtd+aFbHnqmhSRV2XMrX3rZJSFNF7EKQJAoFeEO5MyaVX8JadZeCxz
- 9nyvOIFfyHLA4jwMza1hEvWvlynrqxbKTGeHREBj0tRz4DyBoekI7O16vXoK3rg/dE6n
- 2zLic9MTNYnOYb17KEElSUkCaPZt3M7ATdeAHSi7T32KlXomOjlSKoWpRGMUu9ilnRm0
- XaC6VlXRGkIMiFB/7SoVgfr3PnpaThEyKYtSVBB68tqsvwf65x8O7uBaPfeOHDQW+5em
- GIkw==
-X-Gm-Message-State: AFqh2kqUefIYrfxVVwAXgxQwkAQsZV0xpHVjSDk/9t0fjRW//zvvjukm
- vR8eOg5xE79W07DJV9Z8cSzEDw==
-X-Google-Smtp-Source: AMrXdXsyyYqgbi9vnztN0qEJUh4sEMhVgpD0UW9FODp3c3sMvB7k9jMqwNHuHLS867xUDzKnfPJSpA==
-X-Received: by 2002:a4a:c54d:0:b0:4f2:ff6:6168 with SMTP id
- j13-20020a4ac54d000000b004f20ff66168mr3065732ooq.3.1673457007534; 
- Wed, 11 Jan 2023 09:10:07 -0800 (PST)
+ bh=5LQXvUZ8MPXYbIKFJnWO4N2K/K8eQ/j7XzvKq374hKA=;
+ b=BX8EUXsfoB/kZaANfFQzLQLiGmooRaKEzCBQC+ulI/p5HVJxMkJvgcCpGvnpFqn4nk
+ CLWgguVcdYzugE5WJnYP/0BHPZ/cVytbpIPQkDxFNJepGeYPmeDxjNrz/1eDsVLLoUZR
+ T0Wfsk5utLS9FSkgyMRVxH3UveMMPDoJS6k0eZImOvVRVu7S8Zrs7xjaX5G7eU1dV+wg
+ CCCyHYe5aUyFn9FwPEXEs7MGRRNsZWZtSBnSEBSmZMjkEgcK2UaXQ7suYdPGf3ntdSNp
+ B6OCOyk4rL/VLJ88Th5khEOxpV94UGJli1/Ymr/2p//UzzFQ2fOdAUHFV7yx8H3zvSFB
+ XY2Q==
+X-Gm-Message-State: AFqh2kqZKzZAfN/VlzDq+FPjheIWcyF+6kuk3CHCtPrx1Snb/YIX5Vtk
+ CvekG049JDbMTcdQB1I6pZMefYoLXxmW0kO4FNc=
+X-Google-Smtp-Source: AMrXdXvT9Ul9DaaL20QIy6KYGLcJ7xRtMTqcR9EtJZSUw0L+myrwZM9ZRPVQZdFHUmkl0/ISpgCoEA==
+X-Received: by 2002:a05:6870:316:b0:13b:23e2:3c9a with SMTP id
+ m22-20020a056870031600b0013b23e23c9amr40066849oaf.47.1673457009539; 
+ Wed, 11 Jan 2023 09:10:09 -0800 (PST)
 Received: from grind.. ([191.17.222.2]) by smtp.gmail.com with ESMTPSA id
- x18-20020a4ac592000000b004a3543fbfbbsm7214974oop.14.2023.01.11.09.10.05
+ x18-20020a4ac592000000b004a3543fbfbbsm7214974oop.14.2023.01.11.09.10.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Jan 2023 09:10:07 -0800 (PST)
+ Wed, 11 Jan 2023 09:10:09 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 06/10] hw/riscv: use ms->fdt in
- riscv_socket_fdt_write_distance_matrix()
-Date: Wed, 11 Jan 2023 14:09:44 -0300
-Message-Id: <20230111170948.316276-7-dbarboza@ventanamicro.com>
+Subject: [PATCH 07/10] hw/riscv: simplify riscv_load_fdt()
+Date: Wed, 11 Jan 2023 14:09:45 -0300
+Message-Id: <20230111170948.316276-8-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230111170948.316276-1-dbarboza@ventanamicro.com>
 References: <20230111170948.316276-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2b.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -82,88 +81,109 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2023 17:10:18 -0000
+X-List-Received-Date: Wed, 11 Jan 2023 17:10:19 -0000
 
-There's no need to use a MachineState pointer and a fdt pointer now that
-all RISC-V machines are using the FDT from the MachineState.
+All callers of riscv_load_fdt() are using machine->ram_size as
+'mem_size' and the fdt is always retrievable via machine->fdt.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- hw/riscv/numa.c         | 8 ++++----
- hw/riscv/spike.c        | 2 +-
- hw/riscv/virt.c         | 2 +-
- include/hw/riscv/numa.h | 4 ++--
- 4 files changed, 8 insertions(+), 8 deletions(-)
+ hw/riscv/boot.c            | 4 +++-
+ hw/riscv/microchip_pfsoc.c | 4 ++--
+ hw/riscv/sifive_u.c        | 3 +--
+ hw/riscv/spike.c           | 3 +--
+ hw/riscv/virt.c            | 3 +--
+ include/hw/riscv/boot.h    | 2 +-
+ 6 files changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/hw/riscv/numa.c b/hw/riscv/numa.c
-index f4343f5cde..4720102561 100644
---- a/hw/riscv/numa.c
-+++ b/hw/riscv/numa.c
-@@ -164,7 +164,7 @@ void riscv_socket_fdt_write_id(const MachineState *ms, const char *node_name,
-     }
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index e868fb6ade..21dea7eac2 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -265,10 +265,12 @@ out:
+     return kernel_entry;
  }
  
--void riscv_socket_fdt_write_distance_matrix(const MachineState *ms, void *fdt)
-+void riscv_socket_fdt_write_distance_matrix(const MachineState *ms)
+-uint64_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
++uint64_t riscv_load_fdt(MachineState *ms, hwaddr dram_base)
  {
-     int i, j, idx;
-     uint32_t *dist_matrix, dist_matrix_size;
-@@ -184,10 +184,10 @@ void riscv_socket_fdt_write_distance_matrix(const MachineState *ms, void *fdt)
-             }
-         }
+     uint64_t temp, fdt_addr;
++    uint64_t mem_size = ms->ram_size;
+     hwaddr dram_end = dram_base + mem_size;
++    void *fdt = ms->fdt;
+     int ret, fdtsize = fdt_totalsize(fdt);
  
--        qemu_fdt_add_subnode(fdt, "/distance-map");
--        qemu_fdt_setprop_string(fdt, "/distance-map", "compatible",
-+        qemu_fdt_add_subnode(ms->fdt, "/distance-map");
-+        qemu_fdt_setprop_string(ms->fdt, "/distance-map", "compatible",
-                                 "numa-distance-map-v1");
--        qemu_fdt_setprop(fdt, "/distance-map", "distance-matrix",
-+        qemu_fdt_setprop(ms->fdt, "/distance-map", "distance-matrix",
-                          dist_matrix, dist_matrix_size);
-         g_free(dist_matrix);
+     if (fdtsize <= 0) {
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index c45023a2b1..6bb08f66bd 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -633,8 +633,8 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+                                          true, NULL);
+ 
+         /* Compute the fdt load address in dram */
+-        fdt_load_addr = riscv_load_fdt(memmap[MICROCHIP_PFSOC_DRAM_LO].base,
+-                                       machine->ram_size, machine->fdt);
++        fdt_load_addr = riscv_load_fdt(machine,
++                                       memmap[MICROCHIP_PFSOC_DRAM_LO].base);
+         /* Load the reset vector */
+         riscv_setup_rom_reset_vec(machine, &s->soc.u_cpus, firmware_load_addr,
+                                   memmap[MICROCHIP_PFSOC_ENVM_DATA].base,
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index ccad386920..fc2a8a7af4 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -609,8 +609,7 @@ static void sifive_u_machine_init(MachineState *machine)
+     }
+ 
+     /* Compute the fdt load address in dram */
+-    fdt_load_addr = riscv_load_fdt(memmap[SIFIVE_U_DEV_DRAM].base,
+-                                   machine->ram_size, machine->fdt);
++    fdt_load_addr = riscv_load_fdt(machine, memmap[SIFIVE_U_DEV_DRAM].base);
+     if (!riscv_is_32bit(&s->soc.u_cpus)) {
+         start_addr_hi32 = (uint64_t)start_addr >> 32;
      }
 diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 05d34651cb..91bf194ec1 100644
+index 91bf194ec1..82093dd2cb 100644
 --- a/hw/riscv/spike.c
 +++ b/hw/riscv/spike.c
-@@ -174,7 +174,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
-         g_free(clust_name);
+@@ -316,8 +316,7 @@ static void spike_board_init(MachineState *machine)
      }
  
--    riscv_socket_fdt_write_distance_matrix(mc, fdt);
-+    riscv_socket_fdt_write_distance_matrix(mc);
+     /* Compute the fdt load address in dram */
+-    fdt_load_addr = riscv_load_fdt(memmap[SPIKE_DRAM].base,
+-                                   machine->ram_size, machine->fdt);
++    fdt_load_addr = riscv_load_fdt(machine, memmap[SPIKE_DRAM].base);
  
-     qemu_fdt_add_subnode(fdt, "/chosen");
-     qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", "/htif");
+     /* load the reset vector */
+     riscv_setup_rom_reset_vec(machine, &s->soc[0], memmap[SPIKE_DRAM].base,
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 1d3bd25cb5..e374b58f89 100644
+index e374b58f89..0a0252368e 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -805,7 +805,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
-         }
+@@ -1300,8 +1300,7 @@ static void virt_machine_done(Notifier *notifier, void *data)
      }
  
--    riscv_socket_fdt_write_distance_matrix(mc, mc->fdt);
-+    riscv_socket_fdt_write_distance_matrix(mc);
- }
- 
- static void create_fdt_virtio(RISCVVirtState *s, const MemMapEntry *memmap,
-diff --git a/include/hw/riscv/numa.h b/include/hw/riscv/numa.h
-index 634df6673f..8f5280211d 100644
---- a/include/hw/riscv/numa.h
-+++ b/include/hw/riscv/numa.h
-@@ -100,9 +100,9 @@ void riscv_socket_fdt_write_id(const MachineState *ms, const char *node_name,
-  * @ms: pointer to machine state
-  * @socket_id: socket index
-  *
-- * Write NUMA distance matrix in FDT for given machine
-+ * Write NUMA distance matrix in MachineState->fdt
-  */
--void riscv_socket_fdt_write_distance_matrix(const MachineState *ms, void *fdt);
-+void riscv_socket_fdt_write_distance_matrix(const MachineState *ms);
- 
- CpuInstanceProperties
- riscv_numa_cpu_index_to_props(MachineState *ms, unsigned cpu_index);
+     /* Compute the fdt load address in dram */
+-    fdt_load_addr = riscv_load_fdt(memmap[VIRT_DRAM].base,
+-                                   machine->ram_size, machine->fdt);
++    fdt_load_addr = riscv_load_fdt(machine, memmap[VIRT_DRAM].base);
+     /* load the reset vector */
+     riscv_setup_rom_reset_vec(machine, &s->soc[0], start_addr,
+                               virt_memmap[VIRT_MROM].base,
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index cbd131bad7..3581bbe447 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -47,7 +47,7 @@ target_ulong riscv_load_kernel(MachineState *machine,
+                                target_ulong firmware_end_addr,
+                                bool load_initrd,
+                                symbol_fn_t sym_cb);
+-uint64_t riscv_load_fdt(hwaddr dram_start, uint64_t dram_size, void *fdt);
++uint64_t riscv_load_fdt(MachineState *ms, hwaddr dram_start);
+ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
+                                hwaddr saddr,
+                                hwaddr rom_base, hwaddr rom_size,
 -- 
 2.39.0
 
