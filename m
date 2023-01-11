@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFYX0-0003uf-96
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 05:40:30 -0500
+	id 1pFYX3-0003yA-7O
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 05:40:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pFYWQ-0003kH-DJ; Wed, 11 Jan 2023 05:39:54 -0500
+ id 1pFYWV-0003oz-Tn; Wed, 11 Jan 2023 05:40:03 -0500
 Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pFYWM-0007kC-AG; Wed, 11 Jan 2023 05:39:54 -0500
+ id 1pFYWT-0007mk-Tc; Wed, 11 Jan 2023 05:39:59 -0500
 Received: from localhost.localdomain (unknown [61.165.33.198])
- by APP-01 (Coremail) with SMTP id qwCowABHTTXskb5jCcUADA--.29173S6;
- Wed, 11 Jan 2023 18:39:43 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowABHTTXskb5jCcUADA--.29173S10;
+ Wed, 11 Jan 2023 18:39:46 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v10 4/9] target/riscv: add support for Zcd extension
-Date: Wed, 11 Jan 2023 18:39:31 +0800
-Message-Id: <20230111103936.129269-5-liweiwei@iscas.ac.cn>
+Subject: [PATCH v10 8/9] target/riscv: expose properties for Zc* extension
+Date: Wed, 11 Jan 2023 18:39:35 +0800
+Message-Id: <20230111103936.129269-9-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230111103936.129269-1-liweiwei@iscas.ac.cn>
 References: <20230111103936.129269-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowABHTTXskb5jCcUADA--.29173S6
-X-Coremail-Antispam: 1UD129KBjvJXoW7Aw1UuFW8GF1kWr4fJrW5KFg_yoW8Kr47pF
- 18Cw47GFW5GryfZa13tF43JF1UJFs3Gry8t39Iywn5Gay5GF45Zr1UtFy3tr4UXFZ7Zr1Y
- kF1DA3y3C395trDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBv14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: qwCowABHTTXskb5jCcUADA--.29173S10
+X-Coremail-Antispam: 1UD129KBjvJXoW7uw1fCFWDtw48XF4UZFWxXrb_yoW8uF47pr
+ y5Ga47Kw15Jr13Gwn3tr1DJ3yrGw4rA3s7K3ySv3Z7XrZ3KrZrX3ZrC39rW3yftF4rZr4S
+ gF13Zr1xCrs5ta7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBl14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr
- 1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0D
- M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
- v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
- F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkIecxEwVAFwVW8twCF04
- k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18
- MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr4
- 1lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l
- IxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4
- A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQFxUUUUUU=
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
+ 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
+ 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
+ IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
+ M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY02Avz4vE14v_Gw1l42
+ xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWU
+ GwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI4
+ 8JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4U
+ JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcV
+ C2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbPC7UUUUUU==
 X-Originating-IP: [61.165.33.198]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
@@ -63,94 +63,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2023 10:39:54 -0000
+X-List-Received-Date: Wed, 11 Jan 2023 10:40:04 -0000
 
-Separate c_fld/c_fsd from fld/fsd to add additional check for
-c.fld{sp}/c.fsd{sp} which is useful for zcmp/zcmt to reuse
-their encodings
+Expose zca,zcb,zcf,zcd,zcmp,zcmt properties
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn16.decode              |  8 ++++----
- target/riscv/insn_trans/trans_rvd.c.inc | 18 ++++++++++++++++++
- 2 files changed, 22 insertions(+), 4 deletions(-)
+ target/riscv/cpu.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index f3ea650325..b62664b6af 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -97,12 +97,12 @@
- }
- {
-   lq              001  ... ... .. ... 00 @cl_q
--  fld             001  ... ... .. ... 00 @cl_d
-+  c_fld           001  ... ... .. ... 00 @cl_d
- }
- lw                010  ... ... .. ... 00 @cl_w
- {
-   sq              101  ... ... .. ... 00 @cs_q
--  fsd             101  ... ... .. ... 00 @cs_d
-+  c_fsd           101  ... ... .. ... 00 @cs_d
- }
- sw                110  ... ... .. ... 00 @cs_w
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 39ab7e46d3..6df667805f 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -81,6 +81,12 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zfhmin, true, PRIV_VERSION_1_12_0, ext_zfhmin),
+     ISA_EXT_DATA_ENTRY(zfinx, true, PRIV_VERSION_1_12_0, ext_zfinx),
+     ISA_EXT_DATA_ENTRY(zdinx, true, PRIV_VERSION_1_12_0, ext_zdinx),
++    ISA_EXT_DATA_ENTRY(zca, true, PRIV_VERSION_1_12_0, ext_zca),
++    ISA_EXT_DATA_ENTRY(zcb, true, PRIV_VERSION_1_12_0, ext_zcb),
++    ISA_EXT_DATA_ENTRY(zcf, true, PRIV_VERSION_1_12_0, ext_zcf),
++    ISA_EXT_DATA_ENTRY(zcd, true, PRIV_VERSION_1_12_0, ext_zcd),
++    ISA_EXT_DATA_ENTRY(zcmp, true, PRIV_VERSION_1_12_0, ext_zcmp),
++    ISA_EXT_DATA_ENTRY(zcmt, true, PRIV_VERSION_1_12_0, ext_zcmt),
+     ISA_EXT_DATA_ENTRY(zba, true, PRIV_VERSION_1_12_0, ext_zba),
+     ISA_EXT_DATA_ENTRY(zbb, true, PRIV_VERSION_1_12_0, ext_zbb),
+     ISA_EXT_DATA_ENTRY(zbc, true, PRIV_VERSION_1_12_0, ext_zbc),
+@@ -1135,6 +1141,13 @@ static Property riscv_cpu_extensions[] = {
  
-@@ -148,7 +148,7 @@ addw              100 1 11 ... 01 ... 01 @cs_2
- slli              000 .  .....  ..... 10 @c_shift2
- {
-   lq              001  ... ... .. ... 10 @c_lqsp
--  fld             001 .  .....  ..... 10 @c_ldsp
-+  c_fld           001 .  .....  ..... 10 @c_ldsp
- }
- {
-   illegal         010 -  00000  ----- 10 # c.lwsp, RES rd=0
-@@ -166,7 +166,7 @@ slli              000 .  .....  ..... 10 @c_shift2
- }
- {
-   sq              101  ... ... .. ... 10 @c_sqsp
--  fsd             101   ......  ..... 10 @c_sdsp
-+  c_fsd           101   ......  ..... 10 @c_sdsp
- }
- sw                110 .  .....  ..... 10 @c_swsp
- 
-diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
-index 6e3159b797..47849ffdfd 100644
---- a/target/riscv/insn_trans/trans_rvd.c.inc
-+++ b/target/riscv/insn_trans/trans_rvd.c.inc
-@@ -31,6 +31,12 @@
-     } \
- } while (0)
- 
-+#define REQUIRE_ZCD(ctx) do { \
-+    if (!ctx->cfg_ptr->ext_zcd) {  \
-+        return false;     \
-+    } \
-+} while (0)
+     /* These are experimental so mark with 'x-' */
+     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
 +
- static bool trans_fld(DisasContext *ctx, arg_fld *a)
- {
-     TCGv addr;
-@@ -59,6 +65,18 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
-     return true;
- }
- 
-+static bool trans_c_fld(DisasContext *ctx, arg_fld *a)
-+{
-+    REQUIRE_ZCD(ctx);
-+    return trans_fld(ctx, a);
-+}
-+
-+static bool trans_c_fsd(DisasContext *ctx, arg_fsd *a)
-+{
-+    REQUIRE_ZCD(ctx);
-+    return trans_fsd(ctx, a);
-+}
-+
- static bool trans_fmadd_d(DisasContext *ctx, arg_fmadd_d *a)
- {
-     REQUIRE_FPU;
++    DEFINE_PROP_BOOL("x-zca", RISCVCPU, cfg.ext_zca, false),
++    DEFINE_PROP_BOOL("x-zcb", RISCVCPU, cfg.ext_zcb, false),
++    DEFINE_PROP_BOOL("x-zcd", RISCVCPU, cfg.ext_zcd, false),
++    DEFINE_PROP_BOOL("x-zcf", RISCVCPU, cfg.ext_zcf, false),
++    DEFINE_PROP_BOOL("x-zcmp", RISCVCPU, cfg.ext_zcmp, false),
++    DEFINE_PROP_BOOL("x-zcmt", RISCVCPU, cfg.ext_zcmt, false),
+     /* ePMP 0.9.3 */
+     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+     DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
 -- 
 2.25.1
 
