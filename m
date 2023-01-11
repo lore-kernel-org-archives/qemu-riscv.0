@@ -1,52 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFe9u-0006qS-3b
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 11:41:02 -0500
+	id 1pFebu-0002R9-T7
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 12:09:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>) id 1pFe9s-0006p7-Sa
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 11:41:00 -0500
-Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>) id 1pFe9r-0008Ms-0f
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 11:41:00 -0500
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id E68F161D54;
- Wed, 11 Jan 2023 16:40:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A7FD6C433F0;
- Wed, 11 Jan 2023 16:40:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1673455250;
- bh=mJ7/OhXpyeQ5K/mRmb5v6laD26dU5T1KftFHjraeFWE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=GIcmbO7xasBapmKjxzmIEcEOI2gi48V3dukzry4lLZZT9w1Q6oeN4OE12Yvl2MZEm
- RSXn4XB9PoENVTZjT0XV2oGTYAb68doJeE4w9qkmtFDXIV8uSjR6B3ZvZeDmxnrsMD
- JExZFWGX3XZ+K/198Q+TY04qogm7S9rlX3nahE4h3G3tnzKLsDE89HSjClaMhJ83Fm
- 06c8idODsAObYzG45klE39+LQFx88V+ECgu4ctmTAKxAuO0ogO+k0s+Gq2yqC6Y1D8
- KZUhI6s9aMPM6e3rH3AgwoL/eooDmy2S8HpYavCrD728F60a+UfY/HSszznpy18NPP
- lErCpoYP78kcw==
-Date: Wed, 11 Jan 2023 16:40:47 +0000
-From: Conor Dooley <conor@kernel.org>
-To: stage TC <stagethalescristal@gmail.com>
-Cc: qemu-riscv@nongnu.org
-Subject: Re: qemu icicle kit es
-Message-ID: <Y77mjzm4u1V9JXKO@spud>
-References: <CAJWvPnt95pOb6-QFxrHMH7NNrtxNHKRLjhVoz5A+BZ2Er-joKQ@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pFebt-0002O4-Il
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 12:09:57 -0500
+Received: from mail-oo1-xc41.google.com ([2607:f8b0:4864:20::c41])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pFebr-00067j-OV
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 12:09:57 -0500
+Received: by mail-oo1-xc41.google.com with SMTP id
+ t15-20020a4a96cf000000b0049f7e18db0dso4190239ooi.10
+ for <qemu-riscv@nongnu.org>; Wed, 11 Jan 2023 09:09:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=AH6Fb9n2zOUywkwcVOAInIzMkndQ0tKmVWwBsc0N+DQ=;
+ b=jASZwSSSCanbgkLaXYyV6/kmv2Q8EVkubjwNtzwQ803ZemIzomeWrp9+NBQtjbWCSg
+ 5lrYnOeJJaXrBWfBIkffbl4SMI7qHrt36SHLNy0whaVA1cVgKvJanVqawZpzawJykHSC
+ q8BWR8H4aR4e/8wUPtWKkRP1V/e7WVZFBMSPRYTCnps0lQVh64ZWYXw8y8NmQPAxHzCw
+ iNzWfvDJJVIGcGEQRYoDf/Kt9g5cyxLZSW781+kHYi0oPdUU6UGM2bePijWqMCHE2LCK
+ F9Z0SAepbn0/IQGW6rfg2+I+hK7VqnylghAl5N6PL9UDMm4zPaufZ4/NOVFze5qeeZDS
+ Ibug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AH6Fb9n2zOUywkwcVOAInIzMkndQ0tKmVWwBsc0N+DQ=;
+ b=51IYLnoDJFYeLn55ikC1g5ZKN0tVlgFBS4TXzYJ7o1bUddutNB4hMrkIHnmtDcbht2
+ /qwvXLldESitC6/RDKANuBsJl3Qw+XGcGF/gpxieMdFfy4E+jF60TCEVBapSmhzs5Uex
+ zHTcIA4ozSEL4+jEe6fgxDy9hLHfVvnccsd8+W7v9l9bWxdlwXOYJyHpDMGoHOGhM401
+ 11jFarl+hYJkAwQEHQ7w4fMMKKFi4Gwb9bvRRR6SxP7YnUCEsnUu4T5bwZmlBno61qNJ
+ kUOHUTYEVMuVlkL4W1B15/MuxbV8wkTuCOlawrOOM150yfYvA+TiNLQAbSpc3hRvAyUN
+ Awaw==
+X-Gm-Message-State: AFqh2krpPtDLAdmOmkQ9zywTlFbjRbCqlgSZnunWM1zc/BUb7Bf3UtDn
+ X8orSMJeN0o2QEzgkeulxIxoOA==
+X-Google-Smtp-Source: AMrXdXsBabeqnNzs822rstiYr8w8sdWPstEzdcXW+cbXwOApUJIoFfhN2YNc6PHqbIMUea+YYTL3Rw==
+X-Received: by 2002:a4a:5516:0:b0:4a3:f27d:f324 with SMTP id
+ e22-20020a4a5516000000b004a3f27df324mr1699709oob.4.1673456994467; 
+ Wed, 11 Jan 2023 09:09:54 -0800 (PST)
+Received: from grind.. ([191.17.222.2]) by smtp.gmail.com with ESMTPSA id
+ x18-20020a4ac592000000b004a3543fbfbbsm7214974oop.14.2023.01.11.09.09.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Jan 2023 09:09:54 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH 00/10] riscv: create_fdt() related cleanups
+Date: Wed, 11 Jan 2023 14:09:38 -0300
+Message-Id: <20230111170948.316276-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="VBWWAWZsjmo5LLEM"
-Content-Disposition: inline
-In-Reply-To: <CAJWvPnt95pOb6-QFxrHMH7NNrtxNHKRLjhVoz5A+BZ2Er-joKQ@mail.gmail.com>
-Received-SPF: pass client-ip=2604:1380:4641:c500::1;
- envelope-from=conor@kernel.org; helo=dfw.source.kernel.org
-X-Spam_score_int: -70
-X-Spam_score: -7.1
-X-Spam_bar: -------
-X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c41;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc41.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -59,89 +79,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2023 16:41:01 -0000
+X-List-Received-Date: Wed, 11 Jan 2023 17:09:57 -0000
 
+Hi,
 
---VBWWAWZsjmo5LLEM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+This is a follow-up of:
 
-On Wed, Jan 11, 2023 at 03:21:26PM +0100, stage TC wrote:
-> Hello,
-> Sorry in advance if this is not the right way to do it but I'm a student
-> and not very used to this kind of stuff (first mailing list).
+"[PATCH v5 00/11] riscv: OpenSBI boot test and cleanups"
 
-Don't worry, you are doing fine :)
+Patches were based on top of riscv-to-apply.next [1] + the series above.
 
-> I'm trying to run qemu for the Microchip PolarFire SoC Icicle kit but I'm
-> facing a few issues and the wiki page about that seems obsolete.
+The recent FDT changes made in hw/riscv (all machines are now using the
+FDT via MachineState::fdt) allowed for most of the cleanups made here.
 
-I must admit, it's a long time since I tried to use a v2020.x release of
-any MPFS software. Last time I did give the steps in the docs a go,
-with a suitably vintage version of QEMU, things worked as expected.
-However, using more recent versions of QEMU I ran into some problems
-with the sd/mmc emulation & never get into U-Boot.
+Patches 9 and 10 were based on a suggestion made by Phil a few weeks ago.
+I decided to go for it.
 
-> I follow almost exactly what the wiki does (except I use a terminal as a
-> tty instead of the socket bc it didn't work) but my HSS won't boot on
-> versions more recent than 2020.10 or 0.99.12.
+[1] https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 
-What does "my HSS won't boot" mean? E.g:
-- Does the MICROCHIP logo banner appear (if it existed back then!)?
-  If it didnt, the version string I think was.
-- Does the HSS console appear?
-- Does it fail to launch the next bootloader stage?
+Daniel Henrique Barboza (10):
+  hw/riscv/spike.c: simplify create_fdt()
+  hw/riscv/virt.c: simplify create_fdt()
+  hw/riscv/sifive_u.c: simplify create_fdt()
+  hw/riscv/virt.c: remove 'is_32_bit' param from
+    create_fdt_socket_cpus()
+  hw/riscv: use MachineState::fdt in riscv_socket_fdt_write_id()
+  hw/riscv: use ms->fdt in riscv_socket_fdt_write_distance_matrix()
+  hw/riscv: simplify riscv_load_fdt()
+  hw/riscv/virt.c: calculate socket count once in create_fdt_imsic()
+  hw/riscv/virt.c: rename MachineState 'mc' pointers to 'ms'
+  hw/riscv/spike.c: rename MachineState 'mc' pointers to' ms'
 
-> However I can't find any image compatible for versions older than 2020.10
-> or 0.99.12 (mines hang at "starting kernel ...".
+ hw/riscv/boot.c            |   4 +-
+ hw/riscv/microchip_pfsoc.c |   4 +-
+ hw/riscv/numa.c            |  14 +-
+ hw/riscv/sifive_u.c        |  11 +-
+ hw/riscv/spike.c           |  25 +-
+ hw/riscv/virt.c            | 484 +++++++++++++++++++------------------
+ include/hw/riscv/boot.h    |   2 +-
+ include/hw/riscv/numa.h    |  10 +-
+ 8 files changed, 277 insertions(+), 277 deletions(-)
 
-By that do you mean you cannot find a pre-built yocto image? I am not
-sure that there are any that pre-date the one linked in the wiki that
-are still available, as those on GitHub only go back as far as v2021.02
+-- 
+2.39.0
 
-> Is there any newer version of the tutorial ? Or does anyone have an idea on
-> how to deal with this issue and use qemu for newer versions of the HSS ?
-
-I do my testing with something like:
-$(QEMU)/qemu-system-riscv64 \
-	-M microchip-icicle-kit \
-	-m 2G -smp 5 \
-	-kernel $(vmlinux_bin) \
-	-dtb $(devkit).dtb \
-	-initrd $(initramfs) \
-	-display none \
-	-serial null \
-	-serial stdio
-
-This loads a kernel directly rather than using the HSS - for recent
-versions of the HSS, implementations of some peripherals need to be
-added, for example, it checks things like the cache configuration
-during boot, which are not emulated in QEMU.
-
-For that reason, I've stuck with doing direct kernel boots. Linux
-v6.0.18 (and the associated devicetree) is the most recent combination
-that I have booted unmodified using the master branch of QEMU using
-this method.
-
-More recent (linux) kernels come with a device tree that will require
-changes in QEMU to support & I have unfortunately not had the time
-to work on that recently.
-
-Sorry that I am really of no help to you.
-
-Conor.
-
-
---VBWWAWZsjmo5LLEM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCY77mjwAKCRB4tDGHoIJi
-0vaFAP4laZm0bG+8TcWR3f7HYTrNdyDwlZqqvK0Sd81VZrFY1wD/aLBO2ltqYmRo
-nKfbtgUx1paHI4QiW4IMBAtzQk3WmwA=
-=dx4R
------END PGP SIGNATURE-----
-
---VBWWAWZsjmo5LLEM--
 
