@@ -1,61 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFbzD-000820-Is
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 09:21:51 -0500
+	id 1pFcha-0001sb-2A
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 10:07:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <stagethalescristal@gmail.com>)
- id 1pFbz6-0007vy-GR
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 09:21:44 -0500
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pFcgx-0001hp-Nq
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 10:07:14 -0500
+Received: from mail-qt1-x832.google.com ([2607:f8b0:4864:20::832])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <stagethalescristal@gmail.com>)
- id 1pFbz4-0006gu-UD
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 09:21:44 -0500
-Received: by mail-wr1-x434.google.com with SMTP id z5so14124737wrt.6
- for <qemu-riscv@nongnu.org>; Wed, 11 Jan 2023 06:21:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Xw3+noqo8N1Hqvt9v/9YsjOnaDzRchYiAOecLVlt93U=;
- b=Jl8YulGZ5+r0gFPS0o62vrMQeke60cGqHoHNj6CpRelMoIgZb0893ZW2ZXbKT1LMsF
- Mcr5xk8ggA1wjYdnrWJkKWVC+duGNJMcxIl/l+ToBtJ9yRh9swmRO4ThGHejgobz95hB
- PBs1xjnhmXDRI5Q7gYTaok80OpZrkjAxx1xQp/8YFIp3p2kcVQ5UeWQG+j5mVMD2Dbi3
- h9AJJe6xQu6UF2GLoa/+vize3g3kci7K2bBDrDS+tWGVuKtZvmkn3PU45jvv6qCnF5ww
- sliGWpL5hOBWv/K7qxjNF0s29RqdvM1QusWurbv/SkIZrn0hKzYT7osmTLxZ4BqWhshI
- /MLA==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pFcgu-0008LI-SO
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 10:07:03 -0500
+Received: by mail-qt1-x832.google.com with SMTP id s5so9494127qtx.6
+ for <qemu-riscv@nongnu.org>; Wed, 11 Jan 2023 07:07:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=cf/lJoArq8QrnipC49cD1Zh4f8VhsnbBmzMv7uBKIic=;
+ b=JtRAqPgXWIQhTIJ/pvk9nHYyl7YD9joVmZx7bvBLPEfghgcyasYNpGEfImgnL21RZM
+ Vu3LV7gd9NY3k30xaHijY9Vg0DQbiyxJAjEHqf+s9pWiPiikulqgKmoYH1kce92Aibcl
+ yl84iRyD1nJ5jDH5UY/79s5T6x7lNYs8KHXW3whmtwFBVb/H40VKRmgOuiLWWrTmEvDT
+ +z54+0Ji1v0WqejbtVy4wjc73ivZFxPlbsKPySg1aicbJ0299CFo8AfIW7zQLZMmpMmA
+ nQNb4iI87PSSI3NUhU4g31bGpQaDIAEK7KD/iKiuiWN6x+ogimpzelpSABwID15eK1j6
+ wpcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Xw3+noqo8N1Hqvt9v/9YsjOnaDzRchYiAOecLVlt93U=;
- b=f/gd1Hf4Nu33wNI62HeHW2Tm82aFvHWTFeku9t9ZRDdBVReCel1FPluJ9uB1zC9/2e
- 4uB26IPeKdUgxlavXJO5f5SMlpNyU7+w+rK97FFBxaHYGQb1rQrJO4lKOczsLoxy2NvM
- zrKc2ENPE0WdXunPq/ZzimqUB0feNSW7Ux+NSYNsLsYgdialROko5tUZMKyXhD8/eQT1
- og8tHBKY9UEZBKTRm04qUzhjsFByJsv48CJC0hyHYjN7ThsmLHxiiaBsCGyVOkiAOCpb
- n41xBXynAdbi/0dp/BiRNxnq7LaQRtRUMWf8+J7tS8x4ZWSz84gvw1a/Hm0lZvNEBtAC
- /MQA==
-X-Gm-Message-State: AFqh2kqwII3k/E2UdxPfeoR7aC+tisKkHLXgwj0P3GWnvIjIdGINcYC7
- AlaY3ZpY0fCziT6zu8h6Cc58HWyB4BPvmSdv/nWjChsD
-X-Google-Smtp-Source: AMrXdXuluYi3EUCYYZwv57P/3C20seedFbL+yUpTtVJPPpWf5PrVHxMq7nC9lTePb7PCsllgJ0X6tjHVsho+iD+cX7w=
-X-Received: by 2002:adf:fe4e:0:b0:2bd:c394:7b97 with SMTP id
- m14-20020adffe4e000000b002bdc3947b97mr109023wrs.141.1673446897166; Wed, 11
- Jan 2023 06:21:37 -0800 (PST)
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=cf/lJoArq8QrnipC49cD1Zh4f8VhsnbBmzMv7uBKIic=;
+ b=h0wI2sFWRA+WQDxluxDn6iGNz6IRv8k/aRBa7pXvsdLfzw+2kRhd8y6Y2kZER/QQoY
+ MBFG2xXQkmkOlpM6OQWNkAIpB/vvzS7i9QB24zEBZBO3QsJRLbC6mHcitDx6w2bLh+CF
+ AQAaAy2X75zpekXbEU05r8ghOQHt3ZW+P2lt3WYA9tJNDYuazciYlfuwTKTfWKE14YKL
+ qizFK0eb5gXl7XXkoVWoxo9p+5GHk9Upd2v84qr14w/EG7YRub/WS1OS7HTWZRmLfVyS
+ zty7zq27BSsnAjcAFrVDIxJ6iMOg2/DrewFeJSsL6+l0it29nJ9ICst/oN7T47q5jSHk
+ 2jxQ==
+X-Gm-Message-State: AFqh2kp1T4c5tRGQARm/xcwQfPvYWl2uOfXUOE0uqU4DhoH5LB186Ey2
+ TPMf6o9ipnHBJm2TAglWY8eD8Q==
+X-Google-Smtp-Source: AMrXdXtsl7+BdVbfYQ/BdyMcVxwR67zbAtKaRlaPFHgzN6ZcSRGdIpIaDmwAMndXGaCkuYpOGow1PQ==
+X-Received: by 2002:ac8:690c:0:b0:3ab:9974:3a06 with SMTP id
+ bt12-20020ac8690c000000b003ab99743a06mr74358212qtb.38.1673449619237; 
+ Wed, 11 Jan 2023 07:06:59 -0800 (PST)
+Received: from ?IPV6:2607:fb90:8062:d32d:5ad4:bcd:2063:a06?
+ ([2607:fb90:8062:d32d:5ad4:bcd:2063:a06])
+ by smtp.gmail.com with ESMTPSA id
+ m20-20020ac866d4000000b003a6a7a20575sm7661969qtp.73.2023.01.11.07.06.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Jan 2023 07:06:58 -0800 (PST)
+Message-ID: <7ba0bf63-1b46-7f70-a0ff-6d62cc963d4f@linaro.org>
+Date: Wed, 11 Jan 2023 07:06:53 -0800
 MIME-Version: 1.0
-From: stage TC <stagethalescristal@gmail.com>
-Date: Wed, 11 Jan 2023 15:21:26 +0100
-Message-ID: <CAJWvPnt95pOb6-QFxrHMH7NNrtxNHKRLjhVoz5A+BZ2Er-joKQ@mail.gmail.com>
-Subject: qemu icicle kit es
-To: qemu-riscv@nongnu.org
-Content-Type: multipart/alternative; boundary="000000000000db2c1205f1fdb778"
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=stagethalescristal@gmail.com; helo=mail-wr1-x434.google.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Subject: Re: [PATCH v4 03/36] tcg: Allocate objects contiguously in
+ temp_allocate_frame
+Content-Language: en-US
+To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org, pbonzini@redhat.com, eduardo@habkost.net,
+ qemu-devel@nongnu.org
+References: <20230108023719.2466341-1-richard.henderson@linaro.org>
+ <20230108023719.2466341-4-richard.henderson@linaro.org>
+ <87zgapl7az.fsf@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <87zgapl7az.fsf@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::832;
+ envelope-from=richard.henderson@linaro.org; helo=mail-qt1-x832.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -68,43 +88,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2023 14:21:44 -0000
+X-List-Received-Date: Wed, 11 Jan 2023 15:07:23 -0000
 
---000000000000db2c1205f1fdb778
-Content-Type: text/plain; charset="UTF-8"
+On 1/11/23 01:59, Alex Bennée wrote:
+>> @@ -3277,13 +3278,26 @@ static void temp_allocate_frame(TCGContext *s, TCGTemp *ts)
+>>           tcg_raise_tb_overflow(s);
+>>       }
+>>       s->current_frame_offset = off + size;
+>> -
+>> -    ts->mem_offset = off;
+>>   #if defined(__sparc__)
+>> -    ts->mem_offset += TCG_TARGET_STACK_BIAS;
+>> +    off += TCG_TARGET_STACK_BIAS;
+>>   #endif
+>> -    ts->mem_base = s->frame_temp;
+>> -    ts->mem_allocated = 1;
+>> +
+>> +    /* If the object was subdivided, assign memory to all the parts. */
+>> +    if (ts->base_type != ts->type) {
+>> +        int part_size = tcg_type_size(ts->type);
+>> +        int part_count = size / part_size;
+>> +
+>> +        ts -= ts->temp_subindex;
+> 
+> Whats going on here? Are we jumping to a previous temp? What guarentees
+> there is something at ts - ts->temp_subindex?
 
-Hello,
-Sorry in advance if this is not the right way to do it but I'm a student
-and not very used to this kind of stuff (first mailing list).
-I'm trying to run qemu for the Microchip PolarFire SoC Icicle kit but I'm
-facing a few issues and the wiki page about that seems obsolete.
-I follow almost exactly what the wiki does (except I use a terminal as a
-tty instead of the socket bc it didn't work) but my HSS won't boot on
-versions more recent than 2020.10 or 0.99.12.
-However I can't find any image compatible for versions older than 2020.10
-or 0.99.12 (mines hang at "starting kernel ...".
-Is there any newer version of the tutorial ? Or does anyone have an idea on
-how to deal with this issue and use qemu for newer versions of the HSS ?
+Yes.  Guaranteed by base_type != type.  See tcg_temp_new_internal -- it's the raison 
+d'être of temp_subindex.
 
-Thanks for your help.
 
---000000000000db2c1205f1fdb778
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hello,</div><div>Sorry in advance if this is not the =
-right way to do it but I&#39;m a student and not very used to this kind of =
-stuff (first mailing list).</div><div>I&#39;m trying to run qemu for the Mi=
-crochip PolarFire SoC Icicle kit but I&#39;m facing a few issues and the wi=
-ki page about that seems obsolete.</div><div>I follow almost exactly what t=
-he wiki does (except I use a terminal as a tty instead of the socket bc it =
-didn&#39;t work) but my HSS won&#39;t boot on versions more recent than 202=
-0.10 or 0.99.12. <br></div><div>However I can&#39;t find any image compatib=
-le for versions older than 2020.10 or 0.99.12 (mines hang at &quot;starting=
- kernel ...&quot;.</div><div>Is there any newer version of the tutorial ? O=
-r does anyone have an idea on how to deal with this issue and use qemu for =
-newer versions of the HSS ?</div><div><br></div><div>Thanks for your help.<=
-br></div></div>
-
---000000000000db2c1205f1fdb778--
+r~
 
