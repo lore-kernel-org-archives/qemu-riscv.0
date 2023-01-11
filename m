@@ -1,58 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFWdr-0004gM-C6
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 03:39:27 -0500
+	id 1pFWdt-0004jr-59
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 03:39:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pFWdq-0004f5-JH
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 03:39:26 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pFWdk-0004Zw-9D
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 03:39:21 -0500
 Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pFWdm-0005RX-HB
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 03:39:26 -0500
-Received: by mail-wm1-x334.google.com with SMTP id o15so10547127wmr.4
- for <qemu-riscv@nongnu.org>; Wed, 11 Jan 2023 00:39:22 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pFWdh-0005PB-Ky
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 03:39:19 -0500
+Received: by mail-wm1-x334.google.com with SMTP id
+ g19-20020a05600c4ed300b003d9eb1dbc0aso9061212wmq.3
+ for <qemu-riscv@nongnu.org>; Wed, 11 Jan 2023 00:39:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ORcIO3Q16LO89LF5It+n7AHGZNSc9obPcjCMBZ5jUj4=;
- b=CZy+OweFvz0BKtJ56abiVfIZIslTJJA9ISlamm3fNkKjpXJe6j/QtpzmKWRCuwLDJV
- efX+wSEy3zS5m+X579ik8edNWGRD53VnCdmyb5mzRucPSntB6HAC9fp6GKBtpW8EQtO2
- gTQ2KFaW7mUNFsjPqEK/JT68iMzmZn+XyYwyW2rXFYQhxGcSSSqwqWrE3KB4SWAbwKhW
- oaEHlXskdVb8K6M4hPfJrkymL631hhPCjIZrW3vRQoIenQWUkkZi/ModowptsK2P7JW0
- KaKU86FoHaU+zFtnfR+U37XEUf0CJ1br4WolRq2Fikqt1kNSBIxCuaQgKupjpzJMVRU+
- nC3A==
+ bh=rKS/GHlEaZ2OtVrGcoOQVFe05GPfIcUSWzwlFDllFlA=;
+ b=Jzq9CvL1hNw4kGR/D4Ij13V/FJJYjErVrNPxR+7bLEiD6Tqoz8OVFuhQDSOrGQb08g
+ txVBLcQmd1Hv0HxsCVM+TAdOHBkjIRf2FhyAvRk9u8fo3qoDk7CevA7nKO+SKMY4D2zo
+ 3I/CBktD68uWYM7CnegAWNAj7y04jvpBZVII+GQtRinG4RIaQcN4TeXFy3Z6i1fxiqaG
+ O+dFue9x2RkW4EBGHwHMEzTFYxyTiVW8AmD31+lfuGLhe4R4Uq5LOBYz+B1daJ//3P+T
+ uL0CyW+QUqgpXd/SYNdrtSum4OMBNbOKSCv6BI4Wjb7ejSwxgDTGNHU3TVO+xdGWbf1Q
+ 42qQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ORcIO3Q16LO89LF5It+n7AHGZNSc9obPcjCMBZ5jUj4=;
- b=oqcdV0oVPzb+aG0WhCywNQip6hPTApGTl0nQJiLag41K+W9POFOgxJI5NezHQ/MV+N
- v3Cs6Abz80J3NDjMDKbE9saxAGpo+I2Dp4AEKFXIBwBNpI30C4N1cFGUfSFdm763T6KK
- 3tcmQWgAktwSgzw0m6pqEBsHMjaxRtS/ihfoYyWUuGt9hBXB6TwoB+jfCks/Zzqp3V4I
- 3CwFHPbGgmalhjDhAkal9NFKi7oVPR+SnTliQHzTRVDMGs2cjfYXnMLbwSrE7cgiGh4l
- OnQOnMzDnI2BETkT6eyHWBxxJZV1VwgDSgCb9ZPV1CV/ZwC1OMJvRoRg6gvW18YBcZ4I
- +5qg==
-X-Gm-Message-State: AFqh2kpWUMSsbgb9bwG1llJuBTuK6ZhJv+TlFnTi3Fws/X0S2SMV0Hla
- WAbAAAqRewDlurI6TVbn+/MAyWimgohrPn1Y
-X-Google-Smtp-Source: AMrXdXsK2zJdXbJ9zuXgMsxqeDvbLXTxzP94s4tNE9+ZpZEuzzL15GgXdCzWJg8DY158E44KtpTQAg==
-X-Received: by 2002:a05:600c:3b1c:b0:3d9:f0da:542c with SMTP id
- m28-20020a05600c3b1c00b003d9f0da542cmr7660227wms.28.1673426361111; 
- Wed, 11 Jan 2023 00:39:21 -0800 (PST)
+ bh=rKS/GHlEaZ2OtVrGcoOQVFe05GPfIcUSWzwlFDllFlA=;
+ b=5wb2NwZN4kC0q0rgsdygfh3I6+70E/Q7+M15cfxiQTi8uCCAADxgc1N7gvk6KfYZYk
+ giDQQjb3a8NUskpgEz3dAwiAk+djuotTsaWUsY/Q42JBm27I7WMiby8QQi8Z+s0F4Rjp
+ US41bmUdzFQkFdVWTVAdz3YejIS0kSGwxPy4/flefwCF2ShKv79g6jgenSn1+wiY7ii2
+ 5RhRFHcc//wNQS3GRCrwDh6IJIAyM0aeio9swDqzegfYq7Wd66yD1mucpREv/GfqrWDf
+ QQ9L6IMsd7zTbn9jFng+tGDtREtTRouxRtID6pNrMvB2aIVq0lEZxRIBGTuH1k71BF4Y
+ Ai3w==
+X-Gm-Message-State: AFqh2kq5XK5p+x/f5flAbkHqxiU9OfPhFkUcPKkp0RjtZRQI74zq+YrH
+ 5DtX7x0aZFtb1H1Et+rGaSNwYH2jd8jc0oWk
+X-Google-Smtp-Source: AMrXdXuynAG7uU5p/Z7NJwPGm+HT9rL95N7fMp+/0gsd9zcL44fteXTE7Ip+TnZbbPYLtMJXZ9Tsfw==
+X-Received: by 2002:a05:600c:5405:b0:3da:632:a8d with SMTP id
+ he5-20020a05600c540500b003da06320a8dmr1703139wmb.10.1673426356222; 
+ Wed, 11 Jan 2023 00:39:16 -0800 (PST)
 Received: from localhost.localdomain ([81.0.6.76])
  by smtp.gmail.com with ESMTPSA id
- i5-20020a5d55c5000000b002a6f329203esm13275728wrw.61.2023.01.11.00.39.20
+ f28-20020a05600c491c00b003d9bd56e9c1sm16525824wmp.11.2023.01.11.00.39.15
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 11 Jan 2023 00:39:20 -0800 (PST)
+ Wed, 11 Jan 2023 00:39:15 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
  qemu-block@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 2/4] bulk: Coding style fixes
-Date: Wed, 11 Jan 2023 09:39:07 +0100
-Message-Id: <20230111083909.42624-3-philmd@linaro.org>
+Subject: [PATCH v2 1/4] hw: Remove hardcoded tabs (code style)
+Date: Wed, 11 Jan 2023 09:39:06 +0100
+Message-Id: <20230111083909.42624-2-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230111083909.42624-1-philmd@linaro.org>
 References: <20230111083909.42624-1-philmd@linaro.org>
@@ -80,413 +81,452 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2023 08:39:26 -0000
+X-List-Received-Date: Wed, 11 Jan 2023 08:39:25 -0000
 
-Fix the following checkpatch.pl violation on lines using the
-TARGET_FMT_plx definition to avoid:
+We are going to modify this code, fix its style first to avoid
+the following checkpatch.pl violations:
 
-  WARNING: line over 80 characters
+  ERROR: code indent should never use tabs
+  ERROR: space prohibited between function name and open parenthesis '('
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/block/pflash_cfi01.c       |  5 +++--
- hw/char/digic-uart.c          |  8 ++++----
- hw/core/sysbus.c              |  3 ++-
- hw/dma/pl330.c                | 16 +++++++++-------
- hw/i386/multiboot.c           |  3 ++-
- hw/i386/xen/xen-hvm.c         |  3 ++-
- hw/i386/xen/xen-mapcache.c    | 13 ++++++++-----
- hw/intc/exynos4210_combiner.c | 20 ++++++++++----------
- hw/misc/auxbus.c              |  3 ++-
- hw/net/allwinner_emac.c       |  8 ++++----
- hw/timer/digic-timer.c        |  8 ++++----
- hw/timer/etraxfs_timer.c      |  3 +--
- softmmu/memory.c              |  3 ++-
- target/ppc/mmu-hash32.c       | 10 ++++++----
- target/ppc/mmu_common.c       |  8 +++++---
- target/sparc/mmu_helper.c     |  5 +++--
- 16 files changed, 67 insertions(+), 52 deletions(-)
+ hw/dma/etraxfs_dma.c | 196 +++++++++++++++++++++----------------------
+ hw/misc/mst_fpga.c   | 162 ++++++++++++++++++-----------------
+ 2 files changed, 175 insertions(+), 183 deletions(-)
 
-diff --git a/hw/block/pflash_cfi01.c b/hw/block/pflash_cfi01.c
-index 0cbc2fb4cb..951419b2ed 100644
---- a/hw/block/pflash_cfi01.c
-+++ b/hw/block/pflash_cfi01.c
-@@ -645,8 +645,9 @@ static void pflash_write(PFlashCFI01 *pfl, hwaddr offset,
+diff --git a/hw/dma/etraxfs_dma.c b/hw/dma/etraxfs_dma.c
+index c4334e87bf..88d303ba4a 100644
+--- a/hw/dma/etraxfs_dma.c
++++ b/hw/dma/etraxfs_dma.c
+@@ -269,34 +269,34 @@ static void channel_load_c(struct fs_dma_ctrl *ctrl, int c)
  
-  error_flash:
-     qemu_log_mask(LOG_UNIMP, "%s: Unimplemented flash cmd sequence "
--                  "(offset " TARGET_FMT_plx ", wcycle 0x%x cmd 0x%x value 0x%x)"
--                  "\n", __func__, offset, pfl->wcycle, pfl->cmd, value);
-+                             "(offset " TARGET_FMT_plx
-+                             ", wcycle 0x%x cmd 0x%x value 0x%x)\n",
-+                  __func__, offset, pfl->wcycle, pfl->cmd, value);
- 
-  mode_read_array:
-     trace_pflash_mode_read_array(pfl->name);
-diff --git a/hw/char/digic-uart.c b/hw/char/digic-uart.c
-index 00e5df5517..3bbc43193b 100644
---- a/hw/char/digic-uart.c
-+++ b/hw/char/digic-uart.c
-@@ -62,8 +62,8 @@ static uint64_t digic_uart_read(void *opaque, hwaddr addr,
- 
-     default:
-         qemu_log_mask(LOG_UNIMP,
--                      "digic-uart: read access to unknown register 0x"
--                      TARGET_FMT_plx "\n", addr << 2);
-+                      "digic-uart: read access to unknown register"
-+                      " 0x" TARGET_FMT_plx "\n", addr << 2);
-     }
- 
-     return ret;
-@@ -100,8 +100,8 @@ static void digic_uart_write(void *opaque, hwaddr addr, uint64_t value,
- 
-     default:
-         qemu_log_mask(LOG_UNIMP,
--                      "digic-uart: write access to unknown register 0x"
--                      TARGET_FMT_plx "\n", addr << 2);
-+                      "digic-uart: write access to unknown register"
-+                      " 0x" TARGET_FMT_plx "\n", addr << 2);
-     }
- }
- 
-diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
-index 05c1da3d31..e8b31683e7 100644
---- a/hw/core/sysbus.c
-+++ b/hw/core/sysbus.c
-@@ -269,7 +269,8 @@ static void sysbus_dev_print(Monitor *mon, DeviceState *dev, int indent)
- 
-     for (i = 0; i < s->num_mmio; i++) {
-         size = memory_region_size(s->mmio[i].memory);
--        monitor_printf(mon, "%*smmio " TARGET_FMT_plx "/" TARGET_FMT_plx "\n",
-+        monitor_printf(mon,
-+                       "%*smmio " TARGET_FMT_plx "/" TARGET_FMT_plx "\n",
-                        indent, "", s->mmio[i].addr, size);
-     }
- }
-diff --git a/hw/dma/pl330.c b/hw/dma/pl330.c
-index e5d521c329..60ce65c2a7 100644
---- a/hw/dma/pl330.c
-+++ b/hw/dma/pl330.c
-@@ -1337,8 +1337,8 @@ static void pl330_debug_exec(PL330State *s)
-     }
-     if (ch->stall) {
-         trace_pl330_debug_exec_stall();
--        qemu_log_mask(LOG_UNIMP, "pl330: stall of debug instruction not "
--                      "implemented\n");
-+        qemu_log_mask(LOG_UNIMP,
-+                      "pl330: stall of debug instruction not implemented\n");
-     }
-     s->debug_status = 0;
- }
-@@ -1372,9 +1372,10 @@ static void pl330_iomem_write(void *opaque, hwaddr offset,
-             pl330_debug_exec(s);
-             pl330_exec(s);
-         } else {
--            qemu_log_mask(LOG_GUEST_ERROR, "pl330: write of illegal value %u "
--                          "for offset " TARGET_FMT_plx "\n", (unsigned)value,
--                          offset);
-+            qemu_log_mask(LOG_GUEST_ERROR,
-+                          "pl330: write of illegal value %u"
-+                          " for offset " TARGET_FMT_plx "\n",
-+                          (unsigned)value, offset);
-         }
-         break;
-     case PL330_REG_DBGINST0:
-@@ -1384,8 +1385,9 @@ static void pl330_iomem_write(void *opaque, hwaddr offset,
-         s->dbg[1] = value;
-         break;
-     default:
--        qemu_log_mask(LOG_GUEST_ERROR, "pl330: bad write offset " TARGET_FMT_plx
--                      "\n", offset);
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "pl330: bad write offset " TARGET_FMT_plx "\n",
-+                      offset);
-         break;
-     }
- }
-diff --git a/hw/i386/multiboot.c b/hw/i386/multiboot.c
-index 963e29362e..ec747245c2 100644
---- a/hw/i386/multiboot.c
-+++ b/hw/i386/multiboot.c
-@@ -353,7 +353,8 @@ int load_multiboot(X86MachineState *x86ms,
-             mb_add_mod(&mbs, mbs.mb_buf_phys + offs,
-                        mbs.mb_buf_phys + offs + mb_mod_length, c);
- 
--            mb_debug("mod_start: %p\nmod_end:   %p\n  cmdline: "TARGET_FMT_plx,
-+            mb_debug("mod_start: %p\nmod_end:   %p\n"
-+                     "  cmdline: "TARGET_FMT_plx,
-                      (char *)mbs.mb_buf + offs,
-                      (char *)mbs.mb_buf + offs + mb_mod_length, c);
-             g_free(one_file);
-diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
-index e4293d6d66..67d250ab54 100644
---- a/hw/i386/xen/xen-hvm.c
-+++ b/hw/i386/xen/xen-hvm.c
-@@ -522,7 +522,8 @@ static void xen_set_memory(struct MemoryListener *listener,
-         }
-     } else {
-         if (xen_remove_from_physmap(state, start_addr, size) < 0) {
--            DPRINTF("physmapping does not exist at "TARGET_FMT_plx"\n", start_addr);
-+            DPRINTF("physmapping does not exist at "TARGET_FMT_plx"\n",
-+                    start_addr);
-         }
-     }
- }
-diff --git a/hw/i386/xen/xen-mapcache.c b/hw/i386/xen/xen-mapcache.c
-index a2f93096e7..491320e24a 100644
---- a/hw/i386/xen/xen-mapcache.c
-+++ b/hw/i386/xen/xen-mapcache.c
-@@ -357,7 +357,8 @@ tryagain:
-         entry->lock++;
-         if (entry->lock == 0) {
-             fprintf(stderr,
--                    "mapcache entry lock overflow: "TARGET_FMT_plx" -> %p\n",
-+                    "mapcache entry lock overflow: "
-+                    TARGET_FMT_plx" -> %p\n",
-                     entry->paddr_index, entry->vaddr_base);
-             abort();
-         }
-@@ -404,8 +405,8 @@ ram_addr_t xen_ram_addr_from_mapcache(void *ptr)
-     if (!found) {
-         fprintf(stderr, "%s, could not find %p\n", __func__, ptr);
-         QTAILQ_FOREACH(reventry, &mapcache->locked_entries, next) {
--            DPRINTF("   "TARGET_FMT_plx" -> %p is present\n", reventry->paddr_index,
--                    reventry->vaddr_req);
-+            DPRINTF("   "TARGET_FMT_plx" -> %p is present\n",
-+                    reventry->paddr_index, reventry->vaddr_req);
-         }
-         abort();
-         return 0;
-@@ -445,7 +446,8 @@ static void xen_invalidate_map_cache_entry_unlocked(uint8_t *buffer)
-     if (!found) {
-         DPRINTF("%s, could not find %p\n", __func__, buffer);
-         QTAILQ_FOREACH(reventry, &mapcache->locked_entries, next) {
--            DPRINTF("   "TARGET_FMT_plx" -> %p is present\n", reventry->paddr_index, reventry->vaddr_req);
-+            DPRINTF("   "TARGET_FMT_plx" -> %p is present\n",
-+                    reventry->paddr_index, reventry->vaddr_req);
-         }
-         return;
-     }
-@@ -578,7 +580,8 @@ static uint8_t *xen_replace_cache_entry_unlocked(hwaddr old_phys_addr,
-     if (!test_bits(address_offset >> XC_PAGE_SHIFT,
-                 test_bit_size >> XC_PAGE_SHIFT,
-                 entry->valid_mapping)) {
--        DPRINTF("Unable to update a mapcache entry for "TARGET_FMT_plx"!\n",
-+        DPRINTF("Unable to update a mapcache entry for "
-+                TARGET_FMT_plx "!\n",
-                 old_phys_addr);
-         return NULL;
-     }
-diff --git a/hw/intc/exynos4210_combiner.c b/hw/intc/exynos4210_combiner.c
-index a289510bdb..44810bb63a 100644
---- a/hw/intc/exynos4210_combiner.c
-+++ b/hw/intc/exynos4210_combiner.c
-@@ -119,8 +119,8 @@ exynos4210_combiner_read(void *opaque, hwaddr offset, unsigned size)
-         break;
-     default:
-         if (offset >> 2 >= IIC_REGSET_SIZE) {
--            hw_error("exynos4210.combiner: overflow of reg_set by 0x"
--                    TARGET_FMT_plx "offset\n", offset);
-+            hw_error("exynos4210.combiner: overflow of reg_set by"
-+                     " 0x" TARGET_FMT_plx "offset\n", offset);
-         }
-         val = s->reg_set[offset >> 2];
-     }
-@@ -183,20 +183,20 @@ static void exynos4210_combiner_write(void *opaque, hwaddr offset,
-     reg_n = (offset - (req_quad_base_n << 4)) >> 2;
- 
-     if (req_quad_base_n >= IIC_NGRP) {
--        hw_error("exynos4210.combiner: unallowed write access at offset 0x"
--                TARGET_FMT_plx "\n", offset);
-+        hw_error("exynos4210.combiner: unallowed write access at offset"
-+                 " 0x" TARGET_FMT_plx "\n", offset);
-         return;
-     }
- 
-     if (reg_n > 1) {
--        hw_error("exynos4210.combiner: unallowed write access at offset 0x"
--                TARGET_FMT_plx "\n", offset);
-+        hw_error("exynos4210.combiner: unallowed write access at offset"
-+                 " 0x" TARGET_FMT_plx "\n", offset);
-         return;
-     }
- 
-     if (offset >> 2 >= IIC_REGSET_SIZE) {
--        hw_error("exynos4210.combiner: overflow of reg_set by 0x"
--                TARGET_FMT_plx "offset\n", offset);
-+        hw_error("exynos4210.combiner: overflow of reg_set by"
-+                 " 0x" TARGET_FMT_plx "offset\n", offset);
-     }
-     s->reg_set[offset >> 2] = val;
- 
-@@ -245,8 +245,8 @@ static void exynos4210_combiner_write(void *opaque, hwaddr offset,
-         exynos4210_combiner_update(s, grp_quad_base_n + 3);
-         break;
-     default:
--        hw_error("exynos4210.combiner: unallowed write access at offset 0x"
--                TARGET_FMT_plx "\n", offset);
-+        hw_error("exynos4210.combiner: unallowed write access at offset"
-+                 " 0x" TARGET_FMT_plx "\n", offset);
-         break;
-     }
- }
-diff --git a/hw/misc/auxbus.c b/hw/misc/auxbus.c
-index 8a8012f5f0..a2a0f88836 100644
---- a/hw/misc/auxbus.c
-+++ b/hw/misc/auxbus.c
-@@ -299,7 +299,8 @@ static void aux_slave_dev_print(Monitor *mon, DeviceState *dev, int indent)
- 
-     s = AUX_SLAVE(dev);
- 
--    monitor_printf(mon, "%*smemory " TARGET_FMT_plx "/" TARGET_FMT_plx "\n",
-+    monitor_printf(mon,
-+                   "%*smemory " TARGET_FMT_plx "/" TARGET_FMT_plx "\n",
-                    indent, "",
-                    object_property_get_uint(OBJECT(s->mmio), "addr", NULL),
-                    memory_region_size(s->mmio));
-diff --git a/hw/net/allwinner_emac.c b/hw/net/allwinner_emac.c
-index ddddf35c45..53412c23e4 100644
---- a/hw/net/allwinner_emac.c
-+++ b/hw/net/allwinner_emac.c
-@@ -303,8 +303,8 @@ static uint64_t aw_emac_read(void *opaque, hwaddr offset, unsigned size)
-                                    extract32(s->phy_target, PHY_REG_SHIFT, 8));
-     default:
-         qemu_log_mask(LOG_UNIMP,
--                      "allwinner_emac: read access to unknown register 0x"
--                      TARGET_FMT_plx "\n", offset);
-+                      "allwinner_emac: read access to unknown register"
-+                      " 0x" TARGET_FMT_plx "\n", offset);
-         ret = 0;
-     }
- 
-@@ -406,8 +406,8 @@ static void aw_emac_write(void *opaque, hwaddr offset, uint64_t value,
-         break;
-     default:
-         qemu_log_mask(LOG_UNIMP,
--                      "allwinner_emac: write access to unknown register 0x"
--                      TARGET_FMT_plx "\n", offset);
-+                      "allwinner_emac: write access to unknown register"
-+                      " 0x" TARGET_FMT_plx "\n", offset);
-     }
- }
- 
-diff --git a/hw/timer/digic-timer.c b/hw/timer/digic-timer.c
-index d5186f4454..d324b5e698 100644
---- a/hw/timer/digic-timer.c
-+++ b/hw/timer/digic-timer.c
-@@ -75,8 +75,8 @@ static uint64_t digic_timer_read(void *opaque, hwaddr offset, unsigned size)
-         break;
-     default:
-         qemu_log_mask(LOG_UNIMP,
--                      "digic-timer: read access to unknown register 0x"
--                      TARGET_FMT_plx "\n", offset);
-+                      "digic-timer: read access to unknown register"
-+                      " 0x" TARGET_FMT_plx "\n", offset);
-     }
- 
-     return ret;
-@@ -115,8 +115,8 @@ static void digic_timer_write(void *opaque, hwaddr offset,
- 
-     default:
-         qemu_log_mask(LOG_UNIMP,
--                      "digic-timer: read access to unknown register 0x"
--                      TARGET_FMT_plx "\n", offset);
-+                      "digic-timer: read access to unknown register"
-+                      " 0x" TARGET_FMT_plx "\n", offset);
-     }
- }
- 
-diff --git a/hw/timer/etraxfs_timer.c b/hw/timer/etraxfs_timer.c
-index ecc2831baf..993df3557d 100644
---- a/hw/timer/etraxfs_timer.c
-+++ b/hw/timer/etraxfs_timer.c
-@@ -324,8 +324,7 @@ timer_write(void *opaque, hwaddr addr,
-             t->rw_ack_intr = 0;
-             break;
-         default:
--            printf ("%s " TARGET_FMT_plx " %x\n",
--                __func__, addr, value);
-+            printf("%s " TARGET_FMT_plx " %x\n", __func__, addr, value);
-             break;
-     }
- }
-diff --git a/softmmu/memory.c b/softmmu/memory.c
-index e05332d07f..e8c1f73312 100644
---- a/softmmu/memory.c
-+++ b/softmmu/memory.c
-@@ -1290,7 +1290,8 @@ static void unassigned_mem_write(void *opaque, hwaddr addr,
-                                  uint64_t val, unsigned size)
+ static void channel_load_d(struct fs_dma_ctrl *ctrl, int c)
  {
- #ifdef DEBUG_UNASSIGNED
--    printf("Unassigned mem write " TARGET_FMT_plx " = 0x%"PRIx64"\n", addr, val);
-+    printf("Unassigned mem write " TARGET_FMT_plx " = 0x%"PRIx64"\n",
-+           addr, val);
- #endif
+-	hwaddr addr = channel_reg(ctrl, c, RW_SAVED_DATA);
++    hwaddr addr = channel_reg(ctrl, c, RW_SAVED_DATA);
+ 
+-	/* Load and decode. FIXME: handle endianness.  */
+-	D(printf("%s ch=%d addr=" TARGET_FMT_plx "\n", __func__, c, addr));
++    /* Load and decode. FIXME: handle endianness.  */
++    D(printf("%s ch=%d addr=" TARGET_FMT_plx "\n", __func__, c, addr));
+     cpu_physical_memory_read(addr, &ctrl->channels[c].current_d,
+                              sizeof(ctrl->channels[c].current_d));
+ 
+-	D(dump_d(c, &ctrl->channels[c].current_d));
+-	ctrl->channels[c].regs[RW_DATA] = addr;
++    D(dump_d(c, &ctrl->channels[c].current_d));
++    ctrl->channels[c].regs[RW_DATA] = addr;
  }
  
-diff --git a/target/ppc/mmu-hash32.c b/target/ppc/mmu-hash32.c
-index cc091c3e62..ad353a86bc 100644
---- a/target/ppc/mmu-hash32.c
-+++ b/target/ppc/mmu-hash32.c
-@@ -361,10 +361,12 @@ static hwaddr ppc_hash32_htab_lookup(PowerPCCPU *cpu,
-     pte_offset = ppc_hash32_pteg_search(cpu, pteg_off, 0, ptem, pte);
-     if (pte_offset == -1) {
-         /* Secondary PTEG lookup */
--        qemu_log_mask(CPU_LOG_MMU, "1 htab=" TARGET_FMT_plx "/" TARGET_FMT_plx
--                " vsid=%" PRIx32 " api=%" PRIx32
--                " hash=" TARGET_FMT_plx "\n", ppc_hash32_hpt_base(cpu),
--                ppc_hash32_hpt_mask(cpu), vsid, ptem, ~hash);
-+        qemu_log_mask(CPU_LOG_MMU,
-+                      "1 htab=" TARGET_FMT_plx "/" TARGET_FMT_plx
-+                      " vsid=%" PRIx32 " api=%" PRIx32
-+                      " hash=" TARGET_FMT_plx "\n",
-+                      ppc_hash32_hpt_base(cpu),
-+                      ppc_hash32_hpt_mask(cpu), vsid, ptem, ~hash);
-         pteg_off = get_pteg_offset32(cpu, ~hash);
-         pte_offset = ppc_hash32_pteg_search(cpu, pteg_off, 1, ptem, pte);
-     }
-diff --git a/target/ppc/mmu_common.c b/target/ppc/mmu_common.c
-index 8901f4d134..94cbb8b6a0 100644
---- a/target/ppc/mmu_common.c
-+++ b/target/ppc/mmu_common.c
-@@ -328,7 +328,8 @@ static int get_bat_6xx_tlb(CPUPPCState *env, mmu_ctx_t *ctx,
-                 ctx->prot = prot;
-                 ret = check_prot(ctx->prot, access_type);
-                 if (ret == 0) {
--                    qemu_log_mask(CPU_LOG_MMU, "BAT %d match: r " TARGET_FMT_plx
-+                    qemu_log_mask(CPU_LOG_MMU,
-+                                  "BAT %d match: r " TARGET_FMT_plx
-                                   " prot=%c%c\n", i, ctx->raddr,
-                                   ctx->prot & PAGE_READ ? 'R' : '-',
-                                   ctx->prot & PAGE_WRITE ? 'W' : '-');
-@@ -420,8 +421,9 @@ static int get_segment_6xx_tlb(CPUPPCState *env, mmu_ctx_t *ctx,
-                 hwaddr curaddr;
-                 uint32_t a0, a1, a2, a3;
+ static void channel_store_c(struct fs_dma_ctrl *ctrl, int c)
+ {
+-	hwaddr addr = channel_reg(ctrl, c, RW_GROUP_DOWN);
++    hwaddr addr = channel_reg(ctrl, c, RW_GROUP_DOWN);
  
--                qemu_log("Page table: " TARGET_FMT_plx " len " TARGET_FMT_plx
--                         "\n", ppc_hash32_hpt_base(cpu),
-+                qemu_log("Page table: " TARGET_FMT_plx
-+                         " len " TARGET_FMT_plx "\n",
-+                         ppc_hash32_hpt_base(cpu),
-                          ppc_hash32_hpt_mask(cpu) + 0x80);
-                 for (curaddr = ppc_hash32_hpt_base(cpu);
-                      curaddr < (ppc_hash32_hpt_base(cpu)
-diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
-index 919448a494..e3bdb6c3b8 100644
---- a/target/sparc/mmu_helper.c
-+++ b/target/sparc/mmu_helper.c
-@@ -368,8 +368,9 @@ void dump_mmu(CPUSPARCState *env)
-                 pde = mmu_probe(env, va1, 1);
-                 if (pde) {
-                     pa = cpu_get_phys_page_debug(cs, va1);
--                    qemu_printf(" VA: " TARGET_FMT_lx ", PA: "
--                                TARGET_FMT_plx " PDE: " TARGET_FMT_lx "\n",
-+                    qemu_printf(" VA: " TARGET_FMT_lx
-+                                ", PA: " TARGET_FMT_plx
-+                                " PDE: " TARGET_FMT_lx "\n",
-                                 va1, pa, pde);
-                     for (o = 0, va2 = va1; o < 64; o++, va2 += 4 * 1024) {
-                         pde = mmu_probe(env, va2, 0);
+-	/* Encode and store. FIXME: handle endianness.  */
+-	D(printf("%s ch=%d addr=" TARGET_FMT_plx "\n", __func__, c, addr));
+-	D(dump_d(c, &ctrl->channels[c].current_d));
++    /* Encode and store. FIXME: handle endianness.  */
++    D(printf("%s ch=%d addr=" TARGET_FMT_plx "\n", __func__, c, addr));
++    D(dump_d(c, &ctrl->channels[c].current_d));
+     cpu_physical_memory_write(addr, &ctrl->channels[c].current_c,
+                               sizeof(ctrl->channels[c].current_c));
+ }
+ 
+ static void channel_store_d(struct fs_dma_ctrl *ctrl, int c)
+ {
+-	hwaddr addr = channel_reg(ctrl, c, RW_SAVED_DATA);
++    hwaddr addr = channel_reg(ctrl, c, RW_SAVED_DATA);
+ 
+-	/* Encode and store. FIXME: handle endianness.  */
+-	D(printf("%s ch=%d addr=" TARGET_FMT_plx "\n", __func__, c, addr));
++    /* Encode and store. FIXME: handle endianness.  */
++    D(printf("%s ch=%d addr=" TARGET_FMT_plx "\n", __func__, c, addr));
+     cpu_physical_memory_write(addr, &ctrl->channels[c].current_d,
+                               sizeof(ctrl->channels[c].current_d));
+ }
+@@ -574,46 +574,43 @@ static inline int channel_in_run(struct fs_dma_ctrl *ctrl, int c)
+ 
+ static uint32_t dma_rinvalid (void *opaque, hwaddr addr)
+ {
+-        hw_error("Unsupported short raccess. reg=" TARGET_FMT_plx "\n", addr);
+-        return 0;
++    hw_error("Unsupported short raccess. reg=" TARGET_FMT_plx "\n", addr);
++    return 0;
+ }
+ 
+-static uint64_t
+-dma_read(void *opaque, hwaddr addr, unsigned int size)
++static uint64_t dma_read(void *opaque, hwaddr addr, unsigned int size)
+ {
+-        struct fs_dma_ctrl *ctrl = opaque;
+-	int c;
+-	uint32_t r = 0;
++    struct fs_dma_ctrl *ctrl = opaque;
++    int c;
++    uint32_t r = 0;
+ 
+-	if (size != 4) {
+-		dma_rinvalid(opaque, addr);
+-	}
++    if (size != 4) {
++        dma_rinvalid(opaque, addr);
++    }
+ 
+-	/* Make addr relative to this channel and bounded to nr regs.  */
+-	c = fs_channel(addr);
+-	addr &= 0xff;
+-	addr >>= 2;
+-	switch (addr)
+-	{
+-		case RW_STAT:
+-			r = ctrl->channels[c].state & 7;
+-			r |= ctrl->channels[c].eol << 5;
+-			r |= ctrl->channels[c].stream_cmd_src << 8;
+-			break;
++    /* Make addr relative to this channel and bounded to nr regs.  */
++    c = fs_channel(addr);
++    addr &= 0xff;
++    addr >>= 2;
++    switch (addr) {
++    case RW_STAT:
++        r = ctrl->channels[c].state & 7;
++        r |= ctrl->channels[c].eol << 5;
++        r |= ctrl->channels[c].stream_cmd_src << 8;
++        break;
+ 
+-		default:
+-			r = ctrl->channels[c].regs[addr];
+-			D(printf ("%s c=%d addr=" TARGET_FMT_plx "\n",
+-				  __func__, c, addr));
+-			break;
+-	}
+-	return r;
++    default:
++        r = ctrl->channels[c].regs[addr];
++        D(printf("%s c=%d addr=" TARGET_FMT_plx "\n", __func__, c, addr));
++        break;
++    }
++    return r;
+ }
+ 
+ static void
+ dma_winvalid (void *opaque, hwaddr addr, uint32_t value)
+ {
+-        hw_error("Unsupported short waccess. reg=" TARGET_FMT_plx "\n", addr);
++    hw_error("Unsupported short waccess. reg=" TARGET_FMT_plx "\n", addr);
+ }
+ 
+ static void
+@@ -625,71 +622,68 @@ dma_update_state(struct fs_dma_ctrl *ctrl, int c)
+ 		ctrl->channels[c].state = RST;
+ }
+ 
+-static void
+-dma_write(void *opaque, hwaddr addr,
+-	  uint64_t val64, unsigned int size)
++static void dma_write(void *opaque, hwaddr addr, uint64_t val64,
++                      unsigned int size)
+ {
+-        struct fs_dma_ctrl *ctrl = opaque;
+-	uint32_t value = val64;
+-	int c;
++    struct fs_dma_ctrl *ctrl = opaque;
++    uint32_t value = val64;
++    int c;
+ 
+-	if (size != 4) {
+-		dma_winvalid(opaque, addr, value);
+-	}
++    if (size != 4) {
++        dma_winvalid(opaque, addr, value);
++    }
+ 
+-        /* Make addr relative to this channel and bounded to nr regs.  */
+-	c = fs_channel(addr);
+-        addr &= 0xff;
+-        addr >>= 2;
+-        switch (addr)
+-	{
+-		case RW_DATA:
+-			ctrl->channels[c].regs[addr] = value;
+-			break;
++    /* Make addr relative to this channel and bounded to nr regs.  */
++    c = fs_channel(addr);
++    addr &= 0xff;
++    addr >>= 2;
++    switch (addr) {
++    case RW_DATA:
++        ctrl->channels[c].regs[addr] = value;
++        break;
+ 
+-		case RW_CFG:
+-			ctrl->channels[c].regs[addr] = value;
+-			dma_update_state(ctrl, c);
+-			break;
+-		case RW_CMD:
+-			/* continue.  */
+-			if (value & ~1)
+-				printf("Invalid store to ch=%d RW_CMD %x\n",
+-				       c, value);
+-			ctrl->channels[c].regs[addr] = value;
+-			channel_continue(ctrl, c);
+-			break;
+-
+-		case RW_SAVED_DATA:
+-		case RW_SAVED_DATA_BUF:
+-		case RW_GROUP:
+-		case RW_GROUP_DOWN:
+-			ctrl->channels[c].regs[addr] = value;
+-			break;
+-
+-		case RW_ACK_INTR:
+-		case RW_INTR_MASK:
+-			ctrl->channels[c].regs[addr] = value;
+-			channel_update_irq(ctrl, c);
+-			if (addr == RW_ACK_INTR)
+-				ctrl->channels[c].regs[RW_ACK_INTR] = 0;
+-			break;
+-
+-		case RW_STREAM_CMD:
+-			if (value & ~1023)
+-				printf("Invalid store to ch=%d "
+-				       "RW_STREAMCMD %x\n",
+-				       c, value);
+-			ctrl->channels[c].regs[addr] = value;
+-			D(printf("stream_cmd ch=%d\n", c));
+-			channel_stream_cmd(ctrl, c, value);
+-			break;
+-
+-	        default:
+-			D(printf ("%s c=%d " TARGET_FMT_plx "\n",
+-				__func__, c, addr));
+-			break;
++    case RW_CFG:
++        ctrl->channels[c].regs[addr] = value;
++        dma_update_state(ctrl, c);
++        break;
++    case RW_CMD:
++        /* continue.  */
++        if (value & ~1) {
++            printf("Invalid store to ch=%d RW_CMD %x\n", c, value);
+         }
++        ctrl->channels[c].regs[addr] = value;
++        channel_continue(ctrl, c);
++        break;
++
++    case RW_SAVED_DATA:
++    case RW_SAVED_DATA_BUF:
++    case RW_GROUP:
++    case RW_GROUP_DOWN:
++        ctrl->channels[c].regs[addr] = value;
++        break;
++
++    case RW_ACK_INTR:
++    case RW_INTR_MASK:
++        ctrl->channels[c].regs[addr] = value;
++        channel_update_irq(ctrl, c);
++        if (addr == RW_ACK_INTR) {
++            ctrl->channels[c].regs[RW_ACK_INTR] = 0;
++        }
++        break;
++
++    case RW_STREAM_CMD:
++        if (value & ~1023) {
++            printf("Invalid store to ch=%d RW_STREAMCMD %x\n", c, value);
++        }
++        ctrl->channels[c].regs[addr] = value;
++        D(printf("stream_cmd ch=%d\n", c));
++        channel_stream_cmd(ctrl, c, value);
++        break;
++
++    default:
++        D(printf("%s c=%d " TARGET_FMT_plx "\n", __func__, c, addr));
++        break;
++    }
+ }
+ 
+ static const MemoryRegionOps dma_ops = {
+diff --git a/hw/misc/mst_fpga.c b/hw/misc/mst_fpga.c
+index 2aaadfa966..87c09217a6 100644
+--- a/hw/misc/mst_fpga.c
++++ b/hw/misc/mst_fpga.c
+@@ -99,94 +99,92 @@ mst_fpga_set_irq(void *opaque, int irq, int level)
+ }
+ 
+ 
+-static uint64_t
+-mst_fpga_readb(void *opaque, hwaddr addr, unsigned size)
++static uint64_t mst_fpga_readb(void *opaque, hwaddr addr, unsigned size)
+ {
+-	mst_irq_state *s = (mst_irq_state *) opaque;
++    mst_irq_state *s = (mst_irq_state *) opaque;
+ 
+-	switch (addr) {
+-	case MST_LEDDAT1:
+-		return s->leddat1;
+-	case MST_LEDDAT2:
+-		return s->leddat2;
+-	case MST_LEDCTRL:
+-		return s->ledctrl;
+-	case MST_GPSWR:
+-		return s->gpswr;
+-	case MST_MSCWR1:
+-		return s->mscwr1;
+-	case MST_MSCWR2:
+-		return s->mscwr2;
+-	case MST_MSCWR3:
+-		return s->mscwr3;
+-	case MST_MSCRD:
+-		return s->mscrd;
+-	case MST_INTMSKENA:
+-		return s->intmskena;
+-	case MST_INTSETCLR:
+-		return s->intsetclr;
+-	case MST_PCMCIA0:
+-		return s->pcmcia0;
+-	case MST_PCMCIA1:
+-		return s->pcmcia1;
+-	default:
+-		printf("Mainstone - mst_fpga_readb: Bad register offset "
+-			"0x" TARGET_FMT_plx "\n", addr);
+-	}
+-	return 0;
++    switch (addr) {
++    case MST_LEDDAT1:
++        return s->leddat1;
++    case MST_LEDDAT2:
++        return s->leddat2;
++    case MST_LEDCTRL:
++        return s->ledctrl;
++    case MST_GPSWR:
++        return s->gpswr;
++    case MST_MSCWR1:
++        return s->mscwr1;
++    case MST_MSCWR2:
++        return s->mscwr2;
++    case MST_MSCWR3:
++        return s->mscwr3;
++    case MST_MSCRD:
++        return s->mscrd;
++    case MST_INTMSKENA:
++        return s->intmskena;
++    case MST_INTSETCLR:
++        return s->intsetclr;
++    case MST_PCMCIA0:
++        return s->pcmcia0;
++    case MST_PCMCIA1:
++        return s->pcmcia1;
++    default:
++        printf("Mainstone - mst_fpga_readb: Bad register offset "
++            "0x" TARGET_FMT_plx "\n", addr);
++    }
++    return 0;
+ }
+ 
+-static void
+-mst_fpga_writeb(void *opaque, hwaddr addr, uint64_t value,
+-		unsigned size)
++static void mst_fpga_writeb(void *opaque, hwaddr addr, uint64_t value,
++                            unsigned size)
+ {
+-	mst_irq_state *s = (mst_irq_state *) opaque;
+-	value &= 0xffffffff;
++    mst_irq_state *s = (mst_irq_state *) opaque;
++    value &= 0xffffffff;
+ 
+-	switch (addr) {
+-	case MST_LEDDAT1:
+-		s->leddat1 = value;
+-		break;
+-	case MST_LEDDAT2:
+-		s->leddat2 = value;
+-		break;
+-	case MST_LEDCTRL:
+-		s->ledctrl = value;
+-		break;
+-	case MST_GPSWR:
+-		s->gpswr = value;
+-		break;
+-	case MST_MSCWR1:
+-		s->mscwr1 = value;
+-		break;
+-	case MST_MSCWR2:
+-		s->mscwr2 = value;
+-		break;
+-	case MST_MSCWR3:
+-		s->mscwr3 = value;
+-		break;
+-	case MST_MSCRD:
+-		s->mscrd =  value;
+-		break;
+-	case MST_INTMSKENA:	/* Mask interrupt */
+-		s->intmskena = (value & 0xFEEFF);
+-		qemu_set_irq(s->parent, s->intsetclr & s->intmskena);
+-		break;
+-	case MST_INTSETCLR:	/* clear or set interrupt */
+-		s->intsetclr = (value & 0xFEEFF);
+-		qemu_set_irq(s->parent, s->intsetclr & s->intmskena);
+-		break;
+-		/* For PCMCIAx allow the to change only power and reset */
+-	case MST_PCMCIA0:
+-		s->pcmcia0 = (value & 0x1f) | (s->pcmcia0 & ~0x1f);
+-		break;
+-	case MST_PCMCIA1:
+-		s->pcmcia1 = (value & 0x1f) | (s->pcmcia1 & ~0x1f);
+-		break;
+-	default:
+-		printf("Mainstone - mst_fpga_writeb: Bad register offset "
+-			"0x" TARGET_FMT_plx "\n", addr);
+-	}
++    switch (addr) {
++    case MST_LEDDAT1:
++        s->leddat1 = value;
++        break;
++    case MST_LEDDAT2:
++        s->leddat2 = value;
++        break;
++    case MST_LEDCTRL:
++        s->ledctrl = value;
++        break;
++    case MST_GPSWR:
++        s->gpswr = value;
++        break;
++    case MST_MSCWR1:
++        s->mscwr1 = value;
++        break;
++    case MST_MSCWR2:
++        s->mscwr2 = value;
++        break;
++    case MST_MSCWR3:
++        s->mscwr3 = value;
++        break;
++    case MST_MSCRD:
++        s->mscrd =  value;
++        break;
++    case MST_INTMSKENA:    /* Mask interrupt */
++        s->intmskena = (value & 0xFEEFF);
++        qemu_set_irq(s->parent, s->intsetclr & s->intmskena);
++        break;
++    case MST_INTSETCLR:    /* clear or set interrupt */
++        s->intsetclr = (value & 0xFEEFF);
++        qemu_set_irq(s->parent, s->intsetclr & s->intmskena);
++        break;
++        /* For PCMCIAx allow the to change only power and reset */
++    case MST_PCMCIA0:
++        s->pcmcia0 = (value & 0x1f) | (s->pcmcia0 & ~0x1f);
++        break;
++    case MST_PCMCIA1:
++        s->pcmcia1 = (value & 0x1f) | (s->pcmcia1 & ~0x1f);
++        break;
++    default:
++        printf("Mainstone - mst_fpga_writeb: Bad register offset "
++               "0x" TARGET_FMT_plx "\n", addr);
++    }
+ }
+ 
+ static const MemoryRegionOps mst_fpga_ops = {
 -- 
 2.38.1
 
