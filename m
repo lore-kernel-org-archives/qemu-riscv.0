@@ -1,78 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFdOU-00023l-Li
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 10:52:02 -0500
+	id 1pFe9u-0006qS-3b
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 11:41:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pFdOS-00021j-03
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 10:52:00 -0500
-Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pFdOQ-0007qN-GE
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 10:51:59 -0500
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-1322d768ba7so15950114fac.5
- for <qemu-riscv@nongnu.org>; Wed, 11 Jan 2023 07:51:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WwVMr3DCxLXykOzNi+Px+mDON8RyJnPpnV4piDeP7As=;
- b=HjsYNdxtu4nvATuGxqJUATWGo9P8uXS63XFkR5e2WT1lNz8eQ+Ki4NLi9xqUSoBFGe
- tLeqhte/cCcUI8fMkyC7x3Ckk3Q0w0MhhmmviSeD5ryWNkn1Lyrwu4KJlXEI6GtDu6J9
- VZuNkeaOZM1yoNtk5Z6kqcv/ZodXuUpSto1QgLWH5U70BwOqmnNuLhl5bVcpAaKhM0w3
- /PZoHHmolDyT7DSjTML+8WfWyor6a67RSuxyyrU18Dy3NnV7MA87GENX83LYYod2Zjz7
- GY2NpSkHSCtzFA3pKL3zqkhetHGHFxelYDexQ+qC5AiQyEq5ST2EDQstHagN+Et8rkgm
- MaKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WwVMr3DCxLXykOzNi+Px+mDON8RyJnPpnV4piDeP7As=;
- b=zAAaJp8MOdSfQndQMZmw+obOuTkdR3KU/jxBMDYA0LzKcs7GlE+LNt2rjvQ14AWOWd
- uu/dT5Ol+EwMe1wxYQUiUKB4mLzgBw9gvd3I+JoKSFJ/WyWSGUqFVmV8RGE7ypw1XMH7
- esYxwLCkqCXqUfqO9SKUwvVj3VRHOMoYcIQFuAGRwXlH7cTejCSu3MPb2KQExl0sMC4j
- nOPn0QrAEsSJNTLJZe6GVG8Ogu8MysfEOob4hXNb0Kg8bGWw+rDLdYwfJx8sNUBZD7iJ
- oSMqBENx6SI2HSOlbJOigptkmfHbtk1xg4l6MnO0QgYreg8YmWV54LAHfTa2htGkpSWR
- HIyw==
-X-Gm-Message-State: AFqh2kpVnF5qwIMU1xyM1RDpRWu7MZ9s869GQKLNWPQDP2ssR/G5Aizr
- p2RiwJXr+ZadxLbPwp8VIHRhug==
-X-Google-Smtp-Source: AMrXdXuE+eMd1GxgNIo2lxDmKGRFEhh3xAQvlEJjTqGLv49KGUgd/jbOzu6r1pGFhfWmNQuGbaFvng==
-X-Received: by 2002:a05:6870:5885:b0:14f:b76d:bce4 with SMTP id
- be5-20020a056870588500b0014fb76dbce4mr30123726oab.24.1673452316489; 
- Wed, 11 Jan 2023 07:51:56 -0800 (PST)
-Received: from [192.168.68.107] ([191.17.222.2])
- by smtp.gmail.com with ESMTPSA id
- y6-20020a056870418600b00144e18d8525sm7426264oac.25.2023.01.11.07.51.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Jan 2023 07:51:55 -0800 (PST)
-Message-ID: <46284293-8a49-36f4-c52e-4a976d8b0591@ventanamicro.com>
-Date: Wed, 11 Jan 2023 12:51:53 -0300
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>) id 1pFe9s-0006p7-Sa
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 11:41:00 -0500
+Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>) id 1pFe9r-0008Ms-0f
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 11:41:00 -0500
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E68F161D54;
+ Wed, 11 Jan 2023 16:40:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A7FD6C433F0;
+ Wed, 11 Jan 2023 16:40:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1673455250;
+ bh=mJ7/OhXpyeQ5K/mRmb5v6laD26dU5T1KftFHjraeFWE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=GIcmbO7xasBapmKjxzmIEcEOI2gi48V3dukzry4lLZZT9w1Q6oeN4OE12Yvl2MZEm
+ RSXn4XB9PoENVTZjT0XV2oGTYAb68doJeE4w9qkmtFDXIV8uSjR6B3ZvZeDmxnrsMD
+ JExZFWGX3XZ+K/198Q+TY04qogm7S9rlX3nahE4h3G3tnzKLsDE89HSjClaMhJ83Fm
+ 06c8idODsAObYzG45klE39+LQFx88V+ECgu4ctmTAKxAuO0ogO+k0s+Gq2yqC6Y1D8
+ KZUhI6s9aMPM6e3rH3AgwoL/eooDmy2S8HpYavCrD728F60a+UfY/HSszznpy18NPP
+ lErCpoYP78kcw==
+Date: Wed, 11 Jan 2023 16:40:47 +0000
+From: Conor Dooley <conor@kernel.org>
+To: stage TC <stagethalescristal@gmail.com>
+Cc: qemu-riscv@nongnu.org
+Subject: Re: qemu icicle kit es
+Message-ID: <Y77mjzm4u1V9JXKO@spud>
+References: <CAJWvPnt95pOb6-QFxrHMH7NNrtxNHKRLjhVoz5A+BZ2Er-joKQ@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Subject: Re: [PATCH 1/2] target/riscv/cpu: set cpu->cfg in register_cpu_props()
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com
-References: <20230110201405.247785-1-dbarboza@ventanamicro.com>
- <20230110201405.247785-2-dbarboza@ventanamicro.com>
- <cbc36e57-6a55-0c96-0170-ff4c0563d556@linaro.org>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <cbc36e57-6a55-0c96-0170-ff4c0563d556@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::31;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x31.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="VBWWAWZsjmo5LLEM"
+Content-Disposition: inline
+In-Reply-To: <CAJWvPnt95pOb6-QFxrHMH7NNrtxNHKRLjhVoz5A+BZ2Er-joKQ@mail.gmail.com>
+Received-SPF: pass client-ip=2604:1380:4641:c500::1;
+ envelope-from=conor@kernel.org; helo=dfw.source.kernel.org
+X-Spam_score_int: -70
+X-Spam_score: -7.1
+X-Spam_bar: -------
+X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -86,46 +59,89 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2023 15:52:00 -0000
+X-List-Received-Date: Wed, 11 Jan 2023 16:41:01 -0000
 
 
+--VBWWAWZsjmo5LLEM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 1/11/23 02:39, Richard Henderson wrote:
-> On 1/10/23 12:14, Daniel Henrique Barboza wrote:
->> +/*
->> + * Register CPU props based on env.misa_ext. If a non-zero
->> + * value was set, register only the required cpu->cfg.ext_*
->> + * properties and leave. env.misa_ext = 0 means that we want
->> + * all the default properties to be registered.
->> + */
->>   static void register_cpu_props(DeviceState *dev)
->
-> Suggest invoking this as .instance_post_init hook on TYPE_RISCV_CPU.
-> Then you don't need to manually call it on every cpu class.
+On Wed, Jan 11, 2023 at 03:21:26PM +0100, stage TC wrote:
+> Hello,
+> Sorry in advance if this is not the right way to do it but I'm a student
+> and not very used to this kind of stuff (first mailing list).
 
-That would be nice but we have code such as:
+Don't worry, you are doing fine :)
 
-@@ -317,7 +310,6 @@ static void rv32_sifive_e_cpu_init(Object *obj)
-      RISCVCPU *cpu = RISCV_CPU(obj);
+> I'm trying to run qemu for the Microchip PolarFire SoC Icicle kit but I'm
+> facing a few issues and the wiki page about that seems obsolete.
 
-      set_misa(env, MXL_RV32, RVI | RVM | RVA | RVC | RVU);
-      register_cpu_props(DEVICE(obj));
-      set_priv_version(env, PRIV_VERSION_1_10_0);
-      cpu->cfg.mmu = false; <===========
+I must admit, it's a long time since I tried to use a v2020.x release of
+any MPFS software. Last time I did give the steps in the docs a go,
+with a suitably vintage version of QEMU, things worked as expected.
+However, using more recent versions of QEMU I ran into some problems
+with the sd/mmc emulation & never get into U-Boot.
+
+> I follow almost exactly what the wiki does (except I use a terminal as a
+> tty instead of the socket bc it didn't work) but my HSS won't boot on
+> versions more recent than 2020.10 or 0.99.12.
+
+What does "my HSS won't boot" mean? E.g:
+- Does the MICROCHIP logo banner appear (if it existed back then!)?
+  If it didnt, the version string I think was.
+- Does the HSS console appear?
+- Does it fail to launch the next bootloader stage?
+
+> However I can't find any image compatible for versions older than 2020.10
+> or 0.99.12 (mines hang at "starting kernel ...".
+
+By that do you mean you cannot find a pre-built yocto image? I am not
+sure that there are any that pre-date the one linked in the wiki that
+are still available, as those on GitHub only go back as far as v2021.02
+
+> Is there any newer version of the tutorial ? Or does anyone have an idea on
+> how to deal with this issue and use qemu for newer versions of the HSS ?
+
+I do my testing with something like:
+$(QEMU)/qemu-system-riscv64 \
+	-M microchip-icicle-kit \
+	-m 2G -smp 5 \
+	-kernel $(vmlinux_bin) \
+	-dtb $(devkit).dtb \
+	-initrd $(initramfs) \
+	-display none \
+	-serial null \
+	-serial stdio
+
+This loads a kernel directly rather than using the HSS - for recent
+versions of the HSS, implementations of some peripherals need to be
+added, for example, it checks things like the cache configuration
+during boot, which are not emulated in QEMU.
+
+For that reason, I've stuck with doing direct kernel boots. Linux
+v6.0.18 (and the associated devicetree) is the most recent combination
+that I have booted unmodified using the master branch of QEMU using
+this method.
+
+More recent (linux) kernels come with a device tree that will require
+changes in QEMU to support & I have unfortunately not had the time
+to work on that recently.
+
+Sorry that I am really of no help to you.
+
+Conor.
 
 
-That are setting cpu->cfg attrs after register_cpu_props(), i.e. "I want the
-defaults and these specific settings on top of it".
+--VBWWAWZsjmo5LLEM
+Content-Type: application/pgp-signature; name="signature.asc"
 
-I can think of a few ways to add a a post_init hook to reduce this code
-repetition but I'll need to play around with it a bit first.
+-----BEGIN PGP SIGNATURE-----
 
-Thanks,
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCY77mjwAKCRB4tDGHoIJi
+0vaFAP4laZm0bG+8TcWR3f7HYTrNdyDwlZqqvK0Sd81VZrFY1wD/aLBO2ltqYmRo
+nKfbtgUx1paHI4QiW4IMBAtzQk3WmwA=
+=dx4R
+-----END PGP SIGNATURE-----
 
-Daniel
-
->
->
-> r~
-
+--VBWWAWZsjmo5LLEM--
 
