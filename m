@@ -1,80 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFXuY-00037j-Nh
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 05:00:46 -0500
+	id 1pFYWQ-0003kb-KT
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 05:39:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pFXuW-00035y-Bz
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 05:00:44 -0500
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pFXuS-0002Pb-C4
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 05:00:43 -0500
-Received: by mail-wr1-x431.google.com with SMTP id bs20so14480983wrb.3
- for <qemu-riscv@nongnu.org>; Wed, 11 Jan 2023 02:00:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ow0Xg9fqIBu4e2PkotUhyl1U82f0HOK/VAHgdwlzzFE=;
- b=CO24vEkujg5v4hiPxAnunIfn31T7BTdFUbO38mGoYbl+Rj/tV/7kgJihoQtF5rMwoE
- aXbOWRyNfmk6SiElkopjyEcalEgG8471fllMqIryKrD1/ZgYGJAWdD54X/gRNDbzgJbl
- qzQDS8IV6Vw37OYqy23lHde6g0t64uYljQ5uiPSJWztQQNGn1oj0hJ9k9FYVKmarB6EX
- QL2CXEHaQha9sUwhJUYNFMkwNJvQnD+m9HwfxszwbvuITV2zGyQTpSdvJ17eZ5y0g9TW
- 7mNo7SW4yWXcx/uSAK0qB2NvSBrMVMktU810NBZx6Mgv4cj+sct6fS5Jr338Ukgbw77U
- vCOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
- :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Ow0Xg9fqIBu4e2PkotUhyl1U82f0HOK/VAHgdwlzzFE=;
- b=gmCTts18wmNVSOR0l+uw7Wvg8ZsPWLxulQDn9vHubtIKWbdOjGli9liMR68jzAe8K9
- +OSIiAW6f78uQUDtc7lLlgOyGDQocRn4KM0TcMWA6A1XJP6Eu4p/nyhPf4xxdZoLhCsq
- yT64IQgujtKnK4Q1fXMA/1BC5wC58PqmZ14xulgwbNhD98GzUG0hTCZzCW+lbpbtVsDm
- qIv4GNHm1fJGy1gETp45HMQCq4vhBFkNcW+q0LgSTWxyqrPGKRlLR4GK3Q2UTIH1+Nkj
- MTXixPpH+ai4eJt+l3C8VDgxa0kVrhqJ5cZXXimHBnRJo6NCy5RwaqvHXDlkR1SmhT3W
- BqSw==
-X-Gm-Message-State: AFqh2krPoFh5k6nc397dgNKPykGPeF9KtyaJIQekb3cy9ckicgeeJ2GW
- 63dMm2B9YD8hDB+o8rgVtO+4AA==
-X-Google-Smtp-Source: AMrXdXvS7dtK3h2qoPnbyTssOVrBXo+T4kS61SJCFKGFDIR/o/Uz2Z7d12fXuzM3QyDAV+HnumEzCg==
-X-Received: by 2002:a5d:514c:0:b0:2bc:7ec3:8b2 with SMTP id
- u12-20020a5d514c000000b002bc7ec308b2mr5980065wrt.68.1673431237217; 
- Wed, 11 Jan 2023 02:00:37 -0800 (PST)
-Received: from zen.linaroharston ([185.81.254.11])
- by smtp.gmail.com with ESMTPSA id
- o7-20020a5d62c7000000b002bbeda3809csm7777857wrv.11.2023.01.11.02.00.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Jan 2023 02:00:36 -0800 (PST)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 4ABEC1FFB7;
- Wed, 11 Jan 2023 10:00:36 +0000 (GMT)
-References: <20230108023719.2466341-1-richard.henderson@linaro.org>
- <20230108023719.2466341-4-richard.henderson@linaro.org>
-User-agent: mu4e 1.9.12; emacs 29.0.60
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org, pbonzini@redhat.com, eduardo@habkost.net,
- qemu-devel@nongnu.org
-Subject: Re: [PATCH v4 03/36] tcg: Allocate objects contiguously in
- temp_allocate_frame
-Date: Wed, 11 Jan 2023 09:59:52 +0000
-In-reply-to: <20230108023719.2466341-4-richard.henderson@linaro.org>
-Message-ID: <87zgapl7az.fsf@linaro.org>
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pFYWP-0003ja-5J; Wed, 11 Jan 2023 05:39:53 -0500
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pFYWM-0007k5-8M; Wed, 11 Jan 2023 05:39:52 -0500
+Received: from localhost.localdomain (unknown [61.165.33.198])
+ by APP-01 (Coremail) with SMTP id qwCowABHTTXskb5jCcUADA--.29173S2;
+ Wed, 11 Jan 2023 18:39:41 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v10 0/9] support subsets of virtual memory extension
+Date: Wed, 11 Jan 2023 18:39:27 +0800
+Message-Id: <20230111103936.129269-1-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x431.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: qwCowABHTTXskb5jCcUADA--.29173S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxZr1kZFyfCF1fXw17ur1UGFg_yoW5Xr1fpr
+ WrC3yakrZ8tFWxJw4ft3WUJw15AFs5Wr45Awn7Jw1kJay3ArW3Jrs7K3W3G3WxJF1rWrnF
+ 93WUCw13u3yUJFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkS14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY02Avz4vE14v_Gw1l
+ 42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJV
+ WUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAK
+ I48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r
+ 4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY
+ 6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUonmRUUUUU
+X-Originating-IP: [61.165.33.198]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,79 +61,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2023 10:00:45 -0000
+X-List-Received-Date: Wed, 11 Jan 2023 10:39:53 -0000
+
+This patchset implements RISC-V Zc* extension v1.0.0.RC5.7 version instructions.
+
+Specification:
+https://github.com/riscv/riscv-code-size-reduction/tree/main/Zc-specification
+
+The port is available here:
+https://github.com/plctlab/plct-qemu/tree/plct-zce-upstream-v9
+
+To test Zc* implementation, specify cpu argument with 'x-zca=true,x-zcb=true,x-zcf=true,f=true" and "x-zcd=true,d=true" (or "x-zcmp=true,x-zcmt=true" with c or d=false) to enable Zca/Zcb/Zcf and Zcd(or Zcmp,Zcmt) extensions support.
 
 
-Richard Henderson <richard.henderson@linaro.org> writes:
+This implementation can pass the basic zc tests from https://github.com/yulong-plct/zc-test
 
-> When allocating a temp to the stack frame, consider the
-> base type and allocate all parts at once.
->
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  tcg/tcg.c | 30 ++++++++++++++++++++++--------
->  1 file changed, 22 insertions(+), 8 deletions(-)
->
-> diff --git a/tcg/tcg.c b/tcg/tcg.c
-> index 99e6e4e1a8..7e69e2c9fd 100644
-> --- a/tcg/tcg.c
-> +++ b/tcg/tcg.c
-> @@ -3242,11 +3242,12 @@ static bool liveness_pass_2(TCGContext *s)
->=20=20
->  static void temp_allocate_frame(TCGContext *s, TCGTemp *ts)
->  {
-> -    int size =3D tcg_type_size(ts->type);
-> -    int align;
->      intptr_t off;
-> +    int size, align;
->=20=20
-> -    switch (ts->type) {
-> +    /* When allocating an object, look at the full type. */
-> +    size =3D tcg_type_size(ts->base_type);
-> +    switch (ts->base_type) {
->      case TCG_TYPE_I32:
->          align =3D 4;
->          break;
-> @@ -3277,13 +3278,26 @@ static void temp_allocate_frame(TCGContext *s, TC=
-GTemp *ts)
->          tcg_raise_tb_overflow(s);
->      }
->      s->current_frame_offset =3D off + size;
-> -
-> -    ts->mem_offset =3D off;
->  #if defined(__sparc__)
-> -    ts->mem_offset +=3D TCG_TARGET_STACK_BIAS;
-> +    off +=3D TCG_TARGET_STACK_BIAS;
->  #endif
-> -    ts->mem_base =3D s->frame_temp;
-> -    ts->mem_allocated =3D 1;
-> +
-> +    /* If the object was subdivided, assign memory to all the parts. */
-> +    if (ts->base_type !=3D ts->type) {
-> +        int part_size =3D tcg_type_size(ts->type);
-> +        int part_count =3D size / part_size;
-> +
-> +        ts -=3D ts->temp_subindex;
+v10:
+* rebase on Daniel's series(riscv-to-apply.next) and adjust riscv-tests to test on sifive related CPUs
 
-Whats going on here? Are we jumping to a previous temp? What guarentees
-there is something at ts - ts->temp_subindex?
+v9:
+* rebase on riscv-to-apply.next
 
-> +        for (int i =3D 0; i < part_count; ++i) {
-> +            ts[i].mem_offset =3D off + i * part_size;
-> +            ts[i].mem_base =3D s->frame_temp;
-> +            ts[i].mem_allocated =3D 1;
-> +        }
-> +    } else {
-> +        ts->mem_offset =3D off;
-> +        ts->mem_base =3D s->frame_temp;
-> +        ts->mem_allocated =3D 1;
-> +    }
->  }
->=20=20
->  /* Assign @reg to @ts, and update reg_to_temp[]. */
+v8:
+* improve disas support in Patch 9
 
+v7:
+* Fix description for Zca
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+v6：
+* fix base address for jump table in Patch 7
+* rebase on riscv-to-apply.next
+
+v5:
+* fix exception unwind problem for cpu_ld*_code in helper of cm_jalt
+
+v4:
+* improve Zcmp suggested by Richard
+* fix stateen related check for Zcmt
+
+v3:
+* update the solution for Zcf to the way of Zcd
+* update Zcb to reuse gen_load/store
+* use trans function instead of helper for push/pop
+
+v2:
+* add check for relationship between Zca/Zcf/Zcd with C/F/D based on related discussion in review of Zc* spec
+* separate c.fld{sp}/fsd{sp} with fld{sp}/fsd{sp} before support of zcmp/zcmt
+
+Weiwei Li (9):
+  target/riscv: add cfg properties for Zc* extension
+  target/riscv: add support for Zca extension
+  target/riscv: add support for Zcf extension
+  target/riscv: add support for Zcd extension
+  target/riscv: add support for Zcb extension
+  target/riscv: add support for Zcmp extension
+  target/riscv: add support for Zcmt extension
+  target/riscv: expose properties for Zc* extension
+  disas/riscv.c: add disasm support for Zc*
+
+ disas/riscv.c                             | 228 +++++++++++++++-
+ target/riscv/cpu.c                        |  56 ++++
+ target/riscv/cpu.h                        |  10 +
+ target/riscv/cpu_bits.h                   |   7 +
+ target/riscv/csr.c                        |  38 ++-
+ target/riscv/helper.h                     |   3 +
+ target/riscv/insn16.decode                |  63 ++++-
+ target/riscv/insn_trans/trans_rvd.c.inc   |  18 ++
+ target/riscv/insn_trans/trans_rvf.c.inc   |  18 ++
+ target/riscv/insn_trans/trans_rvi.c.inc   |   4 +-
+ target/riscv/insn_trans/trans_rvzce.c.inc | 313 ++++++++++++++++++++++
+ target/riscv/machine.c                    |  19 ++
+ target/riscv/meson.build                  |   3 +-
+ target/riscv/translate.c                  |  15 +-
+ target/riscv/zce_helper.c                 |  55 ++++
+ 15 files changed, 834 insertions(+), 16 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvzce.c.inc
+ create mode 100644 target/riscv/zce_helper.c
+
+-- 
+2.25.1
+
 
