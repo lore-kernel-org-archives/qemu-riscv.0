@@ -1,56 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFYX3-0003yA-7O
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 05:40:33 -0500
+	id 1pFZQY-0007Xg-No
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 06:37:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pFYWV-0003oz-Tn; Wed, 11 Jan 2023 05:40:03 -0500
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pFYWT-0007mk-Tc; Wed, 11 Jan 2023 05:39:59 -0500
-Received: from localhost.localdomain (unknown [61.165.33.198])
- by APP-01 (Coremail) with SMTP id qwCowABHTTXskb5jCcUADA--.29173S10;
- Wed, 11 Jan 2023 18:39:46 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v10 8/9] target/riscv: expose properties for Zc* extension
-Date: Wed, 11 Jan 2023 18:39:35 +0800
-Message-Id: <20230111103936.129269-9-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230111103936.129269-1-liweiwei@iscas.ac.cn>
-References: <20230111103936.129269-1-liweiwei@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pFZQX-0007XL-KT
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 06:37:53 -0500
+Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pFZQW-00085p-44
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 06:37:53 -0500
+Received: by mail-wr1-x432.google.com with SMTP id bk16so14705749wrb.11
+ for <qemu-riscv@nongnu.org>; Wed, 11 Jan 2023 03:37:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=UsZIA4qOEEIR12nEva/g3EWyOB93VOs7vlFpxNN2OxA=;
+ b=su7N+DjL+hI+0ss7KDZTp4Ht0xOGW0DCFAZpZriljkNOs91SRoxY9/ZSn6+3wZoc9X
+ I1BW8aytMmY21NmKvxBc0mv563vV0yIy3v2uKHNsymuHRz5+0RUixHcZWsn/wq89/99J
+ HRz/cy9JKEWo/7/P9mO6fzVJS11qNn4uaAGuEPyE5NQR0sJICma97GNCqVfhHIQb5hCE
+ ZjYFmOeJ5ohgk6zEMj1dWatQ17Y0n8Qx4fKACHKuqh6qgfO76aLXzFsM1UEvvQBwMSlh
+ 9xHuTppYWUhY3k+v2zNAOsD6oSgJCBKwYahkGsnzYsXUDUyfzGTCsedCjpiQDgB9Nm+J
+ 6rkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=UsZIA4qOEEIR12nEva/g3EWyOB93VOs7vlFpxNN2OxA=;
+ b=oskzrEIYIw79jJ2e++36hWDFMwpi18rJdwJH3y0VVrOvsVr5mbyabgwbGcdDJbWR+X
+ ZsDP0f4Duhwc/7NVkxJks9uwItbeewD2MPk0nfMMlLkhSe9dRaGTvN/vYUJl7K+WxTnl
+ qYI1r2TFiAiRjfdt3AVO+a9G9JCy1RnONz8MP+xiDQa1KrmQ7QzaNc0X4/KxmFwu6orO
+ bJZJnouMYCOAmsz56GQEEBW1mdSndLa/6kb13FwmhrenY2HBqzjz4nKvNofk4tJLrO2P
+ 6zkqDDIbF5s6abXQtTFB9IuZiU1BG7z8KHZXt2DcMz+f/L77YcR2VSKkXQ4wvuwNfj7C
+ MAlQ==
+X-Gm-Message-State: AFqh2kqUxk2cmJmF3mUtabxkzutHv/Xu1U93idp8vibxz26SPGwjtNlU
+ 4o1Bcu6jyreZnmH0gaFDSE+Mnw==
+X-Google-Smtp-Source: AMrXdXtuQYW+74uoaJsXRRQG6pFozZuQcQY+4rLb/QEUumW0pOXuro3quWrO12uniYnzWcXoKf+uxA==
+X-Received: by 2002:a05:6000:4088:b0:2bb:e896:5a09 with SMTP id
+ da8-20020a056000408800b002bbe8965a09mr9559762wrb.66.1673437070139; 
+ Wed, 11 Jan 2023 03:37:50 -0800 (PST)
+Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
+ u5-20020adfdb85000000b002ba2646fd30sm15983289wri.36.2023.01.11.03.37.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Jan 2023 03:37:49 -0800 (PST)
+Message-ID: <466be876-011f-40b3-8d2b-7ddd64fecded@linaro.org>
+Date: Wed, 11 Jan 2023 12:37:47 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.6.1
+Subject: Re: [PATCH v4 10/36] tcg/tci: Fix big-endian return register ordering
+Content-Language: en-US
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org, pbonzini@redhat.com, eduardo@habkost.net
+References: <20230108023719.2466341-1-richard.henderson@linaro.org>
+ <20230108023719.2466341-11-richard.henderson@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20230108023719.2466341-11-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowABHTTXskb5jCcUADA--.29173S10
-X-Coremail-Antispam: 1UD129KBjvJXoW7uw1fCFWDtw48XF4UZFWxXrb_yoW8uF47pr
- y5Ga47Kw15Jr13Gwn3tr1DJ3yrGw4rA3s7K3ySv3Z7XrZ3KrZrX3ZrC39rW3yftF4rZr4S
- gF13Zr1xCrs5ta7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBl14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
- 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
- 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
- IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
- M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY02Avz4vE14v_Gw1l42
- xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWU
- GwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI4
- 8JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4U
- JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcV
- C2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbPC7UUUUUU==
-X-Originating-IP: [61.165.33.198]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::432;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x432.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -63,49 +81,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2023 10:40:04 -0000
+X-List-Received-Date: Wed, 11 Jan 2023 11:37:53 -0000
 
-Expose zca,zcb,zcf,zcd,zcmp,zcmt properties
+On 8/1/23 03:36, Richard Henderson wrote:
+> We expect the backend to require register pairs in
+> host-endian ordering, thus for big-endian the first
+> register of a pair contains the high part.
+> We were forcing R0 to contain the low part for calls.
+> 
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   tcg/tci.c | 21 +++++++++++----------
+>   1 file changed, 11 insertions(+), 10 deletions(-)
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 39ab7e46d3..6df667805f 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -81,6 +81,12 @@ static const struct isa_ext_data isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zfhmin, true, PRIV_VERSION_1_12_0, ext_zfhmin),
-     ISA_EXT_DATA_ENTRY(zfinx, true, PRIV_VERSION_1_12_0, ext_zfinx),
-     ISA_EXT_DATA_ENTRY(zdinx, true, PRIV_VERSION_1_12_0, ext_zdinx),
-+    ISA_EXT_DATA_ENTRY(zca, true, PRIV_VERSION_1_12_0, ext_zca),
-+    ISA_EXT_DATA_ENTRY(zcb, true, PRIV_VERSION_1_12_0, ext_zcb),
-+    ISA_EXT_DATA_ENTRY(zcf, true, PRIV_VERSION_1_12_0, ext_zcf),
-+    ISA_EXT_DATA_ENTRY(zcd, true, PRIV_VERSION_1_12_0, ext_zcd),
-+    ISA_EXT_DATA_ENTRY(zcmp, true, PRIV_VERSION_1_12_0, ext_zcmp),
-+    ISA_EXT_DATA_ENTRY(zcmt, true, PRIV_VERSION_1_12_0, ext_zcmt),
-     ISA_EXT_DATA_ENTRY(zba, true, PRIV_VERSION_1_12_0, ext_zba),
-     ISA_EXT_DATA_ENTRY(zbb, true, PRIV_VERSION_1_12_0, ext_zbb),
-     ISA_EXT_DATA_ENTRY(zbc, true, PRIV_VERSION_1_12_0, ext_zbc),
-@@ -1135,6 +1141,13 @@ static Property riscv_cpu_extensions[] = {
- 
-     /* These are experimental so mark with 'x-' */
-     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
-+
-+    DEFINE_PROP_BOOL("x-zca", RISCVCPU, cfg.ext_zca, false),
-+    DEFINE_PROP_BOOL("x-zcb", RISCVCPU, cfg.ext_zcb, false),
-+    DEFINE_PROP_BOOL("x-zcd", RISCVCPU, cfg.ext_zcd, false),
-+    DEFINE_PROP_BOOL("x-zcf", RISCVCPU, cfg.ext_zcf, false),
-+    DEFINE_PROP_BOOL("x-zcmp", RISCVCPU, cfg.ext_zcmp, false),
-+    DEFINE_PROP_BOOL("x-zcmt", RISCVCPU, cfg.ext_zcmt, false),
-     /* ePMP 0.9.3 */
-     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-     DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
--- 
-2.25.1
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
