@@ -1,74 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFZTl-0000B9-IT
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 06:41:16 -0500
+	id 1pFbzD-000820-Is
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 09:21:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pFZTk-000099-03
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 06:41:12 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <stagethalescristal@gmail.com>)
+ id 1pFbz6-0007vy-GR
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 09:21:44 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pFZTc-0000AL-Sf
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 06:41:07 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id g10so10893991wmo.1
- for <qemu-riscv@nongnu.org>; Wed, 11 Jan 2023 03:41:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=jwTeo3ZkkxI+L+of6rcWdga3jb4dqhIZoBJkzpl+m3g=;
- b=USROVS1BnmiHm/9acqM+GJyIU8S/06ZWVF2CGncEYVUvPoDEyaUk5uB8XuTFXsZVQQ
- 1sNYOwQmF7lzMN18hUGLL0C9r3qO0Xqq5h4TVJwFUW6Z8dMyhcr32Anl+FprPbXYcDJ3
- z2GH9Wu0/ZG94Ebej+Nf9gZ/aCCv2Jzad2/HkFt75uQ++0Vi8Jp/RI4KvyspwOwSCFKK
- RlRZeH5IJaAiZ/ArPvlz3tZLdYQMLhmdZ2SOC26dxqeLeG+aMzxoSb9CHpt9zfyZlhRz
- AwSyzinGOTaF9uIxXtElNOFvEfiBWy5gdScbpGVj0Tfr+8hkGF8hySwRqIPsLYkKPXwM
- owFA==
+ (Exim 4.90_1) (envelope-from <stagethalescristal@gmail.com>)
+ id 1pFbz4-0006gu-UD
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 09:21:44 -0500
+Received: by mail-wr1-x434.google.com with SMTP id z5so14124737wrt.6
+ for <qemu-riscv@nongnu.org>; Wed, 11 Jan 2023 06:21:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Xw3+noqo8N1Hqvt9v/9YsjOnaDzRchYiAOecLVlt93U=;
+ b=Jl8YulGZ5+r0gFPS0o62vrMQeke60cGqHoHNj6CpRelMoIgZb0893ZW2ZXbKT1LMsF
+ Mcr5xk8ggA1wjYdnrWJkKWVC+duGNJMcxIl/l+ToBtJ9yRh9swmRO4ThGHejgobz95hB
+ PBs1xjnhmXDRI5Q7gYTaok80OpZrkjAxx1xQp/8YFIp3p2kcVQ5UeWQG+j5mVMD2Dbi3
+ h9AJJe6xQu6UF2GLoa/+vize3g3kci7K2bBDrDS+tWGVuKtZvmkn3PU45jvv6qCnF5ww
+ sliGWpL5hOBWv/K7qxjNF0s29RqdvM1QusWurbv/SkIZrn0hKzYT7osmTLxZ4BqWhshI
+ /MLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jwTeo3ZkkxI+L+of6rcWdga3jb4dqhIZoBJkzpl+m3g=;
- b=un3XXyioQI5KsnDOVzi749pbxevGe/RZrgoK1d1Lepf8xFV7ZdD8WaPLlQ0NFU3NWN
- VPqGZD2l7Zs3DBZf6+7O3/ruL//hnz8SNKptAeGVmmr6t08RS48i9qs5p6DxPLW+toMV
- p73or8LyHq8sJHuXjMbUBqgq4GC8kqP+/L8IwL97CVG+ZVTQyP2vab3lg2RiJQ9GHFv/
- wT/bSscR8zTky4NikxjQCB/iqDhS9xEHItujWVPVxffuJH/zuvk+BtDpq57CewGHhQ/p
- qkXhtVuEvwxjjsJY8faXOlX0ItruqZSrKnhD7st1QYiae4vyPhC8tls8wx1K9yT6gy/G
- L1pg==
-X-Gm-Message-State: AFqh2kpD5+nhpNa6lK+k0pq3txzDXNQ3ZQHlFsf0RsFbchVNHfN+TxVM
- CRywmdxaXkvSH3Zcg0hczQK+ZQ==
-X-Google-Smtp-Source: AMrXdXtz0RIqxYLTnD227I9Av/KU93A2tiVTe54bZiiF8yaNzeOlwwRK26WHPClaoP8T/2/Ln0N2gA==
-X-Received: by 2002:a05:600c:3545:b0:3d9:a145:9ab with SMTP id
- i5-20020a05600c354500b003d9a14509abmr32835792wmq.39.1673437263364; 
- Wed, 11 Jan 2023 03:41:03 -0800 (PST)
-Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- n9-20020a05600c4f8900b003d96b8e9bcasm25007665wmq.32.2023.01.11.03.41.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Jan 2023 03:41:02 -0800 (PST)
-Message-ID: <4aa7f3f1-551e-edf3-c1e1-1604fc42d3f4@linaro.org>
-Date: Wed, 11 Jan 2023 12:41:01 +0100
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Xw3+noqo8N1Hqvt9v/9YsjOnaDzRchYiAOecLVlt93U=;
+ b=f/gd1Hf4Nu33wNI62HeHW2Tm82aFvHWTFeku9t9ZRDdBVReCel1FPluJ9uB1zC9/2e
+ 4uB26IPeKdUgxlavXJO5f5SMlpNyU7+w+rK97FFBxaHYGQb1rQrJO4lKOczsLoxy2NvM
+ zrKc2ENPE0WdXunPq/ZzimqUB0feNSW7Ux+NSYNsLsYgdialROko5tUZMKyXhD8/eQT1
+ og8tHBKY9UEZBKTRm04qUzhjsFByJsv48CJC0hyHYjN7ThsmLHxiiaBsCGyVOkiAOCpb
+ n41xBXynAdbi/0dp/BiRNxnq7LaQRtRUMWf8+J7tS8x4ZWSz84gvw1a/Hm0lZvNEBtAC
+ /MQA==
+X-Gm-Message-State: AFqh2kqwII3k/E2UdxPfeoR7aC+tisKkHLXgwj0P3GWnvIjIdGINcYC7
+ AlaY3ZpY0fCziT6zu8h6Cc58HWyB4BPvmSdv/nWjChsD
+X-Google-Smtp-Source: AMrXdXuluYi3EUCYYZwv57P/3C20seedFbL+yUpTtVJPPpWf5PrVHxMq7nC9lTePb7PCsllgJ0X6tjHVsho+iD+cX7w=
+X-Received: by 2002:adf:fe4e:0:b0:2bd:c394:7b97 with SMTP id
+ m14-20020adffe4e000000b002bdc3947b97mr109023wrs.141.1673446897166; Wed, 11
+ Jan 2023 06:21:37 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.6.1
-Subject: Re: [PATCH v4 14/36] tcg: Add basic data movement for TCGv_i128
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org, pbonzini@redhat.com, eduardo@habkost.net
-References: <20230108023719.2466341-1-richard.henderson@linaro.org>
- <20230108023719.2466341-15-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230108023719.2466341-15-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+From: stage TC <stagethalescristal@gmail.com>
+Date: Wed, 11 Jan 2023 15:21:26 +0100
+Message-ID: <CAJWvPnt95pOb6-QFxrHMH7NNrtxNHKRLjhVoz5A+BZ2Er-joKQ@mail.gmail.com>
+Subject: qemu icicle kit es
+To: qemu-riscv@nongnu.org
+Content-Type: multipart/alternative; boundary="000000000000db2c1205f1fdb778"
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=stagethalescristal@gmail.com; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,19 +68,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2023 11:41:12 -0000
+X-List-Received-Date: Wed, 11 Jan 2023 14:21:44 -0000
 
-On 8/1/23 03:36, Richard Henderson wrote:
-> Add code generation functions for data movement between
-> TCGv_i128 (mov) and to/from TCGv_i64 (concat, extract).
-> 
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   include/tcg/tcg-op.h |  4 ++++
->   tcg/tcg-internal.h   | 13 +++++++++++++
->   tcg/tcg-op.c         | 20 ++++++++++++++++++++
->   3 files changed, 37 insertions(+)
+--000000000000db2c1205f1fdb778
+Content-Type: text/plain; charset="UTF-8"
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Hello,
+Sorry in advance if this is not the right way to do it but I'm a student
+and not very used to this kind of stuff (first mailing list).
+I'm trying to run qemu for the Microchip PolarFire SoC Icicle kit but I'm
+facing a few issues and the wiki page about that seems obsolete.
+I follow almost exactly what the wiki does (except I use a terminal as a
+tty instead of the socket bc it didn't work) but my HSS won't boot on
+versions more recent than 2020.10 or 0.99.12.
+However I can't find any image compatible for versions older than 2020.10
+or 0.99.12 (mines hang at "starting kernel ...".
+Is there any newer version of the tutorial ? Or does anyone have an idea on
+how to deal with this issue and use qemu for newer versions of the HSS ?
 
+Thanks for your help.
+
+--000000000000db2c1205f1fdb778
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hello,</div><div>Sorry in advance if this is not the =
+right way to do it but I&#39;m a student and not very used to this kind of =
+stuff (first mailing list).</div><div>I&#39;m trying to run qemu for the Mi=
+crochip PolarFire SoC Icicle kit but I&#39;m facing a few issues and the wi=
+ki page about that seems obsolete.</div><div>I follow almost exactly what t=
+he wiki does (except I use a terminal as a tty instead of the socket bc it =
+didn&#39;t work) but my HSS won&#39;t boot on versions more recent than 202=
+0.10 or 0.99.12. <br></div><div>However I can&#39;t find any image compatib=
+le for versions older than 2020.10 or 0.99.12 (mines hang at &quot;starting=
+ kernel ...&quot;.</div><div>Is there any newer version of the tutorial ? O=
+r does anyone have an idea on how to deal with this issue and use qemu for =
+newer versions of the HSS ?</div><div><br></div><div>Thanks for your help.<=
+br></div></div>
+
+--000000000000db2c1205f1fdb778--
 
