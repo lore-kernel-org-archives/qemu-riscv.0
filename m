@@ -1,96 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFVuk-0004Jh-DY
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 02:52:50 -0500
+	id 1pFW1h-0008Cd-1R
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 03:00:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <its@irrelevant.dk>)
- id 1pFVuW-0004FV-81; Wed, 11 Jan 2023 02:52:38 -0500
-Received: from wout3-smtp.messagingengine.com ([64.147.123.19])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <its@irrelevant.dk>)
- id 1pFVuU-0006Aj-B7; Wed, 11 Jan 2023 02:52:35 -0500
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.west.internal (Postfix) with ESMTP id 7FA4C3200970;
- Wed, 11 Jan 2023 02:52:31 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute2.internal (MEProxy); Wed, 11 Jan 2023 02:52:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irrelevant.dk;
- h=cc:cc:content-transfer-encoding:date:date:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to; s=fm2; t=1673423551; x=
- 1673509951; bh=yjjzkGl9WploOz3oaavu6EMFqtcnpfOdirkUoRQSSoE=; b=t
- pc8ys+7IV8ieVHxF1Lvwsk04oziNpB0RIUyAtNznuGfvJhVq0/dtOFEZZQBUoJuk
- YRib+Ugbkwk1gBEuUecGBAuoaCYyFlGNzXACLdIeIRvmrg9pXzZQKG0t01t1dJNR
- A1gyLB+b6lr444rBCszLyg7W3yTkbFJjF9jA6sfAfLCM4dgIB6IMECnO6GG6rlDD
- sz25+22s9UXVAS4o7fClSEGU43Q5sZ8DQhivcr+OOWAQqv4j6f2MPhz+Qu2rzv6X
- 4osWHbiM5Mi5C7ZcbRveOEzAq/Guc4fUBpU3/E2atczEiG6vJ9NJ3rVj2cvDcOVe
- 0ZSfDKgh10ueMqRqV+kjg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm3; t=1673423551; x=1673509951; bh=yjjzkGl9WploO
- z3oaavu6EMFqtcnpfOdirkUoRQSSoE=; b=eEuNwOUjkR0M0GIo/DiK098BZ7xgq
- 0TcWAVv5G6WFzzxIPRP2BRAX6p01idhOmxHCJPpbQ3POvwZhuO9WregKhsjRlAle
- /y+1tmHfOF87yeB+t3PFuRY82ydPrur5w6F8JFccGP/IcS+LMqXyneW5FPEjnZV9
- 8J9BOlh2LBe97A6fjuKzVp4d8Cmh09enrMcZXHq6W1Sny9THSw5vO7AALiHx0SHG
- Q/QVKWCWSryOkPgo4gkHwWwWSZT0uKGiB4mrCW56JTCALlLf+Ie0XlBR6FjYVRKW
- 2qWfuq8togLQswCFU8/sQaSl7keZiV4Wm11udjvMIdtgXF/iGICh6SXTA==
-X-ME-Sender: <xms:v2q-YzV94zfR1PwJnakY9ybKXR2l3kJVngl_h8zMk47EA8n8dc7lMA>
- <xme:v2q-Y7kJLNlYpoKXTtmgyHJRfZFKGb4h0LpVoaDvNZ2F6Usr8EavnDh_u39q2v7K1
- QMYly-sQvnl_ew5JQ0>
-X-ME-Received: <xmr:v2q-Y_axaGSzTDK-ELM3vkbKmX73zNon7459wuLq04BypeLtM_KwB-nzysITpAFiHE13foWYPm8>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrleefgdduudefucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepmfhlrghu
- shculfgvnhhsvghnuceoihhtshesihhrrhgvlhgvvhgrnhhtrdgukheqnecuggftrfgrth
- htvghrnhepjefgieelgfeiveehkeeuveehheekfeevgeeigfehfefgjeejhefffeegudej
- udegnecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehmrghilhhfrhhomhepih
- htshesihhrrhgvlhgvvhgrnhhtrdgukh
-X-ME-Proxy: <xmx:v2q-Y-U1IniJ5lIwqCLyuh1E79kgROlYQL3vAddziwtDCjJIvcdsvg>
- <xmx:v2q-Y9l0XGQnB37EEGJPQLdzDUOh1RyWekbClZh5ZMRtIFKLZ3ydLA>
- <xmx:v2q-Y7dSSzMcXZLOgh4kG1tcJEZ7Q7k4QGlsqrX24fU2cWU9eo1l2g>
- <xmx:v2q-YzV0fzZepe8dZzS32xaMbEIGwZ3E0En_MSxvLh_NrnpvxdRH6g>
-Feedback-ID: idc91472f:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 11 Jan 2023 02:52:29 -0500 (EST)
-From: Klaus Jensen <its@irrelevant.dk>
-To: qemu-devel@nongnu.org,
-	Peter Maydell <peter.maydell@linaro.org>
-Cc: Klaus Jensen <its@irrelevant.dk>, qemu-block@nongnu.org,
- Keith Busch <kbusch@kernel.org>, Klaus Jensen <k.jensen@samsung.com>,
- qemu-stable@nongnu.org, qemu-riscv@nongnu.org,
- Guenter Roeck <linux@roeck-us.net>
-Subject: [PULL 4/6] hw/nvme: fix missing cq eventidx update
-Date: Wed, 11 Jan 2023 08:52:11 +0100
-Message-Id: <20230111075213.70404-5-its@irrelevant.dk>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230111075213.70404-1-its@irrelevant.dk>
-References: <20230111075213.70404-1-its@irrelevant.dk>
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1pFW1b-00088r-OH
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 02:59:57 -0500
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1pFW1Y-0007GX-V7
+ for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 02:59:55 -0500
+Received: by mail-wm1-x32b.google.com with SMTP id
+ c4-20020a1c3504000000b003d9e2f72093so8892238wma.1
+ for <qemu-riscv@nongnu.org>; Tue, 10 Jan 2023 23:59:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Za7c5P/ZM53XI/7OYXXkX7JAqvbWLwDEhHNvtKksAME=;
+ b=gLlgmtZ0QKKlNfSWRxY/tDuxk+0WhzIVN2zKG7qjDoVs06UOOw9CW8VEIpfl4O4EZp
+ AiWaMPFvUCI+zjGLb2Wd2c1NbD5qXSV0+Uv211n+FB/nmu7J2xvncYHhQXcVUQYtYDb4
+ 4UgUVj6/AKa5jegiD9kiplp+l0OoKHgRD7aJJp4H+Js7nYsC0+uDcs/A8NGeFRFMH63c
+ BRxadxK8hhGh7tUE/8LrzVJsrnaX4tgukkonpvLbH6K3+CCSCaQ+VsvvqBWGsrhl8HoU
+ IlRwSTmwbLgIrEbfJmKJMeH0FwQCNsI8Q7xDMWApsqMs0aDND+lKTyfZkaMmSWb2oeg4
+ pVqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Za7c5P/ZM53XI/7OYXXkX7JAqvbWLwDEhHNvtKksAME=;
+ b=aDpFeNcBPlsU+W+LCRlmQz8B/hUwqLaNlMfiru/Y6l+WD70W8436ZiOpPSgSz7Xxco
+ xAR56xDjmquZZL3wRNQ8oggVz+5Dc7uvN/uTEq6pzgct+wr2/HW2ZN5O0Z4DmKk4rdxA
+ ILcTaCl+ZKTTjL7PB+7c6qQTVCZyreRadIUhE/pay69AYqyNBnW4FS1It0HJgMOOp3uI
+ OmUizhY9/D4sn67UkPtuVasct0M+f9ncUwZQXQWDUj887AMtmT66GGzt3/9oLdSm+ZSA
+ Q8OK5t7XYDiGglTBGj+UDgaT1G120nLUN6XmHQafaoKUZK70MTa5bHQrEWwn8jVZjDzg
+ E9Dg==
+X-Gm-Message-State: AFqh2kq+K+HbbdjqB/sKILdAFvilkb1PCBIpkIoyF4JI0BVdO/99RR6z
+ ZJw84XR+4nSeNsutDNoIWLR1iA==
+X-Google-Smtp-Source: AMrXdXtCDk5GDGw2AhTuqoj0oy8ZB1EqtrD4qa0QYNS+Eqk57YV70E2XjToFOwBG4I4Rvk0Msgy8Lg==
+X-Received: by 2002:a05:600c:3b90:b0:3d1:f0f1:ceb4 with SMTP id
+ n16-20020a05600c3b9000b003d1f0f1ceb4mr51358090wms.19.1673423991028; 
+ Tue, 10 Jan 2023 23:59:51 -0800 (PST)
+Received: from zen.linaroharston ([185.81.254.11])
+ by smtp.gmail.com with ESMTPSA id
+ q20-20020a7bce94000000b003c6c3fb3cf6sm17137340wmj.18.2023.01.10.23.59.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Jan 2023 23:59:50 -0800 (PST)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 0BD9E1FFB7;
+ Wed, 11 Jan 2023 07:59:49 +0000 (GMT)
+References: <20230108023719.2466341-1-richard.henderson@linaro.org>
+ <20230108023719.2466341-3-richard.henderson@linaro.org>
+User-agent: mu4e 1.9.12; emacs 29.0.60
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org, pbonzini@redhat.com, eduardo@habkost.net,
+ qemu-devel@nongnu.org
+Subject: Re: [PATCH v4 02/36] tcg: Handle dh_typecode_i128 with
+ TCG_CALL_{RET, ARG}_NORMAL
+Date: Wed, 11 Jan 2023 07:59:41 +0000
+In-reply-to: <20230108023719.2466341-3-richard.henderson@linaro.org>
+Message-ID: <874jsxmrgr.fsf@linaro.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1414; i=k.jensen@samsung.com;
- h=from:subject; bh=ZXD346KYWBQ1ppNzRS48H9du8tV5U4eKh3aFsjFnjSA=;
- b=owJ4nAFtAZL+kA0DAAoBTeGvMW1PDekByyZiAGO+aq2oCgLaoNslR0/8Se/AFY4fl03KSFATsS2D
- lji6oaQEz4kBMwQAAQoAHRYhBFIoM6p14tzmokdmwE3hrzFtTw3pBQJjvmqtAAoJEE3hrzFtTw3pqX
- EIAIKyRJ2R3FFs91sLd4P03smHrDPltF9fp0PJW88rONRogEO70L2nHH/C8JdrPIZ8Ck7hz9bX+d0D
- HsV2oJy/FNvVt6KtjurkhRXuo+0lNhuMMZnPBicnEn+fsN4VbNJEfgIObQguer5GEVzQTA6xSCmUeo
- IEsSvLz5n6h4MpY+Ln3ik8EIa+FInQaaQQAowVTC4vnPQZgSjoEksGtpEmPltJlGX60f46wm1iJ+yH
- /2+elydbcb+Q+UgnukaSlkIs5ILzT97FNHIxMauOKb5yNmjHRBK26V2ybc2FL/p3ZWREKgY8MuPf18
- a+DcYrWNOKoiSYBVe6dYY7DQz4+qHfZ/AXiaf7
-X-Developer-Key: i=k.jensen@samsung.com; a=openpgp;
- fpr=DDCA4D9C9EF931CC3468427263D56FC5E55DA838
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=64.147.123.19; envelope-from=its@irrelevant.dk;
- helo=wout3-smtp.messagingengine.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,55 +88,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2023 07:52:46 -0000
+X-List-Received-Date: Wed, 11 Jan 2023 07:59:59 -0000
 
-From: Klaus Jensen <k.jensen@samsung.com>
 
-Prior to reading the shadow doorbell cq head, we have to update the
-eventidx. Otherwise, we risk that the driver will skip an mmio doorbell
-write. This happens on riscv64, as reported by Guenter.
+Richard Henderson <richard.henderson@linaro.org> writes:
 
-Adding the missing update to the cq eventidx fixes the issue.
+> Many hosts pass and return 128-bit quantities like sequential
+> 64-bit quantities.  Treat this just like we currently break
+> down 64-bit quantities for a 32-bit host.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-Fixes: 3f7fe8de3d49 ("hw/nvme: Implement shadow doorbell buffer support")
-Cc: qemu-stable@nongnu.org
-Cc: qemu-riscv@nongnu.org
-Reported-by: Guenter Roeck <linux@roeck-us.net>
-Reviewed-by: Keith Busch <kbusch@kernel.org>
-Signed-off-by: Klaus Jensen <k.jensen@samsung.com>
----
- hw/nvme/ctrl.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
-diff --git a/hw/nvme/ctrl.c b/hw/nvme/ctrl.c
-index 28e02ec7baa6..226480033771 100644
---- a/hw/nvme/ctrl.c
-+++ b/hw/nvme/ctrl.c
-@@ -1334,6 +1334,15 @@ static inline void nvme_blk_write(BlockBackend *blk, int64_t offset,
-     }
- }
- 
-+static void nvme_update_cq_eventidx(const NvmeCQueue *cq)
-+{
-+    uint32_t v = cpu_to_le32(cq->head);
-+
-+    trace_pci_nvme_update_cq_eventidx(cq->cqid, cq->head);
-+
-+    pci_dma_write(PCI_DEVICE(cq->ctrl), cq->ei_addr, &v, sizeof(v));
-+}
-+
- static void nvme_update_cq_head(NvmeCQueue *cq)
- {
-     uint32_t v;
-@@ -1358,6 +1367,7 @@ static void nvme_post_cqes(void *opaque)
-         hwaddr addr;
- 
-         if (n->dbbuf_enabled) {
-+            nvme_update_cq_eventidx(cq);
-             nvme_update_cq_head(cq);
-         }
- 
--- 
-2.39.0
-
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
