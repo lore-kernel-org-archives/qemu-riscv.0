@@ -1,77 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFTpb-0007co-Ob
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 00:39:23 -0500
+	id 1pFU58-0003nB-5o
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Jan 2023 00:55:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pFTpa-0007cJ-6o
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 00:39:22 -0500
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pFU52-0003mO-4w; Wed, 11 Jan 2023 00:55:21 -0500
+Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pFTpY-00026a-O7
- for qemu-riscv@nongnu.org; Wed, 11 Jan 2023 00:39:21 -0500
-Received: by mail-pj1-x1029.google.com with SMTP id
- h7-20020a17090aa88700b00225f3e4c992so18876182pjq.1
- for <qemu-riscv@nongnu.org>; Tue, 10 Jan 2023 21:39:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=1mILLToEQSFznoisqcOMWl3SJWfi8lRpBkCgUozEfIs=;
- b=sy2MKt7M0vIYExT2CmpnYfeq51Sks47HoUIweLLxVmIxqhg5Mi9QZ9Hw16ho1ZkQde
- uHA176M88tEEN9DdhldCN1meg8fkuuhw5mqFRrcVzcwk+StH13zHCT7xGMsNRKeUe0ac
- J6WxDAYy7dX6WEb3PALa9WMXHmctrMEdwiWlWmzNs+KBO2LwbUn8WXPYjRblpT4GwiY8
- MVnlEr6VAnI9Tg1kM+1x7f23Hj2JpZOH0pMrJGThj2xRrBUnkoxN51rT7E+u7CGsOYmo
- ROqmrRgbOub92OiE1pRTmvzFkrhfxAbcpb7cir/Zl8pBTziviyhTHXhz7tsUf5kib9G2
- A+/Q==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pFU50-0004q8-Eq; Wed, 11 Jan 2023 00:55:19 -0500
+Received: by mail-ej1-x633.google.com with SMTP id ss4so26936524ejb.11;
+ Tue, 10 Jan 2023 21:55:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=oTsQvlLXDij0T2arwwsxKvmrZt8+Xx79D23KJCCsFJ4=;
+ b=gdPIrXX5XeSfFuTuKbD7fWc7vfI3tVvDnblrJ25ktXPDJCy7zC9MzGpxyDm3ofgfM0
+ RQnCFUWSczY3bOk+XyLky+yYmpK8stGnngs95cuR+AKxQl8WP2CYLG+wuOJ/qtmEZaNH
+ inKqeNuG5qIQBJZcWMZoE6xe6qmzdrljXj5y9rBFi5+sipv6PNdHSN4+c30Op5fSIngj
+ 134/07Y4B0mlgbLaChKQ0v9D0rS19+9UCcsPIncOR4P49rvHEBYs/79Bg0ez4Ed/IWNS
+ PMHh2SPHeL4UTiSv3iG90BuiDr4O4sNTdefFMUJ4no07ItGTFhh/B9zadA0QTJOVRdVD
+ ZVLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1mILLToEQSFznoisqcOMWl3SJWfi8lRpBkCgUozEfIs=;
- b=mPiFwedgxORLMaeU1+JZ4OxUX2yO6aOtGwDbmT/JzlQoY/tp+jUAl2KkDBER9Isiws
- osiNJGryemhz/2XrGnrl8R7RCouCROBQHjqxwQs6OvAcWZZRu9G+oJhyPErh861yQxOc
- W5HeqAqZuCRkM0TjIhg6k4iLik0XMiW9nS/548V8W1WMnDZ217USptVK5/l7BE68KUKJ
- 1uTrMTMCR7/yS71ID9TIdSJ2MobtNc5hpK2K0+kSY8sBhri0nsni2hRfj5UwEm49fiDt
- 4rSc2vwDFUsUtgLTMnz3KujfakJwfS/o/KsJxpUCQo9QXZNJPRN3ZdDkSSfgG5RT0DGS
- 6aPA==
-X-Gm-Message-State: AFqh2kphNEz0QjMMvMqMwO+iOSfCs2jBwgWKNObfncPbREF7zTThn2EH
- VFlAYa1RJfMsfj46fBweSu3Gag==
-X-Google-Smtp-Source: AMrXdXtbriMkJCCnSao5aFgrcC9mn+lvbGzgy0MRyDHtTGIZVN47k0epXGw+oH6iv6qNpzv2YoFV5Q==
-X-Received: by 2002:a17:902:9b86:b0:194:4b48:f7f1 with SMTP id
- y6-20020a1709029b8600b001944b48f7f1mr1109091plp.17.1673415559073; 
- Tue, 10 Jan 2023 21:39:19 -0800 (PST)
-Received: from [192.168.0.115] (63-157-97-90.dia.static.qwest.net.
- [63.157.97.90]) by smtp.gmail.com with ESMTPSA id
- v7-20020a1709028d8700b00192902287d1sm8986860plo.288.2023.01.10.21.39.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Jan 2023 21:39:18 -0800 (PST)
-Message-ID: <cbc36e57-6a55-0c96-0170-ff4c0563d556@linaro.org>
-Date: Tue, 10 Jan 2023 21:39:16 -0800
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oTsQvlLXDij0T2arwwsxKvmrZt8+Xx79D23KJCCsFJ4=;
+ b=Uf9ZiwpHoxnwZMpsIVmC3OgbiLL1GifVfEXv3sJ4ARIZsEQH+vlv+3yaAgWuDfRmWQ
+ IWFT/cM5WPvUfuXugfMfZUqQ4YKEkkQOmx3EndbPnLqD2D/X3Wy5pl5vKcWmASQFVSM1
+ BKQ2AItoT/gthBtowngj1yEsf3Bk//an/Q9rArG31Pw6XmZ2tbyqw1tdUnBlSJrL7zN0
+ 3vXZaZ+jVtM9ww7qprDjYLTj8RMa4m6ad7Wmi7nf1WYZZ3P7O3zcUijawAA267xIlB4a
+ TceSZinjI7Itnadd53woYH2+Isc+eTT/weZqwpLrdz7BBsw+yww+jpXWQUgtNtfVIptk
+ tSNg==
+X-Gm-Message-State: AFqh2koDnv12SbM91iH9MNbF7H6WwYZoIAqMHaz4UREP2BYoBbva6r7n
+ mxASMM17u5GZy9n+2nvtgJxAeTSiwQNuTdpX4jY=
+X-Google-Smtp-Source: AMrXdXstIgNzdQgI3/6hSZDBoyiJuQjlPg2Gg27UxT0LU9XRTyHWW6+xLQCfmjbnGC32tqDzo/9KK4G23EVRroTNvB0=
+X-Received: by 2002:a17:906:5798:b0:7c0:dcb3:718b with SMTP id
+ k24-20020a170906579800b007c0dcb3718bmr4319696ejq.711.1673416516021; Tue, 10
+ Jan 2023 21:55:16 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [PATCH 1/2] target/riscv/cpu: set cpu->cfg in register_cpu_props()
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com
 References: <20230110201405.247785-1-dbarboza@ventanamicro.com>
  <20230110201405.247785-2-dbarboza@ventanamicro.com>
-From: Richard Henderson <richard.henderson@linaro.org>
 In-Reply-To: <20230110201405.247785-2-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1029.google.com
-X-Spam_score_int: 12
-X-Spam_score: 1.2
-X-Spam_bar: +
-X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 11 Jan 2023 13:55:04 +0800
+Message-ID: <CAEUhbmV6mPbtY=aQECUjj9b0bcQV4vYi1GxLc4xdzcX_Lo8Yww@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv/cpu: set cpu->cfg in register_cpu_props()
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ richard.henderson@linaro.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::633;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x633.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,20 +72,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2023 05:39:22 -0000
+X-List-Received-Date: Wed, 11 Jan 2023 05:55:22 -0000
 
-On 1/10/23 12:14, Daniel Henrique Barboza wrote:
-> +/*
-> + * Register CPU props based on env.misa_ext. If a non-zero
-> + * value was set, register only the required cpu->cfg.ext_*
-> + * properties and leave. env.misa_ext = 0 means that we want
-> + * all the default properties to be registered.
-> + */
->   static void register_cpu_props(DeviceState *dev)
+On Wed, Jan 11, 2023 at 4:17 AM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> There is an informal contract between the cpu_init() functions and
+> riscv_cpu_realize(): if cpu->env.misa_ext is zero, assume that the
+> default settings were loaded via register_cpu_props() and do validations
+> to set env.misa_ext.  If it's not zero, skip this whole process and
+> assume that the board somehow did everything.
+>
+> At this moment, all SiFive CPUs are setting a non-zero misa_ext during
+> their cpu_init() and skipping a good chunk of riscv_cpu_realize().
+> This causes problems when the code being skipped in riscv_cpu_realize()
+> contains fixes or assumptions that affects all CPUs, meaning that SiFive
+> CPUs are missing out.
+>
+> To allow this code to not be skipped anymore, all the cpu->cfg.ext_* attributes
+> needs to be set during cpu_init() time. At this moment this is being done in
+> register_cpu_props(). The SiFive oards are setting their own extensions during
 
-Suggest invoking this as .instance_post_init hook on TYPE_RISCV_CPU.
-Then you don't need to manually call it on every cpu class.
+The SiFive boards
 
+> cpu_init() though, meaning that they don't want all the defaults from
+> register_cpu_props().
+>
+> Let's move the contract between *_cpu_init() and riscv_cpu_realize() to
+> register_cpu_props(). Inside this function we'll check if cpu->env.misa_ext
+> was set and, if that's the case, set all relevant cpu->cfg.ext_*
+> attributes, and only that. Leave the 'misa_ext' = 0 case as is today,
+> i.e. loading all the defaults from riscv_cpu_extensions[].
+>
+> register_cpu_props() can then be called by all the cpu_init() functions,
+> including the SiFive ones. This will make all CPUs behave more in line
+> with that riscv_cpu_realize() expects.
 
-r~
+with what
+
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/cpu.c | 40 ++++++++++++++++++++++++++++++++++++++++
+>  target/riscv/cpu.h |  4 ++++
+>  2 files changed, 44 insertions(+)
+>
+
+Regards,
+Bin
 
