@@ -1,52 +1,90 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pG1Px-0002KC-OE
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Jan 2023 12:31:09 -0500
+	id 1pG1Wz-0006zp-45
+	for mharc-qemu-riscv@gnu.org; Thu, 12 Jan 2023 12:38:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1pG1Pt-0002GN-SQ; Thu, 12 Jan 2023 12:31:07 -0500
-Received: from frasgout.his.huawei.com ([185.176.79.56])
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1pG1Wn-0006vU-Nl
+ for qemu-riscv@nongnu.org; Thu, 12 Jan 2023 12:38:14 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1pG1Pn-0000uL-UU; Thu, 12 Jan 2023 12:31:01 -0500
-Received: from lhrpeml500005.china.huawei.com (unknown [172.18.147.200])
- by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4NtBQv41ZDz6J9h8;
- Fri, 13 Jan 2023 01:30:47 +0800 (CST)
-Received: from localhost (10.202.227.76) by lhrpeml500005.china.huawei.com
- (7.191.163.240) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 12 Jan
- 2023 17:30:53 +0000
-Date: Thu, 12 Jan 2023 17:30:52 +0000
-From: Jonathan Cameron <Jonathan.Cameron@Huawei.com>
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1pG1WU-0001yb-7O
+ for qemu-riscv@nongnu.org; Thu, 12 Jan 2023 12:37:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1673545073;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ehN6IjRuqMASoeQcKCz8xA1U1hcQP2UwqR3kN7ENeDU=;
+ b=KMoTFpFmqdT6xb4cutgRzvDLmfh6vc+qKyeimU58hjtJubh0BmImZaBOmimj7IFvv+nNvn
+ cfMthFtkNG2ubPQe4OXfoFDySvZ1Lr6iJEdWd67+/d0oPRh4YsslxBA94RrqKcrVuYrJwl
+ 7j8xlXGAmTiCtgNpclJXcKGsGsEoBE0=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-638-oRugn-AVMeGaRGS6rZDoVA-1; Thu, 12 Jan 2023 12:37:52 -0500
+X-MC-Unique: oRugn-AVMeGaRGS6rZDoVA-1
+Received: by mail-wr1-f71.google.com with SMTP id
+ y5-20020adfc7c5000000b002bc02b72d2dso2967730wrg.19
+ for <qemu-riscv@nongnu.org>; Thu, 12 Jan 2023 09:37:52 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ehN6IjRuqMASoeQcKCz8xA1U1hcQP2UwqR3kN7ENeDU=;
+ b=7J4nAUWg2os/1NRSc4DgzxK6g27FPW4nY3YRUzLX2lKpyJCirlIiSA8vDCkHiye75n
+ k4alBYoBzhqA6lRNbfjHfAxaSqYpgjrv4U+flZpnEzMvSx6zzKBXhEceHUK9fhWk7fAC
+ 5l6oVQ4K8LYH+SUO/pRHnFCz0Ae0Ymr05JooxsZf74tuVVls24aHBgAtMBXgr08rmqaS
+ O0lHG45cB9sRfJ0NsPEwQGKXIWVUoHaBEGJ8zqz5AVMvrWUO4kyerKWSBxbjh/UKKF2E
+ Jt+rn7k908CbbSWyHuu7zYJ/zN7lVOiLRlDsYwIhrV0QLTtwZNYLl9KxFI9T1rPfxnFK
+ luew==
+X-Gm-Message-State: AFqh2kqLYMmru+5k8ObbbrjBiypY7VDdOKmnfUhlWG7y4KJa8TQNJ5jt
+ w4BJtZSr5t90FCimp4I0BgP+Mwwfatjk0rEK+7bFsKmEzUjVH62ye17urAJnHiEfWnzv/H69Nxz
+ 250LiwuRb5ZqTIDA=
+X-Received: by 2002:a05:600c:204c:b0:3d6:6a17:7015 with SMTP id
+ p12-20020a05600c204c00b003d66a177015mr54958539wmg.15.1673545071254; 
+ Thu, 12 Jan 2023 09:37:51 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXthTmqxDLV/7SyVlGEW4jDiFeJYlU3S/KdnwQEdBEg8B4JwWK4dBZ1LGxdh2NmFggQ8196Sbw==
+X-Received: by 2002:a05:600c:204c:b0:3d6:6a17:7015 with SMTP id
+ p12-20020a05600c204c00b003d66a177015mr54958508wmg.15.1673545070909; 
+ Thu, 12 Jan 2023 09:37:50 -0800 (PST)
+Received: from redhat.com ([2.52.157.155]) by smtp.gmail.com with ESMTPSA id
+ n36-20020a05600c502400b003da0b75de94sm2670343wmr.8.2023.01.12.09.37.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Jan 2023 09:37:50 -0800 (PST)
+Date: Thu, 12 Jan 2023 12:37:46 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Markus Armbruster <armbru@redhat.com>
-CC: <qemu-devel@nongnu.org>, <imp@bsdimp.com>, <kevans@freebsd.org>,
- <berrange@redhat.com>, <ben.widawsky@intel.com>,
- <kbastian@mail.uni-paderborn.de>, <jasowang@redhat.com>,
- <michael.roth@amd.com>, <kkostiuk@redhat.com>, <tsimpson@quicinc.com>,
- <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <bin.meng@windriver.com>,
- <qemu-riscv@nongnu.org>, <philmd@linaro.org>, <mst@redhat.com>, Bin Meng
- <bmeng.cn@gmail.com>
+Cc: qemu-devel@nongnu.org, imp@bsdimp.com, kevans@freebsd.org,
+ berrange@redhat.com, ben.widawsky@intel.com,
+ jonathan.cameron@huawei.com, kbastian@mail.uni-paderborn.de,
+ jasowang@redhat.com, michael.roth@amd.com, kkostiuk@redhat.com,
+ tsimpson@quicinc.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, philmd@linaro.org,
+ Bin Meng <bmeng.cn@gmail.com>
 Subject: Re: [PATCH v3 1/1] include: Don't include qemu/osdep.h
-Message-ID: <20230112173052.00006303@Huawei.com>
-In-Reply-To: <20230112115005.1504812-2-armbru@redhat.com>
+Message-ID: <20230112123434-mutt-send-email-mst@kernel.org>
 References: <20230112115005.1504812-1-armbru@redhat.com>
  <20230112115005.1504812-2-armbru@redhat.com>
-Organization: Huawei Technologies Research and Development (UK) Ltd.
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
+ <20230112082537-mutt-send-email-mst@kernel.org>
+ <20230112085520-mutt-send-email-mst@kernel.org>
+ <87zgan4xoo.fsf@pond.sub.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: quoted-printable
-X-Originating-IP: [10.202.227.76]
-X-ClientProxiedBy: lhrpeml500004.china.huawei.com (7.191.163.9) To
- lhrpeml500005.china.huawei.com (7.191.163.240)
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=185.176.79.56;
- envelope-from=jonathan.cameron@huawei.com; helo=frasgout.his.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+In-Reply-To: <87zgan4xoo.fsf@pond.sub.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=mst@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -60,263 +98,112 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2023 17:31:08 -0000
+X-List-Received-Date: Thu, 12 Jan 2023 17:38:19 -0000
 
-On Thu, 12 Jan 2023 12:50:05 +0100
-Markus Armbruster <armbru@redhat.com> wrote:
+On Thu, Jan 12, 2023 at 03:47:19PM +0100, Markus Armbruster wrote:
+> "Michael S. Tsirkin" <mst@redhat.com> writes:
+> 
+> > On Thu, Jan 12, 2023 at 08:51:32AM -0500, Michael S. Tsirkin wrote:
+> >> On Thu, Jan 12, 2023 at 12:50:05PM +0100, Markus Armbruster wrote:
+> >> > docs/devel/style.rst mandates:
+> >> > 
+> >> >     The "qemu/osdep.h" header contains preprocessor macros that affect
+> >> >     the behavior of core system headers like <stdint.h>.  It must be
+> >> >     the first include so that core system headers included by external
+> >> >     libraries get the preprocessor macros that QEMU depends on.
+> >> > 
+> >> >     Do not include "qemu/osdep.h" from header files since the .c file
+> >> >     will have already included it.
+> >> > 
+> >> > A few violations have crept in.  Fix them.
+> >> > 
+> >> > Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> >> > Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> >> > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> >> > Reviewed-by: Taylor Simpson <tsimpson@quicinc.com>
+> >> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> >> 
+> >> With my awesome grep skillz I found one more:
+> >> $ grep -r --include='*.h' qemu/osdep.h
+> >> include/block/graph-lock.h:#include "qemu/osdep.h"
+> 
+> Crept in after I prepared my v1.  I neglected to re-check.
+> 
+> > Also:
+> > $ grep -r --include='*.inc' qemu/osdep.h
+> > ui/vnc-enc-zrle.c.inc:#include "qemu/osdep.h"
+> > crypto/akcipher-nettle.c.inc:#include "qemu/osdep.h"
+> > crypto/akcipher-gcrypt.c.inc:#include "qemu/osdep.h"
+> > crypto/rsakey-nettle.c.inc:#include "qemu/osdep.h"
+> > crypto/cipher-gnutls.c.inc:#include "qemu/osdep.h"
+> > target/xtensa/core-dc233c/xtensa-modules.c.inc:#include "qemu/osdep.h"
+> > target/xtensa/core-sample_controller/xtensa-modules.c.inc:#include "qemu/osdep.h"
+> > target/xtensa/core-de212/xtensa-modules.c.inc:#include "qemu/osdep.h"
+> > target/xtensa/core-dc232b/xtensa-modules.c.inc:#include "qemu/osdep.h"
+> > target/xtensa/core-fsf/xtensa-modules.c.inc:#include "qemu/osdep.h"
+> > target/cris/translate_v10.c.inc:#include "qemu/osdep.h"
+> 
+> Good point.  Looks like I successfully supressed all memory of .inc.
+> 
+> >> Looks like all C files must include qemu/osdep.h, no?
+> 
+> I remember there are a few exceptions, but I don't remember which .c
+> they are.  Hmm... see commit 4bd802b209cff612d1a99674a91895b735be8630.
+> 
+> >> How about
+> >> 
+> >> 1- add -include qemu/osdep.h on compile command line
+> >>    drop #include "qemu/osdep.h" from C files
+> 
+> Then you need to encode the exceptions in the build system.  Which might
+> not be a bad thing.
+> 
+> >> 2- drop double include guards, replace with a warning.
+> >> 
+> >> following patch implements part 2:
+> >> 
+> >> 
+> >> qemu/osdep: don't include it from headers
+> >> 
+> >> doing so will lead to trouble eventually - instead of
+> >> working around such cases make it more likely it will fail.
+> >> 
+> >> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> >> 
+> >> ---
+> >> 
+> >> diff --git a/include/qemu/osdep.h b/include/qemu/osdep.h
+> >> index 7d059ad526..e4a60f911c 100644
+> >> --- a/include/qemu/osdep.h
+> >> +++ b/include/qemu/osdep.h
+> >> @@ -24,7 +24,12 @@
+> >>   * This work is licensed under the terms of the GNU GPL, version 2 or later.
+> >>   * See the COPYING file in the top-level directory.
+> >>   */
+> >> -#ifndef QEMU_OSDEP_H
+> >> +#ifdef QEMU_OSDEP_H
+> >> +#warning "Never include qemu/osdep.h from a header!"
+> >> +#endif
+> >> +
+> >> +static inline void qemu_osdep_never_include_from_header(void) {}
+> >> +
+> 
+> Why do you need the function, too?
 
-> docs/devel/style.rst mandates:
->=20
->     The "qemu/osdep.h" header contains preprocessor macros that affect
->     the behavior of core system headers like <stdint.h>.  It must be
->     the first include so that core system headers included by external
->     libraries get the preprocessor macros that QEMU depends on.
->=20
->     Do not include "qemu/osdep.h" from header files since the .c file
->     will have already included it.
->=20
-> A few violations have crept in.  Fix them.
->=20
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> Reviewed-by: Philippe Mathieu-Daud=E9 <philmd@linaro.org>
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> Reviewed-by: Taylor Simpson <tsimpson@quicinc.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+This seems to give a bit more info if header does get included
+twice: instead of just a warning on the second include compiler says
+definition is duplicated and then shows where the first definition was.
+OTOH first one was almost for sure from the proper first include so
+maybe we don't care. Let me drop this.
 
-For the CXL one.
-Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-
-> ---
->  bsd-user/qemu.h                 | 1 -
->  crypto/block-luks-priv.h        | 1 -
->  include/hw/cxl/cxl_host.h       | 1 -
->  include/hw/input/pl050.h        | 1 -
->  include/hw/tricore/triboard.h   | 1 -
->  include/qemu/userfaultfd.h      | 1 -
->  net/vmnet_int.h                 | 1 -
->  qga/cutils.h                    | 1 -
->  target/hexagon/hex_arch_types.h | 1 -
->  target/hexagon/mmvec/macros.h   | 1 -
->  target/riscv/pmu.h              | 1 -
->  bsd-user/arm/signal.c           | 1 +
->  bsd-user/arm/target_arch_cpu.c  | 2 ++
->  bsd-user/freebsd/os-sys.c       | 1 +
->  bsd-user/i386/signal.c          | 1 +
->  bsd-user/x86_64/signal.c        | 1 +
->  qga/cutils.c                    | 3 ++-
->  17 files changed, 8 insertions(+), 12 deletions(-)
->=20
-> diff --git a/bsd-user/qemu.h b/bsd-user/qemu.h
-> index be6105385e..0ceecfb6df 100644
-> --- a/bsd-user/qemu.h
-> +++ b/bsd-user/qemu.h
-> @@ -17,7 +17,6 @@
->  #ifndef QEMU_H
->  #define QEMU_H
-> =20
-> -#include "qemu/osdep.h"
->  #include "cpu.h"
->  #include "qemu/units.h"
->  #include "exec/cpu_ldst.h"
-> diff --git a/crypto/block-luks-priv.h b/crypto/block-luks-priv.h
-> index 90a20d432b..1066df0307 100644
-> --- a/crypto/block-luks-priv.h
-> +++ b/crypto/block-luks-priv.h
-> @@ -18,7 +18,6 @@
->   *
->   */
-> =20
-> -#include "qemu/osdep.h"
->  #include "qapi/error.h"
->  #include "qemu/bswap.h"
-> =20
-> diff --git a/include/hw/cxl/cxl_host.h b/include/hw/cxl/cxl_host.h
-> index a1b662ce40..c9bc9c7c50 100644
-> --- a/include/hw/cxl/cxl_host.h
-> +++ b/include/hw/cxl/cxl_host.h
-> @@ -7,7 +7,6 @@
->   * COPYING file in the top-level directory.
->   */
-> =20
-> -#include "qemu/osdep.h"
->  #include "hw/cxl/cxl.h"
->  #include "hw/boards.h"
-> =20
-> diff --git a/include/hw/input/pl050.h b/include/hw/input/pl050.h
-> index 89ec4fafc9..4cb8985f31 100644
-> --- a/include/hw/input/pl050.h
-> +++ b/include/hw/input/pl050.h
-> @@ -10,7 +10,6 @@
->  #ifndef HW_PL050_H
->  #define HW_PL050_H
-> =20
-> -#include "qemu/osdep.h"
->  #include "hw/sysbus.h"
->  #include "migration/vmstate.h"
->  #include "hw/input/ps2.h"
-> diff --git a/include/hw/tricore/triboard.h b/include/hw/tricore/triboard.h
-> index 094c8bd563..4fdd2d7d97 100644
-> --- a/include/hw/tricore/triboard.h
-> +++ b/include/hw/tricore/triboard.h
-> @@ -18,7 +18,6 @@
->   * License along with this library; if not, see <http://www.gnu.org/lice=
-nses/>.
->   */
-> =20
-> -#include "qemu/osdep.h"
->  #include "qapi/error.h"
->  #include "hw/boards.h"
->  #include "sysemu/sysemu.h"
-> diff --git a/include/qemu/userfaultfd.h b/include/qemu/userfaultfd.h
-> index 6b74f92792..55c95998e8 100644
-> --- a/include/qemu/userfaultfd.h
-> +++ b/include/qemu/userfaultfd.h
-> @@ -13,7 +13,6 @@
->  #ifndef USERFAULTFD_H
->  #define USERFAULTFD_H
-> =20
-> -#include "qemu/osdep.h"
->  #include "exec/hwaddr.h"
->  #include <linux/userfaultfd.h>
-> =20
-> diff --git a/net/vmnet_int.h b/net/vmnet_int.h
-> index adf6e8c20d..d0b90594f2 100644
-> --- a/net/vmnet_int.h
-> +++ b/net/vmnet_int.h
-> @@ -10,7 +10,6 @@
->  #ifndef VMNET_INT_H
->  #define VMNET_INT_H
-> =20
-> -#include "qemu/osdep.h"
->  #include "vmnet_int.h"
->  #include "clients.h"
-> =20
-> diff --git a/qga/cutils.h b/qga/cutils.h
-> index f0f30a7d28..2bfaf554a8 100644
-> --- a/qga/cutils.h
-> +++ b/qga/cutils.h
-> @@ -1,7 +1,6 @@
->  #ifndef CUTILS_H_
->  #define CUTILS_H_
-> =20
-> -#include "qemu/osdep.h"
-> =20
->  int qga_open_cloexec(const char *name, int flags, mode_t mode);
-> =20
-> diff --git a/target/hexagon/hex_arch_types.h b/target/hexagon/hex_arch_ty=
-pes.h
-> index 885f68f760..52a7f2b2f3 100644
-> --- a/target/hexagon/hex_arch_types.h
-> +++ b/target/hexagon/hex_arch_types.h
-> @@ -18,7 +18,6 @@
->  #ifndef HEXAGON_HEX_ARCH_TYPES_H
->  #define HEXAGON_HEX_ARCH_TYPES_H
-> =20
-> -#include "qemu/osdep.h"
->  #include "mmvec/mmvec.h"
->  #include "qemu/int128.h"
-> =20
-> diff --git a/target/hexagon/mmvec/macros.h b/target/hexagon/mmvec/macros.h
-> index 8c864e8c68..1201d778d0 100644
-> --- a/target/hexagon/mmvec/macros.h
-> +++ b/target/hexagon/mmvec/macros.h
-> @@ -18,7 +18,6 @@
->  #ifndef HEXAGON_MMVEC_MACROS_H
->  #define HEXAGON_MMVEC_MACROS_H
-> =20
-> -#include "qemu/osdep.h"
->  #include "qemu/host-utils.h"
->  #include "arch.h"
->  #include "mmvec/system_ext_mmvec.h"
-> diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
-> index 3004ce37b6..0c819ca983 100644
-> --- a/target/riscv/pmu.h
-> +++ b/target/riscv/pmu.h
-> @@ -16,7 +16,6 @@
->   * this program.  If not, see <http://www.gnu.org/licenses/>.
->   */
-> =20
-> -#include "qemu/osdep.h"
->  #include "qemu/log.h"
->  #include "cpu.h"
->  #include "qemu/main-loop.h"
-> diff --git a/bsd-user/arm/signal.c b/bsd-user/arm/signal.c
-> index 2b1dd745d1..9734407543 100644
-> --- a/bsd-user/arm/signal.c
-> +++ b/bsd-user/arm/signal.c
-> @@ -17,6 +17,7 @@
->   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
->   */
-> =20
-> +#include "qemu/osdep.h"
->  #include "qemu.h"
-> =20
->  /*
-> diff --git a/bsd-user/arm/target_arch_cpu.c b/bsd-user/arm/target_arch_cp=
-u.c
-> index 02bf9149d5..fe38ae2210 100644
-> --- a/bsd-user/arm/target_arch_cpu.c
-> +++ b/bsd-user/arm/target_arch_cpu.c
-> @@ -16,6 +16,8 @@
->   *  You should have received a copy of the GNU General Public License
->   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
->   */
-> +
-> +#include "qemu/osdep.h"
->  #include "target_arch.h"
-> =20
->  void target_cpu_set_tls(CPUARMState *env, target_ulong newtls)
-> diff --git a/bsd-user/freebsd/os-sys.c b/bsd-user/freebsd/os-sys.c
-> index 309e27b9d6..1676ec10f8 100644
-> --- a/bsd-user/freebsd/os-sys.c
-> +++ b/bsd-user/freebsd/os-sys.c
-> @@ -17,6 +17,7 @@
->   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
->   */
-> =20
-> +#include "qemu/osdep.h"
->  #include "qemu.h"
->  #include "target_arch_sysarch.h"
-> =20
-> diff --git a/bsd-user/i386/signal.c b/bsd-user/i386/signal.c
-> index 5dd975ce56..a3131047b8 100644
-> --- a/bsd-user/i386/signal.c
-> +++ b/bsd-user/i386/signal.c
-> @@ -17,6 +17,7 @@
->   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
->   */
-> =20
-> +#include "qemu/osdep.h"
->  #include "qemu.h"
-> =20
->  /*
-> diff --git a/bsd-user/x86_64/signal.c b/bsd-user/x86_64/signal.c
-> index c3875bc4c6..46cb865180 100644
-> --- a/bsd-user/x86_64/signal.c
-> +++ b/bsd-user/x86_64/signal.c
-> @@ -16,6 +16,7 @@
->   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
->   */
-> =20
-> +#include "qemu/osdep.h"
->  #include "qemu.h"
-> =20
->  /*
-> diff --git a/qga/cutils.c b/qga/cutils.c
-> index b8e142ef64..b21bcf3683 100644
-> --- a/qga/cutils.c
-> +++ b/qga/cutils.c
-> @@ -2,8 +2,9 @@
->   * This work is licensed under the terms of the GNU GPL, version 2 or la=
-ter.
->   * See the COPYING file in the top-level directory.
->   */
-> -#include "cutils.h"
-> =20
-> +#include "qemu/osdep.h"
-> +#include "cutils.h"
->  #include "qapi/error.h"
-> =20
->  /**
+> >>  #define QEMU_OSDEP_H
+> >>  
+> >>  #include "config-host.h"
+> >> @@ -714,5 +719,3 @@ static inline int platform_does_not_support_system(const char *command)
+> >>  #ifdef __cplusplus
+> >>  }
+> >>  #endif
+> >> -
+> >> -#endif
 
 
