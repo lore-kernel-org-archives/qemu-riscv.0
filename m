@@ -1,59 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFt7V-0002Uu-II
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Jan 2023 03:39:35 -0500
+	id 1pFtfw-0002NF-3A
+	for mharc-qemu-riscv@gnu.org; Thu, 12 Jan 2023 04:15:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pFt7T-0002Sj-Cg
- for qemu-riscv@nongnu.org; Thu, 12 Jan 2023 03:39:32 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pFt7R-0005fH-Av
- for qemu-riscv@nongnu.org; Thu, 12 Jan 2023 03:39:31 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1673512768;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=dRJfkbWwyIQzTd8U489EfmTPNO/iCMPsE3eVTYqVKdc=;
- b=X0sO/pgistsAbjHZXHadUDAtbukPSn/TRiTlbLfI/xMJYoApu+8dr0KD/sqB0dheDFf9NH
- E4ViLDI4WnUDvqgq1hzsN5hbq9UM3ZAz3q6lwXESlZm4V1KC78dHPuDC7F3BkRvKp0l5yo
- e9JyZ0X4WEOVI641BjRlojQnpWso5sk=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-412-UaBl1OE_MlWgXpFCOUT8KA-1; Thu, 12 Jan 2023 03:39:24 -0500
-X-MC-Unique: UaBl1OE_MlWgXpFCOUT8KA-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
- [10.11.54.1])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 371AB1C05AB0;
- Thu, 12 Jan 2023 08:39:24 +0000 (UTC)
-Received: from thuth.com (unknown [10.39.193.2])
- by smtp.corp.redhat.com (Postfix) with ESMTP id BE7A740C2064;
- Thu, 12 Jan 2023 08:39:22 +0000 (UTC)
-From: Thomas Huth <thuth@redhat.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>,
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pFtfu-0002MB-7s
+ for qemu-riscv@nongnu.org; Thu, 12 Jan 2023 04:15:06 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pFtfs-0003Zn-6r
+ for qemu-riscv@nongnu.org; Thu, 12 Jan 2023 04:15:05 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ j16-20020a05600c1c1000b003d9ef8c274bso10120000wms.0
+ for <qemu-riscv@nongnu.org>; Thu, 12 Jan 2023 01:15:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VRgN7jM2i2uWnBORbHAQaWiBRV8VB33yEpTKVQT0RtQ=;
+ b=MiM/VlZkaNkzPvcqm/XJ2yID6ov8SyDgyf48CYOVwKTp+kTPbqeY22RmRF8GxtP1V+
+ y4ZuqeTviVbfiApDAYoNSsXK+Uror10K3kcAdd0z44QpUWrepUmwjVWQTQkQk2irfvXL
+ tL2aYQmZ2nYmSWNQAdIPI9tM1gRRG2bEr3e4bkCp/j5C4jMOEQGDPtYForHiiOBCu2tu
+ M0Mp+bFRIQ0uSK5tdpjt6MtdMGl5wkqZW6R81J1dn9RjL3oyjdl1BtyyWBnfM4LrL+Xz
+ AoxAohcrdoqKRpzLzwRsoGXSBAeYOXF/Ns7HI0Mdui9j25dR1vzLlaAa22YpqvUGLkIs
+ YlEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=VRgN7jM2i2uWnBORbHAQaWiBRV8VB33yEpTKVQT0RtQ=;
+ b=AmuSI3bSl3TOaMHJjGsUvNuaPo0DdgxaRa/HkXUG0Cqm5vN6fTim4lMu3+k30oFpZ8
+ IajVHKGtq85CqWFf+ZtpoZGC/kXtOeFQvPoUOIMY/0YFCWAOCQjf3dlbwMGxjSy5T8z8
+ EaZ3aTVRvg/hfZS/CVfbjTvmTZMps451opwRjgqQjZYQKiAFbnKqpJnu3T5lf5ThfK9X
+ RN5pLeCbMMsIkpaArqA9GA1HMThMVXfZHX6XPeARJCumBR494+i1VcXhz2e9bVVwsFSR
+ Jc7KVmxjs++0Mh8/F1nepo5AtiavVXiSPOnoYwHkEqgsBaRI0YtzdytEya9tO9Gm+1sx
+ kowQ==
+X-Gm-Message-State: AFqh2kqXNJaziJZWmMRLwVn2rRd8615nmdWRLCU5mEnwMDwXy4COn2jw
+ tgUML+UM3BxxohDt/IMf3fdUOg==
+X-Google-Smtp-Source: AMrXdXtC0Nqaz7JY+CZeqjLnLc8M2/v3N+/AY7GUanv2LgjbjkPBCfP6TL+TNASHTm0LyYrHvB5Y3Q==
+X-Received: by 2002:a05:600c:42d5:b0:3d6:e790:c9a0 with SMTP id
+ j21-20020a05600c42d500b003d6e790c9a0mr64966847wme.10.1673514902314; 
+ Thu, 12 Jan 2023 01:15:02 -0800 (PST)
+Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
+ p9-20020a05600c358900b003cffd3c3d6csm23114941wmq.12.2023.01.12.01.15.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Jan 2023 01:15:01 -0800 (PST)
+Message-ID: <b749a663-475f-558c-30ba-0b46d752c0d3@linaro.org>
+Date: Thu, 12 Jan 2023 10:15:00 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.6.1
+Subject: Re: [PATCH] hw/misc/sifive_u_otp: Remove the deprecated OTP config
+ with '-drive if=none'
+Content-Language: en-US
+To: Thomas Huth <thuth@redhat.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Markus Armbruster <armbru@redhat.com>,
  qemu-block@nongnu.org
-Subject: [PATCH v2] hw/misc/sifive_u_otp: Remove the deprecated OTP config
- with '-drive if=none'
-Date: Thu, 12 Jan 2023 09:39:21 +0100
-Message-Id: <20230112083921.887828-1-thuth@redhat.com>
-MIME-Version: 1.0
+References: <20230112082951.874492-1-thuth@redhat.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20230112082951.874492-1-thuth@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.1
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -66,73 +85,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2023 08:39:32 -0000
+X-List-Received-Date: Thu, 12 Jan 2023 09:15:06 -0000
 
-'-drive if=none' is meant for configuring back-end devices only, so this
-got marked as deprecated in QEMU 6.2. Users should now only use the new
-way with '-drive if=pflash' instead.
+On 12/1/23 09:29, Thomas Huth wrote:
+> '-drive if=none' is meant for configuring back-end devices only, so this
+> got marked as deprecated in QEMU 6.2. Users should now only use the new
+> way with '-drive if=pflash' instead.
+> 
+> Signed-off-by: Thomas Huth <thuth@redhat.com>
+> ---
+>   docs/about/deprecated.rst       | 6 ------
+>   docs/about/removed-features.rst | 7 +++++++
+>   hw/misc/sifive_u_otp.c          | 7 -------
+>   3 files changed, 7 insertions(+), 13 deletions(-)
 
-Signed-off-by: Thomas Huth <thuth@redhat.com>
----
- docs/about/deprecated.rst       | 6 ------
- docs/about/removed-features.rst | 7 +++++++
- hw/misc/sifive_u_otp.c          | 7 -------
- 3 files changed, 7 insertions(+), 13 deletions(-)
-
-diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
-index 68d29642d7..bfe8148490 100644
---- a/docs/about/deprecated.rst
-+++ b/docs/about/deprecated.rst
-@@ -87,12 +87,6 @@ as short-form boolean values, and passed to plugins as ``arg_name=on``.
- However, short-form booleans are deprecated and full explicit ``arg_name=on``
- form is preferred.
- 
--``-drive if=none`` for the sifive_u OTP device (since 6.2)
--''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
--
--Using ``-drive if=none`` to configure the OTP device of the sifive_u
--RISC-V machine is deprecated. Use ``-drive if=pflash`` instead.
--
- ``-no-hpet`` (since 8.0)
- ''''''''''''''''''''''''
- 
-diff --git a/docs/about/removed-features.rst b/docs/about/removed-features.rst
-index c918cabd1a..6bd0a2b4e4 100644
---- a/docs/about/removed-features.rst
-+++ b/docs/about/removed-features.rst
-@@ -422,6 +422,13 @@ the value is hexadecimal.  That is, '0x20M' should be written either as
- ``tty`` and ``parport`` used to be aliases for ``serial`` and ``parallel``
- respectively. The actual backend names should be used instead.
- 
-+``-drive if=none`` for the sifive_u OTP device (removed in 8.0)
-+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-+
-+Use ``-drive if=pflash`` to configure the OTP device of the sifive_u
-+RISC-V machine instead.
-+
-+
- QEMU Machine Protocol (QMP) commands
- ------------------------------------
- 
-diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
-index 6d7fdb040a..8965f5c22a 100644
---- a/hw/misc/sifive_u_otp.c
-+++ b/hw/misc/sifive_u_otp.c
-@@ -210,13 +210,6 @@ static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
-     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
- 
-     dinfo = drive_get(IF_PFLASH, 0, 0);
--    if (!dinfo) {
--        dinfo = drive_get(IF_NONE, 0, 0);
--        if (dinfo) {
--            warn_report("using \"-drive if=none\" for the OTP is deprecated, "
--                        "use \"-drive if=pflash\" instead.");
--        }
--    }
-     if (dinfo) {
-         int ret;
-         uint64_t perm;
--- 
-2.31.1
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
