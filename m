@@ -1,79 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFtgz-0002xd-C6
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Jan 2023 04:16:13 -0500
+	id 1pFu9c-00072o-EA
+	for mharc-qemu-riscv@gnu.org; Thu, 12 Jan 2023 04:45:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pFtgx-0002wD-Os
- for qemu-riscv@nongnu.org; Thu, 12 Jan 2023 04:16:11 -0500
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pFu9Z-00071l-9t; Thu, 12 Jan 2023 04:45:45 -0500
+Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pFtgv-0003tN-0D
- for qemu-riscv@nongnu.org; Thu, 12 Jan 2023 04:16:11 -0500
-Received: by mail-wm1-x32a.google.com with SMTP id
- ay12-20020a05600c1e0c00b003d9ea12bafcso10683245wmb.3
- for <qemu-riscv@nongnu.org>; Thu, 12 Jan 2023 01:16:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=AetZmlO1b2EWe5EIF7NB9tiCOx7ssrEdvyQMErQTo2I=;
- b=P76ehxpOcKuJhLaOdLsLviOWBmM13UyHLR1h7kKeiCKF2rP8QGjxzT/L0KUIcCxEM4
- XUcTf7QfwoZtgrEZF7O250SYONTTUbsPn+YEXkgYWWjBbTvBz97m80WUC5uXgsSm1QOA
- vNircbQozqYn9+zth28Jb+c8IpQ8F56Dy0AyL+SZ7ERDEo5LUcu9AzUM3Zf13GT7TKcH
- UwXw/8u7J0SxB/wGiGqCDKf0IlKlyFU22cDrN2XK33XzHVYCZiB98MkVVuoQc03ZG/PE
- sy3S3fhBBe1ArybzNXzuwfPPN8OUdORC/tlCBZwVevgh/Y2ZHfmOjaaju7D1asSxxrd3
- ioOQ==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pFu9U-0001q1-AS; Thu, 12 Jan 2023 04:45:42 -0500
+Received: by mail-vs1-xe30.google.com with SMTP id q125so6745412vsb.0;
+ Thu, 12 Jan 2023 01:45:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=D493d/lf6395odeXd8Z4oL1EMywgeerAnKb+g0+vV6o=;
+ b=IXTySs+I667/BCAfEagoFk8CIQ3C58N6R7Eps/58s250J1tjBnfLLs84YkBS0VjA+R
+ JDeT0Mx01p44HyGlZ4zL+qYbc27I25D4HlNIE8F6m6qzj7ZCEIdYW5BzKyuhW1P0QwkY
+ 0rD0GyeUUXefRMOqvekBK7wvNMebYI7gz/gIQlLutJIBb9Qrgu1vpFhMRoBBsyu+Z7+g
+ 1OCmdUmiaIyFt045dMbDo+KxlXeVGpr/+u5teJxgfmo68t5h0XT/z/16PSRkwbpprwZN
+ B8kodySe8y/2dlLbpNaEPhKrRkdZ3gi77ktk9QGVK7W6Dj7oezpSEB446MX6IXoBzT7O
+ RqVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=AetZmlO1b2EWe5EIF7NB9tiCOx7ssrEdvyQMErQTo2I=;
- b=7saiZDH0Lb/5bOYZE9GomsntyYWNk1kRoe76CVeRlZD5U9Jup038cKpGaWPR+TZvm0
- nCgfZxf5T2GudwfX7BTAt6Ga87EqTdZfbYQvuukp63phWOynIYk2itF4MkLZDvuW0hM8
- YPkgsqyKm+UhaKRF0VrUPhiBUBWccGBr22Afr+pJbJYKlkt/lwvwFpq7520L6A++KPZM
- aJeOQRqKGWkUpJ8cfPsRPG8eIAEZaRwHvgqmd8hg93u4tMTBM2+55Ni8XebQ42fZOwCB
- OhbCSzCaIoXPLYHy3r5tgfsm6gVT1QcdlhM6D6Q5AlUU3uZQIJhP6P0LmRVUXZ4FWpUK
- HTLw==
-X-Gm-Message-State: AFqh2kpqA5XBFBrahIUuDDCgBWWvv+WOK09/GvYBqgy3FI4Bxj3Eu53w
- lUwO9SjTRTmOrXHbTiQcusnTYw==
-X-Google-Smtp-Source: AMrXdXs3p9ICvDUHEE0YFxIK2mcgYtMwDCHDH+mB+GPKtCC8o4xmAohD0tjvaHqgco8HiPQDf/HXWw==
-X-Received: by 2002:a1c:4b03:0:b0:3d9:103d:9081 with SMTP id
- y3-20020a1c4b03000000b003d9103d9081mr54799184wma.28.1673514967419; 
- Thu, 12 Jan 2023 01:16:07 -0800 (PST)
-Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- l14-20020a05600c1d0e00b003da105437besm3208040wms.29.2023.01.12.01.16.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Jan 2023 01:16:06 -0800 (PST)
-Message-ID: <28498e65-43e7-3fa0-6c2f-7f6511891572@linaro.org>
-Date: Thu, 12 Jan 2023 10:16:05 +0100
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=D493d/lf6395odeXd8Z4oL1EMywgeerAnKb+g0+vV6o=;
+ b=BkzaXZhFqwM6AU/LjUFKJuygFa+EzO0Z0HL4ym1w6hoU+Q0svNgJ/HCak7D/ToBpRr
+ MNv9Rm8aZf45/esa0IVQHeUIqBFfiYaDmh1jDpV/yaVsqVhVxE0HTpdlZYrr6wt8agBO
+ 2nHKWYhhUewziRBGPGXrj6vByMmLD59R4+cUlhgFWkCSiAjNLY2H4JsdNcN2mhnt0ct9
+ k/OR8liKtVT4GlZVbrKeevHGO4iBfwYjaCBmR+qSSbMV9loI56EdR5zSz0gmxI/xebKE
+ Y2oanaSEPUXUMuTfE/9OcQdW/za9KB6EVfZxfSoawI+fdnEc9F62sOlxUCsBHnFb7MkL
+ fIqQ==
+X-Gm-Message-State: AFqh2krhO7wVp8REoDPeAvwmPBypUbLdauJOfOgza81uXyfUogYnBw7w
+ /kYT1SwocyCsfOAr6yp/gOuplZYE5IiIPnsAiuU=
+X-Google-Smtp-Source: AMrXdXtp3UeFMDQWnj5sxRdluQeDfh9v9fi5qL7RDm702fYjW+wyZ8s98mhW/cwmLh99hlQrAtiuZD1GlyGUghKKuaQ=
+X-Received: by 2002:a05:6102:510e:b0:3b1:2b83:1861 with SMTP id
+ bm14-20020a056102510e00b003b12b831861mr10025864vsb.10.1673516738156; Thu, 12
+ Jan 2023 01:45:38 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.6.1
-Subject: Re: [PATCH] hw/misc/sifive_u_otp: Remove the deprecated OTP config
+References: <20230112083921.887828-1-thuth@redhat.com>
+In-Reply-To: <20230112083921.887828-1-thuth@redhat.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 12 Jan 2023 19:45:11 +1000
+Message-ID: <CAKmqyKNAREWgeNXEHyPqT8jthXEKK7v7H2vXYS_FSLOZy4_-7w@mail.gmail.com>
+Subject: Re: [PATCH v2] hw/misc/sifive_u_otp: Remove the deprecated OTP config
  with '-drive if=none'
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-To: Thomas Huth <thuth@redhat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Markus Armbruster <armbru@redhat.com>,
- qemu-block@nongnu.org
-References: <20230112082951.874492-1-thuth@redhat.com>
- <b749a663-475f-558c-30ba-0b46d752c0d3@linaro.org>
-In-Reply-To: <b749a663-475f-558c-30ba-0b46d752c0d3@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+To: Thomas Huth <thuth@redhat.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ Markus Armbruster <armbru@redhat.com>, qemu-block@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,22 +76,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2023 09:16:12 -0000
+X-List-Received-Date: Thu, 12 Jan 2023 09:45:46 -0000
 
-On 12/1/23 10:15, Philippe Mathieu-Daudé wrote:
-> On 12/1/23 09:29, Thomas Huth wrote:
->> '-drive if=none' is meant for configuring back-end devices only, so this
->> got marked as deprecated in QEMU 6.2. Users should now only use the new
->> way with '-drive if=pflash' instead.
->>
->> Signed-off-by: Thomas Huth <thuth@redhat.com>
->> ---
->>   docs/about/deprecated.rst       | 6 ------
->>   docs/about/removed-features.rst | 7 +++++++
->>   hw/misc/sifive_u_otp.c          | 7 -------
->>   3 files changed, 7 insertions(+), 13 deletions(-)
-> 
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+On Thu, Jan 12, 2023 at 6:40 PM Thomas Huth <thuth@redhat.com> wrote:
+>
+> '-drive if=none' is meant for configuring back-end devices only, so this
+> got marked as deprecated in QEMU 6.2. Users should now only use the new
+> way with '-drive if=pflash' instead.
+>
+> Signed-off-by: Thomas Huth <thuth@redhat.com>
 
--ENOTENOUGHCOFFEEYET I read v2 and meant to reply there :P
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
+>  docs/about/deprecated.rst       | 6 ------
+>  docs/about/removed-features.rst | 7 +++++++
+>  hw/misc/sifive_u_otp.c          | 7 -------
+>  3 files changed, 7 insertions(+), 13 deletions(-)
+>
+> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+> index 68d29642d7..bfe8148490 100644
+> --- a/docs/about/deprecated.rst
+> +++ b/docs/about/deprecated.rst
+> @@ -87,12 +87,6 @@ as short-form boolean values, and passed to plugins as ``arg_name=on``.
+>  However, short-form booleans are deprecated and full explicit ``arg_name=on``
+>  form is preferred.
+>
+> -``-drive if=none`` for the sifive_u OTP device (since 6.2)
+> -''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+> -
+> -Using ``-drive if=none`` to configure the OTP device of the sifive_u
+> -RISC-V machine is deprecated. Use ``-drive if=pflash`` instead.
+> -
+>  ``-no-hpet`` (since 8.0)
+>  ''''''''''''''''''''''''
+>
+> diff --git a/docs/about/removed-features.rst b/docs/about/removed-features.rst
+> index c918cabd1a..6bd0a2b4e4 100644
+> --- a/docs/about/removed-features.rst
+> +++ b/docs/about/removed-features.rst
+> @@ -422,6 +422,13 @@ the value is hexadecimal.  That is, '0x20M' should be written either as
+>  ``tty`` and ``parport`` used to be aliases for ``serial`` and ``parallel``
+>  respectively. The actual backend names should be used instead.
+>
+> +``-drive if=none`` for the sifive_u OTP device (removed in 8.0)
+> +'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+> +
+> +Use ``-drive if=pflash`` to configure the OTP device of the sifive_u
+> +RISC-V machine instead.
+> +
+> +
+>  QEMU Machine Protocol (QMP) commands
+>  ------------------------------------
+>
+> diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
+> index 6d7fdb040a..8965f5c22a 100644
+> --- a/hw/misc/sifive_u_otp.c
+> +++ b/hw/misc/sifive_u_otp.c
+> @@ -210,13 +210,6 @@ static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
+>      sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
+>
+>      dinfo = drive_get(IF_PFLASH, 0, 0);
+> -    if (!dinfo) {
+> -        dinfo = drive_get(IF_NONE, 0, 0);
+> -        if (dinfo) {
+> -            warn_report("using \"-drive if=none\" for the OTP is deprecated, "
+> -                        "use \"-drive if=pflash\" instead.");
+> -        }
+> -    }
+>      if (dinfo) {
+>          int ret;
+>          uint64_t perm;
+> --
+> 2.31.1
+>
+>
 
