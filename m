@@ -1,81 +1,88 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pFxZT-000155-AK
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Jan 2023 08:24:43 -0500
+	id 1pFy00-0003Ux-0Q
+	for mharc-qemu-riscv@gnu.org; Thu, 12 Jan 2023 08:52:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pFxZQ-000141-Ij
- for qemu-riscv@nongnu.org; Thu, 12 Jan 2023 08:24:41 -0500
-Received: from mail-ot1-x32e.google.com ([2607:f8b0:4864:20::32e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pFxZO-0005Mb-Jm
- for qemu-riscv@nongnu.org; Thu, 12 Jan 2023 08:24:39 -0500
-Received: by mail-ot1-x32e.google.com with SMTP id
- y18-20020a0568301d9200b0067082cd4679so10556392oti.4
- for <qemu-riscv@nongnu.org>; Thu, 12 Jan 2023 05:24:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kgjfwn94DZluSXJskmTBBKz+fkftoBzh7Oxy72vvBwc=;
- b=FB6bY/qHvbJAOXuC1ejKiUnsvlMeGokzI6LhSQ11sTVv4zb5Vec5z/82A8X/DFITqr
- R2fCb31QplRSiWZFFr6FSvf5A+k7R92D5c7CBT7pML63rUjPBT/TvG39MLouN2A0GRc4
- vRc6SmhD3yTmTUYhNLyCoDuLui+zNTFuGzXvAFnswJy8SXQyPadv7Sw5tgAhZxMk5Qpg
- Yh7qdX1ka8EU34ronanfTp3y6CxXXvvY/BJ1ib3q2lTZ8vA9JO17lbZ3D5WKCAwkQTr6
- zdWrgiPrTdbe4RJCzPrCAPt3MX5PHWe5VBGAwCho2s32i1kLVl4wIGLuuFsLTyZexgtb
- oahQ==
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1pFxzd-0002vZ-VD
+ for qemu-riscv@nongnu.org; Thu, 12 Jan 2023 08:51:52 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1pFxzV-0003kT-G4
+ for qemu-riscv@nongnu.org; Thu, 12 Jan 2023 08:51:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1673531495;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1kd6neTRgQmgMh6DNG6DwXYTgAy1+iQonnVyEcqozWM=;
+ b=M3QChTRs9IMVNBdFmIKFEcC/xyjX/mF3YLS4twNJZB3F5zdCq2Da+gwMuF3DwY0F4RQ/ne
+ nnbHv/oev5c5PM+hVXuxvbdVgJSt2bwB3kgZfXt60UJ5RAEBqNjzu+r9SRSO/IhOekY2mv
+ KSHNat6B2mnXVj9V5Kkgdl1fn+jmc/Y=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-647-eTcFwHCVN6qRrC8DQ-_i8g-1; Thu, 12 Jan 2023 08:51:33 -0500
+X-MC-Unique: eTcFwHCVN6qRrC8DQ-_i8g-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ f20-20020a7bc8d4000000b003d1cda5bd6fso4295591wml.9
+ for <qemu-riscv@nongnu.org>; Thu, 12 Jan 2023 05:51:32 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kgjfwn94DZluSXJskmTBBKz+fkftoBzh7Oxy72vvBwc=;
- b=fwWZw5eAqx94TrGSwBJeNNPKqcz9glikJaaJE7urod7hp36eODcI2mhvkSfrs4eHST
- og5S7USJ7b4cKt/4GdIcaYfkrFcHdOTm+V991APjgc7wgpJDF64F2aYfgNsmgJ7vxXhF
- UTQIvhTzNMLbPh8lIgPtOESmt1nTjFuUKISbGdkxFBcb5tip1tFaL4gqE4psD0/cpsMP
- usjFn7gOpIQf6/rzNQ5eawuWbWRTWAXnUElqWeI0QVr4SV66EsUbe6OMEcboX9WkhVgr
- o8N/oiKHDxjQVOWI++LdjSXccYs+x0OU0UxQ3f5vyN8UGw3lmq4/GVmnWbVYYt6LP24o
- YENg==
-X-Gm-Message-State: AFqh2krRtJnCbsjberz8PzFgGjNn6V21NjtxFoVzvpiYLtqVvXP8SwqC
- i803AsM+PYdvSOwtZK0ZiuSlhg==
-X-Google-Smtp-Source: AMrXdXv5PxpvpsUqteCSXlho94s+/hOgF4wxTtCGX/c/8kqXPjwkQCNrgNy9fwMF0GihztqGQwXQsg==
-X-Received: by 2002:a9d:6d0e:0:b0:678:2963:3831 with SMTP id
- o14-20020a9d6d0e000000b0067829633831mr39166299otp.22.1673529877187; 
- Thu, 12 Jan 2023 05:24:37 -0800 (PST)
-Received: from [192.168.68.107] ([191.17.222.2])
- by smtp.gmail.com with ESMTPSA id
- cg28-20020a056830631c00b006706247fdbfsm9269723otb.23.2023.01.12.05.24.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Jan 2023 05:24:36 -0800 (PST)
-Message-ID: <07be21f4-ba88-1bdf-62c6-09adcf5dfecc@ventanamicro.com>
-Date: Thu, 12 Jan 2023 10:24:33 -0300
+ bh=1kd6neTRgQmgMh6DNG6DwXYTgAy1+iQonnVyEcqozWM=;
+ b=inFjHRWSDNoKwXND29M8tUdPPCVZkw+1pOLjHnTSwapB9aB4rgorGo0yZzgiV+lLgs
+ HPPIwjFls8WQVNru0XqrjTgBeIYEg5MfbIfkaRt/iPOpjXAkDKn4hMz30xDuOOd4rEIL
+ xEPFz07H3Z5nU3hfGDBzElffkfE34FbZDTVcIL+f+fVxG3Ext6OnL1RX3tC4Ctpbdt3P
+ YiVTcx4ID8kugcObKT4vLKpXyfSZF6Jns1C6Xu1Cj0BF1Ua4JzRDtAg8G//GJ34S5QLk
+ 7XrI9fgImLEqmxJkP0l1HmeJJ+un2QwbhItb5XXNavYabuQpIDspSoCIyNEDlKCuNPeP
+ qQgg==
+X-Gm-Message-State: AFqh2krFAmCMRJM5CBCfX8Cn0nTq6QGFB/QNIYKn3TpxH4AELcmDBWAX
+ +01JDAUAVvDpASI2ZT/DgQTQ6pHs0LZezFDkeRE9j90aOxAcN44cM28VONB752ih0M7nczf7au3
+ Us9n1WtMGH4JC0QE=
+X-Received: by 2002:a5d:6443:0:b0:2ba:ecb4:5e19 with SMTP id
+ d3-20020a5d6443000000b002baecb45e19mr14872466wrw.11.1673531491944; 
+ Thu, 12 Jan 2023 05:51:31 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXuCDWMX0+MZ6xrmfjPzxy6tksZkIeYbgnZCPZJmOxg8ZdZz+JvkCWpNGGEsq87he7gMEfFuPQ==
+X-Received: by 2002:a5d:6443:0:b0:2ba:ecb4:5e19 with SMTP id
+ d3-20020a5d6443000000b002baecb45e19mr14872431wrw.11.1673531491584; 
+ Thu, 12 Jan 2023 05:51:31 -0800 (PST)
+Received: from redhat.com ([2.52.157.155]) by smtp.gmail.com with ESMTPSA id
+ z9-20020a7bc7c9000000b003d9ef37ec1bsm17340547wmk.5.2023.01.12.05.51.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Jan 2023 05:51:30 -0800 (PST)
+Date: Thu, 12 Jan 2023 08:51:26 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org, imp@bsdimp.com, kevans@freebsd.org,
+ berrange@redhat.com, ben.widawsky@intel.com,
+ jonathan.cameron@huawei.com, kbastian@mail.uni-paderborn.de,
+ jasowang@redhat.com, michael.roth@amd.com, kkostiuk@redhat.com,
+ tsimpson@quicinc.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, philmd@linaro.org,
+ Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [PATCH v3 1/1] include: Don't include qemu/osdep.h
+Message-ID: <20230112082537-mutt-send-email-mst@kernel.org>
+References: <20230112115005.1504812-1-armbru@redhat.com>
+ <20230112115005.1504812-2-armbru@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Subject: Re: [PATCH v5 10/11] hw/riscv/boot.c: consolidate all kernel init in
- riscv_load_kernel()
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
-References: <20230102115241.25733-1-dbarboza@ventanamicro.com>
- <20230102115241.25733-11-dbarboza@ventanamicro.com>
- <CAKmqyKPri7asvqZ8wN4Bd-wjH+gwwMJJhiUd+=QZFV4RhWnyUQ@mail.gmail.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAKmqyKPri7asvqZ8wN4Bd-wjH+gwwMJJhiUd+=QZFV4RhWnyUQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32e.google.com
+In-Reply-To: <20230112115005.1504812-2-armbru@redhat.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,96 +95,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2023 13:24:41 -0000
+X-List-Received-Date: Thu, 12 Jan 2023 13:51:56 -0000
+
+On Thu, Jan 12, 2023 at 12:50:05PM +0100, Markus Armbruster wrote:
+> docs/devel/style.rst mandates:
+> 
+>     The "qemu/osdep.h" header contains preprocessor macros that affect
+>     the behavior of core system headers like <stdint.h>.  It must be
+>     the first include so that core system headers included by external
+>     libraries get the preprocessor macros that QEMU depends on.
+> 
+>     Do not include "qemu/osdep.h" from header files since the .c file
+>     will have already included it.
+> 
+> A few violations have crept in.  Fix them.
+> 
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> Reviewed-by: Taylor Simpson <tsimpson@quicinc.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+With my awesome grep skillz I found one more:
+$ grep -r --include='*.h' qemu/osdep.h
+include/block/graph-lock.h:#include "qemu/osdep.h"
+
+Looks like all C files must include qemu/osdep.h, no?
+How about
+
+1- add -include qemu/osdep.h on compile command line
+   drop #include "qemu/osdep.h" from C files
+2- drop double include guards, replace with a warning.
+
+following patch implements part 2:
 
 
+qemu/osdep: don't include it from headers
 
-On 1/11/23 21:34, Alistair Francis wrote:
-> On Mon, Jan 2, 2023 at 9:55 PM Daniel Henrique Barboza
-> <dbarboza@ventanamicro.com> wrote:
->> The microchip_icicle_kit, sifive_u, spike and virt boards are now doing
->> the same steps when '-kernel' is used:
->>
->> - execute load_kernel()
->> - load init_rd()
->> - write kernel_cmdline
->>
->> Let's fold everything inside riscv_load_kernel() to avoid code
->> repetition. To not change the behavior of boards that aren't calling
->> riscv_load_init(), add an 'load_initrd' flag to riscv_load_kernel() and
->> allow these boards to opt out from initrd loading.
->>
->> Cc: Palmer Dabbelt <palmer@dabbelt.com>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>   hw/riscv/boot.c            | 22 +++++++++++++++++++---
->>   hw/riscv/microchip_pfsoc.c | 12 ++----------
->>   hw/riscv/opentitan.c       |  2 +-
->>   hw/riscv/sifive_e.c        |  3 ++-
->>   hw/riscv/sifive_u.c        | 12 ++----------
->>   hw/riscv/spike.c           | 11 +----------
->>   hw/riscv/virt.c            | 12 ++----------
->>   include/hw/riscv/boot.h    |  1 +
->>   8 files changed, 30 insertions(+), 45 deletions(-)
->>
->> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
->> index 2594276223..4888d5c1e0 100644
->> --- a/hw/riscv/boot.c
->> +++ b/hw/riscv/boot.c
->> @@ -175,10 +175,12 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
->>
->>   target_ulong riscv_load_kernel(MachineState *machine,
->>                                  target_ulong kernel_start_addr,
->> +                               bool load_initrd,
->>                                  symbol_fn_t sym_cb)
->>   {
->>       const char *kernel_filename = machine->kernel_filename;
->>       uint64_t kernel_load_base, kernel_entry;
->> +    void *fdt = machine->fdt;
->>
->>       g_assert(kernel_filename != NULL);
->>
->> @@ -192,21 +194,35 @@ target_ulong riscv_load_kernel(MachineState *machine,
->>       if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
->>                            NULL, &kernel_load_base, NULL, NULL, 0,
->>                            EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
->> -        return kernel_load_base;
->> +        kernel_entry = kernel_load_base;
-> This breaks 32-bit Xvisor loading. It seems that for the 32-bit guest
-> we get a value of 0xffffffff80000000.
->
-> Previously the top bits would be lost as we return a target_ulong from
-> this function, but with this change we pass the value
-> 0xffffffff80000000 to riscv_load_initrd() which causes failures.
->
-> This diff fixes the failure for me
->
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index 4888d5c1e0..f08ed44b97 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -194,7 +194,7 @@ target_ulong riscv_load_kernel(MachineState *machine,
->      if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
->                           NULL, &kernel_load_base, NULL, NULL, 0,
->                           EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
-> -        kernel_entry = kernel_load_base;
-> +        kernel_entry = (target_ulong) kernel_load_base;
->          goto out;
->      }
->
->
-> but I don't think that's the right fix. We should instead look at the
-> CPU XLEN and drop the high bits if required.
->
-> I'm going to drop this patch, do you mind looking into a proper fix?
+doing so will lead to trouble eventually - instead of
+working around such cases make it more likely it will fail.
 
-Thanks for looking this up!
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 
-I 'll fix it and resend patches 10 and 11.
+---
 
-Daniel
-
->
-> Alistair
+diff --git a/include/qemu/osdep.h b/include/qemu/osdep.h
+index 7d059ad526..e4a60f911c 100644
+--- a/include/qemu/osdep.h
++++ b/include/qemu/osdep.h
+@@ -24,7 +24,12 @@
+  * This work is licensed under the terms of the GNU GPL, version 2 or later.
+  * See the COPYING file in the top-level directory.
+  */
+-#ifndef QEMU_OSDEP_H
++#ifdef QEMU_OSDEP_H
++#warning "Never include qemu/osdep.h from a header!"
++#endif
++
++static inline void qemu_osdep_never_include_from_header(void) {}
++
+ #define QEMU_OSDEP_H
+ 
+ #include "config-host.h"
+@@ -714,5 +719,3 @@ static inline int platform_does_not_support_system(const char *command)
+ #ifdef __cplusplus
+ }
+ #endif
+-
+-#endif
 
 
