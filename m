@@ -1,86 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pGHcb-0000Oq-At
-	for mharc-qemu-riscv@gnu.org; Fri, 13 Jan 2023 05:49:17 -0500
+	id 1pGJcL-0008AO-2W
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Jan 2023 07:57:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pGHcY-0000O4-Qt
- for qemu-riscv@nongnu.org; Fri, 13 Jan 2023 05:49:15 -0500
-Received: from mail-oa1-x2e.google.com ([2001:4860:4864:20::2e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pGHcX-0001i8-8Z
- for qemu-riscv@nongnu.org; Fri, 13 Jan 2023 05:49:14 -0500
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-15085b8a2f7so21867106fac.2
- for <qemu-riscv@nongnu.org>; Fri, 13 Jan 2023 02:49:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=GIR69OdksPcShxPKRwSewNUIoa5M9oLbEl3ywObkHpk=;
- b=FWVKdyBcygL18/IcM8KsDCJtGzywEoJmsvW6MMB114EUFYSrAlqGrwpVIuE9+eWks5
- vBsne6jdHcBa3oTU3rHjHZ4JhtriolAdBTBSxWtHi3Os03JsMjvQs8/xRY4ASol4Amst
- dWRJEj8KAGAvUeScU/1ph/EMxEcdPaDo1+RJ91c0LSvOVXpy+etHDke/NifGmsRIwT+7
- fv7RJ00Zj2wHZMWXAhINiJUNAyo/Tjip7yWgRRgWg81Oyy4waNkey2YeYYczl9WWr94G
- H0r1LaP0koPTABGWQhJZpYJmTWEmhj+uGLWUS6IZDTZ+2LRTb5irWJhRq/Z9T/oa4PEb
- /ZXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GIR69OdksPcShxPKRwSewNUIoa5M9oLbEl3ywObkHpk=;
- b=PiDCn78i+ZTV23Yxd+3xfdV3hDILAzCwWQjHlWiZrnL2FK2E4ZMCgP3oVJKa2tIrMy
- Wy+i3FLvCs1A/BSKWKnR6XhUv+fSWELxSnC8rZwWTYmmyf23iV/pxeq63uWWHg4RTLgx
- 6smzMaNeChDYlyhMRZgTGq+9NiijnEfwen8MQWhU4yM6vlSHF4uG6rBCj759dGF1Y/Vz
- MysSQ9+9iFmtCnicFcOCVTm9YNusceSW33pX1LoAKSPCMTSuFM3w02GTGIIlZOMQeep4
- CpX0JLFEZlNqpYayDZ+VQhGZ6fXao1mPkN0GdyF2HbM421LYqqErUhTiDodYji6M5jSC
- 4qhQ==
-X-Gm-Message-State: AFqh2krbP/VGsXMLVP0SYgjyoCVkmeH+VtEfBg8Yru2UIMK6ZDQFalzh
- sPLNfcEYhnNF/PatiCfYS3FErQ==
-X-Google-Smtp-Source: AMrXdXu8HC0GzW6FdgmyQ9TilLdQZ290QNWlGUxUP/7biuBpnm6qfzeIJnLzSh0zoWenZLK0zQ8RZw==
-X-Received: by 2002:a05:6870:34d:b0:14c:67de:47c0 with SMTP id
- n13-20020a056870034d00b0014c67de47c0mr5952710oaf.55.1673606951579; 
- Fri, 13 Jan 2023 02:49:11 -0800 (PST)
-Received: from [192.168.68.107] ([191.17.222.2])
- by smtp.gmail.com with ESMTPSA id
- k12-20020a056870818c00b0013b0b19100fsm10458111oae.32.2023.01.13.02.49.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Jan 2023 02:49:10 -0800 (PST)
-Message-ID: <e69efcbd-d4e7-9e72-cb38-ba872ab621ab@ventanamicro.com>
-Date: Fri, 13 Jan 2023 07:49:07 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Subject: Re: [PATCH v5 10/11] hw/riscv/boot.c: consolidate all kernel init in
- riscv_load_kernel()
-Content-Language: en-US
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>) id 1pGJcJ-0008AD-Ct
+ for qemu-riscv@nongnu.org; Fri, 13 Jan 2023 07:57:07 -0500
+Received: from dfw.source.kernel.org ([139.178.84.217])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>) id 1pGJcH-000227-Az
+ for qemu-riscv@nongnu.org; Fri, 13 Jan 2023 07:57:07 -0500
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E77D861A69;
+ Fri, 13 Jan 2023 12:57:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 867CCC433D2;
+ Fri, 13 Jan 2023 12:57:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1673614623;
+ bh=wCJ/S3iFoqSUJG0SoJig84YphylbsgMs7DTrMA8CTbY=;
+ h=Date:From:To:CC:Subject:In-Reply-To:References:From;
+ b=aQPq123Xbu70FmbdC7YjooRaqp/EVph+d8yQZmS/7gxeLEEf3tIyyx6n17q9cPAU+
+ M1ZXW7zdvdHj9fsy1EJ01IlQnm8a1gI+xKnwqU6ko41SLKISEba2dQECmJmkvhBQVX
+ ihZTiFoh1EBclRknRPylcV8d8VLg9chju6rjHbVOeMm5iOoRRjTW/laL5MpWjZUXas
+ jxMSRJyZK/5CjS7Y1zDUcPChhQdDBCttOWZ4RKBPr2AF86kH/6ruzD2nO6r+k9E88o
+ cwSQmzrHpm8DicKoENQBPGksQZ3ARdDGVWkgXutJuY6gwCnLwjlcIOfEMxX7ViSJjs
+ evAwBvomE3O/A==
+Date: Fri, 13 Jan 2023 12:56:57 +0000
+From: Conor Dooley <conor@kernel.org>
 To: Bin Meng <bmeng.cn@gmail.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- Alistair Francis <alistair23@gmail.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
-References: <20230102115241.25733-1-dbarboza@ventanamicro.com>
- <20230102115241.25733-11-dbarboza@ventanamicro.com>
- <CAKmqyKPri7asvqZ8wN4Bd-wjH+gwwMJJhiUd+=QZFV4RhWnyUQ@mail.gmail.com>
- <b5cab84f-4bb9-694b-80e9-0b5aeac9de6c@linaro.org>
- <0ba72b27-0c3d-2d3d-adec-899717f40594@ventanamicro.com>
- <CAEUhbmV0KKKxOWDqNxiNz0ohR_EPPU_q+uMoukCA=UznZRFrvA@mail.gmail.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAEUhbmV0KKKxOWDqNxiNz0ohR_EPPU_q+uMoukCA=UznZRFrvA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+CC: stage TC <stagethalescristal@gmail.com>, qemu-riscv@nongnu.org
+Subject: Re: qemu icicle kit es
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAEUhbmUa0kCssKBxmkt5qvH5oQmjrbDk_LBb4S2acfGLmzUh5g@mail.gmail.com>
+References: <CAJWvPnt95pOb6-QFxrHMH7NNrtxNHKRLjhVoz5A+BZ2Er-joKQ@mail.gmail.com>
+ <Y77mjzm4u1V9JXKO@spud>
+ <CAJWvPnst42_HH9VN_BvoFXcSjg_z2Nqm-NN-3A3dgQCMy_iDtA@mail.gmail.com>
+ <Y8BLZLw6gP4hUpyy@spud>
+ <CAEUhbmUa0kCssKBxmkt5qvH5oQmjrbDk_LBb4S2acfGLmzUh5g@mail.gmail.com>
+Message-ID: <2882065D-831B-4E8C-BFD3-677BB8ECA2AD@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=139.178.84.217; envelope-from=conor@kernel.org;
+ helo=dfw.source.kernel.org
+X-Spam_score_int: -70
+X-Spam_score: -7.1
+X-Spam_bar: -------
+X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,88 +64,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jan 2023 10:49:15 -0000
+X-List-Received-Date: Fri, 13 Jan 2023 12:57:07 -0000
 
 
 
-On 1/13/23 07:30, Bin Meng wrote:
-> On Fri, Jan 13, 2023 at 6:23 PM Daniel Henrique Barboza
-> <dbarboza@ventanamicro.com> wrote:
+On 13 January 2023 00:35:11 GMT, Bin Meng <bmeng=2Ecn@gmail=2Ecom> wrote:
+>On Fri, Jan 13, 2023 at 2:03 AM Conor Dooley <conor@kernel=2Eorg> wrote:
 >>
+>> +CC Bin Meng
 >>
->> On 1/13/23 04:16, Philippe Mathieu-Daudé wrote:
->>> On 12/1/23 01:34, Alistair Francis wrote:
->>>> On Mon, Jan 2, 2023 at 9:55 PM Daniel Henrique Barboza
->>>> <dbarboza@ventanamicro.com> wrote:
->>>>> The microchip_icicle_kit, sifive_u, spike and virt boards are now doing
->>>>> the same steps when '-kernel' is used:
->>>>>
->>>>> - execute load_kernel()
->>>>> - load init_rd()
->>>>> - write kernel_cmdline
->>>>>
->>>>> Let's fold everything inside riscv_load_kernel() to avoid code
->>>>> repetition. To not change the behavior of boards that aren't calling
->>>>> riscv_load_init(), add an 'load_initrd' flag to riscv_load_kernel() and
->>>>> allow these boards to opt out from initrd loading.
->>>>>
->>>>> Cc: Palmer Dabbelt <palmer@dabbelt.com>
->>>>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>>>> ---
->>>>>    hw/riscv/boot.c            | 22 +++++++++++++++++++---
->>>>>    hw/riscv/microchip_pfsoc.c | 12 ++----------
->>>>>    hw/riscv/opentitan.c       |  2 +-
->>>>>    hw/riscv/sifive_e.c        |  3 ++-
->>>>>    hw/riscv/sifive_u.c        | 12 ++----------
->>>>>    hw/riscv/spike.c           | 11 +----------
->>>>>    hw/riscv/virt.c            | 12 ++----------
->>>>>    include/hw/riscv/boot.h    |  1 +
->>>>>    8 files changed, 30 insertions(+), 45 deletions(-)
->>>>> @@ -192,21 +194,35 @@ target_ulong riscv_load_kernel(MachineState *machine,
->>>>>        if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
->>>>>                             NULL, &kernel_load_base, NULL, NULL, 0,
->>>>>                             EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
->>>>> -        return kernel_load_base;
->>>>> +        kernel_entry = kernel_load_base;
->>>> This breaks 32-bit Xvisor loading. It seems that for the 32-bit guest
->>>> we get a value of 0xffffffff80000000.
->>>>
->>>> Previously the top bits would be lost as we return a target_ulong from
->>>> this function, but with this change we pass the value
->>>> 0xffffffff80000000 to riscv_load_initrd() which causes failures.
->>>>
->>>> This diff fixes the failure for me
->>>>
->>>> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
->>>> index 4888d5c1e0..f08ed44b97 100644
->>>> --- a/hw/riscv/boot.c
->>>> +++ b/hw/riscv/boot.c
->>>> @@ -194,7 +194,7 @@ target_ulong riscv_load_kernel(MachineState *machine,
->>>>       if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
->>>>                            NULL, &kernel_load_base, NULL, NULL, 0,
->>>>                            EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
->>>> -        kernel_entry = kernel_load_base;
->>>> +        kernel_entry = (target_ulong) kernel_load_base;
->>>>           goto out;
->>>>       }
->>>>
->>>>
->>>> but I don't think that's the right fix. We should instead look at the
->>>> CPU XLEN and drop the high bits if required.
->>> Ah, that is what should be done in load_elf_ram_sym()'s missing
->>> translate_fn() handler.
->> Interesting. I'll try it again and re-send.
->>
-> If that fixes the problem, it should be a separate patch.
 
-Fair enough. I'll keep this patch as is and fix it in a separated patch.
-
-Daniel
-
+>> Bin Meng, you're listed as a supporter (in master anyway) but is that
+>> still accurate? I figure there's a good chance it isn't anymore?
+>> Have you tested the platform from HSS init at all lately?
 >
-> I still don't understand why 32-bit xvisor image has a 64-bit address encoded?
->
-> Regards,
-> Bin
+>Yes, I am still maintaining the QEMU PolarFire SoC=2E The WiKi page
+>listed the exact HSS version I tested and if it doesn't, it should be
+>a regression in QEMU=2E If yes, I would like to have a look at that=2E
+
+That'd be great=2E
+I submitted a few patches for fixing the direct kernel boot & hopefully ha=
+ven't broken anything!
+I'll try to test it also, if I get some time=2E
+
+>Running more recent HSS is known to break, because QEMU does not
+>follow up quite closely with the HSS implementation as HSS has evolved
+>quite quickly in the past=2E
+
+Yeah, although the rate of change has slowed down now=2E
+I think there's a decent but of emulation missing though to get a recent v=
+ersion of the HSS working=2E
+
+Thanks,
+Conor=2E
+
 
 
