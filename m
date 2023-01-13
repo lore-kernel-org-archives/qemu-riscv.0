@@ -1,66 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pGOEb-0001HP-5Z
+	id 1pGOEb-0001I7-Ay
 	for mharc-qemu-riscv@gnu.org; Fri, 13 Jan 2023 12:52:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pGOEN-000105-MC
- for qemu-riscv@nongnu.org; Fri, 13 Jan 2023 12:52:43 -0500
-Received: from mail-oi1-x22a.google.com ([2607:f8b0:4864:20::22a])
+ id 1pGOEQ-000140-21
+ for qemu-riscv@nongnu.org; Fri, 13 Jan 2023 12:52:47 -0500
+Received: from mail-oi1-x22d.google.com ([2607:f8b0:4864:20::22d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pGOEK-0001YB-PP
- for qemu-riscv@nongnu.org; Fri, 13 Jan 2023 12:52:43 -0500
-Received: by mail-oi1-x22a.google.com with SMTP id r9so7503816oie.13
- for <qemu-riscv@nongnu.org>; Fri, 13 Jan 2023 09:52:40 -0800 (PST)
+ id 1pGOEN-0001Yt-JZ
+ for qemu-riscv@nongnu.org; Fri, 13 Jan 2023 12:52:45 -0500
+Received: by mail-oi1-x22d.google.com with SMTP id j130so18266816oif.4
+ for <qemu-riscv@nongnu.org>; Fri, 13 Jan 2023 09:52:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DOI8/iNH0q6l/+yMdTICroh3zdczF3J2qooInPAT9oE=;
- b=RVBiQun9XRl8KInbmhhawpk6XxxloM0jX+ADLqXprtKLR0Ih7x0dkeRU2B9BRHmvXr
- wDrS8gBiLOBkbiXnXoqZoTeSeW+cPxchsT8LgaWwMte274DKv7NFBBadIB9IEyPK+2+j
- Zj3xi/3p20H/93sIhLBht7CiBNLG3u8+WIjPbPRsCg3ZVDHLB4oQnuVQiBYhRMLvTa9k
- oSm2tmMeGh4kOpAAQc48R/zo8lc0kBoqByqqhyicoP6StyxShiqAv4qtAF/otYtj9q86
- ptSy2DzIOnPo2v25ZoOCB2EtN1AeUUFzrmaBlYSPkPQKFY3n0/4t1VNJDlhDyigLnKTv
- zg8Q==
+ bh=+M3ohrTeofqSkxQ7pQ8d32nm7gQpOvTOJJgz+5YPODI=;
+ b=I3Bqn2WaKfFzvTGHB1XDo+/dS7wrPeIblMrVgn7Ot7asibUjWTd07osgrAAD9XDaWS
+ H0fbwOOd8sXVAiBdZRAmboUXZ7UnKwNgoN6Ypi0+zSZ/NkfCLiSAd+SarTRljGdwDupD
+ xlBSbyALyUaygBe5TmNYZg9rGH3r6K45Dmp9p8usDPwZxC9hA3qhllfUQOUKqh6dZkdM
+ ocbwVIBDM43qxVYy3Q0B+2Oww9wXopQg5ncTjEzJFGR+UYeM4M1SXDcqE2rYH9bjM5Iq
+ oH+EoBQkyDfP5Ev94qDa5MScn5KEmBPy85QwTy/LjzI1IxJT6590E+oEPBLdMT7ldgZS
+ P7aQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DOI8/iNH0q6l/+yMdTICroh3zdczF3J2qooInPAT9oE=;
- b=ga+rCuz4W2VDOogUyZQFSjPAnnzsAx6C9pD5iSsj16/icHcAWfVAkRZqPd/5YICeDy
- GKRNfNzwXj5vL7YzhybyfFYEJ6BBbimXBeyvwMhQBHxhBrl61N0Z2q2Z16Hc2xv07EPo
- ppPesyOvbP6ybHIRqzcR/xpPxrdWwYIm6sZZqDwYCZ35oYA/mwApM8H3ylrG98qFB+aw
- 148kaodqdv1T6NydUXylSu6zY0VIZs0LhULiTcHG56SjtmQUAWlqE4kB0nFTFnZETlDB
- RoGql514dfMFwneyHkDSH/GfXFh+qVhzpTglYKnmwA13Wgiy5jYjRJZT3jC28Ukvau/I
- /lHQ==
-X-Gm-Message-State: AFqh2krCcEeI+/MeXPNsuAw/42nMKVMYZsNRTEvpmoR336f0cZEzcMLS
- 3OpZIuNtYcjUdDPo9tPkK8YroQ==
-X-Google-Smtp-Source: AMrXdXs6o9QIBwQamHhUW5EiVMXRubpJdXKLlkWI2pkOP4cu61snHCusURQIa0jtCdPFh5aA3zFXcA==
-X-Received: by 2002:a05:6808:238f:b0:360:d951:28bf with SMTP id
- bp15-20020a056808238f00b00360d95128bfmr7025696oib.19.1673632359407; 
- Fri, 13 Jan 2023 09:52:39 -0800 (PST)
+ bh=+M3ohrTeofqSkxQ7pQ8d32nm7gQpOvTOJJgz+5YPODI=;
+ b=I8d6XA6A+iwFRG2pV5mCfnAMnk+4HPQLdr7eS5IChBiWr0ySXDXu5CaV7DQl/Rc8Ke
+ iKrKDqVFRmE/RMAhTdGx0MlUTQCBBmJVIqunT2OYTYRLGMwWcieiPKX1vMSGPtieK8hD
+ 9gESPxsOckOiAFiDE34R67Q7BOmfy7zb168Zjk7u5+vkpaAmfbgdt0Azi64if4VPF1Ze
+ 4jeBRRKEq0VXkhjh4g1a4u/VuoZN/kM1DZJ3EDem3Xq/saURg5eeR24rte+W54fpQiNm
+ A3L1tQl8Gsi0GZEfVTh/QAkmN44bYIo/i7nzUFgQiHRHLYEs+tiBh7TpMO+3fn3M1guj
+ sCVg==
+X-Gm-Message-State: AFqh2kqg/+VquSf2TYQok+LUJNA21xqzydL+zI8YikJuyZyNRYyRpE6/
+ r4QAYgGnKJo6IQ8SZvlpg8o9Bg==
+X-Google-Smtp-Source: AMrXdXtKIeD/7iP4Pt8RPrlRQs3ONt642d3Zw3NxvfGwr+L25uqxIN3S4IzaiuV+x+x/hbmGEuYJgg==
+X-Received: by 2002:aca:ba08:0:b0:363:b22:6532 with SMTP id
+ k8-20020acaba08000000b003630b226532mr33463790oif.7.1673632362225; 
+ Fri, 13 Jan 2023 09:52:42 -0800 (PST)
 Received: from grind.. ([191.17.222.2]) by smtp.gmail.com with ESMTPSA id
- 2-20020aca0702000000b00363ea5be014sm9549276oih.3.2023.01.13.09.52.36
+ 2-20020aca0702000000b00363ea5be014sm9549276oih.3.2023.01.13.09.52.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jan 2023 09:52:38 -0800 (PST)
+ Fri, 13 Jan 2023 09:52:41 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng.cn@gmail.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 1/2] target/riscv/cpu: set cpu->cfg in register_cpu_props()
-Date: Fri, 13 Jan 2023 14:52:29 -0300
-Message-Id: <20230113175230.473975-2-dbarboza@ventanamicro.com>
+Subject: [PATCH v2 2/2] target/riscv/cpu.c: do not skip misa logic in
+ riscv_cpu_realize()
+Date: Fri, 13 Jan 2023 14:52:30 -0300
+Message-Id: <20230113175230.473975-3-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230113175230.473975-1-dbarboza@ventanamicro.com>
 References: <20230113175230.473975-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -80,162 +81,450 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jan 2023 17:52:46 -0000
+X-List-Received-Date: Fri, 13 Jan 2023 17:52:51 -0000
 
-There is an informal contract between the cpu_init() functions and
-riscv_cpu_realize(): if cpu->env.misa_ext is zero, assume that the
-default settings were loaded via register_cpu_props() and do validations
-to set env.misa_ext. If it's not zero, skip this whole process and
-assume that the board somehow did everything.
+All RISCV CPUs are setting cpu->cfg during their cpu_init() functions,
+meaning that there's no reason to skip all the misa validation and setup
+if misa_ext was set beforehand - especially since we're setting an
+updated value in set_misa() in the end.
 
-At this moment, all SiFive CPUs are setting a non-zero misa_ext during
-their cpu_init() and skipping a good chunk of riscv_cpu_realize().  This
-causes problems when the code being skipped in riscv_cpu_realize()
-contains fixes or assumptions that affects all CPUs, meaning that SiFive
-CPUs are missing out.
+Put this code chunk into a new riscv_cpu_validate_set_extensions()
+helper and always execute it regardless of what the board set in
+env->misa_ext.
 
-To allow this code to not be skipped anymore, all the cpu->cfg.ext_*
-attributes needs to be set during cpu_init() time. At this moment this
-is being done in register_cpu_props(). The SiFive boards are setting
-their own extensions during cpu_init() though, meaning that they don't
-want all the defaults from register_cpu_props().
-
-Let's move the contract between *_cpu_init() and riscv_cpu_realize() to
-register_cpu_props(). Inside this function we'll check if
-cpu->env.misa_ext was set and, if that's the case, set all relevant
-cpu->cfg.ext_* attributes, and only that. Leave the 'misa_ext' = 0 case
-as is today, i.e. loading all the defaults from riscv_cpu_extensions[].
-
-register_cpu_props() can then be called by all the cpu_init() functions,
-including the SiFive ones. This will make all CPUs behave more in line
-with what riscv_cpu_realize() expects.
-
-This will also make the cpu_init() functions even more alike, but at this
-moment we would need some design changes in how we're initializing
-extensions/attributes (e.g. some CPUs are setting cfg options after
-register_cpu_props(), so we can't simply add the function to a common
-post_init() hook)  to make a common cpu_init() code across all CPUs.
+This will put more responsibility in how each board is going to init
+their attributes and extensions if they're not using the defaults.
+It'll also allow realize() to do its job looking only at the extensions
+enabled per se, not corner cases that some CPUs might have, and we won't
+have to change multiple code paths to fix or change how extensions work.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+[ Changes by AF:
+ - Rebase
+]
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 40 ++++++++++++++++++++++++++++++++++++++++
- target/riscv/cpu.h |  4 ++++
- 2 files changed, 44 insertions(+)
+ target/riscv/cpu.c | 399 +++++++++++++++++++++++----------------------
+ 1 file changed, 205 insertions(+), 194 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a2e6238bd7..e682102c2a 100644
+index e682102c2a..c192d96a94 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -256,6 +256,7 @@ static void rv64_sifive_u_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-     set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-+    register_cpu_props(DEVICE(obj));
-     set_priv_version(env, PRIV_VERSION_1_10_0);
+@@ -625,6 +625,207 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
+     }
  }
- 
-@@ -265,6 +266,7 @@ static void rv64_sifive_e_cpu_init(Object *obj)
-     RISCVCPU *cpu = RISCV_CPU(obj);
- 
-     set_misa(env, MXL_RV64, RVI | RVM | RVA | RVC | RVU);
-+    register_cpu_props(DEVICE(obj));
-     set_priv_version(env, PRIV_VERSION_1_10_0);
-     cpu->cfg.mmu = false;
- }
-@@ -299,6 +301,7 @@ static void rv32_sifive_u_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-+    register_cpu_props(DEVICE(obj));
-     set_priv_version(env, PRIV_VERSION_1_10_0);
- }
- 
-@@ -308,6 +311,7 @@ static void rv32_sifive_e_cpu_init(Object *obj)
-     RISCVCPU *cpu = RISCV_CPU(obj);
- 
-     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVC | RVU);
-+    register_cpu_props(DEVICE(obj));
-     set_priv_version(env, PRIV_VERSION_1_10_0);
-     cpu->cfg.mmu = false;
- }
-@@ -318,6 +322,7 @@ static void rv32_ibex_cpu_init(Object *obj)
-     RISCVCPU *cpu = RISCV_CPU(obj);
- 
-     set_misa(env, MXL_RV32, RVI | RVM | RVC | RVU);
-+    register_cpu_props(DEVICE(obj));
-     set_priv_version(env, PRIV_VERSION_1_11_0);
-     cpu->cfg.mmu = false;
-     cpu->cfg.epmp = true;
-@@ -329,6 +334,7 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
-     RISCVCPU *cpu = RISCV_CPU(obj);
- 
-     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
-+    register_cpu_props(DEVICE(obj));
-     set_priv_version(env, PRIV_VERSION_1_10_0);
-     cpu->cfg.mmu = false;
- }
-@@ -1083,10 +1089,44 @@ static Property riscv_cpu_extensions[] = {
-     DEFINE_PROP_END_OF_LIST(),
- };
  
 +/*
-+ * Register CPU props based on env.misa_ext. If a non-zero
-+ * value was set, register only the required cpu->cfg.ext_*
-+ * properties and leave. env.misa_ext = 0 means that we want
-+ * all the default properties to be registered.
++ * Check consistency between chosen extensions while setting
++ * cpu->cfg accordingly, doing a set_misa() in the end.
 + */
- static void register_cpu_props(DeviceState *dev)
- {
-+    RISCVCPU *cpu = RISCV_CPU(OBJECT(dev));
-+    uint32_t misa_ext = cpu->env.misa_ext;
-     Property *prop;
- 
-+    /*
-+     * If misa_ext is not zero, set cfg properties now to
-+     * allow them to be read during riscv_cpu_realize()
-+     * later on.
-+     */
-+    if (cpu->env.misa_ext != 0) {
-+        cpu->cfg.ext_i = misa_ext & RVI;
-+        cpu->cfg.ext_e = misa_ext & RVE;
-+        cpu->cfg.ext_m = misa_ext & RVM;
-+        cpu->cfg.ext_a = misa_ext & RVA;
-+        cpu->cfg.ext_f = misa_ext & RVF;
-+        cpu->cfg.ext_d = misa_ext & RVD;
-+        cpu->cfg.ext_v = misa_ext & RVV;
-+        cpu->cfg.ext_c = misa_ext & RVC;
-+        cpu->cfg.ext_s = misa_ext & RVS;
-+        cpu->cfg.ext_u = misa_ext & RVU;
-+        cpu->cfg.ext_h = misa_ext & RVH;
-+        cpu->cfg.ext_j = misa_ext & RVJ;
++static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
++{
++    CPURISCVState *env = &cpu->env;
++    uint32_t ext = 0;
 +
-+        /*
-+         * We don't want to set the default riscv_cpu_extensions
-+         * in this case.
-+         */
++    /* Do some ISA extension error checking */
++    if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
++                            cpu->cfg.ext_a && cpu->cfg.ext_f &&
++                            cpu->cfg.ext_d &&
++                            cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
++        warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
++        cpu->cfg.ext_i = true;
++        cpu->cfg.ext_m = true;
++        cpu->cfg.ext_a = true;
++        cpu->cfg.ext_f = true;
++        cpu->cfg.ext_d = true;
++        cpu->cfg.ext_icsr = true;
++        cpu->cfg.ext_ifencei = true;
++    }
++
++    if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
++        error_setg(errp,
++                   "I and E extensions are incompatible");
 +        return;
 +    }
 +
-     for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
-         qdev_property_add_static(dev, prop);
++    if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
++        error_setg(errp,
++                   "Either I or E extension must be set");
++        return;
++    }
++
++    if (cpu->cfg.ext_s && !cpu->cfg.ext_u) {
++        error_setg(errp,
++                   "Setting S extension without U extension is illegal");
++        return;
++    }
++
++    if (cpu->cfg.ext_h && !cpu->cfg.ext_i) {
++        error_setg(errp,
++                   "H depends on an I base integer ISA with 32 x registers");
++        return;
++    }
++
++    if (cpu->cfg.ext_h && !cpu->cfg.ext_s) {
++        error_setg(errp, "H extension implicitly requires S-mode");
++        return;
++    }
++
++    if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
++        error_setg(errp, "F extension requires Zicsr");
++        return;
++    }
++
++    if ((cpu->cfg.ext_zawrs) && !cpu->cfg.ext_a) {
++        error_setg(errp, "Zawrs extension requires A extension");
++        return;
++    }
++
++    if ((cpu->cfg.ext_zfh || cpu->cfg.ext_zfhmin) && !cpu->cfg.ext_f) {
++        error_setg(errp, "Zfh/Zfhmin extensions require F extension");
++        return;
++    }
++
++    if (cpu->cfg.ext_d && !cpu->cfg.ext_f) {
++        error_setg(errp, "D extension requires F extension");
++        return;
++    }
++
++    if (cpu->cfg.ext_v && !cpu->cfg.ext_d) {
++        error_setg(errp, "V extension requires D extension");
++        return;
++    }
++
++    if ((cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) && !cpu->cfg.ext_f) {
++        error_setg(errp, "Zve32f/Zve64f extensions require F extension");
++        return;
++    }
++
++    /* Set the ISA extensions, checks should have happened above */
++    if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
++        cpu->cfg.ext_zhinxmin) {
++        cpu->cfg.ext_zfinx = true;
++    }
++
++    if (cpu->cfg.ext_zfinx) {
++        if (!cpu->cfg.ext_icsr) {
++            error_setg(errp, "Zfinx extension requires Zicsr");
++            return;
++        }
++        if (cpu->cfg.ext_f) {
++            error_setg(errp,
++                "Zfinx cannot be supported together with F extension");
++            return;
++        }
++    }
++
++    if (cpu->cfg.ext_zk) {
++        cpu->cfg.ext_zkn = true;
++        cpu->cfg.ext_zkr = true;
++        cpu->cfg.ext_zkt = true;
++    }
++
++    if (cpu->cfg.ext_zkn) {
++        cpu->cfg.ext_zbkb = true;
++        cpu->cfg.ext_zbkc = true;
++        cpu->cfg.ext_zbkx = true;
++        cpu->cfg.ext_zkne = true;
++        cpu->cfg.ext_zknd = true;
++        cpu->cfg.ext_zknh = true;
++    }
++
++    if (cpu->cfg.ext_zks) {
++        cpu->cfg.ext_zbkb = true;
++        cpu->cfg.ext_zbkc = true;
++        cpu->cfg.ext_zbkx = true;
++        cpu->cfg.ext_zksed = true;
++        cpu->cfg.ext_zksh = true;
++    }
++
++    if (cpu->cfg.ext_i) {
++        ext |= RVI;
++    }
++    if (cpu->cfg.ext_e) {
++        ext |= RVE;
++    }
++    if (cpu->cfg.ext_m) {
++        ext |= RVM;
++    }
++    if (cpu->cfg.ext_a) {
++        ext |= RVA;
++    }
++    if (cpu->cfg.ext_f) {
++        ext |= RVF;
++    }
++    if (cpu->cfg.ext_d) {
++        ext |= RVD;
++    }
++    if (cpu->cfg.ext_c) {
++        ext |= RVC;
++    }
++    if (cpu->cfg.ext_s) {
++        ext |= RVS;
++    }
++    if (cpu->cfg.ext_u) {
++        ext |= RVU;
++    }
++    if (cpu->cfg.ext_h) {
++        ext |= RVH;
++    }
++    if (cpu->cfg.ext_v) {
++        int vext_version = VEXT_VERSION_1_00_0;
++        ext |= RVV;
++        if (!is_power_of_2(cpu->cfg.vlen)) {
++            error_setg(errp,
++                    "Vector extension VLEN must be power of 2");
++            return;
++        }
++        if (cpu->cfg.vlen > RV_VLEN_MAX || cpu->cfg.vlen < 128) {
++            error_setg(errp,
++                    "Vector extension implementation only supports VLEN "
++                    "in the range [128, %d]", RV_VLEN_MAX);
++            return;
++        }
++        if (!is_power_of_2(cpu->cfg.elen)) {
++            error_setg(errp,
++                    "Vector extension ELEN must be power of 2");
++            return;
++        }
++    if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
++        error_setg(errp,
++                "Vector extension implementation only supports ELEN "
++                "in the range [8, 64]");
++        return;
++    }
++    if (cpu->cfg.vext_spec) {
++        if (!g_strcmp0(cpu->cfg.vext_spec, "v1.0")) {
++            vext_version = VEXT_VERSION_1_00_0;
++        } else {
++            error_setg(errp,
++                   "Unsupported vector spec version '%s'",
++                   cpu->cfg.vext_spec);
++            return;
++        }
++    } else {
++        qemu_log("vector version is not specified, "
++                 "use the default value v1.0\n");
++    }
++    set_vext_version(env, vext_version);
++    }
++    if (cpu->cfg.ext_j) {
++        ext |= RVJ;
++    }
++
++    set_misa(env, env->misa_mxl, ext);
++}
++
+ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+ {
+     CPUState *cs = CPU(dev);
+@@ -720,200 +921,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
      }
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 61a9a40958..bcf0826753 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -63,6 +63,10 @@
+     assert(env->misa_mxl_max == env->misa_mxl);
  
- #define RV(x) ((target_ulong)1 << (x - 'A'))
+-    /* If only MISA_EXT is unset for misa, then set it from properties */
+-    if (env->misa_ext == 0) {
+-        uint32_t ext = 0;
+-
+-        /* Do some ISA extension error checking */
+-        if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
+-                                cpu->cfg.ext_a && cpu->cfg.ext_f &&
+-                                cpu->cfg.ext_d &&
+-                                cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
+-            warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
+-            cpu->cfg.ext_i = true;
+-            cpu->cfg.ext_m = true;
+-            cpu->cfg.ext_a = true;
+-            cpu->cfg.ext_f = true;
+-            cpu->cfg.ext_d = true;
+-            cpu->cfg.ext_icsr = true;
+-            cpu->cfg.ext_ifencei = true;
+-        }
+-
+-        if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
+-            error_setg(errp,
+-                       "I and E extensions are incompatible");
+-            return;
+-        }
+-
+-        if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
+-            error_setg(errp,
+-                       "Either I or E extension must be set");
+-            return;
+-        }
+-
+-        if (cpu->cfg.ext_s && !cpu->cfg.ext_u) {
+-            error_setg(errp,
+-                       "Setting S extension without U extension is illegal");
+-            return;
+-        }
+-
+-        if (cpu->cfg.ext_h && !cpu->cfg.ext_i) {
+-            error_setg(errp,
+-                       "H depends on an I base integer ISA with 32 x registers");
+-            return;
+-        }
+-
+-        if (cpu->cfg.ext_h && !cpu->cfg.ext_s) {
+-            error_setg(errp, "H extension implicitly requires S-mode");
+-            return;
+-        }
+-
+-        if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
+-            error_setg(errp, "F extension requires Zicsr");
+-            return;
+-        }
+-
+-        if ((cpu->cfg.ext_zawrs) && !cpu->cfg.ext_a) {
+-            error_setg(errp, "Zawrs extension requires A extension");
+-            return;
+-        }
+-
+-        if ((cpu->cfg.ext_zfh || cpu->cfg.ext_zfhmin) && !cpu->cfg.ext_f) {
+-            error_setg(errp, "Zfh/Zfhmin extensions require F extension");
+-            return;
+-        }
+-
+-        if (cpu->cfg.ext_d && !cpu->cfg.ext_f) {
+-            error_setg(errp, "D extension requires F extension");
+-            return;
+-        }
+-
+-        if (cpu->cfg.ext_v && !cpu->cfg.ext_d) {
+-            error_setg(errp, "V extension requires D extension");
+-            return;
+-        }
+-
+-        if ((cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) && !cpu->cfg.ext_f) {
+-            error_setg(errp, "Zve32f/Zve64f extensions require F extension");
+-            return;
+-        }
+-
+-        /* Set the ISA extensions, checks should have happened above */
+-        if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
+-            cpu->cfg.ext_zhinxmin) {
+-            cpu->cfg.ext_zfinx = true;
+-        }
+-
+-        if (cpu->cfg.ext_zfinx) {
+-            if (!cpu->cfg.ext_icsr) {
+-                error_setg(errp, "Zfinx extension requires Zicsr");
+-                return;
+-            }
+-            if (cpu->cfg.ext_f) {
+-                error_setg(errp,
+-                    "Zfinx cannot be supported together with F extension");
+-                return;
+-            }
+-        }
+-
+-        if (cpu->cfg.ext_zk) {
+-            cpu->cfg.ext_zkn = true;
+-            cpu->cfg.ext_zkr = true;
+-            cpu->cfg.ext_zkt = true;
+-        }
+-
+-        if (cpu->cfg.ext_zkn) {
+-            cpu->cfg.ext_zbkb = true;
+-            cpu->cfg.ext_zbkc = true;
+-            cpu->cfg.ext_zbkx = true;
+-            cpu->cfg.ext_zkne = true;
+-            cpu->cfg.ext_zknd = true;
+-            cpu->cfg.ext_zknh = true;
+-        }
+-
+-        if (cpu->cfg.ext_zks) {
+-            cpu->cfg.ext_zbkb = true;
+-            cpu->cfg.ext_zbkc = true;
+-            cpu->cfg.ext_zbkx = true;
+-            cpu->cfg.ext_zksed = true;
+-            cpu->cfg.ext_zksh = true;
+-        }
+-
+-        if (cpu->cfg.ext_i) {
+-            ext |= RVI;
+-        }
+-        if (cpu->cfg.ext_e) {
+-            ext |= RVE;
+-        }
+-        if (cpu->cfg.ext_m) {
+-            ext |= RVM;
+-        }
+-        if (cpu->cfg.ext_a) {
+-            ext |= RVA;
+-        }
+-        if (cpu->cfg.ext_f) {
+-            ext |= RVF;
+-        }
+-        if (cpu->cfg.ext_d) {
+-            ext |= RVD;
+-        }
+-        if (cpu->cfg.ext_c) {
+-            ext |= RVC;
+-        }
+-        if (cpu->cfg.ext_s) {
+-            ext |= RVS;
+-        }
+-        if (cpu->cfg.ext_u) {
+-            ext |= RVU;
+-        }
+-        if (cpu->cfg.ext_h) {
+-            ext |= RVH;
+-        }
+-        if (cpu->cfg.ext_v) {
+-            int vext_version = VEXT_VERSION_1_00_0;
+-            ext |= RVV;
+-            if (!is_power_of_2(cpu->cfg.vlen)) {
+-                error_setg(errp,
+-                        "Vector extension VLEN must be power of 2");
+-                return;
+-            }
+-            if (cpu->cfg.vlen > RV_VLEN_MAX || cpu->cfg.vlen < 128) {
+-                error_setg(errp,
+-                        "Vector extension implementation only supports VLEN "
+-                        "in the range [128, %d]", RV_VLEN_MAX);
+-                return;
+-            }
+-            if (!is_power_of_2(cpu->cfg.elen)) {
+-                error_setg(errp,
+-                        "Vector extension ELEN must be power of 2");
+-                return;
+-            }
+-            if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
+-                error_setg(errp,
+-                        "Vector extension implementation only supports ELEN "
+-                        "in the range [8, 64]");
+-                return;
+-            }
+-            if (cpu->cfg.vext_spec) {
+-                if (!g_strcmp0(cpu->cfg.vext_spec, "v1.0")) {
+-                    vext_version = VEXT_VERSION_1_00_0;
+-                } else {
+-                    error_setg(errp,
+-                           "Unsupported vector spec version '%s'",
+-                           cpu->cfg.vext_spec);
+-                    return;
+-                }
+-            } else {
+-                qemu_log("vector version is not specified, "
+-                         "use the default value v1.0\n");
+-            }
+-            set_vext_version(env, vext_version);
+-        }
+-        if (cpu->cfg.ext_j) {
+-            ext |= RVJ;
+-        }
+-
+-        set_misa(env, env->misa_mxl, ext);
++    riscv_cpu_validate_set_extensions(cpu, &local_err);
++    if (local_err != NULL) {
++        error_propagate(errp, local_err);
++        return;
+     }
  
-+/*
-+ * Consider updating register_cpu_props() when adding
-+ * new MISA bits here.
-+ */
- #define RVI RV('I')
- #define RVE RV('E') /* E and I are mutually exclusive */
- #define RVM RV('M')
+ #ifndef CONFIG_USER_ONLY
 -- 
 2.39.0
 
