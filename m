@@ -1,65 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pGNh3-0001Sv-PG
-	for mharc-qemu-riscv@gnu.org; Fri, 13 Jan 2023 12:18:18 -0500
+	id 1pGNhC-0001gN-Pa
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Jan 2023 12:18:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pGNgz-0001Qq-Sr
- for qemu-riscv@nongnu.org; Fri, 13 Jan 2023 12:18:15 -0500
-Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342])
+ id 1pGNh2-0001S7-7i
+ for qemu-riscv@nongnu.org; Fri, 13 Jan 2023 12:18:16 -0500
+Received: from mail-ot1-x335.google.com ([2607:f8b0:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pGNgx-0001JG-Nl
- for qemu-riscv@nongnu.org; Fri, 13 Jan 2023 12:18:13 -0500
-Received: by mail-ot1-x342.google.com with SMTP id
- f88-20020a9d03e1000000b00684c4041ff1so2874128otf.8
- for <qemu-riscv@nongnu.org>; Fri, 13 Jan 2023 09:18:11 -0800 (PST)
+ id 1pGNh0-0001Ju-4b
+ for qemu-riscv@nongnu.org; Fri, 13 Jan 2023 12:18:15 -0500
+Received: by mail-ot1-x335.google.com with SMTP id
+ v15-20020a9d69cf000000b006709b5a534aso12564167oto.11
+ for <qemu-riscv@nongnu.org>; Fri, 13 Jan 2023 09:18:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hJBrxLI6QmmeeITsOzUvZaX/VcVW/UkeGDy9RzOvnNw=;
- b=bi+he8/9ip9JE8Do8cE3WvPHlrPyDBRdi5m51xCgYTEA+EHeKD3bmlDRQRdd7E4Clr
- OofxQVk3yqV2DjPg4BIsqBMU++23/TJNvf8usEJdHcfa/5Fw0LqasV7HIVHnS/drt8LV
- WC5gaBm3Mr0AJ6IcMaRw9cCknkSd4ol8RzsWu6RU0HalWxhbn5E20cHKjthMz96tO0fv
- oVw/XJrOF/XgPDii1E5TIiSxAKbH5/EibId8aUQBuqvvAlKsCm1X5PZo+mw0+w4SmvoS
- lieCDqQKREoaQ6BcdywyUb7o2VcZG+QnO6tEkKnS1gzuYemSrg1OZrrvXQtips9aPk+B
- tvGA==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TC3+HEkqoyLKCQZFIMQ4soj6fRNa9o31XWX9UANzsT4=;
+ b=EY0xOLiCeIeVgYgy0ufpUrU1/thogjzve78OPTumIVxgL3mDwx2HtUODaZQu6wLDlX
+ pYPqnl/oiYBIPgAjCfxiOa9dRC/JBPVpsOsFzx7lmb/JPw5EbAvJM9Jlf7UroWpnppGs
+ lMZkZkjqTFf+FWoWmrzdyNVWRzDYJEiUFQm6gVW7Gti17tIP7cII7JpKv3CnfRsdEAts
+ 1uLTSD7M2R2GXJhVKckpGxLeAYBvmJwrZlClrEs3ooQe6mE8+R0CFFNZCWJo4HvKYLt2
+ wk6tk6z8mVyy+BTddiHAqdZRriDM5aZrw+j1dHbEvI+W7+iRSd5fcv5bWLOjQeOR6VJz
+ xZyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hJBrxLI6QmmeeITsOzUvZaX/VcVW/UkeGDy9RzOvnNw=;
- b=Ilf1BTK0ygK5CS6wZUFU7q8zVbq95zdsd/g8SWH4SdBIianzV3NQQS9e27Zk3gZtEa
- HYExTNAJ3+DazAq3BgHHZsUr3qLIlkIWfeKo0cIHtJH2J+/QuCOsecGfwOOIfWqP8jIU
- RC8xKXpwwaw+Nbg2cXNbONe2vKsF7+e4gurH5BeWqymXGErXUKHVeHxy5qYFJAMFjncd
- 0JvJqSWinQy5Qs6uCd5YFIfOdOe40kQk9UccAdqAkqTr4dzEmHr3bfkiFddrbO0i/DCq
- HGdT4UC+HYa2SPvPc2ECH4H1jtwOuUTTdJIfqs80Gsato8WntEPFEWRbD9KvjLK0xCnp
- yMYw==
-X-Gm-Message-State: AFqh2kpWVnpF1nV8026KHFAHDcCp6MpPTcq/3E1o9ocLV5ek+flO1r4h
- XmL8XKGpFHrMLWt5hYOF4Q0x8g==
-X-Google-Smtp-Source: AMrXdXtJk8eyNnj5qxKu3U5oACPJ+Vp67zXOx7zqHqf5goEV3gqJ4UBcpG+1/yVVart/iWYjfato8Q==
-X-Received: by 2002:a9d:6451:0:b0:684:c8ff:8844 with SMTP id
- m17-20020a9d6451000000b00684c8ff8844mr2588992otl.12.1673630290203; 
- Fri, 13 Jan 2023 09:18:10 -0800 (PST)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TC3+HEkqoyLKCQZFIMQ4soj6fRNa9o31XWX9UANzsT4=;
+ b=2xGVR3Qvv+y+dZ3fRNCbJThveI2i3rT8EJ4ubWwi7hx3XSkoX/9q+Dv2DHEM3K2NQ/
+ MK03H8C1gO1+m6JLl25SELRSONnJp/YehYrVjTSHTxuL4QwIDwUysHJF+i9YOVoAXiv3
+ Z8WSFipcKPtcV/R6xrkeIeXcrsIv2tf4L4lxtBbYP39bitcaXane86TBQgdQAh0bpdzv
+ d0vxPezF06Xx8EoQNEe4CBFqPDHdRsLFCgT/ZMUvF4rqUeaEtPlf9tNYrNdzDMEhm1/v
+ J2l8KAgIhFO7u4yr49tgoFQqTPQJiiipxUbRzN10JIS2iOll27Hb9K4voeaTUz6DigMU
+ 01iw==
+X-Gm-Message-State: AFqh2kowPFyAjuxvsmwoeMdFu7wz5k8YDbltI6Tx3WbcEHLSDH/jvc3R
+ h/e0MTvLhuuxTV6o1M2WeD4tnQ==
+X-Google-Smtp-Source: AMrXdXvKXwRgGqA7vqbL3Ku3IEWptW3M4EuOm72mO+oEHWtaAHN29zvS0FZsre+kuWTj1uvnx2/eYw==
+X-Received: by 2002:a9d:1ea:0:b0:684:b26e:84ba with SMTP id
+ e97-20020a9d01ea000000b00684b26e84bamr5675041ote.11.1673630292660; 
+ Fri, 13 Jan 2023 09:18:12 -0800 (PST)
 Received: from grind.. ([191.17.222.2]) by smtp.gmail.com with ESMTPSA id
- v25-20020a05683011d900b00683e4084740sm10695872otq.10.2023.01.13.09.18.08
+ v25-20020a05683011d900b00683e4084740sm10695872otq.10.2023.01.13.09.18.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Jan 2023 09:18:09 -0800 (PST)
+ Fri, 13 Jan 2023 09:18:12 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v7 0/3] hw/riscv: clear kernel_entry high bits with 32bit CPUs
-Date: Fri, 13 Jan 2023 14:18:02 -0300
-Message-Id: <20230113171805.470252-1-dbarboza@ventanamicro.com>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng@tinylab.org>
+Subject: [PATCH v7 1/3] hw/riscv/boot.c: consolidate all kernel init in
+ riscv_load_kernel()
+Date: Fri, 13 Jan 2023 14:18:03 -0300
+Message-Id: <20230113171805.470252-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.0
+In-Reply-To: <20230113171805.470252-1-dbarboza@ventanamicro.com>
+References: <20230113171805.470252-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::342;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x342.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::335;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -79,44 +83,221 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jan 2023 17:18:15 -0000
+X-List-Received-Date: Fri, 13 Jan 2023 17:18:17 -0000
 
-Hi,
+The microchip_icicle_kit, sifive_u, spike and virt boards are now doing
+the same steps when '-kernel' is used:
 
-In this version I followed Bin Meng's suggestion and reverted patch 1
-back from what it was in the v5, acks included, and added a new patch
-(3) to fix the problem detected with the Xvisor use case. I believe this
-reflects that there is nothing particularly wrong with what we
-did in the v5 patch and we're going an extra mile to fix what, at first
-glance, is a bug somewhere else.
+- execute load_kernel()
+- load init_rd()
+- write kernel_cmdline
 
-In patch 3 I also followed Phil's idea and used a translate_fn()
-callback to do the bit clearing.
+Let's fold everything inside riscv_load_kernel() to avoid code
+repetition. To not change the behavior of boards that aren't calling
+riscv_load_init(), add an 'load_initrd' flag to riscv_load_kernel() and
+allow these boards to opt out from initrd loading.
 
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Reviewed-by: Bin Meng <bmeng@tinylab.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ hw/riscv/boot.c            | 22 +++++++++++++++++++---
+ hw/riscv/microchip_pfsoc.c | 12 ++----------
+ hw/riscv/opentitan.c       |  2 +-
+ hw/riscv/sifive_e.c        |  3 ++-
+ hw/riscv/sifive_u.c        | 12 ++----------
+ hw/riscv/spike.c           | 11 +----------
+ hw/riscv/virt.c            | 12 ++----------
+ include/hw/riscv/boot.h    |  1 +
+ 8 files changed, 30 insertions(+), 45 deletions(-)
 
-Changes from v6:
-- patch 1:
-  - restored to the state it was in v5, acks included
-- patch 3 (new):
-  - clear the higher bits from the result of load_elf_ram_sym() using a
-    translate_fn() callback for 32 bit CPUs
-v6 link: https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg02630.html
-
-Daniel Henrique Barboza (3):
-  hw/riscv/boot.c: consolidate all kernel init in riscv_load_kernel()
-  hw/riscv/boot.c: make riscv_load_initrd() static
-  hw/riscv: clear kernel_entry higher bits in load_elf_ram_sym()
-
- hw/riscv/boot.c            | 111 ++++++++++++++++++++++++-------------
- hw/riscv/microchip_pfsoc.c |  12 +---
- hw/riscv/opentitan.c       |   3 +-
- hw/riscv/sifive_e.c        |   4 +-
- hw/riscv/sifive_u.c        |  12 +---
- hw/riscv/spike.c           |  13 +----
- hw/riscv/virt.c            |  12 +---
- include/hw/riscv/boot.h    |   3 +-
- 8 files changed, 89 insertions(+), 81 deletions(-)
-
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 2594276223..4888d5c1e0 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -175,10 +175,12 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
+ 
+ target_ulong riscv_load_kernel(MachineState *machine,
+                                target_ulong kernel_start_addr,
++                               bool load_initrd,
+                                symbol_fn_t sym_cb)
+ {
+     const char *kernel_filename = machine->kernel_filename;
+     uint64_t kernel_load_base, kernel_entry;
++    void *fdt = machine->fdt;
+ 
+     g_assert(kernel_filename != NULL);
+ 
+@@ -192,21 +194,35 @@ target_ulong riscv_load_kernel(MachineState *machine,
+     if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
+                          NULL, &kernel_load_base, NULL, NULL, 0,
+                          EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
+-        return kernel_load_base;
++        kernel_entry = kernel_load_base;
++        goto out;
+     }
+ 
+     if (load_uimage_as(kernel_filename, &kernel_entry, NULL, NULL,
+                        NULL, NULL, NULL) > 0) {
+-        return kernel_entry;
++        goto out;
+     }
+ 
+     if (load_image_targphys_as(kernel_filename, kernel_start_addr,
+                                current_machine->ram_size, NULL) > 0) {
+-        return kernel_start_addr;
++        kernel_entry = kernel_start_addr;
++        goto out;
+     }
+ 
+     error_report("could not load kernel '%s'", kernel_filename);
+     exit(1);
++
++out:
++    if (load_initrd && machine->initrd_filename) {
++        riscv_load_initrd(machine, kernel_entry);
++    }
++
++    if (fdt && machine->kernel_cmdline && *machine->kernel_cmdline) {
++        qemu_fdt_setprop_string(fdt, "/chosen", "bootargs",
++                                machine->kernel_cmdline);
++    }
++
++    return kernel_entry;
+ }
+ 
+ void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index 82ae5e7023..c45023a2b1 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -629,16 +629,8 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+         kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc.u_cpus,
+                                                          firmware_end_addr);
+ 
+-        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
+-
+-        if (machine->initrd_filename) {
+-            riscv_load_initrd(machine, kernel_entry);
+-        }
+-
+-        if (machine->kernel_cmdline && *machine->kernel_cmdline) {
+-            qemu_fdt_setprop_string(machine->fdt, "/chosen",
+-                                    "bootargs", machine->kernel_cmdline);
+-        }
++        kernel_entry = riscv_load_kernel(machine, kernel_start_addr,
++                                         true, NULL);
+ 
+         /* Compute the fdt load address in dram */
+         fdt_load_addr = riscv_load_fdt(memmap[MICROCHIP_PFSOC_DRAM_LO].base,
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index 64d5d435b9..f6fd9725a5 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -101,7 +101,7 @@ static void opentitan_board_init(MachineState *machine)
+     }
+ 
+     if (machine->kernel_filename) {
+-        riscv_load_kernel(machine, memmap[IBEX_DEV_RAM].base, NULL);
++        riscv_load_kernel(machine, memmap[IBEX_DEV_RAM].base, false, NULL);
+     }
+ }
+ 
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 3e3f4b0088..6835d1c807 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -114,7 +114,8 @@ static void sifive_e_machine_init(MachineState *machine)
+                           memmap[SIFIVE_E_DEV_MROM].base, &address_space_memory);
+ 
+     if (machine->kernel_filename) {
+-        riscv_load_kernel(machine, memmap[SIFIVE_E_DEV_DTIM].base, NULL);
++        riscv_load_kernel(machine, memmap[SIFIVE_E_DEV_DTIM].base,
++                          false, NULL);
+     }
+ }
+ 
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index bac394c959..9a75d4aa62 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -598,16 +598,8 @@ static void sifive_u_machine_init(MachineState *machine)
+         kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc.u_cpus,
+                                                          firmware_end_addr);
+ 
+-        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
+-
+-        if (machine->initrd_filename) {
+-            riscv_load_initrd(machine, kernel_entry);
+-        }
+-
+-        if (machine->kernel_cmdline && *machine->kernel_cmdline) {
+-            qemu_fdt_setprop_string(machine->fdt, "/chosen", "bootargs",
+-                                    machine->kernel_cmdline);
+-        }
++        kernel_entry = riscv_load_kernel(machine, kernel_start_addr,
++                                         true, NULL);
+     } else {
+        /*
+         * If dynamic firmware is used, it doesn't know where is the next mode
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index bff9475686..c517885e6e 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -308,16 +308,7 @@ static void spike_board_init(MachineState *machine)
+                                                          firmware_end_addr);
+ 
+         kernel_entry = riscv_load_kernel(machine, kernel_start_addr,
+-                                         htif_symbol_callback);
+-
+-        if (machine->initrd_filename) {
+-            riscv_load_initrd(machine, kernel_entry);
+-        }
+-
+-        if (machine->kernel_cmdline && *machine->kernel_cmdline) {
+-            qemu_fdt_setprop_string(machine->fdt, "/chosen", "bootargs",
+-                                    machine->kernel_cmdline);
+-        }
++                                         true, htif_symbol_callback);
+     } else {
+        /*
+         * If dynamic firmware is used, it doesn't know where is the next mode
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index c8e35f861e..a931ed05ab 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1281,16 +1281,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
+         kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
+                                                          firmware_end_addr);
+ 
+-        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
+-
+-        if (machine->initrd_filename) {
+-            riscv_load_initrd(machine, kernel_entry);
+-        }
+-
+-        if (machine->kernel_cmdline && *machine->kernel_cmdline) {
+-            qemu_fdt_setprop_string(machine->fdt, "/chosen", "bootargs",
+-                                    machine->kernel_cmdline);
+-        }
++        kernel_entry = riscv_load_kernel(machine, kernel_start_addr,
++                                         true, NULL);
+     } else {
+        /*
+         * If dynamic firmware is used, it doesn't know where is the next mode
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index f94653a09b..c3de897371 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -45,6 +45,7 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
+                                  symbol_fn_t sym_cb);
+ target_ulong riscv_load_kernel(MachineState *machine,
+                                target_ulong firmware_end_addr,
++                               bool load_initrd,
+                                symbol_fn_t sym_cb);
+ void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry);
+ uint64_t riscv_load_fdt(hwaddr dram_start, uint64_t dram_size, void *fdt);
 -- 
 2.39.0
 
