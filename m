@@ -1,57 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pGhYG-0002jm-2i
-	for mharc-qemu-riscv@gnu.org; Sat, 14 Jan 2023 09:30:32 -0500
+	id 1pH5XQ-0003v0-Jm
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 11:07:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>) id 1pGhY8-0002hr-HZ
- for qemu-riscv@nongnu.org; Sat, 14 Jan 2023 09:30:26 -0500
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>) id 1pGhY5-0005Dg-L1
- for qemu-riscv@nongnu.org; Sat, 14 Jan 2023 09:30:23 -0500
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4201660B42;
- Sat, 14 Jan 2023 14:30:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AAEB4C433EF;
- Sat, 14 Jan 2023 14:30:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1673706610;
- bh=Pl0+C9LzOQU3BhGL7BLYAYlyhYrGrlzHcNe6ifoW2W0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=pRlmKKsWE7XHiZOd+oWm/ozhu77eAEccf3M44tctsq6uF22Z5aKSQ+xmvwFjntzyM
- ibxuW5vc/cVP8ngWjBdZnTUlkmOtcbokSTiVkeqChlRbnjw9ELY0sF6ReSmBFQWk7/
- DUU6uWBujAbJxMGstnDnzJsWiqgl2Ku7KVMOzyHedRchAon0W9SGn9ExvtSWwjSwX5
- mTOX0bKcCJWmIs6Qz/tKxwR4rmUfJ8468wjvG+J6WsKYmEkG0IfKdWKFyD8Y+x3Cp/
- 7uilz+SEeqSqiEzpMokPg/A2N2ZJC84vzfRrjG4G9VYtll73zskXQyEyOV95frw+E8
- 6rPyZVEKDFUcA==
-Date: Sat, 14 Jan 2023 14:30:07 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: stage TC <stagethalescristal@gmail.com>, qemu-riscv@nongnu.org
-Subject: Re: qemu icicle kit es
-Message-ID: <Y8K8b75lWE2eXZwz@spud>
-References: <CAJWvPnt95pOb6-QFxrHMH7NNrtxNHKRLjhVoz5A+BZ2Er-joKQ@mail.gmail.com>
- <Y77mjzm4u1V9JXKO@spud>
- <CAJWvPnst42_HH9VN_BvoFXcSjg_z2Nqm-NN-3A3dgQCMy_iDtA@mail.gmail.com>
- <Y8BLZLw6gP4hUpyy@spud>
- <CAEUhbmUa0kCssKBxmkt5qvH5oQmjrbDk_LBb4S2acfGLmzUh5g@mail.gmail.com>
- <2882065D-831B-4E8C-BFD3-677BB8ECA2AD@kernel.org>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pH5XH-0003tk-6G
+ for qemu-riscv@nongnu.org; Sun, 15 Jan 2023 11:07:08 -0500
+Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pH5XD-0002ks-Da
+ for qemu-riscv@nongnu.org; Sun, 15 Jan 2023 11:07:06 -0500
+Received: by mail-pf1-x42c.google.com with SMTP id w2so3959158pfc.11
+ for <qemu-riscv@nongnu.org>; Sun, 15 Jan 2023 08:07:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GZTFHxNlAhNRHDbBvjazOuY2CHtPtEz62uheZE/u1Xc=;
+ b=EJcatYdOLfY+WlTy6Cmxm4tivhdP4s9IgPDXWZi7S89mmohLtbgEO1T4mXXse1llW6
+ 2tJR0DPvCEha7PDUSGRAztMGVAdx9lGsGL7Fjiu9kGL0g2vV83IeST49SndffxtyO2II
+ G6FVQz4iYFnEa8YSldbaOr2fFagepzj0xUTvcHlEfQr8YcpdEgkUxrgpPZtd6e3nzgPW
+ dbnZxDs4GniRq1WPa7xF9ToaOiqXQX8ge03Y6ukAJkSdQCH9Pma0JgRXoxlqWfuLCNvv
+ +ae3Ju21UKwbmWAmInZ+xPeBbGnNNQjH6trGXcO0CZ+tJMGUJLR+By7ohdxtqKJ3//cN
+ 252A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GZTFHxNlAhNRHDbBvjazOuY2CHtPtEz62uheZE/u1Xc=;
+ b=xgyttzuR+bDgVJJhpTzXVIkiw+5ZZBq5gdEJbCEGytEHXkK+xY5pM2MFpHDylAPfGk
+ kFi2sqK/zatVHY0fVwbRUeynq5Gh7LukQTdC4NCg87qOj9sf4Q6GLyAsxSHcxwUrJaDG
+ GKGiNBuW8GyHnvslwYnzYs9LPTgtS2Iwp0BB7lWzwHx7tv6J/BXO9RE7c6kek+gynbLQ
+ 8UFIqhjYX6vQP3DQ32z4/4fzTIOERfEv2ZgcHxztO8hliljxZdYLYiTQNDf1uY/X01hz
+ du9CfV7uRol5N9aMPjjekiEBmVsPhCTJjkonO/E1fD7kytZCx4TxdcckCYd2jEbXvDYT
+ yOXw==
+X-Gm-Message-State: AFqh2konXyAXCoJQHu1WjqWevF/OTNJp9PeCEZj2YPNowg81U4GBRZf4
+ SDemiEj53bxDu46mVvlCkB4P/Q==
+X-Google-Smtp-Source: AMrXdXt1JiQNS04IGj+F/FyZyK57Ko3hRxGIC3Hm/2aWvMrY+3ktQx5h8CWp8rEXSmRSYVRg0iesTA==
+X-Received: by 2002:a05:6a00:1d95:b0:58d:aac3:a8cb with SMTP id
+ z21-20020a056a001d9500b0058daac3a8cbmr633460pfw.0.1673798821246; 
+ Sun, 15 Jan 2023 08:07:01 -0800 (PST)
+Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
+ by smtp.gmail.com with ESMTPSA id
+ c76-20020a624e4f000000b00589c467ed88sm11422735pfb.69.2023.01.15.08.06.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 15 Jan 2023 08:07:00 -0800 (PST)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bin.meng@windriver.com,
+ abdulras@google.com
+Subject: [PATCH 0/2] target/riscv: Fix double calls to gen_set_rm [#1411]
+Date: Sun, 15 Jan 2023 06:06:55 -1000
+Message-Id: <20230115160657.3169274-1-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="qaLxkvU7yOL0xQ3H"
-Content-Disposition: inline
-In-Reply-To: <2882065D-831B-4E8C-BFD3-677BB8ECA2AD@kernel.org>
-Received-SPF: pass client-ip=139.178.84.217; envelope-from=conor@kernel.org;
- helo=dfw.source.kernel.org
-X-Spam_score_int: -70
-X-Spam_score: -7.1
-X-Spam_bar: -------
-X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -64,79 +77,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Jan 2023 14:30:30 -0000
+X-List-Received-Date: Sun, 15 Jan 2023 16:07:11 -0000
+
+These double calls tickle an assertion in decode_save_opc,
+and isn't efficient anyway.  Introduce a new helper to do
+exactly what was desired.
 
 
---qaLxkvU7yOL0xQ3H
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Jan 13, 2023 at 12:56:57PM +0000, Conor Dooley wrote:
->=20
->=20
-> On 13 January 2023 00:35:11 GMT, Bin Meng <bmeng.cn@gmail.com> wrote:
-> >On Fri, Jan 13, 2023 at 2:03 AM Conor Dooley <conor@kernel.org> wrote:
-> >>
-> >> +CC Bin Meng
-> >>
->=20
-> >> Bin Meng, you're listed as a supporter (in master anyway) but is that
-> >> still accurate? I figure there's a good chance it isn't anymore?
-> >> Have you tested the platform from HSS init at all lately?
-> >
-> >Yes, I am still maintaining the QEMU PolarFire SoC. The WiKi page
-> >listed the exact HSS version I tested and if it doesn't, it should be
-> >a regression in QEMU. If yes, I would like to have a look at that.
->=20
-> That'd be great.
-> I submitted a few patches for fixing the direct kernel boot & hopefully
-> haven't broken anything!
-> I'll try to test it also, if I get some time.
-
-Gave 7.2.0 a go yesterday afternoon.
-The URL from the documentation is no longer accessible, I cannot wget
-the image! I'll try and find out what happened there, AFAIU that FTP is
-still in use, so dunno why that file doesn't seem to be there.
-I'll try to find out.
-
-I dug out the commit from the docs for the HSS, built that. Generated a
-payload using the nearest payload generator commit to that was
-compilable, which I passed as the image instead of the wic.
-
-The HSS would load, get as far as trying to extract the payload
-containing the next stage bootloader & fail. Specifically, it was
-complaining that the magic number for the payload was all zeros.
-
-Perhaps if you still have the original wic image you'll have more luck!
-
-Thanks,
-Conor.
-
-| qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
-|     -bios path/to/hss.bin -sd path/to/sdcard.img \
-|     -nic user,model=3Dcadence_gem \
-|     -nic tap,ifname=3Dtap,model=3Dcadence_gem,script=3Dno \
-|     -display none -serial stdio \
-|     -chardev socket,id=3Dserial1,path=3Dserial1.sock,server=3Don,wait=3Do=
-n \
-|     -serial chardev:serial1
-
-btw, I built my QEMU with `./configure --target-list=3Driscv64-softmmu &&
-make`, and got a complaint from the above command that user mode NICs
-were not present in my QEMU.
+r~
 
 
---qaLxkvU7yOL0xQ3H
-Content-Type: application/pgp-signature; name="signature.asc"
+Richard Henderson (2):
+  target/arm: Introduce helper_set_rounding_mode_chkfrm
+  target/riscv: Remove helper_set_rod_rounding_mode
 
------BEGIN PGP SIGNATURE-----
+ target/riscv/helper.h                   |  2 +-
+ target/riscv/fpu_helper.c               | 36 +++++++++++++++++++++++--
+ target/riscv/translate.c                | 21 ++++++++++++---
+ target/riscv/insn_trans/trans_rvv.c.inc | 24 +++--------------
+ 4 files changed, 57 insertions(+), 26 deletions(-)
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCY8K8bwAKCRB4tDGHoIJi
-0qnUAQCU28JUbzk5FXczBq7yOVcPEvvK618bEAS9SXf8NNhkLwD/cGvAg6fu/FDz
-TnKyv2v67T5gVTJun/YkvoitAHNs8wQ=
-=S6xP
------END PGP SIGNATURE-----
+-- 
+2.34.1
 
---qaLxkvU7yOL0xQ3H--
 
