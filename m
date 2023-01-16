@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pHGd7-0007d3-Ix
-	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 22:57:53 -0500
+	id 1pHGeb-0008Mq-OW
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 22:59:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHGd4-0007cI-Ka; Sun, 15 Jan 2023 22:57:50 -0500
-Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
+ id 1pHGea-0008MZ-80; Sun, 15 Jan 2023 22:59:24 -0500
+Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHGcn-0001bC-Cu; Sun, 15 Jan 2023 22:57:34 -0500
-Received: by mail-vs1-xe2b.google.com with SMTP id k4so27843141vsc.4;
- Sun, 15 Jan 2023 19:57:32 -0800 (PST)
+ id 1pHGeY-0001gV-Dp; Sun, 15 Jan 2023 22:59:23 -0500
+Received: by mail-vs1-xe34.google.com with SMTP id k4so27845439vsc.4;
+ Sun, 15 Jan 2023 19:59:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=54s5sY9wHfUM7Myt1094eNvwMqve0Qi7RZp9Mc8ByHs=;
- b=YW4xs5ivjHMipAqtQGvnBkTDGgktxPuUES5RQAvbZwuU5AhTZRJrXL3lGRq0RbWQWC
- ofu6tXOGUoCVtfvtoqUfpJecHn79PAyxTfyqMl4RcQ8sVCE6DT6zIruKpX28IVIsOgnN
- xMB7quA+mciAxWjtobce0RR7zIHUU3U8GqzKlb9Np+jDvu+esCD/IbF9EUkTKiRVkOBe
- dZWzAzokv8TtE1jZOQ/HDPzUpV+LD4/YA8/9aMYrV1/jTJuz9ZCWw5Wm05KLHp5Hn2KX
- TrIygDDTjjwvzDVjJmc2K57kHnkPVUedjtNo+ZIEbRuzWtRnHtxEEL5yWmZfom2ruPUw
- BVqg==
+ bh=B23PUcYuSBn2pTz5X3It7LWM7r/dqGJ6/3fXVTJ4pHc=;
+ b=OKj7fFKxhruFpZVqoKAaO148AKwgaAR1RPynYU9rITZJ51wU/C00G6tqKXM/WhbeyM
+ iVTXUlsU4ZfMBd90N7iHmfCAWhHiFwIcFeRR0TJlT1l7i6GSfguAi8d0rfS0Hb5y2wU8
+ UPkQ/MelNhNZlQI6xwbxImuiN6tGFKzZMl639Mmsvw2onHCijYnmYjo+xJuAyXZlMtRX
+ wJ016seGui8ylFaQRbRnVY1T8U3I49Cvi/n/Awsp7PP+3VTt1nOOc3miL8wl6b8MHBFf
+ m5uArEnwm45CxP+62YPeBWbSRous80dS7sz8brCAXh3aVDVQNdOw2kB51JOtMVBLgIN0
+ Ljaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=54s5sY9wHfUM7Myt1094eNvwMqve0Qi7RZp9Mc8ByHs=;
- b=uvB3GpAS283WVhXjizgXGm0q1s+3EMEwE0bfmbMA25TJRSt8DK6edZwSOOgF55Xoj8
- W0UODto/UF0v6jwyvIK08MiStIURLwF3LvStN44EyOaRjisULqVFOwihB9i4xAF8/mwF
- 2kTJ30wmquxg3oA3sgR6txh55h9Rty3PogF58CPiL0t4iXfsmxb3m+Cr2vpHTJTFrE8x
- 1StbLG3qUzXvdK2XfN4kQ1NETsr0iv3jGIs1zwhLMzGU84WepELovr1cnrtGH4qK9jVf
- 9xibl+3ujyt+ZSOufvlgyhg4HW/ggAABbsPdJmX2TuaYXLLv8xhJzpLTBbQxYeGhr1sn
- 40kQ==
-X-Gm-Message-State: AFqh2kqV5+9szqCl+gcPtG+CFGfywB3aFxv0fGZ2qaIt1c/h5/kub8xR
- NZjZ1raBo/sAo9BR6/aZTrC39mLL3GRxvVY5kkM=
-X-Google-Smtp-Source: AMrXdXvPC65LVXFZRVtfYcSwMEWjlc0tTrMtLkVoCeTBO5lozcnrbsW36W+JUKF75I9zEP1Pg1eGbMAx8yYIDffftYs=
-X-Received: by 2002:a67:c508:0:b0:3d3:c7d9:7b62 with SMTP id
- e8-20020a67c508000000b003d3c7d97b62mr443380vsk.72.1673841451896; Sun, 15 Jan
- 2023 19:57:31 -0800 (PST)
+ bh=B23PUcYuSBn2pTz5X3It7LWM7r/dqGJ6/3fXVTJ4pHc=;
+ b=v42zKd91YXyBCJTlEU9zGwEydWfWBP7bwQoIefevq+byHUVwyWzq59k8k2UM56snYc
+ hGrL4BiRJGexu5FJiO009FtEVVkx5GWkm0IDQvddzKwyPL6oP2ucbzB9QbtCVc2uTccP
+ VlX0GZvgId/Yl2dskfbSkol7xrfeZHYfeFw2/VDkMJXYuXMuDYmlmxR4nrQXmBImh0Lv
+ 1/dG0sJOP8IFcVzH5KDsbn2XjQNyPCp12j4EH1KAw/XG0s2WH5S34l4wyIPxsVddPJPw
+ mEsjlWBmHVd2yLUEeMjo5KfbAdI4tH04+km7OMZ/5leUi7RKOrWYKyQCkZ8FbvzSDHZc
+ GK8g==
+X-Gm-Message-State: AFqh2kq/JYul+d4D+6pfsGH4uLc920RxyXh6f4mCHO2CWqHGmk91TiMn
+ Md6P1mgqGD8ELku2AUSGlZFSEjF4TopOdyyeGqc=
+X-Google-Smtp-Source: AMrXdXsHeNvWPFmhXl2DM9hTWvExde37ALLZGFcfre12/rUsrhwnMLH1mGmT7o3OppbzdjYtWthHlRiDBf8W4VmVw7Y=
+X-Received: by 2002:a05:6102:f8c:b0:3c9:8cc2:dd04 with SMTP id
+ e12-20020a0561020f8c00b003c98cc2dd04mr10389475vsv.73.1673841560995; Sun, 15
+ Jan 2023 19:59:20 -0800 (PST)
 MIME-Version: 1.0
 References: <20230111170948.316276-1-dbarboza@ventanamicro.com>
- <20230111170948.316276-4-dbarboza@ventanamicro.com>
-In-Reply-To: <20230111170948.316276-4-dbarboza@ventanamicro.com>
+ <20230111170948.316276-5-dbarboza@ventanamicro.com>
+In-Reply-To: <20230111170948.316276-5-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Jan 2023 13:57:05 +1000
-Message-ID: <CAKmqyKOdXH36_LeEZzELm4NdgqFJe7fZYwJhjf=65o2KZLscNw@mail.gmail.com>
-Subject: Re: [PATCH 03/10] hw/riscv/sifive_u.c: simplify create_fdt()
+Date: Mon, 16 Jan 2023 13:58:54 +1000
+Message-ID: <CAKmqyKOZPfnRhMAkHS9pzQfOJNmjKNjUsFFHXHQ6xV4TdW_H7w@mail.gmail.com>
+Subject: Re: [PATCH 04/10] hw/riscv/virt.c: remove 'is_32_bit' param from
+ create_fdt_socket_cpus()
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- Palmer Dabbelt <palmer@dabbelt.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,20 +73,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2023 03:57:51 -0000
+X-List-Received-Date: Mon, 16 Jan 2023 03:59:24 -0000
 
-On Thu, Jan 12, 2023 at 3:25 AM Daniel Henrique Barboza
+On Thu, Jan 12, 2023 at 3:22 AM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> 'cmdline' isn't being used. Remove it.
+> create_fdt_socket_cpus() writes a different 'mmu-type' value if we're
+> running in 32 or 64 bits. However, the flag is being calculated during
+> virt_machine_init(), and is passed around in create_fdt(), then
+> create_fdt_socket(), and then finally create_fdt_socket_cpus(). None of
+> the intermediate functions are using the flag, which is a bit
+> misleading.
 >
-> A MachineState pointer is being retrieved via a MACHINE() macro calling
-> qdev_get_machine(). Use MACHINE(s) instead to avoid calling qdev().
+> Remove 'is_32_bit' flag from create_fdt_socket_cpus() and calculate it
+> using the already available RISCVVirtState pointer. This will also
+> change the signature of create_fdt_socket() and create_fdt(), making it
+> clear that these functions don't do anything special when we're running
+> in 32 bit mode.
 >
->  'mem_size' is being set as machine->ram_size by the caller. Retrieve it
-> via ms->ram_size.
->
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -94,36 +98,78 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/sifive_u.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+>  hw/riscv/virt.c | 18 +++++++++---------
+>  1 file changed, 9 insertions(+), 9 deletions(-)
 >
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 9a75d4aa62..ccad386920 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -94,9 +94,10 @@ static const MemMapEntry sifive_u_memmap[] = {
->  #define GEM_REVISION        0x10070109
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 89c99ec1af..99a0a43a73 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -223,12 +223,13 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
 >
->  static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
-> -                       uint64_t mem_size, const char *cmdline, bool is_32_bit)
-> +                       bool is_32_bit)
+>  static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+>                                     char *clust_name, uint32_t *phandle,
+> -                                   bool is_32_bit, uint32_t *intc_phandles)
+> +                                   uint32_t *intc_phandles)
 >  {
-> -    MachineState *ms = MACHINE(qdev_get_machine());
-> +    MachineState *ms = MACHINE(s);
-> +    uint64_t mem_size = ms->ram_size;
->      void *fdt;
->      int cpu, fdt_size;
->      uint32_t *cells;
-> @@ -560,8 +561,7 @@ static void sifive_u_machine_init(MachineState *machine)
->                            qemu_allocate_irq(sifive_u_machine_reset, NULL, 0));
+>      int cpu;
+>      uint32_t cpu_phandle;
+>      MachineState *mc = MACHINE(s);
+>      char *name, *cpu_name, *core_name, *intc_name;
+> +    bool is_32_bit = riscv_is_32bit(&s->soc[0]);
+>
+>      for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
+>          cpu_phandle = (*phandle)++;
+> @@ -721,7 +722,7 @@ static void create_fdt_pmu(RISCVVirtState *s)
+>  }
+>
+>  static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+> -                               bool is_32_bit, uint32_t *phandle,
+> +                               uint32_t *phandle,
+>                                 uint32_t *irq_mmio_phandle,
+>                                 uint32_t *irq_pcie_phandle,
+>                                 uint32_t *irq_virtio_phandle,
+> @@ -750,7 +751,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+>          qemu_fdt_add_subnode(mc->fdt, clust_name);
+>
+>          create_fdt_socket_cpus(s, socket, clust_name, phandle,
+> -            is_32_bit, &intc_phandles[phandle_pos]);
+> +                               &intc_phandles[phandle_pos]);
+>
+>          create_fdt_socket_memory(s, memmap, socket);
+>
+> @@ -998,8 +999,7 @@ static void create_fdt_fw_cfg(RISCVVirtState *s, const MemMapEntry *memmap)
+>      g_free(nodename);
+>  }
+>
+> -static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+> -                       bool is_32_bit)
+> +static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
+>  {
+>      MachineState *mc = MACHINE(s);
+>      uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
+> @@ -1031,9 +1031,9 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+>      qemu_fdt_setprop_cell(mc->fdt, "/soc", "#size-cells", 0x2);
+>      qemu_fdt_setprop_cell(mc->fdt, "/soc", "#address-cells", 0x2);
+>
+> -    create_fdt_sockets(s, memmap, is_32_bit, &phandle,
+> -        &irq_mmio_phandle, &irq_pcie_phandle, &irq_virtio_phandle,
+> -        &msi_pcie_phandle);
+> +    create_fdt_sockets(s, memmap, &phandle, &irq_mmio_phandle,
+> +                       &irq_pcie_phandle, &irq_virtio_phandle,
+> +                       &msi_pcie_phandle);
+>
+>      create_fdt_virtio(s, memmap, irq_virtio_phandle);
+>
+> @@ -1499,7 +1499,7 @@ static void virt_machine_init(MachineState *machine)
+>      virt_flash_map(s, system_memory);
 >
 >      /* create device tree */
-> -    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
-> -               riscv_is_32bit(&s->soc.u_cpus));
-> +    create_fdt(s, memmap, riscv_is_32bit(&s->soc.u_cpus));
+> -    create_fdt(s, memmap, riscv_is_32bit(&s->soc[0]));
+> +    create_fdt(s, memmap);
 >
->      if (s->start_in_flash) {
->          /*
+>      s->machine_done.notify = virt_machine_done;
+>      qemu_add_machine_init_done_notifier(&s->machine_done);
 > --
 > 2.39.0
 >
