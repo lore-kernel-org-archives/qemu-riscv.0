@@ -1,58 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pHGjs-00020J-3w
-	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 23:04:52 -0500
+	id 1pHGkG-0002VJ-Mp
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 23:05:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHGjk-0001z6-Hy; Sun, 15 Jan 2023 23:04:44 -0500
-Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
+ id 1pHGkE-0002PQ-GL; Sun, 15 Jan 2023 23:05:14 -0500
+Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHGji-0002JK-Hz; Sun, 15 Jan 2023 23:04:43 -0500
-Received: by mail-vk1-xa29.google.com with SMTP id 6so12804406vkz.0;
- Sun, 15 Jan 2023 20:04:41 -0800 (PST)
+ id 1pHGkA-0002XW-Au; Sun, 15 Jan 2023 23:05:12 -0500
+Received: by mail-vs1-xe2b.google.com with SMTP id p1so11092375vsr.5;
+ Sun, 15 Jan 2023 20:05:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=udFX3U3RsmIClU1hUlKvTC5l9IBbeNR2IPfzHANRUss=;
- b=CxHq5Selrd3wWLuH8iyQNg3JvTVvNEOlis9f5+Kp5EzCRKmcXE8h+HiVe0KsE/PR+L
- AHggjIuedhLetyhawsc+dUMK4E2JNDTRVO6W+YPvVI7f3yVnzcjbm4gJ+0/qhl1V8wzg
- SbGOQ6Nr2SVrW6tdUYqM8QUqRbhDOJAetLlodoweFSaCyqI4wfSE7cQCTFdZUwkZTGfM
- TQ7j24bN3TnutcM2VLllMeryq+3Y+vp7JQE8qUoB5QC82/PUxeHZtoS0s0AKEZqXXp8Q
- a4Xo1hAdH/4u5weLaf2X8Zx32AxHLS336yfbfxqwR2dOzr7ErAiBByuattMGj1FcYnAy
- EHDA==
+ bh=Ko8wM+0lNUujdvfZHCY206MVuXwb6Ui+NQjc1cY3s+I=;
+ b=a0BRtNfd3mBfRL3lD1zr4V3KqbknDK2i8NoAPKWNsHuNZN1Qa/zJJ1Z7evEWoqiwEN
+ 5F80vGRY/B6gVKYuGMBTsr/5h3vhBNuxYd+FENgTh77Yoexel30mZzfewX0fDHzo0+vX
+ HyQ7N1622Em3gFXGb0h3J05tKSaP9IFHOGhO2J6IrVjCcaqoQFFP9bNO1EAX8woHSqku
+ eVIRu2DmexpOx9ProgbNwt09EL5b3L5dua+0HmottQv7EU2psN2VM+P1ayK0oU0dVcHZ
+ Yl19dKkw13t10W5GW6qdMmItGcmT5kYc48+TubV448HSQFCdIj21+aJnPHcHgT4ApjZm
+ Bxew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=udFX3U3RsmIClU1hUlKvTC5l9IBbeNR2IPfzHANRUss=;
- b=uLT0H/1f/fu/xByMDZ4PycFxwjyl0uObAq6HalTevcry1yMr5wVeyxQIWey3g9NZqL
- gwC9GKc0B8nNSigJNj3NVVgtvAXN3jYpEXmBYkXmZ8ZFx8GEqH2Jh00vhA/qQ3ZEJXsl
- g2sSuzgllRURZBxptpEIw1G45Aa+pXbJeSg+p0AoIoPhjiv+zSiZHocbyx9Naumkvy2K
- km+Ph0UTTuwvAVnZ57Yu+eFsRO/iYk9j/XmMz89zILBDVoUo4w2qEDwJzPueuanPHMKX
- JSlYP35WY6QHoYQ4FPRW3QeK/n8ut45zWWT2cmAe3brzyKcitfCqzM2318mOO4AuB2IF
- 5rfA==
-X-Gm-Message-State: AFqh2krAlY0o1RhZDVNyqh54Bm6sOmtAAGtk5cfsOz+yAH6ui93oIzMv
- nIJYlu6MxuWK+SaMXkZoqFeuvHqbCfb5dHinwXXXL8Q/ESj+Dw==
-X-Google-Smtp-Source: AMrXdXtvsKeCC3q49+Zuhh25eyI63L/IVWPizMNciqqCTi00k1YWOFSHV43yyj3luig8EDudGKpjKdY1Wwp+9CoZnNU=
-X-Received: by 2002:a1f:3215:0:b0:3d5:86ff:6638 with SMTP id
- y21-20020a1f3215000000b003d586ff6638mr9136154vky.30.1673841880331; Sun, 15
- Jan 2023 20:04:40 -0800 (PST)
+ bh=Ko8wM+0lNUujdvfZHCY206MVuXwb6Ui+NQjc1cY3s+I=;
+ b=kxagAH7tEbgdo092ORX+gGwPKrqAml1rzyQmtP9/ZvMABTq+z1iy8RlJTrfoVPvgUv
+ kI7cCFZM759/THILu1m1UR6Psfb/DNxV6MuuFPtwAlriHK4C5/L07EbSC+y/ggn2uBcr
+ 0n3ivABN+p6SW76Nn7EY0BssW+Xi0ryp7jcvU8QEnKhu3sthvBWhiv1SF6AsDdHvaU8W
+ MEXFhXEyTVlkXTvdlFb9BQnzWbZho029Hvbds8IL6O2LhrTK4OVDX2b/W63rUEw2Ppyr
+ iPhl7vNosvct0EtYK99RlUpZWN/DMNkyFIdPMKEjv8WVpGku3NSMcDt8tc3y3sMbfpu4
+ sj2A==
+X-Gm-Message-State: AFqh2kr5mTho0HC49b/XfrvSmAhr0YEj5C2dsC9IqRXgWInILq7UIyfY
+ kz6Qimn9dCpYLDJVGl4oZwR3/HSMmW2hb9zKl60=
+X-Google-Smtp-Source: AMrXdXsuKPK32FpbWGox4/z1aLiFrRZ8Ar9+Xu/bAGORKBPpqA6BXZGoGIlDvUGQ4l7WiLgkAqytoKfF4bWYqyHW4Ko=
+X-Received: by 2002:a05:6102:f8c:b0:3c9:8cc2:dd04 with SMTP id
+ e12-20020a0561020f8c00b003c98cc2dd04mr10391088vsv.73.1673841908546; Sun, 15
+ Jan 2023 20:05:08 -0800 (PST)
 MIME-Version: 1.0
 References: <20230111170948.316276-1-dbarboza@ventanamicro.com>
- <20230111170948.316276-7-dbarboza@ventanamicro.com>
-In-Reply-To: <20230111170948.316276-7-dbarboza@ventanamicro.com>
+In-Reply-To: <20230111170948.316276-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Jan 2023 14:04:14 +1000
-Message-ID: <CAKmqyKOqrx+8XRL9DEn74h42TQs35zfpkyKTnMOQWXWuGuBdYA@mail.gmail.com>
-Subject: Re: [PATCH 06/10] hw/riscv: use ms->fdt in
- riscv_socket_fdt_write_distance_matrix()
+Date: Mon, 16 Jan 2023 14:04:42 +1000
+Message-ID: <CAKmqyKNacev-a0jE3_HQxoBSrgsT4dcCHXDv8TFonvUD7YoLnA@mail.gmail.com>
+Subject: Re: [PATCH 00/10] riscv: create_fdt() related cleanups
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,96 +71,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2023 04:04:46 -0000
+X-List-Received-Date: Mon, 16 Jan 2023 04:05:15 -0000
 
-On Thu, Jan 12, 2023 at 3:26 AM Daniel Henrique Barboza
+On Thu, Jan 12, 2023 at 3:12 AM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> There's no need to use a MachineState pointer and a fdt pointer now that
-> all RISC-V machines are using the FDT from the MachineState.
+> Hi,
 >
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> This is a follow-up of:
+>
+> "[PATCH v5 00/11] riscv: OpenSBI boot test and cleanups"
+>
+> Patches were based on top of riscv-to-apply.next [1] + the series above.
+>
+> The recent FDT changes made in hw/riscv (all machines are now using the
+> FDT via MachineState::fdt) allowed for most of the cleanups made here.
+>
+> Patches 9 and 10 were based on a suggestion made by Phil a few weeks ago.
+> I decided to go for it.
+>
+> [1] https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+>
+> Daniel Henrique Barboza (10):
+>   hw/riscv/spike.c: simplify create_fdt()
+>   hw/riscv/virt.c: simplify create_fdt()
+>   hw/riscv/sifive_u.c: simplify create_fdt()
+>   hw/riscv/virt.c: remove 'is_32_bit' param from
+>     create_fdt_socket_cpus()
+>   hw/riscv: use MachineState::fdt in riscv_socket_fdt_write_id()
+>   hw/riscv: use ms->fdt in riscv_socket_fdt_write_distance_matrix()
+>   hw/riscv: simplify riscv_load_fdt()
+>   hw/riscv/virt.c: calculate socket count once in create_fdt_imsic()
+>   hw/riscv/virt.c: rename MachineState 'mc' pointers to 'ms'
+>   hw/riscv/spike.c: rename MachineState 'mc' pointers to' ms'
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Applied patches 1 to 6.
 
 Alistair
 
-> ---
->  hw/riscv/numa.c         | 8 ++++----
->  hw/riscv/spike.c        | 2 +-
->  hw/riscv/virt.c         | 2 +-
->  include/hw/riscv/numa.h | 4 ++--
->  4 files changed, 8 insertions(+), 8 deletions(-)
 >
-> diff --git a/hw/riscv/numa.c b/hw/riscv/numa.c
-> index f4343f5cde..4720102561 100644
-> --- a/hw/riscv/numa.c
-> +++ b/hw/riscv/numa.c
-> @@ -164,7 +164,7 @@ void riscv_socket_fdt_write_id(const MachineState *ms, const char *node_name,
->      }
->  }
+>  hw/riscv/boot.c            |   4 +-
+>  hw/riscv/microchip_pfsoc.c |   4 +-
+>  hw/riscv/numa.c            |  14 +-
+>  hw/riscv/sifive_u.c        |  11 +-
+>  hw/riscv/spike.c           |  25 +-
+>  hw/riscv/virt.c            | 484 +++++++++++++++++++------------------
+>  include/hw/riscv/boot.h    |   2 +-
+>  include/hw/riscv/numa.h    |  10 +-
+>  8 files changed, 277 insertions(+), 277 deletions(-)
 >
-> -void riscv_socket_fdt_write_distance_matrix(const MachineState *ms, void *fdt)
-> +void riscv_socket_fdt_write_distance_matrix(const MachineState *ms)
->  {
->      int i, j, idx;
->      uint32_t *dist_matrix, dist_matrix_size;
-> @@ -184,10 +184,10 @@ void riscv_socket_fdt_write_distance_matrix(const MachineState *ms, void *fdt)
->              }
->          }
->
-> -        qemu_fdt_add_subnode(fdt, "/distance-map");
-> -        qemu_fdt_setprop_string(fdt, "/distance-map", "compatible",
-> +        qemu_fdt_add_subnode(ms->fdt, "/distance-map");
-> +        qemu_fdt_setprop_string(ms->fdt, "/distance-map", "compatible",
->                                  "numa-distance-map-v1");
-> -        qemu_fdt_setprop(fdt, "/distance-map", "distance-matrix",
-> +        qemu_fdt_setprop(ms->fdt, "/distance-map", "distance-matrix",
->                           dist_matrix, dist_matrix_size);
->          g_free(dist_matrix);
->      }
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 05d34651cb..91bf194ec1 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -174,7 +174,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
->          g_free(clust_name);
->      }
->
-> -    riscv_socket_fdt_write_distance_matrix(mc, fdt);
-> +    riscv_socket_fdt_write_distance_matrix(mc);
->
->      qemu_fdt_add_subnode(fdt, "/chosen");
->      qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", "/htif");
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 1d3bd25cb5..e374b58f89 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -805,7 +805,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
->          }
->      }
->
-> -    riscv_socket_fdt_write_distance_matrix(mc, mc->fdt);
-> +    riscv_socket_fdt_write_distance_matrix(mc);
->  }
->
->  static void create_fdt_virtio(RISCVVirtState *s, const MemMapEntry *memmap,
-> diff --git a/include/hw/riscv/numa.h b/include/hw/riscv/numa.h
-> index 634df6673f..8f5280211d 100644
-> --- a/include/hw/riscv/numa.h
-> +++ b/include/hw/riscv/numa.h
-> @@ -100,9 +100,9 @@ void riscv_socket_fdt_write_id(const MachineState *ms, const char *node_name,
->   * @ms: pointer to machine state
->   * @socket_id: socket index
->   *
-> - * Write NUMA distance matrix in FDT for given machine
-> + * Write NUMA distance matrix in MachineState->fdt
->   */
-> -void riscv_socket_fdt_write_distance_matrix(const MachineState *ms, void *fdt);
-> +void riscv_socket_fdt_write_distance_matrix(const MachineState *ms);
->
->  CpuInstanceProperties
->  riscv_numa_cpu_index_to_props(MachineState *ms, unsigned cpu_index);
 > --
 > 2.39.0
 >
