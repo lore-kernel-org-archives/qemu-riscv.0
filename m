@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pHGZG-0005vf-MG
-	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 22:53:54 -0500
+	id 1pHGaW-0006iX-JF
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 22:55:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHGZF-0005vA-2j; Sun, 15 Jan 2023 22:53:53 -0500
-Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29])
+ id 1pHGaU-0006hq-6u; Sun, 15 Jan 2023 22:55:10 -0500
+Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHGZD-0000vu-Je; Sun, 15 Jan 2023 22:53:52 -0500
-Received: by mail-vs1-xe29.google.com with SMTP id i188so27840186vsi.8;
- Sun, 15 Jan 2023 19:53:50 -0800 (PST)
+ id 1pHGaS-0001BG-Rk; Sun, 15 Jan 2023 22:55:09 -0500
+Received: by mail-vs1-xe2a.google.com with SMTP id 3so27861741vsq.7;
+ Sun, 15 Jan 2023 19:55:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=V8YE8TK8E3peRZJOp78aGJA1MtciRn9S8MKyevbFhek=;
- b=DmWkVZpIKQQ3PSbmy55ADOiVMUNmVOgvsjdgebA3b0+aIYPh+bPcxuHbw6DTkcUu8P
- 39HB2GDG779Boo7kUotlxT8dhlPSXjN3BvBH3DEPRea5LzKTtD05xva2z7RPM1U28vgE
- MtxExi7NZ5hLEHzHVf4bR8BpSPp5ZPmGZlGFrbOvE0cIiFecg0r+3+LfpTVIq1TUC9z2
- nY3whLSRcxL/RbFGXeIIk15gvrpr5pHx8kh7S0/+tz2VLR/Elxj1qWUpZBrf5+P6W1tO
- getsELBTQGz7Z2067r7E52KHdniEfGQlVNRmaoIQpF6BCjd1zJ0+Nfw0ZS9v7HIvDlpg
- FY0g==
+ bh=4uxeO3Ibpb7NyPQHwBJX49btxBwrJwpNKMDlHoHJg9o=;
+ b=qD+XS6rnF5zJTdC14kBLEOKak9a4+XzEo01cSn3O9Uwg+H33v1YcEe513NO/A7qXud
+ NS6Pvd8lP+8gqUrSY/MiuT081H4gESC7x5iRPzoH047cKQVSvkbYH+eCS/3RC1hfg8u2
+ vFji3ppNXdgsw8dxa7fzlk3cz2Z5o0lUXeIm4F2D8ZddRp8H9lt2LI40t0awymy4rrTw
+ dFs59p3O1DjmWQQmMp1cOuHipJ7WjTX2PF96TLy8mzKpeSr0NfiLle9lwe4sHmLPXDfv
+ XqblZO40bVQM3o5yO0GlnQltYv3OY+5TRKSBrMBTd7ASPLk3gdDOIVct8QbCI8Uo8D/D
+ C9Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=V8YE8TK8E3peRZJOp78aGJA1MtciRn9S8MKyevbFhek=;
- b=2RuB8q+Ar/u2qK8ZF7Bhf3xFdVGk5qIQZ4pSmtR/ttzri72udE0bE8OoOw97u4BjD5
- DS8Q7wgU+giB+vQOZapiAw6sXrvT2Q2GZYeDY2VEF2KKiRMblrqfbAR8PVJcw/vTiJAi
- jmHmXqsu6ty59ylXLQd8RK7oPUOxL9maL6n3VjogKcZZWOGLZa3cW+TBAhR9eOy9n6Fk
- QFx1++m1W3yi0pKAQfw3IdcmHYzkSn4Qu+yMFRmfz3lYrxHe52FQXcw7z3+jV4UJRRqo
- LrZ3IAVXy3lfzTimFaibTcpUIDkNIrwAwvsSm2Z02sbTUMRxN/Ij90pekYcl9oHg8psQ
- 5K6g==
-X-Gm-Message-State: AFqh2kqNkZ4gDK0jJrAw3qaapXf5GYgRDBhje34JHIu3zYBnpqgo7BK6
- 6zL/CEshLBhukT1cc+MD6iO/QwV1THSOAv/J334=
-X-Google-Smtp-Source: AMrXdXsNV4pWmOBbyoS8RptIYl1nFz+W8u/nwD/8/xjkN8Yc3hWN7T3Qa3MJQVcBes8bsiV1A2fMlksGn0pDXNYwvrA=
-X-Received: by 2002:a67:c508:0:b0:3d3:c7d9:7b62 with SMTP id
- e8-20020a67c508000000b003d3c7d97b62mr442491vsk.72.1673841230095; Sun, 15 Jan
- 2023 19:53:50 -0800 (PST)
+ bh=4uxeO3Ibpb7NyPQHwBJX49btxBwrJwpNKMDlHoHJg9o=;
+ b=vOC8ahmKCwMJi0X2VRz5i4mDxpeP+xrshS6GeOTrqHl7wGOzvm73qjwdBAxbKJQC8c
+ WlIlefuomr3wAbi2Lbbg69g3Cr7O0XV2c5+qJC6x9RAaOySsbfTkByLkFlcFsX/NYAeY
+ n7aXnwNkrldNzmQi+7j7XM8C1TxhB8xf67I9WaVBp2PcHSeJ6rx3MDPPxGNGazuG+3xt
+ TczP9AZNMQciLTGHKopca19oOxed7msXkVDLuyRKj4K0fln5GbkM3BM5mYz3GVTWGEF+
+ 3ap2wzgQQE6mz5EuVGZSOXwGCn+pKAgig/O5Uu1GjFbuKA+1EKG5zexJHzzfsdy6N27o
+ NtfA==
+X-Gm-Message-State: AFqh2kpoQZ6kL//xreOMUIrKB9aqlJxijjdpKN3DkpbbDHswnjIgd7/q
+ JO7Y+gVB59ZqCeieNC/1oJ451NMnI3+QIiiflaY=
+X-Google-Smtp-Source: AMrXdXtUO0UaEp6xYuhsI30me4yd8CkXNqnNepmTfWxb9hXa++1QCZ+7cythE6Pk/P6mNZCdtfSjwpFYV0h1FIoNb4Q=
+X-Received: by 2002:a05:6102:f8c:b0:3c9:8cc2:dd04 with SMTP id
+ e12-20020a0561020f8c00b003c98cc2dd04mr10388516vsv.73.1673841307579; Sun, 15
+ Jan 2023 19:55:07 -0800 (PST)
 MIME-Version: 1.0
 References: <20230111170948.316276-1-dbarboza@ventanamicro.com>
- <20230111170948.316276-2-dbarboza@ventanamicro.com>
-In-Reply-To: <20230111170948.316276-2-dbarboza@ventanamicro.com>
+ <20230111170948.316276-3-dbarboza@ventanamicro.com>
+In-Reply-To: <20230111170948.316276-3-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Jan 2023 13:53:24 +1000
-Message-ID: <CAKmqyKOmRACuN8hDi_ivWpC6z+Vv+NFskt9vfsQYGpzkzT=o5w@mail.gmail.com>
-Subject: Re: [PATCH 01/10] hw/riscv/spike.c: simplify create_fdt()
+Date: Mon, 16 Jan 2023 13:54:41 +1000
+Message-ID: <CAKmqyKO6a0CCcprmbcReXBV_q8_+2-v1ndwB1-5e0_FwmoDG+A@mail.gmail.com>
+Subject: Re: [PATCH 02/10] hw/riscv/virt.c: simplify create_fdt()
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e29;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,12 +72,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2023 03:53:54 -0000
+X-List-Received-Date: Mon, 16 Jan 2023 03:55:10 -0000
 
-On Thu, Jan 12, 2023 at 3:21 AM Daniel Henrique Barboza
+On Thu, Jan 12, 2023 at 3:18 AM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> 'mem_size' and 'cmdline' are unused.
+> 'mem_size' and 'cmdline' aren't being used. Remove them.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
@@ -86,31 +86,32 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/spike.c | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
+>  hw/riscv/virt.c | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
 >
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index c517885e6e..4a66016d69 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -49,7 +49,6 @@ static const MemMapEntry spike_memmap[] = {
->  };
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index a931ed05ab..89c99ec1af 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -999,7 +999,7 @@ static void create_fdt_fw_cfg(RISCVVirtState *s, const MemMapEntry *memmap)
+>  }
 >
->  static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
-> -                       uint64_t mem_size, const char *cmdline,
->                         bool is_32_bit, bool htif_custom_base)
+>  static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+> -                       uint64_t mem_size, const char *cmdline, bool is_32_bit)
+> +                       bool is_32_bit)
 >  {
->      void *fdt;
-> @@ -299,8 +298,7 @@ static void spike_board_init(MachineState *machine)
->      }
+>      MachineState *mc = MACHINE(s);
+>      uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
+> @@ -1499,8 +1499,7 @@ static void virt_machine_init(MachineState *machine)
+>      virt_flash_map(s, system_memory);
 >
->      /* Create device tree */
+>      /* create device tree */
 > -    create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
-> -               riscv_is_32bit(&s->soc[0]), htif_custom_base);
-> +    create_fdt(s, memmap, riscv_is_32bit(&s->soc[0]), htif_custom_base);
+> -               riscv_is_32bit(&s->soc[0]));
+> +    create_fdt(s, memmap, riscv_is_32bit(&s->soc[0]));
 >
->      /* Load kernel */
->      if (machine->kernel_filename) {
+>      s->machine_done.notify = virt_machine_done;
+>      qemu_add_machine_init_done_notifier(&s->machine_done);
 > --
 > 2.39.0
 >
