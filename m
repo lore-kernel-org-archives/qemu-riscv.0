@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pHFxy-00060q-7T
-	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 22:15:22 -0500
+	id 1pHGSj-0004eU-WD
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 22:47:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHFxw-0005yr-EY; Sun, 15 Jan 2023 22:15:20 -0500
-Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
+ id 1pHGSW-0004dn-LR; Sun, 15 Jan 2023 22:46:56 -0500
+Received: from mail-vk1-xa35.google.com ([2607:f8b0:4864:20::a35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHFxv-0003zF-0h; Sun, 15 Jan 2023 22:15:20 -0500
-Received: by mail-vs1-xe30.google.com with SMTP id l125so8460936vsc.2;
- Sun, 15 Jan 2023 19:15:18 -0800 (PST)
+ id 1pHGSV-0000A9-3I; Sun, 15 Jan 2023 22:46:56 -0500
+Received: by mail-vk1-xa35.google.com with SMTP id w72so12790367vkw.7;
+ Sun, 15 Jan 2023 19:46:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1eDUDW3Do32BbxoncT7Oy8ZChkgrOKCbEGNkcCpFceg=;
- b=Ii4nyuQPcHFYqg5af3RE1trVE7Vb6QCMpalMaRtJgQVe7pk4HoYvRhm4x1YNm/OV8c
- hiW0K0gB9OML7MPzFeN7PKI2snHPx86hlBfUey0H2Jfm3rgAlHHvRwFsd/spe8G0oeyt
- 54ELgqMqU6wr5xbtfUBlTJtugce0INdJbP2E9H7dcc4UOZckoYiX6B2svLxYr4qT434f
- 2oObkUtv7ycXQdchUBH0KVH4iHnfrW74xH+iuVb3HmaoK//11oQ5H8lsE+EhfALiJYhS
- zSrg0tOVA4btJrYSYwPnMo9tmaWMxpi9PrYn3V5npMjw0+O0lzCgKWDsWQrLfXJmF3t0
- f4YQ==
+ bh=/ZgL6g3tzzrMslCgpZr3vadgb8PKA9WFOnNxCm/ITvI=;
+ b=htmbcobEpHfS93Ks3RHW4DOSkq8KMoXf96WyCaoIp+8dcCl49C4fjhKcC+3VPp5gsA
+ 97UzodAaEANyhCgGL5cNXcj3PpZCfYD6rdIfRGybbbsm+VPYv1aV+gcZEVJilGhVhjMk
+ juo8NYDT3dmF6V0yNu2g8YRwd+1fo3lCboul68FGpv359dnXOYY4A/SP80UDDs2bN9Ht
+ 0DaQN1GC6J8q7dVgX27Q+cGzsvP0Ypa0eQAhFOct97rbewjf+kPCuVfhtObqKKtLisPZ
+ 5RRx8GRdytT+WZvOQsCvNEC0x3qlbDOrVmod9gWkIkS0/CiRXD8ATQEqY7QXfif0m0JM
+ OtjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1eDUDW3Do32BbxoncT7Oy8ZChkgrOKCbEGNkcCpFceg=;
- b=aLmfhSZJoqWDU7cKSSUY+bW8b/kymbXFZG9oo3B1cBr4QbygDcSOB/d8DjmFGgu60H
- JVmjSQi/RwQ3LEZeblaojAyJlnTiYv/znMXP57rQyye2eaH9H2LGwugIFLNm8NJlhII/
- PgmF8pU8H8m/q2LK1hvynhUmRFgXREKRAbTfWVhSkAXE5Dv8LNQeQCzvKAWvty1tg77a
- FZuiYl51HLFYEqKxaNc5RXXb/TJqw29Rx2r2jW3ScIJyBVjtSbVuVCYycThgsyzDvyij
- Sn98Q2hNeO2AEyV9rEiTR02z03FWccydkHEiymUpxQtFyrxerRxeTIbscLHuI9p0lnZv
- HY9w==
-X-Gm-Message-State: AFqh2koQWPi0LGeizvhXVQN/10rBLEg1ERlWHlB2bd/xPO0a2CEgOZ2A
- XAbdZdN2Uz8pniSlXMSRmh6TZRkE0XuhBtRO8apVoHSuCA1WeQ==
-X-Google-Smtp-Source: AMrXdXt8obYTEIgAMVuX20EbSIvAgxHGAZj9VZknW6VoBvPjsfyACeUlDJr6eeGCaNQ+TgJ1rdSG9LAGDm9mAbH4g2s=
-X-Received: by 2002:a05:6102:510e:b0:3b1:2b83:1861 with SMTP id
- bm14-20020a056102510e00b003b12b831861mr11644412vsb.10.1673838917653; Sun, 15
- Jan 2023 19:15:17 -0800 (PST)
+ bh=/ZgL6g3tzzrMslCgpZr3vadgb8PKA9WFOnNxCm/ITvI=;
+ b=39lEBspzdg3ArnsmtHKFtuj0JsIMZ18ax9O6/4g+cEazNH+hVBCiAuOCFLLn+VlqS7
+ bYy0/6SF4cTv7493lRjYjuGBRhJbCzicpM4BqgMlmpWI5j5fIuOzCTMeln55rXf5cJxW
+ eQiKnIZc4Ix+lKg/KFmSiqXstf92VPaE49VMewT5d0MRMySUe9BbJ5l6Y9AbMB10f8je
+ c4la5/xjH/ETB1L+4U3+5yPOp1KQrYM19cTWn+ni0OMQfpnFhzB3jwKQY0p81dZiTAVN
+ bLFbhbBKHQl3uOZGtWJyBdrttQr/N6JxhjWqMdfWIQJwzdjKxzgD5cX6ZhHoUQSTDP01
+ zpsg==
+X-Gm-Message-State: AFqh2kr74ByG6EG6d4iDqqcczb12+HJu4B1GYIGZnB2GqS/MTA5EWGFF
+ LyCmOGp4+7BySi93Swl/3s3+1OAAFp01TklXark+PGDYcg8G9g==
+X-Google-Smtp-Source: AMrXdXtvL53wz9NGlckclGMTwP74RrlGTym9tdiiRpWVuHOmBHhj8O7gKNiMCOpFLmeHFs1VX/sUUD1oQog6gFanBDA=
+X-Received: by 2002:a1f:c703:0:b0:3d5:6ccb:8748 with SMTP id
+ x3-20020a1fc703000000b003d56ccb8748mr9255079vkf.26.1673840805637; Sun, 15 Jan
+ 2023 19:46:45 -0800 (PST)
 MIME-Version: 1.0
 References: <20230109152655.340114-1-bmeng@tinylab.org>
 In-Reply-To: <20230109152655.340114-1-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Jan 2023 13:14:51 +1000
-Message-ID: <CAKmqyKPStHj2Kq=CCb9=+wxUzxxCSRAX8iwBdaBezSW--NuHng@mail.gmail.com>
+Date: Mon, 16 Jan 2023 13:46:19 +1000
+Message-ID: <CAKmqyKPXfQkzM=R6cO1gNVFxAr9U_9u9s2bH2+POhkurk10_cw@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Use TARGET_FMT_lx for env->mhartid
 To: Bin Meng <bmeng@tinylab.org>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a35;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,7 +72,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2023 03:15:20 -0000
+X-List-Received-Date: Mon, 16 Jan 2023 03:47:08 -0000
 
 On Tue, Jan 10, 2023 at 1:28 AM Bin Meng <bmeng@tinylab.org> wrote:
 >
@@ -81,7 +81,9 @@ On Tue, Jan 10, 2023 at 1:28 AM Bin Meng <bmeng@tinylab.org> wrote:
 >
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
