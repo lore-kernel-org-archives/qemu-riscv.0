@@ -1,58 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pHHDq-00016r-Au
-	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 23:35:51 -0500
+	id 1pHHGv-0002lS-5E
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 23:39:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHHDj-0000wm-Hv; Sun, 15 Jan 2023 23:35:43 -0500
-Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
+ id 1pHHGt-0002l8-MM; Sun, 15 Jan 2023 23:38:59 -0500
+Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHHDi-0007XA-1G; Sun, 15 Jan 2023 23:35:43 -0500
-Received: by mail-vk1-xa2e.google.com with SMTP id l129so11967243vkh.6;
- Sun, 15 Jan 2023 20:35:41 -0800 (PST)
+ id 1pHHGs-0007x9-9o; Sun, 15 Jan 2023 23:38:59 -0500
+Received: by mail-vs1-xe35.google.com with SMTP id i188so27900252vsi.8;
+ Sun, 15 Jan 2023 20:38:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=z2i207XY0wpyl4uN0PC9a2HsYtkx8YDQWX6ZUNhml+I=;
- b=cQf2X6hFpPZ/Lf3lji+pCkjtDZWJdDBYMX7G+SYJa3Es8zT3Hzbx+cXpBDZlfCDfy7
- PiH+EyJmi4jWYVmJ7Lzxfws0VQganHp34jKhYTZFQfI/yu9Gvv90yt0jtO3KWNmXn7qK
- J+75I9ThyGhbT6jKyUb5v1Da5qd0bR5b8OKceAB7JKL3idrk7qMQgSb1xvJjs8BfbjEF
- Kurx9vr+fBgWTYgkgcRH6TN/sC3HJkE1V2GGo1pGhXDuwjwa5YFrYczeoOLJ+mdVx7RL
- 50TKjzqiyPanugxIl0YPWD+CH9+4P9W5+QnqwDl37PiCl+b+4sbQN135Ncs4PIsm/lGr
- W8uA==
+ bh=kaJP50WLDM/+Y1wH7KAIyvuVMvvgFr40i0fAsYjc5z0=;
+ b=Wl/foCzB10Tf5scj5zbhD4dLij7SsH1zcPAL3+lkMpjrjp96GDUVSUAFmfaNV91xdt
+ gXAVh8x8qhJVUvafcLj+wx6ghADl6tDH2KreSI5UdqGyATE8rob5cqzyvgFNPzHCbQZR
+ uVC4uUJLOrM9VOsjJZ0xoVj2w/xZN6P4UwOBBG/jzOr6EKh/KdVrzSlxl2COjSICwg6o
+ HibqTQWGkl+BG7fuHLCzKL8pHta/LA4fOc7dqAJfGTyuWDGViU2p+LDVuIVSSfqFQD/t
+ T1wyWyhscF3lK9nTY1ewiiBJjTqmt4+KkcbyA4P3/Vol247Q2vOg7CVhr/7NL9tyldOW
+ PQfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=z2i207XY0wpyl4uN0PC9a2HsYtkx8YDQWX6ZUNhml+I=;
- b=bednxPcnEeNSihUUzxg1vtqWP5SmyMHQ5HSMECwuEOnt8NSpiuYodKBzdCwBshHM/U
- peqaYCk64p32HT9JySOu9hbsm2GYtfcqRq/7nYU0E1WRfjED9ZQJ+AlQzgDhzhR1rgkq
- ApM4BaXQ/zuIicQzzMjrSstbuY4iCoTfonScL1ZaaUGhzrzfLiaZTiUXzbYpQPGpdrVR
- 9gteZWCCpMCnehRUfKFQUHsXcdcxK/8yUpVlJ3SHs/+4yoZebgvfXJf4m5IbrDTj1+CP
- h9r7AA6uHS+fCpdctqqLoHx7wTicz4M2U3nkE/NsW+dY+UIk4GW8xi56l9xygQd2CyZB
- ZWVA==
-X-Gm-Message-State: AFqh2koxpYWMzY/QDupbYDPc++JHmjBtgpf1Ue7+ABHIn+aOdIK0bdri
- RzQDw74g/V62W1Or+9NEdSZS477Zhp7M2Y1txcY=
-X-Google-Smtp-Source: AMrXdXskC5cDKi8qnbzagpSV6KLpmw7eIOoZVaASEvfFh99vIu1lqZHd5ZYgTZgZdtKnsTiHwwP+l5bTEFYD6vE9bKA=
-X-Received: by 2002:a05:6122:2323:b0:3e1:7e08:a117 with SMTP id
- bq35-20020a056122232300b003e17e08a117mr23133vkb.34.1673843740643; Sun, 15 Jan
- 2023 20:35:40 -0800 (PST)
+ bh=kaJP50WLDM/+Y1wH7KAIyvuVMvvgFr40i0fAsYjc5z0=;
+ b=b4C6zTpFJQcp6dThFUDji1WouB38YbaqhUA8F+jtzxJz4OCgYrAFfemEeU8aYBIPl1
+ WjgzAHgjYZZ5JW+8kR59O9fCWi40487sQ8K3XSwwNtE385+VLeMnqBz4H3u3ejExjD2g
+ aRaCf8BIrvqyAjfh5QT2HciB7ZxMoZrLmg71zZHqueq6Zu9NiB0AyecOFN4dIXwwmTTR
+ PYaOKM9hbQAVkneyWMwEppR6u++GihWLycqKHIJZfjU/FY/WhwG576mO6tnKuFBZiuHH
+ SRFez2dh7N4eSUQjZtQJ+Xb3Pj4Zh4H/TYJwccUgHE1rF+auxZYGNBwoE7qTkpatW6i0
+ rNMA==
+X-Gm-Message-State: AFqh2kojiJVK92LNqToLpFb2leUcz5kWvYbK2T+uOCbpgfFHkeXlUOuA
+ pOw0zUo65OuVZR+Tz/L5Pq4zWDR0Zb8lFT0nm3U=
+X-Google-Smtp-Source: AMrXdXtBR3NB9DE9nFJegC4knfTX/2Z/0r6qNkqucRp0SL8Gfkak5Vaacv4wCDihVycB3FLcaeTfw/J1ewAF9Ohh+oE=
+X-Received: by 2002:a05:6102:c4a:b0:3ce:f2da:96a with SMTP id
+ y10-20020a0561020c4a00b003cef2da096amr4710899vss.64.1673843936541; Sun, 15
+ Jan 2023 20:38:56 -0800 (PST)
 MIME-Version: 1.0
 References: <20221215224541.1423431-1-abrestic@rivosinc.com>
-In-Reply-To: <20221215224541.1423431-1-abrestic@rivosinc.com>
+ <20221215224541.1423431-2-abrestic@rivosinc.com>
+In-Reply-To: <20221215224541.1423431-2-abrestic@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Jan 2023 14:35:14 +1000
-Message-ID: <CAKmqyKN7TuqwzOr3bs2f=7vWX0wA8Uy5j9j+vECwggD_WcA3RA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/riscv: Fix up masking of vsip/vsie accesses
+Date: Mon, 16 Jan 2023 14:38:30 +1000
+Message-ID: <CAKmqyKNrvEqinvK4D-Axewum1M3msfP9BDc5J3YyP64E9u0A9A@mail.gmail.com>
+Subject: Re: [PATCH 2/2] target/riscv: Trap on writes to stimecmp from VS when
+ hvictl.VTI=1
 To: Andrew Bresticker <abrestic@rivosinc.com>
 Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
  qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,22 +75,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2023 04:35:45 -0000
+X-List-Received-Date: Mon, 16 Jan 2023 04:39:00 -0000
 
 On Fri, Dec 16, 2022 at 8:46 AM Andrew Bresticker <abrestic@rivosinc.com> wrote:
 >
-> The current logic attempts to shift the VS-level bits into their correct
-> position in mip while leaving the remaining bits in-tact. This is both
-> pointless and likely incorrect since one would expect that any new, future
-> VS-level interrupts will get their own position in mip rather than sharing
-> with their (H)S-level equivalent. Fix this, and make the logic more
-> readable, by just making off the VS-level bits and shifting them into
-> position.
+> Per the AIA specification, writes to stimecmp from VS level should
+> trap when hvictl.VTI is set since the write may cause vsip.STIP to
+> become unset.
 >
-> This also fixes reads of vsip, which would only ever report vsip.VSSIP
-> since the non-writable bits got masked off as well.
->
-> Fixes: d028ac7512f1 ("arget/riscv: Implement AIA CSRs for 64 local interrupts on RV32")
+> Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp support")
 > Signed-off-by: Andrew Bresticker <abrestic@rivosinc.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -96,70 +91,33 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/csr.c | 35 +++++++++++------------------------
->  1 file changed, 11 insertions(+), 24 deletions(-)
+>  target/riscv/csr.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 >
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 5c9a7ee287..984548bf87 100644
+> index 984548bf87..7d9035e7bb 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -1975,22 +1975,15 @@ static RISCVException rmw_vsie64(CPURISCVState *env, int csrno,
->                                   uint64_t new_val, uint64_t wr_mask)
->  {
->      RISCVException ret;
-> -    uint64_t rval, vsbits, mask = env->hideleg & VS_MODE_INTERRUPTS;
-> +    uint64_t rval, mask = env->hideleg & VS_MODE_INTERRUPTS;
+> @@ -935,6 +935,9 @@ static RISCVException write_stimecmp(CPURISCVState *env, int csrno,
+>      RISCVCPU *cpu = env_archcpu(env);
 >
->      /* Bring VS-level bits to correct position */
-> -    vsbits = new_val & (VS_MODE_INTERRUPTS >> 1);
-> -    new_val &= ~(VS_MODE_INTERRUPTS >> 1);
-> -    new_val |= vsbits << 1;
-> -    vsbits = wr_mask & (VS_MODE_INTERRUPTS >> 1);
-> -    wr_mask &= ~(VS_MODE_INTERRUPTS >> 1);
-> -    wr_mask |= vsbits << 1;
-> +    new_val = (new_val & (VS_MODE_INTERRUPTS >> 1)) << 1;
-> +    wr_mask = (wr_mask & (VS_MODE_INTERRUPTS >> 1)) << 1;
->
->      ret = rmw_mie64(env, csrno, &rval, new_val, wr_mask & mask);
->      if (ret_val) {
-> -        rval &= mask;
-> -        vsbits = rval & VS_MODE_INTERRUPTS;
-> -        rval &= ~VS_MODE_INTERRUPTS;
-> -        *ret_val = rval | (vsbits >> 1);
-> +        *ret_val = (rval & mask) >> 1;
+>      if (riscv_cpu_virt_enabled(env)) {
+> +        if (env->hvictl & HVICTL_VTI) {
+> +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> +        }
+>          return write_vstimecmp(env, csrno, val);
 >      }
 >
->      return ret;
-> @@ -2191,22 +2184,16 @@ static RISCVException rmw_vsip64(CPURISCVState *env, int csrno,
->                                   uint64_t new_val, uint64_t wr_mask)
->  {
->      RISCVException ret;
-> -    uint64_t rval, vsbits, mask = env->hideleg & vsip_writable_mask;
-> +    uint64_t rval, mask = env->hideleg & VS_MODE_INTERRUPTS;
+> @@ -955,6 +958,9 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
+>      RISCVCPU *cpu = env_archcpu(env);
 >
->      /* Bring VS-level bits to correct position */
-> -    vsbits = new_val & (VS_MODE_INTERRUPTS >> 1);
-> -    new_val &= ~(VS_MODE_INTERRUPTS >> 1);
-> -    new_val |= vsbits << 1;
-> -    vsbits = wr_mask & (VS_MODE_INTERRUPTS >> 1);
-> -    wr_mask &= ~(VS_MODE_INTERRUPTS >> 1);
-> -    wr_mask |= vsbits << 1;
-> -
-> -    ret = rmw_mip64(env, csrno, &rval, new_val, wr_mask & mask);
-> +    new_val = (new_val & (VS_MODE_INTERRUPTS >> 1)) << 1;
-> +    wr_mask = (wr_mask & (VS_MODE_INTERRUPTS >> 1)) << 1;
-> +
-> +    ret = rmw_mip64(env, csrno, &rval, new_val,
-> +                    wr_mask & mask & vsip_writable_mask);
->      if (ret_val) {
-> -        rval &= mask;
-> -        vsbits = rval & VS_MODE_INTERRUPTS;
-> -        rval &= ~VS_MODE_INTERRUPTS;
-> -        *ret_val = rval | (vsbits >> 1);
-> +        *ret_val = (rval & mask) >> 1;
+>      if (riscv_cpu_virt_enabled(env)) {
+> +        if (env->hvictl & HVICTL_VTI) {
+> +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> +        }
+>          return write_vstimecmph(env, csrno, val);
 >      }
 >
->      return ret;
 > --
 > 2.25.1
 >
