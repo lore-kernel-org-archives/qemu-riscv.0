@@ -1,68 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pHIWh-0007nC-FA
-	for mharc-qemu-riscv@gnu.org; Mon, 16 Jan 2023 00:59:23 -0500
+	id 1pHLkD-0005M1-P0
+	for mharc-qemu-riscv@gnu.org; Mon, 16 Jan 2023 04:25:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHIWW-0007aB-7p; Mon, 16 Jan 2023 00:59:15 -0500
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pHLk8-0005K1-QG
+ for qemu-riscv@nongnu.org; Mon, 16 Jan 2023 04:25:29 -0500
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHIWR-0004Yq-Bh; Mon, 16 Jan 2023 00:59:08 -0500
-Received: by mail-pg1-x532.google.com with SMTP id f3so18944835pgc.2;
- Sun, 15 Jan 2023 21:59:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PZSoNavF47DlJv5tWW3a381+KKvDxpiX/lXLvUhxTV0=;
- b=Dlb1lROXKoBri2a9SMtNtbqa70brVxlW+PCeySPhTZm2e3jXlYaFC6rVAln+nWgy2x
- K3H74Mo2wnMoFmhqFY8SAHU1th0FKtLggbhcH3GdPw5z0B9pUobYCDnN64SRJ7GdWAMk
- L1uW8vug3q0Oua0R2FWRBMGXZDbJkotjLvOcqcuD7bVjuFfB0zR2D5sHrK1svqVofpGN
- ab9ecmjOWnWL2i6EXJl26DGYmWkMaMDw8AH1TmhnxlWIILoMt7gbwG40epfGhCQwhj82
- Ga6fMYLZT10oi7bYdrBVGSOCgVoocdpGLsz1MCvfyuhcQsXlQi9nBjCq9JjSgBa+izie
- B5uA==
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pHLk3-0004QL-SS
+ for qemu-riscv@nongnu.org; Mon, 16 Jan 2023 04:25:27 -0500
+Received: by mail-wr1-x436.google.com with SMTP id z5so25761404wrt.6
+ for <qemu-riscv@nongnu.org>; Mon, 16 Jan 2023 01:25:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=d+EPBrH5xWH0oOLlkRWeAJXGBeq6L8Ejk8ixZ1YFNUw=;
+ b=l5/BbfITpEAZWb2UhyPcbI+EF0c/MKWgk/EfCJ4MPPpTP0QbKJ/+xJqVWfyTkcWdTv
+ tbzjlYn+AD9XKVGrlc0tq4cv/coCRC5Ljy9g3mgxVDMIUi7AjEN1w4URpoErj2TsIAc4
+ 2bcqUQPJhMUEQ8S669sluMrgwfNwo9YCcpRqsPzZ02+Yp7L9igB4gWJYAqM+1Bvi5gg7
+ 04CJXJT46wLV/DFTfp9oOIzCdIKpSpX77XYw1y2/IL6+buDShEqWi29Drqo/ccYeHB/m
+ etK/w6Oj/vuyx+UIGS+fcZpYG6rMeLtDcZHq5XpGWO2e3AqgWoVeY9jW9QSjRR+jUU2o
+ SL4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=PZSoNavF47DlJv5tWW3a381+KKvDxpiX/lXLvUhxTV0=;
- b=iyBNWqDKS8CxEedKQJQ2eV1c1HVSkcw6UMmCi9gAn3umKZMw2d21IuJFtSZRpdulFe
- BWGsqU2fh8/5f8563YYi0QaWLYG6iQVxGSC4UgVqHvNQZAe+RgjQTzskG1Tl/54Jg1l7
- e2XRh8GPgXUkPLeCgB3Kl18367f2D4dhYwrow0K7LoSz2vBla1qrQs41Zz8IYKloel2s
- zO5CwUq7lraMJEv9tlTQmOJsLV81YaFl4pbB1h1JlVXJst4QsKD6ra9APKpwDtgxmB83
- u1grl4Ep7zo9llflM7zafKbZCmvq/BQDQRrb1bzMlkOXv24PzOs7pt9eVS9szMTy7wQh
- pPEA==
-X-Gm-Message-State: AFqh2kqw3o/O+6IvKTqh31ddof2kdcHW1VIf8wXatp+w/npb3EpYAJ3R
- Zi272zjvXmjv7bw8rWOphNRtqJYPH5syBPTKTQ1gOQGZ+7/xTw==
-X-Google-Smtp-Source: AMrXdXsaIBsO6AqGITE932OfiU1DBlDTxyuYRkjQFKuSOs+ST6OLkpXQKmpqk4o19XzUTIDzHpgwrCHKGrj3LNcpx1g=
-X-Received: by 2002:a05:6102:510e:b0:3b1:2b83:1861 with SMTP id
- bm14-20020a056102510e00b003b12b831861mr11678769vsb.10.1673846709549; Sun, 15
- Jan 2023 21:25:09 -0800 (PST)
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=d+EPBrH5xWH0oOLlkRWeAJXGBeq6L8Ejk8ixZ1YFNUw=;
+ b=LpjOd3P+Ic3ewuISW7H/Pg9OterAbCaWQZeKkS3hoKcs+MqDsfs5nHnWZsTT8xPmuT
+ N+sXYczk5qvvnTP6/aF7m3JlL6uXb/UwN+AOitVV8imL4sKGSGBQdfLOHI7fcTNM2XwH
+ RokjRvMkioyrR2fb4ZIaNzn3QykEUBCnpbwgKnsulqBW8IIWcKNDrSdia64fJv+q9tgy
+ decYhuziD1UEzTRHyXl/F4qfFFPqL0vvXlqW4zEgW/qN3gIPMVRWwbWdRvCNJ4SN+udD
+ Q0qYWwGKp3dLy2eq4XxLoQGijoKqdpB9GOe1gllQ75tOTSgwas8oSdxiQe/N9b7NoBqd
+ Rf5Q==
+X-Gm-Message-State: AFqh2kq+pcB0o9ujIN3lHAiUyorBLlgqzqZ3eHz3A6old8L5cMdTIlfO
+ PaM859j27dvaHzU0jsYsV1QMxA==
+X-Google-Smtp-Source: AMrXdXuCD6/+h8KXmm8LzbhquqrI3A4wHP68i/q6rfEv3K5NYt6TMUP3KJsO7pVywIYc/Z9mryK0fA==
+X-Received: by 2002:a5d:6c69:0:b0:2bd:f651:3a67 with SMTP id
+ r9-20020a5d6c69000000b002bdf6513a67mr6987843wrz.64.1673861121480; 
+ Mon, 16 Jan 2023 01:25:21 -0800 (PST)
+Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
+ p8-20020a5d4588000000b002bdfb97e029sm3637932wrq.19.2023.01.16.01.25.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 16 Jan 2023 01:25:21 -0800 (PST)
+Message-ID: <1ff4c868-f39f-21e0-2030-a78163143233@linaro.org>
+Date: Mon, 16 Jan 2023 10:25:19 +0100
 MIME-Version: 1.0
-References: <20221215224541.1423431-1-abrestic@rivosinc.com>
- <20221215224541.1423431-2-abrestic@rivosinc.com>
-In-Reply-To: <20221215224541.1423431-2-abrestic@rivosinc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Jan 2023 15:24:43 +1000
-Message-ID: <CAKmqyKOyzZNcQk5tV2rK5dsLmGtD9FQryNrRSna3f=DY6YfDTQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv: Trap on writes to stimecmp from VS when
- hvictl.VTI=1
-To: Andrew Bresticker <abrestic@rivosinc.com>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x532.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.6.1
+Subject: Re: [PATCH v7 3/3] hw/riscv: clear kernel_entry higher bits in
+ load_elf_ram_sym()
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ Bin Meng <bmeng.cn@gmail.com>
+References: <20230113171805.470252-1-dbarboza@ventanamicro.com>
+ <20230113171805.470252-4-dbarboza@ventanamicro.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20230113171805.470252-4-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x436.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,53 +82,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2023 05:59:21 -0000
+X-List-Received-Date: Mon, 16 Jan 2023 09:25:30 -0000
 
-On Fri, Dec 16, 2022 at 8:46 AM Andrew Bresticker <abrestic@rivosinc.com> wrote:
->
-> Per the AIA specification, writes to stimecmp from VS level should
-> trap when hvictl.VTI is set since the write may cause vsip.STIP to
-> become unset.
->
-> Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp support")
-> Signed-off-by: Andrew Bresticker <abrestic@rivosinc.com>
-
-Thanks!
-
-Applied to riscv-to-apply.next
-
-Alistair
-
+On 13/1/23 18:18, Daniel Henrique Barboza wrote:
+> Recent hw/risc/boot.c changes caused a regression in an use case with
+> the Xvisor hypervisor. Running a 32 bit QEMU guest with '-kernel'
+> stopped working. The reason seems to be that Xvisor is using 64 bit to
+> encode the 32 bit addresses from the guest, and load_elf_ram_sym() is
+> sign-extending the result with '1's [1].
+> 
+> This can very well be an issue with Xvisor, but since it's not hard to
+> amend it in our side we're going for it. Use a translate_fn() callback
+> to be called by load_elf_ram_sym() and clear the higher bits of the
+> result if we're running a 32 bit CPU.
+> 
+> [1] https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg02281.html
+> 
+> Suggested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Suggested-by: Bin Meng <bmeng.cn@gmail.com>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  target/riscv/csr.c | 6 ++++++
->  1 file changed, 6 insertions(+)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 984548bf87..7d9035e7bb 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -935,6 +935,9 @@ static RISCVException write_stimecmp(CPURISCVState *env, int csrno,
->      RISCVCPU *cpu = env_archcpu(env);
->
->      if (riscv_cpu_virt_enabled(env)) {
-> +        if (env->hvictl & HVICTL_VTI) {
-> +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> +        }
->          return write_vstimecmp(env, csrno, val);
->      }
->
-> @@ -955,6 +958,9 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
->      RISCVCPU *cpu = env_archcpu(env);
->
->      if (riscv_cpu_virt_enabled(env)) {
-> +        if (env->hvictl & HVICTL_VTI) {
-> +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> +        }
->          return write_vstimecmph(env, csrno, val);
->      }
->
-> --
-> 2.25.1
->
->
+>   hw/riscv/boot.c            | 23 ++++++++++++++++++++++-
+>   hw/riscv/microchip_pfsoc.c |  4 ++--
+>   hw/riscv/opentitan.c       |  3 ++-
+>   hw/riscv/sifive_e.c        |  3 ++-
+>   hw/riscv/sifive_u.c        |  4 ++--
+>   hw/riscv/spike.c           |  2 +-
+>   hw/riscv/virt.c            |  4 ++--
+>   include/hw/riscv/boot.h    |  1 +
+>   8 files changed, 34 insertions(+), 10 deletions(-)
+
+> +static uint64_t translate_kernel_address(void *opaque, uint64_t addr)
+> +{
+> +    RISCVHartArrayState *harts = opaque;
+> +
+> +    /*
+> +     * For 32 bit CPUs, kernel_load_base is sign-extended (i.e.
+> +     * it can be padded with '1's) if the hypervisor, for some
+> +     * reason, is using 64 bit addresses with 32 bit guests.
+> +     *
+> +     * Clear the higher bits to avoid the padding if we're
+> +     * running a 32 bit CPU.
+> +     */
+> +    if (riscv_is_32bit(harts)) {
+> +        return addr & 0x0fffffff;
+
+Instead of this magic mask, can we add some architectural definition
+in target/riscv/cpu_bits.h and use it as:
+
+            return extract64(addr, 0, xxx_ADDR_BITS);
+
+to make the code self-descriptive?
+
+Otherwise LGTM, thanks!
+
+> +    }
+> +
+> +    return addr;
+> +}
+
+
 
