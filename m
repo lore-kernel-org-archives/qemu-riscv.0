@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pHGhl-0000uj-5F
-	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 23:02:42 -0500
+	id 1pHGjs-00020J-3w
+	for mharc-qemu-riscv@gnu.org; Sun, 15 Jan 2023 23:04:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHGhY-0000sn-Ma; Sun, 15 Jan 2023 23:02:36 -0500
-Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
+ id 1pHGjk-0001z6-Hy; Sun, 15 Jan 2023 23:04:44 -0500
+Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pHGhW-0002C3-8i; Sun, 15 Jan 2023 23:02:27 -0500
-Received: by mail-vs1-xe31.google.com with SMTP id i185so27880652vsc.6;
- Sun, 15 Jan 2023 20:02:25 -0800 (PST)
+ id 1pHGji-0002JK-Hz; Sun, 15 Jan 2023 23:04:43 -0500
+Received: by mail-vk1-xa29.google.com with SMTP id 6so12804406vkz.0;
+ Sun, 15 Jan 2023 20:04:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=M2iaegwmrT5K5aEMa0ZkIczVeVodwfUdiZR3a/iMLt0=;
- b=HN8CdHxyLll89w1DZeVEufwuVkYwxovWCFBFP0b8cVfdD3WCb/yosWDfOfXyBS4rw5
- /H8DxGbUPGL7NYLb1ljv6bI77mRrdBk9hKvCghK9EgvZAQ78ozvgz7YWKAiSSQNGq4cj
- ihv6pDiyMFwEyAHTX84llffiKMiFQ5tQ9AGoxAVPXlbPd4P3dn/navca521KumMp9tnI
- Ori7haf+8q9YaNwPUQ2iicQWxkLyQnTN2hneF5O8IoxxSVXffiFo78AbwOCzgz7eaPCj
- eOZdLj1kWBeeefudX1nR9jkOxv8oOBHh6qDjruPetxoM4CmLYY0js9L8Dlg7tkatb3UZ
- eQAw==
+ bh=udFX3U3RsmIClU1hUlKvTC5l9IBbeNR2IPfzHANRUss=;
+ b=CxHq5Selrd3wWLuH8iyQNg3JvTVvNEOlis9f5+Kp5EzCRKmcXE8h+HiVe0KsE/PR+L
+ AHggjIuedhLetyhawsc+dUMK4E2JNDTRVO6W+YPvVI7f3yVnzcjbm4gJ+0/qhl1V8wzg
+ SbGOQ6Nr2SVrW6tdUYqM8QUqRbhDOJAetLlodoweFSaCyqI4wfSE7cQCTFdZUwkZTGfM
+ TQ7j24bN3TnutcM2VLllMeryq+3Y+vp7JQE8qUoB5QC82/PUxeHZtoS0s0AKEZqXXp8Q
+ a4Xo1hAdH/4u5weLaf2X8Zx32AxHLS336yfbfxqwR2dOzr7ErAiBByuattMGj1FcYnAy
+ EHDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=M2iaegwmrT5K5aEMa0ZkIczVeVodwfUdiZR3a/iMLt0=;
- b=0pN7Psnqi+Wtzs+TmFDzXtlBO3pK6HcpAOerWhshquAawBtjgBkfrPcAny7WviWitz
- pS6uLhPuHM7xEAUNbpik/EIXk3BgJrI5RRh5Mu1F+536MjmPm4Ccj6ravWIZuaM3v53K
- qwEiOacFeCEa8Eih5k12XL45CEWi4dhvlY5chJLF+yaKF+oyHtpmhrJej9Hu2UIaLQCq
- zWWbk/Ntg0Du1wVPWHFslkin2OrOyaibyDYzid652Xu3ElRD64KEQ3uNNZZz+G0auj6E
- Fxot2ZE0iA1dDGKLzuChwsEk0CxQTovyQdKdiLv+ZeH65ZSlNNOgcYv50K4dbNdZRoOT
- WsTg==
-X-Gm-Message-State: AFqh2krofQHEnQl3RJZPCfEunywUys6Yn4/JB6f//ZtFLneTLLoeFtvk
- kuzAmn2pg6Oh/qx1nDMK97ovIomE51oM+2ugagM=
-X-Google-Smtp-Source: AMrXdXvfqHjMrTiyI3ry6F1gGpjoIZDrFppLYtrtZGRCor899FYeGoycHg/ELkuJbh5dHvpgWFTaFyRDrHrOGRSo3fM=
-X-Received: by 2002:a67:e052:0:b0:3d0:c2e9:cb77 with SMTP id
- n18-20020a67e052000000b003d0c2e9cb77mr3018866vsl.54.1673841744844; Sun, 15
- Jan 2023 20:02:24 -0800 (PST)
+ bh=udFX3U3RsmIClU1hUlKvTC5l9IBbeNR2IPfzHANRUss=;
+ b=uLT0H/1f/fu/xByMDZ4PycFxwjyl0uObAq6HalTevcry1yMr5wVeyxQIWey3g9NZqL
+ gwC9GKc0B8nNSigJNj3NVVgtvAXN3jYpEXmBYkXmZ8ZFx8GEqH2Jh00vhA/qQ3ZEJXsl
+ g2sSuzgllRURZBxptpEIw1G45Aa+pXbJeSg+p0AoIoPhjiv+zSiZHocbyx9Naumkvy2K
+ km+Ph0UTTuwvAVnZ57Yu+eFsRO/iYk9j/XmMz89zILBDVoUo4w2qEDwJzPueuanPHMKX
+ JSlYP35WY6QHoYQ4FPRW3QeK/n8ut45zWWT2cmAe3brzyKcitfCqzM2318mOO4AuB2IF
+ 5rfA==
+X-Gm-Message-State: AFqh2krAlY0o1RhZDVNyqh54Bm6sOmtAAGtk5cfsOz+yAH6ui93oIzMv
+ nIJYlu6MxuWK+SaMXkZoqFeuvHqbCfb5dHinwXXXL8Q/ESj+Dw==
+X-Google-Smtp-Source: AMrXdXtvsKeCC3q49+Zuhh25eyI63L/IVWPizMNciqqCTi00k1YWOFSHV43yyj3luig8EDudGKpjKdY1Wwp+9CoZnNU=
+X-Received: by 2002:a1f:3215:0:b0:3d5:86ff:6638 with SMTP id
+ y21-20020a1f3215000000b003d586ff6638mr9136154vky.30.1673841880331; Sun, 15
+ Jan 2023 20:04:40 -0800 (PST)
 MIME-Version: 1.0
 References: <20230111170948.316276-1-dbarboza@ventanamicro.com>
- <20230111170948.316276-6-dbarboza@ventanamicro.com>
-In-Reply-To: <20230111170948.316276-6-dbarboza@ventanamicro.com>
+ <20230111170948.316276-7-dbarboza@ventanamicro.com>
+In-Reply-To: <20230111170948.316276-7-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Jan 2023 14:01:58 +1000
-Message-ID: <CAKmqyKPxKuE1eEk-=zSpbCHfbi=mb+_eEvxsK0PU2QY31=OT=g@mail.gmail.com>
-Subject: Re: [PATCH 05/10] hw/riscv: use MachineState::fdt in
- riscv_socket_fdt_write_id()
+Date: Mon, 16 Jan 2023 14:04:14 +1000
+Message-ID: <CAKmqyKOqrx+8XRL9DEn74h42TQs35zfpkyKTnMOQWXWuGuBdYA@mail.gmail.com>
+Subject: Re: [PATCH 06/10] hw/riscv: use ms->fdt in
+ riscv_socket_fdt_write_distance_matrix()
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa29.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,9 +73,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2023 04:02:38 -0000
+X-List-Received-Date: Mon, 16 Jan 2023 04:04:46 -0000
 
-On Thu, Jan 12, 2023 at 3:28 AM Daniel Henrique Barboza
+On Thu, Jan 12, 2023 at 3:26 AM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
 > There's no need to use a MachineState pointer and a fdt pointer now that
@@ -88,165 +88,81 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/numa.c         |  6 +++---
->  hw/riscv/spike.c        |  6 +++---
->  hw/riscv/virt.c         | 18 +++++++++---------
->  include/hw/riscv/numa.h |  6 +++---
->  4 files changed, 18 insertions(+), 18 deletions(-)
+>  hw/riscv/numa.c         | 8 ++++----
+>  hw/riscv/spike.c        | 2 +-
+>  hw/riscv/virt.c         | 2 +-
+>  include/hw/riscv/numa.h | 4 ++--
+>  4 files changed, 8 insertions(+), 8 deletions(-)
 >
 > diff --git a/hw/riscv/numa.c b/hw/riscv/numa.c
-> index 7fe92d402f..f4343f5cde 100644
+> index f4343f5cde..4720102561 100644
 > --- a/hw/riscv/numa.c
 > +++ b/hw/riscv/numa.c
-> @@ -156,11 +156,11 @@ uint64_t riscv_socket_mem_size(const MachineState *ms, int socket_id)
->              ms->numa_state->nodes[socket_id].node_mem : 0;
->  }
->
-> -void riscv_socket_fdt_write_id(const MachineState *ms, void *fdt,
-> -                               const char *node_name, int socket_id)
-> +void riscv_socket_fdt_write_id(const MachineState *ms, const char *node_name,
-> +                               int socket_id)
->  {
->      if (numa_enabled(ms)) {
-> -        qemu_fdt_setprop_cell(fdt, node_name, "numa-node-id", socket_id);
-> +        qemu_fdt_setprop_cell(ms->fdt, node_name, "numa-node-id", socket_id);
+> @@ -164,7 +164,7 @@ void riscv_socket_fdt_write_id(const MachineState *ms, const char *node_name,
 >      }
 >  }
 >
+> -void riscv_socket_fdt_write_distance_matrix(const MachineState *ms, void *fdt)
+> +void riscv_socket_fdt_write_distance_matrix(const MachineState *ms)
+>  {
+>      int i, j, idx;
+>      uint32_t *dist_matrix, dist_matrix_size;
+> @@ -184,10 +184,10 @@ void riscv_socket_fdt_write_distance_matrix(const MachineState *ms, void *fdt)
+>              }
+>          }
+>
+> -        qemu_fdt_add_subnode(fdt, "/distance-map");
+> -        qemu_fdt_setprop_string(fdt, "/distance-map", "compatible",
+> +        qemu_fdt_add_subnode(ms->fdt, "/distance-map");
+> +        qemu_fdt_setprop_string(ms->fdt, "/distance-map", "compatible",
+>                                  "numa-distance-map-v1");
+> -        qemu_fdt_setprop(fdt, "/distance-map", "distance-matrix",
+> +        qemu_fdt_setprop(ms->fdt, "/distance-map", "distance-matrix",
+>                           dist_matrix, dist_matrix_size);
+>          g_free(dist_matrix);
+>      }
 > diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 4a66016d69..05d34651cb 100644
+> index 05d34651cb..91bf194ec1 100644
 > --- a/hw/riscv/spike.c
 > +++ b/hw/riscv/spike.c
-> @@ -121,7 +121,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
->              qemu_fdt_setprop_cell(fdt, cpu_name, "reg",
->                  s->soc[socket].hartid_base + cpu);
->              qemu_fdt_setprop_string(fdt, cpu_name, "device_type", "cpu");
-> -            riscv_socket_fdt_write_id(mc, fdt, cpu_name, socket);
-> +            riscv_socket_fdt_write_id(mc, cpu_name, socket);
->              qemu_fdt_setprop_cell(fdt, cpu_name, "phandle", cpu_phandle);
+> @@ -174,7 +174,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+>          g_free(clust_name);
+>      }
 >
->              intc_name = g_strdup_printf("%s/interrupt-controller", cpu_name);
-> @@ -154,7 +154,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
->          qemu_fdt_setprop_cells(fdt, mem_name, "reg",
->              addr >> 32, addr, size >> 32, size);
->          qemu_fdt_setprop_string(fdt, mem_name, "device_type", "memory");
-> -        riscv_socket_fdt_write_id(mc, fdt, mem_name, socket);
-> +        riscv_socket_fdt_write_id(mc, mem_name, socket);
->          g_free(mem_name);
+> -    riscv_socket_fdt_write_distance_matrix(mc, fdt);
+> +    riscv_socket_fdt_write_distance_matrix(mc);
 >
->          clint_addr = memmap[SPIKE_CLINT].base +
-> @@ -167,7 +167,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
->              0x0, clint_addr, 0x0, memmap[SPIKE_CLINT].size);
->          qemu_fdt_setprop(fdt, clint_name, "interrupts-extended",
->              clint_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
-> -        riscv_socket_fdt_write_id(mc, fdt, clint_name, socket);
-> +        riscv_socket_fdt_write_id(mc, clint_name, socket);
->
->          g_free(clint_name);
->          g_free(clint_cells);
+>      qemu_fdt_add_subnode(fdt, "/chosen");
+>      qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", "/htif");
 > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 99a0a43a73..1d3bd25cb5 100644
+> index 1d3bd25cb5..e374b58f89 100644
 > --- a/hw/riscv/virt.c
 > +++ b/hw/riscv/virt.c
-> @@ -253,7 +253,7 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
->          qemu_fdt_setprop_cell(mc->fdt, cpu_name, "reg",
->              s->soc[socket].hartid_base + cpu);
->          qemu_fdt_setprop_string(mc->fdt, cpu_name, "device_type", "cpu");
-> -        riscv_socket_fdt_write_id(mc, mc->fdt, cpu_name, socket);
-> +        riscv_socket_fdt_write_id(mc, cpu_name, socket);
->          qemu_fdt_setprop_cell(mc->fdt, cpu_name, "phandle", cpu_phandle);
+> @@ -805,7 +805,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+>          }
+>      }
 >
->          intc_phandles[cpu] = (*phandle)++;
-> @@ -291,7 +291,7 @@ static void create_fdt_socket_memory(RISCVVirtState *s,
->      qemu_fdt_setprop_cells(mc->fdt, mem_name, "reg",
->          addr >> 32, addr, size >> 32, size);
->      qemu_fdt_setprop_string(mc->fdt, mem_name, "device_type", "memory");
-> -    riscv_socket_fdt_write_id(mc, mc->fdt, mem_name, socket);
-> +    riscv_socket_fdt_write_id(mc, mem_name, socket);
->      g_free(mem_name);
+> -    riscv_socket_fdt_write_distance_matrix(mc, mc->fdt);
+> +    riscv_socket_fdt_write_distance_matrix(mc);
 >  }
 >
-> @@ -327,7 +327,7 @@ static void create_fdt_socket_clint(RISCVVirtState *s,
->          0x0, clint_addr, 0x0, memmap[VIRT_CLINT].size);
->      qemu_fdt_setprop(mc->fdt, clint_name, "interrupts-extended",
->          clint_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
-> -    riscv_socket_fdt_write_id(mc, mc->fdt, clint_name, socket);
-> +    riscv_socket_fdt_write_id(mc, clint_name, socket);
->      g_free(clint_name);
->
->      g_free(clint_cells);
-> @@ -372,7 +372,7 @@ static void create_fdt_socket_aclint(RISCVVirtState *s,
->              aclint_mswi_cells, aclint_cells_size);
->          qemu_fdt_setprop(mc->fdt, name, "interrupt-controller", NULL, 0);
->          qemu_fdt_setprop_cell(mc->fdt, name, "#interrupt-cells", 0);
-> -        riscv_socket_fdt_write_id(mc, mc->fdt, name, socket);
-> +        riscv_socket_fdt_write_id(mc, name, socket);
->          g_free(name);
->      }
->
-> @@ -396,7 +396,7 @@ static void create_fdt_socket_aclint(RISCVVirtState *s,
->          0x0, RISCV_ACLINT_DEFAULT_MTIME);
->      qemu_fdt_setprop(mc->fdt, name, "interrupts-extended",
->          aclint_mtimer_cells, aclint_cells_size);
-> -    riscv_socket_fdt_write_id(mc, mc->fdt, name, socket);
-> +    riscv_socket_fdt_write_id(mc, name, socket);
->      g_free(name);
->
->      if (s->aia_type != VIRT_AIA_TYPE_APLIC_IMSIC) {
-> @@ -412,7 +412,7 @@ static void create_fdt_socket_aclint(RISCVVirtState *s,
->              aclint_sswi_cells, aclint_cells_size);
->          qemu_fdt_setprop(mc->fdt, name, "interrupt-controller", NULL, 0);
->          qemu_fdt_setprop_cell(mc->fdt, name, "#interrupt-cells", 0);
-> -        riscv_socket_fdt_write_id(mc, mc->fdt, name, socket);
-> +        riscv_socket_fdt_write_id(mc, name, socket);
->          g_free(name);
->      }
->
-> @@ -471,7 +471,7 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
->          0x0, plic_addr, 0x0, memmap[VIRT_PLIC].size);
->      qemu_fdt_setprop_cell(mc->fdt, plic_name, "riscv,ndev",
->                            VIRT_IRQCHIP_NUM_SOURCES - 1);
-> -    riscv_socket_fdt_write_id(mc, mc->fdt, plic_name, socket);
-> +    riscv_socket_fdt_write_id(mc, plic_name, socket);
->      qemu_fdt_setprop_cell(mc->fdt, plic_name, "phandle",
->          plic_phandles[socket]);
->
-> @@ -663,7 +663,7 @@ static void create_fdt_socket_aplic(RISCVVirtState *s,
->          aplic_s_phandle);
->      qemu_fdt_setprop_cells(mc->fdt, aplic_name, "riscv,delegate",
->          aplic_s_phandle, 0x1, VIRT_IRQCHIP_NUM_SOURCES);
-> -    riscv_socket_fdt_write_id(mc, mc->fdt, aplic_name, socket);
-> +    riscv_socket_fdt_write_id(mc, aplic_name, socket);
->      qemu_fdt_setprop_cell(mc->fdt, aplic_name, "phandle", aplic_m_phandle);
->      g_free(aplic_name);
->
-> @@ -691,7 +691,7 @@ static void create_fdt_socket_aplic(RISCVVirtState *s,
->          0x0, aplic_addr, 0x0, memmap[VIRT_APLIC_S].size);
->      qemu_fdt_setprop_cell(mc->fdt, aplic_name, "riscv,num-sources",
->          VIRT_IRQCHIP_NUM_SOURCES);
-> -    riscv_socket_fdt_write_id(mc, mc->fdt, aplic_name, socket);
-> +    riscv_socket_fdt_write_id(mc, aplic_name, socket);
->      qemu_fdt_setprop_cell(mc->fdt, aplic_name, "phandle", aplic_s_phandle);
->
->      if (!socket) {
+>  static void create_fdt_virtio(RISCVVirtState *s, const MemMapEntry *memmap,
 > diff --git a/include/hw/riscv/numa.h b/include/hw/riscv/numa.h
-> index 1a9cce3344..634df6673f 100644
+> index 634df6673f..8f5280211d 100644
 > --- a/include/hw/riscv/numa.h
 > +++ b/include/hw/riscv/numa.h
-> @@ -90,10 +90,10 @@ bool riscv_socket_check_hartids(const MachineState *ms, int socket_id);
+> @@ -100,9 +100,9 @@ void riscv_socket_fdt_write_id(const MachineState *ms, const char *node_name,
 >   * @ms: pointer to machine state
 >   * @socket_id: socket index
 >   *
-> - * Write NUMA node-id FDT property for given FDT node
-> + * Write NUMA node-id FDT property in MachineState->fdt
+> - * Write NUMA distance matrix in FDT for given machine
+> + * Write NUMA distance matrix in MachineState->fdt
 >   */
-> -void riscv_socket_fdt_write_id(const MachineState *ms, void *fdt,
-> -                               const char *node_name, int socket_id);
-> +void riscv_socket_fdt_write_id(const MachineState *ms, const char *node_name,
-> +                               int socket_id);
+> -void riscv_socket_fdt_write_distance_matrix(const MachineState *ms, void *fdt);
+> +void riscv_socket_fdt_write_distance_matrix(const MachineState *ms);
 >
->  /**
->   * riscv_socket_fdt_write_distance_matrix:
+>  CpuInstanceProperties
+>  riscv_numa_cpu_index_to_props(MachineState *ms, unsigned cpu_index);
 > --
 > 2.39.0
 >
