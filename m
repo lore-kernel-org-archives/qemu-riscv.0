@@ -1,68 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pHm0Z-0004xQ-3W
-	for mharc-qemu-riscv@gnu.org; Tue, 17 Jan 2023 08:28:11 -0500
+	id 1pHmqP-0005iB-BY
+	for mharc-qemu-riscv@gnu.org; Tue, 17 Jan 2023 09:21:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pHm0X-0004wh-6N
- for qemu-riscv@nongnu.org; Tue, 17 Jan 2023 08:28:09 -0500
-Received: from mail-oa1-x43.google.com ([2001:4860:4864:20::43])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1pHmqN-0005hd-GN
+ for qemu-riscv@nongnu.org; Tue, 17 Jan 2023 09:21:43 -0500
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pHm0V-0001TR-7g
- for qemu-riscv@nongnu.org; Tue, 17 Jan 2023 08:28:08 -0500
-Received: by mail-oa1-x43.google.com with SMTP id
- 586e51a60fabf-1322d768ba7so31907371fac.5
- for <qemu-riscv@nongnu.org>; Tue, 17 Jan 2023 05:28:06 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1pHmqL-00029v-IS
+ for qemu-riscv@nongnu.org; Tue, 17 Jan 2023 09:21:42 -0500
+Received: by mail-wm1-x32d.google.com with SMTP id m15so1172787wms.4
+ for <qemu-riscv@nongnu.org>; Tue, 17 Jan 2023 06:21:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wjDJws69/b2lYY2Ofw7BKsKud7AlxZ3crKbm2ST0OU4=;
- b=aR3tSfMsvJ+SmHFzbT/w+DElJ7g9fi31QtuEa6rM94lWQ2a4eIt9nC1DmHdSVDLLd1
- VsMUpKqTDwzduyubmt3feJBwOBLDhyEuJby0nmGO9NHCn9SXmEyb1GujCywp4lHqs9us
- 4HCFCqK0rm37Tze0rmxVFs0ZBhsH88bVEy1IcZ2zedTPKdqmA0PEXUaeA5CwDxGUsWZG
- WtyeDXJk913imfQJBSCvl70c/pbeRz8i5KXKsV+ummo9+CKXts0w+YFw6lLn7vpfWERx
- L6/4mMfs1Ba+olDQtT9qS34pOnkbeVQRrXB4bUpnWtdWLEQbfHplGFbvLFoG20GxXP1P
- scig==
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zun9R1HnhsYpIBEgRGSUZTaf8sxjD8dhuMNZisat7OE=;
+ b=izHMtbuWbUucEUuHTTlFDItCol7+bADhZ8vPpw+vOs3DapJ8eG6INbA16ISgsOKgCW
+ 8lWRjrp6+IBf8DkSUuB1kgMqGvdwadXzGHzFaAOgrVNBqdJwgh3+wEZWKI7u2lyAKJb0
+ fEJ4fY2sRWLw6X/wH9epcCUqZneGbDCGWsOdUU6ZPoxANZvCBwiMRBdbMptPZTERBs3J
+ swOeLd0sOBdDSCDqn8sYCFfqia665gypxQL9CpBnf0dDvm/+bbYzW3Fqz5iQjtizT7g2
+ DuNhgS53jotsEq3e1cog8/JUA152Ve1jCyBGQucQ3diz9h4d6Ixe7P7SOW4lk6KrI45l
+ JLvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wjDJws69/b2lYY2Ofw7BKsKud7AlxZ3crKbm2ST0OU4=;
- b=0aXecKXHmFP1XEYbMtvhLeLQtT1kWHwYCcsZM8R61V3vVBc9fVjI7dFMo5v+gVQ4/K
- fpeMKq9JCLmZQIxIQwuHkv3up0ZcfbKw9hMQASUtszgLJA6ZGSNo4GPe2YxHAU0SCeHA
- kxcFiMNEep01CJwIPKXOVIvijQTEEV9S5JUcqVUCXL5/lE6WXZJUDBt3Aqwe0LR0w6+s
- ApNVIiIK4YuFyjBL+Q8DSX2uDtnuISr2G/ll7KKY06AmpScc4nV8LTAuLsFXMQvHkqyP
- uygRt8VAO5517a9aQ85WVWmWqXpNKohHOoDK4chBhG07Y1lyTY8DeBeSduU/XxQokoEK
- PwTQ==
-X-Gm-Message-State: AFqh2kr0GnfpSvDDt3ooRGUT+DByNlpBgZSkrlqIZ3vbA0vhynOEOuND
- 2rSeP+l0/TANVMCdeghz+y6jbQ==
-X-Google-Smtp-Source: AMrXdXuF7p4oLukFB/Lfsv/eQe9Rs9KexoHqHaeBwnHzi4gN34CSglv0AWY07Q9TMJupm9Nlg9RGgA==
-X-Received: by 2002:a05:6870:8999:b0:13c:2539:216 with SMTP id
- f25-20020a056870899900b0013c25390216mr1769389oaq.10.1673962085978; 
- Tue, 17 Jan 2023 05:28:05 -0800 (PST)
-Received: from grind.. ([191.17.222.2]) by smtp.gmail.com with ESMTPSA id
- v12-20020a056870b50c00b0014fc049fc0asm16538270oap.57.2023.01.17.05.28.03
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zun9R1HnhsYpIBEgRGSUZTaf8sxjD8dhuMNZisat7OE=;
+ b=ZaX2WAFrmWvP8Y02KdAIiK1SHcX2D3m6yZ55uh1hveQ7FVurJC51R/zXxCIe9hRuC8
+ nQXNGyeutAkHCMbw2mwmsjgpUELk+pjIW6Erm3nMAv0xDXwI0fRw4aDInEik8UtRFusw
+ 7owy4d4bdYYnxDPe29KkWdDMDEbeE5+AIejKXPz2z0N3UnaU0S9l7ibh/bRhIaUZsQ7m
+ w7Fp6iu6v6jvK7PauPFdsjPZnpMNJoOa5qPierI7mjAvJaGTmMbKx65naqeYgH4QU2fR
+ zbK6n4IjcmbCJQC1brhRRb8rSHoYJXRMdM1vPqkQLqLbuzifmyQ293hruErd9J5+AxYp
+ EAEw==
+X-Gm-Message-State: AFqh2kq5EC3rhouAnL7kaqEVRC5Mar9eKHTvdCpgkT4bEKeexYDJYUIj
+ S9GccOsMDIqSvOBfGR6dsnjGuQ==
+X-Google-Smtp-Source: AMrXdXuqMMdgEqpTq0Kqpst9s4vegKgZPQtwgIb+WdRlWyAn+Bj0fQOyi4fE5wuBq+qS/Lx0mHC7zw==
+X-Received: by 2002:a05:600c:4a27:b0:3db:3ef:2369 with SMTP id
+ c39-20020a05600c4a2700b003db03ef2369mr3755143wmp.40.1673965299712; 
+ Tue, 17 Jan 2023 06:21:39 -0800 (PST)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ j20-20020a05600c1c1400b003daf89e01d3sm8505849wms.11.2023.01.17.06.21.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Jan 2023 05:28:05 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng.cn@gmail.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 1/1] hw/riscv/virt.c: move create_fw_cfg() back to
- virt_machine_init()
-Date: Tue, 17 Jan 2023 10:27:51 -0300
-Message-Id: <20230117132751.229738-2-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230117132751.229738-1-dbarboza@ventanamicro.com>
-References: <20230117132751.229738-1-dbarboza@ventanamicro.com>
+ Tue, 17 Jan 2023 06:21:39 -0800 (PST)
+Date: Tue, 17 Jan 2023 15:21:38 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Alexandre Ghiti <alexghiti@rivosinc.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Subject: Re: [PATCH v5 1/2] riscv: Pass Object to register_cpu_props instead
+ of DeviceState
+Message-ID: <20230117142138.j2cv2lzvppiuzpne@orel>
+References: <20230113103453.42776-1-alexghiti@rivosinc.com>
+ <20230113103453.42776-2-alexghiti@rivosinc.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::43;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x43.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230113103453.42776-2-alexghiti@rivosinc.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -82,64 +86,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jan 2023 13:28:09 -0000
+X-List-Received-Date: Tue, 17 Jan 2023 14:21:43 -0000
 
-Commit 1c20d3ff6004 ("hw/riscv: virt: Add a machine done notifier")
-moved the initialization of fw_cfg to the virt_machine_done() callback.
+On Fri, Jan 13, 2023 at 11:34:52AM +0100, Alexandre Ghiti wrote:
+> One can extract the DeviceState pointer from the Object pointer, so pass
+> the Object for future commits to access other fields of Object.
+> 
+> No functional changes intended.
+> 
+> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> ---
+>  target/riscv/cpu.c | 15 ++++++++-------
+>  1 file changed, 8 insertions(+), 7 deletions(-)
+>
 
-Problem is that the validation of fw_cfg by devices such as ramfb is
-done before the machine done notifier is called. Moving create_fw_cfg()
-to machine_done() results in QEMU failing to boot when using a ramfb
-device:
-
-./qemu-system-riscv64 -machine virt -device ramfb -serial stdio
-qemu-system-riscv64: -device ramfb: ramfb device requires fw_cfg with DMA
-
-The fix is simple: move create_fw_cfg() config back to
-virt_machine_init(). This happens to be the same way the ARM 'virt'
-machine deals with fw_cfg (see machvirt_init() and virt_machine_done()
-in hw/arm/virt.c), so we're keeping consistency with how other machines
-handle this device.
-
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1343
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- hw/riscv/virt.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
-
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index e6d4f06e8d..4a11b4b010 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1254,13 +1254,6 @@ static void virt_machine_done(Notifier *notifier, void *data)
-     firmware_end_addr = riscv_find_and_load_firmware(machine, firmware_name,
-                                                      start_addr, NULL);
- 
--    /*
--     * Init fw_cfg.  Must be done before riscv_load_fdt, otherwise the device
--     * tree cannot be altered and we get FDT_ERR_NOSPACE.
--     */
--    s->fw_cfg = create_fw_cfg(machine);
--    rom_set_fw(s->fw_cfg);
--
-     if (drive_get(IF_PFLASH, 0, 1)) {
-         /*
-          * S-mode FW like EDK2 will be kept in second plash (unit 1).
-@@ -1468,6 +1461,13 @@ static void virt_machine_init(MachineState *machine)
-     memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
-                                 mask_rom);
- 
-+    /*
-+     * Init fw_cfg. Must be done before riscv_load_fdt, otherwise the
-+     * device tree cannot be altered and we get FDT_ERR_NOSPACE.
-+     */
-+    s->fw_cfg = create_fw_cfg(machine);
-+    rom_set_fw(s->fw_cfg);
-+
-     /* SiFive Test MMIO device */
-     sifive_test_create(memmap[VIRT_TEST].base);
- 
--- 
-2.39.0
-
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
