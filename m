@@ -1,58 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIHJN-0001aE-Us
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Jan 2023 17:53:42 -0500
+	id 1pIHMO-0002gN-J8
+	for mharc-qemu-riscv@gnu.org; Wed, 18 Jan 2023 17:56:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIHJG-0001R3-EU; Wed, 18 Jan 2023 17:53:35 -0500
-Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
+ id 1pIHMI-0002fl-8Y; Wed, 18 Jan 2023 17:56:46 -0500
+Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIHJD-00048s-NO; Wed, 18 Jan 2023 17:53:34 -0500
-Received: by mail-vk1-xa2e.google.com with SMTP id w72so93295vkw.7;
- Wed, 18 Jan 2023 14:53:31 -0800 (PST)
+ id 1pIHMF-0004ki-N1; Wed, 18 Jan 2023 17:56:41 -0500
+Received: by mail-vs1-xe2a.google.com with SMTP id i185so363029vsc.6;
+ Wed, 18 Jan 2023 14:56:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xfwvUVbaN5MjMKlFmeSjn3Or3UUiNn/hAoNZcmsCrfs=;
- b=lmtBZavnqrV/0kKVC42BAbN7WX9rhXAVosi4+LoXIm1WeZ2egAIMHI7fHgWeY6W6WI
- UY17l9f9jMMgA63FJQ6woEjnDUWHH4dSqyppzsH9Tj3Ms1hoNMQ5eC81pHtoO/o76HS2
- pckcZNdxSv42t5PFuzUTXsv1r0Y396xIFXd/UxQUM8SVwxrq5MiRbpEysZLPNOd1RqoG
- hm2Lp2iB2sOCCOkTUkMN0jHSint++CyWosfDUKG4oPbkxVYxyp43khP72RVlj/IHJub7
- pUq6tRpPSAAzrTuuECSv3G9bkyWbwyHcclLQAJYDtcF7m2pgY/FDv+jNTHiHBVf2W00a
- Uxjg==
+ bh=ijmLQFdsiMoKeVKdQsH4FLczLJZSaoIAYsR6yAzZMZI=;
+ b=BsxmiDJKQAmiDSlvzLOUyglCSld2XMKTcfWK3yFY6GTp6bgD7YdqF5bnvf2SSHHVfu
+ untFJButmfeX9jNbtEtgkER38gy7btMNyshDCLVFpsWRQFmbJYxNjTL32MpRxZCFX/eQ
+ KJKbvLa5aSmNnKqoLrBPgRsu5/YgcC+g0OI2rLDfduAfHv9CGvDRB9n8cnbS2WM9KUvn
+ 0jJ+IDTVduAg8heSMrsBPB3Ckhn6FbWo9AG2iLPImqoaXMR4dmFc1J5fHvEqdLnVCYAb
+ 4cxrxs2uZvZjIeBtWGuCeg0hyC4NhvkPWpY/W3Rt16MDD1AKxSAjQABHsHZoU9nYDgQb
+ U1XQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xfwvUVbaN5MjMKlFmeSjn3Or3UUiNn/hAoNZcmsCrfs=;
- b=KxTL4jd9ZEMvDSv+OoAzYL9U279lXU3PprwbqaGsa5O9GjS3nqx1ziv3X8TVItC30Y
- 6Ld/4X/HEpmAl1ZnKGeFGKKqdfrKqfehX8u3ipWzAk1vQNI3w0AFMDVYu5Eld/2c9LUu
- guWUH+/cFLTftsbVoJZu3Hz0Oo+q5t93g89yFMPcRNbOAQTUdod5J0TJi/Rj9PKIIISE
- tKoNK+S+/iHhHZa5adhVJscjV2RSjjlpGg2D+WMIynr91Dk3jXFv4PSOXdr/7TsiSHlP
- 45d2cVJqbmzhFHd0jEvJRKfQFOXiz/zYstb7idXMfuf3wNQVCY6tN79adRHgsf8mQgcR
- 1DWQ==
-X-Gm-Message-State: AFqh2kqGSAvrJ7ekDXTGtnRVfBXEDcH9VZHLDQltQpiRg1gkKPXvUUJN
- uViG8G+dJMOCqdSCuGB4zQhlIVtsNeXkawv81M0=
-X-Google-Smtp-Source: AMrXdXtehBMi0+pQUZRqrxR8tmsy5XGMO1qN3a/roArbFSEG0GGpl+v6+EZK4EEGw0MODNFjFDSzWTQ96a46d/r9jLs=
-X-Received: by 2002:a1f:2c0c:0:b0:3e1:7e08:a117 with SMTP id
- s12-20020a1f2c0c000000b003e17e08a117mr1204976vks.34.1674082410205; Wed, 18
- Jan 2023 14:53:30 -0800 (PST)
+ bh=ijmLQFdsiMoKeVKdQsH4FLczLJZSaoIAYsR6yAzZMZI=;
+ b=ap7Yttw36KwgWU69QptVNPlj4TFT5nn+ofg3S+P/gvl6K3pzuiEL36plQgQdlpLmQ8
+ HqgaA8t45UYtBAofy/SHsnsW6okXBgxJXmOU/Y+Lsbuhh9kDbDparo///hslrqHqkEu6
+ TpJJE6vsVW56tQJBGtkabA/easY6eVrHiSznBjiRueLhtveZUUHoERwPpad17D4w7Ab3
+ ssRWnOBhTine7nEqWzqnjgeMi1u5RF2BV1CXELIKk0XAwIAaqA4swN6yzOoSx/MUM09F
+ 2at/wAP1+yNqEh6GTMr9E8iqht6VUwTdA3rYU+GF33XaWeNqqlErMhC8Y4C12TBinieU
+ aWdw==
+X-Gm-Message-State: AFqh2koKW1btCdA3OGOnPm4hoatbwSroB4E+bER+dYQZSEgjro5l4bom
+ vNHoTP8+jaqO6URl64IviqwqMos9pNVYmevnQE4IEqbX8Rs=
+X-Google-Smtp-Source: AMrXdXvQ3F0WUKur+pIcoyCTfrg6J5cEcFw1mps9+lpRBsFd4xBnCxsWigC2UtuRobDi1QLnQe9i5r0uM6f5AcBMG/k=
+X-Received: by 2002:a67:eb10:0:b0:3c9:8cc2:dd04 with SMTP id
+ a16-20020a67eb10000000b003c98cc2dd04mr1294398vso.73.1674082598081; Wed, 18
+ Jan 2023 14:56:38 -0800 (PST)
 MIME-Version: 1.0
-References: <20230115160657.3169274-1-richard.henderson@linaro.org>
- <20230115160657.3169274-3-richard.henderson@linaro.org>
-In-Reply-To: <20230115160657.3169274-3-richard.henderson@linaro.org>
+References: <20230117132751.229738-1-dbarboza@ventanamicro.com>
+ <20230117132751.229738-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20230117132751.229738-2-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 19 Jan 2023 08:53:04 +1000
-Message-ID: <CAKmqyKOiuc49zbG5ZOJswzqi079iUMT0BN3A_uY8G8NBb55gow@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv: Remove helper_set_rod_rounding_mode
-To: Richard Henderson <richard.henderson@linaro.org>
+Date: Thu, 19 Jan 2023 08:56:12 +1000
+Message-ID: <CAKmqyKPQjuK-uSU6iWODnBqQakL6kA9fK_ja9nvmUF7RU1sT9Q@mail.gmail.com>
+Subject: Re: [PATCH 1/1] hw/riscv/virt.c: move create_fw_cfg() back to
+ virt_machine_init()
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bin.meng@windriver.com, abdulras@google.com
+ bmeng.cn@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,72 +74,75 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2023 22:53:40 -0000
+X-List-Received-Date: Wed, 18 Jan 2023 22:56:46 -0000
 
-On Mon, Jan 16, 2023 at 2:08 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Tue, Jan 17, 2023 at 11:28 PM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> The only setting of RISCV_FRM_ROD is from the vector unit,
-> and now handled by helper_set_rounding_mode_chkfrm.
-> This helper is now unused.
+> Commit 1c20d3ff6004 ("hw/riscv: virt: Add a machine done notifier")
+> moved the initialization of fw_cfg to the virt_machine_done() callback.
 >
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> Problem is that the validation of fw_cfg by devices such as ramfb is
+> done before the machine done notifier is called. Moving create_fw_cfg()
+> to machine_done() results in QEMU failing to boot when using a ramfb
+> device:
+>
+> ./qemu-system-riscv64 -machine virt -device ramfb -serial stdio
+> qemu-system-riscv64: -device ramfb: ramfb device requires fw_cfg with DMA
+>
+> The fix is simple: move create_fw_cfg() config back to
+> virt_machine_init(). This happens to be the same way the ARM 'virt'
+> machine deals with fw_cfg (see machvirt_init() and virt_machine_done()
+> in hw/arm/virt.c), so we're keeping consistency with how other machines
+> handle this device.
+>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1343
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Thanks for the fix!
 
 Alistair
 
 > ---
->  target/riscv/helper.h     | 1 -
->  target/riscv/fpu_helper.c | 5 -----
->  target/riscv/translate.c  | 4 ----
->  3 files changed, 10 deletions(-)
+>  hw/riscv/virt.c | 14 +++++++-------
+>  1 file changed, 7 insertions(+), 7 deletions(-)
 >
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 9792ab5086..58a30f03d6 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -4,7 +4,6 @@ DEF_HELPER_2(raise_exception, noreturn, env, i32)
->  /* Floating Point - rounding mode */
->  DEF_HELPER_FLAGS_2(set_rounding_mode, TCG_CALL_NO_WG, void, env, i32)
->  DEF_HELPER_FLAGS_2(set_rounding_mode_chkfrm, TCG_CALL_NO_WG, void, env, i32)
-> -DEF_HELPER_FLAGS_1(set_rod_rounding_mode, TCG_CALL_NO_WG, void, env)
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index e6d4f06e8d..4a11b4b010 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1254,13 +1254,6 @@ static void virt_machine_done(Notifier *notifier, void *data)
+>      firmware_end_addr = riscv_find_and_load_firmware(machine, firmware_name,
+>                                                       start_addr, NULL);
 >
->  /* Floating Point - fused */
->  DEF_HELPER_FLAGS_4(fmadd_s, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
-> diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-> index 96817df8ef..449d236df6 100644
-> --- a/target/riscv/fpu_helper.c
-> +++ b/target/riscv/fpu_helper.c
-> @@ -118,11 +118,6 @@ void helper_set_rounding_mode_chkfrm(CPURISCVState *env, uint32_t rm)
->      set_float_rounding_mode(softrm, &env->fp_status);
->  }
->
-> -void helper_set_rod_rounding_mode(CPURISCVState *env)
-> -{
-> -    set_float_rounding_mode(float_round_to_odd, &env->fp_status);
-> -}
+> -    /*
+> -     * Init fw_cfg.  Must be done before riscv_load_fdt, otherwise the device
+> -     * tree cannot be altered and we get FDT_ERR_NOSPACE.
+> -     */
+> -    s->fw_cfg = create_fw_cfg(machine);
+> -    rom_set_fw(s->fw_cfg);
 > -
->  static uint64_t do_fmadd_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2,
->                             uint64_t rs3, int flags)
->  {
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 493c3815e1..01cc30a365 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -672,10 +672,6 @@ static void gen_set_rm(DisasContext *ctx, int rm)
->      }
->      ctx->frm = rm;
+>      if (drive_get(IF_PFLASH, 0, 1)) {
+>          /*
+>           * S-mode FW like EDK2 will be kept in second plash (unit 1).
+> @@ -1468,6 +1461,13 @@ static void virt_machine_init(MachineState *machine)
+>      memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
+>                                  mask_rom);
 >
-> -    if (rm == RISCV_FRM_ROD) {
-> -        gen_helper_set_rod_rounding_mode(cpu_env);
-> -        return;
-> -    }
->      if (rm == RISCV_FRM_DYN) {
->          /* The helper will return only if frm valid. */
->          ctx->frm_valid = true;
+> +    /*
+> +     * Init fw_cfg. Must be done before riscv_load_fdt, otherwise the
+> +     * device tree cannot be altered and we get FDT_ERR_NOSPACE.
+> +     */
+> +    s->fw_cfg = create_fw_cfg(machine);
+> +    rom_set_fw(s->fw_cfg);
+> +
+>      /* SiFive Test MMIO device */
+>      sifive_test_create(memmap[VIRT_TEST].base);
+>
 > --
-> 2.34.1
+> 2.39.0
 >
 >
 
