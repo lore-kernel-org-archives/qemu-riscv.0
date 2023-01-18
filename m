@@ -1,64 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIHCD-0007yT-Oq
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Jan 2023 17:46:17 -0500
+	id 1pIHIJ-0000mX-4O
+	for mharc-qemu-riscv@gnu.org; Wed, 18 Jan 2023 17:52:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIHC3-0007y4-Fo; Wed, 18 Jan 2023 17:46:16 -0500
-Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
+ id 1pIHIA-0000ly-TW; Wed, 18 Jan 2023 17:52:27 -0500
+Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIHC1-0003AS-Dh; Wed, 18 Jan 2023 17:46:07 -0500
-Received: by mail-ua1-x92c.google.com with SMTP id b18so65198uan.11;
- Wed, 18 Jan 2023 14:46:04 -0800 (PST)
+ id 1pIHI8-00042O-Qv; Wed, 18 Jan 2023 17:52:26 -0500
+Received: by mail-vs1-xe2e.google.com with SMTP id 3so347528vsq.7;
+ Wed, 18 Jan 2023 14:52:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PMGl6hsKo5zTS2425qcXcGNrK0asc0kQJsgGh3YNCWc=;
- b=iLXono22mFEwi6Bt6jAr0RlWaae4GAkrZ+nrLKq/koTqRx+sTzXACrtTqH85b4m/iy
- ZjiMZbCGy2zccMpy04/l55apw58P+J6n0VAk9FyjfPxh6ZOn/oIuVgZvShKxYt5KncVs
- MhfguOVzS+InHsdM2iClJ+0SG3wdMBDVSjESugC+z8bMXrPatLuAvD7E2KdzyXw6KZ+r
- 6AooyTPUO/GpG/1ODf8+rI3j+te9tXjqwjlZmKAyn9Ty+jUZeCubfzupRrPLw6EoYvUe
- qVtHyAy0BiOVcE80k+CO1kQGW0cCACgAG14rG3cgUvD/BkL7QONmxJN3WmGe0H7krydv
- ZPjg==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6NXKZzdVvEDImZrj5tf8O3Vb7baVleyp6hXqcDwEm1o=;
+ b=SQwheuOVcIDwPreRQ/k58H/TtKgUxFB0gqkfb5TovXhN/ZLL1yPA3zTHlJBxQ8lN1s
+ zosWSuPCUqtIc6EGIJeGHLxVPPnLA+LNP8fovaUEucDjR2fDzxTlj4usgUldrwXWfOPJ
+ 8kCL/zusQhM4gZsAbW3PPaLHjaDl+Uk8eEqsdFLRuYP3wWhdI31Awp6PfZAt2nUucv4x
+ 3BaulrKZLbdjLYn4VKjavXuXdwqQlyAyseuKVF9PkJZSctTo8tHe9Bn5WZFxlZPk2ze0
+ 6+WvsjSaFKZtXGERzVrtvFthU/r/UnU0wqYrfzwGjVEx3hY/HKCeHEAhPh1jpdPt93tj
+ nWew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PMGl6hsKo5zTS2425qcXcGNrK0asc0kQJsgGh3YNCWc=;
- b=uB1sCRvCYonCL4JrJnhCC5SIqm/0Pff01mUUCa9uEQFSQtOM3kV19p9P0bgoh+Uonn
- 2YJqEWZLxLtE/XQ+oG7UbNNoowh694bZVkincR7YfaBejSIfLIvL3RTKWflZ206xYDHN
- Gcz9Mord0oc/ewSa3ym9pzVDnisF69wADIFrmFBgi7jWbtmuy+q6xgnVf+hE10KeugnR
- erv6pz/yKeMijnb/Kz2hGXS5Y+CpZCqovbWiRYQ9S+mCJnpXs7pzM8dUFDUa5SniFOvS
- HcqRnjDGEVOi97sMJJPM4vTPnutHicdXzX5qUaaWy0Ham7OBzT97PhtNu+4v1venudv/
- nBEA==
-X-Gm-Message-State: AFqh2kroG2lBLLkYKilq0f0g/tgx8U/qBWPsM4dJKzvBEwHkTg7zWnqj
- HXH5eM8ogSkQug4ukgb8Ks0oyNxMgiqgPSxGCc8=
-X-Google-Smtp-Source: AMrXdXtIxvhW9qW26+pjCFqbTZ1uWJdy+h0CCQ15Ln+U6QTMlZbzXF+OAQ2chCv09ZfU1ZAoxYJtBQyRXPC8XWcpFnY=
-X-Received: by 2002:ab0:318d:0:b0:5c7:f152:3f4a with SMTP id
- d13-20020ab0318d000000b005c7f1523f4amr1145594uan.23.1674081964248; Wed, 18
- Jan 2023 14:46:04 -0800 (PST)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6NXKZzdVvEDImZrj5tf8O3Vb7baVleyp6hXqcDwEm1o=;
+ b=7+E75+Y+dinWStM0SCuvIC/+0SPEVDJr6310uqbKwe4gZwkevXVAm3xiZ572FPuJvG
+ KjiBZzy4D7ql8jilkqcTNB7e2UWVeOtqATTDAo1K/tjRvPIzDkiPXQclKUtXoryL4psw
+ 7bY+5V/s3M1q4LA8uDNec0ZGGxcz8Nt63naCTJyQ2n+/6YpYxyjxDQVUuaXVz7/UsN7L
+ AIzpDniAS48GQFQTemK30vxEIy4DaBT3mQpP2UYTEaCCMgwck2xYH7C7C6RMDySatLC6
+ XWTe32j5JRNUSm4fuMeDVHJchcUMJj0l3pPVtvE8Y43TVoNFQQc1NzR1jG8zHED7YFjm
+ vYcQ==
+X-Gm-Message-State: AFqh2krahJACRi7dUQTBnvy2GSn3rblH1ATQHqXY6fhgbxCJnTAFw3Ek
+ djWVG2RUO1YLPT4q3PWBoxht095xg8VTzXW3BDk=
+X-Google-Smtp-Source: AMrXdXvq3SKaCjUNdfIk6Qw1jsC6FW2r98Mf1Oox5Vy1EEflfri+ql46YdjkTF6VDGDCHWe4M1S5gUGsr1jW2YxWGFE=
+X-Received: by 2002:a67:eb10:0:b0:3c9:8cc2:dd04 with SMTP id
+ a16-20020a67eb10000000b003c98cc2dd04mr1292936vso.73.1674082342510; Wed, 18
+ Jan 2023 14:52:22 -0800 (PST)
 MIME-Version: 1.0
-References: <20230116122948.757515-1-dbarboza@ventanamicro.com>
- <20230116122948.757515-4-dbarboza@ventanamicro.com>
- <a4b7fd13-4bd0-0e7a-4650-7164e1a76053@linaro.org>
- <61fd483d-5d3a-587b-5c98-4b81afe21d7d@ventanamicro.com>
-In-Reply-To: <61fd483d-5d3a-587b-5c98-4b81afe21d7d@ventanamicro.com>
+References: <20230115160657.3169274-1-richard.henderson@linaro.org>
+ <20230115160657.3169274-2-richard.henderson@linaro.org>
+In-Reply-To: <20230115160657.3169274-2-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 19 Jan 2023 08:45:38 +1000
-Message-ID: <CAKmqyKMaG0x1qtKc_HBjfZyLmR==Tg3-DdzPgzDhm0utmrRMOA@mail.gmail.com>
-Subject: Re: [PATCH v8 3/3] hw/riscv: clear kernel_entry higher bits in
- load_elf_ram_sym()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 19 Jan 2023 08:51:56 +1000
+Message-ID: <CAKmqyKOJBjFoCHC79Tzk_fT1YP3=ztvRpsRar9w5mxX-f6VAYA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/arm: Introduce helper_set_rounding_mode_chkfrm
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, abdulras@google.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -79,118 +73,219 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2023 22:46:17 -0000
+X-List-Received-Date: Wed, 18 Jan 2023 22:52:29 -0000
 
-On Mon, Jan 16, 2023 at 10:46 PM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Mon, Jan 16, 2023 at 2:08 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
+> The new helper always validates the contents of FRM, even
+> if the new rounding mode is not DYN.  This is required by
+> the vector unit.
 >
+> Track whether we've validated FRM separately from whether
+> we've updated fp_status with a given rounding mode, so that
+> we can elide calls correctly.
 >
-> On 1/16/23 09:37, Philippe Mathieu-Daud=C3=A9 wrote:
-> > On 16/1/23 13:29, Daniel Henrique Barboza wrote:
-> >> Recent hw/risc/boot.c changes caused a regression in an use case with
-> >> the Xvisor hypervisor. Running a 32 bit QEMU guest with '-kernel'
-> >> stopped working. The reason seems to be that Xvisor is using 64 bit to
-> >> encode the 32 bit addresses from the guest, and load_elf_ram_sym() is
-> >> sign-extending the result with '1's [1].
-> >>
-> >> Use a translate_fn() callback to be called by load_elf_ram_sym() and
-> >> return only the 32 bits address if we're running a 32 bit CPU.
-> >>
-> >> [1] https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg02281.htm=
-l
-> >>
-> >> Suggested-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> >> Suggested-by: Bin Meng <bmeng.cn@gmail.com>
-> >> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> >> ---
-> >>   hw/riscv/boot.c            | 20 +++++++++++++++++++-
-> >>   hw/riscv/microchip_pfsoc.c |  4 ++--
-> >>   hw/riscv/opentitan.c       |  3 ++-
-> >>   hw/riscv/sifive_e.c        |  3 ++-
-> >>   hw/riscv/sifive_u.c        |  4 ++--
-> >>   hw/riscv/spike.c           |  2 +-
-> >>   hw/riscv/virt.c            |  4 ++--
-> >>   include/hw/riscv/boot.h    |  1 +
-> >>   target/riscv/cpu_bits.h    |  1 +
-> >>   9 files changed, 32 insertions(+), 10 deletions(-)
-> >>
-> >> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> >> index e868fb6ade..0fd39df7f3 100644
-> >> --- a/hw/riscv/boot.c
-> >> +++ b/hw/riscv/boot.c
-> >> @@ -213,7 +213,24 @@ static void riscv_load_initrd(MachineState *machi=
-ne, uint64_t kernel_entry)
-> >>       }
-> >>   }
-> >>   +static uint64_t translate_kernel_address(void *opaque, uint64_t add=
-r)
-> >> +{
-> >> +    RISCVHartArrayState *harts =3D opaque;
-> >> +
-> >> +    /*
-> >> +     * For 32 bit CPUs, kernel_load_base is sign-extended (i.e.
-> >> +     * it can be padded with '1's) if the hypervisor is using
-> >> +     * 64 bit addresses with 32 bit guests.
-> >> +     */
-> >> +    if (riscv_is_32bit(harts)) {
-> >
-> > Maybe move the comment within the if() and add " so remove the sign
-> > extension by truncating to 32-bit".
-> >
-> >> +        return extract64(addr, 0, RV32_KERNEL_ADDR_LEN);
-> >
-> > For 32-bit maybe a definition is not necessary, I asked before
-> > you used 24-bit in the previous version. As the maintainer prefer :)
+> This partially reverts d6c4d3f2a69 which attempted the to do
+> the same thing, but with two calls to gen_set_rm(), which is
+> both inefficient and tickles an assertion in decode_save_opc.
 >
-> That was unintentional. I missed a 'f' in that 0x0fffffff, which I notice=
-d only
-> now when doing this version. It's curious because Alistair mentioned that
-> the patch apparently solved the bug ....
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1441
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-I never tested it, I'm not sure if this solves the problem or not.
-
-This patch needs to be merged *before* the initrd patch (patch 1 of
-this series) to avoid breaking users.
-
->
-> I don't mind creating a macro for the 32 bit value. If we decide it's unn=
-eeded
-> I can remove it and just put a '32' there. I'll also make the comment cha=
-nge
-> you mentioned above.
-
-I think 32 if fine, I don't think we need a macro
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/helper.h                   |  1 +
+>  target/riscv/fpu_helper.c               | 37 +++++++++++++++++++++++++
+>  target/riscv/translate.c                | 19 +++++++++++++
+>  target/riscv/insn_trans/trans_rvv.c.inc | 24 +++-------------
+>  4 files changed, 61 insertions(+), 20 deletions(-)
 >
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 227c7122ef..9792ab5086 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -3,6 +3,7 @@ DEF_HELPER_2(raise_exception, noreturn, env, i32)
 >
-> Thanks,
+>  /* Floating Point - rounding mode */
+>  DEF_HELPER_FLAGS_2(set_rounding_mode, TCG_CALL_NO_WG, void, env, i32)
+> +DEF_HELPER_FLAGS_2(set_rounding_mode_chkfrm, TCG_CALL_NO_WG, void, env, i32)
+>  DEF_HELPER_FLAGS_1(set_rod_rounding_mode, TCG_CALL_NO_WG, void, env)
 >
+>  /* Floating Point - fused */
+> diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+> index 5699c9517f..96817df8ef 100644
+> --- a/target/riscv/fpu_helper.c
+> +++ b/target/riscv/fpu_helper.c
+> @@ -81,6 +81,43 @@ void helper_set_rounding_mode(CPURISCVState *env, uint32_t rm)
+>      set_float_rounding_mode(softrm, &env->fp_status);
+>  }
 >
-> Daniel
+> +void helper_set_rounding_mode_chkfrm(CPURISCVState *env, uint32_t rm)
+> +{
+> +    int softrm;
+> +
+> +    /* Always validate frm, even if rm != DYN. */
+> +    if (unlikely(env->frm >= 5)) {
+> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+> +    }
+> +    if (rm == RISCV_FRM_DYN) {
+> +        rm = env->frm;
+> +    }
+> +    switch (rm) {
+> +    case RISCV_FRM_RNE:
+> +        softrm = float_round_nearest_even;
+> +        break;
+> +    case RISCV_FRM_RTZ:
+> +        softrm = float_round_to_zero;
+> +        break;
+> +    case RISCV_FRM_RDN:
+> +        softrm = float_round_down;
+> +        break;
+> +    case RISCV_FRM_RUP:
+> +        softrm = float_round_up;
+> +        break;
+> +    case RISCV_FRM_RMM:
+> +        softrm = float_round_ties_away;
+> +        break;
+> +    case RISCV_FRM_ROD:
+> +        softrm = float_round_to_odd;
+> +        break;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +
+> +    set_float_rounding_mode(softrm, &env->fp_status);
+> +}
+> +
+>  void helper_set_rod_rounding_mode(CPURISCVState *env)
+>  {
+>      set_float_rounding_mode(float_round_to_odd, &env->fp_status);
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index df38db7553..493c3815e1 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -114,6 +114,8 @@ typedef struct DisasContext {
+>      bool pm_base_enabled;
+>      /* Use icount trigger for native debug */
+>      bool itrigger;
+> +    /* FRM is known to contain a valid value. */
+> +    bool frm_valid;
+>      /* TCG of the current insn_start */
+>      TCGOp *insn_start;
+>  } DisasContext;
+> @@ -674,12 +676,29 @@ static void gen_set_rm(DisasContext *ctx, int rm)
+>          gen_helper_set_rod_rounding_mode(cpu_env);
+>          return;
+>      }
+> +    if (rm == RISCV_FRM_DYN) {
+> +        /* The helper will return only if frm valid. */
+> +        ctx->frm_valid = true;
+> +    }
 >
-> >
-> >> +    }
-> >> +
-> >> +    return addr;
-> >> +}
-> >
-> >> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> >> index 8b0d7e20ea..8fcaeae342 100644
-> >> --- a/target/riscv/cpu_bits.h
-> >> +++ b/target/riscv/cpu_bits.h
-> >> @@ -751,6 +751,7 @@ typedef enum RISCVException {
-> >>   #define MENVCFG_STCE                       (1ULL << 63)
-> >>     /* For RV32 */
-> >> +#define RV32_KERNEL_ADDR_LEN               32
-> >>   #define MENVCFGH_PBMTE                     BIT(30)
-> >>   #define MENVCFGH_STCE                      BIT(31)
-> >
-> > Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> >
-> >
+>      /* The helper may raise ILLEGAL_INSN -- record binv for unwind. */
+>      decode_save_opc(ctx);
+>      gen_helper_set_rounding_mode(cpu_env, tcg_constant_i32(rm));
+>  }
+>
+> +static void gen_set_rm_chkfrm(DisasContext *ctx, int rm)
+> +{
+> +    if (ctx->frm == rm && ctx->frm_valid) {
+> +        return;
+> +    }
+> +    ctx->frm = rm;
+> +    ctx->frm_valid = true;
+> +
+> +    /* The helper may raise ILLEGAL_INSN -- record binv for unwind. */
+> +    decode_save_opc(ctx);
+> +    gen_helper_set_rounding_mode_chkfrm(cpu_env, tcg_constant_i32(rm));
+> +}
+> +
+>  static int ex_plus_1(DisasContext *ctx, int nf)
+>  {
+>      return nf + 1;
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index d455acedbf..bbb5c3a7b5 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -2679,13 +2679,9 @@ static bool do_opfv(DisasContext *s, arg_rmr *a,
+>                      int rm)
+>  {
+>      if (checkfn(s, a)) {
+> -        if (rm != RISCV_FRM_DYN) {
+> -            gen_set_rm(s, RISCV_FRM_DYN);
+> -        }
+> -
+>          uint32_t data = 0;
+>          TCGLabel *over = gen_new_label();
+> -        gen_set_rm(s, rm);
+> +        gen_set_rm_chkfrm(s, rm);
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+>          tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+> @@ -2882,17 +2878,13 @@ static bool opffv_widen_check(DisasContext *s, arg_rmr *a)
+>  static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>  {                                                                  \
+>      if (CHECK(s, a)) {                                             \
+> -        if (FRM != RISCV_FRM_DYN) {                                \
+> -            gen_set_rm(s, RISCV_FRM_DYN);                          \
+> -        }                                                          \
+> -                                                                   \
+>          uint32_t data = 0;                                         \
+>          static gen_helper_gvec_3_ptr * const fns[2] = {            \
+>              gen_helper_##HELPER##_h,                               \
+>              gen_helper_##HELPER##_w,                               \
+>          };                                                         \
+>          TCGLabel *over = gen_new_label();                          \
+> -        gen_set_rm(s, FRM);                                        \
+> +        gen_set_rm_chkfrm(s, FRM);                                 \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+>          tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+> @@ -3005,17 +2997,13 @@ static bool opffv_narrow_check(DisasContext *s, arg_rmr *a)
+>  static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>  {                                                                  \
+>      if (CHECK(s, a)) {                                             \
+> -        if (FRM != RISCV_FRM_DYN) {                                \
+> -            gen_set_rm(s, RISCV_FRM_DYN);                          \
+> -        }                                                          \
+> -                                                                   \
+>          uint32_t data = 0;                                         \
+>          static gen_helper_gvec_3_ptr * const fns[2] = {            \
+>              gen_helper_##HELPER##_h,                               \
+>              gen_helper_##HELPER##_w,                               \
+>          };                                                         \
+>          TCGLabel *over = gen_new_label();                          \
+> -        gen_set_rm(s, FRM);                                        \
+> +        gen_set_rm_chkfrm(s, FRM);                                 \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+>          tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+> @@ -3060,10 +3048,6 @@ static bool opxfv_narrow_check(DisasContext *s, arg_rmr *a)
+>  static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>  {                                                                  \
+>      if (opxfv_narrow_check(s, a)) {                                \
+> -        if (FRM != RISCV_FRM_DYN) {                                \
+> -            gen_set_rm(s, RISCV_FRM_DYN);                          \
+> -        }                                                          \
+> -                                                                   \
+>          uint32_t data = 0;                                         \
+>          static gen_helper_gvec_3_ptr * const fns[3] = {            \
+>              gen_helper_##HELPER##_b,                               \
+> @@ -3071,7 +3055,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>              gen_helper_##HELPER##_w,                               \
+>          };                                                         \
+>          TCGLabel *over = gen_new_label();                          \
+> -        gen_set_rm(s, FRM);                                        \
+> +        gen_set_rm_chkfrm(s, FRM);                                 \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+>          tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+> --
+> 2.34.1
 >
 >
 
