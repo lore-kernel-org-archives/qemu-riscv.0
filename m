@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIHIJ-0000mX-4O
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Jan 2023 17:52:36 -0500
+	id 1pIHJN-0001aE-Us
+	for mharc-qemu-riscv@gnu.org; Wed, 18 Jan 2023 17:53:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIHIA-0000ly-TW; Wed, 18 Jan 2023 17:52:27 -0500
-Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
+ id 1pIHJG-0001R3-EU; Wed, 18 Jan 2023 17:53:35 -0500
+Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIHI8-00042O-Qv; Wed, 18 Jan 2023 17:52:26 -0500
-Received: by mail-vs1-xe2e.google.com with SMTP id 3so347528vsq.7;
- Wed, 18 Jan 2023 14:52:23 -0800 (PST)
+ id 1pIHJD-00048s-NO; Wed, 18 Jan 2023 17:53:34 -0500
+Received: by mail-vk1-xa2e.google.com with SMTP id w72so93295vkw.7;
+ Wed, 18 Jan 2023 14:53:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6NXKZzdVvEDImZrj5tf8O3Vb7baVleyp6hXqcDwEm1o=;
- b=SQwheuOVcIDwPreRQ/k58H/TtKgUxFB0gqkfb5TovXhN/ZLL1yPA3zTHlJBxQ8lN1s
- zosWSuPCUqtIc6EGIJeGHLxVPPnLA+LNP8fovaUEucDjR2fDzxTlj4usgUldrwXWfOPJ
- 8kCL/zusQhM4gZsAbW3PPaLHjaDl+Uk8eEqsdFLRuYP3wWhdI31Awp6PfZAt2nUucv4x
- 3BaulrKZLbdjLYn4VKjavXuXdwqQlyAyseuKVF9PkJZSctTo8tHe9Bn5WZFxlZPk2ze0
- 6+WvsjSaFKZtXGERzVrtvFthU/r/UnU0wqYrfzwGjVEx3hY/HKCeHEAhPh1jpdPt93tj
- nWew==
+ bh=xfwvUVbaN5MjMKlFmeSjn3Or3UUiNn/hAoNZcmsCrfs=;
+ b=lmtBZavnqrV/0kKVC42BAbN7WX9rhXAVosi4+LoXIm1WeZ2egAIMHI7fHgWeY6W6WI
+ UY17l9f9jMMgA63FJQ6woEjnDUWHH4dSqyppzsH9Tj3Ms1hoNMQ5eC81pHtoO/o76HS2
+ pckcZNdxSv42t5PFuzUTXsv1r0Y396xIFXd/UxQUM8SVwxrq5MiRbpEysZLPNOd1RqoG
+ hm2Lp2iB2sOCCOkTUkMN0jHSint++CyWosfDUKG4oPbkxVYxyp43khP72RVlj/IHJub7
+ pUq6tRpPSAAzrTuuECSv3G9bkyWbwyHcclLQAJYDtcF7m2pgY/FDv+jNTHiHBVf2W00a
+ Uxjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6NXKZzdVvEDImZrj5tf8O3Vb7baVleyp6hXqcDwEm1o=;
- b=7+E75+Y+dinWStM0SCuvIC/+0SPEVDJr6310uqbKwe4gZwkevXVAm3xiZ572FPuJvG
- KjiBZzy4D7ql8jilkqcTNB7e2UWVeOtqATTDAo1K/tjRvPIzDkiPXQclKUtXoryL4psw
- 7bY+5V/s3M1q4LA8uDNec0ZGGxcz8Nt63naCTJyQ2n+/6YpYxyjxDQVUuaXVz7/UsN7L
- AIzpDniAS48GQFQTemK30vxEIy4DaBT3mQpP2UYTEaCCMgwck2xYH7C7C6RMDySatLC6
- XWTe32j5JRNUSm4fuMeDVHJchcUMJj0l3pPVtvE8Y43TVoNFQQc1NzR1jG8zHED7YFjm
- vYcQ==
-X-Gm-Message-State: AFqh2krahJACRi7dUQTBnvy2GSn3rblH1ATQHqXY6fhgbxCJnTAFw3Ek
- djWVG2RUO1YLPT4q3PWBoxht095xg8VTzXW3BDk=
-X-Google-Smtp-Source: AMrXdXvq3SKaCjUNdfIk6Qw1jsC6FW2r98Mf1Oox5Vy1EEflfri+ql46YdjkTF6VDGDCHWe4M1S5gUGsr1jW2YxWGFE=
-X-Received: by 2002:a67:eb10:0:b0:3c9:8cc2:dd04 with SMTP id
- a16-20020a67eb10000000b003c98cc2dd04mr1292936vso.73.1674082342510; Wed, 18
- Jan 2023 14:52:22 -0800 (PST)
+ bh=xfwvUVbaN5MjMKlFmeSjn3Or3UUiNn/hAoNZcmsCrfs=;
+ b=KxTL4jd9ZEMvDSv+OoAzYL9U279lXU3PprwbqaGsa5O9GjS3nqx1ziv3X8TVItC30Y
+ 6Ld/4X/HEpmAl1ZnKGeFGKKqdfrKqfehX8u3ipWzAk1vQNI3w0AFMDVYu5Eld/2c9LUu
+ guWUH+/cFLTftsbVoJZu3Hz0Oo+q5t93g89yFMPcRNbOAQTUdod5J0TJi/Rj9PKIIISE
+ tKoNK+S+/iHhHZa5adhVJscjV2RSjjlpGg2D+WMIynr91Dk3jXFv4PSOXdr/7TsiSHlP
+ 45d2cVJqbmzhFHd0jEvJRKfQFOXiz/zYstb7idXMfuf3wNQVCY6tN79adRHgsf8mQgcR
+ 1DWQ==
+X-Gm-Message-State: AFqh2kqGSAvrJ7ekDXTGtnRVfBXEDcH9VZHLDQltQpiRg1gkKPXvUUJN
+ uViG8G+dJMOCqdSCuGB4zQhlIVtsNeXkawv81M0=
+X-Google-Smtp-Source: AMrXdXtehBMi0+pQUZRqrxR8tmsy5XGMO1qN3a/roArbFSEG0GGpl+v6+EZK4EEGw0MODNFjFDSzWTQ96a46d/r9jLs=
+X-Received: by 2002:a1f:2c0c:0:b0:3e1:7e08:a117 with SMTP id
+ s12-20020a1f2c0c000000b003e17e08a117mr1204976vks.34.1674082410205; Wed, 18
+ Jan 2023 14:53:30 -0800 (PST)
 MIME-Version: 1.0
 References: <20230115160657.3169274-1-richard.henderson@linaro.org>
- <20230115160657.3169274-2-richard.henderson@linaro.org>
-In-Reply-To: <20230115160657.3169274-2-richard.henderson@linaro.org>
+ <20230115160657.3169274-3-richard.henderson@linaro.org>
+In-Reply-To: <20230115160657.3169274-3-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 19 Jan 2023 08:51:56 +1000
-Message-ID: <CAKmqyKOJBjFoCHC79Tzk_fT1YP3=ztvRpsRar9w5mxX-f6VAYA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/arm: Introduce helper_set_rounding_mode_chkfrm
+Date: Thu, 19 Jan 2023 08:53:04 +1000
+Message-ID: <CAKmqyKOiuc49zbG5ZOJswzqi079iUMT0BN3A_uY8G8NBb55gow@mail.gmail.com>
+Subject: Re: [PATCH 2/2] target/riscv: Remove helper_set_rod_rounding_mode
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bin.meng@windriver.com, abdulras@google.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,217 +73,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2023 22:52:29 -0000
+X-List-Received-Date: Wed, 18 Jan 2023 22:53:40 -0000
 
 On Mon, Jan 16, 2023 at 2:08 AM Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> The new helper always validates the contents of FRM, even
-> if the new rounding mode is not DYN.  This is required by
-> the vector unit.
+> The only setting of RISCV_FRM_ROD is from the vector unit,
+> and now handled by helper_set_rounding_mode_chkfrm.
+> This helper is now unused.
 >
-> Track whether we've validated FRM separately from whether
-> we've updated fp_status with a given rounding mode, so that
-> we can elide calls correctly.
->
-> This partially reverts d6c4d3f2a69 which attempted the to do
-> the same thing, but with two calls to gen_set_rm(), which is
-> both inefficient and tickles an assertion in decode_save_opc.
->
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1441
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/helper.h                   |  1 +
->  target/riscv/fpu_helper.c               | 37 +++++++++++++++++++++++++
->  target/riscv/translate.c                | 19 +++++++++++++
->  target/riscv/insn_trans/trans_rvv.c.inc | 24 +++-------------
->  4 files changed, 61 insertions(+), 20 deletions(-)
+>  target/riscv/helper.h     | 1 -
+>  target/riscv/fpu_helper.c | 5 -----
+>  target/riscv/translate.c  | 4 ----
+>  3 files changed, 10 deletions(-)
 >
 > diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 227c7122ef..9792ab5086 100644
+> index 9792ab5086..58a30f03d6 100644
 > --- a/target/riscv/helper.h
 > +++ b/target/riscv/helper.h
-> @@ -3,6 +3,7 @@ DEF_HELPER_2(raise_exception, noreturn, env, i32)
->
+> @@ -4,7 +4,6 @@ DEF_HELPER_2(raise_exception, noreturn, env, i32)
 >  /* Floating Point - rounding mode */
 >  DEF_HELPER_FLAGS_2(set_rounding_mode, TCG_CALL_NO_WG, void, env, i32)
-> +DEF_HELPER_FLAGS_2(set_rounding_mode_chkfrm, TCG_CALL_NO_WG, void, env, i32)
->  DEF_HELPER_FLAGS_1(set_rod_rounding_mode, TCG_CALL_NO_WG, void, env)
+>  DEF_HELPER_FLAGS_2(set_rounding_mode_chkfrm, TCG_CALL_NO_WG, void, env, i32)
+> -DEF_HELPER_FLAGS_1(set_rod_rounding_mode, TCG_CALL_NO_WG, void, env)
 >
 >  /* Floating Point - fused */
+>  DEF_HELPER_FLAGS_4(fmadd_s, TCG_CALL_NO_RWG, i64, env, i64, i64, i64)
 > diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-> index 5699c9517f..96817df8ef 100644
+> index 96817df8ef..449d236df6 100644
 > --- a/target/riscv/fpu_helper.c
 > +++ b/target/riscv/fpu_helper.c
-> @@ -81,6 +81,43 @@ void helper_set_rounding_mode(CPURISCVState *env, uint32_t rm)
+> @@ -118,11 +118,6 @@ void helper_set_rounding_mode_chkfrm(CPURISCVState *env, uint32_t rm)
 >      set_float_rounding_mode(softrm, &env->fp_status);
 >  }
 >
-> +void helper_set_rounding_mode_chkfrm(CPURISCVState *env, uint32_t rm)
-> +{
-> +    int softrm;
-> +
-> +    /* Always validate frm, even if rm != DYN. */
-> +    if (unlikely(env->frm >= 5)) {
-> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> +    }
-> +    if (rm == RISCV_FRM_DYN) {
-> +        rm = env->frm;
-> +    }
-> +    switch (rm) {
-> +    case RISCV_FRM_RNE:
-> +        softrm = float_round_nearest_even;
-> +        break;
-> +    case RISCV_FRM_RTZ:
-> +        softrm = float_round_to_zero;
-> +        break;
-> +    case RISCV_FRM_RDN:
-> +        softrm = float_round_down;
-> +        break;
-> +    case RISCV_FRM_RUP:
-> +        softrm = float_round_up;
-> +        break;
-> +    case RISCV_FRM_RMM:
-> +        softrm = float_round_ties_away;
-> +        break;
-> +    case RISCV_FRM_ROD:
-> +        softrm = float_round_to_odd;
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
-> +
-> +    set_float_rounding_mode(softrm, &env->fp_status);
-> +}
-> +
->  void helper_set_rod_rounding_mode(CPURISCVState *env)
+> -void helper_set_rod_rounding_mode(CPURISCVState *env)
+> -{
+> -    set_float_rounding_mode(float_round_to_odd, &env->fp_status);
+> -}
+> -
+>  static uint64_t do_fmadd_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2,
+>                             uint64_t rs3, int flags)
 >  {
->      set_float_rounding_mode(float_round_to_odd, &env->fp_status);
 > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index df38db7553..493c3815e1 100644
+> index 493c3815e1..01cc30a365 100644
 > --- a/target/riscv/translate.c
 > +++ b/target/riscv/translate.c
-> @@ -114,6 +114,8 @@ typedef struct DisasContext {
->      bool pm_base_enabled;
->      /* Use icount trigger for native debug */
->      bool itrigger;
-> +    /* FRM is known to contain a valid value. */
-> +    bool frm_valid;
->      /* TCG of the current insn_start */
->      TCGOp *insn_start;
->  } DisasContext;
-> @@ -674,12 +676,29 @@ static void gen_set_rm(DisasContext *ctx, int rm)
->          gen_helper_set_rod_rounding_mode(cpu_env);
->          return;
+> @@ -672,10 +672,6 @@ static void gen_set_rm(DisasContext *ctx, int rm)
 >      }
-> +    if (rm == RISCV_FRM_DYN) {
-> +        /* The helper will return only if frm valid. */
-> +        ctx->frm_valid = true;
-> +    }
+>      ctx->frm = rm;
 >
->      /* The helper may raise ILLEGAL_INSN -- record binv for unwind. */
->      decode_save_opc(ctx);
->      gen_helper_set_rounding_mode(cpu_env, tcg_constant_i32(rm));
->  }
->
-> +static void gen_set_rm_chkfrm(DisasContext *ctx, int rm)
-> +{
-> +    if (ctx->frm == rm && ctx->frm_valid) {
-> +        return;
-> +    }
-> +    ctx->frm = rm;
-> +    ctx->frm_valid = true;
-> +
-> +    /* The helper may raise ILLEGAL_INSN -- record binv for unwind. */
-> +    decode_save_opc(ctx);
-> +    gen_helper_set_rounding_mode_chkfrm(cpu_env, tcg_constant_i32(rm));
-> +}
-> +
->  static int ex_plus_1(DisasContext *ctx, int nf)
->  {
->      return nf + 1;
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index d455acedbf..bbb5c3a7b5 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -2679,13 +2679,9 @@ static bool do_opfv(DisasContext *s, arg_rmr *a,
->                      int rm)
->  {
->      if (checkfn(s, a)) {
-> -        if (rm != RISCV_FRM_DYN) {
-> -            gen_set_rm(s, RISCV_FRM_DYN);
-> -        }
-> -
->          uint32_t data = 0;
->          TCGLabel *over = gen_new_label();
-> -        gen_set_rm(s, rm);
-> +        gen_set_rm_chkfrm(s, rm);
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
->          tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
-> @@ -2882,17 +2878,13 @@ static bool opffv_widen_check(DisasContext *s, arg_rmr *a)
->  static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
->  {                                                                  \
->      if (CHECK(s, a)) {                                             \
-> -        if (FRM != RISCV_FRM_DYN) {                                \
-> -            gen_set_rm(s, RISCV_FRM_DYN);                          \
-> -        }                                                          \
-> -                                                                   \
->          uint32_t data = 0;                                         \
->          static gen_helper_gvec_3_ptr * const fns[2] = {            \
->              gen_helper_##HELPER##_h,                               \
->              gen_helper_##HELPER##_w,                               \
->          };                                                         \
->          TCGLabel *over = gen_new_label();                          \
-> -        gen_set_rm(s, FRM);                                        \
-> +        gen_set_rm_chkfrm(s, FRM);                                 \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
->          tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
->                                                                     \
-> @@ -3005,17 +2997,13 @@ static bool opffv_narrow_check(DisasContext *s, arg_rmr *a)
->  static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
->  {                                                                  \
->      if (CHECK(s, a)) {                                             \
-> -        if (FRM != RISCV_FRM_DYN) {                                \
-> -            gen_set_rm(s, RISCV_FRM_DYN);                          \
-> -        }                                                          \
-> -                                                                   \
->          uint32_t data = 0;                                         \
->          static gen_helper_gvec_3_ptr * const fns[2] = {            \
->              gen_helper_##HELPER##_h,                               \
->              gen_helper_##HELPER##_w,                               \
->          };                                                         \
->          TCGLabel *over = gen_new_label();                          \
-> -        gen_set_rm(s, FRM);                                        \
-> +        gen_set_rm_chkfrm(s, FRM);                                 \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
->          tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
->                                                                     \
-> @@ -3060,10 +3048,6 @@ static bool opxfv_narrow_check(DisasContext *s, arg_rmr *a)
->  static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
->  {                                                                  \
->      if (opxfv_narrow_check(s, a)) {                                \
-> -        if (FRM != RISCV_FRM_DYN) {                                \
-> -            gen_set_rm(s, RISCV_FRM_DYN);                          \
-> -        }                                                          \
-> -                                                                   \
->          uint32_t data = 0;                                         \
->          static gen_helper_gvec_3_ptr * const fns[3] = {            \
->              gen_helper_##HELPER##_b,                               \
-> @@ -3071,7 +3055,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
->              gen_helper_##HELPER##_w,                               \
->          };                                                         \
->          TCGLabel *over = gen_new_label();                          \
-> -        gen_set_rm(s, FRM);                                        \
-> +        gen_set_rm_chkfrm(s, FRM);                                 \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
->          tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
->                                                                     \
+> -    if (rm == RISCV_FRM_ROD) {
+> -        gen_helper_set_rod_rounding_mode(cpu_env);
+> -        return;
+> -    }
+>      if (rm == RISCV_FRM_DYN) {
+>          /* The helper will return only if frm valid. */
+>          ctx->frm_valid = true;
 > --
 > 2.34.1
 >
