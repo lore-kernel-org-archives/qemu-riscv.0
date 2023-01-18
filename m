@@ -1,65 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIHMO-0002gN-J8
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Jan 2023 17:56:48 -0500
+	id 1pIHxC-00040A-MF
+	for mharc-qemu-riscv@gnu.org; Wed, 18 Jan 2023 18:34:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIHMI-0002fl-8Y; Wed, 18 Jan 2023 17:56:46 -0500
-Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pIHxB-0003zi-6g
+ for qemu-riscv@nongnu.org; Wed, 18 Jan 2023 18:34:49 -0500
+Received: from mail-oa1-x41.google.com ([2001:4860:4864:20::41])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIHMF-0004ki-N1; Wed, 18 Jan 2023 17:56:41 -0500
-Received: by mail-vs1-xe2a.google.com with SMTP id i185so363029vsc.6;
- Wed, 18 Jan 2023 14:56:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ijmLQFdsiMoKeVKdQsH4FLczLJZSaoIAYsR6yAzZMZI=;
- b=BsxmiDJKQAmiDSlvzLOUyglCSld2XMKTcfWK3yFY6GTp6bgD7YdqF5bnvf2SSHHVfu
- untFJButmfeX9jNbtEtgkER38gy7btMNyshDCLVFpsWRQFmbJYxNjTL32MpRxZCFX/eQ
- KJKbvLa5aSmNnKqoLrBPgRsu5/YgcC+g0OI2rLDfduAfHv9CGvDRB9n8cnbS2WM9KUvn
- 0jJ+IDTVduAg8heSMrsBPB3Ckhn6FbWo9AG2iLPImqoaXMR4dmFc1J5fHvEqdLnVCYAb
- 4cxrxs2uZvZjIeBtWGuCeg0hyC4NhvkPWpY/W3Rt16MDD1AKxSAjQABHsHZoU9nYDgQb
- U1XQ==
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pIHx9-0001tQ-As
+ for qemu-riscv@nongnu.org; Wed, 18 Jan 2023 18:34:48 -0500
+Received: by mail-oa1-x41.google.com with SMTP id
+ 586e51a60fabf-15ebfdf69adso836568fac.0
+ for <qemu-riscv@nongnu.org>; Wed, 18 Jan 2023 15:34:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wgNU1Xh+K8IsXuabeBLqgeZkgdUbC7XlpmEoFtDGWn4=;
+ b=RI7hqWwZDegu/nz0LPNfCXKJ9tOvil5rOHKAAgSpGl35OKNIbdzUgHw7EFlRR/qGlc
+ 8yoO1MT0e7SqWoiokCA1tr3I6BvMtz9IJS4xK6k9GcYsvTbbW5y4ed1d/5CbTMK7zdt8
+ KvYB+2EA2h+7wOtXqh8/E8IYx1EtdcIaRQqvZwCh/I3cNjbxn4evtLCSLuUMNYQo87kM
+ 045pqmH6w4rI0nFCzZKiMAGyyMnp/V41Ajow/pXAGIxBH1jQc0QLTPkp/rORYM3tQKeC
+ y81W8hgWi67Kmw/8qMaemsXZ46RfiFLruxY3UcVKFaXQevwqL4hIFmkrY1lXlvrOtLms
+ ADhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ijmLQFdsiMoKeVKdQsH4FLczLJZSaoIAYsR6yAzZMZI=;
- b=ap7Yttw36KwgWU69QptVNPlj4TFT5nn+ofg3S+P/gvl6K3pzuiEL36plQgQdlpLmQ8
- HqgaA8t45UYtBAofy/SHsnsW6okXBgxJXmOU/Y+Lsbuhh9kDbDparo///hslrqHqkEu6
- TpJJE6vsVW56tQJBGtkabA/easY6eVrHiSznBjiRueLhtveZUUHoERwPpad17D4w7Ab3
- ssRWnOBhTine7nEqWzqnjgeMi1u5RF2BV1CXELIKk0XAwIAaqA4swN6yzOoSx/MUM09F
- 2at/wAP1+yNqEh6GTMr9E8iqht6VUwTdA3rYU+GF33XaWeNqqlErMhC8Y4C12TBinieU
- aWdw==
-X-Gm-Message-State: AFqh2koKW1btCdA3OGOnPm4hoatbwSroB4E+bER+dYQZSEgjro5l4bom
- vNHoTP8+jaqO6URl64IviqwqMos9pNVYmevnQE4IEqbX8Rs=
-X-Google-Smtp-Source: AMrXdXvQ3F0WUKur+pIcoyCTfrg6J5cEcFw1mps9+lpRBsFd4xBnCxsWigC2UtuRobDi1QLnQe9i5r0uM6f5AcBMG/k=
-X-Received: by 2002:a67:eb10:0:b0:3c9:8cc2:dd04 with SMTP id
- a16-20020a67eb10000000b003c98cc2dd04mr1294398vso.73.1674082598081; Wed, 18
- Jan 2023 14:56:38 -0800 (PST)
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wgNU1Xh+K8IsXuabeBLqgeZkgdUbC7XlpmEoFtDGWn4=;
+ b=OCHJxqTLt6hoEljh+AvhglJeo/smSV6lRmduh3YMVYV67pLHvPOGfum9s9570Mutmg
+ t7nsArTXfJj4OwBu3m6D8JJ84+WyJuvvCyT8FVIcODdgPjjFzo5MdYvv0qsOEQXx8jhC
+ 91vYZxypOM0XgmVk8GYkoTTXb5uczDhq7fApby/5OSkPRunGq2GucLLdxJEXsZs7sksA
+ 3+f8UCLT7yC4wfeUg8dtMMX4m2Gwz7f8eYutd46Vp0N2grysmHkIGSNp8TSfpJ1eoojh
+ KjcpykFA+sE893Z/94UJE98JKrWCOZkFnp0iK5DG4QZvyjjkbrZVH3Q0xq24TaNDVhC1
+ NicQ==
+X-Gm-Message-State: AFqh2kraPGizyhiEzfoGGLkcm8OhDmHIqsaQ2MJ8fRYqgnKgW8dFSbgx
+ yPI7ibUUu9aUIWiZTxqsq6CeaA==
+X-Google-Smtp-Source: AMrXdXunysWxJFJD6+40UImxvaXnGtVNYgV3mPUvYU6+sqLsvncgY2idzqLO+oSeUmlsgSuC420Ujg==
+X-Received: by 2002:a05:6870:289a:b0:15e:9b5b:e2c9 with SMTP id
+ gy26-20020a056870289a00b0015e9b5be2c9mr5229234oab.3.1674084885661; 
+ Wed, 18 Jan 2023 15:34:45 -0800 (PST)
+Received: from [192.168.68.107] ([191.17.222.2])
+ by smtp.gmail.com with ESMTPSA id
+ em33-20020a0568705ba100b0014fd7e7c3fesm18998356oab.27.2023.01.18.15.34.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Jan 2023 15:34:45 -0800 (PST)
+Message-ID: <99e76807-83db-e7f8-4c44-cd9c1f15441a@ventanamicro.com>
+Date: Wed, 18 Jan 2023 20:34:41 -0300
 MIME-Version: 1.0
-References: <20230117132751.229738-1-dbarboza@ventanamicro.com>
- <20230117132751.229738-2-dbarboza@ventanamicro.com>
-In-Reply-To: <20230117132751.229738-2-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 19 Jan 2023 08:56:12 +1000
-Message-ID: <CAKmqyKPQjuK-uSU6iWODnBqQakL6kA9fK_ja9nvmUF7RU1sT9Q@mail.gmail.com>
-Subject: Re: [PATCH 1/1] hw/riscv/virt.c: move create_fw_cfg() back to
- virt_machine_init()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng.cn@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.0
+Subject: Re: [PATCH v8 3/3] hw/riscv: clear kernel_entry higher bits in
+ load_elf_ram_sym()
+To: Alistair Francis <alistair23@gmail.com>
+Cc: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ Bin Meng <bmeng.cn@gmail.com>
+References: <20230116122948.757515-1-dbarboza@ventanamicro.com>
+ <20230116122948.757515-4-dbarboza@ventanamicro.com>
+ <a4b7fd13-4bd0-0e7a-4650-7164e1a76053@linaro.org>
+ <61fd483d-5d3a-587b-5c98-4b81afe21d7d@ventanamicro.com>
+ <CAKmqyKMaG0x1qtKc_HBjfZyLmR==Tg3-DdzPgzDhm0utmrRMOA@mail.gmail.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <CAKmqyKMaG0x1qtKc_HBjfZyLmR==Tg3-DdzPgzDhm0utmrRMOA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2001:4860:4864:20::41;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x41.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.089,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -74,75 +91,108 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2023 22:56:46 -0000
+X-List-Received-Date: Wed, 18 Jan 2023 23:34:49 -0000
 
-On Tue, Jan 17, 2023 at 11:28 PM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Commit 1c20d3ff6004 ("hw/riscv: virt: Add a machine done notifier")
-> moved the initialization of fw_cfg to the virt_machine_done() callback.
->
-> Problem is that the validation of fw_cfg by devices such as ramfb is
-> done before the machine done notifier is called. Moving create_fw_cfg()
-> to machine_done() results in QEMU failing to boot when using a ramfb
-> device:
->
-> ./qemu-system-riscv64 -machine virt -device ramfb -serial stdio
-> qemu-system-riscv64: -device ramfb: ramfb device requires fw_cfg with DMA
->
-> The fix is simple: move create_fw_cfg() config back to
-> virt_machine_init(). This happens to be the same way the ARM 'virt'
-> machine deals with fw_cfg (see machvirt_init() and virt_machine_done()
-> in hw/arm/virt.c), so we're keeping consistency with how other machines
-> handle this device.
->
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1343
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Thanks for the fix!
+On 1/18/23 19:45, Alistair Francis wrote:
+> On Mon, Jan 16, 2023 at 10:46 PM Daniel Henrique Barboza
+> <dbarboza@ventanamicro.com> wrote:
+>>
+>>
+>> On 1/16/23 09:37, Philippe Mathieu-Daudé wrote:
+>>> On 16/1/23 13:29, Daniel Henrique Barboza wrote:
+>>>> Recent hw/risc/boot.c changes caused a regression in an use case with
+>>>> the Xvisor hypervisor. Running a 32 bit QEMU guest with '-kernel'
+>>>> stopped working. The reason seems to be that Xvisor is using 64 bit to
+>>>> encode the 32 bit addresses from the guest, and load_elf_ram_sym() is
+>>>> sign-extending the result with '1's [1].
+>>>>
+>>>> Use a translate_fn() callback to be called by load_elf_ram_sym() and
+>>>> return only the 32 bits address if we're running a 32 bit CPU.
+>>>>
+>>>> [1] https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg02281.html
+>>>>
+>>>> Suggested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>>>> Suggested-by: Bin Meng <bmeng.cn@gmail.com>
+>>>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>>>> ---
+>>>>    hw/riscv/boot.c            | 20 +++++++++++++++++++-
+>>>>    hw/riscv/microchip_pfsoc.c |  4 ++--
+>>>>    hw/riscv/opentitan.c       |  3 ++-
+>>>>    hw/riscv/sifive_e.c        |  3 ++-
+>>>>    hw/riscv/sifive_u.c        |  4 ++--
+>>>>    hw/riscv/spike.c           |  2 +-
+>>>>    hw/riscv/virt.c            |  4 ++--
+>>>>    include/hw/riscv/boot.h    |  1 +
+>>>>    target/riscv/cpu_bits.h    |  1 +
+>>>>    9 files changed, 32 insertions(+), 10 deletions(-)
+>>>>
+>>>> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+>>>> index e868fb6ade..0fd39df7f3 100644
+>>>> --- a/hw/riscv/boot.c
+>>>> +++ b/hw/riscv/boot.c
+>>>> @@ -213,7 +213,24 @@ static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
+>>>>        }
+>>>>    }
+>>>>    +static uint64_t translate_kernel_address(void *opaque, uint64_t addr)
+>>>> +{
+>>>> +    RISCVHartArrayState *harts = opaque;
+>>>> +
+>>>> +    /*
+>>>> +     * For 32 bit CPUs, kernel_load_base is sign-extended (i.e.
+>>>> +     * it can be padded with '1's) if the hypervisor is using
+>>>> +     * 64 bit addresses with 32 bit guests.
+>>>> +     */
+>>>> +    if (riscv_is_32bit(harts)) {
+>>> Maybe move the comment within the if() and add " so remove the sign
+>>> extension by truncating to 32-bit".
+>>>
+>>>> +        return extract64(addr, 0, RV32_KERNEL_ADDR_LEN);
+>>> For 32-bit maybe a definition is not necessary, I asked before
+>>> you used 24-bit in the previous version. As the maintainer prefer :)
+>> That was unintentional. I missed a 'f' in that 0x0fffffff, which I noticed only
+>> now when doing this version. It's curious because Alistair mentioned that
+>> the patch apparently solved the bug ....
+> I never tested it, I'm not sure if this solves the problem or not.
+>
+> This patch needs to be merged *before* the initrd patch (patch 1 of
+> this series) to avoid breaking users.
 
-Alistair
+Makes sense. I'll change it in v9.
 
-> ---
->  hw/riscv/virt.c | 14 +++++++-------
->  1 file changed, 7 insertions(+), 7 deletions(-)
+Daniel
+
+>> I don't mind creating a macro for the 32 bit value. If we decide it's unneeded
+>> I can remove it and just put a '32' there. I'll also make the comment change
+>> you mentioned above.
+> I think 32 if fine, I don't think we need a macro
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index e6d4f06e8d..4a11b4b010 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1254,13 +1254,6 @@ static void virt_machine_done(Notifier *notifier, void *data)
->      firmware_end_addr = riscv_find_and_load_firmware(machine, firmware_name,
->                                                       start_addr, NULL);
+> Alistair
 >
-> -    /*
-> -     * Init fw_cfg.  Must be done before riscv_load_fdt, otherwise the device
-> -     * tree cannot be altered and we get FDT_ERR_NOSPACE.
-> -     */
-> -    s->fw_cfg = create_fw_cfg(machine);
-> -    rom_set_fw(s->fw_cfg);
-> -
->      if (drive_get(IF_PFLASH, 0, 1)) {
->          /*
->           * S-mode FW like EDK2 will be kept in second plash (unit 1).
-> @@ -1468,6 +1461,13 @@ static void virt_machine_init(MachineState *machine)
->      memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
->                                  mask_rom);
->
-> +    /*
-> +     * Init fw_cfg. Must be done before riscv_load_fdt, otherwise the
-> +     * device tree cannot be altered and we get FDT_ERR_NOSPACE.
-> +     */
-> +    s->fw_cfg = create_fw_cfg(machine);
-> +    rom_set_fw(s->fw_cfg);
-> +
->      /* SiFive Test MMIO device */
->      sifive_test_create(memmap[VIRT_TEST].base);
->
-> --
-> 2.39.0
->
->
+>>
+>> Thanks,
+>>
+>>
+>> Daniel
+>>
+>>>> +    }
+>>>> +
+>>>> +    return addr;
+>>>> +}
+>>>> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+>>>> index 8b0d7e20ea..8fcaeae342 100644
+>>>> --- a/target/riscv/cpu_bits.h
+>>>> +++ b/target/riscv/cpu_bits.h
+>>>> @@ -751,6 +751,7 @@ typedef enum RISCVException {
+>>>>    #define MENVCFG_STCE                       (1ULL << 63)
+>>>>      /* For RV32 */
+>>>> +#define RV32_KERNEL_ADDR_LEN               32
+>>>>    #define MENVCFGH_PBMTE                     BIT(30)
+>>>>    #define MENVCFGH_STCE                      BIT(31)
+>>> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>>>
+>>>
+>>
+
 
