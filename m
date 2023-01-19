@@ -1,95 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIPsU-0008MH-6L
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 03:02:30 -0500
+	id 1pIR5w-0003Sw-Kk
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 04:20:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <its@irrelevant.dk>)
- id 1pIPsQ-0008Ll-9u; Thu, 19 Jan 2023 03:02:26 -0500
-Received: from out4-smtp.messagingengine.com ([66.111.4.28])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIR5t-0003Ro-S8
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 04:20:25 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <its@irrelevant.dk>)
- id 1pIPsM-0001ZS-Qe; Thu, 19 Jan 2023 03:02:26 -0500
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.nyi.internal (Postfix) with ESMTP id BC5A35C00E1;
- Thu, 19 Jan 2023 03:02:19 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute3.internal (MEProxy); Thu, 19 Jan 2023 03:02:19 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irrelevant.dk;
- h=cc:cc:content-type:date:date:from:from:in-reply-to
- :in-reply-to:message-id:mime-version:references:reply-to:sender
- :subject:subject:to:to; s=fm2; t=1674115339; x=1674201739; bh=mB
- d7QUcrfTarg4e7g/HJLtAIa3/buWqXHjVxwDG6Dhc=; b=PgQYzn/Zz+P8vSoowS
- VJzNxA+WUjOf7kg5rKt+oWCk0VycFhcEEMqKsNFKS8t2ylfL/z5c0yhikjPdsjVk
- VaMLTpemJegaK13BCqmSStZIharlKidWMaKqw5vEy8hNUmNG/hI2kKXIY2jBixel
- EeX8hbjWLaA1qWHBSfd7kkdwLjyUvcMe7IBqe2N42SErwigsYfCP/mEP7kXbnDUT
- 62mDEuX/fNFGc9zlRGMQOomiBwhaE7y0s2AsWaj6qvMCxaCxqlEpcw6GRUH1ZeQ9
- xyzGqEsr7TiVkxlZiTh6S5zo6adEeKvJHrD5GgC52psZYi97RNp1nooz7mFtuXzr
- 3VSw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
- :feedback-id:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:sender:subject:subject:to:to
- :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm3; t=1674115339; x=1674201739; bh=mBd7QUcrfTarg4e7g/HJLtAIa3/b
- uWqXHjVxwDG6Dhc=; b=a55UmbeUTm+fBSvRbrt+qhzKEFviFHTZO7IuWzj1AIJ+
- T8RbC8RHm56bTlAu+C+tNr99bY4+bv7sKeJ9GjHRhy0qAxM6oD0oJanKjjvkeQfD
- JiX/9FGhpDCGX/PrAUJPaZ5h6eLCpatAUW4VM1xvFFUDnT2s/QgJDT9cDGDMeNiM
- 5XHQnOlRLW62LwT/57Qe+c/5b8jpYDz7BTvjO6PZTZxPeJ5D85LRjtWFJSVy/wa/
- wOAIZvjYjQiLvgkE1GHwQzcWxft50PluUqvpGh8k9iikUqo1bR+n770n6TMr6btw
- fZVZy5DQiPIJ42W/p6KVe0xTsVcV4lSbwtBzqixXmQ==
-X-ME-Sender: <xms:C_nIY8jTBsDQ4ggRP39QWLV7mYU3DfPdSHp72DQ6ptL8xtf7f07RXQ>
- <xme:C_nIY1D4g9mzBBkExaGZ4qdeeU3d2VGX3yboik3wM_tosUgEZtrQCbNt7Ywb_xBsB
- RvTkNZa5dslRopTozk>
-X-ME-Received: <xmr:C_nIY0HyaG__FwFFFKEF4lsL-lIScJBQXOEcq8cTcUXSpEne6Y52aSFqNWO20u05dG0XbpNgyF8oTwR5v6ltU_gtCTEjKg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedruddtledgudduhecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpeffhffvvefukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpefmlhgr
- uhhsucflvghnshgvnhcuoehithhssehirhhrvghlvghvrghnthdrughkqeenucggtffrrg
- htthgvrhhnpeejgfejfeffvdeuhfeifefhgffgueelhedukeevjeevtdduudegieegteff
- ffejveenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
- hithhssehirhhrvghlvghvrghnthdrughk
-X-ME-Proxy: <xmx:C_nIY9T3JLBn5F003CEEVuuzmh4Wb5kLZhXdNBkAeVsU8wgRmC0w7Q>
- <xmx:C_nIY5zBGcJZaLt4_RHZB9fS2Oir7DBGtDRYEHjkUIE-nZ0WCoPk5g>
- <xmx:C_nIY74zoA133YhZTDfSJfp9y5mb__rXY75lvnJZoh-2R8bwK938zA>
- <xmx:C_nIY_6xwqblwWuFN5fbsLeH6XOpBgN60LTUBPyp-2BKBPm5s7D24w>
-Feedback-ID: idc91472f:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 19 Jan 2023 03:02:17 -0500 (EST)
-Date: Thu, 19 Jan 2023 09:02:15 +0100
-From: Klaus Jensen <its@irrelevant.dk>
-To: Keith Busch <kbusch@kernel.org>
-Cc: Alistair Francis <alistair23@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Guenter Roeck <linux@roeck-us.net>, Jens Axboe <axboe@fb.com>,
- Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>,
- linux-nvme@lists.infradead.org, qemu-block@nongnu.org,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: Re: completion timeouts with pin-based interrupts in QEMU hw/nvme
-Message-ID: <Y8j5B+c3mM01d+Gk@cormorant.local>
-References: <CAFEAcA9pS7P=SvKsOtRHPtkrNAD8LF2ZpFJ870G3B-rhWYap4g@mail.gmail.com>
- <20230117192115.GA2958104@roeck-us.net>
- <CAFEAcA_T8QqSg4SzszP+wR3pR1P1WTZg4f7mHHBGRw4UrTw+DQ@mail.gmail.com>
- <Y8gfQXPYdHKd1v4I@kbusch-mbp> <Y8h7aOuVfCb+RsAP@kbusch-mbp>
- <CAKmqyKMHs_-RgagMDYE7vn3MHEP2caBc+RERjaK0DNJw4hFYiA@mail.gmail.com>
- <Y8iulgdgOdVCjuKE@kbusch-mbp>
- <CAKmqyKMveR=RD6fgnzY0SV39tofD+Ws_AbrSZXE_o4m=M6GZHg@mail.gmail.com>
- <Y8jBG/j8w2R43kYd@kbusch-mbp> <Y8jxHuVYoTo6KcH4@cormorant.local>
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIR5s-0005gn-1g
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 04:20:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1674120023;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=AJAH+PtgDJ2Ku6bGCKJxTD3hj9E448yvnHDUAJu5nvg=;
+ b=KSN0owcrhr+Xr6WuO0WwlP6UEhu+KzpjrCos3O8EmsPSCoAlW2IcOtmrdlCTwQ65VMAYc2
+ Er/lH2hxsDuQqekNV9c4uEbcnQiGASiB7RhVjgfl29FUZNWUJXNN3EBFWNStnj8tuhcdAo
+ d1ooi13VWs0w/VMoYzF4T/huzC+MJmE=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-627-oR98r5VaNw2EJ9lf181YHA-1; Thu, 19 Jan 2023 04:20:19 -0500
+X-MC-Unique: oR98r5VaNw2EJ9lf181YHA-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 0CCD0185A78B;
+ Thu, 19 Jan 2023 09:20:18 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 587FB1121315;
+ Thu, 19 Jan 2023 09:20:17 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 2612321E6A28; Thu, 19 Jan 2023 10:20:16 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org,  richard.henderson@linaro.org,
+ pbonzini@redhat.com,  kwolf@redhat.com,  hreitz@redhat.com,
+ imp@bsdimp.com,  kevans@freebsd.org,  berrange@redhat.com,
+ groug@kaod.org,  qemu_oss@crudebyte.com,  mst@redhat.com,
+ philmd@linaro.org,  peter.maydell@linaro.org,  alistair@alistair23.me,
+ jasowang@redhat.com,  jonathan.cameron@huawei.com,
+ kbastian@mail.uni-paderborn.de,  quintela@redhat.com,
+ dgilbert@redhat.com,  michael.roth@amd.com,  kkostiuk@redhat.com,
+ tsimpson@quicinc.com,  palmer@dabbelt.com,  bin.meng@windriver.com,
+ qemu-block@nongnu.org,  qemu-arm@nongnu.org,  qemu-riscv@nongnu.org
+Subject: Re: [PATCH v4 00/19] Clean up includes
+References: <20230119065959.3104012-1-armbru@redhat.com>
+Date: Thu, 19 Jan 2023 10:20:16 +0100
+In-Reply-To: <20230119065959.3104012-1-armbru@redhat.com> (Markus Armbruster's
+ message of "Thu, 19 Jan 2023 07:59:40 +0100")
+Message-ID: <87k01ix4mn.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="W4BUVAsMEMdcmc71"
-Content-Disposition: inline
-In-Reply-To: <Y8jxHuVYoTo6KcH4@cormorant.local>
-Received-SPF: pass client-ip=66.111.4.28; envelope-from=its@irrelevant.dk;
- helo=out4-smtp.messagingengine.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,74 +77,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 08:02:28 -0000
+X-List-Received-Date: Thu, 19 Jan 2023 09:20:26 -0000
 
+Markus Armbruster <armbru@redhat.com> writes:
 
---W4BUVAsMEMdcmc71
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Back in 2016, we discussed[1] rules for headers, and these were
+> generally liked:
+>
+> 1. Have a carefully curated header that's included everywhere first.  We
+>    got that already thanks to Peter: osdep.h.
+>
+> 2. Headers should normally include everything they need beyond osdep.h.
+>    If exceptions are needed for some reason, they must be documented in
+>    the header.  If all that's needed from a header is typedefs, put
+>    those into qemu/typedefs.h instead of including the header.
+>
+> 3. Cyclic inclusion is forbidden.
+>
+> This series fixes violations of rule 2.  I may have split patches too
+> aggressively.  Let me know if you want some squashed together.
+>
+> v4:
+> * PATCH 01-03: New
+> * PATCH 04-15: Previous version redone with scripts/clean-includes,
+>   	       result split up for review
 
-On Jan 19 08:28, Klaus Jensen wrote:
-> On Jan 18 21:03, Keith Busch wrote:
-> > On Thu, Jan 19, 2023 at 01:10:57PM +1000, Alistair Francis wrote:
-> > > On Thu, Jan 19, 2023 at 12:44 PM Keith Busch <kbusch@kernel.org> wrot=
-e:
-> > > >
-> > > > Further up, it says the "interrupt gateway" is responsible for
-> > > > forwarding new interrupt requests while the level remains asserted,=
- but
-> > > > it doesn't look like anything is handling that, which essentially t=
-urns
-> > > > this into an edge interrupt. Am I missing something, or is this rea=
-lly
-> > > > not being handled?
-> > >=20
-> > > Yeah, that wouldn't be handled. In QEMU the PLIC relies on QEMUs
-> > > internal GPIO lines to trigger an interrupt. So with the current setup
-> > > we only support edge triggered interrupts.
-> >=20
-> > Thanks for confirming!
-> >=20
-> > Klaus,
-> > I think we can justify introducing a work-around in the emulated device
-> > now. My previous proposal with pci_irq_pulse() is no good since it does
-> > assert+deassert, but it needs to be the other way around, so please
-> > don't considert that one.
-> >=20
-> > Also, we ought to revisit the intms/intmc usage in the linux driver for
-> > threaded interrupts.
->=20
-> +CC: qemu-riscv
->=20
-> Keith,
->=20
-> Thanks for digging into this!
->=20
-> Yeah, you are probably right that we should only use the intms/intmc
-> changes in the use_threaded_interrupts case, not in general. While my
-> RFC patch does seem to "fix" this, it is just a workaround as your
-> analysis indicate.
+Copying the R-bys for v3 to these patches is tempting.  But I didn't.
 
-+CC: Philippe,
+> * PATCH 16-19: New
+>
+> v3:
+> * Rebased, old PATCH 1+2+4 are in master as commit
+>   881e019770..f07ceffdf5
+> * PATCH 1: Fix bsd-user
+>
+> v2:
+> * Rebased
+> * PATCH 3: v1 posted separately
+> * PATCH 4: New
+>
+> [1] Message-ID: <87h9g8j57d.fsf@blackfin.pond.sub.org>
+>     https://lists.nongnu.org/archive/html/qemu-devel/2016-03/msg03345.html
 
-I am observing these timeouts/aborts on mips as well, so I guess that
-emulation could suffer from the same issue?
-
---W4BUVAsMEMdcmc71
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEUigzqnXi3OaiR2bATeGvMW1PDekFAmPI+QYACgkQTeGvMW1P
-DekHAwf+Ki1LlCBgmoe95m0vajU7TuDu1kMglgpZ9t7UsBwGa88syocxbt0Xbgi8
-9EvIPkncL1hlzzimo/tFa4Ukr5qiCucctT9xW37x2EWpMOk8Dv1Vo3W0pC9X6Apx
-nASE5/LGq/hH1IhnewMKPwABXfpd/OCiNnlkbYtp7dQhk9Yls3WoyASZVnXAKk4P
-Gu8nsBRUutZT1VEjOIv8GYwQwaJ5IHEWULTndsiQZge/vWKgHLev3xDfOtKXKsmw
-mhZm9n1CUZBH2dF9hZCfxGqp1TpWZXKuH5rpw3wcLOFShd8CznI7PvtqNodfeVTo
-fveeCWF7UH05j2gpTGQjY1wKLvjxbA==
-=ZriN
------END PGP SIGNATURE-----
-
---W4BUVAsMEMdcmc71--
 
