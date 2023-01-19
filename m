@@ -1,40 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIOuY-0006XX-0x
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 02:00:35 -0500
+	id 1pIOuZ-0006Y7-JY
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 02:00:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIOuG-0006LR-MH
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIOuG-0006LT-NL
  for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 02:00:19 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIOuE-00089E-AC
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 02:00:16 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIOuC-00088R-1O
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 02:00:14 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1674111607;
+ s=mimecast20190719; t=1674111606;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=vhEyU3lG/HddlFOPbY0juv1v7ZnJ12wqNCac3xMgqpY=;
- b=SdbbhrVjiBkDD3jEa+pM+2Yn9hUeLTTcLNIryqDssuvr8o3uOZBaeHXiYxQoemn8bsXndh
- k7a8+mAWE+Q5d0LhHqgrkcUe7AZTWODnQ59xnbi4NxKA33IsjFQcUh6oFnE7gTNzyma/hF
- keztZEFes3NRZeX86rJgIshZ5m2RtvY=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=DT1YR/I9uiXnMAX5jmyboBoPorBbJELfsh+yymZHrww=;
+ b=impiwq3WbNpRQqmfNbWnwcr/HZTIy533dw0jSPhoGG271ByZfUzeaVNuscPxVxXdH9AjRL
+ MCyeT/gHa/Dqrlm0uMqREzQEX264eHfg//FtTNiuFRMEjYZqET2UeoMzrgTMWqY6C3MDLd
+ 6o+qx6m952qtzGh8M4xVZmy4kldZMZU=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-70-tT4Km-04Mlqzxd9U-zU7jg-1; Thu, 19 Jan 2023 02:00:04 -0500
-X-MC-Unique: tT4Km-04Mlqzxd9U-zU7jg-1
+ us-mta-486-Cg00en9dPXqDrSzG9Rq4PQ-1; Thu, 19 Jan 2023 02:00:03 -0500
+X-MC-Unique: Cg00en9dPXqDrSzG9Rq4PQ-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
  [10.11.54.8])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C24881C05AC4;
- Thu, 19 Jan 2023 07:00:03 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 3D36D857A85;
+ Thu, 19 Jan 2023 07:00:02 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 86C2EC15BAD;
- Thu, 19 Jan 2023 07:00:03 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 013C8C15BAD;
+ Thu, 19 Jan 2023 07:00:00 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 6955C21E64D9; Thu, 19 Jan 2023 07:59:59 +0100 (CET)
+ id 46D5621E66F2; Thu, 19 Jan 2023 07:59:59 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
@@ -46,9 +46,9 @@ Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
  kkostiuk@redhat.com, tsimpson@quicinc.com, palmer@dabbelt.com,
  bin.meng@windriver.com, qemu-block@nongnu.org, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v4 14/19] block: Clean up includes
-Date: Thu, 19 Jan 2023 07:59:54 +0100
-Message-Id: <20230119065959.3104012-15-armbru@redhat.com>
+Subject: [PATCH v4 03/19] scripts/clean-includes: Skip symbolic links
+Date: Thu, 19 Jan 2023 07:59:43 +0100
+Message-Id: <20230119065959.3104012-4-armbru@redhat.com>
 In-Reply-To: <20230119065959.3104012-1-armbru@redhat.com>
 References: <20230119065959.3104012-1-armbru@redhat.com>
 MIME-Version: 1.0
@@ -78,55 +78,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 19 Jan 2023 07:00:20 -0000
 
-Clean up includes so that osdep.h is included first and headers
-which it implies are not included manually.
+When a symbolic link points to a file that needs cleaning, the script
+replaces the link with a cleaned regular file.  Not wanted; skip them.
 
-This commit was created with scripts/clean-includes.
+We have a few symbolic links under subprojects/libvduse/ and
+subprojects/libvhost-user/.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 ---
- include/block/graph-lock.h      | 1 -
- include/block/write-threshold.h | 2 --
- block/qapi.c                    | 1 -
- 3 files changed, 4 deletions(-)
+ scripts/clean-includes | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/include/block/graph-lock.h b/include/block/graph-lock.h
-index 4c92cd8edf..ed9263b84e 100644
---- a/include/block/graph-lock.h
-+++ b/include/block/graph-lock.h
-@@ -20,7 +20,6 @@
- #ifndef GRAPH_LOCK_H
- #define GRAPH_LOCK_H
+diff --git a/scripts/clean-includes b/scripts/clean-includes
+index 8e8420d785..f0466a6262 100755
+--- a/scripts/clean-includes
++++ b/scripts/clean-includes
+@@ -113,6 +113,10 @@ EOT
  
--#include "qemu/osdep.h"
- #include "qemu/clang-tsa.h"
- 
- #include "qemu/coroutine.h"
-diff --git a/include/block/write-threshold.h b/include/block/write-threshold.h
-index f50f923e7e..63d1583887 100644
---- a/include/block/write-threshold.h
-+++ b/include/block/write-threshold.h
-@@ -13,8 +13,6 @@
- #ifndef BLOCK_WRITE_THRESHOLD_H
- #define BLOCK_WRITE_THRESHOLD_H
- 
--#include "qemu/typedefs.h"
--
- /*
-  * bdrv_write_threshold_set:
-  *
-diff --git a/block/qapi.c b/block/qapi.c
-index fea808425b..aede6a40d8 100644
---- a/block/qapi.c
-+++ b/block/qapi.c
-@@ -39,7 +39,6 @@
- #include "qapi/qmp/qstring.h"
- #include "qemu/qemu-print.h"
- #include "sysemu/block-backend.h"
--#include "qemu/cutils.h"
- 
- BlockDeviceInfo *bdrv_block_device_info(BlockBackend *blk,
-                                         BlockDriverState *bs,
+ files=
+ for f in "$@"; do
++  if [ -L "$f" ]; then
++      echo "SKIPPING $f (symbolic link)"
++      continue
++  fi
+   case "$f" in
+     *.c.inc)
+       # These aren't standalone C source files
 -- 
 2.39.0
 
