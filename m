@@ -1,92 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIVy7-0004na-S0
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:32:43 -0500
+	id 1pIW1n-0007N5-KH
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:36:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <groeck7@gmail.com>)
- id 1pIVxk-0004YJ-QS; Thu, 19 Jan 2023 09:32:22 -0500
-Received: from mail-oo1-xc2e.google.com ([2607:f8b0:4864:20::c2e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <groeck7@gmail.com>)
- id 1pIVxh-0005rH-Jn; Thu, 19 Jan 2023 09:32:19 -0500
-Received: by mail-oo1-xc2e.google.com with SMTP id
- h3-20020a4ac443000000b004fb2954e7c3so527366ooq.10; 
- Thu, 19 Jan 2023 06:32:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :sender:from:to:cc:subject:date:message-id:reply-to;
- bh=OzgsiHNFafg9OuoZBVQAxwkGBmRTSBugx3N+qaA0rBI=;
- b=ca9PfG3z/EllduhdK6CDNGJ7qAylteR3X1AjKID79cJKs9dNOQtZfCq0WpbYeCFRpn
- AZGBzK1xTiXHeBtUlmTEAJx4GopUssIpHcTttmqZk21lCLTyIsbOuA01LAJU6QUnnPv4
- zppFSpWUaZFPwyxNI9OYcYU6qre5wiqE3X6UKVq3ok01tGCiv7lJwyCoD8OB8Ky3T+v5
- +AuPj/fJtr1a2FmaNIFC3FYxkqSgA4SJ8Ya/RC7ogm3WRLtz47eUePUyBb0Z+IuzIgdI
- yphrOLgWfpM8OLDvA4TNbkRqsxhVurzVZ219FETwgKhDAqH5WQZZceT75HU4nuZIvBUE
- 6mxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :sender:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OzgsiHNFafg9OuoZBVQAxwkGBmRTSBugx3N+qaA0rBI=;
- b=L9kw5cqnzVffxwJycS5fXPxp4bUYLpUQbaRvAMAPViebP25pznTl/08LvPKeNI6tll
- K5RDB1IT+EoqfzWn+axiWRQSbpPmIcEfnU/e9I5w8tlbWSMKAbrZwGKp6Lpp2cKwqzkV
- ibYy/wU2qUeGOtjt2KsUzR1G2/8CbiV6BeEMxDiuvU6IP+krTvEFRfQuepipoanPfvRf
- wS+l2zCodEg75+zhGo9TBLK67ZnjvbtebnHERysUId4sTAcTJcLvQR/dJeTBw7wAXBJ3
- LkoTXAffc+T8Aiz0xXBSjoZRlxXm2YfuXoOvAU6AK5oPC7StJaPW/qWfDNIdCeLJi1gs
- sQNQ==
-X-Gm-Message-State: AFqh2krpEbDhgYKPebCzsRY7Aa8DI3G6fiW++ArZvKOa4arxfpvx0upz
- J+S7dI8cFNpMkgpnhkijfDI=
-X-Google-Smtp-Source: AMrXdXuzZK0/qeneeoKtkR5uanVU13P0DyIhyVKzXEDf9UVDbzHQsxVUQcff/azGPvHSfERmd5gibA==
-X-Received: by 2002:a05:6820:413:b0:49f:dba7:5e65 with SMTP id
- o19-20020a056820041300b0049fdba75e65mr4855150oou.3.1674138734167; 
- Thu, 19 Jan 2023 06:32:14 -0800 (PST)
-Received: from ?IPV6:2600:1700:e321:62f0:329c:23ff:fee3:9d7c?
- ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
- by smtp.gmail.com with ESMTPSA id
- g6-20020a4aa706000000b004f9cd1e42d3sm3702525oom.26.2023.01.19.06.32.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Jan 2023 06:32:13 -0800 (PST)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <01c6a8f8-881b-66b2-781b-c334e3a9fecc@roeck-us.net>
-Date: Thu, 19 Jan 2023 06:32:10 -0800
+ (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
+ id 1pIW1R-000798-4r
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:15 -0500
+Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
+ id 1pIW1M-0006zW-LP
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:08 -0500
+Received: from [167.98.27.226] (helo=lawrence-thinkpad.office.codethink.co.uk)
+ by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
+ id 1pIW1F-007gSL-Pz; Thu, 19 Jan 2023 14:35:58 +0000
+From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+To: qemu-riscv@nongnu.org
+Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com,
+ Nazar Kazakov <nazar.kazakov@codethink.co.uk>
+Subject: [RFC PATCH 09/39] target/riscv: Add vandn.[vv, vx, vi] decoding,
+ translation and execution support
+Date: Thu, 19 Jan 2023 14:34:58 +0000
+Message-Id: <20230119143528.1290950-10-lawrence.hunter@codethink.co.uk>
+X-Mailer: git-send-email 2.39.1
+In-Reply-To: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
+References: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: completion timeouts with pin-based interrupts in QEMU hw/nvme
-Content-Language: en-US
-To: Klaus Jensen <its@irrelevant.dk>, Keith Busch <kbusch@kernel.org>
-Cc: Alistair Francis <alistair23@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>, Jens Axboe <axboe@fb.com>,
- Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>,
- linux-nvme@lists.infradead.org, qemu-block@nongnu.org,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-References: <CAFEAcA9pS7P=SvKsOtRHPtkrNAD8LF2ZpFJ870G3B-rhWYap4g@mail.gmail.com>
- <20230117192115.GA2958104@roeck-us.net>
- <CAFEAcA_T8QqSg4SzszP+wR3pR1P1WTZg4f7mHHBGRw4UrTw+DQ@mail.gmail.com>
- <Y8gfQXPYdHKd1v4I@kbusch-mbp> <Y8h7aOuVfCb+RsAP@kbusch-mbp>
- <CAKmqyKMHs_-RgagMDYE7vn3MHEP2caBc+RERjaK0DNJw4hFYiA@mail.gmail.com>
- <Y8iulgdgOdVCjuKE@kbusch-mbp>
- <CAKmqyKMveR=RD6fgnzY0SV39tofD+Ws_AbrSZXE_o4m=M6GZHg@mail.gmail.com>
- <Y8jBG/j8w2R43kYd@kbusch-mbp> <Y8jxHuVYoTo6KcH4@cormorant.local>
- <Y8j5B+c3mM01d+Gk@cormorant.local>
-From: Guenter Roeck <linux@roeck-us.net>
-In-Reply-To: <Y8j5B+c3mM01d+Gk@cormorant.local>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2e;
- envelope-from=groeck7@gmail.com; helo=mail-oo1-xc2e.google.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=188.40.203.114;
+ envelope-from=lawrence.hunter@codethink.co.uk; helo=imap4.hz.codethink.co.uk
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
- FREEMAIL_FORGED_FROMDOMAIN=0.25, FREEMAIL_FROM=0.001,
- HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.094,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,56 +46,90 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 14:32:43 -0000
+X-List-Received-Date: Thu, 19 Jan 2023 14:36:16 -0000
 
-On 1/19/23 00:02, Klaus Jensen wrote:
-> On Jan 19 08:28, Klaus Jensen wrote:
->> On Jan 18 21:03, Keith Busch wrote:
->>> On Thu, Jan 19, 2023 at 01:10:57PM +1000, Alistair Francis wrote:
->>>> On Thu, Jan 19, 2023 at 12:44 PM Keith Busch <kbusch@kernel.org> wrote:
->>>>>
->>>>> Further up, it says the "interrupt gateway" is responsible for
->>>>> forwarding new interrupt requests while the level remains asserted, but
->>>>> it doesn't look like anything is handling that, which essentially turns
->>>>> this into an edge interrupt. Am I missing something, or is this really
->>>>> not being handled?
->>>>
->>>> Yeah, that wouldn't be handled. In QEMU the PLIC relies on QEMUs
->>>> internal GPIO lines to trigger an interrupt. So with the current setup
->>>> we only support edge triggered interrupts.
->>>
->>> Thanks for confirming!
->>>
->>> Klaus,
->>> I think we can justify introducing a work-around in the emulated device
->>> now. My previous proposal with pci_irq_pulse() is no good since it does
->>> assert+deassert, but it needs to be the other way around, so please
->>> don't considert that one.
->>>
->>> Also, we ought to revisit the intms/intmc usage in the linux driver for
->>> threaded interrupts.
->>
->> +CC: qemu-riscv
->>
->> Keith,
->>
->> Thanks for digging into this!
->>
->> Yeah, you are probably right that we should only use the intms/intmc
->> changes in the use_threaded_interrupts case, not in general. While my
->> RFC patch does seem to "fix" this, it is just a workaround as your
->> analysis indicate. >
-> +CC: Philippe,
-> 
-> I am observing these timeouts/aborts on mips as well, so I guess that
-> emulation could suffer from the same issue?
+From: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
 
-I suspect it does. In my case, I have an Ethernet controller on the same
-interrupt line as the NVME controller, and it looks like one of the
-interrupts gets lost if both controllers raise an interrupt at the same
-time. The suggested workarounds "fix" the problem, but that doesn't seem
-to be the correct solution.
+Signed-off-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
+---
+ target/riscv/helper.h                      |  9 +++++++++
+ target/riscv/insn32.decode                 |  3 +++
+ target/riscv/insn_trans/trans_rvzvkb.c.inc |  5 +++++
+ target/riscv/vcrypto_helper.c              | 19 +++++++++++++++++++
+ 4 files changed, 36 insertions(+)
 
-Guenter
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index c980d52828..5de615ea78 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1171,3 +1171,12 @@ DEF_HELPER_5(vbrev8_v_b, void, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_5(vbrev8_v_h, void, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_5(vbrev8_v_w, void, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_5(vbrev8_v_d, void, ptr, ptr, ptr, env, i32)
++
++DEF_HELPER_6(vandn_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vandn_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vandn_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vandn_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vandn_vx_b, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vandn_vx_h, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vandn_vx_w, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vandn_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 342199abc0..d6f5e4d198 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -904,3 +904,6 @@ vror_vi         010100 . ..... ..... 011 ..... 1010111 @r_vm
+ vror_vi2        010101 . ..... ..... 011 ..... 1010111 @r_vm
+ vbrev8_v        010010 . ..... 01000 010 ..... 1010111 @r2_vm
+ vrev8_v         010010 . ..... 01001 010 ..... 1010111 @r2_vm
++vandn_vi        000001 . ..... ..... 011 ..... 1010111 @r_vm
++vandn_vv        000001 . ..... ..... 000 ..... 1010111 @r_vm
++vandn_vx        000001 . ..... ..... 100 ..... 1010111 @r_vm
+diff --git a/target/riscv/insn_trans/trans_rvzvkb.c.inc b/target/riscv/insn_trans/trans_rvzvkb.c.inc
+index b0c8347ab1..9f75bb3d39 100644
+--- a/target/riscv/insn_trans/trans_rvzvkb.c.inc
++++ b/target/riscv/insn_trans/trans_rvzvkb.c.inc
+@@ -147,6 +147,11 @@ static bool trans_##NAME(DisasContext *s, arg_rmr * a)                 \
+     return false;                                                      \
+ }
+ 
++
++GEN_OPIVV_TRANS(vandn_vv, zvkb_vv_check)
++GEN_OPIVX_TRANS(vandn_vx, zvkb_vx_check)
++GEN_OPIVI_TRANS(vandn_vi, IMM_SX, vandn_vx, zvkb_vx_check)
++
+ static bool vxrev8_check(DisasContext *s, arg_rmr *a)
+ {
+     return require_rvv(s) &&
+diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
+index b09fe5fa2a..900e68dfb0 100644
+--- a/target/riscv/vcrypto_helper.c
++++ b/target/riscv/vcrypto_helper.c
+@@ -135,3 +135,22 @@ GEN_VEXT_V(vrev8_v_b, 1)
+ GEN_VEXT_V(vrev8_v_h, 2)
+ GEN_VEXT_V(vrev8_v_w, 4)
+ GEN_VEXT_V(vrev8_v_d, 8)
++
++#define DO_ANDN(a, b) ((b) & ~(a))
++RVVCALL(OPIVV2, vandn_vv_b, OP_UUU_B, H1, H1, H1, DO_ANDN)
++RVVCALL(OPIVV2, vandn_vv_h, OP_UUU_H, H2, H2, H2, DO_ANDN)
++RVVCALL(OPIVV2, vandn_vv_w, OP_UUU_W, H4, H4, H4, DO_ANDN)
++RVVCALL(OPIVV2, vandn_vv_d, OP_UUU_D, H8, H8, H8, DO_ANDN)
++GEN_VEXT_VV(vandn_vv_b, 1)
++GEN_VEXT_VV(vandn_vv_h, 2)
++GEN_VEXT_VV(vandn_vv_w, 4)
++GEN_VEXT_VV(vandn_vv_d, 8)
++
++RVVCALL(OPIVX2, vandn_vx_b, OP_UUU_B, H1, H1, DO_ANDN)
++RVVCALL(OPIVX2, vandn_vx_h, OP_UUU_H, H2, H2, DO_ANDN)
++RVVCALL(OPIVX2, vandn_vx_w, OP_UUU_W, H4, H4, DO_ANDN)
++RVVCALL(OPIVX2, vandn_vx_d, OP_UUU_D, H8, H8, DO_ANDN)
++GEN_VEXT_VX(vandn_vx_b, 1)
++GEN_VEXT_VX(vandn_vx_h, 2)
++GEN_VEXT_VX(vandn_vx_w, 4)
++GEN_VEXT_VX(vandn_vx_d, 8)
+-- 
+2.39.1
 
 
