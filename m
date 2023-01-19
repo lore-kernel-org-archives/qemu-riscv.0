@@ -1,64 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIKaq-0001jA-Ie
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Jan 2023 21:23:56 -0500
+	id 1pINkr-00022y-4i
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 00:46:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIKap-0001iu-OQ; Wed, 18 Jan 2023 21:23:55 -0500
-Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pINkj-0001zZ-2k
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 00:46:21 -0500
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIKan-0001Et-Uz; Wed, 18 Jan 2023 21:23:55 -0500
-Received: by mail-ua1-x932.google.com with SMTP id e18so170993uam.9;
- Wed, 18 Jan 2023 18:23:51 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pINka-0005Vr-7u
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 00:46:20 -0500
+Received: by mail-ej1-x62c.google.com with SMTP id mg12so2871135ejc.5
+ for <qemu-riscv@nongnu.org>; Wed, 18 Jan 2023 21:46:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dUplL8wjwMqni4h6vkgvmfr8Mr/MGE1oAhY3BFsXzFU=;
- b=b92cDLlEfQd3SRjc4/3PqMUtYtp3hDwejJDEhhrb0jZ+3359wEEyhvmYQy2g/XTW4d
- Sc6l/EqMAsEfR79/w32ot+tadxMHBPkwLDbxEzCJEpNQlvzrK3C2C9c6SwAQqEAO3Oln
- WOUcYG6AKLQH7Ffk8KttyOjUBGxqicmuQqdVNZBSYt53n7DZFTqwhqZ+HDZovPDl5al+
- t/E5QC1IGiJM2sjyELUcqKQjVuN+wE9XY0KB2v6p4Z4iX4pL9ud8inRmOqSVvDpU8N85
- J2ehM8I7Q9q13fL7QGCeH54qytLObVjdhBm6hTY0n7pdQ6jloEN8BWzqbaPPN7nmAZHF
- jneA==
+ bh=eYW57Deql4eJBVjxcSWp1qgA6sFHWROrBxgMBsl7eOA=;
+ b=Kt/9Vo1lBopkXduMFsS+DPYKQF0yTOSPvPwnHGRGiJmadNNPq3I2SRg8WyBOMXDqwE
+ zmJVc8/AZaBxkEF/wt/XfUf/Ihu8frVCYZfay2xmuzAeHK+PJqyu55uEXEYemEnK8JEm
+ iGKMLwoV+HK5i8Jvn5TTUETU+m0nMoA9KDKb9IeJDj05zQcjwoQ7i7cBFRLXDWJA43Fi
+ h04c/z/SPEjUd5tid9Dy2wF2vPM1c8VxW+fNrrC2e87dxRXl1YTiRg1mwijZAw6m7Dky
+ MgujOYjwUwdfD3WSl13HQBpz9uvECnC37Q8jWmIMX+odpNp9UZdm2qd7MWA9hUVoSS9g
+ y7CQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dUplL8wjwMqni4h6vkgvmfr8Mr/MGE1oAhY3BFsXzFU=;
- b=Da9cpTxQBYLVMlNqjFJiFmgh1t222CWZokQL2M0Pu30eeZkxIbdUybiztBA+fpE9Jj
- 4GKqfjG1nKQz/pZSA0Zfnd5ECZPGUOUVut2+xtEhsQ56F1UbFVcSPPQV/TOzv4HNHv/J
- tqKc4VytXdFi5kLJSy6J5ThL6N2TOT1vL9NgpBe4sp1G8A1LvWOmcDdSULU9mH3g7NNp
- Z+8ZJpnQ9Rg+0QzIJKZEvOiSNJLLmgoh5oYfOE5pFpbNHXtEpAhthVd+dNVXeRF+RdzF
- vZ+i1erjL5/2GCprlKveWtVnkAVH5PHbtc913VHY0yLbO1yPfh+uNzzYISP1AOoQG51D
- 9SAQ==
-X-Gm-Message-State: AFqh2kpM5KbpN6TSqP/2BVnebveOqRAq1skiL53XnaqwkFBW0stb4YIH
- gpjsvJrJLFEtTsXwdGqSuplJLD9aiLUPO9YVU/1+pe/XfjTm3Q==
-X-Google-Smtp-Source: AMrXdXsp1PCP7Q8DWenMJnPpMrPxGoqjckC0GusWsck0wF3Xm4InDNFih1AfMUn+FFRARCnKIWcrpo4hB90QqPCFTZA=
-X-Received: by 2002:ab0:744f:0:b0:419:1fa3:9618 with SMTP id
- p15-20020ab0744f000000b004191fa39618mr1182880uaq.11.1674095030460; Wed, 18
- Jan 2023 18:23:50 -0800 (PST)
+ bh=eYW57Deql4eJBVjxcSWp1qgA6sFHWROrBxgMBsl7eOA=;
+ b=VaqltPd+INlM/kqucYHLpOlE5ypIKfKZY5kYXcaGYisNBUKDgyAlh8eWT34xCCbshv
+ Ue3dC2FP2QXpofnnd0YKyvV6Nf5OzGk56bnXGKxd7QRVqoXK7lk3tTdr/rzUVkSKsUQN
+ NeurtjN2bRy69fcPMCGVSs0RpMr1DSozlygj51mhs8ha1/+Ig6BXPwawILYY6QGWoxUu
+ 2m5iz3dauPKJubU9ex3ZODIJtt6JrYlQiy3l+DMUZi+HWSXHDsSNjegZhL1nCZ0TMsnP
+ Dl4kTIUFD8VHbXYOtF+I4wjBbXsNnCnd2SG2qY6YVYTg8fQVgMmXtLxcHesUOPZ19AEW
+ 8kxw==
+X-Gm-Message-State: AFqh2kqT5GbOwHeA6oHvXaSy+fzHn/8jVhdLP8IAL7FFIiqFsPsnTo2I
+ 98DEeD7eshL/axhG7LNfrz9kXWtubiDaM65G1lw=
+X-Google-Smtp-Source: AMrXdXumrtNkQnsVdmTb0sK+fc4anl5+DaLkCO4WcwtMhzVHYa7/SBssffRxcNUQbd2VDxJWHxJiKr6HUuHUOywM7cY=
+X-Received: by 2002:a17:906:829a:b0:86c:f7ac:71f5 with SMTP id
+ h26-20020a170906829a00b0086cf7ac71f5mr621852ejx.217.1674107165284; Wed, 18
+ Jan 2023 21:46:05 -0800 (PST)
 MIME-Version: 1.0
-References: <20230116173420.1146808-1-dbarboza@ventanamicro.com>
- <20230116173420.1146808-4-dbarboza@ventanamicro.com>
-In-Reply-To: <20230116173420.1146808-4-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 19 Jan 2023 12:23:24 +1000
-Message-ID: <CAKmqyKMBjVjxL=YCprrQe4Hy5DXy4riOi4zwExxWG+nW7hx_AQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/6] hw/riscv: simplify riscv_compute_fdt_addr()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- philmd@linaro.org
+References: <CAJWvPnt95pOb6-QFxrHMH7NNrtxNHKRLjhVoz5A+BZ2Er-joKQ@mail.gmail.com>
+ <Y77mjzm4u1V9JXKO@spud>
+ <CAJWvPnst42_HH9VN_BvoFXcSjg_z2Nqm-NN-3A3dgQCMy_iDtA@mail.gmail.com>
+ <Y8BLZLw6gP4hUpyy@spud>
+ <CAEUhbmUa0kCssKBxmkt5qvH5oQmjrbDk_LBb4S2acfGLmzUh5g@mail.gmail.com>
+ <2882065D-831B-4E8C-BFD3-677BB8ECA2AD@kernel.org> <Y8K8b75lWE2eXZwz@spud>
+In-Reply-To: <Y8K8b75lWE2eXZwz@spud>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 19 Jan 2023 13:45:58 +0800
+Message-ID: <CAEUhbmWuXChi+w8e0igqppAdqi=2SLzwyd6te2se-PY-B9De0g@mail.gmail.com>
+Subject: Re: qemu icicle kit es
+To: Conor Dooley <conor@kernel.org>
+Cc: stage TC <stagethalescristal@gmail.com>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -73,150 +77,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 02:23:56 -0000
+X-List-Received-Date: Thu, 19 Jan 2023 05:46:22 -0000
 
-On Tue, Jan 17, 2023 at 3:34 AM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> All callers are using attributes from the MachineState object. Use a
-> pointer to it instead of passing dram_size (which is always
-> machine->ram_size) and fdt (always machine->fdt).
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  hw/riscv/boot.c            | 6 +++---
->  hw/riscv/microchip_pfsoc.c | 4 ++--
->  hw/riscv/sifive_u.c        | 4 ++--
->  hw/riscv/spike.c           | 4 ++--
->  hw/riscv/virt.c            | 3 +--
->  include/hw/riscv/boot.h    | 2 +-
->  6 files changed, 11 insertions(+), 12 deletions(-)
->
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index b213a32157..508da3f5c7 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -255,11 +255,11 @@ void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
->   *
->   * The FDT is fdt_packed() during the calculation.
->   */
-> -uint32_t riscv_compute_fdt_addr(hwaddr dram_base, uint64_t mem_size,
-> -                                void *fdt)
-> +uint32_t riscv_compute_fdt_addr(MachineState *machine, hwaddr dram_base)
->  {
-> +    void *fdt = machine->fdt;
->      uint64_t temp;
-> -    hwaddr dram_end = dram_base + mem_size;
-> +    hwaddr dram_end = dram_base + machine->ram_size;
->      int ret = fdt_pack(fdt);
->      int fdtsize;
->
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index dcdbc2cac3..a53e48e996 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -641,8 +641,8 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
->          }
->
->          /* Compute the fdt load address in dram */
-> -        fdt_load_addr = riscv_compute_fdt_addr(memmap[MICROCHIP_PFSOC_DRAM_LO].base,
-> -                                              machine->ram_size, machine->fdt);
-> +        fdt_load_addr = riscv_compute_fdt_addr(machine,
-> +                                               memmap[MICROCHIP_PFSOC_DRAM_LO].base);
+Hi Conor,
 
-I don't think this is correct here.
-
-So, first up I understand we don't correctly handle this today, *but*
-I see this change as a step in the wrong direction.
-
-The problem here is that ram is split over two areas. So if
-machine->ram_size is larger then 0x40000000 it is going to overflow
-MICROCHIP_PFSOC_DRAM_LO and jump to MICROCHIP_PFSOC_DRAM_HI
-(0x1000000000).
-
-So we really want something like this
-
-        /* Compute the fdt load address in dram */
-        if (machine->ram_size > memmap[MICROCHIP_PFSOC_DRAM_LO].size) {
-            fdt_load_addr = riscv_load_fdt(memmap[MICROCHIP_PFSOC_DRAM_HI].base,
-                                           machine->ram_size -
-memmap[MICROCHIP_PFSOC_DRAM_LO].size,
-                                           machine->fdt);
-        } else {
-            fdt_load_addr = riscv_load_fdt(memmap[MICROCHIP_PFSOC_DRAM_LO].base,
-                                           machine->ram_size,
-                                           machine->fdt);
-        }
-
-to handle overflowing MICROCHIP_PFSOC_DRAM_LO. While this patch is
-going in the wrong direction and making that more difficult
-
-Alistair
-
-
-
->          riscv_load_fdt(fdt_load_addr, machine->fdt);
+On Sat, Jan 14, 2023 at 10:30 PM Conor Dooley <conor@kernel.org> wrote:
 >
->          /* Load the reset vector */
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 626d4dc2f3..ebfddf161d 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -616,8 +616,8 @@ static void sifive_u_machine_init(MachineState *machine)
->          kernel_entry = 0;
->      }
+> On Fri, Jan 13, 2023 at 12:56:57PM +0000, Conor Dooley wrote:
+> >
+> >
+> > On 13 January 2023 00:35:11 GMT, Bin Meng <bmeng.cn@gmail.com> wrote:
+> > >On Fri, Jan 13, 2023 at 2:03 AM Conor Dooley <conor@kernel.org> wrote:
+> > >>
+> > >> +CC Bin Meng
+> > >>
+> >
+> > >> Bin Meng, you're listed as a supporter (in master anyway) but is that
+> > >> still accurate? I figure there's a good chance it isn't anymore?
+> > >> Have you tested the platform from HSS init at all lately?
+> > >
+> > >Yes, I am still maintaining the QEMU PolarFire SoC. The WiKi page
+> > >listed the exact HSS version I tested and if it doesn't, it should be
+> > >a regression in QEMU. If yes, I would like to have a look at that.
+> >
+> > That'd be great.
+> > I submitted a few patches for fixing the direct kernel boot & hopefully
+> > haven't broken anything!
+> > I'll try to test it also, if I get some time.
 >
-> -    fdt_load_addr = riscv_compute_fdt_addr(memmap[SIFIVE_U_DEV_DRAM].base,
-> -                                           machine->ram_size, machine->fdt);
-> +    fdt_load_addr = riscv_compute_fdt_addr(machine,
-> +                                           memmap[SIFIVE_U_DEV_DRAM].base);
->      riscv_load_fdt(fdt_load_addr, machine->fdt);
+> Gave 7.2.0 a go yesterday afternoon.
+> The URL from the documentation is no longer accessible, I cannot wget
+> the image! I'll try and find out what happened there, AFAIU that FTP is
+> still in use, so dunno why that file doesn't seem to be there.
+> I'll try to find out.
 >
->      if (!riscv_is_32bit(&s->soc.u_cpus)) {
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 88b9fdfc36..afd581436b 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -324,8 +324,8 @@ static void spike_board_init(MachineState *machine)
->          kernel_entry = 0;
->      }
+> I dug out the commit from the docs for the HSS, built that. Generated a
+> payload using the nearest payload generator commit to that was
+> compilable, which I passed as the image instead of the wic.
 >
-> -    fdt_load_addr = riscv_compute_fdt_addr(memmap[SPIKE_DRAM].base,
-> -                                           machine->ram_size, machine->fdt);
-> +    fdt_load_addr = riscv_compute_fdt_addr(machine,
-> +                                           memmap[SPIKE_DRAM].base);
->      riscv_load_fdt(fdt_load_addr, machine->fdt);
+> The HSS would load, get as far as trying to extract the payload
+> containing the next stage bootloader & fail. Specifically, it was
+> complaining that the magic number for the payload was all zeros.
 >
->      /* load the reset vector */
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 839dfaa125..cbba0b8930 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1307,8 +1307,7 @@ static void virt_machine_done(Notifier *notifier, void *data)
->          start_addr = virt_memmap[VIRT_FLASH].base;
->      }
+> Perhaps if you still have the original wic image you'll have more luck!
 >
-> -    fdt_load_addr = riscv_compute_fdt_addr(memmap[VIRT_DRAM].base,
-> -                                           machine->ram_size, machine->fdt);
-> +    fdt_load_addr = riscv_compute_fdt_addr(machine, memmap[VIRT_DRAM].base);
->      riscv_load_fdt(fdt_load_addr, machine->fdt);
+> Thanks,
+> Conor.
 >
->      /* load the reset vector */
-> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-> index 9aea7b9c46..f933de88fb 100644
-> --- a/include/hw/riscv/boot.h
-> +++ b/include/hw/riscv/boot.h
-> @@ -47,7 +47,7 @@ target_ulong riscv_load_kernel(MachineState *machine,
->                                 target_ulong firmware_end_addr,
->                                 symbol_fn_t sym_cb);
->  void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry);
-> -uint32_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size, void *fdt);
-> +uint32_t riscv_compute_fdt_addr(MachineState *machine, hwaddr dram_start);
->  void riscv_load_fdt(uint32_t fdt_addr, void *fdt);
->  void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
->                                 hwaddr saddr,
-> --
-> 2.39.0
+> | qemu-system-riscv64 -M microchip-icicle-kit -smp 5 \
+> |     -bios path/to/hss.bin -sd path/to/sdcard.img \
+> |     -nic user,model=cadence_gem \
+> |     -nic tap,ifname=tap,model=cadence_gem,script=no \
+> |     -display none -serial stdio \
+> |     -chardev socket,id=serial1,path=serial1.sock,server=on,wait=on \
+> |     -serial chardev:serial1
 >
+> btw, I built my QEMU with `./configure --target-list=riscv64-softmmu &&
+> make`, and got a complaint from the above command that user mode NICs
+> were not present in my QEMU.
 >
+
+The user mode NICs issue is because since QEMU 7.2, libslirp
+dependency was changed to an external build host dependency, so you
+need to manually install via something like "apt install libslirq-dev"
+in Ubuntu.
+
+Regards,
+Bin
 
