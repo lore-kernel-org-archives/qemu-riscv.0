@@ -1,30 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIW2J-0007gL-Ee
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:37:04 -0500
+	id 1pIW2T-000806-9m
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:37:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1d-0007Da-7s
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:21 -0500
+ id 1pIW1D-000744-NX
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:08 -0500
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1a-000709-Ba
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:20 -0500
+ id 1pIW1B-0006xW-LT
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:35:55 -0500
 Received: from [167.98.27.226] (helo=lawrence-thinkpad.office.codethink.co.uk)
  by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1pIW1J-007gSL-0o; Thu, 19 Jan 2023 14:36:02 +0000
+ id 1pIW13-007gSL-Lb; Thu, 19 Jan 2023 14:35:46 +0000
 From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 To: qemu-riscv@nongnu.org
 Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com,
  Lawrence Hunter <lawrence.hunter@codethink.co.uk>
-Subject: [RFC PATCH 15/39] target/riscv: Add vaesdf.vs decoding,
- translation and execution support
-Date: Thu, 19 Jan 2023 14:35:04 +0000
-Message-Id: <20230119143528.1290950-16-lawrence.hunter@codethink.co.uk>
+Subject: [RFC PATCH 00/39] Add RISC-V cryptography extensions standardisation
+Date: Thu, 19 Jan 2023 14:34:49 +0000
+Message-Id: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
 X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
-References: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=188.40.203.114;
@@ -46,54 +43,125 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 14:36:27 -0000
+X-List-Received-Date: Thu, 19 Jan 2023 14:36:15 -0000
 
-Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
----
- target/riscv/helper.h                       | 1 +
- target/riscv/insn32.decode                  | 1 +
- target/riscv/insn_trans/trans_rvzvkns.c.inc | 1 +
- target/riscv/vcrypto_helper.c               | 3 +++
- 4 files changed, 6 insertions(+)
+This RFC introduces an implementation for the six instruction sets
+of the draft RISC-V cryptography extensions standardisation
+specification. Once the specification has been ratified we will submit
+these changes as a pull request email to this mailing list. Would this
+be prefered by instruction group or unified as in this RFC?
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index b7696cb6c4..020b9861cf 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1184,3 +1184,4 @@ DEF_HELPER_6(vandn_vx_d, void, ptr, ptr, tl, ptr, env, i32)
- DEF_HELPER_4(vaesef_vv, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesef_vs, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesdf_vv, void, ptr, ptr, env, i32)
-+DEF_HELPER_4(vaesdf_vs, void, ptr, ptr, env, i32)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index ca907dac85..33e5883937 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -913,3 +913,4 @@ vandn_vx        000001 . ..... ..... 100 ..... 1010111 @r_vm
- vaesef_vv       101000 1 ..... 00011 010 ..... 1110111 @r2_vm_1
- vaesef_vs       101001 1 ..... 00011 010 ..... 1110111 @r2_vm_1
- vaesdf_vv       101000 1 ..... 00001 010 ..... 1110111 @r2_vm_1
-+vaesdf_vs       101001 1 ..... 00001 010 ..... 1110111 @r2_vm_1
-diff --git a/target/riscv/insn_trans/trans_rvzvkns.c.inc b/target/riscv/insn_trans/trans_rvzvkns.c.inc
-index bd1f380a65..7dd61b879e 100644
---- a/target/riscv/insn_trans/trans_rvzvkns.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzvkns.c.inc
-@@ -59,3 +59,4 @@ static bool vaes_check_vs(DisasContext *s, arg_rmr *a)
- GEN_V_UNMASKED_TRANS(vaesef_vv, vaes_check_vv)
- GEN_V_UNMASKED_TRANS(vaesef_vs, vaes_check_vs)
- GEN_V_UNMASKED_TRANS(vaesdf_vv, vaes_check_vv)
-+GEN_V_UNMASKED_TRANS(vaesdf_vs, vaes_check_vs)
-diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
-index 24b5336fa7..d3ba5e9cb8 100644
---- a/target/riscv/vcrypto_helper.c
-+++ b/target/riscv/vcrypto_helper.c
-@@ -298,3 +298,6 @@ GEN_ZVKNS_HELPER_VS(vaesef_vs, aes_sub_bytes(round_state);
- GEN_ZVKNS_HELPER_VV(vaesdf_vv, aes_inv_shift_bytes(round_state);
-                     aes_inv_sub_bytes(round_state);
-                     xor_round_key(round_state, (uint8_t *)round_key);)
-+GEN_ZVKNS_HELPER_VS(vaesdf_vs, aes_inv_shift_bytes(round_state);
-+                    aes_inv_sub_bytes(round_state);
-+                    xor_round_key(round_state, (uint8_t *)round_key);)
+This patch set implements the instruction sets as per the 20221202
+version of the specification (1).
+
+Work performed by Dickon, Lawrence, Nazar, Kiran, and William from Codethink
+sponsored by SiFive, and Max Chou from SiFive.
+
+1. https://github.com/riscv/riscv-crypto/releases
+
+Dickon Hood (1):
+  target/riscv: Add vrol.[vv,vx] and vror.[vv,vx,vi] decoding,
+    translation and execution support
+
+Kiran Ostrolenk (4):
+  target/riscv: Add vsha2ms.vv decoding, translation and execution
+    support
+  target/riscv: add zvksh cpu property
+  target/riscv: Add vsm3c.vi decoding, translation and execution support
+  target/riscv: expose zvksh cpu property
+
+Lawrence Hunter (16):
+  target/riscv: Add vclmul.vv decoding, translation and execution
+    support
+  target/riscv: Add vclmul.vx decoding, translation and execution
+    support
+  target/riscv: Add vclmulh.vv decoding, translation and execution
+    support
+  target/riscv: Add vclmulh.vx decoding, translation and execution
+    support
+  target/riscv: Add vaesef.vv decoding, translation and execution
+    support
+  target/riscv: Add vaesef.vs decoding, translation and execution
+    support
+  target/riscv: Add vaesdf.vv decoding, translation and execution
+    support
+  target/riscv: Add vaesdf.vs decoding, translation and execution
+    support
+  target/riscv: Add vaesdm.vv decoding, translation and execution
+    support
+  target/riscv: Add vaesdm.vs decoding, translation and execution
+    support
+  target/riscv: Add vaesz.vs decoding, translation and execution support
+  target/riscv: Add vsha2c[hl].vv decoding, translation and execution
+    support
+  target/riscv: Add vsm3me.vv decoding, translation and execution
+    support
+  target/riscv: add zvkg cpu property
+  target/riscv: Add vghmac.vv decoding, translation and execution
+    support
+  target/riscv: expose zvkg cpu property
+
+Max Chou (5):
+  crypto: Move SM4_SBOXWORD from target/riscv
+  crypto: Add SM4 constant parameter CK.
+  target/riscv: Add zvksed cfg property
+  target/riscv: Add Zvksed support
+  target/riscv: Expose Zvksed property
+
+Nazar Kazakov (10):
+  target/riscv: add zvkb cpu property
+  target/riscv: Add vrev8.v decoding, translation and execution support
+  target/riscv: Add vandn.[vv,vx,vi] decoding, translation and execution
+    support
+  target/riscv: expose zvkb cpu property
+  target/riscv: add zvkns cpu property
+  target/riscv: Add vaeskf1.vi decoding, translation and execution
+    support
+  target/riscv: Add vaeskf2.vi decoding, translation and execution
+    support
+  target/riscv: expose zvkns cpu property
+  target/riscv: add zvknh cpu properties
+  target/riscv: expose zvknh cpu properties
+
+William Salmon (3):
+  target/riscv: Add vbrev8.v decoding, translation and execution support
+  target/riscv: Add vaesem.vv decoding, translation and execution
+    support
+  target/riscv: Add vaesem.vs decoding, translation and execution
+    support
+
+ crypto/sm4.c                                 |   10 +
+ include/crypto/sm4.h                         |    8 +
+ include/qemu/bitops.h                        |   32 +
+ target/arm/crypto_helper.c                   |   10 +-
+ target/riscv/cpu.c                           |   15 +
+ target/riscv/cpu.h                           |    7 +
+ target/riscv/crypto_helper.c                 |    1 +
+ target/riscv/helper.h                        |   69 ++
+ target/riscv/insn32.decode                   |   48 +
+ target/riscv/insn_trans/trans_rvzvkb.c.inc   |  164 +++
+ target/riscv/insn_trans/trans_rvzvkg.c.inc   |    8 +
+ target/riscv/insn_trans/trans_rvzvknh.c.inc  |   47 +
+ target/riscv/insn_trans/trans_rvzvkns.c.inc  |  121 +++
+ target/riscv/insn_trans/trans_rvzvksed.c.inc |   38 +
+ target/riscv/insn_trans/trans_rvzvksh.c.inc  |   20 +
+ target/riscv/meson.build                     |    4 +-
+ target/riscv/translate.c                     |    6 +
+ target/riscv/vcrypto_helper.c                | 1013 ++++++++++++++++++
+ target/riscv/vector_helper.c                 |  242 +----
+ target/riscv/vector_internals.c              |   63 ++
+ target/riscv/vector_internals.h              |  226 ++++
+ 21 files changed, 1902 insertions(+), 250 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvzvkb.c.inc
+ create mode 100644 target/riscv/insn_trans/trans_rvzvkg.c.inc
+ create mode 100644 target/riscv/insn_trans/trans_rvzvknh.c.inc
+ create mode 100644 target/riscv/insn_trans/trans_rvzvkns.c.inc
+ create mode 100644 target/riscv/insn_trans/trans_rvzvksed.c.inc
+ create mode 100644 target/riscv/insn_trans/trans_rvzvksh.c.inc
+ create mode 100644 target/riscv/vcrypto_helper.c
+ create mode 100644 target/riscv/vector_internals.c
+ create mode 100644 target/riscv/vector_internals.h
+
 -- 
 2.39.1
 
