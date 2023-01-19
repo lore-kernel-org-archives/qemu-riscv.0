@@ -1,77 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIbM1-0002KE-2s
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 15:17:45 -0500
+	id 1pIcb0-0006Fj-If
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 16:37:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pIbLw-0002Jg-A0
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 15:17:43 -0500
-Received: from mail-oa1-x2e.google.com ([2001:4860:4864:20::2e])
+ id 1pIcay-0006FS-ED
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 16:37:17 -0500
+Received: from mail-oi1-x244.google.com ([2607:f8b0:4864:20::244])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pIbLu-0004a1-Ca
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 15:17:39 -0500
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-15eec491b40so3847323fac.12
- for <qemu-riscv@nongnu.org>; Thu, 19 Jan 2023 12:17:37 -0800 (PST)
+ id 1pIcaw-0001no-08
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 16:37:16 -0500
+Received: by mail-oi1-x244.google.com with SMTP id s66so2838842oib.7
+ for <qemu-riscv@nongnu.org>; Thu, 19 Jan 2023 13:37:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=lX/f4TRkWE06+NwnzDitUOj/rbGdBPdu3QAKHPVyvhY=;
- b=DqwAlI9vz84aL0RS7+M3rG6MpGIcPi2jsmESjpAphgpJBqw3+warIw/sfOvij2XC0l
- iUruRAL0565isjVCc9ncywDTrZH3JxefqmUCeL8hWWrk4r5A6QnmBbdxhRW1yV4bzZpt
- mprDle4E/lOjSMiHZBwMn7SZ1FFIaUQVbBl4rtiCt5ByvAQFCHi93XY8fWcth6k0cMN0
- Oh6bTtzje22uHBmQ/U1y1L5PXxQyP1nA7TC2U4FcrS1cLE/sBT17W8nd0uwsb5uD/GWQ
- 14HGywH9SLqg+Kahy/QajqcuZ/6rIa4nT0FVNvGdcuhuakM50WN3sVkNItgUSdYX5lUS
- uXew==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=uRotMhtHnKBAO6t2X2uPrp0RVjEDypTQfmHvure0DIU=;
+ b=diJp3OKys+kObtFlzg5ZLmw3ZRlmCctSjDOrNUW1RhrxpC6F2RvsvH1jUeJF1zByTz
+ 84OUkgRPX1x1AYsPFQFjpxPRZLu+OnB9VLoGfRLT6Hj/H/D3A8EVva1DLnx7OJkl56h3
+ 8sXOXG0zMb2Qhq7hdsxMAy8BwHZxOmxAa+YFRX5YM18Dysjxw0BuBgHfdcYmq8Sd3YnV
+ ElVZp2Brkz4gzvCXsNLueV8k27S6CyXE+3IrEVYuzOhGOvAbHPKTDYWekEYKmH8o7eJZ
+ vywilixfQ2zC9K7LWADQFmeio/ZhQcPacOUmv2+j7KFBLwA80EUCMMGATFf/EyEjtyoP
+ ulmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lX/f4TRkWE06+NwnzDitUOj/rbGdBPdu3QAKHPVyvhY=;
- b=dbgOHAf8AYrf6fa1uVGKcbrQ7n7TigmALvkjBPlYQTewynGasaCKWBpL5Y9/ndwRRq
- 0ckaX28RI5eDTBp3rFyQuyua2T0Wn9b0JysgBKwMX/3NGjjmGgQ8zS8rrixeeJt5wuKO
- lcJDSPFdLZwM9yd/Vu1XriHUILDinJaZ2pv/W+SV7+I194PuPxmHKgnnsOgBAnt2wm0l
- Zc39vpinLARpnUwCdFQ1sOH4WGZlErnSFNzPNluHmhkBDB1/ZduZsE6s2zgrhRzjfSEp
- Da4fTjZVkjrZJJKxH1XkCz1dXr3zYqNp4CnPwVNn2IyLqA5TQi7lKTQY+1lzqgGrbu5Z
- 9gug==
-X-Gm-Message-State: AFqh2krs87vDFZnha4u1FXMu0qX/a+s/NWsDVfr/SeGIMyNttCVcItxD
- dWZKFJsiP6pNvYdUs5c/ZXm/sg==
-X-Google-Smtp-Source: AMrXdXtt12V7REAS0RX8kInk0uyyO9YukkuWPNygugVQu1AaV93IVUHCR8keCtbtYaPlXujbfFbf2w==
-X-Received: by 2002:a05:6870:4985:b0:152:d0dc:2bba with SMTP id
- ho5-20020a056870498500b00152d0dc2bbamr6572487oab.15.1674159456962; 
- Thu, 19 Jan 2023 12:17:36 -0800 (PST)
-Received: from [192.168.68.107] ([191.17.222.2])
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uRotMhtHnKBAO6t2X2uPrp0RVjEDypTQfmHvure0DIU=;
+ b=FeHdv8+9oV5D+yVxAo6ZQz0uPnAd/Qn/3HJO/VJ/zMyFBGt5xz0nyseNt+noh8ZVL9
+ SOj82AfN5P00701pSt2rJSRbIvlzZ8Pr6bKbAyqKTlbQMzF/n248MPFv2y0MeMGDj593
+ IRXu5Xu6FRvad84sPoMvbH/I6vZr2Y+tP89DVnxPkvGMFsf4zj4GTpPDMuRALfrC99/d
+ iPpfarugDDw6RyFsUSKt/PXFnkLli6J2e0LuQsDweiA1GcfNQOw4o1Q8JnAfHjlexDCC
+ RRHbimRzNNa1EdnD8bz0ugg8EqwTdgopjIi3T2rjW9N9a26HzYHCXQ1QOtbKUDRrkmIx
+ /FJw==
+X-Gm-Message-State: AFqh2kq482YrSuGFOxHtpduF/lAHL7o81KBrLUEcN8tJV9mxWtdAD6RN
+ wTa334jLOKyI3/DDxTigoWoVxA==
+X-Google-Smtp-Source: AMrXdXuUTfclmD9rOdEeDXq5bSZr5NmmZjRG+7Ov4whzmRHGegiuwipzgbAA0Pn6bEccmRV3QO/ulA==
+X-Received: by 2002:aca:5bc1:0:b0:367:18a6:eb26 with SMTP id
+ p184-20020aca5bc1000000b0036718a6eb26mr4894316oib.42.1674164232001; 
+ Thu, 19 Jan 2023 13:37:12 -0800 (PST)
+Received: from grind.dc1.ventanamicro.com ([191.17.222.2])
  by smtp.gmail.com with ESMTPSA id
- e145-20020a4a5597000000b004fd878ef510sm2026322oob.21.2023.01.19.12.17.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Jan 2023 12:17:36 -0800 (PST)
-Message-ID: <ab6a9f67-c7e7-f96b-5fe9-3df8caba34c9@ventanamicro.com>
-Date: Thu, 19 Jan 2023 17:17:33 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Subject: Re: [PATCH v3 3/7] hw/riscv/microchip_pfsoc.c: add an Icicle Kit fdt
- address function
-To: Conor Dooley <conor@kernel.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
-References: <20230119191728.622081-1-dbarboza@ventanamicro.com>
- <20230119191728.622081-4-dbarboza@ventanamicro.com> <Y8mghghac5Bintsl@spud>
-Content-Language: en-US
+ c132-20020aca358a000000b003646062e83bsm13664472oia.29.2023.01.19.13.37.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Jan 2023 13:37:11 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <Y8mghghac5Bintsl@spud>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v9 0/3] hw/riscv: clear kernel_entry high bits with 32bit CPUs
+Date: Thu, 19 Jan 2023 18:37:04 -0300
+Message-Id: <20230119213707.651533-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.39.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2e.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+Received-SPF: pass client-ip=2607:f8b0:4864:20::244;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x244.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.094,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -86,62 +79,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 20:17:43 -0000
+X-List-Received-Date: Thu, 19 Jan 2023 21:37:17 -0000
 
+Hi,
 
+In this version I changed the patch order to avoid having a patch that
+would trigger the 32 bit regression Alistair observed. Patch 3 is now
+the first patch.
 
-On 1/19/23 16:56, Conor Dooley wrote:
-> Hey!
->
-> On Thu, Jan 19, 2023 at 04:17:24PM -0300, Daniel Henrique Barboza wrote:
->> The Icicle Kit board works with 2 distinct RAM banks that are separated
->> by a gap. We have a lower bank with 1GiB size, a gap follows,
->> then at 64GiB the high memory starts.
->>
->> MachineClass::default_ram_size is set to 1.5Gb and machine_init() is
->> enforcing it as minimal RAM size, meaning that there we'll always have
->> at least 512 MiB in the Hi RAM area, and that the FDT will be located
->> there all the time.
->>
->> riscv_compute_fdt_addr() can't handle this setup because it assumes that
->> the RAM is always contiguous. It's also returning an uint32_t because
->> it's enforcing that fdt address is sitting on an area that is addressable
->> to 32 bit CPUs, but 32 bits won't be enough to point to the Hi area of
->> the Icicle Kit RAM (and to its FDT itself).
->>
->> Create a new function called microchip_compute_fdt_addr() that is able
->> to deal with all these details that are particular to the Icicle Kit.
->> Ditch riscv_compute_fdt_addr() and use it instead.
-> Hmm, this breaks boot for me in what is a valid configuration for
-> Icicle/PolarFire SoC which was previously functional in QEMU.
+I've also addressed the comments from Bin and Phil.
 
-Thanks for letting me know.  Are you testing it by using the command line
-you mentioned in the "qemu icicle kit es" thread?
+Patches based on riscv-to-apply.next.
 
-$(QEMU)/qemu-system-riscv64 \
-	-M microchip-icicle-kit \
-	-m 2G -smp 5 \
-	-kernel $(vmlinux_bin) \
-	-dtb $(devkit).dtb \
-	-initrd $(initramfs) \
-	-display none \
-	-serial null \
-	-serial stdio
+Changes from v8:
+- patch 1 (former 3):
+  - comment changes
+  - now open code '32' instead of using a macro
+- v8 link: https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg03254.html
 
+Daniel Henrique Barboza (3):
+  hw/riscv: clear kernel_entry higher bits from load_elf_ram_sym()
+  hw/riscv/boot.c: consolidate all kernel init in riscv_load_kernel()
+  hw/riscv/boot.c: make riscv_load_initrd() static
 
+ hw/riscv/boot.c            | 96 ++++++++++++++++++++++++++------------
+ hw/riscv/microchip_pfsoc.c | 12 +----
+ hw/riscv/opentitan.c       |  4 +-
+ hw/riscv/sifive_e.c        |  4 +-
+ hw/riscv/sifive_u.c        | 12 +----
+ hw/riscv/spike.c           | 14 ++----
+ hw/riscv/virt.c            | 12 +----
+ include/hw/riscv/boot.h    |  3 +-
+ 8 files changed, 82 insertions(+), 75 deletions(-)
 
-
-Thanks,
-
-Daniel
-
->
-> I'll try and write another email explaining things in more detail, but
-> in case I do not have time to get that done in the next day or two I
-> figured I should let you know.
->
-> Thanks,
-> Conor.
->
+-- 
+2.39.0
 
 
