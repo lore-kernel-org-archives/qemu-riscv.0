@@ -1,26 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIW2m-0008J6-D3
+	id 1pIW2m-0008Jm-JR
 	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:37:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1c-0007DY-Uy
+ id 1pIW1d-0007Db-85
  for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:21 -0500
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1a-0006zY-At
+ id 1pIW1a-00070W-Cz
  for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:20 -0500
 Received: from [167.98.27.226] (helo=lawrence-thinkpad.office.codethink.co.uk)
  by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1pIW1G-007gSL-F5; Thu, 19 Jan 2023 14:35:59 +0000
+ id 1pIW1K-007gSL-Dc; Thu, 19 Jan 2023 14:36:03 +0000
 From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 To: qemu-riscv@nongnu.org
 Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com,
- Nazar Kazakov <nazar.kazakov@codethink.co.uk>
-Subject: [RFC PATCH 10/39] target/riscv: expose zvkb cpu property
-Date: Thu, 19 Jan 2023 14:34:59 +0000
-Message-Id: <20230119143528.1290950-11-lawrence.hunter@codethink.co.uk>
+ Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+Subject: [RFC PATCH 18/39] target/riscv: Add vaesz.vs decoding,
+ translation and execution support
+Date: Thu, 19 Jan 2023 14:35:07 +0000
+Message-Id: <20230119143528.1290950-19-lawrence.hunter@codethink.co.uk>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
 References: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
@@ -28,11 +29,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=188.40.203.114;
  envelope-from=lawrence.hunter@codethink.co.uk; helo=imap4.hz.codethink.co.uk
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+X-Spam_score_int: -13
+X-Spam_score: -1.4
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, URI_NOVOWEL=0.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -47,26 +48,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 19 Jan 2023 14:36:27 -0000
 
-From: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
-
-Signed-off-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
+Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 ---
- target/riscv/cpu.c | 2 ++
- 1 file changed, 2 insertions(+)
+ target/riscv/helper.h                       | 1 +
+ target/riscv/insn32.decode                  | 1 +
+ target/riscv/insn_trans/trans_rvzvkns.c.inc | 5 +++--
+ target/riscv/vcrypto_helper.c               | 2 ++
+ 4 files changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index ec1dbd923d..a504e68196 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1071,6 +1071,8 @@ static Property riscv_cpu_extensions[] = {
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 9895bf5712..def126a59b 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1187,3 +1187,4 @@ DEF_HELPER_4(vaesdf_vv, void, ptr, ptr, env, i32)
+ DEF_HELPER_4(vaesdf_vs, void, ptr, ptr, env, i32)
+ DEF_HELPER_4(vaesdm_vv, void, ptr, ptr, env, i32)
+ DEF_HELPER_4(vaesdm_vs, void, ptr, ptr, env, i32)
++DEF_HELPER_4(vaesz_vs, void, ptr, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 753039e954..b4ddc2586c 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -916,3 +916,4 @@ vaesdf_vv       101000 1 ..... 00001 010 ..... 1110111 @r2_vm_1
+ vaesdf_vs       101001 1 ..... 00001 010 ..... 1110111 @r2_vm_1
+ vaesdm_vv       101000 1 ..... 00000 010 ..... 1110111 @r2_vm_1
+ vaesdm_vs       101001 1 ..... 00000 010 ..... 1110111 @r2_vm_1
++vaesz_vs        101001 1 ..... 00111 010 ..... 1110111 @r2_vm_1
+diff --git a/target/riscv/insn_trans/trans_rvzvkns.c.inc b/target/riscv/insn_trans/trans_rvzvkns.c.inc
+index 2c70227f8b..145b13bc8c 100644
+--- a/target/riscv/insn_trans/trans_rvzvkns.c.inc
++++ b/target/riscv/insn_trans/trans_rvzvkns.c.inc
+@@ -43,7 +43,7 @@ static bool vaes_check_vv(DisasContext *s, arg_rmr *a)
+ static bool vaes_check_overlap(DisasContext *s, int vd, int vs2)
+ {
+     int8_t op_size = s->lmul <= 0 ? 1 : 1 << s->lmul;
+-    return !is_overlapped(vd, op_size, vs2, op_size);
++    return !is_overlapped(vd, op_size, vs2, 1);
+ }
  
-     DEFINE_PROP_BOOL("zmmul", RISCVCPU, cfg.ext_zmmul, false),
+ static bool vaes_check_vs(DisasContext *s, arg_rmr *a)
+@@ -52,7 +52,7 @@ static bool vaes_check_vs(DisasContext *s, arg_rmr *a)
+            vaes_check_overlap(s, a->rd, a->rs2) &&
+            s->cfg_ptr->ext_zvkns == true &&
+            vext_check_isa_ill(s) &&
+-           require_align(a->rd, s->lmul) && require_align(a->rs2, s->lmul) &&
++           require_align(a->rd, s->lmul) &&
+            s->vstart % 4 == 0 && s->sew == MO_32;
+ }
  
-+    DEFINE_PROP_BOOL("zvkb", RISCVCPU, cfg.ext_zvkb, false),
-+
-     /* Vendor-specific custom extensions */
-     DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
- 
+@@ -62,3 +62,4 @@ GEN_V_UNMASKED_TRANS(vaesdf_vv, vaes_check_vv)
+ GEN_V_UNMASKED_TRANS(vaesdf_vs, vaes_check_vs)
+ GEN_V_UNMASKED_TRANS(vaesdm_vv, vaes_check_vv)
+ GEN_V_UNMASKED_TRANS(vaesdm_vs, vaes_check_vs)
++GEN_V_UNMASKED_TRANS(vaesz_vs, vaes_check_vs)
+diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
+index 699bf25bbd..39e2498b7d 100644
+--- a/target/riscv/vcrypto_helper.c
++++ b/target/riscv/vcrypto_helper.c
+@@ -341,3 +341,5 @@ GEN_ZVKNS_HELPER_VS(vaesdm_vs, aes_inv_shift_bytes(round_state);
+                     aes_inv_sub_bytes(round_state);
+                     xor_round_key(round_state, (uint8_t *)round_key);
+                     aes_inv_mix_cols(round_state);)
++GEN_ZVKNS_HELPER_VS(vaesz_vs,
++                    xor_round_key(round_state, (uint8_t *)round_key);)
 -- 
 2.39.1
 
