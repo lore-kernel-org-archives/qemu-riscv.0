@@ -1,40 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIOv7-0006xx-0v
+	id 1pIOv7-0006yV-CN
 	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 02:01:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIOuU-0006Uj-0n
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 02:00:31 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIOuW-0006VE-1K
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 02:00:32 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIOuM-00089T-6h
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 02:00:29 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIOuM-00089Z-5m
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 02:00:31 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  s=mimecast20190719; t=1674111607;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=KJ8KOH8nIqaOp0V9+BTR+CpJ02hP4F+vGPzj4gdl0rs=;
- b=PzX5uqmdF5wLAMDAJlXr6VN9Ynh5uojoQExtdaHsfH8jD5T2E5JBKiSHBbXy+fbMF7FsEH
- Yup+zDhcaSPVIN9uCskx8Tk/SWTnqhHztAcy/yIM1IpSBHFNTylm1ckBH4vzwnyVc0rupp
- amDVGw6/NcnznwNWkuMQLUT6RR8KRNY=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=cwWjKORsTd/U3ucwfmdmjdqlJ1uSQpGItRpbAp5drHw=;
+ b=B755en/eiX/gLSe0O9yPGKH5DknFwVW4S3ny/okBnL4twb1rZ5LICmsNk+O+36eaXO98Ko
+ 6027j/ulJz6m2qZZVAmYm/MAUa0fSBMaIfQiv8xZkCf2Uam3U7VWWmSFWJhvpItgyXF16j
+ r+m4IA/cXg46cdGL54yiGPwJVMiEOSo=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-67-XD1hoiD2MDeYEiAjogJ-qQ-1; Thu, 19 Jan 2023 02:00:04 -0500
-X-MC-Unique: XD1hoiD2MDeYEiAjogJ-qQ-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
+ us-mta-442-bVRH3SPrNY2cI3zHhj89iQ-1; Thu, 19 Jan 2023 02:00:04 -0500
+X-MC-Unique: bVRH3SPrNY2cI3zHhj89iQ-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.7])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9A21D1C05AD8;
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5E3AF183B3C1;
  Thu, 19 Jan 2023 07:00:03 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 54BA12026D68;
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 228A6140EBF6;
  Thu, 19 Jan 2023 07:00:03 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 630EA21E6609; Thu, 19 Jan 2023 07:59:59 +0100 (CET)
+ id 5398421E6600; Thu, 19 Jan 2023 07:59:59 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
@@ -46,16 +46,16 @@ Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
  kkostiuk@redhat.com, tsimpson@quicinc.com, palmer@dabbelt.com,
  bin.meng@windriver.com, qemu-block@nongnu.org, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v4 12/19] target/hexagon: Clean up includes
-Date: Thu, 19 Jan 2023 07:59:52 +0100
-Message-Id: <20230119065959.3104012-13-armbru@redhat.com>
+Subject: [PATCH v4 07/19] hw/input: Clean up includes
+Date: Thu, 19 Jan 2023 07:59:47 +0100
+Message-Id: <20230119065959.3104012-8-armbru@redhat.com>
 In-Reply-To: <20230119065959.3104012-1-armbru@redhat.com>
 References: <20230119065959.3104012-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-type: text/plain
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.7
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -63,7 +63,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,45 +83,36 @@ which it implies are not included manually.
 
 This commit was created with scripts/clean-includes.
 
-Changes to standalone programs dropped, because I can't tell whether
-them not using qemu/osdep.h is intentional:
-
-    target/hexagon/gen_dectree_import.c
-    target/hexagon/gen_semantics.c
-    target/hexagon/idef-parser/idef-parser.h
-    target/hexagon/idef-parser/parser-helpers.c
-    target/hexagon/idef-parser/parser-helpers.h
-
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 ---
- target/hexagon/hex_arch_types.h | 1 -
- target/hexagon/mmvec/macros.h   | 1 -
+ include/hw/input/pl050.h | 1 -
+ hw/input/tsc210x.c       | 1 -
  2 files changed, 2 deletions(-)
 
-diff --git a/target/hexagon/hex_arch_types.h b/target/hexagon/hex_arch_types.h
-index 885f68f760..52a7f2b2f3 100644
---- a/target/hexagon/hex_arch_types.h
-+++ b/target/hexagon/hex_arch_types.h
-@@ -18,7 +18,6 @@
- #ifndef HEXAGON_HEX_ARCH_TYPES_H
- #define HEXAGON_HEX_ARCH_TYPES_H
+diff --git a/include/hw/input/pl050.h b/include/hw/input/pl050.h
+index 89ec4fafc9..4cb8985f31 100644
+--- a/include/hw/input/pl050.h
++++ b/include/hw/input/pl050.h
+@@ -10,7 +10,6 @@
+ #ifndef HW_PL050_H
+ #define HW_PL050_H
  
 -#include "qemu/osdep.h"
- #include "mmvec/mmvec.h"
- #include "qemu/int128.h"
+ #include "hw/sysbus.h"
+ #include "migration/vmstate.h"
+ #include "hw/input/ps2.h"
+diff --git a/hw/input/tsc210x.c b/hw/input/tsc210x.c
+index fdd5ff87d9..7eae5989f7 100644
+--- a/hw/input/tsc210x.c
++++ b/hw/input/tsc210x.c
+@@ -20,7 +20,6 @@
+  */
  
-diff --git a/target/hexagon/mmvec/macros.h b/target/hexagon/mmvec/macros.h
-index 8c864e8c68..1201d778d0 100644
---- a/target/hexagon/mmvec/macros.h
-+++ b/target/hexagon/mmvec/macros.h
-@@ -18,7 +18,6 @@
- #ifndef HEXAGON_MMVEC_MACROS_H
- #define HEXAGON_MMVEC_MACROS_H
- 
--#include "qemu/osdep.h"
- #include "qemu/host-utils.h"
- #include "arch.h"
- #include "mmvec/system_ext_mmvec.h"
+ #include "qemu/osdep.h"
+-#include "qemu/log.h"
+ #include "hw/hw.h"
+ #include "audio/audio.h"
+ #include "qemu/timer.h"
 -- 
 2.39.0
 
