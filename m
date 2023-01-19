@@ -1,26 +1,26 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIWJf-0003oO-Nw
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:55:00 -0500
+	id 1pIWJj-0003s2-6R
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:55:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIWJd-0003nq-6i
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:54:57 -0500
+ id 1pIWJh-0003oj-BL
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:55:01 -0500
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIWJb-0002hy-Ps
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:54:56 -0500
+ id 1pIWJg-0002iV-1t
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:55:01 -0500
 Received: from [167.98.27.226] (helo=lawrence-thinkpad.office.codethink.co.uk)
  by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1pIW1T-007gSL-5y; Thu, 19 Jan 2023 14:36:12 +0000
+ id 1pIW1R-007gSL-4q; Thu, 19 Jan 2023 14:36:10 +0000
 From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 To: qemu-riscv@nongnu.org
 Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com,
- Max Chou <max.chou@sifive.com>
-Subject: [RFC PATCH 39/39] target/riscv: Expose Zvksed property
-Date: Thu, 19 Jan 2023 14:35:28 +0000
-Message-Id: <20230119143528.1290950-40-lawrence.hunter@codethink.co.uk>
+ Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+Subject: [RFC PATCH 32/39] target/riscv: add zvkg cpu property
+Date: Thu, 19 Jan 2023 14:35:21 +0000
+Message-Id: <20230119143528.1290950-33-lawrence.hunter@codethink.co.uk>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
 References: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
@@ -45,28 +45,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 14:54:57 -0000
+X-List-Received-Date: Thu, 19 Jan 2023 14:55:01 -0000
 
-From: Max Chou <max.chou@sifive.com>
-
-Signed-off-by: Max Chou <max.chou@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 ---
  target/riscv/cpu.c | 1 +
- 1 file changed, 1 insertion(+)
+ target/riscv/cpu.h | 1 +
+ 2 files changed, 2 insertions(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index d298c9bbfb..0a707a4415 100644
+index c0c2d70abf..8045a7cec0 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1082,6 +1082,7 @@ static Property riscv_cpu_extensions[] = {
-     DEFINE_PROP_BOOL("zvknha", RISCVCPU, cfg.ext_zvknha, false),
-     DEFINE_PROP_BOOL("zvknhb", RISCVCPU, cfg.ext_zvknhb, false),
-     DEFINE_PROP_BOOL("zvkns", RISCVCPU, cfg.ext_zvkns, false),
-+    DEFINE_PROP_BOOL("zvksed", RISCVCPU, cfg.ext_zvksed, false),
-     DEFINE_PROP_BOOL("zvksh", RISCVCPU, cfg.ext_zvksh, false),
- 
-     /* Vendor-specific custom extensions */
+@@ -101,6 +101,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zve32f, true, PRIV_VERSION_1_12_0, ext_zve32f),
+     ISA_EXT_DATA_ENTRY(zve64f, true, PRIV_VERSION_1_12_0, ext_zve64f),
+     ISA_EXT_DATA_ENTRY(zvkb, true, PRIV_VERSION_1_12_0, ext_zvkb),
++    ISA_EXT_DATA_ENTRY(zvkg, true, PRIV_VERSION_1_12_0, ext_zvkg),
+     ISA_EXT_DATA_ENTRY(zvknha, true, PRIV_VERSION_1_12_0, ext_zvknha),
+     ISA_EXT_DATA_ENTRY(zvknhb, true, PRIV_VERSION_1_12_0, ext_zvknhb),
+     ISA_EXT_DATA_ENTRY(zvkns, true, PRIV_VERSION_1_12_0, ext_zvkns),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 92624bfc57..b3b1174d74 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -462,6 +462,7 @@ struct RISCVCPUConfig {
+     bool ext_zve32f;
+     bool ext_zve64f;
+     bool ext_zvkb;
++    bool ext_zvkg;
+     bool ext_zvknha;
+     bool ext_zvknhb;
+     bool ext_zvkns;
 -- 
 2.39.1
 
