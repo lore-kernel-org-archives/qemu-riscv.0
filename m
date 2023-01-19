@@ -1,27 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIW2T-00080h-Fg
+	id 1pIW2T-00081K-LQ
 	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:37:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1b-0007DE-Pn
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:21 -0500
+ id 1pIW1R-00079C-KE
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:15 -0500
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1a-000710-7Q
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:19 -0500
+ id 1pIW1M-0006zy-Lw
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:09 -0500
 Received: from [167.98.27.226] (helo=lawrence-thinkpad.office.codethink.co.uk)
  by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1pIW1L-007gSL-DI; Thu, 19 Jan 2023 14:36:04 +0000
+ id 1pIW1I-007gSL-JA; Thu, 19 Jan 2023 14:36:01 +0000
 From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 To: qemu-riscv@nongnu.org
 Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com,
- William Salmon <will.salmon@codethink.co.uk>
-Subject: [RFC PATCH 20/39] target/riscv: Add vaesem.vs decoding,
+ Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+Subject: [RFC PATCH 14/39] target/riscv: Add vaesdf.vv decoding,
  translation and execution support
-Date: Thu, 19 Jan 2023 14:35:09 +0000
-Message-Id: <20230119143528.1290950-21-lawrence.hunter@codethink.co.uk>
+Date: Thu, 19 Jan 2023 14:35:03 +0000
+Message-Id: <20230119143528.1290950-15-lawrence.hunter@codethink.co.uk>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
 References: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
@@ -46,65 +46,89 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 14:36:27 -0000
+X-List-Received-Date: Thu, 19 Jan 2023 14:36:15 -0000
 
-From: William Salmon <will.salmon@codethink.co.uk>
-
-Signed-off-by: William Salmon <will.salmon@codethink.co.uk>
+Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 ---
- target/riscv/helper.h                       | 1 +
- target/riscv/insn32.decode                  | 1 +
- target/riscv/insn_trans/trans_rvzvkns.c.inc | 1 +
- target/riscv/vcrypto_helper.c               | 3 +++
- 4 files changed, 6 insertions(+)
+ target/riscv/helper.h                       |  1 +
+ target/riscv/insn32.decode                  |  1 +
+ target/riscv/insn_trans/trans_rvzvkns.c.inc |  1 +
+ target/riscv/vcrypto_helper.c               | 31 +++++++++++++++++++++
+ 4 files changed, 34 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 4bfc9a3387..85981f2cad 100644
+index 42349837ef..b7696cb6c4 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1186,6 +1186,7 @@ DEF_HELPER_4(vaesef_vs, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesdf_vv, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesdf_vs, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesem_vv, void, ptr, ptr, env, i32)
-+DEF_HELPER_4(vaesem_vs, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesdm_vv, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesdm_vs, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesz_vs, void, ptr, ptr, env, i32)
+@@ -1183,3 +1183,4 @@ DEF_HELPER_6(vandn_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+ 
+ DEF_HELPER_4(vaesef_vv, void, ptr, ptr, env, i32)
+ DEF_HELPER_4(vaesef_vs, void, ptr, ptr, env, i32)
++DEF_HELPER_4(vaesdf_vv, void, ptr, ptr, env, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index f31414f72c..cc91ca8794 100644
+index 0d65c2ea27..ca907dac85 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -915,6 +915,7 @@ vaesef_vs       101001 1 ..... 00011 010 ..... 1110111 @r2_vm_1
- vaesdf_vv       101000 1 ..... 00001 010 ..... 1110111 @r2_vm_1
- vaesdf_vs       101001 1 ..... 00001 010 ..... 1110111 @r2_vm_1
- vaesem_vv       101000 1 ..... 00010 010 ..... 1110111 @r2_vm_1
-+vaesem_vs       101001 1 ..... 00010 010 ..... 1110111 @r2_vm_1
- vaesdm_vv       101000 1 ..... 00000 010 ..... 1110111 @r2_vm_1
- vaesdm_vs       101001 1 ..... 00000 010 ..... 1110111 @r2_vm_1
- vaesz_vs        101001 1 ..... 00111 010 ..... 1110111 @r2_vm_1
+@@ -912,3 +912,4 @@ vandn_vx        000001 . ..... ..... 100 ..... 1010111 @r_vm
+ # *** RV64 Zvkns vector crypto extension ***
+ vaesef_vv       101000 1 ..... 00011 010 ..... 1110111 @r2_vm_1
+ vaesef_vs       101001 1 ..... 00011 010 ..... 1110111 @r2_vm_1
++vaesdf_vv       101000 1 ..... 00001 010 ..... 1110111 @r2_vm_1
 diff --git a/target/riscv/insn_trans/trans_rvzvkns.c.inc b/target/riscv/insn_trans/trans_rvzvkns.c.inc
-index 2e0523ec62..fae48d63dc 100644
+index dc4310882d..bd1f380a65 100644
 --- a/target/riscv/insn_trans/trans_rvzvkns.c.inc
 +++ b/target/riscv/insn_trans/trans_rvzvkns.c.inc
-@@ -64,3 +64,4 @@ GEN_V_UNMASKED_TRANS(vaesdm_vv, vaes_check_vv)
- GEN_V_UNMASKED_TRANS(vaesdm_vs, vaes_check_vs)
- GEN_V_UNMASKED_TRANS(vaesz_vs, vaes_check_vs)
- GEN_V_UNMASKED_TRANS(vaesem_vv, vaes_check_vv)
-+GEN_V_UNMASKED_TRANS(vaesem_vs, vaes_check_vs)
+@@ -58,3 +58,4 @@ static bool vaes_check_vs(DisasContext *s, arg_rmr *a)
+ 
+ GEN_V_UNMASKED_TRANS(vaesef_vv, vaes_check_vv)
+ GEN_V_UNMASKED_TRANS(vaesef_vs, vaes_check_vs)
++GEN_V_UNMASKED_TRANS(vaesdf_vv, vaes_check_vv)
 diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
-index a1d66a64aa..883739f4ac 100644
+index f59e090c03..24b5336fa7 100644
 --- a/target/riscv/vcrypto_helper.c
 +++ b/target/riscv/vcrypto_helper.c
-@@ -350,6 +350,9 @@ GEN_ZVKNS_HELPER_VS(vaesdf_vs, aes_inv_shift_bytes(round_state);
- GEN_ZVKNS_HELPER_VV(vaesem_vv, aes_shift_bytes(round_state);
-                     aes_sub_bytes(round_state); aes_mix_cols(round_state);
+@@ -191,6 +191,34 @@ static inline void xor_round_key(uint8_t round_state[4][4], uint8_t *round_key)
+     }
+ }
+ 
++static inline void aes_inv_sub_bytes(uint8_t round_state[4][4])
++{
++    for (int j = 0; j < 16; j++) {
++        round_state[j / 4][j % 4] = AES_isbox[round_state[j / 4][j % 4]];
++    }
++}
++
++static inline void aes_inv_shift_bytes(uint8_t round_state[4][4])
++{
++    uint8_t temp;
++    temp = round_state[3][1];
++    round_state[3][1] = round_state[2][1];
++    round_state[2][1] = round_state[1][1];
++    round_state[1][1] = round_state[0][1];
++    round_state[0][1] = temp;
++    temp = round_state[0][2];
++    round_state[0][2] = round_state[2][2];
++    round_state[2][2] = temp;
++    temp = round_state[1][2];
++    round_state[1][2] = round_state[3][2];
++    round_state[3][2] = temp;
++    temp = round_state[0][3];
++    round_state[0][3] = round_state[1][3];
++    round_state[1][3] = round_state[2][3];
++    round_state[2][3] = round_state[3][3];
++    round_state[3][3] = temp;
++}
++
+ #define GEN_ZVKNS_HELPER_VV(NAME, ...)                                    \
+ void HELPER(NAME)(void *vd_vptr, void *vs2_vptr, CPURISCVState *env,      \
+                   uint32_t desc)                                          \
+@@ -267,3 +295,6 @@ GEN_ZVKNS_HELPER_VV(vaesef_vv, aes_sub_bytes(round_state);
+ GEN_ZVKNS_HELPER_VS(vaesef_vs, aes_sub_bytes(round_state);
+                     aes_shift_bytes(round_state);
                      xor_round_key(round_state, (uint8_t *)round_key);)
-+GEN_ZVKNS_HELPER_VS(vaesem_vs, aes_shift_bytes(round_state);
-+                    aes_sub_bytes(round_state); aes_mix_cols(round_state);
++GEN_ZVKNS_HELPER_VV(vaesdf_vv, aes_inv_shift_bytes(round_state);
++                    aes_inv_sub_bytes(round_state);
 +                    xor_round_key(round_state, (uint8_t *)round_key);)
- GEN_ZVKNS_HELPER_VV(vaesdm_vv, aes_inv_shift_bytes(round_state);
-                     aes_inv_sub_bytes(round_state);
-                     xor_round_key(round_state, (uint8_t *)round_key);
 -- 
 2.39.1
 
