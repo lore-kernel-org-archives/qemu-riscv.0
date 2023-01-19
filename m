@@ -1,40 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIW2y-0000Bm-5o
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:37:44 -0500
+	id 1pIW7j-0003v0-7Q
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:42:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1j-0007En-5u
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:28 -0500
-Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1e-00072o-0y
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:23 -0500
-Received: from [167.98.27.226] (helo=lawrence-thinkpad.office.codethink.co.uk)
- by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1pIW1P-007gSL-7l; Thu, 19 Jan 2023 14:36:08 +0000
-From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
-To: qemu-riscv@nongnu.org
-Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com,
- Lawrence Hunter <lawrence.hunter@codethink.co.uk>,
- Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
-Subject: [RFC PATCH 29/39]  target/riscv: Add vsm3me.vv decoding,
- translation and execution support
-Date: Thu, 19 Jan 2023 14:35:18 +0000
-Message-Id: <20230119143528.1290950-30-lawrence.hunter@codethink.co.uk>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
-References: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1pIW7h-0003ue-TT
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:42:37 -0500
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1pIW7f-0000BI-Cw
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:42:37 -0500
+Received: by mail-ej1-x631.google.com with SMTP id v6so6227130ejg.6
+ for <qemu-riscv@nongnu.org>; Thu, 19 Jan 2023 06:42:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=bsdimp-com.20210112.gappssmtp.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WLm/26TDzMxR9AjqcQLVzx0EJOKTTp2Q5NhztMFa29c=;
+ b=TBMCPeFMINvlR6sLfqmBm9/vaLQjMVVaZZNdyj3wfzPAho/+69TQfPAGmXBfcQgvE2
+ 3MvTFGEuGGhy10YgDigUsENiJ0WQ9QHP+FCn+M4x9x1Gv+33h+zvfPdAz3VQg5YfJ15C
+ RBq8K4q5oaxmGElBG2xYzudAxiovhsDns7/JEomVxBoexfkvAbuMk7v7jiLFWlwH6Lf+
+ v6NVPChBDRjuviN5jqAQLygyfD4s3RMzQF08cYUy38D0qCHIYTBopdBA07F+x7d87w49
+ JejKb5gPur7f5jPjMFbXfHrzmRW0tlsWHSQz65j4IKCwbpU5xvBVjNpUzinQJltxSBAM
+ px9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WLm/26TDzMxR9AjqcQLVzx0EJOKTTp2Q5NhztMFa29c=;
+ b=OrDSDf2iVv/tQC7EItenEbLd2KgZ3xUdKiM/Y9KGF8QD1K4+xuoPQYvfIlNHyzL66X
+ WtzWMYmYaWkbjRESOvwNT7iE4iyalv3Ux7qKxFOKT//19mfvB105IKM1TAeXcZPuLASM
+ 8BYXigbqwvv9mCKOmLcjVxNDFbHgWMNj/Q1bSPhSrAHh+ZdbkX09s1DQ2Rb0iTzI9z/v
+ wgbYkQBbXnFALrPU1p6hN1iEJftnHlqOn9uh8gLSDd1ZAljffGRPjbq9+6T6BK8mGim6
+ yMI3z+v/dJ+Vjb4XcgRn5+V8uhIvKC2QiTJQ7HWnMc3vMe8IGFdsmfpOa0Liuz9wkgxE
+ 8Jxg==
+X-Gm-Message-State: AFqh2kqR8w3FLoqBXJdnhyV2KC1kVvwDvgprOqXIqzd5fxs6guy08tq8
+ WGdVS24dAHi8zg7CrK6lIX9ZWkdlp0z+R7YwpOcMHA==
+X-Google-Smtp-Source: AMrXdXv3voXsg9/2Y7jvMhjyvqkA6fh7HJ4k9HF9m+X+9XeI2roUUcwozH3kKKuRBWbh7Eo3g8KfVZP0g0ezvWD0IIA=
+X-Received: by 2002:a17:906:a3c3:b0:870:7c88:466e with SMTP id
+ ca3-20020a170906a3c300b008707c88466emr788492ejb.140.1674139353359; Thu, 19
+ Jan 2023 06:42:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=188.40.203.114;
- envelope-from=lawrence.hunter@codethink.co.uk; helo=imap4.hz.codethink.co.uk
-X-Spam_score_int: -13
-X-Spam_score: -1.4
+References: <20230119065959.3104012-1-armbru@redhat.com>
+ <20230119065959.3104012-5-armbru@redhat.com>
+In-Reply-To: <20230119065959.3104012-5-armbru@redhat.com>
+From: Warner Losh <imp@bsdimp.com>
+Date: Thu, 19 Jan 2023 07:42:46 -0700
+Message-ID: <CANCZdfrU4zVcepMj=B5EVUz-qhCDhMYDs+cYS5yfW1-G01PsbA@mail.gmail.com>
+Subject: Re: [PATCH v4 04/19] bsd-user: Clean up includes
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org, richard.henderson@linaro.org, pbonzini@redhat.com, 
+ kwolf@redhat.com, hreitz@redhat.com, kevans@freebsd.org,
+ berrange@redhat.com, 
+ groug@kaod.org, qemu_oss@crudebyte.com, mst@redhat.com, philmd@linaro.org, 
+ peter.maydell@linaro.org, alistair@alistair23.me, jasowang@redhat.com, 
+ jonathan.cameron@huawei.com, kbastian@mail.uni-paderborn.de, 
+ quintela@redhat.com, dgilbert@redhat.com, michael.roth@amd.com, 
+ kkostiuk@redhat.com, tsimpson@quicinc.com, palmer@dabbelt.com, 
+ bin.meng@windriver.com, qemu-block@nongnu.org, qemu-arm@nongnu.org, 
+ qemu-riscv@nongnu.org
+Content-Type: multipart/alternative; boundary="000000000000763fdf05f29ef11f"
+Received-SPF: none client-ip=2a00:1450:4864:20::631;
+ envelope-from=wlosh@bsdimp.com; helo=mail-ej1-x631.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, URI_NOVOWEL=0.5 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -47,123 +80,432 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 14:36:29 -0000
+X-List-Received-Date: Thu, 19 Jan 2023 14:42:38 -0000
 
-Co-authored-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
-Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
-Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
----
- target/riscv/helper.h                       |  2 +
- target/riscv/insn32.decode                  |  3 ++
- target/riscv/insn_trans/trans_rvzvksh.c.inc | 12 ++++++
- target/riscv/translate.c                    |  1 +
- target/riscv/vcrypto_helper.c               | 43 +++++++++++++++++++++
- 5 files changed, 61 insertions(+)
- create mode 100644 target/riscv/insn_trans/trans_rvzvksh.c.inc
+--000000000000763fdf05f29ef11f
+Content-Type: text/plain; charset="UTF-8"
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 911270c387..36e0d8eff3 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1196,3 +1196,5 @@ DEF_HELPER_5(vaeskf2_vi, void, ptr, ptr, i32, env, i32)
- DEF_HELPER_5(vsha2ms_vv, void, ptr, ptr, ptr, env, i32)
- DEF_HELPER_5(vsha2ch_vv, void, ptr, ptr, ptr, env, i32)
- DEF_HELPER_5(vsha2cl_vv, void, ptr, ptr, ptr, env, i32)
-+
-+DEF_HELPER_5(vsm3me_vv, void, ptr, ptr, ptr, env, i32)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 2387bc179c..671614e354 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -926,3 +926,6 @@ vaeskf2_vi      101010 1 ..... ..... 010 ..... 1110111 @r_vm_1
- vsha2ms_vv      101101 1 ..... ..... 010 ..... 1110111 @r_vm_1
- vsha2ch_vv      101110 1 ..... ..... 010 ..... 1110111 @r_vm_1
- vsha2cl_vv      101111 1 ..... ..... 010 ..... 1110111 @r_vm_1
-+
-+# *** RV64 Zvksh vector crypto extensions ***
-+vsm3me_vv       100000 1 ..... ..... 010 ..... 1110111 @r_vm_1
-diff --git a/target/riscv/insn_trans/trans_rvzvksh.c.inc b/target/riscv/insn_trans/trans_rvzvksh.c.inc
-new file mode 100644
-index 0000000000..2956618d7e
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvzvksh.c.inc
-@@ -0,0 +1,12 @@
-+static inline bool vsm3_check(DisasContext *s)
-+{
-+    return s->cfg_ptr->ext_zvksh == true && require_rvv(s) &&
-+           vext_check_isa_ill(s) && s->vstart % 8 == 0 && s->sew == MO_32;
-+}
-+
-+static inline bool vsm3me_check(DisasContext *s, arg_rmrr *a)
-+{
-+    return vsm3_check(s) && vext_check_sss(s, a->rd, a->rs1, a->rs2, a->vm);
-+}
-+
-+GEN_VV_UNMASKED_TRANS(vsm3me_vv, vsm3me_check)
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 924a89de9f..9ca2cec23a 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1066,6 +1066,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- #include "insn_trans/trans_rvzvkb.c.inc"
- #include "insn_trans/trans_rvzvkns.c.inc"
- #include "insn_trans/trans_rvzvknh.c.inc"
-+#include "insn_trans/trans_rvzvksh.c.inc"
- #include "insn_trans/trans_privileged.c.inc"
- #include "insn_trans/trans_svinval.c.inc"
- #include "insn_trans/trans_xventanacondops.c.inc"
-diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
-index b73581641a..4dd5920aa4 100644
---- a/target/riscv/vcrypto_helper.c
-+++ b/target/riscv/vcrypto_helper.c
-@@ -694,3 +694,46 @@ void HELPER(vsha2cl_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
-     vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
-     env->vstart = 0;
- }
-+
-+static inline uint32_t p1(uint32_t x)
-+{
-+    return (x) ^ rol32((x), 15) ^ rol32((x), 23);
-+}
-+
-+static inline uint32_t zvksh_w(uint32_t m16, uint32_t m9, uint32_t m3,
-+                               uint32_t m13, uint32_t m6)
-+{
-+    return p1(m16 ^ m9 ^ rol32(m3, 15)) ^ rol32(m13, 7) ^ m6;
-+}
-+
-+void HELPER(vsm3me_vv)(void *vd_vptr, void *vs1_vptr, void *vs2_vptr,
-+                       CPURISCVState *env, uint32_t desc)
-+{
-+    uint32_t esz = memop_size(FIELD_EX64(env->vtype, VTYPE, VSEW));
-+    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-+    uint32_t vta = vext_vta(desc);
-+    uint32_t *vd = vd_vptr;
-+    uint32_t *vs1 = vs1_vptr;
-+    uint32_t *vs2 = vs2_vptr;
-+
-+    if (env->vl % 8 != 0) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+    }
-+
-+    for (int i = env->vstart / 8; i < env->vl / 8; i++) {
-+        uint32_t w[24];
-+        for (int j = 0; j < 8; j++) {
-+            w[j] = bswap32(vs1[H4((i * 8) + j)]);
-+            w[j + 8] = bswap32(vs2[H4((i * 8) + j)]);
-+        }
-+        for (int j = 0; j < 8; j++) {
-+            w[j + 16] =
-+                zvksh_w(w[j], w[j + 7], w[j + 13], w[j + 3], w[j + 10]);
-+        }
-+        for (int j = 0; j < 8; j++) {
-+            vd[(i * 8) + j] = bswap32(w[H4(j + 16)]);
-+        }
-+    }
-+    vext_set_elems_1s(vd_vptr, vta, env->vl * esz, total_elems * esz);
-+    env->vstart = 0;
-+}
--- 
-2.39.1
+On Thu, Jan 19, 2023 at 12:00 AM Markus Armbruster <armbru@redhat.com>
+wrote:
 
+> Clean up includes so that osdep.h is included first and headers
+> which it implies are not included manually.
+>
+> This commit was created with scripts/clean-includes.
+>
+> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> ---
+>  bsd-user/bsd-proc.h               | 4 ----
+>  bsd-user/qemu.h                   | 1 -
+>  bsd-user/arm/signal.c             | 1 +
+>  bsd-user/arm/target_arch_cpu.c    | 2 ++
+>  bsd-user/freebsd/os-sys.c         | 1 +
+>  bsd-user/i386/signal.c            | 1 +
+>  bsd-user/i386/target_arch_cpu.c   | 3 +--
+>  bsd-user/main.c                   | 4 +---
+>  bsd-user/strace.c                 | 1 -
+>  bsd-user/x86_64/signal.c          | 1 +
+>  bsd-user/x86_64/target_arch_cpu.c | 3 +--
+>  11 files changed, 9 insertions(+), 13 deletions(-)
+>
+> diff --git a/bsd-user/bsd-proc.h b/bsd-user/bsd-proc.h
+> index 68b66e571d..a1061bffb8 100644
+> --- a/bsd-user/bsd-proc.h
+> +++ b/bsd-user/bsd-proc.h
+> @@ -20,11 +20,7 @@
+>  #ifndef BSD_PROC_H_
+>  #define BSD_PROC_H_
+>
+> -#include <sys/types.h>
+> -#include <sys/stat.h>
+> -#include <sys/time.h>
+>  #include <sys/resource.h>
+>
+
+Did you test this on FreeBSD 12? FreeBSD 13 has started to climb the hill
+where all includes are independent, but much of that hasn't been merged to
+12 yet. sys/types.h, at least, is documented as a prereq for both
+sys/stat.h and sys/resource.h.
+
+I know many of these are in os-dep.h, and I've had trouble in the bsd-user
+fork with that and the layout of the code which has arguably way too much
+in the .h files.
+
+Also, why didn't you move sys/resource.h and other such files to os-dep.h?
+I'm struggling to understand the rules around what is or isn't included
+where?
+
+
+> -#include <unistd.h>
+>
+>  /* exit(2) */
+>  static inline abi_long do_bsd_exit(void *cpu_env, abi_long arg1)
+> diff --git a/bsd-user/qemu.h b/bsd-user/qemu.h
+> index be6105385e..0ceecfb6df 100644
+> --- a/bsd-user/qemu.h
+> +++ b/bsd-user/qemu.h
+> @@ -17,7 +17,6 @@
+>  #ifndef QEMU_H
+>  #define QEMU_H
+>
+> -#include "qemu/osdep.h"
+>  #include "cpu.h"
+>  #include "qemu/units.h"
+>  #include "exec/cpu_ldst.h"
+> diff --git a/bsd-user/arm/signal.c b/bsd-user/arm/signal.c
+> index 2b1dd745d1..9734407543 100644
+> --- a/bsd-user/arm/signal.c
+> +++ b/bsd-user/arm/signal.c
+> @@ -17,6 +17,7 @@
+>   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>   */
+>
+> +#include "qemu/osdep.h"
+>  #include "qemu.h"
+>
+>  /*
+> diff --git a/bsd-user/arm/target_arch_cpu.c
+> b/bsd-user/arm/target_arch_cpu.c
+> index 02bf9149d5..fe38ae2210 100644
+> --- a/bsd-user/arm/target_arch_cpu.c
+> +++ b/bsd-user/arm/target_arch_cpu.c
+> @@ -16,6 +16,8 @@
+>   *  You should have received a copy of the GNU General Public License
+>   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>   */
+> +
+> +#include "qemu/osdep.h"
+>  #include "target_arch.h"
+>
+>  void target_cpu_set_tls(CPUARMState *env, target_ulong newtls)
+> diff --git a/bsd-user/freebsd/os-sys.c b/bsd-user/freebsd/os-sys.c
+> index 309e27b9d6..1676ec10f8 100644
+> --- a/bsd-user/freebsd/os-sys.c
+> +++ b/bsd-user/freebsd/os-sys.c
+> @@ -17,6 +17,7 @@
+>   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>   */
+>
+> +#include "qemu/osdep.h"
+>  #include "qemu.h"
+>  #include "target_arch_sysarch.h"
+>
+> diff --git a/bsd-user/i386/signal.c b/bsd-user/i386/signal.c
+> index 5dd975ce56..a3131047b8 100644
+> --- a/bsd-user/i386/signal.c
+> +++ b/bsd-user/i386/signal.c
+> @@ -17,6 +17,7 @@
+>   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>   */
+>
+> +#include "qemu/osdep.h"
+>  #include "qemu.h"
+>
+>  /*
+> diff --git a/bsd-user/i386/target_arch_cpu.c
+> b/bsd-user/i386/target_arch_cpu.c
+> index d349e45299..2a3af2ddef 100644
+> --- a/bsd-user/i386/target_arch_cpu.c
+> +++ b/bsd-user/i386/target_arch_cpu.c
+> @@ -17,9 +17,8 @@
+>   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>   */
+>
+> -#include <sys/types.h>
+> -
+>  #include "qemu/osdep.h"
+> +
+>  #include "cpu.h"
+>  #include "qemu.h"
+>  #include "qemu/timer.h"
+> diff --git a/bsd-user/main.c b/bsd-user/main.c
+> index 6f09180d65..41290e16f9 100644
+> --- a/bsd-user/main.c
+> +++ b/bsd-user/main.c
+> @@ -18,12 +18,10 @@
+>   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>   */
+>
+> -#include <sys/types.h>
+> -#include <sys/time.h>
+> +#include "qemu/osdep.h"
+>  #include <sys/resource.h>
+>  #include <sys/sysctl.h>
+>
+> -#include "qemu/osdep.h"
+>  #include "qemu/help-texts.h"
+>  #include "qemu/units.h"
+>  #include "qemu/accel.h"
+> diff --git a/bsd-user/strace.c b/bsd-user/strace.c
+> index a77d10dd6b..96499751eb 100644
+> --- a/bsd-user/strace.c
+> +++ b/bsd-user/strace.c
+> @@ -20,7 +20,6 @@
+>  #include <sys/select.h>
+>  #include <sys/syscall.h>
+>  #include <sys/ioccom.h>
+> -#include <ctype.h>
+>
+>  #include "qemu.h"
+>
+> diff --git a/bsd-user/x86_64/signal.c b/bsd-user/x86_64/signal.c
+> index c3875bc4c6..46cb865180 100644
+> --- a/bsd-user/x86_64/signal.c
+> +++ b/bsd-user/x86_64/signal.c
+> @@ -16,6 +16,7 @@
+>   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>   */
+>
+> +#include "qemu/osdep.h"
+>  #include "qemu.h"
+>
+>  /*
+> diff --git a/bsd-user/x86_64/target_arch_cpu.c
+> b/bsd-user/x86_64/target_arch_cpu.c
+> index be7bd10720..1d32f18907 100644
+> --- a/bsd-user/x86_64/target_arch_cpu.c
+> +++ b/bsd-user/x86_64/target_arch_cpu.c
+> @@ -17,9 +17,8 @@
+>   *  along with this program; if not, see <http://www.gnu.org/licenses/>.
+>   */
+>
+> -#include <sys/types.h>
+> -
+>  #include "qemu/osdep.h"
+> +
+>  #include "cpu.h"
+>  #include "qemu.h"
+>  #include "qemu/timer.h"
+>
+
+I suppose these are fine. How do I run the cleanup script? I have 2x the
+number of files not upstream in the bsd-user fork that I'd like to cleanup
+as well and they are likely a bigger mess and I'll just upstream them in
+the messy state unless I understand how to keep the neat :).
+
+Warner
+
+--000000000000763fdf05f29ef11f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Thu, Jan 19, 2023 at 12:00 AM Mark=
+us Armbruster &lt;<a href=3D"mailto:armbru@redhat.com">armbru@redhat.com</a=
+>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
+ 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Cle=
+an up includes so that osdep.h is included first and headers<br>
+which it implies are not included manually.<br>
+<br>
+This commit was created with scripts/clean-includes.<br>
+<br>
+Signed-off-by: Markus Armbruster &lt;<a href=3D"mailto:armbru@redhat.com" t=
+arget=3D"_blank">armbru@redhat.com</a>&gt;<br>
+---<br>
+=C2=A0bsd-user/bsd-proc.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0| 4 ----<br>
+=C2=A0bsd-user/qemu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0| 1 -<br>
+=C2=A0bsd-user/arm/signal.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+| 1 +<br>
+=C2=A0bsd-user/arm/target_arch_cpu.c=C2=A0 =C2=A0 | 2 ++<br>
+=C2=A0bsd-user/freebsd/os-sys.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 1 +<br>
+=C2=A0bsd-user/i386/signal.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 +=
+<br>
+=C2=A0bsd-user/i386/target_arch_cpu.c=C2=A0 =C2=A0| 3 +--<br>
+=C2=A0bsd-user/main.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0| 4 +---<br>
+=C2=A0bsd-user/strace.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0| 1 -<br>
+=C2=A0bsd-user/x86_64/signal.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 1 +<br>
+=C2=A0bsd-user/x86_64/target_arch_cpu.c | 3 +--<br>
+=C2=A011 files changed, 9 insertions(+), 13 deletions(-)<br>
+<br>
+diff --git a/bsd-user/bsd-proc.h b/bsd-user/bsd-proc.h<br>
+index 68b66e571d..a1061bffb8 100644<br>
+--- a/bsd-user/bsd-proc.h<br>
++++ b/bsd-user/bsd-proc.h<br>
+@@ -20,11 +20,7 @@<br>
+=C2=A0#ifndef BSD_PROC_H_<br>
+=C2=A0#define BSD_PROC_H_<br>
+<br>
+-#include &lt;sys/types.h&gt;<br>
+-#include &lt;sys/stat.h&gt;<br>
+-#include &lt;sys/time.h&gt;<br>
+=C2=A0#include &lt;sys/resource.h&gt;<br></blockquote><div><br></div><div>D=
+id you test this on FreeBSD 12? FreeBSD 13 has started to climb the hill wh=
+ere all includes are independent, but much of that hasn&#39;t been merged t=
+o 12 yet. sys/types.h, at least, is documented as a prereq for both sys/sta=
+t.h and sys/resource.h.</div><div><br></div><div>I know many of these are i=
+n os-dep.h, and I&#39;ve had trouble in the bsd-user fork with that and the=
+ layout of the code which has arguably way too much in the .h files.</div><=
+div><br></div><div>Also, why didn&#39;t you move sys/resource.h and other s=
+uch files to os-dep.h? I&#39;m struggling to understand the rules around wh=
+at is or isn&#39;t included where?<br></div><div>=C2=A0</div><blockquote cl=
+ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
+ rgb(204,204,204);padding-left:1ex">
+-#include &lt;unistd.h&gt;<br>
+<br>
+=C2=A0/* exit(2) */<br>
+=C2=A0static inline abi_long do_bsd_exit(void *cpu_env, abi_long arg1)<br>
+diff --git a/bsd-user/qemu.h b/bsd-user/qemu.h<br>
+index be6105385e..0ceecfb6df 100644<br>
+--- a/bsd-user/qemu.h<br>
++++ b/bsd-user/qemu.h<br>
+@@ -17,7 +17,6 @@<br>
+=C2=A0#ifndef QEMU_H<br>
+=C2=A0#define QEMU_H<br>
+<br>
+-#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &quot;cpu.h&quot;<br>
+=C2=A0#include &quot;qemu/units.h&quot;<br>
+=C2=A0#include &quot;exec/cpu_ldst.h&quot;<br>
+diff --git a/bsd-user/arm/signal.c b/bsd-user/arm/signal.c<br>
+index 2b1dd745d1..9734407543 100644<br>
+--- a/bsd-user/arm/signal.c<br>
++++ b/bsd-user/arm/signal.c<br>
+@@ -17,6 +17,7 @@<br>
+=C2=A0 *=C2=A0 along with this program; if not, see &lt;<a href=3D"http://w=
+ww.gnu.org/licenses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.o=
+rg/licenses/</a>&gt;.<br>
+=C2=A0 */<br>
+<br>
++#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &quot;qemu.h&quot;<br>
+<br>
+=C2=A0/*<br>
+diff --git a/bsd-user/arm/target_arch_cpu.c b/bsd-user/arm/target_arch_cpu.=
+c<br>
+index 02bf9149d5..fe38ae2210 100644<br>
+--- a/bsd-user/arm/target_arch_cpu.c<br>
++++ b/bsd-user/arm/target_arch_cpu.c<br>
+@@ -16,6 +16,8 @@<br>
+=C2=A0 *=C2=A0 You should have received a copy of the GNU General Public Li=
+cense<br>
+=C2=A0 *=C2=A0 along with this program; if not, see &lt;<a href=3D"http://w=
+ww.gnu.org/licenses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.o=
+rg/licenses/</a>&gt;.<br>
+=C2=A0 */<br>
++<br>
++#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &quot;target_arch.h&quot;<br>
+<br>
+=C2=A0void target_cpu_set_tls(CPUARMState *env, target_ulong newtls)<br>
+diff --git a/bsd-user/freebsd/os-sys.c b/bsd-user/freebsd/os-sys.c<br>
+index 309e27b9d6..1676ec10f8 100644<br>
+--- a/bsd-user/freebsd/os-sys.c<br>
++++ b/bsd-user/freebsd/os-sys.c<br>
+@@ -17,6 +17,7 @@<br>
+=C2=A0 *=C2=A0 along with this program; if not, see &lt;<a href=3D"http://w=
+ww.gnu.org/licenses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.o=
+rg/licenses/</a>&gt;.<br>
+=C2=A0 */<br>
+<br>
++#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &quot;qemu.h&quot;<br>
+=C2=A0#include &quot;target_arch_sysarch.h&quot;<br>
+<br>
+diff --git a/bsd-user/i386/signal.c b/bsd-user/i386/signal.c<br>
+index 5dd975ce56..a3131047b8 100644<br>
+--- a/bsd-user/i386/signal.c<br>
++++ b/bsd-user/i386/signal.c<br>
+@@ -17,6 +17,7 @@<br>
+=C2=A0 *=C2=A0 along with this program; if not, see &lt;<a href=3D"http://w=
+ww.gnu.org/licenses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.o=
+rg/licenses/</a>&gt;.<br>
+=C2=A0 */<br>
+<br>
++#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &quot;qemu.h&quot;<br>
+<br>
+=C2=A0/*<br>
+diff --git a/bsd-user/i386/target_arch_cpu.c b/bsd-user/i386/target_arch_cp=
+u.c<br>
+index d349e45299..2a3af2ddef 100644<br>
+--- a/bsd-user/i386/target_arch_cpu.c<br>
++++ b/bsd-user/i386/target_arch_cpu.c<br>
+@@ -17,9 +17,8 @@<br>
+=C2=A0 *=C2=A0 along with this program; if not, see &lt;<a href=3D"http://w=
+ww.gnu.org/licenses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.o=
+rg/licenses/</a>&gt;.<br>
+=C2=A0 */<br>
+<br>
+-#include &lt;sys/types.h&gt;<br>
+-<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
++<br>
+=C2=A0#include &quot;cpu.h&quot;<br>
+=C2=A0#include &quot;qemu.h&quot;<br>
+=C2=A0#include &quot;qemu/timer.h&quot;<br>
+diff --git a/bsd-user/main.c b/bsd-user/main.c<br>
+index 6f09180d65..41290e16f9 100644<br>
+--- a/bsd-user/main.c<br>
++++ b/bsd-user/main.c<br>
+@@ -18,12 +18,10 @@<br>
+=C2=A0 *=C2=A0 along with this program; if not, see &lt;<a href=3D"http://w=
+ww.gnu.org/licenses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.o=
+rg/licenses/</a>&gt;.<br>
+=C2=A0 */<br>
+<br>
+-#include &lt;sys/types.h&gt;<br>
+-#include &lt;sys/time.h&gt;<br>
++#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &lt;sys/resource.h&gt;<br>
+=C2=A0#include &lt;sys/sysctl.h&gt;<br>
+<br>
+-#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &quot;qemu/help-texts.h&quot;<br>
+=C2=A0#include &quot;qemu/units.h&quot;<br>
+=C2=A0#include &quot;qemu/accel.h&quot;<br>
+diff --git a/bsd-user/strace.c b/bsd-user/strace.c<br>
+index a77d10dd6b..96499751eb 100644<br>
+--- a/bsd-user/strace.c<br>
++++ b/bsd-user/strace.c<br>
+@@ -20,7 +20,6 @@<br>
+=C2=A0#include &lt;sys/select.h&gt;<br>
+=C2=A0#include &lt;sys/syscall.h&gt;<br>
+=C2=A0#include &lt;sys/ioccom.h&gt;<br>
+-#include &lt;ctype.h&gt;<br>
+<br>
+=C2=A0#include &quot;qemu.h&quot;<br>
+<br>
+diff --git a/bsd-user/x86_64/signal.c b/bsd-user/x86_64/signal.c<br>
+index c3875bc4c6..46cb865180 100644<br>
+--- a/bsd-user/x86_64/signal.c<br>
++++ b/bsd-user/x86_64/signal.c<br>
+@@ -16,6 +16,7 @@<br>
+=C2=A0 *=C2=A0 along with this program; if not, see &lt;<a href=3D"http://w=
+ww.gnu.org/licenses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.o=
+rg/licenses/</a>&gt;.<br>
+=C2=A0 */<br>
+<br>
++#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &quot;qemu.h&quot;<br>
+<br>
+=C2=A0/*<br>
+diff --git a/bsd-user/x86_64/target_arch_cpu.c b/bsd-user/x86_64/target_arc=
+h_cpu.c<br>
+index be7bd10720..1d32f18907 100644<br>
+--- a/bsd-user/x86_64/target_arch_cpu.c<br>
++++ b/bsd-user/x86_64/target_arch_cpu.c<br>
+@@ -17,9 +17,8 @@<br>
+=C2=A0 *=C2=A0 along with this program; if not, see &lt;<a href=3D"http://w=
+ww.gnu.org/licenses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.o=
+rg/licenses/</a>&gt;.<br>
+=C2=A0 */<br>
+<br>
+-#include &lt;sys/types.h&gt;<br>
+-<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
++<br>
+=C2=A0#include &quot;cpu.h&quot;<br>
+=C2=A0#include &quot;qemu.h&quot;<br>
+=C2=A0#include &quot;qemu/timer.h&quot;<br></blockquote><div><br></div><div=
+>I suppose these are fine. How do I run the cleanup script? I have 2x the n=
+umber of files not upstream in the bsd-user fork that I&#39;d like to clean=
+up as well and they are likely a bigger mess and I&#39;ll just upstream the=
+m in the messy state unless I understand how to keep the neat :).<br></div>=
+<div><br></div><div>Warner <br></div></div></div>
+
+--000000000000763fdf05f29ef11f--
 
