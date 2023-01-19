@@ -1,67 +1,87 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pITIU-0004D4-Mu
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 06:41:34 -0500
+	id 1pITMX-0007a7-7S
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 06:45:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pITIT-0004Ci-Ga
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 06:41:33 -0500
+ (Exim 4.90_1) (envelope-from <dgilbert@redhat.com>)
+ id 1pITMV-0007VL-Ti
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 06:45:43 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pITIS-0006G8-4w
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 06:41:33 -0500
+ (Exim 4.90_1) (envelope-from <dgilbert@redhat.com>)
+ id 1pITMU-00076T-4r
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 06:45:43 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1674128491;
+ s=mimecast20190719; t=1674128741;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=CmPsP3SGpWPOTwWlj7ijZlZ6iruaUyXHSnd1sesgPfw=;
- b=SJMcASpxV2OW5DSJD/wNF2Uff5T+vVZoE7Vz0oxvWPM50yA6Ne/oPfG8gBHRgU/l8AH+Do
- k/XmHokYw1jo59snF1VDs57T8VxqbWYzZ45QPk6BZQgsVx54q8ER4Y8wxqs6Ghb+N214of
- 74HQN97Ohcgh2ZgsmkPABtmju1gdw80=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-159-trcBebO8OVy3wISNSwH_cw-1; Thu, 19 Jan 2023 06:41:27 -0500
-X-MC-Unique: trcBebO8OVy3wISNSwH_cw-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5A3181C05148;
- Thu, 19 Jan 2023 11:41:26 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 95A082026D68;
- Thu, 19 Jan 2023 11:41:25 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 6A9A221E6A28; Thu, 19 Jan 2023 12:41:24 +0100 (CET)
-From: Markus Armbruster <armbru@redhat.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org,  richard.henderson@linaro.org,
- pbonzini@redhat.com,  kwolf@redhat.com,  hreitz@redhat.com,
- imp@bsdimp.com,  kevans@freebsd.org,  berrange@redhat.com,
- groug@kaod.org,  qemu_oss@crudebyte.com,  mst@redhat.com,
- peter.maydell@linaro.org,  alistair@alistair23.me,  jasowang@redhat.com,
- jonathan.cameron@huawei.com,  kbastian@mail.uni-paderborn.de,
- quintela@redhat.com,  dgilbert@redhat.com,  michael.roth@amd.com,
- kkostiuk@redhat.com,  tsimpson@quicinc.com,  palmer@dabbelt.com,
- bin.meng@windriver.com,  qemu-block@nongnu.org,  qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: Re: [PATCH v4 16/19] Fix non-first inclusions of qemu/osdep.h
+ bh=P78m2bxRvKQ56Scy0mxTJdk2vWI6fJdUGvOt38e9eUg=;
+ b=QiXd4nBQYA3OTLlHdXft/Dt1VQhjdRlnygadiAakA0mG7Jbm8xHU9c/bJ20vACEenIvlP7
+ s0yEDXuLA2JLlvlPAjwoYh5Rx/4wvELae6R9gXiivFAX241fUVVxNmEbQ72zNhITc4mszw
+ XQkzRpIG0DbjerlLS2DFEwBX1RX0Gvg=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-605-NaVypYlPPHm3NtCGrSG_uQ-1; Thu, 19 Jan 2023 06:45:40 -0500
+X-MC-Unique: NaVypYlPPHm3NtCGrSG_uQ-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ c7-20020a1c3507000000b003d355c13ba8so1079407wma.6
+ for <qemu-riscv@nongnu.org>; Thu, 19 Jan 2023 03:45:39 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=user-agent:in-reply-to:content-disposition:mime-version:references
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=P78m2bxRvKQ56Scy0mxTJdk2vWI6fJdUGvOt38e9eUg=;
+ b=dDeDSEJQoqs6GkfncgciBhF1JdMIUzpDcZauUqKVjTtDdTmaga+vMjcRwB0GD/Ud43
+ Qvr0T2R8USTSLFjxHfVpQiiAn9991Akf1dM8kGAufiJSCI/i6blfMsqHuazTpmYk+KaS
+ DUSRWjVh4+FqMTb0eBmb66/wRVorjqUALZxa9WlLfJW5uYo7tR5vnC9lvoSex/rdLtfB
+ qzQIL8Tt2HTjky+LhjIfMryPu5pyUapLd80SYIvpJnfQ19qrhdoLk7gsoCRscDiJTa/X
+ 91jR6uKxxweHRfV7SBBpLXWrbw9zEEgJ9tDBFysBXHYo4somjoIRDJNdn+qHNfh2dJPb
+ Q17Q==
+X-Gm-Message-State: AFqh2kokghLS3l0UDnXU/KowPPtnXadEgTESmCnADq409wwHaqoo5/J5
+ DpAy5BBMdzTh6kB7CXexq7LhM3O4wx9/yF58GliOXdP5mZHfMvtC6VFEvwQ4czO9JofRsiqxUMy
+ MdFIHwXXe7okvmaw=
+X-Received: by 2002:a05:600c:214f:b0:3d9:ecae:84f2 with SMTP id
+ v15-20020a05600c214f00b003d9ecae84f2mr9637809wml.25.1674128738970; 
+ Thu, 19 Jan 2023 03:45:38 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXvKovz8+ZDX4sjT/oeKatK0MjM5AWffSSa+Dw2pKc55XmUjZ2fH6WQq39m2D5iyra5dosN8ww==
+X-Received: by 2002:a05:600c:214f:b0:3d9:ecae:84f2 with SMTP id
+ v15-20020a05600c214f00b003d9ecae84f2mr9637775wml.25.1674128738765; 
+ Thu, 19 Jan 2023 03:45:38 -0800 (PST)
+Received: from work-vm
+ (ward-16-b2-v4wan-166627-cust863.vm18.cable.virginm.net. [81.97.203.96])
+ by smtp.gmail.com with ESMTPSA id
+ x23-20020a1c7c17000000b003d974076f13sm4504208wmc.3.2023.01.19.03.45.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Jan 2023 03:45:38 -0800 (PST)
+Date: Thu, 19 Jan 2023 11:45:36 +0000
+From: "Dr. David Alan Gilbert" <dgilbert@redhat.com>
+To: Markus Armbruster <armbru@redhat.com>
+Cc: qemu-devel@nongnu.org, richard.henderson@linaro.org,
+ pbonzini@redhat.com, kwolf@redhat.com, hreitz@redhat.com,
+ imp@bsdimp.com, kevans@freebsd.org, berrange@redhat.com,
+ groug@kaod.org, qemu_oss@crudebyte.com, mst@redhat.com,
+ philmd@linaro.org, peter.maydell@linaro.org, alistair@alistair23.me,
+ jasowang@redhat.com, jonathan.cameron@huawei.com,
+ kbastian@mail.uni-paderborn.de, quintela@redhat.com,
+ michael.roth@amd.com, kkostiuk@redhat.com, tsimpson@quicinc.com,
+ palmer@dabbelt.com, bin.meng@windriver.com, qemu-block@nongnu.org,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org
+Subject: Re: [PATCH v4 10/19] migration: Clean up includes
+Message-ID: <Y8ktYMfKahtAZ83A@work-vm>
 References: <20230119065959.3104012-1-armbru@redhat.com>
- <20230119065959.3104012-17-armbru@redhat.com>
- <a25d449f-ceb5-54d8-ad07-9e6517d6e016@linaro.org>
-Date: Thu, 19 Jan 2023 12:41:24 +0100
-In-Reply-To: <a25d449f-ceb5-54d8-ad07-9e6517d6e016@linaro.org> ("Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Thu, 19 Jan 2023 11:40:06
- +0100")
-Message-ID: <873586u4yj.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
+ <20230119065959.3104012-11-armbru@redhat.com>
+ <Y8kOj6m4jhtUVg+A@work-vm> <87wn5ivmru.fsf@pond.sub.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+In-Reply-To: <87wn5ivmru.fsf@pond.sub.org>
+User-Agent: Mutt/2.2.9 (2022-11-12)
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=dgilbert@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -69,7 +89,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,62 +102,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 11:41:34 -0000
+X-List-Received-Date: Thu, 19 Jan 2023 11:45:44 -0000
 
-Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
+* Markus Armbruster (armbru@redhat.com) wrote:
+> "Dr. David Alan Gilbert" <dgilbert@redhat.com> writes:
+> 
+> > * Markus Armbruster (armbru@redhat.com) wrote:
+> >> Clean up includes so that osdep.h is included first and headers
+> >> which it implies are not included manually.
+> >
+> > That change doesn't seem to match the message; the patch is removing the
+> > osdep.h include.
+> 
+> It's the commit message scripts/clean-includes creates :)
+> 
+> I can throw in another patch to the script so it mentions it also
+> removes qemu/osdep.h from headers.
 
-> On 19/1/23 07:59, Markus Armbruster wrote:
->> This commit was created with scripts/clean-includes.
->> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+Oh hmm it would be clearer; but OK then, so 
 
-[...]
+Reviewed-by: Dr. David Alan Gilbert <dgilbert@redhat.com>
 
-> Up to here:
->
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
->
->> diff --git a/util/async-teardown.c b/util/async-teardown.c
->> index 62bfce1b3c..62cdeb0f20 100644
->> --- a/util/async-teardown.c
->> +++ b/util/async-teardown.c
->> @@ -10,16 +10,12 @@
->>    * option) any later version.  See the COPYING file in the top-level d=
-irectory.
->>    *
->>    */
->> -#include <stdlib.h>
->> -#include <stdio.h>
->> -#include <sys/types.h>
->> -#include <dirent.h>
->> -#include <sys/prctl.h>
->> -#include <signal.h>
->> -#include <sched.h>
->> -#include <unistd.h>
->>=20=20
->>  #include "qemu/osdep.h"
->> +#include <dirent.h>
->> +#include <sys/prctl.h>
->> +#include <sched.h>
->> +
->>   #include "qemu/async-teardown.h"
->
-> This file has more changes.
-
-I'm not sure I understand.
-
-The patch does two related things:
-
-1. It puts qemu/osdep.h first.  The diff makes it look like we leave it
-   in place and move other stuff across, but that's the same.
-
-2. It deletes inclusions of headers qemu/osdep.h already includes:
-
-    <stdlib.h>
-    <stdio.h>
-    <sys/types.h>
-    <signal.h>
-    <unistd.h>
-
-What would you like me to change or explain?
+> >> This commit was created with scripts/clean-includes.
+> >> 
+> >> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> >> ---
+> >>  include/qemu/userfaultfd.h | 1 -
+> >>  1 file changed, 1 deletion(-)
+> >> 
+> >> diff --git a/include/qemu/userfaultfd.h b/include/qemu/userfaultfd.h
+> >> index 6b74f92792..55c95998e8 100644
+> >> --- a/include/qemu/userfaultfd.h
+> >> +++ b/include/qemu/userfaultfd.h
+> >> @@ -13,7 +13,6 @@
+> >>  #ifndef USERFAULTFD_H
+> >>  #define USERFAULTFD_H
+> >>  
+> >> -#include "qemu/osdep.h"
+> >>  #include "exec/hwaddr.h"
+> >>  #include <linux/userfaultfd.h>
+> >>  
+> >> -- 
+> >> 2.39.0
+> >> 
+> 
+-- 
+Dr. David Alan Gilbert / dgilbert@redhat.com / Manchester, UK
 
 
