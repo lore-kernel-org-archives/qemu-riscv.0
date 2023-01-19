@@ -1,27 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIW2z-0000EW-At
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:37:45 -0500
+	id 1pIW30-0000FR-6j
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:37:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1j-0007Ei-5I
+ id 1pIW1j-0007Eh-4W
  for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:28 -0500
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1b-00071G-5s
+ id 1pIW1e-00072V-0c
  for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:23 -0500
 Received: from [167.98.27.226] (helo=lawrence-thinkpad.office.codethink.co.uk)
  by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1pIW1M-007gSL-7S; Thu, 19 Jan 2023 14:36:05 +0000
+ id 1pIW1N-007gSL-UD; Thu, 19 Jan 2023 14:36:06 +0000
 From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 To: qemu-riscv@nongnu.org
 Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com,
+ Lawrence Hunter <lawrence.hunter@codethink.co.uk>,
  Nazar Kazakov <nazar.kazakov@codethink.co.uk>
-Subject: [RFC PATCH 22/39] target/riscv: Add vaeskf2.vi decoding,
+Subject: [RFC PATCH 26/39] target/riscv: Add vsha2c[hl].vv decoding,
  translation and execution support
-Date: Thu, 19 Jan 2023 14:35:11 +0000
-Message-Id: <20230119143528.1290950-23-lawrence.hunter@codethink.co.uk>
+Date: Thu, 19 Jan 2023 14:35:15 +0000
+Message-Id: <20230119143528.1290950-27-lawrence.hunter@codethink.co.uk>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
 References: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
@@ -29,11 +30,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=188.40.203.114;
  envelope-from=lawrence.hunter@codethink.co.uk; helo=imap4.hz.codethink.co.uk
-X-Spam_score_int: -13
-X-Spam_score: -1.4
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, URI_NOVOWEL=0.5 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -48,115 +49,206 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 19 Jan 2023 14:36:29 -0000
 
-From: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
-
+Co-authored-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
 Signed-off-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
+Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 ---
- target/riscv/helper.h                       |  1 +
- target/riscv/insn32.decode                  |  1 +
- target/riscv/insn_trans/trans_rvzvkns.c.inc |  9 ++++
- target/riscv/vcrypto_helper.c               | 56 +++++++++++++++++++++
- 4 files changed, 67 insertions(+)
+ target/riscv/helper.h                       |   2 +
+ target/riscv/insn32.decode                  |   2 +
+ target/riscv/insn_trans/trans_rvzvknh.c.inc |   2 +
+ target/riscv/vcrypto_helper.c               | 153 ++++++++++++++++++++
+ 4 files changed, 159 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 2ac02dde01..312f59bb38 100644
+index 6e7777c879..911270c387 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1191,3 +1191,4 @@ DEF_HELPER_4(vaesdm_vv, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesdm_vs, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesz_vs, void, ptr, ptr, env, i32)
- DEF_HELPER_5(vaeskf1_vi, void, ptr, ptr, i32, env, i32)
-+DEF_HELPER_5(vaeskf2_vi, void, ptr, ptr, i32, env, i32)
+@@ -1194,3 +1194,5 @@ DEF_HELPER_5(vaeskf1_vi, void, ptr, ptr, i32, env, i32)
+ DEF_HELPER_5(vaeskf2_vi, void, ptr, ptr, i32, env, i32)
+ 
+ DEF_HELPER_5(vsha2ms_vv, void, ptr, ptr, ptr, env, i32)
++DEF_HELPER_5(vsha2ch_vv, void, ptr, ptr, ptr, env, i32)
++DEF_HELPER_5(vsha2cl_vv, void, ptr, ptr, ptr, env, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 325e2401c8..1eed0a6b26 100644
+index 57fbd63d91..2387bc179c 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -920,3 +920,4 @@ vaesdm_vv       101000 1 ..... 00000 010 ..... 1110111 @r2_vm_1
- vaesdm_vs       101001 1 ..... 00000 010 ..... 1110111 @r2_vm_1
- vaesz_vs        101001 1 ..... 00111 010 ..... 1110111 @r2_vm_1
- vaeskf1_vi      100010 1 ..... ..... 010 ..... 1110111 @r_vm_1
-+vaeskf2_vi      101010 1 ..... ..... 010 ..... 1110111 @r_vm_1
-diff --git a/target/riscv/insn_trans/trans_rvzvkns.c.inc b/target/riscv/insn_trans/trans_rvzvkns.c.inc
-index 62c3cd83e7..0abb7811b7 100644
---- a/target/riscv/insn_trans/trans_rvzvkns.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzvkns.c.inc
-@@ -109,4 +109,13 @@ static bool vaeskf1_check(DisasContext *s, arg_vaeskf1_vi * a)
-            a->rs1 >= 1 && a->rs1 <= 10;
+@@ -924,3 +924,5 @@ vaeskf2_vi      101010 1 ..... ..... 010 ..... 1110111 @r_vm_1
+ 
+ # *** RV64 Zvknh vector crypto extension ***
+ vsha2ms_vv      101101 1 ..... ..... 010 ..... 1110111 @r_vm_1
++vsha2ch_vv      101110 1 ..... ..... 010 ..... 1110111 @r_vm_1
++vsha2cl_vv      101111 1 ..... ..... 010 ..... 1110111 @r_vm_1
+diff --git a/target/riscv/insn_trans/trans_rvzvknh.c.inc b/target/riscv/insn_trans/trans_rvzvknh.c.inc
+index ff30400100..4d4d26eae5 100644
+--- a/target/riscv/insn_trans/trans_rvzvknh.c.inc
++++ b/target/riscv/insn_trans/trans_rvzvknh.c.inc
+@@ -43,3 +43,5 @@ static bool vsha_check(DisasContext *s, arg_rmrr *a)
  }
  
-+static bool vaeskf2_check(DisasContext *s, arg_vaeskf2_vi *a)
-+{
-+    return require_rvv(s) && s->cfg_ptr->ext_zvkns == true &&
-+           vext_check_isa_ill(s) && s->vstart % 4 == 0 && s->sew == MO_32 &&
-+           require_align(a->rd, s->lmul) && require_align(a->rs2, s->lmul) &&
-+           a->rs1 >= 2 && a->rs1 <= 14;
-+}
-+
- GEN_VI_UNMASKED_TRANS(vaeskf1_vi, vaeskf1_check)
-+GEN_VI_UNMASKED_TRANS(vaeskf2_vi, vaeskf2_check)
+ GEN_VV_UNMASKED_TRANS(vsha2ms_vv, vsha_check)
++GEN_VV_UNMASKED_TRANS(vsha2cl_vv, vsha_check)
++GEN_VV_UNMASKED_TRANS(vsha2ch_vv, vsha_check)
 diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
-index 13ceb705cd..50207b4ff0 100644
+index af596cce09..b73581641a 100644
 --- a/target/riscv/vcrypto_helper.c
 +++ b/target/riscv/vcrypto_helper.c
-@@ -405,3 +405,59 @@ void HELPER(vaeskf1_vi)(void *vd_vptr, void *vs2_vptr, uint32_t uimm,
-     /* set tail elements to 1s */
-     vext_set_elems_1s(vd, vta, vl * 4, total_elems * 4);
+@@ -541,3 +541,156 @@ void HELPER(vsha2ms_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
+     vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
+     env->vstart = 0;
  }
 +
-+void HELPER(vaeskf2_vi)(void *vd_vptr, void *vs2_vptr, uint32_t uimm,
-+                        CPURISCVState *env, uint32_t desc)
++static inline uint64_t sum0_64(uint64_t x)
 +{
-+    uint32_t *vd = vd_vptr;
-+    uint32_t *vs2 = vs2_vptr;
-+    uint32_t vl = env->vl;
-+    uint32_t total_elems = vext_get_total_elems(env, desc, 4);
++    return ror64(x, 28) ^ ror64(x, 34) ^ ror64(x, 39);
++}
++
++static inline uint32_t sum0_32(uint32_t x)
++{
++    return ror32(x, 2) ^ ror32(x, 13) ^ ror32(x, 22);
++}
++
++static inline uint64_t sum1_64(uint64_t x)
++{
++    return ror64(x, 14) ^ ror64(x, 18) ^ ror64(x, 41);
++}
++
++static inline uint32_t sum1_32(uint32_t x)
++{
++    return ror32(x, 6) ^ ror32(x, 11) ^ ror32(x, 25);
++}
++
++#define ch(x, y, z) ((x & y) ^ ((~x) & z))
++
++#define maj(x, y, z) ((x & y) ^ (x & z) ^ (y & z))
++
++static void vsha2c_64(uint64_t *vs2, uint64_t *vd, uint64_t *vs1)
++{
++    uint64_t a = vs2[3], b = vs2[2], e = vs2[1], f = vs2[0];
++    uint64_t c = vd[3], d = vd[2], g = vd[1], h = vd[0];
++    uint64_t W0 = vs1[0], W1 = vs1[1];
++    uint64_t T1 = h + sum1_64(e) + ch(e, f, g) + W0;
++    uint64_t T2 = sum0_64(a) + maj(a, b, c);
++
++    h = g;
++    g = f;
++    f = e;
++    e = d + T1;
++    d = c;
++    c = b;
++    b = a;
++    a = T1 + T2;
++
++    T1 = h + sum1_64(e) + ch(e, f, g) + W1;
++    T2 = sum0_64(a) + maj(a, b, c);
++    h = g;
++    g = f;
++    f = e;
++    e = d + T1;
++    d = c;
++    c = b;
++    b = a;
++    a = T1 + T2;
++
++    vd[0] = f;
++    vd[1] = e;
++    vd[2] = b;
++    vd[3] = a;
++}
++
++static void vsha2c_32(uint32_t *vs2, uint32_t *vd, uint32_t *vs1)
++{
++    uint32_t a = vs2[H4(3)], b = vs2[H4(2)], e = vs2[H4(1)], f = vs2[H4(0)];
++    uint32_t c = vd[H4(3)], d = vd[H4(2)], g = vd[H4(1)], h = vd[H4(0)];
++    uint32_t W0 = vs1[H4(0)], W1 = vs1[H4(1)];
++    uint32_t T1 = h + sum1_32(e) + ch(e, f, g) + W0;
++    uint32_t T2 = sum0_32(a) + maj(a, b, c);
++
++    h = g;
++    g = f;
++    f = e;
++    e = d + T1;
++    d = c;
++    c = b;
++    b = a;
++    a = T1 + T2;
++
++    T1 = h + sum1_32(e) + ch(e, f, g) + W1;
++    T2 = sum0_32(a) + maj(a, b, c);
++    h = g;
++    g = f;
++    f = e;
++    e = d + T1;
++    d = c;
++    c = b;
++    b = a;
++    a = T1 + T2;
++
++    vd[H4(0)] = f;
++    vd[H4(1)] = e;
++    vd[H4(2)] = b;
++    vd[H4(3)] = a;
++
++}
++
++void HELPER(vsha2ch_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
++                        uint32_t desc)
++{
++    uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
++    uint32_t esz = 0;
++    uint32_t total_elems;
 +    uint32_t vta = vext_vta(desc);
++
 +    if (env->vl % 4 != 0) {
 +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
 +    }
++
 +    for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) {
-+        uint32_t rk[12];
-+        static const uint32_t rcon[] = {
-+                0x01000000, 0x02000000, 0x04000000, 0x08000000, 0x10000000,
-+                0x20000000, 0x40000000, 0x80000000, 0x1B000000, 0x36000000,
-+        };
-+
-+        rk[0] = bswap32(vd[i * 4 + H4(0)]);
-+        rk[1] = bswap32(vd[i * 4 + H4(1)]);
-+        rk[2] = bswap32(vd[i * 4 + H4(2)]);
-+        rk[3] = bswap32(vd[i * 4 + H4(3)]);
-+        rk[4] = bswap32(vs2[i * 4 + H4(0)]);
-+        rk[5] = bswap32(vs2[i * 4 + H4(1)]);
-+        rk[6] = bswap32(vs2[i * 4 + H4(2)]);
-+        rk[7] = bswap32(vs2[i * 4 + H4(3)]);
-+
-+        if (uimm % 2 == 0) {
-+            rk[8] = rk[0] ^ (AES_Te4[(rk[7] >> 16) & 0xff] & 0xff000000) ^
-+                    (AES_Te4[(rk[7] >> 8) & 0xff] & 0x00ff0000) ^
-+                    (AES_Te4[(rk[7] >> 0) & 0xff] & 0x0000ff00) ^
-+                    (AES_Te4[(rk[7] >> 24) & 0xff] & 0x000000ff) ^
-+                    rcon[(uimm - 1) / 2];
-+            rk[9] = rk[1] ^ rk[8];
-+            rk[10] = rk[2] ^ rk[9];
-+            rk[11] = rk[3] ^ rk[10];
++        if (sew == MO_64) {
++            esz = 8;
++            vsha2c_64(((uint64_t *)vs2) + 4 * i, ((uint64_t *)vd) + 4 * i,
++                        ((uint64_t *)vs1) + 4 * i + 2);
 +        } else {
-+            rk[8] = rk[0] ^ (AES_Te4[(rk[7] >> 24) & 0xff] & 0xff000000) ^
-+                    (AES_Te4[(rk[7] >> 16) & 0xff] & 0x00ff0000) ^
-+                    (AES_Te4[(rk[7] >> 8) & 0xff] & 0x0000ff00) ^
-+                    (AES_Te4[(rk[7] >> 0) & 0xff] & 0x000000ff);
-+            rk[9] = rk[1] ^ rk[8];
-+            rk[10] = rk[2] ^ rk[9];
-+            rk[11] = rk[3] ^ rk[10];
++            esz = 4;
++            vsha2c_32(((uint32_t *)vs2) + 4 * i, ((uint32_t *)vd) + 4 * i,
++                        ((uint32_t *)vs1) + 4 * i + 2);
 +        }
-+
-+        vd[i * 4 + H4(0)] = bswap32(rk[8]);
-+        vd[i * 4 + H4(1)] = bswap32(rk[9]);
-+        vd[i * 4 + H4(2)] = bswap32(rk[10]);
-+        vd[i * 4 + H4(3)] = bswap32(rk[11]);
 +    }
-+    env->vstart = 0;
++
 +    /* set tail elements to 1s */
-+    vext_set_elems_1s(vd, vta, vl * 4, total_elems * 4);
++    total_elems = vext_get_total_elems(env, desc, esz);
++    vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
++    env->vstart = 0;
++}
++
++void HELPER(vsha2cl_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
++                        uint32_t desc)
++{
++    uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
++    uint32_t esz = 0;
++    uint32_t total_elems;
++    uint32_t vta = vext_vta(desc);
++
++    if (env->vl % 4 != 0) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
++    }
++
++    for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) {
++        if (sew == MO_64) {
++            esz = 8;
++            vsha2c_64(((uint64_t *)vs2) + 4 * i, ((uint64_t *)vd) + 4 * i,
++                        (((uint64_t *)vs1) + 4 * i));
++        } else {
++            esz = 4;
++            vsha2c_32(((uint32_t *)vs2) + 4 * i, ((uint32_t *)vd) + 4 * i,
++                        (((uint32_t *)vs1) + 4 * i));
++        }
++    }
++
++    /* set tail elements to 1s */
++    total_elems = vext_get_total_elems(env, desc, esz);
++    vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
++    env->vstart = 0;
 +}
 -- 
 2.39.1
