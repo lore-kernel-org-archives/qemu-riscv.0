@@ -1,27 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIW2A-0007Zp-8k
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:37:00 -0500
+	id 1pIW2H-0007f7-Dp
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:37:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1U-0007A6-6i
+ id 1pIW1U-0007A8-7j
  for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:15 -0500
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1Q-00070J-4O
+ id 1pIW1P-0006zU-Ui
  for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:10 -0500
 Received: from [167.98.27.226] (helo=lawrence-thinkpad.office.codethink.co.uk)
  by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1pIW1J-007gSL-G5; Thu, 19 Jan 2023 14:36:02 +0000
+ id 1pIW1E-007gSL-J4; Thu, 19 Jan 2023 14:35:57 +0000
 From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 To: qemu-riscv@nongnu.org
 Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com,
- Lawrence Hunter <lawrence.hunter@codethink.co.uk>
-Subject: [RFC PATCH 16/39] target/riscv: Add vaesdm.vv decoding,
+ William Salmon <will.salmon@codethink.co.uk>,
+ Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+Subject: [RFC PATCH 07/39] target/riscv: Add vbrev8.v decoding,
  translation and execution support
-Date: Thu, 19 Jan 2023 14:35:05 +0000
-Message-Id: <20230119143528.1290950-17-lawrence.hunter@codethink.co.uk>
+Date: Thu, 19 Jan 2023 14:34:56 +0000
+Message-Id: <20230119143528.1290950-8-lawrence.hunter@codethink.co.uk>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
 References: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
@@ -29,11 +30,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=188.40.203.114;
  envelope-from=lawrence.hunter@codethink.co.uk; helo=imap4.hz.codethink.co.uk
-X-Spam_score_int: -13
-X-Spam_score: -1.4
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, URI_NOVOWEL=0.5 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -46,94 +47,278 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 14:36:16 -0000
+X-List-Received-Date: Thu, 19 Jan 2023 14:36:17 -0000
 
-Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+From: William Salmon <will.salmon@codethink.co.uk>
+
+Co-authored-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+Signed-off-by: William Salmon <will.salmon@codethink.co.uk>
 ---
- target/riscv/helper.h                       |  1 +
- target/riscv/insn32.decode                  |  1 +
- target/riscv/insn_trans/trans_rvzvkns.c.inc |  1 +
- target/riscv/vcrypto_helper.c               | 36 +++++++++++++++++++++
- 4 files changed, 39 insertions(+)
+ include/qemu/bitops.h                      | 32 +++++++++++++++++
+ target/riscv/helper.h                      |  5 +++
+ target/riscv/insn32.decode                 |  1 +
+ target/riscv/insn_trans/trans_rvzvkb.c.inc | 41 +++++++++++++++++++++
+ target/riscv/vcrypto_helper.c              | 10 ++++++
+ target/riscv/vector_helper.c               | 41 ---------------------
+ target/riscv/vector_internals.h            | 42 ++++++++++++++++++++++
+ 7 files changed, 131 insertions(+), 41 deletions(-)
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 020b9861cf..328a026039 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1185,3 +1185,4 @@ DEF_HELPER_4(vaesef_vv, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesef_vs, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesdf_vv, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesdf_vs, void, ptr, ptr, env, i32)
-+DEF_HELPER_4(vaesdm_vv, void, ptr, ptr, env, i32)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 33e5883937..e5f3af999d 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -914,3 +914,4 @@ vaesef_vv       101000 1 ..... 00011 010 ..... 1110111 @r2_vm_1
- vaesef_vs       101001 1 ..... 00011 010 ..... 1110111 @r2_vm_1
- vaesdf_vv       101000 1 ..... 00001 010 ..... 1110111 @r2_vm_1
- vaesdf_vs       101001 1 ..... 00001 010 ..... 1110111 @r2_vm_1
-+vaesdm_vv       101000 1 ..... 00000 010 ..... 1110111 @r2_vm_1
-diff --git a/target/riscv/insn_trans/trans_rvzvkns.c.inc b/target/riscv/insn_trans/trans_rvzvkns.c.inc
-index 7dd61b879e..21ef836fb2 100644
---- a/target/riscv/insn_trans/trans_rvzvkns.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzvkns.c.inc
-@@ -60,3 +60,4 @@ GEN_V_UNMASKED_TRANS(vaesef_vv, vaes_check_vv)
- GEN_V_UNMASKED_TRANS(vaesef_vs, vaes_check_vs)
- GEN_V_UNMASKED_TRANS(vaesdf_vv, vaes_check_vv)
- GEN_V_UNMASKED_TRANS(vaesdf_vs, vaes_check_vs)
-+GEN_V_UNMASKED_TRANS(vaesdm_vv, vaes_check_vv)
-diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
-index d3ba5e9cb8..bac21b5623 100644
---- a/target/riscv/vcrypto_helper.c
-+++ b/target/riscv/vcrypto_helper.c
-@@ -219,6 +219,38 @@ static inline void aes_inv_shift_bytes(uint8_t round_state[4][4])
-     round_state[3][3] = temp;
+diff --git a/include/qemu/bitops.h b/include/qemu/bitops.h
+index 03213ce952..dfce1cb10c 100644
+--- a/include/qemu/bitops.h
++++ b/include/qemu/bitops.h
+@@ -618,4 +618,36 @@ static inline uint64_t half_unshuffle64(uint64_t x)
+     return x;
  }
  
-+static inline uint8_t xtime(uint8_t x)
++static inline uint8_t reverse_bits_byte(uint8_t x)
 +{
-+    return (x << 1) ^ (((x >> 7) & 1) * 0x1b);
++    x = (((x & 0b10101010) >> 1) | ((x & 0b01010101) << 1));
++    x = (((x & 0b11001100) >> 2) | ((x & 0b00110011) << 2));
++    return ((x & 0b11110000) >> 4) | ((x & 0b00001111) << 4);
 +}
 +
-+static inline uint8_t multiply(uint8_t x, uint8_t y)
++static inline uint16_t reverse_bits_byte_2(uint16_t x)
 +{
-+    return (((y & 1) * x) ^ ((y >> 1 & 1) * xtime(x)) ^
-+            ((y >> 2 & 1) * xtime(xtime(x))) ^
-+            ((y >> 3 & 1) * xtime(xtime(xtime(x)))) ^
-+            ((y >> 4 & 1) * xtime(xtime(xtime(xtime(x))))));
++    return (uint16_t)reverse_bits_byte(x & 0xFF) | \
++       (uint16_t)reverse_bits_byte((x >> 8) & 0xFF) << 8;
 +}
 +
-+static inline void aes_inv_mix_cols(uint8_t round_state[4][4])
++static inline uint32_t reverse_bits_byte_4(uint32_t x)
 +{
-+    uint8_t a, b, c, d;
-+    for (int j = 0; j < 4; ++j) {
-+        a = round_state[j][0];
-+        b = round_state[j][1];
-+        c = round_state[j][2];
-+        d = round_state[j][3];
-+        round_state[j][0] = multiply(a, 0x0e) ^ multiply(b, 0x0b) ^
-+                            multiply(c, 0x0d) ^ multiply(d, 0x09);
-+        round_state[j][1] = multiply(a, 0x09) ^ multiply(b, 0x0e) ^
-+                            multiply(c, 0x0b) ^ multiply(d, 0x0d);
-+        round_state[j][2] = multiply(a, 0x0d) ^ multiply(b, 0x09) ^
-+                            multiply(c, 0x0e) ^ multiply(d, 0x0b);
-+        round_state[j][3] = multiply(a, 0x0b) ^ multiply(b, 0x0d) ^
-+                            multiply(c, 0x09) ^ multiply(d, 0x0e);
-+    }
++    return (uint32_t)reverse_bits_byte(x & 0xFF) | \
++       (uint32_t)reverse_bits_byte((x >> 8) & 0xFF) << 8 | \
++       (uint32_t)reverse_bits_byte((x >> 16) & 0xFF) << 16 | \
++       (uint32_t)reverse_bits_byte((x >> 24) & 0xFF) << 24;
 +}
 +
- #define GEN_ZVKNS_HELPER_VV(NAME, ...)                                    \
- void HELPER(NAME)(void *vd_vptr, void *vs2_vptr, CPURISCVState *env,      \
-                   uint32_t desc)                                          \
-@@ -301,3 +333,7 @@ GEN_ZVKNS_HELPER_VV(vaesdf_vv, aes_inv_shift_bytes(round_state);
- GEN_ZVKNS_HELPER_VS(vaesdf_vs, aes_inv_shift_bytes(round_state);
-                     aes_inv_sub_bytes(round_state);
-                     xor_round_key(round_state, (uint8_t *)round_key);)
-+GEN_ZVKNS_HELPER_VV(vaesdm_vv, aes_inv_shift_bytes(round_state);
-+                    aes_inv_sub_bytes(round_state);
-+                    xor_round_key(round_state, (uint8_t *)round_key);
-+                    aes_inv_mix_cols(round_state);)
++static inline uint64_t reverse_bits_byte_8(uint64_t x)
++{
++    return (uint64_t)reverse_bits_byte(x & 0xFF) | \
++       (uint64_t)reverse_bits_byte((x >> 8) & 0xFF) << 8 | \
++       (uint64_t)reverse_bits_byte((x >> 16) & 0xFF) << 16 | \
++       (uint64_t)reverse_bits_byte((x >> 24) & 0xFF) << 24 | \
++       (uint64_t)reverse_bits_byte((x >> 32) & 0xFF) << 32 | \
++       (uint64_t)reverse_bits_byte((x >> 40) & 0xFF) << 40 | \
++       (uint64_t)reverse_bits_byte((x >> 48) & 0xFF) << 48 | \
++       (uint64_t)reverse_bits_byte((x >> 56) & 0xFF) << 56;
++}
+ #endif
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index e5b6b3360f..c94627d8a4 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1162,3 +1162,8 @@ DEF_HELPER_6(vrol_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vrol_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vrol_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vrol_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++
++DEF_HELPER_5(vbrev8_v_b, void, ptr, ptr, ptr, env, i32)
++DEF_HELPER_5(vbrev8_v_h, void, ptr, ptr, ptr, env, i32)
++DEF_HELPER_5(vbrev8_v_w, void, ptr, ptr, ptr, env, i32)
++DEF_HELPER_5(vbrev8_v_d, void, ptr, ptr, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 725f907ad1..782632a165 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -902,3 +902,4 @@ vror_vv         010100 . ..... ..... 000 ..... 1010111 @r_vm
+ vror_vx         010100 . ..... ..... 100 ..... 1010111 @r_vm
+ vror_vi         010100 . ..... ..... 011 ..... 1010111 @r_vm
+ vror_vi2        010101 . ..... ..... 011 ..... 1010111 @r_vm
++vbrev8_v        010010 . ..... 01000 010 ..... 1010111 @r2_vm
+diff --git a/target/riscv/insn_trans/trans_rvzvkb.c.inc b/target/riscv/insn_trans/trans_rvzvkb.c.inc
+index d2a7a92d42..50eee7c0a3 100644
+--- a/target/riscv/insn_trans/trans_rvzvkb.c.inc
++++ b/target/riscv/insn_trans/trans_rvzvkb.c.inc
+@@ -115,3 +115,44 @@ static bool trans_vror_vi2(DisasContext *s, arg_rmrr *a)
+     a->rs1 += 32;
+     return trans_vror_vi(s, a);
+ }
++
++#define GEN_OPIV_TRANS(NAME, CHECK)                                    \
++static bool trans_##NAME(DisasContext *s, arg_rmr * a)                 \
++{                                                                      \
++    if (CHECK(s, a)) {                                                 \
++        uint32_t data = 0;                                             \
++        static gen_helper_gvec_3_ptr * const fns[4] = {                \
++            gen_helper_##NAME##_b,                                     \
++            gen_helper_##NAME##_h,                                     \
++            gen_helper_##NAME##_w,                                     \
++            gen_helper_##NAME##_d,                                     \
++        };                                                             \
++        TCGLabel *over = gen_new_label();                              \
++        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);              \
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);     \
++                                                                       \
++        data = FIELD_DP32(data, VDATA, VM, a->vm);                     \
++        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                 \
++        data = FIELD_DP32(data, VDATA, VTA, s->vta);                   \
++        data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s); \
++        data = FIELD_DP32(data, VDATA, VMA, s->vma);                   \
++        tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),         \
++                           vreg_ofs(s, a->rs2), cpu_env,               \
++                           s->cfg_ptr->vlen / 8, s->cfg_ptr->vlen / 8, \
++                           data, fns[s->sew]);                         \
++        mark_vs_dirty(s);                                              \
++        gen_set_label(over);                                           \
++        return true;                                                   \
++    }                                                                  \
++    return false;                                                      \
++}
++
++static bool vxrev8_check(DisasContext *s, arg_rmr *a)
++{
++    return require_rvv(s) &&
++           s->cfg_ptr->ext_zvkb == true &&
++           vext_check_isa_ill(s) &&
++           vext_check_ss(s, a->rd, a->rs2, a->vm);
++}
++
++GEN_OPIV_TRANS(vbrev8_v, vxrev8_check)
+diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
+index 7ec75c5589..303a656141 100644
+--- a/target/riscv/vcrypto_helper.c
++++ b/target/riscv/vcrypto_helper.c
+@@ -1,6 +1,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/host-utils.h"
+ #include "qemu/bitops.h"
++#include "qemu/bswap.h"
+ #include "cpu.h"
+ #include "exec/memop.h"
+ #include "exec/exec-all.h"
+@@ -115,3 +116,12 @@ GEN_VEXT_VX(vrol_vx_b, 1)
+ GEN_VEXT_VX(vrol_vx_h, 2)
+ GEN_VEXT_VX(vrol_vx_w, 4)
+ GEN_VEXT_VX(vrol_vx_d, 8)
++
++RVVCALL(OPIVV1, vbrev8_v_b, OP_UU_B, H1, H1, reverse_bits_byte)
++RVVCALL(OPIVV1, vbrev8_v_h, OP_UU_H, H2, H2, reverse_bits_byte_2)
++RVVCALL(OPIVV1, vbrev8_v_w, OP_UU_W, H4, H4, reverse_bits_byte_4)
++RVVCALL(OPIVV1, vbrev8_v_d, OP_UU_D, H8, H8, reverse_bits_byte_8)
++GEN_VEXT_V(vbrev8_v_b, 1)
++GEN_VEXT_V(vbrev8_v_h, 2)
++GEN_VEXT_V(vbrev8_v_w, 4)
++GEN_VEXT_V(vbrev8_v_d, 8)
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index ff7b03cbe3..07da4b5e16 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -3437,12 +3437,6 @@ RVVCALL(OPFVF3, vfwnmsac_vf_w, WOP_UUU_W, H8, H4, fwnmsac32)
+ GEN_VEXT_VF(vfwnmsac_vf_h, 4)
+ GEN_VEXT_VF(vfwnmsac_vf_w, 8)
+ 
+-/* Vector Floating-Point Square-Root Instruction */
+-/* (TD, T2, TX2) */
+-#define OP_UU_H uint16_t, uint16_t, uint16_t
+-#define OP_UU_W uint32_t, uint32_t, uint32_t
+-#define OP_UU_D uint64_t, uint64_t, uint64_t
+-
+ #define OPFVV1(NAME, TD, T2, TX2, HD, HS2, OP)        \
+ static void do_##NAME(void *vd, void *vs2, int i,      \
+         CPURISCVState *env)                            \
+@@ -4134,41 +4128,6 @@ GEN_VEXT_CMP_VF(vmfge_vf_h, uint16_t, H2, vmfge16)
+ GEN_VEXT_CMP_VF(vmfge_vf_w, uint32_t, H4, vmfge32)
+ GEN_VEXT_CMP_VF(vmfge_vf_d, uint64_t, H8, vmfge64)
+ 
+-/* Vector Floating-Point Classify Instruction */
+-#define OPIVV1(NAME, TD, T2, TX2, HD, HS2, OP)         \
+-static void do_##NAME(void *vd, void *vs2, int i)      \
+-{                                                      \
+-    TX2 s2 = *((T2 *)vs2 + HS2(i));                    \
+-    *((TD *)vd + HD(i)) = OP(s2);                      \
+-}
+-
+-#define GEN_VEXT_V(NAME, ESZ)                          \
+-void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
+-                  CPURISCVState *env, uint32_t desc)   \
+-{                                                      \
+-    uint32_t vm = vext_vm(desc);                       \
+-    uint32_t vl = env->vl;                             \
+-    uint32_t total_elems =                             \
+-        vext_get_total_elems(env, desc, ESZ);          \
+-    uint32_t vta = vext_vta(desc);                     \
+-    uint32_t vma = vext_vma(desc);                     \
+-    uint32_t i;                                        \
+-                                                       \
+-    for (i = env->vstart; i < vl; i++) {               \
+-        if (!vm && !vext_elem_mask(v0, i)) {           \
+-            /* set masked-off elements to 1s */        \
+-            vext_set_elems_1s(vd, vma, i * ESZ,        \
+-                              (i + 1) * ESZ);          \
+-            continue;                                  \
+-        }                                              \
+-        do_##NAME(vd, vs2, i);                         \
+-    }                                                  \
+-    env->vstart = 0;                                   \
+-    /* set tail elements to 1s */                      \
+-    vext_set_elems_1s(vd, vta, vl * ESZ,               \
+-                      total_elems * ESZ);              \
+-}
+-
+ target_ulong fclass_h(uint64_t frs1)
+ {
+     float16 f = frs1;
+diff --git a/target/riscv/vector_internals.h b/target/riscv/vector_internals.h
+index a0fbac7bf3..f1f16453dc 100644
+--- a/target/riscv/vector_internals.h
++++ b/target/riscv/vector_internals.h
+@@ -123,12 +123,54 @@ void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
+ /* expand macro args before macro */
+ #define RVVCALL(macro, ...)  macro(__VA_ARGS__)
+ 
++/* Vector Floating-Point Square-Root Instruction */
++/* (TD, T2, TX2) */
++#define OP_UU_B uint8_t, uint8_t, uint8_t
++#define OP_UU_H uint16_t, uint16_t, uint16_t
++#define OP_UU_W uint32_t, uint32_t, uint32_t
++#define OP_UU_D uint64_t, uint64_t, uint64_t
++
+ /* (TD, T1, T2, TX1, TX2) */
+ #define OP_UUU_B uint8_t, uint8_t, uint8_t, uint8_t, uint8_t
+ #define OP_UUU_H uint16_t, uint16_t, uint16_t, uint16_t, uint16_t
+ #define OP_UUU_W uint32_t, uint32_t, uint32_t, uint32_t, uint32_t
+ #define OP_UUU_D uint64_t, uint64_t, uint64_t, uint64_t, uint64_t
+ 
++/* Vector Floating-Point Classify Instruction */
++#define OPIVV1(NAME, TD, T2, TX2, HD, HS2, OP)         \
++static void do_##NAME(void *vd, void *vs2, int i)      \
++{                                                      \
++    TX2 s2 = *((T2 *)vs2 + HS2(i));                    \
++    *((TD *)vd + HD(i)) = OP(s2);                      \
++}
++
++#define GEN_VEXT_V(NAME, ESZ)                          \
++void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
++                  CPURISCVState *env, uint32_t desc)   \
++{                                                      \
++    uint32_t vm = vext_vm(desc);                       \
++    uint32_t vl = env->vl;                             \
++    uint32_t total_elems =                             \
++        vext_get_total_elems(env, desc, ESZ);          \
++    uint32_t vta = vext_vta(desc);                     \
++    uint32_t vma = vext_vma(desc);                     \
++    uint32_t i;                                        \
++                                                       \
++    for (i = env->vstart; i < vl; i++) {               \
++        if (!vm && !vext_elem_mask(v0, i)) {           \
++            /* set masked-off elements to 1s */        \
++            vext_set_elems_1s(vd, vma, i * ESZ,        \
++                              (i + 1) * ESZ);          \
++            continue;                                  \
++        }                                              \
++        do_##NAME(vd, vs2, i);                         \
++    }                                                  \
++    env->vstart = 0;                                   \
++    /* set tail elements to 1s */                      \
++    vext_set_elems_1s(vd, vta, vl * ESZ,               \
++                      total_elems * ESZ);              \
++}
++
+ /* operation of two vector elements */
+ typedef void opivv2_fn(void *vd, void *vs1, void *vs2, int i);
+ 
 -- 
 2.39.1
 
