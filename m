@@ -1,26 +1,26 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIWJX-0003mD-Eu
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:54:51 -0500
+	id 1pIWJa-0003n9-JF
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:54:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIWJW-0003lY-LE
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:54:50 -0500
+ id 1pIWJZ-0003mv-RI
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:54:53 -0500
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIWJU-0002gu-Um
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:54:50 -0500
+ id 1pIWJY-0002hk-F0
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:54:53 -0500
 Received: from [167.98.27.226] (helo=lawrence-thinkpad.office.codethink.co.uk)
  by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1pIW1S-007gSL-JO; Thu, 19 Jan 2023 14:36:11 +0000
+ id 1pIW1S-007gSL-21; Thu, 19 Jan 2023 14:36:10 +0000
 From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 To: qemu-riscv@nongnu.org
 Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com,
  Max Chou <max.chou@sifive.com>
-Subject: [RFC PATCH 37/39] target/riscv: Add zvksed cfg property
-Date: Thu, 19 Jan 2023 14:35:26 +0000
-Message-Id: <20230119143528.1290950-38-lawrence.hunter@codethink.co.uk>
+Subject: [RFC PATCH 35/39] crypto: Move SM4_SBOXWORD from target/riscv
+Date: Thu, 19 Jan 2023 14:35:24 +0000
+Message-Id: <20230119143528.1290950-36-lawrence.hunter@codethink.co.uk>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
 References: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
@@ -45,41 +45,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 14:54:50 -0000
+X-List-Received-Date: Thu, 19 Jan 2023 14:54:54 -0000
 
 From: Max Chou <max.chou@sifive.com>
+
+    - Share SM4_SBOXWORD between target/riscv and target/arm.
 
 Signed-off-by: Max Chou <max.chou@sifive.com>
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/cpu.c | 1 +
- target/riscv/cpu.h | 1 +
- 2 files changed, 2 insertions(+)
+ include/crypto/sm4.h       |  7 +++++++
+ target/arm/crypto_helper.c | 10 ++--------
+ 2 files changed, 9 insertions(+), 8 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 4bd404faa0..d298c9bbfb 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -105,6 +105,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zvknha, true, PRIV_VERSION_1_12_0, ext_zvknha),
-     ISA_EXT_DATA_ENTRY(zvknhb, true, PRIV_VERSION_1_12_0, ext_zvknhb),
-     ISA_EXT_DATA_ENTRY(zvkns, true, PRIV_VERSION_1_12_0, ext_zvkns),
-+    ISA_EXT_DATA_ENTRY(zvksed, true, PRIV_VERSION_1_12_0, ext_zvksed),
-     ISA_EXT_DATA_ENTRY(zvksh, true, PRIV_VERSION_1_12_0, ext_zvksh),
-     ISA_EXT_DATA_ENTRY(zhinx, true, PRIV_VERSION_1_12_0, ext_zhinx),
-     ISA_EXT_DATA_ENTRY(zhinxmin, true, PRIV_VERSION_1_12_0, ext_zhinxmin),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index b3b1174d74..89e9fd61da 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -466,6 +466,7 @@ struct RISCVCPUConfig {
-     bool ext_zvknha;
-     bool ext_zvknhb;
-     bool ext_zvkns;
-+    bool ext_zvksed;
-     bool ext_zvksh;
-     bool ext_zmmul;
-     bool ext_smaia;
+diff --git a/include/crypto/sm4.h b/include/crypto/sm4.h
+index 9bd3ebc62e..33478562a4 100644
+--- a/include/crypto/sm4.h
++++ b/include/crypto/sm4.h
+@@ -1,6 +1,13 @@
+ #ifndef QEMU_SM4_H
+ #define QEMU_SM4_H
+ 
++#define SM4_SBOXWORD(WORD) ( \
++    sm4_sbox[((WORD) >> 24) & 0xff] << 24 | \
++    sm4_sbox[((WORD) >> 16) & 0xff] << 16 | \
++    sm4_sbox[((WORD) >>  8) & 0xff] <<  8 | \
++    sm4_sbox[((WORD) >>  0) & 0xff] <<  0   \
++)
++
+ extern const uint8_t sm4_sbox[256];
+ 
+ #endif
+diff --git a/target/arm/crypto_helper.c b/target/arm/crypto_helper.c
+index d28690321f..4e97af9879 100644
+--- a/target/arm/crypto_helper.c
++++ b/target/arm/crypto_helper.c
+@@ -707,10 +707,7 @@ static void do_crypto_sm4e(uint64_t *rd, uint64_t *rn, uint64_t *rm)
+             CR_ST_WORD(d, (i + 3) % 4) ^
+             CR_ST_WORD(n, i);
+ 
+-        t = sm4_sbox[t & 0xff] |
+-            sm4_sbox[(t >> 8) & 0xff] << 8 |
+-            sm4_sbox[(t >> 16) & 0xff] << 16 |
+-            sm4_sbox[(t >> 24) & 0xff] << 24;
++        t = SM4_SBOXWORD(t);
+ 
+         CR_ST_WORD(d, i) ^= t ^ rol32(t, 2) ^ rol32(t, 10) ^ rol32(t, 18) ^
+                             rol32(t, 24);
+@@ -744,10 +741,7 @@ static void do_crypto_sm4ekey(uint64_t *rd, uint64_t *rn, uint64_t *rm)
+             CR_ST_WORD(d, (i + 3) % 4) ^
+             CR_ST_WORD(m, i);
+ 
+-        t = sm4_sbox[t & 0xff] |
+-            sm4_sbox[(t >> 8) & 0xff] << 8 |
+-            sm4_sbox[(t >> 16) & 0xff] << 16 |
+-            sm4_sbox[(t >> 24) & 0xff] << 24;
++        t = SM4_SBOXWORD(t);
+ 
+         CR_ST_WORD(d, i) ^= t ^ rol32(t, 13) ^ rol32(t, 23);
+     }
 -- 
 2.39.1
 
