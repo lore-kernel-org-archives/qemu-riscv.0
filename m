@@ -1,59 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIIiY-0007w0-W4
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Jan 2023 19:23:47 -0500
+	id 1pIIkO-0000GX-9N
+	for mharc-qemu-riscv@gnu.org; Wed, 18 Jan 2023 19:25:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIIiX-0007vh-9H; Wed, 18 Jan 2023 19:23:45 -0500
-Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
+ id 1pIIkM-0000GG-Ve; Wed, 18 Jan 2023 19:25:39 -0500
+Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIIiV-0000MX-5s; Wed, 18 Jan 2023 19:23:44 -0500
-Received: by mail-ua1-x92b.google.com with SMTP id b18so114817uan.11;
- Wed, 18 Jan 2023 16:23:42 -0800 (PST)
+ id 1pIIkL-0000rs-F3; Wed, 18 Jan 2023 19:25:38 -0500
+Received: by mail-vs1-xe32.google.com with SMTP id v127so509741vsb.12;
+ Wed, 18 Jan 2023 16:25:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HXdUVU3KNzqbrwxdUbStrYGaHHOZeSpZYIbj0MSwj+A=;
- b=gA75PhX+A+mEnwe9mhxDAcPZN1tL9sBkyVoZkR37n3RQYF+1TML+A+IM4d1xY8DvbA
- wSkVFi0G47tAWB7m04wLqr/N5j4mRzG6RNf2BrMcAup+sQlqHN8kWerIs2gffLKArnxM
- 92eCIkAcb44tG+ymNejFewspdGWmZwzNWTv0amDUc9KEopReOaz/meWCOKxEJgCKUCty
- v+m2nbcHR8i/YvEEXP7SRIsRwNYtFQ/+Jmm+hzIjobmrLxywcXgZQ/UCKIehk3ipYNjZ
- 0x9bPPnGJO+XnrmH7iEKhBqUgNxS2yihu+zbk/vXoscZ1nsXV2o3dn3XRSH5ohnodfOa
- UpPg==
+ bh=HEdRdCDC7Rd8VCNhGbhhnwuK4D74h4j/IilETQOk5fg=;
+ b=PjmjpmAoeJGImFxUY8J7CzbEOSIToMQOlL3ZLUE8aZE5cVUrcPR8KE92bnRcJ44pzl
+ SoQzqzukgjBBBqK69lWGZuRVeXAOyQeK+UFPDaSslX+EcuBitjTFFl5WKuwdXRhAXcmA
+ ABvdiyDcvIbfZGoIBvNGnlQYkXlQGrNc1/nlrIuBu8Pgg4vHvKBKGpps7VB+QZW5aR2+
+ 6OEWbX+u0TDO+wD4f1VY6jYZxWXafxVYVQefDbQXtSYEikexB/J0+ndBgGlR+RfW8MQL
+ 9vrs1lDB7joUKkRA/XG5Qqv9lR6uLuoGbeyIYNFSamb2C9DP0mbMu7CfMCcQHo6MNgiI
+ dx0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HXdUVU3KNzqbrwxdUbStrYGaHHOZeSpZYIbj0MSwj+A=;
- b=tCUekSnM0QmBu/d1K0mB8x1U/83vqds0Urf0oJW9JwlTHgPtHUSrlZiD/20thKiGzt
- tfYPIq91VXlpTjGJvNgpOdeofLMJApPV2hkJd0jtPie+i2uuk4TAWOfeB23tbdr4Yxei
- sP3sPjoK+9on50cxeCJnPBfElZ2JoQlVEH1NBknnYKZv1009XWv6uBN4R3xgAa+LEGSR
- tosTeq6iRSsLFC5zOY5CY2PsRIRV5Q+Gfh/LjkvKOHvx3fHa8cQczcIFuirRsa6L2PU/
- nfH/nwS2/BI0iv889CtMn1usIfHhDAWr21MewVUVU9nZBVhtI7D1H8s/lWX+Z4e2qpm2
- rstQ==
-X-Gm-Message-State: AFqh2kp/0K1qz/jAIczHGd4YWTmGJxwi46M704ZD+LbHl5UEyFnBPor8
- ey0Gr1vj691ulIxuy5hZFBnuMfbnlznMFni8We0=
-X-Google-Smtp-Source: AMrXdXt7upsKWeG6AfDENOilcqgc1XV3XJ1P9u+/nWUpOeQxajzCRT/CSy6MBQer6GNrDdrpV5gcP0D130ESeC4Bl3Y=
-X-Received: by 2002:ab0:3b8d:0:b0:419:2865:3ae7 with SMTP id
- p13-20020ab03b8d000000b0041928653ae7mr1066784uaw.70.1674087819745; Wed, 18
- Jan 2023 16:23:39 -0800 (PST)
+ bh=HEdRdCDC7Rd8VCNhGbhhnwuK4D74h4j/IilETQOk5fg=;
+ b=GIvwkesZ0nkBtkTaN/TVuPoUJehRv+lPX7sIKBn4BHU0O6kfgKQS/8sLM3LCc3C5Mu
+ gSTVkYvZFdNnaJ3Z2WS+Ki31aX/b5q/fAsfQ0ua1aL+r+XAxNaie+7YQYifgzkzoTwqm
+ lDxDfYj6mg/f/RHKa84gDwGUMILGPAex7wgl5qa7+CPoM3XCrBcJ7aMpXzw4izWiDxui
+ 7651/H6Bu9aQSZHtF3wBaqNltaMjJt9hwFeThwnjQOcuTuVMsIPjzWfeb6ipU2e5Dfiv
+ S/U6RYgVw8ipYej5W1qSizzc9qqGW0ZmoXkSJM2/X/hISZXZgVCTv9esxoUfnRuwDloy
+ FfvA==
+X-Gm-Message-State: AFqh2ko/Uf6pQWKRTjyH0eynAa/6TmK1CaVVo7hqKwqe5g+QRCgWQlku
+ iDhxJW4fXFEhgnAhzjIgY5gHRJpJNF1Z5R6FbQkkIYzGrjA=
+X-Google-Smtp-Source: AMrXdXu7BGwSlQNPAFe8ULRlsc5F+9kJ3nkFXtQlt7uInA/F/ZInI7z0wZRsxVFlwiqkYwI28sePTe2XrOLr3A+3G1g=
+X-Received: by 2002:a67:eb10:0:b0:3c9:8cc2:dd04 with SMTP id
+ a16-20020a67eb10000000b003c98cc2dd04mr1325314vso.73.1674087936098; Wed, 18
+ Jan 2023 16:25:36 -0800 (PST)
 MIME-Version: 1.0
-References: <20230117132751.229738-1-dbarboza@ventanamicro.com>
- <20230117132751.229738-2-dbarboza@ventanamicro.com>
-In-Reply-To: <20230117132751.229738-2-dbarboza@ventanamicro.com>
+References: <20230113103453.42776-1-alexghiti@rivosinc.com>
+ <20230113103453.42776-3-alexghiti@rivosinc.com>
+ <20230117163138.jze47hjeeuwu2k4j@orel>
+ <CAKmqyKNFX_ovg4Bp_30o0g4Jd5XJ98i9LdFgejsDmGW4iL2+OA@mail.gmail.com>
+ <20230118121916.6aqj57leen72z5tz@orel>
+In-Reply-To: <20230118121916.6aqj57leen72z5tz@orel>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 19 Jan 2023 10:23:13 +1000
-Message-ID: <CAKmqyKOQPge==r7OB4FL6H-bY8Je9XK1xxqYb-e=EtPTa-XNQw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] hw/riscv/virt.c: move create_fw_cfg() back to
- virt_machine_init()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng.cn@gmail.com
+Date: Thu, 19 Jan 2023 10:25:10 +1000
+Message-ID: <CAKmqyKNcd3JOZgPb23idrzVjxHj+HHwPz6f6xPEp2oVGJEZKpg@mail.gmail.com>
+Subject: Re: [PATCH v5 2/2] riscv: Allow user to set the satp mode
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Alexandre Ghiti <alexghiti@rivosinc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Ludovic Henry <ludovic@rivosinc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,75 +79,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 00:23:45 -0000
+X-List-Received-Date: Thu, 19 Jan 2023 00:25:39 -0000
 
-On Tue, Jan 17, 2023 at 11:28 PM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Wed, Jan 18, 2023 at 10:19 PM Andrew Jones <ajones@ventanamicro.com> wrote:
 >
-> Commit 1c20d3ff6004 ("hw/riscv: virt: Add a machine done notifier")
-> moved the initialization of fw_cfg to the virt_machine_done() callback.
+> On Wed, Jan 18, 2023 at 10:28:46AM +1000, Alistair Francis wrote:
+> > On Wed, Jan 18, 2023 at 2:32 AM Andrew Jones <ajones@ventanamicro.com> wrote:
+> > >
+> > > On Fri, Jan 13, 2023 at 11:34:53AM +0100, Alexandre Ghiti wrote:
+> ...
+> > > > +
+> > > > +    /* Get rid of 32-bit/64-bit incompatibility */
+> > > > +    for (int i = 0; i < 16; ++i) {
+> > > > +        if ((cpu->cfg.satp_mode.map & (1 << i)) && !valid_vm[i]) {
+> > >
+> > > If we ever define mode=1 for rv64, then 'sv32=on' will be incorrectly
+> > > accepted as an alias. I think we should simply not define the sv32
+> > > property for rv64 nor the rv64-only modes for rv32. So, down in
+> > > riscv_add_satp_mode_properties() we can add some
+> > >
+> > >   #if defined(TARGET_RISCV32)
+> > >   ...
+> > >   #elif defined(TARGET_RISCV64)
+> > >   ...
+> > >   #endif
+> >
+> > Do not add any #if defined(TARGET_RISCV32) to QEMU.
+> >
+> > We are aiming for the riscv64-softmmu to be able to emulate 32-bit
+> > CPUs and compile time macros are the wrong solution here. Instead you
+> > can get the xlen of the hart and use that.
+> >
 >
-> Problem is that the validation of fw_cfg by devices such as ramfb is
-> done before the machine done notifier is called. Moving create_fw_cfg()
-> to machine_done() results in QEMU failing to boot when using a ramfb
-> device:
+> Does this mean we want to be able to do the following?
 >
-> ./qemu-system-riscv64 -machine virt -device ramfb -serial stdio
-> qemu-system-riscv64: -device ramfb: ramfb device requires fw_cfg with DMA
->
-> The fix is simple: move create_fw_cfg() config back to
-> virt_machine_init(). This happens to be the same way the ARM 'virt'
-> machine deals with fw_cfg (see machvirt_init() and virt_machine_done()
-> in hw/arm/virt.c), so we're keeping consistency with how other machines
-> handle this device.
->
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1343
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>   qemu-system-riscv64 -cpu rv32,sv32=on ...
 
-Thanks!
+That's the plan
 
-Applied to riscv-to-apply.next
+>
+> If so, then can we move the object_property_add() for sv32 to
+> rv32_base_cpu_init() and the rest to rv64_base_cpu_init()?
+> Currently, that would be doing the same thing as proposed above,
+> since those functions are under TARGET_RISCV* defines, but I guess
+> the object_property_add()'s would then be in more or less the right
+> places for when the 32-bit emulation support work is started.
+
+Sounds like a good idea :)
 
 Alistair
 
-> ---
->  hw/riscv/virt.c | 14 +++++++-------
->  1 file changed, 7 insertions(+), 7 deletions(-)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index e6d4f06e8d..4a11b4b010 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1254,13 +1254,6 @@ static void virt_machine_done(Notifier *notifier, void *data)
->      firmware_end_addr = riscv_find_and_load_firmware(machine, firmware_name,
->                                                       start_addr, NULL);
->
-> -    /*
-> -     * Init fw_cfg.  Must be done before riscv_load_fdt, otherwise the device
-> -     * tree cannot be altered and we get FDT_ERR_NOSPACE.
-> -     */
-> -    s->fw_cfg = create_fw_cfg(machine);
-> -    rom_set_fw(s->fw_cfg);
-> -
->      if (drive_get(IF_PFLASH, 0, 1)) {
->          /*
->           * S-mode FW like EDK2 will be kept in second plash (unit 1).
-> @@ -1468,6 +1461,13 @@ static void virt_machine_init(MachineState *machine)
->      memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
->                                  mask_rom);
->
-> +    /*
-> +     * Init fw_cfg. Must be done before riscv_load_fdt, otherwise the
-> +     * device tree cannot be altered and we get FDT_ERR_NOSPACE.
-> +     */
-> +    s->fw_cfg = create_fw_cfg(machine);
-> +    rom_set_fw(s->fw_cfg);
-> +
->      /* SiFive Test MMIO device */
->      sifive_test_create(memmap[VIRT_TEST].base);
->
-> --
-> 2.39.0
->
->
+> Thanks,
+> drew
 
