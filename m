@@ -1,29 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIW2x-0008Uk-32
+	id 1pIW2x-00005Z-A0
 	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 09:37:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1Q-000790-73
+ id 1pIW1S-00079q-MR
  for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:15 -0500
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pIW1J-0006z2-Id
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:06 -0500
+ id 1pIW1P-000701-Uh
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 09:36:10 -0500
 Received: from [167.98.27.226] (helo=lawrence-thinkpad.office.codethink.co.uk)
  by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1pIW1D-007gSL-01; Thu, 19 Jan 2023 14:35:55 +0000
+ id 1pIW1I-007gSL-53; Thu, 19 Jan 2023 14:36:01 +0000
 From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 To: qemu-riscv@nongnu.org
 Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com,
- Lawrence Hunter <lawrence.hunter@codethink.co.uk>,
- Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>,
- Nazar Kazakov <nazar.kazakov@codethink.co.uk>
-Subject: [RFC PATCH 03/39] target/riscv: Add vclmul.vx decoding,
+ Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+Subject: [RFC PATCH 13/39] target/riscv: Add vaesef.vs decoding,
  translation and execution support
-Date: Thu, 19 Jan 2023 14:34:52 +0000
-Message-Id: <20230119143528.1290950-4-lawrence.hunter@codethink.co.uk>
+Date: Thu, 19 Jan 2023 14:35:02 +0000
+Message-Id: <20230119143528.1290950-14-lawrence.hunter@codethink.co.uk>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
 References: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
@@ -31,11 +29,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=188.40.203.114;
  envelope-from=lawrence.hunter@codethink.co.uk; helo=imap4.hz.codethink.co.uk
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+X-Spam_score_int: -13
+X-Spam_score: -1.4
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, URI_NOVOWEL=0.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -49,237 +47,109 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 19 Jan 2023 14:36:16 -0000
-X-List-Received-Date: Thu, 19 Jan 2023 14:36:16 -0000
-X-List-Received-Date: Thu, 19 Jan 2023 14:36:16 -0000
-X-List-Received-Date: Thu, 19 Jan 2023 14:36:16 -0000
 
-Co-authored-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
-Co-authored-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
-Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
-Signed-off-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
 Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 ---
- target/riscv/helper.h                      |  1 +
- target/riscv/insn32.decode                 |  1 +
- target/riscv/insn_trans/trans_rvzvkb.c.inc | 54 ++++++++++++++++++++++
- target/riscv/vcrypto_helper.c              | 12 +++++
- target/riscv/vector_helper.c               | 36 ---------------
- target/riscv/vector_internals.c            | 24 ++++++++++
- target/riscv/vector_internals.h            | 16 +++++++
- 7 files changed, 108 insertions(+), 36 deletions(-)
+ target/riscv/helper.h                       |  1 +
+ target/riscv/insn32.decode                  |  1 +
+ target/riscv/insn_trans/trans_rvzvkns.c.inc | 18 ++++++++++
+ target/riscv/vcrypto_helper.c               | 38 +++++++++++++++++++++
+ 4 files changed, 58 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index e9127c9ccb..6c786ef6f3 100644
+index bdfa63302e..42349837ef 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1139,3 +1139,4 @@ DEF_HELPER_FLAGS_3(sm4ks, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
+@@ -1182,3 +1182,4 @@ DEF_HELPER_6(vandn_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vandn_vx_d, void, ptr, ptr, tl, ptr, env, i32)
  
- /* Vector crypto functions */
- DEF_HELPER_6(vclmul_vv, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vclmul_vx, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_4(vaesef_vv, void, ptr, ptr, env, i32)
++DEF_HELPER_4(vaesef_vs, void, ptr, ptr, env, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 5ddee69d60..4a7421354d 100644
+index fdaab9a189..0d65c2ea27 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -893,3 +893,4 @@ sm4ks       .. 11010 ..... ..... 000 ..... 0110011 @k_aes
+@@ -911,3 +911,4 @@ vandn_vx        000001 . ..... ..... 100 ..... 1010111 @r_vm
  
- # *** RV64 Zvkb vector crypto extension ***
- vclmul_vv       001100 . ..... ..... 010 ..... 1010111 @r_vm
-+vclmul_vx       001100 . ..... ..... 110 ..... 1010111 @r_vm
-diff --git a/target/riscv/insn_trans/trans_rvzvkb.c.inc b/target/riscv/insn_trans/trans_rvzvkb.c.inc
-index fb1995f737..6e8b81136c 100644
---- a/target/riscv/insn_trans/trans_rvzvkb.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzvkb.c.inc
-@@ -39,3 +39,57 @@ static bool vclmul_vv_check(DisasContext *s, arg_rmrr *a)
+ # *** RV64 Zvkns vector crypto extension ***
+ vaesef_vv       101000 1 ..... 00011 010 ..... 1110111 @r2_vm_1
++vaesef_vs       101001 1 ..... 00011 010 ..... 1110111 @r2_vm_1
+diff --git a/target/riscv/insn_trans/trans_rvzvkns.c.inc b/target/riscv/insn_trans/trans_rvzvkns.c.inc
+index f079425614..dc4310882d 100644
+--- a/target/riscv/insn_trans/trans_rvzvkns.c.inc
++++ b/target/riscv/insn_trans/trans_rvzvkns.c.inc
+@@ -39,4 +39,22 @@ static bool vaes_check_vv(DisasContext *s, arg_rmr *a)
+            require_align(a->rd, s->lmul) && require_align(a->rs2, s->lmul) &&
+            s->vstart % 4 == 0 && s->sew == MO_32;
  }
- 
- GEN_VV_MASKED_TRANS(vclmul_vv, vclmul_vv_check)
 +
-+#define GEN_VX_MASKED_TRANS(NAME, CHECK)                                \
-+static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                  \
-+{                                                                       \
-+    if (CHECK(s, a)) {                                                  \
-+        TCGv_ptr rd_v, v0_v, rs2_v;                                     \
-+        TCGv rs1;                                                       \
-+        TCGv_i32 desc;                                                  \
-+        uint32_t data = 0;                                              \
-+                                                                        \
-+        TCGLabel *over = gen_new_label();                               \
-+        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);               \
-+        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);      \
-+                                                                        \
-+        data = FIELD_DP32(data, VDATA, VM, a->vm);                      \
-+        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                  \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);                    \
-+        data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);  \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);                    \
-+                                                                        \
-+        rd_v = tcg_temp_new_ptr();                                      \
-+        v0_v = tcg_temp_new_ptr();                                      \
-+        rs1 = get_gpr(s, a->rs1, EXT_ZERO);                             \
-+        rs2_v = tcg_temp_new_ptr();                                     \
-+        desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,         \
-+                                          s->cfg_ptr->vlen / 8, data)); \
-+        tcg_gen_addi_ptr(rd_v, cpu_env, vreg_ofs(s, a->rd));            \
-+        tcg_gen_addi_ptr(v0_v, cpu_env, vreg_ofs(s, 0));                \
-+        tcg_gen_addi_ptr(rs2_v, cpu_env, vreg_ofs(s, a->rs2));          \
-+        gen_helper_##NAME(rd_v, v0_v, rs1, rs2_v, cpu_env, desc);       \
-+        tcg_temp_free_ptr(rd_v);                                        \
-+        tcg_temp_free_ptr(v0_v);                                        \
-+        tcg_temp_free_ptr(rs2_v);                                       \
-+                                                                        \
-+        mark_vs_dirty(s);                                               \
-+        gen_set_label(over);                                            \
-+        return true;                                                    \
-+    }                                                                   \
-+    return false;                                                       \
-+}
-+
-+static bool zvkb_vx_check(DisasContext *s, arg_rmrr *a)
++static bool vaes_check_overlap(DisasContext *s, int vd, int vs2)
 +{
-+    return opivx_check(s, a) &&
-+           s->cfg_ptr->ext_zvkb == true;
++    int8_t op_size = s->lmul <= 0 ? 1 : 1 << s->lmul;
++    return !is_overlapped(vd, op_size, vs2, op_size);
 +}
 +
-+static bool vclmul_vx_check(DisasContext *s, arg_rmrr *a)
++static bool vaes_check_vs(DisasContext *s, arg_rmr *a)
 +{
-+    return zvkb_vx_check(s, a) &&
-+           s->sew == MO_64;
++    return require_rvv(s) &&
++           vaes_check_overlap(s, a->rd, a->rs2) &&
++           s->cfg_ptr->ext_zvkns == true &&
++           vext_check_isa_ill(s) &&
++           require_align(a->rd, s->lmul) && require_align(a->rs2, s->lmul) &&
++           s->vstart % 4 == 0 && s->sew == MO_32;
 +}
 +
-+GEN_VX_MASKED_TRANS(vclmul_vx, vclmul_vx_check)
+ GEN_V_UNMASKED_TRANS(vaesef_vv, vaes_check_vv)
++GEN_V_UNMASKED_TRANS(vaesef_vs, vaes_check_vs)
 diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
-index 8a11e56754..c453d348ad 100644
+index 59d7d32a05..f59e090c03 100644
 --- a/target/riscv/vcrypto_helper.c
 +++ b/target/riscv/vcrypto_helper.c
-@@ -20,4 +20,16 @@ static void do_vclmul_vv(void *vd, void *vs1, void *vs2, int i)
-     ((uint64_t *)vd)[i] = result;
+@@ -226,6 +226,44 @@ void HELPER(NAME)(void *vd_vptr, void *vs2_vptr, CPURISCVState *env,      \
+     vext_set_elems_1s(vd, vta, vl * 4, total_elems * 4);                  \
  }
  
-+static void do_vclmul_vx(void *vd, target_long rs1, void *vs2, int i)
-+{
-+    uint64_t result = 0;
-+    for (int j = 63; j >= 0; j--) {
-+        if ((rs1 >> j) & 1) {
-+            result ^= (((uint64_t *)vs2)[i] << j);
-+        }
-+    }
-+    ((uint64_t *)vd)[i] = result;
++#define GEN_ZVKNS_HELPER_VS(NAME, ...)                                    \
++void HELPER(NAME)(void *vd_vptr, void *vs2_vptr, CPURISCVState *env,      \
++                  uint32_t desc)                                          \
++{                                                                         \
++    uint64_t *vd = vd_vptr;                                               \
++    uint64_t *vs2 = vs2_vptr;                                             \
++    uint32_t vl = env->vl;                                                \
++    uint32_t total_elems = vext_get_total_elems(env, desc, 4);            \
++    uint32_t vta = vext_vta(desc);                                        \
++    if (env->vl % 4 != 0) {                                               \
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());     \
++    }                                                                     \
++    for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) {            \
++        uint64_t round_key[2] = {                                         \
++            cpu_to_le64(vs2[0]),                                          \
++            cpu_to_le64(vs2[1]),                                          \
++        };                                                                \
++        uint8_t round_state[4][4];                                        \
++        cpu_to_le64s(vd + i * 2 + 0);                                     \
++        cpu_to_le64s(vd + i * 2 + 1);                                     \
++        for (int j = 0; j < 16; j++) {                                    \
++            round_state[j / 4][j % 4] = ((uint8_t *)(vd + i * 2))[j];     \
++        }                                                                 \
++        __VA_ARGS__;                                                      \
++        for (int j = 0; j < 16; j++) {                                    \
++            ((uint8_t *)(vd + i * 2))[j] = round_state[j / 4][j % 4];     \
++        }                                                                 \
++        le64_to_cpus(vd + i * 2 + 0);                                     \
++        le64_to_cpus(vd + i * 2 + 1);                                     \
++    }                                                                     \
++    env->vstart = 0;                                                      \
++    /* set tail elements to 1s */                                         \
++    vext_set_elems_1s(vd, vta, vl * 4, total_elems * 4);                  \
 +}
 +
- GEN_VEXT_VV(vclmul_vv, 8)
-+GEN_VEXT_VX(vclmul_vx, 8)
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index def1b21414..ab470092f6 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -747,8 +747,6 @@ GEN_VEXT_VV(vsub_vv_h, 2)
- GEN_VEXT_VV(vsub_vv_w, 4)
- GEN_VEXT_VV(vsub_vv_d, 8)
- 
--typedef void opivx2_fn(void *vd, target_long s1, void *vs2, int i);
--
- /*
-  * (T1)s1 gives the real operator type.
-  * (TX1)(T1)s1 expands the operator type of widen or narrow operations.
-@@ -773,40 +771,6 @@ RVVCALL(OPIVX2, vrsub_vx_h, OP_SSS_H, H2, H2, DO_RSUB)
- RVVCALL(OPIVX2, vrsub_vx_w, OP_SSS_W, H4, H4, DO_RSUB)
- RVVCALL(OPIVX2, vrsub_vx_d, OP_SSS_D, H8, H8, DO_RSUB)
- 
--static void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
--                       CPURISCVState *env, uint32_t desc,
--                       opivx2_fn fn, uint32_t esz)
--{
--    uint32_t vm = vext_vm(desc);
--    uint32_t vl = env->vl;
--    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
--    uint32_t vta = vext_vta(desc);
--    uint32_t vma = vext_vma(desc);
--    uint32_t i;
--
--    for (i = env->vstart; i < vl; i++) {
--        if (!vm && !vext_elem_mask(v0, i)) {
--            /* set masked-off elements to 1s */
--            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
--            continue;
--        }
--        fn(vd, s1, vs2, i);
--    }
--    env->vstart = 0;
--    /* set tail elements to 1s */
--    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
--}
--
--/* generate the helpers for OPIVX */
--#define GEN_VEXT_VX(NAME, ESZ)                            \
--void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
--                  void *vs2, CPURISCVState *env,          \
--                  uint32_t desc)                          \
--{                                                         \
--    do_vext_vx(vd, v0, s1, vs2, env, desc,                \
--               do_##NAME, ESZ);                           \
--}
--
- GEN_VEXT_VX(vadd_vx_b, 1)
- GEN_VEXT_VX(vadd_vx_h, 2)
- GEN_VEXT_VX(vadd_vx_w, 4)
-diff --git a/target/riscv/vector_internals.c b/target/riscv/vector_internals.c
-index a264797882..b23fa4dd74 100644
---- a/target/riscv/vector_internals.c
-+++ b/target/riscv/vector_internals.c
-@@ -37,3 +37,27 @@ void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
-     /* set tail elements to 1s */
-     vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
- }
-+
-+void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-+                CPURISCVState *env, uint32_t desc,
-+                opivx2_fn fn, uint32_t esz)
-+{
-+    uint32_t vm = vext_vm(desc);
-+    uint32_t vl = env->vl;
-+    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-+    uint32_t vta = vext_vta(desc);
-+    uint32_t vma = vext_vma(desc);
-+    uint32_t i;
-+
-+    for (i = env->vstart; i < vl; i++) {
-+        if (!vm && !vext_elem_mask(v0, i)) {
-+            /* set masked-off elements to 1s */
-+            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
-+            continue;
-+        }
-+        fn(vd, s1, vs2, i);
-+    }
-+    env->vstart = 0;
-+    /* set tail elements to 1s */
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
-+}
-diff --git a/target/riscv/vector_internals.h b/target/riscv/vector_internals.h
-index f61803acc0..49529d2379 100644
---- a/target/riscv/vector_internals.h
-+++ b/target/riscv/vector_internals.h
-@@ -113,4 +113,20 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-                do_##NAME, ESZ);                           \
- }
- 
-+typedef void opivx2_fn(void *vd, target_long s1, void *vs2, int i);
-+
-+void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-+                CPURISCVState *env, uint32_t desc,
-+                opivx2_fn fn, uint32_t esz);
-+
-+/* generate the helpers for OPIVX */
-+#define GEN_VEXT_VX(NAME, ESZ)                            \
-+void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
-+                  void *vs2, CPURISCVState *env,          \
-+                  uint32_t desc)                          \
-+{                                                         \
-+    do_vext_vx(vd, v0, s1, vs2, env, desc,                \
-+               do_##NAME, ESZ);                           \
-+}
-+
- #endif /* TARGET_RISCV_VECTOR_INTERNAL_H */
+ GEN_ZVKNS_HELPER_VV(vaesef_vv, aes_sub_bytes(round_state);
+                     aes_shift_bytes(round_state);
+                     xor_round_key(round_state, (uint8_t *)round_key);)
++GEN_ZVKNS_HELPER_VS(vaesef_vs, aes_sub_bytes(round_state);
++                    aes_shift_bytes(round_state);
++                    xor_round_key(round_state, (uint8_t *)round_key);)
 -- 
 2.39.1
 
