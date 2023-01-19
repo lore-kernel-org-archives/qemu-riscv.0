@@ -1,40 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIOuw-0006js-W1
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 02:00:59 -0500
+	id 1pIOv5-0006w3-Ev
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 02:01:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIOuN-0006OD-AD
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 02:00:23 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIOuY-0006XY-1N
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 02:00:35 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIOuK-00089u-4D
- for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 02:00:22 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pIOuM-0008E5-SY
+ for qemu-riscv@nongnu.org; Thu, 19 Jan 2023 02:00:33 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1674111607;
+ s=mimecast20190719; t=1674111614;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HSvmGx9pg7RM2UEWG6YDDRKexZJzuEM2p+pEafedpfY=;
- b=VJbzcXUprM3JPj3Hey/rT+HjiEiFiQBPjCuYnf0/4+d+Z7IPunYqmaRgyinI60HquMbE8D
- xOPaq2rmknwItW128uNcqKmdpHzfO6JDu8dAvkG37T3hKoa4kMERUO22i5AEImA+hiwBYZ
- 5LGsDMzKIttjF9vv32iJUGvXOFXhG0k=
+ bh=6HC870YUJByfkMZaMPwjTRzkOnJyWaURlvdeg0SRvwM=;
+ b=KH5+vUiykhL3B7GFbtwCBQdT4RxoA9Q/o2CZzYIqw+YWycAMnqAb/4pROGb2+NGNGnk4i2
+ UawGoes1+xWq/Ztud9VM//UYcjukpmnsWGd7n8MO1FBdxn2sOcsP4vd90mdvZEI9UCK4eB
+ nKpydDFMX9yjk2TaXOaGK5tSfD/h4h4=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-191-RftXGxXaP_auvQ_IYat3Fg-1; Thu, 19 Jan 2023 02:00:04 -0500
-X-MC-Unique: RftXGxXaP_auvQ_IYat3Fg-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
- [10.11.54.5])
+ us-mta-240-k0ksHQ5UPmaK26KYeiBTfg-1; Thu, 19 Jan 2023 02:00:06 -0500
+X-MC-Unique: k0ksHQ5UPmaK26KYeiBTfg-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8E42680D0F1;
- Thu, 19 Jan 2023 07:00:03 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 10CCE8533DC;
+ Thu, 19 Jan 2023 07:00:05 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 45BED53AA;
- Thu, 19 Jan 2023 07:00:03 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id C72D1492B00;
+ Thu, 19 Jan 2023 07:00:04 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 599D921E6602; Thu, 19 Jan 2023 07:59:59 +0100 (CET)
+ id 763DE21E5A10; Thu, 19 Jan 2023 07:59:59 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
@@ -46,16 +46,16 @@ Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
  kkostiuk@redhat.com, tsimpson@quicinc.com, palmer@dabbelt.com,
  bin.meng@windriver.com, qemu-block@nongnu.org, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v4 09/19] qga: Clean up includes
-Date: Thu, 19 Jan 2023 07:59:49 +0100
-Message-Id: <20230119065959.3104012-10-armbru@redhat.com>
+Subject: [PATCH v4 18/19] 9p: Drop superfluous include of linux/limits.h
+Date: Thu, 19 Jan 2023 07:59:58 +0100
+Message-Id: <20230119065959.3104012-19-armbru@redhat.com>
 In-Reply-To: <20230119065959.3104012-1-armbru@redhat.com>
 References: <20230119065959.3104012-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-type: text/plain
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -76,60 +76,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 07:00:23 -0000
-
-Clean up includes so that osdep.h is included first and headers
-which it implies are not included manually.
-
-This commit was created with scripts/clean-includes.
+X-List-Received-Date: Thu, 19 Jan 2023 07:00:35 -0000
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 ---
- qga/cutils.h         | 2 --
- qga/commands-posix.c | 1 -
- qga/cutils.c         | 3 ++-
- 3 files changed, 2 insertions(+), 4 deletions(-)
+ hw/9pfs/9p.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/qga/cutils.h b/qga/cutils.h
-index f0f30a7d28..c1f2f4b17a 100644
---- a/qga/cutils.h
-+++ b/qga/cutils.h
-@@ -1,8 +1,6 @@
- #ifndef CUTILS_H_
- #define CUTILS_H_
- 
--#include "qemu/osdep.h"
--
- int qga_open_cloexec(const char *name, int flags, mode_t mode);
- 
- #endif /* CUTILS_H_ */
-diff --git a/qga/commands-posix.c b/qga/commands-posix.c
-index ebd33a643c..079689d79a 100644
---- a/qga/commands-posix.c
-+++ b/qga/commands-posix.c
-@@ -51,7 +51,6 @@
- #else
- #include <net/ethernet.h>
- #endif
--#include <sys/types.h>
- #ifdef CONFIG_SOLARIS
- #include <sys/sockio.h>
- #endif
-diff --git a/qga/cutils.c b/qga/cutils.c
-index b8e142ef64..b21bcf3683 100644
---- a/qga/cutils.c
-+++ b/qga/cutils.c
-@@ -2,8 +2,9 @@
-  * This work is licensed under the terms of the GNU GPL, version 2 or later.
-  * See the COPYING file in the top-level directory.
+diff --git a/hw/9pfs/9p.c b/hw/9pfs/9p.c
+index 9621ec1341..aa736af380 100644
+--- a/hw/9pfs/9p.c
++++ b/hw/9pfs/9p.c
+@@ -17,9 +17,6 @@
   */
--#include "cutils.h"
  
-+#include "qemu/osdep.h"
-+#include "cutils.h"
+ #include "qemu/osdep.h"
+-#ifdef CONFIG_LINUX
+-#include <linux/limits.h>
+-#endif
+ #include <glib/gprintf.h>
+ #include "hw/virtio/virtio.h"
  #include "qapi/error.h"
- 
- /**
 -- 
 2.39.0
 
