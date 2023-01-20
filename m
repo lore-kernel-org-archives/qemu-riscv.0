@@ -1,53 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIr07-0007LX-QG
-	for mharc-qemu-riscv@gnu.org; Fri, 20 Jan 2023 08:00:18 -0500
+	id 1pIr0J-0007NO-Nr
+	for mharc-qemu-riscv@gnu.org; Fri, 20 Jan 2023 08:00:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1pIr05-0007L0-3m
- for qemu-riscv@nongnu.org; Fri, 20 Jan 2023 08:00:09 -0500
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ id 1pIr08-0007Le-Eu
+ for qemu-riscv@nongnu.org; Fri, 20 Jan 2023 08:00:18 -0500
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1pIr03-0006FF-Cq
- for qemu-riscv@nongnu.org; Fri, 20 Jan 2023 08:00:08 -0500
-Received: by mail-pj1-x1034.google.com with SMTP id
- k10-20020a17090a590a00b0022ba875a1a4so1990852pji.3
- for <qemu-riscv@nongnu.org>; Fri, 20 Jan 2023 05:00:05 -0800 (PST)
+ id 1pIr06-0006G4-U3
+ for qemu-riscv@nongnu.org; Fri, 20 Jan 2023 08:00:12 -0500
+Received: by mail-pj1-x102d.google.com with SMTP id d8so5516848pjc.3
+ for <qemu-riscv@nongnu.org>; Fri, 20 Jan 2023 05:00:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=a3DHMQ6hzTLjlt39P1qRoArzmXvZXOpc2fIYrcZ1leU=;
- b=ecJSeHZTsl0ncMlkCpTbc69ElJ4W75LR+gU2idRc42qZlVWFbS9y9AkTm0kURJNrRo
- aERj1SZ0O//FzSU5M8k1LnwQK7j/UH0ajqe2Y1ZvdB5tyv8uYS5mJgmg8SwBoOs91ohH
- 0ro3modS1X17QGD//5H10pWDRnRRmetmjYA5z8/o1YTVSHHM+njQV3w1+Q5ew8BgPZaD
- 0+PYtcbxWI49ZbNe1OWa7j3lmpz8FJ8ufEMrB1dqjI8smDxjiTieATsgePlxv7wFC5sU
- YQ6c3VcLpd6eOqRYvYHZUQjBAJXmj4XgadNfrBOuA0SGoURCbn2vrVtEBzsE6uieqTP2
- FLag==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jhhgQogAthhvWskxErYyVviUIAb5WWWhMnae0hKG2Ik=;
+ b=HOIZH/ACOEXLZTTM8+6S3ZY5iyO2KC6laUnwk9j6hbmvr2Ix+0FiWMFheVZHpfUAui
+ IE3tFtfCDK8DitxjRds16MducHAlrge8eE6NQ1Q3VZjISzv9PouD0kzhtR+Sr3vJAr+R
+ ZinlZ2ncCJTxwrNa/uaDv1REP1Y+yhKojrPOT+M5ypbxM7rZcUGOD/f2gqDjxvvYz8hN
+ +vwMepS4RU+pp4Oyh1GcmjrXJ91yqiKtwkM5tzDNanDZDocxIET48WtLh1pectsvYVOZ
+ ME9SaTQJ+j11Vcfo87ZEy2UKy3cgS6eA2QxekbK2zsylDz+1nUpgBwFY4mlPCSSU1qOq
+ ZaaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=a3DHMQ6hzTLjlt39P1qRoArzmXvZXOpc2fIYrcZ1leU=;
- b=xeN6Td0tzHqikWLaEcJV9SJHaAclOFISBlnhq2LLR9jIrVRmpTiIIQeIfFRwXAe89V
- movFRqeRzh+xAjy45XkidGoGUyUe2IGjdUqn4S9BKvoo8XvepZNhSaialTeOV4vEjV4G
- xHNW963KqUbyRrLcM5PDjsUGn5V07upaENnv1DUwbbCsVgdSdij2tfCAFLIlKBOCFA6a
- lgoCz7IoJDqVpeEzngJGrUOwvCYyp+o822YmNnh/HLydA1DLuxZqN0W/3NtWiRF6FGbR
- WLMRst3HPhTRF/8Y75bpe6CfqW7jhBhDcKP3Hm6lCaTouFcmcICn/GqY5N5yx8VU8CNq
- EYTA==
-X-Gm-Message-State: AFqh2krMYuA7I+lNhL8ZV26Ny3Dx8vCmzgVVTwCzBRa8azBzthSAkv+k
- DvZaGBuCz1+pj5sOigJGdXKv9A==
-X-Google-Smtp-Source: AMrXdXvlTy8T+lSISiRXS+xvGooOLpQjzzuim2By6MhwcbbjhTYU9tryrrdfYRtT2jJkOXd5D+vZ3Q==
-X-Received: by 2002:a17:903:32c8:b0:194:de51:9af with SMTP id
- i8-20020a17090332c800b00194de5109afmr4206405plr.22.1674219604474; 
- Fri, 20 Jan 2023 05:00:04 -0800 (PST)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jhhgQogAthhvWskxErYyVviUIAb5WWWhMnae0hKG2Ik=;
+ b=K2tq9kfAsFqoSvh4LAJqYmLeXY0ajF997f+2O7B0vcpd10OdcBBAJakUTzmfaV2azr
+ ItmHtUb/fc7Z9tPSMhxfkt2NyOJSX450qxroMEzcq5eDm1qwkjvRzM/FQKRoek+UjKoU
+ J95eoK9BhEqpQewzAqLnpOklXOgAV7Mg9m1bHds4GkKdsHZBOkWxd4I9vZLSo73yS8bt
+ SVsnC4PKwls3Jw6VmDeDyudxTQl66GV9oBMA//zBoxXPB1p+Tw9wkDTmPyq2nkXPNau5
+ T18TNGW98QwfR7slZk3U8EGTtcXC26c9Wboi45e3FKsukjv0Tf/vYZkTKuYvWmXRu9L8
+ envA==
+X-Gm-Message-State: AFqh2krxy+WAp8pXTUSfo5+plnrfrhDlP4JmWIH36VhIuQ2aiE6q/xAn
+ qFC3WBFlyHZoDu8k9wa5PqNm7A==
+X-Google-Smtp-Source: AMrXdXvpPoNaU1fqtF07PHP8TPU7yAVUqU/At3pTWwuxnt/Wec8mklyC16wBNmEj44jAbCIlFl42kw==
+X-Received: by 2002:a17:902:6a89:b0:194:88a3:6e28 with SMTP id
+ n9-20020a1709026a8900b0019488a36e28mr15050887plk.51.1674219609223; 
+ Fri, 20 Jan 2023 05:00:09 -0800 (PST)
 Received: from anup-ubuntu-vm.localdomain ([103.97.165.210])
  by smtp.gmail.com with ESMTPSA id
- u7-20020a170902e5c700b0017f72a430adsm7279610plf.71.2023.01.20.05.00.00
+ u7-20020a170902e5c700b0017f72a430adsm7279610plf.71.2023.01.20.05.00.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jan 2023 05:00:03 -0800 (PST)
+ Fri, 20 Jan 2023 05:00:08 -0800 (PST)
 From: Anup Patel <apatel@ventanamicro.com>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -56,15 +56,19 @@ To: Peter Maydell <peter.maydell@linaro.org>,
 Cc: Atish Patra <atishp@atishpatra.org>,
  Richard Henderson <richard.henderson@linaro.org>,
  Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>
-Subject: [PATCH v3 0/4] Nested virtualization fixes for QEMU
-Date: Fri, 20 Jan 2023 18:29:46 +0530
-Message-Id: <20230120125950.2246378-1-apatel@ventanamicro.com>
+ qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v3 1/4] target/riscv: Update VS timer whenever htimedelta
+ changes
+Date: Fri, 20 Jan 2023 18:29:47 +0530
+Message-Id: <20230120125950.2246378-2-apatel@ventanamicro.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230120125950.2246378-1-apatel@ventanamicro.com>
+References: <20230120125950.2246378-1-apatel@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=apatel@ventanamicro.com; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=apatel@ventanamicro.com; helo=mail-pj1-x102d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -84,41 +88,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2023 13:00:09 -0000
+X-List-Received-Date: Fri, 20 Jan 2023 13:00:19 -0000
 
-This series mainly includes fixes discovered while developing nested
-virtualization running on QEMU.
+The htimedelta[h] CSR has impact on the VS timer comparison so we
+should call riscv_timer_write_timecmp() whenever htimedelta changes.
 
-These patches can also be found in the riscv_nested_fixes_v3 branch at:
-https://github.com/avpatel/qemu.git
+Fixes: 3ec0fe18a31f ("target/riscv: Add vstimecmp suppor")
+Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/csr.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-Changes since v2:
- - Dropped PATCH1 since it is already merged
- - Rebased on latest riscv-to-apply.next branch of Alistair
-
-Changes since v1:
- - Added Alistair's Reviewed-by tags to appropriate patches
- - Added detailed comment block in PATCH4
-
-Anup Patel (4):
-  target/riscv: Update VS timer whenever htimedelta changes
-  target/riscv: Don't clear mask in riscv_cpu_update_mip() for VSTIP
-  target/riscv: No need to re-start QEMU timer when timecmp ==
-    UINT64_MAX
-  target/riscv: Ensure opcode is saved for all relevant instructions
-
- target/riscv/cpu_helper.c                   |  2 --
- target/riscv/csr.c                          | 16 +++++++++
- target/riscv/insn_trans/trans_rva.c.inc     | 10 ++++--
- target/riscv/insn_trans/trans_rvd.c.inc     |  2 ++
- target/riscv/insn_trans/trans_rvf.c.inc     |  2 ++
- target/riscv/insn_trans/trans_rvh.c.inc     |  3 ++
- target/riscv/insn_trans/trans_rvi.c.inc     |  2 ++
- target/riscv/insn_trans/trans_rvzfh.c.inc   |  2 ++
- target/riscv/insn_trans/trans_svinval.c.inc |  3 ++
- target/riscv/time_helper.c                  | 36 ++++++++++++++++++---
- 10 files changed, 69 insertions(+), 9 deletions(-)
-
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 62e6c4acbd..fa17d7770c 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -3045,6 +3045,8 @@ static RISCVException read_htimedelta(CPURISCVState *env, int csrno,
+ static RISCVException write_htimedelta(CPURISCVState *env, int csrno,
+                                        target_ulong val)
+ {
++    RISCVCPU *cpu = env_archcpu(env);
++
+     if (!env->rdtime_fn) {
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
+@@ -3054,6 +3056,12 @@ static RISCVException write_htimedelta(CPURISCVState *env, int csrno,
+     } else {
+         env->htimedelta = val;
+     }
++
++    if (cpu->cfg.ext_sstc && env->rdtime_fn) {
++        riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
++                                  env->htimedelta, MIP_VSTIP);
++    }
++
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -3071,11 +3079,19 @@ static RISCVException read_htimedeltah(CPURISCVState *env, int csrno,
+ static RISCVException write_htimedeltah(CPURISCVState *env, int csrno,
+                                         target_ulong val)
+ {
++    RISCVCPU *cpu = env_archcpu(env);
++
+     if (!env->rdtime_fn) {
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+     env->htimedelta = deposit64(env->htimedelta, 32, 32, (uint64_t)val);
++
++    if (cpu->cfg.ext_sstc && env->rdtime_fn) {
++        riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
++                                  env->htimedelta, MIP_VSTIP);
++    }
++
+     return RISCV_EXCP_NONE;
+ }
+ 
 -- 
 2.34.1
 
