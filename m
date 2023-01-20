@@ -1,77 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIqlO-0008M8-IO
-	for mharc-qemu-riscv@gnu.org; Fri, 20 Jan 2023 07:44:58 -0500
+	id 1pIr07-0007LX-QG
+	for mharc-qemu-riscv@gnu.org; Fri, 20 Jan 2023 08:00:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1pIqlM-0008LS-QK
- for qemu-riscv@nongnu.org; Fri, 20 Jan 2023 07:44:56 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1pIr05-0007L0-3m
+ for qemu-riscv@nongnu.org; Fri, 20 Jan 2023 08:00:09 -0500
+Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1pIqlK-0003DU-Sy
- for qemu-riscv@nongnu.org; Fri, 20 Jan 2023 07:44:56 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- c4-20020a1c3504000000b003d9e2f72093so5764233wma.1
- for <qemu-riscv@nongnu.org>; Fri, 20 Jan 2023 04:44:53 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1pIr03-0006FF-Cq
+ for qemu-riscv@nongnu.org; Fri, 20 Jan 2023 08:00:08 -0500
+Received: by mail-pj1-x1034.google.com with SMTP id
+ k10-20020a17090a590a00b0022ba875a1a4so1990852pji.3
+ for <qemu-riscv@nongnu.org>; Fri, 20 Jan 2023 05:00:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7dKPT7zZeztEVVbtJ/eXlr1NgI/lK4+/GGJyiR1XdRc=;
- b=GmfIlS3okrg4vEVz5uh9RrKJRsNo91feo2kcYs6+tK0NQXs/ysu4+4/qwWLos1h/7s
- 4CLIMpr+AStWQEa+3gKYwq3xJXURMsKf4pyv+k2CU2zwYVACaK/8LwB/kyQByqjoW//x
- oyxn+WHYAYcPXGsDhcxtj5NkLA0VKd/d+5ZNChBdsfzbQRSFbMH2GKsIwLbtVKX5JyhG
- 0+g6HY7YfpY7u+cTD0fiYg40Jn0UfbYUA0S+U2f6/FvJMCbJ7aNH6ZZJfkDS4k89h3qB
- dMo6HGKhpNFuO4qJ9b/4rBRMu4H/tY+m2mGgP8FrR5sd1mn/OmqE9oFamiziIRHqakun
- tp3w==
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=a3DHMQ6hzTLjlt39P1qRoArzmXvZXOpc2fIYrcZ1leU=;
+ b=ecJSeHZTsl0ncMlkCpTbc69ElJ4W75LR+gU2idRc42qZlVWFbS9y9AkTm0kURJNrRo
+ aERj1SZ0O//FzSU5M8k1LnwQK7j/UH0ajqe2Y1ZvdB5tyv8uYS5mJgmg8SwBoOs91ohH
+ 0ro3modS1X17QGD//5H10pWDRnRRmetmjYA5z8/o1YTVSHHM+njQV3w1+Q5ew8BgPZaD
+ 0+PYtcbxWI49ZbNe1OWa7j3lmpz8FJ8ufEMrB1dqjI8smDxjiTieATsgePlxv7wFC5sU
+ YQ6c3VcLpd6eOqRYvYHZUQjBAJXmj4XgadNfrBOuA0SGoURCbn2vrVtEBzsE6uieqTP2
+ FLag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=7dKPT7zZeztEVVbtJ/eXlr1NgI/lK4+/GGJyiR1XdRc=;
- b=7yRXSnes5udWNRVBAJMvMFZPBT2Zac3MGvdb7J8CDXrStdTQCizjdFdbh4Icsw7YCP
- 4UxCNGZlA/TgAQis1T9Ek7zNj8LaH31Sz9xbP+lk2zB3vZWGiu//qeteZRF/pbx7sOHW
- /v0UXERWNcceEbV1loggqHDzqoA6LJWGVu+Oi14WWJWOvmih2hz6WKDb4zPzMVxXoSz9
- 6kLvULHjTWYfGReAZVrMSKp/Z1IuhYR3vXoyutVDIUbJ/T7GcEEjYNq2bwf6QoIwMr+p
- j7X7tvKxJGSLzAV0GHk+wsbtbgLFl+QJymxkgiUWiOTVUS1Wx4Y4Od6f8D+eocwFItBZ
- VplA==
-X-Gm-Message-State: AFqh2kp1737FO54Ss9plSnA4LVhA36LH9oYBFi+e6ZQU0MKjz7pHv2z7
- FXf8UHqFyA2qrpLU5iuZbWAsNpRt90jYbz1oqmsHdQ==
-X-Google-Smtp-Source: AMrXdXtKGvxbVgintkp4tzFlcw8sMiqTjAo0kr4OoBmIVnicUa1zKfuvN5lT0N7pcThp1Ph4MVaBLc07AlrofzXHMKU=
-X-Received: by 2002:a05:600c:35c6:b0:3d1:e710:9905 with SMTP id
- r6-20020a05600c35c600b003d1e7109905mr672093wmq.81.1674218692764; Fri, 20 Jan
- 2023 04:44:52 -0800 (PST)
+ bh=a3DHMQ6hzTLjlt39P1qRoArzmXvZXOpc2fIYrcZ1leU=;
+ b=xeN6Td0tzHqikWLaEcJV9SJHaAclOFISBlnhq2LLR9jIrVRmpTiIIQeIfFRwXAe89V
+ movFRqeRzh+xAjy45XkidGoGUyUe2IGjdUqn4S9BKvoo8XvepZNhSaialTeOV4vEjV4G
+ xHNW963KqUbyRrLcM5PDjsUGn5V07upaENnv1DUwbbCsVgdSdij2tfCAFLIlKBOCFA6a
+ lgoCz7IoJDqVpeEzngJGrUOwvCYyp+o822YmNnh/HLydA1DLuxZqN0W/3NtWiRF6FGbR
+ WLMRst3HPhTRF/8Y75bpe6CfqW7jhBhDcKP3Hm6lCaTouFcmcICn/GqY5N5yx8VU8CNq
+ EYTA==
+X-Gm-Message-State: AFqh2krMYuA7I+lNhL8ZV26Ny3Dx8vCmzgVVTwCzBRa8azBzthSAkv+k
+ DvZaGBuCz1+pj5sOigJGdXKv9A==
+X-Google-Smtp-Source: AMrXdXvlTy8T+lSISiRXS+xvGooOLpQjzzuim2By6MhwcbbjhTYU9tryrrdfYRtT2jJkOXd5D+vZ3Q==
+X-Received: by 2002:a17:903:32c8:b0:194:de51:9af with SMTP id
+ i8-20020a17090332c800b00194de5109afmr4206405plr.22.1674219604474; 
+ Fri, 20 Jan 2023 05:00:04 -0800 (PST)
+Received: from anup-ubuntu-vm.localdomain ([103.97.165.210])
+ by smtp.gmail.com with ESMTPSA id
+ u7-20020a170902e5c700b0017f72a430adsm7279610plf.71.2023.01.20.05.00.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Jan 2023 05:00:03 -0800 (PST)
+From: Anup Patel <apatel@ventanamicro.com>
+To: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Atish Patra <atishp@atishpatra.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>
+Subject: [PATCH v3 0/4] Nested virtualization fixes for QEMU
+Date: Fri, 20 Jan 2023 18:29:46 +0530
+Message-Id: <20230120125950.2246378-1-apatel@ventanamicro.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230113103453.42776-1-alexghiti@rivosinc.com>
- <20230113103453.42776-3-alexghiti@rivosinc.com>
- <20230117163138.jze47hjeeuwu2k4j@orel>
- <CAKmqyKNFX_ovg4Bp_30o0g4Jd5XJ98i9LdFgejsDmGW4iL2+OA@mail.gmail.com>
- <20230118121916.6aqj57leen72z5tz@orel>
- <CAKmqyKNcd3JOZgPb23idrzVjxHj+HHwPz6f6xPEp2oVGJEZKpg@mail.gmail.com>
- <CAHVXubiW2OaMhe3STLLMz=wDPJeY8hvPHbuBJgL7KZyw4=pRpw@mail.gmail.com>
- <CAKmqyKNNocLxKJtBtFnZkbTdCwC=TKaHpm4Sunut49nxQyw8yA@mail.gmail.com>
- <20230120095306.yyqq36dliabni3h3@orel>
-In-Reply-To: <20230120095306.yyqq36dliabni3h3@orel>
-From: Alexandre Ghiti <alexghiti@rivosinc.com>
-Date: Fri, 20 Jan 2023 13:44:41 +0100
-Message-ID: <CAHVXubhPhNiCHRvpW11NSZx58Eqi56AVgnaDFnJvrN7wQs_5MA@mail.gmail.com>
-Subject: Re: [PATCH v5 2/2] riscv: Allow user to set the satp mode
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: Alistair Francis <alistair23@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Ludovic Henry <ludovic@rivosinc.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=alexghiti@rivosinc.com; helo=mail-wm1-x32d.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
+ envelope-from=apatel@ventanamicro.com; helo=mail-pj1-x1034.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -85,110 +84,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2023 12:44:57 -0000
+X-List-Received-Date: Fri, 20 Jan 2023 13:00:09 -0000
 
-On Fri, Jan 20, 2023 at 10:53 AM Andrew Jones <ajones@ventanamicro.com> wrote:
->
-> On Fri, Jan 20, 2023 at 09:46:05AM +1000, Alistair Francis wrote:
-> > On Thu, Jan 19, 2023 at 11:00 PM Alexandre Ghiti <alexghiti@rivosinc.com> wrote:
-> > >
-> > > Hi Alistair, Andrew,
-> > >
-> > > On Thu, Jan 19, 2023 at 1:25 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > > >
-> > > > On Wed, Jan 18, 2023 at 10:19 PM Andrew Jones <ajones@ventanamicro.com> wrote:
-> > > > >
-> > > > > On Wed, Jan 18, 2023 at 10:28:46AM +1000, Alistair Francis wrote:
-> > > > > > On Wed, Jan 18, 2023 at 2:32 AM Andrew Jones <ajones@ventanamicro.com> wrote:
-> > > > > > >
-> > > > > > > On Fri, Jan 13, 2023 at 11:34:53AM +0100, Alexandre Ghiti wrote:
-> > > > > ...
-> > > > > > > > +
-> > > > > > > > +    /* Get rid of 32-bit/64-bit incompatibility */
-> > > > > > > > +    for (int i = 0; i < 16; ++i) {
-> > > > > > > > +        if ((cpu->cfg.satp_mode.map & (1 << i)) && !valid_vm[i]) {
-> > > > > > >
-> > > > > > > If we ever define mode=1 for rv64, then 'sv32=on' will be incorrectly
-> > > > > > > accepted as an alias. I think we should simply not define the sv32
-> > > > > > > property for rv64 nor the rv64-only modes for rv32. So, down in
-> > > > > > > riscv_add_satp_mode_properties() we can add some
-> > > > > > >
-> > > > > > >   #if defined(TARGET_RISCV32)
-> > > > > > >   ...
-> > > > > > >   #elif defined(TARGET_RISCV64)
-> > > > > > >   ...
-> > > > > > >   #endif
-> > > > > >
-> > > > > > Do not add any #if defined(TARGET_RISCV32) to QEMU.
-> > > > > >
-> > > > > > We are aiming for the riscv64-softmmu to be able to emulate 32-bit
-> > > > > > CPUs and compile time macros are the wrong solution here. Instead you
-> > > > > > can get the xlen of the hart and use that.
-> > > > > >
-> > > > >
-> > > > > Does this mean we want to be able to do the following?
-> > > > >
-> > > > >   qemu-system-riscv64 -cpu rv32,sv32=on ...
-> > > >
-> > > > That's the plan
-> > > >
-> > > > >
-> > > > > If so, then can we move the object_property_add() for sv32 to
-> > > > > rv32_base_cpu_init() and the rest to rv64_base_cpu_init()?
-> >
-> > Wait! Sorry I didn't read this carefully enough. No, that is not what
-> > we want to do. That then won't support the vendor CPUs.
-> >
-> > We just want to add the properties to all CPUs. Then if an invalid
-> > option is set we should return an error.
+This series mainly includes fixes discovered while developing nested
+virtualization running on QEMU.
 
-Maybe I just don't get this part...
+These patches can also be found in the riscv_nested_fixes_v3 branch at:
+https://github.com/avpatel/qemu.git
 
-> >
-> > Note that the 64-bit only configs can be hidden behind a #if
-> > defined(TARGET_RISCV64).
->
-> OK, so we want the original suggestion of putting an
-> 'if defined(TARGET_RISCV64)' in riscv_add_satp_mode_properties(),
-> which is called from register_cpu_props(), for the 64-bit only
-> configs, but to support emulation we can't put sv32 under an
-> 'if defined(TARGET_RISCV32)'. Instead, we need to check the xlen
-> supported by the cpu type. That makes sense to me, and I think
-> it'd be easiest to do in cpu_riscv_set_satp() with something like
->
->   if (!strncmp(name, "rv32", 4) &&
->       RISCV_CPU(obj)->env.misa_mxl != MXL_RV32) {
->      ... fail with error message ...
->   }
->
+Changes since v2:
+ - Dropped PATCH1 since it is already merged
+ - Rebased on latest riscv-to-apply.next branch of Alistair
 
-...but what about simply using the runtime check when we add the
-properties? Like this:
+Changes since v1:
+ - Added Alistair's Reviewed-by tags to appropriate patches
+ - Added detailed comment block in PATCH4
 
-static void riscv_add_satp_mode_properties(Object *obj)
-{
-    RISCVCPU *cpu = RISCV_CPU(obj);
+Anup Patel (4):
+  target/riscv: Update VS timer whenever htimedelta changes
+  target/riscv: Don't clear mask in riscv_cpu_update_mip() for VSTIP
+  target/riscv: No need to re-start QEMU timer when timecmp ==
+    UINT64_MAX
+  target/riscv: Ensure opcode is saved for all relevant instructions
 
-    if (cpu->env.misa_mxl == MXL_RV32) {
-        object_property_add(obj, "sv32", "bool", cpu_riscv_get_satp,
-                            cpu_riscv_set_satp, NULL,
-&cpu->cfg.satp_mode);
-    } else {
-        object_property_add(obj, "sv39", "bool", cpu_riscv_get_satp,
-                            cpu_riscv_set_satp, NULL,
-&cpu->cfg.satp_mode);
-        object_property_add(obj, "sv48", "bool", cpu_riscv_get_satp,
-                            cpu_riscv_set_satp, NULL,
-&cpu->cfg.satp_mode);
-        object_property_add(obj, "sv57", "bool", cpu_riscv_get_satp,
-                            cpu_riscv_set_satp, NULL,
-&cpu->cfg.satp_mode);
-        object_property_add(obj, "sv64", "bool", cpu_riscv_get_satp,
-                            cpu_riscv_set_satp, NULL,
-&cpu->cfg.satp_mode);
-    }
-}
+ target/riscv/cpu_helper.c                   |  2 --
+ target/riscv/csr.c                          | 16 +++++++++
+ target/riscv/insn_trans/trans_rva.c.inc     | 10 ++++--
+ target/riscv/insn_trans/trans_rvd.c.inc     |  2 ++
+ target/riscv/insn_trans/trans_rvf.c.inc     |  2 ++
+ target/riscv/insn_trans/trans_rvh.c.inc     |  3 ++
+ target/riscv/insn_trans/trans_rvi.c.inc     |  2 ++
+ target/riscv/insn_trans/trans_rvzfh.c.inc   |  2 ++
+ target/riscv/insn_trans/trans_svinval.c.inc |  3 ++
+ target/riscv/time_helper.c                  | 36 ++++++++++++++++++---
+ 10 files changed, 69 insertions(+), 9 deletions(-)
 
-> Thanks,
-> drew
+-- 
+2.34.1
+
 
