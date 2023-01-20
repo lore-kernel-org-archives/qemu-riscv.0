@@ -1,81 +1,86 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIr0S-0007Rs-2g
-	for mharc-qemu-riscv@gnu.org; Fri, 20 Jan 2023 08:00:33 -0500
+	id 1pIrPX-0000Ne-QE
+	for mharc-qemu-riscv@gnu.org; Fri, 20 Jan 2023 08:26:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1pIr0N-0007QQ-KH
- for qemu-riscv@nongnu.org; Fri, 20 Jan 2023 08:00:28 -0500
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1pIrOl-0008LM-FM
+ for qemu-riscv@nongnu.org; Fri, 20 Jan 2023 08:25:43 -0500
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1pIr0L-0006Ja-IB
- for qemu-riscv@nongnu.org; Fri, 20 Jan 2023 08:00:27 -0500
-Received: by mail-pj1-x1031.google.com with SMTP id
- h5-20020a17090a9c0500b0022bb85eb35dso420804pjp.3
- for <qemu-riscv@nongnu.org>; Fri, 20 Jan 2023 05:00:24 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1pIrOj-0003LE-1t
+ for qemu-riscv@nongnu.org; Fri, 20 Jan 2023 08:25:38 -0500
+Received: by mail-ed1-x52e.google.com with SMTP id z11so6793388ede.1
+ for <qemu-riscv@nongnu.org>; Fri, 20 Jan 2023 05:25:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UXFj+TsARYhyAgQ44IDyO3msxHENfQx3g7RXDPoLpl8=;
- b=fFXzg6IfJFbd54MhU8YS0nZbsBNgGnZasdpbRAVJcLSZKlpnw0MW5/5bQIFg8BblFk
- 0LEDEyasyRTnF29ZoRxXFI1y+pv/sa7hYn3QiiRJz1uiF035ax6WA2B7IcXyVj6ji/UF
- 10b1kGoOG54B4k1jY1heu1AW5sqdSfazsRo87S6100nTqxrhUEx6eNBSQ61pwLXrseHc
- a3CEInwIYki4KGcr7+MB7QsLc1SsnGmXvhE0wN3SR2atz2VfGv+WN54JYqcV8g86+qVE
- AxSJGnoWj22WrOI1XSb0AdXltXOgisx2XixFffIvG/N8ZLe2q9pgdTMwjRBumz2w9Xea
- ds1A==
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0fZ8ltseGThkHhi2NNMa+/8NoEJEaquqoyQ5gLJ0q30=;
+ b=L0OQ49eamwQN1FtclSHO7ZqJixkWH9TFzC+VhwKW3m2uSirvYo7CTmDLN5Rt7EdLWp
+ SzwMlRRHIvLHkYa2JUcJtiDmwMYX5mLLX6jiP50nG8InD2cyHyBGeHjr31MX+oUItBHh
+ xkmzOoYzcuHN9+DEseSqVKHxtW1Azxa+ozVVYgSJUhEUVPE7LjqAfsP5OPJEPS2KtN/S
+ U40pLsU/7WO/yshAIC3Y5M3645c5Ce3rnfHylZ5kFlaR5/Jz3ZUZ2TpM/s20FGfB2g7+
+ 6CLdC4hR9A6ygLDUWt+0+hh13TA5sCmXK8/ImcTwAUK9o2ZVlmtA8ZnHcxMU9QkUn5BN
+ HwMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UXFj+TsARYhyAgQ44IDyO3msxHENfQx3g7RXDPoLpl8=;
- b=3zOw/3KY2sLXeDpsjYSMxnTpNZbwTyTvCfQHACLCLf91KnR+Ycwyk+xbff+MxYqRm0
- zxgzpqB2km8QHowQMFQ4lZyR1gH25R1a6exdoO/9oX/iS4H0RBavNcBo60eJfNLfk7ep
- oW55+JMcOc2Ele0LgD6QIui/x49ddPqaH5ZZvFDcdQTUYxltduiu4Semdnyh8QRBZB2L
- WW/ero1gpjq6LmMbPDHIbL8xdWpJVOZLPFl4a3jjsNWskididoHmXc6tCRHtWQMRNX+o
- ONar635juakOPKBVJifUtftPqOV8RceVTWgS6XDIkIAmp6hUtBClO2MxyhTLkcUoytJe
- Uweg==
-X-Gm-Message-State: AFqh2krCLnqvnnWd33z6QWaB2v9Z5OIawAD27ZmdAhxdgvMZemhi+1oP
- 8/HeWM/J8kGdbx17vRLlahh+1g==
-X-Google-Smtp-Source: AMrXdXuA2FNidxqpWO+6f8WMO+OiA2gfBsF33p6oUoJb6qofsQmMX0coaat1P5Le6e4xAMMsZJfcVg==
-X-Received: by 2002:a05:6a21:32a6:b0:a7:9022:5d5e with SMTP id
- yt38-20020a056a2132a600b000a790225d5emr20327875pzb.2.1674219623704; 
- Fri, 20 Jan 2023 05:00:23 -0800 (PST)
-Received: from anup-ubuntu-vm.localdomain ([103.97.165.210])
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0fZ8ltseGThkHhi2NNMa+/8NoEJEaquqoyQ5gLJ0q30=;
+ b=7ASivDPmc9+zgxs8PSck82CYT+DgcjdzRECxHAZEX7n9QCMDG9K8qkYaeegrxocbu+
+ gp5QMbopTpKRZHfXJyVit9D1q1Rx/OKeUnufByVodKI03OtfsI4UJX+OSTXJAz3xImCf
+ Xz+1ma8SPG6eaH8fBBTgIER8pkw0cp7jSV7DX2pjr/H9+n3ZNhn0PVNaggmN8eTLReOL
+ 8YoxveIDtzxwfJHvNMQMm30Z8pqr1L5of9Bo02/4GSu31SMt+H4sEItf5WK9VnuhF0td
+ QvYljvgZNnSvjZtMULUfA90yuNAvkZYle6a62d+fD9HiXBgKHMxQTue7tIoubqWxCD7L
+ SZfQ==
+X-Gm-Message-State: AFqh2krQO2llKLPbX9S8FoS4AbGhv9SoW5nJMND7f/QxQQ7jyVAt49pY
+ rgDCvSbUSnYMOo2yX1ak/sVe/A==
+X-Google-Smtp-Source: AMrXdXthrTF7VTEHcDDVedFt+TFDHgj29TadRXTCGXyh1Xofvm7peeLtQBPcTkGIXhrMKY23HwqvnQ==
+X-Received: by 2002:a05:6402:d47:b0:499:376e:6b31 with SMTP id
+ ec7-20020a0564020d4700b00499376e6b31mr13809783edb.29.1674221133794; 
+ Fri, 20 Jan 2023 05:25:33 -0800 (PST)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
  by smtp.gmail.com with ESMTPSA id
- u7-20020a170902e5c700b0017f72a430adsm7279610plf.71.2023.01.20.05.00.19
+ g8-20020aa7d1c8000000b0049e1f167956sm6416743edp.9.2023.01.20.05.25.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Jan 2023 05:00:23 -0800 (PST)
-From: Anup Patel <apatel@ventanamicro.com>
-To: Peter Maydell <peter.maydell@linaro.org>,
+ Fri, 20 Jan 2023 05:25:33 -0800 (PST)
+Date: Fri, 20 Jan 2023 14:25:32 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Alexandre Ghiti <alexghiti@rivosinc.com>
+Cc: Alistair Francis <alistair23@gmail.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Atish Patra <atishp@atishpatra.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>
-Subject: [PATCH v3 4/4] target/riscv: Ensure opcode is saved for all relevant
- instructions
-Date: Fri, 20 Jan 2023 18:29:50 +0530
-Message-Id: <20230120125950.2246378-5-apatel@ventanamicro.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230120125950.2246378-1-apatel@ventanamicro.com>
-References: <20230120125950.2246378-1-apatel@ventanamicro.com>
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Ludovic Henry <ludovic@rivosinc.com>
+Subject: Re: [PATCH v5 2/2] riscv: Allow user to set the satp mode
+Message-ID: <20230120132532.n5inawnb3odhy7ik@orel>
+References: <20230113103453.42776-1-alexghiti@rivosinc.com>
+ <20230113103453.42776-3-alexghiti@rivosinc.com>
+ <20230117163138.jze47hjeeuwu2k4j@orel>
+ <CAKmqyKNFX_ovg4Bp_30o0g4Jd5XJ98i9LdFgejsDmGW4iL2+OA@mail.gmail.com>
+ <20230118121916.6aqj57leen72z5tz@orel>
+ <CAKmqyKNcd3JOZgPb23idrzVjxHj+HHwPz6f6xPEp2oVGJEZKpg@mail.gmail.com>
+ <CAHVXubiW2OaMhe3STLLMz=wDPJeY8hvPHbuBJgL7KZyw4=pRpw@mail.gmail.com>
+ <CAKmqyKNNocLxKJtBtFnZkbTdCwC=TKaHpm4Sunut49nxQyw8yA@mail.gmail.com>
+ <20230120095306.yyqq36dliabni3h3@orel>
+ <CAHVXubhPhNiCHRvpW11NSZx58Eqi56AVgnaDFnJvrN7wQs_5MA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=apatel@ventanamicro.com; helo=mail-pj1-x1031.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAHVXubhPhNiCHRvpW11NSZx58Eqi56AVgnaDFnJvrN7wQs_5MA@mail.gmail.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x52e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,202 +93,119 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2023 13:00:28 -0000
+X-List-Received-Date: Fri, 20 Jan 2023 13:26:09 -0000
 
-We should call decode_save_opc() for all relevant instructions which
-can potentially generate a virtual instruction fault or a guest page
-fault because generating transformed instruction upon guest page fault
-expects opcode to be available. Without this, hypervisor will see
-transformed instruction as zero in htinst CSR for guest MMIO emulation
-which makes MMIO emulation in hypervisor slow and also breaks nested
-virtualization.
+On Fri, Jan 20, 2023 at 01:44:41PM +0100, Alexandre Ghiti wrote:
+> On Fri, Jan 20, 2023 at 10:53 AM Andrew Jones <ajones@ventanamicro.com> wrote:
+> >
+> > On Fri, Jan 20, 2023 at 09:46:05AM +1000, Alistair Francis wrote:
+> > > On Thu, Jan 19, 2023 at 11:00 PM Alexandre Ghiti <alexghiti@rivosinc.com> wrote:
+> > > >
+> > > > Hi Alistair, Andrew,
+> > > >
+> > > > On Thu, Jan 19, 2023 at 1:25 AM Alistair Francis <alistair23@gmail.com> wrote:
+> > > > >
+> > > > > On Wed, Jan 18, 2023 at 10:19 PM Andrew Jones <ajones@ventanamicro.com> wrote:
+> > > > > >
+> > > > > > On Wed, Jan 18, 2023 at 10:28:46AM +1000, Alistair Francis wrote:
+> > > > > > > On Wed, Jan 18, 2023 at 2:32 AM Andrew Jones <ajones@ventanamicro.com> wrote:
+> > > > > > > >
+> > > > > > > > On Fri, Jan 13, 2023 at 11:34:53AM +0100, Alexandre Ghiti wrote:
+> > > > > > ...
+> > > > > > > > > +
+> > > > > > > > > +    /* Get rid of 32-bit/64-bit incompatibility */
+> > > > > > > > > +    for (int i = 0; i < 16; ++i) {
+> > > > > > > > > +        if ((cpu->cfg.satp_mode.map & (1 << i)) && !valid_vm[i]) {
+> > > > > > > >
+> > > > > > > > If we ever define mode=1 for rv64, then 'sv32=on' will be incorrectly
+> > > > > > > > accepted as an alias. I think we should simply not define the sv32
+> > > > > > > > property for rv64 nor the rv64-only modes for rv32. So, down in
+> > > > > > > > riscv_add_satp_mode_properties() we can add some
+> > > > > > > >
+> > > > > > > >   #if defined(TARGET_RISCV32)
+> > > > > > > >   ...
+> > > > > > > >   #elif defined(TARGET_RISCV64)
+> > > > > > > >   ...
+> > > > > > > >   #endif
+> > > > > > >
+> > > > > > > Do not add any #if defined(TARGET_RISCV32) to QEMU.
+> > > > > > >
+> > > > > > > We are aiming for the riscv64-softmmu to be able to emulate 32-bit
+> > > > > > > CPUs and compile time macros are the wrong solution here. Instead you
+> > > > > > > can get the xlen of the hart and use that.
+> > > > > > >
+> > > > > >
+> > > > > > Does this mean we want to be able to do the following?
+> > > > > >
+> > > > > >   qemu-system-riscv64 -cpu rv32,sv32=on ...
+> > > > >
+> > > > > That's the plan
+> > > > >
+> > > > > >
+> > > > > > If so, then can we move the object_property_add() for sv32 to
+> > > > > > rv32_base_cpu_init() and the rest to rv64_base_cpu_init()?
+> > >
+> > > Wait! Sorry I didn't read this carefully enough. No, that is not what
+> > > we want to do. That then won't support the vendor CPUs.
+> > >
+> > > We just want to add the properties to all CPUs. Then if an invalid
+> > > option is set we should return an error.
+> 
+> Maybe I just don't get this part...
 
-Fixes: a9814e3e08d2 ("target/riscv: Minimize the calls to decode_save_opc")
-Signed-off-by: Anup Patel <apatel@ventanamicro.com>
----
- target/riscv/insn_trans/trans_rva.c.inc     | 10 +++++++---
- target/riscv/insn_trans/trans_rvd.c.inc     |  2 ++
- target/riscv/insn_trans/trans_rvf.c.inc     |  2 ++
- target/riscv/insn_trans/trans_rvh.c.inc     |  3 +++
- target/riscv/insn_trans/trans_rvi.c.inc     |  2 ++
- target/riscv/insn_trans/trans_rvzfh.c.inc   |  2 ++
- target/riscv/insn_trans/trans_svinval.c.inc |  3 +++
- 7 files changed, 21 insertions(+), 3 deletions(-)
+Indeed, I like not adding the property at all over adding it and then
+complaining when it's used. Your solution below looks good to me and
+would be my preference as well.
 
-diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
-index 45db82c9be..5f194a447b 100644
---- a/target/riscv/insn_trans/trans_rva.c.inc
-+++ b/target/riscv/insn_trans/trans_rva.c.inc
-@@ -20,8 +20,10 @@
- 
- static bool gen_lr(DisasContext *ctx, arg_atomic *a, MemOp mop)
- {
--    TCGv src1 = get_address(ctx, a->rs1, 0);
-+    TCGv src1;
- 
-+    decode_save_opc(ctx);
-+    src1 = get_address(ctx, a->rs1, 0);
-     if (a->rl) {
-         tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-     }
-@@ -43,6 +45,7 @@ static bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
-     TCGLabel *l1 = gen_new_label();
-     TCGLabel *l2 = gen_new_label();
- 
-+    decode_save_opc(ctx);
-     src1 = get_address(ctx, a->rs1, 0);
-     tcg_gen_brcond_tl(TCG_COND_NE, load_res, src1, l1);
- 
-@@ -81,9 +84,10 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
-                     MemOp mop)
- {
-     TCGv dest = dest_gpr(ctx, a->rd);
--    TCGv src1 = get_address(ctx, a->rs1, 0);
--    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+    TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
- 
-+    decode_save_opc(ctx);
-+    src1 = get_address(ctx, a->rs1, 0);
-     func(dest, src1, src2, ctx->mem_idx, mop);
- 
-     gen_set_gpr(ctx, a->rd, dest);
-diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
-index 1397c1ce1c..6e3159b797 100644
---- a/target/riscv/insn_trans/trans_rvd.c.inc
-+++ b/target/riscv/insn_trans/trans_rvd.c.inc
-@@ -38,6 +38,7 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
-+    decode_save_opc(ctx);
-     addr = get_address(ctx, a->rs1, a->imm);
-     tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], addr, ctx->mem_idx, MO_TEUQ);
- 
-@@ -52,6 +53,7 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
-+    decode_save_opc(ctx);
-     addr = get_address(ctx, a->rs1, a->imm);
-     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEUQ);
-     return true;
-diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-index a1d3eb52ad..965e1f8d11 100644
---- a/target/riscv/insn_trans/trans_rvf.c.inc
-+++ b/target/riscv/insn_trans/trans_rvf.c.inc
-@@ -38,6 +38,7 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVF);
- 
-+    decode_save_opc(ctx);
-     addr = get_address(ctx, a->rs1, a->imm);
-     dest = cpu_fpr[a->rd];
-     tcg_gen_qemu_ld_i64(dest, addr, ctx->mem_idx, MO_TEUL);
-@@ -54,6 +55,7 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVF);
- 
-+    decode_save_opc(ctx);
-     addr = get_address(ctx, a->rs1, a->imm);
-     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEUL);
-     return true;
-diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
-index 4f8aecddc7..9248b48c36 100644
---- a/target/riscv/insn_trans/trans_rvh.c.inc
-+++ b/target/riscv/insn_trans/trans_rvh.c.inc
-@@ -36,6 +36,7 @@ static bool do_hlv(DisasContext *ctx, arg_r2 *a, MemOp mop)
- #ifdef CONFIG_USER_ONLY
-     return false;
- #else
-+    decode_save_opc(ctx);
-     if (check_access(ctx)) {
-         TCGv dest = dest_gpr(ctx, a->rd);
-         TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-@@ -82,6 +83,7 @@ static bool do_hsv(DisasContext *ctx, arg_r2_s *a, MemOp mop)
- #ifdef CONFIG_USER_ONLY
-     return false;
- #else
-+    decode_save_opc(ctx);
-     if (check_access(ctx)) {
-         TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-         TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
-@@ -135,6 +137,7 @@ static bool trans_hsv_d(DisasContext *ctx, arg_hsv_d *a)
- static bool do_hlvx(DisasContext *ctx, arg_r2 *a,
-                     void (*func)(TCGv, TCGv_env, TCGv))
- {
-+    decode_save_opc(ctx);
-     if (check_access(ctx)) {
-         TCGv dest = dest_gpr(ctx, a->rd);
-         TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 5c69b88d1e..4496f21266 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -261,6 +261,7 @@ static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
- 
- static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
- {
-+    decode_save_opc(ctx);
-     if (get_xl(ctx) == MXL_RV128) {
-         return gen_load_i128(ctx, a, memop);
-     } else {
-@@ -350,6 +351,7 @@ static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
- 
- static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
- {
-+    decode_save_opc(ctx);
-     if (get_xl(ctx) == MXL_RV128) {
-         return gen_store_i128(ctx, a, memop);
-     } else {
-diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
-index 5d07150cd0..2ad5716312 100644
---- a/target/riscv/insn_trans/trans_rvzfh.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
-@@ -49,6 +49,7 @@ static bool trans_flh(DisasContext *ctx, arg_flh *a)
-     REQUIRE_FPU;
-     REQUIRE_ZFH_OR_ZFHMIN(ctx);
- 
-+    decode_save_opc(ctx);
-     t0 = get_gpr(ctx, a->rs1, EXT_NONE);
-     if (a->imm) {
-         TCGv temp = temp_new(ctx);
-@@ -71,6 +72,7 @@ static bool trans_fsh(DisasContext *ctx, arg_fsh *a)
-     REQUIRE_FPU;
-     REQUIRE_ZFH_OR_ZFHMIN(ctx);
- 
-+    decode_save_opc(ctx);
-     t0 = get_gpr(ctx, a->rs1, EXT_NONE);
-     if (a->imm) {
-         TCGv temp = tcg_temp_new();
-diff --git a/target/riscv/insn_trans/trans_svinval.c.inc b/target/riscv/insn_trans/trans_svinval.c.inc
-index 2682bd969f..f3cd7d5c0b 100644
---- a/target/riscv/insn_trans/trans_svinval.c.inc
-+++ b/target/riscv/insn_trans/trans_svinval.c.inc
-@@ -28,6 +28,7 @@ static bool trans_sinval_vma(DisasContext *ctx, arg_sinval_vma *a)
-     /* Do the same as sfence.vma currently */
-     REQUIRE_EXT(ctx, RVS);
- #ifndef CONFIG_USER_ONLY
-+    decode_save_opc(ctx);
-     gen_helper_tlb_flush(cpu_env);
-     return true;
- #endif
-@@ -56,6 +57,7 @@ static bool trans_hinval_vvma(DisasContext *ctx, arg_hinval_vvma *a)
-     /* Do the same as hfence.vvma currently */
-     REQUIRE_EXT(ctx, RVH);
- #ifndef CONFIG_USER_ONLY
-+    decode_save_opc(ctx);
-     gen_helper_hyp_tlb_flush(cpu_env);
-     return true;
- #endif
-@@ -68,6 +70,7 @@ static bool trans_hinval_gvma(DisasContext *ctx, arg_hinval_gvma *a)
-     /* Do the same as hfence.gvma currently */
-     REQUIRE_EXT(ctx, RVH);
- #ifndef CONFIG_USER_ONLY
-+    decode_save_opc(ctx);
-     gen_helper_hyp_gvma_tlb_flush(cpu_env);
-     return true;
- #endif
--- 
-2.34.1
+Thanks,
+drew
 
+> 
+> > >
+> > > Note that the 64-bit only configs can be hidden behind a #if
+> > > defined(TARGET_RISCV64).
+> >
+> > OK, so we want the original suggestion of putting an
+> > 'if defined(TARGET_RISCV64)' in riscv_add_satp_mode_properties(),
+> > which is called from register_cpu_props(), for the 64-bit only
+> > configs, but to support emulation we can't put sv32 under an
+> > 'if defined(TARGET_RISCV32)'. Instead, we need to check the xlen
+> > supported by the cpu type. That makes sense to me, and I think
+> > it'd be easiest to do in cpu_riscv_set_satp() with something like
+> >
+> >   if (!strncmp(name, "rv32", 4) &&
+> >       RISCV_CPU(obj)->env.misa_mxl != MXL_RV32) {
+> >      ... fail with error message ...
+> >   }
+> >
+> 
+> ...but what about simply using the runtime check when we add the
+> properties? Like this:
+> 
+> static void riscv_add_satp_mode_properties(Object *obj)
+> {
+>     RISCVCPU *cpu = RISCV_CPU(obj);
+> 
+>     if (cpu->env.misa_mxl == MXL_RV32) {
+>         object_property_add(obj, "sv32", "bool", cpu_riscv_get_satp,
+>                             cpu_riscv_set_satp, NULL,
+> &cpu->cfg.satp_mode);
+>     } else {
+>         object_property_add(obj, "sv39", "bool", cpu_riscv_get_satp,
+>                             cpu_riscv_set_satp, NULL,
+> &cpu->cfg.satp_mode);
+>         object_property_add(obj, "sv48", "bool", cpu_riscv_get_satp,
+>                             cpu_riscv_set_satp, NULL,
+> &cpu->cfg.satp_mode);
+>         object_property_add(obj, "sv57", "bool", cpu_riscv_get_satp,
+>                             cpu_riscv_set_satp, NULL,
+> &cpu->cfg.satp_mode);
+>         object_property_add(obj, "sv64", "bool", cpu_riscv_get_satp,
+>                             cpu_riscv_set_satp, NULL,
+> &cpu->cfg.satp_mode);
+>     }
+> }
+> 
+> > Thanks,
+> > drew
 
