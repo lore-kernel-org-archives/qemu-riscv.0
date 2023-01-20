@@ -1,65 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pIecH-0003Cv-LM
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 18:46:46 -0500
+	id 1pIepe-0006Cn-KT
+	for mharc-qemu-riscv@gnu.org; Thu, 19 Jan 2023 19:00:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIecA-00037A-94; Thu, 19 Jan 2023 18:46:41 -0500
-Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
+ id 1pIepc-00064H-74; Thu, 19 Jan 2023 19:00:32 -0500
+Received: from mail-vk1-xa36.google.com ([2607:f8b0:4864:20::a36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pIec6-0002NA-0h; Thu, 19 Jan 2023 18:46:35 -0500
-Received: by mail-ua1-x935.google.com with SMTP id u3so991214uae.0;
- Thu, 19 Jan 2023 15:46:32 -0800 (PST)
+ id 1pIepa-0005mE-DP; Thu, 19 Jan 2023 19:00:31 -0500
+Received: by mail-vk1-xa36.google.com with SMTP id i82so1792301vki.8;
+ Thu, 19 Jan 2023 16:00:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KPqJVJp80N/DeT38pRVWoUhAfRHJVaCGxreCuk0z0lQ=;
- b=L1Wa+IhLlyW6uZQjQEganUvpaCWpvURHGyHXP/hvz7QjzHmmC/Y7sBp1otKN/UZguM
- Om12yWN9TTQRytnGqvErPn7lVAh8bFJiC8wKQDI6ALcRPdJRa+AlM7qNFUmsnF7pUSsS
- ZBsIozRh1OmTS0F7j0oLMExg0juSTHgeo6X14x2d/GhizXv2xVP3COLVuuzbJVLAl7wF
- r+IvHheOGT2IVXuA0u7fpZCX3YPddn+ILJrGF6kOoOf9Xfe0gRgSovjsqQMUpl7CFASb
- SMGOEzZEzCRGM5wgbOBxuNWoTUvvD0qBQhAJiFX079Dqtg67r2zgpadPzERTwW9u2eAv
- 5nSw==
+ bh=2L6/cN1y8IcvPVXB8DgZtdsayOsjfkLvj/cekQsNgo4=;
+ b=ba1qp6waQ+PGIXrQwGdUbMcC12jpWRqHk94DuztjfjT8/KyuvBLNFZAyhwaGWU2xo7
+ cW3+U68uIGXBpfzaJ1+afb0LyYCPBE+Rb1tg7TGqQzXrd+zSJix2wArb6RpoXTU0U5fZ
+ cRFJhdWoRDsyuJ+H0o9mhG/0vv2WTla2uT1ThUo4wZKlsNjH8fug+5FfxWSFgLSI6mtx
+ XPytPn4miM9FtfMVaWp3KZP/Q0jsv6iXZStJeHNGca/TK2Z3KpaWG9148RZA+30g0dbB
+ SKYXXkRlBKgeMnGsRKO+teIcse5t4UceJOhrdnqMWTPXejOg+hqD+YEcxvIHEk/oXBBw
+ FM/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KPqJVJp80N/DeT38pRVWoUhAfRHJVaCGxreCuk0z0lQ=;
- b=uUI8PxNwLYQ3kgmx3sUEwMEnX8pFIxEmGEj43bO7Tzr3Jbsc9HDhYS5Nt+e9cHoEbB
- j1jM29Gv1udgGz6BtnZzdpBK6/uwCPPZLrJnsvIYwMUjkknX/P91UcOpuAPcj2FwaNWb
- LBiWHasXgMVyUX5WXqFQJeKLbplGWMM7r0Dv90y9WSeErjifr11poq69CyDCz0oRsQTf
- Q1zHJSwCUusTVYUOc7cg5KgrQTTlN7bS0j54Gd9GkcsIsfWjFgtYuJqikNtBBjN5vCY0
- ncDT/QNCLj3ZEueXG8g1n412vL3QHZJ24rN5Z1I6gKyqlduShnRW+UPevEA+d2+31WtK
- suZA==
-X-Gm-Message-State: AFqh2kqZJQBJBm7tHyMHbCT0WzfkqY1PBTJSZLquT4oyD02qeqbLCWr7
- PNsQ2HaZnALJa1q0QO91maYpA17dXXuqQ0FCUFg=
-X-Google-Smtp-Source: AMrXdXumeFp70WmynUNpbw4r3HyocN0em/Mt78DcvpI/jdNUgdZAU9rfcKmdnZKjPtthcOUvjratqDEP88Uu6WfWjKY=
-X-Received: by 2002:ab0:3b8d:0:b0:419:2865:3ae7 with SMTP id
- p13-20020ab03b8d000000b0041928653ae7mr1567838uaw.70.1674171991715; Thu, 19
- Jan 2023 15:46:31 -0800 (PST)
+ bh=2L6/cN1y8IcvPVXB8DgZtdsayOsjfkLvj/cekQsNgo4=;
+ b=oFE8pB1S4WUHsTnIdvqjbpfrIpNKvornNLCRR5U2a3459OTZ9RZ7i5hwjLjqGBY0rk
+ FNUgZfZWgda05XwtRaRLAF/x64U34SGD4IPGlwov4ycyr3QjF/h5rg+h/5X/vTyOYtqh
+ Srg4QlnzCo/2giisXYeG3/yYuNHaGvuTj0I3T8x9+kufeW1LFRD/10dIdczK0Jl+G2NK
+ pcvqJL1n8FAjEjj5Ia5ZbJdPoqWfzPFTvLI0Ag9U6hdVsYkhQcHzgtqt1KJN5ftQDQmz
+ 16qVQIzfjvehJqRC4U3dRShxXgcCuylXOgMQKFmev1gKTg/bwcGYwuipdRKpjUELhSYI
+ quVQ==
+X-Gm-Message-State: AFqh2koImILASqpXDTZ2oGgsZR2tTQQLrTd94gBrlQhU8bmcM7hWp/bt
+ sK69Go1TGgepC/J9xJ4VDNdc3lIs/tTkJTgU7pcECXcOcU8=
+X-Google-Smtp-Source: AMrXdXua5mO9KZHaUF6Ju1g+rDP0gKREBk/J/pzWeZwQAmfine587Go6Lb4DlKmRjJgIHfjVjBcvOgw4xZgtvCkVM8Q=
+X-Received: by 2002:a05:6122:924:b0:3d5:5f93:53f with SMTP id
+ j36-20020a056122092400b003d55f93053fmr1728465vka.7.1674172828585; Thu, 19 Jan
+ 2023 16:00:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20230113103453.42776-1-alexghiti@rivosinc.com>
- <20230113103453.42776-3-alexghiti@rivosinc.com>
- <20230117163138.jze47hjeeuwu2k4j@orel>
- <CAKmqyKNFX_ovg4Bp_30o0g4Jd5XJ98i9LdFgejsDmGW4iL2+OA@mail.gmail.com>
- <20230118121916.6aqj57leen72z5tz@orel>
- <CAKmqyKNcd3JOZgPb23idrzVjxHj+HHwPz6f6xPEp2oVGJEZKpg@mail.gmail.com>
- <CAHVXubiW2OaMhe3STLLMz=wDPJeY8hvPHbuBJgL7KZyw4=pRpw@mail.gmail.com>
-In-Reply-To: <CAHVXubiW2OaMhe3STLLMz=wDPJeY8hvPHbuBJgL7KZyw4=pRpw@mail.gmail.com>
+References: <20221211052745.24738-1-vysakhpillai@embeddedinn.xyz>
+In-Reply-To: <20221211052745.24738-1-vysakhpillai@embeddedinn.xyz>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 20 Jan 2023 09:46:05 +1000
-Message-ID: <CAKmqyKNNocLxKJtBtFnZkbTdCwC=TKaHpm4Sunut49nxQyw8yA@mail.gmail.com>
-Subject: Re: [PATCH v5 2/2] riscv: Allow user to set the satp mode
-To: Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Andrew Jones <ajones@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Ludovic Henry <ludovic@rivosinc.com>
+Date: Fri, 20 Jan 2023 10:00:02 +1000
+Message-ID: <CAKmqyKPP5j38DesO7oU7FKJdqOuXmx8mJDqyOO-8CCC+Jf=Opg@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: Add support to change default RISCV hart memory
+ region
+To: Vysakh P Pillai <vysakhpillai@embeddedinn.xyz>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x935.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a36;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa36.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -80,78 +72,76 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2023 23:46:42 -0000
+X-List-Received-Date: Fri, 20 Jan 2023 00:00:32 -0000
 
-On Thu, Jan 19, 2023 at 11:00 PM Alexandre Ghiti <alexghiti@rivosinc.com> wrote:
+On Sun, Dec 11, 2022 at 3:29 PM Vysakh P Pillai
+<vysakhpillai@embeddedinn.xyz> wrote:
 >
-> Hi Alistair, Andrew,
+> Add support to optionally specify a memory region container
+> to be used to override the default system memory used
+> by the the RISCV harts when they are realized. Additional
+> memory regions can be added as sub-regions of this container
+> to dynamically control the memory regions and mappings visible
+> from the hart.
+
+Thanks for the patch.
+
+I think it might make more sense to send this with the series adding
+your board. It's a little difficult to picture how this is going to be
+used otherwise.
+
 >
-> On Thu, Jan 19, 2023 at 1:25 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Wed, Jan 18, 2023 at 10:19 PM Andrew Jones <ajones@ventanamicro.com> wrote:
-> > >
-> > > On Wed, Jan 18, 2023 at 10:28:46AM +1000, Alistair Francis wrote:
-> > > > On Wed, Jan 18, 2023 at 2:32 AM Andrew Jones <ajones@ventanamicro.com> wrote:
-> > > > >
-> > > > > On Fri, Jan 13, 2023 at 11:34:53AM +0100, Alexandre Ghiti wrote:
-> > > ...
-> > > > > > +
-> > > > > > +    /* Get rid of 32-bit/64-bit incompatibility */
-> > > > > > +    for (int i = 0; i < 16; ++i) {
-> > > > > > +        if ((cpu->cfg.satp_mode.map & (1 << i)) && !valid_vm[i]) {
-> > > > >
-> > > > > If we ever define mode=1 for rv64, then 'sv32=on' will be incorrectly
-> > > > > accepted as an alias. I think we should simply not define the sv32
-> > > > > property for rv64 nor the rv64-only modes for rv32. So, down in
-> > > > > riscv_add_satp_mode_properties() we can add some
-> > > > >
-> > > > >   #if defined(TARGET_RISCV32)
-> > > > >   ...
-> > > > >   #elif defined(TARGET_RISCV64)
-> > > > >   ...
-> > > > >   #endif
-> > > >
-> > > > Do not add any #if defined(TARGET_RISCV32) to QEMU.
-> > > >
-> > > > We are aiming for the riscv64-softmmu to be able to emulate 32-bit
-> > > > CPUs and compile time macros are the wrong solution here. Instead you
-> > > > can get the xlen of the hart and use that.
-> > > >
-> > >
-> > > Does this mean we want to be able to do the following?
-> > >
-> > >   qemu-system-riscv64 -cpu rv32,sv32=on ...
-> >
-> > That's the plan
-> >
-> > >
-> > > If so, then can we move the object_property_add() for sv32 to
-> > > rv32_base_cpu_init() and the rest to rv64_base_cpu_init()?
+> Signed-off-by: Vysakh P Pillai <vysakhpillai@embeddedinn.xyz>
+> ---
+>  hw/riscv/riscv_hart.c         | 5 +++++
+>  include/hw/riscv/riscv_hart.h | 1 +
+>  2 files changed, 6 insertions(+)
+>
+> diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+> index 613ea2aaa0..7a8dcab7e7 100644
+> --- a/hw/riscv/riscv_hart.c
+> +++ b/hw/riscv/riscv_hart.c
+> @@ -33,6 +33,8 @@ static Property riscv_harts_props[] = {
+>      DEFINE_PROP_STRING("cpu-type", RISCVHartArrayState, cpu_type),
+>      DEFINE_PROP_UINT64("resetvec", RISCVHartArrayState, resetvec,
+>                         DEFAULT_RSTVEC),
+> +    DEFINE_PROP_UINT64("cpu-memory", RISCVHartArrayState,
+> +                       cpu_memory,NULL),
 
-Wait! Sorry I didn't read this carefully enough. No, that is not what
-we want to do. That then won't support the vendor CPUs.
+I'm not sure I follow, this is a uint64_t but the default value is NULL?
 
-We just want to add the properties to all CPUs. Then if an invalid
-option is set we should return an error.
-
-Note that the 64-bit only configs can be hidden behind a #if
-defined(TARGET_RISCV64).
+I assume you are using this as a pointer then?
 
 Alistair
 
-> > > Currently, that would be doing the same thing as proposed above,
-> > > since those functions are under TARGET_RISCV* defines, but I guess
-> > > the object_property_add()'s would then be in more or less the right
-> > > places for when the 32-bit emulation support work is started.
-> >
-> > Sounds like a good idea :)
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
 >
-> What about riscv_any_cpu_init and riscv_host_cpu_init?
+> @@ -49,6 +51,9 @@ static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
+>      qdev_prop_set_uint64(DEVICE(&s->harts[idx]), "resetvec", s->resetvec);
+>      s->harts[idx].env.mhartid = s->hartid_base + idx;
+>      qemu_register_reset(riscv_harts_cpu_reset, &s->harts[idx]);
+> +    if (s->cpu_memory) {
+> +        object_property_set_link(OBJECT(&s->harts[idx].parent_obj), "memory",OBJECT(s->cpu_memory), &error_abort);
+> +    }
+>      return qdev_realize(DEVICE(&s->harts[idx]), NULL, errp);
+>  }
 >
-> >
-> > Alistair
-> >
-> > >
-> > > Thanks,
-> > > drew
+> diff --git a/include/hw/riscv/riscv_hart.h b/include/hw/riscv/riscv_hart.h
+> index bbc21cdc9a..3e5dfeeaae 100644
+> --- a/include/hw/riscv/riscv_hart.h
+> +++ b/include/hw/riscv/riscv_hart.h
+> @@ -38,6 +38,7 @@ struct RISCVHartArrayState {
+>      uint32_t hartid_base;
+>      char *cpu_type;
+>      uint64_t resetvec;
+> +    uint64_t cpu_memory;
+>      RISCVCPU *harts;
+>  };
+>
+> --
+> 2.34.1
+>
+>
+>
 
