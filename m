@@ -1,53 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pK5mr-00042P-9d
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 17:59:37 -0500
+	id 1pK5nw-0004n8-MY
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 18:00:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pK5mq-000425-FK; Mon, 23 Jan 2023 17:59:36 -0500
-Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
+ id 1pK5nt-0004l7-5J; Mon, 23 Jan 2023 18:00:41 -0500
+Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pK5mn-00080u-Jy; Mon, 23 Jan 2023 17:59:36 -0500
-Received: by mail-vk1-xa2c.google.com with SMTP id b81so6775945vkf.1;
- Mon, 23 Jan 2023 14:59:32 -0800 (PST)
+ id 1pK5nl-0008Hj-78; Mon, 23 Jan 2023 18:00:40 -0500
+Received: by mail-vs1-xe2d.google.com with SMTP id d66so14687709vsd.9;
+ Mon, 23 Jan 2023 15:00:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fA+g0ieOoZldjrJr5iwqwBGGsWDFSXZlbyv+KR3/2OU=;
- b=QpfWRLu1/6Ms0Y0vD5TyqQEqZ1v1f0oQ2NnZGDP8hJpJtxy2O7UoyZK2LvzLSySnR1
- cwB8kBQtoJEjW5+ikIEbMvlBdzLvec2Tokloe8NyEs5yRR2NsRrFF/Ai3M/kLZ1fK7pH
- au4ZlHWvTgYz2Y6pkxxhOUjY8zdBsf3C8XgxdJsvdAK5hqLERLsWIc+SjHbX8pRw5sNU
- kARZeRhiQQgJb2xbwwPtgKoHs+HNRQ9rl1ICQOZDrP8f4Tj9Xi2/Bkp1O2mzVkLSwNdb
- L9m6chqZznItyE5pYBk0dCrUEotLT55frjR5vU1HpAhyTJGhWpzv+eN2GuoJsrPNOrS0
- hioA==
+ bh=8vQGA0HFuaL7z/o2BSzL7L7mYrQyy/xNZ0/GqNXGZJ0=;
+ b=muU7mLOWKzYDA58ZEedER84HE6vMAH+GYrjzFzUOhDZWis6/PTMDOsFYul3qrdNhVG
+ AnjvdjUZcnyTYRyajXwa9qAPDuSRGMCEWJoBxfHACYvtUyYA2zFH+ZMBQBxs7g0XibDK
+ KmshDlXC5SaDUxQ6c24putlZC73TvEjaTuxiKawJ1aeIGMLmniV9nbV9GnQwrQtt+E6O
+ mkwkK5hWbukgxDCdd6RPK1tpEgfGQPhXkpYWCSSgtC5QmbF0z3oB7Gzri/ELmnK3onah
+ y57UfBYbSLI2mfginE9gP0W3nIHycg2xtmvOPqRnSqilk5dFu0EVGvMhg2SLbnnKj6TW
+ 8CPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fA+g0ieOoZldjrJr5iwqwBGGsWDFSXZlbyv+KR3/2OU=;
- b=xLWSQ7IXnXIK9GsYzuOlvMcc0o7LemVcqFVTxU+CIaWiaY2//bn18vgZkoYzbsnofv
- SCqOnW+jzUat69Ppyl+nnbYmqtGuN4Wg05DN/14BZRuFOxLPNu2Dn3/9UyVrcGVAVQID
- HPQQ9KHz4KIpHQY7Pk5MULCrnQWhHWmceDcZ72/mn+8FTI0Lgp8kkoBBmLfU8eUUmT9P
- 8F+U/on+GzaMgmhINV2gBpsW62xle1KJ7VLRdQnpzWL8b1Dz2l1P/41GKXzJhP+Flz7y
- nuH2ht9ndDZJEwZcIS4QLgqC6u4DNZ01iCv7JSfuP7pjcVdX0RNoGFQ86QlJ6pi1J2YM
- fTNw==
-X-Gm-Message-State: AFqh2krChSR/mpwtsnSkbUR9Oaf42PJ1BTlaMil+7B4P1+EGYX7nu0S8
- jrifjkdgCyJLrA8Qderax9oXV/MOdYR5Y7KRHO/iND0w93E=
-X-Google-Smtp-Source: AMrXdXstDvY8lrrg4yr7HixtZ4yvN70brLjtvyL3ibmdfQTwUpRukuhx+LWuGqaT/KdFhljRDYuN2naqECzQgMs134w=
-X-Received: by 2002:a05:6122:924:b0:3d5:5f93:53f with SMTP id
- j36-20020a056122092400b003d55f93053fmr3397568vka.7.1674514772479; Mon, 23 Jan
- 2023 14:59:32 -0800 (PST)
+ bh=8vQGA0HFuaL7z/o2BSzL7L7mYrQyy/xNZ0/GqNXGZJ0=;
+ b=vIzbViwqeCTXw0l6JISSk4TJ/m5ozcFHCAgCeJIOw7AIee436XZ0msbW1HCYI1IAVQ
+ ndDarm/sfzrUabRMbjqvkJ9M49Ou1+PpxlRDQLt3HpyWLTxVziX5TAfvF8URNFEGxlSZ
+ EaVDBUfOhHav/PJQkuuG24n27HirdXfb6b5Z9Xmn9Uu4z3GmCd6nSL3OvJxJKWMzxGT6
+ HVS07dI/l8XdeaH+7ilBi/iEkHUZxcDwX9wkg4VmdsOOhOj3IeBGZUj5ffSvbGRj+Q9l
+ p0mXnXU/rDvgr9ftJpYVeexQOaip6WthMIBtrGmIOmFebiiUtLNN+zoBq2N7WF34ezu/
+ eFfA==
+X-Gm-Message-State: AFqh2krHXKP15BoFk9pMzyhEipY53fttEBIz1Yy22kMeHYmTvHVki07u
+ vNHBZ/f7q31GBuquyHvyg/myNYhilD3Yq1MwanM=
+X-Google-Smtp-Source: AMrXdXtxpbDMsv2wAgnyZMGI80W9OsZD0/h0DlEMTMArTmdPxvMugViOlASm4sEScZuLA/IRAzVoq4dXE5x49pT+OOc=
+X-Received: by 2002:a67:ba0c:0:b0:3ce:f2da:96a with SMTP id
+ l12-20020a67ba0c000000b003cef2da096amr3058899vsn.64.1674514831651; Mon, 23
+ Jan 2023 15:00:31 -0800 (PST)
 MIME-Version: 1.0
 References: <20221223180016.2068508-1-christoph.muellner@vrull.eu>
- <20221223180016.2068508-7-christoph.muellner@vrull.eu>
-In-Reply-To: <20221223180016.2068508-7-christoph.muellner@vrull.eu>
+ <20221223180016.2068508-8-christoph.muellner@vrull.eu>
+In-Reply-To: <20221223180016.2068508-8-christoph.muellner@vrull.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 24 Jan 2023 08:59:06 +1000
-Message-ID: <CAKmqyKO+8n=6s3Y1z7jt81vn3r3o5tgXWYmmCV_Ba-kNE1FrsQ@mail.gmail.com>
-Subject: Re: [PATCH v2 06/15] RISC-V: Adding XTheadCondMov ISA extension
+Date: Tue, 24 Jan 2023 09:00:05 +1000
+Message-ID: <CAKmqyKO5J3ZdZNmq==fm5o=4EUTapCiWJw9M=rda4HcvYSSadg@mail.gmail.com>
+Subject: Re: [PATCH v2 07/15] RISC-V: Adding T-Head multiply-accumulate
+ instructions
 To: Christoph Muellner <christoph.muellner@vrull.eu>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
@@ -62,8 +63,8 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -84,19 +85,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2023 22:59:36 -0000
+X-List-Received-Date: Mon, 23 Jan 2023 23:00:43 -0000
 
-On Sat, Dec 24, 2022 at 4:08 AM Christoph Muellner
+On Sat, Dec 24, 2022 at 4:04 AM Christoph Muellner
 <christoph.muellner@vrull.eu> wrote:
 >
 > From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 >
-> This patch adds support for the XTheadCondMov ISA extension.
+> This patch adds support for the T-Head MAC instructions.
 > The patch uses the T-Head specific decoder and translation.
 >
 > Changes in v2:
 > - Add ISA_EXT_DATA_ENTRY()
-> - Fix invalid use of register from dest_gpr()
 > - Use single decoder for XThead extensions
 >
 > Co-developed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
@@ -107,65 +107,65 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.c                         |  2 ++
+>  target/riscv/cpu.c                         |  2 +
 >  target/riscv/cpu.h                         |  1 +
->  target/riscv/insn_trans/trans_xthead.c.inc | 35 ++++++++++++++++++++++
->  target/riscv/translate.c                   |  2 +-
->  target/riscv/xthead.decode                 |  4 +++
->  5 files changed, 43 insertions(+), 1 deletion(-)
+>  target/riscv/insn_trans/trans_xthead.c.inc | 83 ++++++++++++++++++++++
+>  target/riscv/translate.c                   |  3 +-
+>  target/riscv/xthead.decode                 |  8 +++
+>  5 files changed, 96 insertions(+), 1 deletion(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 17273425a8..36a53784dd 100644
+> index 36a53784dd..88ad2138db 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -112,6 +112,7 @@ static const struct isa_ext_data isa_edata_arr[] =3D =
+> @@ -113,6 +113,7 @@ static const struct isa_ext_data isa_edata_arr[] =3D =
 {
->      ISA_EXT_DATA_ENTRY(xtheadbb, true, PRIV_VERSION_1_11_0, ext_xtheadbb=
-),
 >      ISA_EXT_DATA_ENTRY(xtheadbs, true, PRIV_VERSION_1_11_0, ext_xtheadbs=
 ),
 >      ISA_EXT_DATA_ENTRY(xtheadcmo, true, PRIV_VERSION_1_11_0, ext_xtheadc=
 mo),
-> +    ISA_EXT_DATA_ENTRY(xtheadcondmov, true, PRIV_VERSION_1_11_0, ext_xth=
+>      ISA_EXT_DATA_ENTRY(xtheadcondmov, true, PRIV_VERSION_1_11_0, ext_xth=
 eadcondmov),
+> +    ISA_EXT_DATA_ENTRY(xtheadmac, true, PRIV_VERSION_1_11_0, ext_xtheadm=
+ac),
 >      ISA_EXT_DATA_ENTRY(xtheadsync, true, PRIV_VERSION_1_11_0, ext_xthead=
 sync),
 >      ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_X=
 VentanaCondOps),
 >  };
-> @@ -1069,6 +1070,7 @@ static Property riscv_cpu_extensions[] =3D {
->      DEFINE_PROP_BOOL("xtheadbb", RISCVCPU, cfg.ext_xtheadbb, false),
+> @@ -1071,6 +1072,7 @@ static Property riscv_cpu_extensions[] =3D {
 >      DEFINE_PROP_BOOL("xtheadbs", RISCVCPU, cfg.ext_xtheadbs, false),
 >      DEFINE_PROP_BOOL("xtheadcmo", RISCVCPU, cfg.ext_xtheadcmo, false),
-> +    DEFINE_PROP_BOOL("xtheadcondmov", RISCVCPU, cfg.ext_xtheadcondmov, f=
+>      DEFINE_PROP_BOOL("xtheadcondmov", RISCVCPU, cfg.ext_xtheadcondmov, f=
 alse),
+> +    DEFINE_PROP_BOOL("xtheadmac", RISCVCPU, cfg.ext_xtheadmac, false),
 >      DEFINE_PROP_BOOL("xtheadsync", RISCVCPU, cfg.ext_xtheadsync, false),
 >      DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOp=
 s, false),
 >
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 5f68cb1e1e..01f035d8e9 100644
+> index 01f035d8e9..92198be9d8 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -469,6 +469,7 @@ struct RISCVCPUConfig {
->      bool ext_xtheadbb;
+> @@ -470,6 +470,7 @@ struct RISCVCPUConfig {
 >      bool ext_xtheadbs;
 >      bool ext_xtheadcmo;
-> +    bool ext_xtheadcondmov;
+>      bool ext_xtheadcondmov;
+> +    bool ext_xtheadmac;
 >      bool ext_xtheadsync;
 >      bool ext_XVentanaCondOps;
 >
 > diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/in=
 sn_trans/trans_xthead.c.inc
-> index fb1f2c5731..bf549bbd74 100644
+> index bf549bbd74..109be58c9b 100644
 > --- a/target/riscv/insn_trans/trans_xthead.c.inc
 > +++ b/target/riscv/insn_trans/trans_xthead.c.inc
-> @@ -40,6 +40,12 @@
+> @@ -46,6 +46,12 @@
 >      }                                            \
 >  } while (0)
 >
-> +#define REQUIRE_XTHEADCONDMOV(ctx) do {          \
-> +    if (!ctx->cfg_ptr->ext_xtheadcondmov) {      \
+> +#define REQUIRE_XTHEADMAC(ctx) do {              \
+> +    if (!ctx->cfg_ptr->ext_xtheadmac) {          \
 > +        return false;                            \
 > +    }                                            \
 > +} while (0)
@@ -173,38 +173,88 @@ sn_trans/trans_xthead.c.inc
 >  #define REQUIRE_XTHEADSYNC(ctx) do {             \
 >      if (!ctx->cfg_ptr->ext_xtheadsync) {         \
 >          return false;                            \
-> @@ -272,6 +278,35 @@ NOP_PRIVCHECK(th_l2cache_call, REQUIRE_XTHEADCMO, RE=
-QUIRE_PRIV_MHS)
->  NOP_PRIVCHECK(th_l2cache_ciall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
->  NOP_PRIVCHECK(th_l2cache_iall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> @@ -307,6 +313,83 @@ static bool trans_th_mvnez(DisasContext *ctx, arg_th=
+_mveqz *a)
+>      return gen_th_condmove(ctx, a, TCG_COND_NE);
+>  }
 >
-> +/* XTheadCondMov */
+> +/* XTheadMac */
 > +
-> +static bool gen_th_condmove(DisasContext *ctx, arg_r *a, TCGCond cond)
+> +static bool gen_th_mac(DisasContext *ctx, arg_r *a,
+> +                       void (*accumulate_func)(TCGv, TCGv, TCGv),
+> +                       void (*extend_operand_func)(TCGv, TCGv))
 > +{
+> +    TCGv dest =3D dest_gpr(ctx, a->rd);
+> +    TCGv src0 =3D get_gpr(ctx, a->rd, EXT_NONE);
 > +    TCGv src1 =3D get_gpr(ctx, a->rs1, EXT_NONE);
 > +    TCGv src2 =3D get_gpr(ctx, a->rs2, EXT_NONE);
-> +    TCGv old =3D get_gpr(ctx, a->rd, EXT_NONE);
-> +    TCGv dest =3D dest_gpr(ctx, a->rd);
+> +    TCGv tmp =3D tcg_temp_new();
 > +
-> +    tcg_gen_movcond_tl(cond, dest, src2, ctx->zero, src1, old);
+> +    if (extend_operand_func) {
+> +        TCGv tmp2 =3D tcg_temp_new();
+> +        extend_operand_func(tmp, src1);
+> +        extend_operand_func(tmp2, src2);
+> +        tcg_gen_mul_tl(tmp, tmp, tmp2);
+> +        tcg_temp_free(tmp2);
+> +    } else {
+> +        tcg_gen_mul_tl(tmp, src1, src2);
+> +    }
 > +
+> +    accumulate_func(dest, src0, tmp);
 > +    gen_set_gpr(ctx, a->rd, dest);
+> +    tcg_temp_free(tmp);
+> +
 > +    return true;
 > +}
 > +
-> +/* th.mveqz: "if (rs2 =3D=3D 0) rd =3D rs1;" */
-> +static bool trans_th_mveqz(DisasContext *ctx, arg_th_mveqz *a)
+> +/* th.mula: "rd =3D rd + rs1 * rs2" */
+> +static bool trans_th_mula(DisasContext *ctx, arg_th_mula *a)
 > +{
-> +    REQUIRE_XTHEADCONDMOV(ctx);
-> +    return gen_th_condmove(ctx, a, TCG_COND_EQ);
+> +    REQUIRE_XTHEADMAC(ctx);
+> +    return gen_th_mac(ctx, a, tcg_gen_add_tl, NULL);
 > +}
 > +
-> +/* th.mvnez: "if (rs2 !=3D 0) rd =3D rs1;" */
-> +static bool trans_th_mvnez(DisasContext *ctx, arg_th_mveqz *a)
+> +/* th.mulah: "rd =3D sext.w(rd + sext.w(rs1[15:0]) * sext.w(rs2[15:0]))"=
+ */
+> +static bool trans_th_mulah(DisasContext *ctx, arg_th_mulah *a)
 > +{
-> +    REQUIRE_XTHEADCONDMOV(ctx);
-> +    return gen_th_condmove(ctx, a, TCG_COND_NE);
+> +    REQUIRE_XTHEADMAC(ctx);
+> +    ctx->ol =3D MXL_RV32;
+> +    return gen_th_mac(ctx, a, tcg_gen_add_tl, tcg_gen_ext16s_tl);
+> +}
+> +
+> +/* th.mulaw: "rd =3D sext.w(rd + rs1 * rs2)" */
+> +static bool trans_th_mulaw(DisasContext *ctx, arg_th_mulaw *a)
+> +{
+> +    REQUIRE_XTHEADMAC(ctx);
+> +    REQUIRE_64BIT(ctx);
+> +    ctx->ol =3D MXL_RV32;
+> +    return gen_th_mac(ctx, a, tcg_gen_add_tl, NULL);
+> +}
+> +
+> +/* th.muls: "rd =3D rd - rs1 * rs2" */
+> +static bool trans_th_muls(DisasContext *ctx, arg_th_muls *a)
+> +{
+> +    REQUIRE_XTHEADMAC(ctx);
+> +    return gen_th_mac(ctx, a, tcg_gen_sub_tl, NULL);
+> +}
+> +
+> +/* th.mulsh: "rd =3D sext.w(rd - sext.w(rs1[15:0]) * sext.w(rs2[15:0]))"=
+ */
+> +static bool trans_th_mulsh(DisasContext *ctx, arg_th_mulsh *a)
+> +{
+> +    REQUIRE_XTHEADMAC(ctx);
+> +    ctx->ol =3D MXL_RV32;
+> +    return gen_th_mac(ctx, a, tcg_gen_sub_tl, tcg_gen_ext16s_tl);
+> +}
+> +
+> +/* th.mulsw: "rd =3D sext.w(rd - rs1 * rs2)" */
+> +static bool trans_th_mulsw(DisasContext *ctx, arg_th_mulsw *a)
+> +{
+> +    REQUIRE_XTHEADMAC(ctx);
+> +    REQUIRE_64BIT(ctx);
+> +    ctx->ol =3D MXL_RV32;
+> +    return gen_th_mac(ctx, a, tcg_gen_sub_tl, NULL);
 > +}
 > +
 >  /* XTheadSync */
@@ -212,31 +262,37 @@ QUIRE_PRIV_MHS)
 >  static bool trans_th_sfence_vmas(DisasContext *ctx, arg_th_sfence_vmas *=
 a)
 > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index fc326e0a79..f15883b16b 100644
+> index f15883b16b..36f512baa8 100644
 > --- a/target/riscv/translate.c
 > +++ b/target/riscv/translate.c
-> @@ -129,7 +129,7 @@ static bool has_xthead_p(DisasContext *ctx  __attribu=
+> @@ -129,7 +129,8 @@ static bool has_xthead_p(DisasContext *ctx  __attribu=
 te__((__unused__)))
 >  {
 >      return ctx->cfg_ptr->ext_xtheadba || ctx->cfg_ptr->ext_xtheadbb ||
 >             ctx->cfg_ptr->ext_xtheadbs || ctx->cfg_ptr->ext_xtheadcmo ||
-> -           ctx->cfg_ptr->ext_xtheadsync;
-> +           ctx->cfg_ptr->ext_xtheadcondmov || ctx->cfg_ptr->ext_xtheadsy=
+> -           ctx->cfg_ptr->ext_xtheadcondmov || ctx->cfg_ptr->ext_xtheadsy=
 nc;
+> +           ctx->cfg_ptr->ext_xtheadcondmov || ctx->cfg_ptr->ext_xtheadma=
+c ||
+> +           ctx->cfg_ptr->ext_xtheadsync;
 >  }
 >
 >  #define MATERIALISE_EXT_PREDICATE(ext)  \
 > diff --git a/target/riscv/xthead.decode b/target/riscv/xthead.decode
-> index 8494805611..a8ebd8a18b 100644
+> index a8ebd8a18b..696de6cecf 100644
 > --- a/target/riscv/xthead.decode
 > +++ b/target/riscv/xthead.decode
-> @@ -84,6 +84,10 @@ th_l2cache_call  0000000 10101 00000 000 00000 0001011
->  th_l2cache_ciall 0000000 10111 00000 000 00000 0001011
->  th_l2cache_iall  0000000 10110 00000 000 00000 0001011
+> @@ -88,6 +88,14 @@ th_l2cache_iall  0000000 10110 00000 000 00000 0001011
+>  th_mveqz         0100000 ..... .....  001 ..... 0001011 @r
+>  th_mvnez         0100001 ..... .....  001 ..... 0001011 @r
 >
-> +# XTheadCondMov
-> +th_mveqz         0100000 ..... .....  001 ..... 0001011 @r
-> +th_mvnez         0100001 ..... .....  001 ..... 0001011 @r
+> +# XTheadMac
+> +th_mula          00100 00 ..... ..... 001 ..... 0001011 @r
+> +th_mulah         00101 00 ..... ..... 001 ..... 0001011 @r
+> +th_mulaw         00100 10 ..... ..... 001 ..... 0001011 @r
+> +th_muls          00100 01 ..... ..... 001 ..... 0001011 @r
+> +th_mulsh         00101 01 ..... ..... 001 ..... 0001011 @r
+> +th_mulsw         00100 11 ..... ..... 001 ..... 0001011 @r
 > +
 >  # XTheadSync
 >  th_sfence_vmas   0000010 ..... ..... 000 00000 0001011 @rs2_s
