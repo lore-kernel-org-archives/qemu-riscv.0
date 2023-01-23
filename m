@@ -1,57 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pJkdk-0003vy-0K
-	for mharc-qemu-riscv@gnu.org; Sun, 22 Jan 2023 19:24:48 -0500
+	id 1pJmxq-0007CH-2Z
+	for mharc-qemu-riscv@gnu.org; Sun, 22 Jan 2023 21:53:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pJkdb-0003vQ-58; Sun, 22 Jan 2023 19:24:39 -0500
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
+ id 1pJmxo-0007By-Gd; Sun, 22 Jan 2023 21:53:40 -0500
+Received: from mail-vk1-xa33.google.com ([2607:f8b0:4864:20::a33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pJkdY-0003Ek-Fc; Sun, 22 Jan 2023 19:24:38 -0500
-Received: by mail-vs1-xe34.google.com with SMTP id q125so11369528vsb.0;
- Sun, 22 Jan 2023 16:24:35 -0800 (PST)
+ id 1pJmxn-0000lg-27; Sun, 22 Jan 2023 21:53:40 -0500
+Received: by mail-vk1-xa33.google.com with SMTP id 12so5331291vkj.12;
+ Sun, 22 Jan 2023 18:53:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8fZqZuTkE+WjJG7EHXyNeyFw6GlZLWGaAGuhBGJ4LdQ=;
- b=QMK/MAMBMvYJiGXeeX98pckLE0Z6OzQzARKzsKk7TXkzqE+xKi90y7i/J8SN/CPbQt
- Fq33cSvbqP8h4RBxC0PTVTVVkk8sJW1+Dy2wx9MnZoO1ZJDgUdDCYCWJos5ANGhWVdjr
- 4scGTnYKeolXMl6lqOyB9BMWCnKAhvAAZeR5lqe7XnCWOSs2FtvcsUnsPwK8uhWCLL4l
- xynfV2+tA12rDbawD2cOh6L1axKW+TlSPqwYGlGFZkfe7AhvfRbOieBwiDgbh0hK+eVj
- b1eiPDRS1uu1i+LCZK1uzPKtyFtyStMBK10BB5jfRf69FxBXe8iigiom3Qy2E1CPY4XF
- 85Tw==
+ bh=2WYC5rBPFTXtPGGGbMHyimbWYUNxJhLQ33nmRBOsDqw=;
+ b=XcYWzpivIgQzCDPkk2mVIvfR9M8/q+M/klChO83hy13/WEgly28MMrDE2lwiKG5eX4
+ sf5tmpVWDjF/dA5zlvgMU6jgWDe4CcrlVASAGMK65EJQu4UeR/sv//FuB5ZTVIMedXY9
+ KVBsgyLj/tX/1UXje9tXVZdrpFSKB3StLmaxxvHbq2nElhsPH+b7ZZJffGp60h65fBjO
+ tuXBBNDJbOj3hEUGJEvJ94Qb+GZxX05X7bad5GJydfwWmOcltLwn90e3+u4LmajetkB8
+ aVU/m6nsh60hNNrIoCSm+ZuclM94/JqnHtpJLjXssnEEVYvK+pc9qizCMF1e2BH5Ietm
+ QIlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8fZqZuTkE+WjJG7EHXyNeyFw6GlZLWGaAGuhBGJ4LdQ=;
- b=iRd+to8HxQ989PcFU7/sdYYGtgVyRttKeCkcFh4Bx6pse+p+jPhYj4s7xxR1AVmlec
- a54g29Lxpkh2FYpjTCb3RjBY38MCie0KUs4CHjmILW1mykh3PG4X4+5sP808mkao9T1I
- UIvaF0iWVVhhXyFE5l0lC/6FnyhLn+YpRXclu9yZtl8qra2PST7ooiah4fmWhd8/jDA5
- b/qhOWIgFeYA9xDSBl5tM5wfG0OSZQARi+164ls0ZjEVxpDjEU9cnORxTy9vGD9AOT49
- d+pzljqIDvCXZWhTG/Y7R3E8MobG/OmFIYnAHDpuZXKGExfpKtxuAOUl0DwDFg2YX2hv
- dN0w==
-X-Gm-Message-State: AFqh2kphf1eQ+Hhg4q4APyjxfMGTVd249dxA1i+FtRB7bhwIP9LOByR+
- XXFfwKYc44e6nVbpmqTi+IkqRcQ4MwWytjBshtuWwQZ4Qt4=
-X-Google-Smtp-Source: AMrXdXtIXWCIR/tqdeTZojbxIs4jgf7z7eNX8xPSjUSRXdjSMIOYSi8hd6LXbNxCEELtv9vVc1d3wosEXTKboXVhYJE=
-X-Received: by 2002:a67:eb10:0:b0:3c9:8cc2:dd04 with SMTP id
- a16-20020a67eb10000000b003c98cc2dd04mr3192007vso.73.1674433474431; Sun, 22
- Jan 2023 16:24:34 -0800 (PST)
+ bh=2WYC5rBPFTXtPGGGbMHyimbWYUNxJhLQ33nmRBOsDqw=;
+ b=vaZUphF2kRoYxjUwcsFByNKMDGsuy5+i7eDin6i1s1FnwAhLo3GNycGasSoIAe0R9X
+ IhTBTsWJb+b4SN2rYda2PPQbWCpI8+XKuQGifacmw92vP0mqRI2R7RfPDduT6iksxPkH
+ tP1Wt3YwmVFu9v77smsezbdWKgfGoqG+tYEAe/+ofaMpU3X1EfHVNdzeCLbmr+0WWqdC
+ 5fQa/zG4wGDWtT/qnoIRYFtFJHh5c4BWg6L3W8X9OTy+uFfZkN4tqDDW1xkodiizsfyL
+ b7JO+LcOTQ4y4qgn6yBhhDDeVF2EAyOsOeOq7X/MihhhGBWALIvcM4bDQ/p8UboW+6Oq
+ znjQ==
+X-Gm-Message-State: AFqh2krfqSxW5jb9meIVhg8JboQIuVC8jkIBreTmr4F7WBkQC3/RkjFV
+ +KVY/PJMPeGxlrqh30PlbupYCTFwuBZVAADsHIs=
+X-Google-Smtp-Source: AMrXdXuc9+N6IpcHh0KVLW4q6WJS3HiatGBxnYY1vGm7k+8Y8p4znQey0urVP8tn3YWJAuGkop7iuJnajzCmRIA6sS0=
+X-Received: by 2002:a1f:45cb:0:b0:3e2:3d0:929c with SMTP id
+ s194-20020a1f45cb000000b003e203d0929cmr1241498vka.30.1674442417306; Sun, 22
+ Jan 2023 18:53:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20230119213707.651533-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20230119213707.651533-1-dbarboza@ventanamicro.com>
+References: <20230123000540.58351-1-wilfred.mallawa@opensource.wdc.com>
+In-Reply-To: <20230123000540.58351-1-wilfred.mallawa@opensource.wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 23 Jan 2023 10:24:08 +1000
-Message-ID: <CAKmqyKP4NPME9J5y+4M4SqXsEXWyeM4J_MjJ6McNiEa-KB9-EQ@mail.gmail.com>
-Subject: Re: [PATCH v9 0/3] hw/riscv: clear kernel_entry high bits with 32bit
- CPUs
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
+Date: Mon, 23 Jan 2023 12:53:11 +1000
+Message-ID: <CAKmqyKOnXPPcHMXe81KTxt9mLz0VjE+QxGybGmKZNzSFhP7KmQ@mail.gmail.com>
+Subject: Re: [PATCH] include/hw/riscv/opentitan: update opentitan IRQs
+To: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Wilfred Mallawa <wilfred.mallawa@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a33;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa33.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,49 +73,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2023 00:24:41 -0000
+X-List-Received-Date: Mon, 23 Jan 2023 02:53:40 -0000
 
-On Fri, Jan 20, 2023 at 7:38 AM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Mon, Jan 23, 2023 at 10:06 AM Wilfred Mallawa
+<wilfred.mallawa@opensource.wdc.com> wrote:
 >
-> Hi,
+> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 >
-> In this version I changed the patch order to avoid having a patch that
-> would trigger the 32 bit regression Alistair observed. Patch 3 is now
-> the first patch.
+> Updates the opentitan IRQs to match the latest supported commit of
+> Opentitan from TockOS.
 >
-> I've also addressed the comments from Bin and Phil.
+> OPENTITAN_SUPPORTED_SHA := 565e4af39760a123c59a184aa2f5812a961fde47
 >
-> Patches based on riscv-to-apply.next.
->
-> Changes from v8:
-> - patch 1 (former 3):
->   - comment changes
->   - now open code '32' instead of using a macro
-> - v8 link: https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg03254.html
->
-> Daniel Henrique Barboza (3):
->   hw/riscv: clear kernel_entry higher bits from load_elf_ram_sym()
->   hw/riscv/boot.c: consolidate all kernel init in riscv_load_kernel()
->   hw/riscv/boot.c: make riscv_load_initrd() static
+> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  include/hw/riscv/opentitan.h | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
 >
->  hw/riscv/boot.c            | 96 ++++++++++++++++++++++++++------------
->  hw/riscv/microchip_pfsoc.c | 12 +----
->  hw/riscv/opentitan.c       |  4 +-
->  hw/riscv/sifive_e.c        |  4 +-
->  hw/riscv/sifive_u.c        | 12 +----
->  hw/riscv/spike.c           | 14 ++----
->  hw/riscv/virt.c            | 12 +----
->  include/hw/riscv/boot.h    |  3 +-
->  8 files changed, 82 insertions(+), 75 deletions(-)
+> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
+> index 7659d1bc5b..235728b9cc 100644
+> --- a/include/hw/riscv/opentitan.h
+> +++ b/include/hw/riscv/opentitan.h
+> @@ -108,11 +108,11 @@ enum {
+>      IBEX_UART0_RX_BREAK_ERR_IRQ   = 6,
+>      IBEX_UART0_RX_TIMEOUT_IRQ     = 7,
+>      IBEX_UART0_RX_PARITY_ERR_IRQ  = 8,
+> -    IBEX_TIMER_TIMEREXPIRED0_0    = 127,
+> -    IBEX_SPI_HOST0_ERR_IRQ        = 134,
+> -    IBEX_SPI_HOST0_SPI_EVENT_IRQ  = 135,
+> -    IBEX_SPI_HOST1_ERR_IRQ        = 136,
+> -    IBEX_SPI_HOST1_SPI_EVENT_IRQ  = 137,
+> +    IBEX_TIMER_TIMEREXPIRED0_0    = 124,
+> +    IBEX_SPI_HOST0_ERR_IRQ        = 131,
+> +    IBEX_SPI_HOST0_SPI_EVENT_IRQ  = 132,
+> +    IBEX_SPI_HOST1_ERR_IRQ        = 133,
+> +    IBEX_SPI_HOST1_SPI_EVENT_IRQ  = 134,
+>  };
 >
+>  #endif
 > --
 > 2.39.0
 >
