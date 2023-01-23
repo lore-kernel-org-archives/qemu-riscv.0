@@ -1,54 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pK6Qp-00081H-B0
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 18:40:55 -0500
+	id 1pK6TS-00010T-Lr
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 18:43:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pK6Qn-0007yv-N2; Mon, 23 Jan 2023 18:40:53 -0500
-Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
+ id 1pK6TR-0000zW-5e; Mon, 23 Jan 2023 18:43:37 -0500
+Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pK6Qk-0006Yp-8e; Mon, 23 Jan 2023 18:40:52 -0500
-Received: by mail-vs1-xe31.google.com with SMTP id 3so14782332vsq.7;
- Mon, 23 Jan 2023 15:40:48 -0800 (PST)
+ id 1pK6TO-0007MR-Gk; Mon, 23 Jan 2023 18:43:36 -0500
+Received: by mail-vs1-xe33.google.com with SMTP id n190so14797077vsc.11;
+ Mon, 23 Jan 2023 15:43:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JrFU+/OI+aEuW4W7C8WpwgZ0Ws3ulVSH/LvVMTN7BHk=;
- b=gu18tjrFHZJQ9CQeWMi+eLoBpjSP+E+EntRSt0u6GVVoLScqSTnHrmacd7IP1Xesmx
- Ah5FxYFfCTriMwFBcOeCJoe0QlExtSzEdGkZ1TdV44+sx45H0eXYRjhSTtzY/w0rZXHJ
- 5s/cp0PkuplgE0IVloGoVT0khYm8jrsAOqdolECyOFohxyqc9zRFl6lI+tD4ZCo7y57e
- TfHn3/HpgcCwmfZZ3pjbb0DDS0iSQnoZ7d+olMEG7/4i0iIFEti9SKnsgicH/irHV5yN
- u8nzLKC8YXaDnwZrskWSVtjPXPQxpY+cMdVZz/pEYPG91rqwmYpbUtOeBaAbsZ15OvPp
- JHcw==
+ bh=tgDeRWqSkbVPNnX6zRsTaGkdCGHGke7pz1l4aUWanAE=;
+ b=fnXg83fA4pCKEMRWUANp9Pw37CTg6JUzPVz43njRvgSbUYSCmKJNk2NLnTGwO9U1yi
+ Jj8q+n/L6gPUWE3qh6hvOc1PcGQw+VW5lTAc6KqCTOvljEnvMtY9BYotOqc+HRqPSIZ0
+ qBQQOjAgrazHvuQwHBUWS54joFWCnhAR86jHB4JrKSwaAAqd2Z/GDfda/IoTaHgFQful
+ LYvlfbexYUwaShWZmJUs+jIB4hVpXhfg45X3dit+UGxTsasta7gnaq+QnSi+ok3flRYs
+ AENDML1g3FvbwCLTeDlRuy0E3CFYLPmV9xKf8ZPU683xrld7ilNud6zIEcWTvg4wjZSB
+ u4Pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JrFU+/OI+aEuW4W7C8WpwgZ0Ws3ulVSH/LvVMTN7BHk=;
- b=2zXa8mYq00FL1Vr9amQw9uWyVzZ8rluftNMrgkrBBoRuYxXg5rhmaNuBj/BbiDZpa+
- 6rCKrAAVsNXfCVaQIhQbA//QgPaKFDhnZ8xMDSPD0u2zvXUPWEbFtZM8uqYzUV2S0zG+
- Gpznd9CfS5WSCmAIrlGqzI9HIgsRKGLnNNSPeYGHILWp92/8EptrD4gR3AvRXDu7hRhL
- TwX7r6gwTzHEjoHb80k4xEt6so21z7PLhkv3R9JNJiuWiP3Ke7HvO5kmYqlFze7UhfT9
- lSZX4gMZkaMijxFuFse70dskFyXQ1Ocmlx0EE/vLJjxHwDq+1giEJjr3+HAbBDIA9LYF
- uf+A==
-X-Gm-Message-State: AFqh2koX6jFSlcVFhKDqzu5LBGAZDA9L9AMASB7uGm1N4HcXk5+3q7hu
- a0iSw4zz5bHV/8/MxP3nPFKrFgbIZUH72trMc0M=
-X-Google-Smtp-Source: AMrXdXsTTnBfYd0Lorcr0FHqDhuoZEdeM030tmDP3nLkiAuPfzKORgmaio9+cy488ktbj6dLH04uH5IUL6UD19Ol0Vc=
-X-Received: by 2002:a67:e14a:0:b0:3d3:f10a:4f56 with SMTP id
- o10-20020a67e14a000000b003d3f10a4f56mr3500977vsl.10.1674517248007; Mon, 23
- Jan 2023 15:40:48 -0800 (PST)
+ bh=tgDeRWqSkbVPNnX6zRsTaGkdCGHGke7pz1l4aUWanAE=;
+ b=WAMnd0iq6ijdTPNejyn7ATAP3pG8IGKyDYtv18PATxEgnw75e5FWVNpTt3zluDfnkF
+ 5MiJ0Z9m/vaWSpht9TS9oPHTEbN4RQsbaSTaAOVcUIUUgVo+IJMPZ2+eeGFKa8H26xAC
+ H3p5TOQa79ACXhvtyhvdHdniYbyi2xY0HQdGiwPMu8wnEF/lFp2laPdZrl+3Qdi1jyL0
+ z8ucHPJRQw+YJttHa7woRuq+Ve+c5KpFBvHUHLIUkn0AIg/25G99UGdU3NkPFPPE8Ozq
+ wgpByM+NfFCQUjg/wfRRlzcxd4Ed86deavzCgIjx3r0/YqMlgYVaRTJ4AADfUzi1XrXr
+ dfiw==
+X-Gm-Message-State: AFqh2krtTq3VirxVD0d1Bbgn/aIVQg4AwORNC6sPnsLeZ+sjeVnLZw2K
+ oCXOBz7/97qm54WkjSB5l7P+U1TxMq4xkMIB7xY=
+X-Google-Smtp-Source: AMrXdXtcbsnhBeK+u/TRQGhNh9HVNatRywzGdDdv8rjNt2Nk18+87mLhfcjDk2H2iLT00BX3cMZbUqKAf3aXKhj++gM=
+X-Received: by 2002:a67:eb10:0:b0:3c9:8cc2:dd04 with SMTP id
+ a16-20020a67eb10000000b003c98cc2dd04mr3760809vso.73.1674517412790; Mon, 23
+ Jan 2023 15:43:32 -0800 (PST)
 MIME-Version: 1.0
 References: <20221223180016.2068508-1-christoph.muellner@vrull.eu>
- <20221223180016.2068508-16-christoph.muellner@vrull.eu>
-In-Reply-To: <20221223180016.2068508-16-christoph.muellner@vrull.eu>
+ <20221223180016.2068508-14-christoph.muellner@vrull.eu>
+In-Reply-To: <20221223180016.2068508-14-christoph.muellner@vrull.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 24 Jan 2023 09:40:22 +1000
-Message-ID: <CAKmqyKNCisHs+MQbuwqsQAp=ouRuvnTkkaT+oRexu2JgdZy+Ng@mail.gmail.com>
-Subject: Re: [PATCH v2 15/15] target/riscv: add a MAINTAINERS entry for
- XThead* extension support
+Date: Tue, 24 Jan 2023 09:43:06 +1000
+Message-ID: <CAKmqyKP_xwesnzrnZz1vwZmPqGDb3Ov9sXx1j+tOMOAdC_SrMg@mail.gmail.com>
+Subject: Re: [PATCH v2 13/15] RISC-V: Add initial support for T-Head C906
 To: Christoph Muellner <christoph.muellner@vrull.eu>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
@@ -63,8 +62,8 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -85,46 +84,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2023 23:40:54 -0000
+X-List-Received-Date: Mon, 23 Jan 2023 23:43:37 -0000
 
-On Sat, Dec 24, 2022 at 4:09 AM Christoph Muellner
+On Sat, Dec 24, 2022 at 4:07 AM Christoph Muellner
 <christoph.muellner@vrull.eu> wrote:
 >
 > From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 >
-> The XThead* extensions are maintained by T-Head and VRULL.
-> Adding a point of contact from both companies.
+> This patch adds the T-Head C906 to the list of known CPUs.
+> Selecting this CPUs will automatically enable the available
+> ISA extensions of the CPUs (incl. vendor extensions).
 >
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Co-developed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 > Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
+>
+> Changes in v2:
+> - Drop C910 as it does not differ from C906
+> - Set priv version to 1.11 (new fmin/fmax behaviour)
+
+This should be below the line
+
+Otherwise:
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+>
+> Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 > ---
->  MAINTAINERS | 8 ++++++++
->  1 file changed, 8 insertions(+)
+>  target/riscv/cpu.c          | 31 +++++++++++++++++++++++++++++++
+>  target/riscv/cpu.h          |  2 ++
+>  target/riscv/cpu_vendorid.h |  6 ++++++
+>  3 files changed, 39 insertions(+)
+>  create mode 100644 target/riscv/cpu_vendorid.h
 >
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index b270eb8e5b..38f3ab3772 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -294,6 +294,14 @@ F: include/hw/riscv/
->  F: linux-user/host/riscv32/
->  F: linux-user/host/riscv64/
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index a38127365e..d3d8587710 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -279,6 +279,36 @@ static void rv64_sifive_e_cpu_init(Object *obj)
+>      cpu->cfg.mmu =3D false;
+>  }
 >
-> +RISC-V XThead* extensions
-> +M: Christoph Muellner <christoph.muellner@vrull.eu>
-> +M: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> +L: qemu-riscv@nongnu.org
-> +S: Supported
-> +F: target/riscv/insn_trans/trans_xthead.c.inc
-> +F: target/riscv/xthead*.decode
+> +static void rv64_thead_c906_cpu_init(Object *obj)
+> +{
+> +    CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
 > +
->  RISC-V XVentanaCondOps extension
->  M: Philipp Tomsich <philipp.tomsich@vrull.eu>
->  L: qemu-riscv@nongnu.org
+> +    set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RV=
+U);
+> +    set_priv_version(env, PRIV_VERSION_1_11_0);
+> +
+> +    cpu->cfg.ext_g =3D true;
+> +    cpu->cfg.ext_c =3D true;
+> +    cpu->cfg.ext_u =3D true;
+> +    cpu->cfg.ext_s =3D true;
+> +    cpu->cfg.ext_icsr =3D true;
+> +    cpu->cfg.ext_zfh =3D true;
+> +    cpu->cfg.mmu =3D true;
+> +    cpu->cfg.ext_xtheadba =3D true;
+> +    cpu->cfg.ext_xtheadbb =3D true;
+> +    cpu->cfg.ext_xtheadbs =3D true;
+> +    cpu->cfg.ext_xtheadcmo =3D true;
+> +    cpu->cfg.ext_xtheadcondmov =3D true;
+> +    cpu->cfg.ext_xtheadfmemidx =3D true;
+> +    cpu->cfg.ext_xtheadmac =3D true;
+> +    cpu->cfg.ext_xtheadmemidx =3D true;
+> +    cpu->cfg.ext_xtheadmempair =3D true;
+> +    cpu->cfg.ext_xtheadsync =3D true;
+> +    cpu->cfg.ext_xtheadxmae =3D true;
+> +
+> +    cpu->cfg.mvendorid =3D THEAD_VENDOR_ID;
+> +}
+> +
+>  static void rv128_base_cpu_init(Object *obj)
+>  {
+>      if (qemu_tcg_mttcg_enabled()) {
+> @@ -1311,6 +1341,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+>      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
+>      DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
+>      DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
+> +    DEFINE_CPU(TYPE_RISCV_CPU_THEAD_C906,       rv64_thead_c906_cpu_init=
+),
+>      DEFINE_CPU(TYPE_RISCV_CPU_BASE128,          rv128_base_cpu_init),
+>  #endif
+>  };
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 897962f107..28184bbe40 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -27,6 +27,7 @@
+>  #include "qom/object.h"
+>  #include "qemu/int128.h"
+>  #include "cpu_bits.h"
+> +#include "cpu_vendorid.h"
+>
+>  #define TCG_GUEST_DEFAULT_MO 0
+>
+> @@ -53,6 +54,7 @@
+>  #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51"=
+)
+>  #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34"=
+)
+>  #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54"=
+)
+> +#define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906"=
+)
+>  #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+>
+>  #if defined(TARGET_RISCV32)
+> diff --git a/target/riscv/cpu_vendorid.h b/target/riscv/cpu_vendorid.h
+> new file mode 100644
+> index 0000000000..a5aa249bc9
+> --- /dev/null
+> +++ b/target/riscv/cpu_vendorid.h
+> @@ -0,0 +1,6 @@
+> +#ifndef TARGET_RISCV_CPU_VENDORID_H
+> +#define TARGET_RISCV_CPU_VENDORID_H
+> +
+> +#define THEAD_VENDOR_ID         0x5b7
+> +
+> +#endif /*  TARGET_RISCV_CPU_VENDORID_H */
 > --
 > 2.38.1
 >
