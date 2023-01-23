@@ -1,69 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pK6Ze-0003eJ-Bc
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 18:50:02 -0500
+	id 1pK6jD-00073K-Ao
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 18:59:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pK6Zd-0003dx-FT; Mon, 23 Jan 2023 18:50:01 -0500
-Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29])
+ id 1pK6jA-00072x-Q2; Mon, 23 Jan 2023 18:59:52 -0500
+Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pK6Zb-0008JI-3D; Mon, 23 Jan 2023 18:50:00 -0500
-Received: by mail-vs1-xe29.google.com with SMTP id k4so14822649vsc.4;
- Mon, 23 Jan 2023 15:49:58 -0800 (PST)
+ id 1pK6j7-0001SI-42; Mon, 23 Jan 2023 18:59:51 -0500
+Received: by mail-vs1-xe2f.google.com with SMTP id t10so14860984vsr.3;
+ Mon, 23 Jan 2023 15:59:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MHnKkhGfnuDqGR7Xcs4pWDgloAS9OTSgFOd3OduGmE4=;
- b=RQ85Y5i7pO5suC9oHnsqCsa3eAeJjzCRXIIwjOcSOD3YVFYoZTieLZC6aoI2dhlTDN
- kOXpBcmUX5Azm8Kxq0VSfJZwAgSoYIJzPQWpg/BNixPUlVHr7ayMRdl+QIe8SwTZhvND
- HC8NXXSxWC2qYw42sdMVAYL0kECH8K5QnLAIU2rFJbdWgBXbRPL1OgDfp6+IPXF6grkK
- GnTuGzrlASijGydi/mMNLTLFmIBzB9m8u/N4NyPqULAmC4aAnR9x11Pkfy/J3tRwdl45
- 4KQgQKGLdOyUHcH7HtM8Cmu6X4IoBsgAuqeYiNs4FnDhTqS3JFVYd1aWjdJxcZvDOmbC
- LvGw==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PFWOPvOnxnFt1nZS/xroCnvkkHE6ZU3CpyTkzzQJIf0=;
+ b=O+4VsXDAaQB/2VR18qjEXjgDPYpfoQll8zFMi1RbLfFbcMpGj/qXJ9gDRg4dLLb70u
+ zgcCSrm77ema8nl+DbukjGNxoY5qQcCQdE8aPHjtBE9Dzx642eWSkWUSJXIQALyA1uxW
+ pcaqJENCmBHib5QozkqwkshbbUxtQsK7KOFh+Teg4MHDJyJJ/4JOLvn+QOUTyz03ZiNf
+ SYjG9uE6g1+Rbbr5RJlPUZdTztonkz/O7KfrvX3ElekhiU6SX9UtpzCCSkZnPNTq8GFo
+ uTCSp5X4e2iVWegSW9Hho4r0CJ3CNCPuh384A0q9nceGhQNqSAHio1+fbpJowjF60VrP
+ elSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MHnKkhGfnuDqGR7Xcs4pWDgloAS9OTSgFOd3OduGmE4=;
- b=nv4nPcEB9SzkMC1EZIbNgC6DdJ/gP/KP4hijYgmTE2+py7emirBHnLu3Rys6nRtwAU
- aGRennObWWqyrPRP2RgquVDN3GvxDVCtoplUq1mw1mOZ9UWcqjW1uUxUImbeolaQNWff
- AsDu06Zm0ntbkoQ3seLXlQzQ+mb2TN9HItKhepoKe/nNIf5vKcOPGH7kOvalZQ6V19Be
- +pxS2fuN3B3Wcy81E4v7DGoISSG6iBatlX6H80XW0j2Sk3Yi62bGJJxaN1hgJs/rsb/d
- JtZsCgBX+IghRx29JgfkxVJ9G2zG3IZ9GWIJk/cZ4xNGUnqqtM5JzVxJV6uem2InFsoM
- fBDA==
-X-Gm-Message-State: AFqh2koldSgr6CAc1k+ww1tEtwr7gSbMkqaw67KN5WEWjYww19TqouZ6
- i6wI9e74XjpdvATo2LNaZ8/YE+5leoGCs3k1tcA=
-X-Google-Smtp-Source: AMrXdXt7pl5WDd7uNX3I3aAtE84VHW/Uf2Okn3IZ9TcjONdyt0YkMaN8yXTLIPNDJ6qA9y3GzEDAoFUDF3Dk4kjEcDc=
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PFWOPvOnxnFt1nZS/xroCnvkkHE6ZU3CpyTkzzQJIf0=;
+ b=AbGRFN37qHqvd+9Q7TqMo16MATXmMtl7O5gs+pzpNGnmNO2jdnXSEecWZjF0WCUA3o
+ nSDFS2+Z1davxg6bspi/Aj5+gxuu1/h+7jphA/oePKdhoHfa7pR2k7ywtWPNe2JAkni+
+ NzteHcaWbz7u2C8njXiR2RKjMyHpBVH89IrOgC9HaAJBQLUb8RiNYo4T37Q6adjgK5GL
+ PBJ5AFiTqKn0jkOWi6zkktiYeV7IKu78Gj53oEKFo2w90bLZ9woLWidQzI+jzLCxVk79
+ uudnmE2mAEbALsgseBy5tyxDzbzd6ZPzd+mHZ5weG6lDO+Os1UUsM0wBS9C6JrsB5Mvh
+ YPNw==
+X-Gm-Message-State: AFqh2kp1m9Jfx6VRk0gE41AqJuXw9t1e9IUUDHMtv4fNMb5x9klVwbKw
+ 7mmS+HHPh5GDN+AuLmqa3+llSN7HmEVsU6wCa0w=
+X-Google-Smtp-Source: AMrXdXskhhOeOpy3YKC0fGtsYfuGJKqPh72FvPiYw8B5xJvi/WtELek3SqpDrQrlmt1nerirUh89wcCdJW+oDeikL4s=
 X-Received: by 2002:a05:6102:cd4:b0:3d0:c2e9:cb77 with SMTP id
- g20-20020a0561020cd400b003d0c2e9cb77mr3383084vst.54.1674517797574; Mon, 23
- Jan 2023 15:49:57 -0800 (PST)
+ g20-20020a0561020cd400b003d0c2e9cb77mr3386149vst.54.1674518387689; Mon, 23
+ Jan 2023 15:59:47 -0800 (PST)
 MIME-Version: 1.0
-References: <20221223180016.2068508-1-christoph.muellner@vrull.eu>
- <20221223180016.2068508-12-christoph.muellner@vrull.eu>
-In-Reply-To: <20221223180016.2068508-12-christoph.muellner@vrull.eu>
+References: <20230123035754.75553-1-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20230123035754.75553-1-alistair.francis@opensource.wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 24 Jan 2023 09:49:31 +1000
-Message-ID: <CAKmqyKPPr_nkKZH9Z6r0H2E=TZ0Jz6EPbL--w_TSfbGJ+o55yg@mail.gmail.com>
-Subject: Re: [PATCH v2 11/15] RISC-V: Adding T-Head XMAE support
-To: Christoph Muellner <christoph.muellner@vrull.eu>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko.stuebner@vrull.eu>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Nelson Chu <nelson@rivosinc.com>, Kito Cheng <kito.cheng@sifive.com>, 
- Cooper Qu <cooper.qu@linux.alibaba.com>,
- Lifang Xia <lifang_xia@linux.alibaba.com>, 
- Yunhai Shang <yunhai@linux.alibaba.com>,
- Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
+Date: Tue, 24 Jan 2023 09:59:21 +1000
+Message-ID: <CAKmqyKP02-6cU6NVLon9ih5R+uazFDex2HMssOcSKrFbXX6fZw@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: boot: Don't use CSRs if they are disabled
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, Bin Meng <bin.meng@windriver.com>, bmeng.cn@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e29;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -84,107 +72,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2023 23:50:01 -0000
+X-List-Received-Date: Mon, 23 Jan 2023 23:59:53 -0000
 
-On Sat, Dec 24, 2022 at 4:04 AM Christoph Muellner
-<christoph.muellner@vrull.eu> wrote:
+On Mon, Jan 23, 2023 at 1:58 PM Alistair Francis
+<alistair.francis@opensource.wdc.com> wrote:
 >
-> From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
+> From: Alistair Francis <alistair.francis@wdc.com>
 >
-> This patch adds support for the T-Head specific extended memory
-> attributes. Similar like Svpbmt, this support does not have much effect
-> as most behaviour is not modelled in QEMU.
+> If the CSRs and CSR instructions are disabled because the Zicsr
+> extension isn't enabled then we want to make sure we don't run any CSR
+> instructions in the boot ROM.
 >
-> We also don't set any EDATA information, because XMAE discovery is done
-> using the vendor ID in the Linux kernel.
+> This patches removes the CSR instructions from the reset-vec if the
+> extension isn't enabled. We replace the instruction with a NOP instead.
 >
-> Changes in v2:
-> - Add ISA_EXT_DATA_ENTRY()
+> Note that we don't do this for the SiFive U machine, as we are modelling
+> the hardware in that case.
 >
-> Co-developed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
-> ---
->  target/riscv/cpu.c        | 2 ++
->  target/riscv/cpu.h        | 1 +
->  target/riscv/cpu_helper.c | 6 ++++--
->  3 files changed, 7 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 9c31a50e90..bb310755b1 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -118,6 +118,7 @@ static const struct isa_ext_data isa_edata_arr[] =3D =
-{
->      ISA_EXT_DATA_ENTRY(xtheadmemidx, true, PRIV_VERSION_1_11_0, ext_xthe=
-admemidx),
->      ISA_EXT_DATA_ENTRY(xtheadmempair, true, PRIV_VERSION_1_11_0, ext_xth=
-eadmempair),
->      ISA_EXT_DATA_ENTRY(xtheadsync, true, PRIV_VERSION_1_11_0, ext_xthead=
-sync),
-> +    ISA_EXT_DATA_ENTRY(xtheadxmae, true, PRIV_VERSION_1_11_0, ext_xthead=
-xmae),
->      ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_X=
-VentanaCondOps),
->  };
->
-> @@ -1080,6 +1081,7 @@ static Property riscv_cpu_extensions[] =3D {
->      DEFINE_PROP_BOOL("xtheadmemidx", RISCVCPU, cfg.ext_xtheadmemidx, fal=
-se),
->      DEFINE_PROP_BOOL("xtheadmempair", RISCVCPU, cfg.ext_xtheadmempair, f=
-alse),
->      DEFINE_PROP_BOOL("xtheadsync", RISCVCPU, cfg.ext_xtheadsync, false),
-> +    DEFINE_PROP_BOOL("xtheadxmae", RISCVCPU, cfg.ext_xtheadxmae, false),
->      DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOp=
-s, false),
->
->      /* These are experimental so mark with 'x-' */
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index c97c1c0af0..897962f107 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -475,6 +475,7 @@ struct RISCVCPUConfig {
->      bool ext_xtheadmemidx;
->      bool ext_xtheadmempair;
->      bool ext_xtheadsync;
-> +    bool ext_xtheadxmae;
->      bool ext_XVentanaCondOps;
->
->      uint8_t pmu_num;
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 278d163803..345bb69b79 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -938,7 +938,8 @@ restart:
->
->          if (riscv_cpu_sxl(env) =3D=3D MXL_RV32) {
->              ppn =3D pte >> PTE_PPN_SHIFT;
-> -        } else if (cpu->cfg.ext_svpbmt || cpu->cfg.ext_svnapot) {
-> +        } else if (cpu->cfg.ext_svpbmt || cpu->cfg.ext_svnapot ||
-> +                   cpu->cfg.ext_xtheadxmae) {
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1447
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 
-I don't like this. This is some pretty core code that is now getting
-vendor extensions. I know this is very simple, but I'm worried we are
-opening the doors to other vendors adding their MMU changes.
+Thanks!
 
-Can we just set ext_svpbmt instead?
+Applied to riscv-to-apply.next
 
 Alistair
 
->              ppn =3D (pte & (target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT;
->          } else {
->              ppn =3D pte >> PTE_PPN_SHIFT;
-> @@ -950,7 +951,8 @@ restart:
->          if (!(pte & PTE_V)) {
->              /* Invalid PTE */
->              return TRANSLATE_FAIL;
-> -        } else if (!cpu->cfg.ext_svpbmt && (pte & PTE_PBMT)) {
-> +        } else if (!cpu->cfg.ext_svpbmt && (pte & PTE_PBMT) &&
-> +                   !cpu->cfg.ext_xtheadxmae) {
->              return TRANSLATE_FAIL;
->          } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
->              /* Inner PTE, continue walking */
-> --
-> 2.38.1
+> ---
+>  hw/riscv/boot.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
 >
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 2594276223..cb27798a25 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -356,6 +356,15 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts
+>          reset_vec[4] = 0x0182b283;   /*     ld     t0, 24(t0) */
+>      }
+>
+> +    if (!harts->harts[0].cfg.ext_icsr) {
+> +        /*
+> +         * The Zicsr extension has been disabled, so let's ensure we don't
+> +         * run the CSR instruction. Let's fill the address with a non
+> +         * compressed nop.
+> +         */
+> +        reset_vec[2] = 0x00000013;   /*     addi   x0, x0, 0 */
+> +    }
+> +
+>      /* copy in the reset vector in little_endian byte order */
+>      for (i = 0; i < ARRAY_SIZE(reset_vec); i++) {
+>          reset_vec[i] = cpu_to_le32(reset_vec[i]);
+> --
+> 2.39.0
 >
 
