@@ -1,76 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pJu0f-0007VR-KA
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 05:25:06 -0500
+	id 1pJu4n-0000sT-CL
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 05:29:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pJu0e-0007V5-8U
- for qemu-riscv@nongnu.org; Mon, 23 Jan 2023 05:25:04 -0500
-Received: from mail-oi1-x243.google.com ([2607:f8b0:4864:20::243])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1pJu4m-0000sC-6V
+ for qemu-riscv@nongnu.org; Mon, 23 Jan 2023 05:29:20 -0500
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pJu0c-0000kR-Fy
- for qemu-riscv@nongnu.org; Mon, 23 Jan 2023 05:25:03 -0500
-Received: by mail-oi1-x243.google.com with SMTP id d188so9938214oia.3
- for <qemu-riscv@nongnu.org>; Mon, 23 Jan 2023 02:25:01 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1pJu4j-0001MM-GJ
+ for qemu-riscv@nongnu.org; Mon, 23 Jan 2023 05:29:19 -0500
+Received: by mail-ej1-x629.google.com with SMTP id v6so29200225ejg.6
+ for <qemu-riscv@nongnu.org>; Mon, 23 Jan 2023 02:29:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=rgdj8fTeRua4k7SIhwr99XATVMtPD7r3q1liZ2lLMpw=;
- b=UFtwbk3jOsQy6erve0jY7+gOcu119i0eXbDW14ABYjNhnkiqfqwpRRNuV683WgFjL7
- KLBjhuT0uSyQukUXNejdTGsehIygKETKeaKBJ7ki8cYZfXP1lgdC4wYkVAzFx1KacjHI
- uH2o8WDWCIXyKQzb8UmI0NbiLXe+cWj0ZrjjQ4ep/A/JjWQJrxsUJc9yffqLXm4S2CjT
- kLcvD3c7J8g9kA2jOSvKS2QIxgGX3WWvcDYbjfoQVCtfIzjWEs27oSjaVoKcFr/ee0br
- BdHE6MTxmp1XPAZTSben6y4D5gLVsk/Hv4IfO55w4gw+z7pMZk4rZllNWW0TFtn7OrVI
- WcZA==
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=b0oXK1SdRy74tLtiMX3fYKJ2HnHYK6rsSmwH4fzUscU=;
+ b=ahfiun4Tijo6PquHjRJjf6KlQrrIdB8XKm69mCw5oJvxKuzeGShObomjrnu4KngRlw
+ 8pVznH9uGVp+xab01oRTOiVBN0voMbxJ31Pt1IeZ6aPaW30FqUcMnHbW97DEpJfrgh5C
+ g5Xpe3307g0ExkRIRPsSDAinCbne9l5xew/GkCPy4fHeBLD2gkM5siOfWFTQdQvcqkz2
+ qnt7VsWbqpiYCk/xLPLk0KXIHvUoSLbJZP5KVphH8AY97U+p8C3wY5waAc6olyvMPNcp
+ Kv+F3CmfnOjfYpIxgZeAEFAmYub3zmsN6P2jAXT5xUs+F9fQqgqmdqWrqGJQcCopp3DY
+ e8IQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rgdj8fTeRua4k7SIhwr99XATVMtPD7r3q1liZ2lLMpw=;
- b=G9skmjyzVDoiBHo88FqS3wUKWd/5FEwbdKaSoU7T04hLZFQEDZxsutemdAIRM8+kSZ
- fAUNLowcSVA9QdZ+xN+P6yFvoQlcqya/jEFtNawil6lJAajA/ijz0ZSrr8UYn30Z8rLC
- tl1cm4cfOzylXbotPOjIjPHdWJ1xCqsCSwmP7ovYp4ZUJoy0lc5LyLl7KPPdK3Eo8/IG
- KQg+r0JFGW312md7B3rtWhPHI/vGehaplUSErGNIj7jcu9yJOn7ySgU0vYEV3JVitl41
- PQe/AuNYwQK9EWjcdsQzo/6jLyx8Fkrg5YruYUJNz9k1+VOuaNu2/hvxE2GBkdPpJdT8
- YxZw==
-X-Gm-Message-State: AFqh2kriC9BtR8hA776lTo/KXTPAUaGFsT01LfaBErtxB/MuC2VSwF0l
- 4J+R+lpSqCriNHIPIHmq8Enryw==
-X-Google-Smtp-Source: AMrXdXvzKXZ4WzRNWRgXIqW4fNhGqGR84SmcOhi6fcukUoiw/xx6IVwh1nN4H2Pwl0bCmwm75vpqwg==
-X-Received: by 2002:aca:5b02:0:b0:35a:54df:638b with SMTP id
- p2-20020aca5b02000000b0035a54df638bmr9904897oib.4.1674469501028; 
- Mon, 23 Jan 2023 02:25:01 -0800 (PST)
-Received: from [192.168.68.107] ([191.17.222.2])
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=b0oXK1SdRy74tLtiMX3fYKJ2HnHYK6rsSmwH4fzUscU=;
+ b=73VDsjmAGYK+QXLyNpwXC/s/aL3OlH81GsVbcMRpr2kecBIdPpjwYGdYJD+Vu6CY6p
+ kavvyeH6mfB0MGwBG5ObktylUtKX1vtOWnMYzMlX1R4ElndJ85Tfoz1TphkP6qn+t307
+ VO4rKoUf4rpdYebL7TnW6rEF/tkiWHq25U1nuhoIV1YsQ3QyNcyiiNIqVnooO4G9iE6e
+ /8kgjL8wWxCFJeFD6hA/EzAfOIhduSRnNzeIr4cH84V/CAkXQC706AHfU+9nRfbdDTwe
+ 4JUJEy6/vz/RVIlawkpDaJoBBWmCxMykyEWr/VWU7q0u+hAfUWhtmErZ0WCprf5IQfsO
+ 4Hsw==
+X-Gm-Message-State: AFqh2kqk2MobaiWtQKolP0kR9hSTqBWSr5xgbXTnQydXjaNQi1iFAOTG
+ BQY0LBeYTMf3MtPBKNChm9kZMg==
+X-Google-Smtp-Source: AMrXdXsJVlJ6kY47pB1tE2A7cm4P8SwWyJPuWSvJnu8u4XKLHbAvyMOxrg6Yy8ofddTFs4JqqGS2Aw==
+X-Received: by 2002:a17:907:2a07:b0:86f:4a4e:4853 with SMTP id
+ fd7-20020a1709072a0700b0086f4a4e4853mr22048541ejc.49.1674469754206; 
+ Mon, 23 Jan 2023 02:29:14 -0800 (PST)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
  by smtp.gmail.com with ESMTPSA id
- du23-20020a056808629700b0036acbbf9fbasm8206437oib.46.2023.01.23.02.24.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Jan 2023 02:25:00 -0800 (PST)
-Message-ID: <084f9a13-c74f-fa5e-19a7-e6b437f34cce@ventanamicro.com>
-Date: Mon, 23 Jan 2023 07:24:57 -0300
+ ti3-20020a170907c20300b0087190b46ab0sm10616325ejc.76.2023.01.23.02.29.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Jan 2023 02:29:13 -0800 (PST)
+Date: Mon, 23 Jan 2023 11:29:12 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Alexandre Ghiti <alexghiti@rivosinc.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Ludovic Henry <ludovic@rivosinc.com>
+Subject: Re: [PATCH v6 3/5] riscv: Allow user to set the satp mode
+Message-ID: <20230123102912.kq5c47nzeg7ufkma@orel>
+References: <20230123090324.732681-1-alexghiti@rivosinc.com>
+ <20230123090324.732681-4-alexghiti@rivosinc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Subject: Re: [PATCH] hw/riscv: boot: Don't use CSRs if they are disabled
-Content-Language: en-US
-To: Alistair Francis <alistair.francis@opensource.wdc.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com,
- Bin Meng <bin.meng@windriver.com>, alistair23@gmail.com, bmeng.cn@gmail.com
-References: <20230123035754.75553-1-alistair.francis@opensource.wdc.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230123035754.75553-1-alistair.francis@opensource.wdc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::243;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x243.google.com
-X-Spam_score_int: -31
-X-Spam_score: -3.2
-X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.149,
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230123090324.732681-4-alexghiti@rivosinc.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x629.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -85,58 +84,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2023 10:25:04 -0000
+X-List-Received-Date: Mon, 23 Jan 2023 10:29:20 -0000
 
+On Mon, Jan 23, 2023 at 10:03:22AM +0100, Alexandre Ghiti wrote:
+...
+> +/* Sets the satp mode to the max supported */
+> +static void set_satp_mode_default(RISCVCPU *cpu, bool is_32_bit)
+> +{
 
+nit: When passing in the cpu object pointer there's no need to also pass
+is_32_bit, we can just use it from the pointer, cpu->env.misa_mxl == MXL_RV32
 
-On 1/23/23 00:57, Alistair Francis wrote:
-> From: Alistair Francis <alistair.francis@wdc.com>
-> 
-> If the CSRs and CSR instructions are disabled because the Zicsr
-> extension isn't enabled then we want to make sure we don't run any CSR
-> instructions in the boot ROM.
-> 
-> This patches removes the CSR instructions from the reset-vec if the
-> extension isn't enabled. We replace the instruction with a NOP instead.
-> 
-> Note that we don't do this for the SiFive U machine, as we are modelling
-> the hardware in that case.
-> 
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1447
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
-
-Shouldn't we also handle the sifive_u/sifive_e boards? Their reset vectors
-aren't being covered by riscv_set_rom_reset_vec() (it's on my TODO, didn't
-send it yet because sifive uses an extra MSEL pin at the start of the vector).
-
-
-
-Daniel
-
-
-
->   hw/riscv/boot.c | 9 +++++++++
->   1 file changed, 9 insertions(+)
-> 
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index 2594276223..cb27798a25 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -356,6 +356,15 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts
->           reset_vec[4] = 0x0182b283;   /*     ld     t0, 24(t0) */
->       }
->   
-> +    if (!harts->harts[0].cfg.ext_icsr) {
-> +        /*
-> +         * The Zicsr extension has been disabled, so let's ensure we don't
-> +         * run the CSR instruction. Let's fill the address with a non
-> +         * compressed nop.
-> +         */
-> +        reset_vec[2] = 0x00000013;   /*     addi   x0, x0, 0 */
-> +    }
-> +
->       /* copy in the reset vector in little_endian byte order */
->       for (i = 0; i < ARRAY_SIZE(reset_vec); i++) {
->           reset_vec[i] = cpu_to_le32(reset_vec[i]);
+Thanks,
+drew
 
