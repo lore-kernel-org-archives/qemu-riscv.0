@@ -1,53 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pK6QK-0007dd-0A
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 18:40:24 -0500
+	id 1pK6Qp-00081H-B0
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 18:40:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pK6QI-0007dP-JW; Mon, 23 Jan 2023 18:40:22 -0500
+ id 1pK6Qn-0007yv-N2; Mon, 23 Jan 2023 18:40:53 -0500
 Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pK6QF-0006Yp-MK; Mon, 23 Jan 2023 18:40:22 -0500
-Received: by mail-vs1-xe31.google.com with SMTP id 3so14781264vsq.7;
- Mon, 23 Jan 2023 15:40:17 -0800 (PST)
+ id 1pK6Qk-0006Yp-8e; Mon, 23 Jan 2023 18:40:52 -0500
+Received: by mail-vs1-xe31.google.com with SMTP id 3so14782332vsq.7;
+ Mon, 23 Jan 2023 15:40:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n3n5HxNfYhf0/SezKNMAnLkuP5Vy3jO6pDo9v+Bf7pQ=;
- b=KolFkNUXRlgZwvSHbqZnVqc4wXGwOEj4XR6TrGXaZb7ilxxotS1OdHC/s//621PRNH
- lOECUVlx4+FcGwUSUj+7+b5JBVOIjiCUXoHjZeUFgdCbI5x0/Jruapgf8ozwluAnxuO7
- oJsuiXhY6P4FpT6h8R4b0niLz4x4Y/ZO5nRpq5SG6pVpiOmo1gWwA/ywMgdblGC8iPiY
- eoHDjqA6fgX2/NwGyoPFrPxD4hXLA56ubyJwMu5VIk5mUF/OVZ7sxCoKOop2AZHHvfdA
- stPxB+9zgU41soyuJLETM08OAH8NC9PGysPtEoaljUSak8uYeAfXSXte+/2iJ1DlOvx/
- GkeA==
+ bh=JrFU+/OI+aEuW4W7C8WpwgZ0Ws3ulVSH/LvVMTN7BHk=;
+ b=gu18tjrFHZJQ9CQeWMi+eLoBpjSP+E+EntRSt0u6GVVoLScqSTnHrmacd7IP1Xesmx
+ Ah5FxYFfCTriMwFBcOeCJoe0QlExtSzEdGkZ1TdV44+sx45H0eXYRjhSTtzY/w0rZXHJ
+ 5s/cp0PkuplgE0IVloGoVT0khYm8jrsAOqdolECyOFohxyqc9zRFl6lI+tD4ZCo7y57e
+ TfHn3/HpgcCwmfZZ3pjbb0DDS0iSQnoZ7d+olMEG7/4i0iIFEti9SKnsgicH/irHV5yN
+ u8nzLKC8YXaDnwZrskWSVtjPXPQxpY+cMdVZz/pEYPG91rqwmYpbUtOeBaAbsZ15OvPp
+ JHcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=n3n5HxNfYhf0/SezKNMAnLkuP5Vy3jO6pDo9v+Bf7pQ=;
- b=F5RVJlPoAAxj1fQMVZ+1AdGiq+C0nfZkajaPImDLOqmoVrcAjtGN8+f+yg8aPItOKX
- Nv+bLcHTY1GxYeVHe1Mcsqqpj08w5i+1hH31+z9A9nfH9mOCV+DizPt0qTn//vktR6f7
- 8CBZ+pEgkSU2D2LZNu2yun0tpfZepHa63msW0KFnd44WAz6869POewIuP1XbsiH4PzPK
- i8+S5ZDQhHFXvSWokils8JBE1NIvKDuYKmfpr6d8o2HZwl7X2Uav6wEf+GkXy4T5fN90
- dcppT8koYYST0htB4KKoZluHPGL5yh81gTrD8T7SB+eLk6S7Wd+ho21B8qHiMqYM0ggx
- XhDw==
-X-Gm-Message-State: AFqh2kpDw2YviL7DTDyhUhPRULkYodE2JzA6eLhTXVelbqDLTi1whYFd
- mKi6zx/ba6AhUDzh6hQoDeU17tiNZtIpiQNVifI=
-X-Google-Smtp-Source: AMrXdXuxnu8O4yPFFOtshQEUMrIUNy7J8dAFPp6kwSVfKPj9MSE3QJXypEWMISIn2Nnc0XBXGBFSlWVpt++kGwXr1ys=
-X-Received: by 2002:a67:ba0c:0:b0:3ce:f2da:96a with SMTP id
- l12-20020a67ba0c000000b003cef2da096amr3070953vsn.64.1674517215862; Mon, 23
- Jan 2023 15:40:15 -0800 (PST)
+ bh=JrFU+/OI+aEuW4W7C8WpwgZ0Ws3ulVSH/LvVMTN7BHk=;
+ b=2zXa8mYq00FL1Vr9amQw9uWyVzZ8rluftNMrgkrBBoRuYxXg5rhmaNuBj/BbiDZpa+
+ 6rCKrAAVsNXfCVaQIhQbA//QgPaKFDhnZ8xMDSPD0u2zvXUPWEbFtZM8uqYzUV2S0zG+
+ Gpznd9CfS5WSCmAIrlGqzI9HIgsRKGLnNNSPeYGHILWp92/8EptrD4gR3AvRXDu7hRhL
+ TwX7r6gwTzHEjoHb80k4xEt6so21z7PLhkv3R9JNJiuWiP3Ke7HvO5kmYqlFze7UhfT9
+ lSZX4gMZkaMijxFuFse70dskFyXQ1Ocmlx0EE/vLJjxHwDq+1giEJjr3+HAbBDIA9LYF
+ uf+A==
+X-Gm-Message-State: AFqh2koX6jFSlcVFhKDqzu5LBGAZDA9L9AMASB7uGm1N4HcXk5+3q7hu
+ a0iSw4zz5bHV/8/MxP3nPFKrFgbIZUH72trMc0M=
+X-Google-Smtp-Source: AMrXdXsTTnBfYd0Lorcr0FHqDhuoZEdeM030tmDP3nLkiAuPfzKORgmaio9+cy488ktbj6dLH04uH5IUL6UD19Ol0Vc=
+X-Received: by 2002:a67:e14a:0:b0:3d3:f10a:4f56 with SMTP id
+ o10-20020a67e14a000000b003d3f10a4f56mr3500977vsl.10.1674517248007; Mon, 23
+ Jan 2023 15:40:48 -0800 (PST)
 MIME-Version: 1.0
 References: <20221223180016.2068508-1-christoph.muellner@vrull.eu>
- <20221223180016.2068508-13-christoph.muellner@vrull.eu>
-In-Reply-To: <20221223180016.2068508-13-christoph.muellner@vrull.eu>
+ <20221223180016.2068508-16-christoph.muellner@vrull.eu>
+In-Reply-To: <20221223180016.2068508-16-christoph.muellner@vrull.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 24 Jan 2023 09:39:49 +1000
-Message-ID: <CAKmqyKMUZDUHN3P1WMtv6jvthJ+P8A4M4sw=Atpts=00Z7EevA@mail.gmail.com>
-Subject: Re: [PATCH v2 12/15] RISC-V: Set minimum priv version for Zfh to 1.11
+Date: Tue, 24 Jan 2023 09:40:22 +1000
+Message-ID: <CAKmqyKNCisHs+MQbuwqsQAp=ouRuvnTkkaT+oRexu2JgdZy+Ng@mail.gmail.com>
+Subject: Re: [PATCH v2 15/15] target/riscv: add a MAINTAINERS entry for
+ XThead* extension support
 To: Christoph Muellner <christoph.muellner@vrull.eu>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
@@ -84,43 +85,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2023 23:40:22 -0000
+X-List-Received-Date: Mon, 23 Jan 2023 23:40:54 -0000
 
-On Sat, Dec 24, 2022 at 4:07 AM Christoph Muellner
+On Sat, Dec 24, 2022 at 4:09 AM Christoph Muellner
 <christoph.muellner@vrull.eu> wrote:
 >
 > From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 >
-> There are no differences for floating point instructions in priv version =
-1.11
-> and 1.12. There is also no dependency for Zfh to priv version 1.12.
-> Therefore allow Zfh to be enabled for priv version 1.11.
+> The XThead* extensions are maintained by T-Head and VRULL.
+> Adding a point of contact from both companies.
 >
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 > Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  MAINTAINERS | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index bb310755b1..a38127365e 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -76,7 +76,7 @@ static const struct isa_ext_data isa_edata_arr[] =3D {
->      ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ext_icsr),
->      ISA_EXT_DATA_ENTRY(zifencei, true, PRIV_VERSION_1_10_0, ext_ifencei)=
-,
->      ISA_EXT_DATA_ENTRY(zihintpause, true, PRIV_VERSION_1_10_0, ext_zihin=
-tpause),
-> -    ISA_EXT_DATA_ENTRY(zfh, true, PRIV_VERSION_1_12_0, ext_zfh),
-> +    ISA_EXT_DATA_ENTRY(zfh, true, PRIV_VERSION_1_11_0, ext_zfh),
->      ISA_EXT_DATA_ENTRY(zfhmin, true, PRIV_VERSION_1_12_0, ext_zfhmin),
->      ISA_EXT_DATA_ENTRY(zfinx, true, PRIV_VERSION_1_12_0, ext_zfinx),
->      ISA_EXT_DATA_ENTRY(zdinx, true, PRIV_VERSION_1_12_0, ext_zdinx),
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index b270eb8e5b..38f3ab3772 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -294,6 +294,14 @@ F: include/hw/riscv/
+>  F: linux-user/host/riscv32/
+>  F: linux-user/host/riscv64/
+>
+> +RISC-V XThead* extensions
+> +M: Christoph Muellner <christoph.muellner@vrull.eu>
+> +M: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> +L: qemu-riscv@nongnu.org
+> +S: Supported
+> +F: target/riscv/insn_trans/trans_xthead.c.inc
+> +F: target/riscv/xthead*.decode
+> +
+>  RISC-V XVentanaCondOps extension
+>  M: Philipp Tomsich <philipp.tomsich@vrull.eu>
+>  L: qemu-riscv@nongnu.org
 > --
 > 2.38.1
 >
