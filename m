@@ -1,62 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pJvKY-00058H-Jr
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 06:49:42 -0500
+	id 1pJvMh-0005x8-8u
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 06:51:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pJvKW-00057k-Ev; Mon, 23 Jan 2023 06:49:40 -0500
-Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
+ id 1pJvMf-0005vY-GW; Mon, 23 Jan 2023 06:51:53 -0500
+Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pJvKU-0006UT-Px; Mon, 23 Jan 2023 06:49:40 -0500
-Received: by mail-vk1-xa34.google.com with SMTP id b81so5803403vkf.1;
- Mon, 23 Jan 2023 03:49:38 -0800 (PST)
+ id 1pJvMd-00077U-LT; Mon, 23 Jan 2023 06:51:53 -0500
+Received: by mail-vs1-xe34.google.com with SMTP id t10so12560312vsr.3;
+ Mon, 23 Jan 2023 03:51:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fe3wQWfTwAwJBdmmp+ksAlwmOP05eh7YvVMspuYv9SU=;
- b=WD6hp6ZGeyxDd+b55aCySRjVrV++x6XVzUhe9IpgpsjL5l93ymW1bEW22sLiMMlFSc
- TifVsjrh/I9TKo5oZgx0q742YTKdTVHXFQ0Hhx8gZ+4FgzGu/cPfuwk+SECey+H6Mrn0
- Mh+Kr5lqtc83v57NdhCNaQy2c4gDf4Wbnybk1lTNuerAIEMOf1vIlrNHyRaOjaDcIJ5A
- OFzfTGSy7Z/v6tQdLn9X3CHRcb8dl/OXh6JBXQA/TOad/J3pGmgZKW09tgQu1e0iaNky
- kRlzuoTBgGt5tpEAxXupE70HTamiHCnvHpDcCG9mWPLehwAB0fVBv7JVnYYtfqR4UK/e
- 20NQ==
+ bh=WXRZjU2/+Ku0v/DLnU6CS6vf7K9zE8FigBzKnXdHAcg=;
+ b=grQETtIq1FnrngqPTPy5/gc41dmt1TqL2SCCZzrDvuyVSHF4DdWLWr6aBMJ4vJImz2
+ j65xK+IeMlEitVRKVlP2NcQWw8EsjbYFV//J0jV53os+tTYoIQ2x9Qh8TTt4qFrlan9b
+ HW+2ybIajIUbk4RhUJEHK/vwzHbMHNCRsIhlkx1bpdAfnkdMtzv9NeMqRSqYA8/IJYYF
+ WCt5cF1FQqOu93jmd73/XAKn93lVWKsNcXXTZ8TB1Zgw64mFR2ECuH8OZINnHkY7c79N
+ RPuGklN60pIkUe19rh/m83FNPl/PMilnQPz7YiW1A3F570aPa6ZDgtf4+EqtsZTc3D0q
+ MucA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fe3wQWfTwAwJBdmmp+ksAlwmOP05eh7YvVMspuYv9SU=;
- b=qgOQHl9jqsehq3jaEB/D7AT4dcmJ6SztBFb/LP7HS5MxlyCBwErxGjvmFu4E29MSkY
- KwBCpuEfQpJnaOPcpykwsoCzDgR3/m1YldKfbCC5JHoilBKnunpRDqNUM0fHuttf5EwL
- 8j98gmFD7UyF6IOeodxKTpjlNrqjrRxHvsWRqVXsDIho6AmeNaAHv8yxuo535Zv8qQYr
- toVC55rvXjQNfEAPdPASWkh2drelTRAS6iBsy7gZ4ufriJ2kCG5Tye0/oPiCUgJXmdVZ
- W3Dem16UIkH+uuZWhGddWGVnPWQpE4PfIa6kzLr7ziBUnQyhUogL4nvM5hTVFz9lyMMt
- IrAw==
-X-Gm-Message-State: AFqh2koTz5vPnJ9LkQmKNNj6C4ErwXLl3fpsm9h5Cv3dIDMFYBb8G7zZ
- LamYXHLgCiw0Ra3oKGo8AeUyY5vNLHcirF+kJpQ=
-X-Google-Smtp-Source: AMrXdXuFVhIA+WFT1MWZq/dZSa407zky4j2y4alVMDLgfhzhClAvivZHlBAwa91KOFQEPefkmkBGpWaVcbLzOM/I7UY=
-X-Received: by 2002:a1f:b681:0:b0:3dd:fc42:994d with SMTP id
- g123-20020a1fb681000000b003ddfc42994dmr3231523vkf.25.1674474577415; Mon, 23
- Jan 2023 03:49:37 -0800 (PST)
+ bh=WXRZjU2/+Ku0v/DLnU6CS6vf7K9zE8FigBzKnXdHAcg=;
+ b=S+eit5sksC+T6UCMyGOodFyUJ6f+3Hei2sXV/+QDu43z2q5Kzj83BdbC0w645Uoqxa
+ Wb8tuP2vTyDJBCRyqj9a70Gc5nW3cpYcDcoeVHXJByAEaZZ8LC8KApF/xMUutyolHpu3
+ Xx6zt40Ps2+BDoDWM8GTt/Kzsq0JmVqEhnPoW3eS6fOG1pb1DunjZu2mDg010itS8ddz
+ IKdK5Bp1ncU+R3akvhHaiQn6A2CE4DxYN8d0SMQgTQAyRI0OElx88NT+zl4x9sGpHxXg
+ 8dNEzvbEcO6lJ+esSbXK2YDQij4g9hT92gghPP/iDOofEFY2GX0Uo2Uy9KnUANWLUxAy
+ Hqcw==
+X-Gm-Message-State: AFqh2ko4bByraz5zNPqyOILff9XbiCU+Hrn/6Y2QiNOCrWVVIx/FGUIX
+ sN2I/9QoTC1+XbJkGfT9buvoo2i1yWMDuoquQfo=
+X-Google-Smtp-Source: AMrXdXsGHYmmdRCIvMnxYjfrj9IoekuWTLro7RvT5UtjKe2gbtCRQEk3CQgcNWLX2U9BmIkHbnxhf40DIUFHrj1tZVY=
+X-Received: by 2002:a67:ba0c:0:b0:3ce:f2da:96a with SMTP id
+ l12-20020a67ba0c000000b003cef2da096amr2769691vsn.64.1674474710082; Mon, 23
+ Jan 2023 03:51:50 -0800 (PST)
 MIME-Version: 1.0
-References: <20230119191728.622081-1-dbarboza@ventanamicro.com>
- <20230119191728.622081-4-dbarboza@ventanamicro.com> <Y8ndFjv9prrRXLnL@spud>
- <385b977b-d15f-6c54-1d05-ab68e122dfe8@ventanamicro.com>
- <CAKmqyKN=XquxtTDGCstEu7jEvoOn=1HpHc=ax8+zs3XxZO2G3w@mail.gmail.com>
- <14efb6ee-4de0-ce26-569b-3a7ec6647e7d@ventanamicro.com>
-In-Reply-To: <14efb6ee-4de0-ce26-569b-3a7ec6647e7d@ventanamicro.com>
+References: <20230123035754.75553-1-alistair.francis@opensource.wdc.com>
+ <084f9a13-c74f-fa5e-19a7-e6b437f34cce@ventanamicro.com>
+In-Reply-To: <084f9a13-c74f-fa5e-19a7-e6b437f34cce@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 23 Jan 2023 21:49:11 +1000
-Message-ID: <CAKmqyKMTuxpqv2uHope8-oK+LBRJOei4x7LYyL0M6Tj2EGmwVw@mail.gmail.com>
-Subject: Re: [PATCH v3 3/7] hw/riscv/microchip_pfsoc.c: add an Icicle Kit fdt
- address function
+Date: Mon, 23 Jan 2023 21:51:23 +1000
+Message-ID: <CAKmqyKNvuHKJPNn90JY5dvS2jNGj3Fkhov07Tpj2MJH9YPJZ=w@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: boot: Don't use CSRs if they are disabled
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Conor Dooley <conor@kernel.org>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, alistair.francis@wdc.com
+Cc: Alistair Francis <alistair.francis@opensource.wdc.com>,
+ qemu-devel@nongnu.org, 
+ qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ Bin Meng <bin.meng@windriver.com>, bmeng.cn@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,98 +75,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2023 11:49:40 -0000
+X-List-Received-Date: Mon, 23 Jan 2023 11:51:54 -0000
 
-On Mon, Jan 23, 2023 at 8:19 PM Daniel Henrique Barboza
+On Mon, Jan 23, 2023 at 8:25 PM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
 >
 >
-> On 1/22/23 19:53, Alistair Francis wrote:
-> > On Sun, Jan 22, 2023 at 5:16 AM Daniel Henrique Barboza
-> > <dbarboza@ventanamicro.com> wrote:
-> >>
-> >> Conor,
-> >>
-> >> Thanks for the Icicle-kit walk-through! I'll not claim that I fully understood it,
-> >> but I understood enough to handle the situation ATM.
-> >>
-> >> Without this change, this is where the FDT is being installed in the board when
-> >> I start it with 8Gb of RAM (retrieved via 'info roms'):
-> >>
-> >> addr=00000000bfe00000 size=0x00a720 mem=ram name="fdt"
-> >>
-> >> Which surprised me at first because this is almost at the end of the LO area which has
-> >> 1Gb and I figured it would be in the middle of another RAM area. I took another read
-> >> at what we're doing in riscv_load_fdt():
-> >>
-> >> -----------
-> >> temp = (dram_base < 3072 * MiB) ?  MIN(dram_end, 3072 * MiB) : dram_end;
-> >> fdt_addr = QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
-> >> -----------
-> >>
-> >> This code can be read as "if the starting address of the RAM is lower than 3Gb, put
-> >> the FDT no further than 3Gb (0xc0000000). Otherwise, put it at the end of dram",
-> >> where "dram_base" is the starting address of the RAM block that the function
-> >> receives.
-> >>
-> >> For icicle-kit, this is being passed as  memmap[MICROCHIP_PFSOC_DRAM_LO].base,
-> >> 0x80000000, which is 2Gb.
-> >>
-> >> So, regardless of how much RAM we have (dram_end), the FDT will always be capped at
-> >> 3Gb. At this moment, this fits exactly at the end of the LO area for the Icicle Kit.
-> >> Which is funny because this 3Gb restriction was added by commit 1a475d39ef54 to fix
-> >> 32 bit guest boot and it happened to also work for the Microchip SoC.
-> >>
-> >> So yeah, I thought that I was fixing a bug and in the end I caused one. This patch
-> >> needs to go.
-> >>
-> >>
-> >> Alistair, I believe I should re-send v2, this time explaining why the existing function
-> >> will not break the Microchip board because we'll never put the FDT out of the LO area
-> >> of the board. Does this work for you?
+> On 1/23/23 00:57, Alistair Francis wrote:
+> > From: Alistair Francis <alistair.francis@wdc.com>
 > >
-> > I think that's fine. My only worry is that we are losing some
-> > flexibility that some future board might want.
+> > If the CSRs and CSR instructions are disabled because the Zicsr
+> > extension isn't enabled then we want to make sure we don't run any CSR
+> > instructions in the boot ROM.
+> >
+> > This patches removes the CSR instructions from the reset-vec if the
+> > extension isn't enabled. We replace the instruction with a NOP instead.
+> >
+> > Note that we don't do this for the SiFive U machine, as we are modelling
+> > the hardware in that case.
+> >
+> > Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1447
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
 >
-> What if we change riscv_load_fdt() parameters to pass a MemoryRegion/MemMapEntry
-> instead of just dram_base?
->
-> Instead of this:
->
-> uint64_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
->
-> We would have this:
->
-> uint64_t riscv_load_fdt(MemMapEntry mem, uint64_t mem_size, void *fdt)
->
-> Or even this:
->
-> uint64_t riscv_load_fdt(hwaddr dram_base, hwaddr dram_size,
->                          uint64_t mem_size, void *fdt)
->
->
-> And then we can make assumptions based on the actual memory region that the fdt
-> is going to fit into, instead of having a starting address and a total memory
-> size and have to deal with issues such as sparse memory.
->
-> We can keep all the assumptions already made today (e.g. the 3Gb maximum addr)
-> while also having a guarantee that the fdt isn't going to be put in the wrong
-> memory region/spot if we decide to change the assumptions later on.
+> Shouldn't we also handle the sifive_u/sifive_e boards? Their reset vectors
+> aren't being covered by riscv_set_rom_reset_vec() (it's on my TODO, didn't
+> send it yet because sifive uses an extra MSEL pin at the start of the vector).
 
-That seems like a good direction. We currently don't need this though,
-so don't feel like it needs to be done today.
+I feel that those boards are modelling hardware, so in this case we
+should model what the hardware does. I don't even think that a user
+could disable the CSR extension on those boards.
 
 Alistair
 
 >
 >
-> Thanks,
 >
 > Daniel
 >
 >
 >
+> >   hw/riscv/boot.c | 9 +++++++++
+> >   1 file changed, 9 insertions(+)
 > >
-> > Alistair
+> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> > index 2594276223..cb27798a25 100644
+> > --- a/hw/riscv/boot.c
+> > +++ b/hw/riscv/boot.c
+> > @@ -356,6 +356,15 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts
+> >           reset_vec[4] = 0x0182b283;   /*     ld     t0, 24(t0) */
+> >       }
+> >
+> > +    if (!harts->harts[0].cfg.ext_icsr) {
+> > +        /*
+> > +         * The Zicsr extension has been disabled, so let's ensure we don't
+> > +         * run the CSR instruction. Let's fill the address with a non
+> > +         * compressed nop.
+> > +         */
+> > +        reset_vec[2] = 0x00000013;   /*     addi   x0, x0, 0 */
+> > +    }
+> > +
+> >       /* copy in the reset vector in little_endian byte order */
+> >       for (i = 0; i < ARRAY_SIZE(reset_vec); i++) {
+> >           reset_vec[i] = cpu_to_le32(reset_vec[i]);
 
