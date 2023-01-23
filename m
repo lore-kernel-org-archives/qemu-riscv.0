@@ -1,58 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pK5Tz-00062z-Hs
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 17:40:07 -0500
+	id 1pK5dv-00085O-L6
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 17:50:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pK5Tx-00062H-0V; Mon, 23 Jan 2023 17:40:05 -0500
-Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b])
+ id 1pK5dt-000856-8G; Mon, 23 Jan 2023 17:50:21 -0500
+Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pK5Tu-0004p2-GK; Mon, 23 Jan 2023 17:40:04 -0500
-Received: by mail-vk1-xa2b.google.com with SMTP id i82so6753060vki.8;
- Mon, 23 Jan 2023 14:40:01 -0800 (PST)
+ id 1pK5dq-0006Tp-0S; Mon, 23 Jan 2023 17:50:21 -0500
+Received: by mail-vk1-xa2c.google.com with SMTP id t2so6767820vkk.9;
+ Mon, 23 Jan 2023 14:50:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=R6qDaSB1eZAp6e7Eb1wnVLWxQEGT7OzrisF9ZhbUIdo=;
- b=Tjzze3o+3HUwFv+2hrI7HyO1d79LkWUeB72AeZ/bBVJoh1fiqiGs8kVgYE2L//kkXF
- QYsYhemaFlZGj+nCazl9z/rQSg55to2pPh2idmRGJ+sem4LYFWh+H2KwCeJ74rVZH7bS
- PYfOI4Hiv3b/V0VU64vL9ae85HdCZaPr6L8jwUC9vGpzR3JnAz8hZ/OJy5+eZogCyvF9
- yNHyrAdIxhqlgaBaqWQpO7u3pC6YxWrfl7rx3IBeERWDCtbuf2N4hn/J56Y19uWNrWWb
- Y5aNyS1L5Hx6M9BzdNlqTsUc2CESjERhVWHISU15GaEl61xk6ZsNUf2EJ/cIONM1mMQy
- x6cg==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OrHEM6IxsY3EE6MKnYDaPOHYvQiIofAFFhu0Ipm5UI8=;
+ b=XFM9dK5EpT7dhghnl3vh+xEuAXvHQn27oceBv/RIHJWrpTozt8JPXIxe2XGC8oFwct
+ akYY479zPIrwWIegQoyU2FUnBSabEgEQ3J945k0RBgZmyb24Gv5xgL/+si0qsSHlWOya
+ 4Gg6WhDvVVveAswUtXP49IKwK1fIUmFqtPVOozd/dfUiBwWL+996K2MY+yMA9Txrn9jy
+ 0ecMsH8SV1XMx2exX66/w2/vSB2LZf+wWxcHozX6eym6MF8OQnRl5zVsKRXJZ8Vsu+4f
+ bx4xuOsXsS3zRqeoSVXoYLgz/sPtCkLQBsV6lCka+gHYCcqyIq4tNshTHCo7FDeD1ihD
+ ESww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=R6qDaSB1eZAp6e7Eb1wnVLWxQEGT7OzrisF9ZhbUIdo=;
- b=ZAl12DFNsxxiW0fQgnL5edJtzuxMKVnIEAU734Pxh1w1a0S+ttywDJ3debi4gFWsLN
- 3IrEKVkIB9OUWKAN9cY7Pk8Zxs1L+mtQuZ+KvWJpkUpZvbqgMc4gaAx3vLT4+sQudcmJ
- S9jjFnXNDHk7RL/qMOC5dkwjhRHshPmhlyOUTotKU5HMxkoIIBQCKj/UhcyC9qKqZR6a
- KC7Im0ffJ9DMZyaF7A/IbFJk1/0X94lhbM3m93aVXOnXOYR2W0+osa4J2pQNWo8JJ/3R
- ttYmoFmKAQkxFqUeJeiMYAEKH2lMGr0S4/74ZM9jPcElp6p+sHAs3VsL6ahaP/n5T/eQ
- d0kQ==
-X-Gm-Message-State: AFqh2kqG78j2G45yOvWN+wNeIJhbfiJAgke4YMyY3f2HgsjmmYav3yR9
- PRHOTwS1/K53cbkyIDDc4z4REpNlEGK03vAkzYc=
-X-Google-Smtp-Source: AMrXdXtva2IT59FPFTe1UiSjnsp1P4KDi+yzH/6SI7RUQwN3f3ta3/UVVQljpHk8kgSvxm3qEz2of/a7rGl7j55Y6hU=
-X-Received: by 2002:a05:6122:924:b0:3d5:5f93:53f with SMTP id
- j36-20020a056122092400b003d55f93053fmr3391315vka.7.1674513599622; Mon, 23 Jan
- 2023 14:39:59 -0800 (PST)
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OrHEM6IxsY3EE6MKnYDaPOHYvQiIofAFFhu0Ipm5UI8=;
+ b=GIfRxRtufnFgOK1M8qdit2Hdyp8xSeNvOJCZGv4SPRx8K/Qh2nn2EbFpACz6/GUflc
+ zcMrQTeFsK7KZYVgDld3i6qjWWGmQjXBKnmQYK1W4PFnx8P0qRXyKtzCzxPa3cBSa6dA
+ 3yzXLuP5k98ZRNy6O0FNaLWVbl+KTgMgzFsPzo1TpwSG1buTMf8bMX1NtUMz9y9T/92f
+ y9cASTAEFYC+OeslrS6+JbmOsq6Gun1xfXc4tC/z4A33RGwPSVR2zccOKDGtj89CWjfG
+ iLyGtWqTRO2GWps4vgcZ42cl9efvLC8nicz5w/1TPxaWuU6y6VL/V/v55xeFQB1ITKcD
+ EFhA==
+X-Gm-Message-State: AFqh2krPVHRvHhWy4G+zdKpKKcjBWCk5jn/xmMydQ7V4mXax7XFS3924
+ LIK67ZhGJRGxCBGOexhJpSlEDWuW1uyIx06+YCg=
+X-Google-Smtp-Source: AMrXdXuIIfCxC8fmfRjyfkm0UPYfiVkTG74B8fyf0NpfPVIxOo4+pCNtkiKeQvwhlbbzaILARZeb7F8qktOLqXj6HB0=
+X-Received: by 2002:a1f:b681:0:b0:3dd:fc42:994d with SMTP id
+ g123-20020a1fb681000000b003ddfc42994dmr3515028vkf.25.1674514216393; Mon, 23
+ Jan 2023 14:50:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20230123063619.222459-1-wilfred.mallawa@opensource.wdc.com>
-In-Reply-To: <20230123063619.222459-1-wilfred.mallawa@opensource.wdc.com>
+References: <20221223180016.2068508-1-christoph.muellner@vrull.eu>
+ <20221223180016.2068508-2-christoph.muellner@vrull.eu>
+In-Reply-To: <20221223180016.2068508-2-christoph.muellner@vrull.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 24 Jan 2023 08:39:33 +1000
-Message-ID: <CAKmqyKN1cQHctN6LGobM9XZR6iHO7D=7m9P=mtNr8AUGmS61RQ@mail.gmail.com>
-Subject: Re: [PATCH v2] include/hw/riscv/opentitan: update opentitan IRQs
-To: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Date: Tue, 24 Jan 2023 08:49:50 +1000
+Message-ID: <CAKmqyKOXM2poHz5c1CbddvUBC-wQxQE3o_bm7bqrn+XTkqASrg@mail.gmail.com>
+Subject: Re: [PATCH v2 01/15] RISC-V: Adding XTheadCmo ISA extension
+To: Christoph Muellner <christoph.muellner@vrull.eu>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko.stuebner@vrull.eu>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Nelson Chu <nelson@rivosinc.com>, Kito Cheng <kito.cheng@sifive.com>, 
+ Cooper Qu <cooper.qu@linux.alibaba.com>,
+ Lifang Xia <lifang_xia@linux.alibaba.com>, 
+ Yunhai Shang <yunhai@linux.alibaba.com>,
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2b;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2b.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,179 +84,326 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2023 22:40:05 -0000
+X-List-Received-Date: Mon, 23 Jan 2023 22:50:21 -0000
 
-On Mon, Jan 23, 2023 at 4:40 PM Wilfred Mallawa
-<wilfred.mallawa@opensource.wdc.com> wrote:
+On Sat, Dec 24, 2022 at 4:09 AM Christoph Muellner
+<christoph.muellner@vrull.eu> wrote:
 >
-> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 >
-> Updates the opentitan IRQs to match the latest supported commit of
-> Opentitan from TockOS.
+> This patch adds support for the XTheadCmo ISA extension.
+> To avoid interfering with standard extensions, decoder and translation
+> are in its own xthead* specific files.
+> Future patches should be able to easily add additional T-Head extension.
 >
-> OPENTITAN_SUPPORTED_SHA := 565e4af39760a123c59a184aa2f5812a961fde47
+> The implementation does not have much functionality (besides accepting
+> the instructions and not qualifying them as illegal instructions if
+> the hart executes in the required privilege level for the instruction),
+> as QEMU does not model CPU caches and instructions are documented
+> to not raise any exceptions.
 >
-> Memory layout as per [1]
+> Changes in v2:
+> - Add ISA_EXT_DATA_ENTRY()
+> - Explicit test for PRV_U
+> - Encapsule access to env-priv in inline function
+> - Use single decoder for XThead extensions
 >
-> [1] https://github.com/lowRISC/opentitan/blob/565e4af39760a123c59a184aa2f5812a961fde47/hw/top_earlgrey/sw/autogen/top_earlgrey_memory.h
+> Co-developed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
+> ---
+>  target/riscv/cpu.c                         |  2 +
+>  target/riscv/cpu.h                         |  1 +
+>  target/riscv/insn_trans/trans_xthead.c.inc | 89 ++++++++++++++++++++++
+>  target/riscv/meson.build                   |  1 +
+>  target/riscv/translate.c                   | 15 +++-
+>  target/riscv/xthead.decode                 | 38 +++++++++
+>  6 files changed, 143 insertions(+), 3 deletions(-)
+>  create mode 100644 target/riscv/insn_trans/trans_xthead.c.inc
+>  create mode 100644 target/riscv/xthead.decode
 >
-> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6fe176e483..a90b82c5c5 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -108,6 +108,7 @@ static const struct isa_ext_data isa_edata_arr[] =3D =
+{
+>      ISA_EXT_DATA_ENTRY(svinval, true, PRIV_VERSION_1_12_0, ext_svinval),
+>      ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0, ext_svnapot),
+>      ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt),
+> +    ISA_EXT_DATA_ENTRY(xtheadcmo, true, PRIV_VERSION_1_11_0, ext_xtheadc=
+mo),
+>      ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_X=
+VentanaCondOps),
+>  };
+>
+> @@ -1060,6 +1061,7 @@ static Property riscv_cpu_extensions[] =3D {
+>      DEFINE_PROP_BOOL("zmmul", RISCVCPU, cfg.ext_zmmul, false),
+>
+>      /* Vendor-specific custom extensions */
+> +    DEFINE_PROP_BOOL("xtheadcmo", RISCVCPU, cfg.ext_xtheadcmo, false),
+>      DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOp=
+s, false),
+>
+>      /* These are experimental so mark with 'x-' */
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 443d15a47c..ad1c19f870 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -465,6 +465,7 @@ struct RISCVCPUConfig {
+>      uint64_t mimpid;
+>
+>      /* Vendor-specific custom extensions */
+> +    bool ext_xtheadcmo;
+>      bool ext_XVentanaCondOps;
+>
+>      uint8_t pmu_num;
+> diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/in=
+sn_trans/trans_xthead.c.inc
+> new file mode 100644
+> index 0000000000..00e75c7dca
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_xthead.c.inc
+> @@ -0,0 +1,89 @@
+> +/*
+> + * RISC-V translation routines for the T-Head vendor extensions (xthead*=
+).
+> + *
+> + * Copyright (c) 2022 VRULL GmbH.
+> + *
+> + * This program is free software; you can redistribute it and/or modify =
+it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOU=
+T
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
+ for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License alo=
+ng with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#define REQUIRE_XTHEADCMO(ctx) do {              \
+> +    if (!ctx->cfg_ptr->ext_xtheadcmo) {          \
+> +        return false;                            \
+> +    }                                            \
+> +} while (0)
+> +
+> +/* XTheadCmo */
+> +
+> +static inline int priv_level(DisasContext *ctx)
+> +{
+> +#ifdef CONFIG_USER_ONLY
+> +    return PRV_U;
+> +#else
+> +     /* Priv level equals mem_idx -- see cpu_mmu_index. */
+> +    return ctx->mem_idx;
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+This should be ANDed with TB_FLAGS_PRIV_MMU_MASK as sometimes this can
+include hypervisor priv access information
+
+> +#endif
+> +}
+> +
+> +#define REQUIRE_PRIV_MHSU(ctx)                                  \
+> +do {                                                            \
+> +    int priv =3D priv_level(ctx);                                 \
+> +    if (!(priv =3D=3D PRV_M ||                                      \
+> +          priv =3D=3D PRV_H ||                                      \
+
+PRV_H isn't used
+
+> +          priv =3D=3D PRV_S ||                                      \
+> +          priv =3D=3D PRV_U)) {                                     \
+> +        return false;                                           \
+
+When would this not be the case?
+
+> +    }                                                           \
+> +} while (0)
+> +
+> +#define REQUIRE_PRIV_MHS(ctx)                                   \
+> +do {                                                            \
+> +    int priv =3D priv_level(ctx);                                 \
+> +    if (!(priv =3D=3D PRV_M ||                                      \
+> +          priv =3D=3D PRV_H ||                                      \
+
+Also not used
+
+> +          priv =3D=3D PRV_S)) {                                     \
+> +        return false;                                           \
+> +    }                                                           \
+> +} while (0)
+> +
+> +#define NOP_PRIVCHECK(insn, extcheck, privcheck)                \
+> +static bool trans_ ## insn(DisasContext *ctx, arg_ ## insn * a) \
+> +{                                                               \
+> +    (void) a;                                                   \
+> +    extcheck(ctx);                                              \
+> +    privcheck(ctx);                                             \
+> +    return true;                                                \
+> +}
+> +
+> +NOP_PRIVCHECK(th_dcache_call, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_ciall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_iall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_cpa, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_cipa, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_ipa, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_cva, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHSU)
+> +NOP_PRIVCHECK(th_dcache_civa, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHSU)
+> +NOP_PRIVCHECK(th_dcache_iva, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHSU)
+> +NOP_PRIVCHECK(th_dcache_csw, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_cisw, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_isw, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_cpal1, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_dcache_cval1, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +
+> +NOP_PRIVCHECK(th_icache_iall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_icache_ialls, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_icache_ipa, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_icache_iva, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHSU)
+> +
+> +NOP_PRIVCHECK(th_l2cache_call, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_l2cache_ciall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> +NOP_PRIVCHECK(th_l2cache_iall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MHS)
+> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+> index ba25164d74..5dee37a242 100644
+> --- a/target/riscv/meson.build
+> +++ b/target/riscv/meson.build
+> @@ -2,6 +2,7 @@
+>  gen =3D [
+>    decodetree.process('insn16.decode', extra_args: ['--static-decode=3Dde=
+code_insn16', '--insnwidth=3D16']),
+>    decodetree.process('insn32.decode', extra_args: '--static-decode=3Ddec=
+ode_insn32'),
+> +  decodetree.process('xthead.decode', extra_args: '--static-decode=3Ddec=
+ode_xthead'),
+>    decodetree.process('XVentanaCondOps.decode', extra_args: '--static-dec=
+ode=3Ddecode_XVentanaCodeOps'),
+>  ]
+>
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index db123da5ec..14d9116975 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -125,13 +125,18 @@ static bool always_true_p(DisasContext *ctx  __attr=
+ibute__((__unused__)))
+>      return true;
+>  }
+>
+> +static bool has_xthead_p(DisasContext *ctx  __attribute__((__unused__)))
+> +{
+> +    return ctx->cfg_ptr->ext_xtheadcmo;
+> +}
+> +
+>  #define MATERIALISE_EXT_PREDICATE(ext)  \
+>      static bool has_ ## ext ## _p(DisasContext *ctx)    \
+>      { \
+>          return ctx->cfg_ptr->ext_ ## ext ; \
+>      }
+>
+> -MATERIALISE_EXT_PREDICATE(XVentanaCondOps);
+> +MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
+
+Do we need this change?
+
+>
+>  #ifdef TARGET_RISCV32
+>  #define get_xl(ctx)    MXL_RV32
+> @@ -732,6 +737,10 @@ static int ex_rvc_shiftri(DisasContext *ctx, int imm=
+)
+>  /* Include the auto-generated decoder for 32 bit insn */
+>  #include "decode-insn32.c.inc"
+>
+> +/* Include decoders for factored-out extensions */
+> +#include "decode-xthead.c.inc"
+> +#include "decode-XVentanaCondOps.c.inc"
+> +
+>  static bool gen_logic_imm_fn(DisasContext *ctx, arg_i *a,
+>                               void (*func)(TCGv, TCGv, target_long))
+>  {
+> @@ -1033,12 +1042,11 @@ static uint32_t opcode_at(DisasContextBase *dcbas=
+e, target_ulong pc)
+>  #include "insn_trans/trans_rvk.c.inc"
+>  #include "insn_trans/trans_privileged.c.inc"
+>  #include "insn_trans/trans_svinval.c.inc"
+> +#include "insn_trans/trans_xthead.c.inc"
+>  #include "insn_trans/trans_xventanacondops.c.inc"
+>
+>  /* Include the auto-generated decoder for 16 bit insn */
+>  #include "decode-insn16.c.inc"
+> -/* Include decoders for factored-out extensions */
+> -#include "decode-XVentanaCondOps.c.inc"
+
+Can we not leave these at the bottom?
 
 Alistair
 
-> ---
-> Changes in v2:
->         - Updated the MMIO register layout/size
->         - Bumped the supported commit sha
->         - Added link to OT register layout for reference in the commit
->           msg
 >
->  hw/riscv/opentitan.c         | 80 ++++++++++++++++++------------------
->  include/hw/riscv/opentitan.h | 14 +++----
->  2 files changed, 47 insertions(+), 47 deletions(-)
+>  /* The specification allows for longer insns, but not supported by qemu.=
+ */
+>  #define MAX_INSN_LEN  4
+> @@ -1059,6 +1067,7 @@ static void decode_opc(CPURISCVState *env, DisasCon=
+text *ctx, uint16_t opcode)
+>          bool (*decode_func)(DisasContext *, uint32_t);
+>      } decoders[] =3D {
+>          { always_true_p,  decode_insn32 },
+> +        { has_xthead_p, decode_xthead },
+>          { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
+>      };
 >
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 64d5d435b9..353f030d80 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -31,47 +31,47 @@
->  /*
->   * This version of the OpenTitan machine currently supports
->   * OpenTitan RTL version:
-> - * <lowRISC/opentitan@d072ac505f82152678d6e04be95c72b728a347b8>
-> + * <lowRISC/opentitan@565e4af39760a123c59a184aa2f5812a961fde47>
->   *
->   * MMIO mapping as per (specified commit):
->   * lowRISC/opentitan: hw/top_earlgrey/sw/autogen/top_earlgrey_memory.h
->   */
->  static const MemMapEntry ibex_memmap[] = {
-> -    [IBEX_DEV_ROM] =            {  0x00008000,  0x8000 },
-> -    [IBEX_DEV_RAM] =            {  0x10000000,  0x20000 },
-> -    [IBEX_DEV_FLASH] =          {  0x20000000,  0x100000 },
-> -    [IBEX_DEV_UART] =           {  0x40000000,  0x1000  },
-> -    [IBEX_DEV_GPIO] =           {  0x40040000,  0x1000  },
-> -    [IBEX_DEV_SPI_DEVICE] =     {  0x40050000,  0x1000  },
-> -    [IBEX_DEV_I2C] =            {  0x40080000,  0x1000  },
-> -    [IBEX_DEV_PATTGEN] =        {  0x400e0000,  0x1000  },
-> -    [IBEX_DEV_TIMER] =          {  0x40100000,  0x1000  },
-> -    [IBEX_DEV_OTP_CTRL] =       {  0x40130000,  0x4000  },
-> -    [IBEX_DEV_LC_CTRL] =        {  0x40140000,  0x1000  },
-> -    [IBEX_DEV_ALERT_HANDLER] =  {  0x40150000,  0x1000  },
-> -    [IBEX_DEV_SPI_HOST0] =      {  0x40300000,  0x1000  },
-> -    [IBEX_DEV_SPI_HOST1] =      {  0x40310000,  0x1000  },
-> -    [IBEX_DEV_USBDEV] =         {  0x40320000,  0x1000  },
-> -    [IBEX_DEV_PWRMGR] =         {  0x40400000,  0x1000  },
-> -    [IBEX_DEV_RSTMGR] =         {  0x40410000,  0x1000  },
-> -    [IBEX_DEV_CLKMGR] =         {  0x40420000,  0x1000  },
-> -    [IBEX_DEV_PINMUX] =         {  0x40460000,  0x1000  },
-> -    [IBEX_DEV_AON_TIMER] =      {  0x40470000,  0x1000  },
-> -    [IBEX_DEV_SENSOR_CTRL] =    {  0x40490000,  0x1000  },
-> -    [IBEX_DEV_FLASH_CTRL] =     {  0x41000000,  0x1000  },
-> -    [IBEX_DEV_AES] =            {  0x41100000,  0x1000  },
-> -    [IBEX_DEV_HMAC] =           {  0x41110000,  0x1000  },
-> -    [IBEX_DEV_KMAC] =           {  0x41120000,  0x1000  },
-> -    [IBEX_DEV_OTBN] =           {  0x41130000,  0x10000 },
-> -    [IBEX_DEV_KEYMGR] =         {  0x41140000,  0x1000  },
-> -    [IBEX_DEV_CSRNG] =          {  0x41150000,  0x1000  },
-> -    [IBEX_DEV_ENTROPY] =        {  0x41160000,  0x1000  },
-> -    [IBEX_DEV_EDNO] =           {  0x41170000,  0x1000  },
-> -    [IBEX_DEV_EDN1] =           {  0x41180000,  0x1000  },
-> -    [IBEX_DEV_NMI_GEN] =        {  0x411c0000,  0x1000  },
-> -    [IBEX_DEV_PERI] =           {  0x411f0000,  0x10000 },
-> -    [IBEX_DEV_PLIC] =           {  0x48000000,  0x4005000 },
-> -    [IBEX_DEV_FLASH_VIRTUAL] =  {  0x80000000,  0x80000 },
-> +    [IBEX_DEV_ROM] =            {  0x00008000,  0x8000      },
-> +    [IBEX_DEV_RAM] =            {  0x10000000,  0x20000     },
-> +    [IBEX_DEV_FLASH] =          {  0x20000000,  0x100000    },
-> +    [IBEX_DEV_UART] =           {  0x40000000,  0x40        },
-> +    [IBEX_DEV_GPIO] =           {  0x40040000,  0x40        },
-> +    [IBEX_DEV_SPI_DEVICE] =     {  0x40050000,  0x2000      },
-> +    [IBEX_DEV_I2C] =            {  0x40080000,  0x80        },
-> +    [IBEX_DEV_PATTGEN] =        {  0x400e0000,  0x40        },
-> +    [IBEX_DEV_TIMER] =          {  0x40100000,  0x200       },
-> +    [IBEX_DEV_OTP_CTRL] =       {  0x40130000,  0x2000      },
-> +    [IBEX_DEV_LC_CTRL] =        {  0x40140000,  0x100       },
-> +    [IBEX_DEV_ALERT_HANDLER] =  {  0x40150000,  0x800       },
-> +    [IBEX_DEV_SPI_HOST0] =      {  0x40300000,  0x40        },
-> +    [IBEX_DEV_SPI_HOST1] =      {  0x40310000,  0x40        },
-> +    [IBEX_DEV_USBDEV] =         {  0x40320000,  0x1000      },
-> +    [IBEX_DEV_PWRMGR] =         {  0x40400000,  0x80        },
-> +    [IBEX_DEV_RSTMGR] =         {  0x40410000,  0x80        },
-> +    [IBEX_DEV_CLKMGR] =         {  0x40420000,  0x80        },
-> +    [IBEX_DEV_PINMUX] =         {  0x40460000,  0x1000      },
-> +    [IBEX_DEV_AON_TIMER] =      {  0x40470000,  0x40        },
-> +    [IBEX_DEV_SENSOR_CTRL] =    {  0x40490000,  0x40        },
-> +    [IBEX_DEV_FLASH_CTRL] =     {  0x41000000,  0x200       },
-> +    [IBEX_DEV_AES] =            {  0x41100000,  0x100       },
-> +    [IBEX_DEV_HMAC] =           {  0x41110000,  0x1000      },
-> +    [IBEX_DEV_KMAC] =           {  0x41120000,  0x1000      },
-> +    [IBEX_DEV_OTBN] =           {  0x41130000,  0x10000     },
-> +    [IBEX_DEV_KEYMGR] =         {  0x41140000,  0x100       },
-> +    [IBEX_DEV_CSRNG] =          {  0x41150000,  0x80        },
-> +    [IBEX_DEV_ENTROPY] =        {  0x41160000,  0x100       },
-> +    [IBEX_DEV_EDNO] =           {  0x41170000,  0x80        },
-> +    [IBEX_DEV_EDN1] =           {  0x41180000,  0x80        },
-> +    [IBEX_DEV_SRAM_CTRL] =      {  0x411c0000,  0x20        },
-> +    [IBEX_DEV_IBEX_CFG] =       {  0x411f0000,  0x100       },
-> +    [IBEX_DEV_PLIC] =           {  0x48000000,  0x8000000   },
-> +    [IBEX_DEV_FLASH_VIRTUAL] =  {  0x80000000,  0x80000     },
->  };
->
->  static void opentitan_board_init(MachineState *machine)
-> @@ -294,12 +294,12 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->          memmap[IBEX_DEV_EDN1].base, memmap[IBEX_DEV_EDN1].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.alert_handler",
->          memmap[IBEX_DEV_ALERT_HANDLER].base, memmap[IBEX_DEV_ALERT_HANDLER].size);
-> -    create_unimplemented_device("riscv.lowrisc.ibex.nmi_gen",
-> -        memmap[IBEX_DEV_NMI_GEN].base, memmap[IBEX_DEV_NMI_GEN].size);
-> +    create_unimplemented_device("riscv.lowrisc.ibex.sram_ctrl",
-> +        memmap[IBEX_DEV_SRAM_CTRL].base, memmap[IBEX_DEV_SRAM_CTRL].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.otbn",
->          memmap[IBEX_DEV_OTBN].base, memmap[IBEX_DEV_OTBN].size);
-> -    create_unimplemented_device("riscv.lowrisc.ibex.peri",
-> -        memmap[IBEX_DEV_PERI].base, memmap[IBEX_DEV_PERI].size);
-> +    create_unimplemented_device("riscv.lowrisc.ibex.ibex_cfg",
-> +        memmap[IBEX_DEV_IBEX_CFG].base, memmap[IBEX_DEV_IBEX_CFG].size);
->  }
->
->  static Property lowrisc_ibex_soc_props[] = {
-> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-> index 7659d1bc5b..c40b05052a 100644
-> --- a/include/hw/riscv/opentitan.h
-> +++ b/include/hw/riscv/opentitan.h
-> @@ -94,9 +94,9 @@ enum {
->      IBEX_DEV_EDNO,
->      IBEX_DEV_EDN1,
->      IBEX_DEV_ALERT_HANDLER,
-> -    IBEX_DEV_NMI_GEN,
-> +    IBEX_DEV_SRAM_CTRL,
->      IBEX_DEV_OTBN,
-> -    IBEX_DEV_PERI,
-> +    IBEX_DEV_IBEX_CFG,
->  };
->
->  enum {
-> @@ -108,11 +108,11 @@ enum {
->      IBEX_UART0_RX_BREAK_ERR_IRQ   = 6,
->      IBEX_UART0_RX_TIMEOUT_IRQ     = 7,
->      IBEX_UART0_RX_PARITY_ERR_IRQ  = 8,
-> -    IBEX_TIMER_TIMEREXPIRED0_0    = 127,
-> -    IBEX_SPI_HOST0_ERR_IRQ        = 134,
-> -    IBEX_SPI_HOST0_SPI_EVENT_IRQ  = 135,
-> -    IBEX_SPI_HOST1_ERR_IRQ        = 136,
-> -    IBEX_SPI_HOST1_SPI_EVENT_IRQ  = 137,
-> +    IBEX_TIMER_TIMEREXPIRED0_0    = 124,
-> +    IBEX_SPI_HOST0_ERR_IRQ        = 131,
-> +    IBEX_SPI_HOST0_SPI_EVENT_IRQ  = 132,
-> +    IBEX_SPI_HOST1_ERR_IRQ        = 133,
-> +    IBEX_SPI_HOST1_SPI_EVENT_IRQ  = 134,
->  };
->
->  #endif
+> diff --git a/target/riscv/xthead.decode b/target/riscv/xthead.decode
+> new file mode 100644
+> index 0000000000..30533a66f5
+> --- /dev/null
+> +++ b/target/riscv/xthead.decode
+> @@ -0,0 +1,38 @@
+> +#
+> +# Translation routines for the instructions of the XThead* ISA extension=
+s
+> +#
+> +# Copyright (c) 2022 Christoph Muellner, christoph.muellner@vrull.eu
+> +#
+> +# SPDX-License-Identifier: LGPL-2.1-or-later
+> +#
+> +# The documentation of the ISA extensions can be found here:
+> +#   https://github.com/T-head-Semi/thead-extension-spec/releases/latest
+> +
+> +# Fields:
+> +%rs1       15:5
+> +
+> +# Formats
+> +@sfence_vm  ....... ..... .....   ... ..... ....... %rs1
+> +
+> +# XTheadCmo
+> +th_dcache_call   0000000 00001 00000 000 00000 0001011
+> +th_dcache_ciall  0000000 00011 00000 000 00000 0001011
+> +th_dcache_iall   0000000 00010 00000 000 00000 0001011
+> +th_dcache_cpa    0000001 01001 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cipa   0000001 01011 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_ipa    0000001 01010 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cva    0000001 00101 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_civa   0000001 00111 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_iva    0000001 00110 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_csw    0000001 00001 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cisw   0000001 00011 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_isw    0000001 00010 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cpal1  0000001 01000 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cval1  0000001 00100 ..... 000 00000 0001011 @sfence_vm
+> +th_icache_iall   0000000 10000 00000 000 00000 0001011
+> +th_icache_ialls  0000000 10001 00000 000 00000 0001011
+> +th_icache_ipa    0000001 11000 ..... 000 00000 0001011 @sfence_vm
+> +th_icache_iva    0000001 10000 ..... 000 00000 0001011 @sfence_vm
+> +th_l2cache_call  0000000 10101 00000 000 00000 0001011
+> +th_l2cache_ciall 0000000 10111 00000 000 00000 0001011
+> +th_l2cache_iall  0000000 10110 00000 000 00000 0001011
 > --
-> 2.39.1
+> 2.38.1
 >
 >
 
