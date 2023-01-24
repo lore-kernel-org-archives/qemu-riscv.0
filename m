@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pKPSY-0006yv-H3
-	for mharc-qemu-riscv@gnu.org; Tue, 24 Jan 2023 14:59:58 -0500
+	id 1pKPSZ-00070E-SF
+	for mharc-qemu-riscv@gnu.org; Tue, 24 Jan 2023 14:59:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1pKPSX-0006yL-1M
- for qemu-riscv@nongnu.org; Tue, 24 Jan 2023 14:59:57 -0500
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
+ id 1pKPSY-0006yn-EW
+ for qemu-riscv@nongnu.org; Tue, 24 Jan 2023 14:59:58 -0500
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1pKPSV-0002PN-4W
- for qemu-riscv@nongnu.org; Tue, 24 Jan 2023 14:59:56 -0500
-Received: by mail-wr1-x433.google.com with SMTP id e3so14976658wru.13
- for <qemu-riscv@nongnu.org>; Tue, 24 Jan 2023 11:59:54 -0800 (PST)
+ id 1pKPSW-0002Pn-EZ
+ for qemu-riscv@nongnu.org; Tue, 24 Jan 2023 14:59:58 -0500
+Received: by mail-wm1-x32f.google.com with SMTP id j17so12341897wms.0
+ for <qemu-riscv@nongnu.org>; Tue, 24 Jan 2023 11:59:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fj56hxiujpOItyZlhW6MrQ4GGK8G/yx/wceOHNKGO5A=;
- b=s2IoOfom5XZO5FcEI9TqD++AtD772D3wppTUce0KPbaSbwaR+f9rgqgWC7yCoVBdI2
- bhSRoiIaDOL7O9KdhLVM0iDrPKByCTnaqc4U4X1G1Sffp7oLvQR21AWcrxEQSFJvMN+1
- CT8C9ZPY0EWMm6gYUG1NFTpbmuXq9b0J2ulnlNzF1Lr2psUQTJ9RQJvLklNMNRVSOEE8
- 2LGK1n6fLuopIZR3vWZAvcGZFeVGN8X62ON/58TRxu33DcKEhPBPa+oYpBQp42VkfrU7
- VvN6HA7kV9vCNaeRq0s8PSseuwGBNXfx+PC4LgqHlw+lTVLswkKvzeiVy/932suUtP6q
- x/Xg==
+ bh=BAt3iRnDafg9OKpVXS+Dl8Rb2b0Zbz3UDA9D8TIplxU=;
+ b=exy7abfLP3Oq6BZ9eypR0AXbCI5t09g1qhl9d3LH8C6gSnAcRTZsHjkYLbwwelAIG7
+ dQjTEOUTynqbMB1Kgh2NCfFoU4u0mXcAijc8WJJ/XZEoUyVYLEoSM2ATv9H4MGy7nY+0
+ X+xiTglI7S8SJphyfyNEfuXOtoGfcxib58h4gkS4jeyi3lEWqeptlSSvWdKLy6wKrT5J
+ HH2lQGwL7xqCfbY4LGQCSa6QKoQT6vdUBr1/8Xi9wu1X0u3CLwOEFa/la6zWFmdYdMma
+ ra09su7qFKs69ReHIEh64aWH/l+cl8Z1zj964bWq6gwuQGX1DO83eDRGg1ziWabl5QcH
+ qu5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fj56hxiujpOItyZlhW6MrQ4GGK8G/yx/wceOHNKGO5A=;
- b=H20Byhd8whKG1lVJVizrxjD3Gdqwpsxf0ztqhfVwfYR9gdOQoYHef7EBNLRQrKgWUe
- H/mAz8MoHVmTkRBHIseO0mawpvudvBhK5GXcjCjBIM2eFd0W5Q5LYXTet1FjHLXbL1qo
- 8We/fY6jF/P26bz8/6ErcW3alA1zMOJps3FvR+cizAPlHzBL85dgzoLMm5VTqzmMuknr
- 4QwnNcbXmFJ81vi9IGS6PXHXT0+EH7ZPNuMPQnf7tyuSQ2o/EuLCJ+C0Dmzwu1hi6EpJ
- 2/r9WZro2fcs23VZbs9hB1GH8qfQ1TFbj/8Sm924dpsCv2IxGjPULZKugGxifWmSaVzo
- pXPA==
-X-Gm-Message-State: AO0yUKW4T7W2TPk0/P0yWVdhgQkY8jlbZDTkC+j1Q+e1Xj+yIrXynCzw
- wFQ0kXeAJHVZZcAqeX0XNLkav9xEoauVYnhe
-X-Google-Smtp-Source: AK7set8X1FYgS7LHMKHoCPiymjtnSGP0Z/5Bzbk286qQIi3DgDWPvDh8yOrWQ8tS5BfWKyF30aZLlg==
-X-Received: by 2002:a5d:58e9:0:b0:2bf:b65f:d144 with SMTP id
- f9-20020a5d58e9000000b002bfb65fd144mr898174wrd.50.1674590393237; 
- Tue, 24 Jan 2023 11:59:53 -0800 (PST)
+ bh=BAt3iRnDafg9OKpVXS+Dl8Rb2b0Zbz3UDA9D8TIplxU=;
+ b=LgB2gcUgE0UTHLM4r+HVz5kzLeMowwPaei2kD6wVH9NU5xRYn1UFLuHVNAzwwsVKQN
+ Kv6xlK8QF68oSvKQ6c9ugdz5K4u/oiEc+qzJm+GgHWtds6OYYXQETOyhDtZ42ZfwVloq
+ NKSBCgpdAVWTetTiKVG4qUpIBdA3xGWvXKu/alZn9BnLTF45ymOcDwywgyueVGItJawm
+ VYBFIboUegeJ2/hNtOyob9ygQnoyKHJCxb3KoV3hUNfLl1fIm3x0hk1OvgXAN2mQh5XT
+ de6OlNe6h/cTMXTdDbKGYSIcGi5zcdjaPei42AU+sDty76R2kqp+PqSzIDCoj7NHEgfJ
+ uEng==
+X-Gm-Message-State: AFqh2kpBF/QRjavDe6wcjbswS/OnBg76rE6dO/kPN0jGSHY6qXNu46mm
+ gsBBaRhxEC0PPdHiYwPz6Ft2UC7nj/wYQ8nK
+X-Google-Smtp-Source: AMrXdXsJ+hfzA2pU5UqpfN5ycsCGBb9hS0PtKaLA5T4QY1QR9OZesPkIwjP2N94LF7Zbsss/uoGV+g==
+X-Received: by 2002:a05:600c:4f8d:b0:3d3:3d1b:6354 with SMTP id
+ n13-20020a05600c4f8d00b003d33d1b6354mr26168049wmq.3.1674590394517; 
+ Tue, 24 Jan 2023 11:59:54 -0800 (PST)
 Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
  [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- j26-20020a5d453a000000b002bdf3809f59sm2607005wra.38.2023.01.24.11.59.52
+ j26-20020a5d453a000000b002bdf3809f59sm2607005wra.38.2023.01.24.11.59.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Jan 2023 11:59:52 -0800 (PST)
+ Tue, 24 Jan 2023 11:59:54 -0800 (PST)
 From: Christoph Muellner <christoph.muellner@vrull.eu>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -61,17 +61,17 @@ To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Yunhai Shang <yunhai@linux.alibaba.com>,
  Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Subject: [PATCH v3 02/14] RISC-V: Adding XTheadSync ISA extension
-Date: Tue, 24 Jan 2023 20:59:33 +0100
-Message-Id: <20230124195945.181842-3-christoph.muellner@vrull.eu>
+Subject: [PATCH v3 03/14] RISC-V: Adding XTheadBa ISA extension
+Date: Tue, 24 Jan 2023 20:59:34 +0100
+Message-Id: <20230124195945.181842-4-christoph.muellner@vrull.eu>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230124195945.181842-1-christoph.muellner@vrull.eu>
 References: <20230124195945.181842-1-christoph.muellner@vrull.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-wr1-x433.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -91,240 +91,179 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jan 2023 19:59:57 -0000
+X-List-Received-Date: Tue, 24 Jan 2023 19:59:58 -0000
 
 From: Christoph Müllner <christoph.muellner@vrull.eu>
 
-This patch adds support for the XTheadSync ISA extension.
+This patch adds support for the XTheadBa ISA extension.
 The patch uses the T-Head specific decoder and translation.
 
-The implementation introduces a helper to execute synchronization tasks:
-helper_tlb_flush_all() performs a synchronized TLB flush on all CPUs.
-
+Co-developed-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
 Co-developed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 ---
 Changes in v2:
 - Add ISA_EXT_DATA_ENTRY()
-- Use helper to synchronize CPUs and perform TLB flushes
-- Change implemenation to follow latest spec update
+- Split XtheadB* extension into individual commits
 - Use single decoder for XThead extensions
 
-Changes in v3:
-- Adjust for renamed REQUIRE_PRIV_* test macros
-
- target/riscv/cpu.c                         |  2 +
+ target/riscv/cpu.c                         |  2 ++
  target/riscv/cpu.h                         |  1 +
- target/riscv/helper.h                      |  1 +
- target/riscv/insn_trans/trans_xthead.c.inc | 86 ++++++++++++++++++++++
- target/riscv/op_helper.c                   |  6 ++
- target/riscv/translate.c                   |  2 +-
- target/riscv/xthead.decode                 |  9 +++
- 7 files changed, 106 insertions(+), 1 deletion(-)
+ target/riscv/insn_trans/trans_xthead.c.inc | 39 ++++++++++++++++++++++
+ target/riscv/translate.c                   |  3 +-
+ target/riscv/xthead.decode                 | 22 ++++++++++++
+ 5 files changed, 66 insertions(+), 1 deletion(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 43a3b9218f..ae2009e89c 100644
+index ae2009e89c..4b46130c5b 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -110,6 +110,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+@@ -109,6 +109,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(svinval, true, PRIV_VERSION_1_12_0, ext_svinval),
      ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0, ext_svnapot),
      ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt),
++    ISA_EXT_DATA_ENTRY(xtheadba, true, PRIV_VERSION_1_11_0, ext_xtheadba),
      ISA_EXT_DATA_ENTRY(xtheadcmo, true, PRIV_VERSION_1_11_0, ext_xtheadcmo),
-+    ISA_EXT_DATA_ENTRY(xtheadsync, true, PRIV_VERSION_1_11_0, ext_xtheadsync),
+     ISA_EXT_DATA_ENTRY(xtheadsync, true, PRIV_VERSION_1_11_0, ext_xtheadsync),
      ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_XVentanaCondOps),
- };
- 
 @@ -1073,6 +1074,7 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("zmmul", RISCVCPU, cfg.ext_zmmul, false),
  
      /* Vendor-specific custom extensions */
++    DEFINE_PROP_BOOL("xtheadba", RISCVCPU, cfg.ext_xtheadba, false),
      DEFINE_PROP_BOOL("xtheadcmo", RISCVCPU, cfg.ext_xtheadcmo, false),
-+    DEFINE_PROP_BOOL("xtheadsync", RISCVCPU, cfg.ext_xtheadsync, false),
+     DEFINE_PROP_BOOL("xtheadsync", RISCVCPU, cfg.ext_xtheadsync, false),
      DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
- 
-     /* These are experimental so mark with 'x-' */
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 680dd3dfbd..d0ab5c7bb0 100644
+index d0ab5c7bb0..d3191bf27b 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -474,6 +474,7 @@ struct RISCVCPUConfig {
+@@ -473,6 +473,7 @@ struct RISCVCPUConfig {
+     uint64_t mimpid;
  
      /* Vendor-specific custom extensions */
++    bool ext_xtheadba;
      bool ext_xtheadcmo;
-+    bool ext_xtheadsync;
+     bool ext_xtheadsync;
      bool ext_XVentanaCondOps;
- 
-     uint8_t pmu_num;
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 227c7122ef..d22656698a 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -109,6 +109,7 @@ DEF_HELPER_1(sret, tl, env)
- DEF_HELPER_1(mret, tl, env)
- DEF_HELPER_1(wfi, void, env)
- DEF_HELPER_1(tlb_flush, void, env)
-+DEF_HELPER_1(tlb_flush_all, void, env)
- /* Native Debug */
- DEF_HELPER_1(itrigger_match, void, env)
- #endif
 diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
-index 24acaf188c..bf5b39c749 100644
+index bf5b39c749..a7da156869 100644
 --- a/target/riscv/insn_trans/trans_xthead.c.inc
 +++ b/target/riscv/insn_trans/trans_xthead.c.inc
-@@ -22,6 +22,12 @@
-     }                                            \
- } while (0)
+@@ -16,6 +16,12 @@
+  * this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
  
-+#define REQUIRE_XTHEADSYNC(ctx) do {             \
-+    if (!ctx->cfg_ptr->ext_xtheadsync) {         \
++#define REQUIRE_XTHEADBA(ctx) do {               \
++    if (!ctx->cfg_ptr->ext_xtheadba) {           \
 +        return false;                            \
 +    }                                            \
 +} while (0)
 +
+ #define REQUIRE_XTHEADCMO(ctx) do {              \
+     if (!ctx->cfg_ptr->ext_xtheadcmo) {          \
+         return false;                            \
+@@ -28,6 +34,39 @@
+     }                                            \
+ } while (0)
+ 
++/* XTheadBa */
++
++/*
++ * th.addsl is similar to sh[123]add (from Zba), but not an
++ * alternative encoding: while sh[123] applies the shift to rs1,
++ * th.addsl shifts rs2.
++ */
++
++#define GEN_TH_ADDSL(SHAMT)                                     \
++static void gen_th_addsl##SHAMT(TCGv ret, TCGv arg1, TCGv arg2) \
++{                                                               \
++    TCGv t = tcg_temp_new();                                    \
++    tcg_gen_shli_tl(t, arg2, SHAMT);                            \
++    tcg_gen_add_tl(ret, t, arg1);                               \
++    tcg_temp_free(t);                                           \
++}
++
++GEN_TH_ADDSL(1)
++GEN_TH_ADDSL(2)
++GEN_TH_ADDSL(3)
++
++#define GEN_TRANS_TH_ADDSL(SHAMT)                                       \
++static bool trans_th_addsl##SHAMT(DisasContext *ctx,                    \
++                                  arg_th_addsl##SHAMT * a)              \
++{                                                                       \
++    REQUIRE_XTHEADBA(ctx);                                              \
++    return gen_arith(ctx, a, EXT_NONE, gen_th_addsl##SHAMT, NULL);      \
++}
++
++GEN_TRANS_TH_ADDSL(1)
++GEN_TRANS_TH_ADDSL(2)
++GEN_TRANS_TH_ADDSL(3)
++
  /* XTheadCmo */
  
  static inline int priv_level(DisasContext *ctx)
-@@ -79,3 +85,83 @@ NOP_PRIVCHECK(th_icache_iva, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MSU)
- NOP_PRIVCHECK(th_l2cache_call, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
- NOP_PRIVCHECK(th_l2cache_ciall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
- NOP_PRIVCHECK(th_l2cache_iall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
-+
-+/* XTheadSync */
-+
-+static bool trans_th_sfence_vmas(DisasContext *ctx, arg_th_sfence_vmas *a)
-+{
-+    (void) a;
-+    REQUIRE_XTHEADSYNC(ctx);
-+
-+#ifndef CONFIG_USER_ONLY
-+    REQUIRE_PRIV_MS(ctx);
-+    decode_save_opc(ctx);
-+    gen_helper_tlb_flush_all(cpu_env);
-+    return true;
-+#else
-+    return false;
-+#endif
-+}
-+
-+#ifndef CONFIG_USER_ONLY
-+static void gen_th_sync_local(DisasContext *ctx)
-+{
-+    /*
-+     * Emulate out-of-order barriers with pipeline flush
-+     * by exiting the translation block.
-+     */
-+    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-+    tcg_gen_exit_tb(NULL, 0);
-+    ctx->base.is_jmp = DISAS_NORETURN;
-+}
-+#endif
-+
-+static bool trans_th_sync(DisasContext *ctx, arg_th_sync *a)
-+{
-+    (void) a;
-+    REQUIRE_XTHEADSYNC(ctx);
-+
-+#ifndef CONFIG_USER_ONLY
-+    REQUIRE_PRIV_MSU(ctx);
-+
-+    /*
-+     * th.sync is an out-of-order barrier.
-+     */
-+    gen_th_sync_local(ctx);
-+
-+    return true;
-+#else
-+    return false;
-+#endif
-+}
-+
-+static bool trans_th_sync_i(DisasContext *ctx, arg_th_sync_i *a)
-+{
-+    (void) a;
-+    REQUIRE_XTHEADSYNC(ctx);
-+
-+#ifndef CONFIG_USER_ONLY
-+    REQUIRE_PRIV_MSU(ctx);
-+
-+    /*
-+     * th.sync.i is th.sync plus pipeline flush.
-+     */
-+    gen_th_sync_local(ctx);
-+
-+    return true;
-+#else
-+    return false;
-+#endif
-+}
-+
-+static bool trans_th_sync_is(DisasContext *ctx, arg_th_sync_is *a)
-+{
-+    /* This instruction has the same behaviour like th.sync.i. */
-+    return trans_th_sync_i(ctx, a);
-+}
-+
-+static bool trans_th_sync_s(DisasContext *ctx, arg_th_sync_s *a)
-+{
-+    /* This instruction has the same behaviour like th.sync. */
-+    return trans_th_sync(ctx, a);
-+}
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 878bcb03b8..48f918b71b 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -258,6 +258,12 @@ void helper_tlb_flush(CPURISCVState *env)
-     }
- }
- 
-+void helper_tlb_flush_all(CPURISCVState *env)
-+{
-+    CPUState *cs = env_cpu(env);
-+    tlb_flush_all_cpus_synced(cs);
-+}
-+
- void helper_hyp_tlb_flush(CPURISCVState *env)
- {
-     CPUState *cs = env_cpu(env);
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 37763e0502..dcda7cfd22 100644
+index dcda7cfd22..68baf84807 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -130,7 +130,7 @@ static bool always_true_p(DisasContext *ctx  __attribute__((__unused__)))
+@@ -130,7 +130,8 @@ static bool always_true_p(DisasContext *ctx  __attribute__((__unused__)))
  
  static bool has_xthead_p(DisasContext *ctx  __attribute__((__unused__)))
  {
--    return ctx->cfg_ptr->ext_xtheadcmo;
-+    return ctx->cfg_ptr->ext_xtheadcmo || ctx->cfg_ptr->ext_xtheadsync;
+-    return ctx->cfg_ptr->ext_xtheadcmo || ctx->cfg_ptr->ext_xtheadsync;
++    return ctx->cfg_ptr->ext_xtheadba || ctx->cfg_ptr->ext_xtheadcmo ||
++           ctx->cfg_ptr->ext_xtheadsync;
  }
  
  #define MATERIALISE_EXT_PREDICATE(ext)  \
 diff --git a/target/riscv/xthead.decode b/target/riscv/xthead.decode
-index 30533a66f5..1d86f3a012 100644
+index 1d86f3a012..b149f13018 100644
 --- a/target/riscv/xthead.decode
 +++ b/target/riscv/xthead.decode
-@@ -10,9 +10,11 @@
+@@ -2,6 +2,7 @@
+ # Translation routines for the instructions of the XThead* ISA extensions
+ #
+ # Copyright (c) 2022 Christoph Muellner, christoph.muellner@vrull.eu
++#                    Dr. Philipp Tomsich, philipp.tomsich@vrull.eu
+ #
+ # SPDX-License-Identifier: LGPL-2.1-or-later
+ #
+@@ -9,12 +10,33 @@
+ #   https://github.com/T-head-Semi/thead-extension-spec/releases/latest
  
  # Fields:
++%rd        7:5
  %rs1       15:5
-+%rs2       20:5
+ %rs2       20:5
  
++# Argument sets
++&r         rd rs1 rs2                               !extern
++
  # Formats
  @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
-+@rs2_s      ....... ..... ..... ... ..... .......   %rs2 %rs1
+ @rs2_s      ....... ..... ..... ... ..... .......   %rs2 %rs1
++@r          ....... ..... .....  ... ..... .......  &r %rs2 %rs1 %rd
++
++# XTheadBa
++# Instead of defining a new encoding, we simply use the decoder to
++# extract the imm[0:1] field and dispatch to separate translation
++# functions (mirroring the `sh[123]add` instructions from Zba and
++# the regular RVI `add` instruction.
++#
++# The only difference between sh[123]add and addsl is that the shift
++# is applied to rs1 (for addsl) instead of rs2 (for sh[123]add).
++#
++# Note that shift-by-0 is a valid operation according to the manual.
++# This will be equivalent to a regular add.
++add              0000000 ..... ..... 001 ..... 0001011 @r
++th_addsl1        0000001 ..... ..... 001 ..... 0001011 @r
++th_addsl2        0000010 ..... ..... 001 ..... 0001011 @r
++th_addsl3        0000011 ..... ..... 001 ..... 0001011 @r
  
  # XTheadCmo
  th_dcache_call   0000000 00001 00000 000 00000 0001011
-@@ -36,3 +38,10 @@ th_icache_iva    0000001 10000 ..... 000 00000 0001011 @sfence_vm
- th_l2cache_call  0000000 10101 00000 000 00000 0001011
- th_l2cache_ciall 0000000 10111 00000 000 00000 0001011
- th_l2cache_iall  0000000 10110 00000 000 00000 0001011
-+
-+# XTheadSync
-+th_sfence_vmas   0000010 ..... ..... 000 00000 0001011 @rs2_s
-+th_sync          0000000 11000 00000 000 00000 0001011
-+th_sync_i        0000000 11010 00000 000 00000 0001011
-+th_sync_is       0000000 11011 00000 000 00000 0001011
-+th_sync_s        0000000 11001 00000 000 00000 0001011
 -- 
 2.39.0
 
