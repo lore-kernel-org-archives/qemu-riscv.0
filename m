@@ -1,57 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pK6jD-00073K-Ao
-	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 18:59:55 -0500
+	id 1pK6kg-0001US-Dk
+	for mharc-qemu-riscv@gnu.org; Mon, 23 Jan 2023 19:01:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pK6jA-00072x-Q2; Mon, 23 Jan 2023 18:59:52 -0500
-Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
+ id 1pK6kd-0001Je-Ri; Mon, 23 Jan 2023 19:01:23 -0500
+Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pK6j7-0001SI-42; Mon, 23 Jan 2023 18:59:51 -0500
-Received: by mail-vs1-xe2f.google.com with SMTP id t10so14860984vsr.3;
- Mon, 23 Jan 2023 15:59:48 -0800 (PST)
+ id 1pK6ka-0001zT-S3; Mon, 23 Jan 2023 19:01:23 -0500
+Received: by mail-vs1-xe2b.google.com with SMTP id t10so14864071vsr.3;
+ Mon, 23 Jan 2023 16:01:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PFWOPvOnxnFt1nZS/xroCnvkkHE6ZU3CpyTkzzQJIf0=;
- b=O+4VsXDAaQB/2VR18qjEXjgDPYpfoQll8zFMi1RbLfFbcMpGj/qXJ9gDRg4dLLb70u
- zgcCSrm77ema8nl+DbukjGNxoY5qQcCQdE8aPHjtBE9Dzx642eWSkWUSJXIQALyA1uxW
- pcaqJENCmBHib5QozkqwkshbbUxtQsK7KOFh+Teg4MHDJyJJ/4JOLvn+QOUTyz03ZiNf
- SYjG9uE6g1+Rbbr5RJlPUZdTztonkz/O7KfrvX3ElekhiU6SX9UtpzCCSkZnPNTq8GFo
- uTCSp5X4e2iVWegSW9Hho4r0CJ3CNCPuh384A0q9nceGhQNqSAHio1+fbpJowjF60VrP
- elSg==
+ bh=TB0rFcpVUqF55lX6TOWsh0ljmpLe+RRZeSmlCLBHshc=;
+ b=kDkBaDtZ1spYzejh9g2dGJXiu0AwD8KDTcAhILpnCPbHc4aJw4Jf2iFkZvRgg7+ReZ
+ TX0wICnvy2OauyHk+f0TlaQg6guqmfQJi2cikZrC+d9qx1Ip6F+uzKEFl1QlXDKld4AZ
+ 59V+wghuAMTjajxUdQUOogsPBsdjF81hhr+mcuOW+oVc0hoaOEqz1fXioBw7Lj97gppd
+ yRxdYmMc6ZPITlG/IP/68tmkAHTn76Ew2BsztnQyRd03dt2sIY+hmZT78OMQsN9pDrqM
+ 8ePqCjY64q2TtjeBPXS5elSPbKCFyBKYE5NODI2BvfS8ibkTMuWZvkafCcGkgOU68IYq
+ 0RtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PFWOPvOnxnFt1nZS/xroCnvkkHE6ZU3CpyTkzzQJIf0=;
- b=AbGRFN37qHqvd+9Q7TqMo16MATXmMtl7O5gs+pzpNGnmNO2jdnXSEecWZjF0WCUA3o
- nSDFS2+Z1davxg6bspi/Aj5+gxuu1/h+7jphA/oePKdhoHfa7pR2k7ywtWPNe2JAkni+
- NzteHcaWbz7u2C8njXiR2RKjMyHpBVH89IrOgC9HaAJBQLUb8RiNYo4T37Q6adjgK5GL
- PBJ5AFiTqKn0jkOWi6zkktiYeV7IKu78Gj53oEKFo2w90bLZ9woLWidQzI+jzLCxVk79
- uudnmE2mAEbALsgseBy5tyxDzbzd6ZPzd+mHZ5weG6lDO+Os1UUsM0wBS9C6JrsB5Mvh
- YPNw==
-X-Gm-Message-State: AFqh2kp1m9Jfx6VRk0gE41AqJuXw9t1e9IUUDHMtv4fNMb5x9klVwbKw
- 7mmS+HHPh5GDN+AuLmqa3+llSN7HmEVsU6wCa0w=
-X-Google-Smtp-Source: AMrXdXskhhOeOpy3YKC0fGtsYfuGJKqPh72FvPiYw8B5xJvi/WtELek3SqpDrQrlmt1nerirUh89wcCdJW+oDeikL4s=
+ bh=TB0rFcpVUqF55lX6TOWsh0ljmpLe+RRZeSmlCLBHshc=;
+ b=QswSaKoo0XA5VQy3FNRbRFoaTPML6RlpA+nEZ/KeWi4OOyd1/gK7SAFpJrlbJ4fQaa
+ VSCuuCQSM2UnqO+vXjPF9yMatPZhmQVcppt1ean1Tls6B/8nTe27D4A9mZnCYNEmeHIT
+ AI776cW2QYAC0H1m6GT/WeqoD46M/h5MDIOn121U/G/5EZPUrr1dlQTQkJlDEg2+wr22
+ 8UCTGnxFSzhfBM7P87/02u56zHODVksei6he4D4pJbvrR03XYcUKqGV8vpFy53mO4KYL
+ 0Yxb99d/sNlvnsG9I6fsBteLSuSG+82NatJI9rErgdqBfhSLX6Vx/MupqFh1FcFjY9WG
+ 8Kyg==
+X-Gm-Message-State: AFqh2kpo66DWgKekOVLUkOv5wXOP/Tz/CPvcG4nXIqqkmTMOI10FqyIL
+ fjUdotqAgUSfx7Vn8adihOhKvW7vrpzMeJTaPlA=
+X-Google-Smtp-Source: AMrXdXvzUzVExgdyxAPjjxKCJIFb9u+T0Eg0Mr8n67JS9qDmusn3PppDmK0B4HbYy/6MdKEZTarMwX9BadeJmEORmUM=
 X-Received: by 2002:a05:6102:cd4:b0:3d0:c2e9:cb77 with SMTP id
- g20-20020a0561020cd400b003d0c2e9cb77mr3386149vst.54.1674518387689; Mon, 23
- Jan 2023 15:59:47 -0800 (PST)
+ g20-20020a0561020cd400b003d0c2e9cb77mr3386711vst.54.1674518479282; Mon, 23
+ Jan 2023 16:01:19 -0800 (PST)
 MIME-Version: 1.0
-References: <20230123035754.75553-1-alistair.francis@opensource.wdc.com>
-In-Reply-To: <20230123035754.75553-1-alistair.francis@opensource.wdc.com>
+References: <20230120125950.2246378-1-apatel@ventanamicro.com>
+ <20230120125950.2246378-5-apatel@ventanamicro.com>
+In-Reply-To: <20230120125950.2246378-5-apatel@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 24 Jan 2023 09:59:21 +1000
-Message-ID: <CAKmqyKP02-6cU6NVLon9ih5R+uazFDex2HMssOcSKrFbXX6fZw@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: boot: Don't use CSRs if they are disabled
-To: Alistair Francis <alistair.francis@opensource.wdc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, Bin Meng <bin.meng@windriver.com>, bmeng.cn@gmail.com
+Date: Tue, 24 Jan 2023 10:00:53 +1000
+Message-ID: <CAKmqyKO-5SwgVv3rddh6X9KVUg4kFrGJAfnOSaV08fh3VHGd3g@mail.gmail.com>
+Subject: Re: [PATCH v3 4/4] target/riscv: Ensure opcode is saved for all
+ relevant instructions
+To: Anup Patel <apatel@ventanamicro.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Atish Patra <atishp@atishpatra.org>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,57 +79,210 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2023 23:59:53 -0000
+X-List-Received-Date: Tue, 24 Jan 2023 00:01:24 -0000
 
-On Mon, Jan 23, 2023 at 1:58 PM Alistair Francis
-<alistair.francis@opensource.wdc.com> wrote:
+On Fri, Jan 20, 2023 at 11:01 PM Anup Patel <apatel@ventanamicro.com> wrote:
 >
-> From: Alistair Francis <alistair.francis@wdc.com>
+> We should call decode_save_opc() for all relevant instructions which
+> can potentially generate a virtual instruction fault or a guest page
+> fault because generating transformed instruction upon guest page fault
+> expects opcode to be available. Without this, hypervisor will see
+> transformed instruction as zero in htinst CSR for guest MMIO emulation
+> which makes MMIO emulation in hypervisor slow and also breaks nested
+> virtualization.
 >
-> If the CSRs and CSR instructions are disabled because the Zicsr
-> extension isn't enabled then we want to make sure we don't run any CSR
-> instructions in the boot ROM.
->
-> This patches removes the CSR instructions from the reset-vec if the
-> extension isn't enabled. We replace the instruction with a NOP instead.
->
-> Note that we don't do this for the SiFive U machine, as we are modelling
-> the hardware in that case.
->
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1447
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Fixes: a9814e3e08d2 ("target/riscv: Minimize the calls to decode_save_opc")
+> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/boot.c | 9 +++++++++
->  1 file changed, 9 insertions(+)
+>  target/riscv/insn_trans/trans_rva.c.inc     | 10 +++++++---
+>  target/riscv/insn_trans/trans_rvd.c.inc     |  2 ++
+>  target/riscv/insn_trans/trans_rvf.c.inc     |  2 ++
+>  target/riscv/insn_trans/trans_rvh.c.inc     |  3 +++
+>  target/riscv/insn_trans/trans_rvi.c.inc     |  2 ++
+>  target/riscv/insn_trans/trans_rvzfh.c.inc   |  2 ++
+>  target/riscv/insn_trans/trans_svinval.c.inc |  3 +++
+>  7 files changed, 21 insertions(+), 3 deletions(-)
 >
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index 2594276223..cb27798a25 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -356,6 +356,15 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts
->          reset_vec[4] = 0x0182b283;   /*     ld     t0, 24(t0) */
+> diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
+> index 45db82c9be..5f194a447b 100644
+> --- a/target/riscv/insn_trans/trans_rva.c.inc
+> +++ b/target/riscv/insn_trans/trans_rva.c.inc
+> @@ -20,8 +20,10 @@
+>
+>  static bool gen_lr(DisasContext *ctx, arg_atomic *a, MemOp mop)
+>  {
+> -    TCGv src1 = get_address(ctx, a->rs1, 0);
+> +    TCGv src1;
+>
+> +    decode_save_opc(ctx);
+> +    src1 = get_address(ctx, a->rs1, 0);
+>      if (a->rl) {
+>          tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
 >      }
+> @@ -43,6 +45,7 @@ static bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
+>      TCGLabel *l1 = gen_new_label();
+>      TCGLabel *l2 = gen_new_label();
 >
-> +    if (!harts->harts[0].cfg.ext_icsr) {
-> +        /*
-> +         * The Zicsr extension has been disabled, so let's ensure we don't
-> +         * run the CSR instruction. Let's fill the address with a non
-> +         * compressed nop.
-> +         */
-> +        reset_vec[2] = 0x00000013;   /*     addi   x0, x0, 0 */
-> +    }
-> +
->      /* copy in the reset vector in little_endian byte order */
->      for (i = 0; i < ARRAY_SIZE(reset_vec); i++) {
->          reset_vec[i] = cpu_to_le32(reset_vec[i]);
+> +    decode_save_opc(ctx);
+>      src1 = get_address(ctx, a->rs1, 0);
+>      tcg_gen_brcond_tl(TCG_COND_NE, load_res, src1, l1);
+>
+> @@ -81,9 +84,10 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
+>                      MemOp mop)
+>  {
+>      TCGv dest = dest_gpr(ctx, a->rd);
+> -    TCGv src1 = get_address(ctx, a->rs1, 0);
+> -    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
+> +    TCGv src1, src2 = get_gpr(ctx, a->rs2, EXT_NONE);
+>
+> +    decode_save_opc(ctx);
+> +    src1 = get_address(ctx, a->rs1, 0);
+>      func(dest, src1, src2, ctx->mem_idx, mop);
+>
+>      gen_set_gpr(ctx, a->rd, dest);
+> diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
+> index 1397c1ce1c..6e3159b797 100644
+> --- a/target/riscv/insn_trans/trans_rvd.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvd.c.inc
+> @@ -38,6 +38,7 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
+>      REQUIRE_FPU;
+>      REQUIRE_EXT(ctx, RVD);
+>
+> +    decode_save_opc(ctx);
+>      addr = get_address(ctx, a->rs1, a->imm);
+>      tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], addr, ctx->mem_idx, MO_TEUQ);
+>
+> @@ -52,6 +53,7 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
+>      REQUIRE_FPU;
+>      REQUIRE_EXT(ctx, RVD);
+>
+> +    decode_save_opc(ctx);
+>      addr = get_address(ctx, a->rs1, a->imm);
+>      tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEUQ);
+>      return true;
+> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
+> index a1d3eb52ad..965e1f8d11 100644
+> --- a/target/riscv/insn_trans/trans_rvf.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvf.c.inc
+> @@ -38,6 +38,7 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
+>      REQUIRE_FPU;
+>      REQUIRE_EXT(ctx, RVF);
+>
+> +    decode_save_opc(ctx);
+>      addr = get_address(ctx, a->rs1, a->imm);
+>      dest = cpu_fpr[a->rd];
+>      tcg_gen_qemu_ld_i64(dest, addr, ctx->mem_idx, MO_TEUL);
+> @@ -54,6 +55,7 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
+>      REQUIRE_FPU;
+>      REQUIRE_EXT(ctx, RVF);
+>
+> +    decode_save_opc(ctx);
+>      addr = get_address(ctx, a->rs1, a->imm);
+>      tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEUL);
+>      return true;
+> diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
+> index 4f8aecddc7..9248b48c36 100644
+> --- a/target/riscv/insn_trans/trans_rvh.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvh.c.inc
+> @@ -36,6 +36,7 @@ static bool do_hlv(DisasContext *ctx, arg_r2 *a, MemOp mop)
+>  #ifdef CONFIG_USER_ONLY
+>      return false;
+>  #else
+> +    decode_save_opc(ctx);
+>      if (check_access(ctx)) {
+>          TCGv dest = dest_gpr(ctx, a->rd);
+>          TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
+> @@ -82,6 +83,7 @@ static bool do_hsv(DisasContext *ctx, arg_r2_s *a, MemOp mop)
+>  #ifdef CONFIG_USER_ONLY
+>      return false;
+>  #else
+> +    decode_save_opc(ctx);
+>      if (check_access(ctx)) {
+>          TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
+>          TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
+> @@ -135,6 +137,7 @@ static bool trans_hsv_d(DisasContext *ctx, arg_hsv_d *a)
+>  static bool do_hlvx(DisasContext *ctx, arg_r2 *a,
+>                      void (*func)(TCGv, TCGv_env, TCGv))
+>  {
+> +    decode_save_opc(ctx);
+>      if (check_access(ctx)) {
+>          TCGv dest = dest_gpr(ctx, a->rd);
+>          TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
+> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+> index 5c69b88d1e..4496f21266 100644
+> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> @@ -261,6 +261,7 @@ static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
+>
+>  static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
+>  {
+> +    decode_save_opc(ctx);
+>      if (get_xl(ctx) == MXL_RV128) {
+>          return gen_load_i128(ctx, a, memop);
+>      } else {
+> @@ -350,6 +351,7 @@ static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
+>
+>  static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
+>  {
+> +    decode_save_opc(ctx);
+>      if (get_xl(ctx) == MXL_RV128) {
+>          return gen_store_i128(ctx, a, memop);
+>      } else {
+> diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
+> index 5d07150cd0..2ad5716312 100644
+> --- a/target/riscv/insn_trans/trans_rvzfh.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
+> @@ -49,6 +49,7 @@ static bool trans_flh(DisasContext *ctx, arg_flh *a)
+>      REQUIRE_FPU;
+>      REQUIRE_ZFH_OR_ZFHMIN(ctx);
+>
+> +    decode_save_opc(ctx);
+>      t0 = get_gpr(ctx, a->rs1, EXT_NONE);
+>      if (a->imm) {
+>          TCGv temp = temp_new(ctx);
+> @@ -71,6 +72,7 @@ static bool trans_fsh(DisasContext *ctx, arg_fsh *a)
+>      REQUIRE_FPU;
+>      REQUIRE_ZFH_OR_ZFHMIN(ctx);
+>
+> +    decode_save_opc(ctx);
+>      t0 = get_gpr(ctx, a->rs1, EXT_NONE);
+>      if (a->imm) {
+>          TCGv temp = tcg_temp_new();
+> diff --git a/target/riscv/insn_trans/trans_svinval.c.inc b/target/riscv/insn_trans/trans_svinval.c.inc
+> index 2682bd969f..f3cd7d5c0b 100644
+> --- a/target/riscv/insn_trans/trans_svinval.c.inc
+> +++ b/target/riscv/insn_trans/trans_svinval.c.inc
+> @@ -28,6 +28,7 @@ static bool trans_sinval_vma(DisasContext *ctx, arg_sinval_vma *a)
+>      /* Do the same as sfence.vma currently */
+>      REQUIRE_EXT(ctx, RVS);
+>  #ifndef CONFIG_USER_ONLY
+> +    decode_save_opc(ctx);
+>      gen_helper_tlb_flush(cpu_env);
+>      return true;
+>  #endif
+> @@ -56,6 +57,7 @@ static bool trans_hinval_vvma(DisasContext *ctx, arg_hinval_vvma *a)
+>      /* Do the same as hfence.vvma currently */
+>      REQUIRE_EXT(ctx, RVH);
+>  #ifndef CONFIG_USER_ONLY
+> +    decode_save_opc(ctx);
+>      gen_helper_hyp_tlb_flush(cpu_env);
+>      return true;
+>  #endif
+> @@ -68,6 +70,7 @@ static bool trans_hinval_gvma(DisasContext *ctx, arg_hinval_gvma *a)
+>      /* Do the same as hfence.gvma currently */
+>      REQUIRE_EXT(ctx, RVH);
+>  #ifndef CONFIG_USER_ONLY
+> +    decode_save_opc(ctx);
+>      gen_helper_hyp_gvma_tlb_flush(cpu_env);
+>      return true;
+>  #endif
 > --
-> 2.39.0
+> 2.34.1
+>
 >
 
