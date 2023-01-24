@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pKQ9m-0002MN-9d
-	for mharc-qemu-riscv@gnu.org; Tue, 24 Jan 2023 15:44:38 -0500
+	id 1pKQjE-0003g5-Et
+	for mharc-qemu-riscv@gnu.org; Tue, 24 Jan 2023 16:21:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pKQ9k-0002M5-Nn
- for qemu-riscv@nongnu.org; Tue, 24 Jan 2023 15:44:36 -0500
+ id 1pKQjD-0003f4-2J
+ for qemu-riscv@nongnu.org; Tue, 24 Jan 2023 16:21:15 -0500
 Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pKQ9j-0001Ip-4x
- for qemu-riscv@nongnu.org; Tue, 24 Jan 2023 15:44:36 -0500
-Received: by mail-pf1-x42d.google.com with SMTP id z3so12088192pfb.2
- for <qemu-riscv@nongnu.org>; Tue, 24 Jan 2023 12:44:34 -0800 (PST)
+ id 1pKQjB-0006jx-J7
+ for qemu-riscv@nongnu.org; Tue, 24 Jan 2023 16:21:14 -0500
+Received: by mail-pf1-x42d.google.com with SMTP id 207so12120593pfv.5
+ for <qemu-riscv@nongnu.org>; Tue, 24 Jan 2023 13:21:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=VAYOki1uaj12loXH/2FrXicsk+HnZHDlpAPzgpMrWrM=;
- b=w0bId2wLOtNmMeKygTO4/L0x1W3b3PgpOIYNNwF6PJpqWGH0L5uC6898HeBHZME43z
- RO6PNDOduquES7+4Z6haNIoG2JfxlPq1MOyY6utlgKBFe+JJCQhaSkX7MC+zLtgz1FSP
- PNrRJMd54eeEj43g1xzzFJ4I1rVXcixQRMLIwVVNcpjy2u+Oby1eixFbvXPrT0Vm5Jji
- UT/gqqkBw8dRvMZxkoe1qgu0BPzLJumWn57foy204UK9UEg4dfu8P6GUFM6+SI/xItfz
- SN5Cdjxplg2GYxxPlPnzZiwkh1IqQpx7TX+BUuRKd8kgK3OrOGcW111SZ4SNBEkDnNmj
- moOw==
+ bh=rYGKGO1HsVl+R3QDbx/CEvCzK1aj3hBceg6yCyxSRPo=;
+ b=hU4qo4sQkj9t3FAYiv65Be7Boa93RjXxc8bf8Wd6Mzq46BOz86wAZhgfNek7BVs7Lq
+ 3FfNuCE+6fKsUu+6qvJjmV/b5MpPBRs66vcnCa6dfvz/KipXu6KA6WH/jVZYACfJ9ihY
+ 9IV6drRNmos5d55QYBMCm9OhccLUtux0BHgvk/FUJgLQ3CSjx9I7z1kqxCS+i4x5czb+
+ ZQ2L+vYaZlSka8C8qlWkqq4CcNqqL/BL5+8+NK/Oo8qiYjTPogKnFT8iDw2Rnmm3gGAX
+ dP1rr7k8DyEW8MhIw2WLKlB8Qvibez/WcM/m76P72nJlSlgRaFaJNUCuOV5u718jUotw
+ Bbnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VAYOki1uaj12loXH/2FrXicsk+HnZHDlpAPzgpMrWrM=;
- b=N9HRms5mopKobUgsLUlWSmi1CzFrJyVbr3PWO/DdhODVj4i/08xltd5WGWAF1Z/fhd
- e7VZwly4BMmOxj1WJ+UzK28V6luDGEquvZUgi+x6ZQBfN6aDIEBvn24foDAcTFBGbez5
- 2/XeBVgx8cOyTKTE5VSNw/25EP8Lf/N8aQYezxxTclbE/jm4cDdjjGcT7MjYnitH2MiI
- YykxpyBv5nrB9KITnhPeI4U/5QoeYXbkFp2Nt9tc+tTj9Rv4fFRdZU72KVADmX6re5By
- dE4P70/sVxRZsA9kYNIdFyqOQxRJb8At47mVZ/HY9mlIYXpxgIKeBxathOttzlrFnqz4
- 4ZAg==
-X-Gm-Message-State: AFqh2kpGEwZC45E1ZagxZwY/sTT7AZiJ4+lx15E6ZBqKh4jhg6PKOeLB
- 9fD5mIFSnkvHRF7fPoQoFsa2OA==
-X-Google-Smtp-Source: AMrXdXt4vqxiR3B+SvvxxUX6kwjPlCvUIvIJsTSBFB7uBYHdUg2CMJWtYZ4W8xEGtki74qnoH95eFQ==
-X-Received: by 2002:a05:6a00:1887:b0:58c:b0a:e504 with SMTP id
- x7-20020a056a00188700b0058c0b0ae504mr39647679pfh.18.1674593073494; 
- Tue, 24 Jan 2023 12:44:33 -0800 (PST)
+ bh=rYGKGO1HsVl+R3QDbx/CEvCzK1aj3hBceg6yCyxSRPo=;
+ b=WONx/9HfDq24CtFlwIn7Y09eCH1rpB50q0pJHKT0UoZrrxjZ+BTMMJ8AyaCUeWoU+m
+ CW9HuU9fIK9b2wBxjrwnBR9Tb15WhD+FX+WfMjSEjpBGCGyfOhJCuDM6Ydgm+fPR1cDo
+ WpGw6emJibaE8D54hKnjC3/hd4Xwh0Y0xhOAbyb4CrggInJhv8spdf/6bciO47x3SN7w
+ 740BkbCPZEhWjTPwUmrobO0rhBwKEmvhGloDSy/IeLEvrpHbQ+x6DrIs7zlbzgmTyDfI
+ 7PNVR1zgf2KnI9G+88WLlHwRYbiNGt+lCFx0WlQFQoKpEaBAtjBSl+tWQCYbbX3uFv9E
+ xw3A==
+X-Gm-Message-State: AFqh2kpa3AIZx0L3jOGbwt8yuMGYzTnFsYAAmTro1Ce3vD3FfB2PuaN7
+ GtSSW2dlgI/n3i/G5dhc0TjKxA==
+X-Google-Smtp-Source: AMrXdXuwxHFP1TsjkmqE+jTV72EW5dTbC5iSrBgKjKVpIeWzk7Ba9pFcsJ7vlyx02zgI4pKyWA52KA==
+X-Received: by 2002:a05:6a00:1d23:b0:58d:a91d:e9f8 with SMTP id
+ a35-20020a056a001d2300b0058da91de9f8mr25464968pfx.18.1674595272021; 
+ Tue, 24 Jan 2023 13:21:12 -0800 (PST)
 Received: from [192.168.5.146] (rrcs-173-198-77-218.west.biz.rr.com.
  [173.198.77.218]) by smtp.gmail.com with ESMTPSA id
- q9-20020aa79609000000b005882b189a44sm2027619pfg.104.2023.01.24.12.44.30
+ p186-20020a62d0c3000000b0058abddad316sm2033267pfg.209.2023.01.24.13.21.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Jan 2023 12:44:32 -0800 (PST)
-Message-ID: <48ff4151-25d9-4b4d-d50a-6516000599c7@linaro.org>
-Date: Tue, 24 Jan 2023 10:44:28 -1000
+ Tue, 24 Jan 2023 13:21:11 -0800 (PST)
+Message-ID: <3d864ae7-5430-8db9-f91c-fd24f428b04d@linaro.org>
+Date: Tue, 24 Jan 2023 11:21:06 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
-Subject: Re: [PATCH v3 08/14] RISC-V: Adding T-Head MemPair extension
+Subject: Re: [PATCH v3 09/14] RISC-V: Adding T-Head MemIdx extension
 Content-Language: en-US
 To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
@@ -65,9 +65,9 @@ To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
  Yunhai Shang <yunhai@linux.alibaba.com>,
  Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 References: <20230124195945.181842-1-christoph.muellner@vrull.eu>
- <20230124195945.181842-9-christoph.muellner@vrull.eu>
+ <20230124195945.181842-10-christoph.muellner@vrull.eu>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230124195945.181842-9-christoph.muellner@vrull.eu>
+In-Reply-To: <20230124195945.181842-10-christoph.muellner@vrull.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
@@ -91,33 +91,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jan 2023 20:44:37 -0000
+X-List-Received-Date: Tue, 24 Jan 2023 21:21:15 -0000
 
 On 1/24/23 09:59, Christoph Muellner wrote:
-> +static bool gen_loadpair_tl(DisasContext *ctx, arg_th_pair *a, MemOp memop,
-> +                            int shamt)
+> +/* XTheadMemIdx */
+> +
+> +/*
+> + * Load with memop from indexed address and add (imm5 << imm2) to rs1.
+> + * If !preinc, then the load address is rs1.
+> + * If  preinc, then the load address is rs1 + (imm5) << imm2).
+> + */
+> +static bool gen_load_inc(DisasContext *ctx, arg_th_meminc *a, MemOp memop,
+> +                         bool preinc)
 > +{
-> +    TCGv rd1 = dest_gpr(ctx, a->rd1);
-> +    TCGv rd2 = dest_gpr(ctx, a->rd2);
-> +    TCGv addr1 = tcg_temp_new();
-> +    TCGv addr2 = tcg_temp_new();
+> +    TCGv rd = dest_gpr(ctx, a->rd);
+> +    TCGv addr = get_address(ctx, a->rs1, preinc ? a->imm5 << a->imm2 : 0);
 > +
-> +    addr1 = get_address(ctx, a->rs, a->sh2 << shamt);
-> +    if ((memop & MO_SIZE) == MO_64) {
-> +        addr2 = get_address(ctx, a->rs, 8 + (a->sh2 << shamt));
-> +    } else {
-> +        addr2 = get_address(ctx, a->rs, 4 + (a->sh2 << shamt));
-> +    }
-> +
-> +    tcg_gen_qemu_ld_tl(rd1, addr1, ctx->mem_idx, memop);
-> +    tcg_gen_qemu_ld_tl(rd2, addr2, ctx->mem_idx, memop);
-> +    gen_set_gpr(ctx, a->rd1, rd1);
-> +    gen_set_gpr(ctx, a->rd2, rd2);
+> +    tcg_gen_qemu_ld_tl(rd, addr, ctx->mem_idx, memop);
+> +    addr = get_address(ctx, a->rs1, !preinc ? a->imm5 << a->imm2 : 0);
 
-Since dest_gpr may return cpu_gpr[n], this may update the rd1 before recognizing the 
-exception that the second load may generate.  Is that correct?
+First, you're leaking the previous 'addr' temporary.
+Second, get_address may make modifications to 'addr' which you don't want to write back.
+Third, you are not checking for rd != rs1.
 
-The manual says that rd1, rd2, and rs1 must not be the same, but you do not check this.
+I think what you want is
+
+     int imm = a->imm5 << a->imm2;
+     TCGv addr = get_address(ctx, a->rs1, preinc ? imm : 0);
+     TCGv rd = dest_gpr(ctx, a->rd);
+     TCGv rs1 = get_gpr(ctx, a->rs1, EXT_NONE);
+
+     tcg_gen_qemu_ld_tl(rd, addr, ctx->mem_idx, memop);
+     tcg_gen_addi_tl(rs1, rs1, imm);
+     gen_set_gpr(ctx, a->rd, rd);
+     gen_set_gpr(ctx, a->rs1, rs1);
 
 
 r~
