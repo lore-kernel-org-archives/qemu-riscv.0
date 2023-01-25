@@ -1,78 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pKhGe-0003Zd-4a
-	for mharc-qemu-riscv@gnu.org; Wed, 25 Jan 2023 10:00:52 -0500
+	id 1pKiVV-0000YN-Ts
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Jan 2023 11:20:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pKhGY-0003YX-1v
- for qemu-riscv@nongnu.org; Wed, 25 Jan 2023 10:00:50 -0500
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1pKiVU-0000Xt-7B
+ for qemu-riscv@nongnu.org; Wed, 25 Jan 2023 11:20:16 -0500
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pKhGW-0005um-5s
- for qemu-riscv@nongnu.org; Wed, 25 Jan 2023 10:00:45 -0500
-Received: by mail-ej1-x631.google.com with SMTP id v6so48399031ejg.6
- for <qemu-riscv@nongnu.org>; Wed, 25 Jan 2023 07:00:43 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1pKiVS-0002jP-2g
+ for qemu-riscv@nongnu.org; Wed, 25 Jan 2023 11:20:15 -0500
+Received: by mail-wr1-x433.google.com with SMTP id q10so644848wrm.4
+ for <qemu-riscv@nongnu.org>; Wed, 25 Jan 2023 08:20:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DkCMA5p8shoIw9bXSUeqIvRFNyjW3JdiSdkKDaGgizk=;
- b=WSNlVa93DFrkSdvK83vWG1r6N8LQvZ+uSkD2f79Qzm5PyxrR9IyPTYgnx0YH393SMB
- ty9cL8MJBREvxa8oUmeeoB0PQUBP/+07RbaiOWBzRWu/WMSRvIxCXT0zy0E1EPzQ2TcN
- 5EHE1uLGROJNf4Q7vSrj0gmMvA1/uZd+qvVgVzkQIGuUKwchsE+HS4rHVmgxrOT+1Y/M
- o+NzVsHVCI1Kn5fc2bkP1zuAOPUvGTztzzPlziPrbUjPS8GAKtOIMgwjgJ4hxXqgB2LT
- y9CLdV5j9Xju9f2YG0lqsBV642UicI/4rX1q2/viOScYtHMWEyvLJde5EEpIn+OLvCdT
- g7TA==
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Rde7W1nN83rbwZUfRDgP2anYxpLp1ez3smEnDmIEAGY=;
+ b=2caxMVqaV4mnnQ9f5Gx9oGqDF98boRiJDJY4HGDrrxC0jHluw7uZS5/fej/kitDnHe
+ jBNqD2BlI1ZQ/PW16O8Tcbd2Baz+RZlGkRDDCVoggy8MsYaWaGLYXHn6eolIhvX7TeAR
+ gOoMgEJpwRSVVeiUM6t1Ht1WRb8AqTfshh18xvsEtns9zJI1H89Jfm9AenCPuZfhH1Kp
+ Uy0xKUwue3L0lFQ5AP+eMSMIsstITFEvApLQhQzF/m4juq6iPCQ0d8JRT1QJMUtmR4v8
+ RPC6S0Q6iEzpeHsb0lggB+cfYUggKJ9SngFVzSIkSAcAfLMRmkNunGm+6FNiVh7yzGSD
+ PpAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DkCMA5p8shoIw9bXSUeqIvRFNyjW3JdiSdkKDaGgizk=;
- b=btGdAXcCQjbX4LtnZvWt1a43iMWSuYLZH/LXyu8nW5BJSIn40kB0eLhlFg3JBTugYQ
- swMWiAtTXjVxexjBURj1rrVBhpOnsFCXpStTF3YONU1xNJtH7zXA+ISeyRZPWqiByF1R
- n6NDMay2KpPsMXm9XLUNPgj82K/GktJyFX0gxdr+Wj/rMNdxvmgxr9YIUhsySvow3K4X
- 2rctbo4xdvlm5n4WJAMcA7x6BcZeQUz/7J6e6LfUaLxyqZYKBHCuU1uK/FPlr0Yctr6l
- QOJ9Z9bvN02puJen1Thr0ll6WncI6py3JOJ6PTk9DFMEw0QexgIR8dwxxSSkeLPr7aAS
- dFAA==
-X-Gm-Message-State: AFqh2kovGjYYsknz5Sg2gKICS3QFEngcyqsjB5YQ0dC5wWW9qxwaeOCh
- VbA8vBg4Fb+y/P3QlaTy7GHsYQ==
-X-Google-Smtp-Source: AMrXdXtraShb0epMn+qzqjLaZ7jNwWVUMmQ5bQjYdCq52g2oM+DGwq0KYfwipbVgQqUsHS14yWkCcA==
-X-Received: by 2002:a17:906:f0d1:b0:84d:450b:8767 with SMTP id
- dk17-20020a170906f0d100b0084d450b8767mr33485607ejb.21.1674658842607; 
- Wed, 25 Jan 2023 07:00:42 -0800 (PST)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- p18-20020a17090635d200b007c0b28b85c5sm2434816ejb.138.2023.01.25.07.00.41
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Rde7W1nN83rbwZUfRDgP2anYxpLp1ez3smEnDmIEAGY=;
+ b=ZSU48qS0Ly2Olw1sv3/NHYgwawEiJF51j2fdFtaPD8uRfNDLX6BJhcVgVZhIsqz0ta
+ j08bMw0WGXz884Id0gcEnDsHZvBRazQs1IIwE+tWREzgqUWErRxfM5hJ58OI5BsaYhJA
+ GEM4OEgDLjhPd+7yd+DY6vmzRs92pgqmpIiUAj8nMrvO4bmRhDuXXqQ1imLijK8XXtO1
+ W/tE9At86YnWaMux3wW9GuBs79RL7KfhpS20DYtbxiGLeqAaVnyXv47/um+zxwAZVDeh
+ 0U0wEW5u/EaVvBEwu1bZWfglIjAHskYDMd12Dc8FaToqiRbc0zBfIIJeMkK9iEz5a6JF
+ +HrQ==
+X-Gm-Message-State: AFqh2kpnAId9T2MNM3c+FLaeZQVIcgCbPyjjiq8RW6Yw0toP5YWE0SPc
+ JD0alId4CuSIRgKUIs7kKbnuuw==
+X-Google-Smtp-Source: AMrXdXvZZqYJANtmbIzuB2feIdKsDe2bClWey8tBXwzxIENcF25Fe72WbL45w9vyr44wNY5ZRcUqzw==
+X-Received: by 2002:adf:a38d:0:b0:2bf:9527:ce62 with SMTP id
+ l13-20020adfa38d000000b002bf9527ce62mr14104802wrb.60.1674663612167; 
+ Wed, 25 Jan 2023 08:20:12 -0800 (PST)
+Received: from alex-rivos.home (lfbn-lyo-1-450-160.w2-7.abo.wanadoo.fr.
+ [2.7.42.160]) by smtp.gmail.com with ESMTPSA id
+ l12-20020a05600012cc00b002bfba730b0fsm1895458wrx.65.2023.01.25.08.20.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Jan 2023 07:00:42 -0800 (PST)
-Date: Wed, 25 Jan 2023 16:00:35 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Wed, 25 Jan 2023 08:20:11 -0800 (PST)
+From: Alexandre Ghiti <alexghiti@rivosinc.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
+ Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>,
  Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Ludovic Henry <ludovic@rivosinc.com>
-Subject: Re: [PATCH v7 3/5] riscv: Allow user to set the satp mode
-Message-ID: <20230125150035.mx6y65aqx7si32mm@orel>
-References: <20230125084107.1580972-1-alexghiti@rivosinc.com>
- <20230125084107.1580972-4-alexghiti@rivosinc.com>
- <20230125120107.mjh54hcmustfplgi@orel>
- <CAHVXubjxRZmhzWJz3fcpC7enec_1VRs7qnhE=UFx4ijYN55UsQ@mail.gmail.com>
+ qemu-devel@nongnu.org
+Cc: Alexandre Ghiti <alexghiti@rivosinc.com>
+Subject: [PATCH v8 0/5] riscv: Allow user to set the satp mode
+Date: Wed, 25 Jan 2023 17:20:05 +0100
+Message-Id: <20230125162010.1615787-1-alexghiti@rivosinc.com>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAHVXubjxRZmhzWJz3fcpC7enec_1VRs7qnhE=UFx4ijYN55UsQ@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x631.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=alexghiti@rivosinc.com; helo=mail-wr1-x433.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -86,29 +80,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2023 15:00:50 -0000
+X-List-Received-Date: Wed, 25 Jan 2023 16:20:16 -0000
 
-On Wed, Jan 25, 2023 at 01:23:45PM +0100, Alexandre Ghiti wrote:
-> On Wed, Jan 25, 2023 at 1:01 PM Andrew Jones <ajones@ventanamicro.com> wrote:
-> >
-> > On Wed, Jan 25, 2023 at 09:41:05AM +0100, Alexandre Ghiti wrote:
-...
-> > > +    if (!rv32) {
-> > > +        for (int i = satp_mode_max - 1; i >= 0; --i) {
-> >
-> > satp_mode_max can be zero when configs only support mbare, so we need
-> > to be careful here. We should only run this loop when it's greater than
-> > zero.
-> 
-> If satp_mode_max == 0, we don't enter the loop, so no problem for me.
->
+This introduces new properties to allow the user to set the satp mode,
+see patch 3 for full syntax. In addition, it prevents cpus to boot in a
+satp mode they do not support (see patch 4).
 
-Oh, right, i is signed. I reviewed this right after reviewing some
-unsigned comparisons and had the wrong thought process engaged...
-And now I recall that when I'd read this before in previous revisions
-I had had the same impulse at least once, but those times I noticed
-it was signed before sending comments. Anyway, sorry for the noise.
+v8:
+- Remove useless !map check, Andrew
+- Add RB from Andrew
 
-Thanks,
-drew
+v7:
+- Expand map to contain all valid modes, Andrew
+- Fix commit log for patch 3, Andrew
+- Remove is_32_bit argument from set_satp_mode_default, Andrew
+- Move and fixed comment, Andrew
+- Fix satp_mode_map_max in riscv_cpu_satp_mode_finalize which was set
+  too early, Alex
+- Remove is_32_bit argument from set_satp_mode_max_supported, Andrew
+- Use satp_mode directly instead of a string in
+  set_satp_mode_max_supported, Andrew
+- Swap the patch introducing supported bitmap and the patch that sets
+  sv57 in the dt, Andrew
+- Add various RB from Andrew and Alistair, thanks
+
+v6:
+- Remove the valid_vm check in validate_vm and add it to the finalize function
+  so that map already contains the constraint, Alex
+- Add forgotten mbare to satp_mode_from_str, Alex
+- Move satp mode properties handling to riscv_cpu_satp_mode_finalize, Andrew
+- Only add satp mode properties corresponding to the cpu, and then remove the
+  check against valid_vm_1_10_32/64 in riscv_cpu_satp_mode_finalize,
+  Andrew/Alistair/Alex
+- Move mmu-type setting to its own patch, Andrew
+- patch 5 is new and is a fix, Alex
+
+v5:
+- Simplify v4 implementation by leveraging valid_vm_1_10_32/64, as
+  suggested by Andrew
+- Split the v4 patch into 2 patches as suggested by Andrew
+- Lot of other minor corrections, from Andrew
+- Set the satp mode N by disabling the satp mode N + 1
+- Add a helper to set satp mode from a string, as suggested by Frank
+
+v4:
+- Use custom boolean properties instead of OnOffAuto properties, based
+  on ARMVQMap, as suggested by Andrew
+
+v3:
+- Free sv_name as pointed by Bin
+- Replace satp-mode with boolean properties as suggested by Andrew
+- Removed RB from Atish as the patch considerably changed
+
+v2:
+- Use error_setg + return as suggested by Alistair
+- Add RB from Atish
+- Fixed checkpatch issues missed in v1
+- Replaced Ludovic email address with the rivos one
+
+Alexandre Ghiti (5):
+  riscv: Pass Object to register_cpu_props instead of DeviceState
+  riscv: Change type of valid_vm_1_10_[32|64] to bool
+  riscv: Allow user to set the satp mode
+  riscv: Introduce satp mode hw capabilities
+  riscv: Correctly set the device-tree entry 'mmu-type'
+
+ hw/riscv/virt.c    |  19 ++--
+ target/riscv/cpu.c | 247 +++++++++++++++++++++++++++++++++++++++++++--
+ target/riscv/cpu.h |  23 +++++
+ target/riscv/csr.c |  29 +++---
+ 4 files changed, 287 insertions(+), 31 deletions(-)
+
+-- 
+2.37.2
+
 
