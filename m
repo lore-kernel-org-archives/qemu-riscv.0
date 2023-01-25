@@ -1,75 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pKTQ6-0003Q2-Uf
-	for mharc-qemu-riscv@gnu.org; Tue, 24 Jan 2023 19:13:42 -0500
+	id 1pKbCV-0005Yz-FI
+	for mharc-qemu-riscv@gnu.org; Wed, 25 Jan 2023 03:32:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pKTQ5-0003PP-RV
- for qemu-riscv@nongnu.org; Tue, 24 Jan 2023 19:13:41 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1pKbCR-0005Xn-5c
+ for qemu-riscv@nongnu.org; Wed, 25 Jan 2023 03:32:07 -0500
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pKTQ3-0002Z9-0t
- for qemu-riscv@nongnu.org; Tue, 24 Jan 2023 19:13:41 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id q8so12635842wmo.5
- for <qemu-riscv@nongnu.org>; Tue, 24 Jan 2023 16:13:38 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1pKbCP-0005wx-Du
+ for qemu-riscv@nongnu.org; Wed, 25 Jan 2023 03:32:06 -0500
+Received: by mail-wm1-x334.google.com with SMTP id m15so13139458wms.4
+ for <qemu-riscv@nongnu.org>; Wed, 25 Jan 2023 00:32:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=IAanV1cmzpvJ/BO7ybZI1dsSXlZ2W2XaMUYjkULGVBs=;
- b=M8O09S39o0BdB2IT7y6xIXtqPhWOWkVzWbwIqPP7hgQ5QQ9xPgvhY80qgwnFjDp8Jx
- FPi4e3NqWmW7+WMqJqExMirrf7j4/1/hsjNSyxJHFDQWmNvV3psRaSfY4VA06wSPVXa8
- K8kMguUrPTbluO8t4/vTuz/gol0cAC+nhlfGsTp5CqAl2iS7nCkXzJ5rCfrmBYVjD5HI
- 0sP6qHFBP7eQW0eVglRumz/Jfxg/oMvkgMQvWQvyfbdzoED8c5BlB699eryjmw/PpLtZ
- oGAvJ5EmpA7V1ze/K9J4hWV4yl8CEuSMZCxVk56m9DgQBRtO16wHKcQRLbmApjIoa3iB
- FKMQ==
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lgAiDMVvZQfshpzbC4dmAWLfoahPjSqo70AhNR+CR+Y=;
+ b=uA4P61LkjoY8dv1zOX5JF6PXLPs1RuFu0u80vHbmrgwWUF4uFmhoVqhnUReoWxS9Gp
+ WKHbKbU1M97cNvXyGb8g5jRJSgHuFatLlqonbgOzX3CfZjy+bOMrr5SGqJPaYfbUGXG1
+ q2KwB+19lHtyqfTS5eMyoThsXR2a4bTOuRnY+T+ZJ38TiPin4exFqen6X4NYHVdMhqv7
+ /CX5PXXLASfuvG65Xl12aXwrtFvrqA/6T9/a7cVuhrc9M/Vt0oyZEA+wS43fEpKfN61O
+ hxTM4m7qU0mbqh5rmiI6CxmYhwOZM6oiKawh5hGNaFja5G0MdHhp5jkcOp7AaWByWpqy
+ 8kzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IAanV1cmzpvJ/BO7ybZI1dsSXlZ2W2XaMUYjkULGVBs=;
- b=DCXEfQrPC6fpBNFSZjJdcQKSbsyULa5aM18qEYOWNyTZILvRTBHAn0dyhait4OnfbG
- JCZGnJktvHJyTMEWNqvxKEnaWosD2+MHMaEE//VxsVu6HCmDfCMzTPPICgf2vwKIO/wE
- x+zeh4JP8VbeKsk/tOh1splpg6isc9L5lsmGObMH23KRqbOfhUAlRFcpFffw4kMzyMRM
- 9fYNUIW/BP29ix6Nk6MLEJ9vtrzqiD0hFGLE7a6QdsUlGKs6D1RqIzknVC9NcXBdFHD5
- TG+BEuykGSOCXyRSxMEQ2V+hW/hoVi8Wfei/2gm4nIy/MA1I16VD8PuATGr2HNaxpzeW
- 1D0w==
-X-Gm-Message-State: AFqh2krWk0QG0EZ1/9oucyUxfQqAjgFGe81GZe7zeWoS705Bg5fEQVay
- eP5R74YMqHCoBPYi6TKuTQum8Q==
-X-Google-Smtp-Source: AMrXdXvmPQ3nNpR5V9uLmWg69b97JjUGFKiN69alS1w1hhkRi4Lotxsfo8+hBN5cYn6cpyOPUTiEOw==
-X-Received: by 2002:a05:600c:5488:b0:3da:1e3e:1ce8 with SMTP id
- iv8-20020a05600c548800b003da1e3e1ce8mr29468908wmb.13.1674605617245; 
- Tue, 24 Jan 2023 16:13:37 -0800 (PST)
-Received: from [192.168.0.114] ([196.89.153.183])
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=lgAiDMVvZQfshpzbC4dmAWLfoahPjSqo70AhNR+CR+Y=;
+ b=TozqgHZ6wiJVudPssN1wfiH8JrxwuwkrVQdldMDd94ZNM3ifEEoRey7eCB0U0vtRlr
+ MAv+A0sG7+JSZ7n/VmiNAWA3JUvMrQJglXIl7wjGjPd/Dxn6TO2yHTcKG3Z1R6NuE5t8
+ ZgxYiX4DkXnhpn2lBJcM4rlH37o7XVC0ozbAqMrYHxfNxELy8QZuSPvwPavc3HXBt78y
+ jWabJkphA8vqRqtHdmE8M1/5/DULiv70G8mB/4EgogMf9rThDMY1SDBgBUAdqvc11IMK
+ SCyKm1hYDu7RTqqCVUxF61NWqTptGRRh7MD823XkG+tgmR0nDvsFst+an+OGAqQqpG3y
+ elxA==
+X-Gm-Message-State: AFqh2kolAYFJM+90Ho5kvVrbcWo8PPIl4r2tZvv2Xe8JSrrYpt8s1AXH
+ uLtBPade4KxTBUFXE6Ya8wAVgQ==
+X-Google-Smtp-Source: AMrXdXuqM5Go4vh0paC2EI6BjCs6kpn8ScH3fJUHLPEH6gbZofaACvc0aXuwWklFTMr/KVf5VCkjNw==
+X-Received: by 2002:a05:600c:4d98:b0:3d3:5c7d:a5f3 with SMTP id
+ v24-20020a05600c4d9800b003d35c7da5f3mr38506652wmp.37.1674635523581; 
+ Wed, 25 Jan 2023 00:32:03 -0800 (PST)
+Received: from zen.linaroharston ([185.81.254.11])
  by smtp.gmail.com with ESMTPSA id
- p10-20020a05600c430a00b003dc0d5b4f75sm189261wme.43.2023.01.24.16.13.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Jan 2023 16:13:36 -0800 (PST)
-Message-ID: <a90ac6b8-77b0-7bf0-cef6-00c5bee4fa4a@linaro.org>
-Date: Wed, 25 Jan 2023 01:13:34 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.6.1
-Subject: Re: [PATCH v4 13/36] tcg: Add temp allocation for TCGv_i128
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org, pbonzini@redhat.com, eduardo@habkost.net
+ p23-20020a1c5457000000b003da286f8332sm983539wmi.18.2023.01.25.00.32.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Jan 2023 00:32:03 -0800 (PST)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id A75F81FFB7;
+ Wed, 25 Jan 2023 08:32:02 +0000 (GMT)
 References: <20230108023719.2466341-1-richard.henderson@linaro.org>
- <20230108023719.2466341-14-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230108023719.2466341-14-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
-X-Spam_score_int: -31
-X-Spam_score: -3.2
-X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.148,
+ <20230108023719.2466341-5-richard.henderson@linaro.org>
+User-agent: mu4e 1.9.16; emacs 29.0.60
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org, pbonzini@redhat.com, eduardo@habkost.net, Daniel
+ Henrique Barboza <danielhb413@gmail.com>, qemu-arm@nongnu.org
+Subject: Re: [PATCH v4 04/36] tcg: Introduce tcg_out_addi_ptr
+Date: Wed, 25 Jan 2023 08:31:57 +0000
+In-reply-to: <20230108023719.2466341-5-richard.henderson@linaro.org>
+Message-ID: <87wn5bqakd.fsf@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x334.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,18 +86,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2023 00:13:42 -0000
+X-List-Received-Date: Wed, 25 Jan 2023 08:32:07 -0000
 
-On 8/1/23 03:36, Richard Henderson wrote:
-> This enables allocation of i128.  The type is not yet
-> usable, as we have not yet added data movement ops.
-> 
+
+Richard Henderson <richard.henderson@linaro.org> writes:
+
+> Implement the function for arm, i386, and s390x, which will use it.
+> Add stubs for all other backends.
+>
+> Reviewed-by: Daniel Henrique Barboza <danielhb413@gmail.com>
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   include/tcg/tcg.h | 32 +++++++++++++++++++++++++
->   tcg/tcg.c         | 60 +++++++++++++++++++++++++++++++++--------------
->   2 files changed, 74 insertions(+), 18 deletions(-)
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
