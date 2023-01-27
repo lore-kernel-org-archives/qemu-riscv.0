@@ -1,76 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pLNTw-0007dN-Nc
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Jan 2023 07:05:27 -0500
+	id 1pLQ7t-0000w7-UG
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Jan 2023 09:54:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pLNTs-0007JC-DW
- for qemu-riscv@nongnu.org; Fri, 27 Jan 2023 07:05:20 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pLNTq-0004ci-5e
- for qemu-riscv@nongnu.org; Fri, 27 Jan 2023 07:05:19 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1674821117;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=+NHkTA5r3OIEcJQhnqhj4XyOXQN0y1Tqe9QrLqNZ2c8=;
- b=WbYsLMgEOjI3WFMWv1akbkcb4CmLdweNzy27/ejsxGdMsNMBwEYEDhH7Z3W9o8jKmEdE1g
- 6UPFO8eLZf0NqGUN+3EI8JPi6cCAy3dlyFPc0aLLVr+UKO+LeJJq7z98Bo9EZchYi86XHB
- vNOKhph9B/DjNCg51A4R/0uaxV0kHAs=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-70-aicR2qCsO0ypVV-D51APlQ-1; Fri, 27 Jan 2023 07:05:11 -0500
-X-MC-Unique: aicR2qCsO0ypVV-D51APlQ-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 86A391C0A596;
- Fri, 27 Jan 2023 12:05:10 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 429872166B29;
- Fri, 27 Jan 2023 12:05:10 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 021B521E6A1F; Fri, 27 Jan 2023 13:05:09 +0100 (CET)
-From: Markus Armbruster <armbru@redhat.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org,  richard.henderson@linaro.org,
- pbonzini@redhat.com,  kwolf@redhat.com,  hreitz@redhat.com,
- imp@bsdimp.com,  kevans@freebsd.org,  berrange@redhat.com,
- groug@kaod.org,  qemu_oss@crudebyte.com,  mst@redhat.com,
- peter.maydell@linaro.org,  alistair@alistair23.me,  jasowang@redhat.com,
- jonathan.cameron@huawei.com,  kbastian@mail.uni-paderborn.de,
- quintela@redhat.com,  dgilbert@redhat.com,  michael.roth@amd.com,
- kkostiuk@redhat.com,  tsimpson@quicinc.com,  palmer@dabbelt.com,
- bin.meng@windriver.com,  qemu-block@nongnu.org,  qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: Re: [PATCH v4 16/19] Fix non-first inclusions of qemu/osdep.h
-References: <20230119065959.3104012-1-armbru@redhat.com>
- <20230119065959.3104012-17-armbru@redhat.com>
- <a25d449f-ceb5-54d8-ad07-9e6517d6e016@linaro.org>
- <873586u4yj.fsf@pond.sub.org>
- <fc965afb-5e58-bad3-429d-d77e866d9f18@linaro.org>
-Date: Fri, 27 Jan 2023 13:05:08 +0100
-In-Reply-To: <fc965afb-5e58-bad3-429d-d77e866d9f18@linaro.org> ("Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Thu, 19 Jan 2023 12:52:02
- +0100")
-Message-ID: <87v8ks2nez.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1pLQ7s-0000vU-90
+ for qemu-riscv@nongnu.org; Fri, 27 Jan 2023 09:54:48 -0500
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1pLQ7n-00032u-Nw
+ for qemu-riscv@nongnu.org; Fri, 27 Jan 2023 09:54:45 -0500
+Received: by mail-pl1-x631.google.com with SMTP id z13so5177482plg.6
+ for <qemu-riscv@nongnu.org>; Fri, 27 Jan 2023 06:54:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LkDqyGrdQP09P8B3VOXn+2snrIqZ+RVtQwBSGQWoOuE=;
+ b=tbV+DtYfL0Tt3h2SY0kE72VJ3f3GRcNM3eERMngALVTmFr4w3HvaHqdRSl/yJUNkfD
+ 8KEda7J0BuobaAq6VsFTrGQBThFt6Tj9pra9379MYarW87eRD7Mij4dk1O3m2TTV0daQ
+ V3uS9MpvkY+bPFmOCoB7tzKqzwRgCdDFhfpoTF0kkCwaobzit8vutClr+rSYX2R//XjB
+ rgjArxqS+KjE/niw3FHKeefz8atQnLwnv/t396aRMcPhavopo2IWwtP5JhM2n5H8tk25
+ F3e4+UPYqlM2BJotAbFwRBq9Dsw8w/85a5xnj6gB/YaSAp1kR03Ez8iBW397pbhgohU4
+ aKTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LkDqyGrdQP09P8B3VOXn+2snrIqZ+RVtQwBSGQWoOuE=;
+ b=rChRLhFWhHJwvQpeFf9syrElPGHAzAD7CCr290pfQX6xihVsEPTWcTn45st29F5/it
+ WkE+KZqIKVZIp4LgUu6sYJjaIHM3zVZQvwP0YREUJLGDowuxebfPWXgbBZ3mCV5CJCP8
+ QDQgjIRZSGYfIc12qkFZ5nUno44zHwvFTHBz6W5vevNOK0TzoRMB0MpSYAeNeq/buMQe
+ NdMnTGZ5UqFCK+HIfIQtL5cPt68YISu2VWlva7HX3PXfOrMbDXNYY4JQ8IyW8WgYYXQw
+ /OJcW+kpMtgMhA8IRUMT3thh/GuzvaNU5I4z+fOdteiUY6d7Aszro6guCQRnu2gUGC+6
+ kXmQ==
+X-Gm-Message-State: AO0yUKVZpDLlMSRHtHalppbsAXuRwFZCF7qEnaL9XtRwamD6hVpdMFgd
+ 4orM5BVz8EG4RWLswGf3RUs1MdRKc1edZvK6BFev4w==
+X-Google-Smtp-Source: AK7set+BwyxAKfRkJOIWYhmGmtqgxW/nvVV/wOB8DP+JLuUxKYXjGigYlwPknE1fpi3tOE6uxD7mb3NqRa6uPxGwO8M=
+X-Received: by 2002:a17:90a:71c6:b0:22c:dfb:a9da with SMTP id
+ m6-20020a17090a71c600b0022c0dfba9damr1928136pjs.115.1674831282251; Fri, 27
+ Jan 2023 06:54:42 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+References: <20230119065959.3104012-1-armbru@redhat.com>
+ <20230119065959.3104012-5-armbru@redhat.com>
+ <CANCZdfrU4zVcepMj=B5EVUz-qhCDhMYDs+cYS5yfW1-G01PsbA@mail.gmail.com>
+In-Reply-To: <CANCZdfrU4zVcepMj=B5EVUz-qhCDhMYDs+cYS5yfW1-G01PsbA@mail.gmail.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 27 Jan 2023 14:54:30 +0000
+Message-ID: <CAFEAcA8E98v5X5ekA16c6Fby2HAhOC5G4JYnN9TkrA9G7rVzvA@mail.gmail.com>
+Subject: Re: [PATCH v4 04/19] bsd-user: Clean up includes
+To: Warner Losh <imp@bsdimp.com>
+Cc: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org,
+ richard.henderson@linaro.org, 
+ pbonzini@redhat.com, kwolf@redhat.com, hreitz@redhat.com, kevans@freebsd.org, 
+ berrange@redhat.com, groug@kaod.org, qemu_oss@crudebyte.com, mst@redhat.com, 
+ philmd@linaro.org, alistair@alistair23.me, jasowang@redhat.com, 
+ jonathan.cameron@huawei.com, kbastian@mail.uni-paderborn.de, 
+ quintela@redhat.com, dgilbert@redhat.com, michael.roth@amd.com, 
+ kkostiuk@redhat.com, tsimpson@quicinc.com, palmer@dabbelt.com, 
+ bin.meng@windriver.com, qemu-block@nongnu.org, qemu-arm@nongnu.org, 
+ qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=peter.maydell@linaro.org; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -84,61 +83,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2023 12:05:21 -0000
+X-List-Received-Date: Fri, 27 Jan 2023 14:54:48 -0000
 
-Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
-
-> On 19/1/23 12:41, Markus Armbruster wrote:
->> Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
->>=20
->>> On 19/1/23 07:59, Markus Armbruster wrote:
->>>> This commit was created with scripts/clean-includes.
->>>> Signed-off-by: Markus Armbruster <armbru@redhat.com>
->> [...]
->>=20
->>> Up to here:
->>>
->>> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
->>>
->>>> diff --git a/util/async-teardown.c b/util/async-teardown.c
->>>> index 62bfce1b3c..62cdeb0f20 100644
->>>> --- a/util/async-teardown.c
->>>> +++ b/util/async-teardown.c
->>>> @@ -10,16 +10,12 @@
->>>>     * option) any later version.  See the COPYING file in the top-leve=
-l directory.
->>>>     *
->>>>     */
->>>> -#include <stdlib.h>
->>>> -#include <stdio.h>
->>>> -#include <sys/types.h>
->>>> -#include <dirent.h>
->>>> -#include <sys/prctl.h>
->>>> -#include <signal.h>
->>>> -#include <sched.h>
->>>> -#include <unistd.h>
->>>>     #include "qemu/osdep.h"
->>>> +#include <dirent.h>
->>>> +#include <sys/prctl.h>
->>>> +#include <sched.h>
->>>> +
->>>>    #include "qemu/async-teardown.h"
->>>
->>> This file has more changes.
->> I'm not sure I understand.
->> The patch does two related things:
->> 1. It puts qemu/osdep.h first.  The diff makes it look like we leave it
->>     in place and move other stuff across, but that's the same.
->> 2. It deletes inclusions of headers qemu/osdep.h already includes:
->>      <stdlib.h>
->>      <stdio.h>
->>      <sys/types.h>
->>      <signal.h>
->>      <unistd.h>
+On Thu, 19 Jan 2023 at 14:42, Warner Losh <imp@bsdimp.com> wrote:
 >
-> Ah, the other files get this done in the "Drop duplicate #include" patch.
+> Also, why didn't you move sys/resource.h and other such files
+> to os-dep.h? I'm struggling to understand the rules around what
+> is or isn't included where?
 
-I assume this extends your R-by to the complete patch.  Correct me if
-I'm wrong, please.
+The rough rule of thumb is that if some OS needs a compatibility
+fixup or workaround for a system header (eg not every mmap.h
+defines MAP_ANONYMOUS; on Windows unistd.h has to come before
+time.h) then we put that header include and the compat workaround
+into osdep.h. This avoids "only fails on obscure platform" issues
+where somebody puts a header include into some specific .c file
+but not the compat workaround, and it works on the Linux host
+that most people develop and test on and we only find the
+problem later.
 
+There's also no doubt some includes there for historical
+reasons, and some which really are "everybody needs these"
+convenience ones. But we should probably not add new
+includes to osdep.h unless they fall into the "working around
+system header issues" bucket.
+
+thanks
+-- PMM
 
