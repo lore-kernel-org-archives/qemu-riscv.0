@@ -1,38 +1,38 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pLXVz-0002o4-2g
-	for mharc-qemu-riscv@gnu.org; Fri, 27 Jan 2023 17:48:17 -0500
+	id 1pLXdD-0005HF-7I
+	for mharc-qemu-riscv@gnu.org; Fri, 27 Jan 2023 17:55:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eblake@redhat.com>) id 1pLXVn-0002mT-1I
- for qemu-riscv@nongnu.org; Fri, 27 Jan 2023 17:47:59 -0500
+ (Exim 4.90_1) (envelope-from <eblake@redhat.com>) id 1pLXdA-0005Gj-CV
+ for qemu-riscv@nongnu.org; Fri, 27 Jan 2023 17:55:36 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <eblake@redhat.com>) id 1pLXVk-0001f0-Ft
- for qemu-riscv@nongnu.org; Fri, 27 Jan 2023 17:47:58 -0500
+ (Exim 4.90_1) (envelope-from <eblake@redhat.com>) id 1pLXd8-0002gu-AI
+ for qemu-riscv@nongnu.org; Fri, 27 Jan 2023 17:55:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1674859675;
+ s=mimecast20190719; t=1674860133;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=1e0/PGUN4/1YKyQq5ZEih9uomfIieCqX5fsFRyBTOgw=;
- b=YITe2UWRZz0lPayYMxqU6HLh/NzQEKInTV7mFzDi+aAVSg9k2L3JNOAI+UWDmAidrxG4xK
- KmJDjVhhlkAYer0a0m0mMuYv6gVrSTiOVp78MZvPLCMH8WtpHKU+sFrB2YLE6V32R7iTRP
- LnvFHC8nY7JnY+zcSxWRb4YSURuKIM0=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=WryUFBl66HGK4gCI9EH/8uEtyd4e2kmqtTQTKV9nerQ=;
+ b=ZeWHuOdepy3LYI2f9p44Ol4awVKZzbUwvWILwS96kioJCSfp6NhPHzN0Z9N8TLBcQ5oOU6
+ k0O/OWk3wZCnIzMn5TiC9P+4iJ+tf5z2vFT+Ty9hJc8zlywulLhGro9Tt9MJChYIH3gvwL
+ qTcQXnmdmoVYZ97Z3x7cSEoAAc7rmv0=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-484-8Chw50bYPpmpxbNeEHK_cw-1; Fri, 27 Jan 2023 17:47:52 -0500
-X-MC-Unique: 8Chw50bYPpmpxbNeEHK_cw-1
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
+ us-mta-148-1jGQ55FrNy6C5QsacWUdMQ-1; Fri, 27 Jan 2023 17:55:29 -0500
+X-MC-Unique: 1jGQ55FrNy6C5QsacWUdMQ-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 620D7887400;
- Fri, 27 Jan 2023 22:47:51 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E8EF829AA3B3;
+ Fri, 27 Jan 2023 22:55:28 +0000 (UTC)
 Received: from redhat.com (unknown [10.2.17.173])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id A40DC492B01;
- Fri, 27 Jan 2023 22:47:48 +0000 (UTC)
-Date: Fri, 27 Jan 2023 16:47:46 -0600
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id AABD4492C14;
+ Fri, 27 Jan 2023 22:55:26 +0000 (UTC)
+Date: Fri, 27 Jan 2023 16:55:25 -0600
 From: Eric Blake <eblake@redhat.com>
 To: Markus Armbruster <armbru@redhat.com>
 Cc: qemu-devel@nongnu.org, richard.henderson@linaro.org,
@@ -45,16 +45,16 @@ Cc: qemu-devel@nongnu.org, richard.henderson@linaro.org,
  dgilbert@redhat.com, michael.roth@amd.com, kkostiuk@redhat.com,
  tsimpson@quicinc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  qemu-block@nongnu.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org
-Subject: Re: [PATCH v4 03/19] scripts/clean-includes: Skip symbolic links
-Message-ID: <20230127224746.2rqorp2ushelp4wj@redhat.com>
+Subject: Re: [PATCH v4 14/19] block: Clean up includes
+Message-ID: <20230127225525.t5bexrnx76a4oxdm@redhat.com>
 References: <20230119065959.3104012-1-armbru@redhat.com>
- <20230119065959.3104012-4-armbru@redhat.com>
+ <20230119065959.3104012-15-armbru@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230119065959.3104012-4-armbru@redhat.com>
+In-Reply-To: <20230119065959.3104012-15-armbru@redhat.com>
 User-Agent: NeoMutt/20220429
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.9
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=eblake@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
@@ -76,32 +76,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2023 22:47:59 -0000
+X-List-Received-Date: Fri, 27 Jan 2023 22:55:37 -0000
 
-On Thu, Jan 19, 2023 at 07:59:43AM +0100, Markus Armbruster wrote:
-> When a symbolic link points to a file that needs cleaning, the script
-> replaces the link with a cleaned regular file.  Not wanted; skip them.
+On Thu, Jan 19, 2023 at 07:59:54AM +0100, Markus Armbruster wrote:
+> Clean up includes so that osdep.h is included first and headers
+> which it implies are not included manually.
 > 
-> We have a few symbolic links under subprojects/libvduse/ and
-> subprojects/libvhost-user/.
+> This commit was created with scripts/clean-includes.
 > 
 > Signed-off-by: Markus Armbruster <armbru@redhat.com>
 > ---
->  scripts/clean-includes | 4 ++++
->  1 file changed, 4 insertions(+)
-> 
-> diff --git a/scripts/clean-includes b/scripts/clean-includes
-> index 8e8420d785..f0466a6262 100755
-> --- a/scripts/clean-includes
-> +++ b/scripts/clean-includes
-> @@ -113,6 +113,10 @@ EOT
->  
->  files=
->  for f in "$@"; do
-> +  if [ -L "$f" ]; then
-
-I don't see -L used with test very often, but POSIX requires it, so it
-is safe for our choice of /bin/sh.
+>  include/block/graph-lock.h      | 1 -
+>  include/block/write-threshold.h | 2 --
+>  block/qapi.c                    | 1 -
+>  3 files changed, 4 deletions(-)
 
 Reviewed-by: Eric Blake <eblake@redhat.com>
 
