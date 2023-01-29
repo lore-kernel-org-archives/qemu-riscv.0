@@ -1,57 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pM0W1-0006xx-Me
-	for mharc-qemu-riscv@gnu.org; Sun, 29 Jan 2023 00:46:09 -0500
+	id 1pM0e3-0000Qk-GP
+	for mharc-qemu-riscv@gnu.org; Sun, 29 Jan 2023 00:54:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pM0Vz-0006xS-NS; Sun, 29 Jan 2023 00:46:07 -0500
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ id 1pM0e2-0000QY-68; Sun, 29 Jan 2023 00:54:26 -0500
+Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pM0Vu-0000NC-BL; Sun, 29 Jan 2023 00:46:07 -0500
-Received: by mail-ej1-x62a.google.com with SMTP id qw12so7713090ejc.2;
- Sat, 28 Jan 2023 21:46:01 -0800 (PST)
+ id 1pM0e0-0001GN-KY; Sun, 29 Jan 2023 00:54:25 -0500
+Received: by mail-ej1-x636.google.com with SMTP id p26so12416887ejx.13;
+ Sat, 28 Jan 2023 21:54:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=W6BkLfctiOoE8HwM3s6t2Jwc2gJpGrkuQyKPnSMROjU=;
- b=IA9zHTwNqZfnB0Cbg6iOZl56CgAdIR9zBTYDjhN47W9cQUj+e3QVQZ4YL/ibKXMjFr
- KoQNZB2aD5poWJsZWIN7aOELpiYWc+oqwhWY6FJzyeeFLt8t7JMASKBXuO11MG6DkQnK
- A2+CQ6ba8hJ8VTuTmMbw8XfjXjK5mSyo33LZ+pLeRu6j4BeBsyI1P8163p9N+Y78gJgM
- x2PgJiOU1HDNUhKxSX/ShFwWyK+i0efjMAPMXZaVwtUyXErtg3furQGSr9qRFSkBSrdr
- p6zy3EhiFtzpQUZpNoUWN2KjeoquIdgtVWA96X+E40KajPveM07mHcUBQSekPkSo0FQ1
- mgzA==
+ bh=RZ46tTWCeU27G948OZKuUdw0EuBD8CBg1B5NTtmQMmY=;
+ b=WROX4OJHh0VVA2su6cbJYzsaFg0QOkXRQGc1pGVDJPRLJsiHXc6SC1wTqaXQr2655K
+ S1O+UL3wNHl13M8uDOtMzGKiceCUrzR4KCAKv2PsA2BCjgwlcBTax1iBmSSHpcCKw+Cj
+ 8ZJklUcqv/2DiY3prGU7KS19sTmx2PoMC/3aw5UdanYrt6RbmZI1IWzbNEc8bf7KK/Co
+ F103ezbw94BSHfHG8f7hSm1cndMfWsnqXXp2mjYKUbP8dKfLIdxAQcPx/iXa5Ynvv8/w
+ UynrK6SGW/DWUS4PrD100O7z+HZmuW+3uJ3aLVaK+l5GkjBPvI30gVsRN/Dr8mU9vMP6
+ Jyvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=W6BkLfctiOoE8HwM3s6t2Jwc2gJpGrkuQyKPnSMROjU=;
- b=SUmc9lyx0tv18ZUXqKajJKaXHzRycsdHQI9SBaj/Y8S9oRl+avjmX7rXVkiizNeJ3o
- AuzDDphnJc3yy5wYJ3zfl65n27GdtwX9Zqi0UZjuIPKjxb5njLEs4jngng+L7L5gYfaE
- Hm06GbrpD3BORUUQ8a5lnxvjG+ikLuteW7NER88PiiK8XUAFbZlKqcpxcwWY2KucM+2C
- S1zkhv+mYwMRRxMdYKdxDI4lvCy/BO08KzbECo1uPkuur2eSLHEMbyWPujsFPB+5Cdbx
- q4DddciiUTV5lElwIYGD4XK8GknK1AyDTv+L97yAcGV4EY5/YyZ0z/VnuRgi28DqG+Cs
- 13OA==
-X-Gm-Message-State: AFqh2koOZbVjyc3YnCHjFG96Y7pJDCUaWJu95APEPH2I32ckRreaMqxb
- 6KnVQrh8HUn+CeGcVmlOc9lqzplgyOD8ZM2E3lI=
-X-Google-Smtp-Source: AMrXdXtLHzb8TCOV4XMmoK00peQ2Md67X+XGt3s9a5H66I62pbJ0MXvpFP6+dKVRXsIsMptvqRCf4onpcVkl+lOySyg=
-X-Received: by 2002:a17:906:a00b:b0:7c0:beef:79e2 with SMTP id
- p11-20020a170906a00b00b007c0beef79e2mr7941878ejy.148.1674971159942; Sat, 28
- Jan 2023 21:45:59 -0800 (PST)
+ bh=RZ46tTWCeU27G948OZKuUdw0EuBD8CBg1B5NTtmQMmY=;
+ b=1GxHuqw5n6U4NImWrgFLajsbp7K8CeftNcndI1PVm7e/RklNBmdIthwB6KhbJ8I54e
+ NzUEp1zAxzAIno9fjAPpwmoafJkXihavFHSWGRV2Q8O4Cp7P03IEqSZN/YAuXJm78Y3L
+ duDbdn9z55M3+mfTs4buELg3YQywig5d5kmZ9F4ieeSyC+PcC1STtrneueMjXvs9IGfD
+ HNcQl7OhQ8UCIcF06zUNL1mpl+4rah4vFAV+P/L6TQ3PhvhrVYyR++CwOqUIgTJ/IgAH
+ oSEOGpyF8L539hh/Z9uUGrxNnSxeDoyIcdhhBpzAjvT/0mIJIWqeo4RZDAAkrw2j98Bu
+ HRVA==
+X-Gm-Message-State: AO0yUKUrp2YcndDbujQ7fIpYP8TLaD4O8gE3tNIycaxsLgCbiOWvdCoA
+ 1zKqOv4/FctjnRh3C61NwJHxek7dvxI4ifW+IW4=
+X-Google-Smtp-Source: AK7set+CpYeum+BlGbRXTP758K6DvDIMTtXMNoYMGHhCv4mvq4zmoJig0XRMeOrLFyeAYDz/MEaa2VHx7MADrAk04AI=
+X-Received: by 2002:a17:906:3283:b0:882:3e56:a854 with SMTP id
+ 3-20020a170906328300b008823e56a854mr920560ejw.263.1674971661224; Sat, 28 Jan
+ 2023 21:54:21 -0800 (PST)
 MIME-Version: 1.0
-References: <20230126135219.1054658-1-dbarboza@ventanamicro.com>
- <20230126135219.1054658-4-dbarboza@ventanamicro.com>
-In-Reply-To: <20230126135219.1054658-4-dbarboza@ventanamicro.com>
+References: <20230125162010.1615787-1-alexghiti@rivosinc.com>
+ <20230125162010.1615787-2-alexghiti@rivosinc.com>
+In-Reply-To: <20230125162010.1615787-2-alexghiti@rivosinc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sun, 29 Jan 2023 13:45:48 +0800
-Message-ID: <CAEUhbmW7Yh_7UOjeoPKBhSF1P4axp6kggtSEj9BAty1q6Ed4QA@mail.gmail.com>
-Subject: Re: [PATCH v4 3/3] hw/riscv: change riscv_compute_fdt_addr() semantics
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
+Date: Sun, 29 Jan 2023 13:54:10 +0800
+Message-ID: <CAEUhbmWR7UDF2xJbfQLhxPM_VJReAFDsyivGT57__LdyyG52vg@mail.gmail.com>
+Subject: Re: [PATCH v8 1/5] riscv: Pass Object to register_cpu_props instead
+ of DeviceState
+To: Alexandre Ghiti <alexghiti@rivosinc.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>, 
+ Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::636;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -71,218 +76,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Jan 2023 05:46:08 -0000
+X-List-Received-Date: Sun, 29 Jan 2023 05:54:26 -0000
 
-On Thu, Jan 26, 2023 at 9:54 PM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Thu, Jan 26, 2023 at 12:21 AM Alexandre Ghiti <alexghiti@rivosinc.com> wrote:
 >
-> As it is now, riscv_compute_fdt_addr() is receiving a dram_base, a
-> mem_size (which is defaulted to MachineState::ram_size in all boards)
-> and the FDT pointer. And it makes a very important assumption: the DRAM
-> interval dram_base + mem_size is contiguous. This is indeed the case for
-> most boards that uses a FDT.
-
-s/uses/use
-
+> One can extract the DeviceState pointer from the Object pointer, so pass
+> the Object for future commits to access other fields of Object.
 >
-> The Icicle Kit board works with 2 distinct RAM banks that are separated
-> by a gap. We have a lower bank with 1GiB size, a gap follows, then at
-> 64GiB the high memory starts. MachineClass::default_ram_size for this
-> board is set to 1.5Gb, and machine_init() is enforcing it as minimal RAM
-> size, meaning that there we'll always have at least 512 MiB in the Hi
-> RAM area.
+> No functional changes intended.
 >
-> Using riscv_compute_fdt_addr() in this board is weird because not only
-> the board has sparse RAM, and it's calling it using the base address of
-> the Lo RAM area, but it's also using a mem_size that we have guarantees
-> that it will go up to the Hi RAM. All the function assumptions doesn't
-> work for this board.
->
-> In fact, what makes the function works at all in this case is a
-> coincidence.  Commit 1a475d39ef54 introduced a 3GB boundary for the FDT,
-> down from 4Gb, that is enforced if dram_base is lower than 3072 MiB. For
-> the Icicle Kit board, memmap[MICROCHIP_PFSOC_DRAM_LO].base is 0x80000000
-> (2 Gb) and it has a 1Gb size, so it will fall in the conditions to put
-> the FDT under a 3Gb address, which happens to be exactly at the end of
-> DRAM_LO. If the base address of the Lo area started later than 3Gb this
-> function would be unusable by the board. Changing any assumptions inside
-> riscv_compute_fdt_addr() can also break it by accident as well.
->
-> Let's change riscv_compute_fdt_addr() semantics to be appropriate to the
-> Icicle Kit board and for future boards that might have sparse RAM
-> topologies to worry about:
->
-> - relieve the condition that the dram_base + mem_size area is contiguous,
-> since this is already not the case today;
->
-> - receive an extra 'dram_size' size attribute that refers to a contiguous
-> RAM block that the board wants the FDT to reside on.
->
-> Together with 'mem_size' and 'fdt', which are now now being consumed by a
-> MachineState pointer, we're able to make clear assumptions based on the
-> DRAM block and total mem_size available to ensure that the FDT will be put
-> in a valid RAM address.
->
-
-Well written commit message. Thanks!
-
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 > ---
->  hw/riscv/boot.c            | 38 ++++++++++++++++++++++++++------------
->  hw/riscv/microchip_pfsoc.c |  3 ++-
->  hw/riscv/sifive_u.c        |  3 ++-
->  hw/riscv/spike.c           |  3 ++-
->  hw/riscv/virt.c            |  3 ++-
->  include/hw/riscv/boot.h    |  4 ++--
->  6 files changed, 36 insertions(+), 18 deletions(-)
+>  target/riscv/cpu.c | 15 ++++++++-------
+>  1 file changed, 8 insertions(+), 7 deletions(-)
 >
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index a6f7b8ae8e..8f4991480b 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -284,33 +284,47 @@ out:
->  }
->
->  /*
-> - * The FDT should be put at the farthest point possible to
-> - * avoid overwriting it with the kernel/initrd.
-> + * This function makes an assumption that the DRAM interval
-> + * 'dram_base' + 'dram_size' is contiguous.
->   *
-> - * This function makes an assumption that the DRAM is
-> - * contiguous. It also cares about 32-bit systems and
-> - * will limit fdt_addr to be addressable by them even for
-> - * 64-bit CPUs.
-> + * Considering that 'dram_end' is the lowest value between
-> + * the end of the DRAM block and MachineState->ram_size, the
-> + * FDT location will vary according to 'dram_base':
-> + *
-> + * - if 'dram_base' is less that 3072 MiB, the FDT will be
-> + * put at the lowest value between 3072 MiB and 'dram_end';
-> + *
-> + * - if 'dram_base' is higher than 3072 MiB, the FDT will be
-> + * put at 'dram_end'.
->   *
->   * The FDT is fdt_packed() during the calculation.
->   */
-> -uint32_t riscv_compute_fdt_addr(hwaddr dram_base, uint64_t mem_size,
-> -                                void *fdt)
-> +hwaddr riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
 
-Using hwaddr to represent a size looks weird. Although technically
-they are the same ... I would leave this as it is.
-
-> +                              MachineState *ms)
->  {
-> -    uint64_t temp;
-> -    hwaddr dram_end = dram_base + mem_size;
-> -    int ret = fdt_pack(fdt);
-> +    int ret = fdt_pack(ms->fdt);
-> +    hwaddr dram_end, temp;
->      int fdtsize;
->
->      /* Should only fail if we've built a corrupted tree */
->      g_assert(ret == 0);
->
-> -    fdtsize = fdt_totalsize(fdt);
-> +    fdtsize = fdt_totalsize(ms->fdt);
->      if (fdtsize <= 0) {
->          error_report("invalid device-tree");
->          exit(1);
->      }
->
-> +    /*
-> +     * A dram_size == 0, usually from a MemMapEntry[].size element,
-> +     * means that the DRAM block goes all the way to ms->ram_size.
-> +     */
-> +    if (dram_size == 0x0) {
-> +        dram_end = dram_base + ms->ram_size;
-> +    } else {
-> +        dram_end = dram_base + MIN(ms->ram_size, dram_size);
-> +    }
-
-How about:
-
-g_assert(dram_size < ms->ram_size);
-dram_end = dram_base + (dram_size ? dram_size : ms->ram_size);
-
-> +
->      /*
->       * We should put fdt as far as possible to avoid kernel/initrd overwriting
->       * its content. But it should be addressable by 32 bit system as well.
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index a30203db85..e81bbd12df 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -634,7 +634,8 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
->
->          /* Compute the fdt load address in dram */
->          fdt_load_addr = riscv_compute_fdt_addr(memmap[MICROCHIP_PFSOC_DRAM_LO].base,
-> -                                               machine->ram_size, machine->fdt);
-> +                                               memmap[MICROCHIP_PFSOC_DRAM_LO].size,
-> +                                               machine);
->          riscv_load_fdt(fdt_load_addr, machine->fdt);
->
->          /* Load the reset vector */
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 6bbdbe5fb7..ad3bb35b34 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -609,7 +609,8 @@ static void sifive_u_machine_init(MachineState *machine)
->      }
->
->      fdt_load_addr = riscv_compute_fdt_addr(memmap[SIFIVE_U_DEV_DRAM].base,
-> -                                           machine->ram_size, machine->fdt);
-> +                                           memmap[SIFIVE_U_DEV_DRAM].size,
-> +                                           machine);
->      riscv_load_fdt(fdt_load_addr, machine->fdt);
->
->      if (!riscv_is_32bit(&s->soc.u_cpus)) {
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index ceebe34c5f..b5979eddd6 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -317,7 +317,8 @@ static void spike_board_init(MachineState *machine)
->      }
->
->      fdt_load_addr = riscv_compute_fdt_addr(memmap[SPIKE_DRAM].base,
-> -                                           machine->ram_size, machine->fdt);
-> +                                           memmap[SPIKE_DRAM].size,
-> +                                           machine);
->      riscv_load_fdt(fdt_load_addr, machine->fdt);
->
->      /* load the reset vector */
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 43fca597f0..f079a30b60 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1293,7 +1293,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
->      }
->
->      fdt_load_addr = riscv_compute_fdt_addr(memmap[VIRT_DRAM].base,
-> -                                           machine->ram_size, machine->fdt);
-> +                                           memmap[VIRT_DRAM].size,
-> +                                           machine);
->      riscv_load_fdt(fdt_load_addr, machine->fdt);
->
->      /* load the reset vector */
-> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-> index 7babd669c7..a6099c2dc6 100644
-> --- a/include/hw/riscv/boot.h
-> +++ b/include/hw/riscv/boot.h
-> @@ -48,8 +48,8 @@ target_ulong riscv_load_kernel(MachineState *machine,
->                                 target_ulong firmware_end_addr,
->                                 bool load_initrd,
->                                 symbol_fn_t sym_cb);
-> -uint32_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size,
-> -                                void *fdt);
-> +hwaddr riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size,
-> +                              MachineState *ms);
->  void riscv_load_fdt(hwaddr fdt_addr, void *fdt);
->  void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
->                                 hwaddr saddr,
-> --
-
-Regards,
-Bin
+Reviewed-by: Bin Meng <bmeng@tinylab.org>
 
