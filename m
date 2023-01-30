@@ -1,40 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pMU70-0004nP-E8
+	id 1pMU70-0004or-SQ
 	for mharc-qemu-riscv@gnu.org; Mon, 30 Jan 2023 08:22:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pMU6r-0004Gl-Dv
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pMU6n-0004F3-Be
  for qemu-riscv@nongnu.org; Mon, 30 Jan 2023 08:22:10 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pMU6m-0005is-Ec
- for qemu-riscv@nongnu.org; Mon, 30 Jan 2023 08:22:09 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pMU6k-0005hK-JI
+ for qemu-riscv@nongnu.org; Mon, 30 Jan 2023 08:22:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1675084922;
+ s=mimecast20190719; t=1675084921;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=njdrlkfxH32yQsnR9eaCCPDV60Cy31dsoohmWIZTBfU=;
- b=DW5q9li5uvNq4x7/SDMPPhPaAM3+tbWyIHrZ2dLBqneBdAhyI+a5XtmAkLpBSi8htHm8Z5
- mc+NaKaCmfzfzAFKRDwiTh6JXuK7ELDZysa2mBnukFCqXn7MOxWZ0rObxajZKTpWRUKgGa
- 72UfJXBhD76ElrN8a6wBt3EkLg4nwFQ=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=FMxl36Bz4aHtswUyLTzYVqdyTS4VJBWDPTNwMT0G9V8=;
+ b=XJyKHnJ30WMGN0vsQPhzOrdmKioDuHyDOb4xCSN1spR4rRhQ42RszbXTjXpg13Z3OE6aX2
+ 8yssH+aNfu4yi3e3htGZEdPLdImS7uQs/JmFjBOgfBTQGtWpOZkojh1B3jFOXURguqXgmr
+ MUYIRGTOYwJZqikWdmDCkWjoxepKC4k=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-146-i4zfRAlfOz2kCM7dyMxnqg-1; Mon, 30 Jan 2023 08:22:00 -0500
-X-MC-Unique: i4zfRAlfOz2kCM7dyMxnqg-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
- [10.11.54.1])
+ us-mta-364-b-Z2UpSLM6WIbTHrrKki1Q-1; Mon, 30 Jan 2023 08:21:59 -0500
+X-MC-Unique: b-Z2UpSLM6WIbTHrrKki1Q-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.4])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9F30929DD985;
- Mon, 30 Jan 2023 13:21:59 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8AB7B183B3CB;
+ Mon, 30 Jan 2023 13:21:58 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 77F1D40C2064;
- Mon, 30 Jan 2023 13:21:59 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 642E22026D4B;
+ Mon, 30 Jan 2023 13:21:58 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 6E11821E691A; Mon, 30 Jan 2023 14:21:56 +0100 (CET)
+ id 5302A21E6A26; Mon, 30 Jan 2023 14:21:56 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
@@ -46,15 +46,15 @@ Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
  kkostiuk@redhat.com, tsimpson@quicinc.com, palmer@dabbelt.com,
  bin.meng@windriver.com, qemu-block@nongnu.org, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v5 16/20] accel: Clean up includes
-Date: Mon, 30 Jan 2023 14:21:52 +0100
-Message-Id: <20230130132156.1868019-17-armbru@redhat.com>
+Subject: [PATCH v5 07/20] hw/cxl: Clean up includes
+Date: Mon, 30 Jan 2023 14:21:43 +0100
+Message-Id: <20230130132156.1868019-8-armbru@redhat.com>
 In-Reply-To: <20230130132156.1868019-1-armbru@redhat.com>
 References: <20230130132156.1868019-1-armbru@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-type: text/plain
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.1
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
@@ -84,24 +84,51 @@ not in .h, and headers which it implies are not included manually.
 This commit was created with scripts/clean-includes.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- include/sysemu/accel-blocker.h | 1 -
- 1 file changed, 1 deletion(-)
+ include/hw/cxl/cxl_component.h | 2 --
+ include/hw/cxl/cxl_host.h      | 1 -
+ include/hw/cxl/cxl_pci.h       | 1 -
+ 3 files changed, 4 deletions(-)
 
-diff --git a/include/sysemu/accel-blocker.h b/include/sysemu/accel-blocker.h
-index 72020529ef..0733783bcc 100644
---- a/include/sysemu/accel-blocker.h
-+++ b/include/sysemu/accel-blocker.h
-@@ -14,7 +14,6 @@
- #ifndef ACCEL_BLOCKER_H
- #define ACCEL_BLOCKER_H
+diff --git a/include/hw/cxl/cxl_component.h b/include/hw/cxl/cxl_component.h
+index 5dca21e95b..692d7a5507 100644
+--- a/include/hw/cxl/cxl_component.h
++++ b/include/hw/cxl/cxl_component.h
+@@ -15,9 +15,7 @@
+ #define CXL2_COMPONENT_CM_REGION_SIZE 0x1000
+ #define CXL2_COMPONENT_BLOCK_SIZE 0x10000
+ 
+-#include "qemu/compiler.h"
+ #include "qemu/range.h"
+-#include "qemu/typedefs.h"
+ #include "hw/cxl/cxl_cdat.h"
+ #include "hw/register.h"
+ #include "qapi/error.h"
+diff --git a/include/hw/cxl/cxl_host.h b/include/hw/cxl/cxl_host.h
+index a1b662ce40..c9bc9c7c50 100644
+--- a/include/hw/cxl/cxl_host.h
++++ b/include/hw/cxl/cxl_host.h
+@@ -7,7 +7,6 @@
+  * COPYING file in the top-level directory.
+  */
  
 -#include "qemu/osdep.h"
- #include "sysemu/cpus.h"
+ #include "hw/cxl/cxl.h"
+ #include "hw/boards.h"
  
- extern void accel_blocker_init(void);
+diff --git a/include/hw/cxl/cxl_pci.h b/include/hw/cxl/cxl_pci.h
+index 01e15ed5b4..407be95b9e 100644
+--- a/include/hw/cxl/cxl_pci.h
++++ b/include/hw/cxl/cxl_pci.h
+@@ -10,7 +10,6 @@
+ #ifndef CXL_PCI_H
+ #define CXL_PCI_H
+ 
+-#include "qemu/compiler.h"
+ 
+ #define CXL_VENDOR_ID 0x1e98
+ 
 -- 
 2.39.0
 
