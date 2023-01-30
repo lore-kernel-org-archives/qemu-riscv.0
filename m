@@ -1,55 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pMQ8W-0008OW-F4
-	for mharc-qemu-riscv@gnu.org; Mon, 30 Jan 2023 04:07:36 -0500
+	id 1pMR5I-0007UT-8K
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Jan 2023 05:08:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pMQ7p-0008Hj-4D; Mon, 30 Jan 2023 04:06:53 -0500
-Received: from out30-6.freemail.mail.aliyun.com ([115.124.30.6])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pMQ7m-0002XS-2t; Mon, 30 Jan 2023 04:06:51 -0500
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
- TI=SMTPD_---0VaRafXj_1675069602; 
-Received: from 30.221.97.63(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VaRafXj_1675069602) by smtp.aliyun-inc.com;
- Mon, 30 Jan 2023 17:06:43 +0800
-Message-ID: <9d672153-609e-a8f5-31b6-218f2398f10b@linux.alibaba.com>
-Date: Mon, 30 Jan 2023 17:06:27 +0800
+ (Exim 4.90_1) (envelope-from <geomatsi@gmail.com>)
+ id 1pMR56-0007T7-Qy; Mon, 30 Jan 2023 05:08:14 -0500
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <geomatsi@gmail.com>)
+ id 1pMR55-0004RN-69; Mon, 30 Jan 2023 05:08:08 -0500
+Received: by mail-ej1-x62b.google.com with SMTP id p26so18923200ejx.13;
+ Mon, 30 Jan 2023 02:08:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6KLMCo5biRiC7s1o2u7KTvaufRUzTlqDNiiarYgvWeM=;
+ b=BzByR55tE0uOEQiY12DWDyfoTa2a4Z/wa9jqZ3qZG7mOjrUQ0odXQUELqpRAFT9+xq
+ zK63uj3qoZ8khVOSOEbx37NsLx2k4xLsg7EvDmnonq1THAX4wpocxVGTrmp2Nu+1DQV0
+ CzGNMDyF+Hhkq1XCuYOT8Ie7zAvPDvUY+H+exrV1iOIFKCq5/TcnXwowFLa3poD9iDVL
+ +m/3iQrRpP4PfWhvgehkXZ0BO0iS+cmhbUa8M8ZPH1uNwQvOrbxMWyFYM5KIfOedwzME
+ u0Y3nF9xSQ2s2CR7vgVUoUSkmxgzGf+MQv2BcycXn2OqtT6oDPG0jF8eIhMc5GB/WHY5
+ kO+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6KLMCo5biRiC7s1o2u7KTvaufRUzTlqDNiiarYgvWeM=;
+ b=A358TbXTLbgHK2cVxiNYMFOFPA0gCKAJrNsln43GYrxK1LBxHPpRZ4RehbSCFB/KiN
+ 8nyTqci++tovc2UDNTuIqKzsuclZ9aShfjSEbTWwBF2XXbg+g2YRjKW7+OrwiWS3Jzp4
+ 6gvkIgCi65asVGZrpsWjObayTEybHxkKLsvPmVXQY6SPAjelqAhcYNpXrUJMq+5n6wXQ
+ QI9vr1av/MxRZ9do10IFksT+tNx865kH7MaG8BWSjN4K0Elkgi5l1LFZPqtcC9MqWoNC
+ s/Tw4lVI/rRGuZGd/zfHktCOXOirzhH+Qqumg+OgJYivZ2vfojkqCFgSsulZHe/xXfFn
+ LcRw==
+X-Gm-Message-State: AO0yUKV4Hu4tZpgXJABXbXyFuiCZyDfv48nvINVdL2IlMkQrAfe+gY7y
+ hwTrpNKRTgKf+O6+WBo6Is6VdgQlFF6SQaKZ
+X-Google-Smtp-Source: AK7set9YyjbWy6OW1oJO5WXZnAhO6TIXUaZhiBn+YCL2/c/e+GKMGLNSkW5VsZDNNqHcDlng8S3sTQ==
+X-Received: by 2002:a17:906:d8c4:b0:87f:546d:7cb5 with SMTP id
+ re4-20020a170906d8c400b0087f546d7cb5mr9990632ejb.37.1675073284752; 
+ Mon, 30 Jan 2023 02:08:04 -0800 (PST)
+Received: from localhost.localdomain ([80.211.22.60])
+ by smtp.googlemail.com with ESMTPSA id
+ y11-20020a50eb0b000000b00467481df198sm6562461edp.48.2023.01.30.02.08.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Jan 2023 02:08:03 -0800 (PST)
+From: Sergey Matyukevich <geomatsi@gmail.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Sergey Matyukevich <sergey.matyukevich@syntacore.com>
+Subject: [PATCH] target/riscv: set tval for triggered watchpoints
+Date: Mon, 30 Jan 2023 13:07:57 +0300
+Message-Id: <20230130100757.721372-1-geomatsi@gmail.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-Subject: Re: [PATCH v3 12/14] RISC-V: Add initial support for T-Head C906
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>,
- Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, =?UTF-8?Q?Heiko_St=c3=bcbner?=
- <heiko.stuebner@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Nelson Chu <nelson@rivosinc.com>, Kito Cheng <kito.cheng@sifive.com>,
- Cooper Qu <cooper.qu@linux.alibaba.com>,
- Lifang Xia <lifang_xia@linux.alibaba.com>,
- Yunhai Shang <yunhai@linux.alibaba.com>
-References: <20230124195945.181842-1-christoph.muellner@vrull.eu>
- <20230124195945.181842-13-christoph.muellner@vrull.eu>
- <64af1437-b910-e5b3-c462-0ef0c416ba39@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <64af1437-b910-e5b3-c462-0ef0c416ba39@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.6;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-6.freemail.mail.aliyun.com
-X-Spam_score_int: -99
-X-Spam_score: -10.0
-X-Spam_bar: ----------
-X-Spam_report: (-10.0 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.092, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=geomatsi@gmail.com; helo=mail-ej1-x62b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -62,26 +78,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2023 09:07:13 -0000
+X-List-Received-Date: Mon, 30 Jan 2023 10:08:14 -0000
 
+From: Sergey Matyukevich <sergey.matyukevich@syntacore.com>
 
-On 2023/1/25 5:26, Richard Henderson wrote:
-> On 1/24/23 09:59, Christoph Muellner wrote:
->> +++ b/target/riscv/cpu.h
->> @@ -27,6 +27,7 @@
->>   #include "qom/object.h"
->>   #include "qemu/int128.h"
->>   #include "cpu_bits.h"
->> +#include "cpu_vendorid.h"
->
-> I don't see that this ID is required for all users of riscv/cpu.h.
-> This include should be limited to cpu.c.
->
-OK. We can move it to cpu.c
+According to priviledged spec, if [sm]tval is written with a nonzero
+value when a breakpoint exception occurs, then [sm]tval will contain
+the faulting virtual address. Set tval to hit address when breakpoint
+exception is triggered by hardware watchpoint.
 
-Best Regards,
-Zhiwei
+Signed-off-by: Sergey Matyukevich <sergey.matyukevich@syntacore.com>
+---
+ target/riscv/cpu_helper.c | 3 +++
+ target/riscv/debug.c      | 1 +
+ 2 files changed, 4 insertions(+)
 
->
-> r~
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 9a28816521..d3be8c0511 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -1641,6 +1641,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         case RISCV_EXCP_VIRT_INSTRUCTION_FAULT:
+             tval = env->bins;
+             break;
++        case RISCV_EXCP_BREAKPOINT:
++            tval = env->badaddr;
++            break;
+         default:
+             break;
+         }
+diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+index bf4840a6a3..48ef3c59ea 100644
+--- a/target/riscv/debug.c
++++ b/target/riscv/debug.c
+@@ -761,6 +761,7 @@ void riscv_cpu_debug_excp_handler(CPUState *cs)
+ 
+     if (cs->watchpoint_hit) {
+         if (cs->watchpoint_hit->flags & BP_CPU) {
++            env->badaddr = cs->watchpoint_hit->hitaddr;
+             cs->watchpoint_hit = NULL;
+             do_trigger_action(env, DBG_ACTION_BP);
+         }
+-- 
+2.39.0
+
 
