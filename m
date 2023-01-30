@@ -1,40 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pMU7j-00067d-Fp
+	id 1pMU7j-00068x-Rt
 	for mharc-qemu-riscv@gnu.org; Mon, 30 Jan 2023 08:23:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pMU78-000549-7V
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pMU79-00057M-FD
  for qemu-riscv@nongnu.org; Mon, 30 Jan 2023 08:22:27 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pMU6q-0005m2-Iz
- for qemu-riscv@nongnu.org; Mon, 30 Jan 2023 08:22:25 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pMU6q-0005mF-O0
+ for qemu-riscv@nongnu.org; Mon, 30 Jan 2023 08:22:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  s=mimecast20190719; t=1675084925;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=xnuUy+MzQFFeHaD2MZP50NQ29I1xF6AysNgDL67JsxU=;
- b=AFLo/G+zyOhyVkspi80aLwCzSI2jhjwKENxy+7hktrP1AkALEkAz6mgfxIbl0giIXNNsIs
- KlmOKh9EnV+MJUFacvL3AIS0HCb+xZiyDtd6wrEd8ylfhnv1un1ejgnX4YCxdw1j9/NKjE
- G7VzRVkywIlShiaaAbKqecV3+0qMS6o=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=HNe/b8G/bUVnuc9EJ0VT+9hFK8iT5SkRTdPWic3uM/U=;
+ b=ChjuNv1N3jAeJtKakagaA2qsdwtoiUZmcNP7G7BT9ofiuH88U2AatTHjKg6mOPCTXYODoE
+ 0o4QwomUoQeS0Eqg1KMX7KgVeeT3kNT2N0YGrtibpkR5EiMqbBR60EEFKm5FMMiBInj97g
+ HdkgvZ3jcCV/WDXjsWHfiFpJPBmCS64=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-146-JlEXRDP7OEuWVmr0Y5n3qQ-1; Mon, 30 Jan 2023 08:22:00 -0500
-X-MC-Unique: JlEXRDP7OEuWVmr0Y5n3qQ-1
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
+ us-mta-38-3-SVRO6VMdGDEiH2zlR-kQ-1; Mon, 30 Jan 2023 08:21:59 -0500
+X-MC-Unique: 3-SVRO6VMdGDEiH2zlR-kQ-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B03413C0E449;
- Mon, 30 Jan 2023 13:21:59 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B031D80D0FB;
+ Mon, 30 Jan 2023 13:21:58 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 8A001492B05;
- Mon, 30 Jan 2023 13:21:59 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 89B2E422AE;
+ Mon, 30 Jan 2023 13:21:58 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 7829321E691F; Mon, 30 Jan 2023 14:21:56 +0100 (CET)
+ id 61FC921E6913; Mon, 30 Jan 2023 14:21:56 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
@@ -46,15 +46,15 @@ Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
  kkostiuk@redhat.com, tsimpson@quicinc.com, palmer@dabbelt.com,
  bin.meng@windriver.com, qemu-block@nongnu.org, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v5 19/20] 9p: Drop superfluous include of linux/limits.h
-Date: Mon, 30 Jan 2023 14:21:55 +0100
-Message-Id: <20230130132156.1868019-20-armbru@redhat.com>
+Subject: [PATCH v5 12/20] net: Clean up includes
+Date: Mon, 30 Jan 2023 14:21:48 +0100
+Message-Id: <20230130132156.1868019-13-armbru@redhat.com>
 In-Reply-To: <20230130132156.1868019-1-armbru@redhat.com>
 References: <20230130132156.1868019-1-armbru@redhat.com>
 MIME-Version: 1.0
-Content-type: text/plain
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.9
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
@@ -76,29 +76,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2023 13:22:29 -0000
+X-List-Received-Date: Mon, 30 Jan 2023 13:22:31 -0000
+
+Clean up includes so that qemu/osdep.h is included first in .c, and
+not in .h, and headers which it implies are not included manually.
+
+This commit was created with scripts/clean-includes.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Christian Schoenebeck <qemu_oss@crudebyte.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- hw/9pfs/9p.c | 3 ---
- 1 file changed, 3 deletions(-)
+ net/vmnet_int.h | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/hw/9pfs/9p.c b/hw/9pfs/9p.c
-index 9621ec1341..aa736af380 100644
---- a/hw/9pfs/9p.c
-+++ b/hw/9pfs/9p.c
-@@ -17,9 +17,6 @@
-  */
+diff --git a/net/vmnet_int.h b/net/vmnet_int.h
+index adf6e8c20d..d0b90594f2 100644
+--- a/net/vmnet_int.h
++++ b/net/vmnet_int.h
+@@ -10,7 +10,6 @@
+ #ifndef VMNET_INT_H
+ #define VMNET_INT_H
  
- #include "qemu/osdep.h"
--#ifdef CONFIG_LINUX
--#include <linux/limits.h>
--#endif
- #include <glib/gprintf.h>
- #include "hw/virtio/virtio.h"
- #include "qapi/error.h"
+-#include "qemu/osdep.h"
+ #include "vmnet_int.h"
+ #include "clients.h"
+ 
 -- 
 2.39.0
 
