@@ -1,46 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pMSUU-00080l-8Z
-	for mharc-qemu-riscv@gnu.org; Mon, 30 Jan 2023 06:38:26 -0500
+	id 1pMTha-0000iz-3j
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Jan 2023 07:56:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pMSUT-000801-4A
- for qemu-riscv@nongnu.org; Mon, 30 Jan 2023 06:38:25 -0500
-Received: from imap5.colo.codethink.co.uk ([78.40.148.171])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pMThX-0000iA-KN
+ for qemu-riscv@nongnu.org; Mon, 30 Jan 2023 07:56:00 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1pMSUQ-0002Gl-Em
- for qemu-riscv@nongnu.org; Mon, 30 Jan 2023 06:38:24 -0500
-Received: from [78.40.148.178] (helo=webmail.codethink.co.uk)
- by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1pMSUH-002RNM-2F; Mon, 30 Jan 2023 11:38:13 +0000
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pMThW-0000is-2p
+ for qemu-riscv@nongnu.org; Mon, 30 Jan 2023 07:55:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1675083357;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=X1MvUoO4rGgk5ZUx7XU1kZj53hjbVCR8EAsQuTx6Gqg=;
+ b=PEgVWkGS4FM3q7UnMdAgDPF7qC3cmQWRRCehx7YyGnWFOwyPm4GaAFKQEA1Wwvs7Vvx3hx
+ KEvKu90Nuae1FZ1Is8zKJcTcR4L+fuRLldb8FhhPzF/6lhoeeoGnr3+Qo0Dh8qqTmPAEy/
+ vCDXpBkd6UGQGKcBcFYf2vlwGRJYe4M=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-383-hydz8xuxPwaj3e_cwe3reA-1; Mon, 30 Jan 2023 07:55:51 -0500
+X-MC-Unique: hydz8xuxPwaj3e_cwe3reA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 2C3582A59576;
+ Mon, 30 Jan 2023 12:55:50 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 5B7922166B26;
+ Mon, 30 Jan 2023 12:55:49 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 467DE21E6A1F; Mon, 30 Jan 2023 13:55:48 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: qemu-devel@nongnu.org,  richard.henderson@linaro.org,
+ pbonzini@redhat.com,  kwolf@redhat.com,  hreitz@redhat.com,
+ imp@bsdimp.com,  kevans@freebsd.org,  berrange@redhat.com,
+ groug@kaod.org,  qemu_oss@crudebyte.com,  philmd@linaro.org,
+ peter.maydell@linaro.org,  alistair@alistair23.me,  jasowang@redhat.com,
+ jonathan.cameron@huawei.com,  kbastian@mail.uni-paderborn.de,
+ quintela@redhat.com,  dgilbert@redhat.com,  michael.roth@amd.com,
+ kkostiuk@redhat.com,  tsimpson@quicinc.com,  palmer@dabbelt.com,
+ bin.meng@windriver.com,  qemu-block@nongnu.org,  qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: Re: [PATCH v4 01/19] scripts/clean-includes: Fully skip / ignore files
+References: <20230119065959.3104012-1-armbru@redhat.com>
+ <20230119065959.3104012-2-armbru@redhat.com>
+ <20230128052749-mutt-send-email-mst@kernel.org>
+Date: Mon, 30 Jan 2023 13:55:48 +0100
+In-Reply-To: <20230128052749-mutt-send-email-mst@kernel.org> (Michael
+ S. Tsirkin's message of "Sat, 28 Jan 2023 05:28:26 -0500")
+Message-ID: <87r0vcb2qz.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
 MIME-Version: 1.0
-Date: Mon, 30 Jan 2023 11:38:13 +0000
-From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
-To: Alistair Francis <Alistair.Francis@wdc.com>
-Cc: philipp.tomsich@vrull.eu, frank.chang@sifive.com,
- dickon.hood@codethink.co.uk, qemu-riscv@nongnu.org, palmer@dabbelt.com,
- kvm@vger.kernel.org, pbonzini@redhat.com, bin.meng@windriver.com
-Subject: Re: Fwd: [RFC PATCH 00/39] Add RISC-V cryptography extensions
- standardisation
-In-Reply-To: <606a3bcc7c7428d2504d2c60055e76255454c558.camel@wdc.com>
-References: <20230119143528.1290950-1-lawrence.hunter@codethink.co.uk>
- <380600FF-17AC-4134-85C7-CBDF6E34F0E2@getmailspring.com>
- <ad8d999b4e972aa0ea4a276b3d4d8dc355c2d435.camel@wdc.com>
- <CAAeLtUC5p=k4XiXoZxEA6qnLHpmjnuKT+6WUaskbt=uYB1XjrA@mail.gmail.com>
- <606a3bcc7c7428d2504d2c60055e76255454c558.camel@wdc.com>
-Message-ID: <c3e76130725358ade9e87681f3c0233f@codethink.co.uk>
-X-Sender: lawrence.hunter@codethink.co.uk
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=78.40.148.171;
- envelope-from=lawrence.hunter@codethink.co.uk; helo=imap5.colo.codethink.co.uk
-X-Spam_score_int: -13
-X-Spam_score: -1.4
-X-Spam_bar: -
-X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, URI_NOVOWEL=0.5 autolearn=ham autolearn_force=no
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -53,235 +79,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2023 11:38:25 -0000
+X-List-Received-Date: Mon, 30 Jan 2023 12:56:00 -0000
 
+"Michael S. Tsirkin" <mst@redhat.com> writes:
 
+> On Thu, Jan 19, 2023 at 07:59:41AM +0100, Markus Armbruster wrote:
+>> When clean-includes claims to skip or ignore a file, only the part
+>> that sanitizes use of qemu/osdep.h skips the file.  The part that
+>> looks for duplicate #include does not, and neither does committing to
+>> Git.
+>> 
+>> The latter can get unrelated stuff included in the commit, but only if
+>> you run clean-includes in a dirty tree, which is unwise.  Messed up
+>> when we added skipping in commit fd3e39a40c "scripts/clean-includes:
+>> Enhance to handle header files".
+>> 
+>> The former can cause bogus reports for --check-dup-head.  Added in
+>> commit d66253e46a "scripts/clean-includes: added duplicate #include
+>> check", duplicating the prior mistake.
+>> 
+>> Fix the script to fully skip files.
+>> 
+>> Fixes: fd3e39a40ca2ee26b09a5de3149af8b056b85233
+>> Fixes: d66253e46ae2b9c36a9dd90b2b74c0dfa5804b22
+>
+> Isn't
+> Fixes: %h (\"%s\")
+>
+> the accepted format for this?
 
-On 2023-01-29 22:23, Alistair Francis wrote:
-> On Sun, 2023-01-29 at 23:12 +0100, Philipp Tomsich wrote:
->> 
->> 
->> On Sun, 29 Jan 2023 at 23:08, Alistair Francis
->> <Alistair.Francis@wdc.com> wrote:
->> > On Thu, 2023-01-26 at 09:21 +0000, Lawrence Hunter wrote:
->> > > Follow up for add RISC-V vector cryptography extensions
->> > > standardisation
->> > > RFC: we've not received any comments and would like to move this
->> > > series
->> > > towards getting merged. Does anyone have time to review it, and
->> > > should
->> > > we look at resubmitting for merging soon?
->> >
->> > Hello,
->> >
->> > This series never made it to the QEMU list. It looks like it was
->> > never
->> > sent to the general qemu-devel mailing list.
->> >
->> 
->> 
->> This has so far been more than a little painful for our review, as we
->> can't just pull the patches down from patchwork to use our regular
->> test-and-review flow.
->> Should we wait until the resubmission for our review?
+It seems to be common these days.  I'll adjust.
 
-We have pushed a branch 'rfc-zvk-19-01-23' with our commits based on a
-fairly recent master. Hopefully this will ease the review process.
-
-https://github.com/CodethinkLabs/qemu-ct.git
-
-> 
-> Up to you. It won't be merged unless it has been sent to the general
-> mailing list, so you can either get a head start or just wait.
-> 
->> 
->> Note that the current series is not in-sync with the latest
->> specification.
-> 
-> It's only an RFC, so for now that's ok as it won't be merged anyway.
-> 
-> Alistair
-> 
->> We'll try to point out the specific deviations (we have a tree that
->> we've been keeping in sync with the changes to the spec since mid-
->> December) in our reviews.
->> 
->> Cheers,
->> Philipp.
->>  
->> > When submitting patches can you please follow the steps here:
->> > https://www.qemu.org/docs/master/devel/submitting-a-patch.html#submitting-your-patches
->> >
->> > It's important that all patches are sent to the qemu-devel mailing
->> > list
->> > (that's actually much more important then the RISC-V mailing list).
->> >
->> > Alistair
->> >
->> > >
->> > > ---------- Forwarded Message ---------
->> > >
->> > > From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
->> > > Subject: [RFC PATCH 00/39] Add RISC-V cryptography extensions
->> > > standardisation
->> > > Date: Jan 19 2023, at 2:34 pm
->> > > To: qemu-riscv@nongnu.org
->> > > Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com, Lawrence
->> > > Hunter <lawrence.hunter@codethink.co.uk>
->> > >
->> > >
->> > > > This RFC introduces an implementation for the six instruction
->> > > > sets
->> > > > of the draft RISC-V cryptography extensions standardisation
->> > > > specification. Once the specification has been ratified we will
->> > > > submit
->> > > > these changes as a pull request email to this mailing list.
->> > > > Would
->> > > > this
->> > > > be prefered by instruction group or unified as in this RFC?
->> > > >
->> > > > This patch set implements the instruction sets as per the
->> > > > 20221202
->> > > > version of the specification (1).
->> > > >
->> > > > Work performed by Dickon, Lawrence, Nazar, Kiran, and William
->> > > > from
->> > > > Codethink
->> > > > sponsored by SiFive, and Max Chou from SiFive.
->> > > >
->> > > > 1. https://github.com/riscv/riscv-crypto/releases
->> > > >
->> > > > Dickon Hood (1):
->> > > >  target/riscv: Add vrol.[vv,vx] and vror.[vv,vx,vi] decoding,
->> > > >    translation and execution support
->> > > >
->> > > > Kiran Ostrolenk (4):
->> > > >  target/riscv: Add vsha2ms.vv decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: add zvksh cpu property
->> > > >  target/riscv: Add vsm3c.vi decoding, translation and execution
->> > > > support
->> > > >  target/riscv: expose zvksh cpu property
->> > > >
->> > > > Lawrence Hunter (16):
->> > > >  target/riscv: Add vclmul.vv decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vclmul.vx decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vclmulh.vv decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vclmulh.vx decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vaesef.vv decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vaesef.vs decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vaesdf.vv decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vaesdf.vs decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vaesdm.vv decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vaesdm.vs decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vaesz.vs decoding, translation and execution
->> > > > support
->> > > >  target/riscv: Add vsha2c[hl].vv decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vsm3me.vv decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: add zvkg cpu property
->> > > >  target/riscv: Add vghmac.vv decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: expose zvkg cpu property
->> > > >
->> > > > Max Chou (5):
->> > > >  crypto: Move SM4_SBOXWORD from target/riscv
->> > > >  crypto: Add SM4 constant parameter CK.
->> > > >  target/riscv: Add zvksed cfg property
->> > > >  target/riscv: Add Zvksed support
->> > > >  target/riscv: Expose Zvksed property
->> > > >
->> > > > Nazar Kazakov (10):
->> > > >  target/riscv: add zvkb cpu property
->> > > >  target/riscv: Add vrev8.v decoding, translation and execution
->> > > > support
->> > > >  target/riscv: Add vandn.[vv,vx,vi] decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: expose zvkb cpu property
->> > > >  target/riscv: add zvkns cpu property
->> > > >  target/riscv: Add vaeskf1.vi decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vaeskf2.vi decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: expose zvkns cpu property
->> > > >  target/riscv: add zvknh cpu properties
->> > > >  target/riscv: expose zvknh cpu properties
->> > > >
->> > > > William Salmon (3):
->> > > >  target/riscv: Add vbrev8.v decoding, translation and execution
->> > > > support
->> > > >  target/riscv: Add vaesem.vv decoding, translation and
->> > > > execution
->> > > >    support
->> > > >  target/riscv: Add vaesem.vs decoding, translation and
->> > > > execution
->> > > >    support
->> > > >
->> > > > crypto/sm4.c                                 |   10 +
->> > > > include/crypto/sm4.h                         |    8 +
->> > > > include/qemu/bitops.h                        |   32 +
->> > > > target/arm/crypto_helper.c                   |   10 +-
->> > > > target/riscv/cpu.c                           |   15 +
->> > > > target/riscv/cpu.h                           |    7 +
->> > > > target/riscv/crypto_helper.c                 |    1 +
->> > > > target/riscv/helper.h                        |   69 ++
->> > > > target/riscv/insn32.decode                   |   48 +
->> > > > target/riscv/insn_trans/trans_rvzvkb.c.inc   |  164 +++
->> > > > target/riscv/insn_trans/trans_rvzvkg.c.inc   |    8 +
->> > > > target/riscv/insn_trans/trans_rvzvknh.c.inc  |   47 +
->> > > > target/riscv/insn_trans/trans_rvzvkns.c.inc  |  121 +++
->> > > > target/riscv/insn_trans/trans_rvzvksed.c.inc |   38 +
->> > > > target/riscv/insn_trans/trans_rvzvksh.c.inc  |   20 +
->> > > > target/riscv/meson.build                     |    4 +-
->> > > > target/riscv/translate.c                     |    6 +
->> > > > target/riscv/vcrypto_helper.c                | 1013
->> > > > ++++++++++++++++++
->> > > > target/riscv/vector_helper.c                 |  242 +----
->> > > > target/riscv/vector_internals.c              |   63 ++
->> > > > target/riscv/vector_internals.h              |  226 ++++
->> > > > 21 files changed, 1902 insertions(+), 250 deletions(-)
->> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvkb.c.inc
->> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvkg.c.inc
->> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvknh.c.inc
->> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvkns.c.inc
->> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvksed.c.inc
->> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvksh.c.inc
->> > > > create mode 100644 target/riscv/vcrypto_helper.c
->> > > > create mode 100644 target/riscv/vector_internals.c
->> > > > create mode 100644 target/riscv/vector_internals.h
->> > > >
->> > > > --
->> > > > 2.39.1
->> > > >
->> > > >
->> > > >
->> >
 
