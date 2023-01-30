@@ -1,67 +1,84 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pMLoR-0006JI-Tc
-	for mharc-qemu-riscv@gnu.org; Sun, 29 Jan 2023 23:30:35 -0500
+	id 1pMMxR-0005uP-GF
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Jan 2023 00:43:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pMLoP-0006It-1g; Sun, 29 Jan 2023 23:30:34 -0500
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pMMxP-0005tm-Np
+ for qemu-riscv@nongnu.org; Mon, 30 Jan 2023 00:43:55 -0500
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pMLoN-0003ln-MK; Sun, 29 Jan 2023 23:30:32 -0500
-Received: by mail-ed1-x534.google.com with SMTP id f7so2510105edw.5;
- Sun, 29 Jan 2023 20:30:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sKM975hR4vvxtURam1VMgGqxqPbVKVk/vNjQBoFK/6o=;
- b=RdG3h4wsVDxV6ID03MlNm0U7bcqRDE6tOznxpXrrzui32sN9Upg6pzzgPZZXPGrDu4
- 3zvzcSmnfF0O3UMAiK084POQeNENg0BcPCtigz/63WclB5rskinej6zidrD3tDr3qjqy
- MxGbTpeDWkICZ9j47N51p5itcopANs80WtNfOitfY21oCZnSuW/t6MrKy0g8s14akuoe
- XsdI767hqTiwqlQsDJvHyjcrLzXU+YkcCcDfHPdWyFg2hfvP7BL7mtPlgoTC/XPmBKxT
- ySMbOJvYWF1ZNcBPM+WbS7pTvOkkLSQyGLXqfRuiWhNW+JoSR1wUeJfv6fBU7k0I5ZwL
- rqjg==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pMMxN-0005qo-TI
+ for qemu-riscv@nongnu.org; Mon, 30 Jan 2023 00:43:55 -0500
+Received: by mail-pl1-x62d.google.com with SMTP id d3so10424045plr.10
+ for <qemu-riscv@nongnu.org>; Sun, 29 Jan 2023 21:43:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=UX/xnewUGY/tCtBu4Z4GPmEPV9XOCWCsqbIcHA6j5oI=;
+ b=iimcB6C4xkwBJ2i5+AFfIq5HYj09JvQb4Yd2WRTXMhL2oLycST6RmPqkh/OaBC3aFp
+ CgzECp3Rd+76PqBc1Wsu5zkBtjKG4XfEJEYAEm9HNBJxIq8AYEG8Y6p+jvfMNbNrCbCd
+ vqrky268v/YkYVXdz3xwc79zjNQeHj/ylfZNHT5q9I0x9MYJyq6qIj7Kwfk88NHpOiTW
+ 7f64nsYRnTKKSo6mIGjKx/xT7AoBXSwhLCgLNBGo5gZmFlhYpPXQVhPBrgYcDxv8Pl9M
+ JHwPpsYV1FV3ayZLADC4PSYh8SPzAnt66yYLOuDCfJs5JBJ5/5kIoVPDOJNreqczCIKQ
+ digw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sKM975hR4vvxtURam1VMgGqxqPbVKVk/vNjQBoFK/6o=;
- b=6w5RcI9BARxhjr4yPEDH/+d8+mBvp2dnRRaxnT6ke7YBz7tuCH7c4w+R5lG1VbCAtP
- 1uQy5aYJSeMBUmbH/FO62NxWg2YmamUjysgcCfawU+v2uAJYqIm32+jMWbdWe5l8dUW+
- uTW41DEUahrsjwNQhbUMd1u4bsPUgyhsUQx0aBR1iHEdy0u52ss49WPj3pW0B3bdjYwZ
- FGpNdGn4zB5l6jwtAuE4UTdTS5dem3dj0mdgv/X+ugvVDUcW0SJ09lXI7swPHtbKpLF2
- TdIcy8Koci368tXeuc3Ykxhk+qaEmDsV7VD/C7CuNEi5LE6Rf1TsjSwyp5D3RxbJe2Bv
- X8iQ==
-X-Gm-Message-State: AO0yUKVQodz7wmI0PF601ZLa+1Bzel3/8e3xHI3UoyeOm2Oc597Pn4ra
- pn3AWeNqq2XCUxyRlW42XiFdgigyTQkLAhz+1RU=
-X-Google-Smtp-Source: AK7set+KSc1qeu6BPxfc7nMAQrOCM5RsuQACW+XHc8fF+2S9fh3u5n7hK9E/83V9MToi0q8VqCSwiiIwWf0zn9mo90Q=
-X-Received: by 2002:a05:6402:f24:b0:4a2:28f6:984b with SMTP id
- i36-20020a0564020f2400b004a228f6984bmr1675841eda.29.1675053029719; Sun, 29
- Jan 2023 20:30:29 -0800 (PST)
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=UX/xnewUGY/tCtBu4Z4GPmEPV9XOCWCsqbIcHA6j5oI=;
+ b=Fpm9fpsgADTb3gWI5Wzxk1bl53XNYrgSBaTcqy1RICcJpREWJQ/9CIYW0VSTq9/dST
+ FEhfiNxLtx7P2t3pc1cwbp71+IxPZ/TqjcvgQoCGr6hnO8KJX0XiZq+dbq97j3L5URZL
+ qZXzpUs040voiBOuoNpu4uBzC8Qj6OB8yBQ/ObSf6lguNB78rSBScdLKVzprng5Fi8Z9
+ 2A6OF9jo1Z7sy/cdmRqYjdRW1DkGhVKuHJ8h7SdsBQvTwvupctXF8hNtsYlc38+V1E4G
+ APBxsJ6CS8uIu6FWki5TjGZTmOc7doET+TA8Q1//fKAvGBwr75GNr2stJpBYqSJlVN+9
+ ZOLQ==
+X-Gm-Message-State: AO0yUKVq+/Ku9VJFH0iF0jhdT3O+huBskKllZve50o49m8jUCpPhEEhl
+ O4GgzmU9jwJHwV6rut0hxD2Kaw==
+X-Google-Smtp-Source: AK7set9rPElhFC5fdm28zakJA6xD54eJNSdwoVIunhECjyiHMoBjV1j+LeuKhVzcZPHPWNWq2HC8cQ==
+X-Received: by 2002:a17:902:ce8a:b0:196:2d55:5b96 with SMTP id
+ f10-20020a170902ce8a00b001962d555b96mr21413164plg.24.1675057432136; 
+ Sun, 29 Jan 2023 21:43:52 -0800 (PST)
+Received: from [192.168.50.50] ([173.197.98.118])
+ by smtp.gmail.com with ESMTPSA id
+ w9-20020a170902d3c900b0019337bf957dsm6730888plb.296.2023.01.29.21.43.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 29 Jan 2023 21:43:51 -0800 (PST)
+Message-ID: <7f8383f6-e860-5e3e-e89c-dfdac4e05dc5@linaro.org>
+Date: Sun, 29 Jan 2023 19:43:43 -1000
 MIME-Version: 1.0
-References: <20230125162010.1615787-1-alexghiti@rivosinc.com>
- <20230125162010.1615787-6-alexghiti@rivosinc.com>
-In-Reply-To: <20230125162010.1615787-6-alexghiti@rivosinc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 30 Jan 2023 12:30:18 +0800
-Message-ID: <CAEUhbmU06kV90VUigQGuhnO7QEm5y8i+ZeWkQHzV2MzTLyTTWA@mail.gmail.com>
-Subject: Re: [PATCH v8 5/5] riscv: Correctly set the device-tree entry
- 'mmu-type'
-To: Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>, 
- Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x534.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Subject: Re: [PATCH v3 08/14] RISC-V: Adding T-Head MemPair extension
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, =?UTF-8?Q?Heiko_St=c3=bcbner?=
+ <heiko.stuebner@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Nelson Chu <nelson@rivosinc.com>, Kito Cheng <kito.cheng@sifive.com>,
+ Cooper Qu <cooper.qu@linux.alibaba.com>,
+ Lifang Xia <lifang_xia@linux.alibaba.com>,
+ Yunhai Shang <yunhai@linux.alibaba.com>
+References: <20230124195945.181842-1-christoph.muellner@vrull.eu>
+ <20230124195945.181842-9-christoph.muellner@vrull.eu>
+ <48ff4151-25d9-4b4d-d50a-6516000599c7@linaro.org>
+ <8385d954-678e-d78d-c3ae-d74a4a902907@linux.alibaba.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <8385d954-678e-d78d-c3ae-d74a4a902907@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62d.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.092,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -76,20 +93,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2023 04:30:34 -0000
+X-List-Received-Date: Mon, 30 Jan 2023 05:43:55 -0000
 
-On Thu, Jan 26, 2023 at 12:25 AM Alexandre Ghiti <alexghiti@rivosinc.com> wrote:
->
-> The 'mmu-type' should reflect what the hardware is capable of so use the
-> new satp_mode field in RISCVCPUConfig to do that.
->
-> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  hw/riscv/virt.c | 19 ++++++++++---------
->  1 file changed, 10 insertions(+), 9 deletions(-)
->
+On 1/29/23 16:03, LIU Zhiwei wrote:
+> Thanks. It's a bug. We should load all memory addresses to  local TCG temps first.
+> 
+> Do you think we should probe all the memory addresses for the store pair instructions? If 
+> so, can we avoid the use of a helper function?
 
-Reviewed-by: Bin Meng <bmeng@tinylab.org>
+Depends on what the hardware does.  Even with a trap in the middle the stores are 
+restartable, since no register state changes.
+
+But if you'd like no changes verifying both stores, for this case you can pack the pair 
+into a larger data type: TCGv_i64 for pair of 32-bit, and TCGv_i128 for pair of 64-bit.
+Patches for TCGv_i128 [1] are just finishing review; patches to describe atomicity of the 
+larger operation are also on list [2]. Anyway, the idea is that you issue one TCG memory 
+operation, the entire operation is validated, and then the stores happen.
+
+
+> The main reason is that assembler can do this check. Is it necessary to check this in QEMU?
+
+Yes.  Conciser what happens when the insn is encoded with .long.  Does the hardware trap 
+an illegal instruction?  Is the behavior simply unspecified?  The manual could be improved 
+to specify, akin to the Arm terms: UNDEFINED, CONSTRAINED UNPREDICTABLE, IMPLEMENTATION 
+DEFINED, etc.
+
+
+r~
+
+[1] https://patchew.org/QEMU/20230126043824.54819-1-richard.henderson@linaro.org/
+[2] https://patchew.org/QEMU/20221118094754.242910-1-richard.henderson@linaro.org/
 
