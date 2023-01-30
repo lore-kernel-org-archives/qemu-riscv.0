@@ -1,62 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pMGx9-0000om-Sn
-	for mharc-qemu-riscv@gnu.org; Sun, 29 Jan 2023 18:19:15 -0500
+	id 1pMJGE-0005uu-9A
+	for mharc-qemu-riscv@gnu.org; Sun, 29 Jan 2023 20:47:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pMGx7-0000oV-QJ; Sun, 29 Jan 2023 18:19:13 -0500
-Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
+ id 1pMJG4-0005uA-A2; Sun, 29 Jan 2023 20:46:57 -0500
+Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pMGx6-0005vT-2k; Sun, 29 Jan 2023 18:19:13 -0500
-Received: by mail-vs1-xe2f.google.com with SMTP id i188so10775760vsi.8;
- Sun, 29 Jan 2023 15:19:11 -0800 (PST)
+ id 1pMJG1-0002HZ-HB; Sun, 29 Jan 2023 20:46:55 -0500
+Received: by mail-vs1-xe31.google.com with SMTP id 187so10970062vsv.10;
+ Sun, 29 Jan 2023 17:46:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cH+miPkzbGDTbf0TElGPqQol+Y6u3aLOc3n01pQi59o=;
- b=HIRjxsbg8vGSvn2FDh4G2WkK8sjaTYjt/D64aCiLYjtX38ZSdXVzDvsjkqlKTrdt8N
- 1ZCwm2wCD01l8uV3wwtKZ//MHDM9Q/EqEgP0//+lakYlyMg4ECEilsAp/zsr1CG6lOJ4
- 0VwdPaSaSURlqsSXjMEJKjmtnX7wqlGLMkoRPBn7J08M52DfqqFvzFRPtd7nXOmpigEY
- nJx1np9oxVzaWfkLjwj+ch4j7T0N3MHOW5XUcEvGU+gC+YZm2BnQBN5MpQHsawGIBcqt
- IDuYanALL6KZ63q6w22FvmF3VtV5JM+aVcwAHUfdcOFsufqKqse3tZFd+OukHHQXnobq
- ExKw==
+ bh=jTcyvn84Ktx1SzMuYPD98jEGHANSEo8cFAF3Fz3MzO8=;
+ b=F/TfoWK6JIcQ7bghBKyH8suyY8KDEAWTdpEtajQLYGOfWLr9bJIxi+VgREdPCcP4Ce
+ uck7HKsBqeU7bcy4nLZYEr4nL/ELNHPz4YtT9fNttFbuCg9dHmm+fn69X7ZLgVldyrAq
+ /JH/6McoaN+6rhhFkjjJUR9wldIvb7MdtJRIFkc27FehQ4RPmxbBYAGKQdPe/I1xXvsR
+ hcXXL1U5JPW6BkvlpGhbmvgEM9axkYMm1qMf2Tdzi9s28/NPRzAD63yq/VkLPA4nfvHh
+ jVmCAQkO2unZdp5ZNoxT0kPQFcTwYUzjQaMV4ZYrSRrs6/xciNTxcxhfeaWtrQ95EFIn
+ z6yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cH+miPkzbGDTbf0TElGPqQol+Y6u3aLOc3n01pQi59o=;
- b=DLzRhVpQ6lcAFZhGhery1zbl2mf7ul64WSy3Wyt4ql0m2VdsccqDYQ/A6WpMQWBLl0
- +661B/wcg0+b4RTjOVDKAZbDw005ecK7LhEu2jnBDMDkbT3PNbiVUysSX1Xiqb/7ECa0
- P7MSy86ABP88SpuQQeLudiXTzAfOQo0CKS7Y0Y7WLfJJYVCyp0ZlTkdrPNXr529QUmcJ
- MCdQ4daMexXwxjQK7BO2YMYpNG+ySeG6mgnl0PNJEkZ1CA7HtepDBD7PfkkXMdSQyStX
- uSZ0SPKcJ/7zIbyae0ZGs+FoOMkzX3qeo1Gyb9494OrjTnbX0sXIksUlyZOGp/NLoW+T
- DMIQ==
-X-Gm-Message-State: AO0yUKXkBDVg5iJqsrI853zh71EvwoeIZyA9J5oyRFdRNosVNaAJYLLv
- BAen211Q7XRKLqiLm1s+dkX7OYIhEfItkJjRvIIFIMpOL4iXdA==
-X-Google-Smtp-Source: AK7set8HWAIXxuPRgacse35G3WsNIe1R9bmRYaqi1tnfJcyge+wmoQ67KS9nQXhcw5ArJBViJR7FZDQ6kn+hfb05PJA=
-X-Received: by 2002:a67:e101:0:b0:3f0:89e1:7c80 with SMTP id
- d1-20020a67e101000000b003f089e17c80mr796810vsl.72.1675034350837; Sun, 29 Jan
- 2023 15:19:10 -0800 (PST)
+ bh=jTcyvn84Ktx1SzMuYPD98jEGHANSEo8cFAF3Fz3MzO8=;
+ b=oiyDQBT0ytrqCCU5P+9oS4ajpHh9w3RQSo+FBxitwF5d8FmE3Nqu9utpG2BNGXN5ob
+ 3plt7Kf05jGWCNcwyXea7UM/qFJtW5UWvQ5YKbfV3WWXD2tGXvQd+37LZHQOb1YobL39
+ J45AeEK1KHKLr5i55Ap+K/dGbmZeqt+r5Q0+mT1Kqrdyp7kdx46oDpkvsikmdAod7xO3
+ 5b33r60Gwg/LFF0x09Bwsk1mtrIE2x4Qx8aPQKrI8Ov+EdfwucY6BDYfJ94y9hy9MQJm
+ mQksFtAjbNkpsw40hNGaRdT7zLuQtVr2ElIeYx83XYUq5HQ3kvhorJQxoIrvnLySa+oJ
+ 1xiw==
+X-Gm-Message-State: AO0yUKUeivHwP/70tJKZfLmnWs4V34NErvgzJco/bOChQyyEM2HQBt/C
+ 3YNqYOl/f2KAiua8+wd/OdEoOUEXREj4ts4QCaY=
+X-Google-Smtp-Source: AK7set9+ATjERnsmXGraOfm4XULr7IQBTJRBueuh27WRU7M/x+6rnGxVhuknV1m8oBzNv1fzLWi6w9pBn7Xd6ZMJqt8=
+X-Received: by 2002:a05:6102:232e:b0:3ee:4ef8:45d3 with SMTP id
+ b14-20020a056102232e00b003ee4ef845d3mr1165177vsa.64.1675043211636; Sun, 29
+ Jan 2023 17:46:51 -0800 (PST)
 MIME-Version: 1.0
-References: <20230123035754.75553-1-alistair.francis@opensource.wdc.com>
- <CAEUhbmUisvp3QFhnz0Ty74=7zn-h4UpdC_b9E3LNr8B7Bp8Y1Q@mail.gmail.com>
- <CAKmqyKNQ5php2gdJsmL6cmRKkjggHcdoo2Lfw4Z9goQAHtLVQg@mail.gmail.com>
- <CAEUhbmWozgB_u=dPkK0ExMLG69W660qEOgc+BDVgMGpgntM0JA@mail.gmail.com>
-In-Reply-To: <CAEUhbmWozgB_u=dPkK0ExMLG69W660qEOgc+BDVgMGpgntM0JA@mail.gmail.com>
+References: <20230124212234.412630-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20230124212234.412630-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 30 Jan 2023 09:18:44 +1000
-Message-ID: <CAKmqyKNYp=NhHAA6M8vDUvjw1TkRSh2u6Sy42GgaSDiahePfag@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: boot: Don't use CSRs if they are disabled
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@opensource.wdc.com>,
- qemu-devel@nongnu.org, 
- qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
- Bin Meng <bin.meng@windriver.com>
+Date: Mon, 30 Jan 2023 11:46:25 +1000
+Message-ID: <CAKmqyKP0iRT8iEpbSJKypyBwtEHE_-LJf4wbk5tTuzgDbuxYqA@mail.gmail.com>
+Subject: Re: [PATCH v4 0/3] hw/riscv: misc cleanups
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,82 +71,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Jan 2023 23:19:14 -0000
+X-List-Received-Date: Mon, 30 Jan 2023 01:47:00 -0000
 
-On Thu, Jan 26, 2023 at 10:03 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, Jan 25, 2023 at 7:23 AM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> On Tue, Jan 24, 2023 at 9:42 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Tue, Jan 24, 2023 at 11:24 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > On Mon, Jan 23, 2023 at 11:58 AM Alistair Francis
-> > > <alistair.francis@opensource.wdc.com> wrote:
-> > > >
-> > > > From: Alistair Francis <alistair.francis@wdc.com>
-> > > >
-> > > > If the CSRs and CSR instructions are disabled because the Zicsr
-> > > > extension isn't enabled then we want to make sure we don't run any CSR
-> > > > instructions in the boot ROM.
-> > > >
-> > > > This patches removes the CSR instructions from the reset-vec if the
-> > > > extension isn't enabled. We replace the instruction with a NOP instead.
-> > > >
-> > > > Note that we don't do this for the SiFive U machine, as we are modelling
-> > > > the hardware in that case.
-> > > >
-> > > > Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1447
-> > > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > ---
-> > > >  hw/riscv/boot.c | 9 +++++++++
-> > > >  1 file changed, 9 insertions(+)
-> > > >
-> > > > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> > > > index 2594276223..cb27798a25 100644
-> > > > --- a/hw/riscv/boot.c
-> > > > +++ b/hw/riscv/boot.c
-> > > > @@ -356,6 +356,15 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts
-> > > >          reset_vec[4] = 0x0182b283;   /*     ld     t0, 24(t0) */
-> > > >      }
-> > > >
-> > > > +    if (!harts->harts[0].cfg.ext_icsr) {
-> > > > +        /*
-> > > > +         * The Zicsr extension has been disabled, so let's ensure we don't
-> > > > +         * run the CSR instruction. Let's fill the address with a non
-> > > > +         * compressed nop.
-> > > > +         */
-> > > > +        reset_vec[2] = 0x00000013;   /*     addi   x0, x0, 0 */
-> > > > +    }
-> > >
-> > > This is fine for a UP system. I am not sure how SMP can be supported
-> > > without Zicsr as we need to assign hartid in a0.
-> >
-> > Yeah. My thinking was that no one would be using a multicore system
-> > without Zicsr as it's such a core extension. If they are running
-> > without Zicsr they have probably hard coded a lot of things anyway and
-> > don't expect this to work.
-> >
-> > In general I think it's pretty rare to even run a RISC-V core without
-> > Zicsr at all.
-> >
+> Hi,
 >
-> As QEMU implements Zicsr anyway, and there is no way to support SMP
-> without Zicsr, should we disallow user to disable Zicsr in QEMU?
+> These are the last 3 patches from the series
+>
+> "[PATCH v3 0/7] riscv: fdt related cleanups"
+>
+> That can be sent in separate from the fdt work. Patches are all acked.
+>
+> Changes from v3:
+> - patches 1,2,3:
+>   - former patches 5, 6 and 7 from "[PATCH v3 0/7] riscv: fdt related cleanups"
+> - v3 link: https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg04464.html
+>
+> Daniel Henrique Barboza (3):
+>   hw/riscv/virt.c: calculate socket count once in create_fdt_imsic()
+>   hw/riscv/virt.c: rename MachineState 'mc' pointers to 'ms'
+>   hw/riscv/spike.c: rename MachineState 'mc' pointers to' ms'
 
-I feel like we don't need to do that. Here's my thinking:
+Thanks!
 
-Zicsr is a RISC-V extension, the RISC-V spec splits it out so that it
-can be disabled. In theory someone could build a multi-hart CPU
-without Zicsr in hardware, so QEMU should be able to model it.
-
-As well as that Zicsr is enabled by default, so a user has to know
-enough to disable it manually. At which point they probably know what
-they are doing, especially as no standard software will run without
-Zicsr. If that's what someone wants to do then we should allow them
-to, even if it's a bit strange.
+Applied to riscv-to-apply.next
 
 Alistair
 
 >
-> Regards,
-> Bin
+>  hw/riscv/spike.c |  18 +-
+>  hw/riscv/virt.c  | 462 ++++++++++++++++++++++++-----------------------
+>  2 files changed, 242 insertions(+), 238 deletions(-)
+>
+> --
+> 2.39.1
+>
+>
 
