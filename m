@@ -1,76 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pMwxO-00051x-M7
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Jan 2023 15:10:18 -0500
+	id 1pMx79-0006kD-L9
+	for mharc-qemu-riscv@gnu.org; Tue, 31 Jan 2023 15:20:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1pMwxL-00051O-Na
- for qemu-riscv@nongnu.org; Tue, 31 Jan 2023 15:10:15 -0500
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ id 1pMx78-0006jg-BN
+ for qemu-riscv@nongnu.org; Tue, 31 Jan 2023 15:20:22 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1pMwxJ-0000yh-E8
- for qemu-riscv@nongnu.org; Tue, 31 Jan 2023 15:10:15 -0500
-Received: by mail-wm1-x334.google.com with SMTP id
- m5-20020a05600c4f4500b003db03b2559eso11531706wmq.5
- for <qemu-riscv@nongnu.org>; Tue, 31 Jan 2023 12:10:12 -0800 (PST)
+ id 1pMx75-0002i2-Rq
+ for qemu-riscv@nongnu.org; Tue, 31 Jan 2023 15:20:21 -0500
+Received: by mail-wr1-x434.google.com with SMTP id t18so15381862wro.1
+ for <qemu-riscv@nongnu.org>; Tue, 31 Jan 2023 12:20:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=374h9EgviB07TZ//uSp3PBuOnSQUohPKvT41Rszmal0=;
- b=leA9Ml4uGQn0XdlMA1Kp+XZJxMyJ+oJHmcyyFTqPAQiMAYAbSbj8rq9Fxp2n7Lb6jY
- rGgpqRqDJz5Y2Jdhl0ulc46A7gq+jdyXWDl20xhLj1NqdcgiWemfqahcQ8OvTKAbekO7
- z0+/IkCR9moo/qcjZLGzHpOTAikeaY4OxQz0WDZqD9qw9Yvt8YeNcJojZOYT4i3WNk8X
- H1PiTw8NT4S9FeTlkkP5yOp7pIWpegAg95SAz9m3/2CuZfkBd3eWQNV35uByTYhiyiov
- MJnaefCpmUA+Ih41s8+f9uYoXSJZe5Rg58Pv6PATkfP4YSH5ts9QMzMqyCxDBQ3F7iTz
- lsFg==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9lo2K6GQSn2b50esA2/wF8fWoSdV5uNQzm7zIK6gS7A=;
+ b=N0o1V+d9l/rFdInUTnB/gVGHS5U1OU9v4E1C/i2OmVmlw/pAwgDdjI7otUNQ8wT5tH
+ KbEFSl+ngJ8b8leINdy3o49lCfZzAdQnkJ0ThOzFmHrgiVQ1ouVZxJuMNQiTkeCDUL0T
+ qOcbemp5jQ0fI7Oy28CGj1U5NrJjHkZzbHZoIUevSEtq/HCk6Z0pVRoYAk028hk00qLx
+ L4uuD9Iuo3EhqSW28Jt4ksirEpMMmU/LHPKMz73vNn4GoaXvcEKJ/deyoOOWgSeOmB2U
+ BZXEUCbIEl5hpLIS6ZYJqxNBpW4hOi9hFcK+2Bkbmeb+jsJcu27hS43VUmUsTxeWwujU
+ 4KnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=374h9EgviB07TZ//uSp3PBuOnSQUohPKvT41Rszmal0=;
- b=rsKxL/CTS4OX9KdTv7q0sn1vha3gkeRz5tMsmhnnMO+588EhKTVYXk6/MZbkV2UaPx
- 292rUQiIoItG7XynczkiKqe1fyEcqLbRCvhupRlOXbJKnaxTRXi9j3rDmZ0DsgWJ9fmS
- aCivpSzebvkqC0aIuUBfOiAwSAzaFcpMvx+Lupzc9jk65cBGdHScungv0mZ+JJLQC1Bb
- VkmToaEfuS599JtE3BOOoIIhA3Tu8+JL4Lf6z9ywy0Qh94dKkAihl1QKENqG62HxU0Et
- cXrV94typZaILYLWlSq50FeWTuxtQm4E/EyjPvrJF55MZtewi0N6VJL7Bv0ZB1oPJ0Do
- Hk1A==
-X-Gm-Message-State: AFqh2kosIoWAj/1wWmi+atzJxA42GvxWfL0oS2Wpjz5QZewBjfzGVLlm
- pXIQ1rbW2ET9vxrXGakxvR3fBHdSt4TCW438pYYbSw==
-X-Google-Smtp-Source: AMrXdXtdrKtspysonVQI8QcHaopj4bQfALxzaTVRER5vnllS6Fz2rc9CwVXfs5/G6CEo3Tdon3kr4g2Oyg6cDlSfeJI=
-X-Received: by 2002:a05:600c:358e:b0:3d0:1489:78c4 with SMTP id
- p14-20020a05600c358e00b003d0148978c4mr3400814wmq.167.1675195811270; Tue, 31
- Jan 2023 12:10:11 -0800 (PST)
-MIME-Version: 1.0
-References: <20230131180158.2471047-1-christoph.muellner@vrull.eu>
- <20230131180158.2471047-9-christoph.muellner@vrull.eu>
- <1cf43062-1e18-b7aa-8c85-f1b0afe27708@linaro.org>
-In-Reply-To: <1cf43062-1e18-b7aa-8c85-f1b0afe27708@linaro.org>
-From: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Date: Tue, 31 Jan 2023 21:09:58 +0100
-Message-ID: <CAEg0e7jsz1sEDi6OVuTaZuy0+aFoOWamq7AKE_kSj_RKgC=fiA@mail.gmail.com>
-Subject: Re: [PATCH v4 08/14] RISC-V: Adding T-Head MemPair extension
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ bh=9lo2K6GQSn2b50esA2/wF8fWoSdV5uNQzm7zIK6gS7A=;
+ b=emMMV/o0eQKP2lMhGALyZkiI1htdLVWub+08MBrg+fllpLjSomS8tkXo57C+vYM5GQ
+ 6hpD8GcfHw1CtlbukJam3Xdr4osnvF82x1tLoKVK0j+QFMusNHcs8ypMst616ByPTbgg
+ Fk2AUDRRsZVikfULQz1sblzRMqukzQscnwx5ieYX99pKGxa73/xURyZPStn6+NSr0vey
+ tQg2+iDJKdEJAbzKkggm5VNvHOWy/W1L302Y7hye6KcBFTpHR+3mJLagiWF7v+udOMD0
+ ++J9Lgr9UAwsgRcy0l9b82CiP4rwN02NjEjl1seEnGnC0kMfbmvEdrRGCdLB2iYNEVBt
+ oV9A==
+X-Gm-Message-State: AO0yUKU1AJZgNrzBjMq2fuJm42JBPKZ04w5r+vinOijRB9Oho7lOMG1w
+ 4kmlb1rtW1t6HtSNyPIZuhMAQ8eIj62FaiEn
+X-Google-Smtp-Source: AK7set8/gJH9TBdlmv9Sn+CMed9Jfew4Op53Qk6INDv4ykz6JFEf5RYzw5eF7wdILFuk6bPa7fChQA==
+X-Received: by 2002:a5d:6645:0:b0:2bd:ee0c:26a3 with SMTP id
+ f5-20020a5d6645000000b002bdee0c26a3mr4133292wrw.8.1675196416488; 
+ Tue, 31 Jan 2023 12:20:16 -0800 (PST)
+Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
+ [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
+ v2-20020adfe282000000b002bdec340a1csm15391977wri.110.2023.01.31.12.20.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 31 Jan 2023 12:20:15 -0800 (PST)
+From: Christoph Muellner <christoph.muellner@vrull.eu>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
- =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko.stuebner@vrull.eu>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Kito Cheng <kito.cheng@sifive.com>, 
+ =?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko.stuebner@vrull.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Kito Cheng <kito.cheng@sifive.com>,
  Cooper Qu <cooper.qu@linux.alibaba.com>,
- Lifang Xia <lifang_xia@linux.alibaba.com>, 
+ Lifang Xia <lifang_xia@linux.alibaba.com>,
  Yunhai Shang <yunhai@linux.alibaba.com>,
  Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-wm1-x334.google.com
+Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
+Subject: [PATCH v5 00/14] Add support for the T-Head vendor extensions
+Date: Tue, 31 Jan 2023 21:19:59 +0100
+Message-Id: <20230131202013.2541053-1-christoph.muellner@vrull.eu>
+X-Mailer: git-send-email 2.39.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,30 +88,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jan 2023 20:10:16 -0000
+X-List-Received-Date: Tue, 31 Jan 2023 20:20:22 -0000
 
-On Tue, Jan 31, 2023 at 7:23 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> On 1/31/23 08:01, Christoph Muellner wrote:
-> > +    if ((memop & MO_SIZE) == MO_64) {
-> > +        addr2 = get_address(ctx, a->rs, 8 + (a->sh2 << shamt));
-> > +    } else {
-> > +        addr2 = get_address(ctx, a->rs, 4 + (a->sh2 << shamt));
-> > +    }
->
-> Use memop_size(memop) instead.
+From: Christoph Müllner <christoph.muellner@vrull.eu>
 
-Will be part of v5 (will be sent in a couple of minutes).
-I have also added a "int imm = a->sh2 << shamt;".
+This series introduces support for the T-Head vendor extensions,
+which are implemented e.g. in the XuanTie C906 and XuanTie C910:
+* XTheadBa
+* XTheadBb
+* XTheadBs
+* XTheadCmo
+* XTheadCondMov
+* XTheadFMemIdx
+* XTheadFmv
+* XTheadMac
+* XTheadMemIdx
+* XTheadMemPair
+* XTheadSync
 
->
-> Otherwise,
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+The xthead* extensions are documented here:
+  https://github.com/T-head-Semi/thead-extension-spec/releases/latest
 
-Thanks for the review!
+The "th." instruction prefix prevents future conflicts with standard
+extensions and has been documentented in the RISC-V toolchain conventions:
+  https://github.com/riscv-non-isa/riscv-toolchain-conventions
 
->
->
-> r~
+Note, that the T-Head vendor extensions do not contain all
+vendor-specific functionality of the T-Head SoCs
+(e.g. no vendor-specific CSRs are included).
+Instead the extensions cover coherent functionality,
+that is exposed to S and U mode.
+
+To enable the extensions above, the following two methods are possible:
+* add the extension to the arch string
+  E.g. QEMU_CPU="any,xtheadcmo=true,xtheadsync=true"
+* implicitly select the extensions via CPU selection
+  E.g. QEMU_CPU="thead-c906"
+
+Major changes in v2:
+- Add ISA_EXT_DATA_ENTRY()s
+- Use single decoder for XThead extensions
+- Simplify a lot of translation functions
+- Fix RV32 behaviour
+- Added XTheadFmv
+- Addressed all comments of v1
+
+Major changes in v3:
+- Drop XMAE patch
+- Rename priv level test macros
+
+Changes in v4:
+- Address review comments from Richard Henderson
+
+Changes in v5:
+- Remove hard coded constants from gen_*pair_tl()
+
+Christoph Müllner (14):
+  RISC-V: Adding XTheadCmo ISA extension
+  RISC-V: Adding XTheadSync ISA extension
+  RISC-V: Adding XTheadBa ISA extension
+  RISC-V: Adding XTheadBb ISA extension
+  RISC-V: Adding XTheadBs ISA extension
+  RISC-V: Adding XTheadCondMov ISA extension
+  RISC-V: Adding T-Head multiply-accumulate instructions
+  RISC-V: Adding T-Head MemPair extension
+  RISC-V: Adding T-Head MemIdx extension
+  RISC-V: Adding T-Head FMemIdx extension
+  RISC-V: Set minimum priv version for Zfh to 1.11
+  RISC-V: Add initial support for T-Head C906
+  RISC-V: Adding XTheadFmv ISA extension
+  target/riscv: add a MAINTAINERS entry for XThead* extension support
+
+ MAINTAINERS                                |    8 +
+ target/riscv/cpu.c                         |   55 +-
+ target/riscv/cpu.h                         |   12 +
+ target/riscv/cpu_vendorid.h                |    6 +
+ target/riscv/helper.h                      |    1 +
+ target/riscv/insn_trans/trans_xthead.c.inc | 1094 ++++++++++++++++++++
+ target/riscv/meson.build                   |    1 +
+ target/riscv/op_helper.c                   |    6 +
+ target/riscv/translate.c                   |   31 +
+ target/riscv/xthead.decode                 |  185 ++++
+ 10 files changed, 1398 insertions(+), 1 deletion(-)
+ create mode 100644 target/riscv/cpu_vendorid.h
+ create mode 100644 target/riscv/insn_trans/trans_xthead.c.inc
+ create mode 100644 target/riscv/xthead.decode
+
+-- 
+2.39.1
+
 
