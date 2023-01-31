@@ -1,73 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pMlX7-0005lv-9d
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Jan 2023 02:58:27 -0500
+	id 1pMnOn-00046K-FS
+	for mharc-qemu-riscv@gnu.org; Tue, 31 Jan 2023 04:57:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <geomatsi@gmail.com>)
- id 1pMlX1-0005k1-K9; Tue, 31 Jan 2023 02:58:20 -0500
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pMnOm-000464-FZ
+ for qemu-riscv@nongnu.org; Tue, 31 Jan 2023 04:57:56 -0500
+Received: from mail-oa1-x2b.google.com ([2001:4860:4864:20::2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <geomatsi@gmail.com>)
- id 1pMlWz-0002Qe-Dl; Tue, 31 Jan 2023 02:58:19 -0500
-Received: by mail-ej1-x632.google.com with SMTP id p26so27906221ejx.13;
- Mon, 30 Jan 2023 23:58:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yE1SDRPNQvKDzunWv7Z/9APPN2vtX0zkGAvX41ENnyo=;
- b=XmJVzBfSyrxQ1zEOyeHXEILpIYGRovM1d3npD+00XQw5z46oElPpfH/Z4Un6vYOuyl
- UAvu6ubGT4YU0xRZLaqa4AgbsnuYjWVgRv8vXK2Z5re+aeVCbFX3csE2IreWzd900sf1
- oZQkcOj5Rh24NWbK5/nwiBWN7oj62iEIH01KCdbM0dpDazi9mKfcHcOQp+L8hec99MiO
- ZREf4Q1M2oyvsKUP216lFLIlGVlNxbqqhP7IObbrKLKghSVBoYMOsxYjMlM4/5sPp8TK
- SBf8Z67yd8Dhaigrz6PXll9AjdhDHp5vvHnL+GCjzXgsJ0pqBamjMf9NWSEnnf99KcRU
- YY2A==
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pMnOk-00063M-Fy
+ for qemu-riscv@nongnu.org; Tue, 31 Jan 2023 04:57:56 -0500
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-1442977d77dso18647422fac.6
+ for <qemu-riscv@nongnu.org>; Tue, 31 Jan 2023 01:57:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=R5nNvif22PuzEtW9abRjbKLXYdjwEqDLqCnAyeHU/Ro=;
+ b=RJhjgdRen14n+J2VvpUhX2DfnxCrJCv1LGucYBWdX80Gv+dMQBQYOuvBKGQhqDgGh4
+ Na91ifuvUJvuh7gv1NoIIsdBEBHtUIE34hDqRdjahVV9iGYm9ZL1773LcoCHi0QcGQSi
+ iJdThpEFvURYWueTcSTy52Hf5isiRdUR8BADwQcMdBPWUxo1pCTKel/4g1FvUPS+dzmL
+ v7ChBtZHgbeaK5X0m/m+lLlOPntVdOjl/OqN4SVv86GLFraaiwUjxvJRwkRUWHUKAV4U
+ TzJLUDbB8tnSdUyaqtiV1YWVOFj7+fgFoKAT5tfmjkcyCjxVkibDBL9vbjJHrwnxLlTX
+ t18w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yE1SDRPNQvKDzunWv7Z/9APPN2vtX0zkGAvX41ENnyo=;
- b=1xaUqPyUYsrLVrCmuNon8T9pnbL3sCC6R8PR5XeH/8GqhA4YeLvy0PuAucEgTiCMRQ
- 72pG8TFTDOwKy667RB8CInnOBS2Y/Q1J2qEs+maAMP9PMxGyNMz3GW7NoMVe/FlJubKB
- xJciuTFERcTwwZZgmxEjJkdb+ejVXSPpanRwfC/AItPHTpcUhwzaaf8K4mksYI7AZ8la
- suqiEBf1ydEU731luaKbaaxC1Mq0213fFDflNwRL5qXQE8jN1i8prGskebMIqF1xZRJ8
- DnBvS4ELObaotp+taEwekactUNNFj5eY/fg79DRksTflRH7fpYdVVqR9+h6FDqZQ1kOL
- FLGA==
-X-Gm-Message-State: AO0yUKXU4E/16Ava5hCM2la/9za1D1b90vVi6Bw1//K+9bvWHs2h6nX8
- MA/AYlCgyMmQQx+tXsimFeM=
-X-Google-Smtp-Source: AK7set8FQiKx9PyqqRBGpJSwLkvvSYnDZTMshNoji8lnxnTWkMZgd62rr5xZ9bYCka32e9QjHRGMTg==
-X-Received: by 2002:a17:906:411:b0:88b:23bb:e61f with SMTP id
- d17-20020a170906041100b0088b23bbe61fmr3389222eja.25.1675151894622; 
- Mon, 30 Jan 2023 23:58:14 -0800 (PST)
-Received: from curiosity ([80.211.22.60]) by smtp.gmail.com with ESMTPSA id
- e18-20020a17090681d200b0088519b92080sm4190546ejx.127.2023.01.30.23.58.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Jan 2023 23:58:13 -0800 (PST)
-Date: Tue, 31 Jan 2023 10:58:09 +0300
-From: Sergey Matyukevich <geomatsi@gmail.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair23@gmail.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Sergey Matyukevich <sergey.matyukevich@syntacore.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: Re: [PATCH] target/riscv: set tval for triggered watchpoints
-Message-ID: <Y9jKEZgzb+yp5cVE@curiosity>
-References: <20230130100757.721372-1-geomatsi@gmail.com>
- <CAKmqyKMiP9N8CX844++qb+dFFn46Peic87P7-5dJrRfLAyM4wA@mail.gmail.com>
- <CAEUhbmXa=P+JCB3+JnzTdkWdqTZFr9NZR58uEzjK=Pz3ohLD4A@mail.gmail.com>
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=R5nNvif22PuzEtW9abRjbKLXYdjwEqDLqCnAyeHU/Ro=;
+ b=bCVYHuinEpJxIHPwK6F11YG7n6DwHNxw08ODiAxFzpqsCDV9ODMMeZ4jGs0qABLYTu
+ 7sFEMcN02EXzzpMTkope33WzXD9REMk/Wpv97NAPVJ5uLK+1OQq7EwDyOzqjX4X/6Zz3
+ uBbBJCO+W/HlRhjvg4xm+PQHNII3xmzE96s1BOLBUM2b+eYT98uSuE7ZOcMFVLKiZTHD
+ zRmg2U1HrU9brGbBjbdpJu6t/z1oCoQjsTY5QyuSsThNbUTgh8glSS9VwC3qrIIoM9b4
+ Akk0hfQceU+h84qPcKlxK1HzSd23Fl2WjWNY/oksWzb9cVTdDCIwEo1zE6fNHxdRAUtb
+ dmkg==
+X-Gm-Message-State: AO0yUKW8w4IVE/fAa64GB35SOOXIpwxZykWM+IfuN/tD20dQlQSW0OH5
+ Ei5RcPhx94K44bAGwqA51RrB6A==
+X-Google-Smtp-Source: AK7set+o88VvbNstBY2Q6qjES7QJyGKiKr6to/fnIxhYo+2c9aWe8/MCLzRBpeyyXuZnIbKbW4tKjA==
+X-Received: by 2002:a05:6870:d10f:b0:161:eec2:6b5 with SMTP id
+ e15-20020a056870d10f00b00161eec206b5mr16200309oac.49.1675159071907; 
+ Tue, 31 Jan 2023 01:57:51 -0800 (PST)
+Received: from [192.168.68.107] (200-148-13-157.dsl.telesp.net.br.
+ [200.148.13.157]) by smtp.gmail.com with ESMTPSA id
+ k14-20020a056870350e00b0014813cc4a51sm5019723oah.29.2023.01.31.01.57.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 31 Jan 2023 01:57:51 -0800 (PST)
+Message-ID: <0be7a185-b023-31d4-d51e-a7dff59980ee@ventanamicro.com>
+Date: Tue, 31 Jan 2023 06:57:48 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAEUhbmXa=P+JCB3+JnzTdkWdqTZFr9NZR58uEzjK=Pz3ohLD4A@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::632;
- envelope-from=geomatsi@gmail.com; helo=mail-ej1-x632.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.0
+Subject: Re: [PATCH v4 3/3] hw/riscv: change riscv_compute_fdt_addr() semantics
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
+References: <20230126135219.1054658-1-dbarboza@ventanamicro.com>
+ <20230126135219.1054658-4-dbarboza@ventanamicro.com>
+ <CAEUhbmW7Yh_7UOjeoPKBhSF1P4axp6kggtSEj9BAty1q6Ed4QA@mail.gmail.com>
+ <793f7432-4592-98a4-34e9-472c185be297@ventanamicro.com>
+ <CAEUhbmXiNS2cLcdvMLaZ4SUh-0=D7j-dsM+2TuQvF=0EO4xbdQ@mail.gmail.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <CAEUhbmXiNS2cLcdvMLaZ4SUh-0=D7j-dsM+2TuQvF=0EO4xbdQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2001:4860:4864:20::2b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2b.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.09,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -82,94 +88,192 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jan 2023 07:58:20 -0000
+X-List-Received-Date: Tue, 31 Jan 2023 09:57:56 -0000
 
-Hi Bin,
 
-> > > According to priviledged spec, if [sm]tval is written with a nonzero
-> > > value when a breakpoint exception occurs, then [sm]tval will contain
-> > > the faulting virtual address. Set tval to hit address when breakpoint
-> > > exception is triggered by hardware watchpoint.
-> > >
-> > > Signed-off-by: Sergey Matyukevich <sergey.matyukevich@syntacore.com>
-> >
-> > Thanks!
-> >
-> > Applied to riscv-to-apply.next
+
+On 1/30/23 22:00, Bin Meng wrote:
+> On Tue, Jan 31, 2023 at 1:16 AM Daniel Henrique Barboza
+> <dbarboza@ventanamicro.com> wrote:
+>>
+>>
+>>
+>> On 1/29/23 02:45, Bin Meng wrote:
+>>> On Thu, Jan 26, 2023 at 9:54 PM Daniel Henrique Barboza
+>>> <dbarboza@ventanamicro.com> wrote:
+>>>>
+>>>> As it is now, riscv_compute_fdt_addr() is receiving a dram_base, a
+>>>> mem_size (which is defaulted to MachineState::ram_size in all boards)
+>>>> and the FDT pointer. And it makes a very important assumption: the DRAM
+>>>> interval dram_base + mem_size is contiguous. This is indeed the case for
+>>>> most boards that uses a FDT.
+>>>
+>>> s/uses/use
+>>>
+>>>>
+>>>> The Icicle Kit board works with 2 distinct RAM banks that are separated
+>>>> by a gap. We have a lower bank with 1GiB size, a gap follows, then at
+>>>> 64GiB the high memory starts. MachineClass::default_ram_size for this
+>>>> board is set to 1.5Gb, and machine_init() is enforcing it as minimal RAM
+>>>> size, meaning that there we'll always have at least 512 MiB in the Hi
+>>>> RAM area.
+>>>>
+>>>> Using riscv_compute_fdt_addr() in this board is weird because not only
+>>>> the board has sparse RAM, and it's calling it using the base address of
+>>>> the Lo RAM area, but it's also using a mem_size that we have guarantees
+>>>> that it will go up to the Hi RAM. All the function assumptions doesn't
+>>>> work for this board.
+>>>>
+>>>> In fact, what makes the function works at all in this case is a
+>>>> coincidence.  Commit 1a475d39ef54 introduced a 3GB boundary for the FDT,
+>>>> down from 4Gb, that is enforced if dram_base is lower than 3072 MiB. For
+>>>> the Icicle Kit board, memmap[MICROCHIP_PFSOC_DRAM_LO].base is 0x80000000
+>>>> (2 Gb) and it has a 1Gb size, so it will fall in the conditions to put
+>>>> the FDT under a 3Gb address, which happens to be exactly at the end of
+>>>> DRAM_LO. If the base address of the Lo area started later than 3Gb this
+>>>> function would be unusable by the board. Changing any assumptions inside
+>>>> riscv_compute_fdt_addr() can also break it by accident as well.
+>>>>
+>>>> Let's change riscv_compute_fdt_addr() semantics to be appropriate to the
+>>>> Icicle Kit board and for future boards that might have sparse RAM
+>>>> topologies to worry about:
+>>>>
+>>>> - relieve the condition that the dram_base + mem_size area is contiguous,
+>>>> since this is already not the case today;
+>>>>
+>>>> - receive an extra 'dram_size' size attribute that refers to a contiguous
+>>>> RAM block that the board wants the FDT to reside on.
+>>>>
+>>>> Together with 'mem_size' and 'fdt', which are now now being consumed by a
+>>>> MachineState pointer, we're able to make clear assumptions based on the
+>>>> DRAM block and total mem_size available to ensure that the FDT will be put
+>>>> in a valid RAM address.
+>>>>
+>>>
+>>> Well written commit message. Thanks!
+>>>
+>>>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>>>> ---
+>>>>    hw/riscv/boot.c            | 38 ++++++++++++++++++++++++++------------
+>>>>    hw/riscv/microchip_pfsoc.c |  3 ++-
+>>>>    hw/riscv/sifive_u.c        |  3 ++-
+>>>>    hw/riscv/spike.c           |  3 ++-
+>>>>    hw/riscv/virt.c            |  3 ++-
+>>>>    include/hw/riscv/boot.h    |  4 ++--
+>>>>    6 files changed, 36 insertions(+), 18 deletions(-)
+>>>>
+>>>> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+>>>> index a6f7b8ae8e..8f4991480b 100644
+>>>> --- a/hw/riscv/boot.c
+>>>> +++ b/hw/riscv/boot.c
+>>>> @@ -284,33 +284,47 @@ out:
+>>>>    }
+>>>>
+>>>>    /*
+>>>> - * The FDT should be put at the farthest point possible to
+>>>> - * avoid overwriting it with the kernel/initrd.
+>>>> + * This function makes an assumption that the DRAM interval
+>>>> + * 'dram_base' + 'dram_size' is contiguous.
+>>>>     *
+>>>> - * This function makes an assumption that the DRAM is
+>>>> - * contiguous. It also cares about 32-bit systems and
+>>>> - * will limit fdt_addr to be addressable by them even for
+>>>> - * 64-bit CPUs.
+>>>> + * Considering that 'dram_end' is the lowest value between
+>>>> + * the end of the DRAM block and MachineState->ram_size, the
+>>>> + * FDT location will vary according to 'dram_base':
+>>>> + *
+>>>> + * - if 'dram_base' is less that 3072 MiB, the FDT will be
+>>>> + * put at the lowest value between 3072 MiB and 'dram_end';
+>>>> + *
+>>>> + * - if 'dram_base' is higher than 3072 MiB, the FDT will be
+>>>> + * put at 'dram_end'.
+>>>>     *
+>>>>     * The FDT is fdt_packed() during the calculation.
+>>>>     */
+>>>> -uint32_t riscv_compute_fdt_addr(hwaddr dram_base, uint64_t mem_size,
+>>>> -                                void *fdt)
+>>>> +hwaddr riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
+>>>
+>>> Using hwaddr to represent a size looks weird. Although technically
+>>> they are the same ... I would leave this as it is.
+>>
+>> I'll leave it as it was back in patch 2 (uint64_t).
+>>
+>>>
+>>>> +                              MachineState *ms)
+>>>>    {
+>>>> -    uint64_t temp;
+>>>> -    hwaddr dram_end = dram_base + mem_size;
+>>>> -    int ret = fdt_pack(fdt);
+>>>> +    int ret = fdt_pack(ms->fdt);
+>>>> +    hwaddr dram_end, temp;
+>>>>        int fdtsize;
+>>>>
+>>>>        /* Should only fail if we've built a corrupted tree */
+>>>>        g_assert(ret == 0);
+>>>>
+>>>> -    fdtsize = fdt_totalsize(fdt);
+>>>> +    fdtsize = fdt_totalsize(ms->fdt);
+>>>>        if (fdtsize <= 0) {
+>>>>            error_report("invalid device-tree");
+>>>>            exit(1);
+>>>>        }
+>>>>
+>>>> +    /*
+>>>> +     * A dram_size == 0, usually from a MemMapEntry[].size element,
+>>>> +     * means that the DRAM block goes all the way to ms->ram_size.
+>>>> +     */
+>>>> +    if (dram_size == 0x0) {
+>>>> +        dram_end = dram_base + ms->ram_size;
+>>>> +    } else {
+>>>> +        dram_end = dram_base + MIN(ms->ram_size, dram_size);
+>>>> +    }
+>>>
+>>> How about:
+>>>
+>>> g_assert(dram_size < ms->ram_size);
+>>
+>> I don't believe that dram_size > ms->ram_size should be an error. A board can
+>> have a declared MemMapEntry.size that is larger than its current setting of
+>> ms->ram_size.
 > 
-> Oops, too quick, but I have one comment :)
+> What use case is that? This updated function now has the assumption that:
 > 
-> >
-> > Alistair
-> >
-> > > ---
-> > >  target/riscv/cpu_helper.c | 3 +++
-> > >  target/riscv/debug.c      | 1 +
-> > >  2 files changed, 4 insertions(+)
-> > >
-> > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > > index 9a28816521..d3be8c0511 100644
-> > > --- a/target/riscv/cpu_helper.c
-> > > +++ b/target/riscv/cpu_helper.c
-> > > @@ -1641,6 +1641,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-> > >          case RISCV_EXCP_VIRT_INSTRUCTION_FAULT:
-> > >              tval = env->bins;
-> > >              break;
-> > > +        case RISCV_EXCP_BREAKPOINT:
-> > > +            tval = env->badaddr;
-> 
-> RISCV_EXCP_BREAKPOINT may come from 'ebreak' so we should test if this
-> exception comes from the debug module.
-> 
-> The spec also says about icount trigger that:
-> 
-> "If the trigger fires with action =0 then zero is written to the tval
-> CSR on the breakpoint trap."
-> 
-> So we can't blindly set tval for every breakpoint exception.
-> 
+> 1. dram_size being 0 meaning contiguous system RAM region from dram_base
+> 2. otherwise dram_size being the *first* contiguous system RAM region
+> from dram_base
 
-Thanks for catching ! Initial idea was to set badaddr value only when
-it is needed in target/riscv/debug.c. For instance, icount code does
-not set badaddr, so tval will remain zero. On the other hand, breakpoint
-exception may come from ebreak and badaddr may keep non-zero value from
-some previous unrelated exception.
+Yes, but that doesn't mean that dram_size is necessarily smaller than ms->ram_size.
 
-Explicit check should be more safe, e.g. something like that:
+We don't have any board where this happens today but let's pretend that the Icicle
+Kit board didn't have the 1.5Gb minimal RAM restriction. Its first region has
+dram_size 1Gb:
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index d3be8c0511..f1a0c65ad3 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -1642,7 +1642,10 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-             tval = env->bins;
-             break;
-         case RISCV_EXCP_BREAKPOINT:
--            tval = env->badaddr;
-+            if (cs->watchpoint_hit) {
-+                tval = cs->watchpoint_hit->hitaddr;
-+                cs->watchpoint_hit = NULL;
-+            }
-             break;
-         default:
-             break;
-diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-index 48ef3c59ea..b091293069 100644
---- a/target/riscv/debug.c
-+++ b/target/riscv/debug.c
-@@ -761,8 +761,6 @@ void riscv_cpu_debug_excp_handler(CPUState *cs)
- 
-     if (cs->watchpoint_hit) {
-         if (cs->watchpoint_hit->flags & BP_CPU) {
--            env->badaddr = cs->watchpoint_hit->hitaddr;
--            cs->watchpoint_hit = NULL;
-             do_trigger_action(env, DBG_ACTION_BP);
-         }
-     } else {
+[MICROCHIP_PFSOC_DRAM_LO] =         { 0x80000000,   0x40000000 },
+
+So, if I start the board with 512M, ms->ram_size = 512M and this assert will trigger
+because dram_size = 1Gb.
 
 
-I will a fixup after testing.
+Thanks,
 
-Regards,
-Sergey
+
+Daniel
+
+
+> 
+> We can use g_assert(dram_size < ms->ram_size) to catch either case.
+> 
+>>
+>>
+>>> dram_end = dram_base + (dram_size ? dram_size : ms->ram_size);
+>>
+>> I can change the if/else statement up there for a ternary:
+>>
+>> dram_end = dram_base + (dram_size ? ms->ram_size : MIN(ms->ram_size, dram_size))
+>>
+> 
+> Regards,
+> Bin
 
