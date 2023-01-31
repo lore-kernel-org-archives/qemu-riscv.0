@@ -1,69 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pMu99-0000nq-SE
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Jan 2023 12:10:16 -0500
+	id 1pMuxj-0007PZ-Ve
+	for mharc-qemu-riscv@gnu.org; Tue, 31 Jan 2023 13:02:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <geomatsi@gmail.com>)
- id 1pMu95-0000mu-5i; Tue, 31 Jan 2023 12:10:12 -0500
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1pMuxM-0007Bm-9U
+ for qemu-riscv@nongnu.org; Tue, 31 Jan 2023 13:02:08 -0500
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <geomatsi@gmail.com>)
- id 1pMu92-0006By-Oo; Tue, 31 Jan 2023 12:10:10 -0500
-Received: by mail-ej1-x62f.google.com with SMTP id me3so43626842ejb.7;
- Tue, 31 Jan 2023 09:10:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3QpPB5j2/Lw1un26Dww9vvsqU+Ums661g1jLauN9JaQ=;
- b=iPIh/TcPu+Z2eyAo/pn3MR9axm015bx5K4AoxGwMwPfK2WzgSNWc+0vqw0/TsUbM7f
- diqMx0jB1CudBGYr+2DsaHHdaWm50SxcykEm+UzhHsFMEhR5K3Kq1D62V1B7/WTENyYb
- oVKAfIEblt4LS2AM7A2mXpAM74WvmzqcGcGV5tL4w9AGItWNip13+VuVbSaBzDmMNFUq
- rZrXPoBZ4soqwOaLq2mZ9GkO40mW4dy9SBSCyMTMFuVbe9O63NST3rHYQn/shwZFwNGk
- 395ZBi9X9JweHopIG0n9JKOpsNxqxvjaDlu+ADNFKeKUG8cHp0F6nu59QGBw3mPROMhT
- ebug==
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1pMuxK-0000mC-Bu
+ for qemu-riscv@nongnu.org; Tue, 31 Jan 2023 13:02:08 -0500
+Received: by mail-wr1-x431.google.com with SMTP id h12so15006389wrv.10
+ for <qemu-riscv@nongnu.org>; Tue, 31 Jan 2023 10:02:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yfM6G8FfZOMRFuqk0oCRUG07u5+/at2liHmrKytveWs=;
+ b=d+P6jjk/kiArqaKOXHopQeLXjO5WYksG/qb3IIXfpdntdvuRDy2I92QlZxxl40dXBa
+ PlIcD0MhtPIOY3cz7NjfxyXY6+rc3UM1jXd4r3pgOtmn2WDJ6mOQc+uNaEN/o7hHIp+g
+ 2b+CK8yKh8ia2xSJ3pJUPPSZtSW67qiFwZXMRN+Co/AN2/Mlj6CnlgCEAuLtAWmd83i0
+ Sc6PjZlMLmIi0EbagPFEOI4xxqaT5d5tGxjDD89zyB03AluBjOUaL0MVkPRtTejUd1Ll
+ tox93GfXd7Uujzv6z3IeHmo+Ay/FuXd21ScS8dS9bR7F8vXXQVMpGMaqJiPvSY7scCkX
+ HsUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3QpPB5j2/Lw1un26Dww9vvsqU+Ums661g1jLauN9JaQ=;
- b=SsfxGd7g14JA+vAGWhqxX1nXqXLzlxEx1rxYBJ6bTCdixdY7peP81rYSbPhMKCbaaA
- ZhtQp9NSh5+lmRBqYyQAryO/KsUlFUsMQeDpfGhTei7xqecIHEfUjpWHSO43mMgfxEkx
- 074dhllfS8HFWBWWKjbs3XaPC5nZtYFlU6J2HP7EUZA6WYrO28NAEvzI2mOEUvY4NtSD
- TB6cIgx45m1Rl2LtcIXkLiQOOlvozMr9JfYMq/kIwIIgCWV8wV7UDx5PRJ94GeXNdXNz
- be8u3vwB1jfBFDhuHHZ0XR+UPKdFdLclIKITiHKT5K2K7PodPXca8anTPVEuhUrLJiN4
- hzuQ==
-X-Gm-Message-State: AO0yUKWEIUpD1+EEbj0uu13vjsC7Ao3nfHAchAkYwCDOdQA6GAu+xZ5W
- ZIbzmJh0dP01020gPse5O5Ui40yYB1DVgmv7
-X-Google-Smtp-Source: AK7set/hKr869VhUSa13uybFj0Jqv9orBJoTclA78GjpjuFHoG6CPQbVjU9TBYfkFyAuSM9OoOgbWw==
-X-Received: by 2002:a17:906:ad87:b0:885:5231:359c with SMTP id
- la7-20020a170906ad8700b008855231359cmr11735951ejb.5.1675185003641; 
- Tue, 31 Jan 2023 09:10:03 -0800 (PST)
-Received: from localhost.localdomain ([80.211.22.60])
- by smtp.googlemail.com with ESMTPSA id
- d13-20020a170906344d00b0088385cd6166sm5495806ejb.195.2023.01.31.09.10.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Jan 2023 09:10:02 -0800 (PST)
-From: Sergey Matyukevich <geomatsi@gmail.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Sergey Matyukevich <sergey.matyukevich@syntacore.com>
-Subject: [PATCH v2] target/riscv: set tval for triggered watchpoints
-Date: Tue, 31 Jan 2023 20:09:55 +0300
-Message-Id: <20230131170955.752743-1-geomatsi@gmail.com>
-X-Mailer: git-send-email 2.39.0
+ bh=yfM6G8FfZOMRFuqk0oCRUG07u5+/at2liHmrKytveWs=;
+ b=wTAO5J2TS8SdQ1b317h6hjgX6TmqhUt0vczw1XI+R/AfA0JcSpa9Ziolk0V2V1rlZf
+ /7j+qQbl7xtH7X9cf66mnddB7Dn7umauNhGst7agWN2IBON6bT1nFdnU5MQBcF6SltYu
+ 5rpc0WQPWKTrIohjX6HO6oA6Nai5kG7vzPgRW6NHBH9XT5tJvsyi5/gPm7qvTMJHRSPQ
+ OSxCltCponFI2Sn13UkIZROOCIFyi/3JyJr06mQQANhJbekkGSvwa8DN+AUg3bpMvDwi
+ 2wa/ziuSt82z3ZJUzSnOSYTLfe1ovtkhCW4DfqRZ8wD+n+JZ0CcAT4LFxf5GlFluL5us
+ qgPQ==
+X-Gm-Message-State: AO0yUKVusuiuSY/e3rOf7Cdsjbvs1QSSkdCkm6ya4BN7iR9B9VGWxAxW
+ Y+9dCz6dnq1o3EM6X5NwH+k1TzUrvgQN9qkq4e6F7Q==
+X-Google-Smtp-Source: AK7set8VKt45SaRVzHdFljCY8czBkvy5T5RcvVTx8bZ0I6wUFT/zr8wklHpos5xhhC3tbyqYNaPtM9BD5W8a848cRbw=
+X-Received: by 2002:a5d:6f0a:0:b0:2c2:8229:be98 with SMTP id
+ ay10-20020a5d6f0a000000b002c28229be98mr80770wrb.189.1675188124897; Tue, 31
+ Jan 2023 10:02:04 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=geomatsi@gmail.com; helo=mail-ej1-x62f.google.com
+References: <20230124195945.181842-1-christoph.muellner@vrull.eu>
+ <20230124195945.181842-10-christoph.muellner@vrull.eu>
+ <3d864ae7-5430-8db9-f91c-fd24f428b04d@linaro.org>
+In-Reply-To: <3d864ae7-5430-8db9-f91c-fd24f428b04d@linaro.org>
+From: =?UTF-8?Q?Christoph_M=C3=BCllner?= <christoph.muellner@vrull.eu>
+Date: Tue, 31 Jan 2023 19:01:51 +0100
+Message-ID: <CAEg0e7gJeimurDiuFTWqx4OggJ19zD0-c6xBwZkL3sgFWWWeVQ@mail.gmail.com>
+Subject: Re: [PATCH v3 09/14] RISC-V: Adding T-Head MemIdx extension
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko.stuebner@vrull.eu>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Nelson Chu <nelson@rivosinc.com>, 
+ Kito Cheng <kito.cheng@sifive.com>, Cooper Qu <cooper.qu@linux.alibaba.com>, 
+ Lifang Xia <lifang_xia@linux.alibaba.com>,
+ Yunhai Shang <yunhai@linux.alibaba.com>, 
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -78,57 +82,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jan 2023 17:10:13 -0000
+X-List-Received-Date: Tue, 31 Jan 2023 18:02:16 -0000
 
-From: Sergey Matyukevich <sergey.matyukevich@syntacore.com>
+On Tue, Jan 24, 2023 at 10:21 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 1/24/23 09:59, Christoph Muellner wrote:
+> > +/* XTheadMemIdx */
+> > +
+> > +/*
+> > + * Load with memop from indexed address and add (imm5 << imm2) to rs1.
+> > + * If !preinc, then the load address is rs1.
+> > + * If  preinc, then the load address is rs1 + (imm5) << imm2).
+> > + */
+> > +static bool gen_load_inc(DisasContext *ctx, arg_th_meminc *a, MemOp memop,
+> > +                         bool preinc)
+> > +{
+> > +    TCGv rd = dest_gpr(ctx, a->rd);
+> > +    TCGv addr = get_address(ctx, a->rs1, preinc ? a->imm5 << a->imm2 : 0);
+> > +
+> > +    tcg_gen_qemu_ld_tl(rd, addr, ctx->mem_idx, memop);
+> > +    addr = get_address(ctx, a->rs1, !preinc ? a->imm5 << a->imm2 : 0);
+>
+> First, you're leaking the previous 'addr' temporary.
 
-According to priviledged spec, if [sm]tval is written with a nonzero
-value when a breakpoint exception occurs, then [sm]tval will contain
-the faulting virtual address. Set tval to hit address when breakpoint
-exception is triggered by hardware watchpoint.
+Indeed!
+The real question is of course, why we call get_address() twice...
+Fixed in v4.
 
-Signed-off-by: Sergey Matyukevich <sergey.matyukevich@syntacore.com>
+> Second, get_address may make modifications to 'addr' which you don't want to write back.
 
----
+Fixed in v4.
 
-v1 -> v2
-- do not set tval blindly for every breakpoint exception,
-  handle current specific case under consideration
+> Third, you are not checking for rd != rs1.
 
- target/riscv/cpu_helper.c | 6 ++++++
- target/riscv/debug.c      | 1 -
- 2 files changed, 6 insertions(+), 1 deletion(-)
+Fixed in v4.
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 9a28816521..f1a0c65ad3 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -1641,6 +1641,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         case RISCV_EXCP_VIRT_INSTRUCTION_FAULT:
-             tval = env->bins;
-             break;
-+        case RISCV_EXCP_BREAKPOINT:
-+            if (cs->watchpoint_hit) {
-+                tval = cs->watchpoint_hit->hitaddr;
-+                cs->watchpoint_hit = NULL;
-+            }
-+            break;
-         default:
-             break;
-         }
-diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-index bf4840a6a3..b091293069 100644
---- a/target/riscv/debug.c
-+++ b/target/riscv/debug.c
-@@ -761,7 +761,6 @@ void riscv_cpu_debug_excp_handler(CPUState *cs)
- 
-     if (cs->watchpoint_hit) {
-         if (cs->watchpoint_hit->flags & BP_CPU) {
--            cs->watchpoint_hit = NULL;
-             do_trigger_action(env, DBG_ACTION_BP);
-         }
-     } else {
--- 
-2.39.0
+>
+> I think what you want is
+>
+>      int imm = a->imm5 << a->imm2;
+>      TCGv addr = get_address(ctx, a->rs1, preinc ? imm : 0);
+>      TCGv rd = dest_gpr(ctx, a->rd);
+>      TCGv rs1 = get_gpr(ctx, a->rs1, EXT_NONE);
+>
+>      tcg_gen_qemu_ld_tl(rd, addr, ctx->mem_idx, memop);
+>      tcg_gen_addi_tl(rs1, rs1, imm);
+>      gen_set_gpr(ctx, a->rd, rd);
+>      gen_set_gpr(ctx, a->rs1, rs1);
 
+Yes (plus the check for rd != rs1).
+
+Fixed in v4.
+
+Thank you!
+
+>
+>
+> r~
 
