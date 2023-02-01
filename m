@@ -1,94 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNCwX-0003GP-Fj
-	for mharc-qemu-riscv@gnu.org; Wed, 01 Feb 2023 08:14:29 -0500
+	id 1pND4y-0007LV-21
+	for mharc-qemu-riscv@gnu.org; Wed, 01 Feb 2023 08:23:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <quintela@redhat.com>)
- id 1pNCwV-0003Ev-Us
- for qemu-riscv@nongnu.org; Wed, 01 Feb 2023 08:14:28 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <quintela@redhat.com>)
- id 1pNCwU-0002ZZ-Dq
- for qemu-riscv@nongnu.org; Wed, 01 Feb 2023 08:14:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1675257265;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:in-reply-to:in-reply-to:  references:references;
- bh=CBnIdrigAg4xq9Nn0pkiCzy+TzCK0IYmPxCBJAeioM4=;
- b=Dj2zQOq4RYvO+kWIvtOb7lLw4iV4PnkFBlsiaAZW/S6YIGq1ct1udpqyHWruxUYQAReipM
- YXuEiHRUXV6Dp9kdyXlUTTvYt/xx8R4kk9bLa1x8K8GX/AHLg7KBjMC/F8228JqXTa/AnL
- MbFeggRI2qr/4H8ckgvoe6wox/2coXw=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-226-xZQ3QbZzNjiTBDDPMgT4Lg-1; Wed, 01 Feb 2023 08:14:22 -0500
-X-MC-Unique: xZQ3QbZzNjiTBDDPMgT4Lg-1
-Received: by mail-wm1-f72.google.com with SMTP id
- iv6-20020a05600c548600b003dc4b8ee42fso6777898wmb.1
- for <qemu-riscv@nongnu.org>; Wed, 01 Feb 2023 05:14:22 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1pND3S-00065R-LA
+ for qemu-riscv@nongnu.org; Wed, 01 Feb 2023 08:21:47 -0500
+Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1pND3N-00047F-0a
+ for qemu-riscv@nongnu.org; Wed, 01 Feb 2023 08:21:34 -0500
+Received: by mail-lj1-x22c.google.com with SMTP id t12so19327454lji.13
+ for <qemu-riscv@nongnu.org>; Wed, 01 Feb 2023 05:21:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=rFFADaYv4RMRZci0kU485Cfrcm6FCC0H2psqZLwK+Lg=;
+ b=le3s0VPp7peRiMG3z6IRJ4UgIaemTeGjkjAG7wV9sV0zFkHeNvRt8rIdtNkKmeccbB
+ PKg+BVq1u+1mfTDP7yTr78TX4dJWu+AO3CuHd63O4gv1mIKIKpNK7Eozr60EOhFsbxhh
+ 7IkLI0e5APw10ho8FwOQV4tYhY04V/Z3DVudfl0GJsmNy60fRI/FVKphznheeW2vS8k1
+ xCyWR59Ps6a6pSH99AGMpPOAd8sZtwD0xZIphUfvvfEbuT6BXOfgDoDu2MVIuZwq5XJr
+ /hSP5yaCe07NRGnlTcdXdLvuk/v0xwARdMLgeQZidwaz+5dySDgh9rIGsbNos0ecvFpd
+ 5uJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=mime-version:message-id:date:reply-to:user-agent:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CBnIdrigAg4xq9Nn0pkiCzy+TzCK0IYmPxCBJAeioM4=;
- b=ka0XYbPA1QAKph1l2Nom7vXHlmIaRRYI1ownbg6vdT1eENET5Nb9Nl+Z0bjVpziXUt
- 08Y+GZOFTOfbLuol6kThznp1AJOsPaC8JqkpUEBRD/23h9usj8ZjmwakQSdgcegOqkss
- K8sGKFiZJYxWMPSIbrv8VSx2vz7tr9OLLBMdqHWCSyIpNAxOuvF+dvciPnnAtTARk0fD
- AXP0s9ahaWGxct5EYNoIxXyKQD+AN3QfMHrszzsVrTXYEV1l0Krpyciz+Y97U+u2lcGU
- C9SgwHOPxsoGzg1hKTW16cl4OwfYx9t9bWnyy1myyZQ9Cl18lyO9aL7cRiALa+JTWlTA
- 1H+g==
-X-Gm-Message-State: AO0yUKX6Fhmwe0PGGNFuw/P7xTVroEm1pfgygRsyI3Vk/duL8VoieACA
- wDCwkEWuYNmyGEkfF+icH1G2x+lAUVOMti1sjRBN5J3Sd8PfDJ81HZftXdRK+kOtGDcjjlgsDOP
- C6U5Y2IZ/4Ah8bP4=
-X-Received: by 2002:a05:600c:4f03:b0:3dd:e86e:8827 with SMTP id
- l3-20020a05600c4f0300b003dde86e8827mr1890229wmq.4.1675257261465; 
- Wed, 01 Feb 2023 05:14:21 -0800 (PST)
-X-Google-Smtp-Source: AK7set9CyzHeq/DwG6rKtBoNVxBsEsdk82yvIqWlasVfWNFldjWjAq+H5O9Yo4NB+BTjopQZA3jv2w==
-X-Received: by 2002:a05:600c:4f03:b0:3dd:e86e:8827 with SMTP id
- l3-20020a05600c4f0300b003dde86e8827mr1890191wmq.4.1675257261254; 
- Wed, 01 Feb 2023 05:14:21 -0800 (PST)
-Received: from redhat.com ([46.136.252.173]) by smtp.gmail.com with ESMTPSA id
- v2-20020a05600c15c200b003dc54eef495sm1643451wmf.24.2023.02.01.05.14.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Feb 2023 05:14:20 -0800 (PST)
-From: Juan Quintela <quintela@redhat.com>
-To: Markus Armbruster <armbru@redhat.com>
-Cc: qemu-devel@nongnu.org,  richard.henderson@linaro.org,
- pbonzini@redhat.com,  kwolf@redhat.com,  hreitz@redhat.com,
- imp@bsdimp.com,  kevans@freebsd.org,  berrange@redhat.com,
- groug@kaod.org,  qemu_oss@crudebyte.com,  mst@redhat.com,
- philmd@linaro.org,  peter.maydell@linaro.org,  alistair@alistair23.me,
- jasowang@redhat.com,  jonathan.cameron@huawei.com,
- kbastian@mail.uni-paderborn.de,  dgilbert@redhat.com,
- michael.roth@amd.com,  kkostiuk@redhat.com,  tsimpson@quicinc.com,
- palmer@dabbelt.com,  bin.meng@windriver.com,  qemu-block@nongnu.org,
- qemu-arm@nongnu.org,  qemu-riscv@nongnu.org
-Subject: Re: [PATCH v5 04/20] scripts/clean-includes: Improve --git commit
- message
-In-Reply-To: <875ycly2h5.fsf@pond.sub.org> (Markus Armbruster's message of
- "Wed, 01 Feb 2023 13:49:58 +0100")
-References: <20230130132156.1868019-1-armbru@redhat.com>
- <20230130132156.1868019-5-armbru@redhat.com>
- <87sffsnmb2.fsf@secure.mitica> <875ycly2h5.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
-Reply-To: quintela@redhat.com
-Date: Wed, 01 Feb 2023 14:14:19 +0100
-Message-ID: <87bkmdfrys.fsf@secure.mitica>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rFFADaYv4RMRZci0kU485Cfrcm6FCC0H2psqZLwK+Lg=;
+ b=J0cPMoCsj86A3TRQHjU6eH9C89CAniei0UKiZPZ6jGdDGOXQGOYY8j6aJTuzt7dcWs
+ psCEyFCA1XA24llHND8JdlI7pp71eZFy6aJ9M/Nb/AxSmpUyU1KhQX+RofHhupxwppVv
+ kn3LzrbZUQPTNB5w9KVYYA1s71rhtdIPQfQGNxVUbezOTyHuXb5r9cXEZIErWcpTDqKm
+ We6X/fWW4MfHWgnDMHNgAhkA+EUvuuOtohnAMA2cc5qdRa2cLjsPmKkRK4JDfwzkODlr
+ Nxr3ajWPGaFWn4BUJeN5QB0ThGkSU208O9B/7Q95d67s9LbXcD8B4+wIp5ek7aTQkj3V
+ 6/AA==
+X-Gm-Message-State: AO0yUKUAmCHF0PSnaHwrhE1uRI1i2znir/lNgQRUTXPZR6r3ShjKAVyL
+ /dt4aFLIgm5IlpKsEWmoQSua4zpCJD30x2JVlkHknpdhKeXH2BeDGfFEyqLBl23ZdvXA1MsZJlg
+ o6Pjp4hKemwse8IK4prsbM0g1O8nLE3q/eOJZg3CnK2EbGWOCTzZPn+TwduM5VC6Gc2n5ZHhmuW
+ Q=
+X-Google-Smtp-Source: AK7set9jqZAT4hJR+LPzu1lC/jfrSPMSTvd33O1FDI9LC4NE3PjMoUZSlD6AqkHyAlT6JJWFoRYW9Q==
+X-Received: by 2002:a2e:8045:0:b0:290:5a39:9156 with SMTP id
+ p5-20020a2e8045000000b002905a399156mr461307ljg.10.1675257690666; 
+ Wed, 01 Feb 2023 05:21:30 -0800 (PST)
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com.
+ [209.85.167.52]) by smtp.gmail.com with ESMTPSA id
+ s4-20020a05651c200400b0028ea7b5d04asm1050357ljo.129.2023.02.01.05.21.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 01 Feb 2023 05:21:29 -0800 (PST)
+Received: by mail-lf1-f52.google.com with SMTP id b3so29267404lfv.2;
+ Wed, 01 Feb 2023 05:21:29 -0800 (PST)
+X-Received: by 2002:a05:6512:4010:b0:4d5:76af:f890 with SMTP id
+ br16-20020a056512401000b004d576aff890mr401587lfb.228.1675257689284; Wed, 01
+ Feb 2023 05:21:29 -0800 (PST)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=quintela@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+References: <20230131133906.1956228-1-alexghiti@rivosinc.com>
+ <20230131133906.1956228-3-alexghiti@rivosinc.com>
+In-Reply-To: <20230131133906.1956228-3-alexghiti@rivosinc.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Wed, 1 Feb 2023 21:21:17 +0800
+X-Gmail-Original-Message-ID: <CANzO1D0WH1T9YuJokFJp8gc9dkDTKUtD+YN+tvp6bZir=NRQPA@mail.gmail.com>
+Message-ID: <CANzO1D0WH1T9YuJokFJp8gc9dkDTKUtD+YN+tvp6bZir=NRQPA@mail.gmail.com>
+Subject: Re: [PATCH v9 2/5] riscv: Change type of valid_vm_1_10_[32|64] to bool
+To: Alexandre Ghiti <alexghiti@rivosinc.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>, 
+ Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Bin Meng <bmeng@tinylab.org>
+Content-Type: multipart/alternative; boundary="0000000000007a24dc05f3a353fa"
+Received-SPF: pass client-ip=2a00:1450:4864:20::22c;
+ envelope-from=frank.chang@sifive.com; helo=mail-lj1-x22c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -102,58 +90,175 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2023 13:14:28 -0000
+X-List-Received-Date: Wed, 01 Feb 2023 13:21:49 -0000
 
-Markus Armbruster <armbru@redhat.com> wrote:
-> Juan Quintela <quintela@redhat.com> writes:
+--0000000000007a24dc05f3a353fa
+Content-Type: text/plain; charset="UTF-8"
+
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+
+On Tue, Jan 31, 2023 at 10:29 PM Alexandre Ghiti <alexghiti@rivosinc.com>
+wrote:
+
+> This array is actually used as a boolean so swap its current char type
+> to a boolean and at the same time, change the type of validate_vm to
+> bool since it returns valid_vm_1_10_[32|64].
 >
->> Markus Armbruster <armbru@redhat.com> wrote:
->>> The script drops #include "qemu/osdep.h" from headers.  Mention it in
->>> the commit message it uses for --git.
->>>
->>> Signed-off-by: Markus Armbruster <armbru@redhat.com>
->>> ---
->>>  scripts/clean-includes | 4 ++--
->>>  1 file changed, 2 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/scripts/clean-includes b/scripts/clean-includes
->>> index f0466a6262..f9722c3aec 100755
->>> --- a/scripts/clean-includes
->>> +++ b/scripts/clean-includes
->>> @@ -193,8 +193,8 @@ if [ "$GIT" = "yes" ]; then
->>>      git commit --signoff -F - <<EOF
->>>  $GITSUBJ: Clean up includes
->>>  
->>> -Clean up includes so that osdep.h is included first and headers
->>> -which it implies are not included manually.
->>> +Clean up includes so that qemu/osdep.h is included first in .c, and
->>> +not in .h, and headers which it implies are not included manually.
->>
->> I give a tree.
->>
->> Clean up includes so qemu/osdep.h is never used in .h files.  It makes
->> sure that qemu/osdep.h is only used in .c files.  Once there, it assures
->> that .h files already included in qemu/osdep.h are not included a second
->> time on the .c file.
->>
->> What do you think?
+> Suggested-by: Andrew Jones <ajones@ventanamicro.com>
+> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Bin Meng <bmeng@tinylab.org>
+> ---
+>  target/riscv/csr.c | 21 +++++++++++----------
+>  1 file changed, 11 insertions(+), 10 deletions(-)
 >
-> Neglects to mention qemu/osdep.h goes first in .c.
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 0db2c233e5..6b157806a5 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1117,16 +1117,16 @@ static const target_ulong hip_writable_mask =
+> MIP_VSSIP;
+>  static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP |
+> MIP_VSEIP;
+>  static const target_ulong vsip_writable_mask = MIP_VSSIP;
+>
+> -static const char valid_vm_1_10_32[16] = {
+> -    [VM_1_10_MBARE] = 1,
+> -    [VM_1_10_SV32] = 1
+> +static const bool valid_vm_1_10_32[16] = {
+> +    [VM_1_10_MBARE] = true,
+> +    [VM_1_10_SV32] = true
+>  };
+>
+> -static const char valid_vm_1_10_64[16] = {
+> -    [VM_1_10_MBARE] = 1,
+> -    [VM_1_10_SV39] = 1,
+> -    [VM_1_10_SV48] = 1,
+> -    [VM_1_10_SV57] = 1
+> +static const bool valid_vm_1_10_64[16] = {
+> +    [VM_1_10_MBARE] = true,
+> +    [VM_1_10_SV39] = true,
+> +    [VM_1_10_SV48] = true,
+> +    [VM_1_10_SV57] = true
+>  };
+>
+>  /* Machine Information Registers */
+> @@ -1209,7 +1209,7 @@ static RISCVException read_mstatus(CPURISCVState
+> *env, int csrno,
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> -static int validate_vm(CPURISCVState *env, target_ulong vm)
+> +static bool validate_vm(CPURISCVState *env, target_ulong vm)
+>  {
+>      if (riscv_cpu_mxl(env) == MXL_RV32) {
+>          return valid_vm_1_10_32[vm & 0xf];
+> @@ -2648,7 +2648,8 @@ static RISCVException read_satp(CPURISCVState *env,
+> int csrno,
+>  static RISCVException write_satp(CPURISCVState *env, int csrno,
+>                                   target_ulong val)
+>  {
+> -    target_ulong vm, mask;
+> +    target_ulong mask;
+> +    bool vm;
+>
+>      if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
+>          return RISCV_EXCP_NONE;
+> --
+> 2.37.2
+>
+>
+>
 
-/me tries again
+--0000000000007a24dc05f3a353fa
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-What about:
+<div dir=3D"ltr">Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang=
+@sifive.com">frank.chang@sifive.com</a>&gt;</div><br><div class=3D"gmail_qu=
+ote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jan 31, 2023 at 10:29 PM=
+ Alexandre Ghiti &lt;<a href=3D"mailto:alexghiti@rivosinc.com">alexghiti@ri=
+vosinc.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">This array is actually used as a boolean so swap its current cha=
+r type<br>
+to a boolean and at the same time, change the type of validate_vm to<br>
+bool since it returns valid_vm_1_10_[32|64].<br>
+<br>
+Suggested-by: Andrew Jones &lt;<a href=3D"mailto:ajones@ventanamicro.com" t=
+arget=3D"_blank">ajones@ventanamicro.com</a>&gt;<br>
+Signed-off-by: Alexandre Ghiti &lt;<a href=3D"mailto:alexghiti@rivosinc.com=
+" target=3D"_blank">alexghiti@rivosinc.com</a>&gt;<br>
+Reviewed-by: Andrew Jones &lt;<a href=3D"mailto:ajones@ventanamicro.com" ta=
+rget=3D"_blank">ajones@ventanamicro.com</a>&gt;<br>
+Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.co=
+m" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+Reviewed-by: Bin Meng &lt;<a href=3D"mailto:bmeng@tinylab.org" target=3D"_b=
+lank">bmeng@tinylab.org</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/csr.c | 21 +++++++++++----------<br>
+=C2=A01 file changed, 11 insertions(+), 10 deletions(-)<br>
+<br>
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
+index 0db2c233e5..6b157806a5 100644<br>
+--- a/target/riscv/csr.c<br>
++++ b/target/riscv/csr.c<br>
+@@ -1117,16 +1117,16 @@ static const target_ulong hip_writable_mask =3D MIP=
+_VSSIP;<br>
+=C2=A0static const target_ulong hvip_writable_mask =3D MIP_VSSIP | MIP_VSTI=
+P | MIP_VSEIP;<br>
+=C2=A0static const target_ulong vsip_writable_mask =3D MIP_VSSIP;<br>
+<br>
+-static const char valid_vm_1_10_32[16] =3D {<br>
+-=C2=A0 =C2=A0 [VM_1_10_MBARE] =3D 1,<br>
+-=C2=A0 =C2=A0 [VM_1_10_SV32] =3D 1<br>
++static const bool valid_vm_1_10_32[16] =3D {<br>
++=C2=A0 =C2=A0 [VM_1_10_MBARE] =3D true,<br>
++=C2=A0 =C2=A0 [VM_1_10_SV32] =3D true<br>
+=C2=A0};<br>
+<br>
+-static const char valid_vm_1_10_64[16] =3D {<br>
+-=C2=A0 =C2=A0 [VM_1_10_MBARE] =3D 1,<br>
+-=C2=A0 =C2=A0 [VM_1_10_SV39] =3D 1,<br>
+-=C2=A0 =C2=A0 [VM_1_10_SV48] =3D 1,<br>
+-=C2=A0 =C2=A0 [VM_1_10_SV57] =3D 1<br>
++static const bool valid_vm_1_10_64[16] =3D {<br>
++=C2=A0 =C2=A0 [VM_1_10_MBARE] =3D true,<br>
++=C2=A0 =C2=A0 [VM_1_10_SV39] =3D true,<br>
++=C2=A0 =C2=A0 [VM_1_10_SV48] =3D true,<br>
++=C2=A0 =C2=A0 [VM_1_10_SV57] =3D true<br>
+=C2=A0};<br>
+<br>
+=C2=A0/* Machine Information Registers */<br>
+@@ -1209,7 +1209,7 @@ static RISCVException read_mstatus(CPURISCVState *env=
+, int csrno,<br>
+=C2=A0 =C2=A0 =C2=A0return RISCV_EXCP_NONE;<br>
+=C2=A0}<br>
+<br>
+-static int validate_vm(CPURISCVState *env, target_ulong vm)<br>
++static bool validate_vm(CPURISCVState *env, target_ulong vm)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return valid_vm_1_10_32[vm &amp; 0xf];<br=
+>
+@@ -2648,7 +2648,8 @@ static RISCVException read_satp(CPURISCVState *env, i=
+nt csrno,<br>
+=C2=A0static RISCVException write_satp(CPURISCVState *env, int csrno,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong val)<br>
+=C2=A0{<br>
+-=C2=A0 =C2=A0 target_ulong vm, mask;<br>
++=C2=A0 =C2=A0 target_ulong mask;<br>
++=C2=A0 =C2=A0 bool vm;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0if (!riscv_feature(env, RISCV_FEATURE_MMU)) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return RISCV_EXCP_NONE;<br>
+-- <br>
+2.37.2<br>
+<br>
+<br>
+</blockquote></div>
 
-The file qemu/osdep.h should only be included in .c files.  And it has
-to be the first included file.
-
-This script does several things:
-- Remove qemu/osdep.h from .h files.
-- If qemu/osdep.h is included in a .c file it is moved to the first
-  included position if it is anywhere else.
-- Remove from .c files all include files that are already present in
-  qemu/osdep.h.
-
-Later, Juan.
-
+--0000000000007a24dc05f3a353fa--
 
