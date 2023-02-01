@@ -1,76 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pND4y-0007LV-21
-	for mharc-qemu-riscv@gnu.org; Wed, 01 Feb 2023 08:23:12 -0500
+	id 1pND79-0000AR-TQ
+	for mharc-qemu-riscv@gnu.org; Wed, 01 Feb 2023 08:25:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1pND3S-00065R-LA
- for qemu-riscv@nongnu.org; Wed, 01 Feb 2023 08:21:47 -0500
-Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c])
+ id 1pND6c-0007uS-Rd
+ for qemu-riscv@nongnu.org; Wed, 01 Feb 2023 08:24:57 -0500
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1pND3N-00047F-0a
- for qemu-riscv@nongnu.org; Wed, 01 Feb 2023 08:21:34 -0500
-Received: by mail-lj1-x22c.google.com with SMTP id t12so19327454lji.13
- for <qemu-riscv@nongnu.org>; Wed, 01 Feb 2023 05:21:32 -0800 (PST)
+ id 1pND5r-0004a8-Rq
+ for qemu-riscv@nongnu.org; Wed, 01 Feb 2023 08:24:09 -0500
+Received: by mail-lf1-x12b.google.com with SMTP id x40so29184704lfu.12
+ for <qemu-riscv@nongnu.org>; Wed, 01 Feb 2023 05:24:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rFFADaYv4RMRZci0kU485Cfrcm6FCC0H2psqZLwK+Lg=;
- b=le3s0VPp7peRiMG3z6IRJ4UgIaemTeGjkjAG7wV9sV0zFkHeNvRt8rIdtNkKmeccbB
- PKg+BVq1u+1mfTDP7yTr78TX4dJWu+AO3CuHd63O4gv1mIKIKpNK7Eozr60EOhFsbxhh
- 7IkLI0e5APw10ho8FwOQV4tYhY04V/Z3DVudfl0GJsmNy60fRI/FVKphznheeW2vS8k1
- xCyWR59Ps6a6pSH99AGMpPOAd8sZtwD0xZIphUfvvfEbuT6BXOfgDoDu2MVIuZwq5XJr
- /hSP5yaCe07NRGnlTcdXdLvuk/v0xwARdMLgeQZidwaz+5dySDgh9rIGsbNos0ecvFpd
- 5uJQ==
+ bh=lS2CvRnhHoLVexaa0r8i5N4BCfxWMaqXPJGrSY94m3A=;
+ b=XNKBHOPubJrNVb4yQ/Ljd5mhjN9G1DRNPtpNXYsOsdwv6g03EDI7qV5nUd/+m6tX99
+ EC49f0bPlw3fmZ6bIU7k5KRU4u+WPM0UBhv1oMWgc+UFw7+81iVmR+EwcKPBVUFfkfvs
+ Y19TKGr2jw8kyFY9qNXKch2B/zI4/ipCT0sv0Cc6Hff2YM5jU279nHWesdmhHLoANcK0
+ e72+FaolMbi9vxJtLBebRgJySPKkibuLc/jYV72UUMO+BmXN/RdKWr27Vw1ZuGUUJ4kc
+ nrpq9iZmbyUxG10HgRer/oofJ5NjcMjieK/A0/yjJB1TV+sF4IVr1mFes5sgVSQ8OgC5
+ 37QA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rFFADaYv4RMRZci0kU485Cfrcm6FCC0H2psqZLwK+Lg=;
- b=J0cPMoCsj86A3TRQHjU6eH9C89CAniei0UKiZPZ6jGdDGOXQGOYY8j6aJTuzt7dcWs
- psCEyFCA1XA24llHND8JdlI7pp71eZFy6aJ9M/Nb/AxSmpUyU1KhQX+RofHhupxwppVv
- kn3LzrbZUQPTNB5w9KVYYA1s71rhtdIPQfQGNxVUbezOTyHuXb5r9cXEZIErWcpTDqKm
- We6X/fWW4MfHWgnDMHNgAhkA+EUvuuOtohnAMA2cc5qdRa2cLjsPmKkRK4JDfwzkODlr
- Nxr3ajWPGaFWn4BUJeN5QB0ThGkSU208O9B/7Q95d67s9LbXcD8B4+wIp5ek7aTQkj3V
- 6/AA==
-X-Gm-Message-State: AO0yUKUAmCHF0PSnaHwrhE1uRI1i2znir/lNgQRUTXPZR6r3ShjKAVyL
- /dt4aFLIgm5IlpKsEWmoQSua4zpCJD30x2JVlkHknpdhKeXH2BeDGfFEyqLBl23ZdvXA1MsZJlg
- o6Pjp4hKemwse8IK4prsbM0g1O8nLE3q/eOJZg3CnK2EbGWOCTzZPn+TwduM5VC6Gc2n5ZHhmuW
- Q=
-X-Google-Smtp-Source: AK7set9jqZAT4hJR+LPzu1lC/jfrSPMSTvd33O1FDI9LC4NE3PjMoUZSlD6AqkHyAlT6JJWFoRYW9Q==
-X-Received: by 2002:a2e:8045:0:b0:290:5a39:9156 with SMTP id
- p5-20020a2e8045000000b002905a399156mr461307ljg.10.1675257690666; 
- Wed, 01 Feb 2023 05:21:30 -0800 (PST)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com.
- [209.85.167.52]) by smtp.gmail.com with ESMTPSA id
- s4-20020a05651c200400b0028ea7b5d04asm1050357ljo.129.2023.02.01.05.21.29
+ bh=lS2CvRnhHoLVexaa0r8i5N4BCfxWMaqXPJGrSY94m3A=;
+ b=1aO/rulF0n7etjgec5HtmCACNQodnttawEhz6bDAOHExxNs3FKJT9ukHaKZCjm+dW/
+ CdBTm5fn+cHlGYi4RFCzSgUuolow0QMo23Xri0XFJ6cRlJujt7FTnZVmfVyx1OiWd19u
+ 4wt4MHTrhDfkABvzknom+i7nHYPCoOpHjfWdotPXPvgEFa0MBx2PetH7KchAV5AU+FJv
+ nF5SLa3xFQPihdkedLjw72zKBjD6WGKwC4Fij4b1BFvkCetIK92W1Xs2used2tG5RJFA
+ MkJG1PS8FrWYZSVqHJ9YOtIlfiF7OSoPeuq3gCWKtemJwW8aqCA8jGdmIedUKUCY3iwU
+ stxg==
+X-Gm-Message-State: AO0yUKUEU9JpjM3Lgw//BOUqU5+MepcZHl55WGiYQPRZXmhczrHvvuBR
+ EwrZdUw9JyFqoOAqga57oGyb1/us3OVimvqhVfO+ROhd2sv1EbqQm4Z/x6UaAhDnujWrDonMKqb
+ jHYDAPE+nKc06ZPdBYepJWmAOnSFkGpU2cRtLqkfnBbM/7e7YVtnkAk/etX8LNvg1/0ij+6eyAE
+ Wavg==
+X-Google-Smtp-Source: AK7set+eiPewEGZCeMyjTruBEfJc3rdgvSOieu4IXyJFpGwxwC0nFol9b2IuiaV0vb4DhdoW0n6jHA==
+X-Received: by 2002:ac2:4903:0:b0:4b5:6649:eb6c with SMTP id
+ n3-20020ac24903000000b004b56649eb6cmr436652lfi.25.1675257845796; 
+ Wed, 01 Feb 2023 05:24:05 -0800 (PST)
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com.
+ [209.85.167.45]) by smtp.gmail.com with ESMTPSA id
+ y20-20020ac24474000000b004d57d1c6ee7sm1167384lfl.248.2023.02.01.05.24.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Feb 2023 05:21:29 -0800 (PST)
-Received: by mail-lf1-f52.google.com with SMTP id b3so29267404lfv.2;
- Wed, 01 Feb 2023 05:21:29 -0800 (PST)
-X-Received: by 2002:a05:6512:4010:b0:4d5:76af:f890 with SMTP id
- br16-20020a056512401000b004d576aff890mr401587lfb.228.1675257689284; Wed, 01
- Feb 2023 05:21:29 -0800 (PST)
+ Wed, 01 Feb 2023 05:24:05 -0800 (PST)
+Received: by mail-lf1-f45.google.com with SMTP id x40so29184589lfu.12;
+ Wed, 01 Feb 2023 05:24:04 -0800 (PST)
+X-Received: by 2002:a19:6a11:0:b0:4d8:6127:6dcb with SMTP id
+ u17-20020a196a11000000b004d861276dcbmr328391lfu.145.1675257844456; Wed, 01
+ Feb 2023 05:24:04 -0800 (PST)
 MIME-Version: 1.0
 References: <20230131133906.1956228-1-alexghiti@rivosinc.com>
- <20230131133906.1956228-3-alexghiti@rivosinc.com>
-In-Reply-To: <20230131133906.1956228-3-alexghiti@rivosinc.com>
+ <20230131133906.1956228-6-alexghiti@rivosinc.com>
+In-Reply-To: <20230131133906.1956228-6-alexghiti@rivosinc.com>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Wed, 1 Feb 2023 21:21:17 +0800
-X-Gmail-Original-Message-ID: <CANzO1D0WH1T9YuJokFJp8gc9dkDTKUtD+YN+tvp6bZir=NRQPA@mail.gmail.com>
-Message-ID: <CANzO1D0WH1T9YuJokFJp8gc9dkDTKUtD+YN+tvp6bZir=NRQPA@mail.gmail.com>
-Subject: Re: [PATCH v9 2/5] riscv: Change type of valid_vm_1_10_[32|64] to bool
+Date: Wed, 1 Feb 2023 21:23:52 +0800
+X-Gmail-Original-Message-ID: <CANzO1D1s5_7F9D5h=RSy5JgceyLpObWsyPuhtNT58mLsLxrpzA@mail.gmail.com>
+Message-ID: <CANzO1D1s5_7F9D5h=RSy5JgceyLpObWsyPuhtNT58mLsLxrpzA@mail.gmail.com>
+Subject: Re: [PATCH v9 5/5] riscv: Correctly set the device-tree entry
+ 'mmu-type'
 To: Alexandre Ghiti <alexghiti@rivosinc.com>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>, 
  Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Bin Meng <bmeng@tinylab.org>
-Content-Type: multipart/alternative; boundary="0000000000007a24dc05f3a353fa"
-Received-SPF: pass client-ip=2a00:1450:4864:20::22c;
- envelope-from=frank.chang@sifive.com; helo=mail-lj1-x22c.google.com
+Content-Type: multipart/alternative; boundary="000000000000b9e36e05f3a35cd9"
+Received-SPF: pass client-ip=2a00:1450:4864:20::12b;
+ envelope-from=frank.chang@sifive.com; helo=mail-lf1-x12b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -90,104 +91,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2023 13:21:49 -0000
+X-List-Received-Date: Wed, 01 Feb 2023 13:25:03 -0000
 
---0000000000007a24dc05f3a353fa
+--000000000000b9e36e05f3a35cd9
 Content-Type: text/plain; charset="UTF-8"
 
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-On Tue, Jan 31, 2023 at 10:29 PM Alexandre Ghiti <alexghiti@rivosinc.com>
+On Tue, Jan 31, 2023 at 10:36 PM Alexandre Ghiti <alexghiti@rivosinc.com>
 wrote:
 
-> This array is actually used as a boolean so swap its current char type
-> to a boolean and at the same time, change the type of validate_vm to
-> bool since it returns valid_vm_1_10_[32|64].
+> The 'mmu-type' should reflect what the hardware is capable of so use the
+> new satp_mode field in RISCVCPUConfig to do that.
 >
-> Suggested-by: Andrew Jones <ajones@ventanamicro.com>
 > Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
 > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > Reviewed-by: Bin Meng <bmeng@tinylab.org>
 > ---
->  target/riscv/csr.c | 21 +++++++++++----------
->  1 file changed, 11 insertions(+), 10 deletions(-)
+>  hw/riscv/virt.c | 19 ++++++++++---------
+>  1 file changed, 10 insertions(+), 9 deletions(-)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 0db2c233e5..6b157806a5 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1117,16 +1117,16 @@ static const target_ulong hip_writable_mask =
-> MIP_VSSIP;
->  static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP |
-> MIP_VSEIP;
->  static const target_ulong vsip_writable_mask = MIP_VSSIP;
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 94ff2a1584..48d034a5f7 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -228,7 +228,8 @@ static void create_fdt_socket_cpus(RISCVVirtState *s,
+> int socket,
+>      int cpu;
+>      uint32_t cpu_phandle;
+>      MachineState *mc = MACHINE(s);
+> -    char *name, *cpu_name, *core_name, *intc_name;
+> +    uint8_t satp_mode_max;
+> +    char *name, *cpu_name, *core_name, *intc_name, *sv_name;
 >
-> -static const char valid_vm_1_10_32[16] = {
-> -    [VM_1_10_MBARE] = 1,
-> -    [VM_1_10_SV32] = 1
-> +static const bool valid_vm_1_10_32[16] = {
-> +    [VM_1_10_MBARE] = true,
-> +    [VM_1_10_SV32] = true
->  };
->
-> -static const char valid_vm_1_10_64[16] = {
-> -    [VM_1_10_MBARE] = 1,
-> -    [VM_1_10_SV39] = 1,
-> -    [VM_1_10_SV48] = 1,
-> -    [VM_1_10_SV57] = 1
-> +static const bool valid_vm_1_10_64[16] = {
-> +    [VM_1_10_MBARE] = true,
-> +    [VM_1_10_SV39] = true,
-> +    [VM_1_10_SV48] = true,
-> +    [VM_1_10_SV57] = true
->  };
->
->  /* Machine Information Registers */
-> @@ -1209,7 +1209,7 @@ static RISCVException read_mstatus(CPURISCVState
-> *env, int csrno,
->      return RISCV_EXCP_NONE;
->  }
->
-> -static int validate_vm(CPURISCVState *env, target_ulong vm)
-> +static bool validate_vm(CPURISCVState *env, target_ulong vm)
->  {
->      if (riscv_cpu_mxl(env) == MXL_RV32) {
->          return valid_vm_1_10_32[vm & 0xf];
-> @@ -2648,7 +2648,8 @@ static RISCVException read_satp(CPURISCVState *env,
-> int csrno,
->  static RISCVException write_satp(CPURISCVState *env, int csrno,
->                                   target_ulong val)
->  {
-> -    target_ulong vm, mask;
-> +    target_ulong mask;
-> +    bool vm;
->
->      if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
->          return RISCV_EXCP_NONE;
+>      for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
+>          cpu_phandle = (*phandle)++;
+> @@ -236,14 +237,14 @@ static void create_fdt_socket_cpus(RISCVVirtState
+> *s, int socket,
+>          cpu_name = g_strdup_printf("/cpus/cpu@%d",
+>              s->soc[socket].hartid_base + cpu);
+>          qemu_fdt_add_subnode(mc->fdt, cpu_name);
+> -        if (riscv_feature(&s->soc[socket].harts[cpu].env,
+> -                          RISCV_FEATURE_MMU)) {
+> -            qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type",
+> -                                    (is_32_bit) ? "riscv,sv32" :
+> "riscv,sv48");
+> -        } else {
+> -            qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type",
+> -                                    "riscv,none");
+> -        }
+> +
+> +        satp_mode_max = satp_mode_max_from_map(
+> +                            s->soc[socket].harts[cpu].cfg.satp_mode.map);
+> +        sv_name = g_strdup_printf("riscv,%s",
+> +                                  satp_mode_str(satp_mode_max,
+> is_32_bit));
+> +        qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type", sv_name);
+> +        g_free(sv_name);
+> +
+>          name = riscv_isa_string(&s->soc[socket].harts[cpu]);
+>          qemu_fdt_setprop_string(mc->fdt, cpu_name, "riscv,isa", name);
+>          g_free(name);
 > --
 > 2.37.2
 >
 >
 >
 
---0000000000007a24dc05f3a353fa
+--000000000000b9e36e05f3a35cd9
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr">Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang=
 @sifive.com">frank.chang@sifive.com</a>&gt;</div><br><div class=3D"gmail_qu=
-ote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jan 31, 2023 at 10:29 PM=
+ote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jan 31, 2023 at 10:36 PM=
  Alexandre Ghiti &lt;<a href=3D"mailto:alexghiti@rivosinc.com">alexghiti@ri=
 vosinc.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
 =3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">This array is actually used as a boolean so swap its current cha=
-r type<br>
-to a boolean and at the same time, change the type of validate_vm to<br>
-bool since it returns valid_vm_1_10_[32|64].<br>
+-left:1ex">The &#39;mmu-type&#39; should reflect what the hardware is capab=
+le of so use the<br>
+new satp_mode field in RISCVCPUConfig to do that.<br>
 <br>
-Suggested-by: Andrew Jones &lt;<a href=3D"mailto:ajones@ventanamicro.com" t=
-arget=3D"_blank">ajones@ventanamicro.com</a>&gt;<br>
 Signed-off-by: Alexandre Ghiti &lt;<a href=3D"mailto:alexghiti@rivosinc.com=
 " target=3D"_blank">alexghiti@rivosinc.com</a>&gt;<br>
 Reviewed-by: Andrew Jones &lt;<a href=3D"mailto:ajones@ventanamicro.com" ta=
@@ -197,68 +182,73 @@ m" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
 Reviewed-by: Bin Meng &lt;<a href=3D"mailto:bmeng@tinylab.org" target=3D"_b=
 lank">bmeng@tinylab.org</a>&gt;<br>
 ---<br>
-=C2=A0target/riscv/csr.c | 21 +++++++++++----------<br>
-=C2=A01 file changed, 11 insertions(+), 10 deletions(-)<br>
+=C2=A0hw/riscv/virt.c | 19 ++++++++++---------<br>
+=C2=A01 file changed, 10 insertions(+), 9 deletions(-)<br>
 <br>
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-index 0db2c233e5..6b157806a5 100644<br>
---- a/target/riscv/csr.c<br>
-+++ b/target/riscv/csr.c<br>
-@@ -1117,16 +1117,16 @@ static const target_ulong hip_writable_mask =3D MIP=
-_VSSIP;<br>
-=C2=A0static const target_ulong hvip_writable_mask =3D MIP_VSSIP | MIP_VSTI=
-P | MIP_VSEIP;<br>
-=C2=A0static const target_ulong vsip_writable_mask =3D MIP_VSSIP;<br>
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c<br>
+index 94ff2a1584..48d034a5f7 100644<br>
+--- a/hw/riscv/virt.c<br>
++++ b/hw/riscv/virt.c<br>
+@@ -228,7 +228,8 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, i=
+nt socket,<br>
+=C2=A0 =C2=A0 =C2=A0int cpu;<br>
+=C2=A0 =C2=A0 =C2=A0uint32_t cpu_phandle;<br>
+=C2=A0 =C2=A0 =C2=A0MachineState *mc =3D MACHINE(s);<br>
+-=C2=A0 =C2=A0 char *name, *cpu_name, *core_name, *intc_name;<br>
++=C2=A0 =C2=A0 uint8_t satp_mode_max;<br>
++=C2=A0 =C2=A0 char *name, *cpu_name, *core_name, *intc_name, *sv_name;<br>
 <br>
--static const char valid_vm_1_10_32[16] =3D {<br>
--=C2=A0 =C2=A0 [VM_1_10_MBARE] =3D 1,<br>
--=C2=A0 =C2=A0 [VM_1_10_SV32] =3D 1<br>
-+static const bool valid_vm_1_10_32[16] =3D {<br>
-+=C2=A0 =C2=A0 [VM_1_10_MBARE] =3D true,<br>
-+=C2=A0 =C2=A0 [VM_1_10_SV32] =3D true<br>
-=C2=A0};<br>
-<br>
--static const char valid_vm_1_10_64[16] =3D {<br>
--=C2=A0 =C2=A0 [VM_1_10_MBARE] =3D 1,<br>
--=C2=A0 =C2=A0 [VM_1_10_SV39] =3D 1,<br>
--=C2=A0 =C2=A0 [VM_1_10_SV48] =3D 1,<br>
--=C2=A0 =C2=A0 [VM_1_10_SV57] =3D 1<br>
-+static const bool valid_vm_1_10_64[16] =3D {<br>
-+=C2=A0 =C2=A0 [VM_1_10_MBARE] =3D true,<br>
-+=C2=A0 =C2=A0 [VM_1_10_SV39] =3D true,<br>
-+=C2=A0 =C2=A0 [VM_1_10_SV48] =3D true,<br>
-+=C2=A0 =C2=A0 [VM_1_10_SV57] =3D true<br>
-=C2=A0};<br>
-<br>
-=C2=A0/* Machine Information Registers */<br>
-@@ -1209,7 +1209,7 @@ static RISCVException read_mstatus(CPURISCVState *env=
-, int csrno,<br>
-=C2=A0 =C2=A0 =C2=A0return RISCV_EXCP_NONE;<br>
-=C2=A0}<br>
-<br>
--static int validate_vm(CPURISCVState *env, target_ulong vm)<br>
-+static bool validate_vm(CPURISCVState *env, target_ulong vm)<br>
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return valid_vm_1_10_32[vm &amp; 0xf];<br=
->
-@@ -2648,7 +2648,8 @@ static RISCVException read_satp(CPURISCVState *env, i=
-nt csrno,<br>
-=C2=A0static RISCVException write_satp(CPURISCVState *env, int csrno,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong val)<br>
-=C2=A0{<br>
--=C2=A0 =C2=A0 target_ulong vm, mask;<br>
-+=C2=A0 =C2=A0 target_ulong mask;<br>
-+=C2=A0 =C2=A0 bool vm;<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0if (!riscv_feature(env, RISCV_FEATURE_MMU)) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return RISCV_EXCP_NONE;<br>
+=C2=A0 =C2=A0 =C2=A0for (cpu =3D s-&gt;soc[socket].num_harts - 1; cpu &gt;=
+=3D 0; cpu--) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cpu_phandle =3D (*phandle)++;<br>
+@@ -236,14 +237,14 @@ static void create_fdt_socket_cpus(RISCVVirtState *s,=
+ int socket,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cpu_name =3D g_strdup_printf(&quot;/cpus/=
+cpu@%d&quot;,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0s-&gt;soc[socket].hartid_ba=
+se + cpu);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0qemu_fdt_add_subnode(mc-&gt;fdt, cpu_name=
+);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (riscv_feature(&amp;s-&gt;soc[socket].harts=
+[cpu].env,<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 RISCV_FEATURE_MMU)) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fdt_setprop_string(mc-&gt;f=
+dt, cpu_name, &quot;mmu-type&quot;,<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (is_32_bit) ? &quot;ri=
+scv,sv32&quot; : &quot;riscv,sv48&quot;);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fdt_setprop_string(mc-&gt;f=
+dt, cpu_name, &quot;mmu-type&quot;,<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;riscv,none&quot;=
+);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 satp_mode_max =3D satp_mode_max_from_map(<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 s-&gt;soc[socket].harts[cpu].cfg.satp_mode.map);<b=
+r>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 sv_name =3D g_strdup_printf(&quot;riscv,%s&quo=
+t;,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 satp_mode_str(satp_mode_max, =
+is_32_bit));<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_fdt_setprop_string(mc-&gt;fdt, cpu_name, =
+&quot;mmu-type&quot;, sv_name);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 g_free(sv_name);<br>
++<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0name =3D riscv_isa_string(&amp;s-&gt;soc[=
+socket].harts[cpu]);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0qemu_fdt_setprop_string(mc-&gt;fdt, cpu_n=
+ame, &quot;riscv,isa&quot;, name);<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0g_free(name);<br>
 -- <br>
 2.37.2<br>
 <br>
 <br>
 </blockquote></div>
 
---0000000000007a24dc05f3a353fa--
+--000000000000b9e36e05f3a35cd9--
 
