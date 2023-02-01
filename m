@@ -1,84 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pMx7e-00073W-Ud
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Jan 2023 15:20:54 -0500
+	id 1pN0o7-0007OX-FD
+	for mharc-qemu-riscv@gnu.org; Tue, 31 Jan 2023 19:16:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1pMx7T-0006vD-9L
- for qemu-riscv@nongnu.org; Tue, 31 Jan 2023 15:20:43 -0500
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pN0nz-0007Nd-QF; Tue, 31 Jan 2023 19:16:51 -0500
+Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1pMx7Q-0002vK-4P
- for qemu-riscv@nongnu.org; Tue, 31 Jan 2023 15:20:43 -0500
-Received: by mail-wm1-x329.google.com with SMTP id bg26so5369872wmb.0
- for <qemu-riscv@nongnu.org>; Tue, 31 Jan 2023 12:20:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pN0nx-000657-RL; Tue, 31 Jan 2023 19:16:51 -0500
+Received: by mail-vk1-xa2e.google.com with SMTP id l129so8295865vkh.6;
+ Tue, 31 Jan 2023 16:16:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=566M9qySxN23A71+uLC8/2FZUCFdWIxzeit6Cy0IHpE=;
- b=JmrILXtOD9SHgJ6R3EqpNLtq+ZJkzZ9HChifdx1XAaURYdVPHSmgHwfwcf7DG6v6XV
- 7jmd7eXHZdAFUCAd6XCJ88fhUhVxg4mXRudbkVXsC5l7w3n30Wo7Jq4dxG/zs3qK30hU
- OvWbGGZ8LLBmIG4tyXstL/M59vFTypga8eQLWuLTdLylRkDwNp4QgOfARA1KHQ70gwcb
- XNcQm9s+KmRt7TOXkdO5/LoBUqL1GF3UIhoRaTmAgggAa0Sfu/wvJd5bASOkmdtD8yTR
- ez0LEsUSrs2XPVAPhaWDxSgtN7mU9AfOonIKEe5CVfDJIFQX5gtEtIzGc7/VRA2mIUC8
- EpIA==
+ bh=8Z4TDDC4gX0eMrkm4ogAYQ6T2bFbzlcOsTe4fPg2l8Y=;
+ b=qLdPqjcTg1TEK09oTMIRxpohFWVDkGrn3bKQwaqpucaETPOmdD6Engzppikz+hBmlY
+ p2tzpMkvXCnLOojrGegvOfI6BBqqnI0UVuhSVF/85fvAPUjtq9+NkU1XLhkezq4WWkW3
+ Rwmck4PSidBaKBDJCn+oldGmlA0jb1n8EVZMTkr3oYzv9osjRneJAA/gEHKtxpaz1eQG
+ b23VX0rRHWUKwtu09cSe2m3wguIEqJWTKRBs+ccoVKo8SYt8WpR8o5nZuFsLFlCjkIkb
+ iBo6npsNKkItGRljoqBPv2Slj9PvorZb53v0h0eCTsI4c+ziomehGgGfaJLTlecFy3E8
+ CsQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=566M9qySxN23A71+uLC8/2FZUCFdWIxzeit6Cy0IHpE=;
- b=kvIkL94SGdLPteCnmXGySv/rT5TaHFpCh/1eLhWqutR5ToQY6mgBYe3uP5/PehU3P5
- 3YuHgKyk+2QtR44X62/QKoP5JRE6Y5Deeql15Nl3/xP0ljRa7M1fGsbwXaYq4N7kkvYW
- qbpcs1RWue3dOVp3IUcTC7D4hv1fwFlojlJtpintAIvwW1ABsoYyalLgdTSTBgOpFhg3
- OsxOY7JqDCuej3DP7PsCxJjB3XPza6JIqgZqq/EP0UbMa1rdLBybrkLDaRjOI9y5hLxx
- kX5tb08+JT+mA7mgP1qoGHbINPVj6mqhp+0aJirP1NphKChpOWO7zITIjc5Anle26U+O
- uYKQ==
-X-Gm-Message-State: AFqh2kr7aXHsGuxgfUhq12r19P7zNhTsUgor8FJ4QM9NxeEPWQPIRGc4
- MaJKD1d7XP/zrU2gv4TK0Tx+q7F+XxXNVtW4
-X-Google-Smtp-Source: AMrXdXvk4HQimGZ0PYNsLjHeA06UIiAXs6S98MNkgVYFNZ+h233NCyhKpJsHV54z30JaDQsZvPvDNw==
-X-Received: by 2002:a05:600c:3495:b0:3db:a3a:4594 with SMTP id
- a21-20020a05600c349500b003db0a3a4594mr57673839wmq.28.1675196438062; 
- Tue, 31 Jan 2023 12:20:38 -0800 (PST)
-Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
- [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- v2-20020adfe282000000b002bdec340a1csm15391977wri.110.2023.01.31.12.20.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Jan 2023 12:20:37 -0800 (PST)
-From: Christoph Muellner <christoph.muellner@vrull.eu>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- =?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko.stuebner@vrull.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Kito Cheng <kito.cheng@sifive.com>,
- Cooper Qu <cooper.qu@linux.alibaba.com>,
- Lifang Xia <lifang_xia@linux.alibaba.com>,
- Yunhai Shang <yunhai@linux.alibaba.com>,
- Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
-Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
-Subject: [PATCH v5 13/14] RISC-V: Adding XTheadFmv ISA extension
-Date: Tue, 31 Jan 2023 21:20:12 +0100
-Message-Id: <20230131202013.2541053-14-christoph.muellner@vrull.eu>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230131202013.2541053-1-christoph.muellner@vrull.eu>
-References: <20230131202013.2541053-1-christoph.muellner@vrull.eu>
+ bh=8Z4TDDC4gX0eMrkm4ogAYQ6T2bFbzlcOsTe4fPg2l8Y=;
+ b=RDZcHWmFaH2R/NO9EhHGo4GddgRt9TtBq0nK7WbQDwlQO4FUJx2nLRTM1+yXybfthl
+ Udrquo70eLkX8iM6jBI0oCOJaiDBIdO1WM762jngDXSVME1Co+b2m/+WcG251Kze5ruG
+ DY+Ppmykjgkvl8axLDDveS4bN+QmFKAkEAPhPLm0UUjRlKvAU5ANoMlmI3R5SSYHG27Q
+ oi3C+azjiTxg4ZxyV5zKPkaT3jYbKvdCwEQTWo4lSd+CUGTF4rcOmjgZzIJnb/u1Avgr
+ uCG3+Gg/uXd2uwPm44IFuUnfISyYAdxt3YvPoBsiF0W79v81pANLhYOLPU7rX9nCxTwN
+ 4C3w==
+X-Gm-Message-State: AO0yUKX0tKaqMQC+uwZWzS/ULvO3L0QpmyhSn6kBFKL14/w5ZECI9yBp
+ cIiPcVx6KrvQW6mezywJCmbjwKFx14E70q1bCz8=
+X-Google-Smtp-Source: AK7set9qHwVLEyAczHGWfd+G8MYhDzxHxKXEU5RsfR4ro80ClpsNo9Zi0LKP3T7BjJ+aUnzUVhQFj0f2G4hI0/iCxac=
+X-Received: by 2002:a05:6122:7c9:b0:3ea:3dee:4545 with SMTP id
+ l9-20020a05612207c900b003ea3dee4545mr43012vkr.26.1675210608320; Tue, 31 Jan
+ 2023 16:16:48 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-wm1-x329.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20230119213707.651533-1-dbarboza@ventanamicro.com>
+ <20230119213707.651533-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20230119213707.651533-2-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 1 Feb 2023 10:16:22 +1000
+Message-ID: <CAKmqyKPsZC64SsecFip20NhnwjKHRdw1nj-3=jYPU5Lu+urMTQ@mail.gmail.com>
+Subject: Re: [PATCH v9 1/3] hw/riscv: clear kernel_entry higher bits from
+ load_elf_ram_sym()
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Bin Meng <bmeng.cn@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,152 +77,201 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jan 2023 20:20:43 -0000
+X-List-Received-Date: Wed, 01 Feb 2023 00:16:52 -0000
 
-From: Christoph Müllner <christoph.muellner@vrull.eu>
+On Fri, Jan 20, 2023 at 7:38 AM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> load_elf_ram_sym() will sign-extend 32 bit addresses. If a 32 bit
+> QEMU guest happens to be running in a hypervisor that are using 64
+> bits to encode its address, kernel_entry can be padded with '1's
+> and create problems [1].
+>
+> Use a translate_fn() callback to be called by load_elf_ram_sym() and
+> return only the 32 bits address if we're running a 32 bit CPU.
+>
+> [1] https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg02281.html
+>
+> Suggested-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Suggested-by: Bin Meng <bmeng.cn@gmail.com>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  hw/riscv/boot.c            | 20 +++++++++++++++++++-
+>  hw/riscv/microchip_pfsoc.c |  3 ++-
+>  hw/riscv/opentitan.c       |  3 ++-
+>  hw/riscv/sifive_e.c        |  3 ++-
+>  hw/riscv/sifive_u.c        |  3 ++-
+>  hw/riscv/spike.c           |  3 ++-
+>  hw/riscv/virt.c            |  3 ++-
+>  include/hw/riscv/boot.h    |  1 +
+>  8 files changed, 32 insertions(+), 7 deletions(-)
+>
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 2594276223..46fc7adccf 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -173,7 +173,24 @@ target_ulong riscv_load_firmware(const char *firmwar=
+e_filename,
+>      exit(1);
+>  }
+>
+> +static uint64_t translate_kernel_address(void *opaque, uint64_t addr)
+> +{
+> +    RISCVHartArrayState *harts =3D opaque;
+> +
+> +    if (riscv_is_32bit(harts)) {
+> +        /*
+> +         * For 32 bit CPUs, kernel_load_base is sign-extended
+> +         * (i.e. it can be padded with '1's) by load_elf().
+> +         * Remove the sign extension by truncating to 32-bit.
+> +         */
+> +        return extract64(addr, 0, 32);
+> +    }
+> +
+> +    return addr;
 
-This patch adds support for the XTheadFmv ISA extension.
-The patch uses the T-Head specific decoder and translation.
+So.... After all that, this doesn't actually mask pentry from
+load_elf_ram_sym(), so it doesn't help.
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
----
- target/riscv/cpu.c                         |  2 +
- target/riscv/cpu.h                         |  1 +
- target/riscv/insn_trans/trans_xthead.c.inc | 45 ++++++++++++++++++++++
- target/riscv/translate.c                   |  6 +--
- target/riscv/xthead.decode                 |  4 ++
- 5 files changed, 55 insertions(+), 3 deletions(-)
+> +}
+> +
+>  target_ulong riscv_load_kernel(MachineState *machine,
+> +                               RISCVHartArrayState *harts,
+>                                 target_ulong kernel_start_addr,
+>                                 symbol_fn_t sym_cb)
+>  {
+> @@ -189,7 +206,8 @@ target_ulong riscv_load_kernel(MachineState *machine,
+>       * the (expected) load address load address. This allows kernels to =
+have
+>       * separate SBI and ELF entry points (used by FreeBSD, for example).
+>       */
+> -    if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
+> +    if (load_elf_ram_sym(kernel_filename, NULL,
+> +                         translate_kernel_address, harts,
+>                           NULL, &kernel_load_base, NULL, NULL, 0,
+>                           EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 8cbc5c9c1b..0dd2f0c753 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -116,6 +116,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(xtheadcmo, true, PRIV_VERSION_1_11_0, ext_xtheadcmo),
-     ISA_EXT_DATA_ENTRY(xtheadcondmov, true, PRIV_VERSION_1_11_0, ext_xtheadcondmov),
-     ISA_EXT_DATA_ENTRY(xtheadfmemidx, true, PRIV_VERSION_1_11_0, ext_xtheadfmemidx),
-+    ISA_EXT_DATA_ENTRY(xtheadfmv, true, PRIV_VERSION_1_11_0, ext_xtheadfmv),
-     ISA_EXT_DATA_ENTRY(xtheadmac, true, PRIV_VERSION_1_11_0, ext_xtheadmac),
-     ISA_EXT_DATA_ENTRY(xtheadmemidx, true, PRIV_VERSION_1_11_0, ext_xtheadmemidx),
-     ISA_EXT_DATA_ENTRY(xtheadmempair, true, PRIV_VERSION_1_11_0, ext_xtheadmempair),
-@@ -1134,6 +1135,7 @@ static Property riscv_cpu_extensions[] = {
-     DEFINE_PROP_BOOL("xtheadcmo", RISCVCPU, cfg.ext_xtheadcmo, false),
-     DEFINE_PROP_BOOL("xtheadcondmov", RISCVCPU, cfg.ext_xtheadcondmov, false),
-     DEFINE_PROP_BOOL("xtheadfmemidx", RISCVCPU, cfg.ext_xtheadfmemidx, false),
-+    DEFINE_PROP_BOOL("xtheadfmv", RISCVCPU, cfg.ext_xtheadfmv, false),
-     DEFINE_PROP_BOOL("xtheadmac", RISCVCPU, cfg.ext_xtheadmac, false),
-     DEFINE_PROP_BOOL("xtheadmemidx", RISCVCPU, cfg.ext_xtheadmemidx, false),
-     DEFINE_PROP_BOOL("xtheadmempair", RISCVCPU, cfg.ext_xtheadmempair, false),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 60478f4a9c..7128438d8e 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -480,6 +480,7 @@ struct RISCVCPUConfig {
-     bool ext_xtheadcmo;
-     bool ext_xtheadcondmov;
-     bool ext_xtheadfmemidx;
-+    bool ext_xtheadfmv;
-     bool ext_xtheadmac;
-     bool ext_xtheadmemidx;
-     bool ext_xtheadmempair;
-diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
-index 37373732f6..be87c34f56 100644
---- a/target/riscv/insn_trans/trans_xthead.c.inc
-+++ b/target/riscv/insn_trans/trans_xthead.c.inc
-@@ -52,6 +52,12 @@
-     }                                            \
- } while (0)
- 
-+#define REQUIRE_XTHEADFMV(ctx) do {              \
-+    if (!ctx->cfg_ptr->ext_xtheadfmv) {          \
-+        return false;                            \
-+    }                                            \
-+} while (0)
-+
- #define REQUIRE_XTHEADMAC(ctx) do {              \
-     if (!ctx->cfg_ptr->ext_xtheadmac) {          \
-         return false;                            \
-@@ -449,6 +455,45 @@ static bool trans_th_fsurw(DisasContext *ctx, arg_th_memidx *a)
-     return gen_fstore_idx(ctx, a, MO_TEUL, true);
- }
- 
-+/* XTheadFmv */
-+
-+static bool trans_th_fmv_hw_x(DisasContext *ctx, arg_th_fmv_hw_x *a)
-+{
-+    REQUIRE_XTHEADFMV(ctx);
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_FPU;
-+    REQUIRE_EXT(ctx, RVD);
-+
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_ZERO);
-+    TCGv_i64 t1 = tcg_temp_new_i64();
-+
-+    tcg_gen_extu_tl_i64(t1, src1);
-+    tcg_gen_deposit_i64(cpu_fpr[a->rd], cpu_fpr[a->rd], t1, 32, 32);
-+    tcg_temp_free_i64(t1);
-+    mark_fs_dirty(ctx);
-+    return true;
-+}
-+
-+static bool trans_th_fmv_x_hw(DisasContext *ctx, arg_th_fmv_x_hw *a)
-+{
-+    REQUIRE_XTHEADFMV(ctx);
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_FPU;
-+    REQUIRE_EXT(ctx, RVD);
-+    TCGv dst;
-+    TCGv_i64 t1;
-+
-+    dst = dest_gpr(ctx, a->rd);
-+    t1 = tcg_temp_new_i64();
-+
-+    tcg_gen_extract_i64(t1, cpu_fpr[a->rs1], 32, 32);
-+    tcg_gen_trunc_i64_tl(dst, t1);
-+    gen_set_gpr(ctx, a->rd, dst);
-+    tcg_temp_free_i64(t1);
-+    mark_fs_dirty(ctx);
-+    return true;
-+}
-+
- /* XTheadMac */
- 
- static bool gen_th_mac(DisasContext *ctx, arg_r *a,
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 216eaf9d12..182649dcb6 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -135,9 +135,9 @@ static bool has_xthead_p(DisasContext *ctx  __attribute__((__unused__)))
-     return ctx->cfg_ptr->ext_xtheadba || ctx->cfg_ptr->ext_xtheadbb ||
-            ctx->cfg_ptr->ext_xtheadbs || ctx->cfg_ptr->ext_xtheadcmo ||
-            ctx->cfg_ptr->ext_xtheadcondmov ||
--           ctx->cfg_ptr->ext_xtheadfmemidx || ctx->cfg_ptr->ext_xtheadmac ||
--           ctx->cfg_ptr->ext_xtheadmemidx || ctx->cfg_ptr->ext_xtheadmempair ||
--           ctx->cfg_ptr->ext_xtheadsync;
-+           ctx->cfg_ptr->ext_xtheadfmemidx || ctx->cfg_ptr->ext_xtheadfmv ||
-+           ctx->cfg_ptr->ext_xtheadmac || ctx->cfg_ptr->ext_xtheadmemidx ||
-+           ctx->cfg_ptr->ext_xtheadmempair || ctx->cfg_ptr->ext_xtheadsync;
- }
- 
- #define MATERIALISE_EXT_PREDICATE(ext)  \
-diff --git a/target/riscv/xthead.decode b/target/riscv/xthead.decode
-index 81daf1d694..d1d104bcf2 100644
---- a/target/riscv/xthead.decode
-+++ b/target/riscv/xthead.decode
-@@ -110,6 +110,10 @@ th_fsrw          01000 .. ..... ..... 111 ..... 0001011 @th_memidx
- th_fsurd         01110 .. ..... ..... 111 ..... 0001011 @th_memidx
- th_fsurw         01010 .. ..... ..... 111 ..... 0001011 @th_memidx
- 
-+# XTheadFmv
-+th_fmv_hw_x      1010000  00000 ..... 001 ..... 0001011 @r2
-+th_fmv_x_hw      1100000  00000 ..... 001 ..... 0001011 @r2
-+
- # XTheadMac
- th_mula          00100 00 ..... ..... 001 ..... 0001011 @r
- th_mulah         00101 00 ..... ..... 001 ..... 0001011 @r
--- 
-2.39.1
+I think we just need to add the mask here
 
+Alistair
+
+>          return kernel_load_base;
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index 82ae5e7023..bdefeb3cbb 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -629,7 +629,8 @@ static void microchip_icicle_kit_machine_init(Machine=
+State *machine)
+>          kernel_start_addr =3D riscv_calc_kernel_start_addr(&s->soc.u_cpu=
+s,
+>                                                           firmware_end_ad=
+dr);
+>
+> -        kernel_entry =3D riscv_load_kernel(machine, kernel_start_addr, N=
+ULL);
+> +        kernel_entry =3D riscv_load_kernel(machine, &s->soc.u_cpus,
+> +                                         kernel_start_addr, NULL);
+>
+>          if (machine->initrd_filename) {
+>              riscv_load_initrd(machine, kernel_entry);
+> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> index 64d5d435b9..2731138c41 100644
+> --- a/hw/riscv/opentitan.c
+> +++ b/hw/riscv/opentitan.c
+> @@ -101,7 +101,8 @@ static void opentitan_board_init(MachineState *machin=
+e)
+>      }
+>
+>      if (machine->kernel_filename) {
+> -        riscv_load_kernel(machine, memmap[IBEX_DEV_RAM].base, NULL);
+> +        riscv_load_kernel(machine, &s->soc.cpus,
+> +                          memmap[IBEX_DEV_RAM].base, NULL);
+>      }
+>  }
+>
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index 3e3f4b0088..1a7d381514 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -114,7 +114,8 @@ static void sifive_e_machine_init(MachineState *machi=
+ne)
+>                            memmap[SIFIVE_E_DEV_MROM].base, &address_space=
+_memory);
+>
+>      if (machine->kernel_filename) {
+> -        riscv_load_kernel(machine, memmap[SIFIVE_E_DEV_DTIM].base, NULL)=
+;
+> +        riscv_load_kernel(machine, &s->soc.cpus,
+> +                          memmap[SIFIVE_E_DEV_DTIM].base, NULL);
+>      }
+>  }
+>
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 2fb6ee231f..83dfe09877 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -598,7 +598,8 @@ static void sifive_u_machine_init(MachineState *machi=
+ne)
+>          kernel_start_addr =3D riscv_calc_kernel_start_addr(&s->soc.u_cpu=
+s,
+>                                                           firmware_end_ad=
+dr);
+>
+> -        kernel_entry =3D riscv_load_kernel(machine, kernel_start_addr, N=
+ULL);
+> +        kernel_entry =3D riscv_load_kernel(machine, &s->soc.u_cpus,
+> +                                         kernel_start_addr, NULL);
+>
+>          if (machine->initrd_filename) {
+>              riscv_load_initrd(machine, kernel_entry);
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index badc11ec43..2bcc50d90d 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -305,7 +305,8 @@ static void spike_board_init(MachineState *machine)
+>          kernel_start_addr =3D riscv_calc_kernel_start_addr(&s->soc[0],
+>                                                           firmware_end_ad=
+dr);
+>
+> -        kernel_entry =3D riscv_load_kernel(machine, kernel_start_addr,
+> +        kernel_entry =3D riscv_load_kernel(machine, &s->soc[0],
+> +                                         kernel_start_addr,
+>                                           htif_symbol_callback);
+>
+>          if (machine->initrd_filename) {
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 4a11b4b010..ac173a6ed6 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1274,7 +1274,8 @@ static void virt_machine_done(Notifier *notifier, v=
+oid *data)
+>          kernel_start_addr =3D riscv_calc_kernel_start_addr(&s->soc[0],
+>                                                           firmware_end_ad=
+dr);
+>
+> -        kernel_entry =3D riscv_load_kernel(machine, kernel_start_addr, N=
+ULL);
+> +        kernel_entry =3D riscv_load_kernel(machine, &s->soc[0],
+> +                                         kernel_start_addr, NULL);
+>
+>          if (machine->initrd_filename) {
+>              riscv_load_initrd(machine, kernel_entry);
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index f94653a09b..105706bf25 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -44,6 +44,7 @@ target_ulong riscv_load_firmware(const char *firmware_f=
+ilename,
+>                                   hwaddr firmware_load_addr,
+>                                   symbol_fn_t sym_cb);
+>  target_ulong riscv_load_kernel(MachineState *machine,
+> +                               RISCVHartArrayState *harts,
+>                                 target_ulong firmware_end_addr,
+>                                 symbol_fn_t sym_cb);
+>  void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry);
+> --
+> 2.39.0
+>
+>
 
