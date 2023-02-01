@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pN4TD-00089S-Rb
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Jan 2023 23:11:40 -0500
+	id 1pN4Yv-0008SG-FW
+	for mharc-qemu-riscv@gnu.org; Tue, 31 Jan 2023 23:17:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pN4TB-00086J-MH; Tue, 31 Jan 2023 23:11:37 -0500
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ id 1pN4Yn-0008My-Gr; Tue, 31 Jan 2023 23:17:26 -0500
+Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pN4TA-0000or-6F; Tue, 31 Jan 2023 23:11:37 -0500
-Received: by mail-ej1-x62f.google.com with SMTP id p26so36505633ejx.13;
- Tue, 31 Jan 2023 20:11:35 -0800 (PST)
+ id 1pN4Ym-0001u5-1i; Tue, 31 Jan 2023 23:17:25 -0500
+Received: by mail-ej1-x630.google.com with SMTP id dr8so26166539ejc.12;
+ Tue, 31 Jan 2023 20:17:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=StqVRDZodeAFfNJsksDjX9dpuyZSDpXkUOOgAsHviSc=;
- b=G4WDVDQ6fk5iRtZxtVsCzblhMadnWAwh/sEiPMRcAAzmpjuZC0PyiG8KmlEfjx5Vd/
- C8lvUAUeP8RqchYHX7AYx+CJeqTlJQQhTWFgJOG6q6WQEyUG9yJnrYb/BruwBjuEvEqc
- HQtuA9CXimIO65nMXqjaQUHElQwNWVt2tlGPTWAGcW1DwBiSsSIYa9PPTe0D5JrN6NrS
- bm1bNWMyLs8HnLY8ngOKkrqD5PgTwm0u5SZKJUJ8rg1+RJmt2kMB38/Od24dKJITeqvB
- srWjbPVX1KeHOTdc1hEYuhNE0JvszWxTcsfPLNDiPc5hwqa4Rp3mdkx/5loUvUQtlyh5
- ZkBg==
+ bh=2FSgpKCnAh2+2iO4tNdmzqlKbbiBDecbNsqymtBYO0U=;
+ b=XDQCi+1AprfcvGyQuviP2oQwJrOWuVNQm5NcN3qyxkVHbDMA3EyBRir20ptvzzKpPk
+ PKNBskN5B/iygcTWkPNBTseoQgBZlkCpKQykIIzxYCmfHeatTkyInRGGj3f42pj1N0M6
+ /OmaI6h7eSENSNZIxPyncN8RG2jIsEhp4/tRdsmLO2jVgw0czYjjg2brW98v/RlPOiFY
+ lVhx7SM9+qCVX/PXQ7I67bcv2D/YLjdvT5FOs0nr0HQ7bHF7QTS07Obnv5ZttbrC9n9L
+ 3PbKvrhQsLq+GJTFI3SPSocKuqW/ZELTqRGCiv79VMHkAjvvClriLzJWKfXC5bVCGSf6
+ +5Sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=StqVRDZodeAFfNJsksDjX9dpuyZSDpXkUOOgAsHviSc=;
- b=FHaL63uTlNo+jRjpIkYqUykcQUVuDE5uTs4DYyu45OlhrxhYr5uLie9/WTaIEFovrF
- dTuDtoQCPvN2s7rQN89ungmlXl0MMMOdHPp1HvEIdTYatFeKSxJhcT+M3H7tDNE6HaER
- TTeLXDjUhGcF3Erqu46J/8rbO1PtrBYQAmEB8n5FRSzXfhSg6xDVMAeS3LMDAGyiwKnc
- DYbXoVj81PTFukLkyeQtC3bKTd2Nf2ujiijI0Hbck/rmZvp9I/ZWdoVdDI1vmWqGDogW
- qZe3QnUGEg6vTTFvGvYMjj8kdyWMbhhsCLooVnfz1TrXgXPbw4ArSm+p20AAkXMEdybU
- CJlQ==
-X-Gm-Message-State: AO0yUKXC6UHFRReQ5f4EeVlwOp4plg8EJhXg5jL7ONH3//si26spKgfy
- lIkb7qPHFxKhgevSpCBGmjmsgFU2FtF8TH97kDg=
-X-Google-Smtp-Source: AK7set/kwk2FzRh4MpniwXDfC6iQbGHRT7NrybfC4rxAGXko0nJXIu6+nqcfx/FanRbEGElQewoLZFMSCWvsLp9LMk8=
+ bh=2FSgpKCnAh2+2iO4tNdmzqlKbbiBDecbNsqymtBYO0U=;
+ b=mDzDiTrKh3b/b0pqLfoEkX7cNaruoCodJGr1HGIMPvwvlRt7KEkTZhiVRd9owe7Bdw
+ h6ZwlC3UbHdtBqbJlJN5f7PNRQOOFS2x1kcdeziNq7+PJq9mMjWUaboWjM4T5Eg476Sn
+ 6Tg+WA42CQRNbOznre4Hi8Q9JqjiR2wSFAj9bz2MUiUyofgLznVB85oBQvwNxWe4lrRV
+ eQO5T+WMDqHwdEWgPNoqAoGWM2QKA1CCpHOWn6ZZV39lXvzt5GAoKIdhdjjyp/wSsYOA
+ +S5tiN15GCTTIr2p8cNTjpkVGbS72EScjlMGNeS7tF3aw/L6h2XweJA4lokV/wvytGRv
+ QD7w==
+X-Gm-Message-State: AO0yUKV/Iesu6/b09/D0iY17JwDznc38fZQjwwZ8NlvfrAYtZOB+X7SA
+ CWhtQc447TEsjE6DpV5lAtiUOBNVaX2qD2V2fBw=
+X-Google-Smtp-Source: AK7set9/1JqpMYktngqSM9eennJd6fKgRTG6iRafUsRl/A+n/3M9upXonmk4Q1u9CywWHq/2WsAoDzKNndS/ZJBHMrI=
 X-Received: by 2002:a17:906:49da:b0:882:3e56:a854 with SMTP id
- w26-20020a17090649da00b008823e56a854mr229776ejv.263.1675224693771; Tue, 31
- Jan 2023 20:11:33 -0800 (PST)
+ w26-20020a17090649da00b008823e56a854mr233221ejv.263.1675225040811; Tue, 31
+ Jan 2023 20:17:20 -0800 (PST)
 MIME-Version: 1.0
-References: <20230131170955.752743-1-geomatsi@gmail.com>
-In-Reply-To: <20230131170955.752743-1-geomatsi@gmail.com>
+References: <20230131133906.1956228-1-alexghiti@rivosinc.com>
+ <20230131133906.1956228-4-alexghiti@rivosinc.com>
+In-Reply-To: <20230131133906.1956228-4-alexghiti@rivosinc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 1 Feb 2023 12:11:22 +0800
-Message-ID: <CAEUhbmW7pWG0UQmNTkmV-ZjKxov5TT9+Fu5eOpNqXTdOMVokUQ@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv: set tval for triggered watchpoints
-To: Sergey Matyukevich <geomatsi@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
+Date: Wed, 1 Feb 2023 12:17:09 +0800
+Message-ID: <CAEUhbmU2Zi2FtfhqZg1S94A3WcJk_Y+SGm+U=_NSY_idxTJ7Eg@mail.gmail.com>
+Subject: Re: [PATCH v9 3/5] riscv: Allow user to set the satp mode
+To: Alexandre Ghiti <alexghiti@rivosinc.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, 
- Sergey Matyukevich <sergey.matyukevich@syntacore.com>
+ Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>, 
+ Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Ludovic Henry <ludovic@rivosinc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::630;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -74,31 +75,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2023 04:11:37 -0000
+X-List-Received-Date: Wed, 01 Feb 2023 04:17:29 -0000
 
-On Wed, Feb 1, 2023 at 1:35 AM Sergey Matyukevich <geomatsi@gmail.com> wrote:
+On Tue, Jan 31, 2023 at 11:13 PM Alexandre Ghiti <alexghiti@rivosinc.com> wrote:
 >
-> From: Sergey Matyukevich <sergey.matyukevich@syntacore.com>
+> RISC-V specifies multiple sizes for addressable memory and Linux probes for
+> the machine's support at startup via the satp CSR register (done in
+> csr.c:validate_vm).
 >
-> According to priviledged spec, if [sm]tval is written with a nonzero
-
-typo: privileged
-
-> value when a breakpoint exception occurs, then [sm]tval will contain
-> the faulting virtual address. Set tval to hit address when breakpoint
-> exception is triggered by hardware watchpoint.
+> As per the specification, sv64 must support sv57, which in turn must
+> support sv48...etc. So we can restrict machine support by simply setting the
+> "highest" supported mode and the bare mode is always supported.
 >
-> Signed-off-by: Sergey Matyukevich <sergey.matyukevich@syntacore.com>
+> You can set the satp mode using the new properties "sv32", "sv39", "sv48",
+> "sv57" and "sv64" as follows:
+> -cpu rv64,sv57=on  # Linux will boot using sv57 scheme
+> -cpu rv64,sv39=on  # Linux will boot using sv39 scheme
+> -cpu rv64,sv57=off # Linux will boot using sv48 scheme
+> -cpu rv64          # Linux will boot using sv57 scheme by default
 >
+> We take the highest level set by the user:
+> -cpu rv64,sv48=on,sv57=on # Linux will boot using sv57 scheme
+>
+> We make sure that invalid configurations are rejected:
+> -cpu rv64,sv39=off,sv48=on # sv39 must be supported if higher modes are
+>                            # enabled
+>
+> We accept "redundant" configurations:
+> -cpu rv64,sv48=on,sv57=off # Linux will boot using sv48 scheme
+>
+> And contradictory configurations:
+> -cpu rv64,sv48=on,sv48=off # Linux will boot using sv39 scheme
+>
+> Co-Developed-by: Ludovic Henry <ludovic@rivosinc.com>
+> Signed-off-by: Ludovic Henry <ludovic@rivosinc.com>
+> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 > ---
->
-> v1 -> v2
-> - do not set tval blindly for every breakpoint exception,
->   handle current specific case under consideration
->
->  target/riscv/cpu_helper.c | 6 ++++++
->  target/riscv/debug.c      | 1 -
->  2 files changed, 6 insertions(+), 1 deletion(-)
+>  target/riscv/cpu.c | 207 +++++++++++++++++++++++++++++++++++++++++++++
+>  target/riscv/cpu.h |  19 +++++
+>  target/riscv/csr.c |  12 ++-
+>  3 files changed, 231 insertions(+), 7 deletions(-)
 >
 
 Reviewed-by: Bin Meng <bmeng@tinylab.org>
