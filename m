@@ -1,39 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNZnd-0005L8-KG
+	id 1pNZnd-0005Ls-Ts
 	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 08:38:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZnc-0005IY-H1
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZnc-0005I2-AX
  for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:38:48 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZnY-00086E-PH
- for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:38:48 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZnY-00086L-I9
+ for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:38:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  s=mimecast20190719; t=1675345121;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=QWHw17flkIBHBpot8lnmRCMHTzpVOxro/nvK1WdJ3NM=;
- b=GaJmkUM+6jzvMoLeTzXlROZvKwkLNuQ3C+Jx+zRBz7DTFHFXrITtmiTLjQ21wgwqjpzkoZ
- 1FKPcXMfvbLwe5pZcBhqO9KZaHqh5YLoRkoyu1d/WX6NbI64QnEhdNFED+SPUUnrj7f7n1
- rmBthFgnBFm0Yd5D6B9f9TJJgx/imI8=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NGpagByXc6J4MIDUTVLoDzWnIbFD7ozyvTMvhgaYQTI=;
+ b=X1WwdCU8p9fnO/Djwzc2eB2WiyoPEyxIWvYov/Ioh+m9scnQwQHZWft+Q+aWEyTzUHsVOb
+ 32dOX53bcUFTX7OlhHzH1tGNZlWqpLl5UCYh1e1lchQclZnQJtWBm/6/vJE1u8oHbjKQKt
+ Ya7YyiIG+HJZvHNGKWc48bNwqDlAReM=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-455-l1r22ru2PFy-N2yLSrWa9A-1; Thu, 02 Feb 2023 08:38:38 -0500
-X-MC-Unique: l1r22ru2PFy-N2yLSrWa9A-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
+ us-mta-472-dFDwQBH4MhamNswviZXY-A-1; Thu, 02 Feb 2023 08:38:39 -0500
+X-MC-Unique: dFDwQBH4MhamNswviZXY-A-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.7])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 10347100DED2;
- Thu,  2 Feb 2023 13:38:33 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 80F091859187;
+ Thu,  2 Feb 2023 13:38:35 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id CCFEEC16029;
- Thu,  2 Feb 2023 13:38:31 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 3A81E1431C4F;
+ Thu,  2 Feb 2023 13:38:35 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id A9A3E21E6A1F; Thu,  2 Feb 2023 14:38:30 +0100 (CET)
+ id E58EA21E691C; Thu,  2 Feb 2023 14:38:30 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
@@ -45,14 +46,17 @@ Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
  kkostiuk@redhat.com, tsimpson@quicinc.com, palmer@dabbelt.com,
  bin.meng@windriver.com, qemu-block@nongnu.org, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v6 00/20] Clean up includes
-Date: Thu,  2 Feb 2023 14:38:10 +0100
-Message-Id: <20230202133830.2152150-1-armbru@redhat.com>
+Subject: [PATCH v6 18/20] Don't include headers already included by
+ qemu/osdep.h
+Date: Thu,  2 Feb 2023 14:38:28 +0100
+Message-Id: <20230202133830.2152150-19-armbru@redhat.com>
+In-Reply-To: <20230202133830.2152150-1-armbru@redhat.com>
+References: <20230202133830.2152150-1-armbru@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-type: text/plain
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.7
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -75,185 +79,314 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 02 Feb 2023 13:38:48 -0000
 
-Back in 2016, we discussed[1] rules for headers, and these were
-generally liked:
+This commit was created with scripts/clean-includes.
 
-1. Have a carefully curated header that's included everywhere first.  We
-   got that already thanks to Peter: osdep.h.
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
+Acked-by: Christian Schoenebeck <qemu_oss@crudebyte.com>
+Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
+---
+ backends/tpm/tpm_ioctl.h          | 2 --
+ fsdev/p9array.h                   | 2 --
+ include/hw/misc/aspeed_lpc.h      | 2 --
+ include/hw/pci/pcie_doe.h         | 1 -
+ include/qemu/async-teardown.h     | 2 --
+ include/qemu/dbus.h               | 1 -
+ include/qemu/host-utils.h         | 1 -
+ include/sysemu/event-loop-base.h  | 1 -
+ accel/tcg/cpu-exec.c              | 1 -
+ hw/9pfs/9p.c                      | 2 --
+ hw/display/virtio-gpu-udmabuf.c   | 1 -
+ hw/i2c/pmbus_device.c             | 1 -
+ hw/remote/proxy-memory-listener.c | 1 -
+ hw/sensor/adm1272.c               | 1 -
+ hw/usb/dev-storage-bot.c          | 1 -
+ hw/usb/dev-storage-classic.c      | 1 -
+ softmmu/vl.c                      | 2 --
+ tcg/tci.c                         | 1 -
+ tests/unit/test-seccomp.c         | 1 -
+ ui/udmabuf.c                      | 1 -
+ util/main-loop.c                  | 1 -
+ util/oslib-posix.c                | 2 --
+ 22 files changed, 29 deletions(-)
 
-2. Headers should normally include everything they need beyond osdep.h.
-   If exceptions are needed for some reason, they must be documented in
-   the header.  If all that's needed from a header is typedefs, put
-   those into qemu/typedefs.h instead of including the header.
-
-3. Cyclic inclusion is forbidden.
-
-This series fixes violations of rule 2.  I may have split patches too
-aggressively.  Let me know if you want some squashed together.
-
-v6:
-* PATCH 04: Commit message generated by script improved [Juan]
-* PATCH 05-16: Commit messages updated for PATCH 04
-
-v5:
-* PATCH 01+02: Commit message Fixes: format adjusted [Michael]
-* PATCH 04: New [David]
-* PATCH 05-16: Commit messages updated for PATCH 04
-
-v4:
-* PATCH 01-03: New
-* PATCH 04-15: Previous version redone with scripts/clean-includes,
-  	       result split up for review
-* PATCH 16-19: New
-
-v3:
-* Rebased, old PATCH 1+2+4 are in master as commit
-  881e019770..f07ceffdf5
-* PATCH 1: Fix bsd-user
-
-v2:
-* Rebased
-* PATCH 3: v1 posted separately
-* PATCH 4: New
-
-[1] Message-ID: <87h9g8j57d.fsf@blackfin.pond.sub.org>
-    https://lists.nongnu.org/archive/html/qemu-devel/2016-03/msg03345.html
-
-Markus Armbruster (20):
-  scripts/clean-includes: Fully skip / ignore files
-  scripts/clean-includes: Don't claim duplicate headers found when not
-  scripts/clean-includes: Skip symbolic links
-  scripts/clean-includes: Improve --git commit message
-  bsd-user: Clean up includes
-  crypto: Clean up includes
-  hw/cxl: Clean up includes
-  hw/input: Clean up includes
-  hw/tricore: Clean up includes
-  qga: Clean up includes
-  migration: Clean up includes
-  net: Clean up includes
-  target/hexagon: Clean up includes
-  riscv: Clean up includes
-  block: Clean up includes
-  accel: Clean up includes
-  Fix non-first inclusions of qemu/osdep.h
-  Don't include headers already included by qemu/osdep.h
-  9p: Drop superfluous include of linux/limits.h
-  Drop duplicate #include
-
-Markus Armbruster (20):
-  scripts/clean-includes: Fully skip / ignore files
-  scripts/clean-includes: Don't claim duplicate headers found when not
-  scripts/clean-includes: Skip symbolic links
-  scripts/clean-includes: Improve --git commit message
-  bsd-user: Clean up includes
-  crypto: Clean up includes
-  hw/cxl: Clean up includes
-  hw/input: Clean up includes
-  hw/tricore: Clean up includes
-  qga: Clean up includes
-  migration: Clean up includes
-  net: Clean up includes
-  target/hexagon: Clean up includes
-  riscv: Clean up includes
-  block: Clean up includes
-  accel: Clean up includes
-  Fix non-first inclusions of qemu/osdep.h
-  Don't include headers already included by qemu/osdep.h
-  9p: Drop superfluous include of linux/limits.h
-  Drop duplicate #include
-
- backends/tpm/tpm_ioctl.h          |  2 --
- bsd-user/bsd-proc.h               |  4 ----
- bsd-user/qemu.h                   |  1 -
- crypto/block-luks-priv.h          |  1 -
- fsdev/p9array.h                   |  2 --
- include/block/graph-lock.h        |  1 -
- include/block/write-threshold.h   |  2 --
- include/hw/arm/fsl-imx6ul.h       |  1 -
- include/hw/arm/fsl-imx7.h         |  1 -
- include/hw/cxl/cxl_component.h    |  2 --
- include/hw/cxl/cxl_host.h         |  1 -
- include/hw/cxl/cxl_pci.h          |  1 -
- include/hw/input/pl050.h          |  1 -
- include/hw/misc/aspeed_lpc.h      |  2 --
- include/hw/pci/pcie_doe.h         |  1 -
- include/hw/tricore/triboard.h     |  1 -
- include/qemu/async-teardown.h     |  2 --
- include/qemu/dbus.h               |  1 -
- include/qemu/host-utils.h         |  1 -
- include/qemu/userfaultfd.h        |  1 -
- include/sysemu/accel-blocker.h    |  1 -
- include/sysemu/event-loop-base.h  |  1 -
- net/vmnet_int.h                   |  1 -
- qga/cutils.h                      |  2 --
- target/hexagon/hex_arch_types.h   |  1 -
- target/hexagon/mmvec/macros.h     |  1 -
- target/riscv/pmu.h                |  1 -
- accel/tcg/cpu-exec.c              |  1 -
- audio/sndioaudio.c                |  2 +-
- backends/hostmem-epc.c            |  2 +-
- backends/tpm/tpm_emulator.c       |  1 -
- block/export/vduse-blk.c          |  2 +-
- block/qapi.c                      |  1 -
- bsd-user/arm/signal.c             |  1 +
- bsd-user/arm/target_arch_cpu.c    |  2 ++
- bsd-user/freebsd/os-sys.c         |  1 +
- bsd-user/i386/signal.c            |  1 +
- bsd-user/i386/target_arch_cpu.c   |  3 +--
- bsd-user/main.c                   |  4 +---
- bsd-user/strace.c                 |  1 -
- bsd-user/x86_64/signal.c          |  1 +
- bsd-user/x86_64/target_arch_cpu.c |  3 +--
- hw/9pfs/9p.c                      |  5 -----
- hw/acpi/piix4.c                   |  1 -
- hw/alpha/dp264.c                  |  1 -
- hw/arm/virt.c                     |  1 -
- hw/arm/xlnx-versal.c              |  1 -
- hw/block/pflash_cfi01.c           |  1 -
- hw/core/machine.c                 |  1 -
- hw/display/virtio-gpu-udmabuf.c   |  1 -
- hw/hppa/machine.c                 |  1 -
- hw/hyperv/syndbg.c                |  2 +-
- hw/i2c/pmbus_device.c             |  1 -
- hw/i386/acpi-build.c              |  1 -
- hw/input/tsc210x.c                |  1 -
- hw/loongarch/acpi-build.c         |  1 -
- hw/misc/macio/cuda.c              |  1 -
- hw/misc/macio/pmu.c               |  1 -
- hw/net/xilinx_axienet.c           |  1 -
- hw/ppc/ppc405_uc.c                |  2 --
- hw/ppc/ppc440_bamboo.c            |  1 -
- hw/ppc/spapr_drc.c                |  1 -
- hw/rdma/vmw/pvrdma_dev_ring.c     |  1 -
- hw/remote/machine.c               |  1 -
- hw/remote/proxy-memory-listener.c |  1 -
- hw/remote/remote-obj.c            |  1 -
- hw/rtc/mc146818rtc.c              |  1 -
- hw/s390x/virtio-ccw-serial.c      |  1 -
- hw/sensor/adm1272.c               |  1 -
- hw/usb/dev-storage-bot.c          |  1 -
- hw/usb/dev-storage-classic.c      |  1 -
- migration/postcopy-ram.c          |  2 --
- qga/commands-posix.c              |  1 -
- qga/cutils.c                      |  3 ++-
- softmmu/dirtylimit.c              |  1 -
- softmmu/runstate.c                |  1 -
- softmmu/vl.c                      |  3 ---
- target/loongarch/translate.c      |  1 -
- target/mips/tcg/translate.c       |  1 -
- target/nios2/translate.c          |  2 --
- tcg/tci.c                         |  1 -
- tests/unit/test-cutils.c          |  1 -
- tests/unit/test-seccomp.c         |  1 -
- ui/gtk.c                          |  1 -
- ui/udmabuf.c                      |  1 -
- util/async-teardown.c             | 12 ++++--------
- util/main-loop.c                  |  1 -
- util/oslib-posix.c                |  6 ------
- scripts/clean-includes            | 27 +++++++++++++++++++--------
- 89 files changed, 38 insertions(+), 126 deletions(-)
-
+diff --git a/backends/tpm/tpm_ioctl.h b/backends/tpm/tpm_ioctl.h
+index e506ef5160..b1d31768a6 100644
+--- a/backends/tpm/tpm_ioctl.h
++++ b/backends/tpm/tpm_ioctl.h
+@@ -12,8 +12,6 @@
+ # define __USE_LINUX_IOCTL_DEFS
+ #endif
+ 
+-#include <stdint.h>
+-#include <sys/types.h>
+ #ifndef _WIN32
+ #include <sys/uio.h>
+ #include <sys/ioctl.h>
+diff --git a/fsdev/p9array.h b/fsdev/p9array.h
+index 90e83a7c7b..50a1b15fe9 100644
+--- a/fsdev/p9array.h
++++ b/fsdev/p9array.h
+@@ -27,8 +27,6 @@
+ #ifndef QEMU_P9ARRAY_H
+ #define QEMU_P9ARRAY_H
+ 
+-#include "qemu/compiler.h"
+-
+ /**
+  * P9Array provides a mechanism to access arrays in common C-style (e.g. by
+  * square bracket [] operator) in conjunction with reference variables that
+diff --git a/include/hw/misc/aspeed_lpc.h b/include/hw/misc/aspeed_lpc.h
+index fd228731d2..fa398959af 100644
+--- a/include/hw/misc/aspeed_lpc.h
++++ b/include/hw/misc/aspeed_lpc.h
+@@ -12,8 +12,6 @@
+ 
+ #include "hw/sysbus.h"
+ 
+-#include <stdint.h>
+-
+ #define TYPE_ASPEED_LPC "aspeed.lpc"
+ #define ASPEED_LPC(obj) OBJECT_CHECK(AspeedLPCState, (obj), TYPE_ASPEED_LPC)
+ 
+diff --git a/include/hw/pci/pcie_doe.h b/include/hw/pci/pcie_doe.h
+index ba4d8b03bd..87dc17dcef 100644
+--- a/include/hw/pci/pcie_doe.h
++++ b/include/hw/pci/pcie_doe.h
+@@ -11,7 +11,6 @@
+ #define PCIE_DOE_H
+ 
+ #include "qemu/range.h"
+-#include "qemu/typedefs.h"
+ #include "hw/register.h"
+ 
+ /*
+diff --git a/include/qemu/async-teardown.h b/include/qemu/async-teardown.h
+index 092e7a37e7..b281da005b 100644
+--- a/include/qemu/async-teardown.h
++++ b/include/qemu/async-teardown.h
+@@ -13,8 +13,6 @@
+ #ifndef QEMU_ASYNC_TEARDOWN_H
+ #define QEMU_ASYNC_TEARDOWN_H
+ 
+-#include "config-host.h"
+-
+ #ifdef CONFIG_LINUX
+ void init_async_teardown(void);
+ #endif
+diff --git a/include/qemu/dbus.h b/include/qemu/dbus.h
+index 08f00dfd53..81d3de8a5a 100644
+--- a/include/qemu/dbus.h
++++ b/include/qemu/dbus.h
+@@ -15,7 +15,6 @@
+ #include "qom/object.h"
+ #include "chardev/char.h"
+ #include "qemu/notify.h"
+-#include "qemu/typedefs.h"
+ 
+ /* glib/gio 2.68 */
+ #define DBUS_METHOD_INVOCATION_HANDLED TRUE
+diff --git a/include/qemu/host-utils.h b/include/qemu/host-utils.h
+index 88d476161c..3ce62bf4a5 100644
+--- a/include/qemu/host-utils.h
++++ b/include/qemu/host-utils.h
+@@ -30,7 +30,6 @@
+ #ifndef HOST_UTILS_H
+ #define HOST_UTILS_H
+ 
+-#include "qemu/compiler.h"
+ #include "qemu/bswap.h"
+ #include "qemu/int128.h"
+ 
+diff --git a/include/sysemu/event-loop-base.h b/include/sysemu/event-loop-base.h
+index 2748bf6ae1..a6c24f1351 100644
+--- a/include/sysemu/event-loop-base.h
++++ b/include/sysemu/event-loop-base.h
+@@ -14,7 +14,6 @@
+ 
+ #include "qom/object.h"
+ #include "block/aio.h"
+-#include "qemu/typedefs.h"
+ 
+ #define TYPE_EVENT_LOOP_BASE         "event-loop-base"
+ OBJECT_DECLARE_TYPE(EventLoopBase, EventLoopBaseClass,
+diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+index 04cd1f3092..8e0caf2fcc 100644
+--- a/accel/tcg/cpu-exec.c
++++ b/accel/tcg/cpu-exec.c
+@@ -28,7 +28,6 @@
+ #include "exec/exec-all.h"
+ #include "tcg/tcg.h"
+ #include "qemu/atomic.h"
+-#include "qemu/compiler.h"
+ #include "qemu/timer.h"
+ #include "qemu/rcu.h"
+ #include "exec/log.h"
+diff --git a/hw/9pfs/9p.c b/hw/9pfs/9p.c
+index 072cf67956..9621ec1341 100644
+--- a/hw/9pfs/9p.c
++++ b/hw/9pfs/9p.c
+@@ -19,8 +19,6 @@
+ #include "qemu/osdep.h"
+ #ifdef CONFIG_LINUX
+ #include <linux/limits.h>
+-#else
+-#include <limits.h>
+ #endif
+ #include <glib/gprintf.h>
+ #include "hw/virtio/virtio.h"
+diff --git a/hw/display/virtio-gpu-udmabuf.c b/hw/display/virtio-gpu-udmabuf.c
+index 8bdf4bac6e..847fa4c0cc 100644
+--- a/hw/display/virtio-gpu-udmabuf.c
++++ b/hw/display/virtio-gpu-udmabuf.c
+@@ -21,7 +21,6 @@
+ #include "exec/ramblock.h"
+ #include "sysemu/hostmem.h"
+ #include <sys/ioctl.h>
+-#include <fcntl.h>
+ #include <linux/memfd.h>
+ #include "qemu/memfd.h"
+ #include "standard-headers/linux/udmabuf.h"
+diff --git a/hw/i2c/pmbus_device.c b/hw/i2c/pmbus_device.c
+index 4071a88cfc..c3d6046784 100644
+--- a/hw/i2c/pmbus_device.c
++++ b/hw/i2c/pmbus_device.c
+@@ -8,7 +8,6 @@
+ 
+ #include "qemu/osdep.h"
+ #include <math.h>
+-#include <string.h>
+ #include "hw/i2c/pmbus_device.h"
+ #include "migration/vmstate.h"
+ #include "qemu/module.h"
+diff --git a/hw/remote/proxy-memory-listener.c b/hw/remote/proxy-memory-listener.c
+index eb9918fe72..18d96a1d04 100644
+--- a/hw/remote/proxy-memory-listener.c
++++ b/hw/remote/proxy-memory-listener.c
+@@ -8,7 +8,6 @@
+ 
+ #include "qemu/osdep.h"
+ 
+-#include "qemu/compiler.h"
+ #include "qemu/int128.h"
+ #include "qemu/range.h"
+ #include "exec/memory.h"
+diff --git a/hw/sensor/adm1272.c b/hw/sensor/adm1272.c
+index 7310c769be..8f4a1c2cd4 100644
+--- a/hw/sensor/adm1272.c
++++ b/hw/sensor/adm1272.c
+@@ -8,7 +8,6 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include <string.h>
+ #include "hw/i2c/pmbus_device.h"
+ #include "hw/irq.h"
+ #include "migration/vmstate.h"
+diff --git a/hw/usb/dev-storage-bot.c b/hw/usb/dev-storage-bot.c
+index b24b3148c2..1e5c5c711f 100644
+--- a/hw/usb/dev-storage-bot.c
++++ b/hw/usb/dev-storage-bot.c
+@@ -8,7 +8,6 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include "qemu/typedefs.h"
+ #include "qapi/error.h"
+ #include "hw/usb.h"
+ #include "hw/usb/desc.h"
+diff --git a/hw/usb/dev-storage-classic.c b/hw/usb/dev-storage-classic.c
+index 00f25bade2..84d19752b5 100644
+--- a/hw/usb/dev-storage-classic.c
++++ b/hw/usb/dev-storage-classic.c
+@@ -8,7 +8,6 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include "qemu/typedefs.h"
+ #include "qapi/error.h"
+ #include "qapi/visitor.h"
+ #include "hw/usb.h"
+diff --git a/softmmu/vl.c b/softmmu/vl.c
+index 9177d95d4e..5355a7fe5a 100644
+--- a/softmmu/vl.c
++++ b/softmmu/vl.c
+@@ -136,8 +136,6 @@
+ #include "qemu/guest-random.h"
+ #include "qemu/keyval.h"
+ 
+-#include "config-host.h"
+-
+ #define MAX_VIRTIO_CONSOLES 1
+ 
+ typedef struct BlockdevOptionsQueueEntry {
+diff --git a/tcg/tci.c b/tcg/tci.c
+index 05a24163d3..e7ac74cab0 100644
+--- a/tcg/tci.c
++++ b/tcg/tci.c
+@@ -21,7 +21,6 @@
+ #include "exec/cpu_ldst.h"
+ #include "tcg/tcg-op.h"
+ #include "tcg/tcg-ldst.h"
+-#include "qemu/compiler.h"
+ #include <ffi.h>
+ 
+ 
+diff --git a/tests/unit/test-seccomp.c b/tests/unit/test-seccomp.c
+index 3d7771e46c..f02c79cafd 100644
+--- a/tests/unit/test-seccomp.c
++++ b/tests/unit/test-seccomp.c
+@@ -25,7 +25,6 @@
+ #include "qapi/error.h"
+ #include "qemu/module.h"
+ 
+-#include <unistd.h>
+ #include <sys/syscall.h>
+ 
+ static void test_seccomp_helper(const char *args, bool killed,
+diff --git a/ui/udmabuf.c b/ui/udmabuf.c
+index cebceb2610..cbf4357bb1 100644
+--- a/ui/udmabuf.c
++++ b/ui/udmabuf.c
+@@ -8,7 +8,6 @@
+ #include "qapi/error.h"
+ #include "ui/console.h"
+ 
+-#include <fcntl.h>
+ #include <sys/ioctl.h>
+ 
+ int udmabuf_fd(void)
+diff --git a/util/main-loop.c b/util/main-loop.c
+index 58f776a8c9..3c0f525192 100644
+--- a/util/main-loop.c
++++ b/util/main-loop.c
+@@ -33,7 +33,6 @@
+ #include "block/thread-pool.h"
+ #include "qemu/error-report.h"
+ #include "qemu/queue.h"
+-#include "qemu/compiler.h"
+ #include "qom/object.h"
+ 
+ #ifndef _WIN32
+diff --git a/util/oslib-posix.c b/util/oslib-posix.c
+index 59a891b6a8..fd03fd32c8 100644
+--- a/util/oslib-posix.c
++++ b/util/oslib-posix.c
+@@ -40,7 +40,6 @@
+ #include "qemu/thread.h"
+ #include <libgen.h>
+ #include "qemu/cutils.h"
+-#include "qemu/compiler.h"
+ #include "qemu/units.h"
+ #include "qemu/thread-context.h"
+ 
+@@ -50,7 +49,6 @@
+ 
+ #ifdef __FreeBSD__
+ #include <sys/thr.h>
+-#include <sys/types.h>
+ #include <sys/user.h>
+ #include <libutil.h>
+ #endif
 -- 
 2.39.0
 
