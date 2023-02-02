@@ -1,40 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNZoF-0006MG-NK
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 08:39:27 -0500
+	id 1pNZoG-0006OZ-9f
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 08:39:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZnr-0005ew-FX
- for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:39:03 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZns-0005hq-9N
+ for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:39:06 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZnb-00088x-Uc
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZnb-00089g-Ug
  for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:39:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1675345122;
+ s=mimecast20190719; t=1675345123;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JbMoxwj+zgwPdfuywdpJJJLGjOOBALP8/iUd0T+artE=;
- b=Co+jAmfuz12nUubQ3N+2pIZCCx8eFU5juOM/n92YnLqGkS2z0nRdfzUPZpbJ4UuiyNB2so
- JSa6CmTi9RbI4aTQ5mGnaFXIIZ0PfoRllI7yiejRTfJneOxgHgFRjPeujtvapFgtVsr8zx
- 3j49JOo/Tso65rpu7KMh4QIAZIYu2Ek=
+ bh=4bgpb4bpASxmEcWIyxQ7LpGXNyGvsKJ7HrcENKOYhp0=;
+ b=e+32WjIxT0mSQM3CZs7aJ8iQw210o0gd6feeSlcGj2pRqplA0ZPKJ/qI1ek+iS6CCBhM24
+ 9oFlLCVo7Vkqf+2pPSKuGb3ThsKMlpMQHCdY7n+3GI73rjua5DnOdbCKHkcE9e7aryNpqx
+ KtgErj/knowQ7yKVnbNZNI+AbFhuePQ=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-379-ZVqQh0SWMc-BpBkDZN1bpA-1; Thu, 02 Feb 2023 08:38:38 -0500
-X-MC-Unique: ZVqQh0SWMc-BpBkDZN1bpA-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
+ us-mta-151-24yng0eVPYqeUANnERPgNA-1; Thu, 02 Feb 2023 08:38:39 -0500
+X-MC-Unique: 24yng0eVPYqeUANnERPgNA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id DF0C488F4D2;
- Thu,  2 Feb 2023 13:38:33 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 632DE823DE9;
+ Thu,  2 Feb 2023 13:38:35 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 8FDDF2027011;
- Thu,  2 Feb 2023 13:38:33 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 3CD1A2166B33;
+ Thu,  2 Feb 2023 13:38:35 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id BD62721E6A25; Thu,  2 Feb 2023 14:38:30 +0100 (CET)
+ id DA95B21E6916; Thu,  2 Feb 2023 14:38:30 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
@@ -45,16 +45,16 @@ Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
  quintela@redhat.com, dgilbert@redhat.com, michael.roth@amd.com,
  kkostiuk@redhat.com, tsimpson@quicinc.com, palmer@dabbelt.com,
  bin.meng@windriver.com, qemu-block@nongnu.org, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v6 06/20] crypto: Clean up includes
-Date: Thu,  2 Feb 2023 14:38:16 +0100
-Message-Id: <20230202133830.2152150-7-armbru@redhat.com>
+ qemu-riscv@nongnu.org, Eric Blake <eblake@redhat.com>
+Subject: [PATCH v6 15/20] block: Clean up includes
+Date: Thu,  2 Feb 2023 14:38:25 +0100
+Message-Id: <20230202133830.2152150-16-armbru@redhat.com>
 In-Reply-To: <20230202133830.2152150-1-armbru@redhat.com>
 References: <20230202133830.2152150-1-armbru@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-type: text/plain
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
@@ -76,7 +76,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2023 13:39:04 -0000
+X-List-Received-Date: Thu, 02 Feb 2023 13:39:07 -0000
 
 This commit was created with scripts/clean-includes.
 
@@ -90,24 +90,51 @@ related cleanups:
   Drop these, too.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
+Reviewed-by: Eric Blake <eblake@redhat.com>
 ---
- crypto/block-luks-priv.h | 1 -
- 1 file changed, 1 deletion(-)
+ include/block/graph-lock.h      | 1 -
+ include/block/write-threshold.h | 2 --
+ block/qapi.c                    | 1 -
+ 3 files changed, 4 deletions(-)
 
-diff --git a/crypto/block-luks-priv.h b/crypto/block-luks-priv.h
-index dc2dd14e52..8fc967afcb 100644
---- a/crypto/block-luks-priv.h
-+++ b/crypto/block-luks-priv.h
-@@ -18,7 +18,6 @@
-  *
-  */
+diff --git a/include/block/graph-lock.h b/include/block/graph-lock.h
+index 3ab924d5e2..18cc14de22 100644
+--- a/include/block/graph-lock.h
++++ b/include/block/graph-lock.h
+@@ -20,7 +20,6 @@
+ #ifndef GRAPH_LOCK_H
+ #define GRAPH_LOCK_H
  
 -#include "qemu/osdep.h"
- #include "qapi/error.h"
- #include "qemu/bswap.h"
+ #include "qemu/clang-tsa.h"
  
+ /**
+diff --git a/include/block/write-threshold.h b/include/block/write-threshold.h
+index f50f923e7e..63d1583887 100644
+--- a/include/block/write-threshold.h
++++ b/include/block/write-threshold.h
+@@ -13,8 +13,6 @@
+ #ifndef BLOCK_WRITE_THRESHOLD_H
+ #define BLOCK_WRITE_THRESHOLD_H
+ 
+-#include "qemu/typedefs.h"
+-
+ /*
+  * bdrv_write_threshold_set:
+  *
+diff --git a/block/qapi.c b/block/qapi.c
+index 9b4da12966..4f8df48cf4 100644
+--- a/block/qapi.c
++++ b/block/qapi.c
+@@ -40,7 +40,6 @@
+ #include "qapi/qmp/qstring.h"
+ #include "qemu/qemu-print.h"
+ #include "sysemu/block-backend.h"
+-#include "qemu/cutils.h"
+ 
+ BlockDeviceInfo *bdrv_block_device_info(BlockBackend *blk,
+                                         BlockDriverState *bs,
 -- 
 2.39.0
 
