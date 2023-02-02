@@ -1,40 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNZni-0005X1-Qs
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 08:38:54 -0500
+	id 1pNZnj-0005ZO-Q0
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 08:38:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZne-0005MS-Eo
- for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:38:50 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZnh-0005Sm-TB
+ for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:38:53 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZnZ-00085m-L0
- for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:38:50 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZna-00085x-Co
+ for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:38:53 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  s=mimecast20190719; t=1675345121;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=THpMpm+l8y1cW2d6agwzOogXvY3GUaQJHADZw5X5Bfk=;
- b=VM0ZeYRjm2uoORirNfYSFpVSD0lifNUSU7RZARRcXhxO3OGxdT9W+GG+RhV9DA8GzpsyEb
- vb3aBRE6AKRP4Bf6EEQaLcvRPvwTWvXm3UqSCoB7bSkR+O/wfy6pgvyp7tWyOPR8dx52jK
- UeFeBMxXHVHETRQ1ydoo6qUUCzLJdDQ=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=1xpdh3T+Tq8TpF+aECgwaz/Yobg1qYCgW4QneLFug+w=;
+ b=FCxoNd5AcdI0A/3ooeiMln9VDh/P6V9koz+48cHNutSqClKxOWPXHZ+9dj4wXSqpCbb7O9
+ jcZkr/J+sLesXQjaVfjNT3JflFjnWGXs3zeuThr0gbtsa76OxtXAPOlW2HiEsCRMGvNMRy
+ OBjdKaUd2VDb1vyGHsFYXyvRAnlg7PE=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-407-esUOBJD_Pg2Elu3fugjGiw-1; Thu, 02 Feb 2023 08:38:37 -0500
-X-MC-Unique: esUOBJD_Pg2Elu3fugjGiw-1
+ us-mta-665-LSzOUkDLPLyChJuai2Y_6A-1; Thu, 02 Feb 2023 08:38:38 -0500
+X-MC-Unique: LSzOUkDLPLyChJuai2Y_6A-1
 Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
  [10.11.54.7])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 90A3880557A;
- Thu,  2 Feb 2023 13:38:32 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4F5C01C041AD;
+ Thu,  2 Feb 2023 13:38:35 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id CCC7B140EBF6;
- Thu,  2 Feb 2023 13:38:31 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 2947A140EBF6;
+ Thu,  2 Feb 2023 13:38:35 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id B355B21E6A22; Thu,  2 Feb 2023 14:38:30 +0100 (CET)
+ id DE11721E691A; Thu,  2 Feb 2023 14:38:30 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
@@ -45,14 +45,14 @@ Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
  quintela@redhat.com, dgilbert@redhat.com, michael.roth@amd.com,
  kkostiuk@redhat.com, tsimpson@quicinc.com, palmer@dabbelt.com,
  bin.meng@windriver.com, qemu-block@nongnu.org, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org, Eric Blake <eblake@redhat.com>
-Subject: [PATCH v6 03/20] scripts/clean-includes: Skip symbolic links
-Date: Thu,  2 Feb 2023 14:38:13 +0100
-Message-Id: <20230202133830.2152150-4-armbru@redhat.com>
+ qemu-riscv@nongnu.org
+Subject: [PATCH v6 16/20] accel: Clean up includes
+Date: Thu,  2 Feb 2023 14:38:26 +0100
+Message-Id: <20230202133830.2152150-17-armbru@redhat.com>
 In-Reply-To: <20230202133830.2152150-1-armbru@redhat.com>
 References: <20230202133830.2152150-1-armbru@redhat.com>
 MIME-Version: 1.0
-Content-type: text/plain
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.7
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
@@ -76,36 +76,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2023 13:38:50 -0000
+X-List-Received-Date: Thu, 02 Feb 2023 13:38:54 -0000
 
-When a symbolic link points to a file that needs cleaning, the script
-replaces the link with a cleaned regular file.  Not wanted; skip them.
+This commit was created with scripts/clean-includes.
 
-We have a few symbolic links under subprojects/libvduse/ and
-subprojects/libvhost-user/.
+All .c should include qemu/osdep.h first.  The script performs three
+related cleanups:
+
+* Ensure .c files include qemu/osdep.h first.
+* Including it in a .h is redundant, since the .c  already includes
+  it.  Drop such inclusions.
+* Likewise, including headers qemu/osdep.h includes is redundant.
+  Drop these, too.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
-Reviewed-by: Eric Blake <eblake@redhat.com>
 ---
- scripts/clean-includes | 4 ++++
- 1 file changed, 4 insertions(+)
+ include/sysemu/accel-blocker.h | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/scripts/clean-includes b/scripts/clean-includes
-index 8e8420d785..f0466a6262 100755
---- a/scripts/clean-includes
-+++ b/scripts/clean-includes
-@@ -113,6 +113,10 @@ EOT
+diff --git a/include/sysemu/accel-blocker.h b/include/sysemu/accel-blocker.h
+index 72020529ef..0733783bcc 100644
+--- a/include/sysemu/accel-blocker.h
++++ b/include/sysemu/accel-blocker.h
+@@ -14,7 +14,6 @@
+ #ifndef ACCEL_BLOCKER_H
+ #define ACCEL_BLOCKER_H
  
- files=
- for f in "$@"; do
-+  if [ -L "$f" ]; then
-+      echo "SKIPPING $f (symbolic link)"
-+      continue
-+  fi
-   case "$f" in
-     *.c.inc)
-       # These aren't standalone C source files
+-#include "qemu/osdep.h"
+ #include "sysemu/cpus.h"
+ 
+ extern void accel_blocker_init(void);
 -- 
 2.39.0
 
