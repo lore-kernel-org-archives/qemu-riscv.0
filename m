@@ -1,41 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNVTE-0001Ze-24
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 04:01:28 -0500
+	id 1pNXFA-0000oA-VC
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 05:55:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNVT4-0001Pc-Cs
- for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 04:01:19 -0500
+ (Exim 4.90_1) (envelope-from <quintela@redhat.com>)
+ id 1pNXF8-0000nc-Ot
+ for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 05:55:02 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNVT0-0004Ev-5r
- for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 04:01:16 -0500
+ (Exim 4.90_1) (envelope-from <quintela@redhat.com>)
+ id 1pNXF5-0003Yq-J4
+ for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 05:55:01 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1675328473;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=4AhbSG4hXE/hof6E5D603yBgb5Yh7vDIHNwcFGx67Mw=;
- b=Ymu0d+02szjg415pDxjx4Rjn3bq97ZE1UZohmQ9rcy5pNXHqmN6pko2KKY5cki5DohHGZW
- kWESs8O4WpkwShLSvNuSuDIgiFWG2oya5moZFh2UPkM6zIFpS0SP6FAlFu0qkJnotI2+dj
- 4TzwzcHO5pIurYvsq5ELslh/4OOX2JE=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-460-vc_3QRh2N8uZ36COk6DkCw-1; Thu, 02 Feb 2023 04:01:07 -0500
-X-MC-Unique: vc_3QRh2N8uZ36COk6DkCw-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
- [10.11.54.7])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 04C87101A52E;
- Thu,  2 Feb 2023 09:00:52 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id D6CEF140EBF6;
- Thu,  2 Feb 2023 09:00:50 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 3DC2B21E6A1F; Thu,  2 Feb 2023 10:00:49 +0100 (CET)
-From: Markus Armbruster <armbru@redhat.com>
-To: Juan Quintela <quintela@redhat.com>
+ s=mimecast20190719; t=1675335298;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:in-reply-to:in-reply-to:  references:references;
+ bh=NLSAVDoZylH9Kgdm2kdmt4N6jPXJUGvaGdKnV+wEGHI=;
+ b=dIy1xYHNwXtGsSZkWo1rlcEFwXDNyk7lkzJjyMBTYbpjcpfnapQ1J8FEjKxCnE2W82kuIX
+ xwADeXtLiqT6S8v230U9oVbfmFRhSo24x6jnb7+QBm06lRUFkStfY/XgW7toAhQIRMzkJf
+ Be9jpUqJLjMdtV8M5iRikTfnIb4y33M=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-504-cMZCatOOMUCm8SQ6q8dUbQ-1; Thu, 02 Feb 2023 05:54:57 -0500
+X-MC-Unique: cMZCatOOMUCm8SQ6q8dUbQ-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ d18-20020a05600c34d200b003df901ab982so804788wmq.4
+ for <qemu-riscv@nongnu.org>; Thu, 02 Feb 2023 02:54:56 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=mime-version:message-id:date:reply-to:user-agent:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NLSAVDoZylH9Kgdm2kdmt4N6jPXJUGvaGdKnV+wEGHI=;
+ b=gG+ywummzIDkm8tsz3j3iWkBGWkdWuQH/t1n01vsOaYpz/Kxzw4LNVAt16C4/uU3/K
+ TwUtcB1SefOl0RnkIlW9KOn7l2SPP80RYLNsZyXPrIEBbXZws7cTPI4/5S1tKvqgnIig
+ gzs81WXCZGiu0/VP0RhyERtnxnuW4BzCFmbdzwOM276bbXA5py7J59ld0zCTSGE6xrzD
+ x9OhoCdKTCC83YVCPMFcl9Ia6OsHxfQ7YoTyO5Q2t4fDp7A53aS0C4M2wWtwuPrHfqPs
+ aRJqcsgJuJWX996LptU10sSt6MzQJd8SJOLI+WJ9iFaH1CHa0oiiGf/bzS99pjYUgGFH
+ 7Llw==
+X-Gm-Message-State: AO0yUKUGnDkDcLYpnW6VJzoevuEYLrHX7Mfo28nPrhRzemYzXZqVimD6
+ RoR3a07Ym2PNHSLLqHTFRrW52vp3MvAtnhV2Hv5hF/UHUomLqFeszaTj/yujDk/0cUhEqtydBmZ
+ stP4I0IS5So3SbXE=
+X-Received: by 2002:a05:600c:1e8d:b0:3df:deb5:6ff5 with SMTP id
+ be13-20020a05600c1e8d00b003dfdeb56ff5mr1061636wmb.24.1675335296022; 
+ Thu, 02 Feb 2023 02:54:56 -0800 (PST)
+X-Google-Smtp-Source: AK7set8DaXM9gSYh/45BWzUlNpkLzkh2cUwMTm10tdgAFg15v78gsYhSUbWuQYjC0ffljA596j4fOQ==
+X-Received: by 2002:a05:600c:1e8d:b0:3df:deb5:6ff5 with SMTP id
+ be13-20020a05600c1e8d00b003dfdeb56ff5mr1061603wmb.24.1675335295873; 
+ Thu, 02 Feb 2023 02:54:55 -0800 (PST)
+Received: from redhat.com ([46.136.252.173]) by smtp.gmail.com with ESMTPSA id
+ a18-20020a5d5092000000b002bdd8f12effsm19369533wrt.30.2023.02.02.02.54.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Feb 2023 02:54:55 -0800 (PST)
+From: Juan Quintela <quintela@redhat.com>
+To: Markus Armbruster <armbru@redhat.com>
 Cc: qemu-devel@nongnu.org,  richard.henderson@linaro.org,
  pbonzini@redhat.com,  kwolf@redhat.com,  hreitz@redhat.com,
  imp@bsdimp.com,  kevans@freebsd.org,  berrange@redhat.com,
@@ -48,20 +68,22 @@ Cc: qemu-devel@nongnu.org,  richard.henderson@linaro.org,
  qemu-arm@nongnu.org,  qemu-riscv@nongnu.org
 Subject: Re: [PATCH v5 04/20] scripts/clean-includes: Improve --git commit
  message
+In-Reply-To: <87k010phku.fsf@pond.sub.org> (Markus Armbruster's message of
+ "Thu, 02 Feb 2023 10:00:49 +0100")
 References: <20230130132156.1868019-1-armbru@redhat.com>
  <20230130132156.1868019-5-armbru@redhat.com>
  <87sffsnmb2.fsf@secure.mitica> <875ycly2h5.fsf@pond.sub.org>
  <87bkmdfrys.fsf@secure.mitica> <87cz6twldq.fsf@pond.sub.org>
- <877cx11lny.fsf@secure.mitica>
-Date: Thu, 02 Feb 2023 10:00:49 +0100
-In-Reply-To: <877cx11lny.fsf@secure.mitica> (Juan Quintela's message of "Wed, 
- 01 Feb 2023 15:54:09 +0100")
-Message-ID: <87k010phku.fsf@pond.sub.org>
+ <877cx11lny.fsf@secure.mitica> <87k010phku.fsf@pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.2 (gnu/linux)
+Reply-To: quintela@redhat.com
+Date: Thu, 02 Feb 2023 11:54:54 +0100
+Message-ID: <87zg9ws5fl.fsf@secure.mitica>
 MIME-Version: 1.0
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.7
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=quintela@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -82,113 +104,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2023 09:01:24 -0000
+X-List-Received-Date: Thu, 02 Feb 2023 10:55:03 -0000
 
-Juan Quintela <quintela@redhat.com> writes:
+Markus Armbruster <armbru@redhat.com> wrote:
 
-> Markus Armbruster <armbru@redhat.com> wrote:
->> Juan Quintela <quintela@redhat.com> writes:
->>
->>> Markus Armbruster <armbru@redhat.com> wrote:
->>>> Juan Quintela <quintela@redhat.com> writes:
->>>>
->>>>> Markus Armbruster <armbru@redhat.com> wrote:
->>>>>> The script drops #include "qemu/osdep.h" from headers.  Mention it in
->>>>>> the commit message it uses for --git.
->>>>>>
->>>>>> Signed-off-by: Markus Armbruster <armbru@redhat.com>
->>>>>> ---
->>>>>>  scripts/clean-includes | 4 ++--
->>>>>>  1 file changed, 2 insertions(+), 2 deletions(-)
->>>>>>
->>>>>> diff --git a/scripts/clean-includes b/scripts/clean-includes
->>>>>> index f0466a6262..f9722c3aec 100755
->>>>>> --- a/scripts/clean-includes
->>>>>> +++ b/scripts/clean-includes
->>>>>> @@ -193,8 +193,8 @@ if [ "$GIT" = "yes" ]; then
->>>>>>      git commit --signoff -F - <<EOF
->>>>>>  $GITSUBJ: Clean up includes
->>>>>>  
->>>>>> -Clean up includes so that osdep.h is included first and headers
->>>>>> -which it implies are not included manually.
->>>>>> +Clean up includes so that qemu/osdep.h is included first in .c, and
->>>>>> +not in .h, and headers which it implies are not included manually.
->>>>>
->>>>> I give a tree.
->>>>>
->>>>> Clean up includes so qemu/osdep.h is never used in .h files.  It makes
->>>>> sure that qemu/osdep.h is only used in .c files.  Once there, it assures
->>>>> that .h files already included in qemu/osdep.h are not included a second
->>>>> time on the .c file.
->>>>>
->>>>> What do you think?
->>>>
->>>> Neglects to mention qemu/osdep.h goes first in .c.
->>>
->>> /me tries again
->>>
->>> What about:
->>>
->>> The file qemu/osdep.h should only be included in .c files.  And it has
->>> to be the first included file.
->>
->> Suggest "has to be included first."
+> It's less terse.  Fine with me.  The mix of passive and active voice
+> feels a bit awkward, though.  Another try:
 >
-> Ok to this change.
+>   All .c should include qemu/osdep.h first.  This script performs three
+>   related cleanups:
 >
->>
->>> This script does several things:
->>> - Remove qemu/osdep.h from .h files.
->>
->> Correct.  Could say "inclusion of qemu/osdep.h"
->
-> I try to minimize whatever word that "includes" "includ*" (pun intended).
->
->>> - If qemu/osdep.h is included in a .c file it is moved to the first
->>>   included position if it is anywhere else.
->>
->> Not quite.  The script ensures all the .c include it, and include it
->> first.
->
-> Oh, then it is easier.
->
-> - It ensures that qemu/osdep.h is the first included file in all .c files.
->
->>> - Remove from .h files all include files that are already present in
->>>   qemu/osdep.h.
->>
->> They're removed from .h, too.
->
-> Ah, didn't know this bit.
->
->> Sure you want to continue wordsmithing?  ;)
->
-> Yeap, I *hate* error messages that I can't parse (or have to read it ten
-> times before I understand them).
->
-> So, we end with:
->
-> The file qemu/osdep.h should only be included in .c files.  And it has
-> to be included first.
->
-> This script does three things:
-> - Remove qemu/osdep.h from .h files.
-> - It ensures that qemu/osdep.h is the first included file in all .c files.
-> - Include files contained in qemu/osdep.h are removed form all .c and .h
->   files.
->
-> Is this better?
+>   * Ensure .c files include qemu/osdep.h first.
+>   * Including it in a .h is redundant, since the .c  already includes
+>     it.  Drop such inclusions.
+>   * Likewise, including headers qemu/osdep.h includes is redundant.
+>     Drop these, too.
 
-It's less terse.  Fine with me.  The mix of passive and active voice
-feels a bit awkward, though.  Another try:
+Perfect, thanks.
 
-  All .c should include qemu/osdep.h first.  This script performs three
-  related cleanups:
+Reviewed-by: Juan Quintela <quintela@redhat.com>
 
-  * Ensure .c files include qemu/osdep.h first.
-  * Including it in a .h is redundant, since the .c  already includes
-    it.  Drop such inclusions.
-  * Likewise, including headers qemu/osdep.h includes is redundant.
-    Drop these, too.
+or whatever you want it O:-)
 
 
