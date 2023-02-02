@@ -1,65 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNOx6-00055S-Mk
-	for mharc-qemu-riscv@gnu.org; Wed, 01 Feb 2023 21:03:52 -0500
+	id 1pNRaS-0004PE-Ix
+	for mharc-qemu-riscv@gnu.org; Wed, 01 Feb 2023 23:52:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pNOx5-00054v-18; Wed, 01 Feb 2023 21:03:51 -0500
-Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1pNRaL-0004O4-Lu
+ for qemu-riscv@nongnu.org; Wed, 01 Feb 2023 23:52:36 -0500
+Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pNOx3-0002Qb-9f; Wed, 01 Feb 2023 21:03:50 -0500
-Received: by mail-vk1-xa2c.google.com with SMTP id q76so182642vkb.4;
- Wed, 01 Feb 2023 18:03:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JgFJux2t2bDNEyA8Ayal9fQs7VCapb2GISdGEiemPE8=;
- b=qfxX10/xSRqh2b1afYLTDz5Oa724xSm2isyf/Ib616LUIj5Hg2ea3epxmkuqONPTTw
- UbR2uN+yRccWd4F5Wi3CG3kLe4EFktQwI7kso0bg44AA4s6vnUoWq8F87Wxy2jwt5S9C
- s0/Poz8G795DUfYQWqJ4gp3+5UIPmiUoDEv6tpLfsTbkGkCF3CyWpr/BQUcdEc49dQuX
- cXwyN9Lcso4pIQ85YxRhsmZOg/M/nkKxMhXBBEESBVufKdyg6kEyQPIapp9u+gPsWQRX
- PFpjZd/+P7EtRtXXJGVEYkP1G9ybOsT3P1e78q1J6XFb85IhlfHgPZc2XQ/Yo+CnfXS3
- pmPQ==
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1pNRaJ-0001Bx-V5
+ for qemu-riscv@nongnu.org; Wed, 01 Feb 2023 23:52:33 -0500
+Received: by mail-pj1-x102e.google.com with SMTP id
+ n20-20020a17090aab9400b00229ca6a4636so4486788pjq.0
+ for <qemu-riscv@nongnu.org>; Wed, 01 Feb 2023 20:52:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nb64h1xsaFuqQ2VM1naL2fQle0/1IVpMrtDUW4nJxgo=;
+ b=mSeJQFbxooHXJrPYq7/zusSv1m0I+ODpOsUj1jwnM7y+cBhUUeY1LUigfy21vz/Zgk
+ ok9ifs/ti9J9dSdga2OK7pxEAM8huKnoomqCwkWijJlDbPPxmh6L1M/ncqHIDl/ATqhT
+ 3DtSRXjZeXIBEIdyj2f+WeBrIYEYpjzbczSm1RcAu06HiS5FezO5AdOniqcHuQp+MvK5
+ XXK6+o/PA0XzCpZ1IY4jJd2yWVIdo791jc2t9VpVH8w51piqByYgZQiO5y2oDphbao5n
+ 8WA36syQknLlG4Sr/SmV4Z7WOQShZ39u80/sBXrTOz9ueoRWDH38SjoaDyC9/VMK92qk
+ M1OQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JgFJux2t2bDNEyA8Ayal9fQs7VCapb2GISdGEiemPE8=;
- b=YXuPWSGnUYd/XnDRAs7qxtTtkUW4fkJX7Ub4X0/sUqe7YZsOiyFPYCetSV6LIIa8WL
- s0tgRmvla4mlE7RlE+zet65PJkPOnagKGB73FY3SBWC7b0pgLJj/9kX7yE62+BO7+eGF
- d8PDwqj2XGtvC/Fs++S9aGfkadr4cAV4IRXq5RZH06D25osz0hiIUbJpTCe24a6Eb5EF
- hRM9lzYsVq+I9Tt1qUpgRqxnpMXBtVh3jAY35T4PSIBp51dmYsYeVbF9XlG6YD4Qm9Vs
- DeC70xG78VdeFG4vuKanxBDqT7z8/1d+Zdpk6KrRC9VnnYu/4tW9XZxajQ3xPtkOXDzU
- FbTQ==
-X-Gm-Message-State: AO0yUKVxV/PYaFLhK76czWtUKmSCnCX4fzKK0uIzQIoDDSN256raXExE
- CxpXXkzEgZ1VqbDGFv8vOuWA7SAQ5KOTDF5wsq0=
-X-Google-Smtp-Source: AK7set9zICPaxP+NO8Qu2OzFwFlhUaIku/BcNp8ApiJRjYAeSL+xmaFSQzYAXsg8j+BTWm5J2prbMdDUFdHdYLZ7c0c=
-X-Received: by 2002:ac5:c1c1:0:b0:3e5:7064:1bf9 with SMTP id
- g1-20020ac5c1c1000000b003e570641bf9mr674495vkk.30.1675303427925; Wed, 01 Feb
- 2023 18:03:47 -0800 (PST)
+ bh=nb64h1xsaFuqQ2VM1naL2fQle0/1IVpMrtDUW4nJxgo=;
+ b=56c3v+j0ED6rYrlDYZIFV8a7Qvezng198qNnd7lGx6gzPofblY6g9DFGHrNn384723
+ wcoIx8IeF/L9CiIaGHdTg6YcM3JiXbwal1nPvUUcxh+hccIQehu5BxANL1s9wyZ7bZuQ
+ +J9s2uayOHhxnbg5mJPxaqULSVV1r5T8H4azItxE+B9yvxoVGWF5Q5Ln9kv2jrE3orSp
+ 5Bm9c509cdDMiv5a4RDT+TWx0YXdjA0cP1gymXWutpEsjcE+vHpxCSMIu1q4A46Nym2p
+ vSNR09vsMU/l5LmiD+/swi9Oe+id+lGje425u/UysBAt1SL+74vzwmpzdXK5YMYe8MxL
+ QJkQ==
+X-Gm-Message-State: AO0yUKUhAFKOSL0fcvlq1U91ebVqYuwtlMXfGqmqMn5QkoK+ybJstlhM
+ A4U0BUUuJ3Gj+dh36LJHaDWtvg==
+X-Google-Smtp-Source: AK7set9zpgGfyrPwHSZ19yBiBnuI7uw8jmnluSw4vLIPqx6K5jalRewk+UMQYXfX6wOVa2BwHw7w4g==
+X-Received: by 2002:a17:902:ec81:b0:196:7bfb:f0d1 with SMTP id
+ x1-20020a170902ec8100b001967bfbf0d1mr6512302plg.34.1675313549814; 
+ Wed, 01 Feb 2023 20:52:29 -0800 (PST)
+Received: from localhost.localdomain ([49.206.14.226])
+ by smtp.gmail.com with ESMTPSA id
+ w10-20020a170902d70a00b001965540395fsm11222265ply.105.2023.02.01.20.52.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Feb 2023 20:52:29 -0800 (PST)
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Andrew Jones <ajones@ventanamicro.com>,
+ Anup Patel <apatel@ventanamicro.com>,
+ Atish Kumar Patra <atishp@rivosinc.com>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH 00/10] Add basic ACPI support for risc-v virt
+Date: Thu,  2 Feb 2023 10:22:13 +0530
+Message-Id: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.38.0
 MIME-Version: 1.0
-References: <20230201171212.1219375-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20230201171212.1219375-1-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 2 Feb 2023 12:03:21 +1000
-Message-ID: <CAKmqyKP=tCNa_VV0XThA-BGAjRGRsGksP2ihOirEch=20d8a7g@mail.gmail.com>
-Subject: Re: [PATCH v5 0/3] riscv_load_fdt() semantics change
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng.cn@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x102e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,50 +84,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2023 02:03:51 -0000
+X-List-Received-Date: Thu, 02 Feb 2023 04:52:38 -0000
 
-On Thu, Feb 2, 2023 at 3:12 AM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Hi,
->
-> This version contains changed proposed by Bin in the v4 review.
->
-> Patches are based on riscv-to-apply.next.
->
-> Changes from v4:
-> - patch 1:
->   - remove the fdt_pack() related lines instead of letting patch 2 do it
-> - patch 2:
->   - make riscv_compute_fdt_addr() return an uint64_t
-> - patch 3:
->   - do not change riscv_compute_fdt_addr() return type to hwaddr
->   - fix comment typo
->   - use a ternary instead of if/else in dram_end
-> - v4 link: https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg05828.html
->
-> Daniel Henrique Barboza (3):
->   hw/riscv/boot.c: calculate fdt size after fdt_pack()
->   hw/riscv: split fdt address calculation from fdt load
->   hw/riscv: change riscv_compute_fdt_addr() semantics
+This series adds the basic ACPI support for the RISC-V virt machine. 
+Currently only INTC interrupt controller specification is approved by the
+UEFI forum. External interrupt controller support in ACPI is in progress.
 
-Thanks!
+The basic infrstructure changes are mostly leveraged from ARM.
 
-Applied to riscv-to-apply.next
+This adds support for INTC and RHCT tables as specified in below ECR links
+which are approved by UEFI forum.
+RINTC - https://drive.google.com/file/d/1R6k4MshhN3WTT-hwqAquu5nX6xSEqK2l/view
+RHCT - https://drive.google.com/file/d/1nP3nFiH4jkPMp6COOxP6123DCZKR-tia/view
 
-Alistair
+These changes are also available @
+https://github.com/vlsunil/qemu/tree/acpi_b1_us_review
 
->
->  hw/riscv/boot.c            | 53 +++++++++++++++++++++++++++++++-------
->  hw/riscv/microchip_pfsoc.c |  7 +++--
->  hw/riscv/sifive_u.c        |  8 +++---
->  hw/riscv/spike.c           |  7 ++---
->  hw/riscv/virt.c            |  8 +++---
->  include/hw/riscv/boot.h    |  4 ++-
->  6 files changed, 65 insertions(+), 22 deletions(-)
->
-> --
-> 2.39.1
->
->
+The series is tested using SBI HVC console and initrd.
+
+Test instructions:
+1) Build Qemu with ACPI support (this series)
+
+2) Build EDK2 as per instructions in
+https://github.com/vlsunil/riscv-uefi-edk2-docs/wiki/RISC-V-Qemu-Virt-support
+
+3) Build Linux with ACPI support using below branch
+https://github.com/vlsunil/linux/commits/acpi_b1_us_review_ipi17
+after enabling SBI HVC and SBI earlycon options.
+
+CONFIG_RISCV_SBI_V01=y
+CONFIG_SERIAL_EARLYCON_RISCV_SBI=y
+CONFIG_HVC_RISCV_SBI=y
+
+4) Build buildroot.
+
+Run with below command.
+qemu-system-riscv64   -nographic \
+-drive file=Build/RiscVVirtQemu/RELEASE_GCC5/FV/RISCV_VIRT.fd,if=pflash,format=raw,unit=1 \
+-machine virt,acpi=on -smp 16 -m 2G \
+-kernel arch/riscv/boot/Image \
+-initrd buildroot/output/images/rootfs.cpio \
+-append "root=/dev/ram ro console=hvc0 earlycon=sbi"
+
+Sunil V L (10):
+  hw/riscv/virt: Add OEM_ID and OEM_TABLE_ID fields
+  hw/riscv/virt: Add a switch to enable/disable ACPI
+  hw/riscv/virt: Add memmap pointer to RiscVVirtState
+  hw/riscv/virt: virt-acpi-build.c: Add basic ACPI tables
+  hw/riscv/virt: virt-acpi-build.c: Add RINTC in MADT
+  hw/riscv/virt: virt-acpi-build.c: Add RHCT Table
+  hw/riscv: meson.build: Build virt-acpi-build.c
+  hw/riscv/Kconfig: virt: Enable ACPI config options
+  hw/riscv/virt.c: Initialize the ACPI tables
+  MAINTAINERS: Add entry for RISC-V ACPI
+
+ MAINTAINERS                |   6 +
+ hw/riscv/Kconfig           |   3 +
+ hw/riscv/meson.build       |   1 +
+ hw/riscv/virt-acpi-build.c | 391 +++++++++++++++++++++++++++++++++++++
+ hw/riscv/virt.c            |  48 +++++
+ include/hw/riscv/virt.h    |   6 +
+ 6 files changed, 455 insertions(+)
+ create mode 100644 hw/riscv/virt-acpi-build.c
+
+-- 
+2.38.0
+
 
