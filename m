@@ -1,40 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNZnl-0005c4-I0
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 08:38:59 -0500
+	id 1pNZnr-0005eX-7Y
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 08:39:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZng-0005Ql-Ne
- for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:38:52 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZnj-0005Xj-4k
+ for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:38:55 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZna-00087p-3F
- for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:38:52 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1pNZna-00086b-F4
+ for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 08:38:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1675345122;
+ s=mimecast20190719; t=1675345121;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=qcRImc2dDs0fev9FIlKyp+kjuB8jSu/a15QT63yaRK8=;
- b=f64wf4Vbpp22bc5sr88Z00hWEHDyvuLaoeA8q69d2n2U/UcQgQdnL5/jKcZCluvcGBGunU
- ZDx8e+D+V6zHJL0hNDaegxXeB32NXOTucs2/xYFniC6TJxDtKWajgYFx8QzJoe4zzHh6NP
- gk2NhCJMdt8OWblch6jyizDhaMD8eDs=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=y7j6o7r+ivhZioL5mOuRS4hPfEFnlJBnJW1dpYzk1cw=;
+ b=Q69tsOGE5PGZTWcgPzYUMYTcHTtRdN+R7bE89aWWeNRQl4f1EHbyZ51DHJEcpWklzUyrAI
+ JCM0vDHQyeptRLEWDn7eKKBUdKV8bInNfTXMJ72uB3YvG/P5KtlSwsGS+Bi1Erskfhypnr
+ 0e/dQP4+v/a97gBVTVs3GpWOv9grm2k=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-48-acQrf78ZPGmxVT-Kh4E9gw-1; Thu, 02 Feb 2023 08:38:37 -0500
-X-MC-Unique: acQrf78ZPGmxVT-Kh4E9gw-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
- [10.11.54.7])
+ us-mta-503-ZpCnhEpENsSFIzE80IDjjg-1; Thu, 02 Feb 2023 08:38:38 -0500
+X-MC-Unique: ZpCnhEpENsSFIzE80IDjjg-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D88BE8037AF;
- Thu,  2 Feb 2023 13:38:33 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CC88C382C997;
+ Thu,  2 Feb 2023 13:38:34 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.39.192.70])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id CDD2614171BB;
- Thu,  2 Feb 2023 13:38:31 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 5689E2166B3F;
+ Thu,  2 Feb 2023 13:38:34 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id ABFAD21E6A20; Thu,  2 Feb 2023 14:38:30 +0100 (CET)
+ id C979121E6901; Thu,  2 Feb 2023 14:38:30 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
@@ -45,17 +45,17 @@ Cc: richard.henderson@linaro.org, pbonzini@redhat.com, kwolf@redhat.com,
  quintela@redhat.com, dgilbert@redhat.com, michael.roth@amd.com,
  kkostiuk@redhat.com, tsimpson@quicinc.com, palmer@dabbelt.com,
  bin.meng@windriver.com, qemu-block@nongnu.org, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org, Eric Blake <eblake@redhat.com>
-Subject: [PATCH v6 01/20] scripts/clean-includes: Fully skip / ignore files
-Date: Thu,  2 Feb 2023 14:38:11 +0100
-Message-Id: <20230202133830.2152150-2-armbru@redhat.com>
+ qemu-riscv@nongnu.org
+Subject: [PATCH v6 10/20] qga: Clean up includes
+Date: Thu,  2 Feb 2023 14:38:20 +0100
+Message-Id: <20230202133830.2152150-11-armbru@redhat.com>
 In-Reply-To: <20230202133830.2152150-1-armbru@redhat.com>
 References: <20230202133830.2152150-1-armbru@redhat.com>
 MIME-Version: 1.0
 Content-type: text/plain
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.7
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -76,73 +76,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2023 13:38:53 -0000
+X-List-Received-Date: Thu, 02 Feb 2023 13:38:55 -0000
 
-When clean-includes claims to skip or ignore a file, only the part
-that sanitizes use of qemu/osdep.h skips the file.  The part that
-looks for duplicate #include does not, and neither does committing to
-Git.
+This commit was created with scripts/clean-includes.
 
-The latter can get unrelated stuff included in the commit, but only if
-you run clean-includes in a dirty tree, which is unwise.  Messed up
-when we added skipping in commit fd3e39a40c "scripts/clean-includes:
-Enhance to handle header files".
+All .c should include qemu/osdep.h first.  The script performs three
+related cleanups:
 
-The former can cause bogus reports for --check-dup-head.  Added in
-commit d66253e46a "scripts/clean-includes: added duplicate #include
-check", duplicating the prior mistake.
+* Ensure .c files include qemu/osdep.h first.
+* Including it in a .h is redundant, since the .c  already includes
+  it.  Drop such inclusions.
+* Likewise, including headers qemu/osdep.h includes is redundant.
+  Drop these, too.
 
-Fix the script to fully skip files.
-
-Fixes: fd3e39a40ca2 ("scripts/clean-includes: Enhance to handle header files")
-Fixes: d66253e46ae2 ("scripts/clean-includes: added duplicate #include check")
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Konstantin Kostiuk <kkostiuk@redhat.com>
 Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
-Reviewed-by: Eric Blake <eblake@redhat.com>
 ---
- scripts/clean-includes | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ qga/cutils.h         | 2 --
+ qga/commands-posix.c | 1 -
+ qga/cutils.c         | 3 ++-
+ 3 files changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/scripts/clean-includes b/scripts/clean-includes
-index d37bd4f692..86944f27fc 100755
---- a/scripts/clean-includes
-+++ b/scripts/clean-includes
-@@ -111,6 +111,7 @@ cat >"$COCCIFILE" <<EOT
- )
- EOT
+diff --git a/qga/cutils.h b/qga/cutils.h
+index f0f30a7d28..c1f2f4b17a 100644
+--- a/qga/cutils.h
++++ b/qga/cutils.h
+@@ -1,8 +1,6 @@
+ #ifndef CUTILS_H_
+ #define CUTILS_H_
  
-+files=
- for f in "$@"; do
-   case "$f" in
-     *.c.inc)
-@@ -144,6 +145,7 @@ for f in "$@"; do
-       continue
-       ;;
-   esac
-+  files="$files $f"
+-#include "qemu/osdep.h"
+-
+ int qga_open_cloexec(const char *name, int flags, mode_t mode);
  
-   if [ "$MODE" = "c" ]; then
-     # First, use Coccinelle to add qemu/osdep.h before the first existing include
-@@ -174,8 +176,8 @@ for f in "$@"; do
+ #endif /* CUTILS_H_ */
+diff --git a/qga/commands-posix.c b/qga/commands-posix.c
+index ebd33a643c..079689d79a 100644
+--- a/qga/commands-posix.c
++++ b/qga/commands-posix.c
+@@ -51,7 +51,6 @@
+ #else
+ #include <net/ethernet.h>
+ #endif
+-#include <sys/types.h>
+ #ifdef CONFIG_SOLARIS
+ #include <sys/sockio.h>
+ #endif
+diff --git a/qga/cutils.c b/qga/cutils.c
+index b8e142ef64..b21bcf3683 100644
+--- a/qga/cutils.c
++++ b/qga/cutils.c
+@@ -2,8 +2,9 @@
+  * This work is licensed under the terms of the GNU GPL, version 2 or later.
+  * See the COPYING file in the top-level directory.
+  */
+-#include "cutils.h"
  
- done
++#include "qemu/osdep.h"
++#include "cutils.h"
+ #include "qapi/error.h"
  
--if [ "$DUPHEAD" = "yes" ]; then
--    egrep "^[[:space:]]*#[[:space:]]*include" "$@" | tr -d '[:blank:]' \
-+if [ "$DUPHEAD" = "yes" ] && [ -n "$files" ]; then
-+    egrep "^[[:space:]]*#[[:space:]]*include" $files | tr -d '[:blank:]' \
-         | sort | uniq -c | awk '{if ($1 > 1) print $0}'
-     if [ $? -eq 0 ]; then
-         echo "Found duplicate header file includes. Please check the above files manually."
-@@ -184,7 +186,7 @@ if [ "$DUPHEAD" = "yes" ]; then
- fi
- 
- if [ "$GIT" = "yes" ]; then
--    git add -- "$@"
-+    git add -- $files
-     git commit --signoff -F - <<EOF
- $GITSUBJ: Clean up includes
- 
+ /**
 -- 
 2.39.0
 
