@@ -1,55 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNbsh-0007Vx-Oc
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 10:52:13 -0500
+	id 1pNdLQ-0003ft-HQ
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 12:25:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1pNbsW-0007Sr-54; Thu, 02 Feb 2023 10:52:00 -0500
-Received: from frasgout.his.huawei.com ([185.176.79.56])
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1pNdLI-0003bT-Gu; Thu, 02 Feb 2023 12:25:48 -0500
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1pNbsT-0007fQ-Va; Thu, 02 Feb 2023 10:51:59 -0500
-Received: from lhrpeml500005.china.huawei.com (unknown [172.18.147.206])
- by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4P73Cp1HRwz6J9gG;
- Thu,  2 Feb 2023 23:50:46 +0800 (CST)
-Received: from localhost (10.81.211.68) by lhrpeml500005.china.huawei.com
- (7.191.163.240) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 2 Feb
- 2023 15:51:51 +0000
-Date: Thu, 2 Feb 2023 15:51:49 +0000
-From: Jonathan Cameron <Jonathan.Cameron@Huawei.com>
-To: Markus Armbruster <armbru@redhat.com>
-CC: <qemu-devel@nongnu.org>, <richard.henderson@linaro.org>,
- <pbonzini@redhat.com>, <kwolf@redhat.com>, <hreitz@redhat.com>,
- <imp@bsdimp.com>, <kevans@freebsd.org>, <berrange@redhat.com>,
- <groug@kaod.org>, <qemu_oss@crudebyte.com>, <mst@redhat.com>,
- <philmd@linaro.org>, <peter.maydell@linaro.org>, <alistair@alistair23.me>,
- <jasowang@redhat.com>, <kbastian@mail.uni-paderborn.de>,
- <quintela@redhat.com>, <dgilbert@redhat.com>, <michael.roth@amd.com>,
- <kkostiuk@redhat.com>, <tsimpson@quicinc.com>, <palmer@dabbelt.com>,
- <bin.meng@windriver.com>, <qemu-block@nongnu.org>, <qemu-arm@nongnu.org>,
- <qemu-riscv@nongnu.org>
-Subject: Re: [PATCH v6 07/20] hw/cxl: Clean up includes
-Message-ID: <20230202155149.00002c8a@Huawei.com>
-In-Reply-To: <20230202133830.2152150-8-armbru@redhat.com>
-References: <20230202133830.2152150-1-armbru@redhat.com>
- <20230202133830.2152150-8-armbru@redhat.com>
-Organization: Huawei Technologies Research and Development (UK) Ltd.
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1pNdLG-0004ra-Ch; Thu, 02 Feb 2023 12:25:47 -0500
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 6630561A02;
+ Thu,  2 Feb 2023 17:25:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CCCF6C433EF;
+ Thu,  2 Feb 2023 17:25:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1675358741;
+ bh=X5DP7u3+sximFj2iHjts/49g7CXyDYTvEh9oALT1iSY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=ebXltQMmsqiw16u7UhfMXpLpJuhbsLkWmh39ZKp2icld3lS6ZmpsBVgm5UeNBQ0r0
+ PM7f7hxJfTTuTUDIZt6iZzElMsa2Xw1Xl6ZJP2DLWzpsXpduewyZs6E72QY1/nkJ1R
+ SsMFxKUYFJ1lOSUkqgLNe2MTXGNxuVqJDJB/UyDSyrCzKOcLORK3NFEfoZDxuC7RN+
+ G5m/sSHTn+2BLGlqJeOBeLsW+ziTVeubJo/BGPoZPBS0k6TsTD+JLAnR7kNBSeULIJ
+ nmVsaGAYp5/izVWVvqLuiamrbu0063Fa5YTEZ4+m3Laq7JXo94HQfHx4W0SoGf4dlh
+ TKHSXDfp72Qmg==
+Date: Thu, 2 Feb 2023 17:25:38 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
+Subject: Re: [PATCH v10 0/3] hw/riscv: handle kernel_entry high bits with
+ 32bit CPUs
+Message-ID: <Y9vyEp8ghrbqssJO@spud>
+References: <20230202135810.1657792-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.81.211.68]
-X-ClientProxiedBy: lhrpeml100002.china.huawei.com (7.191.160.241) To
- lhrpeml500005.china.huawei.com (7.191.163.240)
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=185.176.79.56;
- envelope-from=jonathan.cameron@huawei.com; helo=frasgout.his.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="3zvu0ipAdxYHGifO"
+Content-Disposition: inline
+In-Reply-To: <20230202135810.1657792-1-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=139.178.84.217; envelope-from=conor@kernel.org;
+ helo=dfw.source.kernel.org
+X-Spam_score_int: -70
+X-Spam_score: -7.1
+X-Spam_bar: -------
+X-Spam_report: (-7.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -63,70 +60,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2023 15:52:09 -0000
+X-List-Received-Date: Thu, 02 Feb 2023 17:25:53 -0000
 
-On Thu,  2 Feb 2023 14:38:17 +0100
-Markus Armbruster <armbru@redhat.com> wrote:
 
-> This commit was created with scripts/clean-includes.
-> 
-> All .c should include qemu/osdep.h first.  The script performs three
-> related cleanups:
-> 
-> * Ensure .c files include qemu/osdep.h first.
-> * Including it in a .h is redundant, since the .c  already includes
->   it.  Drop such inclusions.
-> * Likewise, including headers qemu/osdep.h includes is redundant.
->   Drop these, too.
-> 
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
+--3zvu0ipAdxYHGifO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+On Thu, Feb 02, 2023 at 10:58:07AM -0300, Daniel Henrique Barboza wrote:
+> Hi,
+>=20
+> This new version removed the translate_fn() from patch 1 because it
+> wasn't removing the sign-extension for pentry as we thought it would.
+> A more detailed explanation is given in the commit msg of patch 1.
+>=20
+> We're now retrieving the 'lowaddr' value from load_elf_ram_sym() and
+> using it when we're running a 32-bit CPU. This worked with 32 bit
+> 'virt' machine booting with the -kernel option.
+>=20
+> If this approach doesn't work for the Xvisor use case, IMO  we should
+> just filter kernel_load_addr bits directly as we were doing a handful of
+> versions ago.
+>=20
+> Patches are based on current riscv-to-apply.next.=20
+>=20
+> Changes from v9:
+> - patch 1:
+>   - removed the translate_fn() callback
+>   - return 'kernel_low' when running a 32-bit CPU
+> - v9 link: https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg04509=
+=2Ehtml
 
-> ---
->  include/hw/cxl/cxl_component.h | 2 --
->  include/hw/cxl/cxl_host.h      | 1 -
->  include/hw/cxl/cxl_pci.h       | 1 -
->  3 files changed, 4 deletions(-)
-> 
-> diff --git a/include/hw/cxl/cxl_component.h b/include/hw/cxl/cxl_component.h
-> index 5dca21e95b..692d7a5507 100644
-> --- a/include/hw/cxl/cxl_component.h
-> +++ b/include/hw/cxl/cxl_component.h
-> @@ -15,9 +15,7 @@
->  #define CXL2_COMPONENT_CM_REGION_SIZE 0x1000
->  #define CXL2_COMPONENT_BLOCK_SIZE 0x10000
->  
-> -#include "qemu/compiler.h"
->  #include "qemu/range.h"
-> -#include "qemu/typedefs.h"
->  #include "hw/cxl/cxl_cdat.h"
->  #include "hw/register.h"
->  #include "qapi/error.h"
-> diff --git a/include/hw/cxl/cxl_host.h b/include/hw/cxl/cxl_host.h
-> index a1b662ce40..c9bc9c7c50 100644
-> --- a/include/hw/cxl/cxl_host.h
-> +++ b/include/hw/cxl/cxl_host.h
-> @@ -7,7 +7,6 @@
->   * COPYING file in the top-level directory.
->   */
->  
-> -#include "qemu/osdep.h"
->  #include "hw/cxl/cxl.h"
->  #include "hw/boards.h"
->  
-> diff --git a/include/hw/cxl/cxl_pci.h b/include/hw/cxl/cxl_pci.h
-> index 01e15ed5b4..407be95b9e 100644
-> --- a/include/hw/cxl/cxl_pci.h
-> +++ b/include/hw/cxl/cxl_pci.h
-> @@ -10,7 +10,6 @@
->  #ifndef CXL_PCI_H
->  #define CXL_PCI_H
->  
-> -#include "qemu/compiler.h"
->  
->  #define CXL_VENDOR_ID 0x1e98
->  
+I think my T-b got lost last time around, but I gave this version a
+whirl too & things are working for me as they were before on Icicle.
+For the series:
+Tested-by: Conor Dooley <conor.dooley@microchip.com>
 
+Thanks,
+Conor.
+
+>=20
+> Daniel Henrique Barboza (3):
+>   hw/riscv: handle 32 bit CPUs kernel_addr in riscv_load_kernel()
+>   hw/riscv/boot.c: consolidate all kernel init in riscv_load_kernel()
+>   hw/riscv/boot.c: make riscv_load_initrd() static
+>=20
+>  hw/riscv/boot.c            | 96 +++++++++++++++++++++++---------------
+>  hw/riscv/microchip_pfsoc.c | 12 +----
+>  hw/riscv/opentitan.c       |  4 +-
+>  hw/riscv/sifive_e.c        |  4 +-
+>  hw/riscv/sifive_u.c        | 12 +----
+>  hw/riscv/spike.c           | 14 ++----
+>  hw/riscv/virt.c            | 12 +----
+>  include/hw/riscv/boot.h    |  3 +-
+>  8 files changed, 76 insertions(+), 81 deletions(-)
+>=20
+> --=20
+> 2.39.1
+>=20
+>=20
+
+--3zvu0ipAdxYHGifO
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCY9vyDgAKCRB4tDGHoIJi
+0nonAP4m3U9ASVSJsW8dWMKhJ5SH+QqyiBQI+fcrZBNwQ3CzRwEAm/f5wca1FSkC
+oShRfY022F6soY9oun+Q6yLEmmu5Iw0=
+=yao7
+-----END PGP SIGNATURE-----
+
+--3zvu0ipAdxYHGifO--
 
