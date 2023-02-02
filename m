@@ -1,61 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNNn1-0004LZ-Sv
-	for mharc-qemu-riscv@gnu.org; Wed, 01 Feb 2023 19:49:23 -0500
+	id 1pNO7N-0002XS-Uo
+	for mharc-qemu-riscv@gnu.org; Wed, 01 Feb 2023 20:10:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pNNn0-0004KB-Ge; Wed, 01 Feb 2023 19:49:23 -0500
-Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
+ id 1pNO7L-0002X5-Ke; Wed, 01 Feb 2023 20:10:23 -0500
+Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pNNmx-0007l2-UR; Wed, 01 Feb 2023 19:49:21 -0500
-Received: by mail-vs1-xe2d.google.com with SMTP id k6so231240vsk.1;
- Wed, 01 Feb 2023 16:49:16 -0800 (PST)
+ id 1pNO7J-0004xp-1T; Wed, 01 Feb 2023 20:10:23 -0500
+Received: by mail-vs1-xe32.google.com with SMTP id s24so224253vsi.12;
+ Wed, 01 Feb 2023 17:10:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vav13ApPPcwJYUXQUL5u5lUgqTah/YBD47xoWfq8+6g=;
- b=IcACK+fEER/lSrnQ20aOShM3kyPtxN0puVsTwHFt13czCGULJhzIgn7fcukiKhsw19
- 8qgDXucD41/jte3AYeMAdi8Y2CmnYsYFyY73EYpFUORozA2YGChZwl4SOgoBjKuJK6O8
- /TmZk5ET28QxdsDn/HtPZDjQzezGlRqOu0jSsgiZLzfl3y62Xg8cyuht6PLV1d70l2Kp
- RghSsY+Out9HXY/57/yg3926ZLE6soAh89v9yUX7CB7QFRpfSnedtjc8DBRd956TPHJx
- DTLhz7IQoUl4ncKiAWJoQepICNyn4voz56FXVjKjy+zRBgaOjFg1WKrcfTve2nup45iJ
- Fb+w==
+ bh=QeQVvqiokQ0Jy8LM7YsIqyG1uH1AhxSWuzPikfPrTtM=;
+ b=GTrvIqjOR8GLJmGwsiIgx0YOZM+Bq62C9nXtrDxhxXm+bPMsMYaE+vCe7bW3a/+AZC
+ LoHglo/tbD7eX1RAfDey6Om/YcU8f2P9N8hsnXHDPykz3A1AQOMXexp03bXn/YU8hkTR
+ zxUlJGuYzrK9B109JaBKUYJ1PLXJuTtHBx1rMQPvq0mZguLvUOmnjH7eEeEW3vofadur
+ do4pXoM5U4N2VaQUpBaCyrgHGnMxM1fy+JFGB+R2pAOYcBQeak1lqT2CQl12rFtf1+ax
+ HC9fxONU5Y6ehnv3jNP5I0o2HhzHKxmVlFWr3vXs5gPwp+m7xNzeifEvphJ1IwfbGnNQ
+ 2Oaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vav13ApPPcwJYUXQUL5u5lUgqTah/YBD47xoWfq8+6g=;
- b=sjWbaAj/ZnTQuBHdknigGQfeb754GctZVGw96ACVt/OH+0fOJC/thx/Zg5SAQpg/mJ
- ocqJHSNgeUxrCSKE/2jOBo4f5fn2thSAay9YMceAanhnP9RwQe8g3joUrZ9frEXXR3bI
- JxkBra9eCBNIOT+x2srtxG0UlEhM/aMFSZWUZmdRGY86uFW8PI8ljuc5PGFn6urKBUrV
- Uwb0quONcpVYMrd8Zf7z8oM/JBWP0qlQx6nBdoG09HGBg63BJf8++iKuQSVIaHeZGL+K
- iCQx4DcHUG5GDngb8AYhZQ7oqqFJ3yzhciSitqmA81rwR2e3gcbw5jsiHjTPJ9YH+1q2
- tI3Q==
-X-Gm-Message-State: AO0yUKXkWfokQ70vrdWtleToHuGIP695wSGDldMyNq1j+W5I8Q5dcLob
- 4Hq7HhWynwAKZkmOkJ3rRnSIfyZBykuihbvY44Y=
-X-Google-Smtp-Source: AK7set9OAdos+erHpAugdes1sENQJP5RuwwckZzPZXHTNpysb7EtfqUdPofMG4kKWatkMYbD4ZWUV+e7NMVgGSRBI7k=
-X-Received: by 2002:a05:6102:1276:b0:3ee:4ef8:45d3 with SMTP id
- q22-20020a056102127600b003ee4ef845d3mr648771vsg.64.1675298956005; Wed, 01 Feb
- 2023 16:49:16 -0800 (PST)
+ bh=QeQVvqiokQ0Jy8LM7YsIqyG1uH1AhxSWuzPikfPrTtM=;
+ b=RRS8+zk8ywxcTJoqphANxKlg7w9h055rDtN1u7ohtBB3IVFq5Qyk3Y17oPZcrXggoE
+ 6JJYy6/6lwJ/K9r/QwCPzC0hrhoNbaahV+lvyX1NgAGDT7mg7IXhDG/h0Xwvsb2IO2WD
+ /P8Y7LIW4gQawRXnAvDOqbFVAhzDibZ2BqggrBdvJhqEX2uwR1TtWrplMJuQHFN3nNrS
+ VKhs7SzdzES554d7/WJVxQbCYGBst5lKQs89zlET09MErX6PziMOgKLZLh6PV96itRTT
+ QG1pErTgL7MNKHgG/wc5cv4XyvLQAefl9TdhF0TNLVIdWtysn7mn3IZxXKkPR/l20uRT
+ vQjQ==
+X-Gm-Message-State: AO0yUKX/93uW5zIgiOfbiwKnz8bcNOY4n6lPozP2VTYavkA53NJpyD1v
+ UM1XIM4DgHBHtgr/JLXiZZ1v2At3ZTBhEDGtmb8=
+X-Google-Smtp-Source: AK7set/sRGQGtVA9NCX/vdv0Oww5WVx9ebUkOi6YzjEToDmY2OmhhyEFcPVhxRj6Y2V7aVY4YfECwxmPuFVd9CX7QZ0=
+X-Received: by 2002:a05:6102:52e:b0:3fe:5a64:f8ea with SMTP id
+ m14-20020a056102052e00b003fe5a64f8eamr762144vsa.54.1675300219418; Wed, 01 Feb
+ 2023 17:10:19 -0800 (PST)
 MIME-Version: 1.0
-References: <20230131133906.1956228-1-alexghiti@rivosinc.com>
- <20230131133906.1956228-4-alexghiti@rivosinc.com>
-In-Reply-To: <20230131133906.1956228-4-alexghiti@rivosinc.com>
+References: <20230201171212.1219375-1-dbarboza@ventanamicro.com>
+ <20230201171212.1219375-4-dbarboza@ventanamicro.com>
+In-Reply-To: <20230201171212.1219375-4-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 2 Feb 2023 10:48:49 +1000
-Message-ID: <CAKmqyKMoYhuoz_jfjECbfSnU-NSdwA8A3N-9uc8qKZ77-rVGGA@mail.gmail.com>
-Subject: Re: [PATCH v9 3/5] riscv: Allow user to set the satp mode
-To: Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>, 
- Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Ludovic Henry <ludovic@rivosinc.com>
+Date: Thu, 2 Feb 2023 11:09:53 +1000
+Message-ID: <CAKmqyKOMrgGThNEPWZfwaJroXCniSx7RVYcK2vMtEZhi5vQ=bg@mail.gmail.com>
+Subject: Re: [PATCH v5 3/3] hw/riscv: change riscv_compute_fdt_addr() semantics
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng.cn@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -76,396 +73,202 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2023 00:49:23 -0000
+X-List-Received-Date: Thu, 02 Feb 2023 01:10:24 -0000
 
-On Wed, Feb 1, 2023 at 1:13 AM Alexandre Ghiti <alexghiti@rivosinc.com> wrote:
+On Thu, Feb 2, 2023 at 3:13 AM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> RISC-V specifies multiple sizes for addressable memory and Linux probes for
-> the machine's support at startup via the satp CSR register (done in
-> csr.c:validate_vm).
+> As it is now, riscv_compute_fdt_addr() is receiving a dram_base, a
+> mem_size (which is defaulted to MachineState::ram_size in all boards)
+> and the FDT pointer. And it makes a very important assumption: the DRAM
+> interval dram_base + mem_size is contiguous. This is indeed the case for
+> most boards that use a FDT.
 >
-> As per the specification, sv64 must support sv57, which in turn must
-> support sv48...etc. So we can restrict machine support by simply setting the
-> "highest" supported mode and the bare mode is always supported.
+> The Icicle Kit board works with 2 distinct RAM banks that are separated
+> by a gap. We have a lower bank with 1GiB size, a gap follows, then at
+> 64GiB the high memory starts. MachineClass::default_ram_size for this
+> board is set to 1.5Gb, and machine_init() is enforcing it as minimal RAM
+> size, meaning that there we'll always have at least 512 MiB in the Hi
+> RAM area.
 >
-> You can set the satp mode using the new properties "sv32", "sv39", "sv48",
-> "sv57" and "sv64" as follows:
-> -cpu rv64,sv57=on  # Linux will boot using sv57 scheme
-> -cpu rv64,sv39=on  # Linux will boot using sv39 scheme
-> -cpu rv64,sv57=off # Linux will boot using sv48 scheme
-> -cpu rv64          # Linux will boot using sv57 scheme by default
+> Using riscv_compute_fdt_addr() in this board is weird because not only
+> the board has sparse RAM, and it's calling it using the base address of
+> the Lo RAM area, but it's also using a mem_size that we have guarantees
+> that it will go up to the Hi RAM. All the function assumptions doesn't
+> work for this board.
 >
-> We take the highest level set by the user:
-> -cpu rv64,sv48=on,sv57=on # Linux will boot using sv57 scheme
+> In fact, what makes the function works at all in this case is a
+> coincidence. Commit 1a475d39ef54 introduced a 3GB boundary for the FDT,
+> down from 4Gb, that is enforced if dram_base is lower than 3072 MiB. For
+> the Icicle Kit board, memmap[MICROCHIP_PFSOC_DRAM_LO].base is 0x80000000
+> (2 Gb) and it has a 1Gb size, so it will fall in the conditions to put
+> the FDT under a 3Gb address, which happens to be exactly at the end of
+> DRAM_LO. If the base address of the Lo area started later than 3Gb this
+> function would be unusable by the board. Changing any assumptions inside
+> riscv_compute_fdt_addr() can also break it by accident as well.
 >
-> We make sure that invalid configurations are rejected:
-> -cpu rv64,sv39=off,sv48=on # sv39 must be supported if higher modes are
->                            # enabled
+> Let's change riscv_compute_fdt_addr() semantics to be appropriate to the
+> Icicle Kit board and for future boards that might have sparse RAM
+> topologies to worry about:
 >
-> We accept "redundant" configurations:
-> -cpu rv64,sv48=on,sv57=off # Linux will boot using sv48 scheme
+> - relieve the condition that the dram_base + mem_size area is contiguous,
+> since this is already not the case today;
 >
-> And contradictory configurations:
-> -cpu rv64,sv48=on,sv48=off # Linux will boot using sv39 scheme
+> - receive an extra 'dram_size' size attribute that refers to a contiguous
+> RAM block that the board wants the FDT to reside on.
 >
-> Co-Developed-by: Ludovic Henry <ludovic@rivosinc.com>
-> Signed-off-by: Ludovic Henry <ludovic@rivosinc.com>
-> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> Together with 'mem_size' and 'fdt', which are now now being consumed by a
+> MachineState pointer, we're able to make clear assumptions based on the
+> DRAM block and total mem_size available to ensure that the FDT will be put
+> in a valid RAM address.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c | 207 +++++++++++++++++++++++++++++++++++++++++++++
->  target/riscv/cpu.h |  19 +++++
->  target/riscv/csr.c |  12 ++-
->  3 files changed, 231 insertions(+), 7 deletions(-)
+>  hw/riscv/boot.c            | 35 +++++++++++++++++++++++------------
+>  hw/riscv/microchip_pfsoc.c |  3 ++-
+>  hw/riscv/sifive_u.c        |  3 ++-
+>  hw/riscv/spike.c           |  3 ++-
+>  hw/riscv/virt.c            |  3 ++-
+>  include/hw/riscv/boot.h    |  2 +-
+>  6 files changed, 32 insertions(+), 17 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 7181b34f86..3a7a1746aa 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -27,6 +27,7 @@
->  #include "time_helper.h"
->  #include "exec/exec-all.h"
->  #include "qapi/error.h"
-> +#include "qapi/visitor.h"
->  #include "qemu/error-report.h"
->  #include "hw/qdev-properties.h"
->  #include "migration/vmstate.h"
-> @@ -229,6 +230,81 @@ static void set_vext_version(CPURISCVState *env, int vext_ver)
->      env->vext_ver = vext_ver;
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 2e53494b08..c7e0e50bd8 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -250,33 +250,44 @@ void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
 >  }
 >
-> +static uint8_t satp_mode_from_str(const char *satp_mode_str)
-> +{
-> +    if (!strncmp(satp_mode_str, "mbare", 5)) {
-> +        return VM_1_10_MBARE;
-> +    }
-> +
-> +    if (!strncmp(satp_mode_str, "sv32", 4)) {
-> +        return VM_1_10_SV32;
-> +    }
-> +
-> +    if (!strncmp(satp_mode_str, "sv39", 4)) {
-> +        return VM_1_10_SV39;
-> +    }
-> +
-> +    if (!strncmp(satp_mode_str, "sv48", 4)) {
-> +        return VM_1_10_SV48;
-> +    }
-> +
-> +    if (!strncmp(satp_mode_str, "sv57", 4)) {
-> +        return VM_1_10_SV57;
-> +    }
-> +
-> +    if (!strncmp(satp_mode_str, "sv64", 4)) {
-> +        return VM_1_10_SV64;
-> +    }
-> +
-> +    g_assert_not_reached();
-> +}
-> +
-> +uint8_t satp_mode_max_from_map(uint32_t map)
-> +{
-> +    /* map here has at least one bit set, so no problem with clz */
-> +    return 31 - __builtin_clz(map);
-> +}
-> +
-> +const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit)
-> +{
-> +    if (is_32_bit) {
-> +        switch (satp_mode) {
-> +        case VM_1_10_SV32:
-> +            return "sv32";
-> +        case VM_1_10_MBARE:
-> +            return "none";
-> +        }
-> +    } else {
-> +        switch (satp_mode) {
-> +        case VM_1_10_SV64:
-> +            return "sv64";
-> +        case VM_1_10_SV57:
-> +            return "sv57";
-> +        case VM_1_10_SV48:
-> +            return "sv48";
-> +        case VM_1_10_SV39:
-> +            return "sv39";
-> +        case VM_1_10_MBARE:
-> +            return "none";
-> +        }
-> +    }
-> +
-> +    g_assert_not_reached();
-> +}
-> +
-> +/* Sets the satp mode to the max supported */
-> +static void set_satp_mode_default_map(RISCVCPU *cpu)
-> +{
-> +    bool rv32 = riscv_cpu_mxl(&cpu->env) == MXL_RV32;
-> +
-> +    if (riscv_feature(&cpu->env, RISCV_FEATURE_MMU)) {
-> +        cpu->cfg.satp_mode.map |=
-> +                        (1 << satp_mode_from_str(rv32 ? "sv32" : "sv57"));
-> +    } else {
-> +        cpu->cfg.satp_mode.map |= (1 << satp_mode_from_str("mbare"));
-> +    }
-> +}
-> +
->  static void riscv_any_cpu_init(Object *obj)
->  {
->      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> @@ -619,6 +695,83 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
->      }
->  }
->
-> +static void riscv_cpu_satp_mode_finalize(RISCVCPU *cpu, Error **errp)
-> +{
-> +    bool rv32 = riscv_cpu_mxl(&cpu->env) == MXL_RV32;
-> +    const bool *valid_vm = rv32 ? valid_vm_1_10_32 : valid_vm_1_10_64;
-> +    uint8_t satp_mode_max;
-> +
-> +    if (cpu->cfg.satp_mode.map == 0) {
-> +        if (cpu->cfg.satp_mode.init == 0) {
-> +            /* If unset by the user, we fallback to the default satp mode. */
-> +            set_satp_mode_default_map(cpu);
-> +        } else {
-> +            /*
-> +             * Find the lowest level that was disabled and then enable the
-> +             * first valid level below which can be found in
-> +             * valid_vm_1_10_32/64.
-> +             */
-> +            for (int i = 1; i < 16; ++i) {
-> +                if ((cpu->cfg.satp_mode.init & (1 << i)) && valid_vm[i]) {
-> +                    for (int j = i - 1; j >= 0; --j) {
-> +                        if (valid_vm[j]) {
-> +                            cpu->cfg.satp_mode.map |= (1 << j);
-> +                            break;
-> +                        }
-> +                    }
-> +                    break;
-> +                }
-> +            }
-> +        }
-> +    }
-> +
-> +    /* Make sure the configuration asked is supported by qemu */
-> +    for (int i = 0; i < 16; ++i) {
-> +        if ((cpu->cfg.satp_mode.map & (1 << i)) && !valid_vm[i]) {
-> +            error_setg(errp, "satp_mode %s is not valid",
-> +                       satp_mode_str(i, rv32));
-> +            return;
-> +        }
-> +    }
-> +
-> +    /*
-> +     * Make sure the user did not ask for an invalid configuration as per
-> +     * the specification.
-> +     */
-> +    satp_mode_max = satp_mode_max_from_map(cpu->cfg.satp_mode.map);
-> +
-> +    if (!rv32) {
-> +        for (int i = satp_mode_max - 1; i >= 0; --i) {
-> +            if (!(cpu->cfg.satp_mode.map & (1 << i)) &&
-> +                (cpu->cfg.satp_mode.init & (1 << i)) &&
-> +                valid_vm[i]) {
-> +                error_setg(errp, "cannot disable %s satp mode if %s "
-> +                           "is enabled", satp_mode_str(i, false),
-> +                           satp_mode_str(satp_mode_max, false));
-> +                return;
-> +            }
-> +        }
-> +    }
-> +
-> +    /* Finally expand the map so that all valid modes are set */
-> +    for (int i = satp_mode_max - 1; i >= 0; --i) {
-> +        if (valid_vm[i]) {
-> +            cpu->cfg.satp_mode.map |= (1 << i);
-> +        }
-> +    }
-> +}
-> +
-> +static void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
-> +{
-> +    Error *local_err = NULL;
-> +
-> +    riscv_cpu_satp_mode_finalize(cpu, &local_err);
-> +    if (local_err != NULL) {
-> +        error_propagate(errp, local_err);
-> +        return;
-> +    }
-> +}
-> +
->  static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->  {
->      CPUState *cs = CPU(dev);
-> @@ -919,6 +1072,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->       }
->  #endif
->
-> +    riscv_cpu_finalize_features(cpu, &local_err);
-> +    if (local_err != NULL) {
-> +        error_propagate(errp, local_err);
-> +        return;
-> +    }
-> +
->      riscv_cpu_register_gdb_regs_for_features(cs);
->
->      qemu_init_vcpu(cs);
-> @@ -927,6 +1086,52 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->      mcc->parent_realize(dev, errp);
->  }
->
-> +static void cpu_riscv_get_satp(Object *obj, Visitor *v, const char *name,
-> +                               void *opaque, Error **errp)
-> +{
-> +    RISCVSATPMap *satp_map = opaque;
-> +    uint8_t satp = satp_mode_from_str(name);
-> +    bool value;
-> +
-> +    value = satp_map->map & (1 << satp);
-> +
-> +    visit_type_bool(v, name, &value, errp);
-> +}
-> +
-> +static void cpu_riscv_set_satp(Object *obj, Visitor *v, const char *name,
-> +                               void *opaque, Error **errp)
-> +{
-> +    RISCVSATPMap *satp_map = opaque;
-> +    uint8_t satp = satp_mode_from_str(name);
-> +    bool value;
-> +
-> +    if (!visit_type_bool(v, name, &value, errp)) {
-> +        return;
-> +    }
-> +
-> +    satp_map->map = deposit32(satp_map->map, satp, 1, value);
-> +    satp_map->init |= 1 << satp;
-> +}
-> +
-> +static void riscv_add_satp_mode_properties(Object *obj)
-> +{
-> +    RISCVCPU *cpu = RISCV_CPU(obj);
-> +
-> +    if (cpu->env.misa_mxl == MXL_RV32) {
-> +        object_property_add(obj, "sv32", "bool", cpu_riscv_get_satp,
-> +                            cpu_riscv_set_satp, NULL, &cpu->cfg.satp_mode);
-> +    } else {
-> +        object_property_add(obj, "sv39", "bool", cpu_riscv_get_satp,
-> +                            cpu_riscv_set_satp, NULL, &cpu->cfg.satp_mode);
-> +        object_property_add(obj, "sv48", "bool", cpu_riscv_get_satp,
-> +                            cpu_riscv_set_satp, NULL, &cpu->cfg.satp_mode);
-> +        object_property_add(obj, "sv57", "bool", cpu_riscv_get_satp,
-> +                            cpu_riscv_set_satp, NULL, &cpu->cfg.satp_mode);
-> +        object_property_add(obj, "sv64", "bool", cpu_riscv_get_satp,
-> +                            cpu_riscv_set_satp, NULL, &cpu->cfg.satp_mode);
-> +    }
-> +}
-> +
->  #ifndef CONFIG_USER_ONLY
->  static void riscv_cpu_set_irq(void *opaque, int irq, int level)
->  {
-> @@ -1091,6 +1296,8 @@ static void register_cpu_props(Object *obj)
->      for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
->          qdev_property_add_static(dev, prop);
->      }
-> +
-> +    riscv_add_satp_mode_properties(obj);
->  }
->
->  static Property riscv_cpu_properties[] = {
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index f5609b62a2..e37177db5c 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -27,6 +27,7 @@
->  #include "qom/object.h"
->  #include "qemu/int128.h"
->  #include "cpu_bits.h"
-> +#include "qapi/qapi-types-common.h"
->
->  #define TCG_GUEST_DEFAULT_MO 0
->
-> @@ -413,6 +414,17 @@ struct RISCVCPUClass {
->      ResettablePhases parent_phases;
->  };
->
-> +/*
-> + * map is a 16-bit bitmap: the most significant set bit in map is the maximum
-> + * satp mode that is supported.
+>  /*
+> - * The FDT should be put at the farthest point possible to
+> - * avoid overwriting it with the kernel/initrd.
+> + * This function makes an assumption that the DRAM interval
+> + * 'dram_base' + 'dram_size' is contiguous.
+>   *
+> - * This function makes an assumption that the DRAM is
+> - * contiguous. It also cares about 32-bit systems and
+> - * will limit fdt_addr to be addressable by them even for
+> - * 64-bit CPUs.
+> + * Considering that 'dram_end' is the lowest value between
+> + * the end of the DRAM block and MachineState->ram_size, the
+> + * FDT location will vary according to 'dram_base':
 > + *
-> + * init is a 16-bit bitmap used to make sure the user selected a correct
-> + * configuration as per the specification.
-> + */
-> +typedef struct {
-> +    uint16_t map, init;
-> +} RISCVSATPMap;
-> +
->  struct RISCVCPUConfig {
->      bool ext_i;
->      bool ext_e;
-> @@ -488,6 +500,8 @@ struct RISCVCPUConfig {
->      bool debug;
->
->      bool short_isa_string;
-> +
-> +    RISCVSATPMap satp_mode;
->  };
->
->  typedef struct RISCVCPUConfig RISCVCPUConfig;
-> @@ -794,9 +808,14 @@ enum riscv_pmu_event_idx {
->  /* CSR function table */
->  extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
->
-> +extern const bool valid_vm_1_10_32[], valid_vm_1_10_64[];
-> +
->  void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
->  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
->
->  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
->
-> +uint8_t satp_mode_max_from_map(uint32_t map);
-> +const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
-> +
->  #endif /* RISCV_CPU_H */
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 6b157806a5..f9eff3f1e3 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1117,12 +1117,12 @@ static const target_ulong hip_writable_mask = MIP_VSSIP;
->  static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP | MIP_VSEIP;
->  static const target_ulong vsip_writable_mask = MIP_VSSIP;
->
-> -static const bool valid_vm_1_10_32[16] = {
-> +const bool valid_vm_1_10_32[16] = {
->      [VM_1_10_MBARE] = true,
->      [VM_1_10_SV32] = true
->  };
->
-> -static const bool valid_vm_1_10_64[16] = {
-> +const bool valid_vm_1_10_64[16] = {
->      [VM_1_10_MBARE] = true,
->      [VM_1_10_SV39] = true,
->      [VM_1_10_SV48] = true,
-> @@ -1211,11 +1211,9 @@ static RISCVException read_mstatus(CPURISCVState *env, int csrno,
->
->  static bool validate_vm(CPURISCVState *env, target_ulong vm)
+> + * - if 'dram_base' is less that 3072 MiB, the FDT will be
+> + * put at the lowest value between 3072 MiB and 'dram_end';
+> + *
+> + * - if 'dram_base' is higher than 3072 MiB, the FDT will be
+> + * put at 'dram_end'.
+>   *
+>   * The FDT is fdt_packed() during the calculation.
+>   */
+> -uint64_t riscv_compute_fdt_addr(hwaddr dram_base, uint64_t mem_size,
+> -                                void *fdt)
+> +uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
+> +                                MachineState *ms)
 >  {
-> -    if (riscv_cpu_mxl(env) == MXL_RV32) {
-> -        return valid_vm_1_10_32[vm & 0xf];
-> -    } else {
-> -        return valid_vm_1_10_64[vm & 0xf];
-> -    }
-> +    RISCVCPU *cpu = RISCV_CPU(env_cpu(env));
-> +
-> +    return (vm & 0xf) <= satp_mode_max_from_map(cpu->cfg.satp_mode.map);
->  }
+> -    uint64_t temp;
+> -    hwaddr dram_end = dram_base + mem_size;
+> -    int ret = fdt_pack(fdt);
+> +    int ret = fdt_pack(ms->fdt);
+> +    hwaddr dram_end, temp;
+>      int fdtsize;
 >
->  static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>      /* Should only fail if we've built a corrupted tree */
+>      g_assert(ret == 0);
+>
+> -    fdtsize = fdt_totalsize(fdt);
+> +    fdtsize = fdt_totalsize(ms->fdt);
+>      if (fdtsize <= 0) {
+>          error_report("invalid device-tree");
+>          exit(1);
+>      }
+>
+> +    /*
+> +     * A dram_size == 0, usually from a MemMapEntry[].size element,
+> +     * means that the DRAM block goes all the way to ms->ram_size.
+> +     */
+> +    dram_end = dram_base;
+> +    dram_end += dram_size ? MIN(ms->ram_size, dram_size) : ms->ram_size;
+> +
+>      /*
+>       * We should put fdt as far as possible to avoid kernel/initrd overwriting
+>       * its content. But it should be addressable by 32 bit system as well.
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index 17499d4152..2b91e49561 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -642,7 +642,8 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>
+>          /* Compute the fdt load address in dram */
+>          fdt_load_addr = riscv_compute_fdt_addr(memmap[MICROCHIP_PFSOC_DRAM_LO].base,
+> -                                               machine->ram_size, machine->fdt);
+> +                                               memmap[MICROCHIP_PFSOC_DRAM_LO].size,
+> +                                               machine);
+>          riscv_load_fdt(fdt_load_addr, machine->fdt);
+>
+>          /* Load the reset vector */
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 626d4dc2f3..d3ab7a9cda 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -617,7 +617,8 @@ static void sifive_u_machine_init(MachineState *machine)
+>      }
+>
+>      fdt_load_addr = riscv_compute_fdt_addr(memmap[SIFIVE_U_DEV_DRAM].base,
+> -                                           machine->ram_size, machine->fdt);
+> +                                           memmap[SIFIVE_U_DEV_DRAM].size,
+> +                                           machine);
+>      riscv_load_fdt(fdt_load_addr, machine->fdt);
+>
+>      if (!riscv_is_32bit(&s->soc.u_cpus)) {
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index f1114f2c71..cc3f6dac17 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -325,7 +325,8 @@ static void spike_board_init(MachineState *machine)
+>      }
+>
+>      fdt_load_addr = riscv_compute_fdt_addr(memmap[SPIKE_DRAM].base,
+> -                                           machine->ram_size, machine->fdt);
+> +                                           memmap[SPIKE_DRAM].size,
+> +                                           machine);
+>      riscv_load_fdt(fdt_load_addr, machine->fdt);
+>
+>      /* load the reset vector */
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 2e0a0cdb17..a061151a6f 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1304,7 +1304,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
+>      }
+>
+>      fdt_load_addr = riscv_compute_fdt_addr(memmap[VIRT_DRAM].base,
+> -                                           machine->ram_size, machine->fdt);
+> +                                           memmap[VIRT_DRAM].size,
+> +                                           machine);
+>      riscv_load_fdt(fdt_load_addr, machine->fdt);
+>
+>      /* load the reset vector */
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index 46de4ec46b..511390f60e 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -48,7 +48,7 @@ target_ulong riscv_load_kernel(MachineState *machine,
+>                                 symbol_fn_t sym_cb);
+>  void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry);
+>  uint64_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size,
+> -                                void *fdt);
+> +                                MachineState *ms);
+>  void riscv_load_fdt(hwaddr fdt_addr, void *fdt);
+>  void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
+>                                 hwaddr saddr,
 > --
-> 2.37.2
+> 2.39.1
 >
 >
 
