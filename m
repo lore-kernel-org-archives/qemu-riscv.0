@@ -1,65 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNonc-0001o7-WE
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Feb 2023 00:39:49 -0500
+	id 1pNp5f-0004rS-BQ
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Feb 2023 00:58:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pNonb-0001ne-9D; Fri, 03 Feb 2023 00:39:47 -0500
-Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1pNp5d-0004rC-Rt
+ for qemu-riscv@nongnu.org; Fri, 03 Feb 2023 00:58:25 -0500
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pNonY-0005OJ-Qb; Fri, 03 Feb 2023 00:39:46 -0500
-Received: by mail-ej1-x633.google.com with SMTP id bk15so12353146ejb.9;
- Thu, 02 Feb 2023 21:39:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dt65vMvB1KIyz2co3WmQ+wjkXMdcviuAWEV7nhzeoxY=;
- b=iM++qHT8oDmkCuaCeRiUaSi75vgMO2AoKSgrYogHJ8re/Ju0cvqfq3v8cfo3pIP1x4
- cCLX5fMvtX6CMu7QGU+6tdO30ImpmQgyPVl4IAMMdL14UpUXzxIPzblN1HFiMxvJDK6/
- HnqJQ28anoYcLKp0e+fO5bVQAV2BUx6VRXnbiP7UvWtC9eU0BRRW4Sl6NISWd5q3GrPr
- i0moBV9yW/JaEBXmeGawDcs2q6uVLlAwWzDHpPmAVS53Gj8JVoOHPr0f83+Hpqsl2Wzu
- 5F0fi4trwU16Nfuoh3JMkIdhYPqkOBuCwAzxgZ/xuxdlwMrnEWLVgkWune4wO/+K5b9G
- AnPg==
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1pNp5b-00022k-NU
+ for qemu-riscv@nongnu.org; Fri, 03 Feb 2023 00:58:25 -0500
+Received: by mail-wr1-x429.google.com with SMTP id bt17so640987wrb.8
+ for <qemu-riscv@nongnu.org>; Thu, 02 Feb 2023 21:58:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=y7EslLR/1lA/JW9/x0h4+FJwmBcHRtH49Otf9ZdLq70=;
+ b=L3V5SOG4G05KtsokDfLCVe0BPsaxGZF1FsSaUd4l+GfXvPnzA1e35SiM4NNxFEbJCm
+ 1Oa8NaBSQk4X6y84kdgCmuXIDYhU15ke7Q6fXTecmiG7oBKZLe0dxnpRFwaQ9WgiOp27
+ bgODimFTY6j/Ly0d/iM5ZZf9pbsHTToVwVNkHNFaAIi67nUYxkv0cUqFYKdNn56iHpCS
+ bwAqyJP0eAPPKG9QaO3b+ersqnLbH3LRhGOi4PodKlSzOQ6vom1f7R7fAqzM2m5YgtRW
+ o37BacjteM9q/o8yiLPHI9IybNE2w/dIECK7eMracXkwCfYPb59QQH/s0XxCmv3IRZl+
+ cB9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dt65vMvB1KIyz2co3WmQ+wjkXMdcviuAWEV7nhzeoxY=;
- b=S5XiGNSxggS4OdG62VBMElD3G4JvHcj3vJlWsNBWxs8RFVTQyLxbK7kPyD3k33vMC1
- Vix5tj17JqN2yOlXVQ8b79MFtL0TGeP8pNVoqFpNgBN2ZHHjxhPRoUWAbbBxEdqqYHI6
- 7/JXCgWCoiC9mvbvlQmEJpAcnxDojxlEKYIydLdKwszP72cejyJBaKJNd1+ObJYzqV0x
- 8JTT1PZy5zWa1+SHhLm0HJgtqvR+KFHIStKJuNR//N0t67LEOZx+omncN64plmAZBO+x
- 5xzL3xGkW6TKQpWbnA55VPz+t0iZWFEMrTmpDOpHXqjJ50ocdFcKOtPypJX5Dlv6u9G2
- Q8Iw==
-X-Gm-Message-State: AO0yUKW7Z38mfCFvg+Arl+yZkOdcoXCRYlZ2+y662abI6JaDNPKLs6RW
- hd8JoGEOmvjtVYQ0DFviZAadjBSsudZJGnb9s90=
-X-Google-Smtp-Source: AK7set8lhp0ZRuqnCOg6w2w/KkVLUY+YqouEFFUnIhyg4rozILFUXREZvx2xiCsRGdA4cD+Bz05ZDHVfqcBejNtxjHo=
-X-Received: by 2002:a17:906:49da:b0:882:3e56:a854 with SMTP id
- w26-20020a17090649da00b008823e56a854mr2599791ejv.263.1675402781157; Thu, 02
- Feb 2023 21:39:41 -0800 (PST)
+ bh=y7EslLR/1lA/JW9/x0h4+FJwmBcHRtH49Otf9ZdLq70=;
+ b=xGzbBJL+XVJf/+aMA8o+3yTyTMSvVn/+TZ36vocHPthWJr7DbBkTAJ2JL78utHEwkk
+ M4/K1Ou57pFosDMzy13jbyuXt2pFNjxanPVorHapF4cZtwtEwD1BaiqSb/orAuvS42fx
+ TPxkf9EMtuxy8d4rVGhKsUsam0CRipEGE0S93p4DOe7OyXEE7UbZt1b3WQ3fNtSEsH9f
+ 1wbtdi18kiTvlaPBdcZAt/4HM2EzM4gqLDnXQTZsL5VdtSBBJBC60bXiXURvmgaoflI0
+ pvA56wNMLtbIMhnmPOXYg7QP1EmrtD/RGxtAPtIclnMaTZiqoLrCnz+wI28sB96ZQdR2
+ Ko8g==
+X-Gm-Message-State: AO0yUKU8W+Ix4jVHuRUaa4m/N6MLwvu22wdgTdLkvXDw7+QbCgGLNlky
+ 4fS5ERitvly4kgx+hQEZBQkvvg==
+X-Google-Smtp-Source: AK7set+3Egn72WYHf2NldWib2jjJIz+s19XGdgHye71OSZFo3aW6swbS/rv2yDqhoXB7qfu3ygOIlw==
+X-Received: by 2002:a05:6000:384:b0:2be:4c32:a7df with SMTP id
+ u4-20020a056000038400b002be4c32a7dfmr9099275wrf.63.1675403901975; 
+ Thu, 02 Feb 2023 21:58:21 -0800 (PST)
+Received: from alex-rivos.home (lfbn-lyo-1-450-160.w2-7.abo.wanadoo.fr.
+ [2.7.42.160]) by smtp.gmail.com with ESMTPSA id
+ bj24-20020a0560001e1800b002bded7da2b8sm1105953wrb.102.2023.02.02.21.58.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Feb 2023 21:58:21 -0800 (PST)
+From: Alexandre Ghiti <alexghiti@rivosinc.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>,
+ Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: Alexandre Ghiti <alexghiti@rivosinc.com>
+Subject: [PATCH v10 0/5] riscv: Allow user to set the satp mode
+Date: Fri,  3 Feb 2023 06:58:07 +0100
+Message-Id: <20230203055812.257458-1-alexghiti@rivosinc.com>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-References: <20230202135810.1657792-1-dbarboza@ventanamicro.com>
- <20230202135810.1657792-2-dbarboza@ventanamicro.com>
-In-Reply-To: <20230202135810.1657792-2-dbarboza@ventanamicro.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 3 Feb 2023 13:39:29 +0800
-Message-ID: <CAEUhbmW01vUZNdAcXQ0b-7GUgH70q9eyWJH7kG+Mph4uJJeWnA@mail.gmail.com>
-Subject: Re: [PATCH v10 1/3] hw/riscv: handle 32 bit CPUs kernel_addr in
- riscv_load_kernel()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::633;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x633.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=alexghiti@rivosinc.com; helo=mail-wr1-x429.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,203 +80,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2023 05:39:47 -0000
+X-List-Received-Date: Fri, 03 Feb 2023 05:58:26 -0000
 
-On Thu, Feb 2, 2023 at 9:58 PM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> load_elf_ram_sym() will sign-extend 32 bit addresses. If a 32 bit QEMU
-> guest happens to be running in a hypervisor that are using 64 bits to
-> encode its address, kernel_entry can be padded with '1's and create
-> problems [1].
+This introduces new properties to allow the user to set the satp mode,
+see patch 3 for full syntax. In addition, it prevents cpus to boot in a
+satp mode they do not support (see patch 4).
 
-Still this commit message is inaccurate. It's not
+base-commit: commit 75cc28648574 ("configure: remove
+backwards-compatibility code"
 
-"a 32-bit QEMU guest happens to running in a hypervisor that are using
-64 bits to encode tis address"
+v10:
+- Fix user mode build by surrounding satp handling with #ifndef
+  CONFIG_USER_ONLY, Frank
+- Fix AB/RB from Frank and Alistair
 
-as a 32-bit ELF can only hold a 32-bit address, but it's the QEMU ELF
-loader that does the sign extension and returns the address as
-uint64_t. It has nothing to do with hypervisor too.
+v9:
+- Move valid_vm[i] up, Andrew
+- Fixed expansion of the bitmap map, Bin
+- Rename set_satp_mode_default into set_satp_mode_default_map, Bin
+- Remove outer parenthesis and alignment, Bin
+- Fix qemu32 build failure, Bin
+- Fixed a few typos, Bin
+- Add RB from Andrew and Bin
 
->
-> Using a translate_fn() callback in load_elf_ram_sym() to filter the
-> padding from the address doesn't work. A more detailed explanation can
-> be found in [2]. The short version is that glue(load_elf, SZ), from
-> include/hw/elf_ops.h, will calculate 'pentry' (mapped into the
-> 'kernel_load_base' var in riscv_load_Kernel()) before using
-> translate_fn(), and will not recalculate it after executing it. This
-> means that the callback does not prevent the padding from
-> kernel_load_base to appear.
->
-> Let's instead use a kernel_low var to capture the 'lowaddr' value from
-> load_elf_ram_sim(), and return it when we're dealing with 32 bit CPUs.
+v8:
+- Remove useless !map check, Andrew
+- Add RB from Andrew
 
-Looking at the prototype of load_elf_ram_sym() it has
+v7:
+- Expand map to contain all valid modes, Andrew
+- Fix commit log for patch 3, Andrew
+- Remove is_32_bit argument from set_satp_mode_default, Andrew
+- Move and fixed comment, Andrew
+- Fix satp_mode_map_max in riscv_cpu_satp_mode_finalize which was set
+  too early, Alex
+- Remove is_32_bit argument from set_satp_mode_max_supported, Andrew
+- Use satp_mode directly instead of a string in
+  set_satp_mode_max_supported, Andrew
+- Swap the patch introducing supported bitmap and the patch that sets
+  sv57 in the dt, Andrew
+- Add various RB from Andrew and Alistair, thanks
 
-ssize_t load_elf_ram_sym(const char *filename,
-                         uint64_t (*elf_note_fn)(void *, void *, bool),
-                         uint64_t (*translate_fn)(void *, uint64_t),
-                         void *translate_opaque, uint64_t *pentry,
-                         uint64_t *lowaddr, uint64_t *highaddr,
-                         uint32_t *pflags, int big_endian, int elf_machine,
-                         int clear_lsb, int data_swab,
-                         AddressSpace *as, bool load_rom, symbol_fn_t sym_cb)
+v6:
+- Remove the valid_vm check in validate_vm and add it to the finalize function
+  so that map already contains the constraint, Alex
+- Add forgotten mbare to satp_mode_from_str, Alex
+- Move satp mode properties handling to riscv_cpu_satp_mode_finalize, Andrew
+- Only add satp mode properties corresponding to the cpu, and then remove the
+  check against valid_vm_1_10_32/64 in riscv_cpu_satp_mode_finalize,
+  Andrew/Alistair/Alex
+- Move mmu-type setting to its own patch, Andrew
+- patch 5 is new and is a fix, Alex
 
-So kernel_low is the "highaddr" parameter, not the 'lowaddr' value.
+v5:
+- Simplify v4 implementation by leveraging valid_vm_1_10_32/64, as
+  suggested by Andrew
+- Split the v4 patch into 2 patches as suggested by Andrew
+- Lot of other minor corrections, from Andrew
+- Set the satp mode N by disabling the satp mode N + 1
+- Add a helper to set satp mode from a string, as suggested by Frank
 
->
-> [1] https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg02281.html
-> [2] https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg00099.html
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  hw/riscv/boot.c            | 15 +++++++++++----
->  hw/riscv/microchip_pfsoc.c |  3 ++-
->  hw/riscv/opentitan.c       |  3 ++-
->  hw/riscv/sifive_e.c        |  3 ++-
->  hw/riscv/sifive_u.c        |  3 ++-
->  hw/riscv/spike.c           |  3 ++-
->  hw/riscv/virt.c            |  3 ++-
->  include/hw/riscv/boot.h    |  1 +
->  8 files changed, 24 insertions(+), 10 deletions(-)
->
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index c7e0e50bd8..5ec6d32165 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -174,11 +174,12 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
->  }
->
->  target_ulong riscv_load_kernel(MachineState *machine,
-> +                               RISCVHartArrayState *harts,
->                                 target_ulong kernel_start_addr,
->                                 symbol_fn_t sym_cb)
->  {
->      const char *kernel_filename = machine->kernel_filename;
-> -    uint64_t kernel_load_base, kernel_entry;
-> +    uint64_t kernel_load_base, kernel_entry, kernel_low;
->
->      g_assert(kernel_filename != NULL);
->
-> @@ -189,10 +190,16 @@ target_ulong riscv_load_kernel(MachineState *machine,
->       * the (expected) load address load address. This allows kernels to have
->       * separate SBI and ELF entry points (used by FreeBSD, for example).
->       */
-> -    if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
-> -                         NULL, &kernel_load_base, NULL, NULL, 0,
-> +    if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL, NULL,
-> +                         &kernel_load_base, &kernel_low, NULL, 0,
->                           EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
-> -        return kernel_load_base;
-> +        kernel_entry = kernel_load_base;
-> +
-> +        if (riscv_is_32bit(harts)) {
-> +            kernel_entry = kernel_low;
-> +        }
-> +
-> +        return kernel_entry;
->      }
->
->      if (load_uimage_as(kernel_filename, &kernel_entry, NULL, NULL,
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index 2b91e49561..712625d2a4 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -629,7 +629,8 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
->          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc.u_cpus,
->                                                           firmware_end_addr);
->
-> -        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
-> +        kernel_entry = riscv_load_kernel(machine, &s->soc.u_cpus,
-> +                                         kernel_start_addr, NULL);
->
->          if (machine->initrd_filename) {
->              riscv_load_initrd(machine, kernel_entry);
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 353f030d80..7fe4fb5628 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -101,7 +101,8 @@ static void opentitan_board_init(MachineState *machine)
->      }
->
->      if (machine->kernel_filename) {
-> -        riscv_load_kernel(machine, memmap[IBEX_DEV_RAM].base, NULL);
-> +        riscv_load_kernel(machine, &s->soc.cpus,
-> +                          memmap[IBEX_DEV_RAM].base, NULL);
->      }
->  }
->
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index 3e3f4b0088..1a7d381514 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -114,7 +114,8 @@ static void sifive_e_machine_init(MachineState *machine)
->                            memmap[SIFIVE_E_DEV_MROM].base, &address_space_memory);
->
->      if (machine->kernel_filename) {
-> -        riscv_load_kernel(machine, memmap[SIFIVE_E_DEV_DTIM].base, NULL);
-> +        riscv_load_kernel(machine, &s->soc.cpus,
-> +                          memmap[SIFIVE_E_DEV_DTIM].base, NULL);
->      }
->  }
->
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index d3ab7a9cda..71be442a50 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -598,7 +598,8 @@ static void sifive_u_machine_init(MachineState *machine)
->          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc.u_cpus,
->                                                           firmware_end_addr);
->
-> -        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
-> +        kernel_entry = riscv_load_kernel(machine, &s->soc.u_cpus,
-> +                                         kernel_start_addr, NULL);
->
->          if (machine->initrd_filename) {
->              riscv_load_initrd(machine, kernel_entry);
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index cc3f6dac17..1fa91167ab 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -305,7 +305,8 @@ static void spike_board_init(MachineState *machine)
->          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
->                                                           firmware_end_addr);
->
-> -        kernel_entry = riscv_load_kernel(machine, kernel_start_addr,
-> +        kernel_entry = riscv_load_kernel(machine, &s->soc[0],
-> +                                         kernel_start_addr,
->                                           htif_symbol_callback);
->
->          if (machine->initrd_filename) {
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index a061151a6f..d0531cc641 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1277,7 +1277,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
->          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
->                                                           firmware_end_addr);
->
-> -        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
-> +        kernel_entry = riscv_load_kernel(machine, &s->soc[0],
-> +                                         kernel_start_addr, NULL);
->
->          if (machine->initrd_filename) {
->              riscv_load_initrd(machine, kernel_entry);
-> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-> index 511390f60e..6295316afb 100644
-> --- a/include/hw/riscv/boot.h
-> +++ b/include/hw/riscv/boot.h
-> @@ -44,6 +44,7 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
->                                   hwaddr firmware_load_addr,
->                                   symbol_fn_t sym_cb);
->  target_ulong riscv_load_kernel(MachineState *machine,
-> +                               RISCVHartArrayState *harts,
->                                 target_ulong firmware_end_addr,
->                                 symbol_fn_t sym_cb);
->  void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry);
-> --
+v4:
+- Use custom boolean properties instead of OnOffAuto properties, based
+  on ARMVQMap, as suggested by Andrew
 
-Regards,
-Bin
+v3:
+- Free sv_name as pointed by Bin
+- Replace satp-mode with boolean properties as suggested by Andrew
+- Removed RB from Atish as the patch considerably changed
+
+v2:
+- Use error_setg + return as suggested by Alistair
+- Add RB from Atish
+- Fixed checkpatch issues missed in v1
+- Replaced Ludovic email address with the rivos one
+
+Alexandre Ghiti (5):
+  riscv: Pass Object to register_cpu_props instead of DeviceState
+  riscv: Change type of valid_vm_1_10_[32|64] to bool
+  riscv: Allow user to set the satp mode
+  riscv: Introduce satp mode hw capabilities
+  riscv: Correctly set the device-tree entry 'mmu-type'
+
+ hw/riscv/virt.c    |  19 ++--
+ target/riscv/cpu.c | 271 +++++++++++++++++++++++++++++++++++++++++++--
+ target/riscv/cpu.h |  25 +++++
+ target/riscv/csr.c |  29 +++--
+ 4 files changed, 313 insertions(+), 31 deletions(-)
+
+-- 
+2.37.2
+
 
