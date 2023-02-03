@@ -1,70 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNnd1-0006Xn-JI
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 23:24:47 -0500
+	id 1pNoLM-0005T0-BE
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Feb 2023 00:10:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1pNnd0-0006XY-6R
- for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 23:24:46 -0500
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pNoLK-0005SU-Fy; Fri, 03 Feb 2023 00:10:34 -0500
+Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1pNncy-0007gE-9f
- for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 23:24:45 -0500
-Received: by mail-pg1-x534.google.com with SMTP id v3so2860878pgh.4
- for <qemu-riscv@nongnu.org>; Thu, 02 Feb 2023 20:24:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=XH6bWLGie/nB6oW9RlM0zMwRYQDhnyHZ3cNWbPyp8eM=;
- b=nuCSUoiKFErlvWerlE+q0d2Lb9A+lpDwVmIVizQKNGGonBHf8tzt3mjS9Ltm114msD
- 5LoQecrGK0O1fMW47KQzd0bFPBo4p2kj8EO7HXTYsJMpe2pUOtSa5UN9yMbj36PN12lo
- /9/NqENih47+OaZNE+vZlD231X896jzTBf/miJ91larTCtZo/UQP6jeVeNhacgClyQ4R
- 4MgIy9y6se7fK5vpSUjxdn6RufXLpQJbFDL6Yelb/AZt3Pu00afChlnXj6ESVBkbmK1Z
- 96/C+tfpZ4FF5F9i9qP4Tq7dUHPa1b65vppb3/cWuCBOdsSjrwohJ2xwKUdF4h48fGo5
- Zo7A==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pNoLI-0004IQ-Fg; Fri, 03 Feb 2023 00:10:34 -0500
+Received: by mail-vs1-xe2c.google.com with SMTP id s24so4215235vsi.12;
+ Thu, 02 Feb 2023 21:10:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Mmkeku80xmoKsUkXvVzZlNuLgKuXv6yS5JDoOKA8Nds=;
+ b=KMABX7/LknNGPQmaOm/3kOAKKudwk+niDw+40KMo89ZT9P0u+LB7AdhMYgPSGMTymz
+ hgSmiLC3Ywj7BF5sCcUvdqyEQg1pJAuGvqk0hm8Xn0nptG0phEC31TisyzUYcXArmJIj
+ pckazOrAoW2MCXvELoYOM7Ih9d6jHyyrjMAXC5/jEyfxP4xgrZUlL5IbsIffv5tIyQN/
+ sTID1bLF5CvcSquZolzCe2QWUwcjg5h8B371LJRKqZZbFFT1DhHYofoqz+KmGC9AFm32
+ 2DJrDHF4TNokIDJ6YvzqMaI/j0YEp8Ow0WvdyWw9Vfir5sPVtYBBl8U9nDgq8g8YGw7h
+ RsnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=XH6bWLGie/nB6oW9RlM0zMwRYQDhnyHZ3cNWbPyp8eM=;
- b=lw8D/jjr94tr4/m7MeTAMlpyqcKgreSy4JIoAjT1WlKoGao9QDLHxAEInxiyuCIVdf
- 5b6VTyJ560Ufa6kWmhiXOglx5SUlEVThJG6y1rZ3SSU+pwVNm1xgjRqrDN0xLoM+tgHg
- HhyxXwa70c/sxu6rwOjXD/3qOj4T8f7BrVnWInEQCk5pv58eF2uW/onP0lXVWj4B/Kpm
- K/ejtGqzdO3UmAqVf/1/u/vuqpW5YqEhbcNCOCwt0vFhPRZtmYdJJO6UvK27B4HSvpfv
- cWGvdwj6lHQ/0LAaHzdadNzXJ1fbjSeDiinVRPyNlqg4gkxeJ1/vbTi5u71PnTjcv2al
- TSfQ==
-X-Gm-Message-State: AO0yUKXP8qI1Y+4/TtTB8QCnS/HcxHBwqagWymXNOpR7K2BQtm4xzJzz
- l4AMAXR8D4ymfyGuM1RkrsOYW/gBgVhR1oQ9GyonWQ==
-X-Google-Smtp-Source: AK7set9WTZHiqpIxXNvNIe+HKnWIa1jdIQi10pqaSGQTxVuSztJEqnU3Q9DiV916EqsvdG52qY7uGQ==
-X-Received: by 2002:a05:6a00:882:b0:593:c4fd:f3a5 with SMTP id
- q2-20020a056a00088200b00593c4fdf3a5mr7703176pfj.0.1675398281885; 
- Thu, 02 Feb 2023 20:24:41 -0800 (PST)
-Received: from gram.dc1.ventanamicro.com
- ([2405:201:d019:c0a2:d1bb:4458:2b1b:e0d9])
- by smtp.gmail.com with ESMTPSA id
- g28-20020aa796bc000000b005895f9657ebsm533114pfk.70.2023.02.02.20.24.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Feb 2023 20:24:41 -0800 (PST)
-From: Himanshu Chauhan <hchauhan@ventanamicro.com>
-To: qemu-riscv@nongnu.org
-Cc: Himanshu Chauhan <hchauhan@ventanamicro.com>
-Subject: [PATCH] target/riscv: Convert epmp from feature to ratified smepmp
- extension
-Date: Fri,  3 Feb 2023 09:54:34 +0530
-Message-Id: <20230203042434.67293-1-hchauhan@ventanamicro.com>
-X-Mailer: git-send-email 2.39.1
+ bh=Mmkeku80xmoKsUkXvVzZlNuLgKuXv6yS5JDoOKA8Nds=;
+ b=bwJSDPQKH1Qb5+gNK22HDikYqyFeq1N7Ox3caSgTQvDXpObM9JfG/YcPqkr3AAVOcg
+ rexQfHi0brWFgGei+jLct/ict7CBmM/Fg3WBm01aUEWJMRSOOdoUerg408HTaeVKuadk
+ UxB5ttqzX/wdk1PYn38VevRkz5w9I4YuTU8T6qoBfzBEhYOsCRLdW+sc3UTqDgRURRJM
+ gG5sBkJphRQqrn6Ti90ItrUIXFE3RabbCUmmyAHOLOGXRY7XCrUMxYc5MXDkyBz3Purm
+ e3ln1xWTngL+x8VizRkv6AeuwHjHkR4eEKZR3QSTLPW0M3d7QNVfExsUkDiTXBpPCnEL
+ n/bw==
+X-Gm-Message-State: AO0yUKXBqy2Du87vbBfnbjz+mqfa8H7xm1xB+W8C3cp/ag2VfKx0Uofr
+ T1qdX9OR0sbuwAc6N8hvN47LIXXM5Oj3mvxemOk=
+X-Google-Smtp-Source: AK7set91r6SE1rwr2YahZZEcapir7EhGgUlLESPdewzwMEvZij1VlPwxC8zOzLs1Uw8lSQi3uMD/6P7Rh8z7V3OIR2I=
+X-Received: by 2002:a67:e102:0:b0:3f0:89e1:7c80 with SMTP id
+ d2-20020a67e102000000b003f089e17c80mr1194603vsl.72.1675401030660; Thu, 02 Feb
+ 2023 21:10:30 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=hchauhan@ventanamicro.com; helo=mail-pg1-x534.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20230202135810.1657792-1-dbarboza@ventanamicro.com>
+ <20230202135810.1657792-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20230202135810.1657792-2-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 3 Feb 2023 15:10:04 +1000
+Message-ID: <CAKmqyKOTTMBOsmQbn_pN2Nv4oz7JA5RKsku+8sEgCwK0OJHHrQ@mail.gmail.com>
+Subject: Re: [PATCH v10 1/3] hw/riscv: handle 32 bit CPUs kernel_addr in
+ riscv_load_kernel()
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -79,186 +73,184 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2023 04:24:46 -0000
+X-List-Received-Date: Fri, 03 Feb 2023 05:10:34 -0000
 
-Smepmp is a ratified extension. This patch converts the existing epmp
-support as a feature to an extension. With this, "smepmp" string will
-be concatenated to riscv,isa in generated FDT.
+On Thu, Feb 2, 2023 at 11:58 PM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> load_elf_ram_sym() will sign-extend 32 bit addresses. If a 32 bit QEMU
+> guest happens to be running in a hypervisor that are using 64 bits to
+> encode its address, kernel_entry can be padded with '1's and create
+> problems [1].
+>
+> Using a translate_fn() callback in load_elf_ram_sym() to filter the
+> padding from the address doesn't work. A more detailed explanation can
+> be found in [2]. The short version is that glue(load_elf, SZ), from
+> include/hw/elf_ops.h, will calculate 'pentry' (mapped into the
+> 'kernel_load_base' var in riscv_load_Kernel()) before using
+> translate_fn(), and will not recalculate it after executing it. This
+> means that the callback does not prevent the padding from
+> kernel_load_base to appear.
+>
+> Let's instead use a kernel_low var to capture the 'lowaddr' value from
+> load_elf_ram_sim(), and return it when we're dealing with 32 bit CPUs.
+>
+> [1] https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg02281.html
+> [2] https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg00099.html
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Since the official name of the extension is Smepmp, the references
-to epmp have also been changed to smepmp.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
----
- target/riscv/cpu.c | 16 ++++++----------
- target/riscv/cpu.h |  3 +--
- target/riscv/csr.c |  8 +++++---
- target/riscv/pmp.c | 13 +++++++++----
- 4 files changed, 21 insertions(+), 19 deletions(-)
+Alistair
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 14a7027095..d9bba04226 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -103,6 +103,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zhinx, true, PRIV_VERSION_1_12_0, ext_zhinx),
-     ISA_EXT_DATA_ENTRY(zhinxmin, true, PRIV_VERSION_1_12_0, ext_zhinxmin),
-     ISA_EXT_DATA_ENTRY(smaia, true, PRIV_VERSION_1_12_0, ext_smaia),
-+    ISA_EXT_DATA_ENTRY(smepmp, true, PRIV_VERSION_1_12_0, ext_smepmp),
-     ISA_EXT_DATA_ENTRY(ssaia, true, PRIV_VERSION_1_12_0, ext_ssaia),
-     ISA_EXT_DATA_ENTRY(sscofpmf, true, PRIV_VERSION_1_12_0, ext_sscofpmf),
-     ISA_EXT_DATA_ENTRY(sstc, true, PRIV_VERSION_1_12_0, ext_sstc),
-@@ -325,7 +326,7 @@ static void rv32_ibex_cpu_init(Object *obj)
-     register_cpu_props(DEVICE(obj));
-     set_priv_version(env, PRIV_VERSION_1_11_0);
-     cpu->cfg.mmu = false;
--    cpu->cfg.epmp = true;
-+    cpu->cfg.ext_smepmp = true;
- }
- 
- static void rv32_imafcu_nommu_cpu_init(Object *obj)
-@@ -884,14 +885,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
- 
-     if (cpu->cfg.pmp) {
-         riscv_set_feature(env, RISCV_FEATURE_PMP);
--
--        /*
--         * Enhanced PMP should only be available
--         * on harts with PMP support
--         */
--        if (cpu->cfg.epmp) {
--            riscv_set_feature(env, RISCV_FEATURE_EPMP);
--        }
-+    } else {
-+        /* smepmp requires pmp support */
-+        cpu->cfg.ext_smepmp = false;
-     }
- 
-     if (cpu->cfg.debug) {
-@@ -1051,6 +1047,7 @@ static Property riscv_cpu_extensions[] = {
-     DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-+    DEFINE_PROP_BOOL("smepmp", RISCVCPU, cfg.ext_smepmp, false),
-     DEFINE_PROP_BOOL("sstc", RISCVCPU, cfg.ext_sstc, true),
- 
-     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-@@ -1093,7 +1090,6 @@ static Property riscv_cpu_extensions[] = {
-     /* These are experimental so mark with 'x-' */
-     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
-     /* ePMP 0.9.3 */
--    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-     DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
-     DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
- 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index bcf0826753..30fd29e578 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -87,7 +87,6 @@
- enum {
-     RISCV_FEATURE_MMU,
-     RISCV_FEATURE_PMP,
--    RISCV_FEATURE_EPMP,
-     RISCV_FEATURE_MISA,
-     RISCV_FEATURE_DEBUG
- };
-@@ -465,6 +464,7 @@ struct RISCVCPUConfig {
-     bool ext_smaia;
-     bool ext_ssaia;
-     bool ext_sscofpmf;
-+    bool ext_smepmp;
-     bool rvv_ta_all_1s;
-     bool rvv_ma_all_1s;
- 
-@@ -484,7 +484,6 @@ struct RISCVCPUConfig {
-     uint16_t elen;
-     bool mmu;
-     bool pmp;
--    bool epmp;
-     bool debug;
- 
-     bool short_isa_string;
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 62e6c4acbd..f70f6d9aad 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -426,9 +426,11 @@ static RISCVException pmp(CPURISCVState *env, int csrno)
-     return RISCV_EXCP_ILLEGAL_INST;
- }
- 
--static RISCVException epmp(CPURISCVState *env, int csrno)
-+static RISCVException smepmp(CPURISCVState *env, int csrno)
- {
--    if (env->priv == PRV_M && riscv_feature(env, RISCV_FEATURE_EPMP)) {
-+    RISCVCPU *cpu = env_archcpu(env);
-+
-+    if (env->priv == PRV_M && cpu->cfg.ext_smepmp) {
-         return RISCV_EXCP_NONE;
-     }
- 
-@@ -4259,7 +4261,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_VSIPH]       = { "vsiph",       aia_hmode32, NULL, NULL, rmw_vsiph },
- 
-     /* Physical Memory Protection */
--    [CSR_MSECCFG]    = { "mseccfg",  epmp, read_mseccfg, write_mseccfg,
-+    [CSR_MSECCFG]    = { "mseccfg",  smepmp, read_mseccfg, write_mseccfg,
-                          .min_priv_ver = PRIV_VERSION_1_11_0           },
-     [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
-     [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index d1126a6066..d85ad07caa 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -58,6 +58,11 @@ static inline int pmp_is_locked(CPURISCVState *env, uint32_t pmp_index)
-     return 0;
- }
- 
-+static inline int smepmp_is_enabled(CPURISCVState *env)
-+{
-+    return (RISCV_CPU(env_cpu(env))->cfg.ext_smepmp);
-+}
-+
- /*
-  * Count the number of active rules.
-  */
-@@ -88,7 +93,7 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
-     if (pmp_index < MAX_RISCV_PMPS) {
-         bool locked = true;
- 
--        if (riscv_feature(env, RISCV_FEATURE_EPMP)) {
-+        if (smepmp_is_enabled(env)) {
-             /* mseccfg.RLB is set */
-             if (MSECCFG_RLB_ISSET(env)) {
-                 locked = false;
-@@ -239,7 +244,7 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
- {
-     bool ret;
- 
--    if (riscv_feature(env, RISCV_FEATURE_EPMP)) {
-+    if (smepmp_is_enabled(env)) {
-         if (MSECCFG_MMWP_ISSET(env)) {
-             /*
-              * The Machine Mode Whitelist Policy (mseccfg.MMWP) is set
-@@ -265,7 +270,7 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
-         }
-     }
- 
--    if ((!riscv_feature(env, RISCV_FEATURE_PMP)) || (mode == PRV_M)) {
-+    if (!smepmp_is_enabled(env) || (mode == PRV_M)) {
-         /*
-          * Privileged spec v1.10 states if HW doesn't implement any PMP entry
-          * or no PMP entry matches an M-Mode access, the access succeeds.
-@@ -348,7 +353,7 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
- 
-         /*
-          * Convert the PMP permissions to match the truth table in the
--         * ePMP spec.
-+         * Smepmp spec.
-          */
-         const uint8_t epmp_operation =
-             ((env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) >> 4) |
--- 
-2.39.1
-
+> ---
+>  hw/riscv/boot.c            | 15 +++++++++++----
+>  hw/riscv/microchip_pfsoc.c |  3 ++-
+>  hw/riscv/opentitan.c       |  3 ++-
+>  hw/riscv/sifive_e.c        |  3 ++-
+>  hw/riscv/sifive_u.c        |  3 ++-
+>  hw/riscv/spike.c           |  3 ++-
+>  hw/riscv/virt.c            |  3 ++-
+>  include/hw/riscv/boot.h    |  1 +
+>  8 files changed, 24 insertions(+), 10 deletions(-)
+>
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index c7e0e50bd8..5ec6d32165 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -174,11 +174,12 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
+>  }
+>
+>  target_ulong riscv_load_kernel(MachineState *machine,
+> +                               RISCVHartArrayState *harts,
+>                                 target_ulong kernel_start_addr,
+>                                 symbol_fn_t sym_cb)
+>  {
+>      const char *kernel_filename = machine->kernel_filename;
+> -    uint64_t kernel_load_base, kernel_entry;
+> +    uint64_t kernel_load_base, kernel_entry, kernel_low;
+>
+>      g_assert(kernel_filename != NULL);
+>
+> @@ -189,10 +190,16 @@ target_ulong riscv_load_kernel(MachineState *machine,
+>       * the (expected) load address load address. This allows kernels to have
+>       * separate SBI and ELF entry points (used by FreeBSD, for example).
+>       */
+> -    if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
+> -                         NULL, &kernel_load_base, NULL, NULL, 0,
+> +    if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL, NULL,
+> +                         &kernel_load_base, &kernel_low, NULL, 0,
+>                           EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
+> -        return kernel_load_base;
+> +        kernel_entry = kernel_load_base;
+> +
+> +        if (riscv_is_32bit(harts)) {
+> +            kernel_entry = kernel_low;
+> +        }
+> +
+> +        return kernel_entry;
+>      }
+>
+>      if (load_uimage_as(kernel_filename, &kernel_entry, NULL, NULL,
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index 2b91e49561..712625d2a4 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -629,7 +629,8 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc.u_cpus,
+>                                                           firmware_end_addr);
+>
+> -        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
+> +        kernel_entry = riscv_load_kernel(machine, &s->soc.u_cpus,
+> +                                         kernel_start_addr, NULL);
+>
+>          if (machine->initrd_filename) {
+>              riscv_load_initrd(machine, kernel_entry);
+> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> index 353f030d80..7fe4fb5628 100644
+> --- a/hw/riscv/opentitan.c
+> +++ b/hw/riscv/opentitan.c
+> @@ -101,7 +101,8 @@ static void opentitan_board_init(MachineState *machine)
+>      }
+>
+>      if (machine->kernel_filename) {
+> -        riscv_load_kernel(machine, memmap[IBEX_DEV_RAM].base, NULL);
+> +        riscv_load_kernel(machine, &s->soc.cpus,
+> +                          memmap[IBEX_DEV_RAM].base, NULL);
+>      }
+>  }
+>
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index 3e3f4b0088..1a7d381514 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -114,7 +114,8 @@ static void sifive_e_machine_init(MachineState *machine)
+>                            memmap[SIFIVE_E_DEV_MROM].base, &address_space_memory);
+>
+>      if (machine->kernel_filename) {
+> -        riscv_load_kernel(machine, memmap[SIFIVE_E_DEV_DTIM].base, NULL);
+> +        riscv_load_kernel(machine, &s->soc.cpus,
+> +                          memmap[SIFIVE_E_DEV_DTIM].base, NULL);
+>      }
+>  }
+>
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index d3ab7a9cda..71be442a50 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -598,7 +598,8 @@ static void sifive_u_machine_init(MachineState *machine)
+>          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc.u_cpus,
+>                                                           firmware_end_addr);
+>
+> -        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
+> +        kernel_entry = riscv_load_kernel(machine, &s->soc.u_cpus,
+> +                                         kernel_start_addr, NULL);
+>
+>          if (machine->initrd_filename) {
+>              riscv_load_initrd(machine, kernel_entry);
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index cc3f6dac17..1fa91167ab 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -305,7 +305,8 @@ static void spike_board_init(MachineState *machine)
+>          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
+>                                                           firmware_end_addr);
+>
+> -        kernel_entry = riscv_load_kernel(machine, kernel_start_addr,
+> +        kernel_entry = riscv_load_kernel(machine, &s->soc[0],
+> +                                         kernel_start_addr,
+>                                           htif_symbol_callback);
+>
+>          if (machine->initrd_filename) {
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index a061151a6f..d0531cc641 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1277,7 +1277,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
+>          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
+>                                                           firmware_end_addr);
+>
+> -        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
+> +        kernel_entry = riscv_load_kernel(machine, &s->soc[0],
+> +                                         kernel_start_addr, NULL);
+>
+>          if (machine->initrd_filename) {
+>              riscv_load_initrd(machine, kernel_entry);
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index 511390f60e..6295316afb 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -44,6 +44,7 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
+>                                   hwaddr firmware_load_addr,
+>                                   symbol_fn_t sym_cb);
+>  target_ulong riscv_load_kernel(MachineState *machine,
+> +                               RISCVHartArrayState *harts,
+>                                 target_ulong firmware_end_addr,
+>                                 symbol_fn_t sym_cb);
+>  void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry);
+> --
+> 2.39.1
+>
+>
 
