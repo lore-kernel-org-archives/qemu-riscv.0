@@ -1,58 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNoLM-0005T0-BE
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Feb 2023 00:10:36 -0500
+	id 1pNoQN-0006Zx-F0
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Feb 2023 00:15:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pNoLK-0005SU-Fy; Fri, 03 Feb 2023 00:10:34 -0500
-Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
+ id 1pNoPq-0006Wc-CH; Fri, 03 Feb 2023 00:15:17 -0500
+Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pNoLI-0004IQ-Fg; Fri, 03 Feb 2023 00:10:34 -0500
-Received: by mail-vs1-xe2c.google.com with SMTP id s24so4215235vsi.12;
- Thu, 02 Feb 2023 21:10:31 -0800 (PST)
+ id 1pNoPn-0006VZ-87; Fri, 03 Feb 2023 00:15:14 -0500
+Received: by mail-vs1-xe2d.google.com with SMTP id k4so4253515vsc.4;
+ Thu, 02 Feb 2023 21:15:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Mmkeku80xmoKsUkXvVzZlNuLgKuXv6yS5JDoOKA8Nds=;
- b=KMABX7/LknNGPQmaOm/3kOAKKudwk+niDw+40KMo89ZT9P0u+LB7AdhMYgPSGMTymz
- hgSmiLC3Ywj7BF5sCcUvdqyEQg1pJAuGvqk0hm8Xn0nptG0phEC31TisyzUYcXArmJIj
- pckazOrAoW2MCXvELoYOM7Ih9d6jHyyrjMAXC5/jEyfxP4xgrZUlL5IbsIffv5tIyQN/
- sTID1bLF5CvcSquZolzCe2QWUwcjg5h8B371LJRKqZZbFFT1DhHYofoqz+KmGC9AFm32
- 2DJrDHF4TNokIDJ6YvzqMaI/j0YEp8Ow0WvdyWw9Vfir5sPVtYBBl8U9nDgq8g8YGw7h
- RsnQ==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LE+xK4J8+MuLen57kwk5sRO1xnl47FiSBgDaoWWUDaA=;
+ b=ScrqYpIsIk/AVRhNsIyroRumwBJ+HduRLDrH6EdTS0OIj5i0XqWLD0EZS48FIlMqZv
+ sg0VHxbN5/JjsKLCRhqRCkHJcyQ86xg5IN/RHTB7+tgi0GTPA6R8WLcFTZGnPLQ2qJLT
+ XqBSKqMAqCRD13a5IYp9KToRVJLoQgUwgYAY8kz3dw7bxtcg1CSFttDp7w3LF3OjLuXH
+ be8oYnjRbXFkHg3SV16wTRsL4eAACCW/93XBB+aTHEJ/XR9KWK8nPQAR61KGoAnwxaNG
+ zKPrXzkOQuROQd9jK51mXdNNXnmDjjQcW6/yqvFOdVaZ43XjeqKjBSLXbLfggv67YF88
+ Ks1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Mmkeku80xmoKsUkXvVzZlNuLgKuXv6yS5JDoOKA8Nds=;
- b=bwJSDPQKH1Qb5+gNK22HDikYqyFeq1N7Ox3caSgTQvDXpObM9JfG/YcPqkr3AAVOcg
- rexQfHi0brWFgGei+jLct/ict7CBmM/Fg3WBm01aUEWJMRSOOdoUerg408HTaeVKuadk
- UxB5ttqzX/wdk1PYn38VevRkz5w9I4YuTU8T6qoBfzBEhYOsCRLdW+sc3UTqDgRURRJM
- gG5sBkJphRQqrn6Ti90ItrUIXFE3RabbCUmmyAHOLOGXRY7XCrUMxYc5MXDkyBz3Purm
- e3ln1xWTngL+x8VizRkv6AeuwHjHkR4eEKZR3QSTLPW0M3d7QNVfExsUkDiTXBpPCnEL
- n/bw==
-X-Gm-Message-State: AO0yUKXBqy2Du87vbBfnbjz+mqfa8H7xm1xB+W8C3cp/ag2VfKx0Uofr
- T1qdX9OR0sbuwAc6N8hvN47LIXXM5Oj3mvxemOk=
-X-Google-Smtp-Source: AK7set91r6SE1rwr2YahZZEcapir7EhGgUlLESPdewzwMEvZij1VlPwxC8zOzLs1Uw8lSQi3uMD/6P7Rh8z7V3OIR2I=
-X-Received: by 2002:a67:e102:0:b0:3f0:89e1:7c80 with SMTP id
- d2-20020a67e102000000b003f089e17c80mr1194603vsl.72.1675401030660; Thu, 02 Feb
- 2023 21:10:30 -0800 (PST)
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LE+xK4J8+MuLen57kwk5sRO1xnl47FiSBgDaoWWUDaA=;
+ b=4AJDuOO2V76QxelCyBB78PcgebTpDkYI3NdbrYgqZkWns1XpT9cr/V2jSK3FNJ3rcx
+ JHofLBaumVo5mODDNh3uo6PHcdkYMbb/ajrTxLT5fDTH66eEVNCJirexVgrCD/8yy+0H
+ 8kBH4HUdj6PsSe4cdT1CvNVh83xygBseQOcp7DPR1jkpDPKciHZdmnur9sBgqz8MuZ/O
+ NGH/SNtaIeoHbU/0TircrUobpzFcMGrIQz5mMFMPjimS/tzGHphTOHSdKYgXNjdHWJEU
+ +Kvmww6Z2OKjXU9MGzcFS32OqrrR9fof3daseUWYCUkY7rcHmqVtRjIUPOXJe1w5xTVe
+ HtnQ==
+X-Gm-Message-State: AO0yUKXVnL0ccKcZXc/ZKITrNszw9pHrduYRogSLKG1++WJrl4xIp8Xo
+ QEgw5xAy+/QNyNIwegkVIdjPnniUHtvcZMZPmj4=
+X-Google-Smtp-Source: AK7set8OE1DhVGVZkW17xXWVNbygda2SIFu48yVlFOPksAIEi8nhlO34COD+jtMa+bYrC19zk0mUs61ZUolxc9C4CSE=
+X-Received: by 2002:a67:ab0f:0:b0:401:5ed:9a8 with SMTP id
+ u15-20020a67ab0f000000b0040105ed09a8mr1185899vse.10.1675401309082; 
+ Thu, 02 Feb 2023 21:15:09 -0800 (PST)
 MIME-Version: 1.0
-References: <20230202135810.1657792-1-dbarboza@ventanamicro.com>
- <20230202135810.1657792-2-dbarboza@ventanamicro.com>
-In-Reply-To: <20230202135810.1657792-2-dbarboza@ventanamicro.com>
+References: <20230131202013.2541053-1-christoph.muellner@vrull.eu>
+ <20230131202013.2541053-2-christoph.muellner@vrull.eu>
+In-Reply-To: <20230131202013.2541053-2-christoph.muellner@vrull.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 3 Feb 2023 15:10:04 +1000
-Message-ID: <CAKmqyKOTTMBOsmQbn_pN2Nv4oz7JA5RKsku+8sEgCwK0OJHHrQ@mail.gmail.com>
-Subject: Re: [PATCH v10 1/3] hw/riscv: handle 32 bit CPUs kernel_addr in
- riscv_load_kernel()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
+Date: Fri, 3 Feb 2023 15:14:43 +1000
+Message-ID: <CAKmqyKOHsUsp-UkCsgWw_kUN_ZmM_QyHVyfRg=1SYmFk-LxCrw@mail.gmail.com>
+Subject: Re: [PATCH v5 01/14] RISC-V: Adding XTheadCmo ISA extension
+To: Christoph Muellner <christoph.muellner@vrull.eu>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko.stuebner@vrull.eu>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Kito Cheng <kito.cheng@sifive.com>, Cooper Qu <cooper.qu@linux.alibaba.com>, 
+ Lifang Xia <lifang_xia@linux.alibaba.com>,
+ Yunhai Shang <yunhai@linux.alibaba.com>, 
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,182 +83,284 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2023 05:10:34 -0000
+X-List-Received-Date: Fri, 03 Feb 2023 05:15:39 -0000
 
-On Thu, Feb 2, 2023 at 11:58 PM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Wed, Feb 1, 2023 at 6:21 AM Christoph Muellner
+<christoph.muellner@vrull.eu> wrote:
 >
-> load_elf_ram_sym() will sign-extend 32 bit addresses. If a 32 bit QEMU
-> guest happens to be running in a hypervisor that are using 64 bits to
-> encode its address, kernel_entry can be padded with '1's and create
-> problems [1].
+> From: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 >
-> Using a translate_fn() callback in load_elf_ram_sym() to filter the
-> padding from the address doesn't work. A more detailed explanation can
-> be found in [2]. The short version is that glue(load_elf, SZ), from
-> include/hw/elf_ops.h, will calculate 'pentry' (mapped into the
-> 'kernel_load_base' var in riscv_load_Kernel()) before using
-> translate_fn(), and will not recalculate it after executing it. This
-> means that the callback does not prevent the padding from
-> kernel_load_base to appear.
+> This patch adds support for the XTheadCmo ISA extension.
+> To avoid interfering with standard extensions, decoder and translation
+> are in its own xthead* specific files.
+> Future patches should be able to easily add additional T-Head extension.
 >
-> Let's instead use a kernel_low var to capture the 'lowaddr' value from
-> load_elf_ram_sim(), and return it when we're dealing with 32 bit CPUs.
+> The implementation does not have much functionality (besides accepting
+> the instructions and not qualifying them as illegal instructions if
+> the hart executes in the required privilege level for the instruction),
+> as QEMU does not model CPU caches and instructions are documented
+> to not raise any exceptions.
 >
-> [1] https://lists.gnu.org/archive/html/qemu-devel/2023-01/msg02281.html
-> [2] https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg00099.html
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Co-developed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Signed-off-by: Christoph M=C3=BCllner <christoph.muellner@vrull.eu>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/boot.c            | 15 +++++++++++----
->  hw/riscv/microchip_pfsoc.c |  3 ++-
->  hw/riscv/opentitan.c       |  3 ++-
->  hw/riscv/sifive_e.c        |  3 ++-
->  hw/riscv/sifive_u.c        |  3 ++-
->  hw/riscv/spike.c           |  3 ++-
->  hw/riscv/virt.c            |  3 ++-
->  include/hw/riscv/boot.h    |  1 +
->  8 files changed, 24 insertions(+), 10 deletions(-)
+> Changes in v2:
+> - Add ISA_EXT_DATA_ENTRY()
+> - Explicit test for PRV_U
+> - Encapsule access to env-priv in inline function
+> - Use single decoder for XThead extensions
 >
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index c7e0e50bd8..5ec6d32165 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -174,11 +174,12 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
->  }
+> Changes in v3:
+> - Appling mask TB_FLAGS_PRIV_MMU_MASK to use of ctx->mem_idx
+> - Removing code from test macro REQUIRE_PRIV_MSU()
+> - Removing PRV_H from test macro REQUIRE_PRIV_MS()
+> - Remove unrelated clean-up
+> - Reorder decoder includes
 >
->  target_ulong riscv_load_kernel(MachineState *machine,
-> +                               RISCVHartArrayState *harts,
->                                 target_ulong kernel_start_addr,
->                                 symbol_fn_t sym_cb)
->  {
->      const char *kernel_filename = machine->kernel_filename;
-> -    uint64_t kernel_load_base, kernel_entry;
-> +    uint64_t kernel_load_base, kernel_entry, kernel_low;
+> Changes in v4:
+> - Reorder decoder includes
 >
->      g_assert(kernel_filename != NULL);
+>  target/riscv/cpu.c                         |  2 +
+>  target/riscv/cpu.h                         |  1 +
+>  target/riscv/insn_trans/trans_xthead.c.inc | 81 ++++++++++++++++++++++
+>  target/riscv/meson.build                   |  1 +
+>  target/riscv/translate.c                   |  8 +++
+>  target/riscv/xthead.decode                 | 38 ++++++++++
+>  6 files changed, 131 insertions(+)
+>  create mode 100644 target/riscv/insn_trans/trans_xthead.c.inc
+>  create mode 100644 target/riscv/xthead.decode
 >
-> @@ -189,10 +190,16 @@ target_ulong riscv_load_kernel(MachineState *machine,
->       * the (expected) load address load address. This allows kernels to have
->       * separate SBI and ELF entry points (used by FreeBSD, for example).
->       */
-> -    if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
-> -                         NULL, &kernel_load_base, NULL, NULL, 0,
-> +    if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL, NULL,
-> +                         &kernel_load_base, &kernel_low, NULL, 0,
->                           EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
-> -        return kernel_load_base;
-> +        kernel_entry = kernel_load_base;
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 14a7027095..6ea61e5b22 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -109,6 +109,7 @@ static const struct isa_ext_data isa_edata_arr[] =3D =
+{
+>      ISA_EXT_DATA_ENTRY(svinval, true, PRIV_VERSION_1_12_0, ext_svinval),
+>      ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0, ext_svnapot),
+>      ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt),
+> +    ISA_EXT_DATA_ENTRY(xtheadcmo, true, PRIV_VERSION_1_11_0, ext_xtheadc=
+mo),
+>      ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_X=
+VentanaCondOps),
+>  };
+>
+> @@ -1088,6 +1089,7 @@ static Property riscv_cpu_extensions[] =3D {
+>      DEFINE_PROP_BOOL("zmmul", RISCVCPU, cfg.ext_zmmul, false),
+>
+>      /* Vendor-specific custom extensions */
+> +    DEFINE_PROP_BOOL("xtheadcmo", RISCVCPU, cfg.ext_xtheadcmo, false),
+>      DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOp=
+s, false),
+>
+>      /* These are experimental so mark with 'x-' */
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index bcf0826753..d3ebc6f112 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -473,6 +473,7 @@ struct RISCVCPUConfig {
+>      uint64_t mimpid;
+>
+>      /* Vendor-specific custom extensions */
+> +    bool ext_xtheadcmo;
+>      bool ext_XVentanaCondOps;
+>
+>      uint8_t pmu_num;
+> diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/in=
+sn_trans/trans_xthead.c.inc
+> new file mode 100644
+> index 0000000000..24acaf188c
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_xthead.c.inc
+> @@ -0,0 +1,81 @@
+> +/*
+> + * RISC-V translation routines for the T-Head vendor extensions (xthead*=
+).
+> + *
+> + * Copyright (c) 2022 VRULL GmbH.
+> + *
+> + * This program is free software; you can redistribute it and/or modify =
+it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOU=
+T
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
+ for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License alo=
+ng with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
 > +
-> +        if (riscv_is_32bit(harts)) {
-> +            kernel_entry = kernel_low;
-> +        }
+> +#define REQUIRE_XTHEADCMO(ctx) do {              \
+> +    if (!ctx->cfg_ptr->ext_xtheadcmo) {          \
+> +        return false;                            \
+> +    }                                            \
+> +} while (0)
 > +
-> +        return kernel_entry;
->      }
+> +/* XTheadCmo */
+> +
+> +static inline int priv_level(DisasContext *ctx)
+> +{
+> +#ifdef CONFIG_USER_ONLY
+> +    return PRV_U;
+> +#else
+> +     /* Priv level is part of mem_idx. */
+> +    return ctx->mem_idx & TB_FLAGS_PRIV_MMU_MASK;
+> +#endif
+> +}
+> +
+> +/* Test if priv level is M, S, or U (cannot fail). */
+> +#define REQUIRE_PRIV_MSU(ctx)
+> +
+> +/* Test if priv level is M or S. */
+> +#define REQUIRE_PRIV_MS(ctx)                                    \
+> +do {                                                            \
+> +    int priv =3D priv_level(ctx);                                 \
+> +    if (!(priv =3D=3D PRV_M ||                                      \
+> +          priv =3D=3D PRV_S)) {                                     \
+> +        return false;                                           \
+> +    }                                                           \
+> +} while (0)
+> +
+> +#define NOP_PRIVCHECK(insn, extcheck, privcheck)                \
+> +static bool trans_ ## insn(DisasContext *ctx, arg_ ## insn * a) \
+> +{                                                               \
+> +    (void) a;                                                   \
+> +    extcheck(ctx);                                              \
+> +    privcheck(ctx);                                             \
+> +    return true;                                                \
+> +}
+> +
+> +NOP_PRIVCHECK(th_dcache_call, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_dcache_ciall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_dcache_iall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_dcache_cpa, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_dcache_cipa, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_dcache_ipa, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_dcache_cva, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MSU)
+> +NOP_PRIVCHECK(th_dcache_civa, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MSU)
+> +NOP_PRIVCHECK(th_dcache_iva, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MSU)
+> +NOP_PRIVCHECK(th_dcache_csw, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_dcache_cisw, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_dcache_isw, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_dcache_cpal1, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_dcache_cval1, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +
+> +NOP_PRIVCHECK(th_icache_iall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_icache_ialls, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_icache_ipa, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_icache_iva, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MSU)
+> +
+> +NOP_PRIVCHECK(th_l2cache_call, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_l2cache_ciall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> +NOP_PRIVCHECK(th_l2cache_iall, REQUIRE_XTHEADCMO, REQUIRE_PRIV_MS)
+> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+> index ba25164d74..5dee37a242 100644
+> --- a/target/riscv/meson.build
+> +++ b/target/riscv/meson.build
+> @@ -2,6 +2,7 @@
+>  gen =3D [
+>    decodetree.process('insn16.decode', extra_args: ['--static-decode=3Dde=
+code_insn16', '--insnwidth=3D16']),
+>    decodetree.process('insn32.decode', extra_args: '--static-decode=3Ddec=
+ode_insn32'),
+> +  decodetree.process('xthead.decode', extra_args: '--static-decode=3Ddec=
+ode_xthead'),
+>    decodetree.process('XVentanaCondOps.decode', extra_args: '--static-dec=
+ode=3Ddecode_XVentanaCodeOps'),
+>  ]
 >
->      if (load_uimage_as(kernel_filename, &kernel_entry, NULL, NULL,
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index 2b91e49561..712625d2a4 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -629,7 +629,8 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
->          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc.u_cpus,
->                                                           firmware_end_addr);
->
-> -        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
-> +        kernel_entry = riscv_load_kernel(machine, &s->soc.u_cpus,
-> +                                         kernel_start_addr, NULL);
->
->          if (machine->initrd_filename) {
->              riscv_load_initrd(machine, kernel_entry);
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 353f030d80..7fe4fb5628 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -101,7 +101,8 @@ static void opentitan_board_init(MachineState *machine)
->      }
->
->      if (machine->kernel_filename) {
-> -        riscv_load_kernel(machine, memmap[IBEX_DEV_RAM].base, NULL);
-> +        riscv_load_kernel(machine, &s->soc.cpus,
-> +                          memmap[IBEX_DEV_RAM].base, NULL);
->      }
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 01cc30a365..1e29ac9886 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -130,6 +130,11 @@ static bool always_true_p(DisasContext *ctx  __attri=
+bute__((__unused__)))
+>      return true;
 >  }
 >
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index 3e3f4b0088..1a7d381514 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -114,7 +114,8 @@ static void sifive_e_machine_init(MachineState *machine)
->                            memmap[SIFIVE_E_DEV_MROM].base, &address_space_memory);
+> +static bool has_xthead_p(DisasContext *ctx  __attribute__((__unused__)))
+> +{
+> +    return ctx->cfg_ptr->ext_xtheadcmo;
+> +}
+> +
+>  #define MATERIALISE_EXT_PREDICATE(ext)  \
+>      static bool has_ ## ext ## _p(DisasContext *ctx)    \
+>      { \
+> @@ -1080,6 +1085,8 @@ static uint32_t opcode_at(DisasContextBase *dcbase,=
+ target_ulong pc)
+>  #include "insn_trans/trans_rvk.c.inc"
+>  #include "insn_trans/trans_privileged.c.inc"
+>  #include "insn_trans/trans_svinval.c.inc"
+> +#include "decode-xthead.c.inc"
+> +#include "insn_trans/trans_xthead.c.inc"
+>  #include "insn_trans/trans_xventanacondops.c.inc"
 >
->      if (machine->kernel_filename) {
-> -        riscv_load_kernel(machine, memmap[SIFIVE_E_DEV_DTIM].base, NULL);
-> +        riscv_load_kernel(machine, &s->soc.cpus,
-> +                          memmap[SIFIVE_E_DEV_DTIM].base, NULL);
->      }
->  }
+>  /* Include the auto-generated decoder for 16 bit insn */
+> @@ -1106,6 +1113,7 @@ static void decode_opc(CPURISCVState *env, DisasCon=
+text *ctx, uint16_t opcode)
+>          bool (*decode_func)(DisasContext *, uint32_t);
+>      } decoders[] =3D {
+>          { always_true_p,  decode_insn32 },
+> +        { has_xthead_p, decode_xthead },
+>          { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
+>      };
 >
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index d3ab7a9cda..71be442a50 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -598,7 +598,8 @@ static void sifive_u_machine_init(MachineState *machine)
->          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc.u_cpus,
->                                                           firmware_end_addr);
->
-> -        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
-> +        kernel_entry = riscv_load_kernel(machine, &s->soc.u_cpus,
-> +                                         kernel_start_addr, NULL);
->
->          if (machine->initrd_filename) {
->              riscv_load_initrd(machine, kernel_entry);
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index cc3f6dac17..1fa91167ab 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -305,7 +305,8 @@ static void spike_board_init(MachineState *machine)
->          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
->                                                           firmware_end_addr);
->
-> -        kernel_entry = riscv_load_kernel(machine, kernel_start_addr,
-> +        kernel_entry = riscv_load_kernel(machine, &s->soc[0],
-> +                                         kernel_start_addr,
->                                           htif_symbol_callback);
->
->          if (machine->initrd_filename) {
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index a061151a6f..d0531cc641 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1277,7 +1277,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
->          kernel_start_addr = riscv_calc_kernel_start_addr(&s->soc[0],
->                                                           firmware_end_addr);
->
-> -        kernel_entry = riscv_load_kernel(machine, kernel_start_addr, NULL);
-> +        kernel_entry = riscv_load_kernel(machine, &s->soc[0],
-> +                                         kernel_start_addr, NULL);
->
->          if (machine->initrd_filename) {
->              riscv_load_initrd(machine, kernel_entry);
-> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-> index 511390f60e..6295316afb 100644
-> --- a/include/hw/riscv/boot.h
-> +++ b/include/hw/riscv/boot.h
-> @@ -44,6 +44,7 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
->                                   hwaddr firmware_load_addr,
->                                   symbol_fn_t sym_cb);
->  target_ulong riscv_load_kernel(MachineState *machine,
-> +                               RISCVHartArrayState *harts,
->                                 target_ulong firmware_end_addr,
->                                 symbol_fn_t sym_cb);
->  void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry);
+> diff --git a/target/riscv/xthead.decode b/target/riscv/xthead.decode
+> new file mode 100644
+> index 0000000000..30533a66f5
+> --- /dev/null
+> +++ b/target/riscv/xthead.decode
+> @@ -0,0 +1,38 @@
+> +#
+> +# Translation routines for the instructions of the XThead* ISA extension=
+s
+> +#
+> +# Copyright (c) 2022 Christoph Muellner, christoph.muellner@vrull.eu
+> +#
+> +# SPDX-License-Identifier: LGPL-2.1-or-later
+> +#
+> +# The documentation of the ISA extensions can be found here:
+> +#   https://github.com/T-head-Semi/thead-extension-spec/releases/latest
+> +
+> +# Fields:
+> +%rs1       15:5
+> +
+> +# Formats
+> +@sfence_vm  ....... ..... .....   ... ..... ....... %rs1
+> +
+> +# XTheadCmo
+> +th_dcache_call   0000000 00001 00000 000 00000 0001011
+> +th_dcache_ciall  0000000 00011 00000 000 00000 0001011
+> +th_dcache_iall   0000000 00010 00000 000 00000 0001011
+> +th_dcache_cpa    0000001 01001 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cipa   0000001 01011 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_ipa    0000001 01010 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cva    0000001 00101 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_civa   0000001 00111 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_iva    0000001 00110 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_csw    0000001 00001 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cisw   0000001 00011 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_isw    0000001 00010 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cpal1  0000001 01000 ..... 000 00000 0001011 @sfence_vm
+> +th_dcache_cval1  0000001 00100 ..... 000 00000 0001011 @sfence_vm
+> +th_icache_iall   0000000 10000 00000 000 00000 0001011
+> +th_icache_ialls  0000000 10001 00000 000 00000 0001011
+> +th_icache_ipa    0000001 11000 ..... 000 00000 0001011 @sfence_vm
+> +th_icache_iva    0000001 10000 ..... 000 00000 0001011 @sfence_vm
+> +th_l2cache_call  0000000 10101 00000 000 00000 0001011
+> +th_l2cache_ciall 0000000 10111 00000 000 00000 0001011
+> +th_l2cache_iall  0000000 10110 00000 000 00000 0001011
 > --
 > 2.39.1
 >
