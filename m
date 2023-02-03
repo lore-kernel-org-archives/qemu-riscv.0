@@ -1,185 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pNja4-0007C9-CD
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 19:05:28 -0500
+	id 1pNnd1-0006Xn-JI
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Feb 2023 23:24:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=39186c81e=Alistair.Francis@wdc.com>)
- id 1pNja1-00077f-A1
- for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 19:05:25 -0500
-Received: from esa4.hgst.iphmx.com ([216.71.154.42])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=39186c81e=Alistair.Francis@wdc.com>)
- id 1pNjZy-0005zB-Fm
- for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 19:05:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1675382722; x=1706918722;
- h=from:to:cc:subject:date:message-id:content-id:
- content-transfer-encoding:mime-version;
- bh=w9ALbG/EgkhN7b11U4vXmots/uJHD8L3PURuqDel+pM=;
- b=jzpL2jqGNoMnd274HFwr/HlpWRzyBQ02m9qrWH/Oegj4m0mFsecNft3z
- nlJ3N6pJHiGPz6jxT/JubF0zmHLf8LrpuNud1ccz1NBwlakj1txLW8w6L
- WyRnvmg8IYP6KRhr8u8ngz5ny/hOInu2DHvnRtWfiNStSYl0jY22d9IPs
- 3hj7/7S/ZXWplmRBb0GZvHW16kHxP+qsoYbXciKMCy5qHIKyv9sepcZLs
- C0ayU+w7wd35J6vgP2wBbSedF5100X3AgKbczKSqOO+uimroSY9EqowZW
- ehLnnrdAvyWS/O3lRA2ZAKLGFN0oNw8s0VmctdcdpEPs29BIoompaj08Y w==;
-X-IronPort-AV: E=Sophos;i="5.97,268,1669046400"; d="scan'208";a="220731781"
-Received: from mail-bn8nam11lp2168.outbound.protection.outlook.com (HELO
- NAM11-BN8-obe.outbound.protection.outlook.com) ([104.47.58.168])
- by ob1.hgst.iphmx.com with ESMTP; 03 Feb 2023 08:05:13 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Y42+av1O5ARBfCb9/aMYyH3eG0UDdBhdaVBoqCOBi/K8dRnH/56ZacdipnrLI+eH/zn/OK+4Ujp8JOkwapjgpr7qDiaRURCwMzuRDb30j7YxVG1zSpdU1+W0h6vmvC/Gw1iiXV7v3n5IoWCgWvjtLpYcSjA3oOJYbKRH54ykHiLfstM3Ir/+AgXrff7mE7Ml3JeepBU7KGnK8bGaf5lFHYyB32MWqq85cDot+Ul7LMJSWTjwCdNjEuD3iEzfFytRU5D27cPd6aRsbhRez0hf0jHDoC4qWofP1feduVswKmLMXUnKqkopkA5pli2jzzdem6pynnvQOpCaNpzYb7wXCg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=w9ALbG/EgkhN7b11U4vXmots/uJHD8L3PURuqDel+pM=;
- b=G/0wVnSc2JUwyi11hPyBSwffgmWRQZVAgwNZ9HNdAok/2VnS6UB2ftzdX3p0ZVFCOM3AqrjUM1igqQTG4ic4PE5TUrWPu7KgvTIwbPzOTrdaI0YEgk4DfH1G54/bX0rdJupHcGBGQFPSdQu71vzdhOhYmD/9+jR0rtvl67lz3VqTrp500SZDpqsPlKCcDyKqQ1DT5CAueN188I+ZWvJk97HNifo44gcLh3yKImyzY+I3cHdvar8AxL22UkFW6bk5Oiuw2grhKAwdQrv3jyBveBguSabJh/8/KzxdltTeu3VOSdBCby4C97vdQnsCIzWuSQzV67tcFRNPLvRTG6WeOg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
+ (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
+ id 1pNnd0-0006XY-6R
+ for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 23:24:46 -0500
+Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
+ id 1pNncy-0007gE-9f
+ for qemu-riscv@nongnu.org; Thu, 02 Feb 2023 23:24:45 -0500
+Received: by mail-pg1-x534.google.com with SMTP id v3so2860878pgh.4
+ for <qemu-riscv@nongnu.org>; Thu, 02 Feb 2023 20:24:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=w9ALbG/EgkhN7b11U4vXmots/uJHD8L3PURuqDel+pM=;
- b=nwAUHz3YsK2gwlH6lWeJ8jNAK3OMzA/VQTRXZb5/PUZH2gCdeHmOHJ7tjF3FZ0kTFY4mLkM4k4vftS2597lZJBZaAnWqNmHUogT8SUSjiHKKe8yYdoZ+8//r0Of6/2K3Xv34a7rRtVofwQ4fwQ3bfdyOEdccaiTq1pCKlAC/yMA=
-Received: from SJ0PR04MB7872.namprd04.prod.outlook.com (2603:10b6:a03:303::20)
- by CY4PR04MB1079.namprd04.prod.outlook.com (2603:10b6:910:57::39)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6043.22; Fri, 3 Feb
- 2023 00:05:03 +0000
-Received: from SJ0PR04MB7872.namprd04.prod.outlook.com
- ([fe80::3534:2f3b:3e73:759]) by SJ0PR04MB7872.namprd04.prod.outlook.com
- ([fe80::3534:2f3b:3e73:759%8]) with mapi id 15.20.6064.028; Fri, 3 Feb 2023
- 00:05:03 +0000
-From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "palmer@dabbelt.com" <palmer@dabbelt.com>, "bin.meng@windriver.com"
- <bin.meng@windriver.com>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "bmeng@tinylab.org" <bmeng@tinylab.org>
-CC: "frank.chang@sifive.com" <frank.chang@sifive.com>,
- "mchitale@ventanamicro.com" <mchitale@ventanamicro.com>,
- "abrestic@rivosinc.com" <abrestic@rivosinc.com>,
- "sergey.matyukevich@syntacore.com" <sergey.matyukevich@syntacore.com>,
- Wilfred Mallawa <wilfred.mallawa@wdc.com>, "zhiwei_liu@linux.alibaba.com"
- <zhiwei_liu@linux.alibaba.com>, "rpathak@ventanamicro.com"
- <rpathak@ventanamicro.com>, "apatel@ventanamicro.com"
- <apatel@ventanamicro.com>, "dbarboza@ventanamicro.com"
- <dbarboza@ventanamicro.com>, "liuyang22@iscas.ac.cn" <liuyang22@iscas.ac.cn>, 
- "jim.shu@sifive.com" <jim.shu@sifive.com>, "liweiwei@iscas.ac.cn"
- <liweiwei@iscas.ac.cn>, "atishp@rivosinc.com" <atishp@rivosinc.com>
-Subject: QEMU SIG
-Thread-Topic: QEMU SIG
-Thread-Index: AQHZN2MqbK+R7lg+g0yTxTwXPSGGdA==
-Date: Fri, 3 Feb 2023 00:05:03 +0000
-Message-ID: <d20982479d00087a817be34b470cdd3ab35cc927.camel@wdc.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.46.3 (by Flathub.org) 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=wdc.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SJ0PR04MB7872:EE_|CY4PR04MB1079:EE_
-x-ms-office365-filtering-correlation-id: 9b78154e-5583-4f8a-eda8-08db057a4c99
-wdcipoutbound: EOP-TRUE
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: NIZKBrbTbparuUdAlg+ymAEwAJazLTBzjgV8zO1a6ei+R2Lky1LQ77IIETU+1vU5KZBH3QDxF2EJGesjCc4d1fanNzatXeflklI2kYz+j6N7GB1grVWGmHtjvX4pkI1Pa/3S9LaUUypLSmZ39QHW4EiD4bq6mjkX575Uxfihlsl/o4+cUwCpqvc6BX/XZMZVNyUUXONDWl2dFhzjZngc4P9uXqSmHkSTpJ2eCk+2cfqDlkySxkCtob+w2kgUo7VD5a/uNE8wAumvZCDXsBLbpOrR3mOrHo+CVdCOVeA8lM/UO73zHGoFAGtEQljPrZur1REW6VBdS1iYzdr7kAZ9bD8aQX7LQMyFCmlIPEgHc3X0fPnvaOlHFLf6VyxhV/ceXnB8M4dptXJSxXSl0JcXK6G5MmXpwn37rsXNz3qbryExOiFqdMgc1o436XIne5nFNPbGsFCDsiiXUA7xqhSLcB66YDZAzOMuvTCQp8O/et34jsdOhS9Ls3vQ1hbDahXhqVvZBmFkZfN4dRU58QJmoDxqV6+2xgLGpPucbRKBoZP7+gGhBAr2Mr09cVoFQpwAPrHyT+Bpl6XwjSljX0b8PjQC4dXaY3t3l9RzAjmydWJw2DFV0ouqYvc02pRBzo4bSsMMpQKpDxTbqvbOsCDNVNrhqkkGGMxcfYi6YdE30ZSiFHPGVi5NIuIuey6XKMSpOSYMrFuvqyxcBX9NTte9fKmiOCVG2RhFw1C92yaIFA8=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ0PR04MB7872.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230025)(4636009)(136003)(366004)(396003)(39860400002)(346002)(376002)(451199018)(6486002)(186003)(6512007)(966005)(71200400001)(2616005)(66899018)(54906003)(38100700002)(41300700001)(3480700007)(316002)(64756008)(122000001)(110136005)(6506007)(82960400001)(66446008)(66556008)(478600001)(66946007)(8676002)(7416002)(38070700005)(91956017)(2906002)(36756003)(5660300002)(4326008)(66476007)(76116006)(86362001)(7116003)(8936002);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Qkg1ZEwwZmdJUG9ZV1daWnFDbnpQOUFMR1FFUS96Y3lHSWlXSU5hcThhZU5S?=
- =?utf-8?B?bGQ0T3psekJ0Yk5naExCTVpuUVUyRTFQN0hIekMrZTRZR3k2eXRBNkppYjlE?=
- =?utf-8?B?Rkw2eTRtS1N6REprM0JXOXNIV0l0dHZOdFd6ZGFUcnBBTk11Mm4xZi9hL3hQ?=
- =?utf-8?B?aTlmbnczaW5VYzRtZ1FoWDJKT2RMSklUK0wvMGJqbVNnNzJhaTdQdkVEWXVM?=
- =?utf-8?B?SlQrTTBBbEhNT1p3YzQyTEZvaG1Penk5YlFKZ3ZuR0cza3ZFVHB2R2lmY1NQ?=
- =?utf-8?B?SG5rclhObGpoWEJBRDdweVZkVWQrbUtsc2JxeXFkdVhVbVFxZW5EV0F6MHJH?=
- =?utf-8?B?L3ZZclY2QVl0Sko2MWpuTzhQdjRGNnlvbHUwNmlBak9hRjNPc2hWTGpjS0hj?=
- =?utf-8?B?c0NweWxCUVN5WjZXTjVwNjRLKys4UzAyYkFPSFpDRHpmVmpQSFQ3WXJ1RzVO?=
- =?utf-8?B?Mm5HdHoxOUVQRVhmMlFFL1FZeTVndlhKVG1ZZ3VKUE5tcTFNdDVwR29pdEt4?=
- =?utf-8?B?cDUxZ3MxYTJ3UXFWcjgrYjZydE1KS04xcU44K2FNb2FVV2dtZE9lZFkzd1pp?=
- =?utf-8?B?MFpaZllBNW1aMWFka2Zoa0FMWDV5eWJzaXlkRzExZkhSeDIrdmpUN1IvOUFJ?=
- =?utf-8?B?L2U3WEVUQUMzMm1va0Y5RmVlMm5oTzFER3lLTWtOMjhianpiQTZ6bURpZGNM?=
- =?utf-8?B?aGF3OWV1cUdtZG92SU0zYTJzZkY1THArcEZhVWdTNmUwNG9zc05SaThWb29I?=
- =?utf-8?B?cXoyV2NVV1pPYzJiWUpWTG9VSUdNdDdCbDVON282UHZ2YW1kNmpDNEFCUXJn?=
- =?utf-8?B?SjhjTytXNnFKaUVpb1BZdHZMeFJxOC9kWHo0cW0yRk5FOVRxcTFFUE9xL1Ry?=
- =?utf-8?B?b3pFU3FTUm1wSHE1Qm9lclJkT0N6ZHROU052M09UUGFwank4dzRIZERWUlFp?=
- =?utf-8?B?aStoZFNkSXAwdzRZd1hMNDJTTkpPeThQSU5jMFpvSWJ1UjF4YVpaem81UEUv?=
- =?utf-8?B?N2huQmF2cGVpektjbUR4NWVOUXpXV1B1b0lORHZLZE1iQkZlOG5KQTZMTm9K?=
- =?utf-8?B?NFJLVmU2VUZrSW1sTTVkMmNUU0FMSmNOSGpycmtrd240WDNBRkFua0MzRGhm?=
- =?utf-8?B?Q0t4aGRPZXFIZDlNcUR2MWhMRUR3c2Ird29SaFRMMDc5OTF4UGRYa2dPODhu?=
- =?utf-8?B?WXprc3oxdmk5QVlNTHNSQVlFZUdWRXJuQmFQY0F4bndXQyt1L1ZWTnRaejNS?=
- =?utf-8?B?NnM1a2NURGo1V2lnYW42bUU2aXd0YksrTGI5emIzVHE4eGI0OWNxS1A5dGlP?=
- =?utf-8?B?MlpyVHAzeWxUcHI1VUhQckEvbXBFbE1BQVRaTG9tYUxmSzgyMjhBd1hJejkz?=
- =?utf-8?B?SWN1c1UxWFpsWGFMMHVnZmNJREJMeEdUS1JZTllnMmVjTDVnb20rMlkrV0R4?=
- =?utf-8?B?ejRDYlhvZUxkcFN0ZXByVmVTNmRLWTR2NWJCUEsxeWdMRGpGSTQ2Wm80dVYy?=
- =?utf-8?B?Sm9HOHZTNXVhVUFkTE16VUtrUDhwQTBoU0JiYU9ReGtkeTd4ancvcUE5UCtH?=
- =?utf-8?B?bFlNYXBtU1g5RzViVjNnLzJmd0JiSkMzeVdMSCt5eGFYcDZ0SkRXTEFGa0U1?=
- =?utf-8?B?TGJ0eU1BY3JabStzNDBzR0lLVWZaT2t5UGQ5eVcxZ3dQMGJkd1cxdk54QWdx?=
- =?utf-8?B?a2VFTjNFcCswMnM3ZTl2ZjhkRHdIalpCYW5rV0tPTEJybExhdjhnVVdoUkxW?=
- =?utf-8?B?aWZSazUvc2Q2bkZWNk5oekpVN3pYZEVYZ3BGSGo3L3Yzek5xWmlHU3ZnZWQ1?=
- =?utf-8?B?eWU1NmROaTJqb2pTd0l0ckJEaFpiRmlYbFhiZjRWS3F3SmR4QXYyYWxzWXFP?=
- =?utf-8?B?UGNvNTBjeGI3SDVIMUo2NGtKai9SdVhsTnZuV1phWm5tVkREMUZHemV1UXh0?=
- =?utf-8?B?NGlKeFJ6RFlOemsrVTV2TW5BcklVL1pGSXFtdjJQeTgveEE2SldiTDhpMGdz?=
- =?utf-8?B?Nng3cUZMZDhXaktCT0M3YWN2WmZiaGR4dzhDaXRNMks0TEQyUUJlT2paN2F0?=
- =?utf-8?B?WTZUbWFVcWttbjhlaXFPWGJXM3R0RFU2ZTEwQ3VUWEJ6NEJBK1ozSjRVUGxX?=
- =?utf-8?B?UWxqZDBjREFKemxDRHJBdVN5MGljVnhacXVhb1hvWWE4WWVkMUdsMDdmVzVk?=
- =?utf-8?B?VTV0cnVPSlhSYkV0bHErNGJUeGRiSmZONVFSMkcvejlQMG9VTTAwVkNINHhC?=
- =?utf-8?B?bktTR056dGZZK0xuWFNVd0ZnOS9BPT0=?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <1DC3F3658EE8674F8E073A2A1B3752AA@namprd04.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XH6bWLGie/nB6oW9RlM0zMwRYQDhnyHZ3cNWbPyp8eM=;
+ b=nuCSUoiKFErlvWerlE+q0d2Lb9A+lpDwVmIVizQKNGGonBHf8tzt3mjS9Ltm114msD
+ 5LoQecrGK0O1fMW47KQzd0bFPBo4p2kj8EO7HXTYsJMpe2pUOtSa5UN9yMbj36PN12lo
+ /9/NqENih47+OaZNE+vZlD231X896jzTBf/miJ91larTCtZo/UQP6jeVeNhacgClyQ4R
+ 4MgIy9y6se7fK5vpSUjxdn6RufXLpQJbFDL6Yelb/AZt3Pu00afChlnXj6ESVBkbmK1Z
+ 96/C+tfpZ4FF5F9i9qP4Tq7dUHPa1b65vppb3/cWuCBOdsSjrwohJ2xwKUdF4h48fGo5
+ Zo7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XH6bWLGie/nB6oW9RlM0zMwRYQDhnyHZ3cNWbPyp8eM=;
+ b=lw8D/jjr94tr4/m7MeTAMlpyqcKgreSy4JIoAjT1WlKoGao9QDLHxAEInxiyuCIVdf
+ 5b6VTyJ560Ufa6kWmhiXOglx5SUlEVThJG6y1rZ3SSU+pwVNm1xgjRqrDN0xLoM+tgHg
+ HhyxXwa70c/sxu6rwOjXD/3qOj4T8f7BrVnWInEQCk5pv58eF2uW/onP0lXVWj4B/Kpm
+ K/ejtGqzdO3UmAqVf/1/u/vuqpW5YqEhbcNCOCwt0vFhPRZtmYdJJO6UvK27B4HSvpfv
+ cWGvdwj6lHQ/0LAaHzdadNzXJ1fbjSeDiinVRPyNlqg4gkxeJ1/vbTi5u71PnTjcv2al
+ TSfQ==
+X-Gm-Message-State: AO0yUKXP8qI1Y+4/TtTB8QCnS/HcxHBwqagWymXNOpR7K2BQtm4xzJzz
+ l4AMAXR8D4ymfyGuM1RkrsOYW/gBgVhR1oQ9GyonWQ==
+X-Google-Smtp-Source: AK7set9WTZHiqpIxXNvNIe+HKnWIa1jdIQi10pqaSGQTxVuSztJEqnU3Q9DiV916EqsvdG52qY7uGQ==
+X-Received: by 2002:a05:6a00:882:b0:593:c4fd:f3a5 with SMTP id
+ q2-20020a056a00088200b00593c4fdf3a5mr7703176pfj.0.1675398281885; 
+ Thu, 02 Feb 2023 20:24:41 -0800 (PST)
+Received: from gram.dc1.ventanamicro.com
+ ([2405:201:d019:c0a2:d1bb:4458:2b1b:e0d9])
+ by smtp.gmail.com with ESMTPSA id
+ g28-20020aa796bc000000b005895f9657ebsm533114pfk.70.2023.02.02.20.24.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Feb 2023 20:24:41 -0800 (PST)
+From: Himanshu Chauhan <hchauhan@ventanamicro.com>
+To: qemu-riscv@nongnu.org
+Cc: Himanshu Chauhan <hchauhan@ventanamicro.com>
+Subject: [PATCH] target/riscv: Convert epmp from feature to ratified smepmp
+ extension
+Date: Fri,  3 Feb 2023 09:54:34 +0530
+Message-Id: <20230203042434.67293-1-hchauhan@ventanamicro.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: =?utf-8?B?S283c094anJhalU2Y3pyRDhQcHZLUitSRTFDSkdEK2M2TXEyWktvbDBaa0Yr?=
- =?utf-8?B?RGc5eUNXZEJqVUt1Zk13cXVrNGcrNUw5Ui92enJDQnNla1pPSjZlRUlOa21F?=
- =?utf-8?B?L1RiRTBpV3h1M29LV2tjMHphaTI2Z00rOWcwQ21oV1o4eGdtWjdrT0kvbWlh?=
- =?utf-8?B?UWRhWktRSitsWDJvSzR6YVpPamh2cllQZVdLczZlTS9NSUM4QUlrU0NpekFC?=
- =?utf-8?B?RzBnSDNjUEVXVVo2L3RENlkxWXRvaEJuWXdLbUJKRWNBWENaNEFrdHRFbk9V?=
- =?utf-8?B?UGVEKzgxQmVGZzdIekg5ZkJ1TllvdExRTytyT2lGTTRrckNhQmdITVdsYTFQ?=
- =?utf-8?B?cStTc3VaTzVhd2d1RDhaLzV3WVFSVEVmdCs4OGVWejgzUWdkYmFjZ3R4N2hk?=
- =?utf-8?B?Vk83NVBWdDBYekNtZ0k5dmpqR0tmTGlhTm1EekNENFhQaEtDTTk3NUN0OVFG?=
- =?utf-8?B?ems4allVU3JDaHlFam9mRFJRRkVjMUJkcFVXVlV5VnVlUXEweXl6YlMranBJ?=
- =?utf-8?B?TTRlZnBNcFNadDI3cjFDQkdybi9LaWt4aXUwRmQzY2JxeEtxK0l4cGNOZnlG?=
- =?utf-8?B?SnBzTEViVFJFa3JMK2I0cTdRZHF6VFUyMEdiZDZmMUFpUSsyYWh5T2dzREE2?=
- =?utf-8?B?UnEzc0VDYWhyQnNvRjFCVFlkWEs5aVlUQzRJZW9rTjRzcngyQjhjV2FQNmpD?=
- =?utf-8?B?RU9YaUlvWS82OWRFRy94cnNLQmRVQXhrSExZZ3BiYmZTc1ZoR2dvOFJueGRM?=
- =?utf-8?B?SUlaMnVaZ1R0dnlRU0VLRWR3QUcxc1BFcThGWHgya1hlQ1VFajIwYWxFRjVI?=
- =?utf-8?B?OUVHZ08wTTNySGtGRTRLZFNnb3Rxcyt3WHRHYW1pR25rR2R4djRFYUpYZlMv?=
- =?utf-8?B?V01BaHl1MnVNck9HS1JCUVVBclo2RmpvRWtxZUZrdFlLQ1Z3WDBHT2dZWEFi?=
- =?utf-8?B?T2RqVkJHZWhrUkJVckxkV2RkZnBJUEFxaS9PaDVCbkhkTnowOERqVnl3V3Y3?=
- =?utf-8?B?cnRkOTBab2tWamJJOVQ2VW9hQmM3cUFrNDNZbGM5N21QcHBYb1dPNHBETkRS?=
- =?utf-8?B?Tit0bDJRNWxtNUdwWVJhSGJ6eERhYXNQQnVrWEI0OFJpRDlYWGlSTXlzZmFs?=
- =?utf-8?B?YUp4VU91USswWUprRFZjYldlRk5xYUw0Q09OWk5obDl6d3ozb3I2WjJJRkI3?=
- =?utf-8?B?TWdxNk4rdHB3RlJYMGxzWHpZY2RiaW9iblF2L0MzbGlLQ1FkZjF3NWpOdTFS?=
- =?utf-8?B?eWdrNUVFRlJvZjltZWxUYktpaFZpdCtMRnBPckNYK3JNMTR5SkR4NlZQOEpN?=
- =?utf-8?B?czJDdmZ6OHZKR0RsTGt4QlpSaDE1ZDBZUEZjQ2VySmEvWnh0MmxEYWJLdGgr?=
- =?utf-8?B?aFNkSlpOaUFwUnRMdnNZQ0czNER4OUdsaFY1cUIrcDRUbmU3czJQcW4zYnpa?=
- =?utf-8?B?a3NMa0xUVzZMVGIvSmU4RSt0Y3hOSjVsYkRMMjN3PT0=?=
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SJ0PR04MB7872.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9b78154e-5583-4f8a-eda8-08db057a4c99
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Feb 2023 00:05:03.1979 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 1Kc7LE1WfwuijFyKV4mnMBYKIEgtC6HVvzh3ITGCmSgwu4j5WTFbDpbzkUEE+fKgeeBfcwAfvCc4mwD3ZQStutJ+rxagJBjBbloRZLPYD44=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR04MB1079
-Received-SPF: pass client-ip=216.71.154.42;
- envelope-from=prvs=39186c81e=Alistair.Francis@wdc.com;
- helo=esa4.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
+ envelope-from=hchauhan@ventanamicro.com; helo=mail-pg1-x534.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -193,29 +79,186 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2023 00:05:25 -0000
+X-List-Received-Date: Fri, 03 Feb 2023 04:24:46 -0000
 
-SGVsbG8sDQoNClRoZSBSSVNDLVYgZm91bmRhdGlvbiBoYXMgY3JlYXRlZCBhIFFFTVUgc2lnLg0K
-DQpUaGUgaWRlYSBpcyBpdCdzIGEgcGxhY2UgdG8gY29tbXVuaWNhdGUgYWJvdXQgdGhlIFJJU0Mt
-ViBRRU1VIHdvcmsNCnBlb3BsZSBhcmUgZG9pbmcuDQoNCkl0IG1vc3RseSB3aWxsIGJlIHVzZWQg
-dG8gdHJ5IGFuZCBpbmNyZWFzZSByZXZpZXdlciBwYXJ0aWNpcGF0aW9uIGFuZA0KYWxpZ24gb24g
-d2hhdCBwZW9wbGUgYXJlIHdvcmtpbmcgb24uDQoNClRoZSBvZmZpY2lhbCBkZXNjcmlwdGlvbiBp
-cyBiZWxvdzoNCg0KIiIiDQpUaGUgUUVNVSBTSUcgYWltcyB0bzoNCg0KKiBDb29yZGluYXRlIHdp
-dGggdGhlIHVwc3RyZWFtIFFFTVUgY29tbXVuaXR5IGFuZCBSSVNDLVYgY29udHJpYnV0b3JzOw0K
-KiBJZGVudGlmeSBnYXBzIGFuZCBtYWludGFpbiBhIHN0YXR1cy9yb2FkbWFwIGZvciBSSVNDLVYg
-c3VwcG9ydCBpbg0KUUVNVTsNCiogUmVjcnVpdCByZXZpZXdlcnMgYW5kIGNvbnRyaWJ1dG9ycyB0
-byBRRU1VIHdpdGhpbiB0aGUgUklTQy1WDQplY29zeXN0ZW07DQoqIFByb3ZpZGUgZ3VpZGFuY2Ug
-YW5kIHRyYWluaW5nIGZvciBvdGhlciBncm91cHMgd2l0aGluIFJJU0MtViB0aGF0DQpjb250cmli
-dXRlIHRvIFFFTVUgKGUuZy4sIGFzIHBhcnQgb2YgdGhlIEFjY2VwdGFuY2UgQ3JpdGVyaWEgIGZv
-ciBuZXcNCmV4dGVuc2lvbnMpIGFuZCBhc3Npc3QvY29vcmRpbmF0ZSB0aGUgdXBzdHJlYW1pbmcg
-b2YgUklTQy1WIHNwZWNpZmljDQpjb250cmlidXRpb25zOw0KIiIiDQoNCldlIHdpbGwgcHJvYmFi
-bHkgb3JnYW5pc2UgZm9ydG5pZ2h0bHkgY2hhdHMsIHRoYXQgd2lsbCBiZSBpbiBhDQpBc2lhL0F1
-c3RyYWxpYSBmcmllbmRseSB0aW1lem9uZS4NCg0KSWYgYW55b25lIHdhbnRzIHRvIGpvaW4geW91
-IGFyZSB3ZWxjb21lIHRvLg0KDQpJdCdzIG5vdCByZXBsYWNpbmcgbWFpbGluZyBsaXN0cyBvciBh
-bnkgdHJhZGl0aW9uYWwgUUVNVSBkZXZlbG9wbWVudA0KZmxvd3MuIFNvIGlmIHlvdSBqdXN0IHdh
-bnQgdG8gc2VuZCBhbmQgcmV2aWV3IHBhdGNoZXMgeW91IGRvbid0IG5lZWQgdG8NCmJlIGludm9s
-dmVkLiBUaGlzIGlzIGtpbmQgb2Ygb3V0c2lkZSB0aGUgYWN0dWFsIFFFTVUgZGV2ZWxvcG1lbnQg
-ZmxvdywNCnRvIHRyeSBhbmQgaW5jcmVhc2UgUUVNVSBSSVNDLVYgcGFydGljaXBhdGlvbi4NCg0K
-WW91IGNhbiBqb2luIHRoZSBncm91cCBoZXJlOiBodHRwczovL2xpc3RzLnJpc2N2Lm9yZy9nL3Np
-Zy1xZW11DQoNCkFsaXN0YWlyDQo=
+Smepmp is a ratified extension. This patch converts the existing epmp
+support as a feature to an extension. With this, "smepmp" string will
+be concatenated to riscv,isa in generated FDT.
+
+Since the official name of the extension is Smepmp, the references
+to epmp have also been changed to smepmp.
+
+Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+---
+ target/riscv/cpu.c | 16 ++++++----------
+ target/riscv/cpu.h |  3 +--
+ target/riscv/csr.c |  8 +++++---
+ target/riscv/pmp.c | 13 +++++++++----
+ 4 files changed, 21 insertions(+), 19 deletions(-)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 14a7027095..d9bba04226 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -103,6 +103,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zhinx, true, PRIV_VERSION_1_12_0, ext_zhinx),
+     ISA_EXT_DATA_ENTRY(zhinxmin, true, PRIV_VERSION_1_12_0, ext_zhinxmin),
+     ISA_EXT_DATA_ENTRY(smaia, true, PRIV_VERSION_1_12_0, ext_smaia),
++    ISA_EXT_DATA_ENTRY(smepmp, true, PRIV_VERSION_1_12_0, ext_smepmp),
+     ISA_EXT_DATA_ENTRY(ssaia, true, PRIV_VERSION_1_12_0, ext_ssaia),
+     ISA_EXT_DATA_ENTRY(sscofpmf, true, PRIV_VERSION_1_12_0, ext_sscofpmf),
+     ISA_EXT_DATA_ENTRY(sstc, true, PRIV_VERSION_1_12_0, ext_sstc),
+@@ -325,7 +326,7 @@ static void rv32_ibex_cpu_init(Object *obj)
+     register_cpu_props(DEVICE(obj));
+     set_priv_version(env, PRIV_VERSION_1_11_0);
+     cpu->cfg.mmu = false;
+-    cpu->cfg.epmp = true;
++    cpu->cfg.ext_smepmp = true;
+ }
+ 
+ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+@@ -884,14 +885,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+ 
+     if (cpu->cfg.pmp) {
+         riscv_set_feature(env, RISCV_FEATURE_PMP);
+-
+-        /*
+-         * Enhanced PMP should only be available
+-         * on harts with PMP support
+-         */
+-        if (cpu->cfg.epmp) {
+-            riscv_set_feature(env, RISCV_FEATURE_EPMP);
+-        }
++    } else {
++        /* smepmp requires pmp support */
++        cpu->cfg.ext_smepmp = false;
+     }
+ 
+     if (cpu->cfg.debug) {
+@@ -1051,6 +1047,7 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
++    DEFINE_PROP_BOOL("smepmp", RISCVCPU, cfg.ext_smepmp, false),
+     DEFINE_PROP_BOOL("sstc", RISCVCPU, cfg.ext_sstc, true),
+ 
+     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+@@ -1093,7 +1090,6 @@ static Property riscv_cpu_extensions[] = {
+     /* These are experimental so mark with 'x-' */
+     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+     /* ePMP 0.9.3 */
+-    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+     DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
+     DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
+ 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index bcf0826753..30fd29e578 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -87,7 +87,6 @@
+ enum {
+     RISCV_FEATURE_MMU,
+     RISCV_FEATURE_PMP,
+-    RISCV_FEATURE_EPMP,
+     RISCV_FEATURE_MISA,
+     RISCV_FEATURE_DEBUG
+ };
+@@ -465,6 +464,7 @@ struct RISCVCPUConfig {
+     bool ext_smaia;
+     bool ext_ssaia;
+     bool ext_sscofpmf;
++    bool ext_smepmp;
+     bool rvv_ta_all_1s;
+     bool rvv_ma_all_1s;
+ 
+@@ -484,7 +484,6 @@ struct RISCVCPUConfig {
+     uint16_t elen;
+     bool mmu;
+     bool pmp;
+-    bool epmp;
+     bool debug;
+ 
+     bool short_isa_string;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 62e6c4acbd..f70f6d9aad 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -426,9 +426,11 @@ static RISCVException pmp(CPURISCVState *env, int csrno)
+     return RISCV_EXCP_ILLEGAL_INST;
+ }
+ 
+-static RISCVException epmp(CPURISCVState *env, int csrno)
++static RISCVException smepmp(CPURISCVState *env, int csrno)
+ {
+-    if (env->priv == PRV_M && riscv_feature(env, RISCV_FEATURE_EPMP)) {
++    RISCVCPU *cpu = env_archcpu(env);
++
++    if (env->priv == PRV_M && cpu->cfg.ext_smepmp) {
+         return RISCV_EXCP_NONE;
+     }
+ 
+@@ -4259,7 +4261,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_VSIPH]       = { "vsiph",       aia_hmode32, NULL, NULL, rmw_vsiph },
+ 
+     /* Physical Memory Protection */
+-    [CSR_MSECCFG]    = { "mseccfg",  epmp, read_mseccfg, write_mseccfg,
++    [CSR_MSECCFG]    = { "mseccfg",  smepmp, read_mseccfg, write_mseccfg,
+                          .min_priv_ver = PRIV_VERSION_1_11_0           },
+     [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
+     [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index d1126a6066..d85ad07caa 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -58,6 +58,11 @@ static inline int pmp_is_locked(CPURISCVState *env, uint32_t pmp_index)
+     return 0;
+ }
+ 
++static inline int smepmp_is_enabled(CPURISCVState *env)
++{
++    return (RISCV_CPU(env_cpu(env))->cfg.ext_smepmp);
++}
++
+ /*
+  * Count the number of active rules.
+  */
+@@ -88,7 +93,7 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
+     if (pmp_index < MAX_RISCV_PMPS) {
+         bool locked = true;
+ 
+-        if (riscv_feature(env, RISCV_FEATURE_EPMP)) {
++        if (smepmp_is_enabled(env)) {
+             /* mseccfg.RLB is set */
+             if (MSECCFG_RLB_ISSET(env)) {
+                 locked = false;
+@@ -239,7 +244,7 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
+ {
+     bool ret;
+ 
+-    if (riscv_feature(env, RISCV_FEATURE_EPMP)) {
++    if (smepmp_is_enabled(env)) {
+         if (MSECCFG_MMWP_ISSET(env)) {
+             /*
+              * The Machine Mode Whitelist Policy (mseccfg.MMWP) is set
+@@ -265,7 +270,7 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
+         }
+     }
+ 
+-    if ((!riscv_feature(env, RISCV_FEATURE_PMP)) || (mode == PRV_M)) {
++    if (!smepmp_is_enabled(env) || (mode == PRV_M)) {
+         /*
+          * Privileged spec v1.10 states if HW doesn't implement any PMP entry
+          * or no PMP entry matches an M-Mode access, the access succeeds.
+@@ -348,7 +353,7 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+ 
+         /*
+          * Convert the PMP permissions to match the truth table in the
+-         * ePMP spec.
++         * Smepmp spec.
+          */
+         const uint8_t epmp_operation =
+             ((env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) >> 4) |
+-- 
+2.39.1
+
 
