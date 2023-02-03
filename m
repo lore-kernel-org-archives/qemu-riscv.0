@@ -1,68 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pO0V9-00073P-Gy
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Feb 2023 13:09:31 -0500
+	id 1pO0VH-00075Z-Qo
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Feb 2023 13:09:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pO0V7-00072P-GT
- for qemu-riscv@nongnu.org; Fri, 03 Feb 2023 13:09:29 -0500
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pO0VD-00074q-VS
+ for qemu-riscv@nongnu.org; Fri, 03 Feb 2023 13:09:37 -0500
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pO0V5-0008AZ-MU
- for qemu-riscv@nongnu.org; Fri, 03 Feb 2023 13:09:29 -0500
-Received: by mail-wr1-x42e.google.com with SMTP id r2so5384205wrv.7
- for <qemu-riscv@nongnu.org>; Fri, 03 Feb 2023 10:09:27 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pO0VA-0008CZ-Vo
+ for qemu-riscv@nongnu.org; Fri, 03 Feb 2023 13:09:35 -0500
+Received: by mail-wr1-x429.google.com with SMTP id d14so5376862wrr.9
+ for <qemu-riscv@nongnu.org>; Fri, 03 Feb 2023 10:09:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LAfKidwXqMyl+hQg1D5zpybmHVz62NdxFnrC9ga08Jw=;
- b=fCrQpY/B0WPvykR/ypTqqefxBK8DwNly0OXMnU2qMfqW5gm4/NtKE1gcc2kOGS4G+R
- K0K98fG/kenQ8SY4vt9EQKVU8myl/Ab48UmBjG1uu+m6hNrnsZ3vput7UHGf0EAcVMcK
- ZrcqGBUr6r24pN6eaPDMmy32xkEljZXdb2MpbWO/axaZrpYFGo0TrB+ALPAlLHmffVwh
- DvLJg0xdWHJOktZltFeByL2u7BYs1idlLzJjzWWdU3nHSXMOYyg97O6uEQuDL8juZWGO
- CVYtXvMXm89e7Z3onE50xKaZIToE9DDReA4m+Zaw6uC94zBpngm2DlSV9KM2J84TN4Yd
- rGmA==
+ bh=AFuCwAlq5IxtAXriS8uiMD+6Isqin7gOtT5GKermJKY=;
+ b=QrILnDg56AYQyjEsqvz1V4zQmAKFgde/UZhM1brl+P8lHr3EOHfpF0nLW45Xx6teUB
+ SZIxzh0F0FLcpXB98KbuHykNPHAoMa0d0WEQwWjJhRRwSfQbV58W8pIaqkAulN+uQWMg
+ 2KGfZfL7tLxHNWKTidZYW0F3AHNUkEumd1oNj0tfE0Nv/pI/+ff/lvnPkI4JuQF7C2WX
+ edAeQn3kPLDHxORkSmz7waKWnRWjfCeYsJr+aQ9eg6XZTEC0SwMIvjDV3kXYmvBo0ehE
+ Z5bhqfic2FqyY3SKLpVp9ULWGPWiJRUttecUaWDGm9INJyzFnUlGLRHT0kbF56vgSlss
+ pKkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LAfKidwXqMyl+hQg1D5zpybmHVz62NdxFnrC9ga08Jw=;
- b=vzvzpUk78SNSUaDeDLF+uYFAcPGShv+dTlbLRnqwDdCJZUKMH1mwdWO79tj5EWNgkQ
- b5jZPp3hhIPK2qwBmHuoxYCrjuWRXGIPZXTgoIifeDEvyVq+v4pMfeY0o5TC6HYWmgXu
- tEllRyKgbEA+elydjfsa0aCWYdPy18X+cOhU0cgupEftipEj12q2JgmxzuKac2Mqd1Qd
- kUCcrcU3fIVfWsKTeuPelepB/wX1x2JgW9ieT9lDfUtAAAGlhpo5xiFRuDCm9WbWMUl2
- YBkAV38R+X4c4XU75aqOltVpnhFCrn17FQZlNMkMFD+QVufY5mQ8oxaL4YZnk10l3noL
- uCrA==
-X-Gm-Message-State: AO0yUKWjYdEpEznXkvgj9+yg2NXYrkZjahIVO3XEV44ZhrHJAS9hDJ6B
- ntYi8Ix2Klj01FzXkQi3ABAEZg==
-X-Google-Smtp-Source: AK7set9W3aK6n1hfLPEcZHdTYgkmNQeapXReOUFJDqF5aWpvMMnxPBElUKcvLLIgEyAsQJPLpPJqzg==
-X-Received: by 2002:a05:6000:144f:b0:2c3:be89:7c22 with SMTP id
- v15-20020a056000144f00b002c3be897c22mr5197083wrx.5.1675447766299; 
- Fri, 03 Feb 2023 10:09:26 -0800 (PST)
+ bh=AFuCwAlq5IxtAXriS8uiMD+6Isqin7gOtT5GKermJKY=;
+ b=0yQCpbMtJAK+6bACPBkOj6+3lOSLs1Kg2ASQTcVjD529fUQOtUH27x5P7lRqjfng4M
+ OK2OTm966Q3piP9SsqBRELAvW1rbt6udmmsBFN54mJfDEpC7IBbHTJUyPCEL6WXvGQev
+ AGrustjcZpOtRpsaJ8bHA+z7amWiw/H+LQpqKWZ3x7c6cEkA2hn4f2dyV/NmxAAZuh1p
+ oV25VqT6zEuy2QHdGAxDFGRhwKanrJlp+LOKEdP5k+90nmPW7T5of4m8a5Vwvi/Nygzv
+ Px0+SwY/Uq7NU6BeHe9LZQWGStSOpYZ54TMq7EVGn4lbzlbKfE7vY8nHUNSFcerJ2spd
+ D92A==
+X-Gm-Message-State: AO0yUKUbezcLz5p7i4tui/xiPDiMdzoH73m7VLV+Y4bDNgZoWTvALdTC
+ LkoXwamW2csTTcqikiT/Xg1VNQ==
+X-Google-Smtp-Source: AK7set+HJHuSa3IFD8PZa39OxSNOhF218jjpo04ePRCHDbIYpzUz10+eZzuVWtsqmR9ViQCaaF9Psg==
+X-Received: by 2002:adf:fbc8:0:b0:2bf:ae2f:576f with SMTP id
+ d8-20020adffbc8000000b002bfae2f576fmr9212591wrs.14.1675447771318; 
+ Fri, 03 Feb 2023 10:09:31 -0800 (PST)
 Received: from localhost.localdomain ([81.0.6.76])
  by smtp.gmail.com with ESMTPSA id
- p12-20020a5d48cc000000b00241fab5a296sm2474545wrs.40.2023.02.03.10.09.25
+ e2-20020a5d5002000000b002c3be6ae0b1sm2517659wrt.65.2023.02.03.10.09.30
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 03 Feb 2023 10:09:25 -0800 (PST)
+ Fri, 03 Feb 2023 10:09:31 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
  Eduardo Habkost <eduardo@habkost.net>, qemu-riscv@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH 02/19] hw/qdev: Introduce qdev_prop_set_link()
-Date: Fri,  3 Feb 2023 19:08:57 +0100
-Message-Id: <20230203180914.49112-3-philmd@linaro.org>
+ "Michael S. Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Ani Sinha <ani@anisinha.ca>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>
+Subject: [PATCH 03/19] hw/acpi: Set QDev properties using QDev API
+Date: Fri,  3 Feb 2023 19:08:58 +0100
+Message-Id: <20230203180914.49112-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230203180914.49112-1-philmd@linaro.org>
 References: <20230203180914.49112-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -82,45 +83,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2023 18:09:30 -0000
+X-List-Received-Date: Fri, 03 Feb 2023 18:09:37 -0000
 
-Introduce qdev_prop_set_link(), equivalent of
-object_property_set_link() for QDev objects.
+No need to use the low-level QOM API when an object
+inherits from QDev. Directly use the QDev API to set
+its properties.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/core/qdev-properties.c    | 5 +++++
- include/hw/qdev-properties.h | 1 +
- 2 files changed, 6 insertions(+)
+ hw/acpi/cpu_hotplug.c | 7 +++----
+ hw/acpi/ich9.c        | 4 ++--
+ hw/acpi/piix4.c       | 4 ++--
+ 3 files changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/hw/core/qdev-properties.c b/hw/core/qdev-properties.c
-index 9789a2f5de..46236b1542 100644
---- a/hw/core/qdev-properties.c
-+++ b/hw/core/qdev-properties.c
-@@ -694,6 +694,11 @@ void error_set_from_qdev_prop_error(Error **errp, int ret, Object *obj,
+diff --git a/hw/acpi/cpu_hotplug.c b/hw/acpi/cpu_hotplug.c
+index b8c9081738..5bc5f435f4 100644
+--- a/hw/acpi/cpu_hotplug.c
++++ b/hw/acpi/cpu_hotplug.c
+@@ -10,6 +10,7 @@
+  * See the COPYING file in the top-level directory.
+  */
+ #include "qemu/osdep.h"
++#include "hw/qdev-properties.h"
+ #include "hw/acpi/cpu_hotplug.h"
+ #include "qapi/error.h"
+ #include "hw/core/cpu.h"
+@@ -41,8 +42,7 @@ static void cpu_status_write(void *opaque, hwaddr addr, uint64_t data,
+      */
+     if (addr == 0 && data == 0) {
+         AcpiCpuHotplug *gpe = opaque;
+-        object_property_set_bool(OBJECT(gpe->parent), "cpu-hotplug-legacy",
+-                                 false, &error_abort);
++        qdev_prop_set_bit(gpe->parent, "cpu-hotplug-legacy", false);
      }
  }
  
-+void qdev_prop_set_link(DeviceState *dev, const char *name, Object *value)
-+{
-+    object_property_set_link(OBJECT(dev), name, value, &error_abort);
-+}
-+
- void qdev_prop_set_bit(DeviceState *dev, const char *name, bool value)
+@@ -66,8 +66,7 @@ static void acpi_set_cpu_present_bit(AcpiCpuHotplug *gpe, CPUState *cpu)
+ 
+     cpu_id = k->get_arch_id(cpu);
+     if ((cpu_id / 8) >= ACPI_GPE_PROC_LEN) {
+-        object_property_set_bool(OBJECT(gpe->parent), "cpu-hotplug-legacy",
+-                                 false, &error_abort);
++        qdev_prop_set_bit(gpe->parent, "cpu-hotplug-legacy", false);
+         return;
+     }
+ 
+diff --git a/hw/acpi/ich9.c b/hw/acpi/ich9.c
+index 6c9a737479..9759119b32 100644
+--- a/hw/acpi/ich9.c
++++ b/hw/acpi/ich9.c
+@@ -30,6 +30,7 @@
+ #include "hw/pci/pci.h"
+ #include "migration/vmstate.h"
+ #include "qemu/timer.h"
++#include "hw/qdev-properties.h"
+ #include "hw/core/cpu.h"
+ #include "sysemu/reset.h"
+ #include "sysemu/runstate.h"
+@@ -197,8 +198,7 @@ static bool vmstate_test_use_cpuhp(void *opaque)
+ static int vmstate_cpuhp_pre_load(void *opaque)
  {
-     object_property_set_bool(OBJECT(dev), name, value, &error_abort);
-diff --git a/include/hw/qdev-properties.h b/include/hw/qdev-properties.h
-index 21f399e9a3..c16dbefb2f 100644
---- a/include/hw/qdev-properties.h
-+++ b/include/hw/qdev-properties.h
-@@ -191,6 +191,7 @@ bool qdev_prop_set_drive_err(DeviceState *dev, const char *name,
-  * Set properties between creation and realization.
-  * @value must be valid.  Each property may be set at most once.
-  */
-+void qdev_prop_set_link(DeviceState *dev, const char *name, Object *value);
- void qdev_prop_set_bit(DeviceState *dev, const char *name, bool value);
- void qdev_prop_set_uint8(DeviceState *dev, const char *name, uint8_t value);
- void qdev_prop_set_uint16(DeviceState *dev, const char *name, uint16_t value);
+     ICH9LPCPMRegs *s = opaque;
+-    Object *obj = OBJECT(s->gpe.parent);
+-    object_property_set_bool(obj, "cpu-hotplug-legacy", false, &error_abort);
++    qdev_prop_set_bit(s->gpe.parent, "cpu-hotplug-legacy", false);
+     return 0;
+ }
+ 
+diff --git a/hw/acpi/piix4.c b/hw/acpi/piix4.c
+index 3a61d89f92..9a86d506de 100644
+--- a/hw/acpi/piix4.c
++++ b/hw/acpi/piix4.c
+@@ -206,8 +206,8 @@ static bool vmstate_test_use_cpuhp(void *opaque)
+ 
+ static int vmstate_cpuhp_pre_load(void *opaque)
+ {
+-    Object *obj = OBJECT(opaque);
+-    object_property_set_bool(obj, "cpu-hotplug-legacy", false, &error_abort);
++    PIIX4PMState *s = opaque;
++    qdev_prop_set_bit(DEVICE(s), "cpu-hotplug-legacy", false);
+     return 0;
+ }
+ 
 -- 
 2.38.1
 
