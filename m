@@ -1,68 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pO0VZ-0007jv-IY
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Feb 2023 13:09:57 -0500
+	id 1pO0Vu-0008Ib-OX
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Feb 2023 13:10:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pO0VY-0007gd-1V
- for qemu-riscv@nongnu.org; Fri, 03 Feb 2023 13:09:56 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pO0Ve-0007nq-H8
+ for qemu-riscv@nongnu.org; Fri, 03 Feb 2023 13:10:09 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pO0VW-0008GK-EF
- for qemu-riscv@nongnu.org; Fri, 03 Feb 2023 13:09:55 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- hn2-20020a05600ca38200b003dc5cb96d46so6573716wmb.4
- for <qemu-riscv@nongnu.org>; Fri, 03 Feb 2023 10:09:54 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pO0Va-0008Gt-U1
+ for qemu-riscv@nongnu.org; Fri, 03 Feb 2023 13:10:00 -0500
+Received: by mail-wr1-x434.google.com with SMTP id y1so5408825wru.2
+ for <qemu-riscv@nongnu.org>; Fri, 03 Feb 2023 10:09:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HN76CBKBfX1G0l+y+g6vAhVD6/TboUIvvYwPXW3Iexo=;
- b=m1WjmgwMPOsNtLA5YA0t19cIA3HGnEQVECoOhLU6AGpzzoZQbcGqpC0JvenMkr52s3
- +nXpucNnq828lAZTK+n3yA3GMjt4hoBXVPrlEm8NOds3KrxM6x63NJxhDptUlqTEof2H
- 5Pv9svm6Qdyjxjr7FFrxZ1nUGGg6V2EOysUSqxPFc+SlY3JDuIsbW9K0ftIHSjOWo2Aj
- rAQv87SvACTrrEY82Ch7p3q9Dij2pnj6OQfJAUI0Wyo4cV9hc/bCA3j25ofvY9GVqEDV
- m375OaiEzlgiKCsxl/n5c5MDU5+Tc9HIYlEZ9iH8QtFK3YcukSCoVH5tWdwmnCyVnyar
- nezw==
+ bh=8vovJOcxBVU6DoLhiHtjRCI4bXKmNwzDO1xetqBbwJw=;
+ b=UOROVGJf2LhPr752Dw/+I93w8jyObbZA3IhAvPk00odJTomcoFC44+VlywzefzTQBI
+ 87UOdzz6xjb3/z/Ugj3dHNwazZt3412OTsoijUEPdpUp3MBFD7cH/6bhCR93Oimgr3gn
+ hIhsa1QlaaC8RTcuQafvT4FTWWrinb1RaHh9Spr8Jw5wKNAitKVz2wLDnQ+e555kKLLv
+ AqcGsxNra2OcpD6xxVviE4L0YwJ1GnLN2VGeyW0ylWgc7UCY607BbK7njSwVVNduiAoG
+ 42IQvlighScOqCP5CeI0+K/sIHTT28zzDnBRXMZbFRHtSH9igpqtd/kIbuR+6dUT86Pd
+ PAvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HN76CBKBfX1G0l+y+g6vAhVD6/TboUIvvYwPXW3Iexo=;
- b=U4G7q0kO0JXW+IN+4hGA7GjXDfgJo7o2ktJF0nS3H5h6NwnX7mSyHLRVrE3nFeN7kq
- VkvO7mgtbLS9tzklbKTjzVyXrPU1uOVS7sqWZqC4vDh9MlfBpx7IuBgAhZgnVWWxrGiv
- 3XMqVaS/a7mmpP68Dne8sJTLFipxIdlYYpez078Hvwt5if/1thXBHcqC+2XOYwQelXzb
- /7FiBygBnHfNcBINEiOZOETMDlmwS/Wm4ta/SK9yKc7nMCvc6uGU/UpzB7kXDfQv9D6R
- YwPHMTnQBXteoTPGt9M7KDHbmEIHvw/NOmC9XSWsFUCqEeG7O9whmSLS/YHst70aWkQU
- 9vig==
-X-Gm-Message-State: AO0yUKUXMU58MbhJRPAQuv1ztkRNGAncJPFUYJCB2VLxD8ln3VS/tE9j
- PDY/XAd0fhf9wln3Kyih90NcGw==
-X-Google-Smtp-Source: AK7set9ZxRRFo1CGOLjJgso2lFux2GQWoL4HdyvxVNVLGANu3XJ/bTjpWeRz06io18MYKc5dhIxKLg==
-X-Received: by 2002:a1c:f307:0:b0:3dc:50be:9206 with SMTP id
- q7-20020a1cf307000000b003dc50be9206mr11541740wmq.4.1675447792935; 
- Fri, 03 Feb 2023 10:09:52 -0800 (PST)
+ bh=8vovJOcxBVU6DoLhiHtjRCI4bXKmNwzDO1xetqBbwJw=;
+ b=4cugPWHhXn+dp319VULPynhD/Ou0zpI/7QElWcDyiziFYucdQckG+LRT/4wAdYyF0s
+ VicM/OAHYs1wKpvPSKG6X2QNve33ZHVrWnWnslsN+HGoWR74nT50wskv9tnnl83HMSwN
+ cfN/5AjR5xDtw3+LOQHHi0owLqt9MqDr3SlrKZWyHIoTwcRg37HkI0ensVHAz/cInHsp
+ nw+GhLZeO1Mu9rzEl2lp/gZ5vnvNjnUs+fM+Q4369bP/jtkZl9TnCUpR4U7KtU3g3Rfi
+ 2JEyEEPImaOelDF10gbYw4c7tS7xwAXpnLj0qhVnMity56LybfLwfVsfQgLN7I8AfEHW
+ tH2g==
+X-Gm-Message-State: AO0yUKWYMZtYjrtEbru/oxqnmTK/53zAVP5hDBBzSq6ILYvfATQDFgTk
+ KsKP3q/e7zMe+7aqjYBMNWNrlQ==
+X-Google-Smtp-Source: AK7set/hD9U6wHMO4gsaTyNxz1UIQHivzSkcKTC59mR9ACtZMldDtSDx+5HfrHQZaG9PK1iG6a9nFA==
+X-Received: by 2002:a5d:456e:0:b0:2c3:db61:20ec with SMTP id
+ a14-20020a5d456e000000b002c3db6120ecmr719672wrc.23.1675447797782; 
+ Fri, 03 Feb 2023 10:09:57 -0800 (PST)
 Received: from localhost.localdomain ([81.0.6.76])
  by smtp.gmail.com with ESMTPSA id
- x9-20020a5d4449000000b002c3cf230b60sm2184162wrr.73.2023.02.03.10.09.51
+ z16-20020a5d4d10000000b002bbed1388a5sm2528636wrt.15.2023.02.03.10.09.56
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 03 Feb 2023 10:09:52 -0800 (PST)
+ Fri, 03 Feb 2023 10:09:57 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
  Eduardo Habkost <eduardo@habkost.net>, qemu-riscv@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Fam Zheng <fam@euphon.net>
-Subject: [RFC PATCH 07/19] hw/scsi: Set QDev properties using QDev API
-Date: Fri,  3 Feb 2023 19:09:02 +0100
-Message-Id: <20230203180914.49112-8-philmd@linaro.org>
+ Gerd Hoffmann <kraxel@redhat.com>
+Subject: [PATCH 08/19] hw/usb: Set QDev properties using QDev API
+Date: Fri,  3 Feb 2023 19:09:03 +0100
+Message-Id: <20230203180914.49112-9-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230203180914.49112-1-philmd@linaro.org>
 References: <20230203180914.49112-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -82,7 +81,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2023 18:09:56 -0000
+X-List-Received-Date: Fri, 03 Feb 2023 18:10:14 -0000
 
 No need to use the low-level QOM API when an object
 inherits from QDev. Directly use the QDev API to set
@@ -90,26 +89,36 @@ its properties.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/scsi/scsi-bus.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ hw/usb/hcd-xhci-pci.c    | 2 +-
+ hw/usb/hcd-xhci-sysbus.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/hw/scsi/scsi-bus.c b/hw/scsi/scsi-bus.c
-index ceceafb2cd..a8003126c4 100644
---- a/hw/scsi/scsi-bus.c
-+++ b/hw/scsi/scsi-bus.c
-@@ -347,11 +347,7 @@ SCSIDevice *scsi_bus_legacy_add_drive(SCSIBus *bus, BlockBackend *blk,
-         object_unparent(OBJECT(dev));
-         return NULL;
-     }
--    if (!object_property_set_bool(OBJECT(dev), "share-rw", share_rw, errp)) {
--        object_unparent(OBJECT(dev));
--        return NULL;
--    }
--
-+    qdev_prop_set_bit(dev, "share-rw", share_rw);
-     qdev_prop_set_enum(dev, "rerror", rerror);
-     qdev_prop_set_enum(dev, "werror", werror);
+diff --git a/hw/usb/hcd-xhci-pci.c b/hw/usb/hcd-xhci-pci.c
+index 643d4643e4..7511af4ce2 100644
+--- a/hw/usb/hcd-xhci-pci.c
++++ b/hw/usb/hcd-xhci-pci.c
+@@ -115,7 +115,7 @@ static void usb_xhci_pci_realize(struct PCIDevice *dev, Error **errp)
+     dev->config[PCI_CACHE_LINE_SIZE] = 0x10;
+     dev->config[0x60] = 0x30; /* release number */
  
+-    object_property_set_link(OBJECT(&s->xhci), "host", OBJECT(s), NULL);
++    qdev_prop_set_link(DEVICE(&s->xhci), "host", OBJECT(s));
+     s->xhci.intr_update = xhci_pci_intr_update;
+     s->xhci.intr_raise = xhci_pci_intr_raise;
+     if (!qdev_realize(DEVICE(&s->xhci), NULL, errp)) {
+diff --git a/hw/usb/hcd-xhci-sysbus.c b/hw/usb/hcd-xhci-sysbus.c
+index faf57b4797..d73c71015b 100644
+--- a/hw/usb/hcd-xhci-sysbus.c
++++ b/hw/usb/hcd-xhci-sysbus.c
+@@ -36,7 +36,7 @@ static void xhci_sysbus_realize(DeviceState *dev, Error **errp)
+ {
+     XHCISysbusState *s = XHCI_SYSBUS(dev);
+ 
+-    object_property_set_link(OBJECT(&s->xhci), "host", OBJECT(s), NULL);
++    qdev_prop_set_link(DEVICE(&s->xhci), "host", OBJECT(s));
+     if (!qdev_realize(DEVICE(&s->xhci), NULL, errp)) {
+         return;
+     }
 -- 
 2.38.1
 
