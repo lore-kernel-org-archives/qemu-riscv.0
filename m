@@ -1,69 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pOHGv-0001oA-TU
-	for mharc-qemu-riscv@gnu.org; Sat, 04 Feb 2023 07:03:57 -0500
+	id 1pOIWA-0000q6-LC
+	for mharc-qemu-riscv@gnu.org; Sat, 04 Feb 2023 08:23:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pOHGt-0001nh-0a; Sat, 04 Feb 2023 07:03:56 -0500
-Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
+ (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
+ id 1pOIVz-0000p8-RI; Sat, 04 Feb 2023 08:23:39 -0500
+Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pOHGq-0000Hp-TV; Sat, 04 Feb 2023 07:03:54 -0500
-Received: by mail-vs1-xe2b.google.com with SMTP id s24so8019361vsi.12;
- Sat, 04 Feb 2023 04:03:51 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
+ id 1pOIVx-0004zZ-Ji; Sat, 04 Feb 2023 08:23:35 -0500
+Received: by mail-ej1-x633.google.com with SMTP id gr7so22468134ejb.5;
+ Sat, 04 Feb 2023 05:23:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Z67EqDy61rVQ8457moV7eF1Z0EkJrukYrh9MNtN1Heo=;
- b=OebUOxJzhOfDS+D4JZvPvRHs6H+W4lVGq11+raHk8k27VfO4fqcJeQ/i3IEBF89kHI
- 4kQUeP/ZURrRZxjFEZkhMiUJJ29fgc2ycOV4JsaNmENJo2ApeanVCTJXSm2Lo64DAn+x
- J9YfsNo3VM3fVFsIz4rpfooUW4smZxV36M3WpIXDXhNyR/RHrfXl6ZsnSGz8IaPIHTkr
- W8Pf9hAcfWbI91i8cIG9gEqc0E6lOhYktshgcQ4Y08R719lwxXHd1gDoZliJLJIQnaW6
- Whsxu1EkU7Bycnt0P6OezBB0sNfi7SZIMn4d2yY9E2XLjsgtLTNdjkoEl2iYl1QtRp3P
- kB9Q==
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nFW15eM3QQLDoctzjP7iof9x9B0/XTXmd5jsJMhpTvE=;
+ b=XkzRXjxXC1NobaLkQ1nuAuulFXOeww2JdUHCdZJa52tyS9borQLsVFuEFkFSdcUU0b
+ zRIROs2Sa0bZfJf3DpjWZ/TS5O26BzUPoJQ1+I3eD6ylkXEmLUG2r3htK2jSFeAnPhv8
+ jXigCnHut6Q18rRIn+JocgxGTxWo+rc0kjJLYO463Mh4EpyXnbPGiS/dHdtIr0S4WGxG
+ Rk9Vbxxdm7XU6A0s8rPo034RsA/w43RWPCOym+RUhm66i+goFe+CTk7RwAoq5n5e66qR
+ U8JBNcj1ZVuYQajsPcy3VOZZLirlTHN6R7VyAOmbg7BpCJqhtrkiw0dB3YQyjU/J1WG5
+ h0Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Z67EqDy61rVQ8457moV7eF1Z0EkJrukYrh9MNtN1Heo=;
- b=YEU1XlVSzQgJgIWBUj6r7+vYdyUIxHY12ncig+9PLGYzxKDmkLSK+E6v2qKKF+VhLI
- eKPVaM3oa3Hif+g3+pCX7KXjW1bvh0iCzxtANYXxnI/DfDab8rvFdWQ1iUFwmjlykAo2
- pFuY6HIIYO7cBZfegEIkzXICG24e5UzacmbKBu0FIdHhSotTE5cMW+OCZ8VUAbSMW9et
- 3F1dWXv8Q8RqJAu1W9OT5/ehWDp7a4JYxHn92g/9ncw2+SLWuHYmfO5qmyiVtao3byPT
- Ix9GRobnXbMTCCvHtx5vqlQ69xVMdJZtB70TDpRBCpVhblpvcQjihEmZMfr3DThXMn1Y
- f0fw==
-X-Gm-Message-State: AO0yUKVZukGC5Myoqf8BQCKG+Nc0+txbW5H+euM+ZSe6gxaOyCdPkyzw
- SzOy16letRhAEwSbdI+HtRThopG4YUMdhHbJLVw=
-X-Google-Smtp-Source: AK7set/B8zPaDA7YpJPzydbtgaFMF0CuBL9KLAk5NKweVeghrgC4axwCFnCJoX57/nkRmP5cUZmHbC8/EZoV1dGe8fc=
-X-Received: by 2002:a67:e102:0:b0:3f0:89e1:7c80 with SMTP id
- d2-20020a67e102000000b003f089e17c80mr1748757vsl.72.1675512231208; Sat, 04 Feb
- 2023 04:03:51 -0800 (PST)
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nFW15eM3QQLDoctzjP7iof9x9B0/XTXmd5jsJMhpTvE=;
+ b=d+g5FBycCiYO8zwQDETVDAwnDeTka5f6OBDAwLhh4cWgtYclMmsWhqbxLxq1toyAmt
+ wOhVYfWtKqFZqJaXZiQrnsJnnANGGIC9PgXMI74MpXWJgzMR74er9WTJMAoQ/z9LJtLE
+ ibITS0GUSyyh4ZxQ+w5dtaxLTL+bEZpUzom4Mz4nMFlyauRFJXAAvrdyxfDBpsJDTyqd
+ lZxFXPgLSLZgD5M13f7UVQAQUPFiJIzaQnTjlel4Ax6nR332NQe8DbmJNjuoYQeiZ/JA
+ 6vLjiuLrgZsDmfWOHwQOnUsdS980a7p6fyncbDgQVyAnjQPaqfreTZf3OcX/PS8ed9mu
+ eE1A==
+X-Gm-Message-State: AO0yUKWIMywtY5TAt7vecCkgU6CHy1aGlwL4SGJ4Vdkj6A3aRXefqyAl
+ CXJFCd2F70nxaHrt3RlXN3s/Gx5WrRA=
+X-Google-Smtp-Source: AK7set/sa3AKYxk+FL3zG4IRGCIVEnZ2g4fN1uU53SQ9Dzwqdegrdqdo5AWvNyWnIX+euBJBylSAXQ==
+X-Received: by 2002:a17:907:8a04:b0:885:23bc:3174 with SMTP id
+ sc4-20020a1709078a0400b0088523bc3174mr19244568ejc.70.1675517010332; 
+ Sat, 04 Feb 2023 05:23:30 -0800 (PST)
+Received: from [127.0.0.1] (dynamic-077-183-077-083.77.183.pool.telefonica.de.
+ [77.183.77.83]) by smtp.gmail.com with ESMTPSA id
+ p15-20020a1709060e8f00b0088bd01105eesm2810582ejf.188.2023.02.04.05.23.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 04 Feb 2023 05:23:29 -0800 (PST)
+Date: Sat, 04 Feb 2023 13:23:21 +0000
+From: Bernhard Beschow <shentey@gmail.com>
+To: qemu-devel@nongnu.org,
+ =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>
+CC: qemu-arm@nongnu.org, Markus Armbruster <armbru@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>, qemu-riscv@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ David Hildenbrand <david@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Xiao Guangrong <xiaoguangrong.eric@gmail.com>
+Subject: Re: [RFC PATCH 12/19] hw/i386: Set QDev properties using QDev API
+In-Reply-To: <20230203180914.49112-13-philmd@linaro.org>
+References: <20230203180914.49112-1-philmd@linaro.org>
+ <20230203180914.49112-13-philmd@linaro.org>
+Message-ID: <D0F3AEC0-FC01-426E-ABA3-08CA806E966E@gmail.com>
 MIME-Version: 1.0
-References: <20230202135810.1657792-1-dbarboza@ventanamicro.com>
- <20230202135810.1657792-2-dbarboza@ventanamicro.com>
- <CAEUhbmW01vUZNdAcXQ0b-7GUgH70q9eyWJH7kG+Mph4uJJeWnA@mail.gmail.com>
- <51896f68-d902-ee07-295d-5809c9c66e60@ventanamicro.com>
- <CAEUhbmVN3Pw8794tq2H3X5amexhptnrZaLdG0MHyON6fyac-AA@mail.gmail.com>
- <e7d32c5f-a996-2d50-9362-3223c546d136@ventanamicro.com>
-In-Reply-To: <e7d32c5f-a996-2d50-9362-3223c546d136@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Sat, 4 Feb 2023 22:03:24 +1000
-Message-ID: <CAKmqyKN8MB9zS-KB__Z5HXjEd_QOXEQL_zpVyNga4gQcgdSGsw@mail.gmail.com>
-Subject: Re: [PATCH v10 1/3] hw/riscv: handle 32 bit CPUs kernel_addr in
- riscv_load_kernel()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::633;
+ envelope-from=shentey@gmail.com; helo=mail-ej1-x633.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -78,128 +87,248 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Feb 2023 12:03:56 -0000
+X-List-Received-Date: Sat, 04 Feb 2023 13:23:44 -0000
 
-On Sat, Feb 4, 2023 at 7:01 AM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Hey,
->
-> On 2/3/23 07:45, Bin Meng wrote:
-> > Hi Daniel,
-> >
-> > On Fri, Feb 3, 2023 at 6:31 PM Daniel Henrique Barboza
-> > <dbarboza@ventanamicro.com> wrote:
-> >>
-> >>
-> >>
-> >> On 2/3/23 02:39, Bin Meng wrote:
-> >>> On Thu, Feb 2, 2023 at 9:58 PM Daniel Henrique Barboza
-> >>> <dbarboza@ventanamicro.com> wrote:
-> >>>>
-> >>>> load_elf_ram_sym() will sign-extend 32 bit addresses. If a 32 bit QEMU
-> >>>> guest happens to be running in a hypervisor that are using 64 bits to
-> >>>> encode its address, kernel_entry can be padded with '1's and create
-> >>>> problems [1].
-> >>>
-> >>> Still this commit message is inaccurate. It's not
-> >>>
-> >>> "a 32-bit QEMU guest happens to running in a hypervisor that are using
-> >>> 64 bits to encode tis address"
-> >>>
-> >>> as a 32-bit ELF can only hold a 32-bit address, but it's the QEMU ELF
-> >>> loader that does the sign extension and returns the address as
-> >>> uint64_t. It has nothing to do with hypervisor too.
-> >>
-> >>
-> >> Yeah I'm still focusing too much on the use case instead of the root of the
-> >> problem (sign-extension from QEMU elf).
-> >>
-> >>>
-> >>>>
-> >>>> Using a translate_fn() callback in load_elf_ram_sym() to filter the
-> >>>> padding from the address doesn't work. A more detailed explanation can
-> >>>> be found in [2]. The short version is that glue(load_elf, SZ), from
-> >>>> include/hw/elf_ops.h, will calculate 'pentry' (mapped into the
-> >>>> 'kernel_load_base' var in riscv_load_Kernel()) before using
-> >>>> translate_fn(), and will not recalculate it after executing it. This
-> >>>> means that the callback does not prevent the padding from
-> >>>> kernel_load_base to appear.
-> >>>>
-> >>>> Let's instead use a kernel_low var to capture the 'lowaddr' value from
-> >>>> load_elf_ram_sim(), and return it when we're dealing with 32 bit CPUs.
-> >>>
-> >>> Looking at the prototype of load_elf_ram_sym() it has
-> >>>
-> >>> ssize_t load_elf_ram_sym(const char *filename,
-> >>>                            uint64_t (*elf_note_fn)(void *, void *, bool),
-> >>>                            uint64_t (*translate_fn)(void *, uint64_t),
-> >>>                            void *translate_opaque, uint64_t *pentry,
-> >>>                            uint64_t *lowaddr, uint64_t *highaddr,
-> >>>                            uint32_t *pflags, int big_endian, int elf_machine,
-> >>>                            int clear_lsb, int data_swab,
-> >>>                            AddressSpace *as, bool load_rom, symbol_fn_t sym_cb)
-> >>>
-> >>> So kernel_low is the "highaddr" parameter, not the 'lowaddr' value.
-> >>
-> >> And for some reason I thought kernel_base_addr was being used as 'pentry'. kernel_base_addr
-> >> is already 'lowaddr'. Guess I'll have to rewrite the commit message. And revisit why my
-> >> test case worked for riscv32 (I probably didn't use an ELF image ...)
-> >>
-> >> And the only way out seems to be filtering the bits from lowaddr. I'll do that.
-> >>
-> >
-> > Can you check as to why QEMU ELF loader does the sign extension?
-> >
-> > I personally don't know why. Maybe the ELF loader does something wrong.
->
->
-> I took a look and didn't find out why. I checked that in the ELF specification some
-> file headers can indicate a sign extension. E.g. R_X86_64_32S for example is described as
-> "Direct 32 bit zero extended". Note that the use of the tags are dependent on how the
-> ELF was built, so we would need the exact ELF to check for that. All I can say is that
-> there is a sign extension going on, in the 'lowaddr' field, and that translate_fn()
-> wasn't enough to filter it out. I can't say whether this is intended or a bug.
->
->
-> But going back a little, this whole situation happened in v5 because, in the next
-> patch, riscv_load_initrd() started to receive an uint64_t (kernel_entry) instead of
-> receiving a target_ulong like it was doing before. This behavior change, which was
-> accidental, not only revealed this sign-extension behavior but also potentially changed
-> what riscv_load_initrd() is receiving from load_uimage_as() the same way it's
-> impacting load_elf_ram_sym(). The third load option, load_image_targphys_as(), is
-> already using a target_ulong (kernel_start_addr) as return value so it's not
-> impacted.
->
-> I believe Alistair suggested to clear bits instead of just doing a target_ulong
-> cast for a reason (I guess we're trying to gate all 32/64 bit CPU logic using a
-> direct approach such as checking the CPU directly), but I also think we should
-> clear bits for all 'kernel_entry' possibilities, not just the one that comes from
-> load_elf_ram_sym(), to be consistent in all three cases. We might be even avoiding
-> a future headache from load_uimage_as().
 
-That seems like the approach to take. That way we aren't changing
-behaviour and it continues along with improving/adding RV32 support on
-64-bit bit targets.
 
-If we want to change the behaviour in the future, we can add a patch
-that does that with a description of why.
+Am 3=2E Februar 2023 18:09:07 UTC schrieb "Philippe Mathieu-Daud=C3=A9" <p=
+hilmd@linaro=2Eorg>:
+>No need to use the low-level QOM API when an object
+>inherits from QDev=2E Directly use the QDev API to set
+>its properties=2E
+>
+>Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro=2Eorg>
+>---
+> hw/i386/pc=2Ec           |  8 +++-----
+> hw/i386/pc_q35=2Ec       | 25 +++++++++++--------------
+> hw/i386/sgx=2Ec          |  3 +--
+> hw/i386/x86=2Ec          | 12 ++++--------
+> hw/mem/pc-dimm=2Ec       |  5 ++---
+> target/i386/cpu=2Ec      |  6 ++----
+> target/i386/host-cpu=2Ec |  7 +++----
+> 7 files changed, 26 insertions(+), 40 deletions(-)
+>
+>diff --git a/hw/i386/pc=2Ec b/hw/i386/pc=2Ec
+>index 6e592bd969=2E=2E700fdefa12 100644
+>--- a/hw/i386/pc=2Ec
+>+++ b/hw/i386/pc=2Ec
+>@@ -1236,8 +1236,7 @@ static void pc_superio_init(ISABus *isa_bus, bool c=
+reate_fdctrl,
+>         vmmouse =3D NULL;
+>     }
+>     if (vmmouse) {
+>-        object_property_set_link(OBJECT(vmmouse), TYPE_I8042, OBJECT(i80=
+42),
+>-                                 &error_abort);
+>+        qdev_prop_set_link(DEVICE(vmmouse), TYPE_I8042, OBJECT(i8042));
+>         isa_realize_and_unref(vmmouse, isa_bus, &error_fatal);
+>     }
+>     port92 =3D isa_create_simple(isa_bus, TYPE_PORT92);
+>@@ -1538,9 +1537,8 @@ static void pc_machine_device_pre_plug_cb(HotplugHa=
+ndler *hotplug_dev,
+>         char *resv_prop_str =3D g_strdup_printf("0xfee00000:0xfeefffff:%=
+d",
+>                                               VIRTIO_IOMMU_RESV_MEM_T_MS=
+I);
+>=20
+>-        object_property_set_uint(OBJECT(dev), "len-reserved-regions", 1,=
+ errp);
+>-        object_property_set_str(OBJECT(dev), "reserved-regions[0]",
+>-                                resv_prop_str, errp);
+>+        qdev_prop_set_uint32(dev, "len-reserved-regions", 1);
+>+        qdev_prop_set_string(dev, "reserved-regions[0]", resv_prop_str);
+>         g_free(resv_prop_str);
+>     }
+>=20
+>diff --git a/hw/i386/pc_q35=2Ec b/hw/i386/pc_q35=2Ec
+>index 66cd718b70=2E=2E760efa62ca 100644
+>--- a/hw/i386/pc_q35=2Ec
+>+++ b/hw/i386/pc_q35=2Ec
+>@@ -118,7 +118,7 @@ static void pc_q35_init(MachineState *machine)
+>     PCMachineState *pcms =3D PC_MACHINE(machine);
+>     PCMachineClass *pcmc =3D PC_MACHINE_GET_CLASS(pcms);
+>     X86MachineState *x86ms =3D X86_MACHINE(machine);
+>-    Q35PCIHost *q35_host;
+>+    DeviceState *q35_host;
+>     PCIHostState *phb;
 
-Alistair
+While at it, you could incorporate this change: https://lore=2Ekernel=2Eor=
+g/qemu-devel/20230131115326=2E12454-5-shentey@gmail=2Ecom/ , i=2Ee=2E resol=
+ve the now redundant q35_host variable and use phb instead as DeviceState=
+=2E
 
->
->
->
-> Thoughts?
->
->
-> Daniel
->
->
-> [1] https://github.com/riscv-non-isa/riscv-elf-psabi-doc/blob/master/riscv-elf.adoc
->
-> >
-> > Regards,
-> > Bin
->
+I'll drop the patch from my series in favor of yours=2E
+
+Best regards,
+Bernhard
+
+>     PCIBus *host_bus;
+>     PCIDevice *lpc;
+>@@ -206,7 +206,7 @@ static void pc_q35_init(MachineState *machine)
+>     }
+>=20
+>     /* create pci host bus */
+>-    q35_host =3D Q35_HOST_DEVICE(qdev_new(TYPE_Q35_HOST_DEVICE));
+>+    q35_host =3D qdev_new(TYPE_Q35_HOST_DEVICE);
+>=20
+>     if (pcmc->pci_enabled) {
+>         pci_hole64_size =3D object_property_get_uint(OBJECT(q35_host),
+>@@ -219,18 +219,15 @@ static void pc_q35_init(MachineState *machine)
+>                    pci_hole64_size);
+>=20
+>     object_property_add_child(qdev_get_machine(), "q35", OBJECT(q35_host=
+));
+>-    object_property_set_link(OBJECT(q35_host), MCH_HOST_PROP_RAM_MEM,
+>-                             OBJECT(ram_memory), NULL);
+>-    object_property_set_link(OBJECT(q35_host), MCH_HOST_PROP_PCI_MEM,
+>-                             OBJECT(pci_memory), NULL);
+>-    object_property_set_link(OBJECT(q35_host), MCH_HOST_PROP_SYSTEM_MEM,
+>-                             OBJECT(get_system_memory()), NULL);
+>-    object_property_set_link(OBJECT(q35_host), MCH_HOST_PROP_IO_MEM,
+>-                             OBJECT(system_io), NULL);
+>-    object_property_set_int(OBJECT(q35_host), PCI_HOST_BELOW_4G_MEM_SIZE=
+,
+>-                            x86ms->below_4g_mem_size, NULL);
+>-    object_property_set_int(OBJECT(q35_host), PCI_HOST_ABOVE_4G_MEM_SIZE=
+,
+>-                            x86ms->above_4g_mem_size, NULL);
+>+    qdev_prop_set_link(q35_host, MCH_HOST_PROP_RAM_MEM, OBJECT(ram_memor=
+y));
+>+    qdev_prop_set_link(q35_host, MCH_HOST_PROP_PCI_MEM, OBJECT(pci_memor=
+y));
+>+    qdev_prop_set_link(q35_host, MCH_HOST_PROP_IO_MEM, OBJECT(system_io)=
+);
+>+    qdev_prop_set_link(q35_host, MCH_HOST_PROP_SYSTEM_MEM,
+>+                       OBJECT(get_system_memory()));
+>+    qdev_prop_set_uint64(q35_host, PCI_HOST_BELOW_4G_MEM_SIZE,
+>+                         x86ms->below_4g_mem_size);
+>+    qdev_prop_set_uint64(q35_host, PCI_HOST_ABOVE_4G_MEM_SIZE,
+>+                         x86ms->above_4g_mem_size);
+>     /* pci */
+>     sysbus_realize_and_unref(SYS_BUS_DEVICE(q35_host), &error_fatal);
+>     phb =3D PCI_HOST_BRIDGE(q35_host);
+>diff --git a/hw/i386/sgx=2Ec b/hw/i386/sgx=2Ec
+>index 6a729bff94=2E=2E196fa5afee 100644
+>--- a/hw/i386/sgx=2Ec
+>+++ b/hw/i386/sgx=2Ec
+>@@ -304,8 +304,7 @@ void pc_machine_init_sgx_epc(PCMachineState *pcms)
+>         object_property_parse(OBJECT(dev), SGX_EPC_MEMDEV_PROP,
+>                               list->value->memdev, &error_fatal);
+>         /* set the numa node property for sgx epc object */
+>-        object_property_set_uint(OBJECT(dev), SGX_EPC_NUMA_NODE_PROP,
+>-                                 list->value->node, &error_fatal);
+>+        qdev_prop_set_uint32(dev, SGX_EPC_NUMA_NODE_PROP, list->value->n=
+ode);
+>         qdev_realize_and_unref(dev, NULL, &error_fatal);
+>     }
+>=20
+>diff --git a/hw/i386/x86=2Ec b/hw/i386/x86=2Ec
+>index eaff4227bd=2E=2E191a8c36ee 100644
+>--- a/hw/i386/x86=2Ec
+>+++ b/hw/i386/x86=2Ec
+>@@ -43,6 +43,7 @@
+> #include "sysemu/xen=2Eh"
+> #include "trace=2Eh"
+>=20
+>+#include "hw/qdev-properties=2Eh"
+> #include "hw/i386/x86=2Eh"
+> #include "target/i386/cpu=2Eh"
+> #include "hw/i386/topology=2Eh"
+>@@ -96,15 +97,10 @@ uint32_t x86_cpu_apic_id_from_index(X86MachineState *=
+x86ms,
+>=20
+> void x86_cpu_new(X86MachineState *x86ms, int64_t apic_id, Error **errp)
+> {
+>-    Object *cpu =3D object_new(MACHINE(x86ms)->cpu_type);
+>+    DeviceState *cpu =3D DEVICE(object_new(MACHINE(x86ms)->cpu_type));
+>=20
+>-    if (!object_property_set_uint(cpu, "apic-id", apic_id, errp)) {
+>-        goto out;
+>-    }
+>-    qdev_realize(DEVICE(cpu), NULL, errp);
+>-
+>-out:
+>-    object_unref(cpu);
+>+    qdev_prop_set_uint32(cpu, "apic-id", apic_id);
+>+    qdev_realize(cpu, NULL, errp);
+> }
+>=20
+> void x86_cpus_init(X86MachineState *x86ms, int default_cpu_version)
+>diff --git a/hw/mem/pc-dimm=2Ec b/hw/mem/pc-dimm=2Ec
+>index 50ef83215c=2E=2Ed6e0c8b680 100644
+>--- a/hw/mem/pc-dimm=2Ec
+>+++ b/hw/mem/pc-dimm=2Ec
+>@@ -66,8 +66,7 @@ void pc_dimm_pre_plug(PCDIMMDevice *dimm, MachineState =
+*machine,
+>         error_propagate(errp, local_err);
+>         return;
+>     }
+>-    object_property_set_int(OBJECT(dimm), PC_DIMM_SLOT_PROP, slot,
+>-                            &error_abort);
+>+    qdev_prop_set_int32(DEVICE(dimm), PC_DIMM_SLOT_PROP, slot);
+>     trace_mhp_pc_dimm_assigned_slot(slot);
+>=20
+>     memory_device_pre_plug(MEMORY_DEVICE(dimm), machine, legacy_align,
+>@@ -234,7 +233,7 @@ static uint64_t pc_dimm_md_get_addr(const MemoryDevic=
+eState *md)
+> static void pc_dimm_md_set_addr(MemoryDeviceState *md, uint64_t addr,
+>                                 Error **errp)
+> {
+>-    object_property_set_uint(OBJECT(md), PC_DIMM_ADDR_PROP, addr, errp);
+>+    qdev_prop_set_uint64(DEVICE(md), PC_DIMM_ADDR_PROP, addr);
+> }
+>=20
+> static MemoryRegion *pc_dimm_md_get_memory_region(MemoryDeviceState *md,
+>diff --git a/target/i386/cpu=2Ec b/target/i386/cpu=2Ec
+>index 4d2b8d0444=2E=2E5532cd42c5 100644
+>--- a/target/i386/cpu=2Ec
+>+++ b/target/i386/cpu=2Ec
+>@@ -5073,10 +5073,8 @@ static void x86_cpu_load_model(X86CPU *cpu, X86CPU=
+Model *model)
+>      */
+>=20
+>     /* CPU models only set _minimum_ values for level/xlevel: */
+>-    object_property_set_uint(OBJECT(cpu), "min-level", def->level,
+>-                             &error_abort);
+>-    object_property_set_uint(OBJECT(cpu), "min-xlevel", def->xlevel,
+>-                             &error_abort);
+>+    qdev_prop_set_uint32(DEVICE(cpu), "min-level", def->level);
+>+    qdev_prop_set_uint32(DEVICE(cpu), "min-xlevel", def->xlevel);
+>=20
+>     object_property_set_int(OBJECT(cpu), "family", def->family, &error_a=
+bort);
+>     object_property_set_int(OBJECT(cpu), "model", def->model, &error_abo=
+rt);
+>diff --git a/target/i386/host-cpu=2Ec b/target/i386/host-cpu=2Ec
+>index 10f8aba86e=2E=2E0307eaa208 100644
+>--- a/target/i386/host-cpu=2Ec
+>+++ b/target/i386/host-cpu=2Ec
+>@@ -158,7 +158,7 @@ void host_cpu_instance_init(X86CPU *cpu)
+>=20
+>         host_cpuid(0, 0, NULL, &ebx, &ecx, &edx);
+>         x86_cpu_vendor_words2str(vendor, ebx, edx, ecx);
+>-        object_property_set_str(OBJECT(cpu), "vendor", vendor, &error_ab=
+ort);
+>+        qdev_prop_set_string(DEVICE(cpu), "vendor", vendor);
+>     }
+> }
+>=20
+>@@ -174,13 +174,12 @@ void host_cpu_max_instance_init(X86CPU *cpu)
+>     host_cpu_vendor_fms(vendor, &family, &model, &stepping);
+>     host_cpu_fill_model_id(model_id);
+>=20
+>-    object_property_set_str(OBJECT(cpu), "vendor", vendor, &error_abort)=
+;
+>+    qdev_prop_set_string(DEVICE(cpu), "vendor", vendor);
+>     object_property_set_int(OBJECT(cpu), "family", family, &error_abort)=
+;
+>     object_property_set_int(OBJECT(cpu), "model", model, &error_abort);
+>     object_property_set_int(OBJECT(cpu), "stepping", stepping,
+>                             &error_abort);
+>-    object_property_set_str(OBJECT(cpu), "model-id", model_id,
+>-                            &error_abort);
+>+    qdev_prop_set_string(DEVICE(cpu), "model-id", model_id);
+> }
+>=20
+> static void host_cpu_class_init(ObjectClass *oc, void *data)
 
