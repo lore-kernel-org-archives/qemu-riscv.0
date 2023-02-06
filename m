@@ -1,72 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pOxfk-0002tj-M7
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Feb 2023 04:20:24 -0500
+	id 1pOy26-0007dB-9F
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Feb 2023 04:43:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pOxfi-0002rc-Ti
- for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 04:20:23 -0500
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pOy24-0007co-6v; Mon, 06 Feb 2023 04:43:29 -0500
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pOxfZ-0007qF-1U
- for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 04:20:22 -0500
-Received: by mail-wr1-x436.google.com with SMTP id h3so1855743wrp.10
- for <qemu-riscv@nongnu.org>; Mon, 06 Feb 2023 01:20:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=fGqdE+3KwLKtPmhzyHHh5LIzl/ziJDYhK3nMq9ftjqo=;
- b=zaKvzXtHlpmVIk8lk+gmIAIpw2Y/GuyI+QJsC9wbcR93oqbAh7//3U1G9y0hXJLbgl
- s1sXRyqAl1m7Nj3PTjFuEgGyFFNWajI88/Qkrj9SRlyjPIDNciBbgEb+Xc0aO/NZjgaf
- jwrio2xDTunOP3h16x756BL9mQgnaZBpXWW87hsSWM3zJwPf/wztIz6EW+J9pqCyv6f8
- 0YYprPN8Ly2XSq51v9jIa/67mGcpN/797efUwjZak/LL+HVBsRP17qWGVdR1Rph3WEyi
- FA/NyZGffdKsxH1RN4Yv6zsW7YWVvhV4ZgGEJ5hB1POXJ+Qhb3JTFocJsGMR1iF3pXML
- 4lHw==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pOy22-00036f-Gk; Mon, 06 Feb 2023 04:43:27 -0500
+Received: by mail-ed1-x531.google.com with SMTP id r3so1272158edq.13;
+ Mon, 06 Feb 2023 01:43:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=67d9zFG35eHOCtzFLecCP+mO7UjXbgKaJPqOH5JRbck=;
+ b=J7SCmKL39QzeGI++TGoqPCdVyBnavknPjl4odyKBiJC7kaoJ3TZOaR1zGul9Kaz3tt
+ s2UdOxVLjOSHvXZ5Xumeh4MtPzurmAUI6sfuLoDTfsJs6Nluyppk5t5vjsWtjX3fLVRS
+ eTXkcjBYg2S5Pgp9G0xbJYAaIKswuYM5X+Q4O5ip3Lf+an9NAAoxesEz6nhTlI1NI5Lw
+ nkPcQ2sy9/pbH/GJ1XVYENShsCpFegRr3Vl9SCdiIIXcr5pBN/o2Z0/wT5CByye6up8/
+ UEJTzbb2xVVp1bi2GMZCRNjaRQkd5ll5ZlwOsJxZZY4JSwrkkKI+rJ5gpi7wSny9EN8r
+ hX7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fGqdE+3KwLKtPmhzyHHh5LIzl/ziJDYhK3nMq9ftjqo=;
- b=aq4slcAqKBj4oQvbI0j4pqAqVuUFW4C/pigA13k0xhQOWkMBpZG3jsOgvevX9F/LuN
- AZEztPJ05iL1HNiszAKAcEbSS7F74Jbe68cB1NDkSve6uXyP+fWjdLxVjaj49CFOAerS
- +KsnuzwnyFxRDaOhBgtY30wTX3O36qCqZK6FCvl0qhdAKNg4gnvrDZxdDrJBZNwHbS0v
- oDw2R4E2rPSisPWOIJ6L9zXZlFuDsUOd+AcbX3hkYj2UxdBh/hUITrziuAVXZcMlJ8Js
- M6+PD1adbKIBT7YNLUNVahE1UvlvPDlN+bKMaF6MpzRivD5aB95Y1koRYbCioRNTvSd+
- ptJA==
-X-Gm-Message-State: AO0yUKX4u6mAbQ7k4iF9y4Wf3cT8lRA7vrSMUFgv7jwjcq3lkPv5ZvXJ
- a3vCnBBrqBeRflG8P3F1op8wow==
-X-Google-Smtp-Source: AK7set9HW756wmsNXNvLwyeOvZHrRmTmR5svmoQd6MtALGXDgcce5lto/CSukFDIUe5YIG56/3ONlw==
-X-Received: by 2002:a5d:5c01:0:b0:2bf:ea34:dfe4 with SMTP id
- cc1-20020a5d5c01000000b002bfea34dfe4mr18989097wrb.42.1675675209838; 
- Mon, 06 Feb 2023 01:20:09 -0800 (PST)
-Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- h10-20020a5d504a000000b002c3efca57e1sm383655wrt.110.2023.02.06.01.20.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Feb 2023 01:20:08 -0800 (PST)
-Message-ID: <a441ba3c-a454-8680-bf52-9d71a0f9df7a@linaro.org>
-Date: Mon, 6 Feb 2023 10:20:07 +0100
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=67d9zFG35eHOCtzFLecCP+mO7UjXbgKaJPqOH5JRbck=;
+ b=hHmTy00XMUXeim80xjctOiS5K87K+B+M6Sif6JFh/H1X6eTOacxLl/Q3aRZ4sBUU5R
+ /t/n/CuW93nvOmN1oJKrO185E4a2HMWp4yRRr4VJL6p02pIy/fskxezoqH4G4S0wdWQw
+ KpketluIJjchAWTmznI7+ekHo/7lPZ6ygXpndGnewUMi32t18sKKZV0Nwk766F2AJ1R8
+ EAJtGoinhOFgrliGxw/WW3abrEZnvLb9+A7g0zFBmrW835LI8V9P7xB1OCWP2NXLGOku
+ jb28CVaowof9GdIaRy6TOU7DUkQy1x5NGoTqv+FsLbm0p7+BlQkSF5l/6tzWsZ0rImEP
+ QUig==
+X-Gm-Message-State: AO0yUKXC/MkiBwLR+ww3HySiq3AfjpUIVUQCY6D8xXkJyNOJOOxxsK3u
+ pUpkAAn93oP0IgPy0IacHq+juJNycW4uNnJoJNc=
+X-Google-Smtp-Source: AK7set9McZ9Ax27VrqHo8dME9BriZAwS4F2JULPyMCy9pGGUhKJ5EaM5/eTbJ5MnCebDW8CtAQweLW6JmClsTqASwZM=
+X-Received: by 2002:a50:d5c9:0:b0:4a2:121d:1d3d with SMTP id
+ g9-20020a50d5c9000000b004a2121d1d3dmr5796098edj.82.1675676604471; Mon, 06 Feb
+ 2023 01:43:24 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.6.1
-Subject: Re: [PATCH] hw/riscv: virt: Simplify virt_{get,set}_aclint()
-Content-Language: en-US
-To: Bin Meng <bmeng@tinylab.org>, qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
-References: <20230206085007.3618715-1-bmeng@tinylab.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230206085007.3618715-1-bmeng@tinylab.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x436.google.com
-X-Spam_score_int: -31
-X-Spam_score: -3.2
-X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.149,
+References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
+ <20230202045223.2594627-3-sunilvl@ventanamicro.com>
+In-Reply-To: <20230202045223.2594627-3-sunilvl@ventanamicro.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Mon, 6 Feb 2023 17:43:13 +0800
+Message-ID: <CAEUhbmXYjVTDo6ZYQaO+R50_E+zCnns=CN9oCT-TMwwJ8eH=+w@mail.gmail.com>
+Subject: Re: [PATCH 02/10] hw/riscv/virt: Add a switch to enable/disable ACPI
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Andrew Jones <ajones@ventanamicro.com>, Anup Patel <apatel@ventanamicro.com>, 
+ Atish Kumar Patra <atishp@rivosinc.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x531.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -81,18 +75,126 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2023 09:20:23 -0000
+X-List-Received-Date: Mon, 06 Feb 2023 09:43:29 -0000
 
-On 6/2/23 09:50, Bin Meng wrote:
-> There is no need to declare an intermediate "MachineState *ms".
-> 
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+On Thu, Feb 2, 2023 at 12:54 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
+>
+> ACPI is optional. So, add a switch to toggle.
+>
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 > ---
-> 
->   hw/riscv/virt.c | 6 ++----
->   1 file changed, 2 insertions(+), 4 deletions(-)
+>  hw/riscv/virt.c         | 38 ++++++++++++++++++++++++++++++++++++++
+>  include/hw/riscv/virt.h |  2 ++
+>  2 files changed, 40 insertions(+)
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 7ad9fda20c..84962962ff 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -50,6 +50,7 @@
+>  #include "hw/pci-host/gpex.h"
+>  #include "hw/display/ramfb.h"
+>  #include "hw/acpi/aml-build.h"
+> +#include "qapi/qapi-visit-common.h"
+>
+>  /*
+>   * The virt machine physical address space used by some of the devices
+> @@ -1525,6 +1526,10 @@ static void virt_machine_init(MachineState *machine)
+>
+>  static void virt_machine_instance_init(Object *obj)
+>  {
+> +    MachineState *ms = MACHINE(obj);
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Drop this
 
+> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(ms);
+> +
+> +    s->acpi = ON_OFF_AUTO_OFF;
 
+Is this needed? I believe the purpose of an auto/on/off property is to
+have an "auto" value, which is ON_OFF_AUTO_AUTO.
+
+>  }
+>
+>  static char *virt_get_aia_guests(Object *obj, Error **errp)
+> @@ -1601,6 +1606,34 @@ static void virt_set_aclint(Object *obj, bool value, Error **errp)
+>      s->have_aclint = value;
+>  }
+>
+> +bool virt_is_acpi_enabled(RISCVVirtState *s)
+> +{
+> +    if (s->acpi == ON_OFF_AUTO_OFF) {
+> +        return false;
+> +    }
+> +    return true;
+> +}
+> +
+> +static void virt_get_acpi(Object *obj, Visitor *v, const char *name,
+> +                          void *opaque, Error **errp)
+> +{
+> +    MachineState *ms = MACHINE(obj);
+
+ditto
+
+> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(ms);
+> +
+> +    OnOffAuto acpi = s->acpi;
+> +
+> +    visit_type_OnOffAuto(v, name, &acpi, errp);
+> +}
+> +
+> +static void virt_set_acpi(Object *obj, Visitor *v, const char *name,
+> +                          void *opaque, Error **errp)
+> +{
+> +    MachineState *ms = MACHINE(obj);
+
+ditto
+
+> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(ms);
+> +
+> +    visit_type_OnOffAuto(v, name, &s->acpi, errp);
+> +}
+> +
+>  static HotplugHandler *virt_machine_get_hotplug_handler(MachineState *machine,
+>                                                          DeviceState *dev)
+>  {
+> @@ -1672,6 +1705,11 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+>      sprintf(str, "Set number of guest MMIO pages for AIA IMSIC. Valid value "
+>                   "should be between 0 and %d.", VIRT_IRQCHIP_MAX_GUESTS);
+>      object_class_property_set_description(oc, "aia-guests", str);
+> +    object_class_property_add(oc, "acpi", "OnOffAuto",
+> +                              virt_get_acpi, virt_set_acpi,
+> +                              NULL, NULL);
+
+I am not sure about "OnOffAuto" vs. "bool" type. It seems the only
+difference is that with "OnOffAuto" type we may silently change the
+interpretation of "auto" value across different QEMU versions?
+
+> +    object_class_property_set_description(oc, "acpi",
+> +                                          "Enable ACPI");
+>  }
+>
+>  static const TypeInfo virt_machine_typeinfo = {
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index 6c7885bf89..62efebaa32 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -58,6 +58,7 @@ struct RISCVVirtState {
+>      int aia_guests;
+>      char *oem_id;
+>      char *oem_table_id;
+> +    OnOffAuto acpi;
+>  };
+>
+>  enum {
+> @@ -123,4 +124,5 @@ enum {
+>  #define FDT_APLIC_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
+>                                   1 + FDT_APLIC_INT_CELLS)
+>
+> +bool virt_is_acpi_enabled(RISCVVirtState *s);
+>  #endif
+> --
+
+Regards,
+Bin
 
