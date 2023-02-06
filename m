@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pOy26-0007dB-9F
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Feb 2023 04:43:30 -0500
+	id 1pOy9F-0000kH-G0
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Feb 2023 04:50:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pOy24-0007co-6v; Mon, 06 Feb 2023 04:43:29 -0500
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ id 1pOy8w-0000dW-3R; Mon, 06 Feb 2023 04:50:40 -0500
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pOy22-00036f-Gk; Mon, 06 Feb 2023 04:43:27 -0500
-Received: by mail-ed1-x531.google.com with SMTP id r3so1272158edq.13;
- Mon, 06 Feb 2023 01:43:25 -0800 (PST)
+ id 1pOy8s-0004fM-1E; Mon, 06 Feb 2023 04:50:32 -0500
+Received: by mail-ed1-x52f.google.com with SMTP id a10so3947565edu.9;
+ Mon, 06 Feb 2023 01:50:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=67d9zFG35eHOCtzFLecCP+mO7UjXbgKaJPqOH5JRbck=;
- b=J7SCmKL39QzeGI++TGoqPCdVyBnavknPjl4odyKBiJC7kaoJ3TZOaR1zGul9Kaz3tt
- s2UdOxVLjOSHvXZ5Xumeh4MtPzurmAUI6sfuLoDTfsJs6Nluyppk5t5vjsWtjX3fLVRS
- eTXkcjBYg2S5Pgp9G0xbJYAaIKswuYM5X+Q4O5ip3Lf+an9NAAoxesEz6nhTlI1NI5Lw
- nkPcQ2sy9/pbH/GJ1XVYENShsCpFegRr3Vl9SCdiIIXcr5pBN/o2Z0/wT5CByye6up8/
- UEJTzbb2xVVp1bi2GMZCRNjaRQkd5ll5ZlwOsJxZZY4JSwrkkKI+rJ5gpi7wSny9EN8r
- hX7A==
+ bh=VnAxM9hjSRFkzLal9oZWpwOVho46OWIT02qW++wmOAo=;
+ b=LXqixfUBJyzvKh8NN7bxBwLmjmA/fO5oPRsARlYczGuUfq3fUGZ0WneE2J0ZI5zKia
+ Dw6ZFypnw9TFd7eVq21W5uZk442ZA+ZzH/tLjf5cEnz1PODn7GglGznIb3SfWlc/637g
+ ne6hiQztCHJoV9pWV9XSi9X9qyIHz3/S3etp/e6X2Zosj/OWCq+eSzsAFOYpMgJxERb5
+ TmzlBY25WPFCD+xbmAvHM5dj7A7nB0ZwplgA/GkL/OU87Weq4auYhNQGhjCxWsdBL7T3
+ rf8oa71DOb+SMgU/r+jFufFSO/ZCcE5qan8avVJSXCS008N9A+7zJdHYegVcfvOFwZIg
+ Tceg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=67d9zFG35eHOCtzFLecCP+mO7UjXbgKaJPqOH5JRbck=;
- b=hHmTy00XMUXeim80xjctOiS5K87K+B+M6Sif6JFh/H1X6eTOacxLl/Q3aRZ4sBUU5R
- /t/n/CuW93nvOmN1oJKrO185E4a2HMWp4yRRr4VJL6p02pIy/fskxezoqH4G4S0wdWQw
- KpketluIJjchAWTmznI7+ekHo/7lPZ6ygXpndGnewUMi32t18sKKZV0Nwk766F2AJ1R8
- EAJtGoinhOFgrliGxw/WW3abrEZnvLb9+A7g0zFBmrW835LI8V9P7xB1OCWP2NXLGOku
- jb28CVaowof9GdIaRy6TOU7DUkQy1x5NGoTqv+FsLbm0p7+BlQkSF5l/6tzWsZ0rImEP
- QUig==
-X-Gm-Message-State: AO0yUKXC/MkiBwLR+ww3HySiq3AfjpUIVUQCY6D8xXkJyNOJOOxxsK3u
- pUpkAAn93oP0IgPy0IacHq+juJNycW4uNnJoJNc=
-X-Google-Smtp-Source: AK7set9McZ9Ax27VrqHo8dME9BriZAwS4F2JULPyMCy9pGGUhKJ5EaM5/eTbJ5MnCebDW8CtAQweLW6JmClsTqASwZM=
+ bh=VnAxM9hjSRFkzLal9oZWpwOVho46OWIT02qW++wmOAo=;
+ b=D7h4FVaDV5zhilpvsCd8fR0ykia/hjoNyOkNKUrPS8gpCf8hq6YtnOQNd0YuQDMueL
+ XXtEqv/eM4lpPrtbyBS+gPYek4JHpBZjDu0EVtLl70spy/yT9MqhKhfNfm+PQuw3+z28
+ q7a//+lL31JO36WRfVEOHqfBqgJDhh7eYYxxcZtvAcTaPhN6uQcNJsqA6Nr1DIVMKf7E
+ EqDhoQPFZrsKcin2Hi6FtifTMq2b6a5jArF+vyP8OUcGAwLROJh0IbXcUbElT7u1k/Wj
+ yVhR5DfmVoOnMWX5zOKSeaKYowE7q+SHElzjpOOF/YBVfY33N/BVVU2NGaCmUCRhIXj2
+ E+6g==
+X-Gm-Message-State: AO0yUKWKI8B+Ipe8IUaAMQvwb/72ocBU4tv5dgTIUPzemI6aVYraEb6q
+ fOpAHE0+rbE7exfeNUSNlkhfmmDfmyi07V3BLrs=
+X-Google-Smtp-Source: AK7set8l4/+qCb6ZctLm5DDjoKcXyDcIFtnoCiJJXNkHj0Le7hScysleRDG1ONDVe9Iwm5/1xEIm87X+32YMPHzVxio=
 X-Received: by 2002:a50:d5c9:0:b0:4a2:121d:1d3d with SMTP id
- g9-20020a50d5c9000000b004a2121d1d3dmr5796098edj.82.1675676604471; Mon, 06 Feb
- 2023 01:43:24 -0800 (PST)
+ g9-20020a50d5c9000000b004a2121d1d3dmr5803333edj.82.1675677027648; Mon, 06 Feb
+ 2023 01:50:27 -0800 (PST)
 MIME-Version: 1.0
 References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
- <20230202045223.2594627-3-sunilvl@ventanamicro.com>
-In-Reply-To: <20230202045223.2594627-3-sunilvl@ventanamicro.com>
+ <20230202045223.2594627-4-sunilvl@ventanamicro.com>
+In-Reply-To: <20230202045223.2594627-4-sunilvl@ventanamicro.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 6 Feb 2023 17:43:13 +0800
-Message-ID: <CAEUhbmXYjVTDo6ZYQaO+R50_E+zCnns=CN9oCT-TMwwJ8eH=+w@mail.gmail.com>
-Subject: Re: [PATCH 02/10] hw/riscv/virt: Add a switch to enable/disable ACPI
+Date: Mon, 6 Feb 2023 17:50:16 +0800
+Message-ID: <CAEUhbmWmr7JpjQodHPNQQistvHMvm4PZAS3Yy1j38CapBEE54w@mail.gmail.com>
+Subject: Re: [PATCH 03/10] hw/riscv/virt: Add memmap pointer to RiscVVirtState
 To: Sunil V L <sunilvl@ventanamicro.com>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
@@ -54,8 +54,8 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Andrew Jones <ajones@ventanamicro.com>, Anup Patel <apatel@ventanamicro.com>, 
  Atish Kumar Patra <atishp@rivosinc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x531.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -75,126 +75,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2023 09:43:29 -0000
+X-List-Received-Date: Mon, 06 Feb 2023 09:50:49 -0000
 
 On Thu, Feb 2, 2023 at 12:54 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
 >
-> ACPI is optional. So, add a switch to toggle.
+> memmap needs to be exported outside of virt.c so that
+> modules like acpi can use it. Hence, add a pointer field
+> in RiscVVirtState structure and initialize it with the
+> memorymap.
 >
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 > ---
->  hw/riscv/virt.c         | 38 ++++++++++++++++++++++++++++++++++++++
->  include/hw/riscv/virt.h |  2 ++
->  2 files changed, 40 insertions(+)
+>  hw/riscv/virt.c         | 2 ++
+>  include/hw/riscv/virt.h | 1 +
+>  2 files changed, 3 insertions(+)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 7ad9fda20c..84962962ff 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -50,6 +50,7 @@
->  #include "hw/pci-host/gpex.h"
->  #include "hw/display/ramfb.h"
->  #include "hw/acpi/aml-build.h"
-> +#include "qapi/qapi-visit-common.h"
->
->  /*
->   * The virt machine physical address space used by some of the devices
-> @@ -1525,6 +1526,10 @@ static void virt_machine_init(MachineState *machine)
->
->  static void virt_machine_instance_init(Object *obj)
->  {
-> +    MachineState *ms = MACHINE(obj);
 
-Drop this
-
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(ms);
-> +
-> +    s->acpi = ON_OFF_AUTO_OFF;
-
-Is this needed? I believe the purpose of an auto/on/off property is to
-have an "auto" value, which is ON_OFF_AUTO_AUTO.
-
->  }
->
->  static char *virt_get_aia_guests(Object *obj, Error **errp)
-> @@ -1601,6 +1606,34 @@ static void virt_set_aclint(Object *obj, bool value, Error **errp)
->      s->have_aclint = value;
->  }
->
-> +bool virt_is_acpi_enabled(RISCVVirtState *s)
-> +{
-> +    if (s->acpi == ON_OFF_AUTO_OFF) {
-> +        return false;
-> +    }
-> +    return true;
-> +}
-> +
-> +static void virt_get_acpi(Object *obj, Visitor *v, const char *name,
-> +                          void *opaque, Error **errp)
-> +{
-> +    MachineState *ms = MACHINE(obj);
-
-ditto
-
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(ms);
-> +
-> +    OnOffAuto acpi = s->acpi;
-> +
-> +    visit_type_OnOffAuto(v, name, &acpi, errp);
-> +}
-> +
-> +static void virt_set_acpi(Object *obj, Visitor *v, const char *name,
-> +                          void *opaque, Error **errp)
-> +{
-> +    MachineState *ms = MACHINE(obj);
-
-ditto
-
-> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(ms);
-> +
-> +    visit_type_OnOffAuto(v, name, &s->acpi, errp);
-> +}
-> +
->  static HotplugHandler *virt_machine_get_hotplug_handler(MachineState *machine,
->                                                          DeviceState *dev)
->  {
-> @@ -1672,6 +1705,11 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
->      sprintf(str, "Set number of guest MMIO pages for AIA IMSIC. Valid value "
->                   "should be between 0 and %d.", VIRT_IRQCHIP_MAX_GUESTS);
->      object_class_property_set_description(oc, "aia-guests", str);
-> +    object_class_property_add(oc, "acpi", "OnOffAuto",
-> +                              virt_get_acpi, virt_set_acpi,
-> +                              NULL, NULL);
-
-I am not sure about "OnOffAuto" vs. "bool" type. It seems the only
-difference is that with "OnOffAuto" type we may silently change the
-interpretation of "auto" value across different QEMU versions?
-
-> +    object_class_property_set_description(oc, "acpi",
-> +                                          "Enable ACPI");
->  }
->
->  static const TypeInfo virt_machine_typeinfo = {
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index 6c7885bf89..62efebaa32 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -58,6 +58,7 @@ struct RISCVVirtState {
->      int aia_guests;
->      char *oem_id;
->      char *oem_table_id;
-> +    OnOffAuto acpi;
->  };
->
->  enum {
-> @@ -123,4 +124,5 @@ enum {
->  #define FDT_APLIC_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
->                                   1 + FDT_APLIC_INT_CELLS)
->
-> +bool virt_is_acpi_enabled(RISCVVirtState *s);
->  #endif
-> --
-
-Regards,
-Bin
+Reviewed-by: Bin Meng <bmeng@tinylab.org>
 
