@@ -1,79 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pP2M0-0003Ev-W8
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Feb 2023 09:20:22 -0500
+	id 1pP2YL-0005xH-D3
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Feb 2023 09:33:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pP2LV-0002cl-He
- for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 09:19:51 -0500
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <ysato@users.sourceforge.jp>)
+ id 1pP182-0006uv-09
+ for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 08:01:50 -0500
+Received: from hsmtpd-def.xspmail.jp ([202.238.198.244])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pP2LA-0005Az-PG
- for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 09:19:48 -0500
-Received: by mail-pl1-x62e.google.com with SMTP id z1so12227436plg.6
- for <qemu-riscv@nongnu.org>; Mon, 06 Feb 2023 06:19:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KURJL21wa1FUHPhUnCRF4eQkT8aMjQ4b6+/Ubcj9Zqw=;
- b=cQwCXlsiJY5LeIbgEnGd/J8/TUSTKwKIZG3Q98TouthHmuaDUXV0Thn5U9HJXdq+GZ
- jY5kR4ovDRKrULGjF8wJL5FCjB8aqa9tGYWLT5K+xxYnsDJcq5DnKliKiUKGoGXN9NU+
- Q8TfbtM3KMWyJ1aafsrgElfP/K9j7lFLKMfvTU8NCDkCR0IyTV7tI3bkUfu/6Gzm6EFG
- oF1aqCwwDsmasMlPFu5hX/u0l2TXOU84PZr6j6b8LdEcVBSTVkVI4V9f1iY/64TIQfjG
- BC+IYLOZNezvXMF0KdO8OMQicc5acGMkWWDcCDhhFPZ7sm87JudQ3sr7dLOH7jmhGxDF
- P5OA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KURJL21wa1FUHPhUnCRF4eQkT8aMjQ4b6+/Ubcj9Zqw=;
- b=Q2k8OJZuKYmMytcUekLyh1+ppCFnSQO6ZFF3Ub1nCXbLAMG6G9mylmwS0UUxIif725
- rMmT1Kb5SYjopX3hylVV64pqV0/3lgoaMPRsdXNErhOByhNK96nvz+6pYwL2/qOlJQbC
- h5K5hlJe1hcTxNpPqW592iOZgAh0SQ1UCeDMTk/bo4sOymAJ21ebr6LeaVZZqIlj6j9i
- zrL181uQEvPp9D/C6xrP0KRbW32boHxahwbLXxD0Yk3ZpCzOsHz9ikZFNsoIx6FgcFIj
- tBOsFgS4mqY1wYwTywFeYdJF0U5/prqsssgs5qgQrpMbPq2kYdd8QmHJbMODvvMGKzw+
- ppDg==
-X-Gm-Message-State: AO0yUKUNOg4mNXA1aw2Wi307oKh1cF3DAY3/SAup1zltgs9BFjIZh7hV
- izTWDYEL7lSwsIdK5nKLgJ146g==
-X-Google-Smtp-Source: AK7set/OV34mtLqL9el7NX5JGIrijALBcoW0beuU1Y+TJmUGF7hbnBDg2WXa9P5DNFyiY1uIwFjklQ==
-X-Received: by 2002:a05:6a20:65a6:b0:b8:8a94:5bf with SMTP id
- p38-20020a056a2065a600b000b88a9405bfmr17537908pzh.21.1675693167256; 
- Mon, 06 Feb 2023 06:19:27 -0800 (PST)
-Received: from sunil-laptop ([49.206.14.226]) by smtp.gmail.com with ESMTPSA id
- i132-20020a62878a000000b005810c4286d6sm7132789pfe.0.2023.02.06.06.19.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Feb 2023 06:19:26 -0800 (PST)
-Date: Mon, 6 Feb 2023 19:49:20 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>
-Subject: Re: [PATCH 08/10] hw/riscv/Kconfig: virt: Enable ACPI config options
-Message-ID: <Y+EMaGuphDk9mslw@sunil-laptop>
-References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
- <20230202045223.2594627-9-sunilvl@ventanamicro.com>
- <CAEUhbmUGF3DR_XOB1fb6HbLUYM43RMHo92dewo=_94D2mFkcpA@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAEUhbmUGF3DR_XOB1fb6HbLUYM43RMHo92dewo=_94D2mFkcpA@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x62e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <ysato@users.sourceforge.jp>)
+ id 1pP17z-00066r-87
+ for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 08:01:49 -0500
+X-Country-Code: JP
+Received: from sakura.ysato.name (ik1-413-38519.vs.sakura.ne.jp
+ [153.127.30.23])
+ by hsmtpd-out-2.asahinet.cluster.xspmail.jp (Halon) with ESMTPA
+ id a5dd0592-ab2b-4c17-a294-354aa4a0a4e9;
+ Mon, 06 Feb 2023 22:01:41 +0900 (JST)
+Received: from SIOS1075.ysato.ml (ZM005235.ppp.dion.ne.jp [222.8.5.235])
+ by sakura.ysato.name (Postfix) with ESMTPSA id 349111C012C;
+ Mon,  6 Feb 2023 22:01:39 +0900 (JST)
+Date: Mon, 06 Feb 2023 22:01:36 +0900
+Message-ID: <87wn4vrlqn.wl-ysato@users.sourceforge.jp>
+From: Yoshinori Sato <ysato@users.sourceforge.jp>
+To: Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org,
+ Markus Armbruster <armbru@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>, qemu-riscv@nongnu.org
+Subject: Re: [PATCH 18/19] hw/rx: Set QDev properties using QDev API
+In-Reply-To: <20230203180914.49112-19-philmd@linaro.org>
+References: <20230203180914.49112-1-philmd@linaro.org>
+ <20230203180914.49112-19-philmd@linaro.org>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?ISO-8859-4?Q?Goj=F2?=) APEL-LB/10.8 EasyPG/1.0.0
+ Emacs/27.1 (x86_64-pc-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: softfail client-ip=202.238.198.244;
+ envelope-from=ysato@users.sourceforge.jp; helo=hsmtpd-def.xspmail.jp
+X-Spam_score_int: -11
+X-Spam_score: -1.2
+X-Spam_bar: -
+X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_SOFTFAIL=0.665 autolearn=no autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Mon, 06 Feb 2023 09:33:04 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,39 +57,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2023 14:20:06 -0000
+X-List-Received-Date: Mon, 06 Feb 2023 13:01:51 -0000
 
-On Mon, Feb 06, 2023 at 06:29:46PM +0800, Bin Meng wrote:
-> On Thu, Feb 2, 2023 at 12:54 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
-> >
-> > Enable ACPI related config options to build ACPI subsystem
-> > for virt machine.
-> >
-> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > ---
-> >  hw/riscv/Kconfig | 3 +++
-> >  1 file changed, 3 insertions(+)
-> >
-> > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> > index 4550b3b938..92b1a9eb64 100644
-> > --- a/hw/riscv/Kconfig
-> > +++ b/hw/riscv/Kconfig
-> > @@ -44,6 +44,9 @@ config RISCV_VIRT
-> >      select VIRTIO_MMIO
-> >      select FW_CFG_DMA
-> >      select PLATFORM_BUS
-> > +    select ACPI
-> > +    select ACPI_HW_REDUCED
-> 
-> I don't see APIs in ACPI_HW_REDUCED get called by RISC-V virt codes.
-> 
-Yes, this and PCI are not required at this time. Will remove them when I
-send the next revision of this series.
+On Sat, 04 Feb 2023 03:09:13 +0900,
+Philippe Mathieu-Daud=E9 wrote:
+>=20
+> No need to use the low-level QOM API when an object
+> inherits from QDev. Directly use the QDev API to set
+> its properties.
+>=20
+> Signed-off-by: Philippe Mathieu-Daud=E9 <philmd@linaro.org>
+> ---
+>  hw/rx/rx-gdbsim.c | 11 +++++------
+>  1 file changed, 5 insertions(+), 6 deletions(-)
+>=20
+> diff --git a/hw/rx/rx-gdbsim.c b/hw/rx/rx-gdbsim.c
+> index 47c17026c7..5d50f36877 100644
+> --- a/hw/rx/rx-gdbsim.c
+> +++ b/hw/rx/rx-gdbsim.c
+> @@ -21,6 +21,7 @@
+>  #include "qemu/error-report.h"
+>  #include "qemu/guest-random.h"
+>  #include "qapi/error.h"
+> +#include "hw/qdev-properties.h"
+>  #include "hw/loader.h"
+>  #include "hw/rx/rx62n.h"
+>  #include "sysemu/qtest.h"
+> @@ -99,12 +100,10 @@ static void rx_gdbsim_init(MachineState *machine)
+> =20
+>      /* Initialize MCU */
+>      object_initialize_child(OBJECT(machine), "mcu", &s->mcu, rxc->mcu_na=
+me);
+> -    object_property_set_link(OBJECT(&s->mcu), "main-bus", OBJECT(sysmem),
+> -                             &error_abort);
+> -    object_property_set_uint(OBJECT(&s->mcu), "xtal-frequency-hz",
+> -                             rxc->xtal_freq_hz, &error_abort);
+> -    object_property_set_bool(OBJECT(&s->mcu), "load-kernel",
+> -                             kernel_filename !=3D NULL, &error_abort);
+> +    qdev_prop_set_link(DEVICE(&s->mcu), "main-bus", OBJECT(sysmem));
+> +    qdev_prop_set_uint32(DEVICE(&s->mcu), "xtal-frequency-hz",
+> +                         rxc->xtal_freq_hz);
+> +    qdev_prop_set_bit(DEVICE(&s->mcu), "load-kernel", kernel_filename !=
+=3D NULL);
+> =20
+>      if (!kernel_filename) {
+>          if (machine->firmware) {
+> --=20
+> 2.38.1
+>=20
 
-Thanks
-Sunil
-> > +    select ACPI_PCI
-> 
-> Regards,
-> Bin
+Reviewed-by: Yoshinori Sato <ysato@users.sourceforge.jp>
+
+--=20
+Yosinori Sato
 
