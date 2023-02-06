@@ -1,69 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pP232-0007qi-96
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Feb 2023 09:00:44 -0500
+	id 1pP2M0-0003Ev-W8
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Feb 2023 09:20:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pP22w-0007od-4Q
- for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 09:00:39 -0500
-Received: from mail-oi1-x234.google.com ([2607:f8b0:4864:20::234])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1pP2LV-0002cl-He
+ for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 09:19:51 -0500
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pP22u-0000fI-Ck
- for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 09:00:37 -0500
-Received: by mail-oi1-x234.google.com with SMTP id r28so9786659oiw.3
- for <qemu-riscv@nongnu.org>; Mon, 06 Feb 2023 06:00:36 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1pP2LA-0005Az-PG
+ for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 09:19:48 -0500
+Received: by mail-pl1-x62e.google.com with SMTP id z1so12227436plg.6
+ for <qemu-riscv@nongnu.org>; Mon, 06 Feb 2023 06:19:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PQ1DGt6dxRvvCfgagSgAnk05yahbN85wZ/YBnPu3ZTQ=;
- b=HC+NUtEqJTNncCMRzh1urqr7TVZNiCHpvxiYAGnLY2P2GsnNujRtFXwaQ3AddqLm//
- eDrKU+DFb8E+lFYcMRCMF1/MJCNyNDl6NC2qptkegYetxmlvUFk5DOmCch7+whwQFEfS
- ViJJPUd79QWJI2ZmEMGqiqUYYTrL3FWoGoiD5l67hWxQF30DSnjavwY1qms/NBvxxsph
- PamcBQXUUNYln6pWr2TDYckJLCwEL0MK8XQPI7vkvV9m/5lOlX0tIo6/AGjag/t1UlJI
- 2jiZJAwAD9vWJVhwgrJcCPR1ugu8pajg0P6d9vgUrEliugi5JUJzergF5ULOGNxT7JX+
- 5pNQ==
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KURJL21wa1FUHPhUnCRF4eQkT8aMjQ4b6+/Ubcj9Zqw=;
+ b=cQwCXlsiJY5LeIbgEnGd/J8/TUSTKwKIZG3Q98TouthHmuaDUXV0Thn5U9HJXdq+GZ
+ jY5kR4ovDRKrULGjF8wJL5FCjB8aqa9tGYWLT5K+xxYnsDJcq5DnKliKiUKGoGXN9NU+
+ Q8TfbtM3KMWyJ1aafsrgElfP/K9j7lFLKMfvTU8NCDkCR0IyTV7tI3bkUfu/6Gzm6EFG
+ oF1aqCwwDsmasMlPFu5hX/u0l2TXOU84PZr6j6b8LdEcVBSTVkVI4V9f1iY/64TIQfjG
+ BC+IYLOZNezvXMF0KdO8OMQicc5acGMkWWDcCDhhFPZ7sm87JudQ3sr7dLOH7jmhGxDF
+ P5OA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PQ1DGt6dxRvvCfgagSgAnk05yahbN85wZ/YBnPu3ZTQ=;
- b=ZQD/kIaxMMpMOKYIot4BRs+5jWZgeQLfDSsnyxYQ0nWpPjj8Mvk4mgo5yNokMyNOsY
- fv95dk14C0LJ7wpu9P+ZOIDXOEL9kKH63wqyAdkPm+ktVeOBHfO9OwQUExAtWv0MDJID
- ugiTXEzC9JVsE97WZHRR7Eh2yYW3djxmcEu9p0QTHE7EqqyPUyqOPI/bdipqU5OeCf5a
- 2ZexRFFkWQEQv6L3oHm5bn185fb2bC7CqzW0f5NQaPC13MYVoJEGwCKgIKYN2tC07nQB
- C4cmlb7BrWhv0k5Ij5IfoC33Zh2SOSpxdkRX0Nwu1hqfKIW/3p2xboTKFStRZo0j0VKv
- kUAQ==
-X-Gm-Message-State: AO0yUKUozQ8hY6Fp7sDBgyDh/+4sGGIa6MUP+PzAKDM53Id0yW/z/yCP
- MB+l+Ydn0Sazm9htJ2n11HGskE2vGri6A4Kuq5M=
-X-Google-Smtp-Source: AK7set8x7lt76J/Yy6Qx2LsKLvisXjc0mq9fnW7TRMscyd8hiELCFn/DzsjFt4KLCdogNAgCkV4FCw==
-X-Received: by 2002:a05:6808:a98:b0:364:fc2c:687a with SMTP id
- q24-20020a0568080a9800b00364fc2c687amr10910921oij.57.1675692035276; 
- Mon, 06 Feb 2023 06:00:35 -0800 (PST)
-Received: from grind.. ([191.19.125.138]) by smtp.gmail.com with ESMTPSA id
- s13-20020a0568080b0d00b00364e8f85c08sm4151177oij.21.2023.02.06.06.00.32
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KURJL21wa1FUHPhUnCRF4eQkT8aMjQ4b6+/Ubcj9Zqw=;
+ b=Q2k8OJZuKYmMytcUekLyh1+ppCFnSQO6ZFF3Ub1nCXbLAMG6G9mylmwS0UUxIif725
+ rMmT1Kb5SYjopX3hylVV64pqV0/3lgoaMPRsdXNErhOByhNK96nvz+6pYwL2/qOlJQbC
+ h5K5hlJe1hcTxNpPqW592iOZgAh0SQ1UCeDMTk/bo4sOymAJ21ebr6LeaVZZqIlj6j9i
+ zrL181uQEvPp9D/C6xrP0KRbW32boHxahwbLXxD0Yk3ZpCzOsHz9ikZFNsoIx6FgcFIj
+ tBOsFgS4mqY1wYwTywFeYdJF0U5/prqsssgs5qgQrpMbPq2kYdd8QmHJbMODvvMGKzw+
+ ppDg==
+X-Gm-Message-State: AO0yUKUNOg4mNXA1aw2Wi307oKh1cF3DAY3/SAup1zltgs9BFjIZh7hV
+ izTWDYEL7lSwsIdK5nKLgJ146g==
+X-Google-Smtp-Source: AK7set/OV34mtLqL9el7NX5JGIrijALBcoW0beuU1Y+TJmUGF7hbnBDg2WXa9P5DNFyiY1uIwFjklQ==
+X-Received: by 2002:a05:6a20:65a6:b0:b8:8a94:5bf with SMTP id
+ p38-20020a056a2065a600b000b88a9405bfmr17537908pzh.21.1675693167256; 
+ Mon, 06 Feb 2023 06:19:27 -0800 (PST)
+Received: from sunil-laptop ([49.206.14.226]) by smtp.gmail.com with ESMTPSA id
+ i132-20020a62878a000000b005810c4286d6sm7132789pfe.0.2023.02.06.06.19.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Feb 2023 06:00:34 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Bin Meng <bmeng@tinylab.org>
-Subject: [PATCH v11 3/3] hw/riscv/boot.c: make riscv_load_initrd() static
-Date: Mon,  6 Feb 2023 11:00:22 -0300
-Message-Id: <20230206140022.2748401-4-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230206140022.2748401-1-dbarboza@ventanamicro.com>
-References: <20230206140022.2748401-1-dbarboza@ventanamicro.com>
+ Mon, 06 Feb 2023 06:19:26 -0800 (PST)
+Date: Mon, 6 Feb 2023 19:49:20 +0530
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Andrew Jones <ajones@ventanamicro.com>,
+ Anup Patel <apatel@ventanamicro.com>,
+ Atish Kumar Patra <atishp@rivosinc.com>
+Subject: Re: [PATCH 08/10] hw/riscv/Kconfig: virt: Enable ACPI config options
+Message-ID: <Y+EMaGuphDk9mslw@sunil-laptop>
+References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
+ <20230202045223.2594627-9-sunilvl@ventanamicro.com>
+ <CAEUhbmUGF3DR_XOB1fb6HbLUYM43RMHo92dewo=_94D2mFkcpA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::234;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x234.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAEUhbmUGF3DR_XOB1fb6HbLUYM43RMHo92dewo=_94D2mFkcpA@mail.gmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,131 +85,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2023 14:00:39 -0000
+X-List-Received-Date: Mon, 06 Feb 2023 14:20:06 -0000
 
-The only remaining caller is riscv_load_kernel_and_initrd() which
-belongs to the same file.
+On Mon, Feb 06, 2023 at 06:29:46PM +0800, Bin Meng wrote:
+> On Thu, Feb 2, 2023 at 12:54 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
+> >
+> > Enable ACPI related config options to build ACPI subsystem
+> > for virt machine.
+> >
+> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> > ---
+> >  hw/riscv/Kconfig | 3 +++
+> >  1 file changed, 3 insertions(+)
+> >
+> > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> > index 4550b3b938..92b1a9eb64 100644
+> > --- a/hw/riscv/Kconfig
+> > +++ b/hw/riscv/Kconfig
+> > @@ -44,6 +44,9 @@ config RISCV_VIRT
+> >      select VIRTIO_MMIO
+> >      select FW_CFG_DMA
+> >      select PLATFORM_BUS
+> > +    select ACPI
+> > +    select ACPI_HW_REDUCED
+> 
+> I don't see APIs in ACPI_HW_REDUCED get called by RISC-V virt codes.
+> 
+Yes, this and PCI are not required at this time. Will remove them when I
+send the next revision of this series.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/boot.c         | 80 ++++++++++++++++++++---------------------
- include/hw/riscv/boot.h |  1 -
- 2 files changed, 40 insertions(+), 41 deletions(-)
-
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 4954bb9d4b..52bf8e67de 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -173,6 +173,46 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
-     exit(1);
- }
- 
-+static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
-+{
-+    const char *filename = machine->initrd_filename;
-+    uint64_t mem_size = machine->ram_size;
-+    void *fdt = machine->fdt;
-+    hwaddr start, end;
-+    ssize_t size;
-+
-+    g_assert(filename != NULL);
-+
-+    /*
-+     * We want to put the initrd far enough into RAM that when the
-+     * kernel is uncompressed it will not clobber the initrd. However
-+     * on boards without much RAM we must ensure that we still leave
-+     * enough room for a decent sized initrd, and on boards with large
-+     * amounts of RAM we must avoid the initrd being so far up in RAM
-+     * that it is outside lowmem and inaccessible to the kernel.
-+     * So for boards with less  than 256MB of RAM we put the initrd
-+     * halfway into RAM, and for boards with 256MB of RAM or more we put
-+     * the initrd at 128MB.
-+     */
-+    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
-+
-+    size = load_ramdisk(filename, start, mem_size - start);
-+    if (size == -1) {
-+        size = load_image_targphys(filename, start, mem_size - start);
-+        if (size == -1) {
-+            error_report("could not load ramdisk '%s'", filename);
-+            exit(1);
-+        }
-+    }
-+
-+    /* Some RISC-V machines (e.g. opentitan) don't have a fdt. */
-+    if (fdt) {
-+        end = start + size;
-+        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-start", start);
-+        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end", end);
-+    }
-+}
-+
- target_ulong riscv_load_kernel(MachineState *machine,
-                                RISCVHartArrayState *harts,
-                                target_ulong kernel_start_addr,
-@@ -234,46 +274,6 @@ out:
-     return kernel_entry;
- }
- 
--void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
--{
--    const char *filename = machine->initrd_filename;
--    uint64_t mem_size = machine->ram_size;
--    void *fdt = machine->fdt;
--    hwaddr start, end;
--    ssize_t size;
--
--    g_assert(filename != NULL);
--
--    /*
--     * We want to put the initrd far enough into RAM that when the
--     * kernel is uncompressed it will not clobber the initrd. However
--     * on boards without much RAM we must ensure that we still leave
--     * enough room for a decent sized initrd, and on boards with large
--     * amounts of RAM we must avoid the initrd being so far up in RAM
--     * that it is outside lowmem and inaccessible to the kernel.
--     * So for boards with less  than 256MB of RAM we put the initrd
--     * halfway into RAM, and for boards with 256MB of RAM or more we put
--     * the initrd at 128MB.
--     */
--    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
--
--    size = load_ramdisk(filename, start, mem_size - start);
--    if (size == -1) {
--        size = load_image_targphys(filename, start, mem_size - start);
--        if (size == -1) {
--            error_report("could not load ramdisk '%s'", filename);
--            exit(1);
--        }
--    }
--
--    /* Some RISC-V machines (e.g. opentitan) don't have a fdt. */
--    if (fdt) {
--        end = start + size;
--        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-start", start);
--        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end", end);
--    }
--}
--
- /*
-  * This function makes an assumption that the DRAM interval
-  * 'dram_base' + 'dram_size' is contiguous.
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index ea1de8b020..a2e4ae9cb0 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -48,7 +48,6 @@ target_ulong riscv_load_kernel(MachineState *machine,
-                                target_ulong firmware_end_addr,
-                                bool load_initrd,
-                                symbol_fn_t sym_cb);
--void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry);
- uint64_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size,
-                                 MachineState *ms);
- void riscv_load_fdt(hwaddr fdt_addr, void *fdt);
--- 
-2.39.1
-
+Thanks
+Sunil
+> > +    select ACPI_PCI
+> 
+> Regards,
+> Bin
 
