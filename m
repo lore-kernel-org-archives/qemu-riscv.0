@@ -1,79 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pP7ZQ-00036q-BI
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Feb 2023 14:54:32 -0500
+	id 1pP7wu-00084Q-0M
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Feb 2023 15:18:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pP7ZM-00036X-I9
- for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 14:54:28 -0500
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pP7wp-000816-Mj
+ for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 15:18:44 -0500
+Received: from mail-oo1-xc34.google.com ([2607:f8b0:4864:20::c34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pP7ZK-0000HW-MG
- for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 14:54:27 -0500
-Received: by mail-pj1-x1035.google.com with SMTP id
- n20-20020a17090aab9400b00229ca6a4636so16298938pjq.0
- for <qemu-riscv@nongnu.org>; Mon, 06 Feb 2023 11:54:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pP7wn-00054D-W0
+ for qemu-riscv@nongnu.org; Mon, 06 Feb 2023 15:18:43 -0500
+Received: by mail-oo1-xc34.google.com with SMTP id
+ y81-20020a4a4554000000b0051a7cd153ddso446469ooa.10
+ for <qemu-riscv@nongnu.org>; Mon, 06 Feb 2023 12:18:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=NV38CU3hEYCJgKe3Y1sJyLz9TyPHCnjRcy4RMqB+Vbc=;
- b=y8LcpvpouaAoqudKnoF67uhyuAOxWdwypWodlbZEtbueaUcW0yxga5e1JhoJH96drP
- cJwG9sC5mJgy3H33jlYiklvPkZ+/W1v3kzftcnfub2hcxQUsSPWZguMY8Hx0NtXSic1B
- OmI9K0ZhP5FIYBxUngW1CZ518bsvme/C8KDignP/HSjOFZQXk+ytpLVJdFZNmCBxMmcA
- Ii7YXO0mIA3t0OpQBQrZIktUNl+lCfo3Nfco3yFDYEfV6IPmuu9ur/Yyd2Tj8WvOp6+J
- rfTzdDCNX4X27RSUSnO+vzKBE+Xzq/d+atPeaWGuylDpu+fdpplbR8rTHPDH68JuS0UV
- 5NWg==
+ bh=x78Jif3QAdalrc8WzGLO8KvwP+8HpbsW1oZCYsmjQbw=;
+ b=JQnwhLzs8zJK8x8+OqaS+340ZyUyzCqZXcb0tiq+Nri8vQgdc/8xv/IsHdQdeV1cR2
+ a7y1AJPm70ttj4/7EI2n3W3rUGvyg9YN4T60t7PXN4UZfo/CklD4mAPqF3sHr1Y9BPYS
+ Mx7Y1/eyV8c0sO1efaUyEsDjkCKe4+PQQqn1ViPzQJehPmEApgsLCl2beRkKgwzaQ4GY
+ 9tTfLPq8tFnJXZycyTTBTZIP97hN9LRLnqppcIjaK23fcmaZruhCZISbs3vmO/7uo9fi
+ dx+tfJSam1UO0MkkvQ3+H5NSTHESNIkZ1zv0lMP89W9eoADstIPbU2P/DxCouDY5REGe
+ TPEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NV38CU3hEYCJgKe3Y1sJyLz9TyPHCnjRcy4RMqB+Vbc=;
- b=YBg8BgnttuWsKgbUwK6zJ44X5H5fH5YKrfEnj/VnRkvfRgEWDrJfJ02pgUKYRabYNx
- bwgrCJ5zVrmGobe41V2hl/wwwHV0wpxRN+NAapBr4GeqI2jLKgeGds73vrBZPGWSQE2k
- sLx+bT7jpbTIlH6GQYO8lmZ23ALQ4OZgmVlAQ9UzPUIH3EcI2mc8FAkju5DPMcdRrCMg
- pysIjv3I0PuLH2lf5lS58bK+Xej6lHQanktETFrl0JEp6AxanAS/J4ZnbjdRMz9tDC1a
- OnjR+U0Ek4JWC57SRGCFxbxK0GB2G1SXjQP8h8xIMkXVt2aiEVJCYKc/TTfg+1MnmhVC
- CoTg==
-X-Gm-Message-State: AO0yUKXeCCd0XZBq8XveyaUJsPf71jcRlPDHs+2zEn+8lNKV6mGbhCLd
- PGFDuRiUX06Rj1x376iU30VL2A==
-X-Google-Smtp-Source: AK7set9VRqF/Ve6tfoWaO6yd6/FXhbUiLuOHV41Ks8pbCReHajBwl4KeANGmKQyC0ZAyweHsweSS1g==
-X-Received: by 2002:a05:6a21:6d9f:b0:bc:bf86:660 with SMTP id
- wl31-20020a056a216d9f00b000bcbf860660mr399935pzb.45.1675713265187; 
- Mon, 06 Feb 2023 11:54:25 -0800 (PST)
-Received: from [192.168.101.227] (rrcs-74-87-59-234.west.biz.rr.com.
- [74.87.59.234]) by smtp.gmail.com with ESMTPSA id
- b125-20020a621b83000000b0058e24050648sm7810215pfb.12.2023.02.06.11.54.23
+ bh=x78Jif3QAdalrc8WzGLO8KvwP+8HpbsW1oZCYsmjQbw=;
+ b=NahwUDh1eeAz6Pi8ubumLzCW6gNTosxCEG7+Me6B4lCfc5KObwF1CGMTFo/81USB/j
+ +alJIGkbOrj81xi/N/mvfzWfYQkHly+TFkOSPY408AmLLG4+Z4LFVE3sddMsN0cwx8lk
+ m5Ib9MklztT8Bde8kR5MpXp24sZnl0nv85Oa4Isq0CoKMEakzZvOuX0FHqVPkrs7Tay1
+ WyNssH/PsLfHGVlTft9iL51KVwgJhwX/bfhlcvDI1fIsZjDcrC6pTxx0ekDLYoxzHo4j
+ Z49vItvI7+W2Eayfws8DOwC4DFu3Um8gteDWHdjQRPUSrFBzAu1asSQUNob+CEJkXtIY
+ iafg==
+X-Gm-Message-State: AO0yUKU67dgww3G93XMuHtwC1ZAUbX93KKWBsMfpwD/HjEDVGWqkagfv
+ 2aCabIA4BGG8vCC4S0f1NfrPsg==
+X-Google-Smtp-Source: AK7set8Rht0129IGbcMhXqz3dQyySYEX1SMIvcY3lT4MoO4/KthzPR5E+ITSD0d/+k2GgZ4ZPZbmNw==
+X-Received: by 2002:a4a:91c6:0:b0:4fa:325e:ebb0 with SMTP id
+ e6-20020a4a91c6000000b004fa325eebb0mr114997ooh.5.1675714719382; 
+ Mon, 06 Feb 2023 12:18:39 -0800 (PST)
+Received: from [192.168.68.107] ([191.19.125.138])
+ by smtp.gmail.com with ESMTPSA id
+ w1-20020a4a2741000000b004f269f9b8f3sm4493974oow.25.2023.02.06.12.18.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Feb 2023 11:54:24 -0800 (PST)
-Message-ID: <21b58cf5-af07-95e3-8253-29d5b12d12e1@linaro.org>
-Date: Mon, 6 Feb 2023 09:54:21 -1000
+ Mon, 06 Feb 2023 12:18:38 -0800 (PST)
+Message-ID: <b3105db2-d36b-b12c-fd0b-863cf82f938f@ventanamicro.com>
+Date: Mon, 6 Feb 2023 17:18:35 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
+ Thunderbird/102.6.0
 Subject: Re: [PATCH v11 2/3] hw/riscv/boot.c: consolidate all kernel init in
  riscv_load_kernel()
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng@tinylab.org>
 References: <20230206140022.2748401-1-dbarboza@ventanamicro.com>
  <20230206140022.2748401-3-dbarboza@ventanamicro.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230206140022.2748401-3-dbarboza@ventanamicro.com>
+ <21b58cf5-af07-95e3-8253-29d5b12d12e1@linaro.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <21b58cf5-af07-95e3-8253-29d5b12d12e1@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1035.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c34;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc34.google.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
 X-Spam_bar: ---
 X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.148,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,19 +88,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2023 19:54:29 -0000
-
-On 2/6/23 04:00, Daniel Henrique Barboza wrote:
-> To not change the behavior of boards that aren't calling
-> riscv_load_init(), add an 'load_initrd' flag to riscv_load_kernel() and
-> allow these boards to opt out from initrd loading.
-
-Surely this is simply a bug for those boards.
-
-I cannot believe, for instance, that sifive_u should allow initrd and sifive_e must not.
-
-Backward compatible behaviour is had simply by not providing the command-line argument.
+X-List-Received-Date: Mon, 06 Feb 2023 20:18:45 -0000
 
 
-r~
+
+On 2/6/23 16:54, Richard Henderson wrote:
+> On 2/6/23 04:00, Daniel Henrique Barboza wrote:
+>> To not change the behavior of boards that aren't calling
+>> riscv_load_init(), add an 'load_initrd' flag to riscv_load_kernel() and
+>> allow these boards to opt out from initrd loading.
+> 
+> Surely this is simply a bug for those boards.
+> 
+> I cannot believe, for instance, that sifive_u should allow initrd and sifive_e must not.
+> 
+> Backward compatible behaviour is had simply by not providing the command-line argument.
+
+That makes sense but the question here is whether the sifive_e board supports
+-initrd if the option is provided. I tend to believe that it does, and the current
+code state is mostly an oversight (we forgot to add load_initrd() support for the
+board) rather than an intentional design choice, but since I'm not sure about
+it I opted for playing it safe.
+
+If someone can guarantee that the sifive_e and the opentitan boards are capable of
+-initrd loading I can re-send this patch without the 'load_initrd' flag.
+
+
+Thanks,
+
+Daniel
+
+> 
+> 
+> r~
 
