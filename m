@@ -1,68 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPKxf-0006gB-1U
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 05:12:27 -0500
+	id 1pPKzm-00015N-Jb
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 05:14:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pPKxS-0006AS-9P
- for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 05:12:16 -0500
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1pPKzj-0000oz-JI
+ for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 05:14:35 -0500
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pPKxQ-0003ot-1x
- for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 05:12:13 -0500
-Received: by mail-pl1-x636.google.com with SMTP id u9so10865937plf.3
- for <qemu-riscv@nongnu.org>; Tue, 07 Feb 2023 02:12:11 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1pPKzh-00048t-LD
+ for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 05:14:35 -0500
+Received: by mail-ej1-x629.google.com with SMTP id hx15so41751302ejc.11
+ for <qemu-riscv@nongnu.org>; Tue, 07 Feb 2023 02:14:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=in-reply-to:content-transfer-encoding:content-disposition
  :mime-version:references:message-id:subject:cc:to:from:date:from:to
  :cc:subject:date:message-id:reply-to;
- bh=qCC/6ycsZZB3tzhI/SogW4IH9/TPK6tsBxHCQ7Wvksg=;
- b=P0270ZMXDYfxBf9ngr82xuv7XCHpSfaPh+7ZQSsfLAUGqtGVxi0zCRkf3zoSGSZfoX
- SCy5hXOcj4tPGpaP+Jt3JqQNjij5ct2YN0Rs1LzFasYeUVUlOqshNR63yyOB1XeW9jpY
- PqdzMWdOSipDUFu3kBS0FreC7zfc5SMTD5aTb3XZKo95yZWrlIJRcipwlXp//MDyVfqr
- MJ7KAv5FMvhm7okuNVCneWu07HI5nlnK3nk+DgUE3M0dOGDHHBpH1N/nCiYrRidGRTiq
- pb1UFArNhpwtbdGQSvgE6rH5SkQsmSDXU+o2UGsMEO7RCc4EuHGik1h6QRX6+28AtU8Q
- T1kg==
+ bh=3pjjceatJIncK2q3ah92DQJl3vhq+A75Q98cBXvH02Q=;
+ b=n195x277FZQjIaMhV6fyovqna5rG13y13EOuyBGtUzIdWkpFr9Yysp6veQT5GqjMwG
+ KBKnKHnBeYXiAw9gkeY102lCzEzZPopjq0KsQ6RkY38BDefGcQbWKmNex+fMitTTno6b
+ SjoiIsqgGJn6HBgxnl2cZj3XL9C/p6iGOsXYAZGnUxngFO+5WOteNxZVLbrGHFyqT6BB
+ ggC0u4vocy1Widq0NOx2I8DFrjhzGChwrylghpepnNWvNSlfgXWAKiRqWUDDwtEL8FlU
+ Kq7SFGZ7e4ImCkWgLrNCHw4rF4K66PEJWo5XJkhx22hLP0S6sRZJb9uKrr2d0d/UF9Ca
+ di7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=in-reply-to:content-transfer-encoding:content-disposition
  :mime-version:references:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qCC/6ycsZZB3tzhI/SogW4IH9/TPK6tsBxHCQ7Wvksg=;
- b=3mQzn7U6zsgZTKtVqopRf8gZWJAYVFMFETmQc88VPmo8DbQep+pzkx22RUSe37V16M
- JamO9tuey5nGsER5mKV8cPxLj1G7E5Fd8WtTmahXb0Ea7x0p4zDUL803bMjNAJJ0LInx
- 6NiqVm8UMKFy8PNDok97XYgheO8OXp2RdDv3e5OQ9aUq5OjUVDeUri7fX54GarxozVwl
- 4/0UPwJS3NAXxytZq9Dj9UTIuScY1ovBJ86BOT98bF3c57nuh71zJqfYzQQXzxFFRBMG
- 33es8yXnmQvQp1AoaVK6MprcCiAmI9mvEPXbFFKgWL2KjPGkAeNnbgOo6CKv/OXYVN1z
- p8Zw==
-X-Gm-Message-State: AO0yUKWQZB7Rozy9yEySzuuG/SEA4VeKI26JelSpb8QCuDcXuXtovf3t
- 70BlMVrVP3vMqaK9O0bHPZbgyA==
-X-Google-Smtp-Source: AK7set8XeNXaL3EFUz54Tf3nC/GHOLaSMlvKyCoxzqYPtRhlsXiJnafC53oxfVmTc1c9FlO+0xp1iw==
-X-Received: by 2002:a17:90a:f2d4:b0:230:d3a1:ba03 with SMTP id
- gt20-20020a17090af2d400b00230d3a1ba03mr3329559pjb.43.1675764730363; 
- Tue, 07 Feb 2023 02:12:10 -0800 (PST)
-Received: from sunil-laptop ([49.206.14.226]) by smtp.gmail.com with ESMTPSA id
- z19-20020a17090ad79300b00230da56ddecsm1685727pju.27.2023.02.07.02.12.05
+ bh=3pjjceatJIncK2q3ah92DQJl3vhq+A75Q98cBXvH02Q=;
+ b=tGe/DfMUeDLudpXbDLOZBcMEK+vgoqru0cLJeQxC0SxxpkbDYz7LIH6tWNHuGOhvsU
+ mI9CDnCyHNTTGdS+KkVpNnnyBM+E0fIM5dShW2OOdiPvG+/g/A4HfYK+lJbBEW5mGMKs
+ QPxkoNHd0stvap3loqFlmFkJxTvInroGNXvoB6HK4HGVkZq/rXdpvB/7oa4olTjyUl/W
+ 58fW4ULw2Jaxgj8+20bQICPpdp2NeJ3ykoCUkmYMolkQtRAv7/8wnunw+IYbhEiAl02D
+ cmGuRL5Hz6nBN3K1OnivYSpbXOFJZRhRfEFAAzxZEM+rsDQLGEtQvaSCIpASvnaVBjn8
+ +xUg==
+X-Gm-Message-State: AO0yUKV+J81YZXqVPFX7/ir/qpQfE3Vr5oSHMuuevsQFKc2Tva0XmfDU
+ TtrRSgwqcSsAftQeHtOTDsUPaA==
+X-Google-Smtp-Source: AK7set/r9IELqpnQW1KkJye6qYWkBD7VVkl+5TvzGXQzAv1qaLHaS0GnuffYm0gs6T5gYieevzoFsw==
+X-Received: by 2002:a17:906:4344:b0:7c0:d609:6f9b with SMTP id
+ z4-20020a170906434400b007c0d6096f9bmr2565018ejm.27.1675764872093; 
+ Tue, 07 Feb 2023 02:14:32 -0800 (PST)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ by smtp.gmail.com with ESMTPSA id
+ j2-20020a1709066dc200b008787e94c5ccsm6628331ejt.184.2023.02.07.02.14.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Feb 2023 02:12:10 -0800 (PST)
-Date: Tue, 7 Feb 2023 15:42:01 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
+ Tue, 07 Feb 2023 02:14:31 -0800 (PST)
+Date: Tue, 7 Feb 2023 11:14:30 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
 To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 Cc: Gerd Hoffmann <kraxel@redhat.com>, Andrea Bolognani <abologna@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ Sunil V L <sunilvl@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>,
+ qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>,
  Atish Kumar Patra <atishp@rivosinc.com>,
  Ani Sinha <ani@anisinha.ca>, "Michael S. Tsirkin" <mst@redhat.com>,
  Markus Armbruster <armbru@redhat.com>,
  Igor Mammedov <imammedo@redhat.com>, Thomas Huth <thuth@redhat.com>,
  Bernhard Beschow <shentey@gmail.com>
 Subject: Re: [PATCH 02/10] hw/riscv/virt: Add a switch to enable/disable ACPI
-Message-ID: <Y+Ij8ey7NduVgiQY@sunil-laptop>
+Message-ID: <20230207101430.k3asm7s3f6gz54i4@orel>
 References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
  <20230202045223.2594627-3-sunilvl@ventanamicro.com>
  <CABJz62PFGT1H-AArbfTkpiX24mHU=q3wk7h-bpduZhJyy7tTLw@mail.gmail.com>
@@ -70,12 +70,12 @@ References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
  <20230206125610.nmo2bbbd5kosihav@sirius.home.kraxel.org>
  <25504aa3-20e3-d7e6-4111-c956370949ba@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 In-Reply-To: <25504aa3-20e3-d7e6-4111-c956370949ba@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,11 +95,11 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2023 10:12:18 -0000
+X-List-Received-Date: Tue, 07 Feb 2023 10:14:36 -0000
 
-On Tue, Feb 07, 2023 at 09:50:29AM +0100, Philippe Mathieu-DaudÃ© wrote:
+On Tue, Feb 07, 2023 at 09:50:29AM +0100, Philippe Mathieu-Daudé wrote:
 > On 6/2/23 13:56, Gerd Hoffmann wrote:
-> > On Mon, Feb 06, 2023 at 12:18:06PM +0100, Philippe Mathieu-DaudÃ© wrote:
+> > On Mon, Feb 06, 2023 at 12:18:06PM +0100, Philippe Mathieu-Daudé wrote:
 > > > On 6/2/23 11:54, Andrea Bolognani wrote:
 > > > > On Thu, Feb 02, 2023 at 10:22:15AM +0530, Sunil V L wrote:
 > > > > > +    object_class_property_add(oc, "acpi", "OnOffAuto",
@@ -131,10 +131,17 @@ On Tue, Feb 07, 2023 at 09:50:29AM +0100, Philippe Mathieu-DaudÃ© wrote:
 > Yeah I concur. There is no point in disabling ACPI on the RISCV virt
 > machine IMO.
 
-Thank you all for the inputs. I am fine to keep it enabled by default.
-Do you mean we don't need the switch at all even for some
-testing/debugging purpose?
+edk2 will only present DT or ACPI to the guest, not both. However, RISCV
+Linux supports both. If we don't offer '-no-acpi' as a way to switch to
+DT, then edk2+DT users will need to configure the varstore to select it.
+And, since testing needs to be done with both, that varstore change will
+need to be added to all the testcases which need DT (or a varstore with
+DT already selected will need to be maintained and used by the testsuites)
+
+IMO, the generation of the ACPI tables should be 'on' by default, but then
+the, already present, '-no-acpi' command line option should be made
+available in order to easily inform edk2 to present DT instead of ACPI.
 
 Thanks,
-Sunil
+drew
 
