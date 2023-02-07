@@ -1,81 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPAh5-0002hW-Sq
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Feb 2023 18:14:39 -0500
+	id 1pPELT-0005hy-Gf
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Feb 2023 22:08:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1pPAh4-0002hJ-Cc; Mon, 06 Feb 2023 18:14:38 -0500
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pPELR-0005he-Ur; Mon, 06 Feb 2023 22:08:33 -0500
+Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <shentey@gmail.com>)
- id 1pPAh2-0002VY-Lj; Mon, 06 Feb 2023 18:14:38 -0500
-Received: by mail-ed1-x52a.google.com with SMTP id q19so13306626edd.2;
- Mon, 06 Feb 2023 15:14:35 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pPELH-0001Ih-CU; Mon, 06 Feb 2023 22:08:33 -0500
+Received: by mail-vs1-xe2c.google.com with SMTP id k6so14903298vsk.1;
+ Mon, 06 Feb 2023 19:08:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:subject:cc:to:from:date:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/ngiEMXaS35d3mnB3bo/M5KdP1MctJ4Wodp21fE0vZc=;
- b=OguZRuxdI247Tg5UrDPvM5EgwPuDxGW0nPeP6ChW7cClhcDSKMI52pcCayk5sm8FxP
- QyaZM4QHoGgOzRmXoGPTFk3nOPXsqX6wynfnvKCQfePNKP6ppt6A5csKLsiTQ8KC5wSn
- HSgMFG8Ns/qV+eV3ytoHPRgax5mdOpUlT2An2UGIqES/Du36VCG2WmtR54GyEM9p0dwP
- vQS5/0cDU1SAm7unki9rBsciNl+8BbyhX9EqDU9Mm4UjbuJt1SXLnhQMKp0tcPla1DbI
- bskcoLHlsbZg3lEux/SN7JNY31vENN5jOzUKTg7lAaHxs5WlU24geI/YMSdpBJDvb7d2
- rUMg==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=44Zji4UkG2JMCVgwOWwwU78WxsX66yvpm/FwQSnpvUc=;
+ b=jT1rvtmwSRGOaS3JO0Xv3SCLlEllJSk9UD2OjTs/ywN8Y/58vLXOIxqrltpajRaXVU
+ Cw2cfeWl4had1eHChevyg/J5GsFyePoybfH30or5IzTk2cKsWEAWOt0qSjDjGNP/Po5I
+ /xldq0j5u76ARP1drvIKb9IqBaWC/p21L8kOpleWlC54YFxumqTCBwyzlUjRG1Vb7HYD
+ R2dadnDbHnoMXzTkT6kdHTn2mVPHAE1zQbRujtRmlV8KseT/Ux0UPZqe0gbwqo1ujgnb
+ Ml7i7gNNlWGc6jABl4zjlar1yxZQYdgfrxZ58XOUoRtdNzLQA6AQUwk71y214Ye+p4zT
+ jFcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/ngiEMXaS35d3mnB3bo/M5KdP1MctJ4Wodp21fE0vZc=;
- b=QadrmcmZxj7GdM0ozcZoGV2RtfqcbGCPHA5ygZa0wadTJX8IcvIbLwZKtF/DqwWmt1
- 7y8J4uIRk/3qUWBOyxYsvH35SAcFNt5H/2hf6A2fJTYL2TBrUOFNk6NmhM4bdRnzY/As
- teRB3b+BGSCobgPvuWDY2ko4U/aLmbQaZ27sRDlETaXnN8RTXO2ntTPNVBU6TYXqxgDA
- BI2HC8OHG+M2SIZry+CfUfbemHM0vu9myNJYNBHC6vOWR+ioFI4uMrRYBqPXfrfMjMW8
- 4nnjF88gqndRchtBt9yBwfaCxCc6TQce88X3AN0lIwjTmFo54n1r+vfYemnC6BRX42FJ
- /Opw==
-X-Gm-Message-State: AO0yUKX/FxrFQUYAuFEO0390fsGiM+W2HVMbspHVl41XOLPRMlAk+mAJ
- 6txLDgJe4tufKFGLrOYmPSU=
-X-Google-Smtp-Source: AK7set+PUCXKMew/Gw29Ihb13n1wK9ex5D1Si1VKS5NhdBRynjEnJ0NDNvyFEkMlGTeXDl1gOap1ig==
-X-Received: by 2002:a50:9e0f:0:b0:4a2:1263:bbab with SMTP id
- z15-20020a509e0f000000b004a21263bbabmr1306897ede.17.1675725274318; 
- Mon, 06 Feb 2023 15:14:34 -0800 (PST)
-Received: from [127.0.0.1] (dynamic-077-191-247-108.77.191.pool.telefonica.de.
- [77.191.247.108]) by smtp.gmail.com with ESMTPSA id
- b9-20020a0564021f0900b004a21304f5a0sm5659145edb.72.2023.02.06.15.14.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Feb 2023 15:14:33 -0800 (PST)
-Date: Mon, 06 Feb 2023 23:14:23 +0000
-From: Bernhard Beschow <shentey@gmail.com>
-To: =?ISO-8859-1?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>,
- Andrea Bolognani <abologna@redhat.com>, Sunil V L <sunilvl@ventanamicro.com>
-CC: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>, Ani Sinha <ani@anisinha.ca>,
- "Michael S. Tsirkin" <mst@redhat.com>, Markus Armbruster <armbru@redhat.com>, 
- Igor Mammedov <imammedo@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Thomas Huth <thuth@redhat.com>
-Subject: Re: [PATCH 02/10] hw/riscv/virt: Add a switch to enable/disable ACPI
-In-Reply-To: <fe3b5794-be2a-eec7-9d4e-9a13eab48378@linaro.org>
-References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
- <20230202045223.2594627-3-sunilvl@ventanamicro.com>
- <CABJz62PFGT1H-AArbfTkpiX24mHU=q3wk7h-bpduZhJyy7tTLw@mail.gmail.com>
- <fe3b5794-be2a-eec7-9d4e-9a13eab48378@linaro.org>
-Message-ID: <697B6100-71D3-4339-B2EC-A324270F52DA@gmail.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=44Zji4UkG2JMCVgwOWwwU78WxsX66yvpm/FwQSnpvUc=;
+ b=XIdbPgI179HFjI441UtjZYaXGPGRYxggdxF3B6wFx+zDMjepoqR5xu2x/ZXflioPTb
+ d67kSCsEWqOVf1p/8aCAjq2QVpS0acMZygoOFrGHaiWqqe33bJgS8zrU3vTWW3I0pUAf
+ WOuev/dnQIp/cCh2J+1EJPg7IB4krj4ywkOMpnoK0QJtEi6pOn8nQWGi4jXpjIXj8zWh
+ YVp49mvViRG6eaiyRpSl+EoaMNjqIKE2UpARZ8lyeqmJAc9F27NWl08JCJLufpyz1C3D
+ 7bJMr/wR5QZJkZwSl4VJbngxrIFJaamD5Cdpoq2rRjMpyKwbAvw4vT/vPOJOgy3gZ+bv
+ Jwww==
+X-Gm-Message-State: AO0yUKXxWM0hT5RJ0WhYIVp76q6tWECSgtU53GpRlHifhJXmlgaD0qaG
+ pg1s6i7b0w6zrj8CB374TGdS78qrBvNTpKfIQl/X1u0mrus=
+X-Google-Smtp-Source: AK7set9/3Rd57ZvTGu1lXCWU0P7zutGe60U1rPBIZETHMM9l/hZToge+JkqR4xL3iqwPy2XbNde+/aqB4nxTPZjPR8U=
+X-Received: by 2002:a67:c297:0:b0:3fe:5a64:f8ea with SMTP id
+ k23-20020a67c297000000b003fe5a64f8eamr351760vsj.54.1675738916824; Mon, 06 Feb
+ 2023 19:01:56 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
- envelope-from=shentey@gmail.com; helo=mail-ed1-x52a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+References: <20230206085007.3618715-1-bmeng@tinylab.org>
+In-Reply-To: <20230206085007.3618715-1-bmeng@tinylab.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 7 Feb 2023 13:00:00 +1000
+Message-ID: <CAKmqyKO_=reUVP_EBfnLUmuuSCUonOghF0TUdhSmRGW+xf9Mvw@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: virt: Simplify virt_{get,set}_aclint()
+To: Bin Meng <bmeng@tinylab.org>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -90,46 +73,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2023 23:14:38 -0000
+X-List-Received-Date: Tue, 07 Feb 2023 03:08:34 -0000
 
-
-
-Am 6=2E Februar 2023 11:18:06 UTC schrieb "Philippe Mathieu-Daud=C3=A9" <p=
-hilmd@linaro=2Eorg>:
->On 6/2/23 11:54, Andrea Bolognani wrote:
->> On Thu, Feb 02, 2023 at 10:22:15AM +0530, Sunil V L wrote:
->>> +    object_class_property_add(oc, "acpi", "OnOffAuto",
->>> +                              virt_get_acpi, virt_set_acpi,
->>> +                              NULL, NULL);
->>> +    object_class_property_set_description(oc, "acpi",
->>> +                                          "Enable ACPI");
->>=20
->> The way this works on other architectures (x86_64, aarch64) is that
->> you get ACPI by default and can use -no-acpi to disable it if
->> desired=2E Can we have the same on RISC-V, for consistency?
+On Mon, Feb 6, 2023 at 6:51 PM Bin Meng <bmeng@tinylab.org> wrote:
 >
->-no-acpi rather seems a x86-specific hack for the ISA PC machine,
-
-=2E=2E=2E for the i440FX/PIIX machine, to be precise=2E There it controls =
-the presence of the PIIX ACPI controller and surely also the generation of =
-ACPI tables=2E ACPI wasn't a thing in pure ISA times, so the switch doesn't=
- make much sense for the ISA machine=2E
-
-Here, for RISC-V, the "acpi" switch seems to just control the generation o=
-f ACPI tables which has quite different semantics than -no-acpi=2E
-
->and
->has a high maintenance cost / burden=2E
+> There is no need to declare an intermediate "MachineState *ms".
 >
->If hardware provides ACPI support, QEMU should expose it to the guest=2E
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
-Yes, I fully agree with both points=2E
+Thanks!
 
+Applied to riscv-to-apply.next
+
+Alistair
+
+> ---
 >
->Actually, what is the value added by '-no-acpi'?
-
-IIUC, it allows the PC machine to emulate a PCI PC without an ACPI bios=2E=
- Unfortunately, it also omits the instantiation of the=2E=2E=2E erm=2E=2E=
-=2E Frankenstein PIIX4_ACPI device which seems quite unnecessary to achieve=
- that goal=2E Just always instantiating it seems much simpler=2E
+>  hw/riscv/virt.c | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 4a11b4b010..bdb6b93115 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1577,16 +1577,14 @@ static void virt_set_aia(Object *obj, const char *val, Error **errp)
+>
+>  static bool virt_get_aclint(Object *obj, Error **errp)
+>  {
+> -    MachineState *ms = MACHINE(obj);
+> -    RISCVVirtState *s = RISCV_VIRT_MACHINE(ms);
+> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+>
+>      return s->have_aclint;
+>  }
+>
+>  static void virt_set_aclint(Object *obj, bool value, Error **errp)
+>  {
+> -    MachineState *ms = MACHINE(obj);
+> -    RISCVVirtState *s = RISCV_VIRT_MACHINE(ms);
+> +    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+>
+>      s->have_aclint = value;
+>  }
+> --
+> 2.25.1
+>
+>
 
