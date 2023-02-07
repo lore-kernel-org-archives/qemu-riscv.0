@@ -1,74 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPJZz-0000Mh-AG
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 03:43:56 -0500
+	id 1pPJgX-0004jp-Qc
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 03:50:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1pPJZt-0000LQ-8E
- for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 03:43:49 -0500
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pPJgU-0004jD-Ox
+ for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 03:50:38 -0500
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1pPJZr-0003S0-D7
- for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 03:43:48 -0500
-Received: by mail-pj1-x1034.google.com with SMTP id
- d6-20020a17090ae28600b00230aa72904fso5915267pjz.5
- for <qemu-riscv@nongnu.org>; Tue, 07 Feb 2023 00:43:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=QUReV4KMvI7An8ubheslQVfRM2aU7U816taWVsImywA=;
- b=a5orAumV77+kcjH0Ni32yXBpSYK+gd9VCjoKYhVuYtUQp1RdpCTENNwm71GelEydi2
- xkNWqiemH27UYHtrOuIiThlvn7OAxm4UsM4WRgU9zReOuT/E8l7mi2FWoeHVkjh5jU3w
- O8Zbll1QZp6JriSmW8PRam6133aSEkY3pJjTf5kBoWJAtIVsTUUUBoZBApQAPXQL4yNy
- n4WDklI33l7Usc5TUf6zeQAZv4SvpGhe/G+Ehx9nlVh42qTibKQ4ryDO2d6E5nBQS3pS
- CS6jfA6Ln1W5NuGenB3rtrloqs3ijwid/nfamzi4QRBUdbbdxblLHvTyVZ/W3rYEsWK1
- Xo1A==
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pPJgR-0004rp-Mb
+ for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 03:50:37 -0500
+Received: by mail-wr1-x429.google.com with SMTP id j25so9238748wrc.4
+ for <qemu-riscv@nongnu.org>; Tue, 07 Feb 2023 00:50:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=c1wmpMStD/at9Qj/mIVfu7+yS5fkgnfmx9smMKOa9n4=;
+ b=JNZV05op4HZda2dO+T7sXrKklXCA3ArqGLpc8Ptv0ANHINIz+Fc3kxqu6saadoiXTc
+ mM6tOt9FLQgxvIsDTlpTgvqFlasQtblVwL+8QAH/O1OCfh0333ZXkOJTQSpGlkQQDy6n
+ +TFkfl4zZIauavauuRzfIfgDxLGh873q46O87RxJ/nH81bNncpFASiNx3llNENxRHIaG
+ lnfpORUrd2ZaKtiwIyHl9L+5g/fdzDzMwyS2mvWvnNKGMwAnj5aA78esVLmYnihOmumi
+ qDFVMn8bCyhPTFD+AmC+wjDNUH6kxlZ8CDzi+WiWKIV0Pn1VQpSH+vtI4Eadofj6fuqf
+ /1RQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QUReV4KMvI7An8ubheslQVfRM2aU7U816taWVsImywA=;
- b=LNe1TLwTA4a64Yv1VlY/qjQG+9YCCodQKDGeDTlLW0ubcHchKToRtjgSKrEaqFiIcx
- hlO6YB9zrXK9mYn/a7h5PtdYuVYQ/XelZWwv3NbAHTC72pTzzaC+tMjPr02K13jLH0on
- TwGH+nx/x3cVgLeoVq5H3JqT981eoX+wNT4uq7YXD1uBbeu8euvX/scsUeJyBJWz+Wpe
- ptlR7W9OiYPtQM7dkA09StBT+8t68s9M1mt79IfRNDJn1x0dhbMm1Cw8q9iwIEKjvbV6
- 3H1QAEUNicc+HQhA4epHKQHm2QMaPOgU6hb2S/VnixqltJnTdp1goukncuuS3Jcxt2Ir
- kH/Q==
-X-Gm-Message-State: AO0yUKUSZ/BByIqeMZWXrBU4YSrLezKPk/O5JH9DSDME1gNxa+xxerJD
- 3UPjZg8bZFLGJvo3vsSpFkLObQ==
-X-Google-Smtp-Source: AK7set+MVL77dHpKwxO5VfAF71g/keFiItjUgyaHv/dlZYh0XixvAwOvvgUPhHsEXffTO4uU2jwCyw==
-X-Received: by 2002:a17:902:c612:b0:196:49a3:d349 with SMTP id
- r18-20020a170902c61200b0019649a3d349mr1844112plr.30.1675759425381; 
- Tue, 07 Feb 2023 00:43:45 -0800 (PST)
-Received: from frankchang-ThinkPad-T490.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- v14-20020a170902e8ce00b001949c680b52sm8273534plg.193.2023.02.07.00.43.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Feb 2023 00:43:45 -0800 (PST)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH] target/riscv: Remove .min_priv_ver restriction from RVV CSRs
-Date: Tue,  7 Feb 2023 16:43:35 +0800
-Message-Id: <20230207084341.303907-1-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.25.1
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=c1wmpMStD/at9Qj/mIVfu7+yS5fkgnfmx9smMKOa9n4=;
+ b=S8tG0+JxRevFer52qp1jtqZ/vHiUPch70ZOrYBzZbdli3p8k+I8t5L5HlZxfbrynXo
+ Ouy4K9vH9CsBhsfRF38GL9wGb6JeraSGyk1+cZyevLiukXFy3REN8SluOQ6+RV81CV+Z
+ Yv0TZS8iNyKQTPW1Af2DZhUM/ele0i2pedse16+Or2CJz0qNPaJxLbGE3qAPGzQ3ZlR1
+ Mm6LMr3V+mASarDtVCWJh0TJnZ8DS6tjIWWNWCrNtZEouzbhzAVtmO0Dh89RTIKpAa7j
+ NuC9g5dXZErWA9avYANXBnYsW/SJ6D8jvWjm0hnL/HsjZgmymtTTZGl4FVxkhembb/CM
+ 98oQ==
+X-Gm-Message-State: AO0yUKXvQWaEihregIdra+Z3YSwWScWEfxwjt2Rz5FGQhMewCVMb7vX9
+ +HZzNmKDFSyR+hapEvDBDLBqpA==
+X-Google-Smtp-Source: AK7set+OiaqMBt/0rAMpqmjdCAdv7ULdCafuzt+SgiC5oqd3/qc6ucj5W3byVft44lMQ9guJDZ+eWQ==
+X-Received: by 2002:a5d:6dcb:0:b0:2c3:be89:7c3c with SMTP id
+ d11-20020a5d6dcb000000b002c3be897c3cmr10196251wrz.31.1675759833294; 
+ Tue, 07 Feb 2023 00:50:33 -0800 (PST)
+Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
+ s2-20020a5d69c2000000b002c3de83be0csm7965965wrw.87.2023.02.07.00.50.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 07 Feb 2023 00:50:31 -0800 (PST)
+Message-ID: <25504aa3-20e3-d7e6-4111-c956370949ba@linaro.org>
+Date: Tue, 7 Feb 2023 09:50:29 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.6.1
+Subject: Re: [PATCH 02/10] hw/riscv/virt: Add a switch to enable/disable ACPI
+Content-Language: en-US
+To: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Andrea Bolognani <abologna@redhat.com>,
+ Sunil V L <sunilvl@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Andrew Jones <ajones@ventanamicro.com>,
+ Anup Patel <apatel@ventanamicro.com>, Atish Kumar Patra
+ <atishp@rivosinc.com>, Ani Sinha <ani@anisinha.ca>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Markus Armbruster
+ <armbru@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Thomas Huth <thuth@redhat.com>, Bernhard Beschow <shentey@gmail.com>
+References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
+ <20230202045223.2594627-3-sunilvl@ventanamicro.com>
+ <CABJz62PFGT1H-AArbfTkpiX24mHU=q3wk7h-bpduZhJyy7tTLw@mail.gmail.com>
+ <fe3b5794-be2a-eec7-9d4e-9a13eab48378@linaro.org>
+ <20230206125610.nmo2bbbd5kosihav@sirius.home.kraxel.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20230206125610.nmo2bbbd5kosihav@sirius.home.kraxel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1034.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.148,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,52 +92,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2023 08:43:50 -0000
+X-List-Received-Date: Tue, 07 Feb 2023 08:50:40 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
+On 6/2/23 13:56, Gerd Hoffmann wrote:
+> On Mon, Feb 06, 2023 at 12:18:06PM +0100, Philippe Mathieu-Daudé wrote:
+>> On 6/2/23 11:54, Andrea Bolognani wrote:
+>>> On Thu, Feb 02, 2023 at 10:22:15AM +0530, Sunil V L wrote:
+>>>> +    object_class_property_add(oc, "acpi", "OnOffAuto",
+>>>> +                              virt_get_acpi, virt_set_acpi,
+>>>> +                              NULL, NULL);
+>>>> +    object_class_property_set_description(oc, "acpi",
+>>>> +                                          "Enable ACPI");
+>>>
+>>> The way this works on other architectures (x86_64, aarch64) is that
+>>> you get ACPI by default and can use -no-acpi to disable it if
+>>> desired. Can we have the same on RISC-V, for consistency?
+>>
+>> -no-acpi rather seems a x86-specific hack for the ISA PC machine, and
+>> has a high maintenance cost / burden.
+> 
+> Under the hood it is actually a OnOffAuto machine property and -no-acpi
+> is just a shortcut to set that.
+> 
+>> Actually, what is the value added by '-no-acpi'?
+> 
+> On arm(64) the linux kernel can use either device trees or ACPI to find
+> the hardware.  Historical reasons mostly, when the platform started
+> there was no ACPI support.  Also the edk2 firmware uses Device Trees
+> for hardware discovery, likewise for historical reasons.
+> 
+> When ACPI is available for a platform right from the start I see little
+> reason to offer an option to turn it off though ...
 
-The RVV specification does not require that the core needs to support
-the privileged specification v1.12.0 to support RVV, and there is no
-dependency from ISA level. This commit removes the restriction.
-
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
----
- target/riscv/csr.c | 21 +++++++--------------
- 1 file changed, 7 insertions(+), 14 deletions(-)
-
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index fa17d7770c4..1b0a0c1693c 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -3980,20 +3980,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_FRM]      = { "frm",      fs,     read_frm,     write_frm    },
-     [CSR_FCSR]     = { "fcsr",     fs,     read_fcsr,    write_fcsr   },
-     /* Vector CSRs */
--    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
--    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
--    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
--    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
--    [CSR_VL]       = { "vl",       vs,     read_vl,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
--    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
--    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-+    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart },
-+    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat  },
-+    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm   },
-+    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr   },
-+    [CSR_VL]       = { "vl",       vs,     read_vl                    },
-+    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype                 },
-+    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb                 },
-     /* User Timers and Counters */
-     [CSR_CYCLE]    = { "cycle",    ctr,    read_hpmcounter  },
-     [CSR_INSTRET]  = { "instret",  ctr,    read_hpmcounter  },
--- 
-2.25.1
-
+Yeah I concur. There is no point in disabling ACPI on the RISCV virt
+machine IMO.
 
