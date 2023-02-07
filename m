@@ -1,58 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPL8w-0000R2-B2
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 05:24:06 -0500
+	id 1pPNAn-0007c8-QO
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 07:34:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pPL8t-0000P7-1p
- for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 05:24:03 -0500
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1pPNAm-0007bj-0E
+ for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 07:34:08 -0500
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pPL8m-00069S-N7
- for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 05:23:58 -0500
-Received: by mail-ej1-x629.google.com with SMTP id c13so125536ejz.1
- for <qemu-riscv@nongnu.org>; Tue, 07 Feb 2023 02:23:56 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1pPNAi-00010F-EI
+ for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 07:34:07 -0500
+Received: by mail-pf1-x42e.google.com with SMTP id 144so10622358pfv.11
+ for <qemu-riscv@nongnu.org>; Tue, 07 Feb 2023 04:34:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=in-reply-to:content-transfer-encoding:content-disposition
  :mime-version:references:message-id:subject:cc:to:from:date:from:to
  :cc:subject:date:message-id:reply-to;
- bh=bJCbIn/X3OEHsr0kP2AP7buRcYHWFmb4XL0AYUpRdFM=;
- b=genjaXAxfvpYtmrRmNhxGucPdT75NDwtY8ZFpptqPKpTKbT8jj7W4LAYpf+xDzSH9K
- qASfV7QCJE49WIvcCvzgtdKq79hmWaVQpLLoBucnCIOIaiD4h2Aacc6sjwuuIpoMUihf
- hVjoCEIHqyCs/Dub15w7rzIxnNuO3YiEhD0CBsYtthnDkST9khHBG8PUh0j4IkP+MVB/
- 0OyxgWxtDUiDQnCT/G0jzxoFX0r+UII+ZtW/Ovu10NJGWEQJ2sPj5PRRQZkLYlyhtLUH
- TZLtrhNOBU8rexodwm9WukOXz/c948eviaXkwd6o/xFdinNzrbOOoFJanJwMQf7zo/Qk
- 3NxQ==
+ bh=jnIsDvta7NZxVHd7LnlBHZ35p5nPwuLeuPmb/ZK5jes=;
+ b=Od+bBkKqBThPmPpYoSmkSkGfJOuFba3m3659bNCDhp/Njq1woDL0XzknnPQeW9vRz+
+ H3ninOD/ibjOpAOVpHgNz4vtpiz+i4Wu9FmPKcrzuapCE9FYEtL9z2TBo/b50ImFmiUv
+ MZSUpspEYTF7FPK1JvdVtZ5G/HM/kgGM2kYLhA8kYh/cS4Z+Mtd3xB5cLmrr+u1BS/kK
+ Jm+BPV2l2riDtZDhroHV2D9pEBEuK13Oc5g9onSo4vef2ooFinibrsY6kLNrG7Haj7K3
+ E6I1MicTfg5UPQMmuh3yYAf1JLHJ+vUZQ1O4nG1nrDwR8jhZM3dA+vp1G8veRWYjr/Rd
+ K2fQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=in-reply-to:content-transfer-encoding:content-disposition
  :mime-version:references:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bJCbIn/X3OEHsr0kP2AP7buRcYHWFmb4XL0AYUpRdFM=;
- b=ho16K2d5hSs8vg558Zit0oDD7FJG+2IEUjGx4ZZ3fZxTZ0L2iA7njw8HqozuwNRehd
- f5N50/zLw2sBnHRghfsYD52aT0Fsm8J1gfOn9+vsZk18qJIZBiSoE5yalbwZbqphqHvb
- dEqmRk6HWK2CBuPz+/o4ECzKBovZVDhHPPp8HlHYNSLSjTuuXrmFmRDixcZQWs0ETeWy
- PHCPYGa+2KmwYoVD/eaKEIvVjHGNsjhUeHIlYBZAV6a4lhCe6fY8ZUdrazj/gsZY6ua2
- CaIIzzQF+gbPiJkqJbYETmBTzOzVi64RCDggnDIoCod39ngaEt1cGQTgHGcd73vXv4br
- kfew==
-X-Gm-Message-State: AO0yUKWQicXXk3JXCertna2BHVLjcYmg8MWDP1guNinTw3qvU9mJU9G5
- dBZFMVL5soNnDJ20Sr02xk8xyA==
-X-Google-Smtp-Source: AK7set8hSotccKhxvoJcYtgAJCHWufyOfchofHPEwaZXOY4wsnGpsL1C5AmOxbiKOGXagHngG9jqWw==
-X-Received: by 2002:a17:906:f1c1:b0:7c1:458b:a947 with SMTP id
- gx1-20020a170906f1c100b007c1458ba947mr3114932ejb.26.1675765434806; 
- Tue, 07 Feb 2023 02:23:54 -0800 (PST)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- ot17-20020a170906ccd100b0088272bac7c5sm6631246ejb.121.2023.02.07.02.23.54
+ bh=jnIsDvta7NZxVHd7LnlBHZ35p5nPwuLeuPmb/ZK5jes=;
+ b=iPZQp5r24ZiLc+pTQFEc1LuDAMVZE/ISquzRCM/GxjMAAAR3X9tJPGf8FWL0MT7UvN
+ 83Pd3q3T9tLDp7Gwz+YeSIbHF6KI3tf1MTxaF653SCoNsSrEL3LHLHQcL3mSfTlSvFSi
+ fa1RlZFwZfFkbRcqM2PthnXs5FwUiOrcgWxxyIwmb+JjBSe+EQAHXsjRr/u5H91vSfoB
+ uWzTKfGHK6eYRkkD1I9aS21S5mttoeeOdxzg08xqEW7F4o9gFENSQEMNKT3LHtul5NHa
+ UTCnyOVp0PIFqjcPYdY7FwqGQPI7ghPic8Yyz9TYsnWlzn2EpHxM5RXMAAqvZNf3Xxoy
+ swUA==
+X-Gm-Message-State: AO0yUKVB6V+/5WTRizpZzJ7iqJfcayXTim5U2+hluKEw+SSSY+Mu/ez5
+ mZczHTPOzWldnPUhz6rRo5gG4w==
+X-Google-Smtp-Source: AK7set9IlgmWIGhF1LyH0qHKM2Xg3zMBpAqnr33vHqq6YsigtXl4aPUo7BJt3hk71BpZUYmIdNB2lw==
+X-Received: by 2002:a62:1452:0:b0:592:40cd:ce83 with SMTP id
+ 79-20020a621452000000b0059240cdce83mr2961603pfu.4.1675773240127; 
+ Tue, 07 Feb 2023 04:34:00 -0800 (PST)
+Received: from sunil-laptop ([49.206.14.226]) by smtp.gmail.com with ESMTPSA id
+ t8-20020aa78f88000000b0059260f01115sm9029011pfs.76.2023.02.07.04.33.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Feb 2023 02:23:54 -0800 (PST)
-Date: Tue, 7 Feb 2023 11:23:53 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: Andrea Bolognani <abologna@redhat.com>,
- Sunil V L <sunilvl@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Tue, 07 Feb 2023 04:33:59 -0800 (PST)
+Date: Tue, 7 Feb 2023 18:03:48 +0530
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Andrew Jones <ajones@ventanamicro.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Andrea Bolognani <abologna@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>,
@@ -62,18 +63,20 @@ Cc: Andrea Bolognani <abologna@redhat.com>,
  Gerd Hoffmann <kraxel@redhat.com>, Thomas Huth <thuth@redhat.com>,
  Bernhard Beschow <shentey@gmail.com>
 Subject: Re: [PATCH 02/10] hw/riscv/virt: Add a switch to enable/disable ACPI
-Message-ID: <20230207102353.hpg2gxh22urjbebu@orel>
+Message-ID: <Y+JFLOPIVuHhGNF2@sunil-laptop>
 References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
  <20230202045223.2594627-3-sunilvl@ventanamicro.com>
  <CABJz62PFGT1H-AArbfTkpiX24mHU=q3wk7h-bpduZhJyy7tTLw@mail.gmail.com>
  <fe3b5794-be2a-eec7-9d4e-9a13eab48378@linaro.org>
+ <20230206123520.feomnevavp4olbie@orel>
+ <CAEUhbmUDuH47SFyvHRzB6ZD_Ofs0DZpQDCpcyVELZgF+cTat9g@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <fe3b5794-be2a-eec7-9d4e-9a13eab48378@linaro.org>
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x629.google.com
+In-Reply-To: <CAEUhbmUDuH47SFyvHRzB6ZD_Ofs0DZpQDCpcyVELZgF+cTat9g@mail.gmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -93,28 +96,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2023 10:24:03 -0000
+X-List-Received-Date: Tue, 07 Feb 2023 12:34:08 -0000
 
-On Mon, Feb 06, 2023 at 12:18:06PM +0100, Philippe Mathieu-Daudé wrote:
-> On 6/2/23 11:54, Andrea Bolognani wrote:
-> > On Thu, Feb 02, 2023 at 10:22:15AM +0530, Sunil V L wrote:
-> > > +    object_class_property_add(oc, "acpi", "OnOffAuto",
-> > > +                              virt_get_acpi, virt_set_acpi,
-> > > +                              NULL, NULL);
-> > > +    object_class_property_set_description(oc, "acpi",
-> > > +                                          "Enable ACPI");
-> > 
-> > The way this works on other architectures (x86_64, aarch64) is that
-> > you get ACPI by default and can use -no-acpi to disable it if
-> > desired. Can we have the same on RISC-V, for consistency?
+On Tue, Feb 07, 2023 at 11:57:29AM +0800, Bin Meng wrote:
+> On Mon, Feb 6, 2023 at 8:36 PM Andrew Jones <ajones@ventanamicro.com> wrote:
+> >
+> > On Mon, Feb 06, 2023 at 12:18:06PM +0100, Philippe Mathieu-DaudÃ© wrote:
+> > > On 6/2/23 11:54, Andrea Bolognani wrote:
+> > > > On Thu, Feb 02, 2023 at 10:22:15AM +0530, Sunil V L wrote:
+> > > > > +    object_class_property_add(oc, "acpi", "OnOffAuto",
+> > > > > +                              virt_get_acpi, virt_set_acpi,
+> > > > > +                              NULL, NULL);
+> > > > > +    object_class_property_set_description(oc, "acpi",
+> > > > > +                                          "Enable ACPI");
+> > > >
+> > > > The way this works on other architectures (x86_64, aarch64) is that
+> > > > you get ACPI by default and can use -no-acpi to disable it if
+> > > > desired. Can we have the same on RISC-V, for consistency?
+> >
+> > Default on, with a user control to turn off, can be done with a boolean.
+> > I'm not sure why/if Auto is needed for acpi. Auto is useful when a
+> > configuration doesn't support a default setting for a feature. If the
+> > user hasn't explicitly requested the feature to be on or off, then the
+> > configuration can silently select what works. If, however, the user
+> > explicitly chooses what doesn't work, then qemu will fail with an error
+> > instead.
 > 
-> -no-acpi rather seems a x86-specific hack for the ISA PC machine, and
-> has a high maintenance cost / burden.
+> I have a confusion about "OnOffAuto" vs. "bool" type.
+> 
+> Both "OnOffAuto" vs. "bool" type property can have a default value if
+> user does not assign a value to it from command line. The default
+> value is:
+> 
+> - ON_OFF_AUTO_AUTO for "OnOffAuto"
+> - false for "bool"
+> 
+> But the default value can be overridden in the machine's init
+> function, like in this patch.
+> 
+> So I am not really sure how these 2 types of properties are different.
+> Why did we introduce a "OnOffAuto" type, and how is that type supposed
+> to be used in which scenario?
+> 
 
-Can you elaborate on this? RISCV doesn't need '-no-acpi' specifically.
-If -no-acpi is problematic for some reason, then something like
-'-machine virt,acpi=off' would be sufficient for switching to DT too.
+I don't know either. Since it is the same property across architectures,
+I used the OnOffAuto instead of a bool. 
+
+May be Gerd and other qemu experts can help us to understand better.
+https://github.com/qemu/qemu/commit/17e89077b7e3bc1d96540e21ddc7451c3e077049
 
 Thanks,
-drew
+Sunil
 
