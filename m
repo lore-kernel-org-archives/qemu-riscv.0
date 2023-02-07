@@ -1,91 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPP73-0005hS-Sr
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 09:38:25 -0500
+	id 1pPQYq-0000Zs-6m
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 11:11:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1pPP6z-0005gX-Ji
- for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 09:38:21 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1pPP6y-0000h3-6j
- for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 09:38:21 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1675780699;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=EFtY7ec7mQocFsctKKKJRJ5Gd4uawOzZqJ3gbQS4dVg=;
- b=RthKyRiflssLrJW7sUXJAbRaOZ9P6rXd1sx45belhQ3tIZIT00zA3BAfQwUat9nTvhyx+x
- KotYYyVATgcX9SQuXldcVCCV11vq8yktmTcZKPqC5ggGK/ewuh3wDionyYVZ+Ezvqrt9VT
- 7B5RSDti8oadza4+/Ce9nS9hCFU/V9U=
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-141-HXaJXRzENCO_kgGaOzjKrg-1; Tue, 07 Feb 2023 09:38:18 -0500
-X-MC-Unique: HXaJXRzENCO_kgGaOzjKrg-1
-Received: by mail-pj1-f71.google.com with SMTP id
- gn18-20020a17090ac79200b0022bef1f49c9so1020466pjb.0
- for <qemu-riscv@nongnu.org>; Tue, 07 Feb 2023 06:38:17 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pPQYo-0000ZR-3c; Tue, 07 Feb 2023 11:11:10 -0500
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pPQYm-0003vS-H8; Tue, 07 Feb 2023 11:11:09 -0500
+Received: by mail-ed1-x530.google.com with SMTP id a10so9192678edu.9;
+ Tue, 07 Feb 2023 08:11:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DaT0vzRLbS2uKSgkefjvaiCQs2y4tC1/K8IS5ehOzrI=;
+ b=dGpkLOrwVsHnysDf7Wlq3gLOfgp4yoOMdJ6nh5e5TQIdvItjnGcDsBSCuGiu6NK7eC
+ LZDVZrcieeu1P+k7FnIfu7MAKmDB+WYQBENqMiouBpB6sRFxlu9gNMh9+CcukS1DlhRF
+ +7A9rOoNluK8ZNC4hYKo4XJlE9oAzv6fDL4IAoX1Gc63Rt7Zu5zPRbjOFDnQjMq5tt3M
+ s6e2I6OKmzzzycIj9UNhNC1/1X12zu2zMHSvSdM6TFoQS5bmbwibecLYbZha74gxyDxK
+ h/8kQ5dKa90LaT/L2Vfab4n7TFy5rB6oX7GpcNtNtNhCyHUlPfFiWlVxvaxqX4PZ16Qm
+ Pgkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:in-reply-to:mime-version:references
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=EFtY7ec7mQocFsctKKKJRJ5Gd4uawOzZqJ3gbQS4dVg=;
- b=YetCpYxbZBLv4Ii801DUS8OElfaOUAdEKqyUqkfsbB3pdj/vd4XTw117gevc7aZ0C0
- rVsB0dLjkSVTmHzFHPiHkRao6Ep0tPuFVYqnbDGahQpJfm7VhJRLCUlfE+ipJUAYdMsP
- WbJTQiHzacQaVW/02MGv15hqgEDSIdWYKioBqUUrnq7yT7wWG4GyVuFHQXSY5PL3VE/Y
- eSYJf1Q9HCtDKCOfjLeHRvibX2ODew9Rv/ZvdMEwnqUl4FFebAD1u3h4kipAqq6cICZw
- x3XQqrVygUZQLIRD6YVn/fuIteugvFAyEoKQgpY5cX1p5cXHbCM+jYHjdH2H0Uq7xrol
- 7k2w==
-X-Gm-Message-State: AO0yUKXLSYcFmfaDAxppFxuyvI7Ve3uJV2L+6iPz2sI5ElYyeFBfRkkz
- 0a9Ow6P0YovXKLrQ2lr2ZGkuoESPkZOLmLUp31cFgTQxpBCT8ZbSSEXZunqRDGdqqKQjDvovXjl
- PY57yNX8PUYS088YINOzJwdIbbwc+O2o=
-X-Received: by 2002:a17:902:b20f:b0:199:1e59:fdf6 with SMTP id
- t15-20020a170902b20f00b001991e59fdf6mr707850plr.29.1675780696559; 
- Tue, 07 Feb 2023 06:38:16 -0800 (PST)
-X-Google-Smtp-Source: AK7set/ntBA+fYPv7QoIdjcUyEiEluIbww7kxzs35RlMBgUf0rkFvThOjpxM4LoKHyAq8TpW+h4Rc6Xxm80vHxW7Jp0=
-X-Received: by 2002:a17:902:b20f:b0:199:1e59:fdf6 with SMTP id
- t15-20020a170902b20f00b001991e59fdf6mr707847plr.29.1675780696206; Tue, 07 Feb
- 2023 06:38:16 -0800 (PST)
-Received: from 744723338238 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 7 Feb 2023 06:38:15 -0800
-From: Andrea Bolognani <abologna@redhat.com>
-References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
- <20230202045223.2594627-3-sunilvl@ventanamicro.com>
- <CABJz62PFGT1H-AArbfTkpiX24mHU=q3wk7h-bpduZhJyy7tTLw@mail.gmail.com>
- <fe3b5794-be2a-eec7-9d4e-9a13eab48378@linaro.org>
- <20230207102353.hpg2gxh22urjbebu@orel>
- <CABJz62M+n4DFqMPttzaDrSRzDcjkyEduX_NAv=-9J58mmUe+Ng@mail.gmail.com>
- <9c05b850-ae25-12aa-c6d0-b7a813a5ee03@redhat.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DaT0vzRLbS2uKSgkefjvaiCQs2y4tC1/K8IS5ehOzrI=;
+ b=RaSMS6as0qCsuFihq0qQOfVvoJUjn0xBUpDhrZyLssREjYSN0lmY29d5BczFacQgZG
+ KCCRRK9zW4J/oUR6YUIyJ4tnd9Br+/VyCKqnw0qoGvU8Cw0oUeDx9gDz3QGrv7sU+9aC
+ 1sL5y6qCL++0vVl7G0moo59HnXqDnowe7W+eFhSpXblf3P8GHiVqT7jEgp1qJhLOdTRB
+ z5Im5cDWYYSQtAUVhTPthoYG2IYUwT5KISNYGiBxT/7+d/4QWa0c3gmbXJZaNcl8rDBb
+ mySdnU6aLeiVprO8qysrsjUdlWiZ2CaSZSuZ48ulpP45o5DyfaZNJpP00LBY/984MtDa
+ MjYg==
+X-Gm-Message-State: AO0yUKUAUAsQNCQHyuWJgFMjJ0yZWjOm9KhUSyU9vIPAx+9J4P+3CfcM
+ lCCgi57zQy89x1aHMMmgT4beQ2JATcXUz8nS4Qs=
+X-Google-Smtp-Source: AK7set9c8aje7IEMwZbKRga7eyHTI3X3eM8qxS7hKoAjFXZ4q1WHDNzmwvcPAGCH3PHWOguyiRjeERWn9r/gAHmb8IY=
+X-Received: by 2002:a17:906:7816:b0:888:f761:87aa with SMTP id
+ u22-20020a170906781600b00888f76187aamr1062205ejm.163.1675786266634; Tue, 07
+ Feb 2023 08:11:06 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <9c05b850-ae25-12aa-c6d0-b7a813a5ee03@redhat.com>
-Date: Tue, 7 Feb 2023 06:38:15 -0800
-Message-ID: <CABJz62PuT+kG2X9OEBQRfybWn2ESJ3aNaEBkvDG=XK_43ZC_8w@mail.gmail.com>
-Subject: Re: [PATCH 02/10] hw/riscv/virt: Add a switch to enable/disable ACPI
-To: Thomas Huth <thuth@redhat.com>
-Cc: Andrew Jones <ajones@ventanamicro.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Sunil V L <sunilvl@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- qemu-riscv@nongnu.org, 
- qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>, 
- Atish Kumar Patra <atishp@rivosinc.com>, Ani Sinha <ani@anisinha.ca>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Markus Armbruster <armbru@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, 
- Gerd Hoffmann <kraxel@redhat.com>, Bernhard Beschow <shentey@gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
+ <20230202045223.2594627-5-sunilvl@ventanamicro.com>
+ <CAEUhbmXhXw7juMQTW7-XxSLwhcJrOiZ=4fiwFFAyoXj+sL0jUQ@mail.gmail.com>
+ <Y+D/frPU/TE1aj7y@sunil-laptop>
+In-Reply-To: <Y+D/frPU/TE1aj7y@sunil-laptop>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 8 Feb 2023 00:10:55 +0800
+Message-ID: <CAEUhbmU2cofq767-9Lfs2CF+DzpZ6FCHz1ox1TC1siPs5uUdWQ@mail.gmail.com>
+Subject: Re: [PATCH 04/10] hw/riscv/virt: virt-acpi-build.c: Add basic ACPI
+ tables
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Andrew Jones <ajones@ventanamicro.com>, Anup Patel <apatel@ventanamicro.com>, 
+ Atish Kumar Patra <atishp@rivosinc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=abologna@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -99,45 +78,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2023 14:38:21 -0000
+X-List-Received-Date: Tue, 07 Feb 2023 16:11:10 -0000
 
-On Tue, Feb 07, 2023 at 03:02:19PM +0100, Thomas Huth wrote:
-> On 07/02/2023 14.56, Andrea Bolognani wrote:
-> > It looks like i440fx and q35 both have an 'acpi' machine property. Is
-> > -no-acpi just sugar for acpi=off?
+On Mon, Feb 6, 2023 at 9:24 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
 >
-> Yes, it is, see softmmu/vl.c:
->
->             case QEMU_OPTION_no_acpi:
->                 qdict_put_str(machine_opts_dict, "acpi", "off");
->                 break;
->
-> > Is it considered desirable to get rid of -no-acpi?
->
-> Sounds like a good idea, indeed!
->
-> > If so, we should follow the usual deprecation
-> > process and get rid of it after libvirt has had a chance to adapt.
+> On Mon, Feb 06, 2023 at 06:17:50PM +0800, Bin Meng wrote:
+> > On Thu, Feb 2, 2023 at 12:54 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
+> > >
+> > > Add few basic ACPI tables and DSDT with few devices in a
+> > > new file virt-acpi-build.c.
+> > >
+> > > These are mostly leveraged from arm64.
 > >
-> > In the scenario described above, it would make sense for RISC-V to
-> > only offer the machine type option (assuming that -no-acpi doesn't
-> > come for free with that) instead of putting additional effort into
-> > implementing an interface that is already on its way out.
+> > There are lots of same ACPI codes existing in x86/arm/riscv. I believe
+> > some refactoring work is needed before ACPI support fully lands on
+> > RISC-V.
+> > For example, we can extract the common part among x86/arm/riscv into a
+> > separate file, like hw/acpi/acpi-build.c?
+> >
 >
-> I agree. IMHO the machine parameter should be enough, no need to introduce
-> "-no-acpi" here.
+> While it appears like there is same code in multiple places, those
+> functions take architecture specific MachineState parameter. Some tables
+> like MADT though with same name, will have different contents for
+> different architectures.
+>
+> Only one function which Daniel also pointed is the wrapper
+> acpi_align_size() which can be made common. I am not
+> sure whether it is worth of refactoring.
+>
 
-Well, it looks like -no-acpi will come for free after all, thanks to
-the code you pasted above, as long as the machine property follows
-the convention established by x86, arm and (I just noticed this one)
-loongarch.
+It's more than that. For example,
 
-So I guess the -no-acpi deprecation can be handled separately, and
-the only thing that needs changing in the current patch is making
-sure that ACPI is opt-out rather than opt-in, as is the case for
-other architectures :)
+With acpi_dsdt_add_cpus(), the only meaningful parameter is the number
+of cpus, so there is no need to pass the architecture specific
+MachineState as the parameter.
 
--- 
-Andrea Bolognani / Red Hat / Virtualization
+Likewise, acpi_dsdt_add_fw_cfg() can be made generic as well.
 
+Regards,
+Bin
 
