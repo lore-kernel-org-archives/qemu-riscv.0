@@ -1,86 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPTWB-00007A-0t
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 14:20:39 -0500
+	id 1pPYvQ-0005B5-HX
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 20:07:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pPTW9-00006V-0j
- for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 14:20:37 -0500
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pPYvP-0005As-HX; Tue, 07 Feb 2023 20:07:03 -0500
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pPTW7-0006zr-F9
- for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 14:20:36 -0500
-Received: by mail-ed1-x534.google.com with SMTP id i38so6429501eda.1
- for <qemu-riscv@nongnu.org>; Tue, 07 Feb 2023 11:20:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=y4kzQ4G2/YWvQd1Js9x/k76y/oucxVOi5ZZcjeRNFFU=;
- b=Y+TtghdjFfBWJATRyFn3qGxj7DqJe4SgH7kDVve6zxBcwbGo7B0KJfSqwjegYXVC0v
- 5iz4boVm2ydru6nX5s370wprI6FaeZnIu1KCA0PnPxCpbVk1tc4XpZ03CmysXBDlXJz1
- AXV7OAlWzIDNF09ayhPmqcw4UVxipguRw87b/r7vM8+hP0sVCxpn1yXpwnHXtU39Sub4
- 8sPwRwzakr3g3gscVAE8pBINAo+x0lXNy2b4CkBQ591BFEIjhcp2JV9nKdWMjDnW3Iqt
- ZAsotvRemap/VQi0LGmu4SaEwFgn3rF761wwtXl6YfHUu79uP9KaoYAhoaWDGscFcRJ7
- e65g==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pPYvN-00016t-PS; Tue, 07 Feb 2023 20:07:03 -0500
+Received: by mail-ed1-x529.google.com with SMTP id q19so18528756edd.2;
+ Tue, 07 Feb 2023 17:07:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RobN1nWl/FYx2H9lclz+ZMaymj9B+Fo8BlmYb6oMOV4=;
+ b=piP2WERGOJq4ptNrzUvS5OVvrPGIDPbFe0DfkuDZonbIHTUcFaLba1ha3l/KQyJSjS
+ HJuaXMh7Qyt1NhZ5rQnkWz6VuaJZRJNI/gDU/37EK/Us5Ra+zrSSUujEycRj0+IgnGtN
+ ZW+zvjEOwdBX6IgwQkflhn0mCsf/BSq3x6mXhMp4YicpdZqrRz7bBpsnqdn3Lmuy7YRz
+ ClB16k88+4HvBj4MrOE66ksoz/0k2oUWwHiAIWQAFloTUCzqwjBkVrgl60Li6geyf6/K
+ wVTIrrAF/ey8CizdZh2I2y2cLmJ9HO5aU3vIOKKLJ5Q0pmi+H5kh5iYUhev0QzlQojkR
+ tfRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=y4kzQ4G2/YWvQd1Js9x/k76y/oucxVOi5ZZcjeRNFFU=;
- b=ngQzsTc6/ygTmn/2HbXuUPGUDALNKRKLZJ2FSSigETf7agtPj0rvb3gn1rbac/jrPG
- kiGLm88XEA5xH9SOJPZu7uqw8LCdiECHpOg1XRB+P9qJOPEv/O4yW5b1Y9KlH0qepkpE
- 7CcKAJhgH1GF9URwT45PqGbDbXZZdGRLCXlxHN18wCjuuBbNSz/Nzl46Qc//W97iJEB5
- +GD2x7JLeSvcAJoXIGrb4yVi21oChYahgtgaKk7yDa1PnblMZGcvyf+qU56YjleG7Z4x
- lZD6sbM5DBEFazC+q6Boj85R83I5hQR4MxtmrB5qsRvzLAaO8C4KaxhAeMjHoqn0lJJb
- a7dA==
-X-Gm-Message-State: AO0yUKU0f/fBGoFk5J6UcECwszXzyaU6bO6y54fwe8rnM8+WMQr3JIWx
- fCpZzDYv9KdsMePZXT56dHRQQA==
-X-Google-Smtp-Source: AK7set8yrpwivPAC5Tn2KvINyb5DNZQznltUCrVbf3PvSLze1zvRKMlXNbiN7dLZSl1gOsbEEC8RTg==
-X-Received: by 2002:a50:bac4:0:b0:497:948b:e8 with SMTP id
- x62-20020a50bac4000000b00497948b00e8mr4843838ede.6.1675797633424; 
- Tue, 07 Feb 2023 11:20:33 -0800 (PST)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- u2-20020a509502000000b0049e08f781e3sm6971906eda.3.2023.02.07.11.20.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Feb 2023 11:20:32 -0800 (PST)
-Date: Tue, 7 Feb 2023 20:20:31 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Andrea Bolognani <abologna@redhat.com>
-Cc: Thomas Huth <thuth@redhat.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Sunil V L <sunilvl@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>,
- Ani Sinha <ani@anisinha.ca>, "Michael S. Tsirkin" <mst@redhat.com>,
- Markus Armbruster <armbru@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Bernhard Beschow <shentey@gmail.com>
-Subject: Re: [PATCH 02/10] hw/riscv/virt: Add a switch to enable/disable ACPI
-Message-ID: <20230207192031.pu5uy2yppv3htjw5@orel>
-References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
- <20230202045223.2594627-3-sunilvl@ventanamicro.com>
- <CABJz62PFGT1H-AArbfTkpiX24mHU=q3wk7h-bpduZhJyy7tTLw@mail.gmail.com>
- <fe3b5794-be2a-eec7-9d4e-9a13eab48378@linaro.org>
- <20230207102353.hpg2gxh22urjbebu@orel>
- <CABJz62M+n4DFqMPttzaDrSRzDcjkyEduX_NAv=-9J58mmUe+Ng@mail.gmail.com>
- <9c05b850-ae25-12aa-c6d0-b7a813a5ee03@redhat.com>
- <CABJz62PuT+kG2X9OEBQRfybWn2ESJ3aNaEBkvDG=XK_43ZC_8w@mail.gmail.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RobN1nWl/FYx2H9lclz+ZMaymj9B+Fo8BlmYb6oMOV4=;
+ b=y7rjdn2ZzfLca3tkbOIzZ+59DmRS4ZTaDPi3sUdI9Umv5RV5KVDRQ+r7lVr1RdMpvH
+ L+jquNvK02JFgz3WEo9QKKsKh3EsK9494qSknmC/UQEkOY2f4s9gjcLIXr3BFSw7MNeR
+ YCBdjGfZ+VNCTBtQx384uw98UYC+sYJUF63UDDNSFMxw62J5hLXLG/9eSvGImlKEdfLk
+ ymM07DLhp+oqtFHljmWvPlTjKynanKm1zeGP7xOnK9JRpgDQwPTWKpBM8Qn2jMPOoTed
+ IKBxLExqbNllmiOrWsOzlIgTFEX/CP5Dxf6+nOBTxKAo0DsaWMYPALY7Bn7dRXKseGXO
+ td0w==
+X-Gm-Message-State: AO0yUKURuFc0VPmtF2k7kiYByhglmrGdIvPT9VMoviETqFsZRs/cl79w
+ WtHr6W4wNzTwT4+PZsUTYLW90U68qrq4LL2wmCU=
+X-Google-Smtp-Source: AK7set8hfD800+CMctZwdEmg4qmbmbt+F+BrD34D8Z0KGd4sBAabMtpYP0mIb0BetLeXwVDsaNPPJqKtWpBckp8dpB0=
+X-Received: by 2002:a50:f689:0:b0:4a3:fc00:9d69 with SMTP id
+ d9-20020a50f689000000b004a3fc009d69mr1203259edn.6.1675818419689; Tue, 07 Feb
+ 2023 17:06:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CABJz62PuT+kG2X9OEBQRfybWn2ESJ3aNaEBkvDG=XK_43ZC_8w@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x534.google.com
+References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
+ <20230202045223.2594627-5-sunilvl@ventanamicro.com>
+ <CAEUhbmXhXw7juMQTW7-XxSLwhcJrOiZ=4fiwFFAyoXj+sL0jUQ@mail.gmail.com>
+ <Y+D/frPU/TE1aj7y@sunil-laptop>
+ <CAEUhbmU2cofq767-9Lfs2CF+DzpZ6FCHz1ox1TC1siPs5uUdWQ@mail.gmail.com>
+ <Y+KVPaVQPcoItBbV@sunil-laptop>
+In-Reply-To: <Y+KVPaVQPcoItBbV@sunil-laptop>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 8 Feb 2023 09:06:48 +0800
+Message-ID: <CAEUhbmX6J5ja+_zdRQ8wuqKyU4uquM6ytnJMtqSfN2CSfLv=MA@mail.gmail.com>
+Subject: Re: [PATCH 04/10] hw/riscv/virt: virt-acpi-build.c: Add basic ACPI
+ tables
+To: Sunil V L <sunilvl@ventanamicro.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Andrew Jones <ajones@ventanamicro.com>, Anup Patel <apatel@ventanamicro.com>, 
+ Atish Kumar Patra <atishp@rivosinc.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -95,52 +81,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2023 19:20:37 -0000
+X-List-Received-Date: Wed, 08 Feb 2023 01:07:03 -0000
 
-On Tue, Feb 07, 2023 at 06:38:15AM -0800, Andrea Bolognani wrote:
-> On Tue, Feb 07, 2023 at 03:02:19PM +0100, Thomas Huth wrote:
-> > On 07/02/2023 14.56, Andrea Bolognani wrote:
-> > > It looks like i440fx and q35 both have an 'acpi' machine property. Is
-> > > -no-acpi just sugar for acpi=off?
-> >
-> > Yes, it is, see softmmu/vl.c:
-> >
-> >             case QEMU_OPTION_no_acpi:
-> >                 qdict_put_str(machine_opts_dict, "acpi", "off");
-> >                 break;
-> >
-> > > Is it considered desirable to get rid of -no-acpi?
-> >
-> > Sounds like a good idea, indeed!
-> >
-> > > If so, we should follow the usual deprecation
-> > > process and get rid of it after libvirt has had a chance to adapt.
+On Wed, Feb 8, 2023 at 2:15 AM Sunil V L <sunilvl@ventanamicro.com> wrote:
+>
+> On Wed, Feb 08, 2023 at 12:10:55AM +0800, Bin Meng wrote:
+> > On Mon, Feb 6, 2023 at 9:24 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
 > > >
-> > > In the scenario described above, it would make sense for RISC-V to
-> > > only offer the machine type option (assuming that -no-acpi doesn't
-> > > come for free with that) instead of putting additional effort into
-> > > implementing an interface that is already on its way out.
+> > > On Mon, Feb 06, 2023 at 06:17:50PM +0800, Bin Meng wrote:
+> > > > On Thu, Feb 2, 2023 at 12:54 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
+> > > > >
+> > > > > Add few basic ACPI tables and DSDT with few devices in a
+> > > > > new file virt-acpi-build.c.
+> > > > >
+> > > > > These are mostly leveraged from arm64.
+> > > >
+> > > > There are lots of same ACPI codes existing in x86/arm/riscv. I believe
+> > > > some refactoring work is needed before ACPI support fully lands on
+> > > > RISC-V.
+> > > > For example, we can extract the common part among x86/arm/riscv into a
+> > > > separate file, like hw/acpi/acpi-build.c?
+> > > >
+> > >
+> > > While it appears like there is same code in multiple places, those
+> > > functions take architecture specific MachineState parameter. Some tables
+> > > like MADT though with same name, will have different contents for
+> > > different architectures.
+> > >
+> > > Only one function which Daniel also pointed is the wrapper
+> > > acpi_align_size() which can be made common. I am not
+> > > sure whether it is worth of refactoring.
+> > >
 > >
-> > I agree. IMHO the machine parameter should be enough, no need to introduce
-> > "-no-acpi" here.
-> 
-> Well, it looks like -no-acpi will come for free after all, thanks to
-> the code you pasted above, as long as the machine property follows
-> the convention established by x86, arm and (I just noticed this one)
-> loongarch.
+> > It's more than that. For example,
+> >
+> > With acpi_dsdt_add_cpus(), the only meaningful parameter is the number
+> > of cpus, so there is no need to pass the architecture specific
+> > MachineState as the parameter.
+> >
+> I would not make this function common. The reason is, an architecture may
+> choose to attach different ACPI objects under the CPU node.
+>
 
-Not quite, because we also have
+Is it possible to insert architect specific CPU nodes after this
+common API builds the basic CPU node in DSDT?
 
-$ grep -A1 '"no-acpi"' qemu-options.hx
-DEF("no-acpi", 0, QEMU_OPTION_no_acpi,
-           "-no-acpi        disable ACPI\n", QEMU_ARCH_I386 | QEMU_ARCH_ARM)
+> > Likewise, acpi_dsdt_add_fw_cfg() can be made generic as well.
+> >
+> The issue is, these things are not exactly common across all architectures.
+> x86 has bit different data in these objects. While today it appears they
+> are same for riscv and arm, in future things may change for an architecture.
+> It doesn't look like it is a standard practice to build files under
+> hw/acpi for specific architectures. Hence, IMO, it is better to keep these
+> things in architecture specific folders to allow them to do differently in
+> future.
+>
 
-So that means neither riscv nor loongarch get -no-acpi just by adding
-the "acpi" machine property.
+It looks like hw/acpi/ghes.c is for Arm from MAINTAINERS.
 
-If the plan is to deprecate -no-acpi, then riscv can be like loongarch
-and only have the "acpi" property from the start.
+> But I look forward for the feedback from other architecture maintainers on
+> this topic. My experience in qemu is very limited. So, I need help from
+> experts.
 
-Thanks,
-drew
++ Michael and Igor
+
+Regards,
+Bin
 
