@@ -1,84 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPcOY-0002W9-RB
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 23:49:23 -0500
+	id 1pPdyW-0001OT-S5
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Feb 2023 01:30:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pPcOX-0002V4-F5
- for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 23:49:21 -0500
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1pPdyS-0001Nn-9s
+ for qemu-riscv@nongnu.org; Wed, 08 Feb 2023 01:30:32 -0500
+Received: from mail-oa1-x34.google.com ([2001:4860:4864:20::34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pPcOV-00048x-SZ
- for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 23:49:21 -0500
-Received: by mail-pl1-x629.google.com with SMTP id m2so18029990plg.4
- for <qemu-riscv@nongnu.org>; Tue, 07 Feb 2023 20:49:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/qKMln83+m3EOuan2AfwQRkmnnBaN4eOAIbd9JnOpKM=;
- b=adduCvNbmIcLrfdobmYrxFYdU6gvDdqz+eovas3eFvI8I88wvmlHEwThTpaEb4+Wq3
- YnVRlPoqkN7ZmLnmuuYDdZuV7OlY/5u1fZaLpVU05KM1skwYGBIdl1Rp14r8PK0abXRn
- bnJG9+VUNMsJvtl+M6OxXEsmZnanqjgUMcGQT9EyChWHhPWsPvMDxa6qJZkYUPBG/YSC
- ORjQX9wnZCf4U3e5Mha5WMIIDw36y0/vGmU3ZQimgWtaopoFKZaR4spJmQgl3EtwC6K8
- ADFNt2q33beuMKoer13PrGVkEcmT155FIOgiIRMD1ieZeNEkvOvC57gGHhhokZc++8nN
- F8og==
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1pPdyQ-0003T4-H0
+ for qemu-riscv@nongnu.org; Wed, 08 Feb 2023 01:30:32 -0500
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-16a8d511ce0so3510357fac.1
+ for <qemu-riscv@nongnu.org>; Tue, 07 Feb 2023 22:30:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=P9HmUPUbUwhMNhNgyAsaaHGlm+AuT1fH/lkFxS7uWSQ=;
+ b=JAC13ojhcZUdKtIdbyoLADN2fw0w0o+BuEJDyUFyaB34g5ePt25q2BPWEwmqJvHpk9
+ cLghYnaknPKQZF29i1W3uIwMnlsiW7YjjBunirte+ZTJJZ+j4n1WlNLKWxJEQvsm2liz
+ AuE1ixTy6LKTEbQPZwpq30jTuycaNMpI70ssEBaIXsKACnn+jKk4rxybpdNAPN2nVpRc
+ y1HtFRaDLcn2yyiJD8wCMqLuZzIEbykA6zCsX6ZMz/3ADdDFwdCmJE2mA7TV/Hb1yOuZ
+ y9d/LGMQsexwI01M0yJcWnDZ85T/2Dk+SiXxUMI3iaCwjea0nCSr0n40zTJ6cpqjb7OX
+ Eu7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/qKMln83+m3EOuan2AfwQRkmnnBaN4eOAIbd9JnOpKM=;
- b=0wdEg7oVMTMzu0G8ncglOsrJuyXdh4lxhOm1TwR93EfV1tMfn/3JwVafw5y97uvwlB
- Xh6/aPIReEGVJ8N2OPNn7AXh3c8c0FQnmecd4lox5kvQFdJHuOVT92v2deQtC6z36XkW
- fkCLpc/TRMb3YBzVAxiBfAWA2+PGbQNZGnFcUfk1mnovJbttNhx3pAHeBGhicO6DbVrT
- Pp2xaBGIBph4RY04FDhwFNBjIor8O0lKnMiqkKrQR5Kxz0+oCixZcjHFkL6kDlXJBfu4
- rih1fh5x47ZfljVQ5nA5CjmxdoxiJBckcvgUim+UII+mvODXdDMNJfl2A9caLcqU2n5U
- tO2Q==
-X-Gm-Message-State: AO0yUKV3EPWwSVxMHUO6CtHwRxuSMtapHu2VPOHK6aU+Pdpqf6efv7yK
- mqGDq/uAEMN9wuTB8GUbEn3LlQ==
-X-Google-Smtp-Source: AK7set/6+ljbtBrlJRWIWM5mjpWwwPUlv7Fq/D8eQ5/X+UfVZywe1lJyrjZGxjwmJMztPIU5YiIiNQ==
-X-Received: by 2002:a17:902:c20d:b0:199:3fcd:1755 with SMTP id
- 13-20020a170902c20d00b001993fcd1755mr1566163pll.46.1675831758115; 
- Tue, 07 Feb 2023 20:49:18 -0800 (PST)
-Received: from sunil-laptop ([49.206.14.226]) by smtp.gmail.com with ESMTPSA id
- v23-20020a1709028d9700b0019926c7757asm3206321plo.289.2023.02.07.20.49.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Feb 2023 20:49:17 -0800 (PST)
-Date: Wed, 8 Feb 2023 10:19:10 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>
-Subject: Re: [PATCH 04/10] hw/riscv/virt: virt-acpi-build.c: Add basic ACPI
- tables
-Message-ID: <Y+Mpxv0rmHN4pZ9b@sunil-laptop>
-References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
- <20230202045223.2594627-5-sunilvl@ventanamicro.com>
- <CAEUhbmXhXw7juMQTW7-XxSLwhcJrOiZ=4fiwFFAyoXj+sL0jUQ@mail.gmail.com>
- <Y+D/frPU/TE1aj7y@sunil-laptop>
- <CAEUhbmU2cofq767-9Lfs2CF+DzpZ6FCHz1ox1TC1siPs5uUdWQ@mail.gmail.com>
- <Y+KVPaVQPcoItBbV@sunil-laptop>
- <CAEUhbmX6J5ja+_zdRQ8wuqKyU4uquM6ytnJMtqSfN2CSfLv=MA@mail.gmail.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=P9HmUPUbUwhMNhNgyAsaaHGlm+AuT1fH/lkFxS7uWSQ=;
+ b=4Zl0UHgBxrp6TE8v73rNl191YlgOo7x4TMTthsaxCsD5iVP1IyYQ0GlJ5M++maxkJ0
+ gDOR0eGwqRRd/lZWbbXSI/595s+keWuBrpYD3ocv88uhqL740wYo6p2WnyTi2Tu7WLSu
+ rse/2Wl8FXTIe0VSqriLynZfcllbdSPjsqCgCYQPup1OorsiwTxZGZ+7dpF5Jm2xT3Mc
+ 7Y0IdX61TBTo3GY8gZ9o7gmkNno83fX2W1Ptf1IXUqZxoQNppNAmYFG9rx2FmdefcT+Y
+ 27Rlzeq2g33uZNMPA5RYH3Q2Hqm2PRQwj2g7CQeEWcRLnyvhSrwhVvdr3cGUNsB0+VLK
+ Zv1Q==
+X-Gm-Message-State: AO0yUKWz6VcevqKLTKRwSM55NbNuYG/KhufiNrKxgyo7gsMH30KCT+pd
+ AdmLuoBhFnM/y7zJRIE+aqeYzn9dJRDgNNRy3dcAtg==
+X-Google-Smtp-Source: AK7set8BK7C6mOos/I5DOzcWONGEExKcWHsOYYH6evsLR8vu4VmIJcBkNo3HkPqM/7T92Wxv0lecq1kXXlNWyDqFL58=
+X-Received: by 2002:a05:6870:c68a:b0:16a:4376:e95f with SMTP id
+ cv10-20020a056870c68a00b0016a4376e95fmr171941oab.165.1675837829003; Tue, 07
+ Feb 2023 22:30:29 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAEUhbmX6J5ja+_zdRQ8wuqKyU4uquM6ytnJMtqSfN2CSfLv=MA@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x629.google.com
+References: <20230207084341.303907-1-frank.chang@sifive.com>
+In-Reply-To: <20230207084341.303907-1-frank.chang@sifive.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Wed, 8 Feb 2023 14:30:18 +0800
+Message-ID: <CAE_xrPiwiPcmcTQ+nBEL8CVp3OQkup2t5hq53iCeustvueyG-g@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Remove .min_priv_ver restriction from RVV
+ CSRs
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>
+Content-Type: multipart/alternative; boundary="0000000000007fd14f05f42a66bc"
+Received-SPF: pass client-ip=2001:4860:4864:20::34;
+ envelope-from=frank.chang@sifive.com; helo=mail-oa1-x34.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,78 +75,140 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2023 04:49:21 -0000
+X-List-Received-Date: Wed, 08 Feb 2023 06:30:32 -0000
 
-On Wed, Feb 08, 2023 at 09:06:48AM +0800, Bin Meng wrote:
-> On Wed, Feb 8, 2023 at 2:15 AM Sunil V L <sunilvl@ventanamicro.com> wrote:
-> >
-> > On Wed, Feb 08, 2023 at 12:10:55AM +0800, Bin Meng wrote:
-> > > On Mon, Feb 6, 2023 at 9:24 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
-> > > >
-> > > > On Mon, Feb 06, 2023 at 06:17:50PM +0800, Bin Meng wrote:
-> > > > > On Thu, Feb 2, 2023 at 12:54 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
-> > > > > >
-> > > > > > Add few basic ACPI tables and DSDT with few devices in a
-> > > > > > new file virt-acpi-build.c.
-> > > > > >
-> > > > > > These are mostly leveraged from arm64.
-> > > > >
-> > > > > There are lots of same ACPI codes existing in x86/arm/riscv. I believe
-> > > > > some refactoring work is needed before ACPI support fully lands on
-> > > > > RISC-V.
-> > > > > For example, we can extract the common part among x86/arm/riscv into a
-> > > > > separate file, like hw/acpi/acpi-build.c?
-> > > > >
-> > > >
-> > > > While it appears like there is same code in multiple places, those
-> > > > functions take architecture specific MachineState parameter. Some tables
-> > > > like MADT though with same name, will have different contents for
-> > > > different architectures.
-> > > >
-> > > > Only one function which Daniel also pointed is the wrapper
-> > > > acpi_align_size() which can be made common. I am not
-> > > > sure whether it is worth of refactoring.
-> > > >
-> > >
-> > > It's more than that. For example,
-> > >
-> > > With acpi_dsdt_add_cpus(), the only meaningful parameter is the number
-> > > of cpus, so there is no need to pass the architecture specific
-> > > MachineState as the parameter.
-> > >
-> > I would not make this function common. The reason is, an architecture may
-> > choose to attach different ACPI objects under the CPU node.
-> >
-> 
-> Is it possible to insert architect specific CPU nodes after this
-> common API builds the basic CPU node in DSDT?
-> 
-No. They need to be added in the same loop. Otherwise, it will cause
-issues to the AML interpreter.
+--0000000000007fd14f05f42a66bc
+Content-Type: text/plain; charset="UTF-8"
 
-> > > Likewise, acpi_dsdt_add_fw_cfg() can be made generic as well.
-> > >
-> > The issue is, these things are not exactly common across all architectures.
-> > x86 has bit different data in these objects. While today it appears they
-> > are same for riscv and arm, in future things may change for an architecture.
-> > It doesn't look like it is a standard practice to build files under
-> > hw/acpi for specific architectures. Hence, IMO, it is better to keep these
-> > things in architecture specific folders to allow them to do differently in
-> > future.
-> >
-> 
-> It looks like hw/acpi/ghes.c is for Arm from MAINTAINERS.
-> 
-APEI is a standard feature but it is up to the architecture to use it or
-not. Probably, it is maintained by ARM since they adopted first. But if
-you look at hw/acpi/meson.build, it is not architecture specific.
+I realized that I should also remove the privileged version check
+in isa_edata_arr[], too.
+I will send out v2 patch to fix it.
 
-> > But I look forward for the feedback from other architecture maintainers on
-> > this topic. My experience in qemu is very limited. So, I need help from
-> > experts.
-> 
-> + Michael and Igor
-> 
-Thanks!
-Sunil
+Regards,
+Frank Chang
+
+On Tue, Feb 7, 2023 at 4:43 PM <frank.chang@sifive.com> wrote:
+
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> The RVV specification does not require that the core needs to support
+> the privileged specification v1.12.0 to support RVV, and there is no
+> dependency from ISA level. This commit removes the restriction.
+>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>  target/riscv/csr.c | 21 +++++++--------------
+>  1 file changed, 7 insertions(+), 14 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index fa17d7770c4..1b0a0c1693c 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -3980,20 +3980,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      [CSR_FRM]      = { "frm",      fs,     read_frm,     write_frm    },
+>      [CSR_FCSR]     = { "fcsr",     fs,     read_fcsr,    write_fcsr   },
+>      /* Vector CSRs */
+> -    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart,
+> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+> -    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat,
+> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+> -    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm,
+> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+> -    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr,
+> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+> -    [CSR_VL]       = { "vl",       vs,     read_vl,
+> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+> -    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype,
+> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+> -    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb,
+> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+> +    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart },
+> +    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat  },
+> +    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm   },
+> +    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr   },
+> +    [CSR_VL]       = { "vl",       vs,     read_vl                    },
+> +    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype                 },
+> +    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb                 },
+>      /* User Timers and Counters */
+>      [CSR_CYCLE]    = { "cycle",    ctr,    read_hpmcounter  },
+>      [CSR_INSTRET]  = { "instret",  ctr,    read_hpmcounter  },
+> --
+> 2.25.1
+>
+>
+
+--0000000000007fd14f05f42a66bc
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+PGRpdiBkaXI9Imx0ciI+SSByZWFsaXplZCB0aGF0IEkgc2hvdWxkIGFsc28gcmVtb3ZlIHRoZSBw
+cml2aWxlZ2VkIHZlcnNpb24gY2hlY2sgaW7CoGlzYV9lZGF0YV9hcnJbXSwgdG9vLjxkaXY+SSB3
+aWxsIHNlbmQgb3V0IHYyIHBhdGNoIHRvIGZpeCBpdC48L2Rpdj48ZGl2Pjxicj48L2Rpdj48ZGl2
+PlJlZ2FyZHMsPC9kaXY+PGRpdj5GcmFuayBDaGFuZzwvZGl2PjwvZGl2Pjxicj48ZGl2IGNsYXNz
+PSJnbWFpbF9xdW90ZSI+PGRpdiBkaXI9Imx0ciIgY2xhc3M9ImdtYWlsX2F0dHIiPk9uIFR1ZSwg
+RmViIDcsIDIwMjMgYXQgNDo0MyBQTSAmbHQ7PGEgaHJlZj0ibWFpbHRvOmZyYW5rLmNoYW5nQHNp
+Zml2ZS5jb20iPmZyYW5rLmNoYW5nQHNpZml2ZS5jb208L2E+Jmd0OyB3cm90ZTo8YnI+PC9kaXY+
+PGJsb2NrcXVvdGUgY2xhc3M9ImdtYWlsX3F1b3RlIiBzdHlsZT0ibWFyZ2luOjBweCAwcHggMHB4
+IDAuOGV4O2JvcmRlci1sZWZ0OjFweCBzb2xpZCByZ2IoMjA0LDIwNCwyMDQpO3BhZGRpbmctbGVm
+dDoxZXgiPkZyb206IEZyYW5rIENoYW5nICZsdDs8YSBocmVmPSJtYWlsdG86ZnJhbmsuY2hhbmdA
+c2lmaXZlLmNvbSIgdGFyZ2V0PSJfYmxhbmsiPmZyYW5rLmNoYW5nQHNpZml2ZS5jb208L2E+Jmd0
+Ozxicj4NCjxicj4NClRoZSBSVlYgc3BlY2lmaWNhdGlvbiBkb2VzIG5vdCByZXF1aXJlIHRoYXQg
+dGhlIGNvcmUgbmVlZHMgdG8gc3VwcG9ydDxicj4NCnRoZSBwcml2aWxlZ2VkIHNwZWNpZmljYXRp
+b24gdjEuMTIuMCB0byBzdXBwb3J0IFJWViwgYW5kIHRoZXJlIGlzIG5vPGJyPg0KZGVwZW5kZW5j
+eSBmcm9tIElTQSBsZXZlbC4gVGhpcyBjb21taXQgcmVtb3ZlcyB0aGUgcmVzdHJpY3Rpb24uPGJy
+Pg0KPGJyPg0KU2lnbmVkLW9mZi1ieTogRnJhbmsgQ2hhbmcgJmx0OzxhIGhyZWY9Im1haWx0bzpm
+cmFuay5jaGFuZ0BzaWZpdmUuY29tIiB0YXJnZXQ9Il9ibGFuayI+ZnJhbmsuY2hhbmdAc2lmaXZl
+LmNvbTwvYT4mZ3Q7PGJyPg0KLS0tPGJyPg0KwqB0YXJnZXQvcmlzY3YvY3NyLmMgfCAyMSArKysr
+KysrLS0tLS0tLS0tLS0tLS08YnI+DQrCoDEgZmlsZSBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKyks
+IDE0IGRlbGV0aW9ucygtKTxicj4NCjxicj4NCmRpZmYgLS1naXQgYS90YXJnZXQvcmlzY3YvY3Ny
+LmMgYi90YXJnZXQvcmlzY3YvY3NyLmM8YnI+DQppbmRleCBmYTE3ZDc3NzBjNC4uMWIwYTBjMTY5
+M2MgMTAwNjQ0PGJyPg0KLS0tIGEvdGFyZ2V0L3Jpc2N2L2Nzci5jPGJyPg0KKysrIGIvdGFyZ2V0
+L3Jpc2N2L2Nzci5jPGJyPg0KQEAgLTM5ODAsMjAgKzM5ODAsMTMgQEAgcmlzY3ZfY3NyX29wZXJh
+dGlvbnMgY3NyX29wc1tDU1JfVEFCTEVfU0laRV0gPSB7PGJyPg0KwqAgwqAgwqBbQ1NSX0ZSTV3C
+oCDCoCDCoCA9IHsgJnF1b3Q7ZnJtJnF1b3Q7LMKgIMKgIMKgIGZzLMKgIMKgIMKgcmVhZF9mcm0s
+wqAgwqAgwqB3cml0ZV9mcm3CoCDCoCB9LDxicj4NCsKgIMKgIMKgW0NTUl9GQ1NSXcKgIMKgIMKg
+PSB7ICZxdW90O2Zjc3ImcXVvdDsswqAgwqAgwqBmcyzCoCDCoCDCoHJlYWRfZmNzcizCoCDCoCB3
+cml0ZV9mY3NywqAgwqB9LDxicj4NCsKgIMKgIMKgLyogVmVjdG9yIENTUnMgKi88YnI+DQotwqAg
+wqAgW0NTUl9WU1RBUlRdwqAgwqA9IHsgJnF1b3Q7dnN0YXJ0JnF1b3Q7LMKgIMKgdnMswqAgwqAg
+wqByZWFkX3ZzdGFydCzCoCB3cml0ZV92c3RhcnQsPGJyPg0KLcKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgIMKgIMKgIMKgIMKgLm1pbl9wcml2X3ZlciA9IFBSSVZfVkVSU0lPTl8xXzEyXzDCoCDCoCDC
+oCDCoCDCoCDCoCB9LDxicj4NCi3CoCDCoCBbQ1NSX1ZYU0FUXcKgIMKgID0geyAmcXVvdDt2eHNh
+dCZxdW90OyzCoCDCoCB2cyzCoCDCoCDCoHJlYWRfdnhzYXQswqAgwqB3cml0ZV92eHNhdCw8YnI+
+DQotwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAubWluX3ByaXZfdmVyID0gUFJJ
+Vl9WRVJTSU9OXzFfMTJfMMKgIMKgIMKgIMKgIMKgIMKgIH0sPGJyPg0KLcKgIMKgIFtDU1JfVlhS
+TV3CoCDCoCDCoD0geyAmcXVvdDt2eHJtJnF1b3Q7LMKgIMKgIMKgdnMswqAgwqAgwqByZWFkX3Z4
+cm0swqAgwqAgd3JpdGVfdnhybSw8YnI+DQotwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAubWluX3ByaXZfdmVyID0gUFJJVl9WRVJTSU9OXzFfMTJfMMKgIMKgIMKgIMKgIMKgIMKg
+IH0sPGJyPg0KLcKgIMKgIFtDU1JfVkNTUl3CoCDCoCDCoD0geyAmcXVvdDt2Y3NyJnF1b3Q7LMKg
+IMKgIMKgdnMswqAgwqAgwqByZWFkX3Zjc3IswqAgwqAgd3JpdGVfdmNzciw8YnI+DQotwqAgwqAg
+wqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAubWluX3ByaXZfdmVyID0gUFJJVl9WRVJTSU9O
+XzFfMTJfMMKgIMKgIMKgIMKgIMKgIMKgIH0sPGJyPg0KLcKgIMKgIFtDU1JfVkxdwqAgwqAgwqAg
+wqA9IHsgJnF1b3Q7dmwmcXVvdDsswqAgwqAgwqAgwqB2cyzCoCDCoCDCoHJlYWRfdmwsPGJyPg0K
+LcKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgLm1pbl9wcml2X3ZlciA9IFBSSVZf
+VkVSU0lPTl8xXzEyXzDCoCDCoCDCoCDCoCDCoCDCoCB9LDxicj4NCi3CoCDCoCBbQ1NSX1ZUWVBF
+XcKgIMKgID0geyAmcXVvdDt2dHlwZSZxdW90OyzCoCDCoCB2cyzCoCDCoCDCoHJlYWRfdnR5cGUs
+PGJyPg0KLcKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgLm1pbl9wcml2X3ZlciA9
+IFBSSVZfVkVSU0lPTl8xXzEyXzDCoCDCoCDCoCDCoCDCoCDCoCB9LDxicj4NCi3CoCDCoCBbQ1NS
+X1ZMRU5CXcKgIMKgID0geyAmcXVvdDt2bGVuYiZxdW90OyzCoCDCoCB2cyzCoCDCoCDCoHJlYWRf
+dmxlbmIsPGJyPg0KLcKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgLm1pbl9wcml2
+X3ZlciA9IFBSSVZfVkVSU0lPTl8xXzEyXzDCoCDCoCDCoCDCoCDCoCDCoCB9LDxicj4NCivCoCDC
+oCBbQ1NSX1ZTVEFSVF3CoCDCoD0geyAmcXVvdDt2c3RhcnQmcXVvdDsswqAgwqB2cyzCoCDCoCDC
+oHJlYWRfdnN0YXJ0LMKgIHdyaXRlX3ZzdGFydCB9LDxicj4NCivCoCDCoCBbQ1NSX1ZYU0FUXcKg
+IMKgID0geyAmcXVvdDt2eHNhdCZxdW90OyzCoCDCoCB2cyzCoCDCoCDCoHJlYWRfdnhzYXQswqAg
+wqB3cml0ZV92eHNhdMKgIH0sPGJyPg0KK8KgIMKgIFtDU1JfVlhSTV3CoCDCoCDCoD0geyAmcXVv
+dDt2eHJtJnF1b3Q7LMKgIMKgIMKgdnMswqAgwqAgwqByZWFkX3Z4cm0swqAgwqAgd3JpdGVfdnhy
+bcKgIMKgfSw8YnI+DQorwqAgwqAgW0NTUl9WQ1NSXcKgIMKgIMKgPSB7ICZxdW90O3Zjc3ImcXVv
+dDsswqAgwqAgwqB2cyzCoCDCoCDCoHJlYWRfdmNzcizCoCDCoCB3cml0ZV92Y3NywqAgwqB9LDxi
+cj4NCivCoCDCoCBbQ1NSX1ZMXcKgIMKgIMKgIMKgPSB7ICZxdW90O3ZsJnF1b3Q7LMKgIMKgIMKg
+IMKgdnMswqAgwqAgwqByZWFkX3ZswqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgfSw8YnI+
+DQorwqAgwqAgW0NTUl9WVFlQRV3CoCDCoCA9IHsgJnF1b3Q7dnR5cGUmcXVvdDsswqAgwqAgdnMs
+wqAgwqAgwqByZWFkX3Z0eXBlwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqB9LDxicj4NCivCoCDC
+oCBbQ1NSX1ZMRU5CXcKgIMKgID0geyAmcXVvdDt2bGVuYiZxdW90OyzCoCDCoCB2cyzCoCDCoCDC
+oHJlYWRfdmxlbmLCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoCDCoH0sPGJyPg0KwqAgwqAgwqAvKiBV
+c2VyIFRpbWVycyBhbmQgQ291bnRlcnMgKi88YnI+DQrCoCDCoCDCoFtDU1JfQ1lDTEVdwqAgwqAg
+PSB7ICZxdW90O2N5Y2xlJnF1b3Q7LMKgIMKgIGN0cizCoCDCoCByZWFkX2hwbWNvdW50ZXLCoCB9
+LDxicj4NCsKgIMKgIMKgW0NTUl9JTlNUUkVUXcKgID0geyAmcXVvdDtpbnN0cmV0JnF1b3Q7LMKg
+IGN0cizCoCDCoCByZWFkX2hwbWNvdW50ZXLCoCB9LDxicj4NCi0tIDxicj4NCjIuMjUuMTxicj4N
+Cjxicj4NCjwvYmxvY2txdW90ZT48L2Rpdj4NCg==
+--0000000000007fd14f05f42a66bc--
 
