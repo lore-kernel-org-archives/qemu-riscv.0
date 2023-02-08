@@ -1,97 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPndC-000717-Cy
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Feb 2023 11:49:15 -0500
+	id 1pPqBj-0007TE-8s
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Feb 2023 14:33:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1pPnd5-00070e-RF
- for qemu-riscv@nongnu.org; Wed, 08 Feb 2023 11:49:09 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1pPnd1-0001x6-PW
- for qemu-riscv@nongnu.org; Wed, 08 Feb 2023 11:49:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1675874941;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=1rBO6BPxX2JsKKWVKM4Id2mvZ/jNawONjRxMddbGT9k=;
- b=Rp9w0X+gHColNrxjfAyDYpULnQZGI+qBzj419lVbNEUfWY+deG//PHq2rlRAigBFzk+GlI
- i1CBzKPsahKga5l1F6SU+slXRg8KRIPvcjAg5gUi0mRbNu+Q9a1WR53VJNai/IAHBW73+l
- h6q65qBIbgzfYQjXKbyvGWReLNXL6VQ=
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-619-UQM9edNJPmqg6NssET3nBg-1; Wed, 08 Feb 2023 11:49:00 -0500
-X-MC-Unique: UQM9edNJPmqg6NssET3nBg-1
-Received: by mail-pj1-f70.google.com with SMTP id
- c4-20020a17090a674400b00230c06f525bso1550831pjm.2
- for <qemu-riscv@nongnu.org>; Wed, 08 Feb 2023 08:49:00 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1pPqBQ-0007HT-4K
+ for qemu-riscv@nongnu.org; Wed, 08 Feb 2023 14:32:45 -0500
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1pPqBJ-00071P-Ad
+ for qemu-riscv@nongnu.org; Wed, 08 Feb 2023 14:32:40 -0500
+Received: by mail-pl1-x62b.google.com with SMTP id m2so20531416plg.4
+ for <qemu-riscv@nongnu.org>; Wed, 08 Feb 2023 11:32:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20210112.gappssmtp.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:to:from:cc
+ :in-reply-to:subject:date:from:to:cc:subject:date:message-id
+ :reply-to; bh=tFggisxxgfD6kmx0GPY2F8T8DXDuc4ugX5G1DQKz790=;
+ b=dz7JaG0hNVXvYzcvhXAbk1T+EUE1qZy3cCGWOlV+n4RmNFDC0SGgBPgTEb+3QA+kyr
+ D7UXIdetzi35/Zia8LMKCIDFm/dSrtf7esOyLGpUYJkE/ZJruT/XYgsc+Ls1BGYa5LZQ
+ lH4EaNVq9+gq7kaC79NdtmF2u/HiJ+BQj7+wJZCr9pkifz6qIbXyn/kTY053qfrkJXLv
+ A7429ZZHAncVvLEOiTaiQKxf8zQZXVR3umew1Q+PyecSkMSVRBQzh3ZTNQaOU8oZxseG
+ ekA+VqDvWZ9RuV/lOG1Ww05HbLVqzD0/pjD63w1tezFegn9WII6LXXeD0b6IyMoNPvHz
+ AJtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:in-reply-to
- :mime-version:references:from:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=1rBO6BPxX2JsKKWVKM4Id2mvZ/jNawONjRxMddbGT9k=;
- b=V+S7yv9wg5XQ670RdhwDZ7FrbQAQEmgDnEjQ8obYgxqCL0awRox5fg/Pp0LCdJXpZQ
- j8NAGpN55rJ9YjxWLuFRLLLYotNIAxtMigJT4DA/J0AOQpbLJib/AKD3gzBzf19wunMg
- l81OnLlliWbNrTDwy+n5Ee2suerw+RDhY1Jz/NkBHVAdi+JMUY1fbG/9YDqQ1Wh/Ron0
- kMF/cENm0arKige4oCkARMpL2JxOBbijjjePETkWkk6QQnnJkofip8uB/GjipT/Sj6Th
- k5LcaF6Fjdt/D9oAetaf1g4Pk8SmNePq3xmftsWdPG1pZOvprGmADmBLQhsMiFoz5xko
- oetw==
-X-Gm-Message-State: AO0yUKWlxvVMGBNoZTMzbYTDaxZOUioTnvn7o2CeRHwMAbmURpCnZvHJ
- BKeQDqlEL70navGjo/CpWNYR89sLMBZIqPI1YpbjU2m8yaxzGxmRgfRJxidNsvGOtmJP0dBHDn3
- yZKA9EjLr9H9T+2oy55wVQg89qLYtFE0=
-X-Received: by 2002:a62:1c08:0:b0:590:762f:58bc with SMTP id
- c8-20020a621c08000000b00590762f58bcmr1755528pfc.50.1675874939214; 
- Wed, 08 Feb 2023 08:48:59 -0800 (PST)
-X-Google-Smtp-Source: AK7set9xRAGJcNCX+DiKV/md7TdgznjA3jdrc0kaqctbi7+Ms62lfu2n/YwfLrNsEeASkGIbEnrQVoGKlaNr6lqA2p8=
-X-Received: by 2002:a62:1c08:0:b0:590:762f:58bc with SMTP id
- c8-20020a621c08000000b00590762f58bcmr1755504pfc.50.1675874938886; Wed, 08 Feb
- 2023 08:48:58 -0800 (PST)
-Received: from 744723338238 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 8 Feb 2023 08:48:58 -0800
-From: Andrea Bolognani <abologna@redhat.com>
-References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
- <20230202045223.2594627-3-sunilvl@ventanamicro.com>
- <CABJz62PFGT1H-AArbfTkpiX24mHU=q3wk7h-bpduZhJyy7tTLw@mail.gmail.com>
- <fe3b5794-be2a-eec7-9d4e-9a13eab48378@linaro.org>
- <20230207102353.hpg2gxh22urjbebu@orel>
- <CABJz62M+n4DFqMPttzaDrSRzDcjkyEduX_NAv=-9J58mmUe+Ng@mail.gmail.com>
- <9c05b850-ae25-12aa-c6d0-b7a813a5ee03@redhat.com>
- <CABJz62PuT+kG2X9OEBQRfybWn2ESJ3aNaEBkvDG=XK_43ZC_8w@mail.gmail.com>
- <20230207192031.pu5uy2yppv3htjw5@orel>
-MIME-Version: 1.0
-In-Reply-To: <20230207192031.pu5uy2yppv3htjw5@orel>
-Date: Wed, 8 Feb 2023 08:48:58 -0800
-Message-ID: <CABJz62O6U88GzAuVT78wVOk0f232hhTw35CjOBJL+eBAUfbpCg@mail.gmail.com>
-Subject: Re: [PATCH 02/10] hw/riscv/virt: Add a switch to enable/disable ACPI
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: Thomas Huth <thuth@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Sunil V L <sunilvl@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- qemu-riscv@nongnu.org, 
- qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>, 
- Atish Kumar Patra <atishp@rivosinc.com>, Ani Sinha <ani@anisinha.ca>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Markus Armbruster <armbru@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, 
- Gerd Hoffmann <kraxel@redhat.com>, Bernhard Beschow <shentey@gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=abologna@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ h=content-transfer-encoding:mime-version:message-id:to:from:cc
+ :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tFggisxxgfD6kmx0GPY2F8T8DXDuc4ugX5G1DQKz790=;
+ b=cdGMXcvMubyQf9mdffe2lvmDfMI3muy0SbziKXDnX07zdIpC9ASKxp+NUahaMoJhce
+ z4gEnKq8lqNoV7zaOYO1urScPsc/0molpBrb0ldGUwQVJRd8YSHvOg+L5EcWZaHfQBOz
+ hx7bLeFo98vqdS3D1Gm8vgSMJn9fqFSvJjOn5fGn5Gt4GhJRZrNDcYZWNmSIygbKpVb9
+ 5W3frCcMAdIFUJIE3t3nOkHjH5+sDX3Uix8dl05346J4NAagDZYi4NsKINj1UcWT+HDI
+ TSvFv7oWg5D1m1HmNEa1sx597GfdP5ROjd6xPjvJoP3I+60kbSjsGblA78E8Vb78tQzy
+ aq8g==
+X-Gm-Message-State: AO0yUKXfyN8Nzwxq1vaEyVjrY92AC5fUyo14d4Al9UdMS93P1RgK/aRj
+ lUaysN5gU3M+BdBxGpwSGkAdgA==
+X-Google-Smtp-Source: AK7set/JJINVL2/ghiEyQaUpPNNo6MdeDHsXbSNO6blx6+AIXB6H0p9/e+fP2H0UoOkgZ90xMrE5fw==
+X-Received: by 2002:a17:90b:4c8e:b0:230:d4a2:88d3 with SMTP id
+ my14-20020a17090b4c8e00b00230d4a288d3mr9492912pjb.48.1675884754877; 
+ Wed, 08 Feb 2023 11:32:34 -0800 (PST)
+Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
+ mv17-20020a17090b199100b00229094aabd0sm1930820pjb.35.2023.02.08.11.32.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Feb 2023 11:32:34 -0800 (PST)
+Date: Wed, 08 Feb 2023 11:32:34 -0800 (PST)
+X-Google-Original-Date: Wed, 08 Feb 2023 11:31:56 PST (-0800)
+Subject: Re: Fwd: [RFC PATCH 00/39] Add RISC-V cryptography extensions
+ standardisation
+In-Reply-To: <c3e76130725358ade9e87681f3c0233f@codethink.co.uk>
+CC: Alistair Francis <Alistair.Francis@wdc.com>, philipp.tomsich@vrull.eu,
+ frank.chang@sifive.com, dickon.hood@codethink.co.uk, qemu-riscv@nongnu.org,
+ kvm@vger.kernel.org, pbonzini@redhat.com, bin.meng@windriver.com
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: lawrence.hunter@codethink.co.uk
+Message-ID: <mhng-b8712b20-02a0-477c-a0e8-69269b928dc0@palmer-ri-x1c9a>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=palmer@dabbelt.com; helo=mail-pl1-x62b.google.com
+X-Spam_score_int: -13
+X-Spam_score: -1.4
+X-Spam_bar: -
+X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, URI_NOVOWEL=0.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,57 +80,242 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2023 16:49:09 -0000
+X-List-Received-Date: Wed, 08 Feb 2023 19:32:49 -0000
 
-On Tue, Feb 07, 2023 at 08:20:31PM +0100, Andrew Jones wrote:
-> On Tue, Feb 07, 2023 at 06:38:15AM -0800, Andrea Bolognani wrote:
-> > Well, it looks like -no-acpi will come for free after all, thanks to
-> > the code you pasted above, as long as the machine property follows
-> > the convention established by x86, arm and (I just noticed this one)
-> > loongarch.
+On Mon, 30 Jan 2023 03:38:13 PST (-0800), lawrence.hunter@codethink.co.uk wrote:
 >
-> Not quite, because we also have
 >
-> $ grep -A1 '"no-acpi"' qemu-options.hx
-> DEF("no-acpi", 0, QEMU_OPTION_no_acpi,
->            "-no-acpi        disable ACPI\n", QEMU_ARCH_I386 | QEMU_ARCH_A=
-RM)
+> On 2023-01-29 22:23, Alistair Francis wrote:
+>> On Sun, 2023-01-29 at 23:12 +0100, Philipp Tomsich wrote:
+>>>
+>>>
+>>> On Sun, 29 Jan 2023 at 23:08, Alistair Francis
+>>> <Alistair.Francis@wdc.com> wrote:
+>>> > On Thu, 2023-01-26 at 09:21 +0000, Lawrence Hunter wrote:
+>>> > > Follow up for add RISC-V vector cryptography extensions
+>>> > > standardisation
+>>> > > RFC: we've not received any comments and would like to move this
+>>> > > series
+>>> > > towards getting merged. Does anyone have time to review it, and
+>>> > > should
+>>> > > we look at resubmitting for merging soon?
+>>> >
+>>> > Hello,
+>>> >
+>>> > This series never made it to the QEMU list. It looks like it was
+>>> > never
+>>> > sent to the general qemu-devel mailing list.
+>>> >
+>>>
+>>>
+>>> This has so far been more than a little painful for our review, as we
+>>> can't just pull the patches down from patchwork to use our regular
+>>> test-and-review flow.
+>>> Should we wait until the resubmission for our review?
 >
-> So that means neither riscv nor loongarch get -no-acpi just by adding
-> the "acpi" machine property.
+> We have pushed a branch 'rfc-zvk-19-01-23' with our commits based on a
+> fairly recent master. Hopefully this will ease the review process.
 >
-> If the plan is to deprecate -no-acpi, then riscv can be like loongarch
-> and only have the "acpi" property from the start.
+> https://github.com/CodethinkLabs/qemu-ct.git
 
-Makes sense.
+That's frequently helpful too, but the standard practice in QEMU is to 
+always CC qemu-devel, even if you're aiming at another list too (like 
+qemu-riscv, for example).  It's different than Linux, and IIUC it's 
+there to make some of the automation work.
 
-
-For the libvirt integration, do I understand correctly that the
-machine property was added by commit
-
-  commit 17e89077b7e3bc1d96540e21ddc7451c3e077049
-  Author: Gerd Hoffmann <kraxel@redhat.com>
-  Date:   Fri Mar 20 11:01:36 2020 +0100
-
-    acpi: add acpi=3DOnOffAuto machine property to x86 and arm virt
-
-    Remove the global acpi_enabled bool and replace it with an
-    acpi OnOffAuto machine property.
-
-    qemu throws an error now if you use -no-acpi while the machine
-    type you are using doesn't support acpi in the first place.
-
-    Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-    Message-Id: <20200320100136.11717-1-kraxel@redhat.com>
-    Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com>
-    Acked-by: Paolo Bonzini <pbonzini@redhat.com>
-    Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
-    Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-
-included in QEMU 5.0? libvirt still officially supports QEMU 4.2, so
-we'll have to make the use of the machine property conditional.
-
---=20
-Andrea Bolognani / Red Hat / Virtualization
-
+>
+>>
+>> Up to you. It won't be merged unless it has been sent to the general
+>> mailing list, so you can either get a head start or just wait.
+>>
+>>>
+>>> Note that the current series is not in-sync with the latest
+>>> specification.
+>>
+>> It's only an RFC, so for now that's ok as it won't be merged anyway.
+>>
+>> Alistair
+>>
+>>> We'll try to point out the specific deviations (we have a tree that
+>>> we've been keeping in sync with the changes to the spec since mid-
+>>> December) in our reviews.
+>>>
+>>> Cheers,
+>>> Philipp.
+>>>  
+>>> > When submitting patches can you please follow the steps here:
+>>> > https://www.qemu.org/docs/master/devel/submitting-a-patch.html#submitting-your-patches
+>>> >
+>>> > It's important that all patches are sent to the qemu-devel mailing
+>>> > list
+>>> > (that's actually much more important then the RISC-V mailing list).
+>>> >
+>>> > Alistair
+>>> >
+>>> > >
+>>> > > ---------- Forwarded Message ---------
+>>> > >
+>>> > > From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+>>> > > Subject: [RFC PATCH 00/39] Add RISC-V cryptography extensions
+>>> > > standardisation
+>>> > > Date: Jan 19 2023, at 2:34 pm
+>>> > > To: qemu-riscv@nongnu.org
+>>> > > Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com, Lawrence
+>>> > > Hunter <lawrence.hunter@codethink.co.uk>
+>>> > >
+>>> > >
+>>> > > > This RFC introduces an implementation for the six instruction
+>>> > > > sets
+>>> > > > of the draft RISC-V cryptography extensions standardisation
+>>> > > > specification. Once the specification has been ratified we will
+>>> > > > submit
+>>> > > > these changes as a pull request email to this mailing list.
+>>> > > > Would
+>>> > > > this
+>>> > > > be prefered by instruction group or unified as in this RFC?
+>>> > > >
+>>> > > > This patch set implements the instruction sets as per the
+>>> > > > 20221202
+>>> > > > version of the specification (1).
+>>> > > >
+>>> > > > Work performed by Dickon, Lawrence, Nazar, Kiran, and William
+>>> > > > from
+>>> > > > Codethink
+>>> > > > sponsored by SiFive, and Max Chou from SiFive.
+>>> > > >
+>>> > > > 1. https://github.com/riscv/riscv-crypto/releases
+>>> > > >
+>>> > > > Dickon Hood (1):
+>>> > > >  target/riscv: Add vrol.[vv,vx] and vror.[vv,vx,vi] decoding,
+>>> > > >    translation and execution support
+>>> > > >
+>>> > > > Kiran Ostrolenk (4):
+>>> > > >  target/riscv: Add vsha2ms.vv decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: add zvksh cpu property
+>>> > > >  target/riscv: Add vsm3c.vi decoding, translation and execution
+>>> > > > support
+>>> > > >  target/riscv: expose zvksh cpu property
+>>> > > >
+>>> > > > Lawrence Hunter (16):
+>>> > > >  target/riscv: Add vclmul.vv decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vclmul.vx decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vclmulh.vv decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vclmulh.vx decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vaesef.vv decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vaesef.vs decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vaesdf.vv decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vaesdf.vs decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vaesdm.vv decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vaesdm.vs decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vaesz.vs decoding, translation and execution
+>>> > > > support
+>>> > > >  target/riscv: Add vsha2c[hl].vv decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vsm3me.vv decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: add zvkg cpu property
+>>> > > >  target/riscv: Add vghmac.vv decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: expose zvkg cpu property
+>>> > > >
+>>> > > > Max Chou (5):
+>>> > > >  crypto: Move SM4_SBOXWORD from target/riscv
+>>> > > >  crypto: Add SM4 constant parameter CK.
+>>> > > >  target/riscv: Add zvksed cfg property
+>>> > > >  target/riscv: Add Zvksed support
+>>> > > >  target/riscv: Expose Zvksed property
+>>> > > >
+>>> > > > Nazar Kazakov (10):
+>>> > > >  target/riscv: add zvkb cpu property
+>>> > > >  target/riscv: Add vrev8.v decoding, translation and execution
+>>> > > > support
+>>> > > >  target/riscv: Add vandn.[vv,vx,vi] decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: expose zvkb cpu property
+>>> > > >  target/riscv: add zvkns cpu property
+>>> > > >  target/riscv: Add vaeskf1.vi decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vaeskf2.vi decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: expose zvkns cpu property
+>>> > > >  target/riscv: add zvknh cpu properties
+>>> > > >  target/riscv: expose zvknh cpu properties
+>>> > > >
+>>> > > > William Salmon (3):
+>>> > > >  target/riscv: Add vbrev8.v decoding, translation and execution
+>>> > > > support
+>>> > > >  target/riscv: Add vaesem.vv decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >  target/riscv: Add vaesem.vs decoding, translation and
+>>> > > > execution
+>>> > > >    support
+>>> > > >
+>>> > > > crypto/sm4.c                                 |   10 +
+>>> > > > include/crypto/sm4.h                         |    8 +
+>>> > > > include/qemu/bitops.h                        |   32 +
+>>> > > > target/arm/crypto_helper.c                   |   10 +-
+>>> > > > target/riscv/cpu.c                           |   15 +
+>>> > > > target/riscv/cpu.h                           |    7 +
+>>> > > > target/riscv/crypto_helper.c                 |    1 +
+>>> > > > target/riscv/helper.h                        |   69 ++
+>>> > > > target/riscv/insn32.decode                   |   48 +
+>>> > > > target/riscv/insn_trans/trans_rvzvkb.c.inc   |  164 +++
+>>> > > > target/riscv/insn_trans/trans_rvzvkg.c.inc   |    8 +
+>>> > > > target/riscv/insn_trans/trans_rvzvknh.c.inc  |   47 +
+>>> > > > target/riscv/insn_trans/trans_rvzvkns.c.inc  |  121 +++
+>>> > > > target/riscv/insn_trans/trans_rvzvksed.c.inc |   38 +
+>>> > > > target/riscv/insn_trans/trans_rvzvksh.c.inc  |   20 +
+>>> > > > target/riscv/meson.build                     |    4 +-
+>>> > > > target/riscv/translate.c                     |    6 +
+>>> > > > target/riscv/vcrypto_helper.c                | 1013
+>>> > > > ++++++++++++++++++
+>>> > > > target/riscv/vector_helper.c                 |  242 +----
+>>> > > > target/riscv/vector_internals.c              |   63 ++
+>>> > > > target/riscv/vector_internals.h              |  226 ++++
+>>> > > > 21 files changed, 1902 insertions(+), 250 deletions(-)
+>>> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvkb.c.inc
+>>> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvkg.c.inc
+>>> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvknh.c.inc
+>>> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvkns.c.inc
+>>> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvksed.c.inc
+>>> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvksh.c.inc
+>>> > > > create mode 100644 target/riscv/vcrypto_helper.c
+>>> > > > create mode 100644 target/riscv/vector_internals.c
+>>> > > > create mode 100644 target/riscv/vector_internals.h
+>>> > > >
+>>> > > > --
+>>> > > > 2.39.1
+>>> > > >
+>>> > > >
+>>> > > >
+>>> >
 
