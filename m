@@ -1,79 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPZOv-0003vc-9O
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 20:37:33 -0500
+	id 1pPcOY-0002W9-RB
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Feb 2023 23:49:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baxiantai@gmail.com>)
- id 1pPZ5L-0007Wb-Sn; Tue, 07 Feb 2023 20:17:19 -0500
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1pPcOX-0002V4-F5
+ for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 23:49:21 -0500
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baxiantai@gmail.com>)
- id 1pPZ5J-0002kR-Ik; Tue, 07 Feb 2023 20:17:18 -0500
-Received: by mail-pj1-x102d.google.com with SMTP id
- hv11-20020a17090ae40b00b002307b580d7eso646536pjb.3; 
- Tue, 07 Feb 2023 17:17:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DSLzNJuWkg7tvG4FkRF1XFIRdaFYWhWj/f0U2sJ8ERs=;
- b=PqF7cco9za+AKQPtlWSnxrC0P1jINmxBUmXZjl6Zd+5ZnoCzEzQwstQQObxOLUj6sR
- m7InSc1a+7dOokGQtkyY/qycLecITvENOO9sWZ7n2IA7dxqw9o7ZKrqFAIhW5UNnb4jX
- HkEVgF3oxtBbPuA+jsr+EJRidy8cwSbQnD3sZAOV189EF2kY22lveZNPB0kMPjv4j1vY
- jyq4WrEA7hFidomgqeRreQbcJ6BII5vGWeaGF7nJhuAg1nnDiEQj7m6VcY/yNVDl+R0Q
- B+5EecaDCh8gXtHFFwMy4fZ8oIul+tzERWjs8FhA12G1xPjfGgysxEBXO1JapI8KwRG3
- Uobg==
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1pPcOV-00048x-SZ
+ for qemu-riscv@nongnu.org; Tue, 07 Feb 2023 23:49:21 -0500
+Received: by mail-pl1-x629.google.com with SMTP id m2so18029990plg.4
+ for <qemu-riscv@nongnu.org>; Tue, 07 Feb 2023 20:49:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/qKMln83+m3EOuan2AfwQRkmnnBaN4eOAIbd9JnOpKM=;
+ b=adduCvNbmIcLrfdobmYrxFYdU6gvDdqz+eovas3eFvI8I88wvmlHEwThTpaEb4+Wq3
+ YnVRlPoqkN7ZmLnmuuYDdZuV7OlY/5u1fZaLpVU05KM1skwYGBIdl1Rp14r8PK0abXRn
+ bnJG9+VUNMsJvtl+M6OxXEsmZnanqjgUMcGQT9EyChWHhPWsPvMDxa6qJZkYUPBG/YSC
+ ORjQX9wnZCf4U3e5Mha5WMIIDw36y0/vGmU3ZQimgWtaopoFKZaR4spJmQgl3EtwC6K8
+ ADFNt2q33beuMKoer13PrGVkEcmT155FIOgiIRMD1ieZeNEkvOvC57gGHhhokZc++8nN
+ F8og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DSLzNJuWkg7tvG4FkRF1XFIRdaFYWhWj/f0U2sJ8ERs=;
- b=roWoZaDFcKTgdSOdoEXj/ZrEMobK4e7arqEuUNpoxUdXrbB1CTuqHCCMLloLnTQH31
- ty/jgs7+7JGYEaPZ39RIPNd5bbhzMpY/fxXe4QcsfZiGCmO/Lakrr0BlqFg9RltD0McU
- 2UwsZ3EgB4MWb/Ag50YfG5Rfp9f3WZJtHrTRSTc8kjtzFj9UJIIvgTQeASRmSm9tsvo0
- dSKicMVZd3/Yh25bfy9nNDQvdy9qlC16ODG0ErZ3v8MVIaPREoj7lQUS8XbcyFtmi8ap
- 3jFYfQDEiWs3jVIldU4BcoxkHnhXTMLsO4KWl662F7EEtWfu7jNkaIUeilsAp7w95/YB
- OLNw==
-X-Gm-Message-State: AO0yUKX6BNq+LeUVGegoy9keOtvfJzwimFebsdAbjXFQaoViDE9SnfWz
- dx66Tm8rCIcMbQQNVuQ6Coo=
-X-Google-Smtp-Source: AK7set+HqbvPse07obzRlgY40uoGOJD0hRl7t/Hw2r2bAVA3IXGGzdo64vyA6KaE5I0TBnHHxq2HQw==
-X-Received: by 2002:a17:902:d2d0:b0:198:a338:b9c5 with SMTP id
- n16-20020a170902d2d000b00198a338b9c5mr6382446plc.2.1675819035463; 
- Tue, 07 Feb 2023 17:17:15 -0800 (PST)
-Received: from [30.221.97.79] ([47.246.101.63])
- by smtp.gmail.com with ESMTPSA id
- g10-20020a1709026b4a00b001966eaf7365sm9564492plt.17.2023.02.07.17.17.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Feb 2023 17:17:15 -0800 (PST)
-Message-ID: <c74281b1-99b2-a302-7937-2a096b9c0135@gmail.com>
-Date: Wed, 8 Feb 2023 09:16:57 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
-Subject: Re: [PATCH] target/riscv: Remove .min_priv_ver restriction from RVV
- CSRs
-Content-Language: en-US
-To: frank.chang@sifive.com, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/qKMln83+m3EOuan2AfwQRkmnnBaN4eOAIbd9JnOpKM=;
+ b=0wdEg7oVMTMzu0G8ncglOsrJuyXdh4lxhOm1TwR93EfV1tMfn/3JwVafw5y97uvwlB
+ Xh6/aPIReEGVJ8N2OPNn7AXh3c8c0FQnmecd4lox5kvQFdJHuOVT92v2deQtC6z36XkW
+ fkCLpc/TRMb3YBzVAxiBfAWA2+PGbQNZGnFcUfk1mnovJbttNhx3pAHeBGhicO6DbVrT
+ Pp2xaBGIBph4RY04FDhwFNBjIor8O0lKnMiqkKrQR5Kxz0+oCixZcjHFkL6kDlXJBfu4
+ rih1fh5x47ZfljVQ5nA5CjmxdoxiJBckcvgUim+UII+mvODXdDMNJfl2A9caLcqU2n5U
+ tO2Q==
+X-Gm-Message-State: AO0yUKV3EPWwSVxMHUO6CtHwRxuSMtapHu2VPOHK6aU+Pdpqf6efv7yK
+ mqGDq/uAEMN9wuTB8GUbEn3LlQ==
+X-Google-Smtp-Source: AK7set/6+ljbtBrlJRWIWM5mjpWwwPUlv7Fq/D8eQ5/X+UfVZywe1lJyrjZGxjwmJMztPIU5YiIiNQ==
+X-Received: by 2002:a17:902:c20d:b0:199:3fcd:1755 with SMTP id
+ 13-20020a170902c20d00b001993fcd1755mr1566163pll.46.1675831758115; 
+ Tue, 07 Feb 2023 20:49:18 -0800 (PST)
+Received: from sunil-laptop ([49.206.14.226]) by smtp.gmail.com with ESMTPSA id
+ v23-20020a1709028d9700b0019926c7757asm3206321plo.289.2023.02.07.20.49.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Feb 2023 20:49:17 -0800 (PST)
+Date: Wed, 8 Feb 2023 10:19:10 +0530
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-References: <20230207084341.303907-1-frank.chang@sifive.com>
-From: LIU Zhiwei <baxiantai@gmail.com>
-In-Reply-To: <20230207084341.303907-1-frank.chang@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=baxiantai@gmail.com; helo=mail-pj1-x102d.google.com
-X-Spam_score_int: -31
-X-Spam_score: -3.2
-X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- NICE_REPLY_A=-1.148, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Andrew Jones <ajones@ventanamicro.com>,
+ Anup Patel <apatel@ventanamicro.com>,
+ Atish Kumar Patra <atishp@rivosinc.com>
+Subject: Re: [PATCH 04/10] hw/riscv/virt: virt-acpi-build.c: Add basic ACPI
+ tables
+Message-ID: <Y+Mpxv0rmHN4pZ9b@sunil-laptop>
+References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
+ <20230202045223.2594627-5-sunilvl@ventanamicro.com>
+ <CAEUhbmXhXw7juMQTW7-XxSLwhcJrOiZ=4fiwFFAyoXj+sL0jUQ@mail.gmail.com>
+ <Y+D/frPU/TE1aj7y@sunil-laptop>
+ <CAEUhbmU2cofq767-9Lfs2CF+DzpZ6FCHz1ox1TC1siPs5uUdWQ@mail.gmail.com>
+ <Y+KVPaVQPcoItBbV@sunil-laptop>
+ <CAEUhbmX6J5ja+_zdRQ8wuqKyU4uquM6ytnJMtqSfN2CSfLv=MA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAEUhbmX6J5ja+_zdRQ8wuqKyU4uquM6ytnJMtqSfN2CSfLv=MA@mail.gmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x629.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 07 Feb 2023 20:37:32 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,56 +91,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2023 01:17:20 -0000
+X-List-Received-Date: Wed, 08 Feb 2023 04:49:21 -0000
 
+On Wed, Feb 08, 2023 at 09:06:48AM +0800, Bin Meng wrote:
+> On Wed, Feb 8, 2023 at 2:15 AM Sunil V L <sunilvl@ventanamicro.com> wrote:
+> >
+> > On Wed, Feb 08, 2023 at 12:10:55AM +0800, Bin Meng wrote:
+> > > On Mon, Feb 6, 2023 at 9:24 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
+> > > >
+> > > > On Mon, Feb 06, 2023 at 06:17:50PM +0800, Bin Meng wrote:
+> > > > > On Thu, Feb 2, 2023 at 12:54 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
+> > > > > >
+> > > > > > Add few basic ACPI tables and DSDT with few devices in a
+> > > > > > new file virt-acpi-build.c.
+> > > > > >
+> > > > > > These are mostly leveraged from arm64.
+> > > > >
+> > > > > There are lots of same ACPI codes existing in x86/arm/riscv. I believe
+> > > > > some refactoring work is needed before ACPI support fully lands on
+> > > > > RISC-V.
+> > > > > For example, we can extract the common part among x86/arm/riscv into a
+> > > > > separate file, like hw/acpi/acpi-build.c?
+> > > > >
+> > > >
+> > > > While it appears like there is same code in multiple places, those
+> > > > functions take architecture specific MachineState parameter. Some tables
+> > > > like MADT though with same name, will have different contents for
+> > > > different architectures.
+> > > >
+> > > > Only one function which Daniel also pointed is the wrapper
+> > > > acpi_align_size() which can be made common. I am not
+> > > > sure whether it is worth of refactoring.
+> > > >
+> > >
+> > > It's more than that. For example,
+> > >
+> > > With acpi_dsdt_add_cpus(), the only meaningful parameter is the number
+> > > of cpus, so there is no need to pass the architecture specific
+> > > MachineState as the parameter.
+> > >
+> > I would not make this function common. The reason is, an architecture may
+> > choose to attach different ACPI objects under the CPU node.
+> >
+> 
+> Is it possible to insert architect specific CPU nodes after this
+> common API builds the basic CPU node in DSDT?
+> 
+No. They need to be added in the same loop. Otherwise, it will cause
+issues to the AML interpreter.
 
-On 2023/2/7 16:43, frank.chang@sifive.com wrote:
-> From: Frank Chang <frank.chang@sifive.com>
->
-> The RVV specification does not require that the core needs to support
-> the privileged specification v1.12.0 to support RVV, and there is no
-> dependency from ISA level. This commit removes the restriction.
->
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> ---
->   target/riscv/csr.c | 21 +++++++--------------
->   1 file changed, 7 insertions(+), 14 deletions(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index fa17d7770c4..1b0a0c1693c 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3980,20 +3980,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->       [CSR_FRM]      = { "frm",      fs,     read_frm,     write_frm    },
->       [CSR_FCSR]     = { "fcsr",     fs,     read_fcsr,    write_fcsr   },
->       /* Vector CSRs */
-> -    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart,
-> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> -    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat,
-> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> -    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm,
-> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> -    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr,
-> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> -    [CSR_VL]       = { "vl",       vs,     read_vl,
-> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> -    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype,
-> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> -    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb,
-> -                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> +    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart },
-> +    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat  },
-> +    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm   },
-> +    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr   },
-> +    [CSR_VL]       = { "vl",       vs,     read_vl                    },
-> +    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype                 },
-> +    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb                 },
->       /* User Timers and Counters */
->       [CSR_CYCLE]    = { "cycle",    ctr,    read_hpmcounter  },
->       [CSR_INSTRET]  = { "instret",  ctr,    read_hpmcounter  },
+> > > Likewise, acpi_dsdt_add_fw_cfg() can be made generic as well.
+> > >
+> > The issue is, these things are not exactly common across all architectures.
+> > x86 has bit different data in these objects. While today it appears they
+> > are same for riscv and arm, in future things may change for an architecture.
+> > It doesn't look like it is a standard practice to build files under
+> > hw/acpi for specific architectures. Hence, IMO, it is better to keep these
+> > things in architecture specific folders to allow them to do differently in
+> > future.
+> >
+> 
+> It looks like hw/acpi/ghes.c is for Arm from MAINTAINERS.
+> 
+APEI is a standard feature but it is up to the architecture to use it or
+not. Probably, it is maintained by ARM since they adopted first. But if
+you look at hw/acpi/meson.build, it is not architecture specific.
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-
-Zhiwei
-
+> > But I look forward for the feedback from other architecture maintainers on
+> > this topic. My experience in qemu is very limited. So, I need help from
+> > experts.
+> 
+> + Michael and Igor
+> 
+Thanks!
+Sunil
 
