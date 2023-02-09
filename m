@@ -1,73 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPqBj-0007TE-8s
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Feb 2023 14:33:13 -0500
+	id 1pPudP-00018c-8S
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Feb 2023 19:17:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1pPqBQ-0007HT-4K
- for qemu-riscv@nongnu.org; Wed, 08 Feb 2023 14:32:45 -0500
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pPudN-00018L-Bf; Wed, 08 Feb 2023 19:17:53 -0500
+Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1pPqBJ-00071P-Ad
- for qemu-riscv@nongnu.org; Wed, 08 Feb 2023 14:32:40 -0500
-Received: by mail-pl1-x62b.google.com with SMTP id m2so20531416plg.4
- for <qemu-riscv@nongnu.org>; Wed, 08 Feb 2023 11:32:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20210112.gappssmtp.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:from:to:cc:subject:date:message-id
- :reply-to; bh=tFggisxxgfD6kmx0GPY2F8T8DXDuc4ugX5G1DQKz790=;
- b=dz7JaG0hNVXvYzcvhXAbk1T+EUE1qZy3cCGWOlV+n4RmNFDC0SGgBPgTEb+3QA+kyr
- D7UXIdetzi35/Zia8LMKCIDFm/dSrtf7esOyLGpUYJkE/ZJruT/XYgsc+Ls1BGYa5LZQ
- lH4EaNVq9+gq7kaC79NdtmF2u/HiJ+BQj7+wJZCr9pkifz6qIbXyn/kTY053qfrkJXLv
- A7429ZZHAncVvLEOiTaiQKxf8zQZXVR3umew1Q+PyecSkMSVRBQzh3ZTNQaOU8oZxseG
- ekA+VqDvWZ9RuV/lOG1Ww05HbLVqzD0/pjD63w1tezFegn9WII6LXXeD0b6IyMoNPvHz
- AJtQ==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pPudL-0001jO-H3; Wed, 08 Feb 2023 19:17:52 -0500
+Received: by mail-vs1-xe34.google.com with SMTP id x8so455284vso.2;
+ Wed, 08 Feb 2023 16:17:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Smn1Xnblguf/oi4/pk7XQeGtrWjPbGtdslUr0J2AFcE=;
+ b=e04IltaJxoJ2vo4J5P5RurhHo52xISzoWYt/7KmmOl66h4jkJLgftLWI6FlKgVhQw6
+ BafQ4CgeFTglKeazrMJh9BLLR7LInjIuDbrlYIt4Q+qCqxiN6JNDFi6/5wZboWkgWC0G
+ DG5ghdLENoVDss7KOzOq+P1NbjFBxg6CvReJtKAOulLPNpxPXMjZ//sFwhytXePGPfl3
+ 3Mz63YnxBYe8RzaN3hA+p1mwBZd3FE4nZRHtgnRkrdpdnxG76Nf+QOv/umYCR4bV/AVA
+ bko69rF/jWVbfTh2zcGtK5885f1PXKzhEJc/EVt6pLh0a6l+s9+9nn4Vai7LiyNMrYMX
+ g4Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tFggisxxgfD6kmx0GPY2F8T8DXDuc4ugX5G1DQKz790=;
- b=cdGMXcvMubyQf9mdffe2lvmDfMI3muy0SbziKXDnX07zdIpC9ASKxp+NUahaMoJhce
- z4gEnKq8lqNoV7zaOYO1urScPsc/0molpBrb0ldGUwQVJRd8YSHvOg+L5EcWZaHfQBOz
- hx7bLeFo98vqdS3D1Gm8vgSMJn9fqFSvJjOn5fGn5Gt4GhJRZrNDcYZWNmSIygbKpVb9
- 5W3frCcMAdIFUJIE3t3nOkHjH5+sDX3Uix8dl05346J4NAagDZYi4NsKINj1UcWT+HDI
- TSvFv7oWg5D1m1HmNEa1sx597GfdP5ROjd6xPjvJoP3I+60kbSjsGblA78E8Vb78tQzy
- aq8g==
-X-Gm-Message-State: AO0yUKXfyN8Nzwxq1vaEyVjrY92AC5fUyo14d4Al9UdMS93P1RgK/aRj
- lUaysN5gU3M+BdBxGpwSGkAdgA==
-X-Google-Smtp-Source: AK7set/JJINVL2/ghiEyQaUpPNNo6MdeDHsXbSNO6blx6+AIXB6H0p9/e+fP2H0UoOkgZ90xMrE5fw==
-X-Received: by 2002:a17:90b:4c8e:b0:230:d4a2:88d3 with SMTP id
- my14-20020a17090b4c8e00b00230d4a288d3mr9492912pjb.48.1675884754877; 
- Wed, 08 Feb 2023 11:32:34 -0800 (PST)
-Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
- mv17-20020a17090b199100b00229094aabd0sm1930820pjb.35.2023.02.08.11.32.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Feb 2023 11:32:34 -0800 (PST)
-Date: Wed, 08 Feb 2023 11:32:34 -0800 (PST)
-X-Google-Original-Date: Wed, 08 Feb 2023 11:31:56 PST (-0800)
-Subject: Re: Fwd: [RFC PATCH 00/39] Add RISC-V cryptography extensions
- standardisation
-In-Reply-To: <c3e76130725358ade9e87681f3c0233f@codethink.co.uk>
-CC: Alistair Francis <Alistair.Francis@wdc.com>, philipp.tomsich@vrull.eu,
- frank.chang@sifive.com, dickon.hood@codethink.co.uk, qemu-riscv@nongnu.org,
- kvm@vger.kernel.org, pbonzini@redhat.com, bin.meng@windriver.com
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: lawrence.hunter@codethink.co.uk
-Message-ID: <mhng-b8712b20-02a0-477c-a0e8-69269b928dc0@palmer-ri-x1c9a>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=palmer@dabbelt.com; helo=mail-pl1-x62b.google.com
-X-Spam_score_int: -13
-X-Spam_score: -1.4
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Smn1Xnblguf/oi4/pk7XQeGtrWjPbGtdslUr0J2AFcE=;
+ b=BTQzpCQWHSh/Iwrh1QPwAkggVdvA4XgHxXCMETHjiuaelNsZFShdy7f4tcdOlab0wp
+ x9C04JRKN99xx/NdkX0g47MctOuNTZszbrVikzdgEOqyEJ+gKMQ2JJtf8tMjR81gFb+/
+ zEzTFYusZWb7UZdJISMk6ESl9z5qXGGppAxAoF/LOZ9rIrKRDaxvuoFXP49ewAuDpNg4
+ a3rHg/I6a55lTuCrQNfPedY3ECeaYmQqh/8z6xLgFSe2LTARrfx8G/zzMV72YQjs0WOo
+ YNkIgoaos0YnIrtCLhmRxuIuuNjFICHdBIaWqZeXJ+73robL4yj2JKQE/AH+ZFRwsq3B
+ SGkg==
+X-Gm-Message-State: AO0yUKXZClB7PnvFzvHBljgqJzY+Jw4vNTikK2Bhw72JBpdAv2LCkAhe
+ NUahKowywTtMB8f+CHGLlVKsHY+2RnBXEckVsf8=
+X-Google-Smtp-Source: AK7set8lgh3pWridEWtQPyxGiUs92vd22kjsaHkdHUHjzUtlMfrBjOSK6k+5vNmw68807cNqCG9XBv8dNkBlwr0/JlI=
+X-Received: by 2002:a67:a208:0:b0:3ee:4ef8:45d3 with SMTP id
+ l8-20020a67a208000000b003ee4ef845d3mr1920428vse.64.1675901869588; Wed, 08 Feb
+ 2023 16:17:49 -0800 (PST)
+MIME-Version: 1.0
+References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
+ <20230202045223.2594627-2-sunilvl@ventanamicro.com>
+In-Reply-To: <20230202045223.2594627-2-sunilvl@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 9 Feb 2023 10:17:23 +1000
+Message-ID: <CAKmqyKNZrYOtLqhTSbABpP2ktJYUj1Jgf2czoOwJoQYDCP1itg@mail.gmail.com>
+Subject: Re: [PATCH 01/10] hw/riscv/virt: Add OEM_ID and OEM_TABLE_ID fields
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Andrew Jones <ajones@ventanamicro.com>, Anup Patel <apatel@ventanamicro.com>, 
+ Atish Kumar Patra <atishp@rivosinc.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, URI_NOVOWEL=0.5 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,242 +76,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2023 19:32:49 -0000
+X-List-Received-Date: Thu, 09 Feb 2023 00:17:53 -0000
 
-On Mon, 30 Jan 2023 03:38:13 PST (-0800), lawrence.hunter@codethink.co.uk wrote:
+On Thu, Feb 2, 2023 at 2:54 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
 >
+> ACPI needs OEM_ID and OEM_TABLE_ID for the machine. Add these fields
+> in the RISCVVirtState structure and initialize with default values.
 >
-> On 2023-01-29 22:23, Alistair Francis wrote:
->> On Sun, 2023-01-29 at 23:12 +0100, Philipp Tomsich wrote:
->>>
->>>
->>> On Sun, 29 Jan 2023 at 23:08, Alistair Francis
->>> <Alistair.Francis@wdc.com> wrote:
->>> > On Thu, 2023-01-26 at 09:21 +0000, Lawrence Hunter wrote:
->>> > > Follow up for add RISC-V vector cryptography extensions
->>> > > standardisation
->>> > > RFC: we've not received any comments and would like to move this
->>> > > series
->>> > > towards getting merged. Does anyone have time to review it, and
->>> > > should
->>> > > we look at resubmitting for merging soon?
->>> >
->>> > Hello,
->>> >
->>> > This series never made it to the QEMU list. It looks like it was
->>> > never
->>> > sent to the general qemu-devel mailing list.
->>> >
->>>
->>>
->>> This has so far been more than a little painful for our review, as we
->>> can't just pull the patches down from patchwork to use our regular
->>> test-and-review flow.
->>> Should we wait until the resubmission for our review?
->
-> We have pushed a branch 'rfc-zvk-19-01-23' with our commits based on a
-> fairly recent master. Hopefully this will ease the review process.
->
-> https://github.com/CodethinkLabs/qemu-ct.git
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 
-That's frequently helpful too, but the standard practice in QEMU is to 
-always CC qemu-devel, even if you're aiming at another list too (like 
-qemu-riscv, for example).  It's different than Linux, and IIUC it's 
-there to make some of the automation work.
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
+Alistair
+
+> ---
+>  hw/riscv/virt.c         | 4 ++++
+>  include/hw/riscv/virt.h | 2 ++
+>  2 files changed, 6 insertions(+)
 >
->>
->> Up to you. It won't be merged unless it has been sent to the general
->> mailing list, so you can either get a head start or just wait.
->>
->>>
->>> Note that the current series is not in-sync with the latest
->>> specification.
->>
->> It's only an RFC, so for now that's ok as it won't be merged anyway.
->>
->> Alistair
->>
->>> We'll try to point out the specific deviations (we have a tree that
->>> we've been keeping in sync with the changes to the spec since mid-
->>> December) in our reviews.
->>>
->>> Cheers,
->>> Philipp.
->>>  
->>> > When submitting patches can you please follow the steps here:
->>> > https://www.qemu.org/docs/master/devel/submitting-a-patch.html#submitting-your-patches
->>> >
->>> > It's important that all patches are sent to the qemu-devel mailing
->>> > list
->>> > (that's actually much more important then the RISC-V mailing list).
->>> >
->>> > Alistair
->>> >
->>> > >
->>> > > ---------- Forwarded Message ---------
->>> > >
->>> > > From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
->>> > > Subject: [RFC PATCH 00/39] Add RISC-V cryptography extensions
->>> > > standardisation
->>> > > Date: Jan 19 2023, at 2:34 pm
->>> > > To: qemu-riscv@nongnu.org
->>> > > Cc: dickon.hood@codethink.co.uk, frank.chang@sifive.com, Lawrence
->>> > > Hunter <lawrence.hunter@codethink.co.uk>
->>> > >
->>> > >
->>> > > > This RFC introduces an implementation for the six instruction
->>> > > > sets
->>> > > > of the draft RISC-V cryptography extensions standardisation
->>> > > > specification. Once the specification has been ratified we will
->>> > > > submit
->>> > > > these changes as a pull request email to this mailing list.
->>> > > > Would
->>> > > > this
->>> > > > be prefered by instruction group or unified as in this RFC?
->>> > > >
->>> > > > This patch set implements the instruction sets as per the
->>> > > > 20221202
->>> > > > version of the specification (1).
->>> > > >
->>> > > > Work performed by Dickon, Lawrence, Nazar, Kiran, and William
->>> > > > from
->>> > > > Codethink
->>> > > > sponsored by SiFive, and Max Chou from SiFive.
->>> > > >
->>> > > > 1. https://github.com/riscv/riscv-crypto/releases
->>> > > >
->>> > > > Dickon Hood (1):
->>> > > >  target/riscv: Add vrol.[vv,vx] and vror.[vv,vx,vi] decoding,
->>> > > >    translation and execution support
->>> > > >
->>> > > > Kiran Ostrolenk (4):
->>> > > >  target/riscv: Add vsha2ms.vv decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: add zvksh cpu property
->>> > > >  target/riscv: Add vsm3c.vi decoding, translation and execution
->>> > > > support
->>> > > >  target/riscv: expose zvksh cpu property
->>> > > >
->>> > > > Lawrence Hunter (16):
->>> > > >  target/riscv: Add vclmul.vv decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vclmul.vx decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vclmulh.vv decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vclmulh.vx decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vaesef.vv decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vaesef.vs decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vaesdf.vv decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vaesdf.vs decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vaesdm.vv decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vaesdm.vs decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vaesz.vs decoding, translation and execution
->>> > > > support
->>> > > >  target/riscv: Add vsha2c[hl].vv decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vsm3me.vv decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: add zvkg cpu property
->>> > > >  target/riscv: Add vghmac.vv decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: expose zvkg cpu property
->>> > > >
->>> > > > Max Chou (5):
->>> > > >  crypto: Move SM4_SBOXWORD from target/riscv
->>> > > >  crypto: Add SM4 constant parameter CK.
->>> > > >  target/riscv: Add zvksed cfg property
->>> > > >  target/riscv: Add Zvksed support
->>> > > >  target/riscv: Expose Zvksed property
->>> > > >
->>> > > > Nazar Kazakov (10):
->>> > > >  target/riscv: add zvkb cpu property
->>> > > >  target/riscv: Add vrev8.v decoding, translation and execution
->>> > > > support
->>> > > >  target/riscv: Add vandn.[vv,vx,vi] decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: expose zvkb cpu property
->>> > > >  target/riscv: add zvkns cpu property
->>> > > >  target/riscv: Add vaeskf1.vi decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vaeskf2.vi decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: expose zvkns cpu property
->>> > > >  target/riscv: add zvknh cpu properties
->>> > > >  target/riscv: expose zvknh cpu properties
->>> > > >
->>> > > > William Salmon (3):
->>> > > >  target/riscv: Add vbrev8.v decoding, translation and execution
->>> > > > support
->>> > > >  target/riscv: Add vaesem.vv decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >  target/riscv: Add vaesem.vs decoding, translation and
->>> > > > execution
->>> > > >    support
->>> > > >
->>> > > > crypto/sm4.c                                 |   10 +
->>> > > > include/crypto/sm4.h                         |    8 +
->>> > > > include/qemu/bitops.h                        |   32 +
->>> > > > target/arm/crypto_helper.c                   |   10 +-
->>> > > > target/riscv/cpu.c                           |   15 +
->>> > > > target/riscv/cpu.h                           |    7 +
->>> > > > target/riscv/crypto_helper.c                 |    1 +
->>> > > > target/riscv/helper.h                        |   69 ++
->>> > > > target/riscv/insn32.decode                   |   48 +
->>> > > > target/riscv/insn_trans/trans_rvzvkb.c.inc   |  164 +++
->>> > > > target/riscv/insn_trans/trans_rvzvkg.c.inc   |    8 +
->>> > > > target/riscv/insn_trans/trans_rvzvknh.c.inc  |   47 +
->>> > > > target/riscv/insn_trans/trans_rvzvkns.c.inc  |  121 +++
->>> > > > target/riscv/insn_trans/trans_rvzvksed.c.inc |   38 +
->>> > > > target/riscv/insn_trans/trans_rvzvksh.c.inc  |   20 +
->>> > > > target/riscv/meson.build                     |    4 +-
->>> > > > target/riscv/translate.c                     |    6 +
->>> > > > target/riscv/vcrypto_helper.c                | 1013
->>> > > > ++++++++++++++++++
->>> > > > target/riscv/vector_helper.c                 |  242 +----
->>> > > > target/riscv/vector_internals.c              |   63 ++
->>> > > > target/riscv/vector_internals.h              |  226 ++++
->>> > > > 21 files changed, 1902 insertions(+), 250 deletions(-)
->>> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvkb.c.inc
->>> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvkg.c.inc
->>> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvknh.c.inc
->>> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvkns.c.inc
->>> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvksed.c.inc
->>> > > > create mode 100644 target/riscv/insn_trans/trans_rvzvksh.c.inc
->>> > > > create mode 100644 target/riscv/vcrypto_helper.c
->>> > > > create mode 100644 target/riscv/vector_internals.c
->>> > > > create mode 100644 target/riscv/vector_internals.h
->>> > > >
->>> > > > --
->>> > > > 2.39.1
->>> > > >
->>> > > >
->>> > > >
->>> >
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index a061151a6f..7ad9fda20c 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -49,6 +49,7 @@
+>  #include "hw/pci/pci.h"
+>  #include "hw/pci-host/gpex.h"
+>  #include "hw/display/ramfb.h"
+> +#include "hw/acpi/aml-build.h"
+>
+>  /*
+>   * The virt machine physical address space used by some of the devices
+> @@ -1512,6 +1513,9 @@ static void virt_machine_init(MachineState *machine)
+>      }
+>      virt_flash_map(s, system_memory);
+>
+> +    s->oem_id = g_strndup(ACPI_BUILD_APPNAME6, 6);
+> +    s->oem_table_id = g_strndup(ACPI_BUILD_APPNAME8, 8);
+> +
+>      /* create device tree */
+>      create_fdt(s, memmap);
+>
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index b3d26135c0..6c7885bf89 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -56,6 +56,8 @@ struct RISCVVirtState {
+>      bool have_aclint;
+>      RISCVVirtAIAType aia_type;
+>      int aia_guests;
+> +    char *oem_id;
+> +    char *oem_table_id;
+>  };
+>
+>  enum {
+> --
+> 2.38.0
+>
+>
 
