@@ -1,76 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pQ3KJ-0005Sl-Gg
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Feb 2023 04:34:47 -0500
+	id 1pQ3SQ-0001Hq-Ct
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Feb 2023 04:43:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pQ3KH-0005SS-Pi
- for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 04:34:45 -0500
-Received: from mail-oi1-x236.google.com ([2607:f8b0:4864:20::236])
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1pQ3SO-0001G7-Ry
+ for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 04:43:08 -0500
+Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pQ3KF-0006rx-L3
- for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 04:34:45 -0500
-Received: by mail-oi1-x236.google.com with SMTP id bj22so1137151oib.11
- for <qemu-riscv@nongnu.org>; Thu, 09 Feb 2023 01:34:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=G1lmfvxAWzUgVJy3T6U8BQVMZEKMgEo2vXB3KHcfUqg=;
- b=nmcIsJpKM2TPSP2Xo+aCq86pon3Hiha2k97OgkfFZvpB0b5zpsnEwN5lkVzyznKAe1
- UKGLZ+DopKsSVjbHFJGjJdOrFtxFKIwSk42gSzj5aYBz0HOnzU7znaL6d8rep26DL3Y7
- WMM2A+vEhQqwvHAdrRxAzf8VJlnt9Ca8qi5Law5fxwQ3GgPISfi2hwEtZfOnn5Gew71X
- hnMaD8WS374wZDhFB+jRZ+H6wJay3qQkVLsMACfmqJhsug9kb0dZEB98L2KullRETlzP
- p8mtmg3rmRLPKyO03ikQOtEEypU1aT0l7nrbz5KupfKtO4Fjdv5dTRbLeNboxcMbDMFS
- PKbQ==
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1pQ3SN-0000FA-4J
+ for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 04:43:08 -0500
+Received: by mail-lf1-x133.google.com with SMTP id f34so2362662lfv.10
+ for <qemu-riscv@nongnu.org>; Thu, 09 Feb 2023 01:43:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=n8d/fYltp+/X4xCRNIXoxNPZwkXqf7Qw4+XXRLApH6E=;
+ b=mtthG+A2JqrS1KrDYiHHsdr7dq2v2YLOKw5u3EuWmxIxgkiStewsMDFtMML1Y1NU0z
+ PgXtT2IQjjxi8mNGjpvtr9Nw7Kfy9UP7dYy2r3JBg0t3BgncbD5kYDBkgSt3Hjvh9AeN
+ 3BMuUJJ2Ra7+8feqmfVZFuB/385ESdLKK2BzJ+JLOy3JhEU5lkjh0YRODiOU9SM6wUJv
+ KzPd7Dos/NuTR3YB4EOSy4j9B+yiZqyzSq3u80Y5wu+ZOMTuf5BbWiBIwiRn7qdoxMPW
+ fi6cTDQVCaGvTLx1mV8o1Q7oWU23riAp0uzzfJqcfwyQbCSXeGu9c/oSjpphpVBwZgPg
+ NodQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=G1lmfvxAWzUgVJy3T6U8BQVMZEKMgEo2vXB3KHcfUqg=;
- b=aMIlqQ64o8tbk4UZEUBRHVWhwTqjEEjwtXN9v0wizw8zSFiErdeNwMUuW/WVU5zxkp
- 9xKf6uaDrYjCJmCgeRkLMaukzq8O+SKnweZCHDafQhO5RJtZQF4YpxKVs8OsFgdDuRDH
- O9AuQlpuQME903ZZ4tpRJSWxKDywhWIpWjUY7FFIm7UUdyf3oOUkebewp3WHkM5D5uWo
- 3Izth+7/3XPw8DUokjc+LxT1QKxS46I0TLf7tqNoASHZ6+EWR6TtKe4vK86RSkthltB4
- vVCzgTFSzQ3x8dsyDY6K9qMFfeDJD2wWS+X0Ex0/wapchOD2ZOLd31SikVMlbaTbyjx4
- fK4Q==
-X-Gm-Message-State: AO0yUKXTN0UBZFqYlvJU2EP1XTKL4OGeLB0TFDsYq6I/iAJ8QkmJ/VI5
- QooOb3MDZtajWRZeLBtX8lXatQ==
-X-Google-Smtp-Source: AK7set9rX+7qq6zGdDPRocisZFntESM6ZIN8B1nyWUCzQtFY3P/KdTCW3/ODEP/TzJwtp1BQB8w0dg==
-X-Received: by 2002:a05:6808:dc7:b0:378:6396:13cc with SMTP id
- g7-20020a0568080dc700b00378639613ccmr3802297oic.56.1675935281972; 
- Thu, 09 Feb 2023 01:34:41 -0800 (PST)
-Received: from [192.168.68.107] ([191.19.125.138])
- by smtp.gmail.com with ESMTPSA id
- x133-20020acae08b000000b0037868f9e657sm564747oig.37.2023.02.09.01.34.39
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=n8d/fYltp+/X4xCRNIXoxNPZwkXqf7Qw4+XXRLApH6E=;
+ b=WhNzX5Cg69mKqyasfnlW4uqHsRMU15x9DZNESiRTiqQOMMw28J/5DsOSbaMtpNpEDT
+ hOsc53B+jXiGhGGC2nkjz3prvSISUJKbOvUenL7eRARpF+qe2SqGI/JO+9f3cXRhetCd
+ 0QsfQKmPjlt9zXeEcN7pAwXwk9lowUbS9+ZqucjzktpLE1gzRzvUIsOE0YjWeawZ3Nfi
+ 8cS8aPp7l5ZcbUnF62Ar3djzT80h1+pkSNBzf9RgKnKlYsPomb+Rfj3mLH/fxNIh4qx6
+ GubqVOsTE/65+XDdEZ8yLuCI/fSG3owcVhI66Q7xcN7QrDUMUqsGrgTQ8NuOLDM+lnih
+ zVSQ==
+X-Gm-Message-State: AO0yUKU959EwDSyyWa2qrRnPwuYKvAbNktQjEjfbwweaQNvNBQmRQx8Z
+ 12w0cEzPFYCwR9WRp9gB2OYf4qsVOOY/ZPr5BwgHSO8jkx+9MXOZhz/5pzkYiJgaz2twloOJzPT
+ rQb7Jn/3Qd4AFfxb06FtMhdPDqvZV+j8k4YQhG0+Mnoz0y9FLZj+pketcE144d9hwui9Xdu41ku
+ Y=
+X-Google-Smtp-Source: AK7set+cmv/8jNSjC7Mwqh5Jgyd3xtC2e7TLcG/7io+zdFal4n7DHP6nNSkvIxP1hNSF5kChbVr1Sg==
+X-Received: by 2002:ac2:54bb:0:b0:4da:f5e1:749a with SMTP id
+ w27-20020ac254bb000000b004daf5e1749amr1604408lfk.29.1675935784864; 
+ Thu, 09 Feb 2023 01:43:04 -0800 (PST)
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com.
+ [209.85.167.50]) by smtp.gmail.com with ESMTPSA id
+ w15-20020a05651204cf00b004d3f0f20b98sm103069lfq.40.2023.02.09.01.43.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Feb 2023 01:34:41 -0800 (PST)
-Message-ID: <9e5accd3-9602-ac66-fc17-2d341ffe2821@ventanamicro.com>
-Date: Thu, 9 Feb 2023 06:34:37 -0300
+ Thu, 09 Feb 2023 01:43:04 -0800 (PST)
+Received: by mail-lf1-f50.google.com with SMTP id cf42so2423124lfb.1;
+ Thu, 09 Feb 2023 01:43:04 -0800 (PST)
+X-Received: by 2002:ac2:5fc4:0:b0:4d5:76af:f890 with SMTP id
+ q4-20020ac25fc4000000b004d576aff890mr1724620lfg.228.1675935783770; Thu, 09
+ Feb 2023 01:43:03 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH] MAINTAINERS: Add some RISC-V reviewers
-Content-Language: en-US
-To: Alistair Francis <alistair.francis@opensource.wdc.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: bmeng.cn@gmail.com, alistair23@gmail.com, alistair.francis@wdc.com,
- palmer@dabbelt.com, zhiwei_liu@linux.alibaba.com, liweiwei@iscas.ac.cn
 References: <20230209003308.738237-1-alistair.francis@opensource.wdc.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 In-Reply-To: <20230209003308.738237-1-alistair.francis@opensource.wdc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::236;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x236.google.com
-X-Spam_score_int: -31
-X-Spam_score: -3.2
-X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.146,
+From: Frank Chang <frank.chang@sifive.com>
+Date: Thu, 9 Feb 2023 17:42:52 +0800
+X-Gmail-Original-Message-ID: <CANzO1D3Tan5h14R4Pqt0MtxafGPrWXwv5j5a5xfqv7FEG5H6Pg@mail.gmail.com>
+Message-ID: <CANzO1D3Tan5h14R4Pqt0MtxafGPrWXwv5j5a5xfqv7FEG5H6Pg@mail.gmail.com>
+Subject: Re: [PATCH] MAINTAINERS: Add some RISC-V reviewers
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, bmeng.cn@gmail.com, 
+ alistair23@gmail.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com, 
+ palmer@dabbelt.com, zhiwei_liu@linux.alibaba.com, liweiwei@iscas.ac.cn
+Content-Type: multipart/alternative; boundary="0000000000000ee0d105f44135f3"
+Received-SPF: pass client-ip=2a00:1450:4864:20::133;
+ envelope-from=frank.chang@sifive.com; helo=mail-lf1-x133.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -85,36 +87,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2023 09:34:46 -0000
+X-List-Received-Date: Thu, 09 Feb 2023 09:43:09 -0000
 
+--0000000000000ee0d105f44135f3
+Content-Type: text/plain; charset="UTF-8"
 
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-On 2/8/23 21:33, Alistair Francis wrote:
+On Thu, Feb 9, 2023 at 8:34 AM Alistair Francis <
+alistair.francis@opensource.wdc.com> wrote:
+
 > From: Alistair Francis <alistair.francis@wdc.com>
-> 
+>
 > This patch adds some active RISC-V members as reviewers to the
 > MAINTAINERS file.
-> 
+>
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   MAINTAINERS | 3 +++
->   1 file changed, 3 insertions(+)
-> 
+>  MAINTAINERS | 3 +++
+>  1 file changed, 3 insertions(+)
+>
 > diff --git a/MAINTAINERS b/MAINTAINERS
 > index 96e25f62ac..847bc7f131 100644
 > --- a/MAINTAINERS
 > +++ b/MAINTAINERS
 > @@ -287,6 +287,9 @@ RISC-V TCG CPUs
->   M: Palmer Dabbelt <palmer@dabbelt.com>
->   M: Alistair Francis <alistair.francis@wdc.com>
->   M: Bin Meng <bin.meng@windriver.com>
+>  M: Palmer Dabbelt <palmer@dabbelt.com>
+>  M: Alistair Francis <alistair.francis@wdc.com>
+>  M: Bin Meng <bin.meng@windriver.com>
 > +R: Weiwei Li <liweiwei@iscas.ac.cn>
 > +R: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > +R: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
->   L: qemu-riscv@nongnu.org
->   S: Supported
->   F: target/riscv/
+>  L: qemu-riscv@nongnu.org
+>  S: Supported
+>  F: target/riscv/
+> --
+> 2.39.1
+>
+>
+>
+
+--0000000000000ee0d105f44135f3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang=
+@sifive.com">frank.chang@sifive.com</a>&gt;</div><br><div class=3D"gmail_qu=
+ote"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Feb 9, 2023 at 8:34 AM A=
+listair Francis &lt;<a href=3D"mailto:alistair.francis@opensource.wdc.com">=
+alistair.francis@opensource.wdc.com</a>&gt; wrote:<br></div><blockquote cla=
+ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
+rgb(204,204,204);padding-left:1ex">From: Alistair Francis &lt;<a href=3D"ma=
+ilto:alistair.francis@wdc.com" target=3D"_blank">alistair.francis@wdc.com</=
+a>&gt;<br>
+<br>
+This patch adds some active RISC-V members as reviewers to the<br>
+MAINTAINERS file.<br>
+<br>
+Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.=
+com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+---<br>
+=C2=A0MAINTAINERS | 3 +++<br>
+=C2=A01 file changed, 3 insertions(+)<br>
+<br>
+diff --git a/MAINTAINERS b/MAINTAINERS<br>
+index 96e25f62ac..847bc7f131 100644<br>
+--- a/MAINTAINERS<br>
++++ b/MAINTAINERS<br>
+@@ -287,6 +287,9 @@ RISC-V TCG CPUs<br>
+=C2=A0M: Palmer Dabbelt &lt;<a href=3D"mailto:palmer@dabbelt.com" target=3D=
+"_blank">palmer@dabbelt.com</a>&gt;<br>
+=C2=A0M: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.com" t=
+arget=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+=C2=A0M: Bin Meng &lt;<a href=3D"mailto:bin.meng@windriver.com" target=3D"_=
+blank">bin.meng@windriver.com</a>&gt;<br>
++R: Weiwei Li &lt;<a href=3D"mailto:liweiwei@iscas.ac.cn" target=3D"_blank"=
+>liweiwei@iscas.ac.cn</a>&gt;<br>
++R: Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@ventanamicro.com=
+" target=3D"_blank">dbarboza@ventanamicro.com</a>&gt;<br>
++R: Liu Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@linux.alibaba.com" target=
+=3D"_blank">zhiwei_liu@linux.alibaba.com</a>&gt;<br>
+=C2=A0L: <a href=3D"mailto:qemu-riscv@nongnu.org" target=3D"_blank">qemu-ri=
+scv@nongnu.org</a><br>
+=C2=A0S: Supported<br>
+=C2=A0F: target/riscv/<br>
+-- <br>
+2.39.1<br>
+<br>
+<br>
+</blockquote></div>
+
+--0000000000000ee0d105f44135f3--
 
