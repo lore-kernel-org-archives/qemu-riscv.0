@@ -1,70 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pQ0SG-0007fW-PK
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Feb 2023 01:30:50 -0500
+	id 1pQ0SQ-0007jh-5B
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Feb 2023 01:30:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1pQ0Rw-0007XB-8M
- for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 01:30:30 -0500
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ id 1pQ0S0-0007XS-BG
+ for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 01:30:33 -0500
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1pQ0Rt-0000kw-T0
- for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 01:30:27 -0500
-Received: by mail-pf1-x430.google.com with SMTP id n2so693914pfo.3
- for <qemu-riscv@nongnu.org>; Wed, 08 Feb 2023 22:30:25 -0800 (PST)
+ id 1pQ0Ry-0000me-Ct
+ for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 01:30:32 -0500
+Received: by mail-pg1-x52b.google.com with SMTP id 7so957698pga.1
+ for <qemu-riscv@nongnu.org>; Wed, 08 Feb 2023 22:30:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qlPh49wlbxVVcOm0Ok3pVswLtoV2NRPuPBXAw/YmxdU=;
- b=wp7Yab735sy01MLbrgfsOESNTTb0h03RSrJ/08EgpczVM5M4TOzymFCeAMkBPWNKNm
- /g1h/CZZe0fb3FfaFNqX+OAFyjrcrBdPVjnQq0Kx7qAHYBLyEBm78e3RoNJxISh7jQhJ
- MJJ/Yav2m4F8+LFZFtFrtG7K8gIiW5DwvLnQSrUBM6CwE7hd7dVoqIUWa7ZEfcmj3ju1
- MG2GO6wEykuI4qOei9WjgWfNJCK2D3lr3rhUeawqFWlHLSGl1m5iMggZmHi2wr9aPqJ/
- AeAgOPh1/r98lGKVpSrfuygrqNxG1PcOCEM+7dmG0HKtN7W1Ebfwl8PP6UZ4eSaHC6kK
- QdyA==
+ bh=MgwkEef7vxsb/V1HXgcHLlMSEMyA02TSLlxvE3Cow40=;
+ b=BJp4gQFJur4hucyaYSCMV0vWmBA3IXMp/46pWJrHezGegEO6bIjfmI0loHUB1yMQ37
+ P8Rsm8cIEWrlpYCniqF3ubP/WnTnSw9uvGUgjehPu5M2nLaDlFJL57ezNhw6uBdoFupt
+ u7q3NXT7gtkZ9LgedS457rtDyzABbjW+lgAoszhQHYXzNBQ6UrEIhYZevcAUG1Sftq1v
+ ujgXNqUnWhCaP2FQKCXqJnx9VpscJodcW3cwDV1PxIXocvswjrmeIm4h/z9WAZZC2EFA
+ 5sWG4sXxhh7QXLVHaon0VO16f9iW0LJ6SyyaqukE68Iyf9SsKIGbEIyXkdn3GmWB29D1
+ S3TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qlPh49wlbxVVcOm0Ok3pVswLtoV2NRPuPBXAw/YmxdU=;
- b=Z50jQTWN59psihNE6VhK0W5Yl2X4h7DQSzQCUBK30WlLNuMEL4o4alnxIJ+ny50i71
- Bkyiyq4RHjUhw/RVhViz090dkzjNuKMDEFUrUbgBkQ5hdx2ECLcyyCgJWmPbkvrrGsRy
- f7WvRFdkuzFNJANcZ63UmGT1RnC0XwMkkZHPL+lNiOnUmWn8XkeH/J5DutEloPL3Zta6
- Tc5LW9vntuAycaX98dZRLFWIvLrT2zDi/bWEdRRhzbtaHahyCQwFtrcMN1GnXvipOwdb
- ooNFEGOhuckNmsKG2tym3ooEroQWUnUMNVYrocYuU6KPa0fCUdbdGnMwdsMM3OMWye1G
- +5jw==
-X-Gm-Message-State: AO0yUKWJseE5UY0NloURML5htgF6g6i1NFGLxCX8jK/KPiGSj/gbCXYy
- n35xbTUzdg/8fTTy0T6fVqPSfA==
-X-Google-Smtp-Source: AK7set+aIDc0/0LKIFdjo4kcedHR8xbTL6xdARubTtD7bXEb5o15/SNrwLDEuTLZt/kWuRc8gRkwVA==
-X-Received: by 2002:a62:1a4f:0:b0:593:b491:40b8 with SMTP id
- a76-20020a621a4f000000b00593b49140b8mr8361545pfa.4.1675924224570; 
- Wed, 08 Feb 2023 22:30:24 -0800 (PST)
+ bh=MgwkEef7vxsb/V1HXgcHLlMSEMyA02TSLlxvE3Cow40=;
+ b=FtaKHdXQjmfVCJrN8wo5yBT0/Y2bxpqQUo/ydM1oa910JHeOJKZpitnN0NtyR6J0Re
+ kbgQi0i6+k8A/ukruUgkNvKcY0i+2BonhKLeRZ4pC5XV2p3n6606zqPWB5L1rSoui92o
+ a+DVU/DkFuOrIrssRlAbBhaUptrNCWZUsahv55jsFn13qRx0moyg6oKMZ5HMS7/9tLu+
+ A/SodOSQqyF2HXHkwPF0QYfpX89lD7FC0XSBip84E4asiz5Tf4N8UIpxqgBdmvzl/WdB
+ vlKhaagIzftiCFMdY028ajXvLfxHHCEsYqIQW5846wXyAp5ZnFtw0s3Yrn8DPn8/GMlm
+ hzYw==
+X-Gm-Message-State: AO0yUKWBTqKPNRUTki/yXLrtzVKB/kraERynI3ffxvKPagY3ozXk1ZUs
+ NHI2oZX4R5Ni2ooN565Xwo81gA==
+X-Google-Smtp-Source: AK7set9P/26eCJIVugsXypbPsucHIQ7Hqq6zaq01bzPHVb5fOvd0SegnQS6U2Vb0FiJEChsi1siAjA==
+X-Received: by 2002:aa7:9509:0:b0:594:26a7:cbd2 with SMTP id
+ b9-20020aa79509000000b0059426a7cbd2mr1002962pfp.8.1675924228350; 
+ Wed, 08 Feb 2023 22:30:28 -0800 (PST)
 Received: from debug.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- u15-20020aa7848f000000b00593c434b1b8sm543649pfn.48.2023.02.08.22.30.23
+ u15-20020aa7848f000000b00593c434b1b8sm543649pfn.48.2023.02.08.22.30.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Feb 2023 22:30:24 -0800 (PST)
+ Wed, 08 Feb 2023 22:30:27 -0800 (PST)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>
 Cc: Deepak Gupta <debug@rivosinc.com>, Kip Walker <kip@rivosinc.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v1 RFC Zisslpcfi 2/9] target/riscv: zisslpcfi CSR,
- bit positions and other definitions
-Date: Wed,  8 Feb 2023 22:29:40 -0800
-Message-Id: <20230209062947.3585481-3-debug@rivosinc.com>
+Subject: [PATCH v1 RFC Zisslpcfi 5/9] target/riscv: state save and restore of
+ zisslppcfi state
+Date: Wed,  8 Feb 2023 22:29:43 -0800
+Message-Id: <20230209062947.3585481-6-debug@rivosinc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230209062947.3585481-1-debug@rivosinc.com>
 References: <20230209062947.3585481-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=debug@rivosinc.com; helo=mail-pf1-x430.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=debug@rivosinc.com; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -85,148 +85,130 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 09 Feb 2023 06:30:34 -0000
 
-`zisslpcfi` extension adds two new CSRs. CSR_SSP and CSR_LPLR.
-- CSR_SSP: This CSR holds shadow stack pointer for current privilege mode
-           CSR_SSP is accessible in all modes. Each mode must establish
-           it's own CSR_SSP.
+zisslpcfi's forward cfi if enabled on a hart, enables tracking of
+indirect branches. CPU/hart internally keeps a state `elp` short
+for expecting landing pad instruction. This state goes into
+LP_EXPECTED on an indirect branch. But an interrupt/exception can occur
+before target instruction is executed. In such a case this state must be
+preserved so that it can be restored later. zisslpcfi saves elp state in
+`sstatus` CSR. This patch saves elp state in sstatus CSR on trap delivery
+while restores from sstatus CSR on trap return.
 
-- CSR_LPLR: This CSR holds label value set at the callsite by compiler.
-            On call target label check instructions are emitted by
-            compiler which check label value against value present in
-            CSR_LPRL.
-
-Enabling of `zisslpcfi` is controlled via menvcfg (for S/HS/VS/U/VU) and
-henvcfg (for VS/VU) at bit position 60.
-
-Each mode has enable/disable bits for forward cfi. Backward cfi doesn't
-have separate enable/disable bits for S and M mode. User forward cfi and
-user backward cfi enable/disable bits are in mstatus/sstatus CSR.
-Supervisor forward cfi enable/disable bit are in menvcfg and henvcfg CSR.
-Machine mode forward cfi enable/disable bit is in mseccfg CSR.
-
-If forward cfi enabled, all indirect branches must land on a landing pad
-instruction (`lpcll`, introduced in later commits). CPU/hart tracks this
-internally using a landing pad tracker called `elp` short for `expecting
-landing pad`. An interrupt can occur between an indirect branch and
-target. If such an event occurs `elp` is saved away in mstatus/sstatus
-CSR
+Additionally state in sstatus CSR must have save and restore zisslpcfi
+state on exiting from hypervisor and entering into hypervisor.
 
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
 Signed-off-by: Kip Walker  <kip@rivosinc.com>
 ---
- target/riscv/cpu.h      |  5 +++++
- target/riscv/cpu_bits.h | 25 +++++++++++++++++++++++++
- target/riscv/pmp.h      |  3 ++-
- 3 files changed, 32 insertions(+), 1 deletion(-)
+ target/riscv/cpu_bits.h   |  5 +++++
+ target/riscv/cpu_helper.c | 26 ++++++++++++++++++++++++++
+ target/riscv/op_helper.c  | 12 ++++++++++++
+ 3 files changed, 43 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 9a923760b2..18db61a06a 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -181,6 +181,11 @@ struct CPUArchState {
- 
-     uint32_t features;
- 
-+    /* CFI Extension user mode registers and state */
-+    uint32_t     lplr;
-+    target_ulong ssp;
-+    cfi_elp      elp;
-+
- #ifdef CONFIG_USER_ONLY
-     uint32_t elf_flags;
- #endif
 diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 8b0d7e20ea..1663ba5775 100644
+index 1663ba5775..37100ec8f6 100644
 --- a/target/riscv/cpu_bits.h
 +++ b/target/riscv/cpu_bits.h
-@@ -39,6 +39,10 @@
+@@ -594,6 +594,11 @@ typedef enum {
  
- /* Control and Status Registers */
+ #define CFISTATUS_S_MASK    (SSTATUS_UFCFIEN | SSTATUS_UBCFIEN | \
+                              SSTATUS_SPELP)
++/* enum for branch tracking state in cpu/hart */
++typedef enum {
++    NO_LP_EXPECTED = 0,
++    LP_EXPECTED = 1,
++} cfi_elp;
  
-+/* CFI CSRs */
-+#define CSR_LPLR            0x006
-+#define CSR_SSP             0x020
-+
- /* User Trap Setup */
- #define CSR_USTATUS         0x000
- #define CSR_UIE             0x004
-@@ -542,6 +546,10 @@
- #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
- #define MSTATUS_TW          0x00200000 /* since: priv-1.10 */
- #define MSTATUS_TSR         0x00400000 /* since: priv-1.10 */
-+#define MSTATUS_UFCFIEN     0x00800000 /* Zisslpcfi-0.1 */
-+#define MSTATUS_UBCFIEN     0x01000000 /* Zisslpcfi-0.1 */
-+#define MSTATUS_SPELP       0x02000000 /* Zisslpcfi-0.1 */
-+#define MSTATUS_MPELP       0x04000000 /* Zisslpcfi-0.1 */
- #define MSTATUS_GVA         0x4000000000ULL
- #define MSTATUS_MPV         0x8000000000ULL
- 
-@@ -572,12 +580,21 @@ typedef enum {
- #define SSTATUS_XS          0x00018000
- #define SSTATUS_SUM         0x00040000 /* since: priv-1.10 */
- #define SSTATUS_MXR         0x00080000
-+#define SSTATUS_UFCFIEN     MSTATUS_UFCFIEN /* Zisslpcfi-0.1 */
-+#define SSTATUS_UBCFIEN     MSTATUS_UBCFIEN /* Zisslpcfi-0.1 */
-+#define SSTATUS_SPELP       MSTATUS_SPELP   /* Zisslpcfi-0.1 */
- 
- #define SSTATUS64_UXL       0x0000000300000000ULL
- 
- #define SSTATUS32_SD        0x80000000
- #define SSTATUS64_SD        0x8000000000000000ULL
- 
-+#define CFISTATUS_M_MASK    (MSTATUS_UFCFIEN | MSTATUS_UBCFIEN | \
-+                             MSTATUS_MPELP | MSTATUS_SPELP)
-+
-+#define CFISTATUS_S_MASK    (SSTATUS_UFCFIEN | SSTATUS_UBCFIEN | \
-+                             SSTATUS_SPELP)
-+
  /* hstatus CSR bits */
  #define HSTATUS_VSBE         0x00000020
- #define HSTATUS_GVA          0x00000040
-@@ -747,10 +764,14 @@ typedef enum RISCVException {
- #define MENVCFG_CBIE                       (3UL << 4)
- #define MENVCFG_CBCFE                      BIT(6)
- #define MENVCFG_CBZE                       BIT(7)
-+#define MENVCFG_SFCFIEN                    BIT(59)
-+#define MENVCFG_CFI                        BIT(60)
- #define MENVCFG_PBMTE                      (1ULL << 62)
- #define MENVCFG_STCE                       (1ULL << 63)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index a397023840..fc188683c9 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -534,6 +534,16 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
+     if (riscv_has_ext(env, RVF)) {
+         mstatus_mask |= MSTATUS_FS;
+     }
++
++    /*
++     * If cfi extension available, menvcfg.CFI = 1 and henvcfg.CFI = 1,
++     * then apply CFI mask on mstatus
++     */
++    if (env_archcpu(env)->cfg.ext_cfi &&
++        get_field(env->menvcfg, MENVCFG_CFI) &&
++        get_field(env->henvcfg, HENVCFG_CFI)) {
++        mstatus_mask |= CFISTATUS_S_MASK;
++    }
+     bool current_virt = riscv_cpu_virt_enabled(env);
  
- /* For RV32 */
-+#define MENVCFGH_SFCFIEN                   BIT(27)
-+#define MENVCFGH_CFI                       BIT(28)
- #define MENVCFGH_PBMTE                     BIT(30)
- #define MENVCFGH_STCE                      BIT(31)
+     g_assert(riscv_has_ext(env, RVH));
+@@ -1723,6 +1733,10 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+     if (env->priv <= PRV_S &&
+             cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
+         /* handle the trap in S-mode */
++        /* save elp status */
++        if (cpu_get_fcfien(env)) {
++            env->mstatus = set_field(env->mstatus, MSTATUS_SPELP, env->elp);
++        }
+         if (riscv_has_ext(env, RVH)) {
+             uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
  
-@@ -763,10 +784,14 @@ typedef enum RISCVException {
- #define HENVCFG_CBIE                       MENVCFG_CBIE
- #define HENVCFG_CBCFE                      MENVCFG_CBCFE
- #define HENVCFG_CBZE                       MENVCFG_CBZE
-+#define HENVCFG_SFCFIEN                    MENVCFG_SFCFIEN
-+#define HENVCFG_CFI                        MENVCFG_CFI
- #define HENVCFG_PBMTE                      MENVCFG_PBMTE
- #define HENVCFG_STCE                       MENVCFG_STCE
+@@ -1772,6 +1786,10 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         riscv_cpu_set_mode(env, PRV_S);
+     } else {
+         /* handle the trap in M-mode */
++        /* save elp status */
++        if (cpu_get_fcfien(env)) {
++            env->mstatus = set_field(env->mstatus, MSTATUS_MPELP, env->elp);
++        }
+         if (riscv_has_ext(env, RVH)) {
+             if (riscv_cpu_virt_enabled(env)) {
+                 riscv_cpu_swap_hypervisor_regs(env);
+@@ -1803,6 +1821,14 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         riscv_cpu_set_mode(env, PRV_M);
+     }
  
- /* For RV32 */
-+#define HENVCFGH_SFCFIEN                    MENVCFGH_SFCFIEN
-+#define HENVCFGH_CFI                        MENVCFGH_CFI
- #define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
- #define HENVCFGH_STCE                       MENVCFGH_STCE
++    /*
++     * Interrupt/exception/trap delivery is asynchronous event and as per
++     * Zisslpcfi spec CPU should clear up the ELP state. If cfi extension is
++     * available, clear ELP state.
++     */
++    if (cpu->cfg.ext_cfi) {
++        env->elp = NO_LP_EXPECTED;
++    }
+     /* NOTE: it is not necessary to yield load reservations here. It is only
+      * necessary for an SC from "another hart" to cause a load reservation
+      * to be yielded. Refer to the memory consistency model section of the
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 878bcb03b8..d15893aa82 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -176,6 +176,12 @@ target_ulong helper_sret(CPURISCVState *env)
+         riscv_cpu_set_virt_enabled(env, prev_virt);
+     }
  
-diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-index da32c61c85..f5bfc4955b 100644
---- a/target/riscv/pmp.h
-+++ b/target/riscv/pmp.h
-@@ -43,7 +43,8 @@ typedef enum {
-     MSECCFG_MMWP  = 1 << 1,
-     MSECCFG_RLB   = 1 << 2,
-     MSECCFG_USEED = 1 << 8,
--    MSECCFG_SSEED = 1 << 9
-+    MSECCFG_SSEED = 1 << 9,
-+    MSECCFG_MFCFIEN =  1 << 10
- } mseccfg_field_t;
++    /* If forward cfi enabled for target, restore elp status */
++    if (cpu_get_fcfien(env)) {
++        env->elp = get_field(env->mstatus, MSTATUS_SPELP);
++        env->mstatus = set_field(env->mstatus, MSTATUS_SPELP, 0);
++    }
++
+     riscv_cpu_set_mode(env, prev_priv);
  
- typedef struct {
+     return retpc;
+@@ -220,6 +226,12 @@ target_ulong helper_mret(CPURISCVState *env)
+         riscv_cpu_set_virt_enabled(env, prev_virt);
+     }
+ 
++    /* If forward cfi enabled for target, restore elp status */
++    if (cpu_get_fcfien(env)) {
++        env->elp = get_field(env->mstatus, MSTATUS_MPELP);
++        env->mstatus = set_field(env->mstatus, MSTATUS_MPELP, 0);
++    }
++
+     return retpc;
+ }
+ 
 -- 
 2.25.1
 
