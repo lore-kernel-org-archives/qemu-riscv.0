@@ -1,70 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pQ0SS-0007nr-9r
+	id 1pQ0SS-0007og-PC
 	for mharc-qemu-riscv@gnu.org; Thu, 09 Feb 2023 01:31:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1pQ0S0-0007XR-7Y
- for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 01:30:33 -0500
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ id 1pQ0S5-0007Yz-2V
+ for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 01:30:39 -0500
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1pQ0Ry-0000mF-Ao
- for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 01:30:31 -0500
-Received: by mail-pf1-x432.google.com with SMTP id t17so722082pfj.0
- for <qemu-riscv@nongnu.org>; Wed, 08 Feb 2023 22:30:28 -0800 (PST)
+ id 1pQ0S3-0000ns-7U
+ for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 01:30:36 -0500
+Received: by mail-pj1-x102c.google.com with SMTP id
+ e10-20020a17090a630a00b0022bedd66e6dso5147349pjj.1
+ for <qemu-riscv@nongnu.org>; Wed, 08 Feb 2023 22:30:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=slc2qEJKHDUPCqJbT+o4fG/GNXtlIN4HHpf/pKqJaTw=;
- b=FpWYYk/+rObx8lj8TiUpzTGreHoqDxf0meG0ATcWaJEIBQyKv4sfm/s8Yhiotq4tZw
- V/XWiUCLWMfyv++0IrQxElMBNBWWhGlPWkS94HuLnoTE1YYFxx6EZfUAnWIX2M0/yBwm
- L0DGybx/GMc8JKTIey1tmlqXisSRqHFLw6jHSJO3pTDIy0QDd8WSVwxw8TXQaukURNh7
- 0nmYyfW8LAUgbrqfHeLrg/Rsi+WglTE3kUFMFAsLJzKxaMHCpcEEsyIMZGQwv+Y4Zb80
- da9cnRWbIWYsYhGCOSfHbZgBgUl7TQ+LIuo/lhy8tc771Sv3gRRZhJjRfzyCmh22UIfL
- EuMw==
+ bh=rfCWSS9jG8oH/r1HKi/uvLvwEOlj2iUYuI+0QRVQEBI=;
+ b=t30FnQ5HaoX99Ii21dj/N8EtOEur7pO9kAl21LLxS6ZIKV+5LQQLE5xeQvP6dHwmmJ
+ l+lsJ1vvLYcYtAl83J/zUipRUDlnPghks92akgOYzm7KpVcidm3pRWvPg5vS1yH46Vgq
+ jZ9F/eGJHBDWxfON/xRxvBR9lmyBDwKi6mhYZACdUmuK1KLUtqclm1otpq2RbmaEByCX
+ P8G79yBePj+lCluzq8Afodr65BRplaOe4C2ECTpzAX08RxcviyPjjiaiqY8XEQR0rcox
+ o4f4DU/naRLlP7C37fAX3KbXtD8LqjQar7KWotODi8/ZJ6S1cx4XHe+V7pl2llzY3Y+D
+ WMsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=slc2qEJKHDUPCqJbT+o4fG/GNXtlIN4HHpf/pKqJaTw=;
- b=5jsmHiO0aWgzYTYEJsSf3j/0jp5XbVFE9iw1J2UkE/f97+MTmB4AcvHzJFfO+7f4yu
- hkMCc6P+cEKM3yJTUiKhWSOkte0vqvMUvQKA6QqyNJsn2XEFVxgt6m2RL99UrPuSsXz/
- lAB0/Zyyc/SpLgEv99B5ICz0+MQib3p0YDreReCvGmATg/Kb5r8opv//Ip355lVw7lSc
- PcGDMo4J7q42txdvp6c8b9DQGo4jQYJ1zogzZtcwCs2Ho0W4s9WZeAVVQKr+IY/d+Rl0
- la70Kzf6T2y1YLLxWgm6qWxaKZbyDK46I4Ox+HLw3G745YPiVTKj14oFKyYD97qGsMvv
- MuEg==
-X-Gm-Message-State: AO0yUKWQcxIz5pPXoBErZKsceD1ybl0bs8cZ4+LzMQ9OCrUfkp2AXrUg
- rp2C3Iv4fWxRpsLEqrdThXNEQA==
-X-Google-Smtp-Source: AK7set/A7D+BkYZDhyi+L9nqEefqaNyFJWmscGPQA23xnsPgoqPtMaybiQ2AyGA3/EF5GJdiM1hasw==
-X-Received: by 2002:a62:520a:0:b0:5a8:44b1:7396 with SMTP id
- g10-20020a62520a000000b005a844b17396mr4414023pfb.15.1675924227118; 
- Wed, 08 Feb 2023 22:30:27 -0800 (PST)
+ bh=rfCWSS9jG8oH/r1HKi/uvLvwEOlj2iUYuI+0QRVQEBI=;
+ b=WPIm8Plga4aUD7lOsn74pYSgcBjAEl+nigezaejv5Fhl8h5y5149fk++eU8HUCFdcl
+ sX2Hc07ybtN9NnoDS1FW9eBb3IYd7J+YOR5ywsFAHmgIzuBRmrG/Rnpi1dGinIOam8zU
+ 8NiSa/3+p6j65/0tVkuouKiJBggLQbziLunyJphpKMpAuoYt9TZmErs5sz2aJ5ERzS1X
+ AiXdkbNqrbwyM5Xwm2pHPLCmKMComjC7wlw5lhRQGZsW25f2dlGvvmhS4eOfXsufl4Rh
+ IUrffT1E754hm7QKwSEBnV5tCxaoX18NPOV2CsWN8lJyk44mW6qPpKPLK3oPotJl6Zn9
+ TFAA==
+X-Gm-Message-State: AO0yUKWcru5XdSmhkhx1m2qNlnN7Spil3KM+LLPh5kbXT5xpg2IGQzFu
+ /6XDNwLuWHx3Mn+hDlZt4Jfv5g==
+X-Google-Smtp-Source: AK7set//WQjnVauFQMciSD7aXuLNtoDl91A1cwqGpHfe7qe75MnIow8d22qPo2rVm5DJIyJOo/0o0Q==
+X-Received: by 2002:a05:6a21:9812:b0:a3:7d0b:5dcb with SMTP id
+ ue18-20020a056a21981200b000a37d0b5dcbmr767910pzb.15.1675924233467; 
+ Wed, 08 Feb 2023 22:30:33 -0800 (PST)
 Received: from debug.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- u15-20020aa7848f000000b00593c434b1b8sm543649pfn.48.2023.02.08.22.30.26
+ u15-20020aa7848f000000b00593c434b1b8sm543649pfn.48.2023.02.08.22.30.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Feb 2023 22:30:26 -0800 (PST)
+ Wed, 08 Feb 2023 22:30:32 -0800 (PST)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
+ Alistair Francis <Alistair.Francis@wdc.com>
 Cc: Deepak Gupta <debug@rivosinc.com>, Kip Walker <kip@rivosinc.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v1 RFC Zisslpcfi 4/9] target/riscv: helper functions for
- forward and backward cfi
-Date: Wed,  8 Feb 2023 22:29:42 -0800
-Message-Id: <20230209062947.3585481-5-debug@rivosinc.com>
+Subject: [PATCH v1 RFC Zisslpcfi 9/9] target/riscv: diassembly support for
+ zisslpcfi instructions
+Date: Wed,  8 Feb 2023 22:29:47 -0800
+Message-Id: <20230209062947.3585481-10-debug@rivosinc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230209062947.3585481-1-debug@rivosinc.com>
 References: <20230209062947.3585481-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=debug@rivosinc.com; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=debug@rivosinc.com; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -83,101 +83,203 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2023 06:30:34 -0000
+X-List-Received-Date: Thu, 09 Feb 2023 06:30:43 -0000
 
-Implementation for forward cfi and backward cfi needs helper function
-to determine if currently fcfi and bcfi are enabled. Enable depends on
-privilege mode and settings in sstatus/menvcfg/henvcfg/mseccfg CSRs.
+This patch adds support to disassemble Zisslpcfi instructions.
 
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
 Signed-off-by: Kip Walker  <kip@rivosinc.com>
 ---
- target/riscv/cpu.h        |  2 ++
- target/riscv/cpu_helper.c | 51 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 53 insertions(+)
+ disas/riscv.c | 127 +++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 126 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 18db61a06a..d14ea4f91d 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -568,6 +568,8 @@ bool riscv_cpu_virt_enabled(CPURISCVState *env);
- void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
- bool riscv_cpu_two_stage_lookup(int mmu_idx);
- int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
-+bool cpu_get_fcfien(CPURISCVState *env);
-+bool cpu_get_bcfien(CPURISCVState *env);
- hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- G_NORETURN void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-                                                MMUAccessType access_type, int mmu_idx,
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 9a28816521..a397023840 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -30,6 +30,7 @@
- #include "sysemu/cpu-timers.h"
- #include "cpu_bits.h"
- #include "debug.h"
-+#include "pmp.h"
+diff --git a/disas/riscv.c b/disas/riscv.c
+index d216b9c39b..d16ee617b0 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -163,6 +163,7 @@ typedef enum {
+     rv_codec_v_i,
+     rv_codec_vsetvli,
+     rv_codec_vsetivli,
++    rv_codec_lp,
+ } rv_codec;
  
- int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
- {
-@@ -40,6 +41,56 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
- #endif
+ typedef enum {
+@@ -935,6 +936,19 @@ typedef enum {
+     rv_op_vsetvli = 766,
+     rv_op_vsetivli = 767,
+     rv_op_vsetvl = 768,
++    rv_op_lpsll = 769,
++    rv_op_lpcll = 770,
++    rv_op_lpsml = 771,
++    rv_op_lpcml = 772,
++    rv_op_lpsul = 773,
++    rv_op_lpcul = 774,
++    rv_op_sspush = 775,
++    rv_op_sspop = 776,
++    rv_op_ssprr = 777,
++    rv_op_ssamoswap = 778,
++    rv_op_sschkra = 779,
++    rv_op_zimops_r = 780,
++    rv_op_zimops_rr = 781,
+ } rv_op;
+ 
+ /* structures */
+@@ -1011,6 +1025,7 @@ static const char rv_vreg_name_sym[32][4] = {
+ #define rv_fmt_pred_succ              "O\tp,s"
+ #define rv_fmt_rs1_rs2                "O\t1,2"
+ #define rv_fmt_rd_imm                 "O\t0,i"
++#define rv_fmt_imm                    "O\ti"
+ #define rv_fmt_rd_offset              "O\t0,o"
+ #define rv_fmt_rd_rs1_rs2             "O\t0,1,2"
+ #define rv_fmt_frd_rs1                "O\t3,1"
+@@ -2065,7 +2080,20 @@ const rv_opcode_data opcode_data[] = {
+     { "vsext.vf8", rv_codec_v_r, rv_fmt_vd_vs2_vm, NULL, rv_op_vsext_vf8, rv_op_vsext_vf8, 0 },
+     { "vsetvli", rv_codec_vsetvli, rv_fmt_vsetvli, NULL, rv_op_vsetvli, rv_op_vsetvli, 0 },
+     { "vsetivli", rv_codec_vsetivli, rv_fmt_vsetivli, NULL, rv_op_vsetivli, rv_op_vsetivli, 0 },
+-    { "vsetvl", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, rv_op_vsetvl, rv_op_vsetvl, 0 }
++    { "vsetvl", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, rv_op_vsetvl, rv_op_vsetvl, 0 },
++    { "lpsll", rv_codec_lp, rv_fmt_imm, NULL, 0, 0, 0 },
++    { "lpcll", rv_codec_lp, rv_fmt_imm, NULL, 0, 0, 0 },
++    { "lpsml", rv_codec_lp, rv_fmt_imm, NULL, 0, 0, 0 },
++    { "lpcml", rv_codec_lp, rv_fmt_imm, NULL, 0, 0, 0 },
++    { "lpsul", rv_codec_lp, rv_fmt_imm, NULL, 0, 0, 0 },
++    { "lpcul", rv_codec_lp, rv_fmt_imm, NULL, 0, 0, 0 },
++    { "sspush", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
++    { "sspop", rv_codec_r, rv_fmt_rd, NULL, 0, 0, 0 },
++    { "ssprr", rv_codec_r, rv_fmt_rd, NULL, 0, 0, 0 },
++    { "ssamoswap", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "sschkra", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
++    { "zimops_r", rv_codec_r, rv_fmt_rd, NULL, 0, 0, 0 },
++    { "zimops_rr", rv_codec_r, rv_fmt_rd, NULL, 0, 0, 0 }
+ };
+ 
+ /* CSR names */
+@@ -2084,6 +2112,8 @@ static const char *csr_name(int csrno)
+     case 0x000a: return "vxrm";
+     case 0x000f: return "vcsr";
+     case 0x0015: return "seed";
++    case 0x0006: return "lplr";
++    case 0x0020: return "ssp";
+     case 0x0040: return "uscratch";
+     case 0x0041: return "uepc";
+     case 0x0042: return "ucause";
+@@ -3554,6 +3584,87 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+             case 1: op = rv_op_csrrw; break;
+             case 2: op = rv_op_csrrs; break;
+             case 3: op = rv_op_csrrc; break;
++            case 4:
++                /* if matches mop_r mask */
++                if ((((inst >> 15) & 0b10110011110000000) ==
++                        0b10000001110000000)) {
++                    if ((inst >> 25) == 0b1000000) {
++                        switch ((inst >> 20) & 0b11) {
++                        case 0: /* sspush and sspop */
++                            if (((inst >> 15) & 0b11111) &&
++                                !((inst >> 7) & 0b11111))
++                                op = rv_op_sspush;
++                            if (!((inst >> 15) & 0b11111) &&
++                                ((inst >> 7) & 0b11111))
++                                op = rv_op_sspop;
++                            break;
++
++                        case 1: /* ssprr */
++                            if (!((inst >> 15) & 0b11111) &&
++                                ((inst >> 7) & 0b11111))
++                                op = rv_op_ssprr;
++                            break;
++
++                        default:
++                            op = rv_op_zimops_r;
++                            break;
++                        }
++                    } else {
++                        op = rv_op_zimops_r;
++                    }
++                } else if (((inst >> 15) & 0b10110010000000000) ==
++                            0b10000010000000000) { /* if matches mop_rr mask */
++                    switch (inst >> 28) {
++                    case 0b1000:
++                        switch ((inst >> 7) & 0b11111) {
++                        case 0b00000:
++                            /* collect 5 bits */
++                            switch (((inst >> 23) & 0b11111)) {
++                            case 23:
++                                op = rv_op_lpcul;
++                                break;
++                            case 22:
++                                op = rv_op_lpsul;
++                                break;
++                            case 13:
++                                op = rv_op_lpcml;
++                                break;
++                            case 12:
++                                op = rv_op_lpsml;
++                                break;
++                            case 6:
++                            case 7:
++                                op = rv_op_lpcll;
++                                break;
++                            case 4:
++                            case 5:
++                                op = rv_op_lpsll;
++                                break;
++                            default:
++                                if (inst ==
++                                    0b10001010000100101100000001110011) {
++                                    op = rv_op_sschkra;
++                                } else {
++                                    op = rv_op_zimops_rr;
++                                }
++                                break;
++                            }
++                            break;
++                        default:
++                            if ((inst >> 26) == 0b100000) {
++                                op = rv_op_ssamoswap;
++                            } else {
++                                op = rv_op_zimops_rr;
++                            }
++                            break;
++                        }
++                        break;
++                    default:
++                        op = rv_op_zimops_rr;
++                        break;
++                    }
++                }
++                break;
+             case 5: op = rv_op_csrrwi; break;
+             case 6: op = rv_op_csrrsi; break;
+             case 7: op = rv_op_csrrci; break;
+@@ -3883,6 +3994,17 @@ static uint32_t operand_vm(rv_inst inst)
+     return (inst << 38) >> 63;
  }
  
-+bool cpu_get_fcfien(CPURISCVState *env)
++static uint32_t operand_lpl(rv_inst inst)
 +{
-+#ifdef CONFIG_USER_ONLY
-+    return false;
-+#else
-+    /* no cfi extension, return false */
-+    if (!env_archcpu(env)->cfg.ext_cfi) {
-+        return false;
++    uint32_t label_width = 9;
++
++    if ((inst >> 26) & 0b11) {
++        label_width = 8;
 +    }
 +
-+    switch (env->priv) {
-+    case PRV_U:
-+        return (env->mstatus & MSTATUS_UFCFIEN) ? true : false;
-+    case PRV_S:
-+        return (env->menvcfg & MENVCFG_SFCFIEN) ? true : false;
-+    case PRV_M:
-+        return (env->mseccfg & MSECCFG_MFCFIEN) ? true : false;
-+    default:
-+        g_assert_not_reached();
-+    }
-+#endif
++    return (inst >> 15) & ((1 << label_width) - 1);
 +}
 +
-+bool cpu_get_bcfien(CPURISCVState *env)
-+{
-+#ifdef CONFIG_USER_ONLY
-+    return false;
-+#else
-+    /* no cfi extension, return false */
-+    if (!env_archcpu(env)->cfg.ext_cfi) {
-+        return false;
-+    }
-+
-+    switch (env->priv) {
-+    case PRV_U:
-+        return (env->mstatus & MSTATUS_UBCFIEN) ? true : false;
-+
-+        /*
-+         * no gating for back cfi in M/S mode. back cfi is always on for
-+         * M/S mode
-+         */
-+    case PRV_S:
-+    case PRV_M:
-+        return true;
-+    default:
-+        g_assert_not_reached();
-+    }
-+#endif
-+}
-+
- void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-                           target_ulong *cs_base, uint32_t *pflags)
- {
+ /* decode operands */
+ 
+ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+@@ -4199,6 +4321,9 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+         dec->imm = operand_vimm(inst);
+         dec->vzimm = operand_vzimm10(inst);
+         break;
++    case rv_codec_lp:
++        dec->imm = operand_lpl(inst);
++        break;
+     };
+ }
+ 
 -- 
 2.25.1
 
