@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPuhA-0002qZ-Ou
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Feb 2023 19:21:48 -0500
+	id 1pPujW-0003eI-3u
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Feb 2023 19:24:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pPuh9-0002q8-4e; Wed, 08 Feb 2023 19:21:47 -0500
-Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
+ id 1pPujU-0003e1-AJ; Wed, 08 Feb 2023 19:24:12 -0500
+Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pPuh7-0004qT-8g; Wed, 08 Feb 2023 19:21:46 -0500
-Received: by mail-vk1-xa2f.google.com with SMTP id n13so125364vkl.8;
- Wed, 08 Feb 2023 16:21:44 -0800 (PST)
+ id 1pPujS-0006Ys-R3; Wed, 08 Feb 2023 19:24:12 -0500
+Received: by mail-vs1-xe31.google.com with SMTP id g8so463606vso.3;
+ Wed, 08 Feb 2023 16:24:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=N2iVpHhFeE7trcpuPb4MC/oo6zMdINLLmqqfElixnZs=;
- b=kWcjXc5yUGLoMqs4Weu1N7rfX4l3Ea203ouvEUyQqaTo+OyNFJJUKIMNQCRWTibcIl
- KXTE/CBbsKU6YWmLBBvYscvsMu6iURw24ZBczZmzXHs1BZiIaNVwox6K/DmXU8iDh6qq
- dAtrrGsFgRp7TquBz0eCcWl72NV7MdSM6PiIV6aOleuSdMpOXgf4Cq4GtRjqKP5QT4Ot
- 9PccS5Q+Kw2tNgDWGyBIfKTNfT09Kf7iB2KFIpyfOL7bNHNFlRT5VsmGpW+dPqQhv0QS
- FNDUhv8937nuCYn12hgNPWsE79HspzhK4wwpBgKeSm2B2+/4VKYseUDYUn5ysONuEhJt
- qdtQ==
+ bh=smAv6BxC5HSCMuLcoVpCPWQ6PYBGX6F8Qsvu4jo3WHI=;
+ b=cCAiEs5dwV2QLwnwnfXmCATCEkE4eNf+bMKZEjTIvprf36dW+folK9/c4yTbpWkmUR
+ Ze1Q3BshfhBRRYfTCV+ptHq6X1ZFkiKjv/tqoXl+VU0o2avEYoHs7Vx0IJjsACKGEcs2
+ nEJZf1ZM3XkubHRaZzDKtgolDJb27IW2RXcDM8FTC3FS3dtlOu0UVSmapcDObLJ9uUoh
+ OhBNEY+6dOhRTdi/SlNmgA89sBohLEkXcVx0vcajSCCCNazZ/+nC/EiHgLjkDF4jRulN
+ A+5CrrydXDUDbkT7Ukfj7cMwrz7F278D6QY91LzpuwizI8qUOm5PvBYkxBOa8X5zsBG6
+ wQNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=N2iVpHhFeE7trcpuPb4MC/oo6zMdINLLmqqfElixnZs=;
- b=wjECaGLTED3LxTcchwNTwm41hoOlwbH2QMvxcpcJsHQxqxSf7FJPxal4cpUCqgpTcc
- Q2xLOL6I1b51XgAYJjOnC64XKdVMO5evPYyi35QpiBUdb1+NQq/GSxZickuKNqT9B752
- mMFqxw01uqmLuBA5R1K5tKmZ3Vl1aUPRTC3QkNLa36Fw9ByYNcsEhd1cfRoI22kS8OlX
- 0kAWuaIiTxRdsS4EW+DTbZsex/8zcl8Z9Oz6JyriNcXW41UfWOe90jn49r22RrPZrxJa
- 0qKtutfpAAksMQt2uRadyDrKLdulXNjZaJMdXryxhiwI7NnkDo/H1xfBX3AAIy+MXHud
- fspw==
-X-Gm-Message-State: AO0yUKVXozAPe/LWrViBa8pxxza1Mn5TyZI8ohVQ/8OgZsggErpOjxHg
- YAq57WybbPbnlVpWIyp5xHCsqU0B+cNqR/FGec0=
-X-Google-Smtp-Source: AK7set9zXvWnc8o8i2YZCsEgTUY8/2hffLXd1I1LBTFeLPyNhG63hpbhCArqc/vaIHD8RbiKiS0VDIQZrm/WDLK41gk=
-X-Received: by 2002:a1f:2414:0:b0:3ea:3dee:4545 with SMTP id
- k20-20020a1f2414000000b003ea3dee4545mr2012447vkk.26.1675902103580; Wed, 08
- Feb 2023 16:21:43 -0800 (PST)
+ bh=smAv6BxC5HSCMuLcoVpCPWQ6PYBGX6F8Qsvu4jo3WHI=;
+ b=lNW/oYQmoeCR2nipm/u7PRtNy9x6RaUUk8H+bjxyYcFAcOEZ/cYSiKumO99IqIZabG
+ ct1WNnMiY4Wa67Wrcn8itkEG1fMhGVng05NT9q5x15hy6CzlL9lcxg6ZUuNt0hVpKkWl
+ zfbL6xCmo08C7rVOudJY75+IXPGukpDHP9P45rzTj21yb/htNx94QPS2RYWzN8d0Lq7A
+ usuyxKvzIwN6sRog2N5z9JngJcvcvX/DSuCU09S95ka/l17QjDPxd+8cGJ3orPY2jmJ4
+ dwDqy1cc4DAOSB0cWyWF1J1Jz2Yi8H4frrD0R7RlXFagG1aCWdrsvXAUXZyXI9rXjNk9
+ XoWA==
+X-Gm-Message-State: AO0yUKUhoqFgOqCVgEM5r9oZL9b6yYUnwfINGE3qdOQHkoJHgI8iANip
+ hg6zjovcxYc3kK3KQ0htutrPeY9UYa4R4p/0MA0=
+X-Google-Smtp-Source: AK7set+Ar89QrjOGo4vzcl0NGcuiUDw8Q6ZQToJobQ3EsQ03slJADYtnF5Pn+ibrrpdO9rVmX3O3D73wEJfkcCz5OtE=
+X-Received: by 2002:a67:c297:0:b0:3fe:5a64:f8ea with SMTP id
+ k23-20020a67c297000000b003fe5a64f8eamr1941612vsj.54.1675902249336; Wed, 08
+ Feb 2023 16:24:09 -0800 (PST)
 MIME-Version: 1.0
 References: <20230202045223.2594627-1-sunilvl@ventanamicro.com>
- <20230202045223.2594627-6-sunilvl@ventanamicro.com>
-In-Reply-To: <20230202045223.2594627-6-sunilvl@ventanamicro.com>
+ <20230202045223.2594627-11-sunilvl@ventanamicro.com>
+In-Reply-To: <20230202045223.2594627-11-sunilvl@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 9 Feb 2023 10:21:17 +1000
-Message-ID: <CAKmqyKOtpS-ZcmuQcv-9fSm168g20TdHzSDDMegX1W7HY3zbWQ@mail.gmail.com>
-Subject: Re: [PATCH 05/10] hw/riscv/virt: virt-acpi-build.c: Add RINTC in MADT
+Date: Thu, 9 Feb 2023 10:23:43 +1000
+Message-ID: <CAKmqyKM19dmHsjZuqUKES+b2UyjWPshboF+1b=TayxNPKzHvAA@mail.gmail.com>
+Subject: Re: [PATCH 10/10] MAINTAINERS: Add entry for RISC-V ACPI
 To: Sunil V L <sunilvl@ventanamicro.com>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
@@ -54,8 +54,8 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Andrew Jones <ajones@ventanamicro.com>, Anup Patel <apatel@ventanamicro.com>, 
  Atish Kumar Patra <atishp@rivosinc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -76,71 +76,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2023 00:21:47 -0000
+X-List-Received-Date: Thu, 09 Feb 2023 00:24:12 -0000
 
 On Thu, Feb 2, 2023 at 2:54 PM Sunil V L <sunilvl@ventanamicro.com> wrote:
 >
-> Add Multiple APIC Description Table (MADT) with the
-> INTC structure for each cpu.
+> RISC-V ACPI related functionality for virt machine is added in
+> virt-acpi-build.c. Add the maintainer entry.
 >
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/virt-acpi-build.c | 37 +++++++++++++++++++++++++++++++++++++
->  1 file changed, 37 insertions(+)
+>  MAINTAINERS | 6 ++++++
+>  1 file changed, 6 insertions(+)
 >
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 0410b955bd..2f65f1e2e5 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -137,6 +137,43 @@ build_dsdt(GArray *table_data, BIOSLinker *linker, RISCVVirtState *vms)
->      free_aml_allocator();
->  }
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index c581c11a64..23fcaaf54a 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -995,6 +995,12 @@ L: qemu-arm@nongnu.org
+>  S: Maintained
+>  F: hw/arm/virt-acpi-build.c
 >
-> +/* MADT */
-> +static void
-> +build_madt(GArray *table_data, BIOSLinker *linker, RISCVVirtState *vms)
-> +{
-> +    MachineState *mc = MACHINE(vms);
-> +    int socket;
-> +    uint16_t base_hartid = 0;
-> +    uint32_t cpu_id = 0;
+> +RISC-V ACPI Subsystem
+> +M: Sunil V L <sunilvl@ventanamicro.com>
+> +L: qemu-riscv@nongnu.org
+> +S: Maintained
+> +F: hw/riscv/virt-acpi-build.c
 > +
-> +    AcpiTable table = { .sig = "APIC", .rev = 6, .oem_id = vms->oem_id,
-> +                        .oem_table_id = vms->oem_table_id };
-> +
-> +    acpi_table_begin(&table, table_data);
-> +    /* Local Interrupt Controller Address */
-> +    build_append_int_noprefix(table_data, 0, 4);
-> +    build_append_int_noprefix(table_data, 0, 4);   /* MADT Flags */
-> +
-> +    /* RISC-V Local INTC structures per HART */
-> +    for (socket = 0; socket < riscv_socket_count(mc); socket++) {
-> +        base_hartid = riscv_socket_first_hartid(mc, socket);
-> +
-> +        for (int i = 0; i < vms->soc[socket].num_harts; i++) {
-> +            build_append_int_noprefix(table_data, 0x18, 1);    /* Type     */
-> +            build_append_int_noprefix(table_data, 20, 1);      /* Length   */
-> +            build_append_int_noprefix(table_data, 1, 1);       /* Version  */
-> +            build_append_int_noprefix(table_data, 0, 1);       /* Reserved */
-> +            build_append_int_noprefix(table_data, 1, 4);       /* Flags    */
-> +            build_append_int_noprefix(table_data,
-> +                                      (base_hartid + i), 8);   /* hartid   */
-> +            build_append_int_noprefix(table_data, cpu_id, 4);  /* ACPI ID  */
-> +            cpu_id++;
-> +        }
-> +    }
-> +
-> +    acpi_table_end(linker, &table);
-> +}
-> +
->  static void
->  virt_acpi_build(RISCVVirtState *vms, AcpiBuildTables *tables)
->  {
+>  STM32F100
+>  M: Alexandre Iooss <erdnaxe@crans.org>
+>  L: qemu-arm@nongnu.org
 > --
 > 2.38.0
 >
