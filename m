@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPvta-0002u3-EM
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Feb 2023 20:38:42 -0500
+	id 1pPwbK-0006DG-8C
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Feb 2023 21:23:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pPvtZ-0002tq-0Z; Wed, 08 Feb 2023 20:38:41 -0500
+ id 1pPwbI-0006Ck-80; Wed, 08 Feb 2023 21:23:52 -0500
 Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pPvtW-0002Bs-It; Wed, 08 Feb 2023 20:38:40 -0500
-Received: by mail-vs1-xe2c.google.com with SMTP id d66so582525vsd.9;
- Wed, 08 Feb 2023 17:38:37 -0800 (PST)
+ id 1pPwbF-00015I-Ob; Wed, 08 Feb 2023 21:23:51 -0500
+Received: by mail-vs1-xe2c.google.com with SMTP id g8so693809vso.3;
+ Wed, 08 Feb 2023 18:23:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YbXxzkH73mLEgzLe8FneMvuDHdfcMFHpA+H440F931w=;
- b=mvlAbSY3lvORKOlfIf2GFaWqSHHcLvEh48UuFO5bV3iuuwbrRRbSToqSah6/E4ywdq
- dpPjUwn8qODBQE2utKXnOCF1JZdZi7egmwHJhWjOQ+Pr9S5Is7tz4WcAzjbRo/MXOlKf
- V/w9a+3SvnzKWPeCTzkVEknQwmL1lYYP/bMNywzWW0OkMLDgkfcig0haWhXYn2anRApj
- Tb2qc9il3FuawwOPUYaHNxDfQ1MOKh0wOPlSFDoUjJ9N0VPL+OF+ty6ynJf6anAOJp1u
- gCqzMPCYKYcBydpFnHbHL94ZxRDdaU7InCdJX+61kSEY0JX9bQVDEZqsEWA3fhEeO/Vz
- CvZw==
+ bh=nO/zYB/D+7sZtAtEqF6/49Bw7nHtlppc32ReUMG0U+c=;
+ b=pdaFASEn4svP4rah2le89A2gXw3/J3nzMC+FpN7geOOsPY2FlaDnpQDC8EZNtm7hQB
+ nvSJuceuUAnUgay+tuG83h0wkJa1ag1NRt/P1ihvNWZARVBv+nhlPJGbosnKPwikU285
+ FSg98AMEWl7iKt4Aa0PeKuCWvL2kygQAZ/+8Lrp8XI94GIscPE7vh/nL2dUTD1jVn1QR
+ qp8LGRQCVcBT9jTZLxO2VO2BlgabMLrWtZ+p1kogBMHD7mCcSs/bbNzPhZZloqHSSiUn
+ 9IoSi57MLNwcUk9FVEgWLZF7pXH0NSOKdBBI5QicgshgYRyRemAeksyTFTAfAUz7JIvS
+ tj4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=YbXxzkH73mLEgzLe8FneMvuDHdfcMFHpA+H440F931w=;
- b=2zD+cTQS5HGcvjoCGuYKnN+8XJdBYIuTDwQtHlk70KKs1RJALGjSft9b4QG8cTPwPB
- y5Hf6LFO7OtFo86tUWhK+daP95io6jlcZppdEdRyBw23sy8DZGw2ftuGuOLcKclSVn4u
- xSJ4Pufi4NL0R6ywQmD9r/VkGHCfWRb9p7aWAEcngfam7J6ioUuFWfpTPUB8zfO83gO6
- IPs2IA/UfLYdgVRvnuMaa6ALMvHJmZUGudbDKE9k2hPz0AmnfeTKTSjt6MiK7JaPGlrI
- DKVvoRY0rfJdPpKxG9KXkyXjlIN282oydJDBjpDB+Qz57X9R0lBgCBd12RbDqRPePKpa
- gqCg==
-X-Gm-Message-State: AO0yUKVrVqCgvvSgLyPOrqEWfe8t6rK3L3x3bmBmClxTo6pa6NPITKPV
- g0+jeJEQaEZoQtagOpkdNVroCAdWpCBFVVVOYIY=
-X-Google-Smtp-Source: AK7set/xf7WrRWnRd+hZruKRztJYCSD+jf1Ixr9FCF93MIxiXFYFC0rSYtCtwkH/E+GJ1X+aYcX4cjSqANA7vDkQwfY=
-X-Received: by 2002:a67:ab07:0:b0:401:5ed:9a8 with SMTP id
- u7-20020a67ab07000000b0040105ed09a8mr2164469vse.10.1675906716765; 
- Wed, 08 Feb 2023 17:38:36 -0800 (PST)
+ bh=nO/zYB/D+7sZtAtEqF6/49Bw7nHtlppc32ReUMG0U+c=;
+ b=5YdKBmu0v7KrhTstwnPTjS4g0jm3YeE2fzMYTJ0RBL08LMOM9mmLFS1iXp+UgQfK+r
+ dJChudzqJ5PK1jXhuukqlQ5SkgI09opzU5uOpO4ox/LLcYzHMVAtr/HYbAl08NUOVka/
+ YVlNRb79OPy0xlItLAYtK1DeQgcdyQW6ZdW2ezvWgcalkzeCe1rGyRWxuVwPKm2fB8lk
+ IcykUte2J8fqqcGfH5WfXiUo0bkjud53v2TMGsu7MzjPw9kMmA4L7LBJw0IJDvx+2QxY
+ d57OicUlamG61aYwTbF50aVXVjqidKUuDXgfPkVUr5WTTgZJtUHhhbM9yMY6pxo9PBW7
+ ML0w==
+X-Gm-Message-State: AO0yUKUCI2uxLI0gILm3j53sG2fiUiV/tIzqD+eFq2H0zOCebI7aCXnw
+ 1VTk37s5D/KgjvXdMKraD4I9RwWQNiXJYNwV1dwREqUB10I=
+X-Google-Smtp-Source: AK7set+tp1wXDLfp6jNWVBpl8tghcztJVmj9qbH2IfqT+EbP21CIEwexXhkdUNYWDObr4U4c7Y+bVCgeyzAbvTuSVA4=
+X-Received: by 2002:a67:a407:0:b0:3f0:89e1:7c80 with SMTP id
+ n7-20020a67a407000000b003f089e17c80mr1981378vse.72.1675909428286; Wed, 08 Feb
+ 2023 18:23:48 -0800 (PST)
 MIME-Version: 1.0
 References: <20230207044003.3669059-1-bmeng@tinylab.org>
 In-Reply-To: <20230207044003.3669059-1-bmeng@tinylab.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 9 Feb 2023 11:38:10 +1000
-Message-ID: <CAKmqyKMM+fPJ1MXY_Gy9oK0J9hJQ-TQW7cTN=eom9gG_BSexbA@mail.gmail.com>
+Date: Thu, 9 Feb 2023 12:23:22 +1000
+Message-ID: <CAKmqyKM0JtZCLrV+Q8fjk+QCS3E0HbT_Zx4Kdk5db9jWKvcJDA@mail.gmail.com>
 Subject: Re: [PATCH] roms/opensbi: Upgrade from v1.1 to v1.2
 To: Bin Meng <bmeng@tinylab.org>
 Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
@@ -72,7 +72,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2023 01:38:41 -0000
+X-List-Received-Date: Thu, 09 Feb 2023 02:23:52 -0000
 
 On Tue, Feb 7, 2023 at 2:41 PM Bin Meng <bmeng@tinylab.org> wrote:
 >
@@ -211,7 +211,9 @@ On Tue, Feb 7, 2023 at 2:41 PM Bin Meng <bmeng@tinylab.org> wrote:
 >
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
