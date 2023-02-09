@@ -1,70 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pQ0SR-0007lI-Dr
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Feb 2023 01:30:59 -0500
+	id 1pQ0SS-0007nr-9r
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Feb 2023 01:31:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1pQ0S5-0007Yx-2O
- for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 01:30:39 -0500
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
+ id 1pQ0S0-0007XR-7Y
+ for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 01:30:33 -0500
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1pQ0S1-0000nQ-T9
- for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 01:30:36 -0500
-Received: by mail-pg1-x535.google.com with SMTP id x31so936534pgl.6
- for <qemu-riscv@nongnu.org>; Wed, 08 Feb 2023 22:30:33 -0800 (PST)
+ id 1pQ0Ry-0000mF-Ao
+ for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 01:30:31 -0500
+Received: by mail-pf1-x432.google.com with SMTP id t17so722082pfj.0
+ for <qemu-riscv@nongnu.org>; Wed, 08 Feb 2023 22:30:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9Jpx55XSl5ZxIppesj8mRIonMpJl9Kp5E0HS//vv/Ps=;
- b=j+azb1Kz/1+LoMUMSplcOtGgQhwxIguegMsgcMARZa9pws3BV5KeFtOfIiZxSBsrP4
- zyKSPRMA/9Q/5fDN0daNctWKH3IGJH0yrDfSN/VCDvn6uEWM8VybsLF/Hj+WIKZZajr1
- oCyr5oK4xEn0m/9mQtqoWPNA1BbqO/yX7IfbokLyJANL5hOB8ktFN/1JRS/fHR7wFB2y
- 32idjuTaN3vFydVVG/DkaUUP6ZSqW6ytS0XKj1h1aE+YBmDbb0NFTAQ9hMWn3sJBlQcR
- v78tXLYcL5dQDVkAbB9wZruo6Fh1Oq+uLE1Nm8OQeLWwkAXSbm9hufXaDn7Fmk80vtrn
- rjWA==
+ bh=slc2qEJKHDUPCqJbT+o4fG/GNXtlIN4HHpf/pKqJaTw=;
+ b=FpWYYk/+rObx8lj8TiUpzTGreHoqDxf0meG0ATcWaJEIBQyKv4sfm/s8Yhiotq4tZw
+ V/XWiUCLWMfyv++0IrQxElMBNBWWhGlPWkS94HuLnoTE1YYFxx6EZfUAnWIX2M0/yBwm
+ L0DGybx/GMc8JKTIey1tmlqXisSRqHFLw6jHSJO3pTDIy0QDd8WSVwxw8TXQaukURNh7
+ 0nmYyfW8LAUgbrqfHeLrg/Rsi+WglTE3kUFMFAsLJzKxaMHCpcEEsyIMZGQwv+Y4Zb80
+ da9cnRWbIWYsYhGCOSfHbZgBgUl7TQ+LIuo/lhy8tc771Sv3gRRZhJjRfzyCmh22UIfL
+ EuMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9Jpx55XSl5ZxIppesj8mRIonMpJl9Kp5E0HS//vv/Ps=;
- b=NrpoYHeCwZZTDtmJq5FaPn+IbvtV7YwUCNg0cpoOvYgNlRjIK1UAoFVfnuTNT1KeGe
- SbsvZlxoKBMSzcfmiCfS12MHgDg35ivHjeENq3/1pOb7UYatBJ4k15jKlS5GeEd2UfGv
- d2yQae2i3I12BS9XiaWPOK1ZhjDLzGfUTV3tDMPIbvFXb9ValQ2mzjfHAOMIPtL3lUy7
- gFG6CuVaUy1phff986vEjaBSCEjMVSZdNfFdZxbtmtN1aI80wumFRZvrsMxQHDaLV/mW
- TyAjWt5lhn8kqrJIY5XEhjPbPZFpbEE2Z0I8JB70ND3w7CmiGH9tczwmnOmrxnU9tCMZ
- OvEw==
-X-Gm-Message-State: AO0yUKXKvUIEjhyoJQTX//br9dmgYpX2De2kpxY9RmsWiRYBKHYKitHQ
- ozJSQj4Mh9ppg6NL1H9uZQKnxQ==
-X-Google-Smtp-Source: AK7set8f6Mr+6M2Ck3Fgqx++ypnlj255d4fG6kx+KRgA4hQvhUnrDithtp9Ix9UbZZEh79h9aCA96A==
-X-Received: by 2002:aa7:9aca:0:b0:592:61e2:f598 with SMTP id
- x10-20020aa79aca000000b0059261e2f598mr10054923pfp.26.1675924232146; 
- Wed, 08 Feb 2023 22:30:32 -0800 (PST)
+ bh=slc2qEJKHDUPCqJbT+o4fG/GNXtlIN4HHpf/pKqJaTw=;
+ b=5jsmHiO0aWgzYTYEJsSf3j/0jp5XbVFE9iw1J2UkE/f97+MTmB4AcvHzJFfO+7f4yu
+ hkMCc6P+cEKM3yJTUiKhWSOkte0vqvMUvQKA6QqyNJsn2XEFVxgt6m2RL99UrPuSsXz/
+ lAB0/Zyyc/SpLgEv99B5ICz0+MQib3p0YDreReCvGmATg/Kb5r8opv//Ip355lVw7lSc
+ PcGDMo4J7q42txdvp6c8b9DQGo4jQYJ1zogzZtcwCs2Ho0W4s9WZeAVVQKr+IY/d+Rl0
+ la70Kzf6T2y1YLLxWgm6qWxaKZbyDK46I4Ox+HLw3G745YPiVTKj14oFKyYD97qGsMvv
+ MuEg==
+X-Gm-Message-State: AO0yUKWQcxIz5pPXoBErZKsceD1ybl0bs8cZ4+LzMQ9OCrUfkp2AXrUg
+ rp2C3Iv4fWxRpsLEqrdThXNEQA==
+X-Google-Smtp-Source: AK7set/A7D+BkYZDhyi+L9nqEefqaNyFJWmscGPQA23xnsPgoqPtMaybiQ2AyGA3/EF5GJdiM1hasw==
+X-Received: by 2002:a62:520a:0:b0:5a8:44b1:7396 with SMTP id
+ g10-20020a62520a000000b005a844b17396mr4414023pfb.15.1675924227118; 
+ Wed, 08 Feb 2023 22:30:27 -0800 (PST)
 Received: from debug.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- u15-20020aa7848f000000b00593c434b1b8sm543649pfn.48.2023.02.08.22.30.31
+ u15-20020aa7848f000000b00593c434b1b8sm543649pfn.48.2023.02.08.22.30.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Feb 2023 22:30:31 -0800 (PST)
+ Wed, 08 Feb 2023 22:30:26 -0800 (PST)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>
 Cc: Deepak Gupta <debug@rivosinc.com>, Kip Walker <kip@rivosinc.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v1 RFC Zisslpcfi 8/9] target/riscv: Instructions encodings,
- implementation and handlers
-Date: Wed,  8 Feb 2023 22:29:46 -0800
-Message-Id: <20230209062947.3585481-9-debug@rivosinc.com>
+Subject: [PATCH v1 RFC Zisslpcfi 4/9] target/riscv: helper functions for
+ forward and backward cfi
+Date: Wed,  8 Feb 2023 22:29:42 -0800
+Message-Id: <20230209062947.3585481-5-debug@rivosinc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230209062947.3585481-1-debug@rivosinc.com>
 References: <20230209062947.3585481-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=debug@rivosinc.com; helo=mail-pg1-x535.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=debug@rivosinc.com; helo=mail-pf1-x432.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -83,633 +83,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2023 06:30:43 -0000
+X-List-Received-Date: Thu, 09 Feb 2023 06:30:34 -0000
 
-This patch implements instruction encodings for zisslpcfi instructions.
-Additionally this patch implements zimops encodings as well. If Zisslpcfi
-is supported by CPU but not enabled then all Zisslpcfi instructions
-default to Zimops instuction behavior i.e. mov 0 to rd.
-
-zisslpcfi defines following instructions.
-- Backward control flow
-    - sspush x1/x5 : Decrement shadow stack pointer and pushes x1 or x5
-                     on shadow stack.
-    - sspop x1/x5 : Pops from shadow stack into x1 or x5. Increments
-                    shadow stack pointer.
-    - ssprr : Reads current shadow stack pointer into a destination
-              register.
-    - sscheckra : Compares x1 with x5. Raises illegal instr fault if
-                x1 != x5
-    - ssamoswap : Atomically swaps value on top of shadow stack
-
-- Forward control flow
-    - lpsll, lpsml, lpsul : sets lower (9bit), mid (8bit) and upper
-                            (8bit) label values in CSR_ULLP respectively.
-    - lpcll, lpcml, lpcul : checks lower (9bit), mid (8bit) and upper
-                            (8bit) label values with CSR_ULLP
-                            respectively.
-    Check label instructions raise illegal instruction fault when labels
-    mismatch.
+Implementation for forward cfi and backward cfi needs helper function
+to determine if currently fcfi and bcfi are enabled. Enable depends on
+privilege mode and settings in sstatus/menvcfg/henvcfg/mseccfg CSRs.
 
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
 Signed-off-by: Kip Walker  <kip@rivosinc.com>
 ---
- target/riscv/cpu_bits.h                       |  10 +
- target/riscv/helper.h                         |   7 +
- target/riscv/insn32.decode                    |  29 ++
- target/riscv/insn_trans/trans_rvi.c.inc       |  14 +
- target/riscv/insn_trans/trans_zimops.c.inc    |  53 +++
- target/riscv/insn_trans/trans_zisslpcfi.c.inc | 310 ++++++++++++++++++
- target/riscv/op_helper.c                      |  67 ++++
- target/riscv/translate.c                      |   2 +
- 8 files changed, 492 insertions(+)
- create mode 100644 target/riscv/insn_trans/trans_zimops.c.inc
- create mode 100644 target/riscv/insn_trans/trans_zisslpcfi.c.inc
+ target/riscv/cpu.h        |  2 ++
+ target/riscv/cpu_helper.c | 51 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 53 insertions(+)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 37100ec8f6..b2d527c626 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -600,6 +600,16 @@ typedef enum {
-     LP_EXPECTED = 1,
- } cfi_elp;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 18db61a06a..d14ea4f91d 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -568,6 +568,8 @@ bool riscv_cpu_virt_enabled(CPURISCVState *env);
+ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
+ bool riscv_cpu_two_stage_lookup(int mmu_idx);
+ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
++bool cpu_get_fcfien(CPURISCVState *env);
++bool cpu_get_bcfien(CPURISCVState *env);
+ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ G_NORETURN void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+                                                MMUAccessType access_type, int mmu_idx,
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 9a28816521..a397023840 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -30,6 +30,7 @@
+ #include "sysemu/cpu-timers.h"
+ #include "cpu_bits.h"
+ #include "debug.h"
++#include "pmp.h"
  
-+#define LPLR_UL            (((1 << 8) - 1) << 17)
-+#define LPLR_ML            (((1 << 8) - 1) << 9)
-+#define LPLR_LL            ((1 << 9) - 1)
-+
-+typedef enum {
-+    FCFI_LPLL = 0,
-+    FCFI_ML = 1,
-+    FCFI_UL = 2,
-+} cfi_label_inst;
-+
- /* hstatus CSR bits */
- #define HSTATUS_VSBE         0x00000020
- #define HSTATUS_GVA          0x00000040
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 227c7122ef..6484415612 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -97,6 +97,11 @@ DEF_HELPER_FLAGS_2(fcvt_h_l, TCG_CALL_NO_RWG, i64, env, tl)
- DEF_HELPER_FLAGS_2(fcvt_h_lu, TCG_CALL_NO_RWG, i64, env, tl)
- DEF_HELPER_FLAGS_2(fclass_h, TCG_CALL_NO_RWG_SE, tl, env, i64)
- 
-+/* Forward CFI label checking */
-+DEF_HELPER_2(cfi_jalr, void, env, int)
-+DEF_HELPER_3(cfi_check_landing_pad, void, env, int, int)
-+DEF_HELPER_3(cfi_set_landing_pad, void, env, int, int)
-+
- /* Special functions */
- DEF_HELPER_2(csrr, tl, env, int)
- DEF_HELPER_3(csrw, void, env, int, tl)
-@@ -112,6 +117,8 @@ DEF_HELPER_1(tlb_flush, void, env)
- /* Native Debug */
- DEF_HELPER_1(itrigger_match, void, env)
+ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+ {
+@@ -40,6 +41,56 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
  #endif
-+/* helper for back cfi mismatch */
-+DEF_HELPER_1(sschkra_mismatch, void, env)
+ }
  
- /* Hypervisor functions */
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index b7e7613ea2..cd734f03ae 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -37,6 +37,8 @@
- %imm_u    12:s20                 !function=ex_shift_12
- %imm_bs   30:2                   !function=ex_shift_3
- %imm_rnum 20:4
-+%imm_cfi9  15:9
-+%imm_cfi8  15:8
- 
- # Argument sets:
- &empty
-@@ -163,6 +165,33 @@ csrrwi   ............     ..... 101 ..... 1110011 @csr
- csrrsi   ............     ..... 110 ..... 1110011 @csr
- csrrci   ............     ..... 111 ..... 1110011 @csr
- 
-+# zimops (unpriv integer may be operations) instructions with system opcode
-+# These're superset of for cfi encodings. zimops_r and zimops_rr should be last
-+# entry in below overlapping patterns so that it acts as final sink for overlapping patterns.
-+# Any new encoding that can be used should be placed above mop.r and mop.rr
-+
-+# cfi instructions carved out of mop.r
++bool cpu_get_fcfien(CPURISCVState *env)
 +{
-+  sspush    100000 0 11100     ..... 100 00000 1110011 %rs1
-+  sspop     100000 0 11100     00000 100 ..... 1110011 %rd
-+  ssprr     100000 0 11101     00000 100 ..... 1110011 %rd
-+  zimops_r  1-00-- 0 111--     ----- 100 ..... 1110011 %rd
-+}
-+
-+# cfi instructions carved out of mop.rr
-+{
-+  sschckra  100010 1 00001     00101 100 00000 1110011
-+  ssamoswap 100000 1 .....     ..... 100 ..... 1110011 @r
-+
-+  lpsll     100000 1 0 .........    100 00000 1110011 %imm_cfi9
-+  lpcll     100000 1 1 .........    100 00000 1110011 %imm_cfi9
-+  lpsml     100001 1 0 0........    100 00000 1110011 %imm_cfi8
-+  lpcml     100001 1 0 1........    100 00000 1110011 %imm_cfi8
-+  lpsul     100010 1 1 0........    100 00000 1110011 %imm_cfi8
-+  lpcul     100010 1 1 1........    100 00000 1110011 %imm_cfi8
-+  zimops_rr 1-00-- 1 - ---------    100 ..... 1110011 %rd
-+}
-+
- # *** RV64I Base Instruction Set (in addition to RV32I) ***
- lwu      ............   ..... 110 ..... 0000011 @i
- ld       ............   ..... 011 ..... 0000011 @i
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 5c69b88d1e..4a4f1ca778 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -66,6 +66,20 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
-     }
- 
-     gen_set_gpri(ctx, a->rd, ctx->pc_succ_insn);
-+
-+    if (ctx->cfg_ptr->ext_cfi) {
-+        /*
-+         * Rely on a helper to check the forward CFI enable for the
-+         * current process mode. The alternatives would be (1) include
-+         * "fcfi enabled" in the cflags or (2) maintain a "fcfi
-+         * currently enabled" in cpu_env and emit TCG code to access
-+         * and test it.
-+         */
-+        if (a->rd == xRA || a->rd == xT0 || (a->rs1 != xRA && a->rs1 != xT0)) {
-+            gen_helper_cfi_jalr(cpu_env, tcg_constant_i32(LP_EXPECTED));
-+        }
++#ifdef CONFIG_USER_ONLY
++    return false;
++#else
++    /* no cfi extension, return false */
++    if (!env_archcpu(env)->cfg.ext_cfi) {
++        return false;
 +    }
 +
-     lookup_and_goto_ptr(ctx);
- 
-     if (misaligned) {
-diff --git a/target/riscv/insn_trans/trans_zimops.c.inc b/target/riscv/insn_trans/trans_zimops.c.inc
-new file mode 100644
-index 0000000000..51748637b9
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_zimops.c.inc
-@@ -0,0 +1,53 @@
-+/*
-+ * RISC-V translation routines for the Control-Flow Integrity Extension
-+ *
-+ * Copyright (c) 2022-2023 Rivos Inc.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+ static bool trans_zimops_r(DisasContext *ctx, arg_zimops_r * a)
-+ {
-+      /* zimops not implemented, raise illegal instruction & return true */
-+      if (!ctx->cfg_ptr->ext_zimops) {
-+            gen_exception_illegal(ctx);
-+            return true;
-+      }
-+
-+      /*
-+       * zimops implemented, simply grab destination and mov zero.
-+       * return true
-+       */
-+      TCGv dest = dest_gpr(ctx, a->rd);
-+      dest = tcg_const_tl(0);
-+      gen_set_gpr(ctx, a->rd, dest);
-+      return true;
-+ }
-+
-+ static bool trans_zimops_rr(DisasContext *ctx, arg_zimops_rr * a)
-+ {
-+      /* zimops not implemented, raise illegal instruction & return true */
-+      if (!ctx->cfg_ptr->ext_zimops) {
-+            gen_exception_illegal(ctx);
-+            return true;
-+      }
-+
-+      /*
-+       * zimops implemented, simply grab destination and mov zero.
-+       * return true
-+       */
-+      TCGv dest = dest_gpr(ctx, a->rd);
-+      dest = tcg_const_tl(0);
-+      gen_set_gpr(ctx, a->rd, dest);
-+      return true;
-+ }
-diff --git a/target/riscv/insn_trans/trans_zisslpcfi.c.inc b/target/riscv/insn_trans/trans_zisslpcfi.c.inc
-new file mode 100644
-index 0000000000..fe27bb73f6
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_zisslpcfi.c.inc
-@@ -0,0 +1,310 @@
-+/*
-+ * RISC-V translation routines for the Control-Flow Integrity Extension
-+ *
-+ * Copyright (c) 2022-2023 Rivos Inc.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+static MemOp mxl_memop(DisasContext *ctx)
-+{
-+    switch (get_xl(ctx)) {
-+    case MXL_RV32:
-+        return MO_TEUL;
-+
-+    case MXL_RV64:
-+        return MO_TEUQ;
-+
-+    case MXL_RV128:
-+        return MO_TEUO;
-+
++    switch (env->priv) {
++    case PRV_U:
++        return (env->mstatus & MSTATUS_UFCFIEN) ? true : false;
++    case PRV_S:
++        return (env->menvcfg & MENVCFG_SFCFIEN) ? true : false;
++    case PRV_M:
++        return (env->mseccfg & MSECCFG_MFCFIEN) ? true : false;
 +    default:
 +        g_assert_not_reached();
 +    }
++#endif
 +}
 +
-+static bool trans_sspop(DisasContext *ctx, arg_sspop *a)
++bool cpu_get_bcfien(CPURISCVState *env)
 +{
-+    /* cfi only supported on 32bit and 64bit */
-+    if (get_xl(ctx) != MXL_RV32 && get_xl(ctx) != MXL_RV64) {
++#ifdef CONFIG_USER_ONLY
++    return false;
++#else
++    /* no cfi extension, return false */
++    if (!env_archcpu(env)->cfg.ext_cfi) {
 +        return false;
 +    }
 +
-+    /* back cfi not enabled, should go to trans_zimops. return false */
-+    if (!ctx->bcfi_enabled) {
-+        return false;
++    switch (env->priv) {
++    case PRV_U:
++        return (env->mstatus & MSTATUS_UBCFIEN) ? true : false;
++
++        /*
++         * no gating for back cfi in M/S mode. back cfi is always on for
++         * M/S mode
++         */
++    case PRV_S:
++    case PRV_M:
++        return true;
++    default:
++        g_assert_not_reached();
 +    }
-+
-+    /* sspop can only load into x1 or x5. Everything else defaults to zimops */
-+    if (a->rd != 1 && a->rd != 5) {
-+        return false;
-+    }
-+
-+    /*
-+     * get data in TCGv using get_gpr
-+     * get addr in TCGv using gen_helper_csrr on CSR_SSP
-+     * use some tcg subtract arithmetic (subtract by XLEN) on addr
-+     * perform ss store on computed address
-+     */
-+
-+    TCGv addr = tcg_temp_new();
-+    int tmp = (get_xl(ctx) == MXL_RV64) ? 8 : 4;
-+    TCGv_i32 ssp_csr = tcg_constant_i32(CSR_SSP);
-+    TCGv data = get_gpr(ctx, a->rd, EXT_NONE);
-+    gen_helper_csrr(addr, cpu_env, ssp_csr);
-+    tcg_gen_qemu_ld_tl(data, addr, MMU_IDX_SS_ACCESS,
-+                       mxl_memop(ctx) | MO_ALIGN);
-+
-+    /*
-+     * add XLEN/bitwidth to addr, align to XLEN . How do i do that? Is below
-+     * the right way
-+     */
-+    tcg_gen_addi_tl(addr, addr, tmp);
-+    gen_set_gpr(ctx, a->rd, data);
-+    gen_helper_csrw(cpu_env, ssp_csr, addr);
-+
-+    return true;
++#endif
 +}
 +
-+static bool trans_sspush(DisasContext *ctx, arg_sspush *a)
-+{
-+    /* cfi only supported on 32bit and 64bit */
-+    if (get_xl(ctx) != MXL_RV32 && get_xl(ctx) != MXL_RV64) {
-+        return false;
-+    }
-+
-+    /* back cfi not enabled, should go to trans_zimops. return false */
-+    if (!ctx->bcfi_enabled) {
-+        return false;
-+    }
-+
-+    /*
-+     * sspush can only push from x1 or x5. Everything else defaults to zimops
-+     */
-+    if (a->rs1 != 1 && a->rs1 != 5) {
-+        return false;
-+    }
-+
-+    /*
-+     * get data in TCGv using get_gpr
-+     * get addr in TCGv using gen_helper_csrr on CSR_SSP
-+     * use some tcg subtract arithmetic (subtract by XLEN) on addr
-+     * perform ss store on computed address
-+     */
-+
-+    TCGv addr = tcg_temp_new();
-+    int tmp = (get_xl(ctx) == MXL_RV64) ? -8 : -4;
-+    TCGv_i32 ssp_csr = tcg_constant_i32(CSR_SSP);
-+    TCGv data = get_gpr(ctx, a->rs1, EXT_NONE);
-+    gen_helper_csrr(addr, cpu_env, ssp_csr);
-+
-+    /*
-+     * subtract XLEN from addr, align to XLEN . How do i do that? Is below the
-+     * right way
-+     */
-+    tcg_gen_addi_tl(addr, addr, tmp);
-+    tcg_gen_qemu_st_tl(data, addr, MMU_IDX_SS_ACCESS,
-+                       mxl_memop(ctx) | MO_ALIGN);
-+
-+    gen_helper_csrw(cpu_env, ssp_csr, addr);
-+
-+    return true;
-+}
-+
-+static bool trans_sschckra(DisasContext *ctx, arg_sschckra *a)
-+{
-+    /* cfi only supported on 32bit and 64bit */
-+    if (get_xl(ctx) != MXL_RV32 && get_xl(ctx) != MXL_RV64) {
-+        return false;
-+    }
-+
-+    /* back cfi not enabled, should go to trans_zimops. return false */
-+    if (!ctx->bcfi_enabled) {
-+        return false;
-+    }
-+
-+    gen_helper_sschkra_mismatch(cpu_env);
-+
-+    return true;
-+}
-+
-+static bool trans_ssprr(DisasContext *ctx, arg_ssprr *a)
-+{
-+    /* cfi only supported on 32bit and 64bit */
-+    if (get_xl(ctx) != MXL_RV32 && get_xl(ctx) != MXL_RV64) {
-+        return false;
-+    }
-+
-+    /* back cfi not enabled, should go to trans_zimops. return false */
-+    if (!ctx->bcfi_enabled) {
-+        return false;
-+    }
-+
-+    TCGv dest = get_gpr(ctx, a->rd, EXT_NONE);
-+    TCGv_i32 ssp_csr = tcg_constant_i32(CSR_SSP);
-+    gen_helper_csrr(dest, cpu_env, ssp_csr);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_ssamoswap(DisasContext *ctx, arg_ssamoswap *a)
-+{
-+    /* cfi only supported on 32bit and 64bit */
-+    if (get_xl(ctx) != MXL_RV32 && get_xl(ctx) != MXL_RV64) {
-+        return false;
-+    }
-+
-+    /* back cfi not enabled, should go to trans_zimops. return false */
-+    if (!ctx->bcfi_enabled) {
-+        return false;
-+    }
-+
-+    /* If cfi is enabled then, then rd must be != 0 */
-+
-+    if (a->rd == 0) {
-+        return false;
-+    }
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_address(ctx, a->rs1, 0);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+    MemOp mop = (MO_ALIGN | ((get_xl(ctx) == MXL_RV32) ? MO_TESL : MO_TESQ));
-+
-+    tcg_gen_atomic_xchg_tl(dest, src1, src2, MMU_IDX_SS_ACCESS, mop);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+static bool trans_lpcll(DisasContext *ctx, arg_lpcll *a)
-+{
-+    /* cfi only supported on 32bit and 64bit */
-+    if (get_xl(ctx) != MXL_RV32 && get_xl(ctx) != MXL_RV64) {
-+        return false;
-+    }
-+
-+    /*
-+     * If this is the first instruction of the TB, let the translator
-+     * know the landing pad requirement was satisfied. No need to bother
-+     * checking for CFI feature or enablement.
-+     */
-+
-+    if (ctx->base.pc_next == ctx->base.pc_first) {
-+        ctx->fcfi_lp_expected = false;
-+        /* PC must be 4 byte aligned */
-+        if (ctx->fcfi_enabled && ((ctx->base.pc_next) & 0x3)) {
-+            /*
-+             * misaligned, according to spec we should raise illegal instead
-+             * of mis-aligned
-+             */
-+            gen_exception_illegal(ctx);
-+        }
-+    }
-+
-+    /* forward cfi not enabled, should go to trans_zimops. return false */
-+    if (!ctx->fcfi_enabled) {
-+        return false;
-+    }
-+
-+    gen_helper_cfi_check_landing_pad(cpu_env, tcg_constant_i32(a->imm_cfi9),
-+                               tcg_constant_i32(FCFI_LPLL));
-+    return true;
-+}
-+
-+static bool trans_lpcml(DisasContext *ctx, arg_lpcml *a)
-+{
-+    /* cfi only supported on 32bit and 64bit */
-+    if (get_xl(ctx) != MXL_RV32 && get_xl(ctx) != MXL_RV64) {
-+        return false;
-+    }
-+
-+    /* forward cfi not enabled, should go to trans_zimops. return false */
-+    if (!ctx->fcfi_enabled) {
-+        return false;
-+    }
-+
-+    gen_helper_cfi_check_landing_pad(cpu_env, tcg_constant_i32(a->imm_cfi8),
-+                               tcg_constant_i32(FCFI_ML));
-+    return true;
-+}
-+
-+static bool trans_lpcul(DisasContext *ctx, arg_lpcul *a)
-+{
-+    /* cfi only supported on 32bit and 64bit */
-+    if (get_xl(ctx) != MXL_RV32 && get_xl(ctx) != MXL_RV64) {
-+        return false;
-+    }
-+
-+    /* forward cfi not enabled, should go to trans_zimops. return false */
-+    if (!ctx->fcfi_enabled) {
-+        return false;
-+    }
-+
-+    gen_helper_cfi_check_landing_pad(cpu_env, tcg_constant_i32(a->imm_cfi8),
-+                               tcg_constant_i32(FCFI_UL));
-+    return true;
-+}
-+
-+static bool trans_lpsll(DisasContext *ctx, arg_lpsll *a)
-+{
-+    /* cfi only supported on 32bit and 64bit */
-+    if (get_xl(ctx) != MXL_RV32 && get_xl(ctx) != MXL_RV64) {
-+        return false;
-+    }
-+
-+    /* forward cfi not enabled, should go to trans_zimops. return false */
-+    if (!ctx->fcfi_enabled) {
-+        return false;
-+    }
-+
-+    gen_helper_cfi_set_landing_pad(cpu_env, tcg_constant_i32(a->imm_cfi9),
-+                                   tcg_constant_i32(FCFI_LPLL));
-+
-+    return true;
-+}
-+
-+static bool trans_lpsml(DisasContext *ctx, arg_lpsml *a)
-+{
-+    /* cfi only supported on 32bit and 64bit */
-+    if (get_xl(ctx) != MXL_RV32 && get_xl(ctx) != MXL_RV64) {
-+        return false;
-+    }
-+
-+    /* forward cfi not enabled, should go to trans_zimops. return false */
-+    if (!ctx->fcfi_enabled) {
-+        return false;
-+    }
-+
-+    gen_helper_cfi_set_landing_pad(cpu_env, tcg_constant_i32(a->imm_cfi8),
-+                                   tcg_constant_i32(FCFI_ML));
-+
-+    return true;
-+}
-+
-+static bool trans_lpsul(DisasContext *ctx, arg_lpsul *a)
-+{
-+    /* cfi only supported on 32bit and 64bit */
-+    if (get_xl(ctx) != MXL_RV32 && get_xl(ctx) != MXL_RV64) {
-+        return false;
-+    }
-+
-+    /* forward cfi not enabled, should go to trans_zimops. return false */
-+    if (!ctx->fcfi_enabled) {
-+        return false;
-+    }
-+
-+    gen_helper_cfi_set_landing_pad(cpu_env, tcg_constant_i32(a->imm_cfi8),
-+                                   tcg_constant_i32(FCFI_UL));
-+
-+    return true;
-+}
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index d15893aa82..c14b76aabb 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -123,6 +123,73 @@ target_ulong helper_csrrw_i128(CPURISCVState *env, int csr,
-     return int128_getlo(rv);
- }
- 
-+void helper_sschkra_mismatch(CPURISCVState *env)
-+{
-+    if (env->gpr[xRA] != env->gpr[xT0]) {
-+        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+    }
-+}
-+
-+void helper_cfi_jalr(CPURISCVState *env, int elp)
-+{
-+    /*
-+     * The translation routine doesn't know if forward CFI is enabled
-+     * in the current processor mode or not. It's not worth burning a
-+     * cflags bit to encode this, or tracking the current-mode-fcfi
-+     * enable in a dedicated member of 'env'. Just come out to a helper
-+     * for jump/call on a core with CFI.
-+     */
-+    if (cpu_get_fcfien(env)) {
-+        env->elp = elp;
-+    }
-+}
-+
-+void helper_cfi_check_landing_pad(CPURISCVState *env, int lbl, int inst_type)
-+{
-+    if (cpu_get_fcfien(env)) {
-+        switch (inst_type) {
-+        case FCFI_LPLL:
-+            /*
-+             * Check for a lower label match. We already checked 4 byte
-+             * alignment in tcg
-+             */
-+            if (lbl != get_field(env->lplr, LPLR_LL)) {
-+                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+            }
-+            env->elp = NO_LP_EXPECTED;
-+            break;
-+        case FCFI_ML:
-+            if (lbl != get_field(env->lplr,  LPLR_ML)) {
-+                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+            }
-+            break;
-+        case FCFI_UL:
-+            if (lbl != get_field(env->lplr,  LPLR_UL)) {
-+                riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-+            }
-+        }
-+    }
-+}
-+
-+void helper_cfi_set_landing_pad(CPURISCVState *env, int lbl, int inst_type)
-+{
-+    if (cpu_get_fcfien(env)) {
-+        switch (inst_type) {
-+        case FCFI_LPLL:
-+            /* setting lower label always clears up entire field */
-+            env->lplr = 0;
-+            env->lplr = set_field(env->lplr, LPLR_LL, lbl);
-+            break;
-+        case FCFI_ML:
-+            env->lplr = set_field(env->lplr, LPLR_ML, lbl);
-+            break;
-+        case FCFI_UL:
-+            env->lplr = set_field(env->lplr, LPLR_UL, lbl);
-+            break;
-+        }
-+    }
-+}
-+
- #ifndef CONFIG_USER_ONLY
- 
- target_ulong helper_sret(CPURISCVState *env)
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 7d43d20fc3..b1a965d192 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1071,6 +1071,8 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- #include "insn_trans/trans_privileged.c.inc"
- #include "insn_trans/trans_svinval.c.inc"
- #include "insn_trans/trans_xventanacondops.c.inc"
-+#include "insn_trans/trans_zisslpcfi.c.inc"
-+#include "insn_trans/trans_zimops.c.inc"
- 
- /* Include the auto-generated decoder for 16 bit insn */
- #include "decode-insn16.c.inc"
+ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+                           target_ulong *cs_base, uint32_t *pflags)
+ {
 -- 
 2.25.1
 
