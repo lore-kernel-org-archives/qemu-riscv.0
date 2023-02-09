@@ -1,34 +1,34 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pPyKZ-00017l-C2
+	id 1pPyKZ-00018E-Ly
 	for mharc-qemu-riscv@gnu.org; Wed, 08 Feb 2023 23:14:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pPyKX-00015j-FL; Wed, 08 Feb 2023 23:14:41 -0500
+ id 1pPyKW-000148-72; Wed, 08 Feb 2023 23:14:40 -0500
 Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pPyKS-0002Wq-1h; Wed, 08 Feb 2023 23:14:41 -0500
+ id 1pPyKR-0002Wo-Rn; Wed, 08 Feb 2023 23:14:39 -0500
 Received: from localhost.localdomain (unknown [114.95.238.225])
- by APP-01 (Coremail) with SMTP id qwCowAAnJkIfc+RjuUgtBA--.61796S8;
- Thu, 09 Feb 2023 12:14:28 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowAAnJkIfc+RjuUgtBA--.61796S7;
+ Thu, 09 Feb 2023 12:14:27 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v11 6/9] target/riscv: add support for Zcmp extension
-Date: Thu,  9 Feb 2023 12:13:49 +0800
-Message-Id: <20230209041352.53980-7-liweiwei@iscas.ac.cn>
+Subject: [PATCH v11 5/9] target/riscv: add support for Zcb extension
+Date: Thu,  9 Feb 2023 12:13:48 +0800
+Message-Id: <20230209041352.53980-6-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230209041352.53980-1-liweiwei@iscas.ac.cn>
 References: <20230209041352.53980-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAAnJkIfc+RjuUgtBA--.61796S8
-X-Coremail-Antispam: 1UD129KBjvJXoWxtr1UWw1xZrW3uF4rZw4fXwb_yoW3JF13pF
- 1UC347Wr18XFWSyw48Kr1rCFnIqr1fKrWjk34Skwn5Cay3GF4DJr48KrW3ta1rWFWkuF45
- Ca98Cayjv3y5XFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: qwCowAAnJkIfc+RjuUgtBA--.61796S7
+X-Coremail-Antispam: 1UD129KBjvJXoWxtFy8CFWxuFyfGry5Kr1rJFb_yoW7Zw47pF
+ 1xCry7GFyqgFyfAayfKF43XF17Wr4fXrWUt39xJw1kJay5KFWDJF1DKay3Ka1DXr4DWr4j
+ 93WDA3yUt3y0qa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUUBj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
@@ -63,303 +63,192 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2023 04:14:41 -0000
+X-List-Received-Date: Thu, 09 Feb 2023 04:14:40 -0000
 
-Add encode, trans* functions for Zcmp instructions
+Add encode and trans* functions support for Zcb instructions
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn16.decode                |  18 +++
- target/riscv/insn_trans/trans_rvzce.c.inc | 189 +++++++++++++++++++++-
- target/riscv/translate.c                  |   5 +
- 3 files changed, 211 insertions(+), 1 deletion(-)
+ target/riscv/insn16.decode                |  23 +++++
+ target/riscv/insn_trans/trans_rvzce.c.inc | 100 ++++++++++++++++++++++
+ target/riscv/translate.c                  |   2 +
+ 3 files changed, 125 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzce.c.inc
 
 diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index ab780fa46a..55c9574299 100644
+index b62664b6af..ab780fa46a 100644
 --- a/target/riscv/insn16.decode
 +++ b/target/riscv/insn16.decode
-@@ -21,6 +21,8 @@
- %rs1_3     7:3                !function=ex_rvc_register
- %rs2_3     2:3                !function=ex_rvc_register
- %rs2_5     2:5
-+%r1s       7:3                !function=ex_sreg_register
-+%r2s       2:3                !function=ex_sreg_register
+@@ -43,6 +43,8 @@
+ %imm_addi16sp  12:s1 3:2 5:1 2:1 6:1 !function=ex_shift_4
+ %imm_lui       12:s1 2:5             !function=ex_shift_12
  
- # Immediates:
- %imm_ci        12:s1 2:5
-@@ -45,6 +47,8 @@
- 
- %uimm_cl_b  5:1 6:1
- %uimm_cl_h  5:1                      !function=ex_shift_1
-+%spimm      2:2                      !function=ex_shift_4
-+%urlist     4:4
++%uimm_cl_b  5:1 6:1
++%uimm_cl_h  5:1                      !function=ex_shift_1
  
  # Argument sets imported from insn32.decode:
  &empty                  !extern
-@@ -56,7 +60,9 @@
+@@ -53,6 +55,7 @@
+ &b         imm rs2 rs1  !extern
  &u         imm rd       !extern
  &shift     shamt rs1 rd !extern
- &r2        rd rs1       !extern
-+&r2_s      rs1 rs2      !extern
++&r2        rd rs1       !extern
  
-+&cmpp      urlist spimm
  
  # Formats 16:
- @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
-@@ -97,6 +103,8 @@
- @cl_h         ... . .. ... .. ... ..  &i  imm=%uimm_cl_h  rs1=%rs1_3 rd=%rs2_3
- @cs_b         ... . .. ... .. ... ..  &s  imm=%uimm_cl_b  rs1=%rs1_3 rs2=%rs2_3
- @cs_h         ... . .. ... .. ... ..  &s  imm=%uimm_cl_h  rs1=%rs1_3 rs2=%rs2_3
-+@cm_pp        ... ...  ........   ..  &cmpp  %urlist      %spimm
-+@cm_mv        ... ...  ... .. ... ..  &r2_s  rs2=%r2s     rs1=%r1s
+@@ -89,6 +92,12 @@
  
+ @c_andi         ... . .. ... ..... .. &i imm=%imm_ci rs1=%rs1_3 rd=%rs1_3
+ 
++@cu           ... ...  ... .. ... ..  &r2                 rs1=%rs1_3 rd=%rs1_3
++@cl_b         ... . .. ... .. ... ..  &i  imm=%uimm_cl_b  rs1=%rs1_3 rd=%rs2_3
++@cl_h         ... . .. ... .. ... ..  &i  imm=%uimm_cl_h  rs1=%rs1_3 rd=%rs2_3
++@cs_b         ... . .. ... .. ... ..  &s  imm=%uimm_cl_b  rs1=%rs1_3 rs2=%rs2_3
++@cs_h         ... . .. ... .. ... ..  &s  imm=%uimm_cl_h  rs1=%rs1_3 rs2=%rs2_3
++
  # *** RV32/64C Standard Extension (Quadrant 0) ***
  {
-@@ -176,6 +184,16 @@ slli              000 .  .....  ..... 10 @c_shift2
- {
-   sq              101  ... ... .. ... 10 @c_sqsp
-   c_fsd           101   ......  ..... 10 @c_sdsp
-+
-+  # *** RV64 and RV32 Zcmp Extension ***
-+  [
-+    cm_push         101  11000  .... .. 10 @cm_pp
-+    cm_pop          101  11010  .... .. 10 @cm_pp
-+    cm_popret       101  11110  .... .. 10 @cm_pp
-+    cm_popretz      101  11100  .... .. 10 @cm_pp
-+    cm_mva01s       101  011 ... 11 ... 10 @cm_mv
-+    cm_mvsa01       101  011 ... 01 ... 10 @cm_mv
-+  ]
+   # Opcode of all zeros is illegal; rd != 0, nzuimm == 0 is reserved.
+@@ -180,3 +189,17 @@ sw                110 .  .....  ..... 10 @c_swsp
+   sd              111 .  .....  ..... 10 @c_sdsp
+   c_fsw           111 .  .....  ..... 10 @c_swsp
  }
- sw                110 .  .....  ..... 10 @c_swsp
- 
++
++# *** RV64 and RV32 Zcb Extension ***
++c_zext_b          100 111  ... 11 000 01 @cu
++c_sext_b          100 111  ... 11 001 01 @cu
++c_zext_h          100 111  ... 11 010 01 @cu
++c_sext_h          100 111  ... 11 011 01 @cu
++c_zext_w          100 111  ... 11 100 01 @cu
++c_not             100 111  ... 11 101 01 @cu
++c_mul             100 111  ... 10 ... 01 @cs_2
++c_lbu             100 000  ... .. ... 00 @cl_b
++c_lhu             100 001  ... 0. ... 00 @cl_h
++c_lh              100 001  ... 1. ... 00 @cl_h
++c_sb              100 010  ... .. ... 00 @cs_b
++c_sh              100 011  ... 0. ... 00 @cs_h
 diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
-index de96c4afaf..ac597e1ee2 100644
---- a/target/riscv/insn_trans/trans_rvzce.c.inc
+new file mode 100644
+index 0000000000..de96c4afaf
+--- /dev/null
 +++ b/target/riscv/insn_trans/trans_rvzce.c.inc
-@@ -1,5 +1,5 @@
- /*
-- * RISC-V translation routines for the Zcb Standard Extension.
-+ * RISC-V translation routines for the Zc[b,mp] Standard Extensions.
-  *
-  * Copyright (c) 2021-2022 PLCT Lab
-  *
-@@ -21,6 +21,11 @@
-         return false;           \
- } while (0)
- 
-+#define REQUIRE_ZCMP(ctx) do {   \
-+    if (!ctx->cfg_ptr->ext_zcmp) \
-+        return false;            \
+@@ -0,0 +1,100 @@
++/*
++ * RISC-V translation routines for the Zcb Standard Extension.
++ *
++ * Copyright (c) 2021-2022 PLCT Lab
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#define REQUIRE_ZCB(ctx) do {   \
++    if (!ctx->cfg_ptr->ext_zcb) \
++        return false;           \
 +} while (0)
 +
- static bool trans_c_zext_b(DisasContext *ctx, arg_c_zext_b *a)
- {
-     REQUIRE_ZCB(ctx);
-@@ -98,3 +103,185 @@ static bool trans_c_sh(DisasContext *ctx, arg_c_sh *a)
-     REQUIRE_ZCB(ctx);
-     return gen_store(ctx, a, MO_UW);
- }
-+
-+#define X_S0    8
-+#define X_S1    9
-+#define X_Sn    16
-+
-+static uint32_t decode_push_pop_list(DisasContext *ctx, target_ulong rlist)
++static bool trans_c_zext_b(DisasContext *ctx, arg_c_zext_b *a)
 +{
-+    uint32_t reg_bitmap = 0;
-+
-+    if (ctx->cfg_ptr->ext_e && rlist > 6) {
-+        return 0;
-+    }
-+
-+    switch (rlist) {
-+    case 15:
-+        reg_bitmap |=  1 << (X_Sn + 11) ;
-+        reg_bitmap |=  1 << (X_Sn + 10) ;
-+        /* FALL THROUGH */
-+    case 14:
-+        reg_bitmap |=  1 << (X_Sn + 9) ;
-+        /* FALL THROUGH */
-+    case 13:
-+        reg_bitmap |=  1 << (X_Sn + 8) ;
-+        /* FALL THROUGH */
-+    case 12:
-+        reg_bitmap |=  1 << (X_Sn + 7) ;
-+        /* FALL THROUGH */
-+    case 11:
-+        reg_bitmap |=  1 << (X_Sn + 6) ;
-+        /* FALL THROUGH */
-+    case 10:
-+        reg_bitmap |=  1 << (X_Sn + 5) ;
-+        /* FALL THROUGH */
-+    case 9:
-+        reg_bitmap |=  1 << (X_Sn + 4) ;
-+        /* FALL THROUGH */
-+    case 8:
-+        reg_bitmap |=  1 << (X_Sn + 3) ;
-+        /* FALL THROUGH */
-+    case 7:
-+        reg_bitmap |=  1 << (X_Sn + 2) ;
-+        /* FALL THROUGH */
-+    case 6:
-+        reg_bitmap |=  1 << X_S1 ;
-+        /* FALL THROUGH */
-+    case 5:
-+        reg_bitmap |= 1 << X_S0;
-+        /* FALL THROUGH */
-+    case 4:
-+        reg_bitmap |= 1 << xRA;
-+        break;
-+    default:
-+        break;
-+    }
-+
-+    return reg_bitmap;
++    REQUIRE_ZCB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext8u_tl);
 +}
 +
-+static bool gen_pop(DisasContext *ctx, arg_cmpp *a, bool ret, bool ret_val)
++static bool trans_c_zext_h(DisasContext *ctx, arg_c_zext_h *a)
 +{
-+    REQUIRE_ZCMP(ctx);
-+
-+    uint32_t reg_bitmap = decode_push_pop_list(ctx, a->urlist);
-+    if (reg_bitmap == 0) {
-+        return false;
-+    }
-+
-+    MemOp memop = get_ol(ctx) == MXL_RV32 ? MO_TEUL : MO_TEUQ;
-+    int reg_size = memop_size(memop);
-+    target_ulong stack_adj = ROUND_UP(ctpop32(reg_bitmap) * reg_size, 16) +
-+                             a->spimm;
-+    TCGv sp = dest_gpr(ctx, xSP);
-+    TCGv addr = tcg_temp_new();
-+    int i;
-+
-+    tcg_gen_addi_tl(addr, sp, stack_adj - reg_size);
-+
-+    for (i = X_Sn + 11; i >= 0; i--) {
-+        if (reg_bitmap & (1 << i)) {
-+            TCGv dest = dest_gpr(ctx, i);
-+            tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
-+            gen_set_gpr(ctx, i, dest);
-+            tcg_gen_subi_tl(addr, addr, reg_size);
-+        }
-+    }
-+
-+    tcg_gen_addi_tl(sp, sp, stack_adj);
-+    gen_set_gpr(ctx, xSP, sp);
-+
-+    if (ret_val) {
-+        gen_set_gpr(ctx, xA0, ctx->zero);
-+    }
-+
-+    if (ret) {
-+        TCGv ret_addr = get_gpr(ctx, xRA, EXT_NONE);
-+        gen_set_pc(ctx, ret_addr);
-+        tcg_gen_lookup_and_goto_ptr();
-+        ctx->base.is_jmp = DISAS_NORETURN;
-+    }
-+
-+    tcg_temp_free(addr);
-+    return true;
++    REQUIRE_ZCB(ctx);
++    REQUIRE_ZBB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext16u_tl);
 +}
 +
-+static bool trans_cm_push(DisasContext *ctx, arg_cm_push *a)
++static bool trans_c_sext_b(DisasContext *ctx, arg_c_sext_b *a)
 +{
-+    REQUIRE_ZCMP(ctx);
-+
-+    uint32_t reg_bitmap = decode_push_pop_list(ctx, a->urlist);
-+    if (reg_bitmap == 0) {
-+        return false;
-+    }
-+
-+    MemOp memop = get_ol(ctx) == MXL_RV32 ? MO_TEUL : MO_TEUQ;
-+    int reg_size = memop_size(memop);
-+    target_ulong stack_adj = ROUND_UP(ctpop32(reg_bitmap) * reg_size, 16) +
-+                             a->spimm;
-+    TCGv sp = dest_gpr(ctx, xSP);
-+    TCGv addr = tcg_temp_new();
-+    int i;
-+
-+    tcg_gen_subi_tl(addr, sp, reg_size);
-+
-+    for (i = X_Sn + 11; i >= 0; i--) {
-+        if (reg_bitmap & (1 << i)) {
-+            TCGv val = get_gpr(ctx, i, EXT_NONE);
-+            tcg_gen_qemu_st_tl(val, addr, ctx->mem_idx, memop);
-+            tcg_gen_subi_tl(addr, addr, reg_size);
-+        }
-+    }
-+
-+    tcg_gen_subi_tl(sp, sp, stack_adj);
-+    gen_set_gpr(ctx, xSP, sp);
-+
-+    tcg_temp_free(addr);
-+    return true;
++    REQUIRE_ZCB(ctx);
++    REQUIRE_ZBB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext8s_tl);
 +}
 +
-+static bool trans_cm_pop(DisasContext *ctx, arg_cm_pop *a)
++static bool trans_c_sext_h(DisasContext *ctx, arg_c_sext_h *a)
 +{
-+    return gen_pop(ctx, a, false, false);
++    REQUIRE_ZCB(ctx);
++    REQUIRE_ZBB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext16s_tl);
 +}
 +
-+static bool trans_cm_popret(DisasContext *ctx, arg_cm_popret *a)
++static bool trans_c_zext_w(DisasContext *ctx, arg_c_zext_w *a)
 +{
-+    return gen_pop(ctx, a, true, false);
++    REQUIRE_64BIT(ctx);
++    REQUIRE_ZCB(ctx);
++    REQUIRE_ZBA(ctx);
++    return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext32u_tl);
 +}
 +
-+static bool trans_cm_popretz(DisasContext *ctx, arg_cm_popret *a)
++static bool trans_c_not(DisasContext *ctx, arg_c_not *a)
 +{
-+    return gen_pop(ctx, a, true, true);
++    REQUIRE_ZCB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, tcg_gen_not_tl);
 +}
 +
-+static bool trans_cm_mva01s(DisasContext *ctx, arg_cm_mva01s *a)
++static bool trans_c_mul(DisasContext *ctx, arg_c_mul *a)
 +{
-+    REQUIRE_ZCMP(ctx);
-+
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_set_gpr(ctx, xA0, src1);
-+    gen_set_gpr(ctx, xA1, src2);
-+
-+    return true;
++    REQUIRE_ZCB(ctx);
++    REQUIRE_M_OR_ZMMUL(ctx);
++    return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, NULL);
 +}
 +
-+static bool trans_cm_mvsa01(DisasContext *ctx, arg_cm_mvsa01 *a)
++static bool trans_c_lbu(DisasContext *ctx, arg_c_lbu *a)
 +{
-+    REQUIRE_ZCMP(ctx);
++    REQUIRE_ZCB(ctx);
++    return gen_load(ctx, a, MO_UB);
++}
 +
-+    if (a->rs1 == a->rs2) {
-+        return false;
-+    }
++static bool trans_c_lhu(DisasContext *ctx, arg_c_lhu *a)
++{
++    REQUIRE_ZCB(ctx);
++    return gen_load(ctx, a, MO_UW);
++}
 +
-+    TCGv a0 = get_gpr(ctx, xA0, EXT_NONE);
-+    TCGv a1 = get_gpr(ctx, xA1, EXT_NONE);
++static bool trans_c_lh(DisasContext *ctx, arg_c_lh *a)
++{
++    REQUIRE_ZCB(ctx);
++    return gen_load(ctx, a, MO_SW);
++}
 +
-+    gen_set_gpr(ctx, a->rs1, a0);
-+    gen_set_gpr(ctx, a->rs2, a1);
++static bool trans_c_sb(DisasContext *ctx, arg_c_sb *a)
++{
++    REQUIRE_ZCB(ctx);
++    return gen_store(ctx, a, MO_UB);
++}
 +
-+    return true;
++static bool trans_c_sh(DisasContext *ctx, arg_c_sh *a)
++{
++    REQUIRE_ZCB(ctx);
++    return gen_store(ctx, a, MO_UW);
 +}
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 65b50502a2..08d5ce60cb 100644
+index 1f388ef089..65b50502a2 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -781,6 +781,11 @@ static int ex_rvc_register(DisasContext *ctx, int reg)
-     return 8 + reg;
- }
+@@ -1114,6 +1114,8 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
  
-+static int ex_sreg_register(DisasContext *ctx, int reg)
-+{
-+    return reg < 2 ? reg + 8 : reg + 16;
-+}
+ /* Include the auto-generated decoder for 16 bit insn */
+ #include "decode-insn16.c.inc"
++#include "insn_trans/trans_rvzce.c.inc"
 +
- static int ex_rvc_shiftli(DisasContext *ctx, int imm)
- {
-     /* For RV128 a shamt of 0 means a shift by 64. */
+ /* Include decoders for factored-out extensions */
+ #include "decode-XVentanaCondOps.c.inc"
+ 
 -- 
 2.25.1
 
