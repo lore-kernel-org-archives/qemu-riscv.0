@@ -1,77 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pQ3ag-0004oq-A5
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Feb 2023 04:51:42 -0500
+	id 1pQGWI-0005kb-Fr
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Feb 2023 18:40:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pQ3af-0004ob-FO
- for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 04:51:41 -0500
-Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pQGWG-0005hs-7S; Thu, 09 Feb 2023 18:40:00 -0500
+Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pQ3ac-0001fK-F1
- for qemu-riscv@nongnu.org; Thu, 09 Feb 2023 04:51:40 -0500
-Received: by mail-oi1-x22e.google.com with SMTP id 20so1188624oix.5
- for <qemu-riscv@nongnu.org>; Thu, 09 Feb 2023 01:51:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ue2ZZcDSQs+H906Kb+OyhYBl32Zw+rvGJJ3KlqJX77Q=;
- b=j4xh508AF8sGZ94slpGsVkk9QmMGsypjxFucv46r5/bJ2WmI7tX6LGsWJ+SG6euRch
- 1zH9nFJ2jxePouxfTXs7NaeF82G0Fj9bZLXvbOddRtLD263lVjlChjhw8faBma0oqG0t
- nONmBTW0S6rc9cWmmL0kpWNp2DAY4RFiOVpnWRrHPVOwecCIvpEPQn/bV6kYNm9t9hAv
- yOCCdzc4rjnkbKRIjQ4nmT3SfktBxDfC9bLXkPc/BUW9bBq0rGIuKLfSw4rdsGebabFa
- qu0bN9OfL5kpUeQtL4x9cMJdUCy2jhawi66NC/dHc86BrKhHT9Zef+NxWRUIaw6AlLhN
- cjhA==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pQGWE-0007zB-KT; Thu, 09 Feb 2023 18:39:59 -0500
+Received: by mail-vk1-xa2a.google.com with SMTP id t190so1809580vkb.13;
+ Thu, 09 Feb 2023 15:39:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QxWQehmYBgDBl2n+cS2zVxGK5IMTsnfyhVvkD3u2YGg=;
+ b=Z2RTPySJDxP1aQxLg7d8I3irp/le0qZbLcQ5F52SWBMjShl362UEZVq8aak6YVWXUs
+ UHn3OkpKPSFQ2gLXj7myxpmBnwL+N21oABVGmrvsRU9wGj1QwSdLjRnt14aC1Kx3VD2e
+ 4qIOMg0YBHJjUHL0LMFG3Y4DR/o/iPFx7fMzS6HXGynQLLuHj5gqmVx/kg4rz+inb75d
+ DgMQ75z8RosAvAs2f+adwsUFEAIXliTmBUTRCI/8cw9m21Rhoht7qMLWS4Da0qC+P1/K
+ PecCXce5KVY9/1EX13OWU48v5j2nGdHZRkIFbMfaCjm8I4JdLgiFzSzC3A4AgMhLCvAT
+ 3whg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ue2ZZcDSQs+H906Kb+OyhYBl32Zw+rvGJJ3KlqJX77Q=;
- b=fzEt5E0FPAmJ/63jhUKl0OIn3wXT8mmYa9wWpAIqQpIQY9mU4wRfrSMymGEFXDBO9/
- fX4AFMwQGsywQaiRTTvtOLbWSlDKik0uzfWctGIytv5Sidq7tlsWg4YT7co7l0s48/8O
- bwNNbRysAIFpBU9op7OpNOZvxsXfsWSOaDa+6lsXnd1toI8rISIOSR3wWuwuUo2R50hF
- 88GPFEwMfr3+6eko31i3QoU2iCOdhlyLjZZBigQqYp9x61VuCRz55pWVT8VzwMjFEFYx
- um5makS/1ce4WmS1Ysa0pqVH1k5A+KJJDtYDonSYzl2VfEa53Q5DJlwYhgsnN38Rfu32
- PFBA==
-X-Gm-Message-State: AO0yUKX912qvPwgvXnp+BCxW+od8893pCSqc6nDr9SFHRyHrCNUn4YlQ
- V08UaD8KMKtwFv0vFwzLLXR+lQ==
-X-Google-Smtp-Source: AK7set/fms9cMmOpuVPyvXUQD4fISs8V15BrubXAHNw+z5oXO4uVnG2+HNiFhJaaq9hK01cSoDj70A==
-X-Received: by 2002:a54:470a:0:b0:364:eafd:2697 with SMTP id
- k10-20020a54470a000000b00364eafd2697mr4024706oik.58.1675936297007; 
- Thu, 09 Feb 2023 01:51:37 -0800 (PST)
-Received: from [192.168.68.107] ([191.19.125.138])
- by smtp.gmail.com with ESMTPSA id
- q203-20020acad9d4000000b0037adc5702d4sm565583oig.38.2023.02.09.01.51.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Feb 2023 01:51:36 -0800 (PST)
-Message-ID: <67782c1b-7195-f5f0-4839-0cbacebc43f9@ventanamicro.com>
-Date: Thu, 9 Feb 2023 06:51:33 -0300
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QxWQehmYBgDBl2n+cS2zVxGK5IMTsnfyhVvkD3u2YGg=;
+ b=0z9bo03rlmWEcNIT/iDJPSIZBSwUZdTbB4KSF22xE/+2CUhl99daD+Z7oqAxfiF1L4
+ T8dT2MXH4uVBor0MftWYgrBDiAOlI2hokJmW+xXQ4bdO6UNXtjXGS7IPvbKL/DkqcHUV
+ jIGr1O1X2HMyDLzeDQkFkKWhMEUwZpCNpGi40NKTyxc65GklAl46yQIGdqqn2P+QxRhn
+ ZH1pWMVYhnYHX35J2YtKQ1neyjIlNthxdeNVJtiuSyObYKblzbomV915vPyISTPT8Mtw
+ o6KuMpGMsaV8xMIGcwmpf46dWgrVMQ25cC4SKDqzVJrHvRcbYfI5pSKFcxSRpOPSMu+f
+ vcEA==
+X-Gm-Message-State: AO0yUKXEGp5F36AOqMPE/whAZp1QMl+43zxTdHt1KQQCkWeeHCfOeqSR
+ scT9i06uBwfiTI22h96Nix/8lxB/yu9f7J/uOhd6ZK040gfDug==
+X-Google-Smtp-Source: AK7set9bfzcRD7qpxjhSPUR4Z8SdtRy/gzABremQoRAz+x4Lqa8cRq31IS6HAcQCr+F3Ec7rnih5HuSc5NFs8G4Mkp8=
+X-Received: by 2002:a1f:2ac9:0:b0:3e5:7064:1bf9 with SMTP id
+ q192-20020a1f2ac9000000b003e570641bf9mr2883529vkq.30.1675985997144; Thu, 09
+ Feb 2023 15:39:57 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
+References: <20230209055206.229392-1-hchauhan@ventanamicro.com>
+In-Reply-To: <20230209055206.229392-1-hchauhan@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 10 Feb 2023 09:39:30 +1000
+Message-ID: <CAKmqyKPnrWorMTsA-dmPpVDJrZmBkGUdVCNmWzAEjDP7L7dQBw@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Smepmp: Skip applying default rules when
  address matches
-Content-Language: en-US
-To: Himanshu Chauhan <hchauhan@ventanamicro.com>, qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org
-References: <20230209055206.229392-1-hchauhan@ventanamicro.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230209055206.229392-1-hchauhan@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22e.google.com
-X-Spam_score_int: -31
-X-Spam_score: -3.2
-X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.146,
+To: Himanshu Chauhan <hchauhan@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,42 +72,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2023 09:51:41 -0000
+X-List-Received-Date: Thu, 09 Feb 2023 23:40:00 -0000
 
-
-
-On 2/9/23 02:52, Himanshu Chauhan wrote:
+On Thu, Feb 9, 2023 at 3:53 PM Himanshu Chauhan
+<hchauhan@ventanamicro.com> wrote:
+>
 > When MSECCFG.MML is set, after checking the address range in PMP if the
 > asked permissions are not same as programmed in PMP, the default
 > permissions are applied. This should only be the case when there
 > is no matching address is found.
-> 
+>
 > This patch skips applying default rules when matching address range
 > is found. It returns the index of the match PMP entry.
-> 
+>
 > fixes: 824cac681c3 (target/riscv: Fix PMP propagation for tlb)
-
-Nit: tag starts with capital "F":
-
-Fixes: 824cac681c3 (target/riscv: Fix PMP propagation for tlb)
-
-> 
+>
 > Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/pmp.c | 9 ++++++---
->   1 file changed, 6 insertions(+), 3 deletions(-)
-> 
+>  target/riscv/pmp.c | 9 ++++++---
+>  1 file changed, 6 insertions(+), 3 deletions(-)
+>
 > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
 > index d85ad07caa..0dfdb35828 100644
 > --- a/target/riscv/pmp.c
 > +++ b/target/riscv/pmp.c
 > @@ -446,9 +446,12 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->                   }
->               }
->   
+>                  }
+>              }
+>
 > -            if ((privs & *allowed_privs) == privs) {
 > -                ret = i;
 > -            }
@@ -129,7 +114,11 @@ Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > +             * finding default privileges.
 > +             */
 > +            ret = i;
->               break;
->           }
->       }
+>              break;
+>          }
+>      }
+> --
+> 2.39.1
+>
+>
 
