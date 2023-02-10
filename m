@@ -1,65 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pQJLx-0000Uk-56
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Feb 2023 21:41:33 -0500
+	id 1pQRV6-0001pa-JO
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Feb 2023 06:23:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pQJLv-0000UK-KB; Thu, 09 Feb 2023 21:41:31 -0500
-Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pQJLt-00046C-29; Thu, 09 Feb 2023 21:41:31 -0500
-Received: by mail-ua1-x934.google.com with SMTP id ch22so726117uab.9;
- Thu, 09 Feb 2023 18:41:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TW1zvOzFc23f/2L0lUrFaxWIlPTjKa142u5zcZd33C8=;
- b=RdElEOAKCziYCfjk6KFpKsUM04O+3+konLa3kl9JEovYjPqfmH4iUL9WqI7UD7Maqt
- 5LbH//9cNAYKHnd8PCXS/eCemahN+t6ThPSejOtZgsfpHnBIyaBREYazm+96ql/T4Vob
- yr8O/jjbm/5refcwe6w0YCJYxxmRuXZb4DZAg6tWlsarfMesynP+bmxdqNMDnl4QJd5o
- LxdmAeoeUfMJvKpU+D7h+JhPZIbmAZWB0haQ6QvmXS7ybd4rCw3E++Pu2QCTxH3zJQor
- kjaREXF8fBzPj69RfZAHr99/IntNKgJBBFhPmZFaUz6QbLBEAw35GqoaVejbO5ItewSk
- JWhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TW1zvOzFc23f/2L0lUrFaxWIlPTjKa142u5zcZd33C8=;
- b=PQAuY7kGovFMi65TXQOx95zccXs/PcHPsRPbFbZ9H95wVh1YI0ojeSbofXJxGeKJkG
- lbZ7HM+AiAs0FtNJmn+6LySCk0dCWdLrEyJAQGXDfQSVm5/xGCQh7mr8d84OkdU59hjD
- cjXFlF8oj55Lvy4bzHm4OXu7Vrwj9ANXdaS6M2ST7wzxaHLsptB6eXMMxh7oQKeriPzx
- pVEJPx7/VibQ/njbsQck+tXIzfIYktc0XfhCrfUpxedTDN7xuV9VjaN17XHm18c0YIWK
- IJm/DSj0sCDyjHtMxNUOXGDv686xWykVsFHDEgGMJeyhvQomrypV5VVvTAp6p5w0mTj3
- 96/w==
-X-Gm-Message-State: AO0yUKVg7oCYGObklvajcNQTwyhCpNkLq1iv/yK2bEkPNhLPJc7g3WRJ
- pNRbU5IvMGOAS8JqmsOua9rovZNXGiDQhp7JBQM=
-X-Google-Smtp-Source: AK7set+Tzy1D/eUXZEr6kPnJV3fPXjnFY9U24IY/918GK6HTIVmgB87py98xMBx3szhFEaOPGP0XMNgHORAWXCDY2eQ=
-X-Received: by 2002:ab0:3449:0:b0:686:3ae:58bc with SMTP id
- a9-20020ab03449000000b0068603ae58bcmr2522061uaq.39.1675996886542; Thu, 09 Feb
- 2023 18:41:26 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pQRV2-0001oo-49
+ for qemu-riscv@nongnu.org; Fri, 10 Feb 2023 06:23:29 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pQRUy-00026P-KM
+ for qemu-riscv@nongnu.org; Fri, 10 Feb 2023 06:23:26 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1676028204;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=v1T7ptjdCtR+okGONlmX/SNevHClnPw1rdkZl7CH4iY=;
+ b=GZuu6yhShp9NQsrC1d7w9985biNSnFhdZPkm2do7vsr49NhQLb6a0fPTZEmKMrLtjlI7mL
+ VKl8bYdJtoD+Qrmni9MFhaHjbtgxMffybCUXepHUGBpNe+NmRMrPfyJ3tgTV5lkl7hwz+w
+ exs+DVO2aRDFIb0IC2jPFgPj+xLttP0=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-573-ClTHhPrOPQqREDMu799B-A-1; Fri, 10 Feb 2023 06:23:20 -0500
+X-MC-Unique: ClTHhPrOPQqREDMu799B-A-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 0784C87B2A4;
+ Fri, 10 Feb 2023 11:23:20 +0000 (UTC)
+Received: from thuth.com (unknown [10.39.192.226])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id C5E8D1121315;
+ Fri, 10 Feb 2023 11:23:18 +0000 (UTC)
+From: Thomas Huth <thuth@redhat.com>
+To: qemu-devel@nongnu.org,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Eric Auger <eric.auger@redhat.com>
+Cc: qemu-arm@nongnu.org,
+	qemu-trivial@nongnu.org,
+	qemu-riscv@nongnu.org
+Subject: [PATCH] include/hw: Do not include "hw/registerfields.h" in headers
+ that don't need it
+Date: Fri, 10 Feb 2023 12:23:15 +0100
+Message-Id: <20230210112315.1116966-1-thuth@redhat.com>
 MIME-Version: 1.0
-References: <20230209055206.229392-1-hchauhan@ventanamicro.com>
-In-Reply-To: <20230209055206.229392-1-hchauhan@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 10 Feb 2023 12:41:00 +1000
-Message-ID: <CAKmqyKMOBj4Q5Wb_ERK3i7kigSy9kCOsKiXFOhOtJ_x0VMAp8w@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Smepmp: Skip applying default rules when
- address matches
-To: Himanshu Chauhan <hchauhan@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.3
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,55 +67,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Feb 2023 02:41:31 -0000
+X-List-Received-Date: Fri, 10 Feb 2023 11:23:29 -0000
 
-On Thu, Feb 9, 2023 at 3:53 PM Himanshu Chauhan
-<hchauhan@ventanamicro.com> wrote:
->
-> When MSECCFG.MML is set, after checking the address range in PMP if the
-> asked permissions are not same as programmed in PMP, the default
-> permissions are applied. This should only be the case when there
-> is no matching address is found.
->
-> This patch skips applying default rules when matching address range
-> is found. It returns the index of the match PMP entry.
->
-> fixes: 824cac681c3 (target/riscv: Fix PMP propagation for tlb)
->
-> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+Include "hw/registerfields.h" in the .c files instead (if needed).
 
-Thanks!
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+---
+ include/hw/arm/smmuv3.h        | 1 -
+ include/hw/char/ibex_uart.h    | 1 -
+ include/hw/ssi/ibex_spi_host.h | 1 -
+ hw/char/ibex_uart.c            | 1 +
+ hw/ssi/ibex_spi_host.c         | 1 +
+ 5 files changed, 2 insertions(+), 3 deletions(-)
 
-Applied to riscv-to-apply.next
+diff --git a/include/hw/arm/smmuv3.h b/include/hw/arm/smmuv3.h
+index f1921fdf9e..b6dd087526 100644
+--- a/include/hw/arm/smmuv3.h
++++ b/include/hw/arm/smmuv3.h
+@@ -20,7 +20,6 @@
+ #define HW_ARM_SMMUV3_H
+ 
+ #include "hw/arm/smmu-common.h"
+-#include "hw/registerfields.h"
+ #include "qom/object.h"
+ 
+ #define TYPE_SMMUV3_IOMMU_MEMORY_REGION "smmuv3-iommu-memory-region"
+diff --git a/include/hw/char/ibex_uart.h b/include/hw/char/ibex_uart.h
+index a39985516a..9deadf223b 100644
+--- a/include/hw/char/ibex_uart.h
++++ b/include/hw/char/ibex_uart.h
+@@ -26,7 +26,6 @@
+ #define HW_IBEX_UART_H
+ 
+ #include "hw/sysbus.h"
+-#include "hw/registerfields.h"
+ #include "chardev/char-fe.h"
+ #include "qemu/timer.h"
+ #include "qom/object.h"
+diff --git a/include/hw/ssi/ibex_spi_host.h b/include/hw/ssi/ibex_spi_host.h
+index 1f6d077766..8089cc1c31 100644
+--- a/include/hw/ssi/ibex_spi_host.h
++++ b/include/hw/ssi/ibex_spi_host.h
+@@ -32,7 +32,6 @@
+ #include "hw/ssi/ssi.h"
+ #include "qemu/fifo8.h"
+ #include "qom/object.h"
+-#include "hw/registerfields.h"
+ #include "qemu/timer.h"
+ 
+ #define TYPE_IBEX_SPI_HOST "ibex-spi"
+diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
+index e58181fcf4..f70adb5308 100644
+--- a/hw/char/ibex_uart.c
++++ b/hw/char/ibex_uart.c
+@@ -31,6 +31,7 @@
+ #include "hw/qdev-clock.h"
+ #include "hw/qdev-properties.h"
+ #include "hw/qdev-properties-system.h"
++#include "hw/registerfields.h"
+ #include "migration/vmstate.h"
+ #include "qemu/log.h"
+ #include "qemu/module.h"
+diff --git a/hw/ssi/ibex_spi_host.c b/hw/ssi/ibex_spi_host.c
+index 57df462e3c..1ee7d88c22 100644
+--- a/hw/ssi/ibex_spi_host.c
++++ b/hw/ssi/ibex_spi_host.c
+@@ -26,6 +26,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
+ #include "qemu/module.h"
++#include "hw/registerfields.h"
+ #include "hw/ssi/ibex_spi_host.h"
+ #include "hw/irq.h"
+ #include "hw/qdev-properties.h"
+-- 
+2.31.1
 
-Alistair
-
-> ---
->  target/riscv/pmp.c | 9 ++++++---
->  1 file changed, 6 insertions(+), 3 deletions(-)
->
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index d85ad07caa..0dfdb35828 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -446,9 +446,12 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->                  }
->              }
->
-> -            if ((privs & *allowed_privs) == privs) {
-> -                ret = i;
-> -            }
-> +            /*
-> +             * If matching address range was found, the protection bits
-> +             * defined with PMP must be used. We shouldn't fallback on
-> +             * finding default privileges.
-> +             */
-> +            ret = i;
->              break;
->          }
->      }
-> --
-> 2.39.1
->
->
 
