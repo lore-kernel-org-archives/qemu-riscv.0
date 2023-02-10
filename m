@@ -1,58 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pQI9x-0001cO-87
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Feb 2023 20:25:05 -0500
+	id 1pQJLx-0000Uk-56
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Feb 2023 21:41:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pQI9v-0001br-Fc; Thu, 09 Feb 2023 20:25:03 -0500
-Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
+ id 1pQJLv-0000UK-KB; Thu, 09 Feb 2023 21:41:31 -0500
+Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pQI9t-0003qS-V0; Thu, 09 Feb 2023 20:25:03 -0500
-Received: by mail-vs1-xe35.google.com with SMTP id g3so4113646vsr.10;
- Thu, 09 Feb 2023 17:24:58 -0800 (PST)
+ id 1pQJLt-00046C-29; Thu, 09 Feb 2023 21:41:31 -0500
+Received: by mail-ua1-x934.google.com with SMTP id ch22so726117uab.9;
+ Thu, 09 Feb 2023 18:41:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+asVm7u65dXPQ36PhG8wEvnGhi/T3yC98Hy4eT60BXg=;
- b=XrRlhJYg54QhlzYoboi2C76u9uP1qUMe8CALWWviLctk0McLf7BTzKOqIFzkV082y+
- Z8gJTcwj/5SrTzMrV6AE+zpSueJJ79/A3GsWTybrG7tkYknhFbBtw7+tFuQ/F0SXymD1
- FoWmnVWXDPPm+XUymJ2+Fxo9QT44udv5wjQ5KYnJ4wFL7XThYZoYbzMRMIciIR6qmApo
- 92W0nvvp6eT9y/sd+fcBKrpYOH76GalSNsBx2/0wanErH2PbV81/P2V/L+XWBb6b+eau
- iO3Ii5XPkqddgZPklGHxUgCwOMnqDD79Vqnt242QMsItcYrd8vSBEmz7WcSO389UgVTQ
- ub8A==
+ bh=TW1zvOzFc23f/2L0lUrFaxWIlPTjKa142u5zcZd33C8=;
+ b=RdElEOAKCziYCfjk6KFpKsUM04O+3+konLa3kl9JEovYjPqfmH4iUL9WqI7UD7Maqt
+ 5LbH//9cNAYKHnd8PCXS/eCemahN+t6ThPSejOtZgsfpHnBIyaBREYazm+96ql/T4Vob
+ yr8O/jjbm/5refcwe6w0YCJYxxmRuXZb4DZAg6tWlsarfMesynP+bmxdqNMDnl4QJd5o
+ LxdmAeoeUfMJvKpU+D7h+JhPZIbmAZWB0haQ6QvmXS7ybd4rCw3E++Pu2QCTxH3zJQor
+ kjaREXF8fBzPj69RfZAHr99/IntNKgJBBFhPmZFaUz6QbLBEAw35GqoaVejbO5ItewSk
+ JWhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+asVm7u65dXPQ36PhG8wEvnGhi/T3yC98Hy4eT60BXg=;
- b=ml/kx0aCAxc8sSUNwzUTrEBuoYEqlQiPLea14+JYGfHHWkjCn50hEGtjf4AJfaJ0n0
- Xf2cByGN7xStndSh9Kma3wjSP4dx5YeL6VGEFADzpr8YL51wKg31WJ86JR3PCvbNzYp6
- Fh85EG279qWE9kvFmqbBypblUjZGBq4dXzDyJK2uXSGwCzd0Dlsn1j8b+jQgUoKBb0j6
- MUF/M4vnaIrDOAmIvKYO0/m/cuzC8LDzw6+ma0YJiBXz8yG+mc2tIDHJMOaUSRpFwzal
- pwDqMEh00DalOeesiRwStewoncd2xawzicpbeJ/Gzn9SmFtAPnxbuKaxb8xFqCYwUrKf
- JV0g==
-X-Gm-Message-State: AO0yUKUf22sm8h1k1lK8efICuCnCyRFewz2g93KbqiBsFdRZUqOh64lh
- KRWQiDaC6Ay6A8B2gzNCISqxgzyAeTtJGpv0NGE=
-X-Google-Smtp-Source: AK7set9/SLH62mB3LZ6uwssO2HgvVVhQLfDVbKEY0lSFrNFVLxtV0AnutiKTxXeNX8K5flMAX6wBftE0Gu+hiOttroA=
-X-Received: by 2002:a67:a407:0:b0:3f0:89e1:7c80 with SMTP id
- n7-20020a67a407000000b003f089e17c80mr2494304vse.72.1675992298230; Thu, 09 Feb
- 2023 17:24:58 -0800 (PST)
+ bh=TW1zvOzFc23f/2L0lUrFaxWIlPTjKa142u5zcZd33C8=;
+ b=PQAuY7kGovFMi65TXQOx95zccXs/PcHPsRPbFbZ9H95wVh1YI0ojeSbofXJxGeKJkG
+ lbZ7HM+AiAs0FtNJmn+6LySCk0dCWdLrEyJAQGXDfQSVm5/xGCQh7mr8d84OkdU59hjD
+ cjXFlF8oj55Lvy4bzHm4OXu7Vrwj9ANXdaS6M2ST7wzxaHLsptB6eXMMxh7oQKeriPzx
+ pVEJPx7/VibQ/njbsQck+tXIzfIYktc0XfhCrfUpxedTDN7xuV9VjaN17XHm18c0YIWK
+ IJm/DSj0sCDyjHtMxNUOXGDv686xWykVsFHDEgGMJeyhvQomrypV5VVvTAp6p5w0mTj3
+ 96/w==
+X-Gm-Message-State: AO0yUKVg7oCYGObklvajcNQTwyhCpNkLq1iv/yK2bEkPNhLPJc7g3WRJ
+ pNRbU5IvMGOAS8JqmsOua9rovZNXGiDQhp7JBQM=
+X-Google-Smtp-Source: AK7set+Tzy1D/eUXZEr6kPnJV3fPXjnFY9U24IY/918GK6HTIVmgB87py98xMBx3szhFEaOPGP0XMNgHORAWXCDY2eQ=
+X-Received: by 2002:ab0:3449:0:b0:686:3ae:58bc with SMTP id
+ a9-20020ab03449000000b0068603ae58bcmr2522061uaq.39.1675996886542; Thu, 09 Feb
+ 2023 18:41:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20230209003308.738237-1-alistair.francis@opensource.wdc.com>
-In-Reply-To: <20230209003308.738237-1-alistair.francis@opensource.wdc.com>
+References: <20230209055206.229392-1-hchauhan@ventanamicro.com>
+In-Reply-To: <20230209055206.229392-1-hchauhan@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 10 Feb 2023 11:24:19 +1000
-Message-ID: <CAKmqyKMd4e_UQQNobcWKB0chi8ZETq8Dc=dZSYdJn=3n65wwFg@mail.gmail.com>
-Subject: Re: [PATCH] MAINTAINERS: Add some RISC-V reviewers
-To: Alistair Francis <alistair.francis@opensource.wdc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, bmeng.cn@gmail.com, 
- dbarboza@ventanamicro.com, alistair.francis@wdc.com, palmer@dabbelt.com, 
- zhiwei_liu@linux.alibaba.com, liweiwei@iscas.ac.cn
+Date: Fri, 10 Feb 2023 12:41:00 +1000
+Message-ID: <CAKmqyKMOBj4Q5Wb_ERK3i7kigSy9kCOsKiXFOhOtJ_x0VMAp8w@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Smepmp: Skip applying default rules when
+ address matches
+To: Himanshu Chauhan <hchauhan@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -73,17 +72,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Feb 2023 01:25:03 -0000
+X-List-Received-Date: Fri, 10 Feb 2023 02:41:31 -0000
 
-On Thu, Feb 9, 2023 at 10:33 AM Alistair Francis
-<alistair.francis@opensource.wdc.com> wrote:
+On Thu, Feb 9, 2023 at 3:53 PM Himanshu Chauhan
+<hchauhan@ventanamicro.com> wrote:
 >
-> From: Alistair Francis <alistair.francis@wdc.com>
+> When MSECCFG.MML is set, after checking the address range in PMP if the
+> asked permissions are not same as programmed in PMP, the default
+> permissions are applied. This should only be the case when there
+> is no matching address is found.
 >
-> This patch adds some active RISC-V members as reviewers to the
-> MAINTAINERS file.
+> This patch skips applying default rules when matching address range
+> is found. It returns the index of the match PMP entry.
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> fixes: 824cac681c3 (target/riscv: Fix PMP propagation for tlb)
+>
+> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
 
 Thanks!
 
@@ -92,24 +96,31 @@ Applied to riscv-to-apply.next
 Alistair
 
 > ---
->  MAINTAINERS | 3 +++
->  1 file changed, 3 insertions(+)
+>  target/riscv/pmp.c | 9 ++++++---
+>  1 file changed, 6 insertions(+), 3 deletions(-)
 >
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 96e25f62ac..847bc7f131 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -287,6 +287,9 @@ RISC-V TCG CPUs
->  M: Palmer Dabbelt <palmer@dabbelt.com>
->  M: Alistair Francis <alistair.francis@wdc.com>
->  M: Bin Meng <bin.meng@windriver.com>
-> +R: Weiwei Li <liweiwei@iscas.ac.cn>
-> +R: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> +R: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
->  L: qemu-riscv@nongnu.org
->  S: Supported
->  F: target/riscv/
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index d85ad07caa..0dfdb35828 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -446,9 +446,12 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>                  }
+>              }
+>
+> -            if ((privs & *allowed_privs) == privs) {
+> -                ret = i;
+> -            }
+> +            /*
+> +             * If matching address range was found, the protection bits
+> +             * defined with PMP must be used. We shouldn't fallback on
+> +             * finding default privileges.
+> +             */
+> +            ret = i;
+>              break;
+>          }
+>      }
 > --
 > 2.39.1
+>
 >
 
