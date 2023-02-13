@@ -1,79 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pQoOr-00016y-95
-	for mharc-qemu-riscv@gnu.org; Sat, 11 Feb 2023 06:50:37 -0500
+	id 1pRPJo-0005kd-5r
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Feb 2023 22:15:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pQoOq-000167-DR
- for qemu-riscv@nongnu.org; Sat, 11 Feb 2023 06:50:36 -0500
-Received: from mail-oi1-x231.google.com ([2607:f8b0:4864:20::231])
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1pRPJm-0005im-La
+ for qemu-riscv@nongnu.org; Sun, 12 Feb 2023 22:15:50 -0500
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pQoOd-0002RE-Hw
- for qemu-riscv@nongnu.org; Sat, 11 Feb 2023 06:50:25 -0500
-Received: by mail-oi1-x231.google.com with SMTP id bj22so6599061oib.11
- for <qemu-riscv@nongnu.org>; Sat, 11 Feb 2023 03:50:23 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1pRPJk-0002Fl-Au
+ for qemu-riscv@nongnu.org; Sun, 12 Feb 2023 22:15:49 -0500
+Received: by mail-pj1-x102d.google.com with SMTP id d2so10598437pjd.5
+ for <qemu-riscv@nongnu.org>; Sun, 12 Feb 2023 19:15:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=qtGdEfk8WPql0LZtZNsxPzMi28Bb5PgTELpcE7OsZf4=;
- b=N17wnB9A0wKDEeeyeCKK4ELX/PXjprIDwv2ZAbDXlfTb+4ORYFIsIqmRrAmlDxS5HK
- 1SA2kYWc/lzu/X0PnqAurK/MvChfYhgaHkb2gCez11BNx4XaT47DeEwzfOv8SX0Lnao/
- Fg7MdP6Yxx2VZB9J3/S+/MqdC+X7kYS4bSm+a22tgN5y5KL6fyB+oSw8tKMJv1zpCSdx
- Y+kib8DAZpRrXQZQBPYuxWG7NXb/CjF1LuCF5fPiIolASJet8RLpRHLdaeqDJCxun65P
- 6gJMFMbH5yv38WlI8Qu2O3lrS2LAUn5I1oKhoQjjDhIUleuVsE2uPcnItydk5+wTZHS/
- EDjQ==
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=S4a6IGBvWMqLgMTjeQ/cbKiXdve1YRpp52+qy5xMlDY=;
+ b=kNDNPJL5x3qNeLqXnIjkx/4cjWa2XdrBVsHHF/5UaMjyfM1Q5GpXkjd9vkY9tBHUMP
+ +CYSpN8UGx+v91Qw5imVZGJ3V8nQqwH0Ed0fPkU3HM9WztcCGAn+qiutFUG/uJx/GLky
+ pPISBe9YPlfX3EKCGEL8mhayJuu8CS4imZTNZKH32mns6ZyAlSpJy0+g3L/fefR19tgk
+ z2N6u+LdhlicoMiz9CE/XYR8epwu8oZotdT7ntXpvEYHaRx7W7i4+EFu4mXDQJaltbpv
+ 7yFkA9KEBEjaa/mZki/9p3RTqbCrjQETRBBuEWGccx1/nkrm6opJms5oWER8q4liQyPM
+ 4V4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qtGdEfk8WPql0LZtZNsxPzMi28Bb5PgTELpcE7OsZf4=;
- b=5j/55re1+Typ3lddN36iS72XGze72urK6kBTdDBoPWkQTi8rnw2410YAaBq1qRZ+ZJ
- pt+4DldYgJ2FPa9WFnMpKQE91aG1jSFNIP761xokcvIO5+3MLgGvrXKxsY4hroPLN9cI
- 4RcAZ61CyREJ62elUqWnlwe4sae3N4mLTNKLlNzHDAAVZuv+jtPu6ya4cUVd9e98Mfmy
- 2vS1vxyDRfqdAjNXUsFUpfK/djdUOrGLeRvIX1zy1X74etccXg2bqRUuQ+oU/Ra4KEUM
- zb94kJVPPE3w1AE5jNZ0suJ8fLFFmC8KuZIxNHqcijFwRWvqwLpo6aX0isHfdjqLD0xX
- BAiA==
-X-Gm-Message-State: AO0yUKVaAcoU+EeC/0mnAotbpDpGJQNcHVhb9XwwZCxtnDqqjLZi4gz7
- tQHCYIzqtfEElhpxxwXD3u941Q==
-X-Google-Smtp-Source: AK7set+16H3Bb1KpBe29Zy0soxEtCXcLXvNdSrMf2i0bPus7PVf8FJDiue2Mu64lwuUMzM5dL8mKdQ==
-X-Received: by 2002:a54:4013:0:b0:36e:fe3f:a02 with SMTP id
- x19-20020a544013000000b0036efe3f0a02mr9609281oie.19.1676116222217; 
- Sat, 11 Feb 2023 03:50:22 -0800 (PST)
-Received: from [192.168.68.107] ([191.19.125.138])
+ bh=S4a6IGBvWMqLgMTjeQ/cbKiXdve1YRpp52+qy5xMlDY=;
+ b=WiiWfFuVMIeiRn2Mc7WZwcoVSfjVnSm8PUI+N15WfDhit+8wmWq8S+maJMcutMeK6v
+ /O6t4sIhTM3NIJifQo5QGoTj4hxY2/xVBz+XC8XhE2kWLwqLsnVPfx8DmQUVPxD98GRx
+ aBqP6H+A1MwGhDJAwBtEMc7vu7FKfMGRlDQyr1q0hYoS/NL3xB/kHMHg0jvuEGwh8Ezh
+ ptChXnIBog/Sl7RUPa/PslFn3xK/qMnAFKJDP1KRQMN5DuDPNL0N0I7kRqk7l5gKgGv/
+ 1HOYNjjoUpbxQzTPlL/AzV8y2qZPwJ3v6VchW4DXgSwBWU2pOUCmBPM1+9c59TSdS8tN
+ 6EdQ==
+X-Gm-Message-State: AO0yUKWPfTW0ROfulRZZPBLCE6lbaQ1uLFjK8WfgxU2HIod/QUfZgsLl
+ 9uH2V1PSKeNYeTlWI07rwxCVtA==
+X-Google-Smtp-Source: AK7set+mR6I9OXkaWrvUA+8sJtk5efnKc1JG8uapa/QtTAZSa/dHeGCw67oO+qz9Olhu+jwnAdywzQ==
+X-Received: by 2002:a05:6a20:7d83:b0:c3:19ef:1a83 with SMTP id
+ v3-20020a056a207d8300b000c319ef1a83mr22245751pzj.32.1676258145220; 
+ Sun, 12 Feb 2023 19:15:45 -0800 (PST)
+Received: from debug.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- dj6-20020a0568303a8600b0068d542f630fsm3015703otb.76.2023.02.11.03.50.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 11 Feb 2023 03:50:21 -0800 (PST)
-Message-ID: <0d853c1b-7554-1813-693f-e31a62ef9298@ventanamicro.com>
-Date: Sat, 11 Feb 2023 08:50:18 -0300
+ i4-20020aa79084000000b005a8851e0d04sm2875804pfa.158.2023.02.12.19.15.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 12 Feb 2023 19:15:44 -0800 (PST)
+Date: Sun, 12 Feb 2023 19:15:43 -0800
+From: Deepak Gupta <debug@rivosinc.com>
+To: weiwei <liweiwei@iscas.ac.cn>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Kip Walker <kip@rivosinc.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: Re: [PATCH v1 RFC Zisslpcfi 1/9] target/riscv: adding zimops and
+ zisslpcfi extension to RISCV cpu config
+Message-ID: <20230213031543.GA3943238@debug.ba.rivosinc.com>
+References: <20230209062404.3582018-1-debug@rivosinc.com>
+ <20230209062404.3582018-2-debug@rivosinc.com>
+ <f4cdeb7f-99db-cd87-54cd-baed603832db@iscas.ac.cn>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH 02/11] target/riscv: allow users to actually write the
- MISA CSR
-Content-Language: en-US
-To: weiwei <liweiwei@iscas.ac.cn>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com
-References: <20230210133635.589647-1-dbarboza@ventanamicro.com>
- <20230210133635.589647-3-dbarboza@ventanamicro.com>
- <2a0d5e1e-f2ff-6502-0f88-f6b3005bcaf3@iscas.ac.cn>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <2a0d5e1e-f2ff-6502-0f88-f6b3005bcaf3@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::231;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x231.google.com
-X-Spam_score_int: -31
-X-Spam_score: -3.2
-X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.149,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <f4cdeb7f-99db-cd87-54cd-baed603832db@iscas.ac.cn>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=debug@rivosinc.com; helo=mail-pj1-x102d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,105 +86,107 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Feb 2023 11:50:36 -0000
+X-List-Received-Date: Mon, 13 Feb 2023 03:15:50 -0000
 
-
-
-On 2/10/23 23:43, weiwei wrote:
-> 
-> On 2023/2/10 21:36, Daniel Henrique Barboza wrote:
->> At this moment, and apparently since ever, we have no way of enabling
->> RISCV_FEATURE_MISA. This means that all the code from write_misa(), all
->> the nuts and bolts that handles how to properly write this CSR, has
->> always been a no-op as well because write_misa() will always exit
->> earlier.
+On Sat, Feb 11, 2023 at 11:19:11AM +0800, weiwei wrote:
+>
+>On 2023/2/9 14:23, Deepak Gupta wrote:
+>>Introducing riscv `zisslpcfi` extension to riscv target. `zisslpcfi`
+>>extension provides hardware assistance to riscv hart to enable control
+>>flow integrity (CFI) for software.
 >>
->> This seems to be benign in the majority of cases. Booting an Ubuntu
->> 'virt' guest and logging all the calls to 'write_misa' shows that no
->> writes to MISA CSR was attempted. Writing MISA, i.e. enabling/disabling
->> RISC-V extensions after the machine is powered on, seems to be a niche
->> use.
+>>`zisslpcfi` extension expects hart to implement `zimops`. `zimops` stands
+>>for "unprivileged integer maybe operations". `zimops` carve out certain
+>>reserved opcodes encodings from integer spec to "may be operations"
+>>encodings. `zimops` opcode encodings simply move 0 to rd.
+>>`zisslpcfi` claims some of the `zimops` encodings and use them for shadow
+>>stack management or indirect branch tracking. Any future extension can
+>>also claim `zimops` encodings.
 >>
->> There is a good chance that the code in write_misa() hasn't been
->> properly tested. Allowing users to write MISA can open the floodgates of
->> new breeds of bugs. We could instead remove most (if not all) of
->> write_misa() since it's never used. Well, as a hardware emulator,
->> dealing with crashes because a register write went wrong is what we're
->> here for.
+>>This patch also adds a dependency check for `zimops` to be enabled if
+>>`zisslpcfi` is enabled on the hart.
 >>
->> Create a 'misa-w' CPU property to allow users to choose whether writes
->> to MISA should be allowed. The default is set to 'false' for all RISC-V
->> machines to keep compatibility with what we´ve been doing so far.
+>>Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+>>Signed-off-by: Kip Walker  <kip@rivosinc.com>
+>>---
+>>  target/riscv/cpu.c | 13 +++++++++++++
+>>  target/riscv/cpu.h |  2 ++
+>>  2 files changed, 15 insertions(+)
 >>
->> Read cpu->cfg.misa_w directly in write_misa(), instead of executing
->> riscv_set_feature(RISCV_FEATURE_MISA) in riscv_cpu_realize(), that would
->> simply reflect the cpu->cfg.misa_w bool value in 'env->features' and
->> require a riscv_feature() call to read it back.
->>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>   target/riscv/cpu.c | 1 +
->>   target/riscv/cpu.h | 1 +
->>   target/riscv/csr.c | 4 +++-
->>   3 files changed, 5 insertions(+), 1 deletion(-)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 93b52b826c..69fb9e123f 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -1197,6 +1197,7 @@ static void register_cpu_props(DeviceState *dev)
->>   static Property riscv_cpu_properties[] = {
->>       DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
->> +    DEFINE_PROP_BOOL("misa-w", RISCVCPU, cfg.misa_w, false),
->>       DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
->>       DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index 7128438d8e..103963b386 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -498,6 +498,7 @@ struct RISCVCPUConfig {
->>       bool pmp;
->>       bool epmp;
->>       bool debug;
->> +    bool misa_w;
->>       bool short_isa_string;
->>   };
->> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index e149b453da..4f9cc501b2 100644
->> --- a/target/riscv/csr.c
->> +++ b/target/riscv/csr.c
->> @@ -1329,7 +1329,9 @@ static RISCVException read_misa(CPURISCVState *env, int csrno,
->>   static RISCVException write_misa(CPURISCVState *env, int csrno,
->>                                    target_ulong val)
->>   {
->> -    if (!riscv_feature(env, RISCV_FEATURE_MISA)) {
->> +    RISCVCPU *cpu = env_archcpu(env);
->> +
->> +    if (!cpu->cfg.misa_w) {
-> 
-> It's Ok to get it directly from cfg. However, personally, I prefer to keep the non-isa features in a separate list.
+>>diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>>index cc75ca7667..6b4e90eb91 100644
+>>--- a/target/riscv/cpu.c
+>>+++ b/target/riscv/cpu.c
+>>@@ -110,6 +110,8 @@ static const struct isa_ext_data isa_edata_arr[] = {
+>>      ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0, ext_svnapot),
+>>      ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt),
+>>      ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_XVentanaCondOps),
+>>+    ISA_EXT_DATA_ENTRY(zimops, true, PRIV_VERSION_1_12_0, ext_zimops),
+>>+    ISA_EXT_DATA_ENTRY(zisslpcfi, true, PRIV_VERSION_1_12_0, ext_cfi),
+>
+>By convention, it� should be ext_zisslpcfi� .
 
-I don't mind a separated non-isa list. cpu->cfg has everything contained in it
-though, ISA and non-ISA (e.g. vendor extensions that weren't ratified yet), and
-the current RISCV_FEATURES_* list is just a duplicate of it that we need to
-update it during riscv_cpu_realize().
+Noted. Will fix it.
 
-In my opinion we can spare the extra effort of keeping a separated, up-to-date
-non-ISA extension/features list, by just reading everything from cfg.
+>
+>>  };
+>>  static bool isa_ext_is_enabled(RISCVCPU *cpu,
+>>@@ -792,6 +794,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>>              return;
+>>          }
+>>+        if (cpu->cfg.ext_cfi && !cpu->cfg.ext_zimops) {
+>>+            error_setg(errp, "Zisslpcfi extension requires Zimops extension");
+>>+            return;
+>>+        }
+>>+
+>
+>If� Zisslpcfi implicitly means Zimops is implemented as commented in 
+>following code, I think we should just enable zimops� when zisslpcfi 
+>is enabled.
+>
+Hmm... That's a good idea (at-least for qemu implementation)
+Only catch is this
+    - Since zimops does move 0 to rd. That's still an operation that's happening on 
+      destination. If none of the extensions are implemented, it might be good to have
+      just zimops enabled *just* to make sure binary is not breaking anything (by moving
+      0 to destination)
+>>          /* Set the ISA extensions, checks should have happened above */
+>>          if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
+>>              cpu->cfg.ext_zhinxmin) {
+>>@@ -1102,6 +1109,12 @@ static Property riscv_cpu_properties[] = {
+>>  #ifndef CONFIG_USER_ONLY
+>>      DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVEC),
+>>  #endif
+>>+    /*
+>>+     * Zisslpcfi CFI extension, Zisslpcfi implicitly means Zimops is
+>>+     * implemented
+>>+     */
+>>+    DEFINE_PROP_BOOL("zisslpcfi", RISCVCPU, cfg.ext_cfi, true),
+>>+    DEFINE_PROP_BOOL("zimops", RISCVCPU, cfg.ext_zimops, true),
+>
+>These properties can not expose to users before all its functions are 
+>ready. And it need add 'x-' prefix as experimental extensions 
+>currently.
 
+Noted will revise it.
 
-Thanks,
-
-
-Daniel
-
-> 
-> Regards,
-> 
-> Weiwei Li
-> 
->>           /* drop write to misa */
->>           return RISCV_EXCP_NONE;
->>       }
-> 
+>
+>Regards,
+>
+>Weiwei Li
+>
+>>      DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
+>>diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>>index f5609b62a2..9a923760b2 100644
+>>--- a/target/riscv/cpu.h
+>>+++ b/target/riscv/cpu.h
+>>@@ -471,6 +471,8 @@ struct RISCVCPUConfig {
+>>      uint32_t mvendorid;
+>>      uint64_t marchid;
+>>      uint64_t mimpid;
+>>+    bool ext_zimops;
+>>+    bool ext_cfi;
+>>      /* Vendor-specific custom extensions */
+>>      bool ext_XVentanaCondOps;
+>
 
