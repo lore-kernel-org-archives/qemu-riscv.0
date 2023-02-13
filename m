@@ -1,78 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRPPc-0007t1-UE
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Feb 2023 22:21:52 -0500
+	id 1pRQMo-0001Jd-J2
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Feb 2023 23:23:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1pRPPb-0007r5-Go
- for qemu-riscv@nongnu.org; Sun, 12 Feb 2023 22:21:51 -0500
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1pRPPX-0003O2-8t
- for qemu-riscv@nongnu.org; Sun, 12 Feb 2023 22:21:51 -0500
-Received: by mail-pj1-x102d.google.com with SMTP id
- r9-20020a17090a2e8900b00233ba727724so4678053pjd.1
- for <qemu-riscv@nongnu.org>; Sun, 12 Feb 2023 19:21:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nP+UEs1brdAYX6cbHe9qe6Nxd3L4B1pFoBOSfW2Gvcw=;
- b=g/sN1Zj/iR0xplzpKREeEYabXcutVGMSqpI6XTRMqfwK9tPwoUSNNuqDymroBDDOOS
- Nhyy86YaUiPjlJBcbfZHhmN93ExMaqalQ7fUExVd2VMlJBlbUO0irqXQcSQaZ78zmpuH
- GWwiJrX1sFcZ6fmDVTV1ylJCUbyoUHZ+xNK4/s7FeLFWbWyhuR+d1OTBgI4nRK50mrAF
- iFbK+dI3Z+x/0I/1TPDF039NJwCY9B3mWPml21y/lyqISu2NzBTiBgMJ56UfcOyvdFkF
- ccW858VWg1VIj9CPm4evDRR999Db04KJamaTvg/EPw62QyV7mAFqPCDujmKaynfDT9K2
- 6ytQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nP+UEs1brdAYX6cbHe9qe6Nxd3L4B1pFoBOSfW2Gvcw=;
- b=5yVxmE89Gmsv0s100pGMCjQdilGccB3BeDpYCRX2PBEfVNroF9PzqejIEu+sg8ayHP
- b91K7CxOmO8dV52kpp+22dYfbrEsh+fPzof5tSqYKRzYmqNhgiWpdfDnyrDeRn60vLWg
- 1TslXTc362Fw5ZhOTgWDQID6jatn4dRTMH4K/SlBZ+1yOnrm+tr4ppF6raBWAyZd99I5
- p+g+J3gQtO5XNpS2xWhGvXyBGqjt9Xsk9g5RiR/LWlOeo8yOk4P+0p3AbJdNbDtvrvUt
- YATzPTbvgVJWYKMjOpMSl43iyt/0T2EymfFHmSuy3zElOidj1eDK4ddaOvlldc7gnql4
- +oJg==
-X-Gm-Message-State: AO0yUKXc0JpLTNevtwb1y9fWekyGgehyI9kwQWxkyo2UfeADLF/vT/WK
- EsG3z0yD1cSgErSon1kdN9PFjw==
-X-Google-Smtp-Source: AK7set8XfiXCiqIKqza8mvYaafGhXp98WRjb7iukG2zElISZQ4Z84TGeTkQ90vERvG7SegBi1P28OQ==
-X-Received: by 2002:a05:6a20:4e1f:b0:bf:5459:cc70 with SMTP id
- gk31-20020a056a204e1f00b000bf5459cc70mr20420246pzb.41.1676258505649; 
- Sun, 12 Feb 2023 19:21:45 -0800 (PST)
-Received: from debug.ba.rivosinc.com ([66.220.2.162])
- by smtp.gmail.com with ESMTPSA id
- s3-20020aa78d43000000b00593906a8843sm6999333pfe.176.2023.02.12.19.21.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Feb 2023 19:21:45 -0800 (PST)
-Date: Sun, 12 Feb 2023 19:21:43 -0800
-From: Deepak Gupta <debug@rivosinc.com>
-To: weiwei <liweiwei@iscas.ac.cn>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Kip Walker <kip@rivosinc.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: Re: [PATCH v1 RFC Zisslpcfi 2/9] target/riscv: zisslpcfi CSR, bit
- positions and other definitions
-Message-ID: <20230213032143.GB3943238@debug.ba.rivosinc.com>
-References: <20230209062404.3582018-1-debug@rivosinc.com>
- <20230209062404.3582018-3-debug@rivosinc.com>
- <6b182beb-7e7d-45eb-50ec-3b822759c535@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pRQMn-0001JL-EF; Sun, 12 Feb 2023 23:23:01 -0500
+Received: from out30-130.freemail.mail.aliyun.com ([115.124.30.130])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pRQMk-0005Ly-UP; Sun, 12 Feb 2023 23:23:01 -0500
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R171e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
+ TI=SMTPD_---0VbSvqUv_1676262158; 
+Received: from 30.221.96.206(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VbSvqUv_1676262158) by smtp.aliyun-inc.com;
+ Mon, 13 Feb 2023 12:22:39 +0800
+Message-ID: <5428dd5e-2772-2332-6b39-07a82e14e71b@linux.alibaba.com>
+Date: Mon, 13 Feb 2023 12:22:38 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <6b182beb-7e7d-45eb-50ec-3b822759c535@iscas.ac.cn>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=debug@rivosinc.com; helo=mail-pj1-x102d.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.1
+Subject: Re: [PATCH] target/riscv: Smepmp: Skip applying default rules when
+ address matches
+Content-Language: en-US
+To: Himanshu Chauhan <hchauhan@ventanamicro.com>, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, liweiwei@iscas.ac.cn,
+ dbarboza@ventanamicro.com
+Cc: qemu-devel@nongnu.org
+References: <20230209055206.229392-1-hchauhan@ventanamicro.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230209055206.229392-1-hchauhan@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.130;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-130.freemail.mail.aliyun.com
+X-Spam_score_int: -101
+X-Spam_score: -10.2
+X-Spam_bar: ----------
+X-Spam_report: (-10.2 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.348, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,157 +56,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2023 03:21:52 -0000
+X-List-Received-Date: Mon, 13 Feb 2023 04:23:01 -0000
 
-On Sat, Feb 11, 2023 at 11:32:17AM +0800, weiwei wrote:
->
->On 2023/2/9 14:23, Deepak Gupta wrote:
->>`zisslpcfi` extension adds two new CSRs. CSR_SSP and CSR_LPLR.
->>- CSR_SSP: This CSR holds shadow stack pointer for current privilege mode
->>            CSR_SSP is accessible in all modes. Each mode must establish
->>            it's own CSR_SSP.
->>
->>- CSR_LPLR: This CSR holds label value set at the callsite by compiler.
->>             On call target label check instructions are emitted by
->>             compiler which check label value against value present in
->>             CSR_LPRL.
->>
->>Enabling of `zisslpcfi` is controlled via menvcfg (for S/HS/VS/U/VU) and
->>henvcfg (for VS/VU) at bit position 60.
->>
->>Each mode has enable/disable bits for forward cfi. Backward cfi doesn't
->>have separate enable/disable bits for S and M mode. User forward cfi and
->>user backward cfi enable/disable bits are in mstatus/sstatus CSR.
->>Supervisor forward cfi enable/disable bit are in menvcfg and henvcfg CSR.
->>Machine mode forward cfi enable/disable bit is in mseccfg CSR.
->>
->>If forward cfi enabled, all indirect branches must land on a landing pad
->>instruction (`lpcll`, introduced in later commits). CPU/hart tracks this
->>internally using a landing pad tracker called `elp` short for `expecting
->>landing pad`. An interrupt can occur between an indirect branch and
->>target. If such an event occurs `elp` is saved away in mstatus/sstatus
->>CSR
->>
->>Signed-off-by: Deepak Gupta <debug@rivosinc.com>
->>Signed-off-by: Kip Walker  <kip@rivosinc.com>
->>---
->>  target/riscv/cpu.h      |  5 +++++
->>  target/riscv/cpu_bits.h | 25 +++++++++++++++++++++++++
->>  target/riscv/pmp.h      |  3 ++-
->>  3 files changed, 32 insertions(+), 1 deletion(-)
->>
->>diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->>index 9a923760b2..18db61a06a 100644
->>--- a/target/riscv/cpu.h
->>+++ b/target/riscv/cpu.h
->>@@ -181,6 +181,11 @@ struct CPUArchState {
->>      uint32_t features;
->>+    /* CFI Extension user mode registers and state */
->>+    uint32_t     lplr;
->>+    target_ulong ssp;
->>+    cfi_elp      elp;
->>+
->
->cfi_elp is not defined in current or previous patch.
->
-thanks. sorry my mistake.
-good catch. this needs to go in patch #5.
 
->>  #ifdef CONFIG_USER_ONLY
->>      uint32_t elf_flags;
->>  #endif
->>diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
->>index 8b0d7e20ea..1663ba5775 100644
->>--- a/target/riscv/cpu_bits.h
->>+++ b/target/riscv/cpu_bits.h
->>@@ -39,6 +39,10 @@
->>  /* Control and Status Registers */
->>+/* CFI CSRs */
->>+#define CSR_LPLR            0x006
->>+#define CSR_SSP             0x020
->>+
->>  /* User Trap Setup */
->>  #define CSR_USTATUS         0x000
->>  #define CSR_UIE             0x004
->>@@ -542,6 +546,10 @@
->>  #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
->>  #define MSTATUS_TW          0x00200000 /* since: priv-1.10 */
->>  #define MSTATUS_TSR         0x00400000 /* since: priv-1.10 */
->>+#define MSTATUS_UFCFIEN     0x00800000 /* Zisslpcfi-0.1 */
->>+#define MSTATUS_UBCFIEN     0x01000000 /* Zisslpcfi-0.1 */
->>+#define MSTATUS_SPELP       0x02000000 /* Zisslpcfi-0.1 */
->>+#define MSTATUS_MPELP       0x04000000 /* Zisslpcfi-0.1 */
->>  #define MSTATUS_GVA         0x4000000000ULL
->>  #define MSTATUS_MPV         0x8000000000ULL
->>@@ -572,12 +580,21 @@ typedef enum {
->>  #define SSTATUS_XS          0x00018000
->>  #define SSTATUS_SUM         0x00040000 /* since: priv-1.10 */
->>  #define SSTATUS_MXR         0x00080000
->>+#define SSTATUS_UFCFIEN     MSTATUS_UFCFIEN /* Zisslpcfi-0.1 */
->>+#define SSTATUS_UBCFIEN     MSTATUS_UBCFIEN /* Zisslpcfi-0.1 */
->>+#define SSTATUS_SPELP       MSTATUS_SPELP   /* Zisslpcfi-0.1 */
->>  #define SSTATUS64_UXL       0x0000000300000000ULL
->>  #define SSTATUS32_SD        0x80000000
->>  #define SSTATUS64_SD        0x8000000000000000ULL
->>+#define CFISTATUS_M_MASK    (MSTATUS_UFCFIEN | MSTATUS_UBCFIEN | \
->>+                             MSTATUS_MPELP | MSTATUS_SPELP)
->>+
->>+#define CFISTATUS_S_MASK    (SSTATUS_UFCFIEN | SSTATUS_UBCFIEN | \
->>+                             SSTATUS_SPELP)
->>+
->>  /* hstatus CSR bits */
->>  #define HSTATUS_VSBE         0x00000020
->>  #define HSTATUS_GVA          0x00000040
->>@@ -747,10 +764,14 @@ typedef enum RISCVException {
->>  #define MENVCFG_CBIE                       (3UL << 4)
->>  #define MENVCFG_CBCFE                      BIT(6)
->>  #define MENVCFG_CBZE                       BIT(7)
->>+#define MENVCFG_SFCFIEN                    BIT(59)
->>+#define MENVCFG_CFI                        BIT(60)
->We should use 1ULL << 59/60 here.
-Noted. Will fix.
+On 2023/2/9 13:52, Himanshu Chauhan wrote:
+> When MSECCFG.MML is set, after checking the address range in PMP if the
+> asked permissions are not same as programmed in PMP, the default
+> permissions are applied. This should only be the case when there
+> is no matching address is found.
+>
+> This patch skips applying default rules when matching address range
+> is found. It returns the index of the match PMP entry.
+>
+> fixes: 824cac681c3 (target/riscv: Fix PMP propagation for tlb)
+>
+> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+> ---
+>   target/riscv/pmp.c | 9 ++++++---
+>   1 file changed, 6 insertions(+), 3 deletions(-)
+>
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index d85ad07caa..0dfdb35828 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -446,9 +446,12 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>                   }
+>               }
+>   
+> -            if ((privs & *allowed_privs) == privs) {
+> -                ret = i;
+> -            }
+> +            /*
+> +             * If matching address range was found, the protection bits
+> +             * defined with PMP must be used. We shouldn't fallback on
+> +             * finding default privileges.
+> +             */
+> +            ret = i;
 
->>  #define MENVCFG_PBMTE                      (1ULL << 62)
->>  #define MENVCFG_STCE                       (1ULL << 63)
->>  /* For RV32 */
->>+#define MENVCFGH_SFCFIEN                   BIT(27)
->>+#define MENVCFGH_CFI                       BIT(28)
->>  #define MENVCFGH_PBMTE                     BIT(30)
->>  #define MENVCFGH_STCE                      BIT(31)
->>@@ -763,10 +784,14 @@ typedef enum RISCVException {
->>  #define HENVCFG_CBIE                       MENVCFG_CBIE
->>  #define HENVCFG_CBCFE                      MENVCFG_CBCFE
->>  #define HENVCFG_CBZE                       MENVCFG_CBZE
->>+#define HENVCFG_SFCFIEN                    MENVCFG_SFCFIEN
->>+#define HENVCFG_CFI                        MENVCFG_CFI
->>  #define HENVCFG_PBMTE                      MENVCFG_PBMTE
->>  #define HENVCFG_STCE                       MENVCFG_STCE
->>  /* For RV32 */
->>+#define HENVCFGH_SFCFIEN                    MENVCFGH_SFCFIEN
->>+#define HENVCFGH_CFI                        MENVCFGH_CFI
->>  #define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
->>  #define HENVCFGH_STCE                       MENVCFGH_STCE
->>diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
->>index da32c61c85..f5bfc4955b 100644
->>--- a/target/riscv/pmp.h
->>+++ b/target/riscv/pmp.h
->>@@ -43,7 +43,8 @@ typedef enum {
->>      MSECCFG_MMWP  = 1 << 1,
->>      MSECCFG_RLB   = 1 << 2,
->>      MSECCFG_USEED = 1 << 8,
->>-    MSECCFG_SSEED = 1 << 9
->>+    MSECCFG_SSEED = 1 << 9,
->>+    MSECCFG_MFCFIEN =  1 << 10
->
->It's unnecessary to use multiple space after '='.
->
-Somehow this escaped. Will fix it.
+Notice the return value is the matching rule index, which includes
 
->Regards,
->
->Weiwei Li
->
->>  } mseccfg_field_t;
->>  typedef struct {
->
+1) the address range is matching.
+
+2) the permission of the PMP rule and the memory access type are matching.
+
+
+So we can't simply remove the second check.  I think the right fix is:
+
+            if ((privs & *allowed_privs) == privs) {
+                 ret = i;
+  -         }
+  +         } else {
+  +		ret = -2;
+  +         }
+
+The -2 return value avoids finding the default privileges. And it implies no matching rule is found.
+
+Zhiwei
+
+>               break;
+>           }
+>       }
 
