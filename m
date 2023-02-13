@@ -1,19 +1,19 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRdF8-0000WW-Mu
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Feb 2023 13:07:58 -0500
+	id 1pRdFA-0000Xq-Gt
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Feb 2023 13:08:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1pRdEx-0000Qp-FD; Mon, 13 Feb 2023 13:07:48 -0500
-Received: from bg4.exmail.qq.com ([43.155.65.254])
+ id 1pRdF7-0000Vb-QN; Mon, 13 Feb 2023 13:07:57 -0500
+Received: from bg4.exmail.qq.com ([43.154.221.58])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1pRdEs-00027P-Kf; Mon, 13 Feb 2023 13:07:47 -0500
+ id 1pRdF5-00029g-PL; Mon, 13 Feb 2023 13:07:57 -0500
 X-QQ-Spam: true
-X-QQ-mid: bizesmtp62t1676311390tnqrua0b
+X-QQ-mid: bizesmtp62t1676311396tyhr8vhs
 Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
  by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 14 Feb 2023 02:03:09 +0800 (CST)
+ id ; Tue, 14 Feb 2023 02:03:15 +0800 (CST)
 X-QQ-SSF: 01200000000000C0D000000A0000000
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
@@ -23,10 +23,10 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  qemu-riscv@nongnu.org
-Subject: [PATCH 09/18] target/riscv: Avoid reporting odd-numbered pmpcfgX in
- the CSR XML for RV64
-Date: Tue, 14 Feb 2023 02:02:05 +0800
-Message-Id: <20230213180215.1524938-10-bmeng@tinylab.org>
+Subject: [PATCH 11/18] target/riscv: gdbstub: Drop the vector CSRs in
+ riscv-vector.xml
+Date: Tue, 14 Feb 2023 02:02:07 +0800
+Message-Id: <20230213180215.1524938-12-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230213180215.1524938-1-bmeng@tinylab.org>
 References: <20230213180215.1524938-1-bmeng@tinylab.org>
@@ -34,7 +34,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=43.155.65.254; envelope-from=bmeng@tinylab.org;
+Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
  helo=bg4.exmail.qq.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -53,75 +53,130 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2023 18:07:51 -0000
+X-List-Received-Date: Mon, 13 Feb 2023 18:07:58 -0000
 
-At present the odd-numbered PMP configuration registers for RV64 are
-reported in the CSR XML by QEMU gdbstub. However these registers do
-not exist on RV64 so trying to access them from gdb results in 'E14'.
+It's worth noting that the vector CSR predicate() has a similar
+run-time check logic to the FPU CSR. With the previous patch our
+gdbstub can correctly report these vector CSRs via the CSR xml.
 
-Move the pmpcfgX index check from the actual read/write routine to
-the PMP CSR predicate() routine, so that non-existent pmpcfgX won't
-be reported in the CSR XML for RV64.
+Commit 719d3561b269 ("target/riscv: gdb: support vector registers for rv64 & rv32")
+inserted these vector CSRs in an ad-hoc, non-standard way in the
+riscv-vector.xml. Now we can treat these CSRs no different from
+other CSRs.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
 ---
 
- target/riscv/csr.c | 23 ++++++++---------------
- 1 file changed, 8 insertions(+), 15 deletions(-)
+ target/riscv/gdbstub.c | 75 ------------------------------------------
+ 1 file changed, 75 deletions(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 0a3f2bef6f..749d0ef83e 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -412,6 +412,14 @@ static int aia_hmode32(CPURISCVState *env, int csrno)
- static RISCVException pmp(CPURISCVState *env, int csrno)
- {
-     if (riscv_feature(env, RISCV_FEATURE_PMP)) {
-+        if (csrno <= CSR_PMPCFG3) {
-+            uint32_t reg_index = csrno - CSR_PMPCFG0;
-+
-+            if ((reg_index & 1) && (riscv_cpu_mxl(env) == MXL_RV64)) {
-+                return RISCV_EXCP_ILLEGAL_INST;
-+            }
-+        }
-+
-         return RISCV_EXCP_NONE;
-     }
- 
-@@ -3334,23 +3342,11 @@ static RISCVException write_mseccfg(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index ef52f41460..6048541606 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -127,40 +127,6 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
+     return 0;
  }
  
--static bool check_pmp_reg_index(CPURISCVState *env, uint32_t reg_index)
+-/*
+- * Convert register index number passed by GDB to the correspond
+- * vector CSR number. Vector CSRs are defined after vector registers
+- * in dynamic generated riscv-vector.xml, thus the starting register index
+- * of vector CSRs is 32.
+- * Return 0 if register index number is out of range.
+- */
+-static int riscv_gdb_vector_csrno(int num_regs)
 -{
--    /* TODO: RV128 restriction check */
--    if ((reg_index & 1) && (riscv_cpu_mxl(env) == MXL_RV64)) {
--        return false;
+-    /*
+-     * The order of vector CSRs in the switch case
+-     * should match with the order defined in csr_ops[].
+-     */
+-    switch (num_regs) {
+-    case 32:
+-        return CSR_VSTART;
+-    case 33:
+-        return CSR_VXSAT;
+-    case 34:
+-        return CSR_VXRM;
+-    case 35:
+-        return CSR_VCSR;
+-    case 36:
+-        return CSR_VL;
+-    case 37:
+-        return CSR_VTYPE;
+-    case 38:
+-        return CSR_VLENB;
+-    default:
+-        /* Unknown register. */
+-        return 0;
 -    }
--    return true;
 -}
 -
- static RISCVException read_pmpcfg(CPURISCVState *env, int csrno,
-                                   target_ulong *val)
+ static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
  {
-     uint32_t reg_index = csrno - CSR_PMPCFG0;
+     uint16_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
+@@ -174,19 +140,6 @@ static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
+         return cnt;
+     }
  
--    if (!check_pmp_reg_index(env, reg_index)) {
--        return RISCV_EXCP_ILLEGAL_INST;
+-    int csrno = riscv_gdb_vector_csrno(n);
+-
+-    if (!csrno) {
+-        return 0;
 -    }
-     *val = pmpcfg_csr_read(env, reg_index);
-     return RISCV_EXCP_NONE;
+-
+-    target_ulong val = 0;
+-    int result = riscv_csrrw_debug(env, csrno, &val, 0, 0);
+-
+-    if (result == RISCV_EXCP_NONE) {
+-        return gdb_get_regl(buf, val);
+-    }
+-
+     return 0;
  }
-@@ -3360,9 +3356,6 @@ static RISCVException write_pmpcfg(CPURISCVState *env, int csrno,
- {
-     uint32_t reg_index = csrno - CSR_PMPCFG0;
  
--    if (!check_pmp_reg_index(env, reg_index)) {
--        return RISCV_EXCP_ILLEGAL_INST;
+@@ -201,19 +154,6 @@ static int riscv_gdb_set_vector(CPURISCVState *env, uint8_t *mem_buf, int n)
+         return vlenb;
+     }
+ 
+-    int csrno = riscv_gdb_vector_csrno(n);
+-
+-    if (!csrno) {
+-        return 0;
 -    }
-     pmpcfg_csr_write(env, reg_index, val);
-     return RISCV_EXCP_NONE;
+-
+-    target_ulong val = ldtul_p(mem_buf);
+-    int result = riscv_csrrw_debug(env, csrno, NULL, val, -1);
+-
+-    if (result == RISCV_EXCP_NONE) {
+-        return sizeof(target_ulong);
+-    }
+-
+     return 0;
  }
+ 
+@@ -361,21 +301,6 @@ static int ricsv_gen_dynamic_vector_xml(CPUState *cs, int base_reg)
+         num_regs++;
+     }
+ 
+-    /* Define vector CSRs */
+-    const char *vector_csrs[7] = {
+-        "vstart", "vxsat", "vxrm", "vcsr",
+-        "vl", "vtype", "vlenb"
+-    };
+-
+-    for (i = 0; i < 7; i++) {
+-        g_string_append_printf(s,
+-                               "<reg name=\"%s\" bitsize=\"%d\""
+-                               " regnum=\"%d\" group=\"vector\""
+-                               " type=\"int\"/>",
+-                               vector_csrs[i], TARGET_LONG_BITS, base_reg++);
+-        num_regs++;
+-    }
+-
+     g_string_append_printf(s, "</feature>");
+ 
+     cpu->dyn_vreg_xml = g_string_free(s, false);
 -- 
 2.25.1
 
