@@ -1,68 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRbCT-0007Fa-CQ
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Feb 2023 10:57:05 -0500
+	id 1pRdAe-0003Cw-CM
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Feb 2023 13:03:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1pRbCS-0007FL-Rs
- for qemu-riscv@nongnu.org; Mon, 13 Feb 2023 10:57:04 -0500
-Received: from mail-oa1-x2b.google.com ([2001:4860:4864:20::2b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1pRbCR-0002OA-4h
- for qemu-riscv@nongnu.org; Mon, 13 Feb 2023 10:57:04 -0500
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-169ba826189so15681969fac.2
- for <qemu-riscv@nongnu.org>; Mon, 13 Feb 2023 07:57:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=M7SnJbgGJXj+fTFf3xsoqnXiRCe3dUDlA+Yb5mecyMY=;
- b=fYz7HBeOCRV/CLZsCzHyseMYFBNotNr+L2FSDjzHu6WKB4Hvwr8Qf/yaTorsZf0oeh
- numhwaIG1sd0Jan38Cq4v4dR6R7gBOrkQtOTaZsmqWxyVw0g9Xt7KmLqMiIwWIfsZQw8
- o7EgELzKZFjc7psyIYjWTqVinTYGTB90mzf3Z7xcxhzBJsALOMqJmZDphuOq8PheIepV
- 5OyUNja5Gmw8AiRpHnPJiSKOHGVKIrv5K6z2clCQeu8jq+65MBx/Bu/Xq0XeWldzRWmT
- PY72pVWUbE9nkSSLtExZ2tbHmVsTch94r2UwuM9KUubbCjPilS8wlScGFEi2BSZ731u8
- ZnEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=M7SnJbgGJXj+fTFf3xsoqnXiRCe3dUDlA+Yb5mecyMY=;
- b=rwsZoXuW7sjg0VYxY2sdXGlsDVuLJeFEWUXQxpsCgvlbtFuW50F2UL3EvFU94T1fxz
- hNtiKswFTr375HvWpsmujqMEYD7rOy2A0SPlbUI0tvR8LqEBIhuvhLB16Ilwb9wGjUP7
- mMRyvmAQIS/F5tzcRVQvOjTptgkvgSDcEe1y3CC4TY67UvVOm6MEyrWuz0m6PfjRu4lY
- 5T9W6/serIiHSZlmQA4TIryAWce97ebX/Se+oBfM9/m8+pu7bygwfqeWYlQGMEJqHbA1
- s3wRqYxzG2vTLCbcfeDA/7ggyZIVYqiQ+y5hEfdVx5ml688f8C1iUbh46Rk7eNXkqM4p
- STGA==
-X-Gm-Message-State: AO0yUKW8GZjFgWXRiZUADpqf+nXjJs9ya9STcabnIDjuH3Op34jfNMVy
- Uc1NZfbCS07AFh3v1Xjl4m/1SOnqpDDu+Slod9ICBA==
-X-Google-Smtp-Source: AK7set9dMZLEOuGw9ZPZTCOh0cv+K0rDD9qKEdWXBQDL3scn1i5oTVCGTntRBPdQ87z0DKXHY/BuMBXtASQ3ZEjHx8A=
-X-Received: by 2002:a05:6870:c68a:b0:16a:4376:e95f with SMTP id
- cv10-20020a056870c68a00b0016a4376e95fmr2284151oab.165.1676303821477; Mon, 13
- Feb 2023 07:57:01 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
+ id 1pRdAY-00037b-Tv; Mon, 13 Feb 2023 13:03:15 -0500
+Received: from bg4.exmail.qq.com ([43.154.221.58])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
+ id 1pRdAV-0001Ik-M8; Mon, 13 Feb 2023 13:03:14 -0500
+X-QQ-mid: bizesmtp62t1676311364tf7oryd4
+Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 14 Feb 2023 02:02:43 +0800 (CST)
+X-QQ-SSF: 01200000000000C0D000000A0000000
+X-QQ-FEAT: SdugMSrl+IMOA/kl/2+0JJ7KKDuAi3hv5oa+0wa1bnoGIBw7w2FB1inIAstP2
+ KaItufkKWSnhjmQvHREvmjGln2jEjPCnjeASTHO5UqedakzjzJan994ilXbus49uu8V72PS
+ oPjF9t135vZ7aYezkfFRF1VtiOj6H0xU+BttI/JjkoWGMm9xIfu6U4TW3OFo7QpGbSVnpBR
+ DdmJXceKZANlLNvpiOrYVEhcOInCjQG09AMM6vm43im+qHqs46VHu+aVrqROc2DXt2rGQ7i
+ HPRete33Z7XuYSwU181N+7W+IbqZzMvWHSFUTY0RevuPstLs9wMQRuHeE+j3KPH6SvdHRzf
+ CtEwQ/HN+eVbh3IjZxjJWJx5qW28cbnXRI9dmlvzoqjR3IQqzg=
+X-QQ-GoodBg: 0
+From: Bin Meng <bmeng@tinylab.org>
+To: qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ qemu-riscv@nongnu.org
+Subject: [PATCH 01/18] target/riscv: gdbstub: Check priv spec version before
+ reporting CSR
+Date: Tue, 14 Feb 2023 02:01:57 +0800
+Message-Id: <20230213180215.1524938-2-bmeng@tinylab.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230213180215.1524938-1-bmeng@tinylab.org>
+References: <20230213180215.1524938-1-bmeng@tinylab.org>
 MIME-Version: 1.0
-References: <20230213094550.29621-1-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230213094550.29621-1-zhiwei_liu@linux.alibaba.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Mon, 13 Feb 2023 23:56:50 +0800
-Message-ID: <CAE_xrPgZbi507=QOnXmxP--QGwFMRT_rH97nTrxdVwc=FqJzdQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Fix vslide1up.vf and vslide1down.vf
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Alistair.Francis@wdc.com, 
- bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
- palmer@dabbelt.com
-Content-Type: multipart/alternative; boundary="000000000000d0b06a05f496e56c"
-Received-SPF: pass client-ip=2001:4860:4864:20::2b;
- envelope-from=frank.chang@sifive.com; helo=mail-oa1-x2b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
+Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
+ helo=bg4.exmail.qq.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,140 +59,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2023 15:57:05 -0000
+X-List-Received-Date: Mon, 13 Feb 2023 18:03:18 -0000
 
---000000000000d0b06a05f496e56c
-Content-Type: text/plain; charset="UTF-8"
+The gdbstub CSR XML is dynamically generated according to the result
+of the CSR predicate() result. This has been working fine until
+commit 7100fe6c2441 ("target/riscv: Enable privileged spec version 1.12")
+introduced the privilege spec version check in riscv_csrrw_check().
 
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
+When debugging the 'sifive_u' machine whose priv spec is at 1.10,
+gdbstub reports priv spec 1.12 CSRs like menvcfg in the XML, hence
+we see "remote failure reply 'E14'" message when examining all CSRs
+via "info register system" from gdb.
 
-On Mon, Feb 13, 2023 at 5:45 PM LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-wrote:
+Add the priv spec version check in the CSR XML generation logic to
+fix this issue.
 
-> vslide1up_##BITWIDTH is used by the vslide1up.vx and vslide1up.vf. So its
-> scalar input should be uint64_t to hold the 64 bits float register.And the
-> same for vslide1down_##BITWIDTH.
->
-> This bug is caught when run these instructions on qemu-riscv32.
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> ---
->  target/riscv/vector_helper.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 00de879787..3073c54871 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -5038,7 +5038,7 @@ GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_w, uint32_t, H4)
->  GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_d, uint64_t, H8)
->
->  #define GEN_VEXT_VSLIE1UP(BITWIDTH, H)
->   \
-> -static void vslide1up_##BITWIDTH(void *vd, void *v0, target_ulong s1,
->    \
-> +static void vslide1up_##BITWIDTH(void *vd, void *v0, uint64_t s1,
->    \
->                       void *vs2, CPURISCVState *env, uint32_t desc)
->   \
->  {
->    \
->      typedef uint##BITWIDTH##_t ETYPE;
->    \
-> @@ -5086,7 +5086,7 @@ GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_w, 32)
->  GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_d, 64)
->
->  #define GEN_VEXT_VSLIDE1DOWN(BITWIDTH, H)
->      \
-> -static void vslide1down_##BITWIDTH(void *vd, void *v0, target_ulong s1,
->      \
-> +static void vslide1down_##BITWIDTH(void *vd, void *v0, uint64_t s1,
->      \
->                         void *vs2, CPURISCVState *env, uint32_t desc)
->     \
->  {
->      \
->      typedef uint##BITWIDTH##_t ETYPE;
->      \
-> --
-> 2.17.1
->
->
+Fixes: 7100fe6c2441 ("target/riscv: Enable privileged spec version 1.12")
+Signed-off-by: Bin Meng <bmeng@tinylab.org>
+---
 
---000000000000d0b06a05f496e56c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ target/riscv/gdbstub.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-<div dir=3D"ltr">Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang=
-@sifive.com">frank.chang@sifive.com</a>&gt;</div><br><div class=3D"gmail_qu=
-ote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Feb 13, 2023 at 5:45 PM =
-LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@linux.alibaba.com">zhiwei_liu@l=
-inux.alibaba.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" =
-style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
-dding-left:1ex">vslide1up_##BITWIDTH is used by the vslide1up.vx and vslide=
-1up.vf. So its<br>
-scalar input should be uint64_t to hold the 64 bits float register.And the<=
-br>
-same for vslide1down_##BITWIDTH.<br>
-<br>
-This bug is caught when run these instructions on qemu-riscv32.<br>
-<br>
-Signed-off-by: LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@linux.alibaba.co=
-m" target=3D"_blank">zhiwei_liu@linux.alibaba.com</a>&gt;<br>
----<br>
-=C2=A0target/riscv/vector_helper.c | 4 ++--<br>
-=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
-<br>
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c<br=
->
-index 00de879787..3073c54871 100644<br>
---- a/target/riscv/vector_helper.c<br>
-+++ b/target/riscv/vector_helper.c<br>
-@@ -5038,7 +5038,7 @@ GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_w, uint32_t, H4)=
-<br>
-=C2=A0GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_d, uint64_t, H8)<br>
-<br>
-=C2=A0#define GEN_VEXT_VSLIE1UP(BITWIDTH, H)=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
--static void vslide1up_##BITWIDTH(void *vd, void *v0, target_ulong s1,=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0\<br>
-+static void vslide1up_##BITWIDTH(void *vd, void *v0, uint64_t s1,=C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 void *vs2, CPURISCVState *env, uint32_t desc)=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 \<br>
-=C2=A0{=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
-=C2=A0 =C2=A0 =C2=A0typedef uint##BITWIDTH##_t ETYPE;=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
-@@ -5086,7 +5086,7 @@ GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_w, 32)<br>
-=C2=A0GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_d, 64)<br>
-<br>
-=C2=A0#define GEN_VEXT_VSLIDE1DOWN(BITWIDTH, H)=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
--static void vslide1down_##BITWIDTH(void *vd, void *v0, target_ulong s1,=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0\<br>
-+static void vslide1down_##BITWIDTH(void *vd, void *v0, uint64_t s1,=C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 void *vs2, CPURISCVState *env, uint32_t desc)=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 \<br>
-=C2=A0{=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
-=C2=A0 =C2=A0 =C2=A0typedef uint##BITWIDTH##_t ETYPE;=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
--- <br>
-2.17.1<br>
-<br>
-</blockquote></div>
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 6e7bbdbd5e..e57372db38 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -290,6 +290,9 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+     g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
+ 
+     for (i = 0; i < CSR_TABLE_SIZE; i++) {
++        if (env->priv_ver < csr_ops[i].min_priv_ver) {
++            continue;
++        }
+         predicate = csr_ops[i].predicate;
+         if (predicate && (predicate(env, i) == RISCV_EXCP_NONE)) {
+             if (csr_ops[i].name) {
+-- 
+2.25.1
 
---000000000000d0b06a05f496e56c--
 
