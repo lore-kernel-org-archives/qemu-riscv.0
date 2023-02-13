@@ -1,25 +1,25 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRdAe-0003Cw-CM
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Feb 2023 13:03:20 -0500
+	id 1pRdAh-0003DO-I2
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Feb 2023 13:03:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1pRdAY-00037b-Tv; Mon, 13 Feb 2023 13:03:15 -0500
-Received: from bg4.exmail.qq.com ([43.154.221.58])
+ id 1pRdAZ-00037c-2S; Mon, 13 Feb 2023 13:03:17 -0500
+Received: from bg4.exmail.qq.com ([43.155.65.254])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1pRdAV-0001Ik-M8; Mon, 13 Feb 2023 13:03:14 -0500
-X-QQ-mid: bizesmtp62t1676311364tf7oryd4
+ id 1pRdAW-0001KP-2j; Mon, 13 Feb 2023 13:03:14 -0500
+X-QQ-mid: bizesmtp62t1676311371tk4fexa2
 Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
  by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 14 Feb 2023 02:02:43 +0800 (CST)
+ id ; Tue, 14 Feb 2023 02:02:50 +0800 (CST)
 X-QQ-SSF: 01200000000000C0D000000A0000000
-X-QQ-FEAT: SdugMSrl+IMOA/kl/2+0JJ7KKDuAi3hv5oa+0wa1bnoGIBw7w2FB1inIAstP2
- KaItufkKWSnhjmQvHREvmjGln2jEjPCnjeASTHO5UqedakzjzJan994ilXbus49uu8V72PS
- oPjF9t135vZ7aYezkfFRF1VtiOj6H0xU+BttI/JjkoWGMm9xIfu6U4TW3OFo7QpGbSVnpBR
- DdmJXceKZANlLNvpiOrYVEhcOInCjQG09AMM6vm43im+qHqs46VHu+aVrqROc2DXt2rGQ7i
- HPRete33Z7XuYSwU181N+7W+IbqZzMvWHSFUTY0RevuPstLs9wMQRuHeE+j3KPH6SvdHRzf
- CtEwQ/HN+eVbh3IjZxjJWJx5qW28cbnXRI9dmlvzoqjR3IQqzg=
+X-QQ-FEAT: XBN7tc9DADLyWcuVMnJZzYC19WYF/g/i9wmIl7DusTAioJdVRtZ+CMhJhVc0b
+ hPMjS4U0nG6IflckWv8DJXqHHJf7SrMSAKw3IEYiLVBj2v+ecU1zcTXjPGyytYnL+eRyUGm
+ y5Lea+e4yXDtjYmndAKwAIh447MZBIusYRlVXs2SNtf6+4e4ukgj0L0EbqZ2ZjsavGInfkY
+ oIiRwCPsUE6ZBhjCTHr688jaYCGRcprbyULYmvhga5Ok4o11r/8GTHo96YRBtg1fl5seeiw
+ H4bZkITopOYnfM3R/exloSazKwtNcPKphCmSQlwR0eSz3khJ6IgjeC73eXBvoBkAaiCJW/S
+ OXWnJVCi5JkVGADjeTh8TgttpYb+4kNhdDvrkzUYDEgtn+HFP0=
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
@@ -29,10 +29,10 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  qemu-riscv@nongnu.org
-Subject: [PATCH 01/18] target/riscv: gdbstub: Check priv spec version before
- reporting CSR
-Date: Tue, 14 Feb 2023 02:01:57 +0800
-Message-Id: <20230213180215.1524938-2-bmeng@tinylab.org>
+Subject: [PATCH 03/18] target/riscv: gdbstub: Minor change for better
+ readability
+Date: Tue, 14 Feb 2023 02:01:59 +0800
+Message-Id: <20230213180215.1524938-4-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230213180215.1524938-1-bmeng@tinylab.org>
 References: <20230213180215.1524938-1-bmeng@tinylab.org>
@@ -40,7 +40,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
+Received-SPF: pass client-ip=43.155.65.254; envelope-from=bmeng@tinylab.org;
  helo=bg4.exmail.qq.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -59,42 +59,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2023 18:03:18 -0000
+X-List-Received-Date: Mon, 13 Feb 2023 18:03:19 -0000
 
-The gdbstub CSR XML is dynamically generated according to the result
-of the CSR predicate() result. This has been working fine until
-commit 7100fe6c2441 ("target/riscv: Enable privileged spec version 1.12")
-introduced the privilege spec version check in riscv_csrrw_check().
+Use a variable 'base_reg' to represent cs->gdb_num_regs so that
+the call to ricsv_gen_dynamic_vector_xml() can be placed in one
+single line for better readability.
 
-When debugging the 'sifive_u' machine whose priv spec is at 1.10,
-gdbstub reports priv spec 1.12 CSRs like menvcfg in the XML, hence
-we see "remote failure reply 'E14'" message when examining all CSRs
-via "info register system" from gdb.
-
-Add the priv spec version check in the CSR XML generation logic to
-fix this issue.
-
-Fixes: 7100fe6c2441 ("target/riscv: Enable privileged spec version 1.12")
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
 ---
 
- target/riscv/gdbstub.c | 3 +++
- 1 file changed, 3 insertions(+)
+ target/riscv/gdbstub.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index 6e7bbdbd5e..e57372db38 100644
+index e57372db38..704f3d6922 100644
 --- a/target/riscv/gdbstub.c
 +++ b/target/riscv/gdbstub.c
-@@ -290,6 +290,9 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
-     g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
- 
-     for (i = 0; i < CSR_TABLE_SIZE; i++) {
-+        if (env->priv_ver < csr_ops[i].min_priv_ver) {
-+            continue;
-+        }
-         predicate = csr_ops[i].predicate;
-         if (predicate && (predicate(env, i) == RISCV_EXCP_NONE)) {
-             if (csr_ops[i].name) {
+@@ -385,9 +385,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+                                  32, "riscv-32bit-fpu.xml", 0);
+     }
+     if (env->misa_ext & RVV) {
++        int base_reg = cs->gdb_num_regs;
+         gdb_register_coprocessor(cs, riscv_gdb_get_vector, riscv_gdb_set_vector,
+-                                 ricsv_gen_dynamic_vector_xml(cs,
+-                                                              cs->gdb_num_regs),
++                                 ricsv_gen_dynamic_vector_xml(cs, base_reg),
+                                  "riscv-vector.xml", 0);
+     }
+     switch (env->misa_mxl_max) {
 -- 
 2.25.1
 
