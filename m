@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRqpx-00009C-Qy
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 03:38:53 -0500
+	id 1pRqpz-0000AM-8v
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 03:38:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pRqpv-00006O-Tn; Tue, 14 Feb 2023 03:38:51 -0500
+ id 1pRqpv-00006G-SS; Tue, 14 Feb 2023 03:38:51 -0500
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pRqpr-0001rF-Oa; Tue, 14 Feb 2023 03:38:51 -0500
+ id 1pRqpr-0001rG-Nz; Tue, 14 Feb 2023 03:38:51 -0500
 Received: from localhost.localdomain (unknown [114.95.238.225])
- by APP-05 (Coremail) with SMTP id zQCowADHz5uOSOtjHFQsBQ--.41555S3;
- Tue, 14 Feb 2023 16:38:39 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowADHz5uOSOtjHFQsBQ--.41555S6;
+ Tue, 14 Feb 2023 16:38:41 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,32 +19,32 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [Patch 01/14] target/riscv: Fix the relationship between Zfhmin and
- Zfh
-Date: Tue, 14 Feb 2023 16:38:20 +0800
-Message-Id: <20230214083833.44205-2-liweiwei@iscas.ac.cn>
+Subject: [Patch 04/14] target/riscv: Add cfg properties for Zv* extension
+Date: Tue, 14 Feb 2023 16:38:23 +0800
+Message-Id: <20230214083833.44205-5-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230214083833.44205-1-liweiwei@iscas.ac.cn>
 References: <20230214083833.44205-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowADHz5uOSOtjHFQsBQ--.41555S3
-X-Coremail-Antispam: 1UD129KBjvdXoW7JrW5tw4DuFW3XFWkAF1kZrb_yoW3urb_Ga
- 1F9rZ7Xw1UXFn2gFWUA3WYkr1rW3yrKF4vganxtF4rGFZ8uFykAws7tF1kCrZ8urW5AFZ3
- Aw1xGa43Ga1jvjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUb6xFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUGwA2048vs2IY02
- 0Ec7CjxVAFwI0_JFI_Gr1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
- wVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
- x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS0I0E
- 0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67
- AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48I
- cxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2xKxw
- CF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j
- 6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64
- vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_
- Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0x
- vEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUqAp5UUUUU=
+X-CM-TRANSID: zQCowADHz5uOSOtjHFQsBQ--.41555S6
+X-Coremail-Antispam: 1UD129KBjvdXoWrGw1xArW7GF4rJw13Xr15twb_yoWxXrb_Gw
+ 40vFWxJ345WF4S9rWjyr98tr48Ga48GF4vgrsrtw45KFWYgr9Ik3Wxtrn8Gr1UCr4UZF93
+ twn7ury7WrnxZjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbDxFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
+ IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
+ F7xvwVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr
+ 1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
+ e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
+ 8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
+ jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0x
+ kIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AK
+ xVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrx
+ kI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v2
+ 6r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8Jw
+ CI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOBTYUUUU
+ U
 X-Originating-IP: [114.95.238.225]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -68,31 +68,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 14 Feb 2023 08:38:52 -0000
 
-Zfhmin is part of Zfh, so Zfhmin will be enabled when Zfh is enabled
+Add properties for Zve64d,Zvfh,Zvfhmin extension
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 ---
- target/riscv/cpu.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ target/riscv/cpu.h | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 0dd2f0c753..eb0cd12a6a 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -729,7 +729,11 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
- 
--    if ((cpu->cfg.ext_zfh || cpu->cfg.ext_zfhmin) && !cpu->cfg.ext_f) {
-+    if (cpu->cfg.ext_zfh) {
-+        cpu->cfg.ext_zfhmin = true;
-+    }
-+
-+    if (cpu->cfg.ext_zfhmin && !cpu->cfg.ext_f) {
-         error_setg(errp, "Zfh/Zfhmin extensions require F extension");
-         return;
-     }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 7128438d8e..54c6875617 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -462,7 +462,10 @@ struct RISCVCPUConfig {
+     bool ext_zhinxmin;
+     bool ext_zve32f;
+     bool ext_zve64f;
++    bool ext_zve64d;
+     bool ext_zmmul;
++    bool ext_zvfh;
++    bool ext_zvfhmin;
+     bool ext_smaia;
+     bool ext_ssaia;
+     bool ext_sscofpmf;
 -- 
 2.25.1
 
