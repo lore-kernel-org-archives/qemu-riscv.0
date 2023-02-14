@@ -1,36 +1,36 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRx4V-00076p-Sm
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 10:18:19 -0500
+	id 1pRx5D-0000Jc-8j
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 10:19:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pRx4L-0006dg-FR; Tue, 14 Feb 2023 10:18:10 -0500
+ id 1pRx5B-0000Ir-Sf; Tue, 14 Feb 2023 10:19:01 -0500
 Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pRx4J-0005dP-FK; Tue, 14 Feb 2023 10:18:09 -0500
+ id 1pRx59-0005mg-Nu; Tue, 14 Feb 2023 10:19:01 -0500
 Received: from [192.168.0.119] (unknown [114.95.238.225])
- by APP-01 (Coremail) with SMTP id qwCowABn6NYoputjzBIYBQ--.28217S2;
- Tue, 14 Feb 2023 23:18:00 +0800 (CST)
-Message-ID: <4e9c1522-1b3f-c3b2-b7ac-78ee044bbd08@iscas.ac.cn>
-Date: Tue, 14 Feb 2023 23:18:00 +0800
+ by APP-01 (Coremail) with SMTP id qwCowABXcNRfputjyRYYBQ--.27414S2;
+ Tue, 14 Feb 2023 23:18:55 +0800 (CST)
+Message-ID: <6f932a5d-8b58-fdf2-606d-6a81ce9a7405@iscas.ac.cn>
+Date: Tue, 14 Feb 2023 23:18:55 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.1
-Subject: Re: [PATCH 07/11] target/riscv: remove RISCV_FEATURE_EPMP
+Subject: Re: [PATCH 08/11] target/riscv: remove RISCV_FEATURE_PMP
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liweiwei@iscas.ac.cn
 References: <20230210133635.589647-1-dbarboza@ventanamicro.com>
- <20230210133635.589647-8-dbarboza@ventanamicro.com>
+ <20230210133635.589647-9-dbarboza@ventanamicro.com>
 From: weiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230210133635.589647-8-dbarboza@ventanamicro.com>
+In-Reply-To: <20230210133635.589647-9-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: qwCowABn6NYoputjzBIYBQ--.28217S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxGryDGw17Ww48GFy7Jw4rAFb_yoW5Xw4Dpr
- 48uayrCr9IyFZrAayftF4UWr1UXw1UKw4akws7Ww18tr45GrW5CFnrK3WxCF1DJay8Wr42
- 9F15uF13Zw4jvFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: qwCowABXcNRfputjyRYYBQ--.27414S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxGF1DAry5WF1Dur18CF4fuFg_yoWrXF1fpr
+ 4kGayfCFWDJFZ7Aa1ftF4UWr15Zr1YgF4Ykws7Cw48GF45GrW5urnrK3W2kF1DXayUur4I
+ 9F1j9F1ayw40vFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUUkl14x267AKxVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
  1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
@@ -66,12 +66,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2023 15:18:16 -0000
+X-List-Received-Date: Tue, 14 Feb 2023 15:19:02 -0000
 
 
 On 2023/2/10 21:36, Daniel Henrique Barboza wrote:
-> RISCV_FEATURE_EPMP is always set to the same value as the cpu->cfg.epmp
-> flag. Use the flag directly.
+> RISCV_FEATURE_PMP is being set via riscv_set_feature() by mirroring the
+> cpu->cfg.pmp flag. Use the flag instead.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
@@ -82,83 +82,108 @@ Regards,
 Weiwei Li
 
 > ---
->   target/riscv/cpu.c | 10 +++-------
->   target/riscv/cpu.h |  1 -
->   target/riscv/csr.c |  2 +-
->   target/riscv/pmp.c |  4 ++--
->   4 files changed, 6 insertions(+), 11 deletions(-)
+>   target/riscv/cpu.c        | 4 ----
+>   target/riscv/cpu.h        | 1 -
+>   target/riscv/cpu_helper.c | 2 +-
+>   target/riscv/csr.c        | 2 +-
+>   target/riscv/machine.c    | 3 +--
+>   target/riscv/op_helper.c  | 2 +-
+>   target/riscv/pmp.c        | 2 +-
+>   7 files changed, 5 insertions(+), 11 deletions(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1e67e72f90..430b6adccb 100644
+> index 430b6adccb..a803395ed1 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -927,17 +927,13 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->           riscv_set_feature(env, RISCV_FEATURE_PMP);
+> @@ -923,10 +923,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>           riscv_set_feature(env, RISCV_FEATURE_MMU);
 >       }
 >   
-> -    if (cpu->cfg.epmp) {
-> -        riscv_set_feature(env, RISCV_FEATURE_EPMP);
+> -    if (cpu->cfg.pmp) {
+> -        riscv_set_feature(env, RISCV_FEATURE_PMP);
+> -    }
 > -
-> +    if (cpu->cfg.epmp && !cpu->cfg.pmp) {
+>       if (cpu->cfg.epmp && !cpu->cfg.pmp) {
 >           /*
 >            * Enhanced PMP should only be available
->            * on harts with PMP support
->            */
-> -        if (!cpu->cfg.pmp) {
-> -            error_setg(errp, "Invalid configuration: EPMP requires PMP support");
-> -            return;
-> -        }
-> +        error_setg(errp, "Invalid configuration: EPMP requires PMP support");
-> +        return;
->       }
->   
->   
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 46de6f2f7f..d0de11fd41 100644
+> index d0de11fd41..62919cd5cc 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -88,7 +88,6 @@
+> @@ -87,7 +87,6 @@
+>      so a cpu features bitfield is required, likewise for optional PMP support */
 >   enum {
 >       RISCV_FEATURE_MMU,
->       RISCV_FEATURE_PMP,
-> -    RISCV_FEATURE_EPMP,
+> -    RISCV_FEATURE_PMP,
 >   };
 >   
 >   /* Privileged specification version */
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 4cdd247c6c..15d9542691 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -706,7 +706,7 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
+>       pmp_priv_t pmp_priv;
+>       int pmp_index = -1;
+>   
+> -    if (!riscv_feature(env, RISCV_FEATURE_PMP)) {
+> +    if (!riscv_cpu_cfg(env).pmp) {
+>           *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
+>           return TRANSLATE_SUCCESS;
+>       }
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index af4a44b33b..5b974dad6b 100644
+> index 5b974dad6b..3d55b1b138 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -428,7 +428,7 @@ static RISCVException pmp(CPURISCVState *env, int csrno)
+> @@ -419,7 +419,7 @@ static int aia_hmode32(CPURISCVState *env, int csrno)
 >   
->   static RISCVException epmp(CPURISCVState *env, int csrno)
+>   static RISCVException pmp(CPURISCVState *env, int csrno)
 >   {
-> -    if (env->priv == PRV_M && riscv_feature(env, RISCV_FEATURE_EPMP)) {
-> +    if (env->priv == PRV_M && riscv_cpu_cfg(env).epmp) {
+> -    if (riscv_feature(env, RISCV_FEATURE_PMP)) {
+> +    if (riscv_cpu_cfg(env).pmp) {
 >           return RISCV_EXCP_NONE;
 >       }
 >   
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 4634968898..67e9e56853 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -27,9 +27,8 @@
+>   static bool pmp_needed(void *opaque)
+>   {
+>       RISCVCPU *cpu = opaque;
+> -    CPURISCVState *env = &cpu->env;
+>   
+> -    return riscv_feature(env, RISCV_FEATURE_PMP);
+> +    return cpu->cfg.pmp;
+>   }
+>   
+>   static int pmp_post_load(void *opaque, int version_id)
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 48f918b71b..f34701b443 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -195,7 +195,7 @@ target_ulong helper_mret(CPURISCVState *env)
+>       uint64_t mstatus = env->mstatus;
+>       target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
+>   
+> -    if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+> +    if (riscv_cpu_cfg(env).pmp &&
+>           !pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
+>           riscv_raise_exception(env, RISCV_EXCP_INST_ACCESS_FAULT, GETPC());
+>       }
 > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 4bc4113531..bb54899635 100644
+> index bb54899635..1e7903dffa 100644
 > --- a/target/riscv/pmp.c
 > +++ b/target/riscv/pmp.c
-> @@ -88,7 +88,7 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
->       if (pmp_index < MAX_RISCV_PMPS) {
->           bool locked = true;
+> @@ -265,7 +265,7 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
+>           }
+>       }
 >   
-> -        if (riscv_feature(env, RISCV_FEATURE_EPMP)) {
-> +        if (riscv_cpu_cfg(env).epmp) {
->               /* mseccfg.RLB is set */
->               if (MSECCFG_RLB_ISSET(env)) {
->                   locked = false;
-> @@ -239,7 +239,7 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
->   {
->       bool ret;
->   
-> -    if (riscv_feature(env, RISCV_FEATURE_EPMP)) {
-> +    if (riscv_cpu_cfg(env).epmp) {
->           if (MSECCFG_MMWP_ISSET(env)) {
->               /*
->                * The Machine Mode Whitelist Policy (mseccfg.MMWP) is set
+> -    if ((!riscv_feature(env, RISCV_FEATURE_PMP)) || (mode == PRV_M)) {
+> +    if (!riscv_cpu_cfg(env).pmp || (mode == PRV_M)) {
+>           /*
+>            * Privileged spec v1.10 states if HW doesn't implement any PMP entry
+>            * or no PMP entry matches an M-Mode access, the access succeeds.
 
 
