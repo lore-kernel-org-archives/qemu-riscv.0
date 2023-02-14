@@ -1,82 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRwDW-0007L5-8M
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 09:23:35 -0500
+	id 1pRwHI-0001Uw-Dh
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 09:27:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pRwDT-0007KY-7y
- for qemu-riscv@nongnu.org; Tue, 14 Feb 2023 09:23:31 -0500
-Received: from mail-oa1-x29.google.com ([2001:4860:4864:20::29])
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pRwHH-0001UO-1I; Tue, 14 Feb 2023 09:27:27 -0500
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pRwDR-0002BB-Ky
- for qemu-riscv@nongnu.org; Tue, 14 Feb 2023 09:23:30 -0500
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-16df32f2ffdso8492754fac.1
- for <qemu-riscv@nongnu.org>; Tue, 14 Feb 2023 06:23:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=4F00CTTwLY3038ca8rY5vafjy8fe+jHQBi5QB6/xEJs=;
- b=RkzNtHY0lisy7hDgWGcJLguKyJISqicplsYZJSBJy/u5vBdAkJ1iHslCO1G66D07wp
- +/F7HI2tU62+GvH+fsaPzH+eaH/H8Fm9BJOtlwrOP4mp05cecPOIMGxTerw459Sx7par
- Yg5QEUDKhxsdjbQxBHGt7YPL/5BPN+b9CcnCnuTcuuttSV6POgTyWnY6NzCjyL1ujTyV
- PDBLWuq6pY2iMB4xfL07wYQUWtgIPWb07b5clRYNBOL9f5f61mrEAbv7TlU8NfHTEWIZ
- FmWwFwsVE4+xGTSWuWAxyvgF6p/VnHaHK3WEYT4OqoTAz/xYvvfwi210NJ4yaydebEAA
- wFHw==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pRwHF-0003SK-AX; Tue, 14 Feb 2023 09:27:26 -0500
+Received: by mail-pj1-x1036.google.com with SMTP id bx22so15250705pjb.3;
+ Tue, 14 Feb 2023 06:27:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0dLbXMsDEqCXQNQVDFhpatbYKsJzSr77aU36NNtRbtU=;
+ b=miFthHyQNir+c4HqpNYeuSh5riXN5ZDcg0BwtYgQZJFIr20+9vxXu4emKS3D/DfAh1
+ SQ9I+H683BSeizRLAHco/p2hNcpjTJ6R7tT4f6j5LOrIZu80yfkWUefUjKVJ8Lqqm6ze
+ cDUEEo8FtDHzhXIAO0MjKxw4TcY0dIRiEoUmJMimXiHWlruU6DZDMUscoR8a4/R/BGcc
+ epU1QBmclGvxc6qi35+bgPIOFyuOhbi5H43HrQPhiWK8PJFhti86wZ8crmWMlLs0b+6E
+ 0ypQx2UctCCbGG58ryLdjhTv3TUAZNKro78ImnXrkRJ+Mv+t72D8bdbQ0tzEYPwpEBRa
+ UIVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4F00CTTwLY3038ca8rY5vafjy8fe+jHQBi5QB6/xEJs=;
- b=bW0d6TgGd9Eo1La2+BgxlEqkUlDkjoPoy9+SZ5+kZQ62nqGPXOhw4U+azcxLh4bd3X
- n0oiyKI/x/R+7aHp3rb8uvOXgEizjGTbndnTmVxgT4aSNApdV5nwFpXdtjTPECbeYUbE
- u/2r7wJP1rN6Jet90pMtjbuG5tw/0kwgqWArhQM+e859766cWPXOIY10nrUnyx3Kcauj
- 9nW1kcgSTpgz5vzKYLp3JtxwbmUlr+FUBuMrJG+LocQlo4VrqijN8/FRrLDPoCzdQht+
- VFuSuHDMSyVc47qtVTBVD9vAFbq3Ad/dBNzFg7U6rxt7eNtfODvKH1YbLOnYcLSACP4j
- BZHA==
-X-Gm-Message-State: AO0yUKWxurLyAyDf7ugyThapxUnKWfxYgIZ+yORtR//eiPPzSEFrnDaz
- mddw6eoMtYX5BJt5ort4W+eC0Q==
-X-Google-Smtp-Source: AK7set9o5c9h7Zc0wUtKqSUeRR7eaCzjrd1mXiyokBsOLJ3Vzs6zyWnLfxvuxrMTbcTsiU/zB64LNg==
-X-Received: by 2002:a05:6870:2413:b0:163:7563:41a0 with SMTP id
- n19-20020a056870241300b00163756341a0mr1402808oap.36.1676384606458; 
- Tue, 14 Feb 2023 06:23:26 -0800 (PST)
-Received: from [192.168.68.107] ([191.19.40.109])
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0dLbXMsDEqCXQNQVDFhpatbYKsJzSr77aU36NNtRbtU=;
+ b=h819Y22JaxEAAJ3FULE07cH91ADDxZkvpXI0ieCs/VnP9oOfWEwAho4MPBDJWWL2B3
+ pBroelM71BNjPCPp265XFt2uikcTSvS5EBBwN0BvvoYG74aj7At1niPttPA/7xD7xLE0
+ nXtEJlgOHGhChHP9mgYaKXHcCHAfG7ecCloSngcgqJRCysb7jqe0tdz/fmjGgxJm+Y67
+ Otyq3KpAxCZ9DDTvfvZgEQL76Cwsqk9+mviFZwduUUgq3k4bqeJQtA8TAXfqCLfiHtWN
+ n2W1y+GkVIh1aOwwps9z34TsPyNnbrtnqQyAyZmEI41NeQinJpCX41Sx8I2yNidCgc7c
+ 693w==
+X-Gm-Message-State: AO0yUKVXvTqfFDDQLa1zzrSh8Hz8Q09JtRtQcgy/3K2YBn+pBFuw5S8R
+ CbS+6bA3XsPGFIxMk6qwNmNhxJGG+sk=
+X-Google-Smtp-Source: AK7set+vMyq4ODaI6NaDgr8g5iCOWSPNfbvRh9qahsKQ9PCtMiEeQRK/8U0FqMKFDbQNUOOM0VOEtQ==
+X-Received: by 2002:a05:6a20:a10f:b0:bf:ca3:6896 with SMTP id
+ q15-20020a056a20a10f00b000bf0ca36896mr2889622pzk.2.1676384843109; 
+ Tue, 14 Feb 2023 06:27:23 -0800 (PST)
+Received: from ubuntu.. (144.168.56.201.16clouds.com. [144.168.56.201])
  by smtp.gmail.com with ESMTPSA id
- z3-20020a056870e14300b0014ff15936casm2239186oaa.40.2023.02.14.06.23.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Feb 2023 06:23:25 -0800 (PST)
-Message-ID: <ad9ec4ae-d49e-a3eb-fe27-2130d5bbab07@ventanamicro.com>
-Date: Tue, 14 Feb 2023 11:23:22 -0300
+ s26-20020a639e1a000000b004f1cb6ffe81sm8799108pgd.64.2023.02.14.06.27.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Feb 2023 06:27:22 -0800 (PST)
+From: Bin Meng <bmeng.cn@gmail.com>
+X-Google-Original-From: Bin Meng <bmeng@tinylab.org>
+To: qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ qemu-riscv@nongnu.org
+Subject: [PATCH 18/18] target/riscv: Move configuration check to envcfg CSRs
+ predicate()
+Date: Tue, 14 Feb 2023 22:27:17 +0800
+Message-Id: <20230213180215.1524938-19-bmeng@tinylab.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230213180215.1524938-1-bmeng@tinylab.org>
+References: 
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [Patch 05/14] target/riscv: Fix relationship between V, Zve*, F
- and D
-Content-Language: en-US
-To: weiwei <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230214083833.44205-1-liweiwei@iscas.ac.cn>
- <20230214083833.44205-6-liweiwei@iscas.ac.cn>
- <78ccde8a-4bbb-d000-de5b-dcb00a65a070@ventanamicro.com>
- <62413d42-4219-6eb9-4545-13a65750f0da@iscas.ac.cn>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <62413d42-4219-6eb9-4545-13a65750f0da@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::29;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x29.google.com
-X-Spam_score_int: -24
-X-Spam_score: -2.5
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1036.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.35,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,106 +84,153 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2023 14:23:31 -0000
+X-List-Received-Date: Tue, 14 Feb 2023 14:27:27 -0000
 
+At present the envcfg CSRs predicate() routines are generic one like
+smode(), hmode. The configuration check is done in the read / write
+routine. Create a new predicate routine to cover such check, so that
+gdbstub can correctly report its existence.
 
+Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
-On 2/14/23 10:40, weiwei wrote:
-> 
-> On 2023/2/14 21:21, Daniel Henrique Barboza wrote:
->>
->>
->> On 2/14/23 05:38, Weiwei Li wrote:
->>> Add dependence chain:
->>> *  V => Zve64d => Zve64f => Zve32f => F
->>> *  V => Zve64d => D
->>>
->>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->>> ---
->>>   target/riscv/cpu.c | 21 ++++++++++++++++++---
->>>   1 file changed, 18 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->>> index 9a89bea2a3..4797ef9c42 100644
->>> --- a/target/riscv/cpu.c
->>> +++ b/target/riscv/cpu.c
->>> @@ -743,12 +743,27 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
->>>           return;
->>>       }
->>>   -    if (cpu->cfg.ext_v && !cpu->cfg.ext_d) {
->>> -        error_setg(errp, "V extension requires D extension");
->>> +    /* The V vector extension depends on the Zve64d extension */
->>> +    if (cpu->cfg.ext_v) {
->>> +        cpu->cfg.ext_zve64d = true;
->>> +    }
->>> +
->>> +    /* The Zve64d extension depends on the Zve64f extension */
->>> +    if (cpu->cfg.ext_zve64d) {
->>> +        cpu->cfg.ext_zve64f = true;
->>> +    }
->>> +
->>> +    /* The Zve64f extension depends on the Zve32f extension */
->>> +    if (cpu->cfg.ext_zve64f) {
->>> +        cpu->cfg.ext_zve32f = true;
->>> +    }
->>> +
->>> +    if (cpu->cfg.ext_zve64d && !cpu->cfg.ext_d) {
->>> +        error_setg(errp, "Zve64d extensions require D extension");
->>>           return;
->>
->> I'll be honest and confess that I wrote a short essay about the problems I have
->> with this code. I gave up because in the end it's all stuff that we've been doing
->> for a long time in riscv_cpu_validate_set_extensions(). I'll see if I can work in
->> a redesign of that function and in how we're setting extensions automatically
->> without checking user input and so on.
->>
->> For now I'll say that this error message seems weird because Zve64d was set to true
->> without user input. So this ends up happening:
->>
->> $ ./qemu-system-riscv64 -M virt -cpu rv64,v=true,d=false
->> qemu-system-riscv64: Zve64d extensions require D extension
->>
->> It's weird because the user didn't enabled Zve64d but the error message is complaining
->> about it. Given that the root cause is that ext_v was set, and then we've set other
->> extensions under the hood, a saner error message in this case would be "V extension
->> requires D extension".
->>
->>
->> Thanks,
->>
->>
->> Daniel
-> 
-> Thanks for your comments.
-> 
-> V extension depends on Zve64d(which is actually parts of V). So Zve64d will be enabled when V is enabled.
-> 
-> And in fact, only the instructions in the Zve64d part of V require D extension.
-> 
-> To make it more readable, maybe it can be change to :
-> 
-> "Zve64d (or V) extension requires D extension"
+---
 
+ target/riscv/csr.c | 98 +++++++++++++++++++++++++++++-----------------
+ 1 file changed, 61 insertions(+), 37 deletions(-)
 
-Yes, that looks better to me. Thanks,
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 37350b8a6d..284ccc09dd 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -41,40 +41,6 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+ }
+ 
+ /* Predicates */
+-#if !defined(CONFIG_USER_ONLY)
+-static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
+-                                       uint64_t bit)
+-{
+-    bool virt = riscv_cpu_virt_enabled(env);
+-    RISCVCPU *cpu = env_archcpu(env);
+-
+-    if (env->priv == PRV_M || !cpu->cfg.ext_smstateen) {
+-        return RISCV_EXCP_NONE;
+-    }
+-
+-    if (!(env->mstateen[index] & bit)) {
+-        return RISCV_EXCP_ILLEGAL_INST;
+-    }
+-
+-    if (virt) {
+-        if (!(env->hstateen[index] & bit)) {
+-            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-        }
+-
+-        if (env->priv == PRV_U && !(env->sstateen[index] & bit)) {
+-            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-        }
+-    }
+-
+-    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
+-        if (!(env->sstateen[index] & bit)) {
+-            return RISCV_EXCP_ILLEGAL_INST;
+-        }
+-    }
+-
+-    return RISCV_EXCP_NONE;
+-}
+-#endif
+ 
+ static RISCVException fs(CPURISCVState *env, int csrno)
+ {
+@@ -318,6 +284,32 @@ static RISCVException umode32(CPURISCVState *env, int csrno)
+     return umode(env, csrno);
+ }
+ 
++static RISCVException envcfg(CPURISCVState *env, int csrno)
++{
++    RISCVCPU *cpu = env_archcpu(env);
++    riscv_csr_predicate_fn predicate;
++
++    if (cpu->cfg.ext_smstateen) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    switch (csrno) {
++    case CSR_SENVCFG:
++        predicate = smode;
++        break;
++    case CSR_HENVCFG:
++        predicate = hmode;
++        break;
++    case CSR_HENVCFGH:
++        predicate = hmode32;
++        break;
++    default:
++        g_assert_not_reached();
++    }
++
++    return predicate(env, csrno);
++}
++
+ static RISCVException mstateen(CPURISCVState *env, int csrno)
+ {
+     RISCVCPU *cpu = env_archcpu(env);
+@@ -1946,6 +1938,38 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
++                                       uint64_t bit)
++{
++    bool virt = riscv_cpu_virt_enabled(env);
++
++    if (env->priv == PRV_M) {
++        return RISCV_EXCP_NONE;
++    }
++
++    if (!(env->mstateen[index] & bit)) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    if (virt) {
++        if (!(env->hstateen[index] & bit)) {
++            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++        }
++
++        if (env->priv == PRV_U && !(env->sstateen[index] & bit)) {
++            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++        }
++    }
++
++    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
++        if (!(env->sstateen[index] & bit)) {
++            return RISCV_EXCP_ILLEGAL_INST;
++        }
++    }
++
++    return RISCV_EXCP_NONE;
++}
++
+ static RISCVException read_senvcfg(CPURISCVState *env, int csrno,
+                                    target_ulong *val)
+ {
+@@ -4087,11 +4111,11 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+                        .min_priv_ver = PRIV_VERSION_1_12_0              },
+     [CSR_MENVCFGH] = { "menvcfgh", umode32, read_menvcfgh, write_menvcfgh,
+                        .min_priv_ver = PRIV_VERSION_1_12_0              },
+-    [CSR_SENVCFG]  = { "senvcfg",  smode, read_senvcfg,  write_senvcfg,
++    [CSR_SENVCFG]  = { "senvcfg",  envcfg, read_senvcfg,  write_senvcfg,
+                        .min_priv_ver = PRIV_VERSION_1_12_0              },
+-    [CSR_HENVCFG]  = { "henvcfg",  hmode, read_henvcfg, write_henvcfg,
++    [CSR_HENVCFG]  = { "henvcfg",  envcfg, read_henvcfg,  write_henvcfg,
+                        .min_priv_ver = PRIV_VERSION_1_12_0              },
+-    [CSR_HENVCFGH] = { "henvcfgh", hmode32, read_henvcfgh, write_henvcfgh,
++    [CSR_HENVCFGH] = { "henvcfgh", envcfg, read_henvcfgh, write_henvcfgh,
+                        .min_priv_ver = PRIV_VERSION_1_12_0              },
+ 
+     /* Smstateen extension CSRs */
+-- 
+2.25.1
 
-
-Daniel
-
-> 
-> Regards,
-> 
-> Weiwei Li
-> 
->>
->>
->>
->>>       }
->>>   -    if ((cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) && !cpu->cfg.ext_f) {
->>> +    if (cpu->cfg.ext_zve32f && !cpu->cfg.ext_f) {
->>>           error_setg(errp, "Zve32f/Zve64f extensions require F extension");
->>>           return;
->>>       }
-> 
 
