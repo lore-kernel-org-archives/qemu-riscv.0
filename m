@@ -1,25 +1,25 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRjr9-0000WF-8c
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Feb 2023 20:11:39 -0500
+	id 1pRjrB-0000Wy-9x
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Feb 2023 20:11:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1pRjr3-0000Va-UM; Mon, 13 Feb 2023 20:11:34 -0500
-Received: from bg4.exmail.qq.com ([43.155.65.254])
+ id 1pRjr3-0000VZ-Rq; Mon, 13 Feb 2023 20:11:34 -0500
+Received: from bg4.exmail.qq.com ([43.154.221.58])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1pRjr0-0004Wq-DF; Mon, 13 Feb 2023 20:11:32 -0500
-X-QQ-mid: bizesmtp79t1676337061tf5r9wvl
+ id 1pRjr0-0004Wr-Ub; Mon, 13 Feb 2023 20:11:33 -0500
+X-QQ-mid: bizesmtp79t1676337067tkf0rqd6
 Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
  by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 14 Feb 2023 09:09:17 +0800 (CST)
+ id ; Tue, 14 Feb 2023 09:11:04 +0800 (CST)
 X-QQ-SSF: 01200000000000C0D000000A0000000
-X-QQ-FEAT: 239gR2IZrlthjCVlM4o7gGOaP8j8RynC/RGXnT7SOzKX3IUPixvOvw08eY09k
- L7GlZEZc/Iu8/vI4yPjlQvdoVeFAnzpkbtknKe5g6/GeQehvRHLjXI/BPfABWVZaBu5gd9o
- IrxBkQtTWa+nNABV2pL6hsw1ApNUTvXyQwzKdUEmzjAhP6qw38kbXhbf+aeZ43hMK3IKprc
- t+qVRjANGVF/AZFWwtl63yDCXQAF7/vaYx852QF8n9/ncb6IT5E3iiifdT/OW+WDmYW71TM
- jEKmVBOJS4rJuNHXK4KE7RtOReQayjy0vlF8xf+7vGIat/aVuK5UIFQgBMDEY8s50Eq6LCy
- baOzf3tC1aNH5glfB1Ntg9jAv2qJOKYS5yUslYMUu0YiFLrbo4=
+X-QQ-FEAT: CR3LFp2JE4kzWfmvcx7PnMd75xGL/kcYSZCfu3y9DsmsqZ8+16MurSdNZ81UB
+ fu8xg3JpkEKfr1c8hcoUdPS3OP7m1PEGZzxvs/Kc4dRzxETNkn9OX+mxFDyyFxzAWfHnHim
+ sXYM/z3NOObCQpiAol9OhM1eDIuKRcXIENIcLV8/scuSeDgqE280zW8RPYACoxn4vEXvyqd
+ 4SVY7WVr53Ihtk4ZB1ozVSeT5edT1R4uiQRvGbTIhMTVr4iVIfcO8mp+gJOOohJJRtsbBhH
+ //m6Pk/xcvFBWcVEVVPTpwbXHOuL/FF0tXoD5KESzc4X1dq8u3RvgRbXQNZvSEsDyrk4klN
+ AdZQoo15KjWsTvbH9SZfQj+qPkOFnEOCnp/YUQFpf67MPqILh16+vlD6rKbVg==
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
@@ -29,18 +29,17 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  qemu-riscv@nongnu.org
-Subject: [PATCH 12/18] target/riscv: Allow debugger to access user timer and
- counter CSRs
-Date: Tue, 14 Feb 2023 09:09:10 +0800
-Message-Id: <20230213180215.1524938-13-bmeng@tinylab.org>
+Subject: [PATCH 13/18] target/riscv: Allow debugger to access seed CSR
+Date: Tue, 14 Feb 2023 09:09:11 +0800
+Message-Id: <20230213180215.1524938-14-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230213180215.1524938-1-bmeng@tinylab.org>
-References: 
+References: <20230213180215.1524938-13-bmeng@tinylab.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: bizesmtp:tinylab.org:qybglogicsvr:qybglogicsvr3
-Received-SPF: pass client-ip=43.155.65.254; envelope-from=bmeng@tinylab.org;
+Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
  helo=bg4.exmail.qq.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -61,10 +60,10 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 14 Feb 2023 01:11:36 -0000
 
-At present user timer and counter CSRs are not reported in the
-CSR XML hence gdb cannot access them.
+At present seed CSR is not reported in the CSR XML hence gdb cannot
+access it.
 
-Fix it by addding a debugger check in their predicate() routine.
+Fix it by addding a debugger check in its predicate() routine.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
 ---
@@ -73,20 +72,20 @@ Signed-off-by: Bin Meng <bmeng@tinylab.org>
  1 file changed, 4 insertions(+)
 
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 749d0ef83e..515b05348b 100644
+index 515b05348b..f1075b5728 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -131,6 +131,10 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+@@ -458,6 +458,10 @@ static RISCVException seed(CPURISCVState *env, int csrno)
+     }
  
- skip_ext_pmu_check:
- 
+ #if !defined(CONFIG_USER_ONLY)
 +    if (env->debugger) {
 +        return RISCV_EXCP_NONE;
 +    }
 +
-     if (env->priv < PRV_M && !get_field(env->mcounteren, ctr_mask)) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
+     /*
+      * With a CSR read-write instruction:
+      * 1) The seed CSR is always available in machine mode as normal.
 -- 
 2.25.1
 
