@@ -1,70 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRwHI-0001Uw-Dh
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 09:27:28 -0500
+	id 1pRwL0-00061A-RL
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 09:31:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pRwHH-0001UO-1I; Tue, 14 Feb 2023 09:27:27 -0500
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
+ id 1pRwKz-0005yh-65; Tue, 14 Feb 2023 09:31:17 -0500
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pRwHF-0003SK-AX; Tue, 14 Feb 2023 09:27:26 -0500
-Received: by mail-pj1-x1036.google.com with SMTP id bx22so15250705pjb.3;
- Tue, 14 Feb 2023 06:27:24 -0800 (PST)
+ id 1pRwKw-0004LP-PK; Tue, 14 Feb 2023 09:31:16 -0500
+Received: by mail-ed1-x52d.google.com with SMTP id fi26so17642549edb.7;
+ Tue, 14 Feb 2023 06:31:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0dLbXMsDEqCXQNQVDFhpatbYKsJzSr77aU36NNtRbtU=;
- b=miFthHyQNir+c4HqpNYeuSh5riXN5ZDcg0BwtYgQZJFIr20+9vxXu4emKS3D/DfAh1
- SQ9I+H683BSeizRLAHco/p2hNcpjTJ6R7tT4f6j5LOrIZu80yfkWUefUjKVJ8Lqqm6ze
- cDUEEo8FtDHzhXIAO0MjKxw4TcY0dIRiEoUmJMimXiHWlruU6DZDMUscoR8a4/R/BGcc
- epU1QBmclGvxc6qi35+bgPIOFyuOhbi5H43HrQPhiWK8PJFhti86wZ8crmWMlLs0b+6E
- 0ypQx2UctCCbGG58ryLdjhTv3TUAZNKro78ImnXrkRJ+Mv+t72D8bdbQ0tzEYPwpEBRa
- UIVQ==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=A7vIEGkPHf2DzKRTksnsfX9U6kO6Xso4VrCP4RZlc2s=;
+ b=iTsuB4gLqF1EC0BBzMt7JHzw7lV30AbA0jv/0S/JjAUEXMw8hKSAOVMOC9Kca3Gdb1
+ /xhb2Tq6rcrzP4w1Age2YgP+Mv72hoOrxO8OkTxfNbT69XEhyaNAWxJFYob50SA3Nat1
+ eeghFKO90dvcA/1MLZocNstMlBr5QKomMntqPCPuE+AgxMTmGJSKc84DIzAml2SBdPAw
+ 73uikzcmwx64XB98aUs9dHdnrQNjy47G+FE1Riopxv+IPS6+pYyN+43eRpjmALwxCQj6
+ m4eoHOGFzX1HRAQm/8/4u56iDnXJYigZ7ahTar6DwAF3/E1bG2ySDXPYzmg+XYxBoahL
+ Fs0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0dLbXMsDEqCXQNQVDFhpatbYKsJzSr77aU36NNtRbtU=;
- b=h819Y22JaxEAAJ3FULE07cH91ADDxZkvpXI0ieCs/VnP9oOfWEwAho4MPBDJWWL2B3
- pBroelM71BNjPCPp265XFt2uikcTSvS5EBBwN0BvvoYG74aj7At1niPttPA/7xD7xLE0
- nXtEJlgOHGhChHP9mgYaKXHcCHAfG7ecCloSngcgqJRCysb7jqe0tdz/fmjGgxJm+Y67
- Otyq3KpAxCZ9DDTvfvZgEQL76Cwsqk9+mviFZwduUUgq3k4bqeJQtA8TAXfqCLfiHtWN
- n2W1y+GkVIh1aOwwps9z34TsPyNnbrtnqQyAyZmEI41NeQinJpCX41Sx8I2yNidCgc7c
- 693w==
-X-Gm-Message-State: AO0yUKVXvTqfFDDQLa1zzrSh8Hz8Q09JtRtQcgy/3K2YBn+pBFuw5S8R
- CbS+6bA3XsPGFIxMk6qwNmNhxJGG+sk=
-X-Google-Smtp-Source: AK7set+vMyq4ODaI6NaDgr8g5iCOWSPNfbvRh9qahsKQ9PCtMiEeQRK/8U0FqMKFDbQNUOOM0VOEtQ==
-X-Received: by 2002:a05:6a20:a10f:b0:bf:ca3:6896 with SMTP id
- q15-20020a056a20a10f00b000bf0ca36896mr2889622pzk.2.1676384843109; 
- Tue, 14 Feb 2023 06:27:23 -0800 (PST)
-Received: from ubuntu.. (144.168.56.201.16clouds.com. [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id
- s26-20020a639e1a000000b004f1cb6ffe81sm8799108pgd.64.2023.02.14.06.27.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Feb 2023 06:27:22 -0800 (PST)
-From: Bin Meng <bmeng.cn@gmail.com>
-X-Google-Original-From: Bin Meng <bmeng@tinylab.org>
-To: qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- qemu-riscv@nongnu.org
-Subject: [PATCH 18/18] target/riscv: Move configuration check to envcfg CSRs
- predicate()
-Date: Tue, 14 Feb 2023 22:27:17 +0800
-Message-Id: <20230213180215.1524938-19-bmeng@tinylab.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230213180215.1524938-1-bmeng@tinylab.org>
-References: 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=A7vIEGkPHf2DzKRTksnsfX9U6kO6Xso4VrCP4RZlc2s=;
+ b=oHpx6jGq0jvPjo8TtERKteRrF30G/kVZZSJezhj6mrv7mS0m2YHggnClIS5uZ/jccw
+ 7pWPyjJM1VfI/EZnyDPoj+ohddcgQ3nhfHYIDRHqtKrdgHzMn//GLpP6w7C+VSjmDOAG
+ N/2RX9n7XDO6rMo5NPUWCR6mC8sytjFAUc8e6vsfoePPYkPSxaR8HBVlbBe1QdmaLjMl
+ uwwjgFKCZnHMNMVLnC8Tr1UN+aXGhPXWxVICARz3og7Z/I1SXxNZXytIYPlkWF0dKQ3y
+ TKkYfmRXjU8hEC2fr/1CcXZnsQzlt4WZOMnMeYhgPCdrTG2TPLVUaz0wTvO9HiOG2jbo
+ BGoQ==
+X-Gm-Message-State: AO0yUKVsxQ78wXC9bBgq9chV2M2ZkYoCgyUTDNdmc4whhXHFk3Y7BF/3
+ DJ1UEr7xhdYNPoZFJmgkxMeE19+AeljyD9Sm91s=
+X-Google-Smtp-Source: AK7set9XFxSfvH4zkUoN4lZMhyF4XMZAh8Mk0XLOv8rwzlbCnyLhU9cAfv3yEUMg/cQjjMib2jxMrhmYxXAvKZIzElA=
+X-Received: by 2002:a50:8e52:0:b0:4ac:8359:e846 with SMTP id
+ 18-20020a508e52000000b004ac8359e846mr1236997edx.6.1676385072409; Tue, 14 Feb
+ 2023 06:31:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1036.google.com
+References: <20230213180215.1524938-1-bmeng@tinylab.org>
+ <471ae407-3fe2-5e2f-374b-9c4c83a16fdf@ventanamicro.com>
+In-Reply-To: <471ae407-3fe2-5e2f-374b-9c4c83a16fdf@ventanamicro.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 14 Feb 2023 22:31:01 +0800
+Message-ID: <CAEUhbmUNF2xFw8aJeqy2ykfG_1PdTz6qvCHnWo-hP7sSNbAU_Q@mail.gmail.com>
+Subject: Re: [PATCH 00/18] target/riscv: Various fixes to gdbstub and CSR
+ access
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Bin Meng <bmeng@tinylab.org>, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -84,153 +75,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2023 14:27:27 -0000
+X-List-Received-Date: Tue, 14 Feb 2023 14:31:17 -0000
 
-At present the envcfg CSRs predicate() routines are generic one like
-smode(), hmode. The configuration check is done in the read / write
-routine. Create a new predicate routine to cover such check, so that
-gdbstub can correctly report its existence.
+Hi Daniel,
 
-Signed-off-by: Bin Meng <bmeng@tinylab.org>
+On Tue, Feb 14, 2023 at 3:20 AM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Bin,
+>
+>
+> I received only patches 1-11. I don't see the remaining patches in patchwork:
+>
+>
+> https://patchwork.kernel.org/project/qemu-devel/list/?series=721372
+>
+>
+> or in the qemu-devel archives:
+>
+>
+> https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg03461.html
+>
+>
+> Can you please verify? Thanks,
+>
 
----
+Somehow my email service provider blocked some of my patches. I've now
+resent the missing patches, and I just verified that it showed up in
+the patchwork.
 
- target/riscv/csr.c | 98 +++++++++++++++++++++++++++++-----------------
- 1 file changed, 61 insertions(+), 37 deletions(-)
-
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 37350b8a6d..284ccc09dd 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -41,40 +41,6 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
- }
- 
- /* Predicates */
--#if !defined(CONFIG_USER_ONLY)
--static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
--                                       uint64_t bit)
--{
--    bool virt = riscv_cpu_virt_enabled(env);
--    RISCVCPU *cpu = env_archcpu(env);
--
--    if (env->priv == PRV_M || !cpu->cfg.ext_smstateen) {
--        return RISCV_EXCP_NONE;
--    }
--
--    if (!(env->mstateen[index] & bit)) {
--        return RISCV_EXCP_ILLEGAL_INST;
--    }
--
--    if (virt) {
--        if (!(env->hstateen[index] & bit)) {
--            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
--        }
--
--        if (env->priv == PRV_U && !(env->sstateen[index] & bit)) {
--            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
--        }
--    }
--
--    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
--        if (!(env->sstateen[index] & bit)) {
--            return RISCV_EXCP_ILLEGAL_INST;
--        }
--    }
--
--    return RISCV_EXCP_NONE;
--}
--#endif
- 
- static RISCVException fs(CPURISCVState *env, int csrno)
- {
-@@ -318,6 +284,32 @@ static RISCVException umode32(CPURISCVState *env, int csrno)
-     return umode(env, csrno);
- }
- 
-+static RISCVException envcfg(CPURISCVState *env, int csrno)
-+{
-+    RISCVCPU *cpu = env_archcpu(env);
-+    riscv_csr_predicate_fn predicate;
-+
-+    if (cpu->cfg.ext_smstateen) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    switch (csrno) {
-+    case CSR_SENVCFG:
-+        predicate = smode;
-+        break;
-+    case CSR_HENVCFG:
-+        predicate = hmode;
-+        break;
-+    case CSR_HENVCFGH:
-+        predicate = hmode32;
-+        break;
-+    default:
-+        g_assert_not_reached();
-+    }
-+
-+    return predicate(env, csrno);
-+}
-+
- static RISCVException mstateen(CPURISCVState *env, int csrno)
- {
-     RISCVCPU *cpu = env_archcpu(env);
-@@ -1946,6 +1938,38 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
-+                                       uint64_t bit)
-+{
-+    bool virt = riscv_cpu_virt_enabled(env);
-+
-+    if (env->priv == PRV_M) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    if (!(env->mstateen[index] & bit)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    if (virt) {
-+        if (!(env->hstateen[index] & bit)) {
-+            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-+        }
-+
-+        if (env->priv == PRV_U && !(env->sstateen[index] & bit)) {
-+            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-+        }
-+    }
-+
-+    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
-+        if (!(env->sstateen[index] & bit)) {
-+            return RISCV_EXCP_ILLEGAL_INST;
-+        }
-+    }
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
- static RISCVException read_senvcfg(CPURISCVState *env, int csrno,
-                                    target_ulong *val)
- {
-@@ -4087,11 +4111,11 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-                        .min_priv_ver = PRIV_VERSION_1_12_0              },
-     [CSR_MENVCFGH] = { "menvcfgh", umode32, read_menvcfgh, write_menvcfgh,
-                        .min_priv_ver = PRIV_VERSION_1_12_0              },
--    [CSR_SENVCFG]  = { "senvcfg",  smode, read_senvcfg,  write_senvcfg,
-+    [CSR_SENVCFG]  = { "senvcfg",  envcfg, read_senvcfg,  write_senvcfg,
-                        .min_priv_ver = PRIV_VERSION_1_12_0              },
--    [CSR_HENVCFG]  = { "henvcfg",  hmode, read_henvcfg, write_henvcfg,
-+    [CSR_HENVCFG]  = { "henvcfg",  envcfg, read_henvcfg,  write_henvcfg,
-                        .min_priv_ver = PRIV_VERSION_1_12_0              },
--    [CSR_HENVCFGH] = { "henvcfgh", hmode32, read_henvcfgh, write_henvcfgh,
-+    [CSR_HENVCFGH] = { "henvcfgh", envcfg, read_henvcfgh, write_henvcfgh,
-                        .min_priv_ver = PRIV_VERSION_1_12_0              },
- 
-     /* Smstateen extension CSRs */
--- 
-2.25.1
-
+Regards,
+Bin
 
