@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRqpz-0000AM-8v
+	id 1pRqpz-0000Au-Lh
 	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 03:38:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pRqpv-00006G-SS; Tue, 14 Feb 2023 03:38:51 -0500
+ id 1pRqpw-00007S-Vh; Tue, 14 Feb 2023 03:38:52 -0500
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pRqpr-0001rG-Nz; Tue, 14 Feb 2023 03:38:51 -0500
+ id 1pRqpr-0001qx-PF; Tue, 14 Feb 2023 03:38:52 -0500
 Received: from localhost.localdomain (unknown [114.95.238.225])
- by APP-05 (Coremail) with SMTP id zQCowADHz5uOSOtjHFQsBQ--.41555S6;
- Tue, 14 Feb 2023 16:38:41 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowADHz5uOSOtjHFQsBQ--.41555S2;
+ Tue, 14 Feb 2023 16:38:39 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,32 +19,30 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [Patch 04/14] target/riscv: Add cfg properties for Zv* extension
-Date: Tue, 14 Feb 2023 16:38:23 +0800
-Message-Id: <20230214083833.44205-5-liweiwei@iscas.ac.cn>
+Subject: [Patch 00/14] target/riscv: Some updates to float point related
+ extensions
+Date: Tue, 14 Feb 2023 16:38:19 +0800
+Message-Id: <20230214083833.44205-1-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230214083833.44205-1-liweiwei@iscas.ac.cn>
-References: <20230214083833.44205-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowADHz5uOSOtjHFQsBQ--.41555S6
-X-Coremail-Antispam: 1UD129KBjvdXoWrGw1xArW7GF4rJw13Xr15twb_yoWxXrb_Gw
- 40vFWxJ345WF4S9rWjyr98tr48Ga48GF4vgrsrtw45KFWYgr9Ik3Wxtrn8Gr1UCr4UZF93
- twn7ury7WrnxZjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbDxFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
- IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
- F7xvwVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr
- 1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
- e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
- 8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
- jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0x
- kIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AK
- xVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrx
- kI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v2
- 6r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8Jw
- CI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOBTYUUUU
- U
+X-CM-TRANSID: zQCowADHz5uOSOtjHFQsBQ--.41555S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxJF1UKF1kZr43WFW7ur1fXrb_yoW8XFy5pr
+ 4fG3y7CrZ5JrW7Jr4SqF4UAw1YqF4rWr4ay3Z2yw1rJFW3ZrW5XrnFk3WfKFyUJFWkGry2
+ 9a4UAw13Zw47JaUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkC14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+ 0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
+ jxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr
+ 1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxa
+ n2IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrV
+ AFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCI
+ c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267
+ AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_
+ Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUoOJ5UU
+ UUU
 X-Originating-IP: [114.95.238.225]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -66,31 +64,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2023 08:38:52 -0000
+X-List-Received-Date: Tue, 14 Feb 2023 08:38:53 -0000
 
-Add properties for Zve64d,Zvfh,Zvfhmin extension
+This patchset fixes some relationship for half-precise float point related extensions and vector related extensions. It also adds support for Zvhf{min} and Zve64d extensions.
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
----
- target/riscv/cpu.h | 3 +++
- 1 file changed, 3 insertions(+)
+Specification for Zv* extensions can be found in:
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 7128438d8e..54c6875617 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -462,7 +462,10 @@ struct RISCVCPUConfig {
-     bool ext_zhinxmin;
-     bool ext_zve32f;
-     bool ext_zve64f;
-+    bool ext_zve64d;
-     bool ext_zmmul;
-+    bool ext_zvfh;
-+    bool ext_zvfhmin;
-     bool ext_smaia;
-     bool ext_ssaia;
-     bool ext_sscofpmf;
+https://github.com/riscv/riscv-v-spec/blob/master/v-spec.adoc
+
+The port is available here:
+https://github.com/plctlab/plct-qemu/tree/plct-zvfh-upstream
+
+Weiwei Li (14):
+  target/riscv: Fix the relationship between Zfhmin and Zfh
+  target/riscv: Fix the relationship between Zhinxmin and Zhinx
+  target/riscv: Simplify the check for Zfhmin and Zhinxmin
+  target/riscv: Add cfg properties for Zv* extension
+  target/riscv: Fix relationship between V, Zve*, F and  D
+  target/riscv: Add propertie check for Zvfh{min} extensions
+  target/riscv: Indent fixes in cpu.c
+  target/riscv: Simplify check for Zve32f and Zve64f
+  target/riscv: Replace check for F/D to Zve32f/Zve64d in
+    trans_rvv.c.inc
+  target/riscv: Remove rebundunt check for zve32f and zve64f
+  target/riscv: Add support for Zvfh/zvfhmin extensions
+  target/riscv: Fix check for vectore load/store instructions when
+    EEW=64
+  target/riscv: Simplify check for EEW = 64 in trans_rvv.c.inc
+  target/riscv: Expose properties for Zv* extension
+
+ target/riscv/cpu.c                        |  99 ++++++++----
+ target/riscv/cpu.h                        |   3 +
+ target/riscv/insn_trans/trans_rvv.c.inc   | 184 +++++++---------------
+ target/riscv/insn_trans/trans_rvzfh.c.inc |  25 ++-
+ 4 files changed, 144 insertions(+), 167 deletions(-)
+
 -- 
 2.25.1
 
