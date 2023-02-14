@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRqq2-0000Cd-O0
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 03:38:58 -0500
+	id 1pRqq3-0000DB-2Z
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 03:38:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pRqpv-00006P-UT; Tue, 14 Feb 2023 03:38:51 -0500
+ id 1pRqpw-00007Q-T0; Tue, 14 Feb 2023 03:38:52 -0500
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pRqpr-0001rk-P6; Tue, 14 Feb 2023 03:38:51 -0500
+ id 1pRqps-0001s0-Le; Tue, 14 Feb 2023 03:38:52 -0500
 Received: from localhost.localdomain (unknown [114.95.238.225])
- by APP-05 (Coremail) with SMTP id zQCowADHz5uOSOtjHFQsBQ--.41555S7;
- Tue, 14 Feb 2023 16:38:42 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowADHz5uOSOtjHFQsBQ--.41555S10;
+ Tue, 14 Feb 2023 16:38:43 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,22 +19,22 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [Patch 05/14] target/riscv: Fix relationship between V, Zve*, F and  D
-Date: Tue, 14 Feb 2023 16:38:24 +0800
-Message-Id: <20230214083833.44205-6-liweiwei@iscas.ac.cn>
+Subject: [Patch 08/14] target/riscv: Simplify check for Zve32f and Zve64f
+Date: Tue, 14 Feb 2023 16:38:27 +0800
+Message-Id: <20230214083833.44205-9-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230214083833.44205-1-liweiwei@iscas.ac.cn>
 References: <20230214083833.44205-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowADHz5uOSOtjHFQsBQ--.41555S7
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZrWDWw4fGrWDWFWxGF4UJwb_yoW8GF1Dpr
- srG3yYkryDJ347G3yfXF1DtF1Uur4Fqw4xu39Iqw13uFW7urn5Krn5Aw17uF4rtayrXa1a
- 93W7Cr1DursrXa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPY14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
+X-CM-TRANSID: zQCowADHz5uOSOtjHFQsBQ--.41555S10
+X-Coremail-Antispam: 1UD129KBjvdXoW7Xw48tF4xuF47tF4rCr43trb_yoWkXwb_ur
+ Z7WF1xXryxZrZrKa93CrnxAFy8urZ5Kr4ktw4kt3yY9ry8Gry3Cw1ktF1kJryYyws8Zrna
+ vrsIyry3Xrs8ujkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbDAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
+ IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
+ F7xvwVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
  1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0D
  M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
  v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
@@ -66,53 +66,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2023 08:38:52 -0000
+X-List-Received-Date: Tue, 14 Feb 2023 08:38:53 -0000
 
-Add dependence chain:
-*  V => Zve64d => Zve64f => Zve32f => F
-*  V => Zve64d => D
+Zve64f depends on Zve32f, so we can only check Zve32f
+in these cases
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 ---
- target/riscv/cpu.c | 21 ++++++++++++++++++---
- 1 file changed, 18 insertions(+), 3 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 9a89bea2a3..4797ef9c42 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -743,12 +743,27 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index bbb5c3a7b5..6f7ecf1a68 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -173,9 +173,7 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
+ {
+     TCGv s1, dst;
+ 
+-    if (!require_rvv(s) ||
+-        !(has_ext(s, RVV) || s->cfg_ptr->ext_zve32f ||
+-          s->cfg_ptr->ext_zve64f)) {
++    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32f) {
+         return false;
      }
  
--    if (cpu->cfg.ext_v && !cpu->cfg.ext_d) {
--        error_setg(errp, "V extension requires D extension");
-+    /* The V vector extension depends on the Zve64d extension */
-+    if (cpu->cfg.ext_v) {
-+        cpu->cfg.ext_zve64d = true;
-+    }
-+
-+    /* The Zve64d extension depends on the Zve64f extension */
-+    if (cpu->cfg.ext_zve64d) {
-+        cpu->cfg.ext_zve64f = true;
-+    }
-+
-+    /* The Zve64f extension depends on the Zve32f extension */
-+    if (cpu->cfg.ext_zve64f) {
-+        cpu->cfg.ext_zve32f = true;
-+    }
-+
-+    if (cpu->cfg.ext_zve64d && !cpu->cfg.ext_d) {
-+        error_setg(errp, "Zve64d extensions require D extension");
-         return;
+@@ -210,9 +208,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
+ {
+     TCGv dst;
+ 
+-    if (!require_rvv(s) ||
+-        !(has_ext(s, RVV) || s->cfg_ptr->ext_zve32f ||
+-          s->cfg_ptr->ext_zve64f)) {
++    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32f) {
+         return false;
      }
  
--    if ((cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) && !cpu->cfg.ext_f) {
-+    if (cpu->cfg.ext_zve32f && !cpu->cfg.ext_f) {
-         error_setg(errp, "Zve32f/Zve64f extensions require F extension");
-         return;
-     }
 -- 
 2.25.1
 
