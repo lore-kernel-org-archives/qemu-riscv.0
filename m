@@ -1,80 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRuCT-0001yB-6I
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 07:14:21 -0500
+	id 1pRvFT-0008GX-9f
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 08:21:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pRuCS-0001xl-3a
- for qemu-riscv@nongnu.org; Tue, 14 Feb 2023 07:14:20 -0500
-Received: from mail-oa1-x36.google.com ([2001:4860:4864:20::36])
+ id 1pRvFQ-0008Ef-07
+ for qemu-riscv@nongnu.org; Tue, 14 Feb 2023 08:21:28 -0500
+Received: from mail-ot1-x332.google.com ([2607:f8b0:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pRuCQ-0000nq-Hv
- for qemu-riscv@nongnu.org; Tue, 14 Feb 2023 07:14:19 -0500
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-169ba826189so18752458fac.2
- for <qemu-riscv@nongnu.org>; Tue, 14 Feb 2023 04:14:18 -0800 (PST)
+ id 1pRvFN-0005eq-1M
+ for qemu-riscv@nongnu.org; Tue, 14 Feb 2023 08:21:27 -0500
+Received: by mail-ot1-x332.google.com with SMTP id
+ p24-20020a056830131800b0068d4b30536aso4641164otq.9
+ for <qemu-riscv@nongnu.org>; Tue, 14 Feb 2023 05:21:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=OZOkaOiqRtXu0wImNTXGwdwY/sVxnMfYUwR+1RIU3+M=;
- b=QS3ycB2HlYmygMxZ3lLhIS53WrTPtRzunS1sFqDzCWP9oSRopwg7Deq0m8SmyoWx0H
- dM92GodkgEL/O8334icINs/7WAqDPP+Dck0wIzOyu/qUbsEXkwIGUv79dZ3iAENm1f9M
- SemUpgcSmSQ7z1VTeOXG6VHiC+uzXTxykrSej6KaQeh2DnYw/EXjK5FAoIcNxhT8S0bN
- /iXtqUTqZJGP7QRPVCl+PJFYXXTDWa08kVEZTL//m2fkj5QYPUwwb3yoTwGzCWs3CopK
- bB9anjCbgpm8r4Q0MAduavwQTaWx7ozXWYROe5OY2VPgGu9XjgIni8GbFTWXvEM9+Un7
- 8+2w==
+ bh=SR4hpjofavkRpILzrdxX4rJrMw98WfBm0lbuzcqR8io=;
+ b=AyJWWjWOimR+ABqxHYlEfA964hn1rVaa12RgHnik5ynmPH5RYgskGPUKFpmMMxwCI5
+ mACv3hv/ihESmfY+UBCAEtaChu3JLlR3m2/oYtrWL3HSCgp/OklRgfnasg5XoYzp9WQs
+ Qz41BN6QazjUhFRgC40elPXwna1bABfeB5qadgsCUBqNpVNL68H2mwiPZLwcmh4wFBvH
+ Wq+//jSJd60rdZuB3vePrWZtAu9NFDdbLTv7SPkvQ9mGkgpUvOcm8hMNPHDT7yfcynuu
+ vCp56j0S8uM9z+AhpfxRkeO8X8L8MMrgISsLdtDrutlZuxxLTD139ZT3qcQWOBNqEu2G
+ Emug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OZOkaOiqRtXu0wImNTXGwdwY/sVxnMfYUwR+1RIU3+M=;
- b=dJ9LLP6LJkQAy3JhIkTqcQ3jW3ofx7P71haSUPbanXnIwIrPFpzjROHRpcCYgRf4tE
- xg8gG5JNyxo0dPovCyJZdwh05WTChhc4170tHa7lFL1dvWmlTbX8r7wBaE6eJgnH1e/c
- W9opR/Iorb4tLxGvxk/32/ujrzzKaidGpcjwH6nu4Zki/+jA8ZNxaN0EK5oRazrPNrMf
- onauJx/Zf145+1RXPFLlKhegsNgnWTdGjFY3n8FqweN2BRwFtGemurJdNiPBdZTHCPY/
- JTK8WF7cjiid/Fg6LRAUrDke2Pu6gcyqGqXXuPdgvfLfl/WUpKDgn6LuayQVdLuETMU3
- pNIg==
-X-Gm-Message-State: AO0yUKUWet42/jjn+OOOOrxmSWpwAOmJ+5gkiCsNOuYJ+wy07EIgO1l/
- MYjqomrNx0jZO33YWwR0UFFCrA==
-X-Google-Smtp-Source: AK7set8W6DMEN/+dW3xXk+QesdmoQpJHP8aaAM8ufpwsLskFC2C7P1A+gV8f1UzNrs+SUYgufkl1qg==
-X-Received: by 2002:a05:6871:8b:b0:16e:1aeb:d74b with SMTP id
- u11-20020a056871008b00b0016e1aebd74bmr901653oaa.33.1676376856161; 
- Tue, 14 Feb 2023 04:14:16 -0800 (PST)
+ bh=SR4hpjofavkRpILzrdxX4rJrMw98WfBm0lbuzcqR8io=;
+ b=bBQxfhlNK/YMVQX2ezPyia4QaB6ji6vtnBe7EKS/SVz8T7p5OX+KVyl++gLHbFrkYg
+ 82m9ayLiSEXRPpR4cbPzoaVoO30rLslp8MlTfkDrd4LpRaahC44RiCsPDOd5+PDXRx7a
+ Mwq90b5l8vjymfUUF1PdiGRe/XtwjK18uf3T3cBxwIqW7VMbYcaTuGB0ml9PRErasH78
+ aVPTL8qMBxZOI6rGh8Tm6YkvMFhtRLYi6/iZ5dK+NtaMyzF7XmUemot09KWUhj+K8UqF
+ 5VfcofIuhq0i8bcvq6lIc+2amLPkLZkoOK0g65x2r8R+R2GJxq4QRaOPoWeeRj/ts2gF
+ iwfA==
+X-Gm-Message-State: AO0yUKWf+RokAB6Msmu3896fiP/pHlsVPmbFY3s1ko2xQeqxMw5ywWwT
+ fbEHxypnBiw16IFnVYsgTxdlAg==
+X-Google-Smtp-Source: AK7set/lwm/fjhJNuaUnJ2ZCR+r1Ob/Dvrc+s6YSd+op24YONl2CQAti9It2S8YPfs/MkFfKwIQsUw==
+X-Received: by 2002:a9d:5d13:0:b0:68b:906b:178a with SMTP id
+ b19-20020a9d5d13000000b0068b906b178amr929713oti.2.1676380868882; 
+ Tue, 14 Feb 2023 05:21:08 -0800 (PST)
 Received: from [192.168.68.107] ([191.19.40.109])
  by smtp.gmail.com with ESMTPSA id
- l22-20020a056870d4d600b0016e210ae4e6sm1152135oai.24.2023.02.14.04.14.13
+ x14-20020a9d628e000000b006863ccbf067sm6261869otk.74.2023.02.14.05.21.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Feb 2023 04:14:15 -0800 (PST)
-Message-ID: <4aa40803-b1c4-bf4d-3ddc-458e8f1d0538@ventanamicro.com>
-Date: Tue, 14 Feb 2023 09:14:12 -0300
+ Tue, 14 Feb 2023 05:21:08 -0800 (PST)
+Message-ID: <78ccde8a-4bbb-d000-de5b-dcb00a65a070@ventanamicro.com>
+Date: Tue, 14 Feb 2023 10:21:04 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.1
-Subject: Re: [Patch 04/14] target/riscv: Add cfg properties for Zv* extension
+Subject: Re: [Patch 05/14] target/riscv: Fix relationship between V, Zve*, F
+ and D
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20230214083833.44205-1-liweiwei@iscas.ac.cn>
- <20230214083833.44205-5-liweiwei@iscas.ac.cn>
+ <20230214083833.44205-6-liweiwei@iscas.ac.cn>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230214083833.44205-5-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230214083833.44205-6-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2001:4860:4864:20::36;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::332;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x332.google.com
 X-Spam_score_int: -24
 X-Spam_score: -2.5
 X-Spam_bar: --
 X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.35,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,38 +88,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2023 12:14:20 -0000
+X-List-Received-Date: Tue, 14 Feb 2023 13:21:29 -0000
 
 
 
 On 2/14/23 05:38, Weiwei Li wrote:
-> Add properties for Zve64d,Zvfh,Zvfhmin extension
-
-"for Zve64d,Zvfh,Zvfhmin extensions."
-
+> Add dependence chain:
+> *  V => Zve64d => Zve64f => Zve32f => F
+> *  V => Zve64d => D
 > 
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 > ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/cpu.h | 3 +++
->   1 file changed, 3 insertions(+)
+>   target/riscv/cpu.c | 21 ++++++++++++++++++---
+>   1 file changed, 18 insertions(+), 3 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 7128438d8e..54c6875617 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -462,7 +462,10 @@ struct RISCVCPUConfig {
->       bool ext_zhinxmin;
->       bool ext_zve32f;
->       bool ext_zve64f;
-> +    bool ext_zve64d;
->       bool ext_zmmul;
-> +    bool ext_zvfh;
-> +    bool ext_zvfhmin;
->       bool ext_smaia;
->       bool ext_ssaia;
->       bool ext_sscofpmf;
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 9a89bea2a3..4797ef9c42 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -743,12 +743,27 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>           return;
+>       }
+>   
+> -    if (cpu->cfg.ext_v && !cpu->cfg.ext_d) {
+> -        error_setg(errp, "V extension requires D extension");
+> +    /* The V vector extension depends on the Zve64d extension */
+> +    if (cpu->cfg.ext_v) {
+> +        cpu->cfg.ext_zve64d = true;
+> +    }
+> +
+> +    /* The Zve64d extension depends on the Zve64f extension */
+> +    if (cpu->cfg.ext_zve64d) {
+> +        cpu->cfg.ext_zve64f = true;
+> +    }
+> +
+> +    /* The Zve64f extension depends on the Zve32f extension */
+> +    if (cpu->cfg.ext_zve64f) {
+> +        cpu->cfg.ext_zve32f = true;
+> +    }
+> +
+> +    if (cpu->cfg.ext_zve64d && !cpu->cfg.ext_d) {
+> +        error_setg(errp, "Zve64d extensions require D extension");
+>           return;
+
+I'll be honest and confess that I wrote a short essay about the problems I have
+with this code. I gave up because in the end it's all stuff that we've been doing
+for a long time in riscv_cpu_validate_set_extensions(). I'll see if I can work in
+a redesign of that function and in how we're setting extensions automatically
+without checking user input and so on.
+
+For now I'll say that this error message seems weird because Zve64d was set to true
+without user input. So this ends up happening:
+
+$ ./qemu-system-riscv64 -M virt -cpu rv64,v=true,d=false
+qemu-system-riscv64: Zve64d extensions require D extension
+
+It's weird because the user didn't enabled Zve64d but the error message is complaining
+about it. Given that the root cause is that ext_v was set, and then we've set other
+extensions under the hood, a saner error message in this case would be "V extension
+requires D extension".
+
+
+Thanks,
+
+
+Daniel
+
+
+
+>       }
+>   
+> -    if ((cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) && !cpu->cfg.ext_f) {
+> +    if (cpu->cfg.ext_zve32f && !cpu->cfg.ext_f) {
+>           error_setg(errp, "Zve32f/Zve64f extensions require F extension");
+>           return;
+>       }
 
