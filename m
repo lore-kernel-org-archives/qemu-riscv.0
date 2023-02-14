@@ -1,19 +1,19 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRr01-0008QE-21
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 03:49:19 -0500
+	id 1pRr0w-0000oB-Rs
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 03:50:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pRqzn-0008G5-1P; Tue, 14 Feb 2023 03:49:09 -0500
+ id 1pRr0u-0000no-N0; Tue, 14 Feb 2023 03:50:12 -0500
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pRqzk-0008Jf-1N; Tue, 14 Feb 2023 03:49:02 -0500
+ id 1pRr0s-0000CT-21; Tue, 14 Feb 2023 03:50:12 -0500
 Received: from [192.168.0.119] (unknown [114.95.238.225])
- by APP-05 (Coremail) with SMTP id zQCowACnrJjsSutjhIwsBQ--.41664S2;
- Tue, 14 Feb 2023 16:48:45 +0800 (CST)
-Message-ID: <4cb6521a-e3e6-1c1d-c71f-4ec5400850ef@iscas.ac.cn>
-Date: Tue, 14 Feb 2023 16:48:44 +0800
+ by APP-05 (Coremail) with SMTP id zQCowABnbPA8S+tjCJIsBQ--.43298S2;
+ Tue, 14 Feb 2023 16:50:04 +0800 (CST)
+Message-ID: <957db726-1ecd-b561-318e-afd1dfc43c7f@iscas.ac.cn>
+Date: Tue, 14 Feb 2023 16:50:04 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.1
@@ -22,19 +22,20 @@ Cc: liweiwei@iscas.ac.cn, Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
-Subject: Re: [PATCH 06/18] target/riscv: Use 'bool' type for read_only
+Subject: Re: [PATCH 07/18] target/riscv: Simplify {read,write}_pmpcfg() a
+ little bit
 Content-Language: en-US
 To: Bin Meng <bmeng@tinylab.org>, qemu-devel@nongnu.org
 References: <20230213180215.1524938-1-bmeng@tinylab.org>
- <20230213180215.1524938-7-bmeng@tinylab.org>
+ <20230213180215.1524938-8-bmeng@tinylab.org>
 From: weiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230213180215.1524938-7-bmeng@tinylab.org>
+In-Reply-To: <20230213180215.1524938-8-bmeng@tinylab.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: zQCowACnrJjsSutjhIwsBQ--.41664S2
-X-Coremail-Antispam: 1UD129KBjvdXoWrtw18JFy7ZF4UGw4xAFy8Grg_yoWfWFc_GF
- 4SgFySg3y8W3Za9a4DA34rZFy3Kr40kr1YyFsrtrWv9FWDWr9rA34kKrWkZw45Cws7J3Z7
- C3s7Xa9FkF12vjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+X-CM-TRANSID: zQCowABnbPA8S+tjCJIsBQ--.43298S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrtF1UAF47Zr1xCFy5uF4kZwb_yoWkArg_Gr
+ 40gFWrXrZruwsa9a4DAr95ZFWftr4vkr17KF1xtrWUGry8Wr97Aasav3s5trWY93WxWFsx
+ Can7Zay2kF13ujkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
  9fnUUIcSsGvfJTRUUUb4AFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
  6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
  A2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j
@@ -70,12 +71,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2023 08:49:11 -0000
+X-List-Received-Date: Tue, 14 Feb 2023 08:50:13 -0000
 
 
 On 2023/2/14 02:02, Bin Meng wrote:
-> The read_only variable is currently declared as an 'int', but it
-> should really be a 'bool'.
+> Use the register index that has already been calculated in the
+> pmpcfg_csr_{read,write} call.
 >
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
@@ -84,21 +85,30 @@ Regards,
 Weiwei Li
 > ---
 >
->   target/riscv/csr.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   target/riscv/csr.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 >
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index cc74819759..8bbc75cbfa 100644
+> index 8bbc75cbfa..da3b770894 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -3778,7 +3778,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
->                                                  RISCVCPU *cpu)
->   {
->       /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
-> -    int read_only = get_field(csrno, 0xC00) == 3;
-> +    bool read_only = get_field(csrno, 0xC00) == 3;
->       int csr_min_priv = csr_ops[csrno].min_priv_ver;
+> @@ -3363,7 +3363,7 @@ static RISCVException read_pmpcfg(CPURISCVState *env, int csrno,
+>       if (!check_pmp_reg_index(env, reg_index)) {
+>           return RISCV_EXCP_ILLEGAL_INST;
+>       }
+> -    *val = pmpcfg_csr_read(env, csrno - CSR_PMPCFG0);
+> +    *val = pmpcfg_csr_read(env, reg_index);
+>       return RISCV_EXCP_NONE;
+>   }
 >   
->       /* ensure the CSR extension is enabled. */
+> @@ -3375,7 +3375,7 @@ static RISCVException write_pmpcfg(CPURISCVState *env, int csrno,
+>       if (!check_pmp_reg_index(env, reg_index)) {
+>           return RISCV_EXCP_ILLEGAL_INST;
+>       }
+> -    pmpcfg_csr_write(env, csrno - CSR_PMPCFG0, val);
+> +    pmpcfg_csr_write(env, reg_index, val);
+>       return RISCV_EXCP_NONE;
+>   }
+>   
 
 
