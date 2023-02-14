@@ -1,81 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pRpEm-0000yI-Qi
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 01:56:25 -0500
+	id 1pRqpx-00007h-3g
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 03:38:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pRpEh-0000wB-Jr
- for qemu-riscv@nongnu.org; Tue, 14 Feb 2023 01:56:21 -0500
-Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pRpEf-0000JS-1z
- for qemu-riscv@nongnu.org; Tue, 14 Feb 2023 01:56:19 -0500
-Received: by mail-ej1-x633.google.com with SMTP id mc25so331899ejb.13
- for <qemu-riscv@nongnu.org>; Mon, 13 Feb 2023 22:56:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=m46y6athCHx8Qm/4ueMq0G4R/wGjNzLAm9EuzU4Kp24=;
- b=covBJt7zqcrOOWsifT/KfHdyo739+oKnGQOPsgowaN/4e6zIYjBF2sFNw5aGubuOZQ
- jCW7r7e4KQVhoz7mwmvwtop0slZ0seaMi/UKQfnM/zkMRiu3bP+/E1JHQoaM35hZ/XJs
- pK6fq70WT8VwZoORGOokQ4VY2tjZyQePD6VfwmA18Jp/y+c6gQrDz+FPdLeb6J+FVFaz
- MU8mH6oGyNQuriDvExaynSbItfD410eAqoi1Ny+0i0gDXo5z0I3jR13ZAWyWiFWt9xor
- GsiY9Az1+Fmq3jVguVy1UMugPsDuxtTMu5q9cIx5kx+TO2HLBxWQW8zW6Rhc8jR+ARSn
- 4i3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m46y6athCHx8Qm/4ueMq0G4R/wGjNzLAm9EuzU4Kp24=;
- b=EvPsEeN/YqSm+azobc5yEsplz4hWJS+Q05Znudr3AvJLMP0mAwd6rPucEwh59aSAhA
- SHIJnxcgmVenqZqjjjugwaH0hFEgH/ZCb2b+kL3fVYQxzxOletgQ+HcN6H1bwE/dbilS
- HXmT1v6EbXWvY/8h6Lrbs5o1ueb+bYeV+tZzcXm18C4qXtCv6PWOd6ARhWWCTtkjZxl+
- rvenHep6oOdh60GmCL/ufVp7lWEcsrQKB5AB/DU7keFBxO7iDblS6BYY25i4U6W8NPe9
- GnUEjbXPjz3JjqmaEUWXihTwe8zYg0Dg68T56GSv68Y9PHvj6muvYDSWEei4r/Om7Xfo
- P2gg==
-X-Gm-Message-State: AO0yUKWQbfJGle9aZL/eo+LCNX1EAirx/syT4izxvWgrHtVvajIom1mL
- ZH7M1bT5eQMyVQGl9LBd8BYNyA==
-X-Google-Smtp-Source: AK7set/7Jmgkd3p88JSU3JTEccO37Y0ib3KBRNUACJGLgExHtiqUff5bSb39DzyK3/TSZDVYPN3Zjw==
-X-Received: by 2002:a17:906:a846:b0:882:82b3:58bc with SMTP id
- dx6-20020a170906a84600b0088282b358bcmr1785672ejb.65.1676357774643; 
- Mon, 13 Feb 2023 22:56:14 -0800 (PST)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
- by smtp.gmail.com with ESMTPSA id
- r20-20020a170906705400b0087bd4e34eb8sm7776042ejj.203.2023.02.13.22.56.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Feb 2023 22:56:14 -0800 (PST)
-Date: Tue, 14 Feb 2023 07:56:12 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>
-Subject: Re: [PATCH V2 04/10] hw/riscv/virt: virt-acpi-build.c: Add basic
- ACPI tables
-Message-ID: <20230214065612.4yown5cacay5txhp@orel>
-References: <20230213144038.2547584-1-sunilvl@ventanamicro.com>
- <20230213144038.2547584-5-sunilvl@ventanamicro.com>
- <9e7edd02-aa8e-c146-d67c-aa255a8aa6e5@ventanamicro.com>
- <Y+sDYFI+ku5/S1+J@sunil-laptop>
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pRqpu-00005h-ID; Tue, 14 Feb 2023 03:38:50 -0500
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pRqpr-0001rc-Nw; Tue, 14 Feb 2023 03:38:50 -0500
+Received: from localhost.localdomain (unknown [114.95.238.225])
+ by APP-05 (Coremail) with SMTP id zQCowADHz5uOSOtjHFQsBQ--.41555S9;
+ Tue, 14 Feb 2023 16:38:43 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [Patch 07/14] target/riscv: Indent fixes in cpu.c
+Date: Tue, 14 Feb 2023 16:38:26 +0800
+Message-Id: <20230214083833.44205-8-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230214083833.44205-1-liweiwei@iscas.ac.cn>
+References: <20230214083833.44205-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <Y+sDYFI+ku5/S1+J@sunil-laptop>
-Received-SPF: pass client-ip=2a00:1450:4864:20::633;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x633.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: zQCowADHz5uOSOtjHFQsBQ--.41555S9
+X-Coremail-Antispam: 1UD129KBjvJXoWxZF15WF1xWr1rXrWDGF43trb_yoW5Jw45pr
+ sxG34SkF9rtw17X3yfXF1Ut3W5GrySqa1xK393Zw1kCF4fCrs8Jr9FkF1S9FW7JFn5GFWa
+ gw1UZFn8uw4DJa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPF14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
+ 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
+ IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
+ M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
+ kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
+ 14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIx
+ kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAF
+ wI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
+ W8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOBTY
+ UUUUU
+X-Originating-IP: [114.95.238.225]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,27 +66,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2023 06:56:22 -0000
+X-List-Received-Date: Tue, 14 Feb 2023 08:38:50 -0000
 
-On Tue, Feb 14, 2023 at 09:13:28AM +0530, Sunil V L wrote:
-> On Mon, Feb 13, 2023 at 03:48:04PM -0300, Daniel Henrique Barboza wrote:
-> > Sunil,
-> > 
-> > This patch is a bit confusing to me. You're using functions that doesn't exist
-> > in the code base yet (build_madt and build_rhct) because they are introduced
-> > in later patches. This also means that this patch is not being compiled tested,
-> > because otherwise it would throw a compile error. And the build of the file only
-> > happens after patch 8.
-> > 
-> My intention was to add the caller also in the same patch where the
-> function is added. I think I missed it when I split. Thanks!
->
+Fix indent problems in vector related check
 
-Before posting a series I try to remember to do the following check
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+---
+ target/riscv/cpu.c | 44 ++++++++++++++++++++++----------------------
+ 1 file changed, 22 insertions(+), 22 deletions(-)
 
-$ ./configure ...
-$ git rebase -i -x 'make -j' $BASE_COMMIT_FOR_SERIES
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 8fe76707a0..73711d392d 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -798,7 +798,7 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         }
+         if (cpu->cfg.ext_f) {
+             error_setg(errp,
+-                "Zfinx cannot be supported together with F extension");
++                       "Zfinx cannot be supported together with F extension");
+             return;
+         }
+     }
+@@ -861,40 +861,40 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         ext |= RVV;
+         if (!is_power_of_2(cpu->cfg.vlen)) {
+             error_setg(errp,
+-                    "Vector extension VLEN must be power of 2");
++                       "Vector extension VLEN must be power of 2");
+             return;
+         }
+         if (cpu->cfg.vlen > RV_VLEN_MAX || cpu->cfg.vlen < 128) {
+             error_setg(errp,
+-                    "Vector extension implementation only supports VLEN "
+-                    "in the range [128, %d]", RV_VLEN_MAX);
++                       "Vector extension implementation only supports VLEN "
++                       "in the range [128, %d]", RV_VLEN_MAX);
+             return;
+         }
+         if (!is_power_of_2(cpu->cfg.elen)) {
+             error_setg(errp,
+-                    "Vector extension ELEN must be power of 2");
++                       "Vector extension ELEN must be power of 2");
+             return;
+         }
+-    if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
+-        error_setg(errp,
+-                "Vector extension implementation only supports ELEN "
+-                "in the range [8, 64]");
+-        return;
+-    }
+-    if (cpu->cfg.vext_spec) {
+-        if (!g_strcmp0(cpu->cfg.vext_spec, "v1.0")) {
+-            vext_version = VEXT_VERSION_1_00_0;
+-        } else {
++        if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
+             error_setg(errp,
+-                   "Unsupported vector spec version '%s'",
+-                   cpu->cfg.vext_spec);
++                       "Vector extension implementation only supports ELEN "
++                       "in the range [8, 64]");
+             return;
+         }
+-    } else {
+-        qemu_log("vector version is not specified, "
+-                 "use the default value v1.0\n");
+-    }
+-    set_vext_version(env, vext_version);
++        if (cpu->cfg.vext_spec) {
++            if (!g_strcmp0(cpu->cfg.vext_spec, "v1.0")) {
++                vext_version = VEXT_VERSION_1_00_0;
++            } else {
++                error_setg(errp,
++                           "Unsupported vector spec version '%s'",
++                           cpu->cfg.vext_spec);
++                return;
++            }
++        } else {
++            qemu_log("vector version is not specified, "
++                     "use the default value v1.0\n");
++        }
++        set_vext_version(env, vext_version);
+     }
+     if (cpu->cfg.ext_j) {
+         ext |= RVJ;
+-- 
+2.25.1
 
-Thanks,
-drew
 
