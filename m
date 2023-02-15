@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSHje-0007NL-GD
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 08:22:10 -0500
+	id 1pSHlX-0008RW-0y
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 08:24:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pSHjc-0007Mo-O5
- for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:22:08 -0500
+ id 1pSHlV-0008R3-8E
+ for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:24:05 -0500
 Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pSHja-00054M-NN
- for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:22:08 -0500
-Received: by mail-wr1-x42e.google.com with SMTP id l2so2501034wry.0
- for <qemu-riscv@nongnu.org>; Wed, 15 Feb 2023 05:22:06 -0800 (PST)
+ id 1pSHlT-0005di-IO
+ for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:24:04 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id bu23so19120166wrb.8
+ for <qemu-riscv@nongnu.org>; Wed, 15 Feb 2023 05:24:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=U2yNbmHnzRXnwG5xOMUF+gH4FpuIR/jPtcW7kYTN014=;
- b=Wc4ADkGaKDfZvW+0uCvxTO76JdfqENPdS3UGSE0wvQ4tWOvEeHzq+wzFGk0PRDIlFJ
- GEach2Zg3YKWepkjsba05qxvpzvreycXT5thWdkPpSx3n9VlME0VL8xEUPbs1Yzd+TCh
- sEieesUNglyZG9c9zoakr5Nwy6/HeVARNm2Ki3Yg53LKaOevGhkb1Hpq1svH/92c7Q2J
- z4bofh+Ez+Gk4Yp4Rue/pn3jCYUywnf8SJworFWD7jlVsgGQ9bqsCI93FP/sqCI2bydx
- YCEp0ljLicJsvWLste+xblwOR8yxWCp7LW2kG7cSCNVN4Re1wZo0QbQUnaIlWV0Mxptk
- g8gA==
+ bh=mqPc8AytlXNsKR7etzLKAjM93QRl+g6WGs1zRmxWT5c=;
+ b=LzALQyReD7dlO8MfOKsyCzpBGIr92KiG6l4QHsBiej3aT3mjzifBqsSVFXvOq8e2Ag
+ NoMsAiRl+JUVbTrK+2vI2urXqPwu9i2QXTjL0dbhhRy+DeU+IdjM+mOzvY6StzNfLVlS
+ GE+l4e5nNwbBqijuDD4gKA1APvFXcxuB7AZd5QTAa5E6Hu1YEL7pJnDmsi2PheezP8en
+ 3CQtf+qtZSBdvphkIZ6JYao04lcbq6NlQ/w3aX5NJtTvebN4wTMTtHuRHGwx1ebdqXDq
+ o5OD9ofi19apNpoge68E9CliPRO5Kq3Q0Z2KM4Iw8x13B9iXhuQKLCUG5lOgxwWk/ut2
+ c7CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U2yNbmHnzRXnwG5xOMUF+gH4FpuIR/jPtcW7kYTN014=;
- b=wManPTA/GLCZMEz+RbUYUIu0PpnpHaWQyKl2ctQZcNAJ3S7mVZUqYzStXdp5oAHCfb
- JOdfK+Cd+qlSNqi4OwGdgdRsljiENfZNYsnc7H6G7j1r7219Z6YioEUCm3ayoUiQFWAi
- oDod7sEW6F1AIDdFOd7MSPki4EUN/TzFbexCr8t3BTvUNAEUzKW+H6JrHQkc3kBUQN3f
- nZvxH1gKg06kjmA7twDPBl3Nx+1emFqaWnjXMJX4BZnyh08Ck6ge+hnxB3qA4R6av4GY
- SisFEnqlyrn3DtDlF6QUI47YP9bFNRH+8hU9/dbTcRYCsoAB4Tk0ID/zw46T5hCN/7gH
- wv2A==
-X-Gm-Message-State: AO0yUKXifp1mPsw5fNiacRd1VRt9J4/N7GQrBE7FySOcMXBVWyvDMAgH
- ZBQ8JL6seJzl6JDEbfXlBqHE1A==
-X-Google-Smtp-Source: AK7set+E1IMUkHkzfaLOSQFCH7lqyqsr+PaNx7VayVvpBGg3ipes1zWaopgqRCjPKDsLjuu1ul6Umg==
-X-Received: by 2002:adf:e94a:0:b0:2bf:963a:f266 with SMTP id
- m10-20020adfe94a000000b002bf963af266mr1792578wrn.27.1676467324956; 
- Wed, 15 Feb 2023 05:22:04 -0800 (PST)
+ bh=mqPc8AytlXNsKR7etzLKAjM93QRl+g6WGs1zRmxWT5c=;
+ b=Xc3zKXH5tUuLy282uoXNCZcdfb7yFgI4FoYi4ICePGyxXj4017EoU2rplCLCg0oBjs
+ S4bpLwgczfH4TmKC4sZicFa8aD9brDkLxI0P4t8T9z2hyRFDOVBPG6ophOkdkzCHz7g6
+ y8HqxD74L6yobUXzu2l3q2LY8ezSHDSGvYVUABFufi82ABO7nx5Ur0xXkDHKWspjH19H
+ n7apF43BmRZeJBgRNN8JkIb2wGPKyIzseQPUAnn+cilVcOrn2+md8OLajR7U1ugyhLzW
+ eJi3ZDhpMsIZFrp9JP2g3tWhWAn+kKty1CFrBDOj9+EP1OYPko7yOQZpTz2KbSvKow7V
+ pvCA==
+X-Gm-Message-State: AO0yUKW0Y880Feo8Mkmm8gHL1WJkxEM9RlhC4QauAxiFIy2DJnCkmfQb
+ FdBPrSuZx1uhMGA3zZRKKW0sig==
+X-Google-Smtp-Source: AK7set9DH/deerxOzeSvl5a8jh+Z+LCerW8KPasMFC5XzuCCApykGrXbxZ6kn7hpI4ohoL2CnmsxPA==
+X-Received: by 2002:adf:e651:0:b0:2c5:5b0e:6ee9 with SMTP id
+ b17-20020adfe651000000b002c55b0e6ee9mr1825279wrn.39.1676467441964; 
+ Wed, 15 Feb 2023 05:24:01 -0800 (PST)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
  [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- d13-20020adfe88d000000b002c54f4d0f71sm10518672wrm.38.2023.02.15.05.22.04
+ a9-20020a056000100900b002c5598c14acsm7069838wrx.6.2023.02.15.05.24.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Feb 2023 05:22:04 -0800 (PST)
-Date: Wed, 15 Feb 2023 14:22:03 +0100
+ Wed, 15 Feb 2023 05:24:01 -0800 (PST)
+Date: Wed, 15 Feb 2023 14:24:00 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Sunil V L <sunilvl@ventanamicro.com>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -56,15 +56,16 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>,
  Atish Kumar Patra <atishp@rivosinc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: Re: [PATCH V2 06/10] hw/riscv/virt: virt-acpi-build.c: Add RHCT Table
-Message-ID: <20230215132203.grt3y3ujfpm6smww@orel>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Bin Meng <bmeng@tinylab.org>
+Subject: Re: [PATCH V2 07/10] hw/riscv: meson.build: Build virt-acpi-build.c
+Message-ID: <20230215132400.p4dcrjzwxi6mlljz@orel>
 References: <20230213144038.2547584-1-sunilvl@ventanamicro.com>
- <20230213144038.2547584-7-sunilvl@ventanamicro.com>
+ <20230213144038.2547584-8-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230213144038.2547584-7-sunilvl@ventanamicro.com>
+In-Reply-To: <20230213144038.2547584-8-sunilvl@ventanamicro.com>
 Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
  envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
@@ -73,7 +74,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,134 +87,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2023 13:22:09 -0000
+X-List-Received-Date: Wed, 15 Feb 2023 13:24:05 -0000
 
-On Mon, Feb 13, 2023 at 08:10:34PM +0530, Sunil V L wrote:
-> RISC-V ACPI platforms need to provide RISC-V Hart Capabilities
-> Table (RHCT). Add this to the ACPI tables.
+On Mon, Feb 13, 2023 at 08:10:35PM +0530, Sunil V L wrote:
+> ACPI functions are defined in new file virt-acpi-build.c. Enable
+> it to be built as part of virt machine if CONFIG_ACPI is set.
 > 
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> Reviewed-by: Bin Meng <bmeng@tinylab.org>
 > ---
->  hw/riscv/virt-acpi-build.c | 62 ++++++++++++++++++++++++++++++++++++++
->  1 file changed, 62 insertions(+)
+>  hw/riscv/meson.build | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index f54e3fb731..a2054f79a8 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -35,6 +35,7 @@
->  #include "hw/pci-host/gpex.h"
->  #include "qapi/error.h"
->  #include "migration/vmstate.h"
-> +#include "hw/intc/riscv_aclint.h"
+> diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+> index ab6cae57ea..2f7ee81be3 100644
+> --- a/hw/riscv/meson.build
+> +++ b/hw/riscv/meson.build
+> @@ -9,5 +9,6 @@ riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
+>  riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
+>  riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
+>  riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
+> +riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
 >  
->  #define ACPI_BUILD_TABLE_SIZE             0x20000
->  
-> @@ -85,6 +86,67 @@ acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_memmap)
->      aml_append(scope, dev);
->  }
->  
-> +#define RHCT_NODE_ARRAY_OFFSET 56
-> +static void
-> +build_rhct(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
-> +{
-> +    MachineState *ms = MACHINE(s);
-> +    uint32_t acpi_proc_id = 0;
-> +    int i, socket;
-> +    RISCVCPU *cpu;
-> +    char *isa;
-> +    size_t len, aligned_len;
-> +    uint32_t isa_offset, num_rhct_nodes;
-> +
-> +    AcpiTable table = { .sig = "RHCT", .rev = 1, .oem_id = s->oem_id,
-> +                        .oem_table_id = s->oem_table_id };
-> +
-> +    acpi_table_begin(&table, table_data);
-> +
-> +    build_append_int_noprefix(table_data, 0x0, 4);   /* Reserved */
-> +    build_append_int_noprefix(table_data,
-> +                              RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, 8);
-
-Need "Time Base Frequency" comment.
-
-> +
-> +    /* ISA + N hart info */
-> +    num_rhct_nodes = 1 + ms->smp.cpus;
-> +    build_append_int_noprefix(table_data, num_rhct_nodes, 4);
-
-/* Number of RHCT nodes */
-
-> +    build_append_int_noprefix(table_data, RHCT_NODE_ARRAY_OFFSET, 4);
-
-/* Offset to the RHCT node array */
-
-> +
-> +    /* ISA string node */
-> +    isa_offset = table_data->len - table.table_offset;
-> +    build_append_int_noprefix(table_data, 0, 2);   /* Type 0*/
-                                                               ^ need
-							       space
-> +
-> +    cpu = &s->soc[0].harts[0];
-> +    isa = riscv_isa_string(cpu);
-> +    len = 8 + strlen(isa) + 1;
-> +    aligned_len = (len % 2) ? (len + 1) : len;
-> +
-> +    build_append_int_noprefix(table_data, aligned_len, 2);   /* Total length */
-
-s/Total length/Length/
-
-> +    build_append_int_noprefix(table_data, 0x1, 2);           /* Revision */
-> +
-> +    /* ISA string length including NUL */
-
-/* ISA Length including NUL */
-
-> +    build_append_int_noprefix(table_data, strlen(isa) + 1, 2);
-> +    g_array_append_vals(table_data, isa, strlen(isa) + 1);   /* ISA string */
-> +
-> +    if (aligned_len != len) {
-> +        build_append_int_noprefix(table_data, 0x0, 1);   /* pad */
-
-s/pad/Optional Padding/
-
-> +    }
-> +
-> +    for (socket = 0; socket < riscv_socket_count(ms); socket++) {
-> +        for (i = 0; i < s->soc[socket].num_harts; i++) {
-> +            build_append_int_noprefix(table_data, 0xFFFF, 2);  /* Type */
-> +            build_append_int_noprefix(table_data, 16, 2);      /* Length */
-> +            build_append_int_noprefix(table_data, 0x1, 2);     /* Revision */
-> +            build_append_int_noprefix(table_data, 1, 2); /* number of offsets */
-
-s/number/Number/
-
-> +            build_append_int_noprefix(table_data, acpi_proc_id, 4); /* UID */
-
-ACPI Processor UID
-
-> +            build_append_int_noprefix(table_data, isa_offset, 4);
-
-/* Offsets */
-
-> +            acpi_proc_id++;
-> +        }
-> +    }
-> +
-> +    acpi_table_end(linker, &table);
-> +}
-> +
->  /* FADT */
->  static void
->  build_fadt_rev6(GArray *table_data, BIOSLinker *linker,
+>  hw_arch += {'riscv': riscv_ss}
 > -- 
 > 2.34.1
 >
 
-Other than getting the comments to match the spec fields,
-
 Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-
-Thanks,
-drew
 
