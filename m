@@ -1,59 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSFsf-0000fY-L2
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 06:23:21 -0500
+	id 1pSFsg-0000gL-0s
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 06:23:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pSFsa-0000bg-Sb; Wed, 15 Feb 2023 06:23:17 -0500
-Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
+ id 1pSFsO-0000YM-7t; Wed, 15 Feb 2023 06:23:06 -0500
+Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pSFsY-0000kQ-Ag; Wed, 15 Feb 2023 06:23:15 -0500
-Received: by mail-ed1-x52b.google.com with SMTP id d40so20298019eda.8;
- Wed, 15 Feb 2023 03:23:10 -0800 (PST)
+ id 1pSFsM-0000iq-3j; Wed, 15 Feb 2023 06:23:03 -0500
+Received: by mail-ej1-x62e.google.com with SMTP id qb15so45301794ejc.1;
+ Wed, 15 Feb 2023 03:23:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hAvXoVczJG6syLQqfxMmtbVn0jNx1tQcZCLTdIT7E08=;
- b=aBvkBgjVr285axh2AX/45DC4cfqDsvdAlA3BxA0DWpcZ+X2aXPzK8Vtu60IXrMQIxc
- eeWjvv+ReR/XKoH0dyrznLlh7duXm6N5CJOT2TP2As3ftu3DCgO3LdyjFQh+kgbYQrTf
- NvUiup0VxUUPezjhERuQKMO6cmJTRJJkqF87GtJNyZF6YUHNzdyUSmsn6Ix8F6mlHBbR
- jGg+F+HArMiw6QJmD6RJDY/Tn2nWgG2kGsJZx1HU7v2CdHj9ntUrwQKJlwquF6wVfOJr
- MNDi96GvT3F6jjIy8JzLUsS1XEoVdPk0VczTCQ/gfE1652vURAdATNacAChK/A/OYU4P
- 9LIQ==
+ bh=uJaeQlrZk0neU+uq7mI/mMDgAF9mMrQ9u+w9OyhDT2U=;
+ b=Ih+YUWOWTT82P47N1ZsWvdxAtkrbQpqUUmDIyZhPVGoGVXOB7pOhrvb3hwP2qI8qyn
+ P8VBL/uFW34mJEir2EsfVS0v8LzoBOf8opr/c6QayuiqwM++fEQl6sboh5W59eH9IZy7
+ DoASCKk2a1Ayit7/QvGbLfnTybwgUTMDYR6LvFXhVtEHG07jbD8Ds3gjQtMssUDfg1n6
+ C2bTL54MJZJI8RgPJC7ax8NGhYEwclZ9H7SVQ5o8cUYfKpcysgA1MArPFPa2Isic0lBc
+ rfz4pbPpzbbD/TfDdVE68SMr9VgN5IqRvdj3XJUkChY599qHnheKTYjqgjGbgIbgN0fz
+ saaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hAvXoVczJG6syLQqfxMmtbVn0jNx1tQcZCLTdIT7E08=;
- b=pnPTbAi1VsXLxknQwBrah03vMtPiqfVFBXvozT87b95jcUxCrhio4OYpVKU6O4KapH
- fksUTLAOpG7YcA4wClrL5OsCqYtwY/V195kKh6nQKOo+nQX1R405OG+ldzzYy15Dgg7D
- xq+ugVtAGgZvTPOzaTmTvcpmWALmKyrvFhFKoVRZHlNvO88HXAofJf8ohIx+Byyyckuv
- OC56MkE6HXiBT1UPERAJosSWfjQOXaoax8LNiW8OBijE+wKj0NKbhG3s47OsbDORjXYD
- hTqojUVXpN5bUhmZ9p+wE/jEbaCNkC3IPmfT1iAVIDERXRpf2bZL+iSs0fZbRFH2fhU0
- fMYQ==
-X-Gm-Message-State: AO0yUKXXuFJizU1FhdzDgHZEwLxJlzEexu+7ojAfvxZBXO21SYjE6KDL
- xuImpqe5fvqlsRnBikNApTwZe21qfiuU6TCyxTI=
-X-Google-Smtp-Source: AK7set/KhAw0Y/jsC08fo1qiBo1tCRLehErLiAJHyezI0Pg+VL+qXQEMizI3zlehCpicSE68d6H7mbecXnYQukSVUvs=
-X-Received: by 2002:a50:d653:0:b0:4ac:b618:7fb1 with SMTP id
- c19-20020a50d653000000b004acb6187fb1mr842417edj.6.1676460189463; Wed, 15 Feb
- 2023 03:23:09 -0800 (PST)
+ bh=uJaeQlrZk0neU+uq7mI/mMDgAF9mMrQ9u+w9OyhDT2U=;
+ b=lx6p6tgd8RXbLQOzyiNtYmYTSAowz/59laVfB3VEOAyA0UaUsqzfEjYnS+QrQLxzp/
+ 4liBilhFeNifPTqRvAALLq9ZniRJ6kgDWeqkBywlgOHYmselW37VpyYhkWfoSskczek9
+ MQkVux2kUEWmRHrqv5Dy/wrQmJPkOatvg9D5TW1u/9MVuOaFkASyxdvC5IPdH/kQAS8n
+ eksQphj4WBE6NToeUV89yDiIwPP7qnlb4XlCD9oHy/RotQCyCD6c4PJExPBp0QglyL65
+ T80H30R7pjOB1xqa/LMnV/pX9R5h+QxL6npvvRP36t9DchauS2OLiZViOeBHU9ddM93i
+ O6pw==
+X-Gm-Message-State: AO0yUKXSs2B6/h5aF3n7kSS3We0zCCWjVZ41iSGu2EadBLU/0P+P7EMW
+ tcs1/t1p1g1wWX4UkhQx/0gfrFEEnzt4+ACumOU=
+X-Google-Smtp-Source: AK7set9T9k4ABahVfk0G4EZkuYdgb6uHg6shr7eZYu1tyTkrxGqDz/97pdMODGmKjOxmraRsnDMoTmoYsF2l6DfQEHk=
+X-Received: by 2002:a17:906:e219:b0:8af:2e89:83df with SMTP id
+ gf25-20020a170906e21900b008af2e8983dfmr1139731ejb.6.1676460180471; Wed, 15
+ Feb 2023 03:23:00 -0800 (PST)
 MIME-Version: 1.0
 References: <20230214192356.319991-1-dbarboza@ventanamicro.com>
- <20230214192356.319991-12-dbarboza@ventanamicro.com>
-In-Reply-To: <20230214192356.319991-12-dbarboza@ventanamicro.com>
+ <20230214192356.319991-9-dbarboza@ventanamicro.com>
+In-Reply-To: <20230214192356.319991-9-dbarboza@ventanamicro.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 15 Feb 2023 19:22:57 +0800
-Message-ID: <CAEUhbmWvTzj=29CASB0o2bkeJW0HTyEoKfFTL_1CaJPK6iGMvA@mail.gmail.com>
-Subject: Re: [PATCH v2 11/11] target/riscv/cpu: remove CPUArchState::features
- and friends
+Date: Wed, 15 Feb 2023 19:22:48 +0800
+Message-ID: <CAEUhbmWwn5+Uf_HHBbEjNzRiGfpa8rXsSQ8=coz=M=GxapMLHA@mail.gmail.com>
+Subject: Re: [PATCH v2 08/11] target/riscv: remove RISCV_FEATURE_PMP
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x52b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -73,24 +72,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2023 11:23:19 -0000
+X-List-Received-Date: Wed, 15 Feb 2023 11:23:08 -0000
 
-On Wed, Feb 15, 2023 at 3:26 AM Daniel Henrique Barboza
+On Wed, Feb 15, 2023 at 3:25 AM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> The attribute is no longer used since we can retrieve all the enabled
-> features in the hart by using cpu->cfg instead.
->
-> Remove env->feature, riscv_feature() and riscv_set_feature(). We also
-> need to bump vmstate_riscv_cpu version_id and minimal_version_id since
-> 'features' is no longer being migrated.
+> RISCV_FEATURE_PMP is being set via riscv_set_feature() by mirroring the
+> cpu->cfg.pmp flag. Use the flag instead.
 >
 > Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  target/riscv/cpu.h     | 12 ------------
->  target/riscv/machine.c |  5 ++---
->  2 files changed, 2 insertions(+), 15 deletions(-)
+>  target/riscv/cpu.c        | 4 ----
+>  target/riscv/cpu.h        | 1 -
+>  target/riscv/cpu_helper.c | 2 +-
+>  target/riscv/csr.c        | 2 +-
+>  target/riscv/machine.c    | 3 +--
+>  target/riscv/op_helper.c  | 2 +-
+>  target/riscv/pmp.c        | 2 +-
+>  7 files changed, 5 insertions(+), 11 deletions(-)
 >
 
 Reviewed-by: Bin Meng <bmeng@tinylab.org>
