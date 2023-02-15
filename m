@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSOc1-0000ww-E6
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 15:42:45 -0500
+	id 1pSOgl-0005RE-WB
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 15:47:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1pSObx-0000wT-KA
- for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 15:42:41 -0500
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ id 1pSOgj-0005Mq-E8
+ for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 15:47:38 -0500
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1pSObv-0003tz-HT
- for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 15:42:41 -0500
-Received: by mail-ej1-x630.google.com with SMTP id t24so58161eji.4
- for <qemu-riscv@nongnu.org>; Wed, 15 Feb 2023 12:42:38 -0800 (PST)
+ id 1pSOgd-00018v-0x
+ for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 15:47:35 -0500
+Received: by mail-ed1-x530.google.com with SMTP id t16so2868555edd.10
+ for <qemu-riscv@nongnu.org>; Wed, 15 Feb 2023 12:47:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uVJMGJMG86hoex2aJFwBGgzoHEnDlLOzmlH71siWAGw=;
- b=pb7HNWYnDyOcJm9Y49ArfwRcADjiPT/LSqvWCT+pl9GiuwbODg9A7EB7D2A8ofICf/
- x9xd7np5cGrlDuWjRT6hsLBxSKfR7JJ3Ba2SHhI/75lZbYQIg4qlIDEFlVZyd1b3Hk8N
- w7F8CmJnkpisns1iAGemWZ4fImVXHwaTNLNBnXcOPKJchb7RrMUjkhkmuHwXKL9sXxLr
- MrF+/UokjeUL+Jv9TnC2S3hM+FP9cGo8R+kmeu8mfrvcLbffVHju5FYYFOoI+htqokmn
- xFSFMo2KG7bX8YWa+TY3ZSPiWCBm56I9LO10dSK5Gnbxrg8nNezKMXzyizeUqbS9+WW7
- 0Xyg==
+ bh=ngRZcV04Hjr93houMjBfj908igwE3DQvINQXBEjsS9c=;
+ b=JOwTp6l9M5pMDXujnAtNHGq0OAKJrgW6tpi5/TZ83DKlBaxW176xi1KL3wdELCWhbc
+ azShCbP/q+DBnxTyxmcvLpQ/4vv3SYkOorVwboT4eW+eAPvCHaHNMrOfH2K5W9/WgKKb
+ A0TyqkR3+JbDaHM4UyR3yYIWIqZsg7+vqEqiE227mHjbqH52QgKY1FM4ub9h5Hqt1QUN
+ C13YUhx+fS+z/egFI9by3SGUQcjtug8q8K/yQmCmryP/Zq9IFpgJY4QQyiosWfyCzGHc
+ e59XLraq/KmzL93+PbJnFz+66Y8OOihtfL7nzsgR1G7PZXw92gYbeCJpOm3A1rfw7bB8
+ O8kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uVJMGJMG86hoex2aJFwBGgzoHEnDlLOzmlH71siWAGw=;
- b=Yt6UaKiwk1pdAQIm9bbXzTur0kdmlgHAI0egmswePXXOAWCmaAHlImVBxGF5p/zuzp
- 0DKDSYHCWqd6bmT1YjgfnMtXCgpjqgsEuqGgjS168oACIocIHaJi8Ox0/r6ZVXZ8a/XT
- NhNtMTd1+Vafd5rtsVBbfSylq3i83bOASa6b1mEdGNy3ZfPggdgSk1gBp+GfgXqzFDxP
- M6gTZfFHX0dijpot0HpYc9NJnU9TTrKVhcRVe6R1tiF4ZSO5BkvHa4MbWSlVoURa7Exl
- 9/jzgrCjYxEYOj8ea33JuaXKrJecX0lLF8N/vVdvwxBJnsuTY1xorwIbD0KFZ3nF3hLT
- a2pw==
-X-Gm-Message-State: AO0yUKW6M3TW38tt43PpCIFtVUhDFTPcclR8OvHHKlIWO2pXpHoMl6u8
- +J0eIwvZmqK80bAC7Q7pnbUGoXkx5yoK9XGqH9iv0Q==
-X-Google-Smtp-Source: AK7set+UOBXwWNZfVDsg5KiqY4P995pJZeiI5BYsyVUUG9aMBGdSbT+5O/zAgPLVus0msQ3Plxmjko3zoKH0EBdjjSU=
-X-Received: by 2002:a17:906:ce49:b0:8b1:3cdf:29cd with SMTP id
- se9-20020a170906ce4900b008b13cdf29cdmr1691626ejb.6.1676493757385; Wed, 15 Feb
- 2023 12:42:37 -0800 (PST)
+ bh=ngRZcV04Hjr93houMjBfj908igwE3DQvINQXBEjsS9c=;
+ b=KLEVDfQ+XplJBO1P3D763SM2MHVIF46olmx/D3IhATbQ+Y3M9Wt6jQRJ5aN4KKHJ2g
+ 2aYTnFFK3irFRt0hbkXHHOUA1yOr49YvcmTcrEzLxEhHITrfO4fk4CayQxSUwDSlwXPr
+ 0iYqMwOi6y3Mh6psDIMW+SSlyBzv86d1Zt6dz+RxX48CwfnxFZox8K0FOK2Cg9lap9WX
+ 9ckAbKM7iMf2oTRL/vWACX4YgpxF77T57huhb3qxZmtPVOzTFyBRgyCm2ZeVEfFHOb7E
+ msHWg1WgTS74vgVYZaOijhGwyA0sgWRNB30DWK4zXiPCN55uLIcUJug/WmV2GodMBIA9
+ ybnQ==
+X-Gm-Message-State: AO0yUKVLkgyysbGdZeJZizXc2kAbIp1uoSsfP9QcuYWtOCej76AYLE+0
+ gBNKVKma5gLmf8AeQXAzZsGJizFIk4rePlHxWDGoBA==
+X-Google-Smtp-Source: AK7set//ZFkZ9UxI0utukmGuu8wYVVHMYUE6qEjqnpNEI6qn14BEsuOAYmjRxXAqxSWM+Lr4sJOcaCCSMHSuL2roPTM=
+X-Received: by 2002:a50:d741:0:b0:4aa:a4df:23fc with SMTP id
+ i1-20020a50d741000000b004aaa4df23fcmr1862175edj.1.1676494049549; Wed, 15 Feb
+ 2023 12:47:29 -0800 (PST)
 MIME-Version: 1.0
 References: <20230209062404.3582018-1-debug@rivosinc.com>
- <20230209062404.3582018-3-debug@rivosinc.com>
- <c413c4b3-166f-a1ac-7ee4-a81841ad5a9a@linux.alibaba.com>
-In-Reply-To: <c413c4b3-166f-a1ac-7ee4-a81841ad5a9a@linux.alibaba.com>
+ <20230209062404.3582018-2-debug@rivosinc.com>
+ <64a76da4-62d3-61f3-e8a8-347e3aa7eaca@linux.alibaba.com>
+In-Reply-To: <64a76da4-62d3-61f3-e8a8-347e3aa7eaca@linux.alibaba.com>
 From: Deepak Gupta <debug@rivosinc.com>
-Date: Wed, 15 Feb 2023 12:42:19 -0800
-Message-ID: <CAKC1njQ6kwD12Pqx-p=4v-jx=+EHt+v8JEU7knSafrEdN_eysg@mail.gmail.com>
-Subject: Re: [PATCH v1 RFC Zisslpcfi 2/9] target/riscv: zisslpcfi CSR, bit
- positions and other definitions
+Date: Wed, 15 Feb 2023 12:47:11 -0800
+Message-ID: <CAKC1njQEcuEO=TSkK8qzywADYGh6cFLLUKLJ4fTfULHvKPOa=w@mail.gmail.com>
+Subject: Re: [PATCH v1 RFC Zisslpcfi 1/9] target/riscv: adding zimops and
+ zisslpcfi extension to RISCV cpu config
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
@@ -59,14 +59,14 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  dbarboza@ventanamicro.com, 
  Kip Walker <kip@rivosinc.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=debug@rivosinc.com; helo=mail-ej1-x630.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=debug@rivosinc.com; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -79,187 +79,113 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2023 20:42:42 -0000
+X-List-Received-Date: Wed, 15 Feb 2023 20:47:38 -0000
 
-On Tue, Feb 14, 2023 at 7:31 PM LIU Zhiwei <zhiwei_liu@linux.alibaba.com> wrote:
+On Tue, Feb 14, 2023 at 6:52 PM LIU Zhiwei <zhiwei_liu@linux.alibaba.com> wrote:
 >
 >
 > On 2023/2/9 14:23, Deepak Gupta wrote:
-> > `zisslpcfi` extension adds two new CSRs. CSR_SSP and CSR_LPLR.
-> > - CSR_SSP: This CSR holds shadow stack pointer for current privilege mode
-> >             CSR_SSP is accessible in all modes. Each mode must establish
-> >             it's own CSR_SSP.
+> > Introducing riscv `zisslpcfi` extension to riscv target. `zisslpcfi`
+> > extension provides hardware assistance to riscv hart to enable control
+> > flow integrity (CFI) for software.
 > >
-> > - CSR_LPLR: This CSR holds label value set at the callsite by compiler.
-> >              On call target label check instructions are emitted by
-> >              compiler which check label value against value present in
-> >              CSR_LPRL.
+> > `zisslpcfi` extension expects hart to implement `zimops`. `zimops` stands
+> > for "unprivileged integer maybe operations". `zimops` carve out certain
+> > reserved opcodes encodings from integer spec to "may be operations"
+> > encodings. `zimops` opcode encodings simply move 0 to rd.
+> > `zisslpcfi` claims some of the `zimops` encodings and use them for shadow
+> > stack management or indirect branch tracking. Any future extension can
+> > also claim `zimops` encodings.
+>
+> Does  the zimops has a independent specification? If so, you should give
+> a link to this
+> specification.
+
+Actual formal documentation is still a work in progress.
+I am hoping to provide a reference to it in my next iteration.
+
+>
 > >
-> > Enabling of `zisslpcfi` is controlled via menvcfg (for S/HS/VS/U/VU) and
-> > henvcfg (for VS/VU) at bit position 60.
-> >
-> > Each mode has enable/disable bits for forward cfi. Backward cfi doesn't
-> > have separate enable/disable bits for S and M mode. User forward cfi and
-> > user backward cfi enable/disable bits are in mstatus/sstatus CSR.
-> > Supervisor forward cfi enable/disable bit are in menvcfg and henvcfg CSR.
-> > Machine mode forward cfi enable/disable bit is in mseccfg CSR.
-> >
-> > If forward cfi enabled, all indirect branches must land on a landing pad
-> > instruction (`lpcll`, introduced in later commits). CPU/hart tracks this
-> > internally using a landing pad tracker called `elp` short for `expecting
-> > landing pad`. An interrupt can occur between an indirect branch and
-> > target. If such an event occurs `elp` is saved away in mstatus/sstatus
-> > CSR
+> > This patch also adds a dependency check for `zimops` to be enabled if
+> > `zisslpcfi` is enabled on the hart.
+>
+> You should don't add two extensions in one patch. I think you should add
+> them one by one.
+> And add the zimop first.  In my opinion, you should implement the whole
+> zimop extension before
+> adding any patch for zisslpcfi, including the implementation of mop.rr
+> and mop.r.
+
+Noted will make sure of that and will send two different patch series then.
+
+>
 > >
 > > Signed-off-by: Deepak Gupta <debug@rivosinc.com>
 > > Signed-off-by: Kip Walker  <kip@rivosinc.com>
 > > ---
-> >   target/riscv/cpu.h      |  5 +++++
-> >   target/riscv/cpu_bits.h | 25 +++++++++++++++++++++++++
-> >   target/riscv/pmp.h      |  3 ++-
-> >   3 files changed, 32 insertions(+), 1 deletion(-)
+> >   target/riscv/cpu.c | 13 +++++++++++++
+> >   target/riscv/cpu.h |  2 ++
+> >   2 files changed, 15 insertions(+)
 > >
-> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > index 9a923760b2..18db61a06a 100644
-> > --- a/target/riscv/cpu.h
-> > +++ b/target/riscv/cpu.h
-> > @@ -181,6 +181,11 @@ struct CPUArchState {
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index cc75ca7667..6b4e90eb91 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -110,6 +110,8 @@ static const struct isa_ext_data isa_edata_arr[] = {
+> >       ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0, ext_svnapot),
+> >       ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt),
+> >       ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_XVentanaCondOps),
+> > +    ISA_EXT_DATA_ENTRY(zimops, true, PRIV_VERSION_1_12_0, ext_zimops),
+> > +    ISA_EXT_DATA_ENTRY(zisslpcfi, true, PRIV_VERSION_1_12_0, ext_cfi),
+> Add them one by one.
+> >   };
 > >
-> >       uint32_t features;
+> >   static bool isa_ext_is_enabled(RISCVCPU *cpu,
+> > @@ -792,6 +794,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+> >               return;
+> >           }
 > >
-> > +    /* CFI Extension user mode registers and state */
-> > +    uint32_t     lplr;
-> > +    target_ulong ssp;
-> > +    cfi_elp      elp;
->
-> I think you are coding according to the sections of the specification.
-
-Yes, pretty much.
-
-> However,  when upstream code,
-> don't add declaration or definition if you don't use it in this patch.
->
-> This patch should be split into patches where use these definitions.
-
-Noted.
->
+> > +        if (cpu->cfg.ext_cfi && !cpu->cfg.ext_zimops) {
+> > +            error_setg(errp, "Zisslpcfi extension requires Zimops extension");
+> > +            return;
+> > +        }
 > > +
-> >   #ifdef CONFIG_USER_ONLY
-> >       uint32_t elf_flags;
+> Seems reasonable for me.
+> >           /* Set the ISA extensions, checks should have happened above */
+> >           if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
+> >               cpu->cfg.ext_zhinxmin) {
+> > @@ -1102,6 +1109,12 @@ static Property riscv_cpu_properties[] = {
+> >   #ifndef CONFIG_USER_ONLY
+> >       DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVEC),
 > >   #endif
-> > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> > index 8b0d7e20ea..1663ba5775 100644
-> > --- a/target/riscv/cpu_bits.h
-> > +++ b/target/riscv/cpu_bits.h
-> > @@ -39,6 +39,10 @@
-> >
-> >   /* Control and Status Registers */
-> >
-> > +/* CFI CSRs */
-> > +#define CSR_LPLR            0x006
-> I didn't see the CSR encoding  number from the link in cover-letter.
-
-Yes, allocation is still in process. I'll ask ved (primary spec
-author) to update it.
-
-> > +#define CSR_SSP             0x020
-> > +
-> >   /* User Trap Setup */
-> >   #define CSR_USTATUS         0x000
-> >   #define CSR_UIE             0x004
-> > @@ -542,6 +546,10 @@
-> >   #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
-> >   #define MSTATUS_TW          0x00200000 /* since: priv-1.10 */
-> >   #define MSTATUS_TSR         0x00400000 /* since: priv-1.10 */
-> > +#define MSTATUS_UFCFIEN     0x00800000 /* Zisslpcfi-0.1 */
-> > +#define MSTATUS_UBCFIEN     0x01000000 /* Zisslpcfi-0.1 */
-> > +#define MSTATUS_SPELP       0x02000000 /* Zisslpcfi-0.1 */
-> > +#define MSTATUS_MPELP       0x04000000 /* Zisslpcfi-0.1 */
-> >   #define MSTATUS_GVA         0x4000000000ULL
-> >   #define MSTATUS_MPV         0x8000000000ULL
-> >
-> > @@ -572,12 +580,21 @@ typedef enum {
-> >   #define SSTATUS_XS          0x00018000
-> >   #define SSTATUS_SUM         0x00040000 /* since: priv-1.10 */
-> >   #define SSTATUS_MXR         0x00080000
-> > +#define SSTATUS_UFCFIEN     MSTATUS_UFCFIEN /* Zisslpcfi-0.1 */
-> > +#define SSTATUS_UBCFIEN     MSTATUS_UBCFIEN /* Zisslpcfi-0.1 */
-> > +#define SSTATUS_SPELP       MSTATUS_SPELP   /* Zisslpcfi-0.1 */
-> >
-> >   #define SSTATUS64_UXL       0x0000000300000000ULL
-> >
-> >   #define SSTATUS32_SD        0x80000000
-> >   #define SSTATUS64_SD        0x8000000000000000ULL
-> >
-> > +#define CFISTATUS_M_MASK    (MSTATUS_UFCFIEN | MSTATUS_UBCFIEN | \
-> > +                             MSTATUS_MPELP | MSTATUS_SPELP)
-> > +
-> > +#define CFISTATUS_S_MASK    (SSTATUS_UFCFIEN | SSTATUS_UBCFIEN | \
-> > +                             SSTATUS_SPELP)
-> Why not the VSSTATUS?
-
-It's the same mask for VSSTATUS, so pretty much using the same.
-
-> > +
-> >   /* hstatus CSR bits */
-> >   #define HSTATUS_VSBE         0x00000020
-> >   #define HSTATUS_GVA          0x00000040
-> > @@ -747,10 +764,14 @@ typedef enum RISCVException {
-> >   #define MENVCFG_CBIE                       (3UL << 4)
-> >   #define MENVCFG_CBCFE                      BIT(6)
-> >   #define MENVCFG_CBZE                       BIT(7)
-> > +#define MENVCFG_SFCFIEN                    BIT(59)
-> > +#define MENVCFG_CFI                        BIT(60)
+> > +    /*
+> > +     * Zisslpcfi CFI extension, Zisslpcfi implicitly means Zimops is
+> > +     * implemented
+> > +     */
+> > +    DEFINE_PROP_BOOL("zisslpcfi", RISCVCPU, cfg.ext_cfi, true),
+> > +    DEFINE_PROP_BOOL("zimops", RISCVCPU, cfg.ext_zimops, true),
 >
-> MENVCFG_CFIE according to the specification.  The definitions in other
-> places  should also use X_CFIE.
+> Default value should be false.
 
-Yes, it's a recent change in spec. I missed picking it up on impl.
+Yes, I have to fix this.
 
 >
-> The same comment here with Weiwei, or you can use BIT_ULL.
->
-
-Noted.
-
 > Zhiwei
 >
-> >   #define MENVCFG_PBMTE                      (1ULL << 62)
-> >   #define MENVCFG_STCE                       (1ULL << 63)
 > >
-> >   /* For RV32 */
-> > +#define MENVCFGH_SFCFIEN                   BIT(27)
-> > +#define MENVCFGH_CFI                       BIT(28)
-> >   #define MENVCFGH_PBMTE                     BIT(30)
-> >   #define MENVCFGH_STCE                      BIT(31)
+> >       DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
 > >
-> > @@ -763,10 +784,14 @@ typedef enum RISCVException {
-> >   #define HENVCFG_CBIE                       MENVCFG_CBIE
-> >   #define HENVCFG_CBCFE                      MENVCFG_CBCFE
-> >   #define HENVCFG_CBZE                       MENVCFG_CBZE
-> > +#define HENVCFG_SFCFIEN                    MENVCFG_SFCFIEN
-> > +#define HENVCFG_CFI                        MENVCFG_CFI
-> >   #define HENVCFG_PBMTE                      MENVCFG_PBMTE
-> >   #define HENVCFG_STCE                       MENVCFG_STCE
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index f5609b62a2..9a923760b2 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -471,6 +471,8 @@ struct RISCVCPUConfig {
+> >       uint32_t mvendorid;
+> >       uint64_t marchid;
+> >       uint64_t mimpid;
+> > +    bool ext_zimops;
+> > +    bool ext_cfi;
 > >
-> >   /* For RV32 */
-> > +#define HENVCFGH_SFCFIEN                    MENVCFGH_SFCFIEN
-> > +#define HENVCFGH_CFI                        MENVCFGH_CFI
-> >   #define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
-> >   #define HENVCFGH_STCE                       MENVCFGH_STCE
-> >
-> > diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-> > index da32c61c85..f5bfc4955b 100644
-> > --- a/target/riscv/pmp.h
-> > +++ b/target/riscv/pmp.h
-> > @@ -43,7 +43,8 @@ typedef enum {
-> >       MSECCFG_MMWP  = 1 << 1,
-> >       MSECCFG_RLB   = 1 << 2,
-> >       MSECCFG_USEED = 1 << 8,
-> > -    MSECCFG_SSEED = 1 << 9
-> > +    MSECCFG_SSEED = 1 << 9,
-> > +    MSECCFG_MFCFIEN =  1 << 10
-> >   } mseccfg_field_t;
-> >
-> >   typedef struct {
+> >       /* Vendor-specific custom extensions */
+> >       bool ext_XVentanaCondOps;
 
