@@ -1,66 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pS7zT-0001M9-Hz
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 21:57:51 -0500
+	id 1pS8Vt-0003Nu-Jx
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 22:31:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pS7zR-0001Lk-Cs; Tue, 14 Feb 2023 21:57:49 -0500
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pS7zN-00015N-SN; Tue, 14 Feb 2023 21:57:49 -0500
-Received: from [192.168.0.119] (unknown [114.95.238.225])
- by APP-01 (Coremail) with SMTP id qwCowADnANUfSuxjAdwpBQ--.2482S2;
- Wed, 15 Feb 2023 10:57:35 +0800 (CST)
-Message-ID: <5612a275-4902-a7e8-2f10-1f1fbd999adf@iscas.ac.cn>
-Date: Wed, 15 Feb 2023 10:57:34 +0800
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pS8Vr-0003NM-UO; Tue, 14 Feb 2023 22:31:19 -0500
+Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pS8Vo-0001vQ-6P; Tue, 14 Feb 2023 22:31:19 -0500
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045170;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0VbiRcg2_1676431867; 
+Received: from 30.221.98.44(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VbiRcg2_1676431867) by smtp.aliyun-inc.com;
+ Wed, 15 Feb 2023 11:31:08 +0800
+Message-ID: <c413c4b3-166f-a1ac-7ee4-a81841ad5a9a@linux.alibaba.com>
+Date: Wed, 15 Feb 2023 11:31:06 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Cc: liweiwei@iscas.ac.cn, qemu-devel@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
-Subject: Re: [PATCH 18/18] target/riscv: Move configuration check to envcfg
- CSRs predicate()
-To: Bin Meng <bmeng.cn@gmail.com>
-References: <20230213180215.1524938-19-bmeng@tinylab.org>
- <e0c10cb9-c83b-bb35-3041-0f388dc48267@iscas.ac.cn>
- <CAEUhbmX6Qb1aAdZC+d2F=n5qLo60XGiE3e0xTco1TgNgDxAKVg@mail.gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.2
+Subject: Re: [PATCH v1 RFC Zisslpcfi 2/9] target/riscv: zisslpcfi CSR, bit
+ positions and other definitions
 Content-Language: en-US
-From: weiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <CAEUhbmX6Qb1aAdZC+d2F=n5qLo60XGiE3e0xTco1TgNgDxAKVg@mail.gmail.com>
+To: Deepak Gupta <debug@rivosinc.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, liweiwei@iscas.ac.cn,
+ dbarboza@ventanamicro.com
+Cc: Kip Walker <kip@rivosinc.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20230209062404.3582018-1-debug@rivosinc.com>
+ <20230209062404.3582018-3-debug@rivosinc.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230209062404.3582018-3-debug@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: qwCowADnANUfSuxjAdwpBQ--.2482S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxAryDtry8Cw4fAw4fCFW7Arb_yoW5ArWfpr
- 48GanIkFykWF9Fv34ft3Z8tF13uw18Gw45ZwsrGw18Jr1qkry5Jr1DWrW3ua95ZrZ7Gw40
- vF4jkF43ur42ya7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkE14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
- 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
- 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
- 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE
- 67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrV
- AFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCI
- c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267
- AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_
- Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUdHU
- DUUUUU=
-X-Originating-IP: [114.95.238.225]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -22
-X-Spam_score: -2.3
-X-Spam_bar: --
-X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.35,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.124;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-124.freemail.mail.aliyun.com
+X-Spam_score_int: -101
+X-Spam_score: -10.2
+X-Spam_bar: ----------
+X-Spam_report: (-10.2 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.35, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,106 +57,167 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2023 02:57:49 -0000
+X-List-Received-Date: Wed, 15 Feb 2023 03:31:20 -0000
 
 
-On 2023/2/15 10:22, Bin Meng wrote:
-> On Tue, Feb 14, 2023 at 10:59 PM weiwei <liweiwei@iscas.ac.cn> wrote:
->>
->> On 2023/2/14 22:27, Bin Meng wrote:
->>> At present the envcfg CSRs predicate() routines are generic one like
->>> smode(), hmode. The configuration check is done in the read / write
->>> routine. Create a new predicate routine to cover such check, so that
->>> gdbstub can correctly report its existence.
->>>
->>> Signed-off-by: Bin Meng <bmeng@tinylab.org>
->>>
->>> ---
->>>
->>>    target/riscv/csr.c | 98 +++++++++++++++++++++++++++++-----------------
->>>    1 file changed, 61 insertions(+), 37 deletions(-)
->>>
->>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->>> index 37350b8a6d..284ccc09dd 100644
->>> --- a/target/riscv/csr.c
->>> +++ b/target/riscv/csr.c
->>> @@ -41,40 +41,6 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
->>>    }
->>>
->>>    /* Predicates */
->>> -#if !defined(CONFIG_USER_ONLY)
->>> -static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
->>> -                                       uint64_t bit)
->>> -{
->>> -    bool virt = riscv_cpu_virt_enabled(env);
->>> -    RISCVCPU *cpu = env_archcpu(env);
->>> -
->>> -    if (env->priv == PRV_M || !cpu->cfg.ext_smstateen) {
->>> -        return RISCV_EXCP_NONE;
->>> -    }
->>> -
->>> -    if (!(env->mstateen[index] & bit)) {
->>> -        return RISCV_EXCP_ILLEGAL_INST;
->>> -    }
->>> -
->>> -    if (virt) {
->>> -        if (!(env->hstateen[index] & bit)) {
->>> -            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
->>> -        }
->>> -
->>> -        if (env->priv == PRV_U && !(env->sstateen[index] & bit)) {
->>> -            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
->>> -        }
->>> -    }
->>> -
->>> -    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
->>> -        if (!(env->sstateen[index] & bit)) {
->>> -            return RISCV_EXCP_ILLEGAL_INST;
->>> -        }
->>> -    }
->>> -
->>> -    return RISCV_EXCP_NONE;
->>> -}
->>> -#endif
->>>
->>>    static RISCVException fs(CPURISCVState *env, int csrno)
->>>    {
->>> @@ -318,6 +284,32 @@ static RISCVException umode32(CPURISCVState *env, int csrno)
->>>        return umode(env, csrno);
->>>    }
->>>
->>> +static RISCVException envcfg(CPURISCVState *env, int csrno)
->>> +{
->>> +    RISCVCPU *cpu = env_archcpu(env);
->>> +    riscv_csr_predicate_fn predicate;
->>> +
->>> +    if (cpu->cfg.ext_smstateen) {
->>> +        return RISCV_EXCP_ILLEGAL_INST;
->>> +    }
->> This check seems not right here.  Why  ILLEGAL_INST is directly
->> triggered if smstateen is enabled?
-> This logic was there in the original codes. I was confused when I
-> looked at this as well.
-
-Sorry, I didn't find the original codes. Do you mean this:
-
-     if (env->priv == PRV_M || !cpu->cfg.ext_smstateen) {
-         return RISCV_EXCP_NONE;
-     }
-
-If so, I think the check here is to make the following *stateen related
-check ignored when smstateen extension is disabled.
-
-Regards,
-
-Weiwei Li
-
-> Anyway, if it is an issue, it should be a separate patch.
+On 2023/2/9 14:23, Deepak Gupta wrote:
+> `zisslpcfi` extension adds two new CSRs. CSR_SSP and CSR_LPLR.
+> - CSR_SSP: This CSR holds shadow stack pointer for current privilege mode
+>             CSR_SSP is accessible in all modes. Each mode must establish
+>             it's own CSR_SSP.
 >
->> It seems that smstateen related check will be done  for
->> senvcfg/henvcfg{h} when smstateen is enabled.
->>
-> Regards,
-> Bin
+> - CSR_LPLR: This CSR holds label value set at the callsite by compiler.
+>              On call target label check instructions are emitted by
+>              compiler which check label value against value present in
+>              CSR_LPRL.
+>
+> Enabling of `zisslpcfi` is controlled via menvcfg (for S/HS/VS/U/VU) and
+> henvcfg (for VS/VU) at bit position 60.
+>
+> Each mode has enable/disable bits for forward cfi. Backward cfi doesn't
+> have separate enable/disable bits for S and M mode. User forward cfi and
+> user backward cfi enable/disable bits are in mstatus/sstatus CSR.
+> Supervisor forward cfi enable/disable bit are in menvcfg and henvcfg CSR.
+> Machine mode forward cfi enable/disable bit is in mseccfg CSR.
+>
+> If forward cfi enabled, all indirect branches must land on a landing pad
+> instruction (`lpcll`, introduced in later commits). CPU/hart tracks this
+> internally using a landing pad tracker called `elp` short for `expecting
+> landing pad`. An interrupt can occur between an indirect branch and
+> target. If such an event occurs `elp` is saved away in mstatus/sstatus
+> CSR
+>
+> Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+> Signed-off-by: Kip Walker  <kip@rivosinc.com>
+> ---
+>   target/riscv/cpu.h      |  5 +++++
+>   target/riscv/cpu_bits.h | 25 +++++++++++++++++++++++++
+>   target/riscv/pmp.h      |  3 ++-
+>   3 files changed, 32 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 9a923760b2..18db61a06a 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -181,6 +181,11 @@ struct CPUArchState {
+>   
+>       uint32_t features;
+>   
+> +    /* CFI Extension user mode registers and state */
+> +    uint32_t     lplr;
+> +    target_ulong ssp;
+> +    cfi_elp      elp;
 
+I think you are coding according the sections of the specification. 
+However,  when upstream code,
+don't add declaration or definition if you don't use it in this patch.
+
+This patch should be split into patches where use these definitions.
+
+> +
+>   #ifdef CONFIG_USER_ONLY
+>       uint32_t elf_flags;
+>   #endif
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 8b0d7e20ea..1663ba5775 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -39,6 +39,10 @@
+>   
+>   /* Control and Status Registers */
+>   
+> +/* CFI CSRs */
+> +#define CSR_LPLR            0x006
+I didn't see the CSR encoding  number from the link in cover-letter.
+> +#define CSR_SSP             0x020
+> +
+>   /* User Trap Setup */
+>   #define CSR_USTATUS         0x000
+>   #define CSR_UIE             0x004
+> @@ -542,6 +546,10 @@
+>   #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
+>   #define MSTATUS_TW          0x00200000 /* since: priv-1.10 */
+>   #define MSTATUS_TSR         0x00400000 /* since: priv-1.10 */
+> +#define MSTATUS_UFCFIEN     0x00800000 /* Zisslpcfi-0.1 */
+> +#define MSTATUS_UBCFIEN     0x01000000 /* Zisslpcfi-0.1 */
+> +#define MSTATUS_SPELP       0x02000000 /* Zisslpcfi-0.1 */
+> +#define MSTATUS_MPELP       0x04000000 /* Zisslpcfi-0.1 */
+>   #define MSTATUS_GVA         0x4000000000ULL
+>   #define MSTATUS_MPV         0x8000000000ULL
+>   
+> @@ -572,12 +580,21 @@ typedef enum {
+>   #define SSTATUS_XS          0x00018000
+>   #define SSTATUS_SUM         0x00040000 /* since: priv-1.10 */
+>   #define SSTATUS_MXR         0x00080000
+> +#define SSTATUS_UFCFIEN     MSTATUS_UFCFIEN /* Zisslpcfi-0.1 */
+> +#define SSTATUS_UBCFIEN     MSTATUS_UBCFIEN /* Zisslpcfi-0.1 */
+> +#define SSTATUS_SPELP       MSTATUS_SPELP   /* Zisslpcfi-0.1 */
+>   
+>   #define SSTATUS64_UXL       0x0000000300000000ULL
+>   
+>   #define SSTATUS32_SD        0x80000000
+>   #define SSTATUS64_SD        0x8000000000000000ULL
+>   
+> +#define CFISTATUS_M_MASK    (MSTATUS_UFCFIEN | MSTATUS_UBCFIEN | \
+> +                             MSTATUS_MPELP | MSTATUS_SPELP)
+> +
+> +#define CFISTATUS_S_MASK    (SSTATUS_UFCFIEN | SSTATUS_UBCFIEN | \
+> +                             SSTATUS_SPELP)
+Why not the VSSTATUS?
+> +
+>   /* hstatus CSR bits */
+>   #define HSTATUS_VSBE         0x00000020
+>   #define HSTATUS_GVA          0x00000040
+> @@ -747,10 +764,14 @@ typedef enum RISCVException {
+>   #define MENVCFG_CBIE                       (3UL << 4)
+>   #define MENVCFG_CBCFE                      BIT(6)
+>   #define MENVCFG_CBZE                       BIT(7)
+> +#define MENVCFG_SFCFIEN                    BIT(59)
+> +#define MENVCFG_CFI                        BIT(60)
+
+MENVCFG_CFIE according to the specification.  The definitions in other 
+places  should also use X_CFIE.
+
+The same comment here with Weiwei, or you can use BIT_ULL.
+
+Zhiwei
+
+>   #define MENVCFG_PBMTE                      (1ULL << 62)
+>   #define MENVCFG_STCE                       (1ULL << 63)
+>   
+>   /* For RV32 */
+> +#define MENVCFGH_SFCFIEN                   BIT(27)
+> +#define MENVCFGH_CFI                       BIT(28)
+>   #define MENVCFGH_PBMTE                     BIT(30)
+>   #define MENVCFGH_STCE                      BIT(31)
+>   
+> @@ -763,10 +784,14 @@ typedef enum RISCVException {
+>   #define HENVCFG_CBIE                       MENVCFG_CBIE
+>   #define HENVCFG_CBCFE                      MENVCFG_CBCFE
+>   #define HENVCFG_CBZE                       MENVCFG_CBZE
+> +#define HENVCFG_SFCFIEN                    MENVCFG_SFCFIEN
+> +#define HENVCFG_CFI                        MENVCFG_CFI
+>   #define HENVCFG_PBMTE                      MENVCFG_PBMTE
+>   #define HENVCFG_STCE                       MENVCFG_STCE
+>   
+>   /* For RV32 */
+> +#define HENVCFGH_SFCFIEN                    MENVCFGH_SFCFIEN
+> +#define HENVCFGH_CFI                        MENVCFGH_CFI
+>   #define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
+>   #define HENVCFGH_STCE                       MENVCFGH_STCE
+>   
+> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+> index da32c61c85..f5bfc4955b 100644
+> --- a/target/riscv/pmp.h
+> +++ b/target/riscv/pmp.h
+> @@ -43,7 +43,8 @@ typedef enum {
+>       MSECCFG_MMWP  = 1 << 1,
+>       MSECCFG_RLB   = 1 << 2,
+>       MSECCFG_USEED = 1 << 8,
+> -    MSECCFG_SSEED = 1 << 9
+> +    MSECCFG_SSEED = 1 << 9,
+> +    MSECCFG_MFCFIEN =  1 << 10
+>   } mseccfg_field_t;
+>   
+>   typedef struct {
 
