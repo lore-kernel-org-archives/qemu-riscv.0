@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pS7I1-0002lO-RI
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 21:12:57 -0500
+	id 1pS7I3-0002mE-Id
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 21:12:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pS7I1-0002l1-3k; Tue, 14 Feb 2023 21:12:57 -0500
+ id 1pS7I1-0002l2-CY; Tue, 14 Feb 2023 21:12:57 -0500
 Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pS7Hy-0004pI-Db; Tue, 14 Feb 2023 21:12:56 -0500
+ id 1pS7Hy-0004pT-D5; Tue, 14 Feb 2023 21:12:56 -0500
 Received: from localhost.localdomain (unknown [114.95.238.225])
- by APP-01 (Coremail) with SMTP id qwCowABXcNT4PexjNkcoBQ--.2339S15;
- Wed, 15 Feb 2023 10:05:54 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowABXcNT4PexjNkcoBQ--.2339S14;
+ Wed, 15 Feb 2023 10:05:53 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,19 +19,19 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v2 13/14] target/riscv: Simplify check for EEW = 64 in
- trans_rvv.c.inc
-Date: Wed, 15 Feb 2023 10:05:38 +0800
-Message-Id: <20230215020539.4788-14-liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 12/14] target/riscv: Fix check for vector load/store
+ instructions when EEW=64
+Date: Wed, 15 Feb 2023 10:05:37 +0800
+Message-Id: <20230215020539.4788-13-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230215020539.4788-1-liweiwei@iscas.ac.cn>
 References: <20230215020539.4788-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowABXcNT4PexjNkcoBQ--.2339S15
-X-Coremail-Antispam: 1UD129KBjvJXoWxJryUJryrKr4rWryrKw1xKrg_yoW8ur13pw
- 4rCrWxur4DtFWfuwnakr4jqF1Yy3yrKry7Ka4jv3Z5Xa95Xr48uan0qws3tr4UXFyFqFy0
- kF4YyF15Zr42va7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: qwCowABXcNT4PexjNkcoBQ--.2339S14
+X-Coremail-Antispam: 1UD129KBjvJXoW7ZFyfKF4rAr45uFW7CF43GFg_yoW8Gr1kpr
+ 4S9ry7Kr98JFyxu390ka1UAw43KFWrK3y8tw4vy3Z8XFW3trsavFs8tF17ta4kJFWY9ry0
+ 9a1qvFy3Za1ava7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUUPv14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
@@ -69,60 +69,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 15 Feb 2023 02:12:57 -0000
 
-Only V extension supports EEW = 64 in these cases: Zve64* extensions don't
-support EEW = 64 in these cases as commented before the check.
+The V extension supports all vector load and store instructions except
+the V extension does not support EEW=64 for index values when XLEN=32.
+(Section 18.3)
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 12 ++++--------
- 1 file changed, 4 insertions(+), 8 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 5dbdce073b..fc0d0d60e8 100644
+index 9b2c5c9ac0..5dbdce073b 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1998,8 +1998,7 @@ static bool vmulh_vv_check(DisasContext *s, arg_rmrr *a)
-      * are not included for EEW=64 in Zve64*. (Section 18.2)
-      */
-     return opivv_check(s, a) &&
--           (!has_ext(s, RVV) &&
--            s->cfg_ptr->ext_zve64f ? s->sew != MO_64 : true);
-+           (!has_ext(s, RVV) ? s->sew != MO_64 : true);
- }
+@@ -287,13 +287,12 @@ static bool vext_check_st_index(DisasContext *s, int vd, int vs2, int nf,
+                require_nf(vd, nf, s->lmul);
  
- static bool vmulh_vx_check(DisasContext *s, arg_rmrr *a)
-@@ -2012,8 +2011,7 @@ static bool vmulh_vx_check(DisasContext *s, arg_rmrr *a)
-      * are not included for EEW=64 in Zve64*. (Section 18.2)
+     /*
+-     * All Zve* extensions support all vector load and store instructions,
+-     * except Zve64* extensions do not support EEW=64 for index values
+-     * when XLEN=32. (Section 18.2)
++     * V extension supports all vector load and store instructions,
++     * except V extension does not support EEW=64 for index values
++     * when XLEN=32. (Section 18.3)
       */
-     return opivx_check(s, a) &&
--           (!has_ext(s, RVV) &&
--            s->cfg_ptr->ext_zve64f ? s->sew != MO_64 : true);
-+           (!has_ext(s, RVV) ? s->sew != MO_64 : true);
- }
+     if (get_xl(s) == MXL_RV32) {
+-        ret &= (!has_ext(s, RVV) &&
+-                s->cfg_ptr->ext_zve64f ? eew != MO_64 : true);
++        ret &= (eew != MO_64);
+     }
  
- GEN_OPIVV_GVEC_TRANS(vmul_vv,  mul)
-@@ -2230,8 +2228,7 @@ static bool vsmul_vv_check(DisasContext *s, arg_rmrr *a)
-      * for EEW=64 in Zve64*. (Section 18.2)
-      */
-     return opivv_check(s, a) &&
--           (!has_ext(s, RVV) &&
--            s->cfg_ptr->ext_zve64f ? s->sew != MO_64 : true);
-+           (!has_ext(s, RVV) ? s->sew != MO_64 : true);
- }
- 
- static bool vsmul_vx_check(DisasContext *s, arg_rmrr *a)
-@@ -2242,8 +2239,7 @@ static bool vsmul_vx_check(DisasContext *s, arg_rmrr *a)
-      * for EEW=64 in Zve64*. (Section 18.2)
-      */
-     return opivx_check(s, a) &&
--           (!has_ext(s, RVV) &&
--            s->cfg_ptr->ext_zve64f ? s->sew != MO_64 : true);
-+           (!has_ext(s, RVV) ? s->sew != MO_64 : true);
- }
- 
- GEN_OPIVV_TRANS(vsmul_vv, vsmul_vv_check)
+     return ret;
 -- 
 2.25.1
 
