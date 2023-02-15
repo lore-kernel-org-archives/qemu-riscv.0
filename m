@@ -1,81 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSISM-0007R8-BJ
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 09:08:22 -0500
+	id 1pSMyI-0007c2-O9
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 13:57:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pSISK-0007Qb-QE
- for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 09:08:20 -0500
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pSMyG-0007ae-IG
+ for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 13:57:36 -0500
+Received: from mail-oi1-x236.google.com ([2607:f8b0:4864:20::236])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pSISJ-00019H-DH
- for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 09:08:20 -0500
-Received: by mail-pl1-x635.google.com with SMTP id d8so19121891plr.10
- for <qemu-riscv@nongnu.org>; Wed, 15 Feb 2023 06:08:19 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pSMyE-0007vG-K9
+ for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 13:57:36 -0500
+Received: by mail-oi1-x236.google.com with SMTP id bd6so16640654oib.6
+ for <qemu-riscv@nongnu.org>; Wed, 15 Feb 2023 10:57:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uxWV3VwCM6YMLpTbdsEoc0XSuDWmcRMPT8GxlUKRo7o=;
- b=aV0o53KupfLYKYv3Gk1nagDJdDa0lLQp/Ktir5n3SnoEDQeOtD64k8mWindsdGlN6O
- oQDsgXv+0Vsf47vgYYy8LwZJw03BRWubs9D2piKe0WCQxguARYTMyVzEIsK0dDmNE/Ls
- 1q2WncWwPrMVfCrL+eevTa11t0zOnzhtAcyExsuwahR6SjyCXzyH8KlUs3G2Po+tQoTL
- K8BnTZmu34/5H2DOElpHKOJbeUpbzqkLJ4Yb8yiGWNfhkcL4Cj/vI6oal8VWr6EAbvXK
- Uff9HhC4596D/R8ywfOoK5QlC6q3nlFCJM31ThwBvEsyYSILktUWfRWGBwFy1rsbXx6d
- 3Ijg==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9OPZU49O81ubGxfHmiTW1rLsPMfddY7U/bKWmj7uiPk=;
+ b=lek92tHcuS9C6LeHSGTaVhlllmtnBAv+C411vKq2lolV3cRKCGDtlzrMZhe4dKGY8C
+ BlIM/EhnELZuho13toM1cbOeMQLYT7gusYQpllLbC7N0bM3F2KI3IUXpcT51NewOOcq1
+ 7fl4Kr/QmeaW1xfrDfnBMmCyXFrzOPLA45QE2035KW2W2difmgpTjgSzvajGlUTkk51M
+ tmnOW03gYi+zgeyyJrXat9yPnJui+ixONc2urACOtl/1Jn+L/0FUR3awH1bYyXsFlW6k
+ Jq3DuX269Qo9YdCYcrG1l/o52rKpoMNuq/5wAdXqHWnrovFoq3MXDOXNwZuDgvWPn4tr
+ i/kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uxWV3VwCM6YMLpTbdsEoc0XSuDWmcRMPT8GxlUKRo7o=;
- b=xf2FdhioG9gq1RiiNBl6bRwfgTZGgqsPoYTqKkySGlahMNbre/9yhBv1lA/HwpmDRF
- R0Wg3y9zARvtt6QWAeY1Vnac4oOPIgAhYigzCR5iu8yLPISCk82vO8qjUfpIh8UUcpyt
- uqIfi8NCCDYf/ycpd6mFjoApMq4xEmOOQXrzSAA4NxaFwcCKbWP/2fLSlU4zb+L4bBnh
- +PRl/Hb+9NuLPDeiB5BlJc6GuWNkHX37FzJgHDl0lPt6pQErrl8uTq4i4Fcyq2RsX8BJ
- q11OILzImU3OcHDI5tDJqrA4H/6m3x2OE1FH8wJIKJ7gCo7f/GgErb2L26otz75GEmvM
- 1oqg==
-X-Gm-Message-State: AO0yUKVqOeQBdfJ2qX8ttv+4dS/lNpPydbxqllKcg7vNiudg9mmGu+ww
- rKNDj/K9c7+7+uEKh7j5HTDmug==
-X-Google-Smtp-Source: AK7set/xNnzb8c1Ll2PhCCH79IwH9CINRBpAosFxzbrHDJq48b86kbns22vXIWywAN2D7rVkqTMi5g==
-X-Received: by 2002:a17:90b:1bcc:b0:233:be7b:e71c with SMTP id
- oa12-20020a17090b1bcc00b00233be7be71cmr3091545pjb.5.1676470097961; 
- Wed, 15 Feb 2023 06:08:17 -0800 (PST)
-Received: from sunil-laptop ([49.206.14.226]) by smtp.gmail.com with ESMTPSA id
- e17-20020a17090ab39100b00233e8a83853sm1501870pjr.34.2023.02.15.06.08.13
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9OPZU49O81ubGxfHmiTW1rLsPMfddY7U/bKWmj7uiPk=;
+ b=OiE0B3Pdy+Ug+8MDCYWL8+37EFZ/wl8JVkmjPbphzj+eTlJdxeSxElFX68sAAmvXK0
+ 7j0d84hLtKqEGPHe8nDfw5wG8700oilXFuPJyKxmCWFVohBrImpKrVFDeCckCnDP+uQL
+ EW/s0DiDT3yZxA6du1L4mKEoaWrXD9BNaq3wQ4OZagQynFWAg8YZJDWst252xUOT/EAE
+ RhESLY9vKHMrc/dwR+mMAEAlFpVm+zS868hZQWT/InDG8A0gAcu0PJmpgaPD5VYC7sCN
+ RO24xlB3p9dVhGPM9hbuX+sA2vhNPsZp530/HlL7CivroQedlgiWziwD4aP/ho+HmOuv
+ JW9w==
+X-Gm-Message-State: AO0yUKXFjQ3lDT0Sv5sXh/M69KANNAZ4ogyzhSb1KPAtrT8iQt4+6zsE
+ lOZXXn23mgSXCNqnMSFjZjY9/Q==
+X-Google-Smtp-Source: AK7set8b2rlhX348pEVZwAiyiNzbr5WsrF+1U3Q2/yLAxIP8qV2deCSRxw+yqnkPELl5t3fXWkIcFA==
+X-Received: by 2002:a05:6808:6198:b0:37a:fcd6:5c09 with SMTP id
+ dn24-20020a056808619800b0037afcd65c09mr1040712oib.49.1676487452214; 
+ Wed, 15 Feb 2023 10:57:32 -0800 (PST)
+Received: from grind.dc1.ventanamicro.com ([191.19.40.109])
+ by smtp.gmail.com with ESMTPSA id
+ c21-20020a056808139500b0037d8dbe4308sm4145697oiw.48.2023.02.15.10.57.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Feb 2023 06:08:17 -0800 (PST)
-Date: Wed, 15 Feb 2023 19:38:10 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>
-Subject: Re: [PATCH V2 04/10] hw/riscv/virt: virt-acpi-build.c: Add basic
- ACPI tables
-Message-ID: <Y+znStpBMx35sSop@sunil-laptop>
-References: <20230213144038.2547584-1-sunilvl@ventanamicro.com>
- <20230213144038.2547584-5-sunilvl@ventanamicro.com>
- <9e7edd02-aa8e-c146-d67c-aa255a8aa6e5@ventanamicro.com>
- <Y+sDYFI+ku5/S1+J@sunil-laptop>
- <b5c4fb24-7bd2-a853-4116-58af222bbcad@ventanamicro.com>
+ Wed, 15 Feb 2023 10:57:31 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v3 00/10] enable write_misa() and RISCV_FEATURE_* cleanups
+Date: Wed, 15 Feb 2023 15:57:16 -0300
+Message-Id: <20230215185726.691759-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b5c4fb24-7bd2-a853-4116-58af222bbcad@ventanamicro.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x635.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::236;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x236.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,25 +79,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2023 14:08:21 -0000
+X-List-Received-Date: Wed, 15 Feb 2023 18:57:36 -0000
 
-On Tue, Feb 14, 2023 at 05:44:44AM -0300, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 2/14/23 00:43, Sunil V L wrote:
-> > On Mon, Feb 13, 2023 at 03:48:04PM -0300, Daniel Henrique Barboza wrote:
-> 
-> Nah. Doing that now will make this series rely on acks for every other ACPI arch to
-> push the RISC-V side.
-> 
-> Let's make this happen as is now to get ACPI in RISC-V working. We can think about
-> reducing overall ACPI duplication later. IMO it's enough for now to, mention in this
-> commit msg, which bits of the arm64 virt-acpi-build.c you changed for this RISC-V
-> version.
-> 
+Hi,
 
-Okay. Thanks!. Will update the commit message and send the V3 soon.
+In this new version the most notable change was in the write_misa()
+logic. I decided to follow Bin's suggestion and removed the verification
+at the start of the function.
 
-Thanks
-Sunil
+As the result, the patch that removes RISCV_FEATURE_MISA was merged with
+the patch that makes this change (patch 2).
+
+I also removed the v2 acks from it since the patch now does something
+different than before. Patch 2 is also the only patch that is missing
+acks.
+
+
+Changes from v2:
+- all patches but patch 2 are acked/reviewed
+- patch 2:
+  - remove the RISCV_FEATURE_MISA validation from write_misa()
+- v2 link: https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg03934.html
+
+
+Daniel Henrique Barboza (10):
+  target/riscv: do not mask unsupported QEMU extensions in write_misa()
+  target/riscv: always allow write_misa() to write MISA
+  target/riscv: introduce riscv_cpu_cfg()
+  target/riscv: remove RISCV_FEATURE_DEBUG
+  target/riscv/cpu.c: error out if EPMP is enabled without PMP
+  target/riscv: remove RISCV_FEATURE_EPMP
+  target/riscv: remove RISCV_FEATURE_PMP
+  hw/riscv/virt.c: do not use RISCV_FEATURE_MMU in
+    create_fdt_socket_cpus()
+  target/riscv: remove RISCV_FEATURE_MMU
+  target/riscv/cpu: remove CPUArchState::features and friends
+
+ hw/riscv/virt.c           |  7 ++++---
+ target/riscv/cpu.c        | 19 ++++---------------
+ target/riscv/cpu.h        | 28 +++++-----------------------
+ target/riscv/cpu_helper.c |  6 +++---
+ target/riscv/csr.c        | 18 +++++-------------
+ target/riscv/machine.c    | 11 ++++-------
+ target/riscv/monitor.c    |  2 +-
+ target/riscv/op_helper.c  |  2 +-
+ target/riscv/pmp.c        |  8 ++++----
+ 9 files changed, 31 insertions(+), 70 deletions(-)
+
+-- 
+2.39.1
+
 
