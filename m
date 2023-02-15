@@ -1,59 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pS7I4-0002mf-F1
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 21:13:00 -0500
+	id 1pS7RP-0007nx-DD
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 21:22:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pS7I2-0002li-Bj; Tue, 14 Feb 2023 21:12:58 -0500
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pS7Hy-0004pL-Eb; Tue, 14 Feb 2023 21:12:58 -0500
-Received: from localhost.localdomain (unknown [114.95.238.225])
- by APP-01 (Coremail) with SMTP id qwCowABXcNT4PexjNkcoBQ--.2339S10;
- Wed, 15 Feb 2023 10:05:51 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v2 08/14] target/riscv: Simplify check for Zve32f and Zve64f
-Date: Wed, 15 Feb 2023 10:05:33 +0800
-Message-Id: <20230215020539.4788-9-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230215020539.4788-1-liweiwei@iscas.ac.cn>
-References: <20230215020539.4788-1-liweiwei@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pS7RN-0007nZ-6b; Tue, 14 Feb 2023 21:22:37 -0500
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pS7RK-0000L9-Cq; Tue, 14 Feb 2023 21:22:36 -0500
+Received: by mail-ej1-x62a.google.com with SMTP id mc25so7373193ejb.13;
+ Tue, 14 Feb 2023 18:22:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1T6xQeXcykUPkMe9CK3angKeDaq6b04UtRqXSCinhv0=;
+ b=WuHJqiPvEBQ7Neh/XGtnY0PwHTm9fsvVAb89NXlaFUj6KRDB/dx+4mtnoPG1Vwdwpn
+ wp3KIqnOa9TsdbtoYf3ZksqoFlpfYX1lDpu2oienpS+kn+gB9ypzicR+gEo5EMJIg5Vf
+ AJWMoVILSAwbbcZUgJg4JF/jAla3UzkwsFiz0bFTDm9VbrZ5yU+E1pdId1+RUI5BiYDw
+ MPbYl4PSJxdhtF0362j0oJCtsCZKaNzfnf/z4nAmNXLGLm9MWnEELABKkdo1IoPe+S3j
+ t1oSSJHjh5snMKdkTlFwOS1b3ZjC/jxiuWyTpPyyX8zLuCM8My5dvwAXUqDw5ydYPY6j
+ ScQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1T6xQeXcykUPkMe9CK3angKeDaq6b04UtRqXSCinhv0=;
+ b=kjBwxPDNAzkLTTtwbbjfyiTYvFOFSs/wxIEnLuAP5o/6QIfm1wVreGnH+CSCEztAk7
+ GdoLppa1kjruFTghxVF94qUo/T/ZNoZ8mOj1/1p234b81QJ+Inx2XYc9C9g1sEfhMg0g
+ Q27L7w/iEpXLRpdM46wjbDWTjEdIq0VwOdJ3YrdgKLfJEDKuEA7rPFEY5ypGmN2HhiDL
+ Ku83zvbjMKO7ETHwKXPa+8RpxlZ5b95r1YY+D7lNqbkiMvK7mRpScD5jtrf/X4m0IOrf
+ AykK2JDkY6nytd8iIxdRsyCeDlSvMenBnSzZrk6uFyjVxvqOYL5PBZSqVWUGrPoiDtdy
+ 8gcw==
+X-Gm-Message-State: AO0yUKXe58qIPh0i8WFWJdyJLQWptyOMW8QUnzXR1Flvb6itMjaneV+V
+ pYgAllRA5eoLNI96Juw5QTQ15OA+BVab9WtNt8k=
+X-Google-Smtp-Source: AK7set/MD9TRBXcAtuo4Q/eWnpJRFMlTiCyKlX9NuWzPcmArUjm83k4pIGsQo4TBvZ6EybLjR7Rg4Pa1t/rIow/IsUo=
+X-Received: by 2002:a17:906:af10:b0:877:747c:373e with SMTP id
+ lx16-20020a170906af1000b00877747c373emr280878ejb.6.1676427752456; Tue, 14 Feb
+ 2023 18:22:32 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowABXcNT4PexjNkcoBQ--.2339S10
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZFykWF4kAryrJrW5Zw1UKFg_yoW8KFWxpr
- 48C3yakryDCFZ7Kw4SqF4jvr15Gr4rG3yxKw4v9ws5Xay5GrW5ZFnrKw17Kr45X3WkXFyY
- 9a4jkF15Ar40qFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPS14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4U
- JVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx
- 0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWU
- JVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxV
- A2Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAq
- x4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r
- 43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF
- 7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI
- 0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7V
- UbmZX7UUUUU==
-X-Originating-IP: [114.95.238.225]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20230213180215.1524938-19-bmeng@tinylab.org>
+ <e0c10cb9-c83b-bb35-3041-0f388dc48267@iscas.ac.cn>
+In-Reply-To: <e0c10cb9-c83b-bb35-3041-0f388dc48267@iscas.ac.cn>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 15 Feb 2023 10:22:21 +0800
+Message-ID: <CAEUhbmX6Qb1aAdZC+d2F=n5qLo60XGiE3e0xTco1TgNgDxAKVg@mail.gmail.com>
+Subject: Re: [PATCH 18/18] target/riscv: Move configuration check to envcfg
+ CSRs predicate()
+To: weiwei <liweiwei@iscas.ac.cn>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -66,73 +76,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2023 02:12:58 -0000
+X-List-Received-Date: Wed, 15 Feb 2023 02:22:37 -0000
 
-V/Zve64f depend on Zve32f, so we can only check Zve32f in these cases.
+On Tue, Feb 14, 2023 at 10:59 PM weiwei <liweiwei@iscas.ac.cn> wrote:
+>
+>
+> On 2023/2/14 22:27, Bin Meng wrote:
+> > At present the envcfg CSRs predicate() routines are generic one like
+> > smode(), hmode. The configuration check is done in the read / write
+> > routine. Create a new predicate routine to cover such check, so that
+> > gdbstub can correctly report its existence.
+> >
+> > Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> >
+> > ---
+> >
+> >   target/riscv/csr.c | 98 +++++++++++++++++++++++++++++-----------------
+> >   1 file changed, 61 insertions(+), 37 deletions(-)
+> >
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index 37350b8a6d..284ccc09dd 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -41,40 +41,6 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+> >   }
+> >
+> >   /* Predicates */
+> > -#if !defined(CONFIG_USER_ONLY)
+> > -static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
+> > -                                       uint64_t bit)
+> > -{
+> > -    bool virt = riscv_cpu_virt_enabled(env);
+> > -    RISCVCPU *cpu = env_archcpu(env);
+> > -
+> > -    if (env->priv == PRV_M || !cpu->cfg.ext_smstateen) {
+> > -        return RISCV_EXCP_NONE;
+> > -    }
+> > -
+> > -    if (!(env->mstateen[index] & bit)) {
+> > -        return RISCV_EXCP_ILLEGAL_INST;
+> > -    }
+> > -
+> > -    if (virt) {
+> > -        if (!(env->hstateen[index] & bit)) {
+> > -            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> > -        }
+> > -
+> > -        if (env->priv == PRV_U && !(env->sstateen[index] & bit)) {
+> > -            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> > -        }
+> > -    }
+> > -
+> > -    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
+> > -        if (!(env->sstateen[index] & bit)) {
+> > -            return RISCV_EXCP_ILLEGAL_INST;
+> > -        }
+> > -    }
+> > -
+> > -    return RISCV_EXCP_NONE;
+> > -}
+> > -#endif
+> >
+> >   static RISCVException fs(CPURISCVState *env, int csrno)
+> >   {
+> > @@ -318,6 +284,32 @@ static RISCVException umode32(CPURISCVState *env, int csrno)
+> >       return umode(env, csrno);
+> >   }
+> >
+> > +static RISCVException envcfg(CPURISCVState *env, int csrno)
+> > +{
+> > +    RISCVCPU *cpu = env_archcpu(env);
+> > +    riscv_csr_predicate_fn predicate;
+> > +
+> > +    if (cpu->cfg.ext_smstateen) {
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    }
+>
+> This check seems not right here.  Why  ILLEGAL_INST is directly
+> triggered if smstateen is enabled?
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/cpu_helper.c               | 2 +-
- target/riscv/csr.c                      | 3 +--
- target/riscv/insn_trans/trans_rvv.c.inc | 8 ++------
- 3 files changed, 4 insertions(+), 9 deletions(-)
+This logic was there in the original codes. I was confused when I
+looked at this as well.
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index ad8d82662c..6a3b8bd17b 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -51,7 +51,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-     *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
-     *cs_base = 0;
- 
--    if (riscv_has_ext(env, RVV) || cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) {
-+    if (cpu->cfg.ext_zve32f) {
-         /*
-          * If env->vl equals to VLMAX, we can use generic vector operation
-          * expanders (GVEC) to accerlate the vector operations.
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index fa17d7770c..fbe690878b 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -93,8 +93,7 @@ static RISCVException vs(CPURISCVState *env, int csrno)
-     CPUState *cs = env_cpu(env);
-     RISCVCPU *cpu = RISCV_CPU(cs);
- 
--    if (env->misa_ext & RVV ||
--        cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) {
-+    if (cpu->cfg.ext_zve32f) {
- #if !defined(CONFIG_USER_ONLY)
-         if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
-             return RISCV_EXCP_ILLEGAL_INST;
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index bbb5c3a7b5..6f7ecf1a68 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -173,9 +173,7 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
- {
-     TCGv s1, dst;
- 
--    if (!require_rvv(s) ||
--        !(has_ext(s, RVV) || s->cfg_ptr->ext_zve32f ||
--          s->cfg_ptr->ext_zve64f)) {
-+    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32f) {
-         return false;
-     }
- 
-@@ -210,9 +208,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
- {
-     TCGv dst;
- 
--    if (!require_rvv(s) ||
--        !(has_ext(s, RVV) || s->cfg_ptr->ext_zve32f ||
--          s->cfg_ptr->ext_zve64f)) {
-+    if (!require_rvv(s) || !s->cfg_ptr->ext_zve32f) {
-         return false;
-     }
- 
--- 
-2.25.1
+Anyway, if it is an issue, it should be a separate patch.
 
+>
+> It seems that smstateen related check will be done  for
+> senvcfg/henvcfg{h} when smstateen is enabled.
+>
+
+Regards,
+Bin
 
