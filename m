@@ -1,55 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSHTe-0006PV-7v
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 08:05:38 -0500
+	id 1pSHje-0007NL-GD
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 08:22:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pSHTc-0006P9-6b
- for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:05:36 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ id 1pSHjc-0007Mo-O5
+ for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:22:08 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pSHTa-00053y-Fd
- for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:05:35 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id
- g6-20020a05600c310600b003e1f6dff952so1533503wmo.1
- for <qemu-riscv@nongnu.org>; Wed, 15 Feb 2023 05:05:34 -0800 (PST)
+ id 1pSHja-00054M-NN
+ for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:22:08 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id l2so2501034wry.0
+ for <qemu-riscv@nongnu.org>; Wed, 15 Feb 2023 05:22:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lBiNSsZ870GRbMqmbxJu2R2L5f5vLxkzcaPdYSoLYjY=;
- b=EuO4Fdvtber9kal7LTnn2Sy28y/9yLr7TuElcs+/04eVPVaCYGZoLPi4bVliirvp/I
- GF5lBHMQslarWChR6DnOSLOWEKNJ9yoEsjkBIApaBH/T7gUmJQs0pIX8fhhHAenNwHZH
- 3UWhIBSsAU9ouEaqnFTNsSf4gEJYf1hP1joN7vVzbb9U7SPcAjdmf7Mjf5YO5UXIudCl
- qQ8zUTCspHPCjSrwbkOnjo+HZogz07jaPVApPZ/83F1iopypBrYAVv1uVG4o/GNshRmo
- x6LHOBCAl/luOs/sB1vB3dyjbTau/u6Mfgtyg7yXZqUrryCeE4pgMWeVkdd5QMP6qrO2
- JzeA==
+ bh=U2yNbmHnzRXnwG5xOMUF+gH4FpuIR/jPtcW7kYTN014=;
+ b=Wc4ADkGaKDfZvW+0uCvxTO76JdfqENPdS3UGSE0wvQ4tWOvEeHzq+wzFGk0PRDIlFJ
+ GEach2Zg3YKWepkjsba05qxvpzvreycXT5thWdkPpSx3n9VlME0VL8xEUPbs1Yzd+TCh
+ sEieesUNglyZG9c9zoakr5Nwy6/HeVARNm2Ki3Yg53LKaOevGhkb1Hpq1svH/92c7Q2J
+ z4bofh+Ez+Gk4Yp4Rue/pn3jCYUywnf8SJworFWD7jlVsgGQ9bqsCI93FP/sqCI2bydx
+ YCEp0ljLicJsvWLste+xblwOR8yxWCp7LW2kG7cSCNVN4Re1wZo0QbQUnaIlWV0Mxptk
+ g8gA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lBiNSsZ870GRbMqmbxJu2R2L5f5vLxkzcaPdYSoLYjY=;
- b=C4ukkA8MrFhhOb5cYnsS64MIftUMxfWZsOcOeQXdupOjIRJvojKvgAMcoUrBRQzaZ+
- 9eymJkn50aEqrFPVzCY1KBM/DIVA3zF5G+TpTWRdqz0zL6fycSGXjqxTbBETqx5eF3rA
- cTl5vlna+DTTzoQWiNKn5VvheI6mlE7UQK9j8ZR0MFnrOd9eZXnqeG6cx8cjeN992ZU9
- s03KZne4qTHegAPKOo68tyInPnx0EZ2qG6ewxkkTsDPLwGZ3Ff71W6hxynQCNdM4E2PL
- 3PScTRmmxAKv/WLoVibwG3iaF7msj9ukwjY3iWbQwbnTxoVkD1WQxdsm8jrssV7cYGSu
- EM5w==
-X-Gm-Message-State: AO0yUKXaAKAbKJ/msn1bZtyLaEXR7sCM39FmzymJ85yd3QbRsD9/h+FO
- ea4NQRzsY1fJ1CCnmw5hmTNcTA==
-X-Google-Smtp-Source: AK7set9biYfSuX09svwbF94mgeAwfc9MmkWDLygsHw+7P3NkIzc6GY71e0k+7PmTlL8UciJ7hOI1kg==
-X-Received: by 2002:a05:600c:4918:b0:3db:2063:425d with SMTP id
- f24-20020a05600c491800b003db2063425dmr1860139wmp.2.1676466332855; 
- Wed, 15 Feb 2023 05:05:32 -0800 (PST)
+ bh=U2yNbmHnzRXnwG5xOMUF+gH4FpuIR/jPtcW7kYTN014=;
+ b=wManPTA/GLCZMEz+RbUYUIu0PpnpHaWQyKl2ctQZcNAJ3S7mVZUqYzStXdp5oAHCfb
+ JOdfK+Cd+qlSNqi4OwGdgdRsljiENfZNYsnc7H6G7j1r7219Z6YioEUCm3ayoUiQFWAi
+ oDod7sEW6F1AIDdFOd7MSPki4EUN/TzFbexCr8t3BTvUNAEUzKW+H6JrHQkc3kBUQN3f
+ nZvxH1gKg06kjmA7twDPBl3Nx+1emFqaWnjXMJX4BZnyh08Ck6ge+hnxB3qA4R6av4GY
+ SisFEnqlyrn3DtDlF6QUI47YP9bFNRH+8hU9/dbTcRYCsoAB4Tk0ID/zw46T5hCN/7gH
+ wv2A==
+X-Gm-Message-State: AO0yUKXifp1mPsw5fNiacRd1VRt9J4/N7GQrBE7FySOcMXBVWyvDMAgH
+ ZBQ8JL6seJzl6JDEbfXlBqHE1A==
+X-Google-Smtp-Source: AK7set+E1IMUkHkzfaLOSQFCH7lqyqsr+PaNx7VayVvpBGg3ipes1zWaopgqRCjPKDsLjuu1ul6Umg==
+X-Received: by 2002:adf:e94a:0:b0:2bf:963a:f266 with SMTP id
+ m10-20020adfe94a000000b002bf963af266mr1792578wrn.27.1676467324956; 
+ Wed, 15 Feb 2023 05:22:04 -0800 (PST)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
  [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- j2-20020a05600c1c0200b003e204fdb160sm1727325wms.3.2023.02.15.05.05.32
+ d13-20020adfe88d000000b002c54f4d0f71sm10518672wrm.38.2023.02.15.05.22.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Feb 2023 05:05:32 -0800 (PST)
-Date: Wed, 15 Feb 2023 14:05:31 +0100
+ Wed, 15 Feb 2023 05:22:04 -0800 (PST)
+Date: Wed, 15 Feb 2023 14:22:03 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Sunil V L <sunilvl@ventanamicro.com>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -58,17 +57,16 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>,
  Atish Kumar Patra <atishp@rivosinc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: Re: [PATCH V2 05/10] hw/riscv/virt: virt-acpi-build.c: Add RINTC in
- MADT
-Message-ID: <20230215130531.nrmxazkwlgskluak@orel>
+Subject: Re: [PATCH V2 06/10] hw/riscv/virt: virt-acpi-build.c: Add RHCT Table
+Message-ID: <20230215132203.grt3y3ujfpm6smww@orel>
 References: <20230213144038.2547584-1-sunilvl@ventanamicro.com>
- <20230213144038.2547584-6-sunilvl@ventanamicro.com>
+ <20230213144038.2547584-7-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230213144038.2547584-6-sunilvl@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32f.google.com
+In-Reply-To: <20230213144038.2547584-7-sunilvl@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -88,80 +86,133 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2023 13:05:36 -0000
+X-List-Received-Date: Wed, 15 Feb 2023 13:22:09 -0000
 
-On Mon, Feb 13, 2023 at 08:10:33PM +0530, Sunil V L wrote:
-> Add Multiple APIC Description Table (MADT) with the
-> INTC structure for each cpu.
+On Mon, Feb 13, 2023 at 08:10:34PM +0530, Sunil V L wrote:
+> RISC-V ACPI platforms need to provide RISC-V Hart Capabilities
+> Table (RHCT). Add this to the ACPI tables.
 > 
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  hw/riscv/virt-acpi-build.c | 37 +++++++++++++++++++++++++++++++++++++
->  1 file changed, 37 insertions(+)
+>  hw/riscv/virt-acpi-build.c | 62 ++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 62 insertions(+)
 > 
 > diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 3c4da6c385..f54e3fb731 100644
+> index f54e3fb731..a2054f79a8 100644
 > --- a/hw/riscv/virt-acpi-build.c
 > +++ b/hw/riscv/virt-acpi-build.c
-> @@ -134,6 +134,43 @@ build_dsdt(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
->      free_aml_allocator();
+> @@ -35,6 +35,7 @@
+>  #include "hw/pci-host/gpex.h"
+>  #include "qapi/error.h"
+>  #include "migration/vmstate.h"
+> +#include "hw/intc/riscv_aclint.h"
+>  
+>  #define ACPI_BUILD_TABLE_SIZE             0x20000
+>  
+> @@ -85,6 +86,67 @@ acpi_dsdt_add_fw_cfg(Aml *scope, const MemMapEntry *fw_cfg_memmap)
+>      aml_append(scope, dev);
 >  }
 >  
-> +/* MADT */
+> +#define RHCT_NODE_ARRAY_OFFSET 56
 > +static void
-> +build_madt(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
+> +build_rhct(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
 > +{
-> +    MachineState *mc = MACHINE(s);
-
-Please use 'ms' for MachineState and 'mc' for MachineClass
-
-> +    int socket;
-> +    uint16_t base_hartid = 0;
-> +    uint32_t cpu_id = 0;
+> +    MachineState *ms = MACHINE(s);
+> +    uint32_t acpi_proc_id = 0;
+> +    int i, socket;
+> +    RISCVCPU *cpu;
+> +    char *isa;
+> +    size_t len, aligned_len;
+> +    uint32_t isa_offset, num_rhct_nodes;
 > +
-> +    AcpiTable table = { .sig = "APIC", .rev = 6, .oem_id = s->oem_id,
+> +    AcpiTable table = { .sig = "RHCT", .rev = 1, .oem_id = s->oem_id,
 > +                        .oem_table_id = s->oem_table_id };
 > +
 > +    acpi_table_begin(&table, table_data);
-> +    /* Local Interrupt Controller Address */
-> +    build_append_int_noprefix(table_data, 0, 4);
-> +    build_append_int_noprefix(table_data, 0, 4);   /* MADT Flags */
 > +
-> +    /* RISC-V Local INTC structures per HART */
-> +    for (socket = 0; socket < riscv_socket_count(mc); socket++) {
-> +        base_hartid = riscv_socket_first_hartid(mc, socket);
+> +    build_append_int_noprefix(table_data, 0x0, 4);   /* Reserved */
+> +    build_append_int_noprefix(table_data,
+> +                              RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, 8);
+
+Need "Time Base Frequency" comment.
+
 > +
-> +        for (int i = 0; i < s->soc[socket].num_harts; i++) {
-> +            build_append_int_noprefix(table_data, 0x18, 1);    /* Type     */
-> +            build_append_int_noprefix(table_data, 20, 1);      /* Length   */
-> +            build_append_int_noprefix(table_data, 1, 1);       /* Version  */
-> +            build_append_int_noprefix(table_data, 0, 1);       /* Reserved */
-> +            build_append_int_noprefix(table_data, 1, 4);       /* Flags    */
-> +            build_append_int_noprefix(table_data,
-> +                                      (base_hartid + i), 8);   /* hartid   */
+> +    /* ISA + N hart info */
+> +    num_rhct_nodes = 1 + ms->smp.cpus;
+> +    build_append_int_noprefix(table_data, num_rhct_nodes, 4);
 
-The spec calls this field "Hart ID of the hart" (which is redundant), but
-we should at least use "Hart ID" for the comment here. We want the text
-in the comments to be directly searchable in the specs.
+/* Number of RHCT nodes */
 
-> +            build_append_int_noprefix(table_data, cpu_id, 4);  /* ACPI ID  */
+> +    build_append_int_noprefix(table_data, RHCT_NODE_ARRAY_OFFSET, 4);
 
-This one should be "ACPI Processor UID"
+/* Offset to the RHCT node array */
 
-> +            cpu_id++;
+> +
+> +    /* ISA string node */
+> +    isa_offset = table_data->len - table.table_offset;
+> +    build_append_int_noprefix(table_data, 0, 2);   /* Type 0*/
+                                                               ^ need
+							       space
+> +
+> +    cpu = &s->soc[0].harts[0];
+> +    isa = riscv_isa_string(cpu);
+> +    len = 8 + strlen(isa) + 1;
+> +    aligned_len = (len % 2) ? (len + 1) : len;
+> +
+> +    build_append_int_noprefix(table_data, aligned_len, 2);   /* Total length */
+
+s/Total length/Length/
+
+> +    build_append_int_noprefix(table_data, 0x1, 2);           /* Revision */
+> +
+> +    /* ISA string length including NUL */
+
+/* ISA Length including NUL */
+
+> +    build_append_int_noprefix(table_data, strlen(isa) + 1, 2);
+> +    g_array_append_vals(table_data, isa, strlen(isa) + 1);   /* ISA string */
+> +
+> +    if (aligned_len != len) {
+> +        build_append_int_noprefix(table_data, 0x0, 1);   /* pad */
+
+s/pad/Optional Padding/
+
+> +    }
+> +
+> +    for (socket = 0; socket < riscv_socket_count(ms); socket++) {
+> +        for (i = 0; i < s->soc[socket].num_harts; i++) {
+> +            build_append_int_noprefix(table_data, 0xFFFF, 2);  /* Type */
+> +            build_append_int_noprefix(table_data, 16, 2);      /* Length */
+> +            build_append_int_noprefix(table_data, 0x1, 2);     /* Revision */
+> +            build_append_int_noprefix(table_data, 1, 2); /* number of offsets */
+
+s/number/Number/
+
+> +            build_append_int_noprefix(table_data, acpi_proc_id, 4); /* UID */
+
+ACPI Processor UID
+
+> +            build_append_int_noprefix(table_data, isa_offset, 4);
+
+/* Offsets */
+
+> +            acpi_proc_id++;
 > +        }
 > +    }
 > +
 > +    acpi_table_end(linker, &table);
 > +}
 > +
+>  /* FADT */
 >  static void
->  virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
->  {
+>  build_fadt_rev6(GArray *table_data, BIOSLinker *linker,
 > -- 
 > 2.34.1
 >
+
+Other than getting the comments to match the spec fields,
+
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
 Thanks,
 drew
