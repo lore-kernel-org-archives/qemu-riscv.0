@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSFsa-0000bd-QC
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 06:23:17 -0500
+	id 1pSFsd-0000cp-P9
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 06:23:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pSFsM-0000Y9-ON; Wed, 15 Feb 2023 06:23:04 -0500
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ id 1pSFsO-0000YD-9n; Wed, 15 Feb 2023 06:23:06 -0500
+Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pSFsI-0000hk-Nc; Wed, 15 Feb 2023 06:23:01 -0500
-Received: by mail-ed1-x536.google.com with SMTP id u21so21577398edv.3;
- Wed, 15 Feb 2023 03:22:52 -0800 (PST)
+ id 1pSFsK-0000iO-TK; Wed, 15 Feb 2023 06:23:02 -0500
+Received: by mail-ej1-x634.google.com with SMTP id a3so13341154ejb.3;
+ Wed, 15 Feb 2023 03:22:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ouLWuQZ2pz+VduoyrmD93mYSriub3L2vubqcxMKhsgg=;
- b=oXayaoSD0F6LSdTbc3ixzxNsXtvUpoqIu1FVyH5sVvgbJODsxGvzybzqCK+GgPnP7Z
- 4otVqHISMGq2NF3rh0BUanSCLyeOSfRqB1YjL4liDX0Mnr3sm+kJ3eHnYeZ2uUYtRSih
- MxYlTHnlugDi2Dk6D55PxcMdiGZ6q/WqsmGmS251qKKF+Xfx94sB0Zgvun6HAlW7x1Rk
- wS6Kc+lHTgmAtxT19XkoNl+71yhT91RERmyFnt9pPMkoUSolPdGvpe9PIg/hpYHBj1r1
- hTpnji3O0x/MORNqUWTRaiPiOzgZOsfzkmCrAXNjrufxtsAn/0qWmudoacON1TlXIdu5
- 1tfw==
+ bh=ed80XoNAVnSqtKDt/QSybjFxYrH9cFAShJt71woma0A=;
+ b=k81cpA5zFvdtuCCX15ZXr5TwXFeYTBA8tmE67meHglMIHucsYRSPwQS0MmlJOPAFfE
+ rL0Rsjw/vgLrtZubWr0X1uq+G34W6zEHwLFwmwWO8yUApD2MxvfRVnh4edoV69clZCjZ
+ S9Y18qY4dzQtt+tUN213rS2QsFUeFBjXHgdpUXQh2qZbVG5yVrP8jifi4grNI5dTAW3L
+ ISo/Z6PjoH0+wjDOi8WPeu9T5wlXpnUhR+JM+ZAJ8BfvX5jzk3k56qP/gWrhkBwFt+R5
+ AeEIp3c/W+3/bdn8cRw3azH6uH5JvG742rr+TG/2au309XK7fHX8XW/OIbrO2aE/kTkW
+ d+eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ouLWuQZ2pz+VduoyrmD93mYSriub3L2vubqcxMKhsgg=;
- b=ZHTjqpJkEDDAZ9G/sfm5HQ8NFq3XRwF3E62/tgaOfTwUsu7qOGzDqyfz4/RDEwiuGG
- 38PyHrpfktoNpIKNBryMzU9edOLohAKrnpyHlwsJTJtVU/xJPviBw810YWRcPLxzOGix
- j63IVYxlM6qp1yVdRF7y+l5v7nu74RK2a9U7t/WUkaZkz6W80l3h4P1yN8LvO2Cx37kb
- 254EIG7x/O2DL7XOQkQw5LrxM4Rqj6Klbjv4LYpyNF/0ZBq9WdtG/AOLNj3AXIqFqrAZ
- 0qmQhkDHUUEIzu5tfDE9t5vcbzRrOfHETslFFME0uI9/qkPbEIsVEg9OjvrHrj8CSCOn
- 5xYQ==
-X-Gm-Message-State: AO0yUKWqv+g9hHyNxju8IP4aey+vg5WTY5INYwwVC4gQQEQVTlkr1XwK
- OTvnmZ+dqFtUG58pzBQGzHsQSSr6oSZBqP1Nj00=
-X-Google-Smtp-Source: AK7set/331RP+8P2X9VZiYMo5Dq/61fsXyWlznjJHxYmWdMcVPC78ThsiIKwKxW6wVaBUtIeN3MaXmNCe3Pgj9zYIDg=
-X-Received: by 2002:a50:d093:0:b0:49d:ec5d:28b4 with SMTP id
- v19-20020a50d093000000b0049dec5d28b4mr873541edd.6.1676460171539; Wed, 15 Feb
- 2023 03:22:51 -0800 (PST)
+ bh=ed80XoNAVnSqtKDt/QSybjFxYrH9cFAShJt71woma0A=;
+ b=5ibkuUkTvetzgBP0XdpuBesIY3MaWw2dx7f1xH3EXGj6a5CLwBn8ZVh1qPe2Bv8k2e
+ tH/LKeHSif91imtS5urF1ha/khVIW9BGpg8A1hrml8zM06xgxUrPdxNUOikf7qgzyt44
+ u4nDCmEIEXFWDZCOPDSHh9/YMA1tgaQqMW4Fs6wkFbABinbPYXFvCqrylFB/IcBRzbc+
+ ZQWkDF/2iDZSr23Un+oMJbLK9CSCXovxTffRmys1Yn+/ZP19glpD7+AUETvHv4lciVyu
+ ljGgfF61oIpGYnOmL2GZir0xC55tg90vg+EqlB/CrlrZGvcpqhKDPN0Yi2GlZfKAYzDn
+ CnlQ==
+X-Gm-Message-State: AO0yUKXjOGmsjGcRZS0L5awVBVuw6ShyC3/gEtQQlqZZZito8kdRXyFk
+ /11cxL1Re4dBVSIV03fRsy4OY7G7L3PjwSlD9og=
+X-Google-Smtp-Source: AK7set/Fe2HoPFUQGm8672seyCxMN0yPhXM+4gxFRHKsoFrUE6kVTMerUAESTE5TAswRGcUm/oVoSpIBdjHynu2vnew=
+X-Received: by 2002:a17:906:cc88:b0:878:4a24:1a5c with SMTP id
+ oq8-20020a170906cc8800b008784a241a5cmr902536ejb.6.1676460177470; Wed, 15 Feb
+ 2023 03:22:57 -0800 (PST)
 MIME-Version: 1.0
 References: <20230214192356.319991-1-dbarboza@ventanamicro.com>
- <20230214192356.319991-6-dbarboza@ventanamicro.com>
-In-Reply-To: <20230214192356.319991-6-dbarboza@ventanamicro.com>
+ <20230214192356.319991-8-dbarboza@ventanamicro.com>
+In-Reply-To: <20230214192356.319991-8-dbarboza@ventanamicro.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 15 Feb 2023 19:22:40 +0800
-Message-ID: <CAEUhbmU-xX-LDB2K0BT8iA0Y3kfDn7knoRa=F1G5tdv+znWmwg@mail.gmail.com>
-Subject: Re: [PATCH v2 05/11] target/riscv: remove RISCV_FEATURE_DEBUG
+Date: Wed, 15 Feb 2023 19:22:46 +0800
+Message-ID: <CAEUhbmUn04i2BccNB-o9Z-+tBu0aETTPtkCSGd1S0Q2+eqGXgA@mail.gmail.com>
+Subject: Re: [PATCH v2 07/11] target/riscv: remove RISCV_FEATURE_EPMP
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x536.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::634;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,18 +77,17 @@ X-List-Received-Date: Wed, 15 Feb 2023 11:23:08 -0000
 On Wed, Feb 15, 2023 at 3:25 AM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> RISCV_FEATURE_DEBUG will always follow the value defined by
-> cpu->cfg.debug flag. Read the flag instead.
+> RISCV_FEATURE_EPMP is always set to the same value as the cpu->cfg.epmp
+> flag. Use the flag directly.
 >
 > Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  target/riscv/cpu.c        | 6 +-----
->  target/riscv/cpu.h        | 1 -
->  target/riscv/cpu_helper.c | 2 +-
->  target/riscv/csr.c        | 2 +-
->  target/riscv/machine.c    | 3 +--
->  5 files changed, 4 insertions(+), 10 deletions(-)
+>  target/riscv/cpu.c | 10 +++-------
+>  target/riscv/cpu.h |  1 -
+>  target/riscv/csr.c |  2 +-
+>  target/riscv/pmp.c |  4 ++--
+>  4 files changed, 6 insertions(+), 11 deletions(-)
 >
 
 Reviewed-by: Bin Meng <bmeng@tinylab.org>
