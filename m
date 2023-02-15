@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pS7Bg-0001UR-Mg
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 21:06:24 -0500
+	id 1pS7I1-0002lO-RI
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 21:12:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pS7Bf-0001Tn-2Y; Tue, 14 Feb 2023 21:06:23 -0500
+ id 1pS7I1-0002l1-3k; Tue, 14 Feb 2023 21:12:57 -0500
 Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pS7Bd-0000ET-6N; Tue, 14 Feb 2023 21:06:22 -0500
+ id 1pS7Hy-0004pI-Db; Tue, 14 Feb 2023 21:12:56 -0500
 Received: from localhost.localdomain (unknown [114.95.238.225])
- by APP-01 (Coremail) with SMTP id qwCowABXcNT4PexjNkcoBQ--.2339S11;
- Wed, 15 Feb 2023 10:05:51 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowABXcNT4PexjNkcoBQ--.2339S15;
+ Wed, 15 Feb 2023 10:05:54 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,33 +19,33 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v2 09/14] target/riscv: Replace check for F/D to Zve32f/Zve64d
- in trans_rvv.c.inc
-Date: Wed, 15 Feb 2023 10:05:34 +0800
-Message-Id: <20230215020539.4788-10-liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 13/14] target/riscv: Simplify check for EEW = 64 in
+ trans_rvv.c.inc
+Date: Wed, 15 Feb 2023 10:05:38 +0800
+Message-Id: <20230215020539.4788-14-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230215020539.4788-1-liweiwei@iscas.ac.cn>
 References: <20230215020539.4788-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowABXcNT4PexjNkcoBQ--.2339S11
-X-Coremail-Antispam: 1UD129KBjvdXoW7GFyUXr4ktr13Ww13KF17Jrb_yoWkCwc_Gr
- Z7Wrn7J34fZFZ7KFyUCr9xZr97ua95Gr4qqwsxt3yF9r45G343Cw1DKFn5Jr1UAr4fZrZ3
- ursrZFWfWrn8ujkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbqAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
- IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
- F7xvwVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
- 1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j
- 6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7V
- C0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j
- 6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x0262
- 8vn2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02
- F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GF
- ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7Cj
- xVAFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxV
- WUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU
- OBTYUUUUU
+X-CM-TRANSID: qwCowABXcNT4PexjNkcoBQ--.2339S15
+X-Coremail-Antispam: 1UD129KBjvJXoWxJryUJryrKr4rWryrKw1xKrg_yoW8ur13pw
+ 4rCrWxur4DtFWfuwnakr4jqF1Yy3yrKry7Ka4jv3Z5Xa95Xr48uan0qws3tr4UXFyFqFy0
+ kF4YyF15Zr42va7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPv14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4U
+ JVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx
+ 0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWU
+ JVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxV
+ A2Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAq
+ x4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r
+ 43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Gr0_Xr1lIxAIcVC0I7IYx2IY6xkF
+ 7I0E14v26r4UJVWxJr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14
+ v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuY
+ vjfUOBTYUUUUU
 X-Originating-IP: [114.95.238.225]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
@@ -67,45 +67,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2023 02:06:23 -0000
+X-List-Received-Date: Wed, 15 Feb 2023 02:12:57 -0000
 
-Check for Zve32f/Zve64d can overlap check for F/D.
+Only V extension supports EEW = 64 in these cases: Zve64* extensions don't
+support EEW = 64 in these cases as commented before the check.
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 6f7ecf1a68..9b2711b94b 100644
+index 5dbdce073b..fc0d0d60e8 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -41,9 +41,9 @@ static bool require_rvf(DisasContext *s)
-     switch (s->sew) {
-     case MO_16:
-     case MO_32:
--        return has_ext(s, RVF);
-+        return s->cfg_ptr->ext_zve32f;
-     case MO_64:
--        return has_ext(s, RVD);
-+        return s->cfg_ptr->ext_zve64d;
-     default:
-         return false;
-     }
-@@ -58,9 +58,9 @@ static bool require_scale_rvf(DisasContext *s)
-     switch (s->sew) {
-     case MO_8:
-     case MO_16:
--        return has_ext(s, RVF);
-+        return s->cfg_ptr->ext_zve32f;
-     case MO_32:
--        return has_ext(s, RVD);
-+        return s->cfg_ptr->ext_zve64d;
-     default:
-         return false;
-     }
+@@ -1998,8 +1998,7 @@ static bool vmulh_vv_check(DisasContext *s, arg_rmrr *a)
+      * are not included for EEW=64 in Zve64*. (Section 18.2)
+      */
+     return opivv_check(s, a) &&
+-           (!has_ext(s, RVV) &&
+-            s->cfg_ptr->ext_zve64f ? s->sew != MO_64 : true);
++           (!has_ext(s, RVV) ? s->sew != MO_64 : true);
+ }
+ 
+ static bool vmulh_vx_check(DisasContext *s, arg_rmrr *a)
+@@ -2012,8 +2011,7 @@ static bool vmulh_vx_check(DisasContext *s, arg_rmrr *a)
+      * are not included for EEW=64 in Zve64*. (Section 18.2)
+      */
+     return opivx_check(s, a) &&
+-           (!has_ext(s, RVV) &&
+-            s->cfg_ptr->ext_zve64f ? s->sew != MO_64 : true);
++           (!has_ext(s, RVV) ? s->sew != MO_64 : true);
+ }
+ 
+ GEN_OPIVV_GVEC_TRANS(vmul_vv,  mul)
+@@ -2230,8 +2228,7 @@ static bool vsmul_vv_check(DisasContext *s, arg_rmrr *a)
+      * for EEW=64 in Zve64*. (Section 18.2)
+      */
+     return opivv_check(s, a) &&
+-           (!has_ext(s, RVV) &&
+-            s->cfg_ptr->ext_zve64f ? s->sew != MO_64 : true);
++           (!has_ext(s, RVV) ? s->sew != MO_64 : true);
+ }
+ 
+ static bool vsmul_vx_check(DisasContext *s, arg_rmrr *a)
+@@ -2242,8 +2239,7 @@ static bool vsmul_vx_check(DisasContext *s, arg_rmrr *a)
+      * for EEW=64 in Zve64*. (Section 18.2)
+      */
+     return opivx_check(s, a) &&
+-           (!has_ext(s, RVV) &&
+-            s->cfg_ptr->ext_zve64f ? s->sew != MO_64 : true);
++           (!has_ext(s, RVV) ? s->sew != MO_64 : true);
+ }
+ 
+ GEN_OPIVV_TRANS(vsmul_vv, vsmul_vv_check)
 -- 
 2.25.1
 
