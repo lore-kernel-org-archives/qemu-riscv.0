@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSHm8-0000f4-QI
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 08:24:44 -0500
+	id 1pSHq8-00050U-Fq
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 08:28:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pSHm5-0000Vt-T0
- for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:24:42 -0500
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
+ id 1pSHq5-0004hS-UI
+ for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:28:49 -0500
+Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pSHm3-0005iV-W4
- for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:24:41 -0500
-Received: by mail-wr1-x42b.google.com with SMTP id m10so10219289wrn.4
- for <qemu-riscv@nongnu.org>; Wed, 15 Feb 2023 05:24:39 -0800 (PST)
+ id 1pSHq4-0001oA-2k
+ for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:28:49 -0500
+Received: by mail-wr1-x432.google.com with SMTP id k3so11518304wrv.5
+ for <qemu-riscv@nongnu.org>; Wed, 15 Feb 2023 05:28:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yiZlosEBkr+8oj6Izjo4DAcpmzxY/yeq9wPI4erWw0g=;
- b=c5uEX1j5p5cny3McXE1NNyEm5PyOo+r7DIvE0n8Rkg+Yfgj0jIWoN8XKs3FXRWrOsr
- 5SNeNb5jJKeBAl0zzZ59bIwz+MsHrXYO9pu3BWy2otHFapeVQ/CW0T/XD5kHw7oYP/fj
- Y61UPZFewwWN8YwQYFlIIP/Mxuu6DW6ZvP4DKE3jsYX0XRUIWLHYMqs0nIawIH/mCQMj
- w6Xp2rRkeYqh80s2hRjI5IFZkigIBkHFiV+AXAhVEDYll+T7Pg5SbJoJeMoyOY8I8NJW
- L9oD7T2LvfD6z/iG6iJIbC7q2+r/aKVycSy7JnJcFocPqQZBQRFmrNH131GPPQsJu35a
- Ljvg==
+ bh=RgjdNrGN20/tF99YpbNi+PvCmEt0lTWDvcRUmNlZGYU=;
+ b=Q37uAPat4nXwBevtO622bC2lbdq+2kig5av+s1xEfvrluvvehEzW0lJlgLRjSU/gVS
+ 0g0nbXE453KWchLxocoZtsx6jDxV+6m4XTn/yTNnNOQyDhcofr6S2XDw8m0Z/LUjCfVx
+ /mEaoHRxJq9qggtqyMijHRZBSiUl3v7fzDn0NSUO+ldy6MuxhWBG2cuv/2OApgYJ3vY2
+ PK0N40Ta55bnMhBH4Au+qRTKSa+5NswpZGNAHNaAYZo4fHkKRDIHdxKIF5auDJMNz6Tt
+ Sqbv4LU8Z25Q8SrK2NuPq3bNxR458dY5Vz1VHA0UX1vXOzTHFbIhAGFY3mDkFw3b2KAu
+ b7Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yiZlosEBkr+8oj6Izjo4DAcpmzxY/yeq9wPI4erWw0g=;
- b=SprHgfE1ckNH0qmLermajyVivyAXqLYJn/a2AVj8uLagsJxR0iN3u9vZgZaNd9pWe1
- 9BuLVTkyq2gZeO/QuVfJQa2q+vYF1PdclhOzAb9OvCbk70inRP7e/3+4OeV75HhNYo8U
- 1n8viXOdWPl+NaNFBg1OyBPFqQKgE4Ml2nJYneOtiLwgvPSYYvhBe4pQev8Zvo/MLZ5T
- CRGv/02goExBAB0YMeScQnLUiQHyYzzEtj+OlEzgXLz0ndM6v3PEq7m6hkSmYsNI9d6o
- hyiZ+rktwKvO9oz/Wq7EUrYc17o917e009bYfaW39JStUpA43t7zwzOiDOWSDphqFiOh
- hDGQ==
-X-Gm-Message-State: AO0yUKV/lXyGzSvHR09EDFZsg5yg7970fbywHY6Y3FI4tQRKiZoHtxpi
- pvitLpcynYirUpRbijPp7izKqnI+Lx0XgC4/
-X-Google-Smtp-Source: AK7set+5EG/W4w+oOCo0CRYE2lhq1ANLqWUvM+b4OFvo4NphI3cC5iQLqZAYDYMtGWAg3sOWd5hQiw==
-X-Received: by 2002:a5d:68c8:0:b0:2c0:dcb7:91bc with SMTP id
- p8-20020a5d68c8000000b002c0dcb791bcmr1273751wrw.46.1676467478577; 
- Wed, 15 Feb 2023 05:24:38 -0800 (PST)
+ bh=RgjdNrGN20/tF99YpbNi+PvCmEt0lTWDvcRUmNlZGYU=;
+ b=LTWlbrGmxsGMXGqYUPgEmBdtD97W9bkNwmEkR4PTBMZnaVmFmCEzvutXSlJMW38Crd
+ UUokA9wXABPCjPfme8OYc6gdhgAXW4rhgLNxD23KpuG9SIh32iaEeOSISpmBNyRax9ST
+ pXNVEgqY0GCnWW6CX4nkKj+TpbdlZMe5NlHD2r9eVDWv5NTB8bVwFAppwsDDz3DMmIgE
+ K7ClEALjJz1QmoIo4nK9Lf474o8qz/N63/j+hZlN8ml/OnYMAENzq+1UFKHVLDSQ0ySl
+ qA0V5N2JenqDJy2qzK8O/hsCKyA3+JKAvf3TbXYQ+alqbdwYLq3VsRYmKL11VnBb3XaX
+ IamA==
+X-Gm-Message-State: AO0yUKWmF4Vn0AAte3bdkxLExIFEcru9mLgbEDa5l90WbBaC0eWyck1L
+ NC0xvGZBG/kGmqu2GKrTMqZMuQ==
+X-Google-Smtp-Source: AK7set8QUbUj/nE6L8WnjHe6NgZjzWNh6KmAjlizx8NpM/S8mP8kaQW3lK+sLBWIak4qSUqkTIF34Q==
+X-Received: by 2002:adf:e452:0:b0:2c5:594a:a4f0 with SMTP id
+ t18-20020adfe452000000b002c5594aa4f0mr1772668wrm.58.1676467726453; 
+ Wed, 15 Feb 2023 05:28:46 -0800 (PST)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
  [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- i2-20020adfefc2000000b002c553e061fdsm9145301wrp.112.2023.02.15.05.24.37
+ m18-20020a5d6252000000b002c3dc4131f5sm15807943wrv.18.2023.02.15.05.28.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Feb 2023 05:24:38 -0800 (PST)
-Date: Wed, 15 Feb 2023 14:24:37 +0100
+ Wed, 15 Feb 2023 05:28:46 -0800 (PST)
+Date: Wed, 15 Feb 2023 14:28:45 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Sunil V L <sunilvl@ventanamicro.com>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -58,16 +58,16 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Atish Kumar Patra <atishp@rivosinc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Bin Meng <bmeng@tinylab.org>
-Subject: Re: [PATCH V2 09/10] hw/riscv/virt.c: Initialize the ACPI tables
-Message-ID: <20230215132437.ibksma3khjoukimg@orel>
+Subject: Re: [PATCH V2 10/10] MAINTAINERS: Add entry for RISC-V ACPI
+Message-ID: <20230215132845.nv7km7z7vfm5jqzg@orel>
 References: <20230213144038.2547584-1-sunilvl@ventanamicro.com>
- <20230213144038.2547584-10-sunilvl@ventanamicro.com>
+ <20230213144038.2547584-11-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230213144038.2547584-10-sunilvl@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42b.google.com
+In-Reply-To: <20230213144038.2547584-11-sunilvl@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::432;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x432.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -87,36 +87,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2023 13:24:42 -0000
+X-List-Received-Date: Wed, 15 Feb 2023 13:28:50 -0000
 
-On Mon, Feb 13, 2023 at 08:10:37PM +0530, Sunil V L wrote:
-> When the "acpi=on", ACPI tables need to be added. Detect the option
-> and initialize the ACPI tables.
+On Mon, Feb 13, 2023 at 08:10:38PM +0530, Sunil V L wrote:
+> RISC-V ACPI related functionality for virt machine is added in
+> virt-acpi-build.c. Add the maintainer entry.
 > 
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
 > Reviewed-by: Bin Meng <bmeng@tinylab.org>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  hw/riscv/virt.c | 4 ++++
->  1 file changed, 4 insertions(+)
+>  MAINTAINERS | 6 ++++++
+>  1 file changed, 6 insertions(+)
 > 
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 5017ba62ec..43c201c8cf 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1316,6 +1316,10 @@ static void virt_machine_done(Notifier *notifier, void *data)
->      if (kvm_enabled()) {
->          riscv_setup_direct_kernel(kernel_entry, fdt_load_addr);
->      }
-> +
-> +    if (virt_is_acpi_enabled(s)) {
-> +        virt_acpi_setup(s);
-> +    }
->  }
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 847bc7f131..7fb0f1052d 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1003,6 +1003,12 @@ L: qemu-arm@nongnu.org
+>  S: Maintained
+>  F: hw/arm/virt-acpi-build.c
 >  
->  static void virt_machine_init(MachineState *machine)
+> +RISC-V ACPI Subsystem
+> +M: Sunil V L <sunilvl@ventanamicro.com>
+> +L: qemu-riscv@nongnu.org
+> +S: Maintained
+> +F: hw/riscv/virt-acpi-build.c
+> +
+>  STM32F100
+>  M: Alexandre Iooss <erdnaxe@crans.org>
+>  L: qemu-arm@nongnu.org
 > -- 
 > 2.34.1
-> 
+>
+
+Please move the ARM ACPI entry down under the main ACPI entry and then
+add the RISC-V one there too.
+
+Otherwise,
 
 Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
