@@ -1,50 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pS7uD-0008Rm-U7
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 21:52:25 -0500
+	id 1pS7zT-0001M9-Hz
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Feb 2023 21:57:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pS7uA-0008RP-S2; Tue, 14 Feb 2023 21:52:22 -0500
-Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pS7u8-0001bW-5s; Tue, 14 Feb 2023 21:52:22 -0500
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0VbiDWQ._1676429527; 
-Received: from 30.221.98.44(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VbiDWQ._1676429527) by smtp.aliyun-inc.com;
- Wed, 15 Feb 2023 10:52:08 +0800
-Message-ID: <64a76da4-62d3-61f3-e8a8-347e3aa7eaca@linux.alibaba.com>
-Date: Wed, 15 Feb 2023 10:52:06 +0800
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pS7zR-0001Lk-Cs; Tue, 14 Feb 2023 21:57:49 -0500
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pS7zN-00015N-SN; Tue, 14 Feb 2023 21:57:49 -0500
+Received: from [192.168.0.119] (unknown [114.95.238.225])
+ by APP-01 (Coremail) with SMTP id qwCowADnANUfSuxjAdwpBQ--.2482S2;
+ Wed, 15 Feb 2023 10:57:35 +0800 (CST)
+Message-ID: <5612a275-4902-a7e8-2f10-1f1fbd999adf@iscas.ac.cn>
+Date: Wed, 15 Feb 2023 10:57:34 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.2
-Subject: Re: [PATCH v1 RFC Zisslpcfi 1/9] target/riscv: adding zimops and
- zisslpcfi extension to RISCV cpu config
-Content-Language: en-US
-To: Deepak Gupta <debug@rivosinc.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Cc: liweiwei@iscas.ac.cn, qemu-devel@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, liweiwei@iscas.ac.cn,
- dbarboza@ventanamicro.com
-Cc: Kip Walker <kip@rivosinc.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20230209062404.3582018-1-debug@rivosinc.com>
- <20230209062404.3582018-2-debug@rivosinc.com>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230209062404.3582018-2-debug@rivosinc.com>
+ Bin Meng <bin.meng@windriver.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
+Subject: Re: [PATCH 18/18] target/riscv: Move configuration check to envcfg
+ CSRs predicate()
+To: Bin Meng <bmeng.cn@gmail.com>
+References: <20230213180215.1524938-19-bmeng@tinylab.org>
+ <e0c10cb9-c83b-bb35-3041-0f388dc48267@iscas.ac.cn>
+ <CAEUhbmX6Qb1aAdZC+d2F=n5qLo60XGiE3e0xTco1TgNgDxAKVg@mail.gmail.com>
+Content-Language: en-US
+From: weiwei <liweiwei@iscas.ac.cn>
+In-Reply-To: <CAEUhbmX6Qb1aAdZC+d2F=n5qLo60XGiE3e0xTco1TgNgDxAKVg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.119;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-119.freemail.mail.aliyun.com
-X-Spam_score_int: -101
-X-Spam_score: -10.2
-X-Spam_bar: ----------
-X-Spam_report: (-10.2 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.35, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID: qwCowADnANUfSuxjAdwpBQ--.2482S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxAryDtry8Cw4fAw4fCFW7Arb_yoW5ArWfpr
+ 48GanIkFykWF9Fv34ft3Z8tF13uw18Gw45ZwsrGw18Jr1qkry5Jr1DWrW3ua95ZrZ7Gw40
+ vF4jkF43ur42ya7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkE14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
+ 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+ 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
+ 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE
+ 67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrV
+ AFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCI
+ c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267
+ AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_
+ Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUdHU
+ DUUUUU=
+X-Originating-IP: [114.95.238.225]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -22
+X-Spam_score: -2.3
+X-Spam_bar: --
+X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.35,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -57,101 +73,106 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2023 02:52:25 -0000
+X-List-Received-Date: Wed, 15 Feb 2023 02:57:49 -0000
 
 
-On 2023/2/9 14:23, Deepak Gupta wrote:
-> Introducing riscv `zisslpcfi` extension to riscv target. `zisslpcfi`
-> extension provides hardware assistance to riscv hart to enable control
-> flow integrity (CFI) for software.
+On 2023/2/15 10:22, Bin Meng wrote:
+> On Tue, Feb 14, 2023 at 10:59 PM weiwei <liweiwei@iscas.ac.cn> wrote:
+>>
+>> On 2023/2/14 22:27, Bin Meng wrote:
+>>> At present the envcfg CSRs predicate() routines are generic one like
+>>> smode(), hmode. The configuration check is done in the read / write
+>>> routine. Create a new predicate routine to cover such check, so that
+>>> gdbstub can correctly report its existence.
+>>>
+>>> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+>>>
+>>> ---
+>>>
+>>>    target/riscv/csr.c | 98 +++++++++++++++++++++++++++++-----------------
+>>>    1 file changed, 61 insertions(+), 37 deletions(-)
+>>>
+>>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>>> index 37350b8a6d..284ccc09dd 100644
+>>> --- a/target/riscv/csr.c
+>>> +++ b/target/riscv/csr.c
+>>> @@ -41,40 +41,6 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+>>>    }
+>>>
+>>>    /* Predicates */
+>>> -#if !defined(CONFIG_USER_ONLY)
+>>> -static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
+>>> -                                       uint64_t bit)
+>>> -{
+>>> -    bool virt = riscv_cpu_virt_enabled(env);
+>>> -    RISCVCPU *cpu = env_archcpu(env);
+>>> -
+>>> -    if (env->priv == PRV_M || !cpu->cfg.ext_smstateen) {
+>>> -        return RISCV_EXCP_NONE;
+>>> -    }
+>>> -
+>>> -    if (!(env->mstateen[index] & bit)) {
+>>> -        return RISCV_EXCP_ILLEGAL_INST;
+>>> -    }
+>>> -
+>>> -    if (virt) {
+>>> -        if (!(env->hstateen[index] & bit)) {
+>>> -            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+>>> -        }
+>>> -
+>>> -        if (env->priv == PRV_U && !(env->sstateen[index] & bit)) {
+>>> -            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+>>> -        }
+>>> -    }
+>>> -
+>>> -    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
+>>> -        if (!(env->sstateen[index] & bit)) {
+>>> -            return RISCV_EXCP_ILLEGAL_INST;
+>>> -        }
+>>> -    }
+>>> -
+>>> -    return RISCV_EXCP_NONE;
+>>> -}
+>>> -#endif
+>>>
+>>>    static RISCVException fs(CPURISCVState *env, int csrno)
+>>>    {
+>>> @@ -318,6 +284,32 @@ static RISCVException umode32(CPURISCVState *env, int csrno)
+>>>        return umode(env, csrno);
+>>>    }
+>>>
+>>> +static RISCVException envcfg(CPURISCVState *env, int csrno)
+>>> +{
+>>> +    RISCVCPU *cpu = env_archcpu(env);
+>>> +    riscv_csr_predicate_fn predicate;
+>>> +
+>>> +    if (cpu->cfg.ext_smstateen) {
+>>> +        return RISCV_EXCP_ILLEGAL_INST;
+>>> +    }
+>> This check seems not right here.  Why  ILLEGAL_INST is directly
+>> triggered if smstateen is enabled?
+> This logic was there in the original codes. I was confused when I
+> looked at this as well.
+
+Sorry, I didn't find the original codes. Do you mean this:
+
+     if (env->priv == PRV_M || !cpu->cfg.ext_smstateen) {
+         return RISCV_EXCP_NONE;
+     }
+
+If so, I think the check here is to make the following *stateen related
+check ignored when smstateen extension is disabled.
+
+Regards,
+
+Weiwei Li
+
+> Anyway, if it is an issue, it should be a separate patch.
 >
-> `zisslpcfi` extension expects hart to implement `zimops`. `zimops` stands
-> for "unprivileged integer maybe operations". `zimops` carve out certain
-> reserved opcodes encodings from integer spec to "may be operations"
-> encodings. `zimops` opcode encodings simply move 0 to rd.
-> `zisslpcfi` claims some of the `zimops` encodings and use them for shadow
-> stack management or indirect branch tracking. Any future extension can
-> also claim `zimops` encodings.
+>> It seems that smstateen related check will be done  for
+>> senvcfg/henvcfg{h} when smstateen is enabled.
+>>
+> Regards,
+> Bin
 
-Does  the zimops has a independent specification? If so, you should give 
-a link to this
-specification.
-
->
-> This patch also adds a dependency check for `zimops` to be enabled if
-> `zisslpcfi` is enabled on the hart.
-
-You should don't add two extensions in one patch. I think you should add 
-them one by one.
-And add the zimop first.  In my opinion, you should implement the whole 
-zimop extension before
-adding any patch for zisslpcfi, including the implementation of mop.rr 
-and mop.r.
-
->
-> Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-> Signed-off-by: Kip Walker  <kip@rivosinc.com>
-> ---
->   target/riscv/cpu.c | 13 +++++++++++++
->   target/riscv/cpu.h |  2 ++
->   2 files changed, 15 insertions(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index cc75ca7667..6b4e90eb91 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -110,6 +110,8 @@ static const struct isa_ext_data isa_edata_arr[] = {
->       ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0, ext_svnapot),
->       ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt),
->       ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_XVentanaCondOps),
-> +    ISA_EXT_DATA_ENTRY(zimops, true, PRIV_VERSION_1_12_0, ext_zimops),
-> +    ISA_EXT_DATA_ENTRY(zisslpcfi, true, PRIV_VERSION_1_12_0, ext_cfi),
-Add them one by one.
->   };
->   
->   static bool isa_ext_is_enabled(RISCVCPU *cpu,
-> @@ -792,6 +794,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->               return;
->           }
->   
-> +        if (cpu->cfg.ext_cfi && !cpu->cfg.ext_zimops) {
-> +            error_setg(errp, "Zisslpcfi extension requires Zimops extension");
-> +            return;
-> +        }
-> +
-Seems reasonable for me.
->           /* Set the ISA extensions, checks should have happened above */
->           if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
->               cpu->cfg.ext_zhinxmin) {
-> @@ -1102,6 +1109,12 @@ static Property riscv_cpu_properties[] = {
->   #ifndef CONFIG_USER_ONLY
->       DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVEC),
->   #endif
-> +    /*
-> +     * Zisslpcfi CFI extension, Zisslpcfi implicitly means Zimops is
-> +     * implemented
-> +     */
-> +    DEFINE_PROP_BOOL("zisslpcfi", RISCVCPU, cfg.ext_cfi, true),
-> +    DEFINE_PROP_BOOL("zimops", RISCVCPU, cfg.ext_zimops, true),
-
-Default value should be false.
-
-Zhiwei
-
->   
->       DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
->   
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index f5609b62a2..9a923760b2 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -471,6 +471,8 @@ struct RISCVCPUConfig {
->       uint32_t mvendorid;
->       uint64_t marchid;
->       uint64_t mimpid;
-> +    bool ext_zimops;
-> +    bool ext_cfi;
->   
->       /* Vendor-specific custom extensions */
->       bool ext_XVentanaCondOps;
 
