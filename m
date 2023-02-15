@@ -1,67 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSI6Y-0006oH-0K
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 08:45:50 -0500
+	id 1pSIQH-000577-Jr
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Feb 2023 09:06:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pSI6V-0006nz-TF
- for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:45:49 -0500
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1pSIQF-00056j-ST
+ for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 09:06:11 -0500
+Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pSI6S-0005JR-Jl
- for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 08:45:46 -0500
-Received: by mail-wr1-x431.google.com with SMTP id k3so11570551wrv.5
- for <qemu-riscv@nongnu.org>; Wed, 15 Feb 2023 05:45:43 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1pSIQB-0000jn-KB
+ for qemu-riscv@nongnu.org; Wed, 15 Feb 2023 09:06:11 -0500
+Received: by mail-pj1-x102b.google.com with SMTP id
+ d8-20020a17090ad98800b002344fa17c8bso1981917pjv.5
+ for <qemu-riscv@nongnu.org>; Wed, 15 Feb 2023 06:06:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=n/ThfzrDgUjYqaRx1XhiYCOiTgFfI1QiyNBakl4gOMQ=;
- b=A+OKPdvlTaw5XRL8fbYPKH3bMorBDFlYSLRqkDrwR5QK3BLUnK/1QAUWdJoNxIWGq7
- KnUdmWLQoaoe6nfYjUTbud4h4y9+/YCqdKv/bmZb1lb2Kco8Ie7ommTifjkw/Uv+Q3RA
- ahJbxF/lIb+eD8V0ON6Ss76/byMkqwOeSKXKwZLcgS8zz7eyp5E5hYufYPLnAWehCFum
- st14UK5boX94rNg97KkiNXvjiUSbh9SPSzPc0Ystxodd7FApXpLCVVAGhBV+YTeREGj4
- ijnVVZ92ALzfD8JQ7B6Glq9Vq16/CiV+yyyB7wHOJr5n8Qe7fLfwQCkEjzm3VZeJ5ish
- SH3g==
+ bh=McznPg3QiLCKg93UZYSw9csxgwji/bl/Dcw9teER1hc=;
+ b=mqSDlaoNwSaUb2T9SzvIE1rMsQV+/zfXz6uZ4zCFMjJ6R2CKg9h6XzfZgHf8Ic8jDy
+ 6SgkhyyUEyxy7kHohaQ6ZqBT7JzfcTcb3wu3LlYk6pdvT1qdfkEuS0KEZfpi2tS6RuY4
+ DDpHeBJicMKMh323mwUrIplka0Go0lLYSZbjslDXG3Ob4sorkmrzrX5xakkBCbKhvck6
+ JTs+scQSLdqWV3BHqstmeaWjVakrg6mmZNGuNCB9LmTCIBYNRFC/hHYoyrUvvnnPeqm6
+ uL18V5Naz4hyRZMsf2AuKpPpy88uiAudaw+q6GRdrbZ+GghTTAE3J/547S0VyuHvKp6X
+ J2Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n/ThfzrDgUjYqaRx1XhiYCOiTgFfI1QiyNBakl4gOMQ=;
- b=PPul+KFs7tFIzhyjZD8JYQs+GyNXPNhZBVsUieP3g6pby0cBT4sBZ/91uGD07qkMwj
- mUlPdwBKik7J0ZPeroY/HXmUenoPQlCvLSqPJRHaIOjsozLr2Pkvv7i8VtBrzOPuiSWv
- kjIkNyGygW6bFBr5EReVnzdv7SWvaS2CvW9Aet5E6wpGo0ibQccOTML4h9swuhRRSOxH
- hqB+iDXFIHk+YlyfmsdGy5y8EQmDgYaKAnSdYu7McnjIgSk5VgNF4mj/B4KBxiofohkw
- 9S32ux6Qv92w6+kH4AQSTZch2cc9+skRnfHa+E3dZgClAJjFC2+cnn4kUkNQr+14NRaP
- duJw==
-X-Gm-Message-State: AO0yUKWD6AY97vVg5eWOuFMXg4d2lYEahTlFmapzbdUDSnP0s2dXeVgg
- lHdGZqlVsgrMy5jlAXypwoeF2Q==
-X-Google-Smtp-Source: AK7set9CT59qWEZX1lbfuv2qYv/kiZGz7DX2mfh25u4pB2SXC0NtsuV8aOA5466GHAXinbui3xRQKg==
-X-Received: by 2002:adf:dd0a:0:b0:2bf:d937:3589 with SMTP id
- a10-20020adfdd0a000000b002bfd9373589mr2099936wrm.14.1676468742742; 
- Wed, 15 Feb 2023 05:45:42 -0800 (PST)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- b4-20020a5d4d84000000b002c5621263e3sm4584083wru.19.2023.02.15.05.45.41
+ bh=McznPg3QiLCKg93UZYSw9csxgwji/bl/Dcw9teER1hc=;
+ b=y+fbd3UWlyacHdNzcvsjGsqcJch/Fl862tlXKEMRERntuLSUfWz0ZrxNrMfX41osW0
+ 7O5v7C4y/aiASbJZsLGtlGqE5iZugA8Fc/UT7mdELJB8zWtCWl3mni56KOuY5ISTtMVE
+ TUKCBF5fvQCwMFHk8Vd2bPHZVC/upEH7emrzzxGR+zAfqwi7xgI+bcl5P6DTdPWn9lyn
+ 4c7ZgR/2FGg6OyonfIeucnRJWuZHs8ShAzsslO3VFywdhi9SsuPKiTLjoIb6+QyV6Z7e
+ OVqAk4l9eW7Pptp8mDYuRBb+6Kv2j4IodjOy8Un0k1gTELLW5SRmN0v7N/jjvdPrrPDO
+ aKdQ==
+X-Gm-Message-State: AO0yUKXxU1wGz7eJprKAjOg0m5TOwrE6yDSB/TZ2fIxml8LaZrzpzXCG
+ hUWQLZ3kaRnlHDreIyoS1h8fLg==
+X-Google-Smtp-Source: AK7set+HSj1JGIukd4yFK9DH1/ntVAzGNAOIwoXxotytPGyV2OQTbxaTmLsxuIpDZJ0HUtxzg8RwrA==
+X-Received: by 2002:a17:903:1251:b0:19a:703d:c1cb with SMTP id
+ u17-20020a170903125100b0019a703dc1cbmr2778032plh.11.1676469965928; 
+ Wed, 15 Feb 2023 06:06:05 -0800 (PST)
+Received: from sunil-laptop ([49.206.14.226]) by smtp.gmail.com with ESMTPSA id
+ d12-20020a170902854c00b0019902f0336fsm1378383plo.286.2023.02.15.06.06.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Feb 2023 05:45:42 -0800 (PST)
-Date: Wed, 15 Feb 2023 14:45:41 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH v2 00/11] enable write_misa() and RISCV_FEATURE_* cleanups
-Message-ID: <20230215134541.hxaspacyttcytod5@orel>
-References: <20230214192356.319991-1-dbarboza@ventanamicro.com>
+ Wed, 15 Feb 2023 06:06:05 -0800 (PST)
+Date: Wed, 15 Feb 2023 19:35:58 +0530
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>,
+ Atish Kumar Patra <atishp@rivosinc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: Re: [PATCH V2 08/10] hw/riscv/Kconfig: virt: Enable ACPI config option
+Message-ID: <Y+zmxmcX1lakFxSn@sunil-laptop>
+References: <20230213144038.2547584-1-sunilvl@ventanamicro.com>
+ <20230213144038.2547584-9-sunilvl@ventanamicro.com>
+ <20230215132424.e4vtxjkq2bpffbw2@orel>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230214192356.319991-1-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x431.google.com
+In-Reply-To: <20230215132424.e4vtxjkq2bpffbw2@orel>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x102b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,56 +86,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2023 13:45:49 -0000
+X-List-Received-Date: Wed, 15 Feb 2023 14:06:12 -0000
 
-On Tue, Feb 14, 2023 at 04:23:45PM -0300, Daniel Henrique Barboza wrote:
-> Hi,
+On Wed, Feb 15, 2023 at 02:24:24PM +0100, Andrew Jones wrote:
+> On Mon, Feb 13, 2023 at 08:10:36PM +0530, Sunil V L wrote:
+> > Enable ACPI related config option to build ACPI subsystem
+> > for virt machine.
+> > 
+> > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> > ---
+> >  hw/riscv/Kconfig | 1 +
+> >  1 file changed, 1 insertion(+)
+> > 
+> > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> > index 4550b3b938..6528ebfa3a 100644
+> > --- a/hw/riscv/Kconfig
+> > +++ b/hw/riscv/Kconfig
+> > @@ -44,6 +44,7 @@ config RISCV_VIRT
+> >      select VIRTIO_MMIO
+> >      select FW_CFG_DMA
+> >      select PLATFORM_BUS
+> > +    select ACPI
+> >  
+> >  config SHAKTI_C
+> >      bool
+> > -- 
+> > 2.34.1
+> >
 > 
-> This new version contains suggestions made by Weiwei Li in v1. Most
-> notable change is patch 4 from v1, moving up to patch 2 now,  to allow
-> the riscv_cpu_cfg() helper to be used in the MISA CSR patch.
+> This could probably squashed together with the previous patch.
 > 
-> 
-> Changes in v2:
-> - former patch 4 moved to patch 2
-> - patch 3 (former 2):
->   - use riscv_cpu_cfg()
-> - patch 9:
->   - remove the uneeded RISCVCPUConfig and access mmu via
->     cpu_cfg->cfg.mmu
-> - v1 link: https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg02780.html
-> 
-> Daniel Henrique Barboza (11):
->   target/riscv: do not mask unsupported QEMU extensions in write_misa()
->   target/riscv: introduce riscv_cpu_cfg()
->   target/riscv: allow users to actually write the MISA CSR
->   target/riscv: remove RISCV_FEATURE_MISA
->   target/riscv: remove RISCV_FEATURE_DEBUG
->   target/riscv/cpu.c: error out if EPMP is enabled without PMP
->   target/riscv: remove RISCV_FEATURE_EPMP
->   target/riscv: remove RISCV_FEATURE_PMP
->   hw/riscv/virt.c: do not use RISCV_FEATURE_MMU in
->     create_fdt_socket_cpus()
->   target/riscv: remove RISCV_FEATURE_MMU
->   target/riscv/cpu: remove CPUArchState::features and friends
-> 
->  hw/riscv/virt.c           |  7 ++++---
->  target/riscv/cpu.c        | 20 +++++---------------
->  target/riscv/cpu.h        | 29 ++++++-----------------------
->  target/riscv/cpu_helper.c |  6 +++---
->  target/riscv/csr.c        | 15 ++++++---------
->  target/riscv/machine.c    | 11 ++++-------
->  target/riscv/monitor.c    |  2 +-
->  target/riscv/op_helper.c  |  2 +-
->  target/riscv/pmp.c        |  8 ++++----
->  9 files changed, 34 insertions(+), 66 deletions(-)
-> 
-> -- 
-> 2.39.1
-> 
->
+Thank you!, Drew. Yes, I am going to squash these patches as per
+feedback from Daniel. Will address your comments on other patches and
+send V3 soon.
 
-For the series
-
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Thanks!
+Sunil
 
