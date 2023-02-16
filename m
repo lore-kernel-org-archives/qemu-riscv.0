@@ -1,79 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSiCx-0007uQ-JT
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 12:38:11 -0500
+	id 1pSjgD-0005qr-Ia
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 14:12:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pSiCv-0007to-L6
- for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 12:38:09 -0500
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pSjgB-0005qB-60
+ for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 14:12:27 -0500
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1pSiCt-0002qF-VT
- for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 12:38:09 -0500
-Received: by mail-ed1-x532.google.com with SMTP id fi26so5730633edb.7
- for <qemu-riscv@nongnu.org>; Thu, 16 Feb 2023 09:38:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2QER8VBygYImvV4HHi0mk3XEd/ARl6wH/4dMJx5v2O4=;
- b=o913dQ+E5LmFuFJnEmdXVd6ooPPxfL7FJKD8AuXShfGhri7FM5Gw9VjnvWG+mxGEvh
- rLis0VA/rYyolwVMVMANuFdCZTBEtjiFOG+0Qi+FuBNVUja//Wx5HqPlVAHkF7gZW+3u
- WvDVWEDnE3XlT3tPzt+/nHjnOBDdyi/J+oWcbuwNyI1ed44vRLQvTIYUjbG+mhUBuwip
- FU3mlStoYQDCWukYqCXFfOnNnl2Bd04GAuV1oKefxw0gTUqoPbCo5bjh2tBWbQvX5mFe
- oqqFb8ZHynaWJVItCz77+bwn8JOKAeDnTEzAAdF9rWkn1ws0k/WForYrUVNv70M67zca
- CDLw==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pSjg9-0001OG-OE
+ for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 14:12:26 -0500
+Received: by mail-pl1-x62b.google.com with SMTP id l9so523890plk.3
+ for <qemu-riscv@nongnu.org>; Thu, 16 Feb 2023 11:12:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=sJM2vCNggiVN1gq6+2EeiaMfis3BprLLLN/WmGCl1BY=;
+ b=RSCIt7plhQVMPcoJO4f26agjayCqW182l8o7/gOozQVJ9/WmMxsPTElQ4ZQ4DU9nC9
+ ZuXikS7hB33PVi0Lqr99ZheLe4EF7aeoTVJdzNFzi2F3oGbWkOwxMo1gCKxpzs7/DtWx
+ RSKgNJkjC3nIXORWBIJmsmDczDfSvaPRjyBuIliheE32UNWxUe209Wsbg8vH4e0lD0On
+ dFHKteka/WMCoMDKjvWTXf56z3X+osVnZOIjxtIoVcXJb7mdBYLVkIKVrLhn4rQ/9Zwe
+ kYzRhPGhq02XBqpJafTGwLTv2S0RMd4eFSkSpmU+BurXse3DzCqrYnwbRTrMGyjF7EkT
+ 3R8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2QER8VBygYImvV4HHi0mk3XEd/ARl6wH/4dMJx5v2O4=;
- b=PVifC5KFACrEiTLn59iCu67GT+PVK2s9UzAt9kalw/dmlOpev8XFMVApEcCOqCwrvr
- FsGn/Gxpbmgxu9x8ba8P4d+wxfkfgcI0SXUnfb7SEzoiEUdaUQ/KCem44WUpAyzU1ho8
- O8+9mzYk0miEVWj+C8H61Q8XXxzz9nQ0lE7DOD36pdRUl3DRheMI1bKgqv6jz3/3irC3
- PmYWzFuWBL6EYk1q9stcEpcdYCg7O9AB1vI+dfJBpywLaA5RL1N+cKFvqSlTK7CVGFDe
- VEqrlGWKNVpQZl4NuJ8DK98cYp/ON+YENK2TWsOku0TVaHMmAr5e4CH335xm/6RAD0kT
- Fkuw==
-X-Gm-Message-State: AO0yUKUV3R6/MZk6ntfp2LXHDHrv7kOOBFHCXOalC46cyRLjchl/ip8B
- jQhwbQGxsZtIGzsbmTmg6cSHQw==
-X-Google-Smtp-Source: AK7set/2De/HBXqMZlsLpAjWxM/3rqWMhcVrxHGx2hx3J3k90DOFTOwFpif1Ch1ofwkXEmPtl9+kpw==
-X-Received: by 2002:a17:906:493:b0:8b1:7e88:c20e with SMTP id
- f19-20020a170906049300b008b17e88c20emr290027eja.41.1676569085912; 
- Thu, 16 Feb 2023 09:38:05 -0800 (PST)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- lt13-20020a170906fa8d00b00888d593ce76sm1063711ejb.72.2023.02.16.09.38.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Feb 2023 09:38:05 -0800 (PST)
-Date: Thu, 16 Feb 2023 18:38:04 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>,
- Atish Kumar Patra <atishp@rivosinc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: Re: [PATCH V3 5/8] hw/riscv/virt: virt-acpi-build.c: Add RINTC in MADT
-Message-ID: <20230216173804.zncvxsyqxokn5doo@orel>
-References: <20230216164125.1945633-1-sunilvl@ventanamicro.com>
- <20230216164125.1945633-6-sunilvl@ventanamicro.com>
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=sJM2vCNggiVN1gq6+2EeiaMfis3BprLLLN/WmGCl1BY=;
+ b=hu1/C4pKwzSfZTrSbGetSVs+zF+Llh6bCBosqg0nVfHrGQzTsFikCguGsMbDkJazdi
+ ollMms7btqWAhdvqH3Vt21l3Twax679BzhvHMJOz8nGR1NCJC3LB7b08TCaOXkgOqZtL
+ vaD8oVvxi5ARyWIZJ/shTwx4sJhes/9Om7oV7iOtf4U/DBVYWo0+A1fDmUQGPei4DvHk
+ yJDWBGxnwczbqLQAmYiIRRD42z6ly3so8SNvutYJk2ZF7vpTQgWDkyJ3GuNlfpaGmE4z
+ +5HhyVVabGWQetzWFTqLBoMilbymnUz0hMTnCEs9QX9B76CeTgocOqjxc/PHmiYfvi4T
+ f3wA==
+X-Gm-Message-State: AO0yUKV1B/uMW5wfuS3rbynEC/1OBvKaZvjjv+Cp4bazCRbGxlPKaBjj
+ 0iHEIun/U48PDZRokhYR+3Zg7A==
+X-Google-Smtp-Source: AK7set/tCn1GNub1fsBNsG0YjBDxIPCpZ2HxpP/GOr/218DOcnKwHN5gFKFSjVDfrVjiWRWejqsk5A==
+X-Received: by 2002:a05:6a20:7290:b0:bc:3290:5759 with SMTP id
+ o16-20020a056a20729000b000bc32905759mr7742745pzk.34.1676574744279; 
+ Thu, 16 Feb 2023 11:12:24 -0800 (PST)
+Received: from [192.168.54.227] (rrcs-74-87-59-234.west.biz.rr.com.
+ [74.87.59.234]) by smtp.gmail.com with ESMTPSA id
+ r124-20020a632b82000000b004fb48ac77c8sm1521707pgr.85.2023.02.16.11.12.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Feb 2023 11:12:23 -0800 (PST)
+Message-ID: <ca726eda-6df8-bcc0-15ca-3a38b8360d5a@linaro.org>
+Date: Thu, 16 Feb 2023 09:12:18 -1000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230216164125.1945633-6-sunilvl@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x532.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH v5 2/9] target/riscv: introduce riscv_cpu_cfg()
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
+ Andrew Jones <ajones@ventanamicro.com>
+References: <20230216162126.809482-1-dbarboza@ventanamicro.com>
+ <20230216162126.809482-3-dbarboza@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230216162126.809482-3-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62b.google.com
+X-Spam_score_int: -24
+X-Spam_score: -2.5
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.351,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,93 +85,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2023 17:38:09 -0000
+X-List-Received-Date: Thu, 16 Feb 2023 19:12:27 -0000
 
-On Thu, Feb 16, 2023 at 10:11:22PM +0530, Sunil V L wrote:
-> Add Multiple APIC Description Table (MADT) with the
-> RINTC structure for each cpu.
-> 
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  hw/riscv/virt-acpi-build.c | 44 ++++++++++++++++++++++++++++++++++++++
->  1 file changed, 44 insertions(+)
-> 
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 30af974db3..58e49cd6d6 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -32,6 +32,7 @@
->  #include "sysemu/reset.h"
->  #include "migration/vmstate.h"
->  #include "hw/riscv/virt.h"
-> +#include "hw/riscv/numa.h"
->  
->  #define ACPI_BUILD_TABLE_SIZE             0x20000
->  
-> @@ -123,6 +124,46 @@ static void build_dsdt(GArray *table_data,
->      free_aml_allocator();
->  }
->  
-> +/* MADT */
-> +static void build_madt(GArray *table_data,
-> +                       BIOSLinker *linker,
-> +                       RISCVVirtState *s)
+On 2/16/23 06:21, Daniel Henrique Barboza wrote:
+> +static inline RISCVCPUConfig riscv_cpu_cfg(CPURISCVState *env)
 > +{
-> +    MachineState *ms = MACHINE(s);
-> +    int socket;
-> +    uint16_t base_hartid = 0;
-> +    uint32_t cpu_id = 0;
-> +
-> +    AcpiTable table = { .sig = "APIC", .rev = 6, .oem_id = s->oem_id,
-> +                        .oem_table_id = s->oem_table_id };
-> +
-> +    acpi_table_begin(&table, table_data);
-> +    /* Local Interrupt Controller Address */
-> +    build_append_int_noprefix(table_data, 0, 4);
-> +    build_append_int_noprefix(table_data, 0, 4);   /* MADT Flags */
-> +
-> +    /* RISC-V Local INTC structures per HART */
-> +    for (socket = 0; socket < riscv_socket_count(ms); socket++) {
-> +        base_hartid = riscv_socket_first_hartid(ms, socket);
-> +
-> +        for (int i = 0; i < s->soc[socket].num_harts; i++) {
-> +            build_append_int_noprefix(table_data, 0x18, 1);    /* Type     */
-> +            build_append_int_noprefix(table_data, 20, 1);      /* Length   */
-> +            build_append_int_noprefix(table_data, 1, 1);       /* Version  */
-> +            build_append_int_noprefix(table_data, 0, 1);       /* Reserved */
-> +            build_append_int_noprefix(table_data, 1, 4);       /* Flags    */
-> +            build_append_int_noprefix(table_data,
-> +                                      (base_hartid + i), 8);   /* Hart ID  */
-> +
-> +            /* ACPI Processor UID  */
-> +            build_append_int_noprefix(table_data, cpu_id, 4);
-> +            cpu_id++;
-> +        }
-> +    }
-> +
-> +    acpi_table_end(linker, &table);
+> +    return env_archcpu(env)->cfg;
 > +}
-> +
->  static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
->  {
->      GArray *table_offsets;
-> @@ -144,6 +185,9 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
->      acpi_add_table(table_offsets, tables_blob);
->      build_fadt_rev6(tables_blob, tables->linker, s, dsdt);
->  
-> +    acpi_add_table(table_offsets, tables_blob);
-> +    build_madt(tables_blob, tables->linker, s);
-> +
->      /* XSDT is pointed to by RSDP */
->      xsdt = tables_blob->len;
->      build_xsdt(tables_blob, tables->linker, table_offsets, s->oem_id,
-> -- 
-> 2.34.1
->
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+This structure is 144 bytes.  I don't think you want to be copying it around like that. 
+Better to return a const pointer.
 
-Thanks,
-drew
+
+r~
 
