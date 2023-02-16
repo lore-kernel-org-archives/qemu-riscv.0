@@ -1,76 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSdx7-0004Ul-7p
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 08:05:33 -0500
+	id 1pSeI7-0001LJ-PL
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 08:27:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pSdx3-0004TX-66
- for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 08:05:29 -0500
-Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pSeI0-0001E3-1Z; Thu, 16 Feb 2023 08:27:08 -0500
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pSdwz-0002CK-VB
- for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 08:05:27 -0500
-Received: by mail-oo1-xc33.google.com with SMTP id
- z25-20020a4ad1b9000000b00517affa07c0so201898oor.7
- for <qemu-riscv@nongnu.org>; Thu, 16 Feb 2023 05:05:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GvaH81B5hBrpGPqem9kaUkSdCiGN0le0jCxW0/4CJJg=;
- b=EQRrHyZJa51674sQhWplIv6fecOyvEHgyYtijEchbT/S8ypIZ1DV+uZ91I21qFNFGy
- suKo6GRcIcuUCJtyc+JrXSZqKMm4XyoPjufdb+SgftEyA1LiUM17LPug6jT5jxKqBefB
- 5M/qyzYIe+kq0rwAnJgki+yRNTaPNcijk0T5Kt0iLXICLCJgaljgkGKsIGHmfyWbueOh
- Zhp8J5P3o6b8k6zKfvWiYlyY/+UV3PjU7uiAtsWbbvNCV9Q8LG27WRv/utOKMwvE79Oq
- ALNJk1+FqJcI+OwN5jNtMum2xj1ByJSLMhnU3fsxQt6XHAzlAe4Z4ksMSNQ4hVYYKzJl
- IAOg==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pSeHw-0006RX-G8; Thu, 16 Feb 2023 08:27:06 -0500
+Received: by mail-ej1-x62b.google.com with SMTP id a3so5154746ejb.3;
+ Thu, 16 Feb 2023 05:27:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=CplCPzI50Th7jHG+c71KD2WSIU0BgVLVu/8hr11aSiE=;
+ b=leDm/MncRLvSGpAKgOn9eLBexx7OqdnFZB79Hmxn0lMxlRrqcDa58bdDxKLtS/19lA
+ I4qORVy+0InGTP/2Gl/M60PgD+JhsJhrdcI4r7fqRp3bYxngPffwHMAnTmN5IW8hhtca
+ 7MP9Fg2Bjowpko8xhaxTLB8kV7quAa2k82KMWjDUxui1MRxX1PGCehVsexgktPKWRN0h
+ OlfBxdiAuoZIxz932d/cHWdzaZ45Am6bdi9C5gUeLjGKzuHEvNSe7gCEVGal5DIywkIF
+ FCFzG/Ni4qvpznRouoGdOuqyt9KW+IuNFkiP/sQSICLyVHAv14per2TCV0BdNvjiO/dx
+ 0jnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GvaH81B5hBrpGPqem9kaUkSdCiGN0le0jCxW0/4CJJg=;
- b=MvHO1AnPreL5SPJkFeoSriPybAu3E62lfutnXlGcepefiElJ30z35KSgbtEcbHgokQ
- TscrRZrneSXoaqs06+LXRFop64iY/iiCrWDhaCOJuHJf4zsjhsOMbGvLMcOW6lg1p3Uq
- 9K7Ewkt0onDe3e1iu53BYwGpZnUM4v/VJx4xCnDaeFIP6d/Rc0jxy5zl+TbzCN1baq4W
- SvJKFK4SdfunbG81bjpOTh5VV3u7vBdKAzRqLxJR4FDFoOywpx3EKI7/5lyHAZEK2Kw4
- VxL2j35DSJBWglgr90hHCLYHmK4VuI+Z+VhCm6fz6slMp2FLLhLH+ehYAR53OmQ+d3Ed
- EdyA==
-X-Gm-Message-State: AO0yUKUA7ebxps8iLyHl4xntERI8B40hBYh8mtHu3N5lQfv3SM8iQD04
- 0E17yrZ8RYtUcQ9L+XbC9wJICA==
-X-Google-Smtp-Source: AK7set9SuXlB4yKcBgavleAnsejW5UCFlavlev4MYns7+uSPv6zvsNpXc4CW/QneGy4hhsjkFnCVxA==
-X-Received: by 2002:a05:6820:1895:b0:51a:48f4:75de with SMTP id
- bm21-20020a056820189500b0051a48f475demr889666oob.0.1676552725190; 
- Thu, 16 Feb 2023 05:05:25 -0800 (PST)
-Received: from grind.dc1.ventanamicro.com ([191.19.40.109])
- by smtp.gmail.com with ESMTPSA id
- c74-20020a4a4f4d000000b0051f97e8a1d5sm594315oob.35.2023.02.16.05.05.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Feb 2023 05:05:24 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- ajones@ventanamicro.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v4 10/10] target/riscv/cpu: remove CPUArchState::features and
- friends
-Date: Thu, 16 Feb 2023 10:04:44 -0300
-Message-Id: <20230216130444.795997-11-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230216130444.795997-1-dbarboza@ventanamicro.com>
-References: <20230216130444.795997-1-dbarboza@ventanamicro.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CplCPzI50Th7jHG+c71KD2WSIU0BgVLVu/8hr11aSiE=;
+ b=dYFe6IpNuxwsium5CzWf1OW3PrLeS6n+FTJHDBJ2yxn23k4rtaOftx9TMYxXtoQicy
+ PL9cVTHIoIK8nK3DpJEDZ+oXFlO7idBSj7CT4Or85SeUjOFwWp1yau+3qIJi+x3g2GII
+ a7F/uwtcDUJ3U0ytMW6U6d2LpdFka+UY+yxHChmWquHiC1jGan8T8IdO572KJTkQwRW3
+ bQV8fqSDW7gH44Jixk4UPPs3hiG8ARTnd/bD3RumeqlZtF8BAybJJDx9aGulSjoFqKeV
+ ygDtmzufi6PO0bOI083u+HbMDWI+xas7tEY0HJPLTZDjhvA36JoYIIKwoSnyr6iyLiOM
+ mGyg==
+X-Gm-Message-State: AO0yUKXJ0tnyLvdZOPR5yfK2tiLzWZY2g49r45qz5xZH+8s2WavNP0ku
+ FpT3I3k3o4Wv8apkk81OwzToL1wE+f+Rp9XfJOw=
+X-Google-Smtp-Source: AK7set8k16iaeW0njNZKPFkhK5wh95IuP4uv95M82dqcOLQc2nz0RmhuaYHCdxo2saD9qOBSqOYxjibATnr70TR0w98=
+X-Received: by 2002:a17:906:5293:b0:8b1:2fff:8689 with SMTP id
+ c19-20020a170906529300b008b12fff8689mr2847565ejm.6.1676554021509; Thu, 16 Feb
+ 2023 05:27:01 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc33.google.com
+References: <20230216130444.795997-1-dbarboza@ventanamicro.com>
+ <20230216130444.795997-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20230216130444.795997-2-dbarboza@ventanamicro.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 16 Feb 2023 21:26:50 +0800
+Message-ID: <CAEUhbmWWhwckM0pNQ1uE1BnMJJiE4J7FteZicqAy1cfyTHLJQw@mail.gmail.com>
+Subject: Re: [PATCH v4 01/10] target/riscv: turn write_misa() into an official
+ no-op
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ ajones@ventanamicro.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -85,78 +74,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2023 13:05:31 -0000
+X-List-Received-Date: Thu, 16 Feb 2023 13:27:10 -0000
 
-The attribute is no longer used since we can retrieve all the enabled
-features in the hart by using cpu->cfg instead.
+On Thu, Feb 16, 2023 at 9:06 PM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> At this moment, and apparently since ever, we have no way of enabling
+> RISCV_FEATURE_MISA. This means that all the code from write_misa(), all
+> the nuts and bolts that handles how to write this CSR, has always been a
+> no-op as well because write_misa() will always exit earlier.
+>
+> This seems to be benign in the majority of cases. Booting an Ubuntu
+> 'virt' guest and logging all the calls to 'write_misa' shows that no
+> writes to MISA CSR was attempted. Writing MISA, i.e. enabling/disabling
+> RISC-V extensions after the machine is powered on, seems to be a niche
+> use.
+>
+> It is important to mention that the spec says that MISA is a WARL (Write
+> Any Read Legal) CSR, and having the write operations as a no-op is a
+> valid spec implementation. Allowing the dormant code to write MISA can
+> cause tricky bugs to solve later on. Given that we don't have a
+> particularly interesting case of writing MISA to support today, the
+> risks outweights the benefits.
 
-Remove env->feature, riscv_feature() and riscv_set_feature(). We also
-need to bump vmstate_riscv_cpu version_id and minimal_version_id since
-'features' is no longer being migrated.
+typo, outweigh?
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+>
+> Let's make it official and erase all the body of write_misa(), making it
+> an official no-op.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/csr.c | 55 ----------------------------------------------
+>  1 file changed, 55 deletions(-)
+>
+
 Reviewed-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
----
- target/riscv/cpu.h     | 12 ------------
- target/riscv/machine.c |  5 ++---
- 2 files changed, 2 insertions(+), 15 deletions(-)
-
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 7ff4d90261..671734420b 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -173,8 +173,6 @@ struct CPUArchState {
-     /* 128-bit helpers upper part return value */
-     target_ulong retxh;
- 
--    uint32_t features;
--
- #ifdef CONFIG_USER_ONLY
-     uint32_t elf_flags;
- #endif
-@@ -524,16 +522,6 @@ static inline int riscv_has_ext(CPURISCVState *env, target_ulong ext)
-     return (env->misa_ext & ext) != 0;
- }
- 
--static inline bool riscv_feature(CPURISCVState *env, int feature)
--{
--    return env->features & (1ULL << feature);
--}
--
--static inline void riscv_set_feature(CPURISCVState *env, int feature)
--{
--    env->features |= (1ULL << feature);
--}
--
- #include "cpu_user.h"
- 
- extern const char * const riscv_int_regnames[];
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 67e9e56853..9c455931d8 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -331,8 +331,8 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
- 
- const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
--    .version_id = 6,
--    .minimum_version_id = 6,
-+    .version_id = 7,
-+    .minimum_version_id = 7,
-     .post_load = riscv_cpu_post_load,
-     .fields = (VMStateField[]) {
-         VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
-@@ -351,7 +351,6 @@ const VMStateDescription vmstate_riscv_cpu = {
-         VMSTATE_UINT32(env.misa_ext, RISCVCPU),
-         VMSTATE_UINT32(env.misa_mxl_max, RISCVCPU),
-         VMSTATE_UINT32(env.misa_ext_mask, RISCVCPU),
--        VMSTATE_UINT32(env.features, RISCVCPU),
-         VMSTATE_UINTTL(env.priv, RISCVCPU),
-         VMSTATE_UINTTL(env.virt, RISCVCPU),
-         VMSTATE_UINT64(env.resetvec, RISCVCPU),
--- 
-2.39.1
-
 
