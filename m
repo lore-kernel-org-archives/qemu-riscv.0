@@ -1,49 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSfAs-0005bW-93
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 09:23:50 -0500
+	id 1pSfAt-0005cI-G5
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 09:23:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pSfAo-0005aU-Na
- for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 09:23:48 -0500
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pSfAr-0005bC-P1
+ for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 09:23:49 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pSfAk-00075g-Kx
- for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 09:23:44 -0500
-Received: by mail-wr1-x42b.google.com with SMTP id bk16so1989319wrb.11
- for <qemu-riscv@nongnu.org>; Thu, 16 Feb 2023 06:23:41 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pSfAp-00079r-U6
+ for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 09:23:49 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id r18so1677987wmq.5
+ for <qemu-riscv@nongnu.org>; Thu, 16 Feb 2023 06:23:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=L/pc4xY0KkVf5b//iMesTSo8MZ4ZxBt4DNYQN+C1HdI=;
- b=xm3UKzv2yzNgXUm886BkUe+/i+rHCY1Y6F94hYT5BZTDPkAK8FtiOU35Or0qKMpuHS
- oCwe4GFTO5IOR2cBJbV4GfPitMufN5Ofmx7g8EoIcSZqh8OsySUoL+UO+OX70VX9NEvS
- tgqixgsMLUQfsW+myb52ZJhXWYmVsJTbObv397qLE6y47/4MF0sgyyaABCubASK/Ax8F
- K1LwoTs9Err8cIvhrZyHYjHk9xPWX5iwzPxEH8txuvlGvcmV7vZyk6CL6OVbLoOuriC4
- tCQtuSF8v6pI6Q+yQOuutoI6THlPXHBhAP6WOvgNhWOPRykFRmGh8ld3BBA4z08VpD2D
- P8DA==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JNh8xTJOWod+s7ucBgmNWDci6dZ45Cp+WXSSHvSLoZ8=;
+ b=tiUpkAAcnadyQJ+dVkubzde61bStnA0Kbi3UuyGWDQtEL6yLFqrBOH0YNEIXCeG2/M
+ Y0ImUy3irOA9xnWN7wtRCpZ9wvqkgEm0ktfjlLCPHuXbNuuM03m9noxAnscZp7byCftz
+ /vR0ZVULZUZbxg4dVuJP1WA4lJ04y4gUMi6fmzg4dCoa++Ir2Itb6A4Z06NG3iORGtCh
+ 24xIw7Hih7PmTbInUMPTtmACsstE5YJ2d8lhm6J54YzCr0gg0lxImnFJ193b3I9YRal7
+ 07/NOPhzbMMaFH9DORST7s/FRijumX0Ze217GCFHSxg12cxUcDCnKZ7n51Y15njjuil2
+ RwUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=L/pc4xY0KkVf5b//iMesTSo8MZ4ZxBt4DNYQN+C1HdI=;
- b=EPFL9Nlzi6/IAHE5JbN34meKr4MCicIMjoOECFrB0eXC0AyP79edg9nuuObvVgzF5E
- N2vLQ88cpx8cTL+ZUQ2RIiOqFywGXEABTrmYVHwpfrP0KbnW0u5kHq2TyYKI5ug1u/zQ
- jKbbyz769bUujiv0y3d3uZJJzR82GqSQfmgPcM9bUXpadqgNFV+TCWPERf6/ERMOeUYx
- xywRi/HL0MhYGf/d5K0p/k+dJhCSj9Dk9oZI3G9yhatrEiqMeYh9KgpujGoo49OcS86B
- 71aWgu7ZbyOXU0xrePoI9OcGwh6H91cXhd37sHBFie+SJq2+rPGESB0RGzq5AZnzpWn3
- qzFQ==
-X-Gm-Message-State: AO0yUKWcNJX0nNYsH/pa2AOlkik2uV4ZHlxeAOQcA0v7MvjThnf29xQO
- Jo6a80JN2xJ5BBXRSSpfrvu1Fg==
-X-Google-Smtp-Source: AK7set/fvHUqzq36NUA0q8wFFrhcs/+/abFpUQKRqYYLu+LTVZovh29pUc0cOK3fa5jW3o7YE0SzzA==
-X-Received: by 2002:a5d:4a52:0:b0:2c5:530b:7d6d with SMTP id
- v18-20020a5d4a52000000b002c5530b7d6dmr4818693wrs.24.1676557420715; 
- Thu, 16 Feb 2023 06:23:40 -0800 (PST)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JNh8xTJOWod+s7ucBgmNWDci6dZ45Cp+WXSSHvSLoZ8=;
+ b=urNDpboB0/mFwNyI82OnQyJINFQBv1G3vcnVMFgHadk4L44xYMPHzTW1IUejsr3TqN
+ pYphfcxwwwcg1f3eVzjg3TZTvGH3uxxWi74W8J4f9a3dXZvvHdnBChRn+W/E0xDc4QSU
+ 0DYh4DxY7KZhLAHA+GPm8plqndc3LDUetiXwXaz/LpqRqsj3478ih5eKpHneN31CraYI
+ X0kMOgmaEU5f5RLAHBQlVcu8gZ2jrAq4P2zUCuIj+tEMoONEg3YLKmgcR+mqLbwYnTs5
+ VUJHIqiPRMRMJQudM/RR15rX7VXg8B1kkyVSaEElFCYDykYWANPWR4t/L0Yb0XxHHBiz
+ 4rhA==
+X-Gm-Message-State: AO0yUKWoDU90Knz+egodhoPmyZwcSX0HAiZi2d5jM+EC1URbnt4rfwuM
+ n17Q/dePCn8c9zRfIDosFHTryg==
+X-Google-Smtp-Source: AK7set8/mydYwX5wqEN5PJShPmAcaNUpSAjGQ23UJXmnCPwqodWLrCMYM+/CuCdzsBDiastEQkQulg==
+X-Received: by 2002:a05:600c:91d:b0:3e2:668:3ed7 with SMTP id
+ m29-20020a05600c091d00b003e206683ed7mr3871662wmp.1.1676557426291; 
+ Thu, 16 Feb 2023 06:23:46 -0800 (PST)
 Received: from localhost.localdomain ([81.0.6.76])
  by smtp.gmail.com with ESMTPSA id
- o3-20020a05600c510300b003e2052bad94sm5484942wms.33.2023.02.16.06.23.39
+ p15-20020a7bcdef000000b003e21356bddcsm1966221wmj.33.2023.02.16.06.23.44
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 16 Feb 2023 06:23:40 -0800 (PST)
+ Thu, 16 Feb 2023 06:23:45 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>,
@@ -64,16 +65,17 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, Like Xu <like.xu.linux@gmail.com>,
  Alistair Francis <alistair@alistair23.me>,
  Zhao Liu <zhao1.liu@linux.intel.com>, Eduardo Habkost <eduardo@habkost.net>
-Subject: [PATCH 0/5] hw/cpu/cluster: Restrict CPU cluster to a particular CPU
- type
-Date: Thu, 16 Feb 2023 15:23:33 +0100
-Message-Id: <20230216142338.82982-1-philmd@linaro.org>
+Subject: [PATCH 1/5] hw/cpu: Extend CPUState::cluster_index documentation
+Date: Thu, 16 Feb 2023 15:23:34 +0100
+Message-Id: <20230216142338.82982-2-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
+In-Reply-To: <20230216142338.82982-1-philmd@linaro.org>
+References: <20230216142338.82982-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -93,40 +95,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2023 14:23:48 -0000
+X-List-Received-Date: Thu, 16 Feb 2023 14:23:50 -0000
 
-Following Alex's comment [1] on "Introduce hybrid CPU topology"
-RFC [2], this series strengthen a bit the CPU cluster by
-restricting it to a particular CPU type.
+Copy part of the description of commit f7b78602fd ("accel/tcg:
+Add cluster number to TCG TB hash") in tcg_cpu_init_cflags(),
+improving a bit CPUState::cluster_index documentation.
 
-We'd rather have a single way of creating heterogeneous (hybrid)
-CPU topology. Note the CPU cluster is not user-creatable, so few
-more work is required in this area.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ accel/tcg/tcg-accel-ops.c | 13 ++++++++++++-
+ include/hw/core/cpu.h     |  2 ++
+ 2 files changed, 14 insertions(+), 1 deletion(-)
 
-Based-on: <20230216122524.67212-1-philmd@linaro.org>
-  [3] "Have object_child_foreach() take Error* and return boolean"
-
-[1] https://lore.kernel.org/qemu-devel/87y1p1c18a.fsf@linaro.org/
-[2] https://lore.kernel.org/qemu-devel/20230213095035.158240-1-zhao1.liu@linux.intel.com/
-[3] https://lore.kernel.org/qemu-devel/20230216122524.67212-1-philmd@linaro.org/
-
-Philippe Mathieu-Daudé (5):
-  hw/cpu: Extend CPUState::cluster_index documentation
-  hw/cpu/cluster: Only add CPU objects to CPU cluster
-  hw/cpu/cluster: Restrict CPU cluster to a particular CPU type
-  hw/arm: Restrict CPU clusters to the expected type
-  hw/riscv: Restrict CPU clusters to the expected type
-
- accel/tcg/tcg-accel-ops.c  | 13 ++++++++++++-
- hw/arm/armsse.c            |  1 +
- hw/arm/xlnx-zynqmp.c       |  4 ++++
- hw/cpu/cluster.c           | 33 +++++++++++++++++++++++++++------
- hw/riscv/microchip_pfsoc.c |  4 ++++
- hw/riscv/sifive_u.c        |  2 ++
- include/hw/core/cpu.h      |  2 ++
- include/hw/cpu/cluster.h   |  1 +
- 8 files changed, 53 insertions(+), 7 deletions(-)
-
+diff --git a/accel/tcg/tcg-accel-ops.c b/accel/tcg/tcg-accel-ops.c
+index 19cbf1db3a..654aeec04c 100644
+--- a/accel/tcg/tcg-accel-ops.c
++++ b/accel/tcg/tcg-accel-ops.c
+@@ -44,7 +44,18 @@
+ 
+ void tcg_cpu_init_cflags(CPUState *cpu, bool parallel)
+ {
+-    uint32_t cflags = cpu->cluster_index << CF_CLUSTER_SHIFT;
++    uint32_t cflags;
++
++    /*
++     * Include the cluster number in the hash we use to look up TBs.
++     * This is important because a TB that is valid for one cluster at
++     * a given physical address and set of CPU flags is not necessarily
++     * valid for another:
++     * the two clusters may have different views of physical memory, or
++     * may have different CPU features (eg FPU present or absent).
++     */
++    cflags = cpu->cluster_index << CF_CLUSTER_SHIFT;
++
+     cflags |= parallel ? CF_PARALLEL : 0;
+     cflags |= icount_enabled() ? CF_USE_ICOUNT : 0;
+     cpu->tcg_cflags = cflags;
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index 2417597236..d427db0bc7 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -272,6 +272,8 @@ struct qemu_work_item;
+  *   to a cluster this will be UNASSIGNED_CLUSTER_INDEX; otherwise it will
+  *   be the same as the cluster-id property of the CPU object's TYPE_CPU_CLUSTER
+  *   QOM parent.
++ *   Under TCG this value is propagated to @tcg_cflags.
++ *   See TranslationBlock::TCG CF_CLUSTER_MASK.
+  * @tcg_cflags: Pre-computed cflags for this cpu.
+  * @nr_cores: Number of cores within this CPU package.
+  * @nr_threads: Number of threads within this CPU.
 -- 
 2.38.1
 
