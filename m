@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pShKH-0004BC-0O
+	id 1pShKH-0004EN-Ic
 	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 11:41:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pShKE-0003wf-J5
- for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 11:41:38 -0500
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
+ id 1pShKG-00045A-2o
+ for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 11:41:40 -0500
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pShKC-0000Uw-Pa
- for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 11:41:38 -0500
-Received: by mail-pj1-x1035.google.com with SMTP id k24so2444232pji.2
- for <qemu-riscv@nongnu.org>; Thu, 16 Feb 2023 08:41:33 -0800 (PST)
+ id 1pShKD-0000V7-01
+ for qemu-riscv@nongnu.org; Thu, 16 Feb 2023 11:41:39 -0500
+Received: by mail-pj1-x1033.google.com with SMTP id cp18so229533pjb.0
+ for <qemu-riscv@nongnu.org>; Thu, 16 Feb 2023 08:41:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=P07BINPsU3rITDcFle9rbSUKznPea6L7qdsHyvHdjZA=;
- b=jx90z2tgnL0nTM35WGQh0VH5AYwL6JzfJ6DvijE9Hs8tjCM1EwuSlmOEfZFb/TiHeY
- 0gpO9wLWOoap/vf5/FC79Jvgp4DRkhhOoTi1M9klnWnsOGqJNrEcYrADmm1inLHJhBM/
- ucmxoaF0a8DOARk1Zw6vV2/NFpZcmcl6BI4piDdmCym5ha5IhGDApxvsJgo0kVxhlZVO
- kI5JLbyxe8DYFoVs5W8elMWlGBR0P8yWxMnN7g6DiCfrMSm88SGv2/ehyYMBQ0FLiGz8
- J7m0U36rNR3MK0s4x7Kr1qIx2eAjwo5qCW7p3rMnaeQBvWOZchBcW0FteNopchyy4G5q
- cD9w==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=htx3L8ZbFkDG8vcCbUENB0v9bNbIA+8lPNiDX6BMsUg=;
+ b=OFI2IffIzxCoqGS4LvEtnKA2Klq6cxNbLKMs2DQw5EF/TX2wApZfGVAxa/8SakldiS
+ +DvvhkMrzqAvs56bV9rCwhcAVN9Ze9xLOoETSx15Ei1ar4ijYuCUmz9kEeGkbrc2Wl0J
+ GvGeZylEyokGrFq+TGrQj16e2ZZ5+FfAVwNJrp5HmciV1+/70cZhalzjmVZd8L5kNYpP
+ oPdRsHYSS5EP59gXFpzFzVESbW+8O2it+1hNN4kJEWceTR9Vof2RnhFnGi/Le/0zjq2t
+ t8WgoUqxRVwVvo3Wrawe6m5ZBdsUvsOJtXsm2jOf0dFdd5stBe5F3hSWCNNqNMlhr/Qr
+ uOWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=P07BINPsU3rITDcFle9rbSUKznPea6L7qdsHyvHdjZA=;
- b=WyJpbiTCYaHhItpK3JZPYSJb52HSsl7ihXsXbskONhxlYG7piZLdwuhMGL9rFRf5en
- kPdQ4bkVx0GMNaWjgkbJtA2rajBv8h3KmoEc5uAVgpBa5WJHb1mXy/2ro5KiPNF9h5yN
- 6uXXfKqjb9cTXVDFxHWuoRrzc1Xh2GJhyfiEQVVWTPj++W1wnUQxKIn4KfeeTVQ4UvM2
- RXhmInUQ3Y1ufOAHNSLwaMpQTiTIxQ5p4KpP5oPpj00VXESZ6f1boTQGcoHT/pnn11Rf
- zea/A2KVYWEB9VctHsa5UELwRm+l6c+yHzfHlojrgN7MvtXPW6nmUH8MX+mh38mEqctJ
- Tyog==
-X-Gm-Message-State: AO0yUKXp1rJ9mJyvLUcIn+ZqLQo0f3zc4iIL39OPPwKLFbtqHYJNDYkL
- 3krospb4n+iZ8e/3EPIkIP6w8g==
-X-Google-Smtp-Source: AK7set8sqlygkV+umGArVON4T+JHiaw4Ag8YuF8gRWpu3pZ90ZVcQMDevNXBq6xGPOA3o9HgD/RX2Q==
-X-Received: by 2002:a05:6a20:6a0b:b0:bc:6e88:7f58 with SMTP id
- p11-20020a056a206a0b00b000bc6e887f58mr7441207pzk.51.1676565692263; 
- Thu, 16 Feb 2023 08:41:32 -0800 (PST)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=htx3L8ZbFkDG8vcCbUENB0v9bNbIA+8lPNiDX6BMsUg=;
+ b=YGA1RRlXTvIsjqbSMLJT7GHrhBQxlZwmZ0/qq0VfS9qx5JgmdHTqDWr0c4vpkIvw4J
+ 1rNN1nw+fYB1mY7PhukBy8gYk0IYcZIseQiXhtHCNKs64xssp4faQpUicZSQwpiR+A5a
+ XGsghiNEelGzirUM2+y/JIDatBN3FJq5ljE1mRGHaSh1IXK6HN7VZnMhg8ag532Ju96v
+ oRDEd/HiKN8G/rxso5ppdUKqtByyBl9FK9VbljqlJdKdd0DYOypyXmYoB+T4ZNhxKzTG
+ xLzbMy4j0Mnxu+1OTxtfj+aIK6ZVxA80+JxcysLXHne3Nd/4zLMzVPvntveeTxHc0S0Q
+ 0g2A==
+X-Gm-Message-State: AO0yUKVxJqKSX58dHPBfcfghQgaPME1VE7pmZKPA0K/nYA2v9q5egOkN
+ FatiZ21DU0/CW/hOgAb6+XEMSQ==
+X-Google-Smtp-Source: AK7set94vGJbfZWgGAtMv9FYssmjlDYOut6x3ozSPy5Jws3n82X0wXiz5NqjDqsEbkkfrRYl1eEw+w==
+X-Received: by 2002:a05:6a20:231a:b0:c1:344c:668f with SMTP id
+ n26-20020a056a20231a00b000c1344c668fmr4187355pzc.12.1676565695568; 
+ Thu, 16 Feb 2023 08:41:35 -0800 (PST)
 Received: from kerodi.Dlink ([49.206.14.226]) by smtp.gmail.com with ESMTPSA id
- q20-20020a638c54000000b004fbd10af99asm1385243pgn.60.2023.02.16.08.41.29
+ q20-20020a638c54000000b004fbd10af99asm1385243pgn.60.2023.02.16.08.41.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Feb 2023 08:41:31 -0800 (PST)
+ Thu, 16 Feb 2023 08:41:35 -0800 (PST)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -55,15 +56,17 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Anup Patel <apatel@ventanamicro.com>,
  Atish Kumar Patra <atishp@rivosinc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH V3 0/8] Add basic ACPI support for risc-v virt
-Date: Thu, 16 Feb 2023 22:11:17 +0530
-Message-Id: <20230216164125.1945633-1-sunilvl@ventanamicro.com>
+ Sunil V L <sunilvl@ventanamicro.com>, Bin Meng <bmeng@tinylab.org>
+Subject: [PATCH V3 1/8] hw/riscv/virt: Add OEM_ID and OEM_TABLE_ID fields
+Date: Thu, 16 Feb 2023 22:11:18 +0530
+Message-Id: <20230216164125.1945633-2-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230216164125.1945633-1-sunilvl@ventanamicro.com>
+References: <20230216164125.1945633-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x1035.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,78 +86,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2023 16:41:38 -0000
+X-List-Received-Date: Thu, 16 Feb 2023 16:41:40 -0000
 
-This series adds the basic ACPI support for the RISC-V virt machine. 
-Currently only RINTC interrupt controller specification is approved by the
-UEFI forum. External interrupt controller support in ACPI is in progress.
+ACPI needs OEM_ID and OEM_TABLE_ID for the machine. Add these fields
+in the RISCVVirtState structure and initialize with default values.
 
-The basic infrastructure changes are mostly leveraged from ARM.
+Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+Reviewed-by: Bin Meng <bmeng@tinylab.org>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+---
+ hw/riscv/virt.c         | 5 +++++
+ include/hw/riscv/virt.h | 2 ++
+ 2 files changed, 7 insertions(+)
 
-This adds support for RINTC and RHCT tables as specified in below ECR links
-which are approved by UEFI forum.
-RINTC - https://drive.google.com/file/d/1R6k4MshhN3WTT-hwqAquu5nX6xSEqK2l/view
-RHCT - https://drive.google.com/file/d/1nP3nFiH4jkPMp6COOxP6123DCZKR-tia/view
-
-These changes are also available @
-https://github.com/vlsunil/qemu/tree/acpi_b1_us_review_V3
-
-Changes since V2:
-	1) Squashed commits and updated commit message as per feedback from Daniel.
-	2) Addressed comments from Drew.
-	3) Updated tags.
-
-Changes since V1:
-	1) Addressed comments from Bin Meng.
-	2) Made acpi switch default AUTO similar to other architectures.
-	3) Re-based and added RB and ACKs.
-
-The series is tested using SBI HVC console and initrd.
-
-Test instructions:
-1) Build Qemu with ACPI support (this series)
-
-2) Build EDK2 as per instructions in
-https://github.com/vlsunil/riscv-uefi-edk2-docs/wiki/RISC-V-Qemu-Virt-support
-
-3) Build Linux with ACPI support using below branch
-https://github.com/vlsunil/linux/commits/acpi_b1_us_review_ipi17_V2
-after enabling SBI HVC and SBI earlycon options.
-
-CONFIG_RISCV_SBI_V01=y
-CONFIG_SERIAL_EARLYCON_RISCV_SBI=y
-CONFIG_HVC_RISCV_SBI=y
-
-4) Build buildroot.
-
-Run with below command.
-qemu-system-riscv64   -nographic \
--drive file=Build/RiscVVirtQemu/RELEASE_GCC5/FV/RISCV_VIRT.fd,if=pflash,format=raw,unit=1 \
--machine virt -smp 16 -m 2G \
--kernel arch/riscv/boot/Image \
--initrd buildroot/output/images/rootfs.cpio \
--append "root=/dev/ram ro console=hvc0 earlycon=sbi"
-
-
-Sunil V L (8):
-  hw/riscv/virt: Add OEM_ID and OEM_TABLE_ID fields
-  hw/riscv/virt: Add a switch to disable ACPI
-  hw/riscv/virt: Add memmap pointer to RiscVVirtState
-  hw/riscv/virt: Enable basic ACPI infrastructure
-  hw/riscv/virt: virt-acpi-build.c: Add RINTC in MADT
-  hw/riscv/virt: virt-acpi-build.c: Add RHCT Table
-  hw/riscv/virt.c: Initialize the ACPI tables
-  MAINTAINERS: Add entry for RISC-V ACPI
-
- MAINTAINERS                |  18 +-
- hw/riscv/Kconfig           |   1 +
- hw/riscv/meson.build       |   1 +
- hw/riscv/virt-acpi-build.c | 387 +++++++++++++++++++++++++++++++++++++
- hw/riscv/virt.c            |  40 ++++
- include/hw/riscv/virt.h    |   6 +
- 6 files changed, 447 insertions(+), 6 deletions(-)
- create mode 100644 hw/riscv/virt-acpi-build.c
-
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 86c4adc0c9..1621278eb8 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -49,6 +49,7 @@
+ #include "hw/pci/pci.h"
+ #include "hw/pci-host/gpex.h"
+ #include "hw/display/ramfb.h"
++#include "hw/acpi/aml-build.h"
+ 
+ /*
+  * The virt machine physical address space used by some of the devices
+@@ -1513,6 +1514,10 @@ static void virt_machine_init(MachineState *machine)
+ 
+ static void virt_machine_instance_init(Object *obj)
+ {
++    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
++
++    s->oem_id = g_strndup(ACPI_BUILD_APPNAME6, 6);
++    s->oem_table_id = g_strndup(ACPI_BUILD_APPNAME8, 8);
+ }
+ 
+ static char *virt_get_aia_guests(Object *obj, Error **errp)
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index b3d26135c0..6c7885bf89 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -56,6 +56,8 @@ struct RISCVVirtState {
+     bool have_aclint;
+     RISCVVirtAIAType aia_type;
+     int aia_guests;
++    char *oem_id;
++    char *oem_table_id;
+ };
+ 
+ enum {
 -- 
 2.34.1
 
