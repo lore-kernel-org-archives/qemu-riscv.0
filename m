@@ -1,77 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pT4u0-000421-Ll
-	for mharc-qemu-riscv@gnu.org; Fri, 17 Feb 2023 12:52:08 -0500
+	id 1pT4vQ-00057e-Tq
+	for mharc-qemu-riscv@gnu.org; Fri, 17 Feb 2023 12:53:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pT4ty-00041M-Fb
- for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 12:52:06 -0500
-Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
+ (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
+ id 1pT4vP-00056x-Rr
+ for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 12:53:35 -0500
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pT4tw-0000kj-Pe
- for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 12:52:06 -0500
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-1718b32f589so1604502fac.5
- for <qemu-riscv@nongnu.org>; Fri, 17 Feb 2023 09:52:04 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
+ id 1pT4vN-0000sY-Iv
+ for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 12:53:35 -0500
+Received: by mail-pj1-x1036.google.com with SMTP id
+ ml23-20020a17090b361700b00234463de251so2142093pjb.3
+ for <qemu-riscv@nongnu.org>; Fri, 17 Feb 2023 09:53:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=fLO8uE4MwE+TjjxJWP0Hx1dDkzg54x+hJsFSWNmd2eI=;
- b=EO7Ct7aRpDH51zzos8g8cUwkuyRfxoNTqosiGXPJFad+xgY6QV09eGE+LEz8/BCjtc
- MpAnYeVJ5UbWi3yKGOcLmbPxAkxfA+pWJsDgDwV2Rukpt8VQzY2uGLYLGxg09X+gEnDY
- 1HfpEhmTb2r09PrJm1T88oHxn2GFVavpHxVwrBWqlk2GwKDN/WoC/A1TKeDKxQqzOw/o
- 68ZEN7j7OijJgSwHMd0tzYGL7TA2IWv5+iz//Qz2AZ2yqEkeG3ArY5FRj1ltEd6GtOmz
- wo49Xpizdhgu49THxcK2ZigiYbZUFGD8VAgEkqREI0rJUHAB9Oi/KW2rDTsFfZhLDw/f
- 3Ueg==
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=to:from:cc:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:to:cc:subject:date:message-id:reply-to;
+ bh=YzwdI5K8y8Tic1JwbEz4kn4kuyRk5B0nB92f6tC+1Ns=;
+ b=UatQDxqUDj85d8Hss8P8xeXPjmIjq+mEjwk7TX7SLufy8nKnFnlaJwBEo7zDTrRiVh
+ 2Uf2uPc7INmD7XBIQedkJCoSfkcp9Gm59Fzl5raBqB/MJRNu20prF617FlwI3rL+E+Yx
+ cZr49+WrRV/r7ShQSWvUyfrHsEnyxGYAdDppQG3LDpiV0T2GSlORcNesbRjFAWPX6MN6
+ B5FJUt8ibuBcIUhnBnf7gSFoQrGPqZD7jdX58G1NEf6AXDUeF8MxczYAosHAO7J7NIOe
+ IAsWfzfwgS0gIMJqV0gsZ8ZrK4e9dOEj/4zQC966rAOExv8DBQb6G2RnXDXaeJntZLJK
+ CXHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fLO8uE4MwE+TjjxJWP0Hx1dDkzg54x+hJsFSWNmd2eI=;
- b=sFi8ZogvUrU3NK0mB842kT6XMwsvb5SDPVvh3EZ7f/y14PrHt12YK5UcNvVSFOiLlR
- aPW4x/0syiWFTU3ugMhQTLxSDun90ooq2OG/f26d93PgNxwafb5yhy+3490gg5d+2S8Q
- NYlNdNkx6836F/Lj6yOXEln3otilUfntDt3U/30367USXFsRiU7RM/IWwHD1Jl/1ytGB
- MxEPj9ZkJayWI2eyN/EYCgfPrRAaiNFbVw7OsWuDO2IjdYk93cgFBYyosEd/kIXFcusf
- /ldee6ZfAN0PFUMDbUzsrxN1OOsr4A2QJvG/Hwggy6B4Agu58bFWQjXPJr0fn8rmZWrG
- KAWA==
-X-Gm-Message-State: AO0yUKWPNMuZkkxauYQR5tzgr1HcW3MU7uVErQIawtAsY0XzSFcQbcPf
- m6Z+dkMJm1uHBHiZS8T81pcqZA==
-X-Google-Smtp-Source: AK7set8Mk+dAYnw/IBBfAi+t+X4eiy/KI1ApI262rHeAonq8qiHymHV3J9zZO+etRxeqaWx7Oqk+iQ==
-X-Received: by 2002:a05:6870:479e:b0:16d:cc37:3d7b with SMTP id
- c30-20020a056870479e00b0016dcc373d7bmr763687oaq.36.1676656323103; 
- Fri, 17 Feb 2023 09:52:03 -0800 (PST)
-Received: from [192.168.68.107] ([191.19.40.109])
- by smtp.gmail.com with ESMTPSA id
- du25-20020a0568703a1900b0016a310dc4a9sm1892399oab.9.2023.02.17.09.51.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Feb 2023 09:52:02 -0800 (PST)
-Message-ID: <4c3202fc-654c-8c6c-c754-1d156c2de2a6@ventanamicro.com>
-Date: Fri, 17 Feb 2023 14:51:53 -0300
+ h=to:from:cc:content-transfer-encoding:mime-version:message-id:date
+ :subject:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YzwdI5K8y8Tic1JwbEz4kn4kuyRk5B0nB92f6tC+1Ns=;
+ b=e1hoP932JAxHIfBmrxC+0CldOW5XkxwLTPQQTJt85vS4y6Mr61fqAmbWgdqRIrrJ9I
+ 8L403MaVJzUbvO37zeDEWZhS+LLplNK92jW5LSHeJcZJsosyYZ2uQmmYCR94dCPs1B2r
+ TXeRU4UuHT5/MLBAjqi739xH7rKVvL4SomIsN7yjjmzNzzIMeUsuGAWiseIVO8nZnHgF
+ Vg4qIJKHMDYJ8K2Ckg67THAElc5kCoEZh5G2KgVCI/0HrOr1nq0EmzCLi/iMWzXHrzQr
+ 4zfGbXyNPdLKgvw/bAMtGbXz0ZANhhqvcWAszx287VynEtx5KtjFSL+zdhC3wJ9GS1KQ
+ ODEg==
+X-Gm-Message-State: AO0yUKWVCdKDh11SFZdnP72xIYwUzEMBuaWdb6EYzSlAq7bF6wEPe/Af
+ Fw/JzD09hYO3JUo2ppsgVgmIeUNcM8P3oNHR
+X-Google-Smtp-Source: AK7set/sNJp+H9nku9PgTwU6yPQ1EHhFve82Y6TqlJTV5UxCY8B4Jp6I/4Gg2neqV86xP7a1YSuBhA==
+X-Received: by 2002:a05:6a20:9386:b0:bc:ee04:275d with SMTP id
+ x6-20020a056a20938600b000bcee04275dmr8413588pzh.61.1676656411171; 
+ Fri, 17 Feb 2023 09:53:31 -0800 (PST)
+Received: from localhost ([135.180.226.51]) by smtp.gmail.com with ESMTPSA id
+ y26-20020a62b51a000000b00592417157f2sm3420021pfe.148.2023.02.17.09.53.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Feb 2023 09:53:30 -0800 (PST)
+Subject: [PULL 0/9] Fourth RISC-V PR for QEMU 8.0
+Date: Fri, 17 Feb 2023 09:51:54 -0800
+Message-Id: <20230217175203.19510-1-palmer@rivosinc.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.2
-Subject: Re: [PATCH] [PATCH] disas/riscv Fix ctzw disassemble
-Content-Language: en-US
-To: Ivan Klokov <ivan.klokov@syntacore.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com
-References: <20230217161027.56859-1-ivan.klokov@syntacore.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230217161027.56859-1-ivan.klokov@syntacore.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2001:4860:4864:20::31;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x31.google.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.256,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmer@rivosinc.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=palmer@rivosinc.com; helo=mail-pj1-x1036.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,36 +76,87 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2023 17:52:06 -0000
+X-List-Received-Date: Fri, 17 Feb 2023 17:53:36 -0000
 
+The following changes since commit 417296c8d8588f782018d01a317f88957e9786d6:
 
+  tests/qtest/netdev-socket: Raise connection timeout to 60 seconds (2023-02-09 11:23:53 +0000)
 
-On 2/17/23 13:10, Ivan Klokov wrote:
-> Due to typo in opcode list, ctzw is disassembled as clzw instruction.
-> 
-> Fixes: 02c1b569a15b ("disas/riscv: Add Zb[abcs] instructions")
-> Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
-> ---
+are available in the Git repository at:
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+  https://github.com/palmer-dabbelt/qemu.git tags/pull-riscv-to-apply-20230217
 
-> v2:
->     - added fixes line
-> ---
->   disas/riscv.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index ddda687c13..54455aaaa8 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -1645,7 +1645,7 @@ const rv_opcode_data opcode_data[] = {
->       { "max", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
->       { "maxu", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
->       { "clzw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
-> -    { "clzw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
-> +    { "ctzw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
->       { "cpopw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
->       { "slli.uw", rv_codec_i_sh5, rv_fmt_rd_rs1_imm, NULL, 0, 0, 0 },
->       { "add.uw", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+for you to fetch changes up to e8c0697d79ef05aa5aefb1121dfede59855556b4:
+
+  target/riscv: Fix vslide1up.vf and vslide1down.vf (2023-02-16 08:10:40 -0800)
+
+----------------------------------------------------------------
+Fourth RISC-V PR for QEMU 8.0
+
+* A triplet of cleanups to the kernel/initrd loader that avoids
+  duplication between the various boards.
+* OpenSBI has been updated to version 1.2.
+* Weiwei Li, Daniel Henrique Barboza, and Liu Zhiwei have been added as
+  reviewers.  Thanks for the help!
+* A fix for PMP matching to avoid incorrectly appling the default
+  permissions on PMP permission violations.
+* A cleanup to avoid an unnecessary avoid env_archcpu() in
+  cpu_get_tb_cpu_state().
+* Fixes for the vector slide instructions to avoid truncating 64-bit
+  values (such as doubles) on 32-bit targets.
+
+----------------------------------------------------------------
+Alistair is going to be out for a bit, so I'm going to pick up the pull
+requests for a bit until he's back online.  It's been a while so
+apologies in advance if anything has gone off the rails, the only thing
+I know of is that I moved to a Yubikey a while ago so there's likely
+some new subkeys involved in the signing here.
+
+This is all passing my standard tests (make check along with a handful
+of Linux boots), both on its own and when merge into master from this
+morning.  There has been some flakiness in both of those for a while
+now, but it doesn't appear to be anything new here (and I think might
+just be flaky infrastructure on my end).
+
+----------------------------------------------------------------
+Alistair Francis (1):
+      MAINTAINERS: Add some RISC-V reviewers
+
+Bin Meng (1):
+      roms/opensbi: Upgrade from v1.1 to v1.2
+
+Daniel Henrique Barboza (4):
+      hw/riscv: handle 32 bit CPUs kernel_entry in riscv_load_kernel()
+      hw/riscv/boot.c: consolidate all kernel init in riscv_load_kernel()
+      hw/riscv/boot.c: make riscv_load_initrd() static
+      target/riscv: avoid env_archcpu() in cpu_get_tb_cpu_state()
+
+Frank Chang (1):
+      target/riscv: Remove privileged spec version restriction for RVV
+
+Himanshu Chauhan (1):
+      target/riscv: Smepmp: Skip applying default rules when address matches
+
+LIU Zhiwei (1):
+      target/riscv: Fix vslide1up.vf and vslide1down.vf
+
+ MAINTAINERS                                    |   3 +
+ hw/riscv/boot.c                                |  97 ++++++++++++++++---------
+ hw/riscv/microchip_pfsoc.c                     |  12 +--
+ hw/riscv/opentitan.c                           |   4 +-
+ hw/riscv/sifive_e.c                            |   4 +-
+ hw/riscv/sifive_u.c                            |  12 +--
+ hw/riscv/spike.c                               |  14 +---
+ hw/riscv/virt.c                                |  12 +--
+ include/hw/riscv/boot.h                        |   3 +-
+ pc-bios/opensbi-riscv32-generic-fw_dynamic.bin | Bin 117704 -> 123072 bytes
+ pc-bios/opensbi-riscv64-generic-fw_dynamic.bin | Bin 115344 -> 121800 bytes
+ roms/opensbi                                   |   2 +-
+ target/riscv/cpu.c                             |   2 +-
+ target/riscv/cpu_helper.c                      |   2 +-
+ target/riscv/csr.c                             |  21 ++----
+ target/riscv/pmp.c                             |   9 ++-
+ target/riscv/vector_helper.c                   |   4 +-
+ 17 files changed, 99 insertions(+), 102 deletions(-)
+
 
