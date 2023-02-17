@@ -1,76 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pT4vW-0005BY-Vt
+	id 1pT4vX-0005Bp-4c
 	for mharc-qemu-riscv@gnu.org; Fri, 17 Feb 2023 12:53:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pT4vV-0005Au-Qs
- for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 12:53:41 -0500
-Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
+ id 1pT4vW-0005B3-9h
+ for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 12:53:42 -0500
+Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pT4vU-0000uM-3W
- for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 12:53:41 -0500
-Received: by mail-pg1-x536.google.com with SMTP id o1so1116413pgm.7
- for <qemu-riscv@nongnu.org>; Fri, 17 Feb 2023 09:53:39 -0800 (PST)
+ id 1pT4vU-0000sf-Mc
+ for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 12:53:42 -0500
+Received: by mail-pj1-x1030.google.com with SMTP id
+ ev7-20020a17090aeac700b002341621377cso1997520pjb.2
+ for <qemu-riscv@nongnu.org>; Fri, 17 Feb 2023 09:53:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DDWoUrS3gNFU9IU+ndidQqS1Eb6eRflzx7e/dFgHmuQ=;
- b=qW0nxrrDmzpJPp5WtQkop6cS2PXq3xZlVYb2DUGKYMpSHI/Nbk2Ikrzj97iVxlGR0q
- QYuAoElqh5hLibkQ88w8CnbXGqo+RukN4uQ0uiPDUCVgItq2rBoJFv+HUC0cE+eEva7u
- 3TIpoAg3afcBmkvGJKaLvDtgvhrTLRV5PrS44oyfes2cLhF1g/41N0mA3mJq+PWLCigF
- wM9Lc//QPb2skPZMWNKEe8XyVTuyKumxI8xEU6XS+/ljjxJQrZUuWPWg8hPCR3He00Jp
- 34+Psrf7NipSTxXkazd49idiMP1B8STz+i7Ja6EFvANxafjUFpHG7ZBg8JKbqUw8JAPQ
- IEEg==
+ bh=lx0M+hYFCHNKkG1Lj780I7YKmL/EVcbXsrThtaMCRAY=;
+ b=0IAKTl7IOZDcQBpyC+XtwdOvgNyH0cRsksfIHNjGoiOMiLuO7na9vmfg2Qw0T21qej
+ Z0uA9iaCSZtdh00tY9UB3f0wgHFTO2qqF+vOg47Y0pFVdE0k6ygmyxHw9zMcXpyUgkLR
+ Za6j+49wqolcPQQOAbc3lfZzsmYi+XgRp36arQUtD8HT1cBFq8Hn3PCT8k7b+VmeYz2K
+ GVr6mJP0MGT1fTdgLW3l5o+BKFLZN0cdZ8XHs/ebQ+LsjVx6uwj+bdhim2l8rOCg6qE0
+ Nll2Oh+XZi/xlAK2ihurYmRnp976C4kOrCikDp4Nf5YJdKmC1rnU5fGTuIuI+Wsdp0bF
+ UFNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DDWoUrS3gNFU9IU+ndidQqS1Eb6eRflzx7e/dFgHmuQ=;
- b=do4KcK9sK0vvG0iLRmH7F4XD6MNhhgx/JgphrRd3EEuf9ark6/hUE6Xr9m0sB1wQyY
- nsNI/RX8xVTipLiPDNUgtuJu4tG5k6JArjFJ3H/b3z7xIlz3MvWL9mbEfnkl/Td9NjKB
- TAr6BdrDpq5I0ezLEF/rTLEtmQJ4tIvB+okzntM8/nqD0KJliD+GtLcu5Q23Cf0s/IE8
- 6rHxj1VXF35nQqeKWmZZcc4E6icf+0aW+xKiJzXfpDqlPPhipz2N8ARNrRCzOAzrxEw0
- i9Ycd04RtyYhtBunZqmgCBe5sCckCl27VHGa/8u1OOu99eT13HB3MPkY4RrovuRHcPq9
- liow==
-X-Gm-Message-State: AO0yUKXtKWjtUG2qbuvCdkjsjVIXR7Ul6cPX/bu7VODVT7dKYSR2RZxs
- fuzrmQ4Qkw9VOAm/RnV9+za0vmHWEr+GbISz
-X-Google-Smtp-Source: AK7set97je10L1V6RK2sQgL7D9KoR8q+x0KVILmLpszcU5ZBtj/DsUAiDSoCg9nXhSl+pBOuXwJPHQ==
-X-Received: by 2002:a62:8444:0:b0:5a8:4b27:5db2 with SMTP id
- k65-20020a628444000000b005a84b275db2mr1597092pfd.1.1676656418530; 
- Fri, 17 Feb 2023 09:53:38 -0800 (PST)
+ bh=lx0M+hYFCHNKkG1Lj780I7YKmL/EVcbXsrThtaMCRAY=;
+ b=zu4sAgpeEHYZTvsaLFUZmrOHBe8rJFQxLyHS+3u0CDQe4MHE3WCBJZVjyk/F+KniZh
+ do7OW5PXwJ0g01yKCjlNGKvPepiatTxHeB75i+wxz8od9ppWSjvKfmFalEDlZsTBQWYC
+ wqQ9GUHdDif49m5YVMCZ9uhX+kTSjKyRZJs7p/vquLAg6ERHHUrznaAD+sLYwA0uPhSB
+ V8cnQu7JbXs15vhYn4GgEGWli07gdQbTZcLECN+YAXG6APHfbwGbibQTN936/CU8M329
+ 2e7LqkcNoByYl57og18e6bejv23/EoNN3VZ//HXcBIRvdOWQq5KLZzGbHql+H6QCJ4z1
+ MPJg==
+X-Gm-Message-State: AO0yUKWvKkfywPsuNrQpSPcyLtE/SoNfSxWOgMEyBuLOxTp0VDwcUgt0
+ /EO/SZuuRf0vqKE6ZVdkWsCgmJ8yf43JLCZL
+X-Google-Smtp-Source: AK7set9sE7ST4pvAvj18OxHgEkHYxP03G9nfBG8KifcsLBXY23qXJF+kExlZF9l8MDn78pDoqHEVxg==
+X-Received: by 2002:a17:902:fad0:b0:199:190c:3c15 with SMTP id
+ ld16-20020a170902fad000b00199190c3c15mr1111746plb.49.1676656419672; 
+ Fri, 17 Feb 2023 09:53:39 -0800 (PST)
 Received: from localhost ([135.180.226.51]) by smtp.gmail.com with ESMTPSA id
- j21-20020aa783d5000000b005a9bbef5d22sm2425888pfn.44.2023.02.17.09.53.37
+ y9-20020a170902ed4900b0019a256bfe96sm3404335plb.242.2023.02.17.09.53.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Feb 2023 09:53:38 -0800 (PST)
-Subject: [PULL 5/9] target/riscv: Remove privileged spec version restriction
- for RVV
-Date: Fri, 17 Feb 2023 09:51:59 -0800
-Message-Id: <20230217175203.19510-6-palmer@rivosinc.com>
+ Fri, 17 Feb 2023 09:53:39 -0800 (PST)
+Subject: [PULL 6/9] MAINTAINERS: Add some RISC-V reviewers
+Date: Fri, 17 Feb 2023 09:52:00 -0800
+Message-Id: <20230217175203.19510-7-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230217175203.19510-1-palmer@rivosinc.com>
 References: <20230217175203.19510-1-palmer@rivosinc.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
- Frank Chang <frank.chang@sifive.com>, Bin Meng <bmeng@tinylab.org>,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, 
  Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@rivosinc.com>
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ ilippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@rivosinc.com>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
- envelope-from=palmer@rivosinc.com; helo=mail-pg1-x536.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
+ envelope-from=palmer@rivosinc.com; helo=mail-pj1-x1030.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,72 +88,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 17 Feb 2023 17:53:42 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
+From: Alistair Francis <alistair.francis@wdc.com>
 
-The RVV specification does not require that the core needs to support
-the privileged specification v1.12.0 to support RVV, and there is no
-dependency from ISA level.
+This patch adds some active RISC-V members as reviewers to the
+MAINTAINERS file.
 
-This commit removes the restriction from both RVV CSRs and extension CPU
-ISA string.
-
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Message-Id: <20230208063209.27279-1-frank.chang@sifive.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Acked-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Message-Id: <20230209003308.738237-1-alistair.francis@opensource.wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- target/riscv/cpu.c |  2 +-
- target/riscv/csr.c | 21 +++++++--------------
- 2 files changed, 8 insertions(+), 15 deletions(-)
+ MAINTAINERS | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 0dd2f0c753..93b52b826c 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -73,7 +73,7 @@ struct isa_ext_data {
-  */
- static const struct isa_ext_data isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(h, false, PRIV_VERSION_1_12_0, ext_h),
--    ISA_EXT_DATA_ENTRY(v, false, PRIV_VERSION_1_12_0, ext_v),
-+    ISA_EXT_DATA_ENTRY(v, false, PRIV_VERSION_1_10_0, ext_v),
-     ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ext_icsr),
-     ISA_EXT_DATA_ENTRY(zifencei, true, PRIV_VERSION_1_10_0, ext_ifencei),
-     ISA_EXT_DATA_ENTRY(zihintpause, true, PRIV_VERSION_1_10_0, ext_zihintpause),
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index fa17d7770c..1b0a0c1693 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -3980,20 +3980,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_FRM]      = { "frm",      fs,     read_frm,     write_frm    },
-     [CSR_FCSR]     = { "fcsr",     fs,     read_fcsr,    write_fcsr   },
-     /* Vector CSRs */
--    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
--    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
--    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
--    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
--    [CSR_VL]       = { "vl",       vs,     read_vl,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
--    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
--    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb,
--                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-+    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart },
-+    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat  },
-+    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm   },
-+    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr   },
-+    [CSR_VL]       = { "vl",       vs,     read_vl                    },
-+    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype                 },
-+    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb                 },
-     /* User Timers and Counters */
-     [CSR_CYCLE]    = { "cycle",    ctr,    read_hpmcounter  },
-     [CSR_INSTRET]  = { "instret",  ctr,    read_hpmcounter  },
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 96e25f62ac..847bc7f131 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -287,6 +287,9 @@ RISC-V TCG CPUs
+ M: Palmer Dabbelt <palmer@dabbelt.com>
+ M: Alistair Francis <alistair.francis@wdc.com>
+ M: Bin Meng <bin.meng@windriver.com>
++R: Weiwei Li <liweiwei@iscas.ac.cn>
++R: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
++R: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+ L: qemu-riscv@nongnu.org
+ S: Supported
+ F: target/riscv/
 -- 
 2.39.0
 
