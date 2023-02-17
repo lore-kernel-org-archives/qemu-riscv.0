@@ -1,68 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSq2Z-0003mB-Hk
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 20:59:59 -0500
+	id 1pSq2j-0003uO-Mj
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 21:00:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pSq2X-0003lF-Dm; Thu, 16 Feb 2023 20:59:57 -0500
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pSq2V-0006uv-MC; Thu, 16 Feb 2023 20:59:57 -0500
-Received: by mail-ed1-x530.google.com with SMTP id fj20so10059277edb.1;
- Thu, 16 Feb 2023 17:59:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=prsORwPvRTB6uchzeR6pJmJMqUQUQPDTex/He3lGljk=;
- b=o9ER2LNG0RcR5JBXEWXCpPND8xNRYqKYucYb+fG2ZuGfFLDnO0abdZSCXkFjKQNBFE
- X/kMGrirL2izlRboIVS4LwkXjcc7rAIc7btYMRF/xrej3a/YmHvpI9sxTfKB5muMdJph
- gdqRSb45KeKjAkJqh0FvJ1qShEpNLvzWffJ0/or7ZST42xQv9/eILBQUP4Yvi/L7Qzs9
- ESewUbZyX7imNENbvCwliixF5/1/KWLa0ENiCnzZC5JRbKbnO95qDY3DT+At4xPiMaIt
- caRwF+IcDUTEWdkPfByT/aWixojDZA+1/lrtau55uxD7+e3iLchbWjy869uCOlGauiBz
- MsJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=prsORwPvRTB6uchzeR6pJmJMqUQUQPDTex/He3lGljk=;
- b=8HfCQ1Zb3J/xZ87eE7pty/l3Z6yrnB4cyvhfDJfjn3CReRrszmKxuHi+F4SS0Q/0gd
- gWST4BvrUS7WDpO9po3AeZWQc6CL5mq2wkGAInPvVD176efpRn5HacPIwgOPw8RII/Hx
- 6Pf9xLIf4b6sFkoCq/X+fM96n6dbAc1VWTIohHjrirOwJSdsTn0PR7NtpGzqS+PzxCgZ
- ndlt9T6JmRqoKWx12Xa4M5q6HZhyc6Ju3QdeiqEVkJgANm9vuJlmnxEBtP4FUzRClzth
- aVDKtrI8+he7CBdJMcjIXsuWDyiURzpeHmfjMLzFq/1AGhZgiCUWOAoePDb6aIV/QMMz
- O8Yg==
-X-Gm-Message-State: AO0yUKUCH9+zdQM1AjRDPLoaozazqZUp68PGAQaV4JqUKDjtH2JGtgfn
- PYNYpso+sqOVTi7gJEWMZ5dhK45q5zl6bnlzxEk=
-X-Google-Smtp-Source: AK7set882sRqJdpGZ6eVq5sUF8EpYrWw69+G3RT+4gG4BG4zqRw0/dYC3jgmmpeDajXH1+oAuJnUHXng1myYpbgn3p0=
-X-Received: by 2002:a17:907:3d91:b0:8af:2e89:83df with SMTP id
- he17-20020a1709073d9100b008af2e8983dfmr3027680ejc.6.1676599193581; Thu, 16
- Feb 2023 17:59:53 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pSq2i-0003u5-6H; Thu, 16 Feb 2023 21:00:08 -0500
+Received: from out30-111.freemail.mail.aliyun.com ([115.124.30.111])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pSq2g-0006wI-7r; Thu, 16 Feb 2023 21:00:07 -0500
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R111e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046050;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
+ TI=SMTPD_---0VbqETVf_1676599199; 
+Received: from 30.221.98.44(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VbqETVf_1676599199) by smtp.aliyun-inc.com;
+ Fri, 17 Feb 2023 09:59:59 +0800
+Message-ID: <4a23760d-353c-be20-a3b4-3a0e12eeb6e3@linux.alibaba.com>
+Date: Fri, 17 Feb 2023 09:59:57 +0800
 MIME-Version: 1.0
-References: <CAEUhbmX6Qb1aAdZC+d2F=n5qLo60XGiE3e0xTco1TgNgDxAKVg@mail.gmail.com>
- <mhng-af7566fe-2c88-460b-8cd4-f52b198bbff4@palmer-ri-x1c9a>
-In-Reply-To: <mhng-af7566fe-2c88-460b-8cd4-f52b198bbff4@palmer-ri-x1c9a>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 17 Feb 2023 09:59:42 +0800
-Message-ID: <CAEUhbmWQtabLO-whpqO8WDCgjXTfb7wQoqdWezzAUY-JSg9T2w@mail.gmail.com>
-Subject: Re: [PATCH 18/18] target/riscv: Move configuration check to envcfg
- CSRs predicate()
-To: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: liweiwei@iscas.ac.cn, qemu-devel@nongnu.org, 
- Alistair Francis <Alistair.Francis@wdc.com>, bin.meng@windriver.com, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x530.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.2
+Subject: Re: [PATCH v6 7/9] hw/riscv/virt.c: do not use RISCV_FEATURE_MMU in
+ create_fdt_socket_cpus()
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, richard.henderson@linaro.org,
+ Andrew Jones <ajones@ventanamicro.com>
+References: <20230216215550.1011637-1-dbarboza@ventanamicro.com>
+ <20230216215550.1011637-8-dbarboza@ventanamicro.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230216215550.1011637-8-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.30.111;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-111.freemail.mail.aliyun.com
+X-Spam_score_int: -102
+X-Spam_score: -10.3
+X-Spam_bar: ----------
+X-Spam_report: (-10.3 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.351, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,107 +56,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2023 01:59:57 -0000
+X-List-Received-Date: Fri, 17 Feb 2023 02:00:08 -0000
 
-Hi Palmer,
 
-On Fri, Feb 17, 2023 at 12:40 AM Palmer Dabbelt <palmer@dabbelt.com> wrote:
+On 2023/2/17 5:55, Daniel Henrique Barboza wrote:
+> Read cpu_ptr->cfg.mmu directly. As a bonus, use cpu_ptr in
+> riscv_isa_string().
 >
-> On Tue, 14 Feb 2023 18:22:21 PST (-0800), Bin Meng wrote:
-> > On Tue, Feb 14, 2023 at 10:59 PM weiwei <liweiwei@iscas.ac.cn> wrote:
-> >>
-> >>
-> >> On 2023/2/14 22:27, Bin Meng wrote:
-> >> > At present the envcfg CSRs predicate() routines are generic one like
-> >> > smode(), hmode. The configuration check is done in the read / write
-> >> > routine. Create a new predicate routine to cover such check, so that
-> >> > gdbstub can correctly report its existence.
-> >> >
-> >> > Signed-off-by: Bin Meng <bmeng@tinylab.org>
-> >> >
-> >> > ---
-> >> >
-> >> >   target/riscv/csr.c | 98 +++++++++++++++++++++++++++++-----------------
-> >> >   1 file changed, 61 insertions(+), 37 deletions(-)
-> >> >
-> >> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> >> > index 37350b8a6d..284ccc09dd 100644
-> >> > --- a/target/riscv/csr.c
-> >> > +++ b/target/riscv/csr.c
-> >> > @@ -41,40 +41,6 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
-> >> >   }
-> >> >
-> >> >   /* Predicates */
-> >> > -#if !defined(CONFIG_USER_ONLY)
-> >> > -static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
-> >> > -                                       uint64_t bit)
-> >> > -{
-> >> > -    bool virt = riscv_cpu_virt_enabled(env);
-> >> > -    RISCVCPU *cpu = env_archcpu(env);
-> >> > -
-> >> > -    if (env->priv == PRV_M || !cpu->cfg.ext_smstateen) {
-> >> > -        return RISCV_EXCP_NONE;
-> >> > -    }
-> >> > -
-> >> > -    if (!(env->mstateen[index] & bit)) {
-> >> > -        return RISCV_EXCP_ILLEGAL_INST;
-> >> > -    }
-> >> > -
-> >> > -    if (virt) {
-> >> > -        if (!(env->hstateen[index] & bit)) {
-> >> > -            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> >> > -        }
-> >> > -
-> >> > -        if (env->priv == PRV_U && !(env->sstateen[index] & bit)) {
-> >> > -            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> >> > -        }
-> >> > -    }
-> >> > -
-> >> > -    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
-> >> > -        if (!(env->sstateen[index] & bit)) {
-> >> > -            return RISCV_EXCP_ILLEGAL_INST;
-> >> > -        }
-> >> > -    }
-> >> > -
-> >> > -    return RISCV_EXCP_NONE;
-> >> > -}
-> >> > -#endif
-> >> >
-> >> >   static RISCVException fs(CPURISCVState *env, int csrno)
-> >> >   {
-> >> > @@ -318,6 +284,32 @@ static RISCVException umode32(CPURISCVState *env, int csrno)
-> >> >       return umode(env, csrno);
-> >> >   }
-> >> >
-> >> > +static RISCVException envcfg(CPURISCVState *env, int csrno)
-> >> > +{
-> >> > +    RISCVCPU *cpu = env_archcpu(env);
-> >> > +    riscv_csr_predicate_fn predicate;
-> >> > +
-> >> > +    if (cpu->cfg.ext_smstateen) {
-> >> > +        return RISCV_EXCP_ILLEGAL_INST;
-> >> > +    }
-> >>
-> >> This check seems not right here.  Why  ILLEGAL_INST is directly
-> >> triggered if smstateen is enabled?
-> >
-> > This logic was there in the original codes. I was confused when I
-> > looked at this as well.
-> >
-> > Anyway, if it is an issue, it should be a separate patch.
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Reviewed-by: Bin Meng <bmeng@tinylab.org>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> ---
+>   hw/riscv/virt.c | 7 ++++---
+>   1 file changed, 4 insertions(+), 3 deletions(-)
 >
-> Seems reasonable to me, it's always nice to split up the refactoring types.  So
-> I queued this up as 4ac6c32224 ("Merge patch series "target/riscv: Various
-> fixes to gdbstub and CSR access"").
->
-> I had to fix up the From address on the patch you re-sent and there was a minor
-> merge conflict, but otherwise things look sane to me.  I'll hold off on sending
-> anything for a bit just in case, though.
->
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 86c4adc0c9..49f2c157f7 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -232,20 +232,21 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+>       bool is_32_bit = riscv_is_32bit(&s->soc[0]);
+>   
+>       for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
+> +        RISCVCPU *cpu_ptr = &s->soc[socket].harts[cpu];
+> +
+>           cpu_phandle = (*phandle)++;
+>   
+>           cpu_name = g_strdup_printf("/cpus/cpu@%d",
+>               s->soc[socket].hartid_base + cpu);
+>           qemu_fdt_add_subnode(ms->fdt, cpu_name);
+> -        if (riscv_feature(&s->soc[socket].harts[cpu].env,
+> -                          RISCV_FEATURE_MMU)) {
+> +        if (cpu_ptr->cfg.mmu) {
+>               qemu_fdt_setprop_string(ms->fdt, cpu_name, "mmu-type",
+>                                       (is_32_bit) ? "riscv,sv32" : "riscv,sv48");
+>           } else {
+>               qemu_fdt_setprop_string(ms->fdt, cpu_name, "mmu-type",
+>                                       "riscv,none");
+>           }
+> -        name = riscv_isa_string(&s->soc[socket].harts[cpu]);
+> +        name = riscv_isa_string(cpu_ptr);
 
-There are some open comments in this series I need to address. Please
-drop this v1. I will send v2 soon.
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Regards,
-Bin
+Zhiwei
+
+>           qemu_fdt_setprop_string(ms->fdt, cpu_name, "riscv,isa", name);
+>           g_free(name);
+>           qemu_fdt_setprop_string(ms->fdt, cpu_name, "compatible", "riscv");
 
