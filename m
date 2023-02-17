@@ -1,28 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSqid-0004zC-Jn
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 21:43:27 -0500
+	id 1pSqnu-0007DJ-0i
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 21:48:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pSqic-0004yq-H6; Thu, 16 Feb 2023 21:43:26 -0500
-Received: from out30-99.freemail.mail.aliyun.com ([115.124.30.99])
+ id 1pSqns-0007D0-BZ; Thu, 16 Feb 2023 21:48:52 -0500
+Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pSqiZ-0000Jb-Pg; Thu, 16 Feb 2023 21:43:26 -0500
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R241e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045170;
+ id 1pSqnq-0002RD-15; Thu, 16 Feb 2023 21:48:52 -0500
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046050;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0VbqTi48_1676601795; 
+ TI=SMTPD_---0Vbqa5nj_1676602119; 
 Received: from 30.221.98.44(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VbqTi48_1676601795) by smtp.aliyun-inc.com;
- Fri, 17 Feb 2023 10:43:16 +0800
-Message-ID: <28694a32-f689-c4ac-44aa-74e8379a668d@linux.alibaba.com>
-Date: Fri, 17 Feb 2023 10:43:13 +0800
+ fp:SMTPD_---0Vbqa5nj_1676602119) by smtp.aliyun-inc.com;
+ Fri, 17 Feb 2023 10:48:40 +0800
+Message-ID: <96d82505-e1d2-b533-205f-6a301a0f950d@linux.alibaba.com>
+Date: Fri, 17 Feb 2023 10:48:37 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.2
-Subject: Re: [PATCH 11/18] target/riscv: gdbstub: Drop the vector CSRs in
- riscv-vector.xml
+Subject: Re: [PATCH 12/18] target/riscv: Allow debugger to access user timer
+ and counter CSRs
 Content-Language: en-US
 To: Bin Meng <bmeng@tinylab.org>, qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -30,15 +30,14 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  qemu-riscv@nongnu.org
-References: <20230213180215.1524938-1-bmeng@tinylab.org>
- <20230213180215.1524938-12-bmeng@tinylab.org>
+References: <20230213180215.1524938-13-bmeng@tinylab.org>
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230213180215.1524938-12-bmeng@tinylab.org>
+In-Reply-To: <20230213180215.1524938-13-bmeng@tinylab.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.99;
+Received-SPF: pass client-ip=115.124.30.110;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-99.freemail.mail.aliyun.com
+ helo=out30-110.freemail.mail.aliyun.com
 X-Spam_score_int: -101
 X-Spam_score: -10.2
 X-Spam_bar: ----------
@@ -58,135 +57,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2023 02:43:26 -0000
+X-List-Received-Date: Fri, 17 Feb 2023 02:48:52 -0000
 
 
-On 2023/2/14 2:02, Bin Meng wrote:
-> It's worth noting that the vector CSR predicate() has a similar
-> run-time check logic to the FPU CSR. With the previous patch our
-> gdbstub can correctly report these vector CSRs via the CSR xml.
+On 2023/2/14 9:09, Bin Meng wrote:
+> At present user timer and counter CSRs are not reported in the
+> CSR XML hence gdb cannot access them.
 >
-> Commit 719d3561b269 ("target/riscv: gdb: support vector registers for rv64 & rv32")
-> inserted these vector CSRs in an ad-hoc, non-standard way in the
-> riscv-vector.xml. Now we can treat these CSRs no different from
-> other CSRs.
+> Fix it by addding a debugger check in their predicate() routine.
 >
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 > ---
 >
->   target/riscv/gdbstub.c | 75 ------------------------------------------
->   1 file changed, 75 deletions(-)
+>   target/riscv/csr.c | 4 ++++
+>   1 file changed, 4 insertions(+)
 >
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index ef52f41460..6048541606 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -127,40 +127,6 @@ static int riscv_gdb_set_fpu(CPURISCVState *env, uint8_t *mem_buf, int n)
->       return 0;
->   }
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 749d0ef83e..515b05348b 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -131,6 +131,10 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
 >   
-> -/*
-> - * Convert register index number passed by GDB to the correspond
-> - * vector CSR number. Vector CSRs are defined after vector registers
-> - * in dynamic generated riscv-vector.xml, thus the starting register index
-> - * of vector CSRs is 32.
-> - * Return 0 if register index number is out of range.
-> - */
-> -static int riscv_gdb_vector_csrno(int num_regs)
-> -{
-> -    /*
-> -     * The order of vector CSRs in the switch case
-> -     * should match with the order defined in csr_ops[].
-> -     */
-> -    switch (num_regs) {
-> -    case 32:
-> -        return CSR_VSTART;
-> -    case 33:
-> -        return CSR_VXSAT;
-> -    case 34:
-> -        return CSR_VXRM;
-> -    case 35:
-> -        return CSR_VCSR;
-> -    case 36:
-> -        return CSR_VL;
-> -    case 37:
-> -        return CSR_VTYPE;
-> -    case 38:
-> -        return CSR_VLENB;
-> -    default:
-> -        /* Unknown register. */
-> -        return 0;
-> -    }
-> -}
-> -
->   static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
->   {
->       uint16_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-> @@ -174,19 +140,6 @@ static int riscv_gdb_get_vector(CPURISCVState *env, GByteArray *buf, int n)
->           return cnt;
->       }
+>   skip_ext_pmu_check:
 >   
-> -    int csrno = riscv_gdb_vector_csrno(n);
-> -
-> -    if (!csrno) {
-> -        return 0;
-> -    }
-> -
-> -    target_ulong val = 0;
-> -    int result = riscv_csrrw_debug(env, csrno, &val, 0, 0);
-> -
-> -    if (result == RISCV_EXCP_NONE) {
-> -        return gdb_get_regl(buf, val);
-> -    }
-> -
->       return 0;
->   }
->   
-> @@ -201,19 +154,6 @@ static int riscv_gdb_set_vector(CPURISCVState *env, uint8_t *mem_buf, int n)
->           return vlenb;
->       }
->   
-> -    int csrno = riscv_gdb_vector_csrno(n);
-> -
-> -    if (!csrno) {
-> -        return 0;
-> -    }
-> -
-> -    target_ulong val = ldtul_p(mem_buf);
-> -    int result = riscv_csrrw_debug(env, csrno, NULL, val, -1);
-> -
-> -    if (result == RISCV_EXCP_NONE) {
-> -        return sizeof(target_ulong);
-> -    }
-> -
->       return 0;
->   }
->   
-> @@ -361,21 +301,6 @@ static int ricsv_gen_dynamic_vector_xml(CPUState *cs, int base_reg)
->           num_regs++;
->       }
->   
-> -    /* Define vector CSRs */
-> -    const char *vector_csrs[7] = {
-> -        "vstart", "vxsat", "vxrm", "vcsr",
-> -        "vl", "vtype", "vlenb"
-> -    };
-> -
-> -    for (i = 0; i < 7; i++) {
-> -        g_string_append_printf(s,
-> -                               "<reg name=\"%s\" bitsize=\"%d\""
-> -                               " regnum=\"%d\" group=\"vector\""
-> -                               " type=\"int\"/>",
-> -                               vector_csrs[i], TARGET_LONG_BITS, base_reg++);
-> -        num_regs++;
-> -    }
-> -
+> +    if (env->debugger) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +
 
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
+
 Zhiwei
 
->       g_string_append_printf(s, "</feature>");
->   
->       cpu->dyn_vreg_xml = g_string_free(s, false);
+>       if (env->priv < PRV_M && !get_field(env->mcounteren, ctr_mask)) {
+>           return RISCV_EXCP_ILLEGAL_INST;
+>       }
 
