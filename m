@@ -1,41 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSq74-0007g5-4h
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 21:04:38 -0500
+	id 1pSq7v-0001Iq-DB
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 21:05:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pSq72-0007fZ-HM; Thu, 16 Feb 2023 21:04:36 -0500
-Received: from out30-112.freemail.mail.aliyun.com ([115.124.30.112])
+ id 1pSq7q-00010j-W3; Thu, 16 Feb 2023 21:05:27 -0500
+Received: from out30-101.freemail.mail.aliyun.com ([115.124.30.101])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pSq6z-00088s-UQ; Thu, 16 Feb 2023 21:04:36 -0500
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R241e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+ id 1pSq7o-0008RF-Tq; Thu, 16 Feb 2023 21:05:26 -0500
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0VbqTTvM_1676599463; 
+ TI=SMTPD_---0VbqEqMZ_1676599518; 
 Received: from 30.221.98.44(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VbqTTvM_1676599463) by smtp.aliyun-inc.com;
- Fri, 17 Feb 2023 10:04:24 +0800
-Message-ID: <017221c8-662f-c4b9-cd73-aef046c747ce@linux.alibaba.com>
-Date: Fri, 17 Feb 2023 10:04:22 +0800
+ fp:SMTPD_---0VbqEqMZ_1676599518) by smtp.aliyun-inc.com;
+ Fri, 17 Feb 2023 10:05:18 +0800
+Message-ID: <3c7ae971-f118-b770-36b9-f1179fe628d8@linux.alibaba.com>
+Date: Fri, 17 Feb 2023 10:05:16 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.2
-Subject: Re: [PATCH v6 8/9] target/riscv: remove RISCV_FEATURE_MMU
+Subject: Re: [PATCH v6 9/9] target/riscv/cpu: remove CPUArchState::features
+ and friends
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, richard.henderson@linaro.org,
  Andrew Jones <ajones@ventanamicro.com>
 References: <20230216215550.1011637-1-dbarboza@ventanamicro.com>
- <20230216215550.1011637-9-dbarboza@ventanamicro.com>
+ <20230216215550.1011637-10-dbarboza@ventanamicro.com>
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230216215550.1011637-9-dbarboza@ventanamicro.com>
+In-Reply-To: <20230216215550.1011637-10-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.112;
+Received-SPF: pass client-ip=115.124.30.101;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-112.freemail.mail.aliyun.com
+ helo=out30-101.freemail.mail.aliyun.com
 X-Spam_score_int: -102
 X-Spam_score: -10.3
 X-Spam_bar: ----------
@@ -55,129 +56,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2023 02:04:36 -0000
+X-List-Received-Date: Fri, 17 Feb 2023 02:05:29 -0000
 
 
 On 2023/2/17 5:55, Daniel Henrique Barboza wrote:
-> RISCV_FEATURE_MMU is set whether cpu->cfg.mmu is set, so let's just use
-> the flag directly instead.
+> The attribute is no longer used since we can retrieve all the enabled
+> features in the hart by using cpu->cfg instead.
 >
-> With this change the enum is also removed. It is worth noticing that
-> this enum, and all the RISCV_FEATURES_* that were contained in it,
-> predates the existence of the cpu->cfg object. Today, using cpu->cfg is
-> an easier way to retrieve all the features and extensions enabled in the
-> hart.
+> Remove env->feature, riscv_feature() and riscv_set_feature(). We also
+> need to bump vmstate_riscv_cpu version_id and minimal_version_id since
+> 'features' is no longer being migrated.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Reviewed-by: Bin Meng <bmeng@tinylab.org>
 > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 > ---
->   target/riscv/cpu.c        | 4 ----
->   target/riscv/cpu.h        | 7 -------
->   target/riscv/cpu_helper.c | 2 +-
->   target/riscv/csr.c        | 4 ++--
->   target/riscv/monitor.c    | 2 +-
->   target/riscv/pmp.c        | 2 +-
->   6 files changed, 5 insertions(+), 16 deletions(-)
+>   target/riscv/cpu.h     | 12 ------------
+>   target/riscv/machine.c |  5 ++---
+>   2 files changed, 2 insertions(+), 15 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 7b1360d6ba..075033006c 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -919,10 +919,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->           }
->       }
->   
-> -    if (cpu->cfg.mmu) {
-> -        riscv_set_feature(env, RISCV_FEATURE_MMU);
-> -    }
-> -
->       if (cpu->cfg.epmp && !cpu->cfg.pmp) {
->           /*
->            * Enhanced PMP should only be available
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 119a022af9..0519d2ab0c 100644
+> index 0519d2ab0c..9897305184 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -81,13 +81,6 @@
->   #define RVH RV('H')
->   #define RVJ RV('J')
+> @@ -173,8 +173,6 @@ struct CPUArchState {
+>       /* 128-bit helpers upper part return value */
+>       target_ulong retxh;
 >   
-> -/* S extension denotes that Supervisor mode exists, however it is possible
-> -   to have a core that support S mode but does not have an MMU and there
-> -   is currently no bit in misa to indicate whether an MMU exists or not
-> -   so a cpu features bitfield is required, likewise for optional PMP support */
-> -enum {
-> -    RISCV_FEATURE_MMU,
-> -};
+> -    uint32_t features;
+> -
+>   #ifdef CONFIG_USER_ONLY
+>       uint32_t elf_flags;
+>   #endif
+> @@ -524,16 +522,6 @@ static inline int riscv_has_ext(CPURISCVState *env, target_ulong ext)
+>       return (env->misa_ext & ext) != 0;
+>   }
 >   
->   /* Privileged specification version */
->   enum {
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 292b6b3168..eda2293470 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -796,7 +796,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->           mode = PRV_U;
->       }
+> -static inline bool riscv_feature(CPURISCVState *env, int feature)
+> -{
+> -    return env->features & (1ULL << feature);
+> -}
+> -
+> -static inline void riscv_set_feature(CPURISCVState *env, int feature)
+> -{
+> -    env->features |= (1ULL << feature);
+> -}
+> -
+>   #include "cpu_user.h"
 >   
-> -    if (mode == PRV_M || !riscv_feature(env, RISCV_FEATURE_MMU)) {
-> +    if (mode == PRV_M || !riscv_cpu_cfg(env)->mmu) {
->           *physical = addr;
->           *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
->           return TRANSLATE_SUCCESS;
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d0ab00d870..fcc271c93c 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -2569,7 +2569,7 @@ static RISCVException rmw_siph(CPURISCVState *env, int csrno,
->   static RISCVException read_satp(CPURISCVState *env, int csrno,
->                                   target_ulong *val)
->   {
-> -    if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
-> +    if (!riscv_cpu_cfg(env)->mmu) {
->           *val = 0;
->           return RISCV_EXCP_NONE;
->       }
-> @@ -2588,7 +2588,7 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
->   {
->       target_ulong vm, mask;
+>   extern const char * const riscv_int_regnames[];
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 67e9e56853..9c455931d8 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -331,8 +331,8 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
 >   
-> -    if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
-> +    if (!riscv_cpu_cfg(env)->mmu) {
->           return RISCV_EXCP_NONE;
->       }
->   
-> diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
-> index 236f93b9f5..f36ddfa967 100644
-> --- a/target/riscv/monitor.c
-> +++ b/target/riscv/monitor.c
-> @@ -218,7 +218,7 @@ void hmp_info_mem(Monitor *mon, const QDict *qdict)
->           return;
->       }
->   
-> -    if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
-> +    if (!riscv_cpu_cfg(env)->mmu) {
->           monitor_printf(mon, "S-mode MMU unavailable\n");
->           return;
->       }
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 205bfbe090..a08cd95658 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -315,7 +315,7 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->       }
->   
->       if (size == 0) {
-> -        if (riscv_feature(env, RISCV_FEATURE_MMU)) {
-> +        if (riscv_cpu_cfg(env)->mmu) {
+>   const VMStateDescription vmstate_riscv_cpu = {
+>       .name = "cpu",
+> -    .version_id = 6,
+> -    .minimum_version_id = 6,
+> +    .version_id = 7,
+> +    .minimum_version_id = 7,
+>       .post_load = riscv_cpu_post_load,
+>       .fields = (VMStateField[]) {
+>           VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+> @@ -351,7 +351,6 @@ const VMStateDescription vmstate_riscv_cpu = {
+>           VMSTATE_UINT32(env.misa_ext, RISCVCPU),
+>           VMSTATE_UINT32(env.misa_mxl_max, RISCVCPU),
+>           VMSTATE_UINT32(env.misa_ext_mask, RISCVCPU),
+> -        VMSTATE_UINT32(env.features, RISCVCPU),
 
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Zhiwei
 
->               /*
->                * If size is unknown (0), assume that all bytes
->                * from addr to the end of the page will be accessed.
+>           VMSTATE_UINTTL(env.priv, RISCVCPU),
+>           VMSTATE_UINTTL(env.virt, RISCVCPU),
+>           VMSTATE_UINT64(env.resetvec, RISCVCPU),
 
