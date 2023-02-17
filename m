@@ -1,77 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pT4vU-00059z-Kt
-	for mharc-qemu-riscv@gnu.org; Fri, 17 Feb 2023 12:53:40 -0500
+	id 1pT4vW-0005BY-Vt
+	for mharc-qemu-riscv@gnu.org; Fri, 17 Feb 2023 12:53:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pT4vT-000591-6L
- for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 12:53:39 -0500
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
+ id 1pT4vV-0005Au-Qs
+ for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 12:53:41 -0500
+Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pT4vR-0000tF-BK
- for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 12:53:38 -0500
-Received: by mail-pj1-x1036.google.com with SMTP id
- d2-20020a17090a498200b00236679bc70cso2951973pjh.4
- for <qemu-riscv@nongnu.org>; Fri, 17 Feb 2023 09:53:36 -0800 (PST)
+ id 1pT4vU-0000uM-3W
+ for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 12:53:41 -0500
+Received: by mail-pg1-x536.google.com with SMTP id o1so1116413pgm.7
+ for <qemu-riscv@nongnu.org>; Fri, 17 Feb 2023 09:53:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j3hxgJioJYDaoMVQqM2mg2oa252Bx0zdrz7vXWPM9MA=;
- b=7HWdanCB8vxeAxFHcV5Cb5q3+S35sI6cnLnFnG00qxHIC+zakD8qI32WfzgbDyghpD
- Q6B4vhaFIWmSGTcwW09ybSgRmXoNQI3AVYG3O35uHPi1kpkUqR55RI6Sd98fFZSP3B73
- mXSV3BvBuNRn8dofljP4V8wnnOUjbAvr6Yy4ZaGqAhAG+Xtnx7FMFtd7AnF6jYoTGhA0
- kIO2ssmESJhlyL+S8ywMSHXuEFkEW9ELvTf2A6N5LriZXZsntqZyuVW9bM1zW2+b7J8K
- uKY2x7DVIVLfH4CNf1oILhutcr2lrLUpM2YMUhBPLG6qoM3ffxxipvJWcuW1WTYGLCIr
- 6H/Q==
+ bh=DDWoUrS3gNFU9IU+ndidQqS1Eb6eRflzx7e/dFgHmuQ=;
+ b=qW0nxrrDmzpJPp5WtQkop6cS2PXq3xZlVYb2DUGKYMpSHI/Nbk2Ikrzj97iVxlGR0q
+ QYuAoElqh5hLibkQ88w8CnbXGqo+RukN4uQ0uiPDUCVgItq2rBoJFv+HUC0cE+eEva7u
+ 3TIpoAg3afcBmkvGJKaLvDtgvhrTLRV5PrS44oyfes2cLhF1g/41N0mA3mJq+PWLCigF
+ wM9Lc//QPb2skPZMWNKEe8XyVTuyKumxI8xEU6XS+/ljjxJQrZUuWPWg8hPCR3He00Jp
+ 34+Psrf7NipSTxXkazd49idiMP1B8STz+i7Ja6EFvANxafjUFpHG7ZBg8JKbqUw8JAPQ
+ IEEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=j3hxgJioJYDaoMVQqM2mg2oa252Bx0zdrz7vXWPM9MA=;
- b=M/glh8P04EiTNl7/wFj9faN3uEyjRp5wRbekzCX/EcPnMGmyLDvBviEwHSpTnIFI8z
- E0UJm87LM6sFHXmHpPALctKXKGihjRsFI7UdfUE5yTP/iKNv08YjdmhgJydGUBZdJqJt
- et30/xM3dVu6A631WRmEBVbuV+bHpa9yYFxXOErAN3NHcFcKvKPtk4TnqOEEb6hbFR7y
- c0zsnUdYRHtqkocK39dOER1hLc8bvE8k1/s9GvXYIA5Sn9JfGLhw8eD0Wf3XCi8e/P74
- hQBpop+F1opKWyX8oHVttWdyoB8+Lwc5g9aj21UMWaZKpJDDh3cJbSioQ9yHwwDs2hzl
- q6Mg==
-X-Gm-Message-State: AO0yUKWaPKDtbcqdv1zfokWJgzYDaC9mO4wY0wz5QG5GgXhjwv5t4L2I
- px+gEsMWYf4d4K53VijsFp9IR0P3HLn0Sg85
-X-Google-Smtp-Source: AK7set+g2zKwdoruljwUYqbyQiss/0bDeBRHMDD6NAToHApUIyO1itl/67FLgJD6u7hafNO+wNsIiA==
-X-Received: by 2002:a17:902:d4cd:b0:19a:b033:2bb0 with SMTP id
- o13-20020a170902d4cd00b0019ab0332bb0mr192870plg.46.1676656415232; 
- Fri, 17 Feb 2023 09:53:35 -0800 (PST)
+ bh=DDWoUrS3gNFU9IU+ndidQqS1Eb6eRflzx7e/dFgHmuQ=;
+ b=do4KcK9sK0vvG0iLRmH7F4XD6MNhhgx/JgphrRd3EEuf9ark6/hUE6Xr9m0sB1wQyY
+ nsNI/RX8xVTipLiPDNUgtuJu4tG5k6JArjFJ3H/b3z7xIlz3MvWL9mbEfnkl/Td9NjKB
+ TAr6BdrDpq5I0ezLEF/rTLEtmQJ4tIvB+okzntM8/nqD0KJliD+GtLcu5Q23Cf0s/IE8
+ 6rHxj1VXF35nQqeKWmZZcc4E6icf+0aW+xKiJzXfpDqlPPhipz2N8ARNrRCzOAzrxEw0
+ i9Ycd04RtyYhtBunZqmgCBe5sCckCl27VHGa/8u1OOu99eT13HB3MPkY4RrovuRHcPq9
+ liow==
+X-Gm-Message-State: AO0yUKXtKWjtUG2qbuvCdkjsjVIXR7Ul6cPX/bu7VODVT7dKYSR2RZxs
+ fuzrmQ4Qkw9VOAm/RnV9+za0vmHWEr+GbISz
+X-Google-Smtp-Source: AK7set97je10L1V6RK2sQgL7D9KoR8q+x0KVILmLpszcU5ZBtj/DsUAiDSoCg9nXhSl+pBOuXwJPHQ==
+X-Received: by 2002:a62:8444:0:b0:5a8:4b27:5db2 with SMTP id
+ k65-20020a628444000000b005a84b275db2mr1597092pfd.1.1676656418530; 
+ Fri, 17 Feb 2023 09:53:38 -0800 (PST)
 Received: from localhost ([135.180.226.51]) by smtp.gmail.com with ESMTPSA id
- jc11-20020a17090325cb00b0019607547f29sm3392166plb.304.2023.02.17.09.53.34
+ j21-20020aa783d5000000b005a9bbef5d22sm2425888pfn.44.2023.02.17.09.53.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Feb 2023 09:53:34 -0800 (PST)
-Subject: [PULL 3/9] hw/riscv/boot.c: make riscv_load_initrd() static
-Date: Fri, 17 Feb 2023 09:51:57 -0800
-Message-Id: <20230217175203.19510-4-palmer@rivosinc.com>
+ Fri, 17 Feb 2023 09:53:38 -0800 (PST)
+Subject: [PULL 5/9] target/riscv: Remove privileged spec version restriction
+ for RVV
+Date: Fri, 17 Feb 2023 09:51:59 -0800
+Message-Id: <20230217175203.19510-6-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230217175203.19510-1-palmer@rivosinc.com>
 References: <20230217175203.19510-1-palmer@rivosinc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- ilippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>, 
- Bin Meng <bmeng@tinylab.org>, Alistair Francis <alistair.francis@wdc.com>,
+ Frank Chang <frank.chang@sifive.com>, Bin Meng <bmeng@tinylab.org>,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
  Palmer Dabbelt <palmer@rivosinc.com>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=palmer@rivosinc.com; helo=mail-pj1-x1036.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
+ envelope-from=palmer@rivosinc.com; helo=mail-pg1-x536.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,135 +83,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2023 17:53:39 -0000
+X-List-Received-Date: Fri, 17 Feb 2023 17:53:42 -0000
 
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+From: Frank Chang <frank.chang@sifive.com>
 
-The only remaining caller is riscv_load_kernel_and_initrd() which
-belongs to the same file.
+The RVV specification does not require that the core needs to support
+the privileged specification v1.12.0 to support RVV, and there is no
+dependency from ISA level.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+This commit removes the restriction from both RVV CSRs and extension CPU
+ISA string.
+
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Message-Id: <20230206140022.2748401-4-dbarboza@ventanamicro.com>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Message-Id: <20230208063209.27279-1-frank.chang@sifive.com>
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- hw/riscv/boot.c         | 80 ++++++++++++++++++++---------------------
- include/hw/riscv/boot.h |  1 -
- 2 files changed, 40 insertions(+), 41 deletions(-)
+ target/riscv/cpu.c |  2 +-
+ target/riscv/csr.c | 21 +++++++--------------
+ 2 files changed, 8 insertions(+), 15 deletions(-)
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 4954bb9d4b..52bf8e67de 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -173,6 +173,46 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
-     exit(1);
- }
- 
-+static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
-+{
-+    const char *filename = machine->initrd_filename;
-+    uint64_t mem_size = machine->ram_size;
-+    void *fdt = machine->fdt;
-+    hwaddr start, end;
-+    ssize_t size;
-+
-+    g_assert(filename != NULL);
-+
-+    /*
-+     * We want to put the initrd far enough into RAM that when the
-+     * kernel is uncompressed it will not clobber the initrd. However
-+     * on boards without much RAM we must ensure that we still leave
-+     * enough room for a decent sized initrd, and on boards with large
-+     * amounts of RAM we must avoid the initrd being so far up in RAM
-+     * that it is outside lowmem and inaccessible to the kernel.
-+     * So for boards with less  than 256MB of RAM we put the initrd
-+     * halfway into RAM, and for boards with 256MB of RAM or more we put
-+     * the initrd at 128MB.
-+     */
-+    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
-+
-+    size = load_ramdisk(filename, start, mem_size - start);
-+    if (size == -1) {
-+        size = load_image_targphys(filename, start, mem_size - start);
-+        if (size == -1) {
-+            error_report("could not load ramdisk '%s'", filename);
-+            exit(1);
-+        }
-+    }
-+
-+    /* Some RISC-V machines (e.g. opentitan) don't have a fdt. */
-+    if (fdt) {
-+        end = start + size;
-+        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-start", start);
-+        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end", end);
-+    }
-+}
-+
- target_ulong riscv_load_kernel(MachineState *machine,
-                                RISCVHartArrayState *harts,
-                                target_ulong kernel_start_addr,
-@@ -234,46 +274,6 @@ out:
-     return kernel_entry;
- }
- 
--void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
--{
--    const char *filename = machine->initrd_filename;
--    uint64_t mem_size = machine->ram_size;
--    void *fdt = machine->fdt;
--    hwaddr start, end;
--    ssize_t size;
--
--    g_assert(filename != NULL);
--
--    /*
--     * We want to put the initrd far enough into RAM that when the
--     * kernel is uncompressed it will not clobber the initrd. However
--     * on boards without much RAM we must ensure that we still leave
--     * enough room for a decent sized initrd, and on boards with large
--     * amounts of RAM we must avoid the initrd being so far up in RAM
--     * that it is outside lowmem and inaccessible to the kernel.
--     * So for boards with less  than 256MB of RAM we put the initrd
--     * halfway into RAM, and for boards with 256MB of RAM or more we put
--     * the initrd at 128MB.
--     */
--    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
--
--    size = load_ramdisk(filename, start, mem_size - start);
--    if (size == -1) {
--        size = load_image_targphys(filename, start, mem_size - start);
--        if (size == -1) {
--            error_report("could not load ramdisk '%s'", filename);
--            exit(1);
--        }
--    }
--
--    /* Some RISC-V machines (e.g. opentitan) don't have a fdt. */
--    if (fdt) {
--        end = start + size;
--        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-start", start);
--        qemu_fdt_setprop_cell(fdt, "/chosen", "linux,initrd-end", end);
--    }
--}
--
- /*
-  * This function makes an assumption that the DRAM interval
-  * 'dram_base' + 'dram_size' is contiguous.
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index ea1de8b020..a2e4ae9cb0 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -48,7 +48,6 @@ target_ulong riscv_load_kernel(MachineState *machine,
-                                target_ulong firmware_end_addr,
-                                bool load_initrd,
-                                symbol_fn_t sym_cb);
--void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry);
- uint64_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size,
-                                 MachineState *ms);
- void riscv_load_fdt(hwaddr fdt_addr, void *fdt);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 0dd2f0c753..93b52b826c 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -73,7 +73,7 @@ struct isa_ext_data {
+  */
+ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(h, false, PRIV_VERSION_1_12_0, ext_h),
+-    ISA_EXT_DATA_ENTRY(v, false, PRIV_VERSION_1_12_0, ext_v),
++    ISA_EXT_DATA_ENTRY(v, false, PRIV_VERSION_1_10_0, ext_v),
+     ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ext_icsr),
+     ISA_EXT_DATA_ENTRY(zifencei, true, PRIV_VERSION_1_10_0, ext_ifencei),
+     ISA_EXT_DATA_ENTRY(zihintpause, true, PRIV_VERSION_1_10_0, ext_zihintpause),
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index fa17d7770c..1b0a0c1693 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -3980,20 +3980,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_FRM]      = { "frm",      fs,     read_frm,     write_frm    },
+     [CSR_FCSR]     = { "fcsr",     fs,     read_fcsr,    write_fcsr   },
+     /* Vector CSRs */
+-    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart,
+-                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+-    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat,
+-                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+-    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm,
+-                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+-    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr,
+-                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+-    [CSR_VL]       = { "vl",       vs,     read_vl,
+-                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+-    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype,
+-                       .min_priv_ver = PRIV_VERSION_1_12_0            },
+-    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb,
+-                       .min_priv_ver = PRIV_VERSION_1_12_0            },
++    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart },
++    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat  },
++    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm   },
++    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr   },
++    [CSR_VL]       = { "vl",       vs,     read_vl                    },
++    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype                 },
++    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb                 },
+     /* User Timers and Counters */
+     [CSR_CYCLE]    = { "cycle",    ctr,    read_hpmcounter  },
+     [CSR_INSTRET]  = { "instret",  ctr,    read_hpmcounter  },
 -- 
 2.39.0
 
