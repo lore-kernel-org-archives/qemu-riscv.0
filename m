@@ -1,49 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSq7v-0001Iq-DB
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 21:05:32 -0500
+	id 1pSqDv-0006ow-8D
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 21:11:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pSq7q-00010j-W3; Thu, 16 Feb 2023 21:05:27 -0500
-Received: from out30-101.freemail.mail.aliyun.com ([115.124.30.101])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pSq7o-0008RF-Tq; Thu, 16 Feb 2023 21:05:26 -0500
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0VbqEqMZ_1676599518; 
-Received: from 30.221.98.44(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VbqEqMZ_1676599518) by smtp.aliyun-inc.com;
- Fri, 17 Feb 2023 10:05:18 +0800
-Message-ID: <3c7ae971-f118-b770-36b9-f1179fe628d8@linux.alibaba.com>
-Date: Fri, 17 Feb 2023 10:05:16 +0800
+ (Exim 4.90_1) (envelope-from <baxiantai@gmail.com>)
+ id 1pSqDt-0006oU-F2; Thu, 16 Feb 2023 21:11:41 -0500
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <baxiantai@gmail.com>)
+ id 1pSqDr-00069k-RY; Thu, 16 Feb 2023 21:11:41 -0500
+Received: by mail-pj1-x1033.google.com with SMTP id
+ x4-20020a17090a388400b002349a303ca5so3616248pjb.4; 
+ Thu, 16 Feb 2023 18:11:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=0Ju5tJWlWDrlpGvrc/dpe2qu0gUWND5IGGiTgo4i6q4=;
+ b=TUGeEGnIaXstIoH0W63MxWS7YoR3jAc1YjaLeuCy/ZNPAI5yhOlesseBpZ+SuvnEBC
+ qPEnOcAsAvve7laVOBDeGjJQc6MCS4te7OKJElmp1EmHccAg3te9macKVs14zXryHYlb
+ XYwb32wuWs92B0Q4NCHHgWAFGHG7l8ZMwfHox3KlZqN5JHhb5F+p6aNzG9SAoHIArMEu
+ tZCjPmq8L/ah7IGq2MM9VjQ/f4CzeL3UVDJiIIfn3F5CpfpD0OMZF+DkvBFQ+l+nN37u
+ fi08GCJ9EhuJSuIYfTzJamAxG5BvtavvnDpUZg7hPha0Xi8dhF3zJqOOLK6PBC8u1W+/
+ WI7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=0Ju5tJWlWDrlpGvrc/dpe2qu0gUWND5IGGiTgo4i6q4=;
+ b=EMfF933kJxEqJPKNaHXDTi7P/ew6DAfC2fdG+pMf8JaQDGc+nXMhentpSrdGKcFoMr
+ 1IkA5ZnZglKVVN91ASftbdEFXNGyxD4QSXhiSOzz12ZFZqdKF8qT3SsWNAM5emM/HbJM
+ jZdzYye/uN7Rkky/a8TvBt9+SS5rDJ6CGs+H/i16sz4nw8PQFQz5RUHbh3FuhWq9yrQl
+ wey/eJZW4mkQR8EbDRw7OqNfZJHHX7/jfJsqu3/x3NC1dCo0vBdq6ExouAd8QK+KGA6a
+ XlkVGVOLa+NU0LG6pd/T/HhxBZzsI0XN0wjMFveGzLcFeL28ajWc0Vvu4+GoD35dwcp2
+ 7xng==
+X-Gm-Message-State: AO0yUKWRJ4FfByT2sRiW0D7OHj+07gVrFWbEXiwz+rdPVdmyoGSdTZHQ
+ aAXSkHV8UO2RV9gG7zVeTuk=
+X-Google-Smtp-Source: AK7set92GXVwK7Zg6Fblrk528QOVLJwiDyJVjJmdmzm8GjxBkwWAkQxcsgKAxLVQn+8Nvg8jamvRNQ==
+X-Received: by 2002:a17:90a:19ce:b0:233:e0a5:f711 with SMTP id
+ 14-20020a17090a19ce00b00233e0a5f711mr8998692pjj.22.1676599897316; 
+ Thu, 16 Feb 2023 18:11:37 -0800 (PST)
+Received: from [30.221.98.44] ([47.246.101.60])
+ by smtp.gmail.com with ESMTPSA id
+ q4-20020a17090a68c400b0022c0a05229fsm1732196pjj.41.2023.02.16.18.11.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Feb 2023 18:11:36 -0800 (PST)
+Message-ID: <84a5bc4e-23f9-44fd-e6d2-5a426accb541@gmail.com>
+Date: Fri, 17 Feb 2023 10:11:31 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.2
-Subject: Re: [PATCH v6 9/9] target/riscv/cpu: remove CPUArchState::features
- and friends
+Subject: Re: [PATCH 01/18] target/riscv: gdbstub: Check priv spec version
+ before reporting CSR
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, richard.henderson@linaro.org,
- Andrew Jones <ajones@ventanamicro.com>
-References: <20230216215550.1011637-1-dbarboza@ventanamicro.com>
- <20230216215550.1011637-10-dbarboza@ventanamicro.com>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230216215550.1011637-10-dbarboza@ventanamicro.com>
+To: Bin Meng <bmeng@tinylab.org>, qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ qemu-riscv@nongnu.org
+References: <20230213180215.1524938-1-bmeng@tinylab.org>
+ <20230213180215.1524938-2-bmeng@tinylab.org>
+From: LIU Zhiwei <baxiantai@gmail.com>
+In-Reply-To: <20230213180215.1524938-2-bmeng@tinylab.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.101;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-101.freemail.mail.aliyun.com
-X-Spam_score_int: -102
-X-Spam_score: -10.3
-X-Spam_bar: ----------
-X-Spam_report: (-10.3 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.351, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=baxiantai@gmail.com; helo=mail-pj1-x1033.google.com
+X-Spam_score_int: -24
+X-Spam_score: -2.5
+X-Spam_bar: --
+X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ NICE_REPLY_A=-0.351, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -56,82 +88,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2023 02:05:29 -0000
+X-List-Received-Date: Fri, 17 Feb 2023 02:11:41 -0000
 
 
-On 2023/2/17 5:55, Daniel Henrique Barboza wrote:
-> The attribute is no longer used since we can retrieve all the enabled
-> features in the hart by using cpu->cfg instead.
+On 2023/2/14 2:01, Bin Meng wrote:
+> The gdbstub CSR XML is dynamically generated according to the result
+> of the CSR predicate() result. This has been working fine until
+> commit 7100fe6c2441 ("target/riscv: Enable privileged spec version 1.12")
+> introduced the privilege spec version check in riscv_csrrw_check().
 >
-> Remove env->feature, riscv_feature() and riscv_set_feature(). We also
-> need to bump vmstate_riscv_cpu version_id and minimal_version_id since
-> 'features' is no longer being migrated.
+> When debugging the 'sifive_u' machine whose priv spec is at 1.10,
+> gdbstub reports priv spec 1.12 CSRs like menvcfg in the XML, hence
+> we see "remote failure reply 'E14'" message when examining all CSRs
+> via "info register system" from gdb.
 >
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Reviewed-by: Bin Meng <bmeng@tinylab.org>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> Add the priv spec version check in the CSR XML generation logic to
+> fix this issue.
+>
+> Fixes: 7100fe6c2441 ("target/riscv: Enable privileged spec version 1.12")
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
 > ---
->   target/riscv/cpu.h     | 12 ------------
->   target/riscv/machine.c |  5 ++---
->   2 files changed, 2 insertions(+), 15 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 0519d2ab0c..9897305184 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -173,8 +173,6 @@ struct CPUArchState {
->       /* 128-bit helpers upper part return value */
->       target_ulong retxh;
+>   target/riscv/gdbstub.c | 3 +++
+>   1 file changed, 3 insertions(+)
+>
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 6e7bbdbd5e..e57372db38 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -290,6 +290,9 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+>       g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
 >   
-> -    uint32_t features;
-> -
->   #ifdef CONFIG_USER_ONLY
->       uint32_t elf_flags;
->   #endif
-> @@ -524,16 +522,6 @@ static inline int riscv_has_ext(CPURISCVState *env, target_ulong ext)
->       return (env->misa_ext & ext) != 0;
->   }
->   
-> -static inline bool riscv_feature(CPURISCVState *env, int feature)
-> -{
-> -    return env->features & (1ULL << feature);
-> -}
-> -
-> -static inline void riscv_set_feature(CPURISCVState *env, int feature)
-> -{
-> -    env->features |= (1ULL << feature);
-> -}
-> -
->   #include "cpu_user.h"
->   
->   extern const char * const riscv_int_regnames[];
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 67e9e56853..9c455931d8 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -331,8 +331,8 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
->   
->   const VMStateDescription vmstate_riscv_cpu = {
->       .name = "cpu",
-> -    .version_id = 6,
-> -    .minimum_version_id = 6,
-> +    .version_id = 7,
-> +    .minimum_version_id = 7,
->       .post_load = riscv_cpu_post_load,
->       .fields = (VMStateField[]) {
->           VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
-> @@ -351,7 +351,6 @@ const VMStateDescription vmstate_riscv_cpu = {
->           VMSTATE_UINT32(env.misa_ext, RISCVCPU),
->           VMSTATE_UINT32(env.misa_mxl_max, RISCVCPU),
->           VMSTATE_UINT32(env.misa_ext_mask, RISCVCPU),
-> -        VMSTATE_UINT32(env.features, RISCVCPU),
-
+>       for (i = 0; i < CSR_TABLE_SIZE; i++) {
+> +        if (env->priv_ver < csr_ops[i].min_priv_ver) {
+> +            continue;
+> +        }
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Zhiwei
 
->           VMSTATE_UINTTL(env.priv, RISCVCPU),
->           VMSTATE_UINTTL(env.virt, RISCVCPU),
->           VMSTATE_UINT64(env.resetvec, RISCVCPU),
+>           predicate = csr_ops[i].predicate;
+>           if (predicate && (predicate(env, i) == RISCV_EXCP_NONE)) {
+>               if (csr_ops[i].name) {
 
