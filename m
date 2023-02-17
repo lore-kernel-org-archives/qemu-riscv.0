@@ -1,80 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSqI2-0007i1-4y
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 21:15:58 -0500
+	id 1pSqLI-0000Jy-Py
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 21:19:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baxiantai@gmail.com>)
- id 1pSqHz-0007hU-RR; Thu, 16 Feb 2023 21:15:55 -0500
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baxiantai@gmail.com>)
- id 1pSqHy-0006uk-9d; Thu, 16 Feb 2023 21:15:55 -0500
-Received: by mail-pl1-x630.google.com with SMTP id i15so1325109plr.8;
- Thu, 16 Feb 2023 18:15:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=65HZqLr24EvYMLceZSWjbgB+D4Bc/r0FogWKLBf3HF0=;
- b=DPRGGIhNT+O9RpP0M1TylXjBoVpKc2ipYIHtMNnPyjyoKaJC00z3R9X+stClEzny4M
- OsU0GxmpEYXr5orNaLYqnCKP84+E9kzFPMDvDd1DSqboLkQFSH2YvN5ofwpVWWKrWAmT
- bfHlMLU8ocUAYpNCBf6YxNccTMyIVEdH0tOkDbs8gQWHBiUzpXw6aCvQEMxFQ5SThMEq
- KsCxPZAMFXtFhuhdvWTWrlmEpE5Bsc9vUggV0Eu8RGQilojhQIXtO4ivd48R6eKESfkt
- KZNuclJkV5U7N+hqRhP4kHkE+es4Fm/Hd6fdkw/wi3HuqH2rbsqnk3Koo+OdSHFkr3Id
- OxvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=65HZqLr24EvYMLceZSWjbgB+D4Bc/r0FogWKLBf3HF0=;
- b=QbNwD6QY4l1h29jJNirrVuyqLYc9XpYmbu7ZLyipP+/JMAWJCin/OsQNwnfJ6e8khF
- pZGjWi/7iFVwd1hYce2y9FRX3OHue3piqKZ1NhoXDOp4PqasllqeP0t+C0kHAZWh483N
- 2URYkcZBULyenQRNT6JQDKUxAsph1Lo8SJUPsyhm5CHYTowyhk2ux/v5dsYOU2zBq/f+
- 2ud49sSvFQl0+AnnxXMEI+FgGxW6xxmlplqa3hicdZ/RzdRKzVPSMQlqVubsn5nAIvTu
- SfKMzhFsIm73GQV9Kto+RPWOOnjpyCM3rRIkgjVss8cTB3iWYdVGW31+uPo6zUBEv4Le
- f5SQ==
-X-Gm-Message-State: AO0yUKXFz50NmcyHRJxb6DXXJ9+iyG3szt/LOL7H2pPWsfq6vjx7++/3
- XsbDVTGFw5dSHtkFQrJ/sPY=
-X-Google-Smtp-Source: AK7set+RPRzD+DM2Dgu+p+M7oOQlZ5C2uXUuEFcnD7QO1zwYyzpeagzS8nKZnGrN1zELPpDnmBfBWQ==
-X-Received: by 2002:a17:903:234c:b0:19a:7f4b:3ef6 with SMTP id
- c12-20020a170903234c00b0019a7f4b3ef6mr9708514plh.3.1676600152540; 
- Thu, 16 Feb 2023 18:15:52 -0800 (PST)
-Received: from [30.221.98.44] ([47.246.101.60])
- by smtp.gmail.com with ESMTPSA id
- g1-20020a1709026b4100b00192aa53a7d5sm1945182plt.8.2023.02.16.18.15.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Feb 2023 18:15:52 -0800 (PST)
-Message-ID: <9ea6def2-5648-11d1-261a-d4a42cec2f24@gmail.com>
-Date: Fri, 17 Feb 2023 10:15:46 +0800
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pSqLG-0000Jf-JK; Thu, 16 Feb 2023 21:19:18 -0500
+Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pSqLE-0007O6-AL; Thu, 16 Feb 2023 21:19:18 -0500
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R251e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
+ TI=SMTPD_---0VbqSSAL_1676600346; 
+Received: from 30.221.98.44(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VbqSSAL_1676600346) by smtp.aliyun-inc.com;
+ Fri, 17 Feb 2023 10:19:07 +0800
+Message-ID: <08e6c92d-3dfd-cec0-6d58-07eed19b49a2@linux.alibaba.com>
+Date: Fri, 17 Feb 2023 10:19:05 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.2
-Subject: Re: [PATCH 02/18] target/riscv: Correct the priority policy of
- riscv_csrrw_check()
+Subject: Re: [PATCH v6 2/9] target/riscv: introduce riscv_cpu_cfg()
 Content-Language: en-US
-To: Bin Meng <bmeng@tinylab.org>, qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- qemu-riscv@nongnu.org
-References: <20230213180215.1524938-1-bmeng@tinylab.org>
- <20230213180215.1524938-3-bmeng@tinylab.org>
-From: LIU Zhiwei <baxiantai@gmail.com>
-In-Reply-To: <20230213180215.1524938-3-bmeng@tinylab.org>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, richard.henderson@linaro.org
+References: <20230216215550.1011637-1-dbarboza@ventanamicro.com>
+ <20230216215550.1011637-3-dbarboza@ventanamicro.com>
+ <3e922fdf-c6c7-ae66-261b-0673472df3e0@linux.alibaba.com>
+In-Reply-To: <3e922fdf-c6c7-ae66-261b-0673472df3e0@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=baxiantai@gmail.com; helo=mail-pl1-x630.google.com
-X-Spam_score_int: -24
-X-Spam_score: -2.5
-X-Spam_bar: --
-X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- NICE_REPLY_A=-0.351, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.110;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-110.freemail.mail.aliyun.com
+X-Spam_score_int: -101
+X-Spam_score: -10.2
+X-Spam_bar: ----------
+X-Spam_report: (-10.2 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.351, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,51 +55,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2023 02:15:56 -0000
+X-List-Received-Date: Fri, 17 Feb 2023 02:19:19 -0000
 
 
-On 2023/2/14 2:01, Bin Meng wrote:
-> The priority policy of riscv_csrrw_check() was once adjusted in
-> commit eacaf4401956 ("target/riscv: Fix priority of csr related check in riscv_csrrw_check")
-> whose commit message says the CSR existence check should come
-> before the access control check, but the code changes did not
-> agree with the commit message, that the predicate() check came
-> after the read / write check.
+On 2023/2/17 9:50, LIU Zhiwei wrote:
 >
-> Fixes: eacaf4401956 ("target/riscv: Fix priority of csr related check in riscv_csrrw_check")
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
-> ---
+> On 2023/2/17 5:55, Daniel Henrique Barboza wrote:
+>> We're going to do changes that requires accessing the RISCVCPUConfig
+>> struct from the RISCVCPU, having access only to a CPURISCVState 'env'
+>> pointer. Add a helper to make the code easier to read.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/cpu.h | 5 +++++
+>>   1 file changed, 5 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index 01803a020d..5e9626837b 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -653,6 +653,11 @@ static inline RISCVMXL 
+>> riscv_cpu_mxl(CPURISCVState *env)
+>>   #endif
+>>   #define riscv_cpu_mxl_bits(env) (1UL << (4 + riscv_cpu_mxl(env)))
+>>   +static inline const RISCVCPUConfig *riscv_cpu_cfg(CPURISCVState *env)
 >
->   target/riscv/csr.c | 8 ++++----
->   1 file changed, 4 insertions(+), 4 deletions(-)
+> Maybe we should
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 1b0a0c1693..c2dd9d5af0 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3793,15 +3793,15 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
->           return RISCV_EXCP_ILLEGAL_INST;
->       }
->   
-> -    if (write_mask && read_only) {
-> -        return RISCV_EXCP_ILLEGAL_INST;
-> -    }
-> -
->       RISCVException ret = csr_ops[csrno].predicate(env, csrno);
->       if (ret != RISCV_EXCP_NONE) {
->           return ret;
->       }
->   
-> +    if (write_mask && read_only) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
+> static inline const* RISCVCPUConfig riscv_cpu_cfg(CPURISCVState *env) 
+> or just
+> static inline RISCVCPUConfig *riscv_cpu_cfg(CPURISCVState *env)
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Ignore this comment. I see that you never change the fields from this 
+pointer.
 
 Zhiwei
 
->   #if !defined(CONFIG_USER_ONLY)
->       int csr_priv, effective_priv = env->priv;
->   
+>
+> Zhiwei
+>
+>> +{
+>> +    return &env_archcpu(env)->cfg;
+>> +}
+>> +
+>>   #if defined(TARGET_RISCV32)
+>>   #define cpu_recompute_xl(env)  ((void)(env), MXL_RV32)
+>>   #else
 
