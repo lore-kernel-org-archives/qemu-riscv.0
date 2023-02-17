@@ -1,58 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pSqDv-0006ow-8D
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 21:11:43 -0500
+	id 1pSqI2-0007i1-4y
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Feb 2023 21:15:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baxiantai@gmail.com>)
- id 1pSqDt-0006oU-F2; Thu, 16 Feb 2023 21:11:41 -0500
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ id 1pSqHz-0007hU-RR; Thu, 16 Feb 2023 21:15:55 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baxiantai@gmail.com>)
- id 1pSqDr-00069k-RY; Thu, 16 Feb 2023 21:11:41 -0500
-Received: by mail-pj1-x1033.google.com with SMTP id
- x4-20020a17090a388400b002349a303ca5so3616248pjb.4; 
- Thu, 16 Feb 2023 18:11:38 -0800 (PST)
+ id 1pSqHy-0006uk-9d; Thu, 16 Feb 2023 21:15:55 -0500
+Received: by mail-pl1-x630.google.com with SMTP id i15so1325109plr.8;
+ Thu, 16 Feb 2023 18:15:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=0Ju5tJWlWDrlpGvrc/dpe2qu0gUWND5IGGiTgo4i6q4=;
- b=TUGeEGnIaXstIoH0W63MxWS7YoR3jAc1YjaLeuCy/ZNPAI5yhOlesseBpZ+SuvnEBC
- qPEnOcAsAvve7laVOBDeGjJQc6MCS4te7OKJElmp1EmHccAg3te9macKVs14zXryHYlb
- XYwb32wuWs92B0Q4NCHHgWAFGHG7l8ZMwfHox3KlZqN5JHhb5F+p6aNzG9SAoHIArMEu
- tZCjPmq8L/ah7IGq2MM9VjQ/f4CzeL3UVDJiIIfn3F5CpfpD0OMZF+DkvBFQ+l+nN37u
- fi08GCJ9EhuJSuIYfTzJamAxG5BvtavvnDpUZg7hPha0Xi8dhF3zJqOOLK6PBC8u1W+/
- WI7w==
+ bh=65HZqLr24EvYMLceZSWjbgB+D4Bc/r0FogWKLBf3HF0=;
+ b=DPRGGIhNT+O9RpP0M1TylXjBoVpKc2ipYIHtMNnPyjyoKaJC00z3R9X+stClEzny4M
+ OsU0GxmpEYXr5orNaLYqnCKP84+E9kzFPMDvDd1DSqboLkQFSH2YvN5ofwpVWWKrWAmT
+ bfHlMLU8ocUAYpNCBf6YxNccTMyIVEdH0tOkDbs8gQWHBiUzpXw6aCvQEMxFQ5SThMEq
+ KsCxPZAMFXtFhuhdvWTWrlmEpE5Bsc9vUggV0Eu8RGQilojhQIXtO4ivd48R6eKESfkt
+ KZNuclJkV5U7N+hqRhP4kHkE+es4Fm/Hd6fdkw/wi3HuqH2rbsqnk3Koo+OdSHFkr3Id
+ OxvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0Ju5tJWlWDrlpGvrc/dpe2qu0gUWND5IGGiTgo4i6q4=;
- b=EMfF933kJxEqJPKNaHXDTi7P/ew6DAfC2fdG+pMf8JaQDGc+nXMhentpSrdGKcFoMr
- 1IkA5ZnZglKVVN91ASftbdEFXNGyxD4QSXhiSOzz12ZFZqdKF8qT3SsWNAM5emM/HbJM
- jZdzYye/uN7Rkky/a8TvBt9+SS5rDJ6CGs+H/i16sz4nw8PQFQz5RUHbh3FuhWq9yrQl
- wey/eJZW4mkQR8EbDRw7OqNfZJHHX7/jfJsqu3/x3NC1dCo0vBdq6ExouAd8QK+KGA6a
- XlkVGVOLa+NU0LG6pd/T/HhxBZzsI0XN0wjMFveGzLcFeL28ajWc0Vvu4+GoD35dwcp2
- 7xng==
-X-Gm-Message-State: AO0yUKWRJ4FfByT2sRiW0D7OHj+07gVrFWbEXiwz+rdPVdmyoGSdTZHQ
- aAXSkHV8UO2RV9gG7zVeTuk=
-X-Google-Smtp-Source: AK7set92GXVwK7Zg6Fblrk528QOVLJwiDyJVjJmdmzm8GjxBkwWAkQxcsgKAxLVQn+8Nvg8jamvRNQ==
-X-Received: by 2002:a17:90a:19ce:b0:233:e0a5:f711 with SMTP id
- 14-20020a17090a19ce00b00233e0a5f711mr8998692pjj.22.1676599897316; 
- Thu, 16 Feb 2023 18:11:37 -0800 (PST)
+ bh=65HZqLr24EvYMLceZSWjbgB+D4Bc/r0FogWKLBf3HF0=;
+ b=QbNwD6QY4l1h29jJNirrVuyqLYc9XpYmbu7ZLyipP+/JMAWJCin/OsQNwnfJ6e8khF
+ pZGjWi/7iFVwd1hYce2y9FRX3OHue3piqKZ1NhoXDOp4PqasllqeP0t+C0kHAZWh483N
+ 2URYkcZBULyenQRNT6JQDKUxAsph1Lo8SJUPsyhm5CHYTowyhk2ux/v5dsYOU2zBq/f+
+ 2ud49sSvFQl0+AnnxXMEI+FgGxW6xxmlplqa3hicdZ/RzdRKzVPSMQlqVubsn5nAIvTu
+ SfKMzhFsIm73GQV9Kto+RPWOOnjpyCM3rRIkgjVss8cTB3iWYdVGW31+uPo6zUBEv4Le
+ f5SQ==
+X-Gm-Message-State: AO0yUKXFz50NmcyHRJxb6DXXJ9+iyG3szt/LOL7H2pPWsfq6vjx7++/3
+ XsbDVTGFw5dSHtkFQrJ/sPY=
+X-Google-Smtp-Source: AK7set+RPRzD+DM2Dgu+p+M7oOQlZ5C2uXUuEFcnD7QO1zwYyzpeagzS8nKZnGrN1zELPpDnmBfBWQ==
+X-Received: by 2002:a17:903:234c:b0:19a:7f4b:3ef6 with SMTP id
+ c12-20020a170903234c00b0019a7f4b3ef6mr9708514plh.3.1676600152540; 
+ Thu, 16 Feb 2023 18:15:52 -0800 (PST)
 Received: from [30.221.98.44] ([47.246.101.60])
  by smtp.gmail.com with ESMTPSA id
- q4-20020a17090a68c400b0022c0a05229fsm1732196pjj.41.2023.02.16.18.11.34
+ g1-20020a1709026b4100b00192aa53a7d5sm1945182plt.8.2023.02.16.18.15.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Feb 2023 18:11:36 -0800 (PST)
-Message-ID: <84a5bc4e-23f9-44fd-e6d2-5a426accb541@gmail.com>
-Date: Fri, 17 Feb 2023 10:11:31 +0800
+ Thu, 16 Feb 2023 18:15:52 -0800 (PST)
+Message-ID: <9ea6def2-5648-11d1-261a-d4a42cec2f24@gmail.com>
+Date: Fri, 17 Feb 2023 10:15:46 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.2
-Subject: Re: [PATCH 01/18] target/riscv: gdbstub: Check priv spec version
- before reporting CSR
+Subject: Re: [PATCH 02/18] target/riscv: Correct the priority policy of
+ riscv_csrrw_check()
 Content-Language: en-US
 To: Bin Meng <bmeng@tinylab.org>, qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -62,13 +61,13 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  qemu-riscv@nongnu.org
 References: <20230213180215.1524938-1-bmeng@tinylab.org>
- <20230213180215.1524938-2-bmeng@tinylab.org>
+ <20230213180215.1524938-3-bmeng@tinylab.org>
 From: LIU Zhiwei <baxiantai@gmail.com>
-In-Reply-To: <20230213180215.1524938-2-bmeng@tinylab.org>
+In-Reply-To: <20230213180215.1524938-3-bmeng@tinylab.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=baxiantai@gmail.com; helo=mail-pj1-x1033.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=baxiantai@gmail.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -24
 X-Spam_score: -2.5
 X-Spam_bar: --
@@ -88,46 +87,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2023 02:11:41 -0000
+X-List-Received-Date: Fri, 17 Feb 2023 02:15:56 -0000
 
 
 On 2023/2/14 2:01, Bin Meng wrote:
-> The gdbstub CSR XML is dynamically generated according to the result
-> of the CSR predicate() result. This has been working fine until
-> commit 7100fe6c2441 ("target/riscv: Enable privileged spec version 1.12")
-> introduced the privilege spec version check in riscv_csrrw_check().
+> The priority policy of riscv_csrrw_check() was once adjusted in
+> commit eacaf4401956 ("target/riscv: Fix priority of csr related check in riscv_csrrw_check")
+> whose commit message says the CSR existence check should come
+> before the access control check, but the code changes did not
+> agree with the commit message, that the predicate() check came
+> after the read / write check.
 >
-> When debugging the 'sifive_u' machine whose priv spec is at 1.10,
-> gdbstub reports priv spec 1.12 CSRs like menvcfg in the XML, hence
-> we see "remote failure reply 'E14'" message when examining all CSRs
-> via "info register system" from gdb.
->
-> Add the priv spec version check in the CSR XML generation logic to
-> fix this issue.
->
-> Fixes: 7100fe6c2441 ("target/riscv: Enable privileged spec version 1.12")
+> Fixes: eacaf4401956 ("target/riscv: Fix priority of csr related check in riscv_csrrw_check")
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 > ---
 >
->   target/riscv/gdbstub.c | 3 +++
->   1 file changed, 3 insertions(+)
+>   target/riscv/csr.c | 8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
 >
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index 6e7bbdbd5e..e57372db38 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -290,6 +290,9 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
->       g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 1b0a0c1693..c2dd9d5af0 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -3793,15 +3793,15 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+>           return RISCV_EXCP_ILLEGAL_INST;
+>       }
 >   
->       for (i = 0; i < CSR_TABLE_SIZE; i++) {
-> +        if (env->priv_ver < csr_ops[i].min_priv_ver) {
-> +            continue;
-> +        }
+> -    if (write_mask && read_only) {
+> -        return RISCV_EXCP_ILLEGAL_INST;
+> -    }
+> -
+>       RISCVException ret = csr_ops[csrno].predicate(env, csrno);
+>       if (ret != RISCV_EXCP_NONE) {
+>           return ret;
+>       }
+>   
+> +    if (write_mask && read_only) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +
+
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Zhiwei
 
->           predicate = csr_ops[i].predicate;
->           if (predicate && (predicate(env, i) == RISCV_EXCP_NONE)) {
->               if (csr_ops[i].name) {
+>   #if !defined(CONFIG_USER_ONLY)
+>       int csr_priv, effective_priv = env->priv;
+>   
 
