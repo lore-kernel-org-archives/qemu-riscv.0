@@ -1,77 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pT7Rr-0002gr-EW
-	for mharc-qemu-riscv@gnu.org; Fri, 17 Feb 2023 15:35:15 -0500
+	id 1pTE9w-0000Pj-Be
+	for mharc-qemu-riscv@gnu.org; Fri, 17 Feb 2023 22:45:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pT7Rp-0002f5-T4
- for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 15:35:14 -0500
-Received: from mail-oa1-x2c.google.com ([2001:4860:4864:20::2c])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pTE9r-0000P6-Uc
+ for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 22:45:07 -0500
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pT7Rj-0006Ss-UV
- for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 15:35:10 -0500
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-1718822c152so2435627fac.7
- for <qemu-riscv@nongnu.org>; Fri, 17 Feb 2023 12:35:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=h8I3/loqCXLPJq7Ot2kL3eJ1UPZjr/7NB5ZYHvYcxs4=;
- b=hXlYR+c/vmtjgfPiCUTY2Egvj7W8wG+htq8q1k1Ot9eRL5PxM/sctvLKXh0GQ5dor1
- A2KWh3UKhfGMaFV5MaH5obMlqpUbmgsXyaftIx2HTjkjZbosrFSorvYZB/26sNYbWLbn
- i57ZW+0letC+xpBRJrBG7qXyEs5GLIG/mewnnCukqqwlPNzBTshbFYxeflE63kNLjesl
- SNP4tZacMPLiH4j90OP8ulSYXrACWX9FwobNn9EH3h4TmwPCUrq/guKSS5e82wzrljKL
- E2y1aPW6Tk+v8XlWe2vdBl6rPsTXktFQKLyiUDlso7fWQ0uS1fgIg8zFrN6vfv+kdxBV
- sxPA==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pTE9q-0007i4-8d
+ for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 22:45:07 -0500
+Received: by mail-pl1-x629.google.com with SMTP id jk12so198399plb.5
+ for <qemu-riscv@nongnu.org>; Fri, 17 Feb 2023 19:45:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Sf9athrlZ9RdQSQYsNsHOLfJc9Vc0DwGeKda5qEEZvI=;
+ b=ppHU/sc8jPZXfOmj5769raswq8LWXwjO1o6kUAlyAXzGOoSUl+7m4q0ZiEfuFSYPib
+ c3HY/qC5tWeb1finrSmWxSt1xbXkJ5VF0lF3RXBqeRVWU+CMl8c+RFbKU+iiaRnAbH1H
+ B7bt17o6BZBoVVlH5iG+A54MFgaEP1SNstgK2TRZESwxVgYXSQnu5mFtwvl+8JhBboVM
+ cOxtP3GfND/P33StDHnPMUgojgzQJZQJIx2oS+BZlIF74Tby0rVGQ02Hr0OdDLsHv9pC
+ yBXdCMwqDvDxxRBglSskdd/g757SV6ngqryd2BvLV8flxoCsFRBpL/7UANIZWHBOOUFu
+ bp/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=h8I3/loqCXLPJq7Ot2kL3eJ1UPZjr/7NB5ZYHvYcxs4=;
- b=8KOFSc/3eHQE2bstfj1pFwyIZwvkPOV/sv1GKAxtCW2UieL11XdNZ1nR9E00a54q6w
- +Vzdj84qR51uPO+7OD9xg3ByJjUExn02+KfBz8HNjwc6vRxQmgzs+JpsU2EWZ24GGT1F
- U45wdqgmO4xorWCDGsGRI8yHNsXxqHhlxqpx77r1DSoTd+v3rhlTYiSWD5dT1HE9ghGM
- HeoEs719i3WP4whWn1nIKOZjC8FBSXWFzzvVI9Fvc+tDrsjGnIUlNSz03CwMbCwM2wYV
- 9+5ckA58OeN3BlxH1/oD/aYowXNHI38Vgsx3NdXlcimbbA2Bc/GD/ZMV8qPv7F2yBTcq
- a2kQ==
-X-Gm-Message-State: AO0yUKWKjBBHZsgUYURirT0+Gq47ntTwDchp9tCgUmEd8cg+oW5OgCeo
- s+hx3il+TlSUXiV3cPYsQEy9uw==
-X-Google-Smtp-Source: AK7set9wTy5XMNG0AfZzG70AeWXPVGhlGN0uQo1qyDKSbFIXWJeh5j1rzHnfWcDkLefLUReNexsHCA==
-X-Received: by 2002:a05:6870:171d:b0:16a:16cc:8a0a with SMTP id
- h29-20020a056870171d00b0016a16cc8a0amr3712563oae.28.1676666107281; 
- Fri, 17 Feb 2023 12:35:07 -0800 (PST)
-Received: from grind.dc1.ventanamicro.com ([191.19.40.109])
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Sf9athrlZ9RdQSQYsNsHOLfJc9Vc0DwGeKda5qEEZvI=;
+ b=TTQ0YUhW/JrkBnNVgPFWIZYfEv5Bex6gl1WR7t55psfCqwKRALqkHhAbD+1HQzQq0D
+ F8qtvIdfpO8AwYk6HsDU+v3vsGPqKz6xbJ089mH8jD4XNyS0cVx1mZCPaR9potPvtstc
+ 9QMXb15tUxEl5zA5CS3F9jG0oDEwI4iJtFdSBdKDu4h/zqOGy4PUG6YB9K3gcDPQadk7
+ HApTpJS27xv6DpH7k5Dgi20cHtyOyjHWleEyMm8myEg5FYOQ3PZAI1sHob/7jO0fH4k7
+ 9+KCLs/z65IoBN3PmIsT/S5ev1RdFbilnG6J21l5LwsdJ1pfk+J3fNnC+rxAquhJ43a2
+ z/uQ==
+X-Gm-Message-State: AO0yUKW9lecw9IiEvRW2dwnwZa5OqVURI4FJn3hc7pO4I11B7QlQXuaE
+ ZdxEToI7KkzwPLzJl7v6BXmsCg==
+X-Google-Smtp-Source: AK7set/LbH9Luf8KE3mRNS7xC0s72+/z0sqtm5jNj9rubMdO9ll0HubGv/JLN7sXfwapQxq0iVjbRA==
+X-Received: by 2002:a05:6a20:c701:b0:be:8c7e:4dfc with SMTP id
+ hi1-20020a056a20c70100b000be8c7e4dfcmr1925859pzb.20.1676691903542; 
+ Fri, 17 Feb 2023 19:45:03 -0800 (PST)
+Received: from [172.20.100.240] ([173.198.77.219])
  by smtp.gmail.com with ESMTPSA id
- ef5-20020a0568701a8500b00152c52608dbsm1125616oab.34.2023.02.17.12.35.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Feb 2023 12:35:06 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
+ e22-20020aa78256000000b00575d1ba0ecfsm3764495pfn.133.2023.02.17.19.45.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 17 Feb 2023 19:45:03 -0800 (PST)
+Message-ID: <20408b85-2ad0-4cbc-4ccd-c512ba15ba06@linaro.org>
+Date: Fri, 17 Feb 2023 17:44:56 -1000
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH v6 2/4] target/riscv: implement Zicboz extension
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- dbarboza@ventanamicro.com, richard.henderson@linaro.org,
  Christoph Muellner <cmuellner@linux.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>
-Subject: [PATCH v6 4/4] target/riscv: add Zicbop cbo.prefetch{i, r,
- m} placeholder
-Date: Fri, 17 Feb 2023 17:34:45 -0300
-Message-Id: <20230217203445.51077-5-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230217203445.51077-1-dbarboza@ventanamicro.com>
 References: <20230217203445.51077-1-dbarboza@ventanamicro.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ <20230217203445.51077-3-dbarboza@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230217203445.51077-3-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x629.google.com
+X-Spam_score_int: -23
+X-Spam_score: -2.4
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.256,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -86,38 +86,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2023 20:35:14 -0000
+X-List-Received-Date: Sat, 18 Feb 2023 03:45:08 -0000
 
-From: Christoph Muellner <cmuellner@linux.com>
+On 2/17/23 10:34, Daniel Henrique Barboza wrote:
+> +void helper_cbo_zero(CPURISCVState *env, target_ulong address)
+> +{
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +    uintptr_t ra = GETPC();
+> +    uint16_t cbozlen;
+> +    void *mem;
+> +
+> +    check_zicbo_envcfg(env, MENVCFG_CBZE, ra);
+> +
+> +    /* Get the size of the cache block for zero instructions. */
+> +    cbozlen = cpu->cfg.cboz_blocksize;
+> +
+> +    /* Mask off low-bits to align-down to the cache-block. */
+> +    address &= ~(cbozlen - 1);
+> +
+> +    mem = tlb_vaddr_to_host(env, address, MMU_DATA_STORE,
+> +                            cpu_mmu_index(env, false));
+> +
+> +    if (likely(mem)) {
+> +        /* Zero the block */
+> +        memset(mem, 0, cbozlen);
+> +    }
+> +}
 
-The cmo.prefetch instructions are nops for QEMU (no emulation of the
-memory hierarchy, no illegal instructions, no permission faults, no
-traps).
+Not correct.  This fails to zero the block at all under a number of conditions.
+Please have a closer look at the feedback on v5.
 
-Add a comment noting where they would be decoded in case cbo.prefetch
-instructions become relevant in the future.
 
-Co-developed-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Signed-off-by: Christoph Muellner <cmuellner@linux.com>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/insn32.decode | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 3788f86528..1aebd37572 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -134,6 +134,7 @@ addi     ............     ..... 000 ..... 0010011 @i
- slti     ............     ..... 010 ..... 0010011 @i
- sltiu    ............     ..... 011 ..... 0010011 @i
- xori     ............     ..... 100 ..... 0010011 @i
-+# cbo.prefetch_{i,r,m} instructions are ori with rd=x0 and not decoded.
- ori      ............     ..... 110 ..... 0010011 @i
- andi     ............     ..... 111 ..... 0010011 @i
- slli     00000. ......    ..... 001 ..... 0010011 @sh
--- 
-2.39.2
-
+r~
 
