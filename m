@@ -1,72 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pTEBB-00018a-3f
-	for mharc-qemu-riscv@gnu.org; Fri, 17 Feb 2023 22:46:29 -0500
+	id 1pTJWF-00059Z-Eu
+	for mharc-qemu-riscv@gnu.org; Sat, 18 Feb 2023 04:28:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pTEB9-00018I-Lz
- for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 22:46:27 -0500
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pTJWD-000581-I7
+ for qemu-riscv@nongnu.org; Sat, 18 Feb 2023 04:28:33 -0500
+Received: from mail-oi1-x22c.google.com ([2607:f8b0:4864:20::22c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pTEB7-0008Sr-T5
- for qemu-riscv@nongnu.org; Fri, 17 Feb 2023 22:46:27 -0500
-Received: by mail-pl1-x62a.google.com with SMTP id jk12so199884plb.5
- for <qemu-riscv@nongnu.org>; Fri, 17 Feb 2023 19:46:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pTJWB-0008B8-Vy
+ for qemu-riscv@nongnu.org; Sat, 18 Feb 2023 04:28:33 -0500
+Received: by mail-oi1-x22c.google.com with SMTP id bd2so552726oib.1
+ for <qemu-riscv@nongnu.org>; Sat, 18 Feb 2023 01:28:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=4ORPZA/pWVotURg6W8ELgZu2Ji+ogWXQa28mKpeOMQs=;
- b=yRHs1t9oL+VYrq9gtd+WRaASYQIm5pR/yYZz9p8JPkeLu8XzsLXvNfu1zEbRprFiRl
- 3rVLzExfTF8LxQipz0JhorQw8Oz/VVx4XnppazOmeqrCkVN+KfbQhMhBBhlogIOZp1k0
- XRbNX6v6SI9Mso/ut26Skcm4JvLgOIkcvTsBxGmOBgmLj5+snzqWPsB1R5z8MO/MckLr
- yhiquUfAhhxH3Fra+TyHP8luByPet1/M4CwiOPe1Arab43D63UOTOExu14J6+UjIqlhH
- 5Iv0b/MxOkmjkNptg7wO9zkT2ZPgBTDLshWnxNpLIUeI6K+B4bb3m86rwbymGZ3xaeLw
- xiNQ==
+ bh=DIa8j9bz6MRNdmbdMkc/Z+jMkMfQQHhLjS3nelQIF7M=;
+ b=lP/1PNhiDtq813i/IcGjXpCCm8QeC6YrijxkmI1c+uvRainnxEoJGzSvA2xmhvkd+S
+ MSr4NOxNl/19o1qBL5mQnsf43JGA/V18VlXOlILGGUFMBD02FcGFEQ75XOPb4QXzV8Wh
+ 4gW3cNuVbJy3hgUqM5x2Zkfl9XbMZKYuEk/L+bvQq60AThVGG4Q0QpRB6e0RKwCKTpeX
+ Vh0Cr5CPGj1MXipmtNNOEVpjioB2fwWTUPlMEIkByhFiXzxjj89gFm1M07NawbRTMepn
+ TVZZnrH+wnRrW8qKPmLddEgE1mL6829tyagN91cMnuEOdx2etVAe1OXgUvYU3MXr+XSG
+ gU7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4ORPZA/pWVotURg6W8ELgZu2Ji+ogWXQa28mKpeOMQs=;
- b=flCF3t8Lb58ripJw5+ePMfW53E4uKCPhd8SJgZB8x/g6so7PCq/WrzZ+4rMS5HnGCH
- kr1Cy+4aJD2LjEjbDixkM56oVQW3L4pDS+sja4KN4mYII8C50bgYxeg681cQUC6dZsLu
- JvxkVnvnl6Ag2HuQUuKcuPruOt3uA3emb/iwOQrLL+V4pE7YyE7HG5X2BJRvfwiImT0x
- AhWapAbGIhnnGqtnok0lNCD2ufmZkmbMdds/bcvjoEMOqblZvtG4ghnwue8Pkp0e7Mkl
- E1B7mzdJSWV9EfILjAsQDlfqvF+tksx/zQ82tWt/6LJlHs6lF+e04AhaG8PqfaxJ8LTD
- iRSw==
-X-Gm-Message-State: AO0yUKV5CQ4xQ3Tr7vf3PkL6Ef7Ac4YoE6MdEOXQPA5zfDgbJq4levTa
- K77EOplOyGP8W6RdjwCnf/i9Msq/gQd/FqvBwJ8=
-X-Google-Smtp-Source: AK7set+Va4qsqgReJIoLzlYr7rijDBIQoSwA8VHqSXJOuJFWAewD4ajNSm27PZtnRK1rnuxsgyaiqg==
-X-Received: by 2002:a17:90b:1e4d:b0:234:b35b:f8e7 with SMTP id
- pi13-20020a17090b1e4d00b00234b35bf8e7mr7370212pjb.7.1676691984391; 
- Fri, 17 Feb 2023 19:46:24 -0800 (PST)
-Received: from [172.20.100.240] (rrcs-173-198-77-219.west.biz.rr.com.
- [173.198.77.219]) by smtp.gmail.com with ESMTPSA id
- gz8-20020a17090b0ec800b002343e59709asm3096432pjb.46.2023.02.17.19.46.22
+ bh=DIa8j9bz6MRNdmbdMkc/Z+jMkMfQQHhLjS3nelQIF7M=;
+ b=VRxKFWSOclGE/m06e04mAUDmRL7PBAUXO3tbnKHodkBEE3iqzPIKSZRIJXzA9gRcns
+ YpYbSQNXvYsplEx0DjauvL3uFE+CQwX7sZ4inwBtsaC7/Z9m8shtmHj9QQruVmT3jiXF
+ gAdjWfUk0ffLPmPT/mb3Xv3QF5md/AI3SSnZ1+bdbnod1d49PNKzsmq6KjOLCt6WmXlv
+ cXl16LewIKb5GPWtULMnh2vF3m5LoGdUESEWt5UQYbf6gBXax/LJgBc2DA+b4T91iVht
+ IOgKAzrU7qDH0q991Y6ufPKvcEuVcrtJzOtaMaKR5aaGB9jktVfan81PSUP7BdRZtekr
+ dBtg==
+X-Gm-Message-State: AO0yUKW2AdB5V8JMwuw5mLqN/z3NMtVrYfyCacxRWYEWwqTBwU8JXKzs
+ loUo2d+CcCDOyZrD4mKbON5Eag==
+X-Google-Smtp-Source: AK7set+JCV+WmOq79Tby0tqxww+SGWjOxpzsEQIEMRWO0U8adpgpdsZwehZusOgOUdpb1I9MhYw4/A==
+X-Received: by 2002:aca:1110:0:b0:37f:ae54:155a with SMTP id
+ 16-20020aca1110000000b0037fae54155amr2271640oir.32.1676712510255; 
+ Sat, 18 Feb 2023 01:28:30 -0800 (PST)
+Received: from [192.168.68.107] ([191.19.40.109])
+ by smtp.gmail.com with ESMTPSA id
+ b132-20020aca348a000000b0037b6f5d6309sm2812811oia.2.2023.02.18.01.28.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Feb 2023 19:46:23 -0800 (PST)
-Message-ID: <dc7706fb-6b7c-7b08-9197-1a1a0f973143@linaro.org>
-Date: Fri, 17 Feb 2023 17:46:20 -1000
+ Sat, 18 Feb 2023 01:28:29 -0800 (PST)
+Message-ID: <d468f8c6-f8ec-6d40-44ab-3e76df458680@ventanamicro.com>
+Date: Sat, 18 Feb 2023 06:28:24 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH v6 3/4] target/riscv: implement Zicbom extension
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+ Thunderbird/102.7.2
+Subject: Re: [PATCH v6 2/4] target/riscv: implement Zicboz extension
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
  Christoph Muellner <cmuellner@linux.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>
 References: <20230217203445.51077-1-dbarboza@ventanamicro.com>
- <20230217203445.51077-4-dbarboza@ventanamicro.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230217203445.51077-4-dbarboza@ventanamicro.com>
+ <20230217203445.51077-3-dbarboza@ventanamicro.com>
+ <20408b85-2ad0-4cbc-4ccd-c512ba15ba06@linaro.org>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20408b85-2ad0-4cbc-4ccd-c512ba15ba06@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62a.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22c.google.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
@@ -86,38 +88,72 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Feb 2023 03:46:28 -0000
-
-On 2/17/23 10:34, Daniel Henrique Barboza wrote:
-> +    /*
-> +     * Section 2.5.2 of cmobase v1.0.1:
-> +     *
-> +     * "A cache-block management instruction is permitted to
-> +     * access the specified cache block whenever a load instruction
-> +     * or store instruction is permitted to access the corresponding
-> +     * physical addresses. If neither a load instruction nor store
-> +     * instruction is permitted to access the physical addresses,
-> +     * but an instruction fetch is permitted to access the physical
-> +     * addresses, whether a cache-block management instruction is
-> +     * permitted to access the cache block is UNSPECIFIED.
-> +     *
-> +     * This means we have to make a choice of whether checking
-> +     * MMU_INST_FETCH is worth it or not. We'll go the easier
-> +     * route and check MMU_DATA_LOAD and MMU_DATA_STORE only.
-> +     */
-> +    ret = probe_access_range_flags(env, address, cbomlen,
-> +                                   MMU_DATA_LOAD,
-> +                                   mmu_idx, true, &phost, ra);
-> +
-> +    if (ret == TLB_INVALID_MASK) {
-> +        probe_access_range_flags(env, address, cbomlen,
-> +                                 MMU_DATA_STORE,
-> +                                 mmu_idx, true, &phost, ra);
-> +    }
-
-Not correct, at minimum for discarding the result of the second call.  But I suggested a 
-different ordering of operations which avoid a third probe.
+X-List-Received-Date: Sat, 18 Feb 2023 09:28:33 -0000
 
 
-r~
+
+On 2/18/23 00:44, Richard Henderson wrote:
+> On 2/17/23 10:34, Daniel Henrique Barboza wrote:
+>> +void helper_cbo_zero(CPURISCVState *env, target_ulong address)
+>> +{
+>> +    RISCVCPU *cpu = env_archcpu(env);
+>> +    uintptr_t ra = GETPC();
+>> +    uint16_t cbozlen;
+>> +    void *mem;
+>> +
+>> +    check_zicbo_envcfg(env, MENVCFG_CBZE, ra);
+>> +
+>> +    /* Get the size of the cache block for zero instructions. */
+>> +    cbozlen = cpu->cfg.cboz_blocksize;
+>> +
+>> +    /* Mask off low-bits to align-down to the cache-block. */
+>> +    address &= ~(cbozlen - 1);
+>> +
+>> +    mem = tlb_vaddr_to_host(env, address, MMU_DATA_STORE,
+>> +                            cpu_mmu_index(env, false));
+>> +
+>> +    if (likely(mem)) {
+>> +        /* Zero the block */
+>> +        memset(mem, 0, cbozlen);
+>> +    }
+>> +}
+> 
+> Not correct.  This fails to zero the block at all under a number of conditions.
+
+Ops. The 'else' conditional in which we would zero the mem in case it's an I/O
+region got lost in the middle of rebasing it seems ....
+
+By the way, looking at the lack of any probing in this particular function and at
+the probe_writes() that ARM does, I read the spec again. A paragraph in 2.5.2
+says:
+
+"A cache-block zero instruction is permitted to access the specified cache block whenever
+a store instruction is permitted to access the corresponding physical addresses and when
+the PMAs indicate that cache-block zero instructions are a supported access type. If access
+to the cache block is not permitted, a cache-block zero instruction raises a store page fault
+or store guest-page fault exception if address translation does not permit write access or
+raises a store access fault exception otherwise. During address translation, the instruction
+also checks the accessed and dirty bits and may either raise an exception or set the bits as
+required."
+
+PMA (Physical Memory Access) doesn't seem to be implemented in RISC-V, or at the very least
+it's not using the PMA acronym, so let's skip that for now. I'll add a comment mentioning
+it in the code mentioning that PMA for I/O should be checked and we're not doing it.
+
+But PMA aside, we have wording and conditionals that resembles the cache-block management
+permissions and so on, with the exception that we're not caring about LOAD access this time
+around. So I guess we'll also need here something like what check_zicbom_access() is doing
+in the next patch.
+
+
+Thanks,
+
+Daniel
+
+
+
+> Please have a closer look at the feedback on v5.
+> 
+> 
+> r~
 
