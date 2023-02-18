@@ -1,82 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pTJsa-0001BW-SV
-	for mharc-qemu-riscv@gnu.org; Sat, 18 Feb 2023 04:51:41 -0500
+	id 1pTMWS-0008Ct-Cq
+	for mharc-qemu-riscv@gnu.org; Sat, 18 Feb 2023 07:41:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pTJsZ-0001B8-8b
- for qemu-riscv@nongnu.org; Sat, 18 Feb 2023 04:51:39 -0500
-Received: from mail-oa1-x33.google.com ([2001:4860:4864:20::33])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pTJsX-0007IX-JM
- for qemu-riscv@nongnu.org; Sat, 18 Feb 2023 04:51:38 -0500
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-171a56a5d1aso798913fac.5
- for <qemu-riscv@nongnu.org>; Sat, 18 Feb 2023 01:51:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=KJGljKpAzZ9pDnQYAaiKP6bVlTNvctCi0/Ntbbm3dS8=;
- b=dmV8tLMlDHO3hd7yeL2Ll2uLAGWYax8J8fFCrX4IXQE++Iz/WgQIBHDPhJfV3503u3
- GWBJaxMjiquaQ2957VQdGNV/uyqwRJjOW5Rbyok3iuuGn9hqSet+2AQA6+EtGRQZc76o
- ICLcpvB0kceEW8cJONPVfLIXUx3Lo3S+lyPRAPrPyOQuzeo6lrH0fZvZ4yCG4RZ5OaWk
- VpMOvzSvfXqXH3iw8xBGlUf8WBoHOys8PZHYGCmi01STA/vl2cP1bfr+2kjSgMqYqQ4l
- sVyvkteALJsyaVLvoTet6otqcXxoktl5qQcKggWi11uSwRYBp0/l2FMGVOO267D4wS9K
- rrLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KJGljKpAzZ9pDnQYAaiKP6bVlTNvctCi0/Ntbbm3dS8=;
- b=V7k6xUhGphHpFg2pqfbcqjA9rHNJw/T1qJ48kIBUPfoly/IxyN0kkYUaC+fiJ8i2n7
- JUxTld4jMV2Oybf/bql/hK9SBwtBxihxFhEL8cH9L6xHVdCWAdxz5f9+aihTsVp7rJ4P
- T0AAjiVgLoiR2Ulkw3vddatzYWdaMlrET5EnWh1o1eqMg70AASNNwMj2jPdIfioimq1E
- Ja1ZwWqG82hLbFpowVKbY3Oq5YPeqKQFC3GyKXdBEYJUAM3XrDP/IsxYoHEnfl+2SQ36
- IU1s54gaW2tcgNDU7slY+uOv9mcOIhNKQR9iqSkNYC6VtHm1x+dxCX6MmBhyqHEnRjcZ
- QRQg==
-X-Gm-Message-State: AO0yUKUCKrcTv/+/2sSVK6RToKdwAnoV5gvQFn1cva+LeWd/s3p0QrDT
- R5/Zzc7TX+8f0wEDcStnMRrVag==
-X-Google-Smtp-Source: AK7set9g7jkV/RGlEm3cbkDkHu35/gt/SeBP9BX/aIw0DLlkGEI7xXD3Zto826I5UByGeQBVfj3TRg==
-X-Received: by 2002:a05:6870:ac27:b0:16d:e7d4:4180 with SMTP id
- kw39-20020a056870ac2700b0016de7d44180mr2300113oab.29.1676713895756; 
- Sat, 18 Feb 2023 01:51:35 -0800 (PST)
-Received: from [192.168.68.107] ([191.19.40.109])
- by smtp.gmail.com with ESMTPSA id
- h12-20020a4adccc000000b0051a669290e8sm2825165oou.5.2023.02.18.01.51.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 18 Feb 2023 01:51:35 -0800 (PST)
-Message-ID: <2e2a5291-9613-e332-bcb9-65e5ad1c377d@ventanamicro.com>
-Date: Sat, 18 Feb 2023 06:51:30 -0300
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pTMWQ-0008Bg-K2; Sat, 18 Feb 2023 07:40:58 -0500
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pTMWO-0002mH-1B; Sat, 18 Feb 2023 07:40:58 -0500
+Received: from [192.168.0.119] (unknown [114.95.238.225])
+ by APP-01 (Coremail) with SMTP id qwCowADn70tJx_Bj4rvlBQ--.51430S2;
+ Sat, 18 Feb 2023 20:40:42 +0800 (CST)
+Message-ID: <cef0d8fb-c934-8b73-0326-47868e9b9f40@iscas.ac.cn>
+Date: Sat, 18 Feb 2023 20:40:41 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.2
-Subject: Re: [PATCH v5 3/4] target/riscv: implement Zicbom extension
+ Thunderbird/102.7.1
+Subject: Re: [PATCH] [PATCH] disas/riscv Fix ctzw disassemble
+To: Ivan Klokov <ivan.klokov@syntacore.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com,
+ liweiwei@iscas.ac.cn
+References: <20230217161027.56859-1-ivan.klokov@syntacore.com>
 Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- Christoph Muellner <cmuellner@linux.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-References: <20230215205911.695745-1-dbarboza@ventanamicro.com>
- <20230215205911.695745-4-dbarboza@ventanamicro.com>
- <80575b72-65f7-e5ea-c6e1-558efbe4052a@linaro.org>
- <8cd954be-7ac3-57f7-f9e8-8d4bd02a07de@linaro.org>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <8cd954be-7ac3-57f7-f9e8-8d4bd02a07de@linaro.org>
+From: weiwei <liweiwei@iscas.ac.cn>
+In-Reply-To: <20230217161027.56859-1-ivan.klokov@syntacore.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::33;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x33.google.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID: qwCowADn70tJx_Bj4rvlBQ--.51430S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrtFW3Xw18Ww1kZr4kury5XFb_yoWkJrb_Xr
+ yFvrZ7Wr98XrsavFW7Wrn3uayjgas5AF15GFn2y3yUK3W5CrsrJr98Ka4UAw4UurykWw15
+ CFn8XrWYqrsrGjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbckFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_
+ Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+ 0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
+ jxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr
+ 1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7Mxk0xIA0c2IEe2xFo4CEbIxv
+ r21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxV
+ WUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI
+ 7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r
+ 1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI
+ 42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0JUywZ7UUUUU=
+X-Originating-IP: [114.95.238.225]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.256,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.256,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -90,39 +65,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Feb 2023 09:51:39 -0000
+X-List-Received-Date: Sat, 18 Feb 2023 12:40:59 -0000
 
 
+On 2023/2/18 00:10, Ivan Klokov wrote:
+> Due to typo in opcode list, ctzw is disassembled as clzw instruction.
+>
+> Fixes: 02c1b569a15b ("disas/riscv: Add Zb[abcs] instructions")
+> Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
+> ---
+> v2:
+>     - added fixes line
 
-On 2/15/23 19:18, Richard Henderson wrote:
-> On 2/15/23 12:13, Richard Henderson wrote:
->>      ret = probe_access_flags(env, address, MMU_DATA_LOAD, mmu_idx, true, &phost, ra);
->>      if (ret != TLB_INVALID_MASK) {
->>          /* Success: readable */
->>          return;
->>      }
-> ...
->> At which point the new probe_acccess_range_flags is not needed.
-> 
-> Oh, I get it, the range is required for PMP, for sub-page range checks.
-> 
-> I wonder how tedious it would be to adjust all callers, rather than inventing yet another interface...
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 
-I took a look at the amount of tediousness involved. It's feasible to do if we
-want to add a 'size' param in probe_access_flags() - existing callers would
-use size = 0, RISC-V can use the appropriate size.
+Weiwei Li
+> ---
+>   disas/riscv.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index ddda687c13..54455aaaa8 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -1645,7 +1645,7 @@ const rv_opcode_data opcode_data[] = {
+>       { "max", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+>       { "maxu", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+>       { "clzw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+> -    { "clzw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+> +    { "ctzw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+>       { "cpopw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+>       { "slli.uw", rv_codec_i_sh5, rv_fmt_rd_rs1_imm, NULL, 0, 0, 0 },
+>       { "add.uw", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
 
-
-I'll see if I can pull it off and send it as an alternative in the next
-version.
-
-
-Thanks,
-
-
-Daniel
-
-> 
-> 
-> r~
 
