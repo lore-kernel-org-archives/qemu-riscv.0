@@ -1,80 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pTSza-0003zp-Fb
-	for mharc-qemu-riscv@gnu.org; Sat, 18 Feb 2023 14:35:30 -0500
+	id 1pU2uJ-0002zD-GC
+	for mharc-qemu-riscv@gnu.org; Mon, 20 Feb 2023 04:56:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pTSzY-0003zY-Gk
- for qemu-riscv@nongnu.org; Sat, 18 Feb 2023 14:35:28 -0500
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1pU2uE-0002yP-3d
+ for qemu-riscv@nongnu.org; Mon, 20 Feb 2023 04:56:22 -0500
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pTSzW-00042F-Vw
- for qemu-riscv@nongnu.org; Sat, 18 Feb 2023 14:35:28 -0500
-Received: by mail-pj1-x1032.google.com with SMTP id
- nb7-20020a17090b35c700b0023058bbd7b2so1256069pjb.0
- for <qemu-riscv@nongnu.org>; Sat, 18 Feb 2023 11:35:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=GVimopM9nsGyKogmPStaemWmYX+ncqWbsZ+eteXaxgg=;
- b=mU7YaWB9WFaiFTlpoU/BkTn3ykstVLaH0zUFnkZgVboyBZTV4B7Ny3QCN0Eoq0Gg+y
- WgAmDLVXdegti4YUhZKattB7ZeIHE2EwfkVzbX8SxT0DY+9FyMutl1bzjqSxRSdnKqOw
- 9D3hv7mVoAQ0ZvW9H4qTm2vAe6i6BvYGPLJoYkbIHLNt+ca91uHL9xJEhLuwHmuv9dW3
- VpTQk9W2i2pvfp2xlYQFnjzFGc4RG1XqCDZh46fyCb39sJ4gnAVFxdxhwgZiO1TvSARM
- OKdXtJhyFveOdFh4uQr/+DPdNlLsO1vuskbPM3GhK6cwT723TfOhIm/bQKZcWKMnb9zr
- 3fuw==
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1pU2uC-0006Aw-5R
+ for qemu-riscv@nongnu.org; Mon, 20 Feb 2023 04:56:21 -0500
+Received: by mail-ed1-x52e.google.com with SMTP id ec43so1789221edb.8
+ for <qemu-riscv@nongnu.org>; Mon, 20 Feb 2023 01:56:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=uNIXAIiCHY5tNHZQsSeZepuT/whFbyEot/ug3OODyTg=;
+ b=X9uO8qcHF3OpVRLMoZg2JPIbSFntn2nSXulu05z23JNx1cTx+OyRIpCeQntMlVC6pA
+ CCuZivQY266DZzpxB55yfVmOU5eXReS0ZFcEoP7GtZklr1Y+be/8V+3NNHVumWP8qH0P
+ b7KM9nb+UTro5Jzs/4zMUGmvVH7iNgZ6bNY29pdff9lLUqnYGiiygj0etSzvROZrcpa9
+ ooiWGs6T3lYvr2z0s2VHMuFLwjRN8nGn9R8aOvknj1y2mok0n6nDFg7aSwPglmsR+T6n
+ /ZLM2PyaVMTlwS6u+WbuGvaoQiuqS/S+p7euqeTBQabzwm0sIcb9IeRo4cmQTFqI0/Tp
+ mZQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GVimopM9nsGyKogmPStaemWmYX+ncqWbsZ+eteXaxgg=;
- b=RgEjbJ375p/EoyxPj1ZhLAnSonc7ctqjJSQ1dVM5oVzex/QXXSAR76UADraqlYZNEq
- iuoFg61vypx2czX2brbIXCd1K2coXlsBadYQq3mN+t0qQzRQoENM5bO2k0VZ9T3R2aF+
- nKDMrdT9wYT25fUDlsHiW5UCc0QPyD+7IU7x22aXvg922t4MZqwhBXtEf6dJBx56PqzY
- avM3xmS57Bc5Slurx80QWxwDCiAi0QurN36rr7/sC9iW2JkGmsb2wVuVQXa1Fw4Nmpf6
- ktiwTsJtWq6E0LZGuCvcrBfeRk0SEACAcGpzmEg+9Ibg9dZ47rm2VfpxXoWH3L1aO6UL
- /vNA==
-X-Gm-Message-State: AO0yUKX5DWQfrZvDBosGc7VfUntHFxMTM1BL0jYCL77SzyLg0d27xXC2
- Mw0NqspCg0QzrkP1ecRhEu4Anw==
-X-Google-Smtp-Source: AK7set+77KSDPSpEOdKjUlXddELohKN0HTDxUp2/T6KRm4jabngwP7vxskg+Y312MJLet77RhWPqSQ==
-X-Received: by 2002:a17:90b:2243:b0:234:1a60:a6b0 with SMTP id
- hk3-20020a17090b224300b002341a60a6b0mr1931309pjb.34.1676748924719; 
- Sat, 18 Feb 2023 11:35:24 -0800 (PST)
-Received: from [172.20.100.240] (rrcs-173-198-77-219.west.biz.rr.com.
- [173.198.77.219]) by smtp.gmail.com with ESMTPSA id
- gz2-20020a17090b0ec200b002312586b5b1sm110675pjb.57.2023.02.18.11.35.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 18 Feb 2023 11:35:23 -0800 (PST)
-Message-ID: <4e3ac25e-6443-9365-66e4-ebd903aa29b9@linaro.org>
-Date: Sat, 18 Feb 2023 09:35:11 -1000
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uNIXAIiCHY5tNHZQsSeZepuT/whFbyEot/ug3OODyTg=;
+ b=QW0PJsI3hFbULwnEiS9EC+RnrQAoMnbXII2QLZoRc6zlwxgr/4qEiX3a15sCW6JLeg
+ +ZqpsZzVb176mrxN5ob9m84qU6mv8xf82woASrTovIZgwCRFZot0Il86KocG97xBqUXg
+ 67anFe2KLUn6pdr8oLzLfiLSvC7by90dkAVtpDQdm8fQHgg/synUghN1+tSr9aoflkdd
+ ammBuCt+kpDsSbz+X8zOHNPk/pVk/VvoSHzedQwu+awJlqrsRyXYHNkY3WmRIM+jJpJx
+ j4ZXbo86oERkxV7B5bvBvotW3X43dx93N0DwwTva4MYBXO6a6/RzMMI5waL+cnzSBFdI
+ LYIw==
+X-Gm-Message-State: AO0yUKU7UdAZmivkoTGtbnVS0btT0P30hWsgRqUz/VEUpH6no77vaW04
+ 2vWv+FbwqP08Igzm1Qekh+IuUehLC8S1qcMh
+X-Google-Smtp-Source: AK7set8Kef4AJSjfQfV8dnaPq7FO4sWNJQrk7VYGViWLMugq676hNUu2NkOK+J0/uLARx24/9XQigg==
+X-Received: by 2002:a17:906:f0d1:b0:888:5d34:dc79 with SMTP id
+ dk17-20020a170906f0d100b008885d34dc79mr8817288ejb.40.1676886977527; 
+ Mon, 20 Feb 2023 01:56:17 -0800 (PST)
+Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
+ [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
+ s6-20020a170906bc4600b008cfd5673f55sm1393050ejv.203.2023.02.20.01.56.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Feb 2023 01:56:16 -0800 (PST)
+From: Christoph Muellner <christoph.muellner@vrull.eu>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Manolis Tsamis <manolis.tsamis@vrull.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Cooper Qu <cooper.qu@linux.alibaba.com>,
+ Lifang Xia <lifang_xia@linux.alibaba.com>,
+ Yunhai Shang <yunhai@linux.alibaba.com>,
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
+Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
+Subject: [PATCH] RISC-V: XTheadMemPair: Remove register restrictions for
+ store-pair
+Date: Mon, 20 Feb 2023 10:56:12 +0100
+Message-Id: <20230220095612.1529031-1-christoph.muellner@vrull.eu>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH v6 2/4] target/riscv: implement Zicboz extension
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- Christoph Muellner <cmuellner@linux.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-References: <20230217203445.51077-1-dbarboza@ventanamicro.com>
- <20230217203445.51077-3-dbarboza@ventanamicro.com>
- <20408b85-2ad0-4cbc-4ccd-c512ba15ba06@linaro.org>
- <d468f8c6-f8ec-6d40-44ab-3e76df458680@ventanamicro.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <d468f8c6-f8ec-6d40-44ab-3e76df458680@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1032.google.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ed1-x52e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.256,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -89,21 +88,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Feb 2023 19:35:28 -0000
+X-List-Received-Date: Mon, 20 Feb 2023 09:56:22 -0000
 
-On 2/17/23 23:28, Daniel Henrique Barboza wrote:
-> "A cache-block zero instruction is permitted to access the specified cache block whenever
-> a store instruction is permitted to access the corresponding physical addresses and when
-> the PMAs indicate that cache-block zero instructions are a supported access type. If access
-> to the cache block is not permitted, a cache-block zero instruction raises a store page fault
-> or store guest-page fault exception if address translation does not permit write access or
-> raises a store access fault exception otherwise. During address translation, the instruction
-> also checks the accessed and dirty bits and may either raise an exception or set the bits as
-> required."
+From: Christoph Müllner <christoph.muellner@vrull.eu>
 
-By the way, I think the documentation should specify what happens if the page is *not* 
-accessible.  Is badaddr = {rN, aligned(rN), unspecified, but somewhere in the block}?
+The XTheadMemPair does not define any restrictions for store-pair
+instructions (th.sdd or th.swd). However, the current code enforces
+the restrictions that are required for load-pair instructions.
+Let's fix this by removing this code.
 
+Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
+---
+ target/riscv/insn_trans/trans_xthead.c.inc | 4 ----
+ 1 file changed, 4 deletions(-)
 
-r~
+diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
+index be87c34f56..cf1731b08d 100644
+--- a/target/riscv/insn_trans/trans_xthead.c.inc
++++ b/target/riscv/insn_trans/trans_xthead.c.inc
+@@ -980,10 +980,6 @@ static bool trans_th_lwud(DisasContext *ctx, arg_th_pair *a)
+ static bool gen_storepair_tl(DisasContext *ctx, arg_th_pair *a, MemOp memop,
+                              int shamt)
+ {
+-    if (a->rs == a->rd1 || a->rs == a->rd2 || a->rd1 == a->rd2) {
+-        return false;
+-    }
+-
+     TCGv data1 = get_gpr(ctx, a->rd1, EXT_NONE);
+     TCGv data2 = get_gpr(ctx, a->rd2, EXT_NONE);
+     TCGv addr1 = tcg_temp_new();
+-- 
+2.39.2
+
 
