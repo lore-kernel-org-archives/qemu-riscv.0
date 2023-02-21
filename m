@@ -1,55 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pUbVQ-0007l5-Vc
+	id 1pUbVR-0007lQ-9y
 	for mharc-qemu-riscv@gnu.org; Tue, 21 Feb 2023 17:53:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pUbVI-0007ZW-GH
- for qemu-riscv@nongnu.org; Tue, 21 Feb 2023 17:52:56 -0500
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ id 1pUbVI-0007a1-Tw
+ for qemu-riscv@nongnu.org; Tue, 21 Feb 2023 17:52:57 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pUbV0-000491-Lg
+ id 1pUbV0-00043M-NZ
  for qemu-riscv@nongnu.org; Tue, 21 Feb 2023 17:52:56 -0500
-Received: by mail-wr1-x42d.google.com with SMTP id c5so6718330wrr.5
+Received: by mail-wm1-x32e.google.com with SMTP id
+ o4-20020a05600c4fc400b003e1f5f2a29cso4847182wmq.4
  for <qemu-riscv@nongnu.org>; Tue, 21 Feb 2023 14:52:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yI9cg5uSLm9j6ge6jYumeZR69TGqjGanrthhEwm4YK8=;
- b=j0hYg/kU6sMKln7Nhss2ddhhdJRo1ytldg/zuxA/xqUB7CIbQdu4t9eaY5HUCVw4TM
- Gl0wIr0TlUh7NGukaAgZ9NTUcd6fPo4jqpaCXZJ588Ts3gIyZ5/sYJ4ywqUJ7ock9xRv
- viRS5X6ox3WV90YQJ5Hl1zr+oJrL2HhXCBmYwpl33KVjVMWjqpRwCY27nsOyNq+4fPTx
- 9wrg7eHc8Mw9lTzPMSYZb4Nli1IBhSN6XNGqtQaNxi9oBbj/z0d/M8JrDlIgU/42wMRE
- 2/94QFk84/TcLM9Z0tsDqtXjZa/tpSjsK8SD2jj+CGyWN3OF5s0a6rK1efjBHv6+pCA3
- meHQ==
+ bh=7X5ixi52u3q8mNTsDp+C9raeJcKQAq90J8thOzhSOf4=;
+ b=ocbfQBavJ8WLxSRTQ2bnnLROw0gUfzJDpQjmcaxhRnhbKv95/lFgoeVeWmA7qjNdkQ
+ sHe9vigPRSVLgYkyD4v4R9WiNSOqNjgUbNY/CDlwLsmz6XWOwpy9OmDGVdA7Ffa2cs5Z
+ yaW/J5rSohdQgMnnAi4RXwWwvWCfQ7SHvKoA1QHqk0FW3i+kpZHJhOczr+eumYbQ3JW6
+ CW0Wq0+qT3TTnYQCk55QRLWa2KDNp5j7qd+4xdnwaXhBHHznS13fhr1C6UBBjzeI5M36
+ DXK8W1sA+L3mUEVnJL+fSc9jQwD2McsMsZ7+wbL+treKAGuEsIFYG6q6gMteUqy7NwgC
+ 2GhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yI9cg5uSLm9j6ge6jYumeZR69TGqjGanrthhEwm4YK8=;
- b=dNXaMMOOERlZ3tVIDmkNgK+MfpZMlLhaNxLBhNSylYJ6+jjVk/3xizWyncFKmxFTEi
- tqkWcmwJzIb+XiSjj9Ca4/9dd2jwzjM5+O5rg95YINJQJ08PLmfl72Zj+PKEiZ5TS/As
- F4cSGSULYkF8yzLPmFORd25RLpYZpWh2+0W89M+v+J1UInsy+dE/ZzpVk9dZA/VcA0FO
- NKGIENufHniBc/r/QKZdba7jY6fpPC+2P91tySCSDLHVbrVCzWgYCEJs1EPYBaJy00EM
- GgSeIRRvtoJDG2489sH36t7eENvhTCueyBsR19mNuN0I/abTQJB/ZTcg2qlIZyjiDpR8
- HBAg==
-X-Gm-Message-State: AO0yUKUma6GqjR+TmdPCsx4sWN3+QUxa9Z29gA8a6nBms+FxTCbS0n8r
- C8xOG/iX4MSsnj7TgtjURIjCHw==
-X-Google-Smtp-Source: AK7set9Xy/0nhOChalYF+K+fQGROPBbJvFajJvW30rUwPbfDlHcJNw58aI5myPLa6p7R5KH1f4Anjg==
-X-Received: by 2002:a5d:4d09:0:b0:2c5:5048:8a6a with SMTP id
- z9-20020a5d4d09000000b002c550488a6amr6579824wrt.60.1677019955459; 
- Tue, 21 Feb 2023 14:52:35 -0800 (PST)
+ bh=7X5ixi52u3q8mNTsDp+C9raeJcKQAq90J8thOzhSOf4=;
+ b=necRcEt3ZRvL8C9EWhK2EyTr7cXkEErxnOMPJykNQSSAnrwExOYB+DF5Z5/b1JGJny
+ cE7gx+jZYm3ETLxSsWpa2Sn36yh0JjlS9qzd9edHXmvz/Bt4Y6XoqDn7J8h7TDfPF9nV
+ CpIFU8bqhAx1uwpxw5IYSTjRWif4xNM1FTfReVAXk2XbELNCVgb4siUYon8DVreO4EWh
+ Xo7a1iK8uTzCpuTslvaHsdIFWOuMRSEpCC/9q30pGRruzEi43yo2LdXfwqtb2W4VGlx5
+ y/3/ao29XD99Z3mLlml/dTk5wmJd7QJu8Y5+U0Zq6fg6jg1iX7bqrAG1uzFE0QW5U9kn
+ mCyA==
+X-Gm-Message-State: AO0yUKXKl85seM5IPlI8x4oBbl1HbHotCSjYc2f/YmhbEreuP5FN3CFt
+ sFu3YGoT8WrcW3V/XSWDuGK1dQ==
+X-Google-Smtp-Source: AK7set+JzyU/XGz43sRIqzYsTWCqhFzz7JYpeMEKSv8nx7KgeJbFUFpsJiBrw9PUpYT3XNeUCSxN1g==
+X-Received: by 2002:a05:600c:2ed2:b0:3df:eda1:43b9 with SMTP id
+ q18-20020a05600c2ed200b003dfeda143b9mr4239776wmn.4.1677019956493; 
+ Tue, 21 Feb 2023 14:52:36 -0800 (PST)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- d18-20020a5d6452000000b002c54f4d0f71sm7003887wrw.38.2023.02.21.14.52.30
+ b4-20020adff904000000b002c54f39d34csm9059057wrr.111.2023.02.21.14.52.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 21 Feb 2023 14:52:34 -0800 (PST)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 627521FFBA;
- Tue, 21 Feb 2023 22:52:29 +0000 (GMT)
+ by zen.linaroharston (Postfix) with ESMTP id 6793A1FFD2;
+ Tue, 21 Feb 2023 22:52:31 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
@@ -84,24 +85,25 @@ Cc: Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  David Hildenbrand <david@redhat.com>, Song Gao <gaosong@loongson.cn>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Max Filippov <jcmvbkbc@gmail.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-Subject: [PATCH v3 15/24] gdbstub: introduce gdb_get_max_cpus
-Date: Tue, 21 Feb 2023 22:52:18 +0000
-Message-Id: <20230221225227.3735319-16-alex.bennee@linaro.org>
+Subject: [PATCH v3 24/24] gdbstub: split out softmmu/user specifics for
+ syscall handling
+Date: Tue, 21 Feb 2023 22:52:27 +0000
+Message-Id: <20230221225227.3735319-25-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230221225227.3735319-1-alex.bennee@linaro.org>
 References: <20230221225227.3735319-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,106 +116,153 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2023 22:52:56 -0000
+X-List-Received-Date: Tue, 21 Feb 2023 22:52:57 -0000
 
-This is needed for handling vcont packets as the way of calculating
-max cpus vhanges between user and softmmu mode.
+Most of the syscall code is config agnostic aside from the size of
+target_ulong. In preparation for the next patch move the final bits of
+specialisation into the appropriate user and softmmu helpers.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-
 ---
-v3
-  - rm out of date comment
----
- gdbstub/internals.h |  1 +
- gdbstub/gdbstub.c   | 11 +----------
- gdbstub/softmmu.c   |  9 +++++++++
- gdbstub/user.c      | 17 +++++++++++++++++
- 4 files changed, 28 insertions(+), 10 deletions(-)
+ gdbstub/internals.h |  5 +++++
+ gdbstub/softmmu.c   | 24 ++++++++++++++++++++++++
+ gdbstub/syscalls.c  | 32 +++++++++++---------------------
+ gdbstub/user.c      | 24 ++++++++++++++++++++++++
+ 4 files changed, 64 insertions(+), 21 deletions(-)
 
 diff --git a/gdbstub/internals.h b/gdbstub/internals.h
-index 9de995ce3a..90069a9415 100644
+index fe82facaeb..dce7c4f66f 100644
 --- a/gdbstub/internals.h
 +++ b/gdbstub/internals.h
-@@ -127,6 +127,7 @@ bool gdb_got_immediate_ack(void);
- CPUState *gdb_first_attached_cpu(void);
- void gdb_append_thread_id(CPUState *cpu, GString *buf);
- int gdb_get_cpu_index(CPUState *cpu);
-+unsigned int gdb_get_max_cpus(void); /* both */
+@@ -193,6 +193,11 @@ bool gdb_handled_syscall(void);
+ void gdb_disable_syscalls(void);
+ void gdb_syscall_reset(void);
  
- void gdb_create_default_process(GDBState *s);
- 
-diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index 91021859a1..f9950200b8 100644
---- a/gdbstub/gdbstub.c
-+++ b/gdbstub/gdbstub.c
-@@ -624,16 +624,7 @@ static int gdb_handle_vcont(const char *p)
-     GDBProcess *process;
-     CPUState *cpu;
-     GDBThreadIdKind kind;
--#ifdef CONFIG_USER_ONLY
--    int max_cpus = 1; /* global variable max_cpus exists only in system mode */
--
--    CPU_FOREACH(cpu) {
--        max_cpus = max_cpus <= cpu->cpu_index ? cpu->cpu_index + 1 : max_cpus;
--    }
--#else
--    MachineState *ms = MACHINE(qdev_get_machine());
--    unsigned int max_cpus = ms->smp.max_cpus;
--#endif
-+    unsigned int max_cpus = gdb_get_max_cpus();
-     /* uninitialised CPUs stay 0 */
-     newstates = g_new0(char, max_cpus);
- 
++/* user/softmmu specific signal handling */
++void gdb_pre_syscall_handling(void);
++bool gdb_send_syscall_now(void);
++void gdb_post_syscall_handling(void);
++
+ /*
+  * Break/Watch point support - there is an implementation for softmmu
+  * and user mode.
 diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
-index d9b9ba0a32..65aa2018a7 100644
+index b7e3829ca0..8f3c8ef449 100644
 --- a/gdbstub/softmmu.c
 +++ b/gdbstub/softmmu.c
-@@ -433,6 +433,15 @@ int gdb_target_memory_rw_debug(CPUState *cpu, hwaddr addr,
-     return cpu_memory_rw_debug(cpu, addr, buf, len, is_write);
+@@ -101,6 +101,30 @@ static void gdb_chr_event(void *opaque, QEMUChrEvent event)
+     }
  }
  
 +/*
-+ * cpu helpers
++ * In softmmu mode we stop the VM and wait to send the syscall packet
++ * until notification that the CPU has stopped. This must be done
++ * because if the packet is sent now the reply from the syscall
++ * request could be received while the CPU is still in the running
++ * state, which can cause packets to be dropped and state transition
++ * 'T' packets to be sent while the syscall is still being processed.
 + */
 +
-+unsigned int gdb_get_max_cpus(void)
++void gdb_pre_syscall_handling(void)
 +{
-+    MachineState *ms = MACHINE(qdev_get_machine());
-+    return ms->smp.max_cpus;
++    vm_stop(RUN_STATE_DEBUG);
 +}
- 
- /*
-  * Softmmu specific command helpers
-diff --git a/gdbstub/user.c b/gdbstub/user.c
-index b956c0e297..15ff3ab08d 100644
---- a/gdbstub/user.c
-+++ b/gdbstub/user.c
-@@ -388,6 +388,23 @@ int gdb_target_memory_rw_debug(CPUState *cpu, hwaddr addr,
-     return cpu_memory_rw_debug(cpu, addr, buf, len, is_write);
- }
- 
-+/*
-+ * cpu helpers
-+ */
 +
-+unsigned int gdb_get_max_cpus(void)
++bool gdb_send_syscall_now(void)
 +{
-+    CPUState *cpu;
-+    unsigned int max_cpus = 1;
++    return false;
++}
 +
-+    CPU_FOREACH(cpu) {
-+        max_cpus = max_cpus <= cpu->cpu_index ? cpu->cpu_index + 1 : max_cpus;
++void gdb_post_syscall_handling(void)
++{
++    qemu_cpu_kick(gdbserver_state.c_cpu);
++}
++
+ static void gdb_vm_state_change(void *opaque, bool running, RunState state)
+ {
+     CPUState *cpu = gdbserver_state.c_cpu;
+diff --git a/gdbstub/syscalls.c b/gdbstub/syscalls.c
+index 1b63a1d197..24eee38136 100644
+--- a/gdbstub/syscalls.c
++++ b/gdbstub/syscalls.c
+@@ -102,9 +102,10 @@ void gdb_do_syscallv(gdb_syscall_complete_cb cb, const char *fmt, va_list va)
+     }
+ 
+     gdbserver_syscall_state.current_syscall_cb = cb;
+-#ifndef CONFIG_USER_ONLY
+-    vm_stop(RUN_STATE_DEBUG);
+-#endif
++
++    /* user/softmmu specific handling */
++    gdb_pre_syscall_handling();
++
+     p = &gdbserver_syscall_state.syscall_buf[0];
+     p_end = &gdbserver_syscall_state.syscall_buf[sizeof(gdbserver_syscall_state.syscall_buf)];
+     *(p++) = 'F';
+@@ -138,24 +139,13 @@ void gdb_do_syscallv(gdb_syscall_complete_cb cb, const char *fmt, va_list va)
+         }
+     }
+     *p = 0;
+-#ifdef CONFIG_USER_ONLY
+-    gdb_put_packet(gdbserver_syscall_state.syscall_buf);
+-    /* Return control to gdb for it to process the syscall request.
+-     * Since the protocol requires that gdb hands control back to us
+-     * using a "here are the results" F packet, we don't need to check
+-     * gdb_handlesig's return value (which is the signal to deliver if
+-     * execution was resumed via a continue packet).
+-     */
+-    gdb_handlesig(gdbserver_state.c_cpu, 0);
+-#else
+-    /* In this case wait to send the syscall packet until notification that
+-       the CPU has stopped.  This must be done because if the packet is sent
+-       now the reply from the syscall request could be received while the CPU
+-       is still in the running state, which can cause packets to be dropped
+-       and state transition 'T' packets to be sent while the syscall is still
+-       being processed.  */
+-    qemu_cpu_kick(gdbserver_state.c_cpu);
+-#endif
++
++    if (gdb_send_syscall_now()) { /* true only for *-user */
++        gdb_put_packet(gdbserver_syscall_state.syscall_buf);
 +    }
 +
-+    return max_cpus;
++    /* user/softmmu specific handling */
++    gdb_post_syscall_handling();
+ }
+ 
+ void gdb_do_syscall(gdb_syscall_complete_cb cb, const char *fmt, ...)
+diff --git a/gdbstub/user.c b/gdbstub/user.c
+index cc7eeb9afb..a5227e23cf 100644
+--- a/gdbstub/user.c
++++ b/gdbstub/user.c
+@@ -467,3 +467,27 @@ void gdb_breakpoint_remove_all(CPUState *cs)
+ {
+     cpu_breakpoint_remove_all(cs, BP_GDB);
+ }
++
++/*
++ * For user-mode syscall support we send the system call immediately
++ * and then return control to gdb for it to process the syscall request.
++ * Since the protocol requires that gdb hands control back to us
++ * using a "here are the results" F packet, we don't need to check
++ * gdb_handlesig's return value (which is the signal to deliver if
++ * execution was resumed via a continue packet).
++ */
++
++void gdb_pre_syscall_handling(void)
++{
++    return;
 +}
 +
++bool gdb_send_syscall_now(void)
++{
++    return true;
++}
 +
- /*
-  * Break/Watch point helpers
-  */
++void gdb_post_syscall_handling(void)
++{
++    gdb_handlesig(gdbserver_state.c_cpu, 0);
++}
 -- 
 2.39.1
 
