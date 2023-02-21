@@ -1,60 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pUMrq-00052B-4c
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Feb 2023 02:15:14 -0500
+	id 1pUOfQ-0000ka-Cm
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Feb 2023 04:10:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pUMro-0004yh-5G; Tue, 21 Feb 2023 02:15:12 -0500
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ id 1pUOfO-0000kD-0P; Tue, 21 Feb 2023 04:10:30 -0500
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pUMrk-00037l-T9; Tue, 21 Feb 2023 02:15:11 -0500
-Received: from [192.168.0.119] (unknown [114.95.238.225])
- by APP-05 (Coremail) with SMTP id zQCowABXXZlub_RjV92lBg--.3325S2;
- Tue, 21 Feb 2023 15:14:54 +0800 (CST)
-Message-ID: <56208597-1552-4522-8223-47297e26027a@iscas.ac.cn>
-Date: Tue, 21 Feb 2023 15:14:54 +0800
+ id 1pUOfK-00075K-8K; Tue, 21 Feb 2023 04:10:29 -0500
+Received: from localhost.localdomain (unknown [114.95.238.225])
+ by APP-01 (Coremail) with SMTP id qwCowAAHBUFyivRjvZKIBg--.64010S2;
+ Tue, 21 Feb 2023 17:10:11 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH] target/riscv: Add support for Zicond extension
+Date: Tue, 21 Feb 2023 17:10:09 +0800
+Message-Id: <20230221091009.36545-1-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH v11 0/9] support subsets of code size reduction extension
-Content-Language: en-US
-To: Weiwei Li <liweiwei@iscas.ac.cn>, richard.henderson@linaro.org,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230209041352.53980-1-liweiwei@iscas.ac.cn>
-From: liweiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230209041352.53980-1-liweiwei@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABXXZlub_RjV92lBg--.3325S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxGw1fArWDCr45Jr43Wr1fXrb_yoW5AFWfpw
- 4rCrWSkrZ8tFyxJw4Sq3WUGw15AF4rWr45Awn7Jwn5CayavrW3Jrs7K3W3Gw1UJF15Wr1q
- 9F1UCw13uw45AFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkC14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: qwCowAAHBUFyivRjvZKIBg--.64010S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxtw18Ar13XF4fAr1UWFyDZFb_yoW7XFWfpr
+ 4rG347Ga1DAFyfAayftF4UXr1UCrs3G3yUK39avwn5Xa13WrWxJrsrK3yagrWUJFWkZr4j
+ 9F45Cry5uws5JaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUvj14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
  1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F
- 4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
- 7VC0I7IYx2IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r
- 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE
- 67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrV
- AFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCI
- c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267
- AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_
- Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfU5JPEDU
- UUU
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+ CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+ 2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJV
+ W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
+ Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
+ xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43
+ MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I
+ 0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWU
+ JVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOG
+ QDUUUUU
 X-Originating-IP: [114.95.238.225]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
  helo=cstnet.cn
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.09,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -67,93 +63,138 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2023 07:15:12 -0000
+X-List-Received-Date: Tue, 21 Feb 2023 09:10:31 -0000
 
-Hi,  any  new comments for this patchset?
+The spec can be found in https://github.com/riscv/riscv-zicond.
+Two instructions are added:
+ - czero.eqz: Moves zero to a register rd, if the condition rs2 is
+   equal to zero, otherwise moves rs1 to rd.
+ - czero.nez: Moves zero to a register rd, if the condition rs2 is
+   nonzero, otherwise moves rs1 to rd.
 
-Regards,
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+---
+ target/riscv/cpu.c                           |  2 +
+ target/riscv/cpu.h                           |  1 +
+ target/riscv/insn32.decode                   |  4 ++
+ target/riscv/insn_trans/trans_rvzicond.c.inc | 49 ++++++++++++++++++++
+ target/riscv/translate.c                     |  1 +
+ 5 files changed, 57 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzicond.c.inc
 
-Weiwei Li
-
-On 2023/2/9 12:13, Weiwei Li wrote:
-> This patchset implements RISC-V Zc* extension v1.0.2-1 version instructions.
->
-> Specification:
-> https://github.com/riscv/riscv-code-size-reduction/tree/main/Zc-specification
->
-> The port is available here:
-> https://github.com/plctlab/plct-qemu/tree/plct-zce-upstream-v11
->
-> To test Zc* implementation, specify cpu argument with 'x-zca=true,x-zcb=true,x-zcf=true,f=true" and "x-zcd=true,d=true" (or "x-zcmp=true,x-zcmt=true" with c or d=false) to enable Zca/Zcb/Zcf and Zcd(or Zcmp,Zcmt) extensions support.
->
->
-> This implementation can pass the basic zc tests from https://github.com/yulong-plct/zc-test
->
-> v11
-> * update format and field name based on the latest spec in patch 5, 6, 7 (without other functional changes)
-> * rebase on riscv-to-apply.next
->
-> v10:
-> * rebase on Daniel's series(riscv-to-apply.next) and adjust riscv-tests to test on sifive related CPUs
->
-> v9:
-> * rebase on riscv-to-apply.next
->
-> v8:
-> * improve disas support in Patch 9
->
-> v7:
-> * Fix description for Zca
->
-> v6：
-> * fix base address for jump table in Patch 7
-> * rebase on riscv-to-apply.next
->
-> v5:
-> * fix exception unwind problem for cpu_ld*_code in helper of cm_jalt
->
-> v4:
-> * improve Zcmp suggested by Richard
-> * fix stateen related check for Zcmt
->
-> v3:
-> * update the solution for Zcf to the way of Zcd
-> * update Zcb to reuse gen_load/store
-> * use trans function instead of helper for push/pop
->
-> v2:
-> * add check for relationship between Zca/Zcf/Zcd with C/F/D based on related discussion in review of Zc* spec
-> * separate c.fld{sp}/fsd{sp} with fld{sp}/fsd{sp} before support of zcmp/zcmt
->
-> Weiwei Li (9):
->    target/riscv: add cfg properties for Zc* extension
->    target/riscv: add support for Zca extension
->    target/riscv: add support for Zcf extension
->    target/riscv: add support for Zcd extension
->    target/riscv: add support for Zcb extension
->    target/riscv: add support for Zcmp extension
->    target/riscv: add support for Zcmt extension
->    target/riscv: expose properties for Zc* extension
->    disas/riscv.c: add disasm support for Zc*
->
->   disas/riscv.c                             | 228 +++++++++++++++-
->   target/riscv/cpu.c                        |  56 ++++
->   target/riscv/cpu.h                        |  10 +
->   target/riscv/cpu_bits.h                   |   7 +
->   target/riscv/csr.c                        |  38 ++-
->   target/riscv/helper.h                     |   3 +
->   target/riscv/insn16.decode                |  62 ++++-
->   target/riscv/insn_trans/trans_rvd.c.inc   |  18 ++
->   target/riscv/insn_trans/trans_rvf.c.inc   |  18 ++
->   target/riscv/insn_trans/trans_rvi.c.inc   |   4 +-
->   target/riscv/insn_trans/trans_rvzce.c.inc | 313 ++++++++++++++++++++++
->   target/riscv/machine.c                    |  19 ++
->   target/riscv/meson.build                  |   3 +-
->   target/riscv/translate.c                  |  15 +-
->   target/riscv/zce_helper.c                 |  55 ++++
->   15 files changed, 833 insertions(+), 16 deletions(-)
->   create mode 100644 target/riscv/insn_trans/trans_rvzce.c.inc
->   create mode 100644 target/riscv/zce_helper.c
->
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 0dd2f0c753..80b92930ae 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -74,6 +74,7 @@ struct isa_ext_data {
+ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(h, false, PRIV_VERSION_1_12_0, ext_h),
+     ISA_EXT_DATA_ENTRY(v, false, PRIV_VERSION_1_12_0, ext_v),
++    ISA_EXT_DATA_ENTRY(zicond, true, PRIV_VERSION_1_12_0, ext_zicond),
+     ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ext_icsr),
+     ISA_EXT_DATA_ENTRY(zifencei, true, PRIV_VERSION_1_10_0, ext_ifencei),
+     ISA_EXT_DATA_ENTRY(zihintpause, true, PRIV_VERSION_1_10_0, ext_zihintpause),
+@@ -1143,6 +1144,7 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
+ 
+     /* These are experimental so mark with 'x-' */
++    DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
+     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+     /* ePMP 0.9.3 */
+     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 7128438d8e..81b7c92e7a 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -447,6 +447,7 @@ struct RISCVCPUConfig {
+     bool ext_zkt;
+     bool ext_ifencei;
+     bool ext_icsr;
++    bool ext_zicond;
+     bool ext_zihintpause;
+     bool ext_smstateen;
+     bool ext_sstc;
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index b7e7613ea2..fb537e922e 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -890,3 +890,7 @@ sm3p1       00 01000 01001 ..... 001 ..... 0010011 @r2
+ # *** RV32 Zksed Standard Extension ***
+ sm4ed       .. 11000 ..... ..... 000 ..... 0110011 @k_aes
+ sm4ks       .. 11010 ..... ..... 000 ..... 0110011 @k_aes
++
++# *** RV32 Zicond Standard Extension ***
++czero_eqz   0000111  ..... ..... 101 ..... 0110011 @r
++czero_nez   0000111  ..... ..... 111 ..... 0110011 @r
+diff --git a/target/riscv/insn_trans/trans_rvzicond.c.inc b/target/riscv/insn_trans/trans_rvzicond.c.inc
+new file mode 100644
+index 0000000000..645260164e
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzicond.c.inc
+@@ -0,0 +1,49 @@
++/*
++ * RISC-V translation routines for the Zicond Standard Extension.
++ *
++ * Copyright (c) 2020-2023 PLCT Lab
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#define REQUIRE_ZICOND(ctx) do {          \
++    if (!ctx->cfg_ptr->ext_zicond) {      \
++        return false;                     \
++    }                                     \
++} while (0)
++
++static bool trans_czero_eqz(DisasContext *ctx, arg_czero_eqz *a)
++{
++    REQUIRE_ZICOND(ctx);
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++
++    tcg_gen_movcond_tl(TCG_COND_EQ, dest, src2, ctx->zero, ctx->zero, src1);
++    gen_set_gpr(ctx, a->rd, dest);
++    return true;
++}
++
++static bool trans_czero_nez(DisasContext *ctx, arg_czero_nez *a)
++{
++    REQUIRE_ZICOND(ctx);
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++
++    tcg_gen_movcond_tl(TCG_COND_NE, dest, src2, ctx->zero, ctx->zero, src1);
++    gen_set_gpr(ctx, a->rd, dest);
++    return true;
++}
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 772f9d7973..6e65c6afca 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1103,6 +1103,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "insn_trans/trans_rvh.c.inc"
+ #include "insn_trans/trans_rvv.c.inc"
+ #include "insn_trans/trans_rvb.c.inc"
++#include "insn_trans/trans_rvzicond.c.inc"
+ #include "insn_trans/trans_rvzawrs.c.inc"
+ #include "insn_trans/trans_rvzfh.c.inc"
+ #include "insn_trans/trans_rvk.c.inc"
+-- 
+2.25.1
 
 
