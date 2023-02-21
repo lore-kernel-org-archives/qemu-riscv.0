@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pUbeX-0006j5-St
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Feb 2023 18:02:29 -0500
+	id 1pUbeY-0006kR-3k
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Feb 2023 18:02:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pUbeI-0006TO-CN
- for qemu-riscv@nongnu.org; Tue, 21 Feb 2023 18:02:14 -0500
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ id 1pUbeB-0006OP-8l
+ for qemu-riscv@nongnu.org; Tue, 21 Feb 2023 18:02:10 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pUbe7-0006HR-2y
- for qemu-riscv@nongnu.org; Tue, 21 Feb 2023 18:02:14 -0500
-Received: by mail-wm1-x333.google.com with SMTP id
- k14-20020a05600c1c8e00b003e22107b7ccso265058wms.0
- for <qemu-riscv@nongnu.org>; Tue, 21 Feb 2023 15:02:01 -0800 (PST)
+ id 1pUbe3-0006EU-SS
+ for qemu-riscv@nongnu.org; Tue, 21 Feb 2023 18:02:06 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ p18-20020a05600c359200b003dc57ea0dfeso4821592wmq.0
+ for <qemu-riscv@nongnu.org>; Tue, 21 Feb 2023 15:01:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TVHpGqkcdr2gO4uob9X2D+X5gkMbOtaQKWo3v4EPeXY=;
- b=iGquWRm6hguyiLKLVJTz6HRy0PovTLPeMQ4ZFPxtt1CCrP9lujTRvaAj3umXypY+De
- oMMu3gRC09AnqP3uKvlCSV/9KLYN1F25xsn1yF+tWmcsNCdr3jUl+Bq/vgrXDq+ON1hg
- jz0IycpKzHGokCz4G/EaiKAwOmarp0nFhO652ta5yMj0g/9fP3c/dlcNI/8qWHxHPbQf
- dYKVS4met2t6cluob25JG4YhzkP6cRTg1ftSbJSfpG+p6cQCMrltHryrTFx6QF0eVQDB
- OtMn+6WWR1e2nUBbsHyLdhBs/RZeZ1qJoo0DbCsSoV1LFVmh2mgrY/Wsfzv3QfG7CVq6
- q1aQ==
+ bh=iMicf5MbOGOq7OlwruPZHVb+Ki+l+2GcwACskyg7sb0=;
+ b=Se6r6nanSNv3SGL2ZPDLYua+qn0ydW5lxXxfvjQb4eodVOf//zwxbZsxd5B54DqJwt
+ 81akZNOncSUgJgVWkfFCqjjVcF4f3t+7JHYIQnYIIVDg6KJkL9rql1nML8wfC7p+Sbl1
+ jxTAdkhgfGuHdbgWW78kZgQT2GOf5Js3QZoYRQJzsioFanXCOgRn1Fog1GZ1U2aoxWse
+ 5D6FLJT2RhHM4IOg5DbHWHi5PwXUdaY9tmcgePe94fAhqkkjqiI6tjKN7u6/ugTTMJz0
+ gjn7I4lVJPqvVCdSft5T9N5AMEhmtOXpbHDe6iwGPSzCVf6XIT6qs9Xp/312NNtRcG6+
+ emJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TVHpGqkcdr2gO4uob9X2D+X5gkMbOtaQKWo3v4EPeXY=;
- b=rOJ+5/+jK/28PHwKLznjH1UvU6QP2rF8qaEdBTQWsAlBmqF6ItLg96ftMe3TkGYNtx
- ZZXom0CI6X1Kajwb5Mn7am5n/fC6mYrpgqZ/yh/nfva5DW5NsrHiPQ173JhphjHDIpSH
- AoMCo7Qu/iME7ymem8D/aKfHu+6Q1G03whD/CLWLkIVLPgdJnFZhtN2P5OEEE83K/PTs
- VvJQ3Sn1KfOGlR8HV5Ufru7/idGBhsXLh/CZq3SBJ+mmO4nvN7y+5j0sZhdYaGVSC/4+
- MNOfcvS+SxBhtcr2lIfJ+8P4+6Qj6kKZHOqVLM+ZAm2OotTWj5BWuuQXOUFdtb6UTiGt
- SJOA==
-X-Gm-Message-State: AO0yUKURha8UNTyqvaGmjUjQ3wghdZ0aees3WpLLG+Tr0Wfrm1chCoqC
- kkjYlM0jfjkyUDZakUIyOlvGFw==
-X-Google-Smtp-Source: AK7set8S+FZTxNAK5rZh2HHkQd/hnzrrhL2WwPDiw8cG6ld8jNrsdaTQg9S2QcTmWQRJwiW1Octe2g==
-X-Received: by 2002:a05:600c:2ad6:b0:3df:f7f3:d007 with SMTP id
- t22-20020a05600c2ad600b003dff7f3d007mr4302001wme.17.1677020520311; 
- Tue, 21 Feb 2023 15:02:00 -0800 (PST)
+ bh=iMicf5MbOGOq7OlwruPZHVb+Ki+l+2GcwACskyg7sb0=;
+ b=ysPTzc/Jvn3MJS3TUrrt4xNwUkaAJrXW0ARSs/xq8+7v5FNdigk63Dar3RJIo7PuZA
+ 7jKOKajE9gti1TZjmPtK2DpzjwGaAwhKFTdgHpl/TDskpCcJTFTxbTi5lBPdCb27kelf
+ vBzMrjFugpuEm6E4GJWjDErbneMnPt5nJgVCzG40MrCNwZdxG5u3kohshOAsWBTOgicY
+ xFLC8i2jUqUXQXFnCMkqOh85jzVI1P2t6zgX/mcltxZifT6iIY3H11LFvTpZkYMHSPZb
+ YTK9HxcNpXUHAvxa4SFL1ffVOvOsM2tiyNlkoo0hy+AFuF88buj/TiY8KTAkEwkyAstQ
+ N3GA==
+X-Gm-Message-State: AO0yUKVZrTujiHntYXYnmq3cPa8e2Inno7fAxGDbKiQh16EWeDEfwukP
+ fdjo1JOTyfN/Vvjiykw9ruv4bw==
+X-Google-Smtp-Source: AK7set/YgGh4OVZDzugNmXahxyznct77VCQmOEam1gIpSP9W7Zdt7U9QAVU3rExy1YHoQ7fz5dixlg==
+X-Received: by 2002:a05:600c:5121:b0:3dd:1bd3:4f6d with SMTP id
+ o33-20020a05600c512100b003dd1bd34f6dmr4294092wms.32.1677020518044; 
+ Tue, 21 Feb 2023 15:01:58 -0800 (PST)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- t23-20020a05600c2f9700b003dc521f336esm5381055wmn.14.2023.02.21.15.01.56
+ x8-20020a1c7c08000000b003dc4480df80sm4966219wmc.34.2023.02.21.15.01.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Feb 2023 15:01:58 -0800 (PST)
+ Tue, 21 Feb 2023 15:01:56 -0800 (PST)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id E2FFE1FFCC;
- Tue, 21 Feb 2023 22:52:30 +0000 (GMT)
+ by zen.linaroharston (Postfix) with ESMTP id A4A3C1FFBB;
+ Tue, 21 Feb 2023 22:52:29 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
@@ -85,17 +85,17 @@ Cc: Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  David Hildenbrand <david@redhat.com>, Song Gao <gaosong@loongson.cn>,
  Ilya Leoshkevich <iii@linux.ibm.com>, Max Filippov <jcmvbkbc@gmail.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-Subject: [PATCH v3 21/24] gdbstub: only compile gdbstub twice for whole build
-Date: Tue, 21 Feb 2023 22:52:24 +0000
-Message-Id: <20230221225227.3735319-22-alex.bennee@linaro.org>
+Subject: [PATCH v3 17/24] gdbstub: fix address type of gdb_set_cpu_pc
+Date: Tue, 21 Feb 2023 22:52:20 +0000
+Message-Id: <20230221225227.3735319-18-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230221225227.3735319-1-alex.bennee@linaro.org>
 References: <20230221225227.3735319-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -115,101 +115,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2023 23:02:14 -0000
+X-List-Received-Date: Tue, 21 Feb 2023 23:02:12 -0000
 
-Now we have removed any target specific bits from the core gdbstub
-code we only need to build it twice. We have to jump a few meson hoops
-to manually define the CONFIG_USER_ONLY symbol but it seems to work.
+The underlying call uses vaddr and the comms API uses unsigned long
+long which will always fit. We don't need to deal in target_ulong
+here.
 
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-
 ---
-v3
-  - also include user and softmmu bits in the library
----
- gdbstub/gdbstub.c     |  3 +--
- gdbstub/user-target.c |  2 +-
- gdbstub/meson.build   | 32 ++++++++++++++++++++++++++------
- 3 files changed, 28 insertions(+), 9 deletions(-)
+ gdbstub/gdbstub.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index a8b321710c..791cb79bf6 100644
+index e107aa065c..4814e8fbf3 100644
 --- a/gdbstub/gdbstub.c
 +++ b/gdbstub/gdbstub.c
-@@ -39,7 +39,6 @@
- 
- #include "sysemu/hw_accel.h"
- #include "sysemu/runstate.h"
--#include "exec/exec-all.h"
- #include "exec/tb-flush.h"
- #include "exec/hwaddr.h"
- #include "sysemu/replay.h"
-@@ -1611,7 +1610,7 @@ static const GdbCmdParseEntry gdb_gen_query_table[] = {
-         .cmd_startswith = 1,
-         .schema = "s:l,l0"
-     },
--#if defined(CONFIG_USER_ONLY) && defined(CONFIG_LINUX_USER)
-+#if defined(CONFIG_USER_ONLY) && defined(CONFIG_LINUX)
-     {
-         .handler = gdb_handle_query_xfer_auxv,
-         .cmd = "Xfer:auxv:read::",
-diff --git a/gdbstub/user-target.c b/gdbstub/user-target.c
-index e1d9650c1e..a0c10d6e12 100644
---- a/gdbstub/user-target.c
-+++ b/gdbstub/user-target.c
-@@ -233,7 +233,7 @@ static inline int target_memory_rw_debug(CPUState *cpu, target_ulong addr,
+@@ -535,7 +535,7 @@ static void gdb_process_breakpoint_remove_all(GDBProcess *p)
  }
  
  
--#if defined(CONFIG_LINUX_USER)
-+#if defined(CONFIG_LINUX)
- void gdb_handle_query_xfer_auxv(GArray *params, void *user_ctx)
+-static void gdb_set_cpu_pc(target_ulong pc)
++static void gdb_set_cpu_pc(vaddr pc)
  {
-     TaskState *ts;
-diff --git a/gdbstub/meson.build b/gdbstub/meson.build
-index 56c40c25ef..6abf067afc 100644
---- a/gdbstub/meson.build
-+++ b/gdbstub/meson.build
-@@ -4,13 +4,33 @@
- # types such as hwaddr.
- #
+     CPUState *cpu = gdbserver_state.c_cpu;
  
--specific_ss.add(files('gdbstub.c'))
-+# We need to build the core gdb code via a library to be able to tweak
-+# cflags so:
-+
-+gdb_user_ss = ss.source_set()
-+gdb_softmmu_ss = ss.source_set()
-+
-+# We build two versions of gdbstub, one for each mode
-+gdb_user_ss.add(files('gdbstub.c', 'user.c'))
-+gdb_softmmu_ss.add(files('gdbstub.c', 'softmmu.c'))
-+
-+gdb_user_ss = gdb_user_ss.apply(config_host, strict: false)
-+gdb_softmmu_ss = gdb_softmmu_ss.apply(config_host, strict: false)
-+
-+libgdb_user = static_library('gdb_user', gdb_user_ss.sources(),
-+                             name_suffix: 'fa',
-+                             c_args: '-DCONFIG_USER_ONLY')
-+
-+libgdb_softmmu = static_library('gdb_softmmu', gdb_softmmu_ss.sources(),
-+                                name_suffix: 'fa')
-+
-+gdb_user = declare_dependency(link_whole: libgdb_user)
-+user_ss.add(gdb_user)
-+gdb_softmmu = declare_dependency(link_whole: libgdb_softmmu)
-+softmmu_ss.add(gdb_softmmu)
+@@ -1289,7 +1289,7 @@ static void handle_file_io(GArray *params, void *user_ctx)
+ static void handle_step(GArray *params, void *user_ctx)
+ {
+     if (params->len) {
+-        gdb_set_cpu_pc((target_ulong)get_param(params, 0)->val_ull);
++        gdb_set_cpu_pc(get_param(params, 0)->val_ull);
+     }
  
- # These have to built to the target ABI
- specific_ss.add(files('syscalls.c'))
- 
--softmmu_ss.add(files('softmmu.c'))
--user_ss.add(files('user.c'))
--
--# and BSD?
--specific_ss.add(when: 'CONFIG_LINUX_USER', if_true: files('user-target.c'))
-+# The user-target is specialised by the guest
-+specific_ss.add(when: 'CONFIG_USER_ONLY', if_true: files('user-target.c'))
+     cpu_single_step(gdbserver_state.c_cpu, gdbserver_state.sstep_flags);
 -- 
 2.39.1
 
