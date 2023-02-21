@@ -1,56 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pUOfQ-0000ka-Cm
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Feb 2023 04:10:33 -0500
+	id 1pUQs3-0003aT-CC
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Feb 2023 06:31:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pUOfO-0000kD-0P; Tue, 21 Feb 2023 04:10:30 -0500
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pUOfK-00075K-8K; Tue, 21 Feb 2023 04:10:29 -0500
-Received: from localhost.localdomain (unknown [114.95.238.225])
- by APP-01 (Coremail) with SMTP id qwCowAAHBUFyivRjvZKIBg--.64010S2;
- Tue, 21 Feb 2023 17:10:11 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH] target/riscv: Add support for Zicond extension
-Date: Tue, 21 Feb 2023 17:10:09 +0800
-Message-Id: <20230221091009.36545-1-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pUQrz-0003Zp-Hb
+ for qemu-riscv@nongnu.org; Tue, 21 Feb 2023 06:31:39 -0500
+Received: from mail-oo1-xc30.google.com ([2607:f8b0:4864:20::c30])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pUQrx-0005lo-UQ
+ for qemu-riscv@nongnu.org; Tue, 21 Feb 2023 06:31:39 -0500
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 26-20020a4ae1ba000000b005200f75cb0cso465648ooy.6
+ for <qemu-riscv@nongnu.org>; Tue, 21 Feb 2023 03:31:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Lb432FcfnU0yb2NpmU1uIwX8oPKNQ4sJspikV5whGSs=;
+ b=EpTQIFWyCtIqW6c/du0a6qS/3ezacvJiwA8gBwuDPo2BI0umfr63FHzlqQw2Yal/0m
+ zx2OhbbQKEhCNCFCFM3Pa2TtEJEWGKjBK62XrxXQylAHhwNjNOthGU9/wRjh/mo4I7Lg
+ /ZMjtJ3SJme5/1VaN/xVdQM+QmF7cfl39WuKQXlo9FRtxF34ByOMEvRqe2h5cKn44t7y
+ SgZPn9JGNlNJGC/LaGWiiovJsIxvilmCUT3Udc8xqSuGPUS4O5WY8fzdENBPwmc2gDlT
+ QoGi6W3XTCYw9DLguNji3wvF/Z4y50O3MNizxa/4yUtCe8eISQAMM7M44t622rXTUOEy
+ h4Rg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Lb432FcfnU0yb2NpmU1uIwX8oPKNQ4sJspikV5whGSs=;
+ b=T3VyhxUNFss8TVWouOoNua9KzsF3qmmRn+U3hDpIFPKwx9cTnSUSJU0g6yfov6qM4C
+ v8LEhnQvcRa08zTcCoozDt4Y/ct2h2QhhzgbnPJ6dZVclDR5Q2B2EuXlIx1ORIFVVXhC
+ npRRaVK3co/tzeF0pRx8nqCjnn/4t1iX5lHcjS/6s5nYUkHLc2SGPd+RzwQHemoFT2ak
+ M+C1+F14cmr6Fui0BALcIngAVq+I/wCOiKFpwJA+0UacEeHvo/mSMIb072jSdV48A1mI
+ 0wsvyIY39JmCj8cz+ScSPGxcwN3Q+JYCRIBOdCDSnL0mFTeqkmxVzLBOkDy4SIVuA7sD
+ MZSg==
+X-Gm-Message-State: AO0yUKVxpHlf7iToXCD3hmGGD/uMjV+b5p42vP/BFSVw1UzreFJSznt6
+ p/dvMBzUxUABmcuY/TYAMO82pg==
+X-Google-Smtp-Source: AK7set9n+pE1iCwuSl5c6R5MDW2Kl9MMvWodBoRl2hC7gtQ8cGrNG2IRNBEO1GB9GCdoeqtnmPVtVw==
+X-Received: by 2002:a4a:d485:0:b0:4f2:8f8:d2ff with SMTP id
+ o5-20020a4ad485000000b004f208f8d2ffmr1742386oos.6.1676979096219; 
+ Tue, 21 Feb 2023 03:31:36 -0800 (PST)
+Received: from [192.168.68.107] ([189.110.112.117])
+ by smtp.gmail.com with ESMTPSA id
+ w16-20020a4ae9f0000000b00516d4eac864sm487059ooc.29.2023.02.21.03.31.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 21 Feb 2023 03:31:35 -0800 (PST)
+Message-ID: <3a5af4b2-21a1-ba64-df8f-349b91488206@ventanamicro.com>
+Date: Tue, 21 Feb 2023 08:31:31 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAAHBUFyivRjvZKIBg--.64010S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxtw18Ar13XF4fAr1UWFyDZFb_yoW7XFWfpr
- 4rG347Ga1DAFyfAayftF4UXr1UCrs3G3yUK39avwn5Xa13WrWxJrsrK3yagrWUJFWkZr4j
- 9F45Cry5uws5JaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvj14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
- CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
- 2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJV
- W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
- Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
- xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43
- MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I
- 0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWU
- JVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOG
- QDUUUUU
-X-Originating-IP: [114.95.238.225]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.2
+Subject: Re: [PATCH] hw/riscv: Skip re-generating DT nodes for a given DTB
+Content-Language: en-US
+To: Bin Meng <bmeng@tinylab.org>, qemu-devel@nongnu.org
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org
+References: <20230221061204.1658306-1-bmeng@tinylab.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230221061204.1658306-1-bmeng@tinylab.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c30;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc30.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.09,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -63,138 +87,76 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2023 09:10:31 -0000
+X-List-Received-Date: Tue, 21 Feb 2023 11:31:39 -0000
 
-The spec can be found in https://github.com/riscv/riscv-zicond.
-Two instructions are added:
- - czero.eqz: Moves zero to a register rd, if the condition rs2 is
-   equal to zero, otherwise moves rs1 to rd.
- - czero.nez: Moves zero to a register rd, if the condition rs2 is
-   nonzero, otherwise moves rs1 to rd.
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
----
- target/riscv/cpu.c                           |  2 +
- target/riscv/cpu.h                           |  1 +
- target/riscv/insn32.decode                   |  4 ++
- target/riscv/insn_trans/trans_rvzicond.c.inc | 49 ++++++++++++++++++++
- target/riscv/translate.c                     |  1 +
- 5 files changed, 57 insertions(+)
- create mode 100644 target/riscv/insn_trans/trans_rvzicond.c.inc
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 0dd2f0c753..80b92930ae 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -74,6 +74,7 @@ struct isa_ext_data {
- static const struct isa_ext_data isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(h, false, PRIV_VERSION_1_12_0, ext_h),
-     ISA_EXT_DATA_ENTRY(v, false, PRIV_VERSION_1_12_0, ext_v),
-+    ISA_EXT_DATA_ENTRY(zicond, true, PRIV_VERSION_1_12_0, ext_zicond),
-     ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ext_icsr),
-     ISA_EXT_DATA_ENTRY(zifencei, true, PRIV_VERSION_1_10_0, ext_ifencei),
-     ISA_EXT_DATA_ENTRY(zihintpause, true, PRIV_VERSION_1_10_0, ext_zihintpause),
-@@ -1143,6 +1144,7 @@ static Property riscv_cpu_extensions[] = {
-     DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
- 
-     /* These are experimental so mark with 'x-' */
-+    DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
-     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
-     /* ePMP 0.9.3 */
-     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 7128438d8e..81b7c92e7a 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -447,6 +447,7 @@ struct RISCVCPUConfig {
-     bool ext_zkt;
-     bool ext_ifencei;
-     bool ext_icsr;
-+    bool ext_zicond;
-     bool ext_zihintpause;
-     bool ext_smstateen;
-     bool ext_sstc;
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index b7e7613ea2..fb537e922e 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -890,3 +890,7 @@ sm3p1       00 01000 01001 ..... 001 ..... 0010011 @r2
- # *** RV32 Zksed Standard Extension ***
- sm4ed       .. 11000 ..... ..... 000 ..... 0110011 @k_aes
- sm4ks       .. 11010 ..... ..... 000 ..... 0110011 @k_aes
-+
-+# *** RV32 Zicond Standard Extension ***
-+czero_eqz   0000111  ..... ..... 101 ..... 0110011 @r
-+czero_nez   0000111  ..... ..... 111 ..... 0110011 @r
-diff --git a/target/riscv/insn_trans/trans_rvzicond.c.inc b/target/riscv/insn_trans/trans_rvzicond.c.inc
-new file mode 100644
-index 0000000000..645260164e
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvzicond.c.inc
-@@ -0,0 +1,49 @@
-+/*
-+ * RISC-V translation routines for the Zicond Standard Extension.
-+ *
-+ * Copyright (c) 2020-2023 PLCT Lab
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#define REQUIRE_ZICOND(ctx) do {          \
-+    if (!ctx->cfg_ptr->ext_zicond) {      \
-+        return false;                     \
-+    }                                     \
-+} while (0)
-+
-+static bool trans_czero_eqz(DisasContext *ctx, arg_czero_eqz *a)
-+{
-+    REQUIRE_ZICOND(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    tcg_gen_movcond_tl(TCG_COND_EQ, dest, src2, ctx->zero, ctx->zero, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+static bool trans_czero_nez(DisasContext *ctx, arg_czero_nez *a)
-+{
-+    REQUIRE_ZICOND(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    tcg_gen_movcond_tl(TCG_COND_NE, dest, src2, ctx->zero, ctx->zero, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 772f9d7973..6e65c6afca 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1103,6 +1103,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- #include "insn_trans/trans_rvh.c.inc"
- #include "insn_trans/trans_rvv.c.inc"
- #include "insn_trans/trans_rvb.c.inc"
-+#include "insn_trans/trans_rvzicond.c.inc"
- #include "insn_trans/trans_rvzawrs.c.inc"
- #include "insn_trans/trans_rvzfh.c.inc"
- #include "insn_trans/trans_rvk.c.inc"
--- 
-2.25.1
+On 2/21/23 03:12, Bin Meng wrote:
+> Lanuch qemu-system-riscv64 with a given dtb for 'sifive_u' and 'virt'
+> machines, QEMU complains:
+> 
+>    qemu_fdt_add_subnode: Failed to create subnode /soc: FDT_ERR_EXISTS
+> 
+> The whole DT generation logic should be skipped when a given DTB is
+> present.
+> 
+> Fixes: b1f19f238cae ("hw/riscv: write bootargs 'chosen' FDT after riscv_load_kernel()")
 
+Thanks for cleaning my mess :)
+
+I was wondering whether we should move the ms->dtb verification/load bits outside of
+create_fdt(), and put it explicitly in sifive_u_machine_init() and virt_machine_init().
+Like this:
+
+     /* load/create device tree*/
+     if (ms->dtb) {
+         ms->fdt = load_device_tree(ms->dtb, &s->fdt_size);
+         if (!ms->fdt) {
+             error_report("load_device_tree() failed");
+             exit(1);
+         }
+     } else {
+         create_fdt(s, memmap);
+     }
+
+
+This looks clearer to me because create_fdt() will actually create a fdt, not load or create
+a fdt. create_fdt() from spike works this way.
+
+I'll leave to your discretion. The patch is already good enough as is.
+
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> ---
+> 
+>   hw/riscv/sifive_u.c | 1 +
+>   hw/riscv/virt.c     | 1 +
+>   2 files changed, 2 insertions(+)
+> 
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index ad3bb35b34..76db5ed3dd 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -118,6 +118,7 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+>               error_report("load_device_tree() failed");
+>               exit(1);
+>           }
+> +        return;
+>       } else {
+>           fdt = ms->fdt = create_device_tree(&fdt_size);
+>           if (!fdt) {
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 86c4adc0c9..0c7b4a1e46 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1014,6 +1014,7 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
+>               error_report("load_device_tree() failed");
+>               exit(1);
+>           }
+> +        return;
+>       } else {
+>           ms->fdt = create_device_tree(&s->fdt_size);
+>           if (!ms->fdt) {
 
