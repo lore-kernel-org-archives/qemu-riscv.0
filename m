@@ -1,84 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pUtPW-0007QY-FK
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Feb 2023 13:00:10 -0500
+	id 1pUuE3-00078I-3p
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Feb 2023 13:52:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pUtPS-0007Ps-8X
- for qemu-riscv@nongnu.org; Wed, 22 Feb 2023 13:00:06 -0500
-Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pUuE1-00077v-2G
+ for qemu-riscv@nongnu.org; Wed, 22 Feb 2023 13:52:21 -0500
+Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pUtPQ-00084j-L2
- for qemu-riscv@nongnu.org; Wed, 22 Feb 2023 13:00:05 -0500
-Received: by mail-pj1-x102b.google.com with SMTP id
- oe18-20020a17090b395200b00236a0d55d3aso9618408pjb.3
- for <qemu-riscv@nongnu.org>; Wed, 22 Feb 2023 10:00:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=4spnsT8GCAezU1q61uippCrq9JCLiNkntsXRQ1qJibw=;
- b=rlRm9E7GADNi04OQOAitc8H7uyEoX/Mzofh9H41I1SS1pNRcoCJYXrwZdrdoRMws0T
- YBdAhr+izhqeZqYrT02sVHmRKw92inp/06PL1380R8pebAOG2HUbchCLaVNSSg2FS+Go
- 70gI8oDUtJ0R62RAipHYXSMdhIrGHeCCEzPBMDYZ5C/npLaKE5/FsDntzlkfF5r7Zx2n
- CP3fZDqx5wy/OA6o4cdwi3u74TCf0dbGuMxrGSWklKaZsocl72gaAzAdKH/Iev22dDUL
- tsEXPLTqsnIDJDkKwvKYd2dFfRWlDq0M1AwUoLUBx19qCLupU4jgcdueuaYtqt5LINBy
- lBeQ==
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pUuDz-0004K8-CA
+ for qemu-riscv@nongnu.org; Wed, 22 Feb 2023 13:52:20 -0500
+Received: by mail-ot1-x32d.google.com with SMTP id
+ r23-20020a05683001d700b00690eb18529fso1860656ota.1
+ for <qemu-riscv@nongnu.org>; Wed, 22 Feb 2023 10:52:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=psMLW3mk2KBadYtwbEx+BkQpAhfZEUXKHytX1+JxPMA=;
+ b=Rd7zeZtV8Rpd/pJ2WMnshd7UT9GNqrz7lbIQMbDKkim5cMJQ0eIm2rXXNrC2cRTkyH
+ AkGZAFhJzpeOAwC17Esb+ZPgnU/pVicRHhLI1r2+rhAZQtUI3842Q2S3kAHkt3dxc+il
+ bkwba4+ZQu+nSZ7RvFjhyoPuMKnJrV/FD47XRxk8+LiPAChut9/kAEnIbiAUER0wvl4j
+ MViJ156HhbDrU1jZfPmiE8b/SQSHJgyD6befXe38+49gcZD4lFU2FHN20BaMolrztmDc
+ MO5vap8h/fWr/4q8C7p4HrEBmfMbRginWsH0WNWtS7SWk14ZTXw5Pq7tRYo16H3Z4VqU
+ ClNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4spnsT8GCAezU1q61uippCrq9JCLiNkntsXRQ1qJibw=;
- b=kVCm0yK34rgl7NV5LnTys2eNAdmsASPQipKjGd8fN5Sw5nDpHzeMjrzgrOn5qCpTtN
- IrSsnt2aV/HnjEC6v6CbDNf60YkP5bw89l+8k4nW7J2/AyCM2gkZwnPPdEN2yuzeyff2
- worIQIWrTpWFh38Xo/CqaFpQlPsfCbL/hlIyLRt0q8T/9DkTm5eAAqPbEnwH3fZ0lKAT
- +qfFieu0L7RBTUkw+D3kQwcWegmdw1MatAPjVJMiSEDGYzW+7e50WOsiyaTrMTrO7og6
- 1/hTfSLh0wi9NNosrdjIwZrefILI6l0/hLTk+5CfBMnCoXpDT2vyYAnPuNtXiLnRQXLm
- oOXA==
-X-Gm-Message-State: AO0yUKXIrOflJW4hq0oLGCCoLj5KLaBC5b5EvS/rhYKLZ3jdDDpHeZq2
- eTheH9VEwsbS/BGENxfGU6sTVg==
-X-Google-Smtp-Source: AK7set/rZUASEFzypVn3bGzfIum8wKwzBwRvzJp+NUwt7AJTsMCHiDrs1/kBP8p7O2yMboEwmvXE2w==
-X-Received: by 2002:a05:6a20:3948:b0:cb:f76c:e144 with SMTP id
- r8-20020a056a20394800b000cbf76ce144mr1156145pzg.12.1677088801943; 
- Wed, 22 Feb 2023 10:00:01 -0800 (PST)
-Received: from [192.168.6.128] (rrcs-173-198-77-218.west.biz.rr.com.
- [173.198.77.218]) by smtp.gmail.com with ESMTPSA id
- j15-20020a62e90f000000b0058bc7453285sm5609308pfh.217.2023.02.22.09.59.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Feb 2023 10:00:01 -0800 (PST)
-Message-ID: <9923e8af-e00e-8105-2bd7-2c902770b1c7@linaro.org>
-Date: Wed, 22 Feb 2023 07:59:56 -1000
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH v6 2/4] target/riscv: implement Zicboz extension
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=psMLW3mk2KBadYtwbEx+BkQpAhfZEUXKHytX1+JxPMA=;
+ b=588TRnToQ5IyrFOevglOpyxgw2ZKcp5jTYFPpcTXh1Zpg9zceczq94gP8n1mn/Shfy
+ cDapo5SFJ9SXV2kV3HcNYXqDW7euF4TR5gbDnrcamvoBmPcw4qjfjEQ48nOWjf+Mxq4+
+ v4UAEDh6Cigo17C76DEJeNAVMX96oJsE+URB7B9l7VLShhXgqx+XPyCIljUbTYzbmpvE
+ W109tgytU0q+mf6UjN2rAr7l/6SyAU9SAMCWeEfa0J32nHnikOgS5heYrhLXVQeu2Otn
+ oHbynBJ7gQyFZ9K+ftG7lBAZJwviA3lciaq3H3ju9c+lEnKjPMeRQXK6wMD7Uk2PT+nJ
+ 0Clw==
+X-Gm-Message-State: AO0yUKU92ScNMBDWtFeOAo+JKR3dLIH2U4rw3whky75SfGjDG95Z3ijH
+ 08gDUvVR0kgaDKMAzKnWjZ9sow==
+X-Google-Smtp-Source: AK7set8HB1RdkRgtdU8E9UQlY1HmOUUg/hdQDqz4UYjyq+NE5FADY1ecE2+FIrQ3EvsxQe3ZN+fc8A==
+X-Received: by 2002:a9d:1cb:0:b0:68b:d08e:2200 with SMTP id
+ e69-20020a9d01cb000000b0068bd08e2200mr4340974ote.34.1677091937942; 
+ Wed, 22 Feb 2023 10:52:17 -0800 (PST)
+Received: from grind.dc1.ventanamicro.com ([189.110.112.117])
+ by smtp.gmail.com with ESMTPSA id
+ z2-20020a9d71c2000000b0068bcadcad5bsm1781111otj.57.2023.02.22.10.52.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Feb 2023 10:52:17 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- Christoph Muellner <cmuellner@linux.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-References: <20230217203445.51077-1-dbarboza@ventanamicro.com>
- <20230217203445.51077-3-dbarboza@ventanamicro.com>
- <20408b85-2ad0-4cbc-4ccd-c512ba15ba06@linaro.org>
- <d468f8c6-f8ec-6d40-44ab-3e76df458680@ventanamicro.com>
- <4e3ac25e-6443-9365-66e4-ebd903aa29b9@linaro.org>
- <4247ca1b-aa4c-9494-e634-c8114758bfcd@ventanamicro.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <4247ca1b-aa4c-9494-e634-c8114758bfcd@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102b.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v7 00/10] make write_misa a no-op and FEATURE_* cleanups
+Date: Wed, 22 Feb 2023 15:51:55 -0300
+Message-Id: <20230222185205.355361-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.102,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,22 +80,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2023 18:00:06 -0000
+X-List-Received-Date: Wed, 22 Feb 2023 18:52:21 -0000
 
-On 2/21/23 23:37, Daniel Henrique Barboza wrote:
-> Do you mean that the doc should tell whether the address to be returned in the store
-> access fault should be aligned and whatnot?
+Hi,
 
-Yes.
+In this version we gave up removing all the write_misa() body and,
+instead, we went back to something closer to what we were doing in v2.
+write_misa() is now gated behind an experimental x-misa-w cfg option,
+defaulted to false.
 
-> By reading target/riscv code it seems that all store acess faults are being fired via
-> raise_mmu_exception(), which is only called in riscv_cpu_tlb_fill(), which in turn
-> doesn't do any thing special with the address before firing the exception. So I guess
-> we can assume that badddr = aligned?
+The idea is that x-misa-w allow us to keep experimenting and testing the
+code. Marking it as experimental will (hopefully) make users wary of the
+fact that this feature is unstable. The expectation is that the flag will
+be removed once write_misa() is ready to always write MISA.
 
-Well that's certainly how the code is written, yes.
+Changes from v6:
+- patches without reviews/acks: patch 3
+- patch 2: taken from version 3, acks and r-bs preserved
+- patch 3:
+  - rename 'misa-w' to 'x-misa-w' to be clearer about our intents with
+    the cfg option
+- v6 link: https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg05047.html
 
+Daniel Henrique Barboza (10):
+  target/riscv: introduce riscv_cpu_cfg()
+  target/riscv: do not mask unsupported QEMU extensions in write_misa()
+  target/riscv: allow MISA writes as experimental
+  target/riscv: remove RISCV_FEATURE_DEBUG
+  target/riscv/cpu.c: error out if EPMP is enabled without PMP
+  target/riscv: remove RISCV_FEATURE_EPMP
+  target/riscv: remove RISCV_FEATURE_PMP
+  hw/riscv/virt.c: do not use RISCV_FEATURE_MMU in
+    create_fdt_socket_cpus()
+  target/riscv: remove RISCV_FEATURE_MMU
+  target/riscv/cpu: remove CPUArchState::features and friends
 
-r~
+ hw/riscv/virt.c           |  7 ++++---
+ target/riscv/cpu.c        | 25 ++++++++++---------------
+ target/riscv/cpu.h        | 29 ++++++-----------------------
+ target/riscv/cpu_helper.c |  6 +++---
+ target/riscv/csr.c        | 15 ++++++---------
+ target/riscv/machine.c    | 11 ++++-------
+ target/riscv/monitor.c    |  2 +-
+ target/riscv/op_helper.c  |  2 +-
+ target/riscv/pmp.c        |  8 ++++----
+ 9 files changed, 39 insertions(+), 66 deletions(-)
+
+-- 
+2.39.2
 
 
