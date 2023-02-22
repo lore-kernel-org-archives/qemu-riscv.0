@@ -1,73 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pUuE3-00078I-3p
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Feb 2023 13:52:23 -0500
+	id 1pUuE7-00079L-D8
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Feb 2023 13:52:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pUuE1-00077v-2G
- for qemu-riscv@nongnu.org; Wed, 22 Feb 2023 13:52:21 -0500
-Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d])
+ id 1pUuE4-00078k-GO
+ for qemu-riscv@nongnu.org; Wed, 22 Feb 2023 13:52:25 -0500
+Received: from mail-oa1-x2e.google.com ([2001:4860:4864:20::2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pUuDz-0004K8-CA
- for qemu-riscv@nongnu.org; Wed, 22 Feb 2023 13:52:20 -0500
-Received: by mail-ot1-x32d.google.com with SMTP id
- r23-20020a05683001d700b00690eb18529fso1860656ota.1
- for <qemu-riscv@nongnu.org>; Wed, 22 Feb 2023 10:52:18 -0800 (PST)
+ id 1pUuE2-0004Kh-E7
+ for qemu-riscv@nongnu.org; Wed, 22 Feb 2023 13:52:24 -0500
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-1722c48a773so7953034fac.2
+ for <qemu-riscv@nongnu.org>; Wed, 22 Feb 2023 10:52:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=psMLW3mk2KBadYtwbEx+BkQpAhfZEUXKHytX1+JxPMA=;
- b=Rd7zeZtV8Rpd/pJ2WMnshd7UT9GNqrz7lbIQMbDKkim5cMJQ0eIm2rXXNrC2cRTkyH
- AkGZAFhJzpeOAwC17Esb+ZPgnU/pVicRHhLI1r2+rhAZQtUI3842Q2S3kAHkt3dxc+il
- bkwba4+ZQu+nSZ7RvFjhyoPuMKnJrV/FD47XRxk8+LiPAChut9/kAEnIbiAUER0wvl4j
- MViJ156HhbDrU1jZfPmiE8b/SQSHJgyD6befXe38+49gcZD4lFU2FHN20BaMolrztmDc
- MO5vap8h/fWr/4q8C7p4HrEBmfMbRginWsH0WNWtS7SWk14ZTXw5Pq7tRYo16H3Z4VqU
- ClNg==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uOJjQ+LYJii84tGGghSEtNkWZ701Sd54P2KPAADn0Ns=;
+ b=du73QTC1s8erzOXaFLwbB6tAUZGQ8cBSvjvgDZb/BU3BUgJcw5bsig6oklO4LZulX1
+ Po/liG+40zjc4ULXG2a/0pzm6JF11DAQpuNros8r79tIpQy3nK7yv8grmK37GKzm0JDR
+ hPiMDeHlS5F9esOkH7/xrw/xSggfubWe6egynDpNu9Y8u3MUfgFgIno8y4qARJkVklxE
+ 3/GwZqbkgc5dZFuRdMpM0vrNXztxoFxzpvBSYvDeydzaIfjsMLC3jMFLntu3zkIv34AC
+ 8jptoo37t0+fs32YGXKmXUiiDMqh9Heq54zI+x4hWBYM+279eCZkK8Y3UbnXECyDBImr
+ l2GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=psMLW3mk2KBadYtwbEx+BkQpAhfZEUXKHytX1+JxPMA=;
- b=588TRnToQ5IyrFOevglOpyxgw2ZKcp5jTYFPpcTXh1Zpg9zceczq94gP8n1mn/Shfy
- cDapo5SFJ9SXV2kV3HcNYXqDW7euF4TR5gbDnrcamvoBmPcw4qjfjEQ48nOWjf+Mxq4+
- v4UAEDh6Cigo17C76DEJeNAVMX96oJsE+URB7B9l7VLShhXgqx+XPyCIljUbTYzbmpvE
- W109tgytU0q+mf6UjN2rAr7l/6SyAU9SAMCWeEfa0J32nHnikOgS5heYrhLXVQeu2Otn
- oHbynBJ7gQyFZ9K+ftG7lBAZJwviA3lciaq3H3ju9c+lEnKjPMeRQXK6wMD7Uk2PT+nJ
- 0Clw==
-X-Gm-Message-State: AO0yUKU92ScNMBDWtFeOAo+JKR3dLIH2U4rw3whky75SfGjDG95Z3ijH
- 08gDUvVR0kgaDKMAzKnWjZ9sow==
-X-Google-Smtp-Source: AK7set8HB1RdkRgtdU8E9UQlY1HmOUUg/hdQDqz4UYjyq+NE5FADY1ecE2+FIrQ3EvsxQe3ZN+fc8A==
-X-Received: by 2002:a9d:1cb:0:b0:68b:d08e:2200 with SMTP id
- e69-20020a9d01cb000000b0068bd08e2200mr4340974ote.34.1677091937942; 
- Wed, 22 Feb 2023 10:52:17 -0800 (PST)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uOJjQ+LYJii84tGGghSEtNkWZ701Sd54P2KPAADn0Ns=;
+ b=dJUlCzHMbqKO3+T5GcQJ+0tzE5bd0EEykT5QrPYg84X73JWd3x1m57OrqI1pPrRe9T
+ nMEgCJuXvJJSfya2t1QGlDrjUYVawufvk43q+bEUlat47o2CQbxpS3UQfG/s4gFOieK+
+ jL0uzvjGqLmF0o4ziqNMx9iRiZ0x6TQnneuQZ1shbO8aZsQxxHXYPVZGBIN7Dv0QXA1F
+ ksLisZXd4hd9YGHinvjQr0BNwWZXSiN+BGWqmrNXvOXMHINMstZc4zWYJLibzvpraNYR
+ /tw/cgFcXH+cQOwM6dGkX7y/cdOTJSJfMnQUaDmQ9z/arSFamER1AJmW9ZZYQCEVvXZR
+ S75A==
+X-Gm-Message-State: AO0yUKVyBZLQv0dT1WJlhyAgLGoVir/GlZO10k1KIezI53ZkRL0LlxD3
+ laVtzrnc09xenN71WIcPh2nLHQ==
+X-Google-Smtp-Source: AK7set9Os3DLBTYwLsmrpnpCVphGmHT48v3uJFc82cDhn6rpcV8TEyEgUGCmbLLGLjBSkUZOMEzg8Q==
+X-Received: by 2002:a05:6871:1c5:b0:16e:676:bfea with SMTP id
+ q5-20020a05687101c500b0016e0676bfeamr8930971oad.9.1677091941239; 
+ Wed, 22 Feb 2023 10:52:21 -0800 (PST)
 Received: from grind.dc1.ventanamicro.com ([189.110.112.117])
  by smtp.gmail.com with ESMTPSA id
- z2-20020a9d71c2000000b0068bcadcad5bsm1781111otj.57.2023.02.22.10.52.15
+ z2-20020a9d71c2000000b0068bcadcad5bsm1781111otj.57.2023.02.22.10.52.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Feb 2023 10:52:17 -0800 (PST)
+ Wed, 22 Feb 2023 10:52:20 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v7 00/10] make write_misa a no-op and FEATURE_* cleanups
-Date: Wed, 22 Feb 2023 15:51:55 -0300
-Message-Id: <20230222185205.355361-1-dbarboza@ventanamicro.com>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH v7 01/10] target/riscv: introduce riscv_cpu_cfg()
+Date: Wed, 22 Feb 2023 15:51:56 -0300
+Message-Id: <20230222185205.355361-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230222185205.355361-1-dbarboza@ventanamicro.com>
+References: <20230222185205.355361-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32d.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,52 +84,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2023 18:52:21 -0000
+X-List-Received-Date: Wed, 22 Feb 2023 18:52:25 -0000
 
-Hi,
+We're going to do changes that requires accessing the RISCVCPUConfig
+struct from the RISCVCPU, having access only to a CPURISCVState 'env'
+pointer. Add a helper to make the code easier to read.
 
-In this version we gave up removing all the write_misa() body and,
-instead, we went back to something closer to what we were doing in v2.
-write_misa() is now gated behind an experimental x-misa-w cfg option,
-defaulted to false.
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Bin Meng <bmeng@tinylab.org>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/cpu.h | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-The idea is that x-misa-w allow us to keep experimenting and testing the
-code. Marking it as experimental will (hopefully) make users wary of the
-fact that this feature is unstable. The expectation is that the flag will
-be removed once write_misa() is ready to always write MISA.
-
-Changes from v6:
-- patches without reviews/acks: patch 3
-- patch 2: taken from version 3, acks and r-bs preserved
-- patch 3:
-  - rename 'misa-w' to 'x-misa-w' to be clearer about our intents with
-    the cfg option
-- v6 link: https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg05047.html
-
-Daniel Henrique Barboza (10):
-  target/riscv: introduce riscv_cpu_cfg()
-  target/riscv: do not mask unsupported QEMU extensions in write_misa()
-  target/riscv: allow MISA writes as experimental
-  target/riscv: remove RISCV_FEATURE_DEBUG
-  target/riscv/cpu.c: error out if EPMP is enabled without PMP
-  target/riscv: remove RISCV_FEATURE_EPMP
-  target/riscv: remove RISCV_FEATURE_PMP
-  hw/riscv/virt.c: do not use RISCV_FEATURE_MMU in
-    create_fdt_socket_cpus()
-  target/riscv: remove RISCV_FEATURE_MMU
-  target/riscv/cpu: remove CPUArchState::features and friends
-
- hw/riscv/virt.c           |  7 ++++---
- target/riscv/cpu.c        | 25 ++++++++++---------------
- target/riscv/cpu.h        | 29 ++++++-----------------------
- target/riscv/cpu_helper.c |  6 +++---
- target/riscv/csr.c        | 15 ++++++---------
- target/riscv/machine.c    | 11 ++++-------
- target/riscv/monitor.c    |  2 +-
- target/riscv/op_helper.c  |  2 +-
- target/riscv/pmp.c        |  8 ++++----
- 9 files changed, 39 insertions(+), 66 deletions(-)
-
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 7128438d8e..215423499e 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -654,6 +654,11 @@ static inline RISCVMXL riscv_cpu_mxl(CPURISCVState *env)
+ #endif
+ #define riscv_cpu_mxl_bits(env) (1UL << (4 + riscv_cpu_mxl(env)))
+ 
++static inline const RISCVCPUConfig *riscv_cpu_cfg(CPURISCVState *env)
++{
++    return &env_archcpu(env)->cfg;
++}
++
+ #if defined(TARGET_RISCV32)
+ #define cpu_recompute_xl(env)  ((void)(env), MXL_RV32)
+ #else
 -- 
 2.39.2
 
