@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pUrTb-00066f-5z
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Feb 2023 10:56:16 -0500
+	id 1pUrTg-00068e-OB
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Feb 2023 10:56:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pUrTZ-000650-BL
- for qemu-riscv@nongnu.org; Wed, 22 Feb 2023 10:56:13 -0500
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
+ id 1pUrTb-00066Y-14
+ for qemu-riscv@nongnu.org; Wed, 22 Feb 2023 10:56:15 -0500
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pUrTX-0008L5-AJ
- for qemu-riscv@nongnu.org; Wed, 22 Feb 2023 10:56:13 -0500
-Received: by mail-pj1-x1029.google.com with SMTP id
- na9-20020a17090b4c0900b0023058bbd7b2so8696224pjb.0
- for <qemu-riscv@nongnu.org>; Wed, 22 Feb 2023 07:56:10 -0800 (PST)
+ id 1pUrTZ-0008LO-71
+ for qemu-riscv@nongnu.org; Wed, 22 Feb 2023 10:56:14 -0500
+Received: by mail-pj1-x1032.google.com with SMTP id
+ x20-20020a17090a8a9400b00233ba727724so1782908pjn.1
+ for <qemu-riscv@nongnu.org>; Wed, 22 Feb 2023 07:56:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=to:from:cc:content-transfer-encoding:mime-version:message-id:date
- :subject:from:to:cc:subject:date:message-id:reply-to;
- bh=slDmqUv5p7vsOMrfeJKFL1boce1sUErNzA/SV4DGORE=;
- b=LCeLR2K6m2GkqgoJnB8jOrqhzgGu6yR4k+wOnF9StWd5ZuHl9lPuuh+3drBT18wE+L
- HKOWpmmL6hduvjBdGQ3F1WcdvXLLQwP5Ao983WIcikJCBTAlk29zFHAJy5EOKWOwiy5z
- lxFcRxJEuEZv9/dPoluPtzcrRYPX3QCUF0Nsso1MIadOd9BUltr6ORpm3eIy3KrQko3R
- 31vMWSRdNkrJpjL/JOViUtgljVWtQVjt1zBbuSjXzJMEG0isdm6h/vEu2qHQRnBlRnBU
- HymKKGrysp+Bl1misyG6ugHHWN92IyV87Vv6O60vL1XjoycT7bysyfc0I4wyl61e9Mdk
- hCFg==
+ h=content-transfer-encoding:mime-version:message-id:to:from:cc
+ :in-reply-to:subject:date:from:to:cc:subject:date:message-id
+ :reply-to; bh=xZncKXS3JLOWHAALUueHCR9aGhlXMQFbZdHD4bmhWSY=;
+ b=V+YcUZDJgp4O/gqyBNv9+ieBxkl1omrOLZSKxteH05o0DVavlsqSMxDRSjs5FuTLEu
+ P1bD/aLuN/axnqdNT/q5jIe6dUdUly+HmWeVM6j4i8tYvbF3hVDNOjgyGPMpfjgSHGVn
+ Vfi/Biw5bCQ3BUSCkM2tjs6fOwoydY+aNILzYbNMrKu/3PNGWmWxIzG09Jz8hUE0UQy9
+ qZJGJ8Ic/HvB0nGdvf3r8/7axKYz9GJrpGzdjPA0aym2rfFENEUFRtLinBkOyam2qz6S
+ UJCMxdcxJzkRB7qoe3g5GkecKNi8hIElE8OYndTWV/CZ80MXoJszudz6VYrvdOcAVT50
+ HLXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=to:from:cc:content-transfer-encoding:mime-version:message-id:date
- :subject:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=slDmqUv5p7vsOMrfeJKFL1boce1sUErNzA/SV4DGORE=;
- b=hl1vG8fgXNag6wv3hTV1iomcNFaWVer6nY4iLh5OUDNGRISYUn1hNjTBVOy51VURUn
- uzBJSLXd3uCGNqCwp8qY5o+faO6VELm7bZ1V9IAvn0zUOQ73WlFAu4PF2Bqq5iAmXAsj
- YuJE5kdCx2WR9cKYdCUMWCKHXJsqIOPaKVG1jdiTkVHcL2VietcBwznpwSbgu3dPdCiy
- HbkYai+SuM58sBKKy7JEQtcwWtHnBmnu0jNbhQ6JXCYEvQ1tIMSczA0LkHs8/HM/ThzL
- u7w+WoHF5cBdNQQMWNp3PrVMhOHKCQxDG4nDJyjdqMI0q+RAbs4k4+ZfKokpbAenUUiz
- NlYg==
-X-Gm-Message-State: AO0yUKWOPSc+ycAreX5IwvCrhdClmNJJcqhfHA9WiZKsOHl/z2rlMyle
- ZNCAC6EZlt1CcvHtFvwQeydBsgMi7mm+5V4q
-X-Google-Smtp-Source: AK7set9Gx7NYA5axy6cC3rLkbDeh4X56vVAMkXy+TVH61QCCB9s8dWcunwOkbV/dPzRxRMBfZBMy6w==
-X-Received: by 2002:a17:90b:17d0:b0:233:b849:7e8f with SMTP id
- me16-20020a17090b17d000b00233b8497e8fmr8242308pjb.47.1677081369048; 
- Wed, 22 Feb 2023 07:56:09 -0800 (PST)
+ h=content-transfer-encoding:mime-version:message-id:to:from:cc
+ :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xZncKXS3JLOWHAALUueHCR9aGhlXMQFbZdHD4bmhWSY=;
+ b=N+1XaFKIB+mw5MD/fWdphswIgsvhFoLqtMjUuiLib5UVSRfZeHkneX96MrjHH41NNj
+ uxb7KIwzcY/uAYmM0tE/4CWhKTStT5LCTe3NTQ7BG32EHapxMjtKVPmvSq3Jos3fw/d1
+ WvH6CXkwQmLBZiRaxVGgwPc/vNdDVOiAZVo6Ad1E+SMz5SB8lWucGHUjVUVss8GCM9Gb
+ 570CTBEWeLV5l/0ggrW9O0T49TJlnswaYo4UZy9DfPiOTo8v2muQdtfdCyPVrkzDjNnB
+ WEQ36y6pGF95a0NJiQA7rAExf6WovnM8+qTFPekLVyKDr/ssqqn1fZ32U42rG471f87L
+ 9bmw==
+X-Gm-Message-State: AO0yUKW71RjS40XcOrsP08DcOLYmgjyISZtngJr3WXwAuUtosaK209xK
+ Ko1yKDVjZdFTpSc9nDbDMynWtjR7E1/sZHmR
+X-Google-Smtp-Source: AK7set8TnLBcQT0Ag3vracuLAw6hBpUU7mZu3WKgRrVEX9uLa0mkfH5FsEqcM/havnsH42CXemejSg==
+X-Received: by 2002:a17:902:d501:b0:19a:96ea:3850 with SMTP id
+ b1-20020a170902d50100b0019a96ea3850mr8808227plg.17.1677081371350; 
+ Wed, 22 Feb 2023 07:56:11 -0800 (PST)
 Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
- o14-20020a17090ad24e00b0023087e8adf8sm5054258pjw.21.2023.02.22.07.56.08
+ ja17-20020a170902efd100b0019acd3151d0sm6702927plb.114.2023.02.22.07.56.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Feb 2023 07:56:08 -0800 (PST)
-Subject: [PATCH] gitlab-ci.yml: opensbi: Move to Ubuntu 22.04
-Date: Wed, 22 Feb 2023 07:49:38 -0800
-Message-Id: <20230222154938.9201-1-palmer@rivosinc.com>
-X-Mailer: git-send-email 2.39.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
- Palmer Dabbelt <palmer@rivosinc.com>
+ Wed, 22 Feb 2023 07:56:10 -0800 (PST)
+Date: Wed, 22 Feb 2023 07:56:10 -0800 (PST)
+X-Google-Original-Date: Wed, 22 Feb 2023 07:55:11 PST (-0800)
+Subject: Re: [PULL 0/9] Fourth RISC-V PR for QEMU 8.0
+In-Reply-To: <CAFEAcA_DvrOgKAdVcF8OxpxUv9aPB5hOWjWryOt_SpFiNzY12A@mail.gmail.com>
+CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alex.bennee@linaro.org,
+ bmeng@tinylab.org
 From: Palmer Dabbelt <palmer@rivosinc.com>
-To: Bin Meng <bmeng.cn@gmail.com>, Peter Maydell <peter.maydell@linaro.org>,
- alex.bennee@linaro.org
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=palmer@rivosinc.com; helo=mail-pj1-x1029.google.com
+To: Peter Maydell <peter.maydell@linaro.org>
+Message-ID: <mhng-3ef3787a-321d-4a23-aa45-8831b3093ac5@palmer-ri-x1c9a>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=palmer@rivosinc.com; helo=mail-pj1-x1032.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -78,41 +79,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2023 15:56:14 -0000
+X-List-Received-Date: Wed, 22 Feb 2023 15:56:16 -0000
 
-It looks like the Ubuntu 18.04 Docker images are tripping up our CI with
+On Tue, 21 Feb 2023 08:43:47 PST (-0800), Peter Maydell wrote:
+> On Fri, 17 Feb 2023 at 17:53, Palmer Dabbelt <palmer@rivosinc.com> wrote:
+>>
+>> The following changes since commit 417296c8d8588f782018d01a317f88957e9786d6:
+>>
+>>   tests/qtest/netdev-socket: Raise connection timeout to 60 seconds (2023-02-09 11:23:53 +0000)
+>>
+>> are available in the Git repository at:
+>>
+>>   https://github.com/palmer-dabbelt/qemu.git tags/pull-riscv-to-apply-20230217
+>>
+>> for you to fetch changes up to e8c0697d79ef05aa5aefb1121dfede59855556b4:
+>>
+>>   target/riscv: Fix vslide1up.vf and vslide1down.vf (2023-02-16 08:10:40 -0800)
+>>
+>> ----------------------------------------------------------------
+>> Fourth RISC-V PR for QEMU 8.0
+>>
+>> * A triplet of cleanups to the kernel/initrd loader that avoids
+>>   duplication between the various boards.
+>> * OpenSBI has been updated to version 1.2.
+>> * Weiwei Li, Daniel Henrique Barboza, and Liu Zhiwei have been added as
+>>   reviewers.  Thanks for the help!
+>> * A fix for PMP matching to avoid incorrectly appling the default
+>>   permissions on PMP permission violations.
+>> * A cleanup to avoid an unnecessary avoid env_archcpu() in
+>>   cpu_get_tb_cpu_state().
+>> * Fixes for the vector slide instructions to avoid truncating 64-bit
+>>   values (such as doubles) on 32-bit targets.
+>
+> This seems to have caused CI to decide it needs to rerun the
+> 'docker-opensbi' job, which doesn't work:
+> https://gitlab.com/qemu-project/qemu/-/jobs/3808319659
+>
+> I don't understand what exactly is going on here -- Alex,
+> Bin, any ideas?
+>
+> Why do we build the firmware in CI if we have checked in
+> binaries in pc-bios?
+>
+> Should .gitlab-ci.d/opensbi/Dockerfile really still be
+> starting with Ubuntu 18.04 ? That is already older than our
+> set of supported platforms, and falls out of support from
+> Ubuntu in a couple of months.
 
-    $ docker build --cache-from $IMAGE_TAG --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $IMAGE_TAG .gitlab-ci.d/opensbi
-    Step 1/7 : FROM ubuntu:18.04
-    18.04: Pulling from library/ubuntu
-    mediaType in manifest should be 'application/vnd.docker.distribution.manifest.v2+json' not 'application/vnd.oci.image.manifest.v1+json'
+I just sent along a patch 
+<https://lore.kernel.org/r/20230222154938.9201-1-palmer@rivosinc.com/>.  
+I have no idea how to test it in the CI, though...
 
-Since 18.04 hits EOL at the end of April (a few months), let's just move
-to 22.04 now.
+> (.gitlab-ci.d/edk2/Dockerfile is also using 18.04.)
 
-Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
----
-I don't even know how to test this, as I've not touched the CI yet.  The
-hope is that it fixes the failures in
-<https://gitlab.com/qemu-project/qemu/-/jobs/3808319659>.
----
- .gitlab-ci.d/opensbi/Dockerfile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I guess I'd missed this in the original email, I stumbled on that one as 
+well 
+<https://lore.kernel.org/r/20230222155341.10127-1-palmer@rivosinc.com/>.
 
-diff --git a/.gitlab-ci.d/opensbi/Dockerfile b/.gitlab-ci.d/opensbi/Dockerfile
-index 4ba8a4de86..2fbc9a9ee7 100644
---- a/.gitlab-ci.d/opensbi/Dockerfile
-+++ b/.gitlab-ci.d/opensbi/Dockerfile
-@@ -1,7 +1,7 @@
- #
- # Docker image to cross-compile OpenSBI firmware binaries
- #
--FROM ubuntu:18.04
-+FROM ubuntu:22.04
- 
- MAINTAINER Bin Meng <bmeng.cn@gmail.com>
- 
--- 
-2.39.1
-
+>
+> thanks
+> -- PMM
 
