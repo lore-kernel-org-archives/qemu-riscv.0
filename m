@@ -1,71 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pV8Nd-0005pR-77
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Feb 2023 04:59:13 -0500
+	id 1pV8Ya-00021v-Qv
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Feb 2023 05:10:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1pV8Nc-0005p1-2p
- for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 04:59:12 -0500
-Received: from mail-lf1-x12d.google.com ([2a00:1450:4864:20::12d])
+ id 1pV8YV-00021L-Qk
+ for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 05:10:27 -0500
+Received: from mail-lf1-x135.google.com ([2a00:1450:4864:20::135])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1pV8NZ-0000wQ-JX
- for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 04:59:11 -0500
-Received: by mail-lf1-x12d.google.com with SMTP id i9so12947138lfc.6
- for <qemu-riscv@nongnu.org>; Thu, 23 Feb 2023 01:59:08 -0800 (PST)
+ id 1pV8YR-0005TV-KU
+ for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 05:10:27 -0500
+Received: by mail-lf1-x135.google.com with SMTP id s22so13056261lfi.9
+ for <qemu-riscv@nongnu.org>; Thu, 23 Feb 2023 02:10:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=S6hkfktMN3YJ4JwzsOfKiZhjOI0Us65ewusf5lHD5+8=;
- b=K5fmr62zCs9t3Nt2Y9CwF8Iu4vPp+oDfj/tg/CUpJycZrrrfYJfx3URjY1xEgU5FKv
- UEthnnTQJJ9Ajh4T+g8xkk/rA6ztTR7mJqqO9qjBWPu2nFUc/3KpAieimS19MGedq7s9
- WLZX/t+D8h56lk+Nh479+pspRo+UbUKQekhumUy7MBCtXAT6jb+qUiN1Z62u5/fYSD2A
- 0SY/yZQ7VWd5rq6yzlYf8e0UNQf/yOJwNCvp8BUrLrmJH01Atznbw/MyoaxK0Sc+/Mz+
- 4R7l0mKqKvomMqB45rjygdsBlrYbnq3xDE+ukPu0Jsa/eD2lkaIhORinj9fao5GLkOZk
- oYwA==
+ bh=zLy8+Gzb9ExOnatS0PZ2N/i+0/tAZOgnkK169b8Y7Sk=;
+ b=S524msp/M/kr1i3M2f3Y2Gna7r0brCiASpb6oM7dfcuGVrwuMZ+vGvLS5IsZ2cQIyA
+ +d4nE90q0Jku2X2bNSoni7xkbnoMdgjaxYSeTw4Hx7rLZBd15ApSB09kbzvO2Dj1r4mt
+ uVe8x2QkSGVRU84/4k/6oq9c2BKZ0ZOrEVvNWi61WmzL5h7TpXqgvE80GccT0+SSPHc8
+ s4ljFEJRioDSAU/M8bMoBniyc02eztjNWVCaAnVn0fNkuVXVVN0fMm2W35wd8JtMGqVh
+ f4T441WWpmx15C+JIY6SWTHlyA0kr8knhY4iySCXBeQIB3LxpqRyTJOUyuPFLDZoF4Za
+ k6OQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=S6hkfktMN3YJ4JwzsOfKiZhjOI0Us65ewusf5lHD5+8=;
- b=P8vhWqroBBVmCJpDI/X43PbC7tYrTkM9PfmEiwI4Itmu8XPkUNPMhOhArMpP/cwfKO
- nt9zVzlLZ9KdUdzGp3Zvcd3eEBbBQIRkfrG1l72utHW1sgkB1nVfRMbMH+pZbrroas8V
- Kd/xr4t1z6tsvTbFx3YU4bMKjK78mZWSUg65kU7jQIhdunxoajK8erq0VtQuH4wQn8UP
- 9rzRF9FU9EPPztNZNea5i0QhYzQ3JLtzvk89nKhKyDAl0ZlNPlzALegSj7KkX5xyl5l7
- oE4Dp15SwozadIqOXlsZQtq97o069Nk1d8VOgZnDAWs57ft4sRxzyxmsIiOyl+nTuYSn
- Tdrg==
-X-Gm-Message-State: AO0yUKVB+IeP4iC/MNuWXILozppiXLp0TBQ3Pm7HtagpOgZKzIlfKzv+
- ZPJt2u0KzGvHcf+WQNebxo3VLQ4QPVMuT1K+
-X-Google-Smtp-Source: AK7set+6iCfJNfiuaPg+ydYiGgY/VOlBrU5pDZCjRWJUmTrOyNEa4uF3ltl/5xNlWMIo73/2WKnflQ==
-X-Received: by 2002:a05:6512:102c:b0:4dd:9ddc:4465 with SMTP id
- r12-20020a056512102c00b004dd9ddc4465mr1879492lfr.55.1677146347135; 
- Thu, 23 Feb 2023 01:59:07 -0800 (PST)
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com.
- [209.85.167.54]) by smtp.gmail.com with ESMTPSA id
- m6-20020ac24ac6000000b004db0a7ce483sm283907lfp.162.2023.02.23.01.59.06
+ bh=zLy8+Gzb9ExOnatS0PZ2N/i+0/tAZOgnkK169b8Y7Sk=;
+ b=yjiE6f1XJcD41DBij6PUieqKda4oesTQ4NdzlfWQc3gfJKtza9XcMyswRGpdaT/3eG
+ 8QUVqle9+GadJsOZ4SvkN1UhDmnE7/i+c+HaMpCUt8405pfniveRoVJcfcnkpaS9vsC9
+ QUlmujU23DuEnHluRIoJn2N7h0H1B8Fxcgu6+QLLm5Xr/d1byj/9LxkCOJLxlDpQ+cws
+ 9aFgQAQpK3VL8V4ymW7mt7HsPkevBKKTy+qdePfI7f4+C2TcQUxS4gK+R+LHTzaursFS
+ /noEC+2TN0TVkJ+LzzU/4PAx6jKUI0eXG3+0lFxZcI2AywfrqPhtfegbbEIe0M23Z2NA
+ dAIg==
+X-Gm-Message-State: AO0yUKUPAZ9o3drY0UE/nr/AlFB29k37zxbgfB9K84nF1FzuKXdjHjvI
+ yaEJh2UT79XV1iIn/Le24Qx8pEOC2qRphFBY0YluMF37LIiHDK2lvquXRFmuPBrQ2HFUy+AgX5z
+ +Qk5XdvMMN1+yDeGoauOE456k7zXxBpM0w4ExZPOHeNRY3x6aDrRX5W5fdmlEmEZtZhH7FPba+4
+ oZ2g==
+X-Google-Smtp-Source: AK7set/JIonbnnuBU880JYwnq1nJ5uOOkXJ5NBpWv+yMhDH+FzvsbFtyI6Fku8PjBpHMB5inN68KcA==
+X-Received: by 2002:ac2:532f:0:b0:4d1:331:f6e9 with SMTP id
+ f15-20020ac2532f000000b004d10331f6e9mr3616771lfh.48.1677147021333; 
+ Thu, 23 Feb 2023 02:10:21 -0800 (PST)
+Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com.
+ [209.85.208.176]) by smtp.gmail.com with ESMTPSA id
+ l26-20020ac2555a000000b004cb45148027sm1269021lfk.203.2023.02.23.02.10.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Feb 2023 01:59:06 -0800 (PST)
-Received: by mail-lf1-f54.google.com with SMTP id g17so388761lfv.4;
- Thu, 23 Feb 2023 01:59:06 -0800 (PST)
-X-Received: by 2002:ac2:46fb:0:b0:4dd:a4c5:2b43 with SMTP id
- q27-20020ac246fb000000b004dda4c52b43mr217355lfo.9.1677146346055; Thu, 23 Feb
- 2023 01:59:06 -0800 (PST)
+ Thu, 23 Feb 2023 02:10:20 -0800 (PST)
+Received: by mail-lj1-f176.google.com with SMTP id y14so3190093ljq.4;
+ Thu, 23 Feb 2023 02:10:20 -0800 (PST)
+X-Received: by 2002:a2e:a497:0:b0:295:945d:b381 with SMTP id
+ h23-20020a2ea497000000b00295945db381mr2051354lji.7.1677147020141; Thu, 23 Feb
+ 2023 02:10:20 -0800 (PST)
 MIME-Version: 1.0
-References: <20230221184525.140704-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20230221184525.140704-1-dbarboza@ventanamicro.com>
+References: <20230221091009.36545-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230221091009.36545-1-liweiwei@iscas.ac.cn>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Thu, 23 Feb 2023 17:58:54 +0800
-X-Gmail-Original-Message-ID: <CANzO1D1yDBETrKf_9ap-r7=fEgVLs+dB9asnxtUhToxBY6Wf1Q@mail.gmail.com>
-Message-ID: <CANzO1D1yDBETrKf_9ap-r7=fEgVLs+dB9asnxtUhToxBY6Wf1Q@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv/vector_helper.c: create
- vext_set_tail_elems_1s()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com
-Content-Type: multipart/alternative; boundary="000000000000316d6d05f55b10c3"
-Received-SPF: pass client-ip=2a00:1450:4864:20::12d;
- envelope-from=frank.chang@sifive.com; helo=mail-lf1-x12d.google.com
+Date: Thu, 23 Feb 2023 18:10:08 +0800
+X-Gmail-Original-Message-ID: <CANzO1D14pHkKpjk5XHgrxhiZzp8uowWkfq_3LP1mcg4MGOProA@mail.gmail.com>
+Message-ID: <CANzO1D14pHkKpjk5XHgrxhiZzp8uowWkfq_3LP1mcg4MGOProA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Add support for Zicond extension
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+Content-Type: multipart/alternative; boundary="0000000000005f2ac105f55b3873"
+Received-SPF: pass client-ip=2a00:1450:4864:20::135;
+ envelope-from=frank.chang@sifive.com; helo=mail-lf1-x135.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -85,444 +87,340 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2023 09:59:12 -0000
+X-List-Received-Date: Thu, 23 Feb 2023 10:10:28 -0000
 
---000000000000316d6d05f55b10c3
+--0000000000005f2ac105f55b3873
 Content-Type: text/plain; charset="UTF-8"
 
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-On Wed, Feb 22, 2023 at 2:46 AM Daniel Henrique Barboza <
-dbarboza@ventanamicro.com> wrote:
+On Tue, Feb 21, 2023 at 5:10 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 
-> Commit 752614cab8e6 ("target/riscv: rvv: Add tail agnostic for vector
-> load / store instructions") added code to set the tail elements to 1 in
-> the end of vext_ldst_stride(), vext_ldst_us(), vext_ldst_index() and
-> vext_ldff(). Aside from a env->vl versus an evl value being used in the
-> first loop, the code is being repeated 4 times.
+> The spec can be found in https://github.com/riscv/riscv-zicond.
+> Two instructions are added:
+>  - czero.eqz: Moves zero to a register rd, if the condition rs2 is
+>    equal to zero, otherwise moves rs1 to rd.
+>  - czero.nez: Moves zero to a register rd, if the condition rs2 is
+>    nonzero, otherwise moves rs1 to rd.
 >
-> Create a helper to avoid code repetition in all those functions.
-> Arguments that are used in the callers (nf, esz and max_elems) are
-> passed as arguments. All other values are being derived inside the
-> helper.
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 > ---
->  target/riscv/vector_helper.c | 86 +++++++++++++-----------------------
->  1 file changed, 30 insertions(+), 56 deletions(-)
+>  target/riscv/cpu.c                           |  2 +
+>  target/riscv/cpu.h                           |  1 +
+>  target/riscv/insn32.decode                   |  4 ++
+>  target/riscv/insn_trans/trans_rvzicond.c.inc | 49 ++++++++++++++++++++
+>  target/riscv/translate.c                     |  1 +
+>  5 files changed, 57 insertions(+)
+>  create mode 100644 target/riscv/insn_trans/trans_rvzicond.c.inc
 >
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 00de879787..7d2e3978f1 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -267,6 +267,28 @@ GEN_VEXT_ST_ELEM(ste_h, int16_t, H2, stw)
->  GEN_VEXT_ST_ELEM(ste_w, int32_t, H4, stl)
->  GEN_VEXT_ST_ELEM(ste_d, int64_t, H8, stq)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 0dd2f0c753..80b92930ae 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -74,6 +74,7 @@ struct isa_ext_data {
+>  static const struct isa_ext_data isa_edata_arr[] = {
+>      ISA_EXT_DATA_ENTRY(h, false, PRIV_VERSION_1_12_0, ext_h),
+>      ISA_EXT_DATA_ENTRY(v, false, PRIV_VERSION_1_12_0, ext_v),
+> +    ISA_EXT_DATA_ENTRY(zicond, true, PRIV_VERSION_1_12_0, ext_zicond),
+>      ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ext_icsr),
+>      ISA_EXT_DATA_ENTRY(zifencei, true, PRIV_VERSION_1_10_0, ext_ifencei),
+>      ISA_EXT_DATA_ENTRY(zihintpause, true, PRIV_VERSION_1_10_0,
+> ext_zihintpause),
+> @@ -1143,6 +1144,7 @@ static Property riscv_cpu_extensions[] = {
+>      DEFINE_PROP_BOOL("xventanacondops", RISCVCPU,
+> cfg.ext_XVentanaCondOps, false),
 >
-> +static void vext_set_tail_elems_1s(CPURISCVState *env, target_ulong vl,
-> +                                   void *vd, uint32_t desc, uint32_t nf,
-> +                                   uint32_t esz, uint32_t max_elems)
+>      /* These are experimental so mark with 'x-' */
+> +    DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
+>      DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+>      /* ePMP 0.9.3 */
+>      DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 7128438d8e..81b7c92e7a 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -447,6 +447,7 @@ struct RISCVCPUConfig {
+>      bool ext_zkt;
+>      bool ext_ifencei;
+>      bool ext_icsr;
+> +    bool ext_zicond;
+>      bool ext_zihintpause;
+>      bool ext_smstateen;
+>      bool ext_sstc;
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index b7e7613ea2..fb537e922e 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -890,3 +890,7 @@ sm3p1       00 01000 01001 ..... 001 ..... 0010011 @r2
+>  # *** RV32 Zksed Standard Extension ***
+>  sm4ed       .. 11000 ..... ..... 000 ..... 0110011 @k_aes
+>  sm4ks       .. 11010 ..... ..... 000 ..... 0110011 @k_aes
+> +
+> +# *** RV32 Zicond Standard Extension ***
+> +czero_eqz   0000111  ..... ..... 101 ..... 0110011 @r
+> +czero_nez   0000111  ..... ..... 111 ..... 0110011 @r
+> diff --git a/target/riscv/insn_trans/trans_rvzicond.c.inc
+> b/target/riscv/insn_trans/trans_rvzicond.c.inc
+> new file mode 100644
+> index 0000000000..645260164e
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_rvzicond.c.inc
+> @@ -0,0 +1,49 @@
+> +/*
+> + * RISC-V translation routines for the Zicond Standard Extension.
+> + *
+> + * Copyright (c) 2020-2023 PLCT Lab
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+> for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License
+> along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#define REQUIRE_ZICOND(ctx) do {          \
+> +    if (!ctx->cfg_ptr->ext_zicond) {      \
+> +        return false;                     \
+> +    }                                     \
+> +} while (0)
+> +
+> +static bool trans_czero_eqz(DisasContext *ctx, arg_czero_eqz *a)
 > +{
-> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-> +    uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-> +    uint32_t vta = vext_vta(desc);
-> +    uint32_t registers_used;
-> +    int k;
+> +    REQUIRE_ZICOND(ctx);
 > +
-> +    for (k = 0; k < nf; ++k) {
-> +        vext_set_elems_1s(vd, vta, (k * max_elems + vl) * esz,
-> +                          (k * max_elems + max_elems) * esz);
-> +    }
+> +    TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
+> +    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
 > +
-> +    if (nf * max_elems % total_elems != 0) {
-> +        registers_used = ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-> +        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-> +                          registers_used * vlenb);
-> +    }
+> +    tcg_gen_movcond_tl(TCG_COND_EQ, dest, src2, ctx->zero, ctx->zero,
+> src1);
+> +    gen_set_gpr(ctx, a->rd, dest);
+> +    return true;
 > +}
 > +
->  /*
->   *** stride: access vector element from strided memory
->   */
-> @@ -281,8 +303,6 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
->      uint32_t nf = vext_nf(desc);
->      uint32_t max_elems = vext_max_elems(desc, log2_esz);
->      uint32_t esz = 1 << log2_esz;
-> -    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-> -    uint32_t vta = vext_vta(desc);
->      uint32_t vma = vext_vma(desc);
->
->      for (i = env->vstart; i < env->vl; i++, env->vstart++) {
-> @@ -301,18 +321,8 @@ vext_ldst_stride(void *vd, void *v0, target_ulong
-> base,
->          }
->      }
->      env->vstart = 0;
-> -    /* set tail elements to 1s */
-> -    for (k = 0; k < nf; ++k) {
-> -        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
-> -                          (k * max_elems + max_elems) * esz);
-> -    }
-> -    if (nf * max_elems % total_elems != 0) {
-> -        uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-> -        uint32_t registers_used =
-> -            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-> -        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-> -                          registers_used * vlenb);
-> -    }
+> +static bool trans_czero_nez(DisasContext *ctx, arg_czero_nez *a)
+> +{
+> +    REQUIRE_ZICOND(ctx);
 > +
-> +    vext_set_tail_elems_1s(env, env->vl, vd, desc, nf, esz, max_elems);
->  }
->
->  #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)                        \
-> @@ -359,8 +369,6 @@ vext_ldst_us(void *vd, target_ulong base,
-> CPURISCVState *env, uint32_t desc,
->      uint32_t nf = vext_nf(desc);
->      uint32_t max_elems = vext_max_elems(desc, log2_esz);
->      uint32_t esz = 1 << log2_esz;
-> -    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-> -    uint32_t vta = vext_vta(desc);
->
->      /* load bytes from guest memory */
->      for (i = env->vstart; i < evl; i++, env->vstart++) {
-> @@ -372,18 +380,8 @@ vext_ldst_us(void *vd, target_ulong base,
-> CPURISCVState *env, uint32_t desc,
->          }
->      }
->      env->vstart = 0;
-> -    /* set tail elements to 1s */
-> -    for (k = 0; k < nf; ++k) {
-> -        vext_set_elems_1s(vd, vta, (k * max_elems + evl) * esz,
-> -                          (k * max_elems + max_elems) * esz);
-> -    }
-> -    if (nf * max_elems % total_elems != 0) {
-> -        uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-> -        uint32_t registers_used =
-> -            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-> -        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-> -                          registers_used * vlenb);
-> -    }
+> +    TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
+> +    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
 > +
-> +    vext_set_tail_elems_1s(env, evl, vd, desc, nf, esz, max_elems);
->  }
->
->  /*
-> @@ -484,8 +482,6 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
->      uint32_t vm = vext_vm(desc);
->      uint32_t max_elems = vext_max_elems(desc, log2_esz);
->      uint32_t esz = 1 << log2_esz;
-> -    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-> -    uint32_t vta = vext_vta(desc);
->      uint32_t vma = vext_vma(desc);
->
->      /* load bytes from guest memory */
-> @@ -505,18 +501,8 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
->          }
->      }
->      env->vstart = 0;
-> -    /* set tail elements to 1s */
-> -    for (k = 0; k < nf; ++k) {
-> -        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
-> -                          (k * max_elems + max_elems) * esz);
-> -    }
-> -    if (nf * max_elems % total_elems != 0) {
-> -        uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-> -        uint32_t registers_used =
-> -            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-> -        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-> -                          registers_used * vlenb);
-> -    }
-> +
-> +    vext_set_tail_elems_1s(env, env->vl, vd, desc, nf, esz, max_elems);
->  }
->
->  #define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN, LOAD_FN)
->   \
-> @@ -585,8 +571,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,
->      uint32_t vm = vext_vm(desc);
->      uint32_t max_elems = vext_max_elems(desc, log2_esz);
->      uint32_t esz = 1 << log2_esz;
-> -    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-> -    uint32_t vta = vext_vta(desc);
->      uint32_t vma = vext_vma(desc);
->      target_ulong addr, offset, remain;
->
-> @@ -647,18 +631,8 @@ ProbeSuccess:
->          }
->      }
->      env->vstart = 0;
-> -    /* set tail elements to 1s */
-> -    for (k = 0; k < nf; ++k) {
-> -        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
-> -                          (k * max_elems + max_elems) * esz);
-> -    }
-> -    if (nf * max_elems % total_elems != 0) {
-> -        uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-> -        uint32_t registers_used =
-> -            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-> -        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-> -                          registers_used * vlenb);
-> -    }
-> +
-> +    vext_set_tail_elems_1s(env, env->vl, vd, desc, nf, esz, max_elems);
->  }
->
->  #define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN)               \
+> +    tcg_gen_movcond_tl(TCG_COND_NE, dest, src2, ctx->zero, ctx->zero,
+> src1);
+> +    gen_set_gpr(ctx, a->rd, dest);
+> +    return true;
+> +}
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 772f9d7973..6e65c6afca 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -1103,6 +1103,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase,
+> target_ulong pc)
+>  #include "insn_trans/trans_rvh.c.inc"
+>  #include "insn_trans/trans_rvv.c.inc"
+>  #include "insn_trans/trans_rvb.c.inc"
+> +#include "insn_trans/trans_rvzicond.c.inc"
+>  #include "insn_trans/trans_rvzawrs.c.inc"
+>  #include "insn_trans/trans_rvzfh.c.inc"
+>  #include "insn_trans/trans_rvk.c.inc"
 > --
-> 2.39.2
+> 2.25.1
 >
 >
 >
 
---000000000000316d6d05f55b10c3
+--0000000000005f2ac105f55b3873
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr">Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang=
 @sifive.com">frank.chang@sifive.com</a>&gt;</div><br><div class=3D"gmail_qu=
-ote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Feb 22, 2023 at 2:46 AM =
-Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@ventanamicro.com">db=
-arboza@ventanamicro.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex">Commit 752614cab8e6 (&quot;target/riscv: rvv: Add ta=
-il agnostic for vector<br>
-load / store instructions&quot;) added code to set the tail elements to 1 i=
-n<br>
-the end of vext_ldst_stride(), vext_ldst_us(), vext_ldst_index() and<br>
-vext_ldff(). Aside from a env-&gt;vl versus an evl value being used in the<=
-br>
-first loop, the code is being repeated 4 times.<br>
+ote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Feb 21, 2023 at 5:10 PM =
+Weiwei Li &lt;<a href=3D"mailto:liweiwei@iscas.ac.cn">liweiwei@iscas.ac.cn<=
+/a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">T=
+he spec can be found in <a href=3D"https://github.com/riscv/riscv-zicond" r=
+el=3D"noreferrer" target=3D"_blank">https://github.com/riscv/riscv-zicond</=
+a>.<br>
+Two instructions are added:<br>
+=C2=A0- czero.eqz: Moves zero to a register rd, if the condition rs2 is<br>
+=C2=A0 =C2=A0equal to zero, otherwise moves rs1 to rd.<br>
+=C2=A0- czero.nez: Moves zero to a register rd, if the condition rs2 is<br>
+=C2=A0 =C2=A0nonzero, otherwise moves rs1 to rd.<br>
 <br>
-Create a helper to avoid code repetition in all those functions.<br>
-Arguments that are used in the callers (nf, esz and max_elems) are<br>
-passed as arguments. All other values are being derived inside the<br>
-helper.<br>
-<br>
-Signed-off-by: Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@venta=
-namicro.com" target=3D"_blank">dbarboza@ventanamicro.com</a>&gt;<br>
+Signed-off-by: Weiwei Li &lt;<a href=3D"mailto:liweiwei@iscas.ac.cn" target=
+=3D"_blank">liweiwei@iscas.ac.cn</a>&gt;<br>
+Signed-off-by: Junqiang Wang &lt;<a href=3D"mailto:wangjunqiang@iscas.ac.cn=
+" target=3D"_blank">wangjunqiang@iscas.ac.cn</a>&gt;<br>
 ---<br>
-=C2=A0target/riscv/vector_helper.c | 86 +++++++++++++----------------------=
--<br>
-=C2=A01 file changed, 30 insertions(+), 56 deletions(-)<br>
+=C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 2 +<br>
+=C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 1 +<br>
+=C2=A0target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 4 ++<br>
+=C2=A0target/riscv/insn_trans/trans_rvzicond.c.inc | 49 +++++++++++++++++++=
++<br>
+=C2=A0target/riscv/translate.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 1 +<br>
+=C2=A05 files changed, 57 insertions(+)<br>
+=C2=A0create mode 100644 target/riscv/insn_trans/trans_rvzicond.c.inc<br>
 <br>
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c<br=
->
-index 00de879787..7d2e3978f1 100644<br>
---- a/target/riscv/vector_helper.c<br>
-+++ b/target/riscv/vector_helper.c<br>
-@@ -267,6 +267,28 @@ GEN_VEXT_ST_ELEM(ste_h, int16_t, H2, stw)<br>
-=C2=A0GEN_VEXT_ST_ELEM(ste_w, int32_t, H4, stl)<br>
-=C2=A0GEN_VEXT_ST_ELEM(ste_d, int64_t, H8, stq)<br>
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
+index 0dd2f0c753..80b92930ae 100644<br>
+--- a/target/riscv/cpu.c<br>
++++ b/target/riscv/cpu.c<br>
+@@ -74,6 +74,7 @@ struct isa_ext_data {<br>
+=C2=A0static const struct isa_ext_data isa_edata_arr[] =3D {<br>
+=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(h, false, PRIV_VERSION_1_12_0, ext_h=
+),<br>
+=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(v, false, PRIV_VERSION_1_12_0, ext_v=
+),<br>
++=C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(zicond, true, PRIV_VERSION_1_12_0, ext_zi=
+cond),<br>
+=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ex=
+t_icsr),<br>
+=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zifencei, true, PRIV_VERSION_1_10_0,=
+ ext_ifencei),<br>
+=C2=A0 =C2=A0 =C2=A0ISA_EXT_DATA_ENTRY(zihintpause, true, PRIV_VERSION_1_10=
+_0, ext_zihintpause),<br>
+@@ -1143,6 +1144,7 @@ static Property riscv_cpu_extensions[] =3D {<br>
+=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_BOOL(&quot;xventanacondops&quot;, RISCVCPU,=
+ cfg.ext_XVentanaCondOps, false),<br>
 <br>
-+static void vext_set_tail_elems_1s(CPURISCVState *env, target_ulong vl,<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0void *vd, uint32_t desc=
-, uint32_t nf,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uint32_t esz, uint32_t =
-max_elems)<br>
+=C2=A0 =C2=A0 =C2=A0/* These are experimental so mark with &#39;x-&#39; */<=
+br>
++=C2=A0 =C2=A0 DEFINE_PROP_BOOL(&quot;x-zicond&quot;, RISCVCPU, cfg.ext_zic=
+ond, false),<br>
+=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_BOOL(&quot;x-j&quot;, RISCVCPU, cfg.ext_j, =
+false),<br>
+=C2=A0 =C2=A0 =C2=A0/* ePMP 0.9.3 */<br>
+=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_BOOL(&quot;x-epmp&quot;, RISCVCPU, cfg.epmp=
+, false),<br>
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
+index 7128438d8e..81b7c92e7a 100644<br>
+--- a/target/riscv/cpu.h<br>
++++ b/target/riscv/cpu.h<br>
+@@ -447,6 +447,7 @@ struct RISCVCPUConfig {<br>
+=C2=A0 =C2=A0 =C2=A0bool ext_zkt;<br>
+=C2=A0 =C2=A0 =C2=A0bool ext_ifencei;<br>
+=C2=A0 =C2=A0 =C2=A0bool ext_icsr;<br>
++=C2=A0 =C2=A0 bool ext_zicond;<br>
+=C2=A0 =C2=A0 =C2=A0bool ext_zihintpause;<br>
+=C2=A0 =C2=A0 =C2=A0bool ext_smstateen;<br>
+=C2=A0 =C2=A0 =C2=A0bool ext_sstc;<br>
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode<br>
+index b7e7613ea2..fb537e922e 100644<br>
+--- a/target/riscv/insn32.decode<br>
++++ b/target/riscv/insn32.decode<br>
+@@ -890,3 +890,7 @@ sm3p1=C2=A0 =C2=A0 =C2=A0 =C2=A000 01000 01001 ..... 00=
+1 ..... 0010011 @r2<br>
+=C2=A0# *** RV32 Zksed Standard Extension ***<br>
+=C2=A0sm4ed=C2=A0 =C2=A0 =C2=A0 =C2=A0.. 11000 ..... ..... 000 ..... 011001=
+1 @k_aes<br>
+=C2=A0sm4ks=C2=A0 =C2=A0 =C2=A0 =C2=A0.. 11010 ..... ..... 000 ..... 011001=
+1 @k_aes<br>
++<br>
++# *** RV32 Zicond Standard Extension ***<br>
++czero_eqz=C2=A0 =C2=A00000111=C2=A0 ..... ..... 101 ..... 0110011 @r<br>
++czero_nez=C2=A0 =C2=A00000111=C2=A0 ..... ..... 111 ..... 0110011 @r<br>
+diff --git a/target/riscv/insn_trans/trans_rvzicond.c.inc b/target/riscv/in=
+sn_trans/trans_rvzicond.c.inc<br>
+new file mode 100644<br>
+index 0000000000..645260164e<br>
+--- /dev/null<br>
++++ b/target/riscv/insn_trans/trans_rvzicond.c.inc<br>
+@@ -0,0 +1,49 @@<br>
++/*<br>
++ * RISC-V translation routines for the Zicond Standard Extension.<br>
++ *<br>
++ * Copyright (c) 2020-2023 PLCT Lab<br>
++ *<br>
++ * This program is free software; you can redistribute it and/or modify it=
+<br>
++ * under the terms and conditions of the GNU General Public License,<br>
++ * version 2 or later, as published by the Free Software Foundation.<br>
++ *<br>
++ * This program is distributed in the hope it will be useful, but WITHOUT<=
+br>
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or<b=
+r>
++ * FITNESS FOR A PARTICULAR PURPOSE.=C2=A0 See the GNU General Public Lice=
+nse for<br>
++ * more details.<br>
++ *<br>
++ * You should have received a copy of the GNU General Public License along=
+ with<br>
++ * this program.=C2=A0 If not, see &lt;<a href=3D"http://www.gnu.org/licen=
+ses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.org/licenses/</a>=
+&gt;.<br>
++ */<br>
++<br>
++#define REQUIRE_ZICOND(ctx) do {=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
++=C2=A0 =C2=A0 if (!ctx-&gt;cfg_ptr-&gt;ext_zicond) {=C2=A0 =C2=A0 =C2=A0 \=
+<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return false;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 }=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<=
+br>
++} while (0)<br>
++<br>
++static bool trans_czero_eqz(DisasContext *ctx, arg_czero_eqz *a)<br>
 +{<br>
-+=C2=A0 =C2=A0 uint32_t total_elems =3D vext_get_total_elems(env, desc, esz=
-);<br>
-+=C2=A0 =C2=A0 uint32_t vlenb =3D env_archcpu(env)-&gt;cfg.vlen &gt;&gt; 3;=
-<br>
-+=C2=A0 =C2=A0 uint32_t vta =3D vext_vta(desc);<br>
-+=C2=A0 =C2=A0 uint32_t registers_used;<br>
-+=C2=A0 =C2=A0 int k;<br>
++=C2=A0 =C2=A0 REQUIRE_ZICOND(ctx);<br>
 +<br>
-+=C2=A0 =C2=A0 for (k =3D 0; k &lt; nf; ++k) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 vext_set_elems_1s(vd, vta, (k * max_elems + vl=
-) * esz,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 (k * max_elems + max_elems) * esz);<br>
-+=C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 TCGv dest =3D dest_gpr(ctx, a-&gt;rd);<br>
++=C2=A0 =C2=A0 TCGv src1 =3D get_gpr(ctx, a-&gt;rs1, EXT_NONE);<br>
++=C2=A0 =C2=A0 TCGv src2 =3D get_gpr(ctx, a-&gt;rs2, EXT_NONE);<br>
 +<br>
-+=C2=A0 =C2=A0 if (nf * max_elems % total_elems !=3D 0) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 registers_used =3D ((nf * max_elems) * esz + (=
-vlenb - 1)) / vlenb;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 vext_set_elems_1s(vd, vta, (nf * max_elems) * =
-esz,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 registers_used * vlenb);<br>
-+=C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 tcg_gen_movcond_tl(TCG_COND_EQ, dest, src2, ctx-&gt;zero, ct=
+x-&gt;zero, src1);<br>
++=C2=A0 =C2=A0 gen_set_gpr(ctx, a-&gt;rd, dest);<br>
++=C2=A0 =C2=A0 return true;<br>
 +}<br>
 +<br>
-=C2=A0/*<br>
-=C2=A0 *** stride: access vector element from strided memory<br>
-=C2=A0 */<br>
-@@ -281,8 +303,6 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,=
-<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t nf =3D vext_nf(desc);<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t max_elems =3D vext_max_elems(desc, log2_esz);<=
-br>
-=C2=A0 =C2=A0 =C2=A0uint32_t esz =3D 1 &lt;&lt; log2_esz;<br>
--=C2=A0 =C2=A0 uint32_t total_elems =3D vext_get_total_elems(env, desc, esz=
-);<br>
--=C2=A0 =C2=A0 uint32_t vta =3D vext_vta(desc);<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t vma =3D vext_vma(desc);<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0for (i =3D env-&gt;vstart; i &lt; env-&gt;vl; i++, env-=
-&gt;vstart++) {<br>
-@@ -301,18 +321,8 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base=
-,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0env-&gt;vstart =3D 0;<br>
--=C2=A0 =C2=A0 /* set tail elements to 1s */<br>
--=C2=A0 =C2=A0 for (k =3D 0; k &lt; nf; ++k) {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 vext_set_elems_1s(vd, vta, (k * max_elems + en=
-v-&gt;vl) * esz,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 (k * max_elems + max_elems) * esz);<br>
--=C2=A0 =C2=A0 }<br>
--=C2=A0 =C2=A0 if (nf * max_elems % total_elems !=3D 0) {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t vlenb =3D env_archcpu(env)-&gt;cfg.vl=
-en &gt;&gt; 3;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t registers_used =3D<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ((nf * max_elems) * esz + (vlenb=
- - 1)) / vlenb;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 vext_set_elems_1s(vd, vta, (nf * max_elems) * =
-esz,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 registers_used * vlenb);<br>
--=C2=A0 =C2=A0 }<br>
++static bool trans_czero_nez(DisasContext *ctx, arg_czero_nez *a)<br>
++{<br>
++=C2=A0 =C2=A0 REQUIRE_ZICOND(ctx);<br>
 +<br>
-+=C2=A0 =C2=A0 vext_set_tail_elems_1s(env, env-&gt;vl, vd, desc, nf, esz, m=
-ax_elems);<br>
-=C2=A0}<br>
-<br>
-=C2=A0#define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
-@@ -359,8 +369,6 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState=
- *env, uint32_t desc,<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t nf =3D vext_nf(desc);<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t max_elems =3D vext_max_elems(desc, log2_esz);<=
-br>
-=C2=A0 =C2=A0 =C2=A0uint32_t esz =3D 1 &lt;&lt; log2_esz;<br>
--=C2=A0 =C2=A0 uint32_t total_elems =3D vext_get_total_elems(env, desc, esz=
-);<br>
--=C2=A0 =C2=A0 uint32_t vta =3D vext_vta(desc);<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0/* load bytes from guest memory */<br>
-=C2=A0 =C2=A0 =C2=A0for (i =3D env-&gt;vstart; i &lt; evl; i++, env-&gt;vst=
-art++) {<br>
-@@ -372,18 +380,8 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVStat=
-e *env, uint32_t desc,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0env-&gt;vstart =3D 0;<br>
--=C2=A0 =C2=A0 /* set tail elements to 1s */<br>
--=C2=A0 =C2=A0 for (k =3D 0; k &lt; nf; ++k) {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 vext_set_elems_1s(vd, vta, (k * max_elems + ev=
-l) * esz,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 (k * max_elems + max_elems) * esz);<br>
--=C2=A0 =C2=A0 }<br>
--=C2=A0 =C2=A0 if (nf * max_elems % total_elems !=3D 0) {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t vlenb =3D env_archcpu(env)-&gt;cfg.vl=
-en &gt;&gt; 3;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t registers_used =3D<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ((nf * max_elems) * esz + (vlenb=
- - 1)) / vlenb;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 vext_set_elems_1s(vd, vta, (nf * max_elems) * =
-esz,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 registers_used * vlenb);<br>
--=C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 TCGv dest =3D dest_gpr(ctx, a-&gt;rd);<br>
++=C2=A0 =C2=A0 TCGv src1 =3D get_gpr(ctx, a-&gt;rs1, EXT_NONE);<br>
++=C2=A0 =C2=A0 TCGv src2 =3D get_gpr(ctx, a-&gt;rs2, EXT_NONE);<br>
 +<br>
-+=C2=A0 =C2=A0 vext_set_tail_elems_1s(env, evl, vd, desc, nf, esz, max_elem=
-s);<br>
-=C2=A0}<br>
-<br>
-=C2=A0/*<br>
-@@ -484,8 +482,6 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,<=
-br>
-=C2=A0 =C2=A0 =C2=A0uint32_t vm =3D vext_vm(desc);<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t max_elems =3D vext_max_elems(desc, log2_esz);<=
-br>
-=C2=A0 =C2=A0 =C2=A0uint32_t esz =3D 1 &lt;&lt; log2_esz;<br>
--=C2=A0 =C2=A0 uint32_t total_elems =3D vext_get_total_elems(env, desc, esz=
-);<br>
--=C2=A0 =C2=A0 uint32_t vta =3D vext_vta(desc);<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t vma =3D vext_vma(desc);<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0/* load bytes from guest memory */<br>
-@@ -505,18 +501,8 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,=
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0env-&gt;vstart =3D 0;<br>
--=C2=A0 =C2=A0 /* set tail elements to 1s */<br>
--=C2=A0 =C2=A0 for (k =3D 0; k &lt; nf; ++k) {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 vext_set_elems_1s(vd, vta, (k * max_elems + en=
-v-&gt;vl) * esz,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 (k * max_elems + max_elems) * esz);<br>
--=C2=A0 =C2=A0 }<br>
--=C2=A0 =C2=A0 if (nf * max_elems % total_elems !=3D 0) {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t vlenb =3D env_archcpu(env)-&gt;cfg.vl=
-en &gt;&gt; 3;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t registers_used =3D<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ((nf * max_elems) * esz + (vlenb=
- - 1)) / vlenb;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 vext_set_elems_1s(vd, vta, (nf * max_elems) * =
-esz,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 registers_used * vlenb);<br>
--=C2=A0 =C2=A0 }<br>
-+<br>
-+=C2=A0 =C2=A0 vext_set_tail_elems_1s(env, env-&gt;vl, vd, desc, nf, esz, m=
-ax_elems);<br>
-=C2=A0}<br>
-<br>
-=C2=A0#define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN, LOAD_FN)=C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
-@@ -585,8 +571,6 @@ vext_ldff(void *vd, void *v0, target_ulong base,<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t vm =3D vext_vm(desc);<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t max_elems =3D vext_max_elems(desc, log2_esz);<=
-br>
-=C2=A0 =C2=A0 =C2=A0uint32_t esz =3D 1 &lt;&lt; log2_esz;<br>
--=C2=A0 =C2=A0 uint32_t total_elems =3D vext_get_total_elems(env, desc, esz=
-);<br>
--=C2=A0 =C2=A0 uint32_t vta =3D vext_vta(desc);<br>
-=C2=A0 =C2=A0 =C2=A0uint32_t vma =3D vext_vma(desc);<br>
-=C2=A0 =C2=A0 =C2=A0target_ulong addr, offset, remain;<br>
-<br>
-@@ -647,18 +631,8 @@ ProbeSuccess:<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0env-&gt;vstart =3D 0;<br>
--=C2=A0 =C2=A0 /* set tail elements to 1s */<br>
--=C2=A0 =C2=A0 for (k =3D 0; k &lt; nf; ++k) {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 vext_set_elems_1s(vd, vta, (k * max_elems + en=
-v-&gt;vl) * esz,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 (k * max_elems + max_elems) * esz);<br>
--=C2=A0 =C2=A0 }<br>
--=C2=A0 =C2=A0 if (nf * max_elems % total_elems !=3D 0) {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t vlenb =3D env_archcpu(env)-&gt;cfg.vl=
-en &gt;&gt; 3;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t registers_used =3D<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ((nf * max_elems) * esz + (vlenb=
- - 1)) / vlenb;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 vext_set_elems_1s(vd, vta, (nf * max_elems) * =
-esz,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 registers_used * vlenb);<br>
--=C2=A0 =C2=A0 }<br>
-+<br>
-+=C2=A0 =C2=A0 vext_set_tail_elems_1s(env, env-&gt;vl, vd, desc, nf, esz, m=
-ax_elems);<br>
-=C2=A0}<br>
-<br>
-=C2=A0#define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN)=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 tcg_gen_movcond_tl(TCG_COND_NE, dest, src2, ctx-&gt;zero, ct=
+x-&gt;zero, src1);<br>
++=C2=A0 =C2=A0 gen_set_gpr(ctx, a-&gt;rd, dest);<br>
++=C2=A0 =C2=A0 return true;<br>
++}<br>
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c<br>
+index 772f9d7973..6e65c6afca 100644<br>
+--- a/target/riscv/translate.c<br>
++++ b/target/riscv/translate.c<br>
+@@ -1103,6 +1103,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, t=
+arget_ulong pc)<br>
+=C2=A0#include &quot;insn_trans/trans_rvh.c.inc&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_rvv.c.inc&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_rvb.c.inc&quot;<br>
++#include &quot;insn_trans/trans_rvzicond.c.inc&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_rvzawrs.c.inc&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_rvzfh.c.inc&quot;<br>
+=C2=A0#include &quot;insn_trans/trans_rvk.c.inc&quot;<br>
 -- <br>
-2.39.2<br>
+2.25.1<br>
 <br>
 <br>
 </blockquote></div>
 
---000000000000316d6d05f55b10c3--
+--0000000000005f2ac105f55b3873--
 
