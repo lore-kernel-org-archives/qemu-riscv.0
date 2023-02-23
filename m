@@ -1,71 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVKPL-0008JG-Ve
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Feb 2023 17:49:47 -0500
+	id 1pVLGR-0002jy-VC
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Feb 2023 18:44:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1pVKPJ-0008Gk-T4
- for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 17:49:45 -0500
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pVLGP-0002iA-Nl
+ for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 18:44:38 -0500
+Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1pVKPH-0007q7-Mh
- for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 17:49:45 -0500
-Received: by mail-pl1-x631.google.com with SMTP id u14so10882343ple.7
- for <qemu-riscv@nongnu.org>; Thu, 23 Feb 2023 14:49:42 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pVLGN-00017n-MY
+ for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 18:44:37 -0500
+Received: by mail-oi1-x22e.google.com with SMTP id bk2so13512431oib.10
+ for <qemu-riscv@nongnu.org>; Thu, 23 Feb 2023 15:44:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20210112.gappssmtp.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:from:to:cc:subject:date:message-id
- :reply-to; bh=QQBU9k/QxVKceMOy3CGKDHpENVCP8QZpPc+ABlkMDzA=;
- b=5WBnfriRWHPDJuP6XgGT82ZZCVbos5E1GF7FtE00fuAuJ0xXNTh3mcEFxdF3UovWZ3
- lBEhzm8Ccjt0CNz/Wz8FuO8CABxyi8FzDgE6V+UtJ6w8w6BT0a9Mh4W5zD8g5Lu0X7fH
- 2SELcACpma6F81bW9U6xrH2cq60D2l13DGkux6Fu23AIw9uL8UIuPQw0lpZHnGaM52dV
- iwbIMSXGCXpia/BXvymgPFd6+zXjCljHT3i9Pdj/o9S6ms2rG7lcPpedlyAv2S6u+4tW
- bQGDG+UG4ee1Mdr8S44n5I+qxJdd6wxhefhB7OdpzOehbqbdrHThtzIfHjacrcbuWcJO
- 99yQ==
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CJbRExB8ojRxEX60FycaIeUVQadXxrQm2iLY8irfyRE=;
+ b=dKBBL7P2Fpw7fX8IuGshpsf+H1HBgObcqnTl5LehfKwa98CsxX9DHrNL0yHWDxBylR
+ 37yNFzE8nYZ14tlT7QKjaOO0/hmYMJbvQ3akrmPIzzkN5DDO32MGw/yG8bsSIv93dlkh
+ YdnE9eGuQB6YUv/w45unSaZ9wYoA5BBHsAGCchnWLzJg+1QTVPTTeugR9ZNiGzaRcZig
+ F6S2caGccUuNoSIbFKRQYKlgEf3hPwVUl0fEvQCVo2VyaAdvqUzR0Zjlo0X1xfu79PJk
+ T7N/4s9SUw1w4bBXt2PSTbnyz7fh7Oz6teHmYjhysWZMpRdA6CPKL5NQnxEbqLQIMW7g
+ tocw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QQBU9k/QxVKceMOy3CGKDHpENVCP8QZpPc+ABlkMDzA=;
- b=F1l+Z+v3gUZ/TIE7DFoh3qor62Zfdmm0WoPiFOfGf3lMpRCwIlkMlRduUkFjH8VGnw
- XOASXiFeGMrkJiqZGqajdxzay1/yyMqH/gpfIwmMHZIKqGtep5f0DABmUZCYLXbzaK2a
- 15kpifLPJj1X3IFR8LFyUTB94C5+Oukx7wfHOK+LSopBvLrUVDIqzCnQYtAG83RNwDSo
- z8lU+Sq88YDJOiVies5mwE9tpumDcKs9akwJTElM5y0l3KT5a1tJTVeZuNv6kGeU/iaW
- QKHL2zCv88DpXJiwoj9jeSF11DqZ8v9dIJfMc5el75a/hoxq/yqiRfjsF/Gye3SDqPXP
- e5kQ==
-X-Gm-Message-State: AO0yUKU6KUO5Cvl5RWTRKcU9b53NlmQyAneBVUjpzCDHe6yX5gGyxf/q
- JLCJlwW4dSb2Bakye63XT5mIKolQU6UnzMLa
-X-Google-Smtp-Source: AK7set+v3gtgI+BcGYy94Bgh3a4MCJVhxOibOgZ4GNRv+u85CuMnQkb2rYLAk+YLjKnRo9c6beIh9g==
-X-Received: by 2002:a17:903:707:b0:19c:b7a9:d4a4 with SMTP id
- kk7-20020a170903070700b0019cb7a9d4a4mr4171947plb.37.1677192581308; 
- Thu, 23 Feb 2023 14:49:41 -0800 (PST)
-Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
- ja17-20020a170902efd100b00196025a34b9sm9153184plb.159.2023.02.23.14.49.40
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CJbRExB8ojRxEX60FycaIeUVQadXxrQm2iLY8irfyRE=;
+ b=jZWHSNEB3QA/vhs2xf96rxfDugbVxKko24roNkxbq4pdL1dwj3Jjw3vbLad0VxUcmO
+ KZy5WBf6tsBPhxCTb6GPQhSxqUwj4vFlam6ujAixB4bqK5wW5dtSCP2lQvc77Ne8qN8b
+ Qgm5n75qyZJXr1jnS5JDiKYWoJv6Bk8B8YEYbI12vvJNJJ3klFY3TdCydQi0Hqz453wi
+ Nb02On27CV0/rz0wP5ou3QEE4DZ4/Ni3GSva+eTvg56ecDsd1cH54CXhUSG6mlM5bl9V
+ KjVYhr16kt6TiwTuc6/UM4mYuUAthMTS5KeG0TNSNAq2VsbjRNB1lvr0F0YHrfVGaK1A
+ h34g==
+X-Gm-Message-State: AO0yUKWy36E5REb/imVSpQIstKT1MwnWfF9jSdcMtN8gnKoLm/T9FW+D
+ golMFSbU+VDsUWTazdqJyADDuQ==
+X-Google-Smtp-Source: AK7set+7p1BVcbx3hukJyNfO+Q/GUvviPq+P+bDTP21hB6nc+RWQO2P+/WB/2sGpW5+MYIPxHF3JVg==
+X-Received: by 2002:a54:410f:0:b0:378:79a4:867 with SMTP id
+ l15-20020a54410f000000b0037879a40867mr2667632oic.33.1677195874031; 
+ Thu, 23 Feb 2023 15:44:34 -0800 (PST)
+Received: from grind.dc1.ventanamicro.com ([189.110.112.117])
+ by smtp.gmail.com with ESMTPSA id
+ v6-20020acaac06000000b0037facb2c5fasm2415037oie.1.2023.02.23.15.44.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Feb 2023 14:49:40 -0800 (PST)
-Date: Thu, 23 Feb 2023 14:49:40 -0800 (PST)
-X-Google-Original-Date: Thu, 23 Feb 2023 14:48:55 PST (-0800)
-Subject: Re: [PULL 0/9] Fourth RISC-V PR for QEMU 8.0
-In-Reply-To: <mhng-3ef3787a-321d-4a23-aa45-8831b3093ac5@palmer-ri-x1c9a>
-CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: Peter Maydell <peter.maydell@linaro.org>, alex.bennee@linaro.org,
- bmeng@tinylab.org
-Message-ID: <mhng-61abd1f7-4d76-42de-85b2-42466ec0673f@palmer-ri-x1c9a>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
+ Thu, 23 Feb 2023 15:44:33 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
+ richard.henderson@linaro.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v7 0/4] riscv: Add support for Zicbo[m,z,p] instructions
+Date: Thu, 23 Feb 2023 20:44:23 -0300
+Message-Id: <20230223234427.521114-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=palmer@dabbelt.com; helo=mail-pl1-x631.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,71 +80,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2023 22:49:46 -0000
+X-List-Received-Date: Thu, 23 Feb 2023 23:44:38 -0000
 
-On Wed, 22 Feb 2023 07:56:10 PST (-0800), Palmer Dabbelt wrote:
-> On Tue, 21 Feb 2023 08:43:47 PST (-0800), Peter Maydell wrote:
->> On Fri, 17 Feb 2023 at 17:53, Palmer Dabbelt <palmer@rivosinc.com> wrote:
->>>
->>> The following changes since commit 417296c8d8588f782018d01a317f88957e9786d6:
->>>
->>>   tests/qtest/netdev-socket: Raise connection timeout to 60 seconds (2023-02-09 11:23:53 +0000)
->>>
->>> are available in the Git repository at:
->>>
->>>   https://github.com/palmer-dabbelt/qemu.git tags/pull-riscv-to-apply-20230217
->>>
->>> for you to fetch changes up to e8c0697d79ef05aa5aefb1121dfede59855556b4:
->>>
->>>   target/riscv: Fix vslide1up.vf and vslide1down.vf (2023-02-16 08:10:40 -0800)
->>>
->>> ----------------------------------------------------------------
->>> Fourth RISC-V PR for QEMU 8.0
->>>
->>> * A triplet of cleanups to the kernel/initrd loader that avoids
->>>   duplication between the various boards.
->>> * OpenSBI has been updated to version 1.2.
->>> * Weiwei Li, Daniel Henrique Barboza, and Liu Zhiwei have been added as
->>>   reviewers.  Thanks for the help!
->>> * A fix for PMP matching to avoid incorrectly appling the default
->>>   permissions on PMP permission violations.
->>> * A cleanup to avoid an unnecessary avoid env_archcpu() in
->>>   cpu_get_tb_cpu_state().
->>> * Fixes for the vector slide instructions to avoid truncating 64-bit
->>>   values (such as doubles) on 32-bit targets.
->>
->> This seems to have caused CI to decide it needs to rerun the
->> 'docker-opensbi' job, which doesn't work:
->> https://gitlab.com/qemu-project/qemu/-/jobs/3808319659
->>
->> I don't understand what exactly is going on here -- Alex,
->> Bin, any ideas?
->>
->> Why do we build the firmware in CI if we have checked in
->> binaries in pc-bios?
->>
->> Should .gitlab-ci.d/opensbi/Dockerfile really still be
->> starting with Ubuntu 18.04 ? That is already older than our
->> set of supported platforms, and falls out of support from
->> Ubuntu in a couple of months.
->
-> I just sent along a patch
-> <https://lore.kernel.org/r/20230222154938.9201-1-palmer@rivosinc.com/>.
-> I have no idea how to test it in the CI, though...
+Hi,
 
-Nobody's replied, so I'm inclined to just drop the OpenSBI bump and 
-re-send the PR.  At least that way we can avoid getting blocked on the 
-CI issues.  There's some more in flight so there'll probably be a 5th 
-round before the freeze either way, at least this way the stuff that 
-works can avoid getting blocked.
+This new version has changes based on feedbacks of both v5 and v6.
 
->> (.gitlab-ci.d/edk2/Dockerfile is also using 18.04.)
->
-> I guess I'd missed this in the original email, I stumbled on that one as
-> well
-> <https://lore.kernel.org/r/20230222155341.10127-1-palmer@rivosinc.com/>.
->
->>
->> thanks
->> -- PMM
+Patch 1 was revamped. We're modifying probe_access_flags() to accept a
+'size' parameter to allow for RISC-V usage with PMP. Changes in the existing
+callers are trivial and no behavior change is done (well, at least it's not
+intended). And we avoid adding another  probe_* API that only RISC-V
+will care about. 
+
+Changes from v6:
+- patch 1:
+  - no longer adding a new probe_access_flags_range() API
+  - add a 'size' param to probe_access_flags()
+- patch 2:
+  - check for RISCV_EXCP_ILLEGAL_INST first in check_zicbo_envcfg()
+  - add a probe for MMU_DATA_STORE after check_zicbo_envcfg()
+  - write zeros even if the address isn't mapped to RAM
+- patch 3:
+  - simplify the verifications in check_zicbom_access() by using probe_write()
+- v6 link: https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg05379.html 
+ 
+Christoph Muellner (3):
+  target/riscv: implement Zicboz extension
+  target/riscv: implement Zicbom extension
+  target/riscv: add Zicbop cbo.prefetch{i,r,m} placeholder
+
+Daniel Henrique Barboza (1):
+  tcg: add 'size' param to probe_access_flags()
+
+ accel/stubs/tcg-stub.c                      |   2 +-
+ accel/tcg/cputlb.c                          |  17 ++-
+ accel/tcg/user-exec.c                       |   5 +-
+ include/exec/exec-all.h                     |   3 +-
+ semihosting/uaccess.c                       |   2 +-
+ target/arm/ptw.c                            |   2 +-
+ target/arm/sve_helper.c                     |   2 +-
+ target/riscv/cpu.c                          |   7 ++
+ target/riscv/cpu.h                          |   4 +
+ target/riscv/helper.h                       |   5 +
+ target/riscv/insn32.decode                  |  16 ++-
+ target/riscv/insn_trans/trans_rvzicbo.c.inc |  57 +++++++++
+ target/riscv/op_helper.c                    | 132 ++++++++++++++++++++
+ target/riscv/translate.c                    |   1 +
+ target/s390x/tcg/mem_helper.c               |   6 +-
+ 15 files changed, 247 insertions(+), 14 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvzicbo.c.inc
+
+-- 
+2.39.2
+
 
