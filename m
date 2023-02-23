@@ -1,82 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVBVA-0007dI-FL
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Feb 2023 08:19:12 -0500
+	id 1pVKPL-0008JG-Ve
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Feb 2023 17:49:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pVBV7-0007Ws-GJ
- for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 08:19:11 -0500
-Received: from mail-ot1-x32b.google.com ([2607:f8b0:4864:20::32b])
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1pVKPJ-0008Gk-T4
+ for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 17:49:45 -0500
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pVBV3-00077Y-AD
- for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 08:19:08 -0500
-Received: by mail-ot1-x32b.google.com with SMTP id
- v1-20020a9d6041000000b0068d4a8a8d2dso2274581otj.12
- for <qemu-riscv@nongnu.org>; Thu, 23 Feb 2023 05:19:04 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1pVKPH-0007q7-Mh
+ for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 17:49:45 -0500
+Received: by mail-pl1-x631.google.com with SMTP id u14so10882343ple.7
+ for <qemu-riscv@nongnu.org>; Thu, 23 Feb 2023 14:49:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=sMRsPnOqXIfsHumeg62yfqXE5GIZUf9e0d/Tu/JBZVQ=;
- b=Eryxm0HNsASqxRxVvo7FiNM6nPf4BJSLdAogNxK1qgvxFAEU6QmEnZpnOtySEuAcq4
- V6Xo3sqP3esT5/T+p42VrjakmCqDdDgqNNmuCSxFeLMuZwcM0lhP3cqRQCXpylCFT0I7
- 1Klaqrb5niFt8FEg1AIBFV6GmRexyomzkLAPKY48ObZDgN9xIZtyWxN+5o3VsKl7qoee
- v1HxHdrDPrNlj60xEKJpR1DNqr/PlfjZpwLMLM46A/dMaf/1OgAOMO9IaAYw6U0s8rp9
- 809madeC/YdVSAOJseAgYJmjWJq1Trwe5+i7TAjPtHrdlWRukE9J/EZoy7jHHB0vm/ls
- DaMQ==
+ d=dabbelt-com.20210112.gappssmtp.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:to:from:cc
+ :in-reply-to:subject:date:from:to:cc:subject:date:message-id
+ :reply-to; bh=QQBU9k/QxVKceMOy3CGKDHpENVCP8QZpPc+ABlkMDzA=;
+ b=5WBnfriRWHPDJuP6XgGT82ZZCVbos5E1GF7FtE00fuAuJ0xXNTh3mcEFxdF3UovWZ3
+ lBEhzm8Ccjt0CNz/Wz8FuO8CABxyi8FzDgE6V+UtJ6w8w6BT0a9Mh4W5zD8g5Lu0X7fH
+ 2SELcACpma6F81bW9U6xrH2cq60D2l13DGkux6Fu23AIw9uL8UIuPQw0lpZHnGaM52dV
+ iwbIMSXGCXpia/BXvymgPFd6+zXjCljHT3i9Pdj/o9S6ms2rG7lcPpedlyAv2S6u+4tW
+ bQGDG+UG4ee1Mdr8S44n5I+qxJdd6wxhefhB7OdpzOehbqbdrHThtzIfHjacrcbuWcJO
+ 99yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sMRsPnOqXIfsHumeg62yfqXE5GIZUf9e0d/Tu/JBZVQ=;
- b=Gcxe4zb6QdEP8I32iNdEKG1+ed1RQIk5R+HRcaoQ4NVMtd3upNFLjIGpmcIaAa6iPd
- AeGSYjq/XVVSTKo0ShZ8I6oXLaqUkefuYooUTxdFiLraRwkWfVHbvJ7rcpOfTReGA3xb
- /b0ixr/qMZAyhR24ey3zxucD3WDMTqqZSi9pdvDXmALcbruYfG7gGrR+QnijA73uYqTM
- L2SEGfIfFX0jkcNchxScTLKMjnAQrfMwGyF3HOzBKFD0zEU6olVorb3RZ0zrbXwFexIF
- D/tmtwQHanWW+3kFGFgb+SMdqAvIhEYprQgO00UNi7xBIDckE64GL5Sapz86/MDvy6I8
- XmqA==
-X-Gm-Message-State: AO0yUKW68KqKDM6T78L1QY1OiqDu5FlySjLS3HY+uzXEtY8qjlXB1aHZ
- bwRu8YKClSFxytEtJMD8QIpqNQ==
-X-Google-Smtp-Source: AK7set+DN32O1uWoQWVUbcUUg32qIUetcOzUNxtU2JtfBB9K7M4bjTnZiH5SPuFXJS3SR9XY9sOm5g==
-X-Received: by 2002:a05:6830:2b09:b0:68b:d03b:5105 with SMTP id
- l9-20020a0568302b0900b0068bd03b5105mr8596145otv.8.1677158343118; 
- Thu, 23 Feb 2023 05:19:03 -0800 (PST)
-Received: from [192.168.68.107] ([189.110.112.117])
- by smtp.gmail.com with ESMTPSA id
- r21-20020a9d7cd5000000b0068bce6239a3sm2231852otn.38.2023.02.23.05.18.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Feb 2023 05:19:02 -0800 (PST)
-Message-ID: <2d37d157-12a1-07aa-4c70-974ac1503283@ventanamicro.com>
-Date: Thu, 23 Feb 2023 10:18:55 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.2
-Subject: Re: [PATCH v2 0/4] NUMA: Apply socket-NUMA-node boundary for aarch64
- and RiscV machines
-Content-Language: en-US
-To: Gavin Shan <gshan@redhat.com>, qemu-arm@nongnu.org
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, rad@semihalf.com,
- peter.maydell@linaro.org, quic_llindhol@quicinc.com, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, philmd@linaro.org, wangyanan55@huawei.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- thuth@redhat.com, lvivier@redhat.com, pbonzini@redhat.com,
- imammedo@redhat.com, yihyu@redhat.com, shan.gavin@gmail.com
-References: <20230223081401.248835-1-gshan@redhat.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230223081401.248835-1-gshan@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32b.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.09,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ h=content-transfer-encoding:mime-version:message-id:to:from:cc
+ :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QQBU9k/QxVKceMOy3CGKDHpENVCP8QZpPc+ABlkMDzA=;
+ b=F1l+Z+v3gUZ/TIE7DFoh3qor62Zfdmm0WoPiFOfGf3lMpRCwIlkMlRduUkFjH8VGnw
+ XOASXiFeGMrkJiqZGqajdxzay1/yyMqH/gpfIwmMHZIKqGtep5f0DABmUZCYLXbzaK2a
+ 15kpifLPJj1X3IFR8LFyUTB94C5+Oukx7wfHOK+LSopBvLrUVDIqzCnQYtAG83RNwDSo
+ z8lU+Sq88YDJOiVies5mwE9tpumDcKs9akwJTElM5y0l3KT5a1tJTVeZuNv6kGeU/iaW
+ QKHL2zCv88DpXJiwoj9jeSF11DqZ8v9dIJfMc5el75a/hoxq/yqiRfjsF/Gye3SDqPXP
+ e5kQ==
+X-Gm-Message-State: AO0yUKU6KUO5Cvl5RWTRKcU9b53NlmQyAneBVUjpzCDHe6yX5gGyxf/q
+ JLCJlwW4dSb2Bakye63XT5mIKolQU6UnzMLa
+X-Google-Smtp-Source: AK7set+v3gtgI+BcGYy94Bgh3a4MCJVhxOibOgZ4GNRv+u85CuMnQkb2rYLAk+YLjKnRo9c6beIh9g==
+X-Received: by 2002:a17:903:707:b0:19c:b7a9:d4a4 with SMTP id
+ kk7-20020a170903070700b0019cb7a9d4a4mr4171947plb.37.1677192581308; 
+ Thu, 23 Feb 2023 14:49:41 -0800 (PST)
+Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
+ ja17-20020a170902efd100b00196025a34b9sm9153184plb.159.2023.02.23.14.49.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Feb 2023 14:49:40 -0800 (PST)
+Date: Thu, 23 Feb 2023 14:49:40 -0800 (PST)
+X-Google-Original-Date: Thu, 23 Feb 2023 14:48:55 PST (-0800)
+Subject: Re: [PULL 0/9] Fourth RISC-V PR for QEMU 8.0
+In-Reply-To: <mhng-3ef3787a-321d-4a23-aa45-8831b3093ac5@palmer-ri-x1c9a>
+CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: Peter Maydell <peter.maydell@linaro.org>, alex.bennee@linaro.org,
+ bmeng@tinylab.org
+Message-ID: <mhng-61abd1f7-4d76-42de-85b2-42466ec0673f@palmer-ri-x1c9a>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=palmer@dabbelt.com; helo=mail-pl1-x631.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -90,92 +78,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2023 13:19:11 -0000
+X-List-Received-Date: Thu, 23 Feb 2023 22:49:46 -0000
 
+On Wed, 22 Feb 2023 07:56:10 PST (-0800), Palmer Dabbelt wrote:
+> On Tue, 21 Feb 2023 08:43:47 PST (-0800), Peter Maydell wrote:
+>> On Fri, 17 Feb 2023 at 17:53, Palmer Dabbelt <palmer@rivosinc.com> wrote:
+>>>
+>>> The following changes since commit 417296c8d8588f782018d01a317f88957e9786d6:
+>>>
+>>>   tests/qtest/netdev-socket: Raise connection timeout to 60 seconds (2023-02-09 11:23:53 +0000)
+>>>
+>>> are available in the Git repository at:
+>>>
+>>>   https://github.com/palmer-dabbelt/qemu.git tags/pull-riscv-to-apply-20230217
+>>>
+>>> for you to fetch changes up to e8c0697d79ef05aa5aefb1121dfede59855556b4:
+>>>
+>>>   target/riscv: Fix vslide1up.vf and vslide1down.vf (2023-02-16 08:10:40 -0800)
+>>>
+>>> ----------------------------------------------------------------
+>>> Fourth RISC-V PR for QEMU 8.0
+>>>
+>>> * A triplet of cleanups to the kernel/initrd loader that avoids
+>>>   duplication between the various boards.
+>>> * OpenSBI has been updated to version 1.2.
+>>> * Weiwei Li, Daniel Henrique Barboza, and Liu Zhiwei have been added as
+>>>   reviewers.  Thanks for the help!
+>>> * A fix for PMP matching to avoid incorrectly appling the default
+>>>   permissions on PMP permission violations.
+>>> * A cleanup to avoid an unnecessary avoid env_archcpu() in
+>>>   cpu_get_tb_cpu_state().
+>>> * Fixes for the vector slide instructions to avoid truncating 64-bit
+>>>   values (such as doubles) on 32-bit targets.
+>>
+>> This seems to have caused CI to decide it needs to rerun the
+>> 'docker-opensbi' job, which doesn't work:
+>> https://gitlab.com/qemu-project/qemu/-/jobs/3808319659
+>>
+>> I don't understand what exactly is going on here -- Alex,
+>> Bin, any ideas?
+>>
+>> Why do we build the firmware in CI if we have checked in
+>> binaries in pc-bios?
+>>
+>> Should .gitlab-ci.d/opensbi/Dockerfile really still be
+>> starting with Ubuntu 18.04 ? That is already older than our
+>> set of supported platforms, and falls out of support from
+>> Ubuntu in a couple of months.
+>
+> I just sent along a patch
+> <https://lore.kernel.org/r/20230222154938.9201-1-palmer@rivosinc.com/>.
+> I have no idea how to test it in the CI, though...
 
+Nobody's replied, so I'm inclined to just drop the OpenSBI bump and 
+re-send the PR.  At least that way we can avoid getting blocked on the 
+CI issues.  There's some more in flight so there'll probably be a 5th 
+round before the freeze either way, at least this way the stuff that 
+works can avoid getting blocked.
 
-On 2/23/23 05:13, Gavin Shan wrote:
-> For arm64 and RiscV architecture, the driver (/base/arch_topology.c) is
-> used to populate the CPU topology in the Linux guest. It's required that
-> the CPUs in one socket can't span mutiple NUMA nodes. Otherwise, the Linux
-> scheduling domain can't be sorted out, as the following warning message
-> indicates. To avoid the unexpected confusion, this series attempts to
-> rejects such kind of insane configurations.
-> 
->     -smp 6,maxcpus=6,sockets=2,clusters=1,cores=3,threads=1 \
->     -numa node,nodeid=0,cpus=0-1,memdev=ram0                \
->     -numa node,nodeid=1,cpus=2-3,memdev=ram1                \
->     -numa node,nodeid=2,cpus=4-5,memdev=ram2                \
-
-
-And why is this a QEMU problem? This doesn't hurt ACPI.
-
-Also, this restriction impacts breaks ARM guests in the wild that are running
-non-Linux OSes. I don't see why we should impact use cases that has nothing to
-do with Linux Kernel feelings about sockets - NUMA nodes exclusivity.
-
-
-Thanks,
-
-
-Daniel
-
-
->   
->     ------------[ cut here ]------------
->     WARNING: CPU: 0 PID: 1 at kernel/sched/topology.c:2271 build_sched_domains+0x284/0x910
->     Modules linked in:
->     CPU: 0 PID: 1 Comm: swapper/0 Not tainted 5.14.0-268.el9.aarch64 #1
->     pstate: 00400005 (nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
->     pc : build_sched_domains+0x284/0x910
->     lr : build_sched_domains+0x184/0x910
->     sp : ffff80000804bd50
->     x29: ffff80000804bd50 x28: 0000000000000002 x27: 0000000000000000
->     x26: ffff800009cf9a80 x25: 0000000000000000 x24: ffff800009cbf840
->     x23: ffff000080325000 x22: ffff0000005df800 x21: ffff80000a4ce508
->     x20: 0000000000000000 x19: ffff000080324440 x18: 0000000000000014
->     x17: 00000000388925c0 x16: 000000005386a066 x15: 000000009c10cc2e
->     x14: 00000000000001c0 x13: 0000000000000001 x12: ffff00007fffb1a0
->     x11: ffff00007fffb180 x10: ffff80000a4ce508 x9 : 0000000000000041
->     x8 : ffff80000a4ce500 x7 : ffff80000a4cf920 x6 : 0000000000000001
->     x5 : 0000000000000001 x4 : 0000000000000007 x3 : 0000000000000002
->     x2 : 0000000000001000 x1 : ffff80000a4cf928 x0 : 0000000000000001
->     Call trace:
->      build_sched_domains+0x284/0x910
->      sched_init_domains+0xac/0xe0
->      sched_init_smp+0x48/0xc8
->      kernel_init_freeable+0x140/0x1ac
->      kernel_init+0x28/0x140
->      ret_from_fork+0x10/0x20
-> 
-> PATCH[1] Improves numa/test for aarch64 to follow socket-to-NUMA-node boundary
-> PATCH[2] Validate the configuration if required in the NUMA subsystem
-> PATCH[3] Enable the validation for aarch64 machines
-> PATCH[4] Enable the validation for RiscV machines
-> 
-> v1: https://lists.nongnu.org/archive/html/qemu-arm/2023-02/msg00886.html
-> 
-> Changelog
-> =========
-> v2:
->    * Fix socket-NUMA-node boundary issues in qtests/numa-test  (Gavin)
->    * Add helper set_numa_socket_boundary() and validate the
->      boundary in the generic path                              (Philippe)
-> 
-> Gavin Shan (4):
->    qtest/numa-test: Follow socket-NUMA-node boundary for aarch64
->    numa: Validate socket and NUMA node boundary if required
->    hw/arm: Validate socket and NUMA node boundary
->    hw/riscv: Validate socket and NUMA node boundary
-> 
->   hw/arm/sbsa-ref.c       |  2 ++
->   hw/arm/virt.c           |  2 ++
->   hw/core/machine.c       | 34 ++++++++++++++++++++++++++++++++++
->   hw/core/numa.c          |  7 +++++++
->   hw/riscv/spike.c        |  1 +
->   hw/riscv/virt.c         |  1 +
->   include/sysemu/numa.h   |  4 ++++
->   tests/qtest/numa-test.c | 13 ++++++++++---
->   8 files changed, 61 insertions(+), 3 deletions(-)
-> 
+>> (.gitlab-ci.d/edk2/Dockerfile is also using 18.04.)
+>
+> I guess I'd missed this in the original email, I stumbled on that one as
+> well
+> <https://lore.kernel.org/r/20230222155341.10127-1-palmer@rivosinc.com/>.
+>
+>>
+>> thanks
+>> -- PMM
 
