@@ -1,69 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVc8a-0001o9-Ag
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 12:45:40 -0500
+	id 1pVc8c-0001pC-31
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 12:45:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pVc8Y-0001n2-M6
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 12:45:38 -0500
-Received: from mail-oa1-x2a.google.com ([2001:4860:4864:20::2a])
+ id 1pVc8a-0001oN-Er
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 12:45:40 -0500
+Received: from mail-oa1-x30.google.com ([2001:4860:4864:20::30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pVc8X-0003vN-0Q
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 12:45:38 -0500
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-172094e10e3so267087fac.10
- for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 09:45:36 -0800 (PST)
+ id 1pVc8Y-0003Zn-O6
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 12:45:40 -0500
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-1723ab0375eso324856fac.1
+ for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 09:45:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Yq+sgSEsm/UWUCBr+CXkx2Nf6xLVC+0m9hNthdUCKgc=;
- b=gduwjqQgB+5YL816A9MujgjLziGFVDHxtHX86mxk9XyU/4UajWq2LpeagHwZFTwAhf
- aYAhLnlnDa6y12gV8z59tufLVu3cg8jRgC8Gl/Vo+EHLr46s2rF+/UR2kWgVSJM26p7c
- r+IpRA8JECGajYpoZqsJXCPp1V6OIIFRgjUgsHLwck6LdHfgO/mVtfgObseDjgTMDefg
- y8Ntv+BInBi/mIYjYw6NCeXntennVpOcMek+2myy/WwpV1kTVOWQJykeYGgvlzwy0Kmb
- Elkf5viQVSlMXJOPfa9pQnBJpiF7PzsWpTt+tf2L27zNRMF36Dj4Oi4Bf2u7h8XUBI9d
- WNsw==
+ bh=6d8NvIbXd3OTFEBOjLeLjQoPN4gqAkbvmVXDYpiY2cE=;
+ b=pG6VmqyPGDCCaKGj87nHCI89mJWMEUQAcu1Ag0urlnCNVAf+gFzK7ZnCzVuObbS67K
+ kreRQkVHfhW6lZTlH3Gd4w8hBrzY0C1pXpOgm0YNFEG6LIhGCK50elSAhyGxYMmHJMzl
+ VmGE7FFwH8dP0zvvIISd0HHO3RqkU16OV2ND6KPN4i0qr6v5tyvYWwsm2SkISAqaEYWe
+ ZMkAzUX3eTnhAJmP3ZMECr4LrOM8A9eWj+rvs76Un+VB4YnIy+GfYqP6yhmeVnaZ7gqq
+ ScCj8mxQvcq/im4Q+qndN1ZqvcK2zHZWt42n7m/wsEQ6cr6f0j6wmo7a0m65rhjAjrZf
+ mYsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Yq+sgSEsm/UWUCBr+CXkx2Nf6xLVC+0m9hNthdUCKgc=;
- b=YRdlrYiFaKpnlUX2rfrIyyGJylpXW1p7ce//n9uY94AUHeljvwGAGXn5PvzDc2izU5
- hDHx2P1wtOHBGmgtRAjrzfFIsTgs7hdJo8Cb9TKECjLOvlVy8oTHOcDeZe/GvHSLBfnl
- OAFdP12EFVAl+dN9qpwd7P8PvmwL86VszsWaNE3WEexcVibOt6m8+ZDSwQGovhmbwoLp
- 5TJKicwmdjRVQrU8glo0shlBJ/rZGud0w+5L/FclNR1Gb7jkbE67wW9D+JVOKzY+XRRt
- 8Xk3Ot9u+b2hgD4vrfllKEHnaqKLFqlo2hsXE7/50/MGeGxI98uyaUFANBf5bSIQg6+F
- 38rg==
-X-Gm-Message-State: AO0yUKXCI6la63vi8W3dw+YhGfT7fOLvj058xmM4I15yyj4J1aVvE5JG
- nwTa+s6ZiZyd9prty9eQZhL7zQ==
-X-Google-Smtp-Source: AK7set8IFvZ63XpGJ7g6fy4whTMRjmESPSvOE8tw2yjHTm4m3VdOeqw/WOVC4L9EDwPTKL51/XxnPA==
-X-Received: by 2002:a05:6871:b2a:b0:16e:29f3:df8f with SMTP id
- fq42-20020a0568710b2a00b0016e29f3df8fmr14674771oab.29.1677260735257; 
- Fri, 24 Feb 2023 09:45:35 -0800 (PST)
+ bh=6d8NvIbXd3OTFEBOjLeLjQoPN4gqAkbvmVXDYpiY2cE=;
+ b=Hxz62/NeepN3cuyzCPCcMlzX/N56Z6htx9xxZDX/wMWucHpl0GAuDZD2ZU38fIlnPE
+ TL8UXAjjMTL1l6NQwVKLun8/xSXADTc3evkK8tzzgXBN1XovbJAYuArvb+fa45iJ4ysm
+ i5ZKCnIkAKjVU2lIAeTAVr6jhwqLNGiUZLI/8gM3s6xPt1twiCQflnOx2BEIBhF5zdwP
+ bCOB7DP8ArnZt4DjC6gslhmDS42zxKMH529XthXPkJJ3IJXE4v3l6y3dMpZYyMJNjI47
+ ZN79V/qILA5pcvViq0c8hjOlNgIYsEnYD7kdX4/vhH+zo3UeybIBZHpiQPOWk7mOAKHL
+ j1wg==
+X-Gm-Message-State: AO0yUKWd/PHOP9fHlP4Hvxw3PSzmpRcREn8Xb50beCD7CqRSvwkimMmE
+ 0ikUR9uDLpMF0zowSpWxNblGnw==
+X-Google-Smtp-Source: AK7set/fmLzRsuAY8Tl++MGTnNZrgMfxNDS4jVZXy4WQwNL3dlP9VILSUTzyQd+6j/j6fVGFj/MhSA==
+X-Received: by 2002:a05:6870:469f:b0:16d:f3c8:cf8d with SMTP id
+ a31-20020a056870469f00b0016df3c8cf8dmr14000949oap.29.1677260738080; 
+ Fri, 24 Feb 2023 09:45:38 -0800 (PST)
 Received: from grind.. ([189.110.112.117]) by smtp.gmail.com with ESMTPSA id
- zf48-20020a0568716ab000b001722c5625e2sm3604123oab.7.2023.02.24.09.45.32
+ zf48-20020a0568716ab000b001722c5625e2sm3604123oab.7.2023.02.24.09.45.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Feb 2023 09:45:34 -0800 (PST)
+ Fri, 24 Feb 2023 09:45:37 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 3/4] target/riscv/csr.c: use riscv_cpu_cfg() to avoid
- env_cpu() pointers
-Date: Fri, 24 Feb 2023 14:45:19 -0300
-Message-Id: <20230224174520.92490-4-dbarboza@ventanamicro.com>
+Subject: [PATCH 4/4] target/riscv/csr.c: avoid env_archcpu() usages when
+ reading RISCVCPUConfig
+Date: Fri, 24 Feb 2023 14:45:20 -0300
+Message-Id: <20230224174520.92490-5-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230224174520.92490-1-dbarboza@ventanamicro.com>
 References: <20230224174520.92490-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2a.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::30;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x30.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,152 +83,113 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2023 17:45:38 -0000
+X-List-Received-Date: Fri, 24 Feb 2023 17:45:40 -0000
 
-A common trend in this file is to retrieve a RISCVCPU pointer by first
-retrieving a CPUState pointer via env_cpu(). The CPU pointer is used
-only to access the RISCVCPUConfig object and nothing else.
-
-Let's use riscv_cpu_cfg() to access what we need directly without these
-2 pointers.
+Retrieving the CPU pointer using env_archcpu() just to access cpu->cfg
+can be avoided by using riscv_cpu_cfg().
 
 Suggested-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/csr.c | 50 +++++++++++-----------------------------------
- 1 file changed, 12 insertions(+), 38 deletions(-)
+ target/riscv/csr.c | 32 +++++++++-----------------------
+ 1 file changed, 9 insertions(+), 23 deletions(-)
 
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 0f4aa22a0f..53f1a331f9 100644
+index 53f1a331f9..ffa2d7b606 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -46,10 +46,8 @@ static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
-                                        uint64_t bit)
- {
-     bool virt = riscv_cpu_virt_enabled(env);
--    CPUState *cs = env_cpu(env);
--    RISCVCPU *cpu = RISCV_CPU(cs);
+@@ -213,9 +213,7 @@ static RISCVException any32(CPURISCVState *env, int csrno)
  
--    if (env->priv == PRV_M || !cpu->cfg.ext_smstateen) {
-+    if (env->priv == PRV_M || !riscv_cpu_cfg(env)->ext_smstateen) {
-         return RISCV_EXCP_NONE;
-     }
- 
-@@ -81,7 +79,7 @@ static RISCVException fs(CPURISCVState *env, int csrno)
+ static int aia_any(CPURISCVState *env, int csrno)
  {
- #if !defined(CONFIG_USER_ONLY)
-     if (!env->debugger && !riscv_cpu_fp_enabled(env) &&
--        !RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
-+        !riscv_cpu_cfg(env)->ext_zfinx) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- #endif
-@@ -90,11 +88,9 @@ static RISCVException fs(CPURISCVState *env, int csrno)
- 
- static RISCVException vs(CPURISCVState *env, int csrno)
- {
--    CPUState *cs = env_cpu(env);
--    RISCVCPU *cpu = RISCV_CPU(cs);
+-    RISCVCPU *cpu = env_archcpu(env);
 -
-     if (env->misa_ext & RVV ||
--        cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) {
-+        riscv_cpu_cfg(env)->ext_zve32f ||
-+        riscv_cpu_cfg(env)->ext_zve64f) {
- #if !defined(CONFIG_USER_ONLY)
-         if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
-             return RISCV_EXCP_ILLEGAL_INST;
-@@ -193,10 +189,7 @@ static RISCVException mctr32(CPURISCVState *env, int csrno)
+-    if (!cpu->cfg.ext_smaia) {
++    if (!riscv_cpu_cfg(env)->ext_smaia) {
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
  
- static RISCVException sscofpmf(CPURISCVState *env, int csrno)
+@@ -224,9 +222,7 @@ static int aia_any(CPURISCVState *env, int csrno)
+ 
+ static int aia_any32(CPURISCVState *env, int csrno)
  {
--    CPUState *cs = env_cpu(env);
--    RISCVCPU *cpu = RISCV_CPU(cs);
+-    RISCVCPU *cpu = env_archcpu(env);
 -
--    if (!cpu->cfg.ext_sscofpmf) {
-+    if (!riscv_cpu_cfg(env)->ext_sscofpmf) {
+-    if (!cpu->cfg.ext_smaia) {
++    if (!riscv_cpu_cfg(env)->ext_smaia) {
          return RISCV_EXCP_ILLEGAL_INST;
      }
  
-@@ -319,10 +312,7 @@ static RISCVException umode32(CPURISCVState *env, int csrno)
+@@ -253,9 +249,7 @@ static int smode32(CPURISCVState *env, int csrno)
  
- static RISCVException mstateen(CPURISCVState *env, int csrno)
+ static int aia_smode(CPURISCVState *env, int csrno)
  {
--    CPUState *cs = env_cpu(env);
--    RISCVCPU *cpu = RISCV_CPU(cs);
+-    RISCVCPU *cpu = env_archcpu(env);
 -
--    if (!cpu->cfg.ext_smstateen) {
-+    if (!riscv_cpu_cfg(env)->ext_smstateen) {
+-    if (!cpu->cfg.ext_ssaia) {
++    if (!riscv_cpu_cfg(env)->ext_ssaia) {
          return RISCV_EXCP_ILLEGAL_INST;
      }
  
-@@ -331,10 +321,7 @@ static RISCVException mstateen(CPURISCVState *env, int csrno)
+@@ -264,9 +258,7 @@ static int aia_smode(CPURISCVState *env, int csrno)
  
- static RISCVException hstateen_pred(CPURISCVState *env, int csrno, int base)
+ static int aia_smode32(CPURISCVState *env, int csrno)
  {
--    CPUState *cs = env_cpu(env);
--    RISCVCPU *cpu = RISCV_CPU(cs);
+-    RISCVCPU *cpu = env_archcpu(env);
 -
--    if (!cpu->cfg.ext_smstateen) {
-+    if (!riscv_cpu_cfg(env)->ext_smstateen) {
+-    if (!cpu->cfg.ext_ssaia) {
++    if (!riscv_cpu_cfg(env)->ext_ssaia) {
          return RISCV_EXCP_ILLEGAL_INST;
      }
  
-@@ -361,10 +348,8 @@ static RISCVException sstateen(CPURISCVState *env, int csrno)
+@@ -380,9 +372,7 @@ static RISCVException pointer_masking(CPURISCVState *env, int csrno)
+ 
+ static int aia_hmode(CPURISCVState *env, int csrno)
  {
-     bool virt = riscv_cpu_virt_enabled(env);
-     int index = csrno - CSR_SSTATEEN0;
--    CPUState *cs = env_cpu(env);
--    RISCVCPU *cpu = RISCV_CPU(cs);
- 
--    if (!cpu->cfg.ext_smstateen) {
-+    if (!riscv_cpu_cfg(env)->ext_smstateen) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-@@ -916,11 +901,9 @@ static RISCVException read_timeh(CPURISCVState *env, int csrno,
- 
- static RISCVException sstc(CPURISCVState *env, int csrno)
- {
--    CPUState *cs = env_cpu(env);
--    RISCVCPU *cpu = RISCV_CPU(cs);
-     bool hmode_check = false;
- 
--    if (!cpu->cfg.ext_sstc || !env->rdtime_fn) {
-+    if (!riscv_cpu_cfg(env)->ext_sstc || !env->rdtime_fn) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-@@ -1150,30 +1133,21 @@ static RISCVException write_ignore(CPURISCVState *env, int csrno,
- static RISCVException read_mvendorid(CPURISCVState *env, int csrno,
-                                      target_ulong *val)
- {
--    CPUState *cs = env_cpu(env);
--    RISCVCPU *cpu = RISCV_CPU(cs);
+-    RISCVCPU *cpu = env_archcpu(env);
 -
--    *val = cpu->cfg.mvendorid;
-+    *val = riscv_cpu_cfg(env)->mvendorid;
+-    if (!cpu->cfg.ext_ssaia) {
++    if (!riscv_cpu_cfg(env)->ext_ssaia) {
+         return RISCV_EXCP_ILLEGAL_INST;
+      }
+ 
+@@ -391,9 +381,7 @@ static int aia_hmode(CPURISCVState *env, int csrno)
+ 
+ static int aia_hmode32(CPURISCVState *env, int csrno)
+ {
+-    RISCVCPU *cpu = env_archcpu(env);
+-
+-    if (!cpu->cfg.ext_ssaia) {
++    if (!riscv_cpu_cfg(env)->ext_ssaia) {
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+@@ -430,9 +418,7 @@ static RISCVException debug(CPURISCVState *env, int csrno)
+ 
+ static RISCVException seed(CPURISCVState *env, int csrno)
+ {
+-    RISCVCPU *cpu = env_archcpu(env);
+-
+-    if (!cpu->cfg.ext_zkr) {
++    if (!riscv_cpu_cfg(env)->ext_zkr) {
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+@@ -555,7 +541,7 @@ static RISCVException read_vl(CPURISCVState *env, int csrno,
+ 
+ static int read_vlenb(CPURISCVState *env, int csrno, target_ulong *val)
+ {
+-    *val = env_archcpu(env)->cfg.vlen >> 3;
++    *val = riscv_cpu_cfg(env)->vlen >> 3;
      return RISCV_EXCP_NONE;
  }
  
- static RISCVException read_marchid(CPURISCVState *env, int csrno,
-                                    target_ulong *val)
- {
--    CPUState *cs = env_cpu(env);
--    RISCVCPU *cpu = RISCV_CPU(cs);
--
--    *val = cpu->cfg.marchid;
-+    *val = riscv_cpu_cfg(env)->marchid;
-     return RISCV_EXCP_NONE;
- }
- 
- static RISCVException read_mimpid(CPURISCVState *env, int csrno,
-                                   target_ulong *val)
- {
--    CPUState *cs = env_cpu(env);
--    RISCVCPU *cpu = RISCV_CPU(cs);
--
--    *val = cpu->cfg.mimpid;
-+    *val = riscv_cpu_cfg(env)->mimpid;
+@@ -610,7 +596,7 @@ static RISCVException write_vstart(CPURISCVState *env, int csrno,
+      * The vstart CSR is defined to have only enough writable bits
+      * to hold the largest element index, i.e. lg2(VLEN) bits.
+      */
+-    env->vstart = val & ~(~0ULL << ctzl(env_archcpu(env)->cfg.vlen));
++    env->vstart = val & ~(~0ULL << ctzl(riscv_cpu_cfg(env)->vlen));
      return RISCV_EXCP_NONE;
  }
  
