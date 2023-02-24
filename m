@@ -1,62 +1,89 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVXJr-0002I6-3n
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 07:36:59 -0500
+	id 1pVXaC-0007Zf-VL
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 07:53:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pVXJp-0002Hr-Mq; Fri, 24 Feb 2023 07:36:57 -0500
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pVXJm-0007Ne-SV; Fri, 24 Feb 2023 07:36:57 -0500
-Received: from [192.168.0.120] (unknown [114.95.238.225])
- by APP-01 (Coremail) with SMTP id qwCowAAHD89br_hjbegECA--.55355S2;
- Fri, 24 Feb 2023 20:36:44 +0800 (CST)
-Message-ID: <9cf44206-76c3-0163-77b3-68fed20f886d@iscas.ac.cn>
-Date: Fri, 24 Feb 2023 20:36:43 +0800
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1pVXaB-0007ZI-GT
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 07:53:51 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1pVXa9-0003kV-Ki
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 07:53:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1677243228;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=RJcbME7ttucEmFY/ggwcocRddQ3yO+IDhjI8lavuKLk=;
+ b=XrmhIK6HzpstvR4qwf3F4RLB0h7gL9mPOQQ6YoPezXTJfhqay3Xed4ROzNqTmVHghUbaMO
+ e/fJESNjqksMjkHbZPndRLpk3kFRPz0+eLxGViHBIUg1pM5CpXFGaqxcrZxN3queVHF1B9
+ WqoJ/7CEpZ9DqtcoK9NhjJFX9z3ZJEE=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-644-So7GDBXOMq-b-pOHyIJAFA-1; Fri, 24 Feb 2023 07:53:46 -0500
+X-MC-Unique: So7GDBXOMq-b-pOHyIJAFA-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ x18-20020a1c7c12000000b003e1e7d3cf9fso1187917wmc.3
+ for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 04:53:46 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RJcbME7ttucEmFY/ggwcocRddQ3yO+IDhjI8lavuKLk=;
+ b=ptluOM/0ThvdcR23JFmc/nMuHIAfDhAnBr/CK4qOtj98qXetKa8Na09QadkgsbJ9fo
+ kUEfoaZkuy/0NBPG0QJ52eSa7P0KoK3thTo95tbkzH1PVKu6wMKC+HQUvdiRDg0mHXxy
+ dlJkovMfvRf09zjDx45d3Rey3p4FsD47UkAaa6GFXU9MZpuzsH2GM2LSo17/ih2uuR6x
+ oGtcU0OUtS+rntqyq7zKhmzN8AN5NCljIA7QlHGkgoUK66fAtuNItH2cvxpZMWKBdtmJ
+ Es4Rwiy0aI5/gEoW/zzhfmbbiiyjSRPsbXKFgRPVULdwAC41j3TboZQJZVP4B/OpR7JH
+ CV6w==
+X-Gm-Message-State: AO0yUKV7YgFQZmZh3t61VakUoow4xoG7JayUrksnWdmZ+GTFbUgcHGi2
+ RKO1OJ0fuuMiFPXYwv2wsEhuh39g1tSbE8bW36mBs8y9ki6aFXq/mi/oyGOY275tjdZC44f0rXc
+ Mub0FN+aZ2gXP5tI=
+X-Received: by 2002:adf:f344:0:b0:2c7:1740:629b with SMTP id
+ e4-20020adff344000000b002c71740629bmr3387995wrp.13.1677243225681; 
+ Fri, 24 Feb 2023 04:53:45 -0800 (PST)
+X-Google-Smtp-Source: AK7set+bFJkK1oQrAgntC+DSkgjz3TgGtgDlhLRKLcR153cIVHOiMVNg2o+yOPWiOeLYSEEP0r0iLQ==
+X-Received: by 2002:adf:f344:0:b0:2c7:1740:629b with SMTP id
+ e4-20020adff344000000b002c71740629bmr3387980wrp.13.1677243225343; 
+ Fri, 24 Feb 2023 04:53:45 -0800 (PST)
+Received: from imammedo.users.ipa.redhat.com ([185.140.112.229])
+ by smtp.gmail.com with ESMTPSA id
+ t16-20020a5d5350000000b002c53cc7504csm9811482wrv.78.2023.02.24.04.53.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Feb 2023 04:53:44 -0800 (PST)
+Date: Fri, 24 Feb 2023 13:53:43 +0100
+From: Igor Mammedov <imammedo@redhat.com>
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Andrew Jones
+ <ajones@ventanamicro.com>, Anup Patel <apatel@ventanamicro.com>, Atish
+ Kumar Patra <atishp@rivosinc.com>, Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>
+Subject: Re: [PATCH V4 5/8] hw/riscv/virt: virt-acpi-build.c: Add RINTC in MADT
+Message-ID: <20230224135343.24a5a95b@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20230224083701.2657063-6-sunilvl@ventanamicro.com>
+References: <20230224083701.2657063-1-sunilvl@ventanamicro.com>
+ <20230224083701.2657063-6-sunilvl@ventanamicro.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.36; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH 2/6] target/riscv: Fix the relationship of PBMTE/STCE
- fields between menvcfg and henvcfg
-Content-Language: en-US
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230224040852.37109-1-liweiwei@iscas.ac.cn>
- <20230224040852.37109-3-liweiwei@iscas.ac.cn>
- <20230224121905.mciqkge4qji6xczb@orel>
-From: liweiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230224121905.mciqkge4qji6xczb@orel>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAAHD89br_hjbegECA--.55355S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF4DJF4kXr1UZr43KFg_yoW8tr13pF
- 18XFW5G395tr929as7trn0gF1Yy3WDCws8Zw429anYvFy3ArWrAF9rKas8u348W34kCr1v
- v3yUJFy3uF4DZ3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvGb7Iv0xC_tr1lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
- 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
- A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xII
- jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I
- 8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
- 64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8Jw
- Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l
- c7I2V7IY0VAS07AlzVAYIcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJV
- W8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF
- 1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6x
- IIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvE
- x4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa
- 73UjIFyTuYvjxU2rcTDUUUU
-X-Originating-IP: [114.95.238.225]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.094,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -70,83 +97,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2023 12:36:57 -0000
+X-List-Received-Date: Fri, 24 Feb 2023 12:53:51 -0000
 
+On Fri, 24 Feb 2023 14:06:58 +0530
+Sunil V L <sunilvl@ventanamicro.com> wrote:
 
-On 2023/2/24 20:19, Andrew Jones wrote:
-> On Fri, Feb 24, 2023 at 12:08:48PM +0800, Weiwei Li wrote:
->> henvcfg.PBMTE/STCE are read-only zero if menvcfg.PBMTE/STCE are zero.
->>
->> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->> ---
->>   target/riscv/csr.c | 13 +++++++++----
->>   1 file changed, 9 insertions(+), 4 deletions(-)
->>
->> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index feae23cab0..02cb2c2bb7 100644
->> --- a/target/riscv/csr.c
->> +++ b/target/riscv/csr.c
->> @@ -1956,7 +1956,11 @@ static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
->>           return ret;
->>       }
->>   
->> -    *val = env->henvcfg;
->> +    /*
->> +     * henvcfg.pbmte is read_only 0 when menvcfg.pbmte = 0
->> +     * henvcfg.stce is read_only 0 when menvcfg.stce = 0
->> +     */
->> +    *val = env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE) | env->menvcfg);
->>       return RISCV_EXCP_NONE;
->>   }
->>   
->> @@ -1972,7 +1976,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->>       }
->>   
->>       if (riscv_cpu_mxl(env) == MXL_RV64) {
->> -        mask |= HENVCFG_PBMTE | HENVCFG_STCE;
->> +        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE);
-> nit:
->
->    While HENVCFG_PBMTE == MENVCFG_PBMTE, I'd prefer we use
->    MENVCFG_* with menvcfg and HENVCFG_* with henvcfg.
+> Add Multiple APIC Description Table (MADT) with the
+> RINTC structure for each cpu.
+> 
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> ---
+>  hw/riscv/virt-acpi-build.c | 44 ++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 44 insertions(+)
+> 
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 3a5e2e6d53..8b85b34c55 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -32,6 +32,7 @@
+>  #include "sysemu/reset.h"
+>  #include "migration/vmstate.h"
+>  #include "hw/riscv/virt.h"
+> +#include "hw/riscv/numa.h"
+>  
+>  #define ACPI_BUILD_TABLE_SIZE             0x20000
+>  
+> @@ -132,6 +133,46 @@ static void build_dsdt(GArray *table_data,
+>      free_aml_allocator();
+>  }
+>  
+> +/* MADT */
 
-Yeah. I agree. However, I think this mask is finally used for henvcfg. 
-We just use menvcfg to mask the  bits
+see build_srat() how this comment must look like
 
-when the same bits are zero. So I didn't modify HENVCFG_* here.
+> +static void build_madt(GArray *table_data,
+> +                       BIOSLinker *linker,
+> +                       RISCVVirtState *s)
+> +{
+> +    MachineState *ms = MACHINE(s);
+> +    int socket;
+> +    uint16_t base_hartid = 0;
+> +    uint32_t cpu_id = 0;
+> +
+> +    AcpiTable table = { .sig = "APIC", .rev = 6, .oem_id = s->oem_id,
+> +                        .oem_table_id = s->oem_table_id };
+> +
+> +    acpi_table_begin(&table, table_data);
+> +    /* Local Interrupt Controller Address */
+> +    build_append_int_noprefix(table_data, 0, 4);
+> +    build_append_int_noprefix(table_data, 0, 4);   /* MADT Flags */
+> +
+> +    /* RISC-V Local INTC structures per HART */
+> +    for (socket = 0; socket < riscv_socket_count(ms); socket++) {
+> +        base_hartid = riscv_socket_first_hartid(ms, socket);
+> +
+> +        for (int i = 0; i < s->soc[socket].num_harts; i++) {
+> +            build_append_int_noprefix(table_data, 0x18, 1);    /* Type     */
+> +            build_append_int_noprefix(table_data, 20, 1);      /* Length   */
+> +            build_append_int_noprefix(table_data, 1, 1);       /* Version  */
+> +            build_append_int_noprefix(table_data, 0, 1);       /* Reserved */
+> +            build_append_int_noprefix(table_data, 1, 4);       /* Flags    */
+> +            build_append_int_noprefix(table_data,
+> +                                      (base_hartid + i), 8);   /* Hart ID  */
+> +
+> +            /* ACPI Processor UID  */
+> +            build_append_int_noprefix(table_data, cpu_id, 4);
 
-Regards,
+cpu_id here seems to be unrelated to one in DSDT.
+Could you explain how socket/hartid and cpu_id are related to each other?
 
-Weiwei Li
-
->
->>       }
->>   
->>       env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
->> @@ -1990,14 +1994,15 @@ static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
->>           return ret;
->>       }
->>   
->> -    *val = env->henvcfg >> 32;
->> +    *val = (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE) |
->> +                            env->menvcfg)) >> 32;
->>       return RISCV_EXCP_NONE;
->>   }
->>   
->>   static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
->>                                     target_ulong val)
->>   {
->> -    uint64_t mask = HENVCFG_PBMTE | HENVCFG_STCE;
->> +    uint64_t mask = env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE);
->>       uint64_t valh = (uint64_t)val << 32;
->>       RISCVException ret;
->>   
->> -- 
->> 2.25.1
->>
->>
-> Thanks,
-> drew
+> +            cpu_id++;
+> +        }
+> +    }
+> +
+> +    acpi_table_end(linker, &table);
+> +}
+> +
+>  static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
+>  {
+>      GArray *table_offsets;
+> @@ -153,6 +194,9 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
+>      acpi_add_table(table_offsets, tables_blob);
+>      build_fadt_rev6(tables_blob, tables->linker, s, dsdt);
+>  
+> +    acpi_add_table(table_offsets, tables_blob);
+> +    build_madt(tables_blob, tables->linker, s);
+> +
+>      /* XSDT is pointed to by RSDP */
+>      xsdt = tables_blob->len;
+>      build_xsdt(tables_blob, tables->linker, table_offsets, s->oem_id,
 
 
