@@ -1,69 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVc8c-0001pC-31
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 12:45:42 -0500
+	id 1pVdBe-0007Lv-0S
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 13:52:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pVc8a-0001oN-Er
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 12:45:40 -0500
-Received: from mail-oa1-x30.google.com ([2001:4860:4864:20::30])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1pVdBZ-0007LG-AO
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 13:52:50 -0500
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pVc8Y-0003Zn-O6
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 12:45:40 -0500
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-1723ab0375eso324856fac.1
- for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 09:45:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6d8NvIbXd3OTFEBOjLeLjQoPN4gqAkbvmVXDYpiY2cE=;
- b=pG6VmqyPGDCCaKGj87nHCI89mJWMEUQAcu1Ag0urlnCNVAf+gFzK7ZnCzVuObbS67K
- kreRQkVHfhW6lZTlH3Gd4w8hBrzY0C1pXpOgm0YNFEG6LIhGCK50elSAhyGxYMmHJMzl
- VmGE7FFwH8dP0zvvIISd0HHO3RqkU16OV2ND6KPN4i0qr6v5tyvYWwsm2SkISAqaEYWe
- ZMkAzUX3eTnhAJmP3ZMECr4LrOM8A9eWj+rvs76Un+VB4YnIy+GfYqP6yhmeVnaZ7gqq
- ScCj8mxQvcq/im4Q+qndN1ZqvcK2zHZWt42n7m/wsEQ6cr6f0j6wmo7a0m65rhjAjrZf
- mYsg==
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1pVdBX-0007u5-50
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 13:52:49 -0500
+Received: by mail-pj1-x102c.google.com with SMTP id u10so17417085pjc.5
+ for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 10:52:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QYAvMRnEOrYHcJ/zzAzrW/bNwasKcwx4YV7c5enUUFk=;
+ b=Y8ozZMI8r0DV5lA/Dljn9UuAPC8a5KFCjFRKYOvfTHxuLkf9mJ64ShAYZVB7aC+N6a
+ xHPXz9TyMj8hh2J42GcaeIYcTpd1xl6wqglCH8fw+PNyD48Oa/s1ltNLtUHl1cs9DFVO
+ elkj3KeMotlgHorm7uDAl/6/wvemCLgcL3OC4u45K9ugzvZ3D0lFuCm5lTYwkBWc5AZT
+ zCL+Ba+MlGjJBFeKRl4yvPHHd4thj8Y7sf6YrSxdfMC4BwXIUnxPUAHFwiHGWfPQ8Ot/
+ N+x5fXr0LMHFhQ5c1NHol+p4pIApZj7c+KqEh8/raeSBQ39LS+RmzE2qcBHqeuCf5JEf
+ i2TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6d8NvIbXd3OTFEBOjLeLjQoPN4gqAkbvmVXDYpiY2cE=;
- b=Hxz62/NeepN3cuyzCPCcMlzX/N56Z6htx9xxZDX/wMWucHpl0GAuDZD2ZU38fIlnPE
- TL8UXAjjMTL1l6NQwVKLun8/xSXADTc3evkK8tzzgXBN1XovbJAYuArvb+fa45iJ4ysm
- i5ZKCnIkAKjVU2lIAeTAVr6jhwqLNGiUZLI/8gM3s6xPt1twiCQflnOx2BEIBhF5zdwP
- bCOB7DP8ArnZt4DjC6gslhmDS42zxKMH529XthXPkJJ3IJXE4v3l6y3dMpZYyMJNjI47
- ZN79V/qILA5pcvViq0c8hjOlNgIYsEnYD7kdX4/vhH+zo3UeybIBZHpiQPOWk7mOAKHL
- j1wg==
-X-Gm-Message-State: AO0yUKWd/PHOP9fHlP4Hvxw3PSzmpRcREn8Xb50beCD7CqRSvwkimMmE
- 0ikUR9uDLpMF0zowSpWxNblGnw==
-X-Google-Smtp-Source: AK7set/fmLzRsuAY8Tl++MGTnNZrgMfxNDS4jVZXy4WQwNL3dlP9VILSUTzyQd+6j/j6fVGFj/MhSA==
-X-Received: by 2002:a05:6870:469f:b0:16d:f3c8:cf8d with SMTP id
- a31-20020a056870469f00b0016df3c8cf8dmr14000949oap.29.1677260738080; 
- Fri, 24 Feb 2023 09:45:38 -0800 (PST)
-Received: from grind.. ([189.110.112.117]) by smtp.gmail.com with ESMTPSA id
- zf48-20020a0568716ab000b001722c5625e2sm3604123oab.7.2023.02.24.09.45.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Feb 2023 09:45:37 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 4/4] target/riscv/csr.c: avoid env_archcpu() usages when
- reading RISCVCPUConfig
-Date: Fri, 24 Feb 2023 14:45:20 -0300
-Message-Id: <20230224174520.92490-5-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230224174520.92490-1-dbarboza@ventanamicro.com>
-References: <20230224174520.92490-1-dbarboza@ventanamicro.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QYAvMRnEOrYHcJ/zzAzrW/bNwasKcwx4YV7c5enUUFk=;
+ b=EYWFLSJRWxe6w26EqEMPkTqeh4Gs3XwV1aUkddskchB9eNopj/gYjC+WJClj5K5Mh+
+ kVb7AlSu065VqcPG9OJMexaw00UkHiWY10+EfJQQ1/Uj7QeV2j1e2sUOc1Y5aZWgVqlu
+ p9DicVCcA2GQOntwCMLfQW2HMYdjQ+V+h4ioP4Od57pwoJn3oqnCsBqgm7pHhW00XyK6
+ UrrXJuv+xyU6RRVIb1NT5701XrlXvuPs4QnMn/wKD3StuKJwKsNH+L5ub+drkfHVay30
+ yB/97kw7JHeVvyAKhWDvTbzF9V/UsHpA6Tf5Qf9AHHW89rzpCwruZe5BcTeMonz1uIuJ
+ 5Liw==
+X-Gm-Message-State: AO0yUKV3jHUD7tcciD83puyYPxMvupdNPTuOS+WxO2Evsd8sNrbvYGM5
+ l5o3GDwOhWDwzKvg2ZNabxkMUq016BJHoCviz4Ifxg==
+X-Google-Smtp-Source: AK7set+nrNMeJhPcTSt4hG0r4mOyQhlWUFkQa4zPVYzAuuZf977xGkp7w+q0kOkphlSa8t2my8eggIqsl9X/d1rxkIo=
+X-Received: by 2002:a17:902:a386:b0:198:ec76:e249 with SMTP id
+ x6-20020a170902a38600b00198ec76e249mr3443552pla.13.1677264765610; Fri, 24 Feb
+ 2023 10:52:45 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::30;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x30.google.com
+References: <mhng-61abd1f7-4d76-42de-85b2-42466ec0673f@palmer-ri-x1c9a>
+ <ffe100bb-b2b9-1c74-5b66-4f7ebee6d5ee@redhat.com>
+In-Reply-To: <ffe100bb-b2b9-1c74-5b66-4f7ebee6d5ee@redhat.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 24 Feb 2023 18:52:34 +0000
+Message-ID: <CAFEAcA_OYJFTXxVjmKs8WAHosnqUzu4o4uN3WU21w29O2=tzjg@mail.gmail.com>
+Subject: Re: [PULL 0/9] Fourth RISC-V PR for QEMU 8.0
+To: Thomas Huth <thuth@redhat.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, alex.bennee@linaro.org,
+ bmeng@tinylab.org, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=peter.maydell@linaro.org; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,117 +74,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2023 17:45:40 -0000
+X-List-Received-Date: Fri, 24 Feb 2023 18:52:51 -0000
 
-Retrieving the CPU pointer using env_archcpu() just to access cpu->cfg
-can be avoided by using riscv_cpu_cfg().
+On Fri, 24 Feb 2023 at 06:56, Thomas Huth <thuth@redhat.com> wrote:
+>
+>   Hi!
+>
+> On 23/02/2023 23.49, Palmer Dabbelt wrote:
+> > Nobody's replied, so I'm inclined to just drop the OpenSBI bump and re-send
+> > the PR.  At least that way we can avoid getting blocked on the CI issues.
+> > There's some more in flight so there'll probably be a 5th round before the
+> > freeze either way, at least this way the stuff that works can avoid getting
+> > blocked.
+>
+> Please note that pull requests are currently not processed
+> anyway ('til March 1st), see:
+>
+>   https://lore.kernel.org/qemu-devel/CAFEAcA83u_ENxDj3GJKa-xv6eLJGJPr_9FRDKAqm3qACyhrTgg@mail.gmail.com/
 
-Suggested-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/csr.c | 32 +++++++++-----------------------
- 1 file changed, 9 insertions(+), 23 deletions(-)
+I've been able to do some pullreq processing with a combination
+of the private CI runners, my personal gitlab account's CI minute
+allowance, and local ad-hoc jobs. So probably best not to wait
+til March 1st before sending.
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 53f1a331f9..ffa2d7b606 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -213,9 +213,7 @@ static RISCVException any32(CPURISCVState *env, int csrno)
- 
- static int aia_any(CPURISCVState *env, int csrno)
- {
--    RISCVCPU *cpu = env_archcpu(env);
--
--    if (!cpu->cfg.ext_smaia) {
-+    if (!riscv_cpu_cfg(env)->ext_smaia) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-@@ -224,9 +222,7 @@ static int aia_any(CPURISCVState *env, int csrno)
- 
- static int aia_any32(CPURISCVState *env, int csrno)
- {
--    RISCVCPU *cpu = env_archcpu(env);
--
--    if (!cpu->cfg.ext_smaia) {
-+    if (!riscv_cpu_cfg(env)->ext_smaia) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-@@ -253,9 +249,7 @@ static int smode32(CPURISCVState *env, int csrno)
- 
- static int aia_smode(CPURISCVState *env, int csrno)
- {
--    RISCVCPU *cpu = env_archcpu(env);
--
--    if (!cpu->cfg.ext_ssaia) {
-+    if (!riscv_cpu_cfg(env)->ext_ssaia) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-@@ -264,9 +258,7 @@ static int aia_smode(CPURISCVState *env, int csrno)
- 
- static int aia_smode32(CPURISCVState *env, int csrno)
- {
--    RISCVCPU *cpu = env_archcpu(env);
--
--    if (!cpu->cfg.ext_ssaia) {
-+    if (!riscv_cpu_cfg(env)->ext_ssaia) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-@@ -380,9 +372,7 @@ static RISCVException pointer_masking(CPURISCVState *env, int csrno)
- 
- static int aia_hmode(CPURISCVState *env, int csrno)
- {
--    RISCVCPU *cpu = env_archcpu(env);
--
--    if (!cpu->cfg.ext_ssaia) {
-+    if (!riscv_cpu_cfg(env)->ext_ssaia) {
-         return RISCV_EXCP_ILLEGAL_INST;
-      }
- 
-@@ -391,9 +381,7 @@ static int aia_hmode(CPURISCVState *env, int csrno)
- 
- static int aia_hmode32(CPURISCVState *env, int csrno)
- {
--    RISCVCPU *cpu = env_archcpu(env);
--
--    if (!cpu->cfg.ext_ssaia) {
-+    if (!riscv_cpu_cfg(env)->ext_ssaia) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-@@ -430,9 +418,7 @@ static RISCVException debug(CPURISCVState *env, int csrno)
- 
- static RISCVException seed(CPURISCVState *env, int csrno)
- {
--    RISCVCPU *cpu = env_archcpu(env);
--
--    if (!cpu->cfg.ext_zkr) {
-+    if (!riscv_cpu_cfg(env)->ext_zkr) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-@@ -555,7 +541,7 @@ static RISCVException read_vl(CPURISCVState *env, int csrno,
- 
- static int read_vlenb(CPURISCVState *env, int csrno, target_ulong *val)
- {
--    *val = env_archcpu(env)->cfg.vlen >> 3;
-+    *val = riscv_cpu_cfg(env)->vlen >> 3;
-     return RISCV_EXCP_NONE;
- }
- 
-@@ -610,7 +596,7 @@ static RISCVException write_vstart(CPURISCVState *env, int csrno,
-      * The vstart CSR is defined to have only enough writable bits
-      * to hold the largest element index, i.e. lg2(VLEN) bits.
-      */
--    env->vstart = val & ~(~0ULL << ctzl(env_archcpu(env)->cfg.vlen));
-+    env->vstart = val & ~(~0ULL << ctzl(riscv_cpu_cfg(env)->vlen));
-     return RISCV_EXCP_NONE;
- }
- 
--- 
-2.39.2
-
+thanks
+-- PMM
 
