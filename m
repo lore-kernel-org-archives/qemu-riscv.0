@@ -1,77 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVY5L-0003kk-TB
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 08:26:05 -0500
+	id 1pVY5P-0003mI-I1
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 08:26:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pVY5C-0003iv-Bs
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 08:25:55 -0500
-Received: from mail-oa1-x2f.google.com ([2001:4860:4864:20::2f])
+ id 1pVY5I-0003k8-2G
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 08:26:01 -0500
+Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pVY58-0005U9-B1
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 08:25:51 -0500
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-1729bdcca99so2823609fac.12
- for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 05:25:49 -0800 (PST)
+ id 1pVY5D-0005Ua-9w
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 08:25:57 -0500
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-1722c48a773so16398196fac.2
+ for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 05:25:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jR/gDGrKY2oOFb5rpnLo5gcR+ckh8I3+coh9b7Ltzc4=;
- b=JBEG5LkqzfqA4nqrOW3hXkSlGDsZMGyKasy3vaGQfAD/9O52DV17LpUHHPlQ7dUBze
- qVIEdGNhdmG3riN8vDWEDRPUkDYh+1gqqfZEtiZXFPzbuMNqXjLyxH/QMEFm66t5gEAy
- 1TfX6QEGkUQwvjFq1WaSn8VLbMzF0SWyRkCRmbWdY1UrVooOR4VqxeCP1XkhbKCKpRaw
- FMVK58iBjqK5s6lLH/JaIOzctxt4kExTJdyqi2zJDxHQo8Oh885uaT0FAXDfl1ti8rS4
- CX0LAfmjteXNMrwM34xu7DYRumMYExQ5hpY0DW8XSZVtrVs1Y0IerdmVLtkblrCqfUc7
- FyFA==
+ bh=CL4GPYzKFLWZQ/FFxXY4BBdu3KOs7b8oA1qVwK+TM10=;
+ b=bTx98EA587Cg7D8/7U/8ylJxrSio80qkvCluIneRuywa74dz93UIsS/yV95nTriGNd
+ iyWYNtOwRQGtJjv45OSdPRWgNXfpPJuMngxNlGhlpAwf/iQ9xtckq/tbrGT2NyJAIKxD
+ nnXjP97u38TdhkupmuQssdUETDNwqBYfT0qpwPOuX/2fCiCjmHlADL5b8WWpPb3DehH0
+ cVUFFFoAXE5LwtIyDqA9/o+POorj4LRGOtjfPGbGYq5Zv0kKtsSIIs0mEPTOfUs0RlQU
+ MJIzsvho0pKNCkCLxCBOEi/TSAqeIh0CJ2WjClM6w6jmjcdp3F+AoWNNAubtS/603YNR
+ 6I/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jR/gDGrKY2oOFb5rpnLo5gcR+ckh8I3+coh9b7Ltzc4=;
- b=PclD92ucyhwLlnbWbugZL/nOCU+fw9nAeoMGBnG9HUrADU/RevhdNAH09jNoWdMhh+
- Xn2LOI4YOHpnLNe6ItzgL49MtqmnbXmsDf4TZkgBnCe/UOXh1kLd4p8MCPFD67tZKOxa
- VJI2evxZRCO9y4gAjfhSVGuq91MrafT9TS+vsJHHK+4eO2IjMdNoJbQRNX+yFccUCqlA
- SFzAavQolnDE073cqorqh5QLFgHnoW/wesrLRUeDAgG8Xqw1WgSoDAMcslk/K3Zu/cED
- QL+CeetbW7PIdhWbNgmYikjzFGM/eykC0wtnJvUvBGdKg6q9NL1f9CqDHPHxy3mp6lQ6
- NOUQ==
-X-Gm-Message-State: AO0yUKWt2nEMaAZ69rBAaOX7XRUZrMZyI3BLsHJVIIfCVy2iLznP61I/
- D8ARmeGaWeWGqaBaxrfHITMysA==
-X-Google-Smtp-Source: AK7set+l+2fnF8m12Vdr5xS5lFgFbO9MpK2+TyXs1YsMQ2siiK80nu5XzOxh9phP8H3v54dp1mJtkQ==
-X-Received: by 2002:a05:6870:ea97:b0:16d:ccf9:bb4d with SMTP id
- s23-20020a056870ea9700b0016dccf9bb4dmr11420494oap.39.1677245149143; 
- Fri, 24 Feb 2023 05:25:49 -0800 (PST)
+ bh=CL4GPYzKFLWZQ/FFxXY4BBdu3KOs7b8oA1qVwK+TM10=;
+ b=OyOaFfcowVbm+tWpqphkUb1sh98GVshHzAJUmuIYaa/8vs3AMG4he2Ls9B2NOxpRTU
+ pHaEDbHq/0RteJPgl8GP9o3cZ6BERQtAynxCk5ZP5g2mZ6t3YP9t2Zid0raz1U5KhmWS
+ oDFY/OIWX8f7mgkGt2l5ym1BeAf9ve8Q0BLatx/quvkfzpf4k9VW1wajVfuwZOm+Hz0e
+ L2i+k/P+NMdE9vcqG5ADjVxUUaOJcGm7G2kKWRjZEvoyMiQ6Awl3saeMP5wQ4psjoLmc
+ vnc3BfYMQUmX8rJHSpXrzsYku484bZaXOfivECpQPPXjIjSINGx/K8YFw+UUaTuhRqIF
+ NcqQ==
+X-Gm-Message-State: AO0yUKUUPTQTYafjwW0ilKzj/x03uF7rIgbyjTdCzRnKcuxplA8f+xt5
+ Oa5OQWchvwu0kCtqTiz2kNEpCA==
+X-Google-Smtp-Source: AK7set+Ha5UFcVcpYJ7cGOFpqJx6DI6Wmla321zYCNlIyNS3vhDkNgPjh90ALrKBLWxi2Ctixid/2Q==
+X-Received: by 2002:a05:6870:4713:b0:172:2c74:b99d with SMTP id
+ b19-20020a056870471300b001722c74b99dmr7488543oaq.50.1677245153650; 
+ Fri, 24 Feb 2023 05:25:53 -0800 (PST)
 Received: from grind.. ([2804:18:18bc:fbbd:3c90:eebc:7544:73fd])
  by smtp.gmail.com with ESMTPSA id
- b5-20020a05687061c500b001435fe636f2sm3383763oah.53.2023.02.24.05.25.46
+ b5-20020a05687061c500b001435fe636f2sm3383763oah.53.2023.02.24.05.25.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Feb 2023 05:25:48 -0800 (PST)
+ Fri, 24 Feb 2023 05:25:53 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- richard.henderson@linaro.org,
+ richard.henderson@linaro.org, Christoph Muellner <cmuellner@linux.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v8 1/4] tcg: add 'size' param to probe_access_flags()
-Date: Fri, 24 Feb 2023 10:25:33 -0300
-Message-Id: <20230224132536.552293-2-dbarboza@ventanamicro.com>
+Subject: [PATCH v8 2/4] target/riscv: implement Zicboz extension
+Date: Fri, 24 Feb 2023 10:25:34 -0300
+Message-Id: <20230224132536.552293-3-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230224132536.552293-1-dbarboza@ventanamicro.com>
 References: <20230224132536.552293-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2f.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::31;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x31.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,197 +85,253 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2023 13:25:55 -0000
+X-List-Received-Date: Fri, 24 Feb 2023 13:26:01 -0000
 
-probe_access_flags() as it is today uses probe_access_full(), which in
-turn uses probe_access_internal() with size = 0. probe_access_internal()
-then uses the size to call the tlb_fill() callback for the given CPU.
-This size param ('fault_size' as probe_access_internal() calls it) is
-ignored by most existing .tlb_fill callback implementations, e.g.
-arm_cpu_tlb_fill(), ppc_cpu_tlb_fill(), x86_cpu_tlb_fill() and
-mips_cpu_tlb_fill() to name a few.
+From: Christoph Muellner <cmuellner@linux.com>
 
-But RISC-V riscv_cpu_tlb_fill() actually uses it. The 'size' parameter
-is used to check for PMP (Physical Memory Protection) access. This is
-necessary because PMP does not make any guarantees about all the bytes
-of the same page having the same permissions, i.e. the same page can
-have different PMP properties, so we're forced to make sub-page range
-checks. To allow RISC-V emulation to do a probe_acess_flags() that
-covers PMP, we need to either add a 'size' param to the existing
-probe_acess_flags() or create a new interface (e.g.
-probe_access_range_flags).
+The RISC-V base cache management operation (CBO) ISA extension has been
+ratified. It defines three extensions: Cache-Block Management, Cache-Block
+Prefetch and Cache-Block Zero. More information about the spec can be
+found at [1].
 
-There are quite a few probe_* APIs already, so let's add a 'size' param
-to probe_access_flags() and re-use this API. This is done by open coding
-what probe_access_full() does inside probe_acess_flags() and passing the
-'size' param to probe_acess_internal(). Existing probe_access_flags()
-callers use size = 0 to not change their current API usage. 'size' is
-asserted to enforce single page access like probe_access() already does.
+Let's start by implementing the Cache-Block Zero extension, Zicboz. It
+uses the cbo.zero instruction that, as with all CBO instructions that
+will be added later, needs to be implemented in an overlap group with
+the LQ instruction due to overlapping patterns.
 
-No behavioral changes intended.
+cbo.zero throws a Illegal Instruction/Virtual Instruction exception
+depending on CSR state. This is also the case for the remaining cbo
+instructions we're going to add next, so create a check_zicbo_envcfg()
+that will be used by all Zicbo[mz] instructions.
+
+[1] https://github.com/riscv/riscv-CMOs/blob/master/specifications/cmobase-v1.0.1.pdf
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Co-developed-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Signed-off-by: Christoph Muellner <cmuellner@linux.com>
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- accel/stubs/tcg-stub.c        |  2 +-
- accel/tcg/cputlb.c            | 17 ++++++++++++++---
- accel/tcg/user-exec.c         |  5 +++--
- include/exec/exec-all.h       |  3 ++-
- semihosting/uaccess.c         |  2 +-
- target/arm/ptw.c              |  2 +-
- target/arm/sve_helper.c       |  2 +-
- target/s390x/tcg/mem_helper.c |  6 +++---
- 8 files changed, 26 insertions(+), 13 deletions(-)
+ target/riscv/cpu.c                          |  4 ++
+ target/riscv/cpu.h                          |  2 +
+ target/riscv/helper.h                       |  3 +
+ target/riscv/insn32.decode                  | 10 ++-
+ target/riscv/insn_trans/trans_rvzicbo.c.inc | 30 +++++++++
+ target/riscv/op_helper.c                    | 68 +++++++++++++++++++++
+ target/riscv/translate.c                    |  1 +
+ 7 files changed, 117 insertions(+), 1 deletion(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvzicbo.c.inc
 
-diff --git a/accel/stubs/tcg-stub.c b/accel/stubs/tcg-stub.c
-index c1b05767c0..96af23dc5d 100644
---- a/accel/stubs/tcg-stub.c
-+++ b/accel/stubs/tcg-stub.c
-@@ -25,7 +25,7 @@ void tcg_flush_jmp_cache(CPUState *cpu)
- {
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 93b52b826c..7dd37de7f9 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -74,6 +74,7 @@ struct isa_ext_data {
+ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(h, false, PRIV_VERSION_1_12_0, ext_h),
+     ISA_EXT_DATA_ENTRY(v, false, PRIV_VERSION_1_10_0, ext_v),
++    ISA_EXT_DATA_ENTRY(zicboz, true, PRIV_VERSION_1_12_0, ext_icboz),
+     ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ext_icsr),
+     ISA_EXT_DATA_ENTRY(zifencei, true, PRIV_VERSION_1_10_0, ext_ifencei),
+     ISA_EXT_DATA_ENTRY(zihintpause, true, PRIV_VERSION_1_10_0, ext_zihintpause),
+@@ -1126,6 +1127,9 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("zhinx", RISCVCPU, cfg.ext_zhinx, false),
+     DEFINE_PROP_BOOL("zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
+ 
++    DEFINE_PROP_BOOL("zicboz", RISCVCPU, cfg.ext_icboz, true),
++    DEFINE_PROP_UINT16("cboz_blocksize", RISCVCPU, cfg.cboz_blocksize, 64),
++
+     DEFINE_PROP_BOOL("zmmul", RISCVCPU, cfg.ext_zmmul, false),
+ 
+     /* Vendor-specific custom extensions */
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 7128438d8e..6b4c714d3a 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -447,6 +447,7 @@ struct RISCVCPUConfig {
+     bool ext_zkt;
+     bool ext_ifencei;
+     bool ext_icsr;
++    bool ext_icboz;
+     bool ext_zihintpause;
+     bool ext_smstateen;
+     bool ext_sstc;
+@@ -494,6 +495,7 @@ struct RISCVCPUConfig {
+     char *vext_spec;
+     uint16_t vlen;
+     uint16_t elen;
++    uint16_t cboz_blocksize;
+     bool mmu;
+     bool pmp;
+     bool epmp;
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 0497370afd..ce165821b8 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -97,6 +97,9 @@ DEF_HELPER_FLAGS_2(fcvt_h_l, TCG_CALL_NO_RWG, i64, env, tl)
+ DEF_HELPER_FLAGS_2(fcvt_h_lu, TCG_CALL_NO_RWG, i64, env, tl)
+ DEF_HELPER_FLAGS_2(fclass_h, TCG_CALL_NO_RWG_SE, tl, env, i64)
+ 
++/* Cache-block operations */
++DEF_HELPER_2(cbo_zero, void, env, tl)
++
+ /* Special functions */
+ DEF_HELPER_2(csrr, tl, env, int)
+ DEF_HELPER_3(csrw, void, env, int, tl)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index b7e7613ea2..3985bc703f 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -179,7 +179,15 @@ sraw     0100000 .....  ..... 101 ..... 0111011 @r
+ 
+ # *** RV128I Base Instruction Set (in addition to RV64I) ***
+ ldu      ............   ..... 111 ..... 0000011 @i
+-lq       ............   ..... 010 ..... 0001111 @i
++{
++  [
++    # *** RV32 Zicboz Standard Extension ***
++    cbo_zero   0000000 00100 ..... 010 00000 0001111 @sfence_vm
++  ]
++
++  # *** RVI128 lq ***
++  lq       ............   ..... 010 ..... 0001111 @i
++}
+ sq       ............   ..... 100 ..... 0100011 @s
+ addid    ............  .....  000 ..... 1011011 @i
+ sllid    000000 ......  ..... 001 ..... 1011011 @sh6
+diff --git a/target/riscv/insn_trans/trans_rvzicbo.c.inc b/target/riscv/insn_trans/trans_rvzicbo.c.inc
+new file mode 100644
+index 0000000000..feabc28342
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzicbo.c.inc
+@@ -0,0 +1,30 @@
++/*
++ * RISC-V translation routines for the RISC-V CBO Extension.
++ *
++ * Copyright (c) 2021 Philipp Tomsich, philipp.tomsich@vrull.eu
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#define REQUIRE_ZICBOZ(ctx) do {    \
++    if (!ctx->cfg_ptr->ext_icboz) { \
++        return false;               \
++    }                               \
++} while (0)
++
++static bool trans_cbo_zero(DisasContext *ctx, arg_cbo_zero *a)
++{
++    REQUIRE_ZICBOZ(ctx);
++    gen_helper_cbo_zero(cpu_env, cpu_gpr[a->rs1]);
++    return true;
++}
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 48f918b71b..c43ecc19b5 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -3,6 +3,7 @@
+  *
+  * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
+  * Copyright (c) 2017-2018 SiFive, Inc.
++ * Copyright (c) 2022      VRULL GmbH
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms and conditions of the GNU General Public License,
+@@ -123,6 +124,73 @@ target_ulong helper_csrrw_i128(CPURISCVState *env, int csr,
+     return int128_getlo(rv);
  }
  
--int probe_access_flags(CPUArchState *env, target_ulong addr,
-+int probe_access_flags(CPUArchState *env, target_ulong addr, int size,
-                        MMUAccessType access_type, int mmu_idx,
-                        bool nonfault, void **phost, uintptr_t retaddr)
- {
-diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-index 4812d83961..fc27e34457 100644
---- a/accel/tcg/cputlb.c
-+++ b/accel/tcg/cputlb.c
-@@ -1606,14 +1606,25 @@ int probe_access_full(CPUArchState *env, target_ulong addr,
-     return flags;
- }
- 
--int probe_access_flags(CPUArchState *env, target_ulong addr,
-+int probe_access_flags(CPUArchState *env, target_ulong addr, int size,
-                        MMUAccessType access_type, int mmu_idx,
-                        bool nonfault, void **phost, uintptr_t retaddr)
- {
-     CPUTLBEntryFull *full;
-+    int flags;
 +
-+    g_assert(-(addr | TARGET_PAGE_MASK) >= size);
-+
-+    flags = probe_access_internal(env, addr, size, access_type, mmu_idx,
-+                                  nonfault, phost, &full, retaddr);
- 
--    return probe_access_full(env, addr, access_type, mmu_idx,
--                             nonfault, phost, &full, retaddr);
-+    /* Handle clean RAM pages. */
-+    if (unlikely(flags & TLB_NOTDIRTY)) {
-+        notdirty_write(env_cpu(env), addr, 1, full, retaddr);
-+        flags &= ~TLB_NOTDIRTY;
++/*
++ * check_zicbo_envcfg
++ *
++ * Raise virtual exceptions and illegal instruction exceptions for
++ * Zicbo[mz] instructions based on the settings of [mhs]envcfg as
++ * specified in section 2.5.1 of the CMO specification.
++ */
++static void check_zicbo_envcfg(CPURISCVState *env, target_ulong envbits,
++                                uintptr_t ra)
++{
++#ifndef CONFIG_USER_ONLY
++    if ((env->priv < PRV_M) && !get_field(env->menvcfg, envbits)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
 +    }
 +
-+    return flags;
- }
++    if (riscv_cpu_virt_enabled(env) &&
++        (((env->priv < PRV_H) && !get_field(env->henvcfg, envbits)) ||
++         ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits)))) {
++        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, ra);
++    }
++
++    if ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits)) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
++    }
++#endif
++}
++
++void helper_cbo_zero(CPURISCVState *env, target_ulong address)
++{
++    RISCVCPU *cpu = env_archcpu(env);
++    uint16_t cbozlen = cpu->cfg.cboz_blocksize;
++    int mmu_idx = cpu_mmu_index(env, false);
++    uintptr_t ra = GETPC();
++    void *mem;
++
++    check_zicbo_envcfg(env, MENVCFG_CBZE, ra);
++
++    /* Mask off low-bits to align-down to the cache-block. */
++    address &= ~(cbozlen - 1);
++
++    /*
++     * cbo.zero requires MMU_DATA_STORE access. Do a probe_write()
++     * to raise any exceptions, including PMP.
++     */
++    mem = probe_write(env, address, cbozlen, mmu_idx, ra);
++
++    if (likely(mem)) {
++        memset(mem, 0, cbozlen);
++    } else {
++        /*
++         * This means that we're dealing with an I/O page. Section 4.2
++         * of cmobase v1.0.1 says:
++         *
++         * "Cache-block zero instructions store zeros independently
++         * of whether data from the underlying memory locations are
++         * cacheable."
++         *
++         * Write zeros in address + cbozlen regardless of not being
++         * a RAM page.
++         */
++        for (int i = 0; i < cbozlen; i++) {
++            cpu_stb_mmuidx_ra(env, address + i, 0, mmu_idx, ra);
++        }
++    }
++}
++
+ #ifndef CONFIG_USER_ONLY
  
- void *probe_access(CPUArchState *env, target_ulong addr, int size,
-diff --git a/accel/tcg/user-exec.c b/accel/tcg/user-exec.c
-index ae67d84638..7b37fd229e 100644
---- a/accel/tcg/user-exec.c
-+++ b/accel/tcg/user-exec.c
-@@ -761,13 +761,14 @@ static int probe_access_internal(CPUArchState *env, target_ulong addr,
-     cpu_loop_exit_sigsegv(env_cpu(env), addr, access_type, maperr, ra);
- }
- 
--int probe_access_flags(CPUArchState *env, target_ulong addr,
-+int probe_access_flags(CPUArchState *env, target_ulong addr, int size,
-                        MMUAccessType access_type, int mmu_idx,
-                        bool nonfault, void **phost, uintptr_t ra)
- {
-     int flags;
- 
--    flags = probe_access_internal(env, addr, 0, access_type, nonfault, ra);
-+    g_assert(-(addr | TARGET_PAGE_MASK) >= size);
-+    flags = probe_access_internal(env, addr, size, access_type, nonfault, ra);
-     *phost = flags ? NULL : g2h(env_cpu(env), addr);
-     return flags;
- }
-diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
-index 54585a9954..b0d4916573 100644
---- a/include/exec/exec-all.h
-+++ b/include/exec/exec-all.h
-@@ -446,6 +446,7 @@ static inline void *probe_read(CPUArchState *env, target_ulong addr, int size,
-  * probe_access_flags:
-  * @env: CPUArchState
-  * @addr: guest virtual address to look up
-+ * @size: size of the access
-  * @access_type: read, write or execute permission
-  * @mmu_idx: MMU index to use for lookup
-  * @nonfault: suppress the fault
-@@ -460,7 +461,7 @@ static inline void *probe_read(CPUArchState *env, target_ulong addr, int size,
-  * Do handle clean pages, so exclude TLB_NOTDIRY from the returned flags.
-  * For simplicity, all "mmio-like" flags are folded to TLB_MMIO.
-  */
--int probe_access_flags(CPUArchState *env, target_ulong addr,
-+int probe_access_flags(CPUArchState *env, target_ulong addr, int size,
-                        MMUAccessType access_type, int mmu_idx,
-                        bool nonfault, void **phost, uintptr_t retaddr);
- 
-diff --git a/semihosting/uaccess.c b/semihosting/uaccess.c
-index 8018828069..7505eb6d1b 100644
---- a/semihosting/uaccess.c
-+++ b/semihosting/uaccess.c
-@@ -37,7 +37,7 @@ ssize_t softmmu_strlen_user(CPUArchState *env, target_ulong addr)
-         /* Find the number of bytes remaining in the page. */
-         left_in_page = TARGET_PAGE_SIZE - (addr & ~TARGET_PAGE_MASK);
- 
--        flags = probe_access_flags(env, addr, MMU_DATA_LOAD,
-+        flags = probe_access_flags(env, addr, 0, MMU_DATA_LOAD,
-                                    mmu_idx, true, &h, 0);
-         if (flags & TLB_INVALID_MASK) {
-             return -1;
-diff --git a/target/arm/ptw.c b/target/arm/ptw.c
-index 2b125fff44..1ecefb2027 100644
---- a/target/arm/ptw.c
-+++ b/target/arm/ptw.c
-@@ -407,7 +407,7 @@ static uint64_t arm_casq_ptw(CPUARMState *env, uint64_t old_val,
-         void *discard;
- 
-         env->tlb_fi = fi;
--        flags = probe_access_flags(env, ptw->out_virt, MMU_DATA_STORE,
-+        flags = probe_access_flags(env, ptw->out_virt, 0, MMU_DATA_STORE,
-                                    arm_to_core_mmu_idx(ptw->in_ptw_idx),
-                                    true, &discard, 0);
-         env->tlb_fi = NULL;
-diff --git a/target/arm/sve_helper.c b/target/arm/sve_helper.c
-index 521fc9b969..51909c44ac 100644
---- a/target/arm/sve_helper.c
-+++ b/target/arm/sve_helper.c
-@@ -5352,7 +5352,7 @@ bool sve_probe_page(SVEHostPage *info, bool nofault, CPUARMState *env,
-     addr = useronly_clean_ptr(addr);
- 
- #ifdef CONFIG_USER_ONLY
--    flags = probe_access_flags(env, addr, access_type, mmu_idx, nofault,
-+    flags = probe_access_flags(env, addr, 0, access_type, mmu_idx, nofault,
-                                &info->host, retaddr);
- #else
-     CPUTLBEntryFull *full;
-diff --git a/target/s390x/tcg/mem_helper.c b/target/s390x/tcg/mem_helper.c
-index d6725fd18c..c9fd4142f1 100644
---- a/target/s390x/tcg/mem_helper.c
-+++ b/target/s390x/tcg/mem_helper.c
-@@ -143,14 +143,14 @@ static int s390_probe_access(CPUArchState *env, target_ulong addr, int size,
-                              bool nonfault, void **phost, uintptr_t ra)
- {
- #if defined(CONFIG_USER_ONLY)
--    return probe_access_flags(env, addr, access_type, mmu_idx,
-+    return probe_access_flags(env, addr, 0, access_type, mmu_idx,
-                               nonfault, phost, ra);
- #else
-     int flags;
- 
-     env->tlb_fill_exc = 0;
--    flags = probe_access_flags(env, addr, access_type, mmu_idx, nonfault, phost,
--                               ra);
-+    flags = probe_access_flags(env, addr, 0, access_type, mmu_idx,
-+                               nonfault, phost, ra);
-     if (env->tlb_fill_exc) {
-         return env->tlb_fill_exc;
-     }
+ target_ulong helper_sret(CPURISCVState *env)
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 772f9d7973..7f687a7e37 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1104,6 +1104,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "insn_trans/trans_rvv.c.inc"
+ #include "insn_trans/trans_rvb.c.inc"
+ #include "insn_trans/trans_rvzawrs.c.inc"
++#include "insn_trans/trans_rvzicbo.c.inc"
+ #include "insn_trans/trans_rvzfh.c.inc"
+ #include "insn_trans/trans_rvk.c.inc"
+ #include "insn_trans/trans_privileged.c.inc"
 -- 
 2.39.2
 
