@@ -1,76 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVdJo-0001j0-8S
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 14:01:20 -0500
+	id 1pVfaP-0003x6-Uj
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 16:26:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pVdJm-0001gy-69
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 14:01:18 -0500
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
+ id 1pVfaO-0003w6-1N
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 16:26:36 -0500
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pVdJe-0002et-Sb
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 14:01:17 -0500
-Received: by mail-pj1-x102d.google.com with SMTP id
- oe18-20020a17090b395200b00236a0d55d3aso178636pjb.3
- for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 11:01:10 -0800 (PST)
+ id 1pVfaM-0005CF-7z
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 16:26:35 -0500
+Received: by mail-pl1-x635.google.com with SMTP id i10so824565plr.9
+ for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 13:26:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677265269;
- h=to:from:cc:content-transfer-encoding:mime-version:references
- :in-reply-to:message-id:date:subject:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LNYI9dmX50T6dGo7VdQuyO6akiZafXJYK1pmz8lKKOc=;
- b=azLaETNcBSd/1qj/mncSqkf9N7m7dRnnstusmkRrT/PadgC9NtPLcsoWKRMw+La+fD
- QQhzUBM+yudHJLhXOUeq580MPnR3tTQE6CYKSN6uhd27/TftUn0Y0sWXrYNXpoioP32a
- ZM2HOtIOXQsEyMxE5RnCvxdTafa56VYzLVjce2/Bkp7MO2eFgneapOAo5bS/UnIrXH+s
- kLjJE0uTBMDa/RKzK0WdayL0FN8hOSw29I9bYYQ7pEpPzPjdR81e206aC6gyE8qUjPJ3
- eyXbKJ1OEqsMtq2lf+vsfjWTYBmK0lePDgbeNme6yCjoYsOq+fhwMXxiwQHAEoEF7sVK
- UOgg==
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677273993;
+ h=to:from:cc:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:to:cc:subject:date:message-id:reply-to;
+ bh=x7wVxgcau1DjO9lf37dGwbT86wTbCe9KEdDRaNmXgyc=;
+ b=etl3d9mVnvYRzA+RA0TJ9RFo3F2YQDIO0+rGCtzzvYf/VQe5Ys9blgTYtgKOdyqiS8
+ mYgVqSZFvoHHH1ps3dykviIbmjP/H22ro+cU0kn9zuMk++GLTnMflCYhGX+wxZKJ6i9c
+ ++F+E357rPFyOxyKvOtcAVmNFyYlb0JuLTZTHL2JIxPsiN7ifQhPBUccBBxx+SOA9/RL
+ g0pau3sw4bdVurEQ/OEWSUFsluiCoavr2ypONTUcJK2GcLSwygXGm23/qhJoTGv9TbjN
+ 95gnWvG1bzeyeeVt1eAUZofY4Cms9o8fJ66Noo1M6C5uE/vq2ZeatKmilh8hdEVEWIxG
+ ssMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677265269;
- h=to:from:cc:content-transfer-encoding:mime-version:references
- :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LNYI9dmX50T6dGo7VdQuyO6akiZafXJYK1pmz8lKKOc=;
- b=F1fk2ezx+zCjJ09egGCfDj+qqtT6GGUVaeEk5wKe3A6IoRPw/HKvs18PRw4gbuw7R9
- otwEhkn6J2sH+H44j1IypJggBaHhuoB0DZmAVhm4MZ21E5YPymZ7LVJmj/H+fnqYUBEV
- avQ64sLHIywegOonc1UyPaeQiRlI+KeBFqqvN5dvQneBjozZAN0zkUnamHXCVMKEbLPC
- abvtH9DLfpla/KQlbkYe7MAaIYdY+T0YKLaalgAfBxC2OWRKNS3DFtOBUnn66z9RaV7Q
- odQVvF1dvvEPKDHPf3trE3b2RkK6EBv2gp9KZssHsu7xvlrKEfmrSsLDIv5dNomwQ55J
- JJGQ==
-X-Gm-Message-State: AO0yUKUsqjnLLUc1lrsdZnSr0p7fzCpSUTLhUixu/NLjH/dfCRu6Yh3F
- OzoEwChtfMVsYhIFc02dGUaygIloNeI2lN/z
-X-Google-Smtp-Source: AK7set/xfHOGTxTDaE0g2Bi9OyC2+byN/Gl0V+6hFt2A9V/VY6avfYrbf/DuBunpU4IpKai707a65w==
-X-Received: by 2002:a17:902:dad1:b0:198:9683:9f0a with SMTP id
- q17-20020a170902dad100b0019896839f0amr18581562plx.30.1677265269171; 
- Fri, 24 Feb 2023 11:01:09 -0800 (PST)
-Received: from localhost ([135.180.224.71]) by smtp.gmail.com with ESMTPSA id
- c14-20020a170902b68e00b0019c912c19d3sm7678485pls.62.2023.02.24.11.01.08
+ d=1e100.net; s=20210112; t=1677273993;
+ h=to:from:cc:content-transfer-encoding:mime-version:message-id:date
+ :subject:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=x7wVxgcau1DjO9lf37dGwbT86wTbCe9KEdDRaNmXgyc=;
+ b=GB4k3s4QrsI5eeDV8yxyv9n2T2yryHtKXZpwrwebxxDqPDRgBg6TmmRMB1wlZ+r9mF
+ QRwx0G1Pv8FsV8yBZ02skIHokR8qfO/AzTYQEuR8IyjO3D/DgK6PzTZJcaefannP9UQn
+ ce2qvz+vx0d5nUy/op6Pd1LxtDn2SdDlD+941Y0YKuF6QCHoHZzpAY2PwYKrGgN/8pkq
+ ARot2Lx9F86b2YQ/GG8ih0OxYK/v3WV3SP+6VxckrRBolHtQH/YrCQ3xOnF/fj9TWRb3
+ xvia7nlrm/snEvEsnI0ZsDAfaLw9whlKXmNHaVNVpMnhevfThxbPUN24+A0Y4nUU3xxg
+ saEg==
+X-Gm-Message-State: AO0yUKUKF3zeh2uv1X1KP0OpuR0urMsfKBlMdpH6Q9+IGZQ7mRABBaQk
+ Wi6hADQpBQ3jXzijxJ0CZ5yxrA==
+X-Google-Smtp-Source: AK7set/8w5OWFxKjI7EitKlyMKmz30LJWy22+idoIj1UJrM/iJjJtT6iWo3xWRn+yGHKO5B1GczPig==
+X-Received: by 2002:a17:903:2304:b0:19a:a673:4ee2 with SMTP id
+ d4-20020a170903230400b0019aa6734ee2mr16077539plh.31.1677273992836; 
+ Fri, 24 Feb 2023 13:26:32 -0800 (PST)
+Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
+ e10-20020a170902744a00b0019948184c33sm11014471plt.243.2023.02.24.13.26.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Feb 2023 11:01:08 -0800 (PST)
-Subject: [PULL 7/8] target/riscv: avoid env_archcpu() in cpu_get_tb_cpu_state()
-Date: Fri, 24 Feb 2023 10:59:08 -0800
-Message-Id: <20230224185908.32706-8-palmer@rivosinc.com>
-X-Mailer: git-send-email 2.39.0
-In-Reply-To: <20230224185908.32706-1-palmer@rivosinc.com>
-References: <20230224185908.32706-1-palmer@rivosinc.com>
+ Fri, 24 Feb 2023 13:26:32 -0800 (PST)
+Subject: [PATCH 0/2] Fix the OpenSBI CI job and bump to v1.2
+Date: Fri, 24 Feb 2023 13:25:41 -0800
+Message-Id: <20230224212543.20462-1-palmer@rivosinc.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- ilippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>, 
- Weiwei Li <liweiwei@iscas.ac.cn>, Palmer Dabbelt <palmer@rivosinc.com>
+Cc: qemu-devel@nongnu.org,          qemu-riscv@nongnu.org
 From: Palmer Dabbelt <palmer@rivosinc.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=palmer@rivosinc.com; helo=mail-pj1-x102d.google.com
+To: Bin Meng <bmeng.cn@gmail.com>, thuth@redhat.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=palmer@rivosinc.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,35 +75,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2023 19:01:18 -0000
+X-List-Received-Date: Fri, 24 Feb 2023 21:26:36 -0000
 
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+The OpenSBI version bump found a CI failure, which appears to actually
+have been related to the Docker version as opposed to the Ubuntu
+version -- at least assuming my local CI run
+<https://gitlab.com/palmer-dabbelt/qemu/-/jobs/3832389705> is accurate
+(thanks to Thomas for pointing out how to get those set up).
 
-We have a RISCVCPU *cpu pointer available at the start of the function.
+I've left off the Ubuntu version upgrade because it's triggering some
+key-related issues when in apt.  That's probably worth doing, but I
+figured it'd be better to send these along now to try and get things
+unblocked.  The EDK2 Docker setup looks like it would have the same
+issue but I'll also keep that independent.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <20230210123836.506286-1-dbarboza@ventanamicro.com>
-Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
----
- target/riscv/cpu_helper.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index ad8d82662c..3a9472a2ff 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -60,7 +60,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-          * which is not supported by GVEC. So we set vl_eq_vlmax flag to true
-          * only when maxsz >= 8 bytes.
-          */
--        uint32_t vlmax = vext_get_vlmax(env_archcpu(env), env->vtype);
-+        uint32_t vlmax = vext_get_vlmax(cpu, env->vtype);
-         uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
-         uint32_t maxsz = vlmax << sew;
-         bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) &&
--- 
-2.39.0
 
 
