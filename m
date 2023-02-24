@@ -1,61 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVWcc-0001hF-Tj
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 06:52:18 -0500
+	id 1pVWe7-0002Rv-B6
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 06:53:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pVWcb-0001gq-41
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 06:52:17 -0500
-Received: from mail-ot1-x332.google.com ([2607:f8b0:4864:20::332])
+ id 1pVWe5-0002Ra-Th
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 06:53:49 -0500
+Received: from mail-oi1-x230.google.com ([2607:f8b0:4864:20::230])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pVWcS-0000b2-MF
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 06:52:10 -0500
-Received: by mail-ot1-x332.google.com with SMTP id
- t7-20020a9d7487000000b00693d565b852so1647624otk.5
- for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 03:52:08 -0800 (PST)
+ id 1pVWe4-0000n5-CK
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 06:53:49 -0500
+Received: by mail-oi1-x230.google.com with SMTP id w7so15701044oik.13
+ for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 03:53:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=NztIuqCrmnJbgk5PLl4VI6hgopNK7qDKF7v5qYxbxHU=;
- b=aoIjFJQGN0KeroXatSrkUX1PVdXl+QjJYKonheNVd5pWATWYEY3qIs66ooKOekyrKX
- EpFk4IMsyBam99n8E0P1GCwPaD9qlq6lx265vg1PZLINqk3JYBxAj3oybcL/RENPnx4i
- 4diCo/14V86iM9QNrcDouZzf6hE+9nKI9sadtr7DZIv6jHW1KSWt6sOdqy0jP/I0gZNe
- 6Z0nFfljVAQydhXidx1ZHzkMUkWR6t3Jt/8NZjP0A6cshdTrskWEHYBndgHk8TF4aFTp
- kPdO2TEVpRu2M12Gm1dbmG8+MU0PLkoTzY7CQhXxXFoJgMnvjhiU++XX2Xld2Y4P1Ufx
- cdog==
+ bh=MvqvB85GzyImxzc9FrUa6+WYjCjVHIFrMy6ScFOPlaQ=;
+ b=mOssgRsovPy2KzeX/HQ3Z3qaEbgnAnasoElPOtfhKOhQdj0xG/4yC8IUHopFYHPiE3
+ JlcgBnk+jAlR+S1rmJcFKZWx+H7DYSmhM0AGifjc8z1SGj8yEqLqPbbqs9iaGb4sIA5w
+ bRno5J9d1DWCSff8B8N3H3TltaDdJFbTtTELtQWe6CWEE2ec0jXNLvavEWcXOr7YsGXl
+ Zurgr61yvwFfS7qOpoKZ+5KLghHdyDCs4Kvg9Vp8KAiEFxM5QCD/jVyplWTWdx00sM9+
+ +H+MqG1brzBdIANm36uftuXPzjg8+iwme7xq4gDRaMAOGG7mQVfyqhfNs2PlvMMrXwvm
+ YjQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NztIuqCrmnJbgk5PLl4VI6hgopNK7qDKF7v5qYxbxHU=;
- b=IigFnXN3GltbbozIGK0yrKrWSuO+BSNaKLQabNsnzk2hp/oxyZuKtzU2PcpV5NpMuo
- KJbd5CQoeC9JV7g5QvX5vV4AmDa+dj6+aMEevu/wLOOx3dQFUls7QudlfxMA5FlkpTah
- rE9iCcsxEWqACvcKnYFOODPea8zhrEP6bfAlRlSbroTSomDyQda4ID6SjeF/bHFkKAMD
- /q9AJ6AgD6U7ThlHzQGvrtAk3KKA1uLK41B73k/2xGilcX9OdbbluG4wlZ2tZTcnU0wT
- LNn7fNwqW9sC5kDUYcbFeX54OZOqLEtbs1JQQfSnuupIYSdA8ERKFgaRYyvvQvdn7x1Y
- iB+A==
-X-Gm-Message-State: AO0yUKXKzae2TKipUY4rQCIW1JXtP2zv0/aQ2tf0KV0zH3dU5ue4XniY
- syUatlH/E4dsO98oJ7FvsfGX9A==
-X-Google-Smtp-Source: AK7set8phahpZzX7jXdP+cKOAlGo62AtrdOy602z/aAv9LKuSRRCKadPZrclzBSL29LhN6A9w3MDSA==
-X-Received: by 2002:a05:6830:2656:b0:693:c3bb:8392 with SMTP id
- f22-20020a056830265600b00693c3bb8392mr5332140otu.7.1677239527222; 
- Fri, 24 Feb 2023 03:52:07 -0800 (PST)
+ bh=MvqvB85GzyImxzc9FrUa6+WYjCjVHIFrMy6ScFOPlaQ=;
+ b=3XhDmjS4tTt91aEtQ1HyuZNdRYLr9PQlkMW7PyJmmHP/QOrCb6LTDo7OSPfNcoTINW
+ bwJTZBukKaUZj+v+t4uOVoTKwdsua4ZxeYmwggFG+uFlQDFWyk37tWsYF/bOvfJhvhOx
+ frAVXhOr0ykKEsC8/YKfvm0yDieiSVGgQSU3RBHY6OvgvmzxIXclwS+Gdh6aV13G6Trg
+ N0hPaMbIm2qAgofdtIIp8qwyHyiCz2iGxPcnawfrlskjIav4FmtoijF7P4G8091zHQPe
+ 6atoEiq6keZJKqV2xF/FgYc/HSkh2Yl0YQSStmePwVx7+5n3KC5BHqBoM5SVRgvR0Y04
+ 619A==
+X-Gm-Message-State: AO0yUKV2u+o1y1uVx+3lKjTT1Hz1h8qsSKzY1kr5IzQq8W4Hl/Wt2RKl
+ w4Y/oL6Fzr8hJK2GYNl+umu+Gw==
+X-Google-Smtp-Source: AK7set+W44SiiK714B58TasCHofncdX4GcD7co/i/RwSxCcSQ3EKO8X2oNgz0NIbIqpnxf5UheSu9A==
+X-Received: by 2002:a05:6808:2981:b0:37f:8776:7fb with SMTP id
+ ex1-20020a056808298100b0037f877607fbmr5592679oib.24.1677239627125; 
+ Fri, 24 Feb 2023 03:53:47 -0800 (PST)
 Received: from ?IPV6:2804:7f0:bcc0:a2b4:12ba:56fa:c61d:cd8f?
  ([2804:7f0:bcc0:a2b4:12ba:56fa:c61d:cd8f])
  by smtp.gmail.com with ESMTPSA id
- h7-20020a9d6007000000b00690dd5e7345sm3528005otj.26.2023.02.24.03.52.04
+ k7-20020a056870d38700b00172899830dasm1186696oag.4.2023.02.24.03.53.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Feb 2023 03:52:06 -0800 (PST)
-Message-ID: <2e762081-ca31-641c-6b96-4a4abd7852ad@ventanamicro.com>
-Date: Fri, 24 Feb 2023 08:52:02 -0300
+ Fri, 24 Feb 2023 03:53:46 -0800 (PST)
+Message-ID: <3bf0d629-14ac-6837-4481-fb3fc56330df@ventanamicro.com>
+Date: Fri, 24 Feb 2023 08:53:42 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.2
-Subject: Re: [PATCH 4/6] target/riscv: Add *envcfg.PBMTE related check in
+Subject: Re: [PATCH 5/6] target/riscv: Add *envcfg.HADE related check in
  address translation
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
@@ -63,13 +62,13 @@ To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20230224040852.37109-1-liweiwei@iscas.ac.cn>
- <20230224040852.37109-5-liweiwei@iscas.ac.cn>
+ <20230224040852.37109-6-liweiwei@iscas.ac.cn>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230224040852.37109-5-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230224040852.37109-6-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::332;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x332.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::230;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x230.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -89,18 +88,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2023 11:52:17 -0000
+X-List-Received-Date: Fri, 24 Feb 2023 11:53:50 -0000
 
 
 
 On 2/24/23 01:08, Weiwei Li wrote:
-> menvcfg.PBMTE bit controls whether the Svpbmt extension is available
-> for use in S-mode and G-stage address translation.
+> When menvcfg.HADE is 1, hardware updating of PTE A/D bits is enabled
+> during single-stage address translation. When the hypervisor extension is
+> implemented, if menvcfg.HADE is 1, hardware updating of PTE A/D bits is
+> enabled during G-stage address translation.
 > 
-> henvcfg.PBMTE bit controls whether the Svpbmt extension is available
-> for use in VS-stage address translation.
-> 
-> Set *envcfg.PBMTE default true for backward compatibility.
+> Set *envcfg.HADE default true for backward compatibility.
 > 
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
@@ -108,52 +106,52 @@ On 2/24/23 01:08, Weiwei Li wrote:
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/cpu.c        |  3 +++
->   target/riscv/cpu_helper.c | 10 ++++++++--
->   2 files changed, 11 insertions(+), 2 deletions(-)
+>   target/riscv/cpu.c        | 6 ++++--
+>   target/riscv/cpu_helper.c | 6 ++++++
+>   2 files changed, 10 insertions(+), 2 deletions(-)
 > 
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 0dd2f0c753..2d99679f2f 100644
+> index 2d99679f2f..b81ab65de5 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -613,6 +613,9 @@ static void riscv_cpu_reset_hold(Object *obj)
+> @@ -613,8 +613,10 @@ static void riscv_cpu_reset_hold(Object *obj)
 >       env->bins = 0;
 >       env->two_stage_lookup = false;
 >   
-> +    env->menvcfg = (cpu->cfg.ext_svpbmt ? MENVCFG_PBMTE : 0);
-> +    env->henvcfg = (cpu->cfg.ext_svpbmt ? HENVCFG_PBMTE : 0);
-> +
+> -    env->menvcfg = (cpu->cfg.ext_svpbmt ? MENVCFG_PBMTE : 0);
+> -    env->henvcfg = (cpu->cfg.ext_svpbmt ? HENVCFG_PBMTE : 0);
+> +    env->menvcfg = (cpu->cfg.ext_svpbmt ? MENVCFG_PBMTE : 0) |
+> +                   (cpu->cfg.ext_svadu ? MENVCFG_HADE : 0);
+> +    env->henvcfg = (cpu->cfg.ext_svpbmt ? HENVCFG_PBMTE : 0) |
+> +                   (cpu->cfg.ext_svadu ? HENVCFG_HADE : 0);
+>   
 >       /* Initialized default priorities of local interrupts. */
 >       for (i = 0; i < ARRAY_SIZE(env->miprio); i++) {
->           iprio = riscv_cpu_default_priority(i);
 > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index ad8d82662c..552c0f0b58 100644
+> index 552c0f0b58..9e122ee92a 100644
 > --- a/target/riscv/cpu_helper.c
 > +++ b/target/riscv/cpu_helper.c
-> @@ -936,9 +936,15 @@ restart:
->               return TRANSLATE_FAIL;
+> @@ -937,9 +937,11 @@ restart:
 >           }
 >   
-> +        bool pbmte = env->menvcfg & MENVCFG_PBMTE;
-> +
-> +        if (first_stage && two_stage && riscv_cpu_virt_enabled(env)) {
-> +            pbmte = pbmte && (env->henvcfg & HENVCFG_PBMTE);
-> +        }
-> +
+>           bool pbmte = env->menvcfg & MENVCFG_PBMTE;
+> +        bool hade = env->menvcfg & MENVCFG_HADE;
+>   
+>           if (first_stage && two_stage && riscv_cpu_virt_enabled(env)) {
+>               pbmte = pbmte && (env->henvcfg & HENVCFG_PBMTE);
+> +            hade = hade && (env->henvcfg & HENVCFG_HADE);
+>           }
+>   
 >           if (riscv_cpu_sxl(env) == MXL_RV32) {
->               ppn = pte >> PTE_PPN_SHIFT;
-> -        } else if (cpu->cfg.ext_svpbmt || cpu->cfg.ext_svnapot) {
-> +        } else if (pbmte || cpu->cfg.ext_svnapot) {
->               ppn = (pte & (target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT;
->           } else {
->               ppn = pte >> PTE_PPN_SHIFT;
-> @@ -950,7 +956,7 @@ restart:
->           if (!(pte & PTE_V)) {
->               /* Invalid PTE */
->               return TRANSLATE_FAIL;
-> -        } else if (!cpu->cfg.ext_svpbmt && (pte & PTE_PBMT)) {
-> +        } else if (!pbmte && (pte & PTE_PBMT)) {
->               return TRANSLATE_FAIL;
->           } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
->               /* Inner PTE, continue walking */
+> @@ -998,6 +1000,10 @@ restart:
+>   
+>               /* Page table updates need to be atomic with MTTCG enabled */
+>               if (updated_pte != pte) {
+> +                if (!hade) {
+> +                    return TRANSLATE_FAIL;
+> +                }
+> +
+>                   /*
+>                    * - if accessed or dirty bits need updating, and the PTE is
+>                    *   in RAM, then we do so atomically with a compare and swap.
 
