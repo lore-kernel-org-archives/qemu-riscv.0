@@ -1,73 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVV8O-0004dr-1K
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 05:17:00 -0500
+	id 1pVVL1-0003Cg-Fd
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 05:30:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1pVV8M-0004dA-EP
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 05:16:58 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([216.145.221.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1pVV8K-0002iJ-1V
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 05:16:58 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1677233814;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Oh+P3BbSycHrwvAihhjQcz1YlWZbVn7xiqsHQ8Ir2Ks=;
- b=IUjPO/XbbtAVDO21dVDN9f3FRy32hGIPp+wVUESKaoN5wRR19rGVjwF7UIw24tgY7z4Qc5
- lrTKtUR23kQbqwtUGyTUy4Z+Em/98s1oVOD250T/hBKHcxvTBodQUIeYuRZVCeT08MFOT6
- g/cswk8/3rJeb6yhNNHZkC4iRRAMOro=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-2-78_1lABvMhycruR9VFVVWw-1; Fri, 24 Feb 2023 05:16:50 -0500
-X-MC-Unique: 78_1lABvMhycruR9VFVVWw-1
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 10E6A183B3C0;
- Fri, 24 Feb 2023 10:16:50 +0000 (UTC)
-Received: from [10.64.54.42] (vpn2-54-42.bne.redhat.com [10.64.54.42])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 6C849492B07;
- Fri, 24 Feb 2023 10:16:41 +0000 (UTC)
-Reply-To: Gavin Shan <gshan@redhat.com>
-Subject: Re: [PATCH v2 0/4] NUMA: Apply socket-NUMA-node boundary for aarch64
- and RiscV machines
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-arm@nongnu.org
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, rad@semihalf.com,
- peter.maydell@linaro.org, quic_llindhol@quicinc.com, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, philmd@linaro.org, wangyanan55@huawei.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- thuth@redhat.com, lvivier@redhat.com, pbonzini@redhat.com,
- imammedo@redhat.com, yihyu@redhat.com, shan.gavin@gmail.com
-References: <20230223081401.248835-1-gshan@redhat.com>
- <2d37d157-12a1-07aa-4c70-974ac1503283@ventanamicro.com>
- <fc0d2c66-5600-c33a-62d7-c72f1d16518b@redhat.com>
- <11e958b1-4763-f710-fe02-832cfd559e7b@ventanamicro.com>
-From: Gavin Shan <gshan@redhat.com>
-Message-ID: <9e8523a9-9059-e3a0-e32e-414f83e06a6f@redhat.com>
-Date: Fri, 24 Feb 2023 21:16:39 +1100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.0
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1pVVKx-0003AO-CU
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 05:29:59 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1pVVKu-0000Vh-IY
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 05:29:59 -0500
+Received: by mail-wr1-x434.google.com with SMTP id l1so13124334wry.10
+ for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 02:29:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vKgQc0/EZAT1XYIagdNmajXSgAxQKth+AtuqcB6U/o4=;
+ b=W96250amGqkXSG9GdYonwNCHvo6Sqg+C5pI3lUOEkJihysNBDPxOpEjgwkWfptd3y+
+ ob9+TQv77pdDkDUAhA9DztjCwQXfYtbVtEAASNO/+bZmIDpKyDmBVl2Jm52YxR86wxye
+ KSvxwtlcKJKuU9QgGpNu92eRgvn/bwItFkGzQGLPtQcwKfEPbstMkMIOxXrEnoiYDLIq
+ TZKc3xiyx0Pv6TDnPy6NJekgmdUwq+GRza8k7XwRFwN8XbN+XWq5+g8OI5XVSKGIBgsC
+ vK9ms8Q5bafXHEdLztl4Aa6LJ97Y+OXRtcZRAy7v+CMKIloX6yPgdu3ZDfoUzAdoZDDW
+ UkWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vKgQc0/EZAT1XYIagdNmajXSgAxQKth+AtuqcB6U/o4=;
+ b=sgNuMaP9/ZItWt57oAZrfK276lffR+ZkYK31hky+7r5hjK8htPWSGyT2u53CCdjL7T
+ CzmV7nClSDPE1eQvB5nF22x2QWgu6Ib1mttjB0dHlM3guiz/V1ivk/BJHZiqhNsMOREY
+ dVbQZUe+jojXOdQRgLxke/yG4aeZcs4I+DqM9OHzw7kPV6/Nbpp9nZT5LwIVJiptT9ZK
+ jqe0klrdZ8qbOP8lgqCWAjPqghA4VE7aw1A0WEkViZew+Szjqjyhhya4bDxPoXfdLVe3
+ DRKRSEc3kVs6RWpkmTE3gPBEABJga15Q5jBLpT3iPuCCkG4c2x8kUIJtjgWd1eP6qiAV
+ WF2w==
+X-Gm-Message-State: AO0yUKWLlIAtPH/TC3xW8kfQi5kC0A/sk2Kj+UWjiRpIAj1lKe2h15T5
+ r4HxplUMhY6cNJbWb4fB9w5MSw==
+X-Google-Smtp-Source: AK7set+KmOWTLlQ0oNvpIJmvXFayH6T5HUDtJLDHJPnJDEXxO233eLTF8X25uo2yp9wiRhFM/HW2Gw==
+X-Received: by 2002:a5d:67cc:0:b0:2c5:6016:496 with SMTP id
+ n12-20020a5d67cc000000b002c560160496mr13534855wrw.27.1677234593178; 
+ Fri, 24 Feb 2023 02:29:53 -0800 (PST)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ t25-20020a7bc3d9000000b003e896d953a8sm2336462wmj.17.2023.02.24.02.29.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 24 Feb 2023 02:29:52 -0800 (PST)
+Date: Fri, 24 Feb 2023 11:29:51 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>,
+ Atish Kumar Patra <atishp@rivosinc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Bin Meng <bmeng@tinylab.org>
+Subject: Re: [PATCH V4 8/8] MAINTAINERS: Add entry for RISC-V ACPI
+Message-ID: <20230224102951.dxb6kzw42lkhbibh@orel>
+References: <20230224083701.2657063-1-sunilvl@ventanamicro.com>
+ <20230224083701.2657063-9-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
-In-Reply-To: <11e958b1-4763-f710-fe02-832cfd559e7b@ventanamicro.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.9
-Received-SPF: permerror client-ip=216.145.221.124;
- envelope-from=gshan@redhat.com; helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230224083701.2657063-9-sunilvl@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x434.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- NICE_REPLY_A=-0.09, RCVD_IN_DNSWL_NONE=-0.0001, SPF_FAIL=0.001,
- SPF_HELO_NONE=0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,68 +87,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2023 10:16:58 -0000
+X-List-Received-Date: Fri, 24 Feb 2023 10:30:00 -0000
 
-On 2/24/23 8:26 PM, Daniel Henrique Barboza wrote:
-> On 2/24/23 04:09, Gavin Shan wrote:
->> On 2/24/23 12:18 AM, Daniel Henrique Barboza wrote:
->>> On 2/23/23 05:13, Gavin Shan wrote:
->>>> For arm64 and RiscV architecture, the driver (/base/arch_topology.c) is
->>>> used to populate the CPU topology in the Linux guest. It's required that
->>>> the CPUs in one socket can't span mutiple NUMA nodes. Otherwise, the Linux
->>>> scheduling domain can't be sorted out, as the following warning message
->>>> indicates. To avoid the unexpected confusion, this series attempts to
->>>> rejects such kind of insane configurations.
->>>>
->>>>     -smp 6,maxcpus=6,sockets=2,clusters=1,cores=3,threads=1 \
->>>>     -numa node,nodeid=0,cpus=0-1,memdev=ram0                \
->>>>     -numa node,nodeid=1,cpus=2-3,memdev=ram1                \
->>>>     -numa node,nodeid=2,cpus=4-5,memdev=ram2                \
->>>
->>>
->>> And why is this a QEMU problem? This doesn't hurt ACPI.
->>>
->>> Also, this restriction impacts breaks ARM guests in the wild that are running
->>> non-Linux OSes. I don't see why we should impact use cases that has nothing to
->>> do with Linux Kernel feelings about sockets - NUMA nodes exclusivity.
->>>
->>
->> With above configuration, CPU-0/1/2 are put into socket-0-cluster-0 while CPU-3/4/5
->> are put into socket-1-cluster-0, meaning CPU-2/3 belong to different socket and
->> cluster. However, CPU-2/3 are associated with NUMA node-1. In summary, multiple
->> CPUs in different clusters and sockets have been associated with one NUMA node.
->>
->> If I'm correct, the configuration isn't sensible in a baremetal environment and
->> same Linux kernel is supposed to work well for baremetal and virtualized machine.
->> So I think QEMU needs to emulate the topology as much as we can to match with the
->> baremetal environment. It's the reason why I think it's a QEMU problem even it
->> doesn't hurt ACPI. As I said in the reply to Daniel P. Berrangé <berrange@redhat.com>
->> in another thread, we may need to gurantee that the CPUs in one cluster can't be
->> split to multiple NUMA nodes, which matches with the baremetal environment, as I
->> can understand.
->>
->> Right, the restriction to have socket-NUMA-node or cluster-NUMA-node boundary will
->> definitely break the configurations running in the wild.
+On Fri, Feb 24, 2023 at 02:07:01PM +0530, Sunil V L wrote:
+> RISC-V ACPI related functionality for virt machine is added in
+> virt-acpi-build.c. Add the maintainer entry after moving the
+> ARM ACPI entry under the main ACPI entry.
 > 
+> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> Reviewed-by: Bin Meng <bmeng@tinylab.org>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> ---
+>  MAINTAINERS | 18 ++++++++++++------
+>  1 file changed, 12 insertions(+), 6 deletions(-)
 > 
-> What about a warning? If the user attempts to use an exotic NUMA configuration
-> like the one you mentioned we can print something like:
-> 
-> "Warning: NUMA topologies where a socket belongs to multiple NUMA nodes can cause OSes like Linux to misbehave"
-> 
-> This would inform the user what might be going wrong in case Linux is crashing/error
-> out on them and then the user is free to fix their topology (or the kernel). And
-> at the same time we wouldn't break existing stuff that happens to be working.
-> 
-> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 9adb628627..7a47c2c724 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -994,12 +994,6 @@ S: Maintained
+>  F: hw/ssi/xlnx-versal-ospi.c
+>  F: include/hw/ssi/xlnx-versal-ospi.h
+>  
+> -ARM ACPI Subsystem
+> -M: Shannon Zhao <shannon.zhaosl@gmail.com>
+> -L: qemu-arm@nongnu.org
+> -S: Maintained
+> -F: hw/arm/virt-acpi-build.c
+> -
+>  STM32F100
+>  M: Alexandre Iooss <erdnaxe@crans.org>
+>  L: qemu-arm@nongnu.org
+> @@ -1907,6 +1901,18 @@ F: hw/acpi/ghes.c
+>  F: include/hw/acpi/ghes.h
+>  F: docs/specs/acpi_hest_ghes.rst
+>  
+> +ARM ACPI Subsystem
+> +M: Shannon Zhao <shannon.zhaosl@gmail.com>
+> +L: qemu-arm@nongnu.org
+> +S: Maintained
+> +F: hw/arm/virt-acpi-build.c
+> +
+> +RISC-V ACPI Subsystem
+> +M: Sunil V L <sunilvl@ventanamicro.com>
+> +L: qemu-riscv@nongnu.org
+> +S: Maintained
+> +F: hw/riscv/virt-acpi-build.c
+> +
+>  ppc4xx
+>  L: qemu-ppc@nongnu.org
+>  S: Orphan
+> -- 
+> 2.34.1
+>
 
-Yes, I think a warning message is more appropriate, so that users can fix their
-irregular configurations and the existing configurations aren't disconnected.
-It would be nice to get the agreements from Daniel P. Berrangé and Drew, before
-I'm going to change the code and post next revision.
+I probably would have put these sections directly under the main ACPI
+section, "ACPI/SMBIOS", as these are "main" arch-specific sections,
+but I wouldn't respin the series for that.
+
+Maybe whichever maintainer picks up the patches can put the sections in
+their preferred location.
 
 Thanks,
-Gavin
-
-
+drew
 
