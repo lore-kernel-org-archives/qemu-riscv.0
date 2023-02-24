@@ -1,74 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVWVH-0007PD-Kx
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 06:44:43 -0500
+	id 1pVWXk-0008TZ-Pb
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Feb 2023 06:47:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pVWVE-0007MM-Kh
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 06:44:40 -0500
-Received: from mail-oi1-x234.google.com ([2607:f8b0:4864:20::234])
+ id 1pVWXj-0008T8-S5
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 06:47:15 -0500
+Received: from mail-ot1-x32c.google.com ([2607:f8b0:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pVWVC-0003jo-FZ
- for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 06:44:40 -0500
-Received: by mail-oi1-x234.google.com with SMTP id bk2so14757657oib.10
- for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 03:44:38 -0800 (PST)
+ id 1pVWXi-00089l-2D
+ for qemu-riscv@nongnu.org; Fri, 24 Feb 2023 06:47:15 -0500
+Received: by mail-ot1-x32c.google.com with SMTP id
+ a14-20020a056830100e00b00690ed91749aso3759493otp.7
+ for <qemu-riscv@nongnu.org>; Fri, 24 Feb 2023 03:47:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=rQ+/6c9TigHhV8OLVAat+yHZmBQ8yT8EV6RG/ZtIhHY=;
- b=Nu6evUN0HvgKg+UIPAuctVoSC94W6qTA2vpOcDTEUfA7A3BVFP8WLBE73QPRoHd5Gc
- 8WUjh53Do2gadKYlKEwRL4M5HeGiAtAumBc7a0hg8W8FRkSIs+Qn7juYxpRsAtT2RD3t
- Uvez1egDbNjaH6vn7fwYn/qVctc6EtiwfuHGB2nNK7EuWiGjEAiGzSyl2As5j3WvFYhU
- HrDYMskIXQCa+Qt5E3hwgUHMgEgFg+AwmA/aKTrAWvAUVKIqdL3SBZhhgux0WBSVAooc
- z3JHvHRYUouRSv8rEqSX93bQuqNC1ev0xXQ9z62Tkhtt21Wik4ZVtMlM2RQ3ftXQ4NZZ
- nb2w==
+ bh=xnu0lQWbxM3QuoFjEH/gUFRKWyvnJmSZu2oHAczcHKU=;
+ b=c8vxNLBS/RcfCstR0RB7Vc0xiaQGpRGD+yNXwAaxuiRVjdnuDnUsGfxDbOn2XDOi1U
+ IJEkKVOVAv6XM6X7NyUU/hUgN+AhVIPE+OIfZ4n3M5LM1zfWGZQIe+x5ou8i71TvrM/y
+ uOwJT92rBk3LNEqiNzZjzVsvttsgMN/SspkSpNB/juFCyt8uyGRDQE6o1xY3qIzkMX6r
+ PKpIkvMiUFIN1YYlT8cu7rVcjy3q6DuclFZlr5kMqbeWYVGDDicXTkOyxMov+5dLCmh8
+ fcRQNZnm1NT4NvH87c5vAsCaS4WaZPgoSqEWkRS4qrSbq6S+PF49kPOWhvA+rILw3SsT
+ ER0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rQ+/6c9TigHhV8OLVAat+yHZmBQ8yT8EV6RG/ZtIhHY=;
- b=yTj0bsQ9RB7yr597ItevseRogH/pKdObT5clincThJg4rRplBUl9xLeS8kbAhGyVRK
- qRcTqtAc6FKSquiJ9y17/Aev5fD6l6OmYv4PgBs3OulOCqjSyGN7+Ke85Ae3ILP+tgSv
- ioc5TW1bjkTJuzu4doPboyG7WyuEAx2Sxo4ruF/fYGN9WlKcF/vrRsoVEkKJc1R7HO1Z
- IdN/HL/Ii6U4n7AGuWrTgAapbs5S3VDaoQSswcvCRmEq5rW2gNU/S9TB/uMRFI/IHaUz
- 4il8n/FVWzyIF4iT9IcEsGVMJ7uFvW/9nkhxTx5eZg5N7Gw3spFHDvttKmo3tc3EKUY8
- oGUg==
-X-Gm-Message-State: AO0yUKX9Sy+mUWV5iC+Xt6J0VOy6sHw8pslhjaqUMb9Xw0gJD8XyNKdf
- awCWsPczJVvM4KrTRIHjri6D7g==
-X-Google-Smtp-Source: AK7set+OPvf4a2QRWJWc9jA1870oa8MS5Ss4SBIktfQrooGQufpnVCt/VFi2zBUEdbfriXE5YFmC4Q==
-X-Received: by 2002:a05:6808:8e2:b0:378:90dd:b6a with SMTP id
- d2-20020a05680808e200b0037890dd0b6amr2744533oic.39.1677239077262; 
- Fri, 24 Feb 2023 03:44:37 -0800 (PST)
+ bh=xnu0lQWbxM3QuoFjEH/gUFRKWyvnJmSZu2oHAczcHKU=;
+ b=dtwhfc8J+URJCwG5lg6+Xl7FeMoiGc2q/vKmix0PRzI9wWZDBu9JYsxYuheaHfTz5I
+ qNahjRZJS623pjl6MwdA/RQ1FR4ltQRo3p133EHkTMBGdzCIN81l7r5++BTgagqmHgd6
+ 3n1HaZGaOW4nytbQ18vbPdEFteLrMWBdIjvkPfieRetQd0ValW3jVhWDL5KhEHLZHggI
+ yLUzJs4QcTXlyxj3rUhA+COsyYFND1GGv9L8S3UQFWLu/zIjT26j8Rv2KNEjZ915Nnxz
+ SgA8yXAUYK7ABdTWv8LgjQQyaqvM43/thpxsEN9AEwr539cu1F9qvr1I1W6hy4ZVUFmf
+ Lcgw==
+X-Gm-Message-State: AO0yUKU6fPFajzZaEiC8zB02Lb92hys5aWQWwVXGhnTFjq2lrXWn3mUB
+ WGPWt0GgNJUDa5132Rn3OFJ1Tw==
+X-Google-Smtp-Source: AK7set+MeJgDbQnDrHtZLQtiN7wkOUOxAqWjZpGLQAOZAfbLQceojzNJ6Hj6ONQOd9hBi8KYeAjjRw==
+X-Received: by 2002:a9d:852:0:b0:68d:416e:3d9d with SMTP id
+ 76-20020a9d0852000000b0068d416e3d9dmr7917487oty.7.1677239232656; 
+ Fri, 24 Feb 2023 03:47:12 -0800 (PST)
 Received: from ?IPV6:2804:7f0:bcc0:a2b4:12ba:56fa:c61d:cd8f?
  ([2804:7f0:bcc0:a2b4:12ba:56fa:c61d:cd8f])
  by smtp.gmail.com with ESMTPSA id
- l19-20020a9d7093000000b0068663820588sm4401205otj.44.2023.02.24.03.44.33
+ a17-20020a9d3e11000000b0068bd3001922sm3339938otd.45.2023.02.24.03.47.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Feb 2023 03:44:36 -0800 (PST)
-Message-ID: <a54a31d7-a85c-57eb-5d0b-d85e59348be3@ventanamicro.com>
-Date: Fri, 24 Feb 2023 08:44:32 -0300
+ Fri, 24 Feb 2023 03:47:12 -0800 (PST)
+Message-ID: <e14979dc-7383-84d5-ab03-5bd535752c82@ventanamicro.com>
+Date: Fri, 24 Feb 2023 08:47:08 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.2
-Subject: Re: [PATCH 2/6] target/riscv: Fix the relationship of PBMTE/STCE
- fields between menvcfg and henvcfg
+Subject: Re: [PATCH 3/6] target/riscv: Add csr support for svadu
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20230224040852.37109-1-liweiwei@iscas.ac.cn>
- <20230224040852.37109-3-liweiwei@iscas.ac.cn>
+ <20230224040852.37109-4-liweiwei@iscas.ac.cn>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230224040852.37109-3-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230224040852.37109-4-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::234;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x234.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32c.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -88,12 +88,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2023 11:44:40 -0000
+X-List-Received-Date: Fri, 24 Feb 2023 11:47:16 -0000
 
 
 
 On 2/24/23 01:08, Weiwei Li wrote:
-> henvcfg.PBMTE/STCE are read-only zero if menvcfg.PBMTE/STCE are zero.
+> Add ext_svadu property
+> Add HADE field in *envcfg:
+> * menvcfg.HADE is read-only zero if Svadu is not implemented.
+> * henvcfg.HADE is read-only zero if menvcfg.HADE is zero.
 > 
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
@@ -101,50 +104,114 @@ On 2/24/23 01:08, Weiwei Li wrote:
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/csr.c | 13 +++++++++----
->   1 file changed, 9 insertions(+), 4 deletions(-)
+>   target/riscv/cpu.h      |  1 +
+>   target/riscv/cpu_bits.h |  4 ++++
+>   target/riscv/csr.c      | 17 +++++++++++------
+>   3 files changed, 16 insertions(+), 6 deletions(-)
 > 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 7128438d8e..bd272c35d1 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -450,6 +450,7 @@ struct RISCVCPUConfig {
+>       bool ext_zihintpause;
+>       bool ext_smstateen;
+>       bool ext_sstc;
+> +    bool ext_svadu;
+>       bool ext_svinval;
+>       bool ext_svnapot;
+>       bool ext_svpbmt;
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 8b0d7e20ea..fca7ef0cef 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -747,10 +747,12 @@ typedef enum RISCVException {
+>   #define MENVCFG_CBIE                       (3UL << 4)
+>   #define MENVCFG_CBCFE                      BIT(6)
+>   #define MENVCFG_CBZE                       BIT(7)
+> +#define MENVCFG_HADE                       (1ULL << 61)
+>   #define MENVCFG_PBMTE                      (1ULL << 62)
+>   #define MENVCFG_STCE                       (1ULL << 63)
+>   
+>   /* For RV32 */
+> +#define MENVCFGH_HADE                      BIT(29)
+>   #define MENVCFGH_PBMTE                     BIT(30)
+>   #define MENVCFGH_STCE                      BIT(31)
+>   
+> @@ -763,10 +765,12 @@ typedef enum RISCVException {
+>   #define HENVCFG_CBIE                       MENVCFG_CBIE
+>   #define HENVCFG_CBCFE                      MENVCFG_CBCFE
+>   #define HENVCFG_CBZE                       MENVCFG_CBZE
+> +#define HENVCFG_HADE                       MENVCFG_HADE
+>   #define HENVCFG_PBMTE                      MENVCFG_PBMTE
+>   #define HENVCFG_STCE                       MENVCFG_STCE
+>   
+>   /* For RV32 */
+> +#define HENVCFGH_HADE                       MENVCFGH_HADE
+>   #define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
+>   #define HENVCFGH_STCE                       MENVCFGH_STCE
+>   
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index feae23cab0..02cb2c2bb7 100644
+> index 02cb2c2bb7..63e140e8ad 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -1956,7 +1956,11 @@ static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
->           return ret;
->       }
+> @@ -1890,7 +1890,8 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
 >   
-> -    *val = env->henvcfg;
-> +    /*
-> +     * henvcfg.pbmte is read_only 0 when menvcfg.pbmte = 0
-> +     * henvcfg.stce is read_only 0 when menvcfg.stce = 0
-> +     */
-> +    *val = env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE) | env->menvcfg);
+>       if (riscv_cpu_mxl(env) == MXL_RV64) {
+>           mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+> -                (cfg->ext_sstc ? MENVCFG_STCE : 0);
+> +                (cfg->ext_sstc ? MENVCFG_STCE : 0) |
+> +                (cfg->ext_svadu ? MENVCFG_HADE : 0);
+>       }
+>       env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
+>   
+> @@ -1909,7 +1910,8 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+>   {
+>       RISCVCPUConfig *cfg = &env_archcpu(env)->cfg;
+>       uint64_t mask = (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+> -                    (cfg->ext_sstc ? MENVCFG_STCE : 0);
+> +                    (cfg->ext_sstc ? MENVCFG_STCE : 0) |
+> +                    (cfg->ext_svadu ? MENVCFG_HADE : 0);
+>       uint64_t valh = (uint64_t)val << 32;
+>   
+>       env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
+> @@ -1959,8 +1961,10 @@ static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
+>       /*
+>        * henvcfg.pbmte is read_only 0 when menvcfg.pbmte = 0
+>        * henvcfg.stce is read_only 0 when menvcfg.stce = 0
+> +     * henvcfg.hade is read_only 0 when menvcfg.hade = 0
+>        */
+> -    *val = env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE) | env->menvcfg);
+> +    *val = env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_HADE) |
+> +                           env->menvcfg);
 >       return RISCV_EXCP_NONE;
 >   }
 >   
-> @@ -1972,7 +1976,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+> @@ -1976,7 +1980,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
 >       }
 >   
 >       if (riscv_cpu_mxl(env) == MXL_RV64) {
-> -        mask |= HENVCFG_PBMTE | HENVCFG_STCE;
-> +        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE);
+> -        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE);
+> +        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_HADE);
 >       }
 >   
 >       env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
-> @@ -1990,14 +1994,15 @@ static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
+> @@ -1994,7 +1998,7 @@ static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
 >           return ret;
 >       }
 >   
-> -    *val = env->henvcfg >> 32;
-> +    *val = (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE) |
-> +                            env->menvcfg)) >> 32;
+> -    *val = (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE) |
+> +    *val = (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_HADE) |
+>                               env->menvcfg)) >> 32;
 >       return RISCV_EXCP_NONE;
 >   }
->   
+> @@ -2002,7 +2006,8 @@ static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
 >   static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
 >                                     target_ulong val)
 >   {
-> -    uint64_t mask = HENVCFG_PBMTE | HENVCFG_STCE;
-> +    uint64_t mask = env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE);
+> -    uint64_t mask = env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE);
+> +    uint64_t mask = env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE |
+> +                                    HENVCFG_HADE);
 >       uint64_t valh = (uint64_t)val << 32;
 >       RISCVException ret;
 >   
