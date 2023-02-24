@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVLcR-0005Pv-TF
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Feb 2023 19:07:23 -0500
+	id 1pVLck-0005YX-8j
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Feb 2023 19:07:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pVLcA-0005Nn-Ag
- for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 19:07:09 -0500
-Received: from mail-pg1-x542.google.com ([2607:f8b0:4864:20::542])
+ id 1pVLci-0005Xr-U4
+ for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 19:07:40 -0500
+Received: from mail-pl1-x641.google.com ([2607:f8b0:4864:20::641])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pVLc7-0008Vl-Qs
- for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 19:07:06 -0500
-Received: by mail-pg1-x542.google.com with SMTP id d10so3061476pgt.12
- for <qemu-riscv@nongnu.org>; Thu, 23 Feb 2023 16:07:03 -0800 (PST)
+ id 1pVLcg-00009C-Nw
+ for qemu-riscv@nongnu.org; Thu, 23 Feb 2023 19:07:40 -0500
+Received: by mail-pl1-x641.google.com with SMTP id u14so11058492ple.7
+ for <qemu-riscv@nongnu.org>; Thu, 23 Feb 2023 16:07:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=9QpDIqJoI5UdSVtKuuE2YKlIRvnQMTgQ/ABKyGGNvqA=;
- b=nsvL1o4nJSCVoCRa/PhThsGuDK/SnTiA28c+lQFyR5oS4DW/yJZZ5vy3dfobWKlyuV
- IreMoGFTR2wJmNdYUQSkYthGzFYck2uWlfFM1KI9/SkqEHsQulpnfdGMJB8nGeT/L7Od
- wpogVsRFpJBiR8+1CuBDff5U5f2DWQhYIgRnh/PO62x8ps9HfqGD7fQux6A/xtPn2RJD
- aah/nVzkwSKpIB8+GdCdvSS7w9ZqrC9ay5Dvsa1SObeyV4W0SUEgE7mAyf+WanZmvG06
- Hk3wLKIbV56GG4lUceuGJmyfhk0yw3xGXvYcj8FksoQRLQMFhVQuJpGCGWXTKAEBne98
- 6ofw==
+ bh=RB8xddNIDfKXoV+v6oHpKvEcwRtb44ArlOX1TfWAMh0=;
+ b=goenOoV2/yWeDHBQexgnNBRvI8KZuIfDUs5j5W35ID4fboeYbwKhS1G1pqd8GGUMlp
+ dbqeFfur+sYMM3/smWIzrTA+I5VqiZ+pJVmLbwHm8qEYtvZ+KjMLVo/cFYtU8v5EyVf6
+ XB2TB3EEiV7ussHx7ePHmt07cAUK4M5gb0d/KgLCupKNRYzC6r1Ta4ey/c6eowe+gzO7
+ SCn1daO9CO7uoVOCbFBhFL3r7tO6F5qiwC8pDXZjdLUoHElemwpC6qtSe8nfFylhQBkC
+ ncW+ML/jlwQ9EuSw4SEPn1W1x7QAxtVM2BhPRwtBMnvaP9JyMkhAIfhJeEKH5vqGWDAq
+ sWlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=9QpDIqJoI5UdSVtKuuE2YKlIRvnQMTgQ/ABKyGGNvqA=;
- b=XUx+z/DK5tMxrUMshTCni1hasLGpJVn2KbMGlkE9c5KfX/vp/QRLIEgNK3hfcPAoTN
- vAz8k9OkXGUju2kek8xvhydNDYez+P9Qld8eBL3tV5yERrepu8PW/Caal2AJ//D4RHYh
- c2kDD6P2fJdMexymS9fz5CdUV+nAbKaIcUetGYszsW2BaVgZf7U/P1ATSJgpk2nQW6KJ
- NANSrBJQnMgPmM23Xc6Z1w/s9FmqS16gMvYqSU2scUfcVfqkLldW676t9HOCuGrUAT6q
- 4W+SwdDdA3AmPCU0d8x8fUFGSDwRaZS9FiXFdUMRXwFj+feMVmTvMgvKQ0SD9PoB1QIz
- odhw==
-X-Gm-Message-State: AO0yUKUL7zrj7jWtR0+wTBwV/2ibYdY+Piihf5MMom7cvgHe+wxfku+L
- yxxPN50YU1Inw0JSiytpdXLIbw==
-X-Google-Smtp-Source: AK7set/pd+wihN7xEnO4z1GSrveA9Zq5Ckur/HrCeuRRof+omKy3FZ5/s0bgB+MUB8uSnht3k2Hdpw==
-X-Received: by 2002:a62:7948:0:b0:5a8:482f:c32e with SMTP id
- u69-20020a627948000000b005a8482fc32emr15276739pfc.27.1677197222461; 
- Thu, 23 Feb 2023 16:07:02 -0800 (PST)
+ bh=RB8xddNIDfKXoV+v6oHpKvEcwRtb44ArlOX1TfWAMh0=;
+ b=7+Unv94NHKzB+vLENaJSuWvxhvwwAEcd4AXoO+o3FKWx9QagTDfduF4Ly85zMDoIz2
+ 4FSA9B8bg2MxCffdrCnnFYLtg64P44ZMS3HZoXqUZd3/UFJ8UjM+QIeIYNw6pKWcOaQf
+ 8cossWTfUI2cKvoizGoByLgF34yeMxK/DfUYyfb3ShshGYHmcZptkhl3qCDIzr70Lqz0
+ jgBKFz9Kqim8hMy91hsoprSNKQITah3h5X6J8JX/F7XkWsY8cvrY43G6cIHy+guwHkFX
+ pP/b7pC45oWXd2K/QY2ze34N/kNztbHqM5/qlLMmAmmiI1tGqxw0rnMuVcFSKIubyEV9
+ jaQw==
+X-Gm-Message-State: AO0yUKUsKdE99LrsegC0mVi0SNgANPprM/kxjiEX1YPAWnieappgoOE6
+ 5UhuwGGsofwIZnsKc+jTFhp2oA==
+X-Google-Smtp-Source: AK7set/j0WJuXPwj1VUOzkgXtYG06pb5BjBw+8b+qfOM+JElabhpM42iXStGLT706RaypGl5hDg5RA==
+X-Received: by 2002:a05:6a21:32a9:b0:bc:930e:4165 with SMTP id
+ yt41-20020a056a2132a900b000bc930e4165mr17524148pzb.15.1677197257203; 
+ Thu, 23 Feb 2023 16:07:37 -0800 (PST)
 Received: from [192.168.54.227] (rrcs-173-198-77-218.west.biz.rr.com.
  [173.198.77.218]) by smtp.gmail.com with ESMTPSA id
- j2-20020aa79282000000b00593906a8843sm6225333pfa.176.2023.02.23.16.07.00
+ h23-20020aa786d7000000b005cc52ea452csm5795735pfo.100.2023.02.23.16.07.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Feb 2023 16:07:01 -0800 (PST)
-Message-ID: <dd0c001f-5f64-a5ca-dc84-b7d7401cf447@linaro.org>
-Date: Thu, 23 Feb 2023 14:06:57 -1000
+ Thu, 23 Feb 2023 16:07:36 -0800 (PST)
+Message-ID: <2caff25a-f9a6-5f20-3ba7-00c7f5127c5c@linaro.org>
+Date: Thu, 23 Feb 2023 14:07:33 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.1
-Subject: Re: [PATCH v7 2/4] target/riscv: implement Zicboz extension
+Subject: Re: [PATCH v7 3/4] target/riscv: implement Zicbom extension
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
@@ -60,13 +60,13 @@ Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  Christoph Muellner <cmuellner@linux.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>
 References: <20230223234427.521114-1-dbarboza@ventanamicro.com>
- <20230223234427.521114-3-dbarboza@ventanamicro.com>
+ <20230223234427.521114-4-dbarboza@ventanamicro.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230223234427.521114-3-dbarboza@ventanamicro.com>
+In-Reply-To: <20230223234427.521114-4-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::542;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x542.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::641;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x641.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -86,25 +86,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2023 00:07:09 -0000
+X-List-Received-Date: Fri, 24 Feb 2023 00:07:41 -0000
 
 On 2/23/23 13:44, Daniel Henrique Barboza wrote:
 > From: Christoph Muellner<cmuellner@linux.com>
 > 
-> The RISC-V base cache management operation (CBO) ISA extension has been
-> ratified. It defines three extensions: Cache-Block Management, Cache-Block
-> Prefetch and Cache-Block Zero. More information about the spec can be
-> found at [1].
+> Zicbom is the Cache-Block Management extension defined in the already
+> ratified RISC-V Base Cache Management Operation (CBO) ISA extension [1].
 > 
-> Let's start by implementing the Cache-Block Zero extension, Zicboz. It
-> uses the cbo.zero instruction that, as with all CBO instructions that
-> will be added later, needs to be implemented in an overlap group with
-> the LQ instruction due to overlapping patterns.
+> The extension contains three instructions: cbo.clean, cbo.flush and
+> cbo.inval. All of them must be implemented in the same group as LQ and
+> cbo.zero due to overlapping patterns.
 > 
-> cbo.zero throws a Illegal Instruction/Virtual Instruction exception
-> depending on CSR state. This is also the case for the remaining cbo
-> instructions we're going to add next, so create a check_zicbo_envcfg()
-> that will be used by all Zicbo[mz] instructions.
+> All these instructions can throw a Illegal Instruction/Virtual
+> Instruction exception, similar to the existing cbo.zero. The same
+> check_zicbo_envcfg() is used to handle these exceptions.
+> 
+> Aside from that, these instructions also need to handle page faults and
+> guest page faults. This is done in a new check_zicbom_access() helper.
+> 
+> As with Zicboz, the cache block size for Zicbom is also configurable.
+> Note that the spec determines that Zicbo[mp] and Zicboz can have
+> different cache sizes (Section 2.7 of [1]), so we also include a
+> 'cbom_blocksize' to go along with the existing 'cboz_blocksize'. They
+> are set to the same size, so unless users want to play around with the
+> settings both sizes will be the same.
 > 
 > [1]https://github.com/riscv/riscv-CMOs/blob/master/specifications/cmobase-v1.0.1.pdf
 > 
@@ -112,15 +118,13 @@ On 2/23/23 13:44, Daniel Henrique Barboza wrote:
 > Signed-off-by: Christoph Muellner<cmuellner@linux.com>
 > Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
 > ---
->   target/riscv/cpu.c                          |  4 ++
+>   target/riscv/cpu.c                          |  3 +
 >   target/riscv/cpu.h                          |  2 +
->   target/riscv/helper.h                       |  3 +
->   target/riscv/insn32.decode                  | 10 +++-
->   target/riscv/insn_trans/trans_rvzicbo.c.inc | 30 ++++++++++
->   target/riscv/op_helper.c                    | 65 +++++++++++++++++++++
->   target/riscv/translate.c                    |  1 +
->   7 files changed, 114 insertions(+), 1 deletion(-)
->   create mode 100644 target/riscv/insn_trans/trans_rvzicbo.c.inc
+>   target/riscv/helper.h                       |  2 +
+>   target/riscv/insn32.decode                  |  5 ++
+>   target/riscv/insn_trans/trans_rvzicbo.c.inc | 27 +++++++++
+>   target/riscv/op_helper.c                    | 67 +++++++++++++++++++++
+>   6 files changed, 106 insertions(+)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
