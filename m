@@ -1,61 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVoMR-00081v-K5
-	for mharc-qemu-riscv@gnu.org; Sat, 25 Feb 2023 01:48:47 -0500
+	id 1pVqdg-0004P0-2g
+	for mharc-qemu-riscv@gnu.org; Sat, 25 Feb 2023 04:14:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pVoMQ-00081H-3Y; Sat, 25 Feb 2023 01:48:46 -0500
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pVoMN-0006F0-6K; Sat, 25 Feb 2023 01:48:45 -0500
-Received: from [192.168.0.120] (unknown [180.165.240.213])
- by APP-05 (Coremail) with SMTP id zQCowABXXZlEr_ljUAVvCA--.7733S2;
- Sat, 25 Feb 2023 14:48:36 +0800 (CST)
-Message-ID: <e21fdc77-7255-52c7-d2f9-def5c41f2913@iscas.ac.cn>
-Date: Sat, 25 Feb 2023 14:48:36 +0800
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pVqda-0004L9-TY
+ for qemu-riscv@nongnu.org; Sat, 25 Feb 2023 04:14:39 -0500
+Received: from mail-pl1-x642.google.com ([2607:f8b0:4864:20::642])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pVqdX-0001NR-Cn
+ for qemu-riscv@nongnu.org; Sat, 25 Feb 2023 04:14:38 -0500
+Received: by mail-pl1-x642.google.com with SMTP id c1so1892262plg.4
+ for <qemu-riscv@nongnu.org>; Sat, 25 Feb 2023 01:14:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nCcfgciwkNYLhvqmiM4sbtocENVF28QNNXJ/+qj0qxU=;
+ b=Lo2S21/jNehyWF7g37yrIiQ6hPCX6zYrAI5xKvBaF5O/lHLZ9IXx+qEfoPKN5JKXXg
+ lRqf327RF99/dTw1ObFU5bmoC9cl5Azr2EEQJlB/4XtYj14JaLfwZTPS8trDaG1ECDKY
+ JCdWMrnpXGWX2eZtg/GDpScHgwbYszkHIEEWUyrxpA4LAHS/ARLstiXBmgVDzNJqBMWn
+ ybgrS4mZNsLNhu3bbRCdr2hDpNwSZaO9mRJgu4Gq8C/EGMUi/jKBaYAh2i2Ih3cVX3PP
+ iVvKwaYgFSufHv1VbR7oLd1NTEUh3ou3qQcDSOnjCyr8US65X8HxBSyKRb1qPxQA23d7
+ 9r0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nCcfgciwkNYLhvqmiM4sbtocENVF28QNNXJ/+qj0qxU=;
+ b=hkvGJSW+Sw+fmEYz6P3tSyQ0Z3IRHAhhcgpPhrcyVJgbP4OOwu9AZOpgriW8NfPPAM
+ M8o2gt8kvXd7BvXFytlvY7Ol9vOIXI6aZEDeex8xaIHADkjWubeM5AurP5OVcERO+s1P
+ JBCi1FdkTMLm9DgZzlN3JCLeK9sJ03UUlinIIEm9F9WzWTK81NcGJ7mFTv9I+gzYQndb
+ 7EZRpqgoZP22wdhJK5xU8l7SqLgcQR18GdgQYAf1w3Ckfxdj1HxIkVC7MbZVIsNfufNf
+ 6ZUW7SCa1z9uXRmqxqLhP0n/RIhDV5lTutRoqELZeVsLVGfleGgxGAVZSrJNU5PVdOi3
+ RUsQ==
+X-Gm-Message-State: AO0yUKXY+tAz58rdONE5TM4ojcfvdIjiDcvYXTYLFI4jcYDHRJs5zywG
+ PlKPM0UZoOoRHL6p7496mt3zRg==
+X-Google-Smtp-Source: AK7set+Wsd5TV2gzwTdPu9UjDZR4h2Jz4DvyAT6pG9qpeUxRBaFzKdCGSoAgx+5GhNPeZNa8r69Naw==
+X-Received: by 2002:a17:903:70c:b0:19c:be03:b4d7 with SMTP id
+ kk12-20020a170903070c00b0019cbe03b4d7mr7058396plb.14.1677316472459; 
+ Sat, 25 Feb 2023 01:14:32 -0800 (PST)
+Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
+ by smtp.gmail.com with ESMTPSA id
+ je12-20020a170903264c00b0019607aeda8bsm831101plb.73.2023.02.25.01.14.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 25 Feb 2023 01:14:32 -0800 (PST)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, kbastian@mail.uni-paderborn.de,
+ ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
+ tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
+ edgar.iglesias@gmail.com
+Subject: [PATCH 00/76] tcg: Drop tcg_temp_free from translators
+Date: Fri, 24 Feb 2023 23:13:11 -1000
+Message-Id: <20230225091427.1817156-1-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH v8 2/4] target/riscv: implement Zicboz extension
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- zhiwei_liu@linux.alibaba.com, richard.henderson@linaro.org,
- Christoph Muellner <cmuellner@linux.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-References: <20230224132536.552293-1-dbarboza@ventanamicro.com>
- <20230224132536.552293-3-dbarboza@ventanamicro.com>
-From: liweiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230224132536.552293-3-dbarboza@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: zQCowABXXZlEr_ljUAVvCA--.7733S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3Wr1UZF1rury7Xw1ftw15XFb_yoWftrWrpF
- 4xGay7GFWDJryxZw4ftr45Jr15Gws5Ww4UGwn3Awn5Xr43JFWxJF4DKw47KF4UJFWkur4j
- 9a1jvFy2y395ta7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkqb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
- 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
- A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xII
- jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJVW8Jr1l84ACjcxK6I
- 8E87Iv6xkF7I0E14v26r4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xv
- F2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26r1j6r
- 4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCYjI0SjxkI62AI1cAE67vIY487
- MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr
- 0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0E
- wIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JV
- WxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAI
- cVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU5SPfJUUUUU==
-X-Originating-IP: [180.165.240.213]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.094,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::642;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x642.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -68,257 +81,199 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Feb 2023 06:48:46 -0000
+X-List-Received-Date: Sat, 25 Feb 2023 09:14:39 -0000
 
+Based-on: 20230225085945.1798188-1-richard.henderson@linaro.org
+("[PATCH v3 00/30] tcg: Simplify temporary usage")
 
-On 2023/2/24 21:25, Daniel Henrique Barboza wrote:
-> From: Christoph Muellner <cmuellner@linux.com>
->
-> The RISC-V base cache management operation (CBO) ISA extension has been
-> ratified. It defines three extensions: Cache-Block Management, Cache-Block
-> Prefetch and Cache-Block Zero. More information about the spec can be
-> found at [1].
->
-> Let's start by implementing the Cache-Block Zero extension, Zicboz. It
-> uses the cbo.zero instruction that, as with all CBO instructions that
-> will be added later, needs to be implemented in an overlap group with
-> the LQ instruction due to overlapping patterns.
->
-> cbo.zero throws a Illegal Instruction/Virtual Instruction exception
-> depending on CSR state. This is also the case for the remaining cbo
-> instructions we're going to add next, so create a check_zicbo_envcfg()
-> that will be used by all Zicbo[mz] instructions.
->
-> [1] https://github.com/riscv/riscv-CMOs/blob/master/specifications/cmobase-v1.0.1.pdf
->
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Co-developed-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> Signed-off-by: Christoph Muellner <cmuellner@linux.com>
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+In the above patch set, we changed the lifetime of the temps
+allocated by the guest translators, and eliminated their reuse,
+so that we have the best chance of reducing their strength.
 
-Weiwei Li
-> ---
->   target/riscv/cpu.c                          |  4 ++
->   target/riscv/cpu.h                          |  2 +
->   target/riscv/helper.h                       |  3 +
->   target/riscv/insn32.decode                  | 10 ++-
->   target/riscv/insn_trans/trans_rvzicbo.c.inc | 30 +++++++++
->   target/riscv/op_helper.c                    | 68 +++++++++++++++++++++
->   target/riscv/translate.c                    |  1 +
->   7 files changed, 117 insertions(+), 1 deletion(-)
->   create mode 100644 target/riscv/insn_trans/trans_rvzicbo.c.inc
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 93b52b826c..7dd37de7f9 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -74,6 +74,7 @@ struct isa_ext_data {
->   static const struct isa_ext_data isa_edata_arr[] = {
->       ISA_EXT_DATA_ENTRY(h, false, PRIV_VERSION_1_12_0, ext_h),
->       ISA_EXT_DATA_ENTRY(v, false, PRIV_VERSION_1_10_0, ext_v),
-> +    ISA_EXT_DATA_ENTRY(zicboz, true, PRIV_VERSION_1_12_0, ext_icboz),
->       ISA_EXT_DATA_ENTRY(zicsr, true, PRIV_VERSION_1_10_0, ext_icsr),
->       ISA_EXT_DATA_ENTRY(zifencei, true, PRIV_VERSION_1_10_0, ext_ifencei),
->       ISA_EXT_DATA_ENTRY(zihintpause, true, PRIV_VERSION_1_10_0, ext_zihintpause),
-> @@ -1126,6 +1127,9 @@ static Property riscv_cpu_extensions[] = {
->       DEFINE_PROP_BOOL("zhinx", RISCVCPU, cfg.ext_zhinx, false),
->       DEFINE_PROP_BOOL("zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
->   
-> +    DEFINE_PROP_BOOL("zicboz", RISCVCPU, cfg.ext_icboz, true),
-> +    DEFINE_PROP_UINT16("cboz_blocksize", RISCVCPU, cfg.cboz_blocksize, 64),
-> +
->       DEFINE_PROP_BOOL("zmmul", RISCVCPU, cfg.ext_zmmul, false),
->   
->       /* Vendor-specific custom extensions */
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 7128438d8e..6b4c714d3a 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -447,6 +447,7 @@ struct RISCVCPUConfig {
->       bool ext_zkt;
->       bool ext_ifencei;
->       bool ext_icsr;
-> +    bool ext_icboz;
->       bool ext_zihintpause;
->       bool ext_smstateen;
->       bool ext_sstc;
-> @@ -494,6 +495,7 @@ struct RISCVCPUConfig {
->       char *vext_spec;
->       uint16_t vlen;
->       uint16_t elen;
-> +    uint16_t cboz_blocksize;
->       bool mmu;
->       bool pmp;
->       bool epmp;
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 0497370afd..ce165821b8 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -97,6 +97,9 @@ DEF_HELPER_FLAGS_2(fcvt_h_l, TCG_CALL_NO_RWG, i64, env, tl)
->   DEF_HELPER_FLAGS_2(fcvt_h_lu, TCG_CALL_NO_RWG, i64, env, tl)
->   DEF_HELPER_FLAGS_2(fclass_h, TCG_CALL_NO_RWG_SE, tl, env, i64)
->   
-> +/* Cache-block operations */
-> +DEF_HELPER_2(cbo_zero, void, env, tl)
-> +
->   /* Special functions */
->   DEF_HELPER_2(csrr, tl, env, int)
->   DEF_HELPER_3(csrw, void, env, int, tl)
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index b7e7613ea2..3985bc703f 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -179,7 +179,15 @@ sraw     0100000 .....  ..... 101 ..... 0111011 @r
->   
->   # *** RV128I Base Instruction Set (in addition to RV64I) ***
->   ldu      ............   ..... 111 ..... 0000011 @i
-> -lq       ............   ..... 010 ..... 0001111 @i
-> +{
-> +  [
-> +    # *** RV32 Zicboz Standard Extension ***
-> +    cbo_zero   0000000 00100 ..... 010 00000 0001111 @sfence_vm
-> +  ]
-> +
-> +  # *** RVI128 lq ***
-> +  lq       ............   ..... 010 ..... 0001111 @i
-> +}
->   sq       ............   ..... 100 ..... 0100011 @s
->   addid    ............  .....  000 ..... 1011011 @i
->   sllid    000000 ......  ..... 001 ..... 1011011 @sh6
-> diff --git a/target/riscv/insn_trans/trans_rvzicbo.c.inc b/target/riscv/insn_trans/trans_rvzicbo.c.inc
-> new file mode 100644
-> index 0000000000..feabc28342
-> --- /dev/null
-> +++ b/target/riscv/insn_trans/trans_rvzicbo.c.inc
-> @@ -0,0 +1,30 @@
-> +/*
-> + * RISC-V translation routines for the RISC-V CBO Extension.
-> + *
-> + * Copyright (c) 2021 Philipp Tomsich, philipp.tomsich@vrull.eu
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#define REQUIRE_ZICBOZ(ctx) do {    \
-> +    if (!ctx->cfg_ptr->ext_icboz) { \
-> +        return false;               \
-> +    }                               \
-> +} while (0)
-> +
-> +static bool trans_cbo_zero(DisasContext *ctx, arg_cbo_zero *a)
-> +{
-> +    REQUIRE_ZICBOZ(ctx);
-> +    gen_helper_cbo_zero(cpu_env, cpu_gpr[a->rs1]);
-> +    return true;
-> +}
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 48f918b71b..c43ecc19b5 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -3,6 +3,7 @@
->    *
->    * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
->    * Copyright (c) 2017-2018 SiFive, Inc.
-> + * Copyright (c) 2022      VRULL GmbH
->    *
->    * This program is free software; you can redistribute it and/or modify it
->    * under the terms and conditions of the GNU General Public License,
-> @@ -123,6 +124,73 @@ target_ulong helper_csrrw_i128(CPURISCVState *env, int csr,
->       return int128_getlo(rv);
->   }
->   
-> +
-> +/*
-> + * check_zicbo_envcfg
-> + *
-> + * Raise virtual exceptions and illegal instruction exceptions for
-> + * Zicbo[mz] instructions based on the settings of [mhs]envcfg as
-> + * specified in section 2.5.1 of the CMO specification.
-> + */
-> +static void check_zicbo_envcfg(CPURISCVState *env, target_ulong envbits,
-> +                                uintptr_t ra)
-> +{
-> +#ifndef CONFIG_USER_ONLY
-> +    if ((env->priv < PRV_M) && !get_field(env->menvcfg, envbits)) {
-> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
-> +    }
-> +
-> +    if (riscv_cpu_virt_enabled(env) &&
-> +        (((env->priv < PRV_H) && !get_field(env->henvcfg, envbits)) ||
-> +         ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits)))) {
-> +        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, ra);
-> +    }
-> +
-> +    if ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits)) {
-> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
-> +    }
-> +#endif
-> +}
-> +
-> +void helper_cbo_zero(CPURISCVState *env, target_ulong address)
-> +{
-> +    RISCVCPU *cpu = env_archcpu(env);
-> +    uint16_t cbozlen = cpu->cfg.cboz_blocksize;
-> +    int mmu_idx = cpu_mmu_index(env, false);
-> +    uintptr_t ra = GETPC();
-> +    void *mem;
-> +
-> +    check_zicbo_envcfg(env, MENVCFG_CBZE, ra);
-> +
-> +    /* Mask off low-bits to align-down to the cache-block. */
-> +    address &= ~(cbozlen - 1);
-> +
-> +    /*
-> +     * cbo.zero requires MMU_DATA_STORE access. Do a probe_write()
-> +     * to raise any exceptions, including PMP.
-> +     */
-> +    mem = probe_write(env, address, cbozlen, mmu_idx, ra);
-> +
-> +    if (likely(mem)) {
-> +        memset(mem, 0, cbozlen);
-> +    } else {
-> +        /*
-> +         * This means that we're dealing with an I/O page. Section 4.2
-> +         * of cmobase v1.0.1 says:
-> +         *
-> +         * "Cache-block zero instructions store zeros independently
-> +         * of whether data from the underlying memory locations are
-> +         * cacheable."
-> +         *
-> +         * Write zeros in address + cbozlen regardless of not being
-> +         * a RAM page.
-> +         */
-> +        for (int i = 0; i < cbozlen; i++) {
-> +            cpu_stb_mmuidx_ra(env, address + i, 0, mmu_idx, ra);
-> +        }
-> +    }
-> +}
-> +
->   #ifndef CONFIG_USER_ONLY
->   
->   target_ulong helper_sret(CPURISCVState *env)
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 772f9d7973..7f687a7e37 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -1104,6 +1104,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
->   #include "insn_trans/trans_rvv.c.inc"
->   #include "insn_trans/trans_rvb.c.inc"
->   #include "insn_trans/trans_rvzawrs.c.inc"
-> +#include "insn_trans/trans_rvzicbo.c.inc"
->   #include "insn_trans/trans_rvzfh.c.inc"
->   #include "insn_trans/trans_rvk.c.inc"
->   #include "insn_trans/trans_privileged.c.inc"
+That we don't reuse them means that we gain nothing by freeing them.
+Therefore, drop all mention of tcg_temp_free from target/.
+
+This may be the most negative diffstat I've ever produced.  :-)
+
+r~
+
+Richard Henderson (76):
+  tcg: Remove tcg_check_temp_count, tcg_clear_temp_count
+  accel/tcg: Remove translator_loop_temp_check
+  target/alpha: Drop tcg_temp_free
+  target/arm: Remove arm_free_cc, a64_free_cc
+  target/arm: Remove value_global from DisasCompare
+  target/arm: Drop tcg_temp_free from translator.c
+  target/arm: Drop DisasContext.tmp_a64
+  target/arm: Drop new_tmp_a64
+  target/arm: Drop new_tmp_a64_zero
+  target/arm: Drop tcg_temp_free from translator-a64.c
+  target/arm: Drop tcg_temp_free from translator-m-nocp.c
+  target/arm: Drop tcg_temp_free from translator-mve.c
+  target/arm: Drop tcg_temp_free from translator-neon.c
+  target/arm: Drop tcg_temp_free from translator-sme.c
+  target/arm: Drop tcg_temp_free from translator-sve.c
+  target/arm: Drop tcg_temp_free from translator-vfp.c
+  target/arm: Drop tcg_temp_free from translator.h
+  target/avr: Drop DisasContext.free_skip_var0
+  target/avr: Drop R from trans_COM
+  target/avr: Drop tcg_temp_free
+  target/cris: Drop cris_alu_free_temps
+  target/cris: Drop cris_alu_m_free_temps
+  target/cris: Drop addr from dec10_ind_move_m_pr
+  target/cris: Drop tcg_temp_free
+  target/cris: Drop tcg_temp_free from C code
+  target/cris: Drop tcg_temp_free from gen_tcg_funcs.py
+  target/hexagon/idef-parser: Drop tcg_temp_free
+  target/hexagon/idef-parser: Drop HexValue.is_manual
+  target/hppa: Drop tcg_temp_free
+  target/i386: Drop tcg_temp_free
+  target/loongarch: Drop temp_new
+  target/loongarch: Drop tcg_temp_free
+  target/m68k: Drop mark_to_release
+  target/m68k: Drop free_cond
+  target/m68k: Drop tcg_temp_free
+  target/microblaze: Drop tcg_temp_free
+  target/mips: Drop tcg_temp_free from micromips_translate.c.inc
+  target/mips: Drop tcg_temp_free from mips16e_translate.c.inc
+  target/mips: Drop tcg_temp_free from msa_translate.c
+  target/mips: Drop tcg_temp_free from mxu_translate.c
+  target/mips: Drop tcg_temp_free from nanomips_translate.c.inc
+  target/mips: Drop tcg_temp_free from octeon_translate.c
+  target/mips: Drop tcg_temp_free from translate_addr_const.c
+  target/mips: Drop tcg_temp_free from tx79_translate.c
+  target/mips: Fix trans_mult_acc return
+  target/mips: Drop tcg_temp_free from vr54xx_translate.c
+  target/mips: Drop tcg_temp_free from translate.c
+  target/nios2: Drop tcg_temp_free
+  target/openrisc: Drop tcg_temp_free
+  target/ppc: Drop tcg_temp_free
+  target/riscv: Drop ftemp_new
+  target/riscv: Drop temp_new
+  target/riscv: Drop tcg_temp_free
+  target/rx: Drop tcg_temp_free
+  target/s390x: Use tcg_constant_* in local contexts
+  target/s390x: Use tcg_constant_* for DisasCompare
+  target/s390x: Use tcg_constant_i32 for fpinst_extract_m34
+  target/s390x: Use tcg_constant_* in translate_vx.c.inc
+  target/s390x: Drop free_compare
+  target/s390x: Drop tcg_temp_free from translate_vx.c.inc
+  target/s390x: Drop tcg_temp_free from translate.c
+  target/s390x: Remove assert vs g_in2
+  target/s390x: Remove g_out, g_out2, g_in1, g_in2 from DisasContext
+  target/sh4: Drop tcg_temp_free
+  target/sparc: Drop get_temp_tl
+  target/sparc: Drop get_temp_i32
+  target/sparc: Remove egress label in disas_sparc_context
+  target/sparc: Drop free_compare
+  target/sparc: Drop tcg_temp_free
+  target/tricore: Drop tcg_temp_free
+  target/sparc: Drop reset_sar_tracker
+  target/xtensa: Drop tcg_temp_free
+  include/exec/gen-icount: Drop tcg_temp_free in gen_tb_start
+  tracing: remove transform.py
+  tcg: Create tcg/tcg-temp-internal.h
+  docs/devel/tcg-ops: Drop recommendation to free temps
+
+ docs/devel/tcg-ops.rst                        |   4 -
+ target/hexagon/idef-parser/README.rst         |   8 -
+ meson.build                                   |   1 -
+ include/exec/gen-icount.h                     |   2 -
+ include/exec/translator.h                     |   2 -
+ include/tcg/tcg-temp-internal.h               |  83 +++
+ include/tcg/tcg.h                             |  68 --
+ target/arm/translate-a64.h                    |   2 -
+ target/arm/translate.h                        |   7 -
+ target/hexagon/gen_tcg.h                      |  29 -
+ target/hexagon/gen_tcg_hvx.h                  |  15 -
+ target/hexagon/idef-parser/idef-parser.h      |   1 -
+ target/hexagon/idef-parser/parser-helpers.h   |   4 -
+ target/hexagon/macros.h                       |   7 -
+ target/loongarch/translate.h                  |   3 -
+ accel/tcg/plugin-gen.c                        |   1 +
+ accel/tcg/translator.c                        |  16 -
+ target/alpha/translate.c                      |  71 --
+ target/arm/translate-a64.c                    | 594 ++--------------
+ target/arm/translate-m-nocp.c                 |  20 -
+ target/arm/translate-mve.c                    |  52 --
+ target/arm/translate-neon.c                   | 131 +---
+ target/arm/translate-sme.c                    |  28 -
+ target/arm/translate-sve.c                    | 206 +-----
+ target/arm/translate-vfp.c                    | 193 -----
+ target/arm/translate.c                        | 281 +-------
+ target/avr/translate.c                        | 251 -------
+ target/cris/translate.c                       | 113 ---
+ target/hexagon/genptr.c                       |  58 --
+ target/hexagon/idef-parser/parser-helpers.c   | 158 -----
+ target/hexagon/translate.c                    |   7 -
+ target/hppa/translate.c                       |  93 +--
+ target/i386/tcg/translate.c                   |  41 --
+ target/loongarch/translate.c                  |  21 +-
+ target/m68k/translate.c                       | 276 +-------
+ target/microblaze/translate.c                 |  54 --
+ target/mips/tcg/msa_translate.c               |   9 -
+ target/mips/tcg/mxu_translate.c               |  51 --
+ target/mips/tcg/octeon_translate.c            |  23 -
+ target/mips/tcg/translate.c                   | 537 +-------------
+ target/mips/tcg/translate_addr_const.c        |   7 -
+ target/mips/tcg/tx79_translate.c              |  41 --
+ target/mips/tcg/vr54xx_translate.c            |   6 +-
+ target/nios2/translate.c                      |  15 -
+ target/openrisc/translate.c                   |  39 -
+ target/ppc/translate.c                        | 285 --------
+ target/riscv/translate.c                      |  61 +-
+ target/rx/translate.c                         |  84 ---
+ target/s390x/tcg/translate.c                  | 668 +++++-------------
+ target/sh4/translate.c                        | 110 ---
+ target/sparc/translate.c                      | 259 +------
+ target/tricore/translate.c                    | 540 +-------------
+ target/xtensa/translate.c                     | 121 +---
+ tcg/tcg-op-gvec.c                             |   1 +
+ tcg/tcg-op-vec.c                              |   1 +
+ tcg/tcg-op.c                                  |   1 +
+ tcg/tcg.c                                     |  55 +-
+ target/cris/translate_v10.c.inc               |  49 +-
+ target/i386/tcg/decode-new.c.inc              |  15 -
+ target/i386/tcg/emit.c.inc                    |   6 -
+ target/loongarch/insn_trans/trans_arith.c.inc |  12 -
+ .../loongarch/insn_trans/trans_atomic.c.inc   |   3 -
+ target/loongarch/insn_trans/trans_bit.c.inc   |  12 -
+ target/loongarch/insn_trans/trans_fcmp.c.inc  |   3 -
+ .../loongarch/insn_trans/trans_fmemory.c.inc  |  20 +-
+ target/loongarch/insn_trans/trans_fmov.c.inc  |   6 -
+ .../loongarch/insn_trans/trans_memory.c.inc   |  34 +-
+ .../insn_trans/trans_privileged.c.inc         |   6 +-
+ target/loongarch/insn_trans/trans_shift.c.inc |  11 -
+ target/mips/tcg/micromips_translate.c.inc     |   8 -
+ target/mips/tcg/mips16e_translate.c.inc       |   6 -
+ target/mips/tcg/nanomips_translate.c.inc      | 127 +---
+ target/ppc/power8-pmu-regs.c.inc              |  16 -
+ target/ppc/translate/dfp-impl.c.inc           |  20 -
+ target/ppc/translate/fixedpoint-impl.c.inc    |  16 -
+ target/ppc/translate/fp-impl.c.inc            | 122 +---
+ target/ppc/translate/spe-impl.c.inc           |  59 --
+ target/ppc/translate/storage-ctrl-impl.c.inc  |   2 -
+ target/ppc/translate/vmx-impl.c.inc           | 296 +-------
+ target/ppc/translate/vsx-impl.c.inc           | 287 +-------
+ target/riscv/insn_trans/trans_rvb.c.inc       |  24 -
+ target/riscv/insn_trans/trans_rvd.c.inc       |   2 -
+ target/riscv/insn_trans/trans_rvf.c.inc       |   9 -
+ target/riscv/insn_trans/trans_rvi.c.inc       |  37 -
+ target/riscv/insn_trans/trans_rvk.c.inc       |  15 -
+ target/riscv/insn_trans/trans_rvm.c.inc       |  33 -
+ target/riscv/insn_trans/trans_rvv.c.inc       |  55 --
+ target/riscv/insn_trans/trans_rvzfh.c.inc     |  12 +-
+ target/riscv/insn_trans/trans_xthead.c.inc    |  24 +-
+ target/s390x/tcg/translate_vx.c.inc           | 188 +----
+ scripts/tracetool/transform.py                | 168 -----
+ target/hexagon/README                         |   5 -
+ target/hexagon/gen_tcg_funcs.py               |  79 +--
+ target/hexagon/idef-parser/idef-parser.y      |  12 -
+ 94 files changed, 471 insertions(+), 7143 deletions(-)
+ create mode 100644 include/tcg/tcg-temp-internal.h
+ delete mode 100644 scripts/tracetool/transform.py
+
+-- 
+2.34.1
 
 
