@@ -1,64 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVoBW-0000ha-8k
-	for mharc-qemu-riscv@gnu.org; Sat, 25 Feb 2023 01:37:30 -0500
+	id 1pVoFC-0003zu-0c
+	for mharc-qemu-riscv@gnu.org; Sat, 25 Feb 2023 01:41:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1pVoBR-0000dZ-F1
- for qemu-riscv@nongnu.org; Sat, 25 Feb 2023 01:37:26 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1pVoBQ-0002rQ-0m
- for qemu-riscv@nongnu.org; Sat, 25 Feb 2023 01:37:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1677307043;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=OcGg8UwD1oAse3CxtUrhYuooopXoY1Ay8EyEOaaEFCY=;
- b=NulqjK0ajJRm1kL3tYxJIPBppgCQhJnYH3RcfU+6vS0KFU7uAFsf5iuMQvJsh6o32BMnUa
- kg0wDzcca8GMLVlDi24WCvqA/LE93UfUDFisa0g2z8sWFJIOo3e00XEozs5e6DpgAQlZDK
- T/oU04PqREIXxnC8SpNLqjOlkBPWfaY=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-35-bctDuSKxOZ-5Pk91YuTzuw-1; Sat, 25 Feb 2023 01:37:21 -0500
-X-MC-Unique: bctDuSKxOZ-5Pk91YuTzuw-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 92B96811E6E;
- Sat, 25 Feb 2023 06:37:20 +0000 (UTC)
-Received: from gshan.redhat.com (vpn2-54-20.bne.redhat.com [10.64.54.20])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 073CC40C945A;
- Sat, 25 Feb 2023 06:37:11 +0000 (UTC)
-From: Gavin Shan <gshan@redhat.com>
-To: qemu-arm@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, rad@semihalf.com,
- peter.maydell@linaro.org, quic_llindhol@quicinc.com, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, philmd@linaro.org, wangyanan55@huawei.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- thuth@redhat.com, lvivier@redhat.com, pbonzini@redhat.com,
- imammedo@redhat.com, yihyu@redhat.com, ajones@ventanamicro.com,
- berrange@redhat.com, dbarboza@ventanamicro.com, shan.gavin@gmail.com
-Subject: [PATCH v3 3/3] hw/riscv: Validate cluster and NUMA node boundary
-Date: Sat, 25 Feb 2023 14:35:27 +0800
-Message-Id: <20230225063527.281479-4-gshan@redhat.com>
-In-Reply-To: <20230225063527.281479-1-gshan@redhat.com>
-References: <20230225063527.281479-1-gshan@redhat.com>
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pVoF7-0003zU-Dv; Sat, 25 Feb 2023 01:41:13 -0500
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pVoF4-0003Me-HP; Sat, 25 Feb 2023 01:41:12 -0500
+Received: from [192.168.0.120] (unknown [180.165.240.213])
+ by APP-05 (Coremail) with SMTP id zQCowACXnpp1rfljD6ZuCA--.7668S2;
+ Sat, 25 Feb 2023 14:40:54 +0800 (CST)
+Message-ID: <e40e75ff-37e0-94d3-e9e2-c159b0e2da68@iscas.ac.cn>
+Date: Sat, 25 Feb 2023 14:40:52 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH 1/4] target/riscv/csr.c: use env_archcpu() in ctr()
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ zhiwei_liu@linux.alibaba.com
+References: <20230224174520.92490-1-dbarboza@ventanamicro.com>
+ <20230224174520.92490-2-dbarboza@ventanamicro.com>
+From: liweiwei <liweiwei@iscas.ac.cn>
+In-Reply-To: <20230224174520.92490-2-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID: zQCowACXnpp1rfljD6ZuCA--.7668S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrtryUXr15Gr4xXrWxtrWfAFb_yoWftrc_Gr
+ 4fWF97urnrW3savFWkCw1rtr13KF10gr1xta15XrWUGFyjg3y5Jw1kKF18J34a9F4xWrn3
+ A343ta13GFnI9jkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUb2AYjsxI4VWxJwAYFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I
+ 6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM2
+ 8CjxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0
+ cI8IcVCY1x0267AKxVWUJVW8JwA2z4x0Y4vEx4A2jsIE14v26F4j6r4UJwA2z4x0Y4vEx4
+ A2jsIEc7CjxVAFwI0_Gr1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
+ 0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr
+ 1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxk0xIA0c2IEe2xFo4CEbIxvr21l
+ 42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJV
+ WUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAK
+ I48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r
+ 4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY
+ 6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x07jeXdbUUUUU=
+X-Originating-IP: [180.165.240.213]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -42
+X-Spam_score: -4.3
+X-Spam_bar: ----
+X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.094,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -72,47 +66,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Feb 2023 06:37:26 -0000
+X-List-Received-Date: Sat, 25 Feb 2023 06:41:15 -0000
 
-There are two RISCV machines where NUMA is aware: 'virt' and 'spike'.
-Both of them are required to follow cluster-NUMA-node boundary. To
-enable the validation to warn about the irregular configuration where
-multiple CPUs in one cluster has been associated with multiple NUMA
-nodes.
 
-Signed-off-by: Gavin Shan <gshan@redhat.com>
----
- hw/riscv/spike.c | 2 ++
- hw/riscv/virt.c  | 2 ++
- 2 files changed, 4 insertions(+)
+On 2023/2/25 01:45, Daniel Henrique Barboza wrote:
+> We don't need to use env_cpu() and CPUState().
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>   target/riscv/csr.c | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 75a540bfcb..3692617d13 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -108,8 +108,7 @@ static RISCVException vs(CPURISCVState *env, int csrno)
+>   static RISCVException ctr(CPURISCVState *env, int csrno)
+>   {
+>   #if !defined(CONFIG_USER_ONLY)
+> -    CPUState *cs = env_cpu(env);
+> -    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    RISCVCPU *cpu = env_archcpu(env);
+>       int ctr_index;
+>       target_ulong ctr_mask;
+>       int base_csrno = CSR_CYCLE;
 
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index cc3f6dac17..b09b993634 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -357,6 +357,8 @@ static void spike_machine_class_init(ObjectClass *oc, void *data)
-     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
-     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
-     mc->numa_mem_supported = true;
-+    /* platform instead of architectural choice */
-+    mc->cpu_cluster_has_numa_boundary = true;
-     mc->default_ram_id = "riscv.spike.ram";
- }
- 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index b81081c70b..e5bb168169 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1636,6 +1636,8 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
-     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
-     mc->numa_mem_supported = true;
-+    /* platform instead of architectural choice */
-+    mc->cpu_cluster_has_numa_boundary = true;
-     mc->default_ram_id = "riscv_virt_board.ram";
-     assert(!mc->get_hotplug_handler);
-     mc->get_hotplug_handler = virt_machine_get_hotplug_handler;
--- 
-2.23.0
+This has been done by previous patchset from Bin Meng:
+
+https://lists.nongnu.org/archive/html/qemu-riscv/2023-02/msg00276.html
+
+Regards,
+
+Weiwei Li
 
 
