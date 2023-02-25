@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pVqij-0005Lf-9y
-	for mharc-qemu-riscv@gnu.org; Sat, 25 Feb 2023 04:19:58 -0500
+	id 1pVqit-00061y-62
+	for mharc-qemu-riscv@gnu.org; Sat, 25 Feb 2023 04:20:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pVqiH-0003uR-Lq
- for qemu-riscv@nongnu.org; Sat, 25 Feb 2023 04:19:34 -0500
+ id 1pVqiM-000408-MH
+ for qemu-riscv@nongnu.org; Sat, 25 Feb 2023 04:19:35 -0500
 Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pVqiF-0002tO-Sa
- for qemu-riscv@nongnu.org; Sat, 25 Feb 2023 04:19:29 -0500
-Received: by mail-pj1-x102a.google.com with SMTP id kb15so1446363pjb.1
- for <qemu-riscv@nongnu.org>; Sat, 25 Feb 2023 01:19:27 -0800 (PST)
+ id 1pVqiL-0002tO-3E
+ for qemu-riscv@nongnu.org; Sat, 25 Feb 2023 04:19:34 -0500
+Received: by mail-pj1-x102a.google.com with SMTP id kb15so1446482pjb.1
+ for <qemu-riscv@nongnu.org>; Sat, 25 Feb 2023 01:19:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RUHY2yKH2nPTR6QE7c2gu4MGXp/9B0MeleLyAh2d26U=;
- b=BGabFMm2CVQ3HIsRf1Y4bJmKh1C5VO0rFM9RRNcNn+xeR2GTMMzoVjaPJb6djCmwqV
- DgHeUVe4ebHp7goPA2+yV1BB52LlDxYgvNk5rbyKArRrOuZEuw6buZ3GR1NAZMEXE5PC
- 8Y4cB3lpufqOA+gQ/pXvG5r8ix/w15VMPjyjxErD2VDumlj89BRP6F/978d4CHEawOZ/
- Eos6yTYknsXGdp5AFS4OFBQ2AEOA8IL+mTHVGdYx9nYGn2DQU62V/11xH/Hp9Cuz9RKS
- DC5ENLusQgpbBa6sED0B+4v3lA3EZFAa2jB1Od762qgdeD9y06wSJMkBphDEyKgDO4ET
- di7g==
+ bh=OamVkTHfnUQ17ezU+zmeUz0tz/Qpam4ZKwlKCcTeapQ=;
+ b=SA6xZ6xDY7LrrHiX6kAU6EHasmZaRrIDcRGZtmrrS0HuSZUFwGjw7p8rG1iPT0cmjY
+ OhyaZA56ypL8NS8KIZXqGXDIjEvkMS2oGdis9w547LCoqaL0QR9gSWghitNFoK2SK8VO
+ G0/fxYsKrNtFWqMdOf0bPJ5DkWKw4MhlvRR+ND5yZBZOZq9+RaTa/BwtHTuC/gIP6xVD
+ 7WIBkJiAYUEGjE9bAS2MNh4j8MqxD9xe08D119ICiiIUuoW4yA+hh9+WkHmZgHossjZv
+ I57oKjsfHCegVnHMsvJnbom/quZq62Jbx2fEenzfmZAyrQx6CINa2I17lTPH3G5w2Agw
+ UrIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RUHY2yKH2nPTR6QE7c2gu4MGXp/9B0MeleLyAh2d26U=;
- b=L+ma3fH8Y3cFct/Fz6hZWpQ9i0HKU34mwM33Wg+kAuyZ+zPs9y6mfLF1kizapsYd6R
- DbnrUsIVT7u/PnQJtJY+pPn+anrcCje8RAyLAtLqICoje+CKrlwER/fmSGvJeWdRv/KT
- wew1yqrBf8YRcPZmUIhf3mQzwORyKqCgFUny+AqL0Fs0a2diA+cZ2gRZvjDm/tAgmUUF
- /2PXPYHTJuTuQMSEsS8JqlaSYlpVlGthhFDTlsNARvT2xgNHDy/7owbU1BXR4BcFDICU
- pwnqUe7apDgjXLyAXP9+E4isIEV995CKTXRCQ4qxG84DqexGKwp+VVe4HNIdr5oz6UwC
- d4AA==
-X-Gm-Message-State: AO0yUKUca0h5PTX/PpN6MbtrDwfm5R4IUG3Is4vQVnHe7xiSmYlBRTwC
- DwgiyH3anJWOIu2b/4ECzBxDBA==
-X-Google-Smtp-Source: AK7set809GQmVVO58e266/rAFK1dJeHZRbt9n00gjibAcLLecjYpkW7dAYO6QNM7ZEZlR5O2J+AFBg==
-X-Received: by 2002:a05:6a20:431b:b0:cc:9f59:4562 with SMTP id
- h27-20020a056a20431b00b000cc9f594562mr3948772pzk.53.1677316767069; 
- Sat, 25 Feb 2023 01:19:27 -0800 (PST)
+ bh=OamVkTHfnUQ17ezU+zmeUz0tz/Qpam4ZKwlKCcTeapQ=;
+ b=66KHUp1dt1dGRaP4mODFx6Hf0vCSQmOqgD/Zv60S24FsSwHV0ZMvjkVApbBOcVLnIO
+ GliaJtkWKXMWgZ5zweToY7i8XffiHTtRRZn4k2jmsUtPiC5eLZgP8l0df8F4CTxQr7a5
+ rxeA13mWG886sas0aL0+5EG9siNXzToXPlBhGtocTneU6HlSMPJb0D2htFhnC/bx54F0
+ bC6ca/VtyTLoERT0iyijB/U2mM85jj71OtXGzPspOkFSW3ySK71RmUVodD1MKx8z1c4F
+ 1Gej1a68KgJ4ErHkF61hW+JmxhtLO/yk5Xf1pg7Us8SNEbkdTajUHl87bHym7XPvmLP+
+ EIRA==
+X-Gm-Message-State: AO0yUKVs4WPO3vdFa8rmLTHE2Z6jMd4EeIH2d3H3s5ESY9fQkzhqsRnZ
+ PXVwpC/RDU7yTTIL/CxUO/p6aQ==
+X-Google-Smtp-Source: AK7set+G7eQ4PXorij9lkNA6PkRx3vmGiA2DswJSkUnBlmIqdXxDvCSZOmnh8o5kuavwjSmPDU8A5w==
+X-Received: by 2002:a05:6a20:4da4:b0:cb:6f9c:166d with SMTP id
+ gj36-20020a056a204da400b000cb6f9c166dmr16262190pzb.43.1677316772369; 
+ Sat, 25 Feb 2023 01:19:32 -0800 (PST)
 Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
  by smtp.gmail.com with ESMTPSA id
- 26-20020aa7921a000000b00592417157f2sm843114pfo.148.2023.02.25.01.19.24
+ 26-20020aa7921a000000b00592417157f2sm843114pfo.148.2023.02.25.01.19.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Feb 2023 01:19:26 -0800 (PST)
+ Sat, 25 Feb 2023 01:19:31 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -54,9 +54,9 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
  edgar.iglesias@gmail.com
-Subject: [PATCH 44/76] target/mips: Drop tcg_temp_free from tx79_translate.c
-Date: Fri, 24 Feb 2023 23:13:55 -1000
-Message-Id: <20230225091427.1817156-45-richard.henderson@linaro.org>
+Subject: [PATCH 46/76] target/mips: Drop tcg_temp_free from vr54xx_translate.c
+Date: Fri, 24 Feb 2023 23:13:57 -1000
+Message-Id: <20230225091427.1817156-47-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230225091427.1817156-1-richard.henderson@linaro.org>
 References: <20230225091427.1817156-1-richard.henderson@linaro.org>
@@ -89,116 +89,24 @@ Translators are no longer required to free tcg temporaries.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/mips/tcg/tx79_translate.c | 41 --------------------------------
- 1 file changed, 41 deletions(-)
+ target/mips/tcg/vr54xx_translate.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/target/mips/tcg/tx79_translate.c b/target/mips/tcg/tx79_translate.c
-index 4e479c2d10..d46bc73972 100644
---- a/target/mips/tcg/tx79_translate.c
-+++ b/target/mips/tcg/tx79_translate.c
-@@ -138,10 +138,6 @@ static bool trans_parallel_arith(DisasContext *ctx, arg_r *a,
-     gen_load_gpr_hi(ax, a->rs);
-     gen_load_gpr_hi(bx, a->rt);
-     gen_logic_i64(cpu_gpr_hi[a->rd], ax, bx);
--
--    tcg_temp_free(bx);
--    tcg_temp_free(ax);
--
-     return true;
- }
+diff --git a/target/mips/tcg/vr54xx_translate.c b/target/mips/tcg/vr54xx_translate.c
+index a7d241e4e7..804672f84c 100644
+--- a/target/mips/tcg/vr54xx_translate.c
++++ b/target/mips/tcg/vr54xx_translate.c
+@@ -49,10 +49,6 @@ static bool trans_mult_acc(DisasContext *ctx, arg_r *a,
+     gen_helper_mult_acc(t0, cpu_env, t0, t1);
  
-@@ -273,15 +269,6 @@ static bool trans_parallel_compare(DisasContext *ctx, arg_r *a,
-         tcg_gen_movcond_i64(cond, t2, t1, t0, c1, c0);
-         tcg_gen_deposit_i64(cpu_gpr_hi[a->rd], cpu_gpr_hi[a->rd], t2, wlen * i, wlen);
-     }
+     gen_store_gpr(t0, a->rd);
 -
--    tcg_temp_free(t2);
+-    tcg_temp_free(t0);
 -    tcg_temp_free(t1);
--    tcg_temp_free(t0);
--    tcg_temp_free(bx);
--    tcg_temp_free(ax);
--    tcg_temp_free(c1);
--    tcg_temp_free(c0);
 -
      return true;
  }
  
-@@ -362,10 +349,6 @@ static bool trans_LQ(DisasContext *ctx, arg_i *a)
-     tcg_gen_addi_i64(addr, addr, 8);
-     tcg_gen_qemu_ld_i64(t0, addr, ctx->mem_idx, MO_TEUQ);
-     gen_store_gpr_hi(t0, a->rt);
--
--    tcg_temp_free(t0);
--    tcg_temp_free(addr);
--
-     return true;
- }
- 
-@@ -389,10 +372,6 @@ static bool trans_SQ(DisasContext *ctx, arg_i *a)
-     tcg_gen_addi_i64(addr, addr, 8);
-     gen_load_gpr_hi(t0, a->rt);
-     tcg_gen_qemu_st_i64(t0, addr, ctx->mem_idx, MO_TEUQ);
--
--    tcg_temp_free(addr);
--    tcg_temp_free(t0);
--
-     return true;
- }
- 
-@@ -458,11 +437,6 @@ static bool trans_PPACW(DisasContext *ctx, arg_r *a)
- 
-     gen_load_gpr_hi(t0, a->rs); /* a1 */
-     tcg_gen_deposit_i64(cpu_gpr_hi[a->rd], a0, t0, 32, 32);
--
--    tcg_temp_free(t0);
--    tcg_temp_free(b0);
--    tcg_temp_free(a0);
--
-     return true;
- }
- 
-@@ -506,10 +480,6 @@ static bool trans_PEXTLx(DisasContext *ctx, arg_r *a, unsigned wlen)
-         tcg_gen_shri_i64(bx, bx, wlen);
-         tcg_gen_shri_i64(ax, ax, wlen);
-     }
--
--    tcg_temp_free(bx);
--    tcg_temp_free(ax);
--
-     return true;
- }
- 
-@@ -541,10 +511,6 @@ static bool trans_PEXTLW(DisasContext *ctx, arg_r *a)
-     gen_load_gpr(ax, a->rs);
-     gen_load_gpr(bx, a->rt);
-     gen_pextw(cpu_gpr[a->rd], cpu_gpr_hi[a->rd], ax, bx);
--
--    tcg_temp_free(bx);
--    tcg_temp_free(ax);
--
-     return true;
- }
- 
-@@ -564,10 +530,6 @@ static bool trans_PEXTUW(DisasContext *ctx, arg_r *a)
-     gen_load_gpr_hi(ax, a->rs);
-     gen_load_gpr_hi(bx, a->rt);
-     gen_pextw(cpu_gpr[a->rd], cpu_gpr_hi[a->rd], ax, bx);
--
--    tcg_temp_free(bx);
--    tcg_temp_free(ax);
--
-     return true;
- }
- 
-@@ -678,8 +640,5 @@ static bool trans_PROT3W(DisasContext *ctx, arg_r *a)
- 
-     tcg_gen_deposit_i64(cpu_gpr[a->rd], cpu_gpr[a->rt], ax, 0, 32);
-     tcg_gen_rotri_i64(cpu_gpr[a->rd], cpu_gpr[a->rd], 32);
--
--    tcg_temp_free(ax);
--
-     return true;
- }
 -- 
 2.34.1
 
