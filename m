@@ -1,53 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWWIl-0005Mk-JD
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:43:55 -0500
+	id 1pWWIn-0005Py-MX
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:43:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWIi-0005AA-6C
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:43:52 -0500
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ id 1pWWIm-0005Nq-1o
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:43:56 -0500
+Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWId-0005BU-Ha
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:43:51 -0500
-Received: by mail-pj1-x1034.google.com with SMTP id
- m8-20020a17090a4d8800b002377bced051so8954835pjh.0
- for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:43:44 -0800 (PST)
+ id 1pWWIi-0005Gp-El
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:43:55 -0500
+Received: by mail-pg1-x532.google.com with SMTP id h31so2844003pgl.6
+ for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:43:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8OtbuoqOQ8NxPiPIk6/AH0BDSmN9UcvckTcgcCxtjS0=;
- b=ZNCFj5UwFDFpOW28acWfYsKaWRMDl7NQoNlJYpDJiDbDKKB7EIrsasA0AaOm4S7iU4
- f/PSYVL2G5Jxxxj01iRT7DYQRp+imf1rzIap68eNwadN6YWpBpFlEwb0thOOz91MTpGj
- EtdQfu63SUvUvl0TK+JxzZrIlGVZ08cJFW3h+zsy8mw0P9ggavpIjd/ceTv/ofGVDjfa
- GMvNS/+GpaFk4pWMj2MRdam9aueMW4BVRW/ZsT4Baz9xJOwkdbDh9wVoc3fnm7Jplp51
- MlWm50H9Ojz02Gp8HNUieQDFbbDSZW49tOd7zzXCFXqBhl27s3e/QB3cssTuK5t0li+6
- Xzsg==
+ bh=RCxesrIpTbTxRzaqZYaMu9uuGA6eHqItNDhI0BRycuU=;
+ b=l+cUrSbutYZtb1yNDz9VpYy+7RnrJuM779Qjay6GlDr4fZ1CmFmafG/8/twcwjxgQ5
+ pPc3dgCBdBKqGj5JiD1fTt7FOdcr7S2PPEAt3AC2wxv2SCMNU1iIpe6QQ9fi44Sww/ZD
+ J4l5QpO4BFCEdO5aXCbeCvIsFSvZ+uA0MT1wkSutLw9qkkBKH2eO8cgfo/Sm101iYJZ9
+ CQuvC/6/+sz5GYzmgqikvLP451k9fXCbYBLoeUWJIdAW9U6Cx3AQwn99Hz/Fwr/STElX
+ n3VlQmBBGlPPFl7SdnJwuCxG7Bb8oP0ePJCQL+ityr3u5T/lMD7FOZ565hKDgXp17pdu
+ R1Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8OtbuoqOQ8NxPiPIk6/AH0BDSmN9UcvckTcgcCxtjS0=;
- b=e5m+uAeh5Rr4phn14MizRO022mDqcXUVtz56hVMbRpIjLuP0jR+L8Wr41tVIQ1zeEh
- SZpYk2MsNthGCfr1bT3/qnk1jxfcc/p2BquF/luxH6ECaa9j6nb6wSpICkrJqAd5Wnny
- kcqEDummRyoGcaUOOGnQWRcfIyjX4OTeq6BkB37mvgTeteLPEiDrXjYvxWJS52lUWkIn
- 0NMHFF4dA7tcMk4Q+tK/SUVRvZXTZi8hkZ+S2ND6rujvfMmInwPzJYHmFJOlXuKgMn/U
- 2hbW9JaXNgILrtqQBL8N9vRUUCfAlb2+PguOq6toe2LH9RmmA8JW183i+A8yfrIKLjGJ
- dgtQ==
-X-Gm-Message-State: AO0yUKWNbx3Zw4PsclbQUabGJRkznbAhTOl85P7Vqs+ceoR749Jv6UTu
- KhA3n01NuzZigV/2xtckFyzF4A==
-X-Google-Smtp-Source: AK7set/04MlcirWE/n+uJaPbs9CivcuqJlE/T0Bfpf3Rl0LFiKVUVTtnPTteAPPcssIxCIehXgJu6w==
-X-Received: by 2002:a05:6a20:918a:b0:cc:85ff:1810 with SMTP id
- v10-20020a056a20918a00b000cc85ff1810mr10207651pzd.60.1677476623072; 
- Sun, 26 Feb 2023 21:43:43 -0800 (PST)
+ bh=RCxesrIpTbTxRzaqZYaMu9uuGA6eHqItNDhI0BRycuU=;
+ b=FArqKHobayLFv+xypgXx3TALWmr/ggv79UDXWRM01wpIPe+AJhUJYI7VvNTCOmrxFD
+ DYzRewjIZxkaLBwkE4EhLqGNAlAZg1oftwWtOZSYVbAsAmm6Q2DO8UF4E0OftV+SYR5R
+ Z9UXWSU21w8xmGieD/o4lDYgWUejX74xU8XnxE4G8EO5Z7CSa6q9TbjbmjOr13ROdw2f
+ iTPl9ciY7nwvjNmzkw+sjyC4wSvh8qHs9XtxHYo++/FyLBbSqVMl8YjMBaEajKtU/YAU
+ xFKZykiHYNn39C1WQuY+PIX3sZME6cisg2wMmt965Sm0CEnwwS2z8ggiuEXPH6rw362n
+ vQ3g==
+X-Gm-Message-State: AO0yUKW/BIEv6mkU134opLsvrx137LunejBcdXfy9ksPDCy3AvQmjbEL
+ pZfRWIWg0DBwb5g25zAIgkq7jQ==
+X-Google-Smtp-Source: AK7set81k26dX67OHA/6ferdYh6DgQNY0UAi/kprRMt507IMXYtIVxKnTMsg2IieNomEfYMuAZf56A==
+X-Received: by 2002:a05:6a00:47:b0:5cd:d766:8a2b with SMTP id
+ i7-20020a056a00004700b005cdd7668a2bmr18700523pfk.6.1677476630933; 
+ Sun, 26 Feb 2023 21:43:50 -0800 (PST)
 Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
  by smtp.gmail.com with ESMTPSA id
- d10-20020aa7868a000000b005cdc64a287dsm3317137pfo.115.2023.02.26.21.43.40
+ d10-20020aa7868a000000b005cdc64a287dsm3317137pfo.115.2023.02.26.21.43.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Feb 2023 21:43:42 -0800 (PST)
+ Sun, 26 Feb 2023 21:43:50 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -55,16 +54,16 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
  edgar.iglesias@gmail.com
-Subject: [PATCH 22/70] target/i386: Simplify POPF
-Date: Sun, 26 Feb 2023 19:41:45 -1000
-Message-Id: <20230227054233.390271-23-richard.henderson@linaro.org>
+Subject: [PATCH 25/70] target/m68k: Use tcg_constant_i32 in gen_ea_mode
+Date: Sun, 26 Feb 2023 19:41:48 -1000
+Message-Id: <20230227054233.390271-26-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230227054233.390271-1-richard.henderson@linaro.org>
 References: <20230227054233.390271-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -84,84 +83,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 05:43:52 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 05:43:56 -0000
 
-Compute the eflags write mask separately, leaving one call
-to the helper.  Use tcg_constant_i32.
+Return a constant for an immediate input.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/i386/tcg/translate.c | 55 ++++++++-----------------------------
- 1 file changed, 11 insertions(+), 44 deletions(-)
+ target/m68k/translate.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/i386/tcg/translate.c b/target/i386/tcg/translate.c
-index 692f0c63a8..5d1fcc4b15 100644
---- a/target/i386/tcg/translate.c
-+++ b/target/i386/tcg/translate.c
-@@ -5226,52 +5226,19 @@ static bool disas_insn(DisasContext *s, CPUState *cpu)
-     case 0x9d: /* popf */
-         gen_svm_check_intercept(s, SVM_EXIT_POPF);
-         if (check_vm86_iopl(s)) {
--            ot = gen_pop_T0(s);
-+            int mask = TF_MASK | AC_MASK | ID_MASK | NT_MASK;
-+
-             if (CPL(s) == 0) {
--                if (dflag != MO_16) {
--                    gen_helper_write_eflags(cpu_env, s->T0,
--                                            tcg_const_i32((TF_MASK | AC_MASK |
--                                                           ID_MASK | NT_MASK |
--                                                           IF_MASK |
--                                                           IOPL_MASK)));
--                } else {
--                    gen_helper_write_eflags(cpu_env, s->T0,
--                                            tcg_const_i32((TF_MASK | AC_MASK |
--                                                           ID_MASK | NT_MASK |
--                                                           IF_MASK | IOPL_MASK)
--                                                          & 0xffff));
--                }
--            } else {
--                if (CPL(s) <= IOPL(s)) {
--                    if (dflag != MO_16) {
--                        gen_helper_write_eflags(cpu_env, s->T0,
--                                                tcg_const_i32((TF_MASK |
--                                                               AC_MASK |
--                                                               ID_MASK |
--                                                               NT_MASK |
--                                                               IF_MASK)));
--                    } else {
--                        gen_helper_write_eflags(cpu_env, s->T0,
--                                                tcg_const_i32((TF_MASK |
--                                                               AC_MASK |
--                                                               ID_MASK |
--                                                               NT_MASK |
--                                                               IF_MASK)
--                                                              & 0xffff));
--                    }
--                } else {
--                    if (dflag != MO_16) {
--                        gen_helper_write_eflags(cpu_env, s->T0,
--                                           tcg_const_i32((TF_MASK | AC_MASK |
--                                                          ID_MASK | NT_MASK)));
--                    } else {
--                        gen_helper_write_eflags(cpu_env, s->T0,
--                                           tcg_const_i32((TF_MASK | AC_MASK |
--                                                          ID_MASK | NT_MASK)
--                                                         & 0xffff));
--                    }
--                }
-+                mask |= IF_MASK | IOPL_MASK;
-+            } else if (CPL(s) <= IOPL(s)) {
-+                mask |= IF_MASK;
+diff --git a/target/m68k/translate.c b/target/m68k/translate.c
+index 7a87811427..7435e51acc 100644
+--- a/target/m68k/translate.c
++++ b/target/m68k/translate.c
+@@ -924,7 +924,7 @@ static TCGv gen_ea_mode(CPUM68KState *env, DisasContext *s, int mode, int reg0,
+             default:
+                 g_assert_not_reached();
              }
-+            if (dflag == MO_16) {
-+                mask &= 0xffff;
-+            }
-+
-+            ot = gen_pop_T0(s);
-+            gen_helper_write_eflags(cpu_env, s->T0, tcg_constant_i32(mask));
-             gen_pop_update(s, ot);
-             set_cc_op(s, CC_OP_EFLAGS);
-             /* abort translation because TF/AC flag may change */
+-            return tcg_const_i32(offset);
++            return tcg_constant_i32(offset);
+         default:
+             return NULL_QREG;
+         }
 -- 
 2.34.1
 
