@@ -1,66 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWTuu-0003WF-69
-	for mharc-qemu-riscv@gnu.org; Sun, 26 Feb 2023 22:11:08 -0500
+	id 1pWU1R-00055r-5B
+	for mharc-qemu-riscv@gnu.org; Sun, 26 Feb 2023 22:17:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pWTut-0003Vx-14; Sun, 26 Feb 2023 22:11:07 -0500
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pWTur-00066u-Ik; Sun, 26 Feb 2023 22:11:06 -0500
-Received: by mail-ed1-x52c.google.com with SMTP id cq23so20260457edb.1;
- Sun, 26 Feb 2023 19:11:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=E/CUFEo9DLk9IPFLYkL8BU/syEVDuSIUTZOpiYe8vhI=;
- b=QgUyPEViZvmqCbGeqKhV3idsq3nU1qlk+Xx7HYIZfGUax/MHXahmoZzi1NeydXySax
- gUNRoJf6ikgCrUd9hQm3dMCh9AtxZBrV/Jq1JvQ11d1x7yk1Y1jEyzTTBTTeUA1w130V
- 4Ti+gtX1R1XDOC9vgZvbB+yLGw6w5SZTS5TgsGBkncX8MuJg1dlP5Saytoqpy003KXNV
- ZmCVvIsy1MLekRzP+RhdGBc58v/B/uUrUiXATgRvxQ01yHc/SPpaJS1E3+Fq9B4IqaTT
- LCugwqVyDUD1KtlElTuBwviZhOsAcwW69VukmgX2xBZhZeYoi6Pu6E9hQCuYYb/FagZu
- 1t0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=E/CUFEo9DLk9IPFLYkL8BU/syEVDuSIUTZOpiYe8vhI=;
- b=I5nRceAr2jOKN+WwhF7j5f6eFjRHWEbinZI2PKPFt5K9MBILhbfBc+u0h8LUI89Pjv
- RXrr4uavOOc3nDWq4NaBMqTh4+Z2BCdqMKdiuqvxaTNwrb1SpjBMGy0H6neSYTZyGR60
- 28r6lfej14dXscET6Bc99Z2RECvBiKQlD4WyenyQNYlJg5XpqTmg3JU/X+y6PeC0Upb1
- JoI7LBmyiRnT4PEC+YEWRBhr8sUk8pjfG5lJOb+cIhsTvR5wKiL75klUN6b3UppA9FiU
- hhD6+v5vfzd5tLY0M3POpaof2IiIuytZnozUPjH+ybVf2D/zEAYMPN9GAPvdS6S4Ms0D
- jFWw==
-X-Gm-Message-State: AO0yUKWhOaVwIWNnBotuJQJA5HgzVfyFoCAWDBs2RDlZY2E2HXBcgl+9
- qs3zlsiWnuWlPjRnx9fKUq6yTa3Ea6xWs0A1HNw=
-X-Google-Smtp-Source: AK7set8zZzmUdD60tUtiNzGsJFWz4ov0YBmYXk9c6Ou6s3INuTINWK8wGH16RElBzLwUdg7TInkX2pAFgqXIsgzLH4Q=
-X-Received: by 2002:a50:d51d:0:b0:4ac:b618:7fb1 with SMTP id
- u29-20020a50d51d000000b004acb6187fb1mr10876759edi.6.1677467463919; Sun, 26
- Feb 2023 19:11:03 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <gaosong@loongson.cn>)
+ id 1pWU1P-00055S-Jg; Sun, 26 Feb 2023 22:17:51 -0500
+Received: from mail.loongson.cn ([114.242.206.163] helo=loongson.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <gaosong@loongson.cn>)
+ id 1pWU1N-0007IY-E5; Sun, 26 Feb 2023 22:17:51 -0500
+Received: from loongson.cn (unknown [10.20.42.238])
+ by gateway (Coremail) with SMTP id _____8AxJAzVIPxjgvAFAA--.5488S3;
+ Mon, 27 Feb 2023 11:17:41 +0800 (CST)
+Received: from [10.20.42.238] (unknown [10.20.42.238])
+ by localhost.localdomain (Coremail) with SMTP id
+ AQAAf8BxSL3TIPxjPTg+AA--.46072S3; 
+ Mon, 27 Feb 2023 11:17:40 +0800 (CST)
+Subject: Re: [PATCH 31/76] target/loongarch: Drop temp_new
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, kbastian@mail.uni-paderborn.de,
+ ysato@users.sourceforge.jp, jiaxun.yang@flygoat.com, tsimpson@quicinc.com,
+ ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
+References: <20230225091427.1817156-1-richard.henderson@linaro.org>
+ <20230225091427.1817156-32-richard.henderson@linaro.org>
+From: gaosong <gaosong@loongson.cn>
+Message-ID: <b4ca1e7e-5791-029e-3cab-ba3aefe8c743@loongson.cn>
+Date: Mon, 27 Feb 2023 11:17:39 +0800
+User-Agent: Mozilla/5.0 (X11; Linux loongarch64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-References: <20230224212543.20462-1-palmer@rivosinc.com>
- <20230224212543.20462-2-palmer@rivosinc.com>
-In-Reply-To: <20230224212543.20462-2-palmer@rivosinc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 27 Feb 2023 11:10:52 +0800
-Message-ID: <CAEUhbmXhkCL+bZqjtZ69W_05o1sWHytCYPG5sNv7y4kAyhUgRw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] gitlab/opensbi: Move to docker:stable
-To: Palmer Dabbelt <palmer@rivosinc.com>
-Cc: thuth@redhat.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x52c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <20230225091427.1817156-32-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=gbk; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-CM-TRANSID: AQAAf8BxSL3TIPxjPTg+AA--.46072S3
+X-CM-SenderInfo: 5jdr20tqj6z05rqj20fqof0/
+X-Coremail-Antispam: 1Uk129KBjvJXoWxZw47JrWkZrWUAF1UJw17Awb_yoWrJrWDpr
+ 12kr12gr48JrWfAas7Ja90vr15uF4xKF42g3s3t3s5Gr4aqr1kXr48K3ya9FW8Aay8WrWY
+ vF4vkryDWa12qa7anT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
+ qI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUIcSsGvfJTRUUU
+ bIxYFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s
+ 1l1IIY67AEw4v_Jrv_JF1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
+ wVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
+ x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l
+ e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0cIa020Ex4CE44I27wAqx4xG64xvF2
+ IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jw0_WrylYx0Ex4A2jsIE14v26r4j6F4U
+ McvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCYjI0SjxkI62AI1cAE67vIY487Mx
+ AIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_
+ Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwI
+ xGrwCI42IY6xIIjxv20xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWx
+ JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcV
+ C2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8l38UUUUUU==
+Received-SPF: pass client-ip=114.242.206.163; envelope-from=gaosong@loongson.cn;
+ helo=loongson.cn
+X-Spam_score_int: 39
+X-Spam_score: 3.9
+X-Spam_bar: +++
+X-Spam_report: (3.9 / 5.0 requ) BAYES_00=-1.9, MIME_CHARSET_FARAWAY=2.45,
+ NICE_REPLY_A=-0.001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,32 +72,113 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 03:11:07 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 03:17:52 -0000
 
-On Sat, Feb 25, 2023 at 5:26=E2=80=AFAM Palmer Dabbelt <palmer@rivosinc.com=
-> wrote:
+
+ÔÚ 2023/2/25 ÏÂÎç5:13, Richard Henderson Ð´µÀ:
+> Translators are no longer required to free tcg temporaries,
+> therefore there's no need to record temps for later freeing.
+> Replace the few uses with tcg_temp_new.
 >
-> The OpenSBI build has been using docker:19.03.1, which appears to be old
-> enough that v2 of the manifest is no longer supported.  Something has
-> started serving us those manifests, resulting in errors along the lines
-> of
->
->     $ docker build --cache-from $IMAGE_TAG --tag $CI_REGISTRY_IMAGE:$CI_C=
-OMMIT_SHA --tag $IMAGE_TAG .gitlab-ci.d/opensbi
->     Step 1/7 : FROM ubuntu:18.04
->     18.04: Pulling from library/ubuntu
->     mediaType in manifest should be 'application/vnd.docker.distribution.=
-manifest.v2+json' not 'application/vnd.oci.image.manifest.v1+json'
->
-> This just moves to docker:stable, as was suggested by the template.
->
-> Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  .gitlab-ci.d/opensbi.yml | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
+>   target/loongarch/translate.h                  |  3 ---
+>   target/loongarch/translate.c                  | 21 +++----------------
+>   .../insn_trans/trans_privileged.c.inc         |  2 +-
+>   3 files changed, 4 insertions(+), 22 deletions(-)
+Reviewed-by: Song Gao <gaosong@loongson.cn>
 
-Thanks Palmer for looking into this!
+Thanks.
+Song Gao
+> diff --git a/target/loongarch/translate.h b/target/loongarch/translate.h
+> index 6d2e382e8b..67bc74c05b 100644
+> --- a/target/loongarch/translate.h
+> +++ b/target/loongarch/translate.h
+> @@ -32,9 +32,6 @@ typedef struct DisasContext {
+>       uint16_t mem_idx;
+>       uint16_t plv;
+>       TCGv zero;
+> -    /* Space for 3 operands plus 1 extra for address computation. */
+> -    TCGv temp[4];
+> -    uint8_t ntemp;
+>   } DisasContext;
+>   
+>   void generate_exception(DisasContext *ctx, int excp);
+> diff --git a/target/loongarch/translate.c b/target/loongarch/translate.c
+> index 2a43ab0201..f443b5822f 100644
+> --- a/target/loongarch/translate.c
+> +++ b/target/loongarch/translate.c
+> @@ -85,9 +85,6 @@ static void loongarch_tr_init_disas_context(DisasContextBase *dcbase,
+>       bound = -(ctx->base.pc_first | TARGET_PAGE_MASK) / 4;
+>       ctx->base.max_insns = MIN(ctx->base.max_insns, bound);
+>   
+> -    ctx->ntemp = 0;
+> -    memset(ctx->temp, 0, sizeof(ctx->temp));
+> -
+>       ctx->zero = tcg_constant_tl(0);
+>   }
+>   
+> @@ -110,12 +107,6 @@ static void loongarch_tr_insn_start(DisasContextBase *dcbase, CPUState *cs)
+>    *
+>    * Further, we may provide an extension for word operations.
+>    */
+> -static TCGv temp_new(DisasContext *ctx)
+> -{
+> -    assert(ctx->ntemp < ARRAY_SIZE(ctx->temp));
+> -    return ctx->temp[ctx->ntemp++] = tcg_temp_new();
+> -}
+> -
+>   static TCGv gpr_src(DisasContext *ctx, int reg_num, DisasExtend src_ext)
+>   {
+>       TCGv t;
+> @@ -128,11 +119,11 @@ static TCGv gpr_src(DisasContext *ctx, int reg_num, DisasExtend src_ext)
+>       case EXT_NONE:
+>           return cpu_gpr[reg_num];
+>       case EXT_SIGN:
+> -        t = temp_new(ctx);
+> +        t = tcg_temp_new();
+>           tcg_gen_ext32s_tl(t, cpu_gpr[reg_num]);
+>           return t;
+>       case EXT_ZERO:
+> -        t = temp_new(ctx);
+> +        t = tcg_temp_new();
+>           tcg_gen_ext32u_tl(t, cpu_gpr[reg_num]);
+>           return t;
+>       }
+> @@ -142,7 +133,7 @@ static TCGv gpr_src(DisasContext *ctx, int reg_num, DisasExtend src_ext)
+>   static TCGv gpr_dst(DisasContext *ctx, int reg_num, DisasExtend dst_ext)
+>   {
+>       if (reg_num == 0 || dst_ext) {
+> -        return temp_new(ctx);
+> +        return tcg_temp_new();
+>       }
+>       return cpu_gpr[reg_num];
+>   }
+> @@ -195,12 +186,6 @@ static void loongarch_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
+>           generate_exception(ctx, EXCCODE_INE);
+>       }
+>   
+> -    for (int i = ctx->ntemp - 1; i >= 0; --i) {
+> -        tcg_temp_free(ctx->temp[i]);
+> -        ctx->temp[i] = NULL;
+> -    }
+> -    ctx->ntemp = 0;
+> -
+>       ctx->base.pc_next += 4;
+>   }
+>   
+> diff --git a/target/loongarch/insn_trans/trans_privileged.c.inc b/target/loongarch/insn_trans/trans_privileged.c.inc
+> index 40f82becb0..56f4c45e09 100644
+> --- a/target/loongarch/insn_trans/trans_privileged.c.inc
+> +++ b/target/loongarch/insn_trans/trans_privileged.c.inc
+> @@ -243,7 +243,7 @@ static bool trans_csrwr(DisasContext *ctx, arg_csrwr *a)
+>           dest = gpr_dst(ctx, a->rd, EXT_NONE);
+>           csr->writefn(dest, cpu_env, src1);
+>       } else {
+> -        dest = temp_new(ctx);
+> +        dest = tcg_temp_new();
+>           tcg_gen_ld_tl(dest, cpu_env, csr->offset);
+>           tcg_gen_st_tl(src1, cpu_env, csr->offset);
+>       }
 
-Reviewed-by: Bin Meng <bmeng@tinylab.org>
 
