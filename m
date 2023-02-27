@@ -1,52 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWW21-0008SQ-Ia
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:26:37 -0500
+	id 1pWW22-0008Tz-U5
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:26:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWW1y-0008O9-VK
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:26:35 -0500
-Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644])
+ id 1pWW20-0008Ph-3Z
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:26:36 -0500
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWW1v-0007mC-Bw
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:26:34 -0500
-Received: by mail-pl1-x644.google.com with SMTP id i3so5530962plg.6
- for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:26:30 -0800 (PST)
+ id 1pWW1y-0007oF-0m
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:26:35 -0500
+Received: by mail-pj1-x1042.google.com with SMTP id
+ cp7-20020a17090afb8700b0023756229427so8889570pjb.1
+ for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:26:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tKM2go0UqGbQo3c+LK2J6BohhY4B1W3gSGwXNmUfBI0=;
- b=l10365Sh8EUm1v1EKpnv2rwwY/dzehMgiKvb8G6OSGNw4ehZreVJbQvxIgOsQK5Ou+
- ephkOHRLLEcQAkcjZKUHgoa0NloQOc7aoFoxlss/MeGj4cP5mIOR2KVeWPhgLtHcur4A
- eLgKXbPgDcRQHljUjlzZKEegOn3Kzfnuj1WTAn+fLy38koremshZ0Qq9TdTXQ2HDyMZi
- awgMkr1euAKAt7n5Z7eLGznyNdIBlZ4erTpG+pLEua3ANXpMxQ8UDdeg0VzNZ9XK11EG
- D+gttn7U7lx7inAyc9wtiicFOeT4IUbHzPc+SfzV2OqjMnz5ACmH+ypcDsRSM9xKv3oC
- agnA==
+ bh=oRXjTp+TXfW0C5esl+Zugvmwem8SqRIai2YjZ7FQqDw=;
+ b=IaDMnUfSpDyZf2gVFTRpcpj1HmN9PuUZYpRvelzakPf1zd2p9vl/+pgZQJ6usCkjsv
+ RilHP9KdnJBIwBEYCZwYZ9MKCSrzN6uzgy3JG9OKjIbcNcAGTGWJhudrOav0HFx3eKIY
+ 1+lvNGQi0ODjmog9tjYLPdVPN/fi9HXAMN6Y33ggnJYuAUuUW+dmAChvzCMeVpBBbwuP
+ q6m0RngJOP8WDsXO4Nbl6ERQ1l0WuSMNEqqpdJPwG4a4rQ3cjrgrFGrKjHWPHpSdXlcZ
+ mG2BdV+Qhsx809PIoNQH0xEdMvUQKsAh19CtWUO1KVvg1/eJhslcOgMBvElB2LiutfSC
+ lXIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tKM2go0UqGbQo3c+LK2J6BohhY4B1W3gSGwXNmUfBI0=;
- b=0r4eKF6MEabtdhmmi6LzX/bKZYFwADRQwqHGtkuTd1VX9tFgITF04QHRgBZnyZAWwk
- hg0l3ISvBaXrfIVi0wz3t2acKwTN3OJN9PDmvT+MIKuWVpPQrxctgQwHPHc3CAOP6Bo8
- uJrXnOkN4nfRyi6e89XPOXOl1rJ1U/xa3NG5cQk4tSHxjvrowHUyrXpUgPGcZ71eEdzE
- VLFy3TP2x1YZhpw8Me95Pg+Nk1icQ6AHEgnl10lbZJzNYnGUy6RIvi/+fOvP+qPKJcJU
- qMQuYKnOZyp9QMFofYxMBx9H3CEb+GmYrhrlH2hKTGb4PPPspN0CSI1zpqlhGEiX7I/v
- fYEQ==
-X-Gm-Message-State: AO0yUKXwF6/TOQQJvVy4Fns+7MsZbUcvH16kZmzfj5Pbug40Wy3BuSHK
- Ajl49lqrksFCHB52gjSmjo1dFw==
-X-Google-Smtp-Source: AK7set/r+CyZp0tljlQxcuEaQ2q4n8iibIOYY5QfcHIJX3fkVLwIulWKGgyOS+cEkdh9qCmIcBX1IA==
-X-Received: by 2002:a17:902:e80f:b0:19a:9890:eac6 with SMTP id
- u15-20020a170902e80f00b0019a9890eac6mr28197148plg.24.1677475589840; 
- Sun, 26 Feb 2023 21:26:29 -0800 (PST)
+ bh=oRXjTp+TXfW0C5esl+Zugvmwem8SqRIai2YjZ7FQqDw=;
+ b=e1wW9txG7lo09Y0mlnYVI8aFb3NyTaaoFUzCTNRTLZzYvJeAoJvxAgB8vyt8z1I3/J
+ pfaKvIRz4TjvnJj2joishgw6IYld309ZIpV9huOrZHZQDW93JwRTaVEuhN7RTyqFn7dx
+ 45JsQSEZ7GK5dTPnb83A0z7dG9zV4lgRmqcnh3Sz9W/R+0yvfCgGNNl1t03mvkmhRSK2
+ odclONrERfPQdQX38Ucd2rawRctKsQnEZ1wjTSpgC+elcIymK3bbAdn1XLFy9Tkz2MbN
+ aNAVP0OdGnElo1Z5snWlgglpFic7UXvBUpXUm3QmhYlg90fEtqC0A9JONXK89K07MDiP
+ e1Ww==
+X-Gm-Message-State: AO0yUKUErFrD/7IYB/5eKIRbXNH+Qv/AOlW64ILBB3VWvXuM15uW9hR8
+ LuHbuZ79USKHHbi3y2Zzc13FNQ==
+X-Google-Smtp-Source: AK7set8ly18mIeAVUA5DhLkvciKB8cTkUjcyvY//+4dCDtnR/IZ9XCTboZNTCXaF9XAGZP6Ab8fxrQ==
+X-Received: by 2002:a17:902:e5d2:b0:19c:ff5d:1fd2 with SMTP id
+ u18-20020a170902e5d200b0019cff5d1fd2mr5214788plf.8.1677475592648; 
+ Sun, 26 Feb 2023 21:26:32 -0800 (PST)
 Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
  by smtp.gmail.com with ESMTPSA id
- a14-20020a170902ecce00b0019a837be977sm3513341plh.271.2023.02.26.21.26.27
+ a14-20020a170902ecce00b0019a837be977sm3513341plh.271.2023.02.26.21.26.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Feb 2023 21:26:29 -0800 (PST)
+ Sun, 26 Feb 2023 21:26:32 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -54,16 +55,16 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
  edgar.iglesias@gmail.com
-Subject: [PATCH v2 29/76] target/hppa: Drop tcg_temp_free
-Date: Sun, 26 Feb 2023 19:24:18 -1000
-Message-Id: <20230227052505.352889-30-richard.henderson@linaro.org>
+Subject: [PATCH v2 30/76] target/i386: Drop tcg_temp_free
+Date: Sun, 26 Feb 2023 19:24:19 -1000
+Message-Id: <20230227052505.352889-31-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230227052505.352889-1-richard.henderson@linaro.org>
 References: <20230227052505.352889-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::644;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x644.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1042;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1042.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,518 +84,310 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 05:26:35 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 05:26:36 -0000
 
 Translators are no longer required to free tcg temporaries.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/hppa/translate.c | 93 +----------------------------------------
- 1 file changed, 1 insertion(+), 92 deletions(-)
+ target/i386/tcg/translate.c      | 41 --------------------------------
+ target/i386/tcg/decode-new.c.inc | 15 ------------
+ target/i386/tcg/emit.c.inc       |  6 -----
+ 3 files changed, 62 deletions(-)
 
-diff --git a/target/hppa/translate.c b/target/hppa/translate.c
-index cee960949f..cb4fd1fd62 100644
---- a/target/hppa/translate.c
-+++ b/target/hppa/translate.c
-@@ -35,12 +35,10 @@
- #undef TCGv
- #undef tcg_temp_new
- #undef tcg_global_mem_new
--#undef tcg_temp_free
- 
- #if TARGET_LONG_BITS == 64
- #define TCGv_tl              TCGv_i64
- #define tcg_temp_new_tl      tcg_temp_new_i64
--#define tcg_temp_free_tl     tcg_temp_free_i64
- #if TARGET_REGISTER_BITS == 64
- #define tcg_gen_extu_reg_tl  tcg_gen_mov_i64
- #else
-@@ -49,7 +47,6 @@
- #else
- #define TCGv_tl              TCGv_i32
- #define tcg_temp_new_tl      tcg_temp_new_i32
--#define tcg_temp_free_tl     tcg_temp_free_i32
- #define tcg_gen_extu_reg_tl  tcg_gen_mov_i32
- #endif
- 
-@@ -58,7 +55,6 @@
- 
- #define tcg_temp_new         tcg_temp_new_i64
- #define tcg_global_mem_new   tcg_global_mem_new_i64
--#define tcg_temp_free        tcg_temp_free_i64
- 
- #define tcg_gen_movi_reg     tcg_gen_movi_i64
- #define tcg_gen_mov_reg      tcg_gen_mov_i64
-@@ -153,7 +149,6 @@
- #define TCGv_reg             TCGv_i32
- #define tcg_temp_new         tcg_temp_new_i32
- #define tcg_global_mem_new   tcg_global_mem_new_i32
--#define tcg_temp_free        tcg_temp_free_i32
- 
- #define tcg_gen_movi_reg     tcg_gen_movi_i32
- #define tcg_gen_mov_reg      tcg_gen_mov_i32
-@@ -488,10 +483,6 @@ static void cond_free(DisasCond *cond)
- {
-     switch (cond->c) {
-     default:
--        if (cond->a0 != cpu_psw_n) {
--            tcg_temp_free(cond->a0);
--        }
--        tcg_temp_free(cond->a1);
-         cond->a0 = NULL;
-         cond->a1 = NULL;
-         /* fallthru */
-@@ -1021,7 +1012,6 @@ static DisasCond do_unit_cond(unsigned cf, TCGv_reg res,
-         tcg_gen_and_reg(tmp, in1, in2);
-         tcg_gen_andc_reg(cb, cb, res);
-         tcg_gen_or_reg(cb, cb, tmp);
--        tcg_temp_free(tmp);
-     }
- 
-     switch (cf >> 1) {
-@@ -1040,7 +1030,6 @@ static DisasCond do_unit_cond(unsigned cf, TCGv_reg res,
-         tcg_gen_andc_reg(tmp, tmp, res);
-         tcg_gen_andi_reg(tmp, tmp, 0x80808080u);
-         cond = cond_make_0(TCG_COND_NE, tmp);
--        tcg_temp_free(tmp);
-         break;
- 
-     case 3: /* SHZ / NHZ */
-@@ -1049,7 +1038,6 @@ static DisasCond do_unit_cond(unsigned cf, TCGv_reg res,
-         tcg_gen_andc_reg(tmp, tmp, res);
-         tcg_gen_andi_reg(tmp, tmp, 0x80008000u);
-         cond = cond_make_0(TCG_COND_NE, tmp);
--        tcg_temp_free(tmp);
-         break;
- 
-     case 4: /* SDC / NDC */
-@@ -1070,9 +1058,6 @@ static DisasCond do_unit_cond(unsigned cf, TCGv_reg res,
-     default:
-         g_assert_not_reached();
-     }
--    if (cf & 8) {
--        tcg_temp_free(cb);
+diff --git a/target/i386/tcg/translate.c b/target/i386/tcg/translate.c
+index baf1cfc2bc..692f0c63a8 100644
+--- a/target/i386/tcg/translate.c
++++ b/target/i386/tcg/translate.c
+@@ -899,10 +899,6 @@ static void gen_compute_eflags(DisasContext *s)
+     gen_update_cc_op(s);
+     gen_helper_cc_compute_all(cpu_cc_src, dst, src1, src2, cpu_cc_op);
+     set_cc_op(s, CC_OP_EFLAGS);
+-
+-    if (dead) {
+-        tcg_temp_free(zero);
 -    }
-     if (cf & 1) {
-         cond.c = tcg_invert_cond(cond.c);
-     }
-@@ -1090,7 +1075,6 @@ static TCGv_reg do_add_sv(DisasContext *ctx, TCGv_reg res,
-     tcg_gen_xor_reg(sv, res, in1);
-     tcg_gen_xor_reg(tmp, in1, in2);
-     tcg_gen_andc_reg(sv, sv, tmp);
--    tcg_temp_free(tmp);
- 
-     return sv;
  }
-@@ -1105,7 +1089,6 @@ static TCGv_reg do_sub_sv(DisasContext *ctx, TCGv_reg res,
-     tcg_gen_xor_reg(sv, res, in1);
-     tcg_gen_xor_reg(tmp, in1, in2);
-     tcg_gen_and_reg(sv, sv, tmp);
--    tcg_temp_free(tmp);
  
-     return sv;
+ typedef struct CCPrepare {
+@@ -1650,7 +1646,6 @@ static void gen_shift_flags(DisasContext *s, MemOp ot, TCGv result,
+     } else {
+         tcg_gen_mov_tl(cpu_cc_src, shm1);
+     }
+-    tcg_temp_free(z_tl);
+ 
+     /* Get the two potential CC_OP values into temporaries.  */
+     tcg_gen_movi_i32(s->tmp2_i32, (is_right ? CC_OP_SARB : CC_OP_SHLB) + ot);
+@@ -1666,8 +1661,6 @@ static void gen_shift_flags(DisasContext *s, MemOp ot, TCGv result,
+     s32 = tcg_temp_new_i32();
+     tcg_gen_trunc_tl_i32(s32, count);
+     tcg_gen_movcond_i32(TCG_COND_NE, cpu_cc_op, s32, z32, s->tmp2_i32, oldop);
+-    tcg_temp_free_i32(z32);
+-    tcg_temp_free_i32(s32);
+ 
+     /* The CC_OP value is no longer predictable.  */
+     set_cc_op(s, CC_OP_DYNAMIC);
+@@ -1827,8 +1820,6 @@ static void gen_rot_rm_T1(DisasContext *s, MemOp ot, int op1, int is_right)
+     tcg_gen_movi_i32(s->tmp3_i32, CC_OP_EFLAGS);
+     tcg_gen_movcond_i32(TCG_COND_NE, cpu_cc_op, t1, t0,
+                         s->tmp2_i32, s->tmp3_i32);
+-    tcg_temp_free_i32(t0);
+-    tcg_temp_free_i32(t1);
+ 
+     /* The CC_OP value is no longer predictable.  */ 
+     set_cc_op(s, CC_OP_DYNAMIC);
+@@ -2049,7 +2040,6 @@ static void gen_shiftd_rm_T1(DisasContext *s, MemOp ot, int op1,
+     gen_op_st_rm_T0_A0(s, ot, op1);
+ 
+     gen_shift_flags(s, ot, s->T0, s->tmp0, count, is_right);
+-    tcg_temp_free(count);
  }
-@@ -1163,7 +1146,6 @@ static void do_add(DisasContext *ctx, unsigned rt, TCGv_reg in1,
-         tmp = tcg_temp_new();
-         tcg_gen_setcond_reg(cond.c, tmp, cond.a0, cond.a1);
-         gen_helper_tcond(cpu_env, tmp);
--        tcg_temp_free(tmp);
+ 
+ static void gen_shift(DisasContext *s1, int op, MemOp ot, int d, int s)
+@@ -2513,13 +2503,6 @@ static void gen_cmovcc1(CPUX86State *env, DisasContext *s, MemOp ot, int b,
+     tcg_gen_movcond_tl(cc.cond, s->T0, cc.reg, cc.reg2,
+                        s->T0, cpu_regs[reg]);
+     gen_op_mov_reg_v(s, ot, reg, s->T0);
+-
+-    if (cc.mask != -1) {
+-        tcg_temp_free(cc.reg);
+-    }
+-    if (!cc.use_reg2) {
+-        tcg_temp_free(cc.reg2);
+-    }
+ }
+ 
+ static inline void gen_op_movl_T0_seg(DisasContext *s, X86Seg seg_reg)
+@@ -2748,7 +2731,6 @@ static void gen_set_hflag(DisasContext *s, uint32_t mask)
+         tcg_gen_ld_i32(t, cpu_env, offsetof(CPUX86State, hflags));
+         tcg_gen_ori_i32(t, t, mask);
+         tcg_gen_st_i32(t, cpu_env, offsetof(CPUX86State, hflags));
+-        tcg_temp_free_i32(t);
+         s->flags |= mask;
+     }
+ }
+@@ -2760,7 +2742,6 @@ static void gen_reset_hflag(DisasContext *s, uint32_t mask)
+         tcg_gen_ld_i32(t, cpu_env, offsetof(CPUX86State, hflags));
+         tcg_gen_andi_i32(t, t, ~mask);
+         tcg_gen_st_i32(t, cpu_env, offsetof(CPUX86State, hflags));
+-        tcg_temp_free_i32(t);
+         s->flags &= ~mask;
+     }
+ }
+@@ -2772,7 +2753,6 @@ static void gen_set_eflags(DisasContext *s, target_ulong mask)
+     tcg_gen_ld_tl(t, cpu_env, offsetof(CPUX86State, eflags));
+     tcg_gen_ori_tl(t, t, mask);
+     tcg_gen_st_tl(t, cpu_env, offsetof(CPUX86State, eflags));
+-    tcg_temp_free(t);
+ }
+ 
+ static void gen_reset_eflags(DisasContext *s, target_ulong mask)
+@@ -2782,7 +2762,6 @@ static void gen_reset_eflags(DisasContext *s, target_ulong mask)
+     tcg_gen_ld_tl(t, cpu_env, offsetof(CPUX86State, eflags));
+     tcg_gen_andi_tl(t, t, ~mask);
+     tcg_gen_st_tl(t, cpu_env, offsetof(CPUX86State, eflags));
+-    tcg_temp_free(t);
+ }
+ 
+ /* Clear BND registers during legacy branches.  */
+@@ -3015,13 +2994,11 @@ static void gen_cmpxchg8b(DisasContext *s, CPUX86State *env, int modrm)
+         tcg_gen_nonatomic_cmpxchg_i64(old, s->A0, cmp, val,
+                                       s->mem_index, MO_TEUQ);
+     }
+-    tcg_temp_free_i64(val);
+ 
+     /* Set tmp0 to match the required value of Z. */
+     tcg_gen_setcond_i64(TCG_COND_EQ, cmp, old, cmp);
+     Z = tcg_temp_new();
+     tcg_gen_trunc_i64_tl(Z, cmp);
+-    tcg_temp_free_i64(cmp);
+ 
+     /*
+      * Extract the result values for the register pair.
+@@ -3042,12 +3019,10 @@ static void gen_cmpxchg8b(DisasContext *s, CPUX86State *env, int modrm)
+         tcg_gen_movcond_tl(TCG_COND_EQ, cpu_regs[R_EDX], Z, zero,
+                            s->T1, cpu_regs[R_EDX]);
+     }
+-    tcg_temp_free_i64(old);
+ 
+     /* Update Z. */
+     gen_compute_eflags(s);
+     tcg_gen_deposit_tl(cpu_cc_src, cpu_cc_src, Z, ctz32(CC_Z), 1);
+-    tcg_temp_free(Z);
+ }
+ 
+ #ifdef TARGET_X86_64
+@@ -3072,8 +3047,6 @@ static void gen_cmpxchg16b(DisasContext *s, CPUX86State *env, int modrm)
      }
  
-     /* Write back the result.  */
-@@ -1172,7 +1154,6 @@ static void do_add(DisasContext *ctx, unsigned rt, TCGv_reg in1,
-         save_or_nullify(ctx, cpu_psw_cb_msb, cb_msb);
-     }
-     save_gpr(ctx, rt, dest);
--    tcg_temp_free(dest);
+     tcg_gen_extr_i128_i64(s->T0, s->T1, val);
+-    tcg_temp_free_i128(cmp);
+-    tcg_temp_free_i128(val);
  
-     /* Install the new nullification.  */
-     cond_free(&ctx->null_cond);
-@@ -1257,16 +1238,12 @@ static void do_sub(DisasContext *ctx, unsigned rt, TCGv_reg in1,
-         tmp = tcg_temp_new();
-         tcg_gen_setcond_reg(cond.c, tmp, cond.a0, cond.a1);
-         gen_helper_tcond(cpu_env, tmp);
--        tcg_temp_free(tmp);
-     }
+     /* Determine success after the fact. */
+     t0 = tcg_temp_new_i64();
+@@ -3081,13 +3054,11 @@ static void gen_cmpxchg16b(DisasContext *s, CPUX86State *env, int modrm)
+     tcg_gen_xor_i64(t0, s->T0, cpu_regs[R_EAX]);
+     tcg_gen_xor_i64(t1, s->T1, cpu_regs[R_EDX]);
+     tcg_gen_or_i64(t0, t0, t1);
+-    tcg_temp_free_i64(t1);
  
-     /* Write back the result.  */
-     save_or_nullify(ctx, cpu_psw_cb, cb);
-     save_or_nullify(ctx, cpu_psw_cb_msb, cb_msb);
-     save_gpr(ctx, rt, dest);
--    tcg_temp_free(dest);
--    tcg_temp_free(cb);
--    tcg_temp_free(cb_msb);
+     /* Update Z. */
+     gen_compute_eflags(s);
+     tcg_gen_setcondi_i64(TCG_COND_EQ, t0, t0, 0);
+     tcg_gen_deposit_tl(cpu_cc_src, cpu_cc_src, t0, ctz32(CC_Z), 1);
+-    tcg_temp_free_i64(t0);
  
-     /* Install the new nullification.  */
-     cond_free(&ctx->null_cond);
-@@ -1321,7 +1298,6 @@ static void do_cmpclr(DisasContext *ctx, unsigned rt, TCGv_reg in1,
-     /* Clear.  */
-     tcg_gen_movi_reg(dest, 0);
-     save_gpr(ctx, rt, dest);
--    tcg_temp_free(dest);
+     /*
+      * Extract the result values for the register pair.  We may do this
+@@ -3437,10 +3408,8 @@ static bool disas_insn(DisasContext *s, CPUState *cpu)
+                 tcg_gen_neg_tl(t1, t0);
+                 tcg_gen_atomic_cmpxchg_tl(t0, a0, t0, t1,
+                                           s->mem_index, ot | MO_LE);
+-                tcg_temp_free(t1);
+                 tcg_gen_brcond_tl(TCG_COND_NE, t0, t2, label1);
  
-     /* Install the new nullification.  */
-     cond_free(&ctx->null_cond);
-@@ -1381,7 +1357,6 @@ static void do_unit(DisasContext *ctx, unsigned rt, TCGv_reg in1,
-             TCGv_reg tmp = tcg_temp_new();
-             tcg_gen_setcond_reg(cond.c, tmp, cond.a0, cond.a1);
-             gen_helper_tcond(cpu_env, tmp);
--            tcg_temp_free(tmp);
+-                tcg_temp_free(t2);
+                 tcg_gen_neg_tl(s->T0, t0);
+             } else {
+                 tcg_gen_neg_tl(s->T0, s->T0);
+@@ -3927,9 +3896,6 @@ static bool disas_insn(DisasContext *s, CPUState *cpu)
+             tcg_gen_mov_tl(s->cc_srcT, cmpv);
+             tcg_gen_sub_tl(cpu_cc_dst, cmpv, oldv);
+             set_cc_op(s, CC_OP_SUBB + ot);
+-            tcg_temp_free(oldv);
+-            tcg_temp_free(newv);
+-            tcg_temp_free(cmpv);
          }
-         save_gpr(ctx, rt, dest);
+         break;
+     case 0x1c7: /* cmpxchg8b */
+@@ -4380,7 +4346,6 @@ static bool disas_insn(DisasContext *s, CPUState *cpu)
+         if (shift) {
+             TCGv imm = tcg_const_tl(x86_ldub_code(env, s));
+             gen_shiftd_rm_T1(s, ot, opreg, op, imm);
+-            tcg_temp_free(imm);
+         } else {
+             gen_shiftd_rm_T1(s, ot, opreg, op, cpu_regs[R_ECX]);
+         }
+@@ -4614,7 +4579,6 @@ static bool disas_insn(DisasContext *s, CPUState *cpu)
+                     tcg_gen_st_tl(last_addr, cpu_env,
+                                   offsetof(CPUX86State, fpdp));
+                 }
+-                tcg_temp_free(last_addr);
+             } else {
+                 /* register float ops */
+                 opreg = rm;
+@@ -6279,9 +6243,6 @@ static bool disas_insn(DisasContext *s, CPUState *cpu)
+             gen_compute_eflags(s);
+             tcg_gen_andi_tl(cpu_cc_src, cpu_cc_src, ~CC_Z);
+             tcg_gen_or_tl(cpu_cc_src, cpu_cc_src, t2);
+-            tcg_temp_free(t0);
+-            tcg_temp_free(t1);
+-            tcg_temp_free(t2);
+         }
+         break;
+     case 0x102: /* lar */
+@@ -6308,7 +6269,6 @@ static bool disas_insn(DisasContext *s, CPUState *cpu)
+             gen_op_mov_reg_v(s, ot, reg, t0);
+             gen_set_label(label1);
+             set_cc_op(s, CC_OP_EFLAGS);
+-            tcg_temp_free(t0);
+         }
+         break;
+     case 0x118:
+@@ -6353,7 +6313,6 @@ static bool disas_insn(DisasContext *s, CPUState *cpu)
+                 TCGv_i64 notu = tcg_temp_new_i64();
+                 tcg_gen_not_i64(notu, cpu_bndu[reg]);
+                 gen_bndck(env, s, modrm, TCG_COND_GTU, notu);
+-                tcg_temp_free_i64(notu);
+             } else if (prefixes & PREFIX_DATA) {
+                 /* bndmov -- from reg/mem */
+                 if (reg >= 4 || s->aflag == MO_16) {
+diff --git a/target/i386/tcg/decode-new.c.inc b/target/i386/tcg/decode-new.c.inc
+index d5fd8d965c..4fdd87750b 100644
+--- a/target/i386/tcg/decode-new.c.inc
++++ b/target/i386/tcg/decode-new.c.inc
+@@ -1567,20 +1567,6 @@ illegal:
+     return false;
+ }
  
-@@ -1420,11 +1395,9 @@ static TCGv_i64 space_select(DisasContext *ctx, int sp, TCGv_reg base)
-     tcg_gen_shri_reg(tmp, base, TARGET_REGISTER_BITS - 5);
-     tcg_gen_andi_reg(tmp, tmp, 030);
-     tcg_gen_trunc_reg_ptr(ptr, tmp);
--    tcg_temp_free(tmp);
+-static void decode_temp_free(X86DecodedOp *op)
+-{
+-    if (op->v_ptr) {
+-        tcg_temp_free_ptr(op->v_ptr);
+-    }
+-}
+-
+-static void decode_temps_free(X86DecodedInsn *decode)
+-{
+-    decode_temp_free(&decode->op[0]);
+-    decode_temp_free(&decode->op[1]);
+-    decode_temp_free(&decode->op[2]);
+-}
+-
+ /*
+  * Convert one instruction. s->base.is_jmp is set if the translation must
+  * be stopped.
+@@ -1835,7 +1821,6 @@ static void disas_insn_new(DisasContext *s, CPUState *cpu, int b)
+         decode.e.gen(s, env, &decode);
+         gen_writeback(s, &decode, 0, s->T0);
+     }
+-    decode_temps_free(&decode);
+     return;
+  illegal_op:
+     gen_illegal_opcode(s);
+diff --git a/target/i386/tcg/emit.c.inc b/target/i386/tcg/emit.c.inc
+index e61ae9a2e9..88359480dd 100644
+--- a/target/i386/tcg/emit.c.inc
++++ b/target/i386/tcg/emit.c.inc
+@@ -629,7 +629,6 @@ static inline void gen_ternary_sse(DisasContext *s, CPUX86State *env, X86Decoded
+     /* The format of the fourth input is Lx */
+     tcg_gen_addi_ptr(ptr3, cpu_env, ZMM_OFFSET(op3));
+     fn(cpu_env, OP_PTR0, OP_PTR1, OP_PTR2, ptr3);
+-    tcg_temp_free_ptr(ptr3);
+ }
+ #define TERNARY_SSE(uname, uvname, lname)                                          \
+ static void gen_##uvname(DisasContext *s, CPUX86State *env, X86DecodedInsn *decode) \
+@@ -1001,7 +1000,6 @@ static inline void gen_vsib_avx(DisasContext *s, CPUX86State *env, X86DecodedIns
+         int ymmh_ofs = vector_elem_offset(&decode->op[1], MO_128, 1);
+         tcg_gen_gvec_dup_imm(MO_64, ymmh_ofs, 16, 16, 0);
+     }
+-    tcg_temp_free_ptr(index);
+ }
+ #define VSIB_AVX(uname, lname)                                                     \
+ static void gen_##uname(DisasContext *s, CPUX86State *env, X86DecodedInsn *decode) \
+@@ -1627,7 +1625,6 @@ static void gen_PMOVMSKB(DisasContext *s, CPUX86State *env, X86DecodedInsn *deco
+             tcg_gen_deposit_tl(s->T0, t, s->T0, 8, TARGET_LONG_BITS - 8);
+         }
+     }
+-    tcg_temp_free(t);
+ }
  
-     tcg_gen_add_ptr(ptr, ptr, cpu_env);
-     tcg_gen_ld_i64(spc, ptr, offsetof(CPUHPPAState, sr[4]));
+ static void gen_PSHUFW(DisasContext *s, CPUX86State *env, X86DecodedInsn *decode)
+@@ -1762,7 +1759,6 @@ static void gen_PSRLDQ_i(DisasContext *s, CPUX86State *env, X86DecodedInsn *deco
+     } else {
+         gen_helper_psrldq_xmm(cpu_env, OP_PTR0, OP_PTR1, imm_vec);
+     }
+-    tcg_temp_free_ptr(imm_vec);
+ }
+ 
+ static void gen_PSLLDQ_i(DisasContext *s, CPUX86State *env, X86DecodedInsn *decode)
+@@ -1775,7 +1771,6 @@ static void gen_PSLLDQ_i(DisasContext *s, CPUX86State *env, X86DecodedInsn *deco
+     } else {
+         gen_helper_pslldq_xmm(cpu_env, OP_PTR0, OP_PTR1, imm_vec);
+     }
+-    tcg_temp_free_ptr(imm_vec);
+ }
+ 
+ static void gen_RORX(DisasContext *s, CPUX86State *env, X86DecodedInsn *decode)
+@@ -2293,7 +2288,6 @@ static void gen_VZEROALL(DisasContext *s, CPUX86State *env, X86DecodedInsn *deco
+     tcg_gen_addi_ptr(ptr, cpu_env, offsetof(CPUX86State, xmm_t0));
+     gen_helper_memset(ptr, ptr, tcg_constant_i32(0),
+                       tcg_constant_ptr(CPU_NB_REGS * sizeof(ZMMReg)));
 -    tcg_temp_free_ptr(ptr);
- 
-     return spc;
- }
-@@ -1582,7 +1555,6 @@ static bool do_floadw(DisasContext *ctx, unsigned rt, unsigned rb,
-     tmp = tcg_temp_new_i32();
-     do_load_32(ctx, tmp, rb, rx, scale, disp, sp, modify, MO_TEUL);
-     save_frw_i32(rt, tmp);
--    tcg_temp_free_i32(tmp);
- 
-     if (rt == 0) {
-         gen_helper_loaded_fr0(cpu_env);
-@@ -1608,7 +1580,6 @@ static bool do_floadd(DisasContext *ctx, unsigned rt, unsigned rb,
-     tmp = tcg_temp_new_i64();
-     do_load_64(ctx, tmp, rb, rx, scale, disp, sp, modify, MO_TEUQ);
-     save_frd(rt, tmp);
--    tcg_temp_free_i64(tmp);
- 
-     if (rt == 0) {
-         gen_helper_loaded_fr0(cpu_env);
-@@ -1642,7 +1613,6 @@ static bool do_fstorew(DisasContext *ctx, unsigned rt, unsigned rb,
- 
-     tmp = load_frw_i32(rt);
-     do_store_32(ctx, tmp, rb, rx, scale, disp, sp, modify, MO_TEUL);
--    tcg_temp_free_i32(tmp);
- 
-     return nullify_end(ctx);
- }
-@@ -1663,7 +1633,6 @@ static bool do_fstored(DisasContext *ctx, unsigned rt, unsigned rb,
- 
-     tmp = load_frd(rt);
-     do_store_64(ctx, tmp, rb, rx, scale, disp, sp, modify, MO_TEUQ);
--    tcg_temp_free_i64(tmp);
- 
-     return nullify_end(ctx);
- }
-@@ -1685,7 +1654,6 @@ static bool do_fop_wew(DisasContext *ctx, unsigned rt, unsigned ra,
-     func(tmp, cpu_env, tmp);
- 
-     save_frw_i32(rt, tmp);
--    tcg_temp_free_i32(tmp);
-     return nullify_end(ctx);
  }
  
-@@ -1701,9 +1669,7 @@ static bool do_fop_wed(DisasContext *ctx, unsigned rt, unsigned ra,
- 
-     func(dst, cpu_env, src);
- 
--    tcg_temp_free_i64(src);
-     save_frw_i32(rt, dst);
--    tcg_temp_free_i32(dst);
-     return nullify_end(ctx);
- }
- 
-@@ -1718,7 +1684,6 @@ static bool do_fop_ded(DisasContext *ctx, unsigned rt, unsigned ra,
-     func(tmp, cpu_env, tmp);
- 
-     save_frd(rt, tmp);
--    tcg_temp_free_i64(tmp);
-     return nullify_end(ctx);
- }
- 
-@@ -1734,9 +1699,7 @@ static bool do_fop_dew(DisasContext *ctx, unsigned rt, unsigned ra,
- 
-     func(dst, cpu_env, src);
- 
--    tcg_temp_free_i32(src);
-     save_frd(rt, dst);
--    tcg_temp_free_i64(dst);
-     return nullify_end(ctx);
- }
- 
-@@ -1752,9 +1715,7 @@ static bool do_fop_weww(DisasContext *ctx, unsigned rt,
- 
-     func(a, cpu_env, a, b);
- 
--    tcg_temp_free_i32(b);
-     save_frw_i32(rt, a);
--    tcg_temp_free_i32(a);
-     return nullify_end(ctx);
- }
- 
-@@ -1770,9 +1731,7 @@ static bool do_fop_dedd(DisasContext *ctx, unsigned rt,
- 
-     func(a, cpu_env, a, b);
- 
--    tcg_temp_free_i64(b);
-     save_frd(rt, a);
--    tcg_temp_free_i64(a);
-     return nullify_end(ctx);
- }
- 
-@@ -2098,8 +2057,6 @@ static bool trans_mfsp(DisasContext *ctx, arg_mfsp *a)
-     tcg_gen_trunc_i64_reg(t1, t0);
- 
-     save_gpr(ctx, rt, t1);
--    tcg_temp_free(t1);
--    tcg_temp_free_i64(t0);
- 
-     cond_free(&ctx->null_cond);
-     return true;
-@@ -2176,7 +2133,6 @@ static bool trans_mtsp(DisasContext *ctx, arg_mtsp *a)
-     } else {
-         tcg_gen_mov_i64(cpu_sr[rs], t64);
-     }
--    tcg_temp_free_i64(t64);
- 
-     return nullify_end(ctx);
- }
-@@ -2192,7 +2148,6 @@ static bool trans_mtctl(DisasContext *ctx, arg_mtctl *a)
-         tmp = tcg_temp_new();
-         tcg_gen_andi_reg(tmp, reg, TARGET_REGISTER_BITS - 1);
-         save_or_nullify(ctx, cpu_sar, tmp);
--        tcg_temp_free(tmp);
- 
-         cond_free(&ctx->null_cond);
-         return true;
-@@ -2254,7 +2209,6 @@ static bool trans_mtsarcm(DisasContext *ctx, arg_mtsarcm *a)
-     tcg_gen_not_reg(tmp, load_gpr(ctx, a->r));
-     tcg_gen_andi_reg(tmp, tmp, TARGET_REGISTER_BITS - 1);
-     save_or_nullify(ctx, cpu_sar, tmp);
--    tcg_temp_free(tmp);
- 
-     cond_free(&ctx->null_cond);
-     return true;
-@@ -2273,8 +2227,6 @@ static bool trans_ldsid(DisasContext *ctx, arg_ldsid *a)
-     tcg_gen_mov_i64(t0, space_select(ctx, a->sp, load_gpr(ctx, a->b)));
-     tcg_gen_shri_i64(t0, t0, 32);
-     tcg_gen_trunc_i64_reg(dest, t0);
--
--    tcg_temp_free_i64(t0);
- #endif
-     save_gpr(ctx, a->t, dest);
- 
-@@ -2437,8 +2389,6 @@ static bool trans_probe(DisasContext *ctx, arg_probe *a)
- 
-     gen_helper_probe(dest, cpu_env, addr, level, want);
- 
--    tcg_temp_free_i32(level);
--
-     save_gpr(ctx, a->t, dest);
-     return nullify_end(ctx);
- }
-@@ -2530,8 +2480,6 @@ static bool trans_ixtlbxf(DisasContext *ctx, arg_ixtlbxf *a)
-                       : offsetof(CPUHPPAState, cr[CR_IIAOQ]));
-     tcg_gen_shli_i64(stl, stl, 32);
-     tcg_gen_or_tl(addr, atl, stl);
--    tcg_temp_free_tl(atl);
--    tcg_temp_free_tl(stl);
- 
-     reg = load_gpr(ctx, a->r);
-     if (a->addr) {
-@@ -2539,7 +2487,6 @@ static bool trans_ixtlbxf(DisasContext *ctx, arg_ixtlbxf *a)
-     } else {
-         gen_helper_itlbp(cpu_env, addr, reg);
-     }
--    tcg_temp_free_tl(addr);
- 
-     /* Exit TB for TLB change if mmu is enabled.  */
-     if (ctx->tb_flags & PSW_C) {
-@@ -2568,7 +2515,6 @@ static bool trans_lpa(DisasContext *ctx, arg_ldst *a)
-         save_gpr(ctx, a->b, ofs);
-     }
-     save_gpr(ctx, a->t, paddr);
--    tcg_temp_free(paddr);
- 
-     return nullify_end(ctx);
- #endif
-@@ -2819,8 +2765,6 @@ static bool trans_ds(DisasContext *ctx, arg_rrr_cf *a)
-     tcg_gen_add2_i32(dest, cpu_psw_cb_msb, add1, zero, add2, zero);
-     tcg_gen_add2_i32(dest, cpu_psw_cb_msb, dest, cpu_psw_cb_msb, addc, zero);
- 
--    tcg_temp_free(addc);
--
-     /* Write back the result register.  */
-     save_gpr(ctx, a->t, dest);
- 
-@@ -2842,10 +2786,6 @@ static bool trans_ds(DisasContext *ctx, arg_rrr_cf *a)
-         ctx->null_cond = do_cond(a->cf, dest, cpu_psw_cb_msb, sv);
-     }
- 
--    tcg_temp_free(add1);
--    tcg_temp_free(add2);
--    tcg_temp_free(dest);
--
-     return nullify_end(ctx);
- }
- 
-@@ -3100,7 +3040,6 @@ static bool do_addb(DisasContext *ctx, unsigned r, TCGv_reg in1,
- 
-     cond = do_cond(c * 2 + f, dest, cb_msb, sv);
-     save_gpr(ctx, r, dest);
--    tcg_temp_free(dest);
-     return do_cbranch(ctx, disp, n, &cond);
- }
- 
-@@ -3128,7 +3067,6 @@ static bool trans_bb_sar(DisasContext *ctx, arg_bb_sar *a)
-     tcg_gen_shl_reg(tmp, tcg_r, cpu_sar);
- 
-     cond = cond_make_0(a->c ? TCG_COND_GE : TCG_COND_LT, tmp);
--    tcg_temp_free(tmp);
-     return do_cbranch(ctx, a->disp, a->n, &cond);
- }
- 
-@@ -3144,7 +3082,6 @@ static bool trans_bb_imm(DisasContext *ctx, arg_bb_imm *a)
-     tcg_gen_shli_reg(tmp, tcg_r, a->p);
- 
-     cond = cond_make_0(a->c ? TCG_COND_GE : TCG_COND_LT, tmp);
--    tcg_temp_free(tmp);
-     return do_cbranch(ctx, a->disp, a->n, &cond);
- }
- 
-@@ -3197,7 +3134,6 @@ static bool trans_shrpw_sar(DisasContext *ctx, arg_shrpw_sar *a)
-         tcg_gen_trunc_reg_i32(t32, load_gpr(ctx, a->r2));
-         tcg_gen_rotr_i32(t32, t32, cpu_sar);
-         tcg_gen_extu_i32_reg(dest, t32);
--        tcg_temp_free_i32(t32);
-     } else {
-         TCGv_i64 t = tcg_temp_new_i64();
-         TCGv_i64 s = tcg_temp_new_i64();
-@@ -3206,9 +3142,6 @@ static bool trans_shrpw_sar(DisasContext *ctx, arg_shrpw_sar *a)
-         tcg_gen_extu_reg_i64(s, cpu_sar);
-         tcg_gen_shr_i64(t, t, s);
-         tcg_gen_trunc_i64_reg(dest, t);
--
--        tcg_temp_free_i64(t);
--        tcg_temp_free_i64(s);
-     }
-     save_gpr(ctx, a->t, dest);
- 
-@@ -3240,13 +3173,11 @@ static bool trans_shrpw_imm(DisasContext *ctx, arg_shrpw_imm *a)
-         tcg_gen_trunc_reg_i32(t32, t2);
-         tcg_gen_rotri_i32(t32, t32, sa);
-         tcg_gen_extu_i32_reg(dest, t32);
--        tcg_temp_free_i32(t32);
-     } else {
-         TCGv_i64 t64 = tcg_temp_new_i64();
-         tcg_gen_concat_reg_i64(t64, t2, cpu_gr[a->r1]);
-         tcg_gen_shri_i64(t64, t64, sa);
-         tcg_gen_trunc_i64_reg(dest, t64);
--        tcg_temp_free_i64(t64);
-     }
-     save_gpr(ctx, a->t, dest);
- 
-@@ -3280,7 +3211,6 @@ static bool trans_extrw_sar(DisasContext *ctx, arg_extrw_sar *a)
-         tcg_gen_shr_reg(dest, src, tmp);
-         tcg_gen_extract_reg(dest, dest, 0, len);
-     }
--    tcg_temp_free(tmp);
-     save_gpr(ctx, a->t, dest);
- 
-     /* Install the new nullification.  */
-@@ -3410,9 +3340,6 @@ static bool do_depw_sar(DisasContext *ctx, unsigned rt, unsigned c,
-     } else {
-         tcg_gen_shl_reg(dest, tmp, shift);
-     }
--    tcg_temp_free(shift);
--    tcg_temp_free(mask);
--    tcg_temp_free(tmp);
-     save_gpr(ctx, rt, dest);
- 
-     /* Install the new nullification.  */
-@@ -3487,7 +3414,6 @@ static bool trans_be(DisasContext *ctx, arg_be *a)
-         tcg_gen_mov_i64(cpu_iasq_b, new_spc);
-         nullify_set(ctx, a->n);
-     }
--    tcg_temp_free_i64(new_spc);
-     tcg_gen_lookup_and_goto_ptr();
-     ctx->base.is_jmp = DISAS_NORETURN;
-     return nullify_end(ctx);
-@@ -3876,9 +3802,6 @@ static bool trans_fcmp_f(DisasContext *ctx, arg_fclass2 *a)
- 
-     gen_helper_fcmp_s(cpu_env, ta, tb, ty, tc);
- 
--    tcg_temp_free_i32(ta);
--    tcg_temp_free_i32(tb);
--
-     return nullify_end(ctx);
- }
- 
-@@ -3896,9 +3819,6 @@ static bool trans_fcmp_d(DisasContext *ctx, arg_fclass2 *a)
- 
-     gen_helper_fcmp_d(cpu_env, ta, tb, ty, tc);
- 
--    tcg_temp_free_i64(ta);
--    tcg_temp_free_i64(tb);
--
-     return nullify_end(ctx);
- }
- 
-@@ -3958,7 +3878,6 @@ static bool trans_ftest(DisasContext *ctx, arg_ftest *a)
- 
-         tcg_gen_extract_reg(t, t, 21 - cbit, 1);
-         ctx->null_cond = cond_make_0(TCG_COND_NE, t);
--        tcg_temp_free(t);
-     }
- 
-  done:
-@@ -4019,8 +3938,6 @@ static bool trans_xmpyu(DisasContext *ctx, arg_xmpyu *a)
-     y = load_frw0_i64(a->r2);
-     tcg_gen_mul_i64(x, x, y);
-     save_frd(a->t, x);
--    tcg_temp_free_i64(x);
--    tcg_temp_free_i64(y);
- 
-     return nullify_end(ctx);
- }
-@@ -4094,10 +4011,7 @@ static bool trans_fmpyfadd_f(DisasContext *ctx, arg_fmpyfadd_f *a)
-         gen_helper_fmpyfadd_s(x, cpu_env, x, y, z);
-     }
- 
--    tcg_temp_free_i32(y);
--    tcg_temp_free_i32(z);
-     save_frw_i32(a->t, x);
--    tcg_temp_free_i32(x);
-     return nullify_end(ctx);
- }
- 
-@@ -4116,10 +4030,7 @@ static bool trans_fmpyfadd_d(DisasContext *ctx, arg_fmpyfadd_d *a)
-         gen_helper_fmpyfadd_d(x, cpu_env, x, y, z);
-     }
- 
--    tcg_temp_free_i64(y);
--    tcg_temp_free_i64(z);
-     save_frd(a->t, x);
--    tcg_temp_free_i64(x);
-     return nullify_end(ctx);
- }
- 
-@@ -4234,13 +4145,11 @@ static void hppa_tr_translate_insn(DisasContextBase *dcbase, CPUState *cs)
-         }
-     }
- 
--    /* Free any temporaries allocated.  */
-+    /* Forget any temporaries allocated.  */
-     for (i = 0, n = ctx->ntempr; i < n; ++i) {
--        tcg_temp_free(ctx->tempr[i]);
-         ctx->tempr[i] = NULL;
-     }
-     for (i = 0, n = ctx->ntempl; i < n; ++i) {
--        tcg_temp_free_tl(ctx->templ[i]);
-         ctx->templ[i] = NULL;
-     }
-     ctx->ntempr = 0;
+ static void gen_VZEROUPPER(DisasContext *s, CPUX86State *env, X86DecodedInsn *decode)
 -- 
 2.34.1
 
