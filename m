@@ -1,85 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWZBw-0000fk-VA
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 03:49:04 -0500
+	id 1pWZJJ-0007oy-2l
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 03:56:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pWZBv-0000fK-MN
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 03:49:03 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pWZBt-0007fC-OU
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 03:49:03 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1677487740;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=IZrUbL2/W00N28CAtosn7/KjD1UIRImQD+Z/FcTgo8c=;
- b=hMc3eZoyvggRq5ZgXdMGfOKb9KlGIokelZgckal51xKVOwAB8e66DgeCB/fOQ9CVKyUcnV
- LSRsqnZ3nnwRzub/NL4v54l0ZXz5JThg5txICeHrIBqfnCMhp/6JDzklI5gNVOR5HPm2w8
- 0bavWHLCvtjPkeGGP0F5qS4uAevZpI0=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-118-r4ACGfiwMs-UlxIVPn8ZtA-1; Mon, 27 Feb 2023 03:48:58 -0500
-X-MC-Unique: r4ACGfiwMs-UlxIVPn8ZtA-1
-Received: by mail-wm1-f71.google.com with SMTP id
- m31-20020a05600c3b1f00b003e9de8c95easo2140364wms.2
- for <qemu-riscv@nongnu.org>; Mon, 27 Feb 2023 00:48:58 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pWZJF-0007mG-Rx
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 03:56:39 -0500
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pWZJB-0000V5-9O
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 03:56:37 -0500
+Received: by mail-wm1-x32f.google.com with SMTP id
+ o38-20020a05600c512600b003e8320d1c11so6240150wms.1
+ for <qemu-riscv@nongnu.org>; Mon, 27 Feb 2023 00:56:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=j2Fc/DeZ+De26dqkQ2sRwuObq0oMb3TqQV81baYUI+A=;
+ b=bgD8MT6JFb+VptMnsoHxBaEw76OECuk8LsIuTFhJaEEzESDcQ+5X6wC0FDBDuSWeqf
+ VakurL7ODRlUKbFg7lr1AW2R/Yr17mvpelGhXM2bF8PcSQBMyBuN5sq88a8eSJ/MlB67
+ 0S/9ZL9im6sqB9W9TqG2NUnHNefqlXAeUMkVnDe57/YH4o94rhjMfU9jIVH4qeycjYoj
+ qWAJmjn3ms2K7GXVOJiQ6QkbhwjiG72Io9WBfahfEYJCyJ7GK8kw6wHnYjOM3Yqsfvbw
+ OZkuiN9nMukXCAcWtbsysxcfhkpP0wzPlAp6kl7khJkncfocATEj0Y9cArNrAPCQvlrr
+ hpdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IZrUbL2/W00N28CAtosn7/KjD1UIRImQD+Z/FcTgo8c=;
- b=pB1OT+qFaToRyJ7ZWJFBl1Np/2zXVKSJcVn7p8VwleHiC/S9fMQckEwU0/IsYNUKoH
- Arav+4H69vkMrTSdw4R948yUNz4vzqFa+QMJHPmZc1coG5dkta/zJQNDc3LA1DYG4rpa
- LoGdJgSgPufuEFTy4ChF5XCmldedrz0oW4e97xNait8FyL4Xpgl/Eb9jzqQGriWuullV
- v+KmKssMJ8Kkzlv/GkQH7nVX+nb9zrCm5n62Ql4DSp3BJ7aaxfdpDLmK+FJ5UJ0rw5Z0
- aSpx4QrwfJI5qhmHM/OVP/VcTM/Vh58srENV1xdADqnCkI59ZM3Sy7qs01tvPvB4TJyo
- PXFw==
-X-Gm-Message-State: AO0yUKUuQ5t3oBktEHndsj6c5rWSqawMnYDOV6tEAAwA72BFrY78l5+r
- Ky6Wq0wJK5WgwRpLikIgyke67TaCW+vBIZSGEKShw2Fr/tBg8dbdxtCgEPWxaZLu3jJVOOXD/u3
- cbgXTmb3UvtrBiPE=
-X-Received: by 2002:adf:fb49:0:b0:2c6:6e35:4414 with SMTP id
- c9-20020adffb49000000b002c66e354414mr20931247wrs.6.1677487737671; 
- Mon, 27 Feb 2023 00:48:57 -0800 (PST)
-X-Google-Smtp-Source: AK7set+GOuc6XqfMA7bmS+WrJRKq8cCQ86YqwPA/d6ckKhN1Q2ppUWL1lppu/wcX3J1f3KELZUq77g==
-X-Received: by 2002:adf:fb49:0:b0:2c6:6e35:4414 with SMTP id
- c9-20020adffb49000000b002c66e354414mr20931235wrs.6.1677487737437; 
- Mon, 27 Feb 2023 00:48:57 -0800 (PST)
-Received: from [192.168.0.2] (ip-109-43-176-150.web.vodafone.de.
- [109.43.176.150]) by smtp.gmail.com with ESMTPSA id
- l16-20020adfe590000000b002c70e60eb40sm6466669wrm.11.2023.02.27.00.48.56
+ bh=j2Fc/DeZ+De26dqkQ2sRwuObq0oMb3TqQV81baYUI+A=;
+ b=7T7F793HdqrTq0cpKT1vpJ3X//rVieDQmv8/coSnIp24BFUhTzPc6U+Ei6/V/DzGjD
+ xJ/dxWLJTGzyG3JGlWOq+clHB6eJw3zvBYiZ7AkOz/arkxRCbcGshfYYf56V/DMzVrps
+ eclF0Q3uo77+2FMDS8fvXBgGpPMDdeGQM4WXV6VVgOMEhV33WvQQwbZiV4rFuHqfuVkN
+ WLxXQZglOJ4tI7RYuWGfNBzhlgu+4yKzs023RssV5jk/MHfVImH98fbIuBts4gfOyMB6
+ xqDAc9+0dUg3PQ0r+GLT4+ILDjxB2qNYMYW9ciiLijUwvd5WCepjp5J0+iXnd213m+XC
+ 8Egw==
+X-Gm-Message-State: AO0yUKUQME5+aLf/gmk6zlLDZMj2qbBtjeHZaJ3lS0I7ILWbYLdlgRfD
+ PkVl6e16AaJ1d8u52id7A8UpKw==
+X-Google-Smtp-Source: AK7set/figWUcbIlydnneQPffQkOvaHR/NNYVvVKf6iSp3nzjFq8NWltIBp0Wg6gYjyV7Jq8WZjVuA==
+X-Received: by 2002:a05:600c:c8:b0:3d2:392e:905f with SMTP id
+ u8-20020a05600c00c800b003d2392e905fmr17818578wmm.24.1677488191474; 
+ Mon, 27 Feb 2023 00:56:31 -0800 (PST)
+Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
+ o6-20020a05600c510600b003e20a6fd604sm8846575wms.4.2023.02.27.00.56.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Feb 2023 00:48:56 -0800 (PST)
-Message-ID: <69d38817-8363-58eb-83dc-a1c7db5d4f8a@redhat.com>
-Date: Mon, 27 Feb 2023 09:48:55 +0100
+ Mon, 27 Feb 2023 00:56:30 -0800 (PST)
+Message-ID: <39ae5611-9fda-e0e4-96ab-dc10fd5572a5@linaro.org>
+Date: Mon, 27 Feb 2023 09:56:28 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.0
-Subject: Re: [PATCH 1/2] gitlab/opensbi: Move to docker:stable
-To: Palmer Dabbelt <palmer@rivosinc.com>, Bin Meng <bmeng.cn@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20230224212543.20462-1-palmer@rivosinc.com>
- <20230224212543.20462-2-palmer@rivosinc.com>
-From: Thomas Huth <thuth@redhat.com>
-In-Reply-To: <20230224212543.20462-2-palmer@rivosinc.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.8.0
+Subject: Re: [PATCH 29/70] target/microblaze: Avoid tcg_const_* throughout
 Content-Language: en-US
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, kbastian@mail.uni-paderborn.de,
+ ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
+ tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
+References: <20230227054233.390271-1-richard.henderson@linaro.org>
+ <20230227054233.390271-30-richard.henderson@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20230227054233.390271-30-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,43 +84,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 08:49:03 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 08:56:40 -0000
 
-On 24/02/2023 22.25, Palmer Dabbelt wrote:
-> The OpenSBI build has been using docker:19.03.1, which appears to be old
-> enough that v2 of the manifest is no longer supported.  Something has
-> started serving us those manifests, resulting in errors along the lines
-> of
+On 27/2/23 06:41, Richard Henderson wrote:
+> All uses are strictly read-only.
 > 
->      $ docker build --cache-from $IMAGE_TAG --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $IMAGE_TAG .gitlab-ci.d/opensbi
->      Step 1/7 : FROM ubuntu:18.04
->      18.04: Pulling from library/ubuntu
->      mediaType in manifest should be 'application/vnd.docker.distribution.manifest.v2+json' not 'application/vnd.oci.image.manifest.v1+json'
-> 
-> This just moves to docker:stable, as was suggested by the template.
-> 
-> Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   .gitlab-ci.d/opensbi.yml | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/.gitlab-ci.d/opensbi.yml b/.gitlab-ci.d/opensbi.yml
-> index 04ed5a3ea1..9a651465d8 100644
-> --- a/.gitlab-ci.d/opensbi.yml
-> +++ b/.gitlab-ci.d/opensbi.yml
-> @@ -42,9 +42,9 @@
->   docker-opensbi:
->     extends: .opensbi_job_rules
->     stage: containers
-> -  image: docker:19.03.1
-> +  image: docker:stable
->     services:
-> -    - docker:19.03.1-dind
-> +    - docker:stable-dind
->     variables:
->       GIT_DEPTH: 3
->       IMAGE_TAG: $CI_REGISTRY_IMAGE:opensbi-cross-build
+>   target/microblaze/translate.c | 35 +++++++++++++++--------------------
+>   1 file changed, 15 insertions(+), 20 deletions(-)
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
