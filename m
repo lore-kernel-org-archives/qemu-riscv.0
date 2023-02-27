@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWWCO-0001sQ-VV
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:37:21 -0500
+	id 1pWWCS-00028q-N4
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:37:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWCM-0001hB-Kx
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:37:18 -0500
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
+ id 1pWWCP-0001yM-PM
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:37:21 -0500
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWCJ-0002Sw-SW
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:37:18 -0500
-Received: by mail-pg1-x52d.google.com with SMTP id p6so2877481pga.0
- for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:37:15 -0800 (PST)
+ id 1pWWCM-0002V3-O1
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:37:21 -0500
+Received: by mail-pg1-x530.google.com with SMTP id h31so2838225pgl.6
+ for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:37:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q/lxx08bzggLpozZyWgUkQK1Gl9+CtNC5ZWpyB9XF2A=;
- b=fDTS2qEINKy3aUYhbGyyb3cTTRA+LaP8OUjR077xcgm70NnBJE0ZlG2JFoFOJqSfAA
- YyzCCpbE3OqEZRYaRY+PR1OoT154nRv6eCQRHszDgt3Bmi/9IeLNduJu9GHmQshoqKmx
- 4UyiH/cE6bBgKvBJnmEzLJI//On2QxWK33UmzXj6Z4fh4gE2gdri2i0pz9y6iGjC4l7U
- F6Ri+c3qNFTro83TaxjwL7eoANxFdbYeXnNyBWVqSUt0IXEau63rYI/dEDafSOCDS6wR
- N0tq9zJbGQmPMlyasqtgXCzP5NrsPqohRxZhpS1jkKg18CSoLUK7wNR7hqg+mgbtT3ue
- FNlA==
+ bh=KgU8jRRsy/4dDTOMKHuklv2pdjkeQjC0sYzVe39pJ+4=;
+ b=K27SV84hKrTbD8r5jyUHbFYzZ1QW4nNBFe3C8WNwO+s+rkS2YM8VE+cHKng4vSF6xT
+ KC7+l5ygc4GOFMd1R2lzxF9/VmaIgG2VXYACnpgeLPl4B6lxZvZdS9wmuVMU+9BLbIRQ
+ rbfuJY3OAavb7U7CtNCO27nYA50rznphYgSZgFg3qu0nBZpglBfO8Q4F2KNu+ykFQ+hm
+ TegEEqCunmyMoo8h4wo0tqlda7s6VBCkeb056zsGZ3rHoJnDm6xhTdIScZDq2IVWVf6C
+ dPEqQle/AMC0AQWB1UI8mpQmTU1DGfy8vIQHe5g/6uNuOZZcaCWAG31lU9ysgTl6qEjR
+ knJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q/lxx08bzggLpozZyWgUkQK1Gl9+CtNC5ZWpyB9XF2A=;
- b=tvhwVc2BQm+uMqvAp494O434QdUWzEafjREwMRfoRySdCm/1CEwpk7apdUXzuTiUG0
- J6SQz91PlxLHfG9kNgnZ5+m3iEUtvbexvpJ64PeOBqQDKO7aaNEwuo/vuitM0KzZOR3o
- Xa0DWDdFoKhctrW47VeajuXSK2S0bGreZ0wI46IEjEdFrChfBMwm76HNA0zpm8iW6S40
- lKUGsAdzMS6Fd9++Abr/BbF6wpVPSXqVe8u5cnlokR/5PvbAC9L7OueyNXoEThUtqU5p
- TDM1sgESCjxwcxcjfa7Q26c3CAi5F8kyJx53DaPq0cIrxKvtWtMzO6gdFVrbeAWVyIGd
- Yy6g==
-X-Gm-Message-State: AO0yUKW5FsuQioOhZNs9sgVhgXZ8Dn88lW9kYpl9jAF0ErOANZrpMVSK
- VQv8wMQuwvBhhXLPf5Q5yJ/aJg==
-X-Google-Smtp-Source: AK7set897NRT/ggZaYPUWz2zorRJaS96l6SLv3OTJNeMT9kzTyutccj7UkPd/z1PD5OihrWAw8r72A==
-X-Received: by 2002:a62:62c6:0:b0:5a8:47e5:bbb2 with SMTP id
- w189-20020a6262c6000000b005a847e5bbb2mr20581675pfb.0.1677476234281; 
- Sun, 26 Feb 2023 21:37:14 -0800 (PST)
+ bh=KgU8jRRsy/4dDTOMKHuklv2pdjkeQjC0sYzVe39pJ+4=;
+ b=TWdKk1Hcgy2HdwBTCemm7tW1/61SxHgjeT+NAv2Vz6hrvbDrwIyu7YdinJKoqH3vF1
+ 1Am3gTakNnHkzycs23Ch/igXrJ3hc3+fsQgT1Kty1CVYqxD3NRlVH5/xCl4/Fxywfery
+ MAF3s7K3KnYVw3a5xK6uLImN6iHYyU5fgr6NIti8AThvFH2LjL6Oc1l0qiYyTvdUCbrI
+ RC8Bo0wA6WTMJNHWYWXLlrzMYi5mBPEiweQr99JJykmqhMH6W1L0fUgSvuX/Q/S5dtJK
+ TDOv3hBJ4AVEZXSmF+NRMARIcw0aYLkfUX30EmODsI7eTY0+mwrlgMxqCNYhweNwiH5S
+ pFcw==
+X-Gm-Message-State: AO0yUKUGr2sRuPRCcHnzi3+vItozKCcElChbnYIEBiHRzSoIVSqxS/lC
+ aS6CAk8SByFS4Djpv5OX7V/yhA==
+X-Google-Smtp-Source: AK7set9XAOOJH/T2M1vxOCmeGWKkNrDid9mJ+NtmuFADNBmiq2ZgvAT5d+MM9alXLUreq1LAvF8HGQ==
+X-Received: by 2002:a62:1d4b:0:b0:5a8:a250:bc16 with SMTP id
+ d72-20020a621d4b000000b005a8a250bc16mr18135051pfd.3.1677476237140; 
+ Sun, 26 Feb 2023 21:37:17 -0800 (PST)
 Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
  by smtp.gmail.com with ESMTPSA id
- k12-20020aa792cc000000b005a7c892b435sm3342137pfa.25.2023.02.26.21.37.11
+ k12-20020aa792cc000000b005a7c892b435sm3342137pfa.25.2023.02.26.21.37.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Feb 2023 21:37:13 -0800 (PST)
+ Sun, 26 Feb 2023 21:37:16 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -55,18 +55,18 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
  edgar.iglesias@gmail.com,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v4 03/31] accel/tcg: Use more accurate max_insns for
- tb_overflow
-Date: Sun, 26 Feb 2023 19:36:33 -1000
-Message-Id: <20230227053701.368744-4-richard.henderson@linaro.org>
+Subject: [PATCH v4 04/31] tcg: Remove branch-to-next regardless of reference
+ count
+Date: Sun, 26 Feb 2023 19:36:34 -1000
+Message-Id: <20230227053701.368744-5-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230227053701.368744-1-richard.henderson@linaro.org>
 References: <20230227053701.368744-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -86,31 +86,76 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 05:37:19 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 05:37:22 -0000
 
-Write back the number of insns that we attempt to translate,
-so that if we longjmp out we have a more accurate limit for
-the next attempt.  This results in fewer restarts when some
-limit is consumed by few instructions.
+Just because the label reference count is more than 1 does
+not mean we cannot remove a branch-to-next.  By doing this
+first, the label reference count may drop to 0, and then
+the label itself gets removed as before.
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- accel/tcg/translator.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tcg/tcg.c | 33 +++++++++++++++++----------------
+ 1 file changed, 17 insertions(+), 16 deletions(-)
 
-diff --git a/accel/tcg/translator.c b/accel/tcg/translator.c
-index fac1e8c465..62e8f28025 100644
---- a/accel/tcg/translator.c
-+++ b/accel/tcg/translator.c
-@@ -78,7 +78,7 @@ void translator_loop(CPUState *cpu, TranslationBlock *tb, int *max_insns,
-     plugin_enabled = plugin_gen_tb_start(cpu, db, cflags & CF_MEMI_ONLY);
+diff --git a/tcg/tcg.c b/tcg/tcg.c
+index 06209e6160..0992fb4f31 100644
+--- a/tcg/tcg.c
++++ b/tcg/tcg.c
+@@ -2638,7 +2638,7 @@ TCGOp *tcg_op_insert_after(TCGContext *s, TCGOp *old_op,
+ /* Reachable analysis : remove unreachable code.  */
+ static void reachable_code_pass(TCGContext *s)
+ {
+-    TCGOp *op, *op_next;
++    TCGOp *op, *op_next, *op_prev;
+     bool dead = false;
  
-     while (true) {
--        db->num_insns++;
-+        *max_insns = ++db->num_insns;
-         ops->insn_start(db, cpu);
-         tcg_debug_assert(db->is_jmp == DISAS_NEXT);  /* no early exit */
+     QTAILQ_FOREACH_SAFE(op, &s->ops, link, op_next) {
+@@ -2648,6 +2648,22 @@ static void reachable_code_pass(TCGContext *s)
+         switch (op->opc) {
+         case INDEX_op_set_label:
+             label = arg_label(op->args[0]);
++
++            /*
++             * Optimization can fold conditional branches to unconditional.
++             * If we find a label which is preceded by an unconditional
++             * branch to next, remove the branch.  We couldn't do this when
++             * processing the branch because any dead code between the branch
++             * and label had not yet been removed.
++             */
++            op_prev = QTAILQ_PREV(op, link);
++            if (op_prev->opc == INDEX_op_br &&
++                label == arg_label(op_prev->args[0])) {
++                tcg_op_remove(s, op_prev);
++                /* Fall through means insns become live again.  */
++                dead = false;
++            }
++
+             if (label->refs == 0) {
+                 /*
+                  * While there is an occasional backward branch, virtually
+@@ -2661,21 +2677,6 @@ static void reachable_code_pass(TCGContext *s)
+                 /* Once we see a label, insns become live again.  */
+                 dead = false;
+                 remove = false;
+-
+-                /*
+-                 * Optimization can fold conditional branches to unconditional.
+-                 * If we find a label with one reference which is preceded by
+-                 * an unconditional branch to it, remove both.  This needed to
+-                 * wait until the dead code in between them was removed.
+-                 */
+-                if (label->refs == 1) {
+-                    TCGOp *op_prev = QTAILQ_PREV(op, link);
+-                    if (op_prev->opc == INDEX_op_br &&
+-                        label == arg_label(op_prev->args[0])) {
+-                        tcg_op_remove(s, op_prev);
+-                        remove = true;
+-                    }
+-                }
+             }
+             break;
  
 -- 
 2.34.1
