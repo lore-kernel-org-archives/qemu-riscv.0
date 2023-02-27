@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWWOK-0000QX-7I
+	id 1pWWOK-0000WT-Tf
 	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:49:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWNU-0004i8-SO
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:48:49 -0500
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ id 1pWWNX-00054I-Dg
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:48:51 -0500
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWNQ-0007J6-FX
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:48:48 -0500
-Received: by mail-pj1-x102c.google.com with SMTP id oj5so929005pjb.5
- for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:48:42 -0800 (PST)
+ id 1pWWNU-0007W2-5A
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:48:50 -0500
+Received: by mail-pl1-x631.google.com with SMTP id i5so3877223pla.2
+ for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:48:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Htwm+E7Ej5o1YDA8ZJwARbX/GtYPS7IcYCg+lmcAy3E=;
- b=cWwWaOTHYxiB+KCaN2JEQ0ZC3ql7d3B85FqiSF9BuibjXV+Ju43HfNqGM2pXZa3rw7
- WO3lyp5iktpMdSznSB0Lw1aWe09czKEUeYLayyUr+3g0tVSpn2Sr5tzoupcJHJ13chGM
- S8gqw5zieVM3wE5O13F5vxihvRQEDwvb+3sdiasrUxSdIiX1WffQcgTUEir4NvqkNBMS
- rCx/tKznFURA0OMUVhxs//Ua4Epw3SbeepGUYxRp3e6AGXB2yIhh4VVsMvUciD9obiV1
- Qlw7MV/qzty8/dQiMM9jC0n95K6e//8PQ7UmNwK8usIw+ebhnaG80XNYy+cOy1HyiBM6
- Mb1g==
+ bh=u2rLxWiBoXc5cqrNuTYk7pclm25I7T2ovSFzBdL97lE=;
+ b=HoQXU/BHAs6fJkA+lfnWc1mmXt62N7ZgQsed1Bajm4nRrhAYV/PsLXEMKtTfU4h6J4
+ icjplpZu5VVYRLF6OioHGNAt6vjPlSYyP0V/1uc4zN+6NPPdU7YtbLQLubX48+V6AAvy
+ lzZDFiZR4q/48aAvXH2gIh0sGIJMU1Xua1HK8EVDRrrT7uJbvadMRWp/EnvCazFo8ZRh
+ 1TjbWUzAhPNcKnHgMju/TYQlrRlNqxIpw5JUk5o3wehkHy36u/7qQQVEDsESu6vTXXFt
+ UKucsp8odwj/ju1VZNq4iR0OVJ/CvTdQu/LIqhpETc07iK7zrFpNEMhmmgKIpEbaLAhv
+ RKGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Htwm+E7Ej5o1YDA8ZJwARbX/GtYPS7IcYCg+lmcAy3E=;
- b=lfkaWgCH525PvRNh+cvoasBcNt6sBQPoK+2qqDdlMHsdAQ4/NA2ontu2xvBTVBS6Ss
- pNlOYZGaSkkitkVld1ON1+FkdJD72ipL/p9H6Pga3tv8k9bXKQUkfi32vkANKm/hDqPI
- Fk+DhU94Mb3hvVeuLU+1eYb3CZkS6gcmIf9Joqd/8pMQnvobhdq7ycitawA+1Bwy0HMh
- IvD4DkWpA1Ak6BctFv1kTM9lNQsj9fxfnmI1yKvcaWLcSoBwXxUKs95hX1ySU6VJ+AYo
- GiQ3GbWxkXeywZiLMU8+Km6lUL96tM49LPwOoGbAEvKuNjbSgmGTpLfDOtIy4JKMZeRW
- cO0Q==
-X-Gm-Message-State: AO0yUKWXH8UXSTAeaLZvkqLBNS1hq8CgbZinKcdRclCmdL5GzfIkPAhE
- 9bzzKmL/XAU4nSPNK+RzY0cdsA==
-X-Google-Smtp-Source: AK7set9jrdmo+5D1wb5LnhBZWm7155nIRMGgv+TQ3KwYeNpoVO12kWObWUB9X8skV36L/ZRJUJ6j8Q==
-X-Received: by 2002:a17:903:22cb:b0:19d:1897:8192 with SMTP id
- y11-20020a17090322cb00b0019d18978192mr1977206plg.47.1677476922275; 
- Sun, 26 Feb 2023 21:48:42 -0800 (PST)
+ bh=u2rLxWiBoXc5cqrNuTYk7pclm25I7T2ovSFzBdL97lE=;
+ b=epi/ZZsu3nc9Q+olUGHWfJuHzMlFF9bcEVz1/QM2prhV/7aPghjrOWV7LGk1RFw6D5
+ fJaglToi7cf/ZJMf5fUhITTFCmlmbhv0F1Op72vUlYqKM2GJ+S2iJ64GswxtdUqkygsJ
+ cfJnqly/WefZHfP7UvCrP8mAG+TxyBcxs3NAlFx0XkqhbsEivfUKvtpPjMBzxImInMK8
+ JwAPfcJKhkY5FM1sbqAjImDjUe6LFj2yGUs/3b785EgXRHOhEBkjoF8HH1TtraSFRCtw
+ nnWvvAiBLlGYjTc11KI0UpVMb1XXHKmYUFvJaZT0VXtoVA+O8mWhlX+VdHSEbRjqHRaD
+ 4OIA==
+X-Gm-Message-State: AO0yUKUd4dn7/3jtIXG7AuaGJ0PEw/JjogMEJFfFX4qCJU9PZXdILmLf
+ kK5OmDc9JoHNQEzBu9qYYv25hA==
+X-Google-Smtp-Source: AK7set+U80p2zY/7h/wIcpOXA0FGD/90henyfodEgvv6xYHvsSjmEdkB4dGUxIZIrNp/WzrUioq5rA==
+X-Received: by 2002:a17:902:ce81:b0:19d:181f:511 with SMTP id
+ f1-20020a170902ce8100b0019d181f0511mr2158458plg.30.1677476924766; 
+ Sun, 26 Feb 2023 21:48:44 -0800 (PST)
 Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
  by smtp.gmail.com with ESMTPSA id
- im16-20020a170902bb1000b0019a983f0119sm3553986plb.307.2023.02.26.21.48.39
+ im16-20020a170902bb1000b0019a983f0119sm3553986plb.307.2023.02.26.21.48.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Feb 2023 21:48:41 -0800 (PST)
+ Sun, 26 Feb 2023 21:48:44 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -54,16 +54,16 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
  edgar.iglesias@gmail.com
-Subject: [PATCH 67/70] target/xtensa: Avoid tcg_const_i32
-Date: Sun, 26 Feb 2023 19:42:30 -1000
-Message-Id: <20230227054233.390271-68-richard.henderson@linaro.org>
+Subject: [PATCH 68/70] tcg: Replace tcg_const_i64 in tcg-op.c
+Date: Sun, 26 Feb 2023 19:42:31 -1000
+Message-Id: <20230227054233.390271-69-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230227054233.390271-1-richard.henderson@linaro.org>
 References: <20230227054233.390271-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,46 +83,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 05:48:49 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 05:48:52 -0000
 
-All remaining uses are strictly read-only.
+These three instances got missed in previous conversion.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/xtensa/translate.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ tcg/tcg-op.c | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
 
-diff --git a/target/xtensa/translate.c b/target/xtensa/translate.c
-index f906ba7ed5..0cf3075649 100644
---- a/target/xtensa/translate.c
-+++ b/target/xtensa/translate.c
-@@ -1361,7 +1361,7 @@ static void translate_all(DisasContext *dc, const OpcodeArg arg[],
-                           const uint32_t par[])
- {
-     uint32_t shift = par[1];
--    TCGv_i32 mask = tcg_const_i32(((1 << shift) - 1) << arg[1].imm);
-+    TCGv_i32 mask = tcg_constant_i32(((1 << shift) - 1) << arg[1].imm);
-     TCGv_i32 tmp = tcg_temp_new_i32();
- 
-     tcg_gen_and_i32(tmp, arg[1].in, mask);
-@@ -1489,7 +1489,7 @@ static void translate_call0(DisasContext *dc, const OpcodeArg arg[],
- static void translate_callw(DisasContext *dc, const OpcodeArg arg[],
-                             const uint32_t par[])
- {
--    TCGv_i32 tmp = tcg_const_i32(arg[0].imm);
-+    TCGv_i32 tmp = tcg_constant_i32(arg[0].imm);
-     gen_callw_slot(dc, par[0], tmp, adjust_jump_slot(dc, arg[0].imm, 0));
+diff --git a/tcg/tcg-op.c b/tcg/tcg-op.c
+index 53e96b5b69..9753b08f6c 100644
+--- a/tcg/tcg-op.c
++++ b/tcg/tcg-op.c
+@@ -1547,9 +1547,7 @@ void tcg_gen_muli_i64(TCGv_i64 ret, TCGv_i64 arg1, int64_t arg2)
+     } else if (is_power_of_2(arg2)) {
+         tcg_gen_shli_i64(ret, arg1, ctz64(arg2));
+     } else {
+-        TCGv_i64 t0 = tcg_const_i64(arg2);
+-        tcg_gen_mul_i64(ret, arg1, t0);
+-        tcg_temp_free_i64(t0);
++        tcg_gen_mul_i64(ret, arg1, tcg_constant_i64(arg2));
+     }
  }
  
-@@ -1537,7 +1537,7 @@ static void translate_clrex(DisasContext *dc, const OpcodeArg arg[],
- static void translate_const16(DisasContext *dc, const OpcodeArg arg[],
-                              const uint32_t par[])
- {
--    TCGv_i32 c = tcg_const_i32(arg[1].imm);
-+    TCGv_i32 c = tcg_constant_i32(arg[1].imm);
- 
-     tcg_gen_deposit_i32(arg[0].out, c, arg[0].in, 16, 16);
+@@ -1946,9 +1944,7 @@ void tcg_gen_clzi_i64(TCGv_i64 ret, TCGv_i64 arg1, uint64_t arg2)
+         tcg_gen_movi_i32(TCGV_HIGH(ret), 0);
+         tcg_temp_free_i32(t);
+     } else {
+-        TCGv_i64 t0 = tcg_const_i64(arg2);
+-        tcg_gen_clz_i64(ret, arg1, t0);
+-        tcg_temp_free_i64(t0);
++        tcg_gen_clz_i64(ret, arg1, tcg_constant_i64(arg2));
+     }
  }
+ 
+@@ -2000,9 +1996,7 @@ void tcg_gen_ctzi_i64(TCGv_i64 ret, TCGv_i64 arg1, uint64_t arg2)
+         tcg_gen_ctpop_i64(ret, t);
+         tcg_temp_free_i64(t);
+     } else {
+-        TCGv_i64 t0 = tcg_const_i64(arg2);
+-        tcg_gen_ctz_i64(ret, arg1, t0);
+-        tcg_temp_free_i64(t0);
++        tcg_gen_ctz_i64(ret, arg1, tcg_constant_i64(arg2));
+     }
+ }
+ 
 -- 
 2.34.1
 
