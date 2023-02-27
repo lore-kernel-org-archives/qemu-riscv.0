@@ -1,72 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWWCX-0002br-Fn
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:37:29 -0500
+	id 1pWWCY-0002hA-Eb
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:37:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWCV-0002LO-2y
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:37:27 -0500
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
+ id 1pWWCX-0002ZV-5V
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:37:29 -0500
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWCS-0002YZ-4u
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:37:26 -0500
-Received: by mail-pj1-x1032.google.com with SMTP id oj5so909332pjb.5
- for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:37:23 -0800 (PST)
+ id 1pWWCV-0002aE-8j
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:37:28 -0500
+Received: by mail-pg1-x52a.google.com with SMTP id s18so2855914pgq.1
+ for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:37:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XU8chpWpCvoR0LbgkNVM0m0xLd7d7yoa5DmO6k+5Uys=;
- b=jGR7UdKMY/UbA5lgVk7nCTF7YagWYPZsq3IB/OyPg75G5Iks5qjF26nYjASzUTvW3Z
- HW9W3eNtoisAl3ao2DLpvh1QZ/O7lEyVbHoeZHeiE74oBxW69xV7zqvHjTiaGR2GlR2d
- M5j17PG0OZ2W/S4q92AoxxPunwUmozd3VL8LdKut0nmx+Tk0QXep1mLf0uAKHfMapa2d
- FOu8jiYFGAC3U7dO3UiJyL0mZS1SnLsTGzs9jkUwzxiQ6Yvk27WQ8ZwTwFIfvLZ5/WzR
- 8FUMYYXZzPEJeUV+XS1OXyB0Nt+3WVqHkOROj4WJXoN7px8HlZ3K1iXZLYBxvbwl1hBl
- aBPA==
+ bh=z2yx2ICVs1zB6ngtjHL2Am0/1UDD6BkdCpu6nOfJ5a4=;
+ b=y99zt4oaIdGSFxgTnRbqMaQNSMHu3V9TkK4/lrhBhyM9ixnNM7WLXvwqkP9v2Z1ip/
+ GqngGiSAjitx4fbgTDzL2d1HBjWMjR9IrRBnTuHpw98gpR2tYE0oLkf+RfkE5YNxQdzW
+ oj/9zwOtWnryCwsRh2TaJRImktZC5IC3C7SKE74nFfUqslYEpqwU9/YRhvMhyYa4zx7Z
+ arerNif6+5Fxl92NPcuQbOY3Zt6OxG0LIo4Mwy06nX3LDh19OpR/TX6BGdCXR+o6TFRE
+ ajoA1XtzwnRQsYHtODhYoF5wx+WBoSNeSHavq7ceYQfGp6jJHzn4lAEsAN7itLWC/nRX
+ HxaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XU8chpWpCvoR0LbgkNVM0m0xLd7d7yoa5DmO6k+5Uys=;
- b=hC74723adkGGrosTbl9lr2NfsWp9WtGvNpo+d6OLJIDsiN2v4xe9nk6j+lKKGRyGne
- VaBzQNAXL/cBGXp+M310YBfw1FTAXPyQtzk48NEskbkUjSnV4mGvKHfhUmgMzwgzVbOX
- EgDXPSdD5epbyEDu0clMkVi8OFsUiHfH+BVkNTecp4/xawl7Ec9oUcc4zqtoJcevYXHl
- VEkzmFcpaF4gDTRmXeryAVmUBD6/9NtjuV71gxfI2TKIoug9zmYPEw1utfC/uCfBHQbH
- M+ruD5OGWQo0tYZ+PbdIGTRqZhM6XPdixkdJYRn7u5+AGwJ5dXdgY8nQap1Iai5tSAXO
- PW7Q==
-X-Gm-Message-State: AO0yUKVDkADGnhWPx7h29kmyOIKKWKn2WC7qmBT+dXOftDd+2NZdWFoK
- zgcRGbtIqWQ+RujBFRejzX6n1w==
-X-Google-Smtp-Source: AK7set/zfjscwDuGYzZMIbEI/EKUD7R49MaabrWJq3sfdtD/qcIfKXYjraOr2QNTxJ3SG/td2Et5DQ==
-X-Received: by 2002:a05:6a20:6a1d:b0:be:e0c3:5012 with SMTP id
- p29-20020a056a206a1d00b000bee0c35012mr7245340pzk.1.1677476242617; 
- Sun, 26 Feb 2023 21:37:22 -0800 (PST)
+ bh=z2yx2ICVs1zB6ngtjHL2Am0/1UDD6BkdCpu6nOfJ5a4=;
+ b=HynyEOeSCuTsQHu+UpHm3JhxzgS5LiibZjaS9vduuPUpMKu3GGzWlmfkmQr21lt4eA
+ uWx2MForMHf2miy+OpMAPNJ52t6vj9QPu1mkCi1HEg1VeQu8oy7RvaF8YkzCr88jDlkz
+ 7UxCNLR37XZRlXF5pSA83kBfBmHzt30j8sFWSXQCndnEkKa+Qr1UT6vzS4mCXDyYm2vn
+ 0JlFfmRTXtK929xL7kkcEKOWAjCCK4YGFf5p89sagEPp1DgSho8ijFdUQtA5P9j1Gk/W
+ Z90u/D4biiiYbV2ZpuocB1A3x2ip+h+P1eBXA7gHWJs2g+RIsTxRZsQp0ZZdFdw9rPqQ
+ SENQ==
+X-Gm-Message-State: AO0yUKVpWVi/ri1D58V1NSxY/FCzeZXR/CYwsQlapjeekPNlTKfLp0Sw
+ 5tDQKy9l4+QY4W6avDP31eCSNg==
+X-Google-Smtp-Source: AK7set9I0oPNr+2dSXzXrqx2AIX03HdrMSqTFwqKLfgD1t8s58t4S4SiDayXAqZADoyc6erCBTDyAA==
+X-Received: by 2002:a05:6a00:47:b0:5cd:d766:8a2b with SMTP id
+ i7-20020a056a00004700b005cdd7668a2bmr18687656pfk.6.1677476245649; 
+ Sun, 26 Feb 2023 21:37:25 -0800 (PST)
 Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
  by smtp.gmail.com with ESMTPSA id
- k12-20020aa792cc000000b005a7c892b435sm3342137pfa.25.2023.02.26.21.37.20
+ k12-20020aa792cc000000b005a7c892b435sm3342137pfa.25.2023.02.26.21.37.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Feb 2023 21:37:22 -0800 (PST)
+ Sun, 26 Feb 2023 21:37:25 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, kbastian@mail.uni-paderborn.de,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
- edgar.iglesias@gmail.com,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>
-Subject: [PATCH v4 06/31] tcg: Use noinline for major tcg_gen_code subroutines
-Date: Sun, 26 Feb 2023 19:36:36 -1000
-Message-Id: <20230227053701.368744-7-richard.henderson@linaro.org>
+ edgar.iglesias@gmail.com
+Subject: [PATCH v4 07/31] tcg: Add liveness_pass_0
+Date: Sun, 26 Feb 2023 19:36:37 -1000
+Message-Id: <20230227053701.368744-8-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230227053701.368744-1-richard.henderson@linaro.org>
 References: <20230227053701.368744-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1032.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -86,51 +83,103 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 05:37:27 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 05:37:29 -0000
 
-This makes it easier to assign blame with perf.
+Attempt to reduce the lifetime of TEMP_TB.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- tcg/tcg.c | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ tcg/tcg.c | 70 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 70 insertions(+)
 
 diff --git a/tcg/tcg.c b/tcg/tcg.c
-index bf2af8b0fe..7ee935701a 100644
+index 7ee935701a..6646770268 100644
 --- a/tcg/tcg.c
 +++ b/tcg/tcg.c
-@@ -2636,7 +2636,8 @@ TCGOp *tcg_op_insert_after(TCGContext *s, TCGOp *old_op,
+@@ -2858,6 +2858,75 @@ static void la_cross_call(TCGContext *s, int nt)
+     }
  }
  
- /* Reachable analysis : remove unreachable code.  */
--static void reachable_code_pass(TCGContext *s)
++/*
++ * Liveness analysis: Verify the lifetime of TEMP_TB, and reduce
++ * to TEMP_EBB, if possible.
++ */
 +static void __attribute__((noinline))
-+reachable_code_pass(TCGContext *s)
- {
-     TCGOp *op, *op_next, *op_prev;
-     bool dead = false;
-@@ -2860,7 +2861,8 @@ static void la_cross_call(TCGContext *s, int nt)
++liveness_pass_0(TCGContext *s)
++{
++    void * const multiple_ebb = (void *)(uintptr_t)-1;
++    int nb_temps = s->nb_temps;
++    TCGOp *op, *ebb;
++
++    for (int i = s->nb_globals; i < nb_temps; ++i) {
++        s->temps[i].state_ptr = NULL;
++    }
++
++    /*
++     * Represent each EBB by the op at which it begins.  In the case of
++     * the first EBB, this is the first op, otherwise it is a label.
++     * Collect the uses of each TEMP_TB: NULL for unused, EBB for use
++     * within a single EBB, else MULTIPLE_EBB.
++     */
++    ebb = QTAILQ_FIRST(&s->ops);
++    QTAILQ_FOREACH(op, &s->ops, link) {
++        const TCGOpDef *def;
++        int nb_oargs, nb_iargs;
++
++        switch (op->opc) {
++        case INDEX_op_set_label:
++            ebb = op;
++            continue;
++        case INDEX_op_discard:
++            continue;
++        case INDEX_op_call:
++            nb_oargs = TCGOP_CALLO(op);
++            nb_iargs = TCGOP_CALLI(op);
++            break;
++        default:
++            def = &tcg_op_defs[op->opc];
++            nb_oargs = def->nb_oargs;
++            nb_iargs = def->nb_iargs;
++            break;
++        }
++
++        for (int i = 0; i < nb_oargs + nb_iargs; ++i) {
++            TCGTemp *ts = arg_temp(op->args[i]);
++
++            if (ts->kind != TEMP_TB) {
++                continue;
++            }
++            if (ts->state_ptr == NULL) {
++                ts->state_ptr = ebb;
++            } else if (ts->state_ptr != ebb) {
++                ts->state_ptr = multiple_ebb;
++            }
++        }
++    }
++
++    /*
++     * For TEMP_TB that turned out not to be used beyond one EBB,
++     * reduce the liveness to TEMP_EBB.
++     */
++    for (int i = s->nb_globals; i < nb_temps; ++i) {
++        TCGTemp *ts = &s->temps[i];
++        if (ts->kind == TEMP_TB && ts->state_ptr != multiple_ebb) {
++            ts->kind = TEMP_EBB;
++        }
++    }
++}
++
  /* Liveness analysis : update the opc_arg_life array to tell if a
     given input arguments is dead. Instructions updating dead
     temporaries are removed. */
--static void liveness_pass_1(TCGContext *s)
-+static void __attribute__((noinline))
-+liveness_pass_1(TCGContext *s)
- {
-     int nb_globals = s->nb_globals;
-     int nb_temps = s->nb_temps;
-@@ -3200,7 +3202,8 @@ static void liveness_pass_1(TCGContext *s)
- }
+@@ -4873,6 +4942,7 @@ int tcg_gen_code(TCGContext *s, TranslationBlock *tb, target_ulong pc_start)
+ #endif
  
- /* Liveness analysis: Convert indirect regs to direct temporaries.  */
--static bool liveness_pass_2(TCGContext *s)
-+static bool __attribute__((noinline))
-+liveness_pass_2(TCGContext *s)
- {
-     int nb_globals = s->nb_globals;
-     int nb_temps, i;
+     reachable_code_pass(s);
++    liveness_pass_0(s);
+     liveness_pass_1(s);
+ 
+     if (s->nb_indirects > 0) {
 -- 
 2.34.1
 
