@@ -1,70 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWW6Z-0006rM-Uq
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:31:19 -0500
+	id 1pWW6b-000716-Mw
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:31:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWW5e-0003IE-1z
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:30:23 -0500
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ id 1pWW5u-0003Yq-VG
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:30:43 -0500
+Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWW5b-0000PL-At
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:30:21 -0500
-Received: by mail-pl1-x631.google.com with SMTP id v11so2009687plz.8
- for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:30:18 -0800 (PST)
+ id 1pWW5q-0000Zb-DZ
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:30:38 -0500
+Received: by mail-pl1-x643.google.com with SMTP id z2so5505996plf.12
+ for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:30:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OamVkTHfnUQ17ezU+zmeUz0tz/Qpam4ZKwlKCcTeapQ=;
- b=SWlI378sWwI/K1RgeozMlwyvCYHMg6xJrUh53vXgBqgN1fvT+a6cNl0coTpmhFFjAY
- sYeoqh9thGGdU7ofM0GSYxSMuT+3zGuvEM5tN0c9B5c1sx1fsxf3paXzzOM8Z/2DAJBi
- HSbL2BbZmsyjAkMUvhXwC+2WOm7h8lI/59LnEkmGNhP+fulK+2C82mLRy2Uxy9492+f9
- Hgu9z3VZDjlCLpK79qliJpRtt6/tbf6UedKZPu8YclDot8fn84zkq+R1IWIAtMScwlxN
- ifPLzQ7AZeot3MM9rstQkCIWr8WlQr/dgC4uP7K49acpYSOtsw94pMfPrc226IF1DnIz
- tNow==
+ bh=jXzb0wguddcKP79wDFGGeUAakOtFrc7V197g1pVsdMU=;
+ b=LR3Mov5ufwrZg1ODnQVmMK4M0FtsCmAzOG1+uiLQNlDF4J9efiw6Bi3CcRDaki5huj
+ PVO32AD78ep8HoEVCBENqpEDpwKlNO3+U9e3GTR3pp8nqcWeMD7T0v7fDrC1o89b2zgz
+ Zd5oou/HAfJBG/Qe1laK0Mv2RWA02WxTvAC6nPYQ+koh/fkE40gFIhwj/utfgsRVJAZz
+ JMNLhqQOG9eOFlJgth5EdpxKaQLjOgnOmcKKPJx3DV+ItJsUVK5LxgItISB/n59i0f/V
+ PmfQzM1yrui3XydvKN/KeK5yQTwAR8WemDHcCK3taQFO4vKa3JznZGceie9l6MigzuWu
+ 7E8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OamVkTHfnUQ17ezU+zmeUz0tz/Qpam4ZKwlKCcTeapQ=;
- b=rGWfWxhME/1l39Wx/KrTmdZHEeFnzYM3r/nV7YVw7EjjydQIB1U9WXPOs/vmu4QAHc
- gM4VGFQRrlbanu901kRm1xM7MNf8d6XYPN+JGWvFjQfyBMep3ogZemp9YUvCLgL+gAOa
- nQ39IsILghhCRNfN62EvSgjYisvhVdEhSHZW3OK0QD8ZwXlUGSC1pijF3BnmTfIKX4m8
- lZjJl9C9iYkb2RSgXpOOOZpmUBXpOXISwky5oDsgASMBBz+pvHn72FbNIxVIDbXvwQH7
- +MV5biHR+7uJtu6S5YynU4gWKaAQjiDIKOB0Z7zvnWyvvWsr+MxuJoreSuKBQLdq5jjQ
- Gy7w==
-X-Gm-Message-State: AO0yUKXPRuiQApjTlJQRHflVetmHO5WeLZMDgTsZWmK5TBFrecUJWz43
- J7xeaO2jFfyEKddWkYagabN/0Q==
-X-Google-Smtp-Source: AK7set8oGElELa57SFMOVPHsjEarbsqRKrfiApe19dFZmlguEIBKHSV7GDl/DhRi35zUM2j6Fcy9tw==
-X-Received: by 2002:a17:90a:7a8f:b0:237:c7ed:8f4d with SMTP id
- q15-20020a17090a7a8f00b00237c7ed8f4dmr6495971pjf.15.1677475818072; 
- Sun, 26 Feb 2023 21:30:18 -0800 (PST)
+ bh=jXzb0wguddcKP79wDFGGeUAakOtFrc7V197g1pVsdMU=;
+ b=6WuaQHNerE3AUKSBn/oHirdzODQyQih4tMWX3Mq1HaMBuV2eoXsgHF1No4TslhmDpm
+ hzuS2QNpyrg941T3k0Vszjusiha1uZSmprXXD7OTTRBA9z6uMq1TILXH7Z2Mjo1aC1xz
+ M+vp1E52Oc+eIEcD04rkS/T5h4y4y2A1+4OfhVIuoNPgISxhZDLMwGGRBGUTPaXh+Bq9
+ VKTkFz0bJJdGRM8t+RoCfVLPdzG23xiFWTCv8xhXC8CH76ncR+VV4RFixqux2CEZy2ms
+ Nb7OKGvq8V/gEOzltadrGqNLV7/iXtLU7rCNnqURYIgda1VXQOLHqxA4M+LMVbRHaZ74
+ VSdA==
+X-Gm-Message-State: AO0yUKX22TAr/SJbPiRHsVtGSxjsDI+qw7uTKJvV4hKDuoRg5oxrm48T
+ 56e42040jOtZG34nBoWQy+rDsA==
+X-Google-Smtp-Source: AK7set+2cybHq0gFkCel5osP8mALq0PJdKb84YjeQSa6Wwycr61rAL6sPvJbfGbb/k6rlaDJyygzHg==
+X-Received: by 2002:a17:90b:350f:b0:234:86a5:f800 with SMTP id
+ ls15-20020a17090b350f00b0023486a5f800mr25701915pjb.34.1677475832967; 
+ Sun, 26 Feb 2023 21:30:32 -0800 (PST)
 Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
  by smtp.gmail.com with ESMTPSA id
- v4-20020a17090a520400b002369e16b276sm5172926pjh.32.2023.02.26.21.30.15
+ v4-20020a17090a520400b002369e16b276sm5172926pjh.32.2023.02.26.21.30.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Feb 2023 21:30:17 -0800 (PST)
+ Sun, 26 Feb 2023 21:30:32 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, kbastian@mail.uni-paderborn.de,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
- edgar.iglesias@gmail.com
-Subject: [PATCH v2 46/76] target/mips: Drop tcg_temp_free from
- vr54xx_translate.c
-Date: Sun, 26 Feb 2023 19:24:35 -1000
-Message-Id: <20230227052505.352889-47-richard.henderson@linaro.org>
+ edgar.iglesias@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v2 51/76] target/riscv: Drop ftemp_new
+Date: Sun, 26 Feb 2023 19:24:40 -1000
+Message-Id: <20230227052505.352889-52-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230227052505.352889-1-richard.henderson@linaro.org>
 References: <20230227052505.352889-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::643;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x643.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -84,30 +84,100 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 05:30:28 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 05:30:48 -0000
 
-Translators are no longer required to free tcg temporaries.
+Translators are no longer required to free tcg temporaries,
+therefore there's no need to record temps for later freeing.
+Replace the few uses with tcg_temp_new_i64.
 
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/mips/tcg/vr54xx_translate.c | 4 ----
- 1 file changed, 4 deletions(-)
+ target/riscv/translate.c | 24 ++++--------------------
+ 1 file changed, 4 insertions(+), 20 deletions(-)
 
-diff --git a/target/mips/tcg/vr54xx_translate.c b/target/mips/tcg/vr54xx_translate.c
-index a7d241e4e7..804672f84c 100644
---- a/target/mips/tcg/vr54xx_translate.c
-+++ b/target/mips/tcg/vr54xx_translate.c
-@@ -49,10 +49,6 @@ static bool trans_mult_acc(DisasContext *ctx, arg_r *a,
-     gen_helper_mult_acc(t0, cpu_env, t0, t1);
- 
-     gen_store_gpr(t0, a->rd);
--
--    tcg_temp_free(t0);
--    tcg_temp_free(t1);
--
-     return true;
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index f9d5d1097e..273e566d66 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -106,9 +106,6 @@ typedef struct DisasContext {
+     TCGv zero;
+     /* Space for 3 operands plus 1 extra for address computation. */
+     TCGv temp[4];
+-    /* Space for 4 operands(1 dest and <=3 src) for float point computation */
+-    TCGv_i64 ftemp[4];
+-    uint8_t nftemp;
+     /* PointerMasking extension */
+     bool pm_mask_enabled;
+     bool pm_base_enabled;
+@@ -431,12 +428,6 @@ static void gen_set_gpr128(DisasContext *ctx, int reg_num, TCGv rl, TCGv rh)
+     }
  }
  
+-static TCGv_i64 ftemp_new(DisasContext *ctx)
+-{
+-    assert(ctx->nftemp < ARRAY_SIZE(ctx->ftemp));
+-    return ctx->ftemp[ctx->nftemp++] = tcg_temp_new_i64();
+-}
+-
+ static TCGv_i64 get_fpr_hs(DisasContext *ctx, int reg_num)
+ {
+     if (!ctx->cfg_ptr->ext_zfinx) {
+@@ -450,7 +441,7 @@ static TCGv_i64 get_fpr_hs(DisasContext *ctx, int reg_num)
+     case MXL_RV32:
+ #ifdef TARGET_RISCV32
+     {
+-        TCGv_i64 t = ftemp_new(ctx);
++        TCGv_i64 t = tcg_temp_new_i64();
+         tcg_gen_ext_i32_i64(t, cpu_gpr[reg_num]);
+         return t;
+     }
+@@ -476,7 +467,7 @@ static TCGv_i64 get_fpr_d(DisasContext *ctx, int reg_num)
+     switch (get_xl(ctx)) {
+     case MXL_RV32:
+     {
+-        TCGv_i64 t = ftemp_new(ctx);
++        TCGv_i64 t = tcg_temp_new_i64();
+         tcg_gen_concat_tl_i64(t, cpu_gpr[reg_num], cpu_gpr[reg_num + 1]);
+         return t;
+     }
+@@ -496,12 +487,12 @@ static TCGv_i64 dest_fpr(DisasContext *ctx, int reg_num)
+     }
+ 
+     if (reg_num == 0) {
+-        return ftemp_new(ctx);
++        return tcg_temp_new_i64();
+     }
+ 
+     switch (get_xl(ctx)) {
+     case MXL_RV32:
+-        return ftemp_new(ctx);
++        return tcg_temp_new_i64();
+ #ifdef TARGET_RISCV64
+     case MXL_RV64:
+         return cpu_gpr[reg_num];
+@@ -1207,8 +1198,6 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->cs = cs;
+     ctx->ntemp = 0;
+     memset(ctx->temp, 0, sizeof(ctx->temp));
+-    ctx->nftemp = 0;
+-    memset(ctx->ftemp, 0, sizeof(ctx->ftemp));
+     ctx->pm_mask_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_MASK_ENABLED);
+     ctx->pm_base_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_BASE_ENABLED);
+     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
+@@ -1244,11 +1233,6 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+         ctx->temp[i] = NULL;
+     }
+     ctx->ntemp = 0;
+-    for (i = ctx->nftemp - 1; i >= 0; --i) {
+-        tcg_temp_free_i64(ctx->ftemp[i]);
+-        ctx->ftemp[i] = NULL;
+-    }
+-    ctx->nftemp = 0;
+ 
+     /* Only the first insn within a TB is allowed to cross a page boundary. */
+     if (ctx->base.is_jmp == DISAS_NEXT) {
 -- 
 2.34.1
 
