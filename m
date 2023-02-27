@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWWIk-0005Ho-3i
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:43:54 -0500
+	id 1pWWIl-0005Ky-4F
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:43:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWIW-0004d6-A2
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:43:47 -0500
-Received: from mail-pf1-x441.google.com ([2607:f8b0:4864:20::441])
+ id 1pWWIf-0004s5-5Z
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:43:49 -0500
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWIT-000580-0G
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:43:39 -0500
-Received: by mail-pf1-x441.google.com with SMTP id fd25so2816124pfb.1
- for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:43:36 -0800 (PST)
+ id 1pWWIX-0005Af-TA
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:43:48 -0500
+Received: by mail-pf1-x42d.google.com with SMTP id u20so2790906pfm.7
+ for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:43:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dFwp7rJLT3ezFoTtdpkm7g7WVshe2Fl4tPXf7GfT8CY=;
- b=Xys5m/BhbJaiCezwG82ZLYx/sXlKRyOWp1V43O+ESWxJ3q7z7L/1IWSXsz/lgCVpB2
- I8KNFl3Fu088dUar4wziVBNBRYCKoU3hQV5TH+h90k7dGz6S/tMJLB3XJqDSv8qh/E4f
- ghr49G7CYMIg+goESjyPWoDAbhfvQq4mCgU1R9EPILtsWX/UcB3oBtFaILFttPoHz+sY
- TMEHDTSYROdZv8CIOiqtdgN0wOHReaW9Y+WFNprr4rrDSCnOV9CTtkKDMxTEfvM45a89
- 97D1MlecNJU0s/ZlDE8qVbvid6Z0MBRFJLDXUN7k5m586rIVYX1dkRRjtf2eryG8N77y
- QxLg==
+ bh=jyCeX4bwIEzy4e7YtKlgTxEYjmitvX4LaioZWsLyP/4=;
+ b=rNZ0GH8aMlSI7aKARZKSb/9/XbQu4UwWzNY6VQUM5Fb8LSaBKB6+kAH5GNH53hPLn7
+ nHDB+SLwrkBLuKxOEzK+aVwp9RdXAvQDh7OfnPBxWOMiMvQAfsrvuabzIANAMTzWd+E4
+ RlkvKlN9F0ql/zT8Q+Ti1fSZ95s//C73M/GLa1o4Dy08zHBLYINFDaSvPaRVxSY1knhA
+ tuZ8BYNqAFEHqBXfoSkc8ko1lg3EYT4E2qlmN7laK12TnGSpRmzs61HAcv8y9gBLSxfa
+ h04HLteuy5uMoWTGedFtgiLRk0iCR4s98BmOU1hAckoH3RQVh2ubH/Gr4N8BFZZ1qlXf
+ QgqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dFwp7rJLT3ezFoTtdpkm7g7WVshe2Fl4tPXf7GfT8CY=;
- b=sOJqGw4ZIieLKpFfSfxHfLtWeCgXLXQM6sn446j3uh5XyYksMh/0GQyQSLkEaD23pk
- Y5KZMMz5XW9jKgZCmE8jyACHuR594BPZ2OxGYZ28sEb/oURaKduaO7bETQvbPXtzeo8B
- teyJIRpnXDhDY6cYJsPY0aAI6ZUwUuZ+hI0aZah4i2Ouu4GS8/Y7q/AjqN8UwBKqojWx
- gecqFV8zIaL9y7WfcoDjiFWwcjHlx9DF7E2gO82A+R0iGBOIwScPLr4wwj6qOqhDPRSe
- BY8CgydmGgkEL9vem/jt7jWgz+yofYPO+xLVcicdJCElpkgm9NgpY7VFjKU9ihp1aQEh
- DNag==
-X-Gm-Message-State: AO0yUKWypBODhageTPBVtQfIVwwPVLiAn65+TEffU5vZfQSarP/ghlIT
- V8qiXItUW8Jr5ZIyBBLdiFqfJw==
-X-Google-Smtp-Source: AK7set8Rtcnirnn4zrZSrRGGY5iZBqATjlxAkru+dJEDU7IMIE+hPyNLIzT+4ftnI2iQsGnwmAmx/w==
-X-Received: by 2002:aa7:9a1b:0:b0:590:921d:5740 with SMTP id
- w27-20020aa79a1b000000b00590921d5740mr20538709pfj.13.1677476615305; 
- Sun, 26 Feb 2023 21:43:35 -0800 (PST)
+ bh=jyCeX4bwIEzy4e7YtKlgTxEYjmitvX4LaioZWsLyP/4=;
+ b=HzBWTAnKrDeNhXKj+MwFbCOfKW8izOgRQcQ/FA7YDlrLMDBO7OtRinjnXPoRgx4+FY
+ sxKXEpcF+Ogy3mcsqhvEC9pMJrefkWp/HqYbCUZZ9MkPmNSfvlJ2E55PDz/4VQA6TuJj
+ yvo0+wWZX0zjwfxCv8pnmXcMcb04Xg73au5ed/65hrR0y5KKt/6/zTYrHnL2LDGWUJHp
+ AHiOOaVkPMrAJ7wG1yR+vdXqLvVh9Rtx73rXzWbzarb2mrQnN/MHYh/1TvFDnMowF2Ha
+ ek+uj7S0a539Gwh/sEUhvtVnZrauLYstkgSNh3UqLZC0kReNaTsN3sQr8bHNTH01R10H
+ Y42w==
+X-Gm-Message-State: AO0yUKWh9tpemMqHuwtNhl9fJkHWpPejt8liZfRfDYoTMLvAxUhRITaE
+ JSwRDf69wuk1/fpZ3fHdRxF0AQ==
+X-Google-Smtp-Source: AK7set+AGMHBvRaJd10ZN+qRSUq9A0zk/67aECI/xyyGol6VfnrOWvaw4m06tun2OHMVPGxjYJSm8w==
+X-Received: by 2002:a05:6a00:f95:b0:5a8:d3d9:e03a with SMTP id
+ ct21-20020a056a000f9500b005a8d3d9e03amr7973139pfb.0.1677476620649; 
+ Sun, 26 Feb 2023 21:43:40 -0800 (PST)
 Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
  by smtp.gmail.com with ESMTPSA id
- d10-20020aa7868a000000b005cdc64a287dsm3317137pfo.115.2023.02.26.21.43.32
+ d10-20020aa7868a000000b005cdc64a287dsm3317137pfo.115.2023.02.26.21.43.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Feb 2023 21:43:34 -0800 (PST)
+ Sun, 26 Feb 2023 21:43:40 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -54,17 +54,16 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
  edgar.iglesias@gmail.com
-Subject: [PATCH 19/70] target/hexagon/idef-parser: Use gen_constant for
- gen_extend_tcg_width_op
-Date: Sun, 26 Feb 2023 19:41:42 -1000
-Message-Id: <20230227054233.390271-20-richard.henderson@linaro.org>
+Subject: [PATCH 21/70] target/hppa: Avoid use of tcg_const_i32 throughout
+Date: Sun, 26 Feb 2023 19:41:44 -1000
+Message-Id: <20230227054233.390271-22-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230227054233.390271-1-richard.henderson@linaro.org>
 References: <20230227054233.390271-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::441;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x441.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -84,67 +83,89 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 05:43:47 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 05:43:49 -0000
 
-We already have a temporary, res, which we can use for the intermediate
-shift result.  Simplify the constant to -1 instead of 0xf*f.
-This was the last use of gen_tmp_value, so remove it.
+All uses were read-write, so replace with a new
+allocation and initialization.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/hexagon/idef-parser/parser-helpers.c | 30 +++------------------
- 1 file changed, 3 insertions(+), 27 deletions(-)
+ target/hppa/translate.c | 21 +++++++++++----------
+ 1 file changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/target/hexagon/idef-parser/parser-helpers.c b/target/hexagon/idef-parser/parser-helpers.c
-index c0e6f2190c..e1a55412c8 100644
---- a/target/hexagon/idef-parser/parser-helpers.c
-+++ b/target/hexagon/idef-parser/parser-helpers.c
-@@ -305,26 +305,6 @@ HexValue gen_tmp(Context *c,
-     return rvalue;
+diff --git a/target/hppa/translate.c b/target/hppa/translate.c
+index 3ea50d0cec..6a3154ebc6 100644
+--- a/target/hppa/translate.c
++++ b/target/hppa/translate.c
+@@ -135,8 +135,6 @@
+ #define tcg_gen_extract_reg  tcg_gen_extract_i64
+ #define tcg_gen_sextract_reg tcg_gen_sextract_i64
+ #define tcg_gen_extract2_reg tcg_gen_extract2_i64
+-#define tcg_const_reg        tcg_const_i64
+-#define tcg_const_local_reg  tcg_const_local_i64
+ #define tcg_constant_reg     tcg_constant_i64
+ #define tcg_gen_movcond_reg  tcg_gen_movcond_i64
+ #define tcg_gen_add2_reg     tcg_gen_add2_i64
+@@ -228,8 +226,6 @@
+ #define tcg_gen_extract_reg  tcg_gen_extract_i32
+ #define tcg_gen_sextract_reg tcg_gen_sextract_i32
+ #define tcg_gen_extract2_reg tcg_gen_extract2_i32
+-#define tcg_const_reg        tcg_const_i32
+-#define tcg_const_local_reg  tcg_const_local_i32
+ #define tcg_constant_reg     tcg_constant_i32
+ #define tcg_gen_movcond_reg  tcg_gen_movcond_i32
+ #define tcg_gen_add2_reg     tcg_gen_add2_i32
+@@ -574,7 +570,9 @@ static TCGv_i32 load_frw_i32(unsigned rt)
+ static TCGv_i32 load_frw0_i32(unsigned rt)
+ {
+     if (rt == 0) {
+-        return tcg_const_i32(0);
++        TCGv_i32 ret = tcg_temp_new_i32();
++        tcg_gen_movi_i32(ret, 0);
++        return ret;
+     } else {
+         return load_frw_i32(rt);
+     }
+@@ -582,15 +580,15 @@ static TCGv_i32 load_frw0_i32(unsigned rt)
+ 
+ static TCGv_i64 load_frw0_i64(unsigned rt)
+ {
++    TCGv_i64 ret = tcg_temp_new_i64();
+     if (rt == 0) {
+-        return tcg_const_i64(0);
++        tcg_gen_movi_i64(ret, 0);
+     } else {
+-        TCGv_i64 ret = tcg_temp_new_i64();
+         tcg_gen_ld32u_i64(ret, cpu_env,
+                           offsetof(CPUHPPAState, fr[rt & 31])
+                           + (rt & 32 ? LO_OFS : HI_OFS));
+-        return ret;
+     }
++    return ret;
  }
  
--static HexValue gen_tmp_value(Context *c,
--                       YYLTYPE *locp,
--                       const char *value,
--                       unsigned bit_width,
--                       HexSignedness signedness)
--{
--    HexValue rvalue;
--    assert(bit_width == 32 || bit_width == 64);
--    memset(&rvalue, 0, sizeof(HexValue));
--    rvalue.type = TEMP;
--    rvalue.bit_width = bit_width;
--    rvalue.signedness = signedness;
--    rvalue.is_dotnew = false;
--    rvalue.tmp.index = c->inst.tmp_count;
--    OUT(c, locp, "TCGv_i", &bit_width, " tmp_", &c->inst.tmp_count,
--        " = tcg_const_i", &bit_width, "(", value, ");\n");
--    c->inst.tmp_count++;
--    return rvalue;
--}
--
- static HexValue gen_constant_from_imm(Context *c,
-                                       YYLTYPE *locp,
-                                       HexValue *value)
-@@ -1120,15 +1100,11 @@ static HexValue gen_extend_tcg_width_op(Context *c,
-     OUT(c, locp, "tcg_gen_subfi_i", &dst_width);
-     OUT(c, locp, "(", &shift, ", ", &dst_width, ", ", &src_width_m, ");\n");
-     if (signedness == UNSIGNED) {
--        const char *mask_str = (dst_width == 32)
--            ? "0xffffffff"
--            : "0xffffffffffffffff";
--        HexValue mask = gen_tmp_value(c, locp, mask_str,
--                                     dst_width, UNSIGNED);
-+        HexValue mask = gen_constant(c, locp, "-1", dst_width, UNSIGNED);
-         OUT(c, locp, "tcg_gen_shr_i", &dst_width, "(",
--            &mask, ", ", &mask, ", ", &shift, ");\n");
-+            &res, ", ", &mask, ", ", &shift, ");\n");
-         OUT(c, locp, "tcg_gen_and_i", &dst_width, "(",
--            &res, ", ", value, ", ", &mask, ");\n");
-+            &res, ", ", &res, ", ", value, ");\n");
+ static void save_frw_i32(unsigned rt, TCGv_i32 val)
+@@ -613,7 +611,9 @@ static TCGv_i64 load_frd(unsigned rt)
+ static TCGv_i64 load_frd0(unsigned rt)
+ {
+     if (rt == 0) {
+-        return tcg_const_i64(0);
++        TCGv_i64 ret = tcg_temp_new_i64();
++        tcg_gen_movi_i64(ret, 0);
++        return ret;
      } else {
-         OUT(c, locp, "tcg_gen_shl_i", &dst_width, "(",
-             &res, ", ", value, ", ", &shift, ");\n");
+         return load_frd(rt);
+     }
+@@ -3330,7 +3330,8 @@ static bool do_depw_sar(DisasContext *ctx, unsigned rt, unsigned c,
+     /* Convert big-endian bit numbering in SAR to left-shift.  */
+     tcg_gen_xori_reg(shift, cpu_sar, TARGET_REGISTER_BITS - 1);
+ 
+-    mask = tcg_const_reg(msb + (msb - 1));
++    mask = tcg_temp_new();
++    tcg_gen_movi_reg(mask, msb + (msb - 1));
+     tcg_gen_and_reg(tmp, val, mask);
+     if (rs) {
+         tcg_gen_shl_reg(mask, mask, shift);
 -- 
 2.34.1
 
