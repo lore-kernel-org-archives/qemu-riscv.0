@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWWEV-00017G-55
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:39:31 -0500
+	id 1pWWEW-0001Q0-LU
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:39:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWD9-0003PZ-T8
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:38:09 -0500
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ id 1pWWDC-0003Qx-HX
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:38:18 -0500
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWD4-0002Wa-5c
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:38:03 -0500
-Received: by mail-pl1-x62b.google.com with SMTP id y11so1403174plg.1
- for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:38:01 -0800 (PST)
+ id 1pWWD9-0002by-FG
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:38:08 -0500
+Received: by mail-pf1-x432.google.com with SMTP id bd34so2803131pfb.3
+ for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:38:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nOjB7Oa3s7/QHz69KU/odzNJz8JnUW0khbG4X3to11I=;
- b=DD3HF3A8LG+tMhcugVaapMk7hvpK328xX0PIrq8xRIw/RZ2RpQHwOyqF8oVysCZ/Oq
- yTZOww5xlhB5sQsiwNMQx1oDcDC0fpgk3kG3WlM4klJu6GnC0ny+00k/XTWgyysZDNx6
- y8MUWGco1YHmcX9UAhDyksn0mZbG6lSkOP5rvyb9948NFG75mstJgBYl17ROEXodkcF9
- hnBxaQKq8SKPrz42eqOocOVeIFpg+X+ypYuLEIu00N03ELFRQ23ljP1O+yj7fPCQzj81
- jih+Z5RWhXi5vdkzlHPUmG7yhJTNfcZCxQt4WzDPxNVvAwFCfYOLjOQPO3Con7mrTCnh
- aR6A==
+ bh=YhL2WzjGmls46D+quq34ze/ulksmGA+cQwYE9pUognw=;
+ b=IqZ+RBL/2YYgOsYsdvePHMAGCFEFsncU1Fp92DEasNpFqQ9VMjHTWrnkmbtD052KBO
+ /Vv04Uz9AZxyCUNMVTIq4ylwpeiQ0sS49zirXicKzO3MCypmMwb1G2osdfm+DV+XMO9Q
+ OWxaTZhT3asJurwFQHXz/TCD+Li/Lp85Hs2eeBYQGNyK50vTgUIE7s1xO8iiP2l5PNxf
+ ap3OLGVCkLlDocjvNOqF3v0elqZOyTXUvUihJP+X4gpVvENMyFS1fFLuEw/4tlbQLZek
+ jxuql4dIDxK6jm25kCDD462Ue/A/cFDuLWmYXFRfZ7PkZxwkeyt1WVOiP4Y7O/ocRoGP
+ opDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nOjB7Oa3s7/QHz69KU/odzNJz8JnUW0khbG4X3to11I=;
- b=QgRCPiF1RC5M3RvEQvEFkzCS2c6b4EvAjlERVkteJpj3FS2M6Xc0nTOMiShSOX7vgX
- K+PIln7lg/FwVZ9a+GcaOBgYmnL6+VZ7mu60hdbwxATeOY6iRyiZEIJazNVQytta5GLq
- T2c6x8R4rMgVzzT0M9rCbgv42cZucCqLcbnhKh+uGJiu+oLCbFGRz7tkzqoO88ndkUJa
- JcvXeqaPiTdCHkw2v1+Rb0r4aCXcpEg00d94tzhTP0r8/0I065W7uYo/MCF+wYNG0N/5
- 5+w56xdBasFSyvzZ4eoifwbJMFr1mWUaej/c0fFtgoxkhttpbPsbMmdRcyiOT5BqgJya
- TdYQ==
-X-Gm-Message-State: AO0yUKXjDdf3M6p/uWFTNTuNjslT/6gKqsSznRjg/23sFwR3JtZkq/5o
- N+R8mO6pn1YJZ0oT65USWL/w6A==
-X-Google-Smtp-Source: AK7set8I+KIkGzehL9vEKHzuFQ7ZehJyryMeMGq4xA5Cm13TX3FuNRteo+5XU7New6QpsPB623QWkQ==
-X-Received: by 2002:a05:6a20:428b:b0:cd:6c14:9854 with SMTP id
- o11-20020a056a20428b00b000cd6c149854mr1300643pzj.26.1677476281419; 
- Sun, 26 Feb 2023 21:38:01 -0800 (PST)
+ bh=YhL2WzjGmls46D+quq34ze/ulksmGA+cQwYE9pUognw=;
+ b=vs15vxYf/HKLINSMWCHJVHxz2EkH69OWyNR46vDQOoRRtWKmqS0bPCWZeaVoMpazW3
+ etNNYDBpuBq9HABR0A+J7KsBoE4MiF7p36rUsYPrbLnH+jDq8jX0BlXAP6udz3milWhq
+ k1RYtTSUNQliXTdwP711Pe3vaLGmk/OPUrOSfhUhluZtzcQsMwYgTi4pru+AStfkP7Sm
+ VTjkS6VGmQfyBciO+CFpm0OCr+9oqk7izJ24OCTO1cSeUi3Y+MhSK7Gq3vBGWCPVP8pv
+ QhF7gC/OW4lgTNaPdzDwdJXpZOCp4624cKOto9e4p2gw7ydj8t9uQs/Kuky/kOsTOHtW
+ loeA==
+X-Gm-Message-State: AO0yUKXe+nUapq7xV9zFHvTe/K18v4GzJJDzmeGzjT+RDFyhtZcArVp/
+ NE5C3Kexh3fYiSKc0/tkFHI+xw==
+X-Google-Smtp-Source: AK7set8aosRGl0tv7yt+NrwMTMskIu6/SkHD5TZMa7qceHG7LodJuDjP5NUygtWqWeMD/ihAuU6e0w==
+X-Received: by 2002:aa7:99dc:0:b0:5e5:e066:2304 with SMTP id
+ v28-20020aa799dc000000b005e5e0662304mr8267814pfi.31.1677476283963; 
+ Sun, 26 Feb 2023 21:38:03 -0800 (PST)
 Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
  by smtp.gmail.com with ESMTPSA id
- k12-20020aa792cc000000b005a7c892b435sm3342137pfa.25.2023.02.26.21.37.59
+ k12-20020aa792cc000000b005a7c892b435sm3342137pfa.25.2023.02.26.21.38.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Feb 2023 21:38:01 -0800 (PST)
+ Sun, 26 Feb 2023 21:38:03 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -55,17 +55,17 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
  edgar.iglesias@gmail.com,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v4 20/31] target/arm: Don't use tcg_temp_local_new_*
-Date: Sun, 26 Feb 2023 19:36:50 -1000
-Message-Id: <20230227053701.368744-21-richard.henderson@linaro.org>
+Subject: [PATCH v4 21/31] target/cris: Don't use tcg_temp_local_new
+Date: Sun, 26 Feb 2023 19:36:51 -1000
+Message-Id: <20230227053701.368744-22-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230227053701.368744-1-richard.henderson@linaro.org>
 References: <20230227053701.368744-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x432.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -85,79 +85,76 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 05:38:19 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 05:38:20 -0000
 
-Since tcg_temp_new_* is now identical, use those.
+Since tcg_temp_new is now identical, use that.
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/arm/translate-sve.c | 6 +++---
- target/arm/translate.c     | 6 +++---
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ target/cris/translate.c         |  6 +++---
+ target/cris/translate_v10.c.inc | 10 +++++-----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/target/arm/translate-sve.c b/target/arm/translate-sve.c
-index 02150d93e8..718a5bce1b 100644
---- a/target/arm/translate-sve.c
-+++ b/target/arm/translate-sve.c
-@@ -2694,7 +2694,7 @@ static bool do_clast_vector(DisasContext *s, arg_rprr_esz *a, bool before)
-         return true;
-     }
+diff --git a/target/cris/translate.c b/target/cris/translate.c
+index 905d01288e..a959b27373 100644
+--- a/target/cris/translate.c
++++ b/target/cris/translate.c
+@@ -1621,7 +1621,7 @@ static int dec_bound_r(CPUCRISState *env, DisasContext *dc)
+     LOG_DIS("bound.%c $r%u, $r%u\n",
+             memsize_char(size), dc->op1, dc->op2);
+     cris_cc_mask(dc, CC_MASK_NZ);
+-    l0 = tcg_temp_local_new();
++    l0 = tcg_temp_new();
+     dec_prep_move_r(dc, dc->op1, dc->op2, size, 0, l0);
+     cris_alu(dc, CC_OP_BOUND, cpu_R[dc->op2], cpu_R[dc->op2], l0, 4);
+     tcg_temp_free(l0);
+@@ -2404,8 +2404,8 @@ static int dec_bound_m(CPUCRISState *env, DisasContext *dc)
+             dc->op1, dc->postinc ? "+]" : "]",
+             dc->op2);
  
--    last = tcg_temp_local_new_i32();
-+    last = tcg_temp_new_i32();
-     over = gen_new_label();
+-    l[0] = tcg_temp_local_new();
+-    l[1] = tcg_temp_local_new();
++    l[0] = tcg_temp_new();
++    l[1] = tcg_temp_new();
+         insn_len = dec_prep_alu_m(env, dc, 0, memsize, l[0], l[1]);
+     cris_cc_mask(dc, CC_MASK_NZ);
+     cris_alu(dc, CC_OP_BOUND, cpu_R[dc->op2], l[0], l[1], 4);
+diff --git a/target/cris/translate_v10.c.inc b/target/cris/translate_v10.c.inc
+index f500e93447..9660f28584 100644
+--- a/target/cris/translate_v10.c.inc
++++ b/target/cris/translate_v10.c.inc
+@@ -68,9 +68,9 @@ static void gen_store_v10_conditional(DisasContext *dc, TCGv addr, TCGv val,
+                        unsigned int size, int mem_index)
+ {
+     TCGLabel *l1 = gen_new_label();
+-    TCGv taddr = tcg_temp_local_new();
+-    TCGv tval = tcg_temp_local_new();
+-    TCGv t1 = tcg_temp_local_new();
++    TCGv taddr = tcg_temp_new();
++    TCGv tval = tcg_temp_new();
++    TCGv t1 = tcg_temp_new();
+     dc->postinc = 0;
+     cris_evaluate_flags(dc);
  
-     find_last_active(s, last, esz, a->pg);
-@@ -4342,7 +4342,7 @@ void gen_sve_ldr(DisasContext *s, TCGv_ptr base, int vofs,
-         tcg_temp_free_i64(t0);
-     } else {
-         TCGLabel *loop = gen_new_label();
--        TCGv_ptr tp, i = tcg_const_local_ptr(0);
-+        TCGv_ptr tp, i = tcg_const_ptr(0);
+@@ -434,7 +434,7 @@ static void dec10_reg_bound(DisasContext *dc, int size)
+ {
+     TCGv t;
  
-         gen_set_label(loop);
+-    t = tcg_temp_local_new();
++    t = tcg_temp_new();
+     t_gen_zext(t, cpu_R[dc->src], size);
+     cris_alu(dc, CC_OP_BOUND, cpu_R[dc->dst], cpu_R[dc->dst], t, 4);
+     tcg_temp_free(t);
+@@ -935,7 +935,7 @@ static int dec10_ind_bound(CPUCRISState *env, DisasContext *dc,
+     int rd = dc->dst;
+     TCGv t;
  
-@@ -4427,7 +4427,7 @@ void gen_sve_str(DisasContext *s, TCGv_ptr base, int vofs,
-         tcg_temp_free_i64(t0);
-     } else {
-         TCGLabel *loop = gen_new_label();
--        TCGv_ptr tp, i = tcg_const_local_ptr(0);
-+        TCGv_ptr tp, i = tcg_const_ptr(0);
- 
-         gen_set_label(loop);
- 
-diff --git a/target/arm/translate.c b/target/arm/translate.c
-index 92955d505c..9c8e1ac04c 100644
---- a/target/arm/translate.c
-+++ b/target/arm/translate.c
-@@ -7136,7 +7136,7 @@ static bool op_strex(DisasContext *s, arg_STREX *a, MemOp mop, bool rel)
-         tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-     }
- 
--    addr = tcg_temp_local_new_i32();
-+    addr = tcg_temp_new_i32();
-     load_reg_var(s, addr, a->rn);
-     tcg_gen_addi_i32(addr, addr, a->imm);
- 
-@@ -7289,7 +7289,7 @@ static bool op_ldrex(DisasContext *s, arg_LDREX *a, MemOp mop, bool acq)
-         return true;
-     }
- 
--    addr = tcg_temp_local_new_i32();
-+    addr = tcg_temp_new_i32();
-     load_reg_var(s, addr, a->rn);
-     tcg_gen_addi_i32(addr, addr, a->imm);
- 
-@@ -8696,7 +8696,7 @@ static bool trans_LE(DisasContext *s, arg_LE *a)
-          * Decrement by 1 << (4 - LTPSIZE). We need to use a TCG local
-          * so that decr stays live after the brcondi.
-          */
--        TCGv_i32 decr = tcg_temp_local_new_i32();
-+        TCGv_i32 decr = tcg_temp_new_i32();
-         TCGv_i32 ltpsize = load_cpu_field(v7m.ltpsize);
-         tcg_gen_sub_i32(decr, tcg_constant_i32(4), ltpsize);
-         tcg_gen_shl_i32(decr, tcg_constant_i32(1), decr);
+-    t = tcg_temp_local_new();
++    t = tcg_temp_new();
+     insn_len += dec10_prep_move_m(env, dc, 0, size, t);
+     cris_alu(dc, CC_OP_BOUND, cpu_R[dc->dst], cpu_R[rd], t, 4);
+     if (dc->dst == 15) {
 -- 
 2.34.1
 
