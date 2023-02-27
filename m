@@ -1,77 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWZJJ-0007oy-2l
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 03:56:41 -0500
+	id 1pWZS4-00062m-BP
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 04:05:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pWZJF-0007mG-Rx
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 03:56:39 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pWZJB-0000V5-9O
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 03:56:37 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id
- o38-20020a05600c512600b003e8320d1c11so6240150wms.1
- for <qemu-riscv@nongnu.org>; Mon, 27 Feb 2023 00:56:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=j2Fc/DeZ+De26dqkQ2sRwuObq0oMb3TqQV81baYUI+A=;
- b=bgD8MT6JFb+VptMnsoHxBaEw76OECuk8LsIuTFhJaEEzESDcQ+5X6wC0FDBDuSWeqf
- VakurL7ODRlUKbFg7lr1AW2R/Yr17mvpelGhXM2bF8PcSQBMyBuN5sq88a8eSJ/MlB67
- 0S/9ZL9im6sqB9W9TqG2NUnHNefqlXAeUMkVnDe57/YH4o94rhjMfU9jIVH4qeycjYoj
- qWAJmjn3ms2K7GXVOJiQ6QkbhwjiG72Io9WBfahfEYJCyJ7GK8kw6wHnYjOM3Yqsfvbw
- OZkuiN9nMukXCAcWtbsysxcfhkpP0wzPlAp6kl7khJkncfocATEj0Y9cArNrAPCQvlrr
- hpdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=j2Fc/DeZ+De26dqkQ2sRwuObq0oMb3TqQV81baYUI+A=;
- b=7T7F793HdqrTq0cpKT1vpJ3X//rVieDQmv8/coSnIp24BFUhTzPc6U+Ei6/V/DzGjD
- xJ/dxWLJTGzyG3JGlWOq+clHB6eJw3zvBYiZ7AkOz/arkxRCbcGshfYYf56V/DMzVrps
- eclF0Q3uo77+2FMDS8fvXBgGpPMDdeGQM4WXV6VVgOMEhV33WvQQwbZiV4rFuHqfuVkN
- WLxXQZglOJ4tI7RYuWGfNBzhlgu+4yKzs023RssV5jk/MHfVImH98fbIuBts4gfOyMB6
- xqDAc9+0dUg3PQ0r+GLT4+ILDjxB2qNYMYW9ciiLijUwvd5WCepjp5J0+iXnd213m+XC
- 8Egw==
-X-Gm-Message-State: AO0yUKUQME5+aLf/gmk6zlLDZMj2qbBtjeHZaJ3lS0I7ILWbYLdlgRfD
- PkVl6e16AaJ1d8u52id7A8UpKw==
-X-Google-Smtp-Source: AK7set/figWUcbIlydnneQPffQkOvaHR/NNYVvVKf6iSp3nzjFq8NWltIBp0Wg6gYjyV7Jq8WZjVuA==
-X-Received: by 2002:a05:600c:c8:b0:3d2:392e:905f with SMTP id
- u8-20020a05600c00c800b003d2392e905fmr17818578wmm.24.1677488191474; 
- Mon, 27 Feb 2023 00:56:31 -0800 (PST)
-Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- o6-20020a05600c510600b003e20a6fd604sm8846575wms.4.2023.02.27.00.56.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Feb 2023 00:56:30 -0800 (PST)
-Message-ID: <39ae5611-9fda-e0e4-96ab-dc10fd5572a5@linaro.org>
-Date: Mon, 27 Feb 2023 09:56:28 +0100
+ (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
+ id 1pWZRX-0005bq-3F; Mon, 27 Feb 2023 04:05:13 -0500
+Received: from forward105j.mail.yandex.net ([2a02:6b8:0:801:2::108])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
+ id 1pWZRP-0001pa-7V; Mon, 27 Feb 2023 04:05:08 -0500
+Received: from myt5-fc73f9af8654.qloud-c.yandex.net
+ (myt5-fc73f9af8654.qloud-c.yandex.net
+ [IPv6:2a02:6b8:c12:2898:0:640:fc73:f9af])
+ by forward105j.mail.yandex.net (Yandex) with ESMTP id 6C6214EC91CA;
+ Mon, 27 Feb 2023 12:02:31 +0300 (MSK)
+Received: by myt5-fc73f9af8654.qloud-c.yandex.net (smtp/Yandex) with ESMTPSA
+ id T2PcS10bGqM1-6YiTMaAk; Mon, 27 Feb 2023 12:02:30 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com; s=mail;
+ t=1677488550; bh=xFuPm4ylRWmpsXvYlS82iEPRaLHSipoR5XS4X1MgI1Y=;
+ h=Message-Id:Date:Cc:Subject:To:From;
+ b=Y45CJ8Fj3S4xwNKglAdGVHZZ6Dx07TXvzQuK66ru7S1hbV4HjXK0/VEpWWh9kkP7i
+ SQpIpCzo0ejyGwZq2U/MBmUVSGfYADly3xgFi66zxjP8KhE3fD68wLh5+coB6c1tD1
+ BnLv0Mq0ITTAF9xlh8UmO/hzSZwkPAfBMWm8jz1I=
+Authentication-Results: myt5-fc73f9af8654.qloud-c.yandex.net;
+ dkim=pass header.i=@syntacore.com
+From: Ivan Klokov <ivan.klokov@syntacore.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com,
+ philipp.tomsich@vrull.eu, Ivan Klokov <ivan.klokov@syntacore.com>
+Subject: [PATCH] Fix slli_uw decoding
+Date: Mon, 27 Feb 2023 12:02:28 +0300
+Message-Id: <20230227090228.17117-1-ivan.klokov@syntacore.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.8.0
-Subject: Re: [PATCH 29/70] target/microblaze: Avoid tcg_const_* throughout
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, kbastian@mail.uni-paderborn.de,
- ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
- tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
-References: <20230227054233.390271-1-richard.henderson@linaro.org>
- <20230227054233.390271-30-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230227054233.390271-30-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+Received-SPF: pass client-ip=2a02:6b8:0:801:2::108;
+ envelope-from=ivan.klokov@syntacore.com; helo=forward105j.mail.yandex.net
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,16 +55,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 08:56:40 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 09:05:16 -0000
 
-On 27/2/23 06:41, Richard Henderson wrote:
-> All uses are strictly read-only.
-> 
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   target/microblaze/translate.c | 35 +++++++++++++++--------------------
->   1 file changed, 15 insertions(+), 20 deletions(-)
+The decoding of the slli_uw currently contains decoding
+error: shamt part of opcode has six bits, not five.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Fixes 3de1fb71("target/riscv: update disas.c for xnor/orn/andn and slli.uw")
+
+Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
+---
+ disas/riscv.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/disas/riscv.c b/disas/riscv.c
+index ddda687c13..03cfefb0d3 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -1647,7 +1647,7 @@ const rv_opcode_data opcode_data[] = {
+     { "clzw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+     { "clzw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+     { "cpopw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+-    { "slli.uw", rv_codec_i_sh5, rv_fmt_rd_rs1_imm, NULL, 0, 0, 0 },
++    { "slli.uw", rv_codec_i_sh6, rv_fmt_rd_rs1_imm, NULL, 0, 0, 0 },
+     { "add.uw", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+     { "rolw", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+     { "rorw", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+@@ -2617,10 +2617,10 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+             switch (((inst >> 12) & 0b111)) {
+             case 0: op = rv_op_addiw; break;
+             case 1:
+-                switch (((inst >> 25) & 0b1111111)) {
++                switch (((inst >> 26) & 0b111111)) {
+                 case 0: op = rv_op_slliw; break;
+-                case 4: op = rv_op_slli_uw; break;
+-                case 48:
++                case 2: op = rv_op_slli_uw; break;
++                case 24:
+                     switch ((inst >> 20) & 0b11111) {
+                     case 0b00000: op = rv_op_clzw; break;
+                     case 0b00001: op = rv_op_ctzw; break;
+-- 
+2.34.1
 
 
