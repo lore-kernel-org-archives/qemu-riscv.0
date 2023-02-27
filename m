@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWWEQ-0000W2-Te
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:39:26 -0500
+	id 1pWWER-0000YY-Fq
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:39:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWDL-0003Xt-Jf
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:38:22 -0500
+ id 1pWWDS-0003mH-1Y
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:38:27 -0500
 Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWDG-00032p-2F
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:38:17 -0500
-Received: by mail-pf1-x436.google.com with SMTP id y10so2785331pfi.8
- for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:38:12 -0800 (PST)
+ id 1pWWDN-00032p-6Q
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:38:24 -0500
+Received: by mail-pf1-x436.google.com with SMTP id y10so2785458pfi.8
+ for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:38:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2x/6xSpCKlYJ34/8OxjWcHuDhp8kikr1JE7fyXvIhlE=;
- b=hx4WLylA/qHlDu5kQdj1q9ukeWDj6boWQxzuqLWxHTPD0v7tbmSLymQx3gbFnBaVC2
- dvtB+Ye1qIQp2J3dCH4MMJH9fwTl21r635hRtqHtrJyc50heVS/3yefF2ud4NUAHzpwP
- zwO/5P0212rBNhtelilOS8swj9WYl/yUVNAsQ6U0ai9dqL9ssKVzpzTbV2yjtqCoU00a
- DRK3z+r7XdE+3sN3lc9v3U3pyaaCBqOr76DX/eZtBM8oSTTFk07fhv9bv9FtePH8fe5e
- AaXOPM2X8aU3ohzS+odFo5yd52h6a08E2w/AOXru0H5PWxunfMkmeP800L1WkOolyFW9
- 6cMw==
+ bh=18JmFlWEdnV+s8Kjewsq0ZcZnDUj7UiObvsTbLqqvwo=;
+ b=nKhf73df0jSurL3IRj8qoqKAuIjblaKOEdGfsr97j679eUg38Gef6+xIHPUFFjVAik
+ J67oZM4Hhii5vR1AUGM6Uon6Qnzbach33jYxa3k0wv6VIxKtPUi/Q1fUlADYkfdVLLOU
+ 68uqqTuCIGnGhfMD+d9CloS1VeRkHByuNfvOAGw+spv0b/5hwM/nTlS/qJ/RBCH02K+W
+ leKue1HgxG9ndePCmsyU13P7+X+xLEBXZtnBSJhVulXQu/APSrVGqeIiYzGWCY27nTUr
+ R7TtypmYD6ilFCMX3cjFZZ1L1fZfdoeU3E0yuhF+ciAUii/BAH5pi1vUsKZXaWiAyg27
+ dKBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2x/6xSpCKlYJ34/8OxjWcHuDhp8kikr1JE7fyXvIhlE=;
- b=iEvQqgZNcX1TxiAHoo/gs4PPwOaKuFY/16UonoK7xIWT/IT/dwqteqME5DZl0h+QA/
- evHJoghNlXUgexpYRMeprY9yt7qVrWsra3Ajmjq26e8REyByyFYBFpPuPnS4P2z8yvHT
- Z9KYddSv3D3NqZVZzaC8V/+UbKZwBSdDIrY/VRp8OV9siaktpGWp/Tpzyh/aDdpKmY5E
- 7QlAtPZnptEHF/olWidIzK/noCJKfUWmD55L3YjWhvx2mpKeSRKehXH3nVtomfL0gW6X
- N+RQKYm1nRw7D4eGuyu7J+1sd38ahIKme57kUahSzxKvZqkHUiRqrMT3IQq0VAaX9JSS
- vAhw==
-X-Gm-Message-State: AO0yUKUKU6YK2jTDYRqA4WtDBCbU9cexLXHtQuBiXDVyZWs3/yqnaSQ2
- mktYs6WQrHf85FDaKqVg996VQF1HqfBeoPNtq+0=
-X-Google-Smtp-Source: AK7set9rxs/5ZpTNOECH4vONmlxmnqBGjqNrEScaagfpTZSjMUyF3DvkFNaQwnXpkNHXdW9ATlAnFA==
-X-Received: by 2002:a62:7bce:0:b0:5ce:ef1b:a86 with SMTP id
- w197-20020a627bce000000b005ceef1b0a86mr16749443pfc.2.1677476291613; 
- Sun, 26 Feb 2023 21:38:11 -0800 (PST)
+ bh=18JmFlWEdnV+s8Kjewsq0ZcZnDUj7UiObvsTbLqqvwo=;
+ b=Q/ypCHHbTGv3ine1LnzqtwlP4+jSIMBGAvRmy6qbl8A9W8/jkKga8MScU/bMz45omz
+ K/2/b6Gw708lTzVTSz+OpiE8UNG+Jg04vdZQKPiH/G9Rn6rPFelAYwSn3YNjjBi2AG09
+ QKwTSHstJVsbBw+UWkyuG6uFrIczDfAtUxD93Q+PJWXqMvVqmZk0UcsEjEsQ+2+nRSdm
+ UOObaZ97lecUlUA35DsCXTlDijIFfK9O9AtamCkAAXNHczuCgFDuQP9dVq7veQ4yTjrH
+ 4G6r7aUwdhFriy1T0qdLRHfZznwIq6KTDcUx/IU4OEAb9RF/W4D9aPz8EbB4r5cAD+AT
+ pB1Q==
+X-Gm-Message-State: AO0yUKWdQNqmvdPWVxi1pXkSoBygeuTBdieUz80JduTnLgrDZ2GEy8vk
+ KDCAoPcO0I0NgvluxBXyHaVUBw==
+X-Google-Smtp-Source: AK7set+Y2UXWQS1BWSdGx5t/xLlYU2Us3PDJJDKnej/j8VU/Rc9PLuUH9CV7COsmVpvcowviWJ0TPw==
+X-Received: by 2002:a62:3841:0:b0:5a9:c55b:2cae with SMTP id
+ f62-20020a623841000000b005a9c55b2caemr20329570pfa.31.1677476299373; 
+ Sun, 26 Feb 2023 21:38:19 -0800 (PST)
 Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
  by smtp.gmail.com with ESMTPSA id
- k12-20020aa792cc000000b005a7c892b435sm3342137pfa.25.2023.02.26.21.38.09
+ k12-20020aa792cc000000b005a7c892b435sm3342137pfa.25.2023.02.26.21.38.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Feb 2023 21:38:11 -0800 (PST)
+ Sun, 26 Feb 2023 21:38:18 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -55,9 +55,9 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
  edgar.iglesias@gmail.com,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v4 24/31] target/hppa: Don't use tcg_temp_local_new
-Date: Sun, 26 Feb 2023 19:36:54 -1000
-Message-Id: <20230227053701.368744-25-richard.henderson@linaro.org>
+Subject: [PATCH v4 27/31] target/ppc: Don't use tcg_temp_local_new
+Date: Sun, 26 Feb 2023 19:36:57 -1000
+Message-Id: <20230227053701.368744-28-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230227053701.368744-1-richard.henderson@linaro.org>
 References: <20230227053701.368744-1-richard.henderson@linaro.org>
@@ -72,7 +72,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,45 +85,97 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 05:38:23 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 05:38:28 -0000
 
-This wasn't actually used at all, just some unused
-macro re-definitions.
+Since tcg_temp_new is now identical, use that.
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/hppa/translate.c | 3 ---
- 1 file changed, 3 deletions(-)
+ target/ppc/translate.c              | 6 +++---
+ target/ppc/translate/spe-impl.c.inc | 8 ++++----
+ target/ppc/translate/vmx-impl.c.inc | 4 ++--
+ 3 files changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/target/hppa/translate.c b/target/hppa/translate.c
-index 0102cf451b..cee960949f 100644
---- a/target/hppa/translate.c
-+++ b/target/hppa/translate.c
-@@ -35,7 +35,6 @@
- #undef TCGv
- #undef tcg_temp_new
- #undef tcg_global_mem_new
--#undef tcg_temp_local_new
- #undef tcg_temp_free
+diff --git a/target/ppc/translate.c b/target/ppc/translate.c
+index 5fe6aa641e..2956021e89 100644
+--- a/target/ppc/translate.c
++++ b/target/ppc/translate.c
+@@ -4415,7 +4415,7 @@ static void gen_bcond(DisasContext *ctx, int type)
+     TCGv target;
  
- #if TARGET_LONG_BITS == 64
-@@ -59,7 +58,6 @@
+     if (type == BCOND_LR || type == BCOND_CTR || type == BCOND_TAR) {
+-        target = tcg_temp_local_new();
++        target = tcg_temp_new();
+         if (type == BCOND_CTR) {
+             tcg_gen_mov_tl(target, cpu_ctr);
+         } else if (type == BCOND_TAR) {
+@@ -5594,8 +5594,8 @@ static inline void gen_405_mulladd_insn(DisasContext *ctx, int opc2, int opc3,
+ {
+     TCGv t0, t1;
  
- #define tcg_temp_new         tcg_temp_new_i64
- #define tcg_global_mem_new   tcg_global_mem_new_i64
--#define tcg_temp_local_new   tcg_temp_local_new_i64
- #define tcg_temp_free        tcg_temp_free_i64
+-    t0 = tcg_temp_local_new();
+-    t1 = tcg_temp_local_new();
++    t0 = tcg_temp_new();
++    t1 = tcg_temp_new();
  
- #define tcg_gen_movi_reg     tcg_gen_movi_i64
-@@ -155,7 +153,6 @@
- #define TCGv_reg             TCGv_i32
- #define tcg_temp_new         tcg_temp_new_i32
- #define tcg_global_mem_new   tcg_global_mem_new_i32
--#define tcg_temp_local_new   tcg_temp_local_new_i32
- #define tcg_temp_free        tcg_temp_free_i32
+     switch (opc3 & 0x0D) {
+     case 0x05:
+diff --git a/target/ppc/translate/spe-impl.c.inc b/target/ppc/translate/spe-impl.c.inc
+index 2e6e799a25..bd8963db2b 100644
+--- a/target/ppc/translate/spe-impl.c.inc
++++ b/target/ppc/translate/spe-impl.c.inc
+@@ -168,7 +168,7 @@ static inline void gen_op_evsrwu(TCGv_i32 ret, TCGv_i32 arg1, TCGv_i32 arg2)
+ {
+     TCGLabel *l1 = gen_new_label();
+     TCGLabel *l2 = gen_new_label();
+-    TCGv_i32 t0 = tcg_temp_local_new_i32();
++    TCGv_i32 t0 = tcg_temp_new_i32();
  
- #define tcg_gen_movi_reg     tcg_gen_movi_i32
+     /* No error here: 6 bits are used */
+     tcg_gen_andi_i32(t0, arg2, 0x3F);
+@@ -185,7 +185,7 @@ static inline void gen_op_evsrws(TCGv_i32 ret, TCGv_i32 arg1, TCGv_i32 arg2)
+ {
+     TCGLabel *l1 = gen_new_label();
+     TCGLabel *l2 = gen_new_label();
+-    TCGv_i32 t0 = tcg_temp_local_new_i32();
++    TCGv_i32 t0 = tcg_temp_new_i32();
+ 
+     /* No error here: 6 bits are used */
+     tcg_gen_andi_i32(t0, arg2, 0x3F);
+@@ -202,7 +202,7 @@ static inline void gen_op_evslw(TCGv_i32 ret, TCGv_i32 arg1, TCGv_i32 arg2)
+ {
+     TCGLabel *l1 = gen_new_label();
+     TCGLabel *l2 = gen_new_label();
+-    TCGv_i32 t0 = tcg_temp_local_new_i32();
++    TCGv_i32 t0 = tcg_temp_new_i32();
+ 
+     /* No error here: 6 bits are used */
+     tcg_gen_andi_i32(t0, arg2, 0x3F);
+@@ -378,7 +378,7 @@ static inline void gen_evsel(DisasContext *ctx)
+     TCGLabel *l2 = gen_new_label();
+     TCGLabel *l3 = gen_new_label();
+     TCGLabel *l4 = gen_new_label();
+-    TCGv_i32 t0 = tcg_temp_local_new_i32();
++    TCGv_i32 t0 = tcg_temp_new_i32();
+ 
+     tcg_gen_andi_i32(t0, cpu_crf[ctx->opcode & 0x07], 1 << 3);
+     tcg_gen_brcondi_i32(TCG_COND_EQ, t0, 0, l1);
+diff --git a/target/ppc/translate/vmx-impl.c.inc b/target/ppc/translate/vmx-impl.c.inc
+index 7741f2eb49..2dd17ab106 100644
+--- a/target/ppc/translate/vmx-impl.c.inc
++++ b/target/ppc/translate/vmx-impl.c.inc
+@@ -1508,8 +1508,8 @@ static bool do_vcmpq(DisasContext *ctx, arg_VX_bf *a, bool sign)
+     REQUIRE_INSNS_FLAGS2(ctx, ISA310);
+     REQUIRE_VECTOR(ctx);
+ 
+-    vra = tcg_temp_local_new_i64();
+-    vrb = tcg_temp_local_new_i64();
++    vra = tcg_temp_new_i64();
++    vrb = tcg_temp_new_i64();
+     gt = gen_new_label();
+     lt = gen_new_label();
+     done = gen_new_label();
 -- 
 2.34.1
 
