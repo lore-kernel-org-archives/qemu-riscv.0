@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWWI4-0002xl-Hd
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:43:12 -0500
+	id 1pWWI8-0003Bj-0v
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Feb 2023 00:43:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWI3-0002u0-1T
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:43:11 -0500
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1pWWI6-00030c-5J
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:43:14 -0500
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pWWHx-0004lW-V0
- for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:43:10 -0500
-Received: by mail-pf1-x433.google.com with SMTP id fd25so2815662pfb.1
- for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:43:05 -0800 (PST)
+ id 1pWWI1-0004vv-Li
+ for qemu-riscv@nongnu.org; Mon, 27 Feb 2023 00:43:13 -0500
+Received: by mail-pg1-x531.google.com with SMTP id q23so2845703pgt.7
+ for <qemu-riscv@nongnu.org>; Sun, 26 Feb 2023 21:43:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0nmZI0+w1F7+8GnTL6IOgNGmXVjRV/sPnzdawMkimPw=;
- b=K8J/HxW0kYm5MJYbIN1+NHclfSdEHUG7kRD5dK3ljLUzPY/O/eS3zPjZU+6C1MksUe
- jZXDFI76tpfAUMvXWXMBcmY7+9ZYWk55GyUsveT5VUhhl8MxDy7BkSafu0jgsVH7ytwS
- A29yeGul3VsuxaAg4Sc8Ng+tkVqjgKDH3HOHx/fQBK6IIFaPRpunAnngWTIH9TtEsc6T
- t2AxIQoXlQk5I93wYlyXRqyC7HhwPw9MUQHDk4JWgsmYI64owIOpubEgVmKO6y4qQrhe
- Mbsv9Z7exMhrsI3MLdVRgMKjPG9OdgYTpocZiVrhDqesaU/CEUStYA6urFMfQ7dobHfi
- i/lQ==
+ bh=0YfgyBDnj6MuT0mZO5HljNGb2RUFRCLedXFv4M1Hnp4=;
+ b=L8G4jfDc6o4KyBdmekotOmWnM1ZTwjSatdHUehx/ZdAs1Trennd6J4cZ/0XVkvUO1T
+ d0KZcSgLsSPvhhiosnKRbcyas8bWpID+PjtvIEhMAKCyiRr9L4MevsTQDFk17GIr+1BQ
+ 1C7T0rEugSGiVnXYFjQy3/Y9xRGwXSeoRsQ29KIeqqZzGkSinmK2OMnl0YCYCxLrdmIH
+ O9LFA/BDA8VM9eB+czoIQe216OuV+iCx9RD5I2mLgrNMFttmzvWET4BGxUe9FS5rB03b
+ MLJRxhU2DZ0XmI0/yXAbkaiZPCE/j89/aqTuKa+Csu8Fin96Wt/iqjJfe+Ou3oJGgCzY
+ fbJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0nmZI0+w1F7+8GnTL6IOgNGmXVjRV/sPnzdawMkimPw=;
- b=nFb5II94+N5yGPS+ze2hqMQyJMl6ySHmlS/QvG+k4e2L33oO0nls3/moUJ6bBKIWQ6
- qKTIlaNWc53nbIoYH4xRsROq4XyVp712Zw8UcEtj3FaatVreqTzTf2YthAHk8G5ms26u
- wRg3IkLCUvUF96qLx6tAkqYYdHB/ZqTcn2qS/nXSqYWun294dZp8BS8p+AMVzDu6SZ0H
- t7N+yOMQYmc3qUfd1qbEni8Drn31zKNzeCUefPm9jqujws0TMhCyK5gnQYRVLncTwcgT
- MzHQEySiyn3hwPRmMH2a8RGIzQNj2M+C/D7u9tk6AUjoFjYN0LDcCgVqOSUbeCTSVJkh
- BhXg==
-X-Gm-Message-State: AO0yUKULVLKLgU0B6LseNYwTjfaNMMxfQJE/At6cpgouWvV/bcKMqrKN
- MSO6NwvDlO1gSnVBT4nAfBtv1w==
-X-Google-Smtp-Source: AK7set8/XKone4qDcYcLd3GNYQG8GsiZhURoLkiZubfYsD+C8MXBPbhLIsMeQPbbPmFALgnG165eJA==
-X-Received: by 2002:aa7:96a1:0:b0:5f1:468b:c88 with SMTP id
- g1-20020aa796a1000000b005f1468b0c88mr3280250pfk.27.1677476585074; 
- Sun, 26 Feb 2023 21:43:05 -0800 (PST)
+ bh=0YfgyBDnj6MuT0mZO5HljNGb2RUFRCLedXFv4M1Hnp4=;
+ b=OdooXMNV1KjvxIzz9DPXWjAmbjBhJ1qBJ3WX9SBM7YAxeF61r5k1P+SllbqmaKwRk+
+ fJ07yUkUUc5wroLk+mbqZhrR+Y/RQhFQGU+4h8DrB5LDKIGXiHh6rjI8oUowD/ZS0cxX
+ ZCFy20GL7C1S8AEj1DRdOslC7V18LqyoepVQl1YuAa9+8PCpVo+eItFmtupIUYjmu3aS
+ tWkcLVP1TASMsVQOEFsDF532WOzKaYDck03kV2qTFfK6qJYP8f702IsYFN8ZnaOXcedw
+ jb4ZSfxK8s1vJRHB1eT9HDVxF+soPPRv8DAJhdNi/iQ5xiQ5b7RB16QmrdZJy/L5WL6i
+ fqZg==
+X-Gm-Message-State: AO0yUKVLH95ej6ExSszv8KoOKwMgTEIDGd/ZhjrtszmJZV7jRW7DtHuG
+ HgzZVueiJc3aLGHmMWu39nngPQ==
+X-Google-Smtp-Source: AK7set/NgsH1sFJOeQnqWQMAtbDKJSqMzc7zP64jy4o4DV2ZVlFqU5fWTF+13iqdntVyrq9pYJdr9A==
+X-Received: by 2002:aa7:9466:0:b0:5dc:e57:e0e7 with SMTP id
+ t6-20020aa79466000000b005dc0e57e0e7mr11674590pfq.22.1677476588020; 
+ Sun, 26 Feb 2023 21:43:08 -0800 (PST)
 Received: from stoup.. (rrcs-173-198-77-218.west.biz.rr.com. [173.198.77.218])
  by smtp.gmail.com with ESMTPSA id
- d10-20020aa7868a000000b005cdc64a287dsm3317137pfo.115.2023.02.26.21.43.02
+ d10-20020aa7868a000000b005cdc64a287dsm3317137pfo.115.2023.02.26.21.43.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Feb 2023 21:43:04 -0800 (PST)
+ Sun, 26 Feb 2023 21:43:07 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -54,16 +54,16 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
  edgar.iglesias@gmail.com
-Subject: [PATCH 08/70] target/arm: Avoid tcg_const_* in translate-mve.c
-Date: Sun, 26 Feb 2023 19:41:31 -1000
-Message-Id: <20230227054233.390271-9-richard.henderson@linaro.org>
+Subject: [PATCH 09/70] target/arm: Avoid tcg_const_ptr in disas_simd_zip_trn
+Date: Sun, 26 Feb 2023 19:41:32 -1000
+Message-Id: <20230227054233.390271-10-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230227054233.390271-1-richard.henderson@linaro.org>
 References: <20230227054233.390271-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,163 +83,112 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2023 05:43:11 -0000
+X-List-Received-Date: Mon, 27 Feb 2023 05:43:14 -0000
 
-All uses are in the context of an accumulator conditionally
-having a zero input.  Split the rda variable to rda_{i,o},
-and set rda_i to tcg_constant_foo(0) when required.
+It is easy enough to use mov instead of or-with-zero
+and relying on the optimizer to fold away the or.
+Use an array for the output, rather than separate
+tcg_res{l,h} variables.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/arm/translate-mve.c | 54 ++++++++++++++++++++------------------
- 1 file changed, 29 insertions(+), 25 deletions(-)
+ target/arm/translate-a64.c | 41 +++++++++++++++++++-------------------
+ 1 file changed, 21 insertions(+), 20 deletions(-)
 
-diff --git a/target/arm/translate-mve.c b/target/arm/translate-mve.c
-index 9744bf3de0..31fb2110f1 100644
---- a/target/arm/translate-mve.c
-+++ b/target/arm/translate-mve.c
-@@ -1150,7 +1150,7 @@ static bool do_long_dual_acc(DisasContext *s, arg_vmlaldav *a,
-                              MVEGenLongDualAccOpFn *fn)
- {
-     TCGv_ptr qn, qm;
--    TCGv_i64 rda;
-+    TCGv_i64 rda_i, rda_o;
-     TCGv_i32 rdalo, rdahi;
+diff --git a/target/arm/translate-a64.c b/target/arm/translate-a64.c
+index 9e682f36c9..1726ec622d 100644
+--- a/target/arm/translate-a64.c
++++ b/target/arm/translate-a64.c
+@@ -7442,10 +7442,10 @@ static void disas_simd_zip_trn(DisasContext *s, uint32_t insn)
+     bool part = extract32(insn, 14, 1);
+     bool is_q = extract32(insn, 30, 1);
+     int esize = 8 << size;
+-    int i, ofs;
++    int i;
+     int datasize = is_q ? 128 : 64;
+     int elements = datasize / esize;
+-    TCGv_i64 tcg_res, tcg_resl, tcg_resh;
++    TCGv_i64 tcg_res[2], tcg_ele;
  
-     if (!dc_isar_feature(aa32_mve, s) ||
-@@ -1177,21 +1177,22 @@ static bool do_long_dual_acc(DisasContext *s, arg_vmlaldav *a,
-      * of an A=0 (no-accumulate) insn which does not execute the first
-      * beat must start with the current rda value, not 0.
-      */
-+    rda_o = tcg_temp_new_i64();
-     if (a->a || mve_skip_first_beat(s)) {
--        rda = tcg_temp_new_i64();
-+        rda_i = rda_o;
-         rdalo = load_reg(s, a->rdalo);
-         rdahi = load_reg(s, a->rdahi);
--        tcg_gen_concat_i32_i64(rda, rdalo, rdahi);
-+        tcg_gen_concat_i32_i64(rda_i, rdalo, rdahi);
-     } else {
--        rda = tcg_const_i64(0);
-+        rda_i = tcg_constant_i64(0);
+     if (opcode == 0 || (size == 3 && !is_q)) {
+         unallocated_encoding(s);
+@@ -7456,37 +7456,39 @@ static void disas_simd_zip_trn(DisasContext *s, uint32_t insn)
+         return;
      }
  
--    fn(rda, cpu_env, qn, qm, rda);
-+    fn(rda_o, cpu_env, qn, qm, rda_i);
+-    tcg_resl = tcg_const_i64(0);
+-    tcg_resh = is_q ? tcg_const_i64(0) : NULL;
+-    tcg_res = tcg_temp_new_i64();
++    tcg_res[0] = tcg_temp_new_i64();
++    tcg_res[1] = is_q ? tcg_temp_new_i64() : NULL;
++    tcg_ele = tcg_temp_new_i64();
  
-     rdalo = tcg_temp_new_i32();
-     rdahi = tcg_temp_new_i32();
--    tcg_gen_extrl_i64_i32(rdalo, rda);
--    tcg_gen_extrh_i64_i32(rdahi, rda);
-+    tcg_gen_extrl_i64_i32(rdalo, rda_o);
-+    tcg_gen_extrh_i64_i32(rdahi, rda_o);
-     store_reg(s, a->rdalo, rdalo);
-     store_reg(s, a->rdahi, rdahi);
-     mve_update_eci(s);
-@@ -1258,7 +1259,7 @@ static bool trans_VRMLSLDAVH(DisasContext *s, arg_vmlaldav *a)
- static bool do_dual_acc(DisasContext *s, arg_vmladav *a, MVEGenDualAccOpFn *fn)
- {
-     TCGv_ptr qn, qm;
--    TCGv_i32 rda;
-+    TCGv_i32 rda_i, rda_o;
+     for (i = 0; i < elements; i++) {
++        int o, w;
++
+         switch (opcode) {
+         case 1: /* UZP1/2 */
+         {
+             int midpoint = elements / 2;
+             if (i < midpoint) {
+-                read_vec_element(s, tcg_res, rn, 2 * i + part, size);
++                read_vec_element(s, tcg_ele, rn, 2 * i + part, size);
+             } else {
+-                read_vec_element(s, tcg_res, rm,
++                read_vec_element(s, tcg_ele, rm,
+                                  2 * (i - midpoint) + part, size);
+             }
+             break;
+         }
+         case 2: /* TRN1/2 */
+             if (i & 1) {
+-                read_vec_element(s, tcg_res, rm, (i & ~1) + part, size);
++                read_vec_element(s, tcg_ele, rm, (i & ~1) + part, size);
+             } else {
+-                read_vec_element(s, tcg_res, rn, (i & ~1) + part, size);
++                read_vec_element(s, tcg_ele, rn, (i & ~1) + part, size);
+             }
+             break;
+         case 3: /* ZIP1/2 */
+         {
+             int base = part * elements / 2;
+             if (i & 1) {
+-                read_vec_element(s, tcg_res, rm, base + (i >> 1), size);
++                read_vec_element(s, tcg_ele, rm, base + (i >> 1), size);
+             } else {
+-                read_vec_element(s, tcg_res, rn, base + (i >> 1), size);
++                read_vec_element(s, tcg_ele, rn, base + (i >> 1), size);
+             }
+             break;
+         }
+@@ -7494,19 +7496,18 @@ static void disas_simd_zip_trn(DisasContext *s, uint32_t insn)
+             g_assert_not_reached();
+         }
  
-     if (!dc_isar_feature(aa32_mve, s) ||
-         !mve_check_qreg_bank(s, a->qn) ||
-@@ -1278,13 +1279,14 @@ static bool do_dual_acc(DisasContext *s, arg_vmladav *a, MVEGenDualAccOpFn *fn)
-      * beat must start with the current rda value, not 0.
-      */
-     if (a->a || mve_skip_first_beat(s)) {
--        rda = load_reg(s, a->rda);
-+        rda_o = rda_i = load_reg(s, a->rda);
-     } else {
--        rda = tcg_const_i32(0);
-+        rda_i = tcg_constant_i32(0);
-+        rda_o = tcg_temp_new_i32();
+-        ofs = i * esize;
+-        if (ofs < 64) {
+-            tcg_gen_shli_i64(tcg_res, tcg_res, ofs);
+-            tcg_gen_or_i64(tcg_resl, tcg_resl, tcg_res);
++        w = (i * esize) / 64;
++        o = (i * esize) % 64;
++        if (o == 0) {
++            tcg_gen_mov_i64(tcg_res[w], tcg_ele);
+         } else {
+-            tcg_gen_shli_i64(tcg_res, tcg_res, ofs - 64);
+-            tcg_gen_or_i64(tcg_resh, tcg_resh, tcg_res);
++            tcg_gen_shli_i64(tcg_ele, tcg_ele, o);
++            tcg_gen_or_i64(tcg_res[w], tcg_res[w], tcg_ele);
+         }
      }
  
--    fn(rda, cpu_env, qn, qm, rda);
--    store_reg(s, a->rda, rda);
-+    fn(rda_o, cpu_env, qn, qm, rda_i);
-+    store_reg(s, a->rda, rda_o);
- 
-     mve_update_eci(s);
-     return true;
-@@ -1396,7 +1398,7 @@ static bool trans_VADDV(DisasContext *s, arg_VADDV *a)
-         { NULL, NULL }
-     };
-     TCGv_ptr qm;
--    TCGv_i32 rda;
-+    TCGv_i32 rda_i, rda_o;
- 
-     if (!dc_isar_feature(aa32_mve, s) ||
-         a->size == 3) {
-@@ -1413,15 +1415,16 @@ static bool trans_VADDV(DisasContext *s, arg_VADDV *a)
-      */
-     if (a->a || mve_skip_first_beat(s)) {
-         /* Accumulate input from Rda */
--        rda = load_reg(s, a->rda);
-+        rda_o = rda_i = load_reg(s, a->rda);
-     } else {
-         /* Accumulate starting at zero */
--        rda = tcg_const_i32(0);
-+        rda_i = tcg_constant_i32(0);
-+        rda_o = tcg_temp_new_i32();
+-    write_vec_element(s, tcg_resl, rd, 0, MO_64);
+-    if (is_q) {
+-        write_vec_element(s, tcg_resh, rd, 1, MO_64);
++    for (i = 0; i <= is_q; ++i) {
++        write_vec_element(s, tcg_res[i], rd, i, MO_64);
      }
- 
-     qm = mve_qreg_ptr(a->qm);
--    fns[a->size][a->u](rda, cpu_env, qm, rda);
--    store_reg(s, a->rda, rda);
-+    fns[a->size][a->u](rda_o, cpu_env, qm, rda_i);
-+    store_reg(s, a->rda, rda_o);
- 
-     mve_update_eci(s);
-     return true;
-@@ -1436,7 +1439,7 @@ static bool trans_VADDLV(DisasContext *s, arg_VADDLV *a)
-      * No need to check Qm's bank: it is only 3 bits in decode.
-      */
-     TCGv_ptr qm;
--    TCGv_i64 rda;
-+    TCGv_i64 rda_i, rda_o;
-     TCGv_i32 rdalo, rdahi;
- 
-     if (!dc_isar_feature(aa32_mve, s)) {
-@@ -1458,28 +1461,29 @@ static bool trans_VADDLV(DisasContext *s, arg_VADDLV *a)
-      * of an A=0 (no-accumulate) insn which does not execute the first
-      * beat must start with the current value of RdaHi:RdaLo, not zero.
-      */
-+    rda_o = tcg_temp_new_i64();
-     if (a->a || mve_skip_first_beat(s)) {
-         /* Accumulate input from RdaHi:RdaLo */
--        rda = tcg_temp_new_i64();
-+        rda_i = rda_o;
-         rdalo = load_reg(s, a->rdalo);
-         rdahi = load_reg(s, a->rdahi);
--        tcg_gen_concat_i32_i64(rda, rdalo, rdahi);
-+        tcg_gen_concat_i32_i64(rda_i, rdalo, rdahi);
-     } else {
-         /* Accumulate starting at zero */
--        rda = tcg_const_i64(0);
-+        rda_i = tcg_constant_i64(0);
-     }
- 
-     qm = mve_qreg_ptr(a->qm);
-     if (a->u) {
--        gen_helper_mve_vaddlv_u(rda, cpu_env, qm, rda);
-+        gen_helper_mve_vaddlv_u(rda_o, cpu_env, qm, rda_i);
-     } else {
--        gen_helper_mve_vaddlv_s(rda, cpu_env, qm, rda);
-+        gen_helper_mve_vaddlv_s(rda_o, cpu_env, qm, rda_i);
-     }
- 
-     rdalo = tcg_temp_new_i32();
-     rdahi = tcg_temp_new_i32();
--    tcg_gen_extrl_i64_i32(rdalo, rda);
--    tcg_gen_extrh_i64_i32(rdahi, rda);
-+    tcg_gen_extrl_i64_i32(rdalo, rda_o);
-+    tcg_gen_extrh_i64_i32(rdahi, rda_o);
-     store_reg(s, a->rdalo, rdalo);
-     store_reg(s, a->rdahi, rdahi);
-     mve_update_eci(s);
+     clear_vec_high(s, is_q, rd);
+ }
 -- 
 2.34.1
 
