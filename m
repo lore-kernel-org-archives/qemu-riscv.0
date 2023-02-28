@@ -1,93 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pX3Dd-0000di-3Y
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Feb 2023 11:52:52 -0500
+	id 1pX3nP-0005Ot-SB
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Feb 2023 12:29:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1pX3Db-0000dR-Ew
- for qemu-riscv@nongnu.org; Tue, 28 Feb 2023 11:52:47 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1pX3DZ-0000GK-KA
- for qemu-riscv@nongnu.org; Tue, 28 Feb 2023 11:52:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1677603164;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=XCPcUvMvu7nP29aOsIlxD6QR0a2L5RjsbiEQanCPXMs=;
- b=b8nla1aI0mqNNyZ7KYYP6dirpBKrrq6KzjB5Uo/HJyPT8Yn5n6aDY/vlrXAwIG+RJuzKqu
- jNRbXBe4Vka69s46y6uUqQ6zyqZm9mALp4nI+qlTzSyaEwkOTQj7dDvILNVi0yX5lYUDQL
- FHDz/GhL40TVd/6FL/nNtGVJHJ2JOX8=
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-645-3dR7VVgzN6GaGPwuTUPRmA-1; Tue, 28 Feb 2023 11:52:43 -0500
-X-MC-Unique: 3dR7VVgzN6GaGPwuTUPRmA-1
-Received: by mail-qk1-f197.google.com with SMTP id
- d72-20020ae9ef4b000000b0072db6346c39so6344789qkg.16
- for <qemu-riscv@nongnu.org>; Tue, 28 Feb 2023 08:52:43 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1pX3nO-0005OA-2S
+ for qemu-riscv@nongnu.org; Tue, 28 Feb 2023 12:29:46 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1pX3nM-0007hJ-FV
+ for qemu-riscv@nongnu.org; Tue, 28 Feb 2023 12:29:45 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ m14-20020a7bce0e000000b003e00c739ce4so6339329wmc.5
+ for <qemu-riscv@nongnu.org>; Tue, 28 Feb 2023 09:29:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NFu8Bk18v4l7Jt0JdGbiRizsWONj5KXQ1ScWYd6O3Vo=;
+ b=Iih72F4Qa2c3KOP7PYX8hIk7jGckmLVYR9kZj6NxQXq2W7V/p5xFtWWjfZ99Bllwnz
+ gz2ggMSjb57AWvX4T8cxVVt1IMrajYHYJoxaVEoyJtN9IjviVEF/3yl2L+DW8bF4vJRo
+ AQi9J5iDocxjiLCTfmRoWP2AC7Vwuu39Zp0tVwxaQmAYWb1HcZ0V7vdXdGR10kn4aR4b
+ AUMQqnaSwiBbM78N25/Lk5DOJg59hPaWWJ9zVQy/DAd0bRnSN74OtwNl9xc2ZlyQn/me
+ 5wBnPeK2kHNqzk5fo/w+EkTOCHr30+Th2N7anTZYT+wBSGwY79uGx8Y/kVnROZsJyDqM
+ rMvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XCPcUvMvu7nP29aOsIlxD6QR0a2L5RjsbiEQanCPXMs=;
- b=GTf8zh2j6TtM7x94D0Xc2W0bqBHVBrRljnKU8LCoojTRGF2Gcfvp56qQKwqip16g2b
- 2FxKc20x/7c52hj0oU903mC5lk+b29fxBtph/Y274W/ksHeq1n0VHmwQ08VX8sGEuB9b
- zrTkPsq6JWHtypawKLbm4moZMMCjm0Yjtl+0EIaiucvoZALmy4iURi7sq1Ul95kY30G7
- VjWc/gkzEh0mit8Ey69ZD0nrUWKdOYGsBA1EBJtiz5Hi/zwb0udI/u+UPrJksI20unfZ
- UsVfwqW+w0MntL1iz7EmVNU7y5yBpDDaIF1jOFzA6WG7SHPPx1zLaLn85/Td9V1MxoiB
- zJ0Q==
-X-Gm-Message-State: AO0yUKU74vF8MiRqCu4Gx514ygf5RUqMnaZYDbCXG5S/VAohY072140O
- JwI9qrJ2zrWevOnOFapc4CE8ORCnBUx46SXIHTkdJnPikW9dG2HeofbkueONdPJXIitVtok4Zvc
- FehNWYTYWFaEJS4g=
-X-Received: by 2002:ad4:5764:0:b0:570:5389:2216 with SMTP id
- r4-20020ad45764000000b0057053892216mr23125891qvx.22.1677603162740; 
- Tue, 28 Feb 2023 08:52:42 -0800 (PST)
-X-Google-Smtp-Source: AK7set/uz8OqIjjwh7S9K0lAIBuXFG61BjDEwlxKafpLeaMq/MFIZQ0Ur8W4akQRtbFJpK07n5ltzA==
-X-Received: by 2002:ad4:5764:0:b0:570:5389:2216 with SMTP id
- r4-20020ad45764000000b0057053892216mr23125864qvx.22.1677603162470; 
- Tue, 28 Feb 2023 08:52:42 -0800 (PST)
-Received: from imammedo.users.ipa.redhat.com ([185.140.112.229])
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=NFu8Bk18v4l7Jt0JdGbiRizsWONj5KXQ1ScWYd6O3Vo=;
+ b=wqRWk1MmQP3WFw3ZzPJzdZlo9zL8ROkGvhsQdZ0SlNN4AfuGBabi8XyMbMLQROg2O1
+ CEJMPISp6YjjKWDpUVLaE49SNqWJxuPuS+i1XLQoupWktjxC/Fo9CZ1sIfd4eAV/tqGC
+ OWd4LAVDnGXBNqh2nLD8KYJR8Q91ZmbAT2x7noObbzwYqH8hrBz27XyUhdOwFxlysvb4
+ tTQPIRmFzKwnvwcgAZWUx0kAphtO0WPJLMQ6bxg8R6Z1sVPP/JJBaZ1xcOrtB2w+PNOr
+ mf6eC/P3S/RbGqyMSc8ueYLX3RG80Prb+X0febnzhUDV5cT0HmIUQUJVS+nbE/2YSSKe
+ e0vw==
+X-Gm-Message-State: AO0yUKVJP/8OYsDPTO9rMJVQlr5CQgFIqhXecTslQ8PF5d3CZQemnE0Z
+ wQ33iBbeKetj4SgP9edKlP3eLg==
+X-Google-Smtp-Source: AK7set/dP3ecKzmKuDKl2wnmDXr/7c0imSvVAcIa8EIna8Itnw1bfFQMtIp6DdmMZMZabHuaOT6NLQ==
+X-Received: by 2002:a05:600c:4e06:b0:3eb:2db4:c626 with SMTP id
+ b6-20020a05600c4e0600b003eb2db4c626mr2839135wmq.38.1677605382828; 
+ Tue, 28 Feb 2023 09:29:42 -0800 (PST)
+Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- v3-20020a379303000000b007429722e620sm6117315qkd.10.2023.02.28.08.52.40
+ n33-20020a05600c502100b003e8dc7a03basm17256919wmr.41.2023.02.28.09.29.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Feb 2023 08:52:41 -0800 (PST)
-Date: Tue, 28 Feb 2023 17:52:38 +0100
-From: Igor Mammedov <imammedo@redhat.com>
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
- <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Andrew Jones
- <ajones@ventanamicro.com>, Anup Patel <apatel@ventanamicro.com>, Atish
- Kumar Patra <atishp@rivosinc.com>, Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>
-Subject: Re: [PATCH V4 5/8] hw/riscv/virt: virt-acpi-build.c: Add RINTC in MADT
-Message-ID: <20230228175238.468e6446@imammedo.users.ipa.redhat.com>
-In-Reply-To: <Y/2ujHMFrhnfJUiJ@sunil-laptop>
-References: <20230224083701.2657063-1-sunilvl@ventanamicro.com>
- <20230224083701.2657063-6-sunilvl@ventanamicro.com>
- <20230224135343.24a5a95b@imammedo.users.ipa.redhat.com>
- <Y/jJMnHaspaic2M3@sunil-laptop>
- <20230227164121.73d1ecc0@imammedo.users.ipa.redhat.com>
- <Y/2ujHMFrhnfJUiJ@sunil-laptop>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.36; x86_64-redhat-linux-gnu)
+ Tue, 28 Feb 2023 09:29:42 -0800 (PST)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 0AC191FFB7;
+ Tue, 28 Feb 2023 17:29:42 +0000 (GMT)
+References: <20230227053701.368744-1-richard.henderson@linaro.org>
+ <20230227053701.368744-8-richard.henderson@linaro.org>
+User-agent: mu4e 1.9.21; emacs 29.0.60
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, kbastian@mail.uni-paderborn.de,
+ ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
+ tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com,
+ edgar.iglesias@gmail.com, qemu-arm@nongnu.org
+Subject: Re: [PATCH v4 07/31] tcg: Add liveness_pass_0
+Date: Tue, 28 Feb 2023 17:29:37 +0000
+In-reply-to: <20230227053701.368744-8-richard.henderson@linaro.org>
+Message-ID: <874jr5g0l6.fsf@linaro.org>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -101,118 +89,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2023 16:52:47 -0000
+X-List-Received-Date: Tue, 28 Feb 2023 17:29:46 -0000
 
-On Tue, 28 Feb 2023 13:04:36 +0530
-Sunil V L <sunilvl@ventanamicro.com> wrote:
 
-> On Mon, Feb 27, 2023 at 04:41:21PM +0100, Igor Mammedov wrote:
-> > On Fri, 24 Feb 2023 19:56:58 +0530
-> > Sunil V L <sunilvl@ventanamicro.com> wrote:
-> >   
-> > > Hi Igor,
-> > > 
-> > > On Fri, Feb 24, 2023 at 01:53:43PM +0100, Igor Mammedov wrote:  
-> > > > On Fri, 24 Feb 2023 14:06:58 +0530
-> > > > Sunil V L <sunilvl@ventanamicro.com> wrote:
-> > > >     
-> > > > > Add Multiple APIC Description Table (MADT) with the
-> > > > > RINTC structure for each cpu.
-> > > > > 
-> > > > > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> > > > > Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> > > > > ---
-> > > > >  hw/riscv/virt-acpi-build.c | 44 ++++++++++++++++++++++++++++++++++++++
-> > > > >  1 file changed, 44 insertions(+)
-> > > > > 
-> > > > > diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> > > > > index 3a5e2e6d53..8b85b34c55 100644
-> > > > > --- a/hw/riscv/virt-acpi-build.c
-> > > > > +++ b/hw/riscv/virt-acpi-build.c
-> > > > > @@ -32,6 +32,7 @@
-> > > > >  #include "sysemu/reset.h"
-> > > > >  #include "migration/vmstate.h"
-> > > > >  #include "hw/riscv/virt.h"
-> > > > > +#include "hw/riscv/numa.h"
-> > > > >  
-> > > > >  #define ACPI_BUILD_TABLE_SIZE             0x20000
-> > > > >  
-> > > > > @@ -132,6 +133,46 @@ static void build_dsdt(GArray *table_data,
-> > > > >      free_aml_allocator();
-> > > > >  }
-> > > > >  
-> > > > > +/* MADT */    
-> > > > 
-> > > > see build_srat() how this comment must look like
-> > > >    
-> > > Currently, even though ECRs are approved, the ACPI spec is not released
-> > > for these MADT structures. I can add the spec version for the generic
-> > > MADT but not for the RINTC. Same issue with a new table RHCT.
-> > > What is the recommendation in such case?  
-> > 
-> > ther must be some draft variant of spec or a ticket where it was approved
-> > or a reference impl. somewhere.
-> >   
-> Sure, I can add the ticket ID. Thanks!
-and a link, later when new spec is published we can update it
-to rev/chapter format.
+Richard Henderson <richard.henderson@linaro.org> writes:
 
-> 
-> > >   
-> > > > > +static void build_madt(GArray *table_data,
-> > > > > +                       BIOSLinker *linker,
-> > > > > +                       RISCVVirtState *s)
-> > > > > +{
-> > > > > +    MachineState *ms = MACHINE(s);
-> > > > > +    int socket;
-> > > > > +    uint16_t base_hartid = 0;
-> > > > > +    uint32_t cpu_id = 0;
-> > > > > +
-> > > > > +    AcpiTable table = { .sig = "APIC", .rev = 6, .oem_id = s->oem_id,
-> > > > > +                        .oem_table_id = s->oem_table_id };
-> > > > > +
-> > > > > +    acpi_table_begin(&table, table_data);
-> > > > > +    /* Local Interrupt Controller Address */
-> > > > > +    build_append_int_noprefix(table_data, 0, 4);
-> > > > > +    build_append_int_noprefix(table_data, 0, 4);   /* MADT Flags */
-> > > > > +
-> > > > > +    /* RISC-V Local INTC structures per HART */
-> > > > > +    for (socket = 0; socket < riscv_socket_count(ms); socket++) {
-> > > > > +        base_hartid = riscv_socket_first_hartid(ms, socket);
-> > > > > +
-> > > > > +        for (int i = 0; i < s->soc[socket].num_harts; i++) {
-> > > > > +            build_append_int_noprefix(table_data, 0x18, 1);    /* Type     */
-> > > > > +            build_append_int_noprefix(table_data, 20, 1);      /* Length   */
-> > > > > +            build_append_int_noprefix(table_data, 1, 1);       /* Version  */
-> > > > > +            build_append_int_noprefix(table_data, 0, 1);       /* Reserved */
-> > > > > +            build_append_int_noprefix(table_data, 1, 4);       /* Flags    */
-> > > > > +            build_append_int_noprefix(table_data,
-> > > > > +                                      (base_hartid + i), 8);   /* Hart ID  */
-> > > > > +
-> > > > > +            /* ACPI Processor UID  */
-> > > > > +            build_append_int_noprefix(table_data, cpu_id, 4);    
-> > > > 
-> > > > cpu_id here seems to be unrelated to one in DSDT.
-> > > > Could you explain how socket/hartid and cpu_id are related to each other?
-> > > >     
-> > > cpu_id should match the _UID. I needed two loops here to get the
-> > > base_hartid of the socket. hart_id is the unique ID for each hart
-> > > similar to MPIDR / APIC ID. I understand your point. Let me make DSDT
-> > > also created using two loops so that both match.  
-> > 
-> > Why not reuse possible CPUs to describe topology there and then
-> > use ids from it to build ACPI tables instead of inventing your own
-> > cpu topo all over the place?
-> > 
-> > PS: look for possible_cpus and how it's used (virt-arm already uses it
-> > although partially). And I'd like to avoid adding new ad-hoc ways
-> > to describe CPU topology is current possible_cpu ca do the job.  
-> 
-> Okay, sure. Let me take a look at possible_cpus and use in cpu topology.
-> Thanks!
-maybe following could be of help:
-  hw/i386/acpi-common.c:acpi_build_madt
-  and see how madt_cpu is used.
+> Attempt to reduce the lifetime of TEMP_TB.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
+Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
