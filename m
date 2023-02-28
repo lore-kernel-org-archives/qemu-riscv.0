@@ -1,79 +1,93 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pX2Yh-0005dV-0L
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Feb 2023 11:10:31 -0500
+	id 1pX3Dd-0000di-3Y
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Feb 2023 11:52:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1pX2Yf-0005d2-W9
- for qemu-riscv@nongnu.org; Tue, 28 Feb 2023 11:10:30 -0500
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1pX2Yd-0000jf-S8
- for qemu-riscv@nongnu.org; Tue, 28 Feb 2023 11:10:29 -0500
-Received: by mail-pl1-x635.google.com with SMTP id p20so9740044plw.13
- for <qemu-riscv@nongnu.org>; Tue, 28 Feb 2023 08:10:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1677600625;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DjGM0IEteqDe9jCtaMeoJATFuSI/VlpZwchcVoWD2kA=;
- b=PqTjpcKLrLVvGEMEUgeDLiD64fLXpsBI/yQ01J4GIrY6wIckuSewSwcAyTYXUzNZAI
- +Ouo661FHtDEmgsuRJDSJ0GH1r9W4k6xnOB0ziOX75b9HX+30G8aTBSxh5jdI9F4P1jM
- zC4WgPg9u3n+H5WgE0klyeJYA12fMwgyKOIysQj5X1SSogjbED2H4yJcKjcXtY4FsBcw
- GFQoRnS74Ut1bi9GNzip278RDo0BopzBu1Kgo6olgJ3FrkngvET5qv73tyYoKdDeb3h6
- x56QMrmrI87lYXq2xNQMRgx+ai5AKdiljDFCL6OBmVvv75k10PAFNPErMz+49zePyDdd
- mBKA==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1pX3Db-0000dR-Ew
+ for qemu-riscv@nongnu.org; Tue, 28 Feb 2023 11:52:47 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1pX3DZ-0000GK-KA
+ for qemu-riscv@nongnu.org; Tue, 28 Feb 2023 11:52:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1677603164;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=XCPcUvMvu7nP29aOsIlxD6QR0a2L5RjsbiEQanCPXMs=;
+ b=b8nla1aI0mqNNyZ7KYYP6dirpBKrrq6KzjB5Uo/HJyPT8Yn5n6aDY/vlrXAwIG+RJuzKqu
+ jNRbXBe4Vka69s46y6uUqQ6zyqZm9mALp4nI+qlTzSyaEwkOTQj7dDvILNVi0yX5lYUDQL
+ FHDz/GhL40TVd/6FL/nNtGVJHJ2JOX8=
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-645-3dR7VVgzN6GaGPwuTUPRmA-1; Tue, 28 Feb 2023 11:52:43 -0500
+X-MC-Unique: 3dR7VVgzN6GaGPwuTUPRmA-1
+Received: by mail-qk1-f197.google.com with SMTP id
+ d72-20020ae9ef4b000000b0072db6346c39so6344789qkg.16
+ for <qemu-riscv@nongnu.org>; Tue, 28 Feb 2023 08:52:43 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677600625;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DjGM0IEteqDe9jCtaMeoJATFuSI/VlpZwchcVoWD2kA=;
- b=PMpB1dtoT9ePMZLY+M5VigtDNKdzPl2UyJc4mHVrJrbq4DFZ/yUHvExEjy2oj+E3Nl
- 95A245cL6W6qOhNj7k2Fbugjr8b2Kja38yVVX2U+StW62CO+JBXWmhEDGYC1sA3tBvXv
- kMn79l3dvzCvCuu4JH8Jmzmc0PKcfKjz0mkPqX8Jqq5bYSeH8GNgnIweo27HC7uhVae2
- FXPvvi/094fiFxB1LRN10FffUGYaX7WaGvXDyDOjnj7IW+K0BntOvCGrGp7V7HqoIu5Z
- M0Pf+se6rjM2E9gvGauSW/l+T5hMbGJDFUDeoBMcFsTwacBXx8LcCYHTdVtvOTk9/mOq
- KS+A==
-X-Gm-Message-State: AO0yUKU0ihjlbmg0rj92e94CUDKLEf9yBc8ZiHfJKofaQZkD867R651k
- sZc0xkqvwYreKMi5Dqo8rU1WPQ==
-X-Google-Smtp-Source: AK7set/G7skLsFvV6X8vvWVnnAAKWQPTae/0iinMFNLMvTg/qMQlps66SMDVNbGGZSqjpPyK2jUM6g==
-X-Received: by 2002:a05:6a21:32a5:b0:cc:e439:bdad with SMTP id
- yt37-20020a056a2132a500b000cce439bdadmr3882993pzb.1.1677600624840; 
- Tue, 28 Feb 2023 08:10:24 -0800 (PST)
-Received: from ?IPV6:2405:201:d019:c0a2:d1bb:4458:2b1b:e0d9?
- ([2405:201:d019:c0a2:d1bb:4458:2b1b:e0d9])
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XCPcUvMvu7nP29aOsIlxD6QR0a2L5RjsbiEQanCPXMs=;
+ b=GTf8zh2j6TtM7x94D0Xc2W0bqBHVBrRljnKU8LCoojTRGF2Gcfvp56qQKwqip16g2b
+ 2FxKc20x/7c52hj0oU903mC5lk+b29fxBtph/Y274W/ksHeq1n0VHmwQ08VX8sGEuB9b
+ zrTkPsq6JWHtypawKLbm4moZMMCjm0Yjtl+0EIaiucvoZALmy4iURi7sq1Ul95kY30G7
+ VjWc/gkzEh0mit8Ey69ZD0nrUWKdOYGsBA1EBJtiz5Hi/zwb0udI/u+UPrJksI20unfZ
+ UsVfwqW+w0MntL1iz7EmVNU7y5yBpDDaIF1jOFzA6WG7SHPPx1zLaLn85/Td9V1MxoiB
+ zJ0Q==
+X-Gm-Message-State: AO0yUKU74vF8MiRqCu4Gx514ygf5RUqMnaZYDbCXG5S/VAohY072140O
+ JwI9qrJ2zrWevOnOFapc4CE8ORCnBUx46SXIHTkdJnPikW9dG2HeofbkueONdPJXIitVtok4Zvc
+ FehNWYTYWFaEJS4g=
+X-Received: by 2002:ad4:5764:0:b0:570:5389:2216 with SMTP id
+ r4-20020ad45764000000b0057053892216mr23125891qvx.22.1677603162740; 
+ Tue, 28 Feb 2023 08:52:42 -0800 (PST)
+X-Google-Smtp-Source: AK7set/uz8OqIjjwh7S9K0lAIBuXFG61BjDEwlxKafpLeaMq/MFIZQ0Ur8W4akQRtbFJpK07n5ltzA==
+X-Received: by 2002:ad4:5764:0:b0:570:5389:2216 with SMTP id
+ r4-20020ad45764000000b0057053892216mr23125864qvx.22.1677603162470; 
+ Tue, 28 Feb 2023 08:52:42 -0800 (PST)
+Received: from imammedo.users.ipa.redhat.com ([185.140.112.229])
  by smtp.gmail.com with ESMTPSA id
- w16-20020aa78590000000b005a8cc32b23csm6261326pfn.20.2023.02.28.08.10.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 28 Feb 2023 08:10:24 -0800 (PST)
-Message-ID: <2bdb572b-d6f4-5ff2-7dc4-33e27c885f89@ventanamicro.com>
-Date: Tue, 28 Feb 2023 21:40:21 +0530
+ v3-20020a379303000000b007429722e620sm6117315qkd.10.2023.02.28.08.52.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Feb 2023 08:52:41 -0800 (PST)
+Date: Tue, 28 Feb 2023 17:52:38 +0100
+From: Igor Mammedov <imammedo@redhat.com>
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, Andrew Jones
+ <ajones@ventanamicro.com>, Anup Patel <apatel@ventanamicro.com>, Atish
+ Kumar Patra <atishp@rivosinc.com>, Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>
+Subject: Re: [PATCH V4 5/8] hw/riscv/virt: virt-acpi-build.c: Add RINTC in MADT
+Message-ID: <20230228175238.468e6446@imammedo.users.ipa.redhat.com>
+In-Reply-To: <Y/2ujHMFrhnfJUiJ@sunil-laptop>
+References: <20230224083701.2657063-1-sunilvl@ventanamicro.com>
+ <20230224083701.2657063-6-sunilvl@ventanamicro.com>
+ <20230224135343.24a5a95b@imammedo.users.ipa.redhat.com>
+ <Y/jJMnHaspaic2M3@sunil-laptop>
+ <20230227164121.73d1ecc0@imammedo.users.ipa.redhat.com>
+ <Y/2ujHMFrhnfJUiJ@sunil-laptop>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.36; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH] target/riscv: Convert epmp from feature to ratified
- smepmp extension
-Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-riscv@nongnu.org, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: Weiwei Li <liweiwei@iscas.ac.cn>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20230203042434.67293-1-hchauhan@ventanamicro.com>
- <aa1e82f7-54e9-7324-0921-ff4612dcdbc7@ventanamicro.com>
-From: Himanshu Chauhan <hchauhan@ventanamicro.com>
-In-Reply-To: <aa1e82f7-54e9-7324-0921-ff4612dcdbc7@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=hchauhan@ventanamicro.com; helo=mail-pl1-x635.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.092,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -87,233 +101,118 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2023 16:10:30 -0000
+X-List-Received-Date: Tue, 28 Feb 2023 16:52:47 -0000
 
+On Tue, 28 Feb 2023 13:04:36 +0530
+Sunil V L <sunilvl@ventanamicro.com> wrote:
 
-On 28/02/23 21:23, Daniel Henrique Barboza wrote:
-> Hey. Sorry for the delay, this patch went through the cracks :(
->
-> (CCing the reviewers)
-> (CCing qemu-devel as well)
->
-> On 2/3/23 01:24, Himanshu Chauhan wrote:
->> Smepmp is a ratified extension. This patch converts the existing epmp
->> support as a feature to an extension. With this, "smepmp" string will
->> be concatenated to riscv,isa in generated FDT.
->>
->> Since the official name of the extension is Smepmp, the references
->> to epmp have also been changed to smepmp.
->>
->> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
->> ---
->>   target/riscv/cpu.c | 16 ++++++----------
->>   target/riscv/cpu.h |  3 +--
->>   target/riscv/csr.c |  8 +++++---
->>   target/riscv/pmp.c | 13 +++++++++----
->>   4 files changed, 21 insertions(+), 19 deletions(-)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 14a7027095..d9bba04226 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -103,6 +103,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
->>       ISA_EXT_DATA_ENTRY(zhinx, true, PRIV_VERSION_1_12_0, ext_zhinx),
->>       ISA_EXT_DATA_ENTRY(zhinxmin, true, PRIV_VERSION_1_12_0, 
->> ext_zhinxmin),
->>       ISA_EXT_DATA_ENTRY(smaia, true, PRIV_VERSION_1_12_0, ext_smaia),
->> +    ISA_EXT_DATA_ENTRY(smepmp, true, PRIV_VERSION_1_12_0, ext_smepmp),
->>       ISA_EXT_DATA_ENTRY(ssaia, true, PRIV_VERSION_1_12_0, ext_ssaia),
->>       ISA_EXT_DATA_ENTRY(sscofpmf, true, PRIV_VERSION_1_12_0, 
->> ext_sscofpmf),
->>       ISA_EXT_DATA_ENTRY(sstc, true, PRIV_VERSION_1_12_0, ext_sstc),
->> @@ -325,7 +326,7 @@ static void rv32_ibex_cpu_init(Object *obj)
->>       register_cpu_props(DEVICE(obj));
->>       set_priv_version(env, PRIV_VERSION_1_11_0);
->>       cpu->cfg.mmu = false;
->> -    cpu->cfg.epmp = true;
->> +    cpu->cfg.ext_smepmp = true;
->>   }
->>     static void rv32_imafcu_nommu_cpu_init(Object *obj)
->> @@ -884,14 +885,9 @@ static void riscv_cpu_realize(DeviceState *dev, 
->> Error **errp)
->>         if (cpu->cfg.pmp) {
->>           riscv_set_feature(env, RISCV_FEATURE_PMP);
->> -
->> -        /*
->> -         * Enhanced PMP should only be available
->> -         * on harts with PMP support
->> -         */
->> -        if (cpu->cfg.epmp) {
->> -            riscv_set_feature(env, RISCV_FEATURE_EPMP);
->> -        }
->> +    } else {
->> +        /* smepmp requires pmp support */
->> +        cpu->cfg.ext_smepmp = false;
->
->
-> I believe this and other chunk like it will collide with the work done 
-> in:
->
-> "[PATCH v7 00/10] make write_misa a no-op and FEATURE_* cleanups"
->
-> That series is already acked, so it would make the maintainer's life 
-> easier to
-> base this patch on top of that. You can add a:
->
-> Based-on: 20230222185205.355361-1-dbarboza@ventanamicro.com
-> ("[PATCH v7 00/10] make write_misa a no-op and FEATURE_* cleanups")
->
-> at the start of the cover-letter to indicate the dependency.
->
->>       }
->>         if (cpu->cfg.debug) {
->> @@ -1051,6 +1047,7 @@ static Property riscv_cpu_extensions[] = {
->>       DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
->>       DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
->>       DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
->> +    DEFINE_PROP_BOOL("smepmp", RISCVCPU, cfg.ext_smepmp, false),
->>       DEFINE_PROP_BOOL("sstc", RISCVCPU, cfg.ext_sstc, true),
->>         DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
->> @@ -1093,7 +1090,6 @@ static Property riscv_cpu_extensions[] = {
->>       /* These are experimental so mark with 'x-' */
->>       DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
->>       /* ePMP 0.9.3 */
->> -    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
->>       DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
->>       DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
->>   diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index bcf0826753..30fd29e578 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -87,7 +87,6 @@
->>   enum {
->>       RISCV_FEATURE_MMU,
->>       RISCV_FEATURE_PMP,
->> -    RISCV_FEATURE_EPMP,
->>       RISCV_FEATURE_MISA,
->>       RISCV_FEATURE_DEBUG
->>   };
->> @@ -465,6 +464,7 @@ struct RISCVCPUConfig {
->>       bool ext_smaia;
->>       bool ext_ssaia;
->>       bool ext_sscofpmf;
->> +    bool ext_smepmp;
->>       bool rvv_ta_all_1s;
->>       bool rvv_ma_all_1s;
->>   @@ -484,7 +484,6 @@ struct RISCVCPUConfig {
->>       uint16_t elen;
->>       bool mmu;
->>       bool pmp;
->> -    bool epmp;
->>       bool debug;
->>         bool short_isa_string;
->> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index 62e6c4acbd..f70f6d9aad 100644
->> --- a/target/riscv/csr.c
->> +++ b/target/riscv/csr.c
->> @@ -426,9 +426,11 @@ static RISCVException pmp(CPURISCVState *env, 
->> int csrno)
->>       return RISCV_EXCP_ILLEGAL_INST;
->>   }
->>   -static RISCVException epmp(CPURISCVState *env, int csrno)
->> +static RISCVException smepmp(CPURISCVState *env, int csrno)
->>   {
->> -    if (env->priv == PRV_M && riscv_feature(env, RISCV_FEATURE_EPMP)) {
->> +    RISCVCPU *cpu = env_archcpu(env);
->> +
->> +    if (env->priv == PRV_M && cpu->cfg.ext_smepmp) {
->
-> I did a recent cleanup in these code patterns by using a new 
-> riscv_cpu_cfg() API.
-> If you rebase this patch on top of that series (which has the API) 
-> this code would
-> become:
->
->> -   if (env->priv == PRV_M && riscv_feature(env, RISCV_FEATURE_EPMP)) {
->> +   if (env->priv == PRV_M && riscv_cpu_cfg(env)->ext_smepmp) {
->
->
->>           return RISCV_EXCP_NONE;
->>       }
->>   @@ -4259,7 +4261,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->>       [CSR_VSIPH]       = { "vsiph",       aia_hmode32, NULL, NULL, 
->> rmw_vsiph },
->>         /* Physical Memory Protection */
->> -    [CSR_MSECCFG]    = { "mseccfg",  epmp, read_mseccfg, write_mseccfg,
->> +    [CSR_MSECCFG]    = { "mseccfg",  smepmp, read_mseccfg, 
->> write_mseccfg,
->>                            .min_priv_ver = 
->> PRIV_VERSION_1_11_0           },
->>       [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg, 
->> write_pmpcfg  },
->>       [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg, 
->> write_pmpcfg  },
->> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
->> index d1126a6066..d85ad07caa 100644
->> --- a/target/riscv/pmp.c
->> +++ b/target/riscv/pmp.c
->> @@ -58,6 +58,11 @@ static inline int pmp_is_locked(CPURISCVState 
->> *env, uint32_t pmp_index)
->>       return 0;
->>   }
->>   +static inline int smepmp_is_enabled(CPURISCVState *env)
->> +{
->> +    return (RISCV_CPU(env_cpu(env))->cfg.ext_smepmp);
->> +}
->> +
->
-> I believe you can just read "riscv_cpu_cfg(env)->ext_smepmp" directly 
-> wherever you need
-> instead of creating a new function
->
->>   /*
->>    * Count the number of active rules.
->>    */
->> @@ -88,7 +93,7 @@ static void pmp_write_cfg(CPURISCVState *env, 
->> uint32_t pmp_index, uint8_t val)
->>       if (pmp_index < MAX_RISCV_PMPS) {
->>           bool locked = true;
->>   -        if (riscv_feature(env, RISCV_FEATURE_EPMP)) {
->> +        if (smepmp_is_enabled(env)) {
->>               /* mseccfg.RLB is set */
->>               if (MSECCFG_RLB_ISSET(env)) {
->>                   locked = false;
->> @@ -239,7 +244,7 @@ static bool 
->> pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
->>   {
->>       bool ret;
->>   -    if (riscv_feature(env, RISCV_FEATURE_EPMP)) {
->> +    if (smepmp_is_enabled(env)) {
->>           if (MSECCFG_MMWP_ISSET(env)) {
->>               /*
->>                * The Machine Mode Whitelist Policy (mseccfg.MMWP) is set
->> @@ -265,7 +270,7 @@ static bool 
->> pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
->>           }
->>       }
->>   -    if ((!riscv_feature(env, RISCV_FEATURE_PMP)) || (mode == 
->> PRV_M)) {
->> +    if (!smepmp_is_enabled(env) || (mode == PRV_M)) {
->>           /*
->>            * Privileged spec v1.10 states if HW doesn't implement any 
->> PMP entry
->>            * or no PMP entry matches an M-Mode access, the access 
->> succeeds.
->> @@ -348,7 +353,7 @@ int pmp_hart_has_privs(CPURISCVState *env, 
->> target_ulong addr,
->>             /*
->>            * Convert the PMP permissions to match the truth table in the
->> -         * ePMP spec.
->> +         * Smepmp spec.
->>            */
->>           const uint8_t epmp_operation =
->>               ((env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) >> 4) |
+> On Mon, Feb 27, 2023 at 04:41:21PM +0100, Igor Mammedov wrote:
+> > On Fri, 24 Feb 2023 19:56:58 +0530
+> > Sunil V L <sunilvl@ventanamicro.com> wrote:
+> >   
+> > > Hi Igor,
+> > > 
+> > > On Fri, Feb 24, 2023 at 01:53:43PM +0100, Igor Mammedov wrote:  
+> > > > On Fri, 24 Feb 2023 14:06:58 +0530
+> > > > Sunil V L <sunilvl@ventanamicro.com> wrote:
+> > > >     
+> > > > > Add Multiple APIC Description Table (MADT) with the
+> > > > > RINTC structure for each cpu.
+> > > > > 
+> > > > > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> > > > > Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> > > > > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> > > > > ---
+> > > > >  hw/riscv/virt-acpi-build.c | 44 ++++++++++++++++++++++++++++++++++++++
+> > > > >  1 file changed, 44 insertions(+)
+> > > > > 
+> > > > > diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> > > > > index 3a5e2e6d53..8b85b34c55 100644
+> > > > > --- a/hw/riscv/virt-acpi-build.c
+> > > > > +++ b/hw/riscv/virt-acpi-build.c
+> > > > > @@ -32,6 +32,7 @@
+> > > > >  #include "sysemu/reset.h"
+> > > > >  #include "migration/vmstate.h"
+> > > > >  #include "hw/riscv/virt.h"
+> > > > > +#include "hw/riscv/numa.h"
+> > > > >  
+> > > > >  #define ACPI_BUILD_TABLE_SIZE             0x20000
+> > > > >  
+> > > > > @@ -132,6 +133,46 @@ static void build_dsdt(GArray *table_data,
+> > > > >      free_aml_allocator();
+> > > > >  }
+> > > > >  
+> > > > > +/* MADT */    
+> > > > 
+> > > > see build_srat() how this comment must look like
+> > > >    
+> > > Currently, even though ECRs are approved, the ACPI spec is not released
+> > > for these MADT structures. I can add the spec version for the generic
+> > > MADT but not for the RINTC. Same issue with a new table RHCT.
+> > > What is the recommendation in such case?  
+> > 
+> > ther must be some draft variant of spec or a ticket where it was approved
+> > or a reference impl. somewhere.
+> >   
+> Sure, I can add the ticket ID. Thanks!
+and a link, later when new spec is published we can update it
+to rev/chapter format.
 
-Thanks Daniel. I will rebase, take care of the conflicts, comments and 
-then resend it.
-
-Regards
-
-Himanshu
+> 
+> > >   
+> > > > > +static void build_madt(GArray *table_data,
+> > > > > +                       BIOSLinker *linker,
+> > > > > +                       RISCVVirtState *s)
+> > > > > +{
+> > > > > +    MachineState *ms = MACHINE(s);
+> > > > > +    int socket;
+> > > > > +    uint16_t base_hartid = 0;
+> > > > > +    uint32_t cpu_id = 0;
+> > > > > +
+> > > > > +    AcpiTable table = { .sig = "APIC", .rev = 6, .oem_id = s->oem_id,
+> > > > > +                        .oem_table_id = s->oem_table_id };
+> > > > > +
+> > > > > +    acpi_table_begin(&table, table_data);
+> > > > > +    /* Local Interrupt Controller Address */
+> > > > > +    build_append_int_noprefix(table_data, 0, 4);
+> > > > > +    build_append_int_noprefix(table_data, 0, 4);   /* MADT Flags */
+> > > > > +
+> > > > > +    /* RISC-V Local INTC structures per HART */
+> > > > > +    for (socket = 0; socket < riscv_socket_count(ms); socket++) {
+> > > > > +        base_hartid = riscv_socket_first_hartid(ms, socket);
+> > > > > +
+> > > > > +        for (int i = 0; i < s->soc[socket].num_harts; i++) {
+> > > > > +            build_append_int_noprefix(table_data, 0x18, 1);    /* Type     */
+> > > > > +            build_append_int_noprefix(table_data, 20, 1);      /* Length   */
+> > > > > +            build_append_int_noprefix(table_data, 1, 1);       /* Version  */
+> > > > > +            build_append_int_noprefix(table_data, 0, 1);       /* Reserved */
+> > > > > +            build_append_int_noprefix(table_data, 1, 4);       /* Flags    */
+> > > > > +            build_append_int_noprefix(table_data,
+> > > > > +                                      (base_hartid + i), 8);   /* Hart ID  */
+> > > > > +
+> > > > > +            /* ACPI Processor UID  */
+> > > > > +            build_append_int_noprefix(table_data, cpu_id, 4);    
+> > > > 
+> > > > cpu_id here seems to be unrelated to one in DSDT.
+> > > > Could you explain how socket/hartid and cpu_id are related to each other?
+> > > >     
+> > > cpu_id should match the _UID. I needed two loops here to get the
+> > > base_hartid of the socket. hart_id is the unique ID for each hart
+> > > similar to MPIDR / APIC ID. I understand your point. Let me make DSDT
+> > > also created using two loops so that both match.  
+> > 
+> > Why not reuse possible CPUs to describe topology there and then
+> > use ids from it to build ACPI tables instead of inventing your own
+> > cpu topo all over the place?
+> > 
+> > PS: look for possible_cpus and how it's used (virt-arm already uses it
+> > although partially). And I'd like to avoid adding new ad-hoc ways
+> > to describe CPU topology is current possible_cpu ca do the job.  
+> 
+> Okay, sure. Let me take a look at possible_cpus and use in cpu topology.
+> Thanks!
+maybe following could be of help:
+  hw/i386/acpi-common.c:acpi_build_madt
+  and see how madt_cpu is used.
 
 
