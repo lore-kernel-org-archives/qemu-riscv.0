@@ -1,38 +1,38 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pWxT8-0001dN-2f
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Feb 2023 05:44:26 -0500
+	id 1pWxU4-0002iI-Un
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Feb 2023 05:45:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1pWxT6-0001cx-Bf; Tue, 28 Feb 2023 05:44:24 -0500
+ id 1pWxU1-0002gO-RB; Tue, 28 Feb 2023 05:45:22 -0500
 Received: from bg4.exmail.qq.com ([43.154.221.58])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
- id 1pWxT3-0002tI-J9; Tue, 28 Feb 2023 05:44:24 -0500
-X-QQ-mid: bizesmtp84t1677581040t1m2frpy
+ id 1pWxTz-0003KC-Vo; Tue, 28 Feb 2023 05:45:21 -0500
+X-QQ-mid: bizesmtp66t1677581104teejqsck
 Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
  by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 28 Feb 2023 18:43:57 +0800 (CST)
+ id ; Tue, 28 Feb 2023 18:45:03 +0800 (CST)
 X-QQ-SSF: 01200000000000D0E000000A0000000
-X-QQ-FEAT: ILHsT53NKPjIAYFLn137NrqjAJubMJnmnFZLU9rTEdohw6iN/tKw3ke0FPK27
- qVCkjCgvRXTXE5hIXB9122jac2qBXOIhbS7eHEqgtOOOuIKJaGeCaJksTn8CxNo95F+rFNY
- MJDeCWer+BXS7wpe2GMhwAohV5K9C3jqasvuOMntaaBoOobqW8Ax36GqWQOKy/3YLVa3xSc
- 8GhrWc0rkDG/WhnbRR/3+w9rQDWHxuCwd6Pu3c3QYZtKPwQHrIg1jGMwoFpkvcA8VN4VrIT
- fSU42B4VZV/jITPcNVjPYhv9aD7x3hCKmfsxMQMvZvVFW8GQZp/DSGIQmvD6R9ubaT7ILLs
- vCXqoOY16tvFCBqSEcAN3ERu3ARGH5ofDQ4Q+XO
+X-QQ-FEAT: XBN7tc9DADIiKnjL71AgyfMs9KlQQOCupLSUV5+hZnNfGXc2yZaSpfu+wsShP
+ EAl/mrdKriC37CGV5KnbruUXnVqWdQKNQ3zq6e6SuzOmShCV003zduKD2eqt/qp+OTnnqML
+ wbzD3fF1RHn6f7+ed7+89X3heTLGIDlheLM4FEuR2ycA9asd+ED3sbNZDnqACwAZ0xCRd6M
+ /xrS4Sfn1aqg6DZ/lSwEDbEUiu/50x1I4aKTrBPfnu2LZKM0lqdnkJndZdBU6uoevWdBbXN
+ QYrL+QVYvGx0aV3IYowIgUDD65Gmmoy2JCmHsll0GYHspa9cmLfbLaChDsbarJkgwxE5ohW
+ C29yfuYhxFjYH1PpZ/Vtj4OG4M+5qOdxAjo4uz428liNNFC+xk=
 X-QQ-GoodBg: 0
 From: Bin Meng <bmeng@tinylab.org>
 To: qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
+Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- qemu-riscv@nongnu.org
-Subject: [PATCH v2 03/18] target/riscv: Use g_assert() for the predicate()
- NULL check
-Date: Tue, 28 Feb 2023 18:40:19 +0800
-Message-Id: <20230228104035.1879882-4-bmeng@tinylab.org>
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
+Subject: [PATCH v2 04/18] target/riscv: gdbstub: Minor change for better
+ readability
+Date: Tue, 28 Feb 2023 18:40:20 +0800
+Message-Id: <20230228104035.1879882-5-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230228104035.1879882-1-bmeng@tinylab.org>
 References: <20230228104035.1879882-1-bmeng@tinylab.org>
@@ -59,49 +59,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2023 10:44:24 -0000
+X-List-Received-Date: Tue, 28 Feb 2023 10:45:22 -0000
 
-At present riscv_csrrw_check() checks the CSR predicate() against
-NULL and throws RISCV_EXCP_ILLEGAL_INST if it is NULL. But this is
-a pure software check, and has nothing to do with the emulation of
-the hardware behavior, thus it is inappropriate to return illegal
-instruction exception when software forgets to install the hook.
-
-Change to use g_assert() instead.
+Use a variable 'base_reg' to represent cs->gdb_num_regs so that
+the call to ricsv_gen_dynamic_vector_xml() can be placed in one
+single line for better readability.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 ---
 
-Changes in v2:
-- new patch: Use assert() for the predicate() NULL check
+(no changes since v1)
 
- target/riscv/csr.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ target/riscv/gdbstub.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 4cc2c6370f..cfd7ffc5c2 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -3786,11 +3786,6 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
-         return RISCV_EXCP_ILLEGAL_INST;
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index e57372db38..704f3d6922 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -385,9 +385,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+                                  32, "riscv-32bit-fpu.xml", 0);
      }
- 
--    /* check predicate */
--    if (!csr_ops[csrno].predicate) {
--        return RISCV_EXCP_ILLEGAL_INST;
--    }
--
-     /* read / write check */
-     if (write_mask && read_only) {
-         return RISCV_EXCP_ILLEGAL_INST;
-@@ -3803,6 +3798,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
-      * illegal instruction exception should be triggered instead of virtual
-      * instruction exception. Hence this comes after the read / write check.
-      */
-+    g_assert(csr_ops[csrno].predicate != NULL);
-     RISCVException ret = csr_ops[csrno].predicate(env, csrno);
-     if (ret != RISCV_EXCP_NONE) {
-         return ret;
+     if (env->misa_ext & RVV) {
++        int base_reg = cs->gdb_num_regs;
+         gdb_register_coprocessor(cs, riscv_gdb_get_vector, riscv_gdb_set_vector,
+-                                 ricsv_gen_dynamic_vector_xml(cs,
+-                                                              cs->gdb_num_regs),
++                                 ricsv_gen_dynamic_vector_xml(cs, base_reg),
+                                  "riscv-vector.xml", 0);
+     }
+     switch (env->misa_mxl_max) {
 -- 
 2.25.1
 
