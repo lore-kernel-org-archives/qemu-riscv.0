@@ -1,51 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pXJ8D-0007cO-RZ
-	for mharc-qemu-riscv@gnu.org; Wed, 01 Mar 2023 04:52:17 -0500
+	id 1pXJBi-0002Vg-Hu
+	for mharc-qemu-riscv@gnu.org; Wed, 01 Mar 2023 04:55:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pXJ8B-0007bn-4o; Wed, 01 Mar 2023 04:52:15 -0500
-Received: from out30-111.freemail.mail.aliyun.com ([115.124.30.111])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pXJ88-0002xO-VQ; Wed, 01 Mar 2023 04:52:14 -0500
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R711e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0VcsZR54_1677664322; 
-Received: from 30.221.97.107(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VcsZR54_1677664322) by smtp.aliyun-inc.com;
- Wed, 01 Mar 2023 17:52:02 +0800
-Message-ID: <bc58e75a-e791-a507-767d-c95dbc59bc38@linux.alibaba.com>
-Date: Wed, 1 Mar 2023 17:52:00 +0800
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pXJBh-0002Sy-AW; Wed, 01 Mar 2023 04:55:53 -0500
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1pXJBc-0003a2-1U; Wed, 01 Mar 2023 04:55:49 -0500
+Received: by mail-ed1-x530.google.com with SMTP id cw28so2342089edb.5;
+ Wed, 01 Mar 2023 01:55:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g1MCv/PXQ1xNCYra+TZIM+TeVdzG3M2/dQOXoq76nok=;
+ b=E3cV15zCAmhbA07HrJ1FjleVTjc+K2XeHX8BNL7R3GKEQxeeSkMPLeDLamzmKJEHNE
+ EgNpwWNLyr10e1C/RGsflkNE+K9OFbAr2ZEeC905yysuNNCoLDTkCy/FxPhDHOwuwoo0
+ 9lqgQmIjM96aaulrYySQlq2uqh0djH23Xzow4OBdHPnvDKCSiaQEeR7fe865bE6jK656
+ 1bc9L9pkm/B6zt8es+GHFLN6cbJ+xEC4nfHiq2TvObNtKxAl3zPm65QmNzqkRcjGbMcn
+ XuLTPq+CimvlKXGZfnRPlQAa7ig+A1fHIVfWdcMBeywjkAZwoy0+6DeJLYi21gPbGuRY
+ Fk8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=g1MCv/PXQ1xNCYra+TZIM+TeVdzG3M2/dQOXoq76nok=;
+ b=xgQctwlcb8Vdz/kXZVRUXyPIIhZKfeJOA6vaioRnfzS+MT3y20oC1crwwQ5ac1ctrw
+ 4OipRB4TXJf9veY3xOYwhfsofh/Vv/294DAUdH1Re8K5SaWq/c/glcpRWuApYOvJEYR/
+ ecSR20yCP3zWMbNwjytJ4roYD1pKwGnZeUP3NUkXn8yGLXwuwPMOS8hnMZX6pyU8yiyz
+ gq6RLgirqrTgyQQib70O66VzF4sHQcsNjEj6nmD3RG/pe1SA+TACKiQrrbWITaF+Ud2o
+ Yb2ycm6IgcO5dT9B7h2R9asvSjjpdSoDwz3Lx48dnH/EuKkSqU99AtLeYOkEVpZTErNo
+ p++g==
+X-Gm-Message-State: AO0yUKWFvhiSD1RwWZL7eZKropt921/ZAp+fGh53C7udTobS2CIIG48i
+ YmVqhF/39ozNoa0VtJV8xKcDrYmvYCoEZZD6h+k=
+X-Google-Smtp-Source: AK7set8FWG6fbzX57DNa52cCxFhgz0EhBuybLP5yyEYGqn2CmGNXWxU8np0yXu7/Ry4q8OlWuyodqNq4qjxwhK1NJKk=
+X-Received: by 2002:a17:907:7648:b0:8b1:7e1b:5ec1 with SMTP id
+ kj8-20020a170907764800b008b17e1b5ec1mr2966667ejc.6.1677664545939; Wed, 01 Mar
+ 2023 01:55:45 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH v2 05/18] target/riscv: gdbstub: Do not generate CSR XML
- if Zicsr is disabled
-To: Bin Meng <bmeng@tinylab.org>, qemu-devel@nongnu.org
-Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
 References: <20230228104035.1879882-1-bmeng@tinylab.org>
  <20230228104035.1879882-6-bmeng@tinylab.org>
-Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230228104035.1879882-6-bmeng@tinylab.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.111;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-111.freemail.mail.aliyun.com
-X-Spam_score_int: -99
-X-Spam_score: -10.0
-X-Spam_bar: ----------
-X-Spam_report: (-10.0 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.092, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ <bc58e75a-e791-a507-767d-c95dbc59bc38@linux.alibaba.com>
+In-Reply-To: <bc58e75a-e791-a507-767d-c95dbc59bc38@linux.alibaba.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 1 Mar 2023 17:55:34 +0800
+Message-ID: <CAEUhbmWtg8+V44h7xgtggcORLww7kCv60DX+r3XYFTOrgzMtmA@mail.gmail.com>
+Subject: Re: [PATCH v2 05/18] target/riscv: gdbstub: Do not generate CSR XML
+ if Zicsr is disabled
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: Bin Meng <bmeng@tinylab.org>, qemu-devel@nongnu.org, 
+ Weiwei Li <liweiwei@iscas.ac.cn>, Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x530.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -58,44 +79,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Mar 2023 09:52:15 -0000
+X-List-Received-Date: Wed, 01 Mar 2023 09:55:53 -0000
 
+On Wed, Mar 1, 2023 at 5:52=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibaba=
+.com> wrote:
+>
+>
+> On 2023/2/28 18:40, Bin Meng wrote:
+> > There is no need to generate the CSR XML if the Zicsr extension
+> > is not enabled.
+>
+> Should we generate the FPU XML or Vector XML when Zicsr is not enabled?
 
-On 2023/2/28 18:40, Bin Meng wrote:
-> There is no need to generate the CSR XML if the Zicsr extension
-> is not enabled.
-
-Should we generate the FPU XML or Vector XML when Zicsr is not enabled?
-
-Zhiwei
+Good point. I think we should disable that too.
 
 >
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
-> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> ---
+> Zhiwei
 >
-> (no changes since v1)
->
->   target/riscv/gdbstub.c | 9 ++++++---
->   1 file changed, 6 insertions(+), 3 deletions(-)
->
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index 704f3d6922..294f0ceb1c 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -406,7 +406,10 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
->           g_assert_not_reached();
->       }
->   
-> -    gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-> -                             riscv_gen_dynamic_csr_xml(cs, cs->gdb_num_regs),
-> -                             "riscv-csr.xml", 0);
-> +    if (cpu->cfg.ext_icsr) {
-> +        int base_reg = cs->gdb_num_regs;
-> +        gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-> +                                 riscv_gen_dynamic_csr_xml(cs, base_reg),
-> +                                 "riscv-csr.xml", 0);
-> +    }
->   }
+
+Regards,
+Bin
 
