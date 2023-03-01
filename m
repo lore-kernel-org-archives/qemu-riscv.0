@@ -1,36 +1,36 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pXPq7-0002Ss-Rp
-	for mharc-qemu-riscv@gnu.org; Wed, 01 Mar 2023 12:02:03 -0500
+	id 1pXPrJ-0004Tg-4V
+	for mharc-qemu-riscv@gnu.org; Wed, 01 Mar 2023 12:03:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1pXPq0-0002Fu-P0; Wed, 01 Mar 2023 12:02:00 -0500
+ id 1pXPr3-00044Q-V0; Wed, 01 Mar 2023 12:03:02 -0500
 Received: from mail.ilande.co.uk ([2001:41c9:1:41f::167])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1pXPpy-0000UX-G2; Wed, 01 Mar 2023 12:01:56 -0500
+ id 1pXPr1-0000hF-Mm; Wed, 01 Mar 2023 12:03:01 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=ilande.co.uk; s=20220518; h=Subject:Content-Transfer-Encoding:Content-Type:
  In-Reply-To:From:References:Cc:To:MIME-Version:Date:Message-ID:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Mr19QZi7L1E7pg6vpF/yhsdmvgzt83cxZ8+vt+D0rUs=; b=icJno/dPOWBtfADrqLaa280Vp3
- RlT9ghpXEhSHFpfkwLSQHoYv7tJFg17rs9eaCjtexruMKdqPE1mI/IvX4U+SoEQik6R+aVhSPcieu
- r5+FRPB2XhGNg/Fwnz9aNPGU8IxO2+Uc9BcwtS3WFXivcK+9EYju3Gs3xgIaI7OWuQx2SzqvD7M31
- bsDACvtaTcgbe/q5byZUGz5nSpXX6nhyuv8bvkmkCaDx6RD4ssRvlTnYi5IIemNatAiHSIDnaIwt7
- REJKQKk40LKksdV/MrhvegX1Ys2taEj/ZjrwOvq9UaFi9yYyKI06t596ENUxAr9iDlNoPPSmjnzhI
- jwYrVZFmtftzsw4rWbfo2/VNPopu2E5hnM5T097F0EkcnBXPXTNZ7sQdaqYoNl7BgOf0oJZRhPUXx
- 5IZYcXIzVJvWICNxv1oxZ7y4UIGqapsHFQ8vkNAl36IRWyjk/9+kBLLDz5MFgFfijn8mH8gv1jwI0
- EFI7p48h/wjWjFMdTF4ydoBgNHLd/glenlgsgyuBKTLsALfX3wkza8gZuhPl22wvMN9JpzoQrRz4H
- 6xDjAp0cHOR3/Ew2so7CAFY114H8+ijjoKwV50cvFVV1Hxbsi8s6QRgMze7eytfFOOLOmx+wRO+Cq
- ck7egMaX9khjG9KLagqyuL4n5taVmSXfLXIPhZIdg=;
+ bh=xZKM4q0f9aPHbo0kvvOKBzsA2Iuo1Vk6cQ0bSvg/CRY=; b=05+FCQzcws4DRtv04vJJfghpkk
+ f0lJoH4NLVgn8UXUwXJJ7Sh2KIrCq48CYgkHR5weDHeO7mKGnUgl4dGaT5kUKXJpPb5TIWNbiv2kA
+ TktqfrM6OhcEUQ1FRFuZJ5oYn3tvoMTM5b4T7FUGcoNMNbLUX/a58CyGvwyNJYGqVbXmNJsrHLh8h
+ gSKJkpRgVH50ozcOqnUqpH2WNqecnKmV8oF8MXF4IMNaa2sfbVBIYEvyRD0GvgEFP8nOznXsUx+Xj
+ +KkDQhe0CXDYJrxefGBiX1tupi5gHLe/AOQ7IuGpp2cBi7MsAstZrIZz1RGcNjeLoijtRQ067phLC
+ FeCnv7AXGdSykfj/dRD2H7b7vTsAzXosNb77Z4fs8co0HAyJstJNSDTcKabt4P+op6W5PCMhAcBh/
+ YgIrMORqAT38om2Xgwb9w25XIqS6Jt2nS/4DLJz0P0oMDBDDv/nl5hv5Q0RoR2tpVo8Ewonco/Ewb
+ W8zzf9Gj7fInyuLPkj2L9PLXiNsAV880yPe2KgX9tHuswCe3IiuzSZLsC75K6YS7vmO8n9ff/OyiQ
+ 0Tf7iE0JesikxIsefSqN5/ywrzMnMyh2Mwewg3YZ08ECjz+BMUN3IPdGyGwhb+YgJu+q1P48Rcy0k
+ Uhupy3+8lo/yp69YoUGHBQxP9EcYnG6+qAgTZ9Qqw=;
 Received: from [2a00:23c4:8baa:d400:877:cbd2:6fe8:34fc]
  by mail.ilande.co.uk with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.92) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1pXPpD-0002a4-70; Wed, 01 Mar 2023 17:01:11 +0000
-Message-ID: <6031007d-b052-4609-2592-412ffc275497@ilande.co.uk>
-Date: Wed, 1 Mar 2023 17:01:41 +0000
+ id 1pXPqF-0002bA-4K; Wed, 01 Mar 2023 17:02:15 +0000
+Message-ID: <195c75eb-136d-57d9-cf08-bbfc339cac51@ilande.co.uk>
+Date: Wed, 1 Mar 2023 17:02:44 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.13.0
@@ -40,14 +40,15 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, kbastian@mail.uni-paderborn.de,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
-References: <20230227052505.352889-1-richard.henderson@linaro.org>
+References: <20230227054233.390271-1-richard.henderson@linaro.org>
+ <20230227054233.390271-56-richard.henderson@linaro.org>
 From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-In-Reply-To: <20230227052505.352889-1-richard.henderson@linaro.org>
+In-Reply-To: <20230227054233.390271-56-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-SA-Exim-Connect-IP: 2a00:23c4:8baa:d400:877:cbd2:6fe8:34fc
 X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
-Subject: Re: [PATCH v2 00/76] tcg: Drop tcg_temp_free from translators
+Subject: Re: [PATCH 55/70] target/sparc: Avoid tcg_const_{tl,i32}
 X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
 X-SA-Exim-Scanned: Yes (on mail.ilande.co.uk)
 Received-SPF: pass client-ip=2001:41c9:1:41f::167;
@@ -70,208 +71,290 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Mar 2023 17:02:01 -0000
+X-List-Received-Date: Wed, 01 Mar 2023 17:03:08 -0000
 
-On 27/02/2023 05:23, Richard Henderson wrote:
+On 27/02/2023 05:42, Richard Henderson wrote:
 
-> Based-on: 20230225085945.1798188-1-richard.henderson@linaro.org
-> ("[PATCH v3 00/30] tcg: Simplify temporary usage")
+> All remaining uses are strictly read-only.
 > 
-> In the above patch set, we changed the lifetime of the temps
-> allocated by the guest translators, and eliminated their reuse,
-> so that we have the best chance of reducing their strength.
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   target/sparc/translate.c | 80 +++++++++++++++++++---------------------
+>   1 file changed, 38 insertions(+), 42 deletions(-)
 > 
-> That we don't reuse them means that we gain nothing by freeing them.
-> Therefore, drop all mention of tcg_temp_free from target/.
-> 
-> Changes for v2:
->    * Apply r-b.
->    * Fix 74/76 "tracing: remove transform.py".
-> 
-> 
-> r~
-> 
-> 
-> Richard Henderson (76):
->    tcg: Remove tcg_check_temp_count, tcg_clear_temp_count
->    accel/tcg: Remove translator_loop_temp_check
->    target/alpha: Drop tcg_temp_free
->    target/arm: Remove arm_free_cc, a64_free_cc
->    target/arm: Remove value_global from DisasCompare
->    target/arm: Drop tcg_temp_free from translator.c
->    target/arm: Drop DisasContext.tmp_a64
->    target/arm: Drop new_tmp_a64
->    target/arm: Drop new_tmp_a64_zero
->    target/arm: Drop tcg_temp_free from translator-a64.c
->    target/arm: Drop tcg_temp_free from translator-m-nocp.c
->    target/arm: Drop tcg_temp_free from translator-mve.c
->    target/arm: Drop tcg_temp_free from translator-neon.c
->    target/arm: Drop tcg_temp_free from translator-sme.c
->    target/arm: Drop tcg_temp_free from translator-sve.c
->    target/arm: Drop tcg_temp_free from translator-vfp.c
->    target/arm: Drop tcg_temp_free from translator.h
->    target/avr: Drop DisasContext.free_skip_var0
->    target/avr: Drop R from trans_COM
->    target/avr: Drop tcg_temp_free
->    target/cris: Drop cris_alu_free_temps
->    target/cris: Drop cris_alu_m_free_temps
->    target/cris: Drop addr from dec10_ind_move_m_pr
->    target/cris: Drop tcg_temp_free
->    target/hexagon: Drop tcg_temp_free from C code
->    target/hexagon: Drop tcg_temp_free from gen_tcg_funcs.py
->    target/hexagon/idef-parser: Drop tcg_temp_free
->    target/hexagon/idef-parser: Drop HexValue.is_manual
->    target/hppa: Drop tcg_temp_free
->    target/i386: Drop tcg_temp_free
->    target/loongarch: Drop temp_new
->    target/loongarch: Drop tcg_temp_free
->    target/m68k: Drop mark_to_release
->    target/m68k: Drop free_cond
->    target/m68k: Drop tcg_temp_free
->    target/microblaze: Drop tcg_temp_free
->    target/mips: Drop tcg_temp_free from micromips_translate.c.inc
->    target/mips: Drop tcg_temp_free from mips16e_translate.c.inc
->    target/mips: Drop tcg_temp_free from msa_translate.c
->    target/mips: Drop tcg_temp_free from mxu_translate.c
->    target/mips: Drop tcg_temp_free from nanomips_translate.c.inc
->    target/mips: Drop tcg_temp_free from octeon_translate.c
->    target/mips: Drop tcg_temp_free from translate_addr_const.c
->    target/mips: Drop tcg_temp_free from tx79_translate.c
->    target/mips: Fix trans_mult_acc return
->    target/mips: Drop tcg_temp_free from vr54xx_translate.c
->    target/mips: Drop tcg_temp_free from translate.c
->    target/nios2: Drop tcg_temp_free
->    target/openrisc: Drop tcg_temp_free
->    target/ppc: Drop tcg_temp_free
->    target/riscv: Drop ftemp_new
->    target/riscv: Drop temp_new
->    target/riscv: Drop tcg_temp_free
->    target/rx: Drop tcg_temp_free
->    target/s390x: Use tcg_constant_* in local contexts
->    target/s390x: Use tcg_constant_* for DisasCompare
->    target/s390x: Use tcg_constant_i32 for fpinst_extract_m34
->    target/s390x: Use tcg_constant_* in translate_vx.c.inc
->    target/s390x: Drop free_compare
->    target/s390x: Drop tcg_temp_free from translate_vx.c.inc
->    target/s390x: Drop tcg_temp_free from translate.c
->    target/s390x: Remove assert vs g_in2
->    target/s390x: Remove g_out, g_out2, g_in1, g_in2 from DisasContext
->    target/sh4: Drop tcg_temp_free
->    target/sparc: Drop get_temp_tl
->    target/sparc: Drop get_temp_i32
->    target/sparc: Remove egress label in disas_sparc_context
->    target/sparc: Drop free_compare
->    target/sparc: Drop tcg_temp_free
->    target/tricore: Drop tcg_temp_free
->    target/xtensa: Drop reset_sar_tracker
->    target/xtensa: Drop tcg_temp_free
->    include/exec/gen-icount: Drop tcg_temp_free in gen_tb_start
->    tracing: remove transform.py
->    tcg: Create tcg/tcg-temp-internal.h
->    docs/devel/tcg-ops: Drop recommendation to free temps
-> 
->   docs/devel/tcg-ops.rst                        |   4 -
->   target/hexagon/idef-parser/README.rst         |   8 -
->   meson.build                                   |   1 -
->   include/exec/gen-icount.h                     |   2 -
->   include/exec/translator.h                     |   2 -
->   include/tcg/tcg-temp-internal.h               |  83 +++
->   include/tcg/tcg.h                             |  68 --
->   target/arm/translate-a64.h                    |   2 -
->   target/arm/translate.h                        |   7 -
->   target/hexagon/gen_tcg.h                      |  29 -
->   target/hexagon/gen_tcg_hvx.h                  |  15 -
->   target/hexagon/idef-parser/idef-parser.h      |   1 -
->   target/hexagon/idef-parser/parser-helpers.h   |   4 -
->   target/hexagon/macros.h                       |   7 -
->   target/loongarch/translate.h                  |   3 -
->   accel/tcg/plugin-gen.c                        |   1 +
->   accel/tcg/translator.c                        |  16 -
->   target/alpha/translate.c                      |  71 --
->   target/arm/translate-a64.c                    | 594 ++--------------
->   target/arm/translate-m-nocp.c                 |  20 -
->   target/arm/translate-mve.c                    |  52 --
->   target/arm/translate-neon.c                   | 131 +---
->   target/arm/translate-sme.c                    |  28 -
->   target/arm/translate-sve.c                    | 206 +-----
->   target/arm/translate-vfp.c                    | 193 -----
->   target/arm/translate.c                        | 281 +-------
->   target/avr/translate.c                        | 251 -------
->   target/cris/translate.c                       | 113 ---
->   target/hexagon/genptr.c                       |  58 --
->   target/hexagon/idef-parser/parser-helpers.c   | 157 ----
->   target/hexagon/translate.c                    |   7 -
->   target/hppa/translate.c                       |  93 +--
->   target/i386/tcg/translate.c                   |  41 --
->   target/loongarch/translate.c                  |  21 +-
->   target/m68k/translate.c                       | 276 +-------
->   target/microblaze/translate.c                 |  54 --
->   target/mips/tcg/msa_translate.c               |   9 -
->   target/mips/tcg/mxu_translate.c               |  51 --
->   target/mips/tcg/octeon_translate.c            |  23 -
->   target/mips/tcg/translate.c                   | 537 +-------------
->   target/mips/tcg/translate_addr_const.c        |   7 -
->   target/mips/tcg/tx79_translate.c              |  41 --
->   target/mips/tcg/vr54xx_translate.c            |   6 +-
->   target/nios2/translate.c                      |  15 -
->   target/openrisc/translate.c                   |  39 -
->   target/ppc/translate.c                        | 285 --------
->   target/riscv/translate.c                      |  61 +-
->   target/rx/translate.c                         |  84 ---
->   target/s390x/tcg/translate.c                  | 668 +++++-------------
->   target/sh4/translate.c                        | 110 ---
->   target/sparc/translate.c                      | 259 +------
->   target/tricore/translate.c                    | 540 +-------------
->   target/xtensa/translate.c                     | 121 +---
->   tcg/tcg-op-gvec.c                             |   1 +
->   tcg/tcg-op-vec.c                              |   1 +
->   tcg/tcg-op.c                                  |   1 +
->   tcg/tcg.c                                     |  55 +-
->   target/cris/translate_v10.c.inc               |  49 +-
->   target/i386/tcg/decode-new.c.inc              |  15 -
->   target/i386/tcg/emit.c.inc                    |   6 -
->   target/loongarch/insn_trans/trans_arith.c.inc |  12 -
->   .../loongarch/insn_trans/trans_atomic.c.inc   |   3 -
->   target/loongarch/insn_trans/trans_bit.c.inc   |  12 -
->   target/loongarch/insn_trans/trans_fcmp.c.inc  |   3 -
->   .../loongarch/insn_trans/trans_fmemory.c.inc  |  20 +-
->   target/loongarch/insn_trans/trans_fmov.c.inc  |   6 -
->   .../loongarch/insn_trans/trans_memory.c.inc   |  34 +-
->   .../insn_trans/trans_privileged.c.inc         |   6 +-
->   target/loongarch/insn_trans/trans_shift.c.inc |  11 -
->   target/mips/tcg/micromips_translate.c.inc     |   8 -
->   target/mips/tcg/mips16e_translate.c.inc       |   6 -
->   target/mips/tcg/nanomips_translate.c.inc      | 127 +---
->   target/ppc/power8-pmu-regs.c.inc              |  16 -
->   target/ppc/translate/dfp-impl.c.inc           |  20 -
->   target/ppc/translate/fixedpoint-impl.c.inc    |  16 -
->   target/ppc/translate/fp-impl.c.inc            | 122 +---
->   target/ppc/translate/spe-impl.c.inc           |  59 --
->   target/ppc/translate/storage-ctrl-impl.c.inc  |   2 -
->   target/ppc/translate/vmx-impl.c.inc           | 296 +-------
->   target/ppc/translate/vsx-impl.c.inc           | 287 +-------
->   target/riscv/insn_trans/trans_rvb.c.inc       |  24 -
->   target/riscv/insn_trans/trans_rvd.c.inc       |   2 -
->   target/riscv/insn_trans/trans_rvf.c.inc       |   9 -
->   target/riscv/insn_trans/trans_rvi.c.inc       |  37 -
->   target/riscv/insn_trans/trans_rvk.c.inc       |  15 -
->   target/riscv/insn_trans/trans_rvm.c.inc       |  33 -
->   target/riscv/insn_trans/trans_rvv.c.inc       |  55 --
->   target/riscv/insn_trans/trans_rvzfh.c.inc     |  12 +-
->   target/riscv/insn_trans/trans_xthead.c.inc    |  24 +-
->   target/s390x/tcg/translate_vx.c.inc           | 188 +----
->   scripts/tracetool/__init__.py                 |  23 -
->   scripts/tracetool/transform.py                | 168 -----
->   target/hexagon/README                         |   5 -
->   target/hexagon/gen_tcg_funcs.py               |  79 +--
->   target/hexagon/idef-parser/idef-parser.y      |  12 -
->   95 files changed, 471 insertions(+), 7165 deletions(-)
->   create mode 100644 include/tcg/tcg-temp-internal.h
->   delete mode 100644 scripts/tracetool/transform.py
+> diff --git a/target/sparc/translate.c b/target/sparc/translate.c
+> index 925023adef..137bdc5159 100644
+> --- a/target/sparc/translate.c
+> +++ b/target/sparc/translate.c
+> @@ -550,7 +550,7 @@ static inline void gen_op_mulscc(TCGv dst, TCGv src1, TCGv src2)
+>       if (!(env->y & 1))
+>           T1 = 0;
+>       */
+> -    zero = tcg_const_tl(0);
+> +    zero = tcg_constant_tl(0);
+>       tcg_gen_andi_tl(cpu_cc_src, src1, 0xffffffff);
+>       tcg_gen_andi_tl(r_temp, cpu_y, 0x1);
+>       tcg_gen_andi_tl(cpu_cc_src2, src2, 0xffffffff);
+> @@ -928,8 +928,8 @@ static void gen_branch_n(DisasContext *dc, target_ulong pc1)
+>           tcg_gen_mov_tl(cpu_pc, cpu_npc);
+>   
+>           tcg_gen_addi_tl(cpu_npc, cpu_npc, 4);
+> -        t = tcg_const_tl(pc1);
+> -        z = tcg_const_tl(0);
+> +        t = tcg_constant_tl(pc1);
+> +        z = tcg_constant_tl(0);
+>           tcg_gen_movcond_tl(TCG_COND_NE, cpu_npc, cpu_cond, z, t, cpu_npc);
+>   
+>           dc->pc = DYNAMIC_PC;
+> @@ -938,9 +938,9 @@ static void gen_branch_n(DisasContext *dc, target_ulong pc1)
+>   
+>   static inline void gen_generic_branch(DisasContext *dc)
+>   {
+> -    TCGv npc0 = tcg_const_tl(dc->jump_pc[0]);
+> -    TCGv npc1 = tcg_const_tl(dc->jump_pc[1]);
+> -    TCGv zero = tcg_const_tl(0);
+> +    TCGv npc0 = tcg_constant_tl(dc->jump_pc[0]);
+> +    TCGv npc1 = tcg_constant_tl(dc->jump_pc[1]);
+> +    TCGv zero = tcg_constant_tl(0);
+>   
+>       tcg_gen_movcond_tl(TCG_COND_NE, cpu_npc, cpu_cond, zero, npc0, npc1);
+>   }
+> @@ -981,18 +981,14 @@ static inline void save_state(DisasContext *dc)
+>   
+>   static void gen_exception(DisasContext *dc, int which)
+>   {
+> -    TCGv_i32 t;
+> -
+>       save_state(dc);
+> -    t = tcg_const_i32(which);
+> -    gen_helper_raise_exception(cpu_env, t);
+> +    gen_helper_raise_exception(cpu_env, tcg_constant_i32(which));
+>       dc->base.is_jmp = DISAS_NORETURN;
+>   }
+>   
+>   static void gen_check_align(TCGv addr, int mask)
+>   {
+> -    TCGv_i32 r_mask = tcg_const_i32(mask);
+> -    gen_helper_check_align(cpu_env, addr, r_mask);
+> +    gen_helper_check_align(cpu_env, addr, tcg_constant_i32(mask));
+>   }
+>   
+>   static inline void gen_mov_pc_npc(DisasContext *dc)
+> @@ -1074,7 +1070,7 @@ static void gen_compare(DisasCompare *cmp, bool xcc, unsigned int cond,
+>           cmp->cond = logic_cond[cond];
+>       do_compare_dst_0:
+>           cmp->is_bool = false;
+> -        cmp->c2 = tcg_const_tl(0);
+> +        cmp->c2 = tcg_constant_tl(0);
+>   #ifdef TARGET_SPARC64
+>           if (!xcc) {
+>               cmp->c1 = tcg_temp_new();
+> @@ -1127,7 +1123,7 @@ static void gen_compare(DisasCompare *cmp, bool xcc, unsigned int cond,
+>           cmp->cond = TCG_COND_NE;
+>           cmp->is_bool = true;
+>           cmp->c1 = r_dst = tcg_temp_new();
+> -        cmp->c2 = tcg_const_tl(0);
+> +        cmp->c2 = tcg_constant_tl(0);
+>   
+>           switch (cond) {
+>           case 0x0:
+> @@ -1192,7 +1188,7 @@ static void gen_fcompare(DisasCompare *cmp, unsigned int cc, unsigned int cond)
+>       cmp->cond = TCG_COND_NE;
+>       cmp->is_bool = true;
+>       cmp->c1 = r_dst = tcg_temp_new();
+> -    cmp->c2 = tcg_const_tl(0);
+> +    cmp->c2 = tcg_constant_tl(0);
+>   
+>       switch (cc) {
+>       default:
+> @@ -1307,7 +1303,7 @@ static void gen_compare_reg(DisasCompare *cmp, int cond, TCGv r_src)
+>       cmp->cond = tcg_invert_cond(gen_tcg_cond_reg[cond]);
+>       cmp->is_bool = false;
+>       cmp->c1 = r_src;
+> -    cmp->c2 = tcg_const_tl(0);
+> +    cmp->c2 = tcg_constant_tl(0);
+>   }
+>   
+>   static inline void gen_cond_reg(TCGv r_dst, int cond, TCGv r_src)
+> @@ -1908,7 +1904,7 @@ static void gen_swap(DisasContext *dc, TCGv dst, TCGv src,
+>   
+>   static void gen_ldstub(DisasContext *dc, TCGv dst, TCGv addr, int mmu_idx)
+>   {
+> -    TCGv m1 = tcg_const_tl(0xff);
+> +    TCGv m1 = tcg_constant_tl(0xff);
+>       gen_address_mask(dc, addr);
+>       tcg_gen_atomic_xchg_tl(dst, addr, m1, mmu_idx, MO_UB);
+>   }
+> @@ -2163,8 +2159,8 @@ static void gen_ld_asi(DisasContext *dc, TCGv dst, TCGv addr,
+>           break;
+>       default:
+>           {
+> -            TCGv_i32 r_asi = tcg_const_i32(da.asi);
+> -            TCGv_i32 r_mop = tcg_const_i32(memop);
+> +            TCGv_i32 r_asi = tcg_constant_i32(da.asi);
+> +            TCGv_i32 r_mop = tcg_constant_i32(memop);
+>   
+>               save_state(dc);
+>   #ifdef TARGET_SPARC64
+> @@ -2217,7 +2213,7 @@ static void gen_st_asi(DisasContext *dc, TCGv src, TCGv addr,
+>           {
+>               TCGv saddr = tcg_temp_new();
+>               TCGv daddr = tcg_temp_new();
+> -            TCGv four = tcg_const_tl(4);
+> +            TCGv four = tcg_constant_tl(4);
+>               TCGv_i32 tmp = tcg_temp_new_i32();
+>               int i;
+>   
+> @@ -2236,8 +2232,8 @@ static void gen_st_asi(DisasContext *dc, TCGv src, TCGv addr,
+>   #endif
+>       default:
+>           {
+> -            TCGv_i32 r_asi = tcg_const_i32(da.asi);
+> -            TCGv_i32 r_mop = tcg_const_i32(memop & MO_SIZE);
+> +            TCGv_i32 r_asi = tcg_constant_i32(da.asi);
+> +            TCGv_i32 r_mop = tcg_constant_i32(memop & MO_SIZE);
+>   
+>               save_state(dc);
+>   #ifdef TARGET_SPARC64
+> @@ -2313,15 +2309,15 @@ static void gen_ldstub_asi(DisasContext *dc, TCGv dst, TCGv addr, int insn)
+>           if (tb_cflags(dc->base.tb) & CF_PARALLEL) {
+>               gen_helper_exit_atomic(cpu_env);
+>           } else {
+> -            TCGv_i32 r_asi = tcg_const_i32(da.asi);
+> -            TCGv_i32 r_mop = tcg_const_i32(MO_UB);
+> +            TCGv_i32 r_asi = tcg_constant_i32(da.asi);
+> +            TCGv_i32 r_mop = tcg_constant_i32(MO_UB);
+>               TCGv_i64 s64, t64;
+>   
+>               save_state(dc);
+>               t64 = tcg_temp_new_i64();
+>               gen_helper_ld_asi(t64, cpu_env, addr, r_asi, r_mop);
+>   
+> -            s64 = tcg_const_i64(0xff);
+> +            s64 = tcg_constant_i64(0xff);
+>               gen_helper_st_asi(cpu_env, addr, s64, r_asi, r_mop);
+>   
+>               tcg_gen_trunc_i64_tl(dst, t64);
+> @@ -2382,7 +2378,7 @@ static void gen_ldf_asi(DisasContext *dc, TCGv addr,
+>   
+>               /* The first operation checks required alignment.  */
+>               memop = da.memop | MO_ALIGN_64;
+> -            eight = tcg_const_tl(8);
+> +            eight = tcg_constant_tl(8);
+>               for (i = 0; ; ++i) {
+>                   tcg_gen_qemu_ld_i64(cpu_fpr[rd / 2 + i], addr,
+>                                       da.mem_idx, memop);
+> @@ -2409,8 +2405,8 @@ static void gen_ldf_asi(DisasContext *dc, TCGv addr,
+>   
+>       default:
+>           {
+> -            TCGv_i32 r_asi = tcg_const_i32(da.asi);
+> -            TCGv_i32 r_mop = tcg_const_i32(da.memop);
+> +            TCGv_i32 r_asi = tcg_constant_i32(da.asi);
+> +            TCGv_i32 r_mop = tcg_constant_i32(da.memop);
+>   
+>               save_state(dc);
+>               /* According to the table in the UA2011 manual, the only
+> @@ -2491,7 +2487,7 @@ static void gen_stf_asi(DisasContext *dc, TCGv addr,
+>   
+>               /* The first operation checks required alignment.  */
+>               memop = da.memop | MO_ALIGN_64;
+> -            eight = tcg_const_tl(8);
+> +            eight = tcg_constant_tl(8);
+>               for (i = 0; ; ++i) {
+>                   tcg_gen_qemu_st_i64(cpu_fpr[rd / 2 + i], addr,
+>                                       da.mem_idx, memop);
+> @@ -2566,8 +2562,8 @@ static void gen_ldda_asi(DisasContext *dc, TCGv addr, int insn, int rd)
+>              real hardware allows others.  This can be seen with e.g.
+>              FreeBSD 10.3 wrt ASI_IC_TAG.  */
+>           {
+> -            TCGv_i32 r_asi = tcg_const_i32(da.asi);
+> -            TCGv_i32 r_mop = tcg_const_i32(da.memop);
+> +            TCGv_i32 r_asi = tcg_constant_i32(da.asi);
+> +            TCGv_i32 r_mop = tcg_constant_i32(da.memop);
+>               TCGv_i64 tmp = tcg_temp_new_i64();
+>   
+>               save_state(dc);
+> @@ -2625,8 +2621,8 @@ static void gen_stda_asi(DisasContext *dc, TCGv hi, TCGv addr,
+>           /* ??? In theory we've handled all of the ASIs that are valid
+>              for stda, and this should raise DAE_invalid_asi.  */
+>           {
+> -            TCGv_i32 r_asi = tcg_const_i32(da.asi);
+> -            TCGv_i32 r_mop = tcg_const_i32(da.memop);
+> +            TCGv_i32 r_asi = tcg_constant_i32(da.asi);
+> +            TCGv_i32 r_mop = tcg_constant_i32(da.memop);
+>               TCGv_i64 t64 = tcg_temp_new_i64();
+>   
+>               /* See above.  */
+> @@ -2686,8 +2682,8 @@ static void gen_ldda_asi(DisasContext *dc, TCGv addr, int insn, int rd)
+>           break;
+>       default:
+>           {
+> -            TCGv_i32 r_asi = tcg_const_i32(da.asi);
+> -            TCGv_i32 r_mop = tcg_const_i32(MO_UQ);
+> +            TCGv_i32 r_asi = tcg_constant_i32(da.asi);
+> +            TCGv_i32 r_mop = tcg_constant_i32(MO_UQ);
+>   
+>               save_state(dc);
+>               gen_helper_ld_asi(t64, cpu_env, addr, r_asi, r_mop);
+> @@ -2724,7 +2720,7 @@ static void gen_stda_asi(DisasContext *dc, TCGv hi, TCGv addr,
+>              as a cacheline-style operation.  */
+>           {
+>               TCGv d_addr = tcg_temp_new();
+> -            TCGv eight = tcg_const_tl(8);
+> +            TCGv eight = tcg_constant_tl(8);
+>               int i;
+>   
+>               tcg_gen_andi_tl(d_addr, addr, -8);
+> @@ -2736,8 +2732,8 @@ static void gen_stda_asi(DisasContext *dc, TCGv hi, TCGv addr,
+>           break;
+>       default:
+>           {
+> -            TCGv_i32 r_asi = tcg_const_i32(da.asi);
+> -            TCGv_i32 r_mop = tcg_const_i32(MO_UQ);
+> +            TCGv_i32 r_asi = tcg_constant_i32(da.asi);
+> +            TCGv_i32 r_mop = tcg_constant_i32(MO_UQ);
+>   
+>               save_state(dc);
+>               gen_helper_st_asi(cpu_env, addr, t64, r_asi, r_mop);
+> @@ -2786,7 +2782,7 @@ static void gen_fmovs(DisasContext *dc, DisasCompare *cmp, int rd, int rs)
+>       s1 = gen_load_fpr_F(dc, rs);
+>       s2 = gen_load_fpr_F(dc, rd);
+>       dst = gen_dest_fpr_F(dc);
+> -    zero = tcg_const_i32(0);
+> +    zero = tcg_constant_i32(0);
+>   
+>       tcg_gen_movcond_i32(TCG_COND_NE, dst, c32, zero, s1, s2);
+>   
+> @@ -3215,7 +3211,7 @@ static void disas_sparc_insn(DisasContext * dc, unsigned int insn)
+>                           TCGv_i32 r_const;
+>   
+>                           r_tickptr = tcg_temp_new_ptr();
+> -                        r_const = tcg_const_i32(dc->mem_idx);
+> +                        r_const = tcg_constant_i32(dc->mem_idx);
+>                           tcg_gen_ld_ptr(r_tickptr, cpu_env,
+>                                          offsetof(CPUSPARCState, tick));
+>                           if (tb_cflags(dc->base.tb) & CF_USE_ICOUNT) {
+> @@ -3267,7 +3263,7 @@ static void disas_sparc_insn(DisasContext * dc, unsigned int insn)
+>                           TCGv_i32 r_const;
+>   
+>                           r_tickptr = tcg_temp_new_ptr();
+> -                        r_const = tcg_const_i32(dc->mem_idx);
+> +                        r_const = tcg_constant_i32(dc->mem_idx);
+>                           tcg_gen_ld_ptr(r_tickptr, cpu_env,
+>                                          offsetof(CPUSPARCState, stick));
+>                           if (tb_cflags(dc->base.tb) & CF_USE_ICOUNT) {
+> @@ -3397,7 +3393,7 @@ static void disas_sparc_insn(DisasContext * dc, unsigned int insn)
+>                           TCGv_i32 r_const;
+>   
+>                           r_tickptr = tcg_temp_new_ptr();
+> -                        r_const = tcg_const_i32(dc->mem_idx);
+> +                        r_const = tcg_constant_i32(dc->mem_idx);
+>                           tcg_gen_ld_ptr(r_tickptr, cpu_env,
+>                                          offsetof(CPUSPARCState, tick));
+>                           if (tb_cflags(dc->base.tb) & CF_USE_ICOUNT) {
 
-For the SPARC parts:
-
-Acked-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+Reviewed-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
 
 
 ATB,
