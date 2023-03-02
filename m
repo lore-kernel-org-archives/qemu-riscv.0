@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pXoIT-0007Jx-LZ
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Mar 2023 14:08:57 -0500
+	id 1pXoIV-0007Mn-JJ
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Mar 2023 14:08:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pXoIS-0007I8-6L
- for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 14:08:56 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ id 1pXoIT-0007KL-Rc
+ for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 14:08:57 -0500
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pXoIL-0004Ul-NU
- for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 14:08:55 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id c18so280606wmr.3
+ id 1pXoIM-0004VJ-Bq
+ for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 14:08:57 -0500
+Received: by mail-wr1-x436.google.com with SMTP id h14so142021wru.4
  for <qemu-riscv@nongnu.org>; Thu, 02 Mar 2023 11:08:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Si6MP0w0kGRFapnvD61w58cvDvKawe1zAULmS0tNy6s=;
- b=g6Bnc2Hhm4jlpLwn6MTGYvT0xExBpOEV0SSTTKBA3gzEuOFGPVcc6MQZZ2Qg5Y3Rhl
- uDaYgpifyMoONDe6/I7pmdkoxUYs64GhJXZdr3nA7YFEyBrFLHVBKQKLe9dJ7KSIgFJf
- 0aqKSKvQnwR2H+Tpujvx+C3fnvTOrMjINEnjEpYihwOOXFoWIpoMkqVnOqvWRejErRTW
- GM5qoWA5kDDGH4lAUk2XkrcTdXT0xtJdyOoqeRR6zuQWXDX8GXzcfDzu7hgP3bsagFO7
- b7FKmGJJFUiIY+QMXHabflo3vobE1Sb/V6y5BfNCJUboAdZZUywWWRrSXuy5CWPAvF7d
- 9WBg==
+ bh=vpN9HZmBiUU2swb5foi3aRB2Xz7IiTbLS73Qjjs5Gno=;
+ b=X6ZpukbXB7ZQFc1ZKHqIcOrN4oUK5G/8vtg+7hvGOx4U57/FqhUHa5xkh0ATKgmuAz
+ bVpNTe20/S+d5VqJiweBYfKEYdadM1ook/Q194p9EbRxNm5CXT+Y9eGQ5qzxY5MSDCFV
+ QBYYyfW/1y6yV5SjCj3PGhaiWVrru80L5WWqRcyfyIbWfZW8cjCZdoEpy3ZUFrXAr5J0
+ Nq8sm2b6TPMo4q8nuUZ7v/o+QGqmDNn6C/dThABzyzE6qr5dE/WPmq9xUdGb99Uv35QL
+ /44TeseRvDIZWTOQ/hCTTRPI0HCC/CaNYOPAK9iJcnmLlyz+TU/GwELecI8eQwqAosOF
+ PAZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Si6MP0w0kGRFapnvD61w58cvDvKawe1zAULmS0tNy6s=;
- b=MlWeBMBbWuuCphcph6deLth6uN1r7gd1hqo0gtm2Na1Fsr8gjBxu7GYAwVJCThlr68
- +nC+BkF10ZlIfRKgoehQ5MwNZrNJ6cK8ITYTU5m+f5iXgQwKc90NZGL/mUAlJPpGW3dq
- HxRTAlyDHDFvZjfVohkMmdlmLT3uwWqqWkd4Zo5GLesPlYin0fMCmvpi7pr13WMa+jxN
- LHQIceYy17UjhcIxmHAxR9UDeNlgkgVjVEBlgEugKgY8ssg2C8772FJfv/USe3rIwLH5
- XEUY0s0Z6aZFyh/f0ZoVUTnXehqf0wEHAXWni5IVWfyEqWt95d/4eE7wHj9kWkuAQ0uF
- gPTQ==
-X-Gm-Message-State: AO0yUKV3oXZH1r7jH6RMvcwpDbHJGA73I1JsQkoGKNAwJqx/0jALpCWg
- OwSIQlKMOBZ7GBYDkyg8+LzJnA==
-X-Google-Smtp-Source: AK7set9eJprV0p7JRLIRr/68JuEcV3uLTkeyYm96s+M5+q4UW2E6CjnTkANW5zuqIUHzGwOOmK8ltw==
-X-Received: by 2002:a05:600c:3b11:b0:3e5:4fb9:ea60 with SMTP id
- m17-20020a05600c3b1100b003e54fb9ea60mr2376003wms.9.1677784127936; 
- Thu, 02 Mar 2023 11:08:47 -0800 (PST)
+ bh=vpN9HZmBiUU2swb5foi3aRB2Xz7IiTbLS73Qjjs5Gno=;
+ b=Zel0RGEYilGKHfZWPDb0Ul5d+NK8RkiosmyQscpMhrlR5I4P/6GpazrdIcdD428Zoe
+ U4oHkJlJqkt99unP+NfFclIZ4ttlY+PBZQ7BJQ9+P8PiJl6znbhKhhb4jpqyVgX6B+4C
+ TkB1rX8LKdPI6qnoSj003z/k4KFR99UNgbi8g/VLHmK9d7Gwk7mIe8eDMAOkoaNC44ZU
+ 7PmEtJw18rzRbLU37tjsblGtiZrQCiALkIK3+aFBhtJGK4YWUENmobstwoGWYD+U8KIO
+ OdkJlKd+JvjdgbNxrymwtnpnWqYNgQVQXwzRBwMXG6qpEuJqI0s0mf6K5nH9v32bSe0V
+ w+kA==
+X-Gm-Message-State: AO0yUKWg1i0tMIG7tM8BNOcmnhgWeo5KXmlf4xr1BoeBO5fKVT0Zox5D
+ mVshL5X3vedWXqkD8CWuYAaJAQ==
+X-Google-Smtp-Source: AK7set/v7x1LqejxyJQY3tLZfGvFHQz1CzgOGP8zxK8uPbd5BSOymIpa0zLlvGeYomEwHDqsj8k0Jg==
+X-Received: by 2002:a5d:4e86:0:b0:2c7:fc61:1676 with SMTP id
+ e6-20020a5d4e86000000b002c7fc611676mr8634371wru.7.1677784128871; 
+ Thu, 02 Mar 2023 11:08:48 -0800 (PST)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- h17-20020a05600c351100b003e4326a6d53sm4241899wmq.35.2023.03.02.11.08.47
+ x8-20020a1c7c08000000b003eb2e33f327sm6700116wmc.2.2023.03.02.11.08.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 02 Mar 2023 11:08:47 -0800 (PST)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id C8E001FFBA;
+ by zen.linaroharston (Postfix) with ESMTP id E33201FFBB;
  Thu,  2 Mar 2023 19:08:46 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -87,17 +87,18 @@ Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
  Taylor Simpson <tsimpson@quicinc.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH v4 02/26] gdbstub: fix-up copyright and license files
-Date: Thu,  2 Mar 2023 19:08:22 +0000
-Message-Id: <20230302190846.2593720-3-alex.bennee@linaro.org>
+Subject: [PATCH v4 03/26] gdbstub: Make syscall_complete/[gs]et_reg
+ target-agnostic typedefs
+Date: Thu,  2 Mar 2023 19:08:23 +0000
+Message-Id: <20230302190846.2593720-4-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230302190846.2593720-1-alex.bennee@linaro.org>
 References: <20230302190846.2593720-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -117,53 +118,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2023 19:08:56 -0000
+X-List-Received-Date: Thu, 02 Mar 2023 19:08:58 -0000
 
-When I started splitting gdbstub apart I was a little too boilerplate
-with my file headers. Fix up to carry over Fabrice's copyright and the
-LGPL license header.
+From: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-Fixes: ae7467b1ac (gdbstub: move breakpoint logic to accel ops)
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Prototypes using gdb_syscall_complete_cb() or gdb_?et_reg_cb()
+don't depend on "cpu.h", thus are not target-specific.
+
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20221214143659.62133-1-philmd@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- gdbstub/softmmu.c | 3 ++-
- gdbstub/user.c    | 3 ++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ include/exec/gdbstub.h | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
-index 129575e510..05db6f8a9f 100644
---- a/gdbstub/softmmu.c
-+++ b/gdbstub/softmmu.c
-@@ -4,9 +4,10 @@
-  * Debug integration depends on support from the individual
-  * accelerators so most of this involves calling the ops helpers.
-  *
-+ * Copyright (c) 2003-2005 Fabrice Bellard
-  * Copyright (c) 2022 Linaro Ltd
-  *
-- * SPDX-License-Identifier: GPL-2.0-or-later
-+ * SPDX-License-Identifier: LGPL-2.0+
-  */
+diff --git a/include/exec/gdbstub.h b/include/exec/gdbstub.h
+index f667014888..1636fb3841 100644
+--- a/include/exec/gdbstub.h
++++ b/include/exec/gdbstub.h
+@@ -71,9 +71,6 @@ struct gdb_timeval {
+   uint64_t tv_usec;   /* microsecond */
+ } QEMU_PACKED;
  
- #include "qemu/osdep.h"
-diff --git a/gdbstub/user.c b/gdbstub/user.c
-index 484bd8f461..09a18fb23b 100644
---- a/gdbstub/user.c
-+++ b/gdbstub/user.c
-@@ -3,9 +3,10 @@
-  *
-  * We know for user-mode we are using TCG so we can call stuff directly.
-  *
-+ * Copyright (c) 2003-2005 Fabrice Bellard
-  * Copyright (c) 2022 Linaro Ltd
-  *
-- * SPDX-License-Identifier: GPL-2.0-or-later
-+ * SPDX-License-Identifier: LGPL-2.0+
-  */
+-#ifdef NEED_CPU_H
+-#include "cpu.h"
+-
+ typedef void (*gdb_syscall_complete_cb)(CPUState *cpu, uint64_t ret, int err);
  
- #include "qemu/osdep.h"
+ /**
+@@ -126,6 +123,7 @@ int gdb_handlesig(CPUState *, int);
+ void gdb_signalled(CPUArchState *, int);
+ void gdbserver_fork(CPUState *);
+ #endif
++
+ /* Get or set a register.  Returns the size of the register.  */
+ typedef int (*gdb_get_reg_cb)(CPUArchState *env, GByteArray *buf, int reg);
+ typedef int (*gdb_set_reg_cb)(CPUArchState *env, uint8_t *buf, int reg);
+@@ -133,6 +131,9 @@ void gdb_register_coprocessor(CPUState *cpu,
+                               gdb_get_reg_cb get_reg, gdb_set_reg_cb set_reg,
+                               int num_regs, const char *xml, int g_pos);
+ 
++#ifdef NEED_CPU_H
++#include "cpu.h"
++
+ /*
+  * The GDB remote protocol transfers values in target byte order. As
+  * the gdbstub may be batching up several register values we always
 -- 
 2.39.2
 
