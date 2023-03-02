@@ -1,55 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pXoIp-0007oK-P4
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Mar 2023 14:09:19 -0500
+	id 1pXoNq-0006aZ-No
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Mar 2023 14:14:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pXoIn-0007fm-ME
- for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 14:09:17 -0500
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
+ id 1pXoNo-0006Wj-8C
+ for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 14:14:28 -0500
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pXoIR-0004Zn-F0
- for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 14:09:17 -0500
-Received: by mail-wr1-x42f.google.com with SMTP id h11so137978wrm.5
- for <qemu-riscv@nongnu.org>; Thu, 02 Mar 2023 11:08:54 -0800 (PST)
+ id 1pXoNi-0000jg-Bd
+ for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 14:14:24 -0500
+Received: by mail-wm1-x333.google.com with SMTP id
+ j19-20020a05600c1c1300b003e9b564fae9so2540103wms.2
+ for <qemu-riscv@nongnu.org>; Thu, 02 Mar 2023 11:14:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MqZnXo7hFBLHq1osD92qYOTfq2ZgDdz/ouY2s2JD3s4=;
- b=fOR2byWfCCcJXjXfwKA46URGir/fGPkWaGXjvyaUgzbeHfEdk+5+rMh8/ZWbZSyatP
- 0ODUvIcB0kpuSPwdT3VpN7Y/ItmmWXOXCM5GYBnwogvyhtzfBfT2ic/U2IM2PdcKBh7z
- FpZX2SmOXyLbWDtzIvURSf4W6ozOFlGlY/kSvWiM6O55YwbaV3bUmgz2ELDtEF7+potP
- OoOfd0ldZcJX+A3T6bBMS+IiGWAdhZiESkj/pAan4toAgMNH0Ef53jFKN6q/JGeNehmg
- JYwd3xCpfUEcOtPXnEGJSkg9XyrjsnyXjhEpvqMhUYswkJU7P1n80aZDHT+ssIlZcFXl
- OPLQ==
+ bh=AkhUerl9HMLvEw3fit+pxInPqsKmIKwDU7RamZamxD0=;
+ b=QkLv0+eOtAYCwCmJedftemEobTPSKKWvlpHZPjXtS7Xt5Lnp+ADQ5od30gQc1GVZw2
+ wsXL89hlobRtsFSDDpyOztNZudx7fTiJ7s7lbpCIkVIk6/fxQGrYlnnzUpEidVPeX2Jv
+ D5Xqc6dl09R6aPu3+rQGcFtfcdK0ZpCTZsxvl5qIbu3x/rCY1NVzOaXV/B4x4un/Uzye
+ OKzcdm1s1OZcVQ1j4lIjJTI1RwAsvHj5WXgNI5n+Zx7eqqY2pMAQqztn6hVnjcjXwinc
+ Cbpwkx6mo7EfIG9yf4QtWIGku5RUKJDxCpSbRNTFK2ncpyW7HUOdwcKfxby6v0V+cMGo
+ o83w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MqZnXo7hFBLHq1osD92qYOTfq2ZgDdz/ouY2s2JD3s4=;
- b=ZxkaCFsRyHi1jOu29p8HKdQNhq2HaHBg1cQD2t3eOPzGpJ3twpX5aNHzg+LOcJ1zmj
- Xp6d8XzNdyRk4MvH8Bn9QMdJyDo9Y5c60ncMKGZdiKMGfB73SAPGkA7g2ryFw2T9oHqI
- 0sKh+vRyy4Ns7hO/cNmBog2D6ULpkwWH7OGY0bUbK2jeb8L/cWYWZINRHJLwyOR1A9Hr
- 5fQHZtjVgEIDyaEzCv49/hYGdUWilQ2IiN37x7snNoiX4IDxutu3X/mJS5Xw6REQ+Efb
- 1UH37LQ0wTwm+D3oIQke9eh4oPSt/t2BDGmUBOM4sqX2Szcmv93xRi+VHGkCIiQgvig2
- ySQA==
-X-Gm-Message-State: AO0yUKW1lY+ObeFD4EaIy87dgwbQLoS88c1nijdgT2h8PsbrFHzqMMtG
- bKqF4PKipODr/ZRxb7/6OdPJ5g==
-X-Google-Smtp-Source: AK7set/GbLEkr34A33zpv5kh6AkqolZvhydftjLJJ27qgEGaUEAiZ0H0oRqb4S9ufCLxgSPqV3tmtg==
-X-Received: by 2002:a05:6000:c8:b0:2c3:e0a0:93f with SMTP id
- q8-20020a05600000c800b002c3e0a0093fmr8547360wrx.8.1677784133847; 
- Thu, 02 Mar 2023 11:08:53 -0800 (PST)
+ bh=AkhUerl9HMLvEw3fit+pxInPqsKmIKwDU7RamZamxD0=;
+ b=p7DDmNfWzPiJWXO6hqaF156RCsDUP/xhTvKYj+GugLE+dXcJPYena8IY2RLUQE9tkO
+ x9UIUvdU7YOunB9B6u55McN1DAWBWulFhTG3IFsr0KLYLjqjOR+FDdx4nYyCQ4WhT0KM
+ L16RkOnToJMkZAFBgx6UYMyULi6frqATm4EyMdmmZ7Hx3sxA1n8tC6oCcYFf23rPPTBs
+ PCYM4Q+ltwZL9o8wC6EwXqNIVAvA6ZZa2yjkykw2Y0IkQCBKYhHuWMcnO8TKpA2uYZa+
+ Z6f+lPUa9RORJ7Q9lkG5tUZhX1aWL8hX8mh/b+AvOJaqBMc6xNUsJscmqVb35ZF0l71p
+ vd3g==
+X-Gm-Message-State: AO0yUKX+mLgcKgffVR2DLgcBd09GVdGSh/KzmspWT5bkatPJdABDB3HZ
+ /mkkQJmFdSIkmEeM47PtDyhKWg==
+X-Google-Smtp-Source: AK7set/t5q9Z1Hr3yT7+q7UuT7SPkaO07wY8/R/Oryajsdhp3v0zZwHlvilonbAyiMin/c9qQ1y3+w==
+X-Received: by 2002:a05:600c:755:b0:3ea:d620:57a0 with SMTP id
+ j21-20020a05600c075500b003ead62057a0mr8022303wmn.3.1677784460520; 
+ Thu, 02 Mar 2023 11:14:20 -0800 (PST)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- a12-20020a056000100c00b002c55ec7f661sm190603wrx.5.2023.03.02.11.08.51
+ p8-20020a05600c2e8800b003e2066a6339sm404744wmn.5.2023.03.02.11.14.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Mar 2023 11:08:53 -0800 (PST)
+ Thu, 02 Mar 2023 11:14:20 -0800 (PST)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id A063E1FFD0;
- Thu,  2 Mar 2023 19:08:50 +0000 (GMT)
+ by zen.linaroharston (Postfix) with ESMTP id 679A51FFC2;
+ Thu,  2 Mar 2023 19:08:48 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
@@ -86,26 +87,26 @@ Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
  Yanan Wang <wangyanan55@huawei.com>, David Hildenbrand <david@redhat.com>,
  Taylor Simpson <tsimpson@quicinc.com>,
  Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Mads Ynddal <m.ynddal@samsung.com>
-Subject: [PATCH v4 26/26] gdbstub: move update guest debug to accel ops
-Date: Thu,  2 Mar 2023 19:08:46 +0000
-Message-Id: <20230302190846.2593720-27-alex.bennee@linaro.org>
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+Subject: [PATCH v4 13/26] gdbstub: abstract target specific details from
+ gdb_put_packet_binary
+Date: Thu,  2 Mar 2023 19:08:33 +0000
+Message-Id: <20230302190846.2593720-14-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230302190846.2593720-1-alex.bennee@linaro.org>
 References: <20230302190846.2593720-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -118,94 +119,119 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2023 19:09:17 -0000
+X-List-Received-Date: Thu, 02 Mar 2023 19:14:28 -0000
 
-From: Mads Ynddal <m.ynddal@samsung.com>
+We unfortunately handle the checking of packet acknowledgement
+differently for user and softmmu modes. Abstract the user mode stuff
+behind gdb_got_immediate_ack with a stub for softmmu.
 
-Continuing the refactor of a48e7d9e52 (gdbstub: move guest debug support
-check to ops) by removing hardcoded kvm_enabled() from generic cpu.c
-code, and replace it with a property of AccelOpsClass.
-
-Signed-off-by: Mads Ynddal <m.ynddal@samsung.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Message-Id: <20230207131721.49233-1-mads@ynddal.dk>
-[AJB: add ifdef around update_guest_debug_ops, fix brace]
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- include/sysemu/accel-ops.h |  1 +
- accel/kvm/kvm-accel-ops.c  |  8 ++++++++
- cpu.c                      | 11 ++++++++---
- 3 files changed, 17 insertions(+), 3 deletions(-)
+ gdbstub/internals.h | 15 +++++++++++++++
+ gdbstub/gdbstub.c   | 10 ++--------
+ gdbstub/softmmu.c   |  8 ++++++++
+ gdbstub/user.c      | 19 +++++++++++++++++++
+ 4 files changed, 44 insertions(+), 8 deletions(-)
 
-diff --git a/include/sysemu/accel-ops.h b/include/sysemu/accel-ops.h
-index 30690c71bd..3c1fab4b1e 100644
---- a/include/sysemu/accel-ops.h
-+++ b/include/sysemu/accel-ops.h
-@@ -48,6 +48,7 @@ struct AccelOpsClass {
+diff --git a/gdbstub/internals.h b/gdbstub/internals.h
+index 6bd6a05657..6534e373cb 100644
+--- a/gdbstub/internals.h
++++ b/gdbstub/internals.h
+@@ -110,6 +110,21 @@ void gdb_memtohex(GString *buf, const uint8_t *mem, int len);
+ void gdb_memtox(GString *buf, const char *mem, int len);
+ void gdb_read_byte(uint8_t ch);
  
-     /* gdbstub hooks */
-     bool (*supports_guest_debug)(void);
-+    int (*update_guest_debug)(CPUState *cpu);
-     int (*insert_breakpoint)(CPUState *cpu, int type, vaddr addr, vaddr len);
-     int (*remove_breakpoint)(CPUState *cpu, int type, vaddr addr, vaddr len);
-     void (*remove_all_breakpoints)(CPUState *cpu);
-diff --git a/accel/kvm/kvm-accel-ops.c b/accel/kvm/kvm-accel-ops.c
-index fbf4fe3497..457eafa380 100644
---- a/accel/kvm/kvm-accel-ops.c
-+++ b/accel/kvm/kvm-accel-ops.c
-@@ -86,6 +86,13 @@ static bool kvm_cpus_are_resettable(void)
-     return !kvm_enabled() || kvm_cpu_check_are_resettable();
- }
++/*
++ * Packet acknowledgement - we handle this slightly differently
++ * between user and softmmu mode, mainly to deal with the differences
++ * between the flexible chardev and the direct fd approaches.
++ *
++ * We currently don't support a negotiated QStartNoAckMode
++ */
++
++/**
++ * gdb_got_immediate_ack() - check ok to continue
++ *
++ * Returns true to continue, false to re-transmit for user only, the
++ * softmmu stub always returns true.
++ */
++bool gdb_got_immediate_ack(void);
+ /* utility helpers */
+ CPUState *gdb_first_attached_cpu(void);
+ void gdb_append_thread_id(CPUState *cpu, GString *buf);
+diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
+index 6907bdc99c..0476ee7039 100644
+--- a/gdbstub/gdbstub.c
++++ b/gdbstub/gdbstub.c
+@@ -239,15 +239,9 @@ int gdb_put_packet_binary(const char *buf, int len, bool dump)
+         gdb_put_buffer(gdbserver_state.last_packet->data,
+                    gdbserver_state.last_packet->len);
  
-+#ifdef KVM_CAP_SET_GUEST_DEBUG
-+static int kvm_update_guest_debug_ops(CPUState *cpu)
-+{
-+    return kvm_update_guest_debug(cpu, 0);
-+}
-+#endif
-+
- static void kvm_accel_ops_class_init(ObjectClass *oc, void *data)
- {
-     AccelOpsClass *ops = ACCEL_OPS_CLASS(oc);
-@@ -99,6 +106,7 @@ static void kvm_accel_ops_class_init(ObjectClass *oc, void *data)
-     ops->synchronize_pre_loadvm = kvm_cpu_synchronize_pre_loadvm;
- 
- #ifdef KVM_CAP_SET_GUEST_DEBUG
-+    ops->update_guest_debug = kvm_update_guest_debug_ops;
-     ops->supports_guest_debug = kvm_supports_guest_debug;
-     ops->insert_breakpoint = kvm_insert_breakpoint;
-     ops->remove_breakpoint = kvm_remove_breakpoint;
-diff --git a/cpu.c b/cpu.c
-index e6abc6c76c..567b23af46 100644
---- a/cpu.c
-+++ b/cpu.c
-@@ -31,8 +31,8 @@
- #include "hw/core/sysemu-cpu-ops.h"
- #include "exec/address-spaces.h"
- #endif
-+#include "sysemu/cpus.h"
- #include "sysemu/tcg.h"
--#include "sysemu/kvm.h"
- #include "exec/replay-core.h"
- #include "exec/cpu-common.h"
- #include "exec/exec-all.h"
-@@ -326,9 +326,14 @@ void cpu_single_step(CPUState *cpu, int enabled)
- {
-     if (cpu->singlestep_enabled != enabled) {
-         cpu->singlestep_enabled = enabled;
--        if (kvm_enabled()) {
--            kvm_update_guest_debug(cpu, 0);
-+
-+#if !defined(CONFIG_USER_ONLY)
-+        const AccelOpsClass *ops = cpus_get_accel();
-+        if (ops->update_guest_debug) {
-+            ops->update_guest_debug(cpu);
-         }
-+#endif
-+
-         trace_breakpoint_singlestep(cpu->cpu_index, enabled);
+-#ifdef CONFIG_USER_ONLY
+-        i = gdb_get_char();
+-        if (i < 0)
+-            return -1;
+-        if (i == '+')
++        if (gdb_got_immediate_ack()) {
+             break;
+-#else
+-        break;
+-#endif
++        }
      }
+     return 0;
  }
+diff --git a/gdbstub/softmmu.c b/gdbstub/softmmu.c
+index 6796761fd9..04e75449a2 100644
+--- a/gdbstub/softmmu.c
++++ b/gdbstub/softmmu.c
+@@ -55,6 +55,14 @@ int gdb_get_cpu_index(CPUState *cpu)
+     return cpu->cpu_index + 1;
+ }
+ 
++/*
++ * We check the status of the last message in the chardev receive code
++ */
++bool gdb_got_immediate_ack(void)
++{
++    return true;
++}
++
+ /*
+  * GDB Connection management. For system emulation we do all of this
+  * via our existing Chardev infrastructure which allows us to support
+diff --git a/gdbstub/user.c b/gdbstub/user.c
+index 23b2e726f6..0c8cd028b1 100644
+--- a/gdbstub/user.c
++++ b/gdbstub/user.c
+@@ -54,6 +54,25 @@ int gdb_get_char(void)
+     return ch;
+ }
+ 
++bool gdb_got_immediate_ack(void)
++{
++    int i;
++
++    i = gdb_get_char();
++    if (i < 0) {
++        /* no response, continue anyway */
++        return true;
++    }
++
++    if (i == '+') {
++        /* received correctly, continue */
++        return true;
++    }
++
++    /* anything else, including '-' then try again */
++    return false;
++}
++
+ void gdb_put_buffer(const uint8_t *buf, int len)
+ {
+     int ret;
 -- 
 2.39.2
 
