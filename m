@@ -1,55 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pXoId-0007Vv-DY
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Mar 2023 14:09:07 -0500
+	id 1pXoIe-0007XV-3r
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Mar 2023 14:09:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pXoIb-0007U0-A1
+ id 1pXoIb-0007UV-GS
  for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 14:09:05 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pXoIO-0004Wt-GY
- for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 14:09:04 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- j19-20020a05600c191300b003eb3e1eb0caso2524567wmq.1
+ id 1pXoIO-0004X6-KZ
+ for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 14:09:05 -0500
+Received: by mail-wr1-x433.google.com with SMTP id h11so137858wrm.5
  for <qemu-riscv@nongnu.org>; Thu, 02 Mar 2023 11:08:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=62eIWH+UgNDIO9tL0abCF5DS6hbxUYuKBS98TK1uNAY=;
- b=Y2EwnqrCp+qDTcFz1EW3YC21JHlRf1J8aYrGwA16D/IrPQ+aPQqDJHH+7FThelkDFB
- 8P/fukV7yJd4T0msEj12mSBV5ljzbAuK6Sg3R+g9QsoN5jpHqQxlkHkrKYLjXCAIuFRL
- 5S5C5B39krQZ0rFy9pIr/itagrEREMhfC3EVUx+d4tsUUzcbvDECSEuEHxCVWJS8GDxC
- gXYle4/apt0EhZXe174MMqRCyJIGjlK8TLBqhbQwZEZaz/OdMjUChqu5R1h8exkjYA67
- CeV9ATLtLKGKbS65+050zb/YnCyfCHofOiHTJPzr5sRxrbwBNYOAwmSee/eKW7BsEBor
- vDBw==
+ bh=zhv1r+37cIdO73Hx2ePtuQOU7s/kw+X5fYnQSMO6fRk=;
+ b=fv7CdPJTK9CJaeTbeeSsek2LKFF9kpjrFZaRix6juRaohfp3SLvfs3Ggy602Up+h22
+ rM2xGkf/oXZa4xPJz1dMsS/9nSu4BO2fUaLutGMQQZBJacAaysZ9yjQaij8vg+rbctxQ
+ Q5MnIaXHSg9UzOK0B53f4LSbOxoFhEJqE/JrC9ChRXQiO2ZQZ+9DU+Xq0CMEbWfA2HBB
+ Kxe50BtD8Df5BZeNZ2RrVKItDRm/fhDLrIk6vt0R20H34+d4SvBadDANJHcqLzxkCqCV
+ kc70xW8lcrMlG6QToYS7BYHHbJOq+m1tQBnEwCkuHs+ArsDP3CmduWv/bJKuT+1ibyy2
+ VQXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=62eIWH+UgNDIO9tL0abCF5DS6hbxUYuKBS98TK1uNAY=;
- b=kQIvDEwuEIyPVdZJ3GLpXW9IGcfemzLYUEIuQvEy2x2k0oeahye56bilv9wwgGK2ZJ
- iB8pc1CMM4Um/7qt3+SC9fAjue/+03zii/JhW9wFhMnkOwXW4axXEwb9hNcihGu8qQks
- cm5aQ9oFk5GgJd9qls5AgxC8w0FupdpKpcn7ZXw0n00adgatvHX1A5zSumiquG/Szif4
- bp+haBV56wGQQOH5vpQPwCvjx5hTIpUSvNqw1N4wMVT926DKxoa2Fk1tFsmxHH/vyGyD
- nEVehH1uKXkVV5oXdb0to/khXjBPQtgRKHB8xZbbo4Frx857cB+H8O8usJykN3fjWt7J
- sS3w==
-X-Gm-Message-State: AO0yUKVTC8lDBwi6U0wUjAxIBJmn0RwdPgL4Bd8WhuDePA0G7s2qEb8Q
- r0CapWetGprRVH5H3tpFtMnuZw==
-X-Google-Smtp-Source: AK7set+DZpUV+fLm5EmXNvZFeuE5OsROlq+aBaJRW0JmuEXUuessAEZ306eoy59qqadcmgINWU/Wgg==
-X-Received: by 2002:a05:600c:170a:b0:3eb:37ce:4c3d with SMTP id
- c10-20020a05600c170a00b003eb37ce4c3dmr4634014wmn.38.1677784130856; 
- Thu, 02 Mar 2023 11:08:50 -0800 (PST)
+ bh=zhv1r+37cIdO73Hx2ePtuQOU7s/kw+X5fYnQSMO6fRk=;
+ b=zVLZ61aZ0oJpjYYdAxsfLLOStQ0hrCRwKq+wLLqOxCSfKxoPuuJgh6VSsLHGhuzqP5
+ cYtPRld6QusOjcWpssYo5KCaODzv9gp5ATXuwVcJP8PGlNof5AMa9F7QH+iW+6rzSX3A
+ tc0/h//bG2xaywiRdi/UmjZIO8nnuGgHdDg/a0E8pZ6YUdS2PIiCf+2epnDAB8u/Lj8g
+ loGFBBJIY+wBK25esFb+HWeAPJdGGDBWgigXPpwm9aD0qWDNEhkoQoqjjloTnymTOKi3
+ sXqK1WgvwHDG4MIhkHoIpE3mlsS72tmaRGv7mlmo+mHOZ0jt3EY488q47t3ayc5S/PI0
+ gHnQ==
+X-Gm-Message-State: AO0yUKVfDCCRMERP8AUkUA+FOUlhUEGGMw2rD/sBH5OjmSbAQDz4K0b8
+ 24RgpWL3ARtL2b83KilhTNXCVQ==
+X-Google-Smtp-Source: AK7set+LEp66kxPk8JP5WMjaKbMYNiQxBVToigX4wmvxYtjwSkY7GbDiNpyXd9Ln+qPbqAZZcuMcIA==
+X-Received: by 2002:a5d:604b:0:b0:2c7:faf:af32 with SMTP id
+ j11-20020a5d604b000000b002c70fafaf32mr7953987wrt.14.1677784131052; 
+ Thu, 02 Mar 2023 11:08:51 -0800 (PST)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- a10-20020a5d508a000000b002c54241b4fesm125929wrt.80.2023.03.02.11.08.47
+ r4-20020a5d4944000000b002c56013c07fsm114369wrs.109.2023.03.02.11.08.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 02 Mar 2023 11:08:48 -0800 (PST)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 07E891FFBC;
+ by zen.linaroharston (Postfix) with ESMTP id 941401FFB7;
  Thu,  2 Mar 2023 19:08:47 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -88,17 +87,17 @@ Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
  Taylor Simpson <tsimpson@quicinc.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH v4 04/26] gdbstub: clean-up indent on gdb_exit
-Date: Thu,  2 Mar 2023 19:08:24 +0000
-Message-Id: <20230302190846.2593720-5-alex.bennee@linaro.org>
+Subject: [PATCH v4 08/26] gdbstub: move fromhex/tohex routines to internals
+Date: Thu,  2 Mar 2023 19:08:28 +0000
+Message-Id: <20230302190846.2593720-9-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230302190846.2593720-1-alex.bennee@linaro.org>
 References: <20230302190846.2593720-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -120,60 +119,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 02 Mar 2023 19:09:05 -0000
 
-Otherwise checkpatch will throw a hissy fit on the later patches that
-split this function up.
+These will be needed from multiple places in the code. They are
+declared as inline so move to the header and fix up to modern coding
+style.
 
+The only other place that messes with hex stuff at the moment is the
+URI handling in utils but that would be more code churn so leave for
+now.
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- gdbstub/gdbstub.c | 28 ++++++++++++++--------------
- 1 file changed, 14 insertions(+), 14 deletions(-)
+ gdbstub/internals.h | 27 +++++++++++++++++++++++++++
+ gdbstub/gdbstub.c   | 20 --------------------
+ 2 files changed, 27 insertions(+), 20 deletions(-)
 
+diff --git a/gdbstub/internals.h b/gdbstub/internals.h
+index 32daaf73a3..b4620f99c4 100644
+--- a/gdbstub/internals.h
++++ b/gdbstub/internals.h
+@@ -57,6 +57,33 @@ typedef struct GDBState {
+     int supported_sstep_flags;
+ } GDBState;
+ 
++
++/*
++ * Inline utility function, convert from int to hex and back
++ */
++
++static inline int fromhex(int v)
++{
++    if (v >= '0' && v <= '9') {
++        return v - '0';
++    } else if (v >= 'A' && v <= 'F') {
++        return v - 'A' + 10;
++    } else if (v >= 'a' && v <= 'f') {
++        return v - 'a' + 10;
++    } else {
++        return 0;
++    }
++}
++
++static inline int tohex(int v)
++{
++    if (v < 10) {
++        return v + '0';
++    } else {
++        return v - 10 + 'a';
++    }
++}
++
+ /*
+  * Break/Watch point support - there is an implementation for softmmu
+  * and user mode.
 diff --git a/gdbstub/gdbstub.c b/gdbstub/gdbstub.c
-index fb9c49e0fd..63b56f0027 100644
+index abb1777e73..ba46ed73b3 100644
 --- a/gdbstub/gdbstub.c
 +++ b/gdbstub/gdbstub.c
-@@ -3021,27 +3021,27 @@ static void gdb_read_byte(uint8_t ch)
- /* Tell the remote gdb that the process has exited.  */
- void gdb_exit(int code)
- {
--  char buf[4];
-+    char buf[4];
- 
--  if (!gdbserver_state.init) {
--      return;
--  }
-+    if (!gdbserver_state.init) {
-+        return;
-+    }
- #ifdef CONFIG_USER_ONLY
--  if (gdbserver_state.socket_path) {
--      unlink(gdbserver_state.socket_path);
--  }
--  if (gdbserver_state.fd < 0) {
--      return;
--  }
-+    if (gdbserver_state.socket_path) {
-+        unlink(gdbserver_state.socket_path);
-+    }
-+    if (gdbserver_state.fd < 0) {
-+        return;
-+    }
- #endif
- 
--  trace_gdbstub_op_exiting((uint8_t)code);
-+    trace_gdbstub_op_exiting((uint8_t)code);
- 
--  snprintf(buf, sizeof(buf), "W%02x", (uint8_t)code);
--  put_packet(buf);
-+    snprintf(buf, sizeof(buf), "W%02x", (uint8_t)code);
-+    put_packet(buf);
- 
- #ifndef CONFIG_USER_ONLY
--  qemu_chr_fe_deinit(&gdbserver_state.chr, true);
-+    qemu_chr_fe_deinit(&gdbserver_state.chr, true);
+@@ -546,26 +546,6 @@ static void put_buffer(const uint8_t *buf, int len)
  #endif
  }
  
+-static inline int fromhex(int v)
+-{
+-    if (v >= '0' && v <= '9')
+-        return v - '0';
+-    else if (v >= 'A' && v <= 'F')
+-        return v - 'A' + 10;
+-    else if (v >= 'a' && v <= 'f')
+-        return v - 'a' + 10;
+-    else
+-        return 0;
+-}
+-
+-static inline int tohex(int v)
+-{
+-    if (v < 10)
+-        return v + '0';
+-    else
+-        return v - 10 + 'a';
+-}
+-
+ /* writes 2*len+1 bytes in buf */
+ static void memtohex(GString *buf, const uint8_t *mem, int len)
+ {
 -- 
 2.39.2
 
