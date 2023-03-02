@@ -1,76 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pXhQN-00024Y-4x
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Mar 2023 06:48:39 -0500
+	id 1pXmws-0004s7-TH
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Mar 2023 12:42:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pXhQL-00024C-R4
- for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 06:48:37 -0500
-Received: from mail-oi1-x22b.google.com ([2607:f8b0:4864:20::22b])
+ id 1pXmwh-0004bU-2q
+ for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 12:42:24 -0500
+Received: from mail-oo1-xc2f.google.com ([2607:f8b0:4864:20::c2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pXhQK-0005aF-2j
- for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 06:48:37 -0500
-Received: by mail-oi1-x22b.google.com with SMTP id bh20so13295105oib.9
- for <qemu-riscv@nongnu.org>; Thu, 02 Mar 2023 03:48:35 -0800 (PST)
+ id 1pXmwe-0002kK-By
+ for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 12:42:22 -0500
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ p8-20020a4a3c48000000b0052527a9d5f0so41117oof.1
+ for <qemu-riscv@nongnu.org>; Thu, 02 Mar 2023 09:42:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1677757714;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=ventanamicro.com; s=google; t=1677778939;
+ h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=bfxtFo75Vbs6nbCD7jh08npMAeE5QGd1IbzegI4Xkyk=;
- b=lI0LnPmEcS00r5Y2hoKEbZv5i8RoEfu3QIJaM99obXn3odAkzf6nFJu46NN/3MzweC
- yviXXrqmDpfrh/2H27CsX3Y9JHc9Om1SL12JEv9JJO/OmbFTfk34DgH2PeFAFoYMBpOj
- 5yNFo0cNKNYu1X3vqSq9TOuRDl9c6bxjiyWOnaM4fksCKpNlfxlxUFBZadpQUvacHyfa
- XkQiDQzTs5/0nhODOC/Ruao1wUAKtmBXEuN/rE6g1rflA3oYy6R9QZTW2uvVGtIFXkbV
- 2TktQEOEdHKnK/BbKRzFGlEv2dAGmC5SZcn03WzxODQqOnqiAjAnYZkXSz6VFf2fI0hq
- vs0A==
+ bh=bzFuRdPWTLKwS4+B3ITFQVoZlEBmCzUltGcXTplZo34=;
+ b=CWxQWC/lotFscbxfW6m39ADDiGWCrmsJw+SwFubFsYhlrzmgeGl94C/TyVEXSxJpIh
+ 2EA05v9W1tmXan0gheYEiGFWXjc1HGokzNft06NUxNveH65aV6KztVE/wfm2ZP/HpBID
+ XjQyGu2nlNXYx3ecn6USZd3kHCLyN1sSkrvAMJaz5j1QPqyTaAenEtYY8n9q6ycrFH8U
+ H4HwX8EP1vOoakFo5hQZ/FuLQlAe9sFlowHAOppcNHQWLeBZO0Iv97c3HmDJUpI61grv
+ 62w26hLEYVH1U/87NC/7VU0qYzB72BJlueqTdEpRElL0CqOtLK9dNvoFpjkbT74R5TmE
+ AFnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677757714;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=1e100.net; s=20210112; t=1677778939;
+ h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bfxtFo75Vbs6nbCD7jh08npMAeE5QGd1IbzegI4Xkyk=;
- b=ZDAh+k3RTu7bRIBXV1W2KrHiSJfLRyDghS9b6G8IzGzslKKXND6+ctWj4e/atWdpTK
- OIi3l2RWCIdrJRgU19LfMUm7SiSld5el+2Bk+YBR//GYMYaRjDU4snelMLsLnaPt3Ptc
- 4U1ab5n3lx0x91IaYIzsh4zltiBYHwR88LUF5oqg4SsaQSs15YDv9zG4v/QiH/jEEo0W
- KigxH+LcAqTJ5iKVNVJB73fUpWrjZG5Kjnt9J7Ts2d3vWIy0so7dLyEZCpqZxSOi5be+
- K8nmeW5i8dt8ba7ZuTSPu9RZ57VZxoWWNsyftsniGfGtoHpvEJb6YUUYkCnQSAqMPJ+f
- Y8pA==
-X-Gm-Message-State: AO0yUKWmckjkcavOP0/A04l+xGjJ5POT2pLc8HSPUvK1HPkhu2jUuGb3
- /GTKdtcfSAVjU+JFsFTsfdBjmQ==
-X-Google-Smtp-Source: AK7set/u1tKeKUPsUhY+eA4Rt8n5bg/E84YjSk3Cd8PcLpvK+i99oIgH9ch0tS/1T+MsgM/1tzPqMA==
-X-Received: by 2002:a05:6808:3a7:b0:378:69f4:7f6c with SMTP id
- n7-20020a05680803a700b0037869f47f6cmr4870434oie.43.1677757714050; 
- Thu, 02 Mar 2023 03:48:34 -0800 (PST)
+ bh=bzFuRdPWTLKwS4+B3ITFQVoZlEBmCzUltGcXTplZo34=;
+ b=EJ75Cxs0iNwwSIlSkbZBXXW4usOvrrAHFAYeQQ0htzmwPB4ybr/gEeBFKSc5DzL7ok
+ tdesAknY4LRoF1EoMInG7JbAcyImOf9dOgVtFTg9Ja9CMWWKSlxNNXyThlntNqnDyxje
+ WocRfnONbDpnk4xy0fvkjXXLv340fi99Zp0ak0MNnzy0rVzlvDO+/PnkLjTc2yoBmM9I
+ z0nFxKujfxu9ck80V+w09JB6iQGtYIPcmXvHf/PBXruxSheGz1TUis6CVo3cHISMh/7X
+ 0A4fkZW6E/jLUkZU24JePCNoX0IwdtZefu60f+zvEzaFSN3eNMAMKlsT7PwI5NNcw5Wx
+ 8b6A==
+X-Gm-Message-State: AO0yUKU5Sn47hKIPLpHl2xs5kMPOgpqRafeQyKDfEFk0iDVlYNxb8KpK
+ JrmjiPeBO0Zc+mGji516YNX3lA==
+X-Google-Smtp-Source: AK7set/lO2l5bMlXpEPKqMzav+d7TSwTPysHmgA+YtyFI0FQWI7Z6KXUi8Y11z5LGCFtkxE2mCDNUw==
+X-Received: by 2002:a05:6820:134d:b0:525:863:ea52 with SMTP id
+ b13-20020a056820134d00b005250863ea52mr6741027oow.2.1677778938947; 
+ Thu, 02 Mar 2023 09:42:18 -0800 (PST)
 Received: from [192.168.68.107] ([177.189.53.31])
  by smtp.gmail.com with ESMTPSA id
- x124-20020acae082000000b0038440f0f63dsm4065344oig.37.2023.03.02.03.48.31
+ a5-20020a9d4705000000b00684a10970adsm138619otf.16.2023.03.02.09.42.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 02 Mar 2023 03:48:33 -0800 (PST)
-Message-ID: <38da764e-3cc8-14cb-4f9a-5b3b4014e042@ventanamicro.com>
-Date: Thu, 2 Mar 2023 08:48:29 -0300
+ Thu, 02 Mar 2023 09:42:18 -0800 (PST)
+Message-ID: <7591407b-e8d0-aa05-86a3-8ca7988a6e69@ventanamicro.com>
+Date: Thu, 2 Mar 2023 14:42:14 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [PATCH v8 0/4] riscv: Add support for Zicbo[m,z,p] instructions
+Subject: Re: [PATCH v10 0/5] riscv: Allow user to set the satp mode
 Content-Language: en-US
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- richard.henderson@linaro.org, Palmer Dabbelt <palmer@rivosinc.com>
-References: <20230224132536.552293-1-dbarboza@ventanamicro.com>
+To: Alexandre Ghiti <alexghiti@rivosinc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>,
+ Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+References: <20230203055812.257458-1-alexghiti@rivosinc.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230224132536.552293-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20230203055812.257458-1-alexghiti@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22b.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2f.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
 X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.09,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.092,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -85,18 +88,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2023 11:48:38 -0000
+X-List-Received-Date: Thu, 02 Mar 2023 17:42:24 -0000
 
-Hi,
+Hi Palmer,
 
-Thanks everyone for the reviews. Palmer, patch 1 just landed upstream (commit
-1770b2f2d3d6). You can pick patches 2-4 cleanly now.
-
-There is another patch in the ML:
-
-[PATCH v2 0/1] hw/riscv/virt.c: add cbo[mz]-block-size fdt properties​3 messages
-
-that can be picked together as well.
+I think this series can be picked. All patches are fully acked. There is a nit
+in patch 3 that I believe you can choose to fix in-tree if you want to.
 
 
 Thanks,
@@ -104,48 +101,94 @@ Thanks,
 
 Daniel
 
-On 2/24/23 10:25, Daniel Henrique Barboza wrote:
-> Hi,
+
+
+
+On 2/3/23 02:58, Alexandre Ghiti wrote:
+> This introduces new properties to allow the user to set the satp mode,
+> see patch 3 for full syntax. In addition, it prevents cpus to boot in a
+> satp mode they do not support (see patch 4).
 > 
-> This version has a change in patch 2, proposed by Weiwei Li, where we're
-> now triggering virt_instruction_fault before triggering illegal_insn
-> fault from S mode.
+> base-commit: commit 75cc28648574 ("configure: remove
+> backwards-compatibility code"
 > 
-> Richard already queued patch 1 is queued in tcg-next already. I'm still
-> including it here to allow for easier testing of the remaining patches.
+> v10:
+> - Fix user mode build by surrounding satp handling with #ifndef
+>    CONFIG_USER_ONLY, Frank
+> - Fix AB/RB from Frank and Alistair
 > 
-> Changes from v7:
-> - patch 1: queued in tcg-next, included here to facilitate testing the
->    other patches
-> - patch 2:
->    - changed check_zicbo_envcfg() to trigger the virtual faults
->      before triggering the illegal exception from S mode.
-> - v7 link: https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg07041.html
+> v9:
+> - Move valid_vm[i] up, Andrew
+> - Fixed expansion of the bitmap map, Bin
+> - Rename set_satp_mode_default into set_satp_mode_default_map, Bin
+> - Remove outer parenthesis and alignment, Bin
+> - Fix qemu32 build failure, Bin
+> - Fixed a few typos, Bin
+> - Add RB from Andrew and Bin
 > 
-> Christoph Muellner (3):
->    target/riscv: implement Zicboz extension
->    target/riscv: implement Zicbom extension
->    target/riscv: add Zicbop cbo.prefetch{i,r,m} placeholder
+> v8:
+> - Remove useless !map check, Andrew
+> - Add RB from Andrew
 > 
-> Daniel Henrique Barboza (1):
->    tcg: add 'size' param to probe_access_flags()
+> v7:
+> - Expand map to contain all valid modes, Andrew
+> - Fix commit log for patch 3, Andrew
+> - Remove is_32_bit argument from set_satp_mode_default, Andrew
+> - Move and fixed comment, Andrew
+> - Fix satp_mode_map_max in riscv_cpu_satp_mode_finalize which was set
+>    too early, Alex
+> - Remove is_32_bit argument from set_satp_mode_max_supported, Andrew
+> - Use satp_mode directly instead of a string in
+>    set_satp_mode_max_supported, Andrew
+> - Swap the patch introducing supported bitmap and the patch that sets
+>    sv57 in the dt, Andrew
+> - Add various RB from Andrew and Alistair, thanks
 > 
->   accel/stubs/tcg-stub.c                      |   2 +-
->   accel/tcg/cputlb.c                          |  17 ++-
->   accel/tcg/user-exec.c                       |   5 +-
->   include/exec/exec-all.h                     |   3 +-
->   semihosting/uaccess.c                       |   2 +-
->   target/arm/ptw.c                            |   2 +-
->   target/arm/sve_helper.c                     |   2 +-
->   target/riscv/cpu.c                          |   7 +
->   target/riscv/cpu.h                          |   4 +
->   target/riscv/helper.h                       |   5 +
->   target/riscv/insn32.decode                  |  16 ++-
->   target/riscv/insn_trans/trans_rvzicbo.c.inc |  57 +++++++++
->   target/riscv/op_helper.c                    | 135 ++++++++++++++++++++
->   target/riscv/translate.c                    |   1 +
->   target/s390x/tcg/mem_helper.c               |   6 +-
->   15 files changed, 250 insertions(+), 14 deletions(-)
->   create mode 100644 target/riscv/insn_trans/trans_rvzicbo.c.inc
+> v6:
+> - Remove the valid_vm check in validate_vm and add it to the finalize function
+>    so that map already contains the constraint, Alex
+> - Add forgotten mbare to satp_mode_from_str, Alex
+> - Move satp mode properties handling to riscv_cpu_satp_mode_finalize, Andrew
+> - Only add satp mode properties corresponding to the cpu, and then remove the
+>    check against valid_vm_1_10_32/64 in riscv_cpu_satp_mode_finalize,
+>    Andrew/Alistair/Alex
+> - Move mmu-type setting to its own patch, Andrew
+> - patch 5 is new and is a fix, Alex
+> 
+> v5:
+> - Simplify v4 implementation by leveraging valid_vm_1_10_32/64, as
+>    suggested by Andrew
+> - Split the v4 patch into 2 patches as suggested by Andrew
+> - Lot of other minor corrections, from Andrew
+> - Set the satp mode N by disabling the satp mode N + 1
+> - Add a helper to set satp mode from a string, as suggested by Frank
+> 
+> v4:
+> - Use custom boolean properties instead of OnOffAuto properties, based
+>    on ARMVQMap, as suggested by Andrew
+> 
+> v3:
+> - Free sv_name as pointed by Bin
+> - Replace satp-mode with boolean properties as suggested by Andrew
+> - Removed RB from Atish as the patch considerably changed
+> 
+> v2:
+> - Use error_setg + return as suggested by Alistair
+> - Add RB from Atish
+> - Fixed checkpatch issues missed in v1
+> - Replaced Ludovic email address with the rivos one
+> 
+> Alexandre Ghiti (5):
+>    riscv: Pass Object to register_cpu_props instead of DeviceState
+>    riscv: Change type of valid_vm_1_10_[32|64] to bool
+>    riscv: Allow user to set the satp mode
+>    riscv: Introduce satp mode hw capabilities
+>    riscv: Correctly set the device-tree entry 'mmu-type'
+> 
+>   hw/riscv/virt.c    |  19 ++--
+>   target/riscv/cpu.c | 271 +++++++++++++++++++++++++++++++++++++++++++--
+>   target/riscv/cpu.h |  25 +++++
+>   target/riscv/csr.c |  29 +++--
+>   4 files changed, 313 insertions(+), 31 deletions(-)
 > 
 
