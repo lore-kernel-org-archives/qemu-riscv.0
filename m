@@ -1,73 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pXYkB-0000jH-Qx
-	for mharc-qemu-riscv@gnu.org; Wed, 01 Mar 2023 21:32:31 -0500
+	id 1pXYvS-0007cs-Gx
+	for mharc-qemu-riscv@gnu.org; Wed, 01 Mar 2023 21:44:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pXYk9-0000if-Rl
- for qemu-riscv@nongnu.org; Wed, 01 Mar 2023 21:32:29 -0500
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pXYk5-00048P-S7
- for qemu-riscv@nongnu.org; Wed, 01 Mar 2023 21:32:29 -0500
-Received: by mail-pl1-x635.google.com with SMTP id u5so12705164plq.7
- for <qemu-riscv@nongnu.org>; Wed, 01 Mar 2023 18:32:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677724342;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:from:to:cc:subject:date:message-id
- :reply-to; bh=VvBeEuJiBzpec98IW6FzfORo+NUzGPoTnGPVZ1D/SBU=;
- b=Q8Z3zvRnSaXiffCTbdrYH1gNgSJZKqGp01JBQosSBLJCI99Y00vs1JaAoXiqKtBAtK
- La7/ZmQazb3j3Pm5RlzqUwqgJnYBMcDmMR6T9vnVW4lu7wJRsru8LgYDDPc8iuRldhkP
- yyCgtzvQR5S2B2fzt3s84d6o9rSnMa3hRVf19vccvQZJQRmWcqlxoX1t+PFsaar0f0ex
- CVcxE4NbrhnEfJ/ZJFuVdWS4x9Lxlexl/GAy8NS+cgTE3GjvgjkAuTuLQPP7iJKQ7SbC
- 3hKElavu5Z0wlV1rxmuJBc5Ns1OppWF/Hza5OXPYq7d/zA6NvYfN2Gqq+ExhbGQD+JEl
- KSAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677724342;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VvBeEuJiBzpec98IW6FzfORo+NUzGPoTnGPVZ1D/SBU=;
- b=wT7ZbRSJPEC5N9ZvltA+Cq2Ezbx1hBiGOMy/ihXs6BFFbVSvEtFMJYIgFvR9NhhGcY
- 8ZZSSFEQhMwQGhDDf5uAdvdmpCLCziPahEFwttKZmoHq9LM+PlSYsP5bjLfQ26dn74ql
- c1oNVSBKWqH2fn5Ns9bWrQvEgBvGH8x0uTL/BWqsYdpugUDa0wBqm5KHmCEoNQqkj+96
- hwLA9tiQ80+SCJ6Sq4CoRhXRHrmyRsotaAW+15Uz1ZcnTE32AFZ+2Zc3MZdnvPdZCth9
- XEDFrEwI3goGzSK8gQd6+l8UWA1GAUbfjHg3p7+SE12S0knWkHJ1H176YNU2M7x0BF7J
- C4iQ==
-X-Gm-Message-State: AO0yUKWYK2c5Rx6xJFw4t2kLMjIInWR0LAO5UFI+5tZRx0dZu6vX6Jnu
- gd+G4/9fsormxMrOOnP7qXi0Ww==
-X-Google-Smtp-Source: AK7set/L6LFYY+e36VB8MLXKtwlzAb+a161izb03EBkjFbY/qmzqCU4SflwayvbDsp4i59zMNzuHlQ==
-X-Received: by 2002:a17:902:720b:b0:19e:2495:20e0 with SMTP id
- ba11-20020a170902720b00b0019e249520e0mr551789plb.21.1677724341763; 
- Wed, 01 Mar 2023 18:32:21 -0800 (PST)
-Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
- a11-20020a170902900b00b0019a9637b2d3sm9071903plp.279.2023.03.01.18.32.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Mar 2023 18:32:20 -0800 (PST)
-Date: Wed, 01 Mar 2023 18:32:20 -0800 (PST)
-X-Google-Original-Date: Wed, 01 Mar 2023 18:15:39 PST (-0800)
-Subject: Re: [PATCH 0/2] target/riscv: some vector_helper.c cleanups
-In-Reply-To: <20230226170514.588071-1-dbarboza@ventanamicro.com>
-CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- dbarboza@ventanamicro.com
-From: Palmer Dabbelt <palmer@rivosinc.com>
-To: dbarboza@ventanamicro.com
-Message-ID: <mhng-6a39a5ff-a51e-433f-9f4e-8ee606510d18@palmer-ri-x1c9a>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pXYvR-0007Zg-9K; Wed, 01 Mar 2023 21:44:09 -0500
+Received: from out30-130.freemail.mail.aliyun.com ([115.124.30.130])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pXYvO-0008N4-Lk; Wed, 01 Mar 2023 21:44:08 -0500
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R241e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0VcvBco-_1677725019; 
+Received: from 30.221.97.107(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VcvBco-_1677725019) by smtp.aliyun-inc.com;
+ Thu, 02 Mar 2023 10:43:40 +0800
+Message-ID: <8f026ece-1535-8b8f-aeff-ab4a90469fd7@linux.alibaba.com>
+Date: Thu, 2 Mar 2023 10:43:39 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH v2 05/18] target/riscv: gdbstub: Do not generate CSR XML
+ if Zicsr is disabled
+Content-Language: en-US
+To: Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Cc: bmeng@tinylab.org, qemu-devel@nongnu.org, liweiwei@iscas.ac.cn,
+ Alistair Francis <Alistair.Francis@wdc.com>, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, qemu-riscv@nongnu.org
+References: <CAEUhbmWtg8+V44h7xgtggcORLww7kCv60DX+r3XYFTOrgzMtmA@mail.gmail.com>
+ <mhng-4de827d1-bce4-4e30-b5d3-cd9e61e4b4db@palmer-ri-x1c9a>
+ <CAEUhbmVGe3mtG+NXkLJ9yKcQEXUB8dsZiFDW=d1kmRzWR-Mrdg@mail.gmail.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <CAEUhbmVGe3mtG+NXkLJ9yKcQEXUB8dsZiFDW=d1kmRzWR-Mrdg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=palmer@rivosinc.com; helo=mail-pl1-x635.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.130;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-130.freemail.mail.aliyun.com
+X-Spam_score_int: -99
+X-Spam_score: -10.0
+X-Spam_bar: ----------
+X-Spam_report: (-10.0 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.09, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,35 +57,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2023 02:32:30 -0000
+X-List-Received-Date: Thu, 02 Mar 2023 02:44:09 -0000
 
-On Sun, 26 Feb 2023 09:05:12 PST (-0800), dbarboza@ventanamicro.com wrote:
-> Based-on: 20230222185205.355361-2-dbarboza@ventanamicro.com
-> ("[PATCH v7 01/10] target/riscv: introduce riscv_cpu_cfg()")
->
-> Hi,
->
-> This is a re-send of patch 1, which is already reviewed, with a
-> follow-up that uses riscv_cpu_cfg() in the remaining of the file. This
-> was suggested by Weiwei Li in the "[PATCH 0/4] RISCVCPUConfig related
-> cleanups" review. Patch 1 makes the work of patch 2 easier since it
-> eliminated some uses of env_archcpu() we want to avoid.
->
-> Both patches depends on patch "[PATCH v7 01/10] target/riscv: introduce
-> riscv_cpu_cfg()" that can be found here:
->
-> https://patchew.org/QEMU/20230222185205.355361-1-dbarboza@ventanamicro.com/20230222185205.355361-2-dbarboza@ventanamicro.com/
->
->
-> Daniel Henrique Barboza (2):
->   target/riscv/vector_helper.c: create vext_set_tail_elems_1s()
->   target/riscv/vector_helper.c: avoid env_archcpu() when reading
->     RISCVCPUConfig
->
->  target/riscv/vector_helper.c | 104 +++++++++++++----------------------
->  1 file changed, 39 insertions(+), 65 deletions(-)
 
-Thanks, these are queued up.  If we're already broken on 
-non-power-of-two then that ROUND_UP() suggestion might be worth looking 
-at, as I doubt we'd want to support them even if the ISA allows for it.
+On 2023/3/2 8:30, Bin Meng wrote:
+> On Thu, Mar 2, 2023 at 7:43 AM Palmer Dabbelt <palmer@dabbelt.com> wrote:
+>> On Wed, 01 Mar 2023 01:55:34 PST (-0800), Bin Meng wrote:
+>>> On Wed, Mar 1, 2023 at 5:52 PM LIU Zhiwei <zhiwei_liu@linux.alibaba.com> wrote:
+>>>>
+>>>> On 2023/2/28 18:40, Bin Meng wrote:
+>>>>> There is no need to generate the CSR XML if the Zicsr extension
+>>>>> is not enabled.
+>>>> Should we generate the FPU XML or Vector XML when Zicsr is not enabled?
+>>> Good point. I think we should disable that too.
+>> Seems reasonable.  Did you want to do that as part of a v3, or just as a
+>> follow-on fix?
+>>
+> I looked at this further.
+>
+> The FPU / Vector XML is guarded by the " env->misa_ext" check. If
+> Zicsr is disabled while F or V extension is off, QEMU will error out
+> in riscv_cpu_realize() earlier before the gdbstub init.
+
+Make sense.
+
+Zhiwei
+
+>
+> So current patch should be fine.
+>
+> Regards,
+> Bin
 
