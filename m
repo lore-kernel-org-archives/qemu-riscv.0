@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pXezN-0003px-PN
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Mar 2023 04:12:37 -0500
+	id 1pXezR-0003vM-U8
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Mar 2023 04:12:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pXezM-0003pU-1w
- for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 04:12:36 -0500
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
+ id 1pXezQ-0003tV-AC
+ for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 04:12:40 -0500
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pXezK-0004oD-FL
- for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 04:12:35 -0500
-Received: by mail-pj1-x1031.google.com with SMTP id
- p3-20020a17090ad30300b0023a1cd5065fso2104013pju.0
- for <qemu-riscv@nongnu.org>; Thu, 02 Mar 2023 01:12:34 -0800 (PST)
+ id 1pXezO-00057Q-NR
+ for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 04:12:40 -0500
+Received: by mail-pj1-x102a.google.com with SMTP id
+ m8-20020a17090a4d8800b002377bced051so2243064pjh.0
+ for <qemu-riscv@nongnu.org>; Thu, 02 Mar 2023 01:12:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EoMLEEBeALy5RqHQol1x3kgq/xhZyhIr706Dydz1mcg=;
- b=bclyfFwvsYpJwq1IZXJYB1f9jfM4Pn+NW6Vn3zK3ZKvPpoqAGdUcCGNKIgkaEKbym9
- MDB9j/t+U1cjrakB2kx+DDysmyw3eJJxhJp6q+sn7IelMOZd56oGxKdUKQPSXyDoL47J
- nFeFzGwWShmqQkpvUmgKrqGQYwkFoIiwJquJYLMS0vnVTPNLI4uhnwykWbDJqnvRmnmB
- gPSqdrpCc3H3CpK/VYPp58nyL3HkIvZtyqkkVnsn+pjFBG6FbhTkUdCTt0vM3Of0KCCu
- phi/WkEprtcN94k3bkOdfRs8m3anBmmJCozDK4vhst6m4gHAxH7S+l++smlA1KHD7js0
- rJkA==
+ bh=Gq6R8bMKD8VginRzcmkhaOc5Trofmeu2n8wOI0BvFnc=;
+ b=gsdiGhQat5spgo9v9tXmUzlTjp5tqAEhw6hPLwwL6B5fh87q6nyjxRxovWqleUyG2V
+ T+Kqt/mvqcMIayoyUQol6nVD7HVoEh91qPjSu4K467WX6Mrqg/zA2DqAWP0mteKO1tUz
+ 8Ma2yREDGXI9exyXmuOYtMUvl8R2UrRINeGq9Rx5N0pf+mOEArmgH9pS4JZ10zC66AAQ
+ nXWkiEbbjIgJNxcG/tPzMHCp8tRG6s7kWaHZeMnJkfygK2Wl3lyE0J16fColZZ+kW/T+
+ BzlYz1v8SO9ZsHHpNnG/5qXY1y6sU/y1aSfL8U9utsiX5KS5eBl/VVoMFjQuMO2aMhu4
+ 7zgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EoMLEEBeALy5RqHQol1x3kgq/xhZyhIr706Dydz1mcg=;
- b=zML/O/NdNQF3qeur9La/RkgtiNJD78YaR/FarR2v8g+d7GXLLR7N67aSKAz1e//NGS
- GtnCaoNJnEY5fVBD/ZccISZD8E4ikY9Bcde2UNXc2570dbPQsx1utXztVQgXbnu9fu5I
- o0kulFyVrDzxa3iE5alEYu5db10FEURuPzEKVdx13ePRAOejslq4tgKR5n7vM6MLJk4n
- jc5mfVjlEOqOpRXnd52uDQ9JES2cRXoJbPfeLTFw/UDmfoeBDvGhgl/kuKONsQtDHOb2
- a0BgU0MDJW+mSJl85x86pV1c2gKOFFm13vEZXpGx2m3guPJKHmuwwsSqXYmsxrK4rthb
- j0JA==
-X-Gm-Message-State: AO0yUKXrsM1gbuqWZ+NCD8UfCigVwV6w0x6mX6RfwudfPIeX8/2RuWSz
- CGJljx0yfbrO8EYiPfII60fPi/MR8UnswX23
-X-Google-Smtp-Source: AK7set8G5aOiRnsTdEV3JQnWFsTdhm8E7hOivZ+Tbc3ZHU25TMyfb/iaS1DiBov1bNhW3YUKjngAlA==
-X-Received: by 2002:a17:90a:1d1:b0:230:a1ce:f673 with SMTP id
- 17-20020a17090a01d100b00230a1cef673mr11378681pjd.4.1677748352977; 
- Thu, 02 Mar 2023 01:12:32 -0800 (PST)
+ bh=Gq6R8bMKD8VginRzcmkhaOc5Trofmeu2n8wOI0BvFnc=;
+ b=uvYHmz/wCcTlYijnvJHWP5sOwE2KX1CDBQ8WRGI3HJrYi0X8U8+agcwNGdjwA0DG3O
+ gl9yZ37XB7iBUT6xFPwMG7wsK09CSmKqjOtDljpc0YlP6yxn2Ab26qsG1L6YMtvfhdPD
+ LxZIDFAlSqssuPVX5mCskq25TtW2ObnrsCHYqClMAlWB4ht0eEZtxWidvYAHwpTkDdB/
+ Hi03PBM/b38haBr+K/+xpChU9XkoTjvdarvcjvP3kVI/Z9Ic/dpcZKvvfjw26WxaDmTr
+ 7tUGpuaZSKKKi0dXiXpjtOuGxVIQqCKqTFNEvvOuW/i50RckLcctwTYZuWEtMrM0GmVc
+ KZxw==
+X-Gm-Message-State: AO0yUKXjGP8Z4T/7BZBvWr2rG8To5gjoKcc6Gjb7M6mQMggzC/u8nNVZ
+ +nfj1q6yuHz5Degjk/wjT3DyqPVSwt0DbHA/
+X-Google-Smtp-Source: AK7set8C3eHW+tX4WgxvhHlguNfTEBzz516Ts2DIjQ4is3lsKDzqpJi8Iaot/qZlUxJUh6TGA+lp1g==
+X-Received: by 2002:a17:902:ea04:b0:19c:c8c8:b544 with SMTP id
+ s4-20020a170902ea0400b0019cc8c8b544mr12430486plg.64.1677748356873; 
+ Thu, 02 Mar 2023 01:12:36 -0800 (PST)
 Received: from localhost.localdomain ([49.206.14.226])
  by smtp.gmail.com with ESMTPSA id
- iz12-20020a170902ef8c00b0019945535973sm9850692plb.63.2023.03.02.01.12.29
+ iz12-20020a170902ef8c00b0019945535973sm9850692plb.63.2023.03.02.01.12.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Mar 2023 01:12:32 -0800 (PST)
+ Thu, 02 Mar 2023 01:12:36 -0800 (PST)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -60,17 +60,18 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Andrew Jones <ajones@ventanamicro.com>,
  Anup Patel <apatel@ventanamicro.com>,
  Atish Kumar Patra <atishp@rivosinc.com>,
- Igor Mammedov <imammedo@redhat.com>, Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH V5 2/8] hw/riscv/virt: Add a switch to disable ACPI
-Date: Thu,  2 Mar 2023 14:42:06 +0530
-Message-Id: <20230302091212.999767-3-sunilvl@ventanamicro.com>
+ Igor Mammedov <imammedo@redhat.com>, Sunil V L <sunilvl@ventanamicro.com>,
+ Bin Meng <bmeng@tinylab.org>
+Subject: [PATCH V5 3/8] hw/riscv/virt: Add memmap pointer to RiscVVirtState
+Date: Thu,  2 Mar 2023 14:42:07 +0530
+Message-Id: <20230302091212.999767-4-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230302091212.999767-1-sunilvl@ventanamicro.com>
 References: <20230302091212.999767-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x1031.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -90,97 +91,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2023 09:12:36 -0000
+X-List-Received-Date: Thu, 02 Mar 2023 09:12:40 -0000
 
-ACPI will be enabled by default. Add a switch to turn off
-for testing and debug purposes.
+memmap needs to be exported outside of virt.c so that
+modules like acpi can use it. Hence, add a pointer field
+in RiscVVirtState structure and initialize it with the
+memorymap.
 
 Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+Reviewed-by: Bin Meng <bmeng@tinylab.org>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 ---
- hw/riscv/virt.c         | 29 +++++++++++++++++++++++++++++
- include/hw/riscv/virt.h |  2 ++
- 2 files changed, 31 insertions(+)
+ hw/riscv/virt.c         | 2 ++
+ include/hw/riscv/virt.h | 1 +
+ 2 files changed, 3 insertions(+)
 
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 1621278eb8..8df37cf3d6 100644
+index 8df37cf3d6..9b85d5b747 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -50,6 +50,7 @@
- #include "hw/pci-host/gpex.h"
- #include "hw/display/ramfb.h"
- #include "hw/acpi/aml-build.h"
-+#include "qapi/qapi-visit-common.h"
+@@ -1451,6 +1451,8 @@ static void virt_machine_init(MachineState *machine)
+             ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
+     }
  
- /*
-  * The virt machine physical address space used by some of the devices
-@@ -1518,6 +1519,7 @@ static void virt_machine_instance_init(Object *obj)
- 
-     s->oem_id = g_strndup(ACPI_BUILD_APPNAME6, 6);
-     s->oem_table_id = g_strndup(ACPI_BUILD_APPNAME8, 8);
-+    s->acpi = ON_OFF_AUTO_AUTO;
- }
- 
- static char *virt_get_aia_guests(Object *obj, Error **errp)
-@@ -1592,6 +1594,28 @@ static void virt_set_aclint(Object *obj, bool value, Error **errp)
-     s->have_aclint = value;
- }
- 
-+bool virt_is_acpi_enabled(RISCVVirtState *s)
-+{
-+    return s->acpi != ON_OFF_AUTO_OFF;
-+}
++    s->memmap = virt_memmap;
 +
-+static void virt_get_acpi(Object *obj, Visitor *v, const char *name,
-+                          void *opaque, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+    OnOffAuto acpi = s->acpi;
-+
-+    visit_type_OnOffAuto(v, name, &acpi, errp);
-+}
-+
-+static void virt_set_acpi(Object *obj, Visitor *v, const char *name,
-+                          void *opaque, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+
-+    visit_type_OnOffAuto(v, name, &s->acpi, errp);
-+}
-+
- static HotplugHandler *virt_machine_get_hotplug_handler(MachineState *machine,
-                                                         DeviceState *dev)
- {
-@@ -1663,6 +1687,11 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-     sprintf(str, "Set number of guest MMIO pages for AIA IMSIC. Valid value "
-                  "should be between 0 and %d.", VIRT_IRQCHIP_MAX_GUESTS);
-     object_class_property_set_description(oc, "aia-guests", str);
-+    object_class_property_add(oc, "acpi", "OnOffAuto",
-+                              virt_get_acpi, virt_set_acpi,
-+                              NULL, NULL);
-+    object_class_property_set_description(oc, "acpi",
-+                                          "Enable ACPI");
- }
- 
- static const TypeInfo virt_machine_typeinfo = {
+     /* register system main memory (actual RAM) */
+     memory_region_add_subregion(system_memory, memmap[VIRT_DRAM].base,
+         machine->ram);
 diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 6c7885bf89..62efebaa32 100644
+index 62efebaa32..379501edcc 100644
 --- a/include/hw/riscv/virt.h
 +++ b/include/hw/riscv/virt.h
-@@ -58,6 +58,7 @@ struct RISCVVirtState {
-     int aia_guests;
+@@ -59,6 +59,7 @@ struct RISCVVirtState {
      char *oem_id;
      char *oem_table_id;
-+    OnOffAuto acpi;
+     OnOffAuto acpi;
++    const MemMapEntry *memmap;
  };
  
  enum {
-@@ -123,4 +124,5 @@ enum {
- #define FDT_APLIC_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
-                                  1 + FDT_APLIC_INT_CELLS)
- 
-+bool virt_is_acpi_enabled(RISCVVirtState *s);
- #endif
 -- 
 2.34.1
 
