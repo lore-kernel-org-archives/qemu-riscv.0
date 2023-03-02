@@ -1,80 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pXe1p-0006h8-Ba
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Mar 2023 03:11:06 -0500
+	id 1pXewJ-0002U5-UB
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Mar 2023 04:09:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pXe1l-0006Yw-MG
- for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 03:11:02 -0500
-Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pXe1j-0000cR-02
- for qemu-riscv@nongnu.org; Thu, 02 Mar 2023 03:11:00 -0500
-Received: by mail-oi1-x22e.google.com with SMTP id bp19so10165284oib.4
- for <qemu-riscv@nongnu.org>; Thu, 02 Mar 2023 00:10:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1677744657;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=vHtPkjOiXO9mXS8KZr+d+YJteZl1d4QhDAU/YQ3XLY8=;
- b=HHiBZE3Uqybgd+8O390DVqvWQYaKEMk6gmsMBwLYzvVoDza99ZUOVej0wFJtB56Ac3
- 8E2W2wyY7uqHuXglT6gpGRxgcEIE50Utkn+u//7hWM2APStKQV+Wpn08V1CdvlHH/Qc8
- Q0Tusacmo68vQSoCgtRirXJAqrWf0JrefeRFw/1YWx8ETM2/E0pMkGwU9kwzmmzbeu+j
- Kr8DK+k4V/KFqRbfZMWQjuf+eLijuDoCdY9zbChz/HdafRpU5hsLs5zXp/svXsXhR+oe
- KC6uUh3n5bQW+QOeIOtfANK6OdT81mhu4HbzjGK8bGGys6ZUqmTrrtMg9Kyx1FgvToCO
- G4kQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677744657;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vHtPkjOiXO9mXS8KZr+d+YJteZl1d4QhDAU/YQ3XLY8=;
- b=K5s0U8RXsfCnQWVHybM07ei8LE8bmo+AR2UrkdzV2SD9mnuAo9RKAg1Ce8sd9kBhwW
- z/W1ZUIHi3DyKlRzvlrq2gyVPxqVJrN48e12n8lx0z3L1tExA5v85Ei7xwRGxt0G6LOV
- I3IETJi2LEBCAx2OMZGjJwsipPy3pNnYwcEyFKFNWF5aktrs3HwXgoTY6WU9sqXsybmK
- XQ2CgO93PFSVsieflW9+YEZQbw/mO4dun+kfMq4P67p9hfHP5Bo/66fQcpthVLxsQH2I
- oiOxYAw5mHKViD/nsMhRHhmEC7ZwIPp22Il0e/AhNeu1dArQrLQ7rlsBvXU3GFrZdaBP
- wrog==
-X-Gm-Message-State: AO0yUKUg7UBPPrK71GpQLY9A3oNyunxno+KgyOMp94zP8iLDg7TiA/fQ
- gOPbyQYMI0R231HpIeLREFa+8A==
-X-Google-Smtp-Source: AK7set9fQgrLLxt1HXfL/4ZHW6f96yFZ0gbAXHBCsklRYySo1H51Obtp77L2Y1EnZzamlyCpXNgpdQ==
-X-Received: by 2002:a54:4783:0:b0:384:c13:d13c with SMTP id
- o3-20020a544783000000b003840c13d13cmr4431548oic.7.1677744656755; 
- Thu, 02 Mar 2023 00:10:56 -0800 (PST)
-Received: from [192.168.68.107] ([177.189.53.31])
- by smtp.gmail.com with ESMTPSA id
- l2-20020a9d7082000000b006863ccbf067sm5711203otj.74.2023.03.02.00.10.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 02 Mar 2023 00:10:56 -0800 (PST)
-Message-ID: <6ed93c3a-edc3-7e5a-c683-43391f450064@ventanamicro.com>
-Date: Thu, 2 Mar 2023 05:10:52 -0300
+ (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
+ id 1pXewI-0002Tf-BC; Thu, 02 Mar 2023 04:09:26 -0500
+Received: from imap5.colo.codethink.co.uk ([78.40.148.171])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
+ id 1pXewG-0001z3-QH; Thu, 02 Mar 2023 04:09:26 -0500
+Received: from [167.98.27.226] (helo=[10.35.5.0])
+ by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1pXeR5-00Blko-7q; Thu, 02 Mar 2023 08:37:11 +0000
+Message-ID: <cc29c762-16e7-8a72-7ad9-b9fd6535c1c1@codethink.co.uk>
+Date: Thu, 2 Mar 2023 08:37:10 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [PATCH 0/4] RISCVCPUConfig related cleanups
-Content-Language: en-US
-To: Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@rivosinc.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com
-References: <20230224174520.92490-1-dbarboza@ventanamicro.com>
- <mhng-c59a4d9c-9a01-44ea-b5a9-b416390b6570@palmer-ri-x1c9a>
- <CAEUhbmUtXVTC3-DFVTAaOaa3_OeP-d8sB-=PSQy4zcFXmC+xfg@mail.gmail.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAEUhbmUtXVTC3-DFVTAaOaa3_OeP-d8sB-=PSQy4zcFXmC+xfg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] hw/riscv/virt.c: add cbom-block-size fdt property
+Content-Language: en-GB
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Anup Patel <apatel@ventanamicro.com>
+References: <20230301215902.375217-1-dbarboza@ventanamicro.com>
+ <20230301215902.375217-2-dbarboza@ventanamicro.com>
+From: Ben Dooks <ben.dooks@codethink.co.uk>
+Organization: Codethink Limited.
+In-Reply-To: <20230301215902.375217-2-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22e.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=78.40.148.171;
+ envelope-from=ben.dooks@codethink.co.uk; helo=imap5.colo.codethink.co.uk
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.09,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.09,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,60 +49,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2023 08:11:02 -0000
+X-List-Received-Date: Thu, 02 Mar 2023 09:09:26 -0000
 
-
-
-On 3/1/23 23:24, Bin Meng wrote:
-> Hi Palmer,
+On 01/03/2023 21:59, Daniel Henrique Barboza wrote:
+> From: Anup Patel <apatel@ventanamicro.com>
 > 
-> On Thu, Mar 2, 2023 at 10:08 AM Palmer Dabbelt <palmer@rivosinc.com> wrote:
->>
->> On Fri, 24 Feb 2023 09:45:16 PST (-0800), dbarboza@ventanamicro.com wrote:
->>> Hi,
->>>
->>> These cleanups were suggested by LIU Zhiwei during the review of the
->>> RISCV_FEATURE_* cleanups, currently on version 7 [1].
->>>
->>> These are dependent on the patch "[PATCH v7 01/10] target/riscv: introduce
->>> riscv_cpu_cfg()" from [1] because we use the riscv_cpu_cfg() API.
->>>
->>>
->>> [1] https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg06467.html
->>>
->>> Daniel Henrique Barboza (4):
->>>    target/riscv/csr.c: use env_archcpu() in ctr()
->>>    target/riscv/csr.c: simplify mctr()
->>>    target/riscv/csr.c: use riscv_cpu_cfg() to avoid env_cpu() pointers
->>>    target/riscv/csr.c: avoid env_archcpu() usages when reading
->>>      RISCVCPUConfig
->>>
->>>   target/riscv/csr.c | 90 +++++++++++++---------------------------------
->>>   1 file changed, 24 insertions(+), 66 deletions(-)
->>
->> I just based these on that patch, which landed as d4ea711704
->> ("target/riscv: introduce riscv_cpu_cfg()").  That resulted in a handful
->> of merge conflicts, but everything looked pretty mechanical.  So it's
->> queued up.
->>
+> The cbom-block-size fdt property property is used to inform the OS about
+> the blocksize in bytes for the Zicbom cache operations.
 > 
-> As Weiwei pointed out in
-> https://lore.kernel.org/qemu-devel/e40e75ff-37e0-94d3-e9e2-c159b0e2da68@iscas.ac.cn/,
-> patch#1 should be dropped.
-
-Yeah, that's my bad. I should've send a v2 owithout patch 1 to avoid confusion.
-
-
-Daniel
-
+> Linux documents it in Documentation/devicetree/bindings/riscv/cpus.yaml
+> as:
 > 
-> But I see it was landed up in your tree @
-> https://github.com/palmer-dabbelt/qemu/commit/3c7d54f945f1b5b474ea35c0815a1618927c9384,
-> while my changes are already in tree @
-> https://github.com/palmer-dabbelt/qemu/commit/94e297071bc0a5965cc32c497a886f2cf9d32710.
+>    riscv,cbom-block-size:
+>      $ref: /schemas/types.yaml#/definitions/uint32
+>      description:
+>        The blocksize in bytes for the Zicbom cache operations.
 > 
-> Not sure why git doesn't figure that out ...
+> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> ---
+>   hw/riscv/virt.c | 6 ++++++
+>   1 file changed, 6 insertions(+)
 > 
-> Regards,
-> Bin
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 49acb57da4..31b55cc62f 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -244,6 +244,12 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+>           name = riscv_isa_string(cpu_ptr);
+>           qemu_fdt_setprop_string(ms->fdt, cpu_name, "riscv,isa", name);
+>           g_free(name);
+> +
+> +        if (cpu_ptr->cfg.ext_icbom) {
+> +            qemu_fdt_setprop_cell(ms->fdt, cpu_name, "riscv,cbom-block-size",
+> +                                  cpu_ptr->cfg.cbom_blocksize);
+> +        }
+> +
+>           qemu_fdt_setprop_string(ms->fdt, cpu_name, "compatible", "riscv");
+>           qemu_fdt_setprop_string(ms->fdt, cpu_name, "status", "okay");
+>           qemu_fdt_setprop_cell(ms->fdt, cpu_name, "reg",
+
+You'll need the same for riscv,cboz-block-size as well.
+
+-- 
+Ben Dooks				http://www.codethink.co.uk/
+Senior Engineer				Codethink - Providing Genius
+
+https://www.codethink.co.uk/privacy.html
+
 
