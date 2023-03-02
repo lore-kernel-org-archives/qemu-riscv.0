@@ -1,64 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pXYkB-0000jD-Dr
+	id 1pXYkB-0000jH-Qx
 	for mharc-qemu-riscv@gnu.org; Wed, 01 Mar 2023 21:32:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pXYk9-0000id-O1
+ id 1pXYk9-0000if-Rl
  for qemu-riscv@nongnu.org; Wed, 01 Mar 2023 21:32:29 -0500
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pXYk8-00048Y-1D
+ id 1pXYk5-00048P-S7
  for qemu-riscv@nongnu.org; Wed, 01 Mar 2023 21:32:29 -0500
-Received: by mail-pl1-x633.google.com with SMTP id v11so12578546plz.8
- for <qemu-riscv@nongnu.org>; Wed, 01 Mar 2023 18:32:24 -0800 (PST)
+Received: by mail-pl1-x635.google.com with SMTP id u5so12705164plq.7
+ for <qemu-riscv@nongnu.org>; Wed, 01 Mar 2023 18:32:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677724343;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677724342;
  h=content-transfer-encoding:mime-version:message-id:to:from:cc
  :in-reply-to:subject:date:from:to:cc:subject:date:message-id
- :reply-to; bh=4UXPLfpRXeWjtHYgrdOgFIZrsGiUoZWchmtMXfPGG8c=;
- b=IL/bGjuFZC9b0Xk9YPFfc+nN1m90jXc3pi6ZdwL0vLxhatUoPVxskcRU9wJQ2YvN8S
- K0hJE261SKHZjdUWG6pcv1ppl29XqdpjujsxdLUKaOcbo43DWb4H8e5hIyk/FBu+YQOQ
- 66+oNIM3VWnHofiNBYUIFZJxt3hwPHpVucXwX9enwTbu2KinbKydo8mNpPig9iW67Mzf
- LiXYjMkyg71EsFXgrCj4t2YVFfrFas8yRQSz02JAqr4lJZhlJDuly0nl5S6pC0pA+/bj
- glR9wIuj2OB3MtvS3PMy0yc6QIdu4kNS6UnKfIy/uaNVe4dWh+GujFXN64/X6lZSbYdB
- mThw==
+ :reply-to; bh=VvBeEuJiBzpec98IW6FzfORo+NUzGPoTnGPVZ1D/SBU=;
+ b=Q8Z3zvRnSaXiffCTbdrYH1gNgSJZKqGp01JBQosSBLJCI99Y00vs1JaAoXiqKtBAtK
+ La7/ZmQazb3j3Pm5RlzqUwqgJnYBMcDmMR6T9vnVW4lu7wJRsru8LgYDDPc8iuRldhkP
+ yyCgtzvQR5S2B2fzt3s84d6o9rSnMa3hRVf19vccvQZJQRmWcqlxoX1t+PFsaar0f0ex
+ CVcxE4NbrhnEfJ/ZJFuVdWS4x9Lxlexl/GAy8NS+cgTE3GjvgjkAuTuLQPP7iJKQ7SbC
+ 3hKElavu5Z0wlV1rxmuJBc5Ns1OppWF/Hza5OXPYq7d/zA6NvYfN2Gqq+ExhbGQD+JEl
+ KSAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677724343;
+ d=1e100.net; s=20210112; t=1677724342;
  h=content-transfer-encoding:mime-version:message-id:to:from:cc
  :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4UXPLfpRXeWjtHYgrdOgFIZrsGiUoZWchmtMXfPGG8c=;
- b=TIt7RmuoN2fmrTG81MyuG92crPuzcUnZGe5g/oRuLuvAijDeFHuzSDW7LYRWD6kKeb
- 9lr0WZXVz1ycrfxT1tNwOBLLB99MiBUte+koJUu4IXMf7Oyt+fXQ7VoLmjCMpdL2a8w8
- Yy2i4dh5yUGS7hp9Z/fOZoTLaLdKQFTVVco2MDuDRYN6TFGOy7ZCfVJo0/GDEAWP+NhP
- 75ohAkc3JypFi5qKQdIKmP14u6I4YcGED1gY6xM55J9wW2PvT5kbIQRTrW41Mo0bc5Ob
- yMG5RIeVPKc83EbC6qkZB/68TcSLLVX6Om7+dWKwq7MT15Pwl/h4JNTYsRYRu4rIAAre
- rRAQ==
-X-Gm-Message-State: AO0yUKX8Wlam+7RljSes+GthOh1jURk3SxWB1PcdA9pxpjjegN7W7EQm
- GHmlueMgBAhiHjKRlwGaUOayWA==
-X-Google-Smtp-Source: AK7set9p37ChMJm/kUFLyfdRNshfthkNrkZtk9KDMZBunaTX5iNoPg9NB9DBX4OpUSHFuvdrxK4dYA==
-X-Received: by 2002:a17:903:2448:b0:19c:d78b:cdc with SMTP id
- l8-20020a170903244800b0019cd78b0cdcmr10193347pls.5.1677724343370; 
- Wed, 01 Mar 2023 18:32:23 -0800 (PST)
+ bh=VvBeEuJiBzpec98IW6FzfORo+NUzGPoTnGPVZ1D/SBU=;
+ b=wT7ZbRSJPEC5N9ZvltA+Cq2Ezbx1hBiGOMy/ihXs6BFFbVSvEtFMJYIgFvR9NhhGcY
+ 8ZZSSFEQhMwQGhDDf5uAdvdmpCLCziPahEFwttKZmoHq9LM+PlSYsP5bjLfQ26dn74ql
+ c1oNVSBKWqH2fn5Ns9bWrQvEgBvGH8x0uTL/BWqsYdpugUDa0wBqm5KHmCEoNQqkj+96
+ hwLA9tiQ80+SCJ6Sq4CoRhXRHrmyRsotaAW+15Uz1ZcnTE32AFZ+2Zc3MZdnvPdZCth9
+ XEDFrEwI3goGzSK8gQd6+l8UWA1GAUbfjHg3p7+SE12S0knWkHJ1H176YNU2M7x0BF7J
+ C4iQ==
+X-Gm-Message-State: AO0yUKWYK2c5Rx6xJFw4t2kLMjIInWR0LAO5UFI+5tZRx0dZu6vX6Jnu
+ gd+G4/9fsormxMrOOnP7qXi0Ww==
+X-Google-Smtp-Source: AK7set/L6LFYY+e36VB8MLXKtwlzAb+a161izb03EBkjFbY/qmzqCU4SflwayvbDsp4i59zMNzuHlQ==
+X-Received: by 2002:a17:902:720b:b0:19e:2495:20e0 with SMTP id
+ ba11-20020a170902720b00b0019e249520e0mr551789plb.21.1677724341763; 
+ Wed, 01 Mar 2023 18:32:21 -0800 (PST)
 Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
- c5-20020a6566c5000000b00503000f0492sm1755765pgw.14.2023.03.01.18.32.22
+ a11-20020a170902900b00b0019a9637b2d3sm9071903plp.279.2023.03.01.18.32.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Mar 2023 18:32:22 -0800 (PST)
-Date: Wed, 01 Mar 2023 18:32:22 -0800 (PST)
-X-Google-Original-Date: Wed, 01 Mar 2023 18:31:21 PST (-0800)
-Subject: Re: [PATCH 0/2] Fix the OpenSBI CI job and bump to v1.2
-In-Reply-To: <20230224212543.20462-1-palmer@rivosinc.com>
-CC: Bin Meng <bmeng.cn@gmail.com>, thuth@redhat.com
+ Wed, 01 Mar 2023 18:32:20 -0800 (PST)
+Date: Wed, 01 Mar 2023 18:32:20 -0800 (PST)
+X-Google-Original-Date: Wed, 01 Mar 2023 18:15:39 PST (-0800)
+Subject: Re: [PATCH 0/2] target/riscv: some vector_helper.c cleanups
+In-Reply-To: <20230226170514.588071-1-dbarboza@ventanamicro.com>
+CC: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ dbarboza@ventanamicro.com
 From: Palmer Dabbelt <palmer@rivosinc.com>
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Message-ID: <mhng-33fa8014-8db8-44e5-85d9-f2071db025ac@palmer-ri-x1c9a>
+To: dbarboza@ventanamicro.com
+Message-ID: <mhng-6a39a5ff-a51e-433f-9f4e-8ee606510d18@palmer-ri-x1c9a>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=palmer@rivosinc.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=palmer@rivosinc.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -77,20 +80,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2023 02:32:29 -0000
+X-List-Received-Date: Thu, 02 Mar 2023 02:32:30 -0000
 
-On Fri, 24 Feb 2023 13:25:41 PST (-0800), Palmer Dabbelt wrote:
-> The OpenSBI version bump found a CI failure, which appears to actually
-> have been related to the Docker version as opposed to the Ubuntu
-> version -- at least assuming my local CI run
-> <https://gitlab.com/palmer-dabbelt/qemu/-/jobs/3832389705> is accurate
-> (thanks to Thomas for pointing out how to get those set up).
+On Sun, 26 Feb 2023 09:05:12 PST (-0800), dbarboza@ventanamicro.com wrote:
+> Based-on: 20230222185205.355361-2-dbarboza@ventanamicro.com
+> ("[PATCH v7 01/10] target/riscv: introduce riscv_cpu_cfg()")
 >
-> I've left off the Ubuntu version upgrade because it's triggering some
-> key-related issues when in apt.  That's probably worth doing, but I
-> figured it'd be better to send these along now to try and get things
-> unblocked.  The EDK2 Docker setup looks like it would have the same
-> issue but I'll also keep that independent.
+> Hi,
+>
+> This is a re-send of patch 1, which is already reviewed, with a
+> follow-up that uses riscv_cpu_cfg() in the remaining of the file. This
+> was suggested by Weiwei Li in the "[PATCH 0/4] RISCVCPUConfig related
+> cleanups" review. Patch 1 makes the work of patch 2 easier since it
+> eliminated some uses of env_archcpu() we want to avoid.
+>
+> Both patches depends on patch "[PATCH v7 01/10] target/riscv: introduce
+> riscv_cpu_cfg()" that can be found here:
+>
+> https://patchew.org/QEMU/20230222185205.355361-1-dbarboza@ventanamicro.com/20230222185205.355361-2-dbarboza@ventanamicro.com/
+>
+>
+> Daniel Henrique Barboza (2):
+>   target/riscv/vector_helper.c: create vext_set_tail_elems_1s()
+>   target/riscv/vector_helper.c: avoid env_archcpu() when reading
+>     RISCVCPUConfig
+>
+>  target/riscv/vector_helper.c | 104 +++++++++++++----------------------
+>  1 file changed, 39 insertions(+), 65 deletions(-)
 
-This is queued.
+Thanks, these are queued up.  If we're already broken on 
+non-power-of-two then that ROUND_UP() suggestion might be worth looking 
+at, as I doubt we'd want to support them even if the ISA allows for it.
 
