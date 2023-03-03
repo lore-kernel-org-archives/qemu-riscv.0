@@ -1,55 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pYAk4-0007Ws-3a
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 14:06:56 -0500
+	id 1pYAkW-0008EH-M7
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 14:07:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1pYAk2-0007Vp-7g
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 14:06:54 -0500
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
+ id 1pYAkV-00088m-Q1
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 14:07:23 -0500
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1pYAjz-000818-MT
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 14:06:53 -0500
-Received: by mail-pg1-x535.google.com with SMTP id y19so2089688pgk.5
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 11:06:50 -0800 (PST)
+ id 1pYAkS-00085d-Fr
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 14:07:22 -0500
+Received: by mail-pg1-x529.google.com with SMTP id q189so2081064pga.9
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 11:07:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1677870409;
+ d=linaro.org; s=google; t=1677870439;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=r9Yndr1liXeO+608ToBMudosrw4ObWwa7evXR2PJIQ8=;
- b=H0HcXLBmvpop0NBGGk3/mM7JrWyl3uWLfg1cvVbZjotOopvKvO/18u8MUmRkUOkvP6
- c2XH+XXNqVM2qoCpBHeBYZD6Kp7jAOJtlTGcxCwp4BZUZFfNehQnJPMWSll/W5LOJq15
- 7dHrUVMWCFnqdtAr6fr8FSHTbXJkxVv5fwmp4aImYgBkgqw5yy6p48c5tzStWGF+DlSi
- r3LEOgoE1JTJ9DlUdQPg6cp/n02tkHeKBJvjginMKgFzXiOhqVFbE7guaLe7nJ7PRRL2
- 6EXCX4NwVoW8rt/nw9RSZP6FQhMivAWJFKva7HtrhuV2oZAvWZS04uxE/bRkA7mKUCah
- r43A==
+ bh=9Vi35FYk9pNKyUa+wOyjhmmd7pel0e3d+ja0uD/0MA0=;
+ b=mGHe0PnDQmzI75F04Kngi5Rs5YIDIsdyMvAxEbGzeB3nsHb8+vESy5zM9vwus/bydC
+ boXs2dAtiRwo0NgZjO8XB89kGV8YMEA95m0bAX9f8RIy1SHF5NQnU5eQxGw3mM66sa8h
+ VwPG47Z9fzuJaHuH9BJE2sEfMIxLer6mVFt4Y8avAFSzGSI+WBvX3eba9uLFzZhSUrZQ
+ 6uGrD2MD9jah6rwgfPB1OIQW9JqLewlh+64VjMGfdZI2YiGpCzCXn2+HfuN8gE+Yh0jo
+ EmP2A+x4B7R674ajY2BGXsc/twAqvWqxnuAI36UgBy+Xqj3Ul2dfEzPNE93BjoDGNQhN
+ wa4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677870409;
+ d=1e100.net; s=20210112; t=1677870439;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=r9Yndr1liXeO+608ToBMudosrw4ObWwa7evXR2PJIQ8=;
- b=UtGL1tCeY1N5TcsyAF+3MbaXK4NoF3euli3nz51zX+0gzBADrK/mrStul5PwH1eON4
- ZbjUkxWOw5gkiQLJA8stVR2qeRKXMiMdDWSHlyRBcQ5wIdMmB26PMrwk1HQoEHxufsmq
- 6hVVBP/J39YF3FhBCwsha14lvmXNC1PUQ07U3Vl2UiGYvYYv0Dhvx3+8A5u+YXoNc0h8
- NVj1qX1gGBnIX06t4sLBsNb9PQgxUdLRrM+2tlIyFXMpkH8OYHMT8xuk2mh4ZK2qPFk8
- oTyzWwmKSAs2eD5wVFpW6gTMofw0tBYV1kumjF+lmRCIV8o23cxyLF7BoT3spDMaimzO
- eM/Q==
-X-Gm-Message-State: AO0yUKXXLVaT9tUoqfKG/4RTejp9i+nVE3oaW1lRbr0lqV3YENQcjVzU
- ixDQ8i39HSo+1Eos90F+VKt+qdiTXsbeO+GvOXC/jw==
-X-Google-Smtp-Source: AK7set+G/vH7N1rAAabvXcSVKcEWoRIoZ1s1D+lA6rT7RxVbVv084Uful7WrUEJoUBK9m8lyMY6llvSn2IxmbCt55WE=
-X-Received: by 2002:a63:8c17:0:b0:503:7be0:ea51 with SMTP id
- m23-20020a638c17000000b005037be0ea51mr861426pgd.9.1677870409504; Fri, 03 Mar
- 2023 11:06:49 -0800 (PST)
+ bh=9Vi35FYk9pNKyUa+wOyjhmmd7pel0e3d+ja0uD/0MA0=;
+ b=wivi06B3KDkqYxFIxkNEiN9xKK352asKB8rvn2cOt4neCyzMRB/xoQ88XL9B+PoSgx
+ M9kff4rOqB45xL0A1TdQtXP2EK7UAaY1ofXW7YS9Kw/xQdAocsEHDDBdOZVutAdrhKdn
+ DM0ASLJFD7BT2zIrwJXOr5yBPQaOzBYGh/R9l9KLx+MqLpUHOLnWlBWCrLQJrdslP0hV
+ VhL9Zjv+P9oROGhEhmnjAegrc90d3QXv5dnYKjYgsMAkTb9XXiCvOyPMbGsPHy2ufTFd
+ Qk4pprGsLFtXM3jdDJUTDvG3DnJb1iqAIHmBE/SrJO9STO77Q4fMx5UKFSRfqyJGzm8s
+ 3olw==
+X-Gm-Message-State: AO0yUKXCnEtPn8aA3c1jGkAtggVI2HGfGywWWCbH7sUwNAIJjh17rFTt
+ tVWHzvRDZ/cASisUuK5gyO7p/ugEuqTj0UDb15Jo9g==
+X-Google-Smtp-Source: AK7set/NKjXNYahgqJzq9Zxb/CEDFjFI6uRYmVF2C5+oU656lgk3VIVaArVNwMcXmfQ/h2MEqsJjDjqfMxRz54F+Sh0=
+X-Received: by 2002:a63:f0a:0:b0:502:f5c8:a00c with SMTP id
+ e10-20020a630f0a000000b00502f5c8a00cmr818667pgl.9.1677870439202; Fri, 03 Mar
+ 2023 11:07:19 -0800 (PST)
 MIME-Version: 1.0
-References: <20230225091427.1817156-1-richard.henderson@linaro.org>
- <20230225091427.1817156-67-richard.henderson@linaro.org>
-In-Reply-To: <20230225091427.1817156-67-richard.henderson@linaro.org>
+References: <20230227052505.352889-1-richard.henderson@linaro.org>
+ <20230227052505.352889-68-richard.henderson@linaro.org>
+In-Reply-To: <20230227052505.352889-68-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 3 Mar 2023 19:06:37 +0000
-Message-ID: <CAFEAcA_F_KGwDsV6MPZwyqs83oJQvr53cTTSgW0L1PwOcKJEbg@mail.gmail.com>
-Subject: Re: [PATCH 66/76] target/sparc: Drop get_temp_i32
+Date: Fri, 3 Mar 2023 19:07:07 +0000
+Message-ID: <CAFEAcA9HssTDrvV6H=NYRd0YC+H4AQ2q2ym2J1JBjEjJhjC94A@mail.gmail.com>
+Subject: Re: [PATCH v2 67/76] target/sparc: Remove egress label in
+ disas_sparc_context
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, 
@@ -57,8 +58,8 @@ Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
  gaosong@loongson.cn, jiaxun.yang@flygoat.com, tsimpson@quicinc.com, 
  ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=peter.maydell@linaro.org; helo=mail-pg1-x535.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=peter.maydell@linaro.org; helo=mail-pg1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,36 +79,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 19:06:54 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 19:07:24 -0000
 
-On Sat, 25 Feb 2023 at 09:27, Richard Henderson
+On Mon, 27 Feb 2023 at 05:45, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> Translators are no longer required to free tcg temporaries,
-> therefore there's no need to record temps for later freeing.
-> Replace the few uses with tcg_temp_new_i32.
->
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>  target/sparc/translate.c | 15 +++++++--------
+>  1 file changed, 7 insertions(+), 8 deletions(-)
 
-> @@ -5762,14 +5752,7 @@ static void disas_sparc_insn(DisasContext * dc, unsigned int insn)
->      gen_exception(dc, TT_NCP_INSN);
->      goto egress;
->  #endif
-> - egress:
-> -    if (dc->n_t32 != 0) {
-> -        int i;
-> -        for (i = dc->n_t32 - 1; i >= 0; --i) {
-> -            tcg_temp_free_i32(dc->t32[i]);
-> -        }
-> -        dc->n_t32 = 0;
-> -    }
-> + egress:;
->  }
-
-Stray semicolon after colon, or does C not let you put a label at
-the end of a function ?
-
-Otherwise
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
 thanks
