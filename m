@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pYANi-0001dw-0x
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 13:43:50 -0500
+	id 1pYAOH-0001rH-3J
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 13:44:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1pYANg-0001cs-Kp
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 13:43:48 -0500
+ id 1pYAOB-0001kA-2p
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 13:44:19 -0500
 Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1pYANe-0007Zh-4I
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 13:43:48 -0500
-Received: by mail-pf1-x435.google.com with SMTP id bd34so2184503pfb.3
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 10:43:45 -0800 (PST)
+ id 1pYAO8-0007ex-J2
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 13:44:18 -0500
+Received: by mail-pf1-x435.google.com with SMTP id c10so2148828pfv.13
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 10:44:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1677869024;
+ d=linaro.org; s=google; t=1677869055;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sJweuKjisjl+SbzQFRrcKt2u4A0ARVkM5ctNmHfdZMM=;
- b=gb8Voo44eokQnpyXZRZCHk+6pesmO1ToYDWW03UdcbkJOSHq9wBdNgcSxL/QeddE4k
- tGXEZksal3WhDASLhfBNgUewE0guedOwuBCt8mmFAK5JPeb0tdCGYFb+r+GUnoF6xo9L
- zGUI0YBctuNI32CFePwoRhTI9IcX15up5bssbtFyYHGHUVqFCJxHWNw4y8GrTE2Ynma3
- 3PyTqrmP/uNqaky2u62dAaPjKaMQHoSx96zySnYFFD8Wbx0WNM4W9kLHAoXpYW5xFPcg
- dFzmcteb39w3phpoE7sX9u7bZ8E2dEKzEEv39z+e7HvbRefwn2JiUgJiBLUwWEGkRcGC
- liTA==
+ bh=sQZzZcEGjMCNAdpg7pW4PnlMgakuvC67V9XQ3TiLV4w=;
+ b=bTOA9Df5q0V+NQyltpkgQUtPGlWL/HYHUonQmNiX6yY3+UnFqH7O4HQYt0ILrtVK9J
+ mZEDGmBTIvk6gRIPyFoYTMEwT8ZasHD8jsmCwvLck3g5mbXF8b5WbkMpea41KoU0CDKn
+ doYXPo1fFZs2JGa4wqVNRxk4Dv0gNaecpDNH8scLg8KA1EDP0jAq90X68EsNh8OPci3N
+ JUc2pGViAm52uXSqpkrgm3yWa1hqWd4y/Eg0H1AgsDXCHB4b4H2q2BE4aTrL5WJ/MioM
+ 7gDbRCLdRvJn/Rg6a8tAdUpZWTzaPgSXAhInITQct+kTJ9SE+ycV4O5/cZn75NjwnuT9
+ 3OAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677869024;
+ d=1e100.net; s=20210112; t=1677869055;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=sJweuKjisjl+SbzQFRrcKt2u4A0ARVkM5ctNmHfdZMM=;
- b=IGEgG03fkVyNzUYni2XrcZ7g5APcLum/qY9lgtog/18bfNzAEASfZ25dYEumTLR9VD
- kqy4OVK56uM/k+co448UhkWl3xLWO0yKcpfp4Uetg5zM2JXFi4RqfGtfpwIshxmlGgyD
- 7KmL1nEkhwqCczjo2rb5DBXX0kJAYg20yEIInDaf4XFTuK7RNDbCT3a5vAanyDba6uyT
- q8Fsw/KptFAgTufD5Py/No5cBhHTa0KF6ODmgA9OpEF6vK4FfPJwmPEihYyUbPH8FbUJ
- 8UPkBci5jmjVIx5sZpmUXZVtGSMaCTr40MIolUlJMIvn8hb8r875MRm1EtaMeKSwATjE
- jqsg==
-X-Gm-Message-State: AO0yUKV27ZFpv+uAS9NbRh6yEDubk34TbCUSKuIgTZR0R4MfLmAzWyxZ
- kd4TfEg7WHiEqRtvwETY8OOxEpUZLIrtY/CHVmzw1w==
-X-Google-Smtp-Source: AK7set8GrwjCFRwaCzpdpX2mAwBm3/e1o8SqsHKF4VDuaKrObWw9CHCHt8w7Rm44F7V8Fb0roZZxiROt5PUnmYl9bw4=
-X-Received: by 2002:a62:d041:0:b0:592:41a:1054 with SMTP id
- p62-20020a62d041000000b00592041a1054mr1314109pfg.5.1677869024519; Fri, 03 Mar
- 2023 10:43:44 -0800 (PST)
+ bh=sQZzZcEGjMCNAdpg7pW4PnlMgakuvC67V9XQ3TiLV4w=;
+ b=X/I6KwaT5djjE+f+3awDaV3M1rLbvhZ3g8zdNkSlHn14GgjDhaukPsk7LN4YInwXCX
+ dj8TddFOPoob9T1NrAXqJe5ojw1EjrDWapZDG/aPPQaEEd4fDFd5rcfyO2nnEX17imGq
+ ScFjaBVmvGgx6TLYUsSmj8SCnrB9JMxqTG2wsciyVYiWptQJBFDbtovXhv1D9mgc6iYB
+ cjq6mqIeyAZO3swrmWw7fR+9i/spaKB4FC4RWXxp3Q6h0oXfgFfiCL1/J9cCm0wUdPYE
+ M1C1ZBFH9ejAOomCCysmKD0b0xITPWqxQPsLE8dvKtQezoQwY2DZ+rAEbXJZ8QbIpZCZ
+ jTqw==
+X-Gm-Message-State: AO0yUKWtCl49Gc1e/goBJ9R7KibKm/1OYwJ0IvBFb9vg9UgQqmz3ztje
+ 5mddYowReCmVZkzTLdEWWNIjVPyvfMib0Z7buL4jaw==
+X-Google-Smtp-Source: AK7set+enV2mf6xc6rTRBSHMstCHNSlxtzXkSi+5rsqQYTpQOLpbTd7oox3CL9NqVK+PEnNz5YzJPaC/+WLXuzaTXws=
+X-Received: by 2002:a63:f705:0:b0:503:7cc9:3f8d with SMTP id
+ x5-20020a63f705000000b005037cc93f8dmr864956pgh.9.1677869055010; Fri, 03 Mar
+ 2023 10:44:15 -0800 (PST)
 MIME-Version: 1.0
 References: <20230227052505.352889-1-richard.henderson@linaro.org>
- <20230227052505.352889-19-richard.henderson@linaro.org>
-In-Reply-To: <20230227052505.352889-19-richard.henderson@linaro.org>
+ <20230227052505.352889-20-richard.henderson@linaro.org>
+In-Reply-To: <20230227052505.352889-20-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 3 Mar 2023 18:43:33 +0000
-Message-ID: <CAFEAcA_7WuicoDqMBvjZN4WG5h9k0h4f7oyJ5vxvbjF7O260dA@mail.gmail.com>
-Subject: Re: [PATCH v2 18/76] target/avr: Drop DisasContext.free_skip_var0
+Date: Fri, 3 Mar 2023 18:44:03 +0000
+Message-ID: <CAFEAcA_0BTp6YL_CEHDQBaNDiE3GSeV4pAFWyYBWRY6OKtTCjA@mail.gmail.com>
+Subject: Re: [PATCH v2 19/76] target/avr: Drop R from trans_COM
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, 
@@ -78,13 +78,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 18:43:48 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 18:44:20 -0000
 
-On Mon, 27 Feb 2023 at 05:31, Richard Henderson
+On Mon, 27 Feb 2023 at 05:32, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> Translators are no longer required to free tcg temporaries,
-> therefore there's no need to record for later freeing.
+> This variable is not used, only allocated and freed.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
