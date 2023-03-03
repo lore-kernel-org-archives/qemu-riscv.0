@@ -1,69 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pY0zz-0001jz-1e
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:42:43 -0500
+	id 1pY100-0001q1-14
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:42:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0zo-0000gd-Fn
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:32 -0500
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
+ id 1pY0zu-0001LN-DU
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:38 -0500
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0zm-000896-PO
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:32 -0500
-Received: by mail-pj1-x1031.google.com with SMTP id
- me6-20020a17090b17c600b0023816b0c7ceso5446764pjb.2
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:42:30 -0800 (PST)
+ id 1pY0zs-0007sG-My
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:38 -0500
+Received: by mail-pj1-x102f.google.com with SMTP id y2so1792363pjg.3
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:42:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832949;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832955;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=82h2vRR5TSHW1u0Jlt4giv+BcWArhc5iaQ4XkWCBX7g=;
- b=qJCsSRycIws//tyhMVjGLu6ywxNbUWq/EpBAYtt06a5aefUYr9IFX6c51tozNobEbO
- mNaXIP774C4yY/J55Wv4vaVZbYU5AGBBP+3oX5PBvLr3A1/Jcggfwkzn/gOmZTvKW21l
- 5dPXStv+gHjE1LKElcX8wDarRwy/ykr1x+B5WduZB/fHkIHXp9OzKy3vYd6EnNiY7wVk
- jYmXkJ8mg2saBK8GTkdDvSLu2pGDNAscnrv20F3SP8zl/H1U+bJX8+4D3twnLbVwX8JA
- dJeBGxxyhEQkbeFhrCfoawRKdk//MWOM15MWk3oTzLGCaymC3oNFQj4CwVXCrSRo9k7S
- OrLg==
+ bh=0rHQcn1c3RoxIEMYQmBzf3qgrVCMNlGeLy55RgmobpQ=;
+ b=Fpus1Gd3jc18L2P5mUkI+RBj8lvpTN6CF+trBI69PYs492/dWFAjKNUFW68XF3EleB
+ 0+iXAc4jp4iXZ7317GW7N0Vsc2Ox07C6yZ6b7fqzd8qaBMKWH9ZlA1ZLnXa+DGD3jkZu
+ e5efUAVdWJibTPVSYeseEBZSWobD8kQsPRlAJVJodanrKvKXuD4kw9Y71PAnv4Y+uVnN
+ R7XsKdZMwNo7kip4WirwQieUFl8JjuYP7lBs85EEwIbd0/5K0AE+aDju0vhO6PcYMeGa
+ xUWnujYnbxKGo6Ps1KZbAJgUaumqJBwSJXFGj0gr2MPeXa/ICCfy85pwVPWwrWC7S39f
+ kMQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677832949;
+ d=1e100.net; s=20210112; t=1677832955;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=82h2vRR5TSHW1u0Jlt4giv+BcWArhc5iaQ4XkWCBX7g=;
- b=RMFK34muMbTRcyD0EHXYzmE2WuyhTg+hc4uLaoVQbAwpf8ufc060a3UQq1JskG8TS3
- hyznUoSBh2YAPmSQpS8iR430TFtVlMqH7YB1FSbfH4/TK1vERxj0HXdOhUIcK5/pRHNe
- i6D2SKXVpIFJD0WVS69EUaJOcFf3YJ6l5H8gfjMMcI7LSXpr6uzLanJYFtGB/4wjxpOp
- 4aPLPW04KcVi1vm6yyoTBf1k8l5m/tKlFigGaV7owuRX55Rc9myFS7xvnufFPpWgWdDp
- rUuo/fBFI8DlkPOr3ecx2S/ePpmstgrhZiHFBlwa2sE6MU0RMahr91pIfDUYdPiyhRut
- OKWw==
-X-Gm-Message-State: AO0yUKUP4iNO/oRgO165MIfcNpKW0moR6qFFnnl+/gGWAjvxYMMxhPlH
- KeAOl+9m4Piv5gfCLzHgs71VjSlh0fo89aCn
-X-Google-Smtp-Source: AK7set+8Om/t/KPnpoGXM3eem1NSHfyvFzkxi8WyxVpX4Vu3HXvCoLIMpf7IYVLPGZAjCD+V8sPgQg==
-X-Received: by 2002:a17:902:db02:b0:19c:bfe3:6f73 with SMTP id
- m2-20020a170902db0200b0019cbfe36f73mr3509935plx.16.1677832949204; 
- Fri, 03 Mar 2023 00:42:29 -0800 (PST)
+ bh=0rHQcn1c3RoxIEMYQmBzf3qgrVCMNlGeLy55RgmobpQ=;
+ b=bPmxWcykEDkJncHbStdCcv+ue+HbLIEZShlWsbjcfRXwXm31WHOH/ZGVkvDo2881MH
+ jgRbGZ4++y7AsnSgwcGASGCofZZcJ+S0bt4XFhD/U3AOrf4G4eFjw2xmjGQ3seDWv5PK
+ 6h+pyv8G4C44+8mKBIJZ3SGQcDcuZmU7ztFuYy6b3YPKt0mQBkVZJWkjYGk1iI0RSEdV
+ DkijPZOfsjWIwcOfeqsBLyrhYwAsf+Vbp418aUx3EKz2/BSLaStlgwz3ICkQgOc3Z7Oa
+ uIVdHcoGNCiQybc3I/WK4tyvaQ2QSldMdlDauhavQwOExelLTKWgC8LhJQxVmzEiHCq9
+ bhCA==
+X-Gm-Message-State: AO0yUKVRTnBf2GxZVekuD4Ex+xzJTsIiSL2AsGB2CyfLTbhyfX/BJ09o
+ bbB1wd6DfFjsSkBS9s7ZbAIiEoogG/MkH5y6
+X-Google-Smtp-Source: AK7set88nqLx/p/eDDnZ6jshl5fpPIkwn4UArH3x1oIsdsHagaDCqekt8siKhhs37jdjfcmGV87hhw==
+X-Received: by 2002:a17:90b:3505:b0:234:dc4:2006 with SMTP id
+ ls5-20020a17090b350500b002340dc42006mr1075443pjb.4.1677832955444; 
+ Fri, 03 Mar 2023 00:42:35 -0800 (PST)
 Received: from localhost ([135.180.224.71]) by smtp.gmail.com with ESMTPSA id
- q15-20020a170902f78f00b001948ff5cc32sm952250pln.215.2023.03.03.00.42.28
+ ki4-20020a170903068400b0019309be03e7sm983435plb.66.2023.03.03.00.42.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Mar 2023 00:42:28 -0800 (PST)
-Subject: [PULL 54/59] target/riscv/csr.c: use env_archcpu() in ctr()
-Date: Fri,  3 Mar 2023 00:37:35 -0800
-Message-Id: <20230303083740.12817-55-palmer@rivosinc.com>
+ Fri, 03 Mar 2023 00:42:35 -0800 (PST)
+Subject: [PULL 59/59] target/riscv/vector_helper.c: avoid env_archcpu() when
+ reading RISCVCPUConfig
+Date: Fri,  3 Mar 2023 00:37:40 -0800
+Message-Id: <20230303083740.12817-60-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230303083740.12817-1-palmer@rivosinc.com>
 References: <20230303083740.12817-1-palmer@rivosinc.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
+ Weiwei Li <liweiwei@iscas.ac.cn>, 
+ ilippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Palmer Dabbelt <palmer@rivosinc.com>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=palmer@rivosinc.com; helo=mail-pj1-x1031.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=palmer@rivosinc.com; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -82,34 +84,117 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 08:42:33 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 08:42:38 -0000
 
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-We don't need to use env_cpu() and CPUState().
+This file has several uses of env_archcpu() that are used solely to read
+cfg->vlen. Use the new riscv_cpu_cfg() inline instead.
 
+Suggested-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <20230224174520.92490-2-dbarboza@ventanamicro.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Weiwei Li<liweiwei@iscas.ac.cn>
+Message-ID: <20230226170514.588071-3-dbarboza@ventanamicro.com>
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- target/riscv/csr.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ target/riscv/vector_helper.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 1b0a0c1693..d047d8b45c 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -108,8 +108,7 @@ static RISCVException vs(CPURISCVState *env, int csrno)
- static RISCVException ctr(CPURISCVState *env, int csrno)
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 7e476ea8c3..2423affe37 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -272,7 +272,7 @@ static void vext_set_tail_elems_1s(CPURISCVState *env, target_ulong vl,
+                                    uint32_t esz, uint32_t max_elems)
  {
- #if !defined(CONFIG_USER_ONLY)
--    CPUState *cs = env_cpu(env);
--    RISCVCPU *cpu = RISCV_CPU(cs);
-+    RISCVCPU *cpu = env_archcpu(env);
-     int ctr_index;
-     target_ulong ctr_mask;
-     int base_csrno = CSR_CYCLE;
+     uint32_t total_elems = vext_get_total_elems(env, desc, esz);
+-    uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
++    uint32_t vlenb = riscv_cpu_cfg(env)->vlen >> 3;
+     uint32_t vta = vext_vta(desc);
+     uint32_t registers_used;
+     int k;
+@@ -671,7 +671,7 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+ {
+     uint32_t i, k, off, pos;
+     uint32_t nf = vext_nf(desc);
+-    uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
++    uint32_t vlenb = riscv_cpu_cfg(env)->vlen >> 3;
+     uint32_t max_elems = vlenb >> log2_esz;
+ 
+     k = env->vstart / max_elems;
+@@ -1141,7 +1141,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
+ {                                                             \
+     uint32_t vl = env->vl;                                    \
+     uint32_t vm = vext_vm(desc);                              \
+-    uint32_t total_elems = env_archcpu(env)->cfg.vlen;        \
++    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;          \
+     uint32_t vta_all_1s = vext_vta_all_1s(desc);              \
+     uint32_t i;                                               \
+                                                               \
+@@ -1177,7 +1177,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,          \
+ {                                                               \
+     uint32_t vl = env->vl;                                      \
+     uint32_t vm = vext_vm(desc);                                \
+-    uint32_t total_elems = env_archcpu(env)->cfg.vlen;          \
++    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;            \
+     uint32_t vta_all_1s = vext_vta_all_1s(desc);                \
+     uint32_t i;                                                 \
+                                                                 \
+@@ -1376,7 +1376,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
+ {                                                             \
+     uint32_t vm = vext_vm(desc);                              \
+     uint32_t vl = env->vl;                                    \
+-    uint32_t total_elems = env_archcpu(env)->cfg.vlen;        \
++    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;          \
+     uint32_t vta_all_1s = vext_vta_all_1s(desc);              \
+     uint32_t vma = vext_vma(desc);                            \
+     uint32_t i;                                               \
+@@ -1439,7 +1439,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,   \
+ {                                                                   \
+     uint32_t vm = vext_vm(desc);                                    \
+     uint32_t vl = env->vl;                                          \
+-    uint32_t total_elems = env_archcpu(env)->cfg.vlen;              \
++    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;                \
+     uint32_t vta_all_1s = vext_vta_all_1s(desc);                    \
+     uint32_t vma = vext_vma(desc);                                  \
+     uint32_t i;                                                     \
+@@ -4152,7 +4152,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
+ {                                                             \
+     uint32_t vm = vext_vm(desc);                              \
+     uint32_t vl = env->vl;                                    \
+-    uint32_t total_elems = env_archcpu(env)->cfg.vlen;        \
++    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;          \
+     uint32_t vta_all_1s = vext_vta_all_1s(desc);              \
+     uint32_t vma = vext_vma(desc);                            \
+     uint32_t i;                                               \
+@@ -4190,7 +4190,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2,       \
+ {                                                                   \
+     uint32_t vm = vext_vm(desc);                                    \
+     uint32_t vl = env->vl;                                          \
+-    uint32_t total_elems = env_archcpu(env)->cfg.vlen;              \
++    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;                \
+     uint32_t vta_all_1s = vext_vta_all_1s(desc);                    \
+     uint32_t vma = vext_vma(desc);                                  \
+     uint32_t i;                                                     \
+@@ -4721,7 +4721,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
+                   uint32_t desc)                          \
+ {                                                         \
+     uint32_t vl = env->vl;                                \
+-    uint32_t total_elems = env_archcpu(env)->cfg.vlen;    \
++    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;      \
+     uint32_t vta_all_1s = vext_vta_all_1s(desc);          \
+     uint32_t i;                                           \
+     int a, b;                                             \
+@@ -4808,7 +4808,7 @@ static void vmsetm(void *vd, void *v0, void *vs2, CPURISCVState *env,
+ {
+     uint32_t vm = vext_vm(desc);
+     uint32_t vl = env->vl;
+-    uint32_t total_elems = env_archcpu(env)->cfg.vlen;
++    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;
+     uint32_t vta_all_1s = vext_vta_all_1s(desc);
+     uint32_t vma = vext_vma(desc);
+     int i;
 -- 
 2.39.2
 
