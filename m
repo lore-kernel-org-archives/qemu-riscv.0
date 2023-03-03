@@ -1,73 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pY0zl-0000Lq-0X
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:42:29 -0500
+	id 1pY0zm-0000U5-FI
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:42:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0zZ-0008Oo-44
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:17 -0500
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
+ id 1pY0zg-0008V8-Pu
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:25 -0500
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0zX-00084V-DW
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:16 -0500
-Received: by mail-pj1-x102f.google.com with SMTP id x34so1847001pjj.0
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:42:15 -0800 (PST)
+ id 1pY0zf-0007l9-Ax
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:24 -0500
+Received: by mail-pl1-x632.google.com with SMTP id i10so1959849plr.9
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:42:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832934;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832942;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HHuyOCh1zMm0s3QvDd4RzkwJUE9fBUpcK5wFEakP9Oo=;
- b=3qheq1kH2eYv2wGqvNGulyD4S30tGIzmK4iac6YR5tyhn141UMGHyQZ1LLH+SfGDPI
- T5wuu3j5jcs7GUPfQlrZFhNs9l8B9fHHlCfEo0EdBMHn6ui3AfCi4CGY6GUSEC528mQ1
- 8AvBYNfN3x7CFwL/3W+LyPwKgcTEp+42cWDfTauBhMmwEFX68hc/9ojuMsdJEKYiTx/P
- 8DAqlRfs74NnnRJzlvknMtmdod2fZJJF48cC/XxhiORVGL6EtF6b1t/DN6IJLgPbqWDr
- h7lw/VqHibBUTH2m18kUFd26/RDIBLplpuR4LcVXW3OjWT3/fP7bI3fxv2qLKJIjPfe7
- 3ATQ==
+ bh=YwFKiArhbxJLyBVT/Z+JtOcropCSjORrRpC5cWL6qGo=;
+ b=XMVZpgvz+3T+O9QwKocc7Keysdq6Qzgf/L8/cNGuEbz0227eSJNkVsZKV2kBbS/ayy
+ 8OkB8kVpcytZjNFfYE0fjJRPp6he4+/mBsl1vGPMKfctIRXWd+V3kHG1R5OLdyh59Ue5
+ gv/fjywgNwlDWITjiaAJP1njr6nx1pY3DBuuTepeKFxXRF4InFAPdRrWJ4CHHadyQdkP
+ PqrPtxpsG7vLLxAMZry8LaHz23jdZu7+1Fv9x8ar4/zow92srW7qwoNtin0hrLTyNcqq
+ fEOUCiFLIUvoNw+sPErgj1fNdkBAws+omgQajF3/PX+J9Bk8/HZdOq6EBjMgaGnOny+k
+ r3vA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677832934;
+ d=1e100.net; s=20210112; t=1677832942;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HHuyOCh1zMm0s3QvDd4RzkwJUE9fBUpcK5wFEakP9Oo=;
- b=v0rVoSnHByt+fi3XQ8UU6OnYY3p6tI/XZFotWHcPwyIkXl9D0ZvCHAaRTcOaCcs5Iu
- CtmbP4vxDJGuLnBO55hgDeubRlH/hk+k3AlyPDTTuwVqNLuuicjWQxOymWvBEsc3UeKd
- wekLSgaNakKmQqAWub5RSkvUiUOtp0QVrRe5MFtv9ZOXJa0KfmyBaEKUQ6oyZsfG3SiH
- NnqknIC+snfLJ1r2zVfg/DbilPvPoO2agZezUE2Sxoxw1AITDoGfj1lE1f56C5sFLvO0
- LImHk5tJ9lgHNN0DC4qxm375oc5CVCSX6TluPRjCnjrxQ7HcswKvlFO5XVylc2OvjR4t
- fMBw==
-X-Gm-Message-State: AO0yUKXlzEmxtE3VywPl5V7fusUzJCtWRDNRZCDfwFNvoCLsN00rg5Bn
- lmjDQOlz+0r6TJ6T0R3Wpz7vo19g+/skQ6Ly
-X-Google-Smtp-Source: AK7set/9x7yYM+Gy1hF4pgydKEL1ydN4Kw21W4tfchPbt1LldiG8Ggy45WX0Wl5SXUEa3OkMC3+WqA==
-X-Received: by 2002:a17:90a:bc85:b0:237:aade:444 with SMTP id
- x5-20020a17090abc8500b00237aade0444mr819449pjr.42.1677832933952; 
- Fri, 03 Mar 2023 00:42:13 -0800 (PST)
+ bh=YwFKiArhbxJLyBVT/Z+JtOcropCSjORrRpC5cWL6qGo=;
+ b=AG4jVFYLko8LP0GgNoMsjcbhviPVCWQnCWgv1U2YniTcvy0ujE6IL3b2A+RCoxNK3Z
+ L/JTR+dglZR9kuzJkre80mMNFy+kShzNytOtOErPEkdvhpNbH2hYg7/c5Y3+S7Ad8oMP
+ 3HGfTfnyEeVulP6JqgqLWnECKX2ndlE3vCdD1JrdIfxj4IT+t/0HAjyhW431Lk2/gnbW
+ g0STXpWTnc3knk23VRl/nXpmqUY5F0YHvHazsCmnHYute36DE4IO31f1ETLAps8y+8Pk
+ C2UeRZqqXettok6FR18AO5rIj2fWSBlr1wwW6rTl7MThU7VjgqYYqjHz/JbFnd+0X8xG
+ AIVw==
+X-Gm-Message-State: AO0yUKUfeYrt0ASFvLZJMgb7KJDjkknkmQOl3MRcFqyq1lfxuwd6W/JL
+ nTZsoMID/CBTjHdSaCQmqhXUd+6FrzT1PguX
+X-Google-Smtp-Source: AK7set8ZuYT41+MzIaUOWYmZiQyuse4/dntmjpUUtJWYgvJUxWjL1IVLcUl7L86VbO+mxS/wUwmltg==
+X-Received: by 2002:a05:6a20:158e:b0:cd:929d:27fc with SMTP id
+ h14-20020a056a20158e00b000cd929d27fcmr1810423pzj.45.1677832941938; 
+ Fri, 03 Mar 2023 00:42:21 -0800 (PST)
 Received: from localhost ([135.180.224.71]) by smtp.gmail.com with ESMTPSA id
- kj16-20020a17090306d000b0019a97f180fcsm983364plb.37.2023.03.03.00.42.13
+ i22-20020aa78d96000000b005d932d0c029sm1044509pfr.65.2023.03.03.00.42.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Mar 2023 00:42:13 -0800 (PST)
-Subject: [PULL 42/59] target/riscv: Group all predicate() routines together
-Date: Fri,  3 Mar 2023 00:37:23 -0800
-Message-Id: <20230303083740.12817-43-palmer@rivosinc.com>
+ Fri, 03 Mar 2023 00:42:21 -0800 (PST)
+Subject: [PULL 48/59] target/riscv: Fix the relationship between
+ menvcfg.PBMTE/STCE and Svpbmt/Sstc extensions
+Date: Fri,  3 Mar 2023 00:37:29 -0800
+Message-Id: <20230303083740.12817-49-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230303083740.12817-1-palmer@rivosinc.com>
 References: <20230303083740.12817-1-palmer@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
- Bin Meng <bmeng@tinylab.org>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, Junqiang Wang <wangjunqiang@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Palmer Dabbelt <palmer@rivosinc.com>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=palmer@rivosinc.com; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=palmer@rivosinc.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,230 +82,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 08:42:18 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 08:42:25 -0000
 
-From: Bin Meng <bmeng@tinylab.org>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
 
-Move sstc()/sstc32() to where all predicate() routines live, and
-smstateen_acc_ok() to near {read,write}_xenvcfg().
+menvcfg.PBMTE/STCE are read-only zero if Svpbmt/Sstc are not implemented.
 
-Signed-off-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <20230228104035.1879882-19-bmeng@tinylab.org>
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Message-ID: <20230224040852.37109-2-liweiwei@iscas.ac.cn>
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- target/riscv/csr.c | 177 ++++++++++++++++++++++-----------------------
- 1 file changed, 87 insertions(+), 90 deletions(-)
+ target/riscv/csr.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 785f6f4d45..3a7e0217e2 100644
+index 1b0a0c1693..b20b00a9a7 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -40,42 +40,6 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
-     csr_ops[csrno & (CSR_TABLE_SIZE - 1)] = *ops;
- }
- 
--/* Predicates */
--#if !defined(CONFIG_USER_ONLY)
--static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
--                                       uint64_t bit)
--{
--    bool virt = riscv_cpu_virt_enabled(env);
--    RISCVCPU *cpu = env_archcpu(env);
--
--    if (env->priv == PRV_M || !cpu->cfg.ext_smstateen) {
--        return RISCV_EXCP_NONE;
--    }
--
--    if (!(env->mstateen[index] & bit)) {
--        return RISCV_EXCP_ILLEGAL_INST;
--    }
--
--    if (virt) {
--        if (!(env->hstateen[index] & bit)) {
--            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
--        }
--
--        if (env->priv == PRV_U && !(env->sstateen[index] & bit)) {
--            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
--        }
--    }
--
--    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
--        if (!(env->sstateen[index] & bit)) {
--            return RISCV_EXCP_ILLEGAL_INST;
--        }
--    }
--
--    return RISCV_EXCP_NONE;
--}
--#endif
--
- static RISCVException fs(CPURISCVState *env, int csrno)
+@@ -1885,10 +1885,12 @@ static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
+ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+                                   target_ulong val)
  {
- #if !defined(CONFIG_USER_ONLY)
-@@ -399,6 +363,60 @@ static RISCVException sstateen(CPURISCVState *env, int csrno)
-     return RISCV_EXCP_NONE;
- }
++    RISCVCPUConfig *cfg = &env_archcpu(env)->cfg;
+     uint64_t mask = MENVCFG_FIOM | MENVCFG_CBIE | MENVCFG_CBCFE | MENVCFG_CBZE;
  
-+static RISCVException sstc(CPURISCVState *env, int csrno)
-+{
-+    RISCVCPU *cpu = env_archcpu(env);
-+    bool hmode_check = false;
-+
-+    if (!cpu->cfg.ext_sstc || !env->rdtime_fn) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    if ((csrno == CSR_VSTIMECMP) || (csrno == CSR_VSTIMECMPH)) {
-+        hmode_check = true;
-+    }
-+
-+    RISCVException ret = hmode_check ? hmode(env, csrno) : smode(env, csrno);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-+    if (env->debugger) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    if (env->priv == PRV_M) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    /*
-+     * No need of separate function for rv32 as menvcfg stores both menvcfg
-+     * menvcfgh for RV32.
-+     */
-+    if (!(get_field(env->mcounteren, COUNTEREN_TM) &&
-+          get_field(env->menvcfg, MENVCFG_STCE))) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    if (riscv_cpu_virt_enabled(env)) {
-+        if (!(get_field(env->hcounteren, COUNTEREN_TM) &&
-+              get_field(env->henvcfg, HENVCFG_STCE))) {
-+            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-+        }
-+    }
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException sstc_32(CPURISCVState *env, int csrno)
-+{
-+    if (riscv_cpu_mxl(env) != MXL_RV32) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    return sstc(env, csrno);
-+}
-+
- /* Checks if PointerMasking registers could be accessed */
- static RISCVException pointer_masking(CPURISCVState *env, int csrno)
- {
-@@ -943,60 +961,6 @@ static RISCVException read_timeh(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
+     if (riscv_cpu_mxl(env) == MXL_RV64) {
+-        mask |= MENVCFG_PBMTE | MENVCFG_STCE;
++        mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
++                (cfg->ext_sstc ? MENVCFG_STCE : 0);
+     }
+     env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
  
--static RISCVException sstc(CPURISCVState *env, int csrno)
--{
--    RISCVCPU *cpu = env_archcpu(env);
--    bool hmode_check = false;
--
--    if (!cpu->cfg.ext_sstc || !env->rdtime_fn) {
--        return RISCV_EXCP_ILLEGAL_INST;
--    }
--
--    if ((csrno == CSR_VSTIMECMP) || (csrno == CSR_VSTIMECMPH)) {
--        hmode_check = true;
--    }
--
--    RISCVException ret = hmode_check ? hmode(env, csrno) : smode(env, csrno);
--    if (ret != RISCV_EXCP_NONE) {
--        return ret;
--    }
--
--    if (env->debugger) {
--        return RISCV_EXCP_NONE;
--    }
--
--    if (env->priv == PRV_M) {
--        return RISCV_EXCP_NONE;
--    }
--
--    /*
--     * No need of separate function for rv32 as menvcfg stores both menvcfg
--     * menvcfgh for RV32.
--     */
--    if (!(get_field(env->mcounteren, COUNTEREN_TM) &&
--          get_field(env->menvcfg, MENVCFG_STCE))) {
--        return RISCV_EXCP_ILLEGAL_INST;
--    }
--
--    if (riscv_cpu_virt_enabled(env)) {
--        if (!(get_field(env->hcounteren, COUNTEREN_TM) &&
--              get_field(env->henvcfg, HENVCFG_STCE))) {
--            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
--        }
--    }
--
--    return RISCV_EXCP_NONE;
--}
--
--static RISCVException sstc_32(CPURISCVState *env, int csrno)
--{
--    if (riscv_cpu_mxl(env) != MXL_RV32) {
--        return RISCV_EXCP_ILLEGAL_INST;
--    }
--
--    return sstc(env, csrno);
--}
--
- static RISCVException read_vstimecmp(CPURISCVState *env, int csrno,
-                                      target_ulong *val)
+@@ -1905,7 +1907,9 @@ static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
+ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+                                   target_ulong val)
  {
-@@ -1944,6 +1908,39 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
+-    uint64_t mask = MENVCFG_PBMTE | MENVCFG_STCE;
++    RISCVCPUConfig *cfg = &env_archcpu(env)->cfg;
++    uint64_t mask = (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
++                    (cfg->ext_sstc ? MENVCFG_STCE : 0);
+     uint64_t valh = (uint64_t)val << 32;
  
-+static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
-+                                       uint64_t bit)
-+{
-+    bool virt = riscv_cpu_virt_enabled(env);
-+    RISCVCPU *cpu = env_archcpu(env);
-+
-+    if (env->priv == PRV_M || !cpu->cfg.ext_smstateen) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    if (!(env->mstateen[index] & bit)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    if (virt) {
-+        if (!(env->hstateen[index] & bit)) {
-+            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-+        }
-+
-+        if (env->priv == PRV_U && !(env->sstateen[index] & bit)) {
-+            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-+        }
-+    }
-+
-+    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
-+        if (!(env->sstateen[index] & bit)) {
-+            return RISCV_EXCP_ILLEGAL_INST;
-+        }
-+    }
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
- static RISCVException read_senvcfg(CPURISCVState *env, int csrno,
-                                    target_ulong *val)
- {
+     env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
 -- 
 2.39.2
 
