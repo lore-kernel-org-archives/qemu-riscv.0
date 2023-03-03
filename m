@@ -1,75 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pY5E8-0004Xb-Fv
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 08:13:36 -0500
+	id 1pY5F6-0005H6-KS
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 08:14:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1pY5E6-0004Wm-8H
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 08:13:34 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ id 1pY5F4-00057E-KD
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 08:14:34 -0500
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1pY5E4-00088i-8f
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 08:13:34 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- d41-20020a05600c4c2900b003e9e066550fso1213532wmp.4
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 05:13:31 -0800 (PST)
+ id 1pY5F2-0008KI-R1
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 08:14:34 -0500
+Received: by mail-wm1-x330.google.com with SMTP id
+ t25-20020a1c7719000000b003eb052cc5ccso3878385wmi.4
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 05:14:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677849210;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=d+E5fIwwLgOGmgtCTsCyP1FkaIZElxDHFJYcbVZDsgk=;
- b=HRmnythN3s3jKCamVLeOpUGzF3Ckiv968U013n2cill4dSshkmLfBWnm8bnz81/gcy
- eJb5PIinZ3Xc21UcEtkJgf88PBq6z1TeeCGp6d5D5qCZeX2qEVwERP6NvAuGmpY7+NdW
- 4JkT+HcK4wC5COADxm1jprsv3m2utdNztPnm+BXprSqxggXNdiRX/54XC8OzNcFUJy7S
- X9W/cjlwBR27pk17bvY6fzUAt9KqBigkF0522l7ysYdbWWKfp+GXFy6hDnRqfeezwGeb
- fX+Wb36nAVKrAD6UiRt21GA/WfaJ305c22auInUYGQ9vo+dK1y153Ll8kDCMHQST0Lir
- iTWQ==
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677849271;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Q244UH1X0Qq28sL8qCMK3QrXi2ZbEVOh6RiT7mirFEc=;
+ b=FhIF7bOK/8tqLWp8TpgHao5zAcw8FSDm53jEHCDrnet1VNq96HpP2XCtqUd3Q+7s4U
+ jInpT2j3DenoQjbcbhBy9wjRmPKxaWXIF+HUNTj+B4Zrlix5sfgpFrKJCJN4Iy+LY/dT
+ vlSLRCTToFFLacWA7BH57Z8uVjAiOxmNhg6f6+ZBoyatctAMqOjXvVfGdhZLCmwyz+dI
+ 4u/KXGlwstuQuY08hvJ1v7oIx61gMQ94v0LF81+EXaCG+NoZtotllOyKUzj6lrdOd+Lr
+ KfiM4zFRGsIL8i3HdJfbDN6reM0QaSHr8q/69LgqNqSJeC32Pdh0LVRuBJQVf2wdc31C
+ ulmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677849210;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=d+E5fIwwLgOGmgtCTsCyP1FkaIZElxDHFJYcbVZDsgk=;
- b=ZUxLe+gkWe16AuMUNSS9YTEHR+SCnvOoHYI7ak6T5dRCt2kkO90+VHgG5PC3Ex0ylX
- Oo9zOKV2YItnO8ZS3G5qkUNDy0AHHjvomLdCoLDYlW4u39jARYvS3zuScZ5oxZNDl+zY
- q021Pzhmwcl/J1d8Jhj7e2xahg6rtUw5S688qJvn9ke9A/WHc7RRW8Cbiog2XegtklfG
- wWvIX8hAESa0sWpgLZ06kmYTuX4KYAvGb/YVOkG8iTL9mGKWUHbv1vi3PFcRMviPqM9y
- c/IPdjiALlrXMWxbt4cjBX+bHXFJurKFDGfqo/5EZTgjavp+KlANFobSksp7CscjAZ/X
- FuKA==
-X-Gm-Message-State: AO0yUKUMnum/OvGgZaHNwG7GQmAjF63rmpc6gA8eE4vp2TVs3uhsAk8u
- QofvJzyda0v6JIujVAXxw7oPBA==
-X-Google-Smtp-Source: AK7set+F+XuwugAvO+j/3gsigWDLR79jIyWY0lQkUVFUCy+Wpj1eX058OXwkLUlj5Uwe5NJEX6bmDg==
-X-Received: by 2002:a7b:cc10:0:b0:3eb:3104:efef with SMTP id
- f16-20020a7bcc10000000b003eb3104efefmr1536296wmh.31.1677849210399; 
- Fri, 03 Mar 2023 05:13:30 -0800 (PST)
+ d=1e100.net; s=20210112; t=1677849271;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Q244UH1X0Qq28sL8qCMK3QrXi2ZbEVOh6RiT7mirFEc=;
+ b=6PKLwLm5keg9SHa7WDm8WvzvvVozWrsXvPm5BdBAN/FlnHjzCkvIp151xBWqROIZ5H
+ hEU8gqFqjpsgEURh7HBD8MFJBKflbaHcjIifoz9F3slTTb98vD663s6+A9eU0sEjIKcq
+ 2P7GtOqM19X+IrmCdg+NZadxDRftXcGgRUfPK5wzse7IPNsMKOQz2wJdxAc3V593u81K
+ PEM3t8PXAKQpOZq0hkyCTD1LU4pYGUCyzXrqJRoOOowyCtHQ1mAfigKRiqt0du0kpsDe
+ oJs00/Xg1YFMEYLPRuRPvrWUvYmOkenCcZeKyXaf6MMa6gGELGEBWtD14bk4sQ1u8IZ5
+ NAVw==
+X-Gm-Message-State: AO0yUKVYSNfkgcY3PCTmUbgHLXik482k15U+hwAR2UV6xvP54GpI2g/2
+ dvLZYnNJKqAyCYn1207/bWWr8Q==
+X-Google-Smtp-Source: AK7set97Mn0O2StlUdYm3F5ghjiVUP/+9pUmncJscr9u5f+hbf6vADx5+XPbzmOg3tZGeFe/sp4qyg==
+X-Received: by 2002:a05:600c:4687:b0:3e2:201a:5bcc with SMTP id
+ p7-20020a05600c468700b003e2201a5bccmr1622369wmo.33.1677849271120; 
+ Fri, 03 Mar 2023 05:14:31 -0800 (PST)
 Received: from alex-rivos.ba.rivosinc.com
  (amontpellier-656-1-456-62.w92-145.abo.wanadoo.fr. [92.145.124.62])
  by smtp.gmail.com with ESMTPSA id
- f2-20020adfdb42000000b002c54fb024b2sm2150961wrj.61.2023.03.03.05.13.29
+ z4-20020a056000110400b002ce3b31753fsm1103722wrw.26.2023.03.03.05.14.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Mar 2023 05:13:30 -0800 (PST)
+ Fri, 03 Mar 2023 05:14:30 -0800 (PST)
 From: Alexandre Ghiti <alexghiti@rivosinc.com>
 To: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>,
  Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
-Cc: Alexandre Ghiti <alexghiti@rivosinc.com>
-Subject: [PATCH v11 0/5] riscv: Allow user to set the satp mode
-Date: Fri,  3 Mar 2023 14:12:47 +0100
-Message-Id: <20230303131252.892893-1-alexghiti@rivosinc.com>
+Cc: Alexandre Ghiti <alexghiti@rivosinc.com>,
+	Bin Meng <bmeng@tinylab.org>
+Subject: [PATCH v11 1/5] riscv: Pass Object to register_cpu_props instead of
+ DeviceState
+Date: Fri,  3 Mar 2023 14:12:48 +0100
+Message-Id: <20230303131252.892893-2-alexghiti@rivosinc.com>
 X-Mailer: git-send-email 2.37.2
+In-Reply-To: <20230303131252.892893-1-alexghiti@rivosinc.com>
+References: <20230303131252.892893-1-alexghiti@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alexghiti@rivosinc.com; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=alexghiti@rivosinc.com; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,100 +87,149 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 13:13:34 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 13:14:34 -0000
 
-This introduces new properties to allow the user to set the satp mode,
-see patch 3 for full syntax. In addition, it prevents cpus to boot in a
-satp mode they do not support (see patch 4).
+One can extract the DeviceState pointer from the Object pointer, so pass
+the Object for future commits to access other fields of Object.
 
-base-commit: commit c61d1a066cb6 ("Merge tag 'for-upstream' of
-https://gitlab.com/bonzini/qemu into staging")
+No functional changes intended.
 
-v11:
-- rebase on top of master
-- Added RB/AB from Frank and Alistair
-- Use VM_1_10_XX directly instead of satp_mode_from_str, from Frank
-- Set satp mode max for thead c906 to sv39
+Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Reviewed-by: Bin Meng <bmeng@tinylab.org>
+---
+ target/riscv/cpu.c | 29 +++++++++++++++--------------
+ 1 file changed, 15 insertions(+), 14 deletions(-)
 
-v10:
-- Fix user mode build by surrounding satp handling with #ifndef
-  CONFIG_USER_ONLY, Frank
-- Fix AB/RB from Frank and Alistair
-
-v9:
-- Move valid_vm[i] up, Andrew
-- Fixed expansion of the bitmap map, Bin
-- Rename set_satp_mode_default into set_satp_mode_default_map, Bin
-- Remove outer parenthesis and alignment, Bin
-- Fix qemu32 build failure, Bin
-- Fixed a few typos, Bin
-- Add RB from Andrew and Bin
-
-v8:
-- Remove useless !map check, Andrew
-- Add RB from Andrew
-
-v7:
-- Expand map to contain all valid modes, Andrew
-- Fix commit log for patch 3, Andrew
-- Remove is_32_bit argument from set_satp_mode_default, Andrew
-- Move and fixed comment, Andrew
-- Fix satp_mode_map_max in riscv_cpu_satp_mode_finalize which was set
-  too early, Alex
-- Remove is_32_bit argument from set_satp_mode_max_supported, Andrew
-- Use satp_mode directly instead of a string in
-  set_satp_mode_max_supported, Andrew
-- Swap the patch introducing supported bitmap and the patch that sets
-  sv57 in the dt, Andrew
-- Add various RB from Andrew and Alistair, thanks
-
-v6:
-- Remove the valid_vm check in validate_vm and add it to the finalize function
-  so that map already contains the constraint, Alex
-- Add forgotten mbare to satp_mode_from_str, Alex
-- Move satp mode properties handling to riscv_cpu_satp_mode_finalize, Andrew
-- Only add satp mode properties corresponding to the cpu, and then remove the
-  check against valid_vm_1_10_32/64 in riscv_cpu_satp_mode_finalize,
-  Andrew/Alistair/Alex
-- Move mmu-type setting to its own patch, Andrew
-- patch 5 is new and is a fix, Alex
-
-v5:
-- Simplify v4 implementation by leveraging valid_vm_1_10_32/64, as
-  suggested by Andrew
-- Split the v4 patch into 2 patches as suggested by Andrew
-- Lot of other minor corrections, from Andrew
-- Set the satp mode N by disabling the satp mode N + 1
-- Add a helper to set satp mode from a string, as suggested by Frank
-
-v4:
-- Use custom boolean properties instead of OnOffAuto properties, based
-  on ARMVQMap, as suggested by Andrew
-
-v3:
-- Free sv_name as pointed by Bin
-- Replace satp-mode with boolean properties as suggested by Andrew
-- Removed RB from Atish as the patch considerably changed
-
-v2:
-- Use error_setg + return as suggested by Alistair
-- Add RB from Atish
-- Fixed checkpatch issues missed in v1
-- Replaced Ludovic email address with the rivos one
-
-Alexandre Ghiti (5):
-  riscv: Pass Object to register_cpu_props instead of DeviceState
-  riscv: Change type of valid_vm_1_10_[32|64] to bool
-  riscv: Allow user to set the satp mode
-  riscv: Introduce satp mode hw capabilities
-  riscv: Correctly set the device-tree entry 'mmu-type'
-
- hw/riscv/virt.c    |  19 +--
- target/riscv/cpu.c | 288 ++++++++++++++++++++++++++++++++++++++++++---
- target/riscv/cpu.h |  25 ++++
- target/riscv/csr.c |  29 +++--
- 4 files changed, 323 insertions(+), 38 deletions(-)
-
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 9eb748a283..5dc11d6670 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -213,7 +213,7 @@ static const char * const riscv_intr_names[] = {
+     "reserved"
+ };
+ 
+-static void register_cpu_props(DeviceState *dev);
++static void register_cpu_props(Object *obj);
+ 
+ const char *riscv_cpu_get_trap_name(target_ulong cause, bool async)
+ {
+@@ -251,7 +251,7 @@ static void riscv_any_cpu_init(Object *obj)
+     set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+ #endif
+     set_priv_version(env, PRIV_VERSION_1_12_0);
+-    register_cpu_props(DEVICE(obj));
++    register_cpu_props(obj);
+ }
+ 
+ #if defined(TARGET_RISCV64)
+@@ -260,7 +260,7 @@ static void rv64_base_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     /* We set this in the realise function */
+     set_misa(env, MXL_RV64, 0);
+-    register_cpu_props(DEVICE(obj));
++    register_cpu_props(obj);
+     /* Set latest version of privileged specification */
+     set_priv_version(env, PRIV_VERSION_1_12_0);
+ }
+@@ -269,7 +269,7 @@ static void rv64_sifive_u_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+-    register_cpu_props(DEVICE(obj));
++    register_cpu_props(obj);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+ }
+ 
+@@ -279,7 +279,7 @@ static void rv64_sifive_e_cpu_init(Object *obj)
+     RISCVCPU *cpu = RISCV_CPU(obj);
+ 
+     set_misa(env, MXL_RV64, RVI | RVM | RVA | RVC | RVU);
+-    register_cpu_props(DEVICE(obj));
++    register_cpu_props(obj);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+     cpu->cfg.mmu = false;
+ }
+@@ -324,7 +324,7 @@ static void rv128_base_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     /* We set this in the realise function */
+     set_misa(env, MXL_RV128, 0);
+-    register_cpu_props(DEVICE(obj));
++    register_cpu_props(obj);
+     /* Set latest version of privileged specification */
+     set_priv_version(env, PRIV_VERSION_1_12_0);
+ }
+@@ -334,7 +334,7 @@ static void rv32_base_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     /* We set this in the realise function */
+     set_misa(env, MXL_RV32, 0);
+-    register_cpu_props(DEVICE(obj));
++    register_cpu_props(obj);
+     /* Set latest version of privileged specification */
+     set_priv_version(env, PRIV_VERSION_1_12_0);
+ }
+@@ -343,7 +343,7 @@ static void rv32_sifive_u_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+-    register_cpu_props(DEVICE(obj));
++    register_cpu_props(obj);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+ }
+ 
+@@ -353,7 +353,7 @@ static void rv32_sifive_e_cpu_init(Object *obj)
+     RISCVCPU *cpu = RISCV_CPU(obj);
+ 
+     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVC | RVU);
+-    register_cpu_props(DEVICE(obj));
++    register_cpu_props(obj);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+     cpu->cfg.mmu = false;
+ }
+@@ -364,7 +364,7 @@ static void rv32_ibex_cpu_init(Object *obj)
+     RISCVCPU *cpu = RISCV_CPU(obj);
+ 
+     set_misa(env, MXL_RV32, RVI | RVM | RVC | RVU);
+-    register_cpu_props(DEVICE(obj));
++    register_cpu_props(obj);
+     set_priv_version(env, PRIV_VERSION_1_11_0);
+     cpu->cfg.mmu = false;
+     cpu->cfg.epmp = true;
+@@ -376,7 +376,7 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+     RISCVCPU *cpu = RISCV_CPU(obj);
+ 
+     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
+-    register_cpu_props(DEVICE(obj));
++    register_cpu_props(obj);
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+     cpu->cfg.mmu = false;
+ }
+@@ -391,7 +391,7 @@ static void riscv_host_cpu_init(Object *obj)
+ #elif defined(TARGET_RISCV64)
+     set_misa(env, MXL_RV64, 0);
+ #endif
+-    register_cpu_props(DEVICE(obj));
++    register_cpu_props(obj);
+ }
+ #endif
+ 
+@@ -1161,11 +1161,12 @@ static Property riscv_cpu_extensions[] = {
+  * properties and leave. env.misa_ext = 0 means that we want
+  * all the default properties to be registered.
+  */
+-static void register_cpu_props(DeviceState *dev)
++static void register_cpu_props(Object *obj)
+ {
+-    RISCVCPU *cpu = RISCV_CPU(OBJECT(dev));
++    RISCVCPU *cpu = RISCV_CPU(obj);
+     uint32_t misa_ext = cpu->env.misa_ext;
+     Property *prop;
++    DeviceState *dev = DEVICE(obj);
+ 
+     /*
+      * If misa_ext is not zero, set cfg properties now to
 -- 
 2.37.2
 
