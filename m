@@ -1,71 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pY100-0001q1-14
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:42:44 -0500
+	id 1pY3xp-0002cm-4J
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 06:52:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0zu-0001LN-DU
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:38 -0500
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1pY3xo-0002cd-7J
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 06:52:40 -0500
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0zs-0007sG-My
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:38 -0500
-Received: by mail-pj1-x102f.google.com with SMTP id y2so1792363pjg.3
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:42:36 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1pY3xm-0006DJ-0o
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 06:52:39 -0500
+Received: by mail-wr1-x42a.google.com with SMTP id bx12so1961085wrb.11
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 03:52:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832955;
- h=to:from:cc:content-transfer-encoding:mime-version:references
- :in-reply-to:message-id:date:subject:from:to:cc:subject:date
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677844355;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0rHQcn1c3RoxIEMYQmBzf3qgrVCMNlGeLy55RgmobpQ=;
- b=Fpus1Gd3jc18L2P5mUkI+RBj8lvpTN6CF+trBI69PYs492/dWFAjKNUFW68XF3EleB
- 0+iXAc4jp4iXZ7317GW7N0Vsc2Ox07C6yZ6b7fqzd8qaBMKWH9ZlA1ZLnXa+DGD3jkZu
- e5efUAVdWJibTPVSYeseEBZSWobD8kQsPRlAJVJodanrKvKXuD4kw9Y71PAnv4Y+uVnN
- R7XsKdZMwNo7kip4WirwQieUFl8JjuYP7lBs85EEwIbd0/5K0AE+aDju0vhO6PcYMeGa
- xUWnujYnbxKGo6Ps1KZbAJgUaumqJBwSJXFGj0gr2MPeXa/ICCfy85pwVPWwrWC7S39f
- kMQg==
+ bh=CnOmpX6F8ikRDUfp7P1Jbr8PUAjqMRlXr1Vehl3RTTI=;
+ b=XUgJQlJg27CK5+HSn06mdsEbzPX8zjwvNwsCufzTxQRKlbZ3FrXW6Hys58wL5s5KZL
+ 6pzHhu+TMfbce7Jonv3IdLtaHVvHc+c7n4/7KWy6FTFRFajZWH2mn05JIhbDm/ctw7+/
+ fJ18u1hvHVEwZxUFozPZn74A2ZCdOSwvGXbIpGasjSEhEe72wb34/SB4o4/6/43CZLow
+ iuikCSgpb32yDlBAG8Yn3s7QF+V+xaXWRueIvt/Ld/5rlP7aC3zdlA91ZsFOLb4IV5cg
+ nF/Eg+XRN5d7dqfINfCvDtD5+JpRQEh+GAaEC3JxAlEAX7Pqkq5dMh9B04CtdCe9vVhO
+ joXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677832955;
- h=to:from:cc:content-transfer-encoding:mime-version:references
- :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20210112; t=1677844355;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0rHQcn1c3RoxIEMYQmBzf3qgrVCMNlGeLy55RgmobpQ=;
- b=bPmxWcykEDkJncHbStdCcv+ue+HbLIEZShlWsbjcfRXwXm31WHOH/ZGVkvDo2881MH
- jgRbGZ4++y7AsnSgwcGASGCofZZcJ+S0bt4XFhD/U3AOrf4G4eFjw2xmjGQ3seDWv5PK
- 6h+pyv8G4C44+8mKBIJZ3SGQcDcuZmU7ztFuYy6b3YPKt0mQBkVZJWkjYGk1iI0RSEdV
- DkijPZOfsjWIwcOfeqsBLyrhYwAsf+Vbp418aUx3EKz2/BSLaStlgwz3ICkQgOc3Z7Oa
- uIVdHcoGNCiQybc3I/WK4tyvaQ2QSldMdlDauhavQwOExelLTKWgC8LhJQxVmzEiHCq9
- bhCA==
-X-Gm-Message-State: AO0yUKVRTnBf2GxZVekuD4Ex+xzJTsIiSL2AsGB2CyfLTbhyfX/BJ09o
- bbB1wd6DfFjsSkBS9s7ZbAIiEoogG/MkH5y6
-X-Google-Smtp-Source: AK7set88nqLx/p/eDDnZ6jshl5fpPIkwn4UArH3x1oIsdsHagaDCqekt8siKhhs37jdjfcmGV87hhw==
-X-Received: by 2002:a17:90b:3505:b0:234:dc4:2006 with SMTP id
- ls5-20020a17090b350500b002340dc42006mr1075443pjb.4.1677832955444; 
- Fri, 03 Mar 2023 00:42:35 -0800 (PST)
-Received: from localhost ([135.180.224.71]) by smtp.gmail.com with ESMTPSA id
- ki4-20020a170903068400b0019309be03e7sm983435plb.66.2023.03.03.00.42.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Mar 2023 00:42:35 -0800 (PST)
-Subject: [PULL 59/59] target/riscv/vector_helper.c: avoid env_archcpu() when
- reading RISCVCPUConfig
-Date: Fri,  3 Mar 2023 00:37:40 -0800
-Message-Id: <20230303083740.12817-60-palmer@rivosinc.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230303083740.12817-1-palmer@rivosinc.com>
-References: <20230303083740.12817-1-palmer@rivosinc.com>
+ bh=CnOmpX6F8ikRDUfp7P1Jbr8PUAjqMRlXr1Vehl3RTTI=;
+ b=wT20tni2xbUpxRZ4QOCCJ322pCtoUfevmb5nmOZnmANtNSedgFVpngv1ArCMPFWGkm
+ OY4eguQio9N1N85gkcsiQK3HyaNQpThjrGZm9QlaRhkyWjH9J7ceRDAJueAjPxxhyBrt
+ 4qSOkX4/69nQAxDu8nth2GaY55qW3ktOzrY0omYhztHaaizzBqIZKt+G6uJh2QpR6vNf
+ SpdoP8IpPM7IZSrnoMS+Ec7b81ArLaWvRHiQ/C50ybe35GMiW4i/mY8v/02MiSJssAUW
+ mncVAYmqyUjOtDRLUGiViZMSskcn2juOm/IP7Q/68JuBvchtPi9nc5islEPyvSzO9Msr
+ 3mDQ==
+X-Gm-Message-State: AO0yUKWkWkrg1683MGLUdCuOoS2SFTtdDuY7gb0iucdtwWoDjpLdfQMG
+ dEg1iA7lYQDmH2AvwWL+Y9qRT6rhEUxvjxrUGVgKSQ==
+X-Google-Smtp-Source: AK7set8C12nMDX+l8t4T17RGIpkYZfTSLyPqt40rvmLjpdDpWZ+jVA7R3SiYbVXjMOYyoLsvgCXKgUrc6XqpKpqDZbM=
+X-Received: by 2002:adf:f90e:0:b0:2cd:ebb0:3895 with SMTP id
+ b14-20020adff90e000000b002cdebb03895mr309025wrr.5.1677844355513; Fri, 03 Mar
+ 2023 03:52:35 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, 
- ilippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Palmer Dabbelt <palmer@rivosinc.com>
-From: Palmer Dabbelt <palmer@rivosinc.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=palmer@rivosinc.com; helo=mail-pj1-x102f.google.com
+References: <20230203055812.257458-1-alexghiti@rivosinc.com>
+ <7591407b-e8d0-aa05-86a3-8ca7988a6e69@ventanamicro.com>
+ <66d80b94-5941-31f3-995f-e9666a91fbb7@ventanamicro.com>
+In-Reply-To: <66d80b94-5941-31f3-995f-e9666a91fbb7@ventanamicro.com>
+From: Alexandre Ghiti <alexghiti@rivosinc.com>
+Date: Fri, 3 Mar 2023 12:52:24 +0100
+Message-ID: <CAHVXubhHbkK12EfGjs7owS9_9rv4DS1bpxQEfWKzdpCg=EHwGA@mail.gmail.com>
+Subject: Re: [PATCH v10 0/5] riscv: Allow user to set the satp mode
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Andrew Jones <ajones@ventanamicro.com>, 
+ Frank Chang <frank.chang@sifive.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=alexghiti@rivosinc.com; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -84,118 +80,145 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 08:42:38 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 11:52:40 -0000
 
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Hi Daniel,
 
-This file has several uses of env_archcpu() that are used solely to read
-cfg->vlen. Use the new riscv_cpu_cfg() inline instead.
+On Thu, Mar 2, 2023 at 10:03=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+>
+>
+> On 3/2/23 14:42, Daniel Henrique Barboza wrote:
+> > Hi Palmer,
+> >
+> > I think this series can be picked. All patches are fully acked. There i=
+s a nit
+> > in patch 3 that I believe you can choose to fix in-tree if you want to.
+>
+> Update: patch 1 is not applicable anymore due to changes in current maste=
+r. All
+> other patches have conflicts as well.
+>
+> I guess it's easier to Alexandre to rebase and re-send it when possible. =
+Frank's
+> comment in patch 3 can also be handled during the process.
 
-Suggested-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Weiwei Li<liweiwei@iscas.ac.cn>
-Message-ID: <20230226170514.588071-3-dbarboza@ventanamicro.com>
-Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
----
- target/riscv/vector_helper.c | 20 ++++++++++----------
- 1 file changed, 10 insertions(+), 10 deletions(-)
+Sure I'll do that today,
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 7e476ea8c3..2423affe37 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -272,7 +272,7 @@ static void vext_set_tail_elems_1s(CPURISCVState *env, target_ulong vl,
-                                    uint32_t esz, uint32_t max_elems)
- {
-     uint32_t total_elems = vext_get_total_elems(env, desc, esz);
--    uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-+    uint32_t vlenb = riscv_cpu_cfg(env)->vlen >> 3;
-     uint32_t vta = vext_vta(desc);
-     uint32_t registers_used;
-     int k;
-@@ -671,7 +671,7 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
- {
-     uint32_t i, k, off, pos;
-     uint32_t nf = vext_nf(desc);
--    uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-+    uint32_t vlenb = riscv_cpu_cfg(env)->vlen >> 3;
-     uint32_t max_elems = vlenb >> log2_esz;
- 
-     k = env->vstart / max_elems;
-@@ -1141,7 +1141,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
- {                                                             \
-     uint32_t vl = env->vl;                                    \
-     uint32_t vm = vext_vm(desc);                              \
--    uint32_t total_elems = env_archcpu(env)->cfg.vlen;        \
-+    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;          \
-     uint32_t vta_all_1s = vext_vta_all_1s(desc);              \
-     uint32_t i;                                               \
-                                                               \
-@@ -1177,7 +1177,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,          \
- {                                                               \
-     uint32_t vl = env->vl;                                      \
-     uint32_t vm = vext_vm(desc);                                \
--    uint32_t total_elems = env_archcpu(env)->cfg.vlen;          \
-+    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;            \
-     uint32_t vta_all_1s = vext_vta_all_1s(desc);                \
-     uint32_t i;                                                 \
-                                                                 \
-@@ -1376,7 +1376,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
- {                                                             \
-     uint32_t vm = vext_vm(desc);                              \
-     uint32_t vl = env->vl;                                    \
--    uint32_t total_elems = env_archcpu(env)->cfg.vlen;        \
-+    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;          \
-     uint32_t vta_all_1s = vext_vta_all_1s(desc);              \
-     uint32_t vma = vext_vma(desc);                            \
-     uint32_t i;                                               \
-@@ -1439,7 +1439,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,   \
- {                                                                   \
-     uint32_t vm = vext_vm(desc);                                    \
-     uint32_t vl = env->vl;                                          \
--    uint32_t total_elems = env_archcpu(env)->cfg.vlen;              \
-+    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;                \
-     uint32_t vta_all_1s = vext_vta_all_1s(desc);                    \
-     uint32_t vma = vext_vma(desc);                                  \
-     uint32_t i;                                                     \
-@@ -4152,7 +4152,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
- {                                                             \
-     uint32_t vm = vext_vm(desc);                              \
-     uint32_t vl = env->vl;                                    \
--    uint32_t total_elems = env_archcpu(env)->cfg.vlen;        \
-+    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;          \
-     uint32_t vta_all_1s = vext_vta_all_1s(desc);              \
-     uint32_t vma = vext_vma(desc);                            \
-     uint32_t i;                                               \
-@@ -4190,7 +4190,7 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2,       \
- {                                                                   \
-     uint32_t vm = vext_vm(desc);                                    \
-     uint32_t vl = env->vl;                                          \
--    uint32_t total_elems = env_archcpu(env)->cfg.vlen;              \
-+    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;                \
-     uint32_t vta_all_1s = vext_vta_all_1s(desc);                    \
-     uint32_t vma = vext_vma(desc);                                  \
-     uint32_t i;                                                     \
-@@ -4721,7 +4721,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-                   uint32_t desc)                          \
- {                                                         \
-     uint32_t vl = env->vl;                                \
--    uint32_t total_elems = env_archcpu(env)->cfg.vlen;    \
-+    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;      \
-     uint32_t vta_all_1s = vext_vta_all_1s(desc);          \
-     uint32_t i;                                           \
-     int a, b;                                             \
-@@ -4808,7 +4808,7 @@ static void vmsetm(void *vd, void *v0, void *vs2, CPURISCVState *env,
- {
-     uint32_t vm = vext_vm(desc);
-     uint32_t vl = env->vl;
--    uint32_t total_elems = env_archcpu(env)->cfg.vlen;
-+    uint32_t total_elems = riscv_cpu_cfg(env)->vlen;
-     uint32_t vta_all_1s = vext_vta_all_1s(desc);
-     uint32_t vma = vext_vma(desc);
-     int i;
--- 
-2.39.2
+Thanks,
 
+Alex
+
+>
+>
+> Thanks,
+>
+>
+> Daniel
+>
+>
+>
+> >
+> >
+> > Thanks,
+> >
+> >
+> > Daniel
+> >
+> >
+> >
+> >
+> > On 2/3/23 02:58, Alexandre Ghiti wrote:
+> >> This introduces new properties to allow the user to set the satp mode,
+> >> see patch 3 for full syntax. In addition, it prevents cpus to boot in =
+a
+> >> satp mode they do not support (see patch 4).
+> >>
+> >> base-commit: commit 75cc28648574 ("configure: remove
+> >> backwards-compatibility code"
+> >>
+> >> v10:
+> >> - Fix user mode build by surrounding satp handling with #ifndef
+> >>    CONFIG_USER_ONLY, Frank
+> >> - Fix AB/RB from Frank and Alistair
+> >>
+> >> v9:
+> >> - Move valid_vm[i] up, Andrew
+> >> - Fixed expansion of the bitmap map, Bin
+> >> - Rename set_satp_mode_default into set_satp_mode_default_map, Bin
+> >> - Remove outer parenthesis and alignment, Bin
+> >> - Fix qemu32 build failure, Bin
+> >> - Fixed a few typos, Bin
+> >> - Add RB from Andrew and Bin
+> >>
+> >> v8:
+> >> - Remove useless !map check, Andrew
+> >> - Add RB from Andrew
+> >>
+> >> v7:
+> >> - Expand map to contain all valid modes, Andrew
+> >> - Fix commit log for patch 3, Andrew
+> >> - Remove is_32_bit argument from set_satp_mode_default, Andrew
+> >> - Move and fixed comment, Andrew
+> >> - Fix satp_mode_map_max in riscv_cpu_satp_mode_finalize which was set
+> >>    too early, Alex
+> >> - Remove is_32_bit argument from set_satp_mode_max_supported, Andrew
+> >> - Use satp_mode directly instead of a string in
+> >>    set_satp_mode_max_supported, Andrew
+> >> - Swap the patch introducing supported bitmap and the patch that sets
+> >>    sv57 in the dt, Andrew
+> >> - Add various RB from Andrew and Alistair, thanks
+> >>
+> >> v6:
+> >> - Remove the valid_vm check in validate_vm and add it to the finalize =
+function
+> >>    so that map already contains the constraint, Alex
+> >> - Add forgotten mbare to satp_mode_from_str, Alex
+> >> - Move satp mode properties handling to riscv_cpu_satp_mode_finalize, =
+Andrew
+> >> - Only add satp mode properties corresponding to the cpu, and then rem=
+ove the
+> >>    check against valid_vm_1_10_32/64 in riscv_cpu_satp_mode_finalize,
+> >>    Andrew/Alistair/Alex
+> >> - Move mmu-type setting to its own patch, Andrew
+> >> - patch 5 is new and is a fix, Alex
+> >>
+> >> v5:
+> >> - Simplify v4 implementation by leveraging valid_vm_1_10_32/64, as
+> >>    suggested by Andrew
+> >> - Split the v4 patch into 2 patches as suggested by Andrew
+> >> - Lot of other minor corrections, from Andrew
+> >> - Set the satp mode N by disabling the satp mode N + 1
+> >> - Add a helper to set satp mode from a string, as suggested by Frank
+> >>
+> >> v4:
+> >> - Use custom boolean properties instead of OnOffAuto properties, based
+> >>    on ARMVQMap, as suggested by Andrew
+> >>
+> >> v3:
+> >> - Free sv_name as pointed by Bin
+> >> - Replace satp-mode with boolean properties as suggested by Andrew
+> >> - Removed RB from Atish as the patch considerably changed
+> >>
+> >> v2:
+> >> - Use error_setg + return as suggested by Alistair
+> >> - Add RB from Atish
+> >> - Fixed checkpatch issues missed in v1
+> >> - Replaced Ludovic email address with the rivos one
+> >>
+> >> Alexandre Ghiti (5):
+> >>    riscv: Pass Object to register_cpu_props instead of DeviceState
+> >>    riscv: Change type of valid_vm_1_10_[32|64] to bool
+> >>    riscv: Allow user to set the satp mode
+> >>    riscv: Introduce satp mode hw capabilities
+> >>    riscv: Correctly set the device-tree entry 'mmu-type'
+> >>
+> >>   hw/riscv/virt.c    |  19 ++--
+> >>   target/riscv/cpu.c | 271 +++++++++++++++++++++++++++++++++++++++++++=
+--
+> >>   target/riscv/cpu.h |  25 +++++
+> >>   target/riscv/csr.c |  29 +++--
+> >>   4 files changed, 313 insertions(+), 31 deletions(-)
+> >>
 
