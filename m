@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pYASl-0008AU-Dz
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 13:49:09 -0500
+	id 1pYATd-0000Qr-44
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 13:49:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1pYASj-0008A6-VF
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 13:49:02 -0500
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ id 1pYATP-0008RG-MD
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 13:49:47 -0500
+Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1pYASi-0001sM-GD
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 13:49:01 -0500
-Received: by mail-pl1-x62a.google.com with SMTP id i5so3725319pla.2
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 10:49:00 -0800 (PST)
+ id 1pYATO-0001wu-8S
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 13:49:43 -0500
+Received: by mail-pj1-x1034.google.com with SMTP id bo22so3523050pjb.4
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 10:49:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1677869339;
+ d=linaro.org; s=google; t=1677869381;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nvLWmEt8n5IuIq8qHZwv+q7Me70MwUbcggNL+tWa8Dc=;
- b=CvTRF7qYi4xCkjNg9T7ngDUfGJeErs4pUFOqtUMAzM7DedElFTGCgQTtu5giFFKbkT
- Xini6ii6s4wgMW/MfYaL4+edLKJpGJS9r2Zkl+xjlcCOHPsO6BRccF97Wq3ANGMtY/jV
- Z/hv70hhwYY32ajxt+Ofmee0fLL5thCv90OREOX+cQJBrx9tjKkj9DcS8S1seuqXE4MW
- HEny49/NROj+zd30wq/EVx7Pzy4GCnYRz0G7hbLRljboN7pHYiBX4rCFcWlX4HOVPIti
- +loZ3j/KWA55UqCJLTJ20V8ZdvjPzjg4JJAkI1qaK946DDnboChbfoz3dQtQfu8y3+pq
- uOuw==
+ bh=JMXMQWpbHwQR/8T8b/ZkNg7ZuKGeta3yefHrf8HK2kY=;
+ b=Zi3oonlcqyi/jQysMJN93ra5NWvnw1kL4A/cYavudQir/EFE+nIUQEqB1aCu8KutRJ
+ l5+bNEnuqZnAIFPKP4qYflLkTI/0abZriAQyQbHI+YiALOzgcHBvDBP9lD118ZDFE37f
+ ZkCyYxtCYlTKCzKG+5C/+ubShoI3AJwG7MFjxTzmR124gbrkQGCDpO/Y57v4KlljgaxW
+ ZiZCC53bzShOwJnvov5WVSmYCHpEKk3/yLtuZYIVFpuGUBm8Wp5yh/DdCSpBU6IQwUgN
+ /Cl9CRIP6rV9r2AcSNQFuktF7T5ShqlU6QL9lCkXHLBW2G4dmuxNmGjMFGqVfwECrqQw
+ OM/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677869339;
+ d=1e100.net; s=20210112; t=1677869381;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nvLWmEt8n5IuIq8qHZwv+q7Me70MwUbcggNL+tWa8Dc=;
- b=LD9h+Ljf3K8z77APyl+MG4ib7gzLNcs7Xt1Ax91COp1ubb+z9DurWXckKm6BTckb+n
- 67vdJuWEXCGRtNbFjK07IPm2Rvjay1SM+vQflM2xzalmdIQ2VY0vUKTTMfMg3KCvsl0h
- hIVhtZC08uKDhqCEi47IadWbEmgLAyyn7YH1yn/O7zvCiTjYSGUFQGrTO8z2N5lkugKl
- P23jYf/kAzEsb5hXlnTU4q3Y7zQeuJpFbAHYXnGBr1zF64UEjgF6pgrxFN2aVNeS33UM
- H4EjQHPk5aXxcBwnkp2qqgAxUKQU1wChoQsxbweDHINe4XklfkX62IsZfSjNtqOMBnUe
- rWXA==
-X-Gm-Message-State: AO0yUKUk+NemCqjCd0Z+va6FVZEJU46u0TpcdT3Y/iMvxoQnsttnb+oI
- gS/cl0FuLn7VGkzb63Ec2uIJzQFhnixrKe4MblPXXQ==
-X-Google-Smtp-Source: AK7set99ScmVJyENc528RTcDX8icxRDdWCbjAT5ne49i8QBbdYUtZn57CIdyh90a5bCtS3UvDAodir2i8zx5lo0Utsw=
-X-Received: by 2002:a17:90a:348d:b0:234:a62e:bc10 with SMTP id
- p13-20020a17090a348d00b00234a62ebc10mr1009221pjb.0.1677869339011; Fri, 03 Mar
- 2023 10:48:59 -0800 (PST)
+ bh=JMXMQWpbHwQR/8T8b/ZkNg7ZuKGeta3yefHrf8HK2kY=;
+ b=o4lxjhYnRXDMjcXVqlZ4DhD27Owny3c09L0E+/ny/gZm64TASxiSdIKPt9y9CL4LT+
+ rw9Eq2NzodFlH5/SZZ5aB16u8HuU7/WaLGrSxDjRzDG64FOzD6AT/3e0kveQQhCu2Reb
+ 9Fdl4JbCrIC0CEfKGKOrHjuIlQMhUY6rHce4KCAx/dLzSXLGkuoiExe8MBz3AXlGrm77
+ XiobKh2NzleP9lQy0ffjFx2CfErWp3EE8q3R15N6aU9tb1Wvlao5cwOaQ/9tboHQn3aV
+ HPII3hLHeXcE9BHYjuBDrXY8/CNEsVo22RC68H7QGygI6FiZlgtlmRWwW+sE4pgWgovW
+ jmag==
+X-Gm-Message-State: AO0yUKXJ1irxy7RCTc+Ewa26/EJ8xc0d9tOIC0cJ9wA7j+XLBASNeDSZ
+ SDFn1C3XsEUiogIc+tIHZusLIfTeGgmXEcrmT8Wg1w==
+X-Google-Smtp-Source: AK7set+KTXrqyqDjgII56ckuWDX6s7lruGQdHdtbcmKSCEwvSpmurnoBiuKLtEVDtR0Nq30roMnzqUdo84IH9ZWyUy8=
+X-Received: by 2002:a17:90b:241:b0:237:ea76:41ed with SMTP id
+ fz1-20020a17090b024100b00237ea7641edmr1009984pjb.0.1677869380983; Fri, 03 Mar
+ 2023 10:49:40 -0800 (PST)
 MIME-Version: 1.0
 References: <20230227052505.352889-1-richard.henderson@linaro.org>
- <20230227052505.352889-24-richard.henderson@linaro.org>
-In-Reply-To: <20230227052505.352889-24-richard.henderson@linaro.org>
+ <20230227052505.352889-49-richard.henderson@linaro.org>
+In-Reply-To: <20230227052505.352889-49-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 3 Mar 2023 18:48:47 +0000
-Message-ID: <CAFEAcA8HR6uc8qptqfoQZDBCyLJ45rL-J5290HSQLuKFd-7-Yw@mail.gmail.com>
-Subject: Re: [PATCH v2 23/76] target/cris: Drop addr from dec10_ind_move_m_pr
+Date: Fri, 3 Mar 2023 18:49:29 +0000
+Message-ID: <CAFEAcA9dfv-HXvO8u8xNd06AkFOXosjPuzmuGiQyzTWQmE5B2g@mail.gmail.com>
+Subject: Re: [PATCH v2 48/76] target/nios2: Drop tcg_temp_free
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, 
@@ -57,15 +57,15 @@ Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
  gaosong@loongson.cn, jiaxun.yang@flygoat.com, tsimpson@quicinc.com, 
  ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=peter.maydell@linaro.org; helo=mail-pl1-x62a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
+ envelope-from=peter.maydell@linaro.org; helo=mail-pj1-x1034.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,15 +78,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 18:49:02 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 18:49:55 -0000
 
-On Mon, 27 Feb 2023 at 05:27, Richard Henderson
+On Mon, 27 Feb 2023 at 05:50, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> This variable is not used, only allocated and freed.
+> Translators are no longer required to free tcg temporaries.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
+>  target/nios2/translate.c | 15 ---------------
+>  1 file changed, 15 deletions(-)
+>
 
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
