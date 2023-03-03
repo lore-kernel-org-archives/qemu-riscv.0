@@ -1,67 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pY0zZ-0008Os-LX
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:42:17 -0500
+	id 1pY0zf-0008Tr-Cs
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:42:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0zU-0008Kl-8e
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:12 -0500
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ id 1pY0zZ-0008Ox-MX
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:17 -0500
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0zS-0007qA-Ng
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:12 -0500
-Received: by mail-pl1-x62e.google.com with SMTP id u5so1974089plq.7
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:42:10 -0800 (PST)
+ id 1pY0zY-00080Q-8Z
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:42:17 -0500
+Received: by mail-pj1-x1035.google.com with SMTP id
+ h17-20020a17090aea9100b0023739b10792so1589524pjz.1
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:42:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832929;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832935;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aE/CF2t05zhOlTcgA6pdglWjLf3mWNbikxW4FBHcrTU=;
- b=gERCMg1jtI6Uns9QUZaIb+5c8QyHueede6Sv9kRyve/gUf63rc/vHhkk7Yoi+jwVhB
- ZXtORWW/FZdSuwh+RLjQsYWRKpWNilqL8oUFWDpj0XaEfP6xZPNEcyzT7uQZKtXeR+H9
- WSXVkP7RxNphoQUEoSv0KlbnvyPyS/T71T6G3Z7HlAJqa+6W169bJUFHtt/KNcveK9yI
- tAmGcBqewQfnUY71gM4MrspoE+4emklhFOtBKlDHbLwhO0/kD7pNg9UD6DrHUJdaoe7v
- YMwAm+oJwDHQvkASb4H++Mz9TRrPr1afzYQwGTQOOBQr+JU7fds3PY85n+GH/tvYAemH
- PQyg==
+ bh=41l2hXF3TddEpsVwVpvNZTk5y5JWJWpku/WJD6CdFb0=;
+ b=47sI5aim0R38ON+SuY9s+l+D33vfqAVVnRR4PyVJwHbpMIR49qkvXADSJ4a1t7rXfG
+ XN4894LqDjpYtEBIzhnW92PDcZ2x3kQmfbyvPqhSQXlm3eBxVeoB5vurbCaaCwf3uEVu
+ AOmYL717MQ2ilx6uo0j6LegRlKt6AffviZhiEZXyQaub8CJSSgZ/S7tJj+TkzrYdvg8P
+ c8ZLPFGTKihIOCVcyo6xK8d2oCl6dSYihKUZF5LrvI9Qq6EaRF+i5lz5dDHXgPCp7YmH
+ PNyMIPVRLrkgY6iJPhXWPAGz4CioS0WicrvKSAl/jd4T3nE8x5UsXqggQbSBjfip5NKl
+ zLew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677832929;
+ d=1e100.net; s=20210112; t=1677832935;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aE/CF2t05zhOlTcgA6pdglWjLf3mWNbikxW4FBHcrTU=;
- b=cFGYki0eM8i2W27N6r6jQ6t/Dj7lcUR34qgnn9uYV7XHkzDKh+1dzipIFO1ajqBD1v
- jvs8lBi5LVCv3NsaBnBr2ZqQaHOx2fc+xpqo591+6F7GTeKRiTbJdDB8ZI24ZwV6xMwc
- VU5/Y+RYkLdZ+ol9X14Me+dBr8pMUCR5qxyTmpS2sd72/C3RN+oczu1Z5eImJR0flcL2
- KaRrbtC6ZZ2j5/Q9EergGcLHhKwrQthd1g3WWTmr38SFZM9Ll4WamB9h37aW1HsRxWEH
- qnO80Oc1BIGScaF9v8z96nbh4r2558eqgZZQLoG1yfU7iRbUzoeo7J3dGQX1NwWj14jN
- TOHA==
-X-Gm-Message-State: AO0yUKVWvSPCL/O3NqpsxCyRzjuQ3+xHiNcLPrucoPQqyE8GtB1K14L/
- niPLs+IFeqLAtO/+HPUvUc4QlsKPSRREnIEY
-X-Google-Smtp-Source: AK7set8s3EUVXFdmEyaqAd9enpocrY6KYbEfO78PxU1Nm9tCmhPtwK4CJDlfD/o5K5Iyyvth8waqtQ==
-X-Received: by 2002:a17:902:db0f:b0:19e:7a2d:19f2 with SMTP id
- m15-20020a170902db0f00b0019e7a2d19f2mr1747928plx.19.1677832929621; 
- Fri, 03 Mar 2023 00:42:09 -0800 (PST)
+ bh=41l2hXF3TddEpsVwVpvNZTk5y5JWJWpku/WJD6CdFb0=;
+ b=XANHV1CCjpE2eY9nVrffjBR3XkdLCXb/LEej187tIxRTdIOwLVQJhiQPG6XtPVSmPJ
+ 02DA01zqmx6LNRqjQ4xuVi3ECcWmkGajegzU0N6ImcaeDf8gaYIfKwsJrlRkscbCnCck
+ y5cAs8xaK4e80kO6sD+9IxZ5XEKUSJ76+SrrFhdPmllUm/9pMgaxjWGXEbIw6bAOA2Ao
+ ouckjdlzaysnRPUQJm3JLomhQRkJYsyUbyTHdZOFDzqiK0ii8vWeU6j0JxLiYXfmeM9I
+ 9TrnUwddqjUD8ST7ea4YeFm10+iteECibUp8SEUjy7XETC7mzMgsiOF4rglIj51My0yM
+ zG6Q==
+X-Gm-Message-State: AO0yUKUagXJjCsIgwB7UBibUCwzeQuyySRbLhaqzXu6atVIupxub+99l
+ isXUp0BK5EoHgL9FmQFj1mnXpBcmtDgoUYzC
+X-Google-Smtp-Source: AK7set9ZF6U8GsdiEuqr+wsibR9KgEXcNrFKlcLLCH1ASlIYjzi5pXKwyTOHTbecsziT1xgHIAYT4A==
+X-Received: by 2002:a17:902:f693:b0:19c:ff5d:1fd2 with SMTP id
+ l19-20020a170902f69300b0019cff5d1fd2mr982686plg.8.1677832935247; 
+ Fri, 03 Mar 2023 00:42:15 -0800 (PST)
 Received: from localhost ([135.180.224.71]) by smtp.gmail.com with ESMTPSA id
- kb8-20020a170903338800b00194d14d8e54sm978032plb.96.2023.03.03.00.42.09
+ v3-20020a170902b7c300b0019682e27995sm959020plz.223.2023.03.03.00.42.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Mar 2023 00:42:09 -0800 (PST)
-Subject: [PULL 39/59] target/riscv: Allow debugger to access {h, s}stateen CSRs
-Date: Fri,  3 Mar 2023 00:37:20 -0800
-Message-Id: <20230303083740.12817-40-palmer@rivosinc.com>
+ Fri, 03 Mar 2023 00:42:14 -0800 (PST)
+Subject: [PULL 43/59] target/riscv: Fix checking of whether instruciton at
+ 'pc_next' spans pages
+Date: Fri,  3 Mar 2023 00:37:24 -0800
+Message-Id: <20230303083740.12817-44-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230303083740.12817-1-palmer@rivosinc.com>
 References: <20230303083740.12817-1-palmer@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
- Bin Meng <bmeng@tinylab.org>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Shaobo Song <songshaobo@eswincomputing.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
  Palmer Dabbelt <palmer@rivosinc.com>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=palmer@rivosinc.com; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=palmer@rivosinc.com; helo=mail-pj1-x1035.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -80,78 +83,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 08:42:12 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 08:42:18 -0000
 
-From: Bin Meng <bmeng@tinylab.org>
+From: Shaobo Song <songshaobo@eswincomputing.com>
 
-At present {h,s}stateen CSRs are not reported in the CSR XML
-hence gdb cannot access them.
+This bug has a noticeable behavior of falling back to the main loop and
+respawning a redundant translation block including a single instruction
+when the end address of the compressive instruction is exactly on a page
+boundary, and slows down running system performance.
 
-Fix it by adjusting their predicate() routine logic so that the
-static config check comes before the run-time check, as well as
-adding a debugger check.
-
-Signed-off-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <20230228104035.1879882-16-bmeng@tinylab.org>
+Signed-off-by: Shaobo Song <songshaobo@eswincomputing.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <20230220072732.568-1-songshaobo@eswincomputing.com>
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- target/riscv/csr.c | 22 ++++++++++++++++++++--
- 1 file changed, 20 insertions(+), 2 deletions(-)
+ target/riscv/translate.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 15b23b9b5a..a0e70f5ba0 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -337,13 +337,22 @@ static RISCVException hstateen_pred(CPURISCVState *env, int csrno, int base)
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 772f9d7973..8ffa2116e0 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1261,7 +1261,7 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+                 uint16_t next_insn = cpu_lduw_code(env, ctx->base.pc_next);
+                 int len = insn_len(next_insn);
  
-+    RISCVException ret = hmode(env, csrno);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-+    if (env->debugger) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-     if (env->priv < PRV_M) {
-         if (!(env->mstateen[csrno - base] & SMSTATEEN_STATEEN)) {
-             return RISCV_EXCP_ILLEGAL_INST;
-         }
-     }
- 
--    return hmode(env, csrno);
-+    return RISCV_EXCP_NONE;
- }
- 
- static RISCVException hstateen(CPURISCVState *env, int csrno)
-@@ -366,6 +375,15 @@ static RISCVException sstateen(CPURISCVState *env, int csrno)
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-+    RISCVException ret = smode(env, csrno);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-+    if (env->debugger) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-     if (env->priv < PRV_M) {
-         if (!(env->mstateen[index] & SMSTATEEN_STATEEN)) {
-             return RISCV_EXCP_ILLEGAL_INST;
-@@ -378,7 +396,7 @@ static RISCVException sstateen(CPURISCVState *env, int csrno)
-         }
-     }
- 
--    return smode(env, csrno);
-+    return RISCV_EXCP_NONE;
- }
- 
- /* Checks if PointerMasking registers could be accessed */
+-                if (!is_same_page(&ctx->base, ctx->base.pc_next + len)) {
++                if (!is_same_page(&ctx->base, ctx->base.pc_next + len - 1)) {
+                     ctx->base.is_jmp = DISAS_TOO_MANY;
+                 }
+             }
 -- 
 2.39.2
 
