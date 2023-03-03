@@ -1,57 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pY0zG-00087C-Me
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:41:58 -0500
+	id 1pY0zI-00088j-UI
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:42:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0zF-000866-Cz
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:57 -0500
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
+ id 1pY0zH-00087y-OP
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:59 -0500
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0zD-0007o9-VD
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:57 -0500
-Received: by mail-pj1-x1030.google.com with SMTP id
- m8-20020a17090a4d8800b002377bced051so5489429pjh.0
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:41:55 -0800 (PST)
+ id 1pY0zF-0007zU-Pd
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:59 -0500
+Received: by mail-pl1-x633.google.com with SMTP id i3so1981553plg.6
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:41:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832915;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832916;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fGLjFr3btl6TtpgGulCBgf0V4/Wyfa5gKk1cozGOLoE=;
- b=uYP5zV+rCQ2kp4O5ryJd1dYyaTjcGCJ4Fri3Txw0JO3YKhzoPHmAUeJ+trEIMYGyWE
- hrHPvUhlL7msCiR7OGzMcPmVDAu+lzkhs6RQ1MjNkj8NJ66jMqPimW9R/iVdVZ14+OU5
- 7XwjoWrknPE1yBo7sUT2z8j0SclyjbjqRJlahnclHrlsfG7ZSZqFdO5eTylptrZjOC/Q
- VT9uCaJqLM5fMVLLwZaEm7oOp4i+zcJ+G2RD126wclXjA9SecQ8TjfwyDbp55HQ8jJIS
- 5512hHUBUzDegFp490+l2zbI+MPMpLoPXht53odKtLpvQro8cbX2sejRaKvJ511h4PXr
- e3dw==
+ bh=xX9YoSlLa+3ihvCOlNB2JgR3BNTq1PpQmJ+xcNb0lYg=;
+ b=ClK2y2OfxJm7n0NGGgdJ7jLJ7wByicD9GPynkVoRAtW0NXINqAwIdbYTHxilLH/xJW
+ dpHblgq5dWQQ23/OxG2IGpbcNnuO3nTxWdHbfcJHpkVQHvpp5tjuJXZesz/53+NYCx/K
+ 7DeTCOE1uRYQuboyzpkyzWITvrBcTuLhivlCnoynIqw+EQV7T/N1qFNGXrdI8dLMuqp4
+ hiNtdFcU1Hmr3KiIKaBQDB/gvKzRLIBBZQ/gPzsAkqi9iFBqqgHV27L2qSt2yxp9GEFM
+ BPd3AdO3t+uPNg9+DTO9uSW/7jfRnpfVL7HNXf+audKbZeJlmJq6oW54hv0CyvKf1Tuq
+ GToA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677832915;
+ d=1e100.net; s=20210112; t=1677832916;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fGLjFr3btl6TtpgGulCBgf0V4/Wyfa5gKk1cozGOLoE=;
- b=vXiY+hB2PaQVYHk6C0+vCnMRLFtwboFnGc8Vf0hH4Pek3Bc7rEJPl8sI93L20MVt0T
- s7ZH2VM3SWHwt26rcJKYm89wk2h+WYTgfXrPCu8pU9fgCYVhf2OeHUkOzRwPlrt+2R7U
- ChnHKLzaIEInONRVbWhHqjIMn/TxHTjKAL8FUc0yElKSJX8PjUi708Z+34Fra8hI5qeh
- 5gYCGJWjllGJull19rejFe8IMi5Yfarf7WTIXXA45ngC9ROH31uBU0nEwNHZDs5viwTG
- NjXtvnjBRKv2tDibY49MY35Ygp9JsNGrFo0RYRvnfeN6iVgmo6c9Ovh5lgMp88cBDQGv
- ac8Q==
-X-Gm-Message-State: AO0yUKUrhhCIXqc+0ARWAXREeBKyOHebxVC7IRVfcT4tc7jkzEXthfR9
- n9JeNIGxkhWvhawgeB237O6qGv366eqOQAJ2
-X-Google-Smtp-Source: AK7set+14tkEpA9JDNTQbo3XrPbLXncfatzqDkQqTirip0+znyoNu931pV0ZRDTSSKx6W82zpEuxQA==
-X-Received: by 2002:a05:6a21:6da9:b0:c7:73ad:1071 with SMTP id
- wl41-20020a056a216da900b000c773ad1071mr1919025pzb.14.1677832914987; 
- Fri, 03 Mar 2023 00:41:54 -0800 (PST)
+ bh=xX9YoSlLa+3ihvCOlNB2JgR3BNTq1PpQmJ+xcNb0lYg=;
+ b=EvWM2Q0PDmv3k30ZdlGrLDT7JC8SKSG70H/mMwEJafo+fGEGaWH49D95CCOXLC1d1w
+ sRBpbQ6nDUGfJCp6vSMiqHmgUq/RKX4VKqi9KXeRCiB5rC4IoE7NUiaikrbJ87tRK2PV
+ 3y+BF3GGueze5UjtKcnH8TvT56E8LYL/Kc/9Km6jfNSW9tI/nAQz+MRZBqf2shFiNQC1
+ 3OnnbunWtmB1Bmqzd7PVhSEjuZlrzNVluLBJaIgFR1skuwADnX6KyRiWebOktBX1iZD4
+ tj3JrNcNFlKmGwswoLM6PMEht3SeLWbgrlPQIc3ggb3Vt75RmTWdPBQlwnzoWihc/AvI
+ 3/tg==
+X-Gm-Message-State: AO0yUKWF/6hPRAG3R7KMY0ruYV8JCo0Mi+1rWJkvQ7QaGfKUf+maXl+R
+ iKm7kCY1J4YRVumcYuu44p/MNBVXl1BQzLoH
+X-Google-Smtp-Source: AK7set9+lqxqXkM3zJ2QMCLDUUa2AAoohVUAGFzHc2rxQIRrDs4zAIp1cCT27bUswx31wY5scLyEdA==
+X-Received: by 2002:a17:902:a985:b0:19e:7f80:4165 with SMTP id
+ bh5-20020a170902a98500b0019e7f804165mr1132240plb.17.1677832916136; 
+ Fri, 03 Mar 2023 00:41:56 -0800 (PST)
 Received: from localhost ([135.180.224.71]) by smtp.gmail.com with ESMTPSA id
- 25-20020aa79259000000b005d866d184b5sm1033003pfp.46.2023.03.03.00.41.54
+ ka12-20020a170903334c00b0019d1f42b00csm1002981plb.17.2023.03.03.00.41.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Mar 2023 00:41:54 -0800 (PST)
-Subject: [PULL 27/59] target/riscv: Use g_assert() for the predicate() NULL
- check
-Date: Fri,  3 Mar 2023 00:37:08 -0800
-Message-Id: <20230303083740.12817-28-palmer@rivosinc.com>
+ Fri, 03 Mar 2023 00:41:55 -0800 (PST)
+Subject: [PULL 28/59] target/riscv: gdbstub: Minor change for better
+ readability
+Date: Fri,  3 Mar 2023 00:37:09 -0800
+Message-Id: <20230303083740.12817-29-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230303083740.12817-1-palmer@rivosinc.com>
 References: <20230303083740.12817-1-palmer@rivosinc.com>
@@ -59,11 +58,12 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
  Bin Meng <bmeng@tinylab.org>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, 
  Palmer Dabbelt <palmer@rivosinc.com>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=palmer@rivosinc.com; helo=mail-pj1-x1030.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=palmer@rivosinc.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -82,50 +82,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 08:41:57 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 08:42:00 -0000
 
 From: Bin Meng <bmeng@tinylab.org>
 
-At present riscv_csrrw_check() checks the CSR predicate() against
-NULL and throws RISCV_EXCP_ILLEGAL_INST if it is NULL. But this is
-a pure software check, and has nothing to do with the emulation of
-the hardware behavior, thus it is inappropriate to return illegal
-instruction exception when software forgets to install the hook.
-
-Change to use g_assert() instead.
+Use a variable 'base_reg' to represent cs->gdb_num_regs so that
+the call to ricsv_gen_dynamic_vector_xml() can be placed in one
+single line for better readability.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Weiwei Li<liweiwei@iscas.ac.cn>
-Message-ID: <20230228104035.1879882-4-bmeng@tinylab.org>
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Message-ID: <20230228104035.1879882-5-bmeng@tinylab.org>
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- target/riscv/csr.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ target/riscv/gdbstub.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 4cc2c6370f..cfd7ffc5c2 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -3786,11 +3786,6 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
-         return RISCV_EXCP_ILLEGAL_INST;
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index e57372db38..704f3d6922 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -385,9 +385,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+                                  32, "riscv-32bit-fpu.xml", 0);
      }
- 
--    /* check predicate */
--    if (!csr_ops[csrno].predicate) {
--        return RISCV_EXCP_ILLEGAL_INST;
--    }
--
-     /* read / write check */
-     if (write_mask && read_only) {
-         return RISCV_EXCP_ILLEGAL_INST;
-@@ -3803,6 +3798,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
-      * illegal instruction exception should be triggered instead of virtual
-      * instruction exception. Hence this comes after the read / write check.
-      */
-+    g_assert(csr_ops[csrno].predicate != NULL);
-     RISCVException ret = csr_ops[csrno].predicate(env, csrno);
-     if (ret != RISCV_EXCP_NONE) {
-         return ret;
+     if (env->misa_ext & RVV) {
++        int base_reg = cs->gdb_num_regs;
+         gdb_register_coprocessor(cs, riscv_gdb_get_vector, riscv_gdb_set_vector,
+-                                 ricsv_gen_dynamic_vector_xml(cs,
+-                                                              cs->gdb_num_regs),
++                                 ricsv_gen_dynamic_vector_xml(cs, base_reg),
+                                  "riscv-vector.xml", 0);
+     }
+     switch (env->misa_mxl_max) {
 -- 
 2.39.2
 
