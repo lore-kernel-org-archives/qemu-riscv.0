@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pY0zB-00083G-DK
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:41:53 -0500
+	id 1pY0zC-00084T-VQ
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:41:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0z9-00080L-DG
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:51 -0500
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ id 1pY0zA-00082o-Jj
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:52 -0500
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0z7-0007wt-SB
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:51 -0500
-Received: by mail-pl1-x62b.google.com with SMTP id i5so2003100pla.2
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:41:49 -0800 (PST)
+ id 1pY0z8-0007sG-VK
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:52 -0500
+Received: by mail-pj1-x102f.google.com with SMTP id y2so1790853pjg.3
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:41:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832908;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832910;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=23+QsQv5VG4gpEQ2Er0+nLjEcRytljERqxt4Mubuags=;
- b=NaHdoBQCeDIKpyy42smmupeSjMD9nj3uzxkI04k2mRsxq+ekuWKgz9y2yhppmH+6HQ
- geKwetk1C1kDhfoHvdYRz6C7ogkU8RkruTAsII8hp6osf5WpLov1SaCgRUzyVMMgWabQ
- xNTDuTneSHOPL4YO1tkEtjkJ8EqLkHAFJ+HMgeVc0b25pb3h1NG7BzN+sLDmvOXcVVI0
- nUtgEsiX9Nng+UQZ4CO4B1eW4iHkXkyAQF4x3AuYadhMYkfvJGeMCVVpucuaIZEdAny/
- n/oJCCk/6Dy/wOelUqsMsDLb3qMEwEcZaTlT/z4snLYC4QRoeIoTM0UUKdqgIN5e8frx
- C0lA==
+ bh=dje010AVV2QeyT/FX8byAIDnwjz48KiaRt3orgmfVv8=;
+ b=AG2+x8MM7CaNbBIWYD8C0jVL5biCj8aqVwEYTfszSxWvSGn64u3+xU21AE/kV1ydKh
+ FdBSY9LsIaF6xYmfRaQHhZBGaXrKBsxjOG1vRs+41XbfB+kztEyaN3vkSPqpnvPRYKLW
+ FVxdAXyuFyiL6iYU7N4RwFKbktNnHe0A7IAbiZHbQ72mNC3qU7IB2Z1C50PPmy6ABDMh
+ ON2l56DsXYvyU0OuvLiXbEvOfAEHVHSynmis5P4Y1TeoZ9fBwXy34uiUXvbb3XuxtlLU
+ crh64Vq0+692e6Y04mbs0ZXcWSfyNlJaAJ2r/GZXXMhtlD/Pp/urlhlQmrvw7fEwhxV4
+ 4RqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677832908;
+ d=1e100.net; s=20210112; t=1677832910;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=23+QsQv5VG4gpEQ2Er0+nLjEcRytljERqxt4Mubuags=;
- b=VtSS+dOQ9DyKnrA2YdM4K3M2FgVovv3v49R3Cunz8MOxISYDp7Bp9L30bv+R6lZxm3
- CGRWZH7nNKsEgipHQZlevr5yaTHatUjyHlb+pCdoiVmhVoUTlNwEDN5SJDG7dTBAIs/h
- SFUrvZJWgTyIsoQWKrDINN/lINq+Ptfme0czG3Fyfi+ZSCWCzEDVMR/4kjQtlD7sc7H4
- qm7A2aKj1Xj0rH7HWQ25Hdpqncq7ANL4TDTElMwCaJs98dBTv4zG+KwO68UvxNxep8qE
- GR3u7vU/QaK4g2Ils9iJ3iihDee3eIrnR5SRaEybyZT2dznCX7fIflLhftxPJ6t6AUNA
- Z1jQ==
-X-Gm-Message-State: AO0yUKW/nNMVEjHVzUqqM/9uyg/xDw+Zlhbj4nOhct0Mq6IceVtg0ZWr
- 1EihVknU/F3KaWZgzCZMU4ffCW6t8dlTxc3/
-X-Google-Smtp-Source: AK7set+lnc02RtELGKYYyvLZyyFybOd7+lDAm4ufW6idrl7dpNy/Zj4QFJM7DmaPDTtAvI/Z7EUrow==
-X-Received: by 2002:a17:90b:4c42:b0:22c:d44:5669 with SMTP id
- np2-20020a17090b4c4200b0022c0d445669mr847264pjb.22.1677832908342; 
- Fri, 03 Mar 2023 00:41:48 -0800 (PST)
+ bh=dje010AVV2QeyT/FX8byAIDnwjz48KiaRt3orgmfVv8=;
+ b=6C/Funo4Eo3XQX3a8BZoRvgYM6Acc0a0YSJ7ISBVl2xPPVlIbqWnf9+Zav07oBwYEW
+ tV9ar8A79zTCLwhz8UKPTuNZlWoWrlmIxiLYp60GMA4C/2OX53CY9opl7RfyquPXgBMc
+ 1qIwuriku2PkFwhM7xfJqZuovoQyZRwzLGDYj9Geuoj/knAzXIgUDVNEbOXTlsnP+ti4
+ 9Wxf/lqdHTyfLnv+YQE+XEx+4AnpJdtWW7zj5GurFm8ABUDz6xjHyBlszpBlqtba/U+5
+ F5Fap5+zx5gNgYRU6YcU3tNvquvzXP8YVja00vo1oTt5oy5l3Qe1ubm5m4AXYgZ9PDxb
+ vAnQ==
+X-Gm-Message-State: AO0yUKUm9+yoCpsQ5smc5gcYUU7+dI0+aWB4/olUstrgZ/c8XOlZfPIG
+ roNJCU4wjqb53pJPvjoM+s+QyJlWVtO8r/OL
+X-Google-Smtp-Source: AK7set/c8y9Vn/ZPgDHxB+vMXOhGvlNK/LN/FVUs8xh9ZoC3qAzRJQNbzly5tDtbhS3KBFA5Wi2stA==
+X-Received: by 2002:a05:6a20:c510:b0:cc:ac05:88f7 with SMTP id
+ gm16-20020a056a20c51000b000ccac0588f7mr1111818pzb.34.1677832909947; 
+ Fri, 03 Mar 2023 00:41:49 -0800 (PST)
 Received: from localhost ([135.180.224.71]) by smtp.gmail.com with ESMTPSA id
- kj16-20020a17090306d000b0019a97f180fcsm982463plb.37.2023.03.03.00.41.47
+ m8-20020aa79008000000b005dae7d1b61asm1022277pfo.154.2023.03.03.00.41.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Mar 2023 00:41:47 -0800 (PST)
-Subject: [PULL 22/59] target/riscv: Fix check for vector load/store
- instructions when EEW=64
-Date: Fri,  3 Mar 2023 00:37:03 -0800
-Message-Id: <20230303083740.12817-23-palmer@rivosinc.com>
+ Fri, 03 Mar 2023 00:41:49 -0800 (PST)
+Subject: [PULL 23/59] target/riscv: Simplify check for EEW = 64 in
+ trans_rvv.c.inc
+Date: Fri,  3 Mar 2023 00:37:04 -0800
+Message-Id: <20230303083740.12817-24-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230303083740.12817-1-palmer@rivosinc.com>
 References: <20230303083740.12817-1-palmer@rivosinc.com>
@@ -62,8 +62,8 @@ Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
  Palmer Dabbelt <palmer@rivosinc.com>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=palmer@rivosinc.com; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=palmer@rivosinc.com; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -82,45 +82,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 08:41:51 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 08:41:52 -0000
 
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 
-The V extension supports all vector load and store instructions except
-the V extension does not support EEW=64 for index values when XLEN=32.
-(Section 18.3)
+Only V extension supports EEW = 64 in these cases: Zve64* extensions don't
+support EEW = 64 in these cases as commented before the check.
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Message-ID: <20230215020539.4788-13-liweiwei@iscas.ac.cn>
+Message-ID: <20230215020539.4788-14-liweiwei@iscas.ac.cn>
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 9b2c5c9ac0..5dbdce073b 100644
+index 5dbdce073b..fc0d0d60e8 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -287,13 +287,12 @@ static bool vext_check_st_index(DisasContext *s, int vd, int vs2, int nf,
-                require_nf(vd, nf, s->lmul);
- 
-     /*
--     * All Zve* extensions support all vector load and store instructions,
--     * except Zve64* extensions do not support EEW=64 for index values
--     * when XLEN=32. (Section 18.2)
-+     * V extension supports all vector load and store instructions,
-+     * except V extension does not support EEW=64 for index values
-+     * when XLEN=32. (Section 18.3)
+@@ -1998,8 +1998,7 @@ static bool vmulh_vv_check(DisasContext *s, arg_rmrr *a)
+      * are not included for EEW=64 in Zve64*. (Section 18.2)
       */
-     if (get_xl(s) == MXL_RV32) {
--        ret &= (!has_ext(s, RVV) &&
--                s->cfg_ptr->ext_zve64f ? eew != MO_64 : true);
-+        ret &= (eew != MO_64);
-     }
+     return opivv_check(s, a) &&
+-           (!has_ext(s, RVV) &&
+-            s->cfg_ptr->ext_zve64f ? s->sew != MO_64 : true);
++           (!has_ext(s, RVV) ? s->sew != MO_64 : true);
+ }
  
-     return ret;
+ static bool vmulh_vx_check(DisasContext *s, arg_rmrr *a)
+@@ -2012,8 +2011,7 @@ static bool vmulh_vx_check(DisasContext *s, arg_rmrr *a)
+      * are not included for EEW=64 in Zve64*. (Section 18.2)
+      */
+     return opivx_check(s, a) &&
+-           (!has_ext(s, RVV) &&
+-            s->cfg_ptr->ext_zve64f ? s->sew != MO_64 : true);
++           (!has_ext(s, RVV) ? s->sew != MO_64 : true);
+ }
+ 
+ GEN_OPIVV_GVEC_TRANS(vmul_vv,  mul)
+@@ -2230,8 +2228,7 @@ static bool vsmul_vv_check(DisasContext *s, arg_rmrr *a)
+      * for EEW=64 in Zve64*. (Section 18.2)
+      */
+     return opivv_check(s, a) &&
+-           (!has_ext(s, RVV) &&
+-            s->cfg_ptr->ext_zve64f ? s->sew != MO_64 : true);
++           (!has_ext(s, RVV) ? s->sew != MO_64 : true);
+ }
+ 
+ static bool vsmul_vx_check(DisasContext *s, arg_rmrr *a)
+@@ -2242,8 +2239,7 @@ static bool vsmul_vx_check(DisasContext *s, arg_rmrr *a)
+      * for EEW=64 in Zve64*. (Section 18.2)
+      */
+     return opivx_check(s, a) &&
+-           (!has_ext(s, RVV) &&
+-            s->cfg_ptr->ext_zve64f ? s->sew != MO_64 : true);
++           (!has_ext(s, RVV) ? s->sew != MO_64 : true);
+ }
+ 
+ GEN_OPIVV_TRANS(vsmul_vv, vsmul_vv_check)
 -- 
 2.39.2
 
