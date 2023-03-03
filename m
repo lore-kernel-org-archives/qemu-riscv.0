@@ -1,77 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pY0yx-0007Kb-Ip
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:41:39 -0500
+	id 1pY0z0-0007bJ-QM
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:41:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0yt-000794-DX
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:35 -0500
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ id 1pY0yx-0007Kx-Nb
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:39 -0500
+Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0yr-0007p0-3E
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:34 -0500
-Received: by mail-pf1-x42b.google.com with SMTP id fd25so1101257pfb.1
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:41:32 -0800 (PST)
+ id 1pY0yv-0007mo-Ao
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:39 -0500
+Received: by mail-pj1-x102b.google.com with SMTP id
+ p3-20020a17090ad30300b0023a1cd5065fso1615615pju.0
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:41:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832891;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832896;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ihpb4HVM2K+uGSZ8ovXkDuhXMAKAlLyH9A3iHU/y+Eg=;
- b=O+udFM3sKy7NeGyBZFyq2/7yQKT5QP/XF6DJcoM9ukpCQmNK3L/FmC57GGhg7+GuzU
- 0+Am+M/0FzidyNo1dv3kqwBZtGG/iL6D4Al8o++in6G2Hu/I9fRM/eJfupXiDJ0ZVGPP
- +CWtYOdQb/Tc28wifW9zqVJc65IZwKq/yTYzvUWyHEF1wiCKq92iApicEgyabPi2Mbka
- ayHrFzEskxDR3tfvsv23nxpY9gmGBQOko16oLUUeIxFt8p4eBxAMs5TR67233SRvPJiH
- t5cj1Oon1iT+NdUYWbTioX+crNyIXXxTr+moQmOixGzcBiqWFbEVDQipJkdF2Oij5/Sx
- OPkQ==
+ bh=1NW+NIexrpPmdGr0YETGUz1SO+EPDDsXBDOKSAL+94I=;
+ b=7whNdQVEyKS45V+NcQrgr3c/mC2WV7+Tp9VBZL92YOqkvvq+b0Ar1/UHC1rBaXwvny
+ GPM+XDEqRYpqBzNdP9/g1xjH4TXg1j7Q/B1bQ0rIPDhGbxRSCJpczhzI/8ijxr2//Trm
+ MI89iAlOSHz3FylA5mw3JQtN35H/UP6WHVPAVQk5ZNpJdnYenspFErexSASQjFt7jhbx
+ YEM0BWJFsMmbfXmBOIR/cLQjE1bXj6p8DD4o4fvgP5m6iAr1iBPV7QD2QaFbMbXgMZDG
+ 44gZxIkdLcyyPSoy6/SYDushRoXaeAfGoGl4CcpmU+iw9W78Jc/YiXOjbe8uEqzv8JYM
+ jofw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677832891;
+ d=1e100.net; s=20210112; t=1677832896;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ihpb4HVM2K+uGSZ8ovXkDuhXMAKAlLyH9A3iHU/y+Eg=;
- b=xJ6IeyVeAHQa8JMHU1jE3B9B8FOpv8DL270Noej39qN4AA+FKeHKRSxq6W+nEVrW1h
- LV6SCEuZIvdRq2Mdor8uW5rfr1Tsv8LEyPBFohTkNN08YX+H8sxIq7U7YESuCee1nW/r
- WFjSt1k9ET6KLjzEWG6P2+XFfVIoCb7/Aykcx+6BzcoBp7JH1qknge9FLzreta7j2gjW
- 987SobUYVoA4p0HBzGeTkE53vr5yym0FTV+TjzuEoSZyX66a5l3KoGYEK3RSKqfhAdHc
- ePzwWh+MwSwedXJ7OFNWfWz/Wyidh4vwEsj6jsDEARRhBGcoAoiR5onhn2UirhmIjril
- Fg1Q==
-X-Gm-Message-State: AO0yUKV288C09Hw2J18PQXqDlYmlI+DsREzD4dgOXeosBFu7m3XbywoO
- mNJd7waOsBJqGmtNRLB/owzpjzO3YgZy36bJ
-X-Google-Smtp-Source: AK7set8iKpkV6PKnNxPs7PI+5oNnRxdOTiTQbXtqdMqKI3O4cw7GwOnkqoQPObdy6RDo/tkqFZm81w==
-X-Received: by 2002:a62:6487:0:b0:594:26a7:cbd2 with SMTP id
- y129-20020a626487000000b0059426a7cbd2mr890934pfb.8.1677832891150; 
- Fri, 03 Mar 2023 00:41:31 -0800 (PST)
+ bh=1NW+NIexrpPmdGr0YETGUz1SO+EPDDsXBDOKSAL+94I=;
+ b=LSQQFiRtJSVoVweujtJtY3TkclwdnLoAjoYFaLpwSDvrACF0uNNnvNhWJSYkcV4fmw
+ 4kTzn6MIgb5esqsOKOzX3dL/zSblpsrwf7WH0ZjVckbFl7jk24RmsHHVX+U7xpwYaYMp
+ hjNmnDXG13W76q0Kx/9oZ9ZZR4Nz6H3j/PbCilWJAffuPv3wxzBS5/NI8enqaF04CT4D
+ pM3ovdhgSHaA5PA8G8snAUTgNBNJdFYH2SWI0OOsqH6WSHv/ZW3XLkI4wwAnLaHsFzBP
+ 1Co2fDk6/FQ+HMnT/KU0Y5H2u9kiV9I8bwrA8yVbDefAIya8JMnMsVQe7EDiEceOURK6
+ vZfQ==
+X-Gm-Message-State: AO0yUKVa1eyDrr1P5y+HvU6uHJrXtAa3OmN5TWJHeu8d/DibUBhaeY1t
+ 7f/m7pghPWJthKUBWb8yHWiVm0fyfy8xtpb3
+X-Google-Smtp-Source: AK7set9Jb7TQ/PJn/mIBx3TkF6CuY6HXF9O74HvUxpLpeioUndaD5ZuRNc8Xl4I9mulPBumrRxh6LQ==
+X-Received: by 2002:a17:90b:38c3:b0:236:704d:ab8c with SMTP id
+ nn3-20020a17090b38c300b00236704dab8cmr900526pjb.26.1677832896142; 
+ Fri, 03 Mar 2023 00:41:36 -0800 (PST)
 Received: from localhost ([135.180.224.71]) by smtp.gmail.com with ESMTPSA id
- e21-20020aa78255000000b005a8dcd32851sm1085526pfn.11.2023.03.03.00.41.30
+ nl2-20020a17090b384200b002311dbb2bc5sm2853499pjb.45.2023.03.03.00.41.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Mar 2023 00:41:30 -0800 (PST)
-Subject: [PULL 08/59] hw/riscv/virt.c: do not use RISCV_FEATURE_MMU in
- create_fdt_socket_cpus()
-Date: Fri,  3 Mar 2023 00:36:49 -0800
-Message-Id: <20230303083740.12817-9-palmer@rivosinc.com>
+ Fri, 03 Mar 2023 00:41:35 -0800 (PST)
+Subject: [PULL 12/59] target/riscv: Fix the relationship between Zhinxmin and
+ Zhinx
+Date: Fri,  3 Mar 2023 00:36:53 -0800
+Message-Id: <20230303083740.12817-13-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230303083740.12817-1-palmer@rivosinc.com>
 References: <20230303083740.12817-1-palmer@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
+ Weiwei Li <liweiwei@iscas.ac.cn>, Junqiang Wang <wangjunqiang@iscas.ac.cn>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, Bin Meng <bmeng@tinylab.org>, 
- Andrew Jones <ajones@ventanamicro.com>,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, 
  Palmer Dabbelt <palmer@rivosinc.com>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=palmer@rivosinc.com; helo=mail-pf1-x42b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
+ envelope-from=palmer@rivosinc.com; helo=mail-pj1-x102b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,53 +83,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 08:41:36 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 08:41:40 -0000
 
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
 
-Read cpu_ptr->cfg.mmu directly. As a bonus, use cpu_ptr in
-riscv_isa_string().
+Just like zfh and zfhmin, Zhinxmin is part of Zhinx so Zhinxmin
+will be enabled when Zhinx is enabled.
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Reviewed-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Message-ID: <20230222185205.355361-9-dbarboza@ventanamicro.com>
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Message-ID: <20230215020539.4788-3-liweiwei@iscas.ac.cn>
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- hw/riscv/virt.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ target/riscv/cpu.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 86c4adc0c9..49f2c157f7 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -232,20 +232,21 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
-     bool is_32_bit = riscv_is_32bit(&s->soc[0]);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index a717f5d995..dcd85f7f27 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -754,8 +754,11 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+     }
  
-     for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
-+        RISCVCPU *cpu_ptr = &s->soc[socket].harts[cpu];
+     /* Set the ISA extensions, checks should have happened above */
+-    if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
+-        cpu->cfg.ext_zhinxmin) {
++    if (cpu->cfg.ext_zhinx) {
++        cpu->cfg.ext_zhinxmin = true;
++    }
 +
-         cpu_phandle = (*phandle)++;
++    if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinxmin) {
+         cpu->cfg.ext_zfinx = true;
+     }
  
-         cpu_name = g_strdup_printf("/cpus/cpu@%d",
-             s->soc[socket].hartid_base + cpu);
-         qemu_fdt_add_subnode(ms->fdt, cpu_name);
--        if (riscv_feature(&s->soc[socket].harts[cpu].env,
--                          RISCV_FEATURE_MMU)) {
-+        if (cpu_ptr->cfg.mmu) {
-             qemu_fdt_setprop_string(ms->fdt, cpu_name, "mmu-type",
-                                     (is_32_bit) ? "riscv,sv32" : "riscv,sv48");
-         } else {
-             qemu_fdt_setprop_string(ms->fdt, cpu_name, "mmu-type",
-                                     "riscv,none");
-         }
--        name = riscv_isa_string(&s->soc[socket].harts[cpu]);
-+        name = riscv_isa_string(cpu_ptr);
-         qemu_fdt_setprop_string(ms->fdt, cpu_name, "riscv,isa", name);
-         g_free(name);
-         qemu_fdt_setprop_string(ms->fdt, cpu_name, "compatible", "riscv");
 -- 
 2.39.2
 
