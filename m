@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pY9Aa-0003kc-Uk
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 12:26:12 -0500
+	id 1pY9C9-0001ko-Ei
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 12:27:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1pY9AZ-0003dD-TF
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 12:26:11 -0500
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ id 1pY9C7-0001dm-E5
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 12:27:47 -0500
+Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1pY9AX-0006IT-56
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 12:26:11 -0500
-Received: by mail-pl1-x630.google.com with SMTP id i10so3382204plr.9
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 09:26:08 -0800 (PST)
+ id 1pY9C4-0006aQ-Ae
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 12:27:47 -0500
+Received: by mail-pg1-x532.google.com with SMTP id s17so1932038pgv.4
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 09:27:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1677864367;
+ d=linaro.org; s=google; t=1677864463;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=S9uqBI1Zh26IHskMoPNGumsZsFAQbQinLDpFlF6Dp0I=;
- b=d38dpnrs8WqNkins1f1QJfqvfcaUlzagzrHZK99psbsHrU1usZWagONjDa/vCx+vrI
- Z3qpWJVYY3AQn38XwcoN/khEyY2B+8hJXcTGOccalhlpR5GbTcIr0qysdk34py5yEzHR
- yjkMw+bYmX4+sQOT5Hs7gRpbEyHN4UbSy+QlKPw0uWbSvPRIFOXWlEuxoxmPQkVIYXDR
- YZAk26vkAjOG1ETA2I+KtU0Dtag6UNe2IqmHJYMH2I82Vh3X0TYoqRRP8L/pBkL2g+Iv
- VtH9QRsLicTBXpbwLWGE6RlXDRTAV7/kzCKrx08WJJOhxLwoldxlldGWeuNuo1OOrWB2
- 7UYQ==
+ bh=8LO3H0xihPu/J7zCAeMi7XJn5vVG/43m/HalvuEQr3o=;
+ b=dqe9Wr/0rmE64Xh4Yh88Z3e9cpBEwQtvyuIgUVKevqct1CNJD97nClsdlKWVWM5bqL
+ AMy2A3k3BhQTXw8Xd/mcdQZmkedJIPma18eTQITDXR2UrL/++lwc3xrn3xjv8fVQSJQl
+ PGfz2yV4R+7+xqFLNpHCCK6YwTcMe+q7Np4Ul7XqQRmgjiBkDaYAycIIb0EcoP2tNC9F
+ zKTDZj5OFsX+8cJJ6Dz9hFHL8nyEjfxnFSHCiKEakc6u0f6Rfu/sGwaKWIC+e2FFzGnL
+ pXYoM90xKp7I5rZ1qNXNbhkFwxfN1wZJqRrQxO5JfIpvV9V3E6rHFfe9GL/m3HhuhWrO
+ Zj2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677864367;
+ d=1e100.net; s=20210112; t=1677864463;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=S9uqBI1Zh26IHskMoPNGumsZsFAQbQinLDpFlF6Dp0I=;
- b=u+Ew22YzSTjgNEWd/c9LVq8RyCaA6ngLAL1G5EGIpzlDusKy+cJAJgczq/SC/YlhnF
- 7xuc5SBC9mBEQRrqY6C9K33wHm6r0EDbE90xBdLCYsVPWU3j+rKk6tZiqAg/w8ESGRG+
- NzL9x2aibckRLvBqBD/AhuRmg/yV6qCz1y1UZTGFIZ7cSkmXK/xV8DvjA97CGhHOHdsB
- XqEWABkNhd3PXpVYZ1wyBz3RATrPXjMKzK8AG4Sz0tcOY2iVu4jivs+BxKlzUKJsOhn/
- DwHihkBP/xSVnAGeLoKpTHleZWJdI7cE4Jux6OS+KtBC1redWnQCu/9lLOkfw7d9K7L+
- A1LA==
-X-Gm-Message-State: AO0yUKU+GQ5nxPkiSzMRS7zQ81D0IE+Ff/FAGTXqPY0JgWPfKwaAa2Ks
- PNF4yl8YvOob+WVHd6El8y9xWPzAOLOfttICgr3bUw==
-X-Google-Smtp-Source: AK7set9TIjiluVUzQQTFuowHaN6khgCIOpsh96YtGZrkLXaHfRzJ2jmkYgtKgjKdIe5In6ubQKFqIlUJTx6II/Evbm4=
-X-Received: by 2002:a17:903:2581:b0:19a:8bc7:d814 with SMTP id
- jb1-20020a170903258100b0019a8bc7d814mr959880plb.13.1677864367594; Fri, 03 Mar
- 2023 09:26:07 -0800 (PST)
+ bh=8LO3H0xihPu/J7zCAeMi7XJn5vVG/43m/HalvuEQr3o=;
+ b=QauJkizsXsoDMVu6GJwnOsmiX8LesU7KtjPTPdcM09cw4b2YFlk8z8H+/DIRW5HYfP
+ MYiSuHSCNTpoSGOKclNqdnEr99t9zyWnlN0KCAB04A/OGkV5gY79bitMi0clO/SiEDGl
+ IavNX+E2SwWCtxHkAgFWaoXyZD8J8HePcfgB3Wqj9Bz8IJvUd5IyIomRJ6M2rs6BlnCW
+ kmRUmo770Xqr+FU51XxAKP0lxTdKTsrC/US82O12nwwCT51yeMHB3w9ziX+Y9QFGuotf
+ /TngmWnn0PR0RTV+bBBOHKGV6YVFwfs5JoFrZbMcq4TC0JbqrJjl/E/XxGa29UZomVsO
+ cWlQ==
+X-Gm-Message-State: AO0yUKX3G+jnasLajLSFe7D9N5vART0NAJikM7hKYh2PQ4tBme0dWOUh
+ nQmAGQDMMTwlKKa0ADAO9R/SgYMBOYVUb4AUZRa5eg==
+X-Google-Smtp-Source: AK7set8RtgODdpxMw0WfgMvh8Pc/ic98gX8Ayo6k4GS8+spLKyKEnHqUHKrKYeujhwqLaNk7opMzTRtE8tnRzPzCNoc=
+X-Received: by 2002:a62:ce4e:0:b0:5a9:c22e:7764 with SMTP id
+ y75-20020a62ce4e000000b005a9c22e7764mr1200776pfg.5.1677864462740; Fri, 03 Mar
+ 2023 09:27:42 -0800 (PST)
 MIME-Version: 1.0
 References: <20230227052505.352889-1-richard.henderson@linaro.org>
- <20230227052505.352889-3-richard.henderson@linaro.org>
-In-Reply-To: <20230227052505.352889-3-richard.henderson@linaro.org>
+ <20230227052505.352889-4-richard.henderson@linaro.org>
+In-Reply-To: <20230227052505.352889-4-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 3 Mar 2023 17:25:56 +0000
-Message-ID: <CAFEAcA-LviR-aaG7XvmMOUXY8xhcZY-u6vUaFjDMr=C-UBPJxw@mail.gmail.com>
-Subject: Re: [PATCH v2 02/76] accel/tcg: Remove translator_loop_temp_check
+Date: Fri, 3 Mar 2023 17:27:31 +0000
+Message-ID: <CAFEAcA9S1kr8rJwgM=qxoSouBhQ+q_cHoUVmZLFBtuTd3YqHGA@mail.gmail.com>
+Subject: Re: [PATCH v2 03/76] target/alpha: Drop tcg_temp_free
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, 
@@ -57,8 +57,8 @@ Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
  gaosong@loongson.cn, jiaxun.yang@flygoat.com, tsimpson@quicinc.com, 
  ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=peter.maydell@linaro.org; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
+ envelope-from=peter.maydell@linaro.org; helo=mail-pg1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,14 +78,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 17:26:12 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 17:27:47 -0000
 
-On Mon, 27 Feb 2023 at 05:26, Richard Henderson
+On Mon, 27 Feb 2023 at 05:27, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> Finish removing tcg temp free accounting interfaces.
+> Translators are no longer required to free tcg temporaries.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
 
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
