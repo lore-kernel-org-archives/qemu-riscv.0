@@ -1,55 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pY0z6-0007t9-Q6
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:41:48 -0500
+	id 1pY0z8-0007xM-1b
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:41:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0z3-0007nn-Dg
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:45 -0500
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1pY0z6-0007u1-Ty
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:48 -0500
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0z1-0007tn-Jh
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:45 -0500
-Received: by mail-pf1-x433.google.com with SMTP id c10so1054684pfv.13
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:41:43 -0800 (PST)
+ id 1pY0z5-0007lv-38
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:48 -0500
+Received: by mail-pl1-x62a.google.com with SMTP id a2so1995129plm.4
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:41:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832902;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832906;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AS9hiZl0QHmELtD5efmoWyb9Kuen5W+Uc8UohPs5jS8=;
- b=GF0VGGHrbOAFtMFLpLS3sPoBSIth7DzMVNbrkFkq4UN6HdCg5vlnwzl0hPmk6nNaiI
- sEgLzKpKeYJ87/HGYkOznUtKvhiwK0hsHyZVHqjAzw4YJBJHJ7wTZdLrEpA0yqtFWcJm
- todytLF8Tg3aHdte8fgiKz5ToaWEn7E/hREHLIJWWaYJltrRiMmcamva+Nz0Hb1v9dyU
- no4R488lqLKuG7wCqj4T/u/kzCJhpVjCfHDh1N7x7+kXyrIdCxy6vc4oCz+OvvrcJGKg
- JcRKA6H7e2PnTDJqUo+OudhpdO3rwQSJE+/qTqrAmAACJLx6OMai7F+gWBd6uRlQ7mRO
- HwXA==
+ bh=KdFCJsN+s5zjRcT/dEPni1wa/6tfViaP6/n8KeEaxj8=;
+ b=5C922TWYXQHorRO+YWNw8nwr3Rt5nZD8a1iJV1VetrbWr52kRsCnu5tlp59pTu+IG7
+ uw7fcHPPqOJMzHh2Vnbp2sHsDAXwdfxDDQXLBQcLGtjAkONIkpe/mFcpp2yg0UGlcK9s
+ u6/0Twhv4P+TyVdlSKwYUpQx+vas7PvuDdVxvWSVKRadsMQHYYakCzFwLdQfm1ETjhyo
+ k0v94BmpfSqFiUe3u0ndV/7CwFF68nsiipDwO5010vaXpkWMIj3NTJtqO6Ff2H6k+QGu
+ XAkXngahzS7rAO7nB2E9BxeKxdQFJWn/N+06Rzs2lrqDIC9EOw/OH5LsZyZpz5d1+1zA
+ Bn1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677832902;
+ d=1e100.net; s=20210112; t=1677832906;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AS9hiZl0QHmELtD5efmoWyb9Kuen5W+Uc8UohPs5jS8=;
- b=fv/TRsxYE6O/o5WgDuejsB+INWMj5pg/+zH/I+QYM1mncJ8KIsPeKaRnmkBms9HBS4
- HMZvNaZ6GUbRa1VpFdtlT4Ksx0Zrh7VcQqohgWNxPeLAlAo+5rrPOZMyVTheXNoKGwWt
- u0BcrDaSQwfREH18SkDDAOYygzhIw2iJCaCyGXgQkMeFJQjdmugyv/7TWOu0wi+Q2Y1J
- fiC4IQABRl6vbN0ot/OSzhe6KIo7eYOQgu0TX9N6/b3l3UFYsnBWR1xtNyKsyDNeXQRN
- qb0asnX0zob/ljHsdwuf09wcAmIJj8TVZdTag/eNVtyHHeJXzriEx6SEBeW1brbDPRtF
- /zpg==
-X-Gm-Message-State: AO0yUKVUJyDXJEqw2nLssoOmMKN81wsZyPjqfNMi0M0YGtAAzryDqWJ5
- V/HtNU4l4itak/06daWJSo/pTpv80yauITRJ
-X-Google-Smtp-Source: AK7set+GF8ylGbOcPgnGkkHo3QO5dUA4Xnu6zzcp6QZaS9evXMYyK+MdJviZ5GVxj9/NswQFP7CDrQ==
-X-Received: by 2002:aa7:948e:0:b0:5a8:b911:a264 with SMTP id
- z14-20020aa7948e000000b005a8b911a264mr1281302pfk.28.1677832902043; 
- Fri, 03 Mar 2023 00:41:42 -0800 (PST)
+ bh=KdFCJsN+s5zjRcT/dEPni1wa/6tfViaP6/n8KeEaxj8=;
+ b=s1pfUQfhrHCaDOHMpnfu8tCZi9c0woAfo2peBLMrnA4N2KNqA+r3iDtXDQWeud9a2e
+ JWkKUOFpXHSyn9cG4HW9pDqpmltklrVGC1gnk/WX80Vex5eyeXsdUPthn3yCwQLS05dY
+ NwHLoq1aAKYTVf4yNKpvhUS0Eea5louzYoCJkFqw+Z+468UIPCA9U41wOhXDLjRVSj5m
+ 6x1PbbLyFyVZwH7EjF6tiIiQVoxR5mrU1o9nXPjo4yy12oOwL5rXrI2mtDuPuDUbVaXc
+ fF2pvbcCM0npxG3s2nyBGJCR9vfFx6rCJfA8jZHWIBUfIofH9Vhq5g00Mjp6tZKHDtyG
+ 5h1Q==
+X-Gm-Message-State: AO0yUKWr1f6bqAsnk4UpHWd9CJTkMg1nt413GLRlJitgGQZ00EcKfvyh
+ Vxoc0ZzISVYzMSPPM9AXZgavpIHhmfwyuMoX
+X-Google-Smtp-Source: AK7set9X1qlfIfAJQdX0eYTur1VEDqACYgF3u74r8EfCGJ4xFW/PH0Sg7MPz/hoQRnjXVgNLO+uxOw==
+X-Received: by 2002:a17:902:e546:b0:19a:7a02:7954 with SMTP id
+ n6-20020a170902e54600b0019a7a027954mr1548724plf.24.1677832905988; 
+ Fri, 03 Mar 2023 00:41:45 -0800 (PST)
 Received: from localhost ([135.180.224.71]) by smtp.gmail.com with ESMTPSA id
- f6-20020aa782c6000000b005d6dff9bbecsm1036415pfn.62.2023.03.03.00.41.41
+ lc14-20020a170902fa8e00b0019aca830869sm967906plb.238.2023.03.03.00.41.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Mar 2023 00:41:41 -0800 (PST)
-Subject: [PULL 17/59] target/riscv: Indent fixes in cpu.c
-Date: Fri,  3 Mar 2023 00:36:58 -0800
-Message-Id: <20230303083740.12817-18-palmer@rivosinc.com>
+ Fri, 03 Mar 2023 00:41:45 -0800 (PST)
+Subject: [PULL 20/59] target/riscv: Remove redundunt check for zve32f and
+ zve64f
+Date: Fri,  3 Mar 2023 00:37:01 -0800
+Message-Id: <20230303083740.12817-21-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230303083740.12817-1-palmer@rivosinc.com>
 References: <20230303083740.12817-1-palmer@rivosinc.com>
@@ -61,8 +62,8 @@ Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
  Palmer Dabbelt <palmer@rivosinc.com>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=palmer@rivosinc.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=palmer@rivosinc.com; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -81,96 +82,304 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 08:41:45 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 08:41:49 -0000
 
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 
-Fix indent problems in vector related check.
+Require_zve32/64f have been overlapped by require_rvf/require_scale_rvf.
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Message-ID: <20230215020539.4788-8-liweiwei@iscas.ac.cn>
+Message-ID: <20230215020539.4788-11-liweiwei@iscas.ac.cn>
+[Palmer: commit text]
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- target/riscv/cpu.c | 44 ++++++++++++++++++++++----------------------
- 1 file changed, 22 insertions(+), 22 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 128 ++++--------------------
+ 1 file changed, 21 insertions(+), 107 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 49ac368662..9b8747ab15 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -798,7 +798,7 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         }
-         if (cpu->cfg.ext_f) {
-             error_setg(errp,
--                "Zfinx cannot be supported together with F extension");
-+                       "Zfinx cannot be supported together with F extension");
-             return;
-         }
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 9b2711b94b..9053759546 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -66,50 +66,6 @@ static bool require_scale_rvf(DisasContext *s)
      }
-@@ -861,40 +861,40 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         ext |= RVV;
-         if (!is_power_of_2(cpu->cfg.vlen)) {
-             error_setg(errp,
--                    "Vector extension VLEN must be power of 2");
-+                       "Vector extension VLEN must be power of 2");
-             return;
-         }
-         if (cpu->cfg.vlen > RV_VLEN_MAX || cpu->cfg.vlen < 128) {
-             error_setg(errp,
--                    "Vector extension implementation only supports VLEN "
--                    "in the range [128, %d]", RV_VLEN_MAX);
-+                       "Vector extension implementation only supports VLEN "
-+                       "in the range [128, %d]", RV_VLEN_MAX);
-             return;
-         }
-         if (!is_power_of_2(cpu->cfg.elen)) {
-             error_setg(errp,
--                    "Vector extension ELEN must be power of 2");
-+                       "Vector extension ELEN must be power of 2");
-             return;
-         }
--    if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
--        error_setg(errp,
--                "Vector extension implementation only supports ELEN "
--                "in the range [8, 64]");
--        return;
+ }
+ 
+-static bool require_zve32f(DisasContext *s)
+-{
+-    /* RVV + Zve32f = RVV. */
+-    if (has_ext(s, RVV)) {
+-        return true;
 -    }
--    if (cpu->cfg.vext_spec) {
--        if (!g_strcmp0(cpu->cfg.vext_spec, "v1.0")) {
--            vext_version = VEXT_VERSION_1_00_0;
--        } else {
-+        if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
-             error_setg(errp,
--                   "Unsupported vector spec version '%s'",
--                   cpu->cfg.vext_spec);
-+                       "Vector extension implementation only supports ELEN "
-+                       "in the range [8, 64]");
-             return;
-         }
--    } else {
--        qemu_log("vector version is not specified, "
--                 "use the default value v1.0\n");
+-
+-    /* Zve32f doesn't support FP64. (Section 18.2) */
+-    return s->cfg_ptr->ext_zve32f ? s->sew <= MO_32 : true;
+-}
+-
+-static bool require_scale_zve32f(DisasContext *s)
+-{
+-    /* RVV + Zve32f = RVV. */
+-    if (has_ext(s, RVV)) {
+-        return true;
 -    }
--    set_vext_version(env, vext_version);
-+        if (cpu->cfg.vext_spec) {
-+            if (!g_strcmp0(cpu->cfg.vext_spec, "v1.0")) {
-+                vext_version = VEXT_VERSION_1_00_0;
-+            } else {
-+                error_setg(errp,
-+                           "Unsupported vector spec version '%s'",
-+                           cpu->cfg.vext_spec);
-+                return;
-+            }
-+        } else {
-+            qemu_log("vector version is not specified, "
-+                     "use the default value v1.0\n");
-+        }
-+        set_vext_version(env, vext_version);
-     }
-     if (cpu->cfg.ext_j) {
-         ext |= RVJ;
+-
+-    /* Zve32f doesn't support FP64. (Section 18.2) */
+-    return s->cfg_ptr->ext_zve64f ? s->sew <= MO_16 : true;
+-}
+-
+-static bool require_zve64f(DisasContext *s)
+-{
+-    /* RVV + Zve64f = RVV. */
+-    if (has_ext(s, RVV)) {
+-        return true;
+-    }
+-
+-    /* Zve64f doesn't support FP64. (Section 18.2) */
+-    return s->cfg_ptr->ext_zve64f ? s->sew <= MO_32 : true;
+-}
+-
+-static bool require_scale_zve64f(DisasContext *s)
+-{
+-    /* RVV + Zve64f = RVV. */
+-    if (has_ext(s, RVV)) {
+-        return true;
+-    }
+-
+-    /* Zve64f doesn't support FP64. (Section 18.2) */
+-    return s->cfg_ptr->ext_zve64f ? s->sew <= MO_16 : true;
+-}
+-
+ /* Destination vector register group cannot overlap source mask register. */
+ static bool require_vm(int vm, int vd)
+ {
+@@ -2331,9 +2287,7 @@ static bool opfvv_check(DisasContext *s, arg_rmrr *a)
+     return require_rvv(s) &&
+            require_rvf(s) &&
+            vext_check_isa_ill(s) &&
+-           vext_check_sss(s, a->rd, a->rs1, a->rs2, a->vm) &&
+-           require_zve32f(s) &&
+-           require_zve64f(s);
++           vext_check_sss(s, a->rd, a->rs1, a->rs2, a->vm);
+ }
+ 
+ /* OPFVV without GVEC IR */
+@@ -2421,9 +2375,7 @@ static bool opfvf_check(DisasContext *s, arg_rmrr *a)
+     return require_rvv(s) &&
+            require_rvf(s) &&
+            vext_check_isa_ill(s) &&
+-           vext_check_ss(s, a->rd, a->rs2, a->vm) &&
+-           require_zve32f(s) &&
+-           require_zve64f(s);
++           vext_check_ss(s, a->rd, a->rs2, a->vm);
+ }
+ 
+ /* OPFVF without GVEC IR */
+@@ -2461,9 +2413,7 @@ static bool opfvv_widen_check(DisasContext *s, arg_rmrr *a)
+            require_scale_rvf(s) &&
+            (s->sew != MO_8) &&
+            vext_check_isa_ill(s) &&
+-           vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm) &&
+-           require_scale_zve32f(s) &&
+-           require_scale_zve64f(s);
++           vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm);
+ }
+ 
+ /* OPFVV with WIDEN */
+@@ -2506,9 +2456,7 @@ static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
+            require_scale_rvf(s) &&
+            (s->sew != MO_8) &&
+            vext_check_isa_ill(s) &&
+-           vext_check_ds(s, a->rd, a->rs2, a->vm) &&
+-           require_scale_zve32f(s) &&
+-           require_scale_zve64f(s);
++           vext_check_ds(s, a->rd, a->rs2, a->vm);
+ }
+ 
+ /* OPFVF with WIDEN */
+@@ -2540,9 +2488,7 @@ static bool opfwv_widen_check(DisasContext *s, arg_rmrr *a)
+            require_scale_rvf(s) &&
+            (s->sew != MO_8) &&
+            vext_check_isa_ill(s) &&
+-           vext_check_dds(s, a->rd, a->rs1, a->rs2, a->vm) &&
+-           require_scale_zve32f(s) &&
+-           require_scale_zve64f(s);
++           vext_check_dds(s, a->rd, a->rs1, a->rs2, a->vm);
+ }
+ 
+ /* WIDEN OPFVV with WIDEN */
+@@ -2585,9 +2531,7 @@ static bool opfwf_widen_check(DisasContext *s, arg_rmrr *a)
+            require_scale_rvf(s) &&
+            (s->sew != MO_8) &&
+            vext_check_isa_ill(s) &&
+-           vext_check_dd(s, a->rd, a->rs2, a->vm) &&
+-           require_scale_zve32f(s) &&
+-           require_scale_zve64f(s);
++           vext_check_dd(s, a->rd, a->rs2, a->vm);
+ }
+ 
+ /* WIDEN OPFVF with WIDEN */
+@@ -2664,9 +2608,7 @@ static bool opfv_check(DisasContext *s, arg_rmr *a)
+            require_rvf(s) &&
+            vext_check_isa_ill(s) &&
+            /* OPFV instructions ignore vs1 check */
+-           vext_check_ss(s, a->rd, a->rs2, a->vm) &&
+-           require_zve32f(s) &&
+-           require_zve64f(s);
++           vext_check_ss(s, a->rd, a->rs2, a->vm);
+ }
+ 
+ static bool do_opfv(DisasContext *s, arg_rmr *a,
+@@ -2731,9 +2673,7 @@ static bool opfvv_cmp_check(DisasContext *s, arg_rmrr *a)
+     return require_rvv(s) &&
+            require_rvf(s) &&
+            vext_check_isa_ill(s) &&
+-           vext_check_mss(s, a->rd, a->rs1, a->rs2) &&
+-           require_zve32f(s) &&
+-           require_zve64f(s);
++           vext_check_mss(s, a->rd, a->rs1, a->rs2);
+ }
+ 
+ GEN_OPFVV_TRANS(vmfeq_vv, opfvv_cmp_check)
+@@ -2746,9 +2686,7 @@ static bool opfvf_cmp_check(DisasContext *s, arg_rmrr *a)
+     return require_rvv(s) &&
+            require_rvf(s) &&
+            vext_check_isa_ill(s) &&
+-           vext_check_ms(s, a->rd, a->rs2) &&
+-           require_zve32f(s) &&
+-           require_zve64f(s);
++           vext_check_ms(s, a->rd, a->rs2);
+ }
+ 
+ GEN_OPFVF_TRANS(vmfeq_vf, opfvf_cmp_check)
+@@ -2769,9 +2707,7 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
+     if (require_rvv(s) &&
+         require_rvf(s) &&
+         vext_check_isa_ill(s) &&
+-        require_align(a->rd, s->lmul) &&
+-        require_zve32f(s) &&
+-        require_zve64f(s)) {
++        require_align(a->rd, s->lmul)) {
+         gen_set_rm(s, RISCV_FRM_DYN);
+ 
+         TCGv_i64 t1;
+@@ -2856,18 +2792,14 @@ static bool opfv_widen_check(DisasContext *s, arg_rmr *a)
+ static bool opxfv_widen_check(DisasContext *s, arg_rmr *a)
+ {
+     return opfv_widen_check(s, a) &&
+-           require_rvf(s) &&
+-           require_zve32f(s) &&
+-           require_zve64f(s);
++           require_rvf(s);
+ }
+ 
+ static bool opffv_widen_check(DisasContext *s, arg_rmr *a)
+ {
+     return opfv_widen_check(s, a) &&
+            require_scale_rvf(s) &&
+-           (s->sew != MO_8) &&
+-           require_scale_zve32f(s) &&
+-           require_scale_zve64f(s);
++           (s->sew != MO_8);
+ }
+ 
+ #define GEN_OPFV_WIDEN_TRANS(NAME, CHECK, HELPER, FRM)             \
+@@ -2918,9 +2850,7 @@ static bool opfxv_widen_check(DisasContext *s, arg_rmr *a)
+            require_scale_rvf(s) &&
+            vext_check_isa_ill(s) &&
+            /* OPFV widening instructions ignore vs1 check */
+-           vext_check_ds(s, a->rd, a->rs2, a->vm) &&
+-           require_scale_zve32f(s) &&
+-           require_scale_zve64f(s);
++           vext_check_ds(s, a->rd, a->rs2, a->vm);
+ }
+ 
+ #define GEN_OPFXV_WIDEN_TRANS(NAME)                                \
+@@ -2975,18 +2905,14 @@ static bool opfxv_narrow_check(DisasContext *s, arg_rmr *a)
+ {
+     return opfv_narrow_check(s, a) &&
+            require_rvf(s) &&
+-           (s->sew != MO_64) &&
+-           require_zve32f(s) &&
+-           require_zve64f(s);
++           (s->sew != MO_64);
+ }
+ 
+ static bool opffv_narrow_check(DisasContext *s, arg_rmr *a)
+ {
+     return opfv_narrow_check(s, a) &&
+            require_scale_rvf(s) &&
+-           (s->sew != MO_8) &&
+-           require_scale_zve32f(s) &&
+-           require_scale_zve64f(s);
++           (s->sew != MO_8);
+ }
+ 
+ #define GEN_OPFV_NARROW_TRANS(NAME, CHECK, HELPER, FRM)            \
+@@ -3035,9 +2961,7 @@ static bool opxfv_narrow_check(DisasContext *s, arg_rmr *a)
+            require_scale_rvf(s) &&
+            vext_check_isa_ill(s) &&
+            /* OPFV narrowing instructions ignore vs1 check */
+-           vext_check_sd(s, a->rd, a->rs2, a->vm) &&
+-           require_scale_zve32f(s) &&
+-           require_scale_zve64f(s);
++           vext_check_sd(s, a->rd, a->rs2, a->vm);
+ }
+ 
+ #define GEN_OPXFV_NARROW_TRANS(NAME, HELPER, FRM)                  \
+@@ -3111,9 +3035,7 @@ GEN_OPIVV_WIDEN_TRANS(vwredsumu_vs, reduction_widen_check)
+ static bool freduction_check(DisasContext *s, arg_rmrr *a)
+ {
+     return reduction_check(s, a) &&
+-           require_rvf(s) &&
+-           require_zve32f(s) &&
+-           require_zve64f(s);
++           require_rvf(s);
+ }
+ 
+ GEN_OPFVV_TRANS(vfredusum_vs, freduction_check)
+@@ -3540,9 +3462,7 @@ static bool trans_vfmv_f_s(DisasContext *s, arg_vfmv_f_s *a)
+ {
+     if (require_rvv(s) &&
+         require_rvf(s) &&
+-        vext_check_isa_ill(s) &&
+-        require_zve32f(s) &&
+-        require_zve64f(s)) {
++        vext_check_isa_ill(s)) {
+         gen_set_rm(s, RISCV_FRM_DYN);
+ 
+         unsigned int ofs = (8 << s->sew);
+@@ -3568,9 +3488,7 @@ static bool trans_vfmv_s_f(DisasContext *s, arg_vfmv_s_f *a)
+ {
+     if (require_rvv(s) &&
+         require_rvf(s) &&
+-        vext_check_isa_ill(s) &&
+-        require_zve32f(s) &&
+-        require_zve64f(s)) {
++        vext_check_isa_ill(s)) {
+         gen_set_rm(s, RISCV_FRM_DYN);
+ 
+         /* The instructions ignore LMUL and vector register group. */
+@@ -3621,17 +3539,13 @@ GEN_OPIVI_TRANS(vslidedown_vi, IMM_ZX, vslidedown_vx, slidedown_check)
+ static bool fslideup_check(DisasContext *s, arg_rmrr *a)
+ {
+     return slideup_check(s, a) &&
+-           require_rvf(s) &&
+-           require_zve32f(s) &&
+-           require_zve64f(s);
++           require_rvf(s);
+ }
+ 
+ static bool fslidedown_check(DisasContext *s, arg_rmrr *a)
+ {
+     return slidedown_check(s, a) &&
+-           require_rvf(s) &&
+-           require_zve32f(s) &&
+-           require_zve64f(s);
++           require_rvf(s);
+ }
+ 
+ GEN_OPFVF_TRANS(vfslide1up_vf, fslideup_check)
 -- 
 2.39.2
 
