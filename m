@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pY0z1-0007dV-5i
+	id 1pY0z1-0007eM-At
 	for mharc-qemu-riscv@gnu.org; Fri, 03 Mar 2023 03:41:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0ym-0006h5-Aj
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:30 -0500
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ id 1pY0yq-0006uv-4o
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:33 -0500
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pY0yk-0007mA-58
- for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:27 -0500
-Received: by mail-pl1-x635.google.com with SMTP id i10so1957993plr.9
- for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:41:25 -0800 (PST)
+ id 1pY0yo-0007nk-1c
+ for qemu-riscv@nongnu.org; Fri, 03 Mar 2023 03:41:31 -0500
+Received: by mail-pl1-x634.google.com with SMTP id p6so2052739plf.0
+ for <qemu-riscv@nongnu.org>; Fri, 03 Mar 2023 00:41:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832884;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1677832888;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4Hfiux9wjBHefjdAiFtqfeuuXfGolGwUIxeXcDisz5o=;
- b=C9CXga+yG17lo4qFtwa+yfafom+JPrJaE/5kr4LAbjz41AmhvuUeNBSe0ZfO2pn9RX
- qXVbVa0j2x31lgBVcQD5Dz1jq6ckCepmLP6rss0etNQHQCLtd7tazbSNkIPqLunO5Jot
- rF7DvrY/umjU7u2L7DyBtluW0l9JXRSW10cstRgyhrWC3rddFSY7g9xNus9M/iK8oQ7R
- FaTbSM/ZIeAH3k3El+GQU08w2qUiVaWlOkVk3V+GMzCAYVkwTmk38+bL4SIqydKQtCdB
- p/CZHp8leUYzu/ixzhpIiajiKk1pfzxG/xUNeJ+9sQeFrAdOYcoPtwqxp2NXYsIOAo5l
- g96w==
+ bh=r1PJv2cc+BR+zPrPoG5NvS1vpNzJ8EEawxdCZRC2CNQ=;
+ b=VR5E6yi2M2GeZof41BYWKNPXunmL56yx1pa72bA7Xzme5y7Qpy+2COqdMkW9Lho3U6
+ yJY9VL/sVZOLYXJta3Yee1zQQtwk5xfKaGBQ2viiMMg+H+OSP2rKAOv3un+CgIb59vOV
+ E1sOjYE9ppFp1J8pmzzHo0u/moqkVS7rB4ad36XkxFwEjh8jh9e+wx2C2SinZ2qkgnv9
+ J7HtoSbPqrD5bnTjmWhSaKvrnYAuSAZP8QqF0lfiBDLIWpCrUXgufm56FY1CCKY/BVsl
+ IChpvDksOjG24LY/5f1AUR9wTga83KP5GyWEvq/WH1lSR3Uh9Rp8zc+yOGdRbMxqdVZK
+ 5ZVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1677832884;
+ d=1e100.net; s=20210112; t=1677832888;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4Hfiux9wjBHefjdAiFtqfeuuXfGolGwUIxeXcDisz5o=;
- b=WaIFtIBybDY5AnpdcaoZXpIWQvJIL5K2I3yS6hQq/e6teuf08zfbXAsDBdwtmUFsVQ
- m52z68mNhIvTGP41BR6Yhr3cl7p9euqInoAKeTzbVS9iziOPtxAbNmEC+vIHEBaK8Fk5
- 5d8VW4nvvQJOffi7bya5DN0Z7WjCV5JJWMmufReNTI2EhSEtKAh4sCksh+xJ8i4Il5Rl
- wxYIdF+QcTf+TUx3CLwYUbnE1pOX7bqqLCFqBxicqc0VdXMuJgGIL4C4R/qgAMzZMGoe
- QLPjWfOCqQDSKGHHjrhRotcNIWnehJXhttJ2XgspqLhP2qzYswCyZxXMQWFFO+IHDph+
- aOQw==
-X-Gm-Message-State: AO0yUKVO0NnNeG7w2lyeu8/ffirEoawuhMs93gXYFdUvJubLzVNgTABF
- jBFjQFMyoPveXsd48xgs4EpBKvfGVTRWYpYR
-X-Google-Smtp-Source: AK7set8fBQjPXKzFPTdtKuiinrCLHzEPQARCg3SvizpIacPD8FkvN00vTk+KBtb1ojPWavwxP/9xQg==
-X-Received: by 2002:a17:90a:190f:b0:233:ccd2:40a4 with SMTP id
- 15-20020a17090a190f00b00233ccd240a4mr905500pjg.23.1677832884243; 
- Fri, 03 Mar 2023 00:41:24 -0800 (PST)
+ bh=r1PJv2cc+BR+zPrPoG5NvS1vpNzJ8EEawxdCZRC2CNQ=;
+ b=Hgj29jU8ndzb78V3DrdmORGPct48RD5OXC3znlZjpwzUQLs61JiPgZqNrLorGaD6JI
+ SxEA2pTRvyypa6d0gMYyirEkc+FJPSLaTstY3NHEARFgkmLVJUOWZUozh7J1LabwWMZZ
+ FCuLiRowwaGgtD652CMBbaQXeqrDH04dR2b7dQYZeEOGpHpMMtk6HAxlGQnOgccQ7TMl
+ rFQFh0jVwuj5c5XBudWIRNDrztS/gk195TCFg/Oqih3sUONSMxdjDb6XMpfjjwiCidZV
+ ZWvpFdsyeJVZwT47fa5f8QIiT4KlQyr19OzmvH5G/UcVz7jLJIO6Vig7ZurPylyVKXIE
+ izmw==
+X-Gm-Message-State: AO0yUKUQvrWIAROVjWqmZDvM74MQpKGmj/EnVPgWxgzl2Mm99Lc7mM0w
+ WfChevsN5+ElAafWA3VYtTYSxNaDWEkEKf5y
+X-Google-Smtp-Source: AK7set8/KwJ+KHLuj3ynlD09Ot/wBLS4d+q2VYvCiuV8fLUK/mkVMEEkZR1+Cv243AY1/3EIGfwWpw==
+X-Received: by 2002:a17:90b:17c2:b0:236:6dc3:3e66 with SMTP id
+ me2-20020a17090b17c200b002366dc33e66mr967512pjb.5.1677832888162; 
+ Fri, 03 Mar 2023 00:41:28 -0800 (PST)
 Received: from localhost ([135.180.224.71]) by smtp.gmail.com with ESMTPSA id
- x15-20020a170902ec8f00b0019aa5e0aadesm976117plg.110.2023.03.03.00.41.23
+ e1-20020a17090ada0100b002353082958csm2889489pjv.10.2023.03.03.00.41.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Mar 2023 00:41:23 -0800 (PST)
-Subject: [PULL 03/59] target/riscv: allow MISA writes as experimental
-Date: Fri,  3 Mar 2023 00:36:44 -0800
-Message-Id: <20230303083740.12817-4-palmer@rivosinc.com>
+ Fri, 03 Mar 2023 00:41:27 -0800 (PST)
+Subject: [PULL 06/59] target/riscv: remove RISCV_FEATURE_EPMP
+Date: Fri,  3 Mar 2023 00:36:47 -0800
+Message-Id: <20230303083740.12817-7-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230303083740.12817-1-palmer@rivosinc.com>
 References: <20230303083740.12817-1-palmer@rivosinc.com>
@@ -57,13 +57,14 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, Andrew Jones <ajones@ventanamicro.com>, 
- Bin Meng <bmeng@tinylab.org>, LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, Bin Meng <bmeng@tinylab.org>, 
+ Andrew Jones <ajones@ventanamicro.com>,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, 
  Palmer Dabbelt <palmer@rivosinc.com>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=palmer@rivosinc.com; helo=mail-pl1-x635.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=palmer@rivosinc.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -82,101 +83,99 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2023 08:41:32 -0000
+X-List-Received-Date: Fri, 03 Mar 2023 08:41:34 -0000
 
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-At this moment, and apparently since ever, we have no way of enabling
-RISCV_FEATURE_MISA. This means that all the code from write_misa(), all
-the nuts and bolts that handles how to properly write this CSR, has
-always been a no-op as well because write_misa() will always exit
-earlier.
-
-This seems to be benign in the majority of cases. Booting an Ubuntu
-'virt' guest and logging all the calls to 'write_misa' shows that no
-writes to MISA CSR was attempted. Writing MISA, i.e. enabling/disabling
-RISC-V extensions after the machine is powered on, seems to be a niche
-use.
-
-After discussions in the mailing list, most notably in [1], we reached
-the consensus that this code is not suited to be exposed to users
-because it's not well tested, but at the same time removing it is a bit
-extreme because we would like to fix it, and it's easier to do so with
-the code available to use instead of fetching it from git log.
-
-The approach taken here is to get rid of RISCV_FEATURE_MISA altogether
-and use a new experimental flag called x-misa-w. The default value is
-false, meaning that we're keeping the existing behavior of doing nothing
-if a write_misa() is attempted. As with any existing experimental flag,
-x-misa-w is also a temporary flag that we need to remove once we fix
-write_misa().
-
-[1] https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg05092.html
+RISCV_FEATURE_EPMP is always set to the same value as the cpu->cfg.epmp
+flag. Use the flag directly.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 Reviewed-by: Bin Meng <bmeng@tinylab.org>
-Reviewed-by: Weiwei Li<liweiwei@iscas.ac.cn>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Message-ID: <20230222185205.355361-4-dbarboza@ventanamicro.com>
+Message-ID: <20230222185205.355361-7-dbarboza@ventanamicro.com>
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- target/riscv/cpu.c | 6 ++++++
- target/riscv/cpu.h | 2 +-
- target/riscv/csr.c | 2 +-
- 3 files changed, 8 insertions(+), 2 deletions(-)
+ target/riscv/cpu.c | 10 +++-------
+ target/riscv/cpu.h |  1 -
+ target/riscv/csr.c |  2 +-
+ target/riscv/pmp.c |  4 ++--
+ 4 files changed, 6 insertions(+), 11 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 93b52b826c..1d637b1acd 100644
+index aec7830c44..807a466f34 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1210,6 +1210,12 @@ static Property riscv_cpu_properties[] = {
+@@ -927,17 +927,13 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         riscv_set_feature(env, RISCV_FEATURE_PMP);
+     }
  
-     DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false),
-     DEFINE_PROP_BOOL("rvv_ma_all_1s", RISCVCPU, cfg.rvv_ma_all_1s, false),
-+
-+    /*
-+     * write_misa() is marked as experimental for now so mark
-+     * it with -x and default to 'false'.
-+     */
-+    DEFINE_PROP_BOOL("x-misa-w", RISCVCPU, cfg.misa_w, false),
-     DEFINE_PROP_END_OF_LIST(),
- };
+-    if (cpu->cfg.epmp) {
+-        riscv_set_feature(env, RISCV_FEATURE_EPMP);
+-
++    if (cpu->cfg.epmp && !cpu->cfg.pmp) {
+         /*
+          * Enhanced PMP should only be available
+          * on harts with PMP support
+          */
+-        if (!cpu->cfg.pmp) {
+-            error_setg(errp, "Invalid configuration: EPMP requires PMP support");
+-            return;
+-        }
++        error_setg(errp, "Invalid configuration: EPMP requires PMP support");
++        return;
+     }
+ 
  
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 7ee22cbfa1..ca828424c1 100644
+index dc62554e14..471e587729 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -89,7 +89,6 @@ enum {
+@@ -88,7 +88,6 @@
+ enum {
      RISCV_FEATURE_MMU,
      RISCV_FEATURE_PMP,
-     RISCV_FEATURE_EPMP,
--    RISCV_FEATURE_MISA,
-     RISCV_FEATURE_DEBUG
+-    RISCV_FEATURE_EPMP,
  };
  
-@@ -498,6 +497,7 @@ struct RISCVCPUConfig {
-     bool pmp;
-     bool epmp;
-     bool debug;
-+    bool misa_w;
- 
-     bool short_isa_string;
- };
+ /* Privileged specification version */
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index e149b453da..3cb8d2ffad 100644
+index e220c4a5fd..951327022d 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -1329,7 +1329,7 @@ static RISCVException read_misa(CPURISCVState *env, int csrno,
- static RISCVException write_misa(CPURISCVState *env, int csrno,
-                                  target_ulong val)
+@@ -428,7 +428,7 @@ static RISCVException pmp(CPURISCVState *env, int csrno)
+ 
+ static RISCVException epmp(CPURISCVState *env, int csrno)
  {
--    if (!riscv_feature(env, RISCV_FEATURE_MISA)) {
-+    if (!riscv_cpu_cfg(env)->misa_w) {
-         /* drop write to misa */
+-    if (env->priv == PRV_M && riscv_feature(env, RISCV_FEATURE_EPMP)) {
++    if (env->priv == PRV_M && riscv_cpu_cfg(env)->epmp) {
          return RISCV_EXCP_NONE;
      }
+ 
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 4bc4113531..aa4d1996e9 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -88,7 +88,7 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
+     if (pmp_index < MAX_RISCV_PMPS) {
+         bool locked = true;
+ 
+-        if (riscv_feature(env, RISCV_FEATURE_EPMP)) {
++        if (riscv_cpu_cfg(env)->epmp) {
+             /* mseccfg.RLB is set */
+             if (MSECCFG_RLB_ISSET(env)) {
+                 locked = false;
+@@ -239,7 +239,7 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
+ {
+     bool ret;
+ 
+-    if (riscv_feature(env, RISCV_FEATURE_EPMP)) {
++    if (riscv_cpu_cfg(env)->epmp) {
+         if (MSECCFG_MMWP_ISSET(env)) {
+             /*
+              * The Machine Mode Whitelist Policy (mseccfg.MMWP) is set
 -- 
 2.39.2
 
