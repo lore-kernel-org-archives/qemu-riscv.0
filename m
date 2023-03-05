@@ -1,70 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pYy0b-00007v-EW
-	for mharc-qemu-riscv@gnu.org; Sun, 05 Mar 2023 18:43:17 -0500
+	id 1pYy2R-0000vA-SR
+	for mharc-qemu-riscv@gnu.org; Sun, 05 Mar 2023 18:45:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pYy0Y-00007Q-U1
- for qemu-riscv@nongnu.org; Sun, 05 Mar 2023 18:43:14 -0500
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1pYy2Q-0000uo-G4
+ for qemu-riscv@nongnu.org; Sun, 05 Mar 2023 18:45:10 -0500
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pYy0X-000733-6i
- for qemu-riscv@nongnu.org; Sun, 05 Mar 2023 18:43:14 -0500
-Received: by mail-pl1-x631.google.com with SMTP id n6so8426364plf.5
- for <qemu-riscv@nongnu.org>; Sun, 05 Mar 2023 15:43:12 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1pYy2O-0007Jl-Ei
+ for qemu-riscv@nongnu.org; Sun, 05 Mar 2023 18:45:10 -0500
+Received: by mail-pl1-x62d.google.com with SMTP id ky4so8445335plb.3
+ for <qemu-riscv@nongnu.org>; Sun, 05 Mar 2023 15:45:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1678059791;
+ d=dabbelt-com.20210112.gappssmtp.com; s=20210112; t=1678059906;
  h=content-transfer-encoding:mime-version:message-id:to:from:cc
  :in-reply-to:subject:date:from:to:cc:subject:date:message-id
- :reply-to; bh=yIh1lN+9dkH89Si6XgS1D9s5qWnDOWjVZhmy/Se/BVg=;
- b=CL1SrI+KTUaFE9ErX0FGLdJiQHw7Ytc+s0i18mpguULi+LwP3zU+tz+QMIoZYsVbtg
- GnflsIIob0GhvluDvGZ+Hnk6VXJNNDLYfKVtTxh90QCuzwrx6/izAC3kBy0StqnaD4H0
- DEvzR8ImTTfef3dH1A3qkoHlIbXNFgmcw0Egu8S+8x7CG0h70+Zc1eclbKyOJ7Y72yQ6
- VEMVDYaTAEfLXsGZmEKivJ6zmUrzPYOxfx4FPtnlUpJp5R1wy8e5mIUScpqL1njlqyyQ
- XRP45yzr/06IwqbkN60hW/+YeaiPV1oufejFM4kY+UYk+hZcg2u0/8TCdueleAt6wJ6F
- 7HeQ==
+ :reply-to; bh=AChv+aZEEc9jg147GbiI56ZSDqX5vlK6xVOAdvqnWBA=;
+ b=08pr26//uW0H/wa5qagW43EHmIWAIhTYGkwO6pMSTgiXkixBFMgGztVLsM31hutb0U
+ CeR9+lxHb5xQsTmDNlnE/GUsbL4t1VcH9r7sMr0D4ZcpUGtJDcvRVIatVS1pjzE0MVel
+ mShi2em8Gzh4DmUyEbdHa82C5v4ENxkoCdIxywUVNDTe8efer3Dw13rEovxKwa7jNfQo
+ HIfBhBDPBdvJjK+FB4mGvL0sEoRGU+NVLJPgZnyF7wPWmMLv8C4IGw23Q9dz4+9WfqjQ
+ 1qLwOwx1D5D/M1KpuCK4Zl/MWzosPQSqO4td9YRp+6/NUqUS878a8MKNxJVzv3NH7ekt
+ 4Xog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678059791;
+ d=1e100.net; s=20210112; t=1678059906;
  h=content-transfer-encoding:mime-version:message-id:to:from:cc
  :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yIh1lN+9dkH89Si6XgS1D9s5qWnDOWjVZhmy/Se/BVg=;
- b=nmo6luOTKH4RqMSclZ9wvjk1MeNsDvVUWpTgp7jiB167O452kJGGQyIeW7ap0fbAw6
- +Kq1SQUasRKziWHesdpsRH/XssDVc5fLVME2YvWqNYUjT2Yi+Bg4Hej+lb/MGOsXH+I5
- 5DxY3oMuztk5Pw0l/d/S9DC1A+cVlhZtx5bCqykRkBENSV66UfMpx4tYxVn1YBj4A6fY
- o2spqD2tImDfA4LFtUm3RG+6CYtj8GjV1G0FaJxlFousHvPBhSFF+IfGChtO60w4Za4V
- sPRXQKH6AsPOBFsU+zClFP8oRyEBWqtbWl5oLianYYuBka5z7XcEPVcNkIRkGuwb0zzz
- nSiQ==
-X-Gm-Message-State: AO0yUKVr/JKPdKaC5C9Q9Yq+G1EPq+YD9vJ/dYP3houhcw/Tp1PmI5wK
- vDmpx1uJWEi67SVlZjj70lQDbU9TDfvSrMG4Z9k=
-X-Google-Smtp-Source: AK7set9avzaQ5XfCyzAUNbK9LDxodchHbhHbadhVIKQHslIiAb8J6no0UILnjxkTUDzwf+c/rteKag==
-X-Received: by 2002:a17:902:c946:b0:19c:1433:5fba with SMTP id
- i6-20020a170902c94600b0019c14335fbamr11225704pla.0.1678059790718; 
- Sun, 05 Mar 2023 15:43:10 -0800 (PST)
+ bh=AChv+aZEEc9jg147GbiI56ZSDqX5vlK6xVOAdvqnWBA=;
+ b=xQuEYSFMANd7h/V2qnRIzZi5Hl5bF4Lq+NuVAcZHmMkqGWPl4+CCwzEC7R7rHpNcha
+ jpde8wgZunVymc+B/u3jlpRmVjroCWM99JL+71yGFM5Vew58LeyZjF0glLsmjjsCEXf8
+ X0pRBWHN1FgPP+V82KHecYRFuLOkhS9LfaYzsW5rGOyf+ZuQR9V4EPiiSjjRCZlN1aUn
+ nEDyVkgxld/3Kb1FO5V32K3r8OPCE2Mlb5+3X4dUsj7oAGW6bd7E7uMGX6w1FKtfcME/
+ Hq+E3esF+yc96Gk2594JKicNawVAD7uoh/44qcPUwbinYZb6jhHccUdi5aewMD6PAcGO
+ vf5w==
+X-Gm-Message-State: AO0yUKXYve/DNsUPWsThYc91t7inME4+lMghtuYUCKAw+XiZeznsD2hm
+ bI1NWES3QNQapKPQUUAt7D4x3M6MaK57U3oCvuQ=
+X-Google-Smtp-Source: AK7set/Ctv+RdSQ829mKTYZ30xKY+bAZ/vdhiRDZkrXD/DbnJFsD8KpbgZqk9Bm02PKrwuSAyezmTQ==
+X-Received: by 2002:a05:6a20:7348:b0:cc:9010:9ed with SMTP id
+ v8-20020a056a20734800b000cc901009edmr10427227pzc.31.1678059906138; 
+ Sun, 05 Mar 2023 15:45:06 -0800 (PST)
 Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
- e4-20020a17090301c400b001898ee9f723sm5289843plh.2.2023.03.05.15.43.10
+ d25-20020aa78159000000b005cdf83e4513sm5155616pfn.145.2023.03.05.15.45.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Mar 2023 15:43:10 -0800 (PST)
-Date: Sun, 05 Mar 2023 15:43:10 -0800 (PST)
-X-Google-Original-Date: Sun, 05 Mar 2023 15:42:20 PST (-0800)
-Subject: Re: [PATCH v2 1/2] gitlab/opensbi: Move to docker:stable
-In-Reply-To: <CAEUhbmXVqJ3RnTk7OGquR-ChCSWJ8NmOGeo6kUmoFhipofm7tQ@mail.gmail.com>
-CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmer@rivosinc.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Message-ID: <mhng-94876e10-142c-43de-bfa9-774e398cc502@palmer-ri-x1c9a>
+ Sun, 05 Mar 2023 15:45:05 -0800 (PST)
+Date: Sun, 05 Mar 2023 15:45:05 -0800 (PST)
+X-Google-Original-Date: Sun, 05 Mar 2023 15:44:14 PST (-0800)
+Subject: Re: [PATCH V5 0/8] Add basic ACPI support for risc-v virt
+In-Reply-To: <20230302091212.999767-1-sunilvl@ventanamicro.com>
+CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>, bin.meng@windriver.com,
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, ajones@ventanamicro.com, apatel@ventanamicro.com,
+ Atish Patra <atishp@rivosinc.com>, sunilvl@ventanamicro.com
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: sunilvl@ventanamicro.com, imammedo@redhat.com
+Message-ID: <mhng-7afa2599-95f6-43e9-a968-9e7e4f939faa@palmer-ri-x1c9a>
 Mime-Version: 1.0 (MHng)
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=palmer@rivosinc.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=palmer@dabbelt.com; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,65 +81,90 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Mar 2023 23:43:15 -0000
+X-List-Received-Date: Sun, 05 Mar 2023 23:45:10 -0000
 
-On Fri, 03 Mar 2023 15:28:14 PST (-0800), Bin Meng wrote:
-> On Sat, Mar 4, 2023 at 4:25 AM Palmer Dabbelt <palmer@rivosinc.com> wrote:
->>
->> The OpenSBI build has been using docker:19.03.1, which appears to be old
->> enough that v2 of the manifest is no longer supported.  Something has
->> started serving us those manifests, resulting in errors along the lines
->> of
->>
->>     $ docker build --cache-from $IMAGE_TAG --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $IMAGE_TAG .gitlab-ci.d/opensbi
->>     Step 1/7 : FROM ubuntu:18.04
->>     18.04: Pulling from library/ubuntu
->>     mediaType in manifest should be 'application/vnd.docker.distribution.manifest.v2+json' not 'application/vnd.oci.image.manifest.v1+json'
->>
->> This moves to docker:stable, as was suggested by the template.  It also
->> adds the python3 package via apt, as OpenSBI requires that to build.
->>
->> Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
->> ---
->>  .gitlab-ci.d/opensbi.yml        | 4 ++--
->>  .gitlab-ci.d/opensbi/Dockerfile | 1 +
->>  2 files changed, 3 insertions(+), 2 deletions(-)
->>
->> diff --git a/.gitlab-ci.d/opensbi.yml b/.gitlab-ci.d/opensbi.yml
->> index 04ed5a3ea1..9a651465d8 100644
->> --- a/.gitlab-ci.d/opensbi.yml
->> +++ b/.gitlab-ci.d/opensbi.yml
->> @@ -42,9 +42,9 @@
->>  docker-opensbi:
->>    extends: .opensbi_job_rules
->>    stage: containers
->> -  image: docker:19.03.1
->> +  image: docker:stable
->>    services:
->> -    - docker:19.03.1-dind
->> +    - docker:stable-dind
->>    variables:
->>      GIT_DEPTH: 3
->>      IMAGE_TAG: $CI_REGISTRY_IMAGE:opensbi-cross-build
->> diff --git a/.gitlab-ci.d/opensbi/Dockerfile b/.gitlab-ci.d/opensbi/Dockerfile
->> index 4ba8a4de86..2d151a6bc8 100644
->> --- a/.gitlab-ci.d/opensbi/Dockerfile
->> +++ b/.gitlab-ci.d/opensbi/Dockerfile
->> @@ -16,6 +16,7 @@ RUN apt update \
->>          git \
->>          make \
->>          wget \
->> +       python3 \
+On Thu, 02 Mar 2023 01:12:04 PST (-0800), sunilvl@ventanamicro.com wrote:
+> This series adds the basic ACPI support for the RISC-V virt machine.
+> Currently only RINTC interrupt controller specification is approved by the
+> UEFI forum. External interrupt controller support in ACPI is in progress.
 >
-> nits: this should be inserted before wget to follow the alphabetical order
+> This adds support for RINTC and RHCT tables as specified in below ECR links
+> which are approved by UEFI forum.
+> RINTC - https://drive.google.com/file/d/1R6k4MshhN3WTT-hwqAquu5nX6xSEqK2l/view
+> RHCT - https://drive.google.com/file/d/1nP3nFiH4jkPMp6COOxP6123DCZKR-tia/view
+>
+> These changes are also available @
+> https://github.com/vlsunil/qemu/tree/acpi_b1_us_review_V5
+>
+> Changes since V4:
+> 	1) Used possible_cpus to create cpu topology in DSDT, MADT and RHCT as
+>            per Igor's feedback.
 
-Thanks, I just squashed that in and stuck these on riscv-to-apply.next.  
+Thanks.  These all look good to me, but given that Igor had some 
+feedback on the v4 and it's pretty much just been weekend since t hese 
+went out I'm going to hold off until tomorrow before merging anything.  
+They're all staged and passing the tests on my end, so everything's good 
+as far as I'm concerned.
 
+>         2) Moved MAINTAINER entries below ACPI/SMBIOS entry as per Drew's
+>            feedback
+> Changes since V3:
+> 	1) Added back acpi_align_size() wrapper as per Drew's feedback
+> 	2) Updated RB tags
 >
->>      && \
->>      \
->>      rm -rf /var/lib/apt/lists/*
->> --
+> Changes since V2:
+> 	1) Squashed commits and updated commit message as per feedback from Daniel.
+> 	2) Addressed comments from Drew.
+> 	3) Updated tags.
 >
-> Reviewed-by: Bin Meng <bmeng@tinylab.org>
+> Changes since V1:
+> 	1) Addressed comments from Bin Meng.
+> 	2) Made acpi switch default AUTO similar to other architectures.
+> 	3) Re-based and added RB and ACKs.
+>
+> The series is tested using SBI HVC console and initrd.
+>
+> Test instructions:
+> 1) Build Qemu with ACPI support (this series)
+>
+> 2) Build EDK2 as per instructions in
+> https://github.com/vlsunil/riscv-uefi-edk2-docs/wiki/RISC-V-Qemu-Virt-support
+>
+> 3) Build Linux with ACPI support using below branch
+> https://github.com/vlsunil/linux/commits/acpi_b1_us_review_ipi17_V2
+> after enabling SBI HVC and SBI earlycon options.
+>
+> CONFIG_RISCV_SBI_V01=y
+> CONFIG_SERIAL_EARLYCON_RISCV_SBI=y
+> CONFIG_HVC_RISCV_SBI=y
+>
+> 4) Build buildroot.
+>
+> Run with below command.
+> qemu-system-riscv64   -nographic \
+> -drive file=Build/RiscVVirtQemu/RELEASE_GCC5/FV/RISCV_VIRT.fd,if=pflash,format=raw,unit=1 \
+> -machine virt -smp 16 -m 2G \
+> -kernel arch/riscv/boot/Image \
+> -initrd buildroot/output/images/rootfs.cpio \
+> -append "root=/dev/ram ro console=hvc0 earlycon=sbi"
+>
+>
+> Sunil V L (8):
+>   hw/riscv/virt: Add OEM_ID and OEM_TABLE_ID fields
+>   hw/riscv/virt: Add a switch to disable ACPI
+>   hw/riscv/virt: Add memmap pointer to RiscVVirtState
+>   hw/riscv/virt: Enable basic ACPI infrastructure
+>   hw/riscv/virt: virt-acpi-build.c: Add RINTC in MADT
+>   hw/riscv/virt: virt-acpi-build.c: Add RHCT Table
+>   hw/riscv/virt.c: Initialize the ACPI tables
+>   MAINTAINERS: Add entry for RISC-V ACPI
+>
+>  MAINTAINERS                |  18 +-
+>  hw/riscv/Kconfig           |   1 +
+>  hw/riscv/meson.build       |   1 +
+>  hw/riscv/virt-acpi-build.c | 416 +++++++++++++++++++++++++++++++++++++
+>  hw/riscv/virt.c            |  40 ++++
+>  include/hw/riscv/virt.h    |   6 +
+>  6 files changed, 476 insertions(+), 6 deletions(-)
+>  create mode 100644 hw/riscv/virt-acpi-build.c
 
