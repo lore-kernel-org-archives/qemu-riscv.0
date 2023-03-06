@@ -1,71 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZ6I0-0004bm-NH
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 03:33:48 -0500
+	id 1pZ6lG-00006g-4B
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 04:04:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1pZ6Hu-0004bO-8r
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 03:33:45 -0500
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1pZ6Hl-0003ht-3W
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 03:33:39 -0500
-Received: by mail-wm1-x32b.google.com with SMTP id
- l7-20020a05600c4f0700b003e79fa98ce1so4666995wmq.2
- for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 00:33:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1678091611;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ibF4ybF4Ws8o4T9oAIQ18WOYdCEg4Mfe/uDfEQIPEes=;
- b=euAixTX8dR788iaS+DRb7O2ZJVJFVj7SjpBLqScqcxAgZmdxXJRkOPD5+v2B0jj73J
- W3WEOGbe5y2i6m15dba7W6uG2tkQwdDxvpkLm7FoRs5aJTOWGFU8hdw3/43d12slYKfY
- 8h1TNBo92MIQjKvGxVjvV/hOoNfCbHslzWqRrrb2SQKLLTBlJUvG02K2jgoog6/aPtYV
- JSir5OmXCTQq5NWQlatCl7r476Wt/yiqXAoF2qi1rq7YgjhZxaycXeVK2+DdVu1FulJS
- k5BjZcbWtR3oNEkQBww9Al6dUBEgJiqIe5sz3vnLmRp2SXltPng0XPwxCN41qx8VcdpX
- uWmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678091611;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ibF4ybF4Ws8o4T9oAIQ18WOYdCEg4Mfe/uDfEQIPEes=;
- b=m8bYPJM/OipPaFhtEJXum2O0sCWYCVG/TDSWGBlYZgFotYQcHFdsGqT5FI9ORMDXDg
- aV3a1UW5pR5VwP0kFHX9sdiwpp2+gOxhEUA7o1vXDVjl4ixKPbfYnWBlxt30YcPu9/QU
- gPa+8IhIhY9eQhiuMPG3jN9RFxECEVn8zwL4STKGKeX8CC0flG7DNRJ81iDysraRa20s
- PyO3hI2t+S4ZB/JRCJg17icVQb1hQpwW9IHMMP2QADM1jf3bFEMhfontPpHqVvfbBeOA
- TJeN+WXSb1ZQV69INOoUCaEwUdJJDV6LBQ9Y/MkV5ZXt4dP8pjB+t6MChsziOkXtM3fU
- oeJw==
-X-Gm-Message-State: AO0yUKUh7jDemWnlGmTNcEe6BIxRqRVdplcWCZ/nHPhCET0XN8KiqG92
- EXa6daZz/ICLNB7YHQ/i5dWQtS1XL1mDqRftVYMPHw==
-X-Google-Smtp-Source: AK7set/1OWB18GVh5BErNM9qT+SHtKXtoSTHQf2af7R9Nbyn99UUJMdIs+aijevLfnXACJbCpJgXp8sOWJxrdFafV+0=
-X-Received: by 2002:a05:600c:a695:b0:3df:97cf:4593 with SMTP id
- ip21-20020a05600ca69500b003df97cf4593mr2052544wmb.6.1678091610761; Mon, 06
- Mar 2023 00:33:30 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pZ6kp-0008VN-1g; Mon, 06 Mar 2023 04:03:39 -0500
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pZ6kl-0002dQ-Cc; Mon, 06 Mar 2023 04:03:34 -0500
+Received: from localhost.localdomain (unknown [180.165.240.213])
+ by APP-01 (Coremail) with SMTP id qwCowADX8NRUrAVkS7fuCw--.45017S3;
+ Mon, 06 Mar 2023 17:03:18 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH 1/1] hw/riscv: Add signature dump function for spike to run
+ ACT tests
+Date: Mon,  6 Mar 2023 17:03:14 +0800
+Message-Id: <20230306090314.74626-2-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230306090314.74626-1-liweiwei@iscas.ac.cn>
+References: <20230306090314.74626-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-References: <20230303131252.892893-1-alexghiti@rivosinc.com>
- <mhng-4e784c07-e2bb-40f9-a42c-d4b3c331ddba@palmer-ri-x1c9a>
-In-Reply-To: <mhng-4e784c07-e2bb-40f9-a42c-d4b3c331ddba@palmer-ri-x1c9a>
-From: Alexandre Ghiti <alexghiti@rivosinc.com>
-Date: Mon, 6 Mar 2023 09:33:20 +0100
-Message-ID: <CAHVXubiCH=X-gi37DFpOFWsNn=-vPnKe4SV2Gnt6P-r1SFLKPQ@mail.gmail.com>
-Subject: Re: [PATCH v11 0/5] riscv: Allow user to set the satp mode
-To: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: dbarboza@ventanamicro.com, Alistair Francis <Alistair.Francis@wdc.com>, 
- bin.meng@windriver.com, ajones@ventanamicro.com, frank.chang@sifive.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=alexghiti@rivosinc.com; helo=mail-wm1-x32b.google.com
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: qwCowADX8NRUrAVkS7fuCw--.45017S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxZF1DXF15KF1xCF1DAF43KFg_yoWrWF15pF
+ s3GFn8Cry5JFn3JFnxtw18ua1rGws3J3W7KrsxCw18Zan8WFy7Aan7ta45Zan8GFWxZa1U
+ JFWDGFy3KF45Zw7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBE14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+ x26xkF7I0E14v26r1I6r4UM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
+ 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
+ 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+ IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+ Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
+ xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
+ 6r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2
+ Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
+ Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMI
+ IF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUqAp5UUUUU
+ =
+X-Originating-IP: [180.165.240.213]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,133 +67,135 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Mar 2023 08:33:45 -0000
+X-List-Received-Date: Mon, 06 Mar 2023 09:03:52 -0000
 
-Hi Palmer,
+Add signature and signature-granularity properties in spike to specify the target
+signatrue file and the line size for signature data.
 
-On Mon, Mar 6, 2023 at 12:34=E2=80=AFAM Palmer Dabbelt <palmer@dabbelt.com>=
- wrote:
->
-> On Fri, 03 Mar 2023 05:12:47 PST (-0800), alexghiti@rivosinc.com wrote:
-> > This introduces new properties to allow the user to set the satp mode,
-> > see patch 3 for full syntax. In addition, it prevents cpus to boot in a
-> > satp mode they do not support (see patch 4).
-> >
-> > base-commit: commit c61d1a066cb6 ("Merge tag 'for-upstream' of
-> > https://gitlab.com/bonzini/qemu into staging")
->
-> I have that, but I still got some merge conflicts.  I've put that here
-> <https://github.com/palmer-dabbelt/qemu/tree/set-satp> for now, pending
-> Daniel's response below.
+Recgonize the signature section between begin_signature and end_signature symbols
+when loading elf of ACT tests. Then dump signature data in signature section just
+before the ACT tests exit.
 
-Weird, I have just tried again and it applied cleanly on the
-base-commit I mentioned, I tried to cherry-pick a few patches, even
-commit d4ea71170432 ("target/riscv: introduce riscv_cpu_cfg()") does
-not break the merge.
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+---
+ hw/char/riscv_htif.c | 39 ++++++++++++++++++++++++++++++++++++++-
+ hw/riscv/spike.c     | 16 ++++++++++++++++
+ 2 files changed, 54 insertions(+), 1 deletion(-)
 
-Anyway, FWIW I checked the patches on the set-satp branch again, and
-your merge seems ok.
+diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+index 098de50e35..2a82ed8500 100644
+--- a/hw/char/riscv_htif.c
++++ b/hw/char/riscv_htif.c
+@@ -29,6 +29,8 @@
+ #include "chardev/char-fe.h"
+ #include "qemu/timer.h"
+ #include "qemu/error-report.h"
++#include "exec/address-spaces.h"
++#include "sysemu/dma.h"
+ 
+ #define RISCV_DEBUG_HTIF 0
+ #define HTIF_DEBUG(fmt, ...)                                                   \
+@@ -51,7 +53,10 @@
+ /* PK system call number */
+ #define PK_SYS_WRITE            64
+ 
+-static uint64_t fromhost_addr, tohost_addr;
++extern const char *sig_file;
++extern uint8_t line_size;
++
++static uint64_t fromhost_addr, tohost_addr, sig_addr, sig_len;
+ 
+ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
+                           uint64_t st_size)
+@@ -68,6 +73,10 @@ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
+             error_report("HTIF tohost must be 8 bytes");
+             exit(1);
+         }
++    } else if (strcmp("begin_signature", st_name) == 0) {
++        sig_addr = st_value;
++    } else if (strcmp("end_signature", st_name) == 0) {
++        sig_len = st_value - sig_addr;
+     }
+ }
+ 
+@@ -161,6 +170,34 @@ static void htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
+         /* frontend syscall handler, shutdown and exit code support */
+         if (cmd == HTIF_SYSTEM_CMD_SYSCALL) {
+             if (payload & 0x1) {
++                /* Dump signature data to sig_file if specified */
++                if (sig_file) {
++                    char *sig_data = g_malloc(sig_len);
++                    dma_memory_read(&address_space_memory, sig_addr, sig_data,
++                                    sig_len, MEMTXATTRS_UNSPECIFIED);
++                    FILE *signature = fopen(sig_file, "w");
++                    if (signature == NULL) {
++                        error_report("open %s: %s", sig_file,
++                                     strerror(errno));
++                        exit(1);
++                    }
++
++                    for (int i = 0; i < sig_len; i += line_size) {
++                        for (int j = line_size; j > 0; j--) {
++                            if (i + j <= sig_len) {
++                                fprintf(signature, "%02x",
++                                        sig_data[i + j - 1] & 0xff);
++                            } else {
++                                fprintf(signature, "%02x", 0);
++                            }
++                        }
++                        fprintf(signature, "\n");
++                    }
++
++                    fclose(signature);
++                    g_free(sig_data);
++                }
++
+                 /* exit code */
+                 int exit_code = payload >> 1;
+                 exit(exit_code);
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index a584d5b3a2..eaa7f54fd6 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -41,6 +41,9 @@
+ 
+ #include <libfdt.h>
+ 
++const char *sig_file;
++uint8_t line_size = 16;
++
+ static const MemMapEntry spike_memmap[] = {
+     [SPIKE_MROM] =     {     0x1000,     0xf000 },
+     [SPIKE_HTIF] =     {  0x1000000,     0x1000 },
+@@ -332,6 +335,11 @@ static void spike_board_init(MachineState *machine)
+                  htif_custom_base);
+ }
+ 
++static void spike_set_signature(Object *obj, const char *val, Error **errp)
++{
++    sig_file = g_strdup(val);
++}
++
+ static void spike_machine_instance_init(Object *obj)
+ {
+ }
+@@ -350,6 +358,14 @@ static void spike_machine_class_init(ObjectClass *oc, void *data)
+     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
+     mc->numa_mem_supported = true;
+     mc->default_ram_id = "riscv.spike.ram";
++    object_class_property_add_str(oc, "signature", NULL, spike_set_signature);
++    object_class_property_set_description(oc, "signature",
++                                          "File to write ACT test signature");
++    object_class_property_add_uint8_ptr(oc, "signature-granularity",
++                                        &line_size, OBJ_PROP_FLAG_WRITE);
++    object_class_property_set_description(oc, "signature-granularity",
++                                          "Size of each line in ACT signature "
++                                          "file");
+ }
+ 
+ static const TypeInfo spike_machine_typeinfo = {
+-- 
+2.25.1
 
->
-> >
-> > v11:
-> > - rebase on top of master
-> > - Added RB/AB from Frank and Alistair
-> > - Use VM_1_10_XX directly instead of satp_mode_from_str, from Frank
-> > - Set satp mode max for thead c906 to sv39
->
-> Daniel: It looks like the feedback on v10 included dropping the first
-> patch
-> <https://lore.kernel.org/qemu-devel/66d80b94-5941-31f3-995f-e9666a91fbb7@=
-ventanamicro.com/T/#macdb6c5232bd8c082966107d7b44aaaec9b29ad6>.
-> Sorry if I'm just misunderstanding, but it looks to me like that patch
-> is still useful and the v11 doesn't even build without it.
-
-No, the first commit is a preparatory commit for the series, it is required=
-.
-
-
->
-> >
-> > v10:
-> > - Fix user mode build by surrounding satp handling with #ifndef
-> >   CONFIG_USER_ONLY, Frank
-> > - Fix AB/RB from Frank and Alistair
-> >
-> > v9:
-> > - Move valid_vm[i] up, Andrew
-> > - Fixed expansion of the bitmap map, Bin
-> > - Rename set_satp_mode_default into set_satp_mode_default_map, Bin
-> > - Remove outer parenthesis and alignment, Bin
-> > - Fix qemu32 build failure, Bin
-> > - Fixed a few typos, Bin
-> > - Add RB from Andrew and Bin
-> >
-> > v8:
-> > - Remove useless !map check, Andrew
-> > - Add RB from Andrew
-> >
-> > v7:
-> > - Expand map to contain all valid modes, Andrew
-> > - Fix commit log for patch 3, Andrew
-> > - Remove is_32_bit argument from set_satp_mode_default, Andrew
-> > - Move and fixed comment, Andrew
-> > - Fix satp_mode_map_max in riscv_cpu_satp_mode_finalize which was set
-> >   too early, Alex
-> > - Remove is_32_bit argument from set_satp_mode_max_supported, Andrew
-> > - Use satp_mode directly instead of a string in
-> >   set_satp_mode_max_supported, Andrew
-> > - Swap the patch introducing supported bitmap and the patch that sets
-> >   sv57 in the dt, Andrew
-> > - Add various RB from Andrew and Alistair, thanks
-> >
-> > v6:
-> > - Remove the valid_vm check in validate_vm and add it to the finalize f=
-unction
-> >   so that map already contains the constraint, Alex
-> > - Add forgotten mbare to satp_mode_from_str, Alex
-> > - Move satp mode properties handling to riscv_cpu_satp_mode_finalize, A=
-ndrew
-> > - Only add satp mode properties corresponding to the cpu, and then remo=
-ve the
-> >   check against valid_vm_1_10_32/64 in riscv_cpu_satp_mode_finalize,
-> >   Andrew/Alistair/Alex
-> > - Move mmu-type setting to its own patch, Andrew
-> > - patch 5 is new and is a fix, Alex
-> >
-> > v5:
-> > - Simplify v4 implementation by leveraging valid_vm_1_10_32/64, as
-> >   suggested by Andrew
-> > - Split the v4 patch into 2 patches as suggested by Andrew
-> > - Lot of other minor corrections, from Andrew
-> > - Set the satp mode N by disabling the satp mode N + 1
-> > - Add a helper to set satp mode from a string, as suggested by Frank
-> >
-> > v4:
-> > - Use custom boolean properties instead of OnOffAuto properties, based
-> >   on ARMVQMap, as suggested by Andrew
-> >
-> > v3:
-> > - Free sv_name as pointed by Bin
-> > - Replace satp-mode with boolean properties as suggested by Andrew
-> > - Removed RB from Atish as the patch considerably changed
-> >
-> > v2:
-> > - Use error_setg + return as suggested by Alistair
-> > - Add RB from Atish
-> > - Fixed checkpatch issues missed in v1
-> > - Replaced Ludovic email address with the rivos one
-> >
-> > Alexandre Ghiti (5):
-> >   riscv: Pass Object to register_cpu_props instead of DeviceState
-> >   riscv: Change type of valid_vm_1_10_[32|64] to bool
-> >   riscv: Allow user to set the satp mode
-> >   riscv: Introduce satp mode hw capabilities
-> >   riscv: Correctly set the device-tree entry 'mmu-type'
-> >
-> >  hw/riscv/virt.c    |  19 +--
-> >  target/riscv/cpu.c | 288 ++++++++++++++++++++++++++++++++++++++++++---
-> >  target/riscv/cpu.h |  25 ++++
-> >  target/riscv/csr.c |  29 +++--
-> >  4 files changed, 323 insertions(+), 38 deletions(-)
 
