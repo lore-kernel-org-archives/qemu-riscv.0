@@ -1,66 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZIwf-0006aT-PC
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 17:04:37 -0500
+	id 1pZIwg-0006bC-Hj
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 17:04:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pZIwd-0006VW-NT
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 17:04:35 -0500
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ id 1pZIwc-0006Uc-Ug
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 17:04:34 -0500
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pZIwc-0006qY-3N
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 17:04:35 -0500
-Received: by mail-pj1-x1034.google.com with SMTP id x34so11342288pjj.0
- for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 14:04:33 -0800 (PST)
+ id 1pZIwb-0006pz-2y
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 17:04:34 -0500
+Received: by mail-pj1-x102a.google.com with SMTP id
+ x20-20020a17090a8a9400b00233ba727724so196600pjn.1
+ for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 14:04:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1678140272;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1678140271;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LLk5MjQxWqWUwFhPTSIibV1K6q+m6IrRjjb/wMuUX4M=;
- b=0zYWOIYH+DBo3z57wwOjjOsX7dM9dQqjq9xwbyVv3OXzLeYstqUeR38IjTGld0+ZyX
- ntkd7Ly8huf+UanzVlHJjY2etHBEq4QfCdYymX5x+bOcnALEuFkHPm+X2Z+ve2/Cfuv5
- w6PWEiST5k7t/P85O7MiXLgbSAVjlWoxAtrf0M4jVKcncaid1+iRT1FgvVKgPc0P7g0n
- 5vTsSXWuE6+0ojCe7cfPpNhH34ZK3cnRsVpS6WJ5A7rC/mdxhZqKJGvxZKhiTacoiDu+
- VmJTrX0nuOejEcaDglhJRLBJ8FyLI8ZFQqHeKtCHR407ejAnLud3GXmY78UOI+bjz1f8
- VedA==
+ bh=mbqFcrDJKQyMd5mS2b0pUWsHV6dPfEh5r93Laun+DQc=;
+ b=SCBt6FqDujAydx5nRG0uohOYNxI+QmURBeowSsrRd0awl2yXPEsyCGzqWaDpw/j7UO
+ CYAAOgd5V1Mv06MGxu4YcinYZ6Gt2yM6xNfXEXQWosJJZmqbQgSArnv0s+n0F4yJqjxm
+ 1MJOeLjt0K3yRkssxVMrrfqafaMfY+HIrjQWiKr4tRbqzgPFxW6+fa4DgdJv5SlEMsfg
+ mXpCG+GcuRu0LrO9rnS4j+oUWQJyXiqscJdltQ5CzVM4mpBWJ00PRU1+TmimjNhX4acr
+ GDqe5ggRYEcNRi0uqAyTyPLE6NFpf8UBt4olx6cO4Vsy8lR3xaIgZzGXkrU7DM4346cs
+ SEDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678140272;
+ d=1e100.net; s=20210112; t=1678140271;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LLk5MjQxWqWUwFhPTSIibV1K6q+m6IrRjjb/wMuUX4M=;
- b=vH/DxfoQ3j3+p7GsIA/7pywUdFZLd2kXGKCZH3julOPFZxKbOaufRk+4d+U8fQwTmp
- 05HPYDjYtr/vfLyjOZVUKG9IQ8GPRusayk+77Vusss/apL0s6mxX/8NSSNuLRimA/hTS
- 9TQCCY/yIJu7vOIVW+7Qy/e8/tK9nwcTxWdMtFKDcij14nZ9NpuCo9M6MjnYooUly6fD
- 4OEImqfanYpMr3gcZ98IcNRuQQkMmmzV6Bnm2qqGFD96wdHaWphwMcX+r4eBhgAt1Xq9
- BR3xmI5IMZqfbZXaHmvDIH7SXOV06TfBkR+/KRsGly3sQwvz69i5x1XL3dBDFnUOlmEb
- 4vNw==
-X-Gm-Message-State: AO0yUKXQlV7ZMpShnQcvkXxpuaa6f0wtHe1eg1VwoZQlDYdfQxE79sib
- NHq+DxxLrWN/VMgu9qXxZ7Isi0zEflb/OKdqbSg=
-X-Google-Smtp-Source: AK7set/b7KPpusAKYfkDCI8sIuqXhGoybWlj79GVCaRJnP+0Bxw+0en4d25KkPYVx/rUKCdWr1DnjQ==
-X-Received: by 2002:a17:903:283:b0:19e:b9f8:1fca with SMTP id
- j3-20020a170903028300b0019eb9f81fcamr6704665plr.10.1678140272623; 
- Mon, 06 Mar 2023 14:04:32 -0800 (PST)
+ bh=mbqFcrDJKQyMd5mS2b0pUWsHV6dPfEh5r93Laun+DQc=;
+ b=lJyedX/B7OcNe9QOqGac6eths5rtQ/hiKyybCiAI9/eK+BCI8mHZWr1jjY9y6ds9ku
+ MEQJBNOUqmUxYVXSM+HtMzZsm488RchRhZdZ2ESnXvw8KBkLPDfKQelxxi7XCsXLVi6O
+ lrrkGnUoommtJ0aJDOS6mXqSRPqLlIppewBBL3IQwkB7Dx0th0bGbEzZIpQSBAcmZB7c
+ juG2l4Ntvepiw2A5DiMT4NV40EDV4L9DI6gsV74pe/yMlJAFqY4hipOj4e4IuMR+UBKI
+ a/EcPLKExYYi12vEXlQ9nb1XcXq4Rp8O7dGKo7ytlFOd+lsnr0T2T3Dm9JKzJpyK5fUl
+ n76g==
+X-Gm-Message-State: AO0yUKVN5Vr/v0Xl9S/3L4oD/Q4Q5jpip8Z8QZs9pGYof870VIqBWjZv
+ X/tnFslNl+QMInBS7nS256cTRMMwXTy+Dyuvhh4=
+X-Google-Smtp-Source: AK7set+k0rcnVkX/AnahiQH5ck9EzFxz4qWwnAUxGlkugTuam6WXVIVOFHjkU0U0WGxOdJyL3J5syw==
+X-Received: by 2002:a17:90b:1c87:b0:234:d78:9b4c with SMTP id
+ oo7-20020a17090b1c8700b002340d789b4cmr12700523pjb.18.1678140271427; 
+ Mon, 06 Mar 2023 14:04:31 -0800 (PST)
 Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
- lc5-20020a170902fa8500b0019a7bb18f98sm7235846plb.48.2023.03.06.14.04.32
+ y31-20020a63181f000000b004f27761a9e7sm6438336pgl.12.2023.03.06.14.04.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Mar 2023 14:04:32 -0800 (PST)
-Subject: [PULL 08/22] gitlab/opensbi: Move to docker:stable
-Date: Mon,  6 Mar 2023 14:02:45 -0800
-Message-Id: <20230306220259.7748-9-palmer@rivosinc.com>
+ Mon, 06 Mar 2023 14:04:31 -0800 (PST)
+Subject: [PULL 07/22] hw: intc: Use cpu_by_arch_id to fetch CPU state
+Date: Mon,  6 Mar 2023 14:02:44 -0800
+Message-Id: <20230306220259.7748-8-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230306220259.7748-1-palmer@rivosinc.com>
 References: <20230306220259.7748-1-palmer@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
- Palmer Dabbelt <palmer@rivosinc.com>, Bin Meng <bmeng@tinylab.org>
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Anup Patel <apatel@ventanamicro.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Palmer Dabbelt <palmer@rivosinc.com>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=palmer@rivosinc.com; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=palmer@rivosinc.com; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -81,55 +85,147 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Mon, 06 Mar 2023 22:04:35 -0000
 
-The OpenSBI build has been using docker:19.03.1, which appears to be old
-enough that v2 of the manifest is no longer supported.  Something has
-started serving us those manifests, resulting in errors along the lines
-of
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
 
-    $ docker build --cache-from $IMAGE_TAG --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $IMAGE_TAG .gitlab-ci.d/opensbi
-    Step 1/7 : FROM ubuntu:18.04
-    18.04: Pulling from library/ubuntu
-    mediaType in manifest should be 'application/vnd.docker.distribution.manifest.v2+json' not 'application/vnd.oci.image.manifest.v1+json'
+Qemu_get_cpu uses the logical CPU id assigned during init to fetch the
+CPU state. However APLIC, IMSIC and ACLINT contain registers and states
+which are specific to physical hart Ids. The hart Ids in any given system
+might be sparse and hence calls to qemu_get_cpu need to be replaced by
+cpu_by_arch_id which performs lookup based on the sparse physical hart IDs.
 
-This moves to docker:stable, as was suggested by the template.  It also
-adds the python3 package via apt, as OpenSBI requires that to build.
-
-Reviewed-by: Bin Meng <bmeng@tinylab.org>
-Message-ID: <20230303202448.11911-2-palmer@rivosinc.com>
+Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Message-ID: <20230303065055.915652-3-mchitale@ventanamicro.com>
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- .gitlab-ci.d/opensbi.yml        | 4 ++--
- .gitlab-ci.d/opensbi/Dockerfile | 1 +
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ hw/intc/riscv_aclint.c | 16 ++++++++--------
+ hw/intc/riscv_aplic.c  |  4 ++--
+ hw/intc/riscv_imsic.c  |  6 +++---
+ 3 files changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/.gitlab-ci.d/opensbi.yml b/.gitlab-ci.d/opensbi.yml
-index 04ed5a3ea1..9a651465d8 100644
---- a/.gitlab-ci.d/opensbi.yml
-+++ b/.gitlab-ci.d/opensbi.yml
-@@ -42,9 +42,9 @@
- docker-opensbi:
-   extends: .opensbi_job_rules
-   stage: containers
--  image: docker:19.03.1
-+  image: docker:stable
-   services:
--    - docker:19.03.1-dind
-+    - docker:stable-dind
-   variables:
-     GIT_DEPTH: 3
-     IMAGE_TAG: $CI_REGISTRY_IMAGE:opensbi-cross-build
-diff --git a/.gitlab-ci.d/opensbi/Dockerfile b/.gitlab-ci.d/opensbi/Dockerfile
-index 4ba8a4de86..5ccf4151f4 100644
---- a/.gitlab-ci.d/opensbi/Dockerfile
-+++ b/.gitlab-ci.d/opensbi/Dockerfile
-@@ -15,6 +15,7 @@ RUN apt update \
-         ca-certificates \
-         git \
-         make \
-+	python3 \
-         wget \
-     && \
-     \
+diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+index eee04643cb..b466a6abaf 100644
+--- a/hw/intc/riscv_aclint.c
++++ b/hw/intc/riscv_aclint.c
+@@ -130,7 +130,7 @@ static uint64_t riscv_aclint_mtimer_read(void *opaque, hwaddr addr,
+         addr < (mtimer->timecmp_base + (mtimer->num_harts << 3))) {
+         size_t hartid = mtimer->hartid_base +
+                         ((addr - mtimer->timecmp_base) >> 3);
+-        CPUState *cpu = qemu_get_cpu(hartid);
++        CPUState *cpu = cpu_by_arch_id(hartid);
+         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
+         if (!env) {
+             qemu_log_mask(LOG_GUEST_ERROR,
+@@ -173,7 +173,7 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
+         addr < (mtimer->timecmp_base + (mtimer->num_harts << 3))) {
+         size_t hartid = mtimer->hartid_base +
+                         ((addr - mtimer->timecmp_base) >> 3);
+-        CPUState *cpu = qemu_get_cpu(hartid);
++        CPUState *cpu = cpu_by_arch_id(hartid);
+         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
+         if (!env) {
+             qemu_log_mask(LOG_GUEST_ERROR,
+@@ -231,7 +231,7 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
+ 
+         /* Check if timer interrupt is triggered for each hart. */
+         for (i = 0; i < mtimer->num_harts; i++) {
+-            CPUState *cpu = qemu_get_cpu(mtimer->hartid_base + i);
++            CPUState *cpu = cpu_by_arch_id(mtimer->hartid_base + i);
+             CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
+             if (!env) {
+                 continue;
+@@ -292,7 +292,7 @@ static void riscv_aclint_mtimer_realize(DeviceState *dev, Error **errp)
+     s->timecmp = g_new0(uint64_t, s->num_harts);
+     /* Claim timer interrupt bits */
+     for (i = 0; i < s->num_harts; i++) {
+-        RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(s->hartid_base + i));
++        RISCVCPU *cpu = RISCV_CPU(cpu_by_arch_id(s->hartid_base + i));
+         if (riscv_cpu_claim_interrupts(cpu, MIP_MTIP) < 0) {
+             error_report("MTIP already claimed");
+             exit(1);
+@@ -372,7 +372,7 @@ DeviceState *riscv_aclint_mtimer_create(hwaddr addr, hwaddr size,
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+ 
+     for (i = 0; i < num_harts; i++) {
+-        CPUState *cpu = qemu_get_cpu(hartid_base + i);
++        CPUState *cpu = cpu_by_arch_id(hartid_base + i);
+         RISCVCPU *rvcpu = RISCV_CPU(cpu);
+         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
+         riscv_aclint_mtimer_callback *cb =
+@@ -407,7 +407,7 @@ static uint64_t riscv_aclint_swi_read(void *opaque, hwaddr addr,
+ 
+     if (addr < (swi->num_harts << 2)) {
+         size_t hartid = swi->hartid_base + (addr >> 2);
+-        CPUState *cpu = qemu_get_cpu(hartid);
++        CPUState *cpu = cpu_by_arch_id(hartid);
+         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
+         if (!env) {
+             qemu_log_mask(LOG_GUEST_ERROR,
+@@ -430,7 +430,7 @@ static void riscv_aclint_swi_write(void *opaque, hwaddr addr, uint64_t value,
+ 
+     if (addr < (swi->num_harts << 2)) {
+         size_t hartid = swi->hartid_base + (addr >> 2);
+-        CPUState *cpu = qemu_get_cpu(hartid);
++        CPUState *cpu = cpu_by_arch_id(hartid);
+         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
+         if (!env) {
+             qemu_log_mask(LOG_GUEST_ERROR,
+@@ -545,7 +545,7 @@ DeviceState *riscv_aclint_swi_create(hwaddr addr, uint32_t hartid_base,
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+ 
+     for (i = 0; i < num_harts; i++) {
+-        CPUState *cpu = qemu_get_cpu(hartid_base + i);
++        CPUState *cpu = cpu_by_arch_id(hartid_base + i);
+         RISCVCPU *rvcpu = RISCV_CPU(cpu);
+ 
+         qdev_connect_gpio_out(dev, i,
+diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+index cfd007e629..cd7efc4ad4 100644
+--- a/hw/intc/riscv_aplic.c
++++ b/hw/intc/riscv_aplic.c
+@@ -833,7 +833,7 @@ static void riscv_aplic_realize(DeviceState *dev, Error **errp)
+ 
+         /* Claim the CPU interrupt to be triggered by this APLIC */
+         for (i = 0; i < aplic->num_harts; i++) {
+-            RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(aplic->hartid_base + i));
++            RISCVCPU *cpu = RISCV_CPU(cpu_by_arch_id(aplic->hartid_base + i));
+             if (riscv_cpu_claim_interrupts(cpu,
+                 (aplic->mmode) ? MIP_MEIP : MIP_SEIP) < 0) {
+                 error_report("%s already claimed",
+@@ -966,7 +966,7 @@ DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
+ 
+     if (!msimode) {
+         for (i = 0; i < num_harts; i++) {
+-            CPUState *cpu = qemu_get_cpu(hartid_base + i);
++            CPUState *cpu = cpu_by_arch_id(hartid_base + i);
+ 
+             qdev_connect_gpio_out_named(dev, NULL, i,
+                                         qdev_get_gpio_in(DEVICE(cpu),
+diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+index 4d4d5b50ca..fea3385b51 100644
+--- a/hw/intc/riscv_imsic.c
++++ b/hw/intc/riscv_imsic.c
+@@ -316,8 +316,8 @@ static const MemoryRegionOps riscv_imsic_ops = {
+ static void riscv_imsic_realize(DeviceState *dev, Error **errp)
+ {
+     RISCVIMSICState *imsic = RISCV_IMSIC(dev);
+-    RISCVCPU *rcpu = RISCV_CPU(qemu_get_cpu(imsic->hartid));
+-    CPUState *cpu = qemu_get_cpu(imsic->hartid);
++    RISCVCPU *rcpu = RISCV_CPU(cpu_by_arch_id(imsic->hartid));
++    CPUState *cpu = cpu_by_arch_id(imsic->hartid);
+     CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
+ 
+     imsic->num_eistate = imsic->num_pages * imsic->num_irqs;
+@@ -413,7 +413,7 @@ DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,
+                                 uint32_t num_pages, uint32_t num_ids)
+ {
+     DeviceState *dev = qdev_new(TYPE_RISCV_IMSIC);
+-    CPUState *cpu = qemu_get_cpu(hartid);
++    CPUState *cpu = cpu_by_arch_id(hartid);
+     uint32_t i;
+ 
+     assert(!(addr & (IMSIC_MMIO_PAGE_SZ - 1)));
 -- 
 2.39.2
 
