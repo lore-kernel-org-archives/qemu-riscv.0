@@ -1,58 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZBdk-0006xB-VJ
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 09:16:36 -0500
+	id 1pZBfG-0001KZ-RW
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 09:18:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBdj-0006vV-An
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 09:16:35 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBfD-0001Fa-0n
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 09:18:08 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBdg-0001Ke-DO
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 09:16:34 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- j19-20020a05600c1c1300b003e9b564fae9so8294827wms.2
- for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 06:16:31 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBfA-0001h6-D1
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 09:18:06 -0500
+Received: by mail-wr1-x434.google.com with SMTP id j2so8959877wrh.9
+ for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 06:18:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678112190;
+ d=linaro.org; s=google; t=1678112283;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=JhuEQ3p/0JOhSZuNJ9191rf4J1UXNZ0JvQASlmYbeYE=;
- b=ceYAdKfrKRBJIeI09+5wHtOQYeVHJB8c6gngUe707dS5GP4pRfSwb936/z7zwzplyx
- WGdMcpWA/ush4tYmwCyU8iZijhIFP0zcehG3uculDLVAAPV83o971XokAbnASx8u8hjq
- xOmGZM2u57mUtDDtLn7t17CbOrWdMUcIvMNL45hFSSAFJ+U7w3Yf4JB/DrGkGLnaqMtn
- zz8dMEMUSrzGr5HbHJeuUBkatFxMhd0DQLy9yQJW2Tin4F1+Y044FuO5I80YeoHsc/fZ
- LRv3+OqG3gmwKDySFEtlliOQOjC6nzSn8JSywvAhkMiA/I3lqDbO18xoK9Eh+Nazzeze
- /HCg==
+ bh=O9vuSGrgX+yoQzwoRqKUNQvM6R0Y4d2jIW7l9KHayos=;
+ b=P7XBvOQLKeOWUVy3aTgbV5xUKie21SrtVB0G7szU+AppCqwDvSSp2HtV0v/Zzb8l27
+ UkmIFv0VGQ4b9lKDo9pXK28eQrx4rZ0iiTkl9KHbDuhnScgmQf8feS3Vv7jPHck2vBEJ
+ 15jHQwL5uacMPz5vXbEHwaYn/G9sjzpELGoR3P+gXifezE0IppUYk3C8EwBGYWuSmivE
+ ccMt7NLpjwjqjTCRVG10qkzYASKW3YMH4+c5yIzdJlfMPgaJhw4bHwREQMP6HCVQ8tRg
+ 6dThWDSAtUrxdvJ3yYSnakiMiNUotv/Xcugi83CXyEAGdYI1vTSA6xB3rTXvqwjgWsgr
+ WeHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678112190;
+ d=1e100.net; s=20210112; t=1678112283;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JhuEQ3p/0JOhSZuNJ9191rf4J1UXNZ0JvQASlmYbeYE=;
- b=sUrCa3N1Zh7XkZg5iY9OnSLkd6E2RFBFM913/2lb+CSGMHlQ//zri1X0ABgH4IJu6C
- 24M4Uqh5B+e2PwIueXAKPcjCpwvHbDlPb9LboxWHIfy8hXZBVcVOg/AUrGLMiLzhdoE7
- CULvqTGCoR0VJP5WHZszJHOKR961giDeieKORCj1Z91iiRn2KBkE5llWyO21kd8JbGNS
- 6EvHJ7alJcqGVwYxpImqFsh1fvGjwvkJzsAOcOpaQRl8CrVmrtq4CAobwreIzJmQ80Pt
- Xk/77767UKIGLkqpjQn22dzhFCNmjkrm8rAj8vZ/EqPwME/+qcNnBQOc2PfL8s5ka+fw
- 7jEw==
-X-Gm-Message-State: AO0yUKUzBScJOsvCwjXilRUvyFC3DTIIIaErtmIsdrfHNhOWG6ZIfgou
- NMsP8ZX1+Y2HjUk4O8/rvQm5eA==
-X-Google-Smtp-Source: AK7set/+9TIALIeMis4nNZNGK+8wSR7ZbYDW+f5oL0agyuuUpIf/OLr2NxiK8tAj5qh0F+ndCJ2JKg==
-X-Received: by 2002:a05:600c:524d:b0:3eb:38a2:2bbc with SMTP id
- fc13-20020a05600c524d00b003eb38a22bbcmr8983900wmb.7.1678112190555; 
- Mon, 06 Mar 2023 06:16:30 -0800 (PST)
+ bh=O9vuSGrgX+yoQzwoRqKUNQvM6R0Y4d2jIW7l9KHayos=;
+ b=UCnN/S/rw5xyXcpJyWxzqrlkCiVnU4oKAzfYMJw3LTlxCXWabE9fDjntKhCt+WUpz/
+ T/O25GpchdNUD0DmFE7NDJECrfxYyZbw5DmS2WUQdvEgmImsQlC9HjrgKWaWA7k+ZICP
+ aehwmEDtZButLzIjS3tD12uDbGchAc+xCYA6RANy8CXfhVNoTwKW4N58svNkMJo9/U2Y
+ LCptCPRfs+i2Zr4HjDQ2jOy/2gXVQiFV4OZjkOLSNd7CFO405RPu46JfGd56+gXyDjzw
+ s+T7/5GSqDJ7fvLttVt5osxhWAvT/oYpXYO36Ty4TibfWlnonShcaMQd9Q/vayMf1bFQ
+ k3ag==
+X-Gm-Message-State: AO0yUKX3HLxCvQCIlwhIZC4bcDptxNN8ZIKSyw+4ClHlK8Kimq5RbDk4
+ AtMzU8U+p7pruUqzi3qBeSiEtg==
+X-Google-Smtp-Source: AK7set/YPmtRp1uWmBq3+hNToshMrochkalbho74DiaJ6/oPCLXZsYnZqq2BcHeUs3AykzId9AJo2A==
+X-Received: by 2002:a5d:664e:0:b0:2c5:3ccf:e99a with SMTP id
+ f14-20020a5d664e000000b002c53ccfe99amr6927647wrw.6.1678112282724; 
+ Mon, 06 Mar 2023 06:18:02 -0800 (PST)
 Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- w34-20020a05600c09a200b003e21f959453sm10303150wmp.32.2023.03.06.06.16.29
+ k4-20020adfd844000000b002c57384dfe0sm10135231wrl.113.2023.03.06.06.18.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Mar 2023 06:16:30 -0800 (PST)
-Message-ID: <ca40823c-e766-ea05-6a28-71a267b3d7dd@linaro.org>
-Date: Mon, 6 Mar 2023 15:16:28 +0100
+ Mon, 06 Mar 2023 06:18:02 -0800 (PST)
+Message-ID: <10637298-4d36-709a-6b73-4281f1dcfd28@linaro.org>
+Date: Mon, 6 Mar 2023 15:18:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.8.0
-Subject: Re: [PATCH 35/70] target/ppc: Avoid tcg_const_i64 in
- do_vector_shift_quad
+Subject: Re: [PATCH 48/70] target/rx: Avoid tcg_const_i32 when new temp needed
 Content-Language: en-US
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -60,13 +58,13 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
 References: <20230227054233.390271-1-richard.henderson@linaro.org>
- <20230227054233.390271-36-richard.henderson@linaro.org>
+ <20230227054233.390271-49-richard.henderson@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230227054233.390271-36-richard.henderson@linaro.org>
+In-Reply-To: <20230227054233.390271-49-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -86,15 +84,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Mar 2023 14:16:35 -0000
+X-List-Received-Date: Mon, 06 Mar 2023 14:18:09 -0000
 
-On 27/2/23 06:41, Richard Henderson wrote:
+On 27/2/23 06:42, Richard Henderson wrote:
+> These three cases use a constant as first input, and
+> then overwrite the temp in the output.  Separate them.
+> 
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   target/ppc/translate/vmx-impl.c.inc | 4 +++-
->   1 file changed, 3 insertions(+), 1 deletion(-)
+>   target/rx/translate.c | 12 ++++++------
+>   1 file changed, 6 insertions(+), 6 deletions(-)
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-
 
 
