@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZCZA-0000EA-3r
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 10:15:56 -0500
+	id 1pZCfy-0005ba-Pu
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 10:22:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZCZ8-0000Bv-RC
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 10:15:54 -0500
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZCfx-0005YM-Cz
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 10:22:57 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZCZ6-0006Y5-4X
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 10:15:54 -0500
-Received: by mail-wr1-x42e.google.com with SMTP id bx12so9158885wrb.11
- for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 07:15:51 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZCfu-0007y8-BT
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 10:22:57 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ ay29-20020a05600c1e1d00b003e9f4c2b623so8439105wmb.3
+ for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 07:22:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678115750;
+ d=linaro.org; s=google; t=1678116172;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=yRQl9IavSP2ECC7Npy1kkvDd7fq8yF3XjhXOCTQ7O94=;
- b=YquRDKbKEtYWh2bDDkqMNyQreLSxV4TO/zSf+aL6uxzZPmB/VPMKvw23JlSZ7TKT2t
- Xfv/wAgD3jbXBNqUpiVkNHoccaGMi7v7QFK8m/jR9yySZG7Y3kCZopRJdrvQtfjr3K/Q
- Y9pvgboZPkj44EY6xbwzsSIft1ThrNplVhqg/El6vN0yY0GmKB3Xaneb6s2b7LiBDedM
- u3XRqtbjMNbYdmMt5V0+pzAisjju9HKET16dnBWmUIL7ZE+VxuRZfRYodQ9EPvlROzFX
- 9ytFi2q0/AxIJwOAT5ljYLwvDFtm21FYSJfwD9KyCI3gpuwnnxEWnRi0fA1NyGChwUDB
- dsuA==
+ bh=zaZzsHFDAUulgPgGq9RguUXw3QMu9+56YCieruNcXXI=;
+ b=c7QSTelMP52C0T+LH3uI4z+izyvCVWq3rMkgcJZM0Oxv7yItWV0PtyaMoAfCkzc0iK
+ IMgVp16UUpFJSmq2wUmrpxqwMDkNV4LZ3b9sU+Jo+MBxqwMJ0dOqDJhwkh8xiU/+NDde
+ UJw3O0yoRFKuRzwvMnIBlVf4pu7mUboLiqE5hLOgrzG6dncfaoZKxyqZw9TW92HolWMw
+ LriMP6tHWmlwbLvQIqV0vB3NH42jtF6cQPRKj8Z+A/c5TKy9sbvq5LH9AeN3bC9Q9uOt
+ HvQY9MOUTxjKRlVuCo3vWXLWL8NKjYnj2CCa0eDORQYKHhw4/LZWNrX7IBgABROsggSz
+ XAKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678115750;
+ d=1e100.net; s=20210112; t=1678116172;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=yRQl9IavSP2ECC7Npy1kkvDd7fq8yF3XjhXOCTQ7O94=;
- b=NY/xjsSOVLsUJEWghnwgUBCWRge4yoUU1nyYDPNidWiYb6sIYaPkG5ArG1Yy0uIKDr
- PZgQ2ZO1XqJUaPpGem/8csas+u+SPoajyeSsbQYJJZQsFkH+nFzoGxKu55SMaTT1zFVL
- 0ekJ3Hc9JlGi3Qmxv2o/dwhD0c4B9+tyT4RHHeQZSC4gWXfnoFYEgiJ2gvgx47aYYCtd
- FTP17pzF3Ko1n15ZgEToZmIOJ3wlfzpNBBnjwnuAcKcAVKnaERcjdnvMzqgyIjSoxLHd
- PirzalK4+yF1Nk251qwU/EjUVIf8pxdxQb7PHOn+NY4UeI5sZl5Fivh5taw9mWczgenc
- rO4g==
-X-Gm-Message-State: AO0yUKUFRpAEmMvJSVfeU8RPiRPY4Wau6ScOkLSW5N2sQJfMpcv6O/DG
- vVBY/AX8D6mirfRF4uGYEK3w6A==
-X-Google-Smtp-Source: AK7set+37np1BJ1mhdQXd/QD/bscRr/zPqmnUVof8TjkCv+PNp1z7+lduk7lnkA9tutnLDPccK/Osg==
-X-Received: by 2002:adf:f20d:0:b0:2c7:e60:a41d with SMTP id
- p13-20020adff20d000000b002c70e60a41dmr7235515wro.61.1678115750559; 
- Mon, 06 Mar 2023 07:15:50 -0800 (PST)
+ bh=zaZzsHFDAUulgPgGq9RguUXw3QMu9+56YCieruNcXXI=;
+ b=zrwI226QLCMmeghbFvLlrgqh3TToD2OgNbvws26L3qMHaFgRHXzTp43oHfkYlSbAWh
+ asyaOoXLkoBT0TuUTubAwcO+qYcBxxJHhBXzAoY1R94nQnp61XP5nCr2zQP0L2EwHSI9
+ 42Ge8Wzee1YPnGhLwth2Pi4nMIizoCs3vzbDjldGk8/1w1BHe2oMnbnAz4DnFXj38kCG
+ nWgErGMOaAiZp6svkHymOStVD0pWSsg2wTUOXYTgnRC5e1zyDOyFJfx8RxwGiQn6GWOW
+ S6Mk6gEgqJS+NnnAAU6Jnj8HGUkZ8BEyNHLRrB29cEoKSJFNpA9uokKW7KxaIGkxTeXj
+ levA==
+X-Gm-Message-State: AO0yUKVFIld3GMEAnG/N0GMuE+KzhD2FqXNLdYSBdThsQsWZVAAXB+ti
+ Qwf9kio5Vw2GgdeuI9GWFndK8w==
+X-Google-Smtp-Source: AK7set/RaZMfpZ5TGLTlgaXyai2lkOwpe1o6Mf9xtFEWlE/XRwh1aNal0PhVUA52Yk3RoeFLwphvxA==
+X-Received: by 2002:a05:600c:6001:b0:3eb:38e6:f650 with SMTP id
+ az1-20020a05600c600100b003eb38e6f650mr9546881wmb.41.1678116172461; 
+ Mon, 06 Mar 2023 07:22:52 -0800 (PST)
 Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- n1-20020adffe01000000b002c4084d3472sm10349148wrr.58.2023.03.06.07.15.49
+ n37-20020a05600c3ba500b003e2052bad94sm15658781wms.33.2023.03.06.07.22.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Mar 2023 07:15:50 -0800 (PST)
-Message-ID: <c5541883-df72-90ac-88d3-ecc01c78058d@linaro.org>
-Date: Mon, 6 Mar 2023 16:15:47 +0100
+ Mon, 06 Mar 2023 07:22:51 -0800 (PST)
+Message-ID: <651db4ce-9085-2f48-f1e7-295884759833@linaro.org>
+Date: Mon, 6 Mar 2023 16:22:49 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.8.0
-Subject: Re: [PATCH 10/70] target/arm: Avoid tcg_const_ptr in
- handle_vec_simd_sqshrn
+Subject: Re: [PATCH 11/70] target/arm: Avoid tcg_const_ptr in handle_rev
 Content-Language: en-US
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -59,13 +59,13 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
 References: <20230227054233.390271-1-richard.henderson@linaro.org>
- <20230227054233.390271-11-richard.henderson@linaro.org>
+ <20230227054233.390271-12-richard.henderson@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230227054233.390271-11-richard.henderson@linaro.org>
+In-Reply-To: <20230227054233.390271-12-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -85,18 +85,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Mar 2023 15:15:55 -0000
+X-List-Received-Date: Mon, 06 Mar 2023 15:22:57 -0000
 
 On 27/2/23 06:41, Richard Henderson wrote:
-> It is easy enough to use mov instead of or-with-zero
-> and relying on the optimizer to fold away the or.
+> Here it is not trivial to notice first initialization, so explicitly
+> zero the temps.  Use an array for the output, rather than separate
+> tcg_rd/tcg_rd_hi variables.
+> 
+> Fixes a bug by adding a missing clear_vec_high.
 > 
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   target/arm/translate-a64.c | 8 ++++++--
->   1 file changed, 6 insertions(+), 2 deletions(-)
+>   target/arm/translate-a64.c | 26 +++++++++++++++-----------
+>   1 file changed, 15 insertions(+), 11 deletions(-)
+> 
+> diff --git a/target/arm/translate-a64.c b/target/arm/translate-a64.c
+> index 16aa71451c..02a61aa8b7 100644
+> --- a/target/arm/translate-a64.c
+> +++ b/target/arm/translate-a64.c
+> @@ -12003,22 +12003,26 @@ static void handle_rev(DisasContext *s, int opcode, bool u,
+>           int esize = 8 << size;
+>           int elements = dsize / esize;
+>           TCGv_i64 tcg_rn = tcg_temp_new_i64();
+> -        TCGv_i64 tcg_rd = tcg_const_i64(0);
+> -        TCGv_i64 tcg_rd_hi = tcg_const_i64(0);
+> +        TCGv_i64 tcg_rd[2];
+> +
+> +        for (i = 0; i < 2; i++) {
+> +            tcg_rd[i] = tcg_temp_new_i64();
+> +            tcg_gen_movi_i64(tcg_rd[i], 0);
+> +        }
+>   
+>           for (i = 0; i < elements; i++) {
+>               int e_rev = (i & 0xf) ^ revmask;
+> -            int off = e_rev * esize;
+> +            int w = (e_rev * esize) / 64;
+> +            int o = (e_rev * esize) % 64;
+> +
+>               read_vec_element(s, tcg_rn, rn, i, size);
+> -            if (off >= 64) {
+> -                tcg_gen_deposit_i64(tcg_rd_hi, tcg_rd_hi,
+> -                                    tcg_rn, off - 64, esize);
+> -            } else {
+> -                tcg_gen_deposit_i64(tcg_rd, tcg_rd, tcg_rn, off, esize);
+> -            }
+> +            tcg_gen_deposit_i64(tcg_rd[w], tcg_rd[w], tcg_rn, o, esize);
+>           }
+> -        write_vec_element(s, tcg_rd, rd, 0, MO_64);
+> -        write_vec_element(s, tcg_rd_hi, rd, 1, MO_64);
+> +
+> +        for (i = 0; i < 2; i++) {
+> +            write_vec_element(s, tcg_rd[i], rd, i, MO_64);
+> +        }
+
+Preferably splitting the bugfix in a preliminary patch,
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
+> +        clear_vec_high(s, true, rd);
+>       }
+>   }
+>   
 
 
