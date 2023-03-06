@@ -1,56 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZBEV-00056j-Fo
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 08:50:32 -0500
+	id 1pZBFk-0007Jm-9O
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 08:51:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBER-00055h-48
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 08:50:27 -0500
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBFj-0007IG-BP
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 08:51:47 -0500
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBEP-00044J-Dl
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 08:50:26 -0500
-Received: by mail-wr1-x433.google.com with SMTP id bx12so8852024wrb.11
- for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 05:50:18 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBFh-0004QL-D4
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 08:51:46 -0500
+Received: by mail-wm1-x330.google.com with SMTP id
+ o11-20020a05600c4fcb00b003eb33ea29a8so5234941wmq.1
+ for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 05:51:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678110617;
+ d=linaro.org; s=google; t=1678110704;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=R6EY7YLlxUlNircTEBcEM7bEjeHXHZddnC6H8JIHLFo=;
- b=VXN5/NSysX8D8XNoV6nEc/9ce7fxc2EDcC26U4QTj6SVBuvQAI9eUS66JVEANwkNZc
- 3OfOuRKbN9V9KDqMaowNV/Tr4fvSoo6olfCoEH6+xEbGyHwXNok0b429zQLANTZYON++
- oDHCqkxjN8CJDWJcrnsF2wrq8Zc0Lzl931NIpMEdR/IyXOU2sfTIDFZVmB5qYUIlk1nt
- D4QouQ8bz636QbxvMKfN+UfTxNMX96YFbCgK4M6C12P4jVTmnIoVlj5TiNcahHp/FOQM
- Zb3O4XTlu19ZSNibpf1iWA6AX06hYR1fwCMAy8wxB1GYz3iqB8r6p8QCg4VWYz1NUJ8Q
- qlSA==
+ bh=tm5wyMoeZT7Hze5SiailHbhj+mbt27BZ3Y9F4zK+rHM=;
+ b=Y1PvHo0Zz6w5Ikug2W+0ELb1PASI0hvPmkfluvPBVtgPVC5z13kmB6Pt8rUGghjcZa
+ 0dat/pltSfJ34gJSooP+2gmNHyMOCNK28lL/9N7bCwVBk52Oylbzr1Wmi3kgvNOBAH1G
+ qLGYNiLIQbCvgE2La0UDpQIqWgCGZhS/Wn2/JGLIFO9daK+yfNunzYkOn41l+DjcsM0u
+ okq3PemyDDme3Kgwh7sEUuPXuhYhgBIgtsIRqH32Nne3TKY7xe9dFxLOrbFqyywdWHYC
+ T87hb4cu5Eq9h7F4GsvmExklLfwOnwRU9aneZErniP6dESvlr7qm5AWmdxagtZ+3ttWU
+ bqAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678110617;
+ d=1e100.net; s=20210112; t=1678110704;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=R6EY7YLlxUlNircTEBcEM7bEjeHXHZddnC6H8JIHLFo=;
- b=dE+T8Jk5fdq4rNIe/UdEdccVg7o0Qwz2Ge4qcYDzfGI7RtnT895nB+06WId2H9Kfg8
- u23KoHQ2e07lqBxYOsQvkT+pEWjoLc7VNYJmA37F/z2CGFrc9gMpcWPXgUEEHAOcFZJy
- u9QGPwx22cCjugquwfuXk4Uz9CXWioo2gNobwcue1mDfDRHjIEmkcSKmZSDx3395zHPE
- FHTfnkgIT3xjqzOqSOct6ZBkCeeRqLZsIXp5KJ60uSpaFawjDiDp4I9fFHVSrNGbQUeN
- o1h/qngMpAq7Eyn9IA87FdMbibTqGHandl32hjPR02wURfrkIJbJ2PamRZYP+5vK9AoI
- P26w==
-X-Gm-Message-State: AO0yUKVF8TqDvEncvQQF+728pa86m0ZxTgZx94/h66C4vZmbj3Wf5b1G
- Ds8Ivs5y/XQGyOpLTnn8mTX4tg==
-X-Google-Smtp-Source: AK7set9UbgrvIdLIPulF12kQsi9CGnXFBVEunbE1HNKw5sgMMDnFmOWwptesGbGgshDNr5jB6BwK0Q==
-X-Received: by 2002:adf:fa4a:0:b0:2c7:d56:7d72 with SMTP id
- y10-20020adffa4a000000b002c70d567d72mr6104765wrr.19.1678110617503; 
- Mon, 06 Mar 2023 05:50:17 -0800 (PST)
+ bh=tm5wyMoeZT7Hze5SiailHbhj+mbt27BZ3Y9F4zK+rHM=;
+ b=7YQd/jRoROD2w6KbYGYLek8ihU2hWV7dcsJs17PHb3ExUDQOmX3uUdP/rTMOIZ8M91
+ MJgsS3AyiKO6essJuQzlCmExHWdVyr75cOETG1jp4zj/7keL0NlOTtahlkZhKkA8KfAS
+ UtM/eCcr87LmF6+RKpL71MTuQopaFC+V2JdgXOYf9LEK5sdfwrGIp54G3KuYw6UYSfN2
+ wE2egZKVFMbFjvsip43zPnXAreOEoKaz7jZon1siND7LjOynvEONq2u5WGpy9ytPZIiw
+ qdZcC9mJTWCTxonbhdH+xMyQyhgPi6hXMy/WceUp2vW7ofZY+t4N4g24sSi58UbTEvf7
+ jksA==
+X-Gm-Message-State: AO0yUKU9GNsXuSZdd+7Xm1U84hol5+avg9Ot/8XZjeap+m2eal2QmzbQ
+ ZT6ZxAtJV3/dMVnj0nRz1GFj3Q==
+X-Google-Smtp-Source: AK7set9GXoZHnRz3FspEfBc4X4DlR2l4J5Hr4SK55XuIP+jdbW7bq7t4mihFh9VhTnY/gl5UG6QtFw==
+X-Received: by 2002:a05:600c:3d8b:b0:3eb:578d:ded3 with SMTP id
+ bi11-20020a05600c3d8b00b003eb578dded3mr9823514wmb.35.1678110703804; 
+ Mon, 06 Mar 2023 05:51:43 -0800 (PST)
 Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- a7-20020a5d4d47000000b002c5706f7c6dsm9945140wru.94.2023.03.06.05.50.16
+ l21-20020a05600c47d500b003e11ad0750csm9882776wmo.47.2023.03.06.05.51.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Mar 2023 05:50:17 -0800 (PST)
-Message-ID: <a58527ed-1573-75e8-62ad-3123951d93fa@linaro.org>
-Date: Mon, 6 Mar 2023 14:50:15 +0100
+ Mon, 06 Mar 2023 05:51:43 -0800 (PST)
+Message-ID: <4d2f292b-85ce-3943-7fd8-efa9d87587f4@linaro.org>
+Date: Mon, 6 Mar 2023 14:51:41 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.8.0
-Subject: Re: [PATCH 20/70] target/hppa: Avoid tcg_const_i64 in trans_fid_f
+Subject: Re: [PATCH 12/70] target/avr: Avoid use of tcg_const_i32 in SBIC, SBIS
 Content-Language: en-US
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -58,13 +59,13 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
 References: <20230227054233.390271-1-richard.henderson@linaro.org>
- <20230227054233.390271-21-richard.henderson@linaro.org>
+ <20230227054233.390271-13-richard.henderson@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230227054233.390271-21-richard.henderson@linaro.org>
+In-Reply-To: <20230227054233.390271-13-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x433.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -84,16 +85,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Mar 2023 13:50:27 -0000
+X-List-Received-Date: Mon, 06 Mar 2023 13:51:47 -0000
 
 On 27/2/23 06:41, Richard Henderson wrote:
-> Use a C test instead of a pre-processor test for the id.
-> Use tcg_constant_i64 instead of tcg_const_i64.
+> The use of separate data/port variables is existing
+> practice elsewhere, e.g. SBI, CBI.
 > 
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   target/hppa/translate.c | 14 +++++++++-----
->   1 file changed, 9 insertions(+), 5 deletions(-)
+>   target/avr/translate.c | 18 ++++++++++--------
+>   1 file changed, 10 insertions(+), 8 deletions(-)
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
