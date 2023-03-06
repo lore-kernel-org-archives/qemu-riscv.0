@@ -1,70 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZIwe-0006Vs-7s
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 17:04:36 -0500
+	id 1pZIwf-0006aT-PC
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 17:04:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pZIwc-0006UI-0m
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 17:04:34 -0500
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
+ id 1pZIwd-0006VW-NT
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 17:04:35 -0500
+Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pZIwZ-0006pY-Rt
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 17:04:33 -0500
-Received: by mail-pj1-x102d.google.com with SMTP id
- 6-20020a17090a190600b00237c5b6ecd7so14594225pjg.4
- for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 14:04:31 -0800 (PST)
+ id 1pZIwc-0006qY-3N
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 17:04:35 -0500
+Received: by mail-pj1-x1034.google.com with SMTP id x34so11342288pjj.0
+ for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 14:04:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1678140270;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1678140272;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KiJB/Wjm1656LF+Iv/fNcQLwW8gCy5nvZ76GiHAmyoM=;
- b=psBqCLXNc1orSAcLWeyzFe70VmPToSPCdESCoYy37Yr24ewU2u9bjYr3iM2Bgz6OjQ
- ycvNVXuBDcwH+IhVvkpbclOP8dAIPCGVoyKqMQ5q2KrSvoykhrXHsZ3YYr6sr+aXSqq3
- bKN09IrHZ3kwTq9lYXAtDbB0U19t7BbU1J1i7sLhaHAdRHknMwHUfAO83D+KuLhPIKVe
- UKFnonJjlPYlsCC7JAB94J/4aLyQKWfiNyrtVtA1X8AMw9TdhF2eUqJIehF+w1HYmF8q
- LQqNB+PPfngo030Rjit4oONEStHOMHTFY5487bTHafZ+UuJm4/CoKi9/hYwbHKuglv58
- CZXA==
+ bh=LLk5MjQxWqWUwFhPTSIibV1K6q+m6IrRjjb/wMuUX4M=;
+ b=0zYWOIYH+DBo3z57wwOjjOsX7dM9dQqjq9xwbyVv3OXzLeYstqUeR38IjTGld0+ZyX
+ ntkd7Ly8huf+UanzVlHJjY2etHBEq4QfCdYymX5x+bOcnALEuFkHPm+X2Z+ve2/Cfuv5
+ w6PWEiST5k7t/P85O7MiXLgbSAVjlWoxAtrf0M4jVKcncaid1+iRT1FgvVKgPc0P7g0n
+ 5vTsSXWuE6+0ojCe7cfPpNhH34ZK3cnRsVpS6WJ5A7rC/mdxhZqKJGvxZKhiTacoiDu+
+ VmJTrX0nuOejEcaDglhJRLBJ8FyLI8ZFQqHeKtCHR407ejAnLud3GXmY78UOI+bjz1f8
+ VedA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678140270;
+ d=1e100.net; s=20210112; t=1678140272;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KiJB/Wjm1656LF+Iv/fNcQLwW8gCy5nvZ76GiHAmyoM=;
- b=zWbdlZLQi99T/hxt/TwpqGnjx4D5tvrfvRrfQRzOGkuv9TO5ORTHA2HuCaJn/Vk49X
- bs5sNFUNeUVzHWDFnnJp0cRbO3ICtnoZgkhCaZ1CoYzRw6iAS5ykrXAMquCAIh5GHiez
- 26YNpkiO63aaue6LswhKKoPLDhQ2Yy1FcBHMTFLy8a0EYh0i1OHqpPqcGLErf2P36vcC
- rl8id98Wi+z01DCkpeq7+305nvPmYYSSwYHYOsdf0lepfYyLI+zJL0E+QREBGQRrq7rp
- i/7hyvJrlpv/QXIF9mzallMulVLhaAzWkQdKGIl68XV+LolCJAwaFyhXqT3ErhtZRvzv
- xQ2g==
-X-Gm-Message-State: AO0yUKWW+U0Iwqh9BcZKzUx5c7i8SxB0Erf2uShHfX0ZTt0BFZTug+Fo
- 9tdGtijn/0OIBKWfgFC1HN9pZBtgvvtDqWZZfiM=
-X-Google-Smtp-Source: AK7set9Y18aPr7HqX1C2SCqTId+HMlMsrXq4ceZ5hsB4XFE7o9PFNFczJgHxu6QE4V/3XmJmnQCk9w==
-X-Received: by 2002:a17:90b:4c48:b0:23a:cded:5f3 with SMTP id
- np8-20020a17090b4c4800b0023acded05f3mr1887492pjb.49.1678140270313; 
- Mon, 06 Mar 2023 14:04:30 -0800 (PST)
+ bh=LLk5MjQxWqWUwFhPTSIibV1K6q+m6IrRjjb/wMuUX4M=;
+ b=vH/DxfoQ3j3+p7GsIA/7pywUdFZLd2kXGKCZH3julOPFZxKbOaufRk+4d+U8fQwTmp
+ 05HPYDjYtr/vfLyjOZVUKG9IQ8GPRusayk+77Vusss/apL0s6mxX/8NSSNuLRimA/hTS
+ 9TQCCY/yIJu7vOIVW+7Qy/e8/tK9nwcTxWdMtFKDcij14nZ9NpuCo9M6MjnYooUly6fD
+ 4OEImqfanYpMr3gcZ98IcNRuQQkMmmzV6Bnm2qqGFD96wdHaWphwMcX+r4eBhgAt1Xq9
+ BR3xmI5IMZqfbZXaHmvDIH7SXOV06TfBkR+/KRsGly3sQwvz69i5x1XL3dBDFnUOlmEb
+ 4vNw==
+X-Gm-Message-State: AO0yUKXQlV7ZMpShnQcvkXxpuaa6f0wtHe1eg1VwoZQlDYdfQxE79sib
+ NHq+DxxLrWN/VMgu9qXxZ7Isi0zEflb/OKdqbSg=
+X-Google-Smtp-Source: AK7set/b7KPpusAKYfkDCI8sIuqXhGoybWlj79GVCaRJnP+0Bxw+0en4d25KkPYVx/rUKCdWr1DnjQ==
+X-Received: by 2002:a17:903:283:b0:19e:b9f8:1fca with SMTP id
+ j3-20020a170903028300b0019eb9f81fcamr6704665plr.10.1678140272623; 
+ Mon, 06 Mar 2023 14:04:32 -0800 (PST)
 Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
- t19-20020a17090a951300b002367325203fsm8149021pjo.50.2023.03.06.14.04.29
+ lc5-20020a170902fa8500b0019a7bb18f98sm7235846plb.48.2023.03.06.14.04.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Mar 2023 14:04:29 -0800 (PST)
-Subject: [PULL 06/22] target/riscv: cpu: Implement get_arch_id callback
-Date: Mon,  6 Mar 2023 14:02:43 -0800
-Message-Id: <20230306220259.7748-7-palmer@rivosinc.com>
+ Mon, 06 Mar 2023 14:04:32 -0800 (PST)
+Subject: [PULL 08/22] gitlab/opensbi: Move to docker:stable
+Date: Mon,  6 Mar 2023 14:02:45 -0800
+Message-Id: <20230306220259.7748-9-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230306220259.7748-1-palmer@rivosinc.com>
 References: <20230306220259.7748-1-palmer@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@rivosinc.com>
+ Palmer Dabbelt <palmer@rivosinc.com>, Bin Meng <bmeng@tinylab.org>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=palmer@rivosinc.com; helo=mail-pj1-x102d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
+ envelope-from=palmer@rivosinc.com; helo=mail-pj1-x1034.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -83,48 +79,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Mar 2023 22:04:34 -0000
+X-List-Received-Date: Mon, 06 Mar 2023 22:04:35 -0000
 
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
+The OpenSBI build has been using docker:19.03.1, which appears to be old
+enough that v2 of the manifest is no longer supported.  Something has
+started serving us those manifests, resulting in errors along the lines
+of
 
-Implement the callback for getting the architecture-dependent CPU ID ie
-mhartid.
+    $ docker build --cache-from $IMAGE_TAG --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $IMAGE_TAG .gitlab-ci.d/opensbi
+    Step 1/7 : FROM ubuntu:18.04
+    18.04: Pulling from library/ubuntu
+    mediaType in manifest should be 'application/vnd.docker.distribution.manifest.v2+json' not 'application/vnd.oci.image.manifest.v1+json'
 
-Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Message-ID: <20230303065055.915652-2-mchitale@ventanamicro.com>
+This moves to docker:stable, as was suggested by the template.  It also
+adds the python3 package via apt, as OpenSBI requires that to build.
+
+Reviewed-by: Bin Meng <bmeng@tinylab.org>
+Message-ID: <20230303202448.11911-2-palmer@rivosinc.com>
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- target/riscv/cpu.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ .gitlab-ci.d/opensbi.yml        | 4 ++--
+ .gitlab-ci.d/opensbi/Dockerfile | 1 +
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 3e8f21a47d..0ad8f94a42 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1301,6 +1301,13 @@ static const char *riscv_gdb_get_dynamic_xml(CPUState *cs, const char *xmlname)
- }
- 
- #ifndef CONFIG_USER_ONLY
-+static int64_t riscv_get_arch_id(CPUState *cs)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+
-+    return cpu->env.mhartid;
-+}
-+
- #include "hw/core/sysemu-cpu-ops.h"
- 
- static const struct SysemuCPUOps riscv_sysemu_ops = {
-@@ -1355,6 +1362,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
-     cc->disas_set_info = riscv_cpu_disas_set_info;
- #ifndef CONFIG_USER_ONLY
-     cc->sysemu_ops = &riscv_sysemu_ops;
-+    cc->get_arch_id = riscv_get_arch_id;
- #endif
-     cc->gdb_arch_name = riscv_gdb_arch_name;
-     cc->gdb_get_dynamic_xml = riscv_gdb_get_dynamic_xml;
+diff --git a/.gitlab-ci.d/opensbi.yml b/.gitlab-ci.d/opensbi.yml
+index 04ed5a3ea1..9a651465d8 100644
+--- a/.gitlab-ci.d/opensbi.yml
++++ b/.gitlab-ci.d/opensbi.yml
+@@ -42,9 +42,9 @@
+ docker-opensbi:
+   extends: .opensbi_job_rules
+   stage: containers
+-  image: docker:19.03.1
++  image: docker:stable
+   services:
+-    - docker:19.03.1-dind
++    - docker:stable-dind
+   variables:
+     GIT_DEPTH: 3
+     IMAGE_TAG: $CI_REGISTRY_IMAGE:opensbi-cross-build
+diff --git a/.gitlab-ci.d/opensbi/Dockerfile b/.gitlab-ci.d/opensbi/Dockerfile
+index 4ba8a4de86..5ccf4151f4 100644
+--- a/.gitlab-ci.d/opensbi/Dockerfile
++++ b/.gitlab-ci.d/opensbi/Dockerfile
+@@ -15,6 +15,7 @@ RUN apt update \
+         ca-certificates \
+         git \
+         make \
++	python3 \
+         wget \
+     && \
+     \
 -- 
 2.39.2
 
