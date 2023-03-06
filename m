@@ -1,57 +1,23 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZBFk-0007Jm-9O
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 08:51:48 -0500
+	id 1pZBHH-00014z-15
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 08:53:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBFj-0007IG-BP
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 08:51:47 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBFh-0004QL-D4
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 08:51:46 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- o11-20020a05600c4fcb00b003eb33ea29a8so5234941wmq.1
- for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 05:51:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678110704;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=tm5wyMoeZT7Hze5SiailHbhj+mbt27BZ3Y9F4zK+rHM=;
- b=Y1PvHo0Zz6w5Ikug2W+0ELb1PASI0hvPmkfluvPBVtgPVC5z13kmB6Pt8rUGghjcZa
- 0dat/pltSfJ34gJSooP+2gmNHyMOCNK28lL/9N7bCwVBk52Oylbzr1Wmi3kgvNOBAH1G
- qLGYNiLIQbCvgE2La0UDpQIqWgCGZhS/Wn2/JGLIFO9daK+yfNunzYkOn41l+DjcsM0u
- okq3PemyDDme3Kgwh7sEUuPXuhYhgBIgtsIRqH32Nne3TKY7xe9dFxLOrbFqyywdWHYC
- T87hb4cu5Eq9h7F4GsvmExklLfwOnwRU9aneZErniP6dESvlr7qm5AWmdxagtZ+3ttWU
- bqAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678110704;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tm5wyMoeZT7Hze5SiailHbhj+mbt27BZ3Y9F4zK+rHM=;
- b=7YQd/jRoROD2w6KbYGYLek8ihU2hWV7dcsJs17PHb3ExUDQOmX3uUdP/rTMOIZ8M91
- MJgsS3AyiKO6essJuQzlCmExHWdVyr75cOETG1jp4zj/7keL0NlOTtahlkZhKkA8KfAS
- UtM/eCcr87LmF6+RKpL71MTuQopaFC+V2JdgXOYf9LEK5sdfwrGIp54G3KuYw6UYSfN2
- wE2egZKVFMbFjvsip43zPnXAreOEoKaz7jZon1siND7LjOynvEONq2u5WGpy9ytPZIiw
- qdZcC9mJTWCTxonbhdH+xMyQyhgPi6hXMy/WceUp2vW7ofZY+t4N4g24sSi58UbTEvf7
- jksA==
-X-Gm-Message-State: AO0yUKU9GNsXuSZdd+7Xm1U84hol5+avg9Ot/8XZjeap+m2eal2QmzbQ
- ZT6ZxAtJV3/dMVnj0nRz1GFj3Q==
-X-Google-Smtp-Source: AK7set9GXoZHnRz3FspEfBc4X4DlR2l4J5Hr4SK55XuIP+jdbW7bq7t4mihFh9VhTnY/gl5UG6QtFw==
-X-Received: by 2002:a05:600c:3d8b:b0:3eb:578d:ded3 with SMTP id
- bi11-20020a05600c3d8b00b003eb578dded3mr9823514wmb.35.1678110703804; 
- Mon, 06 Mar 2023 05:51:43 -0800 (PST)
-Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- l21-20020a05600c47d500b003e11ad0750csm9882776wmo.47.2023.03.06.05.51.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Mar 2023 05:51:43 -0800 (PST)
-Message-ID: <4d2f292b-85ce-3943-7fd8-efa9d87587f4@linaro.org>
-Date: Mon, 6 Mar 2023 14:51:41 +0100
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pZBHD-0000zd-PQ; Mon, 06 Mar 2023 08:53:19 -0500
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pZBHB-0004c1-5i; Mon, 06 Mar 2023 08:53:19 -0500
+Received: from [192.168.0.120] (unknown [180.165.240.213])
+ by APP-05 (Coremail) with SMTP id zQCowACnr_c_8AVk6B1DDA--.48519S2;
+ Mon, 06 Mar 2023 21:53:04 +0800 (CST)
+Message-ID: <a2a085f6-e92b-598e-075a-9a929fa3620f@iscas.ac.cn>
+Date: Mon, 6 Mar 2023 21:53:03 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.8.0
-Subject: Re: [PATCH 12/70] target/avr: Avoid use of tcg_const_i32 in SBIC, SBIS
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH 45/70] target/riscv: Avoid tcg_const_*
 Content-Language: en-US
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
@@ -59,19 +25,37 @@ Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
  tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
 References: <20230227054233.390271-1-richard.henderson@linaro.org>
- <20230227054233.390271-13-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230227054233.390271-13-richard.henderson@linaro.org>
+ <20230227054233.390271-46-richard.henderson@linaro.org>
+From: liweiwei <liweiwei@iscas.ac.cn>
+In-Reply-To: <20230227054233.390271-46-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID: zQCowACnr_c_8AVk6B1DDA--.48519S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7WFWkArWDXrW8uF4UAr15CFg_yoW8KFWDpr
+ 4rK3y2kr45JFWfZa43tF4UZF1UXa1Yk3yYvw1vvwn5GFs8GrW7ZFs8K347Krs8J3WUur12
+ kFZ8Aa15uw40qaUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUvlb7Iv0xC_Zr1lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+ 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+ A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xII
+ jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I
+ 8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
+ 64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8Jw
+ Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l
+ c7I2V7IY0VAS07AlzVAYIcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJV
+ W8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF
+ 1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6x
+ IIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvE
+ x4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvj
+ DU0xZFpf9x07je1v3UUUUU=
+X-Originating-IP: [180.165.240.213]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -85,17 +69,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Mar 2023 13:51:47 -0000
+X-List-Received-Date: Mon, 06 Mar 2023 13:53:20 -0000
 
-On 27/2/23 06:41, Richard Henderson wrote:
-> The use of separate data/port variables is existing
-> practice elsewhere, e.g. SBI, CBI.
-> 
+
+On 2023/2/27 13:42, Richard Henderson wrote:
+> All uses are strictly read-only.
+>
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   target/avr/translate.c | 18 ++++++++++--------
->   1 file changed, 10 insertions(+), 8 deletions(-)
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+
+Weiwei Li
+
+> ---
+>   target/riscv/translate.c                  | 4 ++--
+>   target/riscv/insn_trans/trans_rvv.c.inc   | 4 ++--
+>   target/riscv/insn_trans/trans_rvzfh.c.inc | 2 +-
+>   3 files changed, 5 insertions(+), 5 deletions(-)
+>
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 180fa5d30d..5c558a6f5f 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -201,8 +201,8 @@ static void gen_nanbox_h(TCGv_i64 out, TCGv_i64 in)
+>    */
+>   static void gen_check_nanbox_h(TCGv_i64 out, TCGv_i64 in)
+>   {
+> -    TCGv_i64 t_max = tcg_const_i64(0xffffffffffff0000ull);
+> -    TCGv_i64 t_nan = tcg_const_i64(0xffffffffffff7e00ull);
+> +    TCGv_i64 t_max = tcg_constant_i64(0xffffffffffff0000ull);
+> +    TCGv_i64 t_nan = tcg_constant_i64(0xffffffffffff7e00ull);
+>   
+>       tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
+>   }
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 0607eff5e6..cee793a440 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -237,8 +237,8 @@ static bool trans_vsetvli(DisasContext *s, arg_vsetvli *a)
+>   
+>   static bool trans_vsetivli(DisasContext *s, arg_vsetivli *a)
+>   {
+> -    TCGv s1 = tcg_const_tl(a->rs1);
+> -    TCGv s2 = tcg_const_tl(a->zimm);
+> +    TCGv s1 = tcg_constant_tl(a->rs1);
+> +    TCGv s2 = tcg_constant_tl(a->zimm);
+>       return do_vsetivli(s, a->rd, s1, s2);
+>   }
+>   
+> diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
+> index 03773e2aa8..a563cac97a 100644
+> --- a/target/riscv/insn_trans/trans_rvzfh.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
+> @@ -300,7 +300,7 @@ static bool trans_fsgnjn_h(DisasContext *ctx, arg_fsgnjn_h *a)
+>            * Replace bit 15 in rs1 with inverse in rs2.
+>            * This formulation retains the nanboxing of rs1.
+>            */
+> -        mask = tcg_const_i64(~MAKE_64BIT_MASK(15, 1));
+> +        mask = tcg_constant_i64(~MAKE_64BIT_MASK(15, 1));
+>           tcg_gen_not_i64(rs2, rs2);
+>           tcg_gen_andc_i64(rs2, rs2, mask);
+>           tcg_gen_and_i64(dest, mask, rs1);
 
 
