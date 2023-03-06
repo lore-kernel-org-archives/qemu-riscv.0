@@ -1,71 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZBYr-00020r-Jh
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 09:11:33 -0500
+	id 1pZBbq-0003En-9r
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 09:14:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBYp-00020F-Ip
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 09:11:31 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBbg-0003A3-DC
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 09:14:28 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBYn-0000GA-9P
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 09:11:31 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id f11so8942057wrv.8
- for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 06:11:26 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZBbe-0000c9-2h
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 09:14:28 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ t25-20020a1c7719000000b003eb052cc5ccso8271965wmi.4
+ for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 06:14:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678111885;
+ d=linaro.org; s=google; t=1678112064;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=o2J+WpL6f5/gX8dQgrpUvb62UwCJ7P8wIM58S091AtQ=;
- b=cbtfAAN2ENRlH4NcZdWMJ5vb7vnThZKHrwKx39aM82Tc0lYjZEICyEr/A1Czvlsk6u
- 2IGDE/09m44PkzGnZfv8lQXKzla0kpWR+HKuCr7RBk/J6/sReVPCY+QNYEXILYbUIM53
- Vmf4rWP+Po29hJEvmWfbVwe/Hf7EVVIVztGZ8vWGPA7tCQusK3MrkzsV/wFnov+jqYLo
- tN7hJ/0kvn2xdfjdLsDMOKNKNmnLDHzThnha/NLhUJGUEf/q8RVNTe7kAP0DvBFPW/ud
- 1x0HbY3TwCaeOCXpGmx5GZyPMslOy5zqiGZiY8gBJwWmz59vvh9dJXNf4uF72+fNiX/I
- 9Cgw==
+ bh=7b/5Nnn4470AE9lGpvZFOcmVz7QwGaCPX8iwkVjkmAY=;
+ b=VKoSWinPM2t6rF59tTGlyotv1sTZoB5pL/F9i4PJCIfhxzgiou3RKIykHqXTallWTj
+ fBDJno/uFDmRhPx/fuHRTKyp2mS/rJXnSzp8zTNEuGDzEgH7K0gwFk6bUDHn0RUUvHLP
+ K61U4eMBqoxAXhICiIn3iO+t8Xka5Y/h0DW0U+nPOPr7fWEHSIeA5dxamolq8tgoOrmQ
+ gNc3XK88fx6L0XRsaDzCwA0ixgqDzc2ULh98ZYFQkPbcRrNIezOW/RE3AdymE+sZ5MAG
+ XJwxu2vySUC6Uz9SNYACRR1jN/luUjQlf3h++WQlwPh05tHYq+tOGhGg9JtbcmI26HHz
+ 4AjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678111885;
+ d=1e100.net; s=20210112; t=1678112064;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=o2J+WpL6f5/gX8dQgrpUvb62UwCJ7P8wIM58S091AtQ=;
- b=ks3ehcvptn0iIwXoKNBL5JPqLVvBl1GiePBNmL1eQbpVw5yPugIG317ajvgiJQgUvP
- mrLCFOVDwL5AOfS0dtZJxWuSyXQg/kroiCWSU2Wzgv76Hyze+5QKZL4EtRDvIuM25QWu
- HCxhSm5rGZsgOqaMXGl+FFX31I7nMjFXpLlqcQlNFat7r59+lNucthTw6zTd2T0NcCu3
- lDYl0tr16cgB3iaiODbuQJJ/KSxUc9SMj/5p4MaoJwin0WrkszGhIjhaUHx89S/iSj3w
- HwWpX6Ds0+H6miKd2hvnmihBU8UPJDv3tzAeJ2q8Y+gsrvujuH74kgI5hTJAnmMe12lN
- rz+w==
-X-Gm-Message-State: AO0yUKVrjj3TrHTLumajMCYg59a5vaPi1Pf6qugxYs8XHVwZ/koTH1QK
- SUjmmEwE7rhKSq7Mg4/5X5ES4A==
-X-Google-Smtp-Source: AK7set+bdHMdPl6c+7t2IMGJ1bzwGQdkU84vq/LlhIm3grQATa/TlKVyXppTE8lUlzpBp3SxOMoDXQ==
-X-Received: by 2002:adf:ee12:0:b0:2cb:3b68:3c1c with SMTP id
- y18-20020adfee12000000b002cb3b683c1cmr6669275wrn.14.1678111885048; 
- Mon, 06 Mar 2023 06:11:25 -0800 (PST)
+ bh=7b/5Nnn4470AE9lGpvZFOcmVz7QwGaCPX8iwkVjkmAY=;
+ b=2lt/nbN/8WYJTdsR14TwFkM5SUKKE9JoYtCUM2fULGNOrc5ewejX0Y5gKMfJVvDRHK
+ OnZtBx2nZAoUZ3M0w69sRuiR83Znjjxj36s/Q/KosFZoALorIOMZ6cJ5RYKAtjwhYx5F
+ hg8vXQb6yJlbpIX7/0xqTBoKpLYjqDKxLK7ojGuqBQcKEmaq/803r2BMZOzkArsYNO0h
+ S+1bgUJACQy2Yx1NrQhp6puF7L6d9OxJwVLem+R1HIA/ZHszJtzGUbbH4YOtfgaVatMI
+ d9fkbSQvqFfxCYnvX5GuC4FmgZxXmRRMUL6SpflT9CNZQ2OFicbfUGpmnhSIzOzf9nQa
+ jiDw==
+X-Gm-Message-State: AO0yUKXspxosGtf9GbVFNn6UIp784c2LtEQQqZrR/xbFzHqeZVWgALIX
+ Bjv77QuqmrdeW6E9bgL9DS282g==
+X-Google-Smtp-Source: AK7set+Xhew/dIrscr5an0m6xOYjWf32Mlt31aX/ke5wsNBW6htZ1VBFyrZt04sxh8moS8N8BowhMQ==
+X-Received: by 2002:a05:600c:4f87:b0:3ea:d610:f059 with SMTP id
+ n7-20020a05600c4f8700b003ead610f059mr10396660wmq.4.1678112064170; 
+ Mon, 06 Mar 2023 06:14:24 -0800 (PST)
 Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- w7-20020a5d6087000000b002c567b58e9asm10143135wrt.56.2023.03.06.06.11.23
+ c40-20020a05600c4a2800b003eb20d4d4a8sm10175450wmp.44.2023.03.06.06.14.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Mar 2023 06:11:24 -0800 (PST)
-Message-ID: <69d3e5e4-a563-61a6-c3e0-8a6ef026ac8f@linaro.org>
-Date: Mon, 6 Mar 2023 15:11:23 +0100
+ Mon, 06 Mar 2023 06:14:23 -0800 (PST)
+Message-ID: <77f3be43-1281-0f40-1f31-d6d053c09afb@linaro.org>
+Date: Mon, 6 Mar 2023 15:14:21 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.8.0
-Subject: Re: [Qemu-devel] [PULL 11/29] target/riscv: Convert RV32F insns to
- decodetree
+Subject: Re: [PATCH 25/70] target/m68k: Use tcg_constant_i32 in gen_ea_mode
 Content-Language: en-US
-To: Palmer Dabbelt <palmer@sifive.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Peer Adelt <peer.adelt@hni.uni-paderborn.de>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-References: <20190312131526.14710-1-palmer@sifive.com>
- <20190312131526.14710-12-palmer@sifive.com>
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, kbastian@mail.uni-paderborn.de,
+ ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
+ tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
+References: <20230227054233.390271-1-richard.henderson@linaro.org>
+ <20230227054233.390271-26-richard.henderson@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20190312131526.14710-12-palmer@sifive.com>
+In-Reply-To: <20230227054233.390271-26-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -85,50 +85,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Mar 2023 14:11:31 -0000
+X-List-Received-Date: Mon, 06 Mar 2023 14:14:28 -0000
 
-Hi Palmer, Bastian,
-
-(old patch)
-
-On 12/3/19 14:15, Palmer Dabbelt wrote:
-> From: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+On 27/2/23 06:41, Richard Henderson wrote:
+> Return a constant for an immediate input.
 > 
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Signed-off-by: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
-> Signed-off-by: Peer Adelt <peer.adelt@hni.uni-paderborn.de>
-> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   target/riscv/insn32.decode              |  35 +++
->   target/riscv/insn_trans/trans_rvf.inc.c | 379 ++++++++++++++++++++++++
->   target/riscv/translate.c                |   1 +
->   3 files changed, 415 insertions(+)
->   create mode 100644 target/riscv/insn_trans/trans_rvf.inc.c
+>   target/m68k/translate.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
-> +static bool trans_fmv_x_w(DisasContext *ctx, arg_fmv_x_w *a)
-> +{
-> +    /* NOTE: This was FMV.X.S in an earlier version of the ISA spec! */
-> +    REQUIRE_FPU;
-> +    REQUIRE_EXT(ctx, RVF);
-> +
-> +    TCGv t0 = tcg_temp_new();
-> +
-> +#if defined(TARGET_RISCV64)
-
-Just noticed this while reviewing Richard's "tcg: Remove tcg_const_*'
-recent series, shouldn't be this #if condition inverted?
-
-> +    tcg_gen_ext32s_tl(t0, cpu_fpr[a->rs1]);
-> +#else
-> +    tcg_gen_extrl_i64_i32(t0, cpu_fpr[a->rs1]);
-> +#endif
-> +
-> +    gen_set_gpr(a->rd, t0);
-> +    tcg_temp_free(t0);
-> +
-> +    return true;
-> +}
 
 
