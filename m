@@ -1,68 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pYy2R-0000vA-SR
-	for mharc-qemu-riscv@gnu.org; Sun, 05 Mar 2023 18:45:11 -0500
+	id 1pZ6I0-0004bm-NH
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 03:33:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1pYy2Q-0000uo-G4
- for qemu-riscv@nongnu.org; Sun, 05 Mar 2023 18:45:10 -0500
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1pZ6Hu-0004bO-8r
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 03:33:45 -0500
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1pYy2O-0007Jl-Ei
- for qemu-riscv@nongnu.org; Sun, 05 Mar 2023 18:45:10 -0500
-Received: by mail-pl1-x62d.google.com with SMTP id ky4so8445335plb.3
- for <qemu-riscv@nongnu.org>; Sun, 05 Mar 2023 15:45:07 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1pZ6Hl-0003ht-3W
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 03:33:39 -0500
+Received: by mail-wm1-x32b.google.com with SMTP id
+ l7-20020a05600c4f0700b003e79fa98ce1so4666995wmq.2
+ for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 00:33:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20210112.gappssmtp.com; s=20210112; t=1678059906;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:from:to:cc:subject:date:message-id
- :reply-to; bh=AChv+aZEEc9jg147GbiI56ZSDqX5vlK6xVOAdvqnWBA=;
- b=08pr26//uW0H/wa5qagW43EHmIWAIhTYGkwO6pMSTgiXkixBFMgGztVLsM31hutb0U
- CeR9+lxHb5xQsTmDNlnE/GUsbL4t1VcH9r7sMr0D4ZcpUGtJDcvRVIatVS1pjzE0MVel
- mShi2em8Gzh4DmUyEbdHa82C5v4ENxkoCdIxywUVNDTe8efer3Dw13rEovxKwa7jNfQo
- HIfBhBDPBdvJjK+FB4mGvL0sEoRGU+NVLJPgZnyF7wPWmMLv8C4IGw23Q9dz4+9WfqjQ
- 1qLwOwx1D5D/M1KpuCK4Zl/MWzosPQSqO4td9YRp+6/NUqUS878a8MKNxJVzv3NH7ekt
- 4Xog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678059906;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1678091611;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AChv+aZEEc9jg147GbiI56ZSDqX5vlK6xVOAdvqnWBA=;
- b=xQuEYSFMANd7h/V2qnRIzZi5Hl5bF4Lq+NuVAcZHmMkqGWPl4+CCwzEC7R7rHpNcha
- jpde8wgZunVymc+B/u3jlpRmVjroCWM99JL+71yGFM5Vew58LeyZjF0glLsmjjsCEXf8
- X0pRBWHN1FgPP+V82KHecYRFuLOkhS9LfaYzsW5rGOyf+ZuQR9V4EPiiSjjRCZlN1aUn
- nEDyVkgxld/3Kb1FO5V32K3r8OPCE2Mlb5+3X4dUsj7oAGW6bd7E7uMGX6w1FKtfcME/
- Hq+E3esF+yc96Gk2594JKicNawVAD7uoh/44qcPUwbinYZb6jhHccUdi5aewMD6PAcGO
- vf5w==
-X-Gm-Message-State: AO0yUKXYve/DNsUPWsThYc91t7inME4+lMghtuYUCKAw+XiZeznsD2hm
- bI1NWES3QNQapKPQUUAt7D4x3M6MaK57U3oCvuQ=
-X-Google-Smtp-Source: AK7set/Ctv+RdSQ829mKTYZ30xKY+bAZ/vdhiRDZkrXD/DbnJFsD8KpbgZqk9Bm02PKrwuSAyezmTQ==
-X-Received: by 2002:a05:6a20:7348:b0:cc:9010:9ed with SMTP id
- v8-20020a056a20734800b000cc901009edmr10427227pzc.31.1678059906138; 
- Sun, 05 Mar 2023 15:45:06 -0800 (PST)
-Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
- d25-20020aa78159000000b005cdf83e4513sm5155616pfn.145.2023.03.05.15.45.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Mar 2023 15:45:05 -0800 (PST)
-Date: Sun, 05 Mar 2023 15:45:05 -0800 (PST)
-X-Google-Original-Date: Sun, 05 Mar 2023 15:44:14 PST (-0800)
-Subject: Re: [PATCH V5 0/8] Add basic ACPI support for risc-v virt
-In-Reply-To: <20230302091212.999767-1-sunilvl@ventanamicro.com>
-CC: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>, bin.meng@windriver.com,
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, ajones@ventanamicro.com, apatel@ventanamicro.com,
- Atish Patra <atishp@rivosinc.com>, sunilvl@ventanamicro.com
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: sunilvl@ventanamicro.com, imammedo@redhat.com
-Message-ID: <mhng-7afa2599-95f6-43e9-a968-9e7e4f939faa@palmer-ri-x1c9a>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=palmer@dabbelt.com; helo=mail-pl1-x62d.google.com
+ bh=ibF4ybF4Ws8o4T9oAIQ18WOYdCEg4Mfe/uDfEQIPEes=;
+ b=euAixTX8dR788iaS+DRb7O2ZJVJFVj7SjpBLqScqcxAgZmdxXJRkOPD5+v2B0jj73J
+ W3WEOGbe5y2i6m15dba7W6uG2tkQwdDxvpkLm7FoRs5aJTOWGFU8hdw3/43d12slYKfY
+ 8h1TNBo92MIQjKvGxVjvV/hOoNfCbHslzWqRrrb2SQKLLTBlJUvG02K2jgoog6/aPtYV
+ JSir5OmXCTQq5NWQlatCl7r476Wt/yiqXAoF2qi1rq7YgjhZxaycXeVK2+DdVu1FulJS
+ k5BjZcbWtR3oNEkQBww9Al6dUBEgJiqIe5sz3vnLmRp2SXltPng0XPwxCN41qx8VcdpX
+ uWmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1678091611;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ibF4ybF4Ws8o4T9oAIQ18WOYdCEg4Mfe/uDfEQIPEes=;
+ b=m8bYPJM/OipPaFhtEJXum2O0sCWYCVG/TDSWGBlYZgFotYQcHFdsGqT5FI9ORMDXDg
+ aV3a1UW5pR5VwP0kFHX9sdiwpp2+gOxhEUA7o1vXDVjl4ixKPbfYnWBlxt30YcPu9/QU
+ gPa+8IhIhY9eQhiuMPG3jN9RFxECEVn8zwL4STKGKeX8CC0flG7DNRJ81iDysraRa20s
+ PyO3hI2t+S4ZB/JRCJg17icVQb1hQpwW9IHMMP2QADM1jf3bFEMhfontPpHqVvfbBeOA
+ TJeN+WXSb1ZQV69INOoUCaEwUdJJDV6LBQ9Y/MkV5ZXt4dP8pjB+t6MChsziOkXtM3fU
+ oeJw==
+X-Gm-Message-State: AO0yUKUh7jDemWnlGmTNcEe6BIxRqRVdplcWCZ/nHPhCET0XN8KiqG92
+ EXa6daZz/ICLNB7YHQ/i5dWQtS1XL1mDqRftVYMPHw==
+X-Google-Smtp-Source: AK7set/1OWB18GVh5BErNM9qT+SHtKXtoSTHQf2af7R9Nbyn99UUJMdIs+aijevLfnXACJbCpJgXp8sOWJxrdFafV+0=
+X-Received: by 2002:a05:600c:a695:b0:3df:97cf:4593 with SMTP id
+ ip21-20020a05600ca69500b003df97cf4593mr2052544wmb.6.1678091610761; Mon, 06
+ Mar 2023 00:33:30 -0800 (PST)
+MIME-Version: 1.0
+References: <20230303131252.892893-1-alexghiti@rivosinc.com>
+ <mhng-4e784c07-e2bb-40f9-a42c-d4b3c331ddba@palmer-ri-x1c9a>
+In-Reply-To: <mhng-4e784c07-e2bb-40f9-a42c-d4b3c331ddba@palmer-ri-x1c9a>
+From: Alexandre Ghiti <alexghiti@rivosinc.com>
+Date: Mon, 6 Mar 2023 09:33:20 +0100
+Message-ID: <CAHVXubiCH=X-gi37DFpOFWsNn=-vPnKe4SV2Gnt6P-r1SFLKPQ@mail.gmail.com>
+Subject: Re: [PATCH v11 0/5] riscv: Allow user to set the satp mode
+To: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: dbarboza@ventanamicro.com, Alistair Francis <Alistair.Francis@wdc.com>, 
+ bin.meng@windriver.com, ajones@ventanamicro.com, frank.chang@sifive.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=alexghiti@rivosinc.com; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -81,90 +78,133 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Mar 2023 23:45:10 -0000
+X-List-Received-Date: Mon, 06 Mar 2023 08:33:45 -0000
 
-On Thu, 02 Mar 2023 01:12:04 PST (-0800), sunilvl@ventanamicro.com wrote:
-> This series adds the basic ACPI support for the RISC-V virt machine.
-> Currently only RINTC interrupt controller specification is approved by the
-> UEFI forum. External interrupt controller support in ACPI is in progress.
->
-> This adds support for RINTC and RHCT tables as specified in below ECR links
-> which are approved by UEFI forum.
-> RINTC - https://drive.google.com/file/d/1R6k4MshhN3WTT-hwqAquu5nX6xSEqK2l/view
-> RHCT - https://drive.google.com/file/d/1nP3nFiH4jkPMp6COOxP6123DCZKR-tia/view
->
-> These changes are also available @
-> https://github.com/vlsunil/qemu/tree/acpi_b1_us_review_V5
->
-> Changes since V4:
-> 	1) Used possible_cpus to create cpu topology in DSDT, MADT and RHCT as
->            per Igor's feedback.
+Hi Palmer,
 
-Thanks.  These all look good to me, but given that Igor had some 
-feedback on the v4 and it's pretty much just been weekend since t hese 
-went out I'm going to hold off until tomorrow before merging anything.  
-They're all staged and passing the tests on my end, so everything's good 
-as far as I'm concerned.
+On Mon, Mar 6, 2023 at 12:34=E2=80=AFAM Palmer Dabbelt <palmer@dabbelt.com>=
+ wrote:
+>
+> On Fri, 03 Mar 2023 05:12:47 PST (-0800), alexghiti@rivosinc.com wrote:
+> > This introduces new properties to allow the user to set the satp mode,
+> > see patch 3 for full syntax. In addition, it prevents cpus to boot in a
+> > satp mode they do not support (see patch 4).
+> >
+> > base-commit: commit c61d1a066cb6 ("Merge tag 'for-upstream' of
+> > https://gitlab.com/bonzini/qemu into staging")
+>
+> I have that, but I still got some merge conflicts.  I've put that here
+> <https://github.com/palmer-dabbelt/qemu/tree/set-satp> for now, pending
+> Daniel's response below.
 
->         2) Moved MAINTAINER entries below ACPI/SMBIOS entry as per Drew's
->            feedback
-> Changes since V3:
-> 	1) Added back acpi_align_size() wrapper as per Drew's feedback
-> 	2) Updated RB tags
+Weird, I have just tried again and it applied cleanly on the
+base-commit I mentioned, I tried to cherry-pick a few patches, even
+commit d4ea71170432 ("target/riscv: introduce riscv_cpu_cfg()") does
+not break the merge.
+
+Anyway, FWIW I checked the patches on the set-satp branch again, and
+your merge seems ok.
+
 >
-> Changes since V2:
-> 	1) Squashed commits and updated commit message as per feedback from Daniel.
-> 	2) Addressed comments from Drew.
-> 	3) Updated tags.
+> >
+> > v11:
+> > - rebase on top of master
+> > - Added RB/AB from Frank and Alistair
+> > - Use VM_1_10_XX directly instead of satp_mode_from_str, from Frank
+> > - Set satp mode max for thead c906 to sv39
 >
-> Changes since V1:
-> 	1) Addressed comments from Bin Meng.
-> 	2) Made acpi switch default AUTO similar to other architectures.
-> 	3) Re-based and added RB and ACKs.
+> Daniel: It looks like the feedback on v10 included dropping the first
+> patch
+> <https://lore.kernel.org/qemu-devel/66d80b94-5941-31f3-995f-e9666a91fbb7@=
+ventanamicro.com/T/#macdb6c5232bd8c082966107d7b44aaaec9b29ad6>.
+> Sorry if I'm just misunderstanding, but it looks to me like that patch
+> is still useful and the v11 doesn't even build without it.
+
+No, the first commit is a preparatory commit for the series, it is required=
+.
+
+
 >
-> The series is tested using SBI HVC console and initrd.
->
-> Test instructions:
-> 1) Build Qemu with ACPI support (this series)
->
-> 2) Build EDK2 as per instructions in
-> https://github.com/vlsunil/riscv-uefi-edk2-docs/wiki/RISC-V-Qemu-Virt-support
->
-> 3) Build Linux with ACPI support using below branch
-> https://github.com/vlsunil/linux/commits/acpi_b1_us_review_ipi17_V2
-> after enabling SBI HVC and SBI earlycon options.
->
-> CONFIG_RISCV_SBI_V01=y
-> CONFIG_SERIAL_EARLYCON_RISCV_SBI=y
-> CONFIG_HVC_RISCV_SBI=y
->
-> 4) Build buildroot.
->
-> Run with below command.
-> qemu-system-riscv64   -nographic \
-> -drive file=Build/RiscVVirtQemu/RELEASE_GCC5/FV/RISCV_VIRT.fd,if=pflash,format=raw,unit=1 \
-> -machine virt -smp 16 -m 2G \
-> -kernel arch/riscv/boot/Image \
-> -initrd buildroot/output/images/rootfs.cpio \
-> -append "root=/dev/ram ro console=hvc0 earlycon=sbi"
->
->
-> Sunil V L (8):
->   hw/riscv/virt: Add OEM_ID and OEM_TABLE_ID fields
->   hw/riscv/virt: Add a switch to disable ACPI
->   hw/riscv/virt: Add memmap pointer to RiscVVirtState
->   hw/riscv/virt: Enable basic ACPI infrastructure
->   hw/riscv/virt: virt-acpi-build.c: Add RINTC in MADT
->   hw/riscv/virt: virt-acpi-build.c: Add RHCT Table
->   hw/riscv/virt.c: Initialize the ACPI tables
->   MAINTAINERS: Add entry for RISC-V ACPI
->
->  MAINTAINERS                |  18 +-
->  hw/riscv/Kconfig           |   1 +
->  hw/riscv/meson.build       |   1 +
->  hw/riscv/virt-acpi-build.c | 416 +++++++++++++++++++++++++++++++++++++
->  hw/riscv/virt.c            |  40 ++++
->  include/hw/riscv/virt.h    |   6 +
->  6 files changed, 476 insertions(+), 6 deletions(-)
->  create mode 100644 hw/riscv/virt-acpi-build.c
+> >
+> > v10:
+> > - Fix user mode build by surrounding satp handling with #ifndef
+> >   CONFIG_USER_ONLY, Frank
+> > - Fix AB/RB from Frank and Alistair
+> >
+> > v9:
+> > - Move valid_vm[i] up, Andrew
+> > - Fixed expansion of the bitmap map, Bin
+> > - Rename set_satp_mode_default into set_satp_mode_default_map, Bin
+> > - Remove outer parenthesis and alignment, Bin
+> > - Fix qemu32 build failure, Bin
+> > - Fixed a few typos, Bin
+> > - Add RB from Andrew and Bin
+> >
+> > v8:
+> > - Remove useless !map check, Andrew
+> > - Add RB from Andrew
+> >
+> > v7:
+> > - Expand map to contain all valid modes, Andrew
+> > - Fix commit log for patch 3, Andrew
+> > - Remove is_32_bit argument from set_satp_mode_default, Andrew
+> > - Move and fixed comment, Andrew
+> > - Fix satp_mode_map_max in riscv_cpu_satp_mode_finalize which was set
+> >   too early, Alex
+> > - Remove is_32_bit argument from set_satp_mode_max_supported, Andrew
+> > - Use satp_mode directly instead of a string in
+> >   set_satp_mode_max_supported, Andrew
+> > - Swap the patch introducing supported bitmap and the patch that sets
+> >   sv57 in the dt, Andrew
+> > - Add various RB from Andrew and Alistair, thanks
+> >
+> > v6:
+> > - Remove the valid_vm check in validate_vm and add it to the finalize f=
+unction
+> >   so that map already contains the constraint, Alex
+> > - Add forgotten mbare to satp_mode_from_str, Alex
+> > - Move satp mode properties handling to riscv_cpu_satp_mode_finalize, A=
+ndrew
+> > - Only add satp mode properties corresponding to the cpu, and then remo=
+ve the
+> >   check against valid_vm_1_10_32/64 in riscv_cpu_satp_mode_finalize,
+> >   Andrew/Alistair/Alex
+> > - Move mmu-type setting to its own patch, Andrew
+> > - patch 5 is new and is a fix, Alex
+> >
+> > v5:
+> > - Simplify v4 implementation by leveraging valid_vm_1_10_32/64, as
+> >   suggested by Andrew
+> > - Split the v4 patch into 2 patches as suggested by Andrew
+> > - Lot of other minor corrections, from Andrew
+> > - Set the satp mode N by disabling the satp mode N + 1
+> > - Add a helper to set satp mode from a string, as suggested by Frank
+> >
+> > v4:
+> > - Use custom boolean properties instead of OnOffAuto properties, based
+> >   on ARMVQMap, as suggested by Andrew
+> >
+> > v3:
+> > - Free sv_name as pointed by Bin
+> > - Replace satp-mode with boolean properties as suggested by Andrew
+> > - Removed RB from Atish as the patch considerably changed
+> >
+> > v2:
+> > - Use error_setg + return as suggested by Alistair
+> > - Add RB from Atish
+> > - Fixed checkpatch issues missed in v1
+> > - Replaced Ludovic email address with the rivos one
+> >
+> > Alexandre Ghiti (5):
+> >   riscv: Pass Object to register_cpu_props instead of DeviceState
+> >   riscv: Change type of valid_vm_1_10_[32|64] to bool
+> >   riscv: Allow user to set the satp mode
+> >   riscv: Introduce satp mode hw capabilities
+> >   riscv: Correctly set the device-tree entry 'mmu-type'
+> >
+> >  hw/riscv/virt.c    |  19 +--
+> >  target/riscv/cpu.c | 288 ++++++++++++++++++++++++++++++++++++++++++---
+> >  target/riscv/cpu.h |  25 ++++
+> >  target/riscv/csr.c |  29 +++--
+> >  4 files changed, 323 insertions(+), 38 deletions(-)
 
