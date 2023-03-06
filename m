@@ -1,76 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZIwg-0006bC-Hj
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 17:04:38 -0500
+	id 1pZIwl-0006mW-St
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 17:04:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pZIwc-0006Uc-Ug
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 17:04:34 -0500
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ id 1pZIwj-0006kK-M6
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 17:04:41 -0500
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1pZIwb-0006pz-2y
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 17:04:34 -0500
-Received: by mail-pj1-x102a.google.com with SMTP id
- x20-20020a17090a8a9400b00233ba727724so196600pjn.1
- for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 14:04:32 -0800 (PST)
+ id 1pZIwg-0006rZ-FC
+ for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 17:04:40 -0500
+Received: by mail-pl1-x633.google.com with SMTP id y11so12116552plg.1
+ for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 14:04:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1678140271;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1678140277;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mbqFcrDJKQyMd5mS2b0pUWsHV6dPfEh5r93Laun+DQc=;
- b=SCBt6FqDujAydx5nRG0uohOYNxI+QmURBeowSsrRd0awl2yXPEsyCGzqWaDpw/j7UO
- CYAAOgd5V1Mv06MGxu4YcinYZ6Gt2yM6xNfXEXQWosJJZmqbQgSArnv0s+n0F4yJqjxm
- 1MJOeLjt0K3yRkssxVMrrfqafaMfY+HIrjQWiKr4tRbqzgPFxW6+fa4DgdJv5SlEMsfg
- mXpCG+GcuRu0LrO9rnS4j+oUWQJyXiqscJdltQ5CzVM4mpBWJ00PRU1+TmimjNhX4acr
- GDqe5ggRYEcNRi0uqAyTyPLE6NFpf8UBt4olx6cO4Vsy8lR3xaIgZzGXkrU7DM4346cs
- SEDA==
+ bh=e32/f4uJI8Xsh47JTD6oMpzp6kkZE6i5wkSH5g4r7LA=;
+ b=WVvaF9wIUb+DPX3LzZ15A4/uvKgYZa+hVFueCMCJzGjtb006e/yc8qV6iNxDEWDI7f
+ UPDIxtVzd9mdi6w3vQHnKdY3UbWkpMo4t+npQfFxXpZKmUFi9iy2780D62/J4vel+m89
+ v6X0d11Dk3iJdUhODNoCT1if4RqmTRbRcRLLNTftONb/CHkqOMVYMNmtnhzuvqSmoYVt
+ M3fdab4Kpy37qELbMEpWAmHLUtzU0QMWDkbo5yT8L044vuHBkbPutUYTBzzOO82JzdKx
+ jVA6EedqAXwKMAHj92udrbrBcjuxKs2K4hwPTLvGablqjm0ubDca7ocjG4qlavmRw7++
+ 1Vkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678140271;
+ d=1e100.net; s=20210112; t=1678140277;
  h=to:from:cc:content-transfer-encoding:mime-version:references
  :in-reply-to:message-id:date:subject:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mbqFcrDJKQyMd5mS2b0pUWsHV6dPfEh5r93Laun+DQc=;
- b=lJyedX/B7OcNe9QOqGac6eths5rtQ/hiKyybCiAI9/eK+BCI8mHZWr1jjY9y6ds9ku
- MEQJBNOUqmUxYVXSM+HtMzZsm488RchRhZdZ2ESnXvw8KBkLPDfKQelxxi7XCsXLVi6O
- lrrkGnUoommtJ0aJDOS6mXqSRPqLlIppewBBL3IQwkB7Dx0th0bGbEzZIpQSBAcmZB7c
- juG2l4Ntvepiw2A5DiMT4NV40EDV4L9DI6gsV74pe/yMlJAFqY4hipOj4e4IuMR+UBKI
- a/EcPLKExYYi12vEXlQ9nb1XcXq4Rp8O7dGKo7ytlFOd+lsnr0T2T3Dm9JKzJpyK5fUl
- n76g==
-X-Gm-Message-State: AO0yUKVN5Vr/v0Xl9S/3L4oD/Q4Q5jpip8Z8QZs9pGYof870VIqBWjZv
- X/tnFslNl+QMInBS7nS256cTRMMwXTy+Dyuvhh4=
-X-Google-Smtp-Source: AK7set+k0rcnVkX/AnahiQH5ck9EzFxz4qWwnAUxGlkugTuam6WXVIVOFHjkU0U0WGxOdJyL3J5syw==
-X-Received: by 2002:a17:90b:1c87:b0:234:d78:9b4c with SMTP id
- oo7-20020a17090b1c8700b002340d789b4cmr12700523pjb.18.1678140271427; 
- Mon, 06 Mar 2023 14:04:31 -0800 (PST)
+ bh=e32/f4uJI8Xsh47JTD6oMpzp6kkZE6i5wkSH5g4r7LA=;
+ b=Py4M3/sALNFTdP9o6qD43cm61+/pA8DSWt4HfXXqAmLT78VZfYkxl/7gHH+Edy9Cy6
+ AoLg2zNRJVV15VxpQDwd+Uo6H9PYdOF33gidqoPv2/AkP8VtXQexVC6gDYsxD2OUxeK9
+ Zjk9FQ4ImcdXr9xlfzA54SlqobEtz6tQSuNuvTuaZM3OZvwGMue/MrDL/zq0caBQBzNd
+ 3NJobsFRdKc+KVxzbFYmkqbDel4II2a7JE/UJq6/nM73d2wZr9XpJFZk1C4VQjZ1+fX/
+ KP0NOkMmWFnzs3TFfvwAbLU7G86MVtZkGovPAZYabesJZ5LKDsreBxgQD0fTDdcVGs+p
+ RHuw==
+X-Gm-Message-State: AO0yUKXFTKbRF7LFT53+lX3AiB39b5mtw0HxSW071DSxzYW2seU22nsv
+ tsh8ZTr+oq9NwPGlZZYDtEeR6DO/AAsQrFQFnH0=
+X-Google-Smtp-Source: AK7set9AQHQ0I8eOaCqDopwHHneGgd8dDfmvrfmwLJRs3y8JVG4EGKrt5rZDNiYF28X2Bht9obN3Dw==
+X-Received: by 2002:a17:903:1103:b0:19e:8075:5545 with SMTP id
+ n3-20020a170903110300b0019e80755545mr15307337plh.54.1678140276878; 
+ Mon, 06 Mar 2023 14:04:36 -0800 (PST)
 Received: from localhost ([50.221.140.188]) by smtp.gmail.com with ESMTPSA id
- y31-20020a63181f000000b004f27761a9e7sm6438336pgl.12.2023.03.06.14.04.30
+ d13-20020a170903230d00b0019c13d032d8sm7160400plh.253.2023.03.06.14.04.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Mar 2023 14:04:31 -0800 (PST)
-Subject: [PULL 07/22] hw: intc: Use cpu_by_arch_id to fetch CPU state
-Date: Mon,  6 Mar 2023 14:02:44 -0800
-Message-Id: <20230306220259.7748-8-palmer@rivosinc.com>
+ Mon, 06 Mar 2023 14:04:36 -0800 (PST)
+Subject: [PULL 11/22] riscv: Change type of valid_vm_1_10_[32|64] to bool
+Date: Mon,  6 Mar 2023 14:02:48 -0800
+Message-Id: <20230306220259.7748-12-palmer@rivosinc.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230306220259.7748-1-palmer@rivosinc.com>
 References: <20230306220259.7748-1-palmer@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Cc: qemu-riscv@nongnu.org,          qemu-devel@nongnu.org,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@rivosinc.com>
+ Alexandre Ghiti <alexghiti@rivosinc.com>,
+ Andrew Jones <ajones@ventanamicro.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng@tinylab.org>,
+ Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@rivosinc.com>
 From: Palmer Dabbelt <palmer@rivosinc.com>
 To: Peter Maydell <peter.maydell@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=palmer@rivosinc.com; helo=mail-pj1-x102a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=palmer@rivosinc.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,149 +82,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Mar 2023 22:04:35 -0000
+X-List-Received-Date: Mon, 06 Mar 2023 22:04:41 -0000
 
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
+From: Alexandre Ghiti <alexghiti@rivosinc.com>
 
-Qemu_get_cpu uses the logical CPU id assigned during init to fetch the
-CPU state. However APLIC, IMSIC and ACLINT contain registers and states
-which are specific to physical hart Ids. The hart Ids in any given system
-might be sparse and hence calls to qemu_get_cpu need to be replaced by
-cpu_by_arch_id which performs lookup based on the sparse physical hart IDs.
+This array is actually used as a boolean so swap its current char type
+to a boolean and at the same time, change the type of validate_vm to
+bool since it returns valid_vm_1_10_[32|64].
 
-Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Message-ID: <20230303065055.915652-3-mchitale@ventanamicro.com>
+Suggested-by: Andrew Jones <ajones@ventanamicro.com>
+Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bmeng@tinylab.org>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Message-ID: <20230303131252.892893-3-alexghiti@rivosinc.com>
 Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 ---
- hw/intc/riscv_aclint.c | 16 ++++++++--------
- hw/intc/riscv_aplic.c  |  4 ++--
- hw/intc/riscv_imsic.c  |  6 +++---
- 3 files changed, 13 insertions(+), 13 deletions(-)
+ target/riscv/csr.c | 21 +++++++++++----------
+ 1 file changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
-index eee04643cb..b466a6abaf 100644
---- a/hw/intc/riscv_aclint.c
-+++ b/hw/intc/riscv_aclint.c
-@@ -130,7 +130,7 @@ static uint64_t riscv_aclint_mtimer_read(void *opaque, hwaddr addr,
-         addr < (mtimer->timecmp_base + (mtimer->num_harts << 3))) {
-         size_t hartid = mtimer->hartid_base +
-                         ((addr - mtimer->timecmp_base) >> 3);
--        CPUState *cpu = qemu_get_cpu(hartid);
-+        CPUState *cpu = cpu_by_arch_id(hartid);
-         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-         if (!env) {
-             qemu_log_mask(LOG_GUEST_ERROR,
-@@ -173,7 +173,7 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
-         addr < (mtimer->timecmp_base + (mtimer->num_harts << 3))) {
-         size_t hartid = mtimer->hartid_base +
-                         ((addr - mtimer->timecmp_base) >> 3);
--        CPUState *cpu = qemu_get_cpu(hartid);
-+        CPUState *cpu = cpu_by_arch_id(hartid);
-         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-         if (!env) {
-             qemu_log_mask(LOG_GUEST_ERROR,
-@@ -231,7 +231,7 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 3106f96212..d93d481bd6 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1141,16 +1141,16 @@ static const target_ulong hip_writable_mask = MIP_VSSIP;
+ static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP | MIP_VSEIP;
+ static const target_ulong vsip_writable_mask = MIP_VSSIP;
  
-         /* Check if timer interrupt is triggered for each hart. */
-         for (i = 0; i < mtimer->num_harts; i++) {
--            CPUState *cpu = qemu_get_cpu(mtimer->hartid_base + i);
-+            CPUState *cpu = cpu_by_arch_id(mtimer->hartid_base + i);
-             CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-             if (!env) {
-                 continue;
-@@ -292,7 +292,7 @@ static void riscv_aclint_mtimer_realize(DeviceState *dev, Error **errp)
-     s->timecmp = g_new0(uint64_t, s->num_harts);
-     /* Claim timer interrupt bits */
-     for (i = 0; i < s->num_harts; i++) {
--        RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(s->hartid_base + i));
-+        RISCVCPU *cpu = RISCV_CPU(cpu_by_arch_id(s->hartid_base + i));
-         if (riscv_cpu_claim_interrupts(cpu, MIP_MTIP) < 0) {
-             error_report("MTIP already claimed");
-             exit(1);
-@@ -372,7 +372,7 @@ DeviceState *riscv_aclint_mtimer_create(hwaddr addr, hwaddr size,
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+-static const char valid_vm_1_10_32[16] = {
+-    [VM_1_10_MBARE] = 1,
+-    [VM_1_10_SV32] = 1
++static const bool valid_vm_1_10_32[16] = {
++    [VM_1_10_MBARE] = true,
++    [VM_1_10_SV32] = true
+ };
  
-     for (i = 0; i < num_harts; i++) {
--        CPUState *cpu = qemu_get_cpu(hartid_base + i);
-+        CPUState *cpu = cpu_by_arch_id(hartid_base + i);
-         RISCVCPU *rvcpu = RISCV_CPU(cpu);
-         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-         riscv_aclint_mtimer_callback *cb =
-@@ -407,7 +407,7 @@ static uint64_t riscv_aclint_swi_read(void *opaque, hwaddr addr,
+-static const char valid_vm_1_10_64[16] = {
+-    [VM_1_10_MBARE] = 1,
+-    [VM_1_10_SV39] = 1,
+-    [VM_1_10_SV48] = 1,
+-    [VM_1_10_SV57] = 1
++static const bool valid_vm_1_10_64[16] = {
++    [VM_1_10_MBARE] = true,
++    [VM_1_10_SV39] = true,
++    [VM_1_10_SV48] = true,
++    [VM_1_10_SV57] = true
+ };
  
-     if (addr < (swi->num_harts << 2)) {
-         size_t hartid = swi->hartid_base + (addr >> 2);
--        CPUState *cpu = qemu_get_cpu(hartid);
-+        CPUState *cpu = cpu_by_arch_id(hartid);
-         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-         if (!env) {
-             qemu_log_mask(LOG_GUEST_ERROR,
-@@ -430,7 +430,7 @@ static void riscv_aclint_swi_write(void *opaque, hwaddr addr, uint64_t value,
+ /* Machine Information Registers */
+@@ -1230,7 +1230,7 @@ static RISCVException read_mstatus(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
  
-     if (addr < (swi->num_harts << 2)) {
-         size_t hartid = swi->hartid_base + (addr >> 2);
--        CPUState *cpu = qemu_get_cpu(hartid);
-+        CPUState *cpu = cpu_by_arch_id(hartid);
-         CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-         if (!env) {
-             qemu_log_mask(LOG_GUEST_ERROR,
-@@ -545,7 +545,7 @@ DeviceState *riscv_aclint_swi_create(hwaddr addr, uint32_t hartid_base,
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
- 
-     for (i = 0; i < num_harts; i++) {
--        CPUState *cpu = qemu_get_cpu(hartid_base + i);
-+        CPUState *cpu = cpu_by_arch_id(hartid_base + i);
-         RISCVCPU *rvcpu = RISCV_CPU(cpu);
- 
-         qdev_connect_gpio_out(dev, i,
-diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-index cfd007e629..cd7efc4ad4 100644
---- a/hw/intc/riscv_aplic.c
-+++ b/hw/intc/riscv_aplic.c
-@@ -833,7 +833,7 @@ static void riscv_aplic_realize(DeviceState *dev, Error **errp)
- 
-         /* Claim the CPU interrupt to be triggered by this APLIC */
-         for (i = 0; i < aplic->num_harts; i++) {
--            RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(aplic->hartid_base + i));
-+            RISCVCPU *cpu = RISCV_CPU(cpu_by_arch_id(aplic->hartid_base + i));
-             if (riscv_cpu_claim_interrupts(cpu,
-                 (aplic->mmode) ? MIP_MEIP : MIP_SEIP) < 0) {
-                 error_report("%s already claimed",
-@@ -966,7 +966,7 @@ DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
- 
-     if (!msimode) {
-         for (i = 0; i < num_harts; i++) {
--            CPUState *cpu = qemu_get_cpu(hartid_base + i);
-+            CPUState *cpu = cpu_by_arch_id(hartid_base + i);
- 
-             qdev_connect_gpio_out_named(dev, NULL, i,
-                                         qdev_get_gpio_in(DEVICE(cpu),
-diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-index 4d4d5b50ca..fea3385b51 100644
---- a/hw/intc/riscv_imsic.c
-+++ b/hw/intc/riscv_imsic.c
-@@ -316,8 +316,8 @@ static const MemoryRegionOps riscv_imsic_ops = {
- static void riscv_imsic_realize(DeviceState *dev, Error **errp)
+-static int validate_vm(CPURISCVState *env, target_ulong vm)
++static bool validate_vm(CPURISCVState *env, target_ulong vm)
  {
-     RISCVIMSICState *imsic = RISCV_IMSIC(dev);
--    RISCVCPU *rcpu = RISCV_CPU(qemu_get_cpu(imsic->hartid));
--    CPUState *cpu = qemu_get_cpu(imsic->hartid);
-+    RISCVCPU *rcpu = RISCV_CPU(cpu_by_arch_id(imsic->hartid));
-+    CPUState *cpu = cpu_by_arch_id(imsic->hartid);
-     CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
- 
-     imsic->num_eistate = imsic->num_pages * imsic->num_irqs;
-@@ -413,7 +413,7 @@ DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,
-                                 uint32_t num_pages, uint32_t num_ids)
+     if (riscv_cpu_mxl(env) == MXL_RV32) {
+         return valid_vm_1_10_32[vm & 0xf];
+@@ -2669,7 +2669,8 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
+ static RISCVException write_satp(CPURISCVState *env, int csrno,
+                                  target_ulong val)
  {
-     DeviceState *dev = qdev_new(TYPE_RISCV_IMSIC);
--    CPUState *cpu = qemu_get_cpu(hartid);
-+    CPUState *cpu = cpu_by_arch_id(hartid);
-     uint32_t i;
+-    target_ulong vm, mask;
++    target_ulong mask;
++    bool vm;
  
-     assert(!(addr & (IMSIC_MMIO_PAGE_SZ - 1)));
+     if (!riscv_cpu_cfg(env)->mmu) {
+         return RISCV_EXCP_NONE;
 -- 
 2.39.2
 
