@@ -1,48 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZSSo-00065X-KE
+	id 1pZSSo-00065p-TT
 	for mharc-qemu-riscv@gnu.org; Tue, 07 Mar 2023 03:14:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pZSSh-000606-K0; Tue, 07 Mar 2023 03:14:19 -0500
+ id 1pZSSj-00061d-UU; Tue, 07 Mar 2023 03:14:22 -0500
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pZSSc-0007Jn-Vs; Tue, 07 Mar 2023 03:14:19 -0500
+ id 1pZSSd-0007KO-A2; Tue, 07 Mar 2023 03:14:21 -0500
 Received: from localhost.localdomain (unknown [180.165.240.213])
- by APP-05 (Coremail) with SMTP id zQCowACn0qJN8gZkNe6lDA--.36330S4;
- Tue, 07 Mar 2023 16:14:07 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowACn0qJN8gZkNe6lDA--.36330S9;
+ Tue, 07 Mar 2023 16:14:10 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>, Wilfred Mallawa <wilfred.mallawa@wdc.com>
-Subject: [PATCH v12 02/10] target/riscv: add support for Zca extension
-Date: Tue,  7 Mar 2023 16:13:55 +0800
-Message-Id: <20230307081403.61950-3-liweiwei@iscas.ac.cn>
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v12 07/10] target/riscv: add support for Zcmt extension
+Date: Tue,  7 Mar 2023 16:14:00 +0800
+Message-Id: <20230307081403.61950-8-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230307081403.61950-1-liweiwei@iscas.ac.cn>
 References: <20230307081403.61950-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowACn0qJN8gZkNe6lDA--.36330S4
-X-Coremail-Antispam: 1UD129KBjvJXoW7Kw18uw43Zr1ftry5Kr1kAFb_yoW8KF4xpr
- 4Fk3y7KrZ5Jr93Aa95CF4jqr1UJr4Sgr4xJ39Yvws3JFW3XrW5XFsrKry3KryUZFs2qr1Y
- 9FZ0yFZ8Za18XaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBE14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
- x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
- 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
- IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
- Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
- xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
- 6r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2
- Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
- Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMI
- IF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUc6pPUUUUU
- =
+X-CM-TRANSID: zQCowACn0qJN8gZkNe6lDA--.36330S9
+X-Coremail-Antispam: 1UD129KBjvJXoW3KrWDZF17Jry3JFyUKF1rWFg_yoWDuryrpF
+ 48C3y7GrWkJFZ7Aa4fKF45tF15Jw4rG3yjkws3Aws5Ja13JFWrJr1DKw13KF4DXFZ5ur1j
+ 93Z0yFy5ArW8ZFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9E14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
+ 3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
+ x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
+ JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vIr4
+ 1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
+ 67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
+ 8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20E
+ Y4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267
+ AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbmZX7UUUUU==
 X-Originating-IP: [180.165.240.213]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -64,68 +63,366 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Mar 2023 08:14:19 -0000
+X-List-Received-Date: Tue, 07 Mar 2023 08:14:22 -0000
 
-Modify the check for C extension to Zca (C implies Zca).
+Add encode, trans* functions and helper functions support for Zcmt
+instrutions.
+Add support for jvt csr.
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvi.c.inc | 4 ++--
- target/riscv/translate.c                | 8 ++++++--
- 2 files changed, 8 insertions(+), 4 deletions(-)
+ target/riscv/cpu.h                        |  4 ++
+ target/riscv/cpu_bits.h                   |  7 +++
+ target/riscv/csr.c                        | 36 ++++++++++++++-
+ target/riscv/helper.h                     |  3 ++
+ target/riscv/insn16.decode                |  7 ++-
+ target/riscv/insn_trans/trans_rvzce.c.inc | 28 +++++++++++-
+ target/riscv/machine.c                    | 19 ++++++++
+ target/riscv/meson.build                  |  3 +-
+ target/riscv/zce_helper.c                 | 55 +++++++++++++++++++++++
+ 9 files changed, 157 insertions(+), 5 deletions(-)
+ create mode 100644 target/riscv/zce_helper.c
 
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 4ad54e8a49..c70c495fc5 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -56,7 +56,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
-     tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index a2426ec479..351d5e3e79 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -176,6 +176,8 @@ struct CPUArchState {
+     /* 128-bit helpers upper part return value */
+     target_ulong retxh;
  
-     gen_set_pc(ctx, cpu_pc);
--    if (!has_ext(ctx, RVC)) {
-+    if (!ctx->cfg_ptr->ext_zca) {
-         TCGv t0 = tcg_temp_new();
++    target_ulong jvt;
++
+ #ifdef CONFIG_USER_ONLY
+     uint32_t elf_flags;
+ #endif
+@@ -619,6 +621,8 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
+                                                  target_ulong new_val,
+                                                  target_ulong write_mask),
+                                    void *rmw_fn_arg);
++
++RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit);
+ #endif
+ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv);
  
-         misaligned = gen_new_label();
-@@ -169,7 +169,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index fca7ef0cef..a92313a06f 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -319,6 +319,7 @@
+ #define SMSTATEEN_MAX_COUNT 4
+ #define SMSTATEEN0_CS       (1ULL << 0)
+ #define SMSTATEEN0_FCSR     (1ULL << 1)
++#define SMSTATEEN0_JVT      (1ULL << 2)
+ #define SMSTATEEN0_HSCONTXT (1ULL << 57)
+ #define SMSTATEEN0_IMSIC    (1ULL << 58)
+ #define SMSTATEEN0_AIA      (1ULL << 59)
+@@ -523,6 +524,9 @@
+ /* Crypto Extension */
+ #define CSR_SEED            0x015
  
-     gen_set_label(l); /* branch taken */
++/* Zcmt Extension */
++#define CSR_JVT             0x017
++
+ /* mstatus CSR bits */
+ #define MSTATUS_UIE         0x00000001
+ #define MSTATUS_SIE         0x00000002
+@@ -898,4 +902,7 @@ typedef enum RISCVException {
+ #define MHPMEVENT_IDX_MASK                 0xFFFFF
+ #define MHPMEVENT_SSCOF_RESVD              16
  
--    if (!has_ext(ctx, RVC) && ((ctx->base.pc_next + a->imm) & 0x3)) {
-+    if (!ctx->cfg_ptr->ext_zca && ((ctx->base.pc_next + a->imm) & 0x3)) {
-         /* misaligned */
-         gen_exception_inst_addr_mis(ctx);
-     } else {
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 0ee8ee147d..d1fdd0c2d7 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -549,7 +549,7 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
++/* JVT CSR bits */
++#define JVT_MODE                           0x3F
++#define JVT_BASE                           (~0x3F)
+ #endif
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index ab566639e5..d7bf83bc8c 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -42,8 +42,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
  
-     /* check misaligned: */
-     next_pc = ctx->base.pc_next + imm;
--    if (!has_ext(ctx, RVC)) {
-+    if (!ctx->cfg_ptr->ext_zca) {
-         if ((next_pc & 0x3) != 0) {
-             gen_exception_inst_addr_mis(ctx);
-             return;
-@@ -1122,7 +1122,11 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-     if (insn_len(opcode) == 2) {
-         ctx->opcode = opcode;
-         ctx->pc_succ_insn = ctx->base.pc_next + 2;
--        if (has_ext(ctx, RVC) && decode_insn16(ctx, opcode)) {
-+        /*
-+         * The Zca extension is added as way to refer to instructions in the C
-+         * extension that do not include the floating-point loads and stores
-+         */
-+        if (ctx->cfg_ptr->ext_zca && decode_insn16(ctx, opcode)) {
-             return;
-         }
-     } else {
+ /* Predicates */
+ #if !defined(CONFIG_USER_ONLY)
+-static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
+-                                       uint64_t bit)
++RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit)
+ {
+     bool virt = riscv_cpu_virt_enabled(env);
+ 
+@@ -162,6 +161,22 @@ static RISCVException ctr32(CPURISCVState *env, int csrno)
+     return ctr(env, csrno);
+ }
+ 
++static RISCVException zcmt(CPURISCVState *env, int csrno)
++{
++    if (!riscv_cpu_cfg(env)->ext_zcmt) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++#if !defined(CONFIG_USER_ONLY)
++    RISCVException ret = smstateen_acc_ok(env, 0, SMSTATEEN0_JVT);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
++#endif
++
++    return RISCV_EXCP_NONE;
++}
++
+ #if !defined(CONFIG_USER_ONLY)
+ static RISCVException mctr(CPURISCVState *env, int csrno)
+ {
+@@ -3990,6 +4005,20 @@ RISCVException riscv_csrrw_debug(CPURISCVState *env, int csrno,
+     return ret;
+ }
+ 
++static RISCVException read_jvt(CPURISCVState *env, int csrno,
++                               target_ulong *val)
++{
++    *val = env->jvt;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_jvt(CPURISCVState *env, int csrno,
++                                target_ulong val)
++{
++    env->jvt = val;
++    return RISCV_EXCP_NONE;
++}
++
+ /* Control and Status Register function table */
+ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* User Floating-Point CSRs */
+@@ -4020,6 +4049,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* Crypto Extension */
+     [CSR_SEED] = { "seed", seed, NULL, NULL, rmw_seed },
+ 
++    /* Zcmt Extension */
++    [CSR_JVT] = {"jvt", zcmt, read_jvt, write_jvt},
++
+ #if !defined(CONFIG_USER_ONLY)
+     /* Machine Timers and Counters */
+     [CSR_MCYCLE]    = { "mcycle",    any,   read_hpmcounter,
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 37b54e0991..1880e95c50 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1142,3 +1142,6 @@ DEF_HELPER_FLAGS_1(aes64im, TCG_CALL_NO_RWG_SE, tl, tl)
+ 
+ DEF_HELPER_FLAGS_3(sm4ed, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
+ DEF_HELPER_FLAGS_3(sm4ks, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
++
++/* Zce helper */
++DEF_HELPER_FLAGS_2(cm_jalt, TCG_CALL_NO_WG, tl, env, i32)
+diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
+index 55c9574299..b96c534e73 100644
+--- a/target/riscv/insn16.decode
++++ b/target/riscv/insn16.decode
+@@ -49,6 +49,7 @@
+ %uimm_cl_h  5:1                      !function=ex_shift_1
+ %spimm      2:2                      !function=ex_shift_4
+ %urlist     4:4
++%index      2:8
+ 
+ # Argument sets imported from insn32.decode:
+ &empty                  !extern
+@@ -63,6 +64,7 @@
+ &r2_s      rs1 rs2      !extern
+ 
+ &cmpp      urlist spimm
++&cmjt      index
+ 
+ # Formats 16:
+ @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
+@@ -105,6 +107,7 @@
+ @cs_h         ... . .. ... .. ... ..  &s  imm=%uimm_cl_h  rs1=%rs1_3 rs2=%rs2_3
+ @cm_pp        ... ...  ........   ..  &cmpp  %urlist      %spimm
+ @cm_mv        ... ...  ... .. ... ..  &r2_s  rs2=%r2s     rs1=%r1s
++@cm_jt        ... ...  ........   ..  &cmjt  %index
+ 
+ # *** RV32/64C Standard Extension (Quadrant 0) ***
+ {
+@@ -185,7 +188,7 @@ slli              000 .  .....  ..... 10 @c_shift2
+   sq              101  ... ... .. ... 10 @c_sqsp
+   c_fsd           101   ......  ..... 10 @c_sdsp
+ 
+-  # *** RV64 and RV32 Zcmp Extension ***
++  # *** RV64 and RV32 Zcmp/Zcmt Extension ***
+   [
+     cm_push         101  11000  .... .. 10 @cm_pp
+     cm_pop          101  11010  .... .. 10 @cm_pp
+@@ -193,6 +196,8 @@ slli              000 .  .....  ..... 10 @c_shift2
+     cm_popretz      101  11100  .... .. 10 @cm_pp
+     cm_mva01s       101  011 ... 11 ... 10 @cm_mv
+     cm_mvsa01       101  011 ... 01 ... 10 @cm_mv
++
++    cm_jalt         101  000   ........ 10 @cm_jt
+   ]
+ }
+ sw                110 .  .....  ..... 10 @c_swsp
+diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
+index a47959eb67..d75acbc4a6 100644
+--- a/target/riscv/insn_trans/trans_rvzce.c.inc
++++ b/target/riscv/insn_trans/trans_rvzce.c.inc
+@@ -1,5 +1,5 @@
+ /*
+- * RISC-V translation routines for the Zc[b,mp] Standard Extensions.
++ * RISC-V translation routines for the Zc[b,mp,mt] Standard Extensions.
+  *
+  * Copyright (c) 2021-2022 PLCT Lab
+  *
+@@ -26,6 +26,11 @@
+         return false;            \
+ } while (0)
+ 
++#define REQUIRE_ZCMT(ctx) do {   \
++    if (!ctx->cfg_ptr->ext_zcmt) \
++        return false;            \
++} while (0)
++
+ static bool trans_c_zext_b(DisasContext *ctx, arg_c_zext_b *a)
+ {
+     REQUIRE_ZCB(ctx);
+@@ -283,3 +288,24 @@ static bool trans_cm_mvsa01(DisasContext *ctx, arg_cm_mvsa01 *a)
+ 
+     return true;
+ }
++
++static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
++{
++    REQUIRE_ZCMT(ctx);
++
++    /*
++     * Update pc to current for the non-unwinding exception
++     * that might come from cpu_ld*_code() in the helper.
++     */
++    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
++    gen_helper_cm_jalt(cpu_pc, cpu_env, tcg_constant_i32(a->index));
++
++    /* c.jt vs c.jalt depends on the index. */
++    if (a->index >= 32) {
++        gen_set_gpri(ctx, xRA, ctx->pc_succ_insn);
++    }
++
++    tcg_gen_lookup_and_goto_ptr();
++    ctx->base.is_jmp = DISAS_NORETURN;
++    return true;
++}
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 9c455931d8..27f430ad74 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -329,6 +329,24 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
+     }
+ };
+ 
++static bool jvt_needed(void *opaque)
++{
++    RISCVCPU *cpu = opaque;
++
++    return cpu->cfg.ext_zcmt;
++}
++
++static const VMStateDescription vmstate_jvt = {
++    .name = "cpu/jvt",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .needed = jvt_needed,
++    .fields = (VMStateField[]) {
++        VMSTATE_UINTTL(env.jvt, RISCVCPU),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
+ const VMStateDescription vmstate_riscv_cpu = {
+     .name = "cpu",
+     .version_id = 7,
+@@ -395,6 +413,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+         &vmstate_envcfg,
+         &vmstate_debug,
+         &vmstate_smstateen,
++        &vmstate_jvt,
+         NULL
+     }
+ };
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index 5dee37a242..5b7f813a3e 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -19,7 +19,8 @@ riscv_ss.add(files(
+   'bitmanip_helper.c',
+   'translate.c',
+   'm128_helper.c',
+-  'crypto_helper.c'
++  'crypto_helper.c',
++  'zce_helper.c'
+ ))
+ riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'), if_false: files('kvm-stub.c'))
+ 
+diff --git a/target/riscv/zce_helper.c b/target/riscv/zce_helper.c
+new file mode 100644
+index 0000000000..b433bda16d
+--- /dev/null
++++ b/target/riscv/zce_helper.c
+@@ -0,0 +1,55 @@
++/*
++ * RISC-V Zcmt Extension Helper for QEMU.
++ *
++ * Copyright (c) 2021-2022 PLCT Lab
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include "qemu/osdep.h"
++#include "cpu.h"
++#include "exec/exec-all.h"
++#include "exec/helper-proto.h"
++#include "exec/cpu_ldst.h"
++
++target_ulong HELPER(cm_jalt)(CPURISCVState *env, uint32_t index)
++{
++
++#if !defined(CONFIG_USER_ONLY)
++    RISCVException ret = smstateen_acc_ok(env, 0, SMSTATEEN0_JVT);
++    if (ret != RISCV_EXCP_NONE) {
++        riscv_raise_exception(env, ret, 0);
++    }
++#endif
++
++    target_ulong target;
++    target_ulong val = env->jvt;
++    int xlen = riscv_cpu_xlen(env);
++    uint8_t mode = get_field(val, JVT_MODE);
++    target_ulong base = val & JVT_BASE;
++    target_ulong t0;
++
++    if (mode != 0) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, 0);
++    }
++
++    if (xlen == 32) {
++        t0 = base + (index << 2);
++        target = cpu_ldl_code(env, t0);
++    } else {
++        t0 = base + (index << 3);
++        target = cpu_ldq_code(env, t0);
++    }
++
++    return target & ~0x1;
++}
 -- 
 2.25.1
 
