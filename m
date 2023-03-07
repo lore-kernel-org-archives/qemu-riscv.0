@@ -1,47 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZSSl-000622-Dv
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Mar 2023 03:14:23 -0500
+	id 1pZSSm-00062g-PX
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Mar 2023 03:14:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pZSSg-0005zp-Aq; Tue, 07 Mar 2023 03:14:18 -0500
+ id 1pZSSh-00060K-Nj; Tue, 07 Mar 2023 03:14:19 -0500
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pZSSc-0007Jk-Vd; Tue, 07 Mar 2023 03:14:18 -0500
+ id 1pZSSc-0007Jm-Vl; Tue, 07 Mar 2023 03:14:19 -0500
 Received: from localhost.localdomain (unknown [180.165.240.213])
- by APP-05 (Coremail) with SMTP id zQCowACn0qJN8gZkNe6lDA--.36330S5;
- Tue, 07 Mar 2023 16:14:07 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowACn0qJN8gZkNe6lDA--.36330S2;
+ Tue, 07 Mar 2023 16:14:06 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v12 03/10] target/riscv: add support for Zcf extension
-Date: Tue,  7 Mar 2023 16:13:56 +0800
-Message-Id: <20230307081403.61950-4-liweiwei@iscas.ac.cn>
+Subject: [PATCH v12 00/10] support subsets of code size reduction extension
+Date: Tue,  7 Mar 2023 16:13:53 +0800
+Message-Id: <20230307081403.61950-1-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230307081403.61950-1-liweiwei@iscas.ac.cn>
-References: <20230307081403.61950-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowACn0qJN8gZkNe6lDA--.36330S5
-X-Coremail-Antispam: 1UD129KBjvJXoW7uF43Jry7Xw47JFyrJF4UXFb_yoW8trW3pr
- 18Cay7GrWUAryfA3Z3tF45Xr1UJrs2gry8t3sIyw1kGa1UGFs8Zw1qqr13tr4UXFyvqr1Y
- kF18A39xC3yktrDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9m14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
- x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
- 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
- IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
- Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCF04k20xvY0x0EwIxGrwCFx2
- IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v2
- 6r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67
- AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IY
- s7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr
- 0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd8n5UUUUU=
+X-CM-TRANSID: zQCowACn0qJN8gZkNe6lDA--.36330S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxZr1DtF4rKr1Duw18ZFW5KFg_yoW5CrWfpr
+ WrCayakrZ8tFyxJw4Sq3WUJw15AFs5Wr45Awn7Jw1kGa13ArW3Jrs7K3W3K3W8JF1rWrnF
+ 93WUCw13u3yUAFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUyl14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+ CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+ 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+ W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vI
+ r41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8Gjc
+ xK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0
+ cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8V
+ AvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E
+ 14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUoOJ5UUUUU
 X-Originating-IP: [180.165.240.213]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -63,85 +61,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Mar 2023 08:14:18 -0000
+X-List-Received-Date: Tue, 07 Mar 2023 08:14:20 -0000
 
-Separate c_flw/c_fsw from flw/fsw to add check for Zcf extension.
+This patchset implements RISC-V Zc* extension v1.0.3-1 version instructions.
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/insn16.decode              |  8 ++++----
- target/riscv/insn_trans/trans_rvf.c.inc | 18 ++++++++++++++++++
- 2 files changed, 22 insertions(+), 4 deletions(-)
+Specification:
+https://github.com/riscv/riscv-code-size-reduction/tree/main/Zc-specification
 
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index ccfe59f294..f3ea650325 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -109,11 +109,11 @@ sw                110  ... ... .. ... 00 @cs_w
- # *** RV32C and RV64C specific Standard Extension (Quadrant 0) ***
- {
-   ld              011  ... ... .. ... 00 @cl_d
--  flw             011  ... ... .. ... 00 @cl_w
-+  c_flw           011  ... ... .. ... 00 @cl_w
- }
- {
-   sd              111  ... ... .. ... 00 @cs_d
--  fsw             111  ... ... .. ... 00 @cs_w
-+  c_fsw           111  ... ... .. ... 00 @cs_w
- }
- 
- # *** RV32/64C Standard Extension (Quadrant 1) ***
-@@ -174,9 +174,9 @@ sw                110 .  .....  ..... 10 @c_swsp
- {
-   c64_illegal     011 -  00000  ----- 10 # c.ldsp, RES rd=0
-   ld              011 .  .....  ..... 10 @c_ldsp
--  flw             011 .  .....  ..... 10 @c_lwsp
-+  c_flw           011 .  .....  ..... 10 @c_lwsp
- }
- {
-   sd              111 .  .....  ..... 10 @c_sdsp
--  fsw             111 .  .....  ..... 10 @c_swsp
-+  c_fsw           111 .  .....  ..... 10 @c_swsp
- }
-diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-index 052408f45c..9e9fa2087a 100644
---- a/target/riscv/insn_trans/trans_rvf.c.inc
-+++ b/target/riscv/insn_trans/trans_rvf.c.inc
-@@ -30,6 +30,12 @@
-     } \
- } while (0)
- 
-+#define REQUIRE_ZCF(ctx) do {                  \
-+    if (!ctx->cfg_ptr->ext_zcf) {              \
-+        return false;                          \
-+    }                                          \
-+} while (0)
-+
- static bool trans_flw(DisasContext *ctx, arg_flw *a)
- {
-     TCGv_i64 dest;
-@@ -61,6 +67,18 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
-     return true;
- }
- 
-+static bool trans_c_flw(DisasContext *ctx, arg_flw *a)
-+{
-+    REQUIRE_ZCF(ctx);
-+    return trans_flw(ctx, a);
-+}
-+
-+static bool trans_c_fsw(DisasContext *ctx, arg_fsw *a)
-+{
-+    REQUIRE_ZCF(ctx);
-+    return trans_fsw(ctx, a);
-+}
-+
- static bool trans_fmadd_s(DisasContext *ctx, arg_fmadd_s *a)
- {
-     REQUIRE_FPU;
+The port is available here:
+https://github.com/plctlab/plct-qemu/tree/plct-zce-upstream-v12
+
+To test Zc* implementation, specify cpu argument with 'x-zca=true,x-zcb=true,x-zcf=true,f=true" and "x-zcd=true,d=true" (or "x-zcmp=true,x-zcmt=true" with c or d=false) to enable Zca/Zcb/Zcf and Zcd(or Zcmp,Zcmt) extensions support. We can also specify "x-zce=true,f=true" to enable Zca/Zcb/Zcmp/Zcmt and Zcf.
+
+This implementation can pass the basic zc tests from https://github.com/yulong-plct/zc-test
+
+v12
+* add patch 10 to support zce property
+* rebase on upstream master: reuse riscv_get_cfg() in patch 7 and remove tcg_temp_free in patch 6
+
+v11
+* update format and field name based on the latest spec in patch 5, 6, 7 (without other functional changes)
+* rebase on riscv-to-apply.next
+
+v10:
+* rebase on Daniel's series(riscv-to-apply.next) and adjust riscv-tests to test on sifive related CPUs
+
+v9:
+* rebase on riscv-to-apply.next
+
+v8:
+* improve disas support in Patch 9
+
+v7:
+* Fix description for Zca
+
+v6：
+* fix base address for jump table in Patch 7
+* rebase on riscv-to-apply.next
+
+v5:
+* fix exception unwind problem for cpu_ld*_code in helper of cm_jalt
+
+v4:
+* improve Zcmp suggested by Richard
+* fix stateen related check for Zcmt
+
+v3:
+* update the solution for Zcf to the way of Zcd
+* update Zcb to reuse gen_load/store
+* use trans function instead of helper for push/pop
+
+v2:
+* add check for relationship between Zca/Zcf/Zcd with C/F/D based on related discussion in review of Zc* spec
+* separate c.fld{sp}/fsd{sp} with fld{sp}/fsd{sp} before support of zcmp/zcmt
+
+Weiwei Li (10):
+  target/riscv: add cfg properties for Zc* extension
+  target/riscv: add support for Zca extension
+  target/riscv: add support for Zcf extension
+  target/riscv: add support for Zcd extension
+  target/riscv: add support for Zcb extension
+  target/riscv: add support for Zcmp extension
+  target/riscv: add support for Zcmt extension
+  target/riscv: expose properties for Zc* extension
+  disas/riscv.c: add disasm support for Zc*
+  target/riscv: Add support for Zce
+
+ disas/riscv.c                             | 228 +++++++++++++++-
+ target/riscv/cpu.c                        |  69 +++++
+ target/riscv/cpu.h                        |  11 +
+ target/riscv/cpu_bits.h                   |   7 +
+ target/riscv/csr.c                        |  36 ++-
+ target/riscv/helper.h                     |   3 +
+ target/riscv/insn16.decode                |  62 ++++-
+ target/riscv/insn_trans/trans_rvd.c.inc   |  18 ++
+ target/riscv/insn_trans/trans_rvf.c.inc   |  18 ++
+ target/riscv/insn_trans/trans_rvi.c.inc   |   4 +-
+ target/riscv/insn_trans/trans_rvzce.c.inc | 311 ++++++++++++++++++++++
+ target/riscv/machine.c                    |  19 ++
+ target/riscv/meson.build                  |   3 +-
+ target/riscv/translate.c                  |  15 +-
+ target/riscv/zce_helper.c                 |  55 ++++
+ 15 files changed, 843 insertions(+), 16 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvzce.c.inc
+ create mode 100644 target/riscv/zce_helper.c
+
 -- 
 2.25.1
 
