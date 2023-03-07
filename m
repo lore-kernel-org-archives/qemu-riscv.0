@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZSSn-00062z-2h
+	id 1pZSSn-00063D-6m
 	for mharc-qemu-riscv@gnu.org; Tue, 07 Mar 2023 03:14:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pZSSh-000603-HP; Tue, 07 Mar 2023 03:14:19 -0500
+ id 1pZSSh-00060F-Lo; Tue, 07 Mar 2023 03:14:19 -0500
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pZSSc-0007Jl-Vh; Tue, 07 Mar 2023 03:14:19 -0500
+ id 1pZSSd-0007KP-AD; Tue, 07 Mar 2023 03:14:19 -0500
 Received: from localhost.localdomain (unknown [180.165.240.213])
- by APP-05 (Coremail) with SMTP id zQCowACn0qJN8gZkNe6lDA--.36330S3;
- Tue, 07 Mar 2023 16:14:06 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowACn0qJN8gZkNe6lDA--.36330S10;
+ Tue, 07 Mar 2023 16:14:11 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v12 01/10] target/riscv: add cfg properties for Zc* extension
-Date: Tue,  7 Mar 2023 16:13:54 +0800
-Message-Id: <20230307081403.61950-2-liweiwei@iscas.ac.cn>
+Subject: [PATCH v12 08/10] target/riscv: expose properties for Zc* extension
+Date: Tue,  7 Mar 2023 16:14:01 +0800
+Message-Id: <20230307081403.61950-9-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230307081403.61950-1-liweiwei@iscas.ac.cn>
 References: <20230307081403.61950-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowACn0qJN8gZkNe6lDA--.36330S3
-X-Coremail-Antispam: 1UD129KBjvJXoW7WryDtw1rtFyfur45JFykGrg_yoW8KF4fpr
- 48G3yYkrWDJr17C3yfXF1UKFn8Wws2vayxK392q3WxurW7ArW5XFnYkw1UWF45tFs5Xa1a
- 9F17CF1DCrsrJa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9m14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
- x26xkF7I0E14v26r1I6r4UM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
- 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
- IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
- Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCF04k20xvY0x0EwIxGrwCFx2
- IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v2
- 6r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67
- AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IY
- s7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr
- 0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUqAp5UUUUU=
+X-CM-TRANSID: zQCowACn0qJN8gZkNe6lDA--.36330S10
+X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF4rWw4xAF4xJFyxZrb_yoW8tr43pr
+ W5Ga47Kw15Jr13Gwsxtr1DJw4rCw4rA3s7K3ySv3Z7JrZ7KrZrXFnrG39rW3yrtF4rZw4S
+ gF13Zr1xurs5ta7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
+ 3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
+ x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
+ JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vIr4
+ 1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
+ 67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
+ 8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20E
+ Y4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267
+ AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQSdkUUUUU=
 X-Originating-IP: [180.165.240.213]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -65,89 +65,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 07 Mar 2023 08:14:19 -0000
 
-Add properties for Zca,Zcb,Zcf,Zcd,Zcmp,Zcmt extension.
-Add check for these properties.
+Expose zca,zcb,zcf,zcd,zcmp,zcmt properties.
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 43 +++++++++++++++++++++++++++++++++++++++++++
- target/riscv/cpu.h |  6 ++++++
- 2 files changed, 49 insertions(+)
+ target/riscv/cpu.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1e97473af2..df7eed57af 100644
+index df7eed57af..d17ae942bd 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -939,6 +939,49 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         }
-     }
- 
-+    if (cpu->cfg.ext_c) {
-+        cpu->cfg.ext_zca = true;
-+        if (cpu->cfg.ext_f && env->misa_mxl_max == MXL_RV32) {
-+            cpu->cfg.ext_zcf = true;
-+        }
-+        if (cpu->cfg.ext_d) {
-+            cpu->cfg.ext_zcd = true;
-+        }
-+    }
+@@ -87,6 +87,12 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zfhmin, true, PRIV_VERSION_1_12_0, ext_zfhmin),
+     ISA_EXT_DATA_ENTRY(zfinx, true, PRIV_VERSION_1_12_0, ext_zfinx),
+     ISA_EXT_DATA_ENTRY(zdinx, true, PRIV_VERSION_1_12_0, ext_zdinx),
++    ISA_EXT_DATA_ENTRY(zca, true, PRIV_VERSION_1_12_0, ext_zca),
++    ISA_EXT_DATA_ENTRY(zcb, true, PRIV_VERSION_1_12_0, ext_zcb),
++    ISA_EXT_DATA_ENTRY(zcf, true, PRIV_VERSION_1_12_0, ext_zcf),
++    ISA_EXT_DATA_ENTRY(zcd, true, PRIV_VERSION_1_12_0, ext_zcd),
++    ISA_EXT_DATA_ENTRY(zcmp, true, PRIV_VERSION_1_12_0, ext_zcmp),
++    ISA_EXT_DATA_ENTRY(zcmt, true, PRIV_VERSION_1_12_0, ext_zcmt),
+     ISA_EXT_DATA_ENTRY(zba, true, PRIV_VERSION_1_12_0, ext_zba),
+     ISA_EXT_DATA_ENTRY(zbb, true, PRIV_VERSION_1_12_0, ext_zbb),
+     ISA_EXT_DATA_ENTRY(zbc, true, PRIV_VERSION_1_12_0, ext_zbc),
+@@ -1491,6 +1497,14 @@ static Property riscv_cpu_extensions[] = {
+     /* These are experimental so mark with 'x-' */
+     DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
+     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
 +
-+    if (env->misa_mxl_max != MXL_RV32 && cpu->cfg.ext_zcf) {
-+        error_setg(errp, "Zcf extension is only relevant to RV32");
-+        return;
-+    }
++    DEFINE_PROP_BOOL("x-zca", RISCVCPU, cfg.ext_zca, false),
++    DEFINE_PROP_BOOL("x-zcb", RISCVCPU, cfg.ext_zcb, false),
++    DEFINE_PROP_BOOL("x-zcd", RISCVCPU, cfg.ext_zcd, false),
++    DEFINE_PROP_BOOL("x-zcf", RISCVCPU, cfg.ext_zcf, false),
++    DEFINE_PROP_BOOL("x-zcmp", RISCVCPU, cfg.ext_zcmp, false),
++    DEFINE_PROP_BOOL("x-zcmt", RISCVCPU, cfg.ext_zcmt, false),
 +
-+    if (!cpu->cfg.ext_f && cpu->cfg.ext_zcf) {
-+        error_setg(errp, "Zcf extension requires F extension");
-+        return;
-+    }
-+
-+    if (!cpu->cfg.ext_d && cpu->cfg.ext_zcd) {
-+        error_setg(errp, "Zcd extension requires D extension");
-+        return;
-+    }
-+
-+    if ((cpu->cfg.ext_zcf || cpu->cfg.ext_zcd || cpu->cfg.ext_zcb ||
-+         cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt) && !cpu->cfg.ext_zca) {
-+        error_setg(errp, "Zcf/Zcd/Zcb/Zcmp/Zcmt extensions require Zca "
-+                         "extension");
-+        return;
-+    }
-+
-+    if (cpu->cfg.ext_zcd && (cpu->cfg.ext_zcmp || cpu->cfg.ext_zcmt)) {
-+        error_setg(errp, "Zcmp/Zcmt extensions are incompatible with "
-+                         "Zcd extension");
-+        return;
-+    }
-+
-+    if (cpu->cfg.ext_zcmt && !cpu->cfg.ext_icsr) {
-+        error_setg(errp, "Zcmt extension requires Zicsr extension");
-+        return;
-+    }
-+
-     if (cpu->cfg.ext_zk) {
-         cpu->cfg.ext_zkn = true;
-         cpu->cfg.ext_zkr = true;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 638e47c75a..a2426ec479 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -438,6 +438,12 @@ struct RISCVCPUConfig {
-     bool ext_zbkc;
-     bool ext_zbkx;
-     bool ext_zbs;
-+    bool ext_zca;
-+    bool ext_zcb;
-+    bool ext_zcd;
-+    bool ext_zcf;
-+    bool ext_zcmp;
-+    bool ext_zcmt;
-     bool ext_zk;
-     bool ext_zkn;
-     bool ext_zknd;
+     /* ePMP 0.9.3 */
+     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+     DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
 -- 
 2.25.1
 
