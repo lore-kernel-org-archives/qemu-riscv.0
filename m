@@ -1,79 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZLKW-0001bA-DI
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 19:37:24 -0500
+	id 1pZMQF-0003dq-9a
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 20:47:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZLKT-0001YO-5b
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 19:37:21 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pZLKQ-0000IR-Dz
- for qemu-riscv@nongnu.org; Mon, 06 Mar 2023 19:37:20 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- t25-20020a1c7719000000b003eb052cc5ccso9412664wmi.4
- for <qemu-riscv@nongnu.org>; Mon, 06 Mar 2023 16:37:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678149436;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ICnPhU6cHn0twhF/CUf4hoGgm/p7umHBuM4TowPzpDA=;
- b=NmvSR9kg1zwpXasWQuA4g9cj+Ngm8LW9Kzeuj16zvxhK19LXslMk23ZJ8vfMFEdSo7
- 05d+ERCTImX6PkU0M28BPQnEQdpf4E+8eLTmZ2XDRQllfyUlnXfuQp+uklSK3HU4Sc+X
- vPjRarj4K7sCcj8nGH/DuCR46AUhew1DBVaXK78ugKTqt1P1FGWZw8jX8p3YRMmRBg2R
- V5sO6SplFTdOxn47wsxNf/5L553YLk+CeWiRSPJX5uT5hyLWUtcsRBuLrQuUK1brlx20
- KZtm2vtRF44MHU/kC/bZaVBaHjtDAMTcUqThCaXpCUjGck1gjH4rAnNG2cbyfQCumaG8
- oABQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678149436;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ICnPhU6cHn0twhF/CUf4hoGgm/p7umHBuM4TowPzpDA=;
- b=jPc+5Dt2zXmx9rZ67PMFaIR6XA2R7vyd3ZdQqfIv8XAXmC6E+ie9Wh8VOMfxB88ADp
- dANUigQPbXwNX4CAOYwEZnrKZ5nAxZwglQWMt04ATF7k7rHa21giL7mOYva4r1czXGhQ
- Xap5TKW0KyZ00Uoybaw5g2cg/S5hKx/pSNFl8LibAndDReqK/h6XCmggNKUPASf59jkK
- rK4FONoVoQcCxWkQ09kGDd6MPEC84XyKuH1/3g6P1Zwd7jojLZTE9A+Cn+03wowcjahj
- xlIjKQiiQMK7YyW1z24LdXM084XTSLR0yA8vsZtKYzwDsFukIN/NG1XIcv0aTOWjqctV
- VAVQ==
-X-Gm-Message-State: AO0yUKX6I0QBQeKbg7Jg92OdjYfMYldgiL6Gm1jqbr8gfMbzM4h/UmaT
- eYT5dGlCrf1sdSAx9ws6L8U4LA==
-X-Google-Smtp-Source: AK7set/HjGFBbAw3cKfMPPyEuOkqIhgQ399VTchnCbNnzp3TYEVzKgdbSpqwe3mdl9mA/X/UagqZKw==
-X-Received: by 2002:a05:600c:4f15:b0:3eb:3998:36fa with SMTP id
- l21-20020a05600c4f1500b003eb399836famr10927932wmq.29.1678149436676; 
- Mon, 06 Mar 2023 16:37:16 -0800 (PST)
-Received: from [192.168.1.115] (138.red-88-29-178.dynamicip.rima-tde.net.
- [88.29.178.138]) by smtp.gmail.com with ESMTPSA id
- r22-20020a05600c435600b003eae73ee4a1sm11439258wme.17.2023.03.06.16.37.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 06 Mar 2023 16:37:16 -0800 (PST)
-Message-ID: <0115ca07-70f3-91c7-8d89-c4b51b833428@linaro.org>
-Date: Tue, 7 Mar 2023 01:37:11 +0100
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pZMQD-0003dc-Sn; Mon, 06 Mar 2023 20:47:21 -0500
+Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pZMQA-0001uM-VI; Mon, 06 Mar 2023 20:47:21 -0500
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R981e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0VdJ4Q6C_1678153628; 
+Received: from 192.168.3.95(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VdJ4Q6C_1678153628) by smtp.aliyun-inc.com;
+ Tue, 07 Mar 2023 09:47:09 +0800
+Message-ID: <36217124-138c-d7ca-2322-5b5d40c31fb2@linux.alibaba.com>
+Date: Tue, 7 Mar 2023 09:47:08 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.8.0
-Subject: Re: [PATCH 23/70] target/i386: Avoid use of tcg_const_* throughout
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH 1/1] hw/riscv: Add signature dump function for spike to
+ run ACT tests
+To: liweiwei <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20230306090314.74626-1-liweiwei@iscas.ac.cn>
+ <20230306090314.74626-2-liweiwei@iscas.ac.cn>
+ <6dd0199c-c3e0-a466-67b3-dab92df587d2@linux.alibaba.com>
+ <5032e9ed-b8ef-cc0e-e122-1ec09fc00cf3@iscas.ac.cn>
 Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org, jcmvbkbc@gmail.com, kbastian@mail.uni-paderborn.de,
- ysato@users.sourceforge.jp, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
- tsimpson@quicinc.com, ale@rev.ng, mrolnik@gmail.com, edgar.iglesias@gmail.com
-References: <20230227054233.390271-1-richard.henderson@linaro.org>
- <20230227054233.390271-24-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230227054233.390271-24-richard.henderson@linaro.org>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <5032e9ed-b8ef-cc0e-e122-1ec09fc00cf3@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.119;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-119.freemail.mail.aliyun.com
+X-Spam_score_int: -98
+X-Spam_score: -9.9
+X-Spam_bar: ---------
+X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,17 +58,178 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Mar 2023 00:37:21 -0000
+X-List-Received-Date: Tue, 07 Mar 2023 01:47:22 -0000
 
-On 27/2/23 06:41, Richard Henderson wrote:
-> All uses are strictly read-only.  Most of the obviously so,
-> as direct arguments to gen_helper_*.
-> 
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   target/i386/tcg/translate.c | 83 +++++++++++++++++++------------------
->   1 file changed, 42 insertions(+), 41 deletions(-)
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+On 2023/3/6 20:10, liweiwei wrote:
+>
+> On 2023/3/6 19:00, LIU Zhiwei wrote:
+>>
+>> On 2023/3/6 17:03, Weiwei Li wrote:
+>>> Add signature and signature-granularity properties in spike to 
+>>> specify the target
+>>> signatrue file and the line size for signature data.
+>>>
+>>> Recgonize the signature section between begin_signature and 
+>>> end_signature symbols
+>>> when loading elf of ACT tests. Then dump signature data in signature 
+>>> section just
+>>> before the ACT tests exit.
+>>>
+>>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+>>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+>>> ---
+>>>   hw/char/riscv_htif.c | 39 ++++++++++++++++++++++++++++++++++++++-
+>>>   hw/riscv/spike.c     | 16 ++++++++++++++++
+>>>   2 files changed, 54 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+>>> index 098de50e35..2a82ed8500 100644
+>>> --- a/hw/char/riscv_htif.c
+>>> +++ b/hw/char/riscv_htif.c
+>>> @@ -29,6 +29,8 @@
+>>>   #include "chardev/char-fe.h"
+>>>   #include "qemu/timer.h"
+>>>   #include "qemu/error-report.h"
+>>> +#include "exec/address-spaces.h"
+>>> +#include "sysemu/dma.h"
+>>>     #define RISCV_DEBUG_HTIF 0
+>>>   #define HTIF_DEBUG(fmt, 
+>>> ...)                                                   \
+>>> @@ -51,7 +53,10 @@
+>>>   /* PK system call number */
+>>>   #define PK_SYS_WRITE            64
+>>>   -static uint64_t fromhost_addr, tohost_addr;
+>>> +extern const char *sig_file;
+>>> +extern uint8_t line_size;
+>>> +
+>> Why not declare them in riscv_htif.h and include them in 
+>> hw/riscv/spike.c?
+>
+> Do you mean the above "extern ..." declaration? It's OK to move them 
+> to riscv_hitf.h.
 
+No， I mean define them in riscv_htif.c and declare them in riscv_htif.h.
+
+Zhiwei
+
+>
+> However, we can not move the definition in spike.c to riscv_htif.h. 
+> Otherwise, it'll trigger
+>
+> multiple definition error.
+>
+>>> +static uint64_t fromhost_addr, tohost_addr, sig_addr, sig_len;
+>>>     void htif_symbol_callback(const char *st_name, int st_info, 
+>>> uint64_t st_value,
+>>>                             uint64_t st_size)
+>>> @@ -68,6 +73,10 @@ void htif_symbol_callback(const char *st_name, 
+>>> int st_info, uint64_t st_value,
+>>>               error_report("HTIF tohost must be 8 bytes");
+>>>               exit(1);
+>>>           }
+>>> +    } else if (strcmp("begin_signature", st_name) == 0) {
+>>> +        sig_addr = st_value;
+>>> +    } else if (strcmp("end_signature", st_name) == 0) {
+>>> +        sig_len = st_value - sig_addr;
+>>>       }
+>>>   }
+>>>   @@ -161,6 +170,34 @@ static void 
+>>> htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
+>>>           /* frontend syscall handler, shutdown and exit code 
+>>> support */
+>>>           if (cmd == HTIF_SYSTEM_CMD_SYSCALL) {
+>>>               if (payload & 0x1) {
+>>> +                /* Dump signature data to sig_file if specified */
+>>> +                if (sig_file) {
+>>> +                    char *sig_data = g_malloc(sig_len);
+>>> + dma_memory_read(&address_space_memory, sig_addr, sig_data,
+>>> +                                    sig_len, MEMTXATTRS_UNSPECIFIED);
+>>> +                    FILE *signature = fopen(sig_file, "w");
+>>> +                    if (signature == NULL) {
+>>> +                        error_report("open %s: %s", sig_file,
+>>> +                                     strerror(errno));
+>>> +                        exit(1);
+>>> +                    }
+>>> +
+>>> +                    for (int i = 0; i < sig_len; i += line_size) {
+>>> +                        for (int j = line_size; j > 0; j--) {
+>>> +                            if (i + j <= sig_len) {
+>>> +                                fprintf(signature, "%02x",
+>>> +                                        sig_data[i + j - 1] & 0xff);
+>>
+>> Not sure about the order. Otherwise, 
+>
+> It will put the higher data(at higher address) before the lower data 
+> in the same line,
+>
+> just as the htif logic in riscv-isa-sim(spike).
+>
+> Regards,
+>
+> Weiwei Li
+>
+>>
+>> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+>>
+>> Zhiwei
+>>
+>>> +                            } else {
+>>> +                                fprintf(signature, "%02x", 0);
+>>> +                            }
+>>> +                        }
+>>> +                        fprintf(signature, "\n");
+>>> +                    }
+>>> +
+>>> +                    fclose(signature);
+>>> +                    g_free(sig_data);
+>>> +                }
+>>> +
+>>>                   /* exit code */
+>>>                   int exit_code = payload >> 1;
+>>>                   exit(exit_code);
+>>> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+>>> index a584d5b3a2..eaa7f54fd6 100644
+>>> --- a/hw/riscv/spike.c
+>>> +++ b/hw/riscv/spike.c
+>>> @@ -41,6 +41,9 @@
+>>>     #include <libfdt.h>
+>>>   +const char *sig_file;
+>>> +uint8_t line_size = 16;
+>>> +
+>>>   static const MemMapEntry spike_memmap[] = {
+>>>       [SPIKE_MROM] =     {     0x1000,     0xf000 },
+>>>       [SPIKE_HTIF] =     {  0x1000000,     0x1000 },
+>>> @@ -332,6 +335,11 @@ static void spike_board_init(MachineState 
+>>> *machine)
+>>>                    htif_custom_base);
+>>>   }
+>>>   +static void spike_set_signature(Object *obj, const char *val, 
+>>> Error **errp)
+>>> +{
+>>> +    sig_file = g_strdup(val);
+>>> +}
+>>> +
+>>>   static void spike_machine_instance_init(Object *obj)
+>>>   {
+>>>   }
+>>> @@ -350,6 +358,14 @@ static void 
+>>> spike_machine_class_init(ObjectClass *oc, void *data)
+>>>       mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
+>>>       mc->numa_mem_supported = true;
+>>>       mc->default_ram_id = "riscv.spike.ram";
+>>> +    object_class_property_add_str(oc, "signature", NULL, 
+>>> spike_set_signature);
+>>> +    object_class_property_set_description(oc, "signature",
+>>> +                                          "File to write ACT test 
+>>> signature");
+>>> +    object_class_property_add_uint8_ptr(oc, "signature-granularity",
+>>> +                                        &line_size, 
+>>> OBJ_PROP_FLAG_WRITE);
+>>> +    object_class_property_set_description(oc, "signature-granularity",
+>>> +                                          "Size of each line in ACT 
+>>> signature "
+>>> +                                          "file");
+>>>   }
+>>>     static const TypeInfo spike_machine_typeinfo = {
 
