@@ -1,49 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZNA6-00005S-73
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 21:34:46 -0500
+	id 1pZO15-0001rG-Kk
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Mar 2023 22:29:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pZNA4-000059-Lm; Mon, 06 Mar 2023 21:34:44 -0500
-Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pZNA1-0001R9-Rh; Mon, 06 Mar 2023 21:34:44 -0500
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R521e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0VdJLSfx_1678156474; 
-Received: from 30.32.93.50(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VdJLSfx_1678156474) by smtp.aliyun-inc.com;
- Tue, 07 Mar 2023 10:34:34 +0800
-Message-ID: <d6d230a5-2d99-7660-e1ce-3e49d04e30f8@linux.alibaba.com>
-Date: Tue, 7 Mar 2023 10:34:34 +0800
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pZO13-0001qp-W2; Mon, 06 Mar 2023 22:29:30 -0500
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pZO11-0002ac-4F; Mon, 06 Mar 2023 22:29:29 -0500
+Received: from localhost.localdomain (unknown [180.165.240.213])
+ by APP-05 (Coremail) with SMTP id zQCowAAnLemNrwZkRKOODA--.34193S3;
+ Tue, 07 Mar 2023 11:29:19 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v3 1/1] hw/riscv: Add signature dump function for spike to run
+ ACT tests
+Date: Tue,  7 Mar 2023 11:29:15 +0800
+Message-Id: <20230307032915.10059-2-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230307032915.10059-1-liweiwei@iscas.ac.cn>
+References: <20230307032915.10059-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH qemu] linux-user: Emulate /proc/cpuinfo output for riscv
-Content-Language: en-US
-To: ~abordado <afonsobordado@gmail.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-References: <167811752616.21558.7117682501860352029-0@git.sr.ht>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <167811752616.21558.7117682501860352029-0@git.sr.ht>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.124;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-124.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+X-CM-TRANSID: zQCowAAnLemNrwZkRKOODA--.34193S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxZF1DXrWfZF1fuF1UGr4rKrg_yoWrZrWxpF
+ s3CFnxuryUJFn3GFnxtw1xua1rGan5W3W2krnxuw1rZFs8WFyUAa97t3W5Za98Grs2vF45
+ ArWDKF9xKa15Zw7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUP014x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+ x26xkF7I0E14v26r1I6r4UM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
+ ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1U
+ M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
+ v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
+ F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
+ IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAF
+ wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc4
+ 0Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AK
+ xVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr
+ 1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbec_DUU
+ UUU==
+X-Originating-IP: [180.165.240.213]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -56,143 +67,141 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Mar 2023 02:34:45 -0000
+X-List-Received-Date: Tue, 07 Mar 2023 03:29:30 -0000
 
+Add signature and signature-granularity properties in spike to specify the target
+signatrue file and the line size for signature data.
 
-On 2023/3/5 22:34, ~abordado wrote:
-> From: Afonso Bordado <afonsobordado@gmail.com>
->
-> RISC-V does not expose all extensions via hwcaps, thus some userspace
-> applications may want to query these via /proc/cpuinfo.
->
-> Currently when querying this file the host's file is shown instead
-> which is slightly confusing. Emulate a basic /proc/cpuinfo file
-> with mmu info and an ISA sting.
->
-> Signed-off-by: Afonso Bordado <afonsobordado@gmail.com>
-> ---
->   linux-user/syscall.c              | 32 +++++++++++++++++++++++++++++--
->   tests/tcg/riscv64/Makefile.target |  1 +
->   tests/tcg/riscv64/cpuinfo.c       | 30 +++++++++++++++++++++++++++++
->   3 files changed, 61 insertions(+), 2 deletions(-)
->   create mode 100644 tests/tcg/riscv64/cpuinfo.c
->
-> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-> index a6c426d73c..eda2bc5df0 100644
-> --- a/linux-user/syscall.c
-> +++ b/linux-user/syscall.c
-> @@ -8183,7 +8183,8 @@ void target_exception_dump(CPUArchState *env, const char *fmt, int code)
->   }
->   
->   #if HOST_BIG_ENDIAN != TARGET_BIG_ENDIAN || \
-> -    defined(TARGET_SPARC) || defined(TARGET_M68K) || defined(TARGET_HPPA)
-> +    defined(TARGET_SPARC) || defined(TARGET_M68K) || defined(TARGET_HPPA) || \
-> +    defined(TARGET_RISCV)
->   static int is_proc(const char *filename, const char *entry)
->   {
->       return strcmp(filename, entry) == 0;
-> @@ -8261,6 +8262,33 @@ static int open_cpuinfo(CPUArchState *cpu_env, int fd)
->   }
->   #endif
->   
-> +#if defined(TARGET_RISCV)
-> +static int open_cpuinfo(CPUArchState *cpu_env, int fd)
-> +{
-> +    int i;
-> +    int num_cpus = sysconf(_SC_NPROCESSORS_ONLN);
-> +    RISCVCPU *cpu = env_archcpu(cpu_env);
+Recgonize the signature section between begin_signature and end_signature symbols
+when loading elf of ACT tests. Then dump signature data in signature section just
+before the ACT tests exit.
 
-Use this API:
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+---
+ hw/char/riscv_htif.c         | 39 +++++++++++++++++++++++++++++++++++-
+ hw/riscv/spike.c             | 13 ++++++++++++
+ include/hw/char/riscv_htif.h |  3 +++
+ 3 files changed, 54 insertions(+), 1 deletion(-)
 
-riscv_cpu_cfg(CPURISCVState *)
+diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+index 098de50e35..297c98c215 100644
+--- a/hw/char/riscv_htif.c
++++ b/hw/char/riscv_htif.c
+@@ -29,6 +29,8 @@
+ #include "chardev/char-fe.h"
+ #include "qemu/timer.h"
+ #include "qemu/error-report.h"
++#include "exec/address-spaces.h"
++#include "sysemu/dma.h"
+ 
+ #define RISCV_DEBUG_HTIF 0
+ #define HTIF_DEBUG(fmt, ...)                                                   \
+@@ -51,7 +53,10 @@
+ /* PK system call number */
+ #define PK_SYS_WRITE            64
+ 
+-static uint64_t fromhost_addr, tohost_addr;
++const char *sig_file;
++uint8_t line_size = 16;
++
++static uint64_t fromhost_addr, tohost_addr, sig_addr, sig_len;
+ 
+ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
+                           uint64_t st_size)
+@@ -68,6 +73,10 @@ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
+             error_report("HTIF tohost must be 8 bytes");
+             exit(1);
+         }
++    } else if (strcmp("begin_signature", st_name) == 0) {
++        sig_addr = st_value;
++    } else if (strcmp("end_signature", st_name) == 0) {
++        sig_len = st_value - sig_addr;
+     }
+ }
+ 
+@@ -161,6 +170,34 @@ static void htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
+         /* frontend syscall handler, shutdown and exit code support */
+         if (cmd == HTIF_SYSTEM_CMD_SYSCALL) {
+             if (payload & 0x1) {
++                /* Dump signature data to sig_file if specified */
++                if (sig_file) {
++                    char *sig_data = g_malloc(sig_len);
++                    dma_memory_read(&address_space_memory, sig_addr, sig_data,
++                                    sig_len, MEMTXATTRS_UNSPECIFIED);
++                    FILE *signature = fopen(sig_file, "w");
++                    if (signature == NULL) {
++                        error_report("open %s: %s", sig_file,
++                                     strerror(errno));
++                        exit(1);
++                    }
++
++                    for (int i = 0; i < sig_len; i += line_size) {
++                        for (int j = line_size; j > 0; j--) {
++                            if (i + j <= sig_len) {
++                                fprintf(signature, "%02x",
++                                        sig_data[i + j - 1] & 0xff);
++                            } else {
++                                fprintf(signature, "%02x", 0);
++                            }
++                        }
++                        fprintf(signature, "\n");
++                    }
++
++                    fclose(signature);
++                    g_free(sig_data);
++                }
++
+                 /* exit code */
+                 int exit_code = payload >> 1;
+                 exit(exit_code);
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index a584d5b3a2..2c5546560a 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -332,6 +332,11 @@ static void spike_board_init(MachineState *machine)
+                  htif_custom_base);
+ }
+ 
++static void spike_set_signature(Object *obj, const char *val, Error **errp)
++{
++    sig_file = g_strdup(val);
++}
++
+ static void spike_machine_instance_init(Object *obj)
+ {
+ }
+@@ -350,6 +355,14 @@ static void spike_machine_class_init(ObjectClass *oc, void *data)
+     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
+     mc->numa_mem_supported = true;
+     mc->default_ram_id = "riscv.spike.ram";
++    object_class_property_add_str(oc, "signature", NULL, spike_set_signature);
++    object_class_property_set_description(oc, "signature",
++                                          "File to write ACT test signature");
++    object_class_property_add_uint8_ptr(oc, "signature-granularity",
++                                        &line_size, OBJ_PROP_FLAG_WRITE);
++    object_class_property_set_description(oc, "signature-granularity",
++                                          "Size of each line in ACT signature "
++                                          "file");
+ }
+ 
+ static const TypeInfo spike_machine_typeinfo = {
+diff --git a/include/hw/char/riscv_htif.h b/include/hw/char/riscv_htif.h
+index 5958c5b986..df493fdf6b 100644
+--- a/include/hw/char/riscv_htif.h
++++ b/include/hw/char/riscv_htif.h
+@@ -40,6 +40,9 @@ typedef struct HTIFState {
+     uint64_t pending_read;
+ } HTIFState;
+ 
++extern const char *sig_file;
++extern uint8_t line_size;
++
+ /* HTIF symbol callback */
+ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
+     uint64_t st_size);
+-- 
+2.25.1
 
-> +    char *isa_string = riscv_isa_string(cpu);
-> +    bool is_32_bit = riscv_cpu_xlen(&cpu->env) == 32;
-
-Remove this statement.
-
-> +    const char *mmu;
-> +
-> +    if (cpu->cfg.mmu) {
-> +        mmu = (is_32_bit) ? "sv32" : "sv48";
-
-mmu = (cpu_env->xl == MXL_RV32) ? "sv32"  : "sv48"
-
-Zhiwei
-
-> +    } else {
-> +        mmu = "none";
-> +    }
-> +
-> +    for (i = 0; i < num_cpus; i++) {
-> +        dprintf(fd, "processor\t: %d\n", i);
-> +        dprintf(fd, "hart\t\t: %d\n", i);
-> +        dprintf(fd, "isa\t\t: %s\n", isa_string);
-> +        dprintf(fd, "mmu\t\t: %s\n", mmu);
-> +        dprintf(fd, "uarch\t\t: qemu\n\n");
-> +    }
-> +    return 0;
-> +}
-> +#endif
-> +
->   #if defined(TARGET_M68K)
->   static int open_hardware(CPUArchState *cpu_env, int fd)
->   {
-> @@ -8285,7 +8313,7 @@ static int do_openat(CPUArchState *cpu_env, int dirfd, const char *pathname, int
->   #if HOST_BIG_ENDIAN != TARGET_BIG_ENDIAN
->           { "/proc/net/route", open_net_route, is_proc },
->   #endif
-> -#if defined(TARGET_SPARC) || defined(TARGET_HPPA)
-> +#if defined(TARGET_SPARC) || defined(TARGET_HPPA) || defined(TARGET_RISCV)
->           { "/proc/cpuinfo", open_cpuinfo, is_proc },
->   #endif
->   #if defined(TARGET_M68K)
-> diff --git a/tests/tcg/riscv64/Makefile.target b/tests/tcg/riscv64/Makefile.target
-> index cc3ed65ffd..df93a2ce1f 100644
-> --- a/tests/tcg/riscv64/Makefile.target
-> +++ b/tests/tcg/riscv64/Makefile.target
-> @@ -4,6 +4,7 @@
->   VPATH += $(SRC_PATH)/tests/tcg/riscv64
->   TESTS += test-div
->   TESTS += noexec
-> +TESTS += cpuinfo
->   
->   # Disable compressed instructions for test-noc
->   TESTS += test-noc
-> diff --git a/tests/tcg/riscv64/cpuinfo.c b/tests/tcg/riscv64/cpuinfo.c
-> new file mode 100644
-> index 0000000000..296abd0a8c
-> --- /dev/null
-> +++ b/tests/tcg/riscv64/cpuinfo.c
-> @@ -0,0 +1,30 @@
-> +#include <stdio.h>
-> +#include <stdlib.h>
-> +#include <string.h>
-> +#include <assert.h>
-> +
-> +#define BUFFER_SIZE 1024
-> +
-> +int main(void)
-> +{
-> +    char buffer[BUFFER_SIZE];
-> +    FILE *fp = fopen("/proc/cpuinfo", "r");
-> +    assert(fp != NULL);
-> +
-> +    while (fgets(buffer, BUFFER_SIZE, fp) != NULL) {
-> +        if (strstr(buffer, "processor") != NULL) {
-> +            assert(strstr(buffer, "processor\t: ") == buffer);
-> +        } else if (strstr(buffer, "hart") != NULL) {
-> +            assert(strstr(buffer, "hart\t\t: ") == buffer);
-> +        } else if (strstr(buffer, "isa") != NULL) {
-> +            assert(strcmp(buffer, "isa\t\t: rv64imafdc_zicsr_zifencei\n") == 0);
-> +        } else if (strstr(buffer, "mmu") != NULL) {
-> +            assert(strcmp(buffer, "mmu\t\t: sv48\n") == 0);
-> +        } else if (strstr(buffer, "uarch") != NULL) {
-> +            assert(strcmp(buffer, "uarch\t\t: qemu\n") == 0);
-> +        }
-> +    }
-> +
-> +    fclose(fp);
-> +    return 0;
-> +}
 
