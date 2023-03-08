@@ -1,79 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pZzhs-0004qa-UM
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Mar 2023 14:44:12 -0500
+	id 1pa0G9-00081i-0i
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Mar 2023 15:19:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pZzhr-0004qJ-J1
- for qemu-riscv@nongnu.org; Wed, 08 Mar 2023 14:44:11 -0500
-Received: from mail-ot1-x32f.google.com ([2607:f8b0:4864:20::32f])
+ id 1pa0G7-00081K-K4
+ for qemu-riscv@nongnu.org; Wed, 08 Mar 2023 15:19:35 -0500
+Received: from mail-oi1-x236.google.com ([2607:f8b0:4864:20::236])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pZzhp-0000Ji-W3
- for qemu-riscv@nongnu.org; Wed, 08 Mar 2023 14:44:11 -0500
-Received: by mail-ot1-x32f.google.com with SMTP id
- p13-20020a9d744d000000b0069438f0db7eso9616241otk.3
- for <qemu-riscv@nongnu.org>; Wed, 08 Mar 2023 11:44:09 -0800 (PST)
+ id 1pa0G5-0002RW-L6
+ for qemu-riscv@nongnu.org; Wed, 08 Mar 2023 15:19:35 -0500
+Received: by mail-oi1-x236.google.com with SMTP id t22so13091485oiw.12
+ for <qemu-riscv@nongnu.org>; Wed, 08 Mar 2023 12:19:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1678304648;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Va8WlO+A1D+uCK+sXUAuGdfKcLA2q71EZisg6zxJxwE=;
- b=KumMekCoJ8b5+GNCIGc1s2rQmGzjzN9fGBK8c1MurUhwXe5wFPTV7t2soL9Ve0u5qs
- w086ILNDWyW76JQh4u4ZhAW8O0C7WWvPEPiSJRIksfgy1bucKTFh1SK0x53IYSgyBW53
- NeUWRXGLGcyHOrbGKRBnC1yBCW7095C9YwWatLYNf+R+KY7bjz+/rcSbLzlptx75kzhT
- kOFIiAWnVLXVIFJbUCoR0AA8xMzN5caa6hjyRnSZPta4mn4r29q4R5Eh/JMIEOTwOMAd
- pjojfkWXvExzUVcg2mrGH0ni7wsiLSh9C9lwK/UyjXOz1QMXkqjRRIyCnF8mUauip8vI
- i6cg==
+ d=ventanamicro.com; s=google; t=1678306772;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=K/wTU1insbTSQSCHyzMrWKAQ0M88DmCBOmdr8lZ66rw=;
+ b=EAMFxLC7Yq0xWrRV8D+QN0cfOBQzLQn5fp1L6mvPWWfvbdqMwM4Mew8wTvdNnAQkP5
+ 5gO9b+LTmxE95D/7UxiEF0h6R780IPeAZ/wAWXK4rdEsvhhqJaNvF7rHbk7gAQF5PKmA
+ fiujHgngOeYC3uxhmaSoKyKQKrVJzt7DPGYaYe38kn0TqYIX0hxh+F8D1qr63YViUP8r
+ WFzlz4+qxzH7lL5z2enEdtQ7ZfJ2JMSgvPhWpjWAWxy56DZoiaKAlA1URS7TFSfwofrL
+ Mpo0ah/ywPhOWqxCj9ZqSDmxxK0n4Y0Rjjk45349VSjTfKy+5DGkmb1yKldRT/M7Ep9g
+ ZSRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678304648;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Va8WlO+A1D+uCK+sXUAuGdfKcLA2q71EZisg6zxJxwE=;
- b=C6K/d1ffFPTssTXsws5p4JKvfK5IxlK98IabGO2e2lydrKwlR2KjFKOtD4rvnld5r3
- 0pF1UVWgKzMk0+gvrNU0p2zKQ+PPM7l1RHocDzYeuZ4ivyn2l5oYFW3s5cBX+2TAOoPT
- 5HSYE974KuZRNZNuRWy+fhn7XafSjKbbkPWaegdCHNYN1l0cynYSibZhLhZlea8n5ZU3
- r5lWXqpjPOgc1tRHq+XauG2Aoa619083btuCdgi0ucVcHN33u/iQYpA9d7tpPSJ29U7u
- yx8TlqFTWmFvOxb50bWduPl562YREN0hnjvSkFTAZ/WaikiEeDO1BpBA/4RYbZEvx/Io
- 0qiA==
-X-Gm-Message-State: AO0yUKUzGJMn8HxjBubFu1m6xDuEXy7riHKhGVstaXO0dn5ofcLxRrDu
- U5eHeQ3c6iihUOoGEQZ3wsUqag==
-X-Google-Smtp-Source: AK7set+aJt3cLv8wSYaPgJz6wUOL/wGTpYxVE6zTG47ie261N0ROfZ4slfaICr3sjww8gY4DSJhAdw==
-X-Received: by 2002:a9d:3c6:0:b0:68b:dacf:a530 with SMTP id
- f64-20020a9d03c6000000b0068bdacfa530mr9186940otf.15.1678304648362; 
- Wed, 08 Mar 2023 11:44:08 -0800 (PST)
-Received: from [192.168.68.107] ([177.189.53.31])
- by smtp.gmail.com with ESMTPSA id
- z18-20020a9d71d2000000b0068bd9a6d644sm6946840otj.23.2023.03.08.11.44.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Mar 2023 11:44:07 -0800 (PST)
-Message-ID: <adbe0c52-61f0-2779-c32f-a75bf0a303e1@ventanamicro.com>
-Date: Wed, 8 Mar 2023 16:44:03 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
-Content-Language: en-US
-To: chenyi2000@zju.edu.cn, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20230308123417.12555-1-chenyi2000@zju.edu.cn>
+ d=1e100.net; s=20210112; t=1678306772;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=K/wTU1insbTSQSCHyzMrWKAQ0M88DmCBOmdr8lZ66rw=;
+ b=5p0HiTvaasUCjU8QPaWGV6Pd4z+Vr8l8dP0JY3AhllXeiGf8kLgebc8iWb6CPZxk7l
+ r4JwowVng0Bg+9j6f1ay7Pmyrv4ILYz5XFAxwvQ0IUdYFCrdxtoD4CmErb4g31hu9qDg
+ leSpMOJObAMq6bo8cWzE4qm0hl2fF6DIOnP1cqxUH/J0qBijCBmuxg2xHHDXUDwe8cZF
+ e6PZ1b3L2mnpL1EgTc2aV4QSErdCD8UzvMd6Oy7IwxYDbaQ2DZKf4pkTKs6A1jnPQyne
+ B568dMVIJCidvKMhwMK+vXx4XjFBJK8UTFIYbqfwYLhNxRmmO2Qf7/hpK06vAs/z3jpo
+ 9aVw==
+X-Gm-Message-State: AO0yUKWUoxbBgnN2i6g8sO/Dj3f/wLPCo0DKx+/JEHMjcaY47Dr2gi1Q
+ CzU4bXYsNUWLcmiBHGFatjAQTQ==
+X-Google-Smtp-Source: AK7set/25H2rAPO8E3uVpqv2IX1JjKpeZMgDYylQttLCXbMToG7ri7PF7jZUtKIL4hP2XiQkFgPn4Q==
+X-Received: by 2002:aca:2311:0:b0:383:f4fb:be63 with SMTP id
+ e17-20020aca2311000000b00383f4fbbe63mr7817213oie.37.1678306772285; 
+ Wed, 08 Mar 2023 12:19:32 -0800 (PST)
+Received: from grind.. ([177.189.53.31]) by smtp.gmail.com with ESMTPSA id
+ i66-20020aca3b45000000b00383e9fa1eaasm6705790oia.43.2023.03.08.12.19.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Mar 2023 12:19:31 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230308123417.12555-1-chenyi2000@zju.edu.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32f.google.com
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH for-8.1 00/17] centralize CPU extensions logic
+Date: Wed,  8 Mar 2023 17:19:08 -0300
+Message-Id: <20230308201925.258223-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::236;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x236.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -88,116 +78,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Mar 2023 19:44:11 -0000
+X-List-Received-Date: Wed, 08 Mar 2023 20:19:35 -0000
+
+Hi,
+
+During the review of a series that did some work in the RISCV_FEATURES*
+enum, Liu Zhiwei commented on how we could centralize the all the
+extension validation code and integrate it with write_misa() [1].
+
+This does at least part of what was suggested. The idea is that, ATM, we
+have too many places setting cpu->cfg and the validation logic is
+scattered around (e.g. there are some contraints in write_misa() that
+should be applicable elsewhere). This series is an attempt to centralize
+things a bit.
+
+The main accomplishments of this series are:
+
+- the parent device riscv-cpu no longer sets any cpu->cfg attribute. This
+  was forcing init() functions to disable extensions that it wouldn't
+  use just because the parent device was enabling it;
+
+- all validations are centered in validate_set_extensions(), with
+  pontual exceptions in write_misa() that has exclusive contraints;
+
+- set_misa() now writes cpu->cfg. No need to have one function to set
+  env->misa_ext and then another to set cpu->cfg;
+
+- register_cpu_props() now only exposes user-facing props;
+
+- all validations from validate_set_extensions() are done at the start
+  of the function. Validate first, set extensions after;
+
+- RVE is now forbidden in all validations, not just in write_misa();
+
+- RVG is now forbidden in write_misa();
+
+- write_misa now uses set_misa() and validate_set_extensions().
 
 
 
-On 3/8/23 09:34, chenyi2000@zju.edu.cn wrote:
-> From: Yi Chen <chenyi2000@zju.edu.cn>
-> 
-> Trap accesses to hgatp if MSTATUS_TVM is enabled.
-> Don't trap accesses to vsatp even if MSTATUS_TVM is enabled.
-> 
-> Signed-off-by: Yi Chen <chenyi2000@zju.edu.cn>
-> ---
->   target/riscv/csr.c | 18 ++++++++++++++----
->   1 file changed, 14 insertions(+), 4 deletions(-)
-> 
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index ab56663..09bc780 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -2655,7 +2655,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
->           return RISCV_EXCP_NONE;
->       }
->   
-> -    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
-> +    if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) && get_field(env->mstatus, MSTATUS_TVM)) {
+[1] https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg05092.html
 
-The commit message mentions 'vsatp' but this patch is changing satp callbacks.
+Daniel Henrique Barboza (17):
+  target/riscv/cpu.c: add riscv_cpu_validate_v()
+  target/riscv/cpu.c: remove set_vext_version()
+  target/riscv/cpu.c: remove set_priv_version()
+  target/riscv: add PRIV_VERSION_LATEST macro
+  target/riscv/cpu.c: add riscv_cpu_validate_priv_spec()
+  target/riscv: move realize() validations to
+    riscv_cpu_validate_set_extensions()
+  target/riscv/cpu.c: remove cfg setup from riscv_cpu_init()
+  target/riscv/cpu.c: avoid set_misa() in validate_set_extensions()
+  target/riscv/cpu.c: set cpu config in set_misa()
+  target/riscv/cpu.c: redesign register_cpu_props()
+  target/riscv/cpu.c: move riscv_cpu_validate_v() up
+  target/riscv: put env->misa_ext <-> cpu->cfg code into helpers
+  target/riscv/cpu.c: split riscv_cpu_validate_priv_spec()
+  target/riscv/cpu.c: do not allow RVE to be set
+  target/riscv: add RVG
+  target/riscv: do not allow RVG in write_misa()
+  target/riscv: rework write_misa()
 
-Any reason to not change read_vsatp() and write_vsatp() instead?
+ target/riscv/cpu.c | 516 +++++++++++++++++++++++++--------------------
+ target/riscv/cpu.h |   9 +-
+ target/riscv/csr.c |  52 ++---
+ 3 files changed, 323 insertions(+), 254 deletions(-)
 
+-- 
+2.39.2
 
->           return RISCV_EXCP_ILLEGAL_INST;
->       } else {
->           *val = env->satp;
-> @@ -2683,7 +2683,7 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
->       }
->   
->       if (vm && mask) {
-> -        if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
-> +        if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) && get_field(env->mstatus, MSTATUS_TVM)) {
->               return RISCV_EXCP_ILLEGAL_INST;
->           } else {
->               /*
-> @@ -3047,14 +3047,24 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
->   static RISCVException read_hgatp(CPURISCVState *env, int csrno,
->                                    target_ulong *val)
->   {
-> -    *val = env->hgatp;
-> +    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-
-The end of the first paragraph of ISA 8.2.10 goes as follows:
-
-====
-When mstatus.TVM=1, attempts to read or write hgatp while executing
-in HS-mode will raise an illegal instruction exception.
-====
-
-I believe you need to check for HS-mode, not just PRV_S. riscv_csrrw_check() in
-target/riscv/csr.c checks for HS-mode as follows:
-
-     if (riscv_has_ext(env, RVH) && env->priv == PRV_S &&
-         !riscv_cpu_virt_enabled(env)) {
-
-Same goes for write_hgatp() below.
-
-> +    } else {
-> +        *val = env->hgatp;
-> +    }
-> +
-
-You can discard the 'else' since you're doing a return in the if:
-
-if (...) {
-     return RISCV_EXCP_ILLEGAL_INST;
-}
-
-*val = env->hgatp;
-
-
->       return RISCV_EXCP_NONE;
->   }
->   
->   static RISCVException write_hgatp(CPURISCVState *env, int csrno,
->                                     target_ulong val)
->   {
-> -    env->hgatp = val;
-> +    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    } else {
-> +        env->hgatp = val;
-> +    }
-
-No need for else here either:
-
-if (...) {
-     return RISCV_EXCP_ILLEGAL_INST;
-}
-
-env->hgatp = val;
-
-
-
-Thanks,
-
-
-Daniel
-
-> +
->       return RISCV_EXCP_NONE;
->   }
->   
 
