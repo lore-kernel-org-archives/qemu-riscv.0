@@ -1,81 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1paI9n-0002Sk-M1
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 10:26:15 -0500
+	id 1paIBa-0003QS-Rr
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 10:28:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1paI9j-0002Qc-OD
- for qemu-riscv@nongnu.org; Thu, 09 Mar 2023 10:26:12 -0500
-Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1paI9f-0007NC-7X
- for qemu-riscv@nongnu.org; Thu, 09 Mar 2023 10:26:09 -0500
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-176d93cd0daso2672103fac.4
- for <qemu-riscv@nongnu.org>; Thu, 09 Mar 2023 07:26:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1678375565;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2LPCtpMluYElYKx4kdSb4vYJwV6jUzBWF8jg9WRIbhM=;
- b=OOxxtPxa1HKagwC2tEWVjHk8s/4lAVw7CcC7d7C5JZlw2MiFJaBc/vJFCf5x3Mlnm4
- JEFwbHQxcMIA8mDvoJwfrk7oCAu2qzSZgjHt2uUO7tHZnxTnbKF9H5tYJq9AldQiMdtO
- JQwnhOg9m3OHpNz+b6HBovw3r+ZaKZNTBqgBPfVNaNjsF/Ki3Ylfhqx2byEXMfRQuJYr
- ArFk+6YqQNfik+AxqcA/xAHUqrRy1Nfv2/RcCasHCH9VoA5ue/kKylzzh2RDsm4zSSiY
- ciFXvN2Q+Gfw+OJ99KBVaxkPIpAyUJOusB8L3wKv6862PtLyabjnA8QmI6En84pxVF//
- EBlQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678375565;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2LPCtpMluYElYKx4kdSb4vYJwV6jUzBWF8jg9WRIbhM=;
- b=6odJC03s31TwwoDF3bHw8UdmL+1TUIgd1q9RuXHPEjcI5pTtws6jjOcCn538gLJnTW
- D0N/2JnJSFcWoOVTkuvnwnyBUR932UaemTxKhE23JY7qHwFwRSei9jcQyrg8ZI7X338q
- ZRC6Hu/VPovIG8UwXgUcsk6oVcHverZ74eMgBsGWBiNmIz+4hgoPpfNEExU50a5tuA5o
- wPUKUeD87T3an1sXyib7SxgFeIKyHBCNiLma55wylCT5pZdVweVmLQqdDjpZXx3yvu/q
- zzHskl8pQlboWzp6KjJOJu7Cb7XYPT4PiXd5wIMr4f8kASmfjeRNj1pbW21Zckkc7Zj6
- qLyg==
-X-Gm-Message-State: AO0yUKUQX6T+wfQNgEmIhpD64nxxLgr/O2upKhj6JkImN4xTJ1YICHZF
- X4QEOzvnzOUV+WnS1zz0AMzhzw==
-X-Google-Smtp-Source: AK7set+Zl7wj0/VSGM4EfOKe5pFjGoKWpTu7gcmNLJ+3kUOo0wHFolQMP4KzI6MJ/3LEFi+cFfnGGQ==
-X-Received: by 2002:a05:6870:8194:b0:172:289c:102 with SMTP id
- k20-20020a056870819400b00172289c0102mr13005934oae.17.1678375564539; 
- Thu, 09 Mar 2023 07:26:04 -0800 (PST)
-Received: from [192.168.68.107] ([177.189.53.31])
- by smtp.gmail.com with ESMTPSA id
- m29-20020a4a391d000000b00517a7ac36c8sm7475304ooa.24.2023.03.09.07.26.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Mar 2023 07:26:04 -0800 (PST)
-Message-ID: <f60610a7-4c09-3217-a88c-3d39c5662143@ventanamicro.com>
-Date: Thu, 9 Mar 2023 12:26:00 -0300
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1paIBS-0003Mi-Og; Thu, 09 Mar 2023 10:28:03 -0500
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1paIBP-0007Wh-GE; Thu, 09 Mar 2023 10:27:58 -0500
+Received: from [192.168.0.120] (unknown [180.165.240.213])
+ by APP-01 (Coremail) with SMTP id qwCowAAnJEDy+glkzkVrDQ--.22680S2;
+ Thu, 09 Mar 2023 23:27:46 +0800 (CST)
+Content-Type: multipart/alternative;
+ boundary="------------7cWHIhhR5oskOqIpmOaBJvfL"
+Message-ID: <aba228b8-03fa-c096-72bf-1b920cbe4f9f@iscas.ac.cn>
+Date: Thu, 9 Mar 2023 23:27:45 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH v7 03/10] target/riscv: allow MISA writes as experimental
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Frank Chang <frank.chang@sifive.com>
-Cc: qemu-riscv@nongnu.org, bmeng@tinylab.org, liweiwei@iscas.ac.cn,
- palmer@rivosinc.com
-References: <20230222185205.355361-1-dbarboza@ventanamicro.com>
- <20230222185205.355361-4-dbarboza@ventanamicro.com>
- <87bbfaef-92df-52d7-da48-ff25a3c508a4@linux.alibaba.com>
+ Thunderbird/102.7.1
+Cc: liweiwei@iscas.ac.cn, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Subject: Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <87bbfaef-92df-52d7-da48-ff25a3c508a4@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::31;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x31.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+To: CHEN Yi <chenyi2000@zju.edu.cn>, qemu-devel@nongnu.org
+References: <20230308123417.12555-1-chenyi2000@zju.edu.cn>
+ <18d2b7d5-fa56-eb32-4803-74e85f24e1a2@iscas.ac.cn>
+ <3b6c6f15.8a1c1.186c6e4ff7d.Coremail.chenyi2000@zju.edu.cn>
+From: liweiwei <liweiwei@iscas.ac.cn>
+In-Reply-To: <3b6c6f15.8a1c1.186c6e4ff7d.Coremail.chenyi2000@zju.edu.cn>
+X-CM-TRANSID: qwCowAAnJEDy+glkzkVrDQ--.22680S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxAFWkGFWrXryUZr48uFyxuFg_yoW5uFy8pF
+ 48tw4YkayUKrWqvanaqr1qgF15ArWUGa9rAw1xGay8Aw1fAry5CFyDX3yaqr1DWFWkXFW2
+ vFWDuF93AF42ka7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkq14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487McIj6xIIjxv20xvE14v26r1j6r18McIj6I8E
+ 87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lF7I21c0EjI
+ I2zVCS5cI20VAGYxC7Mx8GjcxK6IxK0xIIj40E5I8CrwCYjI0SjxkI62AI1cAE67vIY487
+ MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr
+ I_JrWlx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0E
+ wIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJV
+ W8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAI
+ cVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VU1g4S7UUUUU==
+X-Originating-IP: [180.165.240.213]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
+ NICE_REPLY_A=-0.001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -89,117 +71,309 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Mar 2023 15:26:14 -0000
+X-List-Received-Date: Thu, 09 Mar 2023 15:28:05 -0000
+
+This is a multi-part message in MIME format.
+--------------7cWHIhhR5oskOqIpmOaBJvfL
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
-
-On 3/9/23 03:11, LIU Zhiwei wrote:
-> 
-> On 2023/2/23 2:51, Daniel Henrique Barboza wrote:
->> At this moment, and apparently since ever, we have no way of enabling
->> RISCV_FEATURE_MISA. This means that all the code from write_misa(), all
->> the nuts and bolts that handles how to properly write this CSR, has
->> always been a no-op as well because write_misa() will always exit
->> earlier.
+On 2023/3/9 23:02, CHEN Yi wrote:
+>
+>
+>
+>     -----Original Messages-----
+>     *From:*liweiwei <liweiwei@iscas.ac.cn>
+>     *Sent Time:*2023-03-09 15:48:17 (Thursday)
+>     *To:* chenyi2000@zju.edu.cn, qemu-devel@nongnu.org
+>     *Cc:* "Palmer Dabbelt" <palmer@dabbelt.com>, "Alistair Francis"
+>     <alistair.francis@wdc.com>, "Bin Meng" <bin.meng@windriver.com>,
+>     "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>, "Liu
+>     Zhiwei" <zhiwei_liu@linux.alibaba.com>, "open list:RISC-V TCG
+>     CPUs" <qemu-riscv@nongnu.org>
+>     *Subject:* Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
+>
+>
+>     On 2023/3/8 20:34, chenyi2000@zju.edu.cn wrote:
+>>     From: Yi Chen<chenyi2000@zju.edu.cn>  Trap accesses to hgatp if MSTATUS_TVM is enabled.
+>>     Don't trap accesses to vsatp even if MSTATUS_TVM is enabled.
 >>
->> This seems to be benign in the majority of cases. Booting an Ubuntu
->> 'virt' guest and logging all the calls to 'write_misa' shows that no
->> writes to MISA CSR was attempted. Writing MISA, i.e. enabling/disabling
->> RISC-V extensions after the machine is powered on, seems to be a niche
->> use.
+>>     Signed-off-by: Yi Chen<chenyi2000@zju.edu.cn>  ---
+>>       target/riscv/csr.c | 18 ++++++++++++++----
+>>       1 file changed, 14 insertions(+), 4 deletions(-)
 >>
->> After discussions in the mailing list, most notably in [1], we reached
->> the consensus that this code is not suited to be exposed to users
->> because it's not well tested, but at the same time removing it is a bit
->> extreme because we would like to fix it, and it's easier to do so with
->> the code available to use instead of fetching it from git log.
->>
->> The approach taken here is to get rid of RISCV_FEATURE_MISA altogether
->> and use a new experimental flag called x-misa-w. The default value is
->> false, meaning that we're keeping the existing behavior of doing nothing
->> if a write_misa() is attempted. As with any existing experimental flag,
->> x-misa-w is also a temporary flag that we need to remove once we fix
->> write_misa().
->>
->> [1] https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg05092.html
->>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>   target/riscv/cpu.c | 6 ++++++
->>   target/riscv/cpu.h | 2 +-
->>   target/riscv/csr.c | 2 +-
->>   3 files changed, 8 insertions(+), 2 deletions(-)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 93b52b826c..1d637b1acd 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -1210,6 +1210,12 @@ static Property riscv_cpu_properties[] = {
->>       DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false),
->>       DEFINE_PROP_BOOL("rvv_ma_all_1s", RISCVCPU, cfg.rvv_ma_all_1s, false),
->> +
->> +    /*
->> +     * write_misa() is marked as experimental for now so mark
->> +     * it with -x and default to 'false'.
->> +     */
->> +    DEFINE_PROP_BOOL("x-misa-w", RISCVCPU, cfg.misa_w, false),
-> 
-> Just a question  I got when I reviewed another patch set:
-> 
-> Why put x-misa-w to riscv_cpu_properties instead of riscv_cpu_extensions?
+>>     diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>>     index ab56663..09bc780 100644
+>>     --- a/target/riscv/csr.c
+>>     +++ b/target/riscv/csr.c
+>>     @@ -2655,7 +2655,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
+>>               return RISCV_EXCP_NONE;
+>>           }
+>>       
+>>     -    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+>>     +    if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) && get_field(env->mstatus, MSTATUS_TVM)) {
+>>               return RISCV_EXCP_ILLEGAL_INST;
+>
+>     This line seems too long (> 80).
+>
+>     And hstatus.VTVM should also be taken into consideration.
+>
+>     Similar to following write_satp.
+>
+>>           } else {
+>>               *val = env->satp;
+>>     @@ -2683,7 +2683,7 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
+>>           }
+>>       
+>>           if (vm && mask) {
+>>     -        if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+>>     +        if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) && get_field(env->mstatus, MSTATUS_TVM)) {
+>>                   return RISCV_EXCP_ILLEGAL_INST;
+>>               } else {
+>>                   /*
+>
+>
+> Thanks a lot. In the next version, I will fix the code style issue and 
+> consider hstatus.VTVM.
+>
+>
+>>     @@ -3047,14 +3047,24 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
+>>       static RISCVException read_hgatp(CPURISCVState *env, int csrno,
+>>                                        target_ulong *val)
+>>       {
+>>     -    *val = env->hgatp;
+>>     +    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+>>     +        return RISCV_EXCP_ILLEGAL_INST;
+>
+>     This check will do before privilege check in riscv_csrrw_check. So
+>     it will make VS mode access trigger
+>
+>     ILLEGAL_INST exception, However, it should be VIRTUAL_INST
+>     exception in this case.
+>
+>     Regards,
+>
+>     Weiwei Li
+>
+>
+>
+> In riscv_csrrw(), riscv_csrrw_check() is called before 
+> riscv_csrrw_do64(). So I think VIRTUAL_INST will be triggered. Could 
+> you please explain why this check will do before the privilege check 
+> in riscv_csrrw_check? I'm new to Qemu source code and am sorry I can't 
+> understand that.
+>
+>
+Yeah, You are right. Sorry that I mistook this check for check in the 
+predicate.
 
-I didn't think too much about it to be honest. I copied what was being done
-with the now old RISCV_FEATURE_DEBUG. It made sense to me because x-misa-w
-isn't a RISC-V extension but a property of our model.
+By the way, I think this check is better to be done in the predicate.
 
-I don't oppose moving it to a better place. Just be aware that this a property
-that we're planning to eventually remove.
+Regards,
 
+Weiwei Li
 
-Thanks,
+>>     +    } else {
+>>     +        *val = env->hgatp;
+>>     +    }
+>>     +
+>>           return RISCV_EXCP_NONE;
+>>       }
+>>       
+>>       static RISCVException write_hgatp(CPURISCVState *env, int csrno,
+>>                                         target_ulong val)
+>>       {
+>>     -    env->hgatp = val;
+>>     +    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+>>     +        return RISCV_EXCP_ILLEGAL_INST;
+>>     +    } else {
+>>     +        env->hgatp = val;
+>>     +    }
+>>     +
+>>           return RISCV_EXCP_NONE;
+>>       }
+>>       
+>
+>
+> Thanks,
+>
+> Yi
+>
+--------------7cWHIhhR5oskOqIpmOaBJvfL
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2023/3/9 23:02, CHEN Yi wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:3b6c6f15.8a1c1.186c6e4ff7d.Coremail.chenyi2000@zju.edu.cn">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <br>
+      <br>
+      <br>
+      <blockquote name="replyContent" class="ReferenceQuote"
+        style="padding-left:5px;margin-left:5px;border-left:#b6b6b6 2px
+        solid;margin-right:0;"> -----Original Messages-----<br>
+        <b>From:</b><span id="rc_from">liweiwei
+          <a class="moz-txt-link-rfc2396E" href="mailto:liweiwei@iscas.ac.cn">&lt;liweiwei@iscas.ac.cn&gt;</a></span><br>
+        <b>Sent Time:</b><span id="rc_senttime">2023-03-09 15:48:17
+          (Thursday)</span><br>
+        <b>To:</b> <a class="moz-txt-link-abbreviated" href="mailto:chenyi2000@zju.edu.cn">chenyi2000@zju.edu.cn</a>, <a class="moz-txt-link-abbreviated" href="mailto:qemu-devel@nongnu.org">qemu-devel@nongnu.org</a><br>
+        <b>Cc:</b> "Palmer Dabbelt" <a class="moz-txt-link-rfc2396E" href="mailto:palmer@dabbelt.com">&lt;palmer@dabbelt.com&gt;</a>,
+        "Alistair Francis" <a class="moz-txt-link-rfc2396E" href="mailto:alistair.francis@wdc.com">&lt;alistair.francis@wdc.com&gt;</a>, "Bin Meng"
+        <a class="moz-txt-link-rfc2396E" href="mailto:bin.meng@windriver.com">&lt;bin.meng@windriver.com&gt;</a>, "Daniel Henrique Barboza"
+        <a class="moz-txt-link-rfc2396E" href="mailto:dbarboza@ventanamicro.com">&lt;dbarboza@ventanamicro.com&gt;</a>, "Liu Zhiwei"
+        <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@linux.alibaba.com">&lt;zhiwei_liu@linux.alibaba.com&gt;</a>, "open list:RISC-V TCG
+        CPUs" <a class="moz-txt-link-rfc2396E" href="mailto:qemu-riscv@nongnu.org">&lt;qemu-riscv@nongnu.org&gt;</a><br>
+        <b>Subject:</b> Re: [PATCH] target/riscv/csr.c: fix H extension
+        TVM trap<br>
+        <br>
+        <p> <br>
+        </p>
+        <div class="moz-cite-prefix"> On 2023/3/8 20:34, <a
+            class="moz-txt-link-abbreviated moz-txt-link-freetext"
+            href="mailto:chenyi2000@zju.edu.cn" moz-do-not-send="true">chenyi2000@zju.edu.cn</a>
+          wrote:<br>
+        </div>
+        <blockquote type="cite"
+          cite="mid:20230308123417.12555-1-chenyi2000@zju.edu.cn">
+          <pre class="moz-quote-pre" wrap="">From: Yi Chen <a class="moz-txt-link-rfc2396E" href="mailto:chenyi2000@zju.edu.cn" moz-do-not-send="true">&lt;chenyi2000@zju.edu.cn&gt;</a> Trap accesses to hgatp if MSTATUS_TVM is enabled.
+Don't trap accesses to vsatp even if MSTATUS_TVM is enabled.
 
-Daniel
+Signed-off-by: Yi Chen <a class="moz-txt-link-rfc2396E" href="mailto:chenyi2000@zju.edu.cn" moz-do-not-send="true">&lt;chenyi2000@zju.edu.cn&gt;</a> ---
+ target/riscv/csr.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index ab56663..09bc780 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2655,7 +2655,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
+         return RISCV_EXCP_NONE;
+     }
+ 
+-    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
++    if (env-&gt;priv == PRV_S &amp;&amp; !riscv_cpu_virt_enabled(env) &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
+         return RISCV_EXCP_ILLEGAL_INST;</pre>
+        </blockquote>
+        <p> This line seems too long (&gt; 80). </p>
+        <p> And hstatus.VTVM should also be taken into consideration. </p>
+        <p> Similar to following write_satp. </p>
+        <blockquote type="cite"
+          cite="mid:20230308123417.12555-1-chenyi2000@zju.edu.cn">
+          <pre class="moz-quote-pre" wrap="">     } else {
+         *val = env-&gt;satp;
+@@ -2683,7 +2683,7 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
+     }
+ 
+     if (vm &amp;&amp; mask) {
+-        if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
++        if (env-&gt;priv == PRV_S &amp;&amp; !riscv_cpu_virt_enabled(env) &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
+             return RISCV_EXCP_ILLEGAL_INST;
+         } else {
+             /*</pre>
+        </blockquote>
+      </blockquote>
+      <p> <br>
+      </p>
+      <p> Thanks a lot. In the next version, I will fix the code style
+        issue and consider hstatus.VTVM.
+      </p>
+      <p> <br>
+      </p>
+      <blockquote name="replyContent" class="ReferenceQuote"
+        style="padding-left:5px;margin-left:5px;border-left:#b6b6b6 2px
+        solid;margin-right:0;">
+        <blockquote type="cite"
+          cite="mid:20230308123417.12555-1-chenyi2000@zju.edu.cn">
+          <pre class="moz-quote-pre" wrap="">@@ -3047,14 +3047,24 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
+ static RISCVException read_hgatp(CPURISCVState *env, int csrno,
+                                  target_ulong *val)
+ {
+-    *val = env-&gt;hgatp;
++    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
++        return RISCV_EXCP_ILLEGAL_INST;</pre>
+        </blockquote>
+        <p> This check will do before privilege check in <span
+            style="color:#000000;">riscv_csrrw_check</span>. So it will
+          make VS mode access trigger </p>
+        <p> ILLEGAL_INST exception, However, it should be VIRTUAL_INST
+          exception in this case. </p>
+        <p> Regards, </p>
+        <p> Weiwei Li </p>
+        <p> <br>
+        </p>
+      </blockquote>
+      <p> <br>
+      </p>
+      <p> In riscv_csrrw(), riscv_csrrw_check() is called before
+        riscv_csrrw_do64(). So I think VIRTUAL_INST will be triggered.
+        Could you please explain why this check will do before the
+        privilege check in riscv_csrrw_check? I'm new to Qemu source
+        code and am sorry I can't understand that.<span
+          style="font-family:&quot;Source Han Sans
+          SC&quot;;font-size:medium;white-space:normal;"></span>
+      </p>
+      <p> <br>
+      </p>
+    </blockquote>
+    <p>Yeah, You are right. Sorry that I mistook this check for check in
+      the predicate.</p>
+    <p>By the way, I think this check is better to be done in the
+      predicate.</p>
+    <p>Regards,</p>
+    <p>Weiwei Li<br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:3b6c6f15.8a1c1.186c6e4ff7d.Coremail.chenyi2000@zju.edu.cn">
+      <p>
+      </p>
+      <blockquote name="replyContent" class="ReferenceQuote"
+        style="padding-left:5px;margin-left:5px;border-left:#b6b6b6 2px
+        solid;margin-right:0;">
+        <blockquote type="cite"
+          cite="mid:20230308123417.12555-1-chenyi2000@zju.edu.cn">
+          <pre class="moz-quote-pre" wrap="">+    } else {
++        *val = env-&gt;hgatp;
++    }
++
+     return RISCV_EXCP_NONE;
+ }
+ 
+ static RISCVException write_hgatp(CPURISCVState *env, int csrno,
+                                   target_ulong val)
+ {
+-    env-&gt;hgatp = val;
++    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    } else {
++        env-&gt;hgatp = val;
++    }
++
+     return RISCV_EXCP_NONE;
+ }
+ 
+</pre>
+        </blockquote>
+      </blockquote>
+      <p> <br>
+      </p>
+      <p> Thanks,
+      </p>
+      <p> Yi
+      </p>
+    </blockquote>
+  </body>
+</html>
 
-> 
-> I think this property should have a fixed value for a named cpu(such as sifive_e). Therefore IMHO, putting x-misa-w into riscv_cpu_extensions is more proper. At the same time,  the debug, rvv_ta_all_1s, rvv_ma_all_1s, resetvec properties should be moved to riscv_cpu_extentions. I am not sure why we should give the marchid/mipid/mvendorid option for named cpus. Maybe @Frank knows.
-> 
-> Have I missed something?
-> 
-> Zhiwei
-> 
->>       DEFINE_PROP_END_OF_LIST(),
->>   };
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index 215423499e..9d3304bcda 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -89,7 +89,6 @@ enum {
->>       RISCV_FEATURE_MMU,
->>       RISCV_FEATURE_PMP,
->>       RISCV_FEATURE_EPMP,
->> -    RISCV_FEATURE_MISA,
->>       RISCV_FEATURE_DEBUG
->>   };
->> @@ -498,6 +497,7 @@ struct RISCVCPUConfig {
->>       bool pmp;
->>       bool epmp;
->>       bool debug;
->> +    bool misa_w;
->>       bool short_isa_string;
->>   };
->> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index e149b453da..3cb8d2ffad 100644
->> --- a/target/riscv/csr.c
->> +++ b/target/riscv/csr.c
->> @@ -1329,7 +1329,7 @@ static RISCVException read_misa(CPURISCVState *env, int csrno,
->>   static RISCVException write_misa(CPURISCVState *env, int csrno,
->>                                    target_ulong val)
->>   {
->> -    if (!riscv_feature(env, RISCV_FEATURE_MISA)) {
->> +    if (!riscv_cpu_cfg(env)->misa_w) {
->>           /* drop write to misa */
->>           return RISCV_EXCP_NONE;
->>       }
+--------------7cWHIhhR5oskOqIpmOaBJvfL--
+
 
