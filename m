@@ -1,50 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1paGpI-0004jx-Vz
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 09:01:01 -0500
+	id 1paHTm-0007M0-02
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 09:42:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
- id 1paGpB-0004bp-Qz; Thu, 09 Mar 2023 09:00:55 -0500
-Received: from forward106j.mail.yandex.net ([2a02:6b8:0:801:2::109])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
- id 1paGp9-0001Ip-K9; Thu, 09 Mar 2023 09:00:53 -0500
-Received: from iva3-dd2bb2ff2b5f.qloud-c.yandex.net
- (iva3-dd2bb2ff2b5f.qloud-c.yandex.net
- [IPv6:2a02:6b8:c0c:7611:0:640:dd2b:b2ff])
- by forward106j.mail.yandex.net (Yandex) with ESMTP id 8480F6BD89B3;
- Thu,  9 Mar 2023 16:54:14 +0300 (MSK)
-Received: by iva3-dd2bb2ff2b5f.qloud-c.yandex.net (smtp/Yandex) with ESMTPSA
- id BsdJhR3bk8c1-0CWZd0hO; Thu, 09 Mar 2023 16:54:13 +0300
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com; s=mail;
- t=1678370053; bh=eFm8VCL1PLveRB8WCNxZodpv/TMfY4YITyhE/ClC8l8=;
- h=Message-Id:Date:Cc:Subject:To:From;
- b=eXO6xgfKMVH5YttMDw5vTLPnIxHBmLWpblKXzD9jQ30CGZnGI92I+GrTjuqsdHsXj
- snax24S5RkL5ff+OufcZSkRz+yiD1qmpy/P8OtA++8A3UDJ/AVZorlUvQoU4RSsQGq
- g2Lm4Axy6olegjmWxv6pEr1EdTEhOrgdr531f+6I=
-Authentication-Results: iva3-dd2bb2ff2b5f.qloud-c.yandex.net;
- dkim=pass header.i=@syntacore.com
-From: Ivan Klokov <ivan.klokov@syntacore.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, richard.henderson@linaro.org, pbonzini@redhat.com,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
- wangyanan55@huawei.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
- liu@linux.alibaba.com, Ivan Klokov <ivan.klokov@syntacore.com>
-Subject: [PATCH v2] target/riscv: Add RVV registers to log
-Date: Thu,  9 Mar 2023 16:54:03 +0300
-Message-Id: <20230309135403.102703-1-ivan.klokov@syntacore.com>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <chenyi2000@zju.edu.cn>)
+ id 1paHTl-0007Lm-8O; Thu, 09 Mar 2023 09:42:49 -0500
+Received: from zg8tmtyylji0my4xnjqumte4.icoremail.net ([162.243.164.118])
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <chenyi2000@zju.edu.cn>)
+ id 1paHTh-00005K-O9; Thu, 09 Mar 2023 09:42:48 -0500
+Received: by ajax-webmail-mail-app2 (Coremail) ; Thu, 9 Mar 2023 22:42:24
+ +0800 (GMT+08:00)
+X-Originating-IP: [112.10.177.110]
+Date: Thu, 9 Mar 2023 22:42:24 +0800 (GMT+08:00)
+X-CM-HeaderCharset: UTF-8
+From: "CHEN Yi" <chenyi2000@zju.edu.cn>
+To: "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>, 
+ qemu-devel@nongnu.org
+Cc: "Palmer Dabbelt" <palmer@dabbelt.com>, 
+ "Alistair Francis" <alistair.francis@wdc.com>, 
+ "Bin Meng" <bin.meng@windriver.com>, "Weiwei Li" <liweiwei@iscas.ac.cn>, 
+ "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Subject: Re: Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.13 build 20210104(ab8c30b6)
+ Copyright (c) 2002-2023 www.mailtech.cn zju.edu.cn
+In-Reply-To: <adbe0c52-61f0-2779-c32f-a75bf0a303e1@ventanamicro.com>
+References: <20230308123417.12555-1-chenyi2000@zju.edu.cn>
+ <adbe0c52-61f0-2779-c32f-a75bf0a303e1@ventanamicro.com>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a02:6b8:0:801:2::109;
- envelope-from=ivan.klokov@syntacore.com; helo=forward106j.mail.yandex.net
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+Message-ID: <376f8611.8a0fa.186c6d2b9da.Coremail.chenyi2000@zju.edu.cn>
+X-Coremail-Locale: en_US
+X-CM-TRANSID: by_KCgBHC7FR8AlkYYaCCw--.27616W
+X-CM-SenderInfo: xfkh05blsqiio62m3hxhgxhubq/1tbiAQkJClZdwzLCEgABsg
+X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
+ CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
+ daVFxhVjvjDU=
+Received-SPF: pass client-ip=162.243.164.118;
+ envelope-from=chenyi2000@zju.edu.cn;
+ helo=zg8tmtyylji0my4xnjqumte4.icoremail.net
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -58,165 +59,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Mar 2023 14:00:57 -0000
+X-List-Received-Date: Thu, 09 Mar 2023 14:42:49 -0000
 
-Added QEMU option 'rvv' to add RISC-V RVV registers to log like regular regs.
-
-Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
----
-v2:
-   - fix option name
-   - fix byte ordering
----
- accel/tcg/cpu-exec.c  |  3 +++
- include/hw/core/cpu.h |  2 ++
- include/qemu/log.h    |  1 +
- target/riscv/cpu.c    | 59 ++++++++++++++++++++++++++++++++++++++++++-
- util/log.c            |  2 ++
- 5 files changed, 66 insertions(+), 1 deletion(-)
-
-diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-index 56aaf58b9d..0dca69fccb 100644
---- a/accel/tcg/cpu-exec.c
-+++ b/accel/tcg/cpu-exec.c
-@@ -319,6 +319,9 @@ static void log_cpu_exec(target_ulong pc, CPUState *cpu,
- #if defined(TARGET_I386)
-                 flags |= CPU_DUMP_CCOP;
- #endif
-+                if (qemu_loglevel_mask(CPU_LOG_TB_VPU)) {
-+                    flags |= CPU_DUMP_VPU;
-+                }
-                 cpu_dump_state(cpu, logfile, flags);
-                 qemu_log_unlock(logfile);
-             }
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 75689bff02..7c9d25ff45 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -545,11 +545,13 @@ GuestPanicInformation *cpu_get_crash_info(CPUState *cpu);
-  * @CPU_DUMP_CODE:
-  * @CPU_DUMP_FPU: dump FPU register state, not just integer
-  * @CPU_DUMP_CCOP: dump info about TCG QEMU's condition code optimization state
-+ * @CPU_DUMP_VPU: dump VPU registers
-  */
- enum CPUDumpFlags {
-     CPU_DUMP_CODE = 0x00010000,
-     CPU_DUMP_FPU  = 0x00020000,
-     CPU_DUMP_CCOP = 0x00040000,
-+    CPU_DUMP_VPU  = 0x00080000,
- };
- 
- /**
-diff --git a/include/qemu/log.h b/include/qemu/log.h
-index c5643d8dd5..df59bfabcd 100644
---- a/include/qemu/log.h
-+++ b/include/qemu/log.h
-@@ -35,6 +35,7 @@ bool qemu_log_separate(void);
- /* LOG_STRACE is used for user-mode strace logging. */
- #define LOG_STRACE         (1 << 19)
- #define LOG_PER_THREAD     (1 << 20)
-+#define CPU_LOG_TB_VPU     (1 << 21)
- 
- /* Lock/unlock output. */
- 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 5bc0005cc7..0b16c9c8e3 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -172,6 +172,14 @@ const char * const riscv_fpr_regnames[] = {
-   "f30/ft10", "f31/ft11"
- };
- 
-+const char * const riscv_rvv_regnames[] = {
-+  "v0",  "v1",  "v2",  "v3",  "v4",  "v5",  "v6",
-+  "v7",  "v8",  "v9",  "v10", "v11", "v12", "v13",
-+  "v14", "v15", "v16", "v17", "v18", "v19", "v20",
-+  "v21", "v22", "v23", "v24", "v25", "v26", "v27",
-+  "v28", "v29", "v30", "v31"
-+};
-+
- static const char * const riscv_excp_names[] = {
-     "misaligned_fetch",
-     "fault_fetch",
-@@ -422,7 +430,8 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
--    int i;
-+    int i, j;
-+    uint8_t *p;
- 
- #if !defined(CONFIG_USER_ONLY)
-     if (riscv_has_ext(env, RVH)) {
-@@ -506,6 +515,54 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-             }
-         }
-     }
-+    if (riscv_has_ext(env, RVV)) {
-+        if (flags & CPU_DUMP_VPU) {
-+
-+            static const int dump_rvv_csrs[] = {
-+                        CSR_VSTART,
-+                        CSR_VXSAT,
-+                        CSR_VXRM,
-+                        CSR_VCSR,
-+                        CSR_VL,
-+                        CSR_VTYPE,
-+                        CSR_VLENB,
-+                    };
-+            for (int i = 0; i < ARRAY_SIZE(dump_rvv_csrs); ++i) {
-+                int csrno = dump_rvv_csrs[i];
-+                target_ulong val = 0;
-+                RISCVException res = riscv_csrrw_debug(env, csrno, &val, 0, 0);
-+
-+                /*
-+                 * Rely on the smode, hmode, etc, predicates within csr.c
-+                 * to do the filtering of the registers that are present.
-+                 */
-+                if (res == RISCV_EXCP_NONE) {
-+                    qemu_fprintf(f, " %-8s " TARGET_FMT_lx "\n",
-+                                 csr_ops[csrno].name, val);
-+                }
-+            }
-+            uint16_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-+
-+/*
-+ * From vector_helper.c
-+ * Note that vector data is stored in host-endian 64-bit chunks,
-+ * so addressing bytes needs a host-endian fixup.
-+ */
-+#if HOST_BIG_ENDIAN
-+#define BYTE(x)   ((x) ^ 7)
-+#else
-+#define BYTE(x)   (x)
-+#endif
-+            for (i = 0; i < 32; i++) {
-+                qemu_fprintf(f, " %-8s ", riscv_rvv_regnames[i]);
-+                p = (uint8_t *)env->vreg;
-+                for (j = vlenb - 1 ; j >= 0; j--) {
-+                    qemu_fprintf(f, "%02x", *(p + i * vlenb + BYTE(j)));
-+                }
-+                qemu_fprintf(f, "\n");
-+            }
-+        }
-+    }
- }
- 
- static void riscv_cpu_set_pc(CPUState *cs, vaddr value)
-diff --git a/util/log.c b/util/log.c
-index 7837ff9917..93dccee7b8 100644
---- a/util/log.c
-+++ b/util/log.c
-@@ -495,6 +495,8 @@ const QEMULogItem qemu_log_items[] = {
-       "log every user-mode syscall, its input, and its result" },
-     { LOG_PER_THREAD, "tid",
-       "open a separate log file per thread; filename must contain '%d'" },
-+    { CPU_LOG_TB_VPU, "vpu",
-+      "include VPU registers in the 'cpu' logging" },
-     { 0, NULL, NULL },
- };
- 
--- 
-2.34.1
-
+CgoKPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2VzLS0tLS0KPiBGcm9tOiAiRGFuaWVsIEhlbnJpcXVl
+IEJhcmJvemEiIDxkYmFyYm96YUB2ZW50YW5hbWljcm8uY29tPgo+IFNlbnQgVGltZTogMjAyMy0w
+My0wOSAwMzo0NDowMyAoVGh1cnNkYXkpCj4gVG86IGNoZW55aTIwMDBAemp1LmVkdS5jbiwgcWVt
+dS1kZXZlbEBub25nbnUub3JnCj4gQ2M6ICJQYWxtZXIgRGFiYmVsdCIgPHBhbG1lckBkYWJiZWx0
+LmNvbT4sICJBbGlzdGFpciBGcmFuY2lzIiA8YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tPiwgIkJp
+biBNZW5nIiA8YmluLm1lbmdAd2luZHJpdmVyLmNvbT4sICJXZWl3ZWkgTGkiIDxsaXdlaXdlaUBp
+c2Nhcy5hYy5jbj4sICJMaXUgWmhpd2VpIiA8emhpd2VpX2xpdUBsaW51eC5hbGliYWJhLmNvbT4s
+ICJvcGVuIGxpc3Q6UklTQy1WIFRDRyBDUFVzIiA8cWVtdS1yaXNjdkBub25nbnUub3JnPgo+IFN1
+YmplY3Q6IFJlOiBbUEFUQ0hdIHRhcmdldC9yaXNjdi9jc3IuYzogZml4IEggZXh0ZW5zaW9uIFRW
+TSB0cmFwCj4gCj4gCj4gCj4gT24gMy84LzIzIDA5OjM0LCBjaGVueWkyMDAwQHpqdS5lZHUuY24g
+d3JvdGU6Cj4gPiBGcm9tOiBZaSBDaGVuIDxjaGVueWkyMDAwQHpqdS5lZHUuY24+Cj4gPiAKPiA+
+IFRyYXAgYWNjZXNzZXMgdG8gaGdhdHAgaWYgTVNUQVRVU19UVk0gaXMgZW5hYmxlZC4KPiA+IERv
+bid0IHRyYXAgYWNjZXNzZXMgdG8gdnNhdHAgZXZlbiBpZiBNU1RBVFVTX1RWTSBpcyBlbmFibGVk
+Lgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5OiBZaSBDaGVuIDxjaGVueWkyMDAwQHpqdS5lZHUuY24+
+Cj4gPiAtLS0KPiA+ICAgdGFyZ2V0L3Jpc2N2L2Nzci5jIHwgMTggKysrKysrKysrKysrKystLS0t
+Cj4gPiAgIDEgZmlsZSBjaGFuZ2VkLCAxNCBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQo+
+ID4gCj4gPiBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L2Nzci5jIGIvdGFyZ2V0L3Jpc2N2L2Nz
+ci5jCj4gPiBpbmRleCBhYjU2NjYzLi4wOWJjNzgwIDEwMDY0NAo+ID4gLS0tIGEvdGFyZ2V0L3Jp
+c2N2L2Nzci5jCj4gPiArKysgYi90YXJnZXQvcmlzY3YvY3NyLmMKPiA+IEBAIC0yNjU1LDcgKzI2
+NTUsNyBAQCBzdGF0aWMgUklTQ1ZFeGNlcHRpb24gcmVhZF9zYXRwKENQVVJJU0NWU3RhdGUgKmVu
+diwgaW50IGNzcm5vLAo+ID4gICAgICAgICAgIHJldHVybiBSSVNDVl9FWENQX05PTkU7Cj4gPiAg
+ICAgICB9Cj4gPiAgIAo+ID4gLSAgICBpZiAoZW52LT5wcml2ID09IFBSVl9TICYmIGdldF9maWVs
+ZChlbnYtPm1zdGF0dXMsIE1TVEFUVVNfVFZNKSkgewo+ID4gKyAgICBpZiAoZW52LT5wcml2ID09
+IFBSVl9TICYmICFyaXNjdl9jcHVfdmlydF9lbmFibGVkKGVudikgJiYgZ2V0X2ZpZWxkKGVudi0+
+bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7Cj4gCj4gVGhlIGNvbW1pdCBtZXNzYWdlIG1lbnRpb25z
+ICd2c2F0cCcgYnV0IHRoaXMgcGF0Y2ggaXMgY2hhbmdpbmcgc2F0cCBjYWxsYmFja3MuCj4gCj4g
+QW55IHJlYXNvbiB0byBub3QgY2hhbmdlIHJlYWRfdnNhdHAoKSBhbmQgd3JpdGVfdnNhdHAoKSBp
+bnN0ZWFkPwoKcmVhZF92c2F0cCgpIGFuZCB3cml0ZV92c2F0cCgpIGhhdmUgY29ycmVjdGx5IGlt
+cGxlbWVudGVkIHRoZSBiZWhhdmlvciBvZiBNU1RBVFVTLlRWTS4KTWVhbndoaWxlLCBpZiBhbiBI
+Uy1tb2RlIGhhcnQgdHJpZXMgdG8gYWNjZXNzICdzYXRwJywgd2hhdCBpdCBhY3R1YWxseSBhY2Nl
+c3NlcyBpcyAndnNhdHAnIGFjY29yZGluZyB0byB0aGUgSVNBLiBJbiBRZW11J3MgaW1wbGVtZW50
+YXRpb24sIHRoZSAnc2F0cCcgY2FsbGJhY2tzIGFyZSBjYWxsZWQgYXQgZmlyc3QsIGFuZCByaXNj
+dl9jcHVfc3dhcF9oeXBlcnZpc29yX3JlZ3MoKSB3aWxsIGJlIGNhbGxlZCBhZnRlcndhcmQuIFNv
+IHdlIGFsc28gbmVlZCB0byBtb2RpZnkgcmVhZF9zYXRwKCkgYW5kIHdyaXRlX3NhdHAoKS4KCj4g
+Cj4gPiAgICAgICAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfSUxMRUdBTF9JTlNUOwo+ID4gICAgICAg
+fSBlbHNlIHsKPiA+ICAgICAgICAgICAqdmFsID0gZW52LT5zYXRwOwo+ID4gQEAgLTI2ODMsNyAr
+MjY4Myw3IEBAIHN0YXRpYyBSSVNDVkV4Y2VwdGlvbiB3cml0ZV9zYXRwKENQVVJJU0NWU3RhdGUg
+KmVudiwgaW50IGNzcm5vLAo+ID4gICAgICAgfQo+ID4gICAKPiA+ICAgICAgIGlmICh2bSAmJiBt
+YXNrKSB7Cj4gPiAtICAgICAgICBpZiAoZW52LT5wcml2ID09IFBSVl9TICYmIGdldF9maWVsZChl
+bnYtPm1zdGF0dXMsIE1TVEFUVVNfVFZNKSkgewo+ID4gKyAgICAgICAgaWYgKGVudi0+cHJpdiA9
+PSBQUlZfUyAmJiAhcmlzY3ZfY3B1X3ZpcnRfZW5hYmxlZChlbnYpICYmIGdldF9maWVsZChlbnYt
+Pm1zdGF0dXMsIE1TVEFUVVNfVFZNKSkgewo+ID4gICAgICAgICAgICAgICByZXR1cm4gUklTQ1Zf
+RVhDUF9JTExFR0FMX0lOU1Q7Cj4gPiAgICAgICAgICAgfSBlbHNlIHsKPiA+ICAgICAgICAgICAg
+ICAgLyoKPiA+IEBAIC0zMDQ3LDE0ICszMDQ3LDI0IEBAIHN0YXRpYyBSSVNDVkV4Y2VwdGlvbiBy
+ZWFkX2hnZWlwKENQVVJJU0NWU3RhdGUgKmVudiwgaW50IGNzcm5vLAo+ID4gICBzdGF0aWMgUklT
+Q1ZFeGNlcHRpb24gcmVhZF9oZ2F0cChDUFVSSVNDVlN0YXRlICplbnYsIGludCBjc3JubywKPiA+
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdGFyZ2V0X3Vsb25nICp2YWwpCj4g
+PiAgIHsKPiA+IC0gICAgKnZhbCA9IGVudi0+aGdhdHA7Cj4gPiArICAgIGlmIChlbnYtPnByaXYg
+PT0gUFJWX1MgJiYgZ2V0X2ZpZWxkKGVudi0+bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7Cj4gPiAr
+ICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9JTExFR0FMX0lOU1Q7Cj4gCj4gVGhlIGVuZCBvZiB0
+aGUgZmlyc3QgcGFyYWdyYXBoIG9mIElTQSA4LjIuMTAgZ29lcyBhcyBmb2xsb3dzOgo+IAo+ID09
+PT0KPiBXaGVuIG1zdGF0dXMuVFZNPTEsIGF0dGVtcHRzIHRvIHJlYWQgb3Igd3JpdGUgaGdhdHAg
+d2hpbGUgZXhlY3V0aW5nCj4gaW4gSFMtbW9kZSB3aWxsIHJhaXNlIGFuIGlsbGVnYWwgaW5zdHJ1
+Y3Rpb24gZXhjZXB0aW9uLgo+ID09PT0KPiAKPiBJIGJlbGlldmUgeW91IG5lZWQgdG8gY2hlY2sg
+Zm9yIEhTLW1vZGUsIG5vdCBqdXN0IFBSVl9TLiByaXNjdl9jc3Jyd19jaGVjaygpIGluCj4gdGFy
+Z2V0L3Jpc2N2L2Nzci5jIGNoZWNrcyBmb3IgSFMtbW9kZSBhcyBmb2xsb3dzOgo+IAo+ICAgICAg
+aWYgKHJpc2N2X2hhc19leHQoZW52LCBSVkgpICYmIGVudi0+cHJpdiA9PSBQUlZfUyAmJgo+ICAg
+ICAgICAgICFyaXNjdl9jcHVfdmlydF9lbmFibGVkKGVudikpIHsKPiAKPiBTYW1lIGdvZXMgZm9y
+IHdyaXRlX2hnYXRwKCkgYmVsb3cuCj4gCj4gPiArICAgIH0gZWxzZSB7Cj4gPiArICAgICAgICAq
+dmFsID0gZW52LT5oZ2F0cDsKPiA+ICsgICAgfQo+ID4gKwo+IAoKSSB0aGluayBWUy1tb2RlIGNh
+bid0IGFjY2VzcyBIUy1tb2RlIENTUiByZWdpc3RlcnMsIHdoaWNoIGhhcyBiZWVuIGVuc3VyZWQg
+aW4gcmlzY3ZfY3NycndfY2hlY2soKS4gWW91IGNhbiBzZWUgb3RoZXIgY2FsbGJhY2tzIG9mIEhT
+LW1vZGUgQ1NSIHJlZ2lzdGVycyAoZS5nLiwgcmVhZF9oZ2VpcCgpKSBhc3N1bWUgdGhhdCBpdCdz
+IE0tbW9kZSBvciBIUy1tb2RlLCB0b28uCgo+IFlvdSBjYW4gZGlzY2FyZCB0aGUgJ2Vsc2UnIHNp
+bmNlIHlvdSdyZSBkb2luZyBhIHJldHVybiBpbiB0aGUgaWY6Cj4gCj4gaWYgKC4uLikgewo+ICAg
+ICAgcmV0dXJuIFJJU0NWX0VYQ1BfSUxMRUdBTF9JTlNUOwo+IH0KPiAKPiAqdmFsID0gZW52LT5o
+Z2F0cDsKPiAKPiAKPiA+ICAgICAgIHJldHVybiBSSVNDVl9FWENQX05PTkU7Cj4gPiAgIH0KPiA+
+ICAgCj4gPiAgIHN0YXRpYyBSSVNDVkV4Y2VwdGlvbiB3cml0ZV9oZ2F0cChDUFVSSVNDVlN0YXRl
+ICplbnYsIGludCBjc3JubywKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHRhcmdldF91bG9uZyB2YWwpCj4gPiAgIHsKPiA+IC0gICAgZW52LT5oZ2F0cCA9IHZhbDsKPiA+
+ICsgICAgaWYgKGVudi0+cHJpdiA9PSBQUlZfUyAmJiBnZXRfZmllbGQoZW52LT5tc3RhdHVzLCBN
+U1RBVFVTX1RWTSkpIHsKPiA+ICsgICAgICAgIHJldHVybiBSSVNDVl9FWENQX0lMTEVHQUxfSU5T
+VDsKPiA+ICsgICAgfSBlbHNlIHsKPiA+ICsgICAgICAgIGVudi0+aGdhdHAgPSB2YWw7Cj4gPiAr
+ICAgIH0KPiAKPiBObyBuZWVkIGZvciBlbHNlIGhlcmUgZWl0aGVyOgo+IAo+IGlmICguLi4pIHsK
+PiAgICAgIHJldHVybiBSSVNDVl9FWENQX0lMTEVHQUxfSU5TVDsKPiB9Cj4gCj4gZW52LT5oZ2F0
+cCA9IHZhbDsKPiAKPiAKCkkgc2VlLiBJIHdpbGwgZml4IHRoYXQgaW4gdGhlIG5leHQgdmVyc2lv
+biBvZiB0aGlzIHBhdGNoLgoKPiAKPiBUaGFua3MsCj4gCj4gCj4gRGFuaWVsCj4gCj4gPiArCj4g
+PiAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9OT05FOwo+ID4gICB9Cj4gPiAgIAoKVGhhbmtzIQoK
+WWkK
 
