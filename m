@@ -1,72 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1paNKC-00055c-Mr
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 15:57:20 -0500
+	id 1paNbN-0006aE-Ql
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 16:15:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1paNK5-0004tZ-2e
- for qemu-riscv@nongnu.org; Thu, 09 Mar 2023 15:57:15 -0500
-Received: from mail-oi1-x233.google.com ([2607:f8b0:4864:20::233])
+ id 1paNbL-0006Xd-Vc
+ for qemu-riscv@nongnu.org; Thu, 09 Mar 2023 16:15:03 -0500
+Received: from mail-oa1-x33.google.com ([2001:4860:4864:20::33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1paNK3-0001Gp-Iv
- for qemu-riscv@nongnu.org; Thu, 09 Mar 2023 15:57:12 -0500
-Received: by mail-oi1-x233.google.com with SMTP id bh20so2689394oib.9
- for <qemu-riscv@nongnu.org>; Thu, 09 Mar 2023 12:57:11 -0800 (PST)
+ id 1paNbK-0004Vq-1w
+ for qemu-riscv@nongnu.org; Thu, 09 Mar 2023 16:15:03 -0500
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-1767a208b30so3765688fac.2
+ for <qemu-riscv@nongnu.org>; Thu, 09 Mar 2023 13:15:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1678395430;
+ d=ventanamicro.com; s=google; t=1678396500;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ZzqZDdeMGZQ3piPXuqaXq8vnLEy6sJO3zD+s9pop8ug=;
- b=LB9AcBmEnn0J0LuGVCEPlO7rYGXhwWCb1QolkU7gA8tti16tufGv+5BaA548BAvsWR
- 0JBrFo2/QwjIiaYmEsziq6q50mgWIGSuHhukS+UMAAJye/r1QFcR7c6jYFti0sPVHj4D
- hA3uIUNxqRRw1OfGOjWrPBtB4mX0XCbR6F+o236kt2dR3ymgWCLL1D6D5BhJWqR1mHro
- d9Wbgd2/mDqMt9FoPAWuuUccK2uydR+bRnEoH8dScDpo/JXaC0pn1z0Xlcv2XNBpdmz7
- TCVOV12mHFMDUPJD/CqPTlLaAkyiQL5CM/CT9mzVb4BvtoKJ/N2lKY5iOixGWSCULT/X
- FIRA==
+ bh=YAB0nwTwTz5OL3ZASLpXeDoJNH2dEwFjDl4zjLqF4WU=;
+ b=JtW+3/NQwwIkydWZ02laO2JvHRlydjxy40ofzKgxXjL/5I7eQMozjDiLLwJV27xlYW
+ rrLGHTvDCanALkhEOZgzCkYcmr0kXy/s+/gkqQjuuNEbS60c+ZWPEGIDoLCVS62KGw4j
+ rnHzSh+0U/t3tT/I3DqYi4kO318Au6fD5Imb1eTsx7e4riVfNFpCsQxq8VXdh5vdApd6
+ qvU47G+vBLuE3IDvW2ayTEFiuh8uvjLME9E5TM5ERGubjRf2Pwjx7afEM78jlF87KraB
+ gDJI9tLBkCAwDgfV31tH5JWRs3lW33FHzyzNxYVHQgMr/R/V6O5oHdbkh7aXVsPQB5CV
+ a83g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678395430;
+ d=1e100.net; s=20210112; t=1678396500;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ZzqZDdeMGZQ3piPXuqaXq8vnLEy6sJO3zD+s9pop8ug=;
- b=jllEkAo0A1nBMcRCGhH94XdaNJDrKF7aCtFV9e9OHDSojygIykr/tSXeeOHg998adF
- OMuAchNBi3nOAONCZkO7xOSxfeKHQIhqOh04bmp4DMUSJY4ZzuOT0owlucPNuPpRHuDl
- 3LouNYKjfxBAaKpBEsSOnosBMheXTa4dx/+k+kdT3UaoDV2SCTiYJuB2Spjp8sW+Ui91
- 5r44bUlk6W+Sv0gizKr70vPSPBVfc6Cb11XH+7FGRZhNjxzedSf/ZbOGG5SZcqPzNOe+
- M0H6A9AG7B+x63RDJPa3idtQZqw0qDUqvOn2laxx7FhZA07UZtFqyvUcgqwfvCH89BXZ
- Z6xw==
-X-Gm-Message-State: AO0yUKWqWM4vht/rJSVljrCe8u4GAKR9FuHZenysvqOok3j/nXOuB5Od
- QYdbG/yYuM8ggxOM8mo/fayLqQ==
-X-Google-Smtp-Source: AK7set9bWgnBgX6IKkQwjTXfheN2Jwjs+bu2Q3x19DYFeVRJnOW0tTJvgsl6mmBrFij5/eTtGUA3BA==
-X-Received: by 2002:aca:1711:0:b0:384:8bba:940a with SMTP id
- j17-20020aca1711000000b003848bba940amr9326841oii.30.1678395430288; 
- Thu, 09 Mar 2023 12:57:10 -0800 (PST)
+ bh=YAB0nwTwTz5OL3ZASLpXeDoJNH2dEwFjDl4zjLqF4WU=;
+ b=vZ9fCxfy80NvQuTRnXj/48qAPD2gGw+X/Z7jcft4JVaqlZVBN1NOl3UMyCwvo1Ncp4
+ v4H/SBF49Aw/6y8IKHSMj/3pE+Rp23q4F+vjLor9hBI+/j/y441qOz/hdC826JgrZv0F
+ 5LX5YVST3LltCjbStrXEjlD0jZuk0zdT2sMMcn8KuqjN7nJqL47FpY0+tbx5ehTrew8C
+ /pvxHW/9ng86CRhHvQhvQxYLwJpqM5nF2XYs5A2kDyYVyI6BgMOK8q+Z/cy62bFVA89d
+ 6w9vduXCOfI5lLgAhPLhXlHSCG+bdNsTdQtzCcWFT2gkothAa1akPqfPT1C8vGToFXoK
+ 0t2g==
+X-Gm-Message-State: AO0yUKWttGAY+PsMI34w1SGpzSIU84pAC46v8O6bwe9NycmvtSW2uGc5
+ mRX8Vcsoo6rWNDXlFnzaNvTivQ==
+X-Google-Smtp-Source: AK7set/wQn5Q+HSqr5Ebddl5nE3j9SP8Fqrxp1KbfBEwdZQ0Xr8k9ZcNE/oAFnDLdkAAWY+ZCD3yIw==
+X-Received: by 2002:a05:6870:a109:b0:172:acf5:1d25 with SMTP id
+ m9-20020a056870a10900b00172acf51d25mr14861918oae.0.1678396500496; 
+ Thu, 09 Mar 2023 13:15:00 -0800 (PST)
 Received: from [192.168.68.107] ([177.189.53.31])
  by smtp.gmail.com with ESMTPSA id
- az2-20020a056808164200b0037d6c3fc8aasm112352oib.45.2023.03.09.12.57.07
+ k37-20020a4a94a8000000b0051ffe0fe11bsm141964ooi.6.2023.03.09.13.14.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Mar 2023 12:57:09 -0800 (PST)
-Message-ID: <d7c32985-e061-610d-fba8-0b9aec1c4950@ventanamicro.com>
-Date: Thu, 9 Mar 2023 17:57:06 -0300
+ Thu, 09 Mar 2023 13:15:00 -0800 (PST)
+Message-ID: <2b4071aa-b584-a03f-1aaf-e73bafcf1db3@ventanamicro.com>
+Date: Thu, 9 Mar 2023 18:14:56 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [PATCH 4/4] target/riscv: Simplify arguments for riscv_csrrw_check
+Subject: Re: [PATCH for-8.1 00/17] centralize CPU extensions logic
 Content-Language: en-US
-To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230309071329.45932-1-liweiwei@iscas.ac.cn>
- <20230309071329.45932-5-liweiwei@iscas.ac.cn>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+References: <20230308201925.258223-1-dbarboza@ventanamicro.com>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230309071329.45932-5-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230308201925.258223-1-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::233;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x233.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -86,65 +85,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Mar 2023 20:57:16 -0000
+X-List-Received-Date: Thu, 09 Mar 2023 21:15:04 -0000
+
+Just realized that the subject doesn't mention 'riscv' anywhere.
+
+Yes, this is target/riscv specific. I'll make sure to mention that in the
+future versions.
+
+Thanks,
 
 
+Daniel
 
-On 3/9/23 04:13, Weiwei Li wrote:
-> Remove RISCVCPU argument, and get cfg infomation from CPURISCVState
-> directly.
+On 3/8/23 17:19, Daniel Henrique Barboza wrote:
+> Hi,
 > 
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/csr.c | 12 ++++--------
->   1 file changed, 4 insertions(+), 8 deletions(-)
+> During the review of a series that did some work in the RISCV_FEATURES*
+> enum, Liu Zhiwei commented on how we could centralize the all the
+> extension validation code and integrate it with write_misa() [1].
 > 
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 53143f4d9a..80fc15e4d6 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3755,15 +3755,14 @@ static RISCVException rmw_seed(CPURISCVState *env, int csrno,
->   
->   static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
->                                                  int csrno,
-> -                                               bool write_mask,
-> -                                               RISCVCPU *cpu)
-> +                                               bool write_mask)
->   {
->       /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
->       bool read_only = get_field(csrno, 0xC00) == 3;
->       int csr_min_priv = csr_ops[csrno].min_priv_ver;
->   
->       /* ensure the CSR extension is enabled */
-> -    if (!cpu->cfg.ext_icsr) {
-> +    if (!riscv_cpu_cfg(env)->ext_icsr) {
->           return RISCV_EXCP_ILLEGAL_INST;
->       }
->   
-> @@ -3859,9 +3858,7 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
->                              target_ulong *ret_value,
->                              target_ulong new_value, target_ulong write_mask)
->   {
-> -    RISCVCPU *cpu = env_archcpu(env);
-> -
-> -    RISCVException ret = riscv_csrrw_check(env, csrno, write_mask, cpu);
-> +    RISCVException ret = riscv_csrrw_check(env, csrno, write_mask);
->       if (ret != RISCV_EXCP_NONE) {
->           return ret;
->       }
-> @@ -3914,9 +3911,8 @@ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
->                                   Int128 new_value, Int128 write_mask)
->   {
->       RISCVException ret;
-> -    RISCVCPU *cpu = env_archcpu(env);
->   
-> -    ret = riscv_csrrw_check(env, csrno, int128_nz(write_mask), cpu);
-> +    ret = riscv_csrrw_check(env, csrno, int128_nz(write_mask));
->       if (ret != RISCV_EXCP_NONE) {
->           return ret;
->       }
+> This does at least part of what was suggested. The idea is that, ATM, we
+> have too many places setting cpu->cfg and the validation logic is
+> scattered around (e.g. there are some contraints in write_misa() that
+> should be applicable elsewhere). This series is an attempt to centralize
+> things a bit.
+> 
+> The main accomplishments of this series are:
+> 
+> - the parent device riscv-cpu no longer sets any cpu->cfg attribute. This
+>    was forcing init() functions to disable extensions that it wouldn't
+>    use just because the parent device was enabling it;
+> 
+> - all validations are centered in validate_set_extensions(), with
+>    pontual exceptions in write_misa() that has exclusive contraints;
+> 
+> - set_misa() now writes cpu->cfg. No need to have one function to set
+>    env->misa_ext and then another to set cpu->cfg;
+> 
+> - register_cpu_props() now only exposes user-facing props;
+> 
+> - all validations from validate_set_extensions() are done at the start
+>    of the function. Validate first, set extensions after;
+> 
+> - RVE is now forbidden in all validations, not just in write_misa();
+> 
+> - RVG is now forbidden in write_misa();
+> 
+> - write_misa now uses set_misa() and validate_set_extensions().
+> 
+> 
+> 
+> [1] https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg05092.html
+> 
+> Daniel Henrique Barboza (17):
+>    target/riscv/cpu.c: add riscv_cpu_validate_v()
+>    target/riscv/cpu.c: remove set_vext_version()
+>    target/riscv/cpu.c: remove set_priv_version()
+>    target/riscv: add PRIV_VERSION_LATEST macro
+>    target/riscv/cpu.c: add riscv_cpu_validate_priv_spec()
+>    target/riscv: move realize() validations to
+>      riscv_cpu_validate_set_extensions()
+>    target/riscv/cpu.c: remove cfg setup from riscv_cpu_init()
+>    target/riscv/cpu.c: avoid set_misa() in validate_set_extensions()
+>    target/riscv/cpu.c: set cpu config in set_misa()
+>    target/riscv/cpu.c: redesign register_cpu_props()
+>    target/riscv/cpu.c: move riscv_cpu_validate_v() up
+>    target/riscv: put env->misa_ext <-> cpu->cfg code into helpers
+>    target/riscv/cpu.c: split riscv_cpu_validate_priv_spec()
+>    target/riscv/cpu.c: do not allow RVE to be set
+>    target/riscv: add RVG
+>    target/riscv: do not allow RVG in write_misa()
+>    target/riscv: rework write_misa()
+> 
+>   target/riscv/cpu.c | 516 +++++++++++++++++++++++++--------------------
+>   target/riscv/cpu.h |   9 +-
+>   target/riscv/csr.c |  52 ++---
+>   3 files changed, 323 insertions(+), 254 deletions(-)
+> 
 
