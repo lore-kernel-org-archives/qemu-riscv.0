@@ -1,51 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1paHnD-0004WY-4W
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 10:02:56 -0500
+	id 1paI9n-0002Sk-M1
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 10:26:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chenyi2000@zju.edu.cn>)
- id 1paHmy-0004Q7-4B; Thu, 09 Mar 2023 10:02:40 -0500
-Received: from azure-sdnproxy.icoremail.net ([52.175.55.52])
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <chenyi2000@zju.edu.cn>)
- id 1paHmv-0003XH-Hb; Thu, 09 Mar 2023 10:02:39 -0500
-Received: by ajax-webmail-mail-app2 (Coremail) ; Thu, 9 Mar 2023 23:02:21
- +0800 (GMT+08:00)
-X-Originating-IP: [112.10.177.110]
-Date: Thu, 9 Mar 2023 23:02:21 +0800 (GMT+08:00)
-X-CM-HeaderCharset: UTF-8
-From: "CHEN Yi" <chenyi2000@zju.edu.cn>
-To: liweiwei <liweiwei@iscas.ac.cn>, qemu-devel@nongnu.org
-Cc: "Palmer Dabbelt" <palmer@dabbelt.com>, 
- "Alistair Francis" <alistair.francis@wdc.com>, 
- "Bin Meng" <bin.meng@windriver.com>, 
- "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>, 
- "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-Subject: Re: Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.13 build 20210104(ab8c30b6)
- Copyright (c) 2002-2023 www.mailtech.cn zju.edu.cn
-In-Reply-To: <18d2b7d5-fa56-eb32-4803-74e85f24e1a2@iscas.ac.cn>
-References: <20230308123417.12555-1-chenyi2000@zju.edu.cn>
- <18d2b7d5-fa56-eb32-4803-74e85f24e1a2@iscas.ac.cn>
-Content-Type: multipart/alternative; 
- boundary="----=_Part_3353132_626522633.1678374141821"
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1paI9j-0002Qc-OD
+ for qemu-riscv@nongnu.org; Thu, 09 Mar 2023 10:26:12 -0500
+Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1paI9f-0007NC-7X
+ for qemu-riscv@nongnu.org; Thu, 09 Mar 2023 10:26:09 -0500
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-176d93cd0daso2672103fac.4
+ for <qemu-riscv@nongnu.org>; Thu, 09 Mar 2023 07:26:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1678375565;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=2LPCtpMluYElYKx4kdSb4vYJwV6jUzBWF8jg9WRIbhM=;
+ b=OOxxtPxa1HKagwC2tEWVjHk8s/4lAVw7CcC7d7C5JZlw2MiFJaBc/vJFCf5x3Mlnm4
+ JEFwbHQxcMIA8mDvoJwfrk7oCAu2qzSZgjHt2uUO7tHZnxTnbKF9H5tYJq9AldQiMdtO
+ JQwnhOg9m3OHpNz+b6HBovw3r+ZaKZNTBqgBPfVNaNjsF/Ki3Ylfhqx2byEXMfRQuJYr
+ ArFk+6YqQNfik+AxqcA/xAHUqrRy1Nfv2/RcCasHCH9VoA5ue/kKylzzh2RDsm4zSSiY
+ ciFXvN2Q+Gfw+OJ99KBVaxkPIpAyUJOusB8L3wKv6862PtLyabjnA8QmI6En84pxVF//
+ EBlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1678375565;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=2LPCtpMluYElYKx4kdSb4vYJwV6jUzBWF8jg9WRIbhM=;
+ b=6odJC03s31TwwoDF3bHw8UdmL+1TUIgd1q9RuXHPEjcI5pTtws6jjOcCn538gLJnTW
+ D0N/2JnJSFcWoOVTkuvnwnyBUR932UaemTxKhE23JY7qHwFwRSei9jcQyrg8ZI7X338q
+ ZRC6Hu/VPovIG8UwXgUcsk6oVcHverZ74eMgBsGWBiNmIz+4hgoPpfNEExU50a5tuA5o
+ wPUKUeD87T3an1sXyib7SxgFeIKyHBCNiLma55wylCT5pZdVweVmLQqdDjpZXx3yvu/q
+ zzHskl8pQlboWzp6KjJOJu7Cb7XYPT4PiXd5wIMr4f8kASmfjeRNj1pbW21Zckkc7Zj6
+ qLyg==
+X-Gm-Message-State: AO0yUKUQX6T+wfQNgEmIhpD64nxxLgr/O2upKhj6JkImN4xTJ1YICHZF
+ X4QEOzvnzOUV+WnS1zz0AMzhzw==
+X-Google-Smtp-Source: AK7set+Zl7wj0/VSGM4EfOKe5pFjGoKWpTu7gcmNLJ+3kUOo0wHFolQMP4KzI6MJ/3LEFi+cFfnGGQ==
+X-Received: by 2002:a05:6870:8194:b0:172:289c:102 with SMTP id
+ k20-20020a056870819400b00172289c0102mr13005934oae.17.1678375564539; 
+ Thu, 09 Mar 2023 07:26:04 -0800 (PST)
+Received: from [192.168.68.107] ([177.189.53.31])
+ by smtp.gmail.com with ESMTPSA id
+ m29-20020a4a391d000000b00517a7ac36c8sm7475304ooa.24.2023.03.09.07.26.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 09 Mar 2023 07:26:04 -0800 (PST)
+Message-ID: <f60610a7-4c09-3217-a88c-3d39c5662143@ventanamicro.com>
+Date: Thu, 9 Mar 2023 12:26:00 -0300
 MIME-Version: 1.0
-Message-ID: <3b6c6f15.8a1c1.186c6e4ff7d.Coremail.chenyi2000@zju.edu.cn>
-X-Coremail-Locale: en_US
-X-CM-TRANSID: by_KCgDn7fX+9AlkbrqCCw--.53033W
-X-CM-SenderInfo: xfkh05blsqiio62m3hxhgxhubq/1tbiAQYJClZdwzLDTwABsz
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
- CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
- daVFxhVjvjDU=
-Received-SPF: pass client-ip=52.175.55.52; envelope-from=chenyi2000@zju.edu.cn;
- helo=azure-sdnproxy.icoremail.net
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH v7 03/10] target/riscv: allow MISA writes as experimental
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Frank Chang <frank.chang@sifive.com>
+Cc: qemu-riscv@nongnu.org, bmeng@tinylab.org, liweiwei@iscas.ac.cn,
+ palmer@rivosinc.com
+References: <20230222185205.355361-1-dbarboza@ventanamicro.com>
+ <20230222185205.355361-4-dbarboza@ventanamicro.com>
+ <87bbfaef-92df-52d7-da48-ff25a3c508a4@linux.alibaba.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <87bbfaef-92df-52d7-da48-ff25a3c508a4@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2001:4860:4864:20::31;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x31.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -59,166 +89,117 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Mar 2023 15:02:43 -0000
+X-List-Received-Date: Thu, 09 Mar 2023 15:26:14 -0000
 
-------=_Part_3353132_626522633.1678374141821
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
 
-CgoKLS0tLS1PcmlnaW5hbCBNZXNzYWdlcy0tLS0tCkZyb206bGl3ZWl3ZWkgPGxpd2Vpd2VpQGlz
-Y2FzLmFjLmNuPgpTZW50IFRpbWU6MjAyMy0wMy0wOSAxNTo0ODoxNyAoVGh1cnNkYXkpClRvOiBj
-aGVueWkyMDAwQHpqdS5lZHUuY24sIHFlbXUtZGV2ZWxAbm9uZ251Lm9yZwpDYzogIlBhbG1lciBE
-YWJiZWx0IiA8cGFsbWVyQGRhYmJlbHQuY29tPiwgIkFsaXN0YWlyIEZyYW5jaXMiIDxhbGlzdGFp
-ci5mcmFuY2lzQHdkYy5jb20+LCAiQmluIE1lbmciIDxiaW4ubWVuZ0B3aW5kcml2ZXIuY29tPiwg
-IkRhbmllbCBIZW5yaXF1ZSBCYXJib3phIiA8ZGJhcmJvemFAdmVudGFuYW1pY3JvLmNvbT4sICJM
-aXUgWmhpd2VpIiA8emhpd2VpX2xpdUBsaW51eC5hbGliYWJhLmNvbT4sICJvcGVuIGxpc3Q6UklT
-Qy1WIFRDRyBDUFVzIiA8cWVtdS1yaXNjdkBub25nbnUub3JnPgpTdWJqZWN0OiBSZTogW1BBVENI
-XSB0YXJnZXQvcmlzY3YvY3NyLmM6IGZpeCBIIGV4dGVuc2lvbiBUVk0gdHJhcAoKCgoKCgpPbiAy
-MDIzLzMvOCAyMDozNCwgY2hlbnlpMjAwMEB6anUuZWR1LmNuIHdyb3RlOgoKRnJvbTogWWkgQ2hl
-biA8Y2hlbnlpMjAwMEB6anUuZWR1LmNuPiBUcmFwIGFjY2Vzc2VzIHRvIGhnYXRwIGlmIE1TVEFU
-VVNfVFZNIGlzIGVuYWJsZWQuCkRvbid0IHRyYXAgYWNjZXNzZXMgdG8gdnNhdHAgZXZlbiBpZiBN
-U1RBVFVTX1RWTSBpcyBlbmFibGVkLgoKU2lnbmVkLW9mZi1ieTogWWkgQ2hlbiA8Y2hlbnlpMjAw
-MEB6anUuZWR1LmNuPiAtLS0KIHRhcmdldC9yaXNjdi9jc3IuYyB8IDE4ICsrKysrKysrKysrKysr
-LS0tLQogMSBmaWxlIGNoYW5nZWQsIDE0IGluc2VydGlvbnMoKyksIDQgZGVsZXRpb25zKC0pCgpk
-aWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L2Nzci5jIGIvdGFyZ2V0L3Jpc2N2L2Nzci5jCmluZGV4
-IGFiNTY2NjMuLjA5YmM3ODAgMTAwNjQ0Ci0tLSBhL3RhcmdldC9yaXNjdi9jc3IuYworKysgYi90
-YXJnZXQvcmlzY3YvY3NyLmMKQEAgLTI2NTUsNyArMjY1NSw3IEBAIHN0YXRpYyBSSVNDVkV4Y2Vw
-dGlvbiByZWFkX3NhdHAoQ1BVUklTQ1ZTdGF0ZSAqZW52LCBpbnQgY3Nybm8sCiAgICAgICAgIHJl
-dHVybiBSSVNDVl9FWENQX05PTkU7CiAgICAgfQogCi0gICAgaWYgKGVudi0+cHJpdiA9PSBQUlZf
-UyAmJiBnZXRfZmllbGQoZW52LT5tc3RhdHVzLCBNU1RBVFVTX1RWTSkpIHsKKyAgICBpZiAoZW52
-LT5wcml2ID09IFBSVl9TICYmICFyaXNjdl9jcHVfdmlydF9lbmFibGVkKGVudikgJiYgZ2V0X2Zp
-ZWxkKGVudi0+bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CiAgICAgICAgIHJldHVybiBSSVNDVl9F
-WENQX0lMTEVHQUxfSU5TVDsKClRoaXMgbGluZSBzZWVtcyB0b28gbG9uZyAoPiA4MCkuCgpBbmQg
-aHN0YXR1cy5WVFZNIHNob3VsZCBhbHNvIGJlIHRha2VuIGludG8gY29uc2lkZXJhdGlvbi4KClNp
-bWlsYXIgdG8gZm9sbG93aW5nIHdyaXRlX3NhdHAuCgogICAgIH0gZWxzZSB7CiAgICAgICAgICp2
-YWwgPSBlbnYtPnNhdHA7CkBAIC0yNjgzLDcgKzI2ODMsNyBAQCBzdGF0aWMgUklTQ1ZFeGNlcHRp
-b24gd3JpdGVfc2F0cChDUFVSSVNDVlN0YXRlICplbnYsIGludCBjc3JubywKICAgICB9CiAKICAg
-ICBpZiAodm0gJiYgbWFzaykgewotICAgICAgICBpZiAoZW52LT5wcml2ID09IFBSVl9TICYmIGdl
-dF9maWVsZChlbnYtPm1zdGF0dXMsIE1TVEFUVVNfVFZNKSkgeworICAgICAgICBpZiAoZW52LT5w
-cml2ID09IFBSVl9TICYmICFyaXNjdl9jcHVfdmlydF9lbmFibGVkKGVudikgJiYgZ2V0X2ZpZWxk
-KGVudi0+bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CiAgICAgICAgICAgICByZXR1cm4gUklTQ1Zf
-RVhDUF9JTExFR0FMX0lOU1Q7CiAgICAgICAgIH0gZWxzZSB7CiAgICAgICAgICAgICAvKgoKCgoK
-VGhhbmtzIGEgbG90LiBJbiB0aGUgbmV4dCB2ZXJzaW9uLCBJIHdpbGwgZml4IHRoZSBjb2RlIHN0
-eWxlIGlzc3VlIGFuZCBjb25zaWRlciBoc3RhdHVzLlZUVk0uCgoKCgpAQCAtMzA0NywxNCArMzA0
-NywyNCBAQCBzdGF0aWMgUklTQ1ZFeGNlcHRpb24gcmVhZF9oZ2VpcChDUFVSSVNDVlN0YXRlICpl
-bnYsIGludCBjc3JubywKIHN0YXRpYyBSSVNDVkV4Y2VwdGlvbiByZWFkX2hnYXRwKENQVVJJU0NW
-U3RhdGUgKmVudiwgaW50IGNzcm5vLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-dGFyZ2V0X3Vsb25nICp2YWwpCiB7Ci0gICAgKnZhbCA9IGVudi0+aGdhdHA7CisgICAgaWYgKGVu
-di0+cHJpdiA9PSBQUlZfUyAmJiBnZXRfZmllbGQoZW52LT5tc3RhdHVzLCBNU1RBVFVTX1RWTSkp
-IHsKKyAgICAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfSUxMRUdBTF9JTlNUOwoKVGhpcyBjaGVjayB3
-aWxsIGRvIGJlZm9yZSBwcml2aWxlZ2UgY2hlY2sgaW4gcmlzY3ZfY3NycndfY2hlY2suIFNvIGl0
-IHdpbGwgbWFrZSBWUyBtb2RlIGFjY2VzcyB0cmlnZ2VyCgpJTExFR0FMX0lOU1QgZXhjZXB0aW9u
-LCBIb3dldmVyLCBpdCBzaG91bGQgYmUgVklSVFVBTF9JTlNUIGV4Y2VwdGlvbiBpbiB0aGlzIGNh
-c2UuCgpSZWdhcmRzLAoKV2Vpd2VpIExpCgoKCgoKCgpJbiByaXNjdl9jc3JydygpLCByaXNjdl9j
-c3Jyd19jaGVjaygpIGlzIGNhbGxlZCBiZWZvcmUgcmlzY3ZfY3NycndfZG82NCgpLiBTbyBJIHRo
-aW5rIFZJUlRVQUxfSU5TVCB3aWxsIGJlIHRyaWdnZXJlZC4gQ291bGQgeW91IHBsZWFzZSBleHBs
-YWluIHdoeSB0aGlzIGNoZWNrIHdpbGwgZG8gYmVmb3JlIHRoZSBwcml2aWxlZ2UgY2hlY2sgaW4g
-cmlzY3ZfY3NycndfY2hlY2s/IEknbSBuZXcgdG8gUWVtdSBzb3VyY2UgY29kZSBhbmQgYW0gc29y
-cnkgSSBjYW4ndCB1bmRlcnN0YW5kIHRoYXQuCgoKCgorICAgIH0gZWxzZSB7CisgICAgICAgICp2
-YWwgPSBlbnYtPmhnYXRwOworICAgIH0KKwogICAgIHJldHVybiBSSVNDVl9FWENQX05PTkU7CiB9
-CiAKIHN0YXRpYyBSSVNDVkV4Y2VwdGlvbiB3cml0ZV9oZ2F0cChDUFVSSVNDVlN0YXRlICplbnYs
-IGludCBjc3JubywKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0YXJnZXRfdWxv
-bmcgdmFsKQogewotICAgIGVudi0+aGdhdHAgPSB2YWw7CisgICAgaWYgKGVudi0+cHJpdiA9PSBQ
-UlZfUyAmJiBnZXRfZmllbGQoZW52LT5tc3RhdHVzLCBNU1RBVFVTX1RWTSkpIHsKKyAgICAgICAg
-cmV0dXJuIFJJU0NWX0VYQ1BfSUxMRUdBTF9JTlNUOworICAgIH0gZWxzZSB7CisgICAgICAgIGVu
-di0+aGdhdHAgPSB2YWw7CisgICAgfQorCiAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfTk9ORTsKIH0K
-IAoKCgoKClRoYW5rcywKCllp
-------=_Part_3353132_626522633.1678374141821
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: base64
 
-PGJyPgo8YnI+Cjxicj4KPGJsb2NrcXVvdGUgbmFtZT0icmVwbHlDb250ZW50IiBjbGFzcz0iUmVm
-ZXJlbmNlUXVvdGUiIHN0eWxlPSJwYWRkaW5nLWxlZnQ6NXB4O21hcmdpbi1sZWZ0OjVweDtib3Jk
-ZXItbGVmdDojYjZiNmI2IDJweCBzb2xpZDttYXJnaW4tcmlnaHQ6MDsiPgoJLS0tLS1PcmlnaW5h
-bCBNZXNzYWdlcy0tLS0tPGJyPgo8Yj5Gcm9tOjwvYj48c3BhbiBpZD0icmNfZnJvbSI+bGl3ZWl3
-ZWkgJmx0O2xpd2Vpd2VpQGlzY2FzLmFjLmNuJmd0Ozwvc3Bhbj48YnI+CjxiPlNlbnQgVGltZTo8
-L2I+PHNwYW4gaWQ9InJjX3NlbnR0aW1lIj4yMDIzLTAzLTA5IDE1OjQ4OjE3IChUaHVyc2RheSk8
-L3NwYW4+PGJyPgo8Yj5Ubzo8L2I+IGNoZW55aTIwMDBAemp1LmVkdS5jbiwgcWVtdS1kZXZlbEBu
-b25nbnUub3JnPGJyPgo8Yj5DYzo8L2I+ICJQYWxtZXIgRGFiYmVsdCIgJmx0O3BhbG1lckBkYWJi
-ZWx0LmNvbSZndDssICJBbGlzdGFpciBGcmFuY2lzIiAmbHQ7YWxpc3RhaXIuZnJhbmNpc0B3ZGMu
-Y29tJmd0OywgIkJpbiBNZW5nIiAmbHQ7YmluLm1lbmdAd2luZHJpdmVyLmNvbSZndDssICJEYW5p
-ZWwgSGVucmlxdWUgQmFyYm96YSIgJmx0O2RiYXJib3phQHZlbnRhbmFtaWNyby5jb20mZ3Q7LCAi
-TGl1IFpoaXdlaSIgJmx0O3poaXdlaV9saXVAbGludXguYWxpYmFiYS5jb20mZ3Q7LCAib3BlbiBs
-aXN0OlJJU0MtViBUQ0cgQ1BVcyIgJmx0O3FlbXUtcmlzY3ZAbm9uZ251Lm9yZyZndDs8YnI+Cjxi
-PlN1YmplY3Q6PC9iPiBSZTogW1BBVENIXSB0YXJnZXQvcmlzY3YvY3NyLmM6IGZpeCBIIGV4dGVu
-c2lvbiBUVk0gdHJhcDxicj4KPGJyPgoJPHA+CgkJPGJyPgoJPC9wPgoJPGRpdiBjbGFzcz0ibW96
-LWNpdGUtcHJlZml4Ij4KCQlPbiAyMDIzLzMvOCAyMDozNCwgPGEgY2xhc3M9Im1vei10eHQtbGlu
-ay1hYmJyZXZpYXRlZCIgaHJlZj0ibWFpbHRvOmNoZW55aTIwMDBAemp1LmVkdS5jbiI+Y2hlbnlp
-MjAwMEB6anUuZWR1LmNuPC9hPiB3cm90ZTo8YnI+Cgk8L2Rpdj4KCTxibG9ja3F1b3RlIHR5cGU9
-ImNpdGUiIGNpdGU9Im1pZDoyMDIzMDMwODEyMzQxNy4xMjU1NS0xLWNoZW55aTIwMDBAemp1LmVk
-dS5jbiI+CjxwcmUgY2xhc3M9Im1vei1xdW90ZS1wcmUiIHdyYXA9IiI+RnJvbTogWWkgQ2hlbiA8
-YSBjbGFzcz0ibW96LXR4dC1saW5rLXJmYzIzOTZFIiBocmVmPSJtYWlsdG86Y2hlbnlpMjAwMEB6
-anUuZWR1LmNuIj4mbHQ7Y2hlbnlpMjAwMEB6anUuZWR1LmNuJmd0OzwvYT4gVHJhcCBhY2Nlc3Nl
-cyB0byBoZ2F0cCBpZiBNU1RBVFVTX1RWTSBpcyBlbmFibGVkLgpEb24ndCB0cmFwIGFjY2Vzc2Vz
-IHRvIHZzYXRwIGV2ZW4gaWYgTVNUQVRVU19UVk0gaXMgZW5hYmxlZC4KClNpZ25lZC1vZmYtYnk6
-IFlpIENoZW4gPGEgY2xhc3M9Im1vei10eHQtbGluay1yZmMyMzk2RSIgaHJlZj0ibWFpbHRvOmNo
-ZW55aTIwMDBAemp1LmVkdS5jbiI+Jmx0O2NoZW55aTIwMDBAemp1LmVkdS5jbiZndDs8L2E+IC0t
-LQogdGFyZ2V0L3Jpc2N2L2Nzci5jIHwgMTggKysrKysrKysrKysrKystLS0tCiAxIGZpbGUgY2hh
-bmdlZCwgMTQgaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS90YXJn
-ZXQvcmlzY3YvY3NyLmMgYi90YXJnZXQvcmlzY3YvY3NyLmMKaW5kZXggYWI1NjY2My4uMDliYzc4
-MCAxMDA2NDQKLS0tIGEvdGFyZ2V0L3Jpc2N2L2Nzci5jCisrKyBiL3RhcmdldC9yaXNjdi9jc3Iu
-YwpAQCAtMjY1NSw3ICsyNjU1LDcgQEAgc3RhdGljIFJJU0NWRXhjZXB0aW9uIHJlYWRfc2F0cChD
-UFVSSVNDVlN0YXRlICplbnYsIGludCBjc3JubywKICAgICAgICAgcmV0dXJuIFJJU0NWX0VYQ1Bf
-Tk9ORTsKICAgICB9CiAKLSAgICBpZiAoZW52LSZndDtwcml2ID09IFBSVl9TICZhbXA7JmFtcDsg
-Z2V0X2ZpZWxkKGVudi0mZ3Q7bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CisgICAgaWYgKGVudi0m
-Z3Q7cHJpdiA9PSBQUlZfUyAmYW1wOyZhbXA7ICFyaXNjdl9jcHVfdmlydF9lbmFibGVkKGVudikg
-JmFtcDsmYW1wOyBnZXRfZmllbGQoZW52LSZndDttc3RhdHVzLCBNU1RBVFVTX1RWTSkpIHsKICAg
-ICAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfSUxMRUdBTF9JTlNUOzwvcHJlPgoJPC9ibG9ja3F1b3Rl
-PgoJPHA+CgkJVGhpcyBsaW5lIHNlZW1zIHRvbyBsb25nICgmZ3Q7IDgwKS4KCTwvcD4KCTxwPgoJ
-CUFuZCBoc3RhdHVzLlZUVk0gc2hvdWxkIGFsc28gYmUgdGFrZW4gaW50byBjb25zaWRlcmF0aW9u
-LgoJPC9wPgoJPHA+CgkJU2ltaWxhciB0byBmb2xsb3dpbmcgd3JpdGVfc2F0cC4KCTwvcD4KCTxi
-bG9ja3F1b3RlIHR5cGU9ImNpdGUiIGNpdGU9Im1pZDoyMDIzMDMwODEyMzQxNy4xMjU1NS0xLWNo
-ZW55aTIwMDBAemp1LmVkdS5jbiI+CjxwcmUgY2xhc3M9Im1vei1xdW90ZS1wcmUiIHdyYXA9IiI+
-ICAgICB9IGVsc2UgewogICAgICAgICAqdmFsID0gZW52LSZndDtzYXRwOwpAQCAtMjY4Myw3ICsy
-NjgzLDcgQEAgc3RhdGljIFJJU0NWRXhjZXB0aW9uIHdyaXRlX3NhdHAoQ1BVUklTQ1ZTdGF0ZSAq
-ZW52LCBpbnQgY3Nybm8sCiAgICAgfQogCiAgICAgaWYgKHZtICZhbXA7JmFtcDsgbWFzaykgewot
-ICAgICAgICBpZiAoZW52LSZndDtwcml2ID09IFBSVl9TICZhbXA7JmFtcDsgZ2V0X2ZpZWxkKGVu
-di0mZ3Q7bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CisgICAgICAgIGlmIChlbnYtJmd0O3ByaXYg
-PT0gUFJWX1MgJmFtcDsmYW1wOyAhcmlzY3ZfY3B1X3ZpcnRfZW5hYmxlZChlbnYpICZhbXA7JmFt
-cDsgZ2V0X2ZpZWxkKGVudi0mZ3Q7bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CiAgICAgICAgICAg
-ICByZXR1cm4gUklTQ1ZfRVhDUF9JTExFR0FMX0lOU1Q7CiAgICAgICAgIH0gZWxzZSB7CiAgICAg
-ICAgICAgICAvKjwvcHJlPgoJPC9ibG9ja3F1b3RlPgo8L2Jsb2NrcXVvdGU+CjxwPgoJPGJyPgo8
-L3A+CjxwPgoJVGhhbmtzIGEgbG90LiBJbiB0aGUgbmV4dCB2ZXJzaW9uLCBJIHdpbGwgZml4IHRo
-ZSBjb2RlIHN0eWxlIGlzc3VlIGFuZCBjb25zaWRlciBoc3RhdHVzLlZUVk0uCjwvcD4KPHA+Cgk8
-YnI+CjwvcD4KPGJsb2NrcXVvdGUgbmFtZT0icmVwbHlDb250ZW50IiBjbGFzcz0iUmVmZXJlbmNl
-UXVvdGUiIHN0eWxlPSJwYWRkaW5nLWxlZnQ6NXB4O21hcmdpbi1sZWZ0OjVweDtib3JkZXItbGVm
-dDojYjZiNmI2IDJweCBzb2xpZDttYXJnaW4tcmlnaHQ6MDsiPgoJPGJsb2NrcXVvdGUgdHlwZT0i
-Y2l0ZSIgY2l0ZT0ibWlkOjIwMjMwMzA4MTIzNDE3LjEyNTU1LTEtY2hlbnlpMjAwMEB6anUuZWR1
-LmNuIj4KPHByZSBjbGFzcz0ibW96LXF1b3RlLXByZSIgd3JhcD0iIj5AQCAtMzA0NywxNCArMzA0
-NywyNCBAQCBzdGF0aWMgUklTQ1ZFeGNlcHRpb24gcmVhZF9oZ2VpcChDUFVSSVNDVlN0YXRlICpl
-bnYsIGludCBjc3JubywKIHN0YXRpYyBSSVNDVkV4Y2VwdGlvbiByZWFkX2hnYXRwKENQVVJJU0NW
-U3RhdGUgKmVudiwgaW50IGNzcm5vLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-dGFyZ2V0X3Vsb25nICp2YWwpCiB7Ci0gICAgKnZhbCA9IGVudi0mZ3Q7aGdhdHA7CisgICAgaWYg
-KGVudi0mZ3Q7cHJpdiA9PSBQUlZfUyAmYW1wOyZhbXA7IGdldF9maWVsZChlbnYtJmd0O21zdGF0
-dXMsIE1TVEFUVVNfVFZNKSkgeworICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9JTExFR0FMX0lO
-U1Q7PC9wcmU+Cgk8L2Jsb2NrcXVvdGU+Cgk8cD4KCQlUaGlzIGNoZWNrIHdpbGwgZG8gYmVmb3Jl
-IHByaXZpbGVnZSBjaGVjayBpbiA8c3BhbiBzdHlsZT0iY29sb3I6IzAwMDAwMDsiPnJpc2N2X2Nz
-cnJ3X2NoZWNrPC9zcGFuPi4gU28gaXQgd2lsbCBtYWtlIFZTIG1vZGUKICAgICAgYWNjZXNzIHRy
-aWdnZXIKCTwvcD4KCTxwPgoJCUlMTEVHQUxfSU5TVCBleGNlcHRpb24sIEhvd2V2ZXIsIGl0IHNo
-b3VsZCBiZSBWSVJUVUFMX0lOU1QKICAgICAgZXhjZXB0aW9uIGluIHRoaXMgY2FzZS4KCTwvcD4K
-CTxwPgoJCVJlZ2FyZHMsCgk8L3A+Cgk8cD4KCQlXZWl3ZWkgTGkKCTwvcD4KCTxwPgoJCTxicj4K
-CTwvcD4KPC9ibG9ja3F1b3RlPgo8cD4KCTxicj4KPC9wPgo8cD4KCUluIHJpc2N2X2NzcnJ3KCks
-IHJpc2N2X2NzcnJ3X2NoZWNrKCkgaXMgY2FsbGVkIGJlZm9yZSByaXNjdl9jc3Jyd19kbzY0KCku
-IFNvIEkgdGhpbmsgVklSVFVBTF9JTlNUIHdpbGwgYmUgdHJpZ2dlcmVkLiBDb3VsZCB5b3UgcGxl
-YXNlIGV4cGxhaW4gd2h5IHRoaXMgY2hlY2sgd2lsbCBkbyBiZWZvcmUgdGhlIHByaXZpbGVnZSBj
-aGVjayBpbiByaXNjdl9jc3Jyd19jaGVjaz8gSSdtIG5ldyB0byBRZW11IHNvdXJjZSBjb2RlIGFu
-ZCBhbSBzb3JyeSBJIGNhbid0IHVuZGVyc3RhbmQgdGhhdC48c3BhbiBzdHlsZT0iZm9udC1mYW1p
-bHk6JnF1b3Q7U291cmNlIEhhbiBTYW5zIFNDJnF1b3Q7O2ZvbnQtc2l6ZTptZWRpdW07d2hpdGUt
-c3BhY2U6bm9ybWFsOyI+PC9zcGFuPgo8L3A+CjxwPgoJPGJyPgo8L3A+CjxibG9ja3F1b3RlIG5h
-bWU9InJlcGx5Q29udGVudCIgY2xhc3M9IlJlZmVyZW5jZVF1b3RlIiBzdHlsZT0icGFkZGluZy1s
-ZWZ0OjVweDttYXJnaW4tbGVmdDo1cHg7Ym9yZGVyLWxlZnQ6I2I2YjZiNiAycHggc29saWQ7bWFy
-Z2luLXJpZ2h0OjA7Ij4KCTxibG9ja3F1b3RlIHR5cGU9ImNpdGUiIGNpdGU9Im1pZDoyMDIzMDMw
-ODEyMzQxNy4xMjU1NS0xLWNoZW55aTIwMDBAemp1LmVkdS5jbiI+CjxwcmUgY2xhc3M9Im1vei1x
-dW90ZS1wcmUiIHdyYXA9IiI+KyAgICB9IGVsc2UgeworICAgICAgICAqdmFsID0gZW52LSZndDto
-Z2F0cDsKKyAgICB9CisKICAgICByZXR1cm4gUklTQ1ZfRVhDUF9OT05FOwogfQogCiBzdGF0aWMg
-UklTQ1ZFeGNlcHRpb24gd3JpdGVfaGdhdHAoQ1BVUklTQ1ZTdGF0ZSAqZW52LCBpbnQgY3Nybm8s
-CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdGFyZ2V0X3Vsb25nIHZhbCkKIHsK
-LSAgICBlbnYtJmd0O2hnYXRwID0gdmFsOworICAgIGlmIChlbnYtJmd0O3ByaXYgPT0gUFJWX1Mg
-JmFtcDsmYW1wOyBnZXRfZmllbGQoZW52LSZndDttc3RhdHVzLCBNU1RBVFVTX1RWTSkpIHsKKyAg
-ICAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfSUxMRUdBTF9JTlNUOworICAgIH0gZWxzZSB7CisgICAg
-ICAgIGVudi0mZ3Q7aGdhdHAgPSB2YWw7CisgICAgfQorCiAgICAgcmV0dXJuIFJJU0NWX0VYQ1Bf
-Tk9ORTsKIH0KIAo8L3ByZT4KCTwvYmxvY2txdW90ZT4KPC9ibG9ja3F1b3RlPgo8cD4KCTxicj4K
-PC9wPgo8cD4KCVRoYW5rcywKPC9wPgo8cD4KCVlpCjwvcD4=
-------=_Part_3353132_626522633.1678374141821--
+On 3/9/23 03:11, LIU Zhiwei wrote:
+> 
+> On 2023/2/23 2:51, Daniel Henrique Barboza wrote:
+>> At this moment, and apparently since ever, we have no way of enabling
+>> RISCV_FEATURE_MISA. This means that all the code from write_misa(), all
+>> the nuts and bolts that handles how to properly write this CSR, has
+>> always been a no-op as well because write_misa() will always exit
+>> earlier.
+>>
+>> This seems to be benign in the majority of cases. Booting an Ubuntu
+>> 'virt' guest and logging all the calls to 'write_misa' shows that no
+>> writes to MISA CSR was attempted. Writing MISA, i.e. enabling/disabling
+>> RISC-V extensions after the machine is powered on, seems to be a niche
+>> use.
+>>
+>> After discussions in the mailing list, most notably in [1], we reached
+>> the consensus that this code is not suited to be exposed to users
+>> because it's not well tested, but at the same time removing it is a bit
+>> extreme because we would like to fix it, and it's easier to do so with
+>> the code available to use instead of fetching it from git log.
+>>
+>> The approach taken here is to get rid of RISCV_FEATURE_MISA altogether
+>> and use a new experimental flag called x-misa-w. The default value is
+>> false, meaning that we're keeping the existing behavior of doing nothing
+>> if a write_misa() is attempted. As with any existing experimental flag,
+>> x-misa-w is also a temporary flag that we need to remove once we fix
+>> write_misa().
+>>
+>> [1] https://lists.gnu.org/archive/html/qemu-devel/2023-02/msg05092.html
+>>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/cpu.c | 6 ++++++
+>>   target/riscv/cpu.h | 2 +-
+>>   target/riscv/csr.c | 2 +-
+>>   3 files changed, 8 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index 93b52b826c..1d637b1acd 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -1210,6 +1210,12 @@ static Property riscv_cpu_properties[] = {
+>>       DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false),
+>>       DEFINE_PROP_BOOL("rvv_ma_all_1s", RISCVCPU, cfg.rvv_ma_all_1s, false),
+>> +
+>> +    /*
+>> +     * write_misa() is marked as experimental for now so mark
+>> +     * it with -x and default to 'false'.
+>> +     */
+>> +    DEFINE_PROP_BOOL("x-misa-w", RISCVCPU, cfg.misa_w, false),
+> 
+> Just a question  I got when I reviewed another patch set:
+> 
+> Why put x-misa-w to riscv_cpu_properties instead of riscv_cpu_extensions?
 
+I didn't think too much about it to be honest. I copied what was being done
+with the now old RISCV_FEATURE_DEBUG. It made sense to me because x-misa-w
+isn't a RISC-V extension but a property of our model.
+
+I don't oppose moving it to a better place. Just be aware that this a property
+that we're planning to eventually remove.
+
+
+Thanks,
+
+
+Daniel
+
+
+> 
+> I think this property should have a fixed value for a named cpu(such as sifive_e). Therefore IMHO, putting x-misa-w into riscv_cpu_extensions is more proper. At the same time,  the debug, rvv_ta_all_1s, rvv_ma_all_1s, resetvec properties should be moved to riscv_cpu_extentions. I am not sure why we should give the marchid/mipid/mvendorid option for named cpus. Maybe @Frank knows.
+> 
+> Have I missed something?
+> 
+> Zhiwei
+> 
+>>       DEFINE_PROP_END_OF_LIST(),
+>>   };
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index 215423499e..9d3304bcda 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -89,7 +89,6 @@ enum {
+>>       RISCV_FEATURE_MMU,
+>>       RISCV_FEATURE_PMP,
+>>       RISCV_FEATURE_EPMP,
+>> -    RISCV_FEATURE_MISA,
+>>       RISCV_FEATURE_DEBUG
+>>   };
+>> @@ -498,6 +497,7 @@ struct RISCVCPUConfig {
+>>       bool pmp;
+>>       bool epmp;
+>>       bool debug;
+>> +    bool misa_w;
+>>       bool short_isa_string;
+>>   };
+>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>> index e149b453da..3cb8d2ffad 100644
+>> --- a/target/riscv/csr.c
+>> +++ b/target/riscv/csr.c
+>> @@ -1329,7 +1329,7 @@ static RISCVException read_misa(CPURISCVState *env, int csrno,
+>>   static RISCVException write_misa(CPURISCVState *env, int csrno,
+>>                                    target_ulong val)
+>>   {
+>> -    if (!riscv_feature(env, RISCV_FEATURE_MISA)) {
+>> +    if (!riscv_cpu_cfg(env)->misa_w) {
+>>           /* drop write to misa */
+>>           return RISCV_EXCP_NONE;
+>>       }
 
