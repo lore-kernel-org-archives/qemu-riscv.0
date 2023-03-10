@@ -1,52 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1paYuA-0001oR-7i
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Mar 2023 04:19:14 -0500
+	id 1paa4h-0005CO-5W
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Mar 2023 05:34:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1paYu8-0001ni-09; Fri, 10 Mar 2023 04:19:12 -0500
-Received: from out30-111.freemail.mail.aliyun.com ([115.124.30.111])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1paYu5-0004GJ-4w; Fri, 10 Mar 2023 04:19:11 -0500
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0VdWqkPa_1678439937; 
-Received: from 30.221.99.193(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VdWqkPa_1678439937) by smtp.aliyun-inc.com;
- Fri, 10 Mar 2023 17:18:58 +0800
-Content-Type: multipart/alternative;
- boundary="------------lYG1tp08znSCecnfBehMxMjN"
-Message-ID: <c78fd321-d287-f55e-fecf-1823367ea485@linux.alibaba.com>
-Date: Fri, 10 Mar 2023 17:18:56 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
-Content-Language: en-US
-To: CHEN Yi <chenyi2000@zju.edu.cn>, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ (Exim 4.90_1) (envelope-from <chenyi2000@zju.edu.cn>)
+ id 1paa4X-00059u-PJ; Fri, 10 Mar 2023 05:34:02 -0500
+Received: from zg8tndyumtaxlji0oc4xnzya.icoremail.net ([46.101.248.176])
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <chenyi2000@zju.edu.cn>)
+ id 1paa4U-00050Y-RP; Fri, 10 Mar 2023 05:34:01 -0500
+Received: by ajax-webmail-mail-app3 (Coremail) ; Fri, 10 Mar 2023 18:33:50
+ +0800 (GMT+08:00)
+X-Originating-IP: [112.10.177.110]
+Date: Fri, 10 Mar 2023 18:33:50 +0800 (GMT+08:00)
+X-CM-HeaderCharset: UTF-8
+From: "CHEN Yi" <chenyi2000@zju.edu.cn>
+To: "LIU Zhiwei" <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: "Palmer Dabbelt" <palmer@dabbelt.com>, 
+ "Alistair Francis" <alistair.francis@wdc.com>, 
+ "Bin Meng" <bin.meng@windriver.com>, "Weiwei Li" <liweiwei@iscas.ac.cn>, 
+ "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>, 
  "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Subject: Re: Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.13 build 20210104(ab8c30b6)
+ Copyright (c) 2002-2023 www.mailtech.cn zju.edu.cn
+In-Reply-To: <c78fd321-d287-f55e-fecf-1823367ea485@linux.alibaba.com>
 References: <20230308123417.12555-1-chenyi2000@zju.edu.cn>
  <087472fc-94f1-165d-9776-8e12d60be09d@linux.alibaba.com>
  <33d93933.8ba4c.186cac784e7.Coremail.chenyi2000@zju.edu.cn>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <33d93933.8ba4c.186cac784e7.Coremail.chenyi2000@zju.edu.cn>
-Received-SPF: pass client-ip=115.124.30.111;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-111.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- HTML_MESSAGE=0.001, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ <c78fd321-d287-f55e-fecf-1823367ea485@linux.alibaba.com>
+Content-Type: multipart/alternative; 
+ boundary="----=_Part_3364150_18184957.1678444430022"
+MIME-Version: 1.0
+Message-ID: <45765f42.8bdcd.186cb1582c6.Coremail.chenyi2000@zju.edu.cn>
+X-Coremail-Locale: en_US
+X-CM-TRANSID: cC_KCgCXnQyPBwtk6KEZDg--.31768W
+X-CM-SenderInfo: xfkh05blsqiio62m3hxhgxhubq/1tbiAQQKClZdwzOE2AAAsi
+X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
+ CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
+ daVFxhVjvjDU=
+Received-SPF: pass client-ip=46.101.248.176;
+ envelope-from=chenyi2000@zju.edu.cn;
+ helo=zg8tndyumtaxlji0oc4xnzya.icoremail.net
+X-Spam_score_int: 14
+X-Spam_score: 1.4
+X-Spam_bar: +
+X-Spam_report: (1.4 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
+ RCVD_IN_MSPIKE_H2=-0.001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -59,264 +61,221 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Mar 2023 09:19:12 -0000
+X-List-Received-Date: Fri, 10 Mar 2023 10:34:07 -0000
 
-This is a multi-part message in MIME format.
---------------lYG1tp08znSCecnfBehMxMjN
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+------=_Part_3364150_18184957.1678444430022
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: base64
 
-
-On 2023/3/10 17:08, CHEN Yi wrote:
->
->     -----Original Messages-----
->     *From:*"LIU Zhiwei" <zhiwei_liu@linux.alibaba.com>
->     *Sent Time:*2023-03-10 10:12:10 (Friday)
->     *To:* chenyi2000@zju.edu.cn, qemu-devel@nongnu.org
->     *Cc:* "Palmer Dabbelt" <palmer@dabbelt.com>, "Alistair Francis"
->     <alistair.francis@wdc.com>, "Bin Meng" <bin.meng@windriver.com>,
->     "Weiwei Li" <liweiwei@iscas.ac.cn>, "Daniel Henrique Barboza"
->     <dbarboza@ventanamicro.com>, "open list:RISC-V TCG CPUs"
->     <qemu-riscv@nongnu.org>
->     *Subject:* Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
->
->
->     On 2023/3/8 20:34, chenyi2000@zju.edu.cn wrote:
->>     From: Yi Chen<chenyi2000@zju.edu.cn>  Trap accesses to hgatp if MSTATUS_TVM is enabled.
->>     Don't trap accesses to vsatp even if MSTATUS_TVM is enabled.
->
->     By the way, do you know why mstatus_tvm and hstatus_tvm are needed?
->
->     The specification said,
->
->     The TVM mechanism improves virtualization efficiency by permitting guest operating systems to
->     execute in S-mode, rather than classically virtualizing them in U-mode. This approach obviates
->     the need to trap accesses to most S-mode CSRs.
->
->     I don't know how the tvm field obviates the need to trap accesses
->     to most S-mode CSRs.
->
->     Thanks,
->     Zhiwei
->
-> When VMs are in U-mode, their accesses to S-mode CSR registers must be 
-> emulated. Otherwise, the behavior of the host OS will be affected. But 
-> I guess since TVM helps insert another stage of address translation 
-> below that controlled by the OS, it enables VMs to run in S-mode, 
-> which means that VMs can directly use most S-mode CSR registers 
-> instead of emulated ones.
->
-If the guest running in S-mode, the other smode CSR accesses may break 
-the host OS.
-
-Zhiwei
-
->
-> Best,
->
-> Yi
->
->
->
->>     Signed-off-by: Yi Chen<chenyi2000@zju.edu.cn>  ---
->>       target/riscv/csr.c | 18 ++++++++++++++----
->>       1 file changed, 14 insertions(+), 4 deletions(-)
->>
->>     diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->>     index ab56663..09bc780 100644
->>     --- a/target/riscv/csr.c
->>     +++ b/target/riscv/csr.c
->>     @@ -2655,7 +2655,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
->>               return RISCV_EXCP_NONE;
->>           }
->>       
->>     -    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
->>     +    if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) && get_field(env->mstatus, MSTATUS_TVM)) {
->>               return RISCV_EXCP_ILLEGAL_INST;
->>           } else {
->>               *val = env->satp;
->>     @@ -2683,7 +2683,7 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
->>           }
->>       
->>           if (vm && mask) {
->>     -        if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
->>     +        if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) && get_field(env->mstatus, MSTATUS_TVM)) {
->>                   return RISCV_EXCP_ILLEGAL_INST;
->>               } else {
->>                   /*
->>     @@ -3047,14 +3047,24 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
->>       static RISCVException read_hgatp(CPURISCVState *env, int csrno,
->>                                        target_ulong *val)
->>       {
->>     -    *val = env->hgatp;
->>     +    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
->>     +        return RISCV_EXCP_ILLEGAL_INST;
->>     +    } else {
->>     +        *val = env->hgatp;
->>     +    }
->>     +
->>           return RISCV_EXCP_NONE;
->>       }
->>       
->>       static RISCVException write_hgatp(CPURISCVState *env, int csrno,
->>                                         target_ulong val)
->>       {
->>     -    env->hgatp = val;
->>     +    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
->>     +        return RISCV_EXCP_ILLEGAL_INST;
->>     +    } else {
->>     +        env->hgatp = val;
->>     +    }
->>     +
->>           return RISCV_EXCP_NONE;
->>       }
->
---------------lYG1tp08znSCecnfBehMxMjN
+CgoKLS0tLS1PcmlnaW5hbCBNZXNzYWdlcy0tLS0tCkZyb206IkxJVSBaaGl3ZWkiIDx6aGl3ZWlf
+bGl1QGxpbnV4LmFsaWJhYmEuY29tPgpTZW50IFRpbWU6MjAyMy0wMy0xMCAxNzoxODo1NiAoRnJp
+ZGF5KQpUbzogIkNIRU4gWWkiIDxjaGVueWkyMDAwQHpqdS5lZHUuY24+LCBxZW11LWRldmVsQG5v
+bmdudS5vcmcKQ2M6ICJQYWxtZXIgRGFiYmVsdCIgPHBhbG1lckBkYWJiZWx0LmNvbT4sICJBbGlz
+dGFpciBGcmFuY2lzIiA8YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tPiwgIkJpbiBNZW5nIiA8Ymlu
+Lm1lbmdAd2luZHJpdmVyLmNvbT4sICJXZWl3ZWkgTGkiIDxsaXdlaXdlaUBpc2Nhcy5hYy5jbj4s
+ICJEYW5pZWwgSGVucmlxdWUgQmFyYm96YSIgPGRiYXJib3phQHZlbnRhbmFtaWNyby5jb20+LCAi
+b3BlbiBsaXN0OlJJU0MtViBUQ0cgQ1BVcyIgPHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz4KU3ViamVj
+dDogUmU6IFtQQVRDSF0gdGFyZ2V0L3Jpc2N2L2Nzci5jOiBmaXggSCBleHRlbnNpb24gVFZNIHRy
+YXAKCgoKCgoKT24gMjAyMy8zLzEwIDE3OjA4LCBDSEVOIFlpIHdyb3RlOgoKLS0tLS1PcmlnaW5h
+bCBNZXNzYWdlcy0tLS0tCkZyb206IkxJVSBaaGl3ZWkiIDx6aGl3ZWlfbGl1QGxpbnV4LmFsaWJh
+YmEuY29tPgpTZW50IFRpbWU6MjAyMy0wMy0xMCAxMDoxMjoxMCAoRnJpZGF5KQpUbzpjaGVueWky
+MDAwQHpqdS5lZHUuY24sIHFlbXUtZGV2ZWxAbm9uZ251Lm9yZwpDYzogIlBhbG1lciBEYWJiZWx0
+IiA8cGFsbWVyQGRhYmJlbHQuY29tPiwgIkFsaXN0YWlyIEZyYW5jaXMiIDxhbGlzdGFpci5mcmFu
+Y2lzQHdkYy5jb20+LCAiQmluIE1lbmciIDxiaW4ubWVuZ0B3aW5kcml2ZXIuY29tPiwgIldlaXdl
+aSBMaSIgPGxpd2Vpd2VpQGlzY2FzLmFjLmNuPiwgIkRhbmllbCBIZW5yaXF1ZSBCYXJib3phIiA8
+ZGJhcmJvemFAdmVudGFuYW1pY3JvLmNvbT4sICJvcGVuIGxpc3Q6UklTQy1WIFRDRyBDUFVzIiA8
+cWVtdS1yaXNjdkBub25nbnUub3JnPgpTdWJqZWN0OiBSZTogW1BBVENIXSB0YXJnZXQvcmlzY3Yv
+Y3NyLmM6IGZpeCBIIGV4dGVuc2lvbiBUVk0gdHJhcAoKCgoKCgpPbiAyMDIzLzMvOCAyMDozNCwg
+Y2hlbnlpMjAwMEB6anUuZWR1LmNuIHdyb3RlOgoKRnJvbTogWWkgQ2hlbiA8Y2hlbnlpMjAwMEB6
+anUuZWR1LmNuPiBUcmFwIGFjY2Vzc2VzIHRvIGhnYXRwIGlmIE1TVEFUVVNfVFZNIGlzIGVuYWJs
+ZWQuCkRvbid0IHRyYXAgYWNjZXNzZXMgdG8gdnNhdHAgZXZlbiBpZiBNU1RBVFVTX1RWTSBpcyBl
+bmFibGVkLgoKQnkgdGhlIHdheSwgZG8geW91IGtub3cgd2h5IG1zdGF0dXNfdHZtIGFuZCBoc3Rh
+dHVzX3R2bSBhcmUgbmVlZGVkPwoKVGhlIHNwZWNpZmljYXRpb24gc2FpZCwKClRoZSBUVk0gbWVj
+aGFuaXNtIGltcHJvdmVzIHZpcnR1YWxpemF0aW9uIGVmZmljaWVuY3kgYnkgcGVybWl0dGluZyBn
+dWVzdCBvcGVyYXRpbmcgc3lzdGVtcyB0bwpleGVjdXRlIGluIFMtbW9kZSwgcmF0aGVyIHRoYW4g
+Y2xhc3NpY2FsbHkgdmlydHVhbGl6aW5nIHRoZW0gaW4gVS1tb2RlLiBUaGlzIGFwcHJvYWNoIG9i
+dmlhdGVzCnRoZSBuZWVkIHRvIHRyYXAgYWNjZXNzZXMgdG8gbW9zdCBTLW1vZGUgQ1NScy4KCgpJ
+IGRvbid0IGtub3cgaG93IHRoZSB0dm0gZmllbGQgb2J2aWF0ZXMgdGhlIG5lZWQgdG8gdHJhcCBh
+Y2Nlc3NlcyB0byBtb3N0IFMtbW9kZSBDU1JzLgoKVGhhbmtzLApaaGl3ZWkKCgoKCldoZW4gVk1z
+IGFyZSBpbiBVLW1vZGUsIHRoZWlyIGFjY2Vzc2VzIHRvIFMtbW9kZSBDU1IgcmVnaXN0ZXJzIG11
+c3QgYmUgZW11bGF0ZWQuIE90aGVyd2lzZSwgdGhlIGJlaGF2aW9yIG9mIHRoZSBob3N0IE9TIHdp
+bGwgYmUgYWZmZWN0ZWQuIEJ1dCBJIGd1ZXNzIHNpbmNlIFRWTSBoZWxwcyBpbnNlcnQgYW5vdGhl
+ciBzdGFnZSBvZiBhZGRyZXNzIHRyYW5zbGF0aW9uIGJlbG93IHRoYXQgY29udHJvbGxlZCBieSB0
+aGUgT1MsIGl0IGVuYWJsZXMgVk1zIHRvIHJ1biBpbiBTLW1vZGUsIHdoaWNoIG1lYW5zIHRoYXQg
+Vk1zIGNhbiBkaXJlY3RseSB1c2UgbW9zdCBTLW1vZGUgQ1NSIHJlZ2lzdGVycyBpbnN0ZWFkIG9m
+IGVtdWxhdGVkIG9uZXMuCgpJZiB0aGUgZ3Vlc3QgcnVubmluZyBpbiBTLW1vZGUsIHRoZSBvdGhl
+ciBzbW9kZSBDU1IgYWNjZXNzZXMgbWF5IGJyZWFrIHRoZSBob3N0IE9TLiAKClpoaXdlaQoKCgoK
+SSBndWVzcyBoeXBlcnZpc29ycyBjYW4gYmUgKHBhcnRpYWxseSkgcHV0IGluIE0tbW9kZS4gRG8g
+eW91IGhhdmUgYW55IGV4YW1wbGUgd2hlcmUgYWNjZXNzIHRvIGEgc3BlY2lmaWMgQ1NSIGhhcyB0
+byBiZSB0cmFwcGVkPwoKCgoKQmVzdCwKCllpCgoKCgpCZXN0LAoKWWkKCgoKCgoKClNpZ25lZC1v
+ZmYtYnk6IFlpIENoZW4gPGNoZW55aTIwMDBAemp1LmVkdS5jbj4gLS0tCiB0YXJnZXQvcmlzY3Yv
+Y3NyLmMgfCAxOCArKysrKysrKysrKysrKy0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAxNCBpbnNlcnRp
+b25zKCspLCA0IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3RhcmdldC9yaXNjdi9jc3IuYyBi
+L3RhcmdldC9yaXNjdi9jc3IuYwppbmRleCBhYjU2NjYzLi4wOWJjNzgwIDEwMDY0NAotLS0gYS90
+YXJnZXQvcmlzY3YvY3NyLmMKKysrIGIvdGFyZ2V0L3Jpc2N2L2Nzci5jCkBAIC0yNjU1LDcgKzI2
+NTUsNyBAQCBzdGF0aWMgUklTQ1ZFeGNlcHRpb24gcmVhZF9zYXRwKENQVVJJU0NWU3RhdGUgKmVu
+diwgaW50IGNzcm5vLAogICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9OT05FOwogICAgIH0KIAot
+ICAgIGlmIChlbnYtPnByaXYgPT0gUFJWX1MgJiYgZ2V0X2ZpZWxkKGVudi0+bXN0YXR1cywgTVNU
+QVRVU19UVk0pKSB7CisgICAgaWYgKGVudi0+cHJpdiA9PSBQUlZfUyAmJiAhcmlzY3ZfY3B1X3Zp
+cnRfZW5hYmxlZChlbnYpICYmIGdldF9maWVsZChlbnYtPm1zdGF0dXMsIE1TVEFUVVNfVFZNKSkg
+ewogICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9JTExFR0FMX0lOU1Q7CiAgICAgfSBlbHNlIHsK
+ICAgICAgICAgKnZhbCA9IGVudi0+c2F0cDsKQEAgLTI2ODMsNyArMjY4Myw3IEBAIHN0YXRpYyBS
+SVNDVkV4Y2VwdGlvbiB3cml0ZV9zYXRwKENQVVJJU0NWU3RhdGUgKmVudiwgaW50IGNzcm5vLAog
+ICAgIH0KIAogICAgIGlmICh2bSAmJiBtYXNrKSB7Ci0gICAgICAgIGlmIChlbnYtPnByaXYgPT0g
+UFJWX1MgJiYgZ2V0X2ZpZWxkKGVudi0+bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CisgICAgICAg
+IGlmIChlbnYtPnByaXYgPT0gUFJWX1MgJiYgIXJpc2N2X2NwdV92aXJ0X2VuYWJsZWQoZW52KSAm
+JiBnZXRfZmllbGQoZW52LT5tc3RhdHVzLCBNU1RBVFVTX1RWTSkpIHsKICAgICAgICAgICAgIHJl
+dHVybiBSSVNDVl9FWENQX0lMTEVHQUxfSU5TVDsKICAgICAgICAgfSBlbHNlIHsKICAgICAgICAg
+ICAgIC8qCkBAIC0zMDQ3LDE0ICszMDQ3LDI0IEBAIHN0YXRpYyBSSVNDVkV4Y2VwdGlvbiByZWFk
+X2hnZWlwKENQVVJJU0NWU3RhdGUgKmVudiwgaW50IGNzcm5vLAogc3RhdGljIFJJU0NWRXhjZXB0
+aW9uIHJlYWRfaGdhdHAoQ1BVUklTQ1ZTdGF0ZSAqZW52LCBpbnQgY3Nybm8sCiAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICB0YXJnZXRfdWxvbmcgKnZhbCkKIHsKLSAgICAqdmFsID0g
+ZW52LT5oZ2F0cDsKKyAgICBpZiAoZW52LT5wcml2ID09IFBSVl9TICYmIGdldF9maWVsZChlbnYt
+Pm1zdGF0dXMsIE1TVEFUVVNfVFZNKSkgeworICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9JTExF
+R0FMX0lOU1Q7CisgICAgfSBlbHNlIHsKKyAgICAgICAgKnZhbCA9IGVudi0+aGdhdHA7CisgICAg
+fQorCiAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfTk9ORTsKIH0KIAogc3RhdGljIFJJU0NWRXhjZXB0
+aW9uIHdyaXRlX2hnYXRwKENQVVJJU0NWU3RhdGUgKmVudiwgaW50IGNzcm5vLAogICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHRhcmdldF91bG9uZyB2YWwpCiB7Ci0gICAgZW52LT5o
+Z2F0cCA9IHZhbDsKKyAgICBpZiAoZW52LT5wcml2ID09IFBSVl9TICYmIGdldF9maWVsZChlbnYt
+Pm1zdGF0dXMsIE1TVEFUVVNfVFZNKSkgeworICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9JTExF
+R0FMX0lOU1Q7CisgICAgfSBlbHNlIHsKKyAgICAgICAgZW52LT5oZ2F0cCA9IHZhbDsKKyAgICB9
+CisKICAgICByZXR1cm4gUklTQ1ZfRVhDUF9OT05FOwogfSA=
+------=_Part_3364150_18184957.1678444430022
 Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: base64
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2023/3/10 17:08, CHEN Yi wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:33d93933.8ba4c.186cac784e7.Coremail.chenyi2000@zju.edu.cn">
-      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-      <blockquote name="replyContent" class="ReferenceQuote"
-        style="padding-left:5px;margin-left:5px;border-left:#b6b6b6 2px
-        solid;margin-right:0;"> -----Original Messages-----<br>
-        <b>From:</b><span id="rc_from">"LIU Zhiwei"
-          <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@linux.alibaba.com">&lt;zhiwei_liu@linux.alibaba.com&gt;</a></span><br>
-        <b>Sent Time:</b><span id="rc_senttime">2023-03-10 10:12:10
-          (Friday)</span><br>
-        <b>To:</b> <a class="moz-txt-link-abbreviated" href="mailto:chenyi2000@zju.edu.cn">chenyi2000@zju.edu.cn</a>, <a class="moz-txt-link-abbreviated" href="mailto:qemu-devel@nongnu.org">qemu-devel@nongnu.org</a><br>
-        <b>Cc:</b> "Palmer Dabbelt" <a class="moz-txt-link-rfc2396E" href="mailto:palmer@dabbelt.com">&lt;palmer@dabbelt.com&gt;</a>,
-        "Alistair Francis" <a class="moz-txt-link-rfc2396E" href="mailto:alistair.francis@wdc.com">&lt;alistair.francis@wdc.com&gt;</a>, "Bin Meng"
-        <a class="moz-txt-link-rfc2396E" href="mailto:bin.meng@windriver.com">&lt;bin.meng@windriver.com&gt;</a>, "Weiwei Li"
-        <a class="moz-txt-link-rfc2396E" href="mailto:liweiwei@iscas.ac.cn">&lt;liweiwei@iscas.ac.cn&gt;</a>, "Daniel Henrique Barboza"
-        <a class="moz-txt-link-rfc2396E" href="mailto:dbarboza@ventanamicro.com">&lt;dbarboza@ventanamicro.com&gt;</a>, "open list:RISC-V TCG CPUs"
-        <a class="moz-txt-link-rfc2396E" href="mailto:qemu-riscv@nongnu.org">&lt;qemu-riscv@nongnu.org&gt;</a><br>
-        <b>Subject:</b> Re: [PATCH] target/riscv/csr.c: fix H extension
-        TVM trap<br>
-        <br>
-        <p> <br>
-        </p>
-        <div class="moz-cite-prefix"> On 2023/3/8 20:34, <a
-            class="moz-txt-link-abbreviated moz-txt-link-freetext"
-            href="mailto:chenyi2000@zju.edu.cn" moz-do-not-send="true">chenyi2000@zju.edu.cn</a>
-          wrote:<br>
-        </div>
-        <blockquote type="cite"
-          cite="mid:20230308123417.12555-1-chenyi2000@zju.edu.cn">
-          <pre class="moz-quote-pre" wrap="">From: Yi Chen <a class="moz-txt-link-rfc2396E" href="mailto:chenyi2000@zju.edu.cn" moz-do-not-send="true">&lt;chenyi2000@zju.edu.cn&gt;</a> Trap accesses to hgatp if MSTATUS_TVM is enabled.
-Don't trap accesses to vsatp even if MSTATUS_TVM is enabled.</pre>
-        </blockquote>
-        <p> By the way, do you know why mstatus_tvm and hstatus_tvm are
-          needed? </p>
-        <p> The specification said, </p>
-        <pre>The TVM mechanism improves virtualization efficiency by permitting guest operating systems to
-execute in S-mode, rather than classically virtualizing them in U-mode. This approach obviates
-the need to trap accesses to most S-mode CSRs.
-</pre>
-        <p> I don't know how the tvm field obviates the need to trap
-          accesses to most S-mode CSRs. </p>
-        <p> Thanks,<br>
-          Zhiwei </p>
-      </blockquote>
-      <p>
-      </p>
-      <p> When VMs are in U-mode, their accesses to S-mode CSR registers
-        must be emulated. Otherwise, the behavior of the host OS will be
-        affected. But I guess since TVM helps insert another stage of
-        address translation below that controlled by the OS, it enables
-        VMs to run in S-mode, which means that VMs can directly use most
-        S-mode CSR registers instead of emulated ones.
-      </p>
-    </blockquote>
-    <p>If the guest running in S-mode, the other smode CSR accesses may
-      break the host OS.  <br>
-    </p>
-    <p>Zhiwei<br>
-    </p>
-    <blockquote type="cite"
-      cite="mid:33d93933.8ba4c.186cac784e7.Coremail.chenyi2000@zju.edu.cn">
-      <p> <br>
-      </p>
-      <p> Best,
-      </p>
-      <p> Yi
-      </p>
-      <p> <br>
-      </p>
-      <blockquote name="replyContent" class="ReferenceQuote"
-        style="padding-left:5px;margin-left:5px;border-left:#b6b6b6 2px
-        solid;margin-right:0;">
-        <p> <br>
-        </p>
-        <blockquote type="cite"
-          cite="mid:20230308123417.12555-1-chenyi2000@zju.edu.cn">
-          <pre class="moz-quote-pre" wrap="">Signed-off-by: Yi Chen <a class="moz-txt-link-rfc2396E" href="mailto:chenyi2000@zju.edu.cn" moz-do-not-send="true">&lt;chenyi2000@zju.edu.cn&gt;</a> ---
- target/riscv/csr.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
+PGJyPgo8YnI+Cjxicj4KPGJsb2NrcXVvdGUgbmFtZT0icmVwbHlDb250ZW50IiBjbGFzcz0iUmVm
+ZXJlbmNlUXVvdGUiIHN0eWxlPSJwYWRkaW5nLWxlZnQ6NXB4O21hcmdpbi1sZWZ0OjVweDtib3Jk
+ZXItbGVmdDojYjZiNmI2IDJweCBzb2xpZDttYXJnaW4tcmlnaHQ6MDsiPgoJLS0tLS1PcmlnaW5h
+bCBNZXNzYWdlcy0tLS0tPGJyPgo8Yj5Gcm9tOjwvYj48c3BhbiBpZD0icmNfZnJvbSI+IkxJVSBa
+aGl3ZWkiICZsdDt6aGl3ZWlfbGl1QGxpbnV4LmFsaWJhYmEuY29tJmd0Ozwvc3Bhbj48YnI+Cjxi
+PlNlbnQgVGltZTo8L2I+PHNwYW4gaWQ9InJjX3NlbnR0aW1lIj4yMDIzLTAzLTEwIDE3OjE4OjU2
+IChGcmlkYXkpPC9zcGFuPjxicj4KPGI+VG86PC9iPiAiQ0hFTiBZaSIgJmx0O2NoZW55aTIwMDBA
+emp1LmVkdS5jbiZndDssIHFlbXUtZGV2ZWxAbm9uZ251Lm9yZzxicj4KPGI+Q2M6PC9iPiAiUGFs
+bWVyIERhYmJlbHQiICZsdDtwYWxtZXJAZGFiYmVsdC5jb20mZ3Q7LCAiQWxpc3RhaXIgRnJhbmNp
+cyIgJmx0O2FsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbSZndDssICJCaW4gTWVuZyIgJmx0O2Jpbi5t
+ZW5nQHdpbmRyaXZlci5jb20mZ3Q7LCAiV2Vpd2VpIExpIiAmbHQ7bGl3ZWl3ZWlAaXNjYXMuYWMu
+Y24mZ3Q7LCAiRGFuaWVsIEhlbnJpcXVlIEJhcmJvemEiICZsdDtkYmFyYm96YUB2ZW50YW5hbWlj
+cm8uY29tJmd0OywgIm9wZW4gbGlzdDpSSVNDLVYgVENHIENQVXMiICZsdDtxZW11LXJpc2N2QG5v
+bmdudS5vcmcmZ3Q7PGJyPgo8Yj5TdWJqZWN0OjwvYj4gUmU6IFtQQVRDSF0gdGFyZ2V0L3Jpc2N2
+L2Nzci5jOiBmaXggSCBleHRlbnNpb24gVFZNIHRyYXA8YnI+Cjxicj4KCTxwPgoJCTxicj4KCTwv
+cD4KCTxkaXYgY2xhc3M9Im1vei1jaXRlLXByZWZpeCI+CgkJT24gMjAyMy8zLzEwIDE3OjA4LCBD
+SEVOIFlpIHdyb3RlOjxicj4KCTwvZGl2PgoJPGJsb2NrcXVvdGUgdHlwZT0iY2l0ZSIgY2l0ZT0i
+bWlkOjMzZDkzOTMzLjhiYTRjLjE4NmNhYzc4NGU3LkNvcmVtYWlsLmNoZW55aTIwMDBAemp1LmVk
+dS5jbiI+CgkJPGJsb2NrcXVvdGUgbmFtZT0icmVwbHlDb250ZW50IiBjbGFzcz0iUmVmZXJlbmNl
+UXVvdGUiIHN0eWxlPSJwYWRkaW5nLWxlZnQ6NXB4O21hcmdpbi1sZWZ0OjVweDtib3JkZXItbGVm
+dDojYjZiNmI2IDJweCBzb2xpZDttYXJnaW4tcmlnaHQ6MDsiPgoJCQktLS0tLU9yaWdpbmFsIE1l
+c3NhZ2VzLS0tLS08YnI+CjxiPkZyb206PC9iPjxzcGFuIGlkPSJyY19mcm9tIj4iTElVIFpoaXdl
+aSIgPGEgY2xhc3M9Im1vei10eHQtbGluay1yZmMyMzk2RSIgaHJlZj0ibWFpbHRvOnpoaXdlaV9s
+aXVAbGludXguYWxpYmFiYS5jb20iPiZsdDt6aGl3ZWlfbGl1QGxpbnV4LmFsaWJhYmEuY29tJmd0
+OzwvYT48L3NwYW4+PGJyPgo8Yj5TZW50IFRpbWU6PC9iPjxzcGFuIGlkPSJyY19zZW50dGltZSI+
+MjAyMy0wMy0xMCAxMDoxMjoxMAogICAgICAgICAgKEZyaWRheSk8L3NwYW4+PGJyPgo8Yj5Ubzo8
+L2I+IDxhIGNsYXNzPSJtb3otdHh0LWxpbmstYWJicmV2aWF0ZWQiIGhyZWY9Im1haWx0bzpjaGVu
+eWkyMDAwQHpqdS5lZHUuY24iPmNoZW55aTIwMDBAemp1LmVkdS5jbjwvYT4sIDxhIGNsYXNzPSJt
+b3otdHh0LWxpbmstYWJicmV2aWF0ZWQiIGhyZWY9Im1haWx0bzpxZW11LWRldmVsQG5vbmdudS5v
+cmciPnFlbXUtZGV2ZWxAbm9uZ251Lm9yZzwvYT48YnI+CjxiPkNjOjwvYj4gIlBhbG1lciBEYWJi
+ZWx0IiA8YSBjbGFzcz0ibW96LXR4dC1saW5rLXJmYzIzOTZFIiBocmVmPSJtYWlsdG86cGFsbWVy
+QGRhYmJlbHQuY29tIj4mbHQ7cGFsbWVyQGRhYmJlbHQuY29tJmd0OzwvYT4sCiAgICAgICAgIkFs
+aXN0YWlyIEZyYW5jaXMiIDxhIGNsYXNzPSJtb3otdHh0LWxpbmstcmZjMjM5NkUiIGhyZWY9Im1h
+aWx0bzphbGlzdGFpci5mcmFuY2lzQHdkYy5jb20iPiZsdDthbGlzdGFpci5mcmFuY2lzQHdkYy5j
+b20mZ3Q7PC9hPiwgIkJpbiBNZW5nIiA8YSBjbGFzcz0ibW96LXR4dC1saW5rLXJmYzIzOTZFIiBo
+cmVmPSJtYWlsdG86YmluLm1lbmdAd2luZHJpdmVyLmNvbSI+Jmx0O2Jpbi5tZW5nQHdpbmRyaXZl
+ci5jb20mZ3Q7PC9hPiwgIldlaXdlaSBMaSIgPGEgY2xhc3M9Im1vei10eHQtbGluay1yZmMyMzk2
+RSIgaHJlZj0ibWFpbHRvOmxpd2Vpd2VpQGlzY2FzLmFjLmNuIj4mbHQ7bGl3ZWl3ZWlAaXNjYXMu
+YWMuY24mZ3Q7PC9hPiwgIkRhbmllbCBIZW5yaXF1ZSBCYXJib3phIiA8YSBjbGFzcz0ibW96LXR4
+dC1saW5rLXJmYzIzOTZFIiBocmVmPSJtYWlsdG86ZGJhcmJvemFAdmVudGFuYW1pY3JvLmNvbSI+
+Jmx0O2RiYXJib3phQHZlbnRhbmFtaWNyby5jb20mZ3Q7PC9hPiwgIm9wZW4gbGlzdDpSSVNDLVYg
+VENHIENQVXMiIDxhIGNsYXNzPSJtb3otdHh0LWxpbmstcmZjMjM5NkUiIGhyZWY9Im1haWx0bzpx
+ZW11LXJpc2N2QG5vbmdudS5vcmciPiZsdDtxZW11LXJpc2N2QG5vbmdudS5vcmcmZ3Q7PC9hPjxi
+cj4KPGI+U3ViamVjdDo8L2I+IFJlOiBbUEFUQ0hdIHRhcmdldC9yaXNjdi9jc3IuYzogZml4IEgg
+ZXh0ZW5zaW9uCiAgICAgICAgVFZNIHRyYXA8YnI+Cjxicj4KCQkJPHA+CgkJCQk8YnI+CgkJCTwv
+cD4KCQkJPGRpdiBjbGFzcz0ibW96LWNpdGUtcHJlZml4Ij4KCQkJCU9uIDIwMjMvMy84IDIwOjM0
+LCA8YSBjbGFzcz0ibW96LXR4dC1saW5rLWFiYnJldmlhdGVkIG1vei10eHQtbGluay1mcmVldGV4
+dCIgaHJlZj0ibWFpbHRvOmNoZW55aTIwMDBAemp1LmVkdS5jbiIgbW96LWRvLW5vdC1zZW5kPSJ0
+cnVlIj5jaGVueWkyMDAwQHpqdS5lZHUuY248L2E+IHdyb3RlOjxicj4KCQkJPC9kaXY+CgkJCTxi
+bG9ja3F1b3RlIHR5cGU9ImNpdGUiIGNpdGU9Im1pZDoyMDIzMDMwODEyMzQxNy4xMjU1NS0xLWNo
+ZW55aTIwMDBAemp1LmVkdS5jbiI+CjxwcmUgY2xhc3M9Im1vei1xdW90ZS1wcmUiIHdyYXA9IiI+
+RnJvbTogWWkgQ2hlbiA8YSBjbGFzcz0ibW96LXR4dC1saW5rLXJmYzIzOTZFIiBocmVmPSJtYWls
+dG86Y2hlbnlpMjAwMEB6anUuZWR1LmNuIiBtb3otZG8tbm90LXNlbmQ9InRydWUiPiZsdDtjaGVu
+eWkyMDAwQHpqdS5lZHUuY24mZ3Q7PC9hPiBUcmFwIGFjY2Vzc2VzIHRvIGhnYXRwIGlmIE1TVEFU
+VVNfVFZNIGlzIGVuYWJsZWQuCkRvbid0IHRyYXAgYWNjZXNzZXMgdG8gdnNhdHAgZXZlbiBpZiBN
+U1RBVFVTX1RWTSBpcyBlbmFibGVkLjwvcHJlPgoJCQk8L2Jsb2NrcXVvdGU+CgkJCTxwPgoJCQkJ
+QnkgdGhlIHdheSwgZG8geW91IGtub3cgd2h5IG1zdGF0dXNfdHZtIGFuZCBoc3RhdHVzX3R2bSBh
+cmUKICAgICAgICAgIG5lZWRlZD8KCQkJPC9wPgoJCQk8cD4KCQkJCVRoZSBzcGVjaWZpY2F0aW9u
+IHNhaWQsCgkJCTwvcD4KPHByZT5UaGUgVFZNIG1lY2hhbmlzbSBpbXByb3ZlcyB2aXJ0dWFsaXph
+dGlvbiBlZmZpY2llbmN5IGJ5IHBlcm1pdHRpbmcgZ3Vlc3Qgb3BlcmF0aW5nIHN5c3RlbXMgdG8K
+ZXhlY3V0ZSBpbiBTLW1vZGUsIHJhdGhlciB0aGFuIGNsYXNzaWNhbGx5IHZpcnR1YWxpemluZyB0
+aGVtIGluIFUtbW9kZS4gVGhpcyBhcHByb2FjaCBvYnZpYXRlcwp0aGUgbmVlZCB0byB0cmFwIGFj
+Y2Vzc2VzIHRvIG1vc3QgUy1tb2RlIENTUnMuCjwvcHJlPgoJCQk8cD4KCQkJCUkgZG9uJ3Qga25v
+dyBob3cgdGhlIHR2bSBmaWVsZCBvYnZpYXRlcyB0aGUgbmVlZCB0byB0cmFwCiAgICAgICAgICBh
+Y2Nlc3NlcyB0byBtb3N0IFMtbW9kZSBDU1JzLgoJCQk8L3A+CgkJCTxwPgoJCQkJVGhhbmtzLDxi
+cj4KWmhpd2VpCgkJCTwvcD4KCQk8L2Jsb2NrcXVvdGU+CgkJPHA+CgkJCTxicj4KCQk8L3A+CgkJ
+PHA+CgkJCVdoZW4gVk1zIGFyZSBpbiBVLW1vZGUsIHRoZWlyIGFjY2Vzc2VzIHRvIFMtbW9kZSBD
+U1IgcmVnaXN0ZXJzCiAgICAgICAgbXVzdCBiZSBlbXVsYXRlZC4gT3RoZXJ3aXNlLCB0aGUgYmVo
+YXZpb3Igb2YgdGhlIGhvc3QgT1Mgd2lsbCBiZQogICAgICAgIGFmZmVjdGVkLiBCdXQgSSBndWVz
+cyBzaW5jZSBUVk0gaGVscHMgaW5zZXJ0IGFub3RoZXIgc3RhZ2Ugb2YKICAgICAgICBhZGRyZXNz
+IHRyYW5zbGF0aW9uIGJlbG93IHRoYXQgY29udHJvbGxlZCBieSB0aGUgT1MsIGl0IGVuYWJsZXMK
+ICAgICAgICBWTXMgdG8gcnVuIGluIFMtbW9kZSwgd2hpY2ggbWVhbnMgdGhhdCBWTXMgY2FuIGRp
+cmVjdGx5IHVzZSBtb3N0CiAgICAgICAgUy1tb2RlIENTUiByZWdpc3RlcnMgaW5zdGVhZCBvZiBl
+bXVsYXRlZCBvbmVzLgoJCTwvcD4KCTwvYmxvY2txdW90ZT4KCTxwPgoJCUlmIHRoZSBndWVzdCBy
+dW5uaW5nIGluIFMtbW9kZSwgdGhlIG90aGVyIHNtb2RlIENTUiBhY2Nlc3NlcyBtYXkKICAgICAg
+YnJlYWsgdGhlIGhvc3QgT1MuJm5ic3A7Cgk8L3A+Cgk8cD4KCQlaaGl3ZWkKCTwvcD4KCTxibG9j
+a3F1b3RlIHR5cGU9ImNpdGUiIGNpdGU9Im1pZDozM2Q5MzkzMy44YmE0Yy4xODZjYWM3ODRlNy5D
+b3JlbWFpbC5jaGVueWkyMDAwQHpqdS5lZHUuY24iPgoJCTxwPgoJCQk8YnI+CgkJPC9wPgoJPC9i
+bG9ja3F1b3RlPgo8L2Jsb2NrcXVvdGU+CjxwPgoJSSBndWVzcyBoeXBlcnZpc29ycyBjYW4gYmUg
+KHBhcnRpYWxseSkgcHV0IGluIE0tbW9kZS4gRG8geW91IGhhdmUgYW55IGV4YW1wbGUgd2hlcmUg
+YWNjZXNzIHRvIGEgc3BlY2lmaWMgQ1NSIGhhcyB0byBiZSB0cmFwcGVkPwo8L3A+CjxwPgoJPGJy
+Pgo8L3A+CjxwPgoJQmVzdCwKPC9wPgo8cD4KCVlpCjwvcD4KPGJsb2NrcXVvdGUgbmFtZT0icmVw
+bHlDb250ZW50IiBjbGFzcz0iUmVmZXJlbmNlUXVvdGUiIHN0eWxlPSJwYWRkaW5nLWxlZnQ6NXB4
+O21hcmdpbi1sZWZ0OjVweDtib3JkZXItbGVmdDojYjZiNmI2IDJweCBzb2xpZDttYXJnaW4tcmln
+aHQ6MDsiPgoJPGJsb2NrcXVvdGUgdHlwZT0iY2l0ZSIgY2l0ZT0ibWlkOjMzZDkzOTMzLjhiYTRj
+LjE4NmNhYzc4NGU3LkNvcmVtYWlsLmNoZW55aTIwMDBAemp1LmVkdS5jbiI+CgkJPHA+CgkJCTxi
+cj4KCQk8L3A+CgkJPHA+CgkJCUJlc3QsCgkJPC9wPgoJCTxwPgoJCQlZaQoJCTwvcD4KCQk8cD4K
+CQkJPGJyPgoJCTwvcD4KCQk8YmxvY2txdW90ZSBuYW1lPSJyZXBseUNvbnRlbnQiIGNsYXNzPSJS
+ZWZlcmVuY2VRdW90ZSIgc3R5bGU9InBhZGRpbmctbGVmdDo1cHg7bWFyZ2luLWxlZnQ6NXB4O2Jv
+cmRlci1sZWZ0OiNiNmI2YjYgMnB4IHNvbGlkO21hcmdpbi1yaWdodDowOyI+CgkJCTxwPgoJCQkJ
+PGJyPgoJCQk8L3A+CgkJCTxibG9ja3F1b3RlIHR5cGU9ImNpdGUiIGNpdGU9Im1pZDoyMDIzMDMw
+ODEyMzQxNy4xMjU1NS0xLWNoZW55aTIwMDBAemp1LmVkdS5jbiI+CjxwcmUgY2xhc3M9Im1vei1x
+dW90ZS1wcmUiIHdyYXA9IiI+U2lnbmVkLW9mZi1ieTogWWkgQ2hlbiA8YSBjbGFzcz0ibW96LXR4
+dC1saW5rLXJmYzIzOTZFIiBocmVmPSJtYWlsdG86Y2hlbnlpMjAwMEB6anUuZWR1LmNuIiBtb3ot
+ZG8tbm90LXNlbmQ9InRydWUiPiZsdDtjaGVueWkyMDAwQHpqdS5lZHUuY24mZ3Q7PC9hPiAtLS0K
+IHRhcmdldC9yaXNjdi9jc3IuYyB8IDE4ICsrKysrKysrKysrKysrLS0tLQogMSBmaWxlIGNoYW5n
+ZWQsIDE0IGluc2VydGlvbnMoKyksIDQgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvdGFyZ2V0
+L3Jpc2N2L2Nzci5jIGIvdGFyZ2V0L3Jpc2N2L2Nzci5jCmluZGV4IGFiNTY2NjMuLjA5YmM3ODAg
+MTAwNjQ0Ci0tLSBhL3RhcmdldC9yaXNjdi9jc3IuYworKysgYi90YXJnZXQvcmlzY3YvY3NyLmMK
+QEAgLTI2NTUsNyArMjY1NSw3IEBAIHN0YXRpYyBSSVNDVkV4Y2VwdGlvbiByZWFkX3NhdHAoQ1BV
+UklTQ1ZTdGF0ZSAqZW52LCBpbnQgY3Nybm8sCiAgICAgICAgIHJldHVybiBSSVNDVl9FWENQX05P
+TkU7CiAgICAgfQogCi0gICAgaWYgKGVudi0mZ3Q7cHJpdiA9PSBQUlZfUyAmYW1wOyZhbXA7IGdl
+dF9maWVsZChlbnYtJmd0O21zdGF0dXMsIE1TVEFUVVNfVFZNKSkgeworICAgIGlmIChlbnYtJmd0
+O3ByaXYgPT0gUFJWX1MgJmFtcDsmYW1wOyAhcmlzY3ZfY3B1X3ZpcnRfZW5hYmxlZChlbnYpICZh
+bXA7JmFtcDsgZ2V0X2ZpZWxkKGVudi0mZ3Q7bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CiAgICAg
+ICAgIHJldHVybiBSSVNDVl9FWENQX0lMTEVHQUxfSU5TVDsKICAgICB9IGVsc2UgewogICAgICAg
+ICAqdmFsID0gZW52LSZndDtzYXRwOwpAQCAtMjY4Myw3ICsyNjgzLDcgQEAgc3RhdGljIFJJU0NW
+RXhjZXB0aW9uIHdyaXRlX3NhdHAoQ1BVUklTQ1ZTdGF0ZSAqZW52LCBpbnQgY3Nybm8sCiAgICAg
+fQogCiAgICAgaWYgKHZtICZhbXA7JmFtcDsgbWFzaykgewotICAgICAgICBpZiAoZW52LSZndDtw
+cml2ID09IFBSVl9TICZhbXA7JmFtcDsgZ2V0X2ZpZWxkKGVudi0mZ3Q7bXN0YXR1cywgTVNUQVRV
+U19UVk0pKSB7CisgICAgICAgIGlmIChlbnYtJmd0O3ByaXYgPT0gUFJWX1MgJmFtcDsmYW1wOyAh
+cmlzY3ZfY3B1X3ZpcnRfZW5hYmxlZChlbnYpICZhbXA7JmFtcDsgZ2V0X2ZpZWxkKGVudi0mZ3Q7
+bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CiAgICAgICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9J
+TExFR0FMX0lOU1Q7CiAgICAgICAgIH0gZWxzZSB7CiAgICAgICAgICAgICAvKgpAQCAtMzA0Nywx
+NCArMzA0NywyNCBAQCBzdGF0aWMgUklTQ1ZFeGNlcHRpb24gcmVhZF9oZ2VpcChDUFVSSVNDVlN0
+YXRlICplbnYsIGludCBjc3JubywKIHN0YXRpYyBSSVNDVkV4Y2VwdGlvbiByZWFkX2hnYXRwKENQ
+VVJJU0NWU3RhdGUgKmVudiwgaW50IGNzcm5vLAogICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgdGFyZ2V0X3Vsb25nICp2YWwpCiB7Ci0gICAgKnZhbCA9IGVudi0mZ3Q7aGdhdHA7Cisg
+ICAgaWYgKGVudi0mZ3Q7cHJpdiA9PSBQUlZfUyAmYW1wOyZhbXA7IGdldF9maWVsZChlbnYtJmd0
+O21zdGF0dXMsIE1TVEFUVVNfVFZNKSkgeworICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9JTExF
+R0FMX0lOU1Q7CisgICAgfSBlbHNlIHsKKyAgICAgICAgKnZhbCA9IGVudi0mZ3Q7aGdhdHA7Cisg
+ICAgfQorCiAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfTk9ORTsKIH0KIAogc3RhdGljIFJJU0NWRXhj
+ZXB0aW9uIHdyaXRlX2hnYXRwKENQVVJJU0NWU3RhdGUgKmVudiwgaW50IGNzcm5vLAogICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRhcmdldF91bG9uZyB2YWwpCiB7Ci0gICAgZW52
+LSZndDtoZ2F0cCA9IHZhbDsKKyAgICBpZiAoZW52LSZndDtwcml2ID09IFBSVl9TICZhbXA7JmFt
+cDsgZ2V0X2ZpZWxkKGVudi0mZ3Q7bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CisgICAgICAgIHJl
+dHVybiBSSVNDVl9FWENQX0lMTEVHQUxfSU5TVDsKKyAgICB9IGVsc2UgeworICAgICAgICBlbnYt
+Jmd0O2hnYXRwID0gdmFsOworICAgIH0KKwogICAgIHJldHVybiBSSVNDVl9FWENQX05PTkU7CiB9
+IDxzcGFuIHN0eWxlPSJmb250LWZhbWlseTon5a6L5L2TLCBhcmlhbCwgVmVyZGFuYSwgc2Fucy1z
+ZXJpZic7Ij48c3BhbiBzdHlsZT0id2hpdGUtc3BhY2U6bm93cmFwOyI+IDwvc3Bhbj48L3NwYW4+
+PC9wcmU+CgkJCTwvYmxvY2txdW90ZT4KCQk8L2Jsb2NrcXVvdGU+Cgk8L2Jsb2NrcXVvdGU+Cjwv
+YmxvY2txdW90ZT4=
+------=_Part_3364150_18184957.1678444430022--
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index ab56663..09bc780 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -2655,7 +2655,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
-         return RISCV_EXCP_NONE;
-     }
- 
--    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
-+    if (env-&gt;priv == PRV_S &amp;&amp; !riscv_cpu_virt_enabled(env) &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     } else {
-         *val = env-&gt;satp;
-@@ -2683,7 +2683,7 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
-     }
- 
-     if (vm &amp;&amp; mask) {
--        if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
-+        if (env-&gt;priv == PRV_S &amp;&amp; !riscv_cpu_virt_enabled(env) &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
-             return RISCV_EXCP_ILLEGAL_INST;
-         } else {
-             /*
-@@ -3047,14 +3047,24 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
- static RISCVException read_hgatp(CPURISCVState *env, int csrno,
-                                  target_ulong *val)
- {
--    *val = env-&gt;hgatp;
-+    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    } else {
-+        *val = env-&gt;hgatp;
-+    }
-+
-     return RISCV_EXCP_NONE;
- }
- 
- static RISCVException write_hgatp(CPURISCVState *env, int csrno,
-                                   target_ulong val)
- {
--    env-&gt;hgatp = val;
-+    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    } else {
-+        env-&gt;hgatp = val;
-+    }
-+
-     return RISCV_EXCP_NONE;
- } <span style="font-family:'宋体, arial, Verdana, sans-serif';"><span style="white-space:nowrap;"> </span></span></pre>
-        </blockquote>
-      </blockquote>
-    </blockquote>
-  </body>
-</html>
-
---------------lYG1tp08znSCecnfBehMxMjN--
 
