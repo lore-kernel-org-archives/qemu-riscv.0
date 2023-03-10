@@ -1,73 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1paQTB-0000iG-6N
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 19:18:49 -0500
+	id 1paSF8-0003zm-Fg
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 21:12:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1paQT8-0000hk-QR; Thu, 09 Mar 2023 19:18:46 -0500
-Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1paQT6-0003DY-PC; Thu, 09 Mar 2023 19:18:46 -0500
-Received: by mail-vs1-xe2c.google.com with SMTP id x14so3226808vso.9;
- Thu, 09 Mar 2023 16:18:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1678407523;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G5aq7e3bRxnNfv6pJGwT9ZfROZJqbGJaBjer/bMRRlw=;
- b=YN2MkNADfKmQyLQhL4GuAv9ox1/MKhlMLd0P8ZS2OwR9QXqBqLpxu/e8jB7MKw2fSk
- uQcRwR/QSoirptje3CYCxeGZBgxttBPPtPaoJCKVIzCd1wK6nfUsH5bNxMKKtn8+i1ud
- 2PHruAwemnPOiceSPqcMklgRRR7Y7FScHsFKRf/3jZmWA2JcbDgNc3aZwOlO1QkEpve8
- KYudSeq6PE+Yvu6D6l88SAZFw6Rz3Yso2ZxK1QxX5RdBLZD8rrYmr50eKEoqSbUvaRew
- /XC/Qpu8YJ7xXLg1j8mXzcJfBWm4qpAHqi680JTdjSnPCQHWzMtBCGESD8ZLWrFMva/s
- bpYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678407523;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=G5aq7e3bRxnNfv6pJGwT9ZfROZJqbGJaBjer/bMRRlw=;
- b=uJ6dxVqCZUWd0tMJURtWfjLS+VgFldgrQ7MwnVF3cHG0Va1UrEQaooMyu7cmvuqvVC
- OAKp+2IwmiDnRjbXd1evDTasQHBw6qtZX+GMLNqLDYW2v1424w0HCCYvi6ublxpU2AKH
- SmFmmnmfaMmiBuPDK7Uj7BjanIA1zZcWmg8ORSUaeC+Vyn0+QYbqvW0kh80XoX6rllaZ
- Jt9d2MI2bDrTIR48tBBBL0hvjACfIP5k/Q+O3sPOztuRV5gwaFZ8sgQl7u6+go4A1YJc
- cy+CCwBjA/XawSdrGN/oc3ibZJvSvlgyAYoCdEYy/Dhdj5Yof29vh0OVetAFBCkwYGbF
- fnJA==
-X-Gm-Message-State: AO0yUKXNhAp5wwtm9bhapvk3vMR3EXT0MCQ4dzfI5clWvm0Fyd3bruNr
- 6dzECYpWNpmrtipTX9yzDnRxsxQFxWtkCZEKTfA=
-X-Google-Smtp-Source: AK7set9ZN2r2qm4q7SkEy9S1YNVvKUNKYU3Q7IdhWBwegXlvElxEOsL86pmqLs8YFVqQwLqoXInrhe+/SXmYjmf/nqs=
-X-Received: by 2002:a67:e3cb:0:b0:421:e25b:3d0c with SMTP id
- k11-20020a67e3cb000000b00421e25b3d0cmr9981021vsm.3.1678407523314; Thu, 09 Mar
- 2023 16:18:43 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1paSF7-0003zT-2y; Thu, 09 Mar 2023 21:12:25 -0500
+Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1paSF4-0007w3-Ci; Thu, 09 Mar 2023 21:12:24 -0500
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R771e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
+ TI=SMTPD_---0VdVJAIe_1678414331; 
+Received: from 30.221.99.193(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VdVJAIe_1678414331) by smtp.aliyun-inc.com;
+ Fri, 10 Mar 2023 10:12:12 +0800
+Content-Type: multipart/alternative;
+ boundary="------------Q3SsejpLbgmwUjK7Bx0YaGKI"
+Message-ID: <087472fc-94f1-165d-9776-8e12d60be09d@linux.alibaba.com>
+Date: Fri, 10 Mar 2023 10:12:10 +0800
 MIME-Version: 1.0
-References: <20230308201925.258223-1-dbarboza@ventanamicro.com>
- <20230308201925.258223-4-dbarboza@ventanamicro.com>
- <9bb69365-f291-8515-2afa-1792998601b8@linux.alibaba.com>
- <34d490d3-0444-e312-a125-3c2b9d3220e1@ventanamicro.com>
-In-Reply-To: <34d490d3-0444-e312-a125-3c2b9d3220e1@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 10 Mar 2023 10:18:16 +1000
-Message-ID: <CAKmqyKN0aeMkKikSNqUpHciX3oLYS7=JjxaNOH6HNm5nSek2vw@mail.gmail.com>
-Subject: Re: [PATCH for-8.1 03/17] target/riscv/cpu.c: remove
- set_priv_version()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org, 
- qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org, 
- liweiwei@iscas.ac.cn, palmer@rivosinc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
+Content-Language: en-US
+To: chenyi2000@zju.edu.cn, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+References: <20230308123417.12555-1-chenyi2000@zju.edu.cn>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230308123417.12555-1-chenyi2000@zju.edu.cn>
+Received-SPF: pass client-ip=115.124.30.119;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-119.freemail.mail.aliyun.com
+X-Spam_score_int: -98
+X-Spam_score: -9.9
+X-Spam_bar: ---------
+X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ HTML_MESSAGE=0.001, NICE_REPLY_A=-0.001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,192 +56,185 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Mar 2023 00:18:47 -0000
+X-List-Received-Date: Fri, 10 Mar 2023 02:12:25 -0000
 
-On Fri, Mar 10, 2023 at 2:23=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
->
->
-> On 3/9/23 04:28, LIU Zhiwei wrote:
-> >
-> > On 2023/3/9 4:19, Daniel Henrique Barboza wrote:
-> >> The setter is doing nothing special. Just set env->priv_ver directly.
-> > IMHO, No better than the older implementation.
->
-> In the current context having a setter means that the function is doing
-> something else other than simply setting the attr. Because we're setting =
-a
-> lot of other 'env' attrs directly: env->pc, env->priv, env->menvcfg and
-> so on. So a setter is a special function (e.g. set_misa()).
->
-> But then set_priv_version() and set_vext_version() are just setting
-> env->priv_ver/env->vext_version and nothing else. This means that every
-> time we read
->
-> "set_priv_version(env, val)"
->
-> We're either required to remember that this is just a simple setter or we=
- spend
-> a few seconds looking it up to see that it's a simple setter. We could, i=
-nstead,
-> just read
->
-> "env->priv_ver =3D val"
->
-> and moved on.
->
->
-> I really think we should get rid of all these kind of setters in the code=
-. It's not
-> like these are user facing APIs that needs encapsulation.
+This is a multi-part message in MIME format.
+--------------Q3SsejpLbgmwUjK7Bx0YaGKI
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I tend to agree. I don't think they add anything. I guess you could
-debate they are kind of self commenting as the function name describes
-what is happening, but I think in a lot of cases it's pretty clear as
-is.
 
-Alistair
+On 2023/3/8 20:34, chenyi2000@zju.edu.cn wrote:
+> From: Yi Chen<chenyi2000@zju.edu.cn>
+>
+> Trap accesses to hgatp if MSTATUS_TVM is enabled.
+> Don't trap accesses to vsatp even if MSTATUS_TVM is enabled.
+
+By the way, do you know why mstatus_tvm and hstatus_tvm are needed?
+
+The specification said,
+
+The TVM mechanism improves virtualization efficiency by permitting guest operating systems to
+execute in S-mode, rather than classically virtualizing them in U-mode. This approach obviates
+the need to trap accesses to most S-mode CSRs.
+
+I don't know how the tvm field obviates the need to trap accesses to 
+most S-mode CSRs.
+
+Thanks,
+Zhiwei
 
 >
+> Signed-off-by: Yi Chen<chenyi2000@zju.edu.cn>
+> ---
+>   target/riscv/csr.c | 18 ++++++++++++++----
+>   1 file changed, 14 insertions(+), 4 deletions(-)
 >
-> Thanks,
->
->
-> Daniel
->
->
->
-> >
-> > Zhiwei
-> >
-> >>
-> >> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> >> ---
-> >>   target/riscv/cpu.c | 30 +++++++++++++-----------------
-> >>   1 file changed, 13 insertions(+), 17 deletions(-)
-> >>
-> >> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> >> index 0baed79ec2..964817b9d2 100644
-> >> --- a/target/riscv/cpu.c
-> >> +++ b/target/riscv/cpu.c
-> >> @@ -240,11 +240,6 @@ static void set_misa(CPURISCVState *env, RISCVMXL=
- mxl, uint32_t ext)
-> >>       env->misa_ext_mask =3D env->misa_ext =3D ext;
-> >>   }
-> >> -static void set_priv_version(CPURISCVState *env, int priv_ver)
-> >> -{
-> >> -    env->priv_ver =3D priv_ver;
-> >> -}
-> >> -
-> >>   #ifndef CONFIG_USER_ONLY
-> >>   static uint8_t satp_mode_from_str(const char *satp_mode_str)
-> >>   {
-> >> @@ -343,7 +338,7 @@ static void riscv_any_cpu_init(Object *obj)
-> >>                                       VM_1_10_SV32 : VM_1_10_SV57);
-> >>   #endif
-> >> -    set_priv_version(env, PRIV_VERSION_1_12_0);
-> >> +    env->priv_ver =3D PRIV_VERSION_1_12_0;
-> >>       register_cpu_props(obj);
-> >>   }
-> >> @@ -355,7 +350,7 @@ static void rv64_base_cpu_init(Object *obj)
-> >>       set_misa(env, MXL_RV64, 0);
-> >>       register_cpu_props(obj);
-> >>       /* Set latest version of privileged specification */
-> >> -    set_priv_version(env, PRIV_VERSION_1_12_0);
-> >> +    env->priv_ver =3D PRIV_VERSION_1_12_0;
-> >>   #ifndef CONFIG_USER_ONLY
-> >>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
-> >>   #endif
-> >> @@ -366,7 +361,7 @@ static void rv64_sifive_u_cpu_init(Object *obj)
-> >>       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> >>       set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS =
-| RVU);
-> >>       register_cpu_props(obj);
-> >> -    set_priv_version(env, PRIV_VERSION_1_10_0);
-> >> +    env->priv_ver =3D PRIV_VERSION_1_10_0;
-> >>   #ifndef CONFIG_USER_ONLY
-> >>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV39);
-> >>   #endif
-> >> @@ -379,7 +374,7 @@ static void rv64_sifive_e_cpu_init(Object *obj)
-> >>       set_misa(env, MXL_RV64, RVI | RVM | RVA | RVC | RVU);
-> >>       register_cpu_props(obj);
-> >> -    set_priv_version(env, PRIV_VERSION_1_10_0);
-> >> +    env->priv_ver =3D PRIV_VERSION_1_10_0;
-> >>       cpu->cfg.mmu =3D false;
-> >>   #ifndef CONFIG_USER_ONLY
-> >>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
-> >> @@ -392,7 +387,7 @@ static void rv64_thead_c906_cpu_init(Object *obj)
-> >>       RISCVCPU *cpu =3D RISCV_CPU(obj);
-> >>       set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS =
-| RVU);
-> >> -    set_priv_version(env, PRIV_VERSION_1_11_0);
-> >> +    env->priv_ver =3D PRIV_VERSION_1_11_0;
-> >>       cpu->cfg.ext_g =3D true;
-> >>       cpu->cfg.ext_c =3D true;
-> >> @@ -431,7 +426,7 @@ static void rv128_base_cpu_init(Object *obj)
-> >>       set_misa(env, MXL_RV128, 0);
-> >>       register_cpu_props(obj);
-> >>       /* Set latest version of privileged specification */
-> >> -    set_priv_version(env, PRIV_VERSION_1_12_0);
-> >> +    env->priv_ver =3D PRIV_VERSION_1_12_0;
-> >>   #ifndef CONFIG_USER_ONLY
-> >>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
-> >>   #endif
-> >> @@ -444,7 +439,7 @@ static void rv32_base_cpu_init(Object *obj)
-> >>       set_misa(env, MXL_RV32, 0);
-> >>       register_cpu_props(obj);
-> >>       /* Set latest version of privileged specification */
-> >> -    set_priv_version(env, PRIV_VERSION_1_12_0);
-> >> +    env->priv_ver =3D PRIV_VERSION_1_12_0;
-> >>   #ifndef CONFIG_USER_ONLY
-> >>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV32);
-> >>   #endif
-> >> @@ -454,8 +449,9 @@ static void rv32_sifive_u_cpu_init(Object *obj)
-> >>   {
-> >>       CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> >>       set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVS =
-| RVU);
-> >> +
-> >>       register_cpu_props(obj);
-> >> -    set_priv_version(env, PRIV_VERSION_1_10_0);
-> >> +    env->priv_ver =3D PRIV_VERSION_1_10_0;
-> >>   #ifndef CONFIG_USER_ONLY
-> >>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV32);
-> >>   #endif
-> >> @@ -468,7 +464,7 @@ static void rv32_sifive_e_cpu_init(Object *obj)
-> >>       set_misa(env, MXL_RV32, RVI | RVM | RVA | RVC | RVU);
-> >>       register_cpu_props(obj);
-> >> -    set_priv_version(env, PRIV_VERSION_1_10_0);
-> >> +    env->priv_ver =3D PRIV_VERSION_1_10_0;
-> >>       cpu->cfg.mmu =3D false;
-> >>   #ifndef CONFIG_USER_ONLY
-> >>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
-> >> @@ -482,7 +478,7 @@ static void rv32_ibex_cpu_init(Object *obj)
-> >>       set_misa(env, MXL_RV32, RVI | RVM | RVC | RVU);
-> >>       register_cpu_props(obj);
-> >> -    set_priv_version(env, PRIV_VERSION_1_11_0);
-> >> +    env->priv_ver =3D PRIV_VERSION_1_11_0;
-> >>       cpu->cfg.mmu =3D false;
-> >>   #ifndef CONFIG_USER_ONLY
-> >>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
-> >> @@ -497,7 +493,7 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj=
-)
-> >>       set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
-> >>       register_cpu_props(obj);
-> >> -    set_priv_version(env, PRIV_VERSION_1_10_0);
-> >> +    env->priv_ver =3D PRIV_VERSION_1_10_0;
-> >>       cpu->cfg.mmu =3D false;
-> >>   #ifndef CONFIG_USER_ONLY
-> >>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
-> >> @@ -1159,7 +1155,7 @@ static void riscv_cpu_realize(DeviceState *dev, =
-Error **errp)
-> >>       }
-> >>       if (priv_version >=3D PRIV_VERSION_1_10_0) {
-> >> -        set_priv_version(env, priv_version);
-> >> +        env->priv_ver =3D priv_version;
-> >>       }
-> >>       /* Force disable extensions if priv spec version does not match =
-*/
->
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index ab56663..09bc780 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -2655,7 +2655,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
+>           return RISCV_EXCP_NONE;
+>       }
+>   
+> -    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+> +    if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) && get_field(env->mstatus, MSTATUS_TVM)) {
+>           return RISCV_EXCP_ILLEGAL_INST;
+>       } else {
+>           *val = env->satp;
+> @@ -2683,7 +2683,7 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
+>       }
+>   
+>       if (vm && mask) {
+> -        if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+> +        if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) && get_field(env->mstatus, MSTATUS_TVM)) {
+>               return RISCV_EXCP_ILLEGAL_INST;
+>           } else {
+>               /*
+> @@ -3047,14 +3047,24 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
+>   static RISCVException read_hgatp(CPURISCVState *env, int csrno,
+>                                    target_ulong *val)
+>   {
+> -    *val = env->hgatp;
+> +    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    } else {
+> +        *val = env->hgatp;
+> +    }
+> +
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+>   static RISCVException write_hgatp(CPURISCVState *env, int csrno,
+>                                     target_ulong val)
+>   {
+> -    env->hgatp = val;
+> +    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    } else {
+> +        env->hgatp = val;
+> +    }
+> +
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+--------------Q3SsejpLbgmwUjK7Bx0YaGKI
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2023/3/8 20:34,
+      <a class="moz-txt-link-abbreviated" href="mailto:chenyi2000@zju.edu.cn">chenyi2000@zju.edu.cn</a> wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:20230308123417.12555-1-chenyi2000@zju.edu.cn">
+      <pre class="moz-quote-pre" wrap="">From: Yi Chen <a class="moz-txt-link-rfc2396E" href="mailto:chenyi2000@zju.edu.cn">&lt;chenyi2000@zju.edu.cn&gt;</a>
+
+Trap accesses to hgatp if MSTATUS_TVM is enabled.
+Don't trap accesses to vsatp even if MSTATUS_TVM is enabled.</pre>
+    </blockquote>
+    <p>By the way, do you know why mstatus_tvm and hstatus_tvm are
+      needed?</p>
+    <p>The specification said,</p>
+    <pre>The TVM mechanism improves virtualization efficiency by permitting guest operating systems to
+execute in S-mode, rather than classically virtualizing them in U-mode. This approach obviates
+the need to trap accesses to most S-mode CSRs.
+</pre>
+    <p>I don't know how the tvm field obviates the need to trap accesses
+      to most S-mode CSRs.<br>
+    </p>
+    <p>Thanks,<br>
+      Zhiwei<br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:20230308123417.12555-1-chenyi2000@zju.edu.cn">
+      <pre class="moz-quote-pre" wrap="">
+
+Signed-off-by: Yi Chen <a class="moz-txt-link-rfc2396E" href="mailto:chenyi2000@zju.edu.cn">&lt;chenyi2000@zju.edu.cn&gt;</a>
+---
+ target/riscv/csr.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
+
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index ab56663..09bc780 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2655,7 +2655,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
+         return RISCV_EXCP_NONE;
+     }
+ 
+-    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
++    if (env-&gt;priv == PRV_S &amp;&amp; !riscv_cpu_virt_enabled(env) &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
+         return RISCV_EXCP_ILLEGAL_INST;
+     } else {
+         *val = env-&gt;satp;
+@@ -2683,7 +2683,7 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
+     }
+ 
+     if (vm &amp;&amp; mask) {
+-        if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
++        if (env-&gt;priv == PRV_S &amp;&amp; !riscv_cpu_virt_enabled(env) &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
+             return RISCV_EXCP_ILLEGAL_INST;
+         } else {
+             /*
+@@ -3047,14 +3047,24 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
+ static RISCVException read_hgatp(CPURISCVState *env, int csrno,
+                                  target_ulong *val)
+ {
+-    *val = env-&gt;hgatp;
++    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    } else {
++        *val = env-&gt;hgatp;
++    }
++
+     return RISCV_EXCP_NONE;
+ }
+ 
+ static RISCVException write_hgatp(CPURISCVState *env, int csrno,
+                                   target_ulong val)
+ {
+-    env-&gt;hgatp = val;
++    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    } else {
++        env-&gt;hgatp = val;
++    }
++
+     return RISCV_EXCP_NONE;
+ }
+ 
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------Q3SsejpLbgmwUjK7Bx0YaGKI--
 
