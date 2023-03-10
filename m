@@ -1,50 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1paYkC-0004b7-I7
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Mar 2023 04:08:56 -0500
+	id 1paYuA-0001oR-7i
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Mar 2023 04:19:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chenyi2000@zju.edu.cn>)
- id 1paYkA-0004Yp-Tx; Fri, 10 Mar 2023 04:08:54 -0500
-Received: from azure-sdnproxy.icoremail.net ([20.228.234.168])
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <chenyi2000@zju.edu.cn>)
- id 1paYk8-0001kz-Id; Fri, 10 Mar 2023 04:08:54 -0500
-Received: by ajax-webmail-mail-app3 (Coremail) ; Fri, 10 Mar 2023 17:08:38
- +0800 (GMT+08:00)
-X-Originating-IP: [112.10.177.110]
-Date: Fri, 10 Mar 2023 17:08:38 +0800 (GMT+08:00)
-X-CM-HeaderCharset: UTF-8
-From: "CHEN Yi" <chenyi2000@zju.edu.cn>
-To: "LIU Zhiwei" <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: "Palmer Dabbelt" <palmer@dabbelt.com>, 
- "Alistair Francis" <alistair.francis@wdc.com>, 
- "Bin Meng" <bin.meng@windriver.com>, "Weiwei Li" <liweiwei@iscas.ac.cn>, 
- "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>, 
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1paYu8-0001ni-09; Fri, 10 Mar 2023 04:19:12 -0500
+Received: from out30-111.freemail.mail.aliyun.com ([115.124.30.111])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1paYu5-0004GJ-4w; Fri, 10 Mar 2023 04:19:11 -0500
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
+ TI=SMTPD_---0VdWqkPa_1678439937; 
+Received: from 30.221.99.193(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VdWqkPa_1678439937) by smtp.aliyun-inc.com;
+ Fri, 10 Mar 2023 17:18:58 +0800
+Content-Type: multipart/alternative;
+ boundary="------------lYG1tp08znSCecnfBehMxMjN"
+Message-ID: <c78fd321-d287-f55e-fecf-1823367ea485@linux.alibaba.com>
+Date: Fri, 10 Mar 2023 17:18:56 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
+Content-Language: en-US
+To: CHEN Yi <chenyi2000@zju.edu.cn>, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-Subject: Re: Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.13 build 20210104(ab8c30b6)
- Copyright (c) 2002-2023 www.mailtech.cn zju.edu.cn
-In-Reply-To: <087472fc-94f1-165d-9776-8e12d60be09d@linux.alibaba.com>
 References: <20230308123417.12555-1-chenyi2000@zju.edu.cn>
  <087472fc-94f1-165d-9776-8e12d60be09d@linux.alibaba.com>
-Content-Type: multipart/alternative; 
- boundary="----=_Part_3361214_1106745380.1678439318758"
-MIME-Version: 1.0
-Message-ID: <33d93933.8ba4c.186cac784e7.Coremail.chenyi2000@zju.edu.cn>
-X-Coremail-Locale: en_US
-X-CM-TRANSID: cC_KCgCXnQyX8wpk1pIYDg--.31671W
-X-CM-SenderInfo: xfkh05blsqiio62m3hxhgxhubq/1tbiAQEJClZdwzLDxgAIs0
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
- CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
- daVFxhVjvjDU=
-Received-SPF: pass client-ip=20.228.234.168;
- envelope-from=chenyi2000@zju.edu.cn; helo=azure-sdnproxy.icoremail.net
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ <33d93933.8ba4c.186cac784e7.Coremail.chenyi2000@zju.edu.cn>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <33d93933.8ba4c.186cac784e7.Coremail.chenyi2000@zju.edu.cn>
+Received-SPF: pass client-ip=115.124.30.111;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-111.freemail.mail.aliyun.com
+X-Spam_score_int: -98
+X-Spam_score: -9.9
+X-Spam_bar: ---------
+X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ HTML_MESSAGE=0.001, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -57,159 +59,264 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Mar 2023 09:08:55 -0000
+X-List-Received-Date: Fri, 10 Mar 2023 09:19:12 -0000
 
-------=_Part_3361214_1106745380.1678439318758
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
+This is a multi-part message in MIME format.
+--------------lYG1tp08znSCecnfBehMxMjN
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-LS0tLS1PcmlnaW5hbCBNZXNzYWdlcy0tLS0tCkZyb206IkxJVSBaaGl3ZWkiIDx6aGl3ZWlfbGl1
-QGxpbnV4LmFsaWJhYmEuY29tPgpTZW50IFRpbWU6MjAyMy0wMy0xMCAxMDoxMjoxMCAoRnJpZGF5
-KQpUbzogY2hlbnlpMjAwMEB6anUuZWR1LmNuLCBxZW11LWRldmVsQG5vbmdudS5vcmcKQ2M6ICJQ
-YWxtZXIgRGFiYmVsdCIgPHBhbG1lckBkYWJiZWx0LmNvbT4sICJBbGlzdGFpciBGcmFuY2lzIiA8
-YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tPiwgIkJpbiBNZW5nIiA8YmluLm1lbmdAd2luZHJpdmVy
-LmNvbT4sICJXZWl3ZWkgTGkiIDxsaXdlaXdlaUBpc2Nhcy5hYy5jbj4sICJEYW5pZWwgSGVucmlx
-dWUgQmFyYm96YSIgPGRiYXJib3phQHZlbnRhbmFtaWNyby5jb20+LCAib3BlbiBsaXN0OlJJU0Mt
-ViBUQ0cgQ1BVcyIgPHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz4KU3ViamVjdDogUmU6IFtQQVRDSF0g
-dGFyZ2V0L3Jpc2N2L2Nzci5jOiBmaXggSCBleHRlbnNpb24gVFZNIHRyYXAKCgoKCgoKT24gMjAy
-My8zLzggMjA6MzQsIGNoZW55aTIwMDBAemp1LmVkdS5jbiB3cm90ZToKCkZyb206IFlpIENoZW4g
-PGNoZW55aTIwMDBAemp1LmVkdS5jbj4gVHJhcCBhY2Nlc3NlcyB0byBoZ2F0cCBpZiBNU1RBVFVT
-X1RWTSBpcyBlbmFibGVkLgpEb24ndCB0cmFwIGFjY2Vzc2VzIHRvIHZzYXRwIGV2ZW4gaWYgTVNU
-QVRVU19UVk0gaXMgZW5hYmxlZC4KCkJ5IHRoZSB3YXksIGRvIHlvdSBrbm93IHdoeSBtc3RhdHVz
-X3R2bSBhbmQgaHN0YXR1c190dm0gYXJlIG5lZWRlZD8KClRoZSBzcGVjaWZpY2F0aW9uIHNhaWQs
-CgpUaGUgVFZNIG1lY2hhbmlzbSBpbXByb3ZlcyB2aXJ0dWFsaXphdGlvbiBlZmZpY2llbmN5IGJ5
-IHBlcm1pdHRpbmcgZ3Vlc3Qgb3BlcmF0aW5nIHN5c3RlbXMgdG8KZXhlY3V0ZSBpbiBTLW1vZGUs
-IHJhdGhlciB0aGFuIGNsYXNzaWNhbGx5IHZpcnR1YWxpemluZyB0aGVtIGluIFUtbW9kZS4gVGhp
-cyBhcHByb2FjaCBvYnZpYXRlcwp0aGUgbmVlZCB0byB0cmFwIGFjY2Vzc2VzIHRvIG1vc3QgUy1t
-b2RlIENTUnMuCgoKSSBkb24ndCBrbm93IGhvdyB0aGUgdHZtIGZpZWxkIG9idmlhdGVzIHRoZSBu
-ZWVkIHRvIHRyYXAgYWNjZXNzZXMgdG8gbW9zdCBTLW1vZGUgQ1NScy4KClRoYW5rcywKWmhpd2Vp
-CgpXaGVuIFZNcyBhcmUgaW4gVS1tb2RlLCB0aGVpciBhY2Nlc3NlcyB0byBTLW1vZGUgQ1NSIHJl
-Z2lzdGVycyBtdXN0IGJlIGVtdWxhdGVkLiBPdGhlcndpc2UsIHRoZSBiZWhhdmlvciBvZiB0aGUg
-aG9zdCBPUyB3aWxsIGJlIGFmZmVjdGVkLiBCdXQgSSBndWVzcyBzaW5jZSBUVk0gaGVscHMgaW5z
-ZXJ0IGFub3RoZXIgc3RhZ2Ugb2YgYWRkcmVzcyB0cmFuc2xhdGlvbiBiZWxvdyB0aGF0IGNvbnRy
-b2xsZWQgYnkgdGhlIE9TLCBpdCBlbmFibGVzIFZNcyB0byBydW4gaW4gUy1tb2RlLCB3aGljaCBt
-ZWFucyB0aGF0IFZNcyBjYW4gZGlyZWN0bHkgdXNlIG1vc3QgUy1tb2RlIENTUiByZWdpc3RlcnMg
-aW5zdGVhZCBvZiBlbXVsYXRlZCBvbmVzLgoKCgoKQmVzdCwKCllpCgoKCgoKCgpTaWduZWQtb2Zm
-LWJ5OiBZaSBDaGVuIDxjaGVueWkyMDAwQHpqdS5lZHUuY24+IC0tLQogdGFyZ2V0L3Jpc2N2L2Nz
-ci5jIHwgMTggKysrKysrKysrKysrKystLS0tCiAxIGZpbGUgY2hhbmdlZCwgMTQgaW5zZXJ0aW9u
-cygrKSwgNCBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS90YXJnZXQvcmlzY3YvY3NyLmMgYi90
-YXJnZXQvcmlzY3YvY3NyLmMKaW5kZXggYWI1NjY2My4uMDliYzc4MCAxMDA2NDQKLS0tIGEvdGFy
-Z2V0L3Jpc2N2L2Nzci5jCisrKyBiL3RhcmdldC9yaXNjdi9jc3IuYwpAQCAtMjY1NSw3ICsyNjU1
-LDcgQEAgc3RhdGljIFJJU0NWRXhjZXB0aW9uIHJlYWRfc2F0cChDUFVSSVNDVlN0YXRlICplbnYs
-IGludCBjc3JubywKICAgICAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfTk9ORTsKICAgICB9CiAKLSAg
-ICBpZiAoZW52LT5wcml2ID09IFBSVl9TICYmIGdldF9maWVsZChlbnYtPm1zdGF0dXMsIE1TVEFU
-VVNfVFZNKSkgeworICAgIGlmIChlbnYtPnByaXYgPT0gUFJWX1MgJiYgIXJpc2N2X2NwdV92aXJ0
-X2VuYWJsZWQoZW52KSAmJiBnZXRfZmllbGQoZW52LT5tc3RhdHVzLCBNU1RBVFVTX1RWTSkpIHsK
-ICAgICAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfSUxMRUdBTF9JTlNUOwogICAgIH0gZWxzZSB7CiAg
-ICAgICAgICp2YWwgPSBlbnYtPnNhdHA7CkBAIC0yNjgzLDcgKzI2ODMsNyBAQCBzdGF0aWMgUklT
-Q1ZFeGNlcHRpb24gd3JpdGVfc2F0cChDUFVSSVNDVlN0YXRlICplbnYsIGludCBjc3JubywKICAg
-ICB9CiAKICAgICBpZiAodm0gJiYgbWFzaykgewotICAgICAgICBpZiAoZW52LT5wcml2ID09IFBS
-Vl9TICYmIGdldF9maWVsZChlbnYtPm1zdGF0dXMsIE1TVEFUVVNfVFZNKSkgeworICAgICAgICBp
-ZiAoZW52LT5wcml2ID09IFBSVl9TICYmICFyaXNjdl9jcHVfdmlydF9lbmFibGVkKGVudikgJiYg
-Z2V0X2ZpZWxkKGVudi0+bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CiAgICAgICAgICAgICByZXR1
-cm4gUklTQ1ZfRVhDUF9JTExFR0FMX0lOU1Q7CiAgICAgICAgIH0gZWxzZSB7CiAgICAgICAgICAg
-ICAvKgpAQCAtMzA0NywxNCArMzA0NywyNCBAQCBzdGF0aWMgUklTQ1ZFeGNlcHRpb24gcmVhZF9o
-Z2VpcChDUFVSSVNDVlN0YXRlICplbnYsIGludCBjc3JubywKIHN0YXRpYyBSSVNDVkV4Y2VwdGlv
-biByZWFkX2hnYXRwKENQVVJJU0NWU3RhdGUgKmVudiwgaW50IGNzcm5vLAogICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgdGFyZ2V0X3Vsb25nICp2YWwpCiB7Ci0gICAgKnZhbCA9IGVu
-di0+aGdhdHA7CisgICAgaWYgKGVudi0+cHJpdiA9PSBQUlZfUyAmJiBnZXRfZmllbGQoZW52LT5t
-c3RhdHVzLCBNU1RBVFVTX1RWTSkpIHsKKyAgICAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfSUxMRUdB
-TF9JTlNUOworICAgIH0gZWxzZSB7CisgICAgICAgICp2YWwgPSBlbnYtPmhnYXRwOworICAgIH0K
-KwogICAgIHJldHVybiBSSVNDVl9FWENQX05PTkU7CiB9CiAKIHN0YXRpYyBSSVNDVkV4Y2VwdGlv
-biB3cml0ZV9oZ2F0cChDUFVSSVNDVlN0YXRlICplbnYsIGludCBjc3JubywKICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICB0YXJnZXRfdWxvbmcgdmFsKQogewotICAgIGVudi0+aGdh
-dHAgPSB2YWw7CisgICAgaWYgKGVudi0+cHJpdiA9PSBQUlZfUyAmJiBnZXRfZmllbGQoZW52LT5t
-c3RhdHVzLCBNU1RBVFVTX1RWTSkpIHsKKyAgICAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfSUxMRUdB
-TF9JTlNUOworICAgIH0gZWxzZSB7CisgICAgICAgIGVudi0+aGdhdHAgPSB2YWw7CisgICAgfQor
-CiAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfTk9ORTsKIH0g
-------=_Part_3361214_1106745380.1678439318758
+
+On 2023/3/10 17:08, CHEN Yi wrote:
+>
+>     -----Original Messages-----
+>     *From:*"LIU Zhiwei" <zhiwei_liu@linux.alibaba.com>
+>     *Sent Time:*2023-03-10 10:12:10 (Friday)
+>     *To:* chenyi2000@zju.edu.cn, qemu-devel@nongnu.org
+>     *Cc:* "Palmer Dabbelt" <palmer@dabbelt.com>, "Alistair Francis"
+>     <alistair.francis@wdc.com>, "Bin Meng" <bin.meng@windriver.com>,
+>     "Weiwei Li" <liweiwei@iscas.ac.cn>, "Daniel Henrique Barboza"
+>     <dbarboza@ventanamicro.com>, "open list:RISC-V TCG CPUs"
+>     <qemu-riscv@nongnu.org>
+>     *Subject:* Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
+>
+>
+>     On 2023/3/8 20:34, chenyi2000@zju.edu.cn wrote:
+>>     From: Yi Chen<chenyi2000@zju.edu.cn>  Trap accesses to hgatp if MSTATUS_TVM is enabled.
+>>     Don't trap accesses to vsatp even if MSTATUS_TVM is enabled.
+>
+>     By the way, do you know why mstatus_tvm and hstatus_tvm are needed?
+>
+>     The specification said,
+>
+>     The TVM mechanism improves virtualization efficiency by permitting guest operating systems to
+>     execute in S-mode, rather than classically virtualizing them in U-mode. This approach obviates
+>     the need to trap accesses to most S-mode CSRs.
+>
+>     I don't know how the tvm field obviates the need to trap accesses
+>     to most S-mode CSRs.
+>
+>     Thanks,
+>     Zhiwei
+>
+> When VMs are in U-mode, their accesses to S-mode CSR registers must be 
+> emulated. Otherwise, the behavior of the host OS will be affected. But 
+> I guess since TVM helps insert another stage of address translation 
+> below that controlled by the OS, it enables VMs to run in S-mode, 
+> which means that VMs can directly use most S-mode CSR registers 
+> instead of emulated ones.
+>
+If the guest running in S-mode, the other smode CSR accesses may break 
+the host OS.
+
+Zhiwei
+
+>
+> Best,
+>
+> Yi
+>
+>
+>
+>>     Signed-off-by: Yi Chen<chenyi2000@zju.edu.cn>  ---
+>>       target/riscv/csr.c | 18 ++++++++++++++----
+>>       1 file changed, 14 insertions(+), 4 deletions(-)
+>>
+>>     diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>>     index ab56663..09bc780 100644
+>>     --- a/target/riscv/csr.c
+>>     +++ b/target/riscv/csr.c
+>>     @@ -2655,7 +2655,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
+>>               return RISCV_EXCP_NONE;
+>>           }
+>>       
+>>     -    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+>>     +    if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) && get_field(env->mstatus, MSTATUS_TVM)) {
+>>               return RISCV_EXCP_ILLEGAL_INST;
+>>           } else {
+>>               *val = env->satp;
+>>     @@ -2683,7 +2683,7 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
+>>           }
+>>       
+>>           if (vm && mask) {
+>>     -        if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+>>     +        if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) && get_field(env->mstatus, MSTATUS_TVM)) {
+>>                   return RISCV_EXCP_ILLEGAL_INST;
+>>               } else {
+>>                   /*
+>>     @@ -3047,14 +3047,24 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
+>>       static RISCVException read_hgatp(CPURISCVState *env, int csrno,
+>>                                        target_ulong *val)
+>>       {
+>>     -    *val = env->hgatp;
+>>     +    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+>>     +        return RISCV_EXCP_ILLEGAL_INST;
+>>     +    } else {
+>>     +        *val = env->hgatp;
+>>     +    }
+>>     +
+>>           return RISCV_EXCP_NONE;
+>>       }
+>>       
+>>       static RISCVException write_hgatp(CPURISCVState *env, int csrno,
+>>                                         target_ulong val)
+>>       {
+>>     -    env->hgatp = val;
+>>     +    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+>>     +        return RISCV_EXCP_ILLEGAL_INST;
+>>     +    } else {
+>>     +        env->hgatp = val;
+>>     +    }
+>>     +
+>>           return RISCV_EXCP_NONE;
+>>       }
+>
+--------------lYG1tp08znSCecnfBehMxMjN
 Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
 
-PGJsb2NrcXVvdGUgbmFtZT0icmVwbHlDb250ZW50IiBjbGFzcz0iUmVmZXJlbmNlUXVvdGUiIHN0
-eWxlPSJwYWRkaW5nLWxlZnQ6NXB4O21hcmdpbi1sZWZ0OjVweDtib3JkZXItbGVmdDojYjZiNmI2
-IDJweCBzb2xpZDttYXJnaW4tcmlnaHQ6MDsiPgoJLS0tLS1PcmlnaW5hbCBNZXNzYWdlcy0tLS0t
-PGJyPgo8Yj5Gcm9tOjwvYj48c3BhbiBpZD0icmNfZnJvbSI+IkxJVSBaaGl3ZWkiICZsdDt6aGl3
-ZWlfbGl1QGxpbnV4LmFsaWJhYmEuY29tJmd0Ozwvc3Bhbj48YnI+CjxiPlNlbnQgVGltZTo8L2I+
-PHNwYW4gaWQ9InJjX3NlbnR0aW1lIj4yMDIzLTAzLTEwIDEwOjEyOjEwIChGcmlkYXkpPC9zcGFu
-Pjxicj4KPGI+VG86PC9iPiBjaGVueWkyMDAwQHpqdS5lZHUuY24sIHFlbXUtZGV2ZWxAbm9uZ251
-Lm9yZzxicj4KPGI+Q2M6PC9iPiAiUGFsbWVyIERhYmJlbHQiICZsdDtwYWxtZXJAZGFiYmVsdC5j
-b20mZ3Q7LCAiQWxpc3RhaXIgRnJhbmNpcyIgJmx0O2FsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbSZn
-dDssICJCaW4gTWVuZyIgJmx0O2Jpbi5tZW5nQHdpbmRyaXZlci5jb20mZ3Q7LCAiV2Vpd2VpIExp
-IiAmbHQ7bGl3ZWl3ZWlAaXNjYXMuYWMuY24mZ3Q7LCAiRGFuaWVsIEhlbnJpcXVlIEJhcmJvemEi
-ICZsdDtkYmFyYm96YUB2ZW50YW5hbWljcm8uY29tJmd0OywgIm9wZW4gbGlzdDpSSVNDLVYgVENH
-IENQVXMiICZsdDtxZW11LXJpc2N2QG5vbmdudS5vcmcmZ3Q7PGJyPgo8Yj5TdWJqZWN0OjwvYj4g
-UmU6IFtQQVRDSF0gdGFyZ2V0L3Jpc2N2L2Nzci5jOiBmaXggSCBleHRlbnNpb24gVFZNIHRyYXA8
-YnI+Cjxicj4KCTxwPgoJCTxicj4KCTwvcD4KCTxkaXYgY2xhc3M9Im1vei1jaXRlLXByZWZpeCI+
-CgkJT24gMjAyMy8zLzggMjA6MzQsIDxhIGNsYXNzPSJtb3otdHh0LWxpbmstYWJicmV2aWF0ZWQi
-IGhyZWY9Im1haWx0bzpjaGVueWkyMDAwQHpqdS5lZHUuY24iPmNoZW55aTIwMDBAemp1LmVkdS5j
-bjwvYT4gd3JvdGU6PGJyPgoJPC9kaXY+Cgk8YmxvY2txdW90ZSB0eXBlPSJjaXRlIiBjaXRlPSJt
-aWQ6MjAyMzAzMDgxMjM0MTcuMTI1NTUtMS1jaGVueWkyMDAwQHpqdS5lZHUuY24iPgo8cHJlIGNs
-YXNzPSJtb3otcXVvdGUtcHJlIiB3cmFwPSIiPkZyb206IFlpIENoZW4gPGEgY2xhc3M9Im1vei10
-eHQtbGluay1yZmMyMzk2RSIgaHJlZj0ibWFpbHRvOmNoZW55aTIwMDBAemp1LmVkdS5jbiI+Jmx0
-O2NoZW55aTIwMDBAemp1LmVkdS5jbiZndDs8L2E+IFRyYXAgYWNjZXNzZXMgdG8gaGdhdHAgaWYg
-TVNUQVRVU19UVk0gaXMgZW5hYmxlZC4KRG9uJ3QgdHJhcCBhY2Nlc3NlcyB0byB2c2F0cCBldmVu
-IGlmIE1TVEFUVVNfVFZNIGlzIGVuYWJsZWQuPC9wcmU+Cgk8L2Jsb2NrcXVvdGU+Cgk8cD4KCQlC
-eSB0aGUgd2F5LCBkbyB5b3Uga25vdyB3aHkgbXN0YXR1c190dm0gYW5kIGhzdGF0dXNfdHZtIGFy
-ZQogICAgICBuZWVkZWQ/Cgk8L3A+Cgk8cD4KCQlUaGUgc3BlY2lmaWNhdGlvbiBzYWlkLAoJPC9w
-Pgo8cHJlPlRoZSBUVk0gbWVjaGFuaXNtIGltcHJvdmVzIHZpcnR1YWxpemF0aW9uIGVmZmljaWVu
-Y3kgYnkgcGVybWl0dGluZyBndWVzdCBvcGVyYXRpbmcgc3lzdGVtcyB0bwpleGVjdXRlIGluIFMt
-bW9kZSwgcmF0aGVyIHRoYW4gY2xhc3NpY2FsbHkgdmlydHVhbGl6aW5nIHRoZW0gaW4gVS1tb2Rl
-LiBUaGlzIGFwcHJvYWNoIG9idmlhdGVzCnRoZSBuZWVkIHRvIHRyYXAgYWNjZXNzZXMgdG8gbW9z
-dCBTLW1vZGUgQ1NScy4KPC9wcmU+Cgk8cD4KCQlJIGRvbid0IGtub3cgaG93IHRoZSB0dm0gZmll
-bGQgb2J2aWF0ZXMgdGhlIG5lZWQgdG8gdHJhcCBhY2Nlc3NlcwogICAgICB0byBtb3N0IFMtbW9k
-ZSBDU1JzLgoJPC9wPgoJPHA+CgkJVGhhbmtzLDxicj4KWmhpd2VpCgk8L3A+CjwvYmxvY2txdW90
-ZT4KPHA+CjwvcD4KPHA+CglXaGVuIFZNcyBhcmUgaW4gVS1tb2RlLCB0aGVpciBhY2Nlc3NlcyB0
-byBTLW1vZGUgQ1NSIHJlZ2lzdGVycyBtdXN0IGJlIGVtdWxhdGVkLiBPdGhlcndpc2UsIHRoZSBi
-ZWhhdmlvciBvZiB0aGUgaG9zdCBPUyB3aWxsIGJlIGFmZmVjdGVkLiBCdXQgSSBndWVzcyBzaW5j
-ZSBUVk0gaGVscHMgaW5zZXJ0IGFub3RoZXIgc3RhZ2Ugb2YgYWRkcmVzcyB0cmFuc2xhdGlvbiBi
-ZWxvdyB0aGF0IGNvbnRyb2xsZWQgYnkgdGhlIE9TLCBpdCBlbmFibGVzIFZNcyB0byBydW4gaW4g
-Uy1tb2RlLCB3aGljaCBtZWFucyB0aGF0IFZNcyBjYW4gZGlyZWN0bHkgdXNlIG1vc3QgUy1tb2Rl
-IENTUiByZWdpc3RlcnMgaW5zdGVhZCBvZiBlbXVsYXRlZCBvbmVzLgo8L3A+CjxwPgoJPGJyPgo8
-L3A+CjxwPgoJQmVzdCwKPC9wPgo8cD4KCVlpCjwvcD4KPHA+Cgk8YnI+CjwvcD4KPGJsb2NrcXVv
-dGUgbmFtZT0icmVwbHlDb250ZW50IiBjbGFzcz0iUmVmZXJlbmNlUXVvdGUiIHN0eWxlPSJwYWRk
-aW5nLWxlZnQ6NXB4O21hcmdpbi1sZWZ0OjVweDtib3JkZXItbGVmdDojYjZiNmI2IDJweCBzb2xp
-ZDttYXJnaW4tcmlnaHQ6MDsiPgoJPHA+CgkJPGJyPgoJPC9wPgoJPGJsb2NrcXVvdGUgdHlwZT0i
-Y2l0ZSIgY2l0ZT0ibWlkOjIwMjMwMzA4MTIzNDE3LjEyNTU1LTEtY2hlbnlpMjAwMEB6anUuZWR1
-LmNuIj4KPHByZSBjbGFzcz0ibW96LXF1b3RlLXByZSIgd3JhcD0iIj5TaWduZWQtb2ZmLWJ5OiBZ
-aSBDaGVuIDxhIGNsYXNzPSJtb3otdHh0LWxpbmstcmZjMjM5NkUiIGhyZWY9Im1haWx0bzpjaGVu
-eWkyMDAwQHpqdS5lZHUuY24iPiZsdDtjaGVueWkyMDAwQHpqdS5lZHUuY24mZ3Q7PC9hPiAtLS0K
-IHRhcmdldC9yaXNjdi9jc3IuYyB8IDE4ICsrKysrKysrKysrKysrLS0tLQogMSBmaWxlIGNoYW5n
-ZWQsIDE0IGluc2VydGlvbnMoKyksIDQgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvdGFyZ2V0
-L3Jpc2N2L2Nzci5jIGIvdGFyZ2V0L3Jpc2N2L2Nzci5jCmluZGV4IGFiNTY2NjMuLjA5YmM3ODAg
-MTAwNjQ0Ci0tLSBhL3RhcmdldC9yaXNjdi9jc3IuYworKysgYi90YXJnZXQvcmlzY3YvY3NyLmMK
-QEAgLTI2NTUsNyArMjY1NSw3IEBAIHN0YXRpYyBSSVNDVkV4Y2VwdGlvbiByZWFkX3NhdHAoQ1BV
-UklTQ1ZTdGF0ZSAqZW52LCBpbnQgY3Nybm8sCiAgICAgICAgIHJldHVybiBSSVNDVl9FWENQX05P
-TkU7CiAgICAgfQogCi0gICAgaWYgKGVudi0mZ3Q7cHJpdiA9PSBQUlZfUyAmYW1wOyZhbXA7IGdl
-dF9maWVsZChlbnYtJmd0O21zdGF0dXMsIE1TVEFUVVNfVFZNKSkgeworICAgIGlmIChlbnYtJmd0
-O3ByaXYgPT0gUFJWX1MgJmFtcDsmYW1wOyAhcmlzY3ZfY3B1X3ZpcnRfZW5hYmxlZChlbnYpICZh
-bXA7JmFtcDsgZ2V0X2ZpZWxkKGVudi0mZ3Q7bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CiAgICAg
-ICAgIHJldHVybiBSSVNDVl9FWENQX0lMTEVHQUxfSU5TVDsKICAgICB9IGVsc2UgewogICAgICAg
-ICAqdmFsID0gZW52LSZndDtzYXRwOwpAQCAtMjY4Myw3ICsyNjgzLDcgQEAgc3RhdGljIFJJU0NW
-RXhjZXB0aW9uIHdyaXRlX3NhdHAoQ1BVUklTQ1ZTdGF0ZSAqZW52LCBpbnQgY3Nybm8sCiAgICAg
-fQogCiAgICAgaWYgKHZtICZhbXA7JmFtcDsgbWFzaykgewotICAgICAgICBpZiAoZW52LSZndDtw
-cml2ID09IFBSVl9TICZhbXA7JmFtcDsgZ2V0X2ZpZWxkKGVudi0mZ3Q7bXN0YXR1cywgTVNUQVRV
-U19UVk0pKSB7CisgICAgICAgIGlmIChlbnYtJmd0O3ByaXYgPT0gUFJWX1MgJmFtcDsmYW1wOyAh
-cmlzY3ZfY3B1X3ZpcnRfZW5hYmxlZChlbnYpICZhbXA7JmFtcDsgZ2V0X2ZpZWxkKGVudi0mZ3Q7
-bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CiAgICAgICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9J
-TExFR0FMX0lOU1Q7CiAgICAgICAgIH0gZWxzZSB7CiAgICAgICAgICAgICAvKgpAQCAtMzA0Nywx
-NCArMzA0NywyNCBAQCBzdGF0aWMgUklTQ1ZFeGNlcHRpb24gcmVhZF9oZ2VpcChDUFVSSVNDVlN0
-YXRlICplbnYsIGludCBjc3JubywKIHN0YXRpYyBSSVNDVkV4Y2VwdGlvbiByZWFkX2hnYXRwKENQ
-VVJJU0NWU3RhdGUgKmVudiwgaW50IGNzcm5vLAogICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgdGFyZ2V0X3Vsb25nICp2YWwpCiB7Ci0gICAgKnZhbCA9IGVudi0mZ3Q7aGdhdHA7Cisg
-ICAgaWYgKGVudi0mZ3Q7cHJpdiA9PSBQUlZfUyAmYW1wOyZhbXA7IGdldF9maWVsZChlbnYtJmd0
-O21zdGF0dXMsIE1TVEFUVVNfVFZNKSkgeworICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9JTExF
-R0FMX0lOU1Q7CisgICAgfSBlbHNlIHsKKyAgICAgICAgKnZhbCA9IGVudi0mZ3Q7aGdhdHA7Cisg
-ICAgfQorCiAgICAgcmV0dXJuIFJJU0NWX0VYQ1BfTk9ORTsKIH0KIAogc3RhdGljIFJJU0NWRXhj
-ZXB0aW9uIHdyaXRlX2hnYXRwKENQVVJJU0NWU3RhdGUgKmVudiwgaW50IGNzcm5vLAogICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRhcmdldF91bG9uZyB2YWwpCiB7Ci0gICAgZW52
-LSZndDtoZ2F0cCA9IHZhbDsKKyAgICBpZiAoZW52LSZndDtwcml2ID09IFBSVl9TICZhbXA7JmFt
-cDsgZ2V0X2ZpZWxkKGVudi0mZ3Q7bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7CisgICAgICAgIHJl
-dHVybiBSSVNDVl9FWENQX0lMTEVHQUxfSU5TVDsKKyAgICB9IGVsc2UgeworICAgICAgICBlbnYt
-Jmd0O2hnYXRwID0gdmFsOworICAgIH0KKwogICAgIHJldHVybiBSSVNDVl9FWENQX05PTkU7CiB9
-IDxzcGFuIHN0eWxlPSJmb250LWZhbWlseTon5a6L5L2TLCBhcmlhbCwgVmVyZGFuYSwgc2Fucy1z
-ZXJpZic7Ij48c3BhbiBzdHlsZT0id2hpdGUtc3BhY2U6bm93cmFwOyI+IDwvc3Bhbj48L3NwYW4+
-PC9wcmU+Cgk8L2Jsb2NrcXVvdGU+CjwvYmxvY2txdW90ZT4=
-------=_Part_3361214_1106745380.1678439318758--
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2023/3/10 17:08, CHEN Yi wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:33d93933.8ba4c.186cac784e7.Coremail.chenyi2000@zju.edu.cn">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <blockquote name="replyContent" class="ReferenceQuote"
+        style="padding-left:5px;margin-left:5px;border-left:#b6b6b6 2px
+        solid;margin-right:0;"> -----Original Messages-----<br>
+        <b>From:</b><span id="rc_from">"LIU Zhiwei"
+          <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@linux.alibaba.com">&lt;zhiwei_liu@linux.alibaba.com&gt;</a></span><br>
+        <b>Sent Time:</b><span id="rc_senttime">2023-03-10 10:12:10
+          (Friday)</span><br>
+        <b>To:</b> <a class="moz-txt-link-abbreviated" href="mailto:chenyi2000@zju.edu.cn">chenyi2000@zju.edu.cn</a>, <a class="moz-txt-link-abbreviated" href="mailto:qemu-devel@nongnu.org">qemu-devel@nongnu.org</a><br>
+        <b>Cc:</b> "Palmer Dabbelt" <a class="moz-txt-link-rfc2396E" href="mailto:palmer@dabbelt.com">&lt;palmer@dabbelt.com&gt;</a>,
+        "Alistair Francis" <a class="moz-txt-link-rfc2396E" href="mailto:alistair.francis@wdc.com">&lt;alistair.francis@wdc.com&gt;</a>, "Bin Meng"
+        <a class="moz-txt-link-rfc2396E" href="mailto:bin.meng@windriver.com">&lt;bin.meng@windriver.com&gt;</a>, "Weiwei Li"
+        <a class="moz-txt-link-rfc2396E" href="mailto:liweiwei@iscas.ac.cn">&lt;liweiwei@iscas.ac.cn&gt;</a>, "Daniel Henrique Barboza"
+        <a class="moz-txt-link-rfc2396E" href="mailto:dbarboza@ventanamicro.com">&lt;dbarboza@ventanamicro.com&gt;</a>, "open list:RISC-V TCG CPUs"
+        <a class="moz-txt-link-rfc2396E" href="mailto:qemu-riscv@nongnu.org">&lt;qemu-riscv@nongnu.org&gt;</a><br>
+        <b>Subject:</b> Re: [PATCH] target/riscv/csr.c: fix H extension
+        TVM trap<br>
+        <br>
+        <p> <br>
+        </p>
+        <div class="moz-cite-prefix"> On 2023/3/8 20:34, <a
+            class="moz-txt-link-abbreviated moz-txt-link-freetext"
+            href="mailto:chenyi2000@zju.edu.cn" moz-do-not-send="true">chenyi2000@zju.edu.cn</a>
+          wrote:<br>
+        </div>
+        <blockquote type="cite"
+          cite="mid:20230308123417.12555-1-chenyi2000@zju.edu.cn">
+          <pre class="moz-quote-pre" wrap="">From: Yi Chen <a class="moz-txt-link-rfc2396E" href="mailto:chenyi2000@zju.edu.cn" moz-do-not-send="true">&lt;chenyi2000@zju.edu.cn&gt;</a> Trap accesses to hgatp if MSTATUS_TVM is enabled.
+Don't trap accesses to vsatp even if MSTATUS_TVM is enabled.</pre>
+        </blockquote>
+        <p> By the way, do you know why mstatus_tvm and hstatus_tvm are
+          needed? </p>
+        <p> The specification said, </p>
+        <pre>The TVM mechanism improves virtualization efficiency by permitting guest operating systems to
+execute in S-mode, rather than classically virtualizing them in U-mode. This approach obviates
+the need to trap accesses to most S-mode CSRs.
+</pre>
+        <p> I don't know how the tvm field obviates the need to trap
+          accesses to most S-mode CSRs. </p>
+        <p> Thanks,<br>
+          Zhiwei </p>
+      </blockquote>
+      <p>
+      </p>
+      <p> When VMs are in U-mode, their accesses to S-mode CSR registers
+        must be emulated. Otherwise, the behavior of the host OS will be
+        affected. But I guess since TVM helps insert another stage of
+        address translation below that controlled by the OS, it enables
+        VMs to run in S-mode, which means that VMs can directly use most
+        S-mode CSR registers instead of emulated ones.
+      </p>
+    </blockquote>
+    <p>If the guest running in S-mode, the other smode CSR accesses may
+      break the host OS.  <br>
+    </p>
+    <p>Zhiwei<br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:33d93933.8ba4c.186cac784e7.Coremail.chenyi2000@zju.edu.cn">
+      <p> <br>
+      </p>
+      <p> Best,
+      </p>
+      <p> Yi
+      </p>
+      <p> <br>
+      </p>
+      <blockquote name="replyContent" class="ReferenceQuote"
+        style="padding-left:5px;margin-left:5px;border-left:#b6b6b6 2px
+        solid;margin-right:0;">
+        <p> <br>
+        </p>
+        <blockquote type="cite"
+          cite="mid:20230308123417.12555-1-chenyi2000@zju.edu.cn">
+          <pre class="moz-quote-pre" wrap="">Signed-off-by: Yi Chen <a class="moz-txt-link-rfc2396E" href="mailto:chenyi2000@zju.edu.cn" moz-do-not-send="true">&lt;chenyi2000@zju.edu.cn&gt;</a> ---
+ target/riscv/csr.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index ab56663..09bc780 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2655,7 +2655,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
+         return RISCV_EXCP_NONE;
+     }
+ 
+-    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
++    if (env-&gt;priv == PRV_S &amp;&amp; !riscv_cpu_virt_enabled(env) &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
+         return RISCV_EXCP_ILLEGAL_INST;
+     } else {
+         *val = env-&gt;satp;
+@@ -2683,7 +2683,7 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
+     }
+ 
+     if (vm &amp;&amp; mask) {
+-        if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
++        if (env-&gt;priv == PRV_S &amp;&amp; !riscv_cpu_virt_enabled(env) &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
+             return RISCV_EXCP_ILLEGAL_INST;
+         } else {
+             /*
+@@ -3047,14 +3047,24 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
+ static RISCVException read_hgatp(CPURISCVState *env, int csrno,
+                                  target_ulong *val)
+ {
+-    *val = env-&gt;hgatp;
++    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    } else {
++        *val = env-&gt;hgatp;
++    }
++
+     return RISCV_EXCP_NONE;
+ }
+ 
+ static RISCVException write_hgatp(CPURISCVState *env, int csrno,
+                                   target_ulong val)
+ {
+-    env-&gt;hgatp = val;
++    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    } else {
++        env-&gt;hgatp = val;
++    }
++
+     return RISCV_EXCP_NONE;
+ } <span style="font-family:'宋体, arial, Verdana, sans-serif';"><span style="white-space:nowrap;"> </span></span></pre>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </body>
+</html>
+
+--------------lYG1tp08znSCecnfBehMxMjN--
 
