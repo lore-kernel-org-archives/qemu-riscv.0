@@ -1,65 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1paTuU-0000B1-BW
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 22:59:14 -0500
+	id 1paUCw-0002XL-DJ
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 23:18:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1paTuS-0000Ab-Uk; Thu, 09 Mar 2023 22:59:13 -0500
-Received: from mail-ua1-x92e.google.com ([2607:f8b0:4864:20::92e])
+ id 1paUCu-0002Wo-83; Thu, 09 Mar 2023 23:18:16 -0500
+Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1paTuR-0001ni-Do; Thu, 09 Mar 2023 22:59:12 -0500
-Received: by mail-ua1-x92e.google.com with SMTP id x1so2678985uav.9;
- Thu, 09 Mar 2023 19:59:10 -0800 (PST)
+ id 1paUCs-0005EH-Da; Thu, 09 Mar 2023 23:18:15 -0500
+Received: by mail-vs1-xe2d.google.com with SMTP id d7so3617614vsj.2;
+ Thu, 09 Mar 2023 20:18:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1678420750;
+ d=gmail.com; s=20210112; t=1678421892;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ce5Emz7Kx4FfBs4paLCODWnbHCptHGBkaFDAaQ79X+U=;
- b=JY5KRNdtUtB8D7cChNmlrBdqkDw5vxYQLf5iIGsF/o+dA2DddKF1F1UeBG782uYOR0
- U9UpEd67NQkSvX5Ztc1smQ+YK9m+A3fm2uD1fEYm8gqKSnhwu+6Ol6sPNsPAhcs2OD/F
- QvdZua3K9svDJipakxTqVlpWLfrVo8CSRXSL+8kQKQweXOmIM3OZdc4MdGWJ1WCpwYZI
- 4cA5s4OZKoXOzHRgL1WrQyq/I2Eo6MmD+h4XmAXudl9AAm6EfNoZlGq+ztZ6qJuf4fHQ
- 2anpbyRlV/oA/TwJ5aHKoMvmXTY3ZwEx/2XoR+FeIrNbO7MWK4SLbQGVddQm8v279Y/0
- 5NrQ==
+ bh=2q0Jafov6kUZR8tyjsO+Csu6RGx6hFW3jb968e4aVuU=;
+ b=ZMX/hpURIkQbxE1c4/xkB3cgRzXrGrZuQdxCL9H9wpH1J0Sj5o08PqaMKK45Cf5oPM
+ sAc163VGrp1YA/UL0lwDGDKZB0CC7U6PyqbwCeijgTZQQIlQGFDBpAm24+rl5wriWaj4
+ mZ9nr2lLpbJXZulO2/t7KUziZUMJxc42b90SZNKfeSIbfGoOlp4uYNNnQY/2pyuJlNgI
+ CXQQCXV+M28qozXM4TpYAvyhwfGTwZTTByBoJEdKen8IyivIADQmtE8r0XF2qI+DrEGZ
+ OWg4hCuiIiV4OlO2/DFsUhUWmKn4QdfBKp7UmG3EFdJsHZwkRzIYqReRw+oWczvo9OE6
+ eTcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678420750;
+ d=1e100.net; s=20210112; t=1678421892;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ce5Emz7Kx4FfBs4paLCODWnbHCptHGBkaFDAaQ79X+U=;
- b=tP05P9Ajh7nTw8BRa+DAi/QthVCtfhR69x4wb81/YsLDT6XIZwxZfoMvDvPytoLr6v
- CA1fIIuGkzIzBkEKFpG2Oyz2BPCPbwIpDlJjiHeOw3eYksI3+6tXdR//PcvIF2uJMS8P
- tqQRRv2gftu9VN/1bhDZo02jEW4JHojjsOyTXy0XQP/UCeOINQWBmpW+ixnMzsaz0ipc
- Sq9BEw7cP65rb6db+bJ7ycwowjA+epdpTQsM0MV/B+xAExzHN4UKmBFJwxkEXjJP+i89
- 3PHkL/mcABkAQXi7keVXjFyIQbLx3H+QmVcAL3I1WO3AmI4KahE/xO72SiD4WlmhvSjR
- ljkg==
-X-Gm-Message-State: AO0yUKVncvCYIjrceK1lWUbJgBBKWGl/TndTeiqPZ3/pdG3baJOUXq4Z
- VcqbxjAFpuXRU29mPD8DVu3Jq7rCHBJs+juPZ+o=
-X-Google-Smtp-Source: AK7set/RZXdVIM9pNeI2sdgaS2qe86wzBaHYLKH/QtNRvnxuYcJCk0T4YfxCLK4PYELIes7coTwOBz1nLXVzk1MOTJM=
-X-Received: by 2002:a1f:6d42:0:b0:401:b9fd:7053 with SMTP id
- i63-20020a1f6d42000000b00401b9fd7053mr15756642vkc.2.1678420749974; Thu, 09
- Mar 2023 19:59:09 -0800 (PST)
+ bh=2q0Jafov6kUZR8tyjsO+Csu6RGx6hFW3jb968e4aVuU=;
+ b=ovpGw3XVGfnzxKoPQ1GH9C5AT572vvOz1EYJtI9fY62yS7aaEsiBHdWnvnTFtTPoFC
+ IHvJ/wRlgXZi6morB9yJpDQe+Dtqrks6gqTEr/pf8vob017OxEM1HYg5AZYuBEaEo6Qs
+ ChmHgDOv4R3cJV5ICrvaAFaBtd7eKsgkaqrtrzoy4rnQZ8ptAa71jLwaSfGIZDzBRxlF
+ EIFih7rB/xXex+AY2Zkz9z98QqOjqXsY9acqGFFg6mSyQQe4WpGQcBsjC9Jc6s3wXfUF
+ eG1JRsvTAfa+r6zw7Nev8U5hgrgRKC37PZpCv39x5GFgcNbC0sTc4zoABAKeTHyyxjzj
+ wjew==
+X-Gm-Message-State: AO0yUKXbbwWE7v9FyTigOOQfP5teWVr9nRw6yEyHlSgp5KVkBSg72wPc
+ v7RQSHC5DGTXtXQkRraZdlswhrTkapUDtd9Qet8=
+X-Google-Smtp-Source: AK7set87Eb0lCVWgEIVBE4MAXB95JLxhw34L9nosEDOWjzMMiyDtu+3eQoI2bGHJ8KaZpUaE4zGVFdwS+97bwqcfOP8=
+X-Received: by 2002:a67:fd7a:0:b0:416:f1ea:1001 with SMTP id
+ h26-20020a67fd7a000000b00416f1ea1001mr16314222vsa.5.1678421891880; Thu, 09
+ Mar 2023 20:18:11 -0800 (PST)
 MIME-Version: 1.0
-References: <20230305094231.1616-1-jim.shu@sifive.com>
- <20230305094231.1616-2-jim.shu@sifive.com>
-In-Reply-To: <20230305094231.1616-2-jim.shu@sifive.com>
+References: <20230227090228.17117-1-ivan.klokov@syntacore.com>
+In-Reply-To: <20230227090228.17117-1-ivan.klokov@syntacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 10 Mar 2023 13:58:43 +1000
-Message-ID: <CAKmqyKPm=EUrKn7DGobMG1ax1KtGv3Kf1fxAqDB961Mfa8Sb8w@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv: Make the "virt" register writable by GDB
-To: Jim Shu <jim.shu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Date: Fri, 10 Mar 2023 14:17:45 +1000
+Message-ID: <CAKmqyKMbr5ZTOmjyHLgjh266upSFDOgZUCo95OHk80REC+m6fg@mail.gmail.com>
+Subject: Re: [PATCH] Fix slli_uw decoding
+To: Ivan Klokov <ivan.klokov@syntacore.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Alistair.Francis@wdc.com, 
+ palmer@dabbelt.com, philipp.tomsich@vrull.eu
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92e;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -80,70 +75,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Mar 2023 03:59:13 -0000
+X-List-Received-Date: Fri, 10 Mar 2023 04:18:16 -0000
 
-On Sun, Mar 5, 2023 at 7:43=E2=80=AFPM Jim Shu <jim.shu@sifive.com> wrote:
+On Mon, Feb 27, 2023 at 7:06=E2=80=AFPM Ivan Klokov <ivan.klokov@syntacore.=
+com> wrote:
 >
-> This patch also enables debugger to set current privilege mode to
-> VU/VS-mode.
+> The decoding of the slli_uw currently contains decoding
+> error: shamt part of opcode has six bits, not five.
 >
-> Extend previous commit 81d2929c41d32af138f3562f5a7b309f6eac7ca7 to
-> support H-extension.
+> Fixes 3de1fb71("target/riscv: update disas.c for xnor/orn/andn and slli.u=
+w")
+>
+> Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
 
-I'm not sure we want this. What is the use case for this?
-
-Changing the virt mode on the fly like this is likely to break lots of
-software. Should we really allow users to do this?
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->
-> Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
 > ---
->  target/riscv/gdbstub.c | 18 ++++++++++++++++--
->  1 file changed, 16 insertions(+), 2 deletions(-)
+>  disas/riscv.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 >
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index 1755fd9d51..a7f234beaf 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -203,15 +203,29 @@ static int riscv_gdb_get_virtual(CPURISCVState *cs,=
- GByteArray *buf, int n)
->
->  static int riscv_gdb_set_virtual(CPURISCVState *cs, uint8_t *mem_buf, in=
-t n)
->  {
-> +#ifdef CONFIG_USER_ONLY
-> +    if (n >=3D 0 && n <=3D 1) {
-> +        return sizeof(target_ulong);
-> +    }
-> +#else
-> +    bool virt;
-> +
->      if (n =3D=3D 0) {
-> -#ifndef CONFIG_USER_ONLY
->          cs->priv =3D ldtul_p(mem_buf) & 0x3;
->          if (cs->priv =3D=3D PRV_H) {
->              cs->priv =3D PRV_S;
->          }
-> -#endif
-> +        return sizeof(target_ulong);
-> +    } else if (n =3D=3D 1) {
-> +        virt =3D ldtul_p(mem_buf) & 0x1;
-> +        if ((cs->priv =3D=3D PRV_M) && (virt =3D=3D true)) {
-> +            /* M-mode only supports V=3D0. */
-> +            virt =3D false;
-> +        }
-> +        riscv_cpu_set_virt_enabled(cs, virt);
->          return sizeof(target_ulong);
->      }
-> +#endif
->      return 0;
->  }
->
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index ddda687c13..03cfefb0d3 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -1647,7 +1647,7 @@ const rv_opcode_data opcode_data[] =3D {
+>      { "clzw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+>      { "clzw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+>      { "cpopw", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
+> -    { "slli.uw", rv_codec_i_sh5, rv_fmt_rd_rs1_imm, NULL, 0, 0, 0 },
+> +    { "slli.uw", rv_codec_i_sh6, rv_fmt_rd_rs1_imm, NULL, 0, 0, 0 },
+>      { "add.uw", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+>      { "rolw", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+>      { "rorw", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+> @@ -2617,10 +2617,10 @@ static void decode_inst_opcode(rv_decode *dec, rv=
+_isa isa)
+>              switch (((inst >> 12) & 0b111)) {
+>              case 0: op =3D rv_op_addiw; break;
+>              case 1:
+> -                switch (((inst >> 25) & 0b1111111)) {
+> +                switch (((inst >> 26) & 0b111111)) {
+>                  case 0: op =3D rv_op_slliw; break;
+> -                case 4: op =3D rv_op_slli_uw; break;
+> -                case 48:
+> +                case 2: op =3D rv_op_slli_uw; break;
+> +                case 24:
+>                      switch ((inst >> 20) & 0b11111) {
+>                      case 0b00000: op =3D rv_op_clzw; break;
+>                      case 0b00001: op =3D rv_op_ctzw; break;
 > --
-> 2.17.1
+> 2.34.1
 >
 >
 
