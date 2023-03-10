@@ -1,49 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1paSF8-0003zm-Fg
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 21:12:26 -0500
+	id 1paTuU-0000B1-BW
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Mar 2023 22:59:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1paSF7-0003zT-2y; Thu, 09 Mar 2023 21:12:25 -0500
-Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1paSF4-0007w3-Ci; Thu, 09 Mar 2023 21:12:24 -0500
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R771e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0VdVJAIe_1678414331; 
-Received: from 30.221.99.193(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VdVJAIe_1678414331) by smtp.aliyun-inc.com;
- Fri, 10 Mar 2023 10:12:12 +0800
-Content-Type: multipart/alternative;
- boundary="------------Q3SsejpLbgmwUjK7Bx0YaGKI"
-Message-ID: <087472fc-94f1-165d-9776-8e12d60be09d@linux.alibaba.com>
-Date: Fri, 10 Mar 2023 10:12:10 +0800
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1paTuS-0000Ab-Uk; Thu, 09 Mar 2023 22:59:13 -0500
+Received: from mail-ua1-x92e.google.com ([2607:f8b0:4864:20::92e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1paTuR-0001ni-Do; Thu, 09 Mar 2023 22:59:12 -0500
+Received: by mail-ua1-x92e.google.com with SMTP id x1so2678985uav.9;
+ Thu, 09 Mar 2023 19:59:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20210112; t=1678420750;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ce5Emz7Kx4FfBs4paLCODWnbHCptHGBkaFDAaQ79X+U=;
+ b=JY5KRNdtUtB8D7cChNmlrBdqkDw5vxYQLf5iIGsF/o+dA2DddKF1F1UeBG782uYOR0
+ U9UpEd67NQkSvX5Ztc1smQ+YK9m+A3fm2uD1fEYm8gqKSnhwu+6Ol6sPNsPAhcs2OD/F
+ QvdZua3K9svDJipakxTqVlpWLfrVo8CSRXSL+8kQKQweXOmIM3OZdc4MdGWJ1WCpwYZI
+ 4cA5s4OZKoXOzHRgL1WrQyq/I2Eo6MmD+h4XmAXudl9AAm6EfNoZlGq+ztZ6qJuf4fHQ
+ 2anpbyRlV/oA/TwJ5aHKoMvmXTY3ZwEx/2XoR+FeIrNbO7MWK4SLbQGVddQm8v279Y/0
+ 5NrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1678420750;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ce5Emz7Kx4FfBs4paLCODWnbHCptHGBkaFDAaQ79X+U=;
+ b=tP05P9Ajh7nTw8BRa+DAi/QthVCtfhR69x4wb81/YsLDT6XIZwxZfoMvDvPytoLr6v
+ CA1fIIuGkzIzBkEKFpG2Oyz2BPCPbwIpDlJjiHeOw3eYksI3+6tXdR//PcvIF2uJMS8P
+ tqQRRv2gftu9VN/1bhDZo02jEW4JHojjsOyTXy0XQP/UCeOINQWBmpW+ixnMzsaz0ipc
+ Sq9BEw7cP65rb6db+bJ7ycwowjA+epdpTQsM0MV/B+xAExzHN4UKmBFJwxkEXjJP+i89
+ 3PHkL/mcABkAQXi7keVXjFyIQbLx3H+QmVcAL3I1WO3AmI4KahE/xO72SiD4WlmhvSjR
+ ljkg==
+X-Gm-Message-State: AO0yUKVncvCYIjrceK1lWUbJgBBKWGl/TndTeiqPZ3/pdG3baJOUXq4Z
+ VcqbxjAFpuXRU29mPD8DVu3Jq7rCHBJs+juPZ+o=
+X-Google-Smtp-Source: AK7set/RZXdVIM9pNeI2sdgaS2qe86wzBaHYLKH/QtNRvnxuYcJCk0T4YfxCLK4PYELIes7coTwOBz1nLXVzk1MOTJM=
+X-Received: by 2002:a1f:6d42:0:b0:401:b9fd:7053 with SMTP id
+ i63-20020a1f6d42000000b00401b9fd7053mr15756642vkc.2.1678420749974; Thu, 09
+ Mar 2023 19:59:09 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH] target/riscv/csr.c: fix H extension TVM trap
-Content-Language: en-US
-To: chenyi2000@zju.edu.cn, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+References: <20230305094231.1616-1-jim.shu@sifive.com>
+ <20230305094231.1616-2-jim.shu@sifive.com>
+In-Reply-To: <20230305094231.1616-2-jim.shu@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 10 Mar 2023 13:58:43 +1000
+Message-ID: <CAKmqyKPm=EUrKn7DGobMG1ax1KtGv3Kf1fxAqDB961Mfa8Sb8w@mail.gmail.com>
+Subject: Re: [PATCH 2/2] target/riscv: Make the "virt" register writable by GDB
+To: Jim Shu <jim.shu@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20230308123417.12555-1-chenyi2000@zju.edu.cn>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230308123417.12555-1-chenyi2000@zju.edu.cn>
-Received-SPF: pass client-ip=115.124.30.119;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-119.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- HTML_MESSAGE=0.001, NICE_REPLY_A=-0.001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92e;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -56,185 +80,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Mar 2023 02:12:25 -0000
+X-List-Received-Date: Fri, 10 Mar 2023 03:59:13 -0000
 
-This is a multi-part message in MIME format.
---------------Q3SsejpLbgmwUjK7Bx0YaGKI
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-
-On 2023/3/8 20:34, chenyi2000@zju.edu.cn wrote:
-> From: Yi Chen<chenyi2000@zju.edu.cn>
+On Sun, Mar 5, 2023 at 7:43=E2=80=AFPM Jim Shu <jim.shu@sifive.com> wrote:
 >
-> Trap accesses to hgatp if MSTATUS_TVM is enabled.
-> Don't trap accesses to vsatp even if MSTATUS_TVM is enabled.
+> This patch also enables debugger to set current privilege mode to
+> VU/VS-mode.
+>
+> Extend previous commit 81d2929c41d32af138f3562f5a7b309f6eac7ca7 to
+> support H-extension.
 
-By the way, do you know why mstatus_tvm and hstatus_tvm are needed?
+I'm not sure we want this. What is the use case for this?
 
-The specification said,
+Changing the virt mode on the fly like this is likely to break lots of
+software. Should we really allow users to do this?
 
-The TVM mechanism improves virtualization efficiency by permitting guest operating systems to
-execute in S-mode, rather than classically virtualizing them in U-mode. This approach obviates
-the need to trap accesses to most S-mode CSRs.
-
-I don't know how the tvm field obviates the need to trap accesses to 
-most S-mode CSRs.
-
-Thanks,
-Zhiwei
+Alistair
 
 >
-> Signed-off-by: Yi Chen<chenyi2000@zju.edu.cn>
+> Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
 > ---
->   target/riscv/csr.c | 18 ++++++++++++++----
->   1 file changed, 14 insertions(+), 4 deletions(-)
+>  target/riscv/gdbstub.c | 18 ++++++++++++++++--
+>  1 file changed, 16 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index ab56663..09bc780 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -2655,7 +2655,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
->           return RISCV_EXCP_NONE;
->       }
->   
-> -    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
-> +    if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) && get_field(env->mstatus, MSTATUS_TVM)) {
->           return RISCV_EXCP_ILLEGAL_INST;
->       } else {
->           *val = env->satp;
-> @@ -2683,7 +2683,7 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
->       }
->   
->       if (vm && mask) {
-> -        if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
-> +        if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) && get_field(env->mstatus, MSTATUS_TVM)) {
->               return RISCV_EXCP_ILLEGAL_INST;
->           } else {
->               /*
-> @@ -3047,14 +3047,24 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
->   static RISCVException read_hgatp(CPURISCVState *env, int csrno,
->                                    target_ulong *val)
->   {
-> -    *val = env->hgatp;
-> +    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    } else {
-> +        *val = env->hgatp;
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 1755fd9d51..a7f234beaf 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -203,15 +203,29 @@ static int riscv_gdb_get_virtual(CPURISCVState *cs,=
+ GByteArray *buf, int n)
+>
+>  static int riscv_gdb_set_virtual(CPURISCVState *cs, uint8_t *mem_buf, in=
+t n)
+>  {
+> +#ifdef CONFIG_USER_ONLY
+> +    if (n >=3D 0 && n <=3D 1) {
+> +        return sizeof(target_ulong);
 > +    }
+> +#else
+> +    bool virt;
 > +
->       return RISCV_EXCP_NONE;
->   }
->   
->   static RISCVException write_hgatp(CPURISCVState *env, int csrno,
->                                     target_ulong val)
->   {
-> -    env->hgatp = val;
-> +    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    } else {
-> +        env->hgatp = val;
-> +    }
-> +
->       return RISCV_EXCP_NONE;
->   }
->   
---------------Q3SsejpLbgmwUjK7Bx0YaGKI
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2023/3/8 20:34,
-      <a class="moz-txt-link-abbreviated" href="mailto:chenyi2000@zju.edu.cn">chenyi2000@zju.edu.cn</a> wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:20230308123417.12555-1-chenyi2000@zju.edu.cn">
-      <pre class="moz-quote-pre" wrap="">From: Yi Chen <a class="moz-txt-link-rfc2396E" href="mailto:chenyi2000@zju.edu.cn">&lt;chenyi2000@zju.edu.cn&gt;</a>
-
-Trap accesses to hgatp if MSTATUS_TVM is enabled.
-Don't trap accesses to vsatp even if MSTATUS_TVM is enabled.</pre>
-    </blockquote>
-    <p>By the way, do you know why mstatus_tvm and hstatus_tvm are
-      needed?</p>
-    <p>The specification said,</p>
-    <pre>The TVM mechanism improves virtualization efficiency by permitting guest operating systems to
-execute in S-mode, rather than classically virtualizing them in U-mode. This approach obviates
-the need to trap accesses to most S-mode CSRs.
-</pre>
-    <p>I don't know how the tvm field obviates the need to trap accesses
-      to most S-mode CSRs.<br>
-    </p>
-    <p>Thanks,<br>
-      Zhiwei<br>
-    </p>
-    <blockquote type="cite"
-      cite="mid:20230308123417.12555-1-chenyi2000@zju.edu.cn">
-      <pre class="moz-quote-pre" wrap="">
-
-Signed-off-by: Yi Chen <a class="moz-txt-link-rfc2396E" href="mailto:chenyi2000@zju.edu.cn">&lt;chenyi2000@zju.edu.cn&gt;</a>
----
- target/riscv/csr.c | 18 ++++++++++++++----
- 1 file changed, 14 insertions(+), 4 deletions(-)
-
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index ab56663..09bc780 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -2655,7 +2655,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
-         return RISCV_EXCP_NONE;
-     }
- 
--    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
-+    if (env-&gt;priv == PRV_S &amp;&amp; !riscv_cpu_virt_enabled(env) &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     } else {
-         *val = env-&gt;satp;
-@@ -2683,7 +2683,7 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
-     }
- 
-     if (vm &amp;&amp; mask) {
--        if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
-+        if (env-&gt;priv == PRV_S &amp;&amp; !riscv_cpu_virt_enabled(env) &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
-             return RISCV_EXCP_ILLEGAL_INST;
-         } else {
-             /*
-@@ -3047,14 +3047,24 @@ static RISCVException read_hgeip(CPURISCVState *env, int csrno,
- static RISCVException read_hgatp(CPURISCVState *env, int csrno,
-                                  target_ulong *val)
- {
--    *val = env-&gt;hgatp;
-+    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    } else {
-+        *val = env-&gt;hgatp;
-+    }
-+
-     return RISCV_EXCP_NONE;
- }
- 
- static RISCVException write_hgatp(CPURISCVState *env, int csrno,
-                                   target_ulong val)
- {
--    env-&gt;hgatp = val;
-+    if (env-&gt;priv == PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_TVM)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    } else {
-+        env-&gt;hgatp = val;
-+    }
-+
-     return RISCV_EXCP_NONE;
- }
- 
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------Q3SsejpLbgmwUjK7Bx0YaGKI--
+>      if (n =3D=3D 0) {
+> -#ifndef CONFIG_USER_ONLY
+>          cs->priv =3D ldtul_p(mem_buf) & 0x3;
+>          if (cs->priv =3D=3D PRV_H) {
+>              cs->priv =3D PRV_S;
+>          }
+> -#endif
+> +        return sizeof(target_ulong);
+> +    } else if (n =3D=3D 1) {
+> +        virt =3D ldtul_p(mem_buf) & 0x1;
+> +        if ((cs->priv =3D=3D PRV_M) && (virt =3D=3D true)) {
+> +            /* M-mode only supports V=3D0. */
+> +            virt =3D false;
+> +        }
+> +        riscv_cpu_set_virt_enabled(cs, virt);
+>          return sizeof(target_ulong);
+>      }
+> +#endif
+>      return 0;
+>  }
+>
+> --
+> 2.17.1
+>
+>
 
