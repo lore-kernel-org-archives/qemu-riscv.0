@@ -1,74 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pbgXF-0000zC-Ko
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Mar 2023 07:40:13 -0400
+	id 1pbhJO-0006ab-IB
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Mar 2023 08:29:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pbgXE-0000yl-6p
- for qemu-riscv@nongnu.org; Mon, 13 Mar 2023 07:40:12 -0400
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pbhJM-0006Va-CF
+ for qemu-riscv@nongnu.org; Mon, 13 Mar 2023 08:29:56 -0400
+Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pbgXB-0002yk-I9
- for qemu-riscv@nongnu.org; Mon, 13 Mar 2023 07:40:11 -0400
-Received: by mail-wr1-x430.google.com with SMTP id i9so1985516wrp.3
- for <qemu-riscv@nongnu.org>; Mon, 13 Mar 2023 04:40:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pbhJK-0004ye-BS
+ for qemu-riscv@nongnu.org; Mon, 13 Mar 2023 08:29:56 -0400
+Received: by mail-oo1-xc33.google.com with SMTP id
+ e12-20020a4ae0cc000000b00525034ca5e9so1798588oot.0
+ for <qemu-riscv@nongnu.org>; Mon, 13 Mar 2023 05:29:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678707607;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=ventanamicro.com; s=google; t=1678710593;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=UiFoUA81V4aPPuk00TispSuT5tLI9a4wkzitJ40zKPw=;
- b=QpC6nUm0eRJxdnl5vA4C6A5oSoscBmorqvVWT/KVF4lJGnEkvr1Xd+fCqe1yacrwlQ
- ioOtsmXR2MIq8xnBmsR0Y88SC/dUdEkiscEDaI2eWrG3kbkYHNoYbS51F2+EXbfhDLc+
- wqFUtHRkPmAuIN3UZj2x61PML1WgOYBaidrQfsG4yUWZ1NPQqlArPlFKcouLB4eUkbR9
- mTmZvriBeHgPxI1jYwRAEGWraQEeD4pIKxIyPh9a31rVN8WOOpj02a7VgVZlDI9aYMyl
- Q49Y7DbAu4qVDUigg6MTp5GHjwvtnRVNSHzK53TXZ1Ct7sXBYuY8Y5gb8VlZUQFIfWiw
- Sm3w==
+ bh=vqYTxiz0FPAqe1ZJj7LrudqrUwrVva6VFiDt2b8Jx7U=;
+ b=cMh/m+HXsRdNoMyE/1AdFvJPNp2Z4bBj/fwOYGte+EU7wtiKtFkhMraFfdbxMYZ6dV
+ EjVPmfVpwI+DLT9BHDGIurFHG9M3Yr1tuiaxnOosfH639Fawt9NNj9j7AbpdpbIIJYTA
+ L6acygcsnMul4MWClM/VZ4g9tI8ThZFq9iJq6FH86dVM8d+4OsuYDTNl2Z45p8ajmECV
+ MNExbLPMlTiSX9oCBwuF8YfqeO2xvNrS5bynMFzYCmiE6VydOopjAanH9bOiwPlbFE8Y
+ Hi4ePPdHylA9SZETQUd+Dy8JIbiZF30nTdsIb1yzrB3tN94MEsBGE9QZNEWAYSmGVQQ5
+ rR1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678707607;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20210112; t=1678710593;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UiFoUA81V4aPPuk00TispSuT5tLI9a4wkzitJ40zKPw=;
- b=Uh6C25lgMOgJmIMuRNvh57L1zT0H5zvJbhpQO0NsSDt3Wwkj7GWO95TuIxKZ1YrxTM
- Zukhue+qmyVg86RN99Yj2DtVnADvZ3JhLmAxIUeSJWI80Gauk/4fdauiAi0szg0D8LEF
- nk1EDzSV84CcRGnAfDFef5fOO7aezcauZ9I7OJ2ojlafMKlDACrCpEZ4JdqOhggG05j2
- RaCK7vecsoEypZuq8wcrMCB5NZcWBdOcMYU0pPDyMZx1jkZsN5vuj716z6ypyNBrK2GQ
- 8ZpSUK6riqqikAmutPwqc/ii5mBXVnU2OQ1/eqsrt39ZPaFzWF3BFlMKbwmcocUdeVjt
- Z0Pg==
-X-Gm-Message-State: AO0yUKX4CosMgUjlQQQdBOPfsuW3HEBnyO7HeJE/dlsNDBwGxhVeRoJw
- cVF3gAa2lKp+8v3rpDMWi8v8bA==
-X-Google-Smtp-Source: AK7set9Qc7TeQwizJiWSHoER0zmq1UY0RLh+GEh0dvINWzZw5YIvRJmDTfj0Ay9R9FLiJrKTCjtahg==
-X-Received: by 2002:adf:f1c2:0:b0:2cf:6088:3949 with SMTP id
- z2-20020adff1c2000000b002cf60883949mr1859466wro.18.1678707607295; 
- Mon, 13 Mar 2023 04:40:07 -0700 (PDT)
-Received: from [192.168.30.216] ([81.0.6.76]) by smtp.gmail.com with ESMTPSA id
- e3-20020adfdbc3000000b002c55efa9cbesm7911867wrj.39.2023.03.13.04.40.04
+ bh=vqYTxiz0FPAqe1ZJj7LrudqrUwrVva6VFiDt2b8Jx7U=;
+ b=CKGQl4MBjGceL4tJt0VZ8Bw1rB/z4iiJfkCR4hqaJ0CIIJnEha8iWRVbmsq27d98zG
+ EzgkLOccRnMeayiA13JwtpgmfGJji0azXhFgWPGEhDGgclKAJ9qTf/+6+K+qOPS+P6bB
+ Vi5xmO9GgY2a4o8UVN0te+KyXihUmHCvjc8jZE6nkhC41oI1wKUidY1VtZWYKPSBvjgz
+ jCk8JSLxJQ7ZXosC4jIE+7LUd39L8uVwqllebzHATdIPZuMY+AovLd6eYsFYmdGeO5Nd
+ 0Idtn+RxYc4zur0vacwGyu4qIhq1XFtVWCw/D9xACWYzNM3r/mTmkDD1D+RNLyuuQB7f
+ Zjlg==
+X-Gm-Message-State: AO0yUKXtZH290YlEtoy9JCLuMC4+LD3KR3udJhe16AjtEHim1l7pseg9
+ P/GtFYKLIK/tJIemGRUA+BnYcQ==
+X-Google-Smtp-Source: AK7set9P50ScFrghkOjICBskg9xdzku4uwZSbMrg2cc/JUQTskwbMMsRyjoWdRrtsObVZgv/knneOA==
+X-Received: by 2002:a4a:9652:0:b0:525:4b8b:8f38 with SMTP id
+ r18-20020a4a9652000000b005254b8b8f38mr4605301ooi.3.1678710592906; 
+ Mon, 13 Mar 2023 05:29:52 -0700 (PDT)
+Received: from [192.168.68.107] ([177.95.89.231])
+ by smtp.gmail.com with ESMTPSA id
+ y19-20020a4a9813000000b00524fe20aee5sm3044839ooi.34.2023.03.13.05.29.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Mar 2023 04:40:06 -0700 (PDT)
-Message-ID: <7853d60e-b2f2-c83d-7160-b69b2c7ad8b3@linaro.org>
-Date: Mon, 13 Mar 2023 12:40:03 +0100
+ Mon, 13 Mar 2023 05:29:52 -0700 (PDT)
+Message-ID: <8c0fc246-00b8-2cc6-4790-b0c81f87a784@ventanamicro.com>
+Date: Mon, 13 Mar 2023 09:29:49 -0300
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.8.0
-Subject: Re: [PATCH v3 1/3] numa: Validate cluster and NUMA node boundary if
- required
-To: Gavin Shan <gshan@redhat.com>, qemu-arm@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, rad@semihalf.com,
- peter.maydell@linaro.org, quic_llindhol@quicinc.com, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, wangyanan55@huawei.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, thuth@redhat.com,
- lvivier@redhat.com, pbonzini@redhat.com, imammedo@redhat.com,
- yihyu@redhat.com, ajones@ventanamicro.com, berrange@redhat.com,
- dbarboza@ventanamicro.com, shan.gavin@gmail.com
-References: <20230225063527.281479-1-gshan@redhat.com>
- <20230225063527.281479-2-gshan@redhat.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH v3 1/1] hw/riscv: Fix max size limit when put initrd to RAM
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230225063527.281479-2-gshan@redhat.com>
+To: Hang Xu <xuhang@eswincomputing.com>, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, palmer@rivosinc.com, alistair.francis@wdc.com
+References: <20230313021826.6898-1-xuhang@eswincomputing.com>
+ <20230313021826.6898-2-xuhang@eswincomputing.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230313021826.6898-2-xuhang@eswincomputing.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -88,124 +85,190 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Mar 2023 11:40:12 -0000
+X-List-Received-Date: Mon, 13 Mar 2023 12:29:57 -0000
 
-On 25/2/23 07:35, Gavin Shan wrote:
-> For some architectures like ARM64, multiple CPUs in one cluster can be
-> associated with different NUMA nodes, which is irregular configuration
-> because we shouldn't have this in baremetal environment. The irregular
-> configuration causes Linux guest to misbehave, as the following warning
-> messages indicate.
+
+
+On 3/12/23 23:18, Hang Xu wrote:
+> Because the starting address of ram is not necessarily 0,
+> the remaining free space in ram is
+> ram_size - (start - ram_base) instead of ram_size-start.
 > 
->    -smp 6,maxcpus=6,sockets=2,clusters=1,cores=3,threads=1 \
->    -numa node,nodeid=0,cpus=0-1,memdev=ram0                \
->    -numa node,nodeid=1,cpus=2-3,memdev=ram1                \
->    -numa node,nodeid=2,cpus=4-5,memdev=ram2                \
-> 
->    ------------[ cut here ]------------
->    WARNING: CPU: 0 PID: 1 at kernel/sched/topology.c:2271 build_sched_domains+0x284/0x910
->    Modules linked in:
->    CPU: 0 PID: 1 Comm: swapper/0 Not tainted 5.14.0-268.el9.aarch64 #1
->    pstate: 00400005 (nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
->    pc : build_sched_domains+0x284/0x910
->    lr : build_sched_domains+0x184/0x910
->    sp : ffff80000804bd50
->    x29: ffff80000804bd50 x28: 0000000000000002 x27: 0000000000000000
->    x26: ffff800009cf9a80 x25: 0000000000000000 x24: ffff800009cbf840
->    x23: ffff000080325000 x22: ffff0000005df800 x21: ffff80000a4ce508
->    x20: 0000000000000000 x19: ffff000080324440 x18: 0000000000000014
->    x17: 00000000388925c0 x16: 000000005386a066 x15: 000000009c10cc2e
->    x14: 00000000000001c0 x13: 0000000000000001 x12: ffff00007fffb1a0
->    x11: ffff00007fffb180 x10: ffff80000a4ce508 x9 : 0000000000000041
->    x8 : ffff80000a4ce500 x7 : ffff80000a4cf920 x6 : 0000000000000001
->    x5 : 0000000000000001 x4 : 0000000000000007 x3 : 0000000000000002
->    x2 : 0000000000001000 x1 : ffff80000a4cf928 x0 : 0000000000000001
->    Call trace:
->     build_sched_domains+0x284/0x910
->     sched_init_domains+0xac/0xe0
->     sched_init_smp+0x48/0xc8
->     kernel_init_freeable+0x140/0x1ac
->     kernel_init+0x28/0x140
->     ret_from_fork+0x10/0x20
-> 
-> Improve the situation to warn when multiple CPUs in one cluster have
-> been associated with different NUMA nodes. However, one NUMA node is
-> allowed to be associated with different clusters.
-> 
-> Signed-off-by: Gavin Shan <gshan@redhat.com>
+> Signed-off-by: Hang Xu <xuhang@eswincomputing.com>
 > ---
->   hw/core/machine.c   | 42 ++++++++++++++++++++++++++++++++++++++++++
->   include/hw/boards.h |  1 +
->   2 files changed, 43 insertions(+)
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   hw/riscv/boot.c            | 19 +++++++++++++------
+>   hw/riscv/microchip_pfsoc.c |  5 ++++-
+>   hw/riscv/opentitan.c       |  2 +-
+>   hw/riscv/sifive_e.c        |  2 +-
+>   hw/riscv/sifive_u.c        |  5 ++++-
+>   hw/riscv/spike.c           |  5 ++++-
+>   hw/riscv/virt.c            |  5 ++++-
+>   include/hw/riscv/boot.h    |  2 ++
+>   8 files changed, 33 insertions(+), 12 deletions(-)
 > 
-> diff --git a/hw/core/machine.c b/hw/core/machine.c
-> index f29e700ee4..3513df5a86 100644
-> --- a/hw/core/machine.c
-> +++ b/hw/core/machine.c
-> @@ -1252,6 +1252,45 @@ static void machine_numa_finish_cpu_init(MachineState *machine)
->       g_string_free(s, true);
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 52bf8e67de..cfbc376a82 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -173,13 +173,14 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
+>       exit(1);
 >   }
 >   
-> +static void validate_cpu_cluster_to_numa_boundary(MachineState *ms)
-> +{
-> +    MachineClass *mc = MACHINE_GET_CLASS(ms);
-> +    NumaState *state = ms->numa_state;
-> +    const CPUArchIdList *possible_cpus = mc->possible_cpu_arch_ids(ms);
-> +    const CPUArchId *cpus = possible_cpus->cpus;
-> +    int len = possible_cpus->len, i, j;
-
-(Nitpicking, 'len' variable is not very useful).
-
-> +
-> +    if (state->num_nodes <= 1 || len <= 1) {
-> +        return;
-> +    }
-> +
-> +    /*
-> +     * The Linux scheduling domain can't be parsed when the multiple CPUs
-> +     * in one cluster have been associated with different NUMA nodes. However,
-> +     * it's fine to associate one NUMA node with CPUs in different clusters.
-> +     */
-> +    for (i = 0; i < len; i++) {
-> +        for (j = i + 1; j < len; j++) {
-> +            if (cpus[i].props.has_socket_id &&
-> +                cpus[i].props.has_cluster_id &&
-> +                cpus[i].props.has_node_id &&
-> +                cpus[j].props.has_socket_id &&
-> +                cpus[j].props.has_cluster_id &&
-> +                cpus[j].props.has_node_id &&
-> +                cpus[i].props.socket_id == cpus[j].props.socket_id &&
-> +                cpus[i].props.cluster_id == cpus[j].props.cluster_id &&
-> +                cpus[i].props.node_id != cpus[j].props.node_id) {
-> +                warn_report("CPU-%d and CPU-%d in socket-%ld-cluster-%ld "
-> +                             "have been associated with node-%ld and node-%ld "
-> +                             "respectively. It can cause OSes like Linux to"
-> +                             "misbehave", i, j, cpus[i].props.socket_id,
-> +                             cpus[i].props.cluster_id, cpus[i].props.node_id,
-> +                             cpus[j].props.node_id);
-
-machine_run_board_init() takes an Error* argument, but is only called
-once by qemu_init_board() with errp=&error_fatal. I suppose using
-warn_report() here is OK.
-
-Acked-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-
-> +            }
-> +        }
-> +    }
-> +}
-> +
->   MemoryRegion *machine_consume_memdev(MachineState *machine,
->                                        HostMemoryBackend *backend)
+> -static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
+> +static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry,
+> +                              uint64_t ram_base, uint64_t ram_size)
 >   {
-> @@ -1337,6 +1376,9 @@ void machine_run_board_init(MachineState *machine, const char *mem_path, Error *
->           numa_complete_configuration(machine);
->           if (machine->numa_state->num_nodes) {
->               machine_numa_finish_cpu_init(machine);
-> +            if (machine_class->cpu_cluster_has_numa_boundary) {
-> +                validate_cpu_cluster_to_numa_boundary(machine);
-> +            }
->           }
+>       const char *filename = machine->initrd_filename;
+> -    uint64_t mem_size = machine->ram_size;
+>       void *fdt = machine->fdt;
+>       hwaddr start, end;
+>       ssize_t size;
+> +    uint64_t max_initrd;
+>   
+>       g_assert(filename != NULL);
+>   
+> @@ -193,12 +194,16 @@ static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
+>        * So for boards with less  than 256MB of RAM we put the initrd
+>        * halfway into RAM, and for boards with 256MB of RAM or more we put
+>        * the initrd at 128MB.
+> +     * A ram_size == 0, usually from a MemMapEntry[].size element,
+> +     * means that the RAM block goes all the way to ms->ram_size.
+>        */
+> -    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
+> +    ram_size = ram_size ? MIN(machine->ram_size, ram_size) : machine->ram_size;
+> +    start = kernel_entry + MIN(ram_size / 2, 128 * MiB);
+> +    max_initrd = ram_size - (start - ram_base);
+>   
+> -    size = load_ramdisk(filename, start, mem_size - start);
+> +    size = load_ramdisk(filename, start, max_initrd);
+>       if (size == -1) {
+> -        size = load_image_targphys(filename, start, mem_size - start);
+> +        size = load_image_targphys(filename, start, max_initrd);
+>           if (size == -1) {
+>               error_report("could not load ramdisk '%s'", filename);
+>               exit(1);
+> @@ -217,6 +222,8 @@ target_ulong riscv_load_kernel(MachineState *machine,
+>                                  RISCVHartArrayState *harts,
+>                                  target_ulong kernel_start_addr,
+>                                  bool load_initrd,
+> +                               uint64_t ram_base,
+> +                               uint64_t ram_size,
+>                                  symbol_fn_t sym_cb)
+>   {
+>       const char *kernel_filename = machine->kernel_filename;
+> @@ -263,7 +270,7 @@ out:
 >       }
-
+>   
+>       if (load_initrd && machine->initrd_filename) {
+> -        riscv_load_initrd(machine, kernel_entry);
+> +        riscv_load_initrd(machine, kernel_entry, ram_base, ram_size);
+>       }
+>   
+>       if (fdt && machine->kernel_cmdline && *machine->kernel_cmdline) {
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index e81bbd12df..b42d90b89e 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -630,7 +630,10 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>                                                            firmware_end_addr);
+>   
+>           kernel_entry = riscv_load_kernel(machine, &s->soc.u_cpus,
+> -                                         kernel_start_addr, true, NULL);
+> +                                         kernel_start_addr, true,
+> +                                         memmap[MICROCHIP_PFSOC_DRAM_LO].base,
+> +                                         memmap[MICROCHIP_PFSOC_DRAM_LO].size,
+> +                                         NULL);
+>   
+>           /* Compute the fdt load address in dram */
+>           fdt_load_addr = riscv_compute_fdt_addr(memmap[MICROCHIP_PFSOC_DRAM_LO].base,
+> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> index b06944d382..bb663523d5 100644
+> --- a/hw/riscv/opentitan.c
+> +++ b/hw/riscv/opentitan.c
+> @@ -103,7 +103,7 @@ static void opentitan_board_init(MachineState *machine)
+>       if (machine->kernel_filename) {
+>           riscv_load_kernel(machine, &s->soc.cpus,
+>                             memmap[IBEX_DEV_RAM].base,
+> -                          false, NULL);
+> +                          false, 0, 0, NULL);
+>       }
+>   }
+>   
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index 04939b60c3..5b47d539a6 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -116,7 +116,7 @@ static void sifive_e_machine_init(MachineState *machine)
+>       if (machine->kernel_filename) {
+>           riscv_load_kernel(machine, &s->soc.cpus,
+>                             memmap[SIFIVE_E_DEV_DTIM].base,
+> -                          false, NULL);
+> +                          false, 0, 0, NULL);
+>       }
+>   }
+>   
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 35a335b8d0..b45fdc968c 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -599,7 +599,10 @@ static void sifive_u_machine_init(MachineState *machine)
+>                                                            firmware_end_addr);
+>   
+>           kernel_entry = riscv_load_kernel(machine, &s->soc.u_cpus,
+> -                                         kernel_start_addr, true, NULL);
+> +                                         kernel_start_addr, true,
+> +                                         memmap[SIFIVE_U_DEV_DRAM].base,
+> +                                         memmap[SIFIVE_U_DEV_DRAM].size,
+> +                                         NULL);
+>       } else {
+>          /*
+>           * If dynamic firmware is used, it doesn't know where is the next mode
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index a584d5b3a2..e322ed8506 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -307,7 +307,10 @@ static void spike_board_init(MachineState *machine)
+>   
+>           kernel_entry = riscv_load_kernel(machine, &s->soc[0],
+>                                            kernel_start_addr,
+> -                                         true, htif_symbol_callback);
+> +                                         true,
+> +                                         memmap[SPIKE_DRAM].base,
+> +                                         memmap[SPIKE_DRAM].size,
+> +                                         htif_symbol_callback);
+>       } else {
+>          /*
+>           * If dynamic firmware is used, it doesn't know where is the next mode
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 4e3efbee16..11f26b0dc0 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1287,7 +1287,10 @@ static void virt_machine_done(Notifier *notifier, void *data)
+>                                                            firmware_end_addr);
+>   
+>           kernel_entry = riscv_load_kernel(machine, &s->soc[0],
+> -                                         kernel_start_addr, true, NULL);
+> +                                         kernel_start_addr, true,
+> +                                         memmap[VIRT_DRAM].base,
+> +                                         memmap[VIRT_DRAM].size,
+> +                                         NULL);
+>       } else {
+>          /*
+>           * If dynamic firmware is used, it doesn't know where is the next mode
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index a2e4ae9cb0..987e1add38 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -47,6 +47,8 @@ target_ulong riscv_load_kernel(MachineState *machine,
+>                                  RISCVHartArrayState *harts,
+>                                  target_ulong firmware_end_addr,
+>                                  bool load_initrd,
+> +                               uint64_t ram_base,
+> +                               uint64_t ram_size,
+>                                  symbol_fn_t sym_cb);
+>   uint64_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size,
+>                                   MachineState *ms);
 
