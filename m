@@ -1,77 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pc7sE-0008Jx-Nd
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Mar 2023 12:51:42 -0400
+	id 1pc8Zg-00089V-UP
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Mar 2023 13:36:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pc7rw-00072I-IW
- for qemu-riscv@nongnu.org; Tue, 14 Mar 2023 12:51:27 -0400
-Received: from mail-oa1-x34.google.com ([2001:4860:4864:20::34])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pc8Zf-00088B-FU
+ for qemu-riscv@nongnu.org; Tue, 14 Mar 2023 13:36:35 -0400
+Received: from mail-ot1-x32b.google.com ([2607:f8b0:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pc7rr-00037h-2F
- for qemu-riscv@nongnu.org; Tue, 14 Mar 2023 12:51:22 -0400
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-176b90e14a9so17978485fac.9
- for <qemu-riscv@nongnu.org>; Tue, 14 Mar 2023 09:51:15 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pc8Zd-0002QE-9a
+ for qemu-riscv@nongnu.org; Tue, 14 Mar 2023 13:36:35 -0400
+Received: by mail-ot1-x32b.google.com with SMTP id
+ l16-20020a9d4c10000000b006944b17058cso8828849otf.2
+ for <qemu-riscv@nongnu.org>; Tue, 14 Mar 2023 10:36:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1678812675;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gkB0vzqH+m6CKp6htpyofVNxkBL9rh1LR/W7819esvg=;
- b=ZLvosooEoS3DJpnQztGPBWtBHJCwE8HhEwrErmdxyenSCt7tJkF58d0VWmcYR2QDWL
- hOPMRKn6Og5S9nZVP3k6dWDNa1co51YQK04Zlr99jghOJe8mnzJSG+LGM6+mUyewXVGO
- hUU90DCzaW5/4n8G87UTQYGLOsAzys34Ow/9hBjSql8JL1EaiJhYh/EIUEVFClvVsM5L
- MscVRHh5ugJekII4cW4114dsLeAtZFsR8FEysRd5J9mv/3A50iczuq4lUl/BdOSNADgO
- uo6ic4UeIFr9sXwVe6/0rfWEJahWoQwplaonJ9qmcbqY7O7RBTxTYvH95LJtO7IDLjEF
- xGxA==
+ d=linaro.org; s=google; t=1678815392;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=5+ta97khfy5Txpd/mWLtAJn2uzdgdCo92ZeHWgpDl/Y=;
+ b=u/EapF52Pw8skgpMYMBCFLDk0wMGz4w029qUN2Zd00eOLtMCXvT2v2sT7BFAzsKn1S
+ Bb49T6l2416BVX6VBkvKkhdBToqFT2ero+xIvZvpNtZF3N5PB/GPAtgjg+5JbbPJ0lsS
+ 5ibPaqWAqOk7GIL2hBp89n9w6GYSoqHlom3hZb/2wQoO1Am1qszq5sLaNrqTz9U6sdKB
+ IadG90QilgshgjAFPZkMqP+NdiX19WMwOe3PYKlLa9L1y5fSKW3XNMsdhvdMF8gS3sPn
+ pDYYvhuBW0sH0sa1F6ymfsc9rjkfcWFmNXF23kzjBaA0Ejn17IYJm6rtfau9ej6VgXJX
+ qX+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678812675;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gkB0vzqH+m6CKp6htpyofVNxkBL9rh1LR/W7819esvg=;
- b=BKF8iVJ7JoZMWyLTpS0+YHY7eE4rL5H8dx9sIy28lErDiErDIcORx5Cl/Wwhqmd0hi
- rl3BMljcPe0dMVPZfMrh+m1QnHtNMoK/zvJn9TuViX+ZOEGpA3lWIc8aDU84UDzesjgf
- wKxo+PY+cQYQ/t5iK5hRX5RLMyyvW+VRlIWY+7+7JRiMRxk28TJIP6ID6onGd0uCIxw1
- mT6znXgnHqGdvLHyrrTG3H8erVwpbL08gQO4rgOZHwaPd9XXr+9hDTPNe0XB1j5XX7rr
- G6A3w54z9KZfoGkU90y61ZTumTU1kWkEJ2lvJTVYJxXuYvs4j+fITnc9E6yI17BHLmy0
- OGHA==
-X-Gm-Message-State: AO0yUKUs59/xEcQtGtnJZORCuWYNF+e7jOO9IeFnIQCTvtvdB37PDV7+
- c73Y3NKPyBv1dV6Yl3lydEpNSw==
-X-Google-Smtp-Source: AK7set+x3zGNygrJLqPJVfp6zR52y2zDSQH8ehIMyuOty1ocsKSmQ6EoSEe6lr0qGIX1GZPdmBNK4Q==
-X-Received: by 2002:a05:6870:5703:b0:172:2d00:99f7 with SMTP id
- k3-20020a056870570300b001722d0099f7mr21206413oap.20.1678812674876; 
- Tue, 14 Mar 2023 09:51:14 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com ([177.95.89.231])
+ d=1e100.net; s=20210112; t=1678815392;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5+ta97khfy5Txpd/mWLtAJn2uzdgdCo92ZeHWgpDl/Y=;
+ b=aQ0DDWrFuYdm81n1pWnG3oHqZgPPeW8sGekHSmlt/Evecab+yJWYNG83RqMiExk9Qv
+ 4/py2ZsRlj4T2x3pn0rsIhl/G2Cb5KJTCjkzWvdHDpbMA1qfSj3ipwnx4MFWaDB+pZ5T
+ mi9PQDbQcxpCefuQlVtBV6NVAzBAJm1FO5rOsaW5V6M57RxjMF5+7lCzxNuhb5E8NLcX
+ a7m5kgSPcpSDutJ8t9Z7nMRbJSfFsYUxxIkN0KVqzThIldRJxI49w5WBK2tatz8hospj
+ tc/m5DvpYM9aADR//6IcpCkZ42lPBpTYuajhKbg+pFvrOx5V1FLD6jqmNV+r965Hdc85
+ xONw==
+X-Gm-Message-State: AO0yUKXAkDPRlOzGNp57ezhdSq6CEKMPvjjv7SREMOFGH8iWLiyJhXfD
+ FeUtzf6RD8tY7aNZt4anLASXsQ==
+X-Google-Smtp-Source: AK7set9BrxqR36RnvOV1+uPZ1AhqKG5aFuxvEY5r/DqxDwnJmLut9TY/a71EgovOrUUpChBLUUeumw==
+X-Received: by 2002:a05:6830:2b24:b0:68d:4140:4333 with SMTP id
+ l36-20020a0568302b2400b0068d41404333mr22004076otv.1.1678815391955; 
+ Tue, 14 Mar 2023 10:36:31 -0700 (PDT)
+Received: from [172.20.4.181] ([50.232.40.61])
  by smtp.gmail.com with ESMTPSA id
- 96-20020a9d04e9000000b0069451a9274bsm348689otm.28.2023.03.14.09.51.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Mar 2023 09:51:14 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-8.1 v2 26/26] target/riscv: update cpu->cfg misa bits in
- commit_cpu_cfg()
-Date: Tue, 14 Mar 2023 13:49:48 -0300
-Message-Id: <20230314164948.539135-27-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230314164948.539135-1-dbarboza@ventanamicro.com>
-References: <20230314164948.539135-1-dbarboza@ventanamicro.com>
+ m14-20020a056820034e00b00525398a1144sm1279182ooe.32.2023.03.14.10.36.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 Mar 2023 10:36:31 -0700 (PDT)
+Message-ID: <d359c89c-a2da-a76f-1d82-093a318ffa7c@linaro.org>
+Date: Tue, 14 Mar 2023 10:36:27 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::34;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x34.google.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH for-8.1 v2 04/26] target/riscv: add PRIV_VERSION_LATEST
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+References: <20230314164948.539135-1-dbarboza@ventanamicro.com>
+ <20230314164948.539135-5-dbarboza@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230314164948.539135-5-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,100 +86,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Mar 2023 16:51:27 -0000
+X-List-Received-Date: Tue, 14 Mar 2023 17:36:35 -0000
 
-write_misa() is able to use the same validation workflow
-riscv_cpu_realize() uses. But it's still not capable of updating
-cpu->cfg misa props yet.
+On 3/14/23 09:49, Daniel Henrique Barboza wrote:
+> All these generic CPUs are using the latest priv available, at this
+> moment PRIV_VERSION_1_12_0:
+> 
+> - riscv_any_cpu_init()
+> - rv32_base_cpu_init()
+> - rv64_base_cpu_init()
+> - rv128_base_cpu_init()
+> 
+> Create a new PRIV_VERSION_LATEST enum and use it in those cases. I'll
+> make it easier to update everything at once when a new priv version is
+> available.
+> 
+> Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
+> ---
+>   target/riscv/cpu.c | 8 ++++----
+>   target/riscv/cpu.h | 2 ++
+>   2 files changed, 6 insertions(+), 4 deletions(-)
 
-We have no way of blocking future (and current) code from checking
-env->misa_ext (via riscv_has_ext()) or reading cpu->cfg directly, so our
-best alternative is to keep everything in sync.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-riscv_cpu_commit_cpu_cfg() now receives an extra 'misa_ext' parameter.
-If this val is different from the existing env->misa_ext, update
-env->misa and cpu->cfg with the new value. riscv_cpu_realize() will
-ignore this code since env->misa_ext isn't touched during validation,
-but write_misa() will use it to keep cpu->cfg in sync with the new
-env->misa_ext value.
-
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/cpu.c | 16 ++++++++++++++--
- target/riscv/cpu.h |  2 +-
- target/riscv/csr.c |  3 +--
- 3 files changed, 16 insertions(+), 5 deletions(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 4789a7b70d..059931daea 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1225,8 +1225,20 @@ void riscv_cpu_validate_extensions(RISCVCPU *cpu, uint32_t misa_ext,
-     }
- }
- 
--void riscv_cpu_commit_cpu_cfg(RISCVCPU *cpu)
-+void riscv_cpu_commit_cpu_cfg(RISCVCPU *cpu, uint32_t misa_ext)
- {
-+    CPURISCVState *env = &cpu->env;
-+
-+    /*
-+     * write_misa() needs to update cpu->cfg with the new
-+     * MISA bits. This is a no-op for the riscv_cpu_realize()
-+     * path.
-+     */
-+    if (env->misa_ext != misa_ext) {
-+        env->misa_ext = misa_ext;
-+        riscv_set_cpucfg_with_misa(&cpu->cfg, misa_ext);
-+    }
-+
-     if (cpu->cfg.ext_zk) {
-         cpu->cfg.ext_zkn = true;
-         cpu->cfg.ext_zkr = true;
-@@ -1385,7 +1397,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         return;
-     }
- 
--    riscv_cpu_commit_cpu_cfg(cpu);
-+    riscv_cpu_commit_cpu_cfg(cpu, env->misa_ext);
- 
- #ifndef CONFIG_USER_ONLY
-     if (cpu->cfg.ext_sstc) {
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index ca2ba6a647..befc3b8fff 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -597,7 +597,7 @@ void riscv_cpu_validate_misa_ext(CPURISCVState *env, uint32_t misa_ext,
-                                  Error **errp);
- void riscv_cpu_validate_extensions(RISCVCPU *cpu, uint32_t misa_ext,
-                                    Error **errp);
--void riscv_cpu_commit_cpu_cfg(RISCVCPU *cpu);
-+void riscv_cpu_commit_cpu_cfg(RISCVCPU *cpu, uint32_t misa_ext);
- 
- #define cpu_list riscv_cpu_list
- #define cpu_mmu_index riscv_cpu_mmu_index
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 6f26e7dbcd..0da0ffdaed 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1387,7 +1387,7 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
-         return RISCV_EXCP_NONE;
-     }
- 
--    riscv_cpu_commit_cpu_cfg(cpu);
-+    riscv_cpu_commit_cpu_cfg(cpu, val);
- 
-     if (!(val & RVF)) {
-         env->mstatus &= ~MSTATUS_FS;
-@@ -1395,7 +1395,6 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
- 
-     /* flush translation cache */
-     tb_flush(env_cpu(env));
--    env->misa_ext = val;
-     env->xl = riscv_cpu_mxl(env);
-     return RISCV_EXCP_NONE;
- }
--- 
-2.39.2
-
+r~
 
