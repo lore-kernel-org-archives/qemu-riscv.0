@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pbsvs-0005gZ-Bn
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Mar 2023 20:54:28 -0400
+	id 1pbvwC-0006dM-1q
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Mar 2023 00:07:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pbsvo-0005g6-L9; Mon, 13 Mar 2023 20:54:24 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pbvw7-0006bl-C9; Tue, 14 Mar 2023 00:06:55 -0400
+Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1pbsvm-0005br-Bz; Mon, 13 Mar 2023 20:54:23 -0400
-Received: by mail-ed1-x533.google.com with SMTP id ek18so24648601edb.6;
- Mon, 13 Mar 2023 17:54:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pbvw5-0001Bf-Ee; Tue, 14 Mar 2023 00:06:55 -0400
+Received: by mail-vs1-xe30.google.com with SMTP id e19so6626589vsu.4;
+ Mon, 13 Mar 2023 21:06:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1678755259;
+ d=gmail.com; s=20210112; t=1678766811;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+LcAzyJ//oJzNUrMnCHkxHjlBp1ZNRSAnsX+NVQQgmU=;
- b=QS+xGwsvtClopAdtblJrcbo5C8rQyDPX2LmPPwKZzGvCzq5nLpqPrN7QPJvKIFnr/j
- x+nWf/w9DuxH7SGqlbPFQhptlRP54D2SVu5pIH9DHeZ9q5GCxq5i9vJ4TEV39mwV0B0Y
- lsTbBLslpYVxjogxtF/dyAcy6El+019js/nRZzfFP0k/pMDSrPVxbKGX/GgyrWVYrjVz
- sS0l8Q21raNUQHzgLXxcx9Exw3EAvtXUbrlt1NtcTa5ZLyzjOXVQ8zxj/MmPlAHxhbvD
- 0x397MCxB4ZraTCNTfKMea4uWgrRTEFwk3hWw4SWAdttgDO+wM9dO7DuQsucWO+Bx0sG
- 5Gfg==
+ bh=bBv3Ln9Z6VXD2aMGmb/14bEKAd8SZHLgdBj6mnUUfW8=;
+ b=eWW3WrUkW3AEt/A6UJk6cqXqhCRGw01mgvRYOSZ29FzSGR6RAh0qkDbvCcD6IMJA20
+ 72tg0GTI8kshTuAbLb8vYUQlS027bHcMCVeQ51iWAsAPsdTGpuAVw0wT9EIxckgpqBGK
+ Qyh4G8Qd8ZjiSuv6dtrtP5j6N24yjkWf6WkIFdzTRnp8Rtg/HRTyGhm6NN+PYkDmtt4e
+ X2wk4FMiVd40QmARf+PqCkb7krGNZH/YRiSM4ZVzHIu0iohIqPyifbAIpOiQqbCgY9Ef
+ BYEL/7Th6gWUBHYne81ji9jSG7ERcwCIXILqT8x3yI8BbHBfkmggg1OW+lrHMKS1ix2C
+ QUyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678755259;
+ d=1e100.net; s=20210112; t=1678766811;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+LcAzyJ//oJzNUrMnCHkxHjlBp1ZNRSAnsX+NVQQgmU=;
- b=hNjiPnZLej6M4G5sRXbEanueR43ikRzm8gPnLTCQJvIlGsxBW07bmetHwU1dsbnfds
- YnASPwGownDqJCQ5VNm3YiI9Jj4EyJTF/Gic+2SspVWg32MNsv9GNta6oMih9MaqBC32
- pOltSvFS9Q4YdA9V4kWQhxtWvnZh+ykBmpdoQjIhILoxROGnKR1A7auBPkqa6tA8dYK8
- 8odvu8DYngLkMaNNZhoK67QwLDyANrcJ/fj61YPyHXYMAO/vYfxYqfMVESj2dsBsCppp
- ARMZRVLKZ917O0XlYYPR/Qawgj3NreidXFUb5N2CwMJtIWCS3eDW8HG6WNeCoRFQ+bKD
- tF+A==
-X-Gm-Message-State: AO0yUKVTlabP3qvhkYtzc8D8FxjpnWxteaEHfbnkLKShelOMm+irqzf3
- Vp2yZ4ykAfp35vx54apNPy3r9O868ECgslHLSZw=
-X-Google-Smtp-Source: AK7set+j9IdWq/y9T7tmLAJTjTYWDsfLFPGzboaYmiyWeTdCTkaPe0o4bZJB7lsrPr8U/exUwW428jDqzmA/shvmnY0=
-X-Received: by 2002:a17:907:d13:b0:926:5020:1421 with SMTP id
- gn19-20020a1709070d1300b0092650201421mr258362ejc.9.1678755259284; Mon, 13 Mar
- 2023 17:54:19 -0700 (PDT)
+ bh=bBv3Ln9Z6VXD2aMGmb/14bEKAd8SZHLgdBj6mnUUfW8=;
+ b=xD8Os2b1I2X7yMVqN7Yr5blMZPmTS9SNUmC92sCA6LG54rWY60UF56g9+mhlxomk6J
+ XdTHHAJUDHjDcxzulqNLnQ4jB5v+5r5+cErocqx4slCBQHEz6L3qe7ZZU8k4tEqRAO+r
+ XeRwYlfnGmBtEv6Cve5wjTF6Gb0hfMICLAptcYt9uqWfv70SFMEuWoiFHB85jIXbV1Q3
+ AsPn2mI7pbso0gFe8LVMGm/MpAYo1LT7r4UmI6WCWG9MQz1ysvzOKNSHRFwg92nY8hM5
+ d8QdkyR6bvlRt5lQMWuwhVjNXD4+4jeVb25jCVv+U4MFsagHUK5iTkHXwNMsVRCjOoB+
+ +cmQ==
+X-Gm-Message-State: AO0yUKU9uH8elV6wl5cw0KEKPirrxOMVd14eaVDYUYRS4dQf10PObMZH
+ xB6N1+NJbZWAQjf57VaV25KO6wLCPMa2gVAji9OpWJeGel4=
+X-Google-Smtp-Source: AK7set9gvVwoHq9yVfJetm6TC/5mJjyeb1B6muxsi/UJwRodgto5rVZbmoP4zwB0CrXizsqDgz6Pdc99vdHhgNuZ4A8=
+X-Received: by 2002:a67:db97:0:b0:412:2ed6:d79b with SMTP id
+ f23-20020a67db97000000b004122ed6d79bmr23150223vsk.3.1678766811575; Mon, 13
+ Mar 2023 21:06:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <167873059442.9885.15152085316575248452-0@git.sr.ht>
 In-Reply-To: <167873059442.9885.15152085316575248452-0@git.sr.ht>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 14 Mar 2023 08:54:07 +0800
-Message-ID: <CAEUhbmUeHCznZros16vgEshMQfmEp2qKGHvyos8OLPgyaC7nNw@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 14 Mar 2023 14:06:25 +1000
+Message-ID: <CAKmqyKNe6KHHgsVywjMBJexfDNrX-wY1DXpoDJ4gK64s7Zoz9A@mail.gmail.com>
 Subject: Re: [PATCH qemu v2] linux-user: Emulate /proc/cpuinfo output for riscv
 To: "~abordado" <afonsobordado@gmail.com>
 Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
@@ -57,13 +57,14 @@ Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x533.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -78,9 +79,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Mar 2023 00:54:26 -0000
+X-List-Received-Date: Tue, 14 Mar 2023 04:06:55 -0000
 
-On Tue, Mar 14, 2023 at 4:29=E2=80=AFAM ~abordado <abordado@git.sr.ht> wrot=
+On Tue, Mar 14, 2023 at 6:28=E2=80=AFAM ~abordado <abordado@git.sr.ht> wrot=
 e:
 >
 > From: Afonso Bordado <afonsobordado@gmail.com>
@@ -93,9 +94,6 @@ e:
 > with mmu info and an ISA string.
 >
 > Changes from V1:
-
-The changelog should go below ---
-
 >
 > - Call `g_free` on ISA string.
 > - Use `riscv_cpu_cfg` API.
@@ -106,6 +104,14 @@ The changelog should go below ---
 > Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
 > Reviewed-by: Laurent Vivier <laurent@vivier.eu>
 > ---
+
+With the changelog below these dashes:
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+
 >  linux-user/syscall.c              | 34 +++++++++++++++++++++++++++++--
 >  tests/tcg/riscv64/Makefile.target |  1 +
 >  tests/tcg/riscv64/cpuinfo.c       | 30 +++++++++++++++++++++++++++
@@ -228,7 +234,7 @@ le.target
 > +    fclose(fp);
 > +    return 0;
 > +}
-
-Regards,
-Bin
+> --
+> 2.34.7
+>
 
