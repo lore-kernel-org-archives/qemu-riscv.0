@@ -1,69 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pcJCy-0002Zt-6k
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 00:57:55 -0400
+	id 1pcJMp-000620-Pn
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 01:08:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pcJCq-0002Xx-3S; Wed, 15 Mar 2023 00:57:44 -0400
-Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pcJCn-0003iK-5a; Wed, 15 Mar 2023 00:57:43 -0400
-Received: by mail-ua1-x930.google.com with SMTP id i22so7541021uat.8;
- Tue, 14 Mar 2023 21:57:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1678856256;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=w1aQwP73QDxFiUiU9Cb7lmaQnKachzRaBdy9Y62YCEw=;
- b=nH4lA2o0Ey5CdyFQbCILIfnbCR+VhPp3Yu8+wM9YdC6bQtxNm/+/mUcV/2hohcc65T
- b21JxjIJlO1kvkw3Ve0LyuRxettATiYO2gEBVAGthZcpsxTkPdzPDaGyOZ34tYvZW2Uz
- EdqChgdEfKI20skaTnIeezejweeDqrKiSHngh2lKZoPJesnB70k3vOPURKCsOUluWtaB
- 8RuDv6lK6Xumslxa3gWo4pIO9EL8KvhcIS2HTu/OrdLHfhN+3IMd8OeSvOvBAo48Dpiz
- e1dAuweDHq9u841MF6mDHfW+z97g2AsgnjPeYxuigWj01pB9hLcU++FEQW2PZiIBB4iJ
- k+3w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678856256;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=w1aQwP73QDxFiUiU9Cb7lmaQnKachzRaBdy9Y62YCEw=;
- b=xJfle9P3TpMqKYEGdO6zYesz+kvHCX0DTQgSnA6OR/8msPRLlxKpjztruQNhq7qept
- e6c4c/6ixPLfoXQmTZkzAeh+3qZLAzzcgMuqR5hbnhKtQ9hhR5cstqEWS0jU8uKDz6/j
- eZz5K/+UeXu0pjZyvN7cmhKIZtzRQ5P5xl8+DX5wBmAKE5RcEpd3lfCGVMkiufVS89YE
- A9zn3R43Ree9mAePmdyACcGqOzWipDpNRZ+LhqYTnkLViVblZRTLaA4FgS7TU0p4YQED
- k77I+ABvF95USQOU8egdcTCBCajnohV05fAI6cRjjhPJCnLg7vuw+l0yOOYSJhJzenWM
- Py1w==
-X-Gm-Message-State: AO0yUKUQzAia6Hwo5M+xRtrCifzjuGKlGqeBsY327d25Ld0Z72NhQcRN
- E8vXbZYphd/6VK+fIvyFYeDGR/evMzI/qDfnD/d1OzZEZIk=
-X-Google-Smtp-Source: AK7set8mj/hbLYWHvktM/Sv9OjBSb5TkCN99y/3IcTjXwYQ27Uut0rbf0QIIuAozMLX6Q1/N1IEhG/NAtii2yjOCAv8=
-X-Received: by 2002:ab0:470b:0:b0:688:c23f:c22f with SMTP id
- h11-20020ab0470b000000b00688c23fc22fmr19484779uac.1.1678856256449; Tue, 14
- Mar 2023 21:57:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pcJMm-00060A-Md; Wed, 15 Mar 2023 01:08:00 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pcJMj-0005Md-Hl; Wed, 15 Mar 2023 01:08:00 -0400
+Received: from [192.168.0.120] (unknown [180.165.240.243])
+ by APP-05 (Coremail) with SMTP id zQCowAB3fxeiUhFkyc8xAw--.338S2;
+ Wed, 15 Mar 2023 13:07:48 +0800 (CST)
+Message-ID: <78a2487f-3cd3-c133-4013-2557a8fe8b12@iscas.ac.cn>
+Date: Wed, 15 Mar 2023 13:07:46 +0800
 MIME-Version: 1.0
-References: <20230309071329.45932-1-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230309071329.45932-1-liweiwei@iscas.ac.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 15 Mar 2023 14:57:10 +1000
-Message-ID: <CAKmqyKMFKO89AwErj4r2PLndsbSK_Om9YDU5k6NU3wOMv6ME3A@mail.gmail.com>
-Subject: Re: [PATCH 0/4] target/riscv: Some CPURISCVState related cleanup and
- simplification
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+Subject: Re: [PATCH for-8.1 v2 22/26] target/riscv: error out on priv failure
+ for RVH
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+References: <20230314164948.539135-1-dbarboza@ventanamicro.com>
+ <20230314164948.539135-23-dbarboza@ventanamicro.com>
+From: liweiwei <liweiwei@iscas.ac.cn>
+In-Reply-To: <20230314164948.539135-23-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID: zQCowAB3fxeiUhFkyc8xAw--.338S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxAr43Ww1rXFW8GFyxWw18Grg_yoW5CFWkpr
+ W7G3yayryDJFnrX3y3Jr4DAF18uws5WFZ7Gwn3K3ZrCFWYyrW8Wrn0kr47uFWxAF95ur4a
+ v3WUGFnruFWUJa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkC14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr
+ 1j6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
+ 6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
+ 0_Gr1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7Mxk0xIA0c2IEe2xFo4CE
+ bIxvr21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67
+ AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIY
+ rxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14
+ v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8
+ JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUoOJ5UU
+ UUU
+X-Originating-IP: [180.165.240.243]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -77,48 +68,103 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Mar 2023 04:57:44 -0000
+X-List-Received-Date: Wed, 15 Mar 2023 05:08:01 -0000
 
-On Thu, Mar 9, 2023 at 5:15=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wro=
-te:
->
-> The patchset tries to:
->
-> - Use riscv_cpu_cfg(env) instead of env_archcpu().cfg.
-> - Use env_archcpu() to get RISCVCPU pointer from env directly
-> - Use CPURISCVState as argument directly in riscv_cpu_update_mip and risc=
-v_timer_write_timecmp to simplify type conversion
-> - Remove RISCVCPU argument of riscv_csrrw_check, and get cfg infomation f=
-rom CPURISCVState directly
->
-> The port is available here:
-> https://github.com/plctlab/plct-qemu/tree/plct-cleanup-upstream
->
-> Weiwei Li (4):
->   target/riscv: Avoid env_archcpu() when reading RISCVCPUConfig
->   target/riscv: Simplify getting RISCVCPU pointer from env
->   target/riscv: Simplify type conversion for CPURISCVState
->   target/riscv: Simplify arguments for riscv_csrrw_check
 
-Thanks!
+On 2023/3/15 00:49, Daniel Henrique Barboza wrote:
+> We have one last case where we're changing env->misa_ext* during
+> validation. riscv_cpu_disable_priv_spec_isa_exts(), at the end of
+> riscv_cpu_validate_set_extensions(), will disable cpu->cfg.ext_h and
+> cpu->cfg.ext_v if priv_ver check fails.
+>
+> This check can be done in riscv_cpu_validate_misa_ext(). The difference
+> here is that we're not silently disable it: we'll error out. Silently
+> disabling a MISA extension after all the validation is completed can
+> can cause inconsistencies that we don't have to deal with. Verify ealier
+> and fail faster.
+>
+> Note that we're ignoring RVV priv_ver validation since its minimal priv
+> is also the minimal value we support. RVH will error out if enabled
+> under priv_ver under 1_12_0.
+>
+> As a bonus, we're guaranteeing that all env->misa_ext* changes will
+> happen up until riscv_set_G_virt_ext(). We don't have to worry about
+> keeping env->misa_ext in sync with cpu->cfg.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>   target/riscv/cpu.c | 28 +++++++++++++++++++---------
+>   1 file changed, 19 insertions(+), 9 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index f8f416d6dd..1f72e1b8ce 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1067,6 +1067,20 @@ static void riscv_cpu_validate_misa_ext(CPURISCVState *env,
+>           return;
+>       }
+>   
+> +    /*
+> +     * Check for priv spec version. RVH is 1_12_0, RVV is 1_10_0.
+> +     * We don't support anything under 1_10_0 so skip checking
+> +     * priv for RVV.
+> +     *
+> +     * We're hardcoding it here to avoid looping into the
+> +     * 50+ entries of isa_edata_arr[] just to check the RVH
+> +     * entry.
+> +     */
+> +    if (misa_ext & RVH && env->priv_ver < PRIV_VERSION_1_12_0) {
+> +        error_setg(errp, "H extension requires priv spec 1.12.0");
+> +        return;
+> +    }
+> +
+>       if (misa_ext & RVV) {
+>           /*
+>            * V depends on Zve64d, which requires D. It also
+> @@ -1117,14 +1131,10 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
+>   
+>   /*
+>    * Check consistency between chosen extensions while setting
+> - * cpu->cfg accordingly, setting env->misa_ext and
+> - * misa_ext_mask in the end.
+> + * cpu->cfg accordingly.
+>    */
+>   static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>   {
+> -    CPURISCVState *env = &cpu->env;
+> -    uint32_t ext = 0;
+> -
+>       if (cpu->cfg.epmp && !cpu->cfg.pmp) {
+>           /*
+>            * Enhanced PMP should only be available
+> @@ -1241,10 +1251,6 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>        * validated and set everything we need.
+>        */
+>       riscv_cpu_disable_priv_spec_isa_exts(cpu);
+> -
+> -    ext = riscv_get_misa_ext_with_cpucfg(&cpu->cfg);
+> -
+> -    env->misa_ext_mask = env->misa_ext = ext;
 
-Applied to riscv-to-apply.next
+This can be removed in the patch 17.
 
-Alistair
+Regards,
 
->
->  target/riscv/cpu.c         |  6 +--
->  target/riscv/cpu.h         |  3 +-
->  target/riscv/cpu_helper.c  | 17 ++++----
->  target/riscv/csr.c         | 87 ++++++++++++--------------------------
->  target/riscv/gdbstub.c     |  4 +-
->  target/riscv/pmu.c         | 14 +++---
->  target/riscv/time_helper.c | 15 +++----
->  target/riscv/time_helper.h |  2 +-
->  8 files changed, 57 insertions(+), 91 deletions(-)
->
-> --
-> 2.25.1
->
->
+Weiwei Li
+
+>   }
+>   
+>   #ifndef CONFIG_USER_ONLY
+> @@ -1355,6 +1361,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>           return;
+>       }
+>   
+> +    /*
+> +     * This is the last point where env->misa_ext* can
+> +     * be changed.
+> +     */
+>       if (cpu->cfg.ext_g) {
+>           riscv_set_G_virt_ext(cpu);
+>       }
+
 
