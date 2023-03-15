@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pcVAB-00025b-L8
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:43:47 -0400
+	id 1pcVAD-00027a-8r
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:43:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVA8-00020F-40
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:43:44 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ id 1pcVAA-00024j-PU
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:43:46 -0400
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVA0-0000cm-CD
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:43:43 -0400
-Received: by mail-wr1-x429.google.com with SMTP id m2so5282085wrh.6
- for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:43:35 -0700 (PDT)
+ id 1pcVA0-0000dQ-S5
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:43:46 -0400
+Received: by mail-wr1-x42f.google.com with SMTP id q16so18065240wrw.2
+ for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:43:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678902214;
+ d=linaro.org; s=google; t=1678902215;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y4cpR7vA6XSXxWS6bHag8gq4h8YFalbW/SrKcN6qWB8=;
- b=gb53RexSl8PB4IaOOG9vTrd+3BcQN0+X2Am1jwD+RpD/rPEOKxUfXSzSe4DYauDoAq
- BwfNcPM8KY6JvnQDUHY8DT1a2Pfcdi8XOIC09K8wbEN8O4vtpMXc84nHnMoAxKVz5XyI
- tl6psBNX6/vGm1pZbEPVmGtME5UQZqlkf8f1ggfc+Ip9lbnFapBhBBEnfMxOf+VWfAyO
- Hp+Uz+k0VMlEgUUmnuUzVttOxbO7IHeQPF2i64pBiNfzLgXIrWnqXT5997lsKogM5Hx2
- KUEHwjinTWn6LdBjwPAtR0KxKxLSMSJ34L3EhUBA72mCVUM64sj3Fej/wxBuwYHz0Ph4
- DiLw==
+ bh=ZvCAx4F7D2VDKqlV3zkasos0ltqlJHomALeskNF44vQ=;
+ b=AjlqOME2l5f+IqgDvgtW5+CkYeuA4/tKB9XBYxUgEu3ueBpIzfu96BCHEPiULHgBBL
+ FooB/VtpQBdQkpDO4v/IMPVLvdKcTK9V3rZhZsuv5njFjvea8/ayGf6Ddg8gs8mTHDcv
+ JqDUgd14PceCjhoW67Qm/a5tvXJCKKALZZUmxx0bbPVte135ngmbji6xTxt4R63yB7Ke
+ X4LJ95o9cSH7pSfLjtP/bCLS+EbUhyoKKtO+2KOxARYp/cqT5VwwuTe451t3ohJopxwO
+ THwgKaTxK8c/tq7dYBBCtPaGFqsHkWZ1PGaDTzHuokKCgaXI+K0G9Lk9/7yjBLi6ywlm
+ E6Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678902214;
+ d=1e100.net; s=20210112; t=1678902215;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=y4cpR7vA6XSXxWS6bHag8gq4h8YFalbW/SrKcN6qWB8=;
- b=gECcMlJDnx6qGVxJcezciOZp/2zSZ0IAOTzkShHEFn5+KRGSxE4X2OIGrIR3usiZ7f
- /bjq4QbBcf0CXdkWsP9C0GDWH39RJFgIzOHzdI4GKNms+CBLnL1LUqzKbR2ULe9Ali4f
- 0GS+/kIjr7Md2rcSYOLNW7Yb/auCvVAw2sH1rhhn3hKvja/RNgUuW4C33ZCcsuBuA14+
- wOthEVPFj29886i+9lkwXxv2fwKuP+XHk4aELBdda3jhEQoGUZfnopaT+d5aE3nxxWhP
- ybNx32ye0QIbu5T6+83mM7hRFLsE0f0r8wVQasJ7bRXxdTXlmPY3tlBfUmxbXBPTtg4y
- Xh2Q==
-X-Gm-Message-State: AO0yUKXr2QZbbWhoqFZeIPY4ZCeXn6jgezZsK3iT+5TFwSYjiZ7CeU4D
- th5HeZ20y8AwP65N3wzre4bOSw==
-X-Google-Smtp-Source: AK7set9LElPNTXQiqOj+0ADODBobuAuRsu2Z5RFM9zCJWgYF1lFYWqWlOkJK+PxZbCiaZo7r224tiQ==
-X-Received: by 2002:a5d:6a4a:0:b0:2cf:3a99:9c1e with SMTP id
- t10-20020a5d6a4a000000b002cf3a999c1emr2611776wrw.49.1678902214472; 
- Wed, 15 Mar 2023 10:43:34 -0700 (PDT)
+ bh=ZvCAx4F7D2VDKqlV3zkasos0ltqlJHomALeskNF44vQ=;
+ b=SPftX/kqvwCuOhThV96op6Zl/Je63Zv9BtojO+LMjHiJb9kIaolB/mpvNfDOO/a0Gr
+ R+w3MHlLijqq3gNEIXp//FCVbLwJbdE8uQMjVsnrY9AT7CLeU3CX0eRmVIogFdoyhbdd
+ fMWA27nrVgpaX6399tYgzhzJIUzXGNMTE8Og6aYUq+hPO1YFSauMTgvPn4d/6rrMOzPx
+ 2PSMkuLfh0sC9LgLVN/7ZBxNLlD1OIUTQlt8/RHq46ZoX8+J+mU0jP112pF4qABAmBft
+ E7FHo0ZkgT3sNI9CFnD9nI6Jo2F2bind8ruWRZaRYRNhb3pRYrgQcdJRHiJz2vQx8a3l
+ KGsA==
+X-Gm-Message-State: AO0yUKXfUJHn/cAqU1dYMLdCMyRsNyrVLStIE7AMjCYLleNsD4YcpGEw
+ hzPxfc0yZThFC0gs9coz6ej1gw==
+X-Google-Smtp-Source: AK7set9KVHdN8cCJxYnfTKxozvdOIEvbxQZu2fJTj7PcZnTypbf7faT4UqbTVLs/yAwbAsJxtteILg==
+X-Received: by 2002:adf:fe06:0:b0:2cf:e313:2860 with SMTP id
+ n6-20020adffe06000000b002cfe3132860mr3084467wrr.33.1678902215269; 
+ Wed, 15 Mar 2023 10:43:35 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- n7-20020a5d4847000000b002c5d3f0f737sm5190409wrs.30.2023.03.15.10.43.32
+ f12-20020a5d568c000000b002cfe3f842c8sm5176145wrv.56.2023.03.15.10.43.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 15 Mar 2023 10:43:33 -0700 (PDT)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 8D4A31FFBB;
+ by zen.linaroharston (Postfix) with ESMTP id C89341FFBD;
  Wed, 15 Mar 2023 17:43:31 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -99,17 +99,17 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
  Sunil Muthuswamy <sunilmut@microsoft.com>, Hanna Reitz <hreitz@redhat.com>,
  Peter Xu <peterx@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH v2 03/32] scripts/ci: add libslirp-devel to build-environment
-Date: Wed, 15 Mar 2023 17:43:02 +0000
-Message-Id: <20230315174331.2959-4-alex.bennee@linaro.org>
+Subject: [PATCH v2 05/32] gitlab: update centos-8-stream job
+Date: Wed, 15 Mar 2023 17:43:04 +0000
+Message-Id: <20230315174331.2959-6-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230315174331.2959-1-alex.bennee@linaro.org>
 References: <20230315174331.2959-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -129,29 +129,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Mar 2023 17:43:44 -0000
+X-List-Received-Date: Wed, 15 Mar 2023 17:43:47 -0000
 
-Without libslip enabled we won't have user networking which means the
-KVM tests won't run.
+A couple of clean-ups here:
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+  - inherit from the custom runners job for artefacts
+  - call check-avocado directly
+  - add some comments to the top about setup
+
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- scripts/ci/org.centos/stream/8/build-environment.yml | 1 +
- 1 file changed, 1 insertion(+)
+ .../custom-runners/centos-stream-8-x86_64.yml  | 18 ++++++------------
+ 1 file changed, 6 insertions(+), 12 deletions(-)
 
-diff --git a/scripts/ci/org.centos/stream/8/build-environment.yml b/scripts/ci/org.centos/stream/8/build-environment.yml
-index 0d094d70c3..1ead77e2cb 100644
---- a/scripts/ci/org.centos/stream/8/build-environment.yml
-+++ b/scripts/ci/org.centos/stream/8/build-environment.yml
-@@ -55,6 +55,7 @@
-           - librados-devel
-           - librbd-devel
-           - libseccomp-devel
-+          - libslirp-devel
-           - libssh-devel
-           - libxkbcommon-devel
-           - lzo-devel
+diff --git a/.gitlab-ci.d/custom-runners/centos-stream-8-x86_64.yml b/.gitlab-ci.d/custom-runners/centos-stream-8-x86_64.yml
+index 068b0c4335..367424db78 100644
+--- a/.gitlab-ci.d/custom-runners/centos-stream-8-x86_64.yml
++++ b/.gitlab-ci.d/custom-runners/centos-stream-8-x86_64.yml
+@@ -1,4 +1,9 @@
++# All centos-stream-8 jobs should run successfully in an environment
++# setup by the scripts/ci/setup/stream/8/build-environment.yml task
++# "Installation of extra packages to build QEMU"
++
+ centos-stream-8-x86_64:
++ extends: .custom_runner_template
+  allow_failure: true
+  needs: []
+  stage: build
+@@ -8,15 +13,6 @@ centos-stream-8-x86_64:
+  rules:
+  - if: '$CI_PROJECT_NAMESPACE == "qemu-project" && $CI_COMMIT_BRANCH =~ /^staging/'
+  - if: "$CENTOS_STREAM_8_x86_64_RUNNER_AVAILABLE"
+- artifacts:
+-   name: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+-   when: on_failure
+-   expire_in: 7 days
+-   paths:
+-     - build/tests/results/latest/results.xml
+-     - build/tests/results/latest/test-results
+-   reports:
+-     junit: build/tests/results/latest/results.xml
+  before_script:
+  - JOBS=$(expr $(nproc) + 1)
+  script:
+@@ -25,6 +21,4 @@ centos-stream-8-x86_64:
+  - ../scripts/ci/org.centos/stream/8/x86_64/configure
+    || { cat config.log meson-logs/meson-log.txt; exit 1; }
+  - make -j"$JOBS"
+- - make NINJA=":" check
+-   || { cat meson-logs/testlog.txt; exit 1; } ;
+- - ../scripts/ci/org.centos/stream/8/x86_64/test-avocado
++ - make NINJA=":" check check-avocado
 -- 
 2.39.2
 
