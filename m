@@ -1,56 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pcVPL-0005nH-Ai
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:59:27 -0400
+	id 1pcVPO-0005r2-KY
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:59:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVPJ-0005mK-OM
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:59:26 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ id 1pcVPM-0005nq-8l
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:59:28 -0400
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVPG-0004B6-Ey
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:59:25 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- fm20-20020a05600c0c1400b003ead37e6588so1591552wmb.5
+ id 1pcVPG-0004BT-Ll
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:59:27 -0400
+Received: by mail-wr1-x436.google.com with SMTP id h17so4083224wrt.8
  for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:59:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678903160;
+ d=linaro.org; s=google; t=1678903161;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UdK4L7buRJRBhWENt6vEwjRP9U71/totQZg0N/PH0dY=;
- b=WfOmM7Pmqts8fO7pZEN4UjzlRO6WiUa6G4uOEWiBLr8cfUVMXdV80VYlYbohHUPOAB
- CdkeXPU0/cAeYi0S8fLOeCtDY68+LpcAYRA3Cggm6798NgIBjmxQQrPdf5wLV5v2oxZo
- S3TLlhCvGmC6K0kZM5X9DgypJ8EwgBciy69riFL4SZ2zHvY4guRshb0x5EAdHfonyUpp
- b/VrsSJ3ZPxtIlTvD1ejvzCjej/h0y6Xz/2TtkkrqHo5NcL62/P8nJBmhAb1LmCej27o
- Pzp9ePLOiRX+cTDne9OjTkN767wM3QBkQQvM+CJU7KUJ4mQVOycniOj36vtEB7bD+7CW
- ZQew==
+ bh=sjLPfMQH5X3r4H7gOQMwsuYoqZ/Fp9APWUTkT22J5Kc=;
+ b=dVinq+voLjrtHUA3P8k2xpNisamNSKAls/++1xEuwYv3hEbYbc07C28s+sHxXJmHhp
+ itli+/YI/vLPImSWf/RCJuJzA395V8De3CfugVNhn0sK7s8fDZnnnSYbE8SssRHEAzNL
+ RdGpdqYbBlqPtrfYyQsJKYuhtwlneVAoxHhsGySUlCo6foDord/wVmmbfXHzVxnoF2Gv
+ KXQq4mbur/KAJbFpH1VMuYer1QSqVdPP94dR54tBFOo+jG0jonVO0e2iuaApf3ytEPWi
+ as2KLfQcpXrDt0Sedn4kLK56Oog315V/z72BXQVG/7W7b+ZpmO8qsR6X5JovNnepDgGp
+ bU6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678903160;
+ d=1e100.net; s=20210112; t=1678903161;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UdK4L7buRJRBhWENt6vEwjRP9U71/totQZg0N/PH0dY=;
- b=LLp4TrggU/D3tqpAqpiiSIA5BmJSUG1aZI7NEyUYrhNBk9x6wLyeA33v95iE6BvsyT
- 3ooSPhefN4qXDtTP8Uwk7s11EXtCqxbIJObDq/eErVrcMJaVErUDk23ixMirMr1EJWQQ
- LVYA0iTA7DCk9Oduuu+LWwQhVH/dRuTTt05sVLQckStgc1u5G21oRAllDvcwwjPFA4FV
- diVOdQADfqwANfgieghLcgir5/NaueX4UPoQRlCVVdJcdx8Cu7bZPvLPgS1Oc4pPni4j
- bUkncLRuTMsd9t39yJwJLcW3F9XTpmD25w07JRFKja8HMwL+ZE5NZlPJIL2U1f03yq7q
- 0YSA==
-X-Gm-Message-State: AO0yUKWGED+0lb8HMvaf8nsyH6V1A/J6oi2wN6P/nF3u3zhMTtSTkRGw
- zL1Gjq4Tima0BXTi505TNQIi2w==
-X-Google-Smtp-Source: AK7set+9OzK5yNsExZae8z8rXhOX3AKBlkokIMl0uh6319WCOm8yvPXFNP/inALuD9U7quP1gYpp2g==
-X-Received: by 2002:a05:600c:450d:b0:3ed:314a:326c with SMTP id
- t13-20020a05600c450d00b003ed314a326cmr3501284wmo.11.1678903160398; 
+ bh=sjLPfMQH5X3r4H7gOQMwsuYoqZ/Fp9APWUTkT22J5Kc=;
+ b=oAT7vgUciknc7OFLUc+o7K83x9RR5igBme2cP/LGgr9qwJWHLXRyEIyTM1IfMINYmF
+ lwebAIshnxurBVXNfE/Uws8liHgACHlFCpu7QppHPEUg+vfs5LHAvdIZMs6H6WjXyh6B
+ 9SIDz6C3UG6y5lQDCPFpm+Zx+vFpjnZr13+of0UupgnFqiuNzHpdMAI61EBpe2YPuL6/
+ YCSgbxJFAKYHyUKYJSyyh9dJ/8PlXvGOnlJmKn/5ANs1pU/zt2OYRot4LIeOgqHZMyvN
+ YtmXwgDnjV0XjhTCsjJL8+8RRFoCTISyNbTWnUhn3jxiPHzDbdhHQC+J183+cJRBntKs
+ KqMw==
+X-Gm-Message-State: AO0yUKVLuP5cCHOOQiEdypwcFPf0PeV/nHYeQf/fdD0dPOTHbhFFuwZp
+ iMOjDcfFVK6xOdqp/rL0EKQBng==
+X-Google-Smtp-Source: AK7set802G/CXLCS9yi2aAzotf3LTQqa9PQAR6GfQ5rYk/aiy7ZlgT5v1c0TFRsKs4/yEFhxIoHeew==
+X-Received: by 2002:adf:d849:0:b0:2cf:ecbf:402f with SMTP id
+ k9-20020adfd849000000b002cfecbf402fmr2395365wrl.15.1678903160831; 
  Wed, 15 Mar 2023 10:59:20 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- l26-20020a05600c2cda00b003dd1bd0b915sm2704802wmc.22.2023.03.15.10.59.20
+ i9-20020a5d5589000000b002c553e061fdsm5150678wrv.112.2023.03.15.10.59.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 15 Mar 2023 10:59:20 -0700 (PDT)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 7E9E11FFD0;
+ by zen.linaroharston (Postfix) with ESMTP id 2A1221FFBD;
  Wed, 15 Mar 2023 17:43:44 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -101,17 +100,18 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
  Peter Xu <peterx@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 25/32] iotests: remove the check-block.sh script
-Date: Wed, 15 Mar 2023 17:43:24 +0000
-Message-Id: <20230315174331.2959-26-alex.bennee@linaro.org>
+Subject: [PATCH v2 22/32] iotests: connect stdin to /dev/null when running
+ tests
+Date: Wed, 15 Mar 2023 17:43:21 +0000
+Message-Id: <20230315174331.2959-23-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230315174331.2959-1-alex.bennee@linaro.org>
 References: <20230315174331.2959-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -131,73 +131,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Mar 2023 17:59:26 -0000
+X-List-Received-Date: Wed, 15 Mar 2023 17:59:29 -0000
 
 From: Daniel P. Berrangé <berrange@redhat.com>
 
-Now that meson directly invokes the individual I/O tests, the
-check-block.sh wrapper script is no longer required.
+Currently the tests have their stdin inherited from the test harness,
+meaning they are connected to a TTY. The QEMU processes spawned by
+certain tests, however, modify TTY settings and if the test exits
+abnormally the settings might not be restored.
+
+The python test harness thus has some logic which will capture the
+initial TTY settings and restore them once all tests are finished.
+
+This does not, however, take into account the possibility of many
+copies of the 'check' program running in parallel. With parallel
+execution, a later invokation may save the TTY state that QEMU has
+already modified, and thus restore bad state leaving the TTY
+non-functional.
+
+None of the I/O tests shnould actually be interactive requiring
+user input and so they should not require a TTY at all. To avoid
+this while TTY save/restore complexity we can connect the test
+stdin to /dev/null instead.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 Acked-by: Hanna Czenczek <hreitz@redhat.com>
 Tested-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20230303160727.3977246-9-berrange@redhat.com>
+Message-Id: <20230303160727.3977246-6-berrange@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/check-block.sh | 43 -------------------------------------------
- 1 file changed, 43 deletions(-)
- delete mode 100755 tests/check-block.sh
+ tests/qemu-iotests/testrunner.py | 22 ++--------------------
+ 1 file changed, 2 insertions(+), 20 deletions(-)
 
-diff --git a/tests/check-block.sh b/tests/check-block.sh
-deleted file mode 100755
-index 5de2c1ba0b..0000000000
---- a/tests/check-block.sh
-+++ /dev/null
-@@ -1,43 +0,0 @@
--#!/bin/sh
+diff --git a/tests/qemu-iotests/testrunner.py b/tests/qemu-iotests/testrunner.py
+index e734800b3d..81519ed6e2 100644
+--- a/tests/qemu-iotests/testrunner.py
++++ b/tests/qemu-iotests/testrunner.py
+@@ -24,12 +24,10 @@
+ import subprocess
+ import contextlib
+ import json
+-import termios
+ import shutil
+ import sys
+ from multiprocessing import Pool
+-from contextlib import contextmanager
+-from typing import List, Optional, Iterator, Any, Sequence, Dict, \
++from typing import List, Optional, Any, Sequence, Dict, \
+         ContextManager
+ 
+ from testenv import TestEnv
+@@ -56,22 +54,6 @@ def file_diff(file1: str, file2: str) -> List[str]:
+         return res
+ 
+ 
+-# We want to save current tty settings during test run,
+-# since an aborting qemu call may leave things screwed up.
+-@contextmanager
+-def savetty() -> Iterator[None]:
+-    isterm = sys.stdin.isatty()
+-    if isterm:
+-        fd = sys.stdin.fileno()
+-        attr = termios.tcgetattr(fd)
 -
--if [ "$#" -eq 0 ]; then
--    echo "Usage: $0 fmt..." >&2
--    exit 99
--fi
+-    try:
+-        yield
+-    finally:
+-        if isterm:
+-            termios.tcsetattr(fd, termios.TCSADRAIN, attr)
 -
--# Honor the SPEED environment variable, just like we do it for "meson test"
--format_list="$@"
--if [ "$SPEED" = "slow" ] || [ "$SPEED" = "thorough" ]; then
--    group=
--else
--    group="-g auto"
--fi
 -
--skip() {
--    echo "1..0 #SKIP $*"
--    exit 0
--}
--
--if [ -z "$(find . -name 'qemu-system-*' -print)" ]; then
--    skip "No qemu-system binary available ==> Not running the qemu-iotests."
--fi
--
--cd tests/qemu-iotests
--
--# QEMU_CHECK_BLOCK_AUTO is used to disable some unstable sub-tests
--export QEMU_CHECK_BLOCK_AUTO=1
--export PYTHONUTF8=1
--# If make was called with -jN we want to call ./check with -j N. Extract the
--# flag from MAKEFLAGS, so that if it absent (or MAKEFLAGS is not defined), JOBS
--# would be an empty line otherwise JOBS is prepared string of flag with value:
--# "-j N"
--# Note, that the following works even if make was called with "-j N" or even
--# "--jobs N", as all these variants becomes simply "-jN" in MAKEFLAGS variable.
--JOBS=$(echo "$MAKEFLAGS" | sed -n 's/\(^\|.* \)-j\([0-9]\+\)\( .*\|$\)/-j \2/p')
--
--ret=0
--for fmt in $format_list ; do
--    ${PYTHON} ./check $JOBS -tap -$fmt $group || ret=1
--done
--
--exit $ret
+ class LastElapsedTime(ContextManager['LastElapsedTime']):
+     """ Cache for elapsed time for tests, to show it during new test run
+ 
+@@ -169,7 +151,6 @@ def __enter__(self) -> 'TestRunner':
+         self._stack = contextlib.ExitStack()
+         self._stack.enter_context(self.env)
+         self._stack.enter_context(self.last_elapsed)
+-        self._stack.enter_context(savetty())
+         return self
+ 
+     def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> None:
+@@ -294,6 +275,7 @@ def do_run_test(self, test: str, mp: bool) -> TestResult:
+         t0 = time.time()
+         with f_bad.open('w', encoding="utf-8") as f:
+             with subprocess.Popen(args, cwd=str(f_test.parent), env=env,
++                                  stdin=subprocess.DEVNULL,
+                                   stdout=f, stderr=subprocess.STDOUT) as proc:
+                 try:
+                     proc.wait()
 -- 
 2.39.2
 
