@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pcVAm-0002qr-A2
+	id 1pcVAm-0002rG-Gv
 	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:44:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVAX-0002VC-RY
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:44:10 -0400
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ id 1pcVAY-0002Vx-GU
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:44:11 -0400
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVAE-0000l3-53
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:44:08 -0400
-Received: by mail-wm1-x32c.google.com with SMTP id
- fm20-20020a05600c0c1400b003ead37e6588so1565696wmb.5
+ id 1pcVAE-0000lK-M4
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:44:10 -0400
+Received: by mail-wm1-x32a.google.com with SMTP id
+ o11-20020a05600c4fcb00b003eb33ea29a8so1821206wmq.1
  for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:43:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1678902228;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sQqjfUQatIxdKkk1mS9vZHLNSiIHLiR1rCd25SjEL8w=;
- b=rtTxkMEUHcUjGsJWxc6rUc1ZV4KlgUvIGX4lAPc+INgQ1sAHs0E/76jb/iR5ROIf3i
- oezfa+aaq8mN/eYensGgDwSVA8OsAybcQu9NEdc1x0P7KC6cBg+f2ctAognicS41SsB+
- /5M1v0lScshfUCZ+03WYdCaYZ7ZNLkDTo+7qLKc9+btpS+nLsn1F+2/fHzrE7rBA4gT2
- DUUYeu3kMnyrTrMgui/9iJfkyYdnuOJ+ST+Yd6kA1G9+gZJpK0RZ2RtiFkeEZQRILVns
- q5Uz1sedz3wP2NM0iTTId6xIsvU4g+qb83J/zFWY7LdJkpaCYrnS7n9SCOlbj7Out1QB
- vpWg==
+ bh=yN/kmP3UzMt/cUifiAR045QSMUEZthdjOX5czXccge4=;
+ b=dpi8rv4lnXlZ9UNk6lCXb0nyhYmaD9MjBTd/aJAgT2xzR6+d7nyhQXaqSbDlPxCAB8
+ vYKdPDwBGZ9POtBOB+r9E+Ts4l3wodFzRzSVyC2kO9157PCDXy260qHGkHUP3Bi2znn/
+ Jery4QwT45HgHsOI+c6+HEbOxgyjNXpd3MXGTrqlmeQFtY60QfuFgsPCYuEBJc9oHWcd
+ i55gBSEesCom8qUA9iYT+6VYp+H5DQVtL879c3N+haePQJsgPMjeya9KFXTb4pX38mbO
+ I90a/w/7PO/fMvOeYRJQGiXJ8RNqppieBvTKe5v9PvBEVYFS5MKb+JeSZjpDGVHFTpeR
+ Oorg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112; t=1678902228;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sQqjfUQatIxdKkk1mS9vZHLNSiIHLiR1rCd25SjEL8w=;
- b=wubd+Rwwbo/DTNgIjKTgoVscQStqhch4XtfmXM3AFl4N6rKTNFMW5RDbJJUYEMBdZW
- BnKiD3PsJKpV7ztzDXWFRSNV7/zhueNDPozlbxzE0F+coLeEGERa2fD+r417PqkHKM6u
- cKhF2EwTiP8d6ZpUh5f39vuQG+m+WLYjt+5cvrcEP7D69DGoQIZaCAQEQWYIQ0rREDwv
- MH+71H3CmjsDWRfgGeKp0ISgVHYpY02eQw4AQYXdTYlxCdNFLmsWdJETlh7PzD8LhmuM
- RR3KG0Z8oM6TfRUluNirh3H5caWsXKtzKl9Qxiqj0Nw3puIRGD7dYcCuVBHQRmtDNrNZ
- 1pIg==
-X-Gm-Message-State: AO0yUKWQMgJEC1v6HV79AeCkfWbXCCbRTB42EqDMm3cmvwEtf04VIDXv
- ZOBAF2uM+RESGGHpHNnAeKGSjw==
-X-Google-Smtp-Source: AK7set8HLwYqdb5QVGNCKtc1BGLLs5RIBqmppY2f38wiqYNFfn/T0dLkOnucHAUjUgSjIMrleHRBhA==
-X-Received: by 2002:a05:600c:4ed4:b0:3ed:26c1:8e5a with SMTP id
- g20-20020a05600c4ed400b003ed26c18e5amr9382085wmq.10.1678902228489; 
+ bh=yN/kmP3UzMt/cUifiAR045QSMUEZthdjOX5czXccge4=;
+ b=qarCNx5uel+WP558WoPUrF+JjrV4F7t4Ch01jsbNNxAExC62+9Up3BEvWWuY7wnDak
+ SvXaaW/gGaMO3DDdDjOYt2JUx9fHJiJCJ489W/w/XTJXZw935s0xXtK2C+24WWoXgxxu
+ VpXXNCfuXck2nZEP9uDsD5xkrsRn8k4VrOMK5SkGgDN9FFDLMdtQXsSvraCgacABKGN7
+ 9LydzA013FQg11kzxkv1rNuGQcMZEBXX2ZGS8fzTWuFE1ZBLdWvm5uAfR9Y5FAMuB3rd
+ eqB96XY0arRIY8fJj2ab/NR7ZVK/TcxCEqDsOwV2Ef7nWS/YTYwgW0W+TBvcDpYHdlLj
+ gqIg==
+X-Gm-Message-State: AO0yUKWfgXKMlhZ4kb6Gn2ibZOtVQ4pxqXPln93oiSOIrid5vpco39YF
+ 8fDamwjpCLdTKfvfPbez8R2XFw==
+X-Google-Smtp-Source: AK7set+vJwM0yy8e5btAFhvysicYL2B6xeLTt9PEugX/nMNrxIbhbmQEHo6xJj0enuZRkqL+ERiKeA==
+X-Received: by 2002:a05:600c:3ac8:b0:3eb:3f2d:f237 with SMTP id
+ d8-20020a05600c3ac800b003eb3f2df237mr18572279wms.6.1678902228767; 
  Wed, 15 Mar 2023 10:43:48 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- q3-20020a1cf303000000b003ed341d2d68sm2297850wmq.16.2023.03.15.10.43.46
+ t8-20020a1c7708000000b003ed2276cd0dsm2489997wmi.38.2023.03.15.10.43.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 15 Mar 2023 10:43:47 -0700 (PDT)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 62DC01FFCF;
+ by zen.linaroharston (Postfix) with ESMTP id 0C44A1FFCD;
  Wed, 15 Mar 2023 17:43:44 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -101,17 +101,18 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
  Peter Xu <peterx@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 24/32] iotests: register each I/O test separately with meson
-Date: Wed, 15 Mar 2023 17:43:23 +0000
-Message-Id: <20230315174331.2959-25-alex.bennee@linaro.org>
+Subject: [PATCH v2 21/32] iotests: print TAP protocol version when reporting
+ tests
+Date: Wed, 15 Mar 2023 17:43:20 +0000
+Message-Id: <20230315174331.2959-22-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230315174331.2959-1-alex.bennee@linaro.org>
 References: <20230315174331.2959-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -135,85 +136,35 @@ X-List-Received-Date: Wed, 15 Mar 2023 17:44:12 -0000
 
 From: Daniel P. Berrangé <berrange@redhat.com>
 
-Currently meson registers a single test that invokes an entire group of
-I/O tests, hiding the test granularity from meson. There are various
-downsides of doing this
+Recently meson started complaining that TAP test reports don't include
+the TAP protocol version. While this warning is bogus and has since been
+removed from Meson, it looks like good practice to include this header
+going forward. The GLib library test harness has started unconditionally
+printing the version, so this brings the I/O tests into line.
 
- * You cannot ask 'meson test' to invoke a single I/O test
- * The meson test timeout can't be applied to the individual
-   tests
- * Meson only gets a pass/fail for the overall I/O test group
-   not individual tests
- * If a CI job gets killed by the GitLab timeout, we don't
-   get visibility into how far through the I/O tests
-   execution got.
-
-This switches meson to perform test discovery by invoking 'check' in
-dry-run mode. It then registers one meson test case for each I/O
-test. Parallel execution remains disabled since the I/O tests do not
-use self contained execution environments and thus conflict with
-each other.
-
-Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 Acked-by: Hanna Czenczek <hreitz@redhat.com>
 Tested-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20230303160727.3977246-8-berrange@redhat.com>
+Message-Id: <20230303160727.3977246-5-berrange@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/qemu-iotests/meson.build | 35 ++++++++++++++++++++++++++++------
- 1 file changed, 29 insertions(+), 6 deletions(-)
+ tests/qemu-iotests/testrunner.py | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/tests/qemu-iotests/meson.build b/tests/qemu-iotests/meson.build
-index 323a4acb6a..a162f683ef 100644
---- a/tests/qemu-iotests/meson.build
-+++ b/tests/qemu-iotests/meson.build
-@@ -32,16 +32,39 @@ foreach k, v : emulators
-   endif
- endforeach
+diff --git a/tests/qemu-iotests/testrunner.py b/tests/qemu-iotests/testrunner.py
+index 5a771da86e..e734800b3d 100644
+--- a/tests/qemu-iotests/testrunner.py
++++ b/tests/qemu-iotests/testrunner.py
+@@ -391,6 +391,7 @@ def run_tests(self, tests: List[str], jobs: int = 1) -> bool:
+         casenotrun = []
  
-+qemu_iotests_check_cmd = files('check')
-+
- foreach format, speed: qemu_iotests_formats
-   if speed == 'quick'
-     suites = 'block'
-   else
-     suites = ['block-' + speed, speed]
-   endif
--  test('qemu-iotests ' + format, sh, args: [files('../check-block.sh'), format],
--       depends: qemu_iotests_binaries, env: qemu_iotests_env,
--       protocol: 'tap',
--       suite: suites,
--       timeout: 0,
--       is_parallel: false)
-+
-+  args = ['-tap', '-' + format]
-+  if speed == 'quick'
-+      args += ['-g', 'auto']
-+  endif
-+
-+  rc = run_command(
-+      [qemu_iotests_check_cmd] + args + ['-n'],
-+      check: true,
-+  )
-+
-+  foreach item: rc.stdout().strip().split()
-+      args = ['-tap', '-' + format, item,
-+              '--source-dir', meson.current_source_dir(),
-+              '--build-dir', meson.current_build_dir()]
-+      # Some individual tests take as long as 45 seconds
-+      # Bump the timeout to 3 minutes for some headroom
-+      # on slow machines to minimize spurious failures
-+      test('io-' + format + '-' + item,
-+           qemu_iotests_check_cmd,
-+           args: args,
-+           depends: qemu_iotests_binaries,
-+           env: qemu_iotests_env,
-+           protocol: 'tap',
-+           timeout: 180,
-+           suite: suites)
-+  endforeach
- endforeach
+         if self.tap:
++            print('TAP version 13')
+             self.env.print_env('# ')
+             print('1..%d' % len(tests))
+         else:
 -- 
 2.39.2
 
