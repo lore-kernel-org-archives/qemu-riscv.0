@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pcVAn-0002tj-4C
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:44:25 -0400
+	id 1pcVFk-0001mo-58
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:49:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVAe-0002ZW-7L
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:44:16 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ id 1pcVFe-0001ZK-V3
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:27 -0400
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVAG-0000dz-5w
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:44:15 -0400
-Received: by mail-wm1-x332.google.com with SMTP id p16so13109737wmq.5
- for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:43:51 -0700 (PDT)
+ id 1pcVFa-000281-58
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:26 -0400
+Received: by mail-wr1-x433.google.com with SMTP id o7so8691267wrg.5
+ for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:49:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678902231;
+ d=linaro.org; s=google; t=1678902560;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=v0p39ugLOaQczYK3TkGEmL7O7L8Oc7idQkhckXfJwmM=;
- b=L6TgbpaKg3Edkx/Y//n4gApyrjCUyTeLy9IxlIxXNXRUXnUb7a9kRIUYEUEdmIu39S
- Pu52UMnXk0A0/9ghApZAnv+qxn48udTQLLNTJb6uuFUumQfQ7FlbVWiYPoER4b/lfoPO
- jE6rz0Uzd/uftZo5Lo3ixO21Hn7pEJ4werNmu+3UweAtzEytzuD0hMm7jrfCfs1GoLDf
- 94D5iJfczesQDjnwmnhEso9mmrDROiis9hegOFdMnBdF3XaddDLG3BzKrBzuTI3fQFkp
- SidO5vqUrlwobV2SVsC7lQ/2ou0f0Zef2KUmdFDmm5S54FBEwAs2x2Y3YOizNRZ3rsye
- ltLg==
+ bh=8ftomCMN9D7t/TUiloNrLyUYQ5fiuNqGTG1HcraBz2M=;
+ b=v7vvvpLKuTVpAv8ps0Pq5QZaS+C/K2Uzyy9Kd6A4+ihyL3N/1JJjYNSBZX1ycukERb
+ pzkJE41/Wmw+JG7EXuGc6a/1wIxEyLt1aaQE9yoI2DkJwYs8LZRNJXWC5yq1FAvDAV+O
+ sBqPXOMx4lGGFNGlrtJ54AiimM7+1gfDjheacUJLzuvhR+G/ru6tIsq3SXerh3MvtZ7h
+ nwtNXrBQejuD7vBhdIzyceekpMqTpqbUdZPYYnLjeItExVL7ThO6fD9v2jBp4rzwrvaQ
+ BVUOt2P8vzX53Mnj7E+vRXdiGWZQuYHcntDQiFtMsPp3ooJAlPckNZGCH2qooPfqSaTy
+ isFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678902231;
+ d=1e100.net; s=20210112; t=1678902560;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=v0p39ugLOaQczYK3TkGEmL7O7L8Oc7idQkhckXfJwmM=;
- b=B9NqoiLzC6mk05eh1zaD6KtL7csY+rimtEOId9x+5TyVKFFX3y44rE9C9wzQ2bFMbP
- oR4can3kDWazuA8jzlLCJgJ9pxb1NQV3NUuBBJHwFJk6RN6UXNiDe93jtZ+lGr2b4hpm
- co5dblChlYrZemf5+EJBoNZoLbu+Y0dsUOvbeWVzLsQnMfRHWvr3sBL2p837tHH3ZsAv
- Htzot10gyo0VvKUFmuccslG9nTVD8Mm6nZkoDoi37XPFK0r153cQXUqnc5n1+OGCa534
- xc5U9E9sWBq6d1ytRMRMY+ijnZ02lizZiAykKxtZ5YHNmMkoq/IrSZw/7cZLiqFlpLRX
- 7JhQ==
-X-Gm-Message-State: AO0yUKX1INYp2E5QuWGLAsDEv+i1VMMTHdbfaX+wUER3WrnvOq38+6pG
- rYMg+wjqPlVOk4sL7kT0IvAnaQ==
-X-Google-Smtp-Source: AK7set+0XdSgmxCsuywCuQQEiQovrT78qUyLQqXs0AjgohDoSBgaCSQGBx5YLPMamDwmwdIz/Yr9Bg==
-X-Received: by 2002:a05:600c:4453:b0:3eb:1432:a78c with SMTP id
- v19-20020a05600c445300b003eb1432a78cmr19256411wmn.37.1678902231077; 
- Wed, 15 Mar 2023 10:43:51 -0700 (PDT)
+ bh=8ftomCMN9D7t/TUiloNrLyUYQ5fiuNqGTG1HcraBz2M=;
+ b=8SEjDB4Z5VhSjCdZzhohyNfiaw41dnGH+Kskipq720hng1eYj3tH9qfCAwhMQPnQCw
+ qHWAmu3tzvteORvJd7Soynq5AivKMEp/WVvMADrUsetzCMAhoJaV1UTovSrCg1RCdijx
+ DeExJ8NoN7Xf4MLZzzcVgMd6rKe3WQV6YNHvZXBxPps6/zG3EW5WlGvv4gQcP6QyHYNv
+ JqDRv8qKAEATK2PY4MdGPjYbNBt2VwdVqRrIeSiRSNvaOS+Vn9Pu47Sa5LoQSlvKHnyx
+ JyTo3MUBko8pw4EE2OSGSODFuNzRyjPyC8yFM26llaQxqPM7hr/vQfuNCu3Ha3rBnneU
+ RFVw==
+X-Gm-Message-State: AO0yUKVIKFP0cX7049fQSFHJcNOziV4Ky2/FlDTRko1ixTwn/wRGGkOf
+ ysCHDMqj0znXaFQ5/q/OvD6hVg==
+X-Google-Smtp-Source: AK7set+gIRu8mJmziJy9zHAyVl0XTVtsz+R+CSfjtPtXyE3J6uGRxhl0NzAlapKHUbHEtcUczbUTnQ==
+X-Received: by 2002:a5d:6ac6:0:b0:2cf:e70f:d1a8 with SMTP id
+ u6-20020a5d6ac6000000b002cfe70fd1a8mr2652066wrw.10.1678902559959; 
+ Wed, 15 Mar 2023 10:49:19 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- f6-20020a1c6a06000000b003ed2fb86f85sm2498909wmc.47.2023.03.15.10.43.47
+ c10-20020adffb0a000000b002d1bfe3269esm88021wrr.59.2023.03.15.10.49.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Mar 2023 10:43:50 -0700 (PDT)
+ Wed, 15 Mar 2023 10:49:19 -0700 (PDT)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 562151FFD6;
- Wed, 15 Mar 2023 17:43:45 +0000 (GMT)
+ by zen.linaroharston (Postfix) with ESMTP id 9D4761FFC3;
+ Wed, 15 Mar 2023 17:43:32 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
@@ -98,29 +98,26 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
  Bin Meng <bin.meng@windriver.com>,
  Sunil Muthuswamy <sunilmut@microsoft.com>, Hanna Reitz <hreitz@redhat.com>,
  Peter Xu <peterx@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Vikram Garhwal <vikram.garhwal@amd.com>,
- Stefano Stabellini <stefano.stabellini@amd.com>,
- Sai Pavan Boddu <sai.pavan.boddu@xilinx.com>, Tong Ho <tong.ho@xilinx.com>,
- Francisco Iglesias <francisco.iglesias@amd.com>
-Subject: [PATCH v2 32/32] contrib/gitdm: add group map for AMD
-Date: Wed, 15 Mar 2023 17:43:31 +0000
-Message-Id: <20230315174331.2959-33-alex.bennee@linaro.org>
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+Subject: [PATCH v2 12/32] tcg: Drop plugin_gen_disable_mem_helpers from
+ tcg_gen_exit_tb
+Date: Wed, 15 Mar 2023 17:43:11 +0000
+Message-Id: <20230315174331.2959-13-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230315174331.2959-1-alex.bennee@linaro.org>
 References: <20230315174331.2959-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -133,62 +130,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Mar 2023 17:44:18 -0000
+X-List-Received-Date: Wed, 15 Mar 2023 17:49:27 -0000
 
-AMD recently acquired Xilinx and contributors have been transitioning
-their emails across.
+From: Richard Henderson <richard.henderson@linaro.org>
 
+Now that we call qemu_plugin_disable_mem_helpers in cpu_tb_exec,
+we don't need to do this in generated code as well.
+
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20230310195252.210956-3-richard.henderson@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Cc: Vikram Garhwal <vikram.garhwal@amd.com>
-Cc: Stefano Stabellini <stefano.stabellini@amd.com>
-Cc: Sai Pavan Boddu <sai.pavan.boddu@xilinx.com>
-Cc: Tong Ho <tong.ho@xilinx.com>
-Reviewed-by: Francisco Iglesias <francisco.iglesias@amd.com>
-Message-Id: <20230310180332.2274827-11-alex.bennee@linaro.org>
 ---
- contrib/gitdm/domain-map    | 1 -
- contrib/gitdm/group-map-amd | 8 ++++++++
- gitdm.config                | 1 +
- 3 files changed, 9 insertions(+), 1 deletion(-)
- create mode 100644 contrib/gitdm/group-map-amd
+ tcg/tcg-op.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/contrib/gitdm/domain-map b/contrib/gitdm/domain-map
-index fa9cb5430f..f78c69fa54 100644
---- a/contrib/gitdm/domain-map
-+++ b/contrib/gitdm/domain-map
-@@ -49,6 +49,5 @@ virtuozzo.com   Virtuozzo
- vrull.eu        VRULL
- wdc.com         Western Digital
- windriver.com   Wind River
--xilinx.com      Xilinx
- yadro.com       YADRO
- yandex-team.ru  Yandex
-diff --git a/contrib/gitdm/group-map-amd b/contrib/gitdm/group-map-amd
-new file mode 100644
-index 0000000000..bda4239a8a
---- /dev/null
-+++ b/contrib/gitdm/group-map-amd
-@@ -0,0 +1,8 @@
-+# AMD acquired Xilinx and contributors have been slowly updating emails
-+
-+edgar.iglesias@xilinx.com
-+fnu.vikram@xilinx.com
-+francisco.iglesias@xilinx.com
-+sai.pavan.boddu@xilinx.com
-+stefano.stabellini@xilinx.com
-+tong.ho@xilinx.com
-diff --git a/gitdm.config b/gitdm.config
-index df4ba829ca..9db43ca142 100644
---- a/gitdm.config
-+++ b/gitdm.config
-@@ -32,6 +32,7 @@ EmailMap contrib/gitdm/domain-map
- #
+diff --git a/tcg/tcg-op.c b/tcg/tcg-op.c
+index ddab20a6a6..3136cef81a 100644
+--- a/tcg/tcg-op.c
++++ b/tcg/tcg-op.c
+@@ -2808,7 +2808,6 @@ void tcg_gen_exit_tb(const TranslationBlock *tb, unsigned idx)
+         tcg_debug_assert(idx == TB_EXIT_REQUESTED);
+     }
  
- GroupMap contrib/gitdm/group-map-alibaba Alibaba
-+GroupMap contrib/gitdm/group-map-amd AMD
- GroupMap contrib/gitdm/group-map-cadence Cadence Design Systems
- GroupMap contrib/gitdm/group-map-codeweavers CodeWeavers
- GroupMap contrib/gitdm/group-map-facebook Facebook
+-    plugin_gen_disable_mem_helpers();
+     tcg_gen_op1i(INDEX_op_exit_tb, val);
+ }
+ 
 -- 
 2.39.2
 
