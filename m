@@ -1,56 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pcVG9-0002yM-No
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:49:57 -0400
+	id 1pcVGD-0003Wt-Hi
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:50:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVFq-0002KT-4d
+ id 1pcVFp-0002KS-M6
  for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:38 -0400
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVFd-0002Ao-JS
+ id 1pcVFd-0002AZ-Hw
  for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:37 -0400
-Received: by mail-wr1-x42a.google.com with SMTP id r29so10051003wra.13
+Received: by mail-wm1-x334.google.com with SMTP id
+ az3-20020a05600c600300b003ed2920d585so1588643wmb.2
  for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:49:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1678902563;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ppSEIztWs3xXXlNFmxb7gCAEPQ7PlB98pYGLeW4YOYE=;
- b=WIO3ei+bYW7ojkqoukS+1PJLDudVTHC6RYsQF8hYA5vEQyo2CFtShEbvs0+omK2dcf
- dHIPYNEucLD1qgZ+YHpLk4QZww4ts2+QRHBBgu0XqttzygMdHCzbwYEsrivMNNjuxO1/
- Hf0+uxEmKTqMHLJ+Je7miLs8erttyjnqU6BbkoSC348P+JhGOwmce8mbog/KJ4iT/R64
- tHF+IPu69rmbHK07Bj60SYaxfQL8BCKlxQNtnPuUUZMjGGCNnT9Kqh3Bf57bLjwHvIEB
- 2seWWKTdwhhNbvJeHp5W9sgHtv/0lOHROuPzyjsycDYf/r7QZ/c3B6KPiMFKhkj9zO6x
- I8AQ==
+ bh=CJUdD1KDNN10uHV14kT9b5pVemIcBVsEPAiKGCkA3/I=;
+ b=ZiJwizY+BEQyfg+Q/JLMGsdkQBe18LLAHEYUWqsiE2UzVpoafO6VnoUkgfIPF1UF2C
+ AvHMfi1Zr4Gw+gU/glYhKQrPHig6ofDlVVSvHAknUmPOMV+KsOyu1ap5MFw86PoVzZFW
+ hRlf689u9iXJwNoLzIh4+flVAro/FQfytj2H61FRa0BWvwNGSYnYylvMS/e2dsBa+uYf
+ CdquL8gPnq9mTBiAINiXTynie2t6fwHS67wIcfJ6ZsSjj/Y/hgKw8TjhzQ5V3bDGJo3p
+ peJrW+oyDPqBXVDrJXAHlvdp3/ngS+p7onB5PHuDMel60FN8u/BKxfjngHNycMIUH5CZ
+ 5NFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112; t=1678902563;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ppSEIztWs3xXXlNFmxb7gCAEPQ7PlB98pYGLeW4YOYE=;
- b=D7CvyHIzfDSI1ZOyI8TWUNzP0uEQqdlZHJUYOBtfG06dCZyZZwmC+Or8U17H9xis6O
- Wx+wz2ZaGdbK0l4Bar9Bc4uWZIvWcw+0JaLGxEZ6iNGywKbXYP/kwqMEsAnX0xHCp7tD
- Lpnmo4senNY7MWN1sfkflGJ41w4El+ysirU03mkgSUlApyndz92yZDLGiNWJlPA1BfIM
- WOKnUqniyalKTng++TQHwn7YEf0Lts3HclvZ1bKA3U6/yHnH/GlL12KDNv2hl3v8HDWS
- 0ItUMEUPXKe3S497i9PfK2APEk5q5HgyCpxaNnNoiflM75nJDZBZrX8wCzIQjAs4UWBV
- 7H3g==
-X-Gm-Message-State: AO0yUKWzftgyyPITnJVqdkKG6XzCNJRqo2yHVkHSeSWiNYiSXXbTbGbm
- +gNJ8m5s8PfEHx6Aq/aFiLq1ZA==
-X-Google-Smtp-Source: AK7set92+GpJFzgamUBL/iLBl6mPPE+572u7XyDEJLJYBXQan6/PHN9kdy2rDGo/XW+QKyfAlZorDQ==
-X-Received: by 2002:adf:fd86:0:b0:2cf:efc1:ba49 with SMTP id
- d6-20020adffd86000000b002cfefc1ba49mr2309746wrr.68.1678902563534; 
+ bh=CJUdD1KDNN10uHV14kT9b5pVemIcBVsEPAiKGCkA3/I=;
+ b=KkKrjc44/z31Pxpa7xSxGt9zD8DGV3WHz48TiyFY1ysq9lRKCh8mABmDutOLmJ7zdr
+ y8basya6zh0awwg7CCa2D9sNKcITMqhUSO+VC5XY85aci1NdXdRnrsboLwBubkZ3aNNe
+ cqf7xSRTycfqMdGybts5VrIvUgEqJApD4KOEWkneNuDEb7stJwWz9KSRSXnOeDHHy47c
+ z7QNRBcoeW8jFVKm7X2l8K9OyjvgqMF/8wye1CyfKPM/YAEKIEidrVb9BAe9ZUG894DA
+ s8sCKW+xmAgjmBYO/etiCXiHNixMy9NZ/Ekc9X+aPvhWPJLVu7SMJtTj4TtwlIVh3Dph
+ qXNQ==
+X-Gm-Message-State: AO0yUKVjiUDy8d8YJQ26pppAeiD3ME48UGcEA77r49Bfn7gj3dJA5da6
+ /OX0SyYfltz+QBJCK8MXcyi0kw==
+X-Google-Smtp-Source: AK7set9Iezw6Ybkhh+55E3iLQDdCFi7IXy0jVwnDYuu0oKAYq1ekwxZ2Dgbn+sYCD0cxNic/qWFm/g==
+X-Received: by 2002:a05:600c:4452:b0:3ed:2709:2edf with SMTP id
+ v18-20020a05600c445200b003ed27092edfmr10925363wmn.13.1678902563283; 
  Wed, 15 Mar 2023 10:49:23 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- n5-20020a05600c4f8500b003b47b80cec3sm2522328wmq.42.2023.03.15.10.49.21
+ k6-20020a05600c1c8600b003e209b45f6bsm2909515wms.29.2023.03.15.10.49.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 15 Mar 2023 10:49:22 -0700 (PDT)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 45E101FFC0;
- Wed, 15 Mar 2023 17:43:32 +0000 (GMT)
+ by zen.linaroharston (Postfix) with ESMTP id F30251FFD3;
+ Wed, 15 Mar 2023 17:43:44 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
@@ -98,18 +99,19 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
  Bin Meng <bin.meng@windriver.com>,
  Sunil Muthuswamy <sunilmut@microsoft.com>, Hanna Reitz <hreitz@redhat.com>,
  Peter Xu <peterx@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH v2 09/32] include/exec: fix kerneldoc definition
-Date: Wed, 15 Mar 2023 17:43:08 +0000
-Message-Id: <20230315174331.2959-10-alex.bennee@linaro.org>
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Guo Ren <guoren@kernel.org>, Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v2 29/32] contrib/gitdm: add Alibaba to the domain-map
+Date: Wed, 15 Mar 2023 17:43:28 +0000
+Message-Id: <20230315174331.2959-30-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230315174331.2959-1-alex.bennee@linaro.org>
 References: <20230315174331.2959-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -131,29 +133,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 15 Mar 2023 17:49:48 -0000
 
-The kerneldoc processor complains about the mismatched variable name.
-Fix it.
+This replaces the previous attempt to add c-sky.com. Group everything
+under Alibaba now.
 
-Message-Id: <20230310103123.2118519-11-alex.bennee@linaro.org>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Added as requested by LIU Zhiwei.
+
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Acked-by: Guo Ren <guoren@kernel.org>
+Reviewed-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Message-Id: <20230310180332.2274827-8-alex.bennee@linaro.org>
 ---
- include/exec/memory.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ contrib/gitdm/domain-map        | 1 +
+ contrib/gitdm/group-map-alibaba | 7 +++++++
+ gitdm.config                    | 1 +
+ 3 files changed, 9 insertions(+)
+ create mode 100644 contrib/gitdm/group-map-alibaba
 
-diff --git a/include/exec/memory.h b/include/exec/memory.h
-index 6fa0b071f0..15ade918ba 100644
---- a/include/exec/memory.h
-+++ b/include/exec/memory.h
-@@ -1738,7 +1738,7 @@ void memory_region_notify_iommu_one(IOMMUNotifier *notifier,
-  *
-  * @notifier: the notifier to be notified
-  */
--void memory_region_unmap_iommu_notifier_range(IOMMUNotifier *n);
-+void memory_region_unmap_iommu_notifier_range(IOMMUNotifier *notifier);
+diff --git a/contrib/gitdm/domain-map b/contrib/gitdm/domain-map
+index 8dce276a1c..0b6c77eee0 100644
+--- a/contrib/gitdm/domain-map
++++ b/contrib/gitdm/domain-map
+@@ -4,6 +4,7 @@
+ # This maps email domains to nice easy to read company names
+ #
  
++linux.alibaba.com Alibaba
+ amazon.com      Amazon
+ amazon.co.uk    Amazon
+ amd.com         AMD
+diff --git a/contrib/gitdm/group-map-alibaba b/contrib/gitdm/group-map-alibaba
+new file mode 100644
+index 0000000000..0ebbe6b06e
+--- /dev/null
++++ b/contrib/gitdm/group-map-alibaba
+@@ -0,0 +1,7 @@
++#
++# Alibaba contributors including its subsidiaries 
++#
++
++# c-sky.com, now part of T-Head, wholly-owned entity of Alibaba Group
++ren_guo@c-sky.com
++zhiwei_liu@c-sky.com
+diff --git a/gitdm.config b/gitdm.config
+index 907ffde017..df4ba829ca 100644
+--- a/gitdm.config
++++ b/gitdm.config
+@@ -31,6 +31,7 @@ EmailMap contrib/gitdm/domain-map
+ # identifiable corporate emails. Please keep this list sorted.
+ #
  
- /**
++GroupMap contrib/gitdm/group-map-alibaba Alibaba
+ GroupMap contrib/gitdm/group-map-cadence Cadence Design Systems
+ GroupMap contrib/gitdm/group-map-codeweavers CodeWeavers
+ GroupMap contrib/gitdm/group-map-facebook Facebook
 -- 
 2.39.2
 
