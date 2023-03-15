@@ -1,56 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pcVFq-0002KX-C3
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:49:44 -0400
+	id 1pcVG1-0002TJ-8W
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:49:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVFk-0001mu-9N
+ id 1pcVFk-0001oM-Ar
  for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:32 -0400
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVFb-00029W-Qg
+ id 1pcVFb-00029G-It
  for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:31 -0400
-Received: by mail-wm1-x32d.google.com with SMTP id
- l7-20020a05600c1d0700b003eb5e6d906bso1819411wms.5
+Received: by mail-wr1-x432.google.com with SMTP id l1so18050701wry.12
  for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:49:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678902562;
+ d=linaro.org; s=google; t=1678902561;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/pYU24xJraNXcb1pbvZQddkU2/+s0yp2C0zt4F7Fw+M=;
- b=jNvHwdOpNMv2UO8KMK8p2lj29uq1MkeOJqe6I3QK1DNX6M21D2Hwea3rS4NXyPvGj/
- KGssmV4fPVqU2GH5Df0bzdCiC7ey4LDtsUcsSGXGA8YkYHAPumMbU9EnIkjULxtuLT04
- Yp7NDv2AV9JPi42jBr18x7v+e8wi82GLpxwcix3b6hzt2tzxvABSB7kOxVUAWyiMXgOG
- Ihb7JyJYEz8DsHzrF/P3+QevNJ0bbGfiMc0GFi4eeMWDHyfNYmUz8PsGRVA+KGTjuKpz
- 821zpWvYkr3zbPFxWfzZr2qraNazUvTcuAo35GOMyFaPE3RQJTkToRONF3J418BB1mk6
- SnxQ==
+ bh=QmiQu8mdrNxNFQhkZw0dMyYO7f3kURdPYmnUakKXAyA=;
+ b=QxREuuwpdR15RN5JNit0xAyeDMNaCwDEIqGbqscfA9c3UMUJLDCUDtiTakVi9cvFU9
+ aGtaNmcnergtPFuoykuf19BTHGmBIUSK5omOrtfcnvm5whLWBC4Qing/g/RCg3Mz+gKO
+ RQSnbsQ4EeNwNEC1mXukX45B6c5mlFfa7EQW1EbSuocQGtM+qZAluf5+IDh/eLNaWuhM
+ vEsqkbXHFXS9qILKMuFLJMsGGTOfVaw9oaj0g1mptuvY3sOY4YIXD48p4/BlYNznmaPw
+ pV3iIYWcOmw1PZGvQ/2e98XgVpV4FZ+iI7Jlbpm1fHyDRLocOa/4OmTEfu+K1DqoQhwL
+ 70Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678902562;
+ d=1e100.net; s=20210112; t=1678902561;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/pYU24xJraNXcb1pbvZQddkU2/+s0yp2C0zt4F7Fw+M=;
- b=J7eITwfdY0kvuHbAGE6MjtWPTkIbFHi11TMsk+T0VvQelhv7Q4rHKGbBS5+vdCLr3r
- QKHd4r7wGHX5h69tpXakeW2+HBK7pf/aS8ZmG+539heW/MzrQdmgLrJxd0Y+A2nvwoXT
- OiXDGklGigsInmdBEP+PH27miERVijwxP1An2tq2+IfCWcTndFpvJRHiuhPajGc/Tpxl
- rZfX6CULGIbxR5vfJP4gw5ZSXIQ2klSlehc0H6N0+VRDN2C3M09G2sBjVNRhWLPrVtm9
- vgh0adNb5HWDz0JJw2KsLVee2052kZkqIlIHLUhcKDKysIx/WKFs+p/4/4jdXp2Py+wj
- 1BJg==
-X-Gm-Message-State: AO0yUKWKDAf8M4xmky1alv5o3bgajzGtmCLawdHLVWY6qUYDflVBhNDX
- nQPc7TSCrgL0s5TUJ/iQBeBMxw==
-X-Google-Smtp-Source: AK7set8yW+v7N/LBrGTYDq31McYh/t3FUJbbTwjEk/vI7LeqQDU0nd/+3ZVCM769O91zKqkJGMfXqQ==
-X-Received: by 2002:a05:600c:a0a:b0:3df:eecc:de2b with SMTP id
- z10-20020a05600c0a0a00b003dfeeccde2bmr18189537wmp.11.1678902561952; 
+ bh=QmiQu8mdrNxNFQhkZw0dMyYO7f3kURdPYmnUakKXAyA=;
+ b=W8LpuxMDK2/IGIm23bJc0q6DNl4wv7QIWyaWJlirJGejo8TJD25Jm6Sayrre+kHuur
+ ZPYfULeseM+NRqCHZIg76d3Rz1NbZVx+7lyyoSv1yqwOqWB8RJnFJJfxOBZ+rKk68Wi+
+ UTkHlPmFO00pk7rfm5G2dbd1N3FqsAHoCooh8T75qpdXK/BH7HDxgCQOgDARPQvKaTMd
+ oy9qaMAfpyS062pfLtBjQx0794j+5M9Vrl2ixMKflzFDtK3lOaABCn9w95rddpMnu+DU
+ q7JgQogbCsI0fd+G1ZIbe59eZzNYTpac4xQGuHB3p4jt1Ip9Te7BOMYh11yVDhQFW1Qz
+ AzPQ==
+X-Gm-Message-State: AO0yUKUEvPhfWXdIKUjETCLTrSEHbujwmTtBhjb2Y+z0rFUXhBcI2R4C
+ +PKIQf52/SbajWmWyH9Bd7g0cQ==
+X-Google-Smtp-Source: AK7set/aaaOhbJJyrpgwfF1X2i5ZSdZds8sgsnXAZu9DZ+qxnnfWU8ZYPn+C9jOihCJOsJfviUNlYg==
+X-Received: by 2002:adf:dbc7:0:b0:2c3:f79a:7319 with SMTP id
+ e7-20020adfdbc7000000b002c3f79a7319mr3106758wrj.17.1678902561446; 
  Wed, 15 Mar 2023 10:49:21 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- az40-20020a05600c602800b003e2096da239sm2724726wmb.7.2023.03.15.10.49.20
+ x7-20020a5d6507000000b002cfe71153b4sm5185405wru.60.2023.03.15.10.49.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 15 Mar 2023 10:49:20 -0700 (PDT)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 36CF21FFD5;
+ by zen.linaroharston (Postfix) with ESMTP id 199A31FFD4;
  Wed, 15 Mar 2023 17:43:45 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -100,27 +99,27 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
  Sunil Muthuswamy <sunilmut@microsoft.com>, Hanna Reitz <hreitz@redhat.com>,
  Peter Xu <peterx@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Bernhard Beschow <shentey@gmail.com>,
- Amarjargal Gundjalam <amarjargal16@gmail.com>,
- Bin Meng <bmeng@tinylab.org>, "Jason A . Donenfeld" <Jason@zx2c4.com>
-Subject: [PATCH v2 31/32] contrib/gitdm: add more individual contributors
-Date: Wed, 15 Mar 2023 17:43:30 +0000
-Message-Id: <20230315174331.2959-32-alex.bennee@linaro.org>
+ Anton Johansson <anjo@rev.ng>,
+ =?UTF-8?q?Niccol=C3=B2=20Izzo?= <nizzo@rev.ng>,
+ Paolo Montesel <babush@rev.ng>, Alessandro Di Federico <ale@rev.ng>
+Subject: [PATCH v2 30/32] contrib/gitdm: add revng to domain map
+Date: Wed, 15 Mar 2023 17:43:29 +0000
+Message-Id: <20230315174331.2959-31-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230315174331.2959-1-alex.bennee@linaro.org>
 References: <20230315174331.2959-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::432;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x432.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -135,29 +134,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 15 Mar 2023 17:49:33 -0000
 
-I've only added the names explicitly acked.
-
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Cc: Bernhard Beschow <shentey@gmail.com>
-Cc: Amarjargal Gundjalam <amarjargal16@gmail.com>
-Cc: Bin Meng <bmeng@tinylab.org>
-Cc: Jason A. Donenfeld <Jason@zx2c4.com>
-Cc: Strahinja Jankovic <strahinja.p.jankovic@gmail.com>
-Acked-by: Bernhard Beschow <shentey@gmail.com>
-Message-Id: <20230310180332.2274827-10-alex.bennee@linaro.org>
+Cc: Anton Johansson <anjo@rev.ng>
+Cc: Niccolò Izzo <nizzo@rev.ng>
+Cc: Paolo Montesel <babush@rev.ng>
+Reviewed-by: Alessandro Di Federico <ale@rev.ng>
+Message-Id: <20230310180332.2274827-9-alex.bennee@linaro.org>
 ---
- contrib/gitdm/group-map-individuals | 1 +
+ contrib/gitdm/domain-map | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/contrib/gitdm/group-map-individuals b/contrib/gitdm/group-map-individuals
-index e2263a5ee3..3264c7383d 100644
---- a/contrib/gitdm/group-map-individuals
-+++ b/contrib/gitdm/group-map-individuals
-@@ -38,3 +38,4 @@ paul@nowt.org
- git@xen0n.name
- simon@simonsafar.com
- research_trasio@irq.a4lg.com
-+shentey@gmail.com
+diff --git a/contrib/gitdm/domain-map b/contrib/gitdm/domain-map
+index 0b6c77eee0..fa9cb5430f 100644
+--- a/contrib/gitdm/domain-map
++++ b/contrib/gitdm/domain-map
+@@ -36,6 +36,7 @@ oracle.com      Oracle
+ proxmox.com     Proxmox
+ quicinc.com     Qualcomm Innovation Center
+ redhat.com      Red Hat
++rev.ng          revng
+ rt-rk.com       RT-RK
+ samsung.com     Samsung
+ siemens.com     Siemens
 -- 
 2.39.2
 
