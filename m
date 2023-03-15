@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pcVGK-0004J8-GA
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:50:08 -0400
+	id 1pcVGd-0005k6-9Q
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:50:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVFx-0002S8-26
+ id 1pcVFx-0002SF-3U
  for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:48 -0400
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVFf-0002Ci-KK
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:43 -0400
-Received: by mail-wm1-x333.google.com with SMTP id x22so7660123wmj.3
- for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:49:26 -0700 (PDT)
+ id 1pcVFe-0002Bs-Fc
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:41 -0400
+Received: by mail-wm1-x336.google.com with SMTP id ay8so7868282wmb.1
+ for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:49:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678902566;
+ d=linaro.org; s=google; t=1678902564;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YPoCJ+dE6YMmOqr0FAgUbXJaGmEIUyPWQuUb/ZSLc9g=;
- b=BfmwHE0fBiOoZvl8esaX6Xv+suz6Sf4emTiaq+g2mYKBdiKauqOstnwS8MlSsjdw8B
- uvR3/L1cO1b9BxqE8LmeN9YfMSahaceNoohIaAqV7YmyUl5Na9nm8Pr8BBxLx5c1bEml
- 6sWHnUdXX9SuYlnWPqEpALi3UXbN1fzv6ZBXcKik4tiTVu6swn/aT6kndHvGY076jt5w
- ugpEe0VjoNev40v+HI8HEyFiTEJH6hgJqPkLHXodjRyG6o/F9yWhYQnj1KqIGSAMcw41
- ts3AUeMsUIxMD9zh2hS/4oqZrf9f0G+hO32UdjtF4zfRze7lwdWb72cmPFZMhX+zlg9D
- 3BSA==
+ bh=0N/4PabBLqV/G25pJQsAZWNm7Ckm3Whh6Khx55ga6lY=;
+ b=RDj1iHq8LoIMKN4MX+P7q9gwxajV2pOtRK3j6P8PFfd9B6NNnMSb9erc0MlIK5wQz6
+ 5fSTJQxdrk7jBmE0MQkxF+OazHIrjNnjwgzTw4mak1SdsouTcuziDx6x0CyeZBYJIM68
+ 2TMtV2y9zjZLQNMtVG3RvOfYJ/LGt7VaqRlMNbzfKmNSSNHgijPlF2bPv87hcMKdilgZ
+ dLG+nKf8efYN9UTxcIGNJscM+FdZu0MUxoitLrJETBAJKEtZs1H1Y8JeMJnpDCy7zlmU
+ 1CX+Sy6U6HQgWqtcsvhHNj1W4hhfTgrtOuiQ4PzxxeV+QPYl+s6DvpI8uTbdP1NGDxw+
+ HWqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678902566;
+ d=1e100.net; s=20210112; t=1678902564;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YPoCJ+dE6YMmOqr0FAgUbXJaGmEIUyPWQuUb/ZSLc9g=;
- b=M7kU9ESZSSViAVLVlrDYl6au23qmGqdvf8s+JNGpw/Yk6frp34ypr2SsOuby8qGRIG
- 8KnZueYHWz5oSnbkJKkAGVF5QUS5m0ZtihT4u2TDSmScA1ihiDH5MSQTC2ib2bw41WDL
- mng3dArZKbJ0QM7VHzVyf/ZWmLXCn8XfPoPA/eKjESoO2hgpI77w6ta4/+qyTCWZcoff
- 7pQcczK+iAUy7Z78XplAEIPvTrEBhgnK7Rrsc8Vt/7W6sse5rleZwUq4OSd3w2Xk8v1B
- 8nYytdhKwL37YjJq12AvsecKBW4pf26mVw9i+DHjB0JhTFqNRLXFLGtfTX3BKTJB6bL/
- R5AQ==
-X-Gm-Message-State: AO0yUKV66lCIf9u4eWvUb6Kmj4OxYQR6PL5dt/ZJSym+NwCo10M6m1Ng
- CWsY5jXGP8TU0bmwHTT7Ch/5QA==
-X-Google-Smtp-Source: AK7set+ynAVWb7BGmrdxaYnSAVLbgPOO0KHl8a7IgEJlDeKX4PFtwWpD61GYO6QjfdXpcdXTr8wh/g==
-X-Received: by 2002:a05:600c:4712:b0:3eb:2b88:a69a with SMTP id
- v18-20020a05600c471200b003eb2b88a69amr18958375wmo.14.1678902565778; 
- Wed, 15 Mar 2023 10:49:25 -0700 (PDT)
+ bh=0N/4PabBLqV/G25pJQsAZWNm7Ckm3Whh6Khx55ga6lY=;
+ b=rj3xaFEejyxl5hp+4WBXa9o+0fxEJNl2pVMs1xd9yHFf3xkmjpEbO8ENRKIqNtKccN
+ Qmf7lkspV/FkKzNM91hCXHw1I+4Fi7slZElNmHq4/bTjyDOLsK4ho/dv313OBNCiz8qU
+ 1n8Qd8tY4lunYNKGVVfoPWIbhDs6MKVUJrx/l7QkoKH52vMHZlJJu945LvY1fQC+RUP6
+ LScC3ytExzcVm++SkhUGOcoLAcTNXwAo4nPpwmeAsYyQ79yxTpWyv0SdGlmIBihmePOl
+ p/Q0UOaWBv06Xv3qvsrsugCt9lGjhArmyb0hwbGb6/zRMJoTff0s8HFN5xUe1bnqlNJ6
+ gqKw==
+X-Gm-Message-State: AO0yUKX/6GLzhUTTpCWuF46YeFF/YMcpfGCxV81ddHQ3DFilopEJGAjo
+ LwCrelr6bj6qzw+V7mSrTvd/ew==
+X-Google-Smtp-Source: AK7set/0RZJwAHZGDqwh5L+Jh0el5WLv2Y57y7FuRNcQLA19gfAyXP6PYgMI3jRUhG15cvJuK2x3Pg==
+X-Received: by 2002:a05:600c:46d0:b0:3ed:2346:44bd with SMTP id
+ q16-20020a05600c46d000b003ed234644bdmr5401196wmo.19.1678902564503; 
+ Wed, 15 Mar 2023 10:49:24 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- k26-20020a7bc31a000000b003eb596cbc54sm2704615wmj.0.2023.03.15.10.49.22
+ iz11-20020a05600c554b00b003ed201ddef2sm2641650wmb.2.2023.03.15.10.49.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Mar 2023 10:49:25 -0700 (PDT)
+ Wed, 15 Mar 2023 10:49:22 -0700 (PDT)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 2998A1FFB7;
+ by zen.linaroharston (Postfix) with ESMTP id B8E621FFC4;
  Wed, 15 Mar 2023 17:43:32 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -99,17 +99,17 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
  Sunil Muthuswamy <sunilmut@microsoft.com>, Hanna Reitz <hreitz@redhat.com>,
  Peter Xu <peterx@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH v2 08/32] tests/tcg: disable pauth for aarch64 gdb tests
-Date: Wed, 15 Mar 2023 17:43:07 +0000
-Message-Id: <20230315174331.2959-9-alex.bennee@linaro.org>
+Subject: [PATCH v2 13/32] include/qemu/plugin: Remove QEMU_PLUGIN_ASSERT
+Date: Wed, 15 Mar 2023 17:43:12 +0000
+Message-Id: <20230315174331.2959-14-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230315174331.2959-1-alex.bennee@linaro.org>
 References: <20230315174331.2959-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -131,30 +131,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 15 Mar 2023 17:49:50 -0000
 
-You need a very new gdb to be able to run with pauth support otherwise
-your likely to hit asserts and aborts. Disable pauth for now until we
-can properly probe support in gdb.
+From: Richard Henderson <richard.henderson@linaro.org>
 
-Message-Id: <20230310103123.2118519-10-alex.bennee@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+This macro is no longer used.
+
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+Message-Id: <20230310195252.210956-4-richard.henderson@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/tcg/aarch64/Makefile.target | 2 ++
- 1 file changed, 2 insertions(+)
+ include/qemu/plugin.h | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/tests/tcg/aarch64/Makefile.target b/tests/tcg/aarch64/Makefile.target
-index 9e91a20b0d..8ffde3b0ed 100644
---- a/tests/tcg/aarch64/Makefile.target
-+++ b/tests/tcg/aarch64/Makefile.target
-@@ -84,6 +84,8 @@ TESTS += sha512-vector
- ifeq ($(HOST_GDB_SUPPORTS_ARCH),y)
- GDB_SCRIPT=$(SRC_PATH)/tests/guest-debug/run-test.py
+diff --git a/include/qemu/plugin.h b/include/qemu/plugin.h
+index fb338ba576..e0ebedef84 100644
+--- a/include/qemu/plugin.h
++++ b/include/qemu/plugin.h
+@@ -59,8 +59,6 @@ get_plugin_meminfo_rw(qemu_plugin_meminfo_t i)
+ #ifdef CONFIG_PLUGIN
+ extern QemuOptsList qemu_plugin_opts;
  
-+run-gdbstub-%: QEMU_OPTS=-cpu max,pauth=off
-+
- run-gdbstub-sysregs: sysregs
- 	$(call run-test, $@, $(GDB_SCRIPT) \
- 		--gdb $(HAVE_GDB_BIN) \
+-#define QEMU_PLUGIN_ASSERT(cond) g_assert(cond)
+-
+ static inline void qemu_plugin_add_opts(void)
+ {
+     qemu_add_opts(&qemu_plugin_opts);
+@@ -252,8 +250,6 @@ void qemu_plugin_user_postfork(bool is_child);
+ 
+ #else /* !CONFIG_PLUGIN */
+ 
+-#define QEMU_PLUGIN_ASSERT(cond)
+-
+ static inline void qemu_plugin_add_opts(void)
+ { }
+ 
 -- 
 2.39.2
 
