@@ -1,55 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pcVA6-0001yD-7f
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:43:42 -0400
+	id 1pcVA8-00020U-Iw
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:43:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVA3-0001uv-NE
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:43:40 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ id 1pcVA5-0001xR-Ix
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:43:41 -0400
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcV9y-0000bP-VM
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:43:39 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- az3-20020a05600c600300b003ed2920d585so1578990wmb.2
+ id 1pcVA0-0000bh-B3
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:43:41 -0400
+Received: by mail-wm1-x32c.google.com with SMTP id
+ fm20-20020a05600c0c1400b003ead37e6588so1565282wmb.5
  for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:43:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1678902213;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/XTY7Vej4MUrTa8LspO1+ukvYwDV/OHswwb9kes0OzE=;
- b=FBVDHxJH2Raz0shACtK7xJpCwBhNbY+ZagoTgiblrYs8H8LxA89zfTOw26XJX8e5F6
- cCDbnqo0wui9RbCgM+oZP6PTdDtrjnfYBRLSYyWp7nSPLJZupNg73+OY+fLAH6lKfJ+D
- zxhbqVKhAgm2LAP/b6aMVTgBcXz57fKCh/ydwKOx8iGKV3PVDLWNrrB6izgVvx4lT4QX
- nNcH3TdBWjVr85G4sc0B5+Z6vnMIpjdGUQLb41CDVrV+DXV8gFNeoVQ+T//j686h1NWC
- 1oioxOLuj4MhVWWLWj6PXaxaAbTlC/zkdDyGZSJIsU6JXxwG9zWXpjaLrdzYJQtgxqeq
- bA2w==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+9R+WJAtyA8SeJ/1as6Ou9Go9GUXAmG0Tw994EVyLcw=;
+ b=ZhgBQUWyxDhfXpmiHE0qRJgUZoPsqcJNfS562fDJLhlpne/3qqTUMowB/RqfnxCDV9
+ OpqoaVD2EBKJXMRVDbCjo4ulwDbCQokWJLYVm/dAp961A74gTdezvO5F1R13phhCECrG
+ 49E+uaQqfR/RQIJNvWwyAqraPCQZVMhQZnSO9B0kDtVhhBWO7gA85O0Vft/pzzYRTBh2
+ 76m2r1ATby/XIdrQ+hDgqEGM+XKHdpMDvrjefHNAmAwqiKn8h8rP6iax0Kp2b/ry8hTg
+ EMEHxNXuzNgfNZhazljSnz2gayYU4Kkd8/4TIkpyemgIY4rMMyDJ6rgXuH2jEkdgBrAV
+ Kvbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112; t=1678902213;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/XTY7Vej4MUrTa8LspO1+ukvYwDV/OHswwb9kes0OzE=;
- b=vX/MwGWizDka4NwIiNtjavUk12VHFX4WWI1OaVElXj0gArEMgBCnzk1b7tGYCRd1cE
- m8c2ht8p0aCPl+pGlFOAsmKrjpqI/MLuldYf+vdOBvK+HM2qeHbBc4MaGGDacDblJwGX
- uPgi8kJ8pTVZhIpQ7UC2gNNG4Maklz8K12h+9Nvx+KzIh7to8Xw5jit+NxnxmhrkLumH
- PvebionEqTi7Q401JPcm31i+X69TLPh7NBAQF7IZ6nTW86TOW4oGiwqMhUQo+9f6R3jP
- 7t3XyrDiPtpxQ/Gv8zN5FwPK88V8DXY1wtmZ0yZYQHfJgsf0Jv/3aizeFrVHcUmybQIp
- klNA==
-X-Gm-Message-State: AO0yUKXC5Wtjms73ra6SQVFGOPYQFPis+HVpZevRWl/LJt/Vi/UcxAcy
- W3JkPwgxV8Di4n6jNo/7Y/iDlA==
-X-Google-Smtp-Source: AK7set8/BTKWXEg9MGh98mBBbd5uig+ZfFP5Wud6OFqah1I+zgxB1K/We74ROJzzhpsrwN7MYQkQHg==
-X-Received: by 2002:a05:600c:35c1:b0:3df:deb5:6ff5 with SMTP id
- r1-20020a05600c35c100b003dfdeb56ff5mr18551068wmq.24.1678902212048; 
- Wed, 15 Mar 2023 10:43:32 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+9R+WJAtyA8SeJ/1as6Ou9Go9GUXAmG0Tw994EVyLcw=;
+ b=sLepnV4ZVuencjT2hg/WeA9IhIqmL/UA+Kien9aVSFhqcLk2VRc0piEZtuu33fYDO3
+ Y7xB870Tt94jmCu0+fKJHxqf9CvQX3kuvIid/YP9M6rZROe6AW361rIl0+TQj9dqZKi1
+ 7nPFF6LNCpWFxvzpAkYgP/WE2AZXK8hfgipaL9XWQAzLq8Bmkydbk2cvH5XK+z4FgX4r
+ XM8i6E+KK+yL9mjunmcxvcEHkdOsML2vtYXEKmFG+XpiT9bzen36lRZaN66Y6X1kPt5D
+ CJElsuf+1ViMIuAF7282EX7lc3PlGoAEbd7qJKf9RuwmB/nRmPl0rGnFYiJwwzrc3/D+
+ heZQ==
+X-Gm-Message-State: AO0yUKWSV16wqj1JT2VuT2cRXbGEtQim2Ibly2O/iQJQ9rtti+8nvqdN
+ P09mcpBo4K3KoMJ5mjb3K97bhQ==
+X-Google-Smtp-Source: AK7set/ybwaAP6a2UGo19c1DFXtRAlmxo2N51HdG5oEuaDeW1Zrj0alTLu6ZNgeLbw2TKH8sda6cPg==
+X-Received: by 2002:a05:600c:4f91:b0:3eb:29fe:7b9e with SMTP id
+ n17-20020a05600c4f9100b003eb29fe7b9emr17862933wmq.17.1678902213357; 
+ Wed, 15 Mar 2023 10:43:33 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- 22-20020a05600c021600b003ecc64edf7esm2475344wmi.39.2023.03.15.10.43.31
+ u25-20020a7bc059000000b003e21f959453sm2460485wmc.32.2023.03.15.10.43.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Mar 2023 10:43:31 -0700 (PDT)
+ Wed, 15 Mar 2023 10:43:32 -0700 (PDT)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 35C221FFB7;
+ by zen.linaroharston (Postfix) with ESMTP id 714F61FFBA;
  Wed, 15 Mar 2023 17:43:31 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -98,16 +99,20 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
  Bin Meng <bin.meng@windriver.com>,
  Sunil Muthuswamy <sunilmut@microsoft.com>, Hanna Reitz <hreitz@redhat.com>,
  Peter Xu <peterx@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH v2 00/32] tweaks and fixes for 8.0-rc1 (tests, plugins, docs)
-Date: Wed, 15 Mar 2023 17:42:59 +0000
-Message-Id: <20230315174331.2959-1-alex.bennee@linaro.org>
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Fabiano Rosas <farosas@suse.de>
+Subject: [PATCH v2 02/32] tests/docker: all add DOCKER_BUILDKIT to RUNC
+ environment
+Date: Wed, 15 Mar 2023 17:43:01 +0000
+Message-Id: <20230315174331.2959-3-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230315174331.2959-1-alex.bennee@linaro.org>
+References: <20230315174331.2959-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -127,162 +132,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Mar 2023 17:43:40 -0000
+X-List-Received-Date: Wed, 15 Mar 2023 17:43:41 -0000
 
-As usual for softfreeze I switch from my usual maintainer trees to
-collecting up miscellaneous fixes and tweaks as we stabilise the
-build. I was intending to send it as a PR but I had to squash a number
-of CI failures by adding stuff to:
+It seems we also need to pass DOCKER_BUILDKIT as an argument to docker
+itself to get the full benefit of caching.
 
-      *: Add missing includes of qemu/error-report.h
-      *: Add missing includes of qemu/plugin.h
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Suggested-by: Fabiano Rosas <farosas@suse.de>
+---
+ tests/docker/Makefile.include | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-so I thought it was worth another spin and I can cut the PR from this
-if the reviews are ok.
-
-Since v1:
-  - grabbed Daniel's iotest cleanup for CI
-  - new version of Richard's plugin fix
-  - a number of gitdm updates
-
-I've left:
-  tests/tcg: disable pauth for aarch64 gdb tests
-
-in for now, but I can easily drop it for the PR as it seems the
-consensus is there will be stable updates to gdb that no longer crash
-on our pauth support.
-
-The following still need review:
-
- - contrib/gitdm: add more individual contributors (1 acks, 1 sobs)
- - tests/tcg: add some help output for running individual tests
- - include/qemu: add documentation for memory callbacks
- - gitlab: update centos-8-stream job
- - scripts/ci: update gitlab-runner playbook to handle CentOS
- - tests/docker: all add DOCKER_BUILDKIT to RUNC environment
-
-Alex Bennée (16):
-  tests/docker: all add DOCKER_BUILDKIT to RUNC environment
-  scripts/ci: add libslirp-devel to build-environment
-  scripts/ci: update gitlab-runner playbook to handle CentOS
-  gitlab: update centos-8-stream job
-  include/qemu: add documentation for memory callbacks
-  tests/tcg: add some help output for running individual tests
-  tests/tcg: disable pauth for aarch64 gdb tests
-  include/exec: fix kerneldoc definition
-  tests/avocado: don't use tags to define drive
-  contrib/gitdm: Add ASPEED Technology to the domain map
-  contrib/gitdm: Add SYRMIA to the domain map
-  contrib/gitdm: add Amazon to the domain map
-  contrib/gitdm: add Alibaba to the domain-map
-  contrib/gitdm: add revng to domain map
-  contrib/gitdm: add more individual contributors
-  contrib/gitdm: add group map for AMD
-
-Daniel P. Berrangé (8):
-  iotests: explicitly pass source/build dir to 'check' command
-  iotests: allow test discovery before building
-  iotests: strip subdir path when listing tests
-  iotests: print TAP protocol version when reporting tests
-  iotests: connect stdin to /dev/null when running tests
-  iotests: always use a unique sub-directory per test
-  iotests: register each I/O test separately with meson
-  iotests: remove the check-block.sh script
-
-Marcin Juszkiewicz (1):
-  tests/avocado: update AArch64 tests to Alpine 3.17.2
-
-Richard Henderson (7):
-  tcg: Clear plugin_mem_cbs on TB exit
-  tcg: Drop plugin_gen_disable_mem_helpers from tcg_gen_exit_tb
-  include/qemu/plugin: Remove QEMU_PLUGIN_ASSERT
-  *: Add missing includes of qemu/error-report.h
-  *: Add missing includes of qemu/plugin.h
-  include/qemu: Split out plugin-event.h
-  include/qemu/plugin: Inline qemu_plugin_disable_mem_helpers
-
- include/exec/memory.h                         |  2 +-
- include/hw/core/cpu.h                         |  2 +-
- include/qemu/plugin-event.h                   | 26 ++++++++
- include/qemu/plugin.h                         | 27 ++-------
- include/qemu/qemu-plugin.h                    | 47 +++++++++++++--
- include/user/syscall-trace.h                  |  1 +
- accel/accel-softmmu.c                         |  2 +-
- accel/tcg/cpu-exec-common.c                   |  3 +
- accel/tcg/cpu-exec.c                          |  5 +-
- block/monitor/block-hmp-cmds.c                |  1 +
- cpu.c                                         |  1 +
- dump/dump.c                                   |  1 +
- dump/win_dump.c                               |  1 +
- gdbstub/gdbstub.c                             |  1 +
- hw/arm/collie.c                               |  2 +
- hw/arm/cubieboard.c                           |  1 +
- hw/arm/musicpal.c                             |  2 +
- hw/arm/npcm7xx_boards.c                       |  2 +
- hw/arm/nseries.c                              |  2 +
- hw/arm/omap_sx1.c                             |  2 +
- hw/arm/orangepi.c                             |  1 +
- hw/arm/palm.c                                 |  2 +
- hw/core/loader.c                              |  1 +
- hw/core/machine-smp.c                         |  2 +
- hw/i386/kvm/xen_xenstore.c                    |  1 +
- hw/i386/sgx.c                                 |  1 +
- hw/intc/apic.c                                |  1 +
- hw/loongarch/acpi-build.c                     |  1 +
- hw/loongarch/virt.c                           |  2 +
- hw/m68k/next-cube.c                           |  1 +
- hw/m68k/q800.c                                |  1 +
- hw/m68k/virt.c                                |  1 +
- hw/mem/memory-device.c                        |  1 +
- hw/mem/sparse-mem.c                           |  1 +
- hw/openrisc/boot.c                            |  1 +
- hw/ppc/spapr_softmmu.c                        |  2 +
- hw/riscv/opentitan.c                          |  1 +
- hw/riscv/shakti_c.c                           |  1 +
- hw/riscv/virt-acpi-build.c                    |  1 +
- hw/vfio/display.c                             |  1 +
- hw/vfio/igd.c                                 |  1 +
- hw/vfio/migration.c                           |  1 +
- linux-user/elfload.c                          |  1 +
- linux-user/exit.c                             |  1 +
- linux-user/syscall.c                          |  1 +
- migration/dirtyrate.c                         |  1 +
- migration/exec.c                              |  1 +
- plugins/core.c                                | 11 ----
- target/i386/cpu.c                             |  1 +
- target/i386/host-cpu.c                        |  1 +
- target/i386/sev.c                             |  1 +
- target/i386/whpx/whpx-apic.c                  |  1 +
- target/mips/cpu.c                             |  1 +
- target/s390x/cpu-sysemu.c                     |  1 +
- target/s390x/cpu_models.c                     |  1 +
- target/s390x/diag.c                           |  2 +
- tcg/tcg-op.c                                  |  1 -
- .../custom-runners/centos-stream-8-x86_64.yml | 18 ++----
- contrib/gitdm/domain-map                      |  7 ++-
- contrib/gitdm/group-map-alibaba               |  7 +++
- contrib/gitdm/group-map-amd                   |  8 +++
- contrib/gitdm/group-map-individuals           |  1 +
- gitdm.config                                  |  2 +
- .../org.centos/stream/8/build-environment.yml |  1 +
- scripts/ci/setup/gitlab-runner.yml            | 20 ++++++-
- tests/avocado/machine_aarch64_virt.py         |  8 +--
- tests/avocado/tuxrun_baselines.py             | 60 ++++++++-----------
- tests/check-block.sh                          | 43 -------------
- tests/docker/Makefile.include                 |  2 +-
- tests/qemu-iotests/check                      | 30 ++++++++--
- tests/qemu-iotests/meson.build                | 35 +++++++++--
- tests/qemu-iotests/testenv.py                 | 20 +++----
- tests/qemu-iotests/testrunner.py              | 43 ++++---------
- tests/tcg/Makefile.target                     |  7 +++
- tests/tcg/aarch64/Makefile.target             |  2 +
- ui/cocoa.m                                    |  1 +
- 76 files changed, 305 insertions(+), 193 deletions(-)
- create mode 100644 include/qemu/plugin-event.h
- create mode 100644 contrib/gitdm/group-map-alibaba
- create mode 100644 contrib/gitdm/group-map-amd
- delete mode 100755 tests/check-block.sh
-
+diff --git a/tests/docker/Makefile.include b/tests/docker/Makefile.include
+index 54ed77f671..9401525325 100644
+--- a/tests/docker/Makefile.include
++++ b/tests/docker/Makefile.include
+@@ -39,7 +39,7 @@ docker-qemu-src: $(DOCKER_SRC_COPY)
+ # General rule for building docker images.
+ docker-image-%: $(DOCKER_FILES_DIR)/%.docker
+ 	  $(call quiet-command,			\
+-		$(RUNC) build				\
++		DOCKER_BUILDKIT=1 $(RUNC) build		\
+ 		$(if $V,,--quiet)			\
+ 		$(if $(NOCACHE),--no-cache,		\
+ 			$(if $(DOCKER_REGISTRY),--cache-from $(DOCKER_REGISTRY)/qemu/$*)) \
 -- 
 2.39.2
 
