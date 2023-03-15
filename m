@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pcVAj-0002mU-Cr
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:44:21 -0400
+	id 1pcVAm-0002qr-A2
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:44:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVAT-0002Rv-0x
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:44:05 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ id 1pcVAX-0002VC-RY
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:44:10 -0400
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVAC-0000jf-6I
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:44:04 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- r19-20020a05600c459300b003eb3e2a5e7bso1832806wmo.0
- for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:43:47 -0700 (PDT)
+ id 1pcVAE-0000l3-53
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:44:08 -0400
+Received: by mail-wm1-x32c.google.com with SMTP id
+ fm20-20020a05600c0c1400b003ead37e6588so1565696wmb.5
+ for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:43:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678902226;
+ d=linaro.org; s=google; t=1678902228;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ugIkozbEBGsoB+Byq329AMY9/YRtl8pDzh0Lm83ecO8=;
- b=tIL+RIXFEqvWvEoWx4NCa5UNyBZ5FgdDamUhA7TfuhyAyUWKPI7fQ+jTGj857GkDDt
- 08o7Qt8ZCXFHs02L94g/4uYZtzgnSb/3kOagKIdp4HsCoOVszm8hb92m/WAS3Ae7Li7W
- THFfpbFcY/pBknstK7P+sA8AiV15PIe2xWHB1rKercXae8TgYEyF3SY8ZceZl5Eb8w+t
- 5tYX8wnTFx9j1dF4uSkw9yxW170JPTe4pYGp3HL3JkreMfUrM76Jw2/SrRX6rmkP0s0c
- LrRDA7/jQw1+IDpSHLyuK16mHqnpRlZybQF37SbosnmzGm7EP306QhrgN6KP0vu5bBSB
- JeUQ==
+ bh=sQqjfUQatIxdKkk1mS9vZHLNSiIHLiR1rCd25SjEL8w=;
+ b=rtTxkMEUHcUjGsJWxc6rUc1ZV4KlgUvIGX4lAPc+INgQ1sAHs0E/76jb/iR5ROIf3i
+ oezfa+aaq8mN/eYensGgDwSVA8OsAybcQu9NEdc1x0P7KC6cBg+f2ctAognicS41SsB+
+ /5M1v0lScshfUCZ+03WYdCaYZ7ZNLkDTo+7qLKc9+btpS+nLsn1F+2/fHzrE7rBA4gT2
+ DUUYeu3kMnyrTrMgui/9iJfkyYdnuOJ+ST+Yd6kA1G9+gZJpK0RZ2RtiFkeEZQRILVns
+ q5Uz1sedz3wP2NM0iTTId6xIsvU4g+qb83J/zFWY7LdJkpaCYrnS7n9SCOlbj7Out1QB
+ vpWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678902226;
+ d=1e100.net; s=20210112; t=1678902228;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ugIkozbEBGsoB+Byq329AMY9/YRtl8pDzh0Lm83ecO8=;
- b=u4mY+QRTz046TlqHfFa2UH/n1jToljyHUsblsiTy9gf6aGlh6E9io326CI/1k4eMIO
- Kph9F6GRohuOVVFI388uZDdJM7sHlrA3Yyvf6PMZ+TdHX9BWy5t3dbx8z8PBBzD44aIT
- r5oI5mC9AS9S8P6nqBP1EjPmOf9qblg+s05ajXuGiaTM7fiPGskrHRUfl8IeTXhc93DJ
- hQIz6gsX23YhRf3K+rEWVvja5A1urRCq9UqRxliF3hL+BYmbml/ibErjAgm2y6z4RaCu
- 6TtVTik+eZ5ynQun+DitX/3o3tQsUv3OIQ3QYUhlGan3EbU336/Uf8Ctubf3G1krpQzc
- ekoQ==
-X-Gm-Message-State: AO0yUKVjPgw6udyW2fkC5DrTEEUDEknurk4vD6jnbKXb0+KZQezGayVW
- 7EJZAifa/OQgE0pUx7cKQdrgPQ==
-X-Google-Smtp-Source: AK7set934fSOJYHu8semehokaML/wM+FYEjTaDVaztGT0aSCEP05FZuObq4Zjbt6dBx7saD9BHHiYw==
-X-Received: by 2002:a05:600c:4712:b0:3df:e41f:8396 with SMTP id
- v18-20020a05600c471200b003dfe41f8396mr18760009wmo.37.1678902226589; 
- Wed, 15 Mar 2023 10:43:46 -0700 (PDT)
+ bh=sQqjfUQatIxdKkk1mS9vZHLNSiIHLiR1rCd25SjEL8w=;
+ b=wubd+Rwwbo/DTNgIjKTgoVscQStqhch4XtfmXM3AFl4N6rKTNFMW5RDbJJUYEMBdZW
+ BnKiD3PsJKpV7ztzDXWFRSNV7/zhueNDPozlbxzE0F+coLeEGERa2fD+r417PqkHKM6u
+ cKhF2EwTiP8d6ZpUh5f39vuQG+m+WLYjt+5cvrcEP7D69DGoQIZaCAQEQWYIQ0rREDwv
+ MH+71H3CmjsDWRfgGeKp0ISgVHYpY02eQw4AQYXdTYlxCdNFLmsWdJETlh7PzD8LhmuM
+ RR3KG0Z8oM6TfRUluNirh3H5caWsXKtzKl9Qxiqj0Nw3puIRGD7dYcCuVBHQRmtDNrNZ
+ 1pIg==
+X-Gm-Message-State: AO0yUKWQMgJEC1v6HV79AeCkfWbXCCbRTB42EqDMm3cmvwEtf04VIDXv
+ ZOBAF2uM+RESGGHpHNnAeKGSjw==
+X-Google-Smtp-Source: AK7set8HLwYqdb5QVGNCKtc1BGLLs5RIBqmppY2f38wiqYNFfn/T0dLkOnucHAUjUgSjIMrleHRBhA==
+X-Received: by 2002:a05:600c:4ed4:b0:3ed:26c1:8e5a with SMTP id
+ g20-20020a05600c4ed400b003ed26c18e5amr9382085wmq.10.1678902228489; 
+ Wed, 15 Mar 2023 10:43:48 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- x2-20020a05600c21c200b003e1f2e43a1csm2478386wmj.48.2023.03.15.10.43.44
+ q3-20020a1cf303000000b003ed341d2d68sm2297850wmq.16.2023.03.15.10.43.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Mar 2023 10:43:45 -0700 (PDT)
+ Wed, 15 Mar 2023 10:43:47 -0700 (PDT)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id AC4E31FFCA;
- Wed, 15 Mar 2023 17:43:43 +0000 (GMT)
+ by zen.linaroharston (Postfix) with ESMTP id 62DC01FFCF;
+ Wed, 15 Mar 2023 17:43:44 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
@@ -101,18 +101,17 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
  Peter Xu <peterx@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 18/32] iotests: explicitly pass source/build dir to 'check'
- command
-Date: Wed, 15 Mar 2023 17:43:17 +0000
-Message-Id: <20230315174331.2959-19-alex.bennee@linaro.org>
+Subject: [PATCH v2 24/32] iotests: register each I/O test separately with meson
+Date: Wed, 15 Mar 2023 17:43:23 +0000
+Message-Id: <20230315174331.2959-25-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230315174331.2959-1-alex.bennee@linaro.org>
 References: <20230315174331.2959-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -132,118 +131,89 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Mar 2023 17:44:05 -0000
+X-List-Received-Date: Wed, 15 Mar 2023 17:44:12 -0000
 
 From: Daniel P. Berrangé <berrange@redhat.com>
 
-The 'check' script has some rather dubious logic whereby it assumes
-that if invoked as a symlink, then it is running from a separate
-source tree and build tree, otherwise it assumes the current working
-directory is a combined source and build tree.
+Currently meson registers a single test that invokes an entire group of
+I/O tests, hiding the test granularity from meson. There are various
+downsides of doing this
 
-This doesn't work if you want to invoke the 'check' script using
-its full source tree path while still using a split source and build
-tree layout. This would be a typical situation with meson if you ask
-it to find the 'check' script path using files('check').
+ * You cannot ask 'meson test' to invoke a single I/O test
+ * The meson test timeout can't be applied to the individual
+   tests
+ * Meson only gets a pass/fail for the overall I/O test group
+   not individual tests
+ * If a CI job gets killed by the GitLab timeout, we don't
+   get visibility into how far through the I/O tests
+   execution got.
 
-Rather than trying to make the logic more magical, add support for
-explicitly passing the dirs using --source-dir and --build-dir. If
-either is omitted the current logic is maintained.
+This switches meson to perform test discovery by invoking 'check' in
+dry-run mode. It then registers one meson test case for each I/O
+test. Parallel execution remains disabled since the I/O tests do not
+use self contained execution environments and thus conflict with
+each other.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 Acked-by: Hanna Czenczek <hreitz@redhat.com>
 Tested-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20230303160727.3977246-2-berrange@redhat.com>
+Message-Id: <20230303160727.3977246-8-berrange@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/qemu-iotests/check      | 25 +++++++++++++++++++++++--
- tests/qemu-iotests/testenv.py | 13 ++++---------
- 2 files changed, 27 insertions(+), 11 deletions(-)
+ tests/qemu-iotests/meson.build | 35 ++++++++++++++++++++++++++++------
+ 1 file changed, 29 insertions(+), 6 deletions(-)
 
-diff --git a/tests/qemu-iotests/check b/tests/qemu-iotests/check
-index 9bdda1394e..da7e8a87fe 100755
---- a/tests/qemu-iotests/check
-+++ b/tests/qemu-iotests/check
-@@ -26,9 +26,23 @@ from findtests import TestFinder
- from testenv import TestEnv
- from testrunner import TestRunner
+diff --git a/tests/qemu-iotests/meson.build b/tests/qemu-iotests/meson.build
+index 323a4acb6a..a162f683ef 100644
+--- a/tests/qemu-iotests/meson.build
++++ b/tests/qemu-iotests/meson.build
+@@ -32,16 +32,39 @@ foreach k, v : emulators
+   endif
+ endforeach
  
-+def get_default_path(follow_link=False):
-+    """
-+    Try to automagically figure out the path we are running from.
-+    """
-+    # called from the build tree?
-+    if os.path.islink(sys.argv[0]):
-+        if follow_link:
-+            return os.path.dirname(os.readlink(sys.argv[0]))
-+        else:
-+            return os.path.dirname(os.path.abspath(sys.argv[0]))
-+    else:  # or source tree?
-+        return os.getcwd()
- 
- def make_argparser() -> argparse.ArgumentParser:
--    p = argparse.ArgumentParser(description="Test run options")
-+    p = argparse.ArgumentParser(
-+        description="Test run options",
-+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
- 
-     p.add_argument('-n', '--dry-run', action='store_true',
-                    help='show me, do not run tests')
-@@ -113,6 +127,11 @@ def make_argparser() -> argparse.ArgumentParser:
-                        'middle of the process.')
-     g_sel.add_argument('tests', metavar='TEST_FILES', nargs='*',
-                        help='tests to run, or "--" followed by a command')
-+    g_sel.add_argument('--build-dir', default=get_default_path(),
-+                       help='Path to iotests build directory')
-+    g_sel.add_argument('--source-dir',
-+                       default=get_default_path(follow_link=True),
-+                       help='Path to iotests build directory')
- 
-     return p
- 
-@@ -120,7 +139,9 @@ def make_argparser() -> argparse.ArgumentParser:
- if __name__ == '__main__':
-     args = make_argparser().parse_args()
- 
--    env = TestEnv(imgfmt=args.imgfmt, imgproto=args.imgproto,
-+    env = TestEnv(source_dir=args.source_dir,
-+                  build_dir=args.build_dir,
-+                  imgfmt=args.imgfmt, imgproto=args.imgproto,
-                   aiomode=args.aiomode, cachemode=args.cachemode,
-                   imgopts=args.imgopts, misalign=args.misalign,
-                   debug=args.debug, valgrind=args.valgrind,
-diff --git a/tests/qemu-iotests/testenv.py b/tests/qemu-iotests/testenv.py
-index a864c74b12..aa9d735414 100644
---- a/tests/qemu-iotests/testenv.py
-+++ b/tests/qemu-iotests/testenv.py
-@@ -170,7 +170,8 @@ def root(*names: str) -> str:
-             if not isxfile(b):
-                 sys.exit('Not executable: ' + b)
- 
--    def __init__(self, imgfmt: str, imgproto: str, aiomode: str,
-+    def __init__(self, source_dir: str, build_dir: str,
-+                 imgfmt: str, imgproto: str, aiomode: str,
-                  cachemode: Optional[str] = None,
-                  imgopts: Optional[str] = None,
-                  misalign: bool = False,
-@@ -211,14 +212,8 @@ def __init__(self, imgfmt: str, imgproto: str, aiomode: str,
-         # which are needed to initialize some environment variables. They are
-         # used by init_*() functions as well.
- 
--        if os.path.islink(sys.argv[0]):
--            # called from the build tree
--            self.source_iotests = os.path.dirname(os.readlink(sys.argv[0]))
--            self.build_iotests = os.path.dirname(os.path.abspath(sys.argv[0]))
--        else:
--            # called from the source tree
--            self.source_iotests = os.getcwd()
--            self.build_iotests = self.source_iotests
-+        self.source_iotests = source_dir
-+        self.build_iotests = build_dir
- 
-         self.build_root = os.path.join(self.build_iotests, '..', '..')
- 
++qemu_iotests_check_cmd = files('check')
++
+ foreach format, speed: qemu_iotests_formats
+   if speed == 'quick'
+     suites = 'block'
+   else
+     suites = ['block-' + speed, speed]
+   endif
+-  test('qemu-iotests ' + format, sh, args: [files('../check-block.sh'), format],
+-       depends: qemu_iotests_binaries, env: qemu_iotests_env,
+-       protocol: 'tap',
+-       suite: suites,
+-       timeout: 0,
+-       is_parallel: false)
++
++  args = ['-tap', '-' + format]
++  if speed == 'quick'
++      args += ['-g', 'auto']
++  endif
++
++  rc = run_command(
++      [qemu_iotests_check_cmd] + args + ['-n'],
++      check: true,
++  )
++
++  foreach item: rc.stdout().strip().split()
++      args = ['-tap', '-' + format, item,
++              '--source-dir', meson.current_source_dir(),
++              '--build-dir', meson.current_build_dir()]
++      # Some individual tests take as long as 45 seconds
++      # Bump the timeout to 3 minutes for some headroom
++      # on slow machines to minimize spurious failures
++      test('io-' + format + '-' + item,
++           qemu_iotests_check_cmd,
++           args: args,
++           depends: qemu_iotests_binaries,
++           env: qemu_iotests_env,
++           protocol: 'tap',
++           timeout: 180,
++           suite: suites)
++  endforeach
+ endforeach
 -- 
 2.39.2
 
