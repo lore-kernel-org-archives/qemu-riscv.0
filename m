@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pcVGD-0003Wt-Hi
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:50:01 -0400
+	id 1pcVGF-0003eo-13
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Mar 2023 13:50:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVFp-0002KS-M6
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:38 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ id 1pcVFx-0002SO-4x
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:48 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1pcVFd-0002AZ-Hw
- for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:37 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- az3-20020a05600c600300b003ed2920d585so1588643wmb.2
- for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:49:24 -0700 (PDT)
+ id 1pcVFe-0002BQ-5H
+ for qemu-riscv@nongnu.org; Wed, 15 Mar 2023 13:49:40 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ c8-20020a05600c0ac800b003ed2f97a63eso1584010wmr.3
+ for <qemu-riscv@nongnu.org>; Wed, 15 Mar 2023 10:49:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1678902563;
+ d=linaro.org; s=google; t=1678902564;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CJUdD1KDNN10uHV14kT9b5pVemIcBVsEPAiKGCkA3/I=;
- b=ZiJwizY+BEQyfg+Q/JLMGsdkQBe18LLAHEYUWqsiE2UzVpoafO6VnoUkgfIPF1UF2C
- AvHMfi1Zr4Gw+gU/glYhKQrPHig6ofDlVVSvHAknUmPOMV+KsOyu1ap5MFw86PoVzZFW
- hRlf689u9iXJwNoLzIh4+flVAro/FQfytj2H61FRa0BWvwNGSYnYylvMS/e2dsBa+uYf
- CdquL8gPnq9mTBiAINiXTynie2t6fwHS67wIcfJ6ZsSjj/Y/hgKw8TjhzQ5V3bDGJo3p
- peJrW+oyDPqBXVDrJXAHlvdp3/ngS+p7onB5PHuDMel60FN8u/BKxfjngHNycMIUH5CZ
- 5NFg==
+ bh=Jq6hxeJvtxl+2hc076HR0v7mq5ZkbtUv1Uhl1DVVlCE=;
+ b=JoW+jfgH2ZSGaEGWNB1c86mJrHTmFwhbNALMh5n0IgddNo1vkrMorDjqVZvR5zDYyB
+ E9D/TRIOKM7zII0KRnTs69PFwi21fI+mmi4y0l+s+TcHEz4bTD7IVx4mhIymk5s+coD7
+ wGyBe3LliNocveapx/qlv2jek+6eEVPeVHepiYeI+7KYQqv7i+fGYtHYFkNRb9JmXRUJ
+ dGOOwPnuVj6PCrbQNUqXEEinXq4f9Fivg6UUQi0y3DXAk2sUoHrjGUG9rGPPts+yij6+
+ S91MVP53BG1C93gVX/WpyA0fmjtHXIZ0jTCb07KyHGfypwOxB3dr418TLIsLPWXw6hfi
+ lM1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1678902563;
+ d=1e100.net; s=20210112; t=1678902564;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CJUdD1KDNN10uHV14kT9b5pVemIcBVsEPAiKGCkA3/I=;
- b=KkKrjc44/z31Pxpa7xSxGt9zD8DGV3WHz48TiyFY1ysq9lRKCh8mABmDutOLmJ7zdr
- y8basya6zh0awwg7CCa2D9sNKcITMqhUSO+VC5XY85aci1NdXdRnrsboLwBubkZ3aNNe
- cqf7xSRTycfqMdGybts5VrIvUgEqJApD4KOEWkneNuDEb7stJwWz9KSRSXnOeDHHy47c
- z7QNRBcoeW8jFVKm7X2l8K9OyjvgqMF/8wye1CyfKPM/YAEKIEidrVb9BAe9ZUG894DA
- s8sCKW+xmAgjmBYO/etiCXiHNixMy9NZ/Ekc9X+aPvhWPJLVu7SMJtTj4TtwlIVh3Dph
- qXNQ==
-X-Gm-Message-State: AO0yUKVjiUDy8d8YJQ26pppAeiD3ME48UGcEA77r49Bfn7gj3dJA5da6
- /OX0SyYfltz+QBJCK8MXcyi0kw==
-X-Google-Smtp-Source: AK7set9Iezw6Ybkhh+55E3iLQDdCFi7IXy0jVwnDYuu0oKAYq1ekwxZ2Dgbn+sYCD0cxNic/qWFm/g==
-X-Received: by 2002:a05:600c:4452:b0:3ed:2709:2edf with SMTP id
- v18-20020a05600c445200b003ed27092edfmr10925363wmn.13.1678902563283; 
- Wed, 15 Mar 2023 10:49:23 -0700 (PDT)
+ bh=Jq6hxeJvtxl+2hc076HR0v7mq5ZkbtUv1Uhl1DVVlCE=;
+ b=OxhvYF/eLhueQMKwKZClVGT0YHvtueSlJoAZplOXLVgmyECRO/yrxCa4vdIhhuwkVb
+ cDKbThI4Koems2cl611dmeR7VQUTWIl+tJ6yYH+0AUSwlX5GPTSsgCmN9DX4gmqiaw5o
+ jqaxa9IuLt3ir9m+AOLFpAlgzVO4Rv8WmyCxcus6XD+zk/sKv1gb/6XHXcTSaL2M9ljk
+ eoT2OVy7JmPgVt0qwyjPjisu/gTVhI5ufrJ1skMNf8lMaPtD1t9Uduye0ilotFzMob4B
+ a80hv9g+LG27w0C3sJv6X0r31C0a42hOhgOLwDMC1LyeCvctzK8ozMJMZnoZyb+HXk92
+ IYvQ==
+X-Gm-Message-State: AO0yUKXQEqi3DnDf9YBhkRPpS0GU0IxInFQ1WQZqZOLZpWDsMLyqin1Z
+ XumIbDJrqp0LOE7FiWgljrSn3g==
+X-Google-Smtp-Source: AK7set/4uUeLsWCDFPqKaCldv8PKAYfIYVJ5odmhFOzMgRKZP5LCNYBDfcUOkKbdOk8IDGiVM/Q3pw==
+X-Received: by 2002:a05:600c:4450:b0:3eb:36fa:b791 with SMTP id
+ v16-20020a05600c445000b003eb36fab791mr17432486wmn.31.1678902564253; 
+ Wed, 15 Mar 2023 10:49:24 -0700 (PDT)
 Received: from zen.linaroharston ([85.9.250.243])
  by smtp.gmail.com with ESMTPSA id
- k6-20020a05600c1c8600b003e209b45f6bsm2909515wms.29.2023.03.15.10.49.20
+ y16-20020a05600c365000b003ed23845666sm2459424wmq.45.2023.03.15.10.49.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 15 Mar 2023 10:49:22 -0700 (PDT)
 Received: from zen.lan (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id F30251FFD3;
+ by zen.linaroharston (Postfix) with ESMTP id 4650A1FFCE;
  Wed, 15 Mar 2023 17:43:44 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -100,18 +100,18 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
  Sunil Muthuswamy <sunilmut@microsoft.com>, Hanna Reitz <hreitz@redhat.com>,
  Peter Xu <peterx@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Guo Ren <guoren@kernel.org>, Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-Subject: [PATCH v2 29/32] contrib/gitdm: add Alibaba to the domain-map
-Date: Wed, 15 Mar 2023 17:43:28 +0000
-Message-Id: <20230315174331.2959-30-alex.bennee@linaro.org>
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH v2 23/32] iotests: always use a unique sub-directory per test
+Date: Wed, 15 Mar 2023 17:43:22 +0000
+Message-Id: <20230315174331.2959-24-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230315174331.2959-1-alex.bennee@linaro.org>
 References: <20230315174331.2959-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -131,62 +131,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Mar 2023 17:49:48 -0000
+X-List-Received-Date: Wed, 15 Mar 2023 17:49:50 -0000
 
-This replaces the previous attempt to add c-sky.com. Group everything
-under Alibaba now.
+From: Daniel P. Berrangé <berrange@redhat.com>
 
-Added as requested by LIU Zhiwei.
+The current test runner is only safe against parallel execution within
+a single instance of the 'check' process, and only if -j is given a
+value greater than 2. This prevents running multiple copies of the
+'check' process for different test scenarios.
 
+This change switches the output / socket directories to always include
+the test name, image format and image protocol. This should allow full
+parallelism of all distinct test scenarios. eg running both qcow2 and
+raw tests at the same time, or both file and nbd tests at the same
+time.
+
+It would be possible to allow for parallelism of the same test scenario
+by including the pid, but that would potentially let many directories
+accumulate over time on failures, so is not done.
+
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Acked-by: Hanna Czenczek <hreitz@redhat.com>
+Tested-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20230303160727.3977246-7-berrange@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Acked-by: Guo Ren <guoren@kernel.org>
-Reviewed-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Message-Id: <20230310180332.2274827-8-alex.bennee@linaro.org>
 ---
- contrib/gitdm/domain-map        | 1 +
- contrib/gitdm/group-map-alibaba | 7 +++++++
- gitdm.config                    | 1 +
- 3 files changed, 9 insertions(+)
- create mode 100644 contrib/gitdm/group-map-alibaba
+ tests/qemu-iotests/testrunner.py | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/contrib/gitdm/domain-map b/contrib/gitdm/domain-map
-index 8dce276a1c..0b6c77eee0 100644
---- a/contrib/gitdm/domain-map
-+++ b/contrib/gitdm/domain-map
-@@ -4,6 +4,7 @@
- # This maps email domains to nice easy to read company names
- #
+diff --git a/tests/qemu-iotests/testrunner.py b/tests/qemu-iotests/testrunner.py
+index 81519ed6e2..7b322272e9 100644
+--- a/tests/qemu-iotests/testrunner.py
++++ b/tests/qemu-iotests/testrunner.py
+@@ -228,13 +228,11 @@ def find_reference(self, test: str) -> str:
  
-+linux.alibaba.com Alibaba
- amazon.com      Amazon
- amazon.co.uk    Amazon
- amd.com         AMD
-diff --git a/contrib/gitdm/group-map-alibaba b/contrib/gitdm/group-map-alibaba
-new file mode 100644
-index 0000000000..0ebbe6b06e
---- /dev/null
-+++ b/contrib/gitdm/group-map-alibaba
-@@ -0,0 +1,7 @@
-+#
-+# Alibaba contributors including its subsidiaries 
-+#
+         return f'{test}.out'
+ 
+-    def do_run_test(self, test: str, mp: bool) -> TestResult:
++    def do_run_test(self, test: str) -> TestResult:
+         """
+         Run one test
+ 
+         :param test: test file path
+-        :param mp: if true, we are in a multiprocessing environment, use
+-                   personal subdirectories for test run
+ 
+         Note: this method may be called from subprocess, so it does not
+         change ``self`` object in any way!
+@@ -257,12 +255,14 @@ def do_run_test(self, test: str, mp: bool) -> TestResult:
+ 
+         args = [str(f_test.resolve())]
+         env = self.env.prepare_subprocess(args)
+-        if mp:
+-            # Split test directories, so that tests running in parallel don't
+-            # break each other.
+-            for d in ['TEST_DIR', 'SOCK_DIR']:
+-                env[d] = os.path.join(env[d], f_test.name)
+-                Path(env[d]).mkdir(parents=True, exist_ok=True)
 +
-+# c-sky.com, now part of T-Head, wholly-owned entity of Alibaba Group
-+ren_guo@c-sky.com
-+zhiwei_liu@c-sky.com
-diff --git a/gitdm.config b/gitdm.config
-index 907ffde017..df4ba829ca 100644
---- a/gitdm.config
-+++ b/gitdm.config
-@@ -31,6 +31,7 @@ EmailMap contrib/gitdm/domain-map
- # identifiable corporate emails. Please keep this list sorted.
- #
++        # Split test directories, so that tests running in parallel don't
++        # break each other.
++        for d in ['TEST_DIR', 'SOCK_DIR']:
++            env[d] = os.path.join(
++                env[d],
++                f"{self.env.imgfmt}-{self.env.imgproto}-{f_test.name}")
++            Path(env[d]).mkdir(parents=True, exist_ok=True)
  
-+GroupMap contrib/gitdm/group-map-alibaba Alibaba
- GroupMap contrib/gitdm/group-map-cadence Cadence Design Systems
- GroupMap contrib/gitdm/group-map-codeweavers CodeWeavers
- GroupMap contrib/gitdm/group-map-facebook Facebook
+         test_dir = env['TEST_DIR']
+         f_bad = Path(test_dir, f_test.name + '.out.bad')
+@@ -347,7 +347,7 @@ def run_test(self, test: str,
+             testname = os.path.basename(test)
+             print(f'# running {self.env.imgfmt} {testname}')
+ 
+-        res = self.do_run_test(test, mp)
++        res = self.do_run_test(test)
+ 
+         end = datetime.datetime.now().strftime('%H:%M:%S')
+         self.test_print_one_line(test=test,
 -- 
 2.39.2
 
