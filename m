@@ -1,65 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pd4SB-0007P6-Ih
-	for mharc-qemu-riscv@gnu.org; Fri, 17 Mar 2023 03:24:43 -0400
+	id 1pd4Tp-0008Rn-FD
+	for mharc-qemu-riscv@gnu.org; Fri, 17 Mar 2023 03:26:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pd4S9-0007O9-JR
- for qemu-riscv@nongnu.org; Fri, 17 Mar 2023 03:24:41 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pd4Tn-0008Qi-OS
+ for qemu-riscv@nongnu.org; Fri, 17 Mar 2023 03:26:23 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pd4S7-0006FP-7g
- for qemu-riscv@nongnu.org; Fri, 17 Mar 2023 03:24:41 -0400
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pd4Tl-0006h4-KH
+ for qemu-riscv@nongnu.org; Fri, 17 Mar 2023 03:26:23 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1679037877;
+ s=mimecast20190719; t=1679037980;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=xW5YRWUqoI7YaHI7gPZKm4zvNmnVkp4WxZPUXFEvJBo=;
- b=OnDUM4ca2p/TJYhsHtnYSvFbnWlXbO5i6hGFsmuk7AQBj/mfd3vZZQ33Gjfb+Tb76tW3la
- pup2VhwgRTcOuDOgB4HkRgKL04ZyMWznPmJvAOi0KYdQxhgTuDlbBbF6fr/jyuPK8MSGMn
- Z2GkYYpcIsGO1T50laN6BD5OnPIPWvY=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=HqrnyekWZtj3autRtqGDoL7x0MtC0GOcxCuc87fpusU=;
+ b=cwqTXZ6Rf74awlOSXm30HQtAMEbGYIqy6g9ONZEL/6Obr36tmsNChL72QgAajhJ/6V/l8B
+ ZIywMCqnc65ZvcGuIarBCBRY4sa8WFo+x0+My3mYbrEGFCDSUDto4BXtesvQCpIvMrJx9x
+ ujnqI2r5XxU1Fu1ZEKJRL48xKjnEv+g=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-367-2WNsMfZFO0uUDZWBWFgptg-1; Fri, 17 Mar 2023 03:24:35 -0400
-X-MC-Unique: 2WNsMfZFO0uUDZWBWFgptg-1
-Received: by mail-wm1-f72.google.com with SMTP id
- bd27-20020a05600c1f1b00b003ed5cf99f0cso1742881wmb.1
- for <qemu-riscv@nongnu.org>; Fri, 17 Mar 2023 00:24:35 -0700 (PDT)
+ us-mta-166-p6s1Z8UiOFCHKYPyqIEG8g-1; Fri, 17 Mar 2023 03:26:17 -0400
+X-MC-Unique: p6s1Z8UiOFCHKYPyqIEG8g-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ bi27-20020a05600c3d9b00b003e9d0925341so1876234wmb.8
+ for <qemu-riscv@nongnu.org>; Fri, 17 Mar 2023 00:26:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679037874;
+ d=1e100.net; s=20210112; t=1679037976;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xW5YRWUqoI7YaHI7gPZKm4zvNmnVkp4WxZPUXFEvJBo=;
- b=jv87qQl0e51uLY6fUYY4Gq7lLF2huEeUGGiz8iPpuoFe9h+tlPlXodSK57m3sN8dwb
- iyVMux6OltIEDqBT7FAk5rFNHFKOvmfH02rObjfBa+R7n7AxyvVkBqm+wqzh6McX3fpE
- 7jdWbw7ZYjSZLWJ9ctyIOlrw3yA73Bxs1+53F2/yd++tyfOa0jw3p8T8zcj2ua3oKgMi
- wQhgaFmJGpQHG3bSK+5ya9LKOZeacKWmOz/q4jP3wfKetwV4cAFW315YriGZmkamkLNO
- ceuUfxt9tgnkbQkPhrX5/TblTiURxlzBbXLo9ULv8rvYChZu3Dosv4g3A1fSJ/NtclQb
- Cwtw==
-X-Gm-Message-State: AO0yUKXf91Oc6HdqsxcZjbMe+aVT4T4u3ch2HTHtxLIvOA7H885F9iBc
- fDJSHY2pslnUMY36eUdy4xyh9kubIbtCfTuqRbl7N0HDEUb1Zch2iwV5qgf3lBoI+ZJ4icaoqkn
- MEEi81+RDMFwoiOE=
-X-Received: by 2002:a5d:4d06:0:b0:2c7:daa:1c56 with SMTP id
- z6-20020a5d4d06000000b002c70daa1c56mr5851978wrt.4.1679037874688; 
- Fri, 17 Mar 2023 00:24:34 -0700 (PDT)
-X-Google-Smtp-Source: AK7set+aVAxUwOvFA/ilN/jNay4xxCe5XpeNTShUolDwE3ogiowCBRVEg+sW7qmY2hMDnR5uIw2AZQ==
-X-Received: by 2002:a5d:4d06:0:b0:2c7:daa:1c56 with SMTP id
- z6-20020a5d4d06000000b002c70daa1c56mr5851904wrt.4.1679037874240; 
- Fri, 17 Mar 2023 00:24:34 -0700 (PDT)
+ bh=HqrnyekWZtj3autRtqGDoL7x0MtC0GOcxCuc87fpusU=;
+ b=tRv3FXgbivYgjKbRnzsGvoy1qqE4FmnLsKry1VxGkfTXY2iq03yYymUyFbE+BMmCTW
+ Q7nMKmxoovDeDNl3HcltrzrPXpeawrKrUsPucW/jn0k6Ya2ggqRs8VRhH33Wc/jyQiyp
+ 2GLBYpm5ZSScvzxkgnHMoj+5RE1ek1USPAhdp3PPJI3NB46EdFm9MpFACcydy1MyfjOZ
+ S8FUFB7X7EPGAMWvaUPU0GIaoxHoS7ikFKGX7UPC8tgzag3J158sP5A8EdOxU3ojH9Jk
+ qkEUNoXE8cBVyPZGMdgIWF9UWwAavdwfUKXPoOQ5Lg5/Pm5HsicjGFAEHSKDX3fNSXn6
+ Jtiw==
+X-Gm-Message-State: AO0yUKV3CSeZ4ZxgianCoYU5oqfvTds705kGn/u0qsRqJfapDJn7/t/f
+ x5v40h/DlFvBbsB4NRV09kpkUri/6kMnY8/9C17ZXdwtlQ1kTTHFbqSKEQuvhK7ybSa11bQ+Ivp
+ vjCkzB9fc9iWKV+Q=
+X-Received: by 2002:a05:600c:4fce:b0:3ed:24f6:1089 with SMTP id
+ o14-20020a05600c4fce00b003ed24f61089mr16092907wmq.15.1679037976115; 
+ Fri, 17 Mar 2023 00:26:16 -0700 (PDT)
+X-Google-Smtp-Source: AK7set/Gl8eTfcazshyynddIacq5+dgKonMcbVTvMaTdoQMnA6FrXfJgH39r0LtsNqEKcjgiAOfLyA==
+X-Received: by 2002:a05:600c:4fce:b0:3ed:24f6:1089 with SMTP id
+ o14-20020a05600c4fce00b003ed24f61089mr16092826wmq.15.1679037975745; 
+ Fri, 17 Mar 2023 00:26:15 -0700 (PDT)
 Received: from [192.168.0.3] (ip-109-43-176-33.web.vodafone.de.
  [109.43.176.33]) by smtp.gmail.com with ESMTPSA id
- y1-20020a5d4ac1000000b002ceaeb24c0asm1262440wrs.58.2023.03.17.00.24.29
+ c22-20020a7bc856000000b003dc42d48defsm1479979wml.6.2023.03.17.00.26.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Mar 2023 00:24:32 -0700 (PDT)
-Message-ID: <95ef3696-f934-376e-ee88-687477a32242@redhat.com>
-Date: Fri, 17 Mar 2023 08:24:28 +0100
+ Fri, 17 Mar 2023 00:26:14 -0700 (PDT)
+Message-ID: <e3e19ba8-6574-c989-ad02-25fabe5956f9@redhat.com>
+Date: Fri, 17 Mar 2023 08:26:09 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.13.0
-Subject: Re: [PATCH v2 05/32] gitlab: update centos-8-stream job
+Subject: Re: [PATCH v2 31/32] contrib/gitdm: add more individual contributors
 To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
@@ -103,17 +103,19 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
  Beniamino Galvani <b.galvani@gmail.com>, Paul Durrant <paul@xen.org>,
  Bin Meng <bin.meng@windriver.com>, Sunil Muthuswamy
  <sunilmut@microsoft.com>, Hanna Reitz <hreitz@redhat.com>,
- Peter Xu <peterx@redhat.com>
+ Peter Xu <peterx@redhat.com>, Bernhard Beschow <shentey@gmail.com>,
+ Amarjargal Gundjalam <amarjargal16@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ "Jason A . Donenfeld" <Jason@zx2c4.com>
 References: <20230315174331.2959-1-alex.bennee@linaro.org>
- <20230315174331.2959-6-alex.bennee@linaro.org>
+ <20230315174331.2959-32-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
-In-Reply-To: <20230315174331.2959-6-alex.bennee@linaro.org>
+In-Reply-To: <20230315174331.2959-32-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
@@ -134,24 +136,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Mar 2023 07:24:42 -0000
+X-List-Received-Date: Fri, 17 Mar 2023 07:26:24 -0000
 
 On 15/03/2023 18.43, Alex Bennée wrote:
-> A couple of clean-ups here:
-> 
->    - inherit from the custom runners job for artefacts
-
-I know, it's a difference between BE and AE, but in case you want to be 
-consistent with the yml: s/artefacts/artifacts/
-
->    - call check-avocado directly
->    - add some comments to the top about setup
+> I've only added the names explicitly acked.
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+> Cc: Bernhard Beschow <shentey@gmail.com>
+> Cc: Amarjargal Gundjalam <amarjargal16@gmail.com>
+> Cc: Bin Meng <bmeng@tinylab.org>
+> Cc: Jason A. Donenfeld <Jason@zx2c4.com>
+> Cc: Strahinja Jankovic <strahinja.p.jankovic@gmail.com>
+> Acked-by: Bernhard Beschow <shentey@gmail.com>
+> Message-Id: <20230310180332.2274827-10-alex.bennee@linaro.org>
 > ---
->   .../custom-runners/centos-stream-8-x86_64.yml  | 18 ++++++------------
->   1 file changed, 6 insertions(+), 12 deletions(-)
+>   contrib/gitdm/group-map-individuals | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/contrib/gitdm/group-map-individuals b/contrib/gitdm/group-map-individuals
+> index e2263a5ee3..3264c7383d 100644
+> --- a/contrib/gitdm/group-map-individuals
+> +++ b/contrib/gitdm/group-map-individuals
+> @@ -38,3 +38,4 @@ paul@nowt.org
+>   git@xen0n.name
+>   simon@simonsafar.com
+>   research_trasio@irq.a4lg.com
+> +shentey@gmail.com
 
+FWIW:
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
