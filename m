@@ -1,66 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pd8sz-0003To-9a
-	for mharc-qemu-riscv@gnu.org; Fri, 17 Mar 2023 08:08:41 -0400
+	id 1pd8vj-00055Q-D5
+	for mharc-qemu-riscv@gnu.org; Fri, 17 Mar 2023 08:11:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pd8sx-0003Qn-Uu
- for qemu-riscv@nongnu.org; Fri, 17 Mar 2023 08:08:39 -0400
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pd8vg-00054c-KY
+ for qemu-riscv@nongnu.org; Fri, 17 Mar 2023 08:11:28 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pd8sv-0005CD-4E
- for qemu-riscv@nongnu.org; Fri, 17 Mar 2023 08:08:39 -0400
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pd8ve-0006hL-Ph
+ for qemu-riscv@nongnu.org; Fri, 17 Mar 2023 08:11:28 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1679054916;
+ s=mimecast20190719; t=1679055085;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=kScjxjWF3/DNY8MH6JIoXktFOWCux+jIyciHRIIYQeY=;
- b=IRZnhxZ4agnw63io9mqVbJoAkLtSlQQcuY5xjKUZZ6i2/zD3RIDrjHifbylHCMpDpmQcax
- /tkB5SewZRTnbpsQvwEw/0N/Beq/Qar6CLeeVeoH8JJc+jJks0z0jxqidbFYZxJiSp2WNL
- TbnlRvIpm1C4w2Dfx1AXKdyw4l/9/Z4=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=VdyWJZv8vhAFDbVlVpAgxslKT4rLXftuJGVINjtZsvM=;
+ b=aJDcFbUROquPXUKo9w8C56fBPn8iu5IzU+OUyjszX+NGEkTDr5tXIA8icom4bTK/ezK5BM
+ Ho5UcR9qX+ghLZgIEAjky0A2f44CYCw+ltOb+YUUYhrNdvdfKjXq+u8HGlXUtlWsTVThEt
+ R9kU+VLDSVAsRVNW+6c9qCxXT6OyQz8=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-556-mJk3lttBOY280iRKdideqg-1; Fri, 17 Mar 2023 08:08:35 -0400
-X-MC-Unique: mJk3lttBOY280iRKdideqg-1
-Received: by mail-wm1-f71.google.com with SMTP id
- s18-20020a7bc392000000b003deaf780ab6so1783075wmj.4
- for <qemu-riscv@nongnu.org>; Fri, 17 Mar 2023 05:08:35 -0700 (PDT)
+ us-mta-44-5nx5CML8P222ixwSBqOJhQ-1; Fri, 17 Mar 2023 08:11:24 -0400
+X-MC-Unique: 5nx5CML8P222ixwSBqOJhQ-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ k41-20020a05600c1ca900b003ed383b1b62so1779809wms.8
+ for <qemu-riscv@nongnu.org>; Fri, 17 Mar 2023 05:11:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679054914;
+ d=1e100.net; s=20210112; t=1679055083;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kScjxjWF3/DNY8MH6JIoXktFOWCux+jIyciHRIIYQeY=;
- b=tyPSpG1IJmmRXAq1eu91Q7mZ67lDop1huODgknLRtS0mSmRhActLDZw3NPSh/IfsMz
- 3JXee6wi4XAHdzaYhUJsPB9ZG7ht3yZE5YOI0lw4c1wpOrb+GoL++Ym0JjgyHtLJHw2Z
- lE2DHLpCICFNVAqP/04ZaQyLTeSP3ho1+o5CLF59G1jNbROSjIQDB26eB2I2PJAvw97d
- hkR72HVQ117MKE0o4ZIHqn4M6ACwYzHk57lBAnm60P7U0y/YO/aSynmDRjwj+WETKdYS
- CMnVCcV6QaDGdVFFgX30zzH3ptuY9fUJqY+ToR+bOFAT+2nE7F3+x2cQvhKAMiktmB1O
- E9HQ==
-X-Gm-Message-State: AO0yUKWRDeAuWSXvjcID7Og4jv7CjsvLCaDuytreLFQ3gkc/4PMioy6C
- No51jrS3B2xh+PIFXH8synnwz/xpNRm1Q8OskIkGyZ0WwgVvDijG5osjN8TwzDrGWtK9Kd4B4y1
- sPUF613M9AnSLccw=
-X-Received: by 2002:adf:f150:0:b0:2c9:70a4:4f94 with SMTP id
- y16-20020adff150000000b002c970a44f94mr7656732wro.18.1679054914265; 
- Fri, 17 Mar 2023 05:08:34 -0700 (PDT)
-X-Google-Smtp-Source: AK7set8BjzNtWSjj0hviwgMCvvExxTLEB7Z7kxpInt7PqehO0hi0hW9EyLdwSex7xipSCivTOE1MHA==
-X-Received: by 2002:adf:f150:0:b0:2c9:70a4:4f94 with SMTP id
- y16-20020adff150000000b002c970a44f94mr7656656wro.18.1679054913951; 
- Fri, 17 Mar 2023 05:08:33 -0700 (PDT)
+ bh=VdyWJZv8vhAFDbVlVpAgxslKT4rLXftuJGVINjtZsvM=;
+ b=o+lqZBLy3TJpc9BC/AcpBowSQTUovvORMPfjlbN4TVeO4y7RVTgVOsVxafLUSQapos
+ TnIEyGVupHtKTf6uOLX3KeJwkHMCeC7CcNbBuXa38EIEEdKWVZHmzDwPUMxztcEAkhml
+ lQ0R53xvl3/L1pSD9sJjEXv3BAfgFj6qrQyHL1lav4MNvVMeEF5cMT03d/reW6rLmr3y
+ fgNJYgjJ9+B4ZQMirtNtXCIhondArPvxKUV0Qk+GmlRwGmAowTj9wNZ/gzE+zHnrXSkp
+ P3fxMgeWQYzVCbWJXFlXskgBwZ3ZzSEhwuq0HRhfEgdrx9pYyYNKp7stuG6odp8sZsle
+ ipKQ==
+X-Gm-Message-State: AO0yUKWJhT131pZbchrk1zoBvoKnBz6MdanUigYPv0B1RQkqebpO120G
+ sRUCZx4imoQhkG23wW6kzo/ICZ8y/459a9zULMumiU/ifB5TT5QgCja32f9ZZU52PGf5lwsQZp2
+ BMSCj+4m/w1gqeuY=
+X-Received: by 2002:a05:6000:110a:b0:2ce:a93d:41a7 with SMTP id
+ z10-20020a056000110a00b002cea93d41a7mr6815326wrw.40.1679055083547; 
+ Fri, 17 Mar 2023 05:11:23 -0700 (PDT)
+X-Google-Smtp-Source: AK7set+Drn8o6/nNTBEgK8SgVpgvMd4RO9wUeVwEOco0AOkK3H0Ve2COt2l+fdAqjqS7xNs1SwZQWg==
+X-Received: by 2002:a05:6000:110a:b0:2ce:a93d:41a7 with SMTP id
+ z10-20020a056000110a00b002cea93d41a7mr6815266wrw.40.1679055083247; 
+ Fri, 17 Mar 2023 05:11:23 -0700 (PDT)
 Received: from [192.168.0.3] (ip-109-43-176-33.web.vodafone.de.
  [109.43.176.33]) by smtp.gmail.com with ESMTPSA id
- j20-20020a5d6e54000000b002cea8664304sm1791406wrz.91.2023.03.17.05.08.30
+ u4-20020a5d4344000000b002c5526234d2sm1861459wrr.8.2023.03.17.05.11.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 17 Mar 2023 05:08:33 -0700 (PDT)
-Message-ID: <162c7939-abed-bdb5-47bb-e7b9e873f6b6@redhat.com>
-Date: Fri, 17 Mar 2023 13:08:29 +0100
+ Fri, 17 Mar 2023 05:11:22 -0700 (PDT)
+Message-ID: <5f003318-c22d-b13b-3976-94b0f874c720@redhat.com>
+Date: Fri, 17 Mar 2023 13:11:17 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.13.0
-Subject: Re: [PATCH v2 07/32] tests/tcg: add some help output for running
- individual tests
+Subject: Re: [PATCH v2 06/32] include/qemu: add documentation for memory
+ callbacks
 To: =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
@@ -106,9 +106,9 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
  <sunilmut@microsoft.com>, Hanna Reitz <hreitz@redhat.com>,
  Peter Xu <peterx@redhat.com>
 References: <20230315174331.2959-1-alex.bennee@linaro.org>
- <20230315174331.2959-8-alex.bennee@linaro.org>
+ <20230315174331.2959-7-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
-In-Reply-To: <20230315174331.2959-8-alex.bennee@linaro.org>
+In-Reply-To: <20230315174331.2959-7-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
@@ -135,36 +135,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Mar 2023 12:08:40 -0000
+X-List-Received-Date: Fri, 17 Mar 2023 12:11:29 -0000
 
 On 15/03/2023 18.43, Alex Bennée wrote:
-> So you can do:
+> Some API documentation was missed, rectify that.
 > 
->    cd tests/tcg/aarch64-linux-user
->    make -f ../Makefile.target help
-> 
-> To see the list of tests. You can then run each one individually.
-> 
+> Fixes: https://gitlab.com/qemu-project/qemu/-/issues/1497
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   tests/tcg/Makefile.target | 7 +++++++
->   1 file changed, 7 insertions(+)
-> 
-> diff --git a/tests/tcg/Makefile.target b/tests/tcg/Makefile.target
-> index a3b0aaf8af..8318caf924 100644
-> --- a/tests/tcg/Makefile.target
-> +++ b/tests/tcg/Makefile.target
-> @@ -201,3 +201,10 @@ clean:
->   
->   distclean:
->   	rm -f config-cc.mak config-target.mak ../config-$(TARGET).mak
-> +
-> +.PHONY: help
-> +help:
-> +	@echo "TCG tests help $(TARGET_NAME)"
-> +	@echo "Built with $(CC)"
-> +	@echo "Available tests:"
-> +	@$(foreach t,$(RUN_TESTS),echo "  $t";)
+>   include/qemu/qemu-plugin.h | 47 ++++++++++++++++++++++++++++++++++----
+>   1 file changed, 43 insertions(+), 4 deletions(-)
 
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
