@@ -1,59 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1peVc4-0000Q2-3Y
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Mar 2023 02:36:52 -0400
+	id 1peXLz-0005gB-T4
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Mar 2023 04:28:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fei2.wu@intel.com>)
- id 1peVc2-0000Pm-Hb; Tue, 21 Mar 2023 02:36:50 -0400
-Received: from mga17.intel.com ([192.55.52.151])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fei2.wu@intel.com>)
- id 1peVbz-0001ST-UO; Tue, 21 Mar 2023 02:36:50 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1679380607; x=1710916607;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=T20dgz041mAKoOsM1UKi64go9mCORNyet3agOm7n79Y=;
- b=cJrcWj6YVrbYUHDQUJM8GTAMLEDQ1vk4TTxOlAL59EpB7zbkdF5h6Wru
- zytcL9SEvfjQaJ2XxRhf1lpeL2/6xo3MwkhPx1I9sqmcZnZ4aioCMYl5U
- IgkI2ayNBh+SlaWIOkTa/OIUNjUJJfyFqdvyboDmneIo86gHnCw3KuO2N
- 3v0vT4FUhIZq5fj378yJloSN8JrPDIkbFDvAkj4if65zhggE/fGmBZWuF
- PN664JnwT7qD8SiaVo5hHAmaxM9kWfGmd1wfdS2SOxGcEBqa3SPzcX+Mg
- RarETdccdj487wsbUQy7OUigLMpxKO0EAp4Sx9V9G//HtMBpLCK7jg5/w A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10655"; a="319255497"
-X-IronPort-AV: E=Sophos;i="5.98,278,1673942400"; d="scan'208";a="319255497"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Mar 2023 23:36:35 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10655"; a="1010815244"
-X-IronPort-AV: E=Sophos;i="5.98,278,1673942400"; d="scan'208";a="1010815244"
-Received: from wufei-optiplex-7090.sh.intel.com ([10.238.200.247])
- by fmsmga005.fm.intel.com with ESMTP; 20 Mar 2023 23:36:33 -0700
-From: fei2.wu@intel.com
-To: 
-Cc: Fei Wu <fei2.wu@intel.com>, LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1peXLy-0005fx-RH; Tue, 21 Mar 2023 04:28:22 -0400
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1peXLw-0002mC-2Q; Tue, 21 Mar 2023 04:28:22 -0400
+Received: from [192.168.0.120] (unknown [180.165.240.243])
+ by APP-01 (Coremail) with SMTP id qwCowAB3kNSZahlkdD9HFA--.29435S2;
+ Tue, 21 Mar 2023 16:28:11 +0800 (CST)
+Message-ID: <cf407a04-9717-6a82-6405-d836874c5613@iscas.ac.cn>
+Date: Tue, 21 Mar 2023 16:28:09 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH] target/riscv: reduce overhead of MSTATUS_SUM change
+Content-Language: en-US
+To: fei2.wu@intel.com
+Cc: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
- qemu-devel@nongnu.org (open list:All patches CC here)
-Subject: [PATCH] target/riscv: reduce overhead of MSTATUS_SUM change
-Date: Tue, 21 Mar 2023 14:37:46 +0800
-Message-Id: <20230321063746.151107-1-fei2.wu@intel.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ "open list:All patches CC here" <qemu-devel@nongnu.org>
+References: <20230321063746.151107-1-fei2.wu@intel.com>
+From: liweiwei <liweiwei@iscas.ac.cn>
+In-Reply-To: <20230321063746.151107-1-fei2.wu@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=192.55.52.151; envelope-from=fei2.wu@intel.com;
- helo=mga17.intel.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+X-CM-TRANSID: qwCowAB3kNSZahlkdD9HFA--.29435S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxJFykZw13urWfZFy7GF4Durg_yoW5uw13pr
+ WkG39xKrWDGrZ2ya1fXr4qgrn8Aws5Wr1UCw1ktF45AF4rJrWF9FZ8K34UCr9rX3WxCrWj
+ 9FWUur97AF47ZrDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkm14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+ 0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
+ jxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr
+ 1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7Mxk0xIA0c2IEe2xFo4CEbIxv
+ r21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxV
+ WUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI
+ 7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r
+ 1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI
+ 42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUoOJ5UUUUU
+X-Originating-IP: [180.165.240.243]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -67,97 +70,104 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Mar 2023 06:36:51 -0000
+X-List-Received-Date: Tue, 21 Mar 2023 08:28:23 -0000
 
-From: Fei Wu <fei2.wu@intel.com>
 
-Kernel needs to access user mode memory e.g. during syscalls, the window
-is usually opened up for a very limited time through MSTATUS.SUM, the
-overhead is too much if tlb_flush() gets called for every SUM change.
-This patch saves addresses accessed when SUM=1, and flushs only these
-pages when SUM changes to 0. If the buffer is not large enough to save
-all the pages during SUM=1, it will fall back to tlb_flush when
-necessary.
+On 2023/3/21 14:37, fei2.wu@intel.com wrote:
+> From: Fei Wu <fei2.wu@intel.com>
+>
+> Kernel needs to access user mode memory e.g. during syscalls, the window
+> is usually opened up for a very limited time through MSTATUS.SUM, the
+> overhead is too much if tlb_flush() gets called for every SUM change.
+> This patch saves addresses accessed when SUM=1, and flushs only these
+> pages when SUM changes to 0. If the buffer is not large enough to save
+> all the pages during SUM=1, it will fall back to tlb_flush when
+> necessary.
+>
+> The buffer size is set to 4 since in this MSTATUS.SUM open-up window,
+> most of the time kernel accesses 1 or 2 pages, it's very rare to see
+> more than 4 pages accessed.
+>
+> It's not necessary to save/restore these new added status, as
+> tlb_flush() is always called after restore.
+>
+> Result of 'pipe 10' from unixbench boosts from 223656 to 1327407. Many
+> other syscalls benefit a lot from this one too.
+>
+> Signed-off-by: Fei Wu <fei2.wu@intel.com>
+> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
+>   target/riscv/cpu.h        |  4 ++++
+>   target/riscv/cpu_helper.c |  7 +++++++
+>   target/riscv/csr.c        | 14 +++++++++++++-
+>   3 files changed, 24 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 638e47c75a..926dbce59f 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -383,6 +383,10 @@ struct CPUArchState {
+>       uint64_t kvm_timer_compare;
+>       uint64_t kvm_timer_state;
+>       uint64_t kvm_timer_frequency;
+> +
+> +#define MAX_CACHED_SUM_U_ADDR_NUM 4
+> +    uint64_t sum_u_count;
+> +    uint64_t sum_u_addr[MAX_CACHED_SUM_U_ADDR_NUM];
+>   };
+>   
+>   OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index f88c503cf4..5ad0418eb6 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1068,6 +1068,13 @@ restart:
+>                       (access_type == MMU_DATA_STORE || (pte & PTE_D))) {
+>                   *prot |= PAGE_WRITE;
+>               }
+> +            if ((pte & PTE_U) && (mode & PRV_S) &&
+> +                    get_field(env->mstatus, MSTATUS_SUM)) {
+> +                if (env->sum_u_count < MAX_CACHED_SUM_U_ADDR_NUM) {
+> +                    env->sum_u_addr[env->sum_u_count] = addr;
+> +                }
+> +                ++env->sum_u_count;
+> +            }
+>               return TRANSLATE_SUCCESS;
+>           }
+>       }
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index ab566639e5..74b7638c8a 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1246,9 +1246,21 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>   
+>       /* flush tlb on mstatus fields that affect VM */
+>       if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
+> -            MSTATUS_MPRV | MSTATUS_SUM)) {
+> +            MSTATUS_MPRV)) {
+>           tlb_flush(env_cpu(env));
+> +        env->sum_u_count = 0;
+> +    } else if ((mstatus & MSTATUS_SUM) && !(val & MSTATUS_SUM)) {
+> +        if (env->sum_u_count > MAX_CACHED_SUM_U_ADDR_NUM) {
+> +            tlb_flush(env_cpu(env));
+> +        } else {
+> +            for (int i = 0; i < env->sum_u_count; ++i) {
+> +                tlb_flush_page_by_mmuidx(env_cpu(env), env->sum_u_addr[i],
+> +                                         1 << PRV_S | 1 << PRV_M);
+> +            }
+> +        }
+> +        env->sum_u_count = 0;
+>       }
 
-The buffer size is set to 4 since in this MSTATUS.SUM open-up window,
-most of the time kernel accesses 1 or 2 pages, it's very rare to see
-more than 4 pages accessed.
+Whether tlb should  be flushed when SUM is changed from 0 to 1?
 
-It's not necessary to save/restore these new added status, as
-tlb_flush() is always called after restore.
+Regards,
 
-Result of 'pipe 10' from unixbench boosts from 223656 to 1327407. Many
-other syscalls benefit a lot from this one too.
+Weiwei Li
 
-Signed-off-by: Fei Wu <fei2.wu@intel.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
----
- target/riscv/cpu.h        |  4 ++++
- target/riscv/cpu_helper.c |  7 +++++++
- target/riscv/csr.c        | 14 +++++++++++++-
- 3 files changed, 24 insertions(+), 1 deletion(-)
-
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 638e47c75a..926dbce59f 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -383,6 +383,10 @@ struct CPUArchState {
-     uint64_t kvm_timer_compare;
-     uint64_t kvm_timer_state;
-     uint64_t kvm_timer_frequency;
-+
-+#define MAX_CACHED_SUM_U_ADDR_NUM 4
-+    uint64_t sum_u_count;
-+    uint64_t sum_u_addr[MAX_CACHED_SUM_U_ADDR_NUM];
- };
- 
- OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index f88c503cf4..5ad0418eb6 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -1068,6 +1068,13 @@ restart:
-                     (access_type == MMU_DATA_STORE || (pte & PTE_D))) {
-                 *prot |= PAGE_WRITE;
-             }
-+            if ((pte & PTE_U) && (mode & PRV_S) &&
-+                    get_field(env->mstatus, MSTATUS_SUM)) {
-+                if (env->sum_u_count < MAX_CACHED_SUM_U_ADDR_NUM) {
-+                    env->sum_u_addr[env->sum_u_count] = addr;
-+                }
-+                ++env->sum_u_count;
-+            }
-             return TRANSLATE_SUCCESS;
-         }
-     }
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index ab566639e5..74b7638c8a 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1246,9 +1246,21 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
- 
-     /* flush tlb on mstatus fields that affect VM */
-     if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
--            MSTATUS_MPRV | MSTATUS_SUM)) {
-+            MSTATUS_MPRV)) {
-         tlb_flush(env_cpu(env));
-+        env->sum_u_count = 0;
-+    } else if ((mstatus & MSTATUS_SUM) && !(val & MSTATUS_SUM)) {
-+        if (env->sum_u_count > MAX_CACHED_SUM_U_ADDR_NUM) {
-+            tlb_flush(env_cpu(env));
-+        } else {
-+            for (int i = 0; i < env->sum_u_count; ++i) {
-+                tlb_flush_page_by_mmuidx(env_cpu(env), env->sum_u_addr[i],
-+                                         1 << PRV_S | 1 << PRV_M);
-+            }
-+        }
-+        env->sum_u_count = 0;
-     }
-+
-     mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
-         MSTATUS_SPP | MSTATUS_MPRV | MSTATUS_SUM |
-         MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
--- 
-2.25.1
+> +
+>       mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
+>           MSTATUS_SPP | MSTATUS_MPRV | MSTATUS_SUM |
+>           MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
 
 
