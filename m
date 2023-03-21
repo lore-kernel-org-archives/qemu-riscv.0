@@ -1,48 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1peR9Z-0002Cc-Ru
-	for mharc-qemu-riscv@gnu.org; Mon, 20 Mar 2023 21:51:10 -0400
+	id 1peSOO-0006GE-DG
+	for mharc-qemu-riscv@gnu.org; Mon, 20 Mar 2023 23:10:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1peR9V-00026A-VQ; Mon, 20 Mar 2023 21:51:07 -0400
-Received: from out30-118.freemail.mail.aliyun.com ([115.124.30.118])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1peR9T-0003V3-WC; Mon, 20 Mar 2023 21:51:05 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0VeKxAQ8_1679363457; 
-Received: from 30.221.98.101(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VeKxAQ8_1679363457) by smtp.aliyun-inc.com;
- Tue, 21 Mar 2023 09:50:57 +0800
-Message-ID: <9325d41a-09cd-b790-a4a2-01799190b26c@linux.alibaba.com>
-Date: Tue, 21 Mar 2023 09:50:55 +0800
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1peSOM-0006Fl-Iv; Mon, 20 Mar 2023 23:10:30 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1peSOJ-0003EC-OP; Mon, 20 Mar 2023 23:10:30 -0400
+Received: from [192.168.0.120] (unknown [180.165.240.243])
+ by APP-05 (Coremail) with SMTP id zQCowACnlxQVIBlkKQxEBw--.46239S2;
+ Tue, 21 Mar 2023 11:10:15 +0800 (CST)
+Message-ID: <2e856b86-f454-9e42-9ffa-6a8e029e8984@iscas.ac.cn>
+Date: Tue, 21 Mar 2023 11:10:13 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [PATCH for-8.1 v3 04/26] target/riscv: add PRIV_VERSION_LATEST
+Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+Subject: Re: [PATCH for-8.1 v3 15/26] target/riscv/cpu.c: split RVG code from
+ validate_set_extensions()
 Content-Language: en-US
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, palmer@rivosinc.com,
- Richard Henderson <richard.henderson@linaro.org>
 References: <20230318200436.299464-1-dbarboza@ventanamicro.com>
- <20230318200436.299464-5-dbarboza@ventanamicro.com>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230318200436.299464-5-dbarboza@ventanamicro.com>
+ <20230318200436.299464-16-dbarboza@ventanamicro.com>
+From: liweiwei <liweiwei@iscas.ac.cn>
+In-Reply-To: <20230318200436.299464-16-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.118;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+X-CM-TRANSID: zQCowACnlxQVIBlkKQxEBw--.46239S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxJF4UKFWkCFy3tF18Xr4rAFb_yoWrGw1Dpr
+ WUC39IyryDJF47X393Xr98KFn5Wr4kWayIg3s3W3W3WFs8tr9rJF1qkw1j9FW8JFZ5Xa1a
+ vFyUKFyDursrAa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkm14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
+ Y487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
+ 0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
+ 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
+ WUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
+ IxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUoOJ5UUUUU
+X-Originating-IP: [180.165.240.243]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -55,83 +67,135 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Mar 2023 01:51:08 -0000
+X-List-Received-Date: Tue, 21 Mar 2023 03:10:31 -0000
 
 
-On 2023/3/19 4:04, Daniel Henrique Barboza wrote:
-> All these generic CPUs are using the latest priv available, at this
-> moment PRIV_VERSION_1_12_0:
+On 2023/3/19 04:04, Daniel Henrique Barboza wrote:
+> We can set all RVG related extensions during realize time, before
+> validate_set_extensions() itself. Put it in a separated function so the
+> validate function already uses the updated state.
 >
-> - riscv_any_cpu_init()
-> - rv32_base_cpu_init()
-> - rv64_base_cpu_init()
-> - rv128_base_cpu_init()
+> Note that we're adding an extra constraint: ext_zfinx is a blocker for
+> F, which is a requirement to enable G. If zfinx is enabled we'll have to
+> error out.
 >
-> Create a new PRIV_VERSION_LATEST enum and use it in those cases. I'll
-> make it easier to update everything at once when a new priv version is
-> available.
+> Note that we're setting both cfg->ext_N and env->misa_ext bits, instead
+> of just setting cfg->ext_N. The intention here is to start syncing all
+> misa_ext operations with its cpu->cfg flags, in preparation to allow for
+> the validate function to operate using a misa_ext. This doesn't make any
+> difference for the current code state, but will be a requirement for
+> write_misa() later on.
 >
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->   target/riscv/cpu.c | 8 ++++----
->   target/riscv/cpu.h | 2 ++
->   2 files changed, 6 insertions(+), 4 deletions(-)
+>   target/riscv/cpu.c | 66 +++++++++++++++++++++++++++++++++++-----------
+>   1 file changed, 51 insertions(+), 15 deletions(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 18032dfd4e..1ee322001b 100644
+> index 48ad7372b9..110b52712c 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -338,7 +338,7 @@ static void riscv_any_cpu_init(Object *obj)
->                                       VM_1_10_SV32 : VM_1_10_SV57);
->   #endif
->   
-> -    env->priv_ver = PRIV_VERSION_1_12_0;
-> +    env->priv_ver = PRIV_VERSION_LATEST;
->       register_cpu_props(obj);
+> @@ -281,6 +281,42 @@ static uint32_t riscv_get_misa_ext_with_cpucfg(RISCVCPUConfig *cfg)
+>       return ext;
 >   }
 >   
-> @@ -350,7 +350,7 @@ static void rv64_base_cpu_init(Object *obj)
->       set_misa(env, MXL_RV64, 0);
->       register_cpu_props(obj);
->       /* Set latest version of privileged specification */
-> -    env->priv_ver = PRIV_VERSION_1_12_0;
-> +    env->priv_ver = PRIV_VERSION_LATEST;
->   #ifndef CONFIG_USER_ONLY
->       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
->   #endif
-> @@ -426,7 +426,7 @@ static void rv128_base_cpu_init(Object *obj)
->       set_misa(env, MXL_RV128, 0);
->       register_cpu_props(obj);
->       /* Set latest version of privileged specification */
-> -    env->priv_ver = PRIV_VERSION_1_12_0;
-> +    env->priv_ver = PRIV_VERSION_LATEST;
->   #ifndef CONFIG_USER_ONLY
->       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
->   #endif
-> @@ -439,7 +439,7 @@ static void rv32_base_cpu_init(Object *obj)
->       set_misa(env, MXL_RV32, 0);
->       register_cpu_props(obj);
->       /* Set latest version of privileged specification */
-> -    env->priv_ver = PRIV_VERSION_1_12_0;
-> +    env->priv_ver = PRIV_VERSION_LATEST;
->   #ifndef CONFIG_USER_ONLY
->       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV32);
->   #endif
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 638e47c75a..76f81c6b68 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -88,6 +88,8 @@ enum {
->       PRIV_VERSION_1_10_0 = 0,
->       PRIV_VERSION_1_11_0,
->       PRIV_VERSION_1_12_0,
+> +static void riscv_cpu_enable_g(RISCVCPU *cpu, Error **errp)
+> +{
+> +    CPURISCVState *env = &cpu->env;
+> +    RISCVCPUConfig *cfg = &cpu->cfg;
 > +
-> +    PRIV_VERSION_LATEST = PRIV_VERSION_1_12_0,
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> +    if (cpu->cfg.ext_zfinx) {
+> +        error_setg(errp, "Unable to enable G: Zfinx is enabled, "
+> +                         "so F can not be enabled");
+> +        return;
+> +    }
 
-Zhiwei
->   };
+This check is not very necessary here, since check Zfinx against F will 
+be done in following code.
+
+Regards,
+
+Weiwei Li
+
+> +
+> +    if (!(cfg->ext_i && cfg->ext_m && cfg->ext_a &&
+> +          cfg->ext_f && cfg->ext_d &&
+> +          cfg->ext_icsr && cfg->ext_ifencei)) {
+> +
+> +        warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
+> +        cfg->ext_i = true;
+> +        env->misa_ext |= RVI;
+> +
+> +        cfg->ext_m = true;
+> +        env->misa_ext |= RVM;
+> +
+> +        cfg->ext_a = true;
+> +        env->misa_ext |= RVA;
+> +
+> +        cfg->ext_f = true;
+> +        env->misa_ext |= RVF;
+> +
+> +        cfg->ext_d = true;
+> +        env->misa_ext |= RVD;
+> +
+> +        cfg->ext_icsr = true;
+> +        cfg->ext_ifencei = true;
+> +    }
+> +}
+> +
+>   static void riscv_set_cpucfg_with_misa(RISCVCPUConfig *cfg,
+>                                          uint32_t misa_ext)
+>   {
+> @@ -1036,21 +1072,6 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>           return;
+>       }
 >   
->   #define VEXT_VERSION_1_00_0 0x00010000
+> -    /* Do some ISA extension error checking */
+> -    if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
+> -                            cpu->cfg.ext_a && cpu->cfg.ext_f &&
+> -                            cpu->cfg.ext_d &&
+> -                            cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
+> -        warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
+> -        cpu->cfg.ext_i = true;
+> -        cpu->cfg.ext_m = true;
+> -        cpu->cfg.ext_a = true;
+> -        cpu->cfg.ext_f = true;
+> -        cpu->cfg.ext_d = true;
+> -        cpu->cfg.ext_icsr = true;
+> -        cpu->cfg.ext_ifencei = true;
+> -    }
+> -
+>       if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
+>           error_setg(errp,
+>                      "I and E extensions are incompatible");
+> @@ -1293,6 +1314,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>       CPUState *cs = CPU(dev);
+>       RISCVCPU *cpu = RISCV_CPU(dev);
+>       RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+> +    CPURISCVState *env = &cpu->env;
+>       Error *local_err = NULL;
+>   
+>       cpu_exec_realizefn(cs, &local_err);
+> @@ -1313,6 +1335,20 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>           return;
+>       }
+>   
+> +    if (cpu->cfg.ext_g) {
+> +        riscv_cpu_enable_g(cpu, &local_err);
+> +        if (local_err != NULL) {
+> +            error_propagate(errp, local_err);
+> +            return;
+> +        }
+> +
+> +        /*
+> +         * Sync env->misa_ext_mask with the new
+> +         * env->misa_ext val.
+> +         */
+> +        env->misa_ext_mask = env->misa_ext;
+> +    }
+> +
+>       riscv_cpu_validate_set_extensions(cpu, &local_err);
+>       if (local_err != NULL) {
+>           error_propagate(errp, local_err);
+
 
