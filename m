@@ -1,69 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pf75a-0007Ds-CQ
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 18:37:50 -0400
+	id 1pf7HX-00085S-DI
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 18:50:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pf75Z-0007Dj-BZ
- for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:37:49 -0400
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
+ id 1pf7HV-00085F-JE
+ for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:50:09 -0400
+Received: from mail-yw1-x112d.google.com ([2607:f8b0:4864:20::112d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pf75H-0007h7-3S
- for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:37:49 -0400
-Received: by mail-pj1-x102f.google.com with SMTP id
- h12-20020a17090aea8c00b0023d1311fab3so144782pjz.1
- for <qemu-riscv@nongnu.org>; Wed, 22 Mar 2023 15:37:30 -0700 (PDT)
+ id 1pf7HU-000216-1T
+ for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:50:09 -0400
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-544b959a971so330698077b3.3
+ for <qemu-riscv@nongnu.org>; Wed, 22 Mar 2023 15:50:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1679524603;
+ d=ventanamicro.com; s=google; t=1679525406;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BwzFze6i9LF5NLZ7SPHJQ/+EluN5wBR39ZnMalzotlU=;
- b=aSyy7G+L4qa8uf3W0fPzmOiTaU9MLNwwpuV+/Og2rwPZYvyEw49Ucstj5Z/GSxm3ZZ
- +bBxHypML9NsHxe67+UikhgLtrXqM2bvyn5ZGNaWNO66TVK7qYfYj9z9LO6mkaXKxyp6
- +qs1OnUx/wSGy56Z7OyNdEWKRbxffanSwKvSjcyYecLUUIiu1yA250P8FZGeMyqda2Vt
- FCh3uwP17yKTLWWPimJt3sm4VaS/i9OhyBRG6f5pJOsxSlZfjOPI/5ZT/R2U6B0HS0Yw
- 5wGgnvi4WiPmjAEFO4alDsiAMBrOxwJQ7W2TIYPLubI08CukqC6l6XG+ed1Yt1TvCHkW
- a47Q==
+ bh=gSRdDD81e7A1PCiuRYEMqVD92dtWZhXv26NfXfSATYc=;
+ b=Zezz9YRg83vUvMMBQs13M8TxS7ZYnTGU+m+1m/xZo4DLeqwRkYbCp3tRBT0j4n77Q3
+ 9bZ70e1b4MRZD5auDjfYtZET4AKlwquOQPnbyRYctMYRpsAtfiUYuhgHmP8QR/j7UeJk
+ 7dlELwupwLYwI/koZPygKnBOYjjoTXA3eXc0YWRqO4ARq6RPbxfcEBWJ44A1RXbWq20P
+ dOWoHm2srTBinwRxdeR0ja+TcxqlpuHPcvKe2uvLJQnNCfLbt1WY/4gp9BSmK3FeOxec
+ HAOau131vrq5AUJUjT2Dj3+8Khk/eR4ibx1eST/DiLqBK0nr2gYTI435C2ekHoiyLPuq
+ jJWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679524603;
+ d=1e100.net; s=20210112; t=1679525406;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BwzFze6i9LF5NLZ7SPHJQ/+EluN5wBR39ZnMalzotlU=;
- b=MuVsp5KntAoDDlfIfOudGn/XXPEDfPib9vUp/6Lk7NlOUdIDfThSxXIKc6f/Han64h
- eeQJXFVHXr/mXwZPMDLPafwDxR3+cnB2FOqUucxoAOzah2UX6AwTAhfN1H2qTWifSljH
- /LeiWGNUSmDX1vqAp+zzKjY4Q1fHDYLFzok84gC5zLLcD433O7JVoSa1K5+UM9Dvn261
- Ha7CJGcR8neie+XUnFKpmIxAKqOwqLTHpUFFUdktHBdwJtibGUQMQJUghwyguH00nohv
- gO8Ill3U0G9KBsO5n1iRjxApuAqqc8jX8eazkWBiZttCrm/cvpMkg6PAwKZIb2MQNu0I
- PHqA==
-X-Gm-Message-State: AO0yUKUu0VQgmNAO7l/jc3llDg3tk3OMWqqNjBVdf06O3NdYAFFctr6Y
- 92Eg3ViwYo9LoW9yh28OLla82cLs+ty49KusT3U=
-X-Google-Smtp-Source: AKy350ZydfC8A8L4qtc8RDIfp2m00RMW8ls4na6hL+QPsvtXlkBqXUqCG/4wx9/F9+brCsM0o7j3nA==
-X-Received: by 2002:a05:6870:5806:b0:17a:a2ba:9032 with SMTP id
- r6-20020a056870580600b0017aa2ba9032mr859890oap.3.1679523678241; 
- Wed, 22 Mar 2023 15:21:18 -0700 (PDT)
+ bh=gSRdDD81e7A1PCiuRYEMqVD92dtWZhXv26NfXfSATYc=;
+ b=jzlSXsOUKt0+gXpbOr7I2D5DTBsjYE87piJgyJ5bU6W//rCdnMODalqbHI+QLj5YVk
+ CfPRaCVclDBCDrXtRoFVsH6A0VfkExnyEU8OO5TmLBYsRQ9zIrKDyQ3jhJiVwMPgwT4L
+ Qw56XCPceG/C0wK1hVhZqWmdyh0MImGtlMMER+HAjHnJznhoqdZHM3H7Veu9kiz1pA+Y
+ gPmXLPo8U8Hs6W8sMzu7wNed1HKHWeyoGQItrvzGXeqsq6tQs0enGd5y9e+jZZxAJhlF
+ VRjrAFG0XaYIqqmzSde1gHkaA74BMYtmwrgL/DcTiaAgGFgekWhaoUxsqMShbDDOsakp
+ k4IQ==
+X-Gm-Message-State: AAQBX9fu5GmutJvMshZRF06pgZtNPxSwzW2X2FtwgXArLbutney5t5o1
+ ucivPamunMrVLTQcsUobGNB0xSl1+mWa1cS726c=
+X-Google-Smtp-Source: AK7set9bbwcE9m9O1sjfaI5cMsBtmUH6pAgsYqzJuP7tKvD7RSUUk34t53xuVLXbIeZmcM5G1zXiKw==
+X-Received: by 2002:a05:6870:c0d5:b0:172:48e:b8c4 with SMTP id
+ e21-20020a056870c0d500b00172048eb8c4mr601841oad.17.1679523665259; 
+ Wed, 22 Mar 2023 15:21:05 -0700 (PDT)
 Received: from grind.. ([177.95.89.231]) by smtp.gmail.com with ESMTPSA id
- ax35-20020a05687c022300b0017243edbe5bsm5586817oac.58.2023.03.22.15.21.15
+ ax35-20020a05687c022300b0017243edbe5bsm5586817oac.58.2023.03.22.15.21.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Mar 2023 15:21:17 -0700 (PDT)
+ Wed, 22 Mar 2023 15:21:04 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-8.1 v4 18/25] target/riscv: error out on priv failure for
- RVH
-Date: Wed, 22 Mar 2023 19:19:57 -0300
-Message-Id: <20230322222004.357013-19-dbarboza@ventanamicro.com>
+Subject: [PATCH for-8.1 v4 14/25] target/riscv: add RVG
+Date: Wed, 22 Mar 2023 19:19:53 -0300
+Message-Id: <20230322222004.357013-15-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230322222004.357013-1-dbarboza@ventanamicro.com>
 References: <20230322222004.357013-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-yw1-x112d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,52 +82,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Mar 2023 22:37:49 -0000
+X-List-Received-Date: Wed, 22 Mar 2023 22:50:09 -0000
 
-riscv_cpu_disable_priv_spec_isa_exts(), at the end of
-riscv_cpu_validate_set_extensions(), will disable cpu->cfg.ext_h and
-cpu->cfg.ext_v if priv_ver check fails.
+The 'G' bit in misa_ext is a virtual extension that enables a set of
+extensions (i, m, a, f, d, icsr and ifencei). We're already have code to
+handle it but no bit definition. Add it.
 
-This check can be done in riscv_cpu_validate_misa_ext(). The difference
-here is that we're not silently disable it: we'll error out. Silently
-disabling a MISA extension after all the validation is completed can can
-cause inconsistencies that we don't have to deal with. Verify ealier and
-fail faster.
-
-Note that we're ignoring RVV priv_ver validation since its minimal priv
-is also the minimal value we support. RVH will error out if enabled
-under priv_ver under 1_12_0.
+Add RVG to set_misa() in rv64_thead_c906_cpu_init() and remove the
+manual cpu->cfg.ext_g assignment while we're at it.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/cpu.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ target/riscv/cpu.c | 8 ++++++--
+ target/riscv/cpu.h | 1 +
+ 2 files changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 399f63b42f..d2eb2b3ba1 100644
+index c4f18d0436..f41888baa0 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1055,6 +1055,20 @@ static void riscv_cpu_validate_misa_ext(RISCVCPU *cpu, Error **errp)
-         return;
+@@ -274,6 +274,9 @@ static uint32_t riscv_get_misa_ext_with_cpucfg(RISCVCPUConfig *cfg)
+     if (cfg->ext_j) {
+         ext |= RVJ;
      }
- 
-+    /*
-+     * Check for priv spec version. RVH is 1_12_0, RVV is 1_10_0.
-+     * We don't support anything under 1_10_0 so skip checking
-+     * priv for RVV.
-+     *
-+     * We're hardcoding it here to avoid looping into the
-+     * 50+ entries of isa_edata_arr[] just to check the RVH
-+     * entry.
-+     */
-+    if (cpu->cfg.ext_h && env->priv_ver < PRIV_VERSION_1_12_0) {
-+        error_setg(errp, "H extension requires priv spec 1.12.0");
-+        return;
++    if (cfg->ext_g) {
++        ext |= RVG;
 +    }
-+
-     if (cpu->cfg.ext_v) {
-         riscv_cpu_validate_v(env, &cpu->cfg, &local_err);
-         if (local_err != NULL) {
+ 
+     return ext;
+ }
+@@ -293,6 +296,7 @@ static void riscv_set_cpucfg_with_misa(RISCVCPUConfig *cfg,
+     cfg->ext_u = misa_ext & RVU;
+     cfg->ext_h = misa_ext & RVH;
+     cfg->ext_j = misa_ext & RVJ;
++    cfg->ext_g = misa_ext & RVG;
+ }
+ 
+ static void set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext)
+@@ -474,10 +478,10 @@ static void rv64_thead_c906_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     RISCVCPU *cpu = RISCV_CPU(obj);
+ 
+-    set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
++    set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD |
++                            RVC | RVS | RVU | RVG);
+     env->priv_ver = PRIV_VERSION_1_11_0;
+ 
+-    cpu->cfg.ext_g = true;
+     cpu->cfg.ext_icsr = true;
+     cpu->cfg.ext_zfh = true;
+     cpu->cfg.mmu = true;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 2263629332..dbb4df9df0 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -82,6 +82,7 @@
+ #define RVU RV('U')
+ #define RVH RV('H')
+ #define RVJ RV('J')
++#define RVG RV('G')
+ 
+ 
+ /* Privileged specification version */
 -- 
 2.39.2
 
