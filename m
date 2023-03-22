@@ -1,74 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pf2Qz-00036K-Mn
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 13:39:38 -0400
+	id 1pf2Te-0004JW-QG
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 13:42:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pf2Qx-00033r-IY
- for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 13:39:35 -0400
-Received: from mail-oo1-xc2a.google.com ([2607:f8b0:4864:20::c2a])
+ id 1pf2Td-0004Ir-EC
+ for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 13:42:21 -0400
+Received: from mail-ot1-x32c.google.com ([2607:f8b0:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pf2Qu-0003om-RR
- for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 13:39:35 -0400
-Received: by mail-oo1-xc2a.google.com with SMTP id
- r8-20020a4aa8c8000000b0053b6fd7bc8dso471165oom.4
- for <qemu-riscv@nongnu.org>; Wed, 22 Mar 2023 10:39:31 -0700 (PDT)
+ id 1pf2Tb-0005Pv-Ls
+ for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 13:42:21 -0400
+Received: by mail-ot1-x32c.google.com with SMTP id
+ f19-20020a9d5f13000000b00693ce5a2f3eso10778238oti.8
+ for <qemu-riscv@nongnu.org>; Wed, 22 Mar 2023 10:42:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1679506771;
+ d=ventanamicro.com; s=google; t=1679506938;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=o5SGHt2pNVBSG4O9B41KYK7FkKF8/pLqu6XCpz2C7+M=;
- b=gyBd7oQR/d0A61jMHOl4ajWl/tNoTDaf2tcsDlMu/rpH4FLxx6nJboyIY+2d2lRPBP
- VHh+kfDLtHUQptlj0Jq0bpQ1vlMjJvGRa4e5efos/b4MU/U4i84tLGb2t9nQBtopUL46
- 3/lmfhPOamGYXdLk8yAY+4teO4DOQ4iOC+L0Cbe2mAHtfIaFeMlp9S4KPFPyVmn0jisC
- PbolmV5rDSAsmuUFnXcn1RWeaXyHdSXO62qoScrebn9l6ZgChxQr9Jbd1rxQ0/1wxYo6
- LO7NNokYBFCXJ3N9pEucbVJQcpt78ImftKcOx8oOxqPEYSGZuOzSiuLE93H1XgLWcISG
- uPtQ==
+ bh=RDyV+Y7yDfJhNrZM42Ef7vcPA4XPXVQGeUQGeCKrZhE=;
+ b=JQYwPYsiSQKz0jo6xmNeTFftuMQgZ6cUSh2bjv3KddQ4ZICmHtyMIoA2Rr9j61xvEH
+ iv4M7s+UsqZTrZQKvPtrSPFvbg9Q+FfCNVINvf7oXKUNrGMUGIDskHAORJK0e3Cv5oHI
+ AJEPTmjR6Yvp7wAYwatWNFnZPnLkNNXRItr9Dhz8BhEWeeTWjv29/nfFpwQbpnZEq2jG
+ Lm/LnCz31gn0FD+sPNgawUsfPxALHLJEs7c0G8tLr20bQFVtTnvngXEeNjP2lKvDIpB3
+ FVQqjLH7k2ppG41gimqF7PVArjzXO51Gk0BLXH/oQeS57NPX5AqAsRl22o40P0XuF8bs
+ caxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679506771;
+ d=1e100.net; s=20210112; t=1679506938;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=o5SGHt2pNVBSG4O9B41KYK7FkKF8/pLqu6XCpz2C7+M=;
- b=VddduxpN59lEBhkOJ7KaIG1kOU6JA1qctxxgqaPnEB/mq4zeycnJOu6e/6e9uHn6Xg
- 6X0J9yZ5c4OUABjEOPxHls1I1HPzowH/vivudzsmH6/8KiRbakpMzRrF+odUIfAO69gh
- oVMEXdQ2Yh3K6BZIf4+76hjN/T6ViO7LO/XmBBewa7ryFzpVj7c4Xs4udmTu/xU85id+
- hgk8kOMzELVVLVrG8GCp5ILaUc6+L6+A+VVG3+BpDl+QgSQGT/zJn9mmroaEwoe/x3CI
- ySN52uVOBgtOAKreAi2wr4fIlSetKmwM+FtCHCnH+pDOD9sGtolfUXEFXYsgbl9GOM8N
- iUhA==
-X-Gm-Message-State: AO0yUKXCuV7lqZ3DX4H6hlg4mukdXlU4+vvJIEwE5BJqzd0YfyHi9NF7
- S6NdjLA6tP6j34x95kMQN++efg==
-X-Google-Smtp-Source: AK7set89Nlk5V1aEZDKteL0LaWfkL8giyVcN9LmefmvEergHubirByF3EqjweriHSNnHvddKSRrQUw==
-X-Received: by 2002:a4a:94a1:0:b0:538:b486:3414 with SMTP id
- k30-20020a4a94a1000000b00538b4863414mr1651141ooi.6.1679506770930; 
- Wed, 22 Mar 2023 10:39:30 -0700 (PDT)
+ bh=RDyV+Y7yDfJhNrZM42Ef7vcPA4XPXVQGeUQGeCKrZhE=;
+ b=sFfcmtcNt0pBXOMM7PGLDsCcQ0zgR4hpZijG4keKSMi7Yryq94ZXOp/drML8hH0ryp
+ Lay1VyXO2zgRDrZwNJwiqVnAUBHYVmZYrDW2PI35hFan+auFBrFdDI46FJXdDiEeEp2S
+ ckD4dG3B3nR96sw2z9QavMcVMmhJdYEIY2mDO6iN9vjjXC7OhJouNKzRLStMvKEOr9wW
+ KDjIq6Se0bFPRoHXmoFIUH4Kx9W3vFckznt+d0qvWyCWz92jklrz469AzOQCdKK0deqG
+ CYnqa5t/rhzQkh/BfqU7dQZdhUGYIUYXkGObp08+rB70KgSid5FQPlblfq4MRIKi2Rmq
+ /VWA==
+X-Gm-Message-State: AO0yUKWHdlzcDHwOO/v+OkrTGQ3aHc9E1gsC0/lXpD0+mHRLseRWxNVh
+ VSvAyh6XGFbTYeF01CHqmMHoOQ==
+X-Google-Smtp-Source: AK7set8wLhDBUtmVgm0GWfXr4TQB0IpLYXBtgAFgaG4f/nrahudgwGvYJ9kD5d89pIzw84MF0mD4RQ==
+X-Received: by 2002:a05:6830:1411:b0:69f:3a6:dffb with SMTP id
+ v17-20020a056830141100b0069f03a6dffbmr1799926otp.24.1679506938260; 
+ Wed, 22 Mar 2023 10:42:18 -0700 (PDT)
 Received: from [192.168.68.107] ([177.95.89.231])
  by smtp.gmail.com with ESMTPSA id
- 129-20020a4a1887000000b005252d376caesm6311410ooo.22.2023.03.22.10.39.28
+ x13-20020a056830114d00b0069dc250cb24sm934552otq.3.2023.03.22.10.42.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Mar 2023 10:39:30 -0700 (PDT)
-Message-ID: <ac803957-8283-058b-e5b3-17d8f4edc8b5@ventanamicro.com>
-Date: Wed, 22 Mar 2023 14:39:26 -0300
+ Wed, 22 Mar 2023 10:42:17 -0700 (PDT)
+Message-ID: <dcc3ce9a-3714-05c5-c751-ad2f8f8803ff@ventanamicro.com>
+Date: Wed, 22 Mar 2023 14:42:14 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: [PATCH for-8.1 v3 26/26] target/riscv: allow write_misa() to
- enable RVV
+Subject: Re: [PATCH for-8.1 v3 25/26] target/riscv: allow write_misa() to
+ enable RVG
 Content-Language: en-US
 To: liweiwei <liweiwei@iscas.ac.cn>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
 References: <20230318200436.299464-1-dbarboza@ventanamicro.com>
- <20230318200436.299464-27-dbarboza@ventanamicro.com>
- <c8f3683c-24b8-ef46-b074-aabeee98e0ec@iscas.ac.cn>
+ <20230318200436.299464-26-dbarboza@ventanamicro.com>
+ <8b219f0e-cfd8-390e-405c-2fd9b1e784b5@iscas.ac.cn>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <c8f3683c-24b8-ef46-b074-aabeee98e0ec@iscas.ac.cn>
+In-Reply-To: <8b219f0e-cfd8-390e-405c-2fd9b1e784b5@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -88,148 +88,118 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Mar 2023 17:39:36 -0000
+X-List-Received-Date: Wed, 22 Mar 2023 17:42:21 -0000
 
 
 
-On 3/21/23 00:41, liweiwei wrote:
+On 3/21/23 00:25, liweiwei wrote:
 > 
 > On 2023/3/19 04:04, Daniel Henrique Barboza wrote:
->> Allow write_misa() to enable RVV like we did with RVG. We'll need a
->> riscv_cpu_enable_v() to enable all related misa bits and Z extensions.
->> This new helper validates the existing 'env' conf by using the existing
->> riscv_cpu_validate_v(). We'll also check if we'll be able to enable 'F'
->> by checking for ext_zfinx.
+>> Allow write_misa() to enable RVG by changing riscv_cpu_enable_g()
+>> slighty: instead of returning void, return the current env->misa_ext
+>> value. This is then retrieved by 'val', which will add the RVG flag
+>> itself, and then we'll skip validation and go right into commiting the
+>> changes.
 >>
->> As with RVG, enabling RVV is considered to be a standalone operation in
->> write_misa(). This means that we'll guarantee that we're not being
->> inconsistent in riscv_cpu_enable_v() and that we're okay with skipping
->> regular validation.
+>> The reason why it's ok to skip validation in this case is because we're
+>> only allowing RVG (and its associated extensions/Z extensions) to be
+>> enabled in the hart, and riscv_cpu_enable_g() already does its own
+>> validation before enabling itself. Everything else is considered to be
+>> already validated beforehand, so we don't need to repeat ourselves.
 >>
 >> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 >> ---
->>   target/riscv/cpu.c | 35 +++++++++++++++++++++++++++++++++++
->>   target/riscv/cpu.h |  1 +
->>   target/riscv/csr.c | 14 ++++++++++++++
->>   3 files changed, 50 insertions(+)
+>>   target/riscv/cpu.c |  7 +++++--
+>>   target/riscv/cpu.h |  2 ++
+>>   target/riscv/csr.c | 15 +++++++++++++++
+>>   3 files changed, 22 insertions(+), 2 deletions(-)
 >>
 >> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 73a5fa46ee..9c16b29f27 100644
+>> index 2d2a354af3..73a5fa46ee 100644
 >> --- a/target/riscv/cpu.c
 >> +++ b/target/riscv/cpu.c
->> @@ -983,6 +983,41 @@ static void riscv_cpu_validate_v(CPURISCVState *env,
->>       env->vext_ver = vext_version;
+>> @@ -281,7 +281,8 @@ static uint32_t riscv_get_misa_ext_with_cpucfg(RISCVCPUConfig *cfg)
+>>       return ext;
 >>   }
->> +target_ulong riscv_cpu_enable_v(RISCVCPU *cpu, Error **errp)
->> +{
->> +    CPURISCVState *env = &cpu->env;
->> +    RISCVCPUConfig *cfg = &cpu->cfg;
->> +    Error *local_err = NULL;
+>> -static void riscv_cpu_enable_g(RISCVCPU *cpu, Error **errp)
 >> +
->> +    riscv_cpu_validate_v(env, cfg, &local_err);
->> +    if (local_err != NULL) {
->> +        error_propagate(errp, local_err);
->> +        return 0;
->> +    }
-> 
-> This check is not necessary, we call this function only when we enable v by write_misa, which also have a prerequisite:
-> 
-> V is enabled at the very first. So this check will always be true, since the parameter for vector cannot be changed dynamically.
-> 
-> Similar to following check.
-> 
->> +
->> +    if (cpu->cfg.ext_zfinx) {
->> +        error_setg(errp, "Unable to enable V: Zfinx is enabled, "
->> +                         "so F can not be enabled");
->> +        return 0;
->> +    }
->> +
->> +    cfg->ext_f = true;
->> +    env->misa_ext |= RVF;
->> +
->> +    cfg->ext_d = true;
->> +    env->misa_ext |= RVD;
-> 
-> We do check V against F/D at first. Why we do this when enable V?
-> 
-> And if we do this,  whether we should also enable F when enable D?
-> 
-> 
->> +
->> +    /*
->> +     * The V vector extension depends on the
->> +     *  Zve32f, Zve64f and Zve64d extensions.
->> +     */
->> +    cpu->cfg.ext_zve64d = true;
->> +    cpu->cfg.ext_zve64f = true;
->> +    cpu->cfg.ext_zve32f = true;
-> 
-> This is right, but not necessary in current implementation, since they will not be disabled when we disable V.
-> 
-> So we needn't enable them when we re-enable V.
-> 
->> +
->> +    return env->misa_ext;
->> +}
->> +
->>   static void riscv_cpu_validate_priv_spec(RISCVCPU *cpu, Error **errp)
+>> +target_ulong riscv_cpu_enable_g(RISCVCPU *cpu, Error **errp)
 >>   {
 >>       CPURISCVState *env = &cpu->env;
+>>       RISCVCPUConfig *cfg = &cpu->cfg;
+>> @@ -289,7 +290,7 @@ static void riscv_cpu_enable_g(RISCVCPU *cpu, Error **errp)
+>>       if (cpu->cfg.ext_zfinx) {
+>>           error_setg(errp, "Unable to enable G: Zfinx is enabled, "
+>>                            "so F can not be enabled");
+>> -        return;
+>> +        return 0;
+>>       }
+>>       if (!(cfg->ext_i && cfg->ext_m && cfg->ext_a &&
+>> @@ -315,6 +316,8 @@ static void riscv_cpu_enable_g(RISCVCPU *cpu, Error **errp)
+>>           cfg->ext_icsr = true;
+>>           cfg->ext_ifencei = true;
+>>       }
+>> +
+>> +    return env->misa_ext;
+>>   }
+>>   static void riscv_set_cpucfg_with_misa(RISCVCPUConfig *cfg,
 >> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index 3ca1d4903c..45e801d926 100644
+>> index befc3b8fff..3ca1d4903c 100644
 >> --- a/target/riscv/cpu.h
 >> +++ b/target/riscv/cpu.h
->> @@ -600,6 +600,7 @@ void riscv_cpu_validate_extensions(RISCVCPU *cpu, uint32_t misa_ext,
+>> @@ -599,6 +599,8 @@ void riscv_cpu_validate_extensions(RISCVCPU *cpu, uint32_t misa_ext,
+>>                                      Error **errp);
 >>   void riscv_cpu_commit_cpu_cfg(RISCVCPU *cpu, uint32_t misa_ext);
->>   target_ulong riscv_cpu_enable_g(RISCVCPU *cpu, Error **errp);
->> +target_ulong riscv_cpu_enable_v(RISCVCPU *cpu, Error **errp);
+>> +target_ulong riscv_cpu_enable_g(RISCVCPU *cpu, Error **errp);
+>> +
 >>   #define cpu_list riscv_cpu_list
 >>   #define cpu_mmu_index riscv_cpu_mmu_index
 >> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index 4335398c19..e9e1afc57e 100644
+>> index 839862f1a8..4335398c19 100644
 >> --- a/target/riscv/csr.c
 >> +++ b/target/riscv/csr.c
->> @@ -1395,6 +1395,20 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
->>           goto commit;
+>> @@ -1381,6 +1381,20 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
+>>           val &= RVE;
 >>       }
->> +    if (val & RVV && !(env->misa_ext & RVV)) {
+>> +    if (val & RVG && !(env->misa_ext & RVG)) {
 >> +        /*
->> +         * If the write wants to enable RVV, only RVV and
+>> +         * If the write wants to enable RVG, only RVG and
 >> +         * its dependencies will be updated in the CSR.
 >> +         */
->> +        val = riscv_cpu_enable_v(cpu, &local_err);
+>> +        val = riscv_cpu_enable_g(cpu, &local_err);
 >> +        if (local_err != NULL) {
 >> +            return RISCV_EXCP_NONE;
 >> +        }
 >> +
->> +        val |= RVV;
->> +        goto commit;
->> +    }
->> +
+>> +        val |= RVG;
 > 
-> So, I think we can just treat V as common extension, and do nothing additionally for disabling/re-enabling it.
+> This assignment is not necessary, since RVG is already set in val.
+> 
+> By the way, RVG is still not disabled if any some of included extensions are disabled by write_misa.
 
-In fact I think the same can be said about RVG, since both extensions - and in fact,
-all extensions - would have to be enabled once during cpu_init() anyway. If not,
-env->misa_ext_mask wouldn't allow it be enabled in write_misa() time later on.
-
-I believe I've over-complicated things a bit in these last patches. I'll simplify
-things in v4.
-
-
-Thanks,
+I'll include this use case in v4. And I'll also treat RVG as a regular extension since
+all checks were already done in realize() time.
 
 
 Daniel
+
 
 > 
 > Regards,
 > 
 > Weiwei Li
 > 
+>> +        goto commit;
+>> +    }
+>> +
 >>       /*
 >>        * This flow is similar to what riscv_cpu_realize() does,
 >>        * with the difference that we will update env->misa_ext
+>> @@ -1396,6 +1410,7 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
+>>           return RISCV_EXCP_NONE;
+>>       }
+>> +commit:
+>>       riscv_cpu_commit_cpu_cfg(cpu, val);
+>>       if (!(val & RVF)) {
 > 
 
