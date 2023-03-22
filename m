@@ -1,69 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pf6vQ-0006hn-6P
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 18:27:20 -0400
+	id 1pf6wn-0006j1-EI
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 18:28:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pf6vP-0006hc-2i
- for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:27:19 -0400
-Received: from mail-yw1-x1129.google.com ([2607:f8b0:4864:20::1129])
+ id 1pf6wh-0006ig-9O
+ for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:28:39 -0400
+Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pf6ug-0006qK-HK
- for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:27:17 -0400
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5445009c26bso363723267b3.8
- for <qemu-riscv@nongnu.org>; Wed, 22 Mar 2023 15:26:33 -0700 (PDT)
+ id 1pf6wI-0006vL-GX
+ for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:28:36 -0400
+Received: by mail-ot1-x32d.google.com with SMTP id
+ k14-20020a056830150e00b0069f156d4ce9so6613137otp.6
+ for <qemu-riscv@nongnu.org>; Wed, 22 Mar 2023 15:28:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1679523982;
+ d=ventanamicro.com; s=google; t=1679524092;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9QVfQLLS1pRC6IGhHQ3GM79qE9kCVzjnkNPykrFgYP8=;
- b=gAdVm1mk5VoyJ+y57AWqIAqcg5yBu67/X8bOHpKALRaNEvUYdc69XHFV9nHCSQ6d9s
- n5+V2vHWX54mIpW8Ld7QERBXKhKjUQUcIU++ReXZgm9Xp1oCw+Td/5uAYtzrIPFlmN8m
- z7Q8jAC8hAHHPGilW1tWR5My2PohBjLkY5A3R6FRC1yUcckWgOIVnsPANM9csWnZOiVP
- xMi7ZfgBTFMil7ZYsQpEWg/Q3u3fdsIQWF49uLNNAp68NCMiRpcMmcCoMeSglhUSUHtM
- FVjC85gc5CjDHmSC+5W5yHyatVxFJRUqLlAlfbIiBmsLneTd07mJHJ6Ys5HRL8eTRcEr
- tldg==
+ bh=U7gzbVQ+ppMikngAzfGlNY7kDwQC9s27/btZylqBq0w=;
+ b=RnFqvZo+oN4kEkJcMgABU2tpy1SCldvIlcFY1lszWlivDM2ni1PmC5G7cp7BBWIJA7
+ aIFN4+y8gKO0Mc+j8SfYIF4XDY3vJihy95skVjKY+u2phvZSBA1SkHkYu0rfijMmCZ2P
+ Vx5ntq545T0rxf/TRpsjJ20JCDfKaplPoVZvcvEd96Y394StO5UsKXouMKOupvn1Hr75
+ pG27+0WDiFfciVLpWwr0jhzhiMJBGpS6HyIl8Pa2gRLqDQK4pjnP9QdwFCqtTMhmp+Hs
+ S0ym73mwaNKhJZFlAQ6OsU2qS55/aHwDta5TlwjWqjqcZBIEhLNJzk7KzeTmyddk2gn4
+ PEKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679523982;
+ d=1e100.net; s=20210112; t=1679524092;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9QVfQLLS1pRC6IGhHQ3GM79qE9kCVzjnkNPykrFgYP8=;
- b=wGqvbFyII3T6f03iAggQ/X/1U5OiBBn1GfuP8s8NMkyn8msW2UQ/oW4ospW+VZpnNH
- OucZF83T+0xuB9OxkdsoAnB+cL/T9Ljce+O9zp7OpNn9J3AeIQ4UYLmADAh3MGN38jvL
- dOY9in2vHXnWbCQJTFnfs4L+taZFRRBDdtZ+XW0dQ/PDliMUJQWj9SjBPW9T5IUxQn6+
- hCh9lywyACNwS+heHTwhc/2iyFPqPzcpc1lSFpo7fFDWqeB1lS5vvRoxVcn7aj7bNhYT
- BPzDGAgAY/GdThG09sKAttwDwiZww05d5tHNB/cR6jyQo9ZKhynMY5RqZjT12qfdFXxZ
- TR2w==
-X-Gm-Message-State: AO0yUKUjarA86iDD6/9hx2ClwXbNmgx2VpJ90CSQFQFu306lClYuXNdC
- KGgVmuYjBkP9SHnq8IYbPKALw6bZb3hmejK5I7U=
-X-Google-Smtp-Source: AKy350ZWRp6nQx6lCVGdboUGvGdyKCHy+jnhEB8PjX7lnqP4pKTS234Qqk+crvS1jsQEfVBnAj88PQ==
-X-Received: by 2002:a05:6870:f154:b0:172:899a:f473 with SMTP id
- l20-20020a056870f15400b00172899af473mr798187oac.42.1679523638180; 
- Wed, 22 Mar 2023 15:20:38 -0700 (PDT)
+ bh=U7gzbVQ+ppMikngAzfGlNY7kDwQC9s27/btZylqBq0w=;
+ b=peQFCNeOC6iXlmG/CrlF+gh/70QrIk7dxNdalPF4pSJIvDXNvi9sjlAgKER5Eh/f4a
+ EN43wHmkUcTbb++a7idcrVxl6+Y53/Q+2BIpI4eD4bJgK6H6yfrwDHf5LDYhaTHbvJC/
+ k4PtifmMkpKvqqLgOHw/0hWa1uDPnmuGilYh6eo33n5wd4iPCXJS9YOhaBus+KtYg+go
+ MYuqoMLrIX+P6cZAWqewrsHHLxnhffwA70+XUlisf/+kWOS02kL1/ShlVQT01sH+gaCW
+ 2L1kWrAHQjC8xkL2pzv+IPKEpk6XC+Fdo9FhamQ2szRaRiJbb2CfoJjedLLDhTs11Ra1
+ GpVw==
+X-Gm-Message-State: AO0yUKXFjP77Wckyh1e3gPPtFoNkJ2kCjnQK11X6lTFu1yQswtNmNtMU
+ yOA1yMO3QZJC6d5gNJeGtln8szrIHoGDRP4dGa0=
+X-Google-Smtp-Source: AK7set8Rci+4Zziva8pkgbEbFocl3I5HxGYQTchwWOj+2+piowF6woJL6ZNT3oUcSltv3OcQ01cWtA==
+X-Received: by 2002:a05:6870:6129:b0:17a:b715:ab9a with SMTP id
+ s41-20020a056870612900b0017ab715ab9amr792528oae.50.1679523625642; 
+ Wed, 22 Mar 2023 15:20:25 -0700 (PDT)
 Received: from grind.. ([177.95.89.231]) by smtp.gmail.com with ESMTPSA id
- ax35-20020a05687c022300b0017243edbe5bsm5586817oac.58.2023.03.22.15.20.35
+ ax35-20020a05687c022300b0017243edbe5bsm5586817oac.58.2023.03.22.15.20.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Mar 2023 15:20:37 -0700 (PDT)
+ Wed, 22 Mar 2023 15:20:25 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-8.1 v4 05/25] target/riscv/cpu.c: add priv_spec
- validate/disable_exts helpers
-Date: Wed, 22 Mar 2023 19:19:44 -0300
-Message-Id: <20230322222004.357013-6-dbarboza@ventanamicro.com>
+Subject: [PATCH for-8.1 v4 01/25] target/riscv/cpu.c: add
+ riscv_cpu_validate_v()
+Date: Wed, 22 Mar 2023 19:19:40 -0300
+Message-Id: <20230322222004.357013-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230322222004.357013-1-dbarboza@ventanamicro.com>
 References: <20230322222004.357013-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1129;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-yw1-x1129.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,152 +83,140 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Mar 2023 22:27:19 -0000
+X-List-Received-Date: Wed, 22 Mar 2023 22:28:42 -0000
 
-We're doing env->priv_spec validation and assignment at the start of
-riscv_cpu_realize(), which is fine, but then we're doing a force disable
-on extensions that aren't compatible with the priv version.
+The RVV verification will error out if fails and it's being done at the
+end of riscv_cpu_validate_set_extensions(). Let's put it in its own
+function and do it earlier.
 
-This second step is being done too early. The disabled extensions might be
-re-enabled again in riscv_cpu_validate_set_extensions() by accident. A
-better place to put this code is at the end of
-riscv_cpu_validate_set_extensions() after all the validations are
-completed.
-
-Add a new helper, riscv_cpu_disable_priv_spec_isa_exts(), to disable the
-extesions after the validation is done. While we're at it, create a
-riscv_cpu_validate_priv_spec() helper to host all env->priv_spec related
-validation to unclog riscv_cpu_realize a bit.
+We'll move it out of riscv_cpu_validate_set_extensions() in the near future,
+but for now this is enough to clean the code a bit.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 ---
- target/riscv/cpu.c | 91 ++++++++++++++++++++++++++++------------------
- 1 file changed, 56 insertions(+), 35 deletions(-)
+ target/riscv/cpu.c | 86 ++++++++++++++++++++++++++--------------------
+ 1 file changed, 49 insertions(+), 37 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1ee322001b..17b301967c 100644
+index 1e97473af2..18591aa53a 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -833,6 +833,52 @@ static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg,
-     env->vext_ver = vext_version;
+@@ -802,6 +802,46 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
+     }
  }
  
-+static void riscv_cpu_validate_priv_spec(RISCVCPU *cpu, Error **errp)
++static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg,
++                                 Error **errp)
 +{
-+    CPURISCVState *env = &cpu->env;
-+    int priv_version = -1;
++    int vext_version = VEXT_VERSION_1_00_0;
 +
-+    if (cpu->cfg.priv_spec) {
-+        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.12.0")) {
-+            priv_version = PRIV_VERSION_1_12_0;
-+        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
-+            priv_version = PRIV_VERSION_1_11_0;
-+        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
-+            priv_version = PRIV_VERSION_1_10_0;
++    if (!is_power_of_2(cfg->vlen)) {
++        error_setg(errp, "Vector extension VLEN must be power of 2");
++        return;
++    }
++    if (cfg->vlen > RV_VLEN_MAX || cfg->vlen < 128) {
++        error_setg(errp,
++                   "Vector extension implementation only supports VLEN "
++                   "in the range [128, %d]", RV_VLEN_MAX);
++        return;
++    }
++    if (!is_power_of_2(cfg->elen)) {
++        error_setg(errp, "Vector extension ELEN must be power of 2");
++        return;
++    }
++    if (cfg->elen > 64 || cfg->elen < 8) {
++        error_setg(errp,
++                   "Vector extension implementation only supports ELEN "
++                   "in the range [8, 64]");
++        return;
++    }
++    if (cfg->vext_spec) {
++        if (!g_strcmp0(cfg->vext_spec, "v1.0")) {
++            vext_version = VEXT_VERSION_1_00_0;
 +        } else {
-+            error_setg(errp,
-+                       "Unsupported privilege spec version '%s'",
-+                       cpu->cfg.priv_spec);
++            error_setg(errp, "Unsupported vector spec version '%s'",
++                       cfg->vext_spec);
 +            return;
 +        }
-+
-+        env->priv_ver = priv_version;
++    } else {
++        qemu_log("vector version is not specified, "
++                 "use the default value v1.0\n");
 +    }
-+}
-+
-+static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
-+{
-+    CPURISCVState *env = &cpu->env;
-+    int i;
-+
-+    /* Force disable extensions if priv spec version does not match */
-+    for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
-+        if (isa_ext_is_enabled(cpu, &isa_edata_arr[i]) &&
-+            (env->priv_ver < isa_edata_arr[i].min_version)) {
-+            isa_ext_update_enabled(cpu, &isa_edata_arr[i], false);
-+#ifndef CONFIG_USER_ONLY
-+            warn_report("disabling %s extension for hart 0x" TARGET_FMT_lx
-+                        " because privilege spec version does not match",
-+                        isa_edata_arr[i].name, env->mhartid);
-+#else
-+            warn_report("disabling %s extension because "
-+                        "privilege spec version does not match",
-+                        isa_edata_arr[i].name);
-+#endif
-+        }
-+    }
++    set_vext_version(env, vext_version);
 +}
 +
  /*
   * Check consistency between chosen extensions while setting
   * cpu->cfg accordingly, doing a set_misa() in the end.
-@@ -1002,6 +1048,12 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         cpu->cfg.ext_zksh = true;
-     }
- 
-+    /*
-+     * Disable isa extensions based on priv spec after we
-+     * validated and set everything we need.
-+     */
-+    riscv_cpu_disable_priv_spec_isa_exts(cpu);
-+
-     if (cpu->cfg.ext_i) {
-         ext |= RVI;
-     }
-@@ -1131,7 +1183,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+@@ -809,6 +849,7 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
+ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+ {
      CPURISCVState *env = &cpu->env;
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
-     CPUClass *cc = CPU_CLASS(mcc);
--    int i, priv_version = -1;
-     Error *local_err = NULL;
++    Error *local_err = NULL;
+     uint32_t ext = 0;
  
-     cpu_exec_realizefn(cs, &local_err);
-@@ -1140,40 +1191,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         return;
+     /* Do some ISA extension error checking */
+@@ -939,6 +980,14 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         }
      }
  
--    if (cpu->cfg.priv_spec) {
--        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.12.0")) {
--            priv_version = PRIV_VERSION_1_12_0;
--        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
--            priv_version = PRIV_VERSION_1_11_0;
--        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
--            priv_version = PRIV_VERSION_1_10_0;
--        } else {
++    if (cpu->cfg.ext_v) {
++        riscv_cpu_validate_v(env, &cpu->cfg, &local_err);
++        if (local_err != NULL) {
++            error_propagate(errp, local_err);
++            return;
++        }
++    }
++
+     if (cpu->cfg.ext_zk) {
+         cpu->cfg.ext_zkn = true;
+         cpu->cfg.ext_zkr = true;
+@@ -993,44 +1042,7 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         ext |= RVH;
+     }
+     if (cpu->cfg.ext_v) {
+-        int vext_version = VEXT_VERSION_1_00_0;
+         ext |= RVV;
+-        if (!is_power_of_2(cpu->cfg.vlen)) {
 -            error_setg(errp,
--                       "Unsupported privilege spec version '%s'",
--                       cpu->cfg.priv_spec);
+-                       "Vector extension VLEN must be power of 2");
 -            return;
 -        }
--    }
--
--    if (priv_version >= PRIV_VERSION_1_10_0) {
--        env->priv_ver = priv_version;
--    }
--
--    /* Force disable extensions if priv spec version does not match */
--    for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
--        if (isa_ext_is_enabled(cpu, &isa_edata_arr[i]) &&
--            (env->priv_ver < isa_edata_arr[i].min_version)) {
--            isa_ext_update_enabled(cpu, &isa_edata_arr[i], false);
--#ifndef CONFIG_USER_ONLY
--            warn_report("disabling %s extension for hart 0x" TARGET_FMT_lx
--                        " because privilege spec version does not match",
--                        isa_edata_arr[i].name, env->mhartid);
--#else
--            warn_report("disabling %s extension because "
--                        "privilege spec version does not match",
--                        isa_edata_arr[i].name);
--#endif
+-        if (cpu->cfg.vlen > RV_VLEN_MAX || cpu->cfg.vlen < 128) {
+-            error_setg(errp,
+-                       "Vector extension implementation only supports VLEN "
+-                       "in the range [128, %d]", RV_VLEN_MAX);
+-            return;
 -        }
-+    riscv_cpu_validate_priv_spec(cpu, &local_err);
-+    if (local_err != NULL) {
-+        error_propagate(errp, local_err);
-+        return;
+-        if (!is_power_of_2(cpu->cfg.elen)) {
+-            error_setg(errp,
+-                       "Vector extension ELEN must be power of 2");
+-            return;
+-        }
+-        if (cpu->cfg.elen > 64 || cpu->cfg.elen < 8) {
+-            error_setg(errp,
+-                       "Vector extension implementation only supports ELEN "
+-                       "in the range [8, 64]");
+-            return;
+-        }
+-        if (cpu->cfg.vext_spec) {
+-            if (!g_strcmp0(cpu->cfg.vext_spec, "v1.0")) {
+-                vext_version = VEXT_VERSION_1_00_0;
+-            } else {
+-                error_setg(errp,
+-                           "Unsupported vector spec version '%s'",
+-                           cpu->cfg.vext_spec);
+-                return;
+-            }
+-        } else {
+-            qemu_log("vector version is not specified, "
+-                     "use the default value v1.0\n");
+-        }
+-        set_vext_version(env, vext_version);
      }
- 
-     if (cpu->cfg.epmp && !cpu->cfg.pmp) {
+     if (cpu->cfg.ext_j) {
+         ext |= RVJ;
 -- 
 2.39.2
 
