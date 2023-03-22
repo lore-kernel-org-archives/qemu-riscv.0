@@ -1,75 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pf70g-0006zD-Vj
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 18:32:46 -0400
+	id 1pf75a-0007Ds-CQ
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 18:37:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pf70f-0006z2-24
- for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:32:45 -0400
-Received: from mail-qt1-x82a.google.com ([2607:f8b0:4864:20::82a])
+ id 1pf75Z-0007Dj-BZ
+ for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:37:49 -0400
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pf70S-0007MC-Mx
- for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:32:44 -0400
-Received: by mail-qt1-x82a.google.com with SMTP id ga7so5870755qtb.2
- for <qemu-riscv@nongnu.org>; Wed, 22 Mar 2023 15:32:32 -0700 (PDT)
+ id 1pf75H-0007h7-3S
+ for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:37:49 -0400
+Received: by mail-pj1-x102f.google.com with SMTP id
+ h12-20020a17090aea8c00b0023d1311fab3so144782pjz.1
+ for <qemu-riscv@nongnu.org>; Wed, 22 Mar 2023 15:37:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1679524352;
+ d=ventanamicro.com; s=google; t=1679524603;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1LxDIouyTmW6CIiqQuxLm5ivPOp4dewieXsHrUESWZw=;
- b=mQVuOcG5L8T5ElugFebjoJfPp+Nnf9IOSJCKX1gFpbnmryQbF/9DqFiyLlmQm1ENQY
- H3SQfmG/dgFZf9UvsvDvQEaOfpBwrDqomGwjF2nLxokHcmo7wPSUFtjr7xaEHbHYAs/w
- Ixse4Eif3XvT7G+tRxYy2nwzz7X7pY3GbXGd/ThI10aPUfMMpW8Ungcz6cHy1XCq6DI/
- NiohQo7PpmHiyAYo2fj12iiEVDxxOg08B34QPXlq+eEEYyucbdH8zG6W8n9F2CRSxXxg
- MpoARGUsf+S0BFtrIBi9cc3Qh19vgBIakW0ihj5kpotzo0gx1Pcy0n5y/XhQ/luRRODE
- Ut8w==
+ bh=BwzFze6i9LF5NLZ7SPHJQ/+EluN5wBR39ZnMalzotlU=;
+ b=aSyy7G+L4qa8uf3W0fPzmOiTaU9MLNwwpuV+/Og2rwPZYvyEw49Ucstj5Z/GSxm3ZZ
+ +bBxHypML9NsHxe67+UikhgLtrXqM2bvyn5ZGNaWNO66TVK7qYfYj9z9LO6mkaXKxyp6
+ +qs1OnUx/wSGy56Z7OyNdEWKRbxffanSwKvSjcyYecLUUIiu1yA250P8FZGeMyqda2Vt
+ FCh3uwP17yKTLWWPimJt3sm4VaS/i9OhyBRG6f5pJOsxSlZfjOPI/5ZT/R2U6B0HS0Yw
+ 5wGgnvi4WiPmjAEFO4alDsiAMBrOxwJQ7W2TIYPLubI08CukqC6l6XG+ed1Yt1TvCHkW
+ a47Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679524352;
+ d=1e100.net; s=20210112; t=1679524603;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1LxDIouyTmW6CIiqQuxLm5ivPOp4dewieXsHrUESWZw=;
- b=qvPHv744dxXXYfEZtoxbSfgpR0fpVhthubVr8FPRvy/XjJ229b4hJM2KLsm4i/Tg6O
- +GsTaxgLsTaZDaWxi2hMImhnManex5zmzqF3nMs7klwrYf7Ya9MpR5R885b3AA3O8rbo
- UftnLl5iu4OsKfR3Dq/rcRON7XAIj+JPFOVq6Dd+ujV7aXotWlsfnOMYJ6+R0sPn623i
- lzO8j72Mw9WU2CA//mPiGpfEF1fF2fRIlIYsur9c4neT+rWrPXA1R4TcbSfq55vNxPXD
- Hed2Q9s/6h4t6oJca5oo4DrYMQsBi0ZHdmcrEzbl4Iivu3uvX7Fl86XmJAYgFsidTrFC
- LFqg==
-X-Gm-Message-State: AO0yUKXWc+jjfOCQnyRG99NgKDwjgJbJ0ihCrwjDhoGvH94gk51I+70j
- QHQjrWeTdXuZhoTMPbrFScrbKZW2h5qkKfnzp/o=
-X-Google-Smtp-Source: AK7set/P471p85eNNIq/kt/C2NQjLb4iICt+H8J3sleVrUvgS36YJgvGwd8S7u3BwX6JOFk2H5op1A==
-X-Received: by 2002:a05:6870:c0d5:b0:17e:8727:1fcc with SMTP id
- e21-20020a056870c0d500b0017e87271fccmr1019499oad.4.1679523650281; 
- Wed, 22 Mar 2023 15:20:50 -0700 (PDT)
+ bh=BwzFze6i9LF5NLZ7SPHJQ/+EluN5wBR39ZnMalzotlU=;
+ b=MuVsp5KntAoDDlfIfOudGn/XXPEDfPib9vUp/6Lk7NlOUdIDfThSxXIKc6f/Han64h
+ eeQJXFVHXr/mXwZPMDLPafwDxR3+cnB2FOqUucxoAOzah2UX6AwTAhfN1H2qTWifSljH
+ /LeiWGNUSmDX1vqAp+zzKjY4Q1fHDYLFzok84gC5zLLcD433O7JVoSa1K5+UM9Dvn261
+ Ha7CJGcR8neie+XUnFKpmIxAKqOwqLTHpUFFUdktHBdwJtibGUQMQJUghwyguH00nohv
+ gO8Ill3U0G9KBsO5n1iRjxApuAqqc8jX8eazkWBiZttCrm/cvpMkg6PAwKZIb2MQNu0I
+ PHqA==
+X-Gm-Message-State: AO0yUKUu0VQgmNAO7l/jc3llDg3tk3OMWqqNjBVdf06O3NdYAFFctr6Y
+ 92Eg3ViwYo9LoW9yh28OLla82cLs+ty49KusT3U=
+X-Google-Smtp-Source: AKy350ZydfC8A8L4qtc8RDIfp2m00RMW8ls4na6hL+QPsvtXlkBqXUqCG/4wx9/F9+brCsM0o7j3nA==
+X-Received: by 2002:a05:6870:5806:b0:17a:a2ba:9032 with SMTP id
+ r6-20020a056870580600b0017aa2ba9032mr859890oap.3.1679523678241; 
+ Wed, 22 Mar 2023 15:21:18 -0700 (PDT)
 Received: from grind.. ([177.95.89.231]) by smtp.gmail.com with ESMTPSA id
- ax35-20020a05687c022300b0017243edbe5bsm5586817oac.58.2023.03.22.15.20.47
+ ax35-20020a05687c022300b0017243edbe5bsm5586817oac.58.2023.03.22.15.21.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Mar 2023 15:20:49 -0700 (PDT)
+ Wed, 22 Mar 2023 15:21:17 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-8.1 v4 09/25] target/riscv/cpu.c: remove cfg setup from
- riscv_cpu_init()
-Date: Wed, 22 Mar 2023 19:19:48 -0300
-Message-Id: <20230322222004.357013-10-dbarboza@ventanamicro.com>
+Subject: [PATCH for-8.1 v4 18/25] target/riscv: error out on priv failure for
+ RVH
+Date: Wed, 22 Mar 2023 19:19:57 -0300
+Message-Id: <20230322222004.357013-19-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230322222004.357013-1-dbarboza@ventanamicro.com>
 References: <20230322222004.357013-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::82a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-qt1-x82a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,190 +83,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Mar 2023 22:32:45 -0000
+X-List-Received-Date: Wed, 22 Mar 2023 22:37:49 -0000
 
-We have 4 config settings being done in riscv_cpu_init(): ext_ifencei,
-ext_icsr, mmu and pmp. This is also the constructor of the "riscv-cpu"
-device, which happens to be the parent device of every RISC-V cpu.
+riscv_cpu_disable_priv_spec_isa_exts(), at the end of
+riscv_cpu_validate_set_extensions(), will disable cpu->cfg.ext_h and
+cpu->cfg.ext_v if priv_ver check fails.
 
-The result is that these 4 configs are being set every time, and every
-other CPU should always account for them. CPUs such as sifive_e need to
-disable settings that aren't enabled simply because the parent class
-happens to be enabling it.
+This check can be done in riscv_cpu_validate_misa_ext(). The difference
+here is that we're not silently disable it: we'll error out. Silently
+disabling a MISA extension after all the validation is completed can can
+cause inconsistencies that we don't have to deal with. Verify ealier and
+fail faster.
 
-Moving all configurations from the parent class to each CPU will
-centralize the config of each CPU into its own init(), which is clearer
-than having to account to whatever happens to be set in the parent
-device. These settings are also being set in register_cpu_props() when
-no 'misa_ext' is set, so for these CPUs we don't need changes. Named
-CPUs will receive all cfgs that the parent were setting into their
-init().
+Note that we're ignoring RVV priv_ver validation since its minimal priv
+is also the minimal value we support. RVH will error out if enabled
+under priv_ver under 1_12_0.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/cpu.c | 60 ++++++++++++++++++++++++++++++++++++----------
- 1 file changed, 48 insertions(+), 12 deletions(-)
+ target/riscv/cpu.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index fef55d7d79..c7b6e7b84b 100644
+index 399f63b42f..d2eb2b3ba1 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -325,7 +325,8 @@ static void set_satp_mode_default_map(RISCVCPU *cpu)
+@@ -1055,6 +1055,20 @@ static void riscv_cpu_validate_misa_ext(RISCVCPU *cpu, Error **errp)
+         return;
+     }
  
- static void riscv_any_cpu_init(Object *obj)
- {
--    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+    CPURISCVState *env = &cpu->env;
- #if defined(TARGET_RISCV32)
-     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
- #elif defined(TARGET_RISCV64)
-@@ -340,6 +341,12 @@ static void riscv_any_cpu_init(Object *obj)
- 
-     env->priv_ver = PRIV_VERSION_LATEST;
-     register_cpu_props(obj);
++    /*
++     * Check for priv spec version. RVH is 1_12_0, RVV is 1_10_0.
++     * We don't support anything under 1_10_0 so skip checking
++     * priv for RVV.
++     *
++     * We're hardcoding it here to avoid looping into the
++     * 50+ entries of isa_edata_arr[] just to check the RVH
++     * entry.
++     */
++    if (cpu->cfg.ext_h && env->priv_ver < PRIV_VERSION_1_12_0) {
++        error_setg(errp, "H extension requires priv spec 1.12.0");
++        return;
++    }
 +
-+    /* inherited from parent obj via riscv_cpu_init() */
-+    cpu->cfg.ext_ifencei = true;
-+    cpu->cfg.ext_icsr = true;
-+    cpu->cfg.mmu = true;
-+    cpu->cfg.pmp = true;
- }
- 
- #if defined(TARGET_RISCV64)
-@@ -358,13 +365,20 @@ static void rv64_base_cpu_init(Object *obj)
- 
- static void rv64_sifive_u_cpu_init(Object *obj)
- {
--    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+    CPURISCVState *env = &cpu->env;
-     set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
-     register_cpu_props(obj);
-     env->priv_ver = PRIV_VERSION_1_10_0;
- #ifndef CONFIG_USER_ONLY
-     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV39);
- #endif
-+
-+    /* inherited from parent obj via riscv_cpu_init() */
-+    cpu->cfg.ext_ifencei = true;
-+    cpu->cfg.ext_icsr = true;
-+    cpu->cfg.mmu = true;
-+    cpu->cfg.pmp = true;
- }
- 
- static void rv64_sifive_e_cpu_init(Object *obj)
-@@ -375,10 +389,14 @@ static void rv64_sifive_e_cpu_init(Object *obj)
-     set_misa(env, MXL_RV64, RVI | RVM | RVA | RVC | RVU);
-     register_cpu_props(obj);
-     env->priv_ver = PRIV_VERSION_1_10_0;
--    cpu->cfg.mmu = false;
- #ifndef CONFIG_USER_ONLY
-     set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
- #endif
-+
-+    /* inherited from parent obj via riscv_cpu_init() */
-+    cpu->cfg.ext_ifencei = true;
-+    cpu->cfg.ext_icsr = true;
-+    cpu->cfg.pmp = true;
- }
- 
- static void rv64_thead_c906_cpu_init(Object *obj)
-@@ -411,6 +429,10 @@ static void rv64_thead_c906_cpu_init(Object *obj)
- #ifndef CONFIG_USER_ONLY
-     set_satp_mode_max_supported(cpu, VM_1_10_SV39);
- #endif
-+
-+    /* inherited from parent obj via riscv_cpu_init() */
-+    cpu->cfg.ext_ifencei = true;
-+    cpu->cfg.pmp = true;
- }
- 
- static void rv128_base_cpu_init(Object *obj)
-@@ -447,7 +469,8 @@ static void rv32_base_cpu_init(Object *obj)
- 
- static void rv32_sifive_u_cpu_init(Object *obj)
- {
--    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+    CPURISCVState *env = &cpu->env;
-     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
- 
-     register_cpu_props(obj);
-@@ -455,6 +478,12 @@ static void rv32_sifive_u_cpu_init(Object *obj)
- #ifndef CONFIG_USER_ONLY
-     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV32);
- #endif
-+
-+    /* inherited from parent obj via riscv_cpu_init() */
-+    cpu->cfg.ext_ifencei = true;
-+    cpu->cfg.ext_icsr = true;
-+    cpu->cfg.mmu = true;
-+    cpu->cfg.pmp = true;
- }
- 
- static void rv32_sifive_e_cpu_init(Object *obj)
-@@ -465,10 +494,14 @@ static void rv32_sifive_e_cpu_init(Object *obj)
-     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVC | RVU);
-     register_cpu_props(obj);
-     env->priv_ver = PRIV_VERSION_1_10_0;
--    cpu->cfg.mmu = false;
- #ifndef CONFIG_USER_ONLY
-     set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
- #endif
-+
-+    /* inherited from parent obj via riscv_cpu_init() */
-+    cpu->cfg.ext_ifencei = true;
-+    cpu->cfg.ext_icsr = true;
-+    cpu->cfg.pmp = true;
- }
- 
- static void rv32_ibex_cpu_init(Object *obj)
-@@ -479,11 +512,15 @@ static void rv32_ibex_cpu_init(Object *obj)
-     set_misa(env, MXL_RV32, RVI | RVM | RVC | RVU);
-     register_cpu_props(obj);
-     env->priv_ver = PRIV_VERSION_1_11_0;
--    cpu->cfg.mmu = false;
- #ifndef CONFIG_USER_ONLY
-     set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
- #endif
-     cpu->cfg.epmp = true;
-+
-+    /* inherited from parent obj via riscv_cpu_init() */
-+    cpu->cfg.ext_ifencei = true;
-+    cpu->cfg.ext_icsr = true;
-+    cpu->cfg.pmp = true;
- }
- 
- static void rv32_imafcu_nommu_cpu_init(Object *obj)
-@@ -494,10 +531,14 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
-     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
-     register_cpu_props(obj);
-     env->priv_ver = PRIV_VERSION_1_10_0;
--    cpu->cfg.mmu = false;
- #ifndef CONFIG_USER_ONLY
-     set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
- #endif
-+
-+    /* inherited from parent obj via riscv_cpu_init() */
-+    cpu->cfg.ext_ifencei = true;
-+    cpu->cfg.ext_icsr = true;
-+    cpu->cfg.pmp = true;
- }
- #endif
- 
-@@ -1384,11 +1425,6 @@ static void riscv_cpu_init(Object *obj)
- {
-     RISCVCPU *cpu = RISCV_CPU(obj);
- 
--    cpu->cfg.ext_ifencei = true;
--    cpu->cfg.ext_icsr = true;
--    cpu->cfg.mmu = true;
--    cpu->cfg.pmp = true;
--
-     cpu_set_cpustate_pointers(cpu);
- 
- #ifndef CONFIG_USER_ONLY
+     if (cpu->cfg.ext_v) {
+         riscv_cpu_validate_v(env, &cpu->cfg, &local_err);
+         if (local_err != NULL) {
 -- 
 2.39.2
 
