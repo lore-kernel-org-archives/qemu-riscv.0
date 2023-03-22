@@ -1,68 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pf6ui-0006gf-8Z
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 18:26:36 -0400
+	id 1pf6vQ-0006hn-6P
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 18:27:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pf6uh-0006gV-4F
- for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:26:35 -0400
-Received: from mail-oa1-x2a.google.com ([2001:4860:4864:20::2a])
+ id 1pf6vP-0006hc-2i
+ for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:27:19 -0400
+Received: from mail-yw1-x1129.google.com ([2607:f8b0:4864:20::1129])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pf6tP-0006XA-HZ
- for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:26:33 -0400
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-17683b570b8so20844418fac.13
- for <qemu-riscv@nongnu.org>; Wed, 22 Mar 2023 15:25:11 -0700 (PDT)
+ id 1pf6ug-0006qK-HK
+ for qemu-riscv@nongnu.org; Wed, 22 Mar 2023 18:27:17 -0400
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5445009c26bso363723267b3.8
+ for <qemu-riscv@nongnu.org>; Wed, 22 Mar 2023 15:26:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1679523693;
+ d=ventanamicro.com; s=google; t=1679523982;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UWIoScj5d/AB/UflSRxN6pqPw6JdXgdwjDu9WZeLHZc=;
- b=faiyZPIFW362ymnW4FkWousXmeNLgI2/ozGPoo6kcjSC9BdVZrP3eUSWoq3hKio8Qy
- KxJ/W8xOSyI7TWBQxYtn9Fx3EkV1blnIdnQ5xC4GWo780uMNFyE7S8+/Lv5cYM9M5ds5
- T6lV2E0UlRWPFlA/TGmuk2MMI04E9zAlMquHrICcwJNlUWOkFUCSgnUom7sxdNCDlkYu
- tBQOnCxDYK5uaK/pJS4dcvGdl9avd/G0LKFtRiXEhQ2DTojUYdas9pkfa3dr37PfbvWd
- rfdP/8ePhZxz1OWFUb9qxNnNqHPf+EOu7JnW/YuH3HtwFZAQEQNsTg3WtXjYVb3rXSS5
- zq7w==
+ bh=9QVfQLLS1pRC6IGhHQ3GM79qE9kCVzjnkNPykrFgYP8=;
+ b=gAdVm1mk5VoyJ+y57AWqIAqcg5yBu67/X8bOHpKALRaNEvUYdc69XHFV9nHCSQ6d9s
+ n5+V2vHWX54mIpW8Ld7QERBXKhKjUQUcIU++ReXZgm9Xp1oCw+Td/5uAYtzrIPFlmN8m
+ z7Q8jAC8hAHHPGilW1tWR5My2PohBjLkY5A3R6FRC1yUcckWgOIVnsPANM9csWnZOiVP
+ xMi7ZfgBTFMil7ZYsQpEWg/Q3u3fdsIQWF49uLNNAp68NCMiRpcMmcCoMeSglhUSUHtM
+ FVjC85gc5CjDHmSC+5W5yHyatVxFJRUqLlAlfbIiBmsLneTd07mJHJ6Ys5HRL8eTRcEr
+ tldg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679523693;
+ d=1e100.net; s=20210112; t=1679523982;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UWIoScj5d/AB/UflSRxN6pqPw6JdXgdwjDu9WZeLHZc=;
- b=RFOzM6kC2VBS6EbCZ/y1hw8XpvoopEqTRkDU8taGe9AGyjXYcMIasEn/xSBicvWLUU
- 7NwEBCUF15IZbjsZTV951DnocPjPBZCi83qJuK/cc5yxlz1DgPKG+OZo61Cj36yPHxvu
- d6lsCaCcWuaVnN+nir7riRXc5+D0nhpMhwFbOTs87eZvPF5QUHXbmG47AAWB3X7SWzfC
- cG/qEBOm2LUJKdjBQ8eJbKNXgFJ6ZguZXbv85TneNh+T5bQOO2MQRoSZmIj4H5514fPb
- lPGkXDuyTjxOGnb5Xhh6zNOdhzYspijzD5otR6LEJDPkpNOHxkirsc0Ed/ZPy6Qft67r
- D+WQ==
-X-Gm-Message-State: AAQBX9e6hRvR4lcbUUP9XH0krnoI6qUK7iBw8rMjC5rzWvFkZvc5cekM
- 9J+m7zekGVod1DuOT8WmuuttzA==
-X-Google-Smtp-Source: AK7set8roRQ/GTe4p205ue3h1dRPJ8gN3+dFwPb3Xo6GGJHthM/0Ch6Y21hnopf6kJmYHcypqOlBMg==
-X-Received: by 2002:a05:6870:b506:b0:172:7218:9c01 with SMTP id
- v6-20020a056870b50600b0017272189c01mr710660oap.2.1679523693464; 
- Wed, 22 Mar 2023 15:21:33 -0700 (PDT)
+ bh=9QVfQLLS1pRC6IGhHQ3GM79qE9kCVzjnkNPykrFgYP8=;
+ b=wGqvbFyII3T6f03iAggQ/X/1U5OiBBn1GfuP8s8NMkyn8msW2UQ/oW4ospW+VZpnNH
+ OucZF83T+0xuB9OxkdsoAnB+cL/T9Ljce+O9zp7OpNn9J3AeIQ4UYLmADAh3MGN38jvL
+ dOY9in2vHXnWbCQJTFnfs4L+taZFRRBDdtZ+XW0dQ/PDliMUJQWj9SjBPW9T5IUxQn6+
+ hCh9lywyACNwS+heHTwhc/2iyFPqPzcpc1lSFpo7fFDWqeB1lS5vvRoxVcn7aj7bNhYT
+ BPzDGAgAY/GdThG09sKAttwDwiZww05d5tHNB/cR6jyQo9ZKhynMY5RqZjT12qfdFXxZ
+ TR2w==
+X-Gm-Message-State: AO0yUKUjarA86iDD6/9hx2ClwXbNmgx2VpJ90CSQFQFu306lClYuXNdC
+ KGgVmuYjBkP9SHnq8IYbPKALw6bZb3hmejK5I7U=
+X-Google-Smtp-Source: AKy350ZWRp6nQx6lCVGdboUGvGdyKCHy+jnhEB8PjX7lnqP4pKTS234Qqk+crvS1jsQEfVBnAj88PQ==
+X-Received: by 2002:a05:6870:f154:b0:172:899a:f473 with SMTP id
+ l20-20020a056870f15400b00172899af473mr798187oac.42.1679523638180; 
+ Wed, 22 Mar 2023 15:20:38 -0700 (PDT)
 Received: from grind.. ([177.95.89.231]) by smtp.gmail.com with ESMTPSA id
- ax35-20020a05687c022300b0017243edbe5bsm5586817oac.58.2023.03.22.15.21.30
+ ax35-20020a05687c022300b0017243edbe5bsm5586817oac.58.2023.03.22.15.20.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Mar 2023 15:21:33 -0700 (PDT)
+ Wed, 22 Mar 2023 15:20:37 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-8.1 v4 23/25] target/riscv: rework write_misa()
-Date: Wed, 22 Mar 2023 19:20:02 -0300
-Message-Id: <20230322222004.357013-24-dbarboza@ventanamicro.com>
+Subject: [PATCH for-8.1 v4 05/25] target/riscv/cpu.c: add priv_spec
+ validate/disable_exts helpers
+Date: Wed, 22 Mar 2023 19:19:44 -0300
+Message-Id: <20230322222004.357013-6-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230322222004.357013-1-dbarboza@ventanamicro.com>
 References: <20230322222004.357013-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1129;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-yw1-x1129.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -82,178 +83,152 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Mar 2023 22:26:35 -0000
+X-List-Received-Date: Wed, 22 Mar 2023 22:27:19 -0000
 
-write_misa() must use as much common logic as possible. We want to open
-code just the bits that are exclusive to the CSR write operation and TCG
-internals.
+We're doing env->priv_spec validation and assignment at the start of
+riscv_cpu_realize(), which is fine, but then we're doing a force disable
+on extensions that aren't compatible with the priv version.
 
-Rewrite write_misa() to work as follows:
+This second step is being done too early. The disabled extensions might be
+re-enabled again in riscv_cpu_validate_set_extensions() by accident. A
+better place to put this code is at the end of
+riscv_cpu_validate_set_extensions() after all the validations are
+completed.
 
-- mask the write using misa_ext_mask to avoid enabling unsupported
-  extensions;
-
-- suppress RVC if the next insn isn't aligned;
-
-- handle RVE. This is done by filtering all bits but RVE from 'val'.
-  Setting RVE will forcefully set only RVE - assuming it gets
-  validated afterwards;
-
-- emulate the steps done by realize(): validate the candidate misa_ext
-  val, then validate the configuration with the candidate misa_ext val,
-  and finally commit the changes to cpu->cfg.
-
-If any of the validation steps fails, the write operation is a no-op.
-
-Let's keep write_misa() as experimental for now until this logic gains
-enough mileage.
+Add a new helper, riscv_cpu_disable_priv_spec_isa_exts(), to disable the
+extesions after the validation is done. While we're at it, create a
+riscv_cpu_validate_priv_spec() helper to host all env->priv_spec related
+validation to unclog riscv_cpu_realize a bit.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 ---
- target/riscv/cpu.c | 12 ++++------
- target/riscv/cpu.h |  6 +++++
- target/riscv/csr.c | 59 ++++++++++++++++++++++++++--------------------
- 3 files changed, 45 insertions(+), 32 deletions(-)
+ target/riscv/cpu.c | 91 ++++++++++++++++++++++++++++------------------
+ 1 file changed, 56 insertions(+), 35 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 0e6b8fb45e..41b17ba0c3 100644
+index 1ee322001b..17b301967c 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1018,9 +1018,8 @@ static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
+@@ -833,6 +833,52 @@ static void riscv_cpu_validate_v(CPURISCVState *env, RISCVCPUConfig *cfg,
+     env->vext_ver = vext_version;
  }
  
++static void riscv_cpu_validate_priv_spec(RISCVCPU *cpu, Error **errp)
++{
++    CPURISCVState *env = &cpu->env;
++    int priv_version = -1;
++
++    if (cpu->cfg.priv_spec) {
++        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.12.0")) {
++            priv_version = PRIV_VERSION_1_12_0;
++        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
++            priv_version = PRIV_VERSION_1_11_0;
++        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
++            priv_version = PRIV_VERSION_1_10_0;
++        } else {
++            error_setg(errp,
++                       "Unsupported privilege spec version '%s'",
++                       cpu->cfg.priv_spec);
++            return;
++        }
++
++        env->priv_ver = priv_version;
++    }
++}
++
++static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
++{
++    CPURISCVState *env = &cpu->env;
++    int i;
++
++    /* Force disable extensions if priv spec version does not match */
++    for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
++        if (isa_ext_is_enabled(cpu, &isa_edata_arr[i]) &&
++            (env->priv_ver < isa_edata_arr[i].min_version)) {
++            isa_ext_update_enabled(cpu, &isa_edata_arr[i], false);
++#ifndef CONFIG_USER_ONLY
++            warn_report("disabling %s extension for hart 0x" TARGET_FMT_lx
++                        " because privilege spec version does not match",
++                        isa_edata_arr[i].name, env->mhartid);
++#else
++            warn_report("disabling %s extension because "
++                        "privilege spec version does not match",
++                        isa_edata_arr[i].name);
++#endif
++        }
++    }
++}
++
+ /*
+  * Check consistency between chosen extensions while setting
+  * cpu->cfg accordingly, doing a set_misa() in the end.
+@@ -1002,6 +1048,12 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         cpu->cfg.ext_zksh = true;
+     }
  
--static void riscv_cpu_validate_misa_ext(CPURISCVState *env,
--                                        uint32_t misa_ext,
--                                        Error **errp)
-+void riscv_cpu_validate_misa_ext(CPURISCVState *env, uint32_t misa_ext,
-+                                 Error **errp)
- {
++    /*
++     * Disable isa extensions based on priv spec after we
++     * validated and set everything we need.
++     */
++    riscv_cpu_disable_priv_spec_isa_exts(cpu);
++
+     if (cpu->cfg.ext_i) {
+         ext |= RVI;
+     }
+@@ -1131,7 +1183,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     CPURISCVState *env = &cpu->env;
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+     CPUClass *cc = CPU_CLASS(mcc);
+-    int i, priv_version = -1;
      Error *local_err = NULL;
  
-@@ -1113,9 +1112,8 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
-  * candidate misa_ext value. No changes in env->misa_ext
-  * are made.
-  */
--static void riscv_cpu_validate_extensions(RISCVCPU *cpu,
--                                          uint32_t misa_ext,
--                                          Error **errp)
-+void riscv_cpu_validate_extensions(RISCVCPU *cpu, uint32_t misa_ext,
-+                                   Error **errp)
- {
+     cpu_exec_realizefn(cs, &local_err);
+@@ -1140,40 +1191,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         return;
+     }
+ 
+-    if (cpu->cfg.priv_spec) {
+-        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.12.0")) {
+-            priv_version = PRIV_VERSION_1_12_0;
+-        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
+-            priv_version = PRIV_VERSION_1_11_0;
+-        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
+-            priv_version = PRIV_VERSION_1_10_0;
+-        } else {
+-            error_setg(errp,
+-                       "Unsupported privilege spec version '%s'",
+-                       cpu->cfg.priv_spec);
+-            return;
+-        }
+-    }
+-
+-    if (priv_version >= PRIV_VERSION_1_10_0) {
+-        env->priv_ver = priv_version;
+-    }
+-
+-    /* Force disable extensions if priv spec version does not match */
+-    for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
+-        if (isa_ext_is_enabled(cpu, &isa_edata_arr[i]) &&
+-            (env->priv_ver < isa_edata_arr[i].min_version)) {
+-            isa_ext_update_enabled(cpu, &isa_edata_arr[i], false);
+-#ifndef CONFIG_USER_ONLY
+-            warn_report("disabling %s extension for hart 0x" TARGET_FMT_lx
+-                        " because privilege spec version does not match",
+-                        isa_edata_arr[i].name, env->mhartid);
+-#else
+-            warn_report("disabling %s extension because "
+-                        "privilege spec version does not match",
+-                        isa_edata_arr[i].name);
+-#endif
+-        }
++    riscv_cpu_validate_priv_spec(cpu, &local_err);
++    if (local_err != NULL) {
++        error_propagate(errp, local_err);
++        return;
+     }
+ 
      if (cpu->cfg.epmp && !cpu->cfg.pmp) {
-         /*
-@@ -1206,7 +1204,7 @@ static void riscv_cpu_validate_extensions(RISCVCPU *cpu,
-     }
- }
- 
--static void riscv_cpu_commit_cpu_cfg(RISCVCPU *cpu)
-+void riscv_cpu_commit_cpu_cfg(RISCVCPU *cpu)
- {
-     if (cpu->cfg.ext_zk) {
-         cpu->cfg.ext_zkn = true;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index dbb4df9df0..ca2ba6a647 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -593,6 +593,12 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
- char *riscv_isa_string(RISCVCPU *cpu);
- void riscv_cpu_list(void);
- 
-+void riscv_cpu_validate_misa_ext(CPURISCVState *env, uint32_t misa_ext,
-+                                 Error **errp);
-+void riscv_cpu_validate_extensions(RISCVCPU *cpu, uint32_t misa_ext,
-+                                   Error **errp);
-+void riscv_cpu_commit_cpu_cfg(RISCVCPU *cpu);
-+
- #define cpu_list riscv_cpu_list
- #define cpu_mmu_index riscv_cpu_mmu_index
- 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index d522efc0b6..8d5e8f9ad1 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1343,39 +1343,17 @@ static RISCVException read_misa(CPURISCVState *env, int csrno,
- static RISCVException write_misa(CPURISCVState *env, int csrno,
-                                  target_ulong val)
- {
-+    RISCVCPU *cpu = env_archcpu(env);
-+    Error *local_err = NULL;
-+
-     if (!riscv_cpu_cfg(env)->misa_w) {
-         /* drop write to misa */
-         return RISCV_EXCP_NONE;
-     }
- 
--    /* 'I' or 'E' must be present */
--    if (!(val & (RVI | RVE))) {
--        /* It is not, drop write to misa */
--        return RISCV_EXCP_NONE;
--    }
--
--    /* 'E' excludes all other extensions */
--    if (val & RVE) {
--        /*
--         * when we support 'E' we can do "val = RVE;" however
--         * for now we just drop writes if 'E' is present.
--         */
--        return RISCV_EXCP_NONE;
--    }
--
--    /*
--     * misa.MXL writes are not supported by QEMU.
--     * Drop writes to those bits.
--     */
--
-     /* Mask extensions that are not supported by this hart */
-     val &= env->misa_ext_mask;
- 
--    /* 'D' depends on 'F', so clear 'D' if 'F' is not present */
--    if ((val & RVD) && !(val & RVF)) {
--        val &= ~RVD;
--    }
--
-     /*
-      * Suppress 'C' if next instruction is not aligned
-      * TODO: this should check next_pc
-@@ -1389,6 +1367,37 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
-         return RISCV_EXCP_NONE;
-     }
- 
-+    /*
-+     * We'll handle special cases in separate. If one
-+     * of these bits are enabled we'll handle them and
-+     * end the CSR write.
-+     */
-+    if (val & RVE && !(env->misa_ext & RVE)) {
-+        /*
-+         * RVE must be enabled by itself. Clear all other
-+         * misa_env bits and let the validation do its
-+         * job.
-+         */
-+        val &= RVE;
-+    }
-+
-+    /*
-+     * This flow is similar to what riscv_cpu_realize() does,
-+     * with the difference that we will update env->misa_ext
-+     * value if everything is ok.
-+     */
-+    riscv_cpu_validate_misa_ext(env, val, &local_err);
-+    if (local_err != NULL) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    riscv_cpu_validate_extensions(cpu, val, &local_err);
-+    if (local_err != NULL) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    riscv_cpu_commit_cpu_cfg(cpu);
-+
-     if (!(val & RVF)) {
-         env->mstatus &= ~MSTATUS_FS;
-     }
 -- 
 2.39.2
 
