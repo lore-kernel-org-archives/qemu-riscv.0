@@ -1,52 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pfEuz-0000WP-By
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Mar 2023 02:59:25 -0400
+	id 1pfFkn-0004BP-Mr
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Mar 2023 03:52:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pfEuv-0000VB-BF; Thu, 23 Mar 2023 02:59:21 -0400
-Received: from out30-130.freemail.mail.aliyun.com ([115.124.30.130])
+ (Exim 4.90_1) (envelope-from <laurent@vivier.eu>)
+ id 1pfFki-0004B2-Ci; Thu, 23 Mar 2023 03:52:53 -0400
+Received: from mout.kundenserver.de ([212.227.126.133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pfEuq-0002zX-Ag; Thu, 23 Mar 2023 02:59:19 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0VeTMzUO_1679554746; 
-Received: from 30.221.98.101(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VeTMzUO_1679554746) by smtp.aliyun-inc.com;
- Thu, 23 Mar 2023 14:59:07 +0800
-Message-ID: <91754207-f91f-25dd-605c-1d10b33d229a@linux.alibaba.com>
-Date: Thu, 23 Mar 2023 14:59:04 +0800
+ (Exim 4.90_1) (envelope-from <laurent@vivier.eu>)
+ id 1pfFkg-0002r3-DP; Thu, 23 Mar 2023 03:52:52 -0400
+Received: from [192.168.100.1] ([82.142.8.70]) by mrelayeu.kundenserver.de
+ (mreue010 [213.165.67.103]) with ESMTPSA (Nemesis) id
+ 1MlfGs-1qNyU331Vq-00indb; Thu, 23 Mar 2023 08:52:29 +0100
+Message-ID: <51d17772-3d63-ab6c-3dc3-44cb9dd6a9d1@vivier.eu>
+Date: Thu, 23 Mar 2023 08:52:27 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [PATCH v4 1/2] target/riscv: separate priv from mmu_idx
-To: "Wu, Fei" <fei2.wu@intel.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH qemu v3] linux-user: Emulate /proc/cpuinfo output for riscv
+To: Afonso Bordado <afonsobordado@gmail.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Christoph Muellner <christoph.muellner@vrull.eu>
-References: <20230323024412.324085-1-fei2.wu@intel.com>
- <20230323024412.324085-2-fei2.wu@intel.com>
- <9423db2e-257f-016d-b404-17d8e5adc0ac@linux.alibaba.com>
- <7db6d615-5ddc-5e1b-1d3c-a85c22e6af74@intel.com>
-Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <7db6d615-5ddc-5e1b-1d3c-a85c22e6af74@intel.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <324c2fd4-7044-0dd9-7ad9-b716fbefa5d9@gmail.com>
+Content-Language: fr
+From: Laurent Vivier <laurent@vivier.eu>
+In-Reply-To: <324c2fd4-7044-0dd9-7ad9-b716fbefa5d9@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.130;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-130.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+X-Provags-ID: V03:K1:4/NeyB8q4BoVSYK031OE68WU+tm4DBpWwyqL6syZwCV5rgBZRVc
+ aX5ByyaCfLXot/7VEfB43/+hycx81+LQB/TyeIlYvUzdaBn3vULB40Rs5kCEow58LXkuXC9
+ NlfJNJ4nBcYXWzVTGOQYf7pL4ORtFrEAdDiVuQwlqK42fFZKEPw5kjdqlASs/NJWpVXc9fh
+ WcSAUScqeiQCtM8SZzFVw==
+UI-OutboundReport: notjunk:1;M01:P0:dGfwoI0xEic=;oif2c2PluStKueSycsAagxLnvlI
+ 3e7vi7kONGyIu31uMvJVKDRyC9IXuGaXNkIsSMwOVjJzgJ7yMrVj0j2QdVPx/x1sHNvuxxcp1
+ Rrgt4RSb6YG6Kqlhhy+eD/KMEdvNfKdDlsCis5AYRXv+uCQ3yp0KSPLVbFWz0oxGZOmKmEcV4
+ cFY27lIT7E7p76a5JCe21ggVwaqtBxmeAgvG81IZjWsnXArmfTas5e0LwvN1DpmDq95gq16fO
+ GjuwnTWBzGIe2DvfsbxoS4fzpfpVtGbeD2djCO1Df54aGEWkyv9ecRaV9JdAgdO7+TSKx26/j
+ A7tXqGgCq8SzaEvAalA4u2aOdTbbPTbfCIgEvvCWplvQtMVufDURqMrDR0MFpydgwfQF3+tsY
+ SOJTsjOOX02bZxQj7uJGJFwdQZsIWVeDuVscYudiWAtpZl2x7V6609Ahk3WDGVjK2xEDdj1IZ
+ QkXJF2su1ptF5mM6Luwsv8g1i1fiznk18KwLTtROVsqTaIL8o13vmw731L5lIz2BoGzpglVmL
+ GEbIWmbR84JxPW33DThxxY/hwGqTm25hfgIxQNooXSUS6JEAfOhEzxPQ/Al1rh64PozsHg8wC
+ ekOhsRT9d/90iFG5NwAeZ+qZaB7L09zGnwzAYtbpxCUIU/xnIiNJx5gRPulvGhb77or79w3vi
+ qj8gZa8qPWHEE5CdlNTWQJmpIwx4RRrg5ipy429S2g==
+Received-SPF: none client-ip=212.227.126.133; envelope-from=laurent@vivier.eu;
+ helo=mout.kundenserver.de
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -59,141 +65,156 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Mar 2023 06:59:23 -0000
+X-List-Received-Date: Thu, 23 Mar 2023 07:52:54 -0000
 
+Le 21/03/2023 à 19:25, Afonso Bordado a écrit :
+> RISC-V does not expose all extensions via hwcaps, thus some userspace
+> applications may want to query these via /proc/cpuinfo.
+> 
+> Currently when querying this file the host's file is shown instead
+> which is slightly confusing. Emulate a basic /proc/cpuinfo file
+> with mmu info and an ISA string.
+> 
+> Signed-off-by: Afonso Bordado <afonsobordado@gmail.com>
+> Reviewed-by: Palmer Dabbelt <palmer@rivosinc.com>
+> Acked-by: Palmer Dabbelt <palmer@rivosinc.com>
+> Reviewed-by: Laurent Vivier <laurent@vivier.eu>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
+> 
+> Thanks everyone for reviewing! Should I resend this once the 8.0
+> freeze is over? Or does someone queue it for inclusion in the next
+> version?
 
-On 2023/3/23 14:00, Wu, Fei wrote:
-> On 3/23/2023 1:37 PM, LIU Zhiwei wrote:
->> On 2023/3/23 10:44, Fei Wu wrote:
->>> Currently it's assumed the 2 low bits of mmu_idx map to privilege mode,
->>> this assumption won't last as we are about to add more mmu_idx.
->> For patch set has more than 1 patch, usually add a cover letter.
-> This is cover letter:
->     https://www.mail-archive.com/qemu-devel@nongnu.org/msg950849.html
->
-> I added scripts/get_maintainer.pl to .git/config,
-Interesting.
-> it couldn't find out
-> the maintainers for the cover letter, so I added the mail lists to "To"
-> manually.
-Maybe you should also cc to maintainers manually. I don't know the 
-automatically way.
->
->>> Signed-off-by: Fei Wu <fei2.wu@intel.com>
->>> ---
->>>    target/riscv/cpu.h                             | 1 -
->>>    target/riscv/cpu_helper.c                      | 2 +-
->>>    target/riscv/insn_trans/trans_privileged.c.inc | 2 +-
->>>    target/riscv/insn_trans/trans_xthead.c.inc     | 7 +------
->>>    target/riscv/translate.c                       | 3 +++
->>>    5 files changed, 6 insertions(+), 9 deletions(-)
->>>
->>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->>> index 638e47c75a..66f7e3d1ba 100644
->>> --- a/target/riscv/cpu.h
->>> +++ b/target/riscv/cpu.h
->>> @@ -623,7 +623,6 @@ G_NORETURN void
->>> riscv_raise_exception(CPURISCVState *env,
->>>    target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
->>>    void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
->>>    -#define TB_FLAGS_PRIV_MMU_MASK                3
->>>    #define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
->>>    #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
->>>    #define TB_FLAGS_MSTATUS_VS MSTATUS_VS
->>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->>> index f88c503cf4..76e1b0100e 100644
->>> --- a/target/riscv/cpu_helper.c
->>> +++ b/target/riscv/cpu_helper.c
->>> @@ -762,7 +762,7 @@ static int get_physical_address(CPURISCVState
->>> *env, hwaddr *physical,
->>>         * (riscv_cpu_do_interrupt) is correct */
->>>        MemTxResult res;
->>>        MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
->>> -    int mode = mmu_idx & TB_FLAGS_PRIV_MMU_MASK;
->>> +    int mode = env->priv;
->>>        bool use_background = false;
->>>        hwaddr ppn;
->>>        RISCVCPU *cpu = env_archcpu(env);
->>> diff --git a/target/riscv/insn_trans/trans_privileged.c.inc
->>> b/target/riscv/insn_trans/trans_privileged.c.inc
->>> index 59501b2780..9305b18299 100644
->>> --- a/target/riscv/insn_trans/trans_privileged.c.inc
->>> +++ b/target/riscv/insn_trans/trans_privileged.c.inc
->>> @@ -52,7 +52,7 @@ static bool trans_ebreak(DisasContext *ctx,
->>> arg_ebreak *a)
->>>         * that no exception will be raised when fetching them.
->>>         */
->>>    -    if (semihosting_enabled(ctx->mem_idx < PRV_S) &&
->>> +    if (semihosting_enabled(ctx->priv < PRV_S) &&
->>>            (pre_addr & TARGET_PAGE_MASK) == (post_addr &
->>> TARGET_PAGE_MASK)) {
->>>            pre    = opcode_at(&ctx->base, pre_addr);
->>>            ebreak = opcode_at(&ctx->base, ebreak_addr);
->>> diff --git a/target/riscv/insn_trans/trans_xthead.c.inc
->>> b/target/riscv/insn_trans/trans_xthead.c.inc
->>> index df504c3f2c..adfb53cb4c 100644
->>> --- a/target/riscv/insn_trans/trans_xthead.c.inc
->>> +++ b/target/riscv/insn_trans/trans_xthead.c.inc
->>> @@ -265,12 +265,7 @@ static bool trans_th_tst(DisasContext *ctx,
->>> arg_th_tst *a)
->>>      static inline int priv_level(DisasContext *ctx)
->>>    {
->>> -#ifdef CONFIG_USER_ONLY
->>> -    return PRV_U;
->>> -#else
->>> -     /* Priv level is part of mem_idx. */
->>> -    return ctx->mem_idx & TB_FLAGS_PRIV_MMU_MASK;
->>> -#endif
->>> +    return ctx->priv;
->>>    }
->>>      /* Test if priv level is M, S, or U (cannot fail). */
->>> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
->>> index 0ee8ee147d..e8880f9423 100644
->>> --- a/target/riscv/translate.c
->>> +++ b/target/riscv/translate.c
->>> @@ -69,6 +69,7 @@ typedef struct DisasContext {
->>>        uint32_t mstatus_hs_fs;
->>>        uint32_t mstatus_hs_vs;
->>>        uint32_t mem_idx;
->>> +    uint32_t priv;
->>>        /* Remember the rounding mode encoded in the previous fp
->>> instruction,
->>>           which we have already installed into env->fp_status.  Or -1 for
->>>           no previous fp instruction.  Note that we exit the TB when
->>> writing
->>> @@ -1162,8 +1163,10 @@ static void
->>> riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->>>        } else {
->>>            ctx->virt_enabled = false;
->>>        }
->>> +    ctx->priv = env->priv;
->> This is not right. You should put env->priv into tb flags before you use
->> it in translation.
->>
-> I see some other env usages in this function,
-Don't do it that way. It just be merged by accident. It will make review 
-harder and probably be wrong.
-> when will env->priv and
-> tb_flags.priv mismatch (assume we have recorded priv in tb_flags)?
+I queue this for 8.1 in the linux-use branch.
 
-We always record the env->priv in tb flags if we don't merge your second 
-patch in this patch set.
-After your second patch, we will not record the env->priv  into tb flags 
-when SUM is 1. Thus we may execute a S-mode code when we actually in 
-M-mode, which is forbidden by RISC-V.
+Thanks,
+Laurent
+> 
+> 
+> Changes from V2:
+> - Update ChangeLog Location
+> 
+> Changes from V1:
+> - Call `g_free` on ISA string.
+> - Use `riscv_cpu_cfg` API.
+> - Query `cpu_env->xl` to check for RV32.
+> 
+> 
+>   linux-user/syscall.c              | 34 +++++++++++++++++++++++++++++--
+>   tests/tcg/riscv64/Makefile.target |  1 +
+>   tests/tcg/riscv64/cpuinfo.c       | 30 +++++++++++++++++++++++++++
+>   3 files changed, 63 insertions(+), 2 deletions(-)
+>   create mode 100644 tests/tcg/riscv64/cpuinfo.c
+> 
+> diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+> index 24cea6fb6a..0388f8b0b0 100644
+> --- a/linux-user/syscall.c
+> +++ b/linux-user/syscall.c
+> @@ -8230,7 +8230,8 @@ void target_exception_dump(CPUArchState *env, const char *fmt, int code)
+>   }
+> 
+>   #if HOST_BIG_ENDIAN != TARGET_BIG_ENDIAN || \
+> -    defined(TARGET_SPARC) || defined(TARGET_M68K) || defined(TARGET_HPPA)
+> +    defined(TARGET_SPARC) || defined(TARGET_M68K) || defined(TARGET_HPPA) || \
+> +    defined(TARGET_RISCV)
+>   static int is_proc(const char *filename, const char *entry)
+>   {
+>       return strcmp(filename, entry) == 0;
+> @@ -8308,6 +8309,35 @@ static int open_cpuinfo(CPUArchState *cpu_env, int fd)
+>   }
+>   #endif
+> 
+> +#if defined(TARGET_RISCV)
+> +static int open_cpuinfo(CPUArchState *cpu_env, int fd)
+> +{
+> +    int i;
+> +    int num_cpus = sysconf(_SC_NPROCESSORS_ONLN);
+> +    RISCVCPU *cpu = env_archcpu(cpu_env);
+> +    const RISCVCPUConfig *cfg = riscv_cpu_cfg((CPURISCVState *) cpu_env);
+> +    char *isa_string = riscv_isa_string(cpu);
+> +    const char *mmu;
+> +
+> +    if (cfg->mmu) {
+> +        mmu = (cpu_env->xl == MXL_RV32) ? "sv32"  : "sv48";
+> +    } else {
+> +        mmu = "none";
+> +    }
+> +
+> +    for (i = 0; i < num_cpus; i++) {
+> +        dprintf(fd, "processor\t: %d\n", i);
+> +        dprintf(fd, "hart\t\t: %d\n", i);
+> +        dprintf(fd, "isa\t\t: %s\n", isa_string);
+> +        dprintf(fd, "mmu\t\t: %s\n", mmu);
+> +        dprintf(fd, "uarch\t\t: qemu\n\n");
+> +    }
+> +
+> +    g_free(isa_string);
+> +    return 0;
+> +}
+> +#endif
+> +
+>   #if defined(TARGET_M68K)
+>   static int open_hardware(CPUArchState *cpu_env, int fd)
+>   {
+> @@ -8332,7 +8362,7 @@ static int do_openat(CPUArchState *cpu_env, int dirfd, const char *pathname, int
+>   #if HOST_BIG_ENDIAN != TARGET_BIG_ENDIAN
+>           { "/proc/net/route", open_net_route, is_proc },
+>   #endif
+> -#if defined(TARGET_SPARC) || defined(TARGET_HPPA)
+> +#if defined(TARGET_SPARC) || defined(TARGET_HPPA) || defined(TARGET_RISCV)
+>           { "/proc/cpuinfo", open_cpuinfo, is_proc },
+>   #endif
+>   #if defined(TARGET_M68K)
+> diff --git a/tests/tcg/riscv64/Makefile.target
+> b/tests/tcg/riscv64/Makefile.target
+> index cc3ed65ffd..df93a2ce1f 100644
+> --- a/tests/tcg/riscv64/Makefile.target
+> +++ b/tests/tcg/riscv64/Makefile.target
+> @@ -4,6 +4,7 @@
+>   VPATH += $(SRC_PATH)/tests/tcg/riscv64
+>   TESTS += test-div
+>   TESTS += noexec
+> +TESTS += cpuinfo
+> 
+>   # Disable compressed instructions for test-noc
+>   TESTS += test-noc
+> diff --git a/tests/tcg/riscv64/cpuinfo.c b/tests/tcg/riscv64/cpuinfo.c
+> new file mode 100644
+> index 0000000000..296abd0a8c
+> --- /dev/null
+> +++ b/tests/tcg/riscv64/cpuinfo.c
+> @@ -0,0 +1,30 @@
+> +#include <stdio.h>
+> +#include <stdlib.h>
+> +#include <string.h>
+> +#include <assert.h>
+> +
+> +#define BUFFER_SIZE 1024
+> +
+> +int main(void)
+> +{
+> +    char buffer[BUFFER_SIZE];
+> +    FILE *fp = fopen("/proc/cpuinfo", "r");
+> +    assert(fp != NULL);
+> +
+> +    while (fgets(buffer, BUFFER_SIZE, fp) != NULL) {
+> +        if (strstr(buffer, "processor") != NULL) {
+> +            assert(strstr(buffer, "processor\t: ") == buffer);
+> +        } else if (strstr(buffer, "hart") != NULL) {
+> +            assert(strstr(buffer, "hart\t\t: ") == buffer);
+> +        } else if (strstr(buffer, "isa") != NULL) {
+> +            assert(strcmp(buffer, "isa\t\t: rv64imafdc_zicsr_zifencei\n") == 0);
+> +        } else if (strstr(buffer, "mmu") != NULL) {
+> +            assert(strcmp(buffer, "mmu\t\t: sv48\n") == 0);
+> +        } else if (strstr(buffer, "uarch") != NULL) {
+> +            assert(strcmp(buffer, "uarch\t\t: qemu\n") == 0);
+> +        }
+> +    }
+> +
+> +    fclose(fp);
+> +    return 0;
+> +}
 
-Zhiwei
-
->
-> Thanks,
-> Fei.
->
->> Zhiwei
->>
->>>    #else
->>>        ctx->virt_enabled = false;
->>> +    ctx->priv = PRV_U;
->>>    #endif
->>>        ctx->misa_ext = env->misa_ext;
->>>        ctx->frm = -1;  /* unknown rounding mode */
 
