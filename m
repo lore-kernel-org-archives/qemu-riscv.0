@@ -1,87 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pfO0P-0006T8-CS
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Mar 2023 12:41:37 -0400
+	id 1pfUHh-0003ov-OX
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Mar 2023 19:23:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pfO0O-0006Sw-EU
- for qemu-riscv@nongnu.org; Thu, 23 Mar 2023 12:41:36 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pfUHg-0003oQ-Vb
+ for qemu-riscv@nongnu.org; Thu, 23 Mar 2023 19:23:52 -0400
+Received: from mail-oa1-x2b.google.com ([2001:4860:4864:20::2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pfO0L-00062E-PU
- for qemu-riscv@nongnu.org; Thu, 23 Mar 2023 12:41:36 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- gp15-20020a17090adf0f00b0023d1bbd9f9eso2568347pjb.0
- for <qemu-riscv@nongnu.org>; Thu, 23 Mar 2023 09:41:32 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pfUHc-0005MO-Oq
+ for qemu-riscv@nongnu.org; Thu, 23 Mar 2023 19:23:51 -0400
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-17683b570b8so86762fac.13
+ for <qemu-riscv@nongnu.org>; Thu, 23 Mar 2023 16:23:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1679589691;
+ d=ventanamicro.com; s=google; t=1679613822;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=kqyoSI5i+pkQt4yftSmTL7pnFANsWJMeQ7Q78lFUtZ8=;
- b=Uv9C7tS1nJxCG5KawtZ7wwuS47JEj9Zyxw4b3oxjtd44uhf2A3ATS4rRhZMRqOpenN
- e26+7PXwmcJ8EbCKf4VIH5ZEqtZ4hHddYUF6wHpcQcSZ9HPoBbNLCp/8CeK/nwsoRyLp
- rwH3sua1+hVREgXfODuqyN3Z75jDfsWo41RO8J1Ki4JjHn9HpfGx7xPmOZVihgS0Cjp0
- +NiPjBkc1HWt/7YbHMDPoiU6LaB5UiF7XtnBQSRLXI2fIRyo6BTrKD4w+xUo3LyUvBOq
- F8HDJ6GLDujzj+rd14gfxEc3NBkF/pWetxj4W6Y2u9kbIhkiopjqQNUhD/hU9Z/WyVI6
- lvdw==
+ bh=SuDizPkXYGLtbew1xN/iUh+fbg6F4GO1RWCwvLIE7Og=;
+ b=ndtTMvD4XuGd5wR/fzDxuv8WEp0Qs3bZPBKzrd70X9vWC/o3Y0Ct07srHdpYNYq79b
+ NnnYRavj3ZvnzOz2bKJQqBvO7UP/KiK6uOt1qvSau17vuByjGAUGNCaK1VKt7FtRYOZp
+ U37E5TR9n7z6zdrmIwY4xWvLacLg8dnf4Bj8CoN5uLr0lyzWZZ0jTkrYxKuCDoRYp6oL
+ S7Lzd0XSTBtyAr+fTC0fE2b9O769+fvt49lB4nHrb1n1oGsu3Kr+nZJGLjIbAqSuGest
+ s5EAQdYMU1bJgjhmYArqcmGeXR4fG1pwmJ6UNROaPKdMB9Grq4uQ2wL8eJtZPoMROegi
+ GPZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679589691;
+ d=1e100.net; s=20210112; t=1679613822;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kqyoSI5i+pkQt4yftSmTL7pnFANsWJMeQ7Q78lFUtZ8=;
- b=YrHlDktae8EKsdPbWWPxq/NdSIf5dYou0jxBmo+G/21h+F+ymf3WWjxZXCskADxMDk
- Z7lXU1T49t4IRahJhTG5sOJlZvB4Eq2jrx8LpypVMv2OElLS7YUKhWhTDZZyI0EmCcn9
- V9W7XLzEs6W0uzgy0qfvZKCaJOlzAaQzd/TG9nY9NiEuqZsR7trSH/t49I7cO4oicbHK
- 7i7HQQCG4/Mwv3hAob87qLmyqjNzm5mNPAh3s2Ytk3tvxJGi61r2TJ4BXRxLyc+38eMH
- u8sRsQk5Gv/EKXexfDacBScW/AfXwk5OUAB//2GVxenLXspxVLa2zRk+O1ywEmiRVV/9
- n+hA==
-X-Gm-Message-State: AO0yUKWwuTaEWnFyHFZV2QROW+HmwJSaKt93hZbENBse82hZVNJQx1TC
- N6z1o6vmDH1FV2PkGcOfq7f4pQ==
-X-Google-Smtp-Source: AK7set+2NYvtYEqBp3Cg+itOOEJR4aUvQGheWFO71ZlmtwMDBTo9gqNhIs0RTEk78XPS8ztvH9iu7w==
-X-Received: by 2002:a17:90b:1bcc:b0:23f:b35a:534e with SMTP id
- oa12-20020a17090b1bcc00b0023fb35a534emr8543177pjb.29.1679589691042; 
- Thu, 23 Mar 2023 09:41:31 -0700 (PDT)
-Received: from ?IPV6:2602:ae:1544:6601:226e:47e1:b8cd:a957?
- ([2602:ae:1544:6601:226e:47e1:b8cd:a957])
+ bh=SuDizPkXYGLtbew1xN/iUh+fbg6F4GO1RWCwvLIE7Og=;
+ b=BeHcorJI+w+5q2dK45DJWO+4tuV1G677/cK0XpD3PwJJQn7/7uOu1IUuGSdY5k6jzv
+ drdpE8pAzM6hkA/8FOejtxN5IDOJrC4S2wP2qY78DRcv2N8zDHQe/onVHssbQCFZWQHI
+ act+VGhXZiYBko1QAiETx9c39JvbU36/z3lhaiOGal3Dduo6E8wJSJLAyQKxlbI6U8Gp
+ GAUc4a0vJiQhgk0UAzEMohN1H8j3UmjSWqWP/iGTbDYxP/93pRDEqDo41dcf2UYSqADA
+ /fMF0AnO+7PMGUMnJem4xErxL33pP7OU2U3GZHTDi0Ed0qxQT/D+/HvMaOg98kWbqQww
+ yW1w==
+X-Gm-Message-State: AAQBX9dsL9Wa7olJzyV495hGlCHjoBZzzIg8B2l4CA53E8kFjiV7+P+a
+ jagxZnuNfMduOspjBvfGyrRykg==
+X-Google-Smtp-Source: AKy350ZYEfB+yW/1XjUq9MPwIbQ92dYVHYHLeb6uHpidYxs90NsfvcdiE9tnrNJp5SjMg6tqXUeK/A==
+X-Received: by 2002:a05:6870:b312:b0:17e:2a10:c2e2 with SMTP id
+ a18-20020a056870b31200b0017e2a10c2e2mr680966oao.38.1679613818074; 
+ Thu, 23 Mar 2023 16:23:38 -0700 (PDT)
+Received: from [192.168.68.107] ([177.95.89.231])
  by smtp.gmail.com with ESMTPSA id
- f7-20020a170902860700b001a1d4a985eesm7530594plo.228.2023.03.23.09.41.30
+ y26-20020a056830209a00b006a06e7972ebsm44991otq.38.2023.03.23.16.23.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Mar 2023 09:41:30 -0700 (PDT)
-Message-ID: <86d858a4-4d93-38b0-2661-493de52b8799@linaro.org>
-Date: Thu, 23 Mar 2023 09:41:28 -0700
+ Thu, 23 Mar 2023 16:23:37 -0700 (PDT)
+Message-ID: <c84e9446-de00-a305-8935-0ad898029298@ventanamicro.com>
+Date: Thu, 23 Mar 2023 20:23:34 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH v3] target/riscv: reduce overhead of MSTATUS_SUM change
+ Thunderbird/102.9.0
+Subject: Re: [PATCH for-8.1 v4 11/25] target/riscv/cpu.c: set cpu config in
+ set_misa()
 Content-Language: en-US
-To: "Wu, Fei" <fei2.wu@intel.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- "open list:All patches CC here" <qemu-devel@nongnu.org>
-References: <20230322121240.232303-1-fei2.wu@intel.com>
- <cde0b3bf-7d38-2fc4-c8a9-7241d5bf7339@linaro.org>
- <4c0c210b-7a9a-34a8-b0c2-e32f9328bf07@intel.com>
- <5a9a0d2b-6530-2436-712a-ef168266d2e9@intel.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <5a9a0d2b-6530-2436-712a-ef168266d2e9@intel.com>
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, palmer@rivosinc.com
+References: <20230322222004.357013-1-dbarboza@ventanamicro.com>
+ <20230322222004.357013-12-dbarboza@ventanamicro.com>
+ <54371a2c-78f2-19a7-7a85-10ad0dec72a7@linux.alibaba.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <54371a2c-78f2-19a7-7a85-10ad0dec72a7@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2001:4860:4864:20::2b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,22 +88,170 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Mar 2023 16:41:36 -0000
+X-List-Received-Date: Thu, 23 Mar 2023 23:23:53 -0000
 
-On 3/23/23 06:24, Wu, Fei wrote:
->> There is MSTATUS_MPRV and MSTATUS_MPP kind of thing, priv+sum is not
->> able to represent all of the status, probably we can just add an extra
->> 'priv' at the back of TB_FLAGS?
+
+
+On 3/22/23 23:14, LIU Zhiwei wrote:
+> 
+> On 2023/3/23 6:19, Daniel Henrique Barboza wrote:
+>> set_misa() is setting all 'misa' related env states and nothing else.
+>> But other functions, namely riscv_cpu_validate_set_extensions(), uses
+>> the config object to do its job.
 >>
-> MPRV+MPP looks not necessary be in TB_FLAGS, it's just used to calculate
-> the mmu_idx. Is it necessary to encode SUM into TB_FLAGS?
+>> This creates a need to set the single letter extensions in the cfg
+>> object to keep both in sync. At this moment this is being done by
+>> register_cpu_props(), forcing every CPU to do a call to this function.
+>>
+>> Let's beef up set_misa() and make the function do the sync for us. This
+>> will relieve named CPUs to having to call register_cpu_props(), which
+>> will then be redesigned to a more specialized role next.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/cpu.c | 43 ++++++++++++++++++++++++++++++++-----------
+>>   target/riscv/cpu.h |  4 ++--
+>>   2 files changed, 34 insertions(+), 13 deletions(-)
+>>
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index 36c55abda0..df5c0bda70 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -236,8 +236,40 @@ const char *riscv_cpu_get_trap_name(target_ulong cause, bool async)
+>>   static void set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext)
+>>   {
+>> +    RISCVCPU *cpu;
+>> +
+>>       env->misa_mxl_max = env->misa_mxl = mxl;
+>>       env->misa_ext_mask = env->misa_ext = ext;
+>> +
+>> +    /*
+>> +     * ext = 0 will only be a thing during cpu_init() functions
+>> +     * as a way of setting an extension-agnostic CPU. We do
+>> +     * not support clearing misa_ext* and the ext_N flags in
+>> +     * RISCVCPUConfig in regular circunstances.
+>> +     */
+>> +    if (ext == 0) {
+>> +        return;
+>> +    }
+>> +
+>> +    /*
+>> +     * We can't use riscv_cpu_cfg() in this case because it is
+>> +     * a read-only inline and we're going to change the values
+>> +     * of cpu->cfg.
+>> +     */
+>> +    cpu = env_archcpu(env);
+>> +
+>> +    cpu->cfg.ext_i = ext & RVI;
+>> +    cpu->cfg.ext_e = ext & RVE;
+>> +    cpu->cfg.ext_m = ext & RVM;
+>> +    cpu->cfg.ext_a = ext & RVA;
+>> +    cpu->cfg.ext_f = ext & RVF;
+>> +    cpu->cfg.ext_d = ext & RVD;
+>> +    cpu->cfg.ext_v = ext & RVV;
+>> +    cpu->cfg.ext_c = ext & RVC;
+>> +    cpu->cfg.ext_s = ext & RVS;
+>> +    cpu->cfg.ext_u = ext & RVU;
+>> +    cpu->cfg.ext_h = ext & RVH;
+>> +    cpu->cfg.ext_j = ext & RVJ;
+>>   }
+>>   #ifndef CONFIG_USER_ONLY
+>> @@ -340,7 +372,6 @@ static void riscv_any_cpu_init(Object *obj)
+>>   #endif
+>>       env->priv_ver = PRIV_VERSION_LATEST;
+>> -    register_cpu_props(obj);
+> 
+> This patch will break the original logic. We can only can a empty CPU here.
+> 
+>>       /* inherited from parent obj via riscv_cpu_init() */
+>>       cpu->cfg.ext_ifencei = true;
+>> @@ -368,7 +399,6 @@ static void rv64_sifive_u_cpu_init(Object *obj)
+>>       RISCVCPU *cpu = RISCV_CPU(obj);
+>>       CPURISCVState *env = &cpu->env;
+>>       set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>> -    register_cpu_props(obj);
+>>       env->priv_ver = PRIV_VERSION_1_10_0;
+>>   #ifndef CONFIG_USER_ONLY
+>>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV39);
+>> @@ -387,7 +417,6 @@ static void rv64_sifive_e_cpu_init(Object *obj)
+>>       RISCVCPU *cpu = RISCV_CPU(obj);
+>>       set_misa(env, MXL_RV64, RVI | RVM | RVA | RVC | RVU);
+>> -    register_cpu_props(obj);
+>>       env->priv_ver = PRIV_VERSION_1_10_0;
+>>   #ifndef CONFIG_USER_ONLY
+>>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
+>> @@ -408,9 +437,6 @@ static void rv64_thead_c906_cpu_init(Object *obj)
+>>       env->priv_ver = PRIV_VERSION_1_11_0;
+>>       cpu->cfg.ext_g = true;
+>> -    cpu->cfg.ext_c = true;
+>> -    cpu->cfg.ext_u = true;
+>> -    cpu->cfg.ext_s = true;
+> 
+> Why specially for these configurations?
 
-We need priv separate from midx for priv_level() and similar uses.
-We do not want MPRV=1, MPP=U to prevent M-mode from executing M instructions.
+Because there is a set_misa() call right before:
 
-With PRIV and MIDX in TB_FLAGS, we do not need to separately encode MPRV+MPP+SUM, because 
-all of those are composited into MIDX.
+set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+
+And since set_misa() is now syncing with cpu->cfg these are unneeded. There
+are no other cases like that in other cpu_init() functions. I'll make sure to
+mention this in the commit message in the next version.
+
+Patch 14 is going to do the same thing for ext_g in this same function.
 
 
-r~
+Thanks,
+
+Daniel
+
+> 
+> Zhiwei
+> 
+>>       cpu->cfg.ext_icsr = true;
+>>       cpu->cfg.ext_zfh = true;
+>>       cpu->cfg.mmu = true;
+>> @@ -472,8 +498,6 @@ static void rv32_sifive_u_cpu_init(Object *obj)
+>>       RISCVCPU *cpu = RISCV_CPU(obj);
+>>       CPURISCVState *env = &cpu->env;
+>>       set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>> -
+>> -    register_cpu_props(obj);
+>>       env->priv_ver = PRIV_VERSION_1_10_0;
+>>   #ifndef CONFIG_USER_ONLY
+>>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV32);
+>> @@ -492,7 +516,6 @@ static void rv32_sifive_e_cpu_init(Object *obj)
+>>       RISCVCPU *cpu = RISCV_CPU(obj);
+>>       set_misa(env, MXL_RV32, RVI | RVM | RVA | RVC | RVU);
+>> -    register_cpu_props(obj);
+>>       env->priv_ver = PRIV_VERSION_1_10_0;
+>>   #ifndef CONFIG_USER_ONLY
+>>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
+>> @@ -510,7 +533,6 @@ static void rv32_ibex_cpu_init(Object *obj)
+>>       RISCVCPU *cpu = RISCV_CPU(obj);
+>>       set_misa(env, MXL_RV32, RVI | RVM | RVC | RVU);
+>> -    register_cpu_props(obj);
+>>       env->priv_ver = PRIV_VERSION_1_11_0;
+>>   #ifndef CONFIG_USER_ONLY
+>>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
+>> @@ -529,7 +551,6 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+>>       RISCVCPU *cpu = RISCV_CPU(obj);
+>>       set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
+>> -    register_cpu_props(obj);
+>>       env->priv_ver = PRIV_VERSION_1_10_0;
+>>   #ifndef CONFIG_USER_ONLY
+>>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index 76f81c6b68..ebe0fff668 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -66,8 +66,8 @@
+>>   #define RV(x) ((target_ulong)1 << (x - 'A'))
+>>   /*
+>> - * Consider updating register_cpu_props() when adding
+>> - * new MISA bits here.
+>> + * Consider updating set_misa() when adding new
+>> + * MISA bits here.
+>>    */
+>>   #define RVI RV('I')
+>>   #define RVE RV('E') /* E and I are mutually exclusive */
 
