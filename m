@@ -1,49 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pfAXQ-0000x9-7o
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 22:18:48 -0400
+	id 1pfAui-0000Ag-Ha
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 22:42:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pfAXO-0000wf-6u; Wed, 22 Mar 2023 22:18:46 -0400
-Received: from out30-119.freemail.mail.aliyun.com ([115.124.30.119])
+ (Exim 4.90_1) (envelope-from <fei2.wu@intel.com>)
+ id 1pfAud-0000AH-PI; Wed, 22 Mar 2023 22:42:48 -0400
+Received: from mga04.intel.com ([192.55.52.120])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pfAXL-0007Ik-Hd; Wed, 22 Mar 2023 22:18:46 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0VeSJg0s_1679537914; 
-Received: from 30.221.98.101(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VeSJg0s_1679537914) by smtp.aliyun-inc.com;
- Thu, 23 Mar 2023 10:18:35 +0800
-Message-ID: <49dadece-4157-a1e9-d4d3-6509e8caa8dd@linux.alibaba.com>
-Date: Thu, 23 Mar 2023 10:18:32 +0800
+ (Exim 4.90_1) (envelope-from <fei2.wu@intel.com>)
+ id 1pfAub-0007HI-Vf; Wed, 22 Mar 2023 22:42:47 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1679539366; x=1711075366;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=OtliJv0j6cMBQyx+8x87fkBvL9HT2VKkhB2pK+xwhgU=;
+ b=J3ys6Biqcv2PN2aNuOAnCWNic/wHuLr+O/H0E5rTAbtE/vwR1iQNhilo
+ SQl6WlZM4tSLdUNc1svG3NYvjNS2+eGw1Xyk1mFxgZ8NvsGPnqwltAwSE
+ 1QlbAA8x096Sx9UKO/HJRh026Qn+gtnjrI9ZpqNIDklo3Gt/8JRHB5SWT
+ XbdB6hLalD0yrJ9im9ZafKXJyCLA46B12Kqt+ld4HLGrFzKnjUs915la6
+ /pmLBABmmZAzf2W3gU2p++Y8czPdmpEPcCxbuEe1QG+9svJgwPEBTxQyC
+ bNi51p1aaHomxECUH/XARJF/IYQ/+bKgZYmbZa5v2dhcrJorhs7Md3OBj w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10657"; a="338100171"
+X-IronPort-AV: E=Sophos;i="5.98,283,1673942400"; d="scan'208";a="338100171"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 22 Mar 2023 19:42:29 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10657"; a="712491263"
+X-IronPort-AV: E=Sophos;i="5.98,283,1673942400"; d="scan'208";a="712491263"
+Received: from wufei-optiplex-7090.sh.intel.com ([10.238.200.247])
+ by orsmga008.jf.intel.com with ESMTP; 22 Mar 2023 19:42:27 -0700
+From: Fei Wu <fei2.wu@intel.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: Fei Wu <fei2.wu@intel.com>
+Subject: [PATCH v4 0/2] target/riscv: reduce MSTATUS_SUM overhead
+Date: Thu, 23 Mar 2023 10:44:10 +0800
+Message-Id: <20230323024412.324085-1-fei2.wu@intel.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [PATCH for-8.1 v4 11/25] target/riscv/cpu.c: set cpu config in
- set_misa()
-Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, palmer@rivosinc.com
-References: <20230322222004.357013-1-dbarboza@ventanamicro.com>
- <20230322222004.357013-12-dbarboza@ventanamicro.com>
- <54371a2c-78f2-19a7-7a85-10ad0dec72a7@linux.alibaba.com>
-In-Reply-To: <54371a2c-78f2-19a7-7a85-10ad0dec72a7@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.119;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-119.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=192.55.52.120; envelope-from=fei2.wu@intel.com;
+ helo=mga04.intel.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -56,162 +62,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Mar 2023 02:18:46 -0000
+X-List-Received-Date: Thu, 23 Mar 2023 02:42:49 -0000
 
+v3 -> v4:
+* seperate priv from mmu_idx
+* use index 2 for S+SUM mmu_idx
+* no tlb_flush for MPRV / MPP changes
 
-On 2023/3/23 10:14, LIU Zhiwei wrote:
->
-> On 2023/3/23 6:19, Daniel Henrique Barboza wrote:
->> set_misa() is setting all 'misa' related env states and nothing else.
->> But other functions, namely riscv_cpu_validate_set_extensions(), uses
->> the config object to do its job.
->>
->> This creates a need to set the single letter extensions in the cfg
->> object to keep both in sync. At this moment this is being done by
->> register_cpu_props(), forcing every CPU to do a call to this function.
->>
->> Let's beef up set_misa() and make the function do the sync for us. This
->> will relieve named CPUs to having to call register_cpu_props(), which
->> will then be redesigned to a more specialized role next.
->>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>   target/riscv/cpu.c | 43 ++++++++++++++++++++++++++++++++-----------
->>   target/riscv/cpu.h |  4 ++--
->>   2 files changed, 34 insertions(+), 13 deletions(-)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 36c55abda0..df5c0bda70 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -236,8 +236,40 @@ const char *riscv_cpu_get_trap_name(target_ulong 
->> cause, bool async)
->>     static void set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext)
->>   {
->> +    RISCVCPU *cpu;
->> +
->>       env->misa_mxl_max = env->misa_mxl = mxl;
->>       env->misa_ext_mask = env->misa_ext = ext;
->> +
->> +    /*
->> +     * ext = 0 will only be a thing during cpu_init() functions
->> +     * as a way of setting an extension-agnostic CPU. We do
->> +     * not support clearing misa_ext* and the ext_N flags in
->> +     * RISCVCPUConfig in regular circunstances.
->> +     */
->> +    if (ext == 0) {
->> +        return;
->> +    }
->> +
->> +    /*
->> +     * We can't use riscv_cpu_cfg() in this case because it is
->> +     * a read-only inline and we're going to change the values
->> +     * of cpu->cfg.
->> +     */
->> +    cpu = env_archcpu(env);
->> +
->> +    cpu->cfg.ext_i = ext & RVI;
->> +    cpu->cfg.ext_e = ext & RVE;
->> +    cpu->cfg.ext_m = ext & RVM;
->> +    cpu->cfg.ext_a = ext & RVA;
->> +    cpu->cfg.ext_f = ext & RVF;
->> +    cpu->cfg.ext_d = ext & RVD;
->> +    cpu->cfg.ext_v = ext & RVV;
->> +    cpu->cfg.ext_c = ext & RVC;
->> +    cpu->cfg.ext_s = ext & RVS;
->> +    cpu->cfg.ext_u = ext & RVU;
->> +    cpu->cfg.ext_h = ext & RVH;
->> +    cpu->cfg.ext_j = ext & RVJ;
->>   }
->>     #ifndef CONFIG_USER_ONLY
->> @@ -340,7 +372,6 @@ static void riscv_any_cpu_init(Object *obj)
->>   #endif
->>         env->priv_ver = PRIV_VERSION_LATEST;
->> -    register_cpu_props(obj);
->
-> This patch will break the original logic. We can only can a empty CPU 
-> here.
+Fei Wu (2):
+  target/riscv: separate priv from mmu_idx
+  target/riscv: reduce overhead of MSTATUS_SUM change
 
-Oops. I mistook it as a general cpu. Just ignore this comment.
+ target/riscv/cpu.h                            |  2 --
+ target/riscv/cpu_helper.c                     | 19 ++++++++++++++++---
+ target/riscv/csr.c                            |  3 +--
+ .../riscv/insn_trans/trans_privileged.c.inc   |  2 +-
+ target/riscv/insn_trans/trans_rvh.c.inc       |  4 ++--
+ target/riscv/insn_trans/trans_xthead.c.inc    |  7 +------
+ target/riscv/internals.h                      | 14 ++++++++++++++
+ target/riscv/op_helper.c                      |  5 +++--
+ target/riscv/translate.c                      |  3 +++
+ 9 files changed, 41 insertions(+), 18 deletions(-)
 
-Zhiwei
+-- 
+2.25.1
 
->
->>         /* inherited from parent obj via riscv_cpu_init() */
->>       cpu->cfg.ext_ifencei = true;
->> @@ -368,7 +399,6 @@ static void rv64_sifive_u_cpu_init(Object *obj)
->>       RISCVCPU *cpu = RISCV_CPU(obj);
->>       CPURISCVState *env = &cpu->env;
->>       set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS 
->> | RVU);
->> -    register_cpu_props(obj);
->>       env->priv_ver = PRIV_VERSION_1_10_0;
->>   #ifndef CONFIG_USER_ONLY
->>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV39);
->> @@ -387,7 +417,6 @@ static void rv64_sifive_e_cpu_init(Object *obj)
->>       RISCVCPU *cpu = RISCV_CPU(obj);
->>         set_misa(env, MXL_RV64, RVI | RVM | RVA | RVC | RVU);
->> -    register_cpu_props(obj);
->>       env->priv_ver = PRIV_VERSION_1_10_0;
->>   #ifndef CONFIG_USER_ONLY
->>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
->> @@ -408,9 +437,6 @@ static void rv64_thead_c906_cpu_init(Object *obj)
->>       env->priv_ver = PRIV_VERSION_1_11_0;
->>         cpu->cfg.ext_g = true;
->> -    cpu->cfg.ext_c = true;
->> -    cpu->cfg.ext_u = true;
->> -    cpu->cfg.ext_s = true;
->
-> Why specially for these configurations?
->
-> Zhiwei
->
->>       cpu->cfg.ext_icsr = true;
->>       cpu->cfg.ext_zfh = true;
->>       cpu->cfg.mmu = true;
->> @@ -472,8 +498,6 @@ static void rv32_sifive_u_cpu_init(Object *obj)
->>       RISCVCPU *cpu = RISCV_CPU(obj);
->>       CPURISCVState *env = &cpu->env;
->>       set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVS 
->> | RVU);
->> -
->> -    register_cpu_props(obj);
->>       env->priv_ver = PRIV_VERSION_1_10_0;
->>   #ifndef CONFIG_USER_ONLY
->>       set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV32);
->> @@ -492,7 +516,6 @@ static void rv32_sifive_e_cpu_init(Object *obj)
->>       RISCVCPU *cpu = RISCV_CPU(obj);
->>         set_misa(env, MXL_RV32, RVI | RVM | RVA | RVC | RVU);
->> -    register_cpu_props(obj);
->>       env->priv_ver = PRIV_VERSION_1_10_0;
->>   #ifndef CONFIG_USER_ONLY
->>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
->> @@ -510,7 +533,6 @@ static void rv32_ibex_cpu_init(Object *obj)
->>       RISCVCPU *cpu = RISCV_CPU(obj);
->>         set_misa(env, MXL_RV32, RVI | RVM | RVC | RVU);
->> -    register_cpu_props(obj);
->>       env->priv_ver = PRIV_VERSION_1_11_0;
->>   #ifndef CONFIG_USER_ONLY
->>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
->> @@ -529,7 +551,6 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
->>       RISCVCPU *cpu = RISCV_CPU(obj);
->>         set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
->> -    register_cpu_props(obj);
->>       env->priv_ver = PRIV_VERSION_1_10_0;
->>   #ifndef CONFIG_USER_ONLY
->>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index 76f81c6b68..ebe0fff668 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -66,8 +66,8 @@
->>   #define RV(x) ((target_ulong)1 << (x - 'A'))
->>     /*
->> - * Consider updating register_cpu_props() when adding
->> - * new MISA bits here.
->> + * Consider updating set_misa() when adding new
->> + * MISA bits here.
->>    */
->>   #define RVI RV('I')
->>   #define RVE RV('E') /* E and I are mutually exclusive */
 
