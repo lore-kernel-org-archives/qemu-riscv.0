@@ -1,41 +1,43 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pfBXs-0002jo-Bx
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Mar 2023 23:23:21 -0400
+	id 1pfDe3-00071p-AH
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Mar 2023 01:37:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pfBXo-0002jJ-Ij; Wed, 22 Mar 2023 23:23:16 -0400
-Received: from out30-118.freemail.mail.aliyun.com ([115.124.30.118])
+ id 1pfDe0-00070g-0N; Thu, 23 Mar 2023 01:37:48 -0400
+Received: from out30-130.freemail.mail.aliyun.com ([115.124.30.130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pfBXl-0002qJ-Ae; Wed, 22 Mar 2023 23:23:16 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0VeSbx8-_1679541781; 
+ id 1pfDdw-0000IH-PM; Thu, 23 Mar 2023 01:37:47 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0VeTAhd1_1679549852; 
 Received: from 30.221.98.101(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VeSbx8-_1679541781) by smtp.aliyun-inc.com;
- Thu, 23 Mar 2023 11:23:02 +0800
-Message-ID: <4bdf036a-4d50-2534-559a-415008eeb924@linux.alibaba.com>
-Date: Thu, 23 Mar 2023 11:22:59 +0800
+ fp:SMTPD_---0VeTAhd1_1679549852) by smtp.aliyun-inc.com;
+ Thu, 23 Mar 2023 13:37:33 +0800
+Message-ID: <9423db2e-257f-016d-b404-17d8e5adc0ac@linux.alibaba.com>
+Date: Thu, 23 Mar 2023 13:37:31 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: [PATCH for-8.1 v4 12/25] target/riscv/cpu.c: redesign
- register_cpu_props()
+Subject: Re: [PATCH v4 1/2] target/riscv: separate priv from mmu_idx
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, palmer@rivosinc.com
-References: <20230322222004.357013-1-dbarboza@ventanamicro.com>
- <20230322222004.357013-13-dbarboza@ventanamicro.com>
+To: Fei Wu <fei2.wu@intel.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Christoph Muellner <christoph.muellner@vrull.eu>
+References: <20230323024412.324085-1-fei2.wu@intel.com>
+ <20230323024412.324085-2-fei2.wu@intel.com>
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230322222004.357013-13-dbarboza@ventanamicro.com>
+In-Reply-To: <20230323024412.324085-2-fei2.wu@intel.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.118;
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.30.130;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
+ helo=out30-130.freemail.mail.aliyun.com
 X-Spam_score_int: -98
 X-Spam_score: -9.9
 X-Spam_bar: ---------
@@ -55,162 +57,106 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Mar 2023 03:23:17 -0000
-
-Hi Daniel,
-
-I want to share my opinions about the cpu->cfg and misa.
+X-List-Received-Date: Thu, 23 Mar 2023 05:37:48 -0000
 
 
-Two suggestions:
+On 2023/3/23 10:44, Fei Wu wrote:
+> Currently it's assumed the 2 low bits of mmu_idx map to privilege mode,
+> this assumption won't last as we are about to add more mmu_idx.
+For patch set has more than 1 patch, usually add a cover letter.
+>
+> Signed-off-by: Fei Wu <fei2.wu@intel.com>
+> ---
+>   target/riscv/cpu.h                             | 1 -
+>   target/riscv/cpu_helper.c                      | 2 +-
+>   target/riscv/insn_trans/trans_privileged.c.inc | 2 +-
+>   target/riscv/insn_trans/trans_xthead.c.inc     | 7 +------
+>   target/riscv/translate.c                       | 3 +++
+>   5 files changed, 6 insertions(+), 9 deletions(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 638e47c75a..66f7e3d1ba 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -623,7 +623,6 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *env,
+>   target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
+>   void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
+>   
+> -#define TB_FLAGS_PRIV_MMU_MASK                3
+>   #define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
+>   #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
+>   #define TB_FLAGS_MSTATUS_VS MSTATUS_VS
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index f88c503cf4..76e1b0100e 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -762,7 +762,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>        * (riscv_cpu_do_interrupt) is correct */
+>       MemTxResult res;
+>       MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
+> -    int mode = mmu_idx & TB_FLAGS_PRIV_MMU_MASK;
+> +    int mode = env->priv;
+>       bool use_background = false;
+>       hwaddr ppn;
+>       RISCVCPU *cpu = env_archcpu(env);
+> diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+> index 59501b2780..9305b18299 100644
+> --- a/target/riscv/insn_trans/trans_privileged.c.inc
+> +++ b/target/riscv/insn_trans/trans_privileged.c.inc
+> @@ -52,7 +52,7 @@ static bool trans_ebreak(DisasContext *ctx, arg_ebreak *a)
+>        * that no exception will be raised when fetching them.
+>        */
+>   
+> -    if (semihosting_enabled(ctx->mem_idx < PRV_S) &&
+> +    if (semihosting_enabled(ctx->priv < PRV_S) &&
+>           (pre_addr & TARGET_PAGE_MASK) == (post_addr & TARGET_PAGE_MASK)) {
+>           pre    = opcode_at(&ctx->base, pre_addr);
+>           ebreak = opcode_at(&ctx->base, ebreak_addr);
+> diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
+> index df504c3f2c..adfb53cb4c 100644
+> --- a/target/riscv/insn_trans/trans_xthead.c.inc
+> +++ b/target/riscv/insn_trans/trans_xthead.c.inc
+> @@ -265,12 +265,7 @@ static bool trans_th_tst(DisasContext *ctx, arg_th_tst *a)
+>   
+>   static inline int priv_level(DisasContext *ctx)
+>   {
+> -#ifdef CONFIG_USER_ONLY
+> -    return PRV_U;
+> -#else
+> -     /* Priv level is part of mem_idx. */
+> -    return ctx->mem_idx & TB_FLAGS_PRIV_MMU_MASK;
+> -#endif
+> +    return ctx->priv;
+>   }
+>   
+>   /* Test if priv level is M, S, or U (cannot fail). */
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 0ee8ee147d..e8880f9423 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -69,6 +69,7 @@ typedef struct DisasContext {
+>       uint32_t mstatus_hs_fs;
+>       uint32_t mstatus_hs_vs;
+>       uint32_t mem_idx;
+> +    uint32_t priv;
+>       /* Remember the rounding mode encoded in the previous fp instruction,
+>          which we have already installed into env->fp_status.  Or -1 for
+>          no previous fp instruction.  Note that we exit the TB when writing
+> @@ -1162,8 +1163,10 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>       } else {
+>           ctx->virt_enabled = false;
+>       }
+> +    ctx->priv = env->priv;
 
-1) The cpu->cfg should be set only once in cpu initialization 
-phrase(cpu_init_fn or cpu_realize_fn), and never changes any more in 
-other times(for example write_misa).
+This is not right. You should put env->priv into tb flags before you use 
+it in translation.
 
-2) Set the misa only when cpu->cfg is ready.
-
-
-In my mind, we should setting the misa and cfg in this way.
-
-1) setting cfg  and misa_mxl in xxx_cpu_init.  Don't call set_misa here.
-
-2) register and setting cfg for general cpus by the infrastructure.
-
-3) check the cfg in cpu_realize_fn stage in a special function. Don't 
-change cpu->cfg, just pass it as a parameter.
-
-4)  expand the cpu->cfg, such as for RVG.
-
-5)  setting the misa and misa_max
-
-6) when write_misa, construct a cfg for the new misa value. If the cfg 
-is legal after checking it against with the cpu->cfg, write it directly 
-into misa. Don't change the cpu->cfg here.
-
-
-Best Regards,
 Zhiwei
 
-On 2023/3/23 6:19, Daniel Henrique Barboza wrote:
-> Now that the function is a no-op if 'env.misa_ext != 0', and no one that
-> are setting misa_ext != 0 is calling it because set_misa() is setting
-> the cpu cfg accordingly, remove the now deprecated code and rename the
-> function to register_generic_cpu_props().
->
-> This function is now doing exactly what the name says: it is creating
-> user-facing properties to allow changes in the CPU cfg via the QEMU
-> command line, setting default values if no user input is provided.
->
-> Note that there's the possibility of a CPU to set a certain misa value
-> and, at the same, also want user-facing flags and defaults from this
-> function. This is not the case since commit 26b2bc58599c ("target/riscv:
-> Don't expose the CPU properties on names CPUs"), but given that this is
-> also a possibility, clarify in the function that using this function
-> will overwrite existing values in cpu->cfg.
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->   target/riscv/cpu.c | 48 ++++++++++------------------------------------
->   1 file changed, 10 insertions(+), 38 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index df5c0bda70..0e56a1c01f 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -221,7 +221,7 @@ static const char * const riscv_intr_names[] = {
->       "reserved"
->   };
->   
-> -static void register_cpu_props(Object *obj);
-> +static void register_generic_cpu_props(Object *obj);
->   
->   const char *riscv_cpu_get_trap_name(target_ulong cause, bool async)
->   {
-> @@ -386,7 +386,7 @@ static void rv64_base_cpu_init(Object *obj)
->       CPURISCVState *env = &RISCV_CPU(obj)->env;
->       /* We set this in the realise function */
->       set_misa(env, MXL_RV64, 0);
-> -    register_cpu_props(obj);
-> +    register_generic_cpu_props(obj);
->       /* Set latest version of privileged specification */
->       env->priv_ver = PRIV_VERSION_LATEST;
->   #ifndef CONFIG_USER_ONLY
-> @@ -472,7 +472,7 @@ static void rv128_base_cpu_init(Object *obj)
->       CPURISCVState *env = &RISCV_CPU(obj)->env;
->       /* We set this in the realise function */
->       set_misa(env, MXL_RV128, 0);
-> -    register_cpu_props(obj);
-> +    register_generic_cpu_props(obj);
->       /* Set latest version of privileged specification */
->       env->priv_ver = PRIV_VERSION_LATEST;
->   #ifndef CONFIG_USER_ONLY
-> @@ -485,7 +485,7 @@ static void rv32_base_cpu_init(Object *obj)
->       CPURISCVState *env = &RISCV_CPU(obj)->env;
->       /* We set this in the realise function */
->       set_misa(env, MXL_RV32, 0);
-> -    register_cpu_props(obj);
-> +    register_generic_cpu_props(obj);
->       /* Set latest version of privileged specification */
->       env->priv_ver = PRIV_VERSION_LATEST;
->   #ifndef CONFIG_USER_ONLY
-> @@ -572,7 +572,7 @@ static void riscv_host_cpu_init(Object *obj)
->   #elif defined(TARGET_RISCV64)
->       set_misa(env, MXL_RV64, 0);
+>   #else
+>       ctx->virt_enabled = false;
+> +    ctx->priv = PRV_U;
 >   #endif
-> -    register_cpu_props(obj);
-> +    register_generic_cpu_props(obj);
->   }
->   #endif
->   
-> @@ -1554,44 +1554,16 @@ static Property riscv_cpu_extensions[] = {
->   };
->   
->   /*
-> - * Register CPU props based on env.misa_ext. If a non-zero
-> - * value was set, register only the required cpu->cfg.ext_*
-> - * properties and leave. env.misa_ext = 0 means that we want
-> - * all the default properties to be registered.
-> + * Register generic CPU props with user-facing flags declared
-> + * in riscv_cpu_extensions[].
-> + *
-> + * Note that this will overwrite existing values in cpu->cfg.
->    */
-> -static void register_cpu_props(Object *obj)
-> +static void register_generic_cpu_props(Object *obj)
->   {
-> -    RISCVCPU *cpu = RISCV_CPU(obj);
-> -    uint32_t misa_ext = cpu->env.misa_ext;
->       Property *prop;
->       DeviceState *dev = DEVICE(obj);
->   
-> -    /*
-> -     * If misa_ext is not zero, set cfg properties now to
-> -     * allow them to be read during riscv_cpu_realize()
-> -     * later on.
-> -     */
-> -    if (cpu->env.misa_ext != 0) {
-> -        cpu->cfg.ext_i = misa_ext & RVI;
-> -        cpu->cfg.ext_e = misa_ext & RVE;
-> -        cpu->cfg.ext_m = misa_ext & RVM;
-> -        cpu->cfg.ext_a = misa_ext & RVA;
-> -        cpu->cfg.ext_f = misa_ext & RVF;
-> -        cpu->cfg.ext_d = misa_ext & RVD;
-> -        cpu->cfg.ext_v = misa_ext & RVV;
-> -        cpu->cfg.ext_c = misa_ext & RVC;
-> -        cpu->cfg.ext_s = misa_ext & RVS;
-> -        cpu->cfg.ext_u = misa_ext & RVU;
-> -        cpu->cfg.ext_h = misa_ext & RVH;
-> -        cpu->cfg.ext_j = misa_ext & RVJ;
-> -
-> -        /*
-> -         * We don't want to set the default riscv_cpu_extensions
-> -         * in this case.
-> -         */
-> -        return;
-> -    }
-> -
->       for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
->           qdev_property_add_static(dev, prop);
->       }
+>       ctx->misa_ext = env->misa_ext;
+>       ctx->frm = -1;  /* unknown rounding mode */
 
