@@ -1,73 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pfkox-0001bv-HS
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Mar 2023 13:03:19 -0400
+	id 1pfkr1-0002cp-Rt
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Mar 2023 13:05:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pfkou-0001bN-KB
- for qemu-riscv@nongnu.org; Fri, 24 Mar 2023 13:03:18 -0400
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
+ id 1pfkr0-0002cV-LF
+ for qemu-riscv@nongnu.org; Fri, 24 Mar 2023 13:05:26 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pfkos-00080F-Hh
- for qemu-riscv@nongnu.org; Fri, 24 Mar 2023 13:03:15 -0400
-Received: by mail-pj1-x1029.google.com with SMTP id d13so2040734pjh.0
- for <qemu-riscv@nongnu.org>; Fri, 24 Mar 2023 10:03:14 -0700 (PDT)
+ id 1pfkqx-0008S2-VS
+ for qemu-riscv@nongnu.org; Fri, 24 Mar 2023 13:05:25 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id w4so2378881plg.9
+ for <qemu-riscv@nongnu.org>; Fri, 24 Mar 2023 10:05:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1679677393;
+ d=linaro.org; s=google; t=1679677522;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=hJcpc4LqyzbKYBUF2Bmv43JqvjePOwUDPY91lLBsr4c=;
- b=cAiXKAiAJd1P6thbcUWdHTAeoNTJL3BwE0SOH/g1TJd1jU0PZN1oKn8vDljPwkiS2T
- MB9ZIIr5PE8uefnq9hk5PlB87rKGHwwoVEHyoN6848Rnt+aK/QqHBLe3g+Gwne8azef8
- LRwptVwEzoaG+x7vlUshL7jlyDj1+cmUKciU70ejcBU9banPzxyxGkLdh8LRhswXO3sd
- ZcLE7HR3bG++7HvvO2pEoXsc0Nfa4/I42OmVHnq3FdRQNUkXwIXyEHH7x2A7EO5lcpZJ
- 7ButHBpPJnVdtbeQaDEClwCEc6ZsQ6IUYl2FfqvYnbK5iYBkWlljDHLozh5U1nICobl3
- 6Oaw==
+ bh=AUcB2uIJGflArJH0ZjnGpW49Lq8MbXvQKF59hToSvbg=;
+ b=PrSQvNIeWNfoIrNZGzdfxCOpGTpOjYPpfFxD9F03QMHhmeP9ncwC5L9uUvAOFV+ZaD
+ dJzyx+Cu2NwTIJmw3Pp7HFJA/g1DDzOE/pgRmSEj5jZh3wrd/je2/1XnNBui3ybL+bWs
+ yuQevLOR09t6MxXy6gSYYtXXfOhY9Nx1bwjC9MktUE5ZBhn1kONfkYDER4ViJ7kdAFsK
+ jcgGqTI003xJ4//c3i/TKETxUt5mBbnY9SYcXSQQO3p9QDj0qnUeTCDbWCF3Pgd103AR
+ mlij97araWAALu1LZlxOy/hTiNmuKopE5JkRQXdeWoYsJ3wOlNaHfXknatk4vyiwhSlH
+ 9+cA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679677393;
+ d=1e100.net; s=20210112; t=1679677522;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hJcpc4LqyzbKYBUF2Bmv43JqvjePOwUDPY91lLBsr4c=;
- b=A8gsp7r0gKNj2Nu863LUEv3uTDhyRqq5rXpqwcZ4rnhnSAdr4AQ9aF49KiqhdOvfxH
- VjtbTxjFryFs9/mNCUITpLjutkFD5ggXXSOObl5lwJ5XYzQZFm61HmB5NjnHL7EQ5maL
- tdAMyE1nypY8+MeHWtbCsysjha04Hhu2Sd/m9Tb759qbOv5oQ9kRjCYZ2w9oUKGeP5Xd
- 19yj5dHawzdKgz4PpJjcPQy5n0VJ2zcONkkGKTTBqVOdXBFgHyL+QHA5A63qWOuO2FQF
- KxvmILySDLP1Ww25IAjGMcrWeiOr+7+WALFBRHynO9SmN1S+dB4+AGuhFziBTYbh/2zs
- wwjQ==
-X-Gm-Message-State: AO0yUKUA2rRiMsiSsDSpiv0PGOLfwqbh90rqWC//SWtgzFrqpuhTfCqw
- 6koVEMq6Cg5Xgayxe4wEOc6MiQ==
-X-Google-Smtp-Source: AKy350a3++0sFlv20vAY7HnF56tGy03VDPyf7nHv2byTXZP2ltUgdZ2PqRLWdxPYTIQnMA91A+/LSw==
-X-Received: by 2002:a17:90a:53:b0:237:d2d8:3264 with SMTP id
- 19-20020a17090a005300b00237d2d83264mr3540447pjb.40.1679677393082; 
- Fri, 24 Mar 2023 10:03:13 -0700 (PDT)
+ bh=AUcB2uIJGflArJH0ZjnGpW49Lq8MbXvQKF59hToSvbg=;
+ b=Ejo4HGc5KVO1+ZTETidItjMXPDs1ZiNi7ZLSwqtK9/7anmas+M35VPnTlm7dCsa88k
+ PRBXrM6K8jD5KJFoaizi/10i3B8Q6h4vz1Bk6hQ23xr7ib0vEGHfWf35t84SxTuG/jlf
+ iAyXKDeHgMavG0AxzE7+pNv7zDU6qBL+qdOdbOepEWM5C4A0LUX4IZoCAq75AEjr3Sv1
+ h6kWaQRc1QEzKMp//J+AlsEMhWBOtTgY8o3VSov2B2lHd5GLbrrWI2RRkVtxPw5wW3SG
+ R38g7A9wjAGCNuWIS76TIN8uYxc2USl7/r6XEpJ93yk32N3wUZ3rEE3D3TNZMYeAf2Tp
+ Ez6w==
+X-Gm-Message-State: AAQBX9cPRJEEku17HhE//OJUzTgiJhGhuWQbuxgRNS6NlvUCjrQBhbQs
+ KU9rjtr6+wiku9UWDenVcm9Xrw==
+X-Google-Smtp-Source: AKy350ZdopybBoEUK/ev3oEnXOH8HVZwkDjjo3+tAWu01FtWHs5AcZOPLgSCKFyCYsWjhNw0NAuzEg==
+X-Received: by 2002:a17:90b:3b42:b0:23f:81de:6a74 with SMTP id
+ ot2-20020a17090b3b4200b0023f81de6a74mr3414323pjb.39.1679677522449; 
+ Fri, 24 Mar 2023 10:05:22 -0700 (PDT)
 Received: from ?IPV6:2602:ae:1544:6601:cb42:9f2a:fcd4:54fc?
  ([2602:ae:1544:6601:cb42:9f2a:fcd4:54fc])
  by smtp.gmail.com with ESMTPSA id
- x15-20020a17090a6b4f00b0023acdac248dsm3217494pjl.15.2023.03.24.10.03.12
+ a3-20020a170902900300b001a060007fcbsm14425023plp.213.2023.03.24.10.05.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Mar 2023 10:03:12 -0700 (PDT)
-Message-ID: <bbba44c7-d527-8b9b-9dbf-c62172b27a24@linaro.org>
-Date: Fri, 24 Mar 2023 10:03:10 -0700
+ Fri, 24 Mar 2023 10:05:22 -0700 (PDT)
+Message-ID: <4ae27732-2fc7-8f36-f169-34e8e9bc4e77@linaro.org>
+Date: Fri, 24 Mar 2023 10:05:20 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [PATCH 3/4] target/riscv: Encode the FS and VS on a normal way
- for tb flags
+Subject: Re: [PATCH 4/4] target/riscv: Add a tb flags field for vstart
 Content-Language: en-US
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, qemu-riscv@nongnu.org
 References: <20230324055954.908-1-zhiwei_liu@linux.alibaba.com>
- <20230324055954.908-4-zhiwei_liu@linux.alibaba.com>
+ <20230324055954.908-5-zhiwei_liu@linux.alibaba.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230324055954.908-4-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230324055954.908-5-zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1029.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -87,30 +86,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Mar 2023 17:03:18 -0000
+X-List-Received-Date: Fri, 24 Mar 2023 17:05:26 -0000
 
 On 3/23/23 22:59, LIU Zhiwei wrote:
-> Reuse the MSTATUS_FS and MSTATUS_VS for the tb flags positions is not a normal
-> way.
+> Once we mistook the vstart directly from the env->vstart. As env->vstart is not
+> a constant, we should record it in the tb flags if we want to use
+> it in translation.
 > 
-> It will make us change the tb flags layout difficult. And even worse, if we
-> want to keep tb flags for a same extension togather without a hole.
-> 
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Reported-by: Richard Henderson<richard.henderson@linaro.org>
+> Signed-off-by: LIU Zhiwei<zhiwei_liu@linux.alibaba.com>
+> ---
+>   target/riscv/cpu.h                      | 21 +++++++++++----------
+>   target/riscv/cpu_helper.c               |  1 +
+>   target/riscv/insn_trans/trans_rvv.c.inc | 14 +++++++-------
+>   target/riscv/translate.c                |  4 ++--
+>   4 files changed, 21 insertions(+), 19 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
-> +    flags =  FIELD_DP32(flags, TB_FLAGS, FS, EXT_STATUS_DIRTY);
-> +    flags =  FIELD_DP32(flags, TB_FLAGS, VS, EXT_STATUS_DIRTY);
-...
-> +        flags =  FIELD_DP32(flags, TB_FLAGS, FS,
-...
-> +        flags =  FIELD_DP32(flags, TB_FLAGS, VS,
-
-Extra space after =.
-
-
 r~
-
 
