@@ -1,60 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pfjKx-0000oq-Fb
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Mar 2023 11:28:15 -0400
+	id 1pfkmo-0000YG-72
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Mar 2023 13:01:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pfjKv-0000lX-8C; Fri, 24 Mar 2023 11:28:13 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pfjKp-0005yG-6h; Fri, 24 Mar 2023 11:28:13 -0400
-Received: from [192.168.0.120] (unknown [180.165.240.150])
- by APP-05 (Coremail) with SMTP id zQCowAAHHhYpvR1kwxYmCQ--.5178S2;
- Fri, 24 Mar 2023 23:09:30 +0800 (CST)
-Message-ID: <9997a7ae-f45b-d4b3-9173-66eb48267720@iscas.ac.cn>
-Date: Fri, 24 Mar 2023 23:09:29 +0800
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pfkmm-0000X3-LE
+ for qemu-riscv@nongnu.org; Fri, 24 Mar 2023 13:01:04 -0400
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pfkmj-0007dd-DH
+ for qemu-riscv@nongnu.org; Fri, 24 Mar 2023 13:01:04 -0400
+Received: by mail-pj1-x1032.google.com with SMTP id
+ p13-20020a17090a284d00b0023d2e945aebso6172053pjf.0
+ for <qemu-riscv@nongnu.org>; Fri, 24 Mar 2023 10:01:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1679677259;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=3BrjrwwT88FeHEx8xF+ALqxpNCbBHkDcivNW4pyG/SA=;
+ b=DQLmkUKovXDQPn/fHskaRUy6wY6LzUafA0FJdfvzhc8Z6NOvcf7hNK50nPz6tr3i0f
+ zPpxFlfdqWpOx2oTZmTStlBzGGJIkiYqu2HU6WtJJ+Z3bjwziHkUhFDK2bRhEu2rECW6
+ tAOMXgqgIgEBouPWEQLj3Rr48QuovvZWY7lOLRT8iAEiHqMjS/C9zCJGJHTWg1JeC3tJ
+ 916gRsrXRvFwq5dLx1Qu4EqawrmJ6JD6jgLb+y5l8vtkkcJYL2aX5tFr9dxzAkhSb2sk
+ Om93WwT/Tl0ZLp+SwIBEMdixBhDbgGJ9W1NZSp/fLLpOESbPqJaO8dh0aHWs6yrOdqqU
+ Hhgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1679677259;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=3BrjrwwT88FeHEx8xF+ALqxpNCbBHkDcivNW4pyG/SA=;
+ b=MNMAMmjH3Xrjw5idORzU7qGlxGiYgyhJPSXVOsf7kJbldN/xe0Z7CpvN3aGV3iJTJ8
+ ysiaqntJ84QdGi7aom5r2sSq7kV9A4m0i+zc37ltetRlqWvmUxq5i7LGX0AmInup4N0o
+ FXlfKwQ6KuamjSEto7H1nMI7A0d4eeiigMVpbCO8brFrG7LCRO3KHuN7dkXRkoOAtoD0
+ FmQBw7QXo13dvT8OFiKiatayBTFCrjnCnjGkf3er+VPt676lHgd/Ztk7G+ZHY2nGsUFJ
+ BrGm8UpS32MLe+rwa+LD8n6riLosGNTi3bPRzrJbk6B80Mbj0xay7cegJgiDazdkVebW
+ sLsQ==
+X-Gm-Message-State: AAQBX9eQL4Y4FcTlQVL7AmF0LrIFMXXtWs3bZfe/tpMNR1APG5go7aHu
+ 88teRjUXpgvPji/beybqGeepMg==
+X-Google-Smtp-Source: AKy350a3U0GJznJBAytP96SMDDv2AQngaC+txaXhLjBAVdilpRoMaZq8+Nity5cxFc6Pxt7MXQIZ8Q==
+X-Received: by 2002:a17:90a:d583:b0:237:3f83:61f3 with SMTP id
+ v3-20020a17090ad58300b002373f8361f3mr3653293pju.16.1679677259375; 
+ Fri, 24 Mar 2023 10:00:59 -0700 (PDT)
+Received: from ?IPV6:2602:ae:1544:6601:cb42:9f2a:fcd4:54fc?
+ ([2602:ae:1544:6601:cb42:9f2a:fcd4:54fc])
+ by smtp.gmail.com with ESMTPSA id
+ ix18-20020a170902f81200b0019f1027f88bsm14454942plb.307.2023.03.24.10.00.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 24 Mar 2023 10:00:58 -0700 (PDT)
+Message-ID: <84fac4a7-84f0-e89c-83b1-0a169372201a@linaro.org>
+Date: Fri, 24 Mar 2023 10:00:56 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-Subject: Re: [PATCH for-8.1 v4 23/25] target/riscv: rework write_misa()
+Subject: Re: [PATCH 1/4] target/riscv: Extract virt enabled state from tb flags
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, qemu-riscv@nongnu.org
+References: <20230324055954.908-1-zhiwei_liu@linux.alibaba.com>
+ <20230324055954.908-2-zhiwei_liu@linux.alibaba.com>
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-References: <20230322222004.357013-1-dbarboza@ventanamicro.com>
- <20230322222004.357013-24-dbarboza@ventanamicro.com>
-From: liweiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230322222004.357013-24-dbarboza@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230324055954.908-2-zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: zQCowAAHHhYpvR1kwxYmCQ--.5178S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3Gr1rWF4rXF4kZw13Zw18Zrb_yoW7WF4xpr
- W3G39Ik3yDJFy7Z3y3tr1DJF18uw4vgrWfKws3W3yfAFZ5ArW8KFnxKw1Syry7CF95XF1F
- va15CFy2vF4jka7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkG14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
- Y487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
- 0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
- 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
- W8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1l
- IxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUkrcfUUU
- UU=
-X-Originating-IP: [180.165.240.150]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1032.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -67,186 +87,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Mar 2023 15:28:13 -0000
+X-List-Received-Date: Fri, 24 Mar 2023 17:01:05 -0000
 
-
-On 2023/3/23 06:20, Daniel Henrique Barboza wrote:
-> write_misa() must use as much common logic as possible. We want to open
-> code just the bits that are exclusive to the CSR write operation and TCG
-> internals.
->
-> Rewrite write_misa() to work as follows:
->
-> - mask the write using misa_ext_mask to avoid enabling unsupported
->    extensions;
->
-> - suppress RVC if the next insn isn't aligned;
->
-> - handle RVE. This is done by filtering all bits but RVE from 'val'.
->    Setting RVE will forcefully set only RVE - assuming it gets
->    validated afterwards;
->
-> - emulate the steps done by realize(): validate the candidate misa_ext
->    val, then validate the configuration with the candidate misa_ext val,
->    and finally commit the changes to cpu->cfg.
->
-> If any of the validation steps fails, the write operation is a no-op.
->
-> Let's keep write_misa() as experimental for now until this logic gains
-> enough mileage.
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+On 3/23/23 22:59, LIU Zhiwei wrote:
+> Virt enabled state is not a constant. So we should put it into tb flags.
+> Thus we can use it like a constant condition at translation phase.
+> 
+> Reported-by: Richard Henderson<richard.henderson@linaro.org>
+> Signed-off-by: LIU Zhiwei<zhiwei_liu@linux.alibaba.com>
 > ---
->   target/riscv/cpu.c | 12 ++++------
->   target/riscv/cpu.h |  6 +++++
->   target/riscv/csr.c | 59 ++++++++++++++++++++++++++--------------------
->   3 files changed, 45 insertions(+), 32 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 0e6b8fb45e..41b17ba0c3 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1018,9 +1018,8 @@ static void riscv_cpu_disable_priv_spec_isa_exts(RISCVCPU *cpu)
->   }
->   
->   
-> -static void riscv_cpu_validate_misa_ext(CPURISCVState *env,
-> -                                        uint32_t misa_ext,
-> -                                        Error **errp)
-> +void riscv_cpu_validate_misa_ext(CPURISCVState *env, uint32_t misa_ext,
-> +                                 Error **errp)
->   {
->       Error *local_err = NULL;
->   
-> @@ -1113,9 +1112,8 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
->    * candidate misa_ext value. No changes in env->misa_ext
->    * are made.
->    */
-> -static void riscv_cpu_validate_extensions(RISCVCPU *cpu,
-> -                                          uint32_t misa_ext,
-> -                                          Error **errp)
-> +void riscv_cpu_validate_extensions(RISCVCPU *cpu, uint32_t misa_ext,
-> +                                   Error **errp)
->   {
->       if (cpu->cfg.epmp && !cpu->cfg.pmp) {
->           /*
-> @@ -1206,7 +1204,7 @@ static void riscv_cpu_validate_extensions(RISCVCPU *cpu,
->       }
->   }
->   
-> -static void riscv_cpu_commit_cpu_cfg(RISCVCPU *cpu)
-> +void riscv_cpu_commit_cpu_cfg(RISCVCPU *cpu)
->   {
->       if (cpu->cfg.ext_zk) {
->           cpu->cfg.ext_zkn = true;
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index dbb4df9df0..ca2ba6a647 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -593,6 +593,12 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->   char *riscv_isa_string(RISCVCPU *cpu);
->   void riscv_cpu_list(void);
->   
-> +void riscv_cpu_validate_misa_ext(CPURISCVState *env, uint32_t misa_ext,
-> +                                 Error **errp);
-> +void riscv_cpu_validate_extensions(RISCVCPU *cpu, uint32_t misa_ext,
-> +                                   Error **errp);
-> +void riscv_cpu_commit_cpu_cfg(RISCVCPU *cpu);
-> +
->   #define cpu_list riscv_cpu_list
->   #define cpu_mmu_index riscv_cpu_mmu_index
->   
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d522efc0b6..8d5e8f9ad1 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1343,39 +1343,17 @@ static RISCVException read_misa(CPURISCVState *env, int csrno,
->   static RISCVException write_misa(CPURISCVState *env, int csrno,
->                                    target_ulong val)
->   {
-> +    RISCVCPU *cpu = env_archcpu(env);
-> +    Error *local_err = NULL;
-> +
->       if (!riscv_cpu_cfg(env)->misa_w) {
->           /* drop write to misa */
->           return RISCV_EXCP_NONE;
->       }
->   
-> -    /* 'I' or 'E' must be present */
-> -    if (!(val & (RVI | RVE))) {
-> -        /* It is not, drop write to misa */
-> -        return RISCV_EXCP_NONE;
-> -    }
-> -
-> -    /* 'E' excludes all other extensions */
-> -    if (val & RVE) {
-> -        /*
-> -         * when we support 'E' we can do "val = RVE;" however
-> -         * for now we just drop writes if 'E' is present.
-> -         */
-> -        return RISCV_EXCP_NONE;
-> -    }
-> -
-> -    /*
-> -     * misa.MXL writes are not supported by QEMU.
-> -     * Drop writes to those bits.
-> -     */
-> -
->       /* Mask extensions that are not supported by this hart */
->       val &= env->misa_ext_mask;
->   
-> -    /* 'D' depends on 'F', so clear 'D' if 'F' is not present */
-> -    if ((val & RVD) && !(val & RVF)) {
-> -        val &= ~RVD;
-> -    }
-> -
->       /*
->        * Suppress 'C' if next instruction is not aligned
->        * TODO: this should check next_pc
-> @@ -1389,6 +1367,37 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
->           return RISCV_EXCP_NONE;
->       }
->   
-> +    /*
-> +     * We'll handle special cases in separate. If one
-> +     * of these bits are enabled we'll handle them and
-> +     * end the CSR write.
-> +     */
-> +    if (val & RVE && !(env->misa_ext & RVE)) {
-> +        /*
-> +         * RVE must be enabled by itself. Clear all other
-> +         * misa_env bits and let the validation do its
-> +         * job.
-> +         */
-> +        val &= RVE;
+>   target/riscv/cpu.h        |  2 ++
+>   target/riscv/cpu_helper.c |  2 ++
+>   target/riscv/translate.c  | 10 +---------
+>   3 files changed, 5 insertions(+), 9 deletions(-)
 
-It can just be val = RVE here.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Regards,
-
-Weiwei Li
-
-> +    }
-> +
-> +    /*
-> +     * This flow is similar to what riscv_cpu_realize() does,
-> +     * with the difference that we will update env->misa_ext
-> +     * value if everything is ok.
-> +     */
-> +    riscv_cpu_validate_misa_ext(env, val, &local_err);
-> +    if (local_err != NULL) {
-> +        return RISCV_EXCP_NONE;
-> +    }
-> +
-> +    riscv_cpu_validate_extensions(cpu, val, &local_err);
-> +    if (local_err != NULL) {
-> +        return RISCV_EXCP_NONE;
-> +    }
-> +
-> +    riscv_cpu_commit_cpu_cfg(cpu);
-> +
->       if (!(val & RVF)) {
->           env->mstatus &= ~MSTATUS_FS;
->       }
-
+r~
 
