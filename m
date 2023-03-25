@@ -1,67 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pg2ba-0000j6-9b
-	for mharc-qemu-riscv@gnu.org; Sat, 25 Mar 2023 08:02:42 -0400
+	id 1pg2bb-0000jl-Fz
+	for mharc-qemu-riscv@gnu.org; Sat, 25 Mar 2023 08:02:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pg2bU-0000d3-QN
- for qemu-riscv@nongnu.org; Sat, 25 Mar 2023 08:02:37 -0400
-Received: from mail-qv1-xf34.google.com ([2607:f8b0:4864:20::f34])
+ id 1pg2ba-0000iP-0b
+ for qemu-riscv@nongnu.org; Sat, 25 Mar 2023 08:02:42 -0400
+Received: from mail-oa1-x2e.google.com ([2001:4860:4864:20::2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pg2bS-00041v-4J
- for qemu-riscv@nongnu.org; Sat, 25 Mar 2023 08:02:36 -0400
-Received: by mail-qv1-xf34.google.com with SMTP id q88so3306169qvq.13
- for <qemu-riscv@nongnu.org>; Sat, 25 Mar 2023 05:02:31 -0700 (PDT)
+ id 1pg2bY-00048e-3U
+ for qemu-riscv@nongnu.org; Sat, 25 Mar 2023 08:02:41 -0400
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-17aeb49429eso4469738fac.6
+ for <qemu-riscv@nongnu.org>; Sat, 25 Mar 2023 05:02:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1679745751;
+ d=linaro.org; s=google; t=1679745759;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4cy1xP5OQWUfnynTXfbvIKGvVE6egHD8uv4kncq6BSo=;
- b=mfbnT6MlQWrG+J38c1hDGrByDG0vYVPcAgLRdyKes0rMhUu1pZNWVOl4xnmBvO+oSK
- FRB0DOqavvu60JLuI5W9nqCZV8xAKkJQ7HcTbpoI4JlP2lwsmAb+kH1fWCAJrwtS3NzX
- Gss4ywBKM46Wc+OGDWWzRw8+564lTdlqPKt+IFAc+Q+oFSqjNHbHc0Ij+vmQtU6SfnTY
- RfTSAVKt3el3goJD7guAYWqks5TeSpNTMh7Keh5cH/OUOiV82HIL5hsDH6rUu+m3leKW
- blrSb0AhLbSOYipu6pWtjbPnQXjHRbiif1Mi9JW1TZpn4hZKyNiJ3qLr62LycDS4ddHA
- Zk4g==
+ bh=LHvMKXD8NAoM/vW12NzPpWoUixdpDsUt4QFvbOLsIaM=;
+ b=QpjCi44Fc2AC4iv4/J4rr6aMPYLo97T2Xuarnl2PxDuONerhC+L/FFfZHlYpOsu84N
+ rLTDjMkMwVI2xtT43HLcPo2jaH35bGlWZyZGvvGZT1cPTgONSEfFTgiNi2GiFdYOaoXg
+ X8J3tdMUptSeJYdA1TPtOT6jTkfMD3uq/dkP+cwdd7ZKqY0muEUYYEad65273ZHVmgVd
+ cJ9ACX+JA5AaKmdNf96D5R2nvdoUEamLHKEAOgLVLKLeSXPuf8Y213lLHpvDKfgZUODT
+ c7ySDyNCQcDtVI0Qlj2BseIW0fSRreo0W0SsZW/MF/SqYXJglLmzMQ99didGW9FGJ0Qu
+ hd0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679745751;
+ d=1e100.net; s=20210112; t=1679745759;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4cy1xP5OQWUfnynTXfbvIKGvVE6egHD8uv4kncq6BSo=;
- b=xNn+4YiT1WdqD4jlHNdjGQsx0SX38CUo4SvLPhVXzq1wBLhoBEKnNNHsOBcEVAwIdx
- pxK5lgQgEZ2VknysxOqSVsHzqc4RNiCKGdkvv+WBp0goKXiM9z2sy83UJh0NO+M0pT10
- 8DxPhwCo/SVkLXSBrLgdXPC1NK3VDrQaEFYMjwkktdFBO7G7M/g1BfmTSN3PJp9Mr/B5
- bZ8drxPMWxoBPBXW9jJxQJlh8Lxy/b5rterk7hJdFSOGjQEz+t2ZZTyemCmlFLplPlDY
- WTrPCIW/s1N7qGQbjww+oWNXD+/t6TYw80KhKwxGRPM2j9x1r7QOKKK01cx5zkPLroMl
- /GsA==
-X-Gm-Message-State: AAQBX9dPbVpL4UfzYU0Z8WcvGeT1Gox4R5KPTI+0TliFxpwFzoZ4qdYu
- hvUhX3kNkNvt7VQAxbkiPAbOcJ52lnrQzC/PZMQ=
-X-Google-Smtp-Source: AKy350Y6Ddeh8S703GLVtfoqfnHWkMTPZPGIe6t6xnVAiBA/hiKgKznrbiU5WZAJXfgQA9LzEIKg/Q==
-X-Received: by 2002:a17:90a:4fe5:b0:23d:48a9:3408 with SMTP id
- q92-20020a17090a4fe500b0023d48a93408mr5797910pjh.41.1679741678718; 
- Sat, 25 Mar 2023 03:54:38 -0700 (PDT)
+ bh=LHvMKXD8NAoM/vW12NzPpWoUixdpDsUt4QFvbOLsIaM=;
+ b=gu3KobZfkM2wThRyrMeirHy66a8nkFpnpVMmJENMTLoYKp2YCxLfMmxiBAgdwhGg7l
+ yes1bsp/P5bBv+5n0xQ1k84vGIhki31NGFhBiyrbKDlyLc1l0yAiCseRrBv9aYJHPM1Z
+ AgsuF7tYwsgg0+1NGn7zdcDxv+6sLNALgxkX3tXLRyLWNAJaxV5xNMxs37MmcVaWRRWR
+ RSpiQPhueSxOPEYpnLV1H6d5md4V0nCc75oQlEkAR/2kE/8CGXDQFGd2OrV4rBlWWKlY
+ 5ufT9u3QZaUsfwHF4jbyG7h4M/9nLto/ROaB/61UUVqGmArnQFrY3eZbT4vzUXTV1Rp4
+ UdkA==
+X-Gm-Message-State: AAQBX9csqXYz032dNl7ePb+r8WDes4NFC2bOGNYKrbrj/Oh3mA97SBj2
+ iEfSSZzulwO06hrurL/v6pEb89W7Pn0UjRPbV/M=
+X-Google-Smtp-Source: AKy350btAospyDOrsqZd+QSeQM6bxz6vTFrJ7yDygKk8eS50vqmnuDaozDUceCu8rFLx9tvuA+XvOA==
+X-Received: by 2002:a17:90b:4c8b:b0:240:c25:210 with SMTP id
+ my11-20020a17090b4c8b00b002400c250210mr5919510pjb.44.1679741672884; 
+ Sat, 25 Mar 2023 03:54:32 -0700 (PDT)
 Received: from stoup.. ([2602:ae:1544:6601:790a:6e23:4a91:70a])
  by smtp.gmail.com with ESMTPSA id
- p14-20020a17090a2d8e00b0023af4eb597csm1234684pjd.52.2023.03.25.03.54.38
+ p14-20020a17090a2d8e00b0023af4eb597csm1234684pjd.52.2023.03.25.03.54.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Mar 2023 03:54:38 -0700 (PDT)
+ Sat, 25 Mar 2023 03:54:32 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
  zhiwei_liu@linux.alibaba.com, fei2.wu@intel.com
-Subject: [PATCH v6 09/25] target/riscv: Use cpu_ld*_code_mmu for HLVX
-Date: Sat, 25 Mar 2023 03:54:13 -0700
-Message-Id: <20230325105429.1142530-10-richard.henderson@linaro.org>
+Subject: [PATCH v6 02/25] target/riscv: Add a general status enum for
+ extensions
+Date: Sat, 25 Mar 2023 03:54:06 -0700
+Message-Id: <20230325105429.1142530-3-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230325105429.1142530-1-richard.henderson@linaro.org>
 References: <20230325105429.1142530-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f34;
- envelope-from=richard.henderson@linaro.org; helo=mail-qv1-xf34.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oa1-x2e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,50 +83,164 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Mar 2023 12:02:38 -0000
+X-List-Received-Date: Sat, 25 Mar 2023 12:02:42 -0000
 
-Use the new functions to properly check execute permission
-for the read rather than read permission.
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
+The pointer masking is the only extension that directly use status.
+The vector or float extension uses the status in an indirect way.
+
+Replace the pointer masking extension special status fields with
+the general status.
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Message-Id: <20230324143031.1093-3-zhiwei_liu@linux.alibaba.com>
+[rth: Add a typedef for the enum]
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/op_helper.c | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ target/riscv/cpu.h      |  8 ++++++++
+ target/riscv/cpu_bits.h | 12 ++++--------
+ target/riscv/cpu.c      |  2 +-
+ target/riscv/csr.c      | 14 +++++++-------
+ 4 files changed, 20 insertions(+), 16 deletions(-)
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 962a061228..b2169a99ff 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -427,18 +427,27 @@ void helper_hyp_gvma_tlb_flush(CPURISCVState *env)
-     helper_hyp_tlb_flush(env);
- }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 12fe8d8546..30d9828d59 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -99,6 +99,14 @@ enum {
+     TRANSLATE_G_STAGE_FAIL
+ };
  
-+/*
-+ * TODO: These implementations are not quite correct.  They perform the
-+ * access using execute permission just fine, but the final PMP check
-+ * is supposed to have read permission as well.  Without replicating
-+ * a fair fraction of cputlb.c, fixing this requires adding new mmu_idx
-+ * which would imply that exact check in tlb_fill.
-+ */
- target_ulong helper_hyp_hlvx_hu(CPURISCVState *env, target_ulong address)
- {
-     int mmu_idx = cpu_mmu_index(env, true) | MMU_HYP_ACCESS_BIT;
-+    MemOpIdx oi = make_memop_idx(MO_TEUW, mmu_idx);
++/* Extension context status */
++typedef enum {
++    EXT_STATUS_DISABLED = 0,
++    EXT_STATUS_INITIAL,
++    EXT_STATUS_CLEAN,
++    EXT_STATUS_DIRTY,
++} RISCVExtStatus;
++
+ #define MMU_USER_IDX 3
  
--    return cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
-+    return cpu_ldw_code_mmu(env, address, oi, GETPC());
- }
+ #define MAX_RISCV_PMPS (16)
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index fca7ef0cef..b84f62f8d6 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -9,6 +9,9 @@
+                  (((uint64_t)(val) * ((mask) & ~((mask) << 1))) & \
+                  (uint64_t)(mask)))
  
- target_ulong helper_hyp_hlvx_wu(CPURISCVState *env, target_ulong address)
- {
-     int mmu_idx = cpu_mmu_index(env, true) | MMU_HYP_ACCESS_BIT;
-+    MemOpIdx oi = make_memop_idx(MO_TEUL, mmu_idx);
++/* Extension context status mask */
++#define EXT_STATUS_MASK     0x3ULL
++
+ /* Floating point round mode */
+ #define FSR_RD_SHIFT        5
+ #define FSR_RD              (0x7 << FSR_RD_SHIFT)
+@@ -734,13 +737,6 @@ typedef enum RISCVException {
+ #define PM_ENABLE       0x00000001ULL
+ #define PM_CURRENT      0x00000002ULL
+ #define PM_INSN         0x00000004ULL
+-#define PM_XS_MASK      0x00000003ULL
+-
+-/* PointerMasking XS bits values */
+-#define PM_EXT_DISABLE  0x00000000ULL
+-#define PM_EXT_INITIAL  0x00000001ULL
+-#define PM_EXT_CLEAN    0x00000002ULL
+-#define PM_EXT_DIRTY    0x00000003ULL
  
--    return cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
-+    return cpu_ldl_code_mmu(env, address, oi, GETPC());
- }
+ /* Execution enviornment configuration bits */
+ #define MENVCFG_FIOM                       BIT(0)
+@@ -780,7 +776,7 @@ typedef enum RISCVException {
+ #define S_OFFSET     5ULL
+ #define M_OFFSET     8ULL
  
- #endif /* !CONFIG_USER_ONLY */
+-#define PM_XS_BITS   (PM_XS_MASK << XS_OFFSET)
++#define PM_XS_BITS   (EXT_STATUS_MASK << XS_OFFSET)
+ #define U_PM_ENABLE  (PM_ENABLE  << U_OFFSET)
+ #define U_PM_CURRENT (PM_CURRENT << U_OFFSET)
+ #define U_PM_INSN    (PM_INSN    << U_OFFSET)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1e97473af2..1135106b3e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -764,7 +764,7 @@ static void riscv_cpu_reset_hold(Object *obj)
+         i++;
+     }
+     /* mmte is supposed to have pm.current hardwired to 1 */
+-    env->mmte |= (PM_EXT_INITIAL | MMTE_M_PM_CURRENT);
++    env->mmte |= (EXT_STATUS_INITIAL | MMTE_M_PM_CURRENT);
+ #endif
+     env->xl = riscv_cpu_mxl(env);
+     riscv_cpu_update_mask(env);
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index d522efc0b6..abea7b749e 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -3513,7 +3513,7 @@ static RISCVException write_mmte(CPURISCVState *env, int csrno,
+ 
+     /* hardwiring pm.instruction bit to 0, since it's not supported yet */
+     wpri_val &= ~(MMTE_M_PM_INSN | MMTE_S_PM_INSN | MMTE_U_PM_INSN);
+-    env->mmte = wpri_val | PM_EXT_DIRTY;
++    env->mmte = wpri_val | EXT_STATUS_DIRTY;
+     riscv_cpu_update_mask(env);
+ 
+     /* Set XS and SD bits, since PM CSRs are dirty */
+@@ -3593,7 +3593,7 @@ static RISCVException write_mpmmask(CPURISCVState *env, int csrno,
+     if ((env->priv == PRV_M) && (env->mmte & M_PM_ENABLE)) {
+         env->cur_pmmask = val;
+     }
+-    env->mmte |= PM_EXT_DIRTY;
++    env->mmte |= EXT_STATUS_DIRTY;
+ 
+     /* Set XS and SD bits, since PM CSRs are dirty */
+     mstatus = env->mstatus | MSTATUS_XS;
+@@ -3621,7 +3621,7 @@ static RISCVException write_spmmask(CPURISCVState *env, int csrno,
+     if ((env->priv == PRV_S) && (env->mmte & S_PM_ENABLE)) {
+         env->cur_pmmask = val;
+     }
+-    env->mmte |= PM_EXT_DIRTY;
++    env->mmte |= EXT_STATUS_DIRTY;
+ 
+     /* Set XS and SD bits, since PM CSRs are dirty */
+     mstatus = env->mstatus | MSTATUS_XS;
+@@ -3649,7 +3649,7 @@ static RISCVException write_upmmask(CPURISCVState *env, int csrno,
+     if ((env->priv == PRV_U) && (env->mmte & U_PM_ENABLE)) {
+         env->cur_pmmask = val;
+     }
+-    env->mmte |= PM_EXT_DIRTY;
++    env->mmte |= EXT_STATUS_DIRTY;
+ 
+     /* Set XS and SD bits, since PM CSRs are dirty */
+     mstatus = env->mstatus | MSTATUS_XS;
+@@ -3673,7 +3673,7 @@ static RISCVException write_mpmbase(CPURISCVState *env, int csrno,
+     if ((env->priv == PRV_M) && (env->mmte & M_PM_ENABLE)) {
+         env->cur_pmbase = val;
+     }
+-    env->mmte |= PM_EXT_DIRTY;
++    env->mmte |= EXT_STATUS_DIRTY;
+ 
+     /* Set XS and SD bits, since PM CSRs are dirty */
+     mstatus = env->mstatus | MSTATUS_XS;
+@@ -3701,7 +3701,7 @@ static RISCVException write_spmbase(CPURISCVState *env, int csrno,
+     if ((env->priv == PRV_S) && (env->mmte & S_PM_ENABLE)) {
+         env->cur_pmbase = val;
+     }
+-    env->mmte |= PM_EXT_DIRTY;
++    env->mmte |= EXT_STATUS_DIRTY;
+ 
+     /* Set XS and SD bits, since PM CSRs are dirty */
+     mstatus = env->mstatus | MSTATUS_XS;
+@@ -3729,7 +3729,7 @@ static RISCVException write_upmbase(CPURISCVState *env, int csrno,
+     if ((env->priv == PRV_U) && (env->mmte & U_PM_ENABLE)) {
+         env->cur_pmbase = val;
+     }
+-    env->mmte |= PM_EXT_DIRTY;
++    env->mmte |= EXT_STATUS_DIRTY;
+ 
+     /* Set XS and SD bits, since PM CSRs are dirty */
+     mstatus = env->mstatus | MSTATUS_XS;
 -- 
 2.34.1
 
