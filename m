@@ -1,80 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pfluH-0004eF-Ao
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Mar 2023 14:12:53 -0400
+	id 1pg2P8-0002Fq-O2
+	for mharc-qemu-riscv@gnu.org; Sat, 25 Mar 2023 07:49:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pfluF-0004dH-Cp
- for qemu-riscv@nongnu.org; Fri, 24 Mar 2023 14:12:51 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
+ id 1pg2P7-0002BG-10
+ for qemu-riscv@nongnu.org; Sat, 25 Mar 2023 07:49:49 -0400
+Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pfluA-0007b2-SR
- for qemu-riscv@nongnu.org; Fri, 24 Mar 2023 14:12:51 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- f6-20020a17090ac28600b0023b9bf9eb63so2405967pjt.5
- for <qemu-riscv@nongnu.org>; Fri, 24 Mar 2023 11:12:46 -0700 (PDT)
+ id 1pg2P5-00075P-3w
+ for qemu-riscv@nongnu.org; Sat, 25 Mar 2023 07:49:48 -0400
+Received: by mail-il1-x12a.google.com with SMTP id h11so2205934ild.11
+ for <qemu-riscv@nongnu.org>; Sat, 25 Mar 2023 04:49:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1679681565;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=S0vY+5rBAOixEtqTpHGBpkytNZX7xjLsBEtRpe9HSa0=;
- b=CZZNSaXQfDN/tR2bhO11qiIQzqgGA+ouLCkLzRBkjrNnQteHok190nZlC4hCg4yBV1
- Su+HAkkYRPLIAcDHxHk3PbMMBQVe1YG8praIEiajEOBLJnMxcBXPzEFK9Zu5rOMGrgIr
- EBdUUgm6xmnz6R9gBC3TY5fm4FLgiQSo1siQu115il02zFVI6nitIkrw8Grh97K/55W9
- eVL/lLHC9yraVC0BYTG8N9PvgAeYNgk6gUaOnXAFFTIjVbAn3BtqSmMvUm6w7CCt4+rT
- b8jcj3zyyQ70qKRChpJuMjLXE7jo8fOBTMt3ChoYH3euXPTGWIgr7nili1eWBqaaBI9q
- RVNw==
+ d=linaro.org; s=google; t=1679744975;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/qPeG6/AsXGlYUPMDBHBgWFSsT2rwgiR3XynRIKWr6U=;
+ b=l5TVoVLoOB9NodNwVV/hOCbGxRIO/1KEcs5UYIZem2tMUIfCAvkDxstvxrJ89sYA/e
+ CnsL4Vstx2k7vGrJ/vxZvBkLmbIdSeycJ5221U2iS7sLHmjJssZ/g2NfmU7e102AcOqr
+ /hduYWc5tsRfS5qyAUBxM1EmLXJSWBvx8DWg9b5QFa+Py83KPtrGBLKc4gfgLB21C9NV
+ qhkbbT4x42iCCRgtCQ4K0BPngqmBY4PgJg20t8Ax3JWAMSD6KsDGdLg1i0wbMnZI0WKz
+ jXIu1JHd6ba//RdlrIoF05wULsEr5XLtdB8/+Ejc/we3pc1733C3F1TR91eScoRUasdc
+ RzOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679681565;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=S0vY+5rBAOixEtqTpHGBpkytNZX7xjLsBEtRpe9HSa0=;
- b=qtC4vBWwKjMqvbmHryHO3lAXRgSN9P5/mWVVUXVmFM3o+6nkfA6L6mkoYgxRBpB1Dn
- JzXNW0fIoeBGui1xAGR2YrbkqjmbDEZL0TzvLAAb3hSp3rtf0xrNRguf+P0O0sbRXpYC
- EjISiYCoO54LBrqgtvddTAieth9zRhycjoY4BUbvXVuINEFLqcpIbV8IC2nQbBZtbsWf
- Mrf7QRHvP6SL09J9rbh6UmuTYphrOv6Kq+b6R/DTxSXT6TROb75tY5qxZ7wBs8TZY68j
- 5B2u0lfTOoy1Qncaj+sTtLrz4vkvewuSfXeKL3Aqr/A7CRllF+z0MvdAu8x7Hf5s1Otn
- NdlA==
-X-Gm-Message-State: AAQBX9e9S4WoqEjvDUDzmNNt7MbD/1RQ4zBfXUF9DOTm4Koscqz1eceb
- EofKQyxwDVVVDlyYOgYhI3OX8A==
-X-Google-Smtp-Source: AKy350YZnREMD60UTmw8IDRy2zcDGhrs7O2Gu6/C703diSeFyBBJhQS4oQs9IQO8LlhtCapG71SJbw==
-X-Received: by 2002:a17:90a:b397:b0:23f:7ff6:eba with SMTP id
- e23-20020a17090ab39700b0023f7ff60ebamr3989507pjr.0.1679681565603; 
- Fri, 24 Mar 2023 11:12:45 -0700 (PDT)
-Received: from ?IPV6:2602:ae:1544:6601:cb42:9f2a:fcd4:54fc?
- ([2602:ae:1544:6601:cb42:9f2a:fcd4:54fc])
+ d=1e100.net; s=20210112; t=1679744975;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/qPeG6/AsXGlYUPMDBHBgWFSsT2rwgiR3XynRIKWr6U=;
+ b=Bjsf0o4AkwFNdIfszWHFZVV+csU5le7zYWnwGTxyiEjbmKkxdkqr5PH+HS2mGX6XF4
+ I9rDZIiEhG5IhVyMaxzHWEHbVIHkBthNTeTgdsZvPO3liLrF1gnGNP0+HrWbtIEWtX2c
+ RVDNthyU+ucDzchnmfjqsximKADk+6o9gkv25T3xUkXWb+t8DPqQo9jnz/DLllRrOPXn
+ oy7n0NmT2yQZZt2uy88eT1eqbrVCNNgoUy+66tXlanra594GpTNcwFe6MhMhG1AGA5aM
+ JmL6JiTHYoP85w+YMTr825vEiraPk6xyxx8pRwBPR/3QikNXqPiqp6Uzgnh02CcoA/5k
+ IxRw==
+X-Gm-Message-State: AAQBX9eikrphpNMiviSbGB4faHuo0ovBVQO1UBohlJAEzUDdgVhWVeRb
+ LKIDJbY9iX8YLRPcwjJyFeZ2lU/gHpobkQXQT1I=
+X-Google-Smtp-Source: AKy350aMnk9ooZs7YTxay99zSH3Jb2ED7Hqro0ZqyORr3f7bBFS2mZ+KVmQEA9lypkoduOXc0SUd0w==
+X-Received: by 2002:a17:90b:38d2:b0:234:dc4:2006 with SMTP id
+ nn18-20020a17090b38d200b002340dc42006mr6294417pjb.4.1679741673700; 
+ Sat, 25 Mar 2023 03:54:33 -0700 (PDT)
+Received: from stoup.. ([2602:ae:1544:6601:790a:6e23:4a91:70a])
  by smtp.gmail.com with ESMTPSA id
- b10-20020a170902a9ca00b001a04a372fa0sm209555plr.251.2023.03.24.11.12.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Mar 2023 11:12:45 -0700 (PDT)
-Message-ID: <e0b08cd8-b5c5-ee96-0424-20d1588a9531@linaro.org>
-Date: Fri, 24 Mar 2023 11:12:43 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH 7/8] target/riscv: Fix format for comments
-Content-Language: en-US
-To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230324123809.107714-1-liweiwei@iscas.ac.cn>
- <20230324123809.107714-8-liweiwei@iscas.ac.cn>
+ p14-20020a17090a2d8e00b0023af4eb597csm1234684pjd.52.2023.03.25.03.54.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 25 Mar 2023 03:54:33 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230324123809.107714-8-liweiwei@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1036.google.com
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
+ zhiwei_liu@linux.alibaba.com, fei2.wu@intel.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v6 03/25] target/riscv: Encode the FS and VS on a normal way
+ for tb flags
+Date: Sat, 25 Mar 2023 03:54:07 -0700
+Message-Id: <20230325105429.1142530-4-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230325105429.1142530-1-richard.henderson@linaro.org>
+References: <20230325105429.1142530-1-richard.henderson@linaro.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-il1-x12a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -89,30 +83,236 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Mar 2023 18:12:51 -0000
+X-List-Received-Date: Sat, 25 Mar 2023 11:49:49 -0000
 
-On 3/24/23 05:38, Weiwei Li wrote:
-> Fix formats for multi-lines comments.
-> Add spaces around single line comments(after "/*" and before "*/").
-> 
-> Signed-off-by: Weiwei Li<liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang<wangjunqiang@iscas.ac.cn>
-> ---
->   target/riscv/arch_dump.c                |  3 +-
->   target/riscv/cpu.c                      |  2 +-
->   target/riscv/cpu.h                      | 26 ++++----
->   target/riscv/cpu_bits.h                 |  2 +-
->   target/riscv/cpu_helper.c               | 57 +++++++++++------
->   target/riscv/csr.c                      |  6 +-
->   target/riscv/insn_trans/trans_rvv.c.inc |  8 ++-
->   target/riscv/pmp.c                      | 23 ++++---
->   target/riscv/sbi_ecall_interface.h      |  8 +--
->   target/riscv/translate.c                |  8 ++-
->   target/riscv/vector_helper.c            | 82 +++++++++++++++----------
->   11 files changed, 135 insertions(+), 90 deletions(-)
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Acked-by: Richard Henderson <richard.henderson@linaro.org>
+Reuse the MSTATUS_FS and MSTATUS_VS for the tb flags positions is not a
+normal way.
 
+It will make it hard to change the tb flags layout. And even worse, if we
+want to keep tb flags for a same extension togather without a hole.
 
-r~
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Message-Id: <20230324143031.1093-4-zhiwei_liu@linux.alibaba.com>
+[rth: Adjust trans_rvf.c.inc as well; use the typedef]
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/cpu.h                      | 15 +++++------
+ target/riscv/cpu_helper.c               | 11 ++++----
+ target/riscv/translate.c                | 34 ++++++++++++-------------
+ target/riscv/insn_trans/trans_rvf.c.inc |  2 +-
+ target/riscv/insn_trans/trans_rvv.c.inc |  8 +++---
+ 5 files changed, 34 insertions(+), 36 deletions(-)
+
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 30d9828d59..f787145a21 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -633,18 +633,17 @@ void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
+ 
+ #define TB_FLAGS_PRIV_MMU_MASK                3
+ #define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
+-#define TB_FLAGS_MSTATUS_FS MSTATUS_FS
+-#define TB_FLAGS_MSTATUS_VS MSTATUS_VS
+ 
+ #include "exec/cpu-all.h"
+ 
+ FIELD(TB_FLAGS, MEM_IDX, 0, 3)
+-FIELD(TB_FLAGS, LMUL, 3, 3)
+-FIELD(TB_FLAGS, SEW, 6, 3)
+-/* Skip MSTATUS_VS (0x600) bits */
+-FIELD(TB_FLAGS, VL_EQ_VLMAX, 11, 1)
+-FIELD(TB_FLAGS, VILL, 12, 1)
+-/* Skip MSTATUS_FS (0x6000) bits */
++FIELD(TB_FLAGS, FS, 3, 2)
++/* Vector flags */
++FIELD(TB_FLAGS, VS, 5, 2)
++FIELD(TB_FLAGS, LMUL, 7, 3)
++FIELD(TB_FLAGS, SEW, 10, 3)
++FIELD(TB_FLAGS, VL_EQ_VLMAX, 13, 1)
++FIELD(TB_FLAGS, VILL, 14, 1)
+ /* Is a Hypervisor instruction load/store allowed? */
+ FIELD(TB_FLAGS, HLSX, 15, 1)
+ FIELD(TB_FLAGS, MSTATUS_HS_FS, 16, 2)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 9d50e7bbb6..1e7ee9aa30 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -79,16 +79,17 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+     }
+ 
+ #ifdef CONFIG_USER_ONLY
+-    flags |= TB_FLAGS_MSTATUS_FS;
+-    flags |= TB_FLAGS_MSTATUS_VS;
++    flags = FIELD_DP32(flags, TB_FLAGS, FS, EXT_STATUS_DIRTY);
++    flags = FIELD_DP32(flags, TB_FLAGS, VS, EXT_STATUS_DIRTY);
+ #else
+     flags |= cpu_mmu_index(env, 0);
+     if (riscv_cpu_fp_enabled(env)) {
+-        flags |= env->mstatus & MSTATUS_FS;
++        flags =  FIELD_DP32(flags, TB_FLAGS, FS,
++                            get_field(env->mstatus,  MSTATUS_FS));
+     }
+-
+     if (riscv_cpu_vector_enabled(env)) {
+-        flags |= env->mstatus & MSTATUS_VS;
++        flags =  FIELD_DP32(flags, TB_FLAGS, VS,
++                            get_field(env->mstatus, MSTATUS_VS));
+     }
+ 
+     if (riscv_has_ext(env, RVH)) {
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 880f6318aa..b897bf6006 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -64,10 +64,10 @@ typedef struct DisasContext {
+     RISCVMXL xl;
+     uint32_t misa_ext;
+     uint32_t opcode;
+-    uint32_t mstatus_fs;
+-    uint32_t mstatus_vs;
+-    uint32_t mstatus_hs_fs;
+-    uint32_t mstatus_hs_vs;
++    RISCVExtStatus mstatus_fs;
++    RISCVExtStatus mstatus_vs;
++    RISCVExtStatus mstatus_hs_fs;
++    RISCVExtStatus mstatus_hs_vs;
+     uint32_t mem_idx;
+     /* Remember the rounding mode encoded in the previous fp instruction,
+        which we have already installed into env->fp_status.  Or -1 for
+@@ -598,8 +598,7 @@ static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
+ }
+ 
+ #ifndef CONFIG_USER_ONLY
+-/* The states of mstatus_fs are:
+- * 0 = disabled, 1 = initial, 2 = clean, 3 = dirty
++/*
+  * We will have already diagnosed disabled state,
+  * and need to turn initial/clean into dirty.
+  */
+@@ -611,9 +610,9 @@ static void mark_fs_dirty(DisasContext *ctx)
+         return;
+     }
+ 
+-    if (ctx->mstatus_fs != MSTATUS_FS) {
++    if (ctx->mstatus_fs != EXT_STATUS_DIRTY) {
+         /* Remember the state change for the rest of the TB. */
+-        ctx->mstatus_fs = MSTATUS_FS;
++        ctx->mstatus_fs = EXT_STATUS_DIRTY;
+ 
+         tmp = tcg_temp_new();
+         tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+@@ -621,9 +620,9 @@ static void mark_fs_dirty(DisasContext *ctx)
+         tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+     }
+ 
+-    if (ctx->virt_enabled && ctx->mstatus_hs_fs != MSTATUS_FS) {
++    if (ctx->virt_enabled && ctx->mstatus_hs_fs != EXT_STATUS_DIRTY) {
+         /* Remember the stage change for the rest of the TB. */
+-        ctx->mstatus_hs_fs = MSTATUS_FS;
++        ctx->mstatus_hs_fs = EXT_STATUS_DIRTY;
+ 
+         tmp = tcg_temp_new();
+         tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
+@@ -636,8 +635,7 @@ static inline void mark_fs_dirty(DisasContext *ctx) { }
+ #endif
+ 
+ #ifndef CONFIG_USER_ONLY
+-/* The states of mstatus_vs are:
+- * 0 = disabled, 1 = initial, 2 = clean, 3 = dirty
++/*
+  * We will have already diagnosed disabled state,
+  * and need to turn initial/clean into dirty.
+  */
+@@ -645,9 +643,9 @@ static void mark_vs_dirty(DisasContext *ctx)
+ {
+     TCGv tmp;
+ 
+-    if (ctx->mstatus_vs != MSTATUS_VS) {
++    if (ctx->mstatus_vs != EXT_STATUS_DIRTY) {
+         /* Remember the state change for the rest of the TB.  */
+-        ctx->mstatus_vs = MSTATUS_VS;
++        ctx->mstatus_vs = EXT_STATUS_DIRTY;
+ 
+         tmp = tcg_temp_new();
+         tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+@@ -655,9 +653,9 @@ static void mark_vs_dirty(DisasContext *ctx)
+         tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+     }
+ 
+-    if (ctx->virt_enabled && ctx->mstatus_hs_vs != MSTATUS_VS) {
++    if (ctx->virt_enabled && ctx->mstatus_hs_vs != EXT_STATUS_DIRTY) {
+         /* Remember the stage change for the rest of the TB. */
+-        ctx->mstatus_hs_vs = MSTATUS_VS;
++        ctx->mstatus_hs_vs = EXT_STATUS_DIRTY;
+ 
+         tmp = tcg_temp_new();
+         tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
+@@ -1153,8 +1151,8 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+ 
+     ctx->pc_succ_insn = ctx->base.pc_first;
+     ctx->mem_idx = FIELD_EX32(tb_flags, TB_FLAGS, MEM_IDX);
+-    ctx->mstatus_fs = tb_flags & TB_FLAGS_MSTATUS_FS;
+-    ctx->mstatus_vs = tb_flags & TB_FLAGS_MSTATUS_VS;
++    ctx->mstatus_fs = FIELD_EX32(tb_flags, TB_FLAGS, FS);
++    ctx->mstatus_vs = FIELD_EX32(tb_flags, TB_FLAGS, VS);
+     ctx->priv_ver = env->priv_ver;
+     ctx->virt_enabled = FIELD_EX32(tb_flags, TB_FLAGS, VIRT_ENABLED);
+     ctx->misa_ext = env->misa_ext;
+diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
+index 052408f45c..31cd3d0e05 100644
+--- a/target/riscv/insn_trans/trans_rvf.c.inc
++++ b/target/riscv/insn_trans/trans_rvf.c.inc
+@@ -19,7 +19,7 @@
+  */
+ 
+ #define REQUIRE_FPU do {\
+-    if (ctx->mstatus_fs == 0) \
++    if (ctx->mstatus_fs == EXT_STATUS_DISABLED) \
+         if (!ctx->cfg_ptr->ext_zfinx) \
+             return false; \
+ } while (0)
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index f2e3d38515..6297c3b50d 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -29,12 +29,12 @@ static inline bool is_overlapped(const int8_t astart, int8_t asize,
+ 
+ static bool require_rvv(DisasContext *s)
+ {
+-    return s->mstatus_vs != 0;
++    return s->mstatus_vs != EXT_STATUS_DISABLED;
+ }
+ 
+ static bool require_rvf(DisasContext *s)
+ {
+-    if (s->mstatus_fs == 0) {
++    if (s->mstatus_fs == EXT_STATUS_DISABLED) {
+         return false;
+     }
+ 
+@@ -52,7 +52,7 @@ static bool require_rvf(DisasContext *s)
+ 
+ static bool require_scale_rvf(DisasContext *s)
+ {
+-    if (s->mstatus_fs == 0) {
++    if (s->mstatus_fs == EXT_STATUS_DISABLED) {
+         return false;
+     }
+ 
+@@ -70,7 +70,7 @@ static bool require_scale_rvf(DisasContext *s)
+ 
+ static bool require_scale_rvfmin(DisasContext *s)
+ {
+-    if (s->mstatus_fs == 0) {
++    if (s->mstatus_fs == EXT_STATUS_DISABLED) {
+         return false;
+     }
+ 
+-- 
+2.34.1
+
 
