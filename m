@@ -1,60 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgPtb-00077v-R8
-	for mharc-qemu-riscv@gnu.org; Sun, 26 Mar 2023 08:54:51 -0400
+	id 1pgRCs-0007yM-2G
+	for mharc-qemu-riscv@gnu.org; Sun, 26 Mar 2023 10:18:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pgPtZ-00077h-Vn; Sun, 26 Mar 2023 08:54:50 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ id 1pgRCq-0007y1-Lj; Sun, 26 Mar 2023 10:18:48 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pgPtX-0006rJ-45; Sun, 26 Mar 2023 08:54:49 -0400
+ id 1pgRCn-0005D5-Bj; Sun, 26 Mar 2023 10:18:48 -0400
 Received: from [192.168.0.120] (unknown [180.175.29.170])
- by APP-01 (Coremail) with SMTP id qwCowAB3kNSEQCBkRWUqFw--.60159S2;
- Sun, 26 Mar 2023 20:54:30 +0800 (CST)
-Message-ID: <19e510b0-96dd-b839-c7fa-e7164b425170@iscas.ac.cn>
-Date: Sun, 26 Mar 2023 20:54:28 +0800
+ by APP-05 (Coremail) with SMTP id zQCowAAHDV05VCBkVOZYCg--.64329S2;
+ Sun, 26 Mar 2023 22:18:34 +0800 (CST)
+Content-Type: multipart/alternative;
+ boundary="------------TN7sg1M7nj7CkvILexHhMImt"
+Message-ID: <87d28fb7-df3b-183c-fcac-0e47db3b11a2@iscas.ac.cn>
+Date: Sun, 26 Mar 2023 22:18:33 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [PATCH v6 02/25] target/riscv: Add a general status enum for
- extensions
+Subject: Re: [PATCH v6 00/25] target/riscv: MSTATUS_SUM + cleanups
 Content-Language: en-US
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
  zhiwei_liu@linux.alibaba.com, fei2.wu@intel.com, liweiwei@iscas.ac.cn
 References: <20230325105429.1142530-1-richard.henderson@linaro.org>
- <20230325105429.1142530-3-richard.henderson@linaro.org>
 From: liweiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230325105429.1142530-3-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: qwCowAB3kNSEQCBkRWUqFw--.60159S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3Jr1UGF13WF18Xr18Xr1xuFg_yoW7uFW3pr
- 4kCayfKrW8ta9rCa4Syw1DGr1rJr13KFWDCws7W3yrKFWrJ3y5CFnrtws3ZryDWF48Gw4j
- vF4ruw1vyr42yrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkK14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+In-Reply-To: <20230325105429.1142530-1-richard.henderson@linaro.org>
+X-CM-TRANSID: zQCowAAHDV05VCBkVOZYCg--.64329S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxCr4ruw1xtw15Ar13GrW8Xrb_yoW5CrW3pr
+ yrG3y7AFs5JrZ7Aw4fta1UCry5GF45Wr45A3Z7Zrn5Jw43JrW5Jrs7K347GF1DJFW8Ww12
+ k3Wj9343Aw4UJrDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkl14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
  6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
- 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
- 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
- 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE
- 67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrV
- AFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCI
- c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267
- AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_
- Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbXdbU
- UUUUU==
+ 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487McIj6xIIjxv20xvE14v26r1j6r18McIj
+ 6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lF7I21c
+ 0EjII2zVCS5cI20VAGYxC7Mx8GjcxK6IxK0xIIj40E5I8CrwCYjI0SjxkI62AI1cAE67vI
+ Y487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
+ 0_JrI_JrWlx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
+ 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
+ WUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
+ IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VU1g4S7UUUU
+ U==
 X-Originating-IP: [180.175.29.170]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
  helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -68,169 +66,205 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Mar 2023 12:54:50 -0000
+X-List-Received-Date: Sun, 26 Mar 2023 14:18:49 -0000
+
+This is a multi-part message in MIME format.
+--------------TN7sg1M7nj7CkvILexHhMImt
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
 
 On 2023/3/25 18:54, Richard Henderson wrote:
-> From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> This builds on Fei and Zhiwei's SUM and TB_FLAGS changes.
 >
-> The pointer masking is the only extension that directly use status.
-> The vector or float extension uses the status in an indirect way.
+>    * Reclaim 5 TB_FLAGS bits, since we nearly ran out.
 >
-> Replace the pointer masking extension special status fields with
-> the general status.
+>    * Using cpu_mmu_index(env, true) is insufficient to implement
+>      HLVX properly.  While that chooses the correct mmu_idx, it
+>      does not perform the read with execute permission.
+>      I add a new tcg interface to perform a read-for-execute with
+>      an arbitrary mmu_idx.  This is still not 100% compliant, but
+>      it's closer.
 >
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Message-Id: <20230324143031.1093-3-zhiwei_liu@linux.alibaba.com>
-> [rth: Add a typedef for the enum]
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
+>    * Handle mstatus.MPV in cpu_mmu_index.
+>    * Use vsstatus.SUM when required for MMUIdx_S_SUM.
+>    * Cleanups for get_physical_address.
+>
+> While this passes check-avocado, I'm sure that's insufficient.
+> Please have a close look.
+>
+>
+> r~
+>
+>
+> Fei Wu (2):
+>    target/riscv: Separate priv from mmu_idx
+>    target/riscv: Reduce overhead of MSTATUS_SUM change
+>
+> LIU Zhiwei (4):
+>    target/riscv: Extract virt enabled state from tb flags
+>    target/riscv: Add a general status enum for extensions
+>    target/riscv: Encode the FS and VS on a normal way for tb flags
+>    target/riscv: Add a tb flags field for vstart
+>
+> Richard Henderson (19):
+>    target/riscv: Remove mstatus_hs_{fs,vs} from tb_flags
+>    accel/tcg: Add cpu_ld*_code_mmu
+>    target/riscv: Use cpu_ld*_code_mmu for HLVX
+>    target/riscv: Handle HLV, HSV via helpers
+>    target/riscv: Rename MMU_HYP_ACCESS_BIT to MMU_2STAGE_BIT
+>    target/riscv: Introduce mmuidx_sum
+>    target/riscv: Introduce mmuidx_priv
+>    target/riscv: Introduce mmuidx_2stage
+>    target/riscv: Move hstatus.spvp check to check_access_hlsv
+>    target/riscv: Set MMU_2STAGE_BIT in riscv_cpu_mmu_index
+>    target/riscv: Check SUM in the correct register
+>    target/riscv: Hoist second stage mode change to callers
+>    target/riscv: Hoist pbmte and hade out of the level loop
+>    target/riscv: Move leaf pte processing out of level loop
+>    target/riscv: Suppress pte update with is_debug
+>    target/riscv: Don't modify SUM with is_debug
+>    target/riscv: Merge checks for reserved pte flags
+>    target/riscv: Reorg access check in get_physical_address
+>    target/riscv: Reorg sum check in get_physical_address
+>
+>   include/exec/cpu_ldst.h                       |   9 +
+>   target/riscv/cpu.h                            |  47 ++-
+>   target/riscv/cpu_bits.h                       |  12 +-
+>   target/riscv/helper.h                         |  12 +-
+>   target/riscv/internals.h                      |  35 ++
+>   accel/tcg/cputlb.c                            |  48 +++
+>   accel/tcg/user-exec.c                         |  58 +++
+>   target/riscv/cpu.c                            |   2 +-
+>   target/riscv/cpu_helper.c                     | 393 +++++++++---------
+>   target/riscv/csr.c                            |  21 +-
+>   target/riscv/op_helper.c                      | 113 ++++-
+>   target/riscv/translate.c                      |  72 ++--
+>   .../riscv/insn_trans/trans_privileged.c.inc   |   2 +-
+>   target/riscv/insn_trans/trans_rvf.c.inc       |   2 +-
+>   target/riscv/insn_trans/trans_rvh.c.inc       | 135 +++---
+>   target/riscv/insn_trans/trans_rvv.c.inc       |  22 +-
+>   target/riscv/insn_trans/trans_xthead.c.inc    |   7 +-
+>   17 files changed, 595 insertions(+), 395 deletions(-)
+
+This patchset is LGTM.  Patch 16 seems fix a bug in the two_stage 
+parameter of raise_mmu_exception
+
+called when translation fails,  it didn't take MPV into consideration in 
+original implementation.
 
 Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 
 Weiwei Li
->   target/riscv/cpu.h      |  8 ++++++++
->   target/riscv/cpu_bits.h | 12 ++++--------
->   target/riscv/cpu.c      |  2 +-
->   target/riscv/csr.c      | 14 +++++++-------
->   4 files changed, 20 insertions(+), 16 deletions(-)
+
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 12fe8d8546..30d9828d59 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -99,6 +99,14 @@ enum {
->       TRANSLATE_G_STAGE_FAIL
->   };
->   
-> +/* Extension context status */
-> +typedef enum {
-> +    EXT_STATUS_DISABLED = 0,
-> +    EXT_STATUS_INITIAL,
-> +    EXT_STATUS_CLEAN,
-> +    EXT_STATUS_DIRTY,
-> +} RISCVExtStatus;
-> +
->   #define MMU_USER_IDX 3
->   
->   #define MAX_RISCV_PMPS (16)
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index fca7ef0cef..b84f62f8d6 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -9,6 +9,9 @@
->                    (((uint64_t)(val) * ((mask) & ~((mask) << 1))) & \
->                    (uint64_t)(mask)))
->   
-> +/* Extension context status mask */
-> +#define EXT_STATUS_MASK     0x3ULL
-> +
->   /* Floating point round mode */
->   #define FSR_RD_SHIFT        5
->   #define FSR_RD              (0x7 << FSR_RD_SHIFT)
-> @@ -734,13 +737,6 @@ typedef enum RISCVException {
->   #define PM_ENABLE       0x00000001ULL
->   #define PM_CURRENT      0x00000002ULL
->   #define PM_INSN         0x00000004ULL
-> -#define PM_XS_MASK      0x00000003ULL
-> -
-> -/* PointerMasking XS bits values */
-> -#define PM_EXT_DISABLE  0x00000000ULL
-> -#define PM_EXT_INITIAL  0x00000001ULL
-> -#define PM_EXT_CLEAN    0x00000002ULL
-> -#define PM_EXT_DIRTY    0x00000003ULL
->   
->   /* Execution enviornment configuration bits */
->   #define MENVCFG_FIOM                       BIT(0)
-> @@ -780,7 +776,7 @@ typedef enum RISCVException {
->   #define S_OFFSET     5ULL
->   #define M_OFFSET     8ULL
->   
-> -#define PM_XS_BITS   (PM_XS_MASK << XS_OFFSET)
-> +#define PM_XS_BITS   (EXT_STATUS_MASK << XS_OFFSET)
->   #define U_PM_ENABLE  (PM_ENABLE  << U_OFFSET)
->   #define U_PM_CURRENT (PM_CURRENT << U_OFFSET)
->   #define U_PM_INSN    (PM_INSN    << U_OFFSET)
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1e97473af2..1135106b3e 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -764,7 +764,7 @@ static void riscv_cpu_reset_hold(Object *obj)
->           i++;
->       }
->       /* mmte is supposed to have pm.current hardwired to 1 */
-> -    env->mmte |= (PM_EXT_INITIAL | MMTE_M_PM_CURRENT);
-> +    env->mmte |= (EXT_STATUS_INITIAL | MMTE_M_PM_CURRENT);
->   #endif
->       env->xl = riscv_cpu_mxl(env);
->       riscv_cpu_update_mask(env);
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d522efc0b6..abea7b749e 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3513,7 +3513,7 @@ static RISCVException write_mmte(CPURISCVState *env, int csrno,
->   
->       /* hardwiring pm.instruction bit to 0, since it's not supported yet */
->       wpri_val &= ~(MMTE_M_PM_INSN | MMTE_S_PM_INSN | MMTE_U_PM_INSN);
-> -    env->mmte = wpri_val | PM_EXT_DIRTY;
-> +    env->mmte = wpri_val | EXT_STATUS_DIRTY;
->       riscv_cpu_update_mask(env);
->   
->       /* Set XS and SD bits, since PM CSRs are dirty */
-> @@ -3593,7 +3593,7 @@ static RISCVException write_mpmmask(CPURISCVState *env, int csrno,
->       if ((env->priv == PRV_M) && (env->mmte & M_PM_ENABLE)) {
->           env->cur_pmmask = val;
->       }
-> -    env->mmte |= PM_EXT_DIRTY;
-> +    env->mmte |= EXT_STATUS_DIRTY;
->   
->       /* Set XS and SD bits, since PM CSRs are dirty */
->       mstatus = env->mstatus | MSTATUS_XS;
-> @@ -3621,7 +3621,7 @@ static RISCVException write_spmmask(CPURISCVState *env, int csrno,
->       if ((env->priv == PRV_S) && (env->mmte & S_PM_ENABLE)) {
->           env->cur_pmmask = val;
->       }
-> -    env->mmte |= PM_EXT_DIRTY;
-> +    env->mmte |= EXT_STATUS_DIRTY;
->   
->       /* Set XS and SD bits, since PM CSRs are dirty */
->       mstatus = env->mstatus | MSTATUS_XS;
-> @@ -3649,7 +3649,7 @@ static RISCVException write_upmmask(CPURISCVState *env, int csrno,
->       if ((env->priv == PRV_U) && (env->mmte & U_PM_ENABLE)) {
->           env->cur_pmmask = val;
->       }
-> -    env->mmte |= PM_EXT_DIRTY;
-> +    env->mmte |= EXT_STATUS_DIRTY;
->   
->       /* Set XS and SD bits, since PM CSRs are dirty */
->       mstatus = env->mstatus | MSTATUS_XS;
-> @@ -3673,7 +3673,7 @@ static RISCVException write_mpmbase(CPURISCVState *env, int csrno,
->       if ((env->priv == PRV_M) && (env->mmte & M_PM_ENABLE)) {
->           env->cur_pmbase = val;
->       }
-> -    env->mmte |= PM_EXT_DIRTY;
-> +    env->mmte |= EXT_STATUS_DIRTY;
->   
->       /* Set XS and SD bits, since PM CSRs are dirty */
->       mstatus = env->mstatus | MSTATUS_XS;
-> @@ -3701,7 +3701,7 @@ static RISCVException write_spmbase(CPURISCVState *env, int csrno,
->       if ((env->priv == PRV_S) && (env->mmte & S_PM_ENABLE)) {
->           env->cur_pmbase = val;
->       }
-> -    env->mmte |= PM_EXT_DIRTY;
-> +    env->mmte |= EXT_STATUS_DIRTY;
->   
->       /* Set XS and SD bits, since PM CSRs are dirty */
->       mstatus = env->mstatus | MSTATUS_XS;
-> @@ -3729,7 +3729,7 @@ static RISCVException write_upmbase(CPURISCVState *env, int csrno,
->       if ((env->priv == PRV_U) && (env->mmte & U_PM_ENABLE)) {
->           env->cur_pmbase = val;
->       }
-> -    env->mmte |= PM_EXT_DIRTY;
-> +    env->mmte |= EXT_STATUS_DIRTY;
->   
->       /* Set XS and SD bits, since PM CSRs are dirty */
->       mstatus = env->mstatus | MSTATUS_XS;
+--------------TN7sg1M7nj7CkvILexHhMImt
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2023/3/25 18:54, Richard Henderson
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:20230325105429.1142530-1-richard.henderson@linaro.org">
+      <pre class="moz-quote-pre" wrap="">This builds on Fei and Zhiwei's SUM and TB_FLAGS changes.
+
+  * Reclaim 5 TB_FLAGS bits, since we nearly ran out.
+
+  * Using cpu_mmu_index(env, true) is insufficient to implement
+    HLVX properly.  While that chooses the correct mmu_idx, it
+    does not perform the read with execute permission.
+    I add a new tcg interface to perform a read-for-execute with
+    an arbitrary mmu_idx.  This is still not 100% compliant, but
+    it's closer.
+
+  * Handle mstatus.MPV in cpu_mmu_index.
+  * Use vsstatus.SUM when required for MMUIdx_S_SUM.
+  * Cleanups for get_physical_address.
+
+While this passes check-avocado, I'm sure that's insufficient.
+Please have a close look.
+
+
+r~
+
+
+Fei Wu (2):
+  target/riscv: Separate priv from mmu_idx
+  target/riscv: Reduce overhead of MSTATUS_SUM change
+
+LIU Zhiwei (4):
+  target/riscv: Extract virt enabled state from tb flags
+  target/riscv: Add a general status enum for extensions
+  target/riscv: Encode the FS and VS on a normal way for tb flags
+  target/riscv: Add a tb flags field for vstart
+
+Richard Henderson (19):
+  target/riscv: Remove mstatus_hs_{fs,vs} from tb_flags
+  accel/tcg: Add cpu_ld*_code_mmu
+  target/riscv: Use cpu_ld*_code_mmu for HLVX
+  target/riscv: Handle HLV, HSV via helpers
+  target/riscv: Rename MMU_HYP_ACCESS_BIT to MMU_2STAGE_BIT
+  target/riscv: Introduce mmuidx_sum
+  target/riscv: Introduce mmuidx_priv
+  target/riscv: Introduce mmuidx_2stage
+  target/riscv: Move hstatus.spvp check to check_access_hlsv
+  target/riscv: Set MMU_2STAGE_BIT in riscv_cpu_mmu_index
+  target/riscv: Check SUM in the correct register
+  target/riscv: Hoist second stage mode change to callers
+  target/riscv: Hoist pbmte and hade out of the level loop
+  target/riscv: Move leaf pte processing out of level loop
+  target/riscv: Suppress pte update with is_debug
+  target/riscv: Don't modify SUM with is_debug
+  target/riscv: Merge checks for reserved pte flags
+  target/riscv: Reorg access check in get_physical_address
+  target/riscv: Reorg sum check in get_physical_address
+
+ include/exec/cpu_ldst.h                       |   9 +
+ target/riscv/cpu.h                            |  47 ++-
+ target/riscv/cpu_bits.h                       |  12 +-
+ target/riscv/helper.h                         |  12 +-
+ target/riscv/internals.h                      |  35 ++
+ accel/tcg/cputlb.c                            |  48 +++
+ accel/tcg/user-exec.c                         |  58 +++
+ target/riscv/cpu.c                            |   2 +-
+ target/riscv/cpu_helper.c                     | 393 +++++++++---------
+ target/riscv/csr.c                            |  21 +-
+ target/riscv/op_helper.c                      | 113 ++++-
+ target/riscv/translate.c                      |  72 ++--
+ .../riscv/insn_trans/trans_privileged.c.inc   |   2 +-
+ target/riscv/insn_trans/trans_rvf.c.inc       |   2 +-
+ target/riscv/insn_trans/trans_rvh.c.inc       | 135 +++---
+ target/riscv/insn_trans/trans_rvv.c.inc       |  22 +-
+ target/riscv/insn_trans/trans_xthead.c.inc    |   7 +-
+ 17 files changed, 595 insertions(+), 395 deletions(-)</pre>
+    </blockquote>
+    <p>This patchset is LGTM.  Patch 16 seems fix a bug in the two_stage
+      parameter of <span style="color: #000000;">raise_mmu_exception</span></p>
+    <p><span style="color: #000000;">called when translation fails</span><span
+        style="color: #000000;">,  it didn't take MPV into consideration
+        in original implementation.</span><br>
+    </p>
+    <p>Reviewed-by: Weiwei Li <a class="moz-txt-link-rfc2396E"
+        href="mailto:liweiwei@iscas.ac.cn">&lt;liweiwei@iscas.ac.cn&gt;</a></p>
+    <p>Weiwei Li<br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:20230325105429.1142530-1-richard.henderson@linaro.org">
+      <pre class="moz-quote-pre" wrap="">
+
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------TN7sg1M7nj7CkvILexHhMImt--
 
 
