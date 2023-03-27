@@ -1,71 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgpwg-0002gX-SF
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 12:43:46 -0400
+	id 1pgqU8-0001xu-CN
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 13:18:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pgpwe-0002g3-Or
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 12:43:44 -0400
-Received: from mail-ot1-x32e.google.com ([2607:f8b0:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pgqU3-0001xH-6f
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 13:18:18 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pgpwc-0006dU-VQ
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 12:43:44 -0400
-Received: by mail-ot1-x32e.google.com with SMTP id
- ca2-20020a056830610200b006a11ab58c3fso4191353otb.4
- for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 09:43:42 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pgqU1-0008QG-HI
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 13:18:14 -0400
+Received: by mail-pl1-x630.google.com with SMTP id k2so9075083pll.8
+ for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 10:18:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1679935421;
+ d=linaro.org; s=google; t=1679937488;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=UQviVZQFm/bPdd8QQggkQ3ZywRJoIADqBPysj8eLieA=;
- b=MiTT/OKw9M0RrRP0H582uOvlXpejOaiNJhAp8TTgpp6M60mw0rjJ0prR5GFWYPA04X
- ImzBfTp/caODZxqnpKiym/AhIFhTzqQNBfEQq6WVmtltRLwV6tRm6RdlPeICFD8E6h0E
- Bvo68keeCbBhRG3J97C7P63EWoPjGKBerBJGrkKlp6yf7uq4foW4j0XPwsaKlwCpAvWm
- ln2x2QlSalR2yLxolQpuXemWsoaraxJCrXp66L5XlIvCnPXVbY+MSfueX35sfPEqwPN5
- nNRPD7hCXw76NfU4kyFr6DvGRdJrpJ+og6H5yU3VbgQRAS/xoSLMmk8Llrf0Ks8OtWDQ
- /FcQ==
+ bh=dwx3UmJ/5Z+3rNirob01JQiB4B+Cln0ebYrYuadPQYk=;
+ b=QG4SlZHhdS+NieP6D2zp3x8gITVlFjwMR/CqxDyq1Zql2qFatAa/xrPiU/qNhKPCJc
+ Qkq+B8u3ir6PGD766lKdQ/KtGUCapKO/tS8EqYyBaEvfp6TFht12tyAsWAVbl/P2+WlV
+ z6y2j2LZRuMVWJ1/Baq1xACHB84AeO2vahrV4E93FtAI50PJ0zDArZMIBK5Nm2W8Fu/U
+ 5ErQitAzvSjHqcGiZj0cN2afKndmlbOo73NAIZfzKdRLVRz7QN90gpBpYzreY9aIxp5J
+ wnWVJPeNolV+WXI1D404IVzGFkq62NQgAaYNytH2N+QarHWneTeTbT38fkXLQO0dMMZx
+ jH8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679935421;
+ d=1e100.net; s=20210112; t=1679937488;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UQviVZQFm/bPdd8QQggkQ3ZywRJoIADqBPysj8eLieA=;
- b=sLbfemscQVO0Ph2x2+F327fIwGH0SG8DCiFMZvHQNsJO7L8rK4WxQNhTxXzIcQmEM0
- feJ7lxNorltLlz87Bh/+hJLwjNnjQnQinR6ebjC2YBcFURWoT2fhreUvquqblJfYt9yr
- PC+0nDCJhpNSFfBkScTzUYfUjHZevn0FpxTo+cFszCTDbNsnOLICfWyHuXJ2fYpCXDu0
- Q4+TQtid5GBo9emMWhqnaH6z/pBm0/xerMqc50Hbkeoh7Nw3ydQn7LkYkktgBrP5Y+xq
- 7JmZPVirVh7+gE+8qlgx6GI9Gdmt7Y2tZSek0LiQq4WEreAb4P+ZHuHstXc0SpI2tWsw
- dzzQ==
-X-Gm-Message-State: AAQBX9dkY9D+wcwsla8x/v2vMrPmEw8esyrQ7wIdFRGfAvU3PlgGks/x
- VjrUFVouh0f/+HaRtQiIMebU6w==
-X-Google-Smtp-Source: AKy350agXwI0bYo+5q45zjJCZzomz53hQkqffC50AHKGpma+/Cyv1R5rvhzaYJIMwLeDU+BHx1utJA==
-X-Received: by 2002:a9d:69cb:0:b0:6a1:3d8e:2ae1 with SMTP id
- v11-20020a9d69cb000000b006a13d8e2ae1mr1939083oto.21.1679935421220; 
- Mon, 27 Mar 2023 09:43:41 -0700 (PDT)
-Received: from [192.168.68.107] ([177.95.89.231])
+ bh=dwx3UmJ/5Z+3rNirob01JQiB4B+Cln0ebYrYuadPQYk=;
+ b=bosJUjIn+H4hESycAgwMNUSeojVyaI1DbJvUvvc9i6qwri1lY2J3q/TYuDberE0Sgy
+ 05BD4WJilwz2EBcvzeV5/Y7LEEAYtzfPCy6uA8X2WESrFSr6iv3n1vIbkCcEtnI2BtC0
+ t5oc9+tMhcCJROjTf/A5iiu30q3WBktTpvexHlP0nakjKmta8pYk2KQxC9GZfnZPGOwl
+ mbh2hzueCuj08l8CpX8n89sFKZ6oBjfzu+NhulY7xY7DUEX6dt8G8CnLOtkSXHgVHY2Q
+ OIHJeFgvyJBLgOHjPTOul0E4vs2MWZcM9+skZiyEAPXmZ694/AWY4+BAkIkT+Hm/jfph
+ cHOQ==
+X-Gm-Message-State: AO0yUKWbCfmmQ/Mu6RDQmdjK5bVw2xOzSDWR0kg6DAoWl3nfWXQxR4W6
+ By/RnJRzEtmwJvZblBD6W+PnAw==
+X-Google-Smtp-Source: AK7set8WNbBoQ+TD2+FIl4LkcDDQsadrjlel1WSq08nunLHFTm20RpQf7Cb4MaK2DnwifnBcAHC9zg==
+X-Received: by 2002:a05:6a20:4d90:b0:d6:c9e2:17a1 with SMTP id
+ gj16-20020a056a204d9000b000d6c9e217a1mr10229988pzb.62.1679937488056; 
+ Mon, 27 Mar 2023 10:18:08 -0700 (PDT)
+Received: from ?IPV6:2602:ae:1544:6601:6705:aa17:3641:e634?
+ ([2602:ae:1544:6601:6705:aa17:3641:e634])
  by smtp.gmail.com with ESMTPSA id
- di7-20020a0568303a0700b00690e21a46e1sm11837448otb.56.2023.03.27.09.43.38
+ z17-20020aa785d1000000b005a8c92f7c27sm19257021pfn.212.2023.03.27.10.18.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Mar 2023 09:43:40 -0700 (PDT)
-Message-ID: <e36dba97-c182-c427-e051-2a8d1cfe96a8@ventanamicro.com>
-Date: Mon, 27 Mar 2023 13:43:37 -0300
+ Mon, 27 Mar 2023 10:18:07 -0700 (PDT)
+Message-ID: <b02cc37d-8a51-fed3-5a93-4d9f3873b5ae@linaro.org>
+Date: Mon, 27 Mar 2023 10:18:05 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [PATCH v6 00/25] target/riscv: MSTATUS_SUM + cleanups
+ Thunderbird/102.8.0
+Subject: Re: [PATCH] riscv: Add support for the Zfa extension
 Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
- zhiwei_liu@linux.alibaba.com, fei2.wu@intel.com
-References: <20230325105429.1142530-1-richard.henderson@linaro.org>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230325105429.1142530-1-richard.henderson@linaro.org>
+To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Jeff Law <jeffreyalaw@gmail.com>, Tsukasa OI <research_trasio@irq.a4lg.com>
+Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20230327080026.3266574-1-christoph.muellner@vrull.eu>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230327080026.3266574-1-christoph.muellner@vrull.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -85,87 +90,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Mar 2023 16:43:45 -0000
+X-List-Received-Date: Mon, 27 Mar 2023 17:18:18 -0000
+
+On 3/27/23 01:00, Christoph Muellner wrote:
+> +uint64_t helper_fminm_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
+> +{
+> +    float32 frs1 = check_nanbox_s(env, rs1);
+> +    float32 frs2 = check_nanbox_s(env, rs2);
+> +
+> +    if (float32_is_any_nan(frs1) || float32_is_any_nan(frs2)) {
+> +        return float32_default_nan(&env->fp_status);
+> +    }
+> +
+> +    return nanbox_s(env, float32_minimum_number(frs1, frs2, &env->fp_status));
+> +}
+
+Better to set and clear fp_status->default_nan_mode around the operation.
+
+> +uint64_t helper_fround_s(CPURISCVState *env, uint64_t frs1)
+> +{
+> +    if (float32_is_zero(frs1) ||
+> +        float32_is_infinity(frs1)) {
+> +        return frs1;
+> +    }
+> +
+> +    if (float32_is_any_nan(frs1)) {
+> +        riscv_cpu_set_fflags(env, FPEXC_NV);
+> +        return frs1;
+> +    }
+> +
+> +    int32_t tmp = float32_to_int32(frs1, &env->fp_status);
+> +    return nanbox_s(env, int32_to_float32(tmp, &env->fp_status));
+> +}
+
+Very much incorrect, since int32_t does not have the range for the intermediate result. 
+In any case, the function you want is float32_round_to_int, which eliminates the 
+zero/inf/nan special cases.  It will raise inexact, so perfect for froundnx, but you'll 
+need to save/restore float_flag_inexact around the function.
+
+> +uint64_t helper_fli_s(CPURISCVState *env, uint32_t rs1)
+> +{
+> +    const uint32_t fli_s_table[] = {
+
+static const.  You don't need to use float32_default_nan, use the correct architected 
+constant.  This entire operation should be done at translation time.
+
+> +target_ulong helper_fcvtmod_w_d(CPURISCVState *env, uint64_t frs1)
+> +{
+> +    if (float64_is_any_nan(frs1) ||
+> +        float64_is_infinity(frs1)) {
+> +        return 0;
+> +    }
+> +
+> +    return float64_to_int32(frs1, &env->fp_status);
+> +}
+
+Incorrect, as float64_to_int32 will saturate the result, whereas you need the modular result.
+
+There is code to do the conversion mod 2**64 in target/alpha/ (do_cvttq).  We should move 
+this to generic code if it is to be used by more than one target.
+
+> +bool trans_fmvp_d_x(DisasContext *ctx, arg_fmvp_d_x *a)
+> +{
+> +    REQUIRE_FPU;
+> +    REQUIRE_ZFA(ctx);
+> +    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_32BIT(ctx);
+> +
+> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_ZERO);
+> +    TCGv_i64 t1 = tcg_temp_new_i64();
+> +
+> +    tcg_gen_extu_tl_i64(t1, src1);
+> +    tcg_gen_deposit_i64(cpu_fpr[a->rd], cpu_fpr[a->rd], t1, 32, 32);
+> +    mark_fs_dirty(ctx);
+> +    return true;
+> +}
+
+This does not match the linked document, which says that this insn has two inputs and sets 
+the complete fpr.
 
 
-
-On 3/25/23 07:54, Richard Henderson wrote:
-> This builds on Fei and Zhiwei's SUM and TB_FLAGS changes.
-> 
->    * Reclaim 5 TB_FLAGS bits, since we nearly ran out.
-> 
->    * Using cpu_mmu_index(env, true) is insufficient to implement
->      HLVX properly.  While that chooses the correct mmu_idx, it
->      does not perform the read with execute permission.
->      I add a new tcg interface to perform a read-for-execute with
->      an arbitrary mmu_idx.  This is still not 100% compliant, but
->      it's closer.
-> 
->    * Handle mstatus.MPV in cpu_mmu_index.
->    * Use vsstatus.SUM when required for MMUIdx_S_SUM.
->    * Cleanups for get_physical_address.
-> 
-> While this passes check-avocado, I'm sure that's insufficient.
-> Please have a close look.
-
-Tested fine in my end with some buildroot tests and 'stress-ng' in a 'virt'
-machine with Ubuntu.
-
-Tested-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-> 
-> 
-> r~
-> 
-> 
-> Fei Wu (2):
->    target/riscv: Separate priv from mmu_idx
->    target/riscv: Reduce overhead of MSTATUS_SUM change
-> 
-> LIU Zhiwei (4):
->    target/riscv: Extract virt enabled state from tb flags
->    target/riscv: Add a general status enum for extensions
->    target/riscv: Encode the FS and VS on a normal way for tb flags
->    target/riscv: Add a tb flags field for vstart
-> 
-> Richard Henderson (19):
->    target/riscv: Remove mstatus_hs_{fs,vs} from tb_flags
->    accel/tcg: Add cpu_ld*_code_mmu
->    target/riscv: Use cpu_ld*_code_mmu for HLVX
->    target/riscv: Handle HLV, HSV via helpers
->    target/riscv: Rename MMU_HYP_ACCESS_BIT to MMU_2STAGE_BIT
->    target/riscv: Introduce mmuidx_sum
->    target/riscv: Introduce mmuidx_priv
->    target/riscv: Introduce mmuidx_2stage
->    target/riscv: Move hstatus.spvp check to check_access_hlsv
->    target/riscv: Set MMU_2STAGE_BIT in riscv_cpu_mmu_index
->    target/riscv: Check SUM in the correct register
->    target/riscv: Hoist second stage mode change to callers
->    target/riscv: Hoist pbmte and hade out of the level loop
->    target/riscv: Move leaf pte processing out of level loop
->    target/riscv: Suppress pte update with is_debug
->    target/riscv: Don't modify SUM with is_debug
->    target/riscv: Merge checks for reserved pte flags
->    target/riscv: Reorg access check in get_physical_address
->    target/riscv: Reorg sum check in get_physical_address
-> 
->   include/exec/cpu_ldst.h                       |   9 +
->   target/riscv/cpu.h                            |  47 ++-
->   target/riscv/cpu_bits.h                       |  12 +-
->   target/riscv/helper.h                         |  12 +-
->   target/riscv/internals.h                      |  35 ++
->   accel/tcg/cputlb.c                            |  48 +++
->   accel/tcg/user-exec.c                         |  58 +++
->   target/riscv/cpu.c                            |   2 +-
->   target/riscv/cpu_helper.c                     | 393 +++++++++---------
->   target/riscv/csr.c                            |  21 +-
->   target/riscv/op_helper.c                      | 113 ++++-
->   target/riscv/translate.c                      |  72 ++--
->   .../riscv/insn_trans/trans_privileged.c.inc   |   2 +-
->   target/riscv/insn_trans/trans_rvf.c.inc       |   2 +-
->   target/riscv/insn_trans/trans_rvh.c.inc       | 135 +++---
->   target/riscv/insn_trans/trans_rvv.c.inc       |  22 +-
->   target/riscv/insn_trans/trans_xthead.c.inc    |   7 +-
->   17 files changed, 595 insertions(+), 395 deletions(-)
-> 
+r~
 
