@@ -1,75 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgrJ9-00029r-3W
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 14:11:03 -0400
+	id 1pgroF-0006kx-0K
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 14:43:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pgrJ7-00029U-45
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 14:11:02 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ id 1pgroD-0006ka-C7
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 14:43:09 -0400
+Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pgrJ5-0007lj-Kp
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 14:11:00 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- mp3-20020a17090b190300b0023fcc8ce113so12615843pjb.4
- for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 11:10:59 -0700 (PDT)
+ id 1pgroB-00085d-FG
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 14:43:08 -0400
+Received: by mail-pj1-x102e.google.com with SMTP id
+ l9-20020a17090a3f0900b0023d32684e7fso11326453pjc.1
+ for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 11:43:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1679940658;
+ d=linaro.org; s=google; t=1679942584;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=FyG8/kHuFLzlJCJ+7W6VUMb7LHSaP66RByXTP6tKQ9U=;
- b=DJitybBwNdtL7OpEifmbqrQKwtP/TPQpocdBJxyqYy7GRxzgdsmVn1z0xTNK9pZGxx
- h4JOOXbOnOxSVP3i36pVwj3jplVapJMebmIhdALZzzUp//j0mnvGRiVmjBj/8j+XY6nn
- 9oNQbSuCPMEk1R7I3xh+2irSXH3gi64rzVBsB9blktDyRn7hBfHcu6YIX+TS6rhT2QoO
- 3a3ycdujCTKE8Auz9uKySiytJv56FrLIaozUGBZo2/uH8/r15ZiptB58N9LBqshzJbZt
- 1Iwb4kmO6Qe93/IR9oP0GVa/5/wnzRkrmA0grGAoOpFaTRHm327Qu173Fz/7XmrbpEWn
- +74w==
+ bh=smElFyTXO9NrU2Fyau0lLYj3kwui4it19HAiV9AbNs8=;
+ b=brEOjb0faughg8lfQMXzJYbWvu6NWvJFokhlnoRo/iJ5CDNRwEyNls4k3ieuzNforR
+ NOyZB0ebBDq0XKES7NMhK6mKASpNZ8pKYf4IJ04ku52JTI5fQ/HBEER8Q+2yyObWARCr
+ d8x4W9YThG75vOJslYRvCQEgEk1M9WXDPuwo9ZeVxlvWIsALWdg3IHaKMuV6jFM+n8a5
+ OcuywG7j9cL0N9bstydM9uhDq9qCfE5GPfY2J2aYWBEWzFeOwlkFEQVkYSAzHzVq5297
+ o3h/3x2qRxkhmc/9JMqnuMOOSbuO/VpuMjDB917LbEHdAa2MCv77PXr6m6ZsD/RLzk+/
+ 3/7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679940658;
+ d=1e100.net; s=20210112; t=1679942584;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FyG8/kHuFLzlJCJ+7W6VUMb7LHSaP66RByXTP6tKQ9U=;
- b=SZlLomyfHCpV3hYIiQiSi5jEY1n2/c7ST+bdQXL5IoOClJ5/rhBTpxc9dB7FCeID+u
- V9HfkNJEnaOi/0iAivenTURm9irc8OY1Ji5Pa1YIlYE6y6OMbuoP+PN6CTw4BJ9S+Cu2
- DFuwDHtLperz5TYJAwn2UTihAdyY7kzWJIAM2U4Lx+EVz5T8se4v9rBh1R2oDKJyD2e5
- DJoG6WSOHsRuDMHfO0qx+UjFiGsO7SAqRo3PVtj08LPLWP6uBzU54lwjHqca65PXhxgV
- YSQb6u2oRImKBcq08zQx2a2dR8EFLmjGarn22cFW27ewiyr3CiM7LvjEsFOXTTpcoaGQ
- EpnQ==
-X-Gm-Message-State: AAQBX9diuMUlo1xw1xfdMUM2sYZY9D4WRrBtVNlGWeh0QDt2tXoUGj87
- eQtPaZZgTcwQvGv+5Q5PLupVxw==
-X-Google-Smtp-Source: AKy350Yy+L+Z4Vo7ObX1zSE8+lEh0y4EcevZTqQNhusY1Rb+md80YOC/6vRRkYVOQvVLnStU1MkcQA==
-X-Received: by 2002:a17:902:ecc2:b0:19c:da68:337a with SMTP id
- a2-20020a170902ecc200b0019cda68337amr15976895plh.31.1679940658081; 
- Mon, 27 Mar 2023 11:10:58 -0700 (PDT)
+ bh=smElFyTXO9NrU2Fyau0lLYj3kwui4it19HAiV9AbNs8=;
+ b=BRdQ+lyUwFCqM77DJaCDGB5TL7U7jaP/Imz0wpG4uddXe9y3EUeg0hy4EVugdmt7zn
+ kxsiQUKd/n1EW6scstlQV7ks1pMrtDZimBZXcvNZ1nR/iBSVLDi0p63rMwwMSbLKu5fS
+ r/9djIIN0BuY9JogaZdglR8xv1qyZ1Q5NQq4TONVtblrOpg4qL2B89HmBpF1YQBvPYRe
+ tmjSLranwMNPASCCcVNSyFBhyn55Bwunvz8ypDDriLHsK+UpyAyaIyGo8eU0jq60X06x
+ lL71JLQ6ENMlSaYxYNeggr8Lr7nYjAhr2Qxi8IO2Dhu5hs5SqJXZQ53fgzdsn4cLyZm0
+ g31w==
+X-Gm-Message-State: AAQBX9eGFZ2eoGu4it3d3GljuzJOeUSciI1w7WnM9H5iyZzNUbIfZfvl
+ KHm1tDvmQbla+QVf258D7Je0ZA==
+X-Google-Smtp-Source: AKy350aJB8lQ4hEDQPGVwImBrgJGvXPgYlzdsaBp0miVAzh0m7ZRZDT6ja6VDAnGVWM3eUgJdDI0LQ==
+X-Received: by 2002:a17:902:d48a:b0:19f:3617:e9e9 with SMTP id
+ c10-20020a170902d48a00b0019f3617e9e9mr17837697plg.43.1679942584465; 
+ Mon, 27 Mar 2023 11:43:04 -0700 (PDT)
 Received: from ?IPV6:2602:ae:1544:6601:6705:aa17:3641:e634?
  ([2602:ae:1544:6601:6705:aa17:3641:e634])
  by smtp.gmail.com with ESMTPSA id
- jf9-20020a170903268900b001967580f60fsm19468597plb.260.2023.03.27.11.10.57
+ m33-20020a635821000000b0050927cb606asm17994505pgb.13.2023.03.27.11.43.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Mar 2023 11:10:57 -0700 (PDT)
-Message-ID: <27b4d21e-3e29-e0af-ac5f-47a84f36ff12@linaro.org>
-Date: Mon, 27 Mar 2023 11:10:55 -0700
+ Mon, 27 Mar 2023 11:43:04 -0700 (PDT)
+Message-ID: <8a27b03e-9100-6b64-fde9-6b92a9f643b9@linaro.org>
+Date: Mon, 27 Mar 2023 11:43:02 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [PATCH v2 06/10] target/riscv: Remove riscv_cpu_virt_enabled()
+Subject: Re: [PATCH 03/19] target/riscv: introduce
+ riscv_cpu_add_misa_properties()
 Content-Language: en-US
-To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230327080858.39703-1-liweiwei@iscas.ac.cn>
- <20230327080858.39703-7-liweiwei@iscas.ac.cn>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+References: <20230327124247.106595-1-dbarboza@ventanamicro.com>
+ <20230327124247.106595-4-dbarboza@ventanamicro.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230327080858.39703-7-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230327124247.106595-4-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -89,26 +88,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Mar 2023 18:11:02 -0000
+X-List-Received-Date: Mon, 27 Mar 2023 18:43:09 -0000
 
-On 3/27/23 01:08, Weiwei Li wrote:
-> Directly use env->virt_enabled instead.
-> 
-> Suggested-by: LIU Zhiwei<zhiwei_liu@linux.alibaba.com>
-> Signed-off-by: Weiwei Li<liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang<wangjunqiang@iscas.ac.cn>
-> ---
->   target/riscv/cpu.c        |  2 +-
->   target/riscv/cpu.h        |  1 -
->   target/riscv/cpu_helper.c | 51 ++++++++++++++++++---------------------
->   target/riscv/csr.c        | 46 +++++++++++++++++------------------
->   target/riscv/debug.c      | 10 ++++----
->   target/riscv/op_helper.c  | 18 +++++++-------
->   target/riscv/pmu.c        |  4 +--
->   target/riscv/translate.c  |  2 +-
->   8 files changed, 64 insertions(+), 70 deletions(-)
+On 3/27/23 05:42, Daniel Henrique Barboza wrote:
+> +        g_autofree char *name = g_strdup_printf("%s", misa_cfg->name);
+> +        g_autofree char *desc = g_strdup_printf("%s", misa_cfg->description);
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+What is the point of this?  It would seem that you could simply pass the original string 
+literals to object_property_*.
+
 
 r~
 
