@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pghuv-0007IT-1f
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 04:09:25 -0400
+	id 1pghuw-0007Ja-EZ
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 04:09:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pghus-0007Gd-Vx; Mon, 27 Mar 2023 04:09:23 -0400
+ id 1pghut-0007Gq-71; Mon, 27 Mar 2023 04:09:23 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pghuq-00054m-5D; Mon, 27 Mar 2023 04:09:22 -0400
+ id 1pghuq-00054f-5Y; Mon, 27 Mar 2023 04:09:22 -0400
 Received: from localhost.localdomain (unknown [180.175.29.170])
- by APP-05 (Coremail) with SMTP id zQCowACnrWUkTyFksV29Cg--.4754S9;
- Mon, 27 Mar 2023 16:09:13 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowACnrWUkTyFksV29Cg--.4754S3;
+ Mon, 27 Mar 2023 16:09:10 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -20,32 +20,33 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v2 07/10] target/riscv: Remove redundant parentheses
-Date: Mon, 27 Mar 2023 16:08:55 +0800
-Message-Id: <20230327080858.39703-8-liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 01/10] target/riscv: Remove redundant call to
+ riscv_cpu_virt_enabled
+Date: Mon, 27 Mar 2023 16:08:49 +0800
+Message-Id: <20230327080858.39703-2-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230327080858.39703-1-liweiwei@iscas.ac.cn>
 References: <20230327080858.39703-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowACnrWUkTyFksV29Cg--.4754S9
-X-Coremail-Antispam: 1UD129KBjvdXoWruw4UtrWUXw43Wr1DXr4Dtwb_yoW3urX_Za
- yIgF1vgw48ZF40k3Z5Can8t3WxX348GFZ0ga1fGF4fKa4j9FySk3Z2krZ3Aw1Uur17Jr93
- AF97J3y7Cr45ujkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbqxFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
- IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
- F7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
- 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVWxJr0_
- GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
- x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
- JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2
- ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG
- 67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MI
- IYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E
- 14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr
- 0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbmZ
- X7UUUUU==
+X-CM-TRANSID: zQCowACnrWUkTyFksV29Cg--.4754S3
+X-Coremail-Antispam: 1UD129KBjvdXoW7XrW5uF13Jr1kuF1rKF1Dtrb_yoWDWrbE9F
+ W8KF1vqw1fu3W09Fs8Ar98KryUX34Fg3sa9w47C347GFy2gas3Cw1ktrs3Aw4xAws8Jrnx
+ Crs3Z3y7Crn8ZjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbD8FF20E14v26ryj6rWUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUGwA2048vs2IY02
+ 0Ec7CjxVAFwI0_JFI_Gr1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
+ wVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1l84
+ ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26F4UJVW0owAS
+ 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+ IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+ Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
+ xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
+ 6r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2
+ Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
+ Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMI
+ IF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUqAp5UUUUU
+ =
 X-Originating-IP: [180.175.29.170]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -69,29 +70,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Mon, 27 Mar 2023 08:09:23 -0000
 
-Remove redundant parentheses in get_physical_address.
+The assignment is done under the condition riscv_cpu_virt_enabled()=true.
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 ---
- target/riscv/cpu_helper.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/cpu_helper.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 1ad39e7157..9145ca0ddb 100644
+index 824f0cbd92..e140d6a8d0 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -1046,7 +1046,7 @@ restart:
-             if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
-                 *prot |= PAGE_READ;
-             }
--            if ((pte & PTE_X)) {
-+            if (pte & PTE_X) {
-                 *prot |= PAGE_EXEC;
-             }
-             /* add write permission on stores or if the page is already dirty,
+@@ -1706,9 +1706,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                 riscv_cpu_swap_hypervisor_regs(env);
+                 env->hstatus = set_field(env->hstatus, HSTATUS_SPVP,
+                                          env->priv);
+-                env->hstatus = set_field(env->hstatus, HSTATUS_SPV,
+-                                         riscv_cpu_virt_enabled(env));
+-
++                env->hstatus = set_field(env->hstatus, HSTATUS_SPV, true);
+ 
+                 htval = env->guest_phys_fault_addr;
+ 
 -- 
 2.25.1
 
