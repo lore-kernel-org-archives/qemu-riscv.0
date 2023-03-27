@@ -1,90 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgmsN-00032L-0I
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 09:27:07 -0400
+	id 1pgmuE-0003qk-4D
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 09:29:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1pgmsK-00031o-BP
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 09:27:04 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1pgmsH-0001hj-8Q
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 09:27:04 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1679923619;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=tIV5AmjSgvW36JeCgOM80cPe8HGqbh3Z/tQwUTluUJ8=;
- b=fP6N0FsZ9HxJVf+jUMIxz2q5o8e1kGV8aUgQDzv2nM43mmejBv+DUCuf33erjapKyFuF8j
- 4s3LSvJ091Ar26ccLXbBI2hMErSQc/5b7OKMOxIEHoOt95eE809fZ80O0SWy+Elak5NEZY
- 09PFeQG4cTmbpDBVczqw+1I6WkUqwJE=
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-489-C-cpm28MPlmdqM-1VTz2qA-1; Mon, 27 Mar 2023 09:26:58 -0400
-X-MC-Unique: C-cpm28MPlmdqM-1VTz2qA-1
-Received: by mail-qt1-f197.google.com with SMTP id
- h6-20020ac85846000000b003e3c23d562aso6012817qth.1
- for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 06:26:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pgmu9-0003k9-7p
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 09:28:57 -0400
+Received: from mail-oi1-x22a.google.com ([2607:f8b0:4864:20::22a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1pgmu7-0001w5-7Z
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 09:28:56 -0400
+Received: by mail-oi1-x22a.google.com with SMTP id q27so5580763oiw.0
+ for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 06:28:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1679923733;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Zv7HvMZLSBerHD/Kvw7azBLt4ZK4kS6YZHGzUFBziLI=;
+ b=oIQ07pNE2GubpV5kf3O1x/l+xjhkyFbqEjMBl+2EtwmsHOIFhnrp3ft57P0zwnOhnG
+ pFciOesTJNLh0IL1O/787CHAVG1eA2Bdu3cF57Zdow+hqCOeQKSoFyRgRhr0sxEqHCxM
+ KmkbE1hGqvJe1ZXMd9LC32JHGLM6FfINw/n0UVL4LqVrn7+DQPtzNUwvIl0cckoC4Di1
+ FHh/Z0895TgyzTvFjOVpoIL2/b777km3fSpuf40caZDmeJ384XvjzkCV5HdMNrVCmhTT
+ 6EHj+m633itBtQARXDKVNVgNu21+M1uJRXV/mP0dtt2a4pCtxohqF9V6Y7Wu6FbsRrAj
+ GeZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679923618;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tIV5AmjSgvW36JeCgOM80cPe8HGqbh3Z/tQwUTluUJ8=;
- b=A6A//vlhxoCcj46FEj7ccg/Ibm/jyzrIJgrHhLxYv++6ixVmnT0MwkSDpCRM2Q8XOY
- Alb2u9XRVpBsPbkN8Z1nuHfkIUNtj3MAcTQnW7M28C9qybSFutVqIgzJR1D/0CWirLjd
- oxoB00qZ/p42pJNcx984bzO/lldNwssoF8Nx9p/xR+1MmDq9jGFHQ28SY7jvJO6+A+rC
- v7uhtHvRdJhdNYOnufSFA+ljWsilDJLyIxY3Pw8DFSZ5dRHtlot5IP61DiP6plBc4EO9
- kjidjm++lH2J8rAuoOewZXM4+iD4hrO6lO2XABKX+epfTjIdv2dlUg04bW1EvxVWryu4
- M7TQ==
-X-Gm-Message-State: AO0yUKXEYxEH2ISAGiKSWLomBT35LhN9CDZPViN1P55Tdb1sh0rHvKNG
- XCP5GDL2ZcXMeFb3H/Prr84kusJXBg5JVzrd/+BA50zuQlR4Fii2lVHnL4ihxDeFBX/JuDBtcgp
- GhO2Ltlau4L4EjCc=
-X-Received: by 2002:a05:622a:14c8:b0:3de:4296:2bcc with SMTP id
- u8-20020a05622a14c800b003de42962bccmr21908046qtx.49.1679923618026; 
- Mon, 27 Mar 2023 06:26:58 -0700 (PDT)
-X-Google-Smtp-Source: AK7set+8+ORxLEVVU7jrN8pdNDDiZVbAc+8g+9M52ISmAls35Bjn5x9HWrGkCGiGkK9rHQbnzxQ5Gg==
-X-Received: by 2002:a05:622a:14c8:b0:3de:4296:2bcc with SMTP id
- u8-20020a05622a14c800b003de42962bccmr21907998qtx.49.1679923617633; 
- Mon, 27 Mar 2023 06:26:57 -0700 (PDT)
-Received: from imammedo.users.ipa.redhat.com ([185.140.112.229])
+ d=1e100.net; s=20210112; t=1679923733;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Zv7HvMZLSBerHD/Kvw7azBLt4ZK4kS6YZHGzUFBziLI=;
+ b=UpmEwAnaq+kM7kSLpTdeWf53TaDx/qvskOOn3mb/1M+FL4lLpOPBmOmMFpnEqM1m+h
+ H2gpKB4MtxdxLgYG+cDcYyDs0v86xa0N9IMf3QkZowd9EvuKQdVyYY9EsklcVBRYx8zb
+ nb6pJuHxrV18MhHAhBKKPGoXs46swulFDeqB+mCbFdZUbyvw6Zr5Xk1ia6W4uQ4OCAOp
+ 3zGxJZS6t2OhRe6x5pIWSScG3rjpBHPvjABgxiIvPFUDCvIJcJ5MlECXHFERW5B8OrhQ
+ s3c0woifo5RP9CpnF8mp22lHB58TOm/uUgSUqqmw2tCOCgkVEIk+NKBxECKlxng21rat
+ S3dA==
+X-Gm-Message-State: AO0yUKUsNrqzHzxoxcdxJlfkw+KOzTWhSBOSaL4NF9mw9J61SjSnDac/
+ 3nak3Qb4htF3u61Vu9zXHBW1Yw==
+X-Google-Smtp-Source: AK7set8h8H+3MULYSysiOawxV94XF2OAKAayhDflLizo1zj9KlKT9kCMT+UI3ph8wLsVI5zUDo0Rrg==
+X-Received: by 2002:a54:4f03:0:b0:386:ef98:e5d5 with SMTP id
+ e3-20020a544f03000000b00386ef98e5d5mr5360656oiy.24.1679923733501; 
+ Mon, 27 Mar 2023 06:28:53 -0700 (PDT)
+Received: from [192.168.68.107] ([177.95.89.231])
  by smtp.gmail.com with ESMTPSA id
- t126-20020ae9df84000000b0073b4a55a2d1sm16704086qkf.124.2023.03.27.06.26.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Mar 2023 06:26:56 -0700 (PDT)
-Date: Mon, 27 Mar 2023 15:26:51 +0200
-From: Igor Mammedov <imammedo@redhat.com>
-To: Gavin Shan <gshan@redhat.com>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- rad@semihalf.com, peter.maydell@linaro.org, quic_llindhol@quicinc.com,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, philmd@linaro.org,
- wangyanan55@huawei.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, thuth@redhat.com, lvivier@redhat.com,
- pbonzini@redhat.com, ajones@ventanamicro.com, berrange@redhat.com,
- dbarboza@ventanamicro.com, yihyu@redhat.com, shan.gavin@gmail.com
-Subject: Re: [PATCH v4 0/3] NUMA: Apply cluster-NUMA-node boundary for
- aarch64 and riscv machines
-Message-ID: <20230327152651.41f22ac0@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20230317062542.61061-1-gshan@redhat.com>
-References: <20230317062542.61061-1-gshan@redhat.com>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.36; x86_64-redhat-linux-gnu)
+ o8-20020a0568080f8800b00383b371f2a7sm11000045oiw.42.2023.03.27.06.28.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 27 Mar 2023 06:28:53 -0700 (PDT)
+Message-ID: <3a6a58c9-3eef-2162-94a6-bc76c066970a@ventanamicro.com>
+Date: Mon, 27 Mar 2023 10:28:49 -0300
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Subject: Re: [PATCH 5/5] target/riscv: Add pointer mask support for
+ instruction fetch
+Content-Language: en-US
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20230327100027.61160-1-liweiwei@iscas.ac.cn>
+ <20230327100027.61160-6-liweiwei@iscas.ac.cn>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230327100027.61160-6-liweiwei@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -98,90 +87,143 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Mar 2023 13:27:04 -0000
+X-List-Received-Date: Mon, 27 Mar 2023 13:29:00 -0000
 
-On Fri, 17 Mar 2023 14:25:39 +0800
-Gavin Shan <gshan@redhat.com> wrote:
 
-> For arm64 and riscv architecture, the driver (/base/arch_topology.c) is
-> used to populate the CPU topology in the Linux guest. It's required that
-> the CPUs in one cluster can't span mutiple NUMA nodes. Otherwise, the Linux
-> scheduling domain can't be sorted out, as the following warning message
-> indicates. To avoid the unexpected confusion, this series attempts to
-> warn about such kind of irregular configurations.
-> 
->    -smp 6,maxcpus=6,sockets=2,clusters=1,cores=3,threads=1 \
->    -numa node,nodeid=0,cpus=0-1,memdev=ram0                \
->    -numa node,nodeid=1,cpus=2-3,memdev=ram1                \
->    -numa node,nodeid=2,cpus=4-5,memdev=ram2                \
-> 
->    ------------[ cut here ]------------
->    WARNING: CPU: 0 PID: 1 at kernel/sched/topology.c:2271 build_sched_domains+0x284/0x910
->    Modules linked in:
->    CPU: 0 PID: 1 Comm: swapper/0 Not tainted 5.14.0-268.el9.aarch64 #1
->    pstate: 00400005 (nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
->    pc : build_sched_domains+0x284/0x910
->    lr : build_sched_domains+0x184/0x910
->    sp : ffff80000804bd50
->    x29: ffff80000804bd50 x28: 0000000000000002 x27: 0000000000000000
->    x26: ffff800009cf9a80 x25: 0000000000000000 x24: ffff800009cbf840
->    x23: ffff000080325000 x22: ffff0000005df800 x21: ffff80000a4ce508
->    x20: 0000000000000000 x19: ffff000080324440 x18: 0000000000000014
->    x17: 00000000388925c0 x16: 000000005386a066 x15: 000000009c10cc2e
->    x14: 00000000000001c0 x13: 0000000000000001 x12: ffff00007fffb1a0
->    x11: ffff00007fffb180 x10: ffff80000a4ce508 x9 : 0000000000000041
->    x8 : ffff80000a4ce500 x7 : ffff80000a4cf920 x6 : 0000000000000001
->    x5 : 0000000000000001 x4 : 0000000000000007 x3 : 0000000000000002
->    x2 : 0000000000001000 x1 : ffff80000a4cf928 x0 : 0000000000000001
->    Call trace:
->     build_sched_domains+0x284/0x910
->     sched_init_domains+0xac/0xe0
->     sched_init_smp+0x48/0xc8
->     kernel_init_freeable+0x140/0x1ac
->     kernel_init+0x28/0x140
->     ret_from_fork+0x10/0x20
-> 
-> PATCH[1] Warn about the irregular configuration if required
-> PATCH[2] Enable the validation for aarch64 machines
-> PATCH[3] Enable the validation for riscv machines
-> 
-> v3: https://lists.nongnu.org/archive/html/qemu-arm/2023-02/msg01226.html
-> v2: https://lists.nongnu.org/archive/html/qemu-arm/2023-02/msg01080.html
-> v1: https://lists.nongnu.org/archive/html/qemu-arm/2023-02/msg00886.html
-> 
-> Changelog
-> =========
-> v4:
->   * Pick r-b and ack-b from Daniel/Philippe                   (Gavin)
->   * Replace local variable @len with possible_cpus->len in
->     validate_cpu_cluster_to_numa_boundary()                   (Philippe)
-> v3:
->   * Validate cluster-to-NUMA instead of socket-to-NUMA
->     boundary                                                  (Gavin)
->   * Move the switch from MachineState to MachineClass         (Philippe)
->   * Warning instead of rejecting the irregular configuration  (Daniel)
->   * Comments to mention cluster-to-NUMA is platform instead
->     of architectural choice                                   (Drew)
->   * Drop PATCH[v2 1/4] related to qtests/numa-test            (Gavin)
-> v2:
->   * Fix socket-NUMA-node boundary issues in qtests/numa-test  (Gavin)
->   * Add helper set_numa_socket_boundary() and validate the
->     boundary in the generic path                              (Philippe)
-> 
-> Gavin Shan (3):
->   numa: Validate cluster and NUMA node boundary if required
->   hw/arm: Validate cluster and NUMA node boundary
->   hw/riscv: Validate cluster and NUMA node boundary
-> 
->  hw/arm/sbsa-ref.c   |  2 ++
->  hw/arm/virt.c       |  2 ++
->  hw/core/machine.c   | 42 ++++++++++++++++++++++++++++++++++++++++++
->  hw/riscv/spike.c    |  2 ++
->  hw/riscv/virt.c     |  2 ++
->  include/hw/boards.h |  1 +
->  6 files changed, 51 insertions(+)
-> 
 
-Acked-by: Igor Mammedov <imammedo@redhat.com>
+On 3/27/23 07:00, Weiwei Li wrote:
+> Transform the fetch address before page walk when pointer mask is
+> enabled for instruction fetch.
+> 
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> ---
 
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/cpu.h        |  1 +
+>   target/riscv/cpu_helper.c | 25 +++++++++++++++++++++++--
+>   target/riscv/csr.c        |  2 --
+>   3 files changed, 24 insertions(+), 4 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 638e47c75a..57bd9c3279 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -368,6 +368,7 @@ struct CPUArchState {
+>   #endif
+>       target_ulong cur_pmmask;
+>       target_ulong cur_pmbase;
+> +    bool cur_pminsn;
+>   
+>       /* Fields from here on are preserved across CPU reset. */
+>       QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index f88c503cf4..77132a3e0c 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -124,6 +124,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+>   void riscv_cpu_update_mask(CPURISCVState *env)
+>   {
+>       target_ulong mask = -1, base = 0;
+> +    bool insn = false;
+>       /*
+>        * TODO: Current RVJ spec does not specify
+>        * how the extension interacts with XLEN.
+> @@ -135,18 +136,21 @@ void riscv_cpu_update_mask(CPURISCVState *env)
+>               if (env->mmte & M_PM_ENABLE) {
+>                   mask = env->mpmmask;
+>                   base = env->mpmbase;
+> +                insn = env->mmte & MMTE_M_PM_INSN;
+>               }
+>               break;
+>           case PRV_S:
+>               if (env->mmte & S_PM_ENABLE) {
+>                   mask = env->spmmask;
+>                   base = env->spmbase;
+> +                insn = env->mmte & MMTE_S_PM_INSN;
+>               }
+>               break;
+>           case PRV_U:
+>               if (env->mmte & U_PM_ENABLE) {
+>                   mask = env->upmmask;
+>                   base = env->upmbase;
+> +                insn = env->mmte & MMTE_U_PM_INSN;
+>               }
+>               break;
+>           default:
+> @@ -161,6 +165,7 @@ void riscv_cpu_update_mask(CPURISCVState *env)
+>           env->cur_pmmask = mask;
+>           env->cur_pmbase = base;
+>       }
+> +    env->cur_pminsn = insn;
+>   }
+>   
+>   #ifndef CONFIG_USER_ONLY
+> @@ -1225,6 +1230,17 @@ static void pmu_tlb_fill_incr_ctr(RISCVCPU *cpu, MMUAccessType access_type)
+>       riscv_pmu_incr_ctr(cpu, pmu_event_type);
+>   }
+>   
+> +static target_ulong adjust_pc_address(CPURISCVState *env, target_ulong pc)
+> +{
+> +    target_ulong adjust_pc = pc;
+> +
+> +    if (env->cur_pminsn) {
+> +        adjust_pc = (adjust_pc & ~env->cur_pmmask) | env->cur_pmbase;
+> +    }
+> +
+> +    return adjust_pc;
+> +}
+> +
+>   bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>                           MMUAccessType access_type, int mmu_idx,
+>                           bool probe, uintptr_t retaddr)
+> @@ -1232,6 +1248,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>       RISCVCPU *cpu = RISCV_CPU(cs);
+>       CPURISCVState *env = &cpu->env;
+>       vaddr im_address;
+> +    vaddr orig_address = address;
+>       hwaddr pa = 0;
+>       int prot, prot2, prot_pmp;
+>       bool pmp_violation = false;
+> @@ -1248,6 +1265,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>       qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
+>                     __func__, address, access_type, mmu_idx);
+>   
+> +    if (access_type == MMU_INST_FETCH) {
+> +        address = adjust_pc_address(env, address);
+> +    }
+> +
+>       /* MPRV does not affect the virtual-machine load/store
+>          instructions, HLV, HLVX, and HSV. */
+>       if (riscv_cpu_two_stage_lookup(mmu_idx)) {
+> @@ -1351,13 +1372,13 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>       }
+>   
+>       if (ret == TRANSLATE_SUCCESS) {
+> -        tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
+> +        tlb_set_page(cs, orig_address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
+>                        prot, mmu_idx, tlb_size);
+>           return true;
+>       } else if (probe) {
+>           return false;
+>       } else {
+> -        raise_mmu_exception(env, address, access_type, pmp_violation,
+> +        raise_mmu_exception(env, orig_address, access_type, pmp_violation,
+>                               first_stage_error,
+>                               riscv_cpu_virt_enabled(env) ||
+>                                   riscv_cpu_two_stage_lookup(mmu_idx),
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index d522efc0b6..4544c9d934 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -3511,8 +3511,6 @@ static RISCVException write_mmte(CPURISCVState *env, int csrno,
+>       /* for machine mode pm.current is hardwired to 1 */
+>       wpri_val |= MMTE_M_PM_CURRENT;
+>   
+> -    /* hardwiring pm.instruction bit to 0, since it's not supported yet */
+> -    wpri_val &= ~(MMTE_M_PM_INSN | MMTE_S_PM_INSN | MMTE_U_PM_INSN);
+>       env->mmte = wpri_val | PM_EXT_DIRTY;
+>       riscv_cpu_update_mask(env);
+>   
 
