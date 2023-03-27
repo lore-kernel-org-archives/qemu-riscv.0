@@ -1,83 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgqU8-0001xu-CN
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 13:18:20 -0400
+	id 1pgrDF-0008Kh-EM
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 14:04:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pgqU3-0001xH-6f
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 13:18:18 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ id 1pgrDC-0008Gb-3P
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 14:04:55 -0400
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pgqU1-0008QG-HI
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 13:18:14 -0400
-Received: by mail-pl1-x630.google.com with SMTP id k2so9075083pll.8
- for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 10:18:09 -0700 (PDT)
+ id 1pgrD8-00062Y-U5
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 14:04:52 -0400
+Received: by mail-pj1-x102d.google.com with SMTP id
+ r7-20020a17090b050700b002404be7920aso8580594pjz.5
+ for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 11:04:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1679937488;
+ d=linaro.org; s=google; t=1679940289;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=dwx3UmJ/5Z+3rNirob01JQiB4B+Cln0ebYrYuadPQYk=;
- b=QG4SlZHhdS+NieP6D2zp3x8gITVlFjwMR/CqxDyq1Zql2qFatAa/xrPiU/qNhKPCJc
- Qkq+B8u3ir6PGD766lKdQ/KtGUCapKO/tS8EqYyBaEvfp6TFht12tyAsWAVbl/P2+WlV
- z6y2j2LZRuMVWJ1/Baq1xACHB84AeO2vahrV4E93FtAI50PJ0zDArZMIBK5Nm2W8Fu/U
- 5ErQitAzvSjHqcGiZj0cN2afKndmlbOo73NAIZfzKdRLVRz7QN90gpBpYzreY9aIxp5J
- wnWVJPeNolV+WXI1D404IVzGFkq62NQgAaYNytH2N+QarHWneTeTbT38fkXLQO0dMMZx
- jH8Q==
+ bh=DogCOJnc75WN/a/bLCyMEkOBJKwKB3Bk9qFPriLokwI=;
+ b=PDXtAX8JTwW3xySTtCbid6DqpnVzH+PQwZ+2H3ibRUL8Okffykt2UPmOUfBSW9AkRN
+ KRWAOdbcOcDcLySmwyI54mINT9WjDAigD8l1jvRhx9OorDqxA75zBx4GGCehOzJ5aiZ5
+ GquM5BhGW0Yb+n7f4gHuCLzNBIaU+4UwEpeweO6FutDpzxij+99Mjxmsj6FgO6leHbnT
+ QUI5vj0ibrK1syEJvAOSm3zJkUUh+in3vbntl9GxJKnu2d6Gx8yJyiitwEF4DpklHuky
+ f9qzMMIe5daSMS5vtopwb60JOv6/WIbUE3+nTcn+MDnqOjK0IISHtPurJk451lHR/2fC
+ WtaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679937488;
+ d=1e100.net; s=20210112; t=1679940289;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dwx3UmJ/5Z+3rNirob01JQiB4B+Cln0ebYrYuadPQYk=;
- b=bosJUjIn+H4hESycAgwMNUSeojVyaI1DbJvUvvc9i6qwri1lY2J3q/TYuDberE0Sgy
- 05BD4WJilwz2EBcvzeV5/Y7LEEAYtzfPCy6uA8X2WESrFSr6iv3n1vIbkCcEtnI2BtC0
- t5oc9+tMhcCJROjTf/A5iiu30q3WBktTpvexHlP0nakjKmta8pYk2KQxC9GZfnZPGOwl
- mbh2hzueCuj08l8CpX8n89sFKZ6oBjfzu+NhulY7xY7DUEX6dt8G8CnLOtkSXHgVHY2Q
- OIHJeFgvyJBLgOHjPTOul0E4vs2MWZcM9+skZiyEAPXmZ694/AWY4+BAkIkT+Hm/jfph
- cHOQ==
-X-Gm-Message-State: AO0yUKWbCfmmQ/Mu6RDQmdjK5bVw2xOzSDWR0kg6DAoWl3nfWXQxR4W6
- By/RnJRzEtmwJvZblBD6W+PnAw==
-X-Google-Smtp-Source: AK7set8WNbBoQ+TD2+FIl4LkcDDQsadrjlel1WSq08nunLHFTm20RpQf7Cb4MaK2DnwifnBcAHC9zg==
-X-Received: by 2002:a05:6a20:4d90:b0:d6:c9e2:17a1 with SMTP id
- gj16-20020a056a204d9000b000d6c9e217a1mr10229988pzb.62.1679937488056; 
- Mon, 27 Mar 2023 10:18:08 -0700 (PDT)
+ bh=DogCOJnc75WN/a/bLCyMEkOBJKwKB3Bk9qFPriLokwI=;
+ b=3/ktvBn4YoGSthBCDXOLQdhzsoDPWpWKBIi0mqecIAGy82PMlfyVXJLiTqH0qDNheD
+ ZqHaGT45PfhB6k/gof8GDvq4P+xl8VWMLvqMiAoLzxrK1rTZ08gxL3q/OfeR6+eTEAnE
+ A943bDSM3FYHSlGaatuWGmCc95AJjb8ch1dNvH3glufEpFIWBrmZBK5LG3RvUZNbHcLh
+ xWGqMt8LeO7/tR8MyjVCUKSpIN7MlnYHXOjGJXQIiSKAEA09SYUC5V1/NPwhDAy0a28p
+ YqjDcrVH5GmfUEgCPEMUAot34Xn0lOJryOvONeqwMZWK9/KJOJUdUzdZUHbDaYrW/Lm0
+ 9QVQ==
+X-Gm-Message-State: AAQBX9cEFD5UNpuOPak1eCP9iS1z4aipnfcM/1AbcWRUYMijAnbjfW7w
+ 0C3JTYZ7TL6hEHCeqz/C6B+zCg==
+X-Google-Smtp-Source: AKy350amYlvYvzxSJNrpaD/5TzG+kGfU76l7kUgJooE+j0czMg4aiODHjD7IVAovFziRRq/u6iZHFA==
+X-Received: by 2002:a17:90b:3eca:b0:237:5a3c:e86c with SMTP id
+ rm10-20020a17090b3eca00b002375a3ce86cmr13925990pjb.24.1679940289218; 
+ Mon, 27 Mar 2023 11:04:49 -0700 (PDT)
 Received: from ?IPV6:2602:ae:1544:6601:6705:aa17:3641:e634?
  ([2602:ae:1544:6601:6705:aa17:3641:e634])
  by smtp.gmail.com with ESMTPSA id
- z17-20020aa785d1000000b005a8c92f7c27sm19257021pfn.212.2023.03.27.10.18.07
+ y1-20020a17090a8b0100b002348d711ebbsm7809217pjn.16.2023.03.27.11.04.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Mar 2023 10:18:07 -0700 (PDT)
-Message-ID: <b02cc37d-8a51-fed3-5a93-4d9f3873b5ae@linaro.org>
-Date: Mon, 27 Mar 2023 10:18:05 -0700
+ Mon, 27 Mar 2023 11:04:48 -0700 (PDT)
+Message-ID: <8fed2551-a67d-cd53-f5a1-f089f980aa08@linaro.org>
+Date: Mon, 27 Mar 2023 11:04:46 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [PATCH] riscv: Add support for the Zfa extension
+Subject: Re: [PATCH 5/5] target/riscv: Add pointer mask support for
+ instruction fetch
 Content-Language: en-US
-To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Jeff Law <jeffreyalaw@gmail.com>, Tsukasa OI <research_trasio@irq.a4lg.com>
-Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20230327080026.3266574-1-christoph.muellner@vrull.eu>
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20230327100027.61160-1-liweiwei@iscas.ac.cn>
+ <20230327100027.61160-6-liweiwei@iscas.ac.cn>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230327080026.3266574-1-christoph.muellner@vrull.eu>
+In-Reply-To: <20230327100027.61160-6-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,84 +90,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Mar 2023 17:18:18 -0000
+X-List-Received-Date: Mon, 27 Mar 2023 18:04:55 -0000
 
-On 3/27/23 01:00, Christoph Muellner wrote:
-> +uint64_t helper_fminm_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
-> +{
-> +    float32 frs1 = check_nanbox_s(env, rs1);
-> +    float32 frs2 = check_nanbox_s(env, rs2);
-> +
-> +    if (float32_is_any_nan(frs1) || float32_is_any_nan(frs2)) {
-> +        return float32_default_nan(&env->fp_status);
+On 3/27/23 03:00, Weiwei Li wrote:
+> @@ -1248,6 +1265,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>       qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
+>                     __func__, address, access_type, mmu_idx);
+>   
+> +    if (access_type == MMU_INST_FETCH) {
+> +        address = adjust_pc_address(env, address);
 > +    }
-> +
-> +    return nanbox_s(env, float32_minimum_number(frs1, frs2, &env->fp_status));
-> +}
 
-Better to set and clear fp_status->default_nan_mode around the operation.
-
-> +uint64_t helper_fround_s(CPURISCVState *env, uint64_t frs1)
-> +{
-> +    if (float32_is_zero(frs1) ||
-> +        float32_is_infinity(frs1)) {
-> +        return frs1;
-> +    }
-> +
-> +    if (float32_is_any_nan(frs1)) {
-> +        riscv_cpu_set_fflags(env, FPEXC_NV);
-> +        return frs1;
-> +    }
-> +
-> +    int32_t tmp = float32_to_int32(frs1, &env->fp_status);
-> +    return nanbox_s(env, int32_to_float32(tmp, &env->fp_status));
-> +}
-
-Very much incorrect, since int32_t does not have the range for the intermediate result. 
-In any case, the function you want is float32_round_to_int, which eliminates the 
-zero/inf/nan special cases.  It will raise inexact, so perfect for froundnx, but you'll 
-need to save/restore float_flag_inexact around the function.
-
-> +uint64_t helper_fli_s(CPURISCVState *env, uint32_t rs1)
-> +{
-> +    const uint32_t fli_s_table[] = {
-
-static const.  You don't need to use float32_default_nan, use the correct architected 
-constant.  This entire operation should be done at translation time.
-
-> +target_ulong helper_fcvtmod_w_d(CPURISCVState *env, uint64_t frs1)
-> +{
-> +    if (float64_is_any_nan(frs1) ||
-> +        float64_is_infinity(frs1)) {
-> +        return 0;
-> +    }
-> +
-> +    return float64_to_int32(frs1, &env->fp_status);
-> +}
-
-Incorrect, as float64_to_int32 will saturate the result, whereas you need the modular result.
-
-There is code to do the conversion mod 2**64 in target/alpha/ (do_cvttq).  We should move 
-this to generic code if it is to be used by more than one target.
-
-> +bool trans_fmvp_d_x(DisasContext *ctx, arg_fmvp_d_x *a)
-> +{
-> +    REQUIRE_FPU;
-> +    REQUIRE_ZFA(ctx);
-> +    REQUIRE_EXT(ctx, RVD);
-> +    REQUIRE_32BIT(ctx);
-> +
-> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_ZERO);
-> +    TCGv_i64 t1 = tcg_temp_new_i64();
-> +
-> +    tcg_gen_extu_tl_i64(t1, src1);
-> +    tcg_gen_deposit_i64(cpu_fpr[a->rd], cpu_fpr[a->rd], t1, 32, 32);
-> +    mark_fs_dirty(ctx);
-> +    return true;
-> +}
-
-This does not match the linked document, which says that this insn has two inputs and sets 
-the complete fpr.
+Why do you want to do this so late, as opposed to earlier in cpu_get_tb_cpu_state?
 
 
 r~
