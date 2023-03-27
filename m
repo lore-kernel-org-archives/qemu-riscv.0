@@ -1,73 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgoXo-0002A1-J5
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 11:14:00 -0400
+	id 1pgpc8-00027e-CY
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 12:22:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pgoXn-00029k-6E
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 11:13:59 -0400
-Received: from mail-oi1-x229.google.com ([2607:f8b0:4864:20::229])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pgpc6-00026w-E1
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 12:22:30 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pgoXl-0007KE-Do
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 11:13:58 -0400
-Received: by mail-oi1-x229.google.com with SMTP id bi31so6576351oib.9
- for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 08:13:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pgpc4-0002TZ-5u
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 12:22:29 -0400
+Received: by mail-pl1-x629.google.com with SMTP id iw3so8926553plb.6
+ for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 09:22:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1679930036;
+ d=linaro.org; s=google; t=1679934142;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Zv7HvMZLSBerHD/Kvw7azBLt4ZK4kS6YZHGzUFBziLI=;
- b=eR86iFVIuYhPJTSXed6Mk5bgsjXuqw0loiOnXKdQgg/TU1F61pYC9yvfWaunmfa64b
- ZlQQEgEaWXxY6rXWAZ4UolP4ktAykxRZ/FrPKsYjMTNdBVRWfMutai1seQs6673cKaVY
- DXnIpVVymfwYb05+Dcr7uwC/HE2/eywBggpeQUzfIv/GV4wOj+o962hbMBq4abo56b0S
- juh/IrLQiVfC7+ja0CE5+TwK0Oai+xJLq7IonyhOw3Q2dB5K2+6mbplxFQPvFykAjXl8
- XruqxH2F4nctENzoeaqh4tn75Pvvt4w8zGGiPGFNeqpiwifx5PgHDzzjEuz5knH2+Hm7
- 3dFw==
+ bh=QX1lzkdRlsqReyZXk2eij5YHgtB+eWFFC4ArPqzvOL8=;
+ b=OAIkRj322ArOTNdOL9q67XTUKlofHv2ZhIX/zwxMRfCWTzQiwG/7npao88y7Mid+JV
+ 4+AUkru66YZ7mfIZIcZOi7dkXwwX/gCZq5FSK1E11xRacMrvgXwf1mIOR2C0bBmj4Aw9
+ OiUg4W2Xzauy+zj34fEIu8WJFX1NJctXwgcS0f2ew563HUECJsA7hShz8dAYCtCk9SVp
+ etzFfo4Slegam+S+4xk0pLKHMaICZ6poZpLaQ4qhS+pe/ET3Uzw9775f6c93au5l6RxV
+ unlBcZoHHZnV/eK7KBVD2kK8XkpiQdxkbz1+giQRt3hqo4ewSIWqeDeOIM1WhkmZmjcX
+ tdyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679930036;
+ d=1e100.net; s=20210112; t=1679934142;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Zv7HvMZLSBerHD/Kvw7azBLt4ZK4kS6YZHGzUFBziLI=;
- b=f+IrSZefFhd6KOfb4OlH0Ijq3TEUSKEZN87rjYzRDoxui7ZxxzHffjPz3YbdtI5Ly8
- j2ABweX8GlrABJdlG55f9u3+OxvAzhCBN7MzHFajkxbbmQOGVidlc/8zfEltiYPHsyRD
- tCKcGdbrQyJR4UuFt0QA3WB2p+MAE2RtInjsPcLJtcxV0ukco0xa14A1cMzrR6vqAthp
- 3xSOEVrX5X02mx+u+VL9ngKABuTZvdOOEr6d1ahCWJdLvKTs90THQHwULBFK87ka0j2H
- 1bsabQz/xKeKorObffw2HMHqh8o988ZHlOHQK2TrNS6L1Efqht4csEX+Ymvp+4k//KPE
- K0+A==
-X-Gm-Message-State: AAQBX9enBKhyUbJm/OsI/Bh0mjTS1tKJ/gYOOp4iPvVtTAfQGTkYo4fv
- +3BHwXlLJ2WzxWgnRptak1Ulvw==
-X-Google-Smtp-Source: AKy350YzXg9pUJBGNpvKegAcYpnx5G1DHB5X1XTpXaPdexmUsRJjWpKYptXiFwimTnxtEpvAZ6MnKw==
-X-Received: by 2002:a05:6808:1d3:b0:389:2d2b:4b05 with SMTP id
- x19-20020a05680801d300b003892d2b4b05mr1730773oic.5.1679930034654; 
- Mon, 27 Mar 2023 08:13:54 -0700 (PDT)
-Received: from [192.168.68.107] ([177.95.89.231])
+ bh=QX1lzkdRlsqReyZXk2eij5YHgtB+eWFFC4ArPqzvOL8=;
+ b=nJhohxg0Fvvy29IWksdeJaT9nfSGc2jdq+CelGYWVx7qjOoBFw6Km8Ehn2Sg7/oJuy
+ b3VuDRR8mPF/ZeFwXIEAGRKnuHNe0oXlqvjYQQ8xCEUz64X6cubu3iRZrfZwA6Y98tcv
+ PzwpF3F/2NYNH5x47MoJoVkps216c8FgJFj3MfjbOLlqb3wGV+1GnC/51tib/bpE9AhV
+ W5dZsS4sTX51JyyGkOFrHHqlfawSI/z9xWrJxGH2fQXnUbFYBGtMyBgSMWJCwVjhSTr8
+ i+eSx3g0U02eEUj9UIOlIIED4GlaBXi4/jNlLZ5A16c2giRq0Exv9Hj4CJHZAoUEb/RR
+ gNag==
+X-Gm-Message-State: AAQBX9fvCgfab1xms70Z57yMYKZ+u/SeJDScokUcJ0ZKFHhI6qEClKCd
+ Hp0v95b0fwXD241Wri2ZEVtyng==
+X-Google-Smtp-Source: AKy350aUSQVYKdwy5/T5ti7OPTU/uYo+2yRWzy8upcTWTTw6h1HMhCNgfWP3WNWVSo8T/YgMDK3+9g==
+X-Received: by 2002:a17:903:41cd:b0:1a1:b65a:2072 with SMTP id
+ u13-20020a17090341cd00b001a1b65a2072mr16015529ple.59.1679934142027; 
+ Mon, 27 Mar 2023 09:22:22 -0700 (PDT)
+Received: from ?IPV6:2602:ae:1544:6601:6705:aa17:3641:e634?
+ ([2602:ae:1544:6601:6705:aa17:3641:e634])
  by smtp.gmail.com with ESMTPSA id
- p10-20020acad80a000000b0037d7c3cfac7sm2252712oig.15.2023.03.27.08.13.51
+ q18-20020a170902789200b00185402cfedesm19434867pll.246.2023.03.27.09.22.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Mar 2023 08:13:54 -0700 (PDT)
-Message-ID: <269b74cf-2543-3899-9fad-4b0bf9c622e8@ventanamicro.com>
-Date: Mon, 27 Mar 2023 12:13:50 -0300
+ Mon, 27 Mar 2023 09:22:21 -0700 (PDT)
+Message-ID: <5cc3192b-d8f1-e6c7-e41b-fbe2e000844b@linaro.org>
+Date: Mon, 27 Mar 2023 09:22:19 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [PATCH 5/5] target/riscv: Add pointer mask support for
- instruction fetch
+ Thunderbird/102.8.0
+Subject: Re: [PATCH v6 04/25] target/riscv: Remove mstatus_hs_{fs, vs} from
+ tb_flags
 Content-Language: en-US
-To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230327100027.61160-1-liweiwei@iscas.ac.cn>
- <20230327100027.61160-6-liweiwei@iscas.ac.cn>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230327100027.61160-6-liweiwei@iscas.ac.cn>
+To: liweiwei <liweiwei@iscas.ac.cn>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
+ zhiwei_liu@linux.alibaba.com, fei2.wu@intel.com
+References: <20230325105429.1142530-1-richard.henderson@linaro.org>
+ <20230325105429.1142530-5-richard.henderson@linaro.org>
+ <e6b11b5d-aee7-0aba-c836-dd5e6c713d6d@iscas.ac.cn>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <e6b11b5d-aee7-0aba-c836-dd5e6c713d6d@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::229;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x229.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -87,143 +88,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Mar 2023 15:13:59 -0000
+X-List-Received-Date: Mon, 27 Mar 2023 16:22:30 -0000
+
+On 3/26/23 18:34, liweiwei wrote:
+> We seems only need to know whether fs/vs is dirty,  so maybe we can just use a bool for 
+> them to save more bits from TB_FLAGS.
+
+No, we also need disabled.  That is checked in REQUIRE_FPU, require_rvv, etc.
 
 
-
-On 3/27/23 07:00, Weiwei Li wrote:
-> Transform the fetch address before page walk when pointer mask is
-> enabled for instruction fetch.
-> 
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/cpu.h        |  1 +
->   target/riscv/cpu_helper.c | 25 +++++++++++++++++++++++--
->   target/riscv/csr.c        |  2 --
->   3 files changed, 24 insertions(+), 4 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 638e47c75a..57bd9c3279 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -368,6 +368,7 @@ struct CPUArchState {
->   #endif
->       target_ulong cur_pmmask;
->       target_ulong cur_pmbase;
-> +    bool cur_pminsn;
->   
->       /* Fields from here on are preserved across CPU reset. */
->       QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index f88c503cf4..77132a3e0c 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -124,6 +124,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->   void riscv_cpu_update_mask(CPURISCVState *env)
->   {
->       target_ulong mask = -1, base = 0;
-> +    bool insn = false;
->       /*
->        * TODO: Current RVJ spec does not specify
->        * how the extension interacts with XLEN.
-> @@ -135,18 +136,21 @@ void riscv_cpu_update_mask(CPURISCVState *env)
->               if (env->mmte & M_PM_ENABLE) {
->                   mask = env->mpmmask;
->                   base = env->mpmbase;
-> +                insn = env->mmte & MMTE_M_PM_INSN;
->               }
->               break;
->           case PRV_S:
->               if (env->mmte & S_PM_ENABLE) {
->                   mask = env->spmmask;
->                   base = env->spmbase;
-> +                insn = env->mmte & MMTE_S_PM_INSN;
->               }
->               break;
->           case PRV_U:
->               if (env->mmte & U_PM_ENABLE) {
->                   mask = env->upmmask;
->                   base = env->upmbase;
-> +                insn = env->mmte & MMTE_U_PM_INSN;
->               }
->               break;
->           default:
-> @@ -161,6 +165,7 @@ void riscv_cpu_update_mask(CPURISCVState *env)
->           env->cur_pmmask = mask;
->           env->cur_pmbase = base;
->       }
-> +    env->cur_pminsn = insn;
->   }
->   
->   #ifndef CONFIG_USER_ONLY
-> @@ -1225,6 +1230,17 @@ static void pmu_tlb_fill_incr_ctr(RISCVCPU *cpu, MMUAccessType access_type)
->       riscv_pmu_incr_ctr(cpu, pmu_event_type);
->   }
->   
-> +static target_ulong adjust_pc_address(CPURISCVState *env, target_ulong pc)
-> +{
-> +    target_ulong adjust_pc = pc;
-> +
-> +    if (env->cur_pminsn) {
-> +        adjust_pc = (adjust_pc & ~env->cur_pmmask) | env->cur_pmbase;
-> +    }
-> +
-> +    return adjust_pc;
-> +}
-> +
->   bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->                           MMUAccessType access_type, int mmu_idx,
->                           bool probe, uintptr_t retaddr)
-> @@ -1232,6 +1248,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->       RISCVCPU *cpu = RISCV_CPU(cs);
->       CPURISCVState *env = &cpu->env;
->       vaddr im_address;
-> +    vaddr orig_address = address;
->       hwaddr pa = 0;
->       int prot, prot2, prot_pmp;
->       bool pmp_violation = false;
-> @@ -1248,6 +1265,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->       qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
->                     __func__, address, access_type, mmu_idx);
->   
-> +    if (access_type == MMU_INST_FETCH) {
-> +        address = adjust_pc_address(env, address);
-> +    }
-> +
->       /* MPRV does not affect the virtual-machine load/store
->          instructions, HLV, HLVX, and HSV. */
->       if (riscv_cpu_two_stage_lookup(mmu_idx)) {
-> @@ -1351,13 +1372,13 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->       }
->   
->       if (ret == TRANSLATE_SUCCESS) {
-> -        tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
-> +        tlb_set_page(cs, orig_address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
->                        prot, mmu_idx, tlb_size);
->           return true;
->       } else if (probe) {
->           return false;
->       } else {
-> -        raise_mmu_exception(env, address, access_type, pmp_violation,
-> +        raise_mmu_exception(env, orig_address, access_type, pmp_violation,
->                               first_stage_error,
->                               riscv_cpu_virt_enabled(env) ||
->                                   riscv_cpu_two_stage_lookup(mmu_idx),
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d522efc0b6..4544c9d934 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3511,8 +3511,6 @@ static RISCVException write_mmte(CPURISCVState *env, int csrno,
->       /* for machine mode pm.current is hardwired to 1 */
->       wpri_val |= MMTE_M_PM_CURRENT;
->   
-> -    /* hardwiring pm.instruction bit to 0, since it's not supported yet */
-> -    wpri_val &= ~(MMTE_M_PM_INSN | MMTE_S_PM_INSN | MMTE_U_PM_INSN);
->       env->mmte = wpri_val | PM_EXT_DIRTY;
->       riscv_cpu_update_mask(env);
->   
+r~
 
