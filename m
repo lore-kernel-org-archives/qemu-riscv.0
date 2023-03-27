@@ -1,83 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgrDF-0008Kh-EM
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 14:04:57 -0400
+	id 1pgrHR-0001PO-Hc
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 14:09:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pgrDC-0008Gb-3P
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 14:04:55 -0400
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
+ id 1pgrHP-0001Os-Jh
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 14:09:15 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pgrD8-00062Y-U5
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 14:04:52 -0400
-Received: by mail-pj1-x102d.google.com with SMTP id
- r7-20020a17090b050700b002404be7920aso8580594pjz.5
- for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 11:04:50 -0700 (PDT)
+ id 1pgrHN-000778-3y
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 14:09:15 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id x15so8458489pjk.2
+ for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 11:09:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1679940289;
+ d=linaro.org; s=google; t=1679940551;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=DogCOJnc75WN/a/bLCyMEkOBJKwKB3Bk9qFPriLokwI=;
- b=PDXtAX8JTwW3xySTtCbid6DqpnVzH+PQwZ+2H3ibRUL8Okffykt2UPmOUfBSW9AkRN
- KRWAOdbcOcDcLySmwyI54mINT9WjDAigD8l1jvRhx9OorDqxA75zBx4GGCehOzJ5aiZ5
- GquM5BhGW0Yb+n7f4gHuCLzNBIaU+4UwEpeweO6FutDpzxij+99Mjxmsj6FgO6leHbnT
- QUI5vj0ibrK1syEJvAOSm3zJkUUh+in3vbntl9GxJKnu2d6Gx8yJyiitwEF4DpklHuky
- f9qzMMIe5daSMS5vtopwb60JOv6/WIbUE3+nTcn+MDnqOjK0IISHtPurJk451lHR/2fC
- WtaQ==
+ bh=rwgM/WGkD4T+ARxE+2GTWIA8FXzJ+xxFQlI3g649r60=;
+ b=Po5TV9IRn8wOxFsiv4jnpgxVZxgH/Ot8SmefHsSQJlGvGzTWXlzWv2Aw9CcFbnMRNw
+ h5CrPaIfNdzLTOAJncIhrCl5ks/sCvHCM5DW08ZKtY6F7MbFhstnyACrsFzgFb+5bbMC
+ vRphOQblpzf9j/vw/44AaZJjtnY2HACk9w9DlIhAjMgVXczYqQ01oGYQkl14/3QhXqk1
+ YqYX/ukuMQV027JkF55ZSUf3X0tFwMIP3tG7OSU5t5qTzaESY2AIQwPhN6ZnHRMbpqxG
+ 6w37OYP5QOhq6Fx8XkfuWxrrFAPwim3HYfXuJWG8fDpXTk4KNtH0WSPNi0IIfaNaDVKY
+ PIDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679940289;
+ d=1e100.net; s=20210112; t=1679940551;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DogCOJnc75WN/a/bLCyMEkOBJKwKB3Bk9qFPriLokwI=;
- b=3/ktvBn4YoGSthBCDXOLQdhzsoDPWpWKBIi0mqecIAGy82PMlfyVXJLiTqH0qDNheD
- ZqHaGT45PfhB6k/gof8GDvq4P+xl8VWMLvqMiAoLzxrK1rTZ08gxL3q/OfeR6+eTEAnE
- A943bDSM3FYHSlGaatuWGmCc95AJjb8ch1dNvH3glufEpFIWBrmZBK5LG3RvUZNbHcLh
- xWGqMt8LeO7/tR8MyjVCUKSpIN7MlnYHXOjGJXQIiSKAEA09SYUC5V1/NPwhDAy0a28p
- YqjDcrVH5GmfUEgCPEMUAot34Xn0lOJryOvONeqwMZWK9/KJOJUdUzdZUHbDaYrW/Lm0
- 9QVQ==
-X-Gm-Message-State: AAQBX9cEFD5UNpuOPak1eCP9iS1z4aipnfcM/1AbcWRUYMijAnbjfW7w
- 0C3JTYZ7TL6hEHCeqz/C6B+zCg==
-X-Google-Smtp-Source: AKy350amYlvYvzxSJNrpaD/5TzG+kGfU76l7kUgJooE+j0czMg4aiODHjD7IVAovFziRRq/u6iZHFA==
-X-Received: by 2002:a17:90b:3eca:b0:237:5a3c:e86c with SMTP id
- rm10-20020a17090b3eca00b002375a3ce86cmr13925990pjb.24.1679940289218; 
- Mon, 27 Mar 2023 11:04:49 -0700 (PDT)
+ bh=rwgM/WGkD4T+ARxE+2GTWIA8FXzJ+xxFQlI3g649r60=;
+ b=k0XSSliaxTMXpNnrRQAikseDG2N8wKeUaJ/YLf+akBGk5mJT6RO4zJl286dqIPGbyy
+ l1EERdm9j5dBdhx4AkvHmGIjRY1EVRg0Z2EsQYemjlOhjgrw/tU4257RKOb5bdcmP6bD
+ cDbaK0Ldy4Vlrx/VelQljlgioE9ELEh4aAWMDA5rKmgF52JGSbL2bpinnm/NCGCF7Ddf
+ BchYeN1+YIoITrlSejrKwb/JQOvC3hX+wBLzIfcfnQR+ow4nrI3gUaBvA7wmSkzZjMbM
+ D63Nbhg2tilId6wwz33O5RiBNmC6P3D0mn1eng36PdyU8sPZKPDwqzHxLEe4ARL+Yh1l
+ UGcA==
+X-Gm-Message-State: AO0yUKXE7sYl93LCpjwme6YiRGLUFSUe4u88LsnmBaNAfurFtgO1RC7L
+ vfkbJ2sPg3oeRLzAn0PE6PmNAQ==
+X-Google-Smtp-Source: AK7set9GK7JuiVsxtQstJ9FNrjGkFVRkfulizUtmA8wOjds7iXaTZyoi/MPQ+l0LpUDltjmzPyTRNg==
+X-Received: by 2002:a05:6a20:a882:b0:d3:aba7:807c with SMTP id
+ ca2-20020a056a20a88200b000d3aba7807cmr12348281pzb.34.1679940551485; 
+ Mon, 27 Mar 2023 11:09:11 -0700 (PDT)
 Received: from ?IPV6:2602:ae:1544:6601:6705:aa17:3641:e634?
  ([2602:ae:1544:6601:6705:aa17:3641:e634])
  by smtp.gmail.com with ESMTPSA id
- y1-20020a17090a8b0100b002348d711ebbsm7809217pjn.16.2023.03.27.11.04.48
+ u15-20020a62ed0f000000b0062a474cd46asm8979808pfh.137.2023.03.27.11.09.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Mar 2023 11:04:48 -0700 (PDT)
-Message-ID: <8fed2551-a67d-cd53-f5a1-f089f980aa08@linaro.org>
-Date: Mon, 27 Mar 2023 11:04:46 -0700
+ Mon, 27 Mar 2023 11:09:11 -0700 (PDT)
+Message-ID: <40cca628-0c8b-7cdf-d779-16ece30a89ba@linaro.org>
+Date: Mon, 27 Mar 2023 11:09:09 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [PATCH 5/5] target/riscv: Add pointer mask support for
- instruction fetch
+Subject: Re: [PATCH v2 05/10] target/riscv: Convert env->virt to a bool
+ env->virt_enabled
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230327100027.61160-1-liweiwei@iscas.ac.cn>
- <20230327100027.61160-6-liweiwei@iscas.ac.cn>
+References: <20230327080858.39703-1-liweiwei@iscas.ac.cn>
+ <20230327080858.39703-6-liweiwei@iscas.ac.cn>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230327100027.61160-6-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230327080858.39703-6-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1035.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,19 +89,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Mar 2023 18:04:55 -0000
+X-List-Received-Date: Mon, 27 Mar 2023 18:09:15 -0000
 
-On 3/27/23 03:00, Weiwei Li wrote:
-> @@ -1248,6 +1265,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->       qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
->                     __func__, address, access_type, mmu_idx);
->   
-> +    if (access_type == MMU_INST_FETCH) {
-> +        address = adjust_pc_address(env, address);
-> +    }
+On 3/27/23 01:08, Weiwei Li wrote:
+> From: LIU Zhiwei<zhiwei_liu@linux.alibaba.com>
+> 
+> Currently we only use the env->virt to encode the virtual mode enabled
+> status. Let's make it a bool type.
+> 
+> Signed-off-by: LIU Zhiwei<zhiwei_liu@linux.alibaba.com>
+> Reviewed-by: Weiwei Li<liweiwei@iscas.ac.cn>
+> Message-ID:<20230325145348.1208-1-zhiwei_liu@linux.alibaba.com>
+> ---
+>   target/riscv/cpu.h        | 2 +-
+>   target/riscv/cpu_bits.h   | 3 ---
+>   target/riscv/cpu_helper.c | 6 +++---
+>   target/riscv/machine.c    | 6 +++---
+>   target/riscv/translate.c  | 4 ++--
+>   5 files changed, 9 insertions(+), 12 deletions(-)
 
-Why do you want to do this so late, as opposed to earlier in cpu_get_tb_cpu_state?
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
 
