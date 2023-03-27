@@ -1,72 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgmlM-00073T-Q0
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 09:19:52 -0400
+	id 1pgmlw-0007fM-K2
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 09:20:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pgmlK-00072Y-49
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 09:19:50 -0400
-Received: from mail-oi1-x236.google.com ([2607:f8b0:4864:20::236])
+ id 1pgmlc-0007U1-HT
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 09:20:11 -0400
+Received: from mail-oa1-x33.google.com ([2001:4860:4864:20::33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pgmlI-0006qo-EI
- for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 09:19:49 -0400
-Received: by mail-oi1-x236.google.com with SMTP id r14so624003oiw.12
- for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 06:19:48 -0700 (PDT)
+ id 1pgmla-0007Ae-Eh
+ for qemu-riscv@nongnu.org; Mon, 27 Mar 2023 09:20:07 -0400
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-17ec8963db8so9202874fac.8
+ for <qemu-riscv@nongnu.org>; Mon, 27 Mar 2023 06:20:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1679923187;
+ d=ventanamicro.com; s=google; t=1679923205;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=J2XeDcpUibTrydqD4wrMhPpMjN+DQQyi/5/gaM0qhe0=;
- b=YPetc1IIR8ICuEqJ2NGk0ey2imx7R2B+JPumCvrmNc4dpG2gRKaKBd4EIE3T0FB/qd
- ti03iGWlk8WU+boL98Ai9kOv07kXMURWWjDvOZbMZdk7ffiX5A097gMyNV72JqEx0LuH
- DzkIQFLybQ7W1ZTqdeHXuchXQvsZ1YB1s7N6Nwvao73GMxoQZAFRxluyrNVotGP3TCUI
- XKDLs7r+/esywJ8HYOz0oD6bDpfMWDUMChl2hBgJjD2Up6mtm82d21zFVDcpj7+TY2fs
- d4PQw/Eo2C2QoUu0EVXrDnlJ2BSLoYWRs8QrJwfb/3b2ZCCez160waF4K/ypQTRpnfza
- ZAAA==
+ bh=Q0pDKGjdBGRtTCUrOmH9VQRk3mlQOdIhN1gsJT52R0E=;
+ b=QB+qvTWThaUYdl4aJJZV4ClNnj1ZPPewOA7nh8q2qPV3d0wynr0mU599P9UyyPJgx5
+ FnQllnRa7zyyau4rMu8G9VgZOhpg9ez0Ap4UvdpMg9OO3QLsyVe5/+zl1mPx0/MmyK02
+ 07wEnTYuu3KvEqXIcPN1ZDsxLNoPGmLnmZqoRPA3auZw9FaDuC9WHpLOvuPcQq75xBEo
+ ME5ESJSbAEiCOnENSP/xK4OuXBbCc2X9ybQ8PfV+5HxPJphYvUSepJuxibJAsQ9bDdln
+ 0zLEjD0mXcWwn42ytiEMEi1/L9dC+snk9eyFd8J5KW5txO8cF+RXDGiSLAxLAEScl6cp
+ Ox1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679923187;
+ d=1e100.net; s=20210112; t=1679923205;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=J2XeDcpUibTrydqD4wrMhPpMjN+DQQyi/5/gaM0qhe0=;
- b=yEhNzW2AOmg7t5zI2GGSK81vawILFlL9bE0rLWvD+c4Nqm7w4ZkLbJHRRwgY+hVGX8
- sFKCoVMVbsR5lWenFvNfJpQ6bYzPL+qXFnD80lQCPUIYkzb7P4t9s5dFCC7GfIQNBgPa
- fxS2D9uihf74FoDQoSfBW0cfhZhJlbTXhEIYz2HItDxw6ao8XGxcyddVfTCaswxnbZwJ
- pMFDUFjGg/ywVYJFy2vUSO2/xpOc+4iXrb6DlqNfLKfF+nN0+kM1IpJbP6tmIWM/vPqH
- 1jLgyjpCazH2I7wlmwXL++W/NT6boDSoiTtjAziR8HkSQ/W22sR5SnZNjuK6oqy3Yi69
- 0Lpw==
-X-Gm-Message-State: AAQBX9dRxlEZuI+i+vmraYkPkY+lGLPD412lgkJC5zvLxc0wOf436lB/
- zVMZCHXNWT/WGhkZdyZ9uEMv9g==
-X-Google-Smtp-Source: AKy350ZBiltU6M12U7mYWgz4vF5bd6T8M56AU9SKB1YABhbOFhW3Xg2gygAQ+5civX2DQQBoXjo+2w==
-X-Received: by 2002:aca:1e0b:0:b0:388:f4de:1ed7 with SMTP id
- m11-20020aca1e0b000000b00388f4de1ed7mr2499480oic.1.1679923186971; 
- Mon, 27 Mar 2023 06:19:46 -0700 (PDT)
+ bh=Q0pDKGjdBGRtTCUrOmH9VQRk3mlQOdIhN1gsJT52R0E=;
+ b=dTWCmRp3NF1a93BdFv7LBN5ICDg5MFx35BvkxK4h7DMMHLpCJxLsZtj6YTOE4Aa0Be
+ CaINkmlOVaNBZ01DzdxMEvt/FuHWOydRjE+hR8RSE/2T5tDlTH/InROAbSlCibud5QJq
+ hviB2f053lI5uULRzrnCzjoa6whLVS92MQ3uy2d+vo2YL9ARdl2jJNHHO18wcGP8yvlF
+ BfPQTknrdpaK25wk9shYch+TjtK1yhsMIxc0gYFHfXjcx2i9exqSvO2ld4eRhfWUyen1
+ 3oJHD1qDNInnxOIvb3ZbpQq4JNxj1tPlbnbJCvOE882KqrRmwm0HH9NIcq+KzrhK47PM
+ Ijog==
+X-Gm-Message-State: AAQBX9fTtslSQF8hgz/rd0v2NmveTZKLyEOcRemJdu0yq+BCozahXoTd
+ mrzORMEYcQ17LS5t/Mjb3+VefA==
+X-Google-Smtp-Source: AKy350a7W6ydBr8BVCrSWDYga0fKNG3kK798wXrP5EsvU8KWyhKpOhDp8OFrCHFWG3A0O7hBculzXg==
+X-Received: by 2002:a05:6870:d628:b0:177:a97c:ecde with SMTP id
+ a40-20020a056870d62800b00177a97cecdemr8186077oaq.22.1679923205149; 
+ Mon, 27 Mar 2023 06:20:05 -0700 (PDT)
 Received: from [192.168.68.107] ([177.95.89.231])
  by smtp.gmail.com with ESMTPSA id
- p204-20020acaf1d5000000b003845f4991c7sm11224227oih.11.2023.03.27.06.19.44
+ c16-20020a9d67d0000000b006884c42a38asm1846478otn.41.2023.03.27.06.20.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Mar 2023 06:19:46 -0700 (PDT)
-Message-ID: <b39dc2f5-82b5-5cdc-d2c5-a0fe943ef96d@ventanamicro.com>
-Date: Mon, 27 Mar 2023 10:19:42 -0300
+ Mon, 27 Mar 2023 06:20:04 -0700 (PDT)
+Message-ID: <06d2571e-6a21-7a7d-d836-9bc1b975e4dc@ventanamicro.com>
+Date: Mon, 27 Mar 2023 10:20:01 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: [PATCH 1/5] target/riscv: Fix effective address for pointer mask
+Subject: Re: [PATCH 2/5] target/riscv: Use sign-extended data address when xl
+ = 32
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20230327100027.61160-1-liweiwei@iscas.ac.cn>
- <20230327100027.61160-2-liweiwei@iscas.ac.cn>
+ <20230327100027.61160-3-liweiwei@iscas.ac.cn>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230327100027.61160-2-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230327100027.61160-3-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::236;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x236.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -86,17 +88,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Mar 2023 13:19:50 -0000
+X-List-Received-Date: Mon, 27 Mar 2023 13:20:12 -0000
 
 
 
 On 3/27/23 07:00, Weiwei Li wrote:
-> Since pointer mask works on effective address, and the xl works on the
-> generation of effective address, so xl related calculation should be done
-
-nit: I believe you can remove the 'so'
-
-> before pointer mask.
+> Currently, the pc use signed-extend(in gen_set_pc*) when xl = 32. And
+> data address should use the same memory address space with it when
+> xl = 32. So we should change their address calculation to use sign-extended
+> address when xl = 32.
 > 
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
@@ -104,47 +104,29 @@ nit: I believe you can remove the 'so'
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/translate.c | 16 ++++++++++++----
->   1 file changed, 12 insertions(+), 4 deletions(-)
+>   target/riscv/translate.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 > 
 > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 0ee8ee147d..bf0e2d318e 100644
+> index bf0e2d318e..c48cb19389 100644
 > --- a/target/riscv/translate.c
 > +++ b/target/riscv/translate.c
-> @@ -568,11 +568,15 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
->       TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
->   
+> @@ -570,7 +570,7 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
 >       tcg_gen_addi_tl(addr, src1, imm);
-> +
-> +    if (get_xl(ctx) == MXL_RV32) {
-> +        tcg_gen_ext32u_tl(addr, addr);
-> +    }
-> +
->       if (ctx->pm_mask_enabled) {
->           tcg_gen_andc_tl(addr, addr, pm_mask);
-> -    } else if (get_xl(ctx) == MXL_RV32) {
-> -        tcg_gen_ext32u_tl(addr, addr);
->       }
-> +
->       if (ctx->pm_base_enabled) {
->           tcg_gen_or_tl(addr, addr, pm_base);
->       }
-> @@ -586,11 +590,15 @@ static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
->       TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
 >   
->       tcg_gen_add_tl(addr, src1, offs);
-> +
-> +    if (get_xl(ctx) == MXL_RV32) {
-> +        tcg_gen_ext32u_tl(addr, addr);
-> +    }
-> +
->       if (ctx->pm_mask_enabled) {
->           tcg_gen_andc_tl(addr, addr, pm_mask);
-> -    } else if (get_xl(ctx) == MXL_RV32) {
+>       if (get_xl(ctx) == MXL_RV32) {
 > -        tcg_gen_ext32u_tl(addr, addr);
+> +        tcg_gen_ext32s_tl(addr, addr);
 >       }
-> +
->       if (ctx->pm_base_enabled) {
->           tcg_gen_or_tl(addr, addr, pm_base);
+>   
+>       if (ctx->pm_mask_enabled) {
+> @@ -592,7 +592,7 @@ static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
+>       tcg_gen_add_tl(addr, src1, offs);
+>   
+>       if (get_xl(ctx) == MXL_RV32) {
+> -        tcg_gen_ext32u_tl(addr, addr);
+> +        tcg_gen_ext32s_tl(addr, addr);
 >       }
+>   
+>       if (ctx->pm_mask_enabled) {
 
