@@ -1,48 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgzHV-0002mK-Of
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 22:41:53 -0400
+	id 1pgzOY-0003x8-Pu
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 22:49:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pgzHP-0002lc-OW; Mon, 27 Mar 2023 22:41:47 -0400
-Received: from out30-100.freemail.mail.aliyun.com ([115.124.30.100])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pgzHN-0007NC-HJ; Mon, 27 Mar 2023 22:41:47 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R911e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=6; SR=0;
- TI=SMTPD_---0VerEK-s_1679971299; 
-Received: from 30.221.98.176(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VerEK-s_1679971299) by smtp.aliyun-inc.com;
- Tue, 28 Mar 2023 10:41:40 +0800
-Message-ID: <bd61fc0f-b491-934d-7288-64326b047823@linux.alibaba.com>
-Date: Tue, 28 Mar 2023 10:41:37 +0800
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pgzOX-0003wu-1B; Mon, 27 Mar 2023 22:49:09 -0400
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pgzOU-00026h-70; Mon, 27 Mar 2023 22:49:08 -0400
+Received: from [192.168.0.120] (unknown [180.175.29.170])
+ by APP-01 (Coremail) with SMTP id qwCowACnrc2YVSJkLg3zFw--.2607S2;
+ Tue, 28 Mar 2023 10:48:57 +0800 (CST)
+Message-ID: <c1b60f5e-5bb8-5462-ae93-7813da4269bb@iscas.ac.cn>
+Date: Tue, 28 Mar 2023 10:48:56 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: [PATCH v6 07/25] target/riscv: Reduce overhead of MSTATUS_SUM
- change
+Subject: Re: [PATCH 1/5] target/riscv: Fix effective address for pointer mask
 Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
- fei2.wu@intel.com
-References: <20230325105429.1142530-1-richard.henderson@linaro.org>
- <20230325105429.1142530-8-richard.henderson@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230325105429.1142530-8-richard.henderson@linaro.org>
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20230327100027.61160-1-liweiwei@iscas.ac.cn>
+ <20230327100027.61160-2-liweiwei@iscas.ac.cn>
+ <c0abfb39-56a7-a184-f134-bcb075908f57@linux.alibaba.com>
+From: liweiwei <liweiwei@iscas.ac.cn>
+In-Reply-To: <c0abfb39-56a7-a184-f134-bcb075908f57@linux.alibaba.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.100;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-100.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: qwCowACnrc2YVSJkLg3zFw--.2607S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxXFWDuF1UZw43Xw15Gry5XFb_yoW5XrW7pF
+ 1kGrWkury5Xr97JFy7tr4DXFyrGr1UJa1DXw1vva4YyrWUXr10qr4DXrZIgr4jyr48Xr4U
+ Ar45GryUuF17XrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9F14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F
+ 4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+ 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
+ 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
+ n2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFV
+ Cjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWl
+ x4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r
+ 1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_
+ JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcS
+ sGvfC2KfnxnUUI43ZEXa7VUbXdbUUUUUU==
+X-Originating-IP: [180.175.29.170]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -55,183 +70,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Mar 2023 02:41:48 -0000
+X-List-Received-Date: Tue, 28 Mar 2023 02:49:09 -0000
 
 
-On 2023/3/25 18:54, Richard Henderson wrote:
-> From: Fei Wu <fei2.wu@intel.com>
+On 2023/3/28 10:20, LIU Zhiwei wrote:
 >
-> Kernel needs to access user mode memory e.g. during syscalls, the window
-> is usually opened up for a very limited time through MSTATUS.SUM, the
-> overhead is too much if tlb_flush() gets called for every SUM change.
+> On 2023/3/27 18:00, Weiwei Li wrote:
+>> Since pointer mask works on effective address, and the xl works on the
+>> generation of effective address, so xl related calculation should be 
+>> done
+>> before pointer mask.
 >
-> This patch creates a separate MMU index for S+SUM, so that it's not
-> necessary to flush tlb anymore when SUM changes. This is similar to how
-> ARM handles Privileged Access Never (PAN).
+> Incorrect. It has been done.
 >
-> Result of 'pipe 10' from unixbench boosts from 223656 to 1705006. Many
-> other syscalls benefit a lot from this too.
+> When updating the pm_mask,  we have already considered the env->xl.
 >
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> Signed-off-by: Fei Wu <fei2.wu@intel.com>
-> Message-Id: <20230324054154.414846-3-fei2.wu@intel.com>
-> ---
->   target/riscv/cpu.h                      |  2 --
->   target/riscv/internals.h                | 14 ++++++++++++++
->   target/riscv/cpu_helper.c               | 17 +++++++++++++++--
->   target/riscv/csr.c                      |  3 +--
->   target/riscv/op_helper.c                |  5 +++--
->   target/riscv/insn_trans/trans_rvh.c.inc |  4 ++--
->   6 files changed, 35 insertions(+), 10 deletions(-)
+> You can see it in riscv_cpu_update_mask
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 3e59dbb3fd..5e589db106 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -631,8 +631,6 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *env,
->   target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
->   void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
->   
-> -#define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
-> -
->   #include "exec/cpu-all.h"
->   
->   FIELD(TB_FLAGS, MEM_IDX, 0, 3)
-> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-> index 5620fbffb6..b55152a7dc 100644
-> --- a/target/riscv/internals.h
-> +++ b/target/riscv/internals.h
-> @@ -21,6 +21,20 @@
->   
->   #include "hw/registerfields.h"
->   
-> +/*
-> + * The current MMU Modes are:
-> + *  - U                 0b000
-> + *  - S                 0b001
-> + *  - S+SUM             0b010
-> + *  - M                 0b011
-> + *  - HLV/HLVX/HSV adds 0b100
+>     if (env->xl == MXL_RV32) {
+>         env->cur_pmmask = mask & UINT32_MAX;
+>         env->cur_pmbase = base & UINT32_MAX;
+>     } else {
+>         env->cur_pmmask = mask;
+>         env->cur_pmbase = base;
+>     }
+>
+Yeah, I missed this part. Then we should ensure cur_pmmask/base is 
+updated when xl changes.
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+If so, I'll drop this patch.
 
-Zhiwei
+Regards,
 
-> + */
-> +#define MMUIdx_U            0
-> +#define MMUIdx_S            1
-> +#define MMUIdx_S_SUM        2
-> +#define MMUIdx_M            3
-> +#define MMU_HYP_ACCESS_BIT  (1 << 2)
-> +
->   /* share data between vector helpers and decode code */
->   FIELD(VDATA, VM, 0, 1)
->   FIELD(VDATA, LMUL, 1, 3)
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 5753126c7a..052fdd2d9d 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -21,6 +21,7 @@
->   #include "qemu/log.h"
->   #include "qemu/main-loop.h"
->   #include "cpu.h"
-> +#include "internals.h"
->   #include "pmu.h"
->   #include "exec/exec-all.h"
->   #include "instmap.h"
-> @@ -36,7 +37,19 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
->   #ifdef CONFIG_USER_ONLY
->       return 0;
->   #else
-> -    return env->priv;
-> +    if (ifetch) {
-> +        return env->priv;
-> +    }
-> +
-> +    /* All priv -> mmu_idx mapping are here */
-> +    int mode = env->priv;
-> +    if (mode == PRV_M && get_field(env->mstatus, MSTATUS_MPRV)) {
-> +        mode = get_field(env->mstatus, MSTATUS_MPP);
-> +    }
-> +    if (mode == PRV_S && get_field(env->mstatus, MSTATUS_SUM)) {
-> +        return MMUIdx_S_SUM;
-> +    }
-> +    return mode;
->   #endif
->   }
->   
-> @@ -600,7 +613,7 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
->   
->   bool riscv_cpu_two_stage_lookup(int mmu_idx)
->   {
-> -    return mmu_idx & TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-> +    return mmu_idx & MMU_HYP_ACCESS_BIT;
->   }
->   
->   int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts)
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index abea7b749e..b79758a606 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1246,8 +1246,7 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
->       RISCVMXL xl = riscv_cpu_mxl(env);
->   
->       /* flush tlb on mstatus fields that affect VM */
-> -    if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
-> -            MSTATUS_MPRV | MSTATUS_SUM)) {
-> +    if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPV)) {
->           tlb_flush(env_cpu(env));
->       }
->       mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 84ee018f7d..962a061228 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -20,6 +20,7 @@
->   
->   #include "qemu/osdep.h"
->   #include "cpu.h"
-> +#include "internals.h"
->   #include "qemu/main-loop.h"
->   #include "exec/exec-all.h"
->   #include "exec/helper-proto.h"
-> @@ -428,14 +429,14 @@ void helper_hyp_gvma_tlb_flush(CPURISCVState *env)
->   
->   target_ulong helper_hyp_hlvx_hu(CPURISCVState *env, target_ulong address)
->   {
-> -    int mmu_idx = cpu_mmu_index(env, true) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-> +    int mmu_idx = cpu_mmu_index(env, true) | MMU_HYP_ACCESS_BIT;
->   
->       return cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
->   }
->   
->   target_ulong helper_hyp_hlvx_wu(CPURISCVState *env, target_ulong address)
->   {
-> -    int mmu_idx = cpu_mmu_index(env, true) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-> +    int mmu_idx = cpu_mmu_index(env, true) | MMU_HYP_ACCESS_BIT;
->   
->       return cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
->   }
-> diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
-> index 9248b48c36..15842f4282 100644
-> --- a/target/riscv/insn_trans/trans_rvh.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvh.c.inc
-> @@ -40,7 +40,7 @@ static bool do_hlv(DisasContext *ctx, arg_r2 *a, MemOp mop)
->       if (check_access(ctx)) {
->           TCGv dest = dest_gpr(ctx, a->rd);
->           TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-> -        int mem_idx = ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-> +        int mem_idx = ctx->mem_idx | MMU_HYP_ACCESS_BIT;
->           tcg_gen_qemu_ld_tl(dest, addr, mem_idx, mop);
->           gen_set_gpr(ctx, a->rd, dest);
->       }
-> @@ -87,7 +87,7 @@ static bool do_hsv(DisasContext *ctx, arg_r2_s *a, MemOp mop)
->       if (check_access(ctx)) {
->           TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
->           TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
-> -        int mem_idx = ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-> +        int mem_idx = ctx->mem_idx | MMU_HYP_ACCESS_BIT;
->           tcg_gen_qemu_st_tl(data, addr, mem_idx, mop);
->       }
->       return true;
+Weiwei Li
+
+>>
+>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+>> ---
+>>   target/riscv/translate.c | 16 ++++++++++++----
+>>   1 file changed, 12 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+>> index 0ee8ee147d..bf0e2d318e 100644
+>> --- a/target/riscv/translate.c
+>> +++ b/target/riscv/translate.c
+>> @@ -568,11 +568,15 @@ static TCGv get_address(DisasContext *ctx, int 
+>> rs1, int imm)
+>>       TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
+>>         tcg_gen_addi_tl(addr, src1, imm);
+>> +
+>> +    if (get_xl(ctx) == MXL_RV32) {
+>> +        tcg_gen_ext32u_tl(addr, addr);
+>> +    }
+>> +
+>>       if (ctx->pm_mask_enabled) {
+>>           tcg_gen_andc_tl(addr, addr, pm_mask);
+>> -    } else if (get_xl(ctx) == MXL_RV32) {
+>> -        tcg_gen_ext32u_tl(addr, addr);
+>>       }
+>
+> The else is processing when only xl works, and the pm_mask doesn't work.
+>
+> Zhiwei
+>
+>> +
+>>       if (ctx->pm_base_enabled) {
+>>           tcg_gen_or_tl(addr, addr, pm_base);
+>>       }
+>> @@ -586,11 +590,15 @@ static TCGv get_address_indexed(DisasContext 
+>> *ctx, int rs1, TCGv offs)
+>>       TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
+>>         tcg_gen_add_tl(addr, src1, offs);
+>> +
+>> +    if (get_xl(ctx) == MXL_RV32) {
+>> +        tcg_gen_ext32u_tl(addr, addr);
+>> +    }
+>> +
+>>       if (ctx->pm_mask_enabled) {
+>>           tcg_gen_andc_tl(addr, addr, pm_mask);
+>> -    } else if (get_xl(ctx) == MXL_RV32) {
+>> -        tcg_gen_ext32u_tl(addr, addr);
+>>       }
+>> +
+>>       if (ctx->pm_base_enabled) {
+>>           tcg_gen_or_tl(addr, addr, pm_base);
+>>       }
+
 
