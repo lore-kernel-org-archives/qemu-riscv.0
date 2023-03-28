@@ -1,49 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgyD6-000483-OY
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 21:33:16 -0400
+	id 1pgyZP-0007zz-Ps
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 21:56:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pgyD5-00047h-CP; Mon, 27 Mar 2023 21:33:15 -0400
-Received: from out30-97.freemail.mail.aliyun.com ([115.124.30.97])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pgyD2-0007UM-Dm; Mon, 27 Mar 2023 21:33:14 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R111e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=6; SR=0;
- TI=SMTPD_---0VeqwvwI_1679967182; 
-Received: from 30.221.98.176(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VeqwvwI_1679967182) by smtp.aliyun-inc.com;
- Tue, 28 Mar 2023 09:33:02 +0800
-Message-ID: <075a0bde-0d28-75e1-097f-f5218403b23d@linux.alibaba.com>
-Date: Tue, 28 Mar 2023 09:33:00 +0800
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pgyZP-0007vz-41; Mon, 27 Mar 2023 21:56:19 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pgyZL-0004Iz-Ru; Mon, 27 Mar 2023 21:56:18 -0400
+Received: from [192.168.0.120] (unknown [180.175.29.170])
+ by APP-05 (Coremail) with SMTP id zQCowACXnkIuSSJkyxcWCw--.8922S2;
+ Tue, 28 Mar 2023 09:56:00 +0800 (CST)
+Message-ID: <ae53e46c-b7e2-c986-a797-06a2630cc393@iscas.ac.cn>
+Date: Tue, 28 Mar 2023 09:55:58 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: [PATCH v6 13/25] target/riscv: Introduce mmuidx_priv
+Cc: liweiwei@iscas.ac.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+Subject: Re: [PATCH 5/5] target/riscv: Add pointer mask support for
+ instruction fetch
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+References: <20230327100027.61160-1-liweiwei@iscas.ac.cn>
+ <20230327100027.61160-6-liweiwei@iscas.ac.cn>
+ <8fed2551-a67d-cd53-f5a1-f089f980aa08@linaro.org>
 Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
- fei2.wu@intel.com
-References: <20230325105429.1142530-1-richard.henderson@linaro.org>
- <20230325105429.1142530-14-richard.henderson@linaro.org>
- <a4e87eab-aace-a17b-fef5-5c5b1118a561@linux.alibaba.com>
- <6b21f385-96fd-78f4-bdba-ed552bf2464a@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <6b21f385-96fd-78f4-bdba-ed552bf2464a@linaro.org>
+From: liweiwei <liweiwei@iscas.ac.cn>
+In-Reply-To: <8fed2551-a67d-cd53-f5a1-f089f980aa08@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.97;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-97.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+X-CM-TRANSID: zQCowACXnkIuSSJkyxcWCw--.8922S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrKFyxCFy8Kw47tF4DWrW7urg_yoWxKrb_tw
+ 4UWr4xZwsFqw4DK3W5Jry5Zr18Jw1jywn2qrs7Ar97XrW5JFZxJr1Sywn5J343GF4Utr1x
+ tw15WryfAa4UWjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUb3AFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+ Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr
+ 0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
+ 6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
+ 0_Gr1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxa
+ n2IY04v7Mxk0xIA0c2IEe2xFo4CEbIxvr21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x
+ 0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2
+ zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF
+ 4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWU
+ CwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCT
+ nIWIevJa73UjIFyTuYvjfUoOJ5UUUUU
+X-Originating-IP: [180.175.29.170]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -56,42 +71,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Mar 2023 01:33:15 -0000
+X-List-Received-Date: Tue, 28 Mar 2023 01:56:19 -0000
 
 
-On 2023/3/28 0:29, Richard Henderson wrote:
-> On 3/26/23 19:07, LIU Zhiwei wrote:
->>> +static inline int mmuidx_priv(int mmu_idx)
->>> +{
->>> +    int ret = mmu_idx & 3;
->>> +    if (ret == MMUIdx_S_SUM) {
->>> +        ret = PRV_S;
->>> +    }
->>> +    return ret;
->>> +}
->>> +
->>
->> Can we remove the PRIV from the tb flags after we have this function?
+On 2023/3/28 02:04, Richard Henderson wrote:
+> On 3/27/23 03:00, Weiwei Li wrote:
+>> @@ -1248,6 +1265,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr 
+>> address, int size,
+>>       qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx 
+>> %d\n",
+>>                     __func__, address, access_type, mmu_idx);
+>>   +    if (access_type == MMU_INST_FETCH) {
+>> +        address = adjust_pc_address(env, address);
+>> +    }
 >
-> No, because this is the priv of the memory operation as modified by 
-> e.g. MPRV, not the true cpu priv.
+> Why do you want to do this so late, as opposed to earlier in 
+> cpu_get_tb_cpu_state?
 
-For this implementation, we explicitly use the tb flags for mmu index. I 
-think it is the reason why we have to maintain the redundant privilege 
-in tb flags.
-It may be better to only store machine states into tb flags. Can we just 
-pass everything that we need, for example, the priv and sum, and then 
-implicitly
-calculate the ctx->mem_idx in disas_init_fn?
+In this way, the pc for tb may be different from the reg pc. Then the pc 
+register will be wrong if sync from tb.
 
-I remember that you give the similar suggestion in the comment process
+Regards,
 
-https://mail.gnu.org/archive/html/qemu-riscv/2023-03/msg00566.html
-
-Best Regards,
-Zhiwei
+Weiwei Li
 
 >
 >
 > r~
+
 
