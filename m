@@ -1,54 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgzgQ-00089t-C9
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 23:07:38 -0400
+	id 1pgznC-0006f5-CH
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 23:14:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pgzgO-00085j-Qr; Mon, 27 Mar 2023 23:07:36 -0400
+ id 1pgznA-0006Xk-Ik; Mon, 27 Mar 2023 23:14:36 -0400
 Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pgzgL-0001PO-VR; Mon, 27 Mar 2023 23:07:36 -0400
+ id 1pgzn8-0003yE-7v; Mon, 27 Mar 2023 23:14:36 -0400
 Received: from [192.168.0.120] (unknown [180.175.29.170])
- by APP-01 (Coremail) with SMTP id qwCowAA3P0vrWSJkPk70Fw--.47819S2;
- Tue, 28 Mar 2023 11:07:24 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowACnZ9aTWyJkNOH0Fw--.48009S2;
+ Tue, 28 Mar 2023 11:14:28 +0800 (CST)
 Content-Type: multipart/alternative;
- boundary="------------BFQHy7s11fzXel81ofyw15vz"
-Message-ID: <052a7215-4c24-e0b4-fcd0-c713aaa949c2@iscas.ac.cn>
-Date: Tue, 28 Mar 2023 11:07:22 +0800
+ boundary="------------NG9F730OHqaTZgSWil2BTyR3"
+Message-ID: <c24b5fb2-48d3-c187-f165-2aa98f225302@iscas.ac.cn>
+Date: Tue, 28 Mar 2023 11:14:27 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: [PATCH 2/5] target/riscv: Use sign-extended data address when xl
- = 32
+Cc: liweiwei@iscas.ac.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn,
+ lazyparser@gmail.com
+Subject: Re: [PATCH 5/5] target/riscv: Add pointer mask support for
+ instruction fetch
 Content-Language: en-US
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20230327100027.61160-1-liweiwei@iscas.ac.cn>
- <20230327100027.61160-3-liweiwei@iscas.ac.cn>
- <821f3122-ea3e-f770-1b88-6b512a22cfbe@linux.alibaba.com>
+ <20230327100027.61160-6-liweiwei@iscas.ac.cn>
+ <8fed2551-a67d-cd53-f5a1-f089f980aa08@linaro.org>
+ <ae53e46c-b7e2-c986-a797-06a2630cc393@iscas.ac.cn>
+ <4593f151-8622-7c4e-9e32-1748917a9347@linux.alibaba.com>
 From: liweiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <821f3122-ea3e-f770-1b88-6b512a22cfbe@linux.alibaba.com>
-X-CM-TRANSID: qwCowAA3P0vrWSJkPk70Fw--.47819S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Ary7Jw15tFWfXF1UXw4kCrg_yoW8CFy5pF
- 1xKw42grykJFZ7ZFWxtw4UXr15GFn5CFWjk3sa9w1rurWaqr45CFWqk3y5ta1kWFWxWFWj
- 9rsF9Fy5Za1jgrDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvE14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+In-Reply-To: <4593f151-8622-7c4e-9e32-1748917a9347@linux.alibaba.com>
+X-CM-TRANSID: qwCowACnZ9aTWyJkNOH0Fw--.48009S2
+X-Coremail-Antispam: 1UD129KBjvJXoWrKr4kCF1Duw48WF47Wry7Awb_yoW8JrWkpr
+ 1rAr48CrWkJr97tw4DZw17ZFyYkr1UJ3Wjkry0ka909ry5Xr1Svr1UWa9Fgr1DWrZ7Gw1U
+ Aw4UXrW8uFn8t3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9j14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr
- 1j6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21lYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0E
- x4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACjI8F5V
- A0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l7480Y4vEI4kI2Ix0rVAq
- x4xJMxk0xIA0c2IEe2xFo4CEbIxvr21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7
- v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUGVWUWwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF
- 1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIx
- AIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI
- 42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWI
- evJa73UjIFyTuYvjfUwYFCUUUUU
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F
+ 4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487McIj6xIIjxv20xvE14v26r106r15McIj
+ 6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lF7I21c
+ 0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04v7Mx8GjcxK6IxK0xIIj40E
+ 5I8CrwCYjI0SjxkI62AI1cAE67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4
+ AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_JrI_JrWlx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE
+ 17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMI
+ IF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4l
+ IxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvf
+ C2KfnxnUUI43ZEXa7VU889N3UUUUU==
 X-Originating-IP: [180.175.29.170]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
@@ -71,75 +74,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Mar 2023 03:07:37 -0000
+X-List-Received-Date: Tue, 28 Mar 2023 03:14:36 -0000
 
 This is a multi-part message in MIME format.
---------------BFQHy7s11fzXel81ofyw15vz
+--------------NG9F730OHqaTZgSWil2BTyR3
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
 
-On 2023/3/28 10:14, LIU Zhiwei wrote:
+On 2023/3/28 10:31, LIU Zhiwei wrote:
 >
+> On 2023/3/28 9:55, liweiwei wrote:
+>>
+>> On 2023/3/28 02:04, Richard Henderson wrote:
+>>> On 3/27/23 03:00, Weiwei Li wrote:
+>>>> @@ -1248,6 +1265,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr 
+>>>> address, int size,
+>>>>       qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d 
+>>>> mmu_idx %d\n",
+>>>>                     __func__, address, access_type, mmu_idx);
+>>>>   +    if (access_type == MMU_INST_FETCH) {
+>>>> +        address = adjust_pc_address(env, address);
+>>>> +    }
+>>>
+>>> Why do you want to do this so late, as opposed to earlier in 
+>>> cpu_get_tb_cpu_state?
+>>
+>> In this way, the pc for tb may be different from the reg pc. 
+> I don't understand.
+>> Then the pc register will be wrong if sync from tb.
 >
-> On 2023/3/27 18:00, Weiwei Li wrote:
->> Currently, the pc use signed-extend(in gen_set_pc*) when xl = 32. And
->> data address should use the same memory address space with it when
->> xl = 32. So we should change their address calculation to use sign-extended
->> address when xl = 32.
+> I think you should give an explain here why it is wrong.
 >
-> Incorrect. PC sign-extend is mandated by the spec. It can be seen for 
-> gdb or the OS. But for the memory address for xl = 32, it's the qemu 
-> internal implementation.
->
-Yeah, there is no spec description for the memory address for xlen = 32. 
-But it seems  easier to use the original (sign-extended) pc in this case.
+> Zhiwei
 
-We needn't cut the pc in cpu_get_tb_cpu_state and sign-extend it in 
-riscv_cpu_synchronize_from_tb.
+Assume the pc is 0x1fff 0000, pmmask is 0xf000 0000, if we adjust pc in  
+cpu_get_tb_cpu_state,
+
+then the tb->pc will be 0x0fff 0000.
+
+If we sync pc from tb by riscv_cpu_synchronize_from_tb()
+
+Then the pc will be updated to 0x0fff 0000 in this case, which will 
+different from the original value.
+
+I ignore many internal steps in above case. Any critical condition I 
+missed? or any misunderstood?
 
 Regards,
 
 Weiwei Li
 
-> We should not to make it too complex.
 >
-> Even for the PC, when fectch instruction, we only use the low 32-bits, 
-> as you can see  from the cpu_get_tb_cpu_state.
->
-> *pc = cpu_get_xl(env) == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
->
-> Zhiwei
->
->> Signed-off-by: Weiwei Li<liweiwei@iscas.ac.cn>
->> Signed-off-by: Junqiang Wang<wangjunqiang@iscas.ac.cn>
->> ---
->>   target/riscv/translate.c | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
 >>
->> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
->> index bf0e2d318e..c48cb19389 100644
->> --- a/target/riscv/translate.c
->> +++ b/target/riscv/translate.c
->> @@ -570,7 +570,7 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
->>       tcg_gen_addi_tl(addr, src1, imm);
->>   
->>       if (get_xl(ctx) == MXL_RV32) {
->> -        tcg_gen_ext32u_tl(addr, addr);
->> +        tcg_gen_ext32s_tl(addr, addr);
->>       }
->>   
->>       if (ctx->pm_mask_enabled) {
->> @@ -592,7 +592,7 @@ static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
->>       tcg_gen_add_tl(addr, src1, offs);
->>   
->>       if (get_xl(ctx) == MXL_RV32) {
->> -        tcg_gen_ext32u_tl(addr, addr);
->> +        tcg_gen_ext32s_tl(addr, addr);
->>       }
->>   
->>       if (ctx->pm_mask_enabled) {
---------------BFQHy7s11fzXel81ofyw15vz
+>> Regards,
+>>
+>> Weiwei Li
+>>
+>>>
+>>>
+>>> r~
+--------------NG9F730OHqaTZgSWil2BTyR3
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -150,79 +145,88 @@ Content-Transfer-Encoding: 8bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2023/3/28 10:14, LIU Zhiwei wrote:<br>
+    <div class="moz-cite-prefix">On 2023/3/28 10:31, LIU Zhiwei wrote:<br>
     </div>
     <blockquote type="cite"
-      cite="mid:821f3122-ea3e-f770-1b88-6b512a22cfbe@linux.alibaba.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <p><br>
-      </p>
-      <div class="moz-cite-prefix">On 2023/3/27 18:00, Weiwei Li wrote:<br>
-      </div>
-      <blockquote type="cite"
-        cite="mid:20230327100027.61160-3-liweiwei@iscas.ac.cn">
-        <pre class="moz-quote-pre" wrap="">Currently, the pc use signed-extend(in gen_set_pc*) when xl = 32. And
-data address should use the same memory address space with it when
-xl = 32. So we should change their address calculation to use sign-extended
-address when xl = 32.</pre>
+      cite="mid:4593f151-8622-7c4e-9e32-1748917a9347@linux.alibaba.com">
+      <br>
+      On 2023/3/28 9:55, liweiwei wrote:
+      <br>
+      <blockquote type="cite">
+        <br>
+        On 2023/3/28 02:04, Richard Henderson wrote:
+        <br>
+        <blockquote type="cite">On 3/27/23 03:00, Weiwei Li wrote:
+          <br>
+          <blockquote type="cite">@@ -1248,6 +1265,10 @@ bool
+            riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+            <br>
+                  qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw
+            %d mmu_idx %d\n",
+            <br>
+                                __func__, address, access_type,
+            mmu_idx);
+            <br>
+              +    if (access_type == MMU_INST_FETCH) {
+            <br>
+            +        address = adjust_pc_address(env, address);
+            <br>
+            +    }
+            <br>
+          </blockquote>
+          <br>
+          Why do you want to do this so late, as opposed to earlier in
+          cpu_get_tb_cpu_state?
+          <br>
+        </blockquote>
+        <br>
+        In this way, the pc for tb may be different from the reg pc. </blockquote>
+      I don't understand.
+      <br>
+      <blockquote type="cite">Then the pc register will be wrong if sync
+        from tb.
+        <br>
       </blockquote>
-      <p>Incorrect. PC sign-extend is mandated by the spec. It can be
-        seen for gdb or the OS. But for the memory address for xl = 32,
-        it's the qemu internal implementation.</p>
+      <br>
+      I think you should give an explain here why it is wrong.
+      <br>
+      <br>
+      Zhiwei
+      <br>
     </blockquote>
-    <p>Yeah, there is no spec description for the memory address for
-      xlen = 32. But it seems  easier to use the original
-      (sign-extended) pc in this case.</p>
-    <p>We needn't cut the pc in cpu_get_tb_cpu_state and sign-extend it
-      in <span style="color: #000000;">riscv_cpu_synchronize_from_tb.</span></p>
-    <p><span style="color: #000000;">Regards,</span></p>
-    <p><span style="color: #000000;">Weiwei Li<br>
-      </span></p>
+    <p>Assume the pc is 0x1fff 0000, pmmask is 0xf000 0000, if we adjust
+      pc in  cpu_get_tb_cpu_state,</p>
+    <p>then the tb-&gt;pc will be 0x0fff 0000.</p>
+    <p>If we sync pc from tb by <span style="color: #000000;">riscv_cpu_synchronize_from_tb()</span></p>
+    <p><span style="color: #000000;">Then the pc will be updated to </span>0x0fff
+      0000 in this case, which will different from the original value.</p>
+    <p>I ignore many internal steps in above case. Any critical
+      condition I missed? or any misunderstood?</p>
+    <p>Regards,</p>
+    <p>Weiwei Li<br>
+      <span style="color: #000000;"></span></p>
     <blockquote type="cite"
-      cite="mid:821f3122-ea3e-f770-1b88-6b512a22cfbe@linux.alibaba.com">
-      <p>We should not to make it too complex.</p>
-      <p>Even for the PC, when fectch instruction, we only use the low
-        32-bits, as you can see  from the cpu_get_tb_cpu_state.</p>
-      <pre>*pc = cpu_get_xl(env) == MXL_RV32 ? env-&gt;pc &amp; UINT32_MAX : env-&gt;pc;
-</pre>
-      <p>Zhiwei<br>
-      </p>
-      <blockquote type="cite"
-        cite="mid:20230327100027.61160-3-liweiwei@iscas.ac.cn">
-        <pre class="moz-quote-pre" wrap="">Signed-off-by: Weiwei Li <a class="moz-txt-link-rfc2396E" href="mailto:liweiwei@iscas.ac.cn" moz-do-not-send="true">&lt;liweiwei@iscas.ac.cn&gt;</a>
-Signed-off-by: Junqiang Wang <a class="moz-txt-link-rfc2396E" href="mailto:wangjunqiang@iscas.ac.cn" moz-do-not-send="true">&lt;wangjunqiang@iscas.ac.cn&gt;</a>
----
- target/riscv/translate.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index bf0e2d318e..c48cb19389 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -570,7 +570,7 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
-     tcg_gen_addi_tl(addr, src1, imm);
- 
-     if (get_xl(ctx) == MXL_RV32) {
--        tcg_gen_ext32u_tl(addr, addr);
-+        tcg_gen_ext32s_tl(addr, addr);
-     }
- 
-     if (ctx-&gt;pm_mask_enabled) {
-@@ -592,7 +592,7 @@ static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
-     tcg_gen_add_tl(addr, src1, offs);
- 
-     if (get_xl(ctx) == MXL_RV32) {
--        tcg_gen_ext32u_tl(addr, addr);
-+        tcg_gen_ext32s_tl(addr, addr);
-     }
- 
-     if (ctx-&gt;pm_mask_enabled) {
-</pre>
+      cite="mid:4593f151-8622-7c4e-9e32-1748917a9347@linux.alibaba.com">
+      <br>
+      <blockquote type="cite">
+        <br>
+        Regards,
+        <br>
+        <br>
+        Weiwei Li
+        <br>
+        <br>
+        <blockquote type="cite">
+          <br>
+          <br>
+          r~
+          <br>
+        </blockquote>
       </blockquote>
     </blockquote>
   </body>
 </html>
 
---------------BFQHy7s11fzXel81ofyw15vz--
+--------------NG9F730OHqaTZgSWil2BTyR3--
 
 
