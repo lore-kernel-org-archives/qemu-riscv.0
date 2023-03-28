@@ -1,48 +1,156 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgxvc-0001CL-0p
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 21:15:12 -0400
+	id 1pgy2j-0002ZB-By
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 21:22:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pgxva-0001C0-Ky; Mon, 27 Mar 2023 21:15:10 -0400
-Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
+ (Exim 4.90_1) (envelope-from <fei2.wu@intel.com>)
+ id 1pgy2h-0002Yj-Lg; Mon, 27 Mar 2023 21:22:31 -0400
+Received: from mga17.intel.com ([192.55.52.151])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pgxvW-0004CB-8j; Mon, 27 Mar 2023 21:15:10 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0VeqwS0T_1679966094; 
-Received: from 30.221.98.176(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VeqwS0T_1679966094) by smtp.aliyun-inc.com;
- Tue, 28 Mar 2023 09:14:55 +0800
-Message-ID: <6a2cca4d-73a1-169d-feef-6e4418550056@linux.alibaba.com>
-Date: Tue, 28 Mar 2023 09:14:52 +0800
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <fei2.wu@intel.com>)
+ id 1pgy2e-0007MO-IP; Mon, 27 Mar 2023 21:22:31 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1679966548; x=1711502548;
+ h=message-id:date:subject:to:cc:references:from:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=1bMobXm2apqWGlF7jSNrdZHNLTuvUpmXHiDR4uJ/XcA=;
+ b=D3t9jZu3AlTsa4jIXu6UdwxG2yNgwf488Ik7Ru/p4N3OShZTEwuJCrtM
+ y6gkJPGwBU6L8/GXsyOjaEpB7a19cwvLG8OySSScR+YpwuDZoXZPLwsYv
+ VWyfNvNkgHazKaWnMbXA5QFmnVGf6uvz18YWfkTxFVPUYU6sA24d5mJIU
+ 1RonSu09O77vPA/gsyRlDF0QnLBfDVW0CWfduWxhPGTxCPZMFNBAo6rdR
+ M5fa0jbN/u32x97WYpJcdoa5Qf4wobuYbHasQXNaOFN/ZXcg2Q/ObpEVr
+ ECo8xJBaSkhxtizEBNmu905Kc2fUYOD8i/mJc52D+hipQJPop0FFCgtvH Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10662"; a="320838975"
+X-IronPort-AV: E=Sophos;i="5.98,295,1673942400"; d="scan'208";a="320838975"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+ by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 27 Mar 2023 18:22:14 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10662"; a="772940268"
+X-IronPort-AV: E=Sophos;i="5.98,295,1673942400"; d="scan'208";a="772940268"
+Received: from fmsmsx601.amr.corp.intel.com ([10.18.126.81])
+ by FMSMGA003.fm.intel.com with ESMTP; 27 Mar 2023 18:22:14 -0700
+Received: from fmsmsx612.amr.corp.intel.com (10.18.126.92) by
+ fmsmsx601.amr.corp.intel.com (10.18.126.81) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21; Mon, 27 Mar 2023 18:22:13 -0700
+Received: from FMSEDG603.ED.cps.intel.com (10.1.192.133) by
+ fmsmsx612.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21 via Frontend Transport; Mon, 27 Mar 2023 18:22:13 -0700
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com (104.47.74.45) by
+ edgegateway.intel.com (192.55.55.68) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.21; Mon, 27 Mar 2023 18:22:13 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YqfmugSH1f0seJwIkGJw/SBoBZYDd6SA+1ABMbGHaoTTOLgbNPKWL1BKESchRnza+S7999e8nS8khbmRY0Mw6LofaBpObr3UJ8LtatWtLwaHm7Y34x7JL+rTbTZu+qy+DIxPwHUKKPbG7EpWdyXI9DVDsK01hOFVdSB7eMUys5eoWlxgJSiZggdE2jGP6L1k3QjUb70GsUBHfvVdLOyW/2cujc1sKT25PHkwqsgPAfa48Dd2/2cB+97Qg9+mtgwtlpxoBcVSuizElXClmqHUlmrqpCvN1qI3ZTxYg9Sw+fFjzUj2ep1c0IwsJqhOx7cTCEtyHN0aYugn+zx1myxNxw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5nsh4LyhVriOWXTVgBksXsEl7EEH9T2a/9tslaIh4NI=;
+ b=QMM1TmzkiVRxQrsYVKrkcSn1QcH+qI4zM5ov4TfUWEuMB61B3nsVES6RzYdjSSNq/ABnuYFVrKxPMRxh5tBYbsz3tIrt9l3YD8bL38k+tVQ1jud6QKiKcFz55RbQtbSIzUbNHX8MvKVD/nW8HWTmdmfELjMWHrqp/t5cj0C5JV9hlzlfi8wkujWmrE7LtwwQo6gePtZ0EJyeIvfeRVNJ3dPW7jHHDfO2saJ1Gs4GKU8IIlcZHbXNQ/KD/n/VUrrsRSOqHdl0m8mHQ71JVC/7p4R4kRSbTj1NJ6mbQqR185y6cNUwEIw6NLLEV3lfdfOsRI70YF6F8HlWVcYag3aOGA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from BY5PR11MB4500.namprd11.prod.outlook.com (2603:10b6:a03:1c3::24)
+ by PH0PR11MB5128.namprd11.prod.outlook.com (2603:10b6:510:39::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6222.29; Tue, 28 Mar
+ 2023 01:22:11 +0000
+Received: from BY5PR11MB4500.namprd11.prod.outlook.com
+ ([fe80::cf58:e1db:41d4:ee3f]) by BY5PR11MB4500.namprd11.prod.outlook.com
+ ([fe80::cf58:e1db:41d4:ee3f%6]) with mapi id 15.20.6222.030; Tue, 28 Mar 2023
+ 01:22:11 +0000
+Message-ID: <74eaedfd-73ca-002c-f6bd-6b74628ef5ba@intel.com>
+Date: Tue, 28 Mar 2023 09:22:01 +0800
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: [PATCH v2 06/10] target/riscv: Remove riscv_cpu_virt_enabled()
-To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230327080858.39703-1-liweiwei@iscas.ac.cn>
- <20230327080858.39703-7-liweiwei@iscas.ac.cn>
+Subject: Re: [PATCH v6 00/25] target/riscv: MSTATUS_SUM + cleanups
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Richard Henderson
+ <richard.henderson@linaro.org>, <qemu-devel@nongnu.org>
+CC: <qemu-riscv@nongnu.org>, <alistair.francis@wdc.com>, <palmer@dabbelt.com>, 
+ <zhiwei_liu@linux.alibaba.com>
+References: <20230325105429.1142530-1-richard.henderson@linaro.org>
+ <e36dba97-c182-c427-e051-2a8d1cfe96a8@ventanamicro.com>
 Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230327080858.39703-7-liweiwei@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.124;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-124.freemail.mail.aliyun.com
-X-Spam_score_int: -98
-X-Spam_score: -9.9
-X-Spam_bar: ---------
-X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+From: "Wu, Fei" <fei2.wu@intel.com>
+In-Reply-To: <e36dba97-c182-c427-e051-2a8d1cfe96a8@ventanamicro.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SG2PR01CA0169.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:28::25) To BY5PR11MB4500.namprd11.prod.outlook.com
+ (2603:10b6:a03:1c3::24)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY5PR11MB4500:EE_|PH0PR11MB5128:EE_
+X-MS-Office365-Filtering-Correlation-Id: 590d3cd2-4634-461c-2809-08db2f2adafa
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 2K13qu+WdBELxVAXspuhOeDz2Duonu+wMlAamFqGAn9gxcL+zqv1VL11t3AGB2X5JiLmWYK7GaHgCPq7/lJxOVGh97vCqz/P6Rvg2MG4X+eJUCGFX69+yn5ARgvkl9UgSkE6vzPN4DoR3kYA6ySPr3momenXwexex/Tgd5nHnwD1QFrgQdcp5H9ZBgdmBn4E/kh9jpPr6z/phbVV9RsNY9B05D3wUjvMtHDa6lpgLITcHjXW11oBlQWfVi0Qu8tqwO1TPtmrIy8jjLPg7bRU1PkpfjYoYHLeYWaQMo4pTtmu+bbU7TJgt6QvFaHvUoLB1YjYyaDYMV4MQLUOa4MGFYZSfr8tsuNvzS0tEzW00T3TH4PgscX9b7FhNSb4U1lQfBZ/jFqhlaNOiayC0P0pR7udKZpLTxRiU7+mPGAwwCgOwfZQiTPxF5j4uE0F3tO8ZbiP2hiqMnYoYW3oJSGUvdgWN9f2iewIqBlCoJHdF+Bz4FGbxPQJlmuuhba88RPgLJx3uZ21HfkvWesQzSMAKbahhgso+ztEt8g0MpawW2RJlTpvfqaFpblbzPteBjpHxn8nqghI9uGtkI9/Aq6i8NaWNzH2ZagmCZcTLLcU95jDJuWWt5eurka58xdQbDG/A7rm1qy26mTvm/Sx1WtVaw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BY5PR11MB4500.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230028)(346002)(366004)(39860400002)(396003)(376002)(136003)(451199021)(31686004)(2616005)(83380400001)(41300700001)(31696002)(36756003)(86362001)(5660300002)(38100700002)(8936002)(6486002)(82960400001)(478600001)(8676002)(66946007)(66556008)(4326008)(2906002)(66476007)(6512007)(53546011)(6666004)(6506007)(316002)(186003)(26005)(110136005)(45980500001)(43740500002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QzNCbWJJckhPQU9hLzZ6M3kvY05YbGZFZnF1aUFyWXJtcDBrb1RXNlRxNkFM?=
+ =?utf-8?B?dXN0WHBXNm1YQmpOcE9CWkpKK0pORzY2VEdJL2FJcXkvUk5VQ1V6MWNmdDRT?=
+ =?utf-8?B?UlFUcVRXVkRJTjJjK0JQc0ZwSnl3NEc4T3ltcGZNSVRVcys1NEFZSlZxL2ta?=
+ =?utf-8?B?Z21TNno5RXluQ3RNQXEwdXpXODV0U0R1OVVuMkc1WFNhaXJQZGYwVUNCM3h4?=
+ =?utf-8?B?VlN0aDIwd0R2ZC9jYjJGb0xja3RwNWVBcktMRDBqOXZTVHJlZXgzQW5yck1u?=
+ =?utf-8?B?RWg4MGpRR3lmRjBDaE4zVjliOUV5dGxOUUY2L3V2cW9jNHQwcEJ1eWkwWnJn?=
+ =?utf-8?B?eFNWV1JWRk0rYmtEeUR6NVQwTkdqQ3RpTjhKbHFILzRacm8vOEVaNVU4a0JJ?=
+ =?utf-8?B?MVZBRHRaS291RUkyQXJkeUJlV01NVUJCdlZCR0tqQWdNeUxaOXdjK1VSQlRF?=
+ =?utf-8?B?YWV0dGMwQVFqUDBEQWZSNEh5bWIvTXBmVU81TDJvL1VBODhSMTdDM3pJamVG?=
+ =?utf-8?B?QlJtVXNFcXRXbkwxMVl5K1I1OUxRWEhRWUlSS0VYeUo0RzY4K3V0bU55VEF2?=
+ =?utf-8?B?ZGNJUG1oNFZUd0ttR2RzbkRWOTBpVnZuNURKTExoSFVnYzltcDg5NmVIVXFL?=
+ =?utf-8?B?dWE0cDZBUzNqQXRrcE5HUUptYVpYYS81RFRvN01kZnAzeE5ZYUpWY1l1VDVi?=
+ =?utf-8?B?bmE0aW5FeGlQbUZYWDdCYWJJbVFQdTJyc1Vvd0o5L25SOU1zVDBLbG0wUExZ?=
+ =?utf-8?B?TS9obkJSTTZpbE1qNkNhb1ZTNEJsc0F4RHhiVXdCZWN1YWFPUVV2alJlNTVi?=
+ =?utf-8?B?WDFFRXUvd0EwQlI0aVM5dm9CNW5wci9DVmpYclZqREJSUGFNZHJWNVpCK0kr?=
+ =?utf-8?B?dlZPZ2hGa1JYQVpXbGxSVGhsTUI2TWt3QjVCMXNQaGVLMGhlQWtBL2dqVGRo?=
+ =?utf-8?B?UjJaZkJNb1l3Wnpmc3dJV0U0Z0o2NjRUMlRFMXROcFRza2MwQVo3SmNObG4y?=
+ =?utf-8?B?em9MR0pEY3ZlZm9OZVVrQWdOZWc4aUx2ZnRFSTFXRmFaa2phajJhcmt5K0RZ?=
+ =?utf-8?B?ZGZGeXl0Y0ZlQnFjemREU2g3bk1MVjZiWm1FNmtLS0s5bGdTc2toMWZ2aFVy?=
+ =?utf-8?B?dEZiTk5HQ2pUb1N6UWZWNlVld0xmbU1DcnAzYkN4YjdpZFdhSzI3MFRKMERr?=
+ =?utf-8?B?M09ZV05rOWRtcTF2U24vZTdQRUVhdm5VNjNqbUt2Qko0NHMzVnFJcGhmWTVE?=
+ =?utf-8?B?cDFHeTc2Y0VmRjhmSnovcDZwNDhob1hKOHUwdXcyWXQwb0svNmROL3dzNGx4?=
+ =?utf-8?B?SjVDTlF0eG5wSFhTSklFUi9FNGtWbm5ZQUU2dkZ4SWQyT1k5ZVJKVUNnMTRh?=
+ =?utf-8?B?T1V5M2gvNkFkQTJFb1lDNVFlaDJmUjZuMU5GWmdPcUk0eTI2UEFvMFlFL2lX?=
+ =?utf-8?B?eTNNcWF5ZE5MbGo5UGxiVElBSWhubWRYdGVLeEpzOFdSTEtxVDFBR2xlblhk?=
+ =?utf-8?B?bUs3cXNZMGU4NEFYNEQ2dTM4R2RLbE5GQ0pEbWRueVQxMkFiK1pHTStMNXBM?=
+ =?utf-8?B?anJJeVphYndpMW1tMk5WQllUd2JQazFiZjg4QXJuSHI0Z09RVzdONlVPZFhT?=
+ =?utf-8?B?UW5nMWNIcTBVTmJrcGlMQmZJUnhhYXM1SmRMNmhxUjR0OS9lRzdYVEJwRmUr?=
+ =?utf-8?B?OTNqdTdNdGlIYjBrS0IvckcyRm52TThWY0VFazFlQVRwSy8zc2U2a0MvNWFy?=
+ =?utf-8?B?OVloaW4vQ25ZV0VPcGVVbHZlVTVrSllIWmh6SXpCa0Y2TnJmMWRJNGI5NmR5?=
+ =?utf-8?B?NExhby9vNVVSRkFOUWRpaHVtdjluMFNwSUNvanlrS2Z1MFNPeDhRVUl3OWRm?=
+ =?utf-8?B?M01NSEoxd1RLL0VEVE9UbGk2K21VUW5uSlVDTGMwU1VaMXA0a0wrVm82OGF0?=
+ =?utf-8?B?NWRhSkU4akh3K3dlUjlnS25tQmo0U2ViSVRzNCs2NWl6cGx5aEN6WlZZMy9P?=
+ =?utf-8?B?V3A4aGI3d3NtanBoUGNzcG1KbmYrM2tkRHAwelcyaHBoK0ZTaUptUHN6Y3pO?=
+ =?utf-8?B?akY5cUpIT2tJbW9SQjZVN3pIMGtBcTRnRkFSWnBhbFpjODB5S0djSnl1RXUr?=
+ =?utf-8?Q?9F0yG/x7qb8YeT1rkNTgF2dlf?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 590d3cd2-4634-461c-2809-08db2f2adafa
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR11MB4500.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Mar 2023 01:22:11.4734 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tWCTYAyVjPDITkKBoON3d+tgVfWqnbhVG6fjgFdBoTfT4GvNgGCRzhgPP5+sapf91vUulmSPYgMXPzKCvgTi/w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR11MB5128
+X-OriginatorOrg: intel.com
+Received-SPF: pass client-ip=192.55.52.151; envelope-from=fei2.wu@intel.com;
+ helo=mga17.intel.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -55,620 +163,97 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Mar 2023 01:15:11 -0000
+X-List-Received-Date: Tue, 28 Mar 2023 01:22:32 -0000
 
+On 3/28/2023 12:43 AM, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 3/25/23 07:54, Richard Henderson wrote:
+>> This builds on Fei and Zhiwei's SUM and TB_FLAGS changes.
+>>
+>>    * Reclaim 5 TB_FLAGS bits, since we nearly ran out.
+>>
+>>    * Using cpu_mmu_index(env, true) is insufficient to implement
+>>      HLVX properly.  While that chooses the correct mmu_idx, it
+>>      does not perform the read with execute permission.
+>>      I add a new tcg interface to perform a read-for-execute with
+>>      an arbitrary mmu_idx.  This is still not 100% compliant, but
+>>      it's closer.
+>>
+>>    * Handle mstatus.MPV in cpu_mmu_index.
+>>    * Use vsstatus.SUM when required for MMUIdx_S_SUM.
+>>    * Cleanups for get_physical_address.
+>>
+>> While this passes check-avocado, I'm sure that's insufficient.
+>> Please have a close look.
+> 
+> Tested fine in my end with some buildroot tests and 'stress-ng' in a 'virt'
+> machine with Ubuntu.
+> 
+> Tested-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> 
+Great. I suppose class 'os' in stress-ng should see performance boost too.
 
-On 2023/3/27 16:08, Weiwei Li wrote:
-> Directly use env->virt_enabled instead.
->
-> Suggested-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> ---
->   target/riscv/cpu.c        |  2 +-
->   target/riscv/cpu.h        |  1 -
->   target/riscv/cpu_helper.c | 51 ++++++++++++++++++---------------------
->   target/riscv/csr.c        | 46 +++++++++++++++++------------------
->   target/riscv/debug.c      | 10 ++++----
->   target/riscv/op_helper.c  | 18 +++++++-------
->   target/riscv/pmu.c        |  4 +--
->   target/riscv/translate.c  |  2 +-
->   8 files changed, 64 insertions(+), 70 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 16e465a0ab..e71b4d24a7 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -549,7 +549,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
->   
->   #if !defined(CONFIG_USER_ONLY)
->       if (riscv_has_ext(env, RVH)) {
-> -        qemu_fprintf(f, " %s %d\n", "V      =  ", riscv_cpu_virt_enabled(env));
-> +        qemu_fprintf(f, " %s %d\n", "V      =  ", env->virt_enabled);
->       }
->   #endif
->       qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "pc      ", env->pc);
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 22dc5ddb95..dc9817b40d 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -576,7 +576,6 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env);
->   target_ulong riscv_cpu_get_geilen(CPURISCVState *env);
->   void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen);
->   bool riscv_cpu_vector_enabled(CPURISCVState *env);
-> -bool riscv_cpu_virt_enabled(CPURISCVState *env);
->   void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
->   bool riscv_cpu_two_stage_lookup(int mmu_idx);
->   int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index c7bc3fc553..1ad39e7157 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -93,8 +93,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->   
->       if (riscv_has_ext(env, RVH)) {
->           if (env->priv == PRV_M ||
-> -            (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
-> -            (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
-> +            (env->priv == PRV_S && !env->virt_enabled) ||
-> +            (env->priv == PRV_U && !env->virt_enabled &&
->                   get_field(env->hstatus, HSTATUS_HU))) {
->               flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
->           }
-> @@ -391,7 +391,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
->       uint64_t irqs, pending, mie, hsie, vsie;
->   
->       /* Determine interrupt enable state of all privilege modes */
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           mie = 1;
->           hsie = 1;
->           vsie = (env->priv < PRV_S) ||
-> @@ -452,7 +452,7 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
->   bool riscv_cpu_fp_enabled(CPURISCVState *env)
->   {
->       if (env->mstatus & MSTATUS_FS) {
-> -        if (riscv_cpu_virt_enabled(env) && !(env->mstatus_hs & MSTATUS_FS)) {
-> +        if (env->virt_enabled && !(env->mstatus_hs & MSTATUS_FS)) {
->               return false;
->           }
->           return true;
-> @@ -465,7 +465,7 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env)
->   bool riscv_cpu_vector_enabled(CPURISCVState *env)
->   {
->       if (env->mstatus & MSTATUS_VS) {
-> -        if (riscv_cpu_virt_enabled(env) && !(env->mstatus_hs & MSTATUS_VS)) {
-> +        if (env->virt_enabled && !(env->mstatus_hs & MSTATUS_VS)) {
->               return false;
->           }
->           return true;
-> @@ -483,7 +483,7 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
->       if (riscv_has_ext(env, RVF)) {
->           mstatus_mask |= MSTATUS_FS;
->       }
-> -    bool current_virt = riscv_cpu_virt_enabled(env);
-> +    bool current_virt = env->virt_enabled;
->   
->       g_assert(riscv_has_ext(env, RVH));
->   
-> @@ -558,11 +558,6 @@ void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen)
->       env->geilen = geilen;
->   }
->   
-> -bool riscv_cpu_virt_enabled(CPURISCVState *env)
-> -{
-> -    return env->virt_enabled;
-> -}
+btw, Is there any public URL for us to check QEMU regressions and
+performance data?
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Thanks,
+Fei.
 
-Zhiwei
+>>
+>>
+>> r~
+>>
+>>
+>> Fei Wu (2):
+>>    target/riscv: Separate priv from mmu_idx
+>>    target/riscv: Reduce overhead of MSTATUS_SUM change
+>>
+>> LIU Zhiwei (4):
+>>    target/riscv: Extract virt enabled state from tb flags
+>>    target/riscv: Add a general status enum for extensions
+>>    target/riscv: Encode the FS and VS on a normal way for tb flags
+>>    target/riscv: Add a tb flags field for vstart
+>>
+>> Richard Henderson (19):
+>>    target/riscv: Remove mstatus_hs_{fs,vs} from tb_flags
+>>    accel/tcg: Add cpu_ld*_code_mmu
+>>    target/riscv: Use cpu_ld*_code_mmu for HLVX
+>>    target/riscv: Handle HLV, HSV via helpers
+>>    target/riscv: Rename MMU_HYP_ACCESS_BIT to MMU_2STAGE_BIT
+>>    target/riscv: Introduce mmuidx_sum
+>>    target/riscv: Introduce mmuidx_priv
+>>    target/riscv: Introduce mmuidx_2stage
+>>    target/riscv: Move hstatus.spvp check to check_access_hlsv
+>>    target/riscv: Set MMU_2STAGE_BIT in riscv_cpu_mmu_index
+>>    target/riscv: Check SUM in the correct register
+>>    target/riscv: Hoist second stage mode change to callers
+>>    target/riscv: Hoist pbmte and hade out of the level loop
+>>    target/riscv: Move leaf pte processing out of level loop
+>>    target/riscv: Suppress pte update with is_debug
+>>    target/riscv: Don't modify SUM with is_debug
+>>    target/riscv: Merge checks for reserved pte flags
+>>    target/riscv: Reorg access check in get_physical_address
+>>    target/riscv: Reorg sum check in get_physical_address
+>>
+>>   include/exec/cpu_ldst.h                       |   9 +
+>>   target/riscv/cpu.h                            |  47 ++-
+>>   target/riscv/cpu_bits.h                       |  12 +-
+>>   target/riscv/helper.h                         |  12 +-
+>>   target/riscv/internals.h                      |  35 ++
+>>   accel/tcg/cputlb.c                            |  48 +++
+>>   accel/tcg/user-exec.c                         |  58 +++
+>>   target/riscv/cpu.c                            |   2 +-
+>>   target/riscv/cpu_helper.c                     | 393 +++++++++---------
+>>   target/riscv/csr.c                            |  21 +-
+>>   target/riscv/op_helper.c                      | 113 ++++-
+>>   target/riscv/translate.c                      |  72 ++--
+>>   .../riscv/insn_trans/trans_privileged.c.inc   |   2 +-
+>>   target/riscv/insn_trans/trans_rvf.c.inc       |   2 +-
+>>   target/riscv/insn_trans/trans_rvh.c.inc       | 135 +++---
+>>   target/riscv/insn_trans/trans_rvv.c.inc       |  22 +-
+>>   target/riscv/insn_trans/trans_xthead.c.inc    |   7 +-
+>>   17 files changed, 595 insertions(+), 395 deletions(-)
+>>
 
-> -
->   /* This function can only be called to set virt when RVH is enabled */
->   void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
->   {
-> @@ -609,7 +604,7 @@ uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask,
->       CPUState *cs = env_cpu(env);
->       uint64_t gein, vsgein = 0, vstip = 0, old = env->mip;
->   
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           gein = get_field(env->hstatus, HSTATUS_VGEIN);
->           vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
->       }
-> @@ -768,7 +763,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->        * was called. Background registers will be used if the guest has
->        * forced a two stage translation to be on (in HS or M mode).
->        */
-> -    if (!riscv_cpu_virt_enabled(env) && two_stage) {
-> +    if (!env->virt_enabled && two_stage) {
->           use_background = true;
->       }
->   
-> @@ -931,7 +926,7 @@ restart:
->           bool pbmte = env->menvcfg & MENVCFG_PBMTE;
->           bool hade = env->menvcfg & MENVCFG_HADE;
->   
-> -        if (first_stage && two_stage && riscv_cpu_virt_enabled(env)) {
-> +        if (first_stage && two_stage && env->virt_enabled) {
->               pbmte = pbmte && (env->henvcfg & HENVCFG_PBMTE);
->               hade = hade && (env->henvcfg & HENVCFG_HADE);
->           }
-> @@ -1091,7 +1086,7 @@ static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
->   
->       switch (access_type) {
->       case MMU_INST_FETCH:
-> -        if (riscv_cpu_virt_enabled(env) && !first_stage) {
-> +        if (env->virt_enabled && !first_stage) {
->               cs->exception_index = RISCV_EXCP_INST_GUEST_PAGE_FAULT;
->           } else {
->               cs->exception_index = page_fault_exceptions ?
-> @@ -1131,11 +1126,11 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
->       int mmu_idx = cpu_mmu_index(&cpu->env, false);
->   
->       if (get_physical_address(env, &phys_addr, &prot, addr, NULL, 0, mmu_idx,
-> -                             true, riscv_cpu_virt_enabled(env), true)) {
-> +                             true, env->virt_enabled, true)) {
->           return -1;
->       }
->   
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           if (get_physical_address(env, &phys_addr, &prot, phys_addr, NULL,
->                                    0, mmu_idx, false, true, true)) {
->               return -1;
-> @@ -1163,7 +1158,7 @@ void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
->       }
->   
->       env->badaddr = addr;
-> -    env->two_stage_lookup = riscv_cpu_virt_enabled(env) ||
-> +    env->two_stage_lookup = env->virt_enabled ||
->                               riscv_cpu_two_stage_lookup(mmu_idx);
->       env->two_stage_indirect_lookup = false;
->       cpu_loop_exit_restore(cs, retaddr);
-> @@ -1189,7 +1184,7 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
->           g_assert_not_reached();
->       }
->       env->badaddr = addr;
-> -    env->two_stage_lookup = riscv_cpu_virt_enabled(env) ||
-> +    env->two_stage_lookup = env->virt_enabled ||
->                               riscv_cpu_two_stage_lookup(mmu_idx);
->       env->two_stage_indirect_lookup = false;
->       cpu_loop_exit_restore(cs, retaddr);
-> @@ -1253,7 +1248,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->       }
->   
->       pmu_tlb_fill_incr_ctr(cpu, access_type);
-> -    if (riscv_cpu_virt_enabled(env) ||
-> +    if (env->virt_enabled ||
->           ((riscv_cpu_two_stage_lookup(mmu_idx) || two_stage_lookup) &&
->            access_type != MMU_INST_FETCH)) {
->           /* Two stage lookup */
-> @@ -1351,7 +1346,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->       } else {
->           raise_mmu_exception(env, address, access_type, pmp_violation,
->                               first_stage_error,
-> -                            riscv_cpu_virt_enabled(env) ||
-> +                            env->virt_enabled ||
->                                   riscv_cpu_two_stage_lookup(mmu_idx),
->                               two_stage_indirect_error);
->           cpu_loop_exit_restore(cs, retaddr);
-> @@ -1658,9 +1653,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->   
->               if (env->priv == PRV_M) {
->                   cause = RISCV_EXCP_M_ECALL;
-> -            } else if (env->priv == PRV_S && riscv_cpu_virt_enabled(env)) {
-> +            } else if (env->priv == PRV_S && env->virt_enabled) {
->                   cause = RISCV_EXCP_VS_ECALL;
-> -            } else if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) {
-> +            } else if (env->priv == PRV_S && !env->virt_enabled) {
->                   cause = RISCV_EXCP_S_ECALL;
->               } else if (env->priv == PRV_U) {
->                   cause = RISCV_EXCP_U_ECALL;
-> @@ -1683,7 +1678,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->           if (riscv_has_ext(env, RVH)) {
->               uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
->   
-> -            if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1)) {
-> +            if (env->virt_enabled && ((hdeleg >> cause) & 1)) {
->                   /* Trap to VS mode */
->                   /*
->                    * See if we need to adjust cause. Yes if its VS mode interrupt
-> @@ -1694,7 +1689,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->                       cause = cause - 1;
->                   }
->                   write_gva = false;
-> -            } else if (riscv_cpu_virt_enabled(env)) {
-> +            } else if (env->virt_enabled) {
->                   /* Trap into HS mode, from virt */
->                   riscv_cpu_swap_hypervisor_regs(env);
->                   env->hstatus = set_field(env->hstatus, HSTATUS_SPVP,
-> @@ -1728,12 +1723,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->       } else {
->           /* handle the trap in M-mode */
->           if (riscv_has_ext(env, RVH)) {
-> -            if (riscv_cpu_virt_enabled(env)) {
-> +            if (env->virt_enabled) {
->                   riscv_cpu_swap_hypervisor_regs(env);
->               }
->               env->mstatus = set_field(env->mstatus, MSTATUS_MPV,
-> -                                     riscv_cpu_virt_enabled(env));
-> -            if (riscv_cpu_virt_enabled(env) && tval) {
-> +                                     env->virt_enabled);
-> +            if (env->virt_enabled && tval) {
->                   env->mstatus = set_field(env->mstatus, MSTATUS_GVA, 1);
->               }
->   
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 8f4d5eb13f..4ccd5dbfb5 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -46,7 +46,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
->   static RISCVException smstateen_acc_ok(CPURISCVState *env, int index,
->                                          uint64_t bit)
->   {
-> -    bool virt = riscv_cpu_virt_enabled(env);
-> +    bool virt = env->virt_enabled;
->   
->       if (env->priv == PRV_M || !riscv_cpu_cfg(env)->ext_smstateen) {
->           return RISCV_EXCP_NONE;
-> @@ -136,7 +136,7 @@ skip_ext_pmu_check:
->           return RISCV_EXCP_ILLEGAL_INST;
->       }
->   
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           if (!get_field(env->hcounteren, ctr_mask) ||
->               (env->priv == PRV_U && !get_field(env->scounteren, ctr_mask))) {
->               return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> @@ -350,7 +350,7 @@ static RISCVException hstateenh(CPURISCVState *env, int csrno)
->   
->   static RISCVException sstateen(CPURISCVState *env, int csrno)
->   {
-> -    bool virt = riscv_cpu_virt_enabled(env);
-> +    bool virt = env->virt_enabled;
->       int index = csrno - CSR_SSTATEEN0;
->   
->       if (!riscv_cpu_cfg(env)->ext_smstateen) {
-> @@ -415,7 +415,7 @@ static RISCVException sstc(CPURISCVState *env, int csrno)
->           return RISCV_EXCP_ILLEGAL_INST;
->       }
->   
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           if (!(get_field(env->hcounteren, COUNTEREN_TM) &&
->                 get_field(env->henvcfg, HENVCFG_STCE))) {
->               return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> @@ -521,7 +521,7 @@ static RISCVException seed(CPURISCVState *env, int csrno)
->        */
->       if (env->priv == PRV_M) {
->           return RISCV_EXCP_NONE;
-> -    } else if (riscv_cpu_virt_enabled(env)) {
-> +    } else if (env->virt_enabled) {
->           if (env->mseccfg & MSECCFG_SSEED) {
->               return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
->           } else {
-> @@ -949,7 +949,7 @@ static int read_scountovf(CPURISCVState *env, int csrno, target_ulong *val)
->   static RISCVException read_time(CPURISCVState *env, int csrno,
->                                   target_ulong *val)
->   {
-> -    uint64_t delta = riscv_cpu_virt_enabled(env) ? env->htimedelta : 0;
-> +    uint64_t delta = env->virt_enabled ? env->htimedelta : 0;
->   
->       if (!env->rdtime_fn) {
->           return RISCV_EXCP_ILLEGAL_INST;
-> @@ -962,7 +962,7 @@ static RISCVException read_time(CPURISCVState *env, int csrno,
->   static RISCVException read_timeh(CPURISCVState *env, int csrno,
->                                    target_ulong *val)
->   {
-> -    uint64_t delta = riscv_cpu_virt_enabled(env) ? env->htimedelta : 0;
-> +    uint64_t delta = env->virt_enabled ? env->htimedelta : 0;
->   
->       if (!env->rdtime_fn) {
->           return RISCV_EXCP_ILLEGAL_INST;
-> @@ -1016,7 +1016,7 @@ static RISCVException write_vstimecmph(CPURISCVState *env, int csrno,
->   static RISCVException read_stimecmp(CPURISCVState *env, int csrno,
->                                       target_ulong *val)
->   {
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           *val = env->vstimecmp;
->       } else {
->           *val = env->stimecmp;
-> @@ -1028,7 +1028,7 @@ static RISCVException read_stimecmp(CPURISCVState *env, int csrno,
->   static RISCVException read_stimecmph(CPURISCVState *env, int csrno,
->                                        target_ulong *val)
->   {
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           *val = env->vstimecmp >> 32;
->       } else {
->           *val = env->stimecmp >> 32;
-> @@ -1040,7 +1040,7 @@ static RISCVException read_stimecmph(CPURISCVState *env, int csrno,
->   static RISCVException write_stimecmp(CPURISCVState *env, int csrno,
->                                        target_ulong val)
->   {
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           if (env->hvictl & HVICTL_VTI) {
->               return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
->           }
-> @@ -1061,7 +1061,7 @@ static RISCVException write_stimecmp(CPURISCVState *env, int csrno,
->   static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
->                                         target_ulong val)
->   {
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           if (env->hvictl & HVICTL_VTI) {
->               return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
->           }
-> @@ -1515,7 +1515,7 @@ static int read_mtopi(CPURISCVState *env, int csrno, target_ulong *val)
->   
->   static int aia_xlate_vs_csrno(CPURISCVState *env, int csrno)
->   {
-> -    if (!riscv_cpu_virt_enabled(env)) {
-> +    if (!env->virt_enabled) {
->           return csrno;
->       }
->   
-> @@ -1672,7 +1672,7 @@ static int rmw_xireg(CPURISCVState *env, int csrno, target_ulong *val,
->   
->   done:
->       if (ret) {
-> -        return (riscv_cpu_virt_enabled(env) && virt) ?
-> +        return (env->virt_enabled && virt) ?
->                  RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
->       }
->       return RISCV_EXCP_NONE;
-> @@ -1726,7 +1726,7 @@ static int rmw_xtopei(CPURISCVState *env, int csrno, target_ulong *val,
->   
->   done:
->       if (ret) {
-> -        return (riscv_cpu_virt_enabled(env) && virt) ?
-> +        return (env->virt_enabled && virt) ?
->                  RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
->       }
->       return RISCV_EXCP_NONE;
-> @@ -2156,7 +2156,7 @@ static RISCVException write_hstateenh_1_3(CPURISCVState *env, int csrno,
->   static RISCVException read_sstateen(CPURISCVState *env, int csrno,
->                                       target_ulong *val)
->   {
-> -    bool virt = riscv_cpu_virt_enabled(env);
-> +    bool virt = env->virt_enabled;
->       int index = csrno - CSR_SSTATEEN0;
->   
->       *val = env->sstateen[index] & env->mstateen[index];
-> @@ -2170,7 +2170,7 @@ static RISCVException read_sstateen(CPURISCVState *env, int csrno,
->   static RISCVException write_sstateen(CPURISCVState *env, int csrno,
->                                        uint64_t mask, target_ulong new_val)
->   {
-> -    bool virt = riscv_cpu_virt_enabled(env);
-> +    bool virt = env->virt_enabled;
->       int index = csrno - CSR_SSTATEEN0;
->       uint64_t wr_mask;
->       uint64_t *reg;
-> @@ -2365,7 +2365,7 @@ static RISCVException rmw_sie64(CPURISCVState *env, int csrno,
->       RISCVException ret;
->       uint64_t mask = env->mideleg & S_MODE_INTERRUPTS;
->   
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           if (env->hvictl & HVICTL_VTI) {
->               return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
->           }
-> @@ -2575,7 +2575,7 @@ static RISCVException rmw_sip64(CPURISCVState *env, int csrno,
->       RISCVException ret;
->       uint64_t mask = env->mideleg & sip_writable_mask;
->   
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           if (env->hvictl & HVICTL_VTI) {
->               return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
->           }
-> @@ -2768,7 +2768,7 @@ static int read_stopi(CPURISCVState *env, int csrno, target_ulong *val)
->       int irq;
->       uint8_t iprio;
->   
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           return read_vstopi(env, CSR_VSTOPI, val);
->       }
->   
-> @@ -3113,7 +3113,7 @@ static int read_hvipriox(CPURISCVState *env, int first_index,
->   
->       /* First index has to be a multiple of number of irqs per register */
->       if (first_index % num_irqs) {
-> -        return (riscv_cpu_virt_enabled(env)) ?
-> +        return (env->virt_enabled) ?
->                  RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
->       }
->   
-> @@ -3139,7 +3139,7 @@ static int write_hvipriox(CPURISCVState *env, int first_index,
->   
->       /* First index has to be a multiple of number of irqs per register */
->       if (first_index % num_irqs) {
-> -        return (riscv_cpu_virt_enabled(env)) ?
-> +        return (env->virt_enabled) ?
->                  RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
->       }
->   
-> @@ -3794,7 +3794,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
->       int csr_priv, effective_priv = env->priv;
->   
->       if (riscv_has_ext(env, RVH) && env->priv == PRV_S &&
-> -        !riscv_cpu_virt_enabled(env)) {
-> +        !env->virt_enabled) {
->           /*
->            * We are in HS mode. Add 1 to the effective privledge level to
->            * allow us to access the Hypervisor CSRs.
-> @@ -3804,7 +3804,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
->   
->       csr_priv = get_field(csrno, 0x300);
->       if (!env->debugger && (effective_priv < csr_priv)) {
-> -        if (csr_priv == (PRV_S + 1) && riscv_cpu_virt_enabled(env)) {
-> +        if (csr_priv == (PRV_S + 1) && env->virt_enabled) {
->               return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
->           }
->           return RISCV_EXCP_ILLEGAL_INST;
-> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index b091293069..1f7aed23c9 100644
-> --- a/target/riscv/debug.c
-> +++ b/target/riscv/debug.c
-> @@ -515,7 +515,7 @@ itrigger_set_count(CPURISCVState *env, int index, int value)
->   static bool check_itrigger_priv(CPURISCVState *env, int index)
->   {
->       target_ulong tdata1 = env->tdata1[index];
-> -    if (riscv_cpu_virt_enabled(env)) {
-> +    if (env->virt_enabled) {
->           /* check VU/VS bit against current privilege level */
->           return (get_field(tdata1, ITRIGGER_VS) == env->priv) ||
->                  (get_field(tdata1, ITRIGGER_VU) == env->priv);
-> @@ -787,7 +787,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
->               switch (trigger_type) {
->               case TRIGGER_TYPE_AD_MATCH:
->                   /* type 2 trigger cannot be fired in VU/VS mode */
-> -                if (riscv_cpu_virt_enabled(env)) {
-> +                if (env->virt_enabled) {
->                       return false;
->                   }
->   
-> @@ -806,7 +806,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
->                   pc = env->tdata2[i];
->   
->                   if ((ctrl & TYPE6_EXEC) && (bp->pc == pc)) {
-> -                    if (riscv_cpu_virt_enabled(env)) {
-> +                    if (env->virt_enabled) {
->                           /* check VU/VS bit against current privilege level */
->                           if ((ctrl >> 23) & BIT(env->priv)) {
->                               return true;
-> @@ -845,7 +845,7 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
->           switch (trigger_type) {
->           case TRIGGER_TYPE_AD_MATCH:
->               /* type 2 trigger cannot be fired in VU/VS mode */
-> -            if (riscv_cpu_virt_enabled(env)) {
-> +            if (env->virt_enabled) {
->                   return false;
->               }
->   
-> @@ -880,7 +880,7 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
->               }
->   
->               if ((wp->flags & flags) && (wp->vaddr == addr)) {
-> -                if (riscv_cpu_virt_enabled(env)) {
-> +                if (env->virt_enabled) {
->                       /* check VU/VS bit against current privilege level */
->                       if ((ctrl >> 23) & BIT(env->priv)) {
->                           return true;
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 1eecae9547..c0c4ced7f0 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -140,7 +140,7 @@ static void check_zicbo_envcfg(CPURISCVState *env, target_ulong envbits,
->           riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
->       }
->   
-> -    if (riscv_cpu_virt_enabled(env) &&
-> +    if (env->virt_enabled &&
->           (((env->priv < PRV_H) && !get_field(env->henvcfg, envbits)) ||
->            ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits)))) {
->           riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, ra);
-> @@ -278,7 +278,7 @@ target_ulong helper_sret(CPURISCVState *env)
->           riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
->       }
->   
-> -    if (riscv_cpu_virt_enabled(env) && get_field(env->hstatus, HSTATUS_VTSR)) {
-> +    if (env->virt_enabled && get_field(env->hstatus, HSTATUS_VTSR)) {
->           riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
->       }
->   
-> @@ -293,7 +293,7 @@ target_ulong helper_sret(CPURISCVState *env)
->       }
->       env->mstatus = mstatus;
->   
-> -    if (riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
-> +    if (riscv_has_ext(env, RVH) && !env->virt_enabled) {
->           /* We support Hypervisor extensions and virtulisation is disabled */
->           target_ulong hstatus = env->hstatus;
->   
-> @@ -365,9 +365,9 @@ void helper_wfi(CPURISCVState *env)
->       bool prv_s = env->priv == PRV_S;
->   
->       if (((prv_s || (!rvs && prv_u)) && get_field(env->mstatus, MSTATUS_TW)) ||
-> -        (rvs && prv_u && !riscv_cpu_virt_enabled(env))) {
-> +        (rvs && prv_u && !env->virt_enabled)) {
->           riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> -    } else if (riscv_cpu_virt_enabled(env) && (prv_u ||
-> +    } else if (env->virt_enabled && (prv_u ||
->           (prv_s && get_field(env->hstatus, HSTATUS_VTW)))) {
->           riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
->       } else {
-> @@ -384,7 +384,7 @@ void helper_tlb_flush(CPURISCVState *env)
->           (env->priv == PRV_S &&
->            get_field(env->mstatus, MSTATUS_TVM))) {
->           riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> -    } else if (riscv_has_ext(env, RVH) && riscv_cpu_virt_enabled(env) &&
-> +    } else if (riscv_has_ext(env, RVH) && env->virt_enabled &&
->                  get_field(env->hstatus, HSTATUS_VTVM)) {
->           riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
->       } else {
-> @@ -402,12 +402,12 @@ void helper_hyp_tlb_flush(CPURISCVState *env)
->   {
->       CPUState *cs = env_cpu(env);
->   
-> -    if (env->priv == PRV_S && riscv_cpu_virt_enabled(env)) {
-> +    if (env->priv == PRV_S && env->virt_enabled) {
->           riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
->       }
->   
->       if (env->priv == PRV_M ||
-> -        (env->priv == PRV_S && !riscv_cpu_virt_enabled(env))) {
-> +        (env->priv == PRV_S && !env->virt_enabled)) {
->           tlb_flush(cs);
->           return;
->       }
-> @@ -417,7 +417,7 @@ void helper_hyp_tlb_flush(CPURISCVState *env)
->   
->   void helper_hyp_gvma_tlb_flush(CPURISCVState *env)
->   {
-> -    if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) &&
-> +    if (env->priv == PRV_S && !env->virt_enabled &&
->           get_field(env->mstatus, MSTATUS_TVM)) {
->           riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
->       }
-> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-> index 22e2283c76..7ad85ab476 100644
-> --- a/target/riscv/pmu.c
-> +++ b/target/riscv/pmu.c
-> @@ -109,7 +109,7 @@ static int riscv_pmu_incr_ctr_rv32(RISCVCPU *cpu, uint32_t ctr_idx)
->       CPURISCVState *env = &cpu->env;
->       target_ulong max_val = UINT32_MAX;
->       PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
-> -    bool virt_on = riscv_cpu_virt_enabled(env);
-> +    bool virt_on = env->virt_enabled;
->   
->       /* Privilege mode filtering */
->       if ((env->priv == PRV_M &&
-> @@ -150,7 +150,7 @@ static int riscv_pmu_incr_ctr_rv64(RISCVCPU *cpu, uint32_t ctr_idx)
->       CPURISCVState *env = &cpu->env;
->       PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
->       uint64_t max_val = UINT64_MAX;
-> -    bool virt_on = riscv_cpu_virt_enabled(env);
-> +    bool virt_on = env->virt_enabled;
->   
->       /* Privilege mode filtering */
->       if ((env->priv == PRV_M &&
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index c3adf30b54..5450efcce5 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -1158,7 +1158,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->       ctx->priv_ver = env->priv_ver;
->   #if !defined(CONFIG_USER_ONLY)
->       if (riscv_has_ext(env, RVH)) {
-> -        ctx->virt_enabled = riscv_cpu_virt_enabled(env);
-> +        ctx->virt_enabled = env->virt_enabled;
->       } else {
->           ctx->virt_enabled = false;
->       }
 
