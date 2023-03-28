@@ -1,48 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgyr9-0002So-Sv
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 22:14:39 -0400
+	id 1pgyxF-0003xB-99
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 22:20:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pgyr8-0002SV-2H; Mon, 27 Mar 2023 22:14:38 -0400
-Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
+ id 1pgyxA-0003p2-D8; Mon, 27 Mar 2023 22:20:55 -0400
+Received: from out30-99.freemail.mail.aliyun.com ([115.124.30.99])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pgyr5-0001U1-Bo; Mon, 27 Mar 2023 22:14:37 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
+ id 1pgyx7-0004rJ-QR; Mon, 27 Mar 2023 22:20:52 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0Ver7R.G_1679969662; 
+ TI=SMTPD_---0Ver0.rz_1679970039; 
 Received: from 30.221.98.176(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0Ver7R.G_1679969662) by smtp.aliyun-inc.com;
- Tue, 28 Mar 2023 10:14:23 +0800
-Content-Type: multipart/alternative;
- boundary="------------iWjV2prEssxD3MLKXec67WsS"
-Message-ID: <821f3122-ea3e-f770-1b88-6b512a22cfbe@linux.alibaba.com>
-Date: Tue, 28 Mar 2023 10:14:20 +0800
+ fp:SMTPD_---0Ver0.rz_1679970039) by smtp.aliyun-inc.com;
+ Tue, 28 Mar 2023 10:20:40 +0800
+Message-ID: <c0abfb39-56a7-a184-f134-bcb075908f57@linux.alibaba.com>
+Date: Tue, 28 Mar 2023 10:20:37 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: [PATCH 2/5] target/riscv: Use sign-extended data address when xl
- = 32
+Subject: Re: [PATCH 1/5] target/riscv: Fix effective address for pointer mask
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20230327100027.61160-1-liweiwei@iscas.ac.cn>
- <20230327100027.61160-3-liweiwei@iscas.ac.cn>
+ <20230327100027.61160-2-liweiwei@iscas.ac.cn>
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230327100027.61160-3-liweiwei@iscas.ac.cn>
-Received-SPF: pass client-ip=115.124.30.110;
+In-Reply-To: <20230327100027.61160-2-liweiwei@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.30.99;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-110.freemail.mail.aliyun.com
+ helo=out30-99.freemail.mail.aliyun.com
 X-Spam_score_int: -98
 X-Spam_score: -9.9
 X-Spam_bar: ---------
 X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- HTML_MESSAGE=0.001, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ NICE_REPLY_A=-0.001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
  USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -56,128 +55,78 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Mar 2023 02:14:38 -0000
-
-This is a multi-part message in MIME format.
---------------iWjV2prEssxD3MLKXec67WsS
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 28 Mar 2023 02:20:55 -0000
 
 
 On 2023/3/27 18:00, Weiwei Li wrote:
-> Currently, the pc use signed-extend(in gen_set_pc*) when xl = 32. And
-> data address should use the same memory address space with it when
-> xl = 32. So we should change their address calculation to use sign-extended
-> address when xl = 32.
+> Since pointer mask works on effective address, and the xl works on the
+> generation of effective address, so xl related calculation should be done
+> before pointer mask.
 
-Incorrect. PC sign-extend is mandated by the spec. It can be seen for 
-gdb or the OS. But for the memory address for xl = 32, it's the qemu 
-internal implementation.
+Incorrect. It has been done.
 
-We should not to make it too complex.
+When updating the pm_mask,  we have already considered the env->xl.
 
-Even for the PC, when fectch instruction, we only use the low 32-bits, 
-as you can see  from the cpu_get_tb_cpu_state.
+You can see it in riscv_cpu_update_mask
 
-*pc = cpu_get_xl(env) == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
+     if (env->xl == MXL_RV32) {
+         env->cur_pmmask = mask & UINT32_MAX;
+         env->cur_pmbase = base & UINT32_MAX;
+     } else {
+         env->cur_pmmask = mask;
+         env->cur_pmbase = base;
+     }
+
+>
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> ---
+>   target/riscv/translate.c | 16 ++++++++++++----
+>   1 file changed, 12 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 0ee8ee147d..bf0e2d318e 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -568,11 +568,15 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
+>       TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
+>   
+>       tcg_gen_addi_tl(addr, src1, imm);
+> +
+> +    if (get_xl(ctx) == MXL_RV32) {
+> +        tcg_gen_ext32u_tl(addr, addr);
+> +    }
+> +
+>       if (ctx->pm_mask_enabled) {
+>           tcg_gen_andc_tl(addr, addr, pm_mask);
+> -    } else if (get_xl(ctx) == MXL_RV32) {
+> -        tcg_gen_ext32u_tl(addr, addr);
+>       }
+
+The else is processing when only xl works, and the pm_mask doesn't work.
 
 Zhiwei
 
->
-> Signed-off-by: Weiwei Li<liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang<wangjunqiang@iscas.ac.cn>
-> ---
->   target/riscv/translate.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index bf0e2d318e..c48cb19389 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -570,7 +570,7 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
->       tcg_gen_addi_tl(addr, src1, imm);
->   
->       if (get_xl(ctx) == MXL_RV32) {
-> -        tcg_gen_ext32u_tl(addr, addr);
-> +        tcg_gen_ext32s_tl(addr, addr);
+> +
+>       if (ctx->pm_base_enabled) {
+>           tcg_gen_or_tl(addr, addr, pm_base);
 >       }
+> @@ -586,11 +590,15 @@ static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
+>       TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
 >   
->       if (ctx->pm_mask_enabled) {
-> @@ -592,7 +592,7 @@ static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
 >       tcg_gen_add_tl(addr, src1, offs);
->   
->       if (get_xl(ctx) == MXL_RV32) {
-> -        tcg_gen_ext32u_tl(addr, addr);
-> +        tcg_gen_ext32s_tl(addr, addr);
->       }
->   
+> +
+> +    if (get_xl(ctx) == MXL_RV32) {
+> +        tcg_gen_ext32u_tl(addr, addr);
+> +    }
+> +
 >       if (ctx->pm_mask_enabled) {
---------------iWjV2prEssxD3MLKXec67WsS
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2023/3/27 18:00, Weiwei Li wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:20230327100027.61160-3-liweiwei@iscas.ac.cn">
-      <pre class="moz-quote-pre" wrap="">Currently, the pc use signed-extend(in gen_set_pc*) when xl = 32. And
-data address should use the same memory address space with it when
-xl = 32. So we should change their address calculation to use sign-extended
-address when xl = 32.</pre>
-    </blockquote>
-    <p>Incorrect. PC sign-extend is mandated by the spec. It can be seen
-      for gdb or the OS. But for the memory address for xl = 32, it's
-      the qemu internal implementation.</p>
-    <p>We should not to make it too complex.</p>
-    <p>Even for the PC, when fectch instruction, we only use the low
-      32-bits, as you can see  from the cpu_get_tb_cpu_state.</p>
-    <pre>*pc = cpu_get_xl(env) == MXL_RV32 ? env-&gt;pc &amp; UINT32_MAX : env-&gt;pc;
-</pre>
-    <p>Zhiwei<br>
-    </p>
-    <blockquote type="cite"
-      cite="mid:20230327100027.61160-3-liweiwei@iscas.ac.cn">
-      <pre class="moz-quote-pre" wrap="">
-
-Signed-off-by: Weiwei Li <a class="moz-txt-link-rfc2396E" href="mailto:liweiwei@iscas.ac.cn">&lt;liweiwei@iscas.ac.cn&gt;</a>
-Signed-off-by: Junqiang Wang <a class="moz-txt-link-rfc2396E" href="mailto:wangjunqiang@iscas.ac.cn">&lt;wangjunqiang@iscas.ac.cn&gt;</a>
----
- target/riscv/translate.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index bf0e2d318e..c48cb19389 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -570,7 +570,7 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
-     tcg_gen_addi_tl(addr, src1, imm);
- 
-     if (get_xl(ctx) == MXL_RV32) {
--        tcg_gen_ext32u_tl(addr, addr);
-+        tcg_gen_ext32s_tl(addr, addr);
-     }
- 
-     if (ctx-&gt;pm_mask_enabled) {
-@@ -592,7 +592,7 @@ static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
-     tcg_gen_add_tl(addr, src1, offs);
- 
-     if (get_xl(ctx) == MXL_RV32) {
--        tcg_gen_ext32u_tl(addr, addr);
-+        tcg_gen_ext32s_tl(addr, addr);
-     }
- 
-     if (ctx-&gt;pm_mask_enabled) {
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------iWjV2prEssxD3MLKXec67WsS--
+>           tcg_gen_andc_tl(addr, addr, pm_mask);
+> -    } else if (get_xl(ctx) == MXL_RV32) {
+> -        tcg_gen_ext32u_tl(addr, addr);
+>       }
+> +
+>       if (ctx->pm_base_enabled) {
+>           tcg_gen_or_tl(addr, addr, pm_base);
+>       }
 
