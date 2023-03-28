@@ -1,67 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ph6XG-0003hJ-HF
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Mar 2023 06:26:38 -0400
+	id 1ph7BF-0003ke-70
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Mar 2023 07:07:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ph6XE-0003gn-51; Tue, 28 Mar 2023 06:26:36 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ph6XB-0000Nz-DD; Tue, 28 Mar 2023 06:26:35 -0400
-Received: from [192.168.0.120] (unknown [180.175.29.170])
- by APP-05 (Coremail) with SMTP id zQCowADHzzPMwCJksq0_Cw--.13818S2;
- Tue, 28 Mar 2023 18:26:22 +0800 (CST)
-Content-Type: multipart/alternative;
- boundary="------------sKQNYS42uoaTnKs6ua4TRT6v"
-Message-ID: <c0537d04-58d3-f445-686e-1be96ec95610@iscas.ac.cn>
-Date: Tue, 28 Mar 2023 18:26:20 +0800
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1ph7BD-0003kE-CF
+ for qemu-riscv@nongnu.org; Tue, 28 Mar 2023 07:07:55 -0400
+Received: from mail-qt1-x82c.google.com ([2607:f8b0:4864:20::82c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1ph7BB-0002FU-7O
+ for qemu-riscv@nongnu.org; Tue, 28 Mar 2023 07:07:54 -0400
+Received: by mail-qt1-x82c.google.com with SMTP id cj15so3986240qtb.5
+ for <qemu-riscv@nongnu.org>; Tue, 28 Mar 2023 04:07:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1680001671;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=i2OWo9GIHX+02Cbm4JmUor6P4E16Az7/7HFBGm2zQAk=;
+ b=Nyv0klUMC4GRMlhwF81uhwtqnSqd24I3Km93moGglkqRg+7CmTl0k8CwxbOiodlFti
+ h0rSfGNK4yR4sPvSmjGXWgqbZUhnG4e+HxJspGkPWy2GnUHybwQaV56hFDcIQimRgEv5
+ tbcnf3KaDA+uKRTMucOqfijxEqu5eroSoyf+upzrPGEP4GRVE1lwy4tofQA8/Fuxs9T8
+ lRTWd+PUp68T+l1P1wYS7U12OlLNt9FeyYDNcdMBWj28iPWzPbDZifUyfhvvn1NAGV85
+ DL+1G7YKcw2jzTR0j06X3x+eVL6lTsp4sgJdYHt2U/PU2oTLQDe7bbrKleBaWja47GG1
+ rHNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1680001671;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=i2OWo9GIHX+02Cbm4JmUor6P4E16Az7/7HFBGm2zQAk=;
+ b=Skl29j2dcE2QJDStZqz+5eRQZJXSq7gxOIOs7x2XjDlRdzxlE7AtNaQD4McyisNotC
+ cWMlwBQOkO9ZO2z+VGAWagD9rUTKvjlgYOb/9X3y0tc0ES3DgoIBfjAjAX9h9t5dwov/
+ DR8Kr+/cbtvGQMZDUgl4xO0JgxVWop1vG673qVJY+VWZp1nyMUd0Nm6Um7k1dcb4oD0H
+ X7yfFD5ILro6ciZLIeJzevIpEGM2R0EW4ULvOm8mgEDNV1Isr9sHyInn5r24P7rp6Jz7
+ bRMjqMGLvgFg+AnrCHh9TrliwcDQyCeaIih0lDpY2jdlsu7pO9gPhYEQBpHroAdgQ/Kp
+ cjdg==
+X-Gm-Message-State: AAQBX9cPVRnUAmCaGQaSqn5CkJp65QZkCiaknIa4jV3KREa7ER5XzuiY
+ 5WABH9uRw6y37GDbXhPpt2LZkmUC1jeZb8atL8PU6w==
+X-Google-Smtp-Source: AK7set8k22tHNRJmLP4XMWpf8dXfu5Retly723b3vTkIZ9NSSLF7l16qBm1qVJGRi+MjQDPYUrEZL+tuIZrwOJ70m0U=
+X-Received: by 2002:ac8:5744:0:b0:3e0:c4ac:1620 with SMTP id
+ 4-20020ac85744000000b003e0c4ac1620mr5771868qtx.13.1680001671614; Tue, 28 Mar
+ 2023 04:07:51 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Cc: liweiwei@iscas.ac.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn,
- lazyparser@gmail.com
-Subject: Re: [PATCH 1/5] target/riscv: Fix effective address for pointer mask
-Content-Language: en-US
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-References: <20230327100027.61160-1-liweiwei@iscas.ac.cn>
- <20230327100027.61160-2-liweiwei@iscas.ac.cn>
- <c0abfb39-56a7-a184-f134-bcb075908f57@linux.alibaba.com>
- <c1b60f5e-5bb8-5462-ae93-7813da4269bb@iscas.ac.cn>
- <389e5dd1-12fc-8b71-8e6a-74db1179fa47@linaro.org>
- <04639827-2706-69d8-56d9-5e278742168d@iscas.ac.cn>
- <241a90ec-b183-78d2-f2ba-9317cbad01dc@linux.alibaba.com>
-From: liweiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <241a90ec-b183-78d2-f2ba-9317cbad01dc@linux.alibaba.com>
-X-CM-TRANSID: zQCowADHzzPMwCJksq0_Cw--.13818S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZF1UCrW3CF1DZFyUtF1DZFb_yoW8Gw1xpr
- WrCr4FkrW0qwnakFZrJr1DXFy3GrykA3W7X34jka4UAry5Jw1Fvw10vrZ09rWv9r4IvrW2
- va1YqrWUZF1DZ37anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvC14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487McIj6xIIjxv20xvE14v26r1j6r18McIj6I8E
- 87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lF7I21c0EjI
- I2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04v7Mx8GjcxK6IxK0xIIj40E5I8C
- rwCYjI0SjxkI62AI1cAE67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r
- 1j6r4UMI8I3I0E5I8CrVAFwI0_JrI_JrWlx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CE
- b7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0x
- vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAI
- cVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2Kf
- nxnUUI43ZEXa7VU1g4S7UUUUU==
-X-Originating-IP: [180.175.29.170]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+References: <20221016124726.102129-1-mchitale@ventanamicro.com>
+ <20221016124726.102129-5-mchitale@ventanamicro.com>
+ <CAKmqyKO+HQ7dtGQwaJFG481vkyMfX-tXrux2rmrGkfAz54dBbQ@mail.gmail.com>
+ <3efb804f-4a3a-758e-fb4a-543e10271045@iscas.ac.cn>
+In-Reply-To: <3efb804f-4a3a-758e-fb4a-543e10271045@iscas.ac.cn>
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+Date: Tue, 28 Mar 2023 16:37:15 +0530
+Message-ID: <CAN37VV5b_wdty4ob1D4tjGe6r96CuzdYYurvi=AyqG0EhsSgzg@mail.gmail.com>
+Subject: Re: [PATCH v11 4/5] target/riscv: smstateen check for fcsr
+To: liweiwei <liweiwei@iscas.ac.cn>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ Alistair Francis <alistair23@gmail.com>,
+ Daniel Barboza <dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::82c;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-qt1-x82c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -75,174 +80,139 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Mar 2023 10:26:36 -0000
+X-List-Received-Date: Tue, 28 Mar 2023 11:07:55 -0000
 
-This is a multi-part message in MIME format.
---------------sKQNYS42uoaTnKs6ua4TRT6v
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-
-On 2023/3/28 15:25, LIU Zhiwei wrote:
+On Fri, Mar 24, 2023 at 7:01=E2=80=AFPM liweiwei <liweiwei@iscas.ac.cn> wro=
+te:
 >
 >
-> On 2023/3/28 11:33, liweiwei wrote:
->>
->>
->> On 2023/3/28 11:18, Richard Henderson wrote:
->>> On 3/27/23 19:48, liweiwei wrote:
->>>>
->>>> On 2023/3/28 10:20, LIU Zhiwei wrote:
->>>>>
->>>>> On 2023/3/27 18:00, Weiwei Li wrote:
->>>>>> Since pointer mask works on effective address, and the xl works 
->>>>>> on the
->>>>>> generation of effective address, so xl related calculation should 
->>>>>> be done
->>>>>> before pointer mask.
->>>>>
->>>>> Incorrect. It has been done.
->>>>>
->>>>> When updating the pm_mask,  we have already considered the env->xl.
->>>>>
->>>>> You can see it in riscv_cpu_update_mask
->>>>>
->>>>>     if (env->xl == MXL_RV32) {
->>>>>         env->cur_pmmask = mask & UINT32_MAX;
->>>>>         env->cur_pmbase = base & UINT32_MAX;
->>>>>     } else {
->>>>>         env->cur_pmmask = mask;
->>>>>         env->cur_pmbase = base;
->>>>>     }
->>>>>
->>>> Yeah, I missed this part. Then we should ensure cur_pmmask/base is 
->>>> updated when xl changes.
->>>
->>> Is that even possible?  XL can change on priv level changes (SXL, UXL).
->>
->> Yeah. Not possible, since only UXL is changable currently, and 
->> SXL/UXL can only be changed in higher priv level.
->>
->> So the recompute for xl in write_mstatus() seems redundant.
->>
-> I think you are almost right. But as we allow write XL field when in 
-> debug mode, we seemly also need call this function for it.
+> On 2022/11/21 07:35, Alistair Francis wrote:
+> > On Sun, Oct 16, 2022 at 11:09 PM Mayuresh Chitale
+> > <mchitale@ventanamicro.com> wrote:
+> >> If smstateen is implemented and sstateen0.fcsr is clear then the float=
+ing point
+> >> operations must return illegal instruction exception or virtual instru=
+ction
+> >> trap, if relevant.
+> >>
+> >> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> >> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> >> ---
+> >>   target/riscv/csr.c                        | 23 ++++++++++++
+> >>   target/riscv/insn_trans/trans_rvf.c.inc   | 43 +++++++++++++++++++++=
+--
+> >>   target/riscv/insn_trans/trans_rvzfh.c.inc | 12 +++++++
+> >>   3 files changed, 75 insertions(+), 3 deletions(-)
+> >>
+> >> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> >> index 71236f2b5d..8b25f885ec 100644
+> >> --- a/target/riscv/csr.c
+> >> +++ b/target/riscv/csr.c
+> >> @@ -84,6 +84,10 @@ static RISCVException fs(CPURISCVState *env, int cs=
+rno)
+> >>           !RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
+> >>           return RISCV_EXCP_ILLEGAL_INST;
+> >>       }
+> >> +
+> >> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> >> +        return smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR);
+> >> +    }
+> >>   #endif
+> >>       return RISCV_EXCP_NONE;
+> >>   }
+> >> @@ -2023,6 +2027,9 @@ static RISCVException write_mstateen0(CPURISCVSt=
+ate *env, int csrno,
+> >>                                         target_ulong new_val)
+> >>   {
+> >>       uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> >> +    if (!riscv_has_ext(env, RVF)) {
+> >> +        wr_mask |=3D SMSTATEEN0_FCSR;
+> >> +    }
+> >>
+> >>       return write_mstateen(env, csrno, wr_mask, new_val);
+> >>   }
+> >> @@ -2059,6 +2066,10 @@ static RISCVException write_mstateen0h(CPURISCV=
+State *env, int csrno,
+> >>   {
+> >>       uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> >>
+> >> +    if (!riscv_has_ext(env, RVF)) {
+> >> +        wr_mask |=3D SMSTATEEN0_FCSR;
+> >> +    }
+> >> +
+> >>       return write_mstateenh(env, csrno, wr_mask, new_val);
+> >>   }
+> >>
+> >> @@ -2096,6 +2107,10 @@ static RISCVException write_hstateen0(CPURISCVS=
+tate *env, int csrno,
+> >>   {
+> >>       uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> >>
+> >> +    if (!riscv_has_ext(env, RVF)) {
+> >> +        wr_mask |=3D SMSTATEEN0_FCSR;
+> >> +    }
+> >> +
+> >>       return write_hstateen(env, csrno, wr_mask, new_val);
+> >>   }
+> >>
+> >> @@ -2135,6 +2150,10 @@ static RISCVException write_hstateen0h(CPURISCV=
+State *env, int csrno,
+> >>   {
+> >>       uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> >>
+> >> +    if (!riscv_has_ext(env, RVF)) {
+> >> +        wr_mask |=3D SMSTATEEN0_FCSR;
+> >> +    }
+> >> +
+> >>       return write_hstateenh(env, csrno, wr_mask, new_val);
+> >>   }
+> >>
+> >> @@ -2182,6 +2201,10 @@ static RISCVException write_sstateen0(CPURISCVS=
+tate *env, int csrno,
+> >>   {
+> >>       uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> >>
+> >> +    if (!riscv_has_ext(env, RVF)) {
+> >> +        wr_mask |=3D SMSTATEEN0_FCSR;
+> >> +    }
+> >> +
+> >>       return write_sstateen(env, csrno, wr_mask, new_val);
+> >>   }
+> >>
+> >> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/in=
+sn_trans/trans_rvf.c.inc
+> >> index a1d3eb52ad..93657680c6 100644
+> >> --- a/target/riscv/insn_trans/trans_rvf.c.inc
+> >> +++ b/target/riscv/insn_trans/trans_rvf.c.inc
+> >> @@ -24,9 +24,46 @@
+> >>               return false; \
+> >>   } while (0)
+> >>
+> >> -#define REQUIRE_ZFINX_OR_F(ctx) do {\
+> >> -    if (!ctx->cfg_ptr->ext_zfinx) { \
+> >> -        REQUIRE_EXT(ctx, RVF); \
+> >> +#ifndef CONFIG_USER_ONLY
+> >> +static inline bool smstateen_fcsr_check(DisasContext *ctx, int index)
+> >> +{
+> >> +    CPUState *cpu =3D ctx->cs;
+> >> +    CPURISCVState *env =3D cpu->env_ptr;
+> >> +    uint64_t stateen =3D env->mstateen[index];
+> > Sorry I missed this the first time around. You can't access env here
+> >
+> > Richard pointed it out here:
+> > https://patchwork.kernel.org/project/qemu-devel/patch/20221117070316.58=
+447-8-liweiwei@iscas.ac.cn/#25095773
+> >
+> > I'm going to drop this patch and patch v5
+> >
+> > Alistair
 >
-Then,  cur_pmbase/mask also need update in this case.
-
-Weiwei Li
-
-> Zhiwei
+> Hi, Any new updates for the last two patches after they were dropped?
 >
->> Maybe there is a way to change current xl in future if misa.mxl is 
->> changable.
->>
->> Regards,
->>
->> Weiwei Li
->>
->>>
->>>
->>> r~
---------------sKQNYS42uoaTnKs6ua4TRT6v
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2023/3/28 15:25, LIU Zhiwei wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:241a90ec-b183-78d2-f2ba-9317cbad01dc@linux.alibaba.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <p><br>
-      </p>
-      <div class="moz-cite-prefix">On 2023/3/28 11:33, liweiwei wrote:<br>
-      </div>
-      <blockquote type="cite"
-        cite="mid:04639827-2706-69d8-56d9-5e278742168d@iscas.ac.cn">
-        <meta http-equiv="Content-Type" content="text/html;
-          charset=UTF-8">
-        <p><br>
-        </p>
-        <div class="moz-cite-prefix">On 2023/3/28 11:18, Richard
-          Henderson wrote:<br>
-        </div>
-        <blockquote type="cite"
-          cite="mid:389e5dd1-12fc-8b71-8e6a-74db1179fa47@linaro.org">On
-          3/27/23 19:48, liweiwei wrote: <br>
-          <blockquote type="cite"> <br>
-            On 2023/3/28 10:20, LIU Zhiwei wrote: <br>
-            <blockquote type="cite"> <br>
-              On 2023/3/27 18:00, Weiwei Li wrote: <br>
-              <blockquote type="cite">Since pointer mask works on
-                effective address, and the xl works on the <br>
-                generation of effective address, so xl related
-                calculation should be done <br>
-                before pointer mask. <br>
-              </blockquote>
-              <br>
-              Incorrect. It has been done. <br>
-              <br>
-              When updating the pm_mask,  we have already considered the
-              env-&gt;xl. <br>
-              <br>
-              You can see it in riscv_cpu_update_mask <br>
-              <br>
-                  if (env-&gt;xl == MXL_RV32) { <br>
-                      env-&gt;cur_pmmask = mask &amp; UINT32_MAX; <br>
-                      env-&gt;cur_pmbase = base &amp; UINT32_MAX; <br>
-                  } else { <br>
-                      env-&gt;cur_pmmask = mask; <br>
-                      env-&gt;cur_pmbase = base; <br>
-                  } <br>
-              <br>
-            </blockquote>
-            Yeah, I missed this part. Then we should ensure
-            cur_pmmask/base is updated when xl changes. <br>
-          </blockquote>
-          <br>
-          Is that even possible?  XL can change on priv level changes
-          (SXL, UXL). <br>
-        </blockquote>
-        <p>Yeah. Not possible, since only UXL is changable currently,
-          and SXL/UXL can only be changed in higher priv level.</p>
-        <p>So the recompute for xl in <span style="color: #000000;">write_mstatus()
-            seems redundant.</span></p>
-      </blockquote>
-      <p>I think you are almost right. But as we allow write XL field
-        when in debug mode, we seemly also need call this function for
-        it.</p>
-    </blockquote>
-    <p>Then,  cur_pmbase/mask also need update in this case.</p>
-    <p>Weiwei Li<br>
-    </p>
-    <blockquote type="cite"
-      cite="mid:241a90ec-b183-78d2-f2ba-9317cbad01dc@linux.alibaba.com">
-      <p>Zhiwei<br>
-      </p>
-      <blockquote type="cite"
-        cite="mid:04639827-2706-69d8-56d9-5e278742168d@iscas.ac.cn">
-        <p><span style="color: #000000;">Maybe there is a way to change
-            current xl in future if misa.mxl is changable.</span></p>
-        <p><span style="color: #000000;">Regards,</span></p>
-        <p><span style="color: #000000;">Weiwei Li<br>
-          </span></p>
-        <blockquote type="cite"
-          cite="mid:389e5dd1-12fc-8b71-8e6a-74db1179fa47@linaro.org"> <br>
-          <br>
-          r~ <br>
-        </blockquote>
-      </blockquote>
-    </blockquote>
-  </body>
-</html>
-
---------------sKQNYS42uoaTnKs6ua4TRT6v--
-
+> Regards,
+>
+> Weiwei Li
+>
+Looks like I missed the original comments from Richard and Alistair. I
+am not yet clear how to implement it but I am looking into it.
 
