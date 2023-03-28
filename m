@@ -1,40 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pgzFJ-0001gF-9A
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 22:39:38 -0400
+	id 1pgzHV-0002mK-Of
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Mar 2023 22:41:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pgzFG-0001fu-GP; Mon, 27 Mar 2023 22:39:34 -0400
-Received: from out30-118.freemail.mail.aliyun.com ([115.124.30.118])
+ id 1pgzHP-0002lc-OW; Mon, 27 Mar 2023 22:41:47 -0400
+Received: from out30-100.freemail.mail.aliyun.com ([115.124.30.100])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pgzFD-00026P-9s; Mon, 27 Mar 2023 22:39:33 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
+ id 1pgzHN-0007NC-HJ; Mon, 27 Mar 2023 22:41:47 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R911e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=6; SR=0;
- TI=SMTPD_---0VerC7Ab_1679971163; 
+ TI=SMTPD_---0VerEK-s_1679971299; 
 Received: from 30.221.98.176(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VerC7Ab_1679971163) by smtp.aliyun-inc.com;
- Tue, 28 Mar 2023 10:39:24 +0800
-Message-ID: <0e7256b8-03e6-c65b-d916-954d6dbc8754@linux.alibaba.com>
-Date: Tue, 28 Mar 2023 10:39:21 +0800
+ fp:SMTPD_---0VerEK-s_1679971299) by smtp.aliyun-inc.com;
+ Tue, 28 Mar 2023 10:41:40 +0800
+Message-ID: <bd61fc0f-b491-934d-7288-64326b047823@linux.alibaba.com>
+Date: Tue, 28 Mar 2023 10:41:37 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: [PATCH v6 06/25] target/riscv: Separate priv from mmu_idx
+Subject: Re: [PATCH v6 07/25] target/riscv: Reduce overhead of MSTATUS_SUM
+ change
 Content-Language: en-US
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, palmer@dabbelt.com,
  fei2.wu@intel.com
 References: <20230325105429.1142530-1-richard.henderson@linaro.org>
- <20230325105429.1142530-7-richard.henderson@linaro.org>
+ <20230325105429.1142530-8-richard.henderson@linaro.org>
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230325105429.1142530-7-richard.henderson@linaro.org>
+In-Reply-To: <20230325105429.1142530-8-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.118;
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.30.100;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
+ helo=out30-100.freemail.mail.aliyun.com
 X-Spam_score_int: -98
 X-Spam_score: -9.9
 X-Spam_bar: ---------
@@ -54,130 +55,183 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Mar 2023 02:39:35 -0000
+X-List-Received-Date: Tue, 28 Mar 2023 02:41:48 -0000
 
 
 On 2023/3/25 18:54, Richard Henderson wrote:
 > From: Fei Wu <fei2.wu@intel.com>
 >
-> Currently it's assumed the 2 low bits of mmu_idx map to privilege mode,
-> this assumption won't last as we are about to add more mmu_idx. Here an
-> individual priv field is added into TB_FLAGS.
+> Kernel needs to access user mode memory e.g. during syscalls, the window
+> is usually opened up for a very limited time through MSTATUS.SUM, the
+> overhead is too much if tlb_flush() gets called for every SUM change.
+>
+> This patch creates a separate MMU index for S+SUM, so that it's not
+> necessary to flush tlb anymore when SUM changes. This is similar to how
+> ARM handles Privileged Access Never (PAN).
+>
+> Result of 'pipe 10' from unixbench boosts from 223656 to 1705006. Many
+> other syscalls benefit a lot from this too.
 >
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > Signed-off-by: Fei Wu <fei2.wu@intel.com>
-> Message-Id: <20230324054154.414846-2-fei2.wu@intel.com>
+> Message-Id: <20230324054154.414846-3-fei2.wu@intel.com>
 > ---
->   target/riscv/cpu.h                             | 2 +-
->   target/riscv/cpu_helper.c                      | 4 +++-
->   target/riscv/translate.c                       | 2 ++
->   target/riscv/insn_trans/trans_privileged.c.inc | 2 +-
->   target/riscv/insn_trans/trans_xthead.c.inc     | 7 +------
->   5 files changed, 8 insertions(+), 9 deletions(-)
+>   target/riscv/cpu.h                      |  2 --
+>   target/riscv/internals.h                | 14 ++++++++++++++
+>   target/riscv/cpu_helper.c               | 17 +++++++++++++++--
+>   target/riscv/csr.c                      |  3 +--
+>   target/riscv/op_helper.c                |  5 +++--
+>   target/riscv/insn_trans/trans_rvh.c.inc |  4 ++--
+>   6 files changed, 35 insertions(+), 10 deletions(-)
 >
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 86a82e25dc..3e59dbb3fd 100644
+> index 3e59dbb3fd..5e589db106 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -631,7 +631,6 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *env,
+> @@ -631,8 +631,6 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *env,
 >   target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
 >   void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
 >   
-> -#define TB_FLAGS_PRIV_MMU_MASK                3
->   #define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
->   
+> -#define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
+> -
 >   #include "exec/cpu-all.h"
-> @@ -658,6 +657,7 @@ FIELD(TB_FLAGS, ITRIGGER, 22, 1)
->   /* Virtual mode enabled */
->   FIELD(TB_FLAGS, VIRT_ENABLED, 23, 1)
->   FIELD(TB_FLAGS, VSTART_EQ_ZERO, 24, 1)
-> +FIELD(TB_FLAGS, PRIV, 25, 2)
-Though I am not prefer this.  It is acceptable as the other patches will 
-explicitly encode the mem_index in tb flags.
-After that, this is necessary.
 >   
->   #ifdef TARGET_RISCV32
->   #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 4f0999d50b..5753126c7a 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -83,6 +83,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->       fs = EXT_STATUS_DIRTY;
->       vs = EXT_STATUS_DIRTY;
->   #else
-> +    flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
-> +
->       flags |= cpu_mmu_index(env, 0);
->       fs = get_field(env->mstatus, MSTATUS_FS);
->       vs = get_field(env->mstatus, MSTATUS_VS);
-> @@ -764,7 +766,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->        * (riscv_cpu_do_interrupt) is correct */
->       MemTxResult res;
->       MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
-> -    int mode = mmu_idx & TB_FLAGS_PRIV_MMU_MASK;
-> +    int mode = env->priv;
->       bool use_background = false;
->       hwaddr ppn;
->       RISCVCPU *cpu = env_archcpu(env);
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index f8c077525c..abfc152553 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -67,6 +67,7 @@ typedef struct DisasContext {
->       RISCVExtStatus mstatus_fs;
->       RISCVExtStatus mstatus_vs;
->       uint32_t mem_idx;
-> +    uint32_t priv;
->       /* Remember the rounding mode encoded in the previous fp instruction,
->          which we have already installed into env->fp_status.  Or -1 for
->          no previous fp instruction.  Note that we exit the TB when writing
-> @@ -1140,6 +1141,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->       uint32_t tb_flags = ctx->base.tb->flags;
+>   FIELD(TB_FLAGS, MEM_IDX, 0, 3)
+> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+> index 5620fbffb6..b55152a7dc 100644
+> --- a/target/riscv/internals.h
+> +++ b/target/riscv/internals.h
+> @@ -21,6 +21,20 @@
 >   
->       ctx->pc_succ_insn = ctx->base.pc_first;
-> +    ctx->priv = FIELD_EX32(tb_flags, TB_FLAGS, PRIV);
->       ctx->mem_idx = FIELD_EX32(tb_flags, TB_FLAGS, MEM_IDX);
->       ctx->mstatus_fs = FIELD_EX32(tb_flags, TB_FLAGS, FS);
->       ctx->mstatus_vs = FIELD_EX32(tb_flags, TB_FLAGS, VS);
-> diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
-> index 59501b2780..9305b18299 100644
-> --- a/target/riscv/insn_trans/trans_privileged.c.inc
-> +++ b/target/riscv/insn_trans/trans_privileged.c.inc
-> @@ -52,7 +52,7 @@ static bool trans_ebreak(DisasContext *ctx, arg_ebreak *a)
->        * that no exception will be raised when fetching them.
->        */
+>   #include "hw/registerfields.h"
 >   
-> -    if (semihosting_enabled(ctx->mem_idx < PRV_S) &&
-> +    if (semihosting_enabled(ctx->priv < PRV_S) &&
->           (pre_addr & TARGET_PAGE_MASK) == (post_addr & TARGET_PAGE_MASK)) {
->           pre    = opcode_at(&ctx->base, pre_addr);
->           ebreak = opcode_at(&ctx->base, ebreak_addr);
-> diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
-> index df504c3f2c..adfb53cb4c 100644
-> --- a/target/riscv/insn_trans/trans_xthead.c.inc
-> +++ b/target/riscv/insn_trans/trans_xthead.c.inc
-> @@ -265,12 +265,7 @@ static bool trans_th_tst(DisasContext *ctx, arg_th_tst *a)
->   
->   static inline int priv_level(DisasContext *ctx)
->   {
-> -#ifdef CONFIG_USER_ONLY
-> -    return PRV_U;
-> -#else
-> -     /* Priv level is part of mem_idx. */
-> -    return ctx->mem_idx & TB_FLAGS_PRIV_MMU_MASK;
-> -#endif
-> +    return ctx->priv;
->   }
-
-Could you  remove the priv_level and use ctx->priv directly in this file
-
-Otherwise,
+> +/*
+> + * The current MMU Modes are:
+> + *  - U                 0b000
+> + *  - S                 0b001
+> + *  - S+SUM             0b010
+> + *  - M                 0b011
+> + *  - HLV/HLVX/HSV adds 0b100
 
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Zhiwei
 
+> + */
+> +#define MMUIdx_U            0
+> +#define MMUIdx_S            1
+> +#define MMUIdx_S_SUM        2
+> +#define MMUIdx_M            3
+> +#define MMU_HYP_ACCESS_BIT  (1 << 2)
+> +
+>   /* share data between vector helpers and decode code */
+>   FIELD(VDATA, VM, 0, 1)
+>   FIELD(VDATA, LMUL, 1, 3)
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 5753126c7a..052fdd2d9d 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -21,6 +21,7 @@
+>   #include "qemu/log.h"
+>   #include "qemu/main-loop.h"
+>   #include "cpu.h"
+> +#include "internals.h"
+>   #include "pmu.h"
+>   #include "exec/exec-all.h"
+>   #include "instmap.h"
+> @@ -36,7 +37,19 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+>   #ifdef CONFIG_USER_ONLY
+>       return 0;
+>   #else
+> -    return env->priv;
+> +    if (ifetch) {
+> +        return env->priv;
+> +    }
+> +
+> +    /* All priv -> mmu_idx mapping are here */
+> +    int mode = env->priv;
+> +    if (mode == PRV_M && get_field(env->mstatus, MSTATUS_MPRV)) {
+> +        mode = get_field(env->mstatus, MSTATUS_MPP);
+> +    }
+> +    if (mode == PRV_S && get_field(env->mstatus, MSTATUS_SUM)) {
+> +        return MMUIdx_S_SUM;
+> +    }
+> +    return mode;
+>   #endif
+>   }
 >   
->   /* Test if priv level is M, S, or U (cannot fail). */
+> @@ -600,7 +613,7 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
+>   
+>   bool riscv_cpu_two_stage_lookup(int mmu_idx)
+>   {
+> -    return mmu_idx & TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+> +    return mmu_idx & MMU_HYP_ACCESS_BIT;
+>   }
+>   
+>   int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts)
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index abea7b749e..b79758a606 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1246,8 +1246,7 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>       RISCVMXL xl = riscv_cpu_mxl(env);
+>   
+>       /* flush tlb on mstatus fields that affect VM */
+> -    if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
+> -            MSTATUS_MPRV | MSTATUS_SUM)) {
+> +    if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPV)) {
+>           tlb_flush(env_cpu(env));
+>       }
+>       mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 84ee018f7d..962a061228 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -20,6 +20,7 @@
+>   
+>   #include "qemu/osdep.h"
+>   #include "cpu.h"
+> +#include "internals.h"
+>   #include "qemu/main-loop.h"
+>   #include "exec/exec-all.h"
+>   #include "exec/helper-proto.h"
+> @@ -428,14 +429,14 @@ void helper_hyp_gvma_tlb_flush(CPURISCVState *env)
+>   
+>   target_ulong helper_hyp_hlvx_hu(CPURISCVState *env, target_ulong address)
+>   {
+> -    int mmu_idx = cpu_mmu_index(env, true) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+> +    int mmu_idx = cpu_mmu_index(env, true) | MMU_HYP_ACCESS_BIT;
+>   
+>       return cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
+>   }
+>   
+>   target_ulong helper_hyp_hlvx_wu(CPURISCVState *env, target_ulong address)
+>   {
+> -    int mmu_idx = cpu_mmu_index(env, true) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+> +    int mmu_idx = cpu_mmu_index(env, true) | MMU_HYP_ACCESS_BIT;
+>   
+>       return cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
+>   }
+> diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
+> index 9248b48c36..15842f4282 100644
+> --- a/target/riscv/insn_trans/trans_rvh.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvh.c.inc
+> @@ -40,7 +40,7 @@ static bool do_hlv(DisasContext *ctx, arg_r2 *a, MemOp mop)
+>       if (check_access(ctx)) {
+>           TCGv dest = dest_gpr(ctx, a->rd);
+>           TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
+> -        int mem_idx = ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+> +        int mem_idx = ctx->mem_idx | MMU_HYP_ACCESS_BIT;
+>           tcg_gen_qemu_ld_tl(dest, addr, mem_idx, mop);
+>           gen_set_gpr(ctx, a->rd, dest);
+>       }
+> @@ -87,7 +87,7 @@ static bool do_hsv(DisasContext *ctx, arg_r2_s *a, MemOp mop)
+>       if (check_access(ctx)) {
+>           TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
+>           TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
+> -        int mem_idx = ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
+> +        int mem_idx = ctx->mem_idx | MMU_HYP_ACCESS_BIT;
+>           tcg_gen_qemu_st_tl(data, addr, mem_idx, mop);
+>       }
+>       return true;
 
