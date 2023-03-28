@@ -1,66 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ph0ek-0006EQ-SJ
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Mar 2023 00:09:59 -0400
+	id 1ph3i2-0006XS-9o
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Mar 2023 03:25:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ph0ej-0006EE-Et; Tue, 28 Mar 2023 00:09:57 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ph0ef-0007x4-N6; Tue, 28 Mar 2023 00:09:57 -0400
-Received: from [192.168.0.120] (unknown [180.175.29.170])
- by APP-01 (Coremail) with SMTP id qwCowADX3UmEaCJk+bj4Fw--.50734S2;
- Tue, 28 Mar 2023 12:09:42 +0800 (CST)
-Message-ID: <165c20a1-222a-9b75-c23a-10bbc0619c65@iscas.ac.cn>
-Date: Tue, 28 Mar 2023 12:09:40 +0800
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1ph3i0-0006X8-An; Tue, 28 Mar 2023 03:25:32 -0400
+Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1ph3hx-00078p-NU; Tue, 28 Mar 2023 03:25:31 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R631e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
+ TI=SMTPD_---0Ves1J0s_1679988319; 
+Received: from 30.221.98.176(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0Ves1J0s_1679988319) by smtp.aliyun-inc.com;
+ Tue, 28 Mar 2023 15:25:19 +0800
+Content-Type: multipart/alternative;
+ boundary="------------XXaN4xzUas9nW3l6NH5zc0A7"
+Message-ID: <241a90ec-b183-78d2-f2ba-9317cbad01dc@linux.alibaba.com>
+Date: Tue, 28 Mar 2023 15:25:16 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Cc: liweiwei@iscas.ac.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-Subject: Re: [PATCH 5/5] target/riscv: Add pointer mask support for
- instruction fetch
+Subject: Re: [PATCH 1/5] target/riscv: Fix effective address for pointer mask
 Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
+To: liweiwei <liweiwei@iscas.ac.cn>,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20230327100027.61160-1-liweiwei@iscas.ac.cn>
- <20230327100027.61160-6-liweiwei@iscas.ac.cn>
- <8fed2551-a67d-cd53-f5a1-f089f980aa08@linaro.org>
- <ae53e46c-b7e2-c986-a797-06a2630cc393@iscas.ac.cn>
- <aa9b6745-341f-2466-70c2-d574ce2a7c6a@linaro.org>
-From: liweiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <aa9b6745-341f-2466-70c2-d574ce2a7c6a@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowADX3UmEaCJk+bj4Fw--.50734S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZFy7Zw1UtF4UXr1fGr43trb_yoW8Jw4rpr
- 95AFW8KrWktFWkArsFqr1xXFy2kr1xJ3WUG348GF1FyryFqr1Svr17Was0gr1Ykr4xXw1U
- Zr4Dt3yruF13JrUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9Y14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr
- 1j6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
- 6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
- 0_Gr1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxa
- n2IY04v7Mxk0xIA0c2IEe2xFo4CEbIxvr21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x
- 0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2
- zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF
- 4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWU
- CwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCT
- nIWIevJa73UjIFyTuYvjfUoOJ5UUUUU
-X-Originating-IP: [180.175.29.170]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ <20230327100027.61160-2-liweiwei@iscas.ac.cn>
+ <c0abfb39-56a7-a184-f134-bcb075908f57@linux.alibaba.com>
+ <c1b60f5e-5bb8-5462-ae93-7813da4269bb@iscas.ac.cn>
+ <389e5dd1-12fc-8b71-8e6a-74db1179fa47@linaro.org>
+ <04639827-2706-69d8-56d9-5e278742168d@iscas.ac.cn>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <04639827-2706-69d8-56d9-5e278742168d@iscas.ac.cn>
+Received-SPF: pass client-ip=115.124.30.110;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-110.freemail.mail.aliyun.com
+X-Spam_score_int: -98
+X-Spam_score: -9.9
+X-Spam_bar: ---------
+X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ HTML_MESSAGE=0.001, NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,48 +60,150 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Mar 2023 04:09:57 -0000
+X-List-Received-Date: Tue, 28 Mar 2023 07:25:32 -0000
+
+This is a multi-part message in MIME format.
+--------------XXaN4xzUas9nW3l6NH5zc0A7
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
 
-On 2023/3/28 11:31, Richard Henderson wrote:
-> On 3/27/23 18:55, liweiwei wrote:
->>
->> On 2023/3/28 02:04, Richard Henderson wrote:
->>> On 3/27/23 03:00, Weiwei Li wrote:
->>>> @@ -1248,6 +1265,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr 
->>>> address, int size,
->>>>       qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d 
->>>> mmu_idx %d\n",
->>>>                     __func__, address, access_type, mmu_idx);
->>>>   +    if (access_type == MMU_INST_FETCH) {
->>>> +        address = adjust_pc_address(env, address);
->>>> +    }
+On 2023/3/28 11:33, liweiwei wrote:
+>
+>
+> On 2023/3/28 11:18, Richard Henderson wrote:
+>> On 3/27/23 19:48, liweiwei wrote:
 >>>
->>> Why do you want to do this so late, as opposed to earlier in 
->>> cpu_get_tb_cpu_state?
+>>> On 2023/3/28 10:20, LIU Zhiwei wrote:
+>>>>
+>>>> On 2023/3/27 18:00, Weiwei Li wrote:
+>>>>> Since pointer mask works on effective address, and the xl works on 
+>>>>> the
+>>>>> generation of effective address, so xl related calculation should 
+>>>>> be done
+>>>>> before pointer mask.
+>>>>
+>>>> Incorrect. It has been done.
+>>>>
+>>>> When updating the pm_mask,  we have already considered the env->xl.
+>>>>
+>>>> You can see it in riscv_cpu_update_mask
+>>>>
+>>>>     if (env->xl == MXL_RV32) {
+>>>>         env->cur_pmmask = mask & UINT32_MAX;
+>>>>         env->cur_pmbase = base & UINT32_MAX;
+>>>>     } else {
+>>>>         env->cur_pmmask = mask;
+>>>>         env->cur_pmbase = base;
+>>>>     }
+>>>>
+>>> Yeah, I missed this part. Then we should ensure cur_pmmask/base is 
+>>> updated when xl changes.
 >>
->> In this way, the pc for tb may be different from the reg pc. Then the 
->> pc register will be wrong if sync from tb.
+>> Is that even possible?  XL can change on priv level changes (SXL, UXL).
 >
-> Hmm, true.
+> Yeah. Not possible, since only UXL is changable currently, and SXL/UXL 
+> can only be changed in higher priv level.
 >
-> But you certainly cannot adjust the address in tlb_fill, as you'll be 
-> producing different result for read/write and exec.  You could 
-> plausibly use a separate mmu_idx, but that's not ideal either.
+> So the recompute for xl in write_mstatus() seems redundant.
 >
-> The best solution might be to implement pc-relative translation 
-> (CF_PCREL).  At which point cpu_pc always has the correct results and 
-> we make relative adjustments to that.
+I think you are almost right. But as we allow write XL field when in 
+debug mode, we seemly also need call this function for it.
 
-I'm not very familiar with how CF_PCREL works currently. I'll try this 
-way later.
+Zhiwei
 
-Regards,
-
-Weiwei Li
-
+> Maybe there is a way to change current xl in future if misa.mxl is 
+> changable.
 >
+> Regards,
 >
-> r~
+> Weiwei Li
+>
+>>
+>>
+>> r~
+--------------XXaN4xzUas9nW3l6NH5zc0A7
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2023/3/28 11:33, liweiwei wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:04639827-2706-69d8-56d9-5e278742168d@iscas.ac.cn">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <p><br>
+      </p>
+      <div class="moz-cite-prefix">On 2023/3/28 11:18, Richard Henderson
+        wrote:<br>
+      </div>
+      <blockquote type="cite"
+        cite="mid:389e5dd1-12fc-8b71-8e6a-74db1179fa47@linaro.org">On
+        3/27/23 19:48, liweiwei wrote: <br>
+        <blockquote type="cite"> <br>
+          On 2023/3/28 10:20, LIU Zhiwei wrote: <br>
+          <blockquote type="cite"> <br>
+            On 2023/3/27 18:00, Weiwei Li wrote: <br>
+            <blockquote type="cite">Since pointer mask works on
+              effective address, and the xl works on the <br>
+              generation of effective address, so xl related calculation
+              should be done <br>
+              before pointer mask. <br>
+            </blockquote>
+            <br>
+            Incorrect. It has been done. <br>
+            <br>
+            When updating the pm_mask,  we have already considered the
+            env-&gt;xl. <br>
+            <br>
+            You can see it in riscv_cpu_update_mask <br>
+            <br>
+                if (env-&gt;xl == MXL_RV32) { <br>
+                    env-&gt;cur_pmmask = mask &amp; UINT32_MAX; <br>
+                    env-&gt;cur_pmbase = base &amp; UINT32_MAX; <br>
+                } else { <br>
+                    env-&gt;cur_pmmask = mask; <br>
+                    env-&gt;cur_pmbase = base; <br>
+                } <br>
+            <br>
+          </blockquote>
+          Yeah, I missed this part. Then we should ensure
+          cur_pmmask/base is updated when xl changes. <br>
+        </blockquote>
+        <br>
+        Is that even possible?  XL can change on priv level changes
+        (SXL, UXL). <br>
+      </blockquote>
+      <p>Yeah. Not possible, since only UXL is changable currently, and
+        SXL/UXL can only be changed in higher priv level.</p>
+      <p>So the recompute for xl in <span style="color: #000000;">write_mstatus()
+          seems redundant.</span></p>
+    </blockquote>
+    <p>I think you are almost right. But as we allow write XL field when
+      in debug mode, we seemly also need call this function for it.</p>
+    <p>Zhiwei<br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:04639827-2706-69d8-56d9-5e278742168d@iscas.ac.cn">
+      <p><span style="color: #000000;">Maybe there is a way to change
+          current xl in future if misa.mxl is changable.</span></p>
+      <p><span style="color: #000000;">Regards,</span></p>
+      <p><span style="color: #000000;">Weiwei Li<br>
+        </span></p>
+      <blockquote type="cite"
+        cite="mid:389e5dd1-12fc-8b71-8e6a-74db1179fa47@linaro.org"> <br>
+        <br>
+        r~ <br>
+      </blockquote>
+    </blockquote>
+  </body>
+</html>
+
+--------------XXaN4xzUas9nW3l6NH5zc0A7--
 
