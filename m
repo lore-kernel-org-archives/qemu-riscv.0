@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1phXnj-0003D5-E7
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Mar 2023 11:33:28 -0400
+	id 1phYdj-0002QP-Ob
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Mar 2023 12:27:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1phXnc-0003Br-CA
- for qemu-riscv@nongnu.org; Wed, 29 Mar 2023 11:33:21 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
+ id 1phYdg-0002Q7-87
+ for qemu-riscv@nongnu.org; Wed, 29 Mar 2023 12:27:08 -0400
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1phXna-0000XV-Ir
- for qemu-riscv@nongnu.org; Wed, 29 Mar 2023 11:33:20 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id q102so14387653pjq.3
- for <qemu-riscv@nongnu.org>; Wed, 29 Mar 2023 08:33:18 -0700 (PDT)
+ id 1phYde-0001LI-5B
+ for qemu-riscv@nongnu.org; Wed, 29 Mar 2023 12:27:07 -0400
+Received: by mail-pj1-x102a.google.com with SMTP id j13so14564794pjd.1
+ for <qemu-riscv@nongnu.org>; Wed, 29 Mar 2023 09:27:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1680103997;
+ d=linaro.org; s=google; t=1680107224;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=PMpJPGAxLH7XLs+6DxbdFZiyQjIWCrh8BvF/TV6ez4o=;
- b=XAW3BJYytNI7yYcLuzch2eSKapW38GqUyF7oMvT7cMXBfBa5paoqFodQyJpgk2LndY
- K3xukT1MIc3K5NhFdYnuS04VX7fT1fmdb740Fo+RE2yiQCkq2+7gUWKjacxK37+Dh01u
- hv6I1Bco3ci0vTpGpT7VVNVNC6/TG4D7rYiOoQjYuOz86btZy1G0L3k370EuvT1S6w1W
- c6t3rfIZcYb8F1s85DJaYO1Oz+pIPqvL7ctoDlekE2USw65CkliL3GC0OGqfjijRTwx1
- HXpfa6eqZEtTnvWDu6s9LAk33aqKyqACBOE9OUWqN48iayWYfq9E0FP99PVARv3RBF63
- BeIA==
+ bh=6hcjGeFwyWzDQBXrN7UOz6rgEZeLPt8WlZcS1gj1tKY=;
+ b=HOvmvsju4g/vSq62A9HjW8ejL7pmYzZ9dLaxg8hBFsyK5014WiXwuYr13jLVrIb00M
+ lNJ1Q/p5RYwmmJTvl11rtFxyoIT227nFQ7HD+bSAi9/evua1SpXwKPpIti2v9qsYC3IR
+ 25LK/AJpDLGvbP0t+q4YQHIwrgTrMYBVUZb5T2rBantIY50TrJvJ/fj1qVuh0xQexjxJ
+ Y/W1fX04sDSyUT0K0QKIAFzfoz1+UYHDT50ZVXzfhgdATZPyjm1MQ4bcNmwltWY1Vt67
+ KwN9Q17tMCDoHGkyAbBNFksKSc/d23bEr1PSqAgplRsnTgsCYcWg1F97YZguIvqigW05
+ esqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680103997;
+ d=1e100.net; s=20210112; t=1680107224;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PMpJPGAxLH7XLs+6DxbdFZiyQjIWCrh8BvF/TV6ez4o=;
- b=YRAIB2rEKOuViUJDqYftjzKhkkmfsRXbB3avHWhtrVHMNCyJvI5jbRIgJkHHLlUhid
- M4zA5LE+5htcdXRm3glLBDtuwFugILF32Tky4HkkBo4XEYB1KKfJjs9N7oW/9VW1XRsd
- fmgrZTe+aRj29lnKFfiG5kBQ0CohSIeNn7k/v34A5NSGXt2+yRVXkAt7prgKHdlJpvQH
- OJ4/91Orf217OVbynRqSYj3W1TJ2r+COF7pvmz+4lXIAwMLhejZbIBAJXlyWNHprmCKM
- 0NKMBjeGxiEl1PFgCwRbxY/p4lKfdLu6SVIRL/UPJOuxU1oLBjaR0oU6VOnRNZB6R8+9
- WZMQ==
-X-Gm-Message-State: AO0yUKV73IAyTmPMmQToWPlgSxV/9Teken6xxZmxNlraM2hTug1d/fF/
- SUkj5Jn/qmI7YzVh3bYroLROyw==
-X-Google-Smtp-Source: AK7set9kUJOxYxtIPTO0PaHr5HGNTpLtxwzui3FPMuc6kpPM3+4xUyi9RIcYvnIUL41NTvT08QqHuA==
-X-Received: by 2002:a05:6a20:1a9c:b0:d8:a2ee:6b60 with SMTP id
- ci28-20020a056a201a9c00b000d8a2ee6b60mr17214158pzb.42.1680103997022; 
- Wed, 29 Mar 2023 08:33:17 -0700 (PDT)
+ bh=6hcjGeFwyWzDQBXrN7UOz6rgEZeLPt8WlZcS1gj1tKY=;
+ b=KfXZJo3s9QVQo3+2uZIyvfSTJcFcHZoob4giW2mxr1eSfbNkYgo5J4ZM/lPODZKMlY
+ aEJTOuHElg3LyDKuyRamVxiu8CQubLJcpFXGDasz1s8HTYzleBfc1y0g/Lf1lObxLLjy
+ /bg/pZaUqHt399xFcbY0xH2UnDEMlcuLEJsk3ulQEJrwygHt8oO2CfvRi9LxYL/Bs47v
+ fpWx83mzxilJwPXr/m0KSoCI+Qmje/Mtj83z6MKi55jipzl+JahegrgR91QdsJnyNijT
+ 2xy0OcOC9opAUrWiEziBS6RedKz8dxgcX3vHchON/WHNhjJJHp61dWutTuY7+jl/CHi7
+ bcFg==
+X-Gm-Message-State: AAQBX9eThsCWhV00R2VCNtSWHEpU6POqKiNPAzXIwthLGvcdu6RtSgDJ
+ IRLCdTdHqrnW/F5SkmJfCFLdsw==
+X-Google-Smtp-Source: AKy350aWo19WWERVM/sXvt2mJy4TQamql8THq1NzSD1oxaBjt7dmfMNEEsx+6yD+zPlgM2sZiWVV2Q==
+X-Received: by 2002:a17:903:22cb:b0:1a1:b174:8363 with SMTP id
+ y11-20020a17090322cb00b001a1b1748363mr24206700plg.59.1680107224345; 
+ Wed, 29 Mar 2023 09:27:04 -0700 (PDT)
 Received: from ?IPV6:2602:ae:1541:f901:3369:815f:629b:7300?
  ([2602:ae:1541:f901:3369:815f:629b:7300])
  by smtp.gmail.com with ESMTPSA id
- a12-20020a65640c000000b0050aeaf9f25csm21896676pgv.27.2023.03.29.08.33.16
+ x8-20020a1709027c0800b001a258041049sm4700633pll.32.2023.03.29.09.27.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Mar 2023 08:33:16 -0700 (PDT)
-Message-ID: <092397fd-3b97-b866-6c72-aab132422f2f@linaro.org>
-Date: Wed, 29 Mar 2023 08:33:14 -0700
+ Wed, 29 Mar 2023 09:27:03 -0700 (PDT)
+Message-ID: <08b81942-a356-51c2-9de1-6e057a2ca8b1@linaro.org>
+Date: Wed, 29 Mar 2023 09:27:01 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [PATCH v2 3/5] target/riscv: Sync cpu_pc before update badaddr
+Subject: Re: [PATCH v2 4/5] target/riscv: Add support for PC-relative
+ translation
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
@@ -62,13 +63,13 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20230329032346.55185-1-liweiwei@iscas.ac.cn>
- <20230329032346.55185-4-liweiwei@iscas.ac.cn>
+ <20230329032346.55185-5-liweiwei@iscas.ac.cn>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230329032346.55185-4-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230329032346.55185-5-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1031.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -88,50 +89,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Mar 2023 15:33:23 -0000
+X-List-Received-Date: Wed, 29 Mar 2023 16:27:09 -0000
 
 On 3/28/23 20:23, Weiwei Li wrote:
-> We should sync cpu_pc before storing it into badaddr when mis-aligned
-> exception is triggered.
-> 
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> ---
->   target/riscv/insn_trans/trans_rvi.c.inc | 1 +
->   target/riscv/translate.c                | 1 +
->   2 files changed, 2 insertions(+)
+>   static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
+>   {
+> -    gen_set_gpri(ctx, a->rd, a->imm + ctx->base.pc_next);
+> +    assert(ctx->pc_save != -1);
+> +    if (tb_cflags(ctx->base.tb) & CF_PCREL) {
+> +        TCGv target_pc = tcg_temp_new();
 
-Yes, badaddr should get the invalid pc, but surely epc should contain the pc of the branch 
-instruction causing the fault.  I thought that was the primary reason to handle this 
-exception here, rather than at the start of the translation loop.
+dest_gpr(s, a->rd)
+
+> @@ -51,26 +59,43 @@ static bool trans_jal(DisasContext *ctx, arg_jal *a)
+>   static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+>   {
+>       TCGLabel *misaligned = NULL;
+> +    TCGv succ_pc = tcg_temp_new();
+
+succ_pc can by null for !CF_PCREL...
+
+> +    TCGv target_pc = tcg_temp_new();
+> +
+> +    if (tb_cflags(ctx->base.tb) & CF_PCREL) {
+> +        tcg_gen_addi_tl(succ_pc, cpu_pc, ctx->pc_succ_insn - ctx->pc_save);
+> +    }
+
+... or initialized like
+
+        } else {
+            succ_pc = tcg_constant_tl(ctx->pc_succ_insn);
+        }
+
+> -    gen_set_pc(ctx, cpu_pc);
+>       if (!has_ext(ctx, RVC)) {
+>           TCGv t0 = tcg_temp_new();
+>   
+>           misaligned = gen_new_label();
+> -        tcg_gen_andi_tl(t0, cpu_pc, 0x2);
+> +        tcg_gen_andi_tl(t0, target_pc, 0x2);
+>           tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
+>       }
+...
+>       if (misaligned) {
+>           gen_set_label(misaligned);
+> -        gen_exception_inst_addr_mis(ctx);
+> +        gen_exception_inst_addr_mis(ctx, target_pc);
+>       }
+
+This is what I expected from patch 3: cpu_pc is unchanged, with the new (incorrect) 
+address passed to inst_addr_mis for assigning to badaddr.  Bug being fixed here, thus 
+should really be a separate patch.
+
+> @@ -172,7 +197,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+>       if (!has_ext(ctx, RVC) && ((ctx->base.pc_next + a->imm) & 0x3)) {
+>           /* misaligned */
+>           gen_set_pc_imm(ctx, ctx->base.pc_next + a->imm);
+> -        gen_exception_inst_addr_mis(ctx);
+> +        gen_exception_inst_addr_mis(ctx, cpu_pc);
+
+But this one's different and (probably) incorrect.
+
+> @@ -552,13 +567,21 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+>       if (!has_ext(ctx, RVC)) {
+>           if ((next_pc & 0x3) != 0) {
+>               gen_set_pc_imm(ctx, next_pc);
+> -            gen_exception_inst_addr_mis(ctx);
+> +            gen_exception_inst_addr_mis(ctx, cpu_pc);
+
+Likewise.
+
+> +    assert(ctx->pc_save != -1);
+> +    if (tb_cflags(ctx->base.tb) & CF_PCREL) {
+> +        TCGv succ_pc = tcg_temp_new();
+> +        tcg_gen_addi_tl(succ_pc, cpu_pc, ctx->pc_succ_insn - ctx->pc_save);
+> +        gen_set_gpr(ctx, rd, succ_pc);
+
+dest_gpr.
+
 
 
 r~
-
-> 
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-> index 4ad54e8a49..05d8b5d57f 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -171,6 +171,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
->   
->       if (!has_ext(ctx, RVC) && ((ctx->base.pc_next + a->imm) & 0x3)) {
->           /* misaligned */
-> +        gen_set_pc_imm(ctx, ctx->base.pc_next + a->imm);
->           gen_exception_inst_addr_mis(ctx);
->       } else {
->           gen_goto_tb(ctx, 0, ctx->base.pc_next + a->imm);
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 0ee8ee147d..f7ddf4c50d 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -551,6 +551,7 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
->       next_pc = ctx->base.pc_next + imm;
->       if (!has_ext(ctx, RVC)) {
->           if ((next_pc & 0x3) != 0) {
-> +            gen_set_pc_imm(ctx, next_pc);
->               gen_exception_inst_addr_mis(ctx);
->               return;
->           }
-
 
