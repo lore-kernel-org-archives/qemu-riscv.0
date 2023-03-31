@@ -1,84 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1phvke-0002AI-Gt
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Mar 2023 13:07:52 -0400
+	id 1pi3f5-0004ZU-PY
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Mar 2023 21:34:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1phvkd-0002A6-PG
- for qemu-riscv@nongnu.org; Thu, 30 Mar 2023 13:07:51 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1phvkb-0004nE-N2
- for qemu-riscv@nongnu.org; Thu, 30 Mar 2023 13:07:51 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id ix20so18709582plb.3
- for <qemu-riscv@nongnu.org>; Thu, 30 Mar 2023 10:07:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1680196067;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=33ISq6fHBq1gQz2kqR4zb/6dFLQ/8VDamxNnpOcpXQE=;
- b=C7vJ0HiohpsxZ3TFos9eSYz72yrHP6tyE3NOr4Yf/IDB3tvSkkdzuUbpQcE9rjxWMD
- f7vUS3M+U8ds2/K9mZS/B6W9BzbEfXhCKk65ZXMKaoPJkfFOWf9EIHvMUbQWA2FaNYw5
- /1RA2RFT009r98vdch6PpThhScZ/dHwq74Z5s51yAgLRdcbxy22G5vzX4DUUtDUFcxnC
- C2h0VZPQXkwBT+hNwbyVA+55I2ItyIvwDbzItMAvRiRiTmcq4RQAvpH/8xHfj6gCalPP
- cPvl8/KWAkhq2+TjRCKqbrlbof0iOYHSZKsK1D6BNQ7Ie88Lxjo8AjLYmPk2368OdeQE
- B3Ug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680196067;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=33ISq6fHBq1gQz2kqR4zb/6dFLQ/8VDamxNnpOcpXQE=;
- b=KdFnHwkfqXmdvfnixEypZQBPV+vYfr1YsjJclQdRidCocafBhCzBcKFQJ7wSXQMBdT
- bzH6arIY2bVF+++DpVp1cmrLQL48dQj65YCQENzOLWPGqJmPX9v4AxJLfuz2JsnubYGk
- zCy1wYqJLr1SR79HU1u8PLFiDCQOL2JvhCjBuXbPjzmOEFCdWkCpUzXELYnwPgDQ0/7a
- iNNajrZ8o6G5PkgNClMFe/mSMSwxpHVFdYFGUfVWLiYSFQJ6W3UvRsfre6IcIpkEn7G4
- Nih2qZnCtvQ40YeNFFFU2HabbKk2s4nGB+bxsWLN05IIh/AAXKMVAWRYtI21d5MDYAvt
- 5tLQ==
-X-Gm-Message-State: AAQBX9fvwM2EGWuM95GPJ4uKBri55EfnURMityrgHDHizBUKoTzMOoOD
- 4W0NdEGWqeK5e+/H1TYRRY4VyQ==
-X-Google-Smtp-Source: AKy350ZYNRzjuPXRTZS+19pQzK07ue+jvjj6vpgjupjOmB83xhCzdOA9ENE2C/D9AYzu5hmuz4mVVA==
-X-Received: by 2002:a17:90b:4f48:b0:22c:59c3:8694 with SMTP id
- pj8-20020a17090b4f4800b0022c59c38694mr26686062pjb.44.1680196067251; 
- Thu, 30 Mar 2023 10:07:47 -0700 (PDT)
-Received: from ?IPV6:2602:ae:1541:f901:7fc3:bb75:1c52:e14c?
- ([2602:ae:1541:f901:7fc3:bb75:1c52:e14c])
- by smtp.gmail.com with ESMTPSA id
- s1-20020a17090a948100b0023d386e4806sm3423354pjo.57.2023.03.30.10.07.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Mar 2023 10:07:46 -0700 (PDT)
-Message-ID: <b23f854c-34b6-298f-ea74-6e9f1b6ca16e@linaro.org>
-Date: Thu, 30 Mar 2023 10:07:44 -0700
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pi3f4-0004Z8-9n; Thu, 30 Mar 2023 21:34:38 -0400
+Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1pi3f2-00045p-6b; Thu, 30 Mar 2023 21:34:38 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
+ TI=SMTPD_---0Vf05cDw_1680226464; 
+Received: from 30.221.97.117(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0Vf05cDw_1680226464) by smtp.aliyun-inc.com;
+ Fri, 31 Mar 2023 09:34:25 +0800
+Message-ID: <51afd8dd-be0c-045d-eabf-47e6d07eccbd@linux.alibaba.com>
+Date: Fri, 31 Mar 2023 09:34:22 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: [PATCH v2 4/5] target/riscv: Add support for PC-relative
- translation
-To: liweiwei <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+Subject: Re: [PATCH v2 2/5] target/riscv: Update cur_pmmask/base when xl
+ changes
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+ dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20230329032346.55185-1-liweiwei@iscas.ac.cn>
- <20230329032346.55185-5-liweiwei@iscas.ac.cn>
- <08b81942-a356-51c2-9de1-6e057a2ca8b1@linaro.org>
- <3fdf9a33-767a-53f9-c222-ef9cd39f0689@iscas.ac.cn>
+ <20230329032346.55185-3-liweiwei@iscas.ac.cn>
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <3fdf9a33-767a-53f9-c222-ef9cd39f0689@iscas.ac.cn>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230329032346.55185-3-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.30.110;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-110.freemail.mail.aliyun.com
+X-Spam_score_int: -98
+X-Spam_score: -9.9
+X-Spam_bar: ---------
+X-Spam_report: (-9.9 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,55 +56,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Mar 2023 17:07:52 -0000
-
-On 3/29/23 18:09, liweiwei wrote:
->>> @@ -51,26 +59,43 @@ static bool trans_jal(DisasContext *ctx, arg_jal *a)
->>>   static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
->>>   {
->>>       TCGLabel *misaligned = NULL;
->>> +    TCGv succ_pc = tcg_temp_new();
->>
->> succ_pc can by null for !CF_PCREL...
-> I think this is OK since it's only used for CF_PCREL.
-
-It allocates an unused temp.  Not a bug per se, but an easily fixable mistake.
-
->> ... or initialized like
->>
->>        } else {
->>            succ_pc = tcg_constant_tl(ctx->pc_succ_insn);
->>        }
-
-If you do this, you can avoid the test/set/seti later.
-
->>>       if (misaligned) {
->>>           gen_set_label(misaligned);
->>> -        gen_exception_inst_addr_mis(ctx);
->>> +        gen_exception_inst_addr_mis(ctx, target_pc);
->>>       }
->>
->> This is what I expected from patch 3: cpu_pc is unchanged, with the new (incorrect) 
->> address passed to inst_addr_mis for assigning to badaddr.  Bug being fixed here, thus 
->> should really be a separate patch.
-> 
-> It's OK to update cpu_pc before gen_exception_inst_addr_mis() since it will restore the 
-> current pc by gen_set_pc_imm() after update cpu_pc into badaddr.
-
-True, but I think it's confusing to set cpu_pc for it's mere use in copying to badaddr, 
-and rely on generate_exception to reset cpu_pc to the correct value.
-
-> However, after PC-relative translation is enabled, we cannot use gen_set_pc to directly 
-> update cpu_pc in above case, since gen_set_pc() will break the pc_save, and make 
-> gen_set_pc_imm() in gen_exception_inst_addr_mis() failed. So we introduce a temp target_pc 
-> instead of cpu_pc to compute the destination pc and use it to do misaligned check.
-
-Exactly.
-
-Which is why I think it is better to simply pass gen_exception_inst_addr_mis the value to 
-use with badaddr in a normal temp (or constant).  And do this always, not simply in the 
-one case where it is absolutely required to not clobber cpu_pc.
+X-List-Received-Date: Fri, 31 Mar 2023 01:34:38 -0000
 
 
-r~
+On 2023/3/29 11:23, Weiwei Li wrote:
+> write_mstatus() can only change current xl when in debug mode.
+> And we need update cur_pmmask/base in this case.
+>
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> ---
+>   target/riscv/csr.c | 9 ++++++++-
+>   1 file changed, 8 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index d522efc0b6..43b9ad4500 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1277,8 +1277,15 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>           mstatus = set_field(mstatus, MSTATUS64_SXL, xl);
+>       }
+>       env->mstatus = mstatus;
+> -    env->xl = cpu_recompute_xl(env);
+>   
+> +    /*
+> +     * Except in debug mode, UXL/SXL can only be modified by higher
+> +     * privilege mode. So xl will not be changed in normal mode.
+> +     */
+> +    if (env->debugger) {
+> +        env->xl = cpu_recompute_xl(env);
+> +        riscv_cpu_update_mask(env);
+> +    }
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+
+Zhiwei
+>       return RISCV_EXCP_NONE;
+>   }
+>   
 
