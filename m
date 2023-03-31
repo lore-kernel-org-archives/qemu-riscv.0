@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1piGKp-0000Kw-JV
-	for mharc-qemu-riscv@gnu.org; Fri, 31 Mar 2023 11:06:35 -0400
+	id 1piGKq-0000Lo-NR
+	for mharc-qemu-riscv@gnu.org; Fri, 31 Mar 2023 11:06:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1piGKk-0000Hk-FB; Fri, 31 Mar 2023 11:06:31 -0400
+ id 1piGKj-0000Gs-GN; Fri, 31 Mar 2023 11:06:29 -0400
 Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1piGKh-0003xR-LU; Fri, 31 Mar 2023 11:06:30 -0400
+ id 1piGKf-0003xZ-FV; Fri, 31 Mar 2023 11:06:29 -0400
 Received: from localhost.localdomain (unknown [180.175.29.170])
- by APP-01 (Coremail) with SMTP id qwCowAB3fs7k9iZkzJBxGQ--.8380S2;
- Fri, 31 Mar 2023 23:06:13 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowAB3fs7k9iZkzJBxGQ--.8380S5;
+ Fri, 31 Mar 2023 23:06:14 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,30 +19,32 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v4 0/8] target/riscv: Fix pointer mask related support
-Date: Fri, 31 Mar 2023 23:06:01 +0800
-Message-Id: <20230331150609.114401-1-liweiwei@iscas.ac.cn>
+Subject: [PATCH v4 3/8] target/riscv: Fix target address to update badaddr
+Date: Fri, 31 Mar 2023 23:06:04 +0800
+Message-Id: <20230331150609.114401-4-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230331150609.114401-1-liweiwei@iscas.ac.cn>
+References: <20230331150609.114401-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAB3fs7k9iZkzJBxGQ--.8380S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Cw1xCw13AFWkJF1xXF1xAFb_yoW8Ar1fpr
- WSk3y3Ja98JFZ7Xr4fZa1xZr15KFs5uayUCwn7Gwn5Aw45trZ0qrn3K3y2kFW8JFyrWr17
- KF1qyr1fuFyUAFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkE14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
- n2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
- 0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFyl
- IxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxV
- AFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j
- 6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUdHU
- DUUUUU=
+X-CM-TRANSID: qwCowAB3fs7k9iZkzJBxGQ--.8380S5
+X-Coremail-Antispam: 1UD129KBjvJXoWxurykJF4kGrWxJw15Kr1rJFb_yoWrtF15pF
+ 1akw17WrWDJFZxZayIga1UAF15Jr4SgrWjkw4Skw1kKa13trW5CF1DKFWakFyUuFZ5Xr4Y
+ 9FZ0yFyj9w4jqa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
+ x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
+ 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
+ 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+ IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+ Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
+ xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
+ 6r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2
+ Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
+ Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMI
+ IF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuYvjfUojjgUUUU
+ U
 X-Originating-IP: [180.175.29.170]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
@@ -64,49 +66,139 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Mar 2023 15:06:31 -0000
+X-List-Received-Date: Fri, 31 Mar 2023 15:06:29 -0000
 
-This patchset tries to fix some problem in current implementation for pointer mask, and add support for pointer mask of instruction fetch.
+Compute the target address  before storing it into badaddr
+when mis-aligned exception is triggered.
+Use a target_pc temp to store the target address to avoid
+the confusing operation that udpate target address into
+cpu_pc before misalign check, then update it into badaddr
+and restore cpu_pc to current pc if exception is triggered.
 
-The port is available here:
-https://github.com/plctlab/plct-qemu/tree/plct-pm-fix-v4
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+---
+ target/riscv/insn_trans/trans_rvi.c.inc | 23 ++++++++++++++++-------
+ target/riscv/translate.c                | 21 ++++++++++-----------
+ 2 files changed, 26 insertions(+), 18 deletions(-)
 
-v2:
-* drop some error patchs
-* Add patch 2 and 3 to fix the new problems
-* Add patch 4 and 5 to use PC-relative translation for pointer mask for instruction fetch
-
-v3:
-* use target_pc temp instead of cpu_pc to store into badaddr in patch 3
-* use dest_gpr instead of tcg_temp_new() for succ_pc in patch 4
-* enable CF_PCREL for system mode in seperate patch 5
-
-v4：
-* Fix wrong pc_save value for conditional jump in patch 4
-* Fix tcg_cflags overwrite problem to make CF_PCREL really work in new patch 5
-* Fix tb mis-matched problem in new patch 6
-
-Weiwei Li (8):
-  target/riscv: Fix pointer mask transformation for vector address
-  target/riscv: Update cur_pmmask/base when xl changes
-  target/riscv: Fix target address to update badaddr
-  target/riscv: Add support for PC-relative translation
-  accel/tcg: Fix overwrite problems of tcg_cflags
-  accel/tcg: Fix tb mis-matched problem when CF_PCREL is enabled
-  target/riscv: Enable PC-relative translation in system mode
-  target/riscv: Add pointer mask support for instruction fetch
-
- accel/tcg/cpu-exec.c                    |  3 ++
- accel/tcg/tcg-accel-ops.c               |  2 +-
- target/riscv/cpu.c                      | 31 +++++++----
- target/riscv/cpu.h                      |  1 +
- target/riscv/cpu_helper.c               | 20 ++++++-
- target/riscv/csr.c                      | 11 ++--
- target/riscv/insn_trans/trans_rvi.c.inc | 47 ++++++++++++----
- target/riscv/translate.c                | 72 ++++++++++++++++++-------
- target/riscv/vector_helper.c            |  2 +-
- 9 files changed, 145 insertions(+), 44 deletions(-)
-
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index 4ad54e8a49..48c73cfcfe 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -51,25 +51,30 @@ static bool trans_jal(DisasContext *ctx, arg_jal *a)
+ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+ {
+     TCGLabel *misaligned = NULL;
++    TCGv target_pc = tcg_temp_new();
+ 
+-    tcg_gen_addi_tl(cpu_pc, get_gpr(ctx, a->rs1, EXT_NONE), a->imm);
+-    tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
++    tcg_gen_addi_tl(target_pc, get_gpr(ctx, a->rs1, EXT_NONE), a->imm);
++    tcg_gen_andi_tl(target_pc, target_pc, (target_ulong)-2);
++
++    if (get_xl(ctx) == MXL_RV32) {
++        tcg_gen_ext32s_tl(target_pc, target_pc);
++    }
+ 
+-    gen_set_pc(ctx, cpu_pc);
+     if (!has_ext(ctx, RVC)) {
+         TCGv t0 = tcg_temp_new();
+ 
+         misaligned = gen_new_label();
+-        tcg_gen_andi_tl(t0, cpu_pc, 0x2);
++        tcg_gen_andi_tl(t0, target_pc, 0x2);
+         tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
+     }
+ 
+     gen_set_gpri(ctx, a->rd, ctx->pc_succ_insn);
++    tcg_gen_mov_tl(cpu_pc, target_pc);
+     lookup_and_goto_ptr(ctx);
+ 
+     if (misaligned) {
+         gen_set_label(misaligned);
+-        gen_exception_inst_addr_mis(ctx);
++        gen_exception_inst_addr_mis(ctx, target_pc);
+     }
+     ctx->base.is_jmp = DISAS_NORETURN;
+ 
+@@ -153,6 +158,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+     TCGLabel *l = gen_new_label();
+     TCGv src1 = get_gpr(ctx, a->rs1, EXT_SIGN);
+     TCGv src2 = get_gpr(ctx, a->rs2, EXT_SIGN);
++    target_ulong next_pc;
+ 
+     if (get_xl(ctx) == MXL_RV128) {
+         TCGv src1h = get_gprh(ctx, a->rs1);
+@@ -169,9 +175,12 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+ 
+     gen_set_label(l); /* branch taken */
+ 
+-    if (!has_ext(ctx, RVC) && ((ctx->base.pc_next + a->imm) & 0x3)) {
++    next_pc = ctx->base.pc_next + a->imm;
++    if (!has_ext(ctx, RVC) && (next_pc & 0x3)) {
+         /* misaligned */
+-        gen_exception_inst_addr_mis(ctx);
++        TCGv target_pc = tcg_temp_new();
++        gen_get_target_pc(target_pc, ctx, next_pc);
++        gen_exception_inst_addr_mis(ctx, target_pc);
+     } else {
+         gen_goto_tb(ctx, 0, ctx->base.pc_next + a->imm);
+     }
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 0ee8ee147d..7b5223efc2 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -222,21 +222,18 @@ static void decode_save_opc(DisasContext *ctx)
+     ctx->insn_start = NULL;
+ }
+ 
+-static void gen_set_pc_imm(DisasContext *ctx, target_ulong dest)
++static void gen_get_target_pc(TCGv target, DisasContext *ctx,
++                              target_ulong dest)
+ {
+     if (get_xl(ctx) == MXL_RV32) {
+         dest = (int32_t)dest;
+     }
+-    tcg_gen_movi_tl(cpu_pc, dest);
++    tcg_gen_movi_tl(target, dest);
+ }
+ 
+-static void gen_set_pc(DisasContext *ctx, TCGv dest)
++static void gen_set_pc_imm(DisasContext *ctx, target_ulong dest)
+ {
+-    if (get_xl(ctx) == MXL_RV32) {
+-        tcg_gen_ext32s_tl(cpu_pc, dest);
+-    } else {
+-        tcg_gen_mov_tl(cpu_pc, dest);
+-    }
++    gen_get_target_pc(cpu_pc, ctx, dest);
+ }
+ 
+ static void generate_exception(DisasContext *ctx, int excp)
+@@ -257,9 +254,9 @@ static void gen_exception_illegal(DisasContext *ctx)
+     }
+ }
+ 
+-static void gen_exception_inst_addr_mis(DisasContext *ctx)
++static void gen_exception_inst_addr_mis(DisasContext *ctx, TCGv target)
+ {
+-    tcg_gen_st_tl(cpu_pc, cpu_env, offsetof(CPURISCVState, badaddr));
++    tcg_gen_st_tl(target, cpu_env, offsetof(CPURISCVState, badaddr));
+     generate_exception(ctx, RISCV_EXCP_INST_ADDR_MIS);
+ }
+ 
+@@ -551,7 +548,9 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+     next_pc = ctx->base.pc_next + imm;
+     if (!has_ext(ctx, RVC)) {
+         if ((next_pc & 0x3) != 0) {
+-            gen_exception_inst_addr_mis(ctx);
++            TCGv target_pc = tcg_temp_new();
++            gen_get_target_pc(target_pc, ctx, next_pc);
++            gen_exception_inst_addr_mis(ctx, target_pc);
+             return;
+         }
+     }
 -- 
 2.25.1
 
