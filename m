@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1piag4-00039C-2t
+	id 1piag4-00039q-Kx
 	for mharc-qemu-riscv@gnu.org; Sat, 01 Apr 2023 08:49:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1piag2-00037B-FN; Sat, 01 Apr 2023 08:49:50 -0400
+ id 1piag1-000370-Qq; Sat, 01 Apr 2023 08:49:49 -0400
 Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1piafy-0002JC-31; Sat, 01 Apr 2023 08:49:49 -0400
+ id 1piafy-0002JE-5U; Sat, 01 Apr 2023 08:49:49 -0400
 Received: from localhost.localdomain (unknown [180.175.29.170])
- by APP-01 (Coremail) with SMTP id qwCowAD390NhKChk_03CGQ--.58572S2;
- Sat, 01 Apr 2023 20:49:37 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowAD390NhKChk_03CGQ--.58572S4;
+ Sat, 01 Apr 2023 20:49:39 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,30 +19,33 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [RESEND PATCH v5 0/6] target/riscv: Fix pointer mask related support
-Date: Sat,  1 Apr 2023 20:49:29 +0800
-Message-Id: <20230401124935.20997-1-liweiwei@iscas.ac.cn>
+Subject: [RESEND PATCH v5 2/6] target/riscv: Update cur_pmmask/base when xl
+ changes
+Date: Sat,  1 Apr 2023 20:49:31 +0800
+Message-Id: <20230401124935.20997-3-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230401124935.20997-1-liweiwei@iscas.ac.cn>
+References: <20230401124935.20997-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAD390NhKChk_03CGQ--.58572S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Cw1fCw18uryDXFyfWryxAFb_yoW8Ww45pF
- WfC3y3AaykJFZ7Xr4fJa18Ar15GF4fuFWUCwn7Jwn5tw45trWYqrn7K34jkFWUJFyrWry7
- KF1jyr1fuFyUAFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9a14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
- 4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
- Yx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbV
- WUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7Cj
- xVA2Y2ka0xkIwI1lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4I
- kC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWU
- WwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JF
- I_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_
- Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8Jr
- UvcSsGvfC2KfnxnUUI43ZEXa7VU13ku3UUUUU==
+X-CM-TRANSID: qwCowAD390NhKChk_03CGQ--.58572S4
+X-Coremail-Antispam: 1UD129KBjvdXoW7GFW8XrW3uFy8uF1xGFWfZrb_yoWDWFgE9r
+ 4IgF1kW3yjg3Z2kFWDJa4F9ry8Zry0gr1jvw1fKr15Gryj9rZrJ3Wvqwn7Jry5Zr4DJrnx
+ AwnrXw17Cr12vjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUb98FF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUXwA2048vs2IY02
+ 0Ec7CjxVAFwI0_Gr0_Xr1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
+ wVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UM2
+ 8EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j6F4U
+ JwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
+ IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
+ M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
+ kIc2xKxwCY1x0262kKe7AKxVWUtVW8ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkE
+ bVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67
+ AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI
+ 42IY6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF
+ 4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBI
+ daVFxhVjvjDU0xZFpf9x0JUTE__UUUUU=
 X-Originating-IP: [180.175.29.170]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
@@ -66,47 +69,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sat, 01 Apr 2023 12:49:50 -0000
 
-This patchset tries to fix some problem in current implementation for pointer mask, and add support for pointer mask of instruction fetch.
+write_mstatus() can only change current xl when in debug mode.
+And we need update cur_pmmask/base in this case.
 
-The port is available here:
-https://github.com/plctlab/plct-qemu/tree/plct-pm-fix-v5
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+---
+ target/riscv/csr.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-v2:
-* drop some error patchs
-* Add patch 2 and 3 to fix the new problems
-* Add patch 4 and 5 to use PC-relative translation for pointer mask for instruction fetch
-
-v3:
-* use target_pc temp instead of cpu_pc to store into badaddr in patch 3
-* use dest_gpr instead of tcg_temp_new() for succ_pc in patch 4
-* enable CF_PCREL for system mode in seperate patch 5
-
-v4：
-* Fix wrong pc_save value for conditional jump in patch 4
-* Fix tcg_cflags overwrite problem to make CF_PCREL really work in new patch 5
-* Fix tb mis-matched problem in new patch 6
-
-v5:
-* use gen_get_target_pc to compute target address of auipc and successor address of jalr in patch 4.
-* separate tcg related fix patches(5, 6) from this patchset
-
-Weiwei Li (6):
-  target/riscv: Fix pointer mask transformation for vector address
-  target/riscv: Update cur_pmmask/base when xl changes
-  target/riscv: Fix target address to update badaddr
-  target/riscv: Add support for PC-relative translation
-  target/riscv: Enable PC-relative translation in system mode
-  target/riscv: Add pointer mask support for instruction fetch
-
- target/riscv/cpu.c                      | 31 +++++++----
- target/riscv/cpu.h                      |  1 +
- target/riscv/cpu_helper.c               | 20 ++++++-
- target/riscv/csr.c                      | 11 ++--
- target/riscv/insn_trans/trans_rvi.c.inc | 37 +++++++++----
- target/riscv/translate.c                | 72 ++++++++++++++++++-------
- target/riscv/vector_helper.c            |  2 +-
- 7 files changed, 131 insertions(+), 43 deletions(-)
-
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index d522efc0b6..43b9ad4500 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1277,8 +1277,15 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+         mstatus = set_field(mstatus, MSTATUS64_SXL, xl);
+     }
+     env->mstatus = mstatus;
+-    env->xl = cpu_recompute_xl(env);
+ 
++    /*
++     * Except in debug mode, UXL/SXL can only be modified by higher
++     * privilege mode. So xl will not be changed in normal mode.
++     */
++    if (env->debugger) {
++        env->xl = cpu_recompute_xl(env);
++        riscv_cpu_update_mask(env);
++    }
+     return RISCV_EXCP_NONE;
+ }
+ 
 -- 
 2.25.1
 
