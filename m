@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjW4p-0002vt-NO
+	id 1pjW4q-0002wA-Ta
 	for mharc-qemu-riscv@gnu.org; Mon, 03 Apr 2023 22:07:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pjW4i-0002tv-8S; Mon, 03 Apr 2023 22:07:10 -0400
+ id 1pjW4i-0002ts-7K; Mon, 03 Apr 2023 22:07:08 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pjW4e-00014X-BH; Mon, 03 Apr 2023 22:07:08 -0400
+ id 1pjW4e-00014V-Bm; Mon, 03 Apr 2023 22:07:07 -0400
 Received: from localhost.localdomain (unknown [180.175.29.170])
- by APP-05 (Coremail) with SMTP id zQCowAD3_s4+hitkdVLLDQ--.57109S5;
- Tue, 04 Apr 2023 10:06:56 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowAD3_s4+hitkdVLLDQ--.57109S7;
+ Tue, 04 Apr 2023 10:06:58 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -20,32 +20,33 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v6 3/6] target/riscv: Fix target address to update badaddr
-Date: Tue,  4 Apr 2023 10:06:50 +0800
-Message-Id: <20230404020653.18911-4-liweiwei@iscas.ac.cn>
+Subject: [PATCH v6 5/6] target/riscv: Enable PC-relative translation in system
+ mode
+Date: Tue,  4 Apr 2023 10:06:52 +0800
+Message-Id: <20230404020653.18911-6-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230404020653.18911-1-liweiwei@iscas.ac.cn>
 References: <20230404020653.18911-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowAD3_s4+hitkdVLLDQ--.57109S5
-X-Coremail-Antispam: 1UD129KBjvJXoWxurykJF4kGrWxJw15Kr1rJFb_yoWrtw43pF
- 17Cw17urWDJFZIvayFga1jyF15Gr4SgrWUKw4Sywn5Ka13trW5CrnrtayakFyj9FZ5Xr4Y
- 9FZ8AF1j9w4jqa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPY14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
- x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j6F4U
- JwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
- IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
- M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
- kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
- 14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIx
- kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAF
- wI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r
- 4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd8n5U
- UUUU=
+X-CM-TRANSID: zQCowAD3_s4+hitkdVLLDQ--.57109S7
+X-Coremail-Antispam: 1UD129KBjvdXoWrtF18Aw4xuw45Gr43Zr4rGrg_yoW3Cwb_Wa
+ yI9F4kXr1UX3W09F4rAr45Gr1rC348XFy0gFWxtas5CFWj9r97Aa4DKrZ7Xw18urZ3AF9x
+ Aas7Jr9rCr4UGjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbqkFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
+ IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
+ F7xvwVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
+ 1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr1j
+ 6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x
+ IIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_
+ Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8c
+ xan2IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8C
+ rVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8Zw
+ CIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x02
+ 67AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r
+ 1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQ
+ SdkUUUUU=
 X-Originating-IP: [180.175.29.170]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -69,137 +70,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 04 Apr 2023 02:07:10 -0000
 
-Compute the target address before storing it into badaddr
-when mis-aligned exception is triggered.
-Use a target_pc temp to store the target address to avoid
-the confusing operation that udpate target address into
-cpu_pc before misalign check, then update it into badaddr
-and restore cpu_pc to current pc if exception is triggered.
+Enable PC-relative translation in system mode by setting CF_PCREL
+field of tcg_cflags in riscv_cpu_realize().
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn_trans/trans_rvi.c.inc | 23 ++++++++++++++++-------
- target/riscv/translate.c                | 21 ++++++++++-----------
- 2 files changed, 26 insertions(+), 18 deletions(-)
+ target/riscv/cpu.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 4ad54e8a49..cc72864d32 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -51,25 +51,30 @@ static bool trans_jal(DisasContext *ctx, arg_jal *a)
- static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
- {
-     TCGLabel *misaligned = NULL;
-+    TCGv target_pc = tcg_temp_new();
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 646fa31a59..3b562d5d9f 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1193,6 +1193,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
  
--    tcg_gen_addi_tl(cpu_pc, get_gpr(ctx, a->rs1, EXT_NONE), a->imm);
--    tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
-+    tcg_gen_addi_tl(target_pc, get_gpr(ctx, a->rs1, EXT_NONE), a->imm);
-+    tcg_gen_andi_tl(target_pc, target_pc, (target_ulong)-2);
+ 
+ #ifndef CONFIG_USER_ONLY
++    cs->tcg_cflags |= CF_PCREL;
 +
-+    if (get_xl(ctx) == MXL_RV32) {
-+        tcg_gen_ext32s_tl(target_pc, target_pc);
-+    }
- 
--    gen_set_pc(ctx, cpu_pc);
-     if (!has_ext(ctx, RVC)) {
-         TCGv t0 = tcg_temp_new();
- 
-         misaligned = gen_new_label();
--        tcg_gen_andi_tl(t0, cpu_pc, 0x2);
-+        tcg_gen_andi_tl(t0, target_pc, 0x2);
-         tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
-     }
- 
-     gen_set_gpri(ctx, a->rd, ctx->pc_succ_insn);
-+    tcg_gen_mov_tl(cpu_pc, target_pc);
-     lookup_and_goto_ptr(ctx);
- 
-     if (misaligned) {
-         gen_set_label(misaligned);
--        gen_exception_inst_addr_mis(ctx);
-+        gen_exception_inst_addr_mis(ctx, target_pc);
-     }
-     ctx->base.is_jmp = DISAS_NORETURN;
- 
-@@ -153,6 +158,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
-     TCGLabel *l = gen_new_label();
-     TCGv src1 = get_gpr(ctx, a->rs1, EXT_SIGN);
-     TCGv src2 = get_gpr(ctx, a->rs2, EXT_SIGN);
-+    target_ulong next_pc;
- 
-     if (get_xl(ctx) == MXL_RV128) {
-         TCGv src1h = get_gprh(ctx, a->rs1);
-@@ -169,9 +175,12 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
- 
-     gen_set_label(l); /* branch taken */
- 
--    if (!has_ext(ctx, RVC) && ((ctx->base.pc_next + a->imm) & 0x3)) {
-+    next_pc = ctx->base.pc_next + a->imm;
-+    if (!has_ext(ctx, RVC) && (next_pc & 0x3)) {
-         /* misaligned */
--        gen_exception_inst_addr_mis(ctx);
-+        TCGv target_pc = tcg_temp_new();
-+        gen_pc_plus_diff(target_pc, ctx, next_pc);
-+        gen_exception_inst_addr_mis(ctx, target_pc);
-     } else {
-         gen_goto_tb(ctx, 0, ctx->base.pc_next + a->imm);
-     }
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 0ee8ee147d..d434fedb37 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -222,21 +222,18 @@ static void decode_save_opc(DisasContext *ctx)
-     ctx->insn_start = NULL;
- }
- 
--static void gen_set_pc_imm(DisasContext *ctx, target_ulong dest)
-+static void gen_pc_plus_diff(TCGv target, DisasContext *ctx,
-+                              target_ulong dest)
- {
-     if (get_xl(ctx) == MXL_RV32) {
-         dest = (int32_t)dest;
-     }
--    tcg_gen_movi_tl(cpu_pc, dest);
-+    tcg_gen_movi_tl(target, dest);
- }
- 
--static void gen_set_pc(DisasContext *ctx, TCGv dest)
-+static void gen_set_pc_imm(DisasContext *ctx, target_ulong dest)
- {
--    if (get_xl(ctx) == MXL_RV32) {
--        tcg_gen_ext32s_tl(cpu_pc, dest);
--    } else {
--        tcg_gen_mov_tl(cpu_pc, dest);
--    }
-+    gen_pc_plus_diff(cpu_pc, ctx, dest);
- }
- 
- static void generate_exception(DisasContext *ctx, int excp)
-@@ -257,9 +254,9 @@ static void gen_exception_illegal(DisasContext *ctx)
-     }
- }
- 
--static void gen_exception_inst_addr_mis(DisasContext *ctx)
-+static void gen_exception_inst_addr_mis(DisasContext *ctx, TCGv target)
- {
--    tcg_gen_st_tl(cpu_pc, cpu_env, offsetof(CPURISCVState, badaddr));
-+    tcg_gen_st_tl(target, cpu_env, offsetof(CPURISCVState, badaddr));
-     generate_exception(ctx, RISCV_EXCP_INST_ADDR_MIS);
- }
- 
-@@ -551,7 +548,9 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
-     next_pc = ctx->base.pc_next + imm;
-     if (!has_ext(ctx, RVC)) {
-         if ((next_pc & 0x3) != 0) {
--            gen_exception_inst_addr_mis(ctx);
-+            TCGv target_pc = tcg_temp_new();
-+            gen_pc_plus_diff(target_pc, ctx, next_pc);
-+            gen_exception_inst_addr_mis(ctx, target_pc);
-             return;
-         }
+     if (cpu->cfg.ext_sstc) {
+         riscv_timer_init(cpu);
      }
 -- 
 2.25.1
