@@ -1,50 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjVwb-00010f-4F
-	for mharc-qemu-riscv@gnu.org; Mon, 03 Apr 2023 21:58:45 -0400
+	id 1pjW4k-0002ub-T1
+	for mharc-qemu-riscv@gnu.org; Mon, 03 Apr 2023 22:07:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pjVwZ-000100-AE; Mon, 03 Apr 2023 21:58:43 -0400
-Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pjVwW-0004qv-Eg; Mon, 03 Apr 2023 21:58:43 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R361e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
- TI=SMTPD_---0VfJg8u7_1680573506; 
-Received: from 30.221.97.97(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0VfJg8u7_1680573506) by smtp.aliyun-inc.com;
- Tue, 04 Apr 2023 09:58:27 +0800
-Message-ID: <3e210469-7251-327a-7cf4-52a604ff3442@linux.alibaba.com>
-Date: Tue, 4 Apr 2023 09:58:22 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.1
-Subject: Re: [RESEND PATCH v5 4/6] target/riscv: Add support for PC-relative
- translation
-Content-Language: en-US
-To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pjW4h-0002te-Rq; Mon, 03 Apr 2023 22:07:07 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pjW4e-00014H-8c; Mon, 03 Apr 2023 22:07:06 -0400
+Received: from localhost.localdomain (unknown [180.175.29.170])
+ by APP-05 (Coremail) with SMTP id zQCowAD3_s4+hitkdVLLDQ--.57109S2;
+ Tue, 04 Apr 2023 10:06:55 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Richard Henderson <richard.henderson@linaro.org>
-References: <20230401124935.20997-1-liweiwei@iscas.ac.cn>
- <20230401124935.20997-5-liweiwei@iscas.ac.cn>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230401124935.20997-5-liweiwei@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.131;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-131.freemail.mail.aliyun.com
-X-Spam_score_int: -111
-X-Spam_score: -11.2
-X-Spam_bar: -----------
-X-Spam_report: (-11.2 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-1.349, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v6 0/6] target/riscv: Fix pointer mask related support
+Date: Tue,  4 Apr 2023 10:06:47 +0800
+Message-Id: <20230404020653.18911-1-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: zQCowAD3_s4+hitkdVLLDQ--.57109S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7Cw1xKr4UAFWUCw4rGr1xKrg_yoW8CF17pF
+ WfC3y3JayDJFZ7Xr4fJa18Ar15GF4fuFWDCwn7Jwn5tw45trWFqrn7K34UCFWkJFyfW347
+ KF1jyr1fuF1UArJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUvY14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
+ 4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
+ Yx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbV
+ WUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7Cj
+ xVA2Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxV
+ Aqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q
+ 6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6x
+ kF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AK
+ xVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0J
+ UdHUDUUUUU=
+X-Originating-IP: [180.175.29.170]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -57,252 +64,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Apr 2023 01:58:43 -0000
+X-List-Received-Date: Tue, 04 Apr 2023 02:07:08 -0000
 
+This patchset tries to fix some problem in current implementation for pointer mask, and add support for pointer mask of instruction fetch.
 
-On 2023/4/1 20:49, Weiwei Li wrote:
-> Add a base save_pc For PC-relative translation(CF_PCREL).
-> Diable the directly sync pc from tb by riscv_cpu_synchronize_from_tb.
-> Sync pc before it's used or updated from tb related pc:
->     real_pc = (old)env->pc + target_pc(from tb) - ctx->save_pc
-> Use gen_get_target_pc to compute target address of auipc and successor
-> address of jalr.
->
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   target/riscv/cpu.c                      | 29 +++++++++-----
->   target/riscv/insn_trans/trans_rvi.c.inc | 14 +++++--
->   target/riscv/translate.c                | 53 +++++++++++++++++++++----
->   3 files changed, 75 insertions(+), 21 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1e97473af2..646fa31a59 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -658,16 +658,18 @@ static vaddr riscv_cpu_get_pc(CPUState *cs)
->   static void riscv_cpu_synchronize_from_tb(CPUState *cs,
->                                             const TranslationBlock *tb)
->   {
-> -    RISCVCPU *cpu = RISCV_CPU(cs);
-> -    CPURISCVState *env = &cpu->env;
-> -    RISCVMXL xl = FIELD_EX32(tb->flags, TB_FLAGS, XL);
-> +    if (!(tb_cflags(tb) & CF_PCREL)) {
-> +        RISCVCPU *cpu = RISCV_CPU(cs);
-> +        CPURISCVState *env = &cpu->env;
-> +        RISCVMXL xl = FIELD_EX32(tb->flags, TB_FLAGS, XL);
->   
-> -    tcg_debug_assert(!(cs->tcg_cflags & CF_PCREL));
-> +        tcg_debug_assert(!(cs->tcg_cflags & CF_PCREL));
->   
-> -    if (xl == MXL_RV32) {
-> -        env->pc = (int32_t) tb->pc;
-> -    } else {
-> -        env->pc = tb->pc;
-> +        if (xl == MXL_RV32) {
-> +            env->pc = (int32_t) tb->pc;
-> +        } else {
-> +            env->pc = tb->pc;
-> +        }
->       }
->   }
->   
-> @@ -693,11 +695,18 @@ static void riscv_restore_state_to_opc(CPUState *cs,
->       RISCVCPU *cpu = RISCV_CPU(cs);
->       CPURISCVState *env = &cpu->env;
->       RISCVMXL xl = FIELD_EX32(tb->flags, TB_FLAGS, XL);
-> +    target_ulong pc;
-> +
-> +    if (tb_cflags(tb) & CF_PCREL) {
-> +        pc = (env->pc & TARGET_PAGE_MASK) | data[0];
-> +    } else {
-> +        pc = data[0];
-> +    }
->   
->       if (xl == MXL_RV32) {
-> -        env->pc = (int32_t)data[0];
-> +        env->pc = (int32_t)pc;
->       } else {
-> -        env->pc = data[0];
-> +        env->pc = pc;
->       }
->       env->bins = data[1];
->   }
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-> index 48c73cfcfe..52ef260eff 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -38,7 +38,9 @@ static bool trans_lui(DisasContext *ctx, arg_lui *a)
->   
->   static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
->   {
-> -    gen_set_gpri(ctx, a->rd, a->imm + ctx->base.pc_next);
-> +    TCGv target_pc = dest_gpr(ctx, a->rd);
-> +    gen_get_target_pc(target_pc, ctx, a->imm + ctx->base.pc_next);
-> +    gen_set_gpr(ctx, a->rd, target_pc);
->       return true;
->   }
->   
-> @@ -52,6 +54,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
->   {
->       TCGLabel *misaligned = NULL;
->       TCGv target_pc = tcg_temp_new();
-> +    TCGv succ_pc = dest_gpr(ctx, a->rd);
->   
->       tcg_gen_addi_tl(target_pc, get_gpr(ctx, a->rs1, EXT_NONE), a->imm);
->       tcg_gen_andi_tl(target_pc, target_pc, (target_ulong)-2);
-> @@ -68,7 +71,9 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
->           tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
->       }
->   
-> -    gen_set_gpri(ctx, a->rd, ctx->pc_succ_insn);
-> +    gen_get_target_pc(succ_pc, ctx, ctx->pc_succ_insn);
-> +    gen_set_gpr(ctx, a->rd, succ_pc);
-> +
->       tcg_gen_mov_tl(cpu_pc, target_pc);
+The port is available here:
+https://github.com/plctlab/plct-qemu/tree/plct-pm-fix-v6
 
-If pointer masking enabled, should we adjust the target_pc before it is 
-written into the cpu_pc?
+v2:
+* drop some error patchs
+* Add patch 2 and 3 to fix the new problems
+* Add patch 4 and 5 to use PC-relative translation for pointer mask for instruction fetch
 
->       lookup_and_goto_ptr(ctx);
->   
-> @@ -159,6 +164,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
->       TCGv src1 = get_gpr(ctx, a->rs1, EXT_SIGN);
->       TCGv src2 = get_gpr(ctx, a->rs2, EXT_SIGN);
->       target_ulong next_pc;
-> +    target_ulong orig_pc_save = ctx->pc_save;
->   
->       if (get_xl(ctx) == MXL_RV128) {
->           TCGv src1h = get_gprh(ctx, a->rs1);
-> @@ -175,6 +181,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
->   
->       gen_set_label(l); /* branch taken */
->   
-> +    ctx->pc_save = orig_pc_save;
->       next_pc = ctx->base.pc_next + a->imm;
->       if (!has_ext(ctx, RVC) && (next_pc & 0x3)) {
->           /* misaligned */
-> @@ -182,8 +189,9 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
->           gen_get_target_pc(target_pc, ctx, next_pc);
->           gen_exception_inst_addr_mis(ctx, target_pc);
->       } else {
-> -        gen_goto_tb(ctx, 0, ctx->base.pc_next + a->imm);
-> +        gen_goto_tb(ctx, 0, next_pc);
->       }
-> +    ctx->pc_save = -1;
->       ctx->base.is_jmp = DISAS_NORETURN;
->   
->       return true;
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 7b5223efc2..2dd594ddae 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -59,6 +59,7 @@ typedef struct DisasContext {
->       DisasContextBase base;
->       /* pc_succ_insn points to the instruction following base.pc_next */
->       target_ulong pc_succ_insn;
-> +    target_ulong pc_save;
->       target_ulong priv_ver;
->       RISCVMXL misa_mxl_max;
->       RISCVMXL xl;
-> @@ -225,15 +226,24 @@ static void decode_save_opc(DisasContext *ctx)
->   static void gen_get_target_pc(TCGv target, DisasContext *ctx,
->                                 target_ulong dest)
->   {
-> -    if (get_xl(ctx) == MXL_RV32) {
-> -        dest = (int32_t)dest;
-> +    assert(ctx->pc_save != -1);
-> +    if (tb_cflags(ctx->base.tb) & CF_PCREL) {
-> +        tcg_gen_addi_tl(target, cpu_pc, dest - ctx->pc_save);
-> +        if (get_xl(ctx) == MXL_RV32) {
-> +            tcg_gen_ext32s_tl(target, target);
-> +        }
-> +    } else {
-> +        if (get_xl(ctx) == MXL_RV32) {
-> +            dest = (int32_t)dest;
-> +        }
-> +        tcg_gen_movi_tl(target, dest);
->       }
-> -    tcg_gen_movi_tl(target, dest);
->   }
->   
->   static void gen_set_pc_imm(DisasContext *ctx, target_ulong dest)
->   {
->       gen_get_target_pc(cpu_pc, ctx, dest);
+v3:
+* use target_pc temp instead of cpu_pc to store into badaddr in patch 3
+* use dest_gpr instead of tcg_temp_new() for succ_pc in patch 4
+* enable CF_PCREL for system mode in seperate patch 5
 
-Same like here.
+v4：
+* Fix wrong pc_save value for conditional jump in patch 4
+* Fix tcg_cflags overwrite problem to make CF_PCREL really work in new patch 5
+* Fix tb mis-matched problem in new patch 6
 
-Zhiwei
+v5:
+* use gen_get_target_pc to compute target address of auipc and successor address of jalr in patch 4.
+* separate tcg related fix patches(5, 6) from this patchset
 
-> +    ctx->pc_save = dest;
->   }
->   
->   static void generate_exception(DisasContext *ctx, int excp)
-> @@ -287,8 +297,21 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
->         * direct block chain benefits will be small.
->         */
->       if (translator_use_goto_tb(&ctx->base, dest) && !ctx->itrigger) {
-> -        tcg_gen_goto_tb(n);
-> -        gen_set_pc_imm(ctx, dest);
-> +        /*
-> +         * For pcrel, the pc must always be up-to-date on entry to
-> +         * the linked TB, so that it can use simple additions for all
-> +         * further adjustments.  For !pcrel, the linked TB is compiled
-> +         * to know its full virtual address, so we can delay the
-> +         * update to pc to the unlinked path.  A long chain of links
-> +         * can thus avoid many updates to the PC.
-> +         */
-> +        if (tb_cflags(ctx->base.tb) & CF_PCREL) {
-> +            gen_set_pc_imm(ctx, dest);
-> +            tcg_gen_goto_tb(n);
-> +        } else {
-> +            tcg_gen_goto_tb(n);
-> +            gen_set_pc_imm(ctx, dest);
-> +        }
->           tcg_gen_exit_tb(ctx->base.tb, n);
->       } else {
->           gen_set_pc_imm(ctx, dest);
-> @@ -555,8 +578,16 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
->           }
->       }
->   
-> -    gen_set_gpri(ctx, rd, ctx->pc_succ_insn);
-> -    gen_goto_tb(ctx, 0, ctx->base.pc_next + imm); /* must use this for safety */
-> +    assert(ctx->pc_save != -1);
-> +    if (tb_cflags(ctx->base.tb) & CF_PCREL) {
-> +        TCGv succ_pc = dest_gpr(ctx, rd);
-> +        tcg_gen_addi_tl(succ_pc, cpu_pc, ctx->pc_succ_insn - ctx->pc_save);
-> +        gen_set_gpr(ctx, rd, succ_pc);
-> +    } else {
-> +        gen_set_gpri(ctx, rd, ctx->pc_succ_insn);
-> +    }
-> +
-> +    gen_goto_tb(ctx, 0, next_pc); /* must use this for safety */
->       ctx->base.is_jmp = DISAS_NORETURN;
->   }
->   
-> @@ -1150,6 +1181,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->       RISCVCPU *cpu = RISCV_CPU(cs);
->       uint32_t tb_flags = ctx->base.tb->flags;
->   
-> +    ctx->pc_save = ctx->base.pc_first;
->       ctx->pc_succ_insn = ctx->base.pc_first;
->       ctx->mem_idx = FIELD_EX32(tb_flags, TB_FLAGS, MEM_IDX);
->       ctx->mstatus_fs = tb_flags & TB_FLAGS_MSTATUS_FS;
-> @@ -1195,8 +1227,13 @@ static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
->   static void riscv_tr_insn_start(DisasContextBase *dcbase, CPUState *cpu)
->   {
->       DisasContext *ctx = container_of(dcbase, DisasContext, base);
-> +    target_ulong pc_next = ctx->base.pc_next;
-> +
-> +    if (tb_cflags(dcbase->tb) & CF_PCREL) {
-> +        pc_next &= ~TARGET_PAGE_MASK;
-> +    }
->   
-> -    tcg_gen_insn_start(ctx->base.pc_next, 0);
-> +    tcg_gen_insn_start(pc_next, 0);
->       ctx->insn_start = tcg_last_op();
->   }
->   
+v6:
+* rename gen_get_target_pc as gen_pc_plus_diff in patch 3 and patch 4
+* use gen_pc_plus_diff to compute successor address of jal in patch 4
+* Mov comments for patch 5 to patch 4
+
+Weiwei Li (6):
+  target/riscv: Fix pointer mask transformation for vector address
+  target/riscv: Update cur_pmmask/base when xl changes
+  target/riscv: Fix target address to update badaddr
+  target/riscv: Add support for PC-relative translation
+  target/riscv: Enable PC-relative translation in system mode
+  target/riscv: Add pointer mask support for instruction fetch
+
+ target/riscv/cpu.c                      | 31 ++++++++----
+ target/riscv/cpu.h                      |  1 +
+ target/riscv/cpu_helper.c               | 20 +++++++-
+ target/riscv/csr.c                      | 11 ++--
+ target/riscv/insn_trans/trans_rvi.c.inc | 37 ++++++++++----
+ target/riscv/translate.c                | 67 ++++++++++++++++++-------
+ target/riscv/vector_helper.c            |  2 +-
+ 7 files changed, 126 insertions(+), 43 deletions(-)
+
+-- 
+2.25.1
+
 
