@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjuyK-0002zu-HH
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 00:42:13 -0400
+	id 1pjvCn-0006AD-9v
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 00:57:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjuyI-0002zY-Un; Wed, 05 Apr 2023 00:42:11 -0400
-Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
+ id 1pjvCm-00069y-1D; Wed, 05 Apr 2023 00:57:08 -0400
+Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjuyG-0000A0-TS; Wed, 05 Apr 2023 00:42:10 -0400
-Received: by mail-ua1-x92b.google.com with SMTP id e12so24789160uaa.3;
- Tue, 04 Apr 2023 21:42:08 -0700 (PDT)
+ id 1pjvCj-0002st-7S; Wed, 05 Apr 2023 00:57:07 -0400
+Received: by mail-vs1-xe2a.google.com with SMTP id d18so30418760vsv.11;
+ Tue, 04 Apr 2023 21:57:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680669727;
+ d=gmail.com; s=20210112; t=1680670623;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7RKS3qRVR9X13uJjgu1WIOkfNbB4dVTNOOGn0jwRjFM=;
- b=RiKMZCVPbepWHZZu/o0lH07tek5LJZHp23E3iPbCxrnxNW2/ge8HCvJGpmgZeNBx9c
- R42mzj/RAuI6dGAbOWIWoR5Opu8LJnq6zsm8ektEEe3hcjLcOBMy2946LCqH1YxUAbp2
- lPr2rYLLNskvbktfQM0HnjgFTbhzUoQyzeK7jdfCVkwLQEm7wqf+kwUf7+ACC0+P4T8f
- xvnpvpsCQgwoqmpHzakYQawgkHu04DwjMTLv18kunkO8crGH6WtokcWHQo9s4uyNBC/h
- r8OTQZ7cAEa8Zx2Nf+BmVlaRo4G8q5JQxcFjc8+G44dRdDBZVqknDyoQmo/gmCpjQ1SU
- 80Jw==
+ bh=Mfv1r7vERFJNO/pxSOiF7dpfreqJu6/GDUsOpEMZwwA=;
+ b=j7vd+BQVcMNkvKhe6TlnNMPsyn7jDqFutZEO+lS+qjyJOa/8UrmudwghpdvU6CFGzZ
+ Q2D66w0k7TNFIM8I9c+Vrj560/kZjjAcaCjKs4J2IjAi/vuAXJOVaYk0+BN3Bq26GNn0
+ +rJweEUOm0jDxLG17mzy1eEzAOuPP4/5X7KpYqPeGiyHtm86zPkWEB5SQ4BE/tN6rpBn
+ APQWfE/rZW1C7hL4YmdPU201irfGfLpjOE3L/1Zbdy+GJSQfcNZ4dDJMXDaxuPNaTWsQ
+ W+gp0RSnlHiM65dSdPUvVqyPVi/U7X0eTcfP2D26PRnwo6wSgyfpCSa1i/DaWzU0IJ/S
+ SBng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680669727;
+ d=1e100.net; s=20210112; t=1680670623;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7RKS3qRVR9X13uJjgu1WIOkfNbB4dVTNOOGn0jwRjFM=;
- b=TGXl0wZtpPKmdIHg09VTyk1JSz+Xmj4pVQtWUQQHyz++EYDR+lfFnKdinfyQJFKXwE
- +2unzqSyl5Wtk1NMnRaY2LzJbg0OMws/AQ07hoVDrX81RPiZuQDp2Xt0qlgJ5tjg0bed
- 4w1U+CyPTwwazl2yuQZq0afXLg2UoHVGywUSEom8ikbY7MCgJ8v2zqqQv+4JGtBnXFNH
- tGTtpbXmGONe6JK1frqHIBYOJw7shRVT1tq9m0V0KB3uFAg73/dMDTY7AOjogIvISt7H
- HGHbgvH6hwbUKpRBKcENUVf8AH1bvmH1jc64TPv4kMRFwhMrGcWdF2V4u6FjuspB0nsg
- Tw0A==
-X-Gm-Message-State: AAQBX9ehjrX7XDrwByXyr3OYYDn7k5i0fNyItDL1YEBmwNkDjbgC+xCG
- Wa4x6tOMX7wgm3iURfot6aUXB92e2MR710XJZbI=
-X-Google-Smtp-Source: AKy350Zyo6SzXqjBJuGo0vHXD4CZEZfN2xTBhiV7MzBhTfHM1x5xELcbx2cGDJ7sgI7guCNdbEqB1CknHjVRW3Cc3Qo=
-X-Received: by 2002:a9f:3110:0:b0:68a:a9d:13f5 with SMTP id
- m16-20020a9f3110000000b0068a0a9d13f5mr3461930uab.1.1680669727567; Tue, 04 Apr
- 2023 21:42:07 -0700 (PDT)
+ bh=Mfv1r7vERFJNO/pxSOiF7dpfreqJu6/GDUsOpEMZwwA=;
+ b=saon+n0/I3NE486E/qh2aZbLUtmLqBsq/6e/q7B6hgylrCVaYOss4c/OmDdr1xaAUc
+ fWY9n/EJmGxYA6FCNYB8XKIUeRFNsobPD+gCB5acmOdmTlR/VwPXhxmgujlYCyMoR78c
+ /jxxWynKEkTSq06Hi/qiKpHy6Vh+OZteubxTkIXAIEpg+y588+mwnMj9wp6Jj330Jnzy
+ urfpV/r3xK8dgH12CqwMsiGdufprpHH5bJfZgJ5ufEAschXKoFL4oc+kf33LztXZn4kC
+ CjR4fb0Dz9yA6KzmQSHb8QvN8jIDd+yP8uKSRH57m84ftaXEbdhG9K54U2SEcjWtBYSA
+ bAWQ==
+X-Gm-Message-State: AAQBX9dYgx4i+NG6MSBz5BB4Uy/2sjqwFO9Zf5fdU53lw9iblFOsfRVn
+ 2i6teImZdQ0wTU4da2wpFTQ6Aa789tPP+5y2O00=
+X-Google-Smtp-Source: AKy350ZMf0mDIPHlvLJjHWSRaidFBnF8eZ2ZnSLVO0ZNzn2WMXNXEGL5UHZTx+2YaGvZSDGFxL8dRDykCeRLrfyKnWs=
+X-Received: by 2002:a67:c890:0:b0:425:8e57:7bfd with SMTP id
+ v16-20020a67c890000000b004258e577bfdmr3625607vsk.3.1680670623531; Tue, 04 Apr
+ 2023 21:57:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230404020653.18911-1-liweiwei@iscas.ac.cn>
- <20230404020653.18911-4-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230404020653.18911-4-liweiwei@iscas.ac.cn>
+References: <20230307032915.10059-1-liweiwei@iscas.ac.cn>
+ <20230307032915.10059-2-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230307032915.10059-2-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 5 Apr 2023 14:41:40 +1000
-Message-ID: <CAKmqyKNDXEQg8f+Vnz78rdpHBe=w-FNcX=U9kg7X-7v7MSTFXQ@mail.gmail.com>
-Subject: Re: [PATCH v6 3/6] target/riscv: Fix target address to update badaddr
+Date: Wed, 5 Apr 2023 14:56:37 +1000
+Message-ID: <CAKmqyKNpJSgitgisF9wDU_-m7dOkHDP8uOnhJVbkFRR6t_auNw@mail.gmail.com>
+Subject: Re: [PATCH v3 1/1] hw/riscv: Add signature dump function for spike to
+ run ACT tests
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, 
- Richard Henderson <richard.henderson@linaro.org>
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -78,152 +78,169 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 04:42:11 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 04:57:08 -0000
 
-On Tue, Apr 4, 2023 at 12:08=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
-ote:
+On Tue, Mar 7, 2023 at 1:30=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wro=
+te:
 >
-> Compute the target address before storing it into badaddr
-> when mis-aligned exception is triggered.
-> Use a target_pc temp to store the target address to avoid
-> the confusing operation that udpate target address into
-> cpu_pc before misalign check, then update it into badaddr
-> and restore cpu_pc to current pc if exception is triggered.
+> Add signature and signature-granularity properties in spike to specify th=
+e target
+> signatrue file and the line size for signature data.
+>
+> Recgonize the signature section between begin_signature and end_signature=
+ symbols
+> when loading elf of ACT tests. Then dump signature data in signature sect=
+ion just
+> before the ACT tests exit.
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
+>  hw/char/riscv_htif.c         | 39 +++++++++++++++++++++++++++++++++++-
+>  hw/riscv/spike.c             | 13 ++++++++++++
+>  include/hw/char/riscv_htif.h |  3 +++
+>  3 files changed, 54 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+> index 098de50e35..297c98c215 100644
+> --- a/hw/char/riscv_htif.c
+> +++ b/hw/char/riscv_htif.c
+> @@ -29,6 +29,8 @@
+>  #include "chardev/char-fe.h"
+>  #include "qemu/timer.h"
+>  #include "qemu/error-report.h"
+> +#include "exec/address-spaces.h"
+> +#include "sysemu/dma.h"
+>
+>  #define RISCV_DEBUG_HTIF 0
+>  #define HTIF_DEBUG(fmt, ...)                                            =
+       \
+> @@ -51,7 +53,10 @@
+>  /* PK system call number */
+>  #define PK_SYS_WRITE            64
+>
+> -static uint64_t fromhost_addr, tohost_addr;
+> +const char *sig_file;
+> +uint8_t line_size =3D 16;
+> +
+> +static uint64_t fromhost_addr, tohost_addr, sig_addr, sig_len;
+>
+>  void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_=
+value,
+>                            uint64_t st_size)
+> @@ -68,6 +73,10 @@ void htif_symbol_callback(const char *st_name, int st_=
+info, uint64_t st_value,
+>              error_report("HTIF tohost must be 8 bytes");
+>              exit(1);
+>          }
+> +    } else if (strcmp("begin_signature", st_name) =3D=3D 0) {
+> +        sig_addr =3D st_value;
+> +    } else if (strcmp("end_signature", st_name) =3D=3D 0) {
+> +        sig_len =3D st_value - sig_addr;
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+What if sig_addr isn't initialised, won't this give us a really wrong lengt=
+h?
+
+We should have a default address or check that it has been set
+
+>      }
+>  }
+>
+> @@ -161,6 +170,34 @@ static void htif_handle_tohost_write(HTIFState *s, u=
+int64_t val_written)
+>          /* frontend syscall handler, shutdown and exit code support */
+>          if (cmd =3D=3D HTIF_SYSTEM_CMD_SYSCALL) {
+>              if (payload & 0x1) {
+> +                /* Dump signature data to sig_file if specified */
+> +                if (sig_file) {
+> +                    char *sig_data =3D g_malloc(sig_len);
+> +                    dma_memory_read(&address_space_memory, sig_addr, sig=
+_data,
+> +                                    sig_len, MEMTXATTRS_UNSPECIFIED);
+> +                    FILE *signature =3D fopen(sig_file, "w");
+> +                    if (signature =3D=3D NULL) {
+> +                        error_report("open %s: %s", sig_file,
+
+The error should be "Unable to open %s with error %s" to be more clear
 
 Alistair
 
-> ---
->  target/riscv/insn_trans/trans_rvi.c.inc | 23 ++++++++++++++++-------
->  target/riscv/translate.c                | 21 ++++++++++-----------
->  2 files changed, 26 insertions(+), 18 deletions(-)
->
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_=
-trans/trans_rvi.c.inc
-> index 4ad54e8a49..cc72864d32 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -51,25 +51,30 @@ static bool trans_jal(DisasContext *ctx, arg_jal *a)
->  static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
->  {
->      TCGLabel *misaligned =3D NULL;
-> +    TCGv target_pc =3D tcg_temp_new();
->
-> -    tcg_gen_addi_tl(cpu_pc, get_gpr(ctx, a->rs1, EXT_NONE), a->imm);
-> -    tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
-> +    tcg_gen_addi_tl(target_pc, get_gpr(ctx, a->rs1, EXT_NONE), a->imm);
-> +    tcg_gen_andi_tl(target_pc, target_pc, (target_ulong)-2);
+> +                                     strerror(errno));
+> +                        exit(1);
+> +                    }
 > +
-> +    if (get_xl(ctx) =3D=3D MXL_RV32) {
-> +        tcg_gen_ext32s_tl(target_pc, target_pc);
-> +    }
->
-> -    gen_set_pc(ctx, cpu_pc);
->      if (!has_ext(ctx, RVC)) {
->          TCGv t0 =3D tcg_temp_new();
->
->          misaligned =3D gen_new_label();
-> -        tcg_gen_andi_tl(t0, cpu_pc, 0x2);
-> +        tcg_gen_andi_tl(t0, target_pc, 0x2);
->          tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
->      }
->
->      gen_set_gpri(ctx, a->rd, ctx->pc_succ_insn);
-> +    tcg_gen_mov_tl(cpu_pc, target_pc);
->      lookup_and_goto_ptr(ctx);
->
->      if (misaligned) {
->          gen_set_label(misaligned);
-> -        gen_exception_inst_addr_mis(ctx);
-> +        gen_exception_inst_addr_mis(ctx, target_pc);
->      }
->      ctx->base.is_jmp =3D DISAS_NORETURN;
->
-> @@ -153,6 +158,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, T=
-CGCond cond)
->      TCGLabel *l =3D gen_new_label();
->      TCGv src1 =3D get_gpr(ctx, a->rs1, EXT_SIGN);
->      TCGv src2 =3D get_gpr(ctx, a->rs2, EXT_SIGN);
-> +    target_ulong next_pc;
->
->      if (get_xl(ctx) =3D=3D MXL_RV128) {
->          TCGv src1h =3D get_gprh(ctx, a->rs1);
-> @@ -169,9 +175,12 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, =
-TCGCond cond)
->
->      gen_set_label(l); /* branch taken */
->
-> -    if (!has_ext(ctx, RVC) && ((ctx->base.pc_next + a->imm) & 0x3)) {
-> +    next_pc =3D ctx->base.pc_next + a->imm;
-> +    if (!has_ext(ctx, RVC) && (next_pc & 0x3)) {
->          /* misaligned */
-> -        gen_exception_inst_addr_mis(ctx);
-> +        TCGv target_pc =3D tcg_temp_new();
-> +        gen_pc_plus_diff(target_pc, ctx, next_pc);
-> +        gen_exception_inst_addr_mis(ctx, target_pc);
->      } else {
->          gen_goto_tb(ctx, 0, ctx->base.pc_next + a->imm);
->      }
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 0ee8ee147d..d434fedb37 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -222,21 +222,18 @@ static void decode_save_opc(DisasContext *ctx)
->      ctx->insn_start =3D NULL;
+> +                    for (int i =3D 0; i < sig_len; i +=3D line_size) {
+> +                        for (int j =3D line_size; j > 0; j--) {
+> +                            if (i + j <=3D sig_len) {
+> +                                fprintf(signature, "%02x",
+> +                                        sig_data[i + j - 1] & 0xff);
+> +                            } else {
+> +                                fprintf(signature, "%02x", 0);
+> +                            }
+> +                        }
+> +                        fprintf(signature, "\n");
+> +                    }
+> +
+> +                    fclose(signature);
+> +                    g_free(sig_data);
+> +                }
+> +
+>                  /* exit code */
+>                  int exit_code =3D payload >> 1;
+>                  exit(exit_code);
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index a584d5b3a2..2c5546560a 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -332,6 +332,11 @@ static void spike_board_init(MachineState *machine)
+>                   htif_custom_base);
 >  }
 >
-> -static void gen_set_pc_imm(DisasContext *ctx, target_ulong dest)
-> +static void gen_pc_plus_diff(TCGv target, DisasContext *ctx,
-> +                              target_ulong dest)
+> +static void spike_set_signature(Object *obj, const char *val, Error **er=
+rp)
+> +{
+> +    sig_file =3D g_strdup(val);
+> +}
+> +
+>  static void spike_machine_instance_init(Object *obj)
 >  {
->      if (get_xl(ctx) =3D=3D MXL_RV32) {
->          dest =3D (int32_t)dest;
->      }
-> -    tcg_gen_movi_tl(cpu_pc, dest);
-> +    tcg_gen_movi_tl(target, dest);
+>  }
+> @@ -350,6 +355,14 @@ static void spike_machine_class_init(ObjectClass *oc=
+, void *data)
+>      mc->get_default_cpu_node_id =3D riscv_numa_get_default_cpu_node_id;
+>      mc->numa_mem_supported =3D true;
+>      mc->default_ram_id =3D "riscv.spike.ram";
+> +    object_class_property_add_str(oc, "signature", NULL, spike_set_signa=
+ture);
+> +    object_class_property_set_description(oc, "signature",
+> +                                          "File to write ACT test signat=
+ure");
+> +    object_class_property_add_uint8_ptr(oc, "signature-granularity",
+> +                                        &line_size, OBJ_PROP_FLAG_WRITE)=
+;
+> +    object_class_property_set_description(oc, "signature-granularity",
+> +                                          "Size of each line in ACT sign=
+ature "
+> +                                          "file");
 >  }
 >
-> -static void gen_set_pc(DisasContext *ctx, TCGv dest)
-> +static void gen_set_pc_imm(DisasContext *ctx, target_ulong dest)
->  {
-> -    if (get_xl(ctx) =3D=3D MXL_RV32) {
-> -        tcg_gen_ext32s_tl(cpu_pc, dest);
-> -    } else {
-> -        tcg_gen_mov_tl(cpu_pc, dest);
-> -    }
-> +    gen_pc_plus_diff(cpu_pc, ctx, dest);
->  }
+>  static const TypeInfo spike_machine_typeinfo =3D {
+> diff --git a/include/hw/char/riscv_htif.h b/include/hw/char/riscv_htif.h
+> index 5958c5b986..df493fdf6b 100644
+> --- a/include/hw/char/riscv_htif.h
+> +++ b/include/hw/char/riscv_htif.h
+> @@ -40,6 +40,9 @@ typedef struct HTIFState {
+>      uint64_t pending_read;
+>  } HTIFState;
 >
->  static void generate_exception(DisasContext *ctx, int excp)
-> @@ -257,9 +254,9 @@ static void gen_exception_illegal(DisasContext *ctx)
->      }
->  }
->
-> -static void gen_exception_inst_addr_mis(DisasContext *ctx)
-> +static void gen_exception_inst_addr_mis(DisasContext *ctx, TCGv target)
->  {
-> -    tcg_gen_st_tl(cpu_pc, cpu_env, offsetof(CPURISCVState, badaddr));
-> +    tcg_gen_st_tl(target, cpu_env, offsetof(CPURISCVState, badaddr));
->      generate_exception(ctx, RISCV_EXCP_INST_ADDR_MIS);
->  }
->
-> @@ -551,7 +548,9 @@ static void gen_jal(DisasContext *ctx, int rd, target=
-_ulong imm)
->      next_pc =3D ctx->base.pc_next + imm;
->      if (!has_ext(ctx, RVC)) {
->          if ((next_pc & 0x3) !=3D 0) {
-> -            gen_exception_inst_addr_mis(ctx);
-> +            TCGv target_pc =3D tcg_temp_new();
-> +            gen_pc_plus_diff(target_pc, ctx, next_pc);
-> +            gen_exception_inst_addr_mis(ctx, target_pc);
->              return;
->          }
->      }
+> +extern const char *sig_file;
+> +extern uint8_t line_size;
+> +
+>  /* HTIF symbol callback */
+>  void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_=
+value,
+>      uint64_t st_size);
 > --
 > 2.25.1
 >
