@@ -1,85 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pk9zp-00044f-8K
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 16:44:45 -0400
+	id 1pkCBg-0005V9-1I
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 19:05:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pk9zo-00044H-Ki
- for qemu-riscv@nongnu.org; Wed, 05 Apr 2023 16:44:44 -0400
-Received: from mail-oo1-xc2a.google.com ([2607:f8b0:4864:20::c2a])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pkCBd-0005Ur-U5; Wed, 05 Apr 2023 19:05:05 -0400
+Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pk9zm-0007rG-5U
- for qemu-riscv@nongnu.org; Wed, 05 Apr 2023 16:44:44 -0400
-Received: by mail-oo1-xc2a.google.com with SMTP id
- i4-20020a056820138400b0053e3ccf739cso4983727oow.10
- for <qemu-riscv@nongnu.org>; Wed, 05 Apr 2023 13:44:41 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pkCBc-0000fC-5v; Wed, 05 Apr 2023 19:05:05 -0400
+Received: by mail-vs1-xe35.google.com with SMTP id cu36so32896524vsb.7;
+ Wed, 05 Apr 2023 16:05:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1680727480;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ZqWfb2PPnDpc2PEqcd7YpJ7M16hWDtl2fWp2jjEorwo=;
- b=TNOuzQODBFw4w+EKPw8H+hz/E1aFLDuz22IVxMRnSrjb96aaHbwmAL33xIMmsa9gvT
- iQp4A+/cHZmTKQDilGfL91aI/DfMj/G4wqLu1ET9xijR7swBv3vTXJrJj8TmNGA7S2Wv
- I2JUjyx6LNQ0MuLEQqZ0rTJGi44n1a2kWz1l/eM7zNNXDxXZaolcM9jdrg2Wwwx0V3gq
- upJ4sQdYAzdREj76KzCbvrFdw4HQmzfe/DMlJEtP8AoCCIbKzxEHrOAI75X1/3Qrwetp
- UjBxAFpe4rHKutfCkfjc7G0Sil1Fd+40EFqphuSetm2R1vMJ7pYfF7Wi3XT1HhpMA8GJ
- DUrg==
+ d=gmail.com; s=20210112; t=1680735902;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=L+HpkiUxbKZZuvzD5ms6ufWr18h0S0bZziKCDGRovws=;
+ b=oh0cozYaC9VsahSsTKo1fCbrLaZdyIYlCvJk6ahZLCFmc9CcZaC9qczE4VwqW6pfqI
+ 5QY6bvjfVOogiYGe1StYt/UZx+2/VpWpA0PD0FqXSQvyqZnkdcNlWrWixlGIDQFs9DXz
+ yzao7WZmT+U2++hnQ233f07lSk0r+qArFzOeP6cWaSHTsPlZaWFXUFOt7KGUbyFyJUki
+ x8V9o5spiMHJhBUfcIR6u6dy27ocgrFbHgsvtQPAW0wOetmMN1lFeCRHBm6p7sPz1NGK
+ XHFjt8v6R45NQabQQDfftPxPvjVjY/frLbUhmK7GHuXIO4Kph3QYUh37gder2bvXxqDs
+ 31Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680727480;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ZqWfb2PPnDpc2PEqcd7YpJ7M16hWDtl2fWp2jjEorwo=;
- b=cC8ecuofld49Cxix/dSv40y99HQXdqKbZGFWjMjAAviOa9tIWvsq33mn3qS6M+D/9y
- A8s5R6nG4Y3W93rYzeTl0EOZ/8dprdKR/67yHLYyfnivvVRehlnN6QS0ZgVK3vwcwIJz
- FUPg5JobfTtBCk1rhy/Ej7kQUegMQf0UYqftzZccagJJzMUkz+iBIebfUER7winpMxLJ
- 1s4jBAg+s1DlCjbLb5otIiNZvoi8NYCA8CZfnmUml9N1fIHslVwq6MMVz/+Egg/WR1Ew
- JtoDZIYv9pHlEnUsofW4nHVkG/EKxnG3dicG0AXo7apjXM2OrxOx6v217nANzeD4ufxv
- KIFA==
-X-Gm-Message-State: AAQBX9cAb/E71mx0t2g+IzbSzgoHmeE6ZZG4Ji2qc6zcX/HrW1KmxtBB
- PdvF87UkwiBgR0qp2lS4fxV5Ug==
-X-Google-Smtp-Source: AKy350Zpo5917s3wwJGg0D4GjQAAqZMwM4zNUds49ooFSWmxGSeohhLZSBKl2stDGqytkYYe+q1+OA==
-X-Received: by 2002:a4a:5241:0:b0:537:b1ad:1c7c with SMTP id
- d62-20020a4a5241000000b00537b1ad1c7cmr3544290oob.0.1680727480668; 
- Wed, 05 Apr 2023 13:44:40 -0700 (PDT)
-Received: from [192.168.68.107] ([191.255.108.232])
- by smtp.gmail.com with ESMTPSA id
- u1-20020a056830118100b0069fb749271bsm7192106otq.15.2023.04.05.13.44.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Apr 2023 13:44:39 -0700 (PDT)
-Message-ID: <984d3eda-1efd-f39d-8930-3a8ea5226ad5@ventanamicro.com>
-Date: Wed, 5 Apr 2023 17:44:34 -0300
+ d=1e100.net; s=20210112; t=1680735902;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=L+HpkiUxbKZZuvzD5ms6ufWr18h0S0bZziKCDGRovws=;
+ b=JWiTV5hvzQKG02SE+ZXEhQbBhULOqridHuHMioXOwFJvhU2aA2EZzxZABEyO7rV5PC
+ RNsu5902fAaUdJBzPT1fmo5uhr7SSwVk3Pn6K+qpOfk15jgggslKvGWOSspSrWi5KHzf
+ y0c0g0+6D0FSTexSGA/EivaNDPd3UcjuJ1F2jIcsfjQxKQCi5G7K/qe/2AiwlpSISI5g
+ 3A6gRRSIZ0jtqUEr0ioYy0rKAXQ/eyeL94W4ZyxLUrVzw/ARUbkpYkqMcXRU9zOYhATs
+ SGLhuHZ5nrNC04HuRXGi4WFBGuwFGC1Rb1ClJR6lRLvOGjJ1I8Lzo996ssbjGlenr72A
+ rZiA==
+X-Gm-Message-State: AAQBX9ddyTz2W3dQOSGLUjLuh+vJQlR/l+esit6OY/WLxJsj83U8eCBG
+ htetWPkEvpkscMiyLnekNGQhawRroIefboZiKmjVz5KnmwA=
+X-Google-Smtp-Source: AKy350YOQJX7WKhqgv2+vi4F5exUMPPqx0Bpdb7UdpjpUfROsT0ew808Kur8MZozEfylUZg3IA3fYaA6w1kbGdRW09c=
+X-Received: by 2002:a05:6102:3d29:b0:425:ddcf:69b3 with SMTP id
+ i41-20020a0561023d2900b00425ddcf69b3mr4510690vsv.0.1680735902132; Wed, 05 Apr
+ 2023 16:05:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [RFC PATCH 09/10] target/riscv: Restrict KVM-specific fields from
- ArchCPU
-Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>, qemu-arm@nongnu.org,
- kvm@vger.kernel.org, qemu-ppc@nongnu.org, Palmer Dabbelt
- <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20230405160454.97436-1-philmd@linaro.org>
- <20230405160454.97436-10-philmd@linaro.org>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230405160454.97436-10-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2a.google.com
-X-Spam_score_int: -34
-X-Spam_score: -3.5
-X-Spam_bar: ---
-X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.355,
+References: <20230405085813.40643-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230405085813.40643-1-liweiwei@iscas.ac.cn>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 6 Apr 2023 09:04:36 +1000
+Message-ID: <CAKmqyKONe8TTLGrDi+bnjxUiSN=1Hm7AiiDairOtff7aeDHDog@mail.gmail.com>
+Subject: Re: [PATCH v3 0/4] target/riscv: Simplification for RVH related check
+ and code style fix
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,97 +77,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 20:44:44 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 23:05:06 -0000
 
+On Wed, Apr 5, 2023 at 6:59=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wro=
+te:
+>
+> This patchset tries to simplify the RVH related check and fix some code s=
+tyle problems, such as problems for indentation, multi-line comments and li=
+nes with over 80 characters.
+>
+> The port is available here:
+> https://github.com/plctlab/plct-qemu/tree/plct-virtfix-upstream
+>
+> v2:
+> * add comment to specify riscv_cpu_set_virt_enabled() can only be called =
+when RVH is enabled in patch 4 (suggested by Richard Henderson)
+> * merge patch from LIU Zhiwei(Message-ID: <20230325145348.1208-1-zhiwei_l=
+iu@linux.alibaba.com>) to patch 5
+> * use env->virt_enabled directly instead of riscv_cpu_virt_enabled() in p=
+atch 6 (suggested by LIU Zhiwei)
+> * remain the orginal identation for macro name in patch 8 (suggested by L=
+IU Zhiwei)
+>
+> v3:
+> * rebase on riscv-to-apply.next (partial patches in v2 have been applied)
+> * Fix new found format problem in patch 2,3,4 of v3
+>
+> Weiwei Li (4):
+>   target/riscv: Remove riscv_cpu_virt_enabled()
+>   target/riscv: Fix format for indentation
+>   target/riscv: Fix format for comments
+>   target/riscv: Fix lines with over 80 characters
 
+Thanks!
 
-On 4/5/23 13:04, Philippe Mathieu-Daudé wrote:
-> These fields shouldn't be accessed when KVM is not available.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
-> RFC: The migration part is likely invalid...
-> 
-> kvmtimer_needed() is defined in target/riscv/machine.c as
-> 
->    static bool kvmtimer_needed(void *opaque)
->    {
->        return kvm_enabled();
->    }
-> 
-> which depends on a host feature.
+Applied to riscv-to-apply.next
 
+Alistair
 
-kvm_enabled() can be false even when CONFIG_KVM is true when a KVM capable host
-is running a TCG guest, for example. In that case env->kvm_timer_* states exist
-but aren't initialized, and shouldn't be migrated.
-
-Thus it's not just a host feature, but a host feature + accel option. I think
-this is fine.
-
-> ---
->   target/riscv/cpu.h     | 2 ++
->   target/riscv/machine.c | 4 ++++
->   2 files changed, 6 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 638e47c75a..82939235ab 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -377,12 +377,14 @@ struct CPUArchState {
->       hwaddr kernel_addr;
->       hwaddr fdt_addr;
->   
-> +#ifdef CONFIG_KVM
->       /* kvm timer */
->       bool kvm_timer_dirty;
->       uint64_t kvm_timer_time;
->       uint64_t kvm_timer_compare;
->       uint64_t kvm_timer_state;
->       uint64_t kvm_timer_frequency;
-> +#endif /* CONFIG_KVM */
->   };
->   
->   OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 9c455931d8..e45d564ec3 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -201,10 +201,12 @@ static bool kvmtimer_needed(void *opaque)
->   
->   static int cpu_post_load(void *opaque, int version_id)
->   {
-> +#ifdef CONFIG_KVM
->       RISCVCPU *cpu = opaque;
->       CPURISCVState *env = &cpu->env;
->   
->       env->kvm_timer_dirty = true;
-> +#endif
->       return 0;
->   }
->   
-> @@ -215,9 +217,11 @@ static const VMStateDescription vmstate_kvmtimer = {
->       .needed = kvmtimer_needed,
->       .post_load = cpu_post_load,
->       .fields = (VMStateField[]) {
-> +#ifdef CONFIG_KVM
->           VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
->           VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
->           VMSTATE_UINT64(env.kvm_timer_state, RISCVCPU),
-> +#endif
-
-Here you're creating an empty 'cpu/kvmtimer' vmstate that won't be migrated anyway
-because kvmtimer_needed (== kvm_enabled()) will be always false if CONFIG_KVM=n.
-
-I'd say it's better to just get rid of the whole vmstate in this case, but I don't
-like the precedence of having vmstates being gated by build flags.
-
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-
-
->           VMSTATE_END_OF_LIST()
->       }
->   };
+>
+>  target/riscv/arch_dump.c                |   7 +-
+>  target/riscv/cpu.c                      |  47 ++--
+>  target/riscv/cpu.h                      |  31 +--
+>  target/riscv/cpu_bits.h                 |   2 +-
+>  target/riscv/cpu_helper.c               | 274 ++++++++++----------
+>  target/riscv/csr.c                      |  90 +++----
+>  target/riscv/debug.c                    |  21 +-
+>  target/riscv/fpu_helper.c               |  24 +-
+>  target/riscv/gdbstub.c                  |   3 +-
+>  target/riscv/insn_trans/trans_rvv.c.inc |  36 +--
+>  target/riscv/m128_helper.c              |  16 +-
+>  target/riscv/machine.c                  |  18 +-
+>  target/riscv/op_helper.c                |  20 +-
+>  target/riscv/pmp.c                      |  66 ++---
+>  target/riscv/pmp.h                      |   9 +-
+>  target/riscv/pmu.c                      |   7 +-
+>  target/riscv/sbi_ecall_interface.h      |   8 +-
+>  target/riscv/translate.c                |  26 +-
+>  target/riscv/vector_helper.c            | 317 ++++++++++++++----------
+>  19 files changed, 552 insertions(+), 470 deletions(-)
+>
+> --
+> 2.25.1
+>
+>
 
