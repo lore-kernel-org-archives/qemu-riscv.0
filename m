@@ -1,61 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjwqV-0002Qs-Ma
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 02:42:15 -0400
+	id 1pjwrs-000357-RF
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 02:43:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjwqM-0002N7-1F; Wed, 05 Apr 2023 02:42:07 -0400
-Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
+ id 1pjwrq-000340-7x; Wed, 05 Apr 2023 02:43:38 -0400
+Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjwqJ-0001pU-1w; Wed, 05 Apr 2023 02:42:04 -0400
-Received: by mail-ua1-x933.google.com with SMTP id m5so24852502uae.11;
- Tue, 04 Apr 2023 23:42:02 -0700 (PDT)
+ id 1pjwrn-0002Zf-Kp; Wed, 05 Apr 2023 02:43:37 -0400
+Received: by mail-vs1-xe35.google.com with SMTP id h27so30596477vsa.1;
+ Tue, 04 Apr 2023 23:43:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680676921;
+ d=gmail.com; s=20210112; t=1680677014;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dirIKSeW79GHTOKPMStUrGG3uPwbe7y7iku8QEiIkIw=;
- b=Jw0VbCQRCz3zoX57yZ1taDLvRw8hGoY1xgsfgaIIGSsW8BR1bWxrxKJ0NRl38amipy
- 4/Dx28UinO6dkm33foVehzsIZStbBHCqaOxK+2Sb7OR36HN98lEU56Zaq3v43/8jYIGX
- Oz84pEtSl8KcXflo5EPmWLhKDkNfvZDT6hTfdHvZn7NISqHqy3X4ZVdIltherGk90r0T
- zotYRYxAKQkWnCzHSWOkiiQbctJ+XJHFL0UgFrh4V3/vy76QsTFnylHKo7NKMb5zkDEZ
- ++d7RCmnnJYahfN2EPvUoIUGoWYiiLL2gN0JI5rpI9C3SpHLwHUETAxiNoM3xKS4pZwU
- Khbg==
+ bh=xUF3EfRlWs6bxfd6qdap88DwFSNBmkwW/J6l5GW0jjo=;
+ b=E1ngsBkW0SHpQZW2MhpVlebyrs5QRRFMfvFo4WPKmvC9VfznnNyKb8SmhK8KuhDn2d
+ aripBMkDgUAwsPO/pVEURH35gUQIsaLxxmmePGH6hmRvoOkQcKq1EnmJYX7nPyT2xoGG
+ sqDGcwsLsZCC1CJnqI2kscGvGtmSNHuuZIcFjY3tnY5DMNwb7oCxj3TTWNIBPB+IGpms
+ xFOnAQwIzmzuxH13d49QLBO5CgFClytFMfTtq6Z3vJArswoDZb+v1m7PBcPkEfvItmFA
+ sV5QET4jiM63AD7l9hg/zjJWCnKzFCb8aN5PSlJtIjgfJfcb44UUTNt15scfQJkj23aA
+ 22eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680676921;
+ d=1e100.net; s=20210112; t=1680677014;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dirIKSeW79GHTOKPMStUrGG3uPwbe7y7iku8QEiIkIw=;
- b=OGR2F1O9nbxRANDZAFgY42j5FylMGyPLRjaY1Lbs5Aj4W8OMoaUHyl/cYBuLD0bp5S
- m8bUclpthYixaMN87eQhtYp3+ZGeZfHsKJ9d0ERHvtafhZ+kjn6Dk4faSf6xIAj2RK0y
- bUpjj3uyCB7yxAlOWgcrOCroD9Lbo68InykRU6sNLrV2zdKw0obxgVsIMo0YnBDXS6vt
- GJ1nMyN+DR/9RcjYGAiJVcb8ZVorO49q6SQ0OzZvhexxnAEujDrXgTwFHWQeIIQ9kj7u
- 5V7Aq7NVwGYcwB5Fc1Xus2ZSeXOCA6rzmsc/lWOpVTftwf4Bqe5hnEmQzhglQkeSVaP/
- MbIA==
-X-Gm-Message-State: AAQBX9eCYMtdvAq+1G2CDvfDVsbrOmRpgSYDy4vpFh/dcbtaVBFUjpGH
- FgG7LuK5JS0Rpaf8g9GEfx1k4S4AzmKHQxJ4GJceczedPE8=
-X-Google-Smtp-Source: AKy350YYpVEaVLEbeeTBZ1Eiyj77NYECq3aNXG2vuVSmVa7/PgvYhg/2bFpA2qWVOavfSa98zET6HwndJun7yMBNGwE=
-X-Received: by 2002:ab0:5485:0:b0:765:c225:c914 with SMTP id
- p5-20020ab05485000000b00765c225c914mr3236617uaa.1.1680676921348; Tue, 04 Apr
- 2023 23:42:01 -0700 (PDT)
+ bh=xUF3EfRlWs6bxfd6qdap88DwFSNBmkwW/J6l5GW0jjo=;
+ b=IEc1cLsVzBd7igg4mRtk9EzPUr3j3Zrjq6XcTjIAol+5V3HMfkyzeBdI3MKUH7qIqS
+ XOVXztkdiViryJ6g3lyRAVAWX4w8TtDLjkbeHoo/aKokUdg95jaSYgJhZv8Q9F9/BD/q
+ O0aiHKARzCwSLAimdmuV3Hd5tBqnu/8hcKKAGXsTR/UC/b1YRPMJsItILWRFTnsKW46Q
+ S41TTHyArq1x+ry0lRUduOjuFjajQYJLAcvNtKdKoRKduf+HeL/ZmYCAtp8dNSbPJTsw
+ E5HTIhnePr4JgcF75onl8ttVsgYxvPf2afHfntcP8tOVdKdDib6/ZbRDzwrb1QlAcjb6
+ ukoQ==
+X-Gm-Message-State: AAQBX9dwcEVJMBD9LZTUmRQejWreFyVqkG44tzm4/M3dFV0x1jyVzUL7
+ PspFIB8sqToK59A+1UO13YavCgvAtuJJugRbWMc=
+X-Google-Smtp-Source: AKy350YQ6yNHQC6RjnyWp7Fi6Jsf1I/R0QH89/AA6Tfxlvw8W1KI0RXiDPHQ6HhKAHKfq/DA9jYjPCxaW63x8kXgobA=
+X-Received: by 2002:a67:e18f:0:b0:425:8cbd:f74f with SMTP id
+ e15-20020a67e18f000000b004258cbdf74fmr4170746vsl.3.1680677013853; Tue, 04 Apr
+ 2023 23:43:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230328165406.271528-1-irina.ryapolova@syntacore.com>
-In-Reply-To: <20230328165406.271528-1-irina.ryapolova@syntacore.com>
+References: <20230330034636.44585-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230330034636.44585-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 5 Apr 2023 16:41:35 +1000
-Message-ID: <CAKmqyKMrP-OZxueQBxATbEHTbD8Kt6Yi5+9v6+xuBNC6V6fE8g@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Fix Guest Physical Address Translation
-To: Irina Ryapolova <irina.ryapolova@syntacore.com>
-Cc: qemu-devel@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
- bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
+Date: Wed, 5 Apr 2023 16:43:07 +1000
+Message-ID: <CAKmqyKO04mis_Lj0GQsfD71LmH-s7jVasHeWyGNNBvwoKjWHiQ@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Set opcode to env->bins for illegal/virtual
+ instruction fault
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -76,83 +77,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 06:42:11 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 06:43:38 -0000
 
-On Wed, Mar 29, 2023 at 3:53=E2=80=AFAM Irina Ryapolova
-<irina.ryapolova@syntacore.com> wrote:
+On Thu, Mar 30, 2023 at 1:47=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
+ote:
 >
-> According to specification:
-> For Sv39x4, address bits of the guest physical address 63:41 must all be =
-zeros, or else a
-> guest-page-fault exception occurs.
+> decode_save_opc() will not work for generate_exception(), since 0 is pass=
+ed
+> to riscv_raise_exception() as pc in helper_raise_exception(), and bins wi=
+ll
+> not be restored in this case.
 >
-> Likewise for Sv48x4 and Sv57x4.
-> For Sv48x4 address bits 63:50 must all be zeros, or else a guest-page-fau=
-lt exception occurs.
-> For Sv57x4 address bits 63:59 must all be zeros, or else a guest-page-fau=
-lt exception occurs.
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 
-I don't follow
+Thanks!
 
-The current code enforces that the bits are 0 with this check:
-
-    if (masked_msbs !=3D 0 && masked_msbs !=3D mask) {
-        return TRANSLATE_FAIL;
-    }
-
-It seems like you are removing the mask from calculating masked_msbs,
-but the commit message doesn't really mention that.
-
-Do you mind sending a v2 with a commit message that describes what the
-problem is and how your commit is fixing it?
+Applied to riscv-to-apply.next
 
 Alistair
 
->
-> Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
 > ---
->  target/riscv/cpu_helper.c | 25 ++++++++++++++++---------
->  1 file changed, 16 insertions(+), 9 deletions(-)
+>  target/riscv/insn_trans/trans_rvh.c.inc | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index f88c503cf4..27289f2305 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -863,17 +863,24 @@ static int get_physical_address(CPURISCVState *env,=
- hwaddr *physical,
->
->      CPUState *cs =3D env_cpu(env);
->      int va_bits =3D PGSHIFT + levels * ptidxbits + widened;
-> -    target_ulong mask, masked_msbs;
->
-> -    if (TARGET_LONG_BITS > (va_bits - 1)) {
-> -        mask =3D (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
-> -    } else {
-> -        mask =3D 0;
-> -    }
-> -    masked_msbs =3D (addr >> (va_bits - 1)) & mask;
-> +    if (first_stage =3D=3D true) {
-> +        target_ulong mask, masked_msbs;
-> +
-> +        if (TARGET_LONG_BITS > (va_bits - 1)) {
-> +            mask =3D (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
-> +        } else {
-> +            mask =3D 0;
-> +        }
-> +        masked_msbs =3D (addr >> (va_bits - 1)) & mask;
->
-> -    if (masked_msbs !=3D 0 && masked_msbs !=3D mask) {
-> -        return TRANSLATE_FAIL;
-> +        if (masked_msbs !=3D 0 && masked_msbs !=3D mask) {
-> +            return TRANSLATE_FAIL;
-> +        }
-> +    } else {
-> +        if (vm !=3D VM_1_10_SV32 && addr >> va_bits !=3D 0) {
-> +            return TRANSLATE_FAIL;
-> +        }
->      }
->
->      int ptshift =3D (levels - 1) * ptidxbits;
+> diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_=
+trans/trans_rvh.c.inc
+> index 9248b48c36..4b730cd492 100644
+> --- a/target/riscv/insn_trans/trans_rvh.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvh.c.inc
+> @@ -20,6 +20,8 @@
+>  static bool check_access(DisasContext *ctx)
+>  {
+>      if (!ctx->hlsx) {
+> +        tcg_gen_st_i32(tcg_constant_i32(ctx->opcode), cpu_env,
+> +                       offsetof(CPURISCVState, bins));
+>          if (ctx->virt_enabled) {
+>              generate_exception(ctx, RISCV_EXCP_VIRT_INSTRUCTION_FAULT);
+>          } else {
 > --
 > 2.25.1
 >
