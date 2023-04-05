@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjyyQ-0000hP-3y
+	id 1pjyyQ-0000i3-E6
 	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 04:58:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pjyyO-0000gK-El; Wed, 05 Apr 2023 04:58:32 -0400
+ id 1pjyyN-0000fv-EV; Wed, 05 Apr 2023 04:58:31 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pjyyI-0003DL-Rq; Wed, 05 Apr 2023 04:58:32 -0400
+ id 1pjyyI-0003Cr-QQ; Wed, 05 Apr 2023 04:58:31 -0400
 Received: from localhost.localdomain (unknown [180.175.29.170])
- by APP-05 (Coremail) with SMTP id zQCowAAH+BQoOC1kWY5GDg--.24854S5;
- Wed, 05 Apr 2023 16:58:20 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowAAH+BQoOC1kWY5GDg--.24854S3;
+ Wed, 05 Apr 2023 16:58:18 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -20,22 +20,22 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v3 3/4] target/riscv: Fix format for comments
-Date: Wed,  5 Apr 2023 16:58:12 +0800
-Message-Id: <20230405085813.40643-4-liweiwei@iscas.ac.cn>
+Subject: [PATCH v3 1/4] target/riscv: Remove riscv_cpu_virt_enabled()
+Date: Wed,  5 Apr 2023 16:58:10 +0800
+Message-Id: <20230405085813.40643-2-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230405085813.40643-1-liweiwei@iscas.ac.cn>
 References: <20230405085813.40643-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowAAH+BQoOC1kWY5GDg--.24854S5
-X-Coremail-Antispam: 1UD129KBjvAXoWfuw15uryftFyrJryfAFW3Awb_yoW5Jw15to
- WxCFs5Zws5Ww1fKF98CF1xtry7Ww4vkr4rXF4DKwsYgas5Xr4Ygay7twsxA3ZxXr4rWFW5
- Ja97tayUZas7GFy3n29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
- AaLaJ3UjIYCTnIWjp_UUUOU7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
- j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r1rM28IrcIa0x
- kI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84AC
- jcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM2
+X-CM-TRANSID: zQCowAAH+BQoOC1kWY5GDg--.24854S3
+X-Coremail-Antispam: 1UD129KBjvAXoWfAr1UuF17KFykJF4kJr4DXFb_yoW8KF45Ao
+ Z7Kr409an8Gw1S9w1vvr1UtryUXF1ktrsYqrsrKrZ3W3ZruF1rXr45Kr4UAa47tFWftFW8
+ Xa4xGF12ga4xAa43n29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+ AaLaJ3UjIYCTnIWjp_UUUOU7AC8VAFwI0_Xr0_Wr1l1xkIjI8I6I8E6xAIw20EY4v20xva
+ j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r18M28IrcIa0x
+ kI8VCY1x0267AKxVWUCVW8JwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84AC
+ jcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM2
  8EF7xvwVC2z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1U
  M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
  v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
@@ -44,7 +44,7 @@ X-Coremail-Antispam: 1UD129KBjvAXoWfuw15uryftFyrJryfAFW3Awb_yoW5Jw15to
  wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc4
  0Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AK
  xVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr
- 1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbJ73DUU
+ 1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbec_DUU
  UUU==
 X-Originating-IP: [180.175.29.170]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
@@ -67,747 +67,618 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 08:58:32 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 08:58:31 -0000
 
-Fix formats for multi-lines comments.
-Add spaces around single line comments(after "/*" and before "*/").
+Directly use env->virt_enabled instead.
 
+Suggested-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Acked-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/arch_dump.c                |  3 +-
- target/riscv/cpu.c                      |  2 +-
- target/riscv/cpu.h                      | 26 ++++----
- target/riscv/cpu_bits.h                 |  2 +-
- target/riscv/cpu_helper.c               | 57 +++++++++++------
- target/riscv/csr.c                      |  6 +-
- target/riscv/insn_trans/trans_rvv.c.inc |  8 ++-
- target/riscv/pmp.c                      | 41 +++++++------
- target/riscv/sbi_ecall_interface.h      |  8 +--
- target/riscv/translate.c                | 20 +++---
- target/riscv/vector_helper.c            | 82 +++++++++++++++----------
- 11 files changed, 151 insertions(+), 104 deletions(-)
+ target/riscv/cpu.c        |  2 +-
+ target/riscv/cpu.h        |  1 -
+ target/riscv/cpu_helper.c | 51 ++++++++++++++++++---------------------
+ target/riscv/csr.c        | 46 +++++++++++++++++------------------
+ target/riscv/debug.c      | 10 ++++----
+ target/riscv/op_helper.c  | 18 +++++++-------
+ target/riscv/pmu.c        |  4 +--
+ target/riscv/translate.c  |  2 +-
+ 8 files changed, 64 insertions(+), 70 deletions(-)
 
-diff --git a/target/riscv/arch_dump.c b/target/riscv/arch_dump.c
-index 573587810e..434c8a3dbb 100644
---- a/target/riscv/arch_dump.c
-+++ b/target/riscv/arch_dump.c
-@@ -1,4 +1,5 @@
--/* Support for writing ELF notes for RISC-V architectures
-+/*
-+ * Support for writing ELF notes for RISC-V architectures
-  *
-  * Copyright (C) 2021 Huawei Technologies Co., Ltd
-  *
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 8ed8601399..2e45b1f076 100644
+index cd9e7bdce6..c304deabd7 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -56,7 +56,7 @@ struct isa_ext_data {
- #define ISA_EXT_DATA_ENTRY(_name, _m_letter, _min_ver, _prop) \
-     {#_name, _m_letter, _min_ver, offsetof(struct RISCVCPUConfig, _prop)}
+@@ -556,7 +556,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
  
--/**
-+/*
-  * Here are the ordering rules of extension naming defined by RISC-V
-  * specification :
-  * 1. All extensions should be separated from other multi-letter extensions
+ #if !defined(CONFIG_USER_ONLY)
+     if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s %d\n", "V      =  ", riscv_cpu_virt_enabled(env));
++        qemu_fprintf(f, " %s %d\n", "V      =  ", env->virt_enabled);
+     }
+ #endif
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "pc      ", env->pc);
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 995192757a..5018a3b1b2 100644
+index ff6b3c6720..995192757a 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -124,7 +124,7 @@ FIELD(VTYPE, RESERVED, 10, sizeof(target_ulong) * 8 - 11)
- typedef struct PMUCTRState {
-     /* Current value of a counter */
-     target_ulong mhpmcounter_val;
--    /* Current value of a counter in RV32*/
-+    /* Current value of a counter in RV32 */
-     target_ulong mhpmcounterh_val;
-     /* Snapshot values of counter */
-     target_ulong mhpmcounter_prev;
-@@ -280,8 +280,10 @@ struct CPUArchState {
-     target_ulong satp_hs;
-     uint64_t mstatus_hs;
- 
--    /* Signals whether the current exception occurred with two-stage address
--       translation active. */
-+    /*
-+     * Signals whether the current exception occurred with two-stage address
-+     * translation active.
-+     */
-     bool two_stage_lookup;
-     /*
-      * Signals whether the current exception occurred while doing two-stage
-@@ -297,10 +299,10 @@ struct CPUArchState {
-     /* PMU counter state */
-     PMUCTRState pmu_ctrs[RV_MAX_MHPMCOUNTERS];
- 
--    /* PMU event selector configured values. First three are unused*/
-+    /* PMU event selector configured values. First three are unused */
-     target_ulong mhpmevent_val[RV_MAX_MHPMEVENTS];
- 
--    /* PMU event selector configured values for RV32*/
-+    /* PMU event selector configured values for RV32 */
-     target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
- 
-     target_ulong sscratch;
-@@ -389,7 +391,7 @@ struct CPUArchState {
- 
- OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
- 
--/**
-+/*
-  * RISCVCPUClass:
-  * @parent_realize: The parent class' realize handler.
-  * @parent_phases: The parent class' reset phase handlers.
-@@ -397,9 +399,9 @@ OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-  * A RISCV CPU model.
-  */
- struct RISCVCPUClass {
--    /*< private >*/
-+    /* < private > */
-     CPUClass parent_class;
--    /*< public >*/
-+    /* < public > */
-     DeviceRealize parent_realize;
-     ResettablePhases parent_phases;
- };
-@@ -530,16 +532,16 @@ struct RISCVCPUConfig {
- 
- typedef struct RISCVCPUConfig RISCVCPUConfig;
- 
--/**
-+/*
-  * RISCVCPU:
-  * @env: #CPURISCVState
-  *
-  * A RISCV CPU.
-  */
- struct ArchCPU {
--    /*< private >*/
-+    /* < private > */
-     CPUState parent_obj;
--    /*< public >*/
-+    /* < public > */
-     CPUNegativeOffsetState neg;
-     CPURISCVState env;
- 
-@@ -813,7 +815,7 @@ enum {
-     CSR_TABLE_SIZE = 0x1000
- };
- 
--/**
-+/*
-  * The event id are encoded based on the encoding specified in the
-  * SBI specification v0.3
-  */
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 190e517862..101702cb4a 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -731,7 +731,7 @@ typedef enum RISCVException {
- #define MIE_SSIE                           (1 << IRQ_S_SOFT)
- #define MIE_USIE                           (1 << IRQ_U_SOFT)
- 
--/* General PointerMasking CSR bits*/
-+/* General PointerMasking CSR bits */
- #define PM_ENABLE       0x00000001ULL
- #define PM_CURRENT      0x00000002ULL
- #define PM_INSN         0x00000004ULL
+@@ -585,7 +585,6 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env);
+ target_ulong riscv_cpu_get_geilen(CPURISCVState *env);
+ void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen);
+ bool riscv_cpu_vector_enabled(CPURISCVState *env);
+-bool riscv_cpu_virt_enabled(CPURISCVState *env);
+ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
+ bool riscv_cpu_two_stage_lookup(int mmu_idx);
+ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 8d2547a164..445ffe691a 100644
+index b0e094a933..fbcdec3c06 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -717,7 +717,8 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
-     return TRANSLATE_SUCCESS;
+@@ -93,8 +93,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+ 
+     if (riscv_has_ext(env, RVH)) {
+         if (env->priv == PRV_M ||
+-            (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
+-            (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
++            (env->priv == PRV_S && !env->virt_enabled) ||
++            (env->priv == PRV_U && !env->virt_enabled &&
+                 get_field(env->hstatus, HSTATUS_HU))) {
+             flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
+         }
+@@ -391,7 +391,7 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+     uint64_t irqs, pending, mie, hsie, vsie;
+ 
+     /* Determine interrupt enable state of all privilege modes */
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         mie = 1;
+         hsie = 1;
+         vsie = (env->priv < PRV_S) ||
+@@ -452,7 +452,7 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ bool riscv_cpu_fp_enabled(CPURISCVState *env)
+ {
+     if (env->mstatus & MSTATUS_FS) {
+-        if (riscv_cpu_virt_enabled(env) && !(env->mstatus_hs & MSTATUS_FS)) {
++        if (env->virt_enabled && !(env->mstatus_hs & MSTATUS_FS)) {
+             return false;
+         }
+         return true;
+@@ -465,7 +465,7 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env)
+ bool riscv_cpu_vector_enabled(CPURISCVState *env)
+ {
+     if (env->mstatus & MSTATUS_VS) {
+-        if (riscv_cpu_virt_enabled(env) && !(env->mstatus_hs & MSTATUS_VS)) {
++        if (env->virt_enabled && !(env->mstatus_hs & MSTATUS_VS)) {
+             return false;
+         }
+         return true;
+@@ -483,7 +483,7 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
+     if (riscv_has_ext(env, RVF)) {
+         mstatus_mask |= MSTATUS_FS;
+     }
+-    bool current_virt = riscv_cpu_virt_enabled(env);
++    bool current_virt = env->virt_enabled;
+ 
+     g_assert(riscv_has_ext(env, RVH));
+ 
+@@ -558,11 +558,6 @@ void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen)
+     env->geilen = geilen;
  }
  
--/* get_physical_address - get the physical address for this virtual address
-+/*
-+ * get_physical_address - get the physical address for this virtual address
-  *
-  * Do a page table walk to obtain the physical address corresponding to a
-  * virtual address. Returns 0 if the translation was successful
-@@ -745,9 +746,11 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-                                 bool first_stage, bool two_stage,
-                                 bool is_debug)
+-bool riscv_cpu_virt_enabled(CPURISCVState *env)
+-{
+-    return env->virt_enabled;
+-}
+-
+ /* This function can only be called to set virt when RVH is enabled */
+ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
  {
--    /* NOTE: the env->pc value visible here will not be
-+    /*
-+     * NOTE: the env->pc value visible here will not be
-      * correct, but the value visible to the exception handler
--     * (riscv_cpu_do_interrupt) is correct */
-+     * (riscv_cpu_do_interrupt) is correct
-+     */
-     MemTxResult res;
-     MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
-     int mode = mmu_idx & TB_FLAGS_PRIV_MMU_MASK;
-@@ -767,8 +770,10 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+@@ -609,7 +604,7 @@ uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask,
+     CPUState *cs = env_cpu(env);
+     uint64_t gein, vsgein = 0, vstip = 0, old = env->mip;
+ 
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         gein = get_field(env->hstatus, HSTATUS_VGEIN);
+         vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
+     }
+@@ -768,7 +763,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+      * was called. Background registers will be used if the guest has
+      * forced a two stage translation to be on (in HS or M mode).
+      */
+-    if (!riscv_cpu_virt_enabled(env) && two_stage) {
++    if (!env->virt_enabled && two_stage) {
          use_background = true;
      }
  
--    /* MPRV does not affect the virtual-machine load/store
--       instructions, HLV, HLVX, and HSV. */
-+    /*
-+     * MPRV does not affect the virtual-machine load/store
-+     * instructions, HLV, HLVX, and HSV.
-+     */
-     if (riscv_cpu_two_stage_lookup(mmu_idx)) {
-         mode = get_field(env->hstatus, HSTATUS_SPVP);
-     } else if (mode == PRV_M && access_type != MMU_INST_FETCH) {
-@@ -778,8 +783,10 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+@@ -931,7 +926,7 @@ restart:
+         bool pbmte = env->menvcfg & MENVCFG_PBMTE;
+         bool hade = env->menvcfg & MENVCFG_HADE;
+ 
+-        if (first_stage && two_stage && riscv_cpu_virt_enabled(env)) {
++        if (first_stage && two_stage && env->virt_enabled) {
+             pbmte = pbmte && (env->henvcfg & HENVCFG_PBMTE);
+             hade = hade && (env->henvcfg & HENVCFG_HADE);
+         }
+@@ -1091,7 +1086,7 @@ static void raise_mmu_exception(CPURISCVState *env, target_ulong address,
+ 
+     switch (access_type) {
+     case MMU_INST_FETCH:
+-        if (riscv_cpu_virt_enabled(env) && !first_stage) {
++        if (env->virt_enabled && !first_stage) {
+             cs->exception_index = RISCV_EXCP_INST_GUEST_PAGE_FAULT;
+         } else {
+             cs->exception_index = page_fault_exceptions ?
+@@ -1131,11 +1126,11 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
+     int mmu_idx = cpu_mmu_index(&cpu->env, false);
+ 
+     if (get_physical_address(env, &phys_addr, &prot, addr, NULL, 0, mmu_idx,
+-                             true, riscv_cpu_virt_enabled(env), true)) {
++                             true, env->virt_enabled, true)) {
+         return -1;
      }
  
-     if (first_stage == false) {
--        /* We are in stage 2 translation, this is similar to stage 1. */
--        /* Stage 2 is always taken as U-mode */
-+        /*
-+         * We are in stage 2 translation, this is similar to stage 1.
-+         * Stage 2 is always taken as U-mode
-+         */
-         mode = PRV_U;
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         if (get_physical_address(env, &phys_addr, &prot, phys_addr, NULL,
+                                  0, mmu_idx, false, true, true)) {
+             return -1;
+@@ -1163,7 +1158,7 @@ void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
      }
  
-@@ -1007,8 +1014,10 @@ restart:
-                     target_ulong *pte_pa =
-                         qemu_map_ram_ptr(mr->ram_block, addr1);
- #if TCG_OVERSIZED_GUEST
--                    /* MTTCG is not enabled on oversized TCG guests so
--                     * page table updates do not need to be atomic */
-+                    /*
-+                     * MTTCG is not enabled on oversized TCG guests so
-+                     * page table updates do not need to be atomic
-+                     */
-                     *pte_pa = pte = updated_pte;
- #else
-                     target_ulong old_pte =
-@@ -1020,14 +1029,18 @@ restart:
-                     }
- #endif
-                 } else {
--                    /* misconfigured PTE in ROM (AD bits are not preset) or
--                     * PTE is in IO space and can't be updated atomically */
-+                    /*
-+                     * misconfigured PTE in ROM (AD bits are not preset) or
-+                     * PTE is in IO space and can't be updated atomically
-+                     */
-                     return TRANSLATE_FAIL;
+     env->badaddr = addr;
+-    env->two_stage_lookup = riscv_cpu_virt_enabled(env) ||
++    env->two_stage_lookup = env->virt_enabled ||
+                             riscv_cpu_two_stage_lookup(mmu_idx);
+     env->two_stage_indirect_lookup = false;
+     cpu_loop_exit_restore(cs, retaddr);
+@@ -1189,7 +1184,7 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+         g_assert_not_reached();
+     }
+     env->badaddr = addr;
+-    env->two_stage_lookup = riscv_cpu_virt_enabled(env) ||
++    env->two_stage_lookup = env->virt_enabled ||
+                             riscv_cpu_two_stage_lookup(mmu_idx);
+     env->two_stage_indirect_lookup = false;
+     cpu_loop_exit_restore(cs, retaddr);
+@@ -1253,7 +1248,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     }
+ 
+     pmu_tlb_fill_incr_ctr(cpu, access_type);
+-    if (riscv_cpu_virt_enabled(env) ||
++    if (env->virt_enabled ||
+         ((riscv_cpu_two_stage_lookup(mmu_idx) || two_stage_lookup) &&
+          access_type != MMU_INST_FETCH)) {
+         /* Two stage lookup */
+@@ -1351,7 +1346,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     } else {
+         raise_mmu_exception(env, address, access_type, pmp_violation,
+                             first_stage_error,
+-                            riscv_cpu_virt_enabled(env) ||
++                            env->virt_enabled ||
+                                 riscv_cpu_two_stage_lookup(mmu_idx),
+                             two_stage_indirect_error);
+         cpu_loop_exit_restore(cs, retaddr);
+@@ -1658,9 +1653,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+ 
+             if (env->priv == PRV_M) {
+                 cause = RISCV_EXCP_M_ECALL;
+-            } else if (env->priv == PRV_S && riscv_cpu_virt_enabled(env)) {
++            } else if (env->priv == PRV_S && env->virt_enabled) {
+                 cause = RISCV_EXCP_VS_ECALL;
+-            } else if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) {
++            } else if (env->priv == PRV_S && !env->virt_enabled) {
+                 cause = RISCV_EXCP_S_ECALL;
+             } else if (env->priv == PRV_U) {
+                 cause = RISCV_EXCP_U_ECALL;
+@@ -1683,7 +1678,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         if (riscv_has_ext(env, RVH)) {
+             uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
+ 
+-            if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1)) {
++            if (env->virt_enabled && ((hdeleg >> cause) & 1)) {
+                 /* Trap to VS mode */
+                 /*
+                  * See if we need to adjust cause. Yes if its VS mode interrupt
+@@ -1694,7 +1689,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                     cause = cause - 1;
                  }
+                 write_gva = false;
+-            } else if (riscv_cpu_virt_enabled(env)) {
++            } else if (env->virt_enabled) {
+                 /* Trap into HS mode, from virt */
+                 riscv_cpu_swap_hypervisor_regs(env);
+                 env->hstatus = set_field(env->hstatus, HSTATUS_SPVP,
+@@ -1728,12 +1723,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+     } else {
+         /* handle the trap in M-mode */
+         if (riscv_has_ext(env, RVH)) {
+-            if (riscv_cpu_virt_enabled(env)) {
++            if (env->virt_enabled) {
+                 riscv_cpu_swap_hypervisor_regs(env);
+             }
+             env->mstatus = set_field(env->mstatus, MSTATUS_MPV,
+-                                     riscv_cpu_virt_enabled(env));
+-            if (riscv_cpu_virt_enabled(env) && tval) {
++                                     env->virt_enabled);
++            if (env->virt_enabled && tval) {
+                 env->mstatus = set_field(env->mstatus, MSTATUS_GVA, 1);
              }
  
--            /* for superpage mappings, make a fake leaf PTE for the TLB's
--               benefit. */
-+            /*
-+             * for superpage mappings, make a fake leaf PTE for the TLB's
-+             * benefit.
-+             */
-             target_ulong vpn = addr >> PGSHIFT;
- 
-             if (riscv_cpu_cfg(env)->ext_svnapot && (pte & PTE_N)) {
-@@ -1049,8 +1062,10 @@ restart:
-             if (pte & PTE_X) {
-                 *prot |= PAGE_EXEC;
-             }
--            /* add write permission on stores or if the page is already dirty,
--               so that we TLB miss on later writes to update the dirty bit */
-+            /*
-+             * add write permission on stores or if the page is already dirty,
-+             * so that we TLB miss on later writes to update the dirty bit
-+             */
-             if ((pte & PTE_W) &&
-                 (access_type == MMU_DATA_STORE || (pte & PTE_D))) {
-                 *prot |= PAGE_WRITE;
-@@ -1235,8 +1250,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
-                   __func__, address, access_type, mmu_idx);
- 
--    /* MPRV does not affect the virtual-machine load/store
--       instructions, HLV, HLVX, and HSV. */
-+    /*
-+     * MPRV does not affect the virtual-machine load/store
-+     * instructions, HLV, HLVX, and HSV.
-+     */
-     if (riscv_cpu_two_stage_lookup(mmu_idx)) {
-         mode = get_field(env->hstatus, HSTATUS_SPVP);
-     } else if (mode == PRV_M && access_type != MMU_INST_FETCH &&
-@@ -1577,7 +1594,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-     bool write_gva = false;
-     uint64_t s;
- 
--    /* cs->exception is 32-bits wide unlike mcause which is XLEN-bits wide
-+    /*
-+     * cs->exception is 32-bits wide unlike mcause which is XLEN-bits wide
-      * so we mask off the MSB and separate into trap type and cause.
-      */
-     bool async = !!(cs->exception_index & RISCV_EXCP_INT_FLAG);
-@@ -1754,7 +1772,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         riscv_cpu_set_mode(env, PRV_M);
-     }
- 
--    /* NOTE: it is not necessary to yield load reservations here. It is only
-+    /*
-+     * NOTE: it is not necessary to yield load reservations here. It is only
-      * necessary for an SC from "another hart" to cause a load reservation
-      * to be yielded. Refer to the memory consistency model section of the
-      * RISC-V ISA Specification.
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 41e56012d5..76755ee128 100644
+index 777d7fbac0..41e56012d5 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -189,7 +189,7 @@ static RISCVException mctr(CPURISCVState *env, int csrno)
-     }
-     ctr_index = csrno - base_csrno;
-     if (!pmu_num || ctr_index >= pmu_num) {
--        /* The PMU is not enabled or counter is out of range*/
-+        /* The PMU is not enabled or counter is out of range */
+@@ -45,7 +45,7 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+ #if !defined(CONFIG_USER_ONLY)
+ RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit)
+ {
+-    bool virt = riscv_cpu_virt_enabled(env);
++    bool virt = env->virt_enabled;
+ 
+     if (env->priv == PRV_M || !riscv_cpu_cfg(env)->ext_smstateen) {
+         return RISCV_EXCP_NONE;
+@@ -135,7 +135,7 @@ skip_ext_pmu_check:
          return RISCV_EXCP_ILLEGAL_INST;
      }
  
-@@ -877,7 +877,7 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
-                                         counter.mhpmcounter_val;
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         if (!get_field(env->hcounteren, ctr_mask) ||
+             (env->priv == PRV_U && !get_field(env->scounteren, ctr_mask))) {
+             return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+@@ -365,7 +365,7 @@ static RISCVException hstateenh(CPURISCVState *env, int csrno)
  
-     if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
--        /**
-+        /*
-          * Counter should not increment if inhibit bit is set. We can't really
-          * stop the icount counting. Just return the counter value written by
-          * the supervisor to indicate that counter was not incremented.
-@@ -891,7 +891,7 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVState *env, target_ulong *val,
-         }
-     }
- 
--    /**
-+    /*
-      * The kernel computes the perf delta by subtracting the current value from
-      * the value it initialized previously (ctr_val).
-      */
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 8e43bfc07c..ca3c4c1a3d 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -3136,9 +3136,11 @@ static bool trans_vfirst_m(DisasContext *s, arg_rmr *a)
-     return false;
- }
- 
--/* vmsbf.m set-before-first mask bit */
--/* vmsif.m set-includ-first mask bit */
--/* vmsof.m set-only-first mask bit */
-+/*
-+ * vmsbf.m set-before-first mask bit
-+ * vmsif.m set-including-first mask bit
-+ * vmsof.m set-only-first mask bit
-+ */
- #define GEN_M_TRANS(NAME)                                          \
- static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
- {                                                                  \
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 3943b0f2e3..6ab2ae81c7 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -132,15 +132,15 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
- static void pmp_decode_napot(target_ulong a, target_ulong *sa, target_ulong *ea)
+ static RISCVException sstateen(CPURISCVState *env, int csrno)
  {
-     /*
--       aaaa...aaa0   8-byte NAPOT range
--       aaaa...aa01   16-byte NAPOT range
--       aaaa...a011   32-byte NAPOT range
--       ...
--       aa01...1111   2^XLEN-byte NAPOT range
--       a011...1111   2^(XLEN+1)-byte NAPOT range
--       0111...1111   2^(XLEN+2)-byte NAPOT range
--       1111...1111   Reserved
--    */
-+     * aaaa...aaa0   8-byte NAPOT range
-+     * aaaa...aa01   16-byte NAPOT range
-+     * aaaa...a011   32-byte NAPOT range
-+     * ...
-+     * aa01...1111   2^XLEN-byte NAPOT range
-+     * a011...1111   2^(XLEN+1)-byte NAPOT range
-+     * 0111...1111   2^(XLEN+2)-byte NAPOT range
-+     * 1111...1111   Reserved
-+     */
-     a = (a << 2) | 0x3;
-     *sa = a & (a + 1);
-     *ea = a | (a + 1);
-@@ -205,7 +205,8 @@ void pmp_update_rule_nums(CPURISCVState *env)
-     }
- }
+-    bool virt = riscv_cpu_virt_enabled(env);
++    bool virt = env->virt_enabled;
+     int index = csrno - CSR_SSTATEEN0;
  
--/* Convert cfg/addr reg values here into simple 'sa' --> start address and 'ea'
-+/*
-+ * Convert cfg/addr reg values here into simple 'sa' --> start address and 'ea'
-  *   end address values.
-  *   This function is called relatively infrequently whereas the check that
-  *   an address is within a pmp rule is called often, so optimise that one
-@@ -329,8 +330,10 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-         pmp_size = size;
+     if (!riscv_cpu_cfg(env)->ext_smstateen) {
+@@ -430,7 +430,7 @@ static RISCVException sstc(CPURISCVState *env, int csrno)
+         return RISCV_EXCP_ILLEGAL_INST;
      }
  
--    /* 1.10 draft priv spec states there is an implicit order
--         from low to high */
-+    /*
-+     * 1.10 draft priv spec states there is an implicit order
-+     * from low to high
-+     */
-     for (i = 0; i < MAX_RISCV_PMPS; i++) {
-         s = pmp_is_in_range(env, i, addr);
-         e = pmp_is_in_range(env, i, addr + pmp_size - 1);
-@@ -609,13 +612,13 @@ target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
-         return TARGET_PAGE_SIZE;
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         if (!(get_field(env->hcounteren, COUNTEREN_TM) &&
+               get_field(env->henvcfg, HENVCFG_STCE))) {
+             return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+@@ -536,7 +536,7 @@ static RISCVException seed(CPURISCVState *env, int csrno)
+      */
+     if (env->priv == PRV_M) {
+         return RISCV_EXCP_NONE;
+-    } else if (riscv_cpu_virt_enabled(env)) {
++    } else if (env->virt_enabled) {
+         if (env->mseccfg & MSECCFG_SSEED) {
+             return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+         } else {
+@@ -964,7 +964,7 @@ static int read_scountovf(CPURISCVState *env, int csrno, target_ulong *val)
+ static RISCVException read_time(CPURISCVState *env, int csrno,
+                                 target_ulong *val)
+ {
+-    uint64_t delta = riscv_cpu_virt_enabled(env) ? env->htimedelta : 0;
++    uint64_t delta = env->virt_enabled ? env->htimedelta : 0;
+ 
+     if (!env->rdtime_fn) {
+         return RISCV_EXCP_ILLEGAL_INST;
+@@ -977,7 +977,7 @@ static RISCVException read_time(CPURISCVState *env, int csrno,
+ static RISCVException read_timeh(CPURISCVState *env, int csrno,
+                                  target_ulong *val)
+ {
+-    uint64_t delta = riscv_cpu_virt_enabled(env) ? env->htimedelta : 0;
++    uint64_t delta = env->virt_enabled ? env->htimedelta : 0;
+ 
+     if (!env->rdtime_fn) {
+         return RISCV_EXCP_ILLEGAL_INST;
+@@ -1031,7 +1031,7 @@ static RISCVException write_vstimecmph(CPURISCVState *env, int csrno,
+ static RISCVException read_stimecmp(CPURISCVState *env, int csrno,
+                                     target_ulong *val)
+ {
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         *val = env->vstimecmp;
      } else {
-         /*
--        * At this point we have a tlb_size that is the smallest possible size
--        * That fits within a TARGET_PAGE_SIZE and the PMP region.
--        *
--        * If the size is less then TARGET_PAGE_SIZE we drop the size to 1.
--        * This means the result isn't cached in the TLB and is only used for
--        * a single translation.
--        */
-+         * At this point we have a tlb_size that is the smallest possible size
-+         * That fits within a TARGET_PAGE_SIZE and the PMP region.
-+         *
-+         * If the size is less then TARGET_PAGE_SIZE we drop the size to 1.
-+         * This means the result isn't cached in the TLB and is only used for
-+         * a single translation.
-+         */
-         return 1;
+         *val = env->stimecmp;
+@@ -1043,7 +1043,7 @@ static RISCVException read_stimecmp(CPURISCVState *env, int csrno,
+ static RISCVException read_stimecmph(CPURISCVState *env, int csrno,
+                                      target_ulong *val)
+ {
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         *val = env->vstimecmp >> 32;
+     } else {
+         *val = env->stimecmp >> 32;
+@@ -1055,7 +1055,7 @@ static RISCVException read_stimecmph(CPURISCVState *env, int csrno,
+ static RISCVException write_stimecmp(CPURISCVState *env, int csrno,
+                                      target_ulong val)
+ {
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         if (env->hvictl & HVICTL_VTI) {
+             return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+         }
+@@ -1076,7 +1076,7 @@ static RISCVException write_stimecmp(CPURISCVState *env, int csrno,
+ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
+                                       target_ulong val)
+ {
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         if (env->hvictl & HVICTL_VTI) {
+             return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+         }
+@@ -1530,7 +1530,7 @@ static int read_mtopi(CPURISCVState *env, int csrno, target_ulong *val)
+ 
+ static int aia_xlate_vs_csrno(CPURISCVState *env, int csrno)
+ {
+-    if (!riscv_cpu_virt_enabled(env)) {
++    if (!env->virt_enabled) {
+         return csrno;
      }
- }
-diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
-index 77574ed4cb..43899d08f6 100644
---- a/target/riscv/sbi_ecall_interface.h
-+++ b/target/riscv/sbi_ecall_interface.h
-@@ -28,7 +28,7 @@
- #define SBI_EXT_RFENCE                  0x52464E43
- #define SBI_EXT_HSM                     0x48534D
  
--/* SBI function IDs for BASE extension*/
-+/* SBI function IDs for BASE extension */
- #define SBI_EXT_BASE_GET_SPEC_VERSION   0x0
- #define SBI_EXT_BASE_GET_IMP_ID         0x1
- #define SBI_EXT_BASE_GET_IMP_VERSION    0x2
-@@ -37,13 +37,13 @@
- #define SBI_EXT_BASE_GET_MARCHID        0x5
- #define SBI_EXT_BASE_GET_MIMPID         0x6
+@@ -1687,7 +1687,7 @@ static int rmw_xireg(CPURISCVState *env, int csrno, target_ulong *val,
  
--/* SBI function IDs for TIME extension*/
-+/* SBI function IDs for TIME extension */
- #define SBI_EXT_TIME_SET_TIMER          0x0
+ done:
+     if (ret) {
+-        return (riscv_cpu_virt_enabled(env) && virt) ?
++        return (env->virt_enabled && virt) ?
+                RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
+     }
+     return RISCV_EXCP_NONE;
+@@ -1741,7 +1741,7 @@ static int rmw_xtopei(CPURISCVState *env, int csrno, target_ulong *val,
  
--/* SBI function IDs for IPI extension*/
-+/* SBI function IDs for IPI extension */
- #define SBI_EXT_IPI_SEND_IPI            0x0
+ done:
+     if (ret) {
+-        return (riscv_cpu_virt_enabled(env) && virt) ?
++        return (env->virt_enabled && virt) ?
+                RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
+     }
+     return RISCV_EXCP_NONE;
+@@ -2171,7 +2171,7 @@ static RISCVException write_hstateenh_1_3(CPURISCVState *env, int csrno,
+ static RISCVException read_sstateen(CPURISCVState *env, int csrno,
+                                     target_ulong *val)
+ {
+-    bool virt = riscv_cpu_virt_enabled(env);
++    bool virt = env->virt_enabled;
+     int index = csrno - CSR_SSTATEEN0;
  
--/* SBI function IDs for RFENCE extension*/
-+/* SBI function IDs for RFENCE extension */
- #define SBI_EXT_RFENCE_REMOTE_FENCE_I       0x0
- #define SBI_EXT_RFENCE_REMOTE_SFENCE_VMA    0x1
- #define SBI_EXT_RFENCE_REMOTE_SFENCE_VMA_ASID  0x2
+     *val = env->sstateen[index] & env->mstateen[index];
+@@ -2185,7 +2185,7 @@ static RISCVException read_sstateen(CPURISCVState *env, int csrno,
+ static RISCVException write_sstateen(CPURISCVState *env, int csrno,
+                                      uint64_t mask, target_ulong new_val)
+ {
+-    bool virt = riscv_cpu_virt_enabled(env);
++    bool virt = env->virt_enabled;
+     int index = csrno - CSR_SSTATEEN0;
+     uint64_t wr_mask;
+     uint64_t *reg;
+@@ -2380,7 +2380,7 @@ static RISCVException rmw_sie64(CPURISCVState *env, int csrno,
+     RISCVException ret;
+     uint64_t mask = env->mideleg & S_MODE_INTERRUPTS;
+ 
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         if (env->hvictl & HVICTL_VTI) {
+             return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+         }
+@@ -2590,7 +2590,7 @@ static RISCVException rmw_sip64(CPURISCVState *env, int csrno,
+     RISCVException ret;
+     uint64_t mask = env->mideleg & sip_writable_mask;
+ 
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         if (env->hvictl & HVICTL_VTI) {
+             return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+         }
+@@ -2783,7 +2783,7 @@ static int read_stopi(CPURISCVState *env, int csrno, target_ulong *val)
+     int irq;
+     uint8_t iprio;
+ 
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         return read_vstopi(env, CSR_VSTOPI, val);
+     }
+ 
+@@ -3128,7 +3128,7 @@ static int read_hvipriox(CPURISCVState *env, int first_index,
+ 
+     /* First index has to be a multiple of number of irqs per register */
+     if (first_index % num_irqs) {
+-        return (riscv_cpu_virt_enabled(env)) ?
++        return (env->virt_enabled) ?
+                RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+@@ -3154,7 +3154,7 @@ static int write_hvipriox(CPURISCVState *env, int first_index,
+ 
+     /* First index has to be a multiple of number of irqs per register */
+     if (first_index % num_irqs) {
+-        return (riscv_cpu_virt_enabled(env)) ?
++        return (env->virt_enabled) ?
+                RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+@@ -3809,7 +3809,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+     int csr_priv, effective_priv = env->priv;
+ 
+     if (riscv_has_ext(env, RVH) && env->priv == PRV_S &&
+-        !riscv_cpu_virt_enabled(env)) {
++        !env->virt_enabled) {
+         /*
+          * We are in HS mode. Add 1 to the effective privledge level to
+          * allow us to access the Hypervisor CSRs.
+@@ -3819,7 +3819,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+ 
+     csr_priv = get_field(csrno, 0x300);
+     if (!env->debugger && (effective_priv < csr_priv)) {
+-        if (csr_priv == (PRV_S + 1) && riscv_cpu_virt_enabled(env)) {
++        if (csr_priv == (PRV_S + 1) && env->virt_enabled) {
+             return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+         }
+         return RISCV_EXCP_ILLEGAL_INST;
+diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+index b091293069..1f7aed23c9 100644
+--- a/target/riscv/debug.c
++++ b/target/riscv/debug.c
+@@ -515,7 +515,7 @@ itrigger_set_count(CPURISCVState *env, int index, int value)
+ static bool check_itrigger_priv(CPURISCVState *env, int index)
+ {
+     target_ulong tdata1 = env->tdata1[index];
+-    if (riscv_cpu_virt_enabled(env)) {
++    if (env->virt_enabled) {
+         /* check VU/VS bit against current privilege level */
+         return (get_field(tdata1, ITRIGGER_VS) == env->priv) ||
+                (get_field(tdata1, ITRIGGER_VU) == env->priv);
+@@ -787,7 +787,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+             switch (trigger_type) {
+             case TRIGGER_TYPE_AD_MATCH:
+                 /* type 2 trigger cannot be fired in VU/VS mode */
+-                if (riscv_cpu_virt_enabled(env)) {
++                if (env->virt_enabled) {
+                     return false;
+                 }
+ 
+@@ -806,7 +806,7 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+                 pc = env->tdata2[i];
+ 
+                 if ((ctrl & TYPE6_EXEC) && (bp->pc == pc)) {
+-                    if (riscv_cpu_virt_enabled(env)) {
++                    if (env->virt_enabled) {
+                         /* check VU/VS bit against current privilege level */
+                         if ((ctrl >> 23) & BIT(env->priv)) {
+                             return true;
+@@ -845,7 +845,7 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
+         switch (trigger_type) {
+         case TRIGGER_TYPE_AD_MATCH:
+             /* type 2 trigger cannot be fired in VU/VS mode */
+-            if (riscv_cpu_virt_enabled(env)) {
++            if (env->virt_enabled) {
+                 return false;
+             }
+ 
+@@ -880,7 +880,7 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
+             }
+ 
+             if ((wp->flags & flags) && (wp->vaddr == addr)) {
+-                if (riscv_cpu_virt_enabled(env)) {
++                if (env->virt_enabled) {
+                     /* check VU/VS bit against current privilege level */
+                     if ((ctrl >> 23) & BIT(env->priv)) {
+                         return true;
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 1eecae9547..c0c4ced7f0 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -140,7 +140,7 @@ static void check_zicbo_envcfg(CPURISCVState *env, target_ulong envbits,
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
+     }
+ 
+-    if (riscv_cpu_virt_enabled(env) &&
++    if (env->virt_enabled &&
+         (((env->priv < PRV_H) && !get_field(env->henvcfg, envbits)) ||
+          ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits)))) {
+         riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, ra);
+@@ -278,7 +278,7 @@ target_ulong helper_sret(CPURISCVState *env)
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+     }
+ 
+-    if (riscv_cpu_virt_enabled(env) && get_field(env->hstatus, HSTATUS_VTSR)) {
++    if (env->virt_enabled && get_field(env->hstatus, HSTATUS_VTSR)) {
+         riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
+     }
+ 
+@@ -293,7 +293,7 @@ target_ulong helper_sret(CPURISCVState *env)
+     }
+     env->mstatus = mstatus;
+ 
+-    if (riscv_has_ext(env, RVH) && !riscv_cpu_virt_enabled(env)) {
++    if (riscv_has_ext(env, RVH) && !env->virt_enabled) {
+         /* We support Hypervisor extensions and virtulisation is disabled */
+         target_ulong hstatus = env->hstatus;
+ 
+@@ -365,9 +365,9 @@ void helper_wfi(CPURISCVState *env)
+     bool prv_s = env->priv == PRV_S;
+ 
+     if (((prv_s || (!rvs && prv_u)) && get_field(env->mstatus, MSTATUS_TW)) ||
+-        (rvs && prv_u && !riscv_cpu_virt_enabled(env))) {
++        (rvs && prv_u && !env->virt_enabled)) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+-    } else if (riscv_cpu_virt_enabled(env) && (prv_u ||
++    } else if (env->virt_enabled && (prv_u ||
+         (prv_s && get_field(env->hstatus, HSTATUS_VTW)))) {
+         riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
+     } else {
+@@ -384,7 +384,7 @@ void helper_tlb_flush(CPURISCVState *env)
+         (env->priv == PRV_S &&
+          get_field(env->mstatus, MSTATUS_TVM))) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+-    } else if (riscv_has_ext(env, RVH) && riscv_cpu_virt_enabled(env) &&
++    } else if (riscv_has_ext(env, RVH) && env->virt_enabled &&
+                get_field(env->hstatus, HSTATUS_VTVM)) {
+         riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
+     } else {
+@@ -402,12 +402,12 @@ void helper_hyp_tlb_flush(CPURISCVState *env)
+ {
+     CPUState *cs = env_cpu(env);
+ 
+-    if (env->priv == PRV_S && riscv_cpu_virt_enabled(env)) {
++    if (env->priv == PRV_S && env->virt_enabled) {
+         riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
+     }
+ 
+     if (env->priv == PRV_M ||
+-        (env->priv == PRV_S && !riscv_cpu_virt_enabled(env))) {
++        (env->priv == PRV_S && !env->virt_enabled)) {
+         tlb_flush(cs);
+         return;
+     }
+@@ -417,7 +417,7 @@ void helper_hyp_tlb_flush(CPURISCVState *env)
+ 
+ void helper_hyp_gvma_tlb_flush(CPURISCVState *env)
+ {
+-    if (env->priv == PRV_S && !riscv_cpu_virt_enabled(env) &&
++    if (env->priv == PRV_S && !env->virt_enabled &&
+         get_field(env->mstatus, MSTATUS_TVM)) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+     }
+diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+index 96ce2dbe49..48ad60be2b 100644
+--- a/target/riscv/pmu.c
++++ b/target/riscv/pmu.c
+@@ -109,7 +109,7 @@ static int riscv_pmu_incr_ctr_rv32(RISCVCPU *cpu, uint32_t ctr_idx)
+     CPURISCVState *env = &cpu->env;
+     target_ulong max_val = UINT32_MAX;
+     PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
+-    bool virt_on = riscv_cpu_virt_enabled(env);
++    bool virt_on = env->virt_enabled;
+ 
+     /* Privilege mode filtering */
+     if ((env->priv == PRV_M &&
+@@ -150,7 +150,7 @@ static int riscv_pmu_incr_ctr_rv64(RISCVCPU *cpu, uint32_t ctr_idx)
+     CPURISCVState *env = &cpu->env;
+     PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
+     uint64_t max_val = UINT64_MAX;
+-    bool virt_on = riscv_cpu_virt_enabled(env);
++    bool virt_on = env->virt_enabled;
+ 
+     /* Privilege mode filtering */
+     if ((env->priv == PRV_M &&
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 3613aca28d..d0094922b6 100644
+index 5dddac44bc..03748f72e6 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -69,11 +69,13 @@ typedef struct DisasContext {
-     uint32_t mstatus_hs_fs;
-     uint32_t mstatus_hs_vs;
-     uint32_t mem_idx;
--    /* Remember the rounding mode encoded in the previous fp instruction,
--       which we have already installed into env->fp_status.  Or -1 for
--       no previous fp instruction.  Note that we exit the TB when writing
--       to any system register, which includes CSR_FRM, so we do not have
--       to reset this known value.  */
-+    /*
-+     * Remember the rounding mode encoded in the previous fp instruction,
-+     * which we have already installed into env->fp_status.  Or -1 for
-+     * no previous fp instruction.  Note that we exit the TB when writing
-+     * to any system register, which includes CSR_FRM, so we do not have
-+     * to reset this known value.
-+     */
-     int frm;
-     RISCVMXL ol;
-     bool virt_inst_excp;
-@@ -491,7 +493,7 @@ static TCGv_i64 dest_fpr(DisasContext *ctx, int reg_num)
+@@ -1169,7 +1169,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->priv_ver = env->priv_ver;
+ #if !defined(CONFIG_USER_ONLY)
+     if (riscv_has_ext(env, RVH)) {
+-        ctx->virt_enabled = riscv_cpu_virt_enabled(env);
++        ctx->virt_enabled = env->virt_enabled;
+     } else {
+         ctx->virt_enabled = false;
      }
- }
- 
--/* assume t is nanboxing (for normal) or sign-extended (for zfinx) */
-+/* assume it is nanboxing (for normal) or sign-extended (for zfinx) */
- static void gen_set_fpr_hs(DisasContext *ctx, int reg_num, TCGv_i64 t)
- {
-     if (!ctx->cfg_ptr->ext_zfinx) {
-@@ -598,7 +600,8 @@ static TCGv get_address_indexed(DisasContext *ctx, int rs1, TCGv offs)
- }
- 
- #ifndef CONFIG_USER_ONLY
--/* The states of mstatus_fs are:
-+/*
-+ * The states of mstatus_fs are:
-  * 0 = disabled, 1 = initial, 2 = clean, 3 = dirty
-  * We will have already diagnosed disabled state,
-  * and need to turn initial/clean into dirty.
-@@ -636,7 +639,8 @@ static inline void mark_fs_dirty(DisasContext *ctx) { }
- #endif
- 
- #ifndef CONFIG_USER_ONLY
--/* The states of mstatus_vs are:
-+/*
-+ * The states of mstatus_vs are:
-  * 0 = disabled, 1 = initial, 2 = clean, 3 = dirty
-  * We will have already diagnosed disabled state,
-  * and need to turn initial/clean into dirty.
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 6067b5cfc7..81ac85b7d5 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -287,7 +287,7 @@ static void vext_set_tail_elems_1s(CPURISCVState *env, target_ulong vl,
- }
- 
- /*
-- *** stride: access vector element from strided memory
-+ * stride: access vector element from strided memory
-  */
- static void
- vext_ldst_stride(void *vd, void *v0, target_ulong base,
-@@ -353,10 +353,10 @@ GEN_VEXT_ST_STRIDE(vsse32_v, int32_t, ste_w)
- GEN_VEXT_ST_STRIDE(vsse64_v, int64_t, ste_d)
- 
- /*
-- *** unit-stride: access elements stored contiguously in memory
-+ * unit-stride: access elements stored contiguously in memory
-  */
- 
--/* unmasked unit-stride load and store operation*/
-+/* unmasked unit-stride load and store operation */
- static void
- vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-              vext_ldst_elem_fn *ldst_elem, uint32_t log2_esz, uint32_t evl,
-@@ -429,7 +429,7 @@ GEN_VEXT_ST_US(vse32_v, int32_t, ste_w)
- GEN_VEXT_ST_US(vse64_v, int64_t, ste_d)
- 
- /*
-- *** unit stride mask load and store, EEW = 1
-+ * unit stride mask load and store, EEW = 1
-  */
- void HELPER(vlm_v)(void *vd, void *v0, target_ulong base,
-                     CPURISCVState *env, uint32_t desc)
-@@ -450,7 +450,7 @@ void HELPER(vsm_v)(void *vd, void *v0, target_ulong base,
- }
- 
- /*
-- *** index: access vector element from indexed memory
-+ * index: access vector element from indexed memory
-  */
- typedef target_ulong vext_get_index_addr(target_ulong base,
-         uint32_t idx, void *vs2);
-@@ -554,7 +554,7 @@ GEN_VEXT_ST_INDEX(vsxei64_32_v, int32_t, idx_d, ste_w)
- GEN_VEXT_ST_INDEX(vsxei64_64_v, int64_t, idx_d, ste_d)
- 
- /*
-- *** unit-stride fault-only-fisrt load instructions
-+ * unit-stride fault-only-fisrt load instructions
-  */
- static inline void
- vext_ldff(void *vd, void *v0, target_ulong base,
-@@ -571,7 +571,7 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-     uint32_t vma = vext_vma(desc);
-     target_ulong addr, offset, remain;
- 
--    /* probe every access*/
-+    /* probe every access */
-     for (i = env->vstart; i < env->vl; i++) {
-         if (!vm && !vext_elem_mask(v0, i)) {
-             continue;
-@@ -660,7 +660,7 @@ GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d)
- #define DO_MINU(N, M) DO_MIN((UMTYPE)N, (UMTYPE)M)
- 
- /*
-- *** load and store whole register instructions
-+ * load and store whole register instructions
-  */
- static void
- vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-@@ -733,7 +733,7 @@ GEN_VEXT_ST_WHOLE(vs4r_v, int8_t, ste_b)
- GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b)
- 
- /*
-- *** Vector Integer Arithmetic Instructions
-+ * Vector Integer Arithmetic Instructions
-  */
- 
- /* expand macro args before macro */
-@@ -1149,8 +1149,10 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
-         vext_set_elem_mask(vd, i, DO_OP(s2, s1, carry));      \
-     }                                                         \
-     env->vstart = 0;                                          \
--    /* mask destination register are always tail-agnostic */  \
--    /* set tail elements to 1s */                             \
-+    /*
-+     * mask destination register are always tail-agnostic
-+     * set tail elements to 1s
-+     */                                                       \
-     if (vta_all_1s) {                                         \
-         for (; i < total_elems; i++) {                        \
-             vext_set_elem_mask(vd, i, 1);                     \
-@@ -1185,8 +1187,10 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,          \
-                 DO_OP(s2, (ETYPE)(target_long)s1, carry));      \
-     }                                                           \
-     env->vstart = 0;                                            \
--    /* mask destination register are always tail-agnostic */    \
--    /* set tail elements to 1s */                               \
-+    /*
-+     * mask destination register are always tail-agnostic
-+     * set tail elements to 1s
-+     */                                                         \
-     if (vta_all_1s) {                                           \
-         for (; i < total_elems; i++) {                          \
-             vext_set_elem_mask(vd, i, 1);                       \
-@@ -1392,8 +1396,10 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
-         vext_set_elem_mask(vd, i, DO_OP(s2, s1));             \
-     }                                                         \
-     env->vstart = 0;                                          \
--    /* mask destination register are always tail-agnostic */  \
--    /* set tail elements to 1s */                             \
-+    /*
-+     * mask destination register are always tail-agnostic
-+     * set tail elements to 1s
-+     */                                                       \
-     if (vta_all_1s) {                                         \
-         for (; i < total_elems; i++) {                        \
-             vext_set_elem_mask(vd, i, 1);                     \
-@@ -1455,8 +1461,10 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,   \
-                 DO_OP(s2, (ETYPE)(target_long)s1));                 \
-     }                                                               \
-     env->vstart = 0;                                                \
--    /* mask destination register are always tail-agnostic */        \
--    /* set tail elements to 1s */                                   \
-+    /*
-+     * mask destination register are always tail-agnostic
-+     * set tail elements to 1s
-+     */                                                             \
-     if (vta_all_1s) {                                               \
-         for (; i < total_elems; i++) {                              \
-             vext_set_elem_mask(vd, i, 1);                           \
-@@ -2075,7 +2083,7 @@ GEN_VEXT_VMERGE_VX(vmerge_vxm_w, int32_t, H4)
- GEN_VEXT_VMERGE_VX(vmerge_vxm_d, int64_t, H8)
- 
- /*
-- *** Vector Fixed-Point Arithmetic Instructions
-+ * Vector Fixed-Point Arithmetic Instructions
-  */
- 
- /* Vector Single-Width Saturating Add and Subtract */
-@@ -2988,7 +2996,7 @@ GEN_VEXT_VX_RM(vnclipu_wx_h, 2)
- GEN_VEXT_VX_RM(vnclipu_wx_w, 4)
- 
- /*
-- *** Vector Float Point Arithmetic Instructions
-+ * Vector Float Point Arithmetic Instructions
-  */
- /* Vector Single-Width Floating-Point Add/Subtract Instructions */
- #define OPFVV2(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2, OP)   \
-@@ -4171,8 +4179,10 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
-                            DO_OP(s2, s1, &env->fp_status));   \
-     }                                                         \
-     env->vstart = 0;                                          \
--    /* mask destination register are always tail-agnostic */  \
--    /* set tail elements to 1s */                             \
-+    /*
-+     * mask destination register are always tail-agnostic
-+     * set tail elements to 1s
-+     */                                                       \
-     if (vta_all_1s) {                                         \
-         for (; i < total_elems; i++) {                        \
-             vext_set_elem_mask(vd, i, 1);                     \
-@@ -4208,8 +4218,10 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2,       \
-                            DO_OP(s2, (ETYPE)s1, &env->fp_status));  \
-     }                                                               \
-     env->vstart = 0;                                                \
--    /* mask destination register are always tail-agnostic */        \
--    /* set tail elements to 1s */                                   \
-+    /*
-+     * mask destination register are always tail-agnostic
-+     * set tail elements to 1s
-+     */                                                             \
-     if (vta_all_1s) {                                               \
-         for (; i < total_elems; i++) {                              \
-             vext_set_elem_mask(vd, i, 1);                           \
-@@ -4472,7 +4484,9 @@ GEN_VEXT_V_ENV(vfcvt_f_x_v_d, 8)
- #define WOP_UU_B uint16_t, uint8_t,  uint8_t
- #define WOP_UU_H uint32_t, uint16_t, uint16_t
- #define WOP_UU_W uint64_t, uint32_t, uint32_t
--/* vfwcvt.xu.f.v vd, vs2, vm # Convert float to double-width unsigned integer.*/
-+/*
-+ * vfwcvt.xu.f.v vd, vs2, vm # Convert float to double-width unsigned integer.
-+ */
- RVVCALL(OPFVV1, vfwcvt_xu_f_v_h, WOP_UU_H, H4, H2, float16_to_uint32)
- RVVCALL(OPFVV1, vfwcvt_xu_f_v_w, WOP_UU_W, H8, H4, float32_to_uint64)
- GEN_VEXT_V_ENV(vfwcvt_xu_f_v_h, 4)
-@@ -4559,7 +4573,7 @@ GEN_VEXT_V_ENV(vfncvt_f_f_w_h, 2)
- GEN_VEXT_V_ENV(vfncvt_f_f_w_w, 4)
- 
- /*
-- *** Vector Reduction Operations
-+ * Vector Reduction Operations
-  */
- /* Vector Single-Width Integer Reduction Instructions */
- #define GEN_VEXT_RED(NAME, TD, TS2, HD, HS2, OP)          \
-@@ -4713,7 +4727,7 @@ GEN_VEXT_FRED(vfwredosum_vs_h, uint32_t, uint16_t, H4, H2, fwadd16)
- GEN_VEXT_FRED(vfwredosum_vs_w, uint64_t, uint32_t, H8, H4, fwadd32)
- 
- /*
-- *** Vector Mask Operations
-+ * Vector Mask Operations
-  */
- /* Vector Mask-Register Logical Instructions */
- #define GEN_VEXT_MASK_VV(NAME, OP)                        \
-@@ -4733,10 +4747,10 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-         vext_set_elem_mask(vd, i, OP(b, a));              \
-     }                                                     \
-     env->vstart = 0;                                      \
--    /* mask destination register are always tail-         \
--     * agnostic                                           \
-+    /*
-+     * mask destination register are always tail-agnostic
-+     * set tail elements to 1s
-      */                                                   \
--    /* set tail elements to 1s */                         \
-     if (vta_all_1s) {                                     \
-         for (; i < total_elems; i++) {                    \
-             vext_set_elem_mask(vd, i, 1);                 \
-@@ -4779,7 +4793,7 @@ target_ulong HELPER(vcpop_m)(void *v0, void *vs2, CPURISCVState *env,
-     return cnt;
- }
- 
--/* vfirst find-first-set mask bit*/
-+/* vfirst find-first-set mask bit */
- target_ulong HELPER(vfirst_m)(void *v0, void *vs2, CPURISCVState *env,
-                               uint32_t desc)
- {
-@@ -4844,8 +4858,10 @@ static void vmsetm(void *vd, void *v0, void *vs2, CPURISCVState *env,
-         }
-     }
-     env->vstart = 0;
--    /* mask destination register are always tail-agnostic */
--    /* set tail elements to 1s */
-+    /*
-+     * mask destination register are always tail-agnostic
-+     * set tail elements to 1s
-+     */
-     if (vta_all_1s) {
-         for (; i < total_elems; i++) {
-             vext_set_elem_mask(vd, i, 1);
-@@ -4937,7 +4953,7 @@ GEN_VEXT_VID_V(vid_v_w, uint32_t, H4)
- GEN_VEXT_VID_V(vid_v_d, uint64_t, H8)
- 
- /*
-- *** Vector Permutation Instructions
-+ * Vector Permutation Instructions
-  */
- 
- /* Vector Slide Instructions */
 -- 
 2.25.1
 
