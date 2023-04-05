@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjvgV-0000Ua-B9
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 01:27:51 -0400
+	id 1pjvhX-0001vw-Ld
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 01:28:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjvgP-0000Ol-9s; Wed, 05 Apr 2023 01:27:45 -0400
-Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
+ id 1pjvhQ-0001v9-1N; Wed, 05 Apr 2023 01:28:54 -0400
+Received: from mail-ua1-x92a.google.com ([2607:f8b0:4864:20::92a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjvgN-0004rR-Mv; Wed, 05 Apr 2023 01:27:44 -0400
-Received: by mail-vs1-xe32.google.com with SMTP id d18so30461353vsv.11;
- Tue, 04 Apr 2023 22:27:42 -0700 (PDT)
+ id 1pjvhK-0005HZ-O2; Wed, 05 Apr 2023 01:28:47 -0400
+Received: by mail-ua1-x92a.google.com with SMTP id p91so7644339uap.1;
+ Tue, 04 Apr 2023 22:28:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680672462;
+ d=gmail.com; s=20210112; t=1680672521;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oAIf8j8SjQRQ+Jym7xV9/lWu90yOWHQBhTb9ueNVJoI=;
- b=JexYL5yT6d0ZloQ9UwjmId8uXZQq6dDExAm/ZECVsNNzbi7Rjbn9f0bvL7DeGIX9Vx
- DfsRSAJV4wWwPonoIth+lFl005vG9eE+tHlJB3JTrpPfmBcsAsgUf8BUfqY+qJ6IkEnm
- vsldH/kTLyoAe2j+1tU1UP9JRNuQ0LcGmEFPDazdin8hs2ZmERuUR9ncaVV3kbfQVRUZ
- EsRbB09A2OZ0UJt9zSZ4z5OCPZUBw4Q6KgDiiFda6ZooI30GKwnYQLGMVcXbLy+UFlES
- XRGhlpn+F48Z+7xPLCUXeYOAvxTveEU/rnjvMeRZxkF5P1xewW+NvMqybcUiB9L6zWJm
- pqqQ==
+ bh=1IfGqOnGfyAwGtyCxbaDQSiZBSaxy3H2DY1114v1IrQ=;
+ b=qQJDOUT98L4DHBMYM9cmsm3hwTWbX+Mg8xlemFyisUoq5XPza1aBCtdln4ER+z8qg7
+ aHQ5Su9dCsgmSrrWhR+oWLkVWRp+dwq0kyygDUVq5/PW9bXSWoO0Eua2zBxObTZvAEzu
+ dxQlUH3xhGeQPBFWiiemeUwZd0TN+bPsxLRHYuT+WQ4RALqImM5xHSfuOS2jdzh3F/8g
+ jswz9SVFA0rfbsx2fx0Auz3lXh7Qa/Ukf7rUY8zbII2sgV5s5PUYdRuJwWQIXFVvxLF0
+ IxLIACLHqcZhYsBlUW9KmPeKI05gZeHJl7dE+yJ9/m9YbwHEcjp8jL9TabGAkvyKeHiC
+ K7hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680672462;
+ d=1e100.net; s=20210112; t=1680672521;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oAIf8j8SjQRQ+Jym7xV9/lWu90yOWHQBhTb9ueNVJoI=;
- b=sz9nsnMvMBWJ7EQRnZX8HaAtyDfapGE/GEVj0ZytqjzC6U2eQy9F9rKzp4xHjCYEwb
- yQEJ3/CYvUaAVroEfpZj1aQmufdHvbTHpSFvk/6hzW0NQCuK3V2RGCU5ZrtPnC7mhlyS
- MSt/K+8Q6NIAS7OGV9xYD3NaTiWcQuEdr9LCBWYKuvJTxYcsjbGjmI33oYMlIqiYW76j
- UtPNGXKtJo6hlc/fKAt4WR+Kz53mUK4umAlN7HXGiXkVPw7vIqQS7b3g+O9xY+167MJX
- Miewsugxdl+Wmmmvg9q2kLmZOJNS4lds9tYtKnMH+KZGrOpK6N0zPq/chqcV/cN/ngAX
- 39MA==
-X-Gm-Message-State: AAQBX9chsWHJ8fkNsDqXvMQ2apMnyNIW+BptTQ+Q0x2Gm5CHOlSh6DNf
- bByobv/yCy4UcJ9OpIEi/pkPA3SK2vBNTucCgbI=
-X-Google-Smtp-Source: AKy350baJLy8nU7Zxr6Eju4FUjuhxJT0fIqDawdv9Klhlb9wOYZwI4c/MyfSNni/fjEBFcFZYakXEnuyUXa/9OWvKuE=
-X-Received: by 2002:a67:c29e:0:b0:425:d39f:3882 with SMTP id
- k30-20020a67c29e000000b00425d39f3882mr4021955vsj.3.1680672462301; Tue, 04 Apr
- 2023 22:27:42 -0700 (PDT)
+ bh=1IfGqOnGfyAwGtyCxbaDQSiZBSaxy3H2DY1114v1IrQ=;
+ b=0x8duIJEwDc89MOn8XRM8eFWgS1xDJs/CT78EKVJ4+AeEBSW5ArrWFn01bSCOlZr37
+ 7s3kTGIr/PRU029T60ZG5etLs+5mQqD/e3HGiEAMgg0ADtbtqKSRbOlGszRAM4fuo4lE
+ JQAhMwJxMaBNA+wgEFgDF4gpbyRpnqcaj563I+U1hb3opesCFAFBEtKIo6oD/PZq2N10
+ /orB/He9+AeDfKN70nDpG+Gt0+AmacYw6Z+u1UvpKjwnNb9oqWb7xnNRznirOBO/RYrV
+ 0uxQPWYkADTxrwztA8aGfpfyKlqtq8y0NgSkdwRQz1NPnXHu9tq/nHwtQuJXU06v5FLu
+ pbGw==
+X-Gm-Message-State: AAQBX9fr3sm/n6nFNFElNrRP1ZLxdZo1v5FvQFPuq8YLgl2ZJx/4y8OS
+ +cXW6C3R1HvgyfwIl86Hk7yoARqYbxeA/hlZT/M31iroua0=
+X-Google-Smtp-Source: AKy350Y2ZFzLuK9C47kgbIlrIhSvDpPA/etDtKf3xyLoftR/L52xgnR0D2TuFdqlcE9GAGzV3GAs6e1iGJDkRvMtGVA=
+X-Received: by 2002:a1f:acc9:0:b0:433:7ae0:6045 with SMTP id
+ v192-20020a1facc9000000b004337ae06045mr4104049vke.0.1680672520979; Tue, 04
+ Apr 2023 22:28:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230327080858.39703-1-liweiwei@iscas.ac.cn>
- <20230327080858.39703-8-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230327080858.39703-8-liweiwei@iscas.ac.cn>
+ <20230327080858.39703-10-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230327080858.39703-10-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 5 Apr 2023 15:27:16 +1000
-Message-ID: <CAKmqyKN=44S36Vqi+bn5_h9KYrc+mV_ssG=SxiWiOFDAqVtjqA@mail.gmail.com>
-Subject: Re: [PATCH v2 07/10] target/riscv: Remove redundant parentheses
+Date: Wed, 5 Apr 2023 15:28:14 +1000
+Message-ID: <CAKmqyKNhx+nEFVuC71YEBBM-Zbz6JyWk1mzmn2eqAziokuZ15Q@mail.gmail.com>
+Subject: Re: [PATCH v2 09/10] target/riscv: Fix format for comments
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
@@ -56,8 +56,8 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
  Richard Henderson <richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92a;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -78,16 +78,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 05:27:49 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 05:28:54 -0000
 
-On Mon, Mar 27, 2023 at 6:12=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
+On Mon, Mar 27, 2023 at 6:16=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
 ote:
 >
-> Remove redundant parentheses in get_physical_address.
+> Fix formats for multi-lines comments.
+> Add spaces around single line comments(after "/*" and before "*/").
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Acked-by: Richard Henderson <richard.henderson@linaro.org>
 > Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -95,23 +96,765 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu_helper.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  target/riscv/arch_dump.c                |  3 +-
+>  target/riscv/cpu.c                      |  2 +-
+>  target/riscv/cpu.h                      | 26 ++++----
+>  target/riscv/cpu_bits.h                 |  2 +-
+>  target/riscv/cpu_helper.c               | 57 +++++++++++------
+>  target/riscv/csr.c                      |  6 +-
+>  target/riscv/insn_trans/trans_rvv.c.inc |  8 ++-
+>  target/riscv/pmp.c                      | 23 ++++---
+>  target/riscv/sbi_ecall_interface.h      |  8 +--
+>  target/riscv/translate.c                |  8 ++-
+>  target/riscv/vector_helper.c            | 82 +++++++++++++++----------
+>  11 files changed, 135 insertions(+), 90 deletions(-)
 >
+> diff --git a/target/riscv/arch_dump.c b/target/riscv/arch_dump.c
+> index 573587810e..434c8a3dbb 100644
+> --- a/target/riscv/arch_dump.c
+> +++ b/target/riscv/arch_dump.c
+> @@ -1,4 +1,5 @@
+> -/* Support for writing ELF notes for RISC-V architectures
+> +/*
+> + * Support for writing ELF notes for RISC-V architectures
+>   *
+>   * Copyright (C) 2021 Huawei Technologies Co., Ltd
+>   *
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index b0cbacc5f4..7f6184346e 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -56,7 +56,7 @@ struct isa_ext_data {
+>  #define ISA_EXT_DATA_ENTRY(_name, _m_letter, _min_ver, _prop) \
+>  {#_name, _m_letter, _min_ver, offsetof(struct RISCVCPUConfig, _prop)}
+>
+> -/**
+> +/*
+>   * Here are the ordering rules of extension naming defined by RISC-V
+>   * specification :
+>   * 1. All extensions should be separated from other multi-letter extensi=
+ons
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index dc9817b40d..2fcdacf216 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -124,7 +124,7 @@ FIELD(VTYPE, RESERVED, 10, sizeof(target_ulong) * 8 -=
+ 11)
+>  typedef struct PMUCTRState {
+>      /* Current value of a counter */
+>      target_ulong mhpmcounter_val;
+> -    /* Current value of a counter in RV32*/
+> +    /* Current value of a counter in RV32 */
+>      target_ulong mhpmcounterh_val;
+>      /* Snapshot values of counter */
+>      target_ulong mhpmcounter_prev;
+> @@ -278,8 +278,10 @@ struct CPUArchState {
+>      target_ulong satp_hs;
+>      uint64_t mstatus_hs;
+>
+> -    /* Signals whether the current exception occurred with two-stage add=
+ress
+> -       translation active. */
+> +    /*
+> +     * Signals whether the current exception occurred with two-stage add=
+ress
+> +     * translation active.
+> +     */
+>      bool two_stage_lookup;
+>      /*
+>       * Signals whether the current exception occurred while doing two-st=
+age
+> @@ -295,10 +297,10 @@ struct CPUArchState {
+>      /* PMU counter state */
+>      PMUCTRState pmu_ctrs[RV_MAX_MHPMCOUNTERS];
+>
+> -    /* PMU event selector configured values. First three are unused*/
+> +    /* PMU event selector configured values. First three are unused */
+>      target_ulong mhpmevent_val[RV_MAX_MHPMEVENTS];
+>
+> -    /* PMU event selector configured values for RV32*/
+> +    /* PMU event selector configured values for RV32 */
+>      target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
+>
+>      target_ulong sscratch;
+> @@ -387,7 +389,7 @@ struct CPUArchState {
+>
+>  OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+>
+> -/**
+> +/*
+>   * RISCVCPUClass:
+>   * @parent_realize: The parent class' realize handler.
+>   * @parent_phases: The parent class' reset phase handlers.
+> @@ -395,9 +397,9 @@ OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISC=
+V_CPU)
+>   * A RISCV CPU model.
+>   */
+>  struct RISCVCPUClass {
+> -    /*< private >*/
+> +    /* < private > */
+>      CPUClass parent_class;
+> -    /*< public >*/
+> +    /* < public > */
+>      DeviceRealize parent_realize;
+>      ResettablePhases parent_phases;
+>  };
+> @@ -521,16 +523,16 @@ struct RISCVCPUConfig {
+>
+>  typedef struct RISCVCPUConfig RISCVCPUConfig;
+>
+> -/**
+> +/*
+>   * RISCVCPU:
+>   * @env: #CPURISCVState
+>   *
+>   * A RISCV CPU.
+>   */
+>  struct ArchCPU {
+> -    /*< private >*/
+> +    /* < private > */
+>      CPUState parent_obj;
+> -    /*< public >*/
+> +    /* < public > */
+>      CPUNegativeOffsetState neg;
+>      CPURISCVState env;
+>
+> @@ -802,7 +804,7 @@ enum {
+>      CSR_TABLE_SIZE =3D 0x1000
+>  };
+>
+> -/**
+> +/*
+>   * The event id are encoded based on the encoding specified in the
+>   * SBI specification v0.3
+>   */
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 45ddb00aa5..063535b1aa 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -727,7 +727,7 @@ typedef enum RISCVException {
+>  #define MIE_SSIE                           (1 << IRQ_S_SOFT)
+>  #define MIE_USIE                           (1 << IRQ_U_SOFT)
+>
+> -/* General PointerMasking CSR bits*/
+> +/* General PointerMasking CSR bits */
+>  #define PM_ENABLE       0x00000001ULL
+>  #define PM_CURRENT      0x00000002ULL
+>  #define PM_INSN         0x00000004ULL
 > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 1ad39e7157..9145ca0ddb 100644
+> index 6f4d0a6030..e46b667239 100644
 > --- a/target/riscv/cpu_helper.c
 > +++ b/target/riscv/cpu_helper.c
-> @@ -1046,7 +1046,7 @@ restart:
->              if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
->                  *prot |=3D PAGE_READ;
+> @@ -717,7 +717,8 @@ static int get_physical_address_pmp(CPURISCVState *en=
+v, int *prot,
+>      return TRANSLATE_SUCCESS;
+>  }
+>
+> -/* get_physical_address - get the physical address for this virtual addr=
+ess
+> +/*
+> + * get_physical_address - get the physical address for this virtual addr=
+ess
+>   *
+>   * Do a page table walk to obtain the physical address corresponding to =
+a
+>   * virtual address. Returns 0 if the translation was successful
+> @@ -745,9 +746,11 @@ static int get_physical_address(CPURISCVState *env, =
+hwaddr *physical,
+>                                  bool first_stage, bool two_stage,
+>                                  bool is_debug)
+>  {
+> -    /* NOTE: the env->pc value visible here will not be
+> +    /*
+> +     * NOTE: the env->pc value visible here will not be
+>       * correct, but the value visible to the exception handler
+> -     * (riscv_cpu_do_interrupt) is correct */
+> +     * (riscv_cpu_do_interrupt) is correct
+> +     */
+>      MemTxResult res;
+>      MemTxAttrs attrs =3D MEMTXATTRS_UNSPECIFIED;
+>      int mode =3D mmu_idx & TB_FLAGS_PRIV_MMU_MASK;
+> @@ -767,8 +770,10 @@ static int get_physical_address(CPURISCVState *env, =
+hwaddr *physical,
+>          use_background =3D true;
+>      }
+>
+> -    /* MPRV does not affect the virtual-machine load/store
+> -       instructions, HLV, HLVX, and HSV. */
+> +    /*
+> +     * MPRV does not affect the virtual-machine load/store
+> +     * instructions, HLV, HLVX, and HSV.
+> +     */
+>      if (riscv_cpu_two_stage_lookup(mmu_idx)) {
+>          mode =3D get_field(env->hstatus, HSTATUS_SPVP);
+>      } else if (mode =3D=3D PRV_M && access_type !=3D MMU_INST_FETCH) {
+> @@ -778,8 +783,10 @@ static int get_physical_address(CPURISCVState *env, =
+hwaddr *physical,
+>      }
+>
+>      if (first_stage =3D=3D false) {
+> -        /* We are in stage 2 translation, this is similar to stage 1. */
+> -        /* Stage 2 is always taken as U-mode */
+> +        /*
+> +         * We are in stage 2 translation, this is similar to stage 1.
+> +         * Stage 2 is always taken as U-mode
+> +         */
+>          mode =3D PRV_U;
+>      }
+>
+> @@ -1007,8 +1014,10 @@ restart:
+>                      target_ulong *pte_pa =3D
+>                          qemu_map_ram_ptr(mr->ram_block, addr1);
+>  #if TCG_OVERSIZED_GUEST
+> -                    /* MTTCG is not enabled on oversized TCG guests so
+> -                     * page table updates do not need to be atomic */
+> +                    /*
+> +                     * MTTCG is not enabled on oversized TCG guests so
+> +                     * page table updates do not need to be atomic
+> +                     */
+>                      *pte_pa =3D pte =3D updated_pte;
+>  #else
+>                      target_ulong old_pte =3D
+> @@ -1020,14 +1029,18 @@ restart:
+>                      }
+>  #endif
+>                  } else {
+> -                    /* misconfigured PTE in ROM (AD bits are not preset)=
+ or
+> -                     * PTE is in IO space and can't be updated atomicall=
+y */
+> +                    /*
+> +                     * misconfigured PTE in ROM (AD bits are not preset)=
+ or
+> +                     * PTE is in IO space and can't be updated atomicall=
+y
+> +                     */
+>                      return TRANSLATE_FAIL;
+>                  }
 >              }
-> -            if ((pte & PTE_X)) {
-> +            if (pte & PTE_X) {
+>
+> -            /* for superpage mappings, make a fake leaf PTE for the TLB'=
+s
+> -               benefit. */
+> +            /*
+> +             * for superpage mappings, make a fake leaf PTE for the TLB'=
+s
+> +             * benefit.
+> +             */
+>              target_ulong vpn =3D addr >> PGSHIFT;
+>
+>              if (riscv_cpu_cfg(env)->ext_svnapot && (pte & PTE_N)) {
+> @@ -1049,8 +1062,10 @@ restart:
+>              if (pte & PTE_X) {
 >                  *prot |=3D PAGE_EXEC;
 >              }
->              /* add write permission on stores or if the page is already =
+> -            /* add write permission on stores or if the page is already =
 dirty,
+> -               so that we TLB miss on later writes to update the dirty b=
+it */
+> +            /*
+> +             * add write permission on stores or if the page is already =
+dirty,
+> +             * so that we TLB miss on later writes to update the dirty b=
+it
+> +             */
+>              if ((pte & PTE_W) &&
+>                  (access_type =3D=3D MMU_DATA_STORE || (pte & PTE_D))) {
+>                  *prot |=3D PAGE_WRITE;
+> @@ -1235,8 +1250,10 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr addres=
+s, int size,
+>      qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n=
+",
+>                    __func__, address, access_type, mmu_idx);
+>
+> -    /* MPRV does not affect the virtual-machine load/store
+> -       instructions, HLV, HLVX, and HSV. */
+> +    /*
+> +     * MPRV does not affect the virtual-machine load/store
+> +     * instructions, HLV, HLVX, and HSV.
+> +     */
+>      if (riscv_cpu_two_stage_lookup(mmu_idx)) {
+>          mode =3D get_field(env->hstatus, HSTATUS_SPVP);
+>      } else if (mode =3D=3D PRV_M && access_type !=3D MMU_INST_FETCH &&
+> @@ -1577,7 +1594,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>      bool write_gva =3D false;
+>      uint64_t s;
+>
+> -    /* cs->exception is 32-bits wide unlike mcause which is XLEN-bits wi=
+de
+> +    /*
+> +     * cs->exception is 32-bits wide unlike mcause which is XLEN-bits wi=
+de
+>       * so we mask off the MSB and separate into trap type and cause.
+>       */
+>      bool async =3D !!(cs->exception_index & RISCV_EXCP_INT_FLAG);
+> @@ -1754,7 +1772,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          riscv_cpu_set_mode(env, PRV_M);
+>      }
+>
+> -    /* NOTE: it is not necessary to yield load reservations here. It is =
+only
+> +    /*
+> +     * NOTE: it is not necessary to yield load reservations here. It is =
+only
+>       * necessary for an SC from "another hart" to cause a load reservati=
+on
+>       * to be yielded. Refer to the memory consistency model section of t=
+he
+>       * RISC-V ISA Specification.
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 4ccd5dbfb5..35cdbd62dc 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -174,7 +174,7 @@ static RISCVException mctr(CPURISCVState *env, int cs=
+rno)
+>      }
+>      ctr_index =3D csrno - base_csrno;
+>      if (!pmu_num || ctr_index >=3D pmu_num) {
+> -        /* The PMU is not enabled or counter is out of range*/
+> +        /* The PMU is not enabled or counter is out of range */
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+>
+> @@ -862,7 +862,7 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVStat=
+e *env, target_ulong *val,
+>                                          counter.mhpmcounter_val;
+>
+>      if (get_field(env->mcountinhibit, BIT(ctr_idx))) {
+> -        /**
+> +        /*
+>           * Counter should not increment if inhibit bit is set. We can't =
+really
+>           * stop the icount counting. Just return the counter value writt=
+en by
+>           * the supervisor to indicate that counter was not incremented.
+> @@ -876,7 +876,7 @@ static RISCVException riscv_pmu_read_ctr(CPURISCVStat=
+e *env, target_ulong *val,
+>          }
+>      }
+>
+> -    /**
+> +    /*
+>       * The kernel computes the perf delta by subtracting the current val=
+ue from
+>       * the value it initialized previously (ctr_val).
+>       */
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
+trans/trans_rvv.c.inc
+> index 8e43bfc07c..ca3c4c1a3d 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -3136,9 +3136,11 @@ static bool trans_vfirst_m(DisasContext *s, arg_rm=
+r *a)
+>      return false;
+>  }
+>
+> -/* vmsbf.m set-before-first mask bit */
+> -/* vmsif.m set-includ-first mask bit */
+> -/* vmsof.m set-only-first mask bit */
+> +/*
+> + * vmsbf.m set-before-first mask bit
+> + * vmsif.m set-including-first mask bit
+> + * vmsof.m set-only-first mask bit
+> + */
+>  #define GEN_M_TRANS(NAME)                                          \
+>  static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>  {                                                                  \
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 3943b0f2e3..665a8528d5 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -205,7 +205,8 @@ void pmp_update_rule_nums(CPURISCVState *env)
+>      }
+>  }
+>
+> -/* Convert cfg/addr reg values here into simple 'sa' --> start address a=
+nd 'ea'
+> +/*
+> + * Convert cfg/addr reg values here into simple 'sa' --> start address a=
+nd 'ea'
+>   *   end address values.
+>   *   This function is called relatively infrequently whereas the check t=
+hat
+>   *   an address is within a pmp rule is called often, so optimise that o=
+ne
+> @@ -329,8 +330,10 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ul=
+ong addr,
+>          pmp_size =3D size;
+>      }
+>
+> -    /* 1.10 draft priv spec states there is an implicit order
+> -         from low to high */
+> +    /*
+> +     * 1.10 draft priv spec states there is an implicit order
+> +     * from low to high
+> +     */
+>      for (i =3D 0; i < MAX_RISCV_PMPS; i++) {
+>          s =3D pmp_is_in_range(env, i, addr);
+>          e =3D pmp_is_in_range(env, i, addr + pmp_size - 1);
+> @@ -609,13 +612,13 @@ target_ulong pmp_get_tlb_size(CPURISCVState *env, i=
+nt pmp_index,
+>          return TARGET_PAGE_SIZE;
+>      } else {
+>          /*
+> -        * At this point we have a tlb_size that is the smallest possible=
+ size
+> -        * That fits within a TARGET_PAGE_SIZE and the PMP region.
+> -        *
+> -        * If the size is less then TARGET_PAGE_SIZE we drop the size to =
+1.
+> -        * This means the result isn't cached in the TLB and is only used=
+ for
+> -        * a single translation.
+> -        */
+> +         * At this point we have a tlb_size that is the smallest possibl=
+e size
+> +         * That fits within a TARGET_PAGE_SIZE and the PMP region.
+> +         *
+> +         * If the size is less then TARGET_PAGE_SIZE we drop the size to=
+ 1.
+> +         * This means the result isn't cached in the TLB and is only use=
+d for
+> +         * a single translation.
+> +         */
+>          return 1;
+>      }
+>  }
+> diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_=
+interface.h
+> index 77574ed4cb..43899d08f6 100644
+> --- a/target/riscv/sbi_ecall_interface.h
+> +++ b/target/riscv/sbi_ecall_interface.h
+> @@ -28,7 +28,7 @@
+>  #define SBI_EXT_RFENCE                  0x52464E43
+>  #define SBI_EXT_HSM                     0x48534D
+>
+> -/* SBI function IDs for BASE extension*/
+> +/* SBI function IDs for BASE extension */
+>  #define SBI_EXT_BASE_GET_SPEC_VERSION   0x0
+>  #define SBI_EXT_BASE_GET_IMP_ID         0x1
+>  #define SBI_EXT_BASE_GET_IMP_VERSION    0x2
+> @@ -37,13 +37,13 @@
+>  #define SBI_EXT_BASE_GET_MARCHID        0x5
+>  #define SBI_EXT_BASE_GET_MIMPID         0x6
+>
+> -/* SBI function IDs for TIME extension*/
+> +/* SBI function IDs for TIME extension */
+>  #define SBI_EXT_TIME_SET_TIMER          0x0
+>
+> -/* SBI function IDs for IPI extension*/
+> +/* SBI function IDs for IPI extension */
+>  #define SBI_EXT_IPI_SEND_IPI            0x0
+>
+> -/* SBI function IDs for RFENCE extension*/
+> +/* SBI function IDs for RFENCE extension */
+>  #define SBI_EXT_RFENCE_REMOTE_FENCE_I       0x0
+>  #define SBI_EXT_RFENCE_REMOTE_SFENCE_VMA    0x1
+>  #define SBI_EXT_RFENCE_REMOTE_SFENCE_VMA_ASID  0x2
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 5450efcce5..bcd1a1e569 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -491,7 +491,7 @@ static TCGv_i64 dest_fpr(DisasContext *ctx, int reg_n=
+um)
+>      }
+>  }
+>
+> -/* assume t is nanboxing (for normal) or sign-extended (for zfinx) */
+> +/* assume it is nanboxing (for normal) or sign-extended (for zfinx) */
+>  static void gen_set_fpr_hs(DisasContext *ctx, int reg_num, TCGv_i64 t)
+>  {
+>      if (!ctx->cfg_ptr->ext_zfinx) {
+> @@ -598,7 +598,8 @@ static TCGv get_address_indexed(DisasContext *ctx, in=
+t rs1, TCGv offs)
+>  }
+>
+>  #ifndef CONFIG_USER_ONLY
+> -/* The states of mstatus_fs are:
+> +/*
+> + * The states of mstatus_fs are:
+>   * 0 =3D disabled, 1 =3D initial, 2 =3D clean, 3 =3D dirty
+>   * We will have already diagnosed disabled state,
+>   * and need to turn initial/clean into dirty.
+> @@ -636,7 +637,8 @@ static inline void mark_fs_dirty(DisasContext *ctx) {=
+ }
+>  #endif
+>
+>  #ifndef CONFIG_USER_ONLY
+> -/* The states of mstatus_vs are:
+> +/*
+> + * The states of mstatus_vs are:
+>   * 0 =3D disabled, 1 =3D initial, 2 =3D clean, 3 =3D dirty
+>   * We will have already diagnosed disabled state,
+>   * and need to turn initial/clean into dirty.
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index df6201d043..81b99a0e3c 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -290,7 +290,7 @@ static void vext_set_tail_elems_1s(CPURISCVState *env=
+, target_ulong vl,
+>  }
+>
+>  /*
+> - *** stride: access vector element from strided memory
+> + * stride: access vector element from strided memory
+>   */
+>  static void
+>  vext_ldst_stride(void *vd, void *v0, target_ulong base,
+> @@ -356,10 +356,10 @@ GEN_VEXT_ST_STRIDE(vsse32_v, int32_t, ste_w)
+>  GEN_VEXT_ST_STRIDE(vsse64_v, int64_t, ste_d)
+>
+>  /*
+> - *** unit-stride: access elements stored contiguously in memory
+> + * unit-stride: access elements stored contiguously in memory
+>   */
+>
+> -/* unmasked unit-stride load and store operation*/
+> +/* unmasked unit-stride load and store operation */
+>  static void
+>  vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t d=
+esc,
+>               vext_ldst_elem_fn *ldst_elem, uint32_t log2_esz, uint32_t e=
+vl,
+> @@ -432,7 +432,7 @@ GEN_VEXT_ST_US(vse32_v, int32_t, ste_w)
+>  GEN_VEXT_ST_US(vse64_v, int64_t, ste_d)
+>
+>  /*
+> - *** unit stride mask load and store, EEW =3D 1
+> + * unit stride mask load and store, EEW =3D 1
+>   */
+>  void HELPER(vlm_v)(void *vd, void *v0, target_ulong base,
+>                      CPURISCVState *env, uint32_t desc)
+> @@ -453,7 +453,7 @@ void HELPER(vsm_v)(void *vd, void *v0, target_ulong b=
+ase,
+>  }
+>
+>  /*
+> - *** index: access vector element from indexed memory
+> + * index: access vector element from indexed memory
+>   */
+>  typedef target_ulong vext_get_index_addr(target_ulong base,
+>          uint32_t idx, void *vs2);
+> @@ -557,7 +557,7 @@ GEN_VEXT_ST_INDEX(vsxei64_32_v, int32_t, idx_d, ste_w=
+)
+>  GEN_VEXT_ST_INDEX(vsxei64_64_v, int64_t, idx_d, ste_d)
+>
+>  /*
+> - *** unit-stride fault-only-fisrt load instructions
+> + * unit-stride fault-only-fisrt load instructions
+>   */
+>  static inline void
+>  vext_ldff(void *vd, void *v0, target_ulong base,
+> @@ -574,7 +574,7 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+>      uint32_t vma =3D vext_vma(desc);
+>      target_ulong addr, offset, remain;
+>
+> -    /* probe every access*/
+> +    /* probe every access */
+>      for (i =3D env->vstart; i < env->vl; i++) {
+>          if (!vm && !vext_elem_mask(v0, i)) {
+>              continue;
+> @@ -663,7 +663,7 @@ GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d)
+>  #define DO_MINU(N, M) DO_MIN((UMTYPE)N, (UMTYPE)M)
+>
+>  /*
+> - *** load and store whole register instructions
+> + * load and store whole register instructions
+>   */
+>  static void
+>  vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_=
+t desc,
+> @@ -736,7 +736,7 @@ GEN_VEXT_ST_WHOLE(vs4r_v, int8_t, ste_b)
+>  GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b)
+>
+>  /*
+> - *** Vector Integer Arithmetic Instructions
+> + * Vector Integer Arithmetic Instructions
+>   */
+>
+>  /* expand macro args before macro */
+> @@ -1152,8 +1152,10 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, v=
+oid *vs2,   \
+>          vext_set_elem_mask(vd, i, DO_OP(s2, s1, carry));      \
+>      }                                                         \
+>      env->vstart =3D 0;                                          \
+> -    /* mask destination register are always tail-agnostic */  \
+> -    /* set tail elements to 1s */                             \
+> +    /*
+> +     * mask destination register are always tail-agnostic
+> +     * set tail elements to 1s
+> +     */                                                       \
+>      if (vta_all_1s) {                                         \
+>          for (; i < total_elems; i++) {                        \
+>              vext_set_elem_mask(vd, i, 1);                     \
+> @@ -1188,8 +1190,10 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong=
+ s1,          \
+>                  DO_OP(s2, (ETYPE)(target_long)s1, carry));      \
+>      }                                                           \
+>      env->vstart =3D 0;                                            \
+> -    /* mask destination register are always tail-agnostic */    \
+> -    /* set tail elements to 1s */                               \
+> +    /*
+> +     * mask destination register are always tail-agnostic
+> +     * set tail elements to 1s
+> +     */                                                         \
+>      if (vta_all_1s) {                                           \
+>          for (; i < total_elems; i++) {                          \
+>              vext_set_elem_mask(vd, i, 1);                       \
+> @@ -1395,8 +1399,10 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, v=
+oid *vs2,   \
+>          vext_set_elem_mask(vd, i, DO_OP(s2, s1));             \
+>      }                                                         \
+>      env->vstart =3D 0;                                          \
+> -    /* mask destination register are always tail-agnostic */  \
+> -    /* set tail elements to 1s */                             \
+> +    /*
+> +     * mask destination register are always tail-agnostic
+> +     * set tail elements to 1s
+> +     */                                                       \
+>      if (vta_all_1s) {                                         \
+>          for (; i < total_elems; i++) {                        \
+>              vext_set_elem_mask(vd, i, 1);                     \
+> @@ -1458,8 +1464,10 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong=
+ s1, void *vs2,   \
+>                  DO_OP(s2, (ETYPE)(target_long)s1));                 \
+>      }                                                               \
+>      env->vstart =3D 0;                                                \
+> -    /* mask destination register are always tail-agnostic */        \
+> -    /* set tail elements to 1s */                                   \
+> +    /*
+> +     * mask destination register are always tail-agnostic
+> +     * set tail elements to 1s
+> +     */                                                             \
+>      if (vta_all_1s) {                                               \
+>          for (; i < total_elems; i++) {                              \
+>              vext_set_elem_mask(vd, i, 1);                           \
+> @@ -2078,7 +2086,7 @@ GEN_VEXT_VMERGE_VX(vmerge_vxm_w, int32_t, H4)
+>  GEN_VEXT_VMERGE_VX(vmerge_vxm_d, int64_t, H8)
+>
+>  /*
+> - *** Vector Fixed-Point Arithmetic Instructions
+> + * Vector Fixed-Point Arithmetic Instructions
+>   */
+>
+>  /* Vector Single-Width Saturating Add and Subtract */
+> @@ -2991,7 +2999,7 @@ GEN_VEXT_VX_RM(vnclipu_wx_h, 2)
+>  GEN_VEXT_VX_RM(vnclipu_wx_w, 4)
+>
+>  /*
+> - *** Vector Float Point Arithmetic Instructions
+> + * Vector Float Point Arithmetic Instructions
+>   */
+>  /* Vector Single-Width Floating-Point Add/Subtract Instructions */
+>  #define OPFVV2(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2, OP)   \
+> @@ -4174,8 +4182,10 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, v=
+oid *vs2,   \
+>                             DO_OP(s2, s1, &env->fp_status));   \
+>      }                                                         \
+>      env->vstart =3D 0;                                          \
+> -    /* mask destination register are always tail-agnostic */  \
+> -    /* set tail elements to 1s */                             \
+> +    /*
+> +     * mask destination register are always tail-agnostic
+> +     * set tail elements to 1s
+> +     */                                                       \
+>      if (vta_all_1s) {                                         \
+>          for (; i < total_elems; i++) {                        \
+>              vext_set_elem_mask(vd, i, 1);                     \
+> @@ -4211,8 +4221,10 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1,=
+ void *vs2,       \
+>                             DO_OP(s2, (ETYPE)s1, &env->fp_status));  \
+>      }                                                               \
+>      env->vstart =3D 0;                                                \
+> -    /* mask destination register are always tail-agnostic */        \
+> -    /* set tail elements to 1s */                                   \
+> +    /*
+> +     * mask destination register are always tail-agnostic
+> +     * set tail elements to 1s
+> +     */                                                             \
+>      if (vta_all_1s) {                                               \
+>          for (; i < total_elems; i++) {                              \
+>              vext_set_elem_mask(vd, i, 1);                           \
+> @@ -4475,7 +4487,9 @@ GEN_VEXT_V_ENV(vfcvt_f_x_v_d, 8)
+>  #define WOP_UU_B uint16_t, uint8_t,  uint8_t
+>  #define WOP_UU_H uint32_t, uint16_t, uint16_t
+>  #define WOP_UU_W uint64_t, uint32_t, uint32_t
+> -/* vfwcvt.xu.f.v vd, vs2, vm # Convert float to double-width unsigned in=
+teger.*/
+> +/*
+> + * vfwcvt.xu.f.v vd, vs2, vm # Convert float to double-width unsigned in=
+teger.
+> + */
+>  RVVCALL(OPFVV1, vfwcvt_xu_f_v_h, WOP_UU_H, H4, H2, float16_to_uint32)
+>  RVVCALL(OPFVV1, vfwcvt_xu_f_v_w, WOP_UU_W, H8, H4, float32_to_uint64)
+>  GEN_VEXT_V_ENV(vfwcvt_xu_f_v_h, 4)
+> @@ -4562,7 +4576,7 @@ GEN_VEXT_V_ENV(vfncvt_f_f_w_h, 2)
+>  GEN_VEXT_V_ENV(vfncvt_f_f_w_w, 4)
+>
+>  /*
+> - *** Vector Reduction Operations
+> + * Vector Reduction Operations
+>   */
+>  /* Vector Single-Width Integer Reduction Instructions */
+>  #define GEN_VEXT_RED(NAME, TD, TS2, HD, HS2, OP)          \
+> @@ -4716,7 +4730,7 @@ GEN_VEXT_FRED(vfwredosum_vs_h, uint32_t, uint16_t, =
+H4, H2, fwadd16)
+>  GEN_VEXT_FRED(vfwredosum_vs_w, uint64_t, uint32_t, H8, H4, fwadd32)
+>
+>  /*
+> - *** Vector Mask Operations
+> + * Vector Mask Operations
+>   */
+>  /* Vector Mask-Register Logical Instructions */
+>  #define GEN_VEXT_MASK_VV(NAME, OP)                        \
+> @@ -4736,10 +4750,10 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, =
+         \
+>          vext_set_elem_mask(vd, i, OP(b, a));              \
+>      }                                                     \
+>      env->vstart =3D 0;                                      \
+> -    /* mask destination register are always tail-         \
+> -     * agnostic                                           \
+> +    /*
+> +     * mask destination register are always tail-agnostic
+> +     * set tail elements to 1s
+>       */                                                   \
+> -    /* set tail elements to 1s */                         \
+>      if (vta_all_1s) {                                     \
+>          for (; i < total_elems; i++) {                    \
+>              vext_set_elem_mask(vd, i, 1);                 \
+> @@ -4782,7 +4796,7 @@ target_ulong HELPER(vcpop_m)(void *v0, void *vs2, C=
+PURISCVState *env,
+>      return cnt;
+>  }
+>
+> -/* vfirst find-first-set mask bit*/
+> +/* vfirst find-first-set mask bit */
+>  target_ulong HELPER(vfirst_m)(void *v0, void *vs2, CPURISCVState *env,
+>                                uint32_t desc)
+>  {
+> @@ -4847,8 +4861,10 @@ static void vmsetm(void *vd, void *v0, void *vs2, =
+CPURISCVState *env,
+>          }
+>      }
+>      env->vstart =3D 0;
+> -    /* mask destination register are always tail-agnostic */
+> -    /* set tail elements to 1s */
+> +    /*
+> +     * mask destination register are always tail-agnostic
+> +     * set tail elements to 1s
+> +     */
+>      if (vta_all_1s) {
+>          for (; i < total_elems; i++) {
+>              vext_set_elem_mask(vd, i, 1);
+> @@ -4940,7 +4956,7 @@ GEN_VEXT_VID_V(vid_v_w, uint32_t, H4)
+>  GEN_VEXT_VID_V(vid_v_d, uint64_t, H8)
+>
+>  /*
+> - *** Vector Permutation Instructions
+> + * Vector Permutation Instructions
+>   */
+>
+>  /* Vector Slide Instructions */
 > --
 > 2.25.1
 >
