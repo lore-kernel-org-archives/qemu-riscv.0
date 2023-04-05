@@ -1,52 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pk5dI-0005to-8Q
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 12:05:12 -0400
+	id 1pk5dL-0005w2-P3
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 12:05:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pk5dD-0005s7-7k
- for qemu-riscv@nongnu.org; Wed, 05 Apr 2023 12:05:07 -0400
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pk5dK-0005uq-A7
+ for qemu-riscv@nongnu.org; Wed, 05 Apr 2023 12:05:14 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pk5dB-0007ee-73
- for qemu-riscv@nongnu.org; Wed, 05 Apr 2023 12:05:06 -0400
-Received: by mail-wr1-x42a.google.com with SMTP id l12so36706382wrm.10
- for <qemu-riscv@nongnu.org>; Wed, 05 Apr 2023 09:05:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pk5dI-0007la-3N
+ for qemu-riscv@nongnu.org; Wed, 05 Apr 2023 12:05:14 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ d11-20020a05600c3acb00b003ef6e6754c5so18603964wms.5
+ for <qemu-riscv@nongnu.org>; Wed, 05 Apr 2023 09:05:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1680710703;
+ d=linaro.org; s=google; t=1680710709;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xxoSzGepGv7BmEwhIUriUkTSi2iiaajTQsAiWFvibwk=;
- b=DQmQx5IbN6E4g6+BkWxA6gztVY7c/sHCIzd5stHTLyHiWOEkRlEtrivX3vqbDbGjL7
- XxhqdFKDllanEdiwIR+2geFMKUEf51/bjTU6C1eN4FPCiqJiX82RtiNDDdUc4v8TZMlS
- hfE9xJx7iUvpEr/MKnWta3hPHTH4tZxYVjBbZjbRVHV9SQjjE7MOqQkE5Vx8Ki+X5wTp
- c5TkfIiumSxeeb7KERAMfNwXTLH281hiqor5R3BeKHaP0CWh9xqCJFkqSyE1Ryn0CRfG
- Wa9APsQXMmO/K9sEl+9/eYdh12Me4fUTC8mQAdjssj9vMZeCKSBjNoCuzIYv3M364S11
- 1Z3A==
+ bh=vR5kvRphrC8o/hHrAZxx+p2NR9QjIUYlt0J+xt0JrLs=;
+ b=Kue5crNsn30pNOYpY9SPsIZwYEzatKWT1JwNyC4Tz7AI+Dm1LFg9LUQzgpf2K6tikc
+ mk/JLoWJuJW2YMb/u8tpJRDDD7NE7oEZWhjMD1NIUNYPSkllpMt4dfkpHFl4mXkmb2/c
+ TNeHcs9kjwshAlFLaAd4rINe8sxW9leo230jyONFwRebI56QBZwVXxxrhO9P73poHXtK
+ Y8QJ/YWtGqiDl6UF/8eCPHY7/WUX9shWQCd5AGt9lFkl2TKo5jGKRk9cKJNCtgCpeGep
+ 9jtSe7h0htiRpqIt8S8VefTo70S/iyC9ehr9mAsFxriP5352D4IpRYJpO5PNI1YHwluK
+ zLVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680710703;
+ d=1e100.net; s=20210112; t=1680710709;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xxoSzGepGv7BmEwhIUriUkTSi2iiaajTQsAiWFvibwk=;
- b=iooiQ+1iEa7s7aUbmO2OO10rLooJwJpkgMdxQ8CE5yTA3Mwwn6/DcXAvv+i56NNM89
- vI6CsHPEBdTI2nxOnSo0PXlceNe666g7X/XJyh8DS60FMohsN74aj95RYuIDZkNZTqka
- 8UjcRc8L+xnkdbYkIMhUyQ4CSgXRGPoJ0/F6xN9IJGqgCXfFa0nZdzoZgb6H2UJks3GB
- 5J2P4lleU1F7vQFHBjup0L+hk5juXhvzlutn+UwbVpa2KiNK5+Hi+mfKsanSjGfNkDga
- 4cbfAVXhDEu7NleBYmDJI7R1UUDgXTD16kagl70N9nXJhGhsBFFQxx14b/uCeVnbhn1G
- EFjg==
-X-Gm-Message-State: AAQBX9eCx0cW8oAIDbOfZvsXovpov/FifjaVOrU08VbboLZgS+/8HlP9
- LxPbLBoNE/yvwak/Mi+xs56ECg==
-X-Google-Smtp-Source: AKy350bS4fbO2z32Jbhpsnm4njKJVeihL7eN5HhQ5ZKA2WfgsKUiX7r37OaZuRjkvBKDgyCpYJKbBg==
-X-Received: by 2002:adf:de8f:0:b0:2dc:c0da:409 with SMTP id
- w15-20020adfde8f000000b002dcc0da0409mr3979004wrl.27.1680710703263; 
- Wed, 05 Apr 2023 09:05:03 -0700 (PDT)
+ bh=vR5kvRphrC8o/hHrAZxx+p2NR9QjIUYlt0J+xt0JrLs=;
+ b=DHJItUvg6+UJissA0VpYqB6WN7KNd9AlgU4tUUlb2OCPKFpz92xCMLyuArau3h5Q43
+ QXylJAqLp4E/3jbnlB8VpN2TmNCvskn/MtvTeMFuJJkN1xJ7Vl1yl/oP2P+VOiucSPyC
+ c0KTwBXCuHpjjZ025GwvQC3x+IVUBsNCC39GUoNisRnAuTYeuptZuYYQ32z3wv1jquYM
+ JS/w6dSDldZLaa1zyRupDgYKogD4rE0RkxB7wqHCPFLAjPSlzh/5qtgqxBOVKWgXZqGL
+ hGhItc0paMNDFl9ucwFU2434OTCGYAW5lfVaRDcFqC4YB3kwSieq8IIezDQNLqSgJ16L
+ FkVg==
+X-Gm-Message-State: AAQBX9d5grLpZnXEGJO3srKbmR95MXRnZVvasX451AJF86QvGap8PoI2
+ YtS7z1nB70l6PfWwdsTRSmTygQ==
+X-Google-Smtp-Source: AKy350ZaWzKW7gNGd6JCeIyd+5HFBIKAziuH2LQaatqde7bMAk2r3xVbM5UGjlxR3ZLELjGpAEwkSQ==
+X-Received: by 2002:a7b:c7d4:0:b0:3ed:809b:79ac with SMTP id
+ z20-20020a7bc7d4000000b003ed809b79acmr5056954wmk.19.1680710709383; 
+ Wed, 05 Apr 2023 09:05:09 -0700 (PDT)
 Received: from localhost.localdomain
  (4ab54-h01-176-184-52-81.dsl.sta.abo.bbox.fr. [176.184.52.81])
  by smtp.gmail.com with ESMTPSA id
- k16-20020a056000005000b002e116cbe24esm15293404wrx.32.2023.04.05.09.05.01
+ t6-20020a05600c450600b003ee2a0d49dbsm2642061wmo.25.2023.04.05.09.05.07
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 05 Apr 2023 09:05:02 -0700 (PDT)
+ Wed, 05 Apr 2023 09:05:08 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
@@ -54,17 +55,17 @@ Cc: qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  qemu-arm@nongnu.org, kvm@vger.kernel.org, qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PATCH 01/10] sysemu/kvm: Remove unused headers
-Date: Wed,  5 Apr 2023 18:04:45 +0200
-Message-Id: <20230405160454.97436-2-philmd@linaro.org>
+Subject: [PATCH 02/10] accel/kvm: Declare kvm_direct_msi_allowed in stubs
+Date: Wed,  5 Apr 2023 18:04:46 +0200
+Message-Id: <20230405160454.97436-3-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230405160454.97436-1-philmd@linaro.org>
 References: <20230405160454.97436-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -84,29 +85,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 16:05:08 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 16:05:14 -0000
 
-All types used are forward-declared in "qemu/typedefs.h".
+Avoid when calling kvm_direct_msi_enabled() from
+arm_gicv3_its_common.c the next commit:
+
+  Undefined symbols for architecture arm64:
+    "_kvm_direct_msi_allowed", referenced from:
+        _its_class_name in hw_intc_arm_gicv3_its_common.c.o
+  ld: symbol(s) not found for architecture arm64
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/sysemu/kvm.h | 3 ---
- 1 file changed, 3 deletions(-)
+ accel/stubs/kvm-stub.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/include/sysemu/kvm.h b/include/sysemu/kvm.h
-index cc6c678ed8..7902acdfd9 100644
---- a/include/sysemu/kvm.h
-+++ b/include/sysemu/kvm.h
-@@ -16,9 +16,6 @@
- #ifndef QEMU_KVM_H
- #define QEMU_KVM_H
+diff --git a/accel/stubs/kvm-stub.c b/accel/stubs/kvm-stub.c
+index 5d2dd8f351..235dc661bc 100644
+--- a/accel/stubs/kvm-stub.c
++++ b/accel/stubs/kvm-stub.c
+@@ -27,6 +27,7 @@ bool kvm_allowed;
+ bool kvm_readonly_mem_allowed;
+ bool kvm_ioeventfd_any_length_allowed;
+ bool kvm_msi_use_devid;
++bool kvm_direct_msi_allowed;
  
--#include "qemu/queue.h"
--#include "hw/core/cpu.h"
--#include "exec/memattrs.h"
- #include "qemu/accel.h"
- #include "qom/object.h"
- 
+ void kvm_flush_coalesced_mmio_buffer(void)
+ {
 -- 
 2.38.1
 
