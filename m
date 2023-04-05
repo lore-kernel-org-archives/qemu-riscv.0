@@ -1,62 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjuFB-0000Ux-QK
-	for mharc-qemu-riscv@gnu.org; Tue, 04 Apr 2023 23:55:33 -0400
+	id 1pjuHA-0001KR-Cd
+	for mharc-qemu-riscv@gnu.org; Tue, 04 Apr 2023 23:57:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjuFA-0000Uj-6A; Tue, 04 Apr 2023 23:55:32 -0400
-Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
+ id 1pjuH8-0001JP-DQ; Tue, 04 Apr 2023 23:57:34 -0400
+Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjuF8-0006Q1-Ll; Tue, 04 Apr 2023 23:55:31 -0400
-Received: by mail-ua1-x935.google.com with SMTP id n17so24697836uaj.10;
- Tue, 04 Apr 2023 20:55:29 -0700 (PDT)
+ id 1pjuGz-0000KQ-5Y; Tue, 04 Apr 2023 23:57:28 -0400
+Received: by mail-ua1-x92f.google.com with SMTP id q8so17040969uas.7;
+ Tue, 04 Apr 2023 20:57:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680666929;
+ d=gmail.com; s=20210112; t=1680667043;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7A5q85dKuZF3kRbNCPTlOAkp3UMeSEqR+tEIlzexl3Y=;
- b=jtnhsDZqvuVkyZSPAOeG55G6GLoOXDkhKm5hHzpaw8uQrJeybVUOKP3KjTqCEY+O2z
- lZVmaj0nG9Y58iyhrH5bcWf9YPJtrZB3hMSIcks7RvyEOi6qTC6gzHfz+VcJ+ki2v+rH
- F3UFPKeK2FOGIcU3T1llIam4SpJElRPTMRG+wkkD8NzrU51/MxwkYv4o/U+ytDuVXoaa
- bHbAdPE8SRVTaD0q6HcNfKeWSwJ91bwVvEGD1+vtpWTRIup2XSi9uPkG0Q+M5argBqYM
- SjCU5RmBllTj3DdP2ZaWzDxFz2yoLDiknREmoiE9ceull7aJR8nI79NXZr0nvW02J0Vh
- 7D6w==
+ bh=UqrrtYKD/J3Wrz2+CyQNkEETEFJBRHXSHuG4HH0J3us=;
+ b=HVjtXH31FS72KYfVisbrE71oyebFTI6dpYOV9U+W7VIDSQGIejaHM/vtzyYKvWkQeT
+ bucy0a5sLQ7x1UD1P6Rpr8Zpvqp+NGDEYB82ZeTZDWk5SzGPWQQ51ePJWEWWk+ghUBGu
+ lytY0QRAA7oHJMlPB9uHfD1iXcPVXz2iYgTZc6dL/CVN2sAHLlAkioWmUiPrFYYXwIww
+ OkWTVo2pmeOhXCbrn9H8GGW7G0q3axAL7a8UEWWUfQPTxz/Q8N2pgNJJ49dJbyFRkpPO
+ WJmN4VG4pBC1rybYXcwkkp42edeyeqzAH2x/7pIHEQWKvwkY8bx39iBTEav4mfFnsw0i
+ pkvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680666929;
+ d=1e100.net; s=20210112; t=1680667043;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7A5q85dKuZF3kRbNCPTlOAkp3UMeSEqR+tEIlzexl3Y=;
- b=dm7lHkQbKBQiFnc1rqOn3bu5HhXBRYi9V5JrbqrU4R9iqzGoRLX2BzpGJAnPV9caUt
- xaq5lKJ9Ib2upH2cUun4cToerIm6OUBrh2J3L8oFpl120AIKpPun/doQ4SQDIGEW1Igl
- ds0/p2nGYCIOSMOpW389Q++0toI+2LRWu8nFPBs5TKp5OFSw5xiF3+lq/8Nc7YZnIXra
- UCfSaYCe4HiCrBYIBt7JCmwUcgxsB9rH1ZsPwj9LTuIVH9c84QWCCf1kM4xdzq7tmMZY
- b187So0cFBsiKvabajQEIWC8o1bFhPaIl8JRO/gaVGFns7DG7OK4XBNy6igvjvbPLgp0
- u/Dw==
-X-Gm-Message-State: AAQBX9ewMndR7Tu75kyl5Y8kF2XqXIrATOe8pHzODnsd3iabXBTNR6Tf
- E5neREkhrm1kGfq38XMjwjwSGZrW9/jWotHY3NM=
-X-Google-Smtp-Source: AKy350Y1M9cbAXEgmLbqHzlw5NoTrQRHab3BrlPGMr+4cPAcvR0r+rilML5qEjvKRXEAbFYI5ex6wFCgzB0HMJSEG5Q=
-X-Received: by 2002:ab0:7ce:0:b0:68d:6360:77b with SMTP id
- d14-20020ab007ce000000b0068d6360077bmr3077589uaf.1.1680666928973; 
- Tue, 04 Apr 2023 20:55:28 -0700 (PDT)
+ bh=UqrrtYKD/J3Wrz2+CyQNkEETEFJBRHXSHuG4HH0J3us=;
+ b=j6visXqwX1IfoHJTdJYArl6wMv5IKLRbXUnak3hslH8j5U02e/AhSBnWAjW8Z+38zI
+ 1Ul7L0WBgvzyPfY3ec0MchmI+zwDFUrD8l6rqTkhJ56/pD0+nJkqJKyqqLWuek1ann+a
+ NuQg1xeKj80CkNNQgzLmHd7Idg8pVGhk/swqMwYlS7YyAxMydw+qaP+2T2ik0JogPU1/
+ /ekpDQiEDF/kKmpb8EAlWM1SM8+1ynxtH9D/jSKarpmmMW8ySnr8iSmt+2p4gYnoHlP2
+ hUkx/K+5kmYBfpOqN3HEF+M/bIz49gTfv1AnsCoYyimovaSkhp8PkcCDnMDopWoVzwjx
+ F3+g==
+X-Gm-Message-State: AAQBX9fd7X/6FJ77RW+o47JdxWlM9wzE0yNQR4wSDcwrWRNKK/Bkn9zm
+ 1CNOwJg655KjuAPMHOR22SPYXnZJpEaIIvN2cu8=
+X-Google-Smtp-Source: AKy350Zy4ElETfthKBPE4H4gM+9HkKRie4g1SrxTDaWpm87Ps6UP9WVMmKIfLAXN0wtVuptyNL6KuvMDb7ncJby9SuE=
+X-Received: by 2002:a1f:1206:0:b0:43b:ff63:e79a with SMTP id
+ 6-20020a1f1206000000b0043bff63e79amr3779025vks.0.1680667041804; Tue, 04 Apr
+ 2023 20:57:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230330034636.44585-1-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230330034636.44585-1-liweiwei@iscas.ac.cn>
+References: <20230404173333.35179-1-conor@kernel.org>
+In-Reply-To: <20230404173333.35179-1-conor@kernel.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 5 Apr 2023 13:55:02 +1000
-Message-ID: <CAKmqyKM8i_Mr1JgJNhe24JMFpZabOr2MWnixYR0M+0SuH-4JsA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Set opcode to env->bins for illegal/virtual
- instruction fault
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+Date: Wed, 5 Apr 2023 13:56:55 +1000
+Message-ID: <CAKmqyKP2QKJtEhE3+7DxXF0afneZEq=28O_XJ1BMN6XvGjDtpg@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: fix invalid riscv,
+ event-to-mhpmcounters entry
+To: Conor Dooley <conor@kernel.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Atish Kumar Patra <atishp@rivosinc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Conor Dooley <conor.dooley@microchip.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x935.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,44 +81,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 03:55:32 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 03:57:34 -0000
 
-On Thu, Mar 30, 2023 at 1:47=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
-ote:
+On Wed, Apr 5, 2023 at 3:35=E2=80=AFAM Conor Dooley <conor@kernel.org> wrot=
+e:
 >
-> decode_save_opc() will not work for generate_exception(), since 0 is pass=
-ed
-> to riscv_raise_exception() as pc in helper_raise_exception(), and bins wi=
-ll
-> not be restored in this case.
+> From: Conor Dooley <conor.dooley@microchip.com>
 >
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> dt-validate complains:
+> > soc: pmu: {'riscv,event-to-mhpmcounters':
+> > [[1, 1, 524281], [2, 2, 524284], [65561, 65561, 524280],
+> > [65563, 65563, 524280], [65569, 65569, 524280], [0, 0, 0], [0, 0]],
+> > pmu: riscv,event-to-mhpmcounters:6: [0, 0] is too short
+>
+> There are bogus 0 entries added at the end, of which one is of
+> insufficient length. This happens because only 15 of
+> fdt_event_ctr_map[]'s 20 elements are populated & qemu_fdt_setprop() is
+> called using the size of the array.
+> Reduce the array to 15 elements to make the error go away.
+>
+> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
->  target/riscv/insn_trans/trans_rvh.c.inc | 2 ++
->  1 file changed, 2 insertions(+)
+> I dunno if I am missing something intentional here, feel free to scream
+> if so!
+> ---
+>  target/riscv/pmu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_=
-trans/trans_rvh.c.inc
-> index 9248b48c36..4b730cd492 100644
-> --- a/target/riscv/insn_trans/trans_rvh.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvh.c.inc
-> @@ -20,6 +20,8 @@
->  static bool check_access(DisasContext *ctx)
+> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+> index b8e56d2b7b..fa1e1484c2 100644
+> --- a/target/riscv/pmu.c
+> +++ b/target/riscv/pmu.c
+> @@ -35,7 +35,7 @@
+>   */
+>  void riscv_pmu_generate_fdt_node(void *fdt, int num_ctrs, char *pmu_name=
+)
 >  {
->      if (!ctx->hlsx) {
-> +        tcg_gen_st_i32(tcg_constant_i32(ctx->opcode), cpu_env,
-> +                       offsetof(CPURISCVState, bins));
->          if (ctx->virt_enabled) {
->              generate_exception(ctx, RISCV_EXCP_VIRT_INSTRUCTION_FAULT);
->          } else {
+> -    uint32_t fdt_event_ctr_map[20] =3D {};
+> +    uint32_t fdt_event_ctr_map[15] =3D {};
+>      uint32_t cmask;
+>
+>      /* All the programmable counters can map to any event */
 > --
-> 2.25.1
+> 2.39.2
 >
 >
 
