@@ -1,57 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjzta-0001qQ-Gf
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 05:57:38 -0400
+	id 1pk5d9-0005r8-Mr
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 12:05:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pjztX-0001p9-SJ; Wed, 05 Apr 2023 05:57:35 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pjztV-00077O-AX; Wed, 05 Apr 2023 05:57:35 -0400
-Received: from localhost.localdomain (unknown [180.175.29.170])
- by APP-05 (Coremail) with SMTP id zQCowACHjxcBRi1kENNKDg--.27388S2;
- Wed, 05 Apr 2023 17:57:22 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v4 0/1] hw/riscv: Add ACT related support
-Date: Wed,  5 Apr 2023 17:57:19 +0800
-Message-Id: <20230405095720.75848-1-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pk5d8-0005qN-8z
+ for qemu-riscv@nongnu.org; Wed, 05 Apr 2023 12:05:02 -0400
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pk5d5-0007XE-GW
+ for qemu-riscv@nongnu.org; Wed, 05 Apr 2023 12:05:02 -0400
+Received: by mail-wr1-x434.google.com with SMTP id y14so36757054wrq.4
+ for <qemu-riscv@nongnu.org>; Wed, 05 Apr 2023 09:04:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1680710698;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Vl/tcRzlSLFP8I0QYpufOB41zMuDYKv+twPlQw3+A7Y=;
+ b=z2nGX/sbknCymlzrQ9v16a39LCmw2vWJ+052z8qCXp7C4jGf6bXcXu3B7SE2op86CM
+ pZWCxIOp3+X8l3AJqCp2i3FP8bFOTsRw0XKW5Vu5GlUd7a77LW832HlQNzKVAQA6Unii
+ ywjYKNh6fSPU47UFgAbZ/m+OdxIevSbiXkJMApc20LE9+QSxxrSbS2AhGEsWbiV30ZGs
+ tGZCcSsg/j2+HjulCXVtZOqEQgLreXUOtJx3aVjPkjgdF5Gib/2iRwHJE/TDtzWp2cfI
+ BCx9gnMsct8Sih+glmi6JpbVhwxn29093cKIRS61NExqCA4Hm2FHRQvku8it5hwfLWWG
+ 8qnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1680710698;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Vl/tcRzlSLFP8I0QYpufOB41zMuDYKv+twPlQw3+A7Y=;
+ b=FIG56iQqLs0E+70mBMmvPD8wwQYv8X3W1MU5xejCUqsVbs7tlLlpbkUiSHnuf39Wp/
+ U3l3NNcO+OMvdLOhpqFUGjWddfNlGOkbVYJNpoWj9JwFnAsWVE0W8Mtfevq9W2RA0/QX
+ HnjZnO10ItNPibI7cSB44WKbAcksuWaSpZkNHePfBWmguBWDikhk787Buiz4XYNEkEto
+ l1Bu7sZlDiPLBINm/dq1tNhgu6BFkdzTRDRX5x8vmYqCDD1Cg1hRS4dXyIi1P/cxVmzt
+ l4SFNzs6m//QZdQUVxF3ikDxDRI2o+Qm3eR0L9sc8mSjId4sQrgPqhGQb5QgY9pGbsD4
+ 7CQA==
+X-Gm-Message-State: AAQBX9chUmbFwl4Z8IJCVnxOpb10JkQPGfzHEu1dsaYrflIHVV91o8n1
+ Ysh+7JMzGGl8hF9ZITSr56q4CQ==
+X-Google-Smtp-Source: AKy350a2v8x4w7quWU/H2xrgdicBj2Mb70/KyTRdW4r/bTcsFan0Cz9m9OOnUgEYSEuCthtLF8HE9g==
+X-Received: by 2002:a5d:4f8d:0:b0:2d8:1aff:813 with SMTP id
+ d13-20020a5d4f8d000000b002d81aff0813mr4655005wru.43.1680710697754; 
+ Wed, 05 Apr 2023 09:04:57 -0700 (PDT)
+Received: from localhost.localdomain
+ (4ab54-h01-176-184-52-81.dsl.sta.abo.bbox.fr. [176.184.52.81])
+ by smtp.gmail.com with ESMTPSA id
+ p2-20020a5d48c2000000b002e61923575csm14691415wrs.74.2023.04.05.09.04.56
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Wed, 05 Apr 2023 09:04:57 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-arm@nongnu.org, kvm@vger.kernel.org, qemu-ppc@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 00/10] accel/kvm: Spring cleaning
+Date: Wed,  5 Apr 2023 18:04:44 +0200
+Message-Id: <20230405160454.97436-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowACHjxcBRi1kENNKDg--.27388S2
-X-Coremail-Antispam: 1UD129KBjvdXoW7GFyrKF48JF4fWw47XF4fKrg_yoWfKwbEgr
- WxArZxXrZrXayDGa4akF4F9ryak3yrtrWxtFy5WrWUG34rCF17Ars2yrya9348ArW3Ww12
- vr1kXF92yw1aqjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbI8FF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
- A2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j
- 6F4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
- 4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
- Yx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbV
- WUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7Cj
- xVA2Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxV
- Aqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q
- 6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6x
- kF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AK
- xVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvj
- fUoOJ5UUUUU
-X-Originating-IP: [180.175.29.170]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -64,36 +80,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 09:57:36 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 16:05:02 -0000
 
-ACT tests play an important role in riscv tests. This patch tries to
-add related support to run ACT tests.
+Misc KVM-related cleanup patches split from a bigger
+"extract KVM specific fields from CPUState" series.
 
-The port is available here:
-https://github.com/plctlab/plct-qemu/tree/plct-act-upstream-v2
+Philippe Mathieu-Daudé (10):
+  sysemu/kvm: Remove unused headers
+  accel/kvm: Declare kvm_direct_msi_allowed in stubs
+  hw/intc/arm_gic: Un-inline GIC*/ITS class_name() helpers
+  hw/intc/arm_gic: Rename 'first_cpu' argument
+  hw/arm/sbsa-ref: Include missing 'sysemu/kvm.h' header
+  target/arm: Reduce QMP header pressure by not including 'kvm_arm.h'
+  target/arm: Restrict KVM-specific fields from ArchCPU
+  target/ppc: Restrict KVM-specific field from ArchCPU
+  target/riscv: Restrict KVM-specific fields from ArchCPU
+  hw/s390x: Rename pv.c -> pv-kvm.c
 
-The ACT tests can be run on qemu-system-riscv32/64 with machine argument
-"-M spike,signature=<FILE>,signature-granularity=<granurity>".
-
-v4:
-* update error message for opening signature file failed
-* add check for existence of begin/end_signature symbols when trying to update signature file.
-
-v3:
-* move definition of signature related parameters from spike.c to riscv_htif.c
-
-v2：
-* move "extern ..." declaration from riscv_htif.c to riscv_htif.h
-
-Weiwei Li (1):
-  hw/riscv: Add signature dump function for spike to run ACT tests
-
- hw/char/riscv_htif.c         | 44 +++++++++++++++++++++++++++++++++++-
- hw/riscv/spike.c             | 13 +++++++++++
- include/hw/char/riscv_htif.h |  3 +++
- 3 files changed, 59 insertions(+), 1 deletion(-)
+ include/hw/intc/arm_gic.h              |  2 ++
+ include/hw/intc/arm_gicv3_common.h     | 10 ++++++
+ include/hw/intc/arm_gicv3_its_common.h |  9 ++++++
+ include/sysemu/kvm.h                   |  3 --
+ target/arm/cpu.h                       |  2 ++
+ target/arm/kvm_arm.h                   | 45 --------------------------
+ target/ppc/cpu.h                       |  2 ++
+ target/riscv/cpu.h                     |  2 ++
+ accel/stubs/kvm-stub.c                 |  1 +
+ hw/arm/sbsa-ref.c                      |  1 +
+ hw/arm/virt-acpi-build.c               |  2 +-
+ hw/arm/virt.c                          |  1 +
+ hw/intc/arm_gic_common.c               | 12 +++++--
+ hw/intc/arm_gicv3_common.c             | 14 ++++++++
+ hw/intc/arm_gicv3_its_common.c         | 12 +++++++
+ hw/s390x/{pv.c => pv-kvm.c}            |  0
+ target/arm/arm-qmp-cmds.c              |  3 +-
+ target/ppc/mmu_common.c                |  4 +++
+ target/riscv/machine.c                 |  4 +++
+ hw/s390x/meson.build                   |  2 +-
+ 20 files changed, 78 insertions(+), 53 deletions(-)
+ rename hw/s390x/{pv.c => pv-kvm.c} (100%)
 
 -- 
-2.25.1
+2.38.1
 
 
