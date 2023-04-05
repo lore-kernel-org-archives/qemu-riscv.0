@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjwIS-0003sD-QG
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 02:07:04 -0400
+	id 1pjwqV-0002Qs-Ma
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 02:42:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjwIO-0003qs-Cr; Wed, 05 Apr 2023 02:07:00 -0400
-Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
+ id 1pjwqM-0002N7-1F; Wed, 05 Apr 2023 02:42:07 -0400
+Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjwIM-0006yU-Hi; Wed, 05 Apr 2023 02:06:59 -0400
-Received: by mail-vs1-xe2a.google.com with SMTP id dc30so30012731vsb.3;
- Tue, 04 Apr 2023 23:06:57 -0700 (PDT)
+ id 1pjwqJ-0001pU-1w; Wed, 05 Apr 2023 02:42:04 -0400
+Received: by mail-ua1-x933.google.com with SMTP id m5so24852502uae.11;
+ Tue, 04 Apr 2023 23:42:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680674817;
+ d=gmail.com; s=20210112; t=1680676921;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=R59xKTyGphhIrqMul2zpI3JPMBveLuUkBToB6HPuqYM=;
- b=kHAsemvpG56FDzQoR+KJ+8oMMCgQM97MyjHHCK8Csu5/YZJj3DJl8TGS81aQ6Jla+L
- CfqCxXzvZpIR2zS8ArX/kY1F+dFjkcb19Qxt4QJE2fgipQLwXvc8G9wrknyeygrSJ7uf
- K/rDZRf0VFArWSfl3lwOfAWICDrhcQYjhVlRyStN5l6FgJoC/enYGm/rcTq/Oi0ouo6t
- P5OrjNlmTKDAMTaO8bM0ckhkY9HT304lA1hvJax/+l36nmiBtJV1P7T0yUtFF1TQ1WAx
- MHyinsUj/J4SgUH9aATBc7PjVCB0GKQtTz3uUnpT3Mh2T1At0g7i7F7Sye1b2pEhauG3
- 2ABA==
+ bh=dirIKSeW79GHTOKPMStUrGG3uPwbe7y7iku8QEiIkIw=;
+ b=Jw0VbCQRCz3zoX57yZ1taDLvRw8hGoY1xgsfgaIIGSsW8BR1bWxrxKJ0NRl38amipy
+ 4/Dx28UinO6dkm33foVehzsIZStbBHCqaOxK+2Sb7OR36HN98lEU56Zaq3v43/8jYIGX
+ Oz84pEtSl8KcXflo5EPmWLhKDkNfvZDT6hTfdHvZn7NISqHqy3X4ZVdIltherGk90r0T
+ zotYRYxAKQkWnCzHSWOkiiQbctJ+XJHFL0UgFrh4V3/vy76QsTFnylHKo7NKMb5zkDEZ
+ ++d7RCmnnJYahfN2EPvUoIUGoWYiiLL2gN0JI5rpI9C3SpHLwHUETAxiNoM3xKS4pZwU
+ Khbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680674817;
+ d=1e100.net; s=20210112; t=1680676921;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R59xKTyGphhIrqMul2zpI3JPMBveLuUkBToB6HPuqYM=;
- b=mb18/bs53zufcXNKi4ayodqgE+qYeypxEXg0lLSYEISQ60k0EnjnPZE9Kkifq8yhk3
- wNFj8ElPak2s5U3NvEucZEfGTrjfCJlDRrse0qpryQ3fQ4b5TJuOWAPjqjN5Tr1ONrXU
- Tg9bmJryfV9ZXcA/maTI/s8MxoFLZHVzjTTaRxl3T8yuFKnKb24zsRAslZSa4icgt/2K
- WrH2J7wWHckxCLFSN55SO5+9WXO80Wzsl2N7A9sKD0MWnCUiSik+dlsgW8qoByE/+30M
- 45eYcLKt0Mytnt3KqaAF4uFAhUAPKfRiZlQ9U7qQM97r12dL9cfnkcWcd5cH3JgYp1fM
- hYdA==
-X-Gm-Message-State: AAQBX9cw30pVqndtOquYkEYvT2xXYrroEXRDuFrBDzkIQLryZT3i8nnW
- 1NGRlrMk6ZB77+BvLY4Rc5PXmwsn/KU/AXtTodnzTUDqOe0=
-X-Google-Smtp-Source: AKy350ZuKxOqbP9MuHpRwbTbGjp+Y84TrgADUKQBo7BimUiCXsIHqY+0FVGE8INZlrhewHI+B0xuMyaKHnEasQTNvUo=
-X-Received: by 2002:a67:c890:0:b0:425:8e57:7bfd with SMTP id
- v16-20020a67c890000000b004258e577bfdmr3706839vsk.3.1680674816197; Tue, 04 Apr
- 2023 23:06:56 -0700 (PDT)
+ bh=dirIKSeW79GHTOKPMStUrGG3uPwbe7y7iku8QEiIkIw=;
+ b=OGR2F1O9nbxRANDZAFgY42j5FylMGyPLRjaY1Lbs5Aj4W8OMoaUHyl/cYBuLD0bp5S
+ m8bUclpthYixaMN87eQhtYp3+ZGeZfHsKJ9d0ERHvtafhZ+kjn6Dk4faSf6xIAj2RK0y
+ bUpjj3uyCB7yxAlOWgcrOCroD9Lbo68InykRU6sNLrV2zdKw0obxgVsIMo0YnBDXS6vt
+ GJ1nMyN+DR/9RcjYGAiJVcb8ZVorO49q6SQ0OzZvhexxnAEujDrXgTwFHWQeIIQ9kj7u
+ 5V7Aq7NVwGYcwB5Fc1Xus2ZSeXOCA6rzmsc/lWOpVTftwf4Bqe5hnEmQzhglQkeSVaP/
+ MbIA==
+X-Gm-Message-State: AAQBX9eCYMtdvAq+1G2CDvfDVsbrOmRpgSYDy4vpFh/dcbtaVBFUjpGH
+ FgG7LuK5JS0Rpaf8g9GEfx1k4S4AzmKHQxJ4GJceczedPE8=
+X-Google-Smtp-Source: AKy350YYpVEaVLEbeeTBZ1Eiyj77NYECq3aNXG2vuVSmVa7/PgvYhg/2bFpA2qWVOavfSa98zET6HwndJun7yMBNGwE=
+X-Received: by 2002:ab0:5485:0:b0:765:c225:c914 with SMTP id
+ p5-20020ab05485000000b00765c225c914mr3236617uaa.1.1680676921348; Tue, 04 Apr
+ 2023 23:42:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <e9de7676-b669-4f4e-e3e0-e57fb58b7bd7@intel.com>
-In-Reply-To: <e9de7676-b669-4f4e-e3e0-e57fb58b7bd7@intel.com>
+References: <20230328165406.271528-1-irina.ryapolova@syntacore.com>
+In-Reply-To: <20230328165406.271528-1-irina.ryapolova@syntacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 5 Apr 2023 16:06:30 +1000
-Message-ID: <CAKmqyKO6n0go_SzsViGjuS_US8ewiWkNdnVSHwjHmZWUSajpow@mail.gmail.com>
-Subject: Re: riscv: g_assert for NULL predicate?
-To: "Wu, Fei" <fei2.wu@intel.com>
-Cc: "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- qemu-devel <qemu-devel@nongnu.org>, bmeng@tinylab.org
+Date: Wed, 5 Apr 2023 16:41:35 +1000
+Message-ID: <CAKmqyKMrP-OZxueQBxATbEHTbD8Kt6Yi5+9v6+xuBNC6V6fE8g@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Fix Guest Physical Address Translation
+To: Irina Ryapolova <irina.ryapolova@syntacore.com>
+Cc: qemu-devel@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,30 +76,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 06:07:02 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 06:42:11 -0000
 
-On Mon, Apr 3, 2023 at 11:43=E2=80=AFPM Wu, Fei <fei2.wu@intel.com> wrote:
+On Wed, Mar 29, 2023 at 3:53=E2=80=AFAM Irina Ryapolova
+<irina.ryapolova@syntacore.com> wrote:
 >
-> Recent commit 0ee342256af92 switches to g_assert() for the predicate()
-> NULL check from returning RISCV_EXCP_ILLEGAL_INST. Qemu doesn't have
-> predicate() for un-allocated CSRs, then a buggy userspace application
-> reads CSR such as 0x4 causes qemu to exit, I don't think it's expected.
+> According to specification:
+> For Sv39x4, address bits of the guest physical address 63:41 must all be =
+zeros, or else a
+> guest-page-fault exception occurs.
+>
+> Likewise for Sv48x4 and Sv57x4.
+> For Sv48x4 address bits 63:50 must all be zeros, or else a guest-page-fau=
+lt exception occurs.
+> For Sv57x4 address bits 63:59 must all be zeros, or else a guest-page-fau=
+lt exception occurs.
 
-Hm.... That's not good. Userspace shouldn't be able to crash QEMU. I
-think we want to revert that patch then.
+I don't follow
 
-@Bin Meng any thoughts?
+The current code enforces that the bits are 0 with this check:
+
+    if (masked_msbs !=3D 0 && masked_msbs !=3D mask) {
+        return TRANSLATE_FAIL;
+    }
+
+It seems like you are removing the mask from calculating masked_msbs,
+but the commit message doesn't really mention that.
+
+Do you mind sending a v2 with a commit message that describes what the
+problem is and how your commit is fixing it?
 
 Alistair
 
 >
->   .global _start
+> Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
+> ---
+>  target/riscv/cpu_helper.c | 25 ++++++++++++++++---------
+>  1 file changed, 16 insertions(+), 9 deletions(-)
 >
->   .text
->   _start:
->       csrr t3, 0x4
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index f88c503cf4..27289f2305 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -863,17 +863,24 @@ static int get_physical_address(CPURISCVState *env,=
+ hwaddr *physical,
 >
-> Thanks,
-> Fei.
+>      CPUState *cs =3D env_cpu(env);
+>      int va_bits =3D PGSHIFT + levels * ptidxbits + widened;
+> -    target_ulong mask, masked_msbs;
+>
+> -    if (TARGET_LONG_BITS > (va_bits - 1)) {
+> -        mask =3D (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
+> -    } else {
+> -        mask =3D 0;
+> -    }
+> -    masked_msbs =3D (addr >> (va_bits - 1)) & mask;
+> +    if (first_stage =3D=3D true) {
+> +        target_ulong mask, masked_msbs;
+> +
+> +        if (TARGET_LONG_BITS > (va_bits - 1)) {
+> +            mask =3D (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
+> +        } else {
+> +            mask =3D 0;
+> +        }
+> +        masked_msbs =3D (addr >> (va_bits - 1)) & mask;
+>
+> -    if (masked_msbs !=3D 0 && masked_msbs !=3D mask) {
+> -        return TRANSLATE_FAIL;
+> +        if (masked_msbs !=3D 0 && masked_msbs !=3D mask) {
+> +            return TRANSLATE_FAIL;
+> +        }
+> +    } else {
+> +        if (vm !=3D VM_1_10_SV32 && addr >> va_bits !=3D 0) {
+> +            return TRANSLATE_FAIL;
+> +        }
+>      }
+>
+>      int ptshift =3D (levels - 1) * ptidxbits;
+> --
+> 2.25.1
+>
 >
 
