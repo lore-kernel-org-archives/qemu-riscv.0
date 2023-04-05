@@ -1,80 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjzbR-0004z2-BP
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 05:38:53 -0400
+	id 1pjztZ-0001po-CS
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 05:57:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pjzbP-0004yk-Rc
- for qemu-riscv@nongnu.org; Wed, 05 Apr 2023 05:38:51 -0400
-Received: from mail-oi1-x236.google.com ([2607:f8b0:4864:20::236])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pjzbM-00082e-Hh
- for qemu-riscv@nongnu.org; Wed, 05 Apr 2023 05:38:51 -0400
-Received: by mail-oi1-x236.google.com with SMTP id r16so26136512oij.5
- for <qemu-riscv@nongnu.org>; Wed, 05 Apr 2023 02:38:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1680687526;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ajJGqwfcEblMvMwj7bXrSlKFEhxQBhyxnuN+nUuvY9g=;
- b=cPXTmlUce7ATYsNLx4om7/uxO7USOS/WR4wYVxYp6+CT/KAIeY+z8QSVONVFzSPyq4
- Ei0fAAGXm/ddhWVkS1Rwkc21mennw8slHTZePC06VToM+BGrJI4AwEV8jswabkjAnYGm
- Int49maa6C+5+1choZ1XYeuP4NS8uaX7nPPXCRNRJpmWpMRGhDEdKq7iAxvlJFxk/p87
- x47ugdFa9gjU6PA8QEGEjcBiW0olDoywopQl5qUCVU9f5hE22NCjAxkI/4uyv52DhzJz
- xEhrasy4f36Kv81tC3SxeWGNqwQ9I66VwDHnPBhc2GB4WqooLQH3m/0MzfAotxdY/AHN
- 9wVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680687526;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ajJGqwfcEblMvMwj7bXrSlKFEhxQBhyxnuN+nUuvY9g=;
- b=yzAYLCwz20z/5zZShxKRRIN0/ilMWaPVz90Ya3f11PVoPJ6DE+GpR7655/FwX4QG+q
- 3pWF/BI6NqAC3BGBLgUM5+eAi8+X69DjarfSc5yR15bUT54iJORc4seeFGIIsu2kOSE1
- VzwK2B9CBTxrnuEPaUI5khv2gmybktaS/MrMKmlkF9aU94P9P2W0OwOFmQhqFfewhqbZ
- FpsrU8eik8zpSZ8sOhJVEbXVSObj/qSfhOOL5DKpDQdW3d/nEXiQLKW9YfBbbjuk4zXY
- zHPGnglC8S4KziZhrmmDuzoIDZ8eJelAA77GLSLh0nzD7zZXvpYjsdtWwd46x2KGjTjU
- OALg==
-X-Gm-Message-State: AAQBX9f6tu5qO3MvzEsYRMM7Vk4FfbXUDRYYPnQpdbDHC/yt1X6G7Ds8
- GTipxgLjuJTaD2Mr8NVEgy/IDw==
-X-Google-Smtp-Source: AKy350bqQjHGNDZTjP6ABuz3tJI2HiblduKN2fGq5df+TlIurJs6YTfeeKVVbVO539caFwhFbcPhkA==
-X-Received: by 2002:aca:120e:0:b0:386:9c8a:e729 with SMTP id
- 14-20020aca120e000000b003869c8ae729mr1800725ois.17.1680687526539; 
- Wed, 05 Apr 2023 02:38:46 -0700 (PDT)
-Received: from [192.168.68.107] ([191.255.108.232])
- by smtp.gmail.com with ESMTPSA id
- u188-20020a4a57c5000000b00541269a2fcesm4384369ooa.25.2023.04.05.02.38.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Apr 2023 02:38:46 -0700 (PDT)
-Message-ID: <b17e58dc-f530-1730-5e1d-070edcd1f950@ventanamicro.com>
-Date: Wed, 5 Apr 2023 06:38:41 -0300
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pjztY-0001pG-32; Wed, 05 Apr 2023 05:57:36 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pjztV-00077V-Ao; Wed, 05 Apr 2023 05:57:35 -0400
+Received: from localhost.localdomain (unknown [180.175.29.170])
+ by APP-05 (Coremail) with SMTP id zQCowACHjxcBRi1kENNKDg--.27388S3;
+ Wed, 05 Apr 2023 17:57:23 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v4 1/1] hw/riscv: Add signature dump function for spike to run
+ ACT tests
+Date: Wed,  5 Apr 2023 17:57:20 +0800
+Message-Id: <20230405095720.75848-2-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230405095720.75848-1-liweiwei@iscas.ac.cn>
+References: <20230405095720.75848-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [PATCH v3 1/1] hw/riscv: Fix max size limit when put initrd to RAM
-Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>,
- Hang Xu <xuhang@eswincomputing.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@rivosinc.com,
- alistair.francis@wdc.com
-References: <20230313021826.6898-1-xuhang@eswincomputing.com>
- <20230313021826.6898-2-xuhang@eswincomputing.com>
- <CAKmqyKNuA-4SpfN+RNDo8wOFgVuD-s-tXGOg+1po4KYW8KfhUQ@mail.gmail.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAKmqyKNuA-4SpfN+RNDo8wOFgVuD-s-tXGOg+1po4KYW8KfhUQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::236;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x236.google.com
-X-Spam_score_int: -39
-X-Spam_score: -4.0
+X-CM-TRANSID: zQCowACHjxcBRi1kENNKDg--.27388S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxZF1DXrWfZF1fuF1UGr4rKrg_yoWrury7pF
+ ZxCFn3ury5JFn3GFnxtw1UGa15Gan5Wr1jkr13Zr1kZFs8WFy7Caykt3W7Za98Gr4Ivw45
+ Ar4DKFW7GF45Zw7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPF14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+ x26xkF7I0E14v26r1I6r4UM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJw
+ A2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWx
+ Jr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
+ x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
+ JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2
+ ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG
+ 67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MI
+ IYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E
+ 14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
+ W8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU5SoX
+ UUUUU
+X-Originating-IP: [180.175.29.170]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
 X-Spam_bar: ----
-X-Spam_report: (-4.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.925,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,216 +67,146 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 09:38:52 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 09:57:36 -0000
 
+Add signature and signature-granularity properties in spike to specify the target
+signatrue file and the line size for signature data.
 
+Recgonize the signature section between begin_signature and end_signature symbols
+when loading elf of ACT tests. Then dump signature data in signature section just
+before the ACT tests exit.
 
-On 4/5/23 02:53, Alistair Francis wrote:
-> On Mon, Mar 13, 2023 at 11:12 PM Hang Xu <xuhang@eswincomputing.com> wrote:
->>
->> Because the starting address of ram is not necessarily 0,
->> the remaining free space in ram is
->> ram_size - (start - ram_base) instead of ram_size-start.
-> 
-> I think this could be clearer. It's not clear here that you mean the
-> free space after the kernel (for in the initrd).
-> 
->>
->> Signed-off-by: Hang Xu <xuhang@eswincomputing.com>
->> ---
->>   hw/riscv/boot.c            | 19 +++++++++++++------
->>   hw/riscv/microchip_pfsoc.c |  5 ++++-
->>   hw/riscv/opentitan.c       |  2 +-
->>   hw/riscv/sifive_e.c        |  2 +-
->>   hw/riscv/sifive_u.c        |  5 ++++-
->>   hw/riscv/spike.c           |  5 ++++-
->>   hw/riscv/virt.c            |  5 ++++-
->>   include/hw/riscv/boot.h    |  2 ++
->>   8 files changed, 33 insertions(+), 12 deletions(-)
->>
->> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
->> index 52bf8e67de..cfbc376a82 100644
->> --- a/hw/riscv/boot.c
->> +++ b/hw/riscv/boot.c
->> @@ -173,13 +173,14 @@ target_ulong riscv_load_firmware(const char *firmware_filename,
->>       exit(1);
->>   }
->>
->> -static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
->> +static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry,
->> +                              uint64_t ram_base, uint64_t ram_size)
->>   {
->>       const char *filename = machine->initrd_filename;
->> -    uint64_t mem_size = machine->ram_size;
->>       void *fdt = machine->fdt;
->>       hwaddr start, end;
->>       ssize_t size;
->> +    uint64_t max_initrd;
->>
->>       g_assert(filename != NULL);
->>
->> @@ -193,12 +194,16 @@ static void riscv_load_initrd(MachineState *machine, uint64_t kernel_entry)
->>        * So for boards with less  than 256MB of RAM we put the initrd
->>        * halfway into RAM, and for boards with 256MB of RAM or more we put
->>        * the initrd at 128MB.
->> +     * A ram_size == 0, usually from a MemMapEntry[].size element,
->> +     * means that the RAM block goes all the way to ms->ram_size.
->>        */
->> -    start = kernel_entry + MIN(mem_size / 2, 128 * MiB);
->> +    ram_size = ram_size ? MIN(machine->ram_size, ram_size) : machine->ram_size;
-> 
-> This doesn't seem right. If machine->ram_size is greater then the
-> board can support we should tell the user and have them set a correct
-> size
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+---
+ hw/char/riscv_htif.c         | 44 +++++++++++++++++++++++++++++++++++-
+ hw/riscv/spike.c             | 13 +++++++++++
+ include/hw/char/riscv_htif.h |  3 +++
+ 3 files changed, 59 insertions(+), 1 deletion(-)
 
-'ram_size' here is the size of the memory block that the board will use to put
-initrd into.
+diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+index 098de50e35..37d3ccc76b 100644
+--- a/hw/char/riscv_htif.c
++++ b/hw/char/riscv_htif.c
+@@ -29,6 +29,8 @@
+ #include "chardev/char-fe.h"
+ #include "qemu/timer.h"
+ #include "qemu/error-report.h"
++#include "exec/address-spaces.h"
++#include "sysemu/dma.h"
+ 
+ #define RISCV_DEBUG_HTIF 0
+ #define HTIF_DEBUG(fmt, ...)                                                   \
+@@ -51,7 +53,10 @@
+ /* PK system call number */
+ #define PK_SYS_WRITE            64
+ 
+-static uint64_t fromhost_addr, tohost_addr;
++const char *sig_file;
++uint8_t line_size = 16;
++
++static uint64_t fromhost_addr, tohost_addr, begin_sig_addr, end_sig_addr;
+ 
+ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
+                           uint64_t st_size)
+@@ -68,6 +73,10 @@ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
+             error_report("HTIF tohost must be 8 bytes");
+             exit(1);
+         }
++    } else if (strcmp("begin_signature", st_name) == 0) {
++        begin_sig_addr = st_value;
++    } else if (strcmp("end_signature", st_name) == 0) {
++        end_sig_addr = st_value;
+     }
+ }
+ 
+@@ -163,6 +172,39 @@ static void htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
+             if (payload & 0x1) {
+                 /* exit code */
+                 int exit_code = payload >> 1;
++
++                /*
++                 * Dump signature data if sig_file is specified and
++                 * begin/end_signature symbols exist.
++                 */
++                if (sig_file && begin_sig_addr && end_sig_addr) {
++                    uint64_t sig_len = end_sig_addr - begin_sig_addr;
++                    char *sig_data = g_malloc(sig_len);
++                    dma_memory_read(&address_space_memory, begin_sig_addr,
++                                    sig_data, sig_len, MEMTXATTRS_UNSPECIFIED);
++                    FILE *signature = fopen(sig_file, "w");
++                    if (signature == NULL) {
++                        error_report("Unable to open %s with error %s",
++                                     sig_file, strerror(errno));
++                        exit(1);
++                    }
++
++                    for (int i = 0; i < sig_len; i += line_size) {
++                        for (int j = line_size; j > 0; j--) {
++                            if (i + j <= sig_len) {
++                                fprintf(signature, "%02x",
++                                        sig_data[i + j - 1] & 0xff);
++                            } else {
++                                fprintf(signature, "%02x", 0);
++                            }
++                        }
++                        fprintf(signature, "\n");
++                    }
++
++                    fclose(signature);
++                    g_free(sig_data);
++                }
++
+                 exit(exit_code);
+             } else {
+                 uint64_t syscall[8];
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index a584d5b3a2..2c5546560a 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -332,6 +332,11 @@ static void spike_board_init(MachineState *machine)
+                  htif_custom_base);
+ }
+ 
++static void spike_set_signature(Object *obj, const char *val, Error **errp)
++{
++    sig_file = g_strdup(val);
++}
++
+ static void spike_machine_instance_init(Object *obj)
+ {
+ }
+@@ -350,6 +355,14 @@ static void spike_machine_class_init(ObjectClass *oc, void *data)
+     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
+     mc->numa_mem_supported = true;
+     mc->default_ram_id = "riscv.spike.ram";
++    object_class_property_add_str(oc, "signature", NULL, spike_set_signature);
++    object_class_property_set_description(oc, "signature",
++                                          "File to write ACT test signature");
++    object_class_property_add_uint8_ptr(oc, "signature-granularity",
++                                        &line_size, OBJ_PROP_FLAG_WRITE);
++    object_class_property_set_description(oc, "signature-granularity",
++                                          "Size of each line in ACT signature "
++                                          "file");
+ }
+ 
+ static const TypeInfo spike_machine_typeinfo = {
+diff --git a/include/hw/char/riscv_htif.h b/include/hw/char/riscv_htif.h
+index 5958c5b986..df493fdf6b 100644
+--- a/include/hw/char/riscv_htif.h
++++ b/include/hw/char/riscv_htif.h
+@@ -40,6 +40,9 @@ typedef struct HTIFState {
+     uint64_t pending_read;
+ } HTIFState;
+ 
++extern const char *sig_file;
++extern uint8_t line_size;
++
+ /* HTIF symbol callback */
+ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
+     uint64_t st_size);
+-- 
+2.25.1
 
-Perhaps this var can be renamed to 'ram_block_size' or 'memmap_size' for clarity.
-
-
-Daniel
-
-> 
->> +    start = kernel_entry + MIN(ram_size / 2, 128 * MiB);
->> +    max_initrd = ram_size - (start - ram_base);
-> 
-> Good catch. Passing the base address of memory is a good move here.
-> 
-> Alistair
-> 
->>
->> -    size = load_ramdisk(filename, start, mem_size - start);
->> +    size = load_ramdisk(filename, start, max_initrd);
->>       if (size == -1) {
->> -        size = load_image_targphys(filename, start, mem_size - start);
->> +        size = load_image_targphys(filename, start, max_initrd);
->>           if (size == -1) {
->>               error_report("could not load ramdisk '%s'", filename);
->>               exit(1);
->> @@ -217,6 +222,8 @@ target_ulong riscv_load_kernel(MachineState *machine,
->>                                  RISCVHartArrayState *harts,
->>                                  target_ulong kernel_start_addr,
->>                                  bool load_initrd,
->> +                               uint64_t ram_base,
->> +                               uint64_t ram_size,
->>                                  symbol_fn_t sym_cb)
->>   {
->>       const char *kernel_filename = machine->kernel_filename;
->> @@ -263,7 +270,7 @@ out:
->>       }
->>
->>       if (load_initrd && machine->initrd_filename) {
->> -        riscv_load_initrd(machine, kernel_entry);
->> +        riscv_load_initrd(machine, kernel_entry, ram_base, ram_size);
->>       }
->>
->>       if (fdt && machine->kernel_cmdline && *machine->kernel_cmdline) {
->> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
->> index e81bbd12df..b42d90b89e 100644
->> --- a/hw/riscv/microchip_pfsoc.c
->> +++ b/hw/riscv/microchip_pfsoc.c
->> @@ -630,7 +630,10 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
->>                                                            firmware_end_addr);
->>
->>           kernel_entry = riscv_load_kernel(machine, &s->soc.u_cpus,
->> -                                         kernel_start_addr, true, NULL);
->> +                                         kernel_start_addr, true,
->> +                                         memmap[MICROCHIP_PFSOC_DRAM_LO].base,
->> +                                         memmap[MICROCHIP_PFSOC_DRAM_LO].size,
->> +                                         NULL);
->>
->>           /* Compute the fdt load address in dram */
->>           fdt_load_addr = riscv_compute_fdt_addr(memmap[MICROCHIP_PFSOC_DRAM_LO].base,
->> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
->> index b06944d382..bb663523d5 100644
->> --- a/hw/riscv/opentitan.c
->> +++ b/hw/riscv/opentitan.c
->> @@ -103,7 +103,7 @@ static void opentitan_board_init(MachineState *machine)
->>       if (machine->kernel_filename) {
->>           riscv_load_kernel(machine, &s->soc.cpus,
->>                             memmap[IBEX_DEV_RAM].base,
->> -                          false, NULL);
->> +                          false, 0, 0, NULL);
->>       }
->>   }
->>
->> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
->> index 04939b60c3..5b47d539a6 100644
->> --- a/hw/riscv/sifive_e.c
->> +++ b/hw/riscv/sifive_e.c
->> @@ -116,7 +116,7 @@ static void sifive_e_machine_init(MachineState *machine)
->>       if (machine->kernel_filename) {
->>           riscv_load_kernel(machine, &s->soc.cpus,
->>                             memmap[SIFIVE_E_DEV_DTIM].base,
->> -                          false, NULL);
->> +                          false, 0, 0, NULL);
->>       }
->>   }
->>
->> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
->> index 35a335b8d0..b45fdc968c 100644
->> --- a/hw/riscv/sifive_u.c
->> +++ b/hw/riscv/sifive_u.c
->> @@ -599,7 +599,10 @@ static void sifive_u_machine_init(MachineState *machine)
->>                                                            firmware_end_addr);
->>
->>           kernel_entry = riscv_load_kernel(machine, &s->soc.u_cpus,
->> -                                         kernel_start_addr, true, NULL);
->> +                                         kernel_start_addr, true,
->> +                                         memmap[SIFIVE_U_DEV_DRAM].base,
->> +                                         memmap[SIFIVE_U_DEV_DRAM].size,
->> +                                         NULL);
->>       } else {
->>          /*
->>           * If dynamic firmware is used, it doesn't know where is the next mode
->> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
->> index a584d5b3a2..e322ed8506 100644
->> --- a/hw/riscv/spike.c
->> +++ b/hw/riscv/spike.c
->> @@ -307,7 +307,10 @@ static void spike_board_init(MachineState *machine)
->>
->>           kernel_entry = riscv_load_kernel(machine, &s->soc[0],
->>                                            kernel_start_addr,
->> -                                         true, htif_symbol_callback);
->> +                                         true,
->> +                                         memmap[SPIKE_DRAM].base,
->> +                                         memmap[SPIKE_DRAM].size,
->> +                                         htif_symbol_callback);
->>       } else {
->>          /*
->>           * If dynamic firmware is used, it doesn't know where is the next mode
->> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->> index 4e3efbee16..11f26b0dc0 100644
->> --- a/hw/riscv/virt.c
->> +++ b/hw/riscv/virt.c
->> @@ -1287,7 +1287,10 @@ static void virt_machine_done(Notifier *notifier, void *data)
->>                                                            firmware_end_addr);
->>
->>           kernel_entry = riscv_load_kernel(machine, &s->soc[0],
->> -                                         kernel_start_addr, true, NULL);
->> +                                         kernel_start_addr, true,
->> +                                         memmap[VIRT_DRAM].base,
->> +                                         memmap[VIRT_DRAM].size,
->> +                                         NULL);
->>       } else {
->>          /*
->>           * If dynamic firmware is used, it doesn't know where is the next mode
->> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
->> index a2e4ae9cb0..987e1add38 100644
->> --- a/include/hw/riscv/boot.h
->> +++ b/include/hw/riscv/boot.h
->> @@ -47,6 +47,8 @@ target_ulong riscv_load_kernel(MachineState *machine,
->>                                  RISCVHartArrayState *harts,
->>                                  target_ulong firmware_end_addr,
->>                                  bool load_initrd,
->> +                               uint64_t ram_base,
->> +                               uint64_t ram_size,
->>                                  symbol_fn_t sym_cb);
->>   uint64_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size,
->>                                   MachineState *ms);
->> --
->> 2.17.1
->>
->>
 
