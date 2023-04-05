@@ -1,87 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pk9HT-0002oT-DE
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 15:58:55 -0400
+	id 1pk9QF-00059P-Dg
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 16:07:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <quic_llindhol@quicinc.com>)
- id 1pk7n7-00089h-Rn; Wed, 05 Apr 2023 14:23:29 -0400
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <quic_llindhol@quicinc.com>)
- id 1pk7n5-0006qx-31; Wed, 05 Apr 2023 14:23:28 -0400
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 335HMWb7029593; Wed, 5 Apr 2023 18:23:21 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com;
- h=date : from : to :
- cc : subject : message-id : references : mime-version : content-type :
- content-transfer-encoding : in-reply-to; s=qcppdkim1;
- bh=ATuS4Wftab2uHxmwIshAh84WAJ0uXVGyPcyRjldcboo=;
- b=i6lWLFi4Gq1X4Nr9MLBXfOHS4Whp+F9J8BVN9hZJczhWKIB2+DZnT4bim6bQ+E12/0AZ
- iKHoqeSkKVemF+vmW7fhej+3kWZdpTWbqMBJZqHolJA/EiHpHtWHsG1+hMXvSmb/BKRU
- 6dH3Ev1WdOdi8cy7bzfSkj57Csz67umWQZsNEEBjxpc32Z64fn805V+PgevsVnJS40Dr
- bKp6iaCkTk+kUCKO4/GEfc++Z0XtxhCyR4KHP/lbusYoH/c6N2dPR0yFBv46X5ZfmQT5
- NnFVkslyIq8eaFUv0kur2eu2FlnBkQ6BYMEtKH7eWtbnthEXI7Z1L2hEgYeLc8Hadf5l YQ== 
-Received: from nasanppmta03.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3ps8h08v3y-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 05 Apr 2023 18:23:21 +0000
-Received: from nasanex01c.na.qualcomm.com (nasanex01c.na.qualcomm.com
- [10.45.79.139])
- by NASANPPMTA03.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 335INKRL014706
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 5 Apr 2023 18:23:20 GMT
-Received: from qc-i7.hemma.eciton.net (10.80.80.8) by
- nasanex01c.na.qualcomm.com (10.45.79.139) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.42; Wed, 5 Apr 2023 11:23:17 -0700
-Date: Wed, 5 Apr 2023 19:23:14 +0100
-From: Leif Lindholm <quic_llindhol@quicinc.com>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
-CC: <qemu-devel@nongnu.org>, <qemu-s390x@nongnu.org>, <qemu-riscv@nongnu.org>, 
- Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- <qemu-arm@nongnu.org>, <kvm@vger.kernel.org>, <qemu-ppc@nongnu.org>,
- Radoslaw Biernacki <rad@semihalf.com>,
- Peter Maydell <peter.maydell@linaro.org>
-Subject: Re: [PATCH 05/10] hw/arm/sbsa-ref: Include missing 'sysemu/kvm.h'
- header
-Message-ID: <ZC28khr/jGDKK4/W@qc-i7.hemma.eciton.net>
-References: <20230405160454.97436-1-philmd@linaro.org>
- <20230405160454.97436-6-philmd@linaro.org>
+ (Exim 4.90_1) (envelope-from <danielhb413@gmail.com>)
+ id 1pk9QE-00058x-1b; Wed, 05 Apr 2023 16:07:58 -0400
+Received: from mail-ot1-x334.google.com ([2607:f8b0:4864:20::334])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <danielhb413@gmail.com>)
+ id 1pk9QC-0001oY-Gd; Wed, 05 Apr 2023 16:07:57 -0400
+Received: by mail-ot1-x334.google.com with SMTP id
+ r17-20020a05683002f100b006a131458abfso17061036ote.2; 
+ Wed, 05 Apr 2023 13:07:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20210112; t=1680725274;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=RhuMLQBR3rCl5VaE4Hh/yoxhUD1OUMBEn6EcaPgazrI=;
+ b=pP2fEUvwYrEdiuXNPTkMXHVUnka40mUzp56rRN/Y4Zu2s8YPUib88gYRW3BHfC43Cg
+ qa73BgsFEcRx9oKCRE4NyOA29hxbN+s7KpHb/hD+G3OXrYE1kUb8B5uEXM9I8FTwt0FD
+ MbfxJ0L1uPSJsn6pZa14djxWBecTp5ujmuYlwjXvQPGq86mE7eRXzZ7NXut4e629R/NW
+ kttNdIRtFu1dQIAOa4B3rgTDe8JMgZygmUEv5bXus2bdqqIG+7/cuG1tGH7qyZx92BFM
+ Zt7KLIA7ckf19f7PP6Ab1vqbtQAQvGuxt7cz8k/EID+e/GMQLgp3FQ5x6B2obzBckZHg
+ S8fA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1680725274;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=RhuMLQBR3rCl5VaE4Hh/yoxhUD1OUMBEn6EcaPgazrI=;
+ b=qvPPZjt3EGmfBzHNKXYjjLG7ou46f84/CdHb+Pe00tkjdCchcaKqtNRTONDCEcH4qh
+ S3oLRGEQN/MR35n9njQNlP7/J/ZFupSBUXppvsmPtvlr2UYHZjp7zRppb4fTRrZajZJ9
+ Rf4fyFKpZAjq8tMuMqYs0RPwn+q9UX8VpXsGlPNJddaLDwEJQYq1V50sZjIzfO/WT+0g
+ cVUw0ceg/7XZ2Ww3ahfuWqob2NoeXZrmVw9uBRJwEal/cdc6Byk0y5XTof+vhVFozYF+
+ 8LVZT7aADy5r4O2pK1mUUd8OoRfPsIC9EFWBsXyRcr2AuXY1AJSE7vrNgTsiZtPk0PNF
+ UJ3w==
+X-Gm-Message-State: AAQBX9eXn04D0OU7TJNtje7c3qPRqcrJIztfkJEWpGdK5wm+3KSAvq/2
+ 7Cu52al4N37EQ2B9Cy46Pmw=
+X-Google-Smtp-Source: AKy350YiSmUilKBLhtGMkDdEkcF20XopvLMbOWeSCDMkvT7LnCLKjzIhC+ILBPXNxeO6263OpKyUnQ==
+X-Received: by 2002:a9d:76d5:0:b0:69f:a723:bd60 with SMTP id
+ p21-20020a9d76d5000000b0069fa723bd60mr3301505otl.5.1680725273722; 
+ Wed, 05 Apr 2023 13:07:53 -0700 (PDT)
+Received: from [192.168.68.107] ([191.255.108.232])
+ by smtp.gmail.com with ESMTPSA id
+ q16-20020a056830019000b0069fb87285fdsm7212817ota.59.2023.04.05.13.07.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 05 Apr 2023 13:07:53 -0700 (PDT)
+Message-ID: <330814bb-1568-9f64-b7ab-005776671ec5@gmail.com>
+Date: Wed, 5 Apr 2023 17:07:49 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Subject: Re: [PATCH 08/10] target/ppc: Restrict KVM-specific field from ArchCPU
+Content-Language: en-US
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>, qemu-arm@nongnu.org,
+ kvm@vger.kernel.org, qemu-ppc@nongnu.org, =?UTF-8?Q?C=c3=a9dric_Le_Goater?=
+ <clg@kaod.org>, David Gibson <david@gibson.dropbear.id.au>,
+ Greg Kurz <groug@kaod.org>
+References: <20230405160454.97436-1-philmd@linaro.org>
+ <20230405160454.97436-9-philmd@linaro.org>
+From: Daniel Henrique Barboza <danielhb413@gmail.com>
+In-Reply-To: <20230405160454.97436-9-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20230405160454.97436-6-philmd@linaro.org>
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01c.na.qualcomm.com (10.45.79.139)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-GUID: yuK9uBlDPdNsmZVYPiBTy9iMpffC3DO4
-X-Proofpoint-ORIG-GUID: yuK9uBlDPdNsmZVYPiBTy9iMpffC3DO4
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-05_12,2023-04-05_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0
- malwarescore=0 adultscore=0 suspectscore=0 mlxlogscore=789 phishscore=0
- priorityscore=1501 clxscore=1011 mlxscore=0 spamscore=0 bulkscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2303200000 definitions=main-2304050164
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=quic_llindhol@quicinc.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::334;
+ envelope-from=danielhb413@gmail.com; helo=mail-ot1-x334.google.com
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, NICE_REPLY_A=-1.355,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 05 Apr 2023 15:58:53 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,43 +89,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 18:23:31 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 20:07:58 -0000
 
-On Wed, Apr 05, 2023 at 18:04:49 +0200, Philippe Mathieu-Daudé wrote:
-> "sysemu/kvm.h" is indirectly pulled in. Explicit its
-> inclusion to avoid when refactoring include/:
+
+
+On 4/5/23 13:04, Philippe Mathieu-DaudÃ© wrote:
+> The 'kvm_sw_tlb' field shouldn't be accessed when KVM is not available.
 > 
->   hw/arm/sbsa-ref.c:693:9: error: implicit declaration of function 'kvm_enabled' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
->     if (kvm_enabled()) {
->         ^
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Signed-off-by: Philippe Mathieu-DaudÃ© <philmd@linaro.org>
 > ---
->  hw/arm/sbsa-ref.c | 1 +
->  1 file changed, 1 insertion(+)
+
+Reviewed-by: Daniel Henrique Barboza <danielhb413@gmail.com>
+
+>   target/ppc/cpu.h        | 2 ++
+>   target/ppc/mmu_common.c | 4 ++++
+>   2 files changed, 6 insertions(+)
 > 
-> diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-> index 0b93558dde..7df4d7b712 100644
-> --- a/hw/arm/sbsa-ref.c
-> +++ b/hw/arm/sbsa-ref.c
-> @@ -26,6 +26,7 @@
->  #include "sysemu/numa.h"
->  #include "sysemu/runstate.h"
->  #include "sysemu/sysemu.h"
-> +#include "sysemu/kvm.h"
-
-Can I do my traditional nitpick and ask this to be added above
-sysemu/numa.h in order to maintain alphabetical ordering within the
-sysemu block?
-
-With that:
-Reviewed-by: Leif Lindholm <quic_llindhol@quicinc.com>
-
-
->  #include "exec/hwaddr.h"
->  #include "kvm_arm.h"
->  #include "hw/arm/boot.h"
-> -- 
-> 2.38.1
-> 
+> diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
+> index 557d736dab..0ec3957397 100644
+> --- a/target/ppc/cpu.h
+> +++ b/target/ppc/cpu.h
+> @@ -1148,7 +1148,9 @@ struct CPUArchState {
+>       int tlb_type;    /* Type of TLB we're dealing with */
+>       ppc_tlb_t tlb;   /* TLB is optional. Allocate them only if needed */
+>       bool tlb_dirty;  /* Set to non-zero when modifying TLB */
+> +#ifdef CONFIG_KVM
+>       bool kvm_sw_tlb; /* non-zero if KVM SW TLB API is active */
+> +#endif /* CONFIG_KVM */
+>       uint32_t tlb_need_flush; /* Delayed flush needed */
+>   #define TLB_NEED_LOCAL_FLUSH   0x1
+>   #define TLB_NEED_GLOBAL_FLUSH  0x2
+> diff --git a/target/ppc/mmu_common.c b/target/ppc/mmu_common.c
+> index 7235a4befe..21843c69f6 100644
+> --- a/target/ppc/mmu_common.c
+> +++ b/target/ppc/mmu_common.c
+> @@ -917,10 +917,12 @@ static void mmubooke_dump_mmu(CPUPPCState *env)
+>       ppcemb_tlb_t *entry;
+>       int i;
+>   
+> +#ifdef CONFIG_KVM
+>       if (kvm_enabled() && !env->kvm_sw_tlb) {
+>           qemu_printf("Cannot access KVM TLB\n");
+>           return;
+>       }
+> +#endif
+>   
+>       qemu_printf("\nTLB:\n");
+>       qemu_printf("Effective          Physical           Size PID   Prot     "
+> @@ -1008,10 +1010,12 @@ static void mmubooke206_dump_mmu(CPUPPCState *env)
+>       int offset = 0;
+>       int i;
+>   
+> +#ifdef CONFIG_KVM
+>       if (kvm_enabled() && !env->kvm_sw_tlb) {
+>           qemu_printf("Cannot access KVM TLB\n");
+>           return;
+>       }
+> +#endif
+>   
+>       for (i = 0; i < BOOKE206_MAX_TLBN; i++) {
+>           int size = booke206_tlb_size(env, i);
 
