@@ -1,55 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjvWw-0004hI-Rr
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 01:17:58 -0400
+	id 1pjvXM-0004u5-NY
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 01:18:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjvWt-0004gz-8w; Wed, 05 Apr 2023 01:17:55 -0400
-Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
+ id 1pjvXK-0004qJ-Sm; Wed, 05 Apr 2023 01:18:22 -0400
+Received: from mail-ua1-x92a.google.com ([2607:f8b0:4864:20::92a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjvWn-0003kJ-PQ; Wed, 05 Apr 2023 01:17:54 -0400
-Received: by mail-ua1-x933.google.com with SMTP id l23so6007004uac.6;
- Tue, 04 Apr 2023 22:17:49 -0700 (PDT)
+ id 1pjvXJ-00041D-Bg; Wed, 05 Apr 2023 01:18:22 -0400
+Received: by mail-ua1-x92a.google.com with SMTP id r7so24831375uaj.2;
+ Tue, 04 Apr 2023 22:18:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680671868;
+ d=gmail.com; s=20210112; t=1680671900;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=o5IpNVf9RcAKYb/WTk5eRmOZLd9jQiuA8kUH+zUbTGg=;
- b=PkY3S4SFRgMTIr/7ngJ3sLkYMFR++AEzKRjRiF+3ETpKna1lnm8n41bePm2WNSgxJO
- 1KLPHHv7aarqm/OvaReHL1wPsfWY9SaUFRkosiSJ3kEfpU9/WiOZuQcHuJZRS9JQqDKq
- 9rq+op6Xj5GvAUnbzZiZOLVj46CkDnrUgxaodg5nVz1Cj9kEKRGUzYzTO0apQb5jzikl
- pOHrABgUkEqleVhkVMDDe+8JdCnKF5SCPWAA/TRALToHe29LWd7yp5Af3w7skvEqEGX3
- UVDgFswyYVjbB+WDYqStkERNctEUDNdVdHm9cJNxxh8mFkOVpPeI8tx+O1n21owfV8oJ
- Gm+A==
+ bh=hqee6GtDQsXlDrjPHQra8l2gPP5FMjOkT5mbonnHNpQ=;
+ b=p43S1bVCnx534sRv3LtCaWJlR0TjlPkVlxv5yox/JScUAi2NzCksFUT/3Q0SKkYrZ0
+ GNg7l28my6ZZJUGUqyO5xjtHAcM8NvTpr6MqdL36X/6qOYqTjL2VjipLmyv7dXBOL+D6
+ 3631eSVQAO5U0cggrBfy4sD9eXMd9Y7ML0HP8hKoVbY0SgeDSpMygI5q2WUAF+D4r0Ck
+ 5MOW1lblY+ZxHQYDURU2wW39Ou/F+uurg8Nh9+fsXzI4E0zM4GTAMZVpl641QcLHJsT4
+ l3R+BetGgTP83aE5DhS3OVKA2XyPfVAK2iDLoo+hkmNKzsz970k445KExW/n4o6fpeq5
+ di1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680671868;
+ d=1e100.net; s=20210112; t=1680671900;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=o5IpNVf9RcAKYb/WTk5eRmOZLd9jQiuA8kUH+zUbTGg=;
- b=KyQMzBzj10DaLnWSKV7gcIR4JGoP/uD1pyj/O7af/F3ejlhyA1QIkxx0uDxlHJpTC6
- WQ2BFoDemB5nrS2ZtoSYOGOKyimkZL7WuS08UX/dvGIIsyU0sMKir5lXb5ywTlamZIKv
- Mgq0VQZUxPxL5PDa2axeV7oKPJdFLbRsiQVWbZKqxf3OyDePZa8NoHx8huKVUfp3qk7w
- cwxb2Z9U8eHsKhBst20EF6uKmhhYdc6dqmJ+qs0FvbKeQazdRmAEJonGFPrqRF7cKArX
- 76Ge4/7Kq6stRUHe6kzZC+ejv2kd2oWPoTL8584L8Pn8K3MNP0CWdMRAVkX45fv1h0lh
- 6Xzg==
-X-Gm-Message-State: AAQBX9dwwRxn46DIy+RlOgatAfT7n8esXlxQNe3A9DZVPEZjE612TGaT
- W5keGcMZa1iSXbcqvJQgIhZ5bLKpluruyCgTC3A=
-X-Google-Smtp-Source: AKy350b3Hvk3ULkYOJCNItdAMqnhTJ/5BrTySkvMTYBHYeji8PKR/jm+gb9TwsfG02owSJrVBS1aj68fvTT45YL5G0w=
-X-Received: by 2002:a1f:2147:0:b0:40c:4d1:b550 with SMTP id
- h68-20020a1f2147000000b0040c04d1b550mr3937054vkh.0.1680671868172; Tue, 04 Apr
- 2023 22:17:48 -0700 (PDT)
+ bh=hqee6GtDQsXlDrjPHQra8l2gPP5FMjOkT5mbonnHNpQ=;
+ b=sGq3r5l/GxnL/2lznvPjct6MmEoqymvd9nYGh6vBB4pNjJsCN/xZ6hNXmMrcdrh604
+ gZJGzItYJQ93Fu5/tznRFa5GuVEqurRYZ2EsUxNEHhz5S/WnuSK0oOr8OfvK9V2ySd2I
+ fnMzljOZz+m5BKJsiKrM9Lz2UQ5bOVZdgZPYS54UCE/CTxVTHlb5fna1q3GtmJpfRCmS
+ +9wTlYGAYOP6wjoKze3BGNuyNMSM2uIfOpnoWWwfZv34uZp5TbATNxDQ4I6vfqz+ldks
+ 4rRld/QyH9m9yVR33wutAwbU5zoOHGlfQK3zm9JkO3XTHgZcdcvUl4J9arIjd5Tt12VG
+ KfTA==
+X-Gm-Message-State: AAQBX9fytCWz5tAtbb8cCHqDllyj7XeJzBD3E8Ux6QGoHS/P1N97e2tC
+ OcUHyk3XvwncXRfcLKjnPYoVYJs0TMD0lGdy5cQ=
+X-Google-Smtp-Source: AKy350baTWKZibPCxQrGJ3/fM5i+alXlYknVf3bE3oOCe9xb9/6RCo50pZc2mXSlZ0c6JfkiSQW7Mh0QPQ/mL7+gj2Y=
+X-Received: by 2002:a1f:280b:0:b0:43b:e059:987f with SMTP id
+ o11-20020a1f280b000000b0043be059987fmr3740137vko.0.1680671899927; Tue, 04 Apr
+ 2023 22:18:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230327080858.39703-1-liweiwei@iscas.ac.cn>
- <20230327080858.39703-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230327080858.39703-2-liweiwei@iscas.ac.cn>
+ <20230327080858.39703-3-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230327080858.39703-3-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 5 Apr 2023 15:17:21 +1000
-Message-ID: <CAKmqyKOqtKXk6fhGV6N61-4J6ZbxpEQSWaigMrYWsg000TGWJA@mail.gmail.com>
-Subject: Re: [PATCH v2 01/10] target/riscv: Remove redundant call to
- riscv_cpu_virt_enabled
+Date: Wed, 5 Apr 2023 15:17:54 +1000
+Message-ID: <CAKmqyKP97U=C03eGMGsaVtE6oS7az5yeGYb+hAG3DJg4osvWNQ@mail.gmail.com>
+Subject: Re: [PATCH v2 02/10] target/riscv: Remove redundant check on RVH
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
@@ -57,8 +56,8 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
  Richard Henderson <richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92a;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -79,13 +78,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 05:17:56 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 05:18:23 -0000
 
-On Mon, Mar 27, 2023 at 6:11=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
+On Mon, Mar 27, 2023 at 6:10=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
 ote:
 >
-> The assignment is done under the condition riscv_cpu_virt_enabled()=3Dtru=
-e.
+> Check on riscv_cpu_virt_enabled contains the check on RVH.
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
@@ -97,24 +95,24 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu_helper.c | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
+>  target/riscv/op_helper.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 824f0cbd92..e140d6a8d0 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1706,9 +1706,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->                  riscv_cpu_swap_hypervisor_regs(env);
->                  env->hstatus =3D set_field(env->hstatus, HSTATUS_SPVP,
->                                           env->priv);
-> -                env->hstatus =3D set_field(env->hstatus, HSTATUS_SPV,
-> -                                         riscv_cpu_virt_enabled(env));
-> -
-> +                env->hstatus =3D set_field(env->hstatus, HSTATUS_SPV, tr=
-ue);
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 84ee018f7d..1eecae9547 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -278,8 +278,7 @@ target_ulong helper_sret(CPURISCVState *env)
+>          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+>      }
 >
->                  htval =3D env->guest_phys_fault_addr;
+> -    if (riscv_has_ext(env, RVH) && riscv_cpu_virt_enabled(env) &&
+> -        get_field(env->hstatus, HSTATUS_VTSR)) {
+> +    if (riscv_cpu_virt_enabled(env) && get_field(env->hstatus, HSTATUS_V=
+TSR)) {
+>          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GE=
+TPC());
+>      }
 >
 > --
 > 2.25.1
