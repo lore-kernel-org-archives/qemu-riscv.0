@@ -1,62 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjvVU-0003r3-Od
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 01:16:28 -0400
+	id 1pjvWw-0004hI-Rr
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 01:17:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjvVS-0003ot-Jg; Wed, 05 Apr 2023 01:16:26 -0400
-Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29])
+ id 1pjvWt-0004gz-8w; Wed, 05 Apr 2023 01:17:55 -0400
+Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjvVQ-0003B2-Fe; Wed, 05 Apr 2023 01:16:25 -0400
-Received: by mail-vs1-xe29.google.com with SMTP id h15so30483664vsh.0;
- Tue, 04 Apr 2023 22:16:23 -0700 (PDT)
+ id 1pjvWn-0003kJ-PQ; Wed, 05 Apr 2023 01:17:54 -0400
+Received: by mail-ua1-x933.google.com with SMTP id l23so6007004uac.6;
+ Tue, 04 Apr 2023 22:17:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680671783;
+ d=gmail.com; s=20210112; t=1680671868;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7hMz/LM5LOlvWVz4ib4pOnRU5W2nNXlngbsQwrP8JWY=;
- b=f78/KS4dGRQr79W/Qc009yki+FiEZxQJ4PbgCIsBm+9NumF5ab79W8Rf4wO9BjbVS5
- q90F3Y6nuSSzaL7ngqAoey1/KKweq8AyIs6zsJkv+vYyFr5ohOoTISbSx0oXc55ukBqi
- nX26QrqH9Gv74zCeTjSSv5xWQloXjriulZ+TuCYry4dmHGGJ49EH5E0hgzwjqYXunc00
- jBUjh45exz98zr3s6KxkYJAAtWBYASiua48NihMKh3Jw2AzCpQwBz9a6GwIfMsRd7fCn
- CE7ZipBoe2CZHIhS6Q5vwtodornJRX8Ua6m+yXXemXBf1RBkjpOYp0Msv1DAWqhijZS8
- djYg==
+ bh=o5IpNVf9RcAKYb/WTk5eRmOZLd9jQiuA8kUH+zUbTGg=;
+ b=PkY3S4SFRgMTIr/7ngJ3sLkYMFR++AEzKRjRiF+3ETpKna1lnm8n41bePm2WNSgxJO
+ 1KLPHHv7aarqm/OvaReHL1wPsfWY9SaUFRkosiSJ3kEfpU9/WiOZuQcHuJZRS9JQqDKq
+ 9rq+op6Xj5GvAUnbzZiZOLVj46CkDnrUgxaodg5nVz1Cj9kEKRGUzYzTO0apQb5jzikl
+ pOHrABgUkEqleVhkVMDDe+8JdCnKF5SCPWAA/TRALToHe29LWd7yp5Af3w7skvEqEGX3
+ UVDgFswyYVjbB+WDYqStkERNctEUDNdVdHm9cJNxxh8mFkOVpPeI8tx+O1n21owfV8oJ
+ Gm+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680671783;
+ d=1e100.net; s=20210112; t=1680671868;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7hMz/LM5LOlvWVz4ib4pOnRU5W2nNXlngbsQwrP8JWY=;
- b=PRezqAha8rkYS1VqSniAYDtEyZ5+jz+r8iUmwB+pLmqj3a/dFUkfyyNjG4ErupXK1a
- Lx0bzsGuRrRn05H05sLxkknDjnfy6Wln//10DdFv0yzhBeUvhNVlNKCB/4/YD2HQouhl
- oLoOgUJUKuRWUo84PgpmSKtCbTATAmjmXLDJhG4kBnNZbKOHOty+gldLzEDnrojQgkxu
- tBiOFoafAX8OS1SHz46HdX6mjhU/i50eTUFZaPev/U1zJD1K1W4/260y6MQt05Jm286U
- Foq6t9wlKXFNxEYzJq9JOkabpOJk18ONm8L1LZNJk0IbxDhYgV2wPQQrehrjpYZ1vmqC
- 08OA==
-X-Gm-Message-State: AAQBX9eAT02RCgOR2zZySFrsgbBpLXaznJw1nib53AMllswB2ZCvh2df
- 7MR+pTKJydyeuvn2g1IWdGGy52Pe4YyiQXtmqyA=
-X-Google-Smtp-Source: AKy350Zd2t0RckPEGt2vV7+OJFtqRuoDqdEK7JtMIFAUHjG5naM294tOz11Y8OS24l8HGdXdvtu+3o2HjQYGuJsj8+s=
-X-Received: by 2002:a67:c29e:0:b0:425:d39f:3882 with SMTP id
- k30-20020a67c29e000000b00425d39f3882mr4010268vsj.3.1680671782890; Tue, 04 Apr
- 2023 22:16:22 -0700 (PDT)
+ bh=o5IpNVf9RcAKYb/WTk5eRmOZLd9jQiuA8kUH+zUbTGg=;
+ b=KyQMzBzj10DaLnWSKV7gcIR4JGoP/uD1pyj/O7af/F3ejlhyA1QIkxx0uDxlHJpTC6
+ WQ2BFoDemB5nrS2ZtoSYOGOKyimkZL7WuS08UX/dvGIIsyU0sMKir5lXb5ywTlamZIKv
+ Mgq0VQZUxPxL5PDa2axeV7oKPJdFLbRsiQVWbZKqxf3OyDePZa8NoHx8huKVUfp3qk7w
+ cwxb2Z9U8eHsKhBst20EF6uKmhhYdc6dqmJ+qs0FvbKeQazdRmAEJonGFPrqRF7cKArX
+ 76Ge4/7Kq6stRUHe6kzZC+ejv2kd2oWPoTL8584L8Pn8K3MNP0CWdMRAVkX45fv1h0lh
+ 6Xzg==
+X-Gm-Message-State: AAQBX9dwwRxn46DIy+RlOgatAfT7n8esXlxQNe3A9DZVPEZjE612TGaT
+ W5keGcMZa1iSXbcqvJQgIhZ5bLKpluruyCgTC3A=
+X-Google-Smtp-Source: AKy350b3Hvk3ULkYOJCNItdAMqnhTJ/5BrTySkvMTYBHYeji8PKR/jm+gb9TwsfG02owSJrVBS1aj68fvTT45YL5G0w=
+X-Received: by 2002:a1f:2147:0:b0:40c:4d1:b550 with SMTP id
+ h68-20020a1f2147000000b0040c04d1b550mr3937054vkh.0.1680671868172; Tue, 04 Apr
+ 2023 22:17:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230325145348.1208-1-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230325145348.1208-1-zhiwei_liu@linux.alibaba.com>
+References: <20230327080858.39703-1-liweiwei@iscas.ac.cn>
+ <20230327080858.39703-2-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230327080858.39703-2-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 5 Apr 2023 15:15:56 +1000
-Message-ID: <CAKmqyKMh4LhmQFSo86cWzXLEkhx4aFULsYA=+yXJRBEf8ko1Uw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] target/riscv: Convert env->virt to a bool
- env->virt_enabled
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com, 
- bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
- qemu-riscv@nongnu.org
+Date: Wed, 5 Apr 2023 15:17:21 +1000
+Message-ID: <CAKmqyKOqtKXk6fhGV6N61-4J6ZbxpEQSWaigMrYWsg000TGWJA@mail.gmail.com>
+Subject: Re: [PATCH v2 01/10] target/riscv: Remove redundant call to
+ riscv_cpu_virt_enabled
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, 
+ Richard Henderson <richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e29;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,128 +79,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 05:16:27 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 05:17:56 -0000
 
-On Sun, Mar 26, 2023 at 12:55=E2=80=AFAM LIU Zhiwei
-<zhiwei_liu@linux.alibaba.com> wrote:
+On Mon, Mar 27, 2023 at 6:11=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
+ote:
 >
-> Currently we only use the env->virt to encode the virtual mode enabled
-> status. Let's make it a bool type.
+> The assignment is done under the condition riscv_cpu_virt_enabled()=3Dtru=
+e.
 >
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.h        | 2 +-
->  target/riscv/cpu_bits.h   | 3 ---
->  target/riscv/cpu_helper.c | 6 +++---
->  target/riscv/machine.c    | 6 +++---
->  target/riscv/translate.c  | 4 ++--
->  5 files changed, 9 insertions(+), 12 deletions(-)
+>  target/riscv/cpu_helper.c | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 638e47c75a..3c8041c5a4 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -183,7 +183,7 @@ struct CPUArchState {
->  #ifndef CONFIG_USER_ONLY
->      target_ulong priv;
->      /* This contains QEMU specific information about the virt state. */
-> -    target_ulong virt;
-> +    bool virt_enabled;
->      target_ulong geilen;
->      uint64_t resetvec;
->
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index fca7ef0cef..45ddb00aa5 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -607,9 +607,6 @@ typedef enum {
->  #define PRV_H 2 /* Reserved */
->  #define PRV_M 3
->
-> -/* Virtulisation Register Fields */
-> -#define VIRT_ONOFF          1
-> -
->  /* RV32 satp CSR field masks */
->  #define SATP32_MODE         0x80000000
->  #define SATP32_ASID         0x7fc00000
 > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index f88c503cf4..56f4ff9ccc 100644
+> index 824f0cbd92..e140d6a8d0 100644
 > --- a/target/riscv/cpu_helper.c
 > +++ b/target/riscv/cpu_helper.c
-> @@ -564,7 +564,7 @@ bool riscv_cpu_virt_enabled(CPURISCVState *env)
->          return false;
->      }
+> @@ -1706,9 +1706,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>                  riscv_cpu_swap_hypervisor_regs(env);
+>                  env->hstatus =3D set_field(env->hstatus, HSTATUS_SPVP,
+>                                           env->priv);
+> -                env->hstatus =3D set_field(env->hstatus, HSTATUS_SPV,
+> -                                         riscv_cpu_virt_enabled(env));
+> -
+> +                env->hstatus =3D set_field(env->hstatus, HSTATUS_SPV, tr=
+ue);
 >
-> -    return get_field(env->virt, VIRT_ONOFF);
-> +    return env->virt_enabled;
->  }
+>                  htval =3D env->guest_phys_fault_addr;
 >
->  void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
-> @@ -574,11 +574,11 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env,=
- bool enable)
->      }
->
->      /* Flush the TLB on all virt mode changes. */
-> -    if (get_field(env->virt, VIRT_ONOFF) !=3D enable) {
-> +    if (env->virt_enabled !=3D enable) {
->          tlb_flush(env_cpu(env));
->      }
->
-> -    env->virt =3D set_field(env->virt, VIRT_ONOFF, enable);
-> +    env->virt_enabled =3D enable;
->
->      if (enable) {
->          /*
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 9c455931d8..0fb3ddda06 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -331,8 +331,8 @@ static const VMStateDescription vmstate_pmu_ctr_state=
- =3D {
->
->  const VMStateDescription vmstate_riscv_cpu =3D {
->      .name =3D "cpu",
-> -    .version_id =3D 7,
-> -    .minimum_version_id =3D 7,
-> +    .version_id =3D 8,
-> +    .minimum_version_id =3D 8,
->      .post_load =3D riscv_cpu_post_load,
->      .fields =3D (VMStateField[]) {
->          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
-> @@ -352,7 +352,7 @@ const VMStateDescription vmstate_riscv_cpu =3D {
->          VMSTATE_UINT32(env.misa_mxl_max, RISCVCPU),
->          VMSTATE_UINT32(env.misa_ext_mask, RISCVCPU),
->          VMSTATE_UINTTL(env.priv, RISCVCPU),
-> -        VMSTATE_UINTTL(env.virt, RISCVCPU),
-> +        VMSTATE_BOOL(env.virt_enabled, RISCVCPU),
->          VMSTATE_UINT64(env.resetvec, RISCVCPU),
->          VMSTATE_UINTTL(env.mhartid, RISCVCPU),
->          VMSTATE_UINT64(env.mstatus, RISCVCPU),
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 0ee8ee147d..c3adf30b54 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -1255,8 +1255,8 @@ static void riscv_tr_disas_log(const DisasContextBa=
-se *dcbase,
->
->      fprintf(logfile, "IN: %s\n", lookup_symbol(dcbase->pc_first));
->  #ifndef CONFIG_USER_ONLY
-> -    fprintf(logfile, "Priv: "TARGET_FMT_ld"; Virt: "TARGET_FMT_ld"\n",
-> -            env->priv, env->virt);
-> +    fprintf(logfile, "Priv: "TARGET_FMT_ld"; Virt: %d\n",
-> +            env->priv, env->virt_enabled);
->  #endif
->      target_disas(logfile, cpu, dcbase->pc_first, dcbase->tb->size);
->  }
 > --
-> 2.17.1
+> 2.25.1
 >
 >
 
