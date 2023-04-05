@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjvPb-0001DZ-Sj
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 01:10:23 -0400
+	id 1pjvQl-0001nj-53
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 01:11:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjvPX-0001Cw-1v; Wed, 05 Apr 2023 01:10:20 -0400
-Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29])
+ id 1pjvQj-0001n7-A0; Wed, 05 Apr 2023 01:11:33 -0400
+Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjvPT-0008Ob-0p; Wed, 05 Apr 2023 01:10:18 -0400
-Received: by mail-vs1-xe29.google.com with SMTP id df34so30398473vsb.8;
- Tue, 04 Apr 2023 22:10:11 -0700 (PDT)
+ id 1pjvQW-0000if-3e; Wed, 05 Apr 2023 01:11:28 -0400
+Received: by mail-vs1-xe2f.google.com with SMTP id d18so30438783vsv.11;
+ Tue, 04 Apr 2023 22:11:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680671410;
+ d=gmail.com; s=20210112; t=1680671478;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=72kN9BlG3PEbZHWwE6kiJqhzMkkc6hjjs6UOp+QedQg=;
- b=FLCoNMdaPaJmYfNmQLBazgqlMHJBu1dBJiHd+6njGxVRcDTcNCOOQuZKHjmodFkl/p
- F1jiJDyC/QIssWnY4ecUAtHjvjbRIvBdYnykMIBro60SuY+UxvYgzTa+/HRg+G5jtELf
- Ak5fBvAp3MDBzYM3LFdPpfsRNy7vWKGyBzMe2bwQpIY9qESL+W8DSHhK155nfyHYzUXB
- bUcvozcokeDOY/6bSv/ku5uxARMeAaUUYvycSWcO9P1mkQba3g13ineXchJBV99CwbqF
- Kl2zAUlNXNoamCxpOh3c+YPCEn9AYlY08IivpzVPEIGhUncBVGLiUkl1MuigC8FYV6LJ
- Bqcg==
+ bh=Nz48m4lNjoGztjUMamLD2jkKSwVWxhUedJxzDSJq5l8=;
+ b=QVaE9AeTrJQRJ9AeORyGoHABJdS7NdPH3GYL273aNRE1GfK4jhDwqfWepxh3UNlhrq
+ S1mNRkPw/nSy598dYEA/CPOYAr7Jhrp+sSDa7YTCQ+ayjyydusHmad/U7Q1fSFuGSP/1
+ 5GAOgqZkI208p4+eu8Abhrqflo+md6gMS6N7Tfr9qIaELIqkPvkRzgEIYXrBB6ovUi/h
+ t8nrThFewdD6jZoVr988s5d/zbhivkuIQ8sBSnaos3R626lRr4fkm/Cf5fHtQR/iSWVW
+ /o+P282+w0Y4mpvd1ZP2dKDi/ms2shQmo5ivD6ex++Y3iYYjRG2+p6cArr7IsbaHuu1x
+ XPGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680671410;
+ d=1e100.net; s=20210112; t=1680671478;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=72kN9BlG3PEbZHWwE6kiJqhzMkkc6hjjs6UOp+QedQg=;
- b=vK8yZRWpkm9FP1Pl769zBukrjLbKpnBNzda0ydlSZ+HnVbsFg6rXfQiNqmxb3ZS+GW
- nGrGHGkWbv4btyZi7qGclG6U+r6sJiqfaxPy8YtTNNT6cqQGEPdRTiYFLOYzTryTy81p
- CF715v41YMxwm2X6Is56AbeoWeA/bNliHQ0H425Kwk52logI6S8J7+VzVFMGmoEGtvXw
- I9vfwWNRzB//+G45cuW7pyFm5mWL2mZ/3GkSSuAEyvsSG3ZO6hR9Uf0iWiqUA0wAH8cP
- G9nuBzlLqbGexY28KiB+Og3vB37ER96PJwBjklNVfwy+7goDYHA3trp2DWVR+RekwvMZ
- BI7g==
-X-Gm-Message-State: AAQBX9fUfPRWe412wUdJc0vZxKdsxEL94bt0uqQr04LRon6qPRIs8ip2
- UJdMFbaCu9eT7IoPVbdnvc6mOpGgMYKrRueKXUM=
-X-Google-Smtp-Source: AKy350YD0KVvaP/aKhZM7BDw/bOJ4cdPTpxFv6l+SvA9VgQdd1+hWZQGeuCRC+grQvE06gvsGjzq7VcO6UYrGV5ZCCY=
-X-Received: by 2002:a67:c29e:0:b0:425:d39f:3882 with SMTP id
- k30-20020a67c29e000000b00425d39f3882mr4004120vsj.3.1680671410583; Tue, 04 Apr
- 2023 22:10:10 -0700 (PDT)
+ bh=Nz48m4lNjoGztjUMamLD2jkKSwVWxhUedJxzDSJq5l8=;
+ b=dw1qRSbibS3/AOtRdx0fTWhKVjIBB1Cmws9mYiGGVydAXYx/3AEXl3tmiYC1f/lCsX
+ 4FLirqCSehXlNI+Kx7yOQI2vSxbYPFVEPy/v/zEvm0L9YYdI0wjoIeMyKkPAwMdJhpdR
+ Tv2xrdvb9wbQvZzpXXrLbqKUByJ3x/9fGhoIqR8g4m/edY/3Bi4+nKOF+Gii/iAPFRbc
+ 89Qt7QRqRmh3Bo7Lr6FtzMYf+drdfg3vk4pt0oVGIqjAojhyfSTltn2dADi2UOAvRLiF
+ WfVBiVI7d6f1rychwZJlUmdfab5PtW3XwQX6CIG1GyvkAFB1RnxYI/F0yqXz3FhOajtQ
+ Ur7g==
+X-Gm-Message-State: AAQBX9e/YkFw4hqiK7BansAdPG6EN57yZixU+TIgcirhON3nAsGnjUi7
+ WlQsMUujTNjD4Z63JvH4QriqdQ9sqRbo71qr99M=
+X-Google-Smtp-Source: AKy350aG78ovBxomByAWlfpVKsvm3IgNTt9yZgatpxY7bHI67iD4nWQdqtJMPeOgfkaFv6I7UmSBts/R2vvH65H7Igc=
+X-Received: by 2002:a67:d390:0:b0:412:5424:e58e with SMTP id
+ b16-20020a67d390000000b004125424e58emr1317726vsj.0.1680671478592; Tue, 04 Apr
+ 2023 22:11:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230324064011.976-1-zhiwei_liu@linux.alibaba.com>
 In-Reply-To: <20230324064011.976-1-zhiwei_liu@linux.alibaba.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 5 Apr 2023 15:09:44 +1000
-Message-ID: <CAKmqyKP2twN5tisvKOR2BfRZH8cMkozN2KBWdLE3Wrgp++xWHg@mail.gmail.com>
+Date: Wed, 5 Apr 2023 15:10:52 +1000
+Message-ID: <CAKmqyKPZF9B5B9JR0+mD-Kcbj8mSSOG0_aeCz=vh8t-5AO4E3g@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Fix itrigger when icount is used
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com, 
@@ -54,8 +54,8 @@ Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, palmer@dabbelt.com,
  qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e29;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -76,7 +76,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 05:10:21 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 05:11:33 -0000
 
 On Sat, Mar 25, 2023 at 2:04=E2=80=AFAM LIU Zhiwei <zhiwei_liu@linux.alibab=
 a.com> wrote:
@@ -91,7 +91,9 @@ xit.
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
