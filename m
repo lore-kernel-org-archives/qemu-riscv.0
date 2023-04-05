@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pjvjC-0003ME-Qp
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 01:30:38 -0400
+	id 1pjvjj-00040I-VD
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 01:31:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjvj9-0003LH-N0; Wed, 05 Apr 2023 01:30:35 -0400
-Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
+ id 1pjvji-0003vx-Jy; Wed, 05 Apr 2023 01:31:10 -0400
+Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pjvj3-0006CE-TG; Wed, 05 Apr 2023 01:30:33 -0400
-Received: by mail-ua1-x92c.google.com with SMTP id e12so24837631uaa.3;
- Tue, 04 Apr 2023 22:30:27 -0700 (PDT)
+ id 1pjvjd-0006QU-7a; Wed, 05 Apr 2023 01:31:10 -0400
+Received: by mail-ua1-x92f.google.com with SMTP id r7so24844277uaj.2;
+ Tue, 04 Apr 2023 22:31:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680672627;
+ d=gmail.com; s=20210112; t=1680672663;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NU+DyW++2pw6gaebctreNZNqag9dtL51u+4ChKEZj9E=;
- b=oCDuCeOZsO958Q6A5fUjfguBm9vu8DssAwkMuU+yi5s37xv8Us+hCI4aJudJsX06Uu
- FU0McVeUE3i7igy5aS1DlXgj/l8DZQbSxyA/2KHDZveSnEvy2isRQzwo4KsfEUToVpKT
- 8pvJiXO9KeB7EvTTKtqAxjUZv2TsuYqFFVFtoCUzO4qll8iI836CQ/90z0h6wQvQiM9j
- sXxwF+H7hNOTSgedPPzawBMCNXmyE38mWq+/TiqmZfVb8Fs+/sq20wzC2J1Dcxc6woUG
- Ral2GiQQnapt+NYFwGua53/VKiiJVLPckHCJltmWZRYIyQyokOyrZB5PtDgIhUM6brQq
- 43qA==
+ bh=yiJ/TGm51DVYlm0ESrmKrf5lNFJ64XBOiiRT8h1x1iI=;
+ b=O9fwXw/98qr98QCd3bHKJI1qbHbwVBjkLQc4FAPtlfk4HRd5pD4mCJCTaDkkMGEj3n
+ kpZu/jqJzhoT1HWgaZfisWYSMa1pOkcevC/azvUxcNaGe4WFfRmZj+u56bmzun8XIRSS
+ /9N7/s4hzxRdoTOkTrRrBXlEb4zShfxUkU8vuZoAHyUaHPUSD5gXey3R8JLqbo5Gpq/h
+ R/dhGgMufH6rj27JaqyUUihVmRP7zoS+Ml6Xab8WKIL6gRLc/qoNZeTP8AsHJ0Zkx+Yv
+ d0L1+C2V5uhZHwLqpzGY/nmv/IfqUXSm95GT0oxkzhEa97qbbGAf4XkKSkP+1LkrHyAb
+ YMQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680672627;
+ d=1e100.net; s=20210112; t=1680672663;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NU+DyW++2pw6gaebctreNZNqag9dtL51u+4ChKEZj9E=;
- b=ULZKFUFbFniD90hpX9KUpADq3er+CMMeEriRSUgEcPQ0d5DmyWXidm0uUAjZ2QcmD6
- /1o2AOG5fzOn60ELRz/qxn/2XMseubB7cTkPrbnL0QK81bHjPsPiYJMpSfODnm5oQdP7
- lUN4nKyw5mt+Qwayjhpa6+xIiB8Xw0VgpqTkV9WMR46OX5er+0WxV3ywmyBOcDT+VzS1
- +YpHn9MBswtajdNqhrfLCLempLma5SY2jz1hTcEefrAaiXW+oWFjQxfHwJJ4fNGQBhWk
- /jY+4yE5gDr6m96SFHmfH1pIiMy0TL85ZPgAFW6oABBKyy0h6gE9vZnarSv2fRzSclZT
- q4tw==
-X-Gm-Message-State: AAQBX9fn3jm5Bx1hIV+qoQP4VFUrZxhOdYpTgAz5oXb588dbM/Elho22
- /QtyjPr5DUSnmFItaXuf6irU32EQCxFA1oCcr9o=
-X-Google-Smtp-Source: AKy350b2xpRRDt1p9KQduPiy8P9eXWsc/M8vnyKrJlbkBMpSRapvAEauGshqI3oLRfRHLClSxeSEgbgusdhLrD76ThM=
-X-Received: by 2002:a9f:37cd:0:b0:764:64c1:9142 with SMTP id
- q71-20020a9f37cd000000b0076464c19142mr1485662uaq.0.1680672626832; Tue, 04 Apr
- 2023 22:30:26 -0700 (PDT)
+ bh=yiJ/TGm51DVYlm0ESrmKrf5lNFJ64XBOiiRT8h1x1iI=;
+ b=jvj9d9wWwKRuPtM8Ilo5U0Dem8nGtacQDRxnkmlZq0Wnin2VbfA63+sUf90dLlmF3o
+ NO7Hmb2jsvj4wyjqXe0MhsIpG2V5kDS/RbJZHI7xoNyr2LpwBSBM7DMdhRrEVhQpLL+/
+ d+NVta1B1M0m+8T0hHH7yHKyP8zT2A723dziUqQBft/OXpNuEfdKF31ZujjvMze6I7rQ
+ NX9ZUEMcdYjGMsOSgEM1ge3WNv8qgWWluecmn1w4GIyBAv/VI+cAwqL3A81RNicnZaAg
+ 9le6C64h8tIH6oR4XiE4AywKM/++ICneHgwwZEwp4Q3dse/qlU++EZ4OxodTTLKLViju
+ qKog==
+X-Gm-Message-State: AAQBX9dwUjRXv85hN7TabVfht6e8NT5fqMmsMBXEf6Dvo5qaoFmUcjfY
+ g2KBv8eI+RTwFUr6ULbwqUnNmSFrk6APqm/pcfrI3BU56Ew=
+X-Google-Smtp-Source: AKy350bAMkgl1s/vQ/Wi+/LyaCXgrjx2zBSFU59EJCt3yzer4BQG2zXLsY/In9jpQqOBUPh+xR2nSKthkklGQf2hz/4=
+X-Received: by 2002:a1f:ad0b:0:b0:43c:6481:2b50 with SMTP id
+ w11-20020a1fad0b000000b0043c64812b50mr3896722vke.0.1680672663708; Tue, 04 Apr
+ 2023 22:31:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230327080858.39703-1-liweiwei@iscas.ac.cn>
- <20230327080858.39703-11-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230327080858.39703-11-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230327080858.39703-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 5 Apr 2023 15:30:00 +1000
-Message-ID: <CAKmqyKPU238xonsTkAVkAVrG=dkPL7ayjphkfP-n0eEKo8iPJQ@mail.gmail.com>
-Subject: Re: [PATCH v2 10/10] target/riscv: Fix lines with over 80 characters
+Date: Wed, 5 Apr 2023 15:30:37 +1000
+Message-ID: <CAKmqyKO_=DnwmU5szGASkQf_GdZLW+GDd=+qgpW_KsB3bjt0Aw@mail.gmail.com>
+Subject: Re: [PATCH v2 00/10] target/riscv: Simplification for RVH related
+ check and code style fix
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
  zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,333 +77,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2023 05:30:36 -0000
+X-List-Received-Date: Wed, 05 Apr 2023 05:31:11 -0000
 
 On Mon, Mar 27, 2023 at 6:11=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
 ote:
 >
-> Fix lines with over 80 characters for both code and comments in
-> vector_helper.c, pmp.c and pmu.c.
+> This patchset tries to simplify the RVH related check and fix some code s=
+tyle problems, such as problems for indentation, multi-line comments and li=
+nes with over 80 characters.
 >
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> The port is available here:
+> https://github.com/plctlab/plct-qemu/tree/plct-virtfix-upstream
+>
+> v2:
+> * add comment to specify riscv_cpu_set_virt_enabled() can only be called =
+when RVH is enabled in patch 4 (suggested by Richard Henderson)
+> * merge patch from LIU Zhiwei(Message-ID: <20230325145348.1208-1-zhiwei_l=
+iu@linux.alibaba.com>) to patch 5
+> * use env->virt_enabled directly instead of riscv_cpu_virt_enabled() in p=
+atch 6 (suggested by LIU Zhiwei)
+> * remain the orginal identation for macro name in patch 8 (suggested by L=
+IU Zhiwei)
+>
+> LIU Zhiwei (1):
+>   target/riscv: Convert env->virt to a bool env->virt_enabled
+>
+> Weiwei Li (9):
+>   target/riscv: Remove redundant call to riscv_cpu_virt_enabled
+>   target/riscv: Remove redundant check on RVH
+>   target/riscv: Remove check on RVH for riscv_cpu_virt_enabled
+>   target/riscv: Remove check on RVH for riscv_cpu_set_virt_enabled
+>   target/riscv: Remove riscv_cpu_virt_enabled()
+>   target/riscv: Remove redundant parentheses
+>   target/riscv: Fix format for indentation
+>   target/riscv: Fix format for comments
+>   target/riscv: Fix lines with over 80 characters
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/pmp.c           |  6 ++-
->  target/riscv/pmu.c           |  3 +-
->  target/riscv/vector_helper.c | 76 ++++++++++++++++++++++++------------
->  3 files changed, 56 insertions(+), 29 deletions(-)
 >
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 665a8528d5..428ebe7272 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -129,7 +129,8 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_=
-t pmp_index, uint8_t val)
->      }
->  }
+>  target/riscv/arch_dump.c                |   7 +-
+>  target/riscv/cpu.c                      |   8 +-
+>  target/riscv/cpu.h                      |  29 +--
+>  target/riscv/cpu_bits.h                 |   5 +-
+>  target/riscv/cpu_helper.c               | 142 ++++++------
+>  target/riscv/csr.c                      |  52 ++---
+>  target/riscv/debug.c                    |  10 +-
+>  target/riscv/insn_trans/trans_rvv.c.inc |  36 +--
+>  target/riscv/machine.c                  |   6 +-
+>  target/riscv/op_helper.c                |  21 +-
+>  target/riscv/pmp.c                      |  48 ++--
+>  target/riscv/pmp.h                      |   9 +-
+>  target/riscv/pmu.c                      |   7 +-
+>  target/riscv/sbi_ecall_interface.h      |   8 +-
+>  target/riscv/translate.c                |  14 +-
+>  target/riscv/vector_helper.c            | 292 ++++++++++++++----------
+>  16 files changed, 378 insertions(+), 316 deletions(-)
 >
-> -static void pmp_decode_napot(target_ulong a, target_ulong *sa, target_ul=
-ong *ea)
-> +static void pmp_decode_napot(target_ulong a, target_ulong *sa,
-> +                             target_ulong *ea)
->  {
->      /*
->         aaaa...aaa0   8-byte NAPOT range
-> @@ -217,7 +218,8 @@ static void pmp_update_rule(CPURISCVState *env, uint3=
-2_t pmp_index)
->      pmp_update_rule_nums(env);
->  }
->
-> -static int pmp_is_in_range(CPURISCVState *env, int pmp_index, target_ulo=
-ng addr)
-> +static int pmp_is_in_range(CPURISCVState *env, int pmp_index,
-> +                           target_ulong addr)
->  {
->      int result =3D 0;
->
-> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-> index 7ad85ab476..903bf29361 100644
-> --- a/target/riscv/pmu.c
-> +++ b/target/riscv/pmu.c
-> @@ -419,7 +419,8 @@ int riscv_pmu_setup_timer(CPURISCVState *env, uint64_=
-t value, uint32_t ctr_idx)
->      } else {
->          return -1;
->      }
-> -    overflow_at =3D (uint64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + ov=
-erflow_ns;
-> +    overflow_at =3D (uint64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-> +                  overflow_ns;
->
->      if (overflow_at > INT64_MAX) {
->          overflow_left +=3D overflow_at - INT64_MAX;
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 81b99a0e3c..b5ab8edcb3 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -385,8 +385,8 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVSta=
-te *env, uint32_t desc,
->  }
->
->  /*
-> - * masked unit-stride load and store operation will be a special case of=
- stride,
-> - * stride =3D NF * sizeof (MTYPE)
-> + * masked unit-stride load and store operation will be a special case of
-> + * stride, stride =3D NF * sizeof (MTYPE)
->   */
->
->  #define GEN_VEXT_LD_US(NAME, ETYPE, LOAD_FN)                            =
-\
-> @@ -681,7 +681,8 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCV=
-State *env, uint32_t desc,
->          /* load/store rest of elements of current segment pointed by vst=
-art */
->          for (pos =3D off; pos < max_elems; pos++, env->vstart++) {
->              target_ulong addr =3D base + ((pos + k * max_elems) << log2_=
-esz);
-> -            ldst_elem(env, adjust_addr(env, addr), pos + k * max_elems, =
-vd, ra);
-> +            ldst_elem(env, adjust_addr(env, addr), pos + k * max_elems, =
-vd,
-> +                      ra);
->          }
->          k++;
->      }
-> @@ -1309,7 +1310,9 @@ GEN_VEXT_SHIFT_VV(vsra_vv_h, uint16_t, int16_t, H2,=
- H2, DO_SRL, 0xf)
->  GEN_VEXT_SHIFT_VV(vsra_vv_w, uint32_t, int32_t, H4, H4, DO_SRL, 0x1f)
->  GEN_VEXT_SHIFT_VV(vsra_vv_d, uint64_t, int64_t, H8, H8, DO_SRL, 0x3f)
->
-> -/* generate the helpers for shift instructions with one vector and one s=
-calar */
-> +/*
-> + * generate the helpers for shift instructions with one vector and one s=
-calar
-> + */
->  #define GEN_VEXT_SHIFT_VX(NAME, TD, TS2, HD, HS2, OP, MASK) \
->  void HELPER(NAME)(void *vd, void *v0, target_ulong s1,      \
->                    void *vs2, CPURISCVState *env,            \
-> @@ -2168,7 +2171,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, vo=
-id *vs2,     \
->                   do_##NAME, ESZ);                               \
->  }
->
-> -static inline uint8_t saddu8(CPURISCVState *env, int vxrm, uint8_t a, ui=
-nt8_t b)
-> +static inline uint8_t saddu8(CPURISCVState *env, int vxrm, uint8_t a,
-> +                             uint8_t b)
->  {
->      uint8_t res =3D a + b;
->      if (res < a) {
-> @@ -2312,7 +2316,8 @@ static inline int8_t sadd8(CPURISCVState *env, int =
-vxrm, int8_t a, int8_t b)
->      return res;
->  }
->
-> -static inline int16_t sadd16(CPURISCVState *env, int vxrm, int16_t a, in=
-t16_t b)
-> +static inline int16_t sadd16(CPURISCVState *env, int vxrm, int16_t a,
-> +                             int16_t b)
->  {
->      int16_t res =3D a + b;
->      if ((res ^ a) & (res ^ b) & INT16_MIN) {
-> @@ -2322,7 +2327,8 @@ static inline int16_t sadd16(CPURISCVState *env, in=
-t vxrm, int16_t a, int16_t b)
->      return res;
->  }
->
-> -static inline int32_t sadd32(CPURISCVState *env, int vxrm, int32_t a, in=
-t32_t b)
-> +static inline int32_t sadd32(CPURISCVState *env, int vxrm, int32_t a,
-> +                             int32_t b)
->  {
->      int32_t res =3D a + b;
->      if ((res ^ a) & (res ^ b) & INT32_MIN) {
-> @@ -2332,7 +2338,8 @@ static inline int32_t sadd32(CPURISCVState *env, in=
-t vxrm, int32_t a, int32_t b)
->      return res;
->  }
->
-> -static inline int64_t sadd64(CPURISCVState *env, int vxrm, int64_t a, in=
-t64_t b)
-> +static inline int64_t sadd64(CPURISCVState *env, int vxrm, int64_t a,
-> +                             int64_t b)
->  {
->      int64_t res =3D a + b;
->      if ((res ^ a) & (res ^ b) & INT64_MIN) {
-> @@ -2360,7 +2367,8 @@ GEN_VEXT_VX_RM(vsadd_vx_h, 2)
->  GEN_VEXT_VX_RM(vsadd_vx_w, 4)
->  GEN_VEXT_VX_RM(vsadd_vx_d, 8)
->
-> -static inline uint8_t ssubu8(CPURISCVState *env, int vxrm, uint8_t a, ui=
-nt8_t b)
-> +static inline uint8_t ssubu8(CPURISCVState *env, int vxrm, uint8_t a,
-> +                             uint8_t b)
->  {
->      uint8_t res =3D a - b;
->      if (res > a) {
-> @@ -2431,7 +2439,8 @@ static inline int8_t ssub8(CPURISCVState *env, int =
-vxrm, int8_t a, int8_t b)
->      return res;
->  }
->
-> -static inline int16_t ssub16(CPURISCVState *env, int vxrm, int16_t a, in=
-t16_t b)
-> +static inline int16_t ssub16(CPURISCVState *env, int vxrm, int16_t a,
-> +                             int16_t b)
->  {
->      int16_t res =3D a - b;
->      if ((res ^ a) & (a ^ b) & INT16_MIN) {
-> @@ -2441,7 +2450,8 @@ static inline int16_t ssub16(CPURISCVState *env, in=
-t vxrm, int16_t a, int16_t b)
->      return res;
->  }
->
-> -static inline int32_t ssub32(CPURISCVState *env, int vxrm, int32_t a, in=
-t32_t b)
-> +static inline int32_t ssub32(CPURISCVState *env, int vxrm, int32_t a,
-> +                             int32_t b)
->  {
->      int32_t res =3D a - b;
->      if ((res ^ a) & (a ^ b) & INT32_MIN) {
-> @@ -2451,7 +2461,8 @@ static inline int32_t ssub32(CPURISCVState *env, in=
-t vxrm, int32_t a, int32_t b)
->      return res;
->  }
->
-> -static inline int64_t ssub64(CPURISCVState *env, int vxrm, int64_t a, in=
-t64_t b)
-> +static inline int64_t ssub64(CPURISCVState *env, int vxrm, int64_t a,
-> +                             int64_t b)
->  {
->      int64_t res =3D a - b;
->      if ((res ^ a) & (a ^ b) & INT64_MIN) {
-> @@ -2507,7 +2518,8 @@ static inline uint8_t get_round(int vxrm, uint64_t =
-v, uint8_t shift)
->      return 0; /* round-down (truncate) */
->  }
->
-> -static inline int32_t aadd32(CPURISCVState *env, int vxrm, int32_t a, in=
-t32_t b)
-> +static inline int32_t aadd32(CPURISCVState *env, int vxrm, int32_t a,
-> +                             int32_t b)
->  {
->      int64_t res =3D (int64_t)a + b;
->      uint8_t round =3D get_round(vxrm, res, 1);
-> @@ -2515,7 +2527,8 @@ static inline int32_t aadd32(CPURISCVState *env, in=
-t vxrm, int32_t a, int32_t b)
->      return (res >> 1) + round;
->  }
->
-> -static inline int64_t aadd64(CPURISCVState *env, int vxrm, int64_t a, in=
-t64_t b)
-> +static inline int64_t aadd64(CPURISCVState *env, int vxrm, int64_t a,
-> +                             int64_t b)
->  {
->      int64_t res =3D a + b;
->      uint8_t round =3D get_round(vxrm, res, 1);
-> @@ -2580,7 +2593,8 @@ GEN_VEXT_VX_RM(vaaddu_vx_h, 2)
->  GEN_VEXT_VX_RM(vaaddu_vx_w, 4)
->  GEN_VEXT_VX_RM(vaaddu_vx_d, 8)
->
-> -static inline int32_t asub32(CPURISCVState *env, int vxrm, int32_t a, in=
-t32_t b)
-> +static inline int32_t asub32(CPURISCVState *env, int vxrm, int32_t a,
-> +                             int32_t b)
->  {
->      int64_t res =3D (int64_t)a - b;
->      uint8_t round =3D get_round(vxrm, res, 1);
-> @@ -2588,7 +2602,8 @@ static inline int32_t asub32(CPURISCVState *env, in=
-t vxrm, int32_t a, int32_t b)
->      return (res >> 1) + round;
->  }
->
-> -static inline int64_t asub64(CPURISCVState *env, int vxrm, int64_t a, in=
-t64_t b)
-> +static inline int64_t asub64(CPURISCVState *env, int vxrm, int64_t a,
-> +                             int64_t b)
->  {
->      int64_t res =3D (int64_t)a - b;
->      uint8_t round =3D get_round(vxrm, res, 1);
-> @@ -4501,7 +4516,9 @@ RVVCALL(OPFVV1, vfwcvt_x_f_v_w, WOP_UU_W, H8, H4, f=
-loat32_to_int64)
->  GEN_VEXT_V_ENV(vfwcvt_x_f_v_h, 4)
->  GEN_VEXT_V_ENV(vfwcvt_x_f_v_w, 8)
->
-> -/* vfwcvt.f.xu.v vd, vs2, vm # Convert unsigned integer to double-width =
-float */
-> +/*
-> + * vfwcvt.f.xu.v vd, vs2, vm # Convert unsigned integer to double-width =
-float.
-> + */
->  RVVCALL(OPFVV1, vfwcvt_f_xu_v_b, WOP_UU_B, H2, H1, uint8_to_float16)
->  RVVCALL(OPFVV1, vfwcvt_f_xu_v_h, WOP_UU_H, H4, H2, uint16_to_float32)
->  RVVCALL(OPFVV1, vfwcvt_f_xu_v_w, WOP_UU_W, H8, H4, uint32_to_float64)
-> @@ -4518,8 +4535,7 @@ GEN_VEXT_V_ENV(vfwcvt_f_x_v_h, 4)
->  GEN_VEXT_V_ENV(vfwcvt_f_x_v_w, 8)
->
->  /*
-> - * vfwcvt.f.f.v vd, vs2, vm
-> - * Convert single-width float to double-width float.
-> + * vfwcvt.f.f.v vd, vs2, vm # Convert single-width float to double-width=
- float.
->   */
->  static uint32_t vfwcvtffv16(uint16_t a, float_status *s)
->  {
-> @@ -4552,7 +4568,9 @@ GEN_VEXT_V_ENV(vfncvt_x_f_w_b, 1)
->  GEN_VEXT_V_ENV(vfncvt_x_f_w_h, 2)
->  GEN_VEXT_V_ENV(vfncvt_x_f_w_w, 4)
->
-> -/* vfncvt.f.xu.v vd, vs2, vm # Convert double-width unsigned integer to =
-float */
-> +/*
-> + * vfncvt.f.xu.v vd, vs2, vm # Convert double-width unsigned integer to =
-float.
-> + */
->  RVVCALL(OPFVV1, vfncvt_f_xu_w_h, NOP_UU_H, H2, H4, uint32_to_float16)
->  RVVCALL(OPFVV1, vfncvt_f_xu_w_w, NOP_UU_W, H4, H8, uint64_to_float32)
->  GEN_VEXT_V_ENV(vfncvt_f_xu_w_h, 2)
-> @@ -4702,14 +4720,20 @@ GEN_VEXT_FRED(vfredosum_vs_w, uint32_t, uint32_t,=
- H4, H4, float32_add)
->  GEN_VEXT_FRED(vfredosum_vs_d, uint64_t, uint64_t, H8, H8, float64_add)
->
->  /* Maximum value */
-> -GEN_VEXT_FRED(vfredmax_vs_h, uint16_t, uint16_t, H2, H2, float16_maximum=
-_number)
-> -GEN_VEXT_FRED(vfredmax_vs_w, uint32_t, uint32_t, H4, H4, float32_maximum=
-_number)
-> -GEN_VEXT_FRED(vfredmax_vs_d, uint64_t, uint64_t, H8, H8, float64_maximum=
-_number)
-> +GEN_VEXT_FRED(vfredmax_vs_h, uint16_t, uint16_t, H2, H2,
-> +              float16_maximum_number)
-> +GEN_VEXT_FRED(vfredmax_vs_w, uint32_t, uint32_t, H4, H4,
-> +              float32_maximum_number)
-> +GEN_VEXT_FRED(vfredmax_vs_d, uint64_t, uint64_t, H8, H8,
-> +              float64_maximum_number)
->
->  /* Minimum value */
-> -GEN_VEXT_FRED(vfredmin_vs_h, uint16_t, uint16_t, H2, H2, float16_minimum=
-_number)
-> -GEN_VEXT_FRED(vfredmin_vs_w, uint32_t, uint32_t, H4, H4, float32_minimum=
-_number)
-> -GEN_VEXT_FRED(vfredmin_vs_d, uint64_t, uint64_t, H8, H8, float64_minimum=
-_number)
-> +GEN_VEXT_FRED(vfredmin_vs_h, uint16_t, uint16_t, H2, H2,
-> +              float16_minimum_number)
-> +GEN_VEXT_FRED(vfredmin_vs_w, uint32_t, uint32_t, H4, H4,
-> +              float32_minimum_number)
-> +GEN_VEXT_FRED(vfredmin_vs_d, uint64_t, uint64_t, H8, H8,
-> +              float64_minimum_number)
->
->  /* Vector Widening Floating-Point Add Instructions */
->  static uint32_t fwadd16(uint32_t a, uint16_t b, float_status *s)
 > --
 > 2.25.1
 >
