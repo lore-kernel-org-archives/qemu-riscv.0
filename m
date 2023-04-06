@@ -1,65 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkERp-0003jp-4p
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 21:29:57 -0400
+	id 1pkETO-0004f4-2S
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 21:31:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkERn-0003jH-KC; Wed, 05 Apr 2023 21:29:55 -0400
-Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
+ id 1pkETM-0004er-Kh; Wed, 05 Apr 2023 21:31:32 -0400
+Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkERl-000325-Vc; Wed, 05 Apr 2023 21:29:55 -0400
-Received: by mail-ua1-x932.google.com with SMTP id 89so26963458uao.0;
- Wed, 05 Apr 2023 18:29:53 -0700 (PDT)
+ id 1pkETJ-0003zr-QV; Wed, 05 Apr 2023 21:31:32 -0400
+Received: by mail-vs1-xe2a.google.com with SMTP id h27so33180750vsa.1;
+ Wed, 05 Apr 2023 18:31:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680744592;
+ d=gmail.com; s=20210112; t=1680744688;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OgbbLdVf3SzBuzLEidz0n0NCPSSPThfHJ90CSkpfeLM=;
- b=CiCYw0gC+/wVeETQskTVM1JsYQi3JN+pI05Ezs39iLYBMNNEvE9Nys0nNfHnlgSdk0
- 8U2wdsTECL1eULdLI1vRDPxeOsGqiMH+a0Xh7EK2I6jwGvnsPrkUGgdWPiHX3fp41rTA
- 3GKolnNLf8mEiZm+qHQF/KcktnEbMej/zUFKSJ95vhyNJPCK5mVtTLzNhoxGorrzXI7u
- z5GBZ6NpVinRd6mZOE0NwOy/FnwEHZUGP6v27u3s9ltmKitl9VD11s8o66NZP9cLpQB6
- UsoVkem0eIXuCzjpa1KEtJpPKWQ/R3tf1AFPjSQNklSWfEWfjdE2MDiJaUUvgIg2iS7j
- AgZA==
+ bh=ctUs3MzTui+okTJ3mCbg4M/Da7D0SyDITyJTP6DgU68=;
+ b=Z645zwmtXhQofx6XTJ/8vg++QXVDGvzBslux+l4lMLb8USVI/Vmhgr4/+rd9663kPa
+ J4uWKh3OdZgfGUjIraUAL6RJ6IJKdvNBGia5/DQzZMuX4Ty1BGtNlOBIDut9xejRjxrg
+ KzpkkdQlWpnOa41rOo8j2GcnR6SdoXMTAoVO4GOr4gqaFBeNzx6fHVfvkr7ZsrTHRqf3
+ ph8czNGBMOkc4H6yRiXDaIHrFy3cknfqNXwXKlbed4U3PP3oeu9ilCNXdUWzF4YAqkGo
+ cw59xvRAbwyRXh6b6/nSNVi1ssRjL3btD7GvClnFpyMHb0jDfGf3lGTK0vtVhU3yBprt
+ MQ+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680744592;
+ d=1e100.net; s=20210112; t=1680744688;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OgbbLdVf3SzBuzLEidz0n0NCPSSPThfHJ90CSkpfeLM=;
- b=jc0HClJYTt2b0DBNsAUO99lHfhsbkv1C86buAAiVYpyUbo5UU/JQ0keeqfhPF7BLMM
- ZamJ7JIhbqIqHwdGkRUhZmcMAO0rEeSKfneSUlMpSexnK0i66nUBvWC5IKtbrH9+tGf0
- /EwVVcCFjxKgUb7UET+srkd4779OhWpG72G9lj1SXE5hMyZ4+x5evWkMUT9oWqivohUZ
- 5y2+U9bFoWQkNdmN3a2an5KQJizBeyZnpAGuVBeZOINLg4//B5KCutMg6dpNDN5sqEkJ
- nUwXE8MyeOmcHre78DkITuFF0r4z40bLJ512I0c0kWazVzDUjxeOrZnOWEXAsUKWNMh8
- N6gg==
-X-Gm-Message-State: AAQBX9dckACfsGYK+m102OLqCTZwIiL5/dFaERmVLTtWxg4x/34pGKJB
- wxW0iSUy8va7BUQMlHNimQ3/G3Eh98Ir1j69K28=
-X-Google-Smtp-Source: AKy350b300b69ybmXMVbBjLnz8ZsMZg19DMI0yaC6elxE4QyiyFkwpP/30G3Estc9AFo26W9K5h2Gz4o3FkicnO4+3k=
-X-Received: by 2002:a1f:b2ca:0:b0:406:6b94:c4fe with SMTP id
- b193-20020a1fb2ca000000b004066b94c4femr6138523vkf.0.1680744592429; Wed, 05
- Apr 2023 18:29:52 -0700 (PDT)
+ bh=ctUs3MzTui+okTJ3mCbg4M/Da7D0SyDITyJTP6DgU68=;
+ b=oBSv4SE+4X86azmt7Vwa/UzF8gc7jjZKBi4xmqWf6AKpPEUVdJwc0bPBrbSS3QOX5u
+ cvHiEpvN2TV7EWfOpMNTqzDVSaFi4P25opH9Hm6XL+25bHwQrn+P1ru3W/9Qo6Zj4S4t
+ WUQ1abWbmsf48eG5RVCUAqE8tTIwrk33WEjeJHiGfuQ/4aO0/1G2KYwz3tEfRc6MOdNU
+ AnrfjfH6F/0o1XA7pru4I9NwYgP8/Of+S7T/335whhRE4K9lrZ05jb0jZ7/kF6S9HWhr
+ YUHip/XCi2g9c5CStLGBKGEDA6MCrKU9YaLDrYuSpt5vlCeLWmQ/nIp2pKejWWqXXWx4
+ p8LQ==
+X-Gm-Message-State: AAQBX9fqvSvnCGGt19t8wbbzTW7sNTaJ/gOWAEzd8p/+Zwvz88CsL2Bb
+ Sw1QARjtafNN6iXYFwPU2uu0EQYosc86f3DIqxA=
+X-Google-Smtp-Source: AKy350ZSOdGjn9lZY5KX46zGRZ887uhpiSg4dInva2elGIxxO4/q/hkZhD17pyx6ImWDGY+6mZI3O87Ivl7Fwg6kmrY=
+X-Received: by 2002:a05:6102:3d29:b0:425:ddcf:69b3 with SMTP id
+ i41-20020a0561023d2900b00425ddcf69b3mr4783021vsv.0.1680744687927; Wed, 05 Apr
+ 2023 18:31:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230405095720.75848-1-liweiwei@iscas.ac.cn>
- <20230405095720.75848-2-liweiwei@iscas.ac.cn>
- <CAKmqyKNCUY_AeUjUh=jbZ7aCJcS5TG7xgMpvUx7rQUuGZkv1qg@mail.gmail.com>
- <ef5fd175-a5fb-5731-a102-18787331596b@iscas.ac.cn>
-In-Reply-To: <ef5fd175-a5fb-5731-a102-18787331596b@iscas.ac.cn>
+In-Reply-To: <20230405095720.75848-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Apr 2023 11:29:26 +1000
-Message-ID: <CAKmqyKPVT5qch1cMp6fqF0BPnLwGgvqDYO4Cj_doC=vUYNZ1HQ@mail.gmail.com>
-Subject: Re: [PATCH v4 1/1] hw/riscv: Add signature dump function for spike to
- run ACT tests
-To: liweiwei <liweiwei@iscas.ac.cn>
+Date: Thu, 6 Apr 2023 11:31:01 +1000
+Message-ID: <CAKmqyKMpjhnVjq=mXSx_te6OA-29uL0iM4m3a6Ptq8LoHnB0TA@mail.gmail.com>
+Subject: Re: [PATCH v4 0/1] hw/riscv: Add ACT related support
+To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
  zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -80,107 +76,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 01:29:55 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 01:31:32 -0000
 
-On Thu, Apr 6, 2023 at 11:02=E2=80=AFAM liweiwei <liweiwei@iscas.ac.cn> wro=
+On Wed, Apr 5, 2023 at 7:58=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wro=
 te:
 >
+> ACT tests play an important role in riscv tests. This patch tries to
+> add related support to run ACT tests.
 >
-> On 2023/4/6 08:36, Alistair Francis wrote:
-> > On Wed, Apr 5, 2023 at 7:58=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn>=
- wrote:
-> >> Add signature and signature-granularity properties in spike to specify=
- the target
-> >> signatrue file and the line size for signature data.
-> >>
-> >> Recgonize the signature section between begin_signature and end_signat=
-ure symbols
-> >> when loading elf of ACT tests. Then dump signature data in signature s=
-ection just
-> >> before the ACT tests exit.
-> >>
-> >> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> >> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> >> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> >> ---
-> >>   hw/char/riscv_htif.c         | 44 ++++++++++++++++++++++++++++++++++=
-+-
-> >>   hw/riscv/spike.c             | 13 +++++++++++
-> >>   include/hw/char/riscv_htif.h |  3 +++
-> >>   3 files changed, 59 insertions(+), 1 deletion(-)
-> >>
-> >> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-> >> index 098de50e35..37d3ccc76b 100644
-> >> --- a/hw/char/riscv_htif.c
-> >> +++ b/hw/char/riscv_htif.c
-> >> @@ -29,6 +29,8 @@
-> >>   #include "chardev/char-fe.h"
-> >>   #include "qemu/timer.h"
-> >>   #include "qemu/error-report.h"
-> >> +#include "exec/address-spaces.h"
-> >> +#include "sysemu/dma.h"
-> >>
-> >>   #define RISCV_DEBUG_HTIF 0
-> >>   #define HTIF_DEBUG(fmt, ...)                                        =
-           \
-> >> @@ -51,7 +53,10 @@
-> >>   /* PK system call number */
-> >>   #define PK_SYS_WRITE            64
-> >>
-> >> -static uint64_t fromhost_addr, tohost_addr;
-> >> +const char *sig_file;
-> >> +uint8_t line_size =3D 16;
-> >> +
-> >> +static uint64_t fromhost_addr, tohost_addr, begin_sig_addr, end_sig_a=
-ddr;
-> >>
-> >>   void htif_symbol_callback(const char *st_name, int st_info, uint64_t=
- st_value,
-> >>                             uint64_t st_size)
-> >> @@ -68,6 +73,10 @@ void htif_symbol_callback(const char *st_name, int =
-st_info, uint64_t st_value,
-> >>               error_report("HTIF tohost must be 8 bytes");
-> >>               exit(1);
-> >>           }
-> >> +    } else if (strcmp("begin_signature", st_name) =3D=3D 0) {
-> >> +        begin_sig_addr =3D st_value;
-> >> +    } else if (strcmp("end_signature", st_name) =3D=3D 0) {
-> >> +        end_sig_addr =3D st_value;
-> >>       }
-> >>   }
-> >>
-> >> @@ -163,6 +172,39 @@ static void htif_handle_tohost_write(HTIFState *s=
-, uint64_t val_written)
-> >>               if (payload & 0x1) {
-> >>                   /* exit code */
-> >>                   int exit_code =3D payload >> 1;
-> >> +
-> >> +                /*
-> >> +                 * Dump signature data if sig_file is specified and
-> >> +                 * begin/end_signature symbols exist.
-> >> +                 */
-> >> +                if (sig_file && begin_sig_addr && end_sig_addr) {
-> > There is no guarantee that these are initalised to zero, so this isn't
-> > really checking anything is it?
+> The port is available here:
+> https://github.com/plctlab/plct-qemu/tree/plct-act-upstream-v2
 >
-> I think the static global variable will be  initialized to zero by defaul=
-t.
+> The ACT tests can be run on qemu-system-riscv32/64 with machine argument
+> "-M spike,signature=3D<FILE>,signature-granularity=3D<granurity>".
+>
+> v4:
+> * update error message for opening signature file failed
+> * add check for existence of begin/end_signature symbols when trying to u=
+pdate signature file.
+>
+> v3:
+> * move definition of signature related parameters from spike.c to riscv_h=
+tif.c
+>
+> v2=EF=BC=9A
+> * move "extern ..." declaration from riscv_htif.c to riscv_htif.h
+>
+> Weiwei Li (1):
+>   hw/riscv: Add signature dump function for spike to run ACT tests
 
-Ah, yes you are right. static variables are initalised to zero as per
-the C99 standard.
+Thanks!
 
-In which case:
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Applied to riscv-to-apply.next
 
 Alistair
 
 >
-> If not,  fromhost_addr and tohost_addr may have the same problem.
+>  hw/char/riscv_htif.c         | 44 +++++++++++++++++++++++++++++++++++-
+>  hw/riscv/spike.c             | 13 +++++++++++
+>  include/hw/char/riscv_htif.h |  3 +++
+>  3 files changed, 59 insertions(+), 1 deletion(-)
 >
-> Regards,
+> --
+> 2.25.1
 >
-> Weiwei Li
 >
-> >
 
