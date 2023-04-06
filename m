@@ -1,62 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkEXI-00068n-Pf
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 21:35:36 -0400
+	id 1pkEiY-0008MM-Pr
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 21:47:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pkEXG-00068N-Tb; Wed, 05 Apr 2023 21:35:34 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pkEXE-0000bH-2x; Wed, 05 Apr 2023 21:35:34 -0400
-Received: from [192.168.0.120] (unknown [180.175.29.170])
- by APP-01 (Coremail) with SMTP id qwCowACHEdTZIS5kCgoGAA--.1609S2;
- Thu, 06 Apr 2023 09:35:22 +0800 (CST)
-Message-ID: <9ceb5823-901f-b8ec-ddcd-ce4a500fcf72@iscas.ac.cn>
-Date: Thu, 6 Apr 2023 09:35:21 +0800
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pkEiX-0008M2-4R; Wed, 05 Apr 2023 21:47:13 -0400
+Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pkEiV-00056T-6v; Wed, 05 Apr 2023 21:47:12 -0400
+Received: by mail-ua1-x934.google.com with SMTP id q8so19247153uas.7;
+ Wed, 05 Apr 2023 18:47:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20210112; t=1680745629;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7+WnH+bcz0YDqp64oLC6Rqk4gmZzFxoABmlgB63HkmA=;
+ b=nVC95IE5gCZdevBMVQifBCGpM7S68XruLY9G7088sfG0rm2+mQVRb6ciRTXEn3QMts
+ fmf5sFI9I27Deq4bL4IO6baaFBJA3Rm5Lqcbrgvc7bYCoojBgiNiMfSGfKrlCZ1mBBHP
+ MtAOupsHrAKrsDLh5bdwUWldFE/NlMFtu7xQQoKjR+1XdZnwwpm7ucGibzAJV/VV2krE
+ IjOEZtyeBFzgicNAvuGlb6Yvpv1UJBlN58o/1t2KtyZpqAnCZN721sQt5zxOIjqbRRRL
+ knMcDn76u0Edlk3NR5k+xoem9vxWu2FV0i+RTfCTdpeGP4/HgeYkuacfzdkuVYBT0RnY
+ tTfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1680745629;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7+WnH+bcz0YDqp64oLC6Rqk4gmZzFxoABmlgB63HkmA=;
+ b=vMTEbAD7pG+eJW1q6HQYaMbH7YpIQyItuTUFr4ZS97CPd4tPZmi+wAWWwty+ZZOkRF
+ kFGw+u+pr0cE3L/5X//gZTA2kHaY33YrNJxk1dN33taYKSOXLH0/WInWAEgs2b0Orlb3
+ gXmwpyJr3cab8yRIrTTALNq97m7DEaRnXEqpczRogJIkybOgfe27DasOqbYLxCNPBEmW
+ Jnj8LY8avFqDpq2SyE4D1flOdoN+LuWUnoz2O4oXXmV0ZXhkBXw7X2JGUYoNlzZ+89ax
+ y30BxN/Z+fduDer2Z94IBqwISG/1m/h5SYf1xN2dAa1FoRmZe2P6viVgqd0zsazOs/nK
+ IFtw==
+X-Gm-Message-State: AAQBX9cOzL2UxBqMImtgyJdMUFaUngxKNYbHAw8MWLADKdWneI1D6CB1
+ mLjpxjFCFMANQBo8UvDwoktKO1TJTxzGD45HJZk=
+X-Google-Smtp-Source: AKy350Yj5gyIV1T1nLFYGkf2CQebAo8GpuJehjpBy1EteRxn38CuzjgJlcVmCSEsM9edZp5NPKN/oB1qGGdD53XUFcw=
+X-Received: by 2002:a1f:31d3:0:b0:43c:3dd6:5535 with SMTP id
+ x202-20020a1f31d3000000b0043c3dd65535mr5788444vkx.0.1680745629552; Wed, 05
+ Apr 2023 18:47:09 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-Subject: Re: [PATCH 2/2] target/riscv: Legalize MPP value in write_mstatus
-Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>
 References: <20230330135818.68417-1-liweiwei@iscas.ac.cn>
- <20230330135818.68417-3-liweiwei@iscas.ac.cn>
- <CAKmqyKNyfZoff5woowdVvf9WH_AnTPsD3ES7rkgubLKM0E=9Rg@mail.gmail.com>
-From: liweiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <CAKmqyKNyfZoff5woowdVvf9WH_AnTPsD3ES7rkgubLKM0E=9Rg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACHEdTZIS5kCgoGAA--.1609S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxCrWrKF4xuF18Gr47KFykZrb_yoW5WF4fpr
- WkKFW3GFWDJrZFg3WSqF48WF1YyrW3KrWUCan3tw4UJws5JrZYkF1Dt3y3Cr1DZFyxWr1F
- 9asru3s8AF47ZFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9F14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F
- 4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
- 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
- 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
- n2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFV
- Cjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWl
- x4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r
- 1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_
- JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcS
- sGvfC2KfnxnUUI43ZEXa7VUbXdbUUUUUU==
-X-Originating-IP: [180.175.29.170]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -32
-X-Spam_score: -3.3
-X-Spam_bar: ---
-X-Spam_report: (-3.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-1.355,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
+ <20230330135818.68417-2-liweiwei@iscas.ac.cn>
+ <CAKmqyKMzPwFpScWg2H+JMZpvH6oJAP0A5vgaKAEiXR57db0r4w@mail.gmail.com>
+ <2b52f993-158e-a7ee-9180-b84f85f432c6@iscas.ac.cn>
+In-Reply-To: <2b52f993-158e-a7ee-9180-b84f85f432c6@iscas.ac.cn>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 6 Apr 2023 11:46:43 +1000
+Message-ID: <CAKmqyKOOHs-Wq2s6fNJLyEUAQ1B3=PoyU5EFZ7e_=BDL-vLwAg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Fix the mstatus.MPP value after
+ executing MRET
+To: liweiwei <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -70,90 +80,87 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 01:35:35 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 01:47:13 -0000
 
-
-On 2023/4/6 09:26, Alistair Francis wrote:
-> On Thu, Mar 30, 2023 at 11:59 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->> mstatus.MPP field is a WARL field, so we remain it unchanged if an
-> Only since version 1.11 of the priv spec and we do still support priv 1.10.
+On Thu, Apr 6, 2023 at 10:56=E2=80=AFAM liweiwei <liweiwei@iscas.ac.cn> wro=
+te:
 >
-> I think it's ok to make this change for all priv versions, as it won't
-> break any software running 1.10, but it's worth adding a comment or at
-> least a mention in the commit message.
+>
+> On 2023/4/6 08:43, Alistair Francis wrote:
+>
+> On Thu, Mar 30, 2023 at 11:59=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn>=
+ wrote:
+>
+> The MPP will be set to the least-privileged supported mode (U if
+> U-mode is implemented, else M).
+>
+> I don't think this is right, the spec in section 8.6.4 says this:
+>
+> Sorry, I didn't find this section in latest release of both privilege and=
+ un-privilege spec
 
-OK. I'll add it in next version.
+I updated my spec, using commit
+f6b8d5c7d2dcd935b48689a337c8f5bc2be4b5e5 it's now section 9.6.4 Trap
+Return
 
-Regards,
+>
+> (draft-20230131-c0b298a: Clarify WFI trapping behavior (#972)).
 
-Weiwei Li
+Also, you replied with a HTML email which loses the conversation
+history (just see above). Can you fixup your client to reply with
+plain text please
 
+Alistair
+
+>
+> "MRET then in mstatus/mstatush sets MPV=3D0, MPP=3D0,
+> MIE=3DMPIE, and MPIE=3D1"
+>
+> In section 3.1.6.1, the privilege spec says this:
+>
+> "An MRET or SRET instruction is used to return from a trap in M-mode or S=
+-mode respectively.
+> When executing an xRET instruction, supposing xPP holds the value y, xIE =
+is set to xPIE; the
+> privilege mode is changed to y; xPIE is set to 1; and xPP is set to the l=
+east-privileged supported
+> mode (U if U-mode is implemented, else M). If y=CC=B8=3DM, xRET also sets=
+ MPRV=3D0"
+>
+> And I think PRV_U is an illegal value for MPP if U-mode is not implemente=
+d.
+>
+> Regards,
+>
+> Weiwei Li
+>
+> So it should just always be 0 (PRV_U is 0)
 >
 > Alistair
 >
->> invalid value is written into it. And after this, RVH shouldn't be
->> passed to riscv_cpu_set_mode().
->>
->> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->> ---
->>   target/riscv/cpu_helper.c |  5 +----
->>   target/riscv/csr.c        | 14 ++++++++++++++
->>   2 files changed, 15 insertions(+), 4 deletions(-)
->>
->> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> index f88c503cf4..46baf3ab7c 100644
->> --- a/target/riscv/cpu_helper.c
->> +++ b/target/riscv/cpu_helper.c
->> @@ -659,12 +659,9 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
->>
->>   void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
->>   {
->> -    if (newpriv > PRV_M) {
->> +    if (newpriv > PRV_M || newpriv == PRV_H) {
->>           g_assert_not_reached();
->>       }
->> -    if (newpriv == PRV_H) {
->> -        newpriv = PRV_U;
->> -    }
->>       if (icount_enabled() && newpriv != env->priv) {
->>           riscv_itrigger_update_priv(env);
->>       }
->> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index d522efc0b6..a99026c3e8 100644
->> --- a/target/riscv/csr.c
->> +++ b/target/riscv/csr.c
->> @@ -1238,6 +1238,18 @@ static bool validate_vm(CPURISCVState *env, target_ulong vm)
->>       return (vm & 0xf) <= satp_mode_max_from_map(cpu->cfg.satp_mode.map);
->>   }
->>
->> +static target_ulong legalize_mpp(CPURISCVState *env, target_ulong old_mpp,
->> +                                 target_ulong val)
->> +{
->> +    target_ulong new_mpp = get_field(val, MSTATUS_MPP);
->> +    bool mpp_invalid = (new_mpp == PRV_S && !riscv_has_ext(env, RVS)) ||
->> +                       (new_mpp == PRV_U && !riscv_has_ext(env, RVU)) ||
->> +                       (new_mpp == PRV_H);
->> +
->> +    /* Remain field unchanged if new_mpp value is invalid */
->> +    return mpp_invalid ? set_field(val, MSTATUS_MPP, old_mpp) : val;
->> +}
->> +
->>   static RISCVException write_mstatus(CPURISCVState *env, int csrno,
->>                                       target_ulong val)
->>   {
->> @@ -1245,6 +1257,8 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
->>       uint64_t mask = 0;
->>       RISCVMXL xl = riscv_cpu_mxl(env);
->>
->> +    val = legalize_mpp(env, get_field(mstatus, MSTATUS_MPP), val);
->> +
->>       /* flush tlb on mstatus fields that affect VM */
->>       if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
->>               MSTATUS_MPRV | MSTATUS_SUM)) {
->> --
->> 2.25.1
->>
->>
-
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> ---
+>  target/riscv/op_helper.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 84ee018f7d..991f06d98d 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -339,7 +339,8 @@ target_ulong helper_mret(CPURISCVState *env)
+>      mstatus =3D set_field(mstatus, MSTATUS_MIE,
+>                          get_field(mstatus, MSTATUS_MPIE));
+>      mstatus =3D set_field(mstatus, MSTATUS_MPIE, 1);
+> -    mstatus =3D set_field(mstatus, MSTATUS_MPP, PRV_U);
+> +    mstatus =3D set_field(mstatus, MSTATUS_MPP,
+> +                        riscv_has_ext(env, RVU) ? PRV_U : PRV_M);
+>      mstatus =3D set_field(mstatus, MSTATUS_MPV, 0);
+>      if ((env->priv_ver >=3D PRIV_VERSION_1_12_0) && (prev_priv !=3D PRV_=
+M)) {
+>          mstatus =3D set_field(mstatus, MSTATUS_MPRV, 0);
+> --
+> 2.25.1
+>
+>
 
