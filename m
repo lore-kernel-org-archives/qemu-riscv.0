@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkVI0-0007CU-K8
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Apr 2023 15:28:57 -0400
+	id 1pkVMZ-0005Sk-9v
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Apr 2023 15:33:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pkVHv-0007Bw-Qz
- for qemu-riscv@nongnu.org; Thu, 06 Apr 2023 15:28:51 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ id 1pkVMX-0005SE-V2
+ for qemu-riscv@nongnu.org; Thu, 06 Apr 2023 15:33:38 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pkVHt-0000b6-Jg
- for qemu-riscv@nongnu.org; Thu, 06 Apr 2023 15:28:51 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id c18so38421377ple.11
- for <qemu-riscv@nongnu.org>; Thu, 06 Apr 2023 12:28:48 -0700 (PDT)
+ id 1pkVMW-0005zS-BF
+ for qemu-riscv@nongnu.org; Thu, 06 Apr 2023 15:33:37 -0400
+Received: by mail-pl1-x631.google.com with SMTP id kc4so38428601plb.10
+ for <qemu-riscv@nongnu.org>; Thu, 06 Apr 2023 12:33:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1680809327;
+ d=linaro.org; s=google; t=1680809614;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=fpLo/YTvHFd+wyIe6CDQnWw4tOiJ1LRxGQgdnJnwC00=;
- b=daBaW6ClXIG64itdu7MjxODdeitQAKfQ6pAtKpbxh0ExpQA07yio9BXEUX4V27Q/t7
- PvJPTXna/C8xNZm+l/jKGyn6Fp0/JJVlYNK1aaTvZcqxWaL8JRfQEWxUB8a0D6qljlOP
- Gyh2pgSMgBpZvklRH8Nvz0D3PxDZte6PXiiQ4nW+gz11dswBZqtbzeUal+MP5nVNedS3
- F+o5hoXvGZ1sY+5GmaJD1RV+P/tj6PFOpxP3PI1SXoHH7xyHSWC59DJrPg8g03+MkWuw
- wA5ha1jd3h7pFpnEby5jeSsYnJ3+M2AGi80DAYhWhggzGoab0szCzB3fB6qwfm9emcXa
- 8VCg==
+ bh=Q5fLqYRjHiLLivlpZdwF47imcOn5GRt0O0to3ptExhc=;
+ b=sd41DWUT7sKfwtRh83v+9UJvuXUAxTl1mNXcPybweZo6ldJwyjonSyvwOI/8+61obz
+ dYF21bPjvub2DsgmwnpIe0knS1jOsackJ/ZF4RUUQChipeWqBXIuU+uBWct6cUYNN1nb
+ a83/4sVq+CUmhJ/MNPb6UsCuiwTrk5DgvONEsT1obsjztVLPCEnCKYewOHgUopqGRpWU
+ CW/O1br3PU2X3hxReaR2ZEMVHpRiMp/QjARWRaFukKODHsuZvqxU+TiC5qjzSjooVryh
+ 4iWKw7nvuf9LKZkXu7Um362fnJEgr8EJBn7J3xo43NPovtihQy4TbRgOxl8dEeu9kfZb
+ OJrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680809327;
+ d=1e100.net; s=20210112; t=1680809614;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fpLo/YTvHFd+wyIe6CDQnWw4tOiJ1LRxGQgdnJnwC00=;
- b=iA8Z413tz744ZLMs1IukH06dk6CJSbtJ3QtS8xSUZDj+Rh05PLvSiiSI87LOLWYrm1
- t+Nf5aF+kD1klCKaKBpUvF72CruM3hWWjn4IBGUstcsetk9V1T+H1YxTMIRktpRo2Ole
- aBlPtDCUUq2HVxqhdXEEd4Qc4Wlqdft9OC1jsjQH5cgIBK2nLbmn96jVByqtm6YA+Mj+
- L7ql/lObRJxOjoIRSgMeGuPX6L4k5g0LzJU6sIm8+oOhRflVp75Yudi1F4MgCxisN/UO
- mv+LurWccMiXygyDZQ4pyTCRmOKWjtq9jH2NHNyO984yA3bKT9Ild8umA2L27vcH3FXI
- N0kA==
-X-Gm-Message-State: AAQBX9dwDiDuhKeV+eIxCzNk33NVrV3YevC3f5i1Ky1rnSJg2fenDPGs
- 1HpZBQTcTtWHF409D3MzAF0gJA==
-X-Google-Smtp-Source: AKy350Z9Uaod461oQdFgk1FVfryONA/HgMonPr90VVHz13m56m3zIQbutl9hoCghS5xhMqHMWuUvEQ==
-X-Received: by 2002:a17:90b:1c05:b0:240:d8a:8d24 with SMTP id
- oc5-20020a17090b1c0500b002400d8a8d24mr12697607pjb.4.1680809327448; 
- Thu, 06 Apr 2023 12:28:47 -0700 (PDT)
+ bh=Q5fLqYRjHiLLivlpZdwF47imcOn5GRt0O0to3ptExhc=;
+ b=BkmKVDey1vK+m0lNdznfkfeRu8ChxCnCaRk6qV9/KZ8QUuriktg4+MiYQvAywt7D5O
+ J7RdTCrKtkhdEoOx9CD1cXG71pEGSk4UuQaRrsTy3ftOhzFFDyliuIvWLnsWtUc0f+PR
+ mUQu9wGyWm/gMJ7rdDD5uXNe5jmKfAxSqXE6AcsE7bWsKZSGafoTDfxRAukEuoTkN+P/
+ +ppi9JiofiATr5GSUOahWIUt6uzw+UiXqaXkWqas76SG/iWz4Ci8eQX3rk1VnQxzJoUM
+ vIlkS4/YsCm9kUVRr8lV0MFfyX5JKq7bqHIynWazfeiXHaenVz0/e4uFIkoWKanD+gOG
+ q5bw==
+X-Gm-Message-State: AAQBX9cyA7/ji8XcWNF25gtLlx2TiyEVu4Jx0ytqsSnYWJd+RXp3AtZh
+ EulBmlpoXb+ECOcyQuRS+sqjGA==
+X-Google-Smtp-Source: AKy350bfYSkuh3qGMwzcXvrwwQq+w1k1LxIRSTCmwgBIvVWpAi6NLUycNmrk7G2Inbu9dz0DgceFvw==
+X-Received: by 2002:a17:902:f54a:b0:1a0:6721:6cdb with SMTP id
+ h10-20020a170902f54a00b001a067216cdbmr273319plf.40.1680809614610; 
+ Thu, 06 Apr 2023 12:33:34 -0700 (PDT)
 Received: from [192.168.0.4] (174-21-65-249.tukw.qwest.net. [174.21.65.249])
  by smtp.gmail.com with ESMTPSA id
- nl6-20020a17090b384600b0023faa95f75csm3403803pjb.36.2023.04.06.12.28.46
+ s15-20020a65584f000000b00502fd70b0bdsm1465347pgr.52.2023.04.06.12.33.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Apr 2023 12:28:46 -0700 (PDT)
-Message-ID: <07e4dd2f-0eac-0415-be4d-bed9cfe2fbe8@linaro.org>
-Date: Thu, 6 Apr 2023 12:28:44 -0700
+ Thu, 06 Apr 2023 12:33:34 -0700 (PDT)
+Message-ID: <8bbf3df9-1e90-7976-7273-41cab3e96881@linaro.org>
+Date: Thu, 6 Apr 2023 12:33:32 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
@@ -66,8 +66,8 @@ From: Richard Henderson <richard.henderson@linaro.org>
 In-Reply-To: <20230406072555.21927-3-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -42
 X-Spam_score: -4.3
 X-Spam_bar: ----
@@ -87,19 +87,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 19:28:52 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 19:33:38 -0000
 
 On 4/6/23 00:25, Weiwei Li wrote:
->   void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
->   {
-> -    if (newpriv > PRV_M) {
-> +    if (newpriv > PRV_M || newpriv == PRV_H) {
->           g_assert_not_reached();
->       }
+> +static target_ulong legalize_mpp(CPURISCVState *env, target_ulong old_mpp,
+> +                                 target_ulong val)
+> +{
+> +    target_ulong new_mpp = get_field(val, MSTATUS_MPP);
+> +    bool mpp_invalid = (new_mpp == PRV_S && !riscv_has_ext(env, RVS)) ||
+> +                       (new_mpp == PRV_U && !riscv_has_ext(env, RVU)) ||
+> +                       (new_mpp == PRV_H);
+> +
+> +    /* Remain field unchanged if new_mpp value is invalid */
+> +    return mpp_invalid ? set_field(val, MSTATUS_MPP, old_mpp) : val;
+> +}
 
-Nit: if (test) { assert_not_reached } -> assert(!test).
+Does anyone find PRV_H confusing, since that's not what it is?
+I think it would be nice to remove it entirely.
 
-which emits a more helpful error message before abort.
+This function might be better as
+
+     bool valid = false;
+
+     switch (new_mpp) {
+     case PRV_M:
+         valid = true;
+         break;
+     case PRV_S:
+         valid = riscv_has_ext(env, RVS);
+         break;
+     case PRV_U:
+         valid = riscv_has_ext(env, RVU);
+         break;
+     }
+     if (!valid) {
+         val = set_field(...);
+     }
+     return val;
 
 
 r~
