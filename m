@@ -1,65 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkEiY-0008MM-Pr
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 21:47:14 -0400
+	id 1pkEsW-00026s-N8
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 21:57:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkEiX-0008M2-4R; Wed, 05 Apr 2023 21:47:13 -0400
-Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
+ id 1pkEsS-000268-Lp; Wed, 05 Apr 2023 21:57:28 -0400
+Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkEiV-00056T-6v; Wed, 05 Apr 2023 21:47:12 -0400
-Received: by mail-ua1-x934.google.com with SMTP id q8so19247153uas.7;
- Wed, 05 Apr 2023 18:47:10 -0700 (PDT)
+ id 1pkEsQ-0003D7-Nr; Wed, 05 Apr 2023 21:57:28 -0400
+Received: by mail-vs1-xe36.google.com with SMTP id df34so33152422vsb.8;
+ Wed, 05 Apr 2023 18:57:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680745629;
+ d=gmail.com; s=20210112; t=1680746245;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7+WnH+bcz0YDqp64oLC6Rqk4gmZzFxoABmlgB63HkmA=;
- b=nVC95IE5gCZdevBMVQifBCGpM7S68XruLY9G7088sfG0rm2+mQVRb6ciRTXEn3QMts
- fmf5sFI9I27Deq4bL4IO6baaFBJA3Rm5Lqcbrgvc7bYCoojBgiNiMfSGfKrlCZ1mBBHP
- MtAOupsHrAKrsDLh5bdwUWldFE/NlMFtu7xQQoKjR+1XdZnwwpm7ucGibzAJV/VV2krE
- IjOEZtyeBFzgicNAvuGlb6Yvpv1UJBlN58o/1t2KtyZpqAnCZN721sQt5zxOIjqbRRRL
- knMcDn76u0Edlk3NR5k+xoem9vxWu2FV0i+RTfCTdpeGP4/HgeYkuacfzdkuVYBT0RnY
- tTfw==
+ bh=3oWW0KpuWKhpJeTU99bxxrVEloAKzF8Gz1eOnPn5cCk=;
+ b=HznmwYHc21mDqLYSvHKDVGLhK114gx1WaamaBRXrSlFR+SMzgBUrVlzxqHebZGHzPB
+ uK+pvF4KZkNc+7997BXzJEJJz1F9MFSVHN5xs/v4y7nLWn6Yh4MqaDJzzmF0+oqLk3IY
+ LNPfMPtjSp26je89iN99yiWM+tzBTSkjci5+f/DxauW9yA+XgrfFHIzdoWZQ60pAvioy
+ +vZi7KY8qniTY7MfVzMG1LqGrzeZjeKIGbgUmJsH2hH0yj69DHlJt0MPPzpSVcKWEJ4e
+ 8MsI0oDqsF7UqOdHDTR+Szict/uA1AOpmu/VnH1aK+cV2MqeCd6lLRIa8sEtxQoL+yc+
+ Yxfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680745629;
+ d=1e100.net; s=20210112; t=1680746245;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7+WnH+bcz0YDqp64oLC6Rqk4gmZzFxoABmlgB63HkmA=;
- b=vMTEbAD7pG+eJW1q6HQYaMbH7YpIQyItuTUFr4ZS97CPd4tPZmi+wAWWwty+ZZOkRF
- kFGw+u+pr0cE3L/5X//gZTA2kHaY33YrNJxk1dN33taYKSOXLH0/WInWAEgs2b0Orlb3
- gXmwpyJr3cab8yRIrTTALNq97m7DEaRnXEqpczRogJIkybOgfe27DasOqbYLxCNPBEmW
- Jnj8LY8avFqDpq2SyE4D1flOdoN+LuWUnoz2O4oXXmV0ZXhkBXw7X2JGUYoNlzZ+89ax
- y30BxN/Z+fduDer2Z94IBqwISG/1m/h5SYf1xN2dAa1FoRmZe2P6viVgqd0zsazOs/nK
- IFtw==
-X-Gm-Message-State: AAQBX9cOzL2UxBqMImtgyJdMUFaUngxKNYbHAw8MWLADKdWneI1D6CB1
- mLjpxjFCFMANQBo8UvDwoktKO1TJTxzGD45HJZk=
-X-Google-Smtp-Source: AKy350Yj5gyIV1T1nLFYGkf2CQebAo8GpuJehjpBy1EteRxn38CuzjgJlcVmCSEsM9edZp5NPKN/oB1qGGdD53XUFcw=
-X-Received: by 2002:a1f:31d3:0:b0:43c:3dd6:5535 with SMTP id
- x202-20020a1f31d3000000b0043c3dd65535mr5788444vkx.0.1680745629552; Wed, 05
- Apr 2023 18:47:09 -0700 (PDT)
+ bh=3oWW0KpuWKhpJeTU99bxxrVEloAKzF8Gz1eOnPn5cCk=;
+ b=mTwZaDWH0Kr66Aiw32Zt7aigxxeyki+lMXjr1rfZYyVS1R0rbZjh9weMuDsDmw0tx8
+ iKt7ZRY72XI6QNM9aBFJWUBXJyuyWFxi/c5XJ750b+28ttT6ZRfcDrn1BdmEuy4VfmFZ
+ Us50qejrb+BRFxeCbzAGERpy9JDm/8oTy8TFNIpxpEfzRY1+TfP6BKaU77fgi1o3bdXi
+ LwnNGC667Iu8HjtyWftsN3i6es1HSXtk/FFMpy2JN0I6y7Ldo9xafSW7F9eprXsF0ymO
+ 2oYeaNfBIkcJQotNeSsvy2FoomnCxlG1NqOaDTBGXrc0BonmwPaKQuiGjeY6hVFBPYhj
+ ZZ1A==
+X-Gm-Message-State: AAQBX9cFIL4LThh9itfNcfENXHFzWT70rw294Xcf180kMX4F/jgr7cAC
+ 5157eEVLmg9gNfBWPRDTa7JVhKxpiscz6yiParY=
+X-Google-Smtp-Source: AKy350YXrQCCOgAmgRTGkxCZhb3P/Z1Xs8Nzb8tDCt9VebAdOe8QhqJTs0SaU+bZbbARM3HCW2zAWFs2AvEdynVucEc=
+X-Received: by 2002:a67:c181:0:b0:42a:eb6:6c51 with SMTP id
+ h1-20020a67c181000000b0042a0eb66c51mr6361690vsj.3.1680746244824; Wed, 05 Apr
+ 2023 18:57:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230330135818.68417-1-liweiwei@iscas.ac.cn>
- <20230330135818.68417-2-liweiwei@iscas.ac.cn>
- <CAKmqyKMzPwFpScWg2H+JMZpvH6oJAP0A5vgaKAEiXR57db0r4w@mail.gmail.com>
- <2b52f993-158e-a7ee-9180-b84f85f432c6@iscas.ac.cn>
-In-Reply-To: <2b52f993-158e-a7ee-9180-b84f85f432c6@iscas.ac.cn>
+References: <20230312120538.15286-1-chenyi2000@zju.edu.cn>
+In-Reply-To: <20230312120538.15286-1-chenyi2000@zju.edu.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Apr 2023 11:46:43 +1000
-Message-ID: <CAKmqyKOOHs-Wq2s6fNJLyEUAQ1B3=PoyU5EFZ7e_=BDL-vLwAg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/riscv: Fix the mstatus.MPP value after
- executing MRET
-To: liweiwei <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+Date: Thu, 6 Apr 2023 11:56:58 +1000
+Message-ID: <CAKmqyKMC=8oKaduPE3Zt44qLfuQH9b1ckQmqFTog8QTwJB3GVA@mail.gmail.com>
+Subject: Re: [PATCH v4] target/riscv: fix H extension TVM trap
+To: Yi Chen <chenyi2000@zju.edu.cn>
+Cc: qemu-devel@nongnu.org, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -80,87 +80,197 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 01:47:13 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 01:57:29 -0000
 
-On Thu, Apr 6, 2023 at 10:56=E2=80=AFAM liweiwei <liweiwei@iscas.ac.cn> wro=
-te:
+On Sun, Mar 12, 2023 at 10:07=E2=80=AFPM Yi Chen <chenyi2000@zju.edu.cn> wr=
+ote:
 >
->
-> On 2023/4/6 08:43, Alistair Francis wrote:
->
-> On Thu, Mar 30, 2023 at 11:59=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn>=
- wrote:
->
-> The MPP will be set to the least-privileged supported mode (U if
-> U-mode is implemented, else M).
->
-> I don't think this is right, the spec in section 8.6.4 says this:
->
-> Sorry, I didn't find this section in latest release of both privilege and=
- un-privilege spec
+> - Trap satp/hgatp accesses from HS-mode when MSTATUS.TVM is enabled.
+> - Trap satp accesses from VS-mode when HSTATUS.VTVM is enabled.
+> - Raise RISCV_EXCP_ILLEGAL_INST when U-mode executes SFENCE.VMA/SINVAL.VM=
+A.
+> - Raise RISCV_EXCP_VIRT_INSTRUCTION_FAULT when VU-mode executes
+>   SFENCE.VMA/SINVAL.VMA or VS-mode executes SFENCE.VMA/SINVAL.VMA with
+>   HSTATUS.VTVM enabled.
+> - Raise RISCV_EXCP_VIRT_INSTRUCTION_FAULT when VU-mode executes
+>   HFENCE.GVMA/HFENCE.VVMA/HINVAL.GVMA/HINVAL.VVMA.
 
-I updated my spec, using commit
-f6b8d5c7d2dcd935b48689a337c8f5bc2be4b5e5 it's now section 9.6.4 Trap
-Return
+Thanks for the patch!
 
->
-> (draft-20230131-c0b298a: Clarify WFI trapping behavior (#972)).
+It looks like this patch needs to be rebased. Do you mind rebasing it
+on https://github.com/alistair23/qemu/tree/riscv-to-apply.next and
+then re-sending?
 
-Also, you replied with a HTML email which loses the conversation
-history (just see above). Can you fixup your client to reply with
-plain text please
+Also, when you are fixing a range of issues it's best to split the
+fixes into patches that fix each individual issue (where that is
+possible). This makes it easier to review but also makes it easier to
+track changes and regressions if any problems arise.
+
+In this case you don't need to split them up for a v5, but in future
+it's something to keep in mind
+
+The changes look good otherwise though :)
 
 Alistair
 
 >
-> "MRET then in mstatus/mstatush sets MPV=3D0, MPP=3D0,
-> MIE=3DMPIE, and MPIE=3D1"
->
-> In section 3.1.6.1, the privilege spec says this:
->
-> "An MRET or SRET instruction is used to return from a trap in M-mode or S=
--mode respectively.
-> When executing an xRET instruction, supposing xPP holds the value y, xIE =
-is set to xPIE; the
-> privilege mode is changed to y; xPIE is set to 1; and xPP is set to the l=
-east-privileged supported
-> mode (U if U-mode is implemented, else M). If y=CC=B8=3DM, xRET also sets=
- MPRV=3D0"
->
-> And I think PRV_U is an illegal value for MPP if U-mode is not implemente=
-d.
->
-> Regards,
->
-> Weiwei Li
->
-> So it should just always be 0 (PRV_U is 0)
->
-> Alistair
->
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Signed-off-by: Yi Chen <chenyi2000@zju.edu.cn>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > ---
->  target/riscv/op_helper.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+> Add reviewed-by
+> Replace "env->priv <=3D PRV_S && riscv_cpu_virt_enabled(env)" with "riscv=
+_cpu_virt_enabled(env)"
+>  target/riscv/csr.c       | 56 +++++++++++++++++++++++++---------------
+>  target/riscv/op_helper.c | 12 ++++-----
+>  2 files changed, 41 insertions(+), 27 deletions(-)
 >
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index d522efc0b6..26a02e57bd 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -443,6 +443,30 @@ static RISCVException sstc_32(CPURISCVState *env, in=
+t csrno)
+>      return sstc(env, csrno);
+>  }
+>
+> +static RISCVException satp(CPURISCVState *env, int csrno)
+> +{
+> +    if (env->priv =3D=3D PRV_S && !riscv_cpu_virt_enabled(env) &&
+> +        get_field(env->mstatus, MSTATUS_TVM)) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +    if (env->priv =3D=3D PRV_S && riscv_cpu_virt_enabled(env) &&
+> +        get_field(env->hstatus, HSTATUS_VTVM)) {
+> +        return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> +    }
+> +
+> +    return smode(env, csrno);
+> +}
+> +
+> +static RISCVException hgatp(CPURISCVState *env, int csrno)
+> +{
+> +    if (env->priv =3D=3D PRV_S && !riscv_cpu_virt_enabled(env) &&
+> +        get_field(env->mstatus, MSTATUS_TVM)) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +
+> +    return hmode(env, csrno);
+> +}
+> +
+>  /* Checks if PointerMasking registers could be accessed */
+>  static RISCVException pointer_masking(CPURISCVState *env, int csrno)
+>  {
+> @@ -2655,13 +2679,7 @@ static RISCVException read_satp(CPURISCVState *env=
+, int csrno,
+>          *val =3D 0;
+>          return RISCV_EXCP_NONE;
+>      }
+> -
+> -    if (env->priv =3D=3D PRV_S && get_field(env->mstatus, MSTATUS_TVM)) =
+{
+> -        return RISCV_EXCP_ILLEGAL_INST;
+> -    } else {
+> -        *val =3D env->satp;
+> -    }
+> -
+> +    *val =3D env->satp;
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> @@ -2684,18 +2702,14 @@ static RISCVException write_satp(CPURISCVState *e=
+nv, int csrno,
+>      }
+>
+>      if (vm && mask) {
+> -        if (env->priv =3D=3D PRV_S && get_field(env->mstatus, MSTATUS_TV=
+M)) {
+> -            return RISCV_EXCP_ILLEGAL_INST;
+> -        } else {
+> -            /*
+> -             * The ISA defines SATP.MODE=3DBare as "no translation", but=
+ we still
+> -             * pass these through QEMU's TLB emulation as it improves
+> -             * performance.  Flushing the TLB on SATP writes with paging
+> -             * enabled avoids leaking those invalid cached mappings.
+> -             */
+> -            tlb_flush(env_cpu(env));
+> -            env->satp =3D val;
+> -        }
+> +        /*
+> +         * The ISA defines SATP.MODE=3DBare as "no translation", but we =
+still
+> +         * pass these through QEMU's TLB emulation as it improves
+> +         * performance.  Flushing the TLB on SATP writes with paging
+> +         * enabled avoids leaking those invalid cached mappings.
+> +         */
+> +        tlb_flush(env_cpu(env));
+> +        env->satp =3D val;
+>      }
+>      return RISCV_EXCP_NONE;
+>  }
+> @@ -4180,7 +4194,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
+>                           .min_priv_ver =3D PRIV_VERSION_1_12_0 },
+>
+>      /* Supervisor Protection and Translation */
+> -    [CSR_SATP]     =3D { "satp",     smode, read_satp,     write_satp   =
+  },
+> +    [CSR_SATP]     =3D { "satp",     satp, read_satp,     write_satp    =
+ },
+>
+>      /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
+>      [CSR_SISELECT]   =3D { "siselect",   aia_smode, NULL, NULL, rmw_xise=
+lect },
+> @@ -4217,7 +4231,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
+>                            .min_priv_ver =3D PRIV_VERSION_1_12_0         =
+       },
+>      [CSR_HGEIP]       =3D { "hgeip",       hmode,   read_hgeip,
+>                            .min_priv_ver =3D PRIV_VERSION_1_12_0         =
+       },
+> -    [CSR_HGATP]       =3D { "hgatp",       hmode,   read_hgatp,   write_=
+hgatp,
+> +    [CSR_HGATP]       =3D { "hgatp",       hgatp,   read_hgatp,   write_=
+hgatp,
+>                            .min_priv_ver =3D PRIV_VERSION_1_12_0         =
+       },
+>      [CSR_HTIMEDELTA]  =3D { "htimedelta",  hmode,   read_htimedelta,
+>                            write_htimedelta,
 > diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 84ee018f7d..991f06d98d 100644
+> index 84ee018f7d..8e16020f8d 100644
 > --- a/target/riscv/op_helper.c
 > +++ b/target/riscv/op_helper.c
-> @@ -339,7 +339,8 @@ target_ulong helper_mret(CPURISCVState *env)
->      mstatus =3D set_field(mstatus, MSTATUS_MIE,
->                          get_field(mstatus, MSTATUS_MPIE));
->      mstatus =3D set_field(mstatus, MSTATUS_MPIE, 1);
-> -    mstatus =3D set_field(mstatus, MSTATUS_MPP, PRV_U);
-> +    mstatus =3D set_field(mstatus, MSTATUS_MPP,
-> +                        riscv_has_ext(env, RVU) ? PRV_U : PRV_M);
->      mstatus =3D set_field(mstatus, MSTATUS_MPV, 0);
->      if ((env->priv_ver >=3D PRIV_VERSION_1_12_0) && (prev_priv !=3D PRV_=
-M)) {
->          mstatus =3D set_field(mstatus, MSTATUS_MPRV, 0);
+> @@ -381,12 +381,12 @@ void helper_wfi(CPURISCVState *env)
+>  void helper_tlb_flush(CPURISCVState *env)
+>  {
+>      CPUState *cs =3D env_cpu(env);
+> -    if (!(env->priv >=3D PRV_S) ||
+> -        (env->priv =3D=3D PRV_S &&
+> -         get_field(env->mstatus, MSTATUS_TVM))) {
+> +    if (!riscv_cpu_virt_enabled(env) &&
+> +        (env->priv =3D=3D PRV_U ||
+> +         (env->priv =3D=3D PRV_S && get_field(env->mstatus, MSTATUS_TVM)=
+))) {
+>          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+> -    } else if (riscv_has_ext(env, RVH) && riscv_cpu_virt_enabled(env) &&
+> -               get_field(env->hstatus, HSTATUS_VTVM)) {
+> +    } else if (riscv_cpu_virt_enabled(env) &&
+> +               (env->priv =3D=3D PRV_U || get_field(env->hstatus, HSTATU=
+S_VTVM))) {
+>          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GE=
+TPC());
+>      } else {
+>          tlb_flush(cs);
+> @@ -403,7 +403,7 @@ void helper_hyp_tlb_flush(CPURISCVState *env)
+>  {
+>      CPUState *cs =3D env_cpu(env);
+>
+> -    if (env->priv =3D=3D PRV_S && riscv_cpu_virt_enabled(env)) {
+> +    if (riscv_cpu_virt_enabled(env)) {
+>          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GE=
+TPC());
+>      }
+>
 > --
-> 2.25.1
+> 2.39.2
 >
 >
 
