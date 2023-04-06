@@ -1,61 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkDYu-0001bT-Nm
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 20:33:12 -0400
+	id 1pkDcK-0002ZX-Sl
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 20:36:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkDYt-0001bG-U8; Wed, 05 Apr 2023 20:33:11 -0400
-Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
+ id 1pkDcJ-0002ZA-Ds; Wed, 05 Apr 2023 20:36:43 -0400
+Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkDYs-0006fn-4h; Wed, 05 Apr 2023 20:33:11 -0400
-Received: by mail-vs1-xe2d.google.com with SMTP id dc30so32560733vsb.3;
- Wed, 05 Apr 2023 17:33:09 -0700 (PDT)
+ id 1pkDcH-0008E3-Ix; Wed, 05 Apr 2023 20:36:43 -0400
+Received: by mail-ua1-x934.google.com with SMTP id q8so19165314uas.7;
+ Wed, 05 Apr 2023 17:36:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680741188;
+ d=gmail.com; s=20210112; t=1680741400;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YLxE659lpN2kkLFOSrQQzfGrKFWvl7xR3UECsik87dk=;
- b=FaPFnHz+RJgbtgMxlz+9AwMuIKlEsPl4t9+OJlckeQ9lcOtnSThLcnP3aum7SeubNb
- OHrvGvTPb4lAeKOGrKXdUN5dVR7Qqqy/Ea311UmDLv+DbAxCnZ3086zSAXMXq1nHGsNU
- LS7Lu1+0bFXasC10H7QGYQh4BUTzQ9Uqdzn/YTs/7iG5fIDhOHVocJ/kvluGAPKLxtVj
- igIjZqBIEJLLTaOGG0NjtAjDnIp+Wf+8RwiW/BdhG/Vgjzn8Eo4bEbp8XzfcYWC8lz74
- IospF/w6JIPZctBsNnrCyuSrNch3hTSoDYyhbS0AMJPPbMwThCR3AhcNK1cpH2CFj97r
- BrkA==
+ bh=xapiIqMchVoMFAb68AR2e798+3Df9tFQ1WHgVma4Tdk=;
+ b=bHfSasUXszr0nSAAzmrfT68jtSuKYIK28+CUuxZG97PqPU07dYP3eiS4WuwQ0V5x+J
+ 2KEn/fYr6IZxDgLRajIMaP0y+yOiYQTu4wwqQPQJKnhaqXaOF0xMS58/Equ8T1TC0aAi
+ VyHiHwi3huEgVrfyIgTncic99l1q8INBi/ZduIUJcD+9d9Ie6AqSao168mVlnEKLIe3s
+ vucZ02c7eboomzzCPhLZ/8x6mShb3caIYV1oXrewiKLdBm36yx5gndc9ZbtOB6OAm2Kb
+ Ol3IuGOtmOjhbdDAyB7hCeFLba5pNn7P6RkS9YOL9U3O7PpT0XaHsooj2LnT705ec+sJ
+ Kv6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680741188;
+ d=1e100.net; s=20210112; t=1680741400;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YLxE659lpN2kkLFOSrQQzfGrKFWvl7xR3UECsik87dk=;
- b=Cwifmm/p8UMQ0wrP35bjErbBQcTo8cNpeaiAgBrg/gCbAQBsFoQzBQKRYdrQVoBJHW
- jO8o2dUofCdAzIa5YqjOFSMbGFLIbtyQbajugb0iBR/XhNp35Tx/nSN++5PSQ8uAmYgO
- oINSPOZzL9o4qzxn3ZFzpLJefvoXH9V/pedOyVnqW1qqsBteEoGRkQteTkyZacfqHe5b
- 6PjPuU3cnyLE4+Fn/RpEKKheQow2XnArd3lqpZl+8te6BxXHx1jUC+xLnBjQVG/2GK0/
- myFyqiwPvfjSa27LDV7Xcb79TCNJHcwTML5MAMqsJ6Fgf1JXrOWfvVxDo/H96qQMeimt
- wBUg==
-X-Gm-Message-State: AAQBX9ddbdemFxeNNFy+8oKTr4gPJciTT6E50iPLAvaRePGT+aciei6C
- yVVrLiMSeBIieNL3T9NWy/kSoF8IOaXMvMvm8Js=
-X-Google-Smtp-Source: AKy350Ziel1LcYaquGWxcHMPyaYx8oBvgqjfm+mJ13OIM16tbUWwiuTnH5K8TRmrqcQKW9RevGsKEVEasYGBcLS8zDY=
-X-Received: by 2002:a67:ca90:0:b0:422:1654:7737 with SMTP id
- a16-20020a67ca90000000b0042216547737mr6379982vsl.3.1680741188413; Wed, 05 Apr
- 2023 17:33:08 -0700 (PDT)
+ bh=xapiIqMchVoMFAb68AR2e798+3Df9tFQ1WHgVma4Tdk=;
+ b=l50WVMk9wnWMioonMVfZWfegLHgRPGEIj+gkoCoYKOgiVBp4VYHado6yivlWQV4zFS
+ JafruTjB7gWv2JtdkF3SIz40wPXrITm0SJlIjrSl9XRB5k6CuMOxME69+MQ0dj+98vL+
+ XoyF/Gbr178ysPHRMEb5veCY6uQzw4ZoZR3ZFOFFvj3ABL48qzSHrELft3DySVPhgTY/
+ BCS7JXLb+/KRtKkswoCQyscRQl6mPV3wSsZhrar65kdNNwwfDr63w9BE8d7ErwPEXj4o
+ M3eVUcdONWGnu9ZVQf8KdExSSX5nUuBXqzriCTFPDivu02oi3Osoc8CdACOukn/ABK6E
+ zu0Q==
+X-Gm-Message-State: AAQBX9dBCtZ0OUJR0dXYvrV/dgJXmgZSE7hCnpf8cUxGtv/th+J9T6Jl
+ KmXfoLs4kwRvwHtorUi8qhWsddxzEnhHfyfO7F0=
+X-Google-Smtp-Source: AKy350YJVrEFjpHz17RRxw7a7MiJeoXcDwqYVXkmJeivRaAAXvSSOoJmEDUeTIdX/HnMrLNBH6fHu7rtRNcrp4B/jrM=
+X-Received: by 2002:a1f:214e:0:b0:43c:6ef1:84d3 with SMTP id
+ h75-20020a1f214e000000b0043c6ef184d3mr6065405vkh.0.1680741399819; Wed, 05 Apr
+ 2023 17:36:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230329172903.636383-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20230329172903.636383-1-dbarboza@ventanamicro.com>
+References: <20230405095720.75848-1-liweiwei@iscas.ac.cn>
+ <20230405095720.75848-2-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230405095720.75848-2-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Apr 2023 10:32:42 +1000
-Message-ID: <CAKmqyKOE=mrevVh1CDQtuLWsXQ9VCGDyyavtSbqDievYQhqrHw@mail.gmail.com>
-Subject: Re: [PATCH v3 00/20] remove MISA ext_N flags from cpu->cfg,
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
+Date: Thu, 6 Apr 2023 10:36:13 +1000
+Message-ID: <CAKmqyKNCUY_AeUjUh=jbZ7aCJcS5TG7xgMpvUx7rQUuGZkv1qg@mail.gmail.com>
+Subject: Re: [PATCH v4 1/1] hw/riscv: Add signature dump function for spike to
+ run ACT tests
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -76,60 +78,173 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 00:33:12 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 00:36:43 -0000
 
-On Thu, Mar 30, 2023 at 3:31=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Wed, Apr 5, 2023 at 7:58=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wro=
+te:
 >
-> Hi,
+> Add signature and signature-granularity properties in spike to specify th=
+e target
+> signatrue file and the line size for signature data.
 >
-> This new version has a new patch (3) that removes the 'multi_letter'
-> attribute from isa_ext_data that became redundant after the changes made
-> in patch 2. The change was proposed by Weiwei Li in the v2.
+> Recgonize the signature section between begin_signature and end_signature=
+ symbols
+> when loading elf of ACT tests. Then dump signature data in signature sect=
+ion just
+> before the ACT tests exit.
 >
-> All patches but patch 3 are acked.
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
+>  hw/char/riscv_htif.c         | 44 +++++++++++++++++++++++++++++++++++-
+>  hw/riscv/spike.c             | 13 +++++++++++
+>  include/hw/char/riscv_htif.h |  3 +++
+>  3 files changed, 59 insertions(+), 1 deletion(-)
 >
-> Changes from v2:
-> - patch 3 (new)
->   - remove 'multi_letter' from isa_ext_data
-> - v2 link: https://lists.gnu.org/archive/html/qemu-devel/2023-03/msg06493=
-.html
+> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+> index 098de50e35..37d3ccc76b 100644
+> --- a/hw/char/riscv_htif.c
+> +++ b/hw/char/riscv_htif.c
+> @@ -29,6 +29,8 @@
+>  #include "chardev/char-fe.h"
+>  #include "qemu/timer.h"
+>  #include "qemu/error-report.h"
+> +#include "exec/address-spaces.h"
+> +#include "sysemu/dma.h"
 >
-> Daniel Henrique Barboza (20):
->   target/riscv: sync env->misa_ext* with cpu->cfg in realize()
->   target/riscv: remove MISA properties from isa_edata_arr[]
->   target/riscv/cpu.c: remove 'multi_letter' from isa_ext_data
->   target/riscv: introduce riscv_cpu_add_misa_properties()
->   target/riscv: remove cpu->cfg.ext_a
->   target/riscv: remove cpu->cfg.ext_c
->   target/riscv: remove cpu->cfg.ext_d
->   target/riscv: remove cpu->cfg.ext_f
->   target/riscv: remove cpu->cfg.ext_i
->   target/riscv: remove cpu->cfg.ext_e
->   target/riscv: remove cpu->cfg.ext_m
->   target/riscv: remove cpu->cfg.ext_s
->   target/riscv: remove cpu->cfg.ext_u
->   target/riscv: remove cpu->cfg.ext_h
->   target/riscv: remove cpu->cfg.ext_j
->   target/riscv: remove cpu->cfg.ext_v
->   target/riscv: remove riscv_cpu_sync_misa_cfg()
->   target/riscv: remove cfg.ext_g setup from rv64_thead_c906_cpu_init()
->   target/riscv: add RVG and remove cpu->cfg.ext_g
->   target/riscv/cpu.c: redesign register_cpu_props()
+>  #define RISCV_DEBUG_HTIF 0
+>  #define HTIF_DEBUG(fmt, ...)                                            =
+       \
+> @@ -51,7 +53,10 @@
+>  /* PK system call number */
+>  #define PK_SYS_WRITE            64
+>
+> -static uint64_t fromhost_addr, tohost_addr;
+> +const char *sig_file;
+> +uint8_t line_size =3D 16;
+> +
+> +static uint64_t fromhost_addr, tohost_addr, begin_sig_addr, end_sig_addr=
+;
+>
+>  void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_=
+value,
+>                            uint64_t st_size)
+> @@ -68,6 +73,10 @@ void htif_symbol_callback(const char *st_name, int st_=
+info, uint64_t st_value,
+>              error_report("HTIF tohost must be 8 bytes");
+>              exit(1);
+>          }
+> +    } else if (strcmp("begin_signature", st_name) =3D=3D 0) {
+> +        begin_sig_addr =3D st_value;
+> +    } else if (strcmp("end_signature", st_name) =3D=3D 0) {
+> +        end_sig_addr =3D st_value;
+>      }
+>  }
+>
+> @@ -163,6 +172,39 @@ static void htif_handle_tohost_write(HTIFState *s, u=
+int64_t val_written)
+>              if (payload & 0x1) {
+>                  /* exit code */
+>                  int exit_code =3D payload >> 1;
+> +
+> +                /*
+> +                 * Dump signature data if sig_file is specified and
+> +                 * begin/end_signature symbols exist.
+> +                 */
+> +                if (sig_file && begin_sig_addr && end_sig_addr) {
 
-Thanks for the cleanup. Do you mind rebasing it on
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next then I
-will apply it
+There is no guarantee that these are initalised to zero, so this isn't
+really checking anything is it?
 
 Alistair
 
+> +                    uint64_t sig_len =3D end_sig_addr - begin_sig_addr;
+> +                    char *sig_data =3D g_malloc(sig_len);
+> +                    dma_memory_read(&address_space_memory, begin_sig_add=
+r,
+> +                                    sig_data, sig_len, MEMTXATTRS_UNSPEC=
+IFIED);
+> +                    FILE *signature =3D fopen(sig_file, "w");
+> +                    if (signature =3D=3D NULL) {
+> +                        error_report("Unable to open %s with error %s",
+> +                                     sig_file, strerror(errno));
+> +                        exit(1);
+> +                    }
+> +
+> +                    for (int i =3D 0; i < sig_len; i +=3D line_size) {
+> +                        for (int j =3D line_size; j > 0; j--) {
+> +                            if (i + j <=3D sig_len) {
+> +                                fprintf(signature, "%02x",
+> +                                        sig_data[i + j - 1] & 0xff);
+> +                            } else {
+> +                                fprintf(signature, "%02x", 0);
+> +                            }
+> +                        }
+> +                        fprintf(signature, "\n");
+> +                    }
+> +
+> +                    fclose(signature);
+> +                    g_free(sig_data);
+> +                }
+> +
+>                  exit(exit_code);
+>              } else {
+>                  uint64_t syscall[8];
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index a584d5b3a2..2c5546560a 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -332,6 +332,11 @@ static void spike_board_init(MachineState *machine)
+>                   htif_custom_base);
+>  }
 >
->  target/riscv/cpu.c | 386 +++++++++++++++++++++++----------------------
->  target/riscv/cpu.h |  19 +--
->  2 files changed, 202 insertions(+), 203 deletions(-)
+> +static void spike_set_signature(Object *obj, const char *val, Error **er=
+rp)
+> +{
+> +    sig_file =3D g_strdup(val);
+> +}
+> +
+>  static void spike_machine_instance_init(Object *obj)
+>  {
+>  }
+> @@ -350,6 +355,14 @@ static void spike_machine_class_init(ObjectClass *oc=
+, void *data)
+>      mc->get_default_cpu_node_id =3D riscv_numa_get_default_cpu_node_id;
+>      mc->numa_mem_supported =3D true;
+>      mc->default_ram_id =3D "riscv.spike.ram";
+> +    object_class_property_add_str(oc, "signature", NULL, spike_set_signa=
+ture);
+> +    object_class_property_set_description(oc, "signature",
+> +                                          "File to write ACT test signat=
+ure");
+> +    object_class_property_add_uint8_ptr(oc, "signature-granularity",
+> +                                        &line_size, OBJ_PROP_FLAG_WRITE)=
+;
+> +    object_class_property_set_description(oc, "signature-granularity",
+> +                                          "Size of each line in ACT sign=
+ature "
+> +                                          "file");
+>  }
 >
+>  static const TypeInfo spike_machine_typeinfo =3D {
+> diff --git a/include/hw/char/riscv_htif.h b/include/hw/char/riscv_htif.h
+> index 5958c5b986..df493fdf6b 100644
+> --- a/include/hw/char/riscv_htif.h
+> +++ b/include/hw/char/riscv_htif.h
+> @@ -40,6 +40,9 @@ typedef struct HTIFState {
+>      uint64_t pending_read;
+>  } HTIFState;
+>
+> +extern const char *sig_file;
+> +extern uint8_t line_size;
+> +
+>  /* HTIF symbol callback */
+>  void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_=
+value,
+>      uint64_t st_size);
 > --
-> 2.39.2
+> 2.25.1
 >
 >
 
