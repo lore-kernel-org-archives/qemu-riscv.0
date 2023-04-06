@@ -1,16 +1,16 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkK0m-0006qL-1d
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Apr 2023 03:26:27 -0400
+	id 1pkK0r-0006rF-W4
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Apr 2023 03:26:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pkK0a-0006mW-3w; Thu, 06 Apr 2023 03:26:12 -0400
+ id 1pkK0a-0006mc-8B; Thu, 06 Apr 2023 03:26:12 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pkK0W-0000aU-5F; Thu, 06 Apr 2023 03:26:11 -0400
+ id 1pkK0W-0000aV-5P; Thu, 06 Apr 2023 03:26:11 -0400
 Received: from localhost.localdomain (unknown [180.175.29.170])
- by APP-05 (Coremail) with SMTP id zQCowADHzMwGdC5kQlGzDg--.14061S3;
+ by APP-05 (Coremail) with SMTP id zQCowADHzMwGdC5kQlGzDg--.14061S4;
  Thu, 06 Apr 2023 15:26:00 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
@@ -19,32 +19,31 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v2 1/2] target/riscv: Fix the mstatus.MPP value after
- executing MRET
-Date: Thu,  6 Apr 2023 15:25:54 +0800
-Message-Id: <20230406072555.21927-2-liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 2/2] target/riscv: Legalize MPP value in write_mstatus
+Date: Thu,  6 Apr 2023 15:25:55 +0800
+Message-Id: <20230406072555.21927-3-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230406072555.21927-1-liweiwei@iscas.ac.cn>
 References: <20230406072555.21927-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowADHzMwGdC5kQlGzDg--.14061S3
-X-Coremail-Antispam: 1UD129KBjvdXoWrKrW5AF1fZw47JryrAr43Wrg_yoWDKwbE9r
- y09Fykur18W3WIyFZ5AF1rGryUWFykXFnFkw12kw13ua40ga4fCw1UWF1rGw1UuF4DXan3
- Cwnaq34akF17XjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUb6AFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUGwA2048vs2IY02
- 0Ec7CjxVAFwI0_JFI_Gr1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
- wVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1l84
- ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2AI
- xVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20x
- vE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xv
- r2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04
- v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_
- Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x
- 0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8
- JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIx
- AIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbec_DUUUUU=
+X-CM-TRANSID: zQCowADHzMwGdC5kQlGzDg--.14061S4
+X-Coremail-Antispam: 1UD129KBjvJXoWxJr1fGrykWF4DJr4UXr43KFg_yoW8Kw4fpr
+ WkC3y3GrWDJa9Fqa4fXr48WF15ArWxGrWUCan7Jw48Kw4rJrZ0kF1Dt3y3uF1DWFyxWr1j
+ 93WDZ3s8AF47AaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBE14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
+ x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
+ 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
+ 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+ IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+ Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
+ xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
+ 6r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2
+ Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
+ Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMI
+ IF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUc6pPUUUUU
  =
 X-Originating-IP: [180.175.29.170]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
@@ -69,30 +68,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 06 Apr 2023 07:26:12 -0000
 
-The MPP will be set to the least-privileged supported mode (U if
-U-mode is implemented, else M).
+mstatus.MPP field is a WARL field since priv version 1.11, so we
+remain it unchanged if an invalid value is written into it. And
+after this, RVH shouldn't be passed to riscv_cpu_set_mode().
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/op_helper.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ target/riscv/cpu_helper.c |  5 +----
+ target/riscv/csr.c        | 18 ++++++++++++++++++
+ 2 files changed, 19 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index ec9a384772..b8a03afebb 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -338,7 +338,8 @@ target_ulong helper_mret(CPURISCVState *env)
-     mstatus = set_field(mstatus, MSTATUS_MIE,
-                         get_field(mstatus, MSTATUS_MPIE));
-     mstatus = set_field(mstatus, MSTATUS_MPIE, 1);
--    mstatus = set_field(mstatus, MSTATUS_MPP, PRV_U);
-+    mstatus = set_field(mstatus, MSTATUS_MPP,
-+                        riscv_has_ext(env, RVU) ? PRV_U : PRV_M);
-     mstatus = set_field(mstatus, MSTATUS_MPV, 0);
-     if ((env->priv_ver >= PRIV_VERSION_1_12_0) && (prev_priv != PRV_M)) {
-         mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 2310c7905f..6148f221c3 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -647,12 +647,9 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
+ 
+ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+ {
+-    if (newpriv > PRV_M) {
++    if (newpriv > PRV_M || newpriv == PRV_H) {
+         g_assert_not_reached();
+     }
+-    if (newpriv == PRV_H) {
+-        newpriv = PRV_U;
+-    }
+     if (icount_enabled() && newpriv != env->priv) {
+         riscv_itrigger_update_priv(env);
+     }
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index e0b871f6dc..f3ae726853 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1230,6 +1230,18 @@ static bool validate_vm(CPURISCVState *env, target_ulong vm)
+            satp_mode_max_from_map(riscv_cpu_cfg(env)->satp_mode.map);
+ }
+ 
++static target_ulong legalize_mpp(CPURISCVState *env, target_ulong old_mpp,
++                                 target_ulong val)
++{
++    target_ulong new_mpp = get_field(val, MSTATUS_MPP);
++    bool mpp_invalid = (new_mpp == PRV_S && !riscv_has_ext(env, RVS)) ||
++                       (new_mpp == PRV_U && !riscv_has_ext(env, RVU)) ||
++                       (new_mpp == PRV_H);
++
++    /* Remain field unchanged if new_mpp value is invalid */
++    return mpp_invalid ? set_field(val, MSTATUS_MPP, old_mpp) : val;
++}
++
+ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+                                     target_ulong val)
+ {
+@@ -1237,6 +1249,12 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+     uint64_t mask = 0;
+     RISCVMXL xl = riscv_cpu_mxl(env);
+ 
++    /*
++     * MPP field have been made WARL since priv version 1.11. However,
++     * legalization for it will not break any software running on 1.10.
++     */
++    val = legalize_mpp(env, get_field(mstatus, MSTATUS_MPP), val);
++
+     /* flush tlb on mstatus fields that affect VM */
+     if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
+             MSTATUS_MPRV | MSTATUS_SUM)) {
 -- 
 2.25.1
 
