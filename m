@@ -1,68 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkETO-0004f4-2S
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 21:31:34 -0400
+	id 1pkEXI-00068n-Pf
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 21:35:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkETM-0004er-Kh; Wed, 05 Apr 2023 21:31:32 -0400
-Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkETJ-0003zr-QV; Wed, 05 Apr 2023 21:31:32 -0400
-Received: by mail-vs1-xe2a.google.com with SMTP id h27so33180750vsa.1;
- Wed, 05 Apr 2023 18:31:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680744688;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ctUs3MzTui+okTJ3mCbg4M/Da7D0SyDITyJTP6DgU68=;
- b=Z645zwmtXhQofx6XTJ/8vg++QXVDGvzBslux+l4lMLb8USVI/Vmhgr4/+rd9663kPa
- J4uWKh3OdZgfGUjIraUAL6RJ6IJKdvNBGia5/DQzZMuX4Ty1BGtNlOBIDut9xejRjxrg
- KzpkkdQlWpnOa41rOo8j2GcnR6SdoXMTAoVO4GOr4gqaFBeNzx6fHVfvkr7ZsrTHRqf3
- ph8czNGBMOkc4H6yRiXDaIHrFy3cknfqNXwXKlbed4U3PP3oeu9ilCNXdUWzF4YAqkGo
- cw59xvRAbwyRXh6b6/nSNVi1ssRjL3btD7GvClnFpyMHb0jDfGf3lGTK0vtVhU3yBprt
- MQ+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680744688;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ctUs3MzTui+okTJ3mCbg4M/Da7D0SyDITyJTP6DgU68=;
- b=oBSv4SE+4X86azmt7Vwa/UzF8gc7jjZKBi4xmqWf6AKpPEUVdJwc0bPBrbSS3QOX5u
- cvHiEpvN2TV7EWfOpMNTqzDVSaFi4P25opH9Hm6XL+25bHwQrn+P1ru3W/9Qo6Zj4S4t
- WUQ1abWbmsf48eG5RVCUAqE8tTIwrk33WEjeJHiGfuQ/4aO0/1G2KYwz3tEfRc6MOdNU
- AnrfjfH6F/0o1XA7pru4I9NwYgP8/Of+S7T/335whhRE4K9lrZ05jb0jZ7/kF6S9HWhr
- YUHip/XCi2g9c5CStLGBKGEDA6MCrKU9YaLDrYuSpt5vlCeLWmQ/nIp2pKejWWqXXWx4
- p8LQ==
-X-Gm-Message-State: AAQBX9fqvSvnCGGt19t8wbbzTW7sNTaJ/gOWAEzd8p/+Zwvz88CsL2Bb
- Sw1QARjtafNN6iXYFwPU2uu0EQYosc86f3DIqxA=
-X-Google-Smtp-Source: AKy350ZSOdGjn9lZY5KX46zGRZ887uhpiSg4dInva2elGIxxO4/q/hkZhD17pyx6ImWDGY+6mZI3O87Ivl7Fwg6kmrY=
-X-Received: by 2002:a05:6102:3d29:b0:425:ddcf:69b3 with SMTP id
- i41-20020a0561023d2900b00425ddcf69b3mr4783021vsv.0.1680744687927; Wed, 05 Apr
- 2023 18:31:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pkEXG-00068N-Tb; Wed, 05 Apr 2023 21:35:34 -0400
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pkEXE-0000bH-2x; Wed, 05 Apr 2023 21:35:34 -0400
+Received: from [192.168.0.120] (unknown [180.175.29.170])
+ by APP-01 (Coremail) with SMTP id qwCowACHEdTZIS5kCgoGAA--.1609S2;
+ Thu, 06 Apr 2023 09:35:22 +0800 (CST)
+Message-ID: <9ceb5823-901f-b8ec-ddcd-ce4a500fcf72@iscas.ac.cn>
+Date: Thu, 6 Apr 2023 09:35:21 +0800
 MIME-Version: 1.0
-References: <20230405095720.75848-1-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230405095720.75848-1-liweiwei@iscas.ac.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Apr 2023 11:31:01 +1000
-Message-ID: <CAKmqyKMpjhnVjq=mXSx_te6OA-29uL0iM4m3a6Ptq8LoHnB0TA@mail.gmail.com>
-Subject: Re: [PATCH v4 0/1] hw/riscv: Add ACT related support
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+Subject: Re: [PATCH 2/2] target/riscv: Legalize MPP value in write_mstatus
+Content-Language: en-US
+To: Alistair Francis <alistair23@gmail.com>
+References: <20230330135818.68417-1-liweiwei@iscas.ac.cn>
+ <20230330135818.68417-3-liweiwei@iscas.ac.cn>
+ <CAKmqyKNyfZoff5woowdVvf9WH_AnTPsD3ES7rkgubLKM0E=9Rg@mail.gmail.com>
+From: liweiwei <liweiwei@iscas.ac.cn>
+In-Reply-To: <CAKmqyKNyfZoff5woowdVvf9WH_AnTPsD3ES7rkgubLKM0E=9Rg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: qwCowACHEdTZIS5kCgoGAA--.1609S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxCrWrKF4xuF18Gr47KFykZrb_yoW5WF4fpr
+ WkKFW3GFWDJrZFg3WSqF48WF1YyrW3KrWUCan3tw4UJws5JrZYkF1Dt3y3Cr1DZFyxWr1F
+ 9asru3s8AF47ZFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9F14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F
+ 4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+ 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
+ 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
+ n2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFV
+ Cjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWl
+ x4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r
+ 1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_
+ JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcS
+ sGvfC2KfnxnUUI43ZEXa7VUbXdbUUUUUU==
+X-Originating-IP: [180.175.29.170]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -32
+X-Spam_score: -3.3
+X-Spam_bar: ---
+X-Spam_report: (-3.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-1.355,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -76,49 +70,90 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 01:31:32 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 01:35:35 -0000
 
-On Wed, Apr 5, 2023 at 7:58=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wro=
-te:
->
-> ACT tests play an important role in riscv tests. This patch tries to
-> add related support to run ACT tests.
->
-> The port is available here:
-> https://github.com/plctlab/plct-qemu/tree/plct-act-upstream-v2
->
-> The ACT tests can be run on qemu-system-riscv32/64 with machine argument
-> "-M spike,signature=3D<FILE>,signature-granularity=3D<granurity>".
->
-> v4:
-> * update error message for opening signature file failed
-> * add check for existence of begin/end_signature symbols when trying to u=
-pdate signature file.
->
-> v3:
-> * move definition of signature related parameters from spike.c to riscv_h=
-tif.c
->
-> v2=EF=BC=9A
-> * move "extern ..." declaration from riscv_htif.c to riscv_htif.h
->
-> Weiwei Li (1):
->   hw/riscv: Add signature dump function for spike to run ACT tests
 
-Thanks!
+On 2023/4/6 09:26, Alistair Francis wrote:
+> On Thu, Mar 30, 2023 at 11:59 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+>> mstatus.MPP field is a WARL field, so we remain it unchanged if an
+> Only since version 1.11 of the priv spec and we do still support priv 1.10.
+>
+> I think it's ok to make this change for all priv versions, as it won't
+> break any software running 1.10, but it's worth adding a comment or at
+> least a mention in the commit message.
 
-Applied to riscv-to-apply.next
+OK. I'll add it in next version.
 
-Alistair
+Regards,
+
+Weiwei Li
 
 >
->  hw/char/riscv_htif.c         | 44 +++++++++++++++++++++++++++++++++++-
->  hw/riscv/spike.c             | 13 +++++++++++
->  include/hw/char/riscv_htif.h |  3 +++
->  3 files changed, 59 insertions(+), 1 deletion(-)
+> Alistair
 >
-> --
-> 2.25.1
->
->
+>> invalid value is written into it. And after this, RVH shouldn't be
+>> passed to riscv_cpu_set_mode().
+>>
+>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+>> ---
+>>   target/riscv/cpu_helper.c |  5 +----
+>>   target/riscv/csr.c        | 14 ++++++++++++++
+>>   2 files changed, 15 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>> index f88c503cf4..46baf3ab7c 100644
+>> --- a/target/riscv/cpu_helper.c
+>> +++ b/target/riscv/cpu_helper.c
+>> @@ -659,12 +659,9 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
+>>
+>>   void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+>>   {
+>> -    if (newpriv > PRV_M) {
+>> +    if (newpriv > PRV_M || newpriv == PRV_H) {
+>>           g_assert_not_reached();
+>>       }
+>> -    if (newpriv == PRV_H) {
+>> -        newpriv = PRV_U;
+>> -    }
+>>       if (icount_enabled() && newpriv != env->priv) {
+>>           riscv_itrigger_update_priv(env);
+>>       }
+>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>> index d522efc0b6..a99026c3e8 100644
+>> --- a/target/riscv/csr.c
+>> +++ b/target/riscv/csr.c
+>> @@ -1238,6 +1238,18 @@ static bool validate_vm(CPURISCVState *env, target_ulong vm)
+>>       return (vm & 0xf) <= satp_mode_max_from_map(cpu->cfg.satp_mode.map);
+>>   }
+>>
+>> +static target_ulong legalize_mpp(CPURISCVState *env, target_ulong old_mpp,
+>> +                                 target_ulong val)
+>> +{
+>> +    target_ulong new_mpp = get_field(val, MSTATUS_MPP);
+>> +    bool mpp_invalid = (new_mpp == PRV_S && !riscv_has_ext(env, RVS)) ||
+>> +                       (new_mpp == PRV_U && !riscv_has_ext(env, RVU)) ||
+>> +                       (new_mpp == PRV_H);
+>> +
+>> +    /* Remain field unchanged if new_mpp value is invalid */
+>> +    return mpp_invalid ? set_field(val, MSTATUS_MPP, old_mpp) : val;
+>> +}
+>> +
+>>   static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>>                                       target_ulong val)
+>>   {
+>> @@ -1245,6 +1257,8 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>>       uint64_t mask = 0;
+>>       RISCVMXL xl = riscv_cpu_mxl(env);
+>>
+>> +    val = legalize_mpp(env, get_field(mstatus, MSTATUS_MPP), val);
+>> +
+>>       /* flush tlb on mstatus fields that affect VM */
+>>       if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
+>>               MSTATUS_MPRV | MSTATUS_SUM)) {
+>> --
+>> 2.25.1
+>>
+>>
+
 
