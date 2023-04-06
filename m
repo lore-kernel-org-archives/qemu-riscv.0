@@ -1,110 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkPZB-0000f2-FT
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Apr 2023 09:22:18 -0400
+	id 1pkTgn-0005wB-92
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Apr 2023 13:46:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frankja@linux.ibm.com>)
- id 1pkKbh-0007jT-3v; Thu, 06 Apr 2023 04:04:33 -0400
-Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]
- helo=mx0a-001b2d01.pphosted.com)
+ (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1pkTgl-0005va-TD
+ for qemu-riscv@nongnu.org; Thu, 06 Apr 2023 13:46:24 -0400
+Received: from 4.mo552.mail-out.ovh.net ([178.33.43.201])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frankja@linux.ibm.com>)
- id 1pkKbf-00029m-2A; Thu, 06 Apr 2023 04:04:32 -0400
-Received: from pps.filterd (m0098419.ppops.net [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3366VoEv029569; Thu, 6 Apr 2023 08:04:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=MrE4uEormCPNF2aheHPYCeZ1g12Sic721BFSzIfL51M=;
- b=IXhAMZMkTbmTyLCBtQem1Ln6b2O6w4wtWsLMojP95fdXbrTLI6xRcJVJjvcqTBSqLyp6
- suMaLi/C+pszkQDl71lAgRZtw2l+8k7b69fowZkhj018cVf4twnoRmKmV7Kac3pA9WXP
- iMvTws4o1SL/Q54VqvxSSeW55SRIsWLnKtxkhT8PlH3huDHv4gvlzD9PrBms3tfxy6Zp
- 0Yztfhc9vLCOByfVXuAF4qkK65sNkk5WjwW/PpcMyjWnYBQiWVsUYMjcCcjXiopRt39r
- p/1KCF925Q7i0qi9P7cjURglsQk+4qJCK2jWyVNBmAntKXezoOKuizKUO7IVd3PyIfHg pA== 
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3ps9un6byg-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 06 Apr 2023 08:04:26 +0000
-Received: from m0098419.ppops.net (m0098419.ppops.net [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 3367ElYM019708;
- Thu, 6 Apr 2023 08:04:25 GMT
-Received: from ppma06ams.nl.ibm.com (66.31.33a9.ip4.static.sl-reverse.com
- [169.51.49.102])
- by mx0b-001b2d01.pphosted.com (PPS) with ESMTPS id 3ps9un6bxg-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 06 Apr 2023 08:04:25 +0000
-Received: from pps.filterd (ppma06ams.nl.ibm.com [127.0.0.1])
- by ppma06ams.nl.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id 335Nxs3v004693;
- Thu, 6 Apr 2023 08:04:23 GMT
-Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
- by ppma06ams.nl.ibm.com (PPS) with ESMTPS id 3ppbvg439y-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 06 Apr 2023 08:04:23 +0000
-Received: from smtpav03.fra02v.mail.ibm.com (smtpav03.fra02v.mail.ibm.com
- [10.20.54.102])
- by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 33684HLD44696018
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 6 Apr 2023 08:04:17 GMT
-Received: from smtpav03.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id CA3E720043;
- Thu,  6 Apr 2023 08:04:17 +0000 (GMT)
-Received: from smtpav03.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id E14C120040;
- Thu,  6 Apr 2023 08:04:16 +0000 (GMT)
-Received: from [9.179.16.135] (unknown [9.179.16.135])
- by smtpav03.fra02v.mail.ibm.com (Postfix) with ESMTP;
- Thu,  6 Apr 2023 08:04:16 +0000 (GMT)
-Message-ID: <3fe240da-9a75-0e39-7762-cd91af9ed3f0@linux.ibm.com>
-Date: Thu, 6 Apr 2023 10:04:16 +0200
+ (Exim 4.90_1) (envelope-from <clg@kaod.org>) id 1pkTgj-00050v-KV
+ for qemu-riscv@nongnu.org; Thu, 06 Apr 2023 13:46:23 -0400
+Received: from mxplan5.mail.ovh.net (unknown [10.109.138.227])
+ by mo552.mail-out.ovh.net (Postfix) with ESMTPS id 4294527142;
+ Thu,  6 Apr 2023 17:46:11 +0000 (UTC)
+Received: from kaod.org (37.59.142.96) by DAG4EX2.mxp5.local (172.16.2.32)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.23; Thu, 6 Apr
+ 2023 19:46:10 +0200
+Authentication-Results: garm.ovh; auth=pass
+ (GARM-96R001bbd69b5d-5ba5-40e2-98d5-61c75b75d5d4,
+ FAD431FEE685CF753936F989CEAB98D84F5F9206) smtp.auth=clg@kaod.org
+X-OVh-ClientIp: 82.64.250.170
+Message-ID: <5b90b770-b420-1dab-401e-b1ed5b5d7e94@kaod.org>
+Date: Thu, 6 Apr 2023 19:46:09 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.1
-Subject: Re: [PATCH 10/10] hw/s390x: Rename pv.c -> pv-kvm.c
+Subject: Re: [PATCH 08/10] target/ppc: Restrict KVM-specific field from ArchCPU
 Content-Language: en-US
-To: Thomas Huth <thuth@redhat.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
- <philmd@linaro.org>,
- qemu-devel@nongnu.org, Claudio Imbrenda <imbrenda@linux.ibm.com>
-Cc: qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
- =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
- qemu-arm@nongnu.org, kvm@vger.kernel.org, qemu-ppc@nongnu.org,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ <qemu-devel@nongnu.org>
+CC: <qemu-s390x@nongnu.org>, <qemu-riscv@nongnu.org>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>, <qemu-arm@nongnu.org>, 
+ <kvm@vger.kernel.org>, <qemu-ppc@nongnu.org>, Daniel Henrique Barboza
+ <danielhb413@gmail.com>, David Gibson <david@gibson.dropbear.id.au>, Greg
+ Kurz <groug@kaod.org>
 References: <20230405160454.97436-1-philmd@linaro.org>
- <20230405160454.97436-11-philmd@linaro.org>
- <3cccc7e6-3a39-b3b4-feaf-85a3faa58570@redhat.com>
-From: Janosch Frank <frankja@linux.ibm.com>
-In-Reply-To: <3cccc7e6-3a39-b3b4-feaf-85a3faa58570@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: dGFDklUxK1mPdfJzLpXjzFcSYk_ZmlDd
-X-Proofpoint-GUID: Np6po_7yXNh0DAMOXfeAhoM8cvVtN9zQ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-06_02,2023-04-05_01,2023-02-09_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1011 malwarescore=0
- spamscore=0 bulkscore=0 mlxlogscore=925 mlxscore=0 adultscore=0
- priorityscore=1501 phishscore=0 suspectscore=0 impostorscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2303200000 definitions=main-2304060066
-Received-SPF: pass client-ip=148.163.158.5; envelope-from=frankja@linux.ibm.com;
- helo=mx0a-001b2d01.pphosted.com
-X-Spam_score_int: -33
-X-Spam_score: -3.4
-X-Spam_bar: ---
-X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.355,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ <20230405160454.97436-9-philmd@linaro.org>
+From: =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>
+In-Reply-To: <20230405160454.97436-9-philmd@linaro.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [37.59.142.96]
+X-ClientProxiedBy: DAG9EX1.mxp5.local (172.16.2.81) To DAG4EX2.mxp5.local
+ (172.16.2.32)
+X-Ovh-Tracer-GUID: 4ee85be4-94f7-4812-b6b2-e6f1dcb9ab6d
+X-Ovh-Tracer-Id: 388153995401333749
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvhedrvdejfedgudduhecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefkffggfgfuvfevfhfhjggtgfhisehtkeertddtfeejnecuhfhrohhmpeevrogurhhitgcunfgvucfiohgrthgvrhcuoegtlhhgsehkrghougdrohhrgheqnecuggftrfgrthhtvghrnhepffdufeeliedujeeffffhjeffiefghffhhfdvkeeijeehledvueffhfejtdehgeegnecukfhppeduvdejrddtrddtrddupdefjedrheelrddugedvrdeliedpkedvrdeigedrvdehtddrudejtdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepoegtlhhgsehkrghougdrohhrgheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepphhhihhlmhgusehlihhnrghrohdrohhrghdpqhgvmhhuqdguvghvvghlsehnohhnghhnuhdrohhrghdpqhgvmhhuqdhsfeeltdigsehnohhnghhnuhdrohhrghdpqhgvmhhuqdhrihhstghvsehnohhnghhnuhdrohhrghdprghlvgigrdgsvghnnhgvvgeslhhinhgrrhhordhorhhgpdhqvghmuhdqrghrmhesnhhonhhgnhhurdhorhhgpdhkvhhmsehvghgvrhdrkhgvrhhnvghlrdhorhhgpdhqvghmuhdqphhptgesnhhonhhgnhhurdhorhhgpd
+ gurghnihgvlhhhsgegudefsehgmhgrihhlrdgtohhmpdgurghvihgusehgihgsshhonhdrughrohhpsggvrghrrdhiugdrrghupdhgrhhouhhgsehkrghougdrohhrghdpoffvtefjohhsthepmhhoheehvddpmhhouggvpehsmhhtphhouhht
+Received-SPF: pass client-ip=178.33.43.201; envelope-from=clg@kaod.org;
+ helo=4.mo552.mail-out.ovh.net
+X-Spam_score_int: -40
+X-Spam_score: -4.1
+X-Spam_bar: ----
+X-Spam_report: (-4.1 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-2.224,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 06 Apr 2023 09:22:13 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -116,29 +69,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 08:04:34 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 17:46:24 -0000
 
-T24gNC82LzIzIDA5OjUwLCBUaG9tYXMgSHV0aCB3cm90ZToNCj4gT24gMDUvMDQvMjAyMyAx
-OC4wNCwgUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgd3JvdGU6DQo+PiBQcm90ZWN0ZWQgVmly
-dHVhbGl6YXRpb24gaXMgc3BlY2lmaWMgdG8gS1ZNLg0KPj4gUmVuYW1lIHRoZSBmaWxlIGFz
-ICdwdi1rdm0uYycgdG8gbWFrZSB0aGlzIGNsZWFyZXIuDQo+Pg0KPj4gU2lnbmVkLW9mZi1i
-eTogUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgPHBoaWxtZEBsaW5hcm8ub3JnPg0KPj4gLS0t
-DQo+PiAgICBody9zMzkweC97cHYuYyA9PiBwdi1rdm0uY30gfCAwDQo+PiAgICBody9zMzkw
-eC9tZXNvbi5idWlsZCAgICAgICAgfCAyICstDQo+PiAgICAyIGZpbGVzIGNoYW5nZWQsIDEg
-aW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pDQo+PiAgICByZW5hbWUgaHcvczM5MHgve3B2
-LmMgPT4gcHYta3ZtLmN9ICgxMDAlKQ0KPj4NCj4+IGRpZmYgLS1naXQgYS9ody9zMzkweC9w
-di5jIGIvaHcvczM5MHgvcHYta3ZtLmMNCj4+IHNpbWlsYXJpdHkgaW5kZXggMTAwJQ0KPj4g
-cmVuYW1lIGZyb20gaHcvczM5MHgvcHYuYw0KPj4gcmVuYW1lIHRvIGh3L3MzOTB4L3B2LWt2
-bS5jDQo+PiBkaWZmIC0tZ2l0IGEvaHcvczM5MHgvbWVzb24uYnVpbGQgYi9ody9zMzkweC9t
-ZXNvbi5idWlsZA0KPj4gaW5kZXggZjI5MTAxNmZlZS4uMmY0M2I2YzQ3MyAxMDA2NDQNCj4+
-IC0tLSBhL2h3L3MzOTB4L21lc29uLmJ1aWxkDQo+PiArKysgYi9ody9zMzkweC9tZXNvbi5i
-dWlsZA0KPj4gQEAgLTIyLDcgKzIyLDcgQEAgczM5MHhfc3MuYWRkKHdoZW46ICdDT05GSUdf
-S1ZNJywgaWZfdHJ1ZTogZmlsZXMoDQo+PiAgICAgICd0b2Qta3ZtLmMnLA0KPj4gICAgICAn
-czM5MC1za2V5cy1rdm0uYycsDQo+PiAgICAgICdzMzkwLXN0YXR0cmliLWt2bS5jJywNCj4+
-IC0gICdwdi5jJywNCj4+ICsgICdwdi1rdm0uYycsDQo+PiAgICAgICdzMzkwLXBjaS1rdm0u
-YycsDQo+PiAgICApKQ0KPj4gICAgczM5MHhfc3MuYWRkKHdoZW46ICdDT05GSUdfVENHJywg
-aWZfdHJ1ZTogZmlsZXMoDQo+IA0KPiBIbW1tLCBtYXliZSB3ZSBzaG91bGQgcmF0aGVyIG1v
-dmUgaXQgdG8gdGFyZ2V0L3MzOTB4L2t2bS8gaW5zdGVhZD8NCj4gDQo+IEphbm9zY2gsIHdo
-YXQncyB5b3VyIG9waW5pb24/DQo+IA0KPiAgICBUaG9tYXMNCj4gDQo+IA0KDQpEb24ndCBj
-YXJlIGFzIGxvbmcgYXMgdGhlIGZpbGUgaXMgbm90IGRlbGV0ZWQgOikNCg==
+Hello Philippe
+
+On 4/5/23 18:04, Philippe Mathieu-Daudé wrote:
+> The 'kvm_sw_tlb' field shouldn't be accessed when KVM is not available.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>   target/ppc/cpu.h        | 2 ++
+>   target/ppc/mmu_common.c | 4 ++++
+>   2 files changed, 6 insertions(+)
+> 
+> diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
+> index 557d736dab..0ec3957397 100644
+> --- a/target/ppc/cpu.h
+> +++ b/target/ppc/cpu.h
+> @@ -1148,7 +1148,9 @@ struct CPUArchState {
+>       int tlb_type;    /* Type of TLB we're dealing with */
+>       ppc_tlb_t tlb;   /* TLB is optional. Allocate them only if needed */
+>       bool tlb_dirty;  /* Set to non-zero when modifying TLB */
+
+'tlb_dirty' was part of the same commit 93dd5e852c ("kvm: ppc: booke206:
+use MMU API"). So we might as well include it in the #ifdef section.
+
+Thanks,
+
+C.
+
+> +#ifdef CONFIG_KVM
+>       bool kvm_sw_tlb; /* non-zero if KVM SW TLB API is active */
+> +#endif /* CONFIG_KVM */
+>       uint32_t tlb_need_flush; /* Delayed flush needed */
+>   #define TLB_NEED_LOCAL_FLUSH   0x1
+>   #define TLB_NEED_GLOBAL_FLUSH  0x2
+> diff --git a/target/ppc/mmu_common.c b/target/ppc/mmu_common.c
+> index 7235a4befe..21843c69f6 100644
+> --- a/target/ppc/mmu_common.c
+> +++ b/target/ppc/mmu_common.c
+> @@ -917,10 +917,12 @@ static void mmubooke_dump_mmu(CPUPPCState *env)
+>       ppcemb_tlb_t *entry;
+>       int i;
+>   
+> +#ifdef CONFIG_KVM
+>       if (kvm_enabled() && !env->kvm_sw_tlb) {
+>           qemu_printf("Cannot access KVM TLB\n");
+>           return;
+>       }
+> +#endif
+>   
+>       qemu_printf("\nTLB:\n");
+>       qemu_printf("Effective          Physical           Size PID   Prot     "
+> @@ -1008,10 +1010,12 @@ static void mmubooke206_dump_mmu(CPUPPCState *env)
+>       int offset = 0;
+>       int i;
+>   
+> +#ifdef CONFIG_KVM
+>       if (kvm_enabled() && !env->kvm_sw_tlb) {
+>           qemu_printf("Cannot access KVM TLB\n");
+>           return;
+>       }
+> +#endif
+>   
+>       for (i = 0; i < BOOKE206_MAX_TLBN; i++) {
+>           int size = booke206_tlb_size(env, i);
+
 
