@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkDcK-0002ZX-Sl
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 20:36:44 -0400
+	id 1pkDix-0003j7-A3
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 20:43:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkDcJ-0002ZA-Ds; Wed, 05 Apr 2023 20:36:43 -0400
-Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
+ id 1pkDiv-0003if-Fz; Wed, 05 Apr 2023 20:43:33 -0400
+Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkDcH-0008E3-Ix; Wed, 05 Apr 2023 20:36:43 -0400
-Received: by mail-ua1-x934.google.com with SMTP id q8so19165314uas.7;
- Wed, 05 Apr 2023 17:36:40 -0700 (PDT)
+ id 1pkDiu-0001uX-01; Wed, 05 Apr 2023 20:43:33 -0400
+Received: by mail-vs1-xe2f.google.com with SMTP id d2so33069093vso.9;
+ Wed, 05 Apr 2023 17:43:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680741400;
+ d=gmail.com; s=20210112; t=1680741810;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xapiIqMchVoMFAb68AR2e798+3Df9tFQ1WHgVma4Tdk=;
- b=bHfSasUXszr0nSAAzmrfT68jtSuKYIK28+CUuxZG97PqPU07dYP3eiS4WuwQ0V5x+J
- 2KEn/fYr6IZxDgLRajIMaP0y+yOiYQTu4wwqQPQJKnhaqXaOF0xMS58/Equ8T1TC0aAi
- VyHiHwi3huEgVrfyIgTncic99l1q8INBi/ZduIUJcD+9d9Ie6AqSao168mVlnEKLIe3s
- vucZ02c7eboomzzCPhLZ/8x6mShb3caIYV1oXrewiKLdBm36yx5gndc9ZbtOB6OAm2Kb
- Ol3IuGOtmOjhbdDAyB7hCeFLba5pNn7P6RkS9YOL9U3O7PpT0XaHsooj2LnT705ec+sJ
- Kv6w==
+ bh=Rcj4Wv5TgRGpyNK8GHqR7GnOxdAWPpnwfHBx4nl/esk=;
+ b=HeXVoRAj7wHnLn8V7FxPP2QjXblG6q96tP0j1hFwX/Rp40tqclU1nxUnZhtw7t5N4g
+ Yxa1AIljdBzYzLtmpUf3JPSSTEgwTe7oZkUKQ4kt98hUzH+xHvctklI+yFbU2QeyNbjA
+ qxpatbbohKUHLQc/gcsIgchjLL1icc7f3ZaKKiL5xFiR/lPXMMuX0pc5YkZwXC2vfIkl
+ JCTY9ogA8T+I3/uDVTg74yv2/eQjbSqo59DMU9NSQsTb7gPbt646pIiykBjqzpo9S2S+
+ cTGu6GWyuZ3GVsFyQ7kCXbARJ8WxmJyxdxoR11vYxnRhh9TJ5SmSCDd3GDnlbHIWH3uj
+ MP2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680741400;
+ d=1e100.net; s=20210112; t=1680741810;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xapiIqMchVoMFAb68AR2e798+3Df9tFQ1WHgVma4Tdk=;
- b=l50WVMk9wnWMioonMVfZWfegLHgRPGEIj+gkoCoYKOgiVBp4VYHado6yivlWQV4zFS
- JafruTjB7gWv2JtdkF3SIz40wPXrITm0SJlIjrSl9XRB5k6CuMOxME69+MQ0dj+98vL+
- XoyF/Gbr178ysPHRMEb5veCY6uQzw4ZoZR3ZFOFFvj3ABL48qzSHrELft3DySVPhgTY/
- BCS7JXLb+/KRtKkswoCQyscRQl6mPV3wSsZhrar65kdNNwwfDr63w9BE8d7ErwPEXj4o
- M3eVUcdONWGnu9ZVQf8KdExSSX5nUuBXqzriCTFPDivu02oi3Osoc8CdACOukn/ABK6E
- zu0Q==
-X-Gm-Message-State: AAQBX9dBCtZ0OUJR0dXYvrV/dgJXmgZSE7hCnpf8cUxGtv/th+J9T6Jl
- KmXfoLs4kwRvwHtorUi8qhWsddxzEnhHfyfO7F0=
-X-Google-Smtp-Source: AKy350YJVrEFjpHz17RRxw7a7MiJeoXcDwqYVXkmJeivRaAAXvSSOoJmEDUeTIdX/HnMrLNBH6fHu7rtRNcrp4B/jrM=
-X-Received: by 2002:a1f:214e:0:b0:43c:6ef1:84d3 with SMTP id
- h75-20020a1f214e000000b0043c6ef184d3mr6065405vkh.0.1680741399819; Wed, 05 Apr
- 2023 17:36:39 -0700 (PDT)
+ bh=Rcj4Wv5TgRGpyNK8GHqR7GnOxdAWPpnwfHBx4nl/esk=;
+ b=uZahLudyJ89SHFt2lsDH2wCMVAHyuWK63Bvq6vFuAWYooRtZADlOy12SSe9lFBDmYx
+ yILzEEGyEwZl9oT+o8ozBRrHapczO+4Yox7cw+4FTBm7di2ETkmCUN97N+CGfGN7MLCK
+ 1oP8do1W1qVrL7I/hRwVWpisx80qALuldkGGnD/m5N8vumKrVbnBnMrntTFLsjwq0CSa
+ AoSoGXh3lQz0IohdgwFExrqMk8d+bQoWIA8tRIBvSSm2RiflLbyBCR1mu308eMTULY90
+ 5rYXWBy7ZMxllAADnY+slib2Ti39D5w3HyM/2Ymx0lvsZCgSxLQZy4LfwD+a7ZE/94eB
+ koIw==
+X-Gm-Message-State: AAQBX9c+EVxUaA/WK4ibkMHuCKHj7cTDi7wQuXYA7cXlZuNlVa5yfuDM
+ zPn8sx/77Xt+GF9cLqdTdezIVVoJjfHXmoLRt+9aQBN8iYA=
+X-Google-Smtp-Source: AKy350aKMRf39jcRU9GuDTvI8SJY2FRx+puLok1o0FAVWfRkuvJU8Fl6y6iGkazNEscPwfyqsERVs8bvSvDEl7OvlCM=
+X-Received: by 2002:a67:c181:0:b0:42a:eb6:6c51 with SMTP id
+ h1-20020a67c181000000b0042a0eb66c51mr6259507vsj.3.1680741810608; Wed, 05 Apr
+ 2023 17:43:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230405095720.75848-1-liweiwei@iscas.ac.cn>
- <20230405095720.75848-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230405095720.75848-2-liweiwei@iscas.ac.cn>
+References: <20230330135818.68417-1-liweiwei@iscas.ac.cn>
+ <20230330135818.68417-2-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230330135818.68417-2-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Apr 2023 10:36:13 +1000
-Message-ID: <CAKmqyKNCUY_AeUjUh=jbZ7aCJcS5TG7xgMpvUx7rQUuGZkv1qg@mail.gmail.com>
-Subject: Re: [PATCH v4 1/1] hw/riscv: Add signature dump function for spike to
- run ACT tests
+Date: Thu, 6 Apr 2023 10:43:04 +1000
+Message-ID: <CAKmqyKMzPwFpScWg2H+JMZpvH6oJAP0A5vgaKAEiXR57db0r4w@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Fix the mstatus.MPP value after
+ executing MRET
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
  zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -78,171 +78,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 00:36:43 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 00:43:33 -0000
 
-On Wed, Apr 5, 2023 at 7:58=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wro=
-te:
+On Thu, Mar 30, 2023 at 11:59=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> w=
+rote:
 >
-> Add signature and signature-granularity properties in spike to specify th=
-e target
-> signatrue file and the line size for signature data.
->
-> Recgonize the signature section between begin_signature and end_signature=
- symbols
-> when loading elf of ACT tests. Then dump signature data in signature sect=
-ion just
-> before the ACT tests exit.
->
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> ---
->  hw/char/riscv_htif.c         | 44 +++++++++++++++++++++++++++++++++++-
->  hw/riscv/spike.c             | 13 +++++++++++
->  include/hw/char/riscv_htif.h |  3 +++
->  3 files changed, 59 insertions(+), 1 deletion(-)
->
-> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-> index 098de50e35..37d3ccc76b 100644
-> --- a/hw/char/riscv_htif.c
-> +++ b/hw/char/riscv_htif.c
-> @@ -29,6 +29,8 @@
->  #include "chardev/char-fe.h"
->  #include "qemu/timer.h"
->  #include "qemu/error-report.h"
-> +#include "exec/address-spaces.h"
-> +#include "sysemu/dma.h"
->
->  #define RISCV_DEBUG_HTIF 0
->  #define HTIF_DEBUG(fmt, ...)                                            =
-       \
-> @@ -51,7 +53,10 @@
->  /* PK system call number */
->  #define PK_SYS_WRITE            64
->
-> -static uint64_t fromhost_addr, tohost_addr;
-> +const char *sig_file;
-> +uint8_t line_size =3D 16;
-> +
-> +static uint64_t fromhost_addr, tohost_addr, begin_sig_addr, end_sig_addr=
-;
->
->  void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_=
-value,
->                            uint64_t st_size)
-> @@ -68,6 +73,10 @@ void htif_symbol_callback(const char *st_name, int st_=
-info, uint64_t st_value,
->              error_report("HTIF tohost must be 8 bytes");
->              exit(1);
->          }
-> +    } else if (strcmp("begin_signature", st_name) =3D=3D 0) {
-> +        begin_sig_addr =3D st_value;
-> +    } else if (strcmp("end_signature", st_name) =3D=3D 0) {
-> +        end_sig_addr =3D st_value;
->      }
->  }
->
-> @@ -163,6 +172,39 @@ static void htif_handle_tohost_write(HTIFState *s, u=
-int64_t val_written)
->              if (payload & 0x1) {
->                  /* exit code */
->                  int exit_code =3D payload >> 1;
-> +
-> +                /*
-> +                 * Dump signature data if sig_file is specified and
-> +                 * begin/end_signature symbols exist.
-> +                 */
-> +                if (sig_file && begin_sig_addr && end_sig_addr) {
+> The MPP will be set to the least-privileged supported mode (U if
+> U-mode is implemented, else M).
 
-There is no guarantee that these are initalised to zero, so this isn't
-really checking anything is it?
+I don't think this is right, the spec in section 8.6.4 says this:
+
+"MRET then in mstatus/mstatush sets MPV=3D0, MPP=3D0,
+MIE=3DMPIE, and MPIE=3D1"
+
+So it should just always be 0 (PRV_U is 0)
 
 Alistair
 
-> +                    uint64_t sig_len =3D end_sig_addr - begin_sig_addr;
-> +                    char *sig_data =3D g_malloc(sig_len);
-> +                    dma_memory_read(&address_space_memory, begin_sig_add=
-r,
-> +                                    sig_data, sig_len, MEMTXATTRS_UNSPEC=
-IFIED);
-> +                    FILE *signature =3D fopen(sig_file, "w");
-> +                    if (signature =3D=3D NULL) {
-> +                        error_report("Unable to open %s with error %s",
-> +                                     sig_file, strerror(errno));
-> +                        exit(1);
-> +                    }
-> +
-> +                    for (int i =3D 0; i < sig_len; i +=3D line_size) {
-> +                        for (int j =3D line_size; j > 0; j--) {
-> +                            if (i + j <=3D sig_len) {
-> +                                fprintf(signature, "%02x",
-> +                                        sig_data[i + j - 1] & 0xff);
-> +                            } else {
-> +                                fprintf(signature, "%02x", 0);
-> +                            }
-> +                        }
-> +                        fprintf(signature, "\n");
-> +                    }
-> +
-> +                    fclose(signature);
-> +                    g_free(sig_data);
-> +                }
-> +
->                  exit(exit_code);
->              } else {
->                  uint64_t syscall[8];
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index a584d5b3a2..2c5546560a 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -332,6 +332,11 @@ static void spike_board_init(MachineState *machine)
->                   htif_custom_base);
->  }
 >
-> +static void spike_set_signature(Object *obj, const char *val, Error **er=
-rp)
-> +{
-> +    sig_file =3D g_strdup(val);
-> +}
-> +
->  static void spike_machine_instance_init(Object *obj)
->  {
->  }
-> @@ -350,6 +355,14 @@ static void spike_machine_class_init(ObjectClass *oc=
-, void *data)
->      mc->get_default_cpu_node_id =3D riscv_numa_get_default_cpu_node_id;
->      mc->numa_mem_supported =3D true;
->      mc->default_ram_id =3D "riscv.spike.ram";
-> +    object_class_property_add_str(oc, "signature", NULL, spike_set_signa=
-ture);
-> +    object_class_property_set_description(oc, "signature",
-> +                                          "File to write ACT test signat=
-ure");
-> +    object_class_property_add_uint8_ptr(oc, "signature-granularity",
-> +                                        &line_size, OBJ_PROP_FLAG_WRITE)=
-;
-> +    object_class_property_set_description(oc, "signature-granularity",
-> +                                          "Size of each line in ACT sign=
-ature "
-> +                                          "file");
->  }
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> ---
+>  target/riscv/op_helper.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
->  static const TypeInfo spike_machine_typeinfo =3D {
-> diff --git a/include/hw/char/riscv_htif.h b/include/hw/char/riscv_htif.h
-> index 5958c5b986..df493fdf6b 100644
-> --- a/include/hw/char/riscv_htif.h
-> +++ b/include/hw/char/riscv_htif.h
-> @@ -40,6 +40,9 @@ typedef struct HTIFState {
->      uint64_t pending_read;
->  } HTIFState;
->
-> +extern const char *sig_file;
-> +extern uint8_t line_size;
-> +
->  /* HTIF symbol callback */
->  void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_=
-value,
->      uint64_t st_size);
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 84ee018f7d..991f06d98d 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -339,7 +339,8 @@ target_ulong helper_mret(CPURISCVState *env)
+>      mstatus =3D set_field(mstatus, MSTATUS_MIE,
+>                          get_field(mstatus, MSTATUS_MPIE));
+>      mstatus =3D set_field(mstatus, MSTATUS_MPIE, 1);
+> -    mstatus =3D set_field(mstatus, MSTATUS_MPP, PRV_U);
+> +    mstatus =3D set_field(mstatus, MSTATUS_MPP,
+> +                        riscv_has_ext(env, RVU) ? PRV_U : PRV_M);
+>      mstatus =3D set_field(mstatus, MSTATUS_MPV, 0);
+>      if ((env->priv_ver >=3D PRIV_VERSION_1_12_0) && (prev_priv !=3D PRV_=
+M)) {
+>          mstatus =3D set_field(mstatus, MSTATUS_MPRV, 0);
 > --
 > 2.25.1
 >
