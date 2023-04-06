@@ -1,50 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkMgF-0001NX-K6
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Apr 2023 06:17:24 -0400
+	id 1pkMnO-0003op-O4
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Apr 2023 06:24:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chenyi2000@zju.edu.cn>)
- id 1pkMgE-0001IS-2h; Thu, 06 Apr 2023 06:17:22 -0400
+ id 1pkMnN-0003oV-Gs; Thu, 06 Apr 2023 06:24:45 -0400
 Received: from spam.zju.edu.cn ([61.164.42.155] helo=zju.edu.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <chenyi2000@zju.edu.cn>)
- id 1pkMgA-0002nP-F2; Thu, 06 Apr 2023 06:17:21 -0400
-Received: from toga-arch.localdomain (unknown [10.192.17.134])
- by mail-app4 (Coremail) with SMTP id cS_KCgD3rX0VnC5kJSe+AA--.16479S2;
- Thu, 06 Apr 2023 18:17:03 +0800 (CST)
-From: Yi Chen <chenyi2000@zju.edu.cn>
-To: qemu-devel@nongnu.org
-Cc: Yi Chen <chenyi2000@zju.edu.cn>, Weiwei Li <liweiwei@iscas.ac.cn>,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v5] target/riscv: fix H extension TVM trap
-Date: Thu,  6 Apr 2023 18:15:59 +0800
-Message-Id: <20230406101559.39632-1-chenyi2000@zju.edu.cn>
-X-Mailer: git-send-email 2.40.0
+ id 1pkMnK-0008H2-Lj; Thu, 06 Apr 2023 06:24:45 -0400
+Received: from chenyi2000$zju.edu.cn ( [10.192.17.134] ) by
+ ajax-webmail-mail-app4 (Coremail) ; Thu, 6 Apr 2023 18:24:32 +0800
+ (GMT+08:00)
+X-Originating-IP: [10.192.17.134]
+Date: Thu, 6 Apr 2023 18:24:32 +0800 (GMT+08:00)
+X-CM-HeaderCharset: UTF-8
+From: "CHEN Yi" <chenyi2000@zju.edu.cn>
+To: "Alistair Francis" <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, "Weiwei Li" <liweiwei@iscas.ac.cn>, 
+ "Palmer Dabbelt" <palmer@dabbelt.com>, 
+ "Alistair Francis" <alistair.francis@wdc.com>, 
+ "Bin Meng" <bin.meng@windriver.com>, 
+ "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>, 
+ "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Subject: Re: Re: [PATCH v4] target/riscv: fix H extension TVM trap
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20220622(41e5976f)
+ Copyright (c) 2002-2023 www.mailtech.cn
+ mispb-4df6dc2c-e274-4d1c-b502-72c5c3dfa9ce-zj.edu.cn
+In-Reply-To: <CAKmqyKMC=8oKaduPE3Zt44qLfuQH9b1ckQmqFTog8QTwJB3GVA@mail.gmail.com>
+References: <20230312120538.15286-1-chenyi2000@zju.edu.cn>
+ <CAKmqyKMC=8oKaduPE3Zt44qLfuQH9b1ckQmqFTog8QTwJB3GVA@mail.gmail.com>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: cS_KCgD3rX0VnC5kJSe+AA--.16479S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3Xr17WrW7Jw4fWry3Kr18uFg_yoW7WFWDpa
- 18G39Ik3y8GF97Cws3Kr1DW3WrAw4xGayqy3WkGa1rAr1fCr1rCFyDXryvgFykWr4DWr12
- vFW8ZrWDZr42yaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9m1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AE
- w4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2
- IY67AKxVWDJVCq3wA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJr0_GcWl84ACjcxK6I8E
- 87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1lnxkEFVAIw20F6c
- xK64vIFxWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
- Yx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbV
- WUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7CjxVAKzI0E
- Y4vE52x082I5MxAIw28IcxkI7VAKI48JMxAIw28IcVCjz48v1sIEY20_GFWkJr1UJwCFx2
- IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v2
- 6r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67
- AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IY
- s7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr
- 0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUzBTnUUUUU=
-X-CM-SenderInfo: xfkh05blsqiio62m3hxhgxhubq/
+Message-ID: <7519b147.2e6e7.1875618b4ab.Coremail.chenyi2000@zju.edu.cn>
+X-Coremail-Locale: en_US
+X-CM-TRANSID: cS_KCgAXLXzgnS5kDDa+AA--.25008W
+X-CM-SenderInfo: xfkh05blsqiio62m3hxhgxhubq/1tbiAQoRCmQtg0p0yQAAst
+X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
+ CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
+ daVFxhVjvjDU=
 Received-SPF: pass client-ip=61.164.42.155; envelope-from=chenyi2000@zju.edu.cn;
  helo=zju.edu.cn
 X-Spam_score_int: -18
@@ -64,154 +61,143 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 10:17:22 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 10:24:45 -0000
 
-- Trap satp/hgatp accesses from HS-mode when MSTATUS.TVM is enabled.
-- Trap satp accesses from VS-mode when HSTATUS.VTVM is enabled.
-- Raise RISCV_EXCP_ILLEGAL_INST when U-mode executes SFENCE.VMA/SINVAL.VMA.
-- Raise RISCV_EXCP_VIRT_INSTRUCTION_FAULT when VU-mode executes
-  SFENCE.VMA/SINVAL.VMA or VS-mode executes SFENCE.VMA/SINVAL.VMA with
-  HSTATUS.VTVM enabled.
-- Raise RISCV_EXCP_VIRT_INSTRUCTION_FAULT when VU-mode executes
-  HFENCE.GVMA/HFENCE.VVMA/HINVAL.GVMA/HINVAL.VVMA.
-
-Signed-off-by: Yi Chen <chenyi2000@zju.edu.cn>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
----
-Rebase the patch on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
-Add "Reviewed-by: LIU Zhiwei"
- target/riscv/csr.c       | 56 +++++++++++++++++++++++++---------------
- target/riscv/op_helper.c | 12 ++++-----
- 2 files changed, 41 insertions(+), 27 deletions(-)
-
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index e0b871f6dc..d6669d8524 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -449,6 +449,30 @@ static RISCVException sstc_32(CPURISCVState *env, int csrno)
-     return sstc(env, csrno);
- }
- 
-+static RISCVException satp(CPURISCVState *env, int csrno)
-+{
-+    if (env->priv == PRV_S && !env->virt_enabled &&
-+        get_field(env->mstatus, MSTATUS_TVM)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+    if (env->priv == PRV_S && env->virt_enabled &&
-+        get_field(env->hstatus, HSTATUS_VTVM)) {
-+        return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-+    }
-+
-+    return smode(env, csrno);
-+}
-+
-+static RISCVException hgatp(CPURISCVState *env, int csrno)
-+{
-+    if (env->priv == PRV_S && !env->virt_enabled &&
-+        get_field(env->mstatus, MSTATUS_TVM)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    return hmode(env, csrno);
-+}
-+
- /* Checks if PointerMasking registers could be accessed */
- static RISCVException pointer_masking(CPURISCVState *env, int csrno)
- {
-@@ -2647,13 +2671,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
-         *val = 0;
-         return RISCV_EXCP_NONE;
-     }
--
--    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
--        return RISCV_EXCP_ILLEGAL_INST;
--    } else {
--        *val = env->satp;
--    }
--
-+    *val = env->satp;
-     return RISCV_EXCP_NONE;
- }
- 
-@@ -2676,18 +2694,14 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
-     }
- 
-     if (vm && mask) {
--        if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
--            return RISCV_EXCP_ILLEGAL_INST;
--        } else {
--            /*
--             * The ISA defines SATP.MODE=Bare as "no translation", but we still
--             * pass these through QEMU's TLB emulation as it improves
--             * performance.  Flushing the TLB on SATP writes with paging
--             * enabled avoids leaking those invalid cached mappings.
--             */
--            tlb_flush(env_cpu(env));
--            env->satp = val;
--        }
-+        /*
-+         * The ISA defines SATP.MODE=Bare as "no translation", but we still
-+         * pass these through QEMU's TLB emulation as it improves
-+         * performance.  Flushing the TLB on SATP writes with paging
-+         * enabled avoids leaking those invalid cached mappings.
-+         */
-+        tlb_flush(env_cpu(env));
-+        env->satp = val;
-     }
-     return RISCV_EXCP_NONE;
- }
-@@ -4183,7 +4197,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-                          .min_priv_ver = PRIV_VERSION_1_12_0 },
- 
-     /* Supervisor Protection and Translation */
--    [CSR_SATP]     = { "satp",     smode, read_satp,     write_satp     },
-+    [CSR_SATP]     = { "satp",     satp, read_satp,     write_satp     },
- 
-     /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
-     [CSR_SISELECT]   = { "siselect",   aia_smode, NULL, NULL, rmw_xiselect },
-@@ -4220,7 +4234,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-                           .min_priv_ver = PRIV_VERSION_1_12_0                },
-     [CSR_HGEIP]       = { "hgeip",       hmode,   read_hgeip,
-                           .min_priv_ver = PRIV_VERSION_1_12_0                },
--    [CSR_HGATP]       = { "hgatp",       hmode,   read_hgatp,   write_hgatp,
-+    [CSR_HGATP]       = { "hgatp",       hgatp,   read_hgatp,   write_hgatp,
-                           .min_priv_ver = PRIV_VERSION_1_12_0                },
-     [CSR_HTIMEDELTA]  = { "htimedelta",  hmode,   read_htimedelta,
-                           write_htimedelta,
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index ec9a384772..7cbe13db3f 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -380,12 +380,12 @@ void helper_wfi(CPURISCVState *env)
- void helper_tlb_flush(CPURISCVState *env)
- {
-     CPUState *cs = env_cpu(env);
--    if (!(env->priv >= PRV_S) ||
--        (env->priv == PRV_S &&
--         get_field(env->mstatus, MSTATUS_TVM))) {
-+    if (!env->virt_enabled &&
-+        (env->priv == PRV_U ||
-+         (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)))) {
-         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
--    } else if (riscv_has_ext(env, RVH) && env->virt_enabled &&
--               get_field(env->hstatus, HSTATUS_VTVM)) {
-+    } else if (env->virt_enabled &&
-+               (env->priv == PRV_U || get_field(env->hstatus, HSTATUS_VTVM))) {
-         riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
-     } else {
-         tlb_flush(cs);
-@@ -402,7 +402,7 @@ void helper_hyp_tlb_flush(CPURISCVState *env)
- {
-     CPUState *cs = env_cpu(env);
- 
--    if (env->priv == PRV_S && env->virt_enabled) {
-+    if (env->virt_enabled) {
-         riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
-     }
- 
--- 
-2.40.0
-
+CgoKPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2VzLS0tLS0KPiBGcm9tOiAiQWxpc3RhaXIgRnJhbmNp
+cyIgPGFsaXN0YWlyMjNAZ21haWwuY29tPgo+IFNlbnQgVGltZTogMjAyMy0wNC0wNiAwOTo1Njo1
+OCAoVGh1cnNkYXkpCj4gVG86ICJZaSBDaGVuIiA8Y2hlbnlpMjAwMEB6anUuZWR1LmNuPgo+IENj
+OiBxZW11LWRldmVsQG5vbmdudS5vcmcsICJXZWl3ZWkgTGkiIDxsaXdlaXdlaUBpc2Nhcy5hYy5j
+bj4sICJQYWxtZXIgRGFiYmVsdCIgPHBhbG1lckBkYWJiZWx0LmNvbT4sICJBbGlzdGFpciBGcmFu
+Y2lzIiA8YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tPiwgIkJpbiBNZW5nIiA8YmluLm1lbmdAd2lu
+ZHJpdmVyLmNvbT4sICJEYW5pZWwgSGVucmlxdWUgQmFyYm96YSIgPGRiYXJib3phQHZlbnRhbmFt
+aWNyby5jb20+LCAiTGl1IFpoaXdlaSIgPHpoaXdlaV9saXVAbGludXguYWxpYmFiYS5jb20+LCAi
+b3BlbiBsaXN0OlJJU0MtViBUQ0cgQ1BVcyIgPHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz4KPiBTdWJq
+ZWN0OiBSZTogW1BBVENIIHY0XSB0YXJnZXQvcmlzY3Y6IGZpeCBIIGV4dGVuc2lvbiBUVk0gdHJh
+cAo+IAo+IE9uIFN1biwgTWFyIDEyLCAyMDIzIGF0IDEwOjA34oCvUE0gWWkgQ2hlbiA8Y2hlbnlp
+MjAwMEB6anUuZWR1LmNuPiB3cm90ZToKPiA+Cj4gPiAtIFRyYXAgc2F0cC9oZ2F0cCBhY2Nlc3Nl
+cyBmcm9tIEhTLW1vZGUgd2hlbiBNU1RBVFVTLlRWTSBpcyBlbmFibGVkLgo+ID4gLSBUcmFwIHNh
+dHAgYWNjZXNzZXMgZnJvbSBWUy1tb2RlIHdoZW4gSFNUQVRVUy5WVFZNIGlzIGVuYWJsZWQuCj4g
+PiAtIFJhaXNlIFJJU0NWX0VYQ1BfSUxMRUdBTF9JTlNUIHdoZW4gVS1tb2RlIGV4ZWN1dGVzIFNG
+RU5DRS5WTUEvU0lOVkFMLlZNQS4KPiA+IC0gUmFpc2UgUklTQ1ZfRVhDUF9WSVJUX0lOU1RSVUNU
+SU9OX0ZBVUxUIHdoZW4gVlUtbW9kZSBleGVjdXRlcwo+ID4gICBTRkVOQ0UuVk1BL1NJTlZBTC5W
+TUEgb3IgVlMtbW9kZSBleGVjdXRlcyBTRkVOQ0UuVk1BL1NJTlZBTC5WTUEgd2l0aAo+ID4gICBI
+U1RBVFVTLlZUVk0gZW5hYmxlZC4KPiA+IC0gUmFpc2UgUklTQ1ZfRVhDUF9WSVJUX0lOU1RSVUNU
+SU9OX0ZBVUxUIHdoZW4gVlUtbW9kZSBleGVjdXRlcwo+ID4gICBIRkVOQ0UuR1ZNQS9IRkVOQ0Uu
+VlZNQS9ISU5WQUwuR1ZNQS9ISU5WQUwuVlZNQS4KPiAKPiBUaGFua3MgZm9yIHRoZSBwYXRjaCEK
+PiAKPiBJdCBsb29rcyBsaWtlIHRoaXMgcGF0Y2ggbmVlZHMgdG8gYmUgcmViYXNlZC4gRG8geW91
+IG1pbmQgcmViYXNpbmcgaXQKPiBvbiBodHRwczovL2dpdGh1Yi5jb20vYWxpc3RhaXIyMy9xZW11
+L3RyZWUvcmlzY3YtdG8tYXBwbHkubmV4dCBhbmQKPiB0aGVuIHJlLXNlbmRpbmc/CgpTdXJlLiBJ
+IHNlbnQgaXQganVzdCBub3cuCgo+IEFsc28sIHdoZW4geW91IGFyZSBmaXhpbmcgYSByYW5nZSBv
+ZiBpc3N1ZXMgaXQncyBiZXN0IHRvIHNwbGl0IHRoZQo+IGZpeGVzIGludG8gcGF0Y2hlcyB0aGF0
+IGZpeCBlYWNoIGluZGl2aWR1YWwgaXNzdWUgKHdoZXJlIHRoYXQgaXMKPiBwb3NzaWJsZSkuIFRo
+aXMgbWFrZXMgaXQgZWFzaWVyIHRvIHJldmlldyBidXQgYWxzbyBtYWtlcyBpdCBlYXNpZXIgdG8K
+PiB0cmFjayBjaGFuZ2VzIGFuZCByZWdyZXNzaW9ucyBpZiBhbnkgcHJvYmxlbXMgYXJpc2UuCj4g
+Cj4gSW4gdGhpcyBjYXNlIHlvdSBkb24ndCBuZWVkIHRvIHNwbGl0IHRoZW0gdXAgZm9yIGEgdjUs
+IGJ1dCBpbiBmdXR1cmUKPiBpdCdzIHNvbWV0aGluZyB0byBrZWVwIGluIG1pbmQKCkkgc2VlLiBJ
+IHdpbGwga2VlcCB0aGF0IGluIG1pbmQgaW4gdGhlIGZ1dHVyZS4gVGhhbmtzIGZvciB5b3VyIGtp
+bmQgbm90ZS4KCkJlc3QsCllpCgo+IFRoZSBjaGFuZ2VzIGxvb2sgZ29vZCBvdGhlcndpc2UgdGhv
+dWdoIDopCj4gCj4gQWxpc3RhaXIKPiAKPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBZaSBDaGVuIDxj
+aGVueWkyMDAwQHpqdS5lZHUuY24+Cj4gPiBSZXZpZXdlZC1ieTogV2Vpd2VpIExpIDxsaXdlaXdl
+aUBpc2Nhcy5hYy5jbj4KPiA+IC0tLQo+ID4gQWRkIHJldmlld2VkLWJ5Cj4gPiBSZXBsYWNlICJl
+bnYtPnByaXYgPD0gUFJWX1MgJiYgcmlzY3ZfY3B1X3ZpcnRfZW5hYmxlZChlbnYpIiB3aXRoICJy
+aXNjdl9jcHVfdmlydF9lbmFibGVkKGVudikiCj4gPiAgdGFyZ2V0L3Jpc2N2L2Nzci5jICAgICAg
+IHwgNTYgKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLQo+ID4gIHRhcmdl
+dC9yaXNjdi9vcF9oZWxwZXIuYyB8IDEyICsrKystLS0tLQo+ID4gIDIgZmlsZXMgY2hhbmdlZCwg
+NDEgaW5zZXJ0aW9ucygrKSwgMjcgZGVsZXRpb25zKC0pCj4gPgo+ID4gZGlmZiAtLWdpdCBhL3Rh
+cmdldC9yaXNjdi9jc3IuYyBiL3RhcmdldC9yaXNjdi9jc3IuYwo+ID4gaW5kZXggZDUyMmVmYzBi
+Ni4uMjZhMDJlNTdiZCAxMDA2NDQKPiA+IC0tLSBhL3RhcmdldC9yaXNjdi9jc3IuYwo+ID4gKysr
+IGIvdGFyZ2V0L3Jpc2N2L2Nzci5jCj4gPiBAQCAtNDQzLDYgKzQ0MywzMCBAQCBzdGF0aWMgUklT
+Q1ZFeGNlcHRpb24gc3N0Y18zMihDUFVSSVNDVlN0YXRlICplbnYsIGludCBjc3JubykKPiA+ICAg
+ICAgcmV0dXJuIHNzdGMoZW52LCBjc3Jubyk7Cj4gPiAgfQo+ID4KPiA+ICtzdGF0aWMgUklTQ1ZF
+eGNlcHRpb24gc2F0cChDUFVSSVNDVlN0YXRlICplbnYsIGludCBjc3JubykKPiA+ICt7Cj4gPiAr
+ICAgIGlmIChlbnYtPnByaXYgPT0gUFJWX1MgJiYgIXJpc2N2X2NwdV92aXJ0X2VuYWJsZWQoZW52
+KSAmJgo+ID4gKyAgICAgICAgZ2V0X2ZpZWxkKGVudi0+bXN0YXR1cywgTVNUQVRVU19UVk0pKSB7
+Cj4gPiArICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9JTExFR0FMX0lOU1Q7Cj4gPiArICAgIH0K
+PiA+ICsgICAgaWYgKGVudi0+cHJpdiA9PSBQUlZfUyAmJiByaXNjdl9jcHVfdmlydF9lbmFibGVk
+KGVudikgJiYKPiA+ICsgICAgICAgIGdldF9maWVsZChlbnYtPmhzdGF0dXMsIEhTVEFUVVNfVlRW
+TSkpIHsKPiA+ICsgICAgICAgIHJldHVybiBSSVNDVl9FWENQX1ZJUlRfSU5TVFJVQ1RJT05fRkFV
+TFQ7Cj4gPiArICAgIH0KPiA+ICsKPiA+ICsgICAgcmV0dXJuIHNtb2RlKGVudiwgY3Nybm8pOwo+
+ID4gK30KPiA+ICsKPiA+ICtzdGF0aWMgUklTQ1ZFeGNlcHRpb24gaGdhdHAoQ1BVUklTQ1ZTdGF0
+ZSAqZW52LCBpbnQgY3Nybm8pCj4gPiArewo+ID4gKyAgICBpZiAoZW52LT5wcml2ID09IFBSVl9T
+ICYmICFyaXNjdl9jcHVfdmlydF9lbmFibGVkKGVudikgJiYKPiA+ICsgICAgICAgIGdldF9maWVs
+ZChlbnYtPm1zdGF0dXMsIE1TVEFUVVNfVFZNKSkgewo+ID4gKyAgICAgICAgcmV0dXJuIFJJU0NW
+X0VYQ1BfSUxMRUdBTF9JTlNUOwo+ID4gKyAgICB9Cj4gPiArCj4gPiArICAgIHJldHVybiBobW9k
+ZShlbnYsIGNzcm5vKTsKPiA+ICt9Cj4gPiArCj4gPiAgLyogQ2hlY2tzIGlmIFBvaW50ZXJNYXNr
+aW5nIHJlZ2lzdGVycyBjb3VsZCBiZSBhY2Nlc3NlZCAqLwo+ID4gIHN0YXRpYyBSSVNDVkV4Y2Vw
+dGlvbiBwb2ludGVyX21hc2tpbmcoQ1BVUklTQ1ZTdGF0ZSAqZW52LCBpbnQgY3Nybm8pCj4gPiAg
+ewo+ID4gQEAgLTI2NTUsMTMgKzI2NzksNyBAQCBzdGF0aWMgUklTQ1ZFeGNlcHRpb24gcmVhZF9z
+YXRwKENQVVJJU0NWU3RhdGUgKmVudiwgaW50IGNzcm5vLAo+ID4gICAgICAgICAgKnZhbCA9IDA7
+Cj4gPiAgICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9OT05FOwo+ID4gICAgICB9Cj4gPiAtCj4g
+PiAtICAgIGlmIChlbnYtPnByaXYgPT0gUFJWX1MgJiYgZ2V0X2ZpZWxkKGVudi0+bXN0YXR1cywg
+TVNUQVRVU19UVk0pKSB7Cj4gPiAtICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9JTExFR0FMX0lO
+U1Q7Cj4gPiAtICAgIH0gZWxzZSB7Cj4gPiAtICAgICAgICAqdmFsID0gZW52LT5zYXRwOwo+ID4g
+LSAgICB9Cj4gPiAtCj4gPiArICAgICp2YWwgPSBlbnYtPnNhdHA7Cj4gPiAgICAgIHJldHVybiBS
+SVNDVl9FWENQX05PTkU7Cj4gPiAgfQo+ID4KPiA+IEBAIC0yNjg0LDE4ICsyNzAyLDE0IEBAIHN0
+YXRpYyBSSVNDVkV4Y2VwdGlvbiB3cml0ZV9zYXRwKENQVVJJU0NWU3RhdGUgKmVudiwgaW50IGNz
+cm5vLAo+ID4gICAgICB9Cj4gPgo+ID4gICAgICBpZiAodm0gJiYgbWFzaykgewo+ID4gLSAgICAg
+ICAgaWYgKGVudi0+cHJpdiA9PSBQUlZfUyAmJiBnZXRfZmllbGQoZW52LT5tc3RhdHVzLCBNU1RB
+VFVTX1RWTSkpIHsKPiA+IC0gICAgICAgICAgICByZXR1cm4gUklTQ1ZfRVhDUF9JTExFR0FMX0lO
+U1Q7Cj4gPiAtICAgICAgICB9IGVsc2Ugewo+ID4gLSAgICAgICAgICAgIC8qCj4gPiAtICAgICAg
+ICAgICAgICogVGhlIElTQSBkZWZpbmVzIFNBVFAuTU9ERT1CYXJlIGFzICJubyB0cmFuc2xhdGlv
+biIsIGJ1dCB3ZSBzdGlsbAo+ID4gLSAgICAgICAgICAgICAqIHBhc3MgdGhlc2UgdGhyb3VnaCBR
+RU1VJ3MgVExCIGVtdWxhdGlvbiBhcyBpdCBpbXByb3Zlcwo+ID4gLSAgICAgICAgICAgICAqIHBl
+cmZvcm1hbmNlLiAgRmx1c2hpbmcgdGhlIFRMQiBvbiBTQVRQIHdyaXRlcyB3aXRoIHBhZ2luZwo+
+ID4gLSAgICAgICAgICAgICAqIGVuYWJsZWQgYXZvaWRzIGxlYWtpbmcgdGhvc2UgaW52YWxpZCBj
+YWNoZWQgbWFwcGluZ3MuCj4gPiAtICAgICAgICAgICAgICovCj4gPiAtICAgICAgICAgICAgdGxi
+X2ZsdXNoKGVudl9jcHUoZW52KSk7Cj4gPiAtICAgICAgICAgICAgZW52LT5zYXRwID0gdmFsOwo+
+ID4gLSAgICAgICAgfQo+ID4gKyAgICAgICAgLyoKPiA+ICsgICAgICAgICAqIFRoZSBJU0EgZGVm
+aW5lcyBTQVRQLk1PREU9QmFyZSBhcyAibm8gdHJhbnNsYXRpb24iLCBidXQgd2Ugc3RpbGwKPiA+
+ICsgICAgICAgICAqIHBhc3MgdGhlc2UgdGhyb3VnaCBRRU1VJ3MgVExCIGVtdWxhdGlvbiBhcyBp
+dCBpbXByb3Zlcwo+ID4gKyAgICAgICAgICogcGVyZm9ybWFuY2UuICBGbHVzaGluZyB0aGUgVExC
+IG9uIFNBVFAgd3JpdGVzIHdpdGggcGFnaW5nCj4gPiArICAgICAgICAgKiBlbmFibGVkIGF2b2lk
+cyBsZWFraW5nIHRob3NlIGludmFsaWQgY2FjaGVkIG1hcHBpbmdzLgo+ID4gKyAgICAgICAgICov
+Cj4gPiArICAgICAgICB0bGJfZmx1c2goZW52X2NwdShlbnYpKTsKPiA+ICsgICAgICAgIGVudi0+
+c2F0cCA9IHZhbDsKPiA+ICAgICAgfQo+ID4gICAgICByZXR1cm4gUklTQ1ZfRVhDUF9OT05FOwo+
+ID4gIH0KPiA+IEBAIC00MTgwLDcgKzQxOTQsNyBAQCByaXNjdl9jc3Jfb3BlcmF0aW9ucyBjc3Jf
+b3BzW0NTUl9UQUJMRV9TSVpFXSA9IHsKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgLm1p
+bl9wcml2X3ZlciA9IFBSSVZfVkVSU0lPTl8xXzEyXzAgfSwKPiA+Cj4gPiAgICAgIC8qIFN1cGVy
+dmlzb3IgUHJvdGVjdGlvbiBhbmQgVHJhbnNsYXRpb24gKi8KPiA+IC0gICAgW0NTUl9TQVRQXSAg
+ICAgPSB7ICJzYXRwIiwgICAgIHNtb2RlLCByZWFkX3NhdHAsICAgICB3cml0ZV9zYXRwICAgICB9
+LAo+ID4gKyAgICBbQ1NSX1NBVFBdICAgICA9IHsgInNhdHAiLCAgICAgc2F0cCwgcmVhZF9zYXRw
+LCAgICAgd3JpdGVfc2F0cCAgICAgfSwKPiA+Cj4gPiAgICAgIC8qIFN1cGVydmlzb3ItTGV2ZWwg
+V2luZG93IHRvIEluZGlyZWN0bHkgQWNjZXNzZWQgUmVnaXN0ZXJzIChBSUEpICovCj4gPiAgICAg
+IFtDU1JfU0lTRUxFQ1RdICAgPSB7ICJzaXNlbGVjdCIsICAgYWlhX3Ntb2RlLCBOVUxMLCBOVUxM
+LCBybXdfeGlzZWxlY3QgfSwKPiA+IEBAIC00MjE3LDcgKzQyMzEsNyBAQCByaXNjdl9jc3Jfb3Bl
+cmF0aW9ucyBjc3Jfb3BzW0NTUl9UQUJMRV9TSVpFXSA9IHsKPiA+ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIC5taW5fcHJpdl92ZXIgPSBQUklWX1ZFUlNJT05fMV8xMl8wICAgICAgICAgICAg
+ICAgIH0sCj4gPiAgICAgIFtDU1JfSEdFSVBdICAgICAgID0geyAiaGdlaXAiLCAgICAgICBobW9k
+ZSwgICByZWFkX2hnZWlwLAo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLm1pbl9wcml2
+X3ZlciA9IFBSSVZfVkVSU0lPTl8xXzEyXzAgICAgICAgICAgICAgICAgfSwKPiA+IC0gICAgW0NT
+Ul9IR0FUUF0gICAgICAgPSB7ICJoZ2F0cCIsICAgICAgIGhtb2RlLCAgIHJlYWRfaGdhdHAsICAg
+d3JpdGVfaGdhdHAsCj4gPiArICAgIFtDU1JfSEdBVFBdICAgICAgID0geyAiaGdhdHAiLCAgICAg
+ICBoZ2F0cCwgICByZWFkX2hnYXRwLCAgIHdyaXRlX2hnYXRwLAo+ID4gICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgLm1pbl9wcml2X3ZlciA9IFBSSVZfVkVSU0lPTl8xXzEyXzAgICAgICAgICAg
+ICAgICAgfSwKPiA+ICAgICAgW0NTUl9IVElNRURFTFRBXSAgPSB7ICJodGltZWRlbHRhIiwgIGht
+b2RlLCAgIHJlYWRfaHRpbWVkZWx0YSwKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdy
+aXRlX2h0aW1lZGVsdGEsCj4gPiBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L29wX2hlbHBlci5j
+IGIvdGFyZ2V0L3Jpc2N2L29wX2hlbHBlci5jCj4gPiBpbmRleCA4NGVlMDE4ZjdkLi44ZTE2MDIw
+ZjhkIDEwMDY0NAo+ID4gLS0tIGEvdGFyZ2V0L3Jpc2N2L29wX2hlbHBlci5jCj4gPiArKysgYi90
+YXJnZXQvcmlzY3Yvb3BfaGVscGVyLmMKPiA+IEBAIC0zODEsMTIgKzM4MSwxMiBAQCB2b2lkIGhl
+bHBlcl93ZmkoQ1BVUklTQ1ZTdGF0ZSAqZW52KQo+ID4gIHZvaWQgaGVscGVyX3RsYl9mbHVzaChD
+UFVSSVNDVlN0YXRlICplbnYpCj4gPiAgewo+ID4gICAgICBDUFVTdGF0ZSAqY3MgPSBlbnZfY3B1
+KGVudik7Cj4gPiAtICAgIGlmICghKGVudi0+cHJpdiA+PSBQUlZfUykgfHwKPiA+IC0gICAgICAg
+IChlbnYtPnByaXYgPT0gUFJWX1MgJiYKPiA+IC0gICAgICAgICBnZXRfZmllbGQoZW52LT5tc3Rh
+dHVzLCBNU1RBVFVTX1RWTSkpKSB7Cj4gPiArICAgIGlmICghcmlzY3ZfY3B1X3ZpcnRfZW5hYmxl
+ZChlbnYpICYmCj4gPiArICAgICAgICAoZW52LT5wcml2ID09IFBSVl9VIHx8Cj4gPiArICAgICAg
+ICAgKGVudi0+cHJpdiA9PSBQUlZfUyAmJiBnZXRfZmllbGQoZW52LT5tc3RhdHVzLCBNU1RBVFVT
+X1RWTSkpKSkgewo+ID4gICAgICAgICAgcmlzY3ZfcmFpc2VfZXhjZXB0aW9uKGVudiwgUklTQ1Zf
+RVhDUF9JTExFR0FMX0lOU1QsIEdFVFBDKCkpOwo+ID4gLSAgICB9IGVsc2UgaWYgKHJpc2N2X2hh
+c19leHQoZW52LCBSVkgpICYmIHJpc2N2X2NwdV92aXJ0X2VuYWJsZWQoZW52KSAmJgo+ID4gLSAg
+ICAgICAgICAgICAgIGdldF9maWVsZChlbnYtPmhzdGF0dXMsIEhTVEFUVVNfVlRWTSkpIHsKPiA+
+ICsgICAgfSBlbHNlIGlmIChyaXNjdl9jcHVfdmlydF9lbmFibGVkKGVudikgJiYKPiA+ICsgICAg
+ICAgICAgICAgICAoZW52LT5wcml2ID09IFBSVl9VIHx8IGdldF9maWVsZChlbnYtPmhzdGF0dXMs
+IEhTVEFUVVNfVlRWTSkpKSB7Cj4gPiAgICAgICAgICByaXNjdl9yYWlzZV9leGNlcHRpb24oZW52
+LCBSSVNDVl9FWENQX1ZJUlRfSU5TVFJVQ1RJT05fRkFVTFQsIEdFVFBDKCkpOwo+ID4gICAgICB9
+IGVsc2Ugewo+ID4gICAgICAgICAgdGxiX2ZsdXNoKGNzKTsKPiA+IEBAIC00MDMsNyArNDAzLDcg
+QEAgdm9pZCBoZWxwZXJfaHlwX3RsYl9mbHVzaChDUFVSSVNDVlN0YXRlICplbnYpCj4gPiAgewo+
+ID4gICAgICBDUFVTdGF0ZSAqY3MgPSBlbnZfY3B1KGVudik7Cj4gPgo+ID4gLSAgICBpZiAoZW52
+LT5wcml2ID09IFBSVl9TICYmIHJpc2N2X2NwdV92aXJ0X2VuYWJsZWQoZW52KSkgewo+ID4gKyAg
+ICBpZiAocmlzY3ZfY3B1X3ZpcnRfZW5hYmxlZChlbnYpKSB7Cj4gPiAgICAgICAgICByaXNjdl9y
+YWlzZV9leGNlcHRpb24oZW52LCBSSVNDVl9FWENQX1ZJUlRfSU5TVFJVQ1RJT05fRkFVTFQsIEdF
+VFBDKCkpOwo+ID4gICAgICB9Cj4gPgo+ID4gLS0KPiA+IDIuMzkuMgo+ID4KPiA+Cg==
 
