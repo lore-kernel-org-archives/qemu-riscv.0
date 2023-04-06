@@ -1,30 +1,29 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkFXP-00010N-Mr
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 22:39:47 -0400
+	id 1pkFsx-000499-0D
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 23:02:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pkFXO-000105-4C; Wed, 05 Apr 2023 22:39:46 -0400
+ id 1pkFst-00048N-U1; Wed, 05 Apr 2023 23:02:00 -0400
 Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pkFXL-00015n-5X; Wed, 05 Apr 2023 22:39:45 -0400
+ id 1pkFsq-000494-72; Wed, 05 Apr 2023 23:01:59 -0400
 Received: from [192.168.0.120] (unknown [180.175.29.170])
- by APP-01 (Coremail) with SMTP id qwCowAD3_2PkMC5kx1ALAA--.1870S2;
- Thu, 06 Apr 2023 10:39:33 +0800 (CST)
-Message-ID: <f9daa3a1-43f6-5eae-2f7c-2423a68ea5bb@iscas.ac.cn>
-Date: Thu, 6 Apr 2023 10:39:32 +0800
+ by APP-01 (Coremail) with SMTP id qwCowAD3_2scNi5kqxkNAA--.2369S2;
+ Thu, 06 Apr 2023 11:01:49 +0800 (CST)
+Message-ID: <49a0e0dd-c304-46de-4734-0a1eb134ee9d@iscas.ac.cn>
+Date: Thu, 6 Apr 2023 11:01:48 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Subject: Re: [PATCH 1/2] target/riscv: Fix the mstatus.MPP value after
  executing MRET
 Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>
+To: Alistair Francis <alistair23@gmail.com>, liweiwei <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20230330135818.68417-1-liweiwei@iscas.ac.cn>
  <20230330135818.68417-2-liweiwei@iscas.ac.cn>
  <CAKmqyKMzPwFpScWg2H+JMZpvH6oJAP0A5vgaKAEiXR57db0r4w@mail.gmail.com>
@@ -36,23 +35,24 @@ From: liweiwei <liweiwei@iscas.ac.cn>
 In-Reply-To: <CAKmqyKM=R2c+ayUQnyMTJA8SweGAnLc=5ZxrcZpKn3JtUqgHYg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAD3_2PkMC5kx1ALAA--.1870S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxurWxKF4rXryxKry7Xr4ruFg_yoWrAF1xpr
- W5GFW2kFWDJFZF93WIqw1Fgr43t3y3KryDWwn5Jr1UAFZ0qw4kuFsFyw4Y9rWDZFy0kryj
- vF4jk3sxZFW7ZFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9Y14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: qwCowAD3_2scNi5kqxkNAA--.2369S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxurWxKF4rXryxKry7Xr4ruFg_yoWrZr1fpF
+ W5CFW2kFWDJFZF93WIqw1Fgr43t3y3KryDWwn5Jr1UAFZ0v3ykuFsrAw4Y9ryDZF10kryj
+ vF4jkr9xZFWUZFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPI14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
  1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
- xl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
- 6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
- 0_Gr1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxa
- n2IY04v7Mxk0xIA0c2IEe2xFo4CEbIxvr21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x
- 0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2
- zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF
- 4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWU
- CwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCT
- nIWIevJa73UjIFyTuYvjfUoOJ5UUUUU
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+ CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+ 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+ W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka
+ 0xkIwI1lc7I2V7IY0VAS07AlzVAYIcxG8wCY1x0262kKe7AKxVWUtVW8ZwCF04k20xvY0x
+ 0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwCFI7km07C267AKxVWUXVWUAwC20s026c02
+ F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GF
+ ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7Cj
+ xVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r
+ 1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd
+ -B_UUUUU=
 X-Originating-IP: [180.175.29.170]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
@@ -75,7 +75,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 02:39:46 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 03:02:00 -0000
 
 
 On 2023/4/6 10:24, Alistair Francis wrote:
@@ -100,7 +100,19 @@ On 2023/4/6 10:24, Alistair Francis wrote:
 >> in section 3.1.6.1.
 > They seem to be in conflict. It's probably worth opening an issue
 > against the spec to get some clarification here.
-OK. I'll send an issue for it.
+
+I have sent an issue for 
+it(https://github.com/riscv/riscv-isa-manual/issues/1006).
+
+However, I just find it may be not a conflict. Section 9.6.4 is the spec 
+for hypervisor. And when hypervisor is supported,
+
+S-mode, then U-mode should be supported too.
+
+Regards,
+
+Weiwei Li
+
 >
 >> And MPP is WARL field.  PRV_U will be an illegal value for MPP if U-mode
 >> is not implemented.
@@ -125,13 +137,6 @@ OK. I'll send an issue for it.
 > what happened, but try to check that your responses are plain text. I
 > think there is a setting in Thunderbird to just open and reply to all
 > emails as plain text, which is probably worth turning on
-
-OK . Thanks! I'll try to set it later.
-
-Regards,
-
-Weiwei Li
-
 >
 > Alistair
 >
