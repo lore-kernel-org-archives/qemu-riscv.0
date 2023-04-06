@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkDJz-000777-U4
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 20:17:47 -0400
+	id 1pkDLF-0007u2-DX
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 20:19:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkDJy-00076Z-AY; Wed, 05 Apr 2023 20:17:46 -0400
-Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
+ id 1pkDLE-0007tf-2S; Wed, 05 Apr 2023 20:19:04 -0400
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkDJt-0002oO-Io; Wed, 05 Apr 2023 20:17:45 -0400
-Received: by mail-ua1-x92d.google.com with SMTP id n1so302905uae.9;
- Wed, 05 Apr 2023 17:17:40 -0700 (PDT)
+ id 1pkDLC-0003DT-E3; Wed, 05 Apr 2023 20:19:03 -0400
+Received: by mail-ua1-x930.google.com with SMTP id i22so26799276uat.8;
+ Wed, 05 Apr 2023 17:19:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680740260;
+ d=gmail.com; s=20210112; t=1680740341;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kaWgZ5nPzlZT+MHy4Tfa9QcztgG7gV+7hkKldF6Iw4I=;
- b=gjn9uX6e1YC7hKVL/QF3uMwbbKdj9d0AWZRuYynJCyxkuBllAHYzAAyu7XMJyGAR2e
- 2Aq45jRWKfRbw4EAcYfMKCVMpprkH3zOtlLXtNt3Z0MYykESOICdvaXu0o6hQfSj+ds4
- tSg2bLycBitPl3CaiOn6EjvQrBMKSg0IgOS9hAOeNhxr+SKWxfUfl1ZDPEcqWyH44LJT
- 91D2n/QOm2bFGfUDhAiEgEmOLZFhUwNgDmCbJ6HaotbDTYCYdSnO8Ef83MJ0aLMhxEFQ
- bHXx6wUzrn3ZZ8Ic4YBm89FxqjPutOFwt5UUAnZ78vjVISMD4PcNiZ49JgMm+IDfMuWh
- /aPA==
+ bh=/sjQTGSt2TynqjDj7rHrQDmNFrpbQNR7kD3FgNQAdxg=;
+ b=i2YkAvkJjo51xS63MJgppEmbiXeXxG5c1U3kshaEghiKBkbY2dQ8mJu7YAS9jQjxBw
+ A1MKGu4qZvmJivaQIJkZNmq3xnHr1LCQ9oqq9xOvpK/Gm4zUbztv5BaGX8FY10cIDO/j
+ wKjAFeW3SrsqSHwPk8+4lCzsDlU0eFeyTID3nREaT/1shdI+HY0zVJwuEo3duw7/YNkl
+ yGBWCiWNPyrLCHqKgW4nwDnPIOgfoDP3Rpr16+BpuRCtu7/+yWUGLEuRf5IZxZLWWHnt
+ +z6y7lF6yw9Uopmj/xHknX64OZ8+bfe4WZE5oJYMdaMe4iiEnzkbIhF4TCeNEsT5jZqu
+ DWpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680740260;
+ d=1e100.net; s=20210112; t=1680740341;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kaWgZ5nPzlZT+MHy4Tfa9QcztgG7gV+7hkKldF6Iw4I=;
- b=GXxywzYpnu3bBSw9khAaWOdPdoWo5FxGzajAY1dvAkWDqMWk3ZiMBCzHYLyxT7IDBl
- KOSmf2KOZyujF+EAr5Wi4ZCaZcAibDC4g0jH1PBB/CfWtwY+fKvqO3QdJkFlXTa3qhzW
- C4pmXIYMwqSddQVv9z2OkcdSXR9+1lSxpcyn9RuuwdIZ/EGZOpZWMZIn3lgagDv9KN8W
- DXEemLI204ljX7SQrP3IqBmTutiGOYQaOpFe+KbPFVTnY80iBSFeeblQh9Cpxr3LtmGI
- YlsnA6PEPdu+Xkx0+hoVXZoIwQj1ImwoNRw5CtF/eXzxHjfod1oIprX2IGKZjL1vJzxK
- LmWg==
-X-Gm-Message-State: AAQBX9eaDQjJn5qD6aCkE7V6I7AQEHjBAiNBkBr4iTiRrr49sYbRAImG
- ABVk+aZf2yuci5PwBJudSDgHoO3oQVLDBy5pIkg=
-X-Google-Smtp-Source: AKy350b/PU9jCnyTHSqMC47h5bkozx+/7ZmIxP72VojY3DDKBzxlxnDhjJC3kdYUec4ifW9WdUrIc4HGNdecaGKPyQI=
-X-Received: by 2002:ab0:474f:0:b0:688:c23f:c22f with SMTP id
- i15-20020ab0474f000000b00688c23fc22fmr6342506uac.1.1680740260272; Wed, 05 Apr
- 2023 17:17:40 -0700 (PDT)
+ bh=/sjQTGSt2TynqjDj7rHrQDmNFrpbQNR7kD3FgNQAdxg=;
+ b=MFqmCfC9nlntWL9TuFP4PJOG6GgsIT4IUJNnsSwCisJURQi1/keLrNzmZx9kV3pDRj
+ tbBiIL+C6L48rm4eTHdLFhyUqAluiBwsPzR9UYNfp8wAQvJFulphZMVwtxiodUqEEgOJ
+ tFvcuxrGr2eqM41nU7s1aWLfJ8hJ3OC9yiwLV5l1pssM44Oli8HfTnPkVATDy+4G+z/q
+ 5YN+0lUS6s3kZlSvy8rIIROUtPJv612OXBLy4qUuh7x1m6vGkB0yyn+yQfbKQqoR9kKy
+ euQFc75LqYgiYS0bNKep6DB2pUuAsnfH9DGOqG5A9X53BpWFkdGGwFV1XPCl5U0L34Kq
+ W4JA==
+X-Gm-Message-State: AAQBX9cLAIjNCOKB2aUZtmL/bEvlq2AiaFltNNKeoiqPi/zdFEtqeJwK
+ K9taJJ0m1ofUY5+QCmNqRKgMadV924khT8b0oqY=
+X-Google-Smtp-Source: AKy350bef8mleO7G7gD8R6yfXcI3DkdgML4DjjN4MTb6KZ+67yR/dx/CIp14FR3sXitUxxbVJDtUbfjKjth3mbQNQos=
+X-Received: by 2002:a1f:90c9:0:b0:43c:6ef1:7116 with SMTP id
+ s192-20020a1f90c9000000b0043c6ef17116mr6209897vkd.0.1680740340955; Wed, 05
+ Apr 2023 17:19:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230329172903.636383-1-dbarboza@ventanamicro.com>
- <20230329172903.636383-12-dbarboza@ventanamicro.com>
-In-Reply-To: <20230329172903.636383-12-dbarboza@ventanamicro.com>
+ <20230329172903.636383-13-dbarboza@ventanamicro.com>
+In-Reply-To: <20230329172903.636383-13-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Apr 2023 10:17:14 +1000
-Message-ID: <CAKmqyKPoQ_=JqBVtp2WdSQLqVe8Y2GTGJwJ50wVM_F9wDcKE+g@mail.gmail.com>
-Subject: Re: [PATCH v3 11/20] target/riscv: remove cpu->cfg.ext_m
+Date: Thu, 6 Apr 2023 10:18:34 +1000
+Message-ID: <CAKmqyKPtzHJDfjTfTmYzaLai7PFB30icjKR=6VVQEGDZHic9VQ@mail.gmail.com>
+Subject: Re: [PATCH v3 12/20] target/riscv: remove cpu->cfg.ext_s
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,16 +77,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 00:17:46 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 00:19:04 -0000
 
-On Thu, Mar 30, 2023 at 3:33=E2=80=AFAM Daniel Henrique Barboza
+On Thu, Mar 30, 2023 at 3:32=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> Create a new "m" RISCVCPUMisaExtConfig property that will update
-> env->misa_ext* with RVM. Instances of cpu->cfg.ext_m and similar are
-> replaced with riscv_has_ext(env, RVM).
+> Create a new "s" RISCVCPUMisaExtConfig property that will update
+> env->misa_ext* with RVS. Instances of cpu->cfg.ext_s and similar are
+> replaced with riscv_has_ext(env, RVS).
 >
-> Remove the old "m" property and 'ext_m' from RISCVCPUConfig.
+> Remove the old "s" property and 'ext_s' from RISCVCPUConfig.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
@@ -96,83 +96,93 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.c | 10 +++++-----
+>  target/riscv/cpu.c | 11 +++++------
 >  target/riscv/cpu.h |  1 -
->  2 files changed, 5 insertions(+), 6 deletions(-)
+>  2 files changed, 5 insertions(+), 7 deletions(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 9cf3ab3988..6861446489 100644
+> index 6861446489..59f6711f94 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -810,13 +810,13 @@ static void riscv_cpu_validate_set_extensions(RISCV=
-CPU *cpu, Error **errp)
->      CPURISCVState *env =3D &cpu->env;
+> @@ -401,7 +401,6 @@ static void rv64_thead_c906_cpu_init(Object *obj)
 >
->      /* Do some ISA extension error checking */
-> -    if (cpu->cfg.ext_g && !(riscv_has_ext(env, RVI) && cpu->cfg.ext_m &&
-> +    if (cpu->cfg.ext_g && !(riscv_has_ext(env, RVI) &&
-> +                            riscv_has_ext(env, RVM) &&
->                              riscv_has_ext(env, RVA) &&
->                              riscv_has_ext(env, RVF) &&
->                              riscv_has_ext(env, RVD) &&
->                              cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) =
-{
->          warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
-> -        cpu->cfg.ext_m =3D true;
->          cpu->cfg.ext_icsr =3D true;
->          cpu->cfg.ext_ifencei =3D true;
+>      cpu->cfg.ext_g =3D true;
+>      cpu->cfg.ext_u =3D true;
+> -    cpu->cfg.ext_s =3D true;
+>      cpu->cfg.ext_icsr =3D true;
+>      cpu->cfg.ext_zfh =3D true;
+>      cpu->cfg.mmu =3D true;
+> @@ -836,7 +835,7 @@ static void riscv_cpu_validate_set_extensions(RISCVCP=
+U *cpu, Error **errp)
+>          return;
+>      }
 >
-> @@ -1093,7 +1093,7 @@ static void riscv_cpu_sync_misa_cfg(CPURISCVState *=
+> -    if (cpu->cfg.ext_s && !cpu->cfg.ext_u) {
+> +    if (riscv_has_ext(env, RVS) && !cpu->cfg.ext_u) {
+>          error_setg(errp,
+>                     "Setting S extension without U extension is illegal")=
+;
+>          return;
+> @@ -848,7 +847,7 @@ static void riscv_cpu_validate_set_extensions(RISCVCP=
+U *cpu, Error **errp)
+>          return;
+>      }
+>
+> -    if (cpu->cfg.ext_h && !cpu->cfg.ext_s) {
+> +    if (cpu->cfg.ext_h && !riscv_has_ext(env, RVS)) {
+>          error_setg(errp, "H extension implicitly requires S-mode");
+>          return;
+>      }
+> @@ -1108,7 +1107,7 @@ static void riscv_cpu_sync_misa_cfg(CPURISCVState *=
 env)
->      if (riscv_has_ext(env, RVE)) {
->          ext |=3D RVE;
+>      if (riscv_has_ext(env, RVC)) {
+>          ext |=3D RVC;
 >      }
-> -    if (riscv_cpu_cfg(env)->ext_m) {
-> +    if (riscv_has_ext(env, RVM)) {
->          ext |=3D RVM;
+> -    if (riscv_cpu_cfg(env)->ext_s) {
+> +    if (riscv_has_ext(env, RVS)) {
+>          ext |=3D RVS;
 >      }
->      if (riscv_has_ext(env, RVA)) {
-> @@ -1445,6 +1445,8 @@ static const RISCVCPUMisaExtConfig misa_ext_cfgs[] =
+>      if (riscv_cpu_cfg(env)->ext_u) {
+> @@ -1447,6 +1446,8 @@ static const RISCVCPUMisaExtConfig misa_ext_cfgs[] =
 =3D {
->       .misa_bit =3D RVI, .enabled =3D true},
->      {.name =3D "e", .description =3D "Base integer instruction set (embe=
-dded)",
 >       .misa_bit =3D RVE, .enabled =3D false},
-> +    {.name =3D "m", .description =3D "Integer multiplication and divisio=
+>      {.name =3D "m", .description =3D "Integer multiplication and divisio=
 n",
-> +     .misa_bit =3D RVM, .enabled =3D true},
+>       .misa_bit =3D RVM, .enabled =3D true},
+> +    {.name =3D "s", .description =3D "Supervisor-level instructions",
+> +     .misa_bit =3D RVS, .enabled =3D true},
 >  };
 >
 >  static void riscv_cpu_add_misa_properties(Object *cpu_obj)
-> @@ -1468,7 +1470,6 @@ static void riscv_cpu_add_misa_properties(Object *c=
+> @@ -1470,7 +1471,6 @@ static void riscv_cpu_add_misa_properties(Object *c=
 pu_obj)
 >  static Property riscv_cpu_extensions[] =3D {
 >      /* Defaults for standard extensions */
 >      DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, false),
-> -    DEFINE_PROP_BOOL("m", RISCVCPU, cfg.ext_m, true),
->      DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
+> -    DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
 >      DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
 >      DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
-> @@ -1576,7 +1577,6 @@ static void register_cpu_props(Object *obj)
->       * later on.
+>      DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, true),
+> @@ -1578,7 +1578,6 @@ static void register_cpu_props(Object *obj)
 >       */
 >      if (cpu->env.misa_ext !=3D 0) {
-> -        cpu->cfg.ext_m =3D misa_ext & RVM;
 >          cpu->cfg.ext_v =3D misa_ext & RVV;
->          cpu->cfg.ext_s =3D misa_ext & RVS;
+> -        cpu->cfg.ext_s =3D misa_ext & RVS;
 >          cpu->cfg.ext_u =3D misa_ext & RVU;
+>          cpu->cfg.ext_h =3D misa_ext & RVH;
+>          cpu->cfg.ext_j =3D misa_ext & RVJ;
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index cc0b9e73ac..7a42c80b7d 100644
+> index 7a42c80b7d..fc35aa7509 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
 > @@ -419,7 +419,6 @@ typedef struct {
 >
 >  struct RISCVCPUConfig {
 >      bool ext_g;
-> -    bool ext_m;
->      bool ext_s;
+> -    bool ext_s;
 >      bool ext_u;
 >      bool ext_h;
+>      bool ext_j;
 > --
 > 2.39.2
 >
