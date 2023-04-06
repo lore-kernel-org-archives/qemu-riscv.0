@@ -1,59 +1,93 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkK0r-0006rF-W4
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Apr 2023 03:26:30 -0400
+	id 1pkKOO-0003PV-NE
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Apr 2023 03:50:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pkK0a-0006mc-8B; Thu, 06 Apr 2023 03:26:12 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pkK0W-0000aV-5P; Thu, 06 Apr 2023 03:26:11 -0400
-Received: from localhost.localdomain (unknown [180.175.29.170])
- by APP-05 (Coremail) with SMTP id zQCowADHzMwGdC5kQlGzDg--.14061S4;
- Thu, 06 Apr 2023 15:26:00 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v2 2/2] target/riscv: Legalize MPP value in write_mstatus
-Date: Thu,  6 Apr 2023 15:25:55 +0800
-Message-Id: <20230406072555.21927-3-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230406072555.21927-1-liweiwei@iscas.ac.cn>
-References: <20230406072555.21927-1-liweiwei@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pkKOM-0003OE-MF
+ for qemu-riscv@nongnu.org; Thu, 06 Apr 2023 03:50:46 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pkKOK-0004qO-3P
+ for qemu-riscv@nongnu.org; Thu, 06 Apr 2023 03:50:46 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1680767443;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Zfpt1hWlJeW+De1zXUq58qE//gZcupovgtklglmgOFw=;
+ b=CdXSE1zlSnfXN4yIK3R51Ko5+6TVHy7MPmZ0n1rOtqgtpI7fuSvd26qbCSBnX2+GSlgQGy
+ u+GF5W+niaczqLX1HnAM97kpQ3Zhg+qXdI/f3C0/owUDX6pyB5sB9xd55tFwFO0mVgv7m3
+ Bb+GmJIlELW7gIjUyH30Qnf1Uo9vfXQ=
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-491-kr2e2A3zN5OKf6Ngzg7BKQ-1; Thu, 06 Apr 2023 03:50:41 -0400
+X-MC-Unique: kr2e2A3zN5OKf6Ngzg7BKQ-1
+Received: by mail-qk1-f200.google.com with SMTP id
+ 72-20020a37044b000000b0074694114c09so17251072qke.4
+ for <qemu-riscv@nongnu.org>; Thu, 06 Apr 2023 00:50:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1680767441;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Zfpt1hWlJeW+De1zXUq58qE//gZcupovgtklglmgOFw=;
+ b=P0H5RTeQwexhj6/3Hu5seyDUnC6gmwUBsmMoHeUf4zRQdUSqIOUUrOKpOdErYI7YmV
+ kcwwnYqEKuidwKS0nlJwvva7hVsNrApexFuMZwW44YvoR/50Jbpgtbdj3LNMmVG/CmG1
+ MnSsxOwLJt1UPYSOXbVQ9sKbQFEhkGReaApmkujleRx3+ei/DgEH9Tq/0gy2dNXuXYhg
+ HbGCG/WbdOjNRxqQnShwopXi+tFfXPT2cjZHdep2EE4Ga7ZvXw8t/S9nw9Q5TuKjYZ66
+ 8TiEORrhOioS5nT14yD1i+yi0UnMBniiNsUGjcbaASKVAHbV3+5e8NzW6dKgiQtEfyjZ
+ gJ9A==
+X-Gm-Message-State: AAQBX9dMmBolr0ixFEgmT+ZtNuXrZiv8LYY99iHSe4PUjt5CuhFHFuEN
+ nmBSbU6dcH9WnVPRlBNZBt0WIaAGk9jeP+rt+lnXNaz3TTTziyBTRtTY9x+9QECj1sSS0ZdKwTi
+ OHvMZay7BhRyKjwk=
+X-Received: by 2002:a05:6214:19c3:b0:5a5:b269:bfd7 with SMTP id
+ j3-20020a05621419c300b005a5b269bfd7mr3536301qvc.8.1680767441142; 
+ Thu, 06 Apr 2023 00:50:41 -0700 (PDT)
+X-Google-Smtp-Source: AKy350aOTMeFA6L3L3kDCyW2m/d0fTHZIJmC7P+sa1stPv6snl6xCxTWIR0yTmfZxFMazbqwU1fSEQ==
+X-Received: by 2002:a05:6214:19c3:b0:5a5:b269:bfd7 with SMTP id
+ j3-20020a05621419c300b005a5b269bfd7mr3536276qvc.8.1680767440725; 
+ Thu, 06 Apr 2023 00:50:40 -0700 (PDT)
+Received: from [192.168.0.3] (ip-109-43-178-193.web.vodafone.de.
+ [109.43.178.193]) by smtp.gmail.com with ESMTPSA id
+ 65-20020a370c44000000b00746777fd176sm297041qkm.26.2023.04.06.00.50.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 06 Apr 2023 00:50:40 -0700 (PDT)
+Message-ID: <3cccc7e6-3a39-b3b4-feaf-85a3faa58570@redhat.com>
+Date: Thu, 6 Apr 2023 09:50:36 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.13.0
+Subject: Re: [PATCH 10/10] hw/s390x: Rename pv.c -> pv-kvm.c
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org, Claudio Imbrenda <imbrenda@linux.ibm.com>,
+ Janosch Frank <frankja@linux.ibm.com>
+Cc: qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>, qemu-arm@nongnu.org,
+ kvm@vger.kernel.org, qemu-ppc@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Eric Farman <farman@linux.ibm.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ David Hildenbrand <david@redhat.com>, Ilya Leoshkevich <iii@linux.ibm.com>
+References: <20230405160454.97436-1-philmd@linaro.org>
+ <20230405160454.97436-11-philmd@linaro.org>
+From: Thomas Huth <thuth@redhat.com>
+In-Reply-To: <20230405160454.97436-11-philmd@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowADHzMwGdC5kQlGzDg--.14061S4
-X-Coremail-Antispam: 1UD129KBjvJXoWxJr1fGrykWF4DJr4UXr43KFg_yoW8Kw4fpr
- WkC3y3GrWDJa9Fqa4fXr48WF15ArWxGrWUCan7Jw48Kw4rJrZ0kF1Dt3y3uF1DWFyxWr1j
- 93WDZ3s8AF47AaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBE14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
- x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
- 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
- IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
- Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
- xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
- 6r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2
- Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
- Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMI
- IF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUc6pPUUUUU
- =
-X-Originating-IP: [180.175.29.170]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -34
+X-Spam_score: -3.5
+X-Spam_bar: ---
+X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-1.355, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -66,74 +100,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 07:26:12 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 07:50:46 -0000
 
-mstatus.MPP field is a WARL field since priv version 1.11, so we
-remain it unchanged if an invalid value is written into it. And
-after this, RVH shouldn't be passed to riscv_cpu_set_mode().
+On 05/04/2023 18.04, Philippe Mathieu-Daudé wrote:
+> Protected Virtualization is specific to KVM.
+> Rename the file as 'pv-kvm.c' to make this clearer.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>   hw/s390x/{pv.c => pv-kvm.c} | 0
+>   hw/s390x/meson.build        | 2 +-
+>   2 files changed, 1 insertion(+), 1 deletion(-)
+>   rename hw/s390x/{pv.c => pv-kvm.c} (100%)
+> 
+> diff --git a/hw/s390x/pv.c b/hw/s390x/pv-kvm.c
+> similarity index 100%
+> rename from hw/s390x/pv.c
+> rename to hw/s390x/pv-kvm.c
+> diff --git a/hw/s390x/meson.build b/hw/s390x/meson.build
+> index f291016fee..2f43b6c473 100644
+> --- a/hw/s390x/meson.build
+> +++ b/hw/s390x/meson.build
+> @@ -22,7 +22,7 @@ s390x_ss.add(when: 'CONFIG_KVM', if_true: files(
+>     'tod-kvm.c',
+>     's390-skeys-kvm.c',
+>     's390-stattrib-kvm.c',
+> -  'pv.c',
+> +  'pv-kvm.c',
+>     's390-pci-kvm.c',
+>   ))
+>   s390x_ss.add(when: 'CONFIG_TCG', if_true: files(
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
----
- target/riscv/cpu_helper.c |  5 +----
- target/riscv/csr.c        | 18 ++++++++++++++++++
- 2 files changed, 19 insertions(+), 4 deletions(-)
+Hmmm, maybe we should rather move it to target/s390x/kvm/ instead?
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 2310c7905f..6148f221c3 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -647,12 +647,9 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
- 
- void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
- {
--    if (newpriv > PRV_M) {
-+    if (newpriv > PRV_M || newpriv == PRV_H) {
-         g_assert_not_reached();
-     }
--    if (newpriv == PRV_H) {
--        newpriv = PRV_U;
--    }
-     if (icount_enabled() && newpriv != env->priv) {
-         riscv_itrigger_update_priv(env);
-     }
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index e0b871f6dc..f3ae726853 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1230,6 +1230,18 @@ static bool validate_vm(CPURISCVState *env, target_ulong vm)
-            satp_mode_max_from_map(riscv_cpu_cfg(env)->satp_mode.map);
- }
- 
-+static target_ulong legalize_mpp(CPURISCVState *env, target_ulong old_mpp,
-+                                 target_ulong val)
-+{
-+    target_ulong new_mpp = get_field(val, MSTATUS_MPP);
-+    bool mpp_invalid = (new_mpp == PRV_S && !riscv_has_ext(env, RVS)) ||
-+                       (new_mpp == PRV_U && !riscv_has_ext(env, RVU)) ||
-+                       (new_mpp == PRV_H);
-+
-+    /* Remain field unchanged if new_mpp value is invalid */
-+    return mpp_invalid ? set_field(val, MSTATUS_MPP, old_mpp) : val;
-+}
-+
- static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-                                     target_ulong val)
- {
-@@ -1237,6 +1249,12 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-     uint64_t mask = 0;
-     RISCVMXL xl = riscv_cpu_mxl(env);
- 
-+    /*
-+     * MPP field have been made WARL since priv version 1.11. However,
-+     * legalization for it will not break any software running on 1.10.
-+     */
-+    val = legalize_mpp(env, get_field(mstatus, MSTATUS_MPP), val);
-+
-     /* flush tlb on mstatus fields that affect VM */
-     if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
-             MSTATUS_MPRV | MSTATUS_SUM)) {
--- 
-2.25.1
+Janosch, what's your opinion?
+
+  Thomas
 
 
