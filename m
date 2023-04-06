@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pkDOC-0002Nl-0g
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 20:22:08 -0400
+	id 1pkDOj-0002zm-CM
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Apr 2023 20:22:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkDO9-0002NQ-UW; Wed, 05 Apr 2023 20:22:05 -0400
-Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
+ id 1pkDOh-0002yT-Os; Wed, 05 Apr 2023 20:22:39 -0400
+Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pkDO8-0004k7-B1; Wed, 05 Apr 2023 20:22:05 -0400
-Received: by mail-vs1-xe2b.google.com with SMTP id h27so33076917vsa.1;
- Wed, 05 Apr 2023 17:22:03 -0700 (PDT)
+ id 1pkDOf-0004on-WB; Wed, 05 Apr 2023 20:22:39 -0400
+Received: by mail-ua1-x932.google.com with SMTP id i22so26803108uat.8;
+ Wed, 05 Apr 2023 17:22:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1680740523;
+ d=gmail.com; s=20210112; t=1680740556;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RXG2V1mvfmiB0sC7kJP6BNX/6KgWdBhtv+hpoN4jxWI=;
- b=cxOfFKHuya/WJYuuBIxbdbpaJloogfHtqMCZyOGmPCfKi0O2SxAtgqYk1HOT8fg0tR
- W1NYrBmcgxe+U67FSsdi6t+GxqFF6LVeQoJHH6Oh9P6LcoMIuF+vhjLEYB3zD4nZs1Gy
- 8LjUtQahC1RFQ+uyEJLd6u7eKlUOoF86jncxG1HMJKGz8lKtgfcYNaAG6T4J+PUznFAs
- 45p6aI80pLEwzoGdlmIiEVt2AXbSKvKIn79wRpaYwZZagIjmDfYo8JVbA2GMJN4GUgWD
- 5JLlfkNyyIOBFJsnVUIqi6yyB/cKg0wNlOkQqxUOYp8yhZ7x1hmnt2Qu/Cw/pBqFng+m
- KWYw==
+ bh=rD9Nyl5Ghq+rrnAmSw5uYHh+vSsyBp2OCSD0omgxGXw=;
+ b=W1MARoTIOFzzc/JjsSMJD8++FphEOGKoAR6znxhT9EWZaBIk7ooCs5BVdYdpkIZuqB
+ IMWD4x2BF8Bz43NTdEyDerkm/ycRtIDyDn2sIMuERCjk1Q4Jj8u41e5CM0b5fUC2zCig
+ poOWOZC1OKbdmgW6puf4wwCsnc7ee35qMruntKsxk9s9zJYuFiTM/3qb8HGyOeYbd1Vc
+ B77zRp/gu4j43HC/Xmgcayn4eCGWQon0Dns/zUGCS1dITyzA7pbTIRO8YNhzGEEt2Z6Y
+ N/vv4OSlFgDT5xlXpsINKa0Z1xWCXTPFburQrCjR4sMipZChFmWaI1LMsfxFwf+mnaU/
+ A/Gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680740523;
+ d=1e100.net; s=20210112; t=1680740556;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RXG2V1mvfmiB0sC7kJP6BNX/6KgWdBhtv+hpoN4jxWI=;
- b=W2uYcWFfUyY32LBrZPq6uB6mQDayEH60CsQirv5Y0IUXAAEuNrN02YpeSmS5mrx/aC
- CtvnQY/6hVUkODZyRxfJjcJScEo4Hv/71d0A5Y4y7YdjZNBJCLwrgrSzvk7FnEX80PsM
- 6PkpfbZKUDbw71osmFNRvrnsFlczNmXtg5FJmj9YUPcNVUs4j/g/oXdjqDkGEDrkM2X0
- XC3Z44YyYQXllEDWxUrYuFQ2hXIdhW9A1VVNUCxHwVW+qixmvP8rfE35GFgg6ocWcaOy
- 9grlD9FCRI1bpH0IcVAN8wIWbsmLpAAulgi7CxpLIb50Yk9s8jblAUS36wzq6snmWEwY
- oWlQ==
-X-Gm-Message-State: AAQBX9fuLIlj2rpEM5pURvbs8xyTOSNUlqhdktJYjrCD4l3njIRTQlrF
- Cu41Y4+I8wVdLB5y2oYSKkeJImjpWxZegUd2cWQ=
-X-Google-Smtp-Source: AKy350Y3yWvPIzWbmibXx/20jzvSMiJH6YOsPzXABHVnT/6kTvfd7Hjb4SytAVcdCA4abpgk4tXSQT+l5Mh7FcdvdNE=
-X-Received: by 2002:a67:c890:0:b0:425:8e57:7bfd with SMTP id
- v16-20020a67c890000000b004258e577bfdmr5666053vsk.3.1680740522794; Wed, 05 Apr
- 2023 17:22:02 -0700 (PDT)
+ bh=rD9Nyl5Ghq+rrnAmSw5uYHh+vSsyBp2OCSD0omgxGXw=;
+ b=gflSQOArNSlonWpJ9otahi+oF3egDw6Iw6MP7qZoEEz+VXd/5AOg/UD8tehiBknI/Z
+ uLHmsK2JRKoNxLmPSQHY/0YsQo7zl2Jtrgju7mbbTKGe8WcXFn/JBuMsQcK/LxGUmW0Y
+ WU0PsyXhhMJgQtUoaH+ZFYswx+xEYiey5pSk1U7xz1dyJF2nxZUwn9OvugQPb23sDaLY
+ Y/kKRrPZ/BmU9KxXnbOTARwOcu2TN3V6i4GAhO1UQJW+5bRgA6gXfs8y9/GxvHufMpGs
+ dU/yyj8yg3jBbThmKm1SpwhxvO8yS0GZuKLwiMv0n0SB0j7GW15TgCl+/V+eQnoppzhe
+ L+lQ==
+X-Gm-Message-State: AAQBX9d1G/5EV/MSrrQjFN+6CzrpeeUQrY0gIJOPp7sPd4L/9B1HoxtY
+ lJRjlq3RqmRNhodRR+LYgA5Hbfz1QR6M5GWoJZg=
+X-Google-Smtp-Source: AKy350aT6Mw6hPutcfIJLpyuwPRhEtnQ6HckBuLtLBwQFs8KOCu5//cwYAFIJqNqHiUZyNxGpZsATlBeoJVdnjJlqhg=
+X-Received: by 2002:ab0:5485:0:b0:765:c225:c914 with SMTP id
+ p5-20020ab05485000000b00765c225c914mr5225889uaa.1.1680740556538; Wed, 05 Apr
+ 2023 17:22:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230329172903.636383-1-dbarboza@ventanamicro.com>
- <20230329172903.636383-17-dbarboza@ventanamicro.com>
-In-Reply-To: <20230329172903.636383-17-dbarboza@ventanamicro.com>
+ <20230329172903.636383-18-dbarboza@ventanamicro.com>
+In-Reply-To: <20230329172903.636383-18-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Apr 2023 10:21:36 +1000
-Message-ID: <CAKmqyKNEXq-_faAdNDa_jFA=N3dqwori67mmt42rLqirLpw2SA@mail.gmail.com>
-Subject: Re: [PATCH v3 16/20] target/riscv: remove cpu->cfg.ext_v
+Date: Thu, 6 Apr 2023 10:22:10 +1000
+Message-ID: <CAKmqyKN2q8NK62w+MdzihfxKiwrqSzYGQ166tJZbgObCiLpong@mail.gmail.com>
+Subject: Re: [PATCH v3 17/20] target/riscv: remove riscv_cpu_sync_misa_cfg()
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,16 +77,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2023 00:22:06 -0000
+X-List-Received-Date: Thu, 06 Apr 2023 00:22:40 -0000
 
-On Thu, Mar 30, 2023 at 3:33=E2=80=AFAM Daniel Henrique Barboza
+On Thu, Mar 30, 2023 at 3:31=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> Create a new "v" RISCVCPUMisaExtConfig property that will update
-> env->misa_ext* with RVV. Instances of cpu->cfg.ext_v and similar are
-> replaced with riscv_has_ext(env, RVV).
+> This function was created to move the sync between cpu->cfg.ext_N bit
+> changes to env->misa_ext* from the validation step to an ealier step,
+> giving us a guarantee that we could use either cpu->cfg.ext_N or
+> riscv_has_ext(env,N) in the validation.
 >
-> Remove the old "v" property and 'ext_v' from RISCVCPUConfig.
+> We don't have any cpu->cfg.ext_N left that has an existing MISA bit
+> (cfg.ext_g will be handled shortly). The function is now a no-op, simply
+> copying the existing values of misa_ext* back to misa_ext*.
+>
+> Remove it.
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
@@ -96,92 +101,83 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.c | 12 +++++-------
->  target/riscv/cpu.h |  1 -
->  2 files changed, 5 insertions(+), 8 deletions(-)
+>  target/riscv/cpu.c | 52 ----------------------------------------------
+>  1 file changed, 52 deletions(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 86edc08545..b40a55bc8d 100644
+> index b40a55bc8d..3eb3b7dc59 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -876,7 +876,7 @@ static void riscv_cpu_validate_set_extensions(RISCVCP=
-U *cpu, Error **errp)
->      }
+> @@ -1081,50 +1081,6 @@ static void riscv_cpu_finalize_features(RISCVCPU *=
+cpu, Error **errp)
+>  #endif
+>  }
 >
->      /* The V vector extension depends on the Zve64d extension */
-> -    if (cpu->cfg.ext_v) {
-> +    if (riscv_has_ext(env, RVV)) {
->          cpu->cfg.ext_zve64d =3D true;
->      }
->
-> @@ -958,7 +958,7 @@ static void riscv_cpu_validate_set_extensions(RISCVCP=
-U *cpu, Error **errp)
->          cpu->cfg.ext_zksh =3D true;
->      }
->
-> -    if (cpu->cfg.ext_v) {
-> +    if (riscv_has_ext(env, RVV)) {
->          int vext_version =3D VEXT_VERSION_1_00_0;
->          if (!is_power_of_2(cpu->cfg.vlen)) {
->              error_setg(errp,
-> @@ -1115,7 +1115,7 @@ static void riscv_cpu_sync_misa_cfg(CPURISCVState *=
-env)
->      if (riscv_has_ext(env, RVH)) {
->          ext |=3D RVH;
->      }
-> -    if (riscv_cpu_cfg(env)->ext_v) {
-> +    if (riscv_has_ext(env, RVV)) {
->          ext |=3D RVV;
->      }
->      if (riscv_has_ext(env, RVJ)) {
-> @@ -1453,6 +1453,8 @@ static const RISCVCPUMisaExtConfig misa_ext_cfgs[] =
-=3D {
->       .misa_bit =3D RVH, .enabled =3D true},
->      {.name =3D "x-j", .description =3D "Dynamic translated languages",
->       .misa_bit =3D RVJ, .enabled =3D false},
-> +    {.name =3D "v", .description =3D "Vector operations",
-> +     .misa_bit =3D RVV, .enabled =3D false},
->  };
->
->  static void riscv_cpu_add_misa_properties(Object *cpu_obj)
-> @@ -1476,7 +1478,6 @@ static void riscv_cpu_add_misa_properties(Object *c=
-pu_obj)
->  static Property riscv_cpu_extensions[] =3D {
->      /* Defaults for standard extensions */
->      DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, false),
-> -    DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
->      DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
->      DEFINE_PROP_BOOL("sscofpmf", RISCVCPU, cfg.ext_sscofpmf, false),
->      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-> @@ -1569,7 +1570,6 @@ static Property riscv_cpu_extensions[] =3D {
->  static void register_cpu_props(Object *obj)
->  {
->      RISCVCPU *cpu =3D RISCV_CPU(obj);
-> -    uint32_t misa_ext =3D cpu->env.misa_ext;
->      Property *prop;
->      DeviceState *dev =3D DEVICE(obj);
->
-> @@ -1579,8 +1579,6 @@ static void register_cpu_props(Object *obj)
->       * later on.
->       */
->      if (cpu->env.misa_ext !=3D 0) {
-> -        cpu->cfg.ext_v =3D misa_ext & RVV;
+> -static void riscv_cpu_sync_misa_cfg(CPURISCVState *env)
+> -{
+> -    uint32_t ext =3D 0;
 > -
->          /*
->           * We don't want to set the default riscv_cpu_extensions
->           * in this case.
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 43a40ba950..c0280ace2a 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -419,7 +419,6 @@ typedef struct {
+> -    if (riscv_has_ext(env, RVI)) {
+> -        ext |=3D RVI;
+> -    }
+> -    if (riscv_has_ext(env, RVE)) {
+> -        ext |=3D RVE;
+> -    }
+> -    if (riscv_has_ext(env, RVM)) {
+> -        ext |=3D RVM;
+> -    }
+> -    if (riscv_has_ext(env, RVA)) {
+> -        ext |=3D RVA;
+> -    }
+> -    if (riscv_has_ext(env, RVF)) {
+> -        ext |=3D RVF;
+> -    }
+> -    if (riscv_has_ext(env, RVD)) {
+> -        ext |=3D RVD;
+> -    }
+> -    if (riscv_has_ext(env, RVC)) {
+> -        ext |=3D RVC;
+> -    }
+> -    if (riscv_has_ext(env, RVS)) {
+> -        ext |=3D RVS;
+> -    }
+> -    if (riscv_has_ext(env, RVU)) {
+> -        ext |=3D RVU;
+> -    }
+> -    if (riscv_has_ext(env, RVH)) {
+> -        ext |=3D RVH;
+> -    }
+> -    if (riscv_has_ext(env, RVV)) {
+> -        ext |=3D RVV;
+> -    }
+> -    if (riscv_has_ext(env, RVJ)) {
+> -        ext |=3D RVJ;
+> -    }
+> -
+> -    env->misa_ext =3D env->misa_ext_mask =3D ext;
+> -}
+> -
+>  static void riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **err=
+p)
+>  {
+>      if (riscv_has_ext(env, RVH) && env->priv_ver < PRIV_VERSION_1_12_0) =
+{
+> @@ -1168,14 +1124,6 @@ static void riscv_cpu_realize(DeviceState *dev, Er=
+ror **errp)
+>          set_priv_version(env, priv_version);
+>      }
 >
->  struct RISCVCPUConfig {
->      bool ext_g;
-> -    bool ext_v;
->      bool ext_zba;
->      bool ext_zbb;
->      bool ext_zbc;
+> -    /*
+> -     * We can't be sure of whether we set defaults during cpu_init()
+> -     * or whether the user enabled/disabled some bits via cpu->cfg
+> -     * flags. Sync env->misa_ext with cpu->cfg now to allow us to
+> -     * use just env->misa_ext later.
+> -     */
+> -    riscv_cpu_sync_misa_cfg(env);
+> -
+>      riscv_cpu_validate_misa_priv(env, &local_err);
+>      if (local_err !=3D NULL) {
+>          error_propagate(errp, local_err);
 > --
 > 2.39.2
 >
