@@ -1,60 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pl7ir-000736-No
-	for mharc-qemu-riscv@gnu.org; Sat, 08 Apr 2023 08:31:13 -0400
+	id 1pl96R-0000So-FS
+	for mharc-qemu-riscv@gnu.org; Sat, 08 Apr 2023 09:59:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pl7ip-00072D-Ac; Sat, 08 Apr 2023 08:31:11 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ id 1pl96Q-0000SZ-9E; Sat, 08 Apr 2023 09:59:38 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pl7ik-0004fM-NC; Sat, 08 Apr 2023 08:31:10 -0400
-Received: from [192.168.0.120] (unknown [180.175.29.170])
- by APP-01 (Coremail) with SMTP id qwCowAD3_2N6XjFkwOUCAQ--.31232S2;
- Sat, 08 Apr 2023 20:30:51 +0800 (CST)
-Message-ID: <da9f34ac-3c40-de1f-5e3e-942b93b7a42e@iscas.ac.cn>
-Date: Sat, 8 Apr 2023 20:30:50 +0800
+ id 1pl96N-0005mE-OF; Sat, 08 Apr 2023 09:59:38 -0400
+Received: from localhost.localdomain (unknown [180.175.29.170])
+ by APP-05 (Coremail) with SMTP id zQCowAD3_88zczFk3ImkDw--.48560S2;
+ Sat, 08 Apr 2023 21:59:16 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH] target/riscv: Use check for relationship between
+ Zdinx/Zhinx{min} and Zfinx
+Date: Sat,  8 Apr 2023 21:59:08 +0800
+Message-Id: <20230408135908.25269-1-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Cc: liweiwei@iscas.ac.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
-Subject: Re: [PATCH v2] target/riscv: Fix Guest Physical Address Translation
-Content-Language: en-US
-To: Irina Ryapolova <irina.ryapolova@syntacore.com>, qemu-devel@nongnu.org
-References: <20230407153225.156395-1-irina.ryapolova@syntacore.com>
-From: liweiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230407153225.156395-1-irina.ryapolova@syntacore.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAD3_2N6XjFkwOUCAQ--.31232S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxXFy3Gw18XryUKF13ZF45GFg_yoW5Ww1xp3
- 97C3yakFs5t3ZIyan2qr1jgas0kFZ7Kr48Xw4xtr1ruws8G348uryxK3ySk3sxXr1xZF1I
- vr4qkr109w1qqa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkK14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
- 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
- 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
- 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE
- 67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrV
- AFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCI
- c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267
- AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_
- Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbXdbU
- UUUUU==
+X-CM-TRANSID: zQCowAD3_88zczFk3ImkDw--.48560S2
+X-Coremail-Antispam: 1UD129KBjvdXoW7XF1fKryfZw4fuw15CF4rZrb_yoWfWrg_G3
+ 4F9r97Zw1UWF1Igr4UA3Wrtr1rWws7KanYganxtFWrWFyDWry3twn7Kr1rCrZ09rW5uFyf
+ AwnrJ343GFn09jkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbxxFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+ Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVWxJr
+ 0_GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+ 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+ W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
+ Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
+ xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43
+ MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I
+ 0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWU
+ JVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUoO
+ J5UUUUU
 X-Originating-IP: [180.175.29.170]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
  helo=cstnet.cn
-X-Spam_score_int: -19
-X-Spam_score: -2.0
-X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.113,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -67,88 +64,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Apr 2023 12:31:12 -0000
+X-List-Received-Date: Sat, 08 Apr 2023 13:59:38 -0000
 
+Zdinx/Zhinx{min} require Zfinx. And require relationship is usually done
+by check currently.
 
-On 2023/4/7 23:32, Irina Ryapolova wrote:
-> Before changing the flow check for sv39/48/57.
->
-> According to specification (for Supervisor mode):
-> Sv39 implementations support a 39-bit virtual address space, divided into 4 KiB pages.
-> Instruction fetch addresses and load and store effective addresses, which are 64 bits,
-> must have bits 63–39 all equal to bit 38, or else a page-fault exception will occur.
-> Likewise for Sv48 and Sv57.
->
-> So the high bits are equal to bit 38 for sv39.
->
-> According to specification (for Hypervisor mode):
-> For Sv39x4, address bits of the guest physical address 63:41 must all be zeros, or else a
-> guest-page-fault exception occurs.
->
-> Likewise for Sv48x4 and Sv57x4.
-> For Sv48x4 address bits 63:50 must all be zeros, or else a guest-page-fault exception occurs.
-> For Sv57x4 address bits 63:59 must all be zeros, or else a guest-page-fault exception occurs.
->
-> For example we are trying to access address 0xffff_ffff_ff01_0000 with only G-translation enabled.
-> So expected behavior is to generate exception. But qemu doesn't generate such exception.
->
-> For the old check, we get
-> va_bits == 41, mask == (1 << 24) - 1, masked_msbs == (0xffff_ffff_ff01_0000 >> 40) & mask == mask.
-> Accordingly, the condition masked_msbs != 0 && masked_msbs != mask is not fulfilled
-> and the check passes.
->
-> Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
-> ---
-> Changes for v2:
->    -Add more detailed commit message
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+---
+ target/riscv/cpu.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-I remember I have sent Reviewed-by for last version of this patch.  And 
-it seems no change in following code.
-
-Weiwei Li
-
-> ---
->   target/riscv/cpu_helper.c | 25 ++++++++++++++++---------
->   1 file changed, 16 insertions(+), 9 deletions(-)
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index f88c503cf4..27289f2305 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -863,17 +863,24 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->   
->       CPUState *cs = env_cpu(env);
->       int va_bits = PGSHIFT + levels * ptidxbits + widened;
-> -    target_ulong mask, masked_msbs;
->   
-> -    if (TARGET_LONG_BITS > (va_bits - 1)) {
-> -        mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
-> -    } else {
-> -        mask = 0;
-> -    }
-> -    masked_msbs = (addr >> (va_bits - 1)) & mask;
-> +    if (first_stage == true) {
-> +        target_ulong mask, masked_msbs;
-> +
-> +        if (TARGET_LONG_BITS > (va_bits - 1)) {
-> +            mask = (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
-> +        } else {
-> +            mask = 0;
-> +        }
-> +        masked_msbs = (addr >> (va_bits - 1)) & mask;
->   
-> -    if (masked_msbs != 0 && masked_msbs != mask) {
-> -        return TRANSLATE_FAIL;
-> +        if (masked_msbs != 0 && masked_msbs != mask) {
-> +            return TRANSLATE_FAIL;
-> +        }
-> +    } else {
-> +        if (vm != VM_1_10_SV32 && addr >> va_bits != 0) {
-> +            return TRANSLATE_FAIL;
-> +        }
->       }
->   
->       int ptshift = (levels - 1) * ptidxbits;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1a5099382c..35bee8ff42 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -930,8 +930,9 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         cpu->cfg.ext_zhinxmin = true;
+     }
+ 
+-    if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinxmin) {
+-        cpu->cfg.ext_zfinx = true;
++    if ((cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinxmin) && !cpu->cfg.ext_zfinx) {
++        error_setg(errp, "Zdinx/Zhinx/Zhinxmin extensions require Zfinx");
++        return;
+     }
+ 
+     if (cpu->cfg.ext_zfinx) {
+-- 
+2.25.1
 
 
