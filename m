@@ -1,74 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1plqfF-0007Qo-MT
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 08:30:29 -0400
+	id 1plqfL-0007Sx-Ar
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 08:30:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1plqep-0007Aa-VQ
- for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 08:30:06 -0400
-Received: from mail-oi1-x22b.google.com ([2607:f8b0:4864:20::22b])
+ id 1plqeu-0007CR-Il
+ for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 08:30:13 -0400
+Received: from mail-oi1-x22f.google.com ([2607:f8b0:4864:20::22f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1plqel-0000sh-TZ
- for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 08:30:03 -0400
-Received: by mail-oi1-x22b.google.com with SMTP id be34so2970777oib.4
- for <qemu-riscv@nongnu.org>; Mon, 10 Apr 2023 05:29:59 -0700 (PDT)
+ id 1plqes-00015o-5u
+ for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 08:30:08 -0400
+Received: by mail-oi1-x22f.google.com with SMTP id j12so3099193oij.3
+ for <qemu-riscv@nongnu.org>; Mon, 10 Apr 2023 05:30:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1681129798;
+ d=ventanamicro.com; s=google; t=1681129805;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+SKXBRJdA9KUw/4IAA9R3X/vHCTMNddy95IWzacAV94=;
- b=ZL3iu4HJ31DXsAiCrrDBLr3bKjH7hEUpYv06ybEnRsjfUeahiFP0FI3kay/SIFFR2L
- +Q8maCPKNZ7kD8GrgMXCXLoWtoEda4oEYQrLBvUqM0XYHX3S/NqVJOxR6VaCETmLCqB4
- UueMGQ/2XbbmlMK1vvcvCGECmoGeqQCueiANrB2hcuXC/SeNSpmn5DX0JC9/Pide2Oah
- PGc+p2scKEPFWt6+TZwWVzP3dsYmRYt9rBa6m95WpgYDChcVFErj6TfQ93xh8QeZZUr8
- THvj7du8KpukcuvhHZKLUHL4vzHwdfudfPwNOK5HPslgq/makBwzUAN+0PkeNU0kmjoE
- dmAA==
+ bh=+8eN100PVmLq4Irfczq1tK9TJADhtWJGfBNp8oFnf+o=;
+ b=jtXYKgf+GwxgzXxnxsueQlBrr2Z+i0D1XGTDZiZSPurucYJVdIBAlC8OM2nr5AH+qs
+ zeaxvZQm9XpzIQj56PQDsYKwLICzg1hLk6BSJLC5Ab8yRjEQ9GDU7UA67sCTKAQYBGlc
+ J59NH/fr3DylmkNbktwhgHn2B9yLaNU4S4tgAagvfVQf5s05xn7B8Ywcj8NmLPrr3hlp
+ wLCVRKTCuzUsJDu5muwJbqpmTlLCuj48BaSuNdP8JSLv564sLlhzfTkZ+ptNextjOsEM
+ 4k25tRE+GEMFnxD8ws5cHCHhY+tJNQmhggSviTs7/ljBipL27FFTiisOeqf/kcMQr8XM
+ PV0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681129798;
+ d=1e100.net; s=20210112; t=1681129805;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+SKXBRJdA9KUw/4IAA9R3X/vHCTMNddy95IWzacAV94=;
- b=L13L4ZKJvN1TfaBzFqLLQ8ywwTMOWus52UxNOCswcAIzWCGPPnSeouZEPHfQspQyQY
- m+Okxrs5GgjO0zYJpOuySCdFSESNtpl31Ae1h94n0EXn7LhY9QxdgmbqmDHFbbJRgDrc
- niYED76iGG5B84L6dA7gaYIIiLVyI+HUwAQI6N9d8vT1+xOEwRkdP1Il0Sov7u1NRHkX
- QrhY4U62zxFO3VQE8VCh+vvTg83wa6oNL7F0ca29y15ZeHltTJPYjsmn6297VB0e547P
- hI/qsk8cXQumiE7sdCpDHQUa1qrDj7OSKERKdhLzrEzy5JHSef2L8jYJinXUrORwkdQo
- CqHg==
-X-Gm-Message-State: AAQBX9d7aLO6RjKAS36PKO2PhJ48QY2P/OaJzr3wbnBsAob6YFpNscqC
- 409jVdJLl4o8AnqK0J50euQt9Q==
-X-Google-Smtp-Source: AKy350bCLs0RgGd8Gfde98QxLJUr5LApo4lK4TaxX9kv711zVOSttPhrt+6vqyElSXE/Ys9aqN4HZw==
-X-Received: by 2002:a05:6808:252:b0:386:d4f7:6791 with SMTP id
- m18-20020a056808025200b00386d4f76791mr3816717oie.37.1681129798368; 
- Mon, 10 Apr 2023 05:29:58 -0700 (PDT)
+ bh=+8eN100PVmLq4Irfczq1tK9TJADhtWJGfBNp8oFnf+o=;
+ b=S0FodgQlK6MZuawP7ERuDM0YhzUoB1vdijDRnXFtfdDiiL74VLt0ZJIlFRidUkBO/R
+ I6MIuh1Sa5NdM6jpimffm29m40iHeb/C+GHUTfTh+pmXYZgOLMCLVDohDgt2DYDi6alp
+ PHJUJpj3e9k1TkbHZmmNbWMbZyMMDBnJd8007HLAofWjLnKBUbWHqxmiz6z5aurDtSEg
+ FwUX7rnOqkBf85MxI6QI84EJN5zOWjs7AzneqY5eS9F5l4/36MXuZK1pQMHdf+UL+KXE
+ HwJKjjTvI4DxVHyhAMQsz9hHfNomFTShzDvJ6+hwQRszBjMRjR7doTXrOLNA6NADrnAq
+ A9pA==
+X-Gm-Message-State: AAQBX9feSry5ed47M94KDwbFszZNBN1RMZbbOyQwbEwwcWwpfzT/c0QF
+ wXARub2mMT6AJVXuTCFccl67t6S5Jf0Ly1dBMmY=
+X-Google-Smtp-Source: AKy350alOk807TBHvhHO8UOElQ1z3yZ6e7+PjYJENPl4huS2NW6Flz+Jg9povlm39SIHbgfKNUeMWw==
+X-Received: by 2002:aca:1715:0:b0:38b:79e1:3fda with SMTP id
+ j21-20020aca1715000000b0038b79e13fdamr4282593oii.34.1681129804497; 
+ Mon, 10 Apr 2023 05:30:04 -0700 (PDT)
 Received: from grind.. ([191.255.108.232]) by smtp.gmail.com with ESMTPSA id
- o13-20020a056808124d00b00387160bcd46sm4297016oiv.46.2023.04.10.05.29.55
+ o13-20020a056808124d00b00387160bcd46sm4297016oiv.46.2023.04.10.05.30.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Apr 2023 05:29:58 -0700 (PDT)
+ Mon, 10 Apr 2023 05:30:04 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 2/4] target/riscv: add query-cpy-definitions support
-Date: Mon, 10 Apr 2023 09:29:43 -0300
-Message-Id: <20230410122945.77439-3-dbarboza@ventanamicro.com>
+Subject: [PATCH 4/4] target/riscv: make generic cpus not static
+Date: Mon, 10 Apr 2023 09:29:45 -0300
+Message-Id: <20230410122945.77439-5-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230410122945.77439-1-dbarboza@ventanamicro.com>
 References: <20230410122945.77439-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,134 +81,145 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Apr 2023 12:30:07 -0000
+X-List-Received-Date: Mon, 10 Apr 2023 12:30:15 -0000
 
-This command is used by tooling like libvirt to retrieve a list of
-supported CPUs. Each entry returns a CpuDefinitionInfo object that
-contains more information about each CPU.
+A CPU is declared static or not by changing the class attribute
+'static'. For now the base class is defining every CPU as static via
+riscv_cpu_class_init().
 
-This initial support includes only the name of the CPU and its typename.
-Here's what the command produces for the riscv64 target:
+To change this setting for generic CPUs we'll need a different class
+init for them. Then we'll ned a macro that allows us to set a different
+.class_init implementation for the CPU. With all that we're now able to
+set 'static' as false for the 'any', 'rv32', 'rv64' and 'x-rv128' CPUs.
+For the riscv64 target:
 
 $ ./build/qemu-system-riscv64 -S -M virt -display none -qmp stdio
-{"QMP": {"version": (...)}
+{"QMP": {"version": (...) }
 {"execute": "qmp_capabilities", "arguments": {"enable": ["oob"]}}
 {"return": {}}
 {"execute": "query-cpu-definitions"}
 {"return": [
 {"name": "rv64", "typename": "rv64-riscv-cpu", "static": false, "deprecated": false},
-{"name": "sifive-e51", "typename": "sifive-e51-riscv-cpu", "static": false, "deprecated": false},
+{"name": "sifive-e51", "typename": "sifive-e51-riscv-cpu", "static": true, "deprecated": false},
 {"name": "any", "typename": "any-riscv-cpu", "static": false, "deprecated": false},
 {"name": "x-rv128", "typename": "x-rv128-riscv-cpu", "static": false, "deprecated": false},
-{"name": "shakti-c", "typename": "shakti-c-riscv-cpu", "static": false, "deprecated": false},
-{"name": "thead-c906", "typename": "thead-c906-riscv-cpu", "static": false, "deprecated": false},
-{"name": "sifive-u54", "typename": "sifive-u54-riscv-cpu", "static": false, "deprecated": false}]
+{"name": "shakti-c", "typename": "shakti-c-riscv-cpu", "static": true, "deprecated": false},
+{"name": "thead-c906", "typename": "thead-c906-riscv-cpu", "static": true, "deprecated": false},
+{"name": "sifive-u54", "typename": "sifive-u54-riscv-cpu", "static": true, "deprecated": false}]
 }
-
-Next patches will implement the 'static' attribute of CpuDefinitionInfo.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- qapi/machine-target.json      |  6 ++--
- target/riscv/meson.build      |  3 +-
- target/riscv/riscv-qmp-cmds.c | 53 +++++++++++++++++++++++++++++++++++
- 3 files changed, 59 insertions(+), 3 deletions(-)
- create mode 100644 target/riscv/riscv-qmp-cmds.c
+ target/riscv/cpu.c | 48 ++++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 44 insertions(+), 4 deletions(-)
 
-diff --git a/qapi/machine-target.json b/qapi/machine-target.json
-index 2e267fa458..f3a3de6648 100644
---- a/qapi/machine-target.json
-+++ b/qapi/machine-target.json
-@@ -324,7 +324,8 @@
-                    'TARGET_I386',
-                    'TARGET_S390X',
-                    'TARGET_MIPS',
--                   'TARGET_LOONGARCH64' ] } }
-+                   'TARGET_LOONGARCH64',
-+                   'TARGET_RISCV' ] } }
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 30a1e74ea6..4a9624404c 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -340,6 +340,13 @@ static void set_satp_mode_default_map(RISCVCPU *cpu)
+ }
+ #endif
  
- ##
- # @query-cpu-definitions:
-@@ -341,4 +342,5 @@
-                    'TARGET_I386',
-                    'TARGET_S390X',
-                    'TARGET_MIPS',
--                   'TARGET_LOONGARCH64' ] } }
-+                   'TARGET_LOONGARCH64',
-+                   'TARGET_RISCV' ] } }
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index 5b7f813a3e..e1ff6d9b95 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -32,7 +32,8 @@ riscv_softmmu_ss.add(files(
-   'monitor.c',
-   'machine.c',
-   'pmu.c',
--  'time_helper.c'
-+  'time_helper.c',
-+  'riscv-qmp-cmds.c',
- ))
- 
- target_arch += {'riscv': riscv_ss}
-diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.c
-new file mode 100644
-index 0000000000..128677add9
---- /dev/null
-+++ b/target/riscv/riscv-qmp-cmds.c
-@@ -0,0 +1,53 @@
-+/*
-+ * QEMU CPU QMP commands for RISC-V
-+ *
-+ * Copyright (c) 2023 Ventana Micro Systems Inc.
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a copy
-+ * of this software and associated documentation files (the "Software"), to deal
-+ * in the Software without restriction, including without limitation the rights
-+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-+ * copies of the Software, and to permit persons to whom the Software is
-+ * furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-+ * THE SOFTWARE.
-+ */
-+
-+#include "qemu/osdep.h"
-+
-+#include "qapi/qapi-commands-machine-target.h"
-+#include "cpu-qom.h"
-+
-+static void riscv_cpu_add_definition(gpointer data, gpointer user_data)
++static void riscv_any_cpu_class_init(ObjectClass *c, void *data)
 +{
-+    ObjectClass *oc = data;
-+    CpuDefinitionInfoList **cpu_list = user_data;
-+    CpuDefinitionInfo *info = g_malloc0(sizeof(*info));
-+    const char *typename = object_class_get_name(oc);
++    RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
 +
-+    info->name = g_strndup(typename,
-+                           strlen(typename) - strlen("-" TYPE_RISCV_CPU));
-+    info->q_typename = g_strdup(typename);
-+
-+    QAPI_LIST_PREPEND(*cpu_list, info);
++    mcc->static_model = false;
 +}
 +
-+CpuDefinitionInfoList *qmp_query_cpu_definitions(Error **errp)
+ static void riscv_any_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+@@ -360,6 +367,13 @@ static void riscv_any_cpu_init(Object *obj)
+ }
+ 
+ #if defined(TARGET_RISCV64)
++static void rv64_base_cpu_class_init(ObjectClass *c, void *data)
 +{
-+    CpuDefinitionInfoList *cpu_list = NULL;
-+    GSList *list = object_class_get_list(TYPE_RISCV_CPU, false);
++    RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
 +
-+    g_slist_foreach(list, riscv_cpu_add_definition, &cpu_list);
-+    g_slist_free(list);
-+
-+    return cpu_list;
++    mcc->static_model = false;
 +}
++
+ static void rv64_base_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+@@ -430,6 +444,13 @@ static void rv64_thead_c906_cpu_init(Object *obj)
+ #endif
+ }
+ 
++static void rv128_base_cpu_class_init(ObjectClass *c, void *data)
++{
++    RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
++
++    mcc->static_model = false;
++}
++
+ static void rv128_base_cpu_init(Object *obj)
+ {
+     if (qemu_tcg_mttcg_enabled()) {
+@@ -449,6 +470,13 @@ static void rv128_base_cpu_init(Object *obj)
+ #endif
+ }
+ #else
++static void rv32_base_cpu_class_init(ObjectClass *c, void *data)
++{
++    RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
++
++    mcc->static_model = false;
++}
++
+ static void rv32_base_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+@@ -1779,6 +1807,14 @@ void riscv_cpu_list(void)
+         .instance_init = initfn            \
+     }
+ 
++#define DEFINE_CPU_WITH_CLASSFN(type_name, initfn, classfn) \
++    {                                      \
++        .name = type_name,                 \
++        .parent = TYPE_RISCV_CPU,          \
++        .instance_init = initfn,           \
++        .class_init = classfn              \
++    }
++
+ static const TypeInfo riscv_cpu_type_infos[] = {
+     {
+         .name = TYPE_RISCV_CPU,
+@@ -1790,23 +1826,27 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+         .class_size = sizeof(RISCVCPUClass),
+         .class_init = riscv_cpu_class_init,
+     },
+-    DEFINE_CPU(TYPE_RISCV_CPU_ANY,              riscv_any_cpu_init),
++    DEFINE_CPU_WITH_CLASSFN(TYPE_RISCV_CPU_ANY, riscv_any_cpu_init,
++                            riscv_any_cpu_class_init),
+ #if defined(CONFIG_KVM)
+     DEFINE_CPU(TYPE_RISCV_CPU_HOST,             riscv_host_cpu_init),
+ #endif
+ #if defined(TARGET_RISCV32)
+-    DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           rv32_base_cpu_init),
++    DEFINE_CPU_WITH_CLASSFN(TYPE_RISCV_CPU_BASE32, rv32_base_cpu_init,
++                            rv32_base_cpu_class_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32_ibex_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32_sifive_e_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32_imafcu_nommu_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32_sifive_u_cpu_init),
+ #elif defined(TARGET_RISCV64)
+-    DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           rv64_base_cpu_init),
++    DEFINE_CPU_WITH_CLASSFN(TYPE_RISCV_CPU_BASE64, rv64_base_cpu_init,
++                            rv64_base_cpu_class_init),
++    DEFINE_CPU_WITH_CLASSFN(TYPE_RISCV_CPU_BASE128, rv128_base_cpu_init,
++                            rv128_base_cpu_class_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_THEAD_C906,       rv64_thead_c906_cpu_init),
+-    DEFINE_CPU(TYPE_RISCV_CPU_BASE128,          rv128_base_cpu_init),
+ #endif
+ };
+ 
 -- 
 2.39.2
 
