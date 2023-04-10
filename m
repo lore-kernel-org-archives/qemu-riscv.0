@@ -1,71 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1plqep-0007AV-LA
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 08:30:06 -0400
+	id 1plqf2-0007L9-9P
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 08:30:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1plqem-00077f-GZ
- for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 08:30:00 -0400
-Received: from mail-oi1-x22d.google.com ([2607:f8b0:4864:20::22d])
+ id 1plqeo-00079Q-4B
+ for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 08:30:02 -0400
+Received: from mail-oi1-x235.google.com ([2607:f8b0:4864:20::235])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1plqeg-0000sC-PW
- for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 08:29:56 -0400
-Received: by mail-oi1-x22d.google.com with SMTP id m2so2595425oiw.0
- for <qemu-riscv@nongnu.org>; Mon, 10 Apr 2023 05:29:53 -0700 (PDT)
+ id 1plqel-0000sR-Sc
+ for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 08:30:01 -0400
+Received: by mail-oi1-x235.google.com with SMTP id be34so2970707oib.4
+ for <qemu-riscv@nongnu.org>; Mon, 10 Apr 2023 05:29:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1681129792;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=a0XUJfd3Es4csagaT/7KtTZjz9+/UWZuMAZA+eSifU0=;
- b=WuFk3wGd74BH/ZxWhaZDQiurhupbNi41W0B6pAUD2ZxCup63C/1kCJ3bABqewOXgA3
- H8GyUAEs7xrevHfXTurJT24xPk7OLKO9nrhYxwfWKla2TKOmfXaluxyZf7F/wBugnSxq
- T4xPXCZAewj7XTFIjJnRekGuNKpppEzijLJFKLrPXXXZbU2GmndEFsCJU/G/wmMU+8M5
- YzCETbGNyC6g0rOc6dckPbQ9fbrzoSRjfl7vIrbpzkL87VJWbfRQvx7H9+Uj8ABft+fb
- 3Gb6wreI9EcbxtIfKkgi/8me5ZnXLwjTmJKRYIiaNrd1PTevvzsL/p5q3eLE+SUeaks/
- H8Bw==
+ d=ventanamicro.com; s=google; t=1681129795;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7f97QPiu1Fd+OM3S7vziX0p5A2QzwngIPHhNMODXrEY=;
+ b=QuWFxAQ/lHvuToKCvIjGN1OcZR4DK2tSzho0Sb+ruJCHNSmSJQsm3CWUtAC+f6045N
+ s59EwgR8GhsQC6r91YecUh30y7a9oLjbmEHjaQ6jEBHqFLUaoZ0+yeK7ndBt3V61Alo0
+ DLIgxQr/ZnvktWbnfTEzBUpLwY+mO7/ir/dyzPZqY7LuEEZw9y4pE+xqFKEIlinLt6/E
+ xCG5lupH///COaY3w7GF/lAdj8QkURfIlvyNgvF5pHBfhJAThSCMa0DvCbnGjRKu5B+z
+ sew4x2zPKv0aoVETMBefvrf/4J0FmwuXkrN10cwH0G8IVIBONufhXOkmOcmXP9PoQ7yO
+ IWHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681129792;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=a0XUJfd3Es4csagaT/7KtTZjz9+/UWZuMAZA+eSifU0=;
- b=kfSUF13bDGUunyrwXO0aKLCd39P9yfWDWNGLaIqAIRlv1zk0VPykZZ1XBuHygbDOAe
- A2g32OJ5vCHaLlrNyhPFcWcZLDmvxgUReD4lzp51JJSJtbZZsraXEFesiSoV/Ofw0IOW
- 3Z/sp2tsagWglIi2OYbN2IHVc+bixlZnUWLtywsf8RdwQfRlNXryM7jAJ8sUMhDcRRWk
- +prQO0+qoZtdRgk1BrbUiRpEhpgiboxWk4480UzDSZ/dLDAdT5txnvbvdIqKtnxC+FGC
- Bsn07S/pgEPfLb5T2NyXZUYmvX1igl9c+RsU15j/w0f3Mot9j/wFGk5oXVZBLF1ulp8R
- sYMw==
-X-Gm-Message-State: AAQBX9fOv+idWREsldkStdGD4Q0JVe1Rl6UB4l+sFAoyPbbAGgZ/ZgpR
- ObB/14yLCJZ6/2NjZOsWKn+8dw==
-X-Google-Smtp-Source: AKy350bt7IyrPOxQPLojcmpllRwZpABzV8dpPRWbRQ4dsLYbOYlliwRjTQA/22S6XvucYf7INxLPGQ==
-X-Received: by 2002:a54:4487:0:b0:384:32ff:eb75 with SMTP id
- v7-20020a544487000000b0038432ffeb75mr4648944oiv.18.1681129792625; 
- Mon, 10 Apr 2023 05:29:52 -0700 (PDT)
+ d=1e100.net; s=20210112; t=1681129795;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7f97QPiu1Fd+OM3S7vziX0p5A2QzwngIPHhNMODXrEY=;
+ b=JhQQAQtXhNA4lEov5GaVYG9nma1ltVItFLaS79AsUjBAOzM+Yi58tkXdHkrpha1+36
+ kM2R2kPvLViW9/JggVSa11cwIh+NjZlrWIsfaLDtA7kysIw64JCVKpqWCkqSin3FtCXs
+ DGWUtr5FrJJ8yhe1wbJ/F4l/iVywAqwhENjKqYyBHxncb6f1IjnCkTOvdJKAIkLP3jip
+ 0Qb5cPZcnXkRapkG7uhVH41oz9+VEyibtdp/VrfC3LgDb5cUwjkyMS3CT+fG0c2W7nFI
+ u/+2VuCN6azpR3gkRm7P0g/hi/KCqyf16GFiOr0qsck3zoynBJU/NRzPthmEeh5N7+W/
+ OF4Q==
+X-Gm-Message-State: AAQBX9dQNYW76MXqa3YBULHjfnzNwEVONQxzNSMGxadiJZ/MJolQkX79
+ R0D5sRVKn/ykaT9i477PMTdI8Q==
+X-Google-Smtp-Source: AKy350YyYQIBP7lSCjxQQRXmjqMkocnO9d5wLZK+wlo7lCX5tHxXRpCW4UOsi1Tke8S0laBwbOJWEg==
+X-Received: by 2002:aca:6244:0:b0:389:7d24:def5 with SMTP id
+ w65-20020aca6244000000b003897d24def5mr2977333oib.10.1681129795457; 
+ Mon, 10 Apr 2023 05:29:55 -0700 (PDT)
 Received: from grind.. ([191.255.108.232]) by smtp.gmail.com with ESMTPSA id
- o13-20020a056808124d00b00387160bcd46sm4297016oiv.46.2023.04.10.05.29.49
+ o13-20020a056808124d00b00387160bcd46sm4297016oiv.46.2023.04.10.05.29.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Apr 2023 05:29:52 -0700 (PDT)
+ Mon, 10 Apr 2023 05:29:55 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 0/4] target/riscv: implement query-cpu-definitions
-Date: Mon, 10 Apr 2023 09:29:41 -0300
-Message-Id: <20230410122945.77439-1-dbarboza@ventanamicro.com>
+Subject: [PATCH 1/4] target/riscv: add CPU QOM header
+Date: Mon, 10 Apr 2023 09:29:42 -0300
+Message-Id: <20230410122945.77439-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230410122945.77439-1-dbarboza@ventanamicro.com>
+References: <20230410122945.77439-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::235;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x235.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,44 +81,179 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Apr 2023 12:30:00 -0000
+X-List-Received-Date: Mon, 10 Apr 2023 12:30:02 -0000
 
-Hi,
+QMP CPU commands are usually implemented by a separated file,
+<arch>-qmp-cmds.c, to allow them to be build only for softmmu targets.
+This file uses a CPU QOM header with basic QOM declarations for the
+arch.
 
-This series implements  one of the most common QMP CPU commands,
-query-cpu-definitions.
+We'll introduce query-cpu-definitions for RISC-V CPUs in the next patch,
+but first we need a cpu-qom.h header with the definitions of
+TYPE_RISCV_CPU and RISCVCPUClass declarations. These were moved from
+cpu.h to the new file, and cpu.h now includes "cpu-qom.h".
 
-libvirt and others uses this command to inspect the CPUs available in
-the QEMU binary, with the option to further inspect their properties
-using device-list-properties.
-
-The design decision made here is to consider all generic (i.e. not
-named) CPUs as not static, which the API semantics considers to be the
-same as migration-unsafe. The reason why I took this decision is because
-generic CPUs can have their extensions changed via command line. Today
-this is the case for all CPUs, but we're going to change that in the
-near future after this series.
-
-
-Patches were based on top of Alistair's riscv-to-apply.next.
-
-
-Daniel Henrique Barboza (4):
-  target/riscv: add CPU QOM header
-  target/riscv: add query-cpy-definitions support
-  target/riscv: add 'static' attribute of query-cpu-definitions
-  target/riscv: make generic cpus not static
-
- qapi/machine-target.json      |  6 ++-
- target/riscv/cpu-qom.h        | 73 +++++++++++++++++++++++++++++++++++
- target/riscv/cpu.c            | 54 ++++++++++++++++++++++++--
- target/riscv/cpu.h            | 46 +---------------------
- target/riscv/meson.build      |  3 +-
- target/riscv/riscv-qmp-cmds.c | 55 ++++++++++++++++++++++++++
- 6 files changed, 185 insertions(+), 52 deletions(-)
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/cpu-qom.h | 70 ++++++++++++++++++++++++++++++++++++++++++
+ target/riscv/cpu.h     | 46 +--------------------------
+ 2 files changed, 71 insertions(+), 45 deletions(-)
  create mode 100644 target/riscv/cpu-qom.h
- create mode 100644 target/riscv/riscv-qmp-cmds.c
 
+diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+new file mode 100644
+index 0000000000..b9318e0783
+--- /dev/null
++++ b/target/riscv/cpu-qom.h
+@@ -0,0 +1,70 @@
++/*
++ * QEMU RISC-V CPU QOM header
++ *
++ * Copyright (c) 2023 Ventana Micro Systems Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef RISCV_CPU_QOM_H
++#define RISCV_CPU_QOM_H
++
++#include "hw/core/cpu.h"
++#include "qom/object.h"
++
++#define TYPE_RISCV_CPU "riscv-cpu"
++
++#define RISCV_CPU_TYPE_SUFFIX "-" TYPE_RISCV_CPU
++#define RISCV_CPU_TYPE_NAME(name) (name RISCV_CPU_TYPE_SUFFIX)
++#define CPU_RESOLVING_TYPE TYPE_RISCV_CPU
++
++#define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
++#define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
++#define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
++#define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("x-rv128")
++#define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
++#define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
++#define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
++#define TYPE_RISCV_CPU_SIFIVE_E34       RISCV_CPU_TYPE_NAME("sifive-e34")
++#define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
++#define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
++#define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
++#define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
++#define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
++
++#if defined(TARGET_RISCV32)
++# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
++#elif defined(TARGET_RISCV64)
++# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
++#endif
++
++typedef struct CPUArchState CPURISCVState;
++
++OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
++
++/**
++ * RISCVCPUClass:
++ * @parent_realize: The parent class' realize handler.
++ * @parent_phases: The parent class' reset phase handlers.
++ *
++ * A RISCV CPU model.
++ */
++struct RISCVCPUClass {
++    /*< private >*/
++    CPUClass parent_class;
++    /*< public >*/
++    DeviceRealize parent_realize;
++    ResettablePhases parent_phases;
++};
++
++#endif /* RISCV_CPU_QOM_H */
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index cbf3de2708..d830a64713 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -28,6 +28,7 @@
+ #include "qemu/int128.h"
+ #include "cpu_bits.h"
+ #include "qapi/qapi-types-common.h"
++#include "cpu-qom.h"
+ 
+ #define TCG_GUEST_DEFAULT_MO 0
+ 
+@@ -37,32 +38,6 @@
+  */
+ #define TARGET_INSN_START_EXTRA_WORDS 1
+ 
+-#define TYPE_RISCV_CPU "riscv-cpu"
+-
+-#define RISCV_CPU_TYPE_SUFFIX "-" TYPE_RISCV_CPU
+-#define RISCV_CPU_TYPE_NAME(name) (name RISCV_CPU_TYPE_SUFFIX)
+-#define CPU_RESOLVING_TYPE TYPE_RISCV_CPU
+-
+-#define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
+-#define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+-#define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
+-#define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("x-rv128")
+-#define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
+-#define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
+-#define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
+-#define TYPE_RISCV_CPU_SIFIVE_E34       RISCV_CPU_TYPE_NAME("sifive-e34")
+-#define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
+-#define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
+-#define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
+-#define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
+-#define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+-
+-#if defined(TARGET_RISCV32)
+-# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
+-#elif defined(TARGET_RISCV64)
+-# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
+-#endif
+-
+ #define RV(x) ((target_ulong)1 << (x - 'A'))
+ 
+ /*
+@@ -103,8 +78,6 @@ enum {
+ 
+ #define MAX_RISCV_PMPS (16)
+ 
+-typedef struct CPUArchState CPURISCVState;
+-
+ #if !defined(CONFIG_USER_ONLY)
+ #include "pmp.h"
+ #include "debug.h"
+@@ -389,23 +362,6 @@ struct CPUArchState {
+     uint64_t kvm_timer_frequency;
+ };
+ 
+-OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+-
+-/*
+- * RISCVCPUClass:
+- * @parent_realize: The parent class' realize handler.
+- * @parent_phases: The parent class' reset phase handlers.
+- *
+- * A RISCV CPU model.
+- */
+-struct RISCVCPUClass {
+-    /* < private > */
+-    CPUClass parent_class;
+-    /* < public > */
+-    DeviceRealize parent_realize;
+-    ResettablePhases parent_phases;
+-};
+-
+ /*
+  * map is a 16-bit bitmap: the most significant set bit in map is the maximum
+  * satp mode that is supported. It may be chosen by the user and must respect
 -- 
 2.39.2
 
