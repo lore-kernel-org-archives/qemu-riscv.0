@@ -1,59 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1plrXn-0003cZ-NB
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 09:26:51 -0400
+	id 1plrZt-00057f-U6
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 09:29:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1plrXi-0003cA-Q0; Mon, 10 Apr 2023 09:26:48 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1plrXf-0006is-PH; Mon, 10 Apr 2023 09:26:46 -0400
-Received: from [192.168.0.120] (unknown [180.175.29.170])
- by APP-01 (Coremail) with SMTP id qwCowAAXXJyLDjRkpV_jAQ--.55243S2;
- Mon, 10 Apr 2023 21:26:36 +0800 (CST)
-Message-ID: <b17f918e-fa77-e5aa-84bb-ec29d2b6a672@iscas.ac.cn>
-Date: Mon, 10 Apr 2023 21:26:34 +0800
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1plrZs-00054B-JA
+ for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 09:29:00 -0400
+Received: from mail-oa1-x36.google.com ([2001:4860:4864:20::36])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1plrZn-00073B-1t
+ for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 09:29:00 -0400
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-1842df7cb53so5930702fac.10
+ for <qemu-riscv@nongnu.org>; Mon, 10 Apr 2023 06:28:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1681133321;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=94ISA3Kt4k+7aYHeTe+2qTZKOclVi23kssQQHK/4Ads=;
+ b=FbQpP3Cf2gPxB16XS2Xxue445NIrZ09nvD1AmnlhsCHfQF7z7f2oKiwzExEl2kRzIT
+ cGtT5LBnD3p8+7v1sxdCXWWMPa8NuoVVr8wuJr0GutvSdQFWoEmeU/b3TYL64f1XBTGS
+ TxjcxBQ1ZXucgkAiWi4wW8KtQZgsQ6ZTBVVRmoEfWAsUxzHG2NduVpJjb9FXnU5WG2n4
+ OIgEAPOLBOcFPzKuw2c9s0Ygym4Ft+nVJVFZf7ribdZQhcAKtDZSEqfQGEl95pkwP9XA
+ 2d8CraNPPPFb3nOspNbUDaBVycbxp0USZzxCFHL+T1S86Ycjd3wy+M7j6c5sAU/XjTBJ
+ KpdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1681133321;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=94ISA3Kt4k+7aYHeTe+2qTZKOclVi23kssQQHK/4Ads=;
+ b=T+A4cuqodcHozrwoD4jomFGVhO/Y0bwxzSuF5ik5MmRKPuyHvnTtbbdtaAuZiXSf8+
+ PWj8s2SOvtWGvMVhJPdp/BMz67P/ccxEeCjUjef8MzylAEJP7chpHDvP48MRI05wgDew
+ 1q+MsvAgyhehLNdrxCUyjYsd63BYaBLBfuraC5E+uUwJIBp/SwQwOiP/MIFckdPboLVC
+ oaNy5OkRVZpswgeTzvBMSeiLjKgWO/seQ5C7qd2ItzyBCHEituZr554o+V7rJkRUnW0S
+ +hvhqiGjihc7R7ZZsop2MXZYIta1Qtf+JmeutV+X1TlIMkHcWSnZmidMwJ0Zhhz8b/Sy
+ G1wg==
+X-Gm-Message-State: AAQBX9cXbTwNEtzw5ASj/PdgjqeiKz3vfWm7h1LrfnkF0euTe1iL8Dw1
+ 4ZGAtNtBvNVz9FM/gEqANW5zfQ==
+X-Google-Smtp-Source: AKy350ZVkW+l6iLU2zlfq6nJTto8WpUrMBbGlG3iAFzO8rw2sqKKEFHHwaXy7ovTkVo6riNHk4udYA==
+X-Received: by 2002:a05:6870:9687:b0:183:f65c:8c41 with SMTP id
+ o7-20020a056870968700b00183f65c8c41mr5870705oaq.15.1681133321434; 
+ Mon, 10 Apr 2023 06:28:41 -0700 (PDT)
+Received: from [192.168.68.107] ([191.255.108.232])
+ by smtp.gmail.com with ESMTPSA id
+ bd16-20020a056871b31000b0016e8726f0d4sm4070108oac.3.2023.04.10.06.28.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 10 Apr 2023 06:28:41 -0700 (PDT)
+Message-ID: <14b6c764-4667-a032-33c7-da0521de6f09@ventanamicro.com>
+Date: Mon, 10 Apr 2023 10:28:36 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-Subject: Re: [PATCH 4/4] target/riscv: make generic cpus not static
+ Thunderbird/102.9.1
+Subject: Re: [PATCH 1/2] target/riscv: Add set_implicit_extensions_from_ext()
+ function
 Content-Language: en-US
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-References: <20230410122945.77439-1-dbarboza@ventanamicro.com>
- <20230410122945.77439-5-dbarboza@ventanamicro.com>
-From: liweiwei <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230410122945.77439-5-dbarboza@ventanamicro.com>
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20230410033526.31708-1-liweiwei@iscas.ac.cn>
+ <20230410033526.31708-2-liweiwei@iscas.ac.cn>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230410033526.31708-2-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAAXXJyLDjRkpV_jAQ--.55243S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3AFWfCw15tw18AF1DAw47Jwb_yoW7Cr48pF
- 17GFZ0vFZ8JFsFv3yfJr9Fgry5tw4kW3yYg398Xw4rAa1xurWUJF4Dt3yjkr4kWFZ7Z3Wa
- ya1rAFy3Ca1Yya7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkl14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j
- 6r4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
- Y487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
- 0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
- 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
- WUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
- IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbXdbUUUUU
- U==
-X-Originating-IP: [180.175.29.170]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -50
-X-Spam_score: -5.1
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2001:4860:4864:20::36;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x36.google.com
+X-Spam_score_int: -52
+X-Spam_score: -5.3
 X-Spam_bar: -----
-X-Spam_report: (-5.1 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-3.246,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
+X-Spam_report: (-5.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.246,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -67,154 +88,114 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Apr 2023 13:26:50 -0000
+X-List-Received-Date: Mon, 10 Apr 2023 13:29:00 -0000
 
 
-On 2023/4/10 20:29, Daniel Henrique Barboza wrote:
-> A CPU is declared static or not by changing the class attribute
-> 'static'. For now the base class is defining every CPU as static via
-> riscv_cpu_class_init().
->
-> To change this setting for generic CPUs we'll need a different class
-> init for them. Then we'll ned a macro that allows us to set a different
-> .class_init implementation for the CPU. With all that we're now able to
-> set 'static' as false for the 'any', 'rv32', 'rv64' and 'x-rv128' CPUs.
-> For the riscv64 target:
->
-> $ ./build/qemu-system-riscv64 -S -M virt -display none -qmp stdio
-> {"QMP": {"version": (...) }
-> {"execute": "qmp_capabilities", "arguments": {"enable": ["oob"]}}
-> {"return": {}}
-> {"execute": "query-cpu-definitions"}
-> {"return": [
-> {"name": "rv64", "typename": "rv64-riscv-cpu", "static": false, "deprecated": false},
-> {"name": "sifive-e51", "typename": "sifive-e51-riscv-cpu", "static": true, "deprecated": false},
-> {"name": "any", "typename": "any-riscv-cpu", "static": false, "deprecated": false},
-> {"name": "x-rv128", "typename": "x-rv128-riscv-cpu", "static": false, "deprecated": false},
-> {"name": "shakti-c", "typename": "shakti-c-riscv-cpu", "static": true, "deprecated": false},
-> {"name": "thead-c906", "typename": "thead-c906-riscv-cpu", "static": true, "deprecated": false},
-> {"name": "sifive-u54", "typename": "sifive-u54-riscv-cpu", "static": true, "deprecated": false}]
-> }
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+On 4/10/23 00:35, Weiwei Li wrote:
+> Move multi-letter extensions that may implicitly enabled from misa.EXT
+> alone to prepare for following separation of implicitly enabled and
+> explicitly enabled extensions.
+> 
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 > ---
->   target/riscv/cpu.c | 48 ++++++++++++++++++++++++++++++++++++++++++----
->   1 file changed, 44 insertions(+), 4 deletions(-)
->
+
+Regardless of what we end up doing with patch 2 I believe this is a good
+separation to have.
+
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/cpu.c | 56 +++++++++++++++++++++++++---------------------
+>   1 file changed, 31 insertions(+), 25 deletions(-)
+> 
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 30a1e74ea6..4a9624404c 100644
+> index cb68916fce..abb65d41b1 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -340,6 +340,13 @@ static void set_satp_mode_default_map(RISCVCPU *cpu)
->   }
->   #endif
->   
-> +static void riscv_any_cpu_class_init(ObjectClass *c, void *data)
-> +{
-> +    RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
-> +
-> +    mcc->static_model = false;
-> +}
-> +
->   static void riscv_any_cpu_init(Object *obj)
->   {
->       CPURISCVState *env = &RISCV_CPU(obj)->env;
-> @@ -360,6 +367,13 @@ static void riscv_any_cpu_init(Object *obj)
->   }
->   
->   #if defined(TARGET_RISCV64)
-> +static void rv64_base_cpu_class_init(ObjectClass *c, void *data)
-> +{
-> +    RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
-> +
-> +    mcc->static_model = false;
-> +}
-> +
-
-We needn't duplicate the similar function. They can share  a special 
-class_init for general cpus.
-
-Regards,
-
-Weiwei li
-
->   static void rv64_base_cpu_init(Object *obj)
->   {
->       CPURISCVState *env = &RISCV_CPU(obj)->env;
-> @@ -430,6 +444,13 @@ static void rv64_thead_c906_cpu_init(Object *obj)
->   #endif
->   }
->   
-> +static void rv128_base_cpu_class_init(ObjectClass *c, void *data)
-> +{
-> +    RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
-> +
-> +    mcc->static_model = false;
-> +}
-> +
->   static void rv128_base_cpu_init(Object *obj)
->   {
->       if (qemu_tcg_mttcg_enabled()) {
-> @@ -449,6 +470,13 @@ static void rv128_base_cpu_init(Object *obj)
->   #endif
->   }
->   #else
-> +static void rv32_base_cpu_class_init(ObjectClass *c, void *data)
-> +{
-> +    RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
-> +
-> +    mcc->static_model = false;
-> +}
-> +
->   static void rv32_base_cpu_init(Object *obj)
->   {
->       CPURISCVState *env = &RISCV_CPU(obj)->env;
-> @@ -1779,6 +1807,14 @@ void riscv_cpu_list(void)
->           .instance_init = initfn            \
+> @@ -809,6 +809,35 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
 >       }
+>   }
 >   
-> +#define DEFINE_CPU_WITH_CLASSFN(type_name, initfn, classfn) \
-> +    {                                      \
-> +        .name = type_name,                 \
-> +        .parent = TYPE_RISCV_CPU,          \
-> +        .instance_init = initfn,           \
-> +        .class_init = classfn              \
+> +static void set_implicit_extensions_from_ext(RISCVCPU *cpu)
+> +{
+> +
+> +    /* The V vector extension depends on the Zve64d extension */
+> +    if (cpu->cfg.ext_v) {
+> +        cpu->cfg.ext_zve64d = true;
 > +    }
 > +
->   static const TypeInfo riscv_cpu_type_infos[] = {
->       {
->           .name = TYPE_RISCV_CPU,
-> @@ -1790,23 +1826,27 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->           .class_size = sizeof(RISCVCPUClass),
->           .class_init = riscv_cpu_class_init,
->       },
-> -    DEFINE_CPU(TYPE_RISCV_CPU_ANY,              riscv_any_cpu_init),
-> +    DEFINE_CPU_WITH_CLASSFN(TYPE_RISCV_CPU_ANY, riscv_any_cpu_init,
-> +                            riscv_any_cpu_class_init),
->   #if defined(CONFIG_KVM)
->       DEFINE_CPU(TYPE_RISCV_CPU_HOST,             riscv_host_cpu_init),
->   #endif
->   #if defined(TARGET_RISCV32)
-> -    DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           rv32_base_cpu_init),
-> +    DEFINE_CPU_WITH_CLASSFN(TYPE_RISCV_CPU_BASE32, rv32_base_cpu_init,
-> +                            rv32_base_cpu_class_init),
->       DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32_ibex_cpu_init),
->       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E31,       rv32_sifive_e_cpu_init),
->       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E34,       rv32_imafcu_nommu_cpu_init),
->       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U34,       rv32_sifive_u_cpu_init),
->   #elif defined(TARGET_RISCV64)
-> -    DEFINE_CPU(TYPE_RISCV_CPU_BASE64,           rv64_base_cpu_init),
-> +    DEFINE_CPU_WITH_CLASSFN(TYPE_RISCV_CPU_BASE64, rv64_base_cpu_init,
-> +                            rv64_base_cpu_class_init),
-> +    DEFINE_CPU_WITH_CLASSFN(TYPE_RISCV_CPU_BASE128, rv128_base_cpu_init,
-> +                            rv128_base_cpu_class_init),
->       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
->       DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
->       DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
->       DEFINE_CPU(TYPE_RISCV_CPU_THEAD_C906,       rv64_thead_c906_cpu_init),
-> -    DEFINE_CPU(TYPE_RISCV_CPU_BASE128,          rv128_base_cpu_init),
->   #endif
->   };
+> +    /* The Zve64d extension depends on the Zve64f extension */
+> +    if (cpu->cfg.ext_zve64d) {
+> +        cpu->cfg.ext_zve64f = true;
+> +    }
+> +
+> +    /* The Zve64f extension depends on the Zve32f extension */
+> +    if (cpu->cfg.ext_zve64f) {
+> +        cpu->cfg.ext_zve32f = true;
+> +    }
+> +
+> +    if (cpu->cfg.ext_c) {
+> +        cpu->cfg.ext_zca = true;
+> +        if (cpu->cfg.ext_f && cpu->env.misa_mxl_max == MXL_RV32) {
+> +            cpu->cfg.ext_zcf = true;
+> +        }
+> +        if (cpu->cfg.ext_d) {
+> +            cpu->cfg.ext_zcd = true;
+> +        }
+> +    }
+> +}
+> +
+>   /*
+>    * Check consistency between chosen extensions while setting
+>    * cpu->cfg accordingly, doing a set_misa() in the end.
+> @@ -833,6 +862,8 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>           cpu->cfg.ext_ifencei = true;
+>       }
 >   
-
+> +    set_implicit_extensions_from_ext(cpu);
+> +
+>       if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
+>           error_setg(errp,
+>                      "I and E extensions are incompatible");
+> @@ -886,21 +917,6 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>           return;
+>       }
+>   
+> -    /* The V vector extension depends on the Zve64d extension */
+> -    if (cpu->cfg.ext_v) {
+> -        cpu->cfg.ext_zve64d = true;
+> -    }
+> -
+> -    /* The Zve64d extension depends on the Zve64f extension */
+> -    if (cpu->cfg.ext_zve64d) {
+> -        cpu->cfg.ext_zve64f = true;
+> -    }
+> -
+> -    /* The Zve64f extension depends on the Zve32f extension */
+> -    if (cpu->cfg.ext_zve64f) {
+> -        cpu->cfg.ext_zve32f = true;
+> -    }
+> -
+>       if (cpu->cfg.ext_zve64d && !cpu->cfg.ext_d) {
+>           error_setg(errp, "Zve64d/V extensions require D extension");
+>           return;
+> @@ -956,16 +972,6 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>           }
+>       }
+>   
+> -    if (cpu->cfg.ext_c) {
+> -        cpu->cfg.ext_zca = true;
+> -        if (cpu->cfg.ext_f && env->misa_mxl_max == MXL_RV32) {
+> -            cpu->cfg.ext_zcf = true;
+> -        }
+> -        if (cpu->cfg.ext_d) {
+> -            cpu->cfg.ext_zcd = true;
+> -        }
+> -    }
+> -
+>       if (env->misa_mxl_max != MXL_RV32 && cpu->cfg.ext_zcf) {
+>           error_setg(errp, "Zcf extension is only relevant to RV32");
+>           return;
 
