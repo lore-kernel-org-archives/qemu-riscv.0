@@ -1,70 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pm3AE-00037J-Ex
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 21:51:18 -0400
+	id 1pm3CC-0003ut-AV
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 21:53:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm3AD-000370-CA; Mon, 10 Apr 2023 21:51:17 -0400
-Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pm3C4-0003uN-Ps
+ for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 21:53:13 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm3AB-0004KJ-TG; Mon, 10 Apr 2023 21:51:17 -0400
-Received: by mail-ua1-x930.google.com with SMTP id x30so2743758uaf.7;
- Mon, 10 Apr 2023 18:51:15 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pm3C2-0004lW-6C
+ for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 21:53:12 -0400
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-635df3bd6e9so2376608b3a.1
+ for <qemu-riscv@nongnu.org>; Mon, 10 Apr 2023 18:53:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1681177874; x=1683769874;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UmwQRgTmmYOs0xGk9pR4oKqMEHXb4JzbFkzpkWaOQRw=;
- b=WRtDUqxZbyGoFe5zbNuhPqx/VbYKSZqSpbISM1+TjP5ux+N2vUGvQZhvclwKBraXe1
- jkzdREDkDvP752uOoZCIYJRRwkuzMeO4JVq8X35FABGEjOR+Gcbmy/vxHcodlDnYLX9U
- j3tXvRepEWlTHI9zHyWA+fhtWNRG5NsDa3F2ASch0EfBybXtX3p16/rT7eQjF5jcUVzl
- hMesOY3MH8Nqu1QY99AaxyU/oJ2pYGkulgvI0GnMziTxitCUeK33bQfDyq3cVx+1J7iI
- r18+9YoUI+E3XbMZpLgA11sWHcc4h/9EBt5l69yLH8ffT1rVvFlbpJKXKqDkP9HsTTLs
- 5HIw==
+ d=linaro.org; s=google; t=1681177985;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=dd45i7UxeHdZFsQWRLgzsaEnolrq61z3ps7V9Tm8oxw=;
+ b=XAq6gWJuxtMaUHLps1Zxl9tUm3dPB3irXD0FB3FO5C8pJ/U9F61q0szCttxJVXEbCc
+ QcHsRkZ1v2q96zJ+5iQrkPGMuVUAh2y9dnYXWe/N5x2gAODvhnlirDSTAHpVF1kx1E4z
+ bgNeXhUutXb26EvJ7/5l1JIGWw3omUedfapc7KH+A7MyqPgUmtmfK9jwbBOWv3REZlDh
+ dxhrDzxIN72gmWuBFY2EohItmP7w4Cx4Q21oGNaQvEmYl6RNTCLwhfw7WcGV+qUDywob
+ R61BEPGOwSJLnEoruQwLOkplZwgMs+6R8K4AYpKbhfvk4nheGeTw9vwQ1FV2RLgP8kbJ
+ MFRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681177874; x=1683769874;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UmwQRgTmmYOs0xGk9pR4oKqMEHXb4JzbFkzpkWaOQRw=;
- b=D/5CmQDztEl8B30UlPaHN7V6RFNvrZxcgAtK4/6wYrXuJvrsEmnJ9XQQoHY9Z9vYwd
- Fd+QhpK7AoxsazOqZ0KEWseN2ais9pURdO00bvAzX4NIfBAoFCz3d4W1BW6Mzet3k3EM
- RCt8wqlMFdE5qwajFKB1j+CUCg7qxGDUbt9PoofLuzYUWLkti3BTVeQP+U4Ul1KwtlO7
- wz/iV1tsoZ7rK5s7wkV0jyFNiPWSebgh01QWJDlS3vtphB/3PIl0DJi1hgJjylkl2ZVx
- c0aAs4Og+4T0NnNxlMB6lyKrX0NzoQ9IR4HB/zcCn1Q2FABx0NgrJ7Fjx1G7ABydpUI+
- SP0Q==
-X-Gm-Message-State: AAQBX9cdeoUI2xHts/j0ZcecSLwRuonHASpkcktovcWgDV4N1bR3KEpQ
- H1AothKODs0oVf2cAoBIYRmnlkPhLoD1cCty/Ic=
-X-Google-Smtp-Source: AKy350bhCzjH0fuKWFhn5oZHaqOFnE7Fl0Id61fpqDhitRVbWL5CBs17EINGpasmvP/Iw6npnURe2nCCjN5L748D/kA=
-X-Received: by 2002:ab0:1015:0:b0:68a:5c52:7f2b with SMTP id
- f21-20020ab01015000000b0068a5c527f2bmr8080324uab.1.1681177874097; Mon, 10 Apr
- 2023 18:51:14 -0700 (PDT)
+ d=1e100.net; s=20210112; t=1681177985;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=dd45i7UxeHdZFsQWRLgzsaEnolrq61z3ps7V9Tm8oxw=;
+ b=d2E0jka5PQ80/iFjAsWQVkL83x4DQJFCM1luYKXLVAussa4S9Vt862wMNMPa6sCzNI
+ BiR0ngwnIeZ0SQoAZ3QW8VAdwf/Xx/9M70mE51ajGsEphSbBtwVvD4P65ZoK4I+N04ZV
+ Fo6EfvMZz2R9gNH7b3qK0DGwofN+ayTWM4cUmaumwBx1Hw/ax8D/+vwH33+1tjm9Fkvm
+ IIpci2n+gTmY2gdSDnVn4pdtkXWFSD+ffukcD6TUUxKCUSb7b7jnpghbFM/TP42oXt+Z
+ 0J3yjFFNbbHe7CJVZ8YCD6LeZ0rFobTdU623t3mBZ8xldmlBFAqjjI3vm42D5WnEQ/jR
+ S51A==
+X-Gm-Message-State: AAQBX9dij8z+3tlx+73OZHciJoMCL9+1IuvirDwwM2X0KEkK0jXAliun
+ 2ftS7Ya3ghZKIbr7D7+xGeB9CA==
+X-Google-Smtp-Source: AKy350aZJPDTQJHfP5KQmZ2BgdEx+HM5Vm2qL+0LZZ8tWBQ+e6mELSQTPkZiWHDG0FHT6L7xrP7l7A==
+X-Received: by 2002:a05:6a00:244a:b0:63a:4ef:ae31 with SMTP id
+ d10-20020a056a00244a00b0063a04efae31mr3366532pfj.3.1681177985649; 
+ Mon, 10 Apr 2023 18:53:05 -0700 (PDT)
+Received: from [10.1.0.142] (h146.238.133.40.static.ip.windstream.net.
+ [40.133.238.146]) by smtp.gmail.com with ESMTPSA id
+ 13-20020aa7914d000000b00627fafe49f9sm8459042pfi.106.2023.04.10.18.52.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 10 Apr 2023 18:53:05 -0700 (PDT)
+Message-ID: <9592dac6-2ba7-533a-1d70-2244ecc59761@linaro.org>
+Date: Mon, 10 Apr 2023 18:52:48 -0700
 MIME-Version: 1.0
-References: <20230407014743.18779-1-liweiwei@iscas.ac.cn>
- <20230407014743.18779-4-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230407014743.18779-4-liweiwei@iscas.ac.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 11 Apr 2023 11:50:48 +1000
-Message-ID: <CAKmqyKNyZkQRSpx1J5T=h3eS+V_TefoXFQ6awj4GH+i7ucAR3g@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] target/riscv: Legalize MPP value in write_mstatus
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Subject: Re: [RFC PATCH 3/4] target/riscv: check smstateen fcsr flag
+Content-Language: en-US
+To: Mayuresh Chitale <mchitale@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, alistair.francis@wdc.com
+Cc: Alistair Francis <alistair23@gmail.com>,
+ Daniel Barboza <dbarboza@ventanamicro.com>, liweiwei@iscas.ac.cn
+References: <20230410141316.3317474-1-mchitale@ventanamicro.com>
+ <20230410141316.3317474-4-mchitale@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230410141316.3317474-4-mchitale@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x429.google.com
+X-Spam_score_int: -52
+X-Spam_score: -5.3
+X-Spam_bar: -----
+X-Spam_report: (-5.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.246,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,102 +87,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2023 01:51:17 -0000
+X-List-Received-Date: Tue, 11 Apr 2023 01:53:15 -0000
 
-On Fri, Apr 7, 2023 at 11:49=E2=80=AFAM Weiwei Li <liweiwei@iscas.ac.cn> wr=
-ote:
->
-> mstatus.MPP field is a WARL field since priv version 1.11, so we
-> remain it unchanged if an invalid value is written into it. And
-> after this, RVH shouldn't be passed to riscv_cpu_set_mode().
->
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+On 4/10/23 07:13, Mayuresh Chitale wrote:
+> +#ifndef CONFIG_USER_ONLY
+> +#define smstateen_fcsr_check(ctx) do { \
+> +    if (!ctx->smstateen_fcsr_ok) { \
+> +        if (ctx->virt_enabled) { \
+> +            generate_exception(ctx, RISCV_EXCP_VIRT_INSTRUCTION_FAULT); \
+> +        } else { \
+> +            generate_exception(ctx, RISCV_EXCP_ILLEGAL_INST); \
+> +        } \
+> +        return true; \
+> +    } \
+> +} while (0)
+> +#else
+> +#define smstateen_fcsr_check(ctx)
+> +#endif
+> +
+> +#define REQUIRE_ZFINX_OR_F(ctx) do { \
+> +    if (!has_ext(ctx, RVF)) { \
+> +        if (!ctx->cfg_ptr->ext_zfinx) { \
+> +            return false; \
+> +        } \
+> +        smstateen_fcsr_check(ctx); \
+>       } \
+>   } while (0)
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+As a matter of style, I strongly object to a *nested* macro returning from the calling 
+function.  These should all be changed to normal functions of the form
 
-Alistair
+     if (!require_xyz(ctx) || !require_abc(ctx)) {
+         return something;
+     }
 
-> ---
->  target/riscv/cpu_helper.c |  8 ++------
->  target/riscv/csr.c        | 32 ++++++++++++++++++++++++++++++++
->  2 files changed, 34 insertions(+), 6 deletions(-)
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 2310c7905f..433ea529b0 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -647,12 +647,8 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *en=
-v, uint32_t priv,
->
->  void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
->  {
-> -    if (newpriv > PRV_M) {
-> -        g_assert_not_reached();
-> -    }
-> -    if (newpriv =3D=3D PRV_H) {
-> -        newpriv =3D PRV_U;
-> -    }
-> +    g_assert(newpriv <=3D PRV_M && newpriv !=3D PRV_RESERVED);
-> +
->      if (icount_enabled() && newpriv !=3D env->priv) {
->          riscv_itrigger_update_priv(env);
->      }
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index e0b871f6dc..f4d2dcfdc8 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1230,6 +1230,32 @@ static bool validate_vm(CPURISCVState *env, target=
-_ulong vm)
->             satp_mode_max_from_map(riscv_cpu_cfg(env)->satp_mode.map);
->  }
->
-> +static target_ulong legalize_mpp(CPURISCVState *env, target_ulong old_mp=
-p,
-> +                                 target_ulong val)
-> +{
-> +    bool valid =3D false;
-> +    target_ulong new_mpp =3D get_field(val, MSTATUS_MPP);
-> +
-> +    switch (new_mpp) {
-> +    case PRV_M:
-> +        valid =3D true;
-> +        break;
-> +    case PRV_S:
-> +        valid =3D riscv_has_ext(env, RVS);
-> +        break;
-> +    case PRV_U:
-> +        valid =3D riscv_has_ext(env, RVU);
-> +        break;
-> +    }
-> +
-> +    /* Remain field unchanged if new_mpp value is invalid */
-> +    if (!valid) {
-> +        val =3D set_field(val, MSTATUS_MPP, old_mpp);
-> +    }
-> +
-> +    return val;
-> +}
-> +
->  static RISCVException write_mstatus(CPURISCVState *env, int csrno,
->                                      target_ulong val)
->  {
-> @@ -1237,6 +1263,12 @@ static RISCVException write_mstatus(CPURISCVState =
-*env, int csrno,
->      uint64_t mask =3D 0;
->      RISCVMXL xl =3D riscv_cpu_mxl(env);
->
-> +    /*
-> +     * MPP field have been made WARL since priv version 1.11. However,
-> +     * legalization for it will not break any software running on 1.10.
-> +     */
-> +    val =3D legalize_mpp(env, get_field(mstatus, MSTATUS_MPP), val);
-> +
->      /* flush tlb on mstatus fields that affect VM */
->      if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
->              MSTATUS_MPRV | MSTATUS_SUM)) {
-> --
-> 2.25.1
->
->
+etc.  insn_trans/trans_rvv.c.inc is much much cleaner in this respect.
+
+
+r~
 
