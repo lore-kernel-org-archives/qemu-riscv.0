@@ -1,83 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pm2gM-0001dY-DE
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 21:20:26 -0400
+	id 1pm33h-0008EQ-EZ
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 21:44:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pm2gK-0001d9-Eq
- for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 21:20:24 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pm33f-0008E3-QO; Mon, 10 Apr 2023 21:44:31 -0400
+Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pm2g2-0004Uz-H0
- for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 21:20:08 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- ie17-20020a17090b401100b00246d4b282eeso1499188pjb.2
- for <qemu-riscv@nongnu.org>; Mon, 10 Apr 2023 18:20:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pm33c-0002ac-P0; Mon, 10 Apr 2023 21:44:31 -0400
+Received: by mail-ua1-x934.google.com with SMTP id a38so3913147uax.12;
+ Mon, 10 Apr 2023 18:44:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1681176005;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7/g5FXYIekeo/tjoBsMyH/ydJP6eFd1LKAan25E+aXE=;
- b=PPNbWnU1UnDXZB5Fnb6s+d4FW2kfrJ2DluLoaAI5NEaz9K4YHs5Xpt7OO4SFtPp8aw
- a6c33bgTniR8B9/q1vFG2Q13mbmy7Tu2XZ6ZNvsMGsTRW0Ngrx4QjnVtu4p1w+b+iQVz
- /O39Kz+vbj53v3TEpTa/IpOqpQTzuGQRsMyD82otlr1WYYJpsAS+DZGZ65Rq7jAdiiz8
- J1yXBXhZksz07f/QFGixSsVTjl2kanZ2HKJ0lTEo2C7/FYUWv1TmRMUNOG2KmKjwXpHA
- KgOPlRcG1dtSv5v12FMhkrgRjSKEUet11jJJzc7/IHtgljZsjmxEX24t/zQl5anlOgbz
- +sYQ==
+ d=gmail.com; s=20210112; t=1681177467; x=1683769467;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=syP9nGp5blI+89WkbaX3k3BxM6rU9dg3U/tqJGC30xA=;
+ b=R2+z0me3yURBPZNm3eqFxO/sDR4FB99UjAnpKa06hFmOcxVrqS6yelibRw3AgZTjdt
+ qF9tLp3XDm/7BfT/toKsUcTS7Vkbt51z2MPgO7CTbsyVNN4ODzZwRwqKM0vekvUVmzpL
+ +7gqNE98slVhh8+WzIMM0nPXAjhfdN541DVjsyVOhjNhiBKJo1NyxnyIZjhYPPq79HY5
+ q5yd9nLsOh9RF9QZ1gfiF/FEik2EkaeTH/mx5e8XjIj0LtzK1zARADd5jWzVghbKmbh1
+ /BO64mFQtVJONm7lHxP+ehd0pvagKXApVyIE5bkzdN9C/Y78fqgYOFcfg/DlKlKsO2yU
+ f0eA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681176005;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7/g5FXYIekeo/tjoBsMyH/ydJP6eFd1LKAan25E+aXE=;
- b=PFtsOYuLeKBkKXGnse3/xwfk7GSmdGtdXtDDYwS5+VpdZBMHelOfqjfnbiclo/fpko
- qAooUhum9IKhXmeXQyhWxXHDzLdK4NzzpFgjDFCxBqDkJLKx0nf4sO2jEn/WVJGRwgOY
- ryFwzAZGZJOP69/OGjxrxuLR3uDS6pi4AkeTSL8IKrbeIqjoyvcXpf8+Olu1jXgyBq2y
- fo+o7e9DHHz5I96Hw6DibTo0dDUGdUB5J0Udktg4uNQfRBjVByWJIRA9XEKJdGZ9tgqo
- MApU42z+IZgmCzfkvh88jUtEnpO0MD5yIFFK1jxfvD1YhAMS07BHY2WppNjBoJlWUx2K
- XXxQ==
-X-Gm-Message-State: AAQBX9fZzPCFlo45FuY74xIXnpwxwxW782i/Oo4T6Aem+ddeCOJttxEd
- DxODRQXU/4kD58jExWmQEOIyFQ==
-X-Google-Smtp-Source: AKy350byxEIS+ramQulI+t21xjaTL5gmqB/e8zbipwmVz/KwHTp9+Za16uY1MiM9JUyDl3hj+OeiJg==
-X-Received: by 2002:a17:90b:1d04:b0:23d:3913:bc26 with SMTP id
- on4-20020a17090b1d0400b0023d3913bc26mr15236109pjb.2.1681176004739; 
- Mon, 10 Apr 2023 18:20:04 -0700 (PDT)
-Received: from [10.1.0.142] (h146.238.133.40.static.ip.windstream.net.
- [40.133.238.146]) by smtp.gmail.com with ESMTPSA id
- c7-20020a170902b68700b001a064282b11sm8392638pls.151.2023.04.10.18.20.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Apr 2023 18:20:04 -0700 (PDT)
-Message-ID: <c4e9dbac-cfec-ae70-436f-82f0d70b3539@linaro.org>
-Date: Mon, 10 Apr 2023 18:20:01 -0700
+ d=1e100.net; s=20210112; t=1681177467; x=1683769467;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=syP9nGp5blI+89WkbaX3k3BxM6rU9dg3U/tqJGC30xA=;
+ b=mWqSUgjcs1sb7YOjGez9JyCGYPVWXJ82Mar3R/6Z0gufBfbRY/q9P1MDJu9XMC3ibD
+ oSVImvT0C8WH+hD4HdRFRevvR6q0x9YKm2zAfY+KK4T+jJFmB7YOmiYiGqQpmNANPovX
+ MrtfdWj4UPEV3l5oZmUWYgM+ru0WuCoFe/dB6k2vpe3GLXA/u8nGrq5LnVQiBazcpRuw
+ nAqnVGoZN9XaNeHDL7YST21qBgf6QPLm3Zg6mLx0MVYsPwCif+Kjv/8LJF3Mj4F7ux8a
+ f/3eRsKuKd/6tXW4ZhiupPzj+NzHJd8vNE4cuOLlYO17ZdUysaTz5IL925IEG9bfy+23
+ LT4A==
+X-Gm-Message-State: AAQBX9d2PLVxMDpQVDlxzKesAn9ITbdW9kZiLhfOgr6MYR9/ZdPnb75o
+ Ir8tsb+9m0WezqPKYnp783r+09OMWHSfcfJx/rA=
+X-Google-Smtp-Source: AKy350b1mt8jGgL+FpDZteSSr+nWtxGJ30ClUEzZcTMFVvxNA6z1V4qIq2U8ZojsNmXqJcnAIQnHbFBGstV0/ZiPreA=
+X-Received: by 2002:ab0:4a1e:0:b0:68a:a9d:13f5 with SMTP id
+ q30-20020ab04a1e000000b0068a0a9d13f5mr7266670uae.1.1681177466743; Mon, 10 Apr
+ 2023 18:44:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [RFC PATCH v2] riscv: Add support for the Zfa extension
-Content-Language: en-US
-To: Christoph Muellner <christoph.muellner@vrull.eu>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Palmer Dabbelt <palmer@dabbelt.com>,
- Jeff Law <jeffreyalaw@gmail.com>, Tsukasa OI <research_trasio@irq.a4lg.com>,
- liweiwei@iscas.ac.cn
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20230331182824.4104580-1-christoph.muellner@vrull.eu>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230331182824.4104580-1-christoph.muellner@vrull.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1036.google.com
-X-Spam_score_int: -52
-X-Spam_score: -5.3
-X-Spam_bar: -----
-X-Spam_report: (-5.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.246,
+References: <20230406180351.570807-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20230406180351.570807-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 11 Apr 2023 11:44:00 +1000
+Message-ID: <CAKmqyKNFwvBTyhhJ2_jGUaZ=z1YcxQu=Z7+nJeKHmb-bkDFRQg@mail.gmail.com>
+Subject: Re: [PATCH v4 00/20] remove MISA ext_N flags from cpu->cfg
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,25 +76,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2023 01:20:24 -0000
+X-List-Received-Date: Tue, 11 Apr 2023 01:44:32 -0000
 
-On 3/31/23 11:28, Christoph Muellner wrote:
-> +/*
-> + * Implement float64 to int32_t conversion without saturation;
-> + * the result is supplied modulo 2^32.
-> + * Rounding mode is RTZ.
-> + * Flag behaviour identical to fcvt.w.d (see F specification).
-> + *
-> + * Similar conversion of this function can be found in
-> + * target/arm/vfp_helper.c (fjcvtzs): f64->i32 with other fflag behaviour, and
-> + * target/alpha/fpu_helper.c (do_cvttq): f64->i64 with support for several
-> + * rounding modes and different fflag behaviour.
-> + */
-> +uint64_t helper_fcvtmod_w_d(CPURISCVState *env, uint64_t value)
+On Fri, Apr 7, 2023 at 4:06=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Hi,
+>
+> This new version was rebased on top of Alistair's riscv-to-apply.next @
+> 9c60ca583cb ("hw/riscv: Add signature dump function ...").
+>
+> No other changes made.
+>
+> Changes from v3:
+> - rebased with riscv-to-apply.next @ 9c60ca583cb
+> - v3 link: https://lists.gnu.org/archive/html/qemu-devel/2023-03/msg06911=
+.html
+>
+> Daniel Henrique Barboza (20):
+>   target/riscv: sync env->misa_ext* with cpu->cfg in realize()
+>   target/riscv: remove MISA properties from isa_edata_arr[]
+>   target/riscv/cpu.c: remove 'multi_letter' from isa_ext_data
+>   target/riscv: introduce riscv_cpu_add_misa_properties()
+>   target/riscv: remove cpu->cfg.ext_a
+>   target/riscv: remove cpu->cfg.ext_c
+>   target/riscv: remove cpu->cfg.ext_d
+>   target/riscv: remove cpu->cfg.ext_f
+>   target/riscv: remove cpu->cfg.ext_i
+>   target/riscv: remove cpu->cfg.ext_e
+>   target/riscv: remove cpu->cfg.ext_m
+>   target/riscv: remove cpu->cfg.ext_s
+>   target/riscv: remove cpu->cfg.ext_u
+>   target/riscv: remove cpu->cfg.ext_h
+>   target/riscv: remove cpu->cfg.ext_j
+>   target/riscv: remove cpu->cfg.ext_v
+>   target/riscv: remove riscv_cpu_sync_misa_cfg()
+>   target/riscv: remove cfg.ext_g setup from rv64_thead_c906_cpu_init()
+>   target/riscv: add RVG and remove cpu->cfg.ext_g
+>   target/riscv/cpu.c: redesign register_cpu_props()
 
-I am still of the opinion this should be moved to fpu/softfloat-parts.c.
-The "other fflag" behaviour is very likely a bug in one or more of the three implementations.
+Thanks!
 
+Applied to riscv-to-apply.next
 
-r~
+Alistair
+
+>
+>  target/riscv/cpu.c                        | 412 +++++++++++-----------
+>  target/riscv/cpu.h                        |  19 +-
+>  target/riscv/insn_trans/trans_rvzce.c.inc |   2 +-
+>  3 files changed, 216 insertions(+), 217 deletions(-)
+>
+> --
+> 2.39.2
+>
+>
 
