@@ -1,62 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pm6gd-0000VN-Bd
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 01:36:59 -0400
+	id 1pm6j0-0001TL-Sk
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 01:39:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm6gb-0000Ut-H1; Tue, 11 Apr 2023 01:36:57 -0400
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
+ id 1pm6iy-0001T0-A3; Tue, 11 Apr 2023 01:39:24 -0400
+Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm6gZ-0008Po-SV; Tue, 11 Apr 2023 01:36:57 -0400
-Received: by mail-vs1-xe34.google.com with SMTP id g13so6100836vsk.12;
- Mon, 10 Apr 2023 22:36:54 -0700 (PDT)
+ id 1pm6iw-0000EA-I0; Tue, 11 Apr 2023 01:39:23 -0400
+Received: by mail-vs1-xe2e.google.com with SMTP id y13so6565056vss.0;
+ Mon, 10 Apr 2023 22:39:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1681191414; x=1683783414;
+ d=gmail.com; s=20210112; t=1681191561; x=1683783561;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K+o6HFW7YIcoey1ju41Np2Ywz2uKMZkP6T0NrmrEWzk=;
- b=RjnX2JM/yoppV8rGY9n/F+g/cp0VCHTgG/DIwLRJLafd8rG2tgEiGckRJEr0qlPvS7
- 5Tw2SUEyrZxV/n14FZ5tm+sJTpg35TaSRbZ0l3hgIGAq/wKi69CQSDjD7B7lgIAvF6IX
- emVqpzGks9a7q401UJVouh51qIYDw7luY/w6VO76mVcODFuc46NC1Mgs2rzKbkP3Wxd1
- YoNsFcChHMNWcURVAkp4wy9r8p2NNGdwY/eG2FpNkCO1y9r6sMYsMYPQc/pTsYGD6yLb
- 2gADg1M5+6LUqV3IyVh7Oo40VPQWa3ln4qaHfOLs4McjwwBnoc3XmTTBx5tyK/uV3N8B
- drgg==
+ bh=bSUPXq3QnQiWhCYYAYAM5q3/c0Y8fZ0BfO1FXmWb5MQ=;
+ b=oWPBFNPOQsZyG3KmCahtit79BfMWYxF/v3t62b0SJaQZwONCQstPPsYKAP5pY/Bg79
+ lD9Nb0USVCD8MGpzomCOUhwfj6hkyFV+zh9H5qNI/nWY6NdzHuZ8LN98hbs+4UTJY/nU
+ 9w3TCRl5O4XycLfAfIjmXUCyUJqqm9W9bVbvPS/FXPI9F13Pb4oWAigPNvbj1a5io+B8
+ aQ8mjx7fmwP65qnHRXT2qb1Lht0g5dKXaQIt0gUN6MLXZtIgo8sNHokD7x+DAWboyjJh
+ gYo1+0/utE4S9uW9fSVetpFa9Kp2VST8kRdD2656OI48350D6rm4phI7blF6CThBvG6q
+ n0fA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681191414; x=1683783414;
+ d=1e100.net; s=20210112; t=1681191561; x=1683783561;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=K+o6HFW7YIcoey1ju41Np2Ywz2uKMZkP6T0NrmrEWzk=;
- b=ctLqHhlnQacd63dzJPHuu1nEOaSWjTl9mfVqdAS6dLDH7otR4krip4Zk0+aAIJ9nE0
- rmnuNEYmxB/T3Tm5IU0RYbpNbErMth65qwejJ1hS8IyGDVWLRAGKyMKJZzkLHbJty7/h
- kjvCNLfE9fS18ZjH23nCaVurrw2COmwIeAfUY6dz8pzB0fd1UC99QHb89LPsFKwmnLpM
- dZbRE54WkrjuOXO+1XXGv7yQbELxiGI5+jGWbj2voI4UJ190mPh3brKD0hHZxxV9mikr
- mXT1CDmr9qwq+7+j9vG660IIB9zRqTX823Jgla5qQhO5KQeofpdnNtaGcupXnlVMht2c
- c4/Q==
-X-Gm-Message-State: AAQBX9czlFLUvV4Z5WWI3+PMKiH4da/1baUrBgaHEt4n4aCuLIgydvSt
- tmA3sYB58OXrHhOe+PFhmcrvskpS0O+k31Mge8w=
-X-Google-Smtp-Source: AKy350YOTo8tf19RBJ2IrjKHb/eiRPuhy5LL9J7AOlMzaFGmshI1RYrSbavgM9sLb6Dn00zOl6iC/805nG3EYUZ9ojE=
-X-Received: by 2002:a05:6102:470c:b0:425:87ab:c386 with SMTP id
- ei12-20020a056102470c00b0042587abc386mr7345480vsb.3.1681191414162; Mon, 10
- Apr 2023 22:36:54 -0700 (PDT)
+ bh=bSUPXq3QnQiWhCYYAYAM5q3/c0Y8fZ0BfO1FXmWb5MQ=;
+ b=aaoXYD1le8D5cITI+rh+DWpXp1cPvfkPiuDLOhSrUJSgo801RJV4jg07QcL5dBypnw
+ V9+7RjE/LEiZ6yQsjzSyokJ53AJ3ZMiocjITCVEkajFPERuRJAdJBHAV0GMSh/zbmEXm
+ jZO6N/fVwwh3/l9bJT/yFWEU0bt3UnXMgb8kWrB8j9+Fp5nMOrmyjBhkgggBmoDfD7pX
+ /uA2+Zi4f4R8otYYyUoDSTay7WmiogB00lSC4fgPX7HylWZAiSUf9x2HWGPFPM4BmKf0
+ mKr/ArHN3UM0rLNKiIqgTnrAF2DW8czsjurJGIaZ2qjPSLgNsjfYVOZXWE/+IPUFZ5cX
+ G1YA==
+X-Gm-Message-State: AAQBX9fT/rIBeUkVUmhyIM66uhnNizYxfA6AeB6KXSorq78owBtVgWs0
+ SMBfIOr+Z1yN52+zpejClRIUh2NA8EV8gIy+Ad8=
+X-Google-Smtp-Source: AKy350Y/DZNy18IP96Z+CiSMV5K517bkrmACrr+ux50TY7w5x2daIleNuk3UONqVMTTMsmLJdsx/yNOUdOrCqcSrJa4=
+X-Received: by 2002:a67:d39d:0:b0:42a:eb6:6c51 with SMTP id
+ b29-20020a67d39d000000b0042a0eb66c51mr1110388vsj.3.1681191560946; Mon, 10 Apr
+ 2023 22:39:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230325105429.1142530-1-richard.henderson@linaro.org>
- <20230325105429.1142530-26-richard.henderson@linaro.org>
-In-Reply-To: <20230325105429.1142530-26-richard.henderson@linaro.org>
+In-Reply-To: <20230325105429.1142530-1-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 11 Apr 2023 15:36:28 +1000
-Message-ID: <CAKmqyKO0Ab3EfbXGuV3FKJ0eqcVW8guMoZ8WirFF5tZ_VjPoqQ@mail.gmail.com>
-Subject: Re: [PATCH v6 25/25] target/riscv: Reorg sum check in
- get_physical_address
+Date: Tue, 11 Apr 2023 15:38:54 +1000
+Message-ID: <CAKmqyKPHF_qKa-RSTjC3q8xmJfX2gbDER2dP69z5xBLOfpXa7Q@mail.gmail.com>
+Subject: Re: [PATCH v6 00/25] target/riscv: MSTATUS_SUM + cleanups
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  palmer@dabbelt.com, zhiwei_liu@linux.alibaba.com, fei2.wu@intel.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,77 +75,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2023 05:36:58 -0000
+X-List-Received-Date: Tue, 11 Apr 2023 05:39:25 -0000
 
-On Sat, Mar 25, 2023 at 10:56=E2=80=AFPM Richard Henderson
+On Sat, Mar 25, 2023 at 9:58=E2=80=AFPM Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> Implement this by adjusting prot, which reduces the set of
-> checks required.  This prevents exec to be set for U pages
-> in MMUIdx_S_SUM.  While it had been technically incorrect,
-> it did not manifest as a bug, because we will never attempt
-> to execute from MMUIdx_S_SUM.
+> This builds on Fei and Zhiwei's SUM and TB_FLAGS changes.
 >
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>   * Reclaim 5 TB_FLAGS bits, since we nearly ran out.
+>
+>   * Using cpu_mmu_index(env, true) is insufficient to implement
+>     HLVX properly.  While that chooses the correct mmu_idx, it
+>     does not perform the read with execute permission.
+>     I add a new tcg interface to perform a read-for-execute with
+>     an arbitrary mmu_idx.  This is still not 100% compliant, but
+>     it's closer.
+>
+>   * Handle mstatus.MPV in cpu_mmu_index.
+>   * Use vsstatus.SUM when required for MMUIdx_S_SUM.
+>   * Cleanups for get_physical_address.
+>
+> While this passes check-avocado, I'm sure that's insufficient.
+> Please have a close look.
+>
+>
+> r~
+>
+>
+> Fei Wu (2):
+>   target/riscv: Separate priv from mmu_idx
+>   target/riscv: Reduce overhead of MSTATUS_SUM change
+>
+> LIU Zhiwei (4):
+>   target/riscv: Extract virt enabled state from tb flags
+>   target/riscv: Add a general status enum for extensions
+>   target/riscv: Encode the FS and VS on a normal way for tb flags
+>   target/riscv: Add a tb flags field for vstart
+>
+> Richard Henderson (19):
+>   target/riscv: Remove mstatus_hs_{fs,vs} from tb_flags
+>   accel/tcg: Add cpu_ld*_code_mmu
+>   target/riscv: Use cpu_ld*_code_mmu for HLVX
+>   target/riscv: Handle HLV, HSV via helpers
+>   target/riscv: Rename MMU_HYP_ACCESS_BIT to MMU_2STAGE_BIT
+>   target/riscv: Introduce mmuidx_sum
+>   target/riscv: Introduce mmuidx_priv
+>   target/riscv: Introduce mmuidx_2stage
+>   target/riscv: Move hstatus.spvp check to check_access_hlsv
+>   target/riscv: Set MMU_2STAGE_BIT in riscv_cpu_mmu_index
+>   target/riscv: Check SUM in the correct register
+>   target/riscv: Hoist second stage mode change to callers
+>   target/riscv: Hoist pbmte and hade out of the level loop
+>   target/riscv: Move leaf pte processing out of level loop
+>   target/riscv: Suppress pte update with is_debug
+>   target/riscv: Don't modify SUM with is_debug
+>   target/riscv: Merge checks for reserved pte flags
+>   target/riscv: Reorg access check in get_physical_address
+>   target/riscv: Reorg sum check in get_physical_address
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks for the patches!
+
+This has been reviewed and tested. Do you mind sending a v7 rebased on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next?
 
 Alistair
 
-> ---
->  target/riscv/cpu_helper.c | 22 +++++++++++-----------
->  1 file changed, 11 insertions(+), 11 deletions(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 725ca45106..7336d1273b 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -800,7 +800,7 @@ static int get_physical_address(CPURISCVState *env, h=
-waddr *physical,
->      *ret_prot =3D 0;
+>  include/exec/cpu_ldst.h                       |   9 +
+>  target/riscv/cpu.h                            |  47 ++-
+>  target/riscv/cpu_bits.h                       |  12 +-
+>  target/riscv/helper.h                         |  12 +-
+>  target/riscv/internals.h                      |  35 ++
+>  accel/tcg/cputlb.c                            |  48 +++
+>  accel/tcg/user-exec.c                         |  58 +++
+>  target/riscv/cpu.c                            |   2 +-
+>  target/riscv/cpu_helper.c                     | 393 +++++++++---------
+>  target/riscv/csr.c                            |  21 +-
+>  target/riscv/op_helper.c                      | 113 ++++-
+>  target/riscv/translate.c                      |  72 ++--
+>  .../riscv/insn_trans/trans_privileged.c.inc   |   2 +-
+>  target/riscv/insn_trans/trans_rvf.c.inc       |   2 +-
+>  target/riscv/insn_trans/trans_rvh.c.inc       | 135 +++---
+>  target/riscv/insn_trans/trans_rvv.c.inc       |  22 +-
+>  target/riscv/insn_trans/trans_xthead.c.inc    |   7 +-
+>  17 files changed, 595 insertions(+), 395 deletions(-)
 >
->      hwaddr base;
-> -    int levels, ptidxbits, ptesize, vm, sum, widened;
-> +    int levels, ptidxbits, ptesize, vm, widened;
->
->      if (first_stage =3D=3D true) {
->          if (use_background) {
-> @@ -831,7 +831,7 @@ static int get_physical_address(CPURISCVState *env, h=
-waddr *physical,
->          }
->          widened =3D 2;
->      }
-> -    sum =3D mmuidx_sum(mmu_idx);
-> +
->      switch (vm) {
->      case VM_1_10_SV32:
->        levels =3D 2; ptidxbits =3D 10; ptesize =3D 4; break;
-> @@ -999,15 +999,15 @@ restart:
->          prot |=3D PAGE_EXEC;
->      }
->
-> -    if ((pte & PTE_U) &&
-> -        ((mode !=3D PRV_U) && (!sum || access_type =3D=3D MMU_INST_FETCH=
-))) {
-> -        /*
-> -         * User PTE flags when not U mode and mstatus.SUM is not set,
-> -         * or the access type is an instruction fetch.
-> -         */
-> -        return TRANSLATE_FAIL;
-> -    }
-> -    if (!(pte & PTE_U) && (mode !=3D PRV_S)) {
-> +    if (pte & PTE_U) {
-> +        if (mode !=3D PRV_U) {
-> +            if (!mmuidx_sum(mmu_idx)) {
-> +                return TRANSLATE_FAIL;
-> +            }
-> +            /* SUM allows only read+write, not execute. */
-> +            prot &=3D PAGE_READ | PAGE_WRITE;
-> +        }
-> +    } else if (mode !=3D PRV_S) {
->          /* Supervisor PTE flags when not S mode */
->          return TRANSLATE_FAIL;
->      }
 > --
 > 2.34.1
 >
