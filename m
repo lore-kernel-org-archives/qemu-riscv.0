@@ -1,58 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pm62y-0007DA-Um
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 00:56:00 -0400
+	id 1pm6f0-00084f-3F
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 01:35:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm62w-0007Cj-T2; Tue, 11 Apr 2023 00:55:58 -0400
+ id 1pm6ey-00084L-GY; Tue, 11 Apr 2023 01:35:16 -0400
 Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm62v-0007Zl-4L; Tue, 11 Apr 2023 00:55:58 -0400
-Received: by mail-vs1-xe2d.google.com with SMTP id a9so6717487vsh.3;
- Mon, 10 Apr 2023 21:55:56 -0700 (PDT)
+ id 1pm6ew-000829-PF; Tue, 11 Apr 2023 01:35:16 -0400
+Received: by mail-vs1-xe2d.google.com with SMTP id z13so6524832vss.1;
+ Mon, 10 Apr 2023 22:35:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1681188955; x=1683780955;
+ d=gmail.com; s=20210112; t=1681191313; x=1683783313;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0cZx0MqiQYGWShtcILn1LNaybvVNchry31ZFtSv5/7o=;
- b=RnI1gm7JzPb1cWamqpL920FWU1IM2zCDhqbxQ1ehRCnYxNnXFPf98oqbtQh5uNqIU4
- 0kIgfn31wTl/OEUU8x4p1RtuiN0Z4Ig4NXyDQXWLUtKSn04eM3GwZUqk1GXpn9fO7uBf
- NofERvgMiz5MaHxZE+vm3uLlcP2wqa2bw4/4Dez2xNdU+k0Nr0WXDmQCjqIQ7Q6CFSeT
- 8xjhb+Qf4HD9vdEjiMZ1Y3rhkIaW/Dl4Pqm5Ad4FGzeE7Spo+yP0Kgs9957i3xFP/iWw
- EsansAJ/i8mtbsZjYta3yFDAZuWt4Yadl5bjm32ruoV3XDRzJDhaLSaCNHVGGrRiYO6t
- n8Mw==
+ bh=gWV+je5bE/RogYYBIceHrO2e1HT7i/ZGW8nuCWodz80=;
+ b=JDpQaVsJFRKmklK4Ll1ka27Et+FT4xcFjjufUkewW5uplRJn8Ygdxtp+JxjhyxzKqR
+ 7/1ePw2uDTQDr4neZfgF6gGNrwYhuTR7BikzxhbZ7UrpWY3opLT26UveM47kP2EC7pDk
+ 6pj2osRuA9SwIXdRn4IkUrJlI3yVhWapMbJZn6zTzlJnJWvrx7SofkjSSwFDPFez6DjG
+ DZT1S/be+lR9W0LSP2ujk9L1A9tUwP4y2YHwJOcrw7+a7yb6aIelrKmmRPETLzcRXGkD
+ y/fsWL3jJW1EKElr1MzxpalABuUEdaG0gDCszzDH5rmD4LaV7+j6TLfNjZv5ab4T3MaS
+ y5Vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681188955; x=1683780955;
+ d=1e100.net; s=20210112; t=1681191313; x=1683783313;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0cZx0MqiQYGWShtcILn1LNaybvVNchry31ZFtSv5/7o=;
- b=ck9A6CQGGep52ndB+O7I6JimKKIIKC1WVy4yCEa/U4XTYtsJF1++k86PeUSZxjAIXS
- Cw3WYqL5LWceehNw6nSZ3/qgMSQLnXOqNLvdhW8XpHJZYl517K7D2awhQOhC233afjwV
- v6/9eHlrBLDDxvV+dtAxzMfXADP6w/+ebMtNOE60ck/TRJ/A7/AOegEQFdlZna9STU7c
- dmRVFbtcwn9ay6k58xmNZV3+JYrwn4cGfsFTE8sLx72Jri0eHril/UKEdfaCmKPjYrxw
- dzh1Ke/Y70wJTGoSIx/96F569T17Ro4Fdqbcu6wZcvD6TQcwIPM94SkmAMQgbt/50mds
- l06g==
-X-Gm-Message-State: AAQBX9dHbO5yr/8QnrDUgje/0Gw1ImZtQKTKN/XowbUeVv2irjKmmj/R
- 4Ibn/kAxBqFk7NWLEu/nPOmb+xvHcgNcgz64S7U=
-X-Google-Smtp-Source: AKy350Y/FdWgpTXYiIk0YXJ3DbsPApN6PPEmppMoonLyzeJPTfGlgEKrVUe8U5/fgaSozFwE6u7DSKtvpPlm/E0Jkag=
-X-Received: by 2002:a05:6102:b16:b0:42c:6f4b:dfec with SMTP id
- b22-20020a0561020b1600b0042c6f4bdfecmr3284804vst.0.1681188955563; Mon, 10 Apr
- 2023 21:55:55 -0700 (PDT)
+ bh=gWV+je5bE/RogYYBIceHrO2e1HT7i/ZGW8nuCWodz80=;
+ b=NZySPPom/rolJu3RqTADl4Ph1wefaIhXkCly3VIvYZQyKAVPi9wub9lqzAEh9Jc5jV
+ qQ+9MqvQhrfSOy6weNX4/99bogo5oMS3VZm7y6iHhfx8R3DqSDCri+PyYR4tLNbpIVWv
+ h91RFIw8d4Y8QpUd8WK6s3zBDu1eyPv9Hldpf7DmjZUQlsBQbmUksvdo8fIE9wtf5+RW
+ OWaN1scMB6iFUIQ5F+Ld2UVhiGSma9iwhey3UO2Y3RrECjNc+/O3wPCCg/ys9QdbEnPq
+ e4MqdFSrokaU4UjZRco9D7hNm+xLcetUfXYgrliOSTUMJGL5q6jPFnsCfcOfRNMZnMWL
+ ffaQ==
+X-Gm-Message-State: AAQBX9c2pjvx3fUBzRnJEXfP00YSPJfNWA2a57XzduL74KyeGlpoPtTP
+ NFnYWBk4YUJ5ZHSVKUEzBh4SKUaRZ44cKquNHNM=
+X-Google-Smtp-Source: AKy350btKV1/skshWx2pKpJS01YT0tjXyYpxBEych6+ay8tgi3fJQwbNCDSQP1GX1fPPDKrrjdXtuXwG1FQm6FxoOfc=
+X-Received: by 2002:a67:c81c:0:b0:42c:33ab:97fd with SMTP id
+ u28-20020a67c81c000000b0042c33ab97fdmr6413877vsk.3.1681191313424; Mon, 10 Apr
+ 2023 22:35:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230325105429.1142530-1-richard.henderson@linaro.org>
- <20230325105429.1142530-25-richard.henderson@linaro.org>
-In-Reply-To: <20230325105429.1142530-25-richard.henderson@linaro.org>
+References: <20230407014743.18779-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230407014743.18779-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 11 Apr 2023 14:55:29 +1000
-Message-ID: <CAKmqyKMJV0b60tAektVonn1JzP0mS-HHTe7Hyb7CFPcgAJ8qDQ@mail.gmail.com>
-Subject: Re: [PATCH v6 24/25] target/riscv: Reorg access check in
- get_physical_address
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- palmer@dabbelt.com, zhiwei_liu@linux.alibaba.com, fei2.wu@intel.com
+Date: Tue, 11 Apr 2023 15:34:47 +1000
+Message-ID: <CAKmqyKM1f955Yx-+F_RQ8t1aWtO-Edno1VcOzXwzxB3PzJx_Tg@mail.gmail.com>
+Subject: Re: [PATCH v3 0/3] target/riscv: Fix mstatus.MPP related support
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
@@ -77,157 +76,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2023 04:55:59 -0000
+X-List-Received-Date: Tue, 11 Apr 2023 05:35:16 -0000
 
-On Sat, Mar 25, 2023 at 9:51=E2=80=AFPM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Fri, Apr 7, 2023 at 11:49=E2=80=AFAM Weiwei Li <liweiwei@iscas.ac.cn> wr=
+ote:
 >
-> We were effectively computing the protection bits twice,
-> once while performing access checks and once while returning
-> the valid bits to the caller.  Reorg so we do this once.
+> This patchset tries to fix some problems in current implementation for ms=
+tatus.MPP
 >
-> Move the computation of mxr close to its single use.
+> The port is available here:
+> https://github.com/plctlab/plct-qemu/tree/plct-mpp-fix-v3
 >
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> v3:
+> * add patch 2 to remove PRV_H, and use PRV_RESERVED instead in some cases
+> * improve legalize_mpp and assert error message in patch 3
+>
+> v2:
+> * Modify commit message and add comment to specify MPP field becomes a WA=
+RL field since priv version 1.11 in patch 2
+> * rebase on riscv-to-apply.next
+>
+> Weiwei Li (3):
+>   target/riscv: Fix the mstatus.MPP value after executing MRET
+>   target/riscv: Use PRV_RESERVED instead of PRV_H
+>   target/riscv: Legalize MPP value in write_mstatus
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/cpu_helper.c | 69 ++++++++++++++++++++-------------------
->  1 file changed, 36 insertions(+), 33 deletions(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 82a7c5f9dd..725ca45106 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -762,7 +762,7 @@ static int get_physical_address_pmp(CPURISCVState *en=
-v, int *prot,
->   * @is_debug: Is this access from a debugger or the monitor?
->   */
->  static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-> -                                int *prot, target_ulong addr,
-> +                                int *ret_prot, target_ulong addr,
->                                  target_ulong *fault_pte_addr,
->                                  int access_type, int mmu_idx,
->                                  bool first_stage, bool two_stage,
-> @@ -793,20 +793,14 @@ static int get_physical_address(CPURISCVState *env,=
- hwaddr *physical,
->
->      if (mode =3D=3D PRV_M || !riscv_cpu_cfg(env)->mmu) {
->          *physical =3D addr;
-> -        *prot =3D PAGE_READ | PAGE_WRITE | PAGE_EXEC;
-> +        *ret_prot =3D PAGE_READ | PAGE_WRITE | PAGE_EXEC;
->          return TRANSLATE_SUCCESS;
->      }
->
-> -    *prot =3D 0;
-> +    *ret_prot =3D 0;
->
->      hwaddr base;
-> -    int levels, ptidxbits, ptesize, vm, sum, mxr, widened;
-> -
-> -    if (first_stage =3D=3D true) {
-> -        mxr =3D get_field(env->mstatus, MSTATUS_MXR);
-> -    } else {
-> -        mxr =3D get_field(env->vsstatus, MSTATUS_MXR);
-> -    }
-> +    int levels, ptidxbits, ptesize, vm, sum, widened;
->
->      if (first_stage =3D=3D true) {
->          if (use_background) {
-> @@ -849,7 +843,7 @@ static int get_physical_address(CPURISCVState *env, h=
-waddr *physical,
->        levels =3D 5; ptidxbits =3D 9; ptesize =3D 8; break;
->      case VM_1_10_MBARE:
->          *physical =3D addr;
-> -        *prot =3D PAGE_READ | PAGE_WRITE | PAGE_EXEC;
-> +        *ret_prot =3D PAGE_READ | PAGE_WRITE | PAGE_EXEC;
->          return TRANSLATE_SUCCESS;
->      default:
->        g_assert_not_reached();
-> @@ -984,6 +978,27 @@ restart:
->          return TRANSLATE_FAIL;
->      }
->
-> +    int prot =3D 0;
-> +    if (pte & PTE_R) {
-> +        prot |=3D PAGE_READ;
-> +    }
-> +    if (pte & PTE_W) {
-> +        prot |=3D PAGE_WRITE;
-> +    }
-> +    if (pte & PTE_X) {
-> +        bool mxr;
-> +
-> +        if (first_stage =3D=3D true) {
-> +            mxr =3D get_field(env->mstatus, MSTATUS_MXR);
-> +        } else {
-> +            mxr =3D get_field(env->vsstatus, MSTATUS_MXR);
-> +        }
-> +        if (mxr) {
-> +            prot |=3D PAGE_READ;
-> +        }
-> +        prot |=3D PAGE_EXEC;
-> +    }
-> +
->      if ((pte & PTE_U) &&
->          ((mode !=3D PRV_U) && (!sum || access_type =3D=3D MMU_INST_FETCH=
-))) {
->          /*
-> @@ -996,17 +1011,9 @@ restart:
->          /* Supervisor PTE flags when not S mode */
->          return TRANSLATE_FAIL;
->      }
-> -    if (access_type =3D=3D MMU_DATA_LOAD &&
-> -        !((pte & PTE_R) || ((pte & PTE_X) && mxr))) {
-> -        /* Read access check failed */
-> -        return TRANSLATE_FAIL;
-> -    }
-> -    if (access_type =3D=3D MMU_DATA_STORE && !(pte & PTE_W)) {
-> -        /* Write access check failed */
-> -        return TRANSLATE_FAIL;
-> -    }
-> -    if (access_type =3D=3D MMU_INST_FETCH && !(pte & PTE_X)) {
-> -        /* Fetch access check failed */
-> +
-> +    if (!((prot >> access_type) & 1)) {
-> +        /* Access check failed */
->          return TRANSLATE_FAIL;
->      }
->
-> @@ -1071,20 +1078,16 @@ restart:
->                    (vpn & (((target_ulong)1 << ptshift) - 1))
->                   ) << PGSHIFT) | (addr & ~TARGET_PAGE_MASK);
->
-> -    /* set permissions on the TLB entry */
-> -    if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
-> -        *prot |=3D PAGE_READ;
-> -    }
-> -    if (pte & PTE_X) {
-> -        *prot |=3D PAGE_EXEC;
-> -    }
->      /*
-> -     * Add write permission on stores or if the page is already dirty,
-> -     * so that we TLB miss on later writes to update the dirty bit.
-> +     * Remove write permission unless this is a store, or the page is
-> +     * already dirty, so that we TLB miss on later writes to update
-> +     * the dirty bit.
->       */
-> -    if ((pte & PTE_W) && (access_type =3D=3D MMU_DATA_STORE || (pte & PT=
-E_D))) {
-> -        *prot |=3D PAGE_WRITE;
-> +    if (access_type !=3D MMU_DATA_STORE && !(pte & PTE_D)) {
-> +        prot &=3D ~PAGE_WRITE;
->      }
-> +    *ret_prot =3D prot;
-> +
->      return TRANSLATE_SUCCESS;
->  }
+>  target/riscv/cpu.h        |  2 +-
+>  target/riscv/cpu_bits.h   |  2 +-
+>  target/riscv/cpu_helper.c |  8 ++------
+>  target/riscv/csr.c        | 32 ++++++++++++++++++++++++++++++++
+>  target/riscv/gdbstub.c    |  2 +-
+>  target/riscv/op_helper.c  |  5 +++--
+>  6 files changed, 40 insertions(+), 11 deletions(-)
 >
 > --
-> 2.34.1
+> 2.25.1
 >
 >
 
