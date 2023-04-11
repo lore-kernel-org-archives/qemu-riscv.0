@@ -1,68 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pm6mV-0002RM-Ep
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 01:43:04 -0400
+	id 1pm8V1-0000mh-Up
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 03:33:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm6mI-0002QX-PY; Tue, 11 Apr 2023 01:42:51 -0400
-Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1pm8Uv-0000iM-2F
+ for qemu-riscv@nongnu.org; Tue, 11 Apr 2023 03:33:01 -0400
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm6mH-0000nV-6t; Tue, 11 Apr 2023 01:42:50 -0400
-Received: by mail-ua1-x92f.google.com with SMTP id bh10so6167183uab.13;
- Mon, 10 Apr 2023 22:42:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1pm8Us-0004tL-UI
+ for qemu-riscv@nongnu.org; Tue, 11 Apr 2023 03:33:00 -0400
+Received: by mail-wr1-x42d.google.com with SMTP id j11so10156144wrd.2
+ for <qemu-riscv@nongnu.org>; Tue, 11 Apr 2023 00:32:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1681191767; x=1683783767;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1681198377; x=1683790377;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7TyaYOH7aMB44BJbABbbWxOylU+gGDQEbXCz4pSktxc=;
- b=R0ydtgRWyjvjw3UUOBho+Bv/wyqT0vatkFU1iq6bN/1xH9FCOnVj5IztCHBqBwdL6y
- TclF09Z3ADAUHrl2cdeUURhXtmdQNkDzi2g6sSvX2+IJw6JjqlQ2n8lZrCtthXommB5M
- wmYzsllMfGLz502p6s9pDSdFElmI/hfIVdAIdLiU42W6gWpRUN3a5q1xl/8aIPXMzdmu
- 48rlhWCR8olCZCaXSl1gIclQFH9N9WM8+LsmtH1LEL2H/XsosEWo9dVojg8VsZOKFdyJ
- pCQ16FMTmrVNAfniYppfyl30Xf7k3+xrYKGpGzdKAAUaRQe/FjoBO+PHzMaKS4vJT18l
- xSFQ==
+ bh=0jitfQHxNKlLLWjbKOA7rm6DntsIwrUYmpjynRS/uek=;
+ b=Ct+oFjKklmde7aWgn06ia69rf49YnWZ5M6ykhxeu4X6WUpPuMrODVAHPNIuX1H7GlC
+ 1CHX8VSM+DLPkXFjEfWlqljq2oVeLy6+ut5+UEt55FT5/fJbVCLFnlZvPjZdbpeP7yCx
+ hkDCOkc/PMX9a1fsZc/vSL2rNJDaZGJQ7ZC8f0EuE36yoSfH+d6DoLPeJWvhNoB+NUjI
+ 7bNkOkJpF9OKaOxk6jgtqC6Ns+LklMkpsaWrJn/o25QezZ3q9Pxjjt2mryDY+veyd41o
+ bmthG3SdS7j1XXy+U6UI3XAVA7n8YHRDfF6sMUj1tu72hYv1BzeMT1NTBNxH451ZU7rX
+ 20oA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681191767; x=1683783767;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7TyaYOH7aMB44BJbABbbWxOylU+gGDQEbXCz4pSktxc=;
- b=ijqo4DfUR6y3DxhjaI1J13pSj1N+rrUu6E2p8l68Hq31JTSKVu37NK7x+XzN2xnZAH
- rVEM9qpG0dGa1BiX5MY0qTuxVhPP7JzQkLSXwwk+aApDqukaWLAOAVW8i8vt+zHl/z9S
- f10AcQhg3tYH3I3+Fh7KS5vW7wy6i6kTzuv3Az+8SRPXM8peyHrNy8N+ZCP0QlVPNWMg
- TCMCuLlqUBrIFbYZudGWg/KTUkCsNQ3GyyoqEsvHjndCDI/2XFCUkUUdkDzuZpAKLl5n
- 5F2ybRVkh1P1L8cpT4b1kbDOb+Oe74p0fFWuQL2SZSMK9WYQTfZ6GqfS7H0w+vK1B/+b
- 7oRg==
-X-Gm-Message-State: AAQBX9dmZQQkRRWtbffm1RgOUTqXfAxHzSmaSKobGP9vC3k52+I2jV4v
- Crulm22IFS/mnaSrojd87uYrLPSmQZpGByNzJ14=
-X-Google-Smtp-Source: AKy350akpk4/fKqOx8XrYHj8rpXsV3r9GRpYW2CcMeg964Mhk/PXdvII1jflCI1ZqGkB4+JxdXCBXumOrChwqce5KyE=
-X-Received: by 2002:ab0:6cec:0:b0:764:64c1:9142 with SMTP id
- l12-20020ab06cec000000b0076464c19142mr7174405uai.0.1681191766957; Mon, 10 Apr
- 2023 22:42:46 -0700 (PDT)
+ d=1e100.net; s=20210112; t=1681198377; x=1683790377;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=0jitfQHxNKlLLWjbKOA7rm6DntsIwrUYmpjynRS/uek=;
+ b=7V7cRGUL/xhEYV0FVYkaRZwXRhDb1vJbLYKBRJNhAJmHGDeU10MfHuj62TS9Qnmnv6
+ bZ6l4kXlB8hYIkozv2wTsooBHMtZms4tYObKztYWlIzf8Ja7+AKcAYRQJgE+d0Brh7H8
+ 0xMcyDHC5r/wzhTuyh76oIDYpJcMg2wYlyPr8aTHAW9xnOq4uOkDe305p9GrDUffMqzb
+ CaXcaB/CKVY3ugbAVM+QybXZwIGTjnBqWoUw8kYc0q4Qc7j1dXkBnf4RVBm9tc2Bcg+W
+ arcceusL/lEp3rGNRhbxmYw4Sy91aCrqeXw3YC/IPeJlli6h0usGz82K4XQ6uEuAdV+f
+ iwBQ==
+X-Gm-Message-State: AAQBX9dzv8/QX7AMC/cavjcGceWxvd4YGI7Tra/x03dHwwJ5oXx2kJR8
+ p/D6VMRfzJRz9tjJASqk51QqLg==
+X-Google-Smtp-Source: AKy350aKUv8+aZ99dOPFkzti9Bxtt87xAGxcyArg8Py/ULurTqNc3kASqY0ick0rH8FfulhwnoEUJQ==
+X-Received: by 2002:adf:f448:0:b0:2ef:bbd7:63ab with SMTP id
+ f8-20020adff448000000b002efbbd763abmr7669076wrp.31.1681198377062; 
+ Tue, 11 Apr 2023 00:32:57 -0700 (PDT)
+Received: from zen.linaroharston ([85.9.250.243])
+ by smtp.gmail.com with ESMTPSA id
+ f6-20020adff986000000b002e52dfb9256sm6682692wrr.41.2023.04.11.00.32.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Apr 2023 00:32:56 -0700 (PDT)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 5AFE01FFB7;
+ Tue, 11 Apr 2023 08:32:56 +0100 (BST)
+References: <20230405160454.97436-1-philmd@linaro.org>
+ <20230405160454.97436-5-philmd@linaro.org>
+User-agent: mu4e 1.10.0; emacs 29.0.90
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-arm@nongnu.org, kvm@vger.kernel.org, qemu-ppc@nongnu.org, Peter
+ Maydell <peter.maydell@linaro.org>
+Subject: Re: [PATCH 04/10] hw/intc/arm_gic: Rename 'first_cpu' argument
+Date: Tue, 11 Apr 2023 08:31:27 +0100
+In-reply-to: <20230405160454.97436-5-philmd@linaro.org>
+Message-ID: <87r0sqrhzr.fsf@linaro.org>
 MIME-Version: 1.0
-References: <20230408135908.25269-1-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230408135908.25269-1-liweiwei@iscas.ac.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 11 Apr 2023 15:42:20 +1000
-Message-ID: <CAKmqyKMWin85jX=r3QOcVMnqwqt3E8dSTfAjVXt9mwPLPHhhrw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Use check for relationship between
- Zdinx/Zhinx{min} and Zfinx
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -77,46 +87,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2023 05:42:51 -0000
+X-List-Received-Date: Tue, 11 Apr 2023 07:33:01 -0000
 
-On Sun, Apr 9, 2023 at 12:00=E2=80=AFAM Weiwei Li <liweiwei@iscas.ac.cn> wr=
-ote:
+
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
+
+> "hw/core/cpu.h" defines 'first_cpu' as QTAILQ_FIRST_RCU(&cpus).
 >
-> Zdinx/Zhinx{min} require Zfinx. And require relationship is usually done
-> by check currently.
+> arm_gic_common_reset_irq_state() calls its second argument
+> 'first_cpu', producing a build failure when "hw/core/cpu.h"
+> is included:
 >
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+>   hw/intc/arm_gic_common.c:238:68: warning: omitting the parameter name i=
+n a function definition is a C2x extension [-Wc2x-extensions]
+>     static inline void arm_gic_common_reset_irq_state(GICState *s, int fi=
+rst_cpu,
+>                                                                        ^
+>   include/hw/core/cpu.h:451:26: note: expanded from macro 'first_cpu'
+>     #define first_cpu        QTAILQ_FIRST_RCU(&cpus)
+>                              ^
+>
+> KISS, rename the function argument.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > ---
->  target/riscv/cpu.c | 5 +++--
+>  hw/intc/arm_gic_common.c | 5 +++--
 >  1 file changed, 3 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1a5099382c..35bee8ff42 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -930,8 +930,9 @@ static void riscv_cpu_validate_set_extensions(RISCVCP=
-U *cpu, Error **errp)
->          cpu->cfg.ext_zhinxmin =3D true;
+> diff --git a/hw/intc/arm_gic_common.c b/hw/intc/arm_gic_common.c
+> index 9702197856..889327a8cf 100644
+> --- a/hw/intc/arm_gic_common.c
+> +++ b/hw/intc/arm_gic_common.c
+> @@ -235,12 +235,13 @@ static void arm_gic_common_realize(DeviceState *dev=
+, Error **errp)
 >      }
->
-> -    if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinxmin) {
-> -        cpu->cfg.ext_zfinx =3D true;
-> +    if ((cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinxmin) && !cpu->cfg.ext_z=
-finx) {
-> +        error_setg(errp, "Zdinx/Zhinx/Zhinxmin extensions require Zfinx"=
-);
-> +        return;
->      }
->
->      if (cpu->cfg.ext_zfinx) {
-> --
-> 2.25.1
->
->
+>  }
+>=20=20
+> -static inline void arm_gic_common_reset_irq_state(GICState *s, int first=
+_cpu,
+> +static inline void arm_gic_common_reset_irq_state(GICState *s,
+> +                                                  int
+> first_cpu_index,
+
+I'd have gone for a shorter name like cidx maybe, naming things is hard.
+
+Anyway:
+
+Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+
+
+>                                                    int resetprio)
+>  {
+>      int i, j;
+>=20=20
+> -    for (i =3D first_cpu; i < first_cpu + s->num_cpu; i++) {
+> +    for (i =3D first_cpu_index; i < first_cpu_index + s->num_cpu; i++) {
+>          if (s->revision =3D=3D REV_11MPCORE) {
+>              s->priority_mask[i] =3D 0xf0;
+>          } else {
+
+
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
