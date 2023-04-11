@@ -1,81 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pmD1q-0003Zc-PJ
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 08:23:18 -0400
+	id 1pmIq8-0000JH-Kf
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 14:35:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pmD1p-0003Z9-3c
- for qemu-riscv@nongnu.org; Tue, 11 Apr 2023 08:23:17 -0400
-Received: from mail-oa1-x32.google.com ([2001:4860:4864:20::32])
+ id 1pmIpv-0008K9-Bm
+ for qemu-riscv@nongnu.org; Tue, 11 Apr 2023 14:35:26 -0400
+Received: from mail-oo1-xc30.google.com ([2607:f8b0:4864:20::c30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pmD1n-0007CU-5Z
- for qemu-riscv@nongnu.org; Tue, 11 Apr 2023 08:23:16 -0400
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-18436e0b673so8695586fac.0
- for <qemu-riscv@nongnu.org>; Tue, 11 Apr 2023 05:23:14 -0700 (PDT)
+ id 1pmIps-0008Bn-G5
+ for qemu-riscv@nongnu.org; Tue, 11 Apr 2023 14:35:23 -0400
+Received: by mail-oo1-xc30.google.com with SMTP id
+ m20-20020a4ae3d4000000b00538c0ec9567so1359919oov.1
+ for <qemu-riscv@nongnu.org>; Tue, 11 Apr 2023 11:35:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1681215793;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=UaeCEjfjmbZ1IyBVOX3LWRG303Kt2SbyMn7DiDt5v44=;
- b=gmcZS1keCT5vO0qt3LeQgLYFi2hsLorP6/0G5j3jTOa47yU7JDlbO6kuFFIxooFdBe
- ESIw0eppUwIbBTxxjsbddf0Yy471t0ZhWp2RcIw8f1tzHVDFB+dQfos+PKPecs5hCgYV
- A319rvICmUkbomFiUmfnHFnpBG1sTxfVYyA79EzwdneyRbFZkVFO7Z+n8yMzNzAqINnf
- 7XvPnImNPv1HNMaKrpzPxr0VgVAozJx19mzegDSGqHYWOnVy500rmjM3qlIecNKqmbDu
- rl4bpsWg7ea6IDbwLwji/4BvSAyH0Ikv3y0lKipzg6UCBr/QtNWThVGZfCuPf7ahoEW8
- qfTg==
+ d=ventanamicro.com; s=google; t=1681238117;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3iBIBCvNAnmuv7pAuVCfHs087hGmvVlrkx8RqpPs/qc=;
+ b=jarDJSTyKSfl2rwUBk28nccwPxiykU+vuOWDShHzsROX++hG114tsLEg8YnhLz1+gJ
+ B67mP50CN8G45uQOxWmDNbszqMsBzoZDx7naei51KKLVJlXnT2fTg3mfsjV4ps6rN0KT
+ P4U/KQT+X64KLcF/cy+QpzNHmehsLXS0ewT1afWpjbk0XvrzwGUiIylRYTdZY5jOD9AC
+ Dc5/pi0kaYe1h8bU7so/VVDkVusV38TptTpnKesvzonrpltl+5UyrEK+HC/o3sYEtOrX
+ +vORUfcOAMmw9e00jMsX3kqrH/nZLR4WxiZpAfEzX1vta52GovNWNjDKkGhnr2KHh1NT
+ bsFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681215793;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UaeCEjfjmbZ1IyBVOX3LWRG303Kt2SbyMn7DiDt5v44=;
- b=NOQMMijEkUrpCkHlyWrXk6bSgP+1w6e//2zTvgX/eN5VJadEhXycpXde0SHX/t8ARE
- umeCumpIkNLqwzz+bk1wMIvXX40jBBv24dRoDgek5pB7QGiJh8wk+iidHtcgY6jMrKN5
- Tx4jd5vxG+La3vS7iQVLnHIAw5Zh9a+d/koARYVp/luib1ONEPhS3t7pHrPc2J0qj1SU
- U8DrhcMK/+o1zotGIo0c6tlwcWCei6d54XbbAJCOn3YJn15v6z+f+V7wMkBdfTCps8ED
- pwlyFNJa7CA3nm9ZgMooRAhvd/KdFBIz9KbhTkJ74DQNgijTO0TTWNIdRkxa3md3YGy2
- im7g==
-X-Gm-Message-State: AAQBX9cEahRGUiyTuD7ShKYaLZa2IUUtEhhsDDPiN6GFoYxHXo9L0si/
- SBeuX+bu9bJXHzUEB7nD+7Mhzg==
-X-Google-Smtp-Source: AKy350Z2yvdlXcKn7TQHu63Yj+wJzGSPfZlCPODk+k8/HOM2E2jLOo6a4lspoJPBXgPgebOdj4FhIA==
-X-Received: by 2002:a05:6870:c090:b0:17a:d7dd:aefa with SMTP id
- c16-20020a056870c09000b0017ad7ddaefamr1243702oad.6.1681215793431; 
- Tue, 11 Apr 2023 05:23:13 -0700 (PDT)
-Received: from [192.168.68.107] ([191.255.108.232])
+ d=1e100.net; s=20210112; t=1681238117;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3iBIBCvNAnmuv7pAuVCfHs087hGmvVlrkx8RqpPs/qc=;
+ b=8Cn1+YWFDHykvRrbAR2Li2oHbXcL5AKAIgz02hV5qi/2aYi8siJ32bbiUtmUPj/zQm
+ 0R9founwNLQA71iToNP+Za4wLDjCPQmG5fLM9oOQiN1jLVC4VH6PEfoJfFN/xN97EEZs
+ yopVh27eTpmUzPW+EHsXfsuJE1MJvjWo1jzHTiZleZ/xiIu3RTXl/TEMUIHdB6qIN0bc
+ li/nMKVuc9wgm2FNIRN8ZechUQFa7G3yxhPRXLzMelFs+hx4C0e/ec2lrR+/Yf2ozViX
+ hHAFhvWsqPJ6qbHmx3QR2JT2MgUTeYC0w6Xu8FfiKcHv6zmi91e21hMVSQZTwHGLPnrg
+ lFTQ==
+X-Gm-Message-State: AAQBX9cGrvUiFtCERI3xm3m15eS1vUg671fXZvkXFLpwVa+/TMuPW+iD
+ xkrwOX+ODY+j8O+BMCtbAQ8RgQ==
+X-Google-Smtp-Source: AKy350aMn4DfBOF8eI5jRkfi/YD1l97xNhYZ7biiC9MYiJnbY1Q3eFyYzgd/Z7UkVtYG5vYMWx+XkA==
+X-Received: by 2002:a4a:5242:0:b0:525:59fd:fbe7 with SMTP id
+ d63-20020a4a5242000000b0052559fdfbe7mr6561324oob.2.1681238117603; 
+ Tue, 11 Apr 2023 11:35:17 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com ([191.255.108.232])
  by smtp.gmail.com with ESMTPSA id
- qf9-20020a05687148c900b001727d67f2dbsm4998967oab.40.2023.04.11.05.23.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Apr 2023 05:23:13 -0700 (PDT)
-Message-ID: <94db9b5e-e9ec-a2f8-b2b4-5a0029fccdd4@ventanamicro.com>
-Date: Tue, 11 Apr 2023 09:23:08 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.1
-Subject: Re: [PATCH v2 3/4] target/riscv: add 'static' attribute of
- query-cpu-definitions
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-References: <20230410165251.99107-1-dbarboza@ventanamicro.com>
- <20230410165251.99107-4-dbarboza@ventanamicro.com>
- <7bdf0305-bd5f-68d2-525c-3ec8106f90c5@linaro.org>
+ 4-20020a4a1404000000b005413e617935sm6149983ood.15.2023.04.11.11.35.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Apr 2023 11:35:17 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <7bdf0305-bd5f-68d2-525c-3ec8106f90c5@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ richard.henderson@linaro.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v3 0/3] target/riscv: implement query-cpu-definitions
+Date: Tue, 11 Apr 2023 15:35:08 -0300
+Message-Id: <20230411183511.189632-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::32;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x32.google.com
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.17,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c30;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc30.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,65 +81,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2023 12:23:17 -0000
+X-List-Received-Date: Tue, 11 Apr 2023 18:35:28 -0000
 
+Hi,
 
+In this v3 I removed patches 3 and 4 of v2.
 
-On 4/10/23 23:03, Richard Henderson wrote:
-> On 4/10/23 09:52, Daniel Henrique Barboza wrote:
->> 'static' is defined in the QMP doc as:
->>
->> "whether a CPU definition is static and will not change depending on
->> QEMU version, machine type, machine options and accelerator options. A
->> static model is always migration-safe."
->>
->> For RISC-V we'll consider all named CPUs as static since their
->> extensions can't be changed by user input. Generic CPUs will be
->> considered non-static.
->>
->> We aren't ready to make the change for generic CPUs yet because we're
->> using the same class init for every CPU. We'll deal with it next.
->>
->> Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
->> ---
->>   target/riscv/cpu-qom.h        | 3 +++
->>   target/riscv/cpu.c            | 6 ++++++
->>   target/riscv/riscv-qmp-cmds.c | 2 ++
->>   3 files changed, 11 insertions(+)
-> 
-> Is 'static = true' really what you want as default?
-> Perhaps 'dynamic = false' (considering zero initialization) would be better?
-> Do you want an attribute that can be changed at all?
+Patch 3 now implements a new type that the generic CPUs (any, rv32,
+rv64, x-rv128) were converted to. This type will be used by
+query-cpu-definitions to determine if a given cpu is static or not based
+on its type. This approach was suggested by Richard Henderson in the v2
+review.
 
-I don't think there's a precedence in QEMU of a CPU that starts as static and then
-becomes non-static during runtime. If the CPU has the capability of changing
-its attributes/extensions during runtime then I'd call it non-static all
-the time.
+Patches are based on top of Alistair's riscv-to-apply.next.
 
+Changes from v2:
+- old patches 3 and 4: removed
+- patch 3:
+  - add TYPE_RISCV_DYNAMIC_CPU
+  - use this type to set 'q_static' in riscv_cpu_add_definition()
+- v2 link: https://lists.gnu.org/archive/html/qemu-devel/2023-04/msg01310.html
 
-> 
-> You could plausibly implement this via class inheritance instead.
-> E.g.
-> 
-> static const TypeInfo dynamic_cpu_type_info = {
->      .name = TYPE_RISCV_DYN_CPU,
->      .parent = TYPE_RISCV_CPU,
->      .abstract = true,
->      ...
-> };
-> 
-> and then the dynamic cpus inherit from that.  Your dynamic attribute becomes object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_DYN_CPU) != NULL.
+Daniel Henrique Barboza (3):
+  target/riscv: add CPU QOM header
+  target/riscv: add query-cpy-definitions support
+  target/riscv: add TYPE_RISCV_DYNAMIC_CPU
 
-Sounds good. We'll avoid adding an extra flag in RISCVCPUClass too.
+ qapi/machine-target.json      |  6 ++-
+ target/riscv/cpu-qom.h        | 70 +++++++++++++++++++++++++++++++++++
+ target/riscv/cpu.c            | 20 ++++++++--
+ target/riscv/cpu.h            | 46 +----------------------
+ target/riscv/meson.build      |  3 +-
+ target/riscv/riscv-qmp-cmds.c | 57 ++++++++++++++++++++++++++++
+ 6 files changed, 150 insertions(+), 52 deletions(-)
+ create mode 100644 target/riscv/cpu-qom.h
+ create mode 100644 target/riscv/riscv-qmp-cmds.c
 
+-- 
+2.39.2
 
-Thanks,
-
-
-Daniel
-
-
-> 
-> 
-> r~
 
