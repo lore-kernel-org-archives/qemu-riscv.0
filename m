@@ -1,70 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pm3M2-0007P6-OF
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 22:03:30 -0400
+	id 1pm3Mc-0007yu-0M
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 22:04:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm3M0-0007N2-9M; Mon, 10 Apr 2023 22:03:28 -0400
-Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pm3MY-0007eX-Ow
+ for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 22:04:02 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm3Ly-0006w5-Aw; Mon, 10 Apr 2023 22:03:28 -0400
-Received: by mail-ua1-x92f.google.com with SMTP id z23so4642421uav.8;
- Mon, 10 Apr 2023 19:03:25 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pm3MT-000705-5w
+ for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 22:04:02 -0400
+Received: by mail-pl1-x629.google.com with SMTP id q2so11271267pll.7
+ for <qemu-riscv@nongnu.org>; Mon, 10 Apr 2023 19:03:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1681178605; x=1683770605;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pKd5M9JLByYl6hyWfJ4f1LV397kr4rD2AQihZjQr6aY=;
- b=Py9W7S95F+LaFRm694z2Zbn/DQQJXh+TBZVkLvuoLuRLyxEtb1MraUIt5SAakrlsSP
- 4FBSGbCAQDkNfQQI6NHC65qXZc0pA1IgMqIDXlKTQfOwaVA+fiT9WNasZrh2EskdOmgI
- 0F5x36N5gk7nQXmFIF4YYHKZRi2/xQzQSMO361JccyPbyvwYEqNrr51DGuwIu3x66CxW
- akmND3i5hYiysJQiqbAXRgLaEeY0VFkLehL7iv9MbGtXIffOiCN3g39FRkT7pDMpp5+4
- vm7gGcnO7A3iRVE429F45Et3b4p05kdglXImsnwEdZyIHoBAzVqsuae8wl2TrkjZklhh
- /z2A==
+ d=linaro.org; s=google; t=1681178635;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4yvGcCzLhTpbedWiQuxqQ848MZzzMu+QQMFAOpatbl8=;
+ b=nO2SBxXh9FhBYoy5PNBMb7AjIssvzdGr5kO1SFZjGECu2Vrz2RbvS5WHF6yw+cobgI
+ KBaJ7e/c755T91EnTG7qLaW+WZP2iotpclOBDCXbG/EfaqugKOxw8Xy6okHCA4mW9vJt
+ eKhFO6gJWGVE8ZozWLok2MhKt9X3DeIG7UzZ5QjtU3uJK0k3YyL2fKzVNkYRZxGSkAHi
+ xYoy5PfudrUEC/P7VnvodRBO+cNO9NjQibJOy++nYKB4xdocrYYEZ28OPsTO67mltpft
+ dXmiZygBtpQyv+r50dHxxUBf+q2YANDfOQYGeLoSxgN9EPQ97BCe4G5Sa8uTh5YExGNp
+ Rtmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681178605; x=1683770605;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pKd5M9JLByYl6hyWfJ4f1LV397kr4rD2AQihZjQr6aY=;
- b=bwAWHnlMTZ+G9dPBkcoAoeL3ZP7r7Vq6p+5Fpm78NawWOaCfmVFzhXe8lBGK7OWRtN
- /f2RRmeOjeVDK55xOHc6Hah2ce6Uds/+0Laz34bE/hDpgiSsmy2fZhNQlCzEB7iZuSzE
- oZVmAJReoNeReJGmmUFHRhs3/pfe17nodwcvahbCgRRfwFI1BU4wJ9adOf+li4c0Mwk/
- YAYwnCW5Ewj7Jd981t3tFp0KgrLxj2u1HG58UJc2HClT/nWOBz9l7532DlyFgvLr1JYK
- zZcUVWMHEneDZHVLNHD7hKd5nZ2OTi/SuKTsynurYUUEFluutT5LC92ByH2sVtwyiGOU
- z7ew==
-X-Gm-Message-State: AAQBX9cEN2b2Tbm69iuzM4eRqx29cE9YE6STJmFAU/5j9qUfk23912RZ
- kgH6D7tr0K8d8V9chp3UqCY3Nz9pQRlzU6SKgFw=
-X-Google-Smtp-Source: AKy350apon8c9o0nc56J70b3yhAy6NdU1GlHB7nN0CyFgYAXPVFYLPkhmc8tUIIMwzpH99HopY+oPUSdzad0/+7BvoY=
-X-Received: by 2002:ab0:5b8c:0:b0:765:c225:c914 with SMTP id
- y12-20020ab05b8c000000b00765c225c914mr7869136uae.1.1681178604693; Mon, 10 Apr
- 2023 19:03:24 -0700 (PDT)
+ d=1e100.net; s=20210112; t=1681178635;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4yvGcCzLhTpbedWiQuxqQ848MZzzMu+QQMFAOpatbl8=;
+ b=LnttIHFib4ubGX7Kz5Mv1bmlpav/nJkha80b2vSPSMt2On8wotWFHSCNr6kP10owUF
+ LClRRuBaGMEHUB+bw0imfAhGI0FRKihY+xcDfHodQSi2dZ4RjAVvMYo5wCtGFTSVSARh
+ e3PNY+N8cZBG0XD2JhUSvcet4SA8NDMHsh37hcALZaEYaS1R72E8C1ykJ/kvhoJFIUda
+ j2bDs25ph2GqpVX8+wqX+nAi6oCAdX4bunX//HnKoHaHuPxonFnYt0IMIMLBiQ2NqAN2
+ PRCCUdH/BwI0jSG2cNo+n8ok0BtQgyOIOraH7BZehLj0V8Jurql/NBX3tkFjvKd5uwFQ
+ Meuw==
+X-Gm-Message-State: AAQBX9ceipF8r9bnMUM9GO81gZosfhTKvkqGhD7aUs1WSJAETK2QauS1
+ uMLpikBwZ+f5fD+Js9T3X+lYyA==
+X-Google-Smtp-Source: AKy350a2ShUWbmIqtSLcQChVQGRdxIzsjumkcD8FIzzOIe6tT6WqhYY8JL+8DaxTIFjsF4VaF49V/Q==
+X-Received: by 2002:a05:6a20:4986:b0:ea:ea82:2ffb with SMTP id
+ fs6-20020a056a20498600b000eaea822ffbmr1465758pzb.45.1681178635251; 
+ Mon, 10 Apr 2023 19:03:55 -0700 (PDT)
+Received: from [10.1.0.142] (h146.238.133.40.static.ip.windstream.net.
+ [40.133.238.146]) by smtp.gmail.com with ESMTPSA id
+ e22-20020aa78c56000000b0063a1e7d7439sm1392891pfd.69.2023.04.10.19.03.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 10 Apr 2023 19:03:54 -0700 (PDT)
+Message-ID: <146db5ae-784c-c03a-d2e5-231ae963bd29@linaro.org>
+Date: Mon, 10 Apr 2023 18:56:13 -0700
 MIME-Version: 1.0
-References: <20230325105429.1142530-1-richard.henderson@linaro.org>
- <20230325105429.1142530-5-richard.henderson@linaro.org>
-In-Reply-To: <20230325105429.1142530-5-richard.henderson@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 11 Apr 2023 12:02:58 +1000
-Message-ID: <CAKmqyKNL4T0K+izrvmwXKwZVdiTrcY3ZqnozwmDPyjRnMuvaJw@mail.gmail.com>
-Subject: Re: [PATCH v6 04/25] target/riscv: Remove mstatus_hs_{fs,
- vs} from tb_flags
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- palmer@dabbelt.com, zhiwei_liu@linux.alibaba.com, fei2.wu@intel.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Subject: Re: [PATCH v2 2/4] target/riscv: add query-cpy-definitions support
+Content-Language: en-US
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+References: <20230410165251.99107-1-dbarboza@ventanamicro.com>
+ <20230410165251.99107-3-dbarboza@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230410165251.99107-3-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x629.google.com
+X-Spam_score_int: -52
+X-Spam_score: -5.3
+X-Spam_bar: -----
+X-Spam_report: (-5.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.246,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,211 +85,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2023 02:03:28 -0000
+X-List-Received-Date: Tue, 11 Apr 2023 02:04:03 -0000
 
-On Sat, Mar 25, 2023 at 10:36=E2=80=AFPM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> Merge with mstatus_{fs,vs}.  We might perform a redundant
-> assignment to one or the other field, but it's a trivial
-> and saves 4 bits from TB_FLAGS.
->
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+On 4/10/23 09:52, Daniel Henrique Barboza wrote:
+> This command is used by tooling like libvirt to retrieve a list of
+> supported CPUs. Each entry returns a CpuDefinitionInfo object that
+> contains more information about each CPU.
+> 
+> This initial support includes only the name of the CPU and its typename.
+> Here's what the command produces for the riscv64 target:
+> 
+> $ ./build/qemu-system-riscv64 -S -M virt -display none -qmp stdio
+> {"QMP": {"version": (...)}
+> {"execute": "qmp_capabilities", "arguments": {"enable": ["oob"]}}
+> {"return": {}}
+> {"execute": "query-cpu-definitions"}
+> {"return": [
+> {"name": "rv64", "typename": "rv64-riscv-cpu", "static": false, "deprecated": false},
+> {"name": "sifive-e51", "typename": "sifive-e51-riscv-cpu", "static": false, "deprecated": false},
+> {"name": "any", "typename": "any-riscv-cpu", "static": false, "deprecated": false},
+> {"name": "x-rv128", "typename": "x-rv128-riscv-cpu", "static": false, "deprecated": false},
+> {"name": "shakti-c", "typename": "shakti-c-riscv-cpu", "static": false, "deprecated": false},
+> {"name": "thead-c906", "typename": "thead-c906-riscv-cpu", "static": false, "deprecated": false},
+> {"name": "sifive-u54", "typename": "sifive-u54-riscv-cpu", "static": false, "deprecated": false}]
+> }
+> 
+> Next patches will implement the 'static' attribute of CpuDefinitionInfo.
+> 
+> Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
 > ---
->  target/riscv/cpu.h        | 16 +++++++---------
->  target/riscv/cpu_helper.c | 34 ++++++++++++++++------------------
->  target/riscv/translate.c  | 32 ++++++++++----------------------
->  3 files changed, 33 insertions(+), 49 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index f787145a21..d9e0eaaf9b 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -646,19 +646,17 @@ FIELD(TB_FLAGS, VL_EQ_VLMAX, 13, 1)
->  FIELD(TB_FLAGS, VILL, 14, 1)
->  /* Is a Hypervisor instruction load/store allowed? */
->  FIELD(TB_FLAGS, HLSX, 15, 1)
-> -FIELD(TB_FLAGS, MSTATUS_HS_FS, 16, 2)
-> -FIELD(TB_FLAGS, MSTATUS_HS_VS, 18, 2)
->  /* The combination of MXL/SXL/UXL that applies to the current cpu mode. =
-*/
-> -FIELD(TB_FLAGS, XL, 20, 2)
-> +FIELD(TB_FLAGS, XL, 16, 2)
->  /* If PointerMasking should be applied */
-> -FIELD(TB_FLAGS, PM_MASK_ENABLED, 22, 1)
-> -FIELD(TB_FLAGS, PM_BASE_ENABLED, 23, 1)
-> -FIELD(TB_FLAGS, VTA, 24, 1)
-> -FIELD(TB_FLAGS, VMA, 25, 1)
-> +FIELD(TB_FLAGS, PM_MASK_ENABLED, 18, 1)
-> +FIELD(TB_FLAGS, PM_BASE_ENABLED, 19, 1)
-> +FIELD(TB_FLAGS, VTA, 20, 1)
-> +FIELD(TB_FLAGS, VMA, 21, 1)
->  /* Native debug itrigger */
-> -FIELD(TB_FLAGS, ITRIGGER, 26, 1)
-> +FIELD(TB_FLAGS, ITRIGGER, 22, 1)
->  /* Virtual mode enabled */
-> -FIELD(TB_FLAGS, VIRT_ENABLED, 27, 1)
-> +FIELD(TB_FLAGS, VIRT_ENABLED, 23, 1)
->
->  #ifdef TARGET_RISCV32
->  #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 1e7ee9aa30..4fdd6fe021 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -45,7 +45,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ul=
-ong *pc,
->  {
->      CPUState *cs =3D env_cpu(env);
->      RISCVCPU *cpu =3D RISCV_CPU(cs);
-> -
-> +    RISCVExtStatus fs, vs;
->      uint32_t flags =3D 0;
->
->      *pc =3D env->xl =3D=3D MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
-> @@ -79,18 +79,12 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_=
-ulong *pc,
->      }
->
->  #ifdef CONFIG_USER_ONLY
-> -    flags =3D FIELD_DP32(flags, TB_FLAGS, FS, EXT_STATUS_DIRTY);
-> -    flags =3D FIELD_DP32(flags, TB_FLAGS, VS, EXT_STATUS_DIRTY);
-> +    fs =3D EXT_STATUS_DIRTY;
-> +    vs =3D EXT_STATUS_DIRTY;
->  #else
->      flags |=3D cpu_mmu_index(env, 0);
-> -    if (riscv_cpu_fp_enabled(env)) {
-> -        flags =3D  FIELD_DP32(flags, TB_FLAGS, FS,
-> -                            get_field(env->mstatus,  MSTATUS_FS));
-> -    }
-> -    if (riscv_cpu_vector_enabled(env)) {
-> -        flags =3D  FIELD_DP32(flags, TB_FLAGS, VS,
-> -                            get_field(env->mstatus, MSTATUS_VS));
-> -    }
-> +    fs =3D get_field(env->mstatus, MSTATUS_FS);
-> +    vs =3D get_field(env->mstatus, MSTATUS_VS);
->
->      if (riscv_has_ext(env, RVH)) {
->          if (env->priv =3D=3D PRV_M ||
-> @@ -100,19 +94,23 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target=
-_ulong *pc,
->              flags =3D FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
->          }
->
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS,
-> -                           get_field(env->mstatus_hs, MSTATUS_FS));
-> -
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_VS,
-> -                           get_field(env->mstatus_hs, MSTATUS_VS));
-> -        flags =3D FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED,
-> -                           get_field(env->virt, VIRT_ONOFF));
-> +        if (riscv_cpu_virt_enabled(env)) {
-> +            flags =3D FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
-> +            /*
-> +             * Merge DISABLED and !DIRTY states using MIN.
-> +             * We will set both fields when dirtying.
-> +             */
-> +            fs =3D MIN(fs, get_field(env->mstatus_hs, MSTATUS_FS));
-> +            vs =3D MIN(vs, get_field(env->mstatus_hs, MSTATUS_VS));
-> +        }
->      }
->      if (cpu->cfg.debug && !icount_enabled()) {
->          flags =3D FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_en=
-abled);
->      }
->  #endif
->
-> +    flags =3D FIELD_DP32(flags, TB_FLAGS, FS, fs);
-> +    flags =3D FIELD_DP32(flags, TB_FLAGS, VS, vs);
->      flags =3D FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
->      if (env->cur_pmmask < (env->xl =3D=3D MXL_RV32 ? UINT32_MAX : UINT64=
-_MAX)) {
->          flags =3D FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index b897bf6006..74d0b9889d 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -66,8 +66,6 @@ typedef struct DisasContext {
->      uint32_t opcode;
->      RISCVExtStatus mstatus_fs;
->      RISCVExtStatus mstatus_vs;
-> -    RISCVExtStatus mstatus_hs_fs;
-> -    RISCVExtStatus mstatus_hs_vs;
->      uint32_t mem_idx;
->      /* Remember the rounding mode encoded in the previous fp instruction=
-,
->         which we have already installed into env->fp_status.  Or -1 for
-> @@ -618,16 +616,12 @@ static void mark_fs_dirty(DisasContext *ctx)
->          tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
->          tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS);
->          tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
-> -    }
->
-> -    if (ctx->virt_enabled && ctx->mstatus_hs_fs !=3D EXT_STATUS_DIRTY) {
-> -        /* Remember the stage change for the rest of the TB. */
-> -        ctx->mstatus_hs_fs =3D EXT_STATUS_DIRTY;
-> -
-> -        tmp =3D tcg_temp_new();
-> -        tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs))=
-;
-> -        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS);
-> -        tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs))=
-;
-> +        if (ctx->virt_enabled) {
-> +            tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_=
-hs));
-> +            tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS);
-> +            tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_=
-hs));
-> +        }
->      }
->  }
->  #else
-> @@ -651,16 +645,12 @@ static void mark_vs_dirty(DisasContext *ctx)
->          tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
->          tcg_gen_ori_tl(tmp, tmp, MSTATUS_VS);
->          tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
-> -    }
->
-> -    if (ctx->virt_enabled && ctx->mstatus_hs_vs !=3D EXT_STATUS_DIRTY) {
-> -        /* Remember the stage change for the rest of the TB. */
-> -        ctx->mstatus_hs_vs =3D EXT_STATUS_DIRTY;
-> -
-> -        tmp =3D tcg_temp_new();
-> -        tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs))=
-;
-> -        tcg_gen_ori_tl(tmp, tmp, MSTATUS_VS);
-> -        tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs))=
-;
-> +        if (ctx->virt_enabled) {
-> +            tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_=
-hs));
-> +            tcg_gen_ori_tl(tmp, tmp, MSTATUS_VS);
-> +            tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_=
-hs));
-> +        }
->      }
->  }
->  #else
-> @@ -1158,8 +1148,6 @@ static void riscv_tr_init_disas_context(DisasContex=
-tBase *dcbase, CPUState *cs)
->      ctx->misa_ext =3D env->misa_ext;
->      ctx->frm =3D -1;  /* unknown rounding mode */
->      ctx->cfg_ptr =3D &(cpu->cfg);
-> -    ctx->mstatus_hs_fs =3D FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_FS)=
-;
-> -    ctx->mstatus_hs_vs =3D FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_VS)=
-;
->      ctx->hlsx =3D FIELD_EX32(tb_flags, TB_FLAGS, HLSX);
->      ctx->vill =3D FIELD_EX32(tb_flags, TB_FLAGS, VILL);
->      ctx->sew =3D FIELD_EX32(tb_flags, TB_FLAGS, SEW);
-> --
-> 2.34.1
->
->
+>   qapi/machine-target.json      |  6 ++--
+>   target/riscv/meson.build      |  3 +-
+>   target/riscv/riscv-qmp-cmds.c | 53 +++++++++++++++++++++++++++++++++++
+>   3 files changed, 59 insertions(+), 3 deletions(-)
+>   create mode 100644 target/riscv/riscv-qmp-cmds.c
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+r~
 
