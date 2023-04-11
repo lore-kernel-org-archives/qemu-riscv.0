@@ -1,78 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pm36V-0000ju-Qj
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 21:47:28 -0400
+	id 1pm38v-00021f-WD
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 21:49:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pm36U-0000jY-CG
- for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 21:47:26 -0400
-Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pm38u-000215-M4; Mon, 10 Apr 2023 21:49:56 -0400
+Received: from mail-ua1-x92a.google.com ([2607:f8b0:4864:20::92a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pm36S-0003KJ-RZ
- for qemu-riscv@nongnu.org; Mon, 10 Apr 2023 21:47:26 -0400
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-517bfc0119dso306118a12.2
- for <qemu-riscv@nongnu.org>; Mon, 10 Apr 2023 18:47:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pm38s-0003uv-RY; Mon, 10 Apr 2023 21:49:56 -0400
+Received: by mail-ua1-x92a.google.com with SMTP id ba16so4586880uab.4;
+ Mon, 10 Apr 2023 18:49:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1681177643;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Tj2QkuRqtoTf+6Ske/YxMHcjyvAOfeUuFoPlt+O7SpY=;
- b=zZWGnGgwOYmTPtCUpoQUha4jSD0/uQ9GLaePmi6Wo2G7/ZSAjdzBh0VTc4I6iKCllu
- 4en2F/n548DUCx0Ufz07psjHlEJDMIMGy6omqRlmywbZ4wPF6MjrZ7EyWdROkeY8pQ8d
- snC3gpGvVmgWfaMByiqCH/4OlztWBPMNqG6UBvvGmD1T2guJRrfeFGMv/fD3HEi0DgfO
- SiTJsWe8M9UePFhbnwWARlAa0YmlKX5ccog4qgUM7UOeUXx3Z9yPJcL90RjbCtGGAFGw
- dZTqxQEJVPyTOXf1WD1OmsfxeT6GM5gQhcvpGdU5ekKYscrQqjVAiyWo90Iv2T+ZVL3Y
- PmNg==
+ d=gmail.com; s=20210112; t=1681177793; x=1683769793;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MmKXKynUQezMwAlTkDyGH3vSiztCoTlEXeYfu9yMFWg=;
+ b=gEAPBI+iqLQMUEFDYwYx5jEqxT0zOYck+24iQUVgpAD+IkxXnPSFtOQhb/D2mChZTv
+ UMlJn+K70IFXLEGMvSDqWWE4L+cQoRhE5turFFwKtmyyn8Su8LLxeCE+5EITRWM+OQtZ
+ MX30T76qYkB+Xa74ss8WfTWa8G1Xm+LAeelJJxgJVfR5sCJmzWdvvghBiJPeCaytfbdT
+ dyxAxMtCWRjuFk09UwgribTu0DzBHllJhS8TL0S6RsxXyTX2gV4J+tkPWm1Lg4p4bRoL
+ rkJdeGhvW3YRnzew5mSDi0XV02w+Turb8SdYDEQ6g516f6OCnX4w5K4JCwwPSRPTT0dc
+ 1CxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681177643;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Tj2QkuRqtoTf+6Ske/YxMHcjyvAOfeUuFoPlt+O7SpY=;
- b=moJUICFrtzrR8SDNqiyDC23Piz0ravbw26PkAqzcu3A5RTLPKgHJW4DdkzZ47cKuR9
- tzSqi5fGa3dkb2lqyBwYfFOt2wGryJMMpvLBnOCT7QuyOSJ8iPrcVvoKSnOKQSh0rVqq
- 4Ikr3XSEWraZ6PiPIvmvVe7eMJQK/HdI0NEM5ObYjfIje36JAleqP/eDf4mU5spjwejp
- i9NET8KnSFH5f4SuB6A8m/49IkguSDuPBDVyP4uEbB9OOtzv1C5F6adDSziZToDv88hV
- gv2UU4U6u6uHwSnne08XdVAlFahQ02w9NNjiPeipSDpRZzqQLHPV/1tFCOX9/CancvuD
- /oAg==
-X-Gm-Message-State: AAQBX9cMQVraGLG9fcxYDZtn8Jge86XfRUny0Ko3cc9VIO/UxEOFgl1z
- P1jW6X/kByaJEoGrgFlcI5tVbQ==
-X-Google-Smtp-Source: AKy350bgcchkx+kkFzN8r6+p2Gkj+Ttl+odxOiLiQ78rYICjYZmXGP+wtQv4wm37nlcmB0PAT2XUYw==
-X-Received: by 2002:aa7:96b3:0:b0:627:fb40:7cb4 with SMTP id
- g19-20020aa796b3000000b00627fb407cb4mr1151402pfk.30.1681177643166; 
- Mon, 10 Apr 2023 18:47:23 -0700 (PDT)
-Received: from [10.1.0.142] (h146.238.133.40.static.ip.windstream.net.
- [40.133.238.146]) by smtp.gmail.com with ESMTPSA id
- i16-20020aa78b50000000b0062d7fb53652sm8532221pfd.38.2023.04.10.18.47.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Apr 2023 18:47:22 -0700 (PDT)
-Message-ID: <58021b23-dc58-bf3f-b83e-ddaa5be90e14@linaro.org>
-Date: Mon, 10 Apr 2023 18:47:11 -0700
+ d=1e100.net; s=20210112; t=1681177793; x=1683769793;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MmKXKynUQezMwAlTkDyGH3vSiztCoTlEXeYfu9yMFWg=;
+ b=iIVR7TvNsG37bbfXouTUOVPlKtW3XNO3Oyw+kSBugpBG66bMh0PlWnVeQX5tzE2Vx2
+ 9wpZ5noSJCLtRIfIIAOLTHI0WZVwb7ZyQuLyLseT5Fqvg3D084rqla2WvsT81eHhXSz5
+ SudSoAaMa72KhtETYUFfXxyauZW7rYuWEOtyLwCIRxep5sudZ6MEem5UkAUP8css71lt
+ Pi4AkBzwVMABwhTunTS+DWzjTIrFDginzNF/6jpzRDA7vjBem+wDes6TF5fBvk6hTi5f
+ 9dyoybCKva0XuPmsT/zC98r+67ApOkOCo6C0JqEkulZWnjksqxAVk02meOb65GhqqFU8
+ Cp0Q==
+X-Gm-Message-State: AAQBX9cWJnhnZLe1ice6jQAvpzPmslDNl0J5GQSCaDI51Ss3XZ7c6PcB
+ x5Js/elIuzBkPVrdmorWJFRpMM9Tm/YSlxK+IJ8=
+X-Google-Smtp-Source: AKy350b4rQ16/5Rsl/B5w6E6fv3j/GBKxDpzeEbKvCkz197y6rNnaAporOCiu3u7evis046NfKFZwZ+N2fmvU/KK4wg=
+X-Received: by 2002:a1f:a64b:0:b0:43c:6ef1:84d3 with SMTP id
+ p72-20020a1fa64b000000b0043c6ef184d3mr657632vke.0.1681177793119; Mon, 10 Apr
+ 2023 18:49:53 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [RFC PATCH 2/4] target/riscv: Add fcsr field in tb->flags
-Content-Language: en-US
-To: Mayuresh Chitale <mchitale@ventanamicro.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, alistair.francis@wdc.com
-Cc: Alistair Francis <alistair23@gmail.com>,
- Daniel Barboza <dbarboza@ventanamicro.com>, liweiwei@iscas.ac.cn
-References: <20230410141316.3317474-1-mchitale@ventanamicro.com>
- <20230410141316.3317474-3-mchitale@ventanamicro.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230410141316.3317474-3-mchitale@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x531.google.com
-X-Spam_score_int: -52
-X-Spam_score: -5.3
-X-Spam_bar: -----
-X-Spam_report: (-5.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.246,
+References: <20230407014743.18779-1-liweiwei@iscas.ac.cn>
+ <20230407014743.18779-3-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230407014743.18779-3-liweiwei@iscas.ac.cn>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 11 Apr 2023 11:49:26 +1000
+Message-ID: <CAKmqyKO3ruUy_2KmMczL+-s50f43j+=+Ce7R_SuLje05Q_210Q@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] target/riscv: Use PRV_RESERVED instead of PRV_H
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92a;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -87,23 +77,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2023 01:47:26 -0000
+X-List-Received-Date: Tue, 11 Apr 2023 01:49:56 -0000
 
-On 4/10/23 07:13, Mayuresh Chitale wrote:
-> The state of smstateen0.FCSR bit impacts the execution of floating point
-> instructions when misa.F==0. Add a field in the tb->flags which stores
-> the current state of smstateen0.fcsr and will be used by floating point
-> translation routines.
+On Fri, Apr 7, 2023 at 11:49=E2=80=AFAM Weiwei Li <liweiwei@iscas.ac.cn> wr=
+ote:
+>
+> PRV_H has no real meaning, but just a reserved privilege mode currently.
+>
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 
-Are you certain that you require a new bit?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Could the same effect be achieved by forcing one or more of the existing 
-TB_FLAGS.{FS,HS_FS} fields to 0 within cpu_get_tb_cpu_state?  I.e. for the purposes of 
-translation, pretend the FS state is DISABLED?
+Alistair
 
-These bits are scarce, are we are nearly out.
-
-
-r~
-
+> ---
+>  target/riscv/cpu.h       | 2 +-
+>  target/riscv/cpu_bits.h  | 2 +-
+>  target/riscv/gdbstub.c   | 2 +-
+>  target/riscv/op_helper.c | 2 +-
+>  4 files changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index cbf3de2708..4af8ebc558 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -699,7 +699,7 @@ static inline RISCVMXL cpu_recompute_xl(CPURISCVState=
+ *env)
+>          case PRV_U:
+>              xl =3D get_field(env->mstatus, MSTATUS64_UXL);
+>              break;
+> -        default: /* PRV_S | PRV_H */
+> +        default: /* PRV_S */
+>              xl =3D get_field(env->mstatus, MSTATUS64_SXL);
+>              break;
+>          }
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 101702cb4a..a16bfaf43f 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -608,7 +608,7 @@ typedef enum {
+>  /* Privilege modes */
+>  #define PRV_U 0
+>  #define PRV_S 1
+> -#define PRV_H 2 /* Reserved */
+> +#define PRV_RESERVED 2
+>  #define PRV_M 3
+>
+>  /* RV32 satp CSR field masks */
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index fa537aed74..524bede865 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -203,7 +203,7 @@ static int riscv_gdb_set_virtual(CPURISCVState *cs, u=
+int8_t *mem_buf, int n)
+>      if (n =3D=3D 0) {
+>  #ifndef CONFIG_USER_ONLY
+>          cs->priv =3D ldtul_p(mem_buf) & 0x3;
+> -        if (cs->priv =3D=3D PRV_H) {
+> +        if (cs->priv =3D=3D PRV_RESERVED) {
+>              cs->priv =3D PRV_S;
+>          }
+>  #endif
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index b8a03afebb..bd21c6eeef 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -141,7 +141,7 @@ static void check_zicbo_envcfg(CPURISCVState *env, ta=
+rget_ulong envbits,
+>      }
+>
+>      if (env->virt_enabled &&
+> -        (((env->priv < PRV_H) && !get_field(env->henvcfg, envbits)) ||
+> +        (((env->priv <=3D PRV_S) && !get_field(env->henvcfg, envbits)) |=
+|
+>           ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits)))) {
+>          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, ra=
+);
+>      }
+> --
+> 2.25.1
+>
+>
 
