@@ -1,70 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pm8mb-0005EW-Cc
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 03:51:18 -0400
+	id 1pm9u3-0004Qt-Mr
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 05:03:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm8mZ-0005EC-OP; Tue, 11 Apr 2023 03:51:15 -0400
-Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm8mY-0007nC-8m; Tue, 11 Apr 2023 03:51:15 -0400
-Received: by mail-vs1-xe2b.google.com with SMTP id b17so6693929vsj.7;
- Tue, 11 Apr 2023 00:51:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1681199472; x=1683791472;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jIqnHpgULzJwTs7LwwMAfyeJsHIWn/by5wY/tN7YpOg=;
- b=ba9W/AT4hwBy6FaWW9Y6B9KqjaSRzlf9j2D80YdWaw/j1JOgzYobN6di/s6QBhpT/g
- ZOHcLTwxUng/XdI7RxdAwCRZLdFDgzboQ7zzlPCP10RkZSDrLiI8vZWLkaOKyf/cOTuL
- pvx3aACh++DkIuQwNwQJQNUZnWNz/U7cp73yW8ll298JcJPg9BOTuLJvL9yj4yK4r97v
- IfFvtWFOHpbpiE4bnvcIuOZVb55bB8yBq7qcuQ+wiPOsVsTzIUrz/TfffI1kVm+QOn8c
- 6xAfA4tDYbuJ/rV6Ts+nPe49qkNBBcbXdRUHf93UGvVSwWqteIh7WNECJMJPOOhMSDZ2
- YRKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681199472; x=1683791472;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jIqnHpgULzJwTs7LwwMAfyeJsHIWn/by5wY/tN7YpOg=;
- b=WJR6CpiTAQYYqqW8Ay7PTAZbXEnKUOxcobHgiVu6eEDT7j//uNv7tyygnVk2TLcYL1
- QmAhnwqewceD3XYGHCaDvEZBzZTZmTOh0RAfnb5P4ZpI44vSBR6fQmUskgOQB7MmxPxD
- SQcjFiLElcCj9WAEC0KXAtaUhvkVWb2n/p92S88PZZuE/N+J01yb9xisCX7HMVUk3jus
- WZMleHnnqt7/qG5FH0TPQsDljfZq1yKOmcQhnzOMlrI3MLjrOWdY2lKv9miBOAIpsUD+
- Gx6DDGVRwUkUkkBLJqY7jGmH9EY6d4Dqyc8f7ZkwuSpxl2Y/d1eljEv7fJpvPyZBIeRe
- 3ekA==
-X-Gm-Message-State: AAQBX9e/O2LqHOU8D1emSpDknT0R3tTR8lqhJAjvZOu91UxSkghYE7bX
- Xms6802hxLKVpbVXnuBJ9oih9o0sgZmnWfl5qVs=
-X-Google-Smtp-Source: AKy350bjcu8z4ly6jBQJh3hXhC8gpsh4sCc53fUxRovGAot465BkW6gRH4nFwMAJDHlTeSiOlh1scfivSge120m1xm4=
-X-Received: by 2002:a67:ca06:0:b0:422:1654:7737 with SMTP id
- z6-20020a67ca06000000b0042216547737mr1323083vsk.3.1681199472322; Tue, 11 Apr
- 2023 00:51:12 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
+ id 1pm9u1-0004QY-Gs; Tue, 11 Apr 2023 05:03:01 -0400
+Received: from bg4.exmail.qq.com ([43.154.221.58])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <bmeng@tinylab.org>)
+ id 1pm9ty-0005Oj-Sz; Tue, 11 Apr 2023 05:03:01 -0400
+X-QQ-mid: bizesmtp90t1681203743t0ap21fw
+Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 11 Apr 2023 17:02:11 +0800 (CST)
+X-QQ-SSF: 01200000000000D0F000000A0000000
+X-QQ-FEAT: cy+SGFpNa8duaVCl5WNrH/sW0Sn8KWt+x+a4B58qA8ieBl997q2AcKrs3YV+9
+ ZqXALJMrxHyOJuOu6FeK7WGf2u/rngm8MQEeeb1Ib1OcRgZbuSutzgwfYg9coI6HHEWUUFy
+ gFl0nI+Jyqx5OL3gBS33JlSu9S+Fjw7ExwDuDlUzinqHygonktylmpn3kt4lqshskXkpdB9
+ NnnHp7dupGqCvqzBwDSsIa1LOSHip9GwQ7GoK2gbbA6ksb1eJfT6xQToi7u3uQ80J+zT4fT
+ q7QxPUXMHvTP/oo4+DGjnGvpq52EBzLRc2PUsafClYSMiNrj9Lih9Z0ET9TBrtylGlhu8k7
+ 1jENfE5BiccVWvcrsw=
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 17000592329357289727
+From: Bin Meng <bmeng@tinylab.org>
+To: Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, Palmer Dabbelt <palmer@dabbelt.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Fei Wu <fei2.wu@intel.com>
+Subject: [PATCH] target/riscv: Restore the predicate() NULL check behavior
+Date: Tue, 11 Apr 2023 17:02:11 +0800
+Message-Id: <20230411090211.3039186-1-bmeng@tinylab.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20230408135908.25269-1-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230408135908.25269-1-liweiwei@iscas.ac.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 11 Apr 2023 17:50:46 +1000
-Message-ID: <CAKmqyKNy8VWeivKmc8ky3q4Obz4YjzUotHgyg8vZ_wgDRX9ftw@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Use check for relationship between
- Zdinx/Zhinx{min} and Zfinx
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:tinylab.org:qybglogicsvrgz:qybglogicsvrgz7a-0
+Received-SPF: pass client-ip=43.154.221.58; envelope-from=bmeng@tinylab.org;
+ helo=bg4.exmail.qq.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,48 +55,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2023 07:51:16 -0000
+X-List-Received-Date: Tue, 11 Apr 2023 09:03:02 -0000
 
-On Sun, Apr 9, 2023 at 12:00=E2=80=AFAM Weiwei Li <liweiwei@iscas.ac.cn> wr=
-ote:
->
-> Zdinx/Zhinx{min} require Zfinx. And require relationship is usually done
-> by check currently.
->
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+When reading a non-existent CSR QEMU should raise illegal instruction
+exception, but currently it just exits due to the g_assert() check.
 
-Thanks!
+This actually reverts commit 0ee342256af9205e7388efdf193a6d8f1ba1a617,
+Some comments are also added to indicate that predicate() must be
+provided for an implemented CSR.
 
-Applied to riscv-to-apply.next
+Reported-by: Fei Wu <fei2.wu@intel.com>
+Signed-off-by: Bin Meng <bmeng@tinylab.org>
+---
 
-Alistair
+ target/riscv/csr.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-> ---
->  target/riscv/cpu.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1a5099382c..35bee8ff42 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -930,8 +930,9 @@ static void riscv_cpu_validate_set_extensions(RISCVCP=
-U *cpu, Error **errp)
->          cpu->cfg.ext_zhinxmin =3D true;
->      }
->
-> -    if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinxmin) {
-> -        cpu->cfg.ext_zfinx =3D true;
-> +    if ((cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinxmin) && !cpu->cfg.ext_z=
-finx) {
-> +        error_setg(errp, "Zdinx/Zhinx/Zhinxmin extensions require Zfinx"=
-);
-> +        return;
->      }
->
->      if (cpu->cfg.ext_zfinx) {
-> --
-> 2.25.1
->
->
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index d522efc0b6..736ab64275 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -3797,6 +3797,11 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
++    /* ensure CSR is implemented by checking predicate */
++    if (!csr_ops[csrno].predicate) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
+     /* privileged spec version check */
+     if (env->priv_ver < csr_min_priv) {
+         return RISCV_EXCP_ILLEGAL_INST;
+@@ -3814,7 +3819,6 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+      * illegal instruction exception should be triggered instead of virtual
+      * instruction exception. Hence this comes after the read / write check.
+      */
+-    g_assert(csr_ops[csrno].predicate != NULL);
+     RISCVException ret = csr_ops[csrno].predicate(env, csrno);
+     if (ret != RISCV_EXCP_NONE) {
+         return ret;
+@@ -3991,7 +3995,10 @@ RISCVException riscv_csrrw_debug(CPURISCVState *env, int csrno,
+     return ret;
+ }
+ 
+-/* Control and Status Register function table */
++/*
++ * Control and Status Register function table
++ * riscv_csr_operations::predicate() must be provided for an implemented CSR
++ */
+ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* User Floating-Point CSRs */
+     [CSR_FFLAGS]   = { "fflags",   fs,     read_fflags,  write_fflags },
+-- 
+2.25.1
+
 
