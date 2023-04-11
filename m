@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pm3Oh-00029u-NF
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 22:06:15 -0400
+	id 1pm3QB-00034v-EF
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Apr 2023 22:07:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm3Og-000273-20; Mon, 10 Apr 2023 22:06:14 -0400
-Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
+ id 1pm3Q5-00034G-Ql; Mon, 10 Apr 2023 22:07:45 -0400
+Received: from mail-vs1-xe29.google.com ([2607:f8b0:4864:20::e29])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pm3Od-0007g9-5I; Mon, 10 Apr 2023 22:06:13 -0400
-Received: by mail-vs1-xe30.google.com with SMTP id b26so6137316vsa.11;
- Mon, 10 Apr 2023 19:06:10 -0700 (PDT)
+ id 1pm3Q4-0007oc-4K; Mon, 10 Apr 2023 22:07:41 -0400
+Received: by mail-vs1-xe29.google.com with SMTP id bl16so6631316vsb.4;
+ Mon, 10 Apr 2023 19:07:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1681178769; x=1683770769;
+ d=gmail.com; s=20210112; t=1681178858; x=1683770858;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WQ0k4zmdalq0z2Rj57Vbrq9qNiYkdW0l3jbunk7B7Es=;
- b=Ue9gixfk1VEIlo4UupAFOUdToaC7zH97Rz3H3lwgi84LDWdcTXNpe4ftq7/IYt5VPU
- SETh0Wdwpp/wa9YzMHHFKWeDXHKMnudYsJf3cUu3U5YDQbPAkVYXWGR9UMN1pxDNtDHm
- EnCudpw9//0/qBlRlUng8+FfSJfJmd6PNN+Ocg0Y5fV3FfVtaD51s6zFXqYfI2EHanqt
- av38wy0pd5VEU8CR2F5gifEHC8dxOD2yhDb4aeZn/NQq5g/bXjzXOkAZ22RtYoxiXzCa
- ew/uOm3Ql2WgNsybLxjsXmETDkpRBW284TQwVUb5Uu4Gt4hFXxSVvv09iOs9eai4WQwX
- FdAg==
+ bh=qhP6PUSnuyAt21ZtC8+77k3eFEpp6HdMwOj6FNObl68=;
+ b=FVxwMoSiRT03Y3ObqaXaw358aY132GLsQBzji1QcjZtnUyCl8AtD3aeuZ2RfBqmAGG
+ 9bqP8qrS80gomwVo3xgtfLaf+wWLkUXUY7+qlNSW4EPONwRshrLPpPADyhbFLZ5RGb9P
+ C4tNcYQhonPcAYfLJEtY+VhQNaXzxfFEt9FOW9Byf7Y2BEkJZwKDsMpZPlme87D489AW
+ UFd3AC6W35E+LZuHieUplTkSRRu6qfqkXZfyfAV2xc2gbvHAJ6bEBuBYcl+l+YETaVLi
+ gTj9xmUziAEuSEaj6XLqAWSnqgqROMT5kY8CxQJf9JfMB9u30KO6ZQemBk3jdgvgKMTk
+ Rjjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681178769; x=1683770769;
+ d=1e100.net; s=20210112; t=1681178858; x=1683770858;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WQ0k4zmdalq0z2Rj57Vbrq9qNiYkdW0l3jbunk7B7Es=;
- b=55LOADFwvAWWKhmB1rh4COjQwo6eNouGOE2QL/TR9DdauXMwjkyUBDj8B+ZVS7Ug2K
- nzCEIE89VxI6xAcwHVwyKRf/oBbz2dH5tGatKDpWVnw944iCP4mG+ryY1ryUcWPkpba+
- KCLvHZwYm7XKarOgKHm6yjRD/6b0Q3jGMeb2WEKHUUQ9+hBSew46ejqKcSu0uRQDbmNj
- pBqpSnRpzZ0TI67ve4Z4Icrq4Ts5uChtOZpPOlOn15fuhuBH+k4GaJ3SKscjyOfs9ct5
- LqAr4YRnFLD6gLJ+2an7aoQ3oBeFfGKIMa4kbRuLolWlixdJuCsuSfAts747tyYR/pvM
- 9qDg==
-X-Gm-Message-State: AAQBX9eD47nRhCwprvVRqeJ8EZwxO+VVlr/jCcsFmiVjz63UhPzfrOSK
- W+p7shm7yOGTx8vcy5dCWCKDGrpmefx3kggnmHI=
-X-Google-Smtp-Source: AKy350aIG8FBPEc9hGZgFp8jln33FvN24EGU2FOg3PvSvYjdIctxP9fu+R4B2u1SyNIXEsAH7vM34lXVLeR8piZk5KQ=
-X-Received: by 2002:a67:c289:0:b0:42c:3f5a:7561 with SMTP id
- k9-20020a67c289000000b0042c3f5a7561mr5324917vsj.3.1681178769552; Mon, 10 Apr
- 2023 19:06:09 -0700 (PDT)
+ bh=qhP6PUSnuyAt21ZtC8+77k3eFEpp6HdMwOj6FNObl68=;
+ b=byN9DU04QJflTsbxfiUiW7b/h+7j6c/LExaqLdQ3G35V2bjQy29koqiDIo/chdFz70
+ 8W9ybG8noaukNQuKbIvtwXiZtXYNR9VIpsN4I+CJ9iN9MpnVi/JU48xYq5ljGpyj6vSE
+ z+0UpCdb9COVlAH9SVV/onfbjPGHlejdS0JwhFzz1ShELaipdFdM7YEcB02NBBl698ZN
+ J/nQqJuR9DUtsUBucGA4Yl4b4B/oKCTkaRn+tk7DovC7IQ/5sw2O276fUc8vPCmrKaRE
+ JhP7PUgyHqHR27dPAU9fmvJiDFjIGL6oYIJRD3GmvGd8wqEYHFUtKnFeEHbM2Ys/DR3D
+ Upfw==
+X-Gm-Message-State: AAQBX9cpJcLnLhxuuTDAKV4c3qOFIWnLg3dH58FV9KWSzZl0k71OTUDQ
+ QpXtnlWFTaQnQomWyxWMExKJjhXfxA+z4fBc3Ac=
+X-Google-Smtp-Source: AKy350Yf2Aj8gYP3eEhZUszAaTTuxLmZj9VCJOplo0aiSQQ6fvYyETmPJqAfTSiYDB9+ShQ4dp6WFUhUCinSOmMYkgY=
+X-Received: by 2002:a67:d38d:0:b0:425:8e57:7bfd with SMTP id
+ b13-20020a67d38d000000b004258e577bfdmr7486878vsj.3.1681178858548; Mon, 10 Apr
+ 2023 19:07:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230325105429.1142530-1-richard.henderson@linaro.org>
- <20230325105429.1142530-3-richard.henderson@linaro.org>
-In-Reply-To: <20230325105429.1142530-3-richard.henderson@linaro.org>
+ <20230325105429.1142530-6-richard.henderson@linaro.org>
+In-Reply-To: <20230325105429.1142530-6-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 11 Apr 2023 12:05:43 +1000
-Message-ID: <CAKmqyKMtHANNW3RxQmZm-CgeTDpk-GEXjRqN_zfkfB1onHqF9w@mail.gmail.com>
-Subject: Re: [PATCH v6 02/25] target/riscv: Add a general status enum for
- extensions
+Date: Tue, 11 Apr 2023 12:07:12 +1000
+Message-ID: <CAKmqyKMWnf_HHXuGSPp1Cov8Oa6rp0wuq2YrN2msPtsBvD7whQ@mail.gmail.com>
+Subject: Re: [PATCH v6 05/25] target/riscv: Add a tb flags field for vstart
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- palmer@dabbelt.com, zhiwei_liu@linux.alibaba.com, fei2.wu@intel.com
+ palmer@dabbelt.com, zhiwei_liu@linux.alibaba.com, fei2.wu@intel.com, 
+ Weiwei Li <liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e29;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe29.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,180 +77,170 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2023 02:06:14 -0000
+X-List-Received-Date: Tue, 11 Apr 2023 02:07:46 -0000
 
-On Sat, Mar 25, 2023 at 9:58=E2=80=AFPM Richard Henderson
+On Sat, Mar 25, 2023 at 9:52=E2=80=AFPM Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
 > From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 >
-> The pointer masking is the only extension that directly use status.
-> The vector or float extension uses the status in an indirect way.
+> Once we mistook the vstart directly from the env->vstart. As env->vstart =
+is not
+> a constant, we should record it in the tb flags if we want to use
+> it in translation.
 >
-> Replace the pointer masking extension special status fields with
-> the general status.
->
+> Reported-by: Richard Henderson <richard.henderson@linaro.org>
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Message-Id: <20230324143031.1093-3-zhiwei_liu@linux.alibaba.com>
-> [rth: Add a typedef for the enum]
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Message-Id: <20230324143031.1093-5-zhiwei_liu@linux.alibaba.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.h      |  8 ++++++++
->  target/riscv/cpu_bits.h | 12 ++++--------
->  target/riscv/cpu.c      |  2 +-
->  target/riscv/csr.c      | 14 +++++++-------
->  4 files changed, 20 insertions(+), 16 deletions(-)
+>  target/riscv/cpu.h                      |  1 +
+>  target/riscv/cpu_helper.c               |  1 +
+>  target/riscv/translate.c                |  4 ++--
+>  target/riscv/insn_trans/trans_rvv.c.inc | 14 +++++++-------
+>  4 files changed, 11 insertions(+), 9 deletions(-)
 >
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 12fe8d8546..30d9828d59 100644
+> index d9e0eaaf9b..86a82e25dc 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -99,6 +99,14 @@ enum {
->      TRANSLATE_G_STAGE_FAIL
->  };
+> @@ -657,6 +657,7 @@ FIELD(TB_FLAGS, VMA, 21, 1)
+>  FIELD(TB_FLAGS, ITRIGGER, 22, 1)
+>  /* Virtual mode enabled */
+>  FIELD(TB_FLAGS, VIRT_ENABLED, 23, 1)
+> +FIELD(TB_FLAGS, VSTART_EQ_ZERO, 24, 1)
 >
-> +/* Extension context status */
-> +typedef enum {
-> +    EXT_STATUS_DISABLED =3D 0,
-> +    EXT_STATUS_INITIAL,
-> +    EXT_STATUS_CLEAN,
-> +    EXT_STATUS_DIRTY,
-> +} RISCVExtStatus;
-> +
->  #define MMU_USER_IDX 3
->
->  #define MAX_RISCV_PMPS (16)
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index fca7ef0cef..b84f62f8d6 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -9,6 +9,9 @@
->                   (((uint64_t)(val) * ((mask) & ~((mask) << 1))) & \
->                   (uint64_t)(mask)))
->
-> +/* Extension context status mask */
-> +#define EXT_STATUS_MASK     0x3ULL
-> +
->  /* Floating point round mode */
->  #define FSR_RD_SHIFT        5
->  #define FSR_RD              (0x7 << FSR_RD_SHIFT)
-> @@ -734,13 +737,6 @@ typedef enum RISCVException {
->  #define PM_ENABLE       0x00000001ULL
->  #define PM_CURRENT      0x00000002ULL
->  #define PM_INSN         0x00000004ULL
-> -#define PM_XS_MASK      0x00000003ULL
-> -
-> -/* PointerMasking XS bits values */
-> -#define PM_EXT_DISABLE  0x00000000ULL
-> -#define PM_EXT_INITIAL  0x00000001ULL
-> -#define PM_EXT_CLEAN    0x00000002ULL
-> -#define PM_EXT_DIRTY    0x00000003ULL
->
->  /* Execution enviornment configuration bits */
->  #define MENVCFG_FIOM                       BIT(0)
-> @@ -780,7 +776,7 @@ typedef enum RISCVException {
->  #define S_OFFSET     5ULL
->  #define M_OFFSET     8ULL
->
-> -#define PM_XS_BITS   (PM_XS_MASK << XS_OFFSET)
-> +#define PM_XS_BITS   (EXT_STATUS_MASK << XS_OFFSET)
->  #define U_PM_ENABLE  (PM_ENABLE  << U_OFFSET)
->  #define U_PM_CURRENT (PM_CURRENT << U_OFFSET)
->  #define U_PM_INSN    (PM_INSN    << U_OFFSET)
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1e97473af2..1135106b3e 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -764,7 +764,7 @@ static void riscv_cpu_reset_hold(Object *obj)
->          i++;
+>  #ifdef TARGET_RISCV32
+>  #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 4fdd6fe021..4f0999d50b 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -74,6 +74,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ul=
+ong *pc,
+>                      FIELD_EX64(env->vtype, VTYPE, VTA));
+>          flags =3D FIELD_DP32(flags, TB_FLAGS, VMA,
+>                      FIELD_EX64(env->vtype, VTYPE, VMA));
+> +        flags =3D FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstar=
+t =3D=3D 0);
+>      } else {
+>          flags =3D FIELD_DP32(flags, TB_FLAGS, VILL, 1);
 >      }
->      /* mmte is supposed to have pm.current hardwired to 1 */
-> -    env->mmte |=3D (PM_EXT_INITIAL | MMTE_M_PM_CURRENT);
-> +    env->mmte |=3D (EXT_STATUS_INITIAL | MMTE_M_PM_CURRENT);
->  #endif
->      env->xl =3D riscv_cpu_mxl(env);
->      riscv_cpu_update_mask(env);
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d522efc0b6..abea7b749e 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3513,7 +3513,7 @@ static RISCVException write_mmte(CPURISCVState *env=
-, int csrno,
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 74d0b9889d..f8c077525c 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -97,7 +97,7 @@ typedef struct DisasContext {
+>      uint8_t vta;
+>      uint8_t vma;
+>      bool cfg_vta_all_1s;
+> -    target_ulong vstart;
+> +    bool vstart_eq_zero;
+>      bool vl_eq_vlmax;
+>      CPUState *cs;
+>      TCGv zero;
+> @@ -1155,7 +1155,7 @@ static void riscv_tr_init_disas_context(DisasContex=
+tBase *dcbase, CPUState *cs)
+>      ctx->vta =3D FIELD_EX32(tb_flags, TB_FLAGS, VTA) && cpu->cfg.rvv_ta_=
+all_1s;
+>      ctx->vma =3D FIELD_EX32(tb_flags, TB_FLAGS, VMA) && cpu->cfg.rvv_ma_=
+all_1s;
+>      ctx->cfg_vta_all_1s =3D cpu->cfg.rvv_ta_all_1s;
+> -    ctx->vstart =3D env->vstart;
+> +    ctx->vstart_eq_zero =3D FIELD_EX32(tb_flags, TB_FLAGS, VSTART_EQ_ZER=
+O);
+>      ctx->vl_eq_vlmax =3D FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
+>      ctx->misa_mxl_max =3D env->misa_mxl_max;
+>      ctx->xl =3D FIELD_EX32(tb_flags, TB_FLAGS, XL);
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
+trans/trans_rvv.c.inc
+> index 6297c3b50d..32b3b9a8e5 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -547,7 +547,7 @@ static bool vext_check_sds(DisasContext *s, int vd, i=
+nt vs1, int vs2, int vm)
+>   */
+>  static bool vext_check_reduction(DisasContext *s, int vs2)
+>  {
+> -    return require_align(vs2, s->lmul) && (s->vstart =3D=3D 0);
+> +    return require_align(vs2, s->lmul) && s->vstart_eq_zero;
+>  }
 >
->      /* hardwiring pm.instruction bit to 0, since it's not supported yet =
-*/
->      wpri_val &=3D ~(MMTE_M_PM_INSN | MMTE_S_PM_INSN | MMTE_U_PM_INSN);
-> -    env->mmte =3D wpri_val | PM_EXT_DIRTY;
-> +    env->mmte =3D wpri_val | EXT_STATUS_DIRTY;
->      riscv_cpu_update_mask(env);
+>  /*
+> @@ -3083,7 +3083,7 @@ static bool trans_vcpop_m(DisasContext *s, arg_rmr =
+*a)
+>  {
+>      if (require_rvv(s) &&
+>          vext_check_isa_ill(s) &&
+> -        s->vstart =3D=3D 0) {
+> +        s->vstart_eq_zero) {
+>          TCGv_ptr src2, mask;
+>          TCGv dst;
+>          TCGv_i32 desc;
+> @@ -3112,7 +3112,7 @@ static bool trans_vfirst_m(DisasContext *s, arg_rmr=
+ *a)
+>  {
+>      if (require_rvv(s) &&
+>          vext_check_isa_ill(s) &&
+> -        s->vstart =3D=3D 0) {
+> +        s->vstart_eq_zero) {
+>          TCGv_ptr src2, mask;
+>          TCGv dst;
+>          TCGv_i32 desc;
+> @@ -3146,7 +3146,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          vext_check_isa_ill(s) &&                                   \
+>          require_vm(a->vm, a->rd) &&                                \
+>          (a->rd !=3D a->rs2) &&                                       \
+> -        (s->vstart =3D=3D 0)) {                                        \
+> +        s->vstart_eq_zero) {                                       \
+>          uint32_t data =3D 0;                                         \
+>          gen_helper_gvec_3_ptr *fn =3D gen_helper_##NAME;             \
+>          TCGLabel *over =3D gen_new_label();                          \
+> @@ -3187,7 +3187,7 @@ static bool trans_viota_m(DisasContext *s, arg_viot=
+a_m *a)
+>          !is_overlapped(a->rd, 1 << MAX(s->lmul, 0), a->rs2, 1) &&
+>          require_vm(a->vm, a->rd) &&
+>          require_align(a->rd, s->lmul) &&
+> -        (s->vstart =3D=3D 0)) {
+> +        s->vstart_eq_zero) {
+>          uint32_t data =3D 0;
+>          TCGLabel *over =3D gen_new_label();
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> @@ -3636,7 +3636,7 @@ static bool vcompress_vm_check(DisasContext *s, arg=
+_r *a)
+>             require_align(a->rs2, s->lmul) &&
+>             (a->rd !=3D a->rs2) &&
+>             !is_overlapped(a->rd, 1 << MAX(s->lmul, 0), a->rs1, 1) &&
+> -           (s->vstart =3D=3D 0);
+> +           s->vstart_eq_zero;
+>  }
 >
->      /* Set XS and SD bits, since PM CSRs are dirty */
-> @@ -3593,7 +3593,7 @@ static RISCVException write_mpmmask(CPURISCVState *=
-env, int csrno,
->      if ((env->priv =3D=3D PRV_M) && (env->mmte & M_PM_ENABLE)) {
->          env->cur_pmmask =3D val;
->      }
-> -    env->mmte |=3D PM_EXT_DIRTY;
-> +    env->mmte |=3D EXT_STATUS_DIRTY;
->
->      /* Set XS and SD bits, since PM CSRs are dirty */
->      mstatus =3D env->mstatus | MSTATUS_XS;
-> @@ -3621,7 +3621,7 @@ static RISCVException write_spmmask(CPURISCVState *=
-env, int csrno,
->      if ((env->priv =3D=3D PRV_S) && (env->mmte & S_PM_ENABLE)) {
->          env->cur_pmmask =3D val;
->      }
-> -    env->mmte |=3D PM_EXT_DIRTY;
-> +    env->mmte |=3D EXT_STATUS_DIRTY;
->
->      /* Set XS and SD bits, since PM CSRs are dirty */
->      mstatus =3D env->mstatus | MSTATUS_XS;
-> @@ -3649,7 +3649,7 @@ static RISCVException write_upmmask(CPURISCVState *=
-env, int csrno,
->      if ((env->priv =3D=3D PRV_U) && (env->mmte & U_PM_ENABLE)) {
->          env->cur_pmmask =3D val;
->      }
-> -    env->mmte |=3D PM_EXT_DIRTY;
-> +    env->mmte |=3D EXT_STATUS_DIRTY;
->
->      /* Set XS and SD bits, since PM CSRs are dirty */
->      mstatus =3D env->mstatus | MSTATUS_XS;
-> @@ -3673,7 +3673,7 @@ static RISCVException write_mpmbase(CPURISCVState *=
-env, int csrno,
->      if ((env->priv =3D=3D PRV_M) && (env->mmte & M_PM_ENABLE)) {
->          env->cur_pmbase =3D val;
->      }
-> -    env->mmte |=3D PM_EXT_DIRTY;
-> +    env->mmte |=3D EXT_STATUS_DIRTY;
->
->      /* Set XS and SD bits, since PM CSRs are dirty */
->      mstatus =3D env->mstatus | MSTATUS_XS;
-> @@ -3701,7 +3701,7 @@ static RISCVException write_spmbase(CPURISCVState *=
-env, int csrno,
->      if ((env->priv =3D=3D PRV_S) && (env->mmte & S_PM_ENABLE)) {
->          env->cur_pmbase =3D val;
->      }
-> -    env->mmte |=3D PM_EXT_DIRTY;
-> +    env->mmte |=3D EXT_STATUS_DIRTY;
->
->      /* Set XS and SD bits, since PM CSRs are dirty */
->      mstatus =3D env->mstatus | MSTATUS_XS;
-> @@ -3729,7 +3729,7 @@ static RISCVException write_upmbase(CPURISCVState *=
-env, int csrno,
->      if ((env->priv =3D=3D PRV_U) && (env->mmte & U_PM_ENABLE)) {
->          env->cur_pmbase =3D val;
->      }
-> -    env->mmte |=3D PM_EXT_DIRTY;
-> +    env->mmte |=3D EXT_STATUS_DIRTY;
->
->      /* Set XS and SD bits, since PM CSRs are dirty */
->      mstatus =3D env->mstatus | MSTATUS_XS;
+>  static bool trans_vcompress_vm(DisasContext *s, arg_r *a)
+> @@ -3675,7 +3675,7 @@ static bool trans_##NAME(DisasContext *s, arg_##NAM=
+E * a)               \
+>          QEMU_IS_ALIGNED(a->rd, LEN) &&                                  =
+\
+>          QEMU_IS_ALIGNED(a->rs2, LEN)) {                                 =
+\
+>          uint32_t maxsz =3D (s->cfg_ptr->vlen >> 3) * LEN;               =
+  \
+> -        if (s->vstart =3D=3D 0) {                                       =
+    \
+> +        if (s->vstart_eq_zero) {                                        =
+\
+>              /* EEW =3D 8 */                                             =
+  \
+>              tcg_gen_gvec_mov(MO_8, vreg_ofs(s, a->rd),                  =
+\
+>                               vreg_ofs(s, a->rs2), maxsz, maxsz);        =
+\
 > --
 > 2.34.1
 >
