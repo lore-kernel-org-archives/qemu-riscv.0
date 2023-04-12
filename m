@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pmXbW-0005te-3W
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Apr 2023 06:21:30 -0400
+	id 1pmXd3-0006e9-JD
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Apr 2023 06:23:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pmXbV-0005tM-2w
- for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 06:21:29 -0400
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
+ id 1pmXd2-0006e1-OS
+ for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 06:23:04 -0400
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pmXbT-0001fn-F7
- for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 06:21:28 -0400
-Received: by mail-wr1-x433.google.com with SMTP id j1so14345518wrb.0
- for <qemu-riscv@nongnu.org>; Wed, 12 Apr 2023 03:21:27 -0700 (PDT)
+ id 1pmXd1-0001x2-2R
+ for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 06:23:04 -0400
+Received: by mail-wr1-x430.google.com with SMTP id v27so1128951wra.13
+ for <qemu-riscv@nongnu.org>; Wed, 12 Apr 2023 03:23:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1681294886; x=1683886886;
+ d=linaro.org; s=google; t=1681294980; x=1683886980;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Kbvz25g1gd95mfNr1Luvyo3c+omVh7uTvD4cLsXR77g=;
- b=cOQhZ62JYuVnVBcBF63FOzNvfwfYCrSFXc7MlSbdgkhiHvGR8AVYSZrHbnvtlQwDDD
- qvEJbHCvXHEHkqcl6ha7qnRHNse78PujMAWp+2biBAFzCXTOCSTkrf9tqdc6oSAZu/mc
- JNph3EKsnMWOnRV9lN5Ia+4mI5XRhd0cGo3quUFG2593Uf8D0tTRTn3+E4IbzW9Ls1sr
- HobTf5BDJhJEbZ2gJKUdYJcUR8ssupOZgbq1PsjAUUenOxQ0AW/wY1AU21eCURGo6mIg
- KlO0BpQ6W60gxz2bZ7dm5zf5+f2wKhgGjrYRXQr3gr1X+8dJ9vd6xTgUr8pf124szKsg
- W5Vw==
+ bh=7KSLShETURCw+/v0Lf/BM/x+QDDuxdvZ7GRc6yX/CVw=;
+ b=D8ihJPUaigBIwxj1shQGhv9A1wnUh1ej8zM0Otk2UzCH0MRnVUIrYnKV2JttSuEIFh
+ 2VKMD/Z8Bo7psWx9794WQWAri51Bxo8iHk8+4oxpBm+ZEwuXiocI8VWoGkC2VFyDgND3
+ hKPpgLFPMkB7z0I9FqPIrStTyvQ0seUum5q17ysihRKLvBSM3D7m9hWvpuBEWFq55ud8
+ XkWCjYqPHpH2W2f11f5X5ZhjEu/3VgQT10Te/mtZrh9HGtvkQbAlSYrLYb7n+o1nMhz1
+ eP0gAreT+vca98kk3rwCrntDTPSK4mNzlidLIF7nX9R81vAPRAt52MheULrjnW+2ozAm
+ r01w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681294886; x=1683886886;
+ d=1e100.net; s=20210112; t=1681294980; x=1683886980;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Kbvz25g1gd95mfNr1Luvyo3c+omVh7uTvD4cLsXR77g=;
- b=QfaLTrxRGV32vJBO237Cr0k4V+okX+94QzW7EblvK7exvSoyKENjHqedttC/SSdpfT
- QMkgH0HoQ7RSbFP623FxOKAkv0qwNZZIE/EauHJ5TwYnHbjZEu5eMdk1LDIdJnIt846Q
- JjFyLHFlumo3S485+9ENNPpRCr/+2F72qLgSAspZ/VMZOePrPsGSCvppsGTIVi4wtwsE
- fZg0/9ag4vTdlKEzVvNKEMP9Bwtdu5wTIF9tb8mtCjESWyFK18Jv43W846MG9WRC0zHH
- bsZ0NUVoRMBjel2985RzkWIvhvyt8OL2UX8N72bIg9+y0zOWB3sRTWAE+0cxks+u+Yn8
- K1fQ==
-X-Gm-Message-State: AAQBX9cvYQQjOgHA+VQfHTUZx6wXrp8Kqc8edFrAzhETc94SEauACyTl
- IjhfFsmjvon+vXK9zXPfTO2VTM2Z9GLC7y1QnGScmWxl
-X-Google-Smtp-Source: AKy350aFmDdRlNLfeQspb3wfY3vh021p8FlSeVnBQgTnLZfjsW5Wt9KVNIei3852Ma0GcztLgMc0UQ==
-X-Received: by 2002:a05:6000:1045:b0:2f4:2f98:bf2d with SMTP id
- c5-20020a056000104500b002f42f98bf2dmr1676656wrx.37.1681294885981; 
- Wed, 12 Apr 2023 03:21:25 -0700 (PDT)
+ bh=7KSLShETURCw+/v0Lf/BM/x+QDDuxdvZ7GRc6yX/CVw=;
+ b=XsTniCyqfJMgxI3kIEODz5QNp7GFJ83SLM2Us34y/pRCJbG13jYt2HRWEIQ/ULdnsM
+ YLSrplGu8i1gi4dfGP6J4zEnB2MbDHthb7LXGp/6p41yJmqZqAclaMfsKyeNf/F2Ug+m
+ fVqnwIYrM4hFCr1UIgznZKmGmxalVBrJbplGwIc9zBzg5Nm6CFKj3jM93eINwIfwX5+V
+ BnUi9XAcUxhPE2zvV8Et0cIYoVmmm/0aa9IGBMQe/N5qmAT2nuhT2mYdDHd9lPpA2ziw
+ L48gmZj/0qgPyh8FF9IagIPxTNgX8LZO3uJWKG8VDxermLtTzQmRl88+ERWVPnHgQP/i
+ Lvnw==
+X-Gm-Message-State: AAQBX9eIjO2thHzsc2E5KDBaTG6lgfG3UlZVM6fK0/s0IhswZN5h+qTY
+ fHm2gEnfhC/FYd5aQSohv46p8w==
+X-Google-Smtp-Source: AKy350ZUCHL4PgdrlLrqpxxEp4PGK8xbqgGc2LWpY86M6s6obyMhC9zvOCTH5vS1VLuip49jp6x02A==
+X-Received: by 2002:adf:e750:0:b0:2ef:b4ac:8e5 with SMTP id
+ c16-20020adfe750000000b002efb4ac08e5mr6776413wrn.28.1681294980198; 
+ Wed, 12 Apr 2023 03:23:00 -0700 (PDT)
 Received: from [10.0.2.69] (ip-037-024-010-236.um08.pools.vodafone-ip.de.
  [37.24.10.236]) by smtp.gmail.com with ESMTPSA id
- m8-20020adfe0c8000000b002cff0e213ddsm16886557wri.14.2023.04.12.03.21.24
+ v14-20020adfe28e000000b002e4cd2ec5c7sm16861182wri.86.2023.04.12.03.22.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Apr 2023 03:21:25 -0700 (PDT)
-Message-ID: <e2ef863a-b9d6-49c7-3691-2ce8768b0b4a@linaro.org>
-Date: Wed, 12 Apr 2023 12:21:22 +0200
+ Wed, 12 Apr 2023 03:22:59 -0700 (PDT)
+Message-ID: <42166203-10f9-b6e4-9cf5-7a15131d58c8@linaro.org>
+Date: Wed, 12 Apr 2023 12:22:55 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Subject: Re: [RFC 3/5] target/riscv: Add support for Zvfbfmin extension
+Subject: Re: [RFC 4/5] target/riscv: Add support for Zvfbfwma extension
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
@@ -61,13 +61,13 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20230412023320.50706-1-liweiwei@iscas.ac.cn>
- <20230412023320.50706-4-liweiwei@iscas.ac.cn>
+ <20230412023320.50706-5-liweiwei@iscas.ac.cn>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230412023320.50706-4-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230412023320.50706-5-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x433.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -42
 X-Spam_score: -4.3
 X-Spam_bar: ----
@@ -87,19 +87,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2023 10:21:29 -0000
+X-List-Received-Date: Wed, 12 Apr 2023 10:23:05 -0000
 
 On 4/12/23 04:33, Weiwei Li wrote:
-> Add trans_* and helper function for Zvfbfmin instructions.
+> Add trans_* and helper function for Zvfbfwma instructions.
 > 
 > Signed-off-by: Weiwei Li<liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang<wangjunqiang@iscas.ac.cn>
 > ---
->   target/riscv/helper.h                      |  3 +
+>   target/riscv/helper.h                      |  3 ++
 >   target/riscv/insn32.decode                 |  4 ++
->   target/riscv/insn_trans/trans_rvbf16.c.inc | 64 ++++++++++++++++++++++
->   target/riscv/vector_helper.c               |  6 ++
->   4 files changed, 77 insertions(+)
+>   target/riscv/insn_trans/trans_rvbf16.c.inc | 58 ++++++++++++++++++++++
+>   target/riscv/insn_trans/trans_rvzfh.c.inc  | 13 ++---
+>   target/riscv/vector_helper.c               | 11 ++++
+>   5 files changed, 83 insertions(+), 6 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
