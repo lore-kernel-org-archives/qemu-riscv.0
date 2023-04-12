@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pmQam-0005hW-IF
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 22:52:16 -0400
+	id 1pmQcy-0006ag-8q
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 22:54:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pmQal-0005hK-Mr; Tue, 11 Apr 2023 22:52:15 -0400
-Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
+ id 1pmQcs-0006Yn-Sb; Tue, 11 Apr 2023 22:54:26 -0400
+Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pmQaj-00037k-OR; Tue, 11 Apr 2023 22:52:15 -0400
-Received: by mail-vs1-xe33.google.com with SMTP id y17so9140131vsd.9;
- Tue, 11 Apr 2023 19:52:13 -0700 (PDT)
+ id 1pmQcq-0003VH-Ny; Tue, 11 Apr 2023 22:54:26 -0400
+Received: by mail-vs1-xe2a.google.com with SMTP id b17so9304360vsj.7;
+ Tue, 11 Apr 2023 19:54:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1681267932; x=1683859932;
+ d=gmail.com; s=20221208; t=1681268063; x=1683860063;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m5KFqEsZQgqOGMIvpyY/ThMzzoT8epFpXv5Am5iSVMM=;
- b=Qad4SPkItBf5RcFuNvAmE6F5fPD4VH7BBuDJa71x724m+Z4YZdLV677CiEHD6U9Vn9
- 4lRP6yC+KYqdvvLbO76svxRfi8vt2r4TY94fQZjnnbJM6Zs3hCGntIqJtneeLwxsgCgo
- O0qLf1TGIC99Uhnj82LcCPnIFT5fdSo6bUeSyy3pjC2w4gm0jVD8j7avFKVr8v6JVnmd
- BJPGNgGfe4xQ6p49/ECZ4KiJXMYD/xysk0YJNrKg0LHPshWO8XIDxsTHHmdyE9iJq3hQ
- BohL8Li0kyhThkBMfRK3+BZceXRwRFKuSKEc1YbHgvmdRGBxL+sIol34LwIWvA6jt9pk
- UCzQ==
+ bh=Lom4CntLc48U0/P8ePsDOLx5/IvQ4kCEgYBdDIQ7USU=;
+ b=FXlbq8TvnO+YMnkg6mO0NhobI6S8eISdtFUHlCYgfRziCxhd4EsE5FrZ4KybR79rEd
+ LuO/PL7T1eCjpz7L/vOgaTlzKWoAsYHmR8VwhRqymV/dclMtNgnObJNrdNn6nAAaRCTI
+ Hhr8cgBBqOPEihsjZ/gA/YEc2jTAQ80K8oUH2WPKldYDGyhDpG0eTdffxP5ywGE/xdVJ
+ REqo3ogy6trO8nkQW4+lLoa6V3Mk6jH/ETsknKmov1EhA4qFegrGWvlENO79s3Tgiwfm
+ b2t0RWf/80ovz1a4SuSj/vCHDElPSAdCcaQpqL5GEwbinrysIA6AZcyOS/yWMTkHIU8L
+ 7i0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681267932; x=1683859932;
+ d=1e100.net; s=20210112; t=1681268063; x=1683860063;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=m5KFqEsZQgqOGMIvpyY/ThMzzoT8epFpXv5Am5iSVMM=;
- b=1rKoQ/LdcdoSTiVp/n7M4U4oyOmraP2wq/mS0AFsQvjcVLjxrAF+qNp6aeHtc3onKf
- jwm40JuGs1B4RJgygoLfFEEL6OLV6a9P3qYyp12xoQgL2aRgUG8e19vAH3PENkf5INyQ
- BZfAOiColL6NGDEK4v613FY6ducwDt0M3Kaofh3LpYru3jVd5/4tGoUXtLeoGcDE9+bs
- arNIcOsole2IS3JZ1gs3u0k+sDA/2t77GBfw0ncTffqv7krRCWDlOYxiZBi7fR0y2Vto
- T1rsIwDAq6lEbqXbWqwArYZA93pV+Qx9POIHMRuGCbpm7H/g6Y69NjRACabUlfH3Cv08
- 3qLA==
-X-Gm-Message-State: AAQBX9djkKsNXcLj6X3nMOTfsVMTM00IlLJvH5HwBtwlE5DllsE3TFoL
- lDeUmS+P/afYwYdDVTMpIB7TXEgYaxxao7EE+Lg=
-X-Google-Smtp-Source: AKy350Y7vBB8zU8DHR1UjZ1kLMX2BaKsm+GE5d/8YU85AdHaz2VRGSSs2EIvqdp6DkJy61nY/5IdXErz2ohunkO7BpY=
-X-Received: by 2002:a67:d38e:0:b0:412:2ed6:d79b with SMTP id
- b14-20020a67d38e000000b004122ed6d79bmr8597718vsj.3.1681267932296; Tue, 11 Apr
- 2023 19:52:12 -0700 (PDT)
+ bh=Lom4CntLc48U0/P8ePsDOLx5/IvQ4kCEgYBdDIQ7USU=;
+ b=W7KljgejT7CaOlMmMAoi8ScIh15GFen12MBNirtbJFMRX5J9PfxoZ5oXrjh5Yw5T96
+ 0P+eeUmOC8oKSOqUY2pDNTJdtCATXB6Zj7PWAU1cqZCr+feQgroz8kHRkbYC4akLU6tX
+ rISUhpYgTa5WfxUIamwWkIFxF8VD8Ti8BDXn8PBbGJFly3YRhd1h5LbUE/+EwZYHKTwO
+ ADsVUxY7XqAd1iyeyCg93pa39RtT54XD0uncxMaL0aqQc8LJyMTVsLQubHDgoVFASjm+
+ 3rgwcBB0ec56leX7koE3UrcE6uI+YJjYbxhFbY+/MHc2cqJ05zbTbkAyVyVwa+Z5yRqB
+ Oibw==
+X-Gm-Message-State: AAQBX9eDEMrO9q0cDbckXHrVyaWF+LB3kO3H9T7VLTp5KGW7GQgN1eZa
+ ekHcgir0pIHwmXhVVnDdE20Aw0ne6yJAWlT2LDY=
+X-Google-Smtp-Source: AKy350bkBW0jO5ZNJicDxf/vdLsD7AXXG6DE/yO+5EBuGKsvRjqHVsp6pCyApONlkK/jIyIeMEvPQhRYYo3EZm3Yhps=
+X-Received: by 2002:a67:d60f:0:b0:42c:8f72:623d with SMTP id
+ n15-20020a67d60f000000b0042c8f72623dmr813415vsj.3.1681268063217; Tue, 11 Apr
+ 2023 19:54:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230410033526.31708-1-liweiwei@iscas.ac.cn>
- <20230410033526.31708-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230410033526.31708-2-liweiwei@iscas.ac.cn>
+References: <20230406101559.39632-1-chenyi2000@zju.edu.cn>
+In-Reply-To: <20230406101559.39632-1-chenyi2000@zju.edu.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 12 Apr 2023 12:51:46 +1000
-Message-ID: <CAKmqyKOYdZp_XrX0EBbKy49wORY-vvvfe1-qA216erCOg1gL1g@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/riscv: Add set_implicit_extensions_from_ext()
- function
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+Date: Wed, 12 Apr 2023 12:53:57 +1000
+Message-ID: <CAKmqyKMdmmFhP15vMDipyJcv7DmOow4u9aYtcN4Ru6aw=0pFCw@mail.gmail.com>
+Subject: Re: [PATCH v5] target/riscv: fix H extension TVM trap
+To: Yi Chen <chenyi2000@zju.edu.cn>
+Cc: qemu-devel@nongnu.org, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -78,120 +78,184 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2023 02:52:15 -0000
+X-List-Received-Date: Wed, 12 Apr 2023 02:54:27 -0000
 
-On Mon, Apr 10, 2023 at 1:36=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
-ote:
+On Thu, Apr 6, 2023 at 8:17=E2=80=AFPM Yi Chen <chenyi2000@zju.edu.cn> wrot=
+e:
 >
-> Move multi-letter extensions that may implicitly enabled from misa.EXT
-> alone to prepare for following separation of implicitly enabled and
-> explicitly enabled extensions.
+> - Trap satp/hgatp accesses from HS-mode when MSTATUS.TVM is enabled.
+> - Trap satp accesses from VS-mode when HSTATUS.VTVM is enabled.
+> - Raise RISCV_EXCP_ILLEGAL_INST when U-mode executes SFENCE.VMA/SINVAL.VM=
+A.
+> - Raise RISCV_EXCP_VIRT_INSTRUCTION_FAULT when VU-mode executes
+>   SFENCE.VMA/SINVAL.VMA or VS-mode executes SFENCE.VMA/SINVAL.VMA with
+>   HSTATUS.VTVM enabled.
+> - Raise RISCV_EXCP_VIRT_INSTRUCTION_FAULT when VU-mode executes
+>   HFENCE.GVMA/HFENCE.VVMA/HINVAL.GVMA/HINVAL.VVMA.
 >
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Signed-off-by: Yi Chen <chenyi2000@zju.edu.cn>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c | 56 +++++++++++++++++++++++++---------------------
->  1 file changed, 31 insertions(+), 25 deletions(-)
+> Rebase the patch on https://github.com/alistair23/qemu/tree/riscv-to-appl=
+y.next
+> Add "Reviewed-by: LIU Zhiwei"
+>  target/riscv/csr.c       | 56 +++++++++++++++++++++++++---------------
+>  target/riscv/op_helper.c | 12 ++++-----
+>  2 files changed, 41 insertions(+), 27 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index cb68916fce..abb65d41b1 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -809,6 +809,35 @@ static void riscv_cpu_disas_set_info(CPUState *s, di=
-sassemble_info *info)
->      }
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index e0b871f6dc..d6669d8524 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -449,6 +449,30 @@ static RISCVException sstc_32(CPURISCVState *env, in=
+t csrno)
+>      return sstc(env, csrno);
 >  }
 >
-> +static void set_implicit_extensions_from_ext(RISCVCPU *cpu)
+> +static RISCVException satp(CPURISCVState *env, int csrno)
 > +{
-> +
-> +    /* The V vector extension depends on the Zve64d extension */
-> +    if (cpu->cfg.ext_v) {
-> +        cpu->cfg.ext_zve64d =3D true;
+> +    if (env->priv =3D=3D PRV_S && !env->virt_enabled &&
+> +        get_field(env->mstatus, MSTATUS_TVM)) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +    if (env->priv =3D=3D PRV_S && env->virt_enabled &&
+> +        get_field(env->hstatus, HSTATUS_VTVM)) {
+> +        return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
 > +    }
 > +
-> +    /* The Zve64d extension depends on the Zve64f extension */
-> +    if (cpu->cfg.ext_zve64d) {
-> +        cpu->cfg.ext_zve64f =3D true;
-> +    }
-> +
-> +    /* The Zve64f extension depends on the Zve32f extension */
-> +    if (cpu->cfg.ext_zve64f) {
-> +        cpu->cfg.ext_zve32f =3D true;
-> +    }
-> +
-> +    if (cpu->cfg.ext_c) {
-> +        cpu->cfg.ext_zca =3D true;
-> +        if (cpu->cfg.ext_f && cpu->env.misa_mxl_max =3D=3D MXL_RV32) {
-> +            cpu->cfg.ext_zcf =3D true;
-> +        }
-> +        if (cpu->cfg.ext_d) {
-> +            cpu->cfg.ext_zcd =3D true;
-> +        }
-> +    }
+> +    return smode(env, csrno);
 > +}
 > +
->  /*
->   * Check consistency between chosen extensions while setting
->   * cpu->cfg accordingly, doing a set_misa() in the end.
-> @@ -833,6 +862,8 @@ static void riscv_cpu_validate_set_extensions(RISCVCP=
-U *cpu, Error **errp)
->          cpu->cfg.ext_ifencei =3D true;
->      }
->
-> +    set_implicit_extensions_from_ext(cpu);
+> +static RISCVException hgatp(CPURISCVState *env, int csrno)
+> +{
+> +    if (env->priv =3D=3D PRV_S && !env->virt_enabled &&
+> +        get_field(env->mstatus, MSTATUS_TVM)) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
 > +
->      if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
->          error_setg(errp,
->                     "I and E extensions are incompatible");
-> @@ -886,21 +917,6 @@ static void riscv_cpu_validate_set_extensions(RISCVC=
-PU *cpu, Error **errp)
->          return;
+> +    return hmode(env, csrno);
+> +}
+> +
+>  /* Checks if PointerMasking registers could be accessed */
+>  static RISCVException pointer_masking(CPURISCVState *env, int csrno)
+>  {
+> @@ -2647,13 +2671,7 @@ static RISCVException read_satp(CPURISCVState *env=
+, int csrno,
+>          *val =3D 0;
+>          return RISCV_EXCP_NONE;
+>      }
+> -
+> -    if (env->priv =3D=3D PRV_S && get_field(env->mstatus, MSTATUS_TVM)) =
+{
+> -        return RISCV_EXCP_ILLEGAL_INST;
+> -    } else {
+> -        *val =3D env->satp;
+> -    }
+> -
+> +    *val =3D env->satp;
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> @@ -2676,18 +2694,14 @@ static RISCVException write_satp(CPURISCVState *e=
+nv, int csrno,
 >      }
 >
-> -    /* The V vector extension depends on the Zve64d extension */
-> -    if (cpu->cfg.ext_v) {
-> -        cpu->cfg.ext_zve64d =3D true;
-> -    }
-> -
-> -    /* The Zve64d extension depends on the Zve64f extension */
-> -    if (cpu->cfg.ext_zve64d) {
-> -        cpu->cfg.ext_zve64f =3D true;
-> -    }
-> -
-> -    /* The Zve64f extension depends on the Zve32f extension */
-> -    if (cpu->cfg.ext_zve64f) {
-> -        cpu->cfg.ext_zve32f =3D true;
-> -    }
-> -
->      if (cpu->cfg.ext_zve64d && !cpu->cfg.ext_d) {
->          error_setg(errp, "Zve64d/V extensions require D extension");
->          return;
-> @@ -956,16 +972,6 @@ static void riscv_cpu_validate_set_extensions(RISCVC=
-PU *cpu, Error **errp)
->          }
+>      if (vm && mask) {
+> -        if (env->priv =3D=3D PRV_S && get_field(env->mstatus, MSTATUS_TV=
+M)) {
+> -            return RISCV_EXCP_ILLEGAL_INST;
+> -        } else {
+> -            /*
+> -             * The ISA defines SATP.MODE=3DBare as "no translation", but=
+ we still
+> -             * pass these through QEMU's TLB emulation as it improves
+> -             * performance.  Flushing the TLB on SATP writes with paging
+> -             * enabled avoids leaking those invalid cached mappings.
+> -             */
+> -            tlb_flush(env_cpu(env));
+> -            env->satp =3D val;
+> -        }
+> +        /*
+> +         * The ISA defines SATP.MODE=3DBare as "no translation", but we =
+still
+> +         * pass these through QEMU's TLB emulation as it improves
+> +         * performance.  Flushing the TLB on SATP writes with paging
+> +         * enabled avoids leaking those invalid cached mappings.
+> +         */
+> +        tlb_flush(env_cpu(env));
+> +        env->satp =3D val;
+>      }
+>      return RISCV_EXCP_NONE;
+>  }
+> @@ -4183,7 +4197,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
+>                           .min_priv_ver =3D PRIV_VERSION_1_12_0 },
+>
+>      /* Supervisor Protection and Translation */
+> -    [CSR_SATP]     =3D { "satp",     smode, read_satp,     write_satp   =
+  },
+> +    [CSR_SATP]     =3D { "satp",     satp, read_satp,     write_satp    =
+ },
+>
+>      /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
+>      [CSR_SISELECT]   =3D { "siselect",   aia_smode, NULL, NULL, rmw_xise=
+lect },
+> @@ -4220,7 +4234,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
+>                            .min_priv_ver =3D PRIV_VERSION_1_12_0         =
+       },
+>      [CSR_HGEIP]       =3D { "hgeip",       hmode,   read_hgeip,
+>                            .min_priv_ver =3D PRIV_VERSION_1_12_0         =
+       },
+> -    [CSR_HGATP]       =3D { "hgatp",       hmode,   read_hgatp,   write_=
+hgatp,
+> +    [CSR_HGATP]       =3D { "hgatp",       hgatp,   read_hgatp,   write_=
+hgatp,
+>                            .min_priv_ver =3D PRIV_VERSION_1_12_0         =
+       },
+>      [CSR_HTIMEDELTA]  =3D { "htimedelta",  hmode,   read_htimedelta,
+>                            write_htimedelta,
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index ec9a384772..7cbe13db3f 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -380,12 +380,12 @@ void helper_wfi(CPURISCVState *env)
+>  void helper_tlb_flush(CPURISCVState *env)
+>  {
+>      CPUState *cs =3D env_cpu(env);
+> -    if (!(env->priv >=3D PRV_S) ||
+> -        (env->priv =3D=3D PRV_S &&
+> -         get_field(env->mstatus, MSTATUS_TVM))) {
+> +    if (!env->virt_enabled &&
+> +        (env->priv =3D=3D PRV_U ||
+> +         (env->priv =3D=3D PRV_S && get_field(env->mstatus, MSTATUS_TVM)=
+))) {
+>          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+> -    } else if (riscv_has_ext(env, RVH) && env->virt_enabled &&
+> -               get_field(env->hstatus, HSTATUS_VTVM)) {
+> +    } else if (env->virt_enabled &&
+> +               (env->priv =3D=3D PRV_U || get_field(env->hstatus, HSTATU=
+S_VTVM))) {
+>          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GE=
+TPC());
+>      } else {
+>          tlb_flush(cs);
+> @@ -402,7 +402,7 @@ void helper_hyp_tlb_flush(CPURISCVState *env)
+>  {
+>      CPUState *cs =3D env_cpu(env);
+>
+> -    if (env->priv =3D=3D PRV_S && env->virt_enabled) {
+> +    if (env->virt_enabled) {
+>          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GE=
+TPC());
 >      }
 >
-> -    if (cpu->cfg.ext_c) {
-> -        cpu->cfg.ext_zca =3D true;
-> -        if (cpu->cfg.ext_f && env->misa_mxl_max =3D=3D MXL_RV32) {
-> -            cpu->cfg.ext_zcf =3D true;
-> -        }
-> -        if (cpu->cfg.ext_d) {
-> -            cpu->cfg.ext_zcd =3D true;
-> -        }
-> -    }
-> -
->      if (env->misa_mxl_max !=3D MXL_RV32 && cpu->cfg.ext_zcf) {
->          error_setg(errp, "Zcf extension is only relevant to RV32");
->          return;
 > --
-> 2.25.1
+> 2.40.0
 >
 >
 
