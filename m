@@ -1,72 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pmXPB-0007N7-3Q
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Apr 2023 06:08:45 -0400
+	id 1pmXYu-0003i5-MD
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Apr 2023 06:18:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pmXP9-0007Mg-65
- for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 06:08:43 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pmXYs-0003hm-KV
+ for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 06:18:46 -0400
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pmXP7-0006bo-C7
- for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 06:08:42 -0400
-Received: by mail-wr1-x432.google.com with SMTP id v27so1088317wra.13
- for <qemu-riscv@nongnu.org>; Wed, 12 Apr 2023 03:08:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pmXYq-0000uZ-S3
+ for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 06:18:46 -0400
+Received: by mail-wr1-x42c.google.com with SMTP id v27so1117185wra.13
+ for <qemu-riscv@nongnu.org>; Wed, 12 Apr 2023 03:18:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1681294119; x=1683886119;
+ d=linaro.org; s=google; t=1681294723; x=1683886723;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Jwh6tjaX95EY2R1QvZ0DUQ4zm0KmrHEBJYJyQfYQibE=;
- b=Mej3x+PEspNXyW/TFDL8SonT7XWXTpJAdP3gU5eP48on4V3zGprT1P+nklP2XVTq+A
- jAo+nXQpsLFPmb1Iymr/o9FoTI/idgWTEYkq3K3JuJSgs6Zs7kmLPFD4DITT+ompvqw4
- ZK2UbblnzEHzrpqUqMR8dF7Hkr3thQsr80Wa6hcIxYfWTLn8Lx9kLFtRAEnZJ1LcBDJp
- OHBQMTxzj6k/SF4oy15OS4zrvwc3Pwfil6XDhrx5JJAWsaC37Cxcbm3LbfyAvs6+UFMh
- 0HE8aa22lccZ32gn3p5gaNyNg+40706yagE0lns+LTSrVtlBTkv7aOViO24YEBHu4nw0
- S9HQ==
+ bh=xubp/UHJkutcl3IvIxJS81UUBiExW/az4s4kh4yQCyU=;
+ b=IPLzabwlNoAiuhuCQ/yQElp0PoecSw9MOxXU8Mg+VaM8gLnsHm4b45ic9kKDjDgx5X
+ z8VDlwFfHh9p0WaKgtWh9fdHUWfmrjCZ8gucVcKpflO36Zy+mQx8aYOIOQEM/7JOFKp8
+ 4YyS010r4/6nKEX8vvkGrvBqKpoImqaTgmpcS/ZQduXbvxgXBzgXesgeJOjM6NVBqi0w
+ 8icyjntelINgPG8S9qZ7cwXbuNwMMPygWYNEnZmaqQ8EVPVBwypIqTSYtDrWSfu8TDYV
+ FzBaCPe8ktGo8MHkj3BAO9DjxTq2C0bZSSlj1F9MQVjyB9uo9KADY86/vprqd+Kcg06M
+ xN2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681294119; x=1683886119;
+ d=1e100.net; s=20210112; t=1681294723; x=1683886723;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Jwh6tjaX95EY2R1QvZ0DUQ4zm0KmrHEBJYJyQfYQibE=;
- b=oVjyfcQL2rU3yQ2vv22LInn/wY2X3kkoi9JHEi2BONJDr36YjeTQzSs7DBCd7dxF7K
- 5Si9XycxKNNyFp/g4oK+ZdxNBxwScf7d5/KF9GHaortLfDxRLLTOnAGDNwmNz3oLqG6Q
- StUFBzyWSL6xCjDLDZR5xGaFdDAbofNsKsbwCLDqG9cSuyxaEtv2kNv4jSMwUAjo077X
- xztxGlKY1PPFTZioMcV57Dosjf4KhWTIttxUqiIqlxuB1Ft+57dbkDUdvBzQCVmKr98k
- rYe1d+XmNRHl00AjqbsK3rxyNqlV3HuduEJ5nNbpwDCydkRIFl7iH3snrCec63eZc/4A
- xY2g==
-X-Gm-Message-State: AAQBX9c0bQU6f4ljv5TDUe79F1CvgiTBQ+ydmtdiVSuoo3OuE0cB25kF
- ckn7FQfEx4lpWPNEdIEtkqf6Hw==
-X-Google-Smtp-Source: AKy350YmIvttlWNTicrzj4NhRuMh7muqShdQljEPmwUQgIzcnBCsKL3NJJHMBkEXJQ5A/GYjq6bJXQ==
-X-Received: by 2002:a5d:6451:0:b0:2ef:ac55:1e92 with SMTP id
- d17-20020a5d6451000000b002efac551e92mr4430090wrw.25.1681294119580; 
- Wed, 12 Apr 2023 03:08:39 -0700 (PDT)
-Received: from [192.168.69.115] ([176.187.216.226])
- by smtp.gmail.com with ESMTPSA id
- y16-20020a05600c365000b003f049a42689sm1820552wmq.25.2023.04.12.03.08.38
+ bh=xubp/UHJkutcl3IvIxJS81UUBiExW/az4s4kh4yQCyU=;
+ b=QcrdO1MWUDiMYiqSGjQ8Y2xj1QBjj6TJ8MG8IW46wTMc0CvsDPjI9jz9CNK8FHMP1h
+ wy7pqRAli4Xb4U7X+7vcNkUqqCV58JUAxbVj+mwUxUhdEVgtDeuRHUT0pRLvYIT0r00D
+ S9eMyA7ATpSmdWaa5T2eEqP3wZXKUiLI3Q1HYWLZ1nDftUfjSCL22SlYmRzp+iCsEKjW
+ gFsh5DMMFE8M0agpQKYc7zRPPKPK6s4LnUl2m0HHoE83qYoXcn/TCdi6GuuCgae+kHo9
+ ni6ktY59u8ZVPrkQDzuEKfpUVJIbPbcF7Vtc0SqKEdwx2VPak8npIg/gFsHcJmigE0Pt
+ hzBg==
+X-Gm-Message-State: AAQBX9dPDO3XpzOV3ax0B1ZrOW87usKHT1wVuJcT8iv7Gp3D8ov7eLJr
+ YlpK+tzjzGKanrzOaUjedfwycw==
+X-Google-Smtp-Source: AKy350aCsRFyEL6MFaghP9VnjRznavZun09F3E9nmci/EpldAThNFWSBiM6pVZucN8eKZ6BB0V745Q==
+X-Received: by 2002:a5d:424f:0:b0:2f2:79af:3303 with SMTP id
+ s15-20020a5d424f000000b002f279af3303mr6484699wrr.60.1681294722738; 
+ Wed, 12 Apr 2023 03:18:42 -0700 (PDT)
+Received: from [10.0.2.69] (ip-037-024-010-236.um08.pools.vodafone-ip.de.
+ [37.24.10.236]) by smtp.gmail.com with ESMTPSA id
+ s10-20020a5d6a8a000000b002efdf3e5be0sm10717523wru.44.2023.04.12.03.18.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Apr 2023 03:08:39 -0700 (PDT)
-Message-ID: <8b6684f0-6ee1-5446-7937-5d466f6baca3@linaro.org>
-Date: Wed, 12 Apr 2023 12:08:37 +0200
+ Wed, 12 Apr 2023 03:18:42 -0700 (PDT)
+Message-ID: <c558a047-e289-3c44-78dc-b9930262ebc4@linaro.org>
+Date: Wed, 12 Apr 2023 12:18:40 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.9.1
-Subject: Re: [PATCH] target/riscv: Restore the predicate() NULL check behavior
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Subject: Re: [PATCH v3 3/3] target/riscv: add TYPE_RISCV_DYNAMIC_CPU
 Content-Language: en-US
-To: "Wu, Fei" <fei2.wu@intel.com>, Bin Meng <bmeng@tinylab.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20230411090211.3039186-1-bmeng@tinylab.org>
- <b0d06bc4-d8f1-30ff-9bc1-252c7f15df89@intel.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <b0d06bc4-d8f1-30ff-9bc1-252c7f15df89@intel.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+References: <20230411183511.189632-1-dbarboza@ventanamicro.com>
+ <20230411183511.189632-4-dbarboza@ventanamicro.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20230411183511.189632-4-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -42
 X-Spam_score: -4.3
 X-Spam_bar: ----
@@ -86,27 +85,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2023 10:08:43 -0000
+X-List-Received-Date: Wed, 12 Apr 2023 10:18:46 -0000
 
-On 12/4/23 03:04, Wu, Fei wrote:
-> On 4/11/2023 5:02 PM, Bin Meng wrote:
->> When reading a non-existent CSR QEMU should raise illegal instruction
->> exception, but currently it just exits due to the g_assert() check.
->>
-> I verified that 'csrr t3, 0x4' in user space didn't cause qemu exit but
-> raised illegal instruction after applying this patch.
+On 4/11/23 20:35, Daniel Henrique Barboza wrote:
+> This new abstract type will be used to differentiate between static and
+> non-static CPUs in query-cpu-definitions.
+> 
+> All generic CPUs were changed to be of this type. Named CPUs are kept as
+> TYPE_RISCV_CPU and will still be considered static.
+> 
+> This is the output of query-cpu-definitions after this change for the
+> riscv64 target:
+> 
+> $ ./build/qemu-system-riscv64 -S -M virt -display none -qmp stdio
+> {"QMP": {"version": (...)}
+> {"execute": "qmp_capabilities", "arguments": {"enable": ["oob"]}}
+> {"return": {}}
+> {"execute": "query-cpu-definitions"}
+> {"return": [
+> {"name": "rv64", "typename": "rv64-riscv-cpu", "static": false, "deprecated": false},
+> {"name": "sifive-e51", "typename": "sifive-e51-riscv-cpu", "static": true, "deprecated": false},
+> {"name": "any", "typename": "any-riscv-cpu", "static": false, "deprecated": false},
+> {"name": "x-rv128", "typename": "x-rv128-riscv-cpu", "static": false, "deprecated": false},
+> {"name": "shakti-c", "typename": "shakti-c-riscv-cpu", "static": true, "deprecated": false},
+> {"name": "thead-c906", "typename": "thead-c906-riscv-cpu", "static": true, "deprecated": false},
+> {"name": "sifive-u54", "typename": "sifive-u54-riscv-cpu", "static": true, "deprecated": false}
+> ]}
+> 
+> Suggested-by: Richard Henderson<richard.henderson@linaro.org>
+> Signed-off-by: Daniel Henrique Barboza<dbarboza@ventanamicro.com>
+> ---
+>   target/riscv/cpu-qom.h        |  2 +-
+>   target/riscv/cpu.c            | 20 ++++++++++++++++----
+>   target/riscv/riscv-qmp-cmds.c |  4 ++++
+>   3 files changed, 21 insertions(+), 5 deletions(-)
 
-Good candidate to add in tests/tcg/riscv64/ :)
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
->> This actually reverts commit 0ee342256af9205e7388efdf193a6d8f1ba1a617,
->> Some comments are also added to indicate that predicate() must be
->> provided for an implemented CSR.
->>
->> Reported-by: Fei Wu <fei2.wu@intel.com>
->> Signed-off-by: Bin Meng <bmeng@tinylab.org>
->> ---
->>
->>   target/riscv/csr.c | 11 +++++++++--
->>   1 file changed, 9 insertions(+), 2 deletions(-)
-
+r~
 
