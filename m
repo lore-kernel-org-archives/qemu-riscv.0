@@ -1,77 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pmYtf-00062x-RE
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Apr 2023 07:44:19 -0400
+	id 1pmYtg-00067g-B7
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Apr 2023 07:44:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pmYt9-0004m8-DL
+ id 1pmYt8-0004kq-Ai
  for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 07:43:47 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pmYt5-0002Or-UE
- for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 07:43:46 -0400
-Received: by mail-wr1-x429.google.com with SMTP id e7so493776wrc.12
+ id 1pmYt5-0002N2-U4
+ for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 07:43:45 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id d9so10668327wrb.11
  for <qemu-riscv@nongnu.org>; Wed, 12 Apr 2023 04:43:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1681299821; x=1683891821;
+ d=linaro.org; s=google; t=1681299822; x=1683891822;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vFpmN4l+aiQZzHkMQF0Is1Gbr8TTg8AJfI2hz+TEgNU=;
- b=nubkifGATpQrBCVy4n7E0dP6pAc1PkiFqkKd3VkYpkLWWgA+z6/AHXD6SsbJB9QUxd
- 0Od0dfFs161Qb7JD776X970PESx5q24GgMNOZTlVNSSGnoQPm334rfc1Hy/dHrmsn09V
- flmFoJ6Ztu4yqFM0wwe2JXdvgWLEEG92aj+3anO/UjpqIO3Q0K8POx/UZM0X9/kIrEc4
- f6Od1BxtJgiCC0yKN8PA/td1VNllIFEOve8KI39zWjkdHHg25XOYj6VTub8559IXCIB1
- uKnG3YaK3AsAq0sGOTQrwDCY2NLkE3kQl4Zgn1lQQ5bQoW8Klx8pSq26bRKd5OC1Xm+A
- 5rGA==
+ bh=nYIzXxaKlE7pVBf36j8eV1KDqBsqyyZsO57pOhE6S3s=;
+ b=ONqpGGePtrPAOKWUp+MMlXKvAAooORMK36G0DfY8L2Lp+ZSrKpcsQ2pvjEmclVEubR
+ IaIlilj7qIVZ9slBvCt+e8nwPhQ1RM15ChtOwtvsPEqjypRxJoSdjHV2E26sY/se4Jp1
+ okiN+cCb7Be6FCD5MJlhnSNh6L5CUE4NsDSyL02NFqjsOsit8q/MPNwFE0+ieVuZri6l
+ A/JkYWgMyOyTTJa0/NvxCOVCNyQli0blYlcYhoQ7WrqAdJ+umHlBIfr8w68HV5wagZpM
+ Wh7knq6ENbQtJsuHrsUx/8gr8rhyz4/nO70sRIfeG1Uv4SIZkjZS3S+BzflAHi4V/N8u
+ uyQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681299821; x=1683891821;
+ d=1e100.net; s=20210112; t=1681299822; x=1683891822;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vFpmN4l+aiQZzHkMQF0Is1Gbr8TTg8AJfI2hz+TEgNU=;
- b=hodMAuZ1dksvSKO0l/kt/bweuV7307LzXlm85YOXUyuuOHlOHAQwjNK5HeB5J7yfK+
- IYKeogDLuqAWiB3AtecD6LN7OfLbJpWHb64CG8wIuCv2UlJTyrp22SL5gxdjwb1LFOfg
- jCgkgDOUs5TvTYh4lmskk7P8Mz1tQIHmiZ98A35zpqCtSIKuxMGNWVYvhj6qCB/3MiT9
- c5MTLTAv0CrG4tqH+P6bwoe/wBTeudIRs/IIFYuPApqonr6pwbseNObtGf4w7Jr/6yxy
- X9qcVapPwUYEutPS26lRTVdK80KphtqCThP4/m/PXYpmXBRB4cz7E77kdOdO0A4bgmBM
- /9BA==
-X-Gm-Message-State: AAQBX9e5s6wg5mjw6MM3qK0wFXyB43E5QqTs3D1dpf+2daneJF5KDXme
- oYTELl9jWYdHQOq+99fuLv/7EA==
-X-Google-Smtp-Source: AKy350b+ahkWuQAw9FZv7AL7NFyGVT3t587ErzSTQFFa+wBqbH0GFUV3GHovjV1NBoRHYBzD2umlGQ==
-X-Received: by 2002:adf:dfcc:0:b0:2ef:af46:1278 with SMTP id
- q12-20020adfdfcc000000b002efaf461278mr11347284wrn.10.1681299821156; 
- Wed, 12 Apr 2023 04:43:41 -0700 (PDT)
+ bh=nYIzXxaKlE7pVBf36j8eV1KDqBsqyyZsO57pOhE6S3s=;
+ b=GUebEK5duWmzH0I7gHAggptM32VAA26tVpBvupNOnKmpUcXtQWL+gnOIVQg/9bl8Oz
+ y9ZPzMC2HMUMAYMyY8lfW3CJRxRmSXa6iIKrGLdWWuD8VjJdmuAK6mXbM6PK5fhSpSTr
+ Xhg1ZxU8Pj1oK7YPShCpKMgZuYzvS0Y1sqye72EnefDKVUYQBBaiyt7qnhOjYXlIXBMS
+ BpMYXZr3xwiafuYmpuyu9Pic7QzCnbzLo2PLakAt94xptre/rtxLce8Zdh4P2a3z/7vu
+ bibmbisRMRrGnfbk6K2RqktxAd70+O9bBIikGwlyrbZkCOYyQTvZC7b3Cgy5KwOmL5r5
+ HelA==
+X-Gm-Message-State: AAQBX9d4JCDNArIHo5ojDPXymqT+5r7+nTV/jx3/xb4kZy8CCuurl2HV
+ BifCeAe8+ACHobeSLvC2wi6PJXyg5Siu3OXqRdZiFN9m
+X-Google-Smtp-Source: AKy350ZKkbH7wXDu8y2Wni6JAVagqG7zb/Dzulmic22b8y+OJKUqI4vqXZUU9+TbOngZc6Sj5JMc1Q==
+X-Received: by 2002:adf:fa02:0:b0:2f2:7adf:3c67 with SMTP id
+ m2-20020adffa02000000b002f27adf3c67mr3858978wrr.61.1681299822045; 
+ Wed, 12 Apr 2023 04:43:42 -0700 (PDT)
 Received: from stoup.hotel.gast (ip-037-024-010-236.um08.pools.vodafone-ip.de.
  [37.24.10.236]) by smtp.gmail.com with ESMTPSA id
- k9-20020a5d4289000000b002d21379bcabsm16980826wrq.110.2023.04.12.04.43.40
+ k9-20020a5d4289000000b002d21379bcabsm16980826wrq.110.2023.04.12.04.43.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Apr 2023 04:43:40 -0700 (PDT)
+ Wed, 12 Apr 2023 04:43:41 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: alistair23@gmail.com, qemu-riscv@nongnu.org, Fei Wu <fei2.wu@intel.com>,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+Cc: alistair23@gmail.com, qemu-riscv@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liweiwei@iscas.ac.cn>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v7 07/25] target/riscv: Reduce overhead of MSTATUS_SUM change
-Date: Wed, 12 Apr 2023 13:43:15 +0200
-Message-Id: <20230412114333.118895-8-richard.henderson@linaro.org>
+Subject: [PATCH v7 08/25] accel/tcg: Add cpu_ld*_code_mmu
+Date: Wed, 12 Apr 2023 13:43:16 +0200
+Message-Id: <20230412114333.118895-9-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230412114333.118895-1-richard.henderson@linaro.org>
 References: <20230412114333.118895-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,181 +85,166 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 12 Apr 2023 11:43:48 -0000
 
-From: Fei Wu <fei2.wu@intel.com>
+At least RISC-V has the need to be able to perform a read
+using execute permissions, outside of translation.
+Add helpers to facilitate this.
 
-Kernel needs to access user mode memory e.g. during syscalls, the window
-is usually opened up for a very limited time through MSTATUS.SUM, the
-overhead is too much if tlb_flush() gets called for every SUM change.
-
-This patch creates a separate MMU index for S+SUM, so that it's not
-necessary to flush tlb anymore when SUM changes. This is similar to how
-ARM handles Privileged Access Never (PAN).
-
-Result of 'pipe 10' from unixbench boosts from 223656 to 1705006. Many
-other syscalls benefit a lot from this too.
-
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Fei Wu <fei2.wu@intel.com>
-Message-Id: <20230324054154.414846-3-fei2.wu@intel.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Tested-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Message-Id: <20230325105429.1142530-8-richard.henderson@linaro.org>
+Message-Id: <20230325105429.1142530-9-richard.henderson@linaro.org>
 ---
- target/riscv/cpu.h                      |  2 --
- target/riscv/internals.h                | 14 ++++++++++++++
- target/riscv/cpu_helper.c               | 17 +++++++++++++++--
- target/riscv/csr.c                      |  3 +--
- target/riscv/op_helper.c                |  5 +++--
- target/riscv/insn_trans/trans_rvh.c.inc |  4 ++--
- 6 files changed, 35 insertions(+), 10 deletions(-)
+ include/exec/cpu_ldst.h |  9 +++++++
+ accel/tcg/cputlb.c      | 48 ++++++++++++++++++++++++++++++++++
+ accel/tcg/user-exec.c   | 58 +++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 115 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 9b971ee1b0..6239c99f4c 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -629,8 +629,6 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *env,
- target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
- void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
- 
--#define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
--
- #include "exec/cpu-all.h"
- 
- FIELD(TB_FLAGS, MEM_IDX, 0, 3)
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 5620fbffb6..b55152a7dc 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -21,6 +21,20 @@
- 
- #include "hw/registerfields.h"
- 
-+/*
-+ * The current MMU Modes are:
-+ *  - U                 0b000
-+ *  - S                 0b001
-+ *  - S+SUM             0b010
-+ *  - M                 0b011
-+ *  - HLV/HLVX/HSV adds 0b100
-+ */
-+#define MMUIdx_U            0
-+#define MMUIdx_S            1
-+#define MMUIdx_S_SUM        2
-+#define MMUIdx_M            3
-+#define MMU_HYP_ACCESS_BIT  (1 << 2)
-+
- /* share data between vector helpers and decode code */
- FIELD(VDATA, VM, 0, 1)
- FIELD(VDATA, LMUL, 1, 3)
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 36d6e422d7..174a77706b 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -21,6 +21,7 @@
- #include "qemu/log.h"
- #include "qemu/main-loop.h"
- #include "cpu.h"
-+#include "internals.h"
- #include "pmu.h"
- #include "exec/exec-all.h"
- #include "instmap.h"
-@@ -36,7 +37,19 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
- #ifdef CONFIG_USER_ONLY
-     return 0;
- #else
--    return env->priv;
-+    if (ifetch) {
-+        return env->priv;
-+    }
-+
-+    /* All priv -> mmu_idx mapping are here */
-+    int mode = env->priv;
-+    if (mode == PRV_M && get_field(env->mstatus, MSTATUS_MPRV)) {
-+        mode = get_field(env->mstatus, MSTATUS_MPP);
-+    }
-+    if (mode == PRV_S && get_field(env->mstatus, MSTATUS_SUM)) {
-+        return MMUIdx_S_SUM;
-+    }
-+    return mode;
+diff --git a/include/exec/cpu_ldst.h b/include/exec/cpu_ldst.h
+index 09b55cc0ee..c141f0394f 100644
+--- a/include/exec/cpu_ldst.h
++++ b/include/exec/cpu_ldst.h
+@@ -445,6 +445,15 @@ static inline CPUTLBEntry *tlb_entry(CPUArchState *env, uintptr_t mmu_idx,
+ # define cpu_stq_mmu          cpu_stq_le_mmu
  #endif
+ 
++uint8_t cpu_ldb_code_mmu(CPUArchState *env, abi_ptr addr,
++                         MemOpIdx oi, uintptr_t ra);
++uint16_t cpu_ldw_code_mmu(CPUArchState *env, abi_ptr addr,
++                          MemOpIdx oi, uintptr_t ra);
++uint32_t cpu_ldl_code_mmu(CPUArchState *env, abi_ptr addr,
++                          MemOpIdx oi, uintptr_t ra);
++uint64_t cpu_ldq_code_mmu(CPUArchState *env, abi_ptr addr,
++                          MemOpIdx oi, uintptr_t ra);
++
+ uint32_t cpu_ldub_code(CPUArchState *env, abi_ptr addr);
+ uint32_t cpu_lduw_code(CPUArchState *env, abi_ptr addr);
+ uint32_t cpu_ldl_code(CPUArchState *env, abi_ptr addr);
+diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+index e984a98dc4..e62c8f3c3f 100644
+--- a/accel/tcg/cputlb.c
++++ b/accel/tcg/cputlb.c
+@@ -2768,3 +2768,51 @@ uint64_t cpu_ldq_code(CPUArchState *env, abi_ptr addr)
+     MemOpIdx oi = make_memop_idx(MO_TEUQ, cpu_mmu_index(env, true));
+     return full_ldq_code(env, addr, oi, 0);
+ }
++
++uint8_t cpu_ldb_code_mmu(CPUArchState *env, abi_ptr addr,
++                         MemOpIdx oi, uintptr_t retaddr)
++{
++    return full_ldub_code(env, addr, oi, retaddr);
++}
++
++uint16_t cpu_ldw_code_mmu(CPUArchState *env, abi_ptr addr,
++                          MemOpIdx oi, uintptr_t retaddr)
++{
++    MemOp mop = get_memop(oi);
++    int idx = get_mmuidx(oi);
++    uint16_t ret;
++
++    ret = full_lduw_code(env, addr, make_memop_idx(MO_TEUW, idx), retaddr);
++    if ((mop & MO_BSWAP) != MO_TE) {
++        ret = bswap16(ret);
++    }
++    return ret;
++}
++
++uint32_t cpu_ldl_code_mmu(CPUArchState *env, abi_ptr addr,
++                          MemOpIdx oi, uintptr_t retaddr)
++{
++    MemOp mop = get_memop(oi);
++    int idx = get_mmuidx(oi);
++    uint32_t ret;
++
++    ret = full_ldl_code(env, addr, make_memop_idx(MO_TEUL, idx), retaddr);
++    if ((mop & MO_BSWAP) != MO_TE) {
++        ret = bswap32(ret);
++    }
++    return ret;
++}
++
++uint64_t cpu_ldq_code_mmu(CPUArchState *env, abi_ptr addr,
++                          MemOpIdx oi, uintptr_t retaddr)
++{
++    MemOp mop = get_memop(oi);
++    int idx = get_mmuidx(oi);
++    uint64_t ret;
++
++    ret = full_ldq_code(env, addr, make_memop_idx(MO_TEUQ, idx), retaddr);
++    if ((mop & MO_BSWAP) != MO_TE) {
++        ret = bswap64(ret);
++    }
++    return ret;
++}
+diff --git a/accel/tcg/user-exec.c b/accel/tcg/user-exec.c
+index a7e0c3e2f4..fc597a010d 100644
+--- a/accel/tcg/user-exec.c
++++ b/accel/tcg/user-exec.c
+@@ -1219,6 +1219,64 @@ uint64_t cpu_ldq_code(CPUArchState *env, abi_ptr ptr)
+     return ret;
  }
  
-@@ -588,7 +601,7 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
++uint8_t cpu_ldb_code_mmu(CPUArchState *env, abi_ptr addr,
++                         MemOpIdx oi, uintptr_t ra)
++{
++    void *haddr;
++    uint8_t ret;
++
++    haddr = cpu_mmu_lookup(env, addr, oi, ra, MMU_INST_FETCH);
++    ret = ldub_p(haddr);
++    clear_helper_retaddr();
++    return ret;
++}
++
++uint16_t cpu_ldw_code_mmu(CPUArchState *env, abi_ptr addr,
++                          MemOpIdx oi, uintptr_t ra)
++{
++    void *haddr;
++    uint16_t ret;
++
++    haddr = cpu_mmu_lookup(env, addr, oi, ra, MMU_INST_FETCH);
++    ret = lduw_p(haddr);
++    clear_helper_retaddr();
++    if (get_memop(oi) & MO_BSWAP) {
++        ret = bswap16(ret);
++    }
++    return ret;
++}
++
++uint32_t cpu_ldl_code_mmu(CPUArchState *env, abi_ptr addr,
++                          MemOpIdx oi, uintptr_t ra)
++{
++    void *haddr;
++    uint32_t ret;
++
++    haddr = cpu_mmu_lookup(env, addr, oi, ra, MMU_INST_FETCH);
++    ret = ldl_p(haddr);
++    clear_helper_retaddr();
++    if (get_memop(oi) & MO_BSWAP) {
++        ret = bswap32(ret);
++    }
++    return ret;
++}
++
++uint64_t cpu_ldq_code_mmu(CPUArchState *env, abi_ptr addr,
++                          MemOpIdx oi, uintptr_t ra)
++{
++    void *haddr;
++    uint64_t ret;
++
++    validate_memop(oi, MO_BEUQ);
++    haddr = cpu_mmu_lookup(env, addr, oi, ra, MMU_DATA_LOAD);
++    ret = ldq_p(haddr);
++    clear_helper_retaddr();
++    if (get_memop(oi) & MO_BSWAP) {
++        ret = bswap64(ret);
++    }
++    return ret;
++}
++
+ #include "ldst_common.c.inc"
  
- bool riscv_cpu_two_stage_lookup(int mmu_idx)
- {
--    return mmu_idx & TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-+    return mmu_idx & MMU_HYP_ACCESS_BIT;
- }
- 
- int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts)
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 4268828dc4..124be448dc 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1270,8 +1270,7 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-     val = legalize_mpp(env, get_field(mstatus, MSTATUS_MPP), val);
- 
-     /* flush tlb on mstatus fields that affect VM */
--    if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
--            MSTATUS_MPRV | MSTATUS_SUM)) {
-+    if ((val ^ mstatus) & (MSTATUS_MXR | MSTATUS_MPV)) {
-         tlb_flush(env_cpu(env));
-     }
-     mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index bd21c6eeef..00bdf77f32 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -20,6 +20,7 @@
- 
- #include "qemu/osdep.h"
- #include "cpu.h"
-+#include "internals.h"
- #include "qemu/main-loop.h"
- #include "exec/exec-all.h"
- #include "exec/helper-proto.h"
-@@ -428,14 +429,14 @@ void helper_hyp_gvma_tlb_flush(CPURISCVState *env)
- 
- target_ulong helper_hyp_hlvx_hu(CPURISCVState *env, target_ulong address)
- {
--    int mmu_idx = cpu_mmu_index(env, true) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-+    int mmu_idx = cpu_mmu_index(env, true) | MMU_HYP_ACCESS_BIT;
- 
-     return cpu_lduw_mmuidx_ra(env, address, mmu_idx, GETPC());
- }
- 
- target_ulong helper_hyp_hlvx_wu(CPURISCVState *env, target_ulong address)
- {
--    int mmu_idx = cpu_mmu_index(env, true) | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-+    int mmu_idx = cpu_mmu_index(env, true) | MMU_HYP_ACCESS_BIT;
- 
-     return cpu_ldl_mmuidx_ra(env, address, mmu_idx, GETPC());
- }
-diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
-index 4b730cd492..ae98b45e5e 100644
---- a/target/riscv/insn_trans/trans_rvh.c.inc
-+++ b/target/riscv/insn_trans/trans_rvh.c.inc
-@@ -42,7 +42,7 @@ static bool do_hlv(DisasContext *ctx, arg_r2 *a, MemOp mop)
-     if (check_access(ctx)) {
-         TCGv dest = dest_gpr(ctx, a->rd);
-         TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
--        int mem_idx = ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-+        int mem_idx = ctx->mem_idx | MMU_HYP_ACCESS_BIT;
-         tcg_gen_qemu_ld_tl(dest, addr, mem_idx, mop);
-         gen_set_gpr(ctx, a->rd, dest);
-     }
-@@ -89,7 +89,7 @@ static bool do_hsv(DisasContext *ctx, arg_r2_s *a, MemOp mop)
-     if (check_access(ctx)) {
-         TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-         TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
--        int mem_idx = ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-+        int mem_idx = ctx->mem_idx | MMU_HYP_ACCESS_BIT;
-         tcg_gen_qemu_st_tl(data, addr, mem_idx, mop);
-     }
-     return true;
+ /*
 -- 
 2.34.1
 
