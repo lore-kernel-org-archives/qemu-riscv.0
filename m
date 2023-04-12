@@ -1,73 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pmWbg-0007Cx-9C
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Apr 2023 05:17:36 -0400
+	id 1pmXPB-0007N7-3Q
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Apr 2023 06:08:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1pmWbe-0007Ch-Pp
- for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 05:17:34 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pmXP9-0007Mg-65
+ for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 06:08:43 -0400
+Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1pmWbR-0004j9-5v
- for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 05:17:34 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id gw13so6083871wmb.3
- for <qemu-riscv@nongnu.org>; Wed, 12 Apr 2023 02:17:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pmXP7-0006bo-C7
+ for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 06:08:42 -0400
+Received: by mail-wr1-x432.google.com with SMTP id v27so1088317wra.13
+ for <qemu-riscv@nongnu.org>; Wed, 12 Apr 2023 03:08:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112; t=1681291038; x=1683883038; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LGpSnkBJ4zhtllDlsdgv+XdCiU1d9KOkSdJhsZZctEQ=;
- b=fOs2MMJ6Q7qjToXaPLq5eUZwBzWFpsW4rgN9Vxh224sdufPPCrP53BTbXveVZyI+SO
- Bfsl4R03y8oMqMFORO9iZerXlUARhHjjZYP/f9MbWnDRjhBQt14/KY5N4LMIUKYmL4Uq
- AxJ6dc5BCnHCvJJwRKqXtxPmTkZNjRjr7SGmAhrQ5eFFxTkB3xGZeBX10NJjsYmbnTx1
- ehSD3Neweo8HZAtzydwf8bKCNxJ+HYx9uhDTzh1nyjse/zjL1dR6m8POP82cbl/oUKzE
- fIFH2Qa7Ngp2ICdDzy4CSZ/jT42Q9S7r/HNv/mJcbfn9UqbHx1fVh+IPNRS5vnd5QF3j
- cJJQ==
+ d=linaro.org; s=google; t=1681294119; x=1683886119;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Jwh6tjaX95EY2R1QvZ0DUQ4zm0KmrHEBJYJyQfYQibE=;
+ b=Mej3x+PEspNXyW/TFDL8SonT7XWXTpJAdP3gU5eP48on4V3zGprT1P+nklP2XVTq+A
+ jAo+nXQpsLFPmb1Iymr/o9FoTI/idgWTEYkq3K3JuJSgs6Zs7kmLPFD4DITT+ompvqw4
+ ZK2UbblnzEHzrpqUqMR8dF7Hkr3thQsr80Wa6hcIxYfWTLn8Lx9kLFtRAEnZJ1LcBDJp
+ OHBQMTxzj6k/SF4oy15OS4zrvwc3Pwfil6XDhrx5JJAWsaC37Cxcbm3LbfyAvs6+UFMh
+ 0HE8aa22lccZ32gn3p5gaNyNg+40706yagE0lns+LTSrVtlBTkv7aOViO24YEBHu4nw0
+ S9HQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681291038; x=1683883038;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LGpSnkBJ4zhtllDlsdgv+XdCiU1d9KOkSdJhsZZctEQ=;
- b=HfWz6BouMxhZxpfGXMxcOaBlIfht91a7+xLYm8p8tN5s+vLw5MWshrjFuZPiViUDhS
- EEz9tA/FcPRGax6XQD7M3sMjN7ojzzw/v+w4KjPhPdhAy3KgWdZwpY1aLm9BUMzVvQBn
- x4sHZSboQrl1910PpWP3M+M/5lMZ2ipd15c+6O4F13Ch52wQrtRH0o8rs2QQWsskYdFO
- u9+nq8mQ8tiiJSNlPtW1+n0EM+XbZ7/BPhD+I7jmpUCO/MuOAE6xULtpApd5bR6dpB7q
- hCf3wZmL2A8CFOfED3ex5EjHqn3R5jF7ftjEZBgBx/mFeO6KHKfxN9kM74IUhsEumPCO
- xHxg==
-X-Gm-Message-State: AAQBX9cwt/0Cs/8FQ6v4sxe+E6APepi8nvRHTYA1hleCQmWKmyuuIFrP
- cnBZ2bAeS+mbgNRKlxAQjAsVQw==
-X-Google-Smtp-Source: AKy350ZaSHVzlgHTmWDXxlLFU90DnFK09dj58Wf2yIKeQ42MhmQUgGlweo0od2oNn09h4VV29EjBfA==
-X-Received: by 2002:a1c:f609:0:b0:3ed:3d89:1b4b with SMTP id
- w9-20020a1cf609000000b003ed3d891b4bmr12129585wmc.8.1681291038507; 
- Wed, 12 Apr 2023 02:17:18 -0700 (PDT)
-Received: from alex-rivos.home
- (amontpellier-656-1-456-62.w92-145.abo.wanadoo.fr. [92.145.124.62])
+ d=1e100.net; s=20210112; t=1681294119; x=1683886119;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Jwh6tjaX95EY2R1QvZ0DUQ4zm0KmrHEBJYJyQfYQibE=;
+ b=oVjyfcQL2rU3yQ2vv22LInn/wY2X3kkoi9JHEi2BONJDr36YjeTQzSs7DBCd7dxF7K
+ 5Si9XycxKNNyFp/g4oK+ZdxNBxwScf7d5/KF9GHaortLfDxRLLTOnAGDNwmNz3oLqG6Q
+ StUFBzyWSL6xCjDLDZR5xGaFdDAbofNsKsbwCLDqG9cSuyxaEtv2kNv4jSMwUAjo077X
+ xztxGlKY1PPFTZioMcV57Dosjf4KhWTIttxUqiIqlxuB1Ft+57dbkDUdvBzQCVmKr98k
+ rYe1d+XmNRHl00AjqbsK3rxyNqlV3HuduEJ5nNbpwDCydkRIFl7iH3snrCec63eZc/4A
+ xY2g==
+X-Gm-Message-State: AAQBX9c0bQU6f4ljv5TDUe79F1CvgiTBQ+ydmtdiVSuoo3OuE0cB25kF
+ ckn7FQfEx4lpWPNEdIEtkqf6Hw==
+X-Google-Smtp-Source: AKy350YmIvttlWNTicrzj4NhRuMh7muqShdQljEPmwUQgIzcnBCsKL3NJJHMBkEXJQ5A/GYjq6bJXQ==
+X-Received: by 2002:a5d:6451:0:b0:2ef:ac55:1e92 with SMTP id
+ d17-20020a5d6451000000b002efac551e92mr4430090wrw.25.1681294119580; 
+ Wed, 12 Apr 2023 03:08:39 -0700 (PDT)
+Received: from [192.168.69.115] ([176.187.216.226])
  by smtp.gmail.com with ESMTPSA id
- s5-20020a7bc385000000b003edcc2223c6sm1668271wmj.28.2023.04.12.02.17.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Apr 2023 02:17:18 -0700 (PDT)
-From: Alexandre Ghiti <alexghiti@rivosinc.com>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Alexandre Ghiti <alexghiti@rivosinc.com>,
- Andrea Parri <andrea@rivosinc.com>
-Subject: [PATCH] riscv: Raise an exception if pte reserved bits are not cleared
-Date: Wed, 12 Apr 2023 11:17:16 +0200
-Message-Id: <20230412091716.126601-1-alexghiti@rivosinc.com>
-X-Mailer: git-send-email 2.37.2
+ y16-20020a05600c365000b003f049a42689sm1820552wmq.25.2023.04.12.03.08.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 12 Apr 2023 03:08:39 -0700 (PDT)
+Message-ID: <8b6684f0-6ee1-5446-7937-5d466f6baca3@linaro.org>
+Date: Wed, 12 Apr 2023 12:08:37 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=alexghiti@rivosinc.com; helo=mail-wm1-x32b.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.9.1
+Subject: Re: [PATCH] target/riscv: Restore the predicate() NULL check behavior
+Content-Language: en-US
+To: "Wu, Fei" <fei2.wu@intel.com>, Bin Meng <bmeng@tinylab.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20230411090211.3039186-1-bmeng@tinylab.org>
+ <b0d06bc4-d8f1-30ff-9bc1-252c7f15df89@intel.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <b0d06bc4-d8f1-30ff-9bc1-252c7f15df89@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::432;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x432.google.com
+X-Spam_score_int: -42
+X-Spam_score: -4.3
+X-Spam_bar: ----
+X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.17,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -81,48 +86,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2023 09:17:35 -0000
+X-List-Received-Date: Wed, 12 Apr 2023 10:08:43 -0000
 
-As per the specification, in 64-bit, if any of the pte reserved bits 60-54
-is set, an exception should be triggered (see 4.4.1, "Addressing and Memory
-Protection"), so implement this behaviour in the address translation process.
+On 12/4/23 03:04, Wu, Fei wrote:
+> On 4/11/2023 5:02 PM, Bin Meng wrote:
+>> When reading a non-existent CSR QEMU should raise illegal instruction
+>> exception, but currently it just exits due to the g_assert() check.
+>>
+> I verified that 'csrr t3, 0x4' in user space didn't cause qemu exit but
+> raised illegal instruction after applying this patch.
 
-Reported-by: Andrea Parri <andrea@rivosinc.com>
-Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
----
- target/riscv/cpu_bits.h   | 1 +
- target/riscv/cpu_helper.c | 5 +++++
- 2 files changed, 6 insertions(+)
+Good candidate to add in tests/tcg/riscv64/ :)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index fca7ef0cef..8d9ba2ce11 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -640,6 +640,7 @@ typedef enum {
- #define PTE_SOFT            0x300 /* Reserved for Software */
- #define PTE_PBMT            0x6000000000000000ULL /* Page-based memory types */
- #define PTE_N               0x8000000000000000ULL /* NAPOT translation */
-+#define PTE_RESERVED        0x1FC0000000000000ULL /* Reserved bits */
- #define PTE_ATTR            (PTE_N | PTE_PBMT) /* All attributes bits */
- 
- /* Page table PPN shift amount */
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index f88c503cf4..39c323a865 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -936,6 +936,11 @@ restart:
-             return TRANSLATE_FAIL;
-         }
- 
-+        /* PTE reserved bits must be cleared otherwise an exception is raised */
-+        if (riscv_cpu_mxl(env) == MXL_RV64 && (pte & PTE_RESERVED)) {
-+            return TRANSLATE_FAIL;
-+        }
-+
-         bool pbmte = env->menvcfg & MENVCFG_PBMTE;
-         bool hade = env->menvcfg & MENVCFG_HADE;
- 
--- 
-2.37.2
+>> This actually reverts commit 0ee342256af9205e7388efdf193a6d8f1ba1a617,
+>> Some comments are also added to indicate that predicate() must be
+>> provided for an implemented CSR.
+>>
+>> Reported-by: Fei Wu <fei2.wu@intel.com>
+>> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+>> ---
+>>
+>>   target/riscv/csr.c | 11 +++++++++--
+>>   1 file changed, 9 insertions(+), 2 deletions(-)
 
 
