@@ -1,70 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pmQcy-0006ag-8q
-	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 22:54:32 -0400
+	id 1pmQe1-0007HV-IB
+	for mharc-qemu-riscv@gnu.org; Tue, 11 Apr 2023 22:55:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pmQcs-0006Yn-Sb; Tue, 11 Apr 2023 22:54:26 -0400
-Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pmQcq-0003VH-Ny; Tue, 11 Apr 2023 22:54:26 -0400
-Received: by mail-vs1-xe2a.google.com with SMTP id b17so9304360vsj.7;
- Tue, 11 Apr 2023 19:54:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1681268063; x=1683860063;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Lom4CntLc48U0/P8ePsDOLx5/IvQ4kCEgYBdDIQ7USU=;
- b=FXlbq8TvnO+YMnkg6mO0NhobI6S8eISdtFUHlCYgfRziCxhd4EsE5FrZ4KybR79rEd
- LuO/PL7T1eCjpz7L/vOgaTlzKWoAsYHmR8VwhRqymV/dclMtNgnObJNrdNn6nAAaRCTI
- Hhr8cgBBqOPEihsjZ/gA/YEc2jTAQ80K8oUH2WPKldYDGyhDpG0eTdffxP5ywGE/xdVJ
- REqo3ogy6trO8nkQW4+lLoa6V3Mk6jH/ETsknKmov1EhA4qFegrGWvlENO79s3Tgiwfm
- b2t0RWf/80ovz1a4SuSj/vCHDElPSAdCcaQpqL5GEwbinrysIA6AZcyOS/yWMTkHIU8L
- 7i0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681268063; x=1683860063;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Lom4CntLc48U0/P8ePsDOLx5/IvQ4kCEgYBdDIQ7USU=;
- b=W7KljgejT7CaOlMmMAoi8ScIh15GFen12MBNirtbJFMRX5J9PfxoZ5oXrjh5Yw5T96
- 0P+eeUmOC8oKSOqUY2pDNTJdtCATXB6Zj7PWAU1cqZCr+feQgroz8kHRkbYC4akLU6tX
- rISUhpYgTa5WfxUIamwWkIFxF8VD8Ti8BDXn8PBbGJFly3YRhd1h5LbUE/+EwZYHKTwO
- ADsVUxY7XqAd1iyeyCg93pa39RtT54XD0uncxMaL0aqQc8LJyMTVsLQubHDgoVFASjm+
- 3rgwcBB0ec56leX7koE3UrcE6uI+YJjYbxhFbY+/MHc2cqJ05zbTbkAyVyVwa+Z5yRqB
- Oibw==
-X-Gm-Message-State: AAQBX9eDEMrO9q0cDbckXHrVyaWF+LB3kO3H9T7VLTp5KGW7GQgN1eZa
- ekHcgir0pIHwmXhVVnDdE20Aw0ne6yJAWlT2LDY=
-X-Google-Smtp-Source: AKy350bkBW0jO5ZNJicDxf/vdLsD7AXXG6DE/yO+5EBuGKsvRjqHVsp6pCyApONlkK/jIyIeMEvPQhRYYo3EZm3Yhps=
-X-Received: by 2002:a67:d60f:0:b0:42c:8f72:623d with SMTP id
- n15-20020a67d60f000000b0042c8f72623dmr813415vsj.3.1681268063217; Tue, 11 Apr
- 2023 19:54:23 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pmQdz-0007HI-Hp; Tue, 11 Apr 2023 22:55:35 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pmQdw-0003xG-8s; Tue, 11 Apr 2023 22:55:35 -0400
+Received: from [192.168.0.120] (unknown [180.165.241.15])
+ by APP-05 (Coremail) with SMTP id zQCowACnrc2WHTZksWVBEQ--.60018S2;
+ Wed, 12 Apr 2023 10:55:19 +0800 (CST)
+Message-ID: <0f2ebe23-750c-26eb-9d3e-920c80a3c222@iscas.ac.cn>
+Date: Wed, 12 Apr 2023 10:55:18 +0800
 MIME-Version: 1.0
-References: <20230406101559.39632-1-chenyi2000@zju.edu.cn>
-In-Reply-To: <20230406101559.39632-1-chenyi2000@zju.edu.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 12 Apr 2023 12:53:57 +1000
-Message-ID: <CAKmqyKMdmmFhP15vMDipyJcv7DmOow4u9aYtcN4Ru6aw=0pFCw@mail.gmail.com>
-Subject: Re: [PATCH v5] target/riscv: fix H extension TVM trap
-To: Yi Chen <chenyi2000@zju.edu.cn>
-Cc: qemu-devel@nongnu.org, Weiwei Li <liweiwei@iscas.ac.cn>, 
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Cc: liweiwei@iscas.ac.cn, richard.henderson@linaro.org, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Subject: Re: [PATCH v12 02/10] target/riscv: add support for Zca extension
+Content-Language: en-US
+To: Alistair Francis <alistair23@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+References: <20230307081403.61950-1-liweiwei@iscas.ac.cn>
+ <20230307081403.61950-3-liweiwei@iscas.ac.cn>
+ <0d3b3e7f-3b9a-e08c-dd77-3d5933977701@ventanamicro.com>
+ <CAKmqyKP6Omm8HypeRps0xCaZXxw+VXsT0KY2ONtfOZmjR9WnDA@mail.gmail.com>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+In-Reply-To: <CAKmqyKP6Omm8HypeRps0xCaZXxw+VXsT0KY2ONtfOZmjR9WnDA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: zQCowACnrc2WHTZksWVBEQ--.60018S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxuw4rWw4rAF1DWrW5KF1DAwb_yoW7Kw1DpF
+ 4xCF12kr4kJrySyFyIgr4jqr1Utr4S9FWxJwn0gw1rArZxJrWYqrWkKrWSgFyDZFs5Wr4j
+ 9F4qyFn3ZayYyaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9F14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F
+ 4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+ 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
+ 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
+ n2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFV
+ Cjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWl
+ x4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r
+ 1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_
+ JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcS
+ sGvfC2KfnxnUUI43ZEXa7VUbXdbUUUUUU==
+X-Originating-IP: [180.165.241.15]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -63
+X-Spam_score: -6.4
+X-Spam_bar: ------
+X-Spam_report: (-6.4 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-2.17,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -78,184 +72,157 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2023 02:54:27 -0000
+X-List-Received-Date: Wed, 12 Apr 2023 02:55:35 -0000
 
-On Thu, Apr 6, 2023 at 8:17=E2=80=AFPM Yi Chen <chenyi2000@zju.edu.cn> wrot=
-e:
->
-> - Trap satp/hgatp accesses from HS-mode when MSTATUS.TVM is enabled.
-> - Trap satp accesses from VS-mode when HSTATUS.VTVM is enabled.
-> - Raise RISCV_EXCP_ILLEGAL_INST when U-mode executes SFENCE.VMA/SINVAL.VM=
-A.
-> - Raise RISCV_EXCP_VIRT_INSTRUCTION_FAULT when VU-mode executes
->   SFENCE.VMA/SINVAL.VMA or VS-mode executes SFENCE.VMA/SINVAL.VMA with
->   HSTATUS.VTVM enabled.
-> - Raise RISCV_EXCP_VIRT_INSTRUCTION_FAULT when VU-mode executes
->   HFENCE.GVMA/HFENCE.VVMA/HINVAL.GVMA/HINVAL.VVMA.
->
-> Signed-off-by: Yi Chen <chenyi2000@zju.edu.cn>
-> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+On 2023/4/12 10:12, Alistair Francis wrote:
+> On Fri, Apr 7, 2023 at 6:23 AM Daniel Henrique Barboza
+> <dbarboza@ventanamicro.com> wrote:
+>> Hi,
+>>
+>> This patch is going to break the sifive_u boot if I rebase
+>>
+>> "[PATCH v6 0/9] target/riscv: rework CPU extensions validation"
+>>
+>> on top of it, as it is the case today with the current riscv-to-apply.next.
+>>
+>> The reason is that the priv spec version for Zca is marked as 1_12_0, and
+>> the priv spec version for both sifive CPUs is 1_10_0, and both are enabling
+>> RVC.
+>>
+>> This patch from that series above:
+>>
+>> "[PATCH v6 5/9] target/riscv/cpu.c: add priv_spec validate/disable_exts helpers"
+>>
+>> Makes the disabling of the extension based on priv version to happen *after* we
+>> do all the validations, instead of before as we're doing today. Zca (and Zcd) will
+>> be manually enabled just to be disabled shortly after by the priv spec code. And
+>> this will happen:
+>>
+>> qemu-system-riscv64: warning: disabling zca extension for hart 0x0000000000000000 because privilege spec version does not match
+>> qemu-system-riscv64: warning: disabling zca extension for hart 0x0000000000000001 because privilege spec version does not match
+>> qemu-system-riscv64: warning: disabling zcd extension for hart 0x0000000000000001 because privilege spec version does not match
+>> (--- hangs ---)
+>>
+>> This means that the assumption made in this patch - that Zca implies RVC - is no
+>> longer valid, and all these translations won't work.
+> Thanks for catching and reporting this
+>
+>>
+>> Some possible solutions:
+>>
+>> - Do not use Zca as a synonym for RVC, i.e. drop this patch. We would need to convert
+>> all Zca checks to RVC checks in all translation code.
+> This to me seems like the best solution
 
-Alistair
+I had also implemented a patch for this solution. I'll sent it later.
 
-> ---
-> Rebase the patch on https://github.com/alistair23/qemu/tree/riscv-to-appl=
-y.next
-> Add "Reviewed-by: LIU Zhiwei"
->  target/riscv/csr.c       | 56 +++++++++++++++++++++++++---------------
->  target/riscv/op_helper.c | 12 ++++-----
->  2 files changed, 41 insertions(+), 27 deletions(-)
+However, this will introduce additional check. i.e. check both Zca and C 
+or , both Zcf/d and CF/CD.
+
+I think this is not very necessary. Implcitly-enabled extensions is 
+often the subsets of existed extension.
+
+So enabling them will introduce no additional function to the cpus.
+
+We can just make them invisible to user(mask them in the isa string) 
+instead of disabling them  to be compatible with lower priv version.
+
+Regards,
+
+Weiwei Li
+
+
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index e0b871f6dc..d6669d8524 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -449,6 +449,30 @@ static RISCVException sstc_32(CPURISCVState *env, in=
-t csrno)
->      return sstc(env, csrno);
->  }
+>> - Do not apply patch 5/9 from that series that moves the disable_ext code to the end
+>> of validation. Also a possibility, but we would be sweeping the problem under the rug.
+>> Zca still can't be used as a RVC replacement due to priv spec version constraints, but
+>> we just won't disable Zca because we'll keep validating exts too early (which is the
+>> problem that the patch addresses).
+>>
+>> - change the priv spec of the sifive CPUs - and everyone that uses RVC -  to 1_12_0. Not
+>> sure if this makes sense.
+>>
+>> - do not disable any extensions due to privilege spec version mismatch. This would make
+>> all the priv_version related artifacts to be more "educational" than to be an actual
+>> configuration we want to enforce. Not sure if that would do any good in the end, but
+>> it's also a possibility.
+> This also seems like something we can do. Printing a warning but
+> continuing on seems reasonable to me. That allows users to
+> enable/disable features even if the versions don't match.
 >
-> +static RISCVException satp(CPURISCVState *env, int csrno)
-> +{
-> +    if (env->priv =3D=3D PRV_S && !env->virt_enabled &&
-> +        get_field(env->mstatus, MSTATUS_TVM)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +    if (env->priv =3D=3D PRV_S && env->virt_enabled &&
-> +        get_field(env->hstatus, HSTATUS_VTVM)) {
-> +        return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> +    }
-> +
-> +    return smode(env, csrno);
-> +}
-> +
-> +static RISCVException hgatp(CPURISCVState *env, int csrno)
-> +{
-> +    if (env->priv =3D=3D PRV_S && !env->virt_enabled &&
-> +        get_field(env->mstatus, MSTATUS_TVM)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    return hmode(env, csrno);
-> +}
-> +
->  /* Checks if PointerMasking registers could be accessed */
->  static RISCVException pointer_masking(CPURISCVState *env, int csrno)
->  {
-> @@ -2647,13 +2671,7 @@ static RISCVException read_satp(CPURISCVState *env=
-, int csrno,
->          *val =3D 0;
->          return RISCV_EXCP_NONE;
->      }
-> -
-> -    if (env->priv =3D=3D PRV_S && get_field(env->mstatus, MSTATUS_TVM)) =
-{
-> -        return RISCV_EXCP_ILLEGAL_INST;
-> -    } else {
-> -        *val =3D env->satp;
-> -    }
-> -
-> +    *val =3D env->satp;
->      return RISCV_EXCP_NONE;
->  }
+> I don't think this is the solution for this problem though
 >
-> @@ -2676,18 +2694,14 @@ static RISCVException write_satp(CPURISCVState *e=
-nv, int csrno,
->      }
+> Alistair
 >
->      if (vm && mask) {
-> -        if (env->priv =3D=3D PRV_S && get_field(env->mstatus, MSTATUS_TV=
-M)) {
-> -            return RISCV_EXCP_ILLEGAL_INST;
-> -        } else {
-> -            /*
-> -             * The ISA defines SATP.MODE=3DBare as "no translation", but=
- we still
-> -             * pass these through QEMU's TLB emulation as it improves
-> -             * performance.  Flushing the TLB on SATP writes with paging
-> -             * enabled avoids leaking those invalid cached mappings.
-> -             */
-> -            tlb_flush(env_cpu(env));
-> -            env->satp =3D val;
-> -        }
-> +        /*
-> +         * The ISA defines SATP.MODE=3DBare as "no translation", but we =
-still
-> +         * pass these through QEMU's TLB emulation as it improves
-> +         * performance.  Flushing the TLB on SATP writes with paging
-> +         * enabled avoids leaking those invalid cached mappings.
-> +         */
-> +        tlb_flush(env_cpu(env));
-> +        env->satp =3D val;
->      }
->      return RISCV_EXCP_NONE;
->  }
-> @@ -4183,7 +4197,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
->                           .min_priv_ver =3D PRIV_VERSION_1_12_0 },
->
->      /* Supervisor Protection and Translation */
-> -    [CSR_SATP]     =3D { "satp",     smode, read_satp,     write_satp   =
-  },
-> +    [CSR_SATP]     =3D { "satp",     satp, read_satp,     write_satp    =
- },
->
->      /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
->      [CSR_SISELECT]   =3D { "siselect",   aia_smode, NULL, NULL, rmw_xise=
-lect },
-> @@ -4220,7 +4234,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
->                            .min_priv_ver =3D PRIV_VERSION_1_12_0         =
-       },
->      [CSR_HGEIP]       =3D { "hgeip",       hmode,   read_hgeip,
->                            .min_priv_ver =3D PRIV_VERSION_1_12_0         =
-       },
-> -    [CSR_HGATP]       =3D { "hgatp",       hmode,   read_hgatp,   write_=
-hgatp,
-> +    [CSR_HGATP]       =3D { "hgatp",       hgatp,   read_hgatp,   write_=
-hgatp,
->                            .min_priv_ver =3D PRIV_VERSION_1_12_0         =
-       },
->      [CSR_HTIMEDELTA]  =3D { "htimedelta",  hmode,   read_htimedelta,
->                            write_htimedelta,
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index ec9a384772..7cbe13db3f 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -380,12 +380,12 @@ void helper_wfi(CPURISCVState *env)
->  void helper_tlb_flush(CPURISCVState *env)
->  {
->      CPUState *cs =3D env_cpu(env);
-> -    if (!(env->priv >=3D PRV_S) ||
-> -        (env->priv =3D=3D PRV_S &&
-> -         get_field(env->mstatus, MSTATUS_TVM))) {
-> +    if (!env->virt_enabled &&
-> +        (env->priv =3D=3D PRV_U ||
-> +         (env->priv =3D=3D PRV_S && get_field(env->mstatus, MSTATUS_TVM)=
-))) {
->          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> -    } else if (riscv_has_ext(env, RVH) && env->virt_enabled &&
-> -               get_field(env->hstatus, HSTATUS_VTVM)) {
-> +    } else if (env->virt_enabled &&
-> +               (env->priv =3D=3D PRV_U || get_field(env->hstatus, HSTATU=
-S_VTVM))) {
->          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GE=
-TPC());
->      } else {
->          tlb_flush(cs);
-> @@ -402,7 +402,7 @@ void helper_hyp_tlb_flush(CPURISCVState *env)
->  {
->      CPUState *cs =3D env_cpu(env);
->
-> -    if (env->priv =3D=3D PRV_S && env->virt_enabled) {
-> +    if (env->virt_enabled) {
->          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GE=
-TPC());
->      }
->
-> --
-> 2.40.0
->
->
+>>
+>> I'll hold the rebase of that series until we sort this out. Thanks,
+>>
+>>
+>> Daniel
+>>
+>>
+>>
+>> On 3/7/23 05:13, Weiwei Li wrote:
+>>> Modify the check for C extension to Zca (C implies Zca).
+>>>
+>>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+>>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+>>> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+>>> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>>> Reviewed-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+>>> ---
+>>>    target/riscv/insn_trans/trans_rvi.c.inc | 4 ++--
+>>>    target/riscv/translate.c                | 8 ++++++--
+>>>    2 files changed, 8 insertions(+), 4 deletions(-)
+>>>
+>>> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+>>> index 4ad54e8a49..c70c495fc5 100644
+>>> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+>>> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+>>> @@ -56,7 +56,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+>>>        tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
+>>>
+>>>        gen_set_pc(ctx, cpu_pc);
+>>> -    if (!has_ext(ctx, RVC)) {
+>>> +    if (!ctx->cfg_ptr->ext_zca) {
+>>>            TCGv t0 = tcg_temp_new();
+>>>
+>>>            misaligned = gen_new_label();
+>>> @@ -169,7 +169,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+>>>
+>>>        gen_set_label(l); /* branch taken */
+>>>
+>>> -    if (!has_ext(ctx, RVC) && ((ctx->base.pc_next + a->imm) & 0x3)) {
+>>> +    if (!ctx->cfg_ptr->ext_zca && ((ctx->base.pc_next + a->imm) & 0x3)) {
+>>>            /* misaligned */
+>>>            gen_exception_inst_addr_mis(ctx);
+>>>        } else {
+>>> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+>>> index 0ee8ee147d..d1fdd0c2d7 100644
+>>> --- a/target/riscv/translate.c
+>>> +++ b/target/riscv/translate.c
+>>> @@ -549,7 +549,7 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+>>>
+>>>        /* check misaligned: */
+>>>        next_pc = ctx->base.pc_next + imm;
+>>> -    if (!has_ext(ctx, RVC)) {
+>>> +    if (!ctx->cfg_ptr->ext_zca) {
+>>>            if ((next_pc & 0x3) != 0) {
+>>>                gen_exception_inst_addr_mis(ctx);
+>>>                return;
+>>> @@ -1122,7 +1122,11 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>>>        if (insn_len(opcode) == 2) {
+>>>            ctx->opcode = opcode;
+>>>            ctx->pc_succ_insn = ctx->base.pc_next + 2;
+>>> -        if (has_ext(ctx, RVC) && decode_insn16(ctx, opcode)) {
+>>> +        /*
+>>> +         * The Zca extension is added as way to refer to instructions in the C
+>>> +         * extension that do not include the floating-point loads and stores
+>>> +         */
+>>> +        if (ctx->cfg_ptr->ext_zca && decode_insn16(ctx, opcode)) {
+>>>                return;
+>>>            }
+>>>        } else {
+
 
