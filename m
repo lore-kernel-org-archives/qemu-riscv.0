@@ -1,79 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pmh1C-0001Z3-SF
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Apr 2023 16:24:39 -0400
+	id 1pmprc-0006dN-HG
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Apr 2023 01:51:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pmh1A-0001Xa-P4
- for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 16:24:36 -0400
-Received: from mail-oi1-x234.google.com ([2607:f8b0:4864:20::234])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pmh18-0006bJ-Pe
- for qemu-riscv@nongnu.org; Wed, 12 Apr 2023 16:24:36 -0400
-Received: by mail-oi1-x234.google.com with SMTP id bm45so2919471oib.4
- for <qemu-riscv@nongnu.org>; Wed, 12 Apr 2023 13:24:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1681331073;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=XBAVPTUqyPo06+CY0uUh4FBLPCYociblB7tJO7HBKg8=;
- b=pIFIroGXM41CmyMz/+XYF9fmflhR6K2+EnRNBD7EVQUXUSV38LOym5JG81rLHBxDkX
- 0U6oP2/QeioXKAss44VqUIWAcd3ZiKrQXByF3l1eUxc9Iee1kDVDxc/j3o9KYEZLNEHu
- 5HYppwQxQuFmgYBg9WzDe5OJ2kZbtPIQwy7/bJCA6w9KAq/59JNsCpmAFUBKZSw1W/uN
- PAYLAJquLxWv80N4dWhaCk/fpbXBFbaJrnc0uPAlHy6p/HPGLs7GLUOEHVjkMGuZAxBu
- fX7g0AKRQcZ8/4UpMdH/QxmSGEDWgxRUjANg488+4cs0ZLzYAx0tEHlWXnAezOnxfnSf
- XFcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681331073;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XBAVPTUqyPo06+CY0uUh4FBLPCYociblB7tJO7HBKg8=;
- b=BSGk+Uc8I3fwmR9gxDPDpO3st0rEPFSSZpT7xdMcn3ZHMAvfSL6ahHIGRi/c+aUNJG
- Q1OKxxHgFbBSiOviEHaJqFMbyd7c7+Nk7qYR6fbTmE/UP6GNsfv4jCNmX+gzz9M4Vi3n
- kOitG/aLefEpr06KddAgFm2qOnJnNJ3QupVwYFWAjoXoTsXMSlWZYKLC2roZFEDgCGrX
- EsKerc5GfApotR6kAE5XTJqvSRN4QB3S8iO23nJvyMVMZ+hg//knAqE/yZEmx9SZnHF9
- s2OQaUeziIchUWaCUIU5WKECz511YNNd5KnLyxsW0sbMa2skDQX+IYwnFBhpT/RaCZfU
- xHEw==
-X-Gm-Message-State: AAQBX9fDfGwoVWVhICOKElr7McADJsTCgBGnLUx9dxIzpm86GZcXYOFq
- D7cOpqgVWJs5Wi3L1E+jhtRWZw==
-X-Google-Smtp-Source: AKy350aCG13yc/bE7OWxNBD4+X31lYaPaIV01FRNh2VgZrEgEWggQDR20rlPjOO+VW9pwmtRW2bUOw==
-X-Received: by 2002:a05:6808:19a9:b0:378:528:d83b with SMTP id
- bj41-20020a05680819a900b003780528d83bmr10215556oib.55.1681331073558; 
- Wed, 12 Apr 2023 13:24:33 -0700 (PDT)
-Received: from [192.168.68.107] ([191.255.108.232])
- by smtp.gmail.com with ESMTPSA id
- o13-20020a056808124d00b00387160bcd46sm6962909oiv.46.2023.04.12.13.24.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Apr 2023 13:24:33 -0700 (PDT)
-Message-ID: <fda80093-00f1-8bf7-dca0-9d680e729dc1@ventanamicro.com>
-Date: Wed, 12 Apr 2023 17:24:28 -0300
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1pmprb-0006d8-Lx
+ for qemu-riscv@nongnu.org; Thu, 13 Apr 2023 01:51:19 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1pmprZ-0006Ec-On
+ for qemu-riscv@nongnu.org; Thu, 13 Apr 2023 01:51:19 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1681365075;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9QTNsDliKvQqC6SQXUKCPfMp857wuJHv0DajDaDBlKk=;
+ b=b/fPVDnULvkNKcnmg0ffNWJwQz5M0rCDhuxXs3q26n0H0lXtups7MkHqgO+/1pRXEzITsw
+ eIqZNOH88DryDyKrZV95MEBZ6um0BpP5sVG1/iq3l4ENxUlLRTfS/oqeuJzRzZPtQrEI7H
+ KyB3qBdM9rJbZUa7QI6SJIOQ4YMt0LU=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-619-kgrjiWN9MCWF-R4_swfvRg-1; Thu, 13 Apr 2023 01:51:14 -0400
+X-MC-Unique: kgrjiWN9MCWF-R4_swfvRg-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 448651C05ACE;
+ Thu, 13 Apr 2023 05:51:13 +0000 (UTC)
+Received: from [10.72.13.34] (ovpn-13-34.pek2.redhat.com [10.72.13.34])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 2837B2166B26;
+ Thu, 13 Apr 2023 05:51:00 +0000 (UTC)
+Reply-To: Gavin Shan <gshan@redhat.com>
+Subject: Re: [PATCH v4 0/3] NUMA: Apply cluster-NUMA-node boundary for aarch64
+ and riscv machines
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Igor Mammedov <imammedo@redhat.com>, qemu-arm@nongnu.org,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, rad@semihalf.com,
+ quic_llindhol@quicinc.com, eduardo@habkost.net, marcel.apfelbaum@gmail.com,
+ philmd@linaro.org, wangyanan55@huawei.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, thuth@redhat.com,
+ lvivier@redhat.com, pbonzini@redhat.com, ajones@ventanamicro.com,
+ berrange@redhat.com, dbarboza@ventanamicro.com, yihyu@redhat.com,
+ shan.gavin@gmail.com
+References: <20230317062542.61061-1-gshan@redhat.com>
+ <20230327152651.41f22ac0@imammedo.users.ipa.redhat.com>
+ <3d1d2e5d-0202-ffa8-e07f-1cd7dc2ea3bf@redhat.com>
+ <CAFEAcA8ERPiock5FiwdE021V0S_Bofz5UJtvBuet2EcK2bXfZw@mail.gmail.com>
+From: Gavin Shan <gshan@redhat.com>
+Message-ID: <e1bb85c9-88f0-f55f-118e-b38afd7da8b0@redhat.com>
+Date: Thu, 13 Apr 2023 13:50:57 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.1
-Subject: Re: [RFC 5/5] target/riscv: Expose properties for BF16 extensions
+In-Reply-To: <CAFEAcA8ERPiock5FiwdE021V0S_Bofz5UJtvBuet2EcK2bXfZw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230412023320.50706-1-liweiwei@iscas.ac.cn>
- <20230412023320.50706-6-liweiwei@iscas.ac.cn>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230412023320.50706-6-liweiwei@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::234;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x234.google.com
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=gshan@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
 X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.083,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-1.083, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,50 +82,113 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2023 20:24:37 -0000
+X-List-Received-Date: Thu, 13 Apr 2023 05:51:20 -0000
 
-
-
-On 4/11/23 23:33, Weiwei Li wrote:
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/cpu.c | 7 +++++++
->   1 file changed, 7 insertions(+)
+On 4/12/23 7:42 PM, Peter Maydell wrote:
+> On Wed, 12 Apr 2023 at 02:08, Gavin Shan <gshan@redhat.com> wrote:
+>> On 3/27/23 9:26 PM, Igor Mammedov wrote:
+>>> On Fri, 17 Mar 2023 14:25:39 +0800
+>>> Gavin Shan <gshan@redhat.com> wrote:
+>>>
+>>>> For arm64 and riscv architecture, the driver (/base/arch_topology.c) is
+>>>> used to populate the CPU topology in the Linux guest. It's required that
+>>>> the CPUs in one cluster can't span mutiple NUMA nodes. Otherwise, the Linux
+>>>> scheduling domain can't be sorted out, as the following warning message
+>>>> indicates. To avoid the unexpected confusion, this series attempts to
+>>>> warn about such kind of irregular configurations.
+>>>>
+>>>>      -smp 6,maxcpus=6,sockets=2,clusters=1,cores=3,threads=1 \
+>>>>      -numa node,nodeid=0,cpus=0-1,memdev=ram0                \
+>>>>      -numa node,nodeid=1,cpus=2-3,memdev=ram1                \
+>>>>      -numa node,nodeid=2,cpus=4-5,memdev=ram2                \
+>>>>
+>>>>      ------------[ cut here ]------------
+>>>>      WARNING: CPU: 0 PID: 1 at kernel/sched/topology.c:2271 build_sched_domains+0x284/0x910
+>>>>      Modules linked in:
+>>>>      CPU: 0 PID: 1 Comm: swapper/0 Not tainted 5.14.0-268.el9.aarch64 #1
+>>>>      pstate: 00400005 (nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+>>>>      pc : build_sched_domains+0x284/0x910
+>>>>      lr : build_sched_domains+0x184/0x910
+>>>>      sp : ffff80000804bd50
+>>>>      x29: ffff80000804bd50 x28: 0000000000000002 x27: 0000000000000000
+>>>>      x26: ffff800009cf9a80 x25: 0000000000000000 x24: ffff800009cbf840
+>>>>      x23: ffff000080325000 x22: ffff0000005df800 x21: ffff80000a4ce508
+>>>>      x20: 0000000000000000 x19: ffff000080324440 x18: 0000000000000014
+>>>>      x17: 00000000388925c0 x16: 000000005386a066 x15: 000000009c10cc2e
+>>>>      x14: 00000000000001c0 x13: 0000000000000001 x12: ffff00007fffb1a0
+>>>>      x11: ffff00007fffb180 x10: ffff80000a4ce508 x9 : 0000000000000041
+>>>>      x8 : ffff80000a4ce500 x7 : ffff80000a4cf920 x6 : 0000000000000001
+>>>>      x5 : 0000000000000001 x4 : 0000000000000007 x3 : 0000000000000002
+>>>>      x2 : 0000000000001000 x1 : ffff80000a4cf928 x0 : 0000000000000001
+>>>>      Call trace:
+>>>>       build_sched_domains+0x284/0x910
+>>>>       sched_init_domains+0xac/0xe0
+>>>>       sched_init_smp+0x48/0xc8
+>>>>       kernel_init_freeable+0x140/0x1ac
+>>>>       kernel_init+0x28/0x140
+>>>>       ret_from_fork+0x10/0x20
+>>>>
+>>>> PATCH[1] Warn about the irregular configuration if required
+>>>> PATCH[2] Enable the validation for aarch64 machines
+>>>> PATCH[3] Enable the validation for riscv machines
+>>>>
+>>>> v3: https://lists.nongnu.org/archive/html/qemu-arm/2023-02/msg01226.html
+>>>> v2: https://lists.nongnu.org/archive/html/qemu-arm/2023-02/msg01080.html
+>>>> v1: https://lists.nongnu.org/archive/html/qemu-arm/2023-02/msg00886.html
+>>>>
+>>>> Changelog
+>>>> =========
+>>>> v4:
+>>>>     * Pick r-b and ack-b from Daniel/Philippe                   (Gavin)
+>>>>     * Replace local variable @len with possible_cpus->len in
+>>>>       validate_cpu_cluster_to_numa_boundary()                   (Philippe)
+>>>> v3:
+>>>>     * Validate cluster-to-NUMA instead of socket-to-NUMA
+>>>>       boundary                                                  (Gavin)
+>>>>     * Move the switch from MachineState to MachineClass         (Philippe)
+>>>>     * Warning instead of rejecting the irregular configuration  (Daniel)
+>>>>     * Comments to mention cluster-to-NUMA is platform instead
+>>>>       of architectural choice                                   (Drew)
+>>>>     * Drop PATCH[v2 1/4] related to qtests/numa-test            (Gavin)
+>>>> v2:
+>>>>     * Fix socket-NUMA-node boundary issues in qtests/numa-test  (Gavin)
+>>>>     * Add helper set_numa_socket_boundary() and validate the
+>>>>       boundary in the generic path                              (Philippe)
+>>>>
+>>>> Gavin Shan (3):
+>>>>     numa: Validate cluster and NUMA node boundary if required
+>>>>     hw/arm: Validate cluster and NUMA node boundary
+>>>>     hw/riscv: Validate cluster and NUMA node boundary
+>>>>
+>>>>    hw/arm/sbsa-ref.c   |  2 ++
+>>>>    hw/arm/virt.c       |  2 ++
+>>>>    hw/core/machine.c   | 42 ++++++++++++++++++++++++++++++++++++++++++
+>>>>    hw/riscv/spike.c    |  2 ++
+>>>>    hw/riscv/virt.c     |  2 ++
+>>>>    include/hw/boards.h |  1 +
+>>>>    6 files changed, 51 insertions(+)
+>>>>
+>>>
+>>> Acked-by: Igor Mammedov <imammedo@redhat.com>
+>>>
+>>
+>> Not sure if QEMU v8.0 is still available to integrate this series.
+>> Otherwise, it should be something for QEMU v8.1. By the way, I'm
+>> also uncertain who needs to be merge this series.
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index c19bbb41fb..0265fae46f 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -83,6 +83,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
->       ISA_EXT_DATA_ENTRY(zifencei, true, PRIV_VERSION_1_10_0, ext_ifencei),
->       ISA_EXT_DATA_ENTRY(zihintpause, true, PRIV_VERSION_1_10_0, ext_zihintpause),
->       ISA_EXT_DATA_ENTRY(zawrs, true, PRIV_VERSION_1_12_0, ext_zawrs),
-> +    ISA_EXT_DATA_ENTRY(zfbfmin, true, PRIV_VERSION_1_12_0, ext_zfbfmin),
->       ISA_EXT_DATA_ENTRY(zfh, true, PRIV_VERSION_1_11_0, ext_zfh),
->       ISA_EXT_DATA_ENTRY(zfhmin, true, PRIV_VERSION_1_12_0, ext_zfhmin),
->       ISA_EXT_DATA_ENTRY(zfinx, true, PRIV_VERSION_1_12_0, ext_zfinx),
-> @@ -107,6 +108,8 @@ static const struct isa_ext_data isa_edata_arr[] = {
->       ISA_EXT_DATA_ENTRY(zve32f, true, PRIV_VERSION_1_12_0, ext_zve32f),
->       ISA_EXT_DATA_ENTRY(zve64f, true, PRIV_VERSION_1_12_0, ext_zve64f),
->       ISA_EXT_DATA_ENTRY(zve64d, true, PRIV_VERSION_1_12_0, ext_zve64d),
-> +    ISA_EXT_DATA_ENTRY(zvfbfmin, true, PRIV_VERSION_1_12_0, ext_zvfbfmin),
-> +    ISA_EXT_DATA_ENTRY(zvfbfwma, true, PRIV_VERSION_1_12_0, ext_zvfbfwma),
->       ISA_EXT_DATA_ENTRY(zvfh, true, PRIV_VERSION_1_12_0, ext_zvfh),
->       ISA_EXT_DATA_ENTRY(zvfhmin, true, PRIV_VERSION_1_12_0, ext_zvfhmin),
->       ISA_EXT_DATA_ENTRY(zhinx, true, PRIV_VERSION_1_12_0, ext_zhinx),
-> @@ -1469,6 +1472,10 @@ static Property riscv_cpu_extensions[] = {
->       DEFINE_PROP_BOOL("x-zvfh", RISCVCPU, cfg.ext_zvfh, false),
->       DEFINE_PROP_BOOL("x-zvfhmin", RISCVCPU, cfg.ext_zvfhmin, false),
->   
-> +    DEFINE_PROP_BOOL("x-zfbfmin", RISCVCPU, cfg.ext_zfbfmin, false),
-> +    DEFINE_PROP_BOOL("x-zvfbfmin", RISCVCPU, cfg.ext_zvfbfmin, false),
-> +    DEFINE_PROP_BOOL("x-zvfbfwma", RISCVCPU, cfg.ext_zvfbfwma, false),
-> +
->       DEFINE_PROP_END_OF_LIST(),
->   };
->   
+> It barely touches arm specific boards, so I'm assuming it will
+> be reviewed and taken by whoever handles hw/core/machine.c
+> 
+> And yes, 8.0 is nearly out the door, this is 8.1 stuff.
+> 
+
+Indeed. In this case, it needs to be merged via 'Machine core' tree,
+which is being taken care by Eduardo Habkost or Marcel Apfelbaum.
+
+Eduardo and  Marcel, could you please merge this to QEMU v8.1 when it's
+ready? Thanks in advance.
+
+Thanks,
+Gavin
+
 
