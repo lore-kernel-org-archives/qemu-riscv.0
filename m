@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pmsqQ-0001ye-M3
+	id 1pmsqQ-0001yp-QL
 	for mharc-qemu-riscv@gnu.org; Thu, 13 Apr 2023 05:02:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pmsqP-0001xf-Ig; Thu, 13 Apr 2023 05:02:17 -0400
+ id 1pmsqP-0001xh-MB; Thu, 13 Apr 2023 05:02:17 -0400
 Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pmsqM-00027q-O1; Thu, 13 Apr 2023 05:02:17 -0400
+ id 1pmsqM-00027n-PH; Thu, 13 Apr 2023 05:02:17 -0400
 Received: from localhost.localdomain (unknown [180.165.241.15])
- by APP-01 (Coremail) with SMTP id qwCowAAHDp4KxTdkPEVVAw--.16197S4;
- Thu, 13 Apr 2023 17:02:05 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowAAHDp4KxTdkPEVVAw--.16197S3;
+ Thu, 13 Apr 2023 17:02:04 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,33 +19,32 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn,
  lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH 2/6] target/riscv: Move pmp_get_tlb_size apart from
- get_physical_address_pmp
-Date: Thu, 13 Apr 2023 17:01:18 +0800
-Message-Id: <20230413090122.65228-3-liweiwei@iscas.ac.cn>
+Subject: [PATCH 1/6] target/riscv: Update pmp_get_tlb_size()
+Date: Thu, 13 Apr 2023 17:01:17 +0800
+Message-Id: <20230413090122.65228-2-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230413090122.65228-1-liweiwei@iscas.ac.cn>
 References: <20230413090122.65228-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAAHDp4KxTdkPEVVAw--.16197S4
-X-Coremail-Antispam: 1UD129KBjvJXoWxAF48KFWkJw18uF1DGr1Dtrb_yoW5GrW3pr
- ZxCrWxWa1kKFZa9a10vr1UAF45CFnrKrWUW3WkGwsY9Fs0q345C3Wqk34agFZ7GrWkZws0
- kw4qyFy8CF45XF7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
- x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVWxJr0_GcWl
- e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
- 8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
- jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0x
- kIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AK
- xVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrx
- kI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v2
- 6r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8Jw
- CI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOJPEUUUU
- U
+X-CM-TRANSID: qwCowAAHDp4KxTdkPEVVAw--.16197S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxGrW8GFyrGr1DuFy7uryxuFg_yoWrJryrpr
+ W7CrWxGrWkK39xJ3WftF4DXF15Cw4fKr4UAan7GFZYya15G3yrAr1qkw43Zry8Ga98WrWY
+ kFWDAF1UCr4UXF7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBE14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+ x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
+ ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26F4UJVW0owAS
+ 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+ IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+ Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
+ xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
+ 6r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2
+ Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
+ Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMI
+ IF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JU2_M3UUUUU
+ =
 X-Originating-IP: [180.165.241.15]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
@@ -69,76 +68,104 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Thu, 13 Apr 2023 09:02:17 -0000
 
-pmp_get_tlb_size have no relationship with pmp-related permission check
-currently.
+Not only the matched PMP entry, Any PMP entry that overlap with partial of
+the tlb page may make the regions in that page have different permission
+rights. So all of them should be taken into consideration.
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 ---
- target/riscv/cpu_helper.c | 16 ++++++----------
- 1 file changed, 6 insertions(+), 10 deletions(-)
+ target/riscv/cpu_helper.c |  7 ++-----
+ target/riscv/pmp.c        | 34 +++++++++++++++++++++-------------
+ target/riscv/pmp.h        |  3 +--
+ 3 files changed, 24 insertions(+), 20 deletions(-)
 
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 075fc0538a..83c9699a6d 100644
+index 433ea529b0..075fc0538a 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -676,14 +676,11 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-  *
-  * @env: CPURISCVState
-  * @prot: The returned protection attributes
-- * @tlb_size: TLB page size containing addr. It could be modified after PMP
-- *            permission checking. NULL if not set TLB page for addr.
-  * @addr: The physical address to be checked permission
-  * @access_type: The type of MMU access
-  * @mode: Indicates current privilege level.
-  */
--static int get_physical_address_pmp(CPURISCVState *env, int *prot,
--                                    target_ulong *tlb_size, hwaddr addr,
-+static int get_physical_address_pmp(CPURISCVState *env, int *prot, hwaddr addr,
-                                     int size, MMUAccessType access_type,
-                                     int mode)
- {
-@@ -703,9 +700,6 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
+@@ -703,11 +703,8 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
      }
  
      *prot = pmp_priv_to_page_prot(pmp_priv);
--    if (tlb_size != NULL) {
--        *tlb_size = pmp_get_tlb_size(env, addr);
--    }
+-    if ((tlb_size != NULL) && pmp_index != MAX_RISCV_PMPS) {
+-        target_ulong tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
+-        target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
+-
+-        *tlb_size = pmp_get_tlb_size(env, pmp_index, tlb_sa, tlb_ea);
++    if (tlb_size != NULL) {
++        *tlb_size = pmp_get_tlb_size(env, addr);
+     }
  
      return TRANSLATE_SUCCESS;
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 1f5aca42e8..4f9389e73c 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -601,28 +601,36 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
  }
-@@ -905,7 +899,7 @@ restart:
-         }
  
-         int pmp_prot;
--        int pmp_ret = get_physical_address_pmp(env, &pmp_prot, NULL, pte_addr,
-+        int pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
-                                                sizeof(target_ulong),
-                                                MMU_DATA_LOAD, PRV_S);
-         if (pmp_ret != TRANSLATE_SUCCESS) {
-@@ -1300,8 +1294,9 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-             prot &= prot2;
+ /*
+- * Calculate the TLB size if the start address or the end address of
++ * Calculate the TLB size if any start address or the end address of
+  * PMP entry is presented in the TLB page.
+  */
+-target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
+-                              target_ulong tlb_sa, target_ulong tlb_ea)
++target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr)
+ {
+-    target_ulong pmp_sa = env->pmp_state.addr[pmp_index].sa;
+-    target_ulong pmp_ea = env->pmp_state.addr[pmp_index].ea;
++    target_ulong pmp_sa;
++    target_ulong pmp_ea;
++    target_ulong tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
++    target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
++    int i;
++
++    for (i = 0; i < MAX_RISCV_PMPS; i++) {
++        pmp_sa = env->pmp_state.addr[i].sa;
++        pmp_ea = env->pmp_state.addr[i].ea;
  
-             if (ret == TRANSLATE_SUCCESS) {
--                ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
-+                ret = get_physical_address_pmp(env, &prot_pmp, pa,
-                                                size, access_type, mode);
-+                tlb_size = pmp_get_tlb_size(env, pa);
+-    if (pmp_sa <= tlb_sa && pmp_ea >= tlb_ea) {
+-        return TARGET_PAGE_SIZE;
+-    } else {
+         /*
+-         * At this point we have a tlb_size that is the smallest possible size
+-         * That fits within a TARGET_PAGE_SIZE and the PMP region.
+-         *
+-         * If the size is less then TARGET_PAGE_SIZE we drop the size to 1.
++         * If any start address or the end address of PMP entry is presented
++         * in the TLB page and cannot override the whole TLB page we drop the
++         * size to 1.
+          * This means the result isn't cached in the TLB and is only used for
+          * a single translation.
+          */
+-        return 1;
++        if (((pmp_sa >= tlb_sa && pmp_sa <= tlb_ea) ||
++             (pmp_ea >= tlb_sa && pmp_ea <= tlb_ea)) &&
++            !(pmp_sa == tlb_sa && pmp_ea == tlb_ea)) {
++            return 1;
++        }
+     }
++
++    return TARGET_PAGE_SIZE;
+ }
  
-                 qemu_log_mask(CPU_LOG_MMU,
-                               "%s PMP address=" HWADDR_FMT_plx " ret %d prot"
-@@ -1333,8 +1328,9 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                       __func__, address, ret, pa, prot);
- 
-         if (ret == TRANSLATE_SUCCESS) {
--            ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
-+            ret = get_physical_address_pmp(env, &prot_pmp, pa,
-                                            size, access_type, mode);
-+            tlb_size = pmp_get_tlb_size(env, pa);
- 
-             qemu_log_mask(CPU_LOG_MMU,
-                           "%s PMP address=" HWADDR_FMT_plx " ret %d prot"
+ /*
+diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+index b296ea1fc6..0a7e24750b 100644
+--- a/target/riscv/pmp.h
++++ b/target/riscv/pmp.h
+@@ -76,8 +76,7 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+                        target_ulong size, pmp_priv_t privs,
+                        pmp_priv_t *allowed_privs,
+                        target_ulong mode);
+-target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
+-                              target_ulong tlb_sa, target_ulong tlb_ea);
++target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr);
+ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
+ void pmp_update_rule_nums(CPURISCVState *env);
+ uint32_t pmp_get_num_rules(CPURISCVState *env);
 -- 
 2.25.1
 
