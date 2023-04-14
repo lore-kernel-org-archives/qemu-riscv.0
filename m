@@ -1,75 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pnIiv-0005nm-C7
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Apr 2023 08:40:17 -0400
+	id 1pnLsm-0001r3-BL
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Apr 2023 12:02:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pnIit-0005ms-5H
- for qemu-riscv@nongnu.org; Fri, 14 Apr 2023 08:40:16 -0400
-Received: from mail-oi1-x229.google.com ([2607:f8b0:4864:20::229])
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1pnLsZ-0001ep-Ub
+ for qemu-riscv@nongnu.org; Fri, 14 Apr 2023 12:02:35 -0400
+Received: from mail-oa1-x32.google.com ([2001:4860:4864:20::32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pnIiq-0002Rz-VY
- for qemu-riscv@nongnu.org; Fri, 14 Apr 2023 08:40:14 -0400
-Received: by mail-oi1-x229.google.com with SMTP id x22so398425oiv.10
- for <qemu-riscv@nongnu.org>; Fri, 14 Apr 2023 05:40:11 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1pnLsY-0007En-77
+ for qemu-riscv@nongnu.org; Fri, 14 Apr 2023 12:02:27 -0400
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-187a742a963so3555469fac.10
+ for <qemu-riscv@nongnu.org>; Fri, 14 Apr 2023 09:02:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1681476010; x=1684068010;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Jfj1fPzM+3HYfYIDorwflGDqKUkISp58tDvUgAsf0j0=;
- b=Vqru1ejYoYAuBrt4OAtTuAlRK9tlHFAtNXcpFRGQt33XV3dSAqFEn0uu0oPUi5Ih4w
- 5i3br7I8E4Sm3M7PKopVbEXcxX/5JVrw1ydO4VbHbO6Jg4dxWdPtzKnJXjT0SexipZuj
- oyG6OiL7kDX93jCLXrnjyQs+Oe03hqOs+tYP2IB3/F7zxYbQkmL8++J8MWPlpyyT8tWS
- 0/2hmQHAKccKOGR63JePzJYSAcpphHRyc5x8x5abR6dwHhRL1hhjFHwrfj0lQJK+ZsfH
- ALi+geWsFWoyYTESQY5SzIE57YGPNxtIjEXKTfq8eAGTMlmxM2IIv2/04illke0ZZpui
- ErMQ==
+ d=ventanamicro.com; s=google; t=1681488145; x=1684080145;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=o2QcPUfp1MpPevNyEGith7KhVp0Sl4Ym11iIU4KtbXI=;
+ b=aX1iY0SdJO6VmhTnoy2l2wvi/Ykc7nJlZupQxDdD+Vh8YzMKtYucoWYsX+XsOI/7ud
+ rD4QTkaHsKkdEuKsevCtmg4BsHQ6q/LnF4Yy0Il8aPuZNyLZRMzrIEhKEqzeLNICYmsM
+ O5ggx1hxP+ptV6tFVwO6xmNffYAIorNJTQCShq0XRt8QawIgZRmdYqfta2Key/V5g3Yr
+ rArM9idVnpw7OK/ZGmNpEOuWS1CHMgj4QYbUfSc9H5MFqVSTArMRdapg88TfGwOfzcH1
+ 9VbKjfXZ6aLeyPDhvXTP+ucnmWQ0NrXOJFTxC1RK7WIK5kUILST80trRyIxaaKAZL0Pj
+ aTgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681476010; x=1684068010;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Jfj1fPzM+3HYfYIDorwflGDqKUkISp58tDvUgAsf0j0=;
- b=W4UPtx/pLdOXifJYzhakkp18pG6DiJpgJwMdZPpNjqqzo0rTF4Iel9KFakQJrePwt2
- 19Zlwizw3qLDcNZYVBuKzhPPMmidEC/Cs5/fB7pJyBwha5Xo7Lx0Gw/mnRd1R6UQIgTb
- dEkrWCMd8O/lqRdl5nghxoTTlRi1A9bqsFzY9xq1qZkd8ZV9U9/u3GgktDhQ1bXq3K7W
- yGgPTUPnQv7Z1BouJjjd5AkxpV6NPD9oL2bLlYpoYE8Sg3sNRjk7oalritcFvI0pgNnZ
- LCkeBYywzddxMeS2/uGWcN7CoU8xsiAB0939PpUe6HYfx8ZPxINim4GpsGC6W60k1+pm
- SBQA==
-X-Gm-Message-State: AAQBX9eaBz1nA+MZfPwBEreqjj0jWfpQpNzsKQeEoMDVx+4nxEHZgQFB
- HwV7ub+7ZTqXNdzAEZ34H62gng==
-X-Google-Smtp-Source: AKy350axsTiQ/UbIc3bx+aQKV31F5Ip+dbcgUv92hoOFyURz/6tqPpHjEm4xi/DB+Z/AtRos6D0PvA==
-X-Received: by 2002:a05:6808:2d1:b0:378:7dbd:6da7 with SMTP id
- a17-20020a05680802d100b003787dbd6da7mr2321139oid.29.1681476010217; 
- Fri, 14 Apr 2023 05:40:10 -0700 (PDT)
-Received: from [192.168.68.107] ([191.255.108.232])
- by smtp.gmail.com with ESMTPSA id
- cg9-20020a056808328900b0038beb8c1289sm1647541oib.15.2023.04.14.05.40.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 14 Apr 2023 05:40:09 -0700 (PDT)
-Message-ID: <c021529c-67ce-fe7c-1acc-7753715c466f@ventanamicro.com>
-Date: Fri, 14 Apr 2023 09:40:06 -0300
+ d=1e100.net; s=20221208; t=1681488145; x=1684080145;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=o2QcPUfp1MpPevNyEGith7KhVp0Sl4Ym11iIU4KtbXI=;
+ b=G7majFa5Osix7idNV1mHKN2rCwcy5C70gBJWRxvUqMXQvhVAGLRFgJHTTcXSz2Y10r
+ KRMQXLHJPtmftya+mNNcQixThX3MmorYBnfFGaviS7FkHf7EgHH0jSTP7Ll2qjnVWFE2
+ 2CnLlaZ7FlhnyygQOwaeGEaIoFlunUcP4b00t22h6bPKINKvLiGjoigZLp+X9Br/OEsl
+ ovUuVowXgjJBRd/ktRd0E8tVKHpy/Iou45YF2nR/WNMitxQKAwK2wBS58Yt+vV1jJJGd
+ r1jrHaYe7EY2yhR2v54C565mbNn+8qGAh+yDMYAwfEVOZtkolCLGLVQk2PU6eCNImlOv
+ ZIDQ==
+X-Gm-Message-State: AAQBX9erskeFceDeVw4GREjBg2jQaS9fvkKKBHoLci94OPCQiAVun4wO
+ YOBn7ZSSCaavVCFjxsHd22DybQ==
+X-Google-Smtp-Source: AKy350aEv0fhqPNi4G37umwofF31GxaCVXrmXnERkMh8IA5i0YKbKlzkg48jMYw6x+VXglQhlEEZpg==
+X-Received: by 2002:a05:6870:a412:b0:177:af7c:906f with SMTP id
+ m18-20020a056870a41200b00177af7c906fmr4338924oal.40.1681488144205; 
+ Fri, 14 Apr 2023 09:02:24 -0700 (PDT)
+Received: from mchitale-vm.. ([103.97.165.210])
+ by smtp.googlemail.com with ESMTPSA id
+ u6-20020a4a5706000000b00524fe20aee5sm1794323ooa.34.2023.04.14.09.02.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Apr 2023 09:02:23 -0700 (PDT)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org,
+	alistair.francis@wdc.com
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Alistair Francis <alistair23@gmail.com>,
+ Daniel Barboza <dbarboza@ventanamicro.com>, liweiwei@iscas.ac.cn,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [RFC PATCH v2 0/4] Smstateen FCSR
+Date: Fri, 14 Apr 2023 21:31:58 +0530
+Message-Id: <20230414160202.1298242-1-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.1
-Subject: Re: KVM QEMU AIA support for RISCV guests
-Content-Language: en-US
-To: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
- anup@brainfault.org, alistair.francis@wdc.com,
- Atish Kumar Patra <atishp@rivosinc.com>, Palmer Dabbelt <palmer@rivosinc.com>
-References: <CAECbVCt_+SCiUzv9cOR4KYC7BE_4TjRGqOndzDthUvara8OxMA@mail.gmail.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAECbVCt_+SCiUzv9cOR4KYC7BE_4TjRGqOndzDthUvara8OxMA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::229;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x229.google.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.282,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2001:4860:4864:20::32;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-oa1-x32.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -84,30 +83,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Apr 2023 12:40:16 -0000
+X-List-Received-Date: Fri, 14 Apr 2023 16:02:37 -0000
 
+Patch 4 and 5 of the smstateen series need to be re-submitted with
+changes described in the email below.
+https://lists.nongnu.org/archive/html/qemu-riscv/2022-11/msg00155.html
+Hence splitting the patch 4 of the original series into three and
+re-submitting along with the original patch 5.
 
+Changes in v2:
+ - Improve patch 1 description
+ - Reuse TB_FLAGS.HS_FS for smstateen
+ - Convert smstateen_fcsr_check to function
+ - Add fcsr check for zdinx
 
-On 4/14/23 08:35, Rajnesh Kanwal wrote:
-> Hi All,
-> 
-> I am starting to work on KVM-QEMU AIA support for RISCV guests to extend
-> kvm accel support added in [0]. This is just to confirm if anyone else
-> is actively
-> working on it to avoid duplicate effort.
+Mayuresh Chitale (4):
+  target/riscv: smstateen check for fcsr
+  target/riscv: Reuse TB_FLAGS.MSTATUS_HFS_FS
+  target/riscv: check smstateen fcsr flag
+  target/riscv: smstateen knobs
 
-I was going to look into it eventually, but now that you've started I'll sit
-back and help with reviews and testing and so on.
+ target/riscv/cpu.c                        |  3 ++-
+ target/riscv/cpu_helper.c                 | 12 ++++++++++++
+ target/riscv/csr.c                        | 23 ++++++++++++++++++++++
+ target/riscv/insn_trans/trans_rvd.c.inc   | 13 ++++++++----
+ target/riscv/insn_trans/trans_rvf.c.inc   | 24 +++++++++++++++++++----
+ target/riscv/insn_trans/trans_rvzfh.c.inc | 18 ++++++++++++++---
+ target/riscv/translate.c                  |  7 +++++++
+ 7 files changed, 88 insertions(+), 12 deletions(-)
 
+-- 
+2.34.1
 
-Thanks,
-
-Daniel
-
-> 
-> [0]: https://lists.nongnu.org/archive/html/qemu-riscv/2021-08/msg00117.html
-> 
-> Thanks,
-> Rajnesh
-> 
 
