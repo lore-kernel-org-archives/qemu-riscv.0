@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pnLt5-00029e-7c
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Apr 2023 12:02:59 -0400
+	id 1pnLt6-0002EI-CE
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Apr 2023 12:03:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1pnLsw-0001y7-Ee
- for qemu-riscv@nongnu.org; Fri, 14 Apr 2023 12:02:54 -0400
-Received: from mail-oa1-x32.google.com ([2001:4860:4864:20::32])
+ id 1pnLsp-0001uV-5V
+ for qemu-riscv@nongnu.org; Fri, 14 Apr 2023 12:02:46 -0400
+Received: from mail-oa1-x2a.google.com ([2001:4860:4864:20::2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1pnLst-0007En-FC
- for qemu-riscv@nongnu.org; Fri, 14 Apr 2023 12:02:49 -0400
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-187a742a963so3556986fac.10
- for <qemu-riscv@nongnu.org>; Fri, 14 Apr 2023 09:02:46 -0700 (PDT)
+ id 1pnLsm-0007I8-Ik
+ for qemu-riscv@nongnu.org; Fri, 14 Apr 2023 12:02:41 -0400
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-187b51ed66fso2208785fac.6
+ for <qemu-riscv@nongnu.org>; Fri, 14 Apr 2023 09:02:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1681488166; x=1684080166;
+ d=ventanamicro.com; s=google; t=1681488159; x=1684080159;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kcIjP4leyqTCDqA3jCQ9aon4GwK6cfhvsVFfSZZr4Ss=;
- b=jXaul5JtLsf7B5ZYXyf2ViGMBF16dUHBxAOOKu3hCRfWF/yrAZkyY6dMNR/IuVEjt+
- z+70I6oG2T38e6xLbySKsZXei8YIX3743xk616S+KlbFwvG3NtJKe7Jp2zpU89w4oKjd
- lC5JRM3Y1zVPycAUgwKYJ57VUn45wjB4mzwnx437Ths0FMCTvVqQ16mPzXt+cE97Px0Y
- iWPrnX/Mj13w0rEXlVwVypV3HBBQ93dvBft0vbBu7M15A1zjZIOwxSeQ9jcqZdya7Xn3
- DXWmyMcBijpoPJjdNnhLh6X6rFYygeCD/4Ban4NTXYLv0uGDp2b+ja9rw8SNbZG2CWOD
- LMvA==
+ bh=perATyW0cckcJ920vv15FR2BOwASFN69Rds4SyzKxpo=;
+ b=ZVS3kkcmHY+rUf+vlCpBZIeh/KN5JSWldKZZqy6bSe30eZOE/vxkh/lh0wwzO6y5mZ
+ pxQrOCTGODWfth4ziIut/no6pA2WfxYt7krZ9mGLjSF1TPOsGq1Uo4u9PNRWXh/EOkih
+ CkMHix0600DcuyzfYLFNJvSVm1HQRNI0RmmS3Nb2Qf+Q8900wnV11qo68GQEEt1qZggD
+ Kk4vA+FrzqebZpAtux3HStLMB/LVsCPVNuhypnXlwQwjS5tIKOXdw+GKzccQYe0ZnIXY
+ P//XVYOpaYqip5ovnzT7P8nqS8nakyy8GdWnYipNP5mw2mFYvdnhHZcKgLVQBl/bpNmS
+ 2pNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681488166; x=1684080166;
+ d=1e100.net; s=20221208; t=1681488159; x=1684080159;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kcIjP4leyqTCDqA3jCQ9aon4GwK6cfhvsVFfSZZr4Ss=;
- b=e4Nh2nTcgI3czwsyFAr8jkwtTItEEwhv+ktsXkJHbeSkr/eKXrw3/LZhzymVCcD5li
- gtN80q799beLJc6RcKGQWH39WvfDkybM64pfHz9X5vBdSrnHe5jxYE74loLklQj72x5t
- gPbAgzoA01w2qZI9ZjrZJ9/niwwZRuuvEyW+4rDRfKmAJ5vB3QKQpg9CA5l4/8iuzJZe
- U+hIgGgfesLnZkVE1/Qv/QmOhyOXuHm8NAb1jCB9u0PBbEDiGB1j5DDfKqgFF1utqNJ+
- Mbkr2Z5NwHeXwJi+oBM+NjFQPU3HIE86YLvox8xt0DHJhnZcFnHauNHoEong7Ctkvspp
- GBTw==
-X-Gm-Message-State: AAQBX9d41xaH8XxLbfIIucu+o3ycvVoA3vmtNJmxxh7B634nYlVxEC+V
- Xsq8f67HZXw8OEJjoAQWA9xOvg==
-X-Google-Smtp-Source: AKy350ZERZCPkelQkCvgwaxSZ4+yEE5TSh6jSwAV7hyNBw5ZzVQjV0gxYLr6vD7tY3jx+tjcIw0Slg==
-X-Received: by 2002:a05:6870:a448:b0:187:8537:e432 with SMTP id
- n8-20020a056870a44800b001878537e432mr4104531oal.54.1681488166260; 
- Fri, 14 Apr 2023 09:02:46 -0700 (PDT)
+ bh=perATyW0cckcJ920vv15FR2BOwASFN69Rds4SyzKxpo=;
+ b=GPC9Eu7XDYd6SJANMPFVPc/1/xoOBBJOQzBEEApav8AENDO1wNzRHUDmaZDLHIs+FY
+ uW4QfT5vQ5M+QP9TAp3ZAwdHnQW/+1OeImiVmyJVGhVICBWGFBFNSUP4u8KIIpDTQ9xr
+ OJ1z11yZSOqak23J446D9plW6RjRLJbjTmnsMV8dBUHC6Eg9Jur0GOMu285Cx5yQRqWb
+ lwSIU6JI4NWyuXMSJ3Kg5klvp2RMVxgPSc9DPhw5YFQ9i/VVQnba28Yd6U2S1Q8GDIXa
+ qvf9hm6hSSNJjs+fS4hvBSq5a4MTNaSntT8fWInhefYN9YMCf74obG5+fma0Lstl17Ch
+ LFcw==
+X-Gm-Message-State: AAQBX9e6uWbDsmqBeZA3J3OygCSm6HtEPko0kNUqD28vz8qVhQ0Oncra
+ ml47dXv47buQfBYGPIt699ZUCQ==
+X-Google-Smtp-Source: AKy350Zok570ce2gcX+JR60dlpe/XST38mRsKMUQHCAFhN9UrMzCvw+VwxZnYMzv7wMvgi8y7jlp1w==
+X-Received: by 2002:a05:6870:f114:b0:183:cc50:f85e with SMTP id
+ k20-20020a056870f11400b00183cc50f85emr3724633oac.56.1681488159271; 
+ Fri, 14 Apr 2023 09:02:39 -0700 (PDT)
 Received: from mchitale-vm.. ([103.97.165.210])
  by smtp.googlemail.com with ESMTPSA id
- u6-20020a4a5706000000b00524fe20aee5sm1794323ooa.34.2023.04.14.09.02.39
+ u6-20020a4a5706000000b00524fe20aee5sm1794323ooa.34.2023.04.14.09.02.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Apr 2023 09:02:46 -0700 (PDT)
+ Fri, 14 Apr 2023 09:02:39 -0700 (PDT)
 From: Mayuresh Chitale <mchitale@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org,
@@ -57,16 +57,16 @@ Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
  Alistair Francis <alistair23@gmail.com>,
  Daniel Barboza <dbarboza@ventanamicro.com>, liweiwei@iscas.ac.cn,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [RFC PATCH v2 3/4] target/riscv: check smstateen fcsr flag
-Date: Fri, 14 Apr 2023 21:32:01 +0530
-Message-Id: <20230414160202.1298242-4-mchitale@ventanamicro.com>
+Subject: [RFC PATCH v2 2/4] target/riscv: Reuse TB_FLAGS.MSTATUS_HFS_FS
+Date: Fri, 14 Apr 2023 21:32:00 +0530
+Message-Id: <20230414160202.1298242-3-mchitale@ventanamicro.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230414160202.1298242-1-mchitale@ventanamicro.com>
 References: <20230414160202.1298242-1-mchitale@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::32;
- envelope-from=mchitale@ventanamicro.com; helo=mail-oa1-x32.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2a;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-oa1-x2a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -86,125 +86,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Apr 2023 16:02:57 -0000
+X-List-Received-Date: Fri, 14 Apr 2023 16:02:50 -0000
 
-If misa.F and smstateen_fcsr_ok flag are clear then all the floating
-point instructions must generate an appropriate exception.
+When misa.F is clear, TB_FLAGS.MSTATUS_HS_FS field is unused and can
+be used to save the current state of smstateen0.FCSR check which is
+needed by the floating point translation routines.
 
 Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
 ---
- target/riscv/insn_trans/trans_rvd.c.inc   | 13 ++++++++----
- target/riscv/insn_trans/trans_rvf.c.inc   | 24 +++++++++++++++++++----
- target/riscv/insn_trans/trans_rvzfh.c.inc | 18 ++++++++++++++---
- 3 files changed, 44 insertions(+), 11 deletions(-)
+ target/riscv/cpu_helper.c | 12 ++++++++++++
+ target/riscv/translate.c  |  7 +++++++
+ 2 files changed, 19 insertions(+)
 
-diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
-index 2c51e01c40..d9e0cf116f 100644
---- a/target/riscv/insn_trans/trans_rvd.c.inc
-+++ b/target/riscv/insn_trans/trans_rvd.c.inc
-@@ -18,10 +18,15 @@
-  * this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#define REQUIRE_ZDINX_OR_D(ctx) do { \
--    if (!ctx->cfg_ptr->ext_zdinx) { \
--        REQUIRE_EXT(ctx, RVD); \
--    } \
-+#define REQUIRE_ZDINX_OR_D(ctx) do {           \
-+    if (!has_ext(ctx, RVD)) {                  \
-+        if (!ctx->cfg_ptr->ext_zdinx) {        \
-+            return false;                      \
-+        }                                      \
-+        if (!smstateen_fcsr_check(ctx)) {      \
-+            return false;                      \
-+        }                                      \
-+    }                                          \
- } while (0)
- 
- #define REQUIRE_EVEN(ctx, reg) do { \
-diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-index 9e9fa2087a..6bf6fe16be 100644
---- a/target/riscv/insn_trans/trans_rvf.c.inc
-+++ b/target/riscv/insn_trans/trans_rvf.c.inc
-@@ -24,10 +24,26 @@
-             return false; \
- } while (0)
- 
--#define REQUIRE_ZFINX_OR_F(ctx) do {\
--    if (!ctx->cfg_ptr->ext_zfinx) { \
--        REQUIRE_EXT(ctx, RVF); \
--    } \
-+static inline bool smstateen_fcsr_check(DisasContext *ctx)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    if (!has_ext(ctx, RVF) && !ctx->smstateen_fcsr_ok) {
-+        ctx->virt_inst_excp = ctx->virt_enabled;
-+        return false;
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 433ea529b0..fd1731cc39 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -105,6 +105,18 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+         flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_VS,
+                            get_field(env->mstatus_hs, MSTATUS_VS));
+     }
++    /*
++     * If misa.F is 0 then the MSTATUS_HS_FS field of the tb->flags
++     * can be used to pass the current state of the smstateen.FCSR bit
++     * which must be checked for in the floating point translation routines
++     */
++    if (!riscv_has_ext(env, RVF)) {
++        if (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) == RISCV_EXCP_NONE) {
++            flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS, 1);
++        } else {
++            flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS, 0);
++        }
 +    }
-+#endif
-+    return true;
-+}
-+
-+#define REQUIRE_ZFINX_OR_F(ctx) do {           \
-+    if (!has_ext(ctx, RVF)) {                  \
-+        if (!ctx->cfg_ptr->ext_zfinx) {        \
-+            return false;                      \
-+        }                                      \
-+        if (!smstateen_fcsr_check(ctx)) {      \
-+            return false;                      \
-+        }                                      \
-+    }                                          \
- } while (0)
+     if (cpu->cfg.debug && !icount_enabled()) {
+         flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
+     }
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index d0094922b6..e29bbb8b70 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -79,6 +79,7 @@ typedef struct DisasContext {
+     int frm;
+     RISCVMXL ol;
+     bool virt_inst_excp;
++    bool smstateen_fcsr_ok;
+     bool virt_enabled;
+     const RISCVCPUConfig *cfg_ptr;
+     bool hlsx;
+@@ -1202,6 +1203,12 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
+     ctx->zero = tcg_constant_tl(0);
+     ctx->virt_inst_excp = false;
++    if (has_ext(ctx, RVF)) {
++        ctx->smstateen_fcsr_ok = 1;
++    } else {
++        ctx->smstateen_fcsr_ok = FIELD_EX32(tb_flags, TB_FLAGS,
++                                             MSTATUS_HS_FS);
++    }
+ }
  
- #define REQUIRE_ZCF(ctx) do {                  \
-diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
-index 74dde37ff7..74a125e4c0 100644
---- a/target/riscv/insn_trans/trans_rvzfh.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
-@@ -16,28 +16,40 @@
-  * this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#define REQUIRE_ZFH(ctx) do { \
-+#define REQUIRE_ZFH(ctx) do {          \
-     if (!ctx->cfg_ptr->ext_zfh) {      \
--        return false;         \
--    }                         \
-+        return false;                  \
-+    }                                  \
-+    if (!smstateen_fcsr_check(ctx)) {  \
-+        return false;                  \
-+    }                                  \
- } while (0)
- 
- #define REQUIRE_ZHINX_OR_ZFH(ctx) do { \
-     if (!ctx->cfg_ptr->ext_zhinx && !ctx->cfg_ptr->ext_zfh) { \
-         return false;                  \
-     }                                  \
-+    if (!smstateen_fcsr_check(ctx)) {  \
-+        return false;                  \
-+    }                                  \
- } while (0)
- 
- #define REQUIRE_ZFHMIN(ctx) do {              \
-     if (!ctx->cfg_ptr->ext_zfhmin) {          \
-         return false;                         \
-     }                                         \
-+    if (!smstateen_fcsr_check(ctx)) {         \
-+        return false;                         \
-+    }                                         \
- } while (0)
- 
- #define REQUIRE_ZFHMIN_OR_ZHINXMIN(ctx) do {                 \
-     if (!(ctx->cfg_ptr->ext_zfhmin || ctx->cfg_ptr->ext_zhinxmin)) { \
-         return false;                                        \
-     }                                                        \
-+    if (!smstateen_fcsr_check(ctx)) {                        \
-+        return false;                                        \
-+    }                                                        \
- } while (0)
- 
- static bool trans_flh(DisasContext *ctx, arg_flh *a)
+ static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
 -- 
 2.34.1
 
