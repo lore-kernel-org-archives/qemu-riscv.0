@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pnUVm-0001sI-Tv
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Apr 2023 21:15:30 -0400
+	id 1pnUfO-00044D-Jd
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Apr 2023 21:25:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pnUVl-0001qw-MA; Fri, 14 Apr 2023 21:15:29 -0400
+ id 1pnUfM-00043h-B2; Fri, 14 Apr 2023 21:25:24 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pnUVi-0005Ha-TA; Fri, 14 Apr 2023 21:15:29 -0400
+ id 1pnUfJ-0007H8-9T; Fri, 14 Apr 2023 21:25:24 -0400
 Received: from [192.168.0.120] (unknown [180.165.241.15])
- by APP-05 (Coremail) with SMTP id zQCowADn7kKk+jlkDBbAEg--.11411S2;
- Sat, 15 Apr 2023 09:15:17 +0800 (CST)
-Message-ID: <3690a23f-25b3-3e62-4412-9c9c867031aa@iscas.ac.cn>
-Date: Sat, 15 Apr 2023 09:15:15 +0800
+ by APP-05 (Coremail) with SMTP id zQCowACHj8_1_DlkT+7AEg--.13355S2;
+ Sat, 15 Apr 2023 09:25:10 +0800 (CST)
+Message-ID: <615227a7-0406-8c52-d08c-e5d225909d6f@iscas.ac.cn>
+Date: Sat, 15 Apr 2023 09:25:08 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
 Cc: liweiwei@iscas.ac.cn, Alistair Francis <alistair23@gmail.com>,
  Daniel Barboza <dbarboza@ventanamicro.com>,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: Re: [RFC PATCH v2 2/4] target/riscv: Reuse TB_FLAGS.MSTATUS_HFS_FS
+Subject: Re: [RFC PATCH v2 3/4] target/riscv: check smstateen fcsr flag
 Content-Language: en-US
 To: Mayuresh Chitale <mchitale@ventanamicro.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org, alistair.francis@wdc.com
 References: <20230414160202.1298242-1-mchitale@ventanamicro.com>
- <20230414160202.1298242-3-mchitale@ventanamicro.com>
+ <20230414160202.1298242-4-mchitale@ventanamicro.com>
 From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230414160202.1298242-3-mchitale@ventanamicro.com>
+In-Reply-To: <20230414160202.1298242-4-mchitale@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: zQCowADn7kKk+jlkDBbAEg--.11411S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Aw1rWF1kZw1fKw4UKr45Jrb_yoW8Kw4DpF
- s7Gw4SkFZrGFZrJa1fKF4YqF1xWr4kCr45uwn7Cw10qrs0qrZ5CF97KFW3GFs8JFy8Wryj
- vF4YkryUAr4UZFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: zQCowACHj8_1_DlkT+7AEg--.13355S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxJFy7Cw4ruFykArWfAr48tFb_yoWrXr18p3
+ yrGFWYyrZ5JrWSya1ftFZ5A3sxtanagw4kKwnxt34DJa98Gr4rWrs5K3y7KryxJFykWryI
+ ka1YyFy3Cw4DX3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUUkl14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
  1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
@@ -69,76 +69,149 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Apr 2023 01:15:30 -0000
+X-List-Received-Date: Sat, 15 Apr 2023 01:25:24 -0000
 
 
 On 2023/4/15 00:02, Mayuresh Chitale wrote:
-> When misa.F is clear, TB_FLAGS.MSTATUS_HS_FS field is unused and can
-> be used to save the current state of smstateen0.FCSR check which is
-> needed by the floating point translation routines.
+> If misa.F and smstateen_fcsr_ok flag are clear then all the floating
+> point instructions must generate an appropriate exception.
 >
 > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
 > ---
->   target/riscv/cpu_helper.c | 12 ++++++++++++
->   target/riscv/translate.c  |  7 +++++++
->   2 files changed, 19 insertions(+)
+>   target/riscv/insn_trans/trans_rvd.c.inc   | 13 ++++++++----
+>   target/riscv/insn_trans/trans_rvf.c.inc   | 24 +++++++++++++++++++----
+>   target/riscv/insn_trans/trans_rvzfh.c.inc | 18 ++++++++++++++---
+>   3 files changed, 44 insertions(+), 11 deletions(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 433ea529b0..fd1731cc39 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -105,6 +105,18 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->           flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_VS,
->                              get_field(env->mstatus_hs, MSTATUS_VS));
->       }
-> +    /*
-> +     * If misa.F is 0 then the MSTATUS_HS_FS field of the tb->flags
-> +     * can be used to pass the current state of the smstateen.FCSR bit
-> +     * which must be checked for in the floating point translation routines
-> +     */
-> +    if (!riscv_has_ext(env, RVF)) {
-> +        if (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) == RISCV_EXCP_NONE) {
-> +            flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS, 1);
-> +        } else {
-> +            flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS, 0);
-> +        }
+> diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
+> index 2c51e01c40..d9e0cf116f 100644
+> --- a/target/riscv/insn_trans/trans_rvd.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvd.c.inc
+> @@ -18,10 +18,15 @@
+>    * this program.  If not, see <http://www.gnu.org/licenses/>.
+>    */
+>   
+> -#define REQUIRE_ZDINX_OR_D(ctx) do { \
+> -    if (!ctx->cfg_ptr->ext_zdinx) { \
+> -        REQUIRE_EXT(ctx, RVD); \
+> -    } \
+> +#define REQUIRE_ZDINX_OR_D(ctx) do {           \
+> +    if (!has_ext(ctx, RVD)) {                  \
+> +        if (!ctx->cfg_ptr->ext_zdinx) {        \
+> +            return false;                      \
+> +        }                                      \
+> +        if (!smstateen_fcsr_check(ctx)) {      \
+> +            return false;                      \
+> +        }                                      \
+> +    }                                          \
+>   } while (0)
+>   
+>   #define REQUIRE_EVEN(ctx, reg) do { \
+> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
+> index 9e9fa2087a..6bf6fe16be 100644
+> --- a/target/riscv/insn_trans/trans_rvf.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvf.c.inc
+> @@ -24,10 +24,26 @@
+>               return false; \
+>   } while (0)
+>   
+> -#define REQUIRE_ZFINX_OR_F(ctx) do {\
+> -    if (!ctx->cfg_ptr->ext_zfinx) { \
+> -        REQUIRE_EXT(ctx, RVF); \
+> -    } \
+> +static inline bool smstateen_fcsr_check(DisasContext *ctx)
+> +{
+> +#ifndef CONFIG_USER_ONLY
+> +    if (!has_ext(ctx, RVF) && !ctx->smstateen_fcsr_ok) {
+
+We needn't check RVF here. Two reasons:
+
+1. This check only be done when RVF is diabled.
+
+2. ctx->smstateen_fcsr_ok is always be true (set in last patch) when RVF 
+is enabled
+
+> +        ctx->virt_inst_excp = ctx->virt_enabled;
+> +        return false;
 > +    }
->       if (cpu->cfg.debug && !icount_enabled()) {
->           flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
->       }
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index d0094922b6..e29bbb8b70 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -79,6 +79,7 @@ typedef struct DisasContext {
->       int frm;
->       RISCVMXL ol;
->       bool virt_inst_excp;
-> +    bool smstateen_fcsr_ok;
->       bool virt_enabled;
->       const RISCVCPUConfig *cfg_ptr;
->       bool hlsx;
-> @@ -1202,6 +1203,12 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->       ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
->       ctx->zero = tcg_constant_tl(0);
->       ctx->virt_inst_excp = false;
-> +    if (has_ext(ctx, RVF)) {
-> +        ctx->smstateen_fcsr_ok = 1;
-> +    } else {
-> +        ctx->smstateen_fcsr_ok = FIELD_EX32(tb_flags, TB_FLAGS,
-> +                                             MSTATUS_HS_FS);
+> +#endif
+> +    return true;
+> +}
+> +
+> +#define REQUIRE_ZFINX_OR_F(ctx) do {           \
+> +    if (!has_ext(ctx, RVF)) {                  \
+> +        if (!ctx->cfg_ptr->ext_zfinx) {        \
+> +            return false;                      \
+> +        }                                      \
+> +        if (!smstateen_fcsr_check(ctx)) {      \
+> +            return false;                      \
+> +        }                                      \
+> +    }                                          \
+>   } while (0)
+>   
+>   #define REQUIRE_ZCF(ctx) do {                  \
+> diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
+> index 74dde37ff7..74a125e4c0 100644
+> --- a/target/riscv/insn_trans/trans_rvzfh.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
+> @@ -16,28 +16,40 @@
+>    * this program.  If not, see <http://www.gnu.org/licenses/>.
+>    */
+>   
+> -#define REQUIRE_ZFH(ctx) do { \
+> +#define REQUIRE_ZFH(ctx) do {          \
+>       if (!ctx->cfg_ptr->ext_zfh) {      \
+> -        return false;         \
+> -    }                         \
+> +        return false;                  \
+> +    }                                  \
+> +    if (!smstateen_fcsr_check(ctx)) {  \
+> +        return false;                  \
+> +    }                                  \
 
-Seems unaligned with tb_flags.
+This is unnecessary here. This check is only for Zhinx.
 
-Otherwise, LGTM.
+Similar to REQUIRE_ZFHMIN.
 
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+>   } while (0)
+>   
+>   #define REQUIRE_ZHINX_OR_ZFH(ctx) do { \
+>       if (!ctx->cfg_ptr->ext_zhinx && !ctx->cfg_ptr->ext_zfh) { \
+>           return false;                  \
+>       }                                  \
+> +    if (!smstateen_fcsr_check(ctx)) {  \
+> +        return false;                  \
+> +    }                                  \
+
+This check is only for Zhinx here. So it's better to take the similar 
+way as REQUIRE_ZFINX_OR_F.
+
+Similar to REQUIRE_ZFHMIN_OR_ZHINXMIN.
+
+Regards,
 
 Weiwei Li
 
-> +    }
->   }
+>   } while (0)
 >   
->   static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
+>   #define REQUIRE_ZFHMIN(ctx) do {              \
+>       if (!ctx->cfg_ptr->ext_zfhmin) {          \
+>           return false;                         \
+>       }                                         \
+> +    if (!smstateen_fcsr_check(ctx)) {         \
+> +        return false;                         \
+> +    }                                         \
+>   } while (0)
+>   
+>   #define REQUIRE_ZFHMIN_OR_ZHINXMIN(ctx) do {                 \
+>       if (!(ctx->cfg_ptr->ext_zfhmin || ctx->cfg_ptr->ext_zhinxmin)) { \
+>           return false;                                        \
+>       }                                                        \
+> +    if (!smstateen_fcsr_check(ctx)) {                        \
+> +        return false;                                        \
+> +    }                                                        \
+>   } while (0)
+>   
+>   static bool trans_flh(DisasContext *ctx, arg_flh *a)
 
 
