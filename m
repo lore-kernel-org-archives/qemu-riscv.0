@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1poBdu-0000B4-6t
+	id 1poBdu-0000BE-Bk
 	for mharc-qemu-riscv@gnu.org; Sun, 16 Apr 2023 19:18:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dfustini@baylibre.com>)
- id 1poBds-0000A5-Ge
+ id 1poBds-0000AH-L5
  for qemu-riscv@nongnu.org; Sun, 16 Apr 2023 19:18:44 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dfustini@baylibre.com>)
- id 1poBdo-0004HC-9F
+ id 1poBdp-0004Hb-AC
  for qemu-riscv@nongnu.org; Sun, 16 Apr 2023 19:18:44 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- cm18-20020a17090afa1200b0024713adf69dso11690150pjb.3
- for <qemu-riscv@nongnu.org>; Sun, 16 Apr 2023 16:18:39 -0700 (PDT)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ mq14-20020a17090b380e00b002472a2d9d6aso9711204pjb.5
+ for <qemu-riscv@nongnu.org>; Sun, 16 Apr 2023 16:18:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1681687119; x=1684279119; 
+ d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1681687120; x=1684279120; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HTop2FIiObHfGAenbh2XJ3MX8XHxp+aoI9kbS5HSHFQ=;
- b=tNTrdgc1VIBE8u75kUCLyObZt+7ls9LIcI6ExKjoTTQHUktT1sUC2KcYAJV9GvQbUb
- QxR04tDiAW94p+MDGUOzrmxMRx1TZSx3hbHRdUEmWYBH4K6fuSHs38Eg91Zt1il5OGEM
- wvVvhlv/UPJ3W7J++ru9YKWW9DOLEZdAagoDzmjs+afJQFTxSJmNxuLLOV69wTmsX/yG
- PfIJKzvyATbEdcVp3dLeKazc7mqd7G1TTGNiwKUzG8b+cYrL6eNq4EFdHKYeZDjXctor
- DML8VuQDJmvb+9qaUHfPorR0MuYpRvhdLibkaQisbNPKRKg9HfAaCpPFHzNgDVP68jwy
- BN6Q==
+ bh=r77zs+wYrWdUnDiK/DqITyLcxyU7q4aifAZ6rFsQTsc=;
+ b=nylKLmHMy8omRfmfCX2Tp3umLaurCFUhDBvfe92qEhLPfBJXZ7JKbrOhVzjTdL57uH
+ ArJ1t4ENA3JOpE4BKBlDJurAZtU+CLqYX+Yn20rtrjxRomripvSHGIIV+CIE7cfpHZbQ
+ /TYzvc7wwD99wRCaWg/qqLGie4GR5QT+eAq2wAaLZ5RZCKbJR1o0bWc/KyAn9E3l7M7h
+ W+90LpsbcqmeT2VO4xRswytnSMcPlwhAH25ljjiP+eapqfwTceFXzqywonsgod/hzK8q
+ nxqnLTElV5+5CXAoglNiskvNAOlMgYeYUn+uzamYAebb59o4JIcs3p+y1l7h4EB5DWrf
+ DfPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681687119; x=1684279119;
+ d=1e100.net; s=20221208; t=1681687120; x=1684279120;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HTop2FIiObHfGAenbh2XJ3MX8XHxp+aoI9kbS5HSHFQ=;
- b=eSorIxtoH0EEI+/JNoEcdzkG5M1uh6+31MwxdTfvXk7TEhRRq+6Bh/xEmU/LpUsxd+
- xYBSa76hiefHhUXHOYpoGRqYDkvnPqvYFjIWnwp8ynkMhxF+OY6Ls8tzesSLqt1VZUAe
- WmoTyP3IrUVkytHO71yzomZrT8RFTzi0bWxQzPVmQzZZqV9tZu9cJlOUw47+eKY/fzNj
- N8xuByuzmwKiQ88qVlyYyp6+xG0TxeP/HNLko+rDL9e9D/MgJc6+cCAdPqgTNSvnlKFo
- hJgdkP2G4KqzKJJhn+gNCJMUENZdIOZgiERFIMWr8TEuUu39jK0V/cLpvE9Tf5lX8SPa
- 2MaQ==
-X-Gm-Message-State: AAQBX9eVz14FKzsPzP8sLKEjtDigBsJeIfMs7pLiMXILzkPC1HM022Is
- fw8kyqlwE4vOGLWXd8625w3fKQ==
-X-Google-Smtp-Source: AKy350ZqyVBg/LoOS2+Dx+JhPEwwyxCi/Qb79btipbECg/AlwwyhLN6A04TOcmFdjuTmMw22V0Ipiw==
-X-Received: by 2002:a17:902:db09:b0:1a6:82ac:f277 with SMTP id
- m9-20020a170902db0900b001a682acf277mr12309733plx.14.1681687118933; 
- Sun, 16 Apr 2023 16:18:38 -0700 (PDT)
+ bh=r77zs+wYrWdUnDiK/DqITyLcxyU7q4aifAZ6rFsQTsc=;
+ b=XBcJ4nQGfU3N0d/v1Jv3hCEKtWqSFN+tbtXY8dsSodmH+q++Ar6B2iF3YAh/+5HV+1
+ JpKozZi6zJxq5bXFmnlCx8pptFi8w7Lc9zSh1FVgOUr4YEFCnHHaySHSc0CuDN097LMC
+ aabQoM32ED2WfwfFhij8rQgylENrBjfN7eySEBsxMETemzfkyerG1/7PABZefRq2v7Yx
+ Reg/ioP98BD/Rtxih6kVuMk+0hgiekU4sEZHqf/dDRiG52B+8rEtNH9h6IhnaG0AJyRb
+ JjDrfpov8yroELqom44OfLzVP3kC8nUkNivoLBzyaASE/Pi0Kspihb4nMrtfQ4CoHYWA
+ 7FBg==
+X-Gm-Message-State: AAQBX9f+HzICy+xqXH+fyJsoCP636OM6uwl4GHKCO/6wm0JT1DOrR1pH
+ BfVW+1fkCqDQsRLN1K9qnDlO0Q==
+X-Google-Smtp-Source: AKy350bbbyRgHc9gk4RXxJN2QPfW0RB3xCOyC0/1OpBMSUuqGLcT/0EI1+WrT+UoaL6cHSWd3c/XyQ==
+X-Received: by 2002:a17:902:db10:b0:19a:96ea:3850 with SMTP id
+ m16-20020a170902db1000b0019a96ea3850mr11917606plx.17.1681687120061; 
+ Sun, 16 Apr 2023 16:18:40 -0700 (PDT)
 Received: from localhost.localdomain ([2601:1c2:1800:f680:20ea:ba1c:5673:16e6])
  by smtp.gmail.com with ESMTPSA id
- jl3-20020a170903134300b001a6b02659c0sm3087847plb.159.2023.04.16.16.18.37
+ jl3-20020a170903134300b001a6b02659c0sm3087847plb.159.2023.04.16.16.18.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Apr 2023 16:18:38 -0700 (PDT)
+ Sun, 16 Apr 2023 16:18:39 -0700 (PDT)
 From: Drew Fustini <dfustini@baylibre.com>
 To: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
@@ -59,16 +59,16 @@ To: Palmer Dabbelt <palmer@dabbelt.com>,
  Adrien Ricciardi <aricciardi@baylibre.com>,
  =?UTF-8?q?Kornel=20Dul=C4=99ba?= <mindal@semihalf.com>
 Cc: Drew Fustini <dfustini@baylibre.com>
-Subject: [RFC PATCH 3/8] hw/riscv: implement CBQRI capacity controller
-Date: Sun, 16 Apr 2023 16:20:45 -0700
-Message-Id: <20230416232050.4094820-4-dfustini@baylibre.com>
+Subject: [RFC PATCH 4/8] hw/riscv: implement CBQRI memory controller
+Date: Sun, 16 Apr 2023 16:20:46 -0700
+Message-Id: <20230416232050.4094820-5-dfustini@baylibre.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230416232050.4094820-1-dfustini@baylibre.com>
 References: <20230416232050.4094820-1-dfustini@baylibre.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=dfustini@baylibre.com; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=dfustini@baylibre.com; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -91,35 +91,36 @@ X-List-Received-Date: Sun, 16 Apr 2023 23:18:44 -0000
 
 From: Nicolas Pitre <npitre@baylibre.com>
 
-Implement a capacity controller according to the Capacity and Bandwidth
+Implement a bandwidth controller according to the Capacity and Bandwidth
 QoS Register Interface (CBQRI) which supports these capabilities:
 
-  - Number of access types: 2 (code and data)
-  - Usage monitoring operations: CONFIG_EVENT, READ_COUNTER
-  - Event IDs supported: None, Occupancy
-  - Capacity allocation ops: CONFIG_LIMIT, READ_LIMIT, FLUSH_RCID
+    - Number of access types: 1 (no code/data differentiation)
+    - Usage monitoring operations: CONFIG_EVENT, READ_COUNTER
+    - Event IDs supported: None, Total read/write byte count, Total
+                           read byte count, Total write byte count
+    - Bandwidth allocation operations: CONFIG_LIMIT, READ_LIMIT
 
 Link: https://github.com/riscv-non-isa/riscv-cmqri/blob/main/riscv-cbqri.pdf
 Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
 Signed-off-by: Drew Fustini <dfustini@baylibre.com>
 ---
- hw/riscv/cbqri_capacity.c | 532 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 532 insertions(+)
- create mode 100644 hw/riscv/cbqri_capacity.c
+ hw/riscv/cbqri_bandwidth.c | 511 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 511 insertions(+)
+ create mode 100644 hw/riscv/cbqri_bandwidth.c
 
-diff --git a/hw/riscv/cbqri_capacity.c b/hw/riscv/cbqri_capacity.c
+diff --git a/hw/riscv/cbqri_bandwidth.c b/hw/riscv/cbqri_bandwidth.c
 new file mode 100644
-index 000000000000..a9f65c2ba25f
+index 000000000000..da33c34fada4
 --- /dev/null
-+++ b/hw/riscv/cbqri_capacity.c
-@@ -0,0 +1,532 @@
++++ b/hw/riscv/cbqri_bandwidth.c
+@@ -0,0 +1,511 @@
 +/*
 + * RISC-V Capacity and Bandwidth QoS Register Interface
 + * URL: https://github.com/riscv-non-isa/riscv-cbqri
 + *
 + * Copyright (c) 2023 BayLibre SAS
 + *
-+ * This file contains the Capacity-controller QoS Register Interface.
++ * This file contains the Bandwidth-controller QoS Register Interface.
 + *
 + * This program is free software; you can redistribute it and/or modify it
 + * under the terms and conditions of the GNU General Public License,
@@ -139,86 +140,93 @@ index 000000000000..a9f65c2ba25f
 +#include "qemu/error-report.h"
 +#include "qemu/log.h"
 +#include "qemu/module.h"
-+#include "qemu/bitmap.h"
 +#include "hw/sysbus.h"
 +#include "target/riscv/cpu.h"
 +#include "hw/riscv/cbqri.h"
 +
++
 +/* Encodings of `AT` field */
 +enum {
-+    CC_AT_DATA = 0,
-+    CC_AT_CODE = 1,
++    BC_AT_DATA = 0,
++    BC_AT_CODE = 1,
 +};
 +
 +/* Capabilities */
-+REG64(CC_CAPABILITIES, 0);
-+FIELD(CC_CAPABILITIES, VER, 0, 8);
-+FIELD(CC_CAPABILITIES, VER_MINOR, 0, 4);
-+FIELD(CC_CAPABILITIES, VER_MAJOR, 4, 4);
-+FIELD(CC_CAPABILITIES, NCBLKS, 8, 16);
-+FIELD(CC_CAPABILITIES, FRCID, 24, 1);
++REG64(BC_CAPABILITIES, 0);
++FIELD(BC_CAPABILITIES, VER, 0, 8);
++FIELD(BC_CAPABILITIES, VER_MINOR, 0, 4);
++FIELD(BC_CAPABILITIES, VER_MAJOR, 4, 4);
++FIELD(BC_CAPABILITIES, NBWBLKS, 8, 16);
++FIELD(BC_CAPABILITIES, MRBWB, 32, 16);
 +
 +/* Usage monitoring control */
-+REG64(CC_MON_CTL, 8);
-+FIELD(CC_MON_CTL, OP, 0, 5);
-+FIELD(CC_MON_CTL, AT, 5, 3);
-+FIELD(CC_MON_CTL, MCID, 8, 12);
-+FIELD(CC_MON_CTL, EVT_ID, 20, 8);
-+FIELD(CC_MON_CTL, ATV, 28, 1);
-+FIELD(CC_MON_CTL, STATUS, 32, 7);
-+FIELD(CC_MON_CTL, BUSY, 39, 1);
++REG64(BC_MON_CTL, 8);
++FIELD(BC_MON_CTL, OP, 0, 5);
++FIELD(BC_MON_CTL, AT, 5, 3);
++FIELD(BC_MON_CTL, MCID, 8, 12);
++FIELD(BC_MON_CTL, EVT_ID, 20, 8);
++FIELD(BC_MON_CTL, ATV, 28, 1);
++FIELD(BC_MON_CTL, STATUS, 32, 7);
++FIELD(BC_MON_CTL, BUSY, 39, 1);
 +
 +/* Usage monitoring operations */
 +enum {
-+    CC_MON_OP_CONFIG_EVENT = 1,
-+    CC_MON_OP_READ_COUNTER = 2,
++    BC_MON_OP_CONFIG_EVENT = 1,
++    BC_MON_OP_READ_COUNTER = 2,
 +};
 +
-+/* Usage monitoring event ID */
++/* Bandwidth monitoring event ID */
 +enum {
-+    CC_EVT_ID_None = 0,
-+    CC_EVT_ID_Occupancy = 1,
++    BC_EVT_ID_None = 0,
++    BC_EVT_ID_RDWR_count = 1,
++    BC_EVT_ID_RDONLY_count = 2,
++    BC_EVT_ID_WRONLY_count = 3,
 +};
 +
-+/* CC_MON_CTL.STATUS field encodings */
++/* BC_MON_CTL.STATUS field encodings */
 +enum {
-+    CC_MON_CTL_STATUS_SUCCESS = 1,
-+    CC_MON_CTL_STATUS_INVAL_OP = 2,
-+    CC_MON_CTL_STATUS_INVAL_MCID = 3,
-+    CC_MON_CTL_STATUS_INVAL_EVT_ID = 4,
-+    CC_MON_CTL_STATUS_INVAL_AT = 5,
++    BC_MON_CTL_STATUS_SUCCESS = 1,
++    BC_MON_CTL_STATUS_INVAL_OP = 2,
++    BC_MON_CTL_STATUS_INVAL_MCID = 3,
++    BC_MON_CTL_STATUS_INVAL_EVT_ID = 4,
++    BC_MON_CTL_STATUS_INVAL_AT = 5,
 +};
 +
 +/* Monitoring counter value */
-+REG64(CC_MON_CTR_VAL, 16);
-+FIELD(CC_MON_CTR_VAL, CTR, 0, 63);
-+FIELD(CC_MON_CTR_VAL, INVALID, 63, 1);
++REG64(BC_MON_CTR_VAL, 16);
++FIELD(BC_MON_CTR_VAL, CTR, 0, 62);
++FIELD(BC_MON_CTR_VAL, INVALID, 62, 1);
++FIELD(BC_MON_CTR_VAL, OVF, 63, 1);
 +
-+/* Capacity allocation control */
-+REG64(CC_ALLOC_CTL, 24);
-+FIELD(CC_ALLOC_CTL, OP, 0, 5);
-+FIELD(CC_ALLOC_CTL, AT, 5, 3);
-+FIELD(CC_ALLOC_CTL, RCID, 8, 12);
-+FIELD(CC_ALLOC_CTL, STATUS, 32, 7);
-+FIELD(CC_ALLOC_CTL, BUSY, 39, 1);
++/* Bandwidth Allocation control */
++REG64(BC_ALLOC_CTL, 24);
++FIELD(BC_ALLOC_CTL, OP, 0, 5);
++FIELD(BC_ALLOC_CTL, AT, 5, 3);
++FIELD(BC_ALLOC_CTL, RCID, 8, 12);
++FIELD(BC_ALLOC_CTL, STATUS, 32, 7);
++FIELD(BC_ALLOC_CTL, BUSY, 39, 1);
 +
-+/* Capacity allocation operations */
++/* Bandwidth allocation operations */
 +enum {
-+    CC_ALLOC_OP_CONFIG_LIMIT = 1,
-+    CC_ALLOC_OP_READ_LIMIT = 2,
-+    CC_ALLOC_OP_FLUSH_RCID = 3,
++    BC_ALLOC_OP_CONFIG_LIMIT = 1,
++    BC_ALLOC_OP_READ_LIMIT = 2,
 +};
 +
-+/* CC_ALLOC_CTL.STATUS field encodings */
++/* BC_ALLOC_CTL.STATUS field encodings */
 +enum {
-+    CC_ALLOC_STATUS_SUCCESS = 1,
-+    CC_ALLOC_STATUS_INVAL_OP = 2,
-+    CC_ALLOC_STATUS_INVAL_RCID = 3,
-+    CC_ALLOC_STATUS_INVAL_AT = 4,
-+    CC_ALLOC_STATUS_INVAL_BLKMASK = 5,
++    BC_ALLOC_STATUS_SUCCESS = 1,
++    BC_ALLOC_STATUS_INVAL_OP = 2,
++    BC_ALLOC_STATUS_INVAL_RCID = 3,
++    BC_ALLOC_STATUS_INVAL_AT = 4,
++    BC_ALLOC_STATUS_INVAL_BLKS = 5,
 +};
 +
-+REG64(CC_BLOCK_MASK, 32);
++/* Bandwidth allocation */
++REG64(BC_BW_ALLOC, 32);
++FIELD(BC_BW_ALLOC, Rbwb, 0, 16);
++FIELD(BC_BW_ALLOC, Mweight, 20, 8);
++FIELD(BC_BW_ALLOC, sharedAT, 28, 3);
++FIELD(BC_BW_ALLOC, useShared, 31, 1);
 +
 +
 +typedef struct MonitorCounter {
@@ -228,127 +236,105 @@ index 000000000000..a9f65c2ba25f
 +    bool active;
 +} MonitorCounter;
 +
-+typedef struct RiscvCbqriCapacityState {
++typedef struct BandwidthAllocation {
++    uint32_t Rbwb:16;
++    uint32_t Mweight:8;
++    uint32_t sharedAT:3;
++    bool useShared:1;
++} BandwidthAllocation;
++
++typedef struct RiscvCbqriBandwidthState {
 +    SysBusDevice parent_obj;
 +    MemoryRegion mmio;
 +    const char *name;
-+    const RiscvCbqriCapacityCaps *caps;
++    const RiscvCbqriBandwidthCaps *caps;
 +
 +    /* cached value of some registers */
-+    uint64_t cc_mon_ctl;
-+    uint64_t cc_mon_ctr_val;
-+    uint64_t cc_alloc_ctl;
++    uint64_t bc_mon_ctl;
++    uint64_t bc_mon_ctr_val;
++    uint64_t bc_alloc_ctl;
++    uint64_t bc_bw_alloc;
 +
-+    /* monitoring counters */
 +    MonitorCounter *mon_counters;
++    BandwidthAllocation *bw_allocations;
++} RiscvCbqriBandwidthState;
 +
-+    /* allocation blockmasks (1st one is the CC_BLOCK_MASK register) */
-+    uint64_t *alloc_blockmasks;
-+} RiscvCbqriCapacityState;
++#define TYPE_RISCV_CBQRI_BC "riscv.cbqri.bandwidth"
 +
-+#define TYPE_RISCV_CBQRI_CC "riscv.cbqri.capacity"
++#define RISCV_CBQRI_BC(obj) \
++    OBJECT_CHECK(RiscvCbqriBandwidthState, (obj), TYPE_RISCV_CBQRI_BC)
 +
-+#define RISCV_CBQRI_CC(obj) \
-+    OBJECT_CHECK(RiscvCbqriCapacityState, (obj), TYPE_RISCV_CBQRI_CC)
-+
-+static uint64_t *get_blockmask_location(RiscvCbqriCapacityState *cc,
-+                                        uint32_t rcid, uint32_t at)
++static BandwidthAllocation *get_bw_alloc(RiscvCbqriBandwidthState *bc,
++                                      uint32_t rcid, uint32_t at)
 +{
 +    /*
-+     * All blockmasks are contiguous to simplify allocation.
-+     * The first one is used to hold the CC_BLOCK_MASK register content,
-+     * followed by respective blockmasks for each AT per RCID.
-+     * Each blockmask is made of one or more uint64_t "slots".
++     * All bandwidth allocation records are contiguous to simplify
++     * allocation. The first one is used to hold the BC_BW_ALLOC register
++     * content, followed by respective records for each AT per RCID.
 +     */
++
 +    unsigned int nb_ats = 0;
-+    nb_ats += !!cc->caps->supports_at_data;
-+    nb_ats += !!cc->caps->supports_at_code;
++    nb_ats += !!bc->caps->supports_at_data;
++    nb_ats += !!bc->caps->supports_at_code;
 +    nb_ats = MAX(nb_ats, 1);
 +    assert(at < nb_ats);
 +
-+    unsigned int blockmask_slots = (cc->caps->ncblks + 63) / 64;
-+    unsigned int blockmask_offset = blockmask_slots * (1 + rcid * nb_ats + at);
-+
-+    return cc->alloc_blockmasks + blockmask_offset;
++    return &bc->bw_allocations[1 + rcid * nb_ats + at];
 +}
 +
-+static uint32_t alloc_blockmask_config(RiscvCbqriCapacityState *cc,
-+                                       uint32_t rcid, uint32_t at,
-+                                       bool *busy)
++static uint32_t bandwidth_config(RiscvCbqriBandwidthState *bc,
++                                 uint32_t rcid, uint32_t at,
++                                 bool *busy)
 +{
-+    unsigned int blockmask_slots = (cc->caps->ncblks + 63) / 64;
++    BandwidthAllocation *bw_alloc = get_bw_alloc(bc, rcid, at);
 +
-+    if ((cc->caps->ncblks % 64) != 0) {
-+        /* make sure provided mask isn't too large */
-+        uint64_t tail = cc->alloc_blockmasks[blockmask_slots - 1];
-+        if ((tail >> (cc->caps->ncblks % 64)) != 0) {
-+            return CC_ALLOC_STATUS_INVAL_BLKMASK;
-+        }
-+    }
-+
-+    /* for now we only preserve the current CC_BLOCK_MASK register content */
-+    memcpy(get_blockmask_location(cc, rcid, at),
-+           cc->alloc_blockmasks, blockmask_slots * 8);
-+    return CC_ALLOC_STATUS_SUCCESS;
++    /* for now we only preserve the current BC_BW_ALLOC register content */
++    *bw_alloc = bc->bw_allocations[0];
++    return BC_ALLOC_STATUS_SUCCESS;
 +}
 +
-+static uint32_t alloc_blockmask_read(RiscvCbqriCapacityState *cc,
-+                                     uint32_t rcid, uint32_t at,
-+                                     bool *busy)
++static uint32_t bandwidth_read(RiscvCbqriBandwidthState *bc,
++                               uint32_t rcid, uint32_t at,
++                               bool *busy)
 +{
-+    unsigned int blockmask_slots = (cc->caps->ncblks + 63) / 64;
++    BandwidthAllocation *bw_alloc = get_bw_alloc(bc, rcid, at);
 +
-+    memcpy(cc->alloc_blockmasks,
-+           get_blockmask_location(cc, rcid, at),
-+           blockmask_slots * 8);
-+    return CC_ALLOC_STATUS_SUCCESS;
++    /* populate BC_BW_ALLOC register with selected content */
++    bc->bw_allocations[0] = *bw_alloc;
++    return BC_ALLOC_STATUS_SUCCESS;
 +}
 +
-+static uint32_t alloc_blockmask_init(RiscvCbqriCapacityState *cc,
-+                                     uint32_t rcid, uint32_t at, bool set,
-+                                     bool *busy)
-+{
-+    void *blockmask = get_blockmask_location(cc, rcid, at);
-+
-+    if (set) {
-+        bitmap_fill(blockmask, cc->caps->ncblks);
-+    } else {
-+        bitmap_zero(blockmask, cc->caps->ncblks);
-+    }
-+    return CC_ALLOC_STATUS_SUCCESS;
-+}
-+
-+static bool is_valid_at(RiscvCbqriCapacityState *cc, uint32_t at)
++static bool is_valid_at(RiscvCbqriBandwidthState *bc, uint32_t at)
 +{
 +    switch (at) {
-+    case CC_AT_DATA:
-+        return cc->caps->supports_at_data;
-+    case CC_AT_CODE:
-+        return cc->caps->supports_at_code;
++    case BC_AT_DATA:
++        return bc->caps->supports_at_data;
++    case BC_AT_CODE:
++        return bc->caps->supports_at_code;
 +    default:
 +        return false;
 +    }
 +}
 +
-+static void riscv_cbqri_cc_write_mon_ctl(RiscvCbqriCapacityState *cc,
++static void riscv_cbqri_bc_write_mon_ctl(RiscvCbqriBandwidthState *bc,
 +                                         uint64_t value)
 +{
-+    if (!cc->caps->supports_mon_op_config_event &&
-+        !cc->caps->supports_mon_op_read_counter) {
++    if (!bc->caps->supports_mon_op_config_event &&
++        !bc->caps->supports_mon_op_read_counter) {
 +        /* monitoring not supported: leave mon_ctl set to 0 */
 +        return;
 +    }
 +
 +    /* extract writable fields */
-+    uint32_t op = FIELD_EX64(value, CC_MON_CTL, OP);
-+    uint32_t at = FIELD_EX64(value, CC_MON_CTL, AT);
-+    uint32_t mcid = FIELD_EX64(value, CC_MON_CTL, MCID);
-+    uint32_t evt_id = FIELD_EX64(value, CC_MON_CTL, EVT_ID);
-+    bool atv = FIELD_EX64(value, CC_MON_CTL, ATV);
++    uint32_t op = FIELD_EX64(value, BC_MON_CTL, OP);
++    uint32_t at = FIELD_EX64(value, BC_MON_CTL, AT);
++    uint32_t mcid = FIELD_EX64(value, BC_MON_CTL, MCID);
++    uint32_t evt_id = FIELD_EX64(value, BC_MON_CTL, EVT_ID);
++    bool atv = FIELD_EX64(value, BC_MON_CTL, ATV);
 +
 +    /* extract read-only fields */
-+    uint32_t status = FIELD_EX64(cc->cc_mon_ctl, CC_MON_CTL, STATUS);
-+    bool busy = FIELD_EX64(cc->cc_mon_ctl, CC_MON_CTL, BUSY);
++    uint32_t status = FIELD_EX64(bc->bc_mon_ctl, BC_MON_CTL, STATUS);
++    bool busy = FIELD_EX64(bc->bc_mon_ctl, BC_MON_CTL, BUSY);
 +
 +    if (busy) {
 +        qemu_log_mask(LOG_GUEST_ERROR,
@@ -357,75 +343,78 @@ index 000000000000..a9f65c2ba25f
 +        return;
 +    }
 +
-+    if (!cc->caps->supports_at_data &&
-+        !cc->caps->supports_at_code) {
++    if (!bc->caps->supports_at_data &&
++        !bc->caps->supports_at_code) {
 +        /* AT not supported: hardwire to 0 */
 +        at = 0;
 +        atv = false;
 +    }
 +
-+    if (mcid >= cc->caps->nb_mcids) {
-+        status = CC_MON_CTL_STATUS_INVAL_MCID;
-+    } else if (op == CC_MON_OP_CONFIG_EVENT &&
-+               cc->caps->supports_mon_op_config_event) {
-+        if (evt_id == CC_EVT_ID_None &&
-+            cc->caps->supports_mon_evt_id_none) {
-+            cc->mon_counters[mcid].active = false;
-+            status = CC_MON_CTL_STATUS_SUCCESS;
-+        } else if (evt_id == CC_EVT_ID_Occupancy &&
-+                   cc->caps->supports_mon_evt_id_occupancy) {
-+            if (atv && !is_valid_at(cc, at)) {
-+                status = CC_MON_CTL_STATUS_INVAL_AT;
++    if (mcid >= bc->caps->nb_mcids) {
++        status = BC_MON_CTL_STATUS_INVAL_MCID;
++    } else if (op == BC_MON_OP_CONFIG_EVENT &&
++               bc->caps->supports_mon_op_config_event) {
++        if (evt_id == BC_EVT_ID_None &&
++            bc->caps->supports_mon_evt_id_none) {
++            bc->mon_counters[mcid].active = false;
++            status = BC_MON_CTL_STATUS_SUCCESS;
++        } else if ((evt_id == BC_EVT_ID_RDWR_count &&
++                    bc->caps->supports_mon_evt_id_rdwr_count) ||
++                   (evt_id == BC_EVT_ID_RDONLY_count &&
++                    bc->caps->supports_mon_evt_id_rdonly_count) ||
++                   (evt_id == BC_EVT_ID_WRONLY_count &&
++                    bc->caps->supports_mon_evt_id_wronly_count)) {
++            if (atv && !is_valid_at(bc, at)) {
++                status = BC_MON_CTL_STATUS_INVAL_AT;
 +            } else {
-+                cc->mon_counters[mcid].ctr_val =
-+                    FIELD_DP64(0, CC_MON_CTR_VAL, INVALID, 1);
-+                cc->mon_counters[mcid].evt_id = evt_id;
-+                cc->mon_counters[mcid].at = atv ? at : -1;
-+                cc->mon_counters[mcid].active = true;
-+                status = CC_MON_CTL_STATUS_SUCCESS;
++                bc->mon_counters[mcid].ctr_val =
++                    FIELD_DP64(0, BC_MON_CTR_VAL, INVALID, 1);
++                bc->mon_counters[mcid].evt_id = evt_id;
++                bc->mon_counters[mcid].at = atv ? at : -1;
++                bc->mon_counters[mcid].active = true;
++                status = BC_MON_CTL_STATUS_SUCCESS;
 +            }
 +        } else {
-+            status = CC_MON_CTL_STATUS_INVAL_EVT_ID;
++            status = BC_MON_CTL_STATUS_INVAL_EVT_ID;
 +        }
-+    } else if (op == CC_MON_OP_READ_COUNTER &&
-+               cc->caps->supports_mon_op_read_counter) {
-+        cc->cc_mon_ctr_val = cc->mon_counters[mcid].ctr_val;
-+        status = CC_MON_CTL_STATUS_SUCCESS;
++    } else if (op == BC_MON_OP_READ_COUNTER &&
++               bc->caps->supports_mon_op_read_counter) {
++        bc->bc_mon_ctr_val = bc->mon_counters[mcid].ctr_val;
++        status = BC_MON_CTL_STATUS_SUCCESS;
 +    } else {
-+        status = CC_MON_CTL_STATUS_INVAL_OP;
++        status = BC_MON_CTL_STATUS_INVAL_OP;
 +    }
 +
 +    /* reconstruct updated register value */
 +    value = 0;
-+    value = FIELD_DP64(value, CC_MON_CTL, OP, op);
-+    value = FIELD_DP64(value, CC_MON_CTL, AT, at);
-+    value = FIELD_DP64(value, CC_MON_CTL, MCID, mcid);
-+    value = FIELD_DP64(value, CC_MON_CTL, EVT_ID, evt_id);
-+    value = FIELD_DP64(value, CC_MON_CTL, ATV, atv);
-+    value = FIELD_DP64(value, CC_MON_CTL, STATUS, status);
-+    value = FIELD_DP64(value, CC_MON_CTL, BUSY, busy);
-+    cc->cc_mon_ctl = value;
++    value = FIELD_DP64(value, BC_MON_CTL, OP, op);
++    value = FIELD_DP64(value, BC_MON_CTL, AT, at);
++    value = FIELD_DP64(value, BC_MON_CTL, MCID, mcid);
++    value = FIELD_DP64(value, BC_MON_CTL, EVT_ID, evt_id);
++    value = FIELD_DP64(value, BC_MON_CTL, ATV, atv);
++    value = FIELD_DP64(value, BC_MON_CTL, STATUS, status);
++    value = FIELD_DP64(value, BC_MON_CTL, BUSY, busy);
++    bc->bc_mon_ctl = value;
 +}
 +
-+static void riscv_cbqri_cc_write_alloc_ctl(RiscvCbqriCapacityState *cc,
++static void riscv_cbqri_bc_write_alloc_ctl(RiscvCbqriBandwidthState *bc,
 +                                           uint64_t value)
 +{
-+    if (cc->caps->ncblks == 0 ||
-+        (!cc->caps->supports_alloc_op_config_limit &&
-+         !cc->caps->supports_alloc_op_read_limit &&
-+         !cc->caps->supports_alloc_op_flush_rcid)) {
-+        /* capacity allocation not supported: leave alloc_ctl set to 0 */
++    if (bc->caps->nbwblks == 0 ||
++        (!bc->caps->supports_alloc_op_config_limit &&
++         !bc->caps->supports_alloc_op_read_limit)) {
++        /* capacity allocation not supported: leave bc_alloc_ctl set to 0 */
 +        return;
 +    }
 +
 +    /* extract writable fields */
-+    uint32_t op = FIELD_EX64(value, CC_ALLOC_CTL, OP);
-+    uint32_t at = FIELD_EX64(value, CC_ALLOC_CTL, AT);
-+    uint32_t rcid = FIELD_EX64(value, CC_ALLOC_CTL, RCID);
++    uint32_t op = FIELD_EX64(value, BC_ALLOC_CTL, OP);
++    uint32_t at = FIELD_EX64(value, BC_ALLOC_CTL, AT);
++    uint32_t rcid = FIELD_EX64(value, BC_ALLOC_CTL, RCID);
 +
 +    /* extract read-only fields */
-+    uint32_t status = FIELD_EX64(cc->cc_alloc_ctl, CC_ALLOC_CTL, STATUS);
-+    bool busy = FIELD_EX64(cc->cc_alloc_ctl, CC_ALLOC_CTL, BUSY);
++    uint32_t status = FIELD_EX64(bc->bc_alloc_ctl, BC_ALLOC_CTL, STATUS);
++    bool busy = FIELD_EX64(bc->bc_alloc_ctl, BC_ALLOC_CTL, BUSY);
 +
 +    if (busy) {
 +        qemu_log_mask(LOG_GUEST_ERROR,
@@ -435,128 +424,139 @@ index 000000000000..a9f65c2ba25f
 +    }
 +
 +    bool atv = true;
-+    if (!cc->caps->supports_at_data &&
-+        !cc->caps->supports_at_code) {
++    if (!bc->caps->supports_at_data &&
++        !bc->caps->supports_at_code) {
 +        /* AT not supported: hardwire to 0 */
 +        at = 0;
 +        atv = false;
 +    }
 +
-+    if (rcid >= cc->caps->nb_rcids) {
-+        status = CC_ALLOC_STATUS_INVAL_RCID;
-+    } else if (atv && !is_valid_at(cc, at)) {
-+        status = CC_ALLOC_STATUS_INVAL_AT;
-+    } else if (op == CC_ALLOC_OP_CONFIG_LIMIT &&
-+               cc->caps->supports_alloc_op_config_limit) {
-+        status = alloc_blockmask_config(cc, rcid, at, &busy);
-+    } else if (op == CC_ALLOC_OP_READ_LIMIT &&
-+               cc->caps->supports_alloc_op_read_limit) {
-+        status = alloc_blockmask_read(cc, rcid, at, &busy);
-+    } else if (op == CC_ALLOC_OP_FLUSH_RCID &&
-+               cc->caps->supports_alloc_op_flush_rcid) {
-+        status = alloc_blockmask_init(cc, rcid, at, false, &busy);
++    if (rcid >= bc->caps->nb_rcids) {
++        status = BC_ALLOC_STATUS_INVAL_RCID;
++    } else if (atv && !is_valid_at(bc, at)) {
++        status = BC_ALLOC_STATUS_INVAL_AT;
++    } else if (op == BC_ALLOC_OP_CONFIG_LIMIT &&
++               bc->caps->supports_alloc_op_config_limit) {
++        status = bandwidth_config(bc, rcid, at, &busy);
++    } else if (op == BC_ALLOC_OP_READ_LIMIT &&
++               bc->caps->supports_alloc_op_read_limit) {
++        status = bandwidth_read(bc, rcid, at, &busy);
 +    } else {
-+        status = CC_ALLOC_STATUS_INVAL_OP;
++        status = BC_ALLOC_STATUS_INVAL_OP;
 +    }
 +
 +    /* reconstruct updated register value */
 +    value = 0;
-+    value = FIELD_DP64(value, CC_ALLOC_CTL, OP, op);
-+    value = FIELD_DP64(value, CC_ALLOC_CTL, AT, at);
-+    value = FIELD_DP64(value, CC_ALLOC_CTL, RCID, rcid);
-+    value = FIELD_DP64(value, CC_ALLOC_CTL, STATUS, status);
-+    value = FIELD_DP64(value, CC_ALLOC_CTL, BUSY, busy);
-+    cc->cc_alloc_ctl = value;
++    value = FIELD_DP64(value, BC_ALLOC_CTL, OP, op);
++    value = FIELD_DP64(value, BC_ALLOC_CTL, AT, at);
++    value = FIELD_DP64(value, BC_ALLOC_CTL, RCID, rcid);
++    value = FIELD_DP64(value, BC_ALLOC_CTL, STATUS, status);
++    value = FIELD_DP64(value, BC_ALLOC_CTL, BUSY, busy);
++    bc->bc_alloc_ctl = value;
 +}
 +
-+static void riscv_cbqri_cc_write(void *opaque, hwaddr addr,
++static void riscv_cbqri_bc_write_bw_alloc(RiscvCbqriBandwidthState *bc,
++                                          uint64_t value)
++{
++    if (bc->caps->nbwblks == 0) {
++        /* capacity allocation not supported: leave bw_alloc set to 0 */
++        return;
++    }
++
++    BandwidthAllocation *bc_bw_alloc = &bc->bw_allocations[0];
++
++    /* extract writable fields */
++    bc_bw_alloc->Rbwb = FIELD_EX64(value, BC_BW_ALLOC, Rbwb);
++    bc_bw_alloc->Mweight = FIELD_EX64(value, BC_BW_ALLOC, Mweight);
++    bc_bw_alloc->sharedAT = FIELD_EX64(value, BC_BW_ALLOC, sharedAT);
++    bc_bw_alloc->useShared = FIELD_EX64(value, BC_BW_ALLOC, useShared);
++
++    if (!bc->caps->supports_at_data &&
++        !bc->caps->supports_at_code) {
++        /* AT not supported: hardwire to 0 */
++        bc_bw_alloc->sharedAT = 0;
++        bc_bw_alloc->useShared = false;
++    }
++}
++
++static void riscv_cbqri_bc_write(void *opaque, hwaddr addr,
 +                                 uint64_t value, unsigned size)
 +{
-+    RiscvCbqriCapacityState *cc = opaque;
++    RiscvCbqriBandwidthState *bc = opaque;
 +
 +    assert((addr % 8) == 0);
 +    assert(size == 8);
 +
 +    switch (addr) {
-+    case A_CC_CAPABILITIES:
++    case A_BC_CAPABILITIES:
 +        /* read-only register */
 +        break;
-+    case A_CC_MON_CTL:
-+        riscv_cbqri_cc_write_mon_ctl(cc, value);
++    case A_BC_MON_CTL:
++        riscv_cbqri_bc_write_mon_ctl(bc, value);
 +        break;
-+    case A_CC_ALLOC_CTL:
-+        riscv_cbqri_cc_write_alloc_ctl(cc, value);
-+        break;
-+    case A_CC_MON_CTR_VAL:
++    case A_BC_MON_CTR_VAL:
 +        /* read-only register */
 +        break;
-+    case A_CC_BLOCK_MASK:
-+        if (cc->caps->ncblks == 0) {
-+            break;
-+        }
-+        /* fallthrough */
++    case A_BC_ALLOC_CTL:
++        riscv_cbqri_bc_write_alloc_ctl(bc, value);
++        break;
++    case A_BC_BW_ALLOC:
++        riscv_cbqri_bc_write_bw_alloc(bc, value);
++        break;
 +    default:
-+        uint32_t blkmask_slot = (addr - A_CC_BLOCK_MASK) / 8;
-+        if (blkmask_slot >= (cc->caps->ncblks + 63) / 64) {
-+            qemu_log_mask(LOG_GUEST_ERROR,
-+                          "%s: out of bounds (addr=0x%x)",
-+                          __func__, (uint32_t)addr);
-+            break;
-+        }
-+        cc->alloc_blockmasks[blkmask_slot] = value;
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: out of bounds (addr=0x%x)",
++                      __func__, (uint32_t)addr);
 +    }
 +}
 +
-+static uint64_t riscv_cbqri_cc_read(void *opaque, hwaddr addr, unsigned size)
++static uint64_t riscv_cbqri_bc_read(void *opaque, hwaddr addr, unsigned size)
 +{
-+    RiscvCbqriCapacityState *cc = opaque;
++    RiscvCbqriBandwidthState *bc = opaque;
 +    uint64_t value = 0;
 +
 +    assert((addr % 8) == 0);
 +    assert(size == 8);
 +
 +    switch (addr) {
-+    case A_CC_CAPABILITIES:
-+        value = FIELD_DP64(value, CC_CAPABILITIES, VER_MAJOR,
++    case A_BC_CAPABILITIES:
++        value = FIELD_DP64(value, BC_CAPABILITIES, VER_MAJOR,
 +                           RISCV_CBQRI_VERSION_MAJOR);
-+        value = FIELD_DP64(value, CC_CAPABILITIES, VER_MINOR,
++        value = FIELD_DP64(value, BC_CAPABILITIES, VER_MINOR,
 +                           RISCV_CBQRI_VERSION_MINOR);
-+        value = FIELD_DP64(value, CC_CAPABILITIES, NCBLKS,
-+                           cc->caps->ncblks);
-+        value = FIELD_DP64(value, CC_CAPABILITIES, FRCID,
-+                           cc->caps->supports_alloc_op_flush_rcid);
++        value = FIELD_DP64(value, BC_CAPABILITIES, NBWBLKS,
++                           bc->caps->nbwblks);
++        value = FIELD_DP64(value, BC_CAPABILITIES, MRBWB,
++                           bc->caps->mrbwb);
 +        break;
-+    case A_CC_MON_CTL:
-+        value = cc->cc_mon_ctl;
++    case A_BC_MON_CTL:
++        value = bc->bc_mon_ctl;
 +        break;
-+    case A_CC_ALLOC_CTL:
-+        value = cc->cc_alloc_ctl;
++    case A_BC_MON_CTR_VAL:
++        value = bc->bc_mon_ctr_val;
 +        break;
-+    case A_CC_MON_CTR_VAL:
-+        value = cc->cc_mon_ctr_val;
++    case A_BC_ALLOC_CTL:
++        value = bc->bc_alloc_ctl;
 +        break;
-+    case A_CC_BLOCK_MASK:
-+        if (cc->caps->ncblks == 0) {
-+            break;
-+        }
-+        /* fallthrough */
++    case A_BC_BW_ALLOC:
++        BandwidthAllocation *bc_bw_alloc = &bc->bw_allocations[0];
++        value = FIELD_DP64(value, BC_BW_ALLOC, Rbwb, bc_bw_alloc->Rbwb);
++        value = FIELD_DP64(value, BC_BW_ALLOC, Mweight, bc_bw_alloc->Mweight);
++        value = FIELD_DP64(value, BC_BW_ALLOC, sharedAT, bc_bw_alloc->sharedAT);
++        value = FIELD_DP64(value, BC_BW_ALLOC, useShared, bc_bw_alloc->useShared);
++        break;
 +    default:
-+        unsigned int blkmask_slot = (addr - A_CC_BLOCK_MASK) / 8;
-+        if (blkmask_slot >= (cc->caps->ncblks + 63) / 64) {
-+            qemu_log_mask(LOG_GUEST_ERROR,
-+                          "%s: out of bounds (addr=0x%x)",
-+                          __func__, (uint32_t)addr);
-+            break;
-+        }
-+        value = cc->alloc_blockmasks[blkmask_slot];
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: out of bounds (addr=0x%x)",
++                      __func__, (uint32_t)addr);
 +    }
 +
 +    return value;
 +}
 +
-+static const MemoryRegionOps riscv_cbqri_cc_ops = {
-+    .read = riscv_cbqri_cc_read,
-+    .write = riscv_cbqri_cc_write,
++static const MemoryRegionOps riscv_cbqri_bc_ops = {
++    .read = riscv_cbqri_bc_read,
++    .write = riscv_cbqri_bc_write,
 +    .endianness = DEVICE_LITTLE_ENDIAN,
 +    .valid.min_access_size = 4,
 +    .valid.max_access_size = 8,
@@ -564,87 +564,67 @@ index 000000000000..a9f65c2ba25f
 +    .impl.max_access_size = 8,
 +};
 +
-+static void riscv_cbqri_cc_realize(DeviceState *dev, Error **errp)
++static void riscv_cbqri_bc_realize(DeviceState *dev, Error **errp)
 +{
-+    RiscvCbqriCapacityState *cc = RISCV_CBQRI_CC(dev);
++    RiscvCbqriBandwidthState *bc = RISCV_CBQRI_BC(dev);
 +
-+    assert(cc->mon_counters == NULL);
-+    cc->mon_counters = g_new0(MonitorCounter, cc->caps->nb_mcids);
++    assert(bc->mon_counters == NULL);
++    bc->mon_counters = g_new0(MonitorCounter, bc->caps->nb_mcids);
 +
-+    assert(cc->alloc_blockmasks == NULL);
-+    uint64_t *end = get_blockmask_location(cc, cc->caps->nb_rcids, 0);
-+    unsigned int blockmasks_size = end - cc->alloc_blockmasks;
-+    cc->alloc_blockmasks = g_new0(uint64_t, blockmasks_size);
++    assert(bc->bw_allocations == NULL);
++    BandwidthAllocation *bw_alloc_end = get_bw_alloc(bc, bc->caps->nb_rcids, 0);
++    unsigned int bw_alloc_size = bw_alloc_end - bc->bw_allocations;
++    bc->bw_allocations = g_new0(BandwidthAllocation, bw_alloc_size);
 +
-+    memory_region_init_io(&cc->mmio, OBJECT(dev), &riscv_cbqri_cc_ops,
-+                          cc, TYPE_RISCV_CBQRI_CC, 4 * 1024);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &cc->mmio);
++    memory_region_init_io(&bc->mmio, OBJECT(dev), &riscv_cbqri_bc_ops,
++                          bc, TYPE_RISCV_CBQRI_BC, 4 * 1024);
++    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &bc->mmio);
 +}
 +
-+static void riscv_cbqri_cc_reset_enter(Object *obj, ResetType type)
++static void riscv_cbqri_bc_reset_enter(Object *obj, ResetType type)
 +{
-+    RiscvCbqriCapacityState *cc = RISCV_CBQRI_CC(obj);
++    RiscvCbqriBandwidthState *bc = RISCV_CBQRI_BC(obj);
 +
-+    cc->cc_mon_ctl = 0;
-+    cc->cc_alloc_ctl = 0;
-+
-+    /* assign all capacity only to rcid0 */
-+    for (unsigned int rcid = 0; rcid < cc->caps->nb_rcids; rcid++) {
-+        bool any_at = false;
-+
-+        if (cc->caps->supports_at_data) {
-+            alloc_blockmask_init(cc, rcid, CC_AT_DATA,
-+                                 rcid == 0, NULL);
-+            any_at = true;
-+        }
-+        if (cc->caps->supports_at_code) {
-+            alloc_blockmask_init(cc, rcid, CC_AT_CODE,
-+                                 rcid == 0, NULL);
-+            any_at = true;
-+        }
-+        if (!any_at) {
-+            alloc_blockmask_init(cc, rcid, 0,
-+                                 rcid == 0, NULL);
-+        }
-+    }
++    bc->bc_mon_ctl = 0;
++    bc->bc_alloc_ctl = 0;
 +}
 +
-+static void riscv_cbqri_cc_class_init(ObjectClass *klass, void *data)
++static void riscv_cbqri_bc_class_init(ObjectClass *klass, void *data)
 +{
 +    DeviceClass *dc = DEVICE_CLASS(klass);
-+    dc->realize = riscv_cbqri_cc_realize;
++    dc->realize = riscv_cbqri_bc_realize;
 +    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+    rc->phases.enter = riscv_cbqri_cc_reset_enter;
++    rc->phases.enter = riscv_cbqri_bc_reset_enter;
 +}
 +
-+static const TypeInfo riscv_cbqri_cc_info = {
-+    .name          = TYPE_RISCV_CBQRI_CC,
++static const TypeInfo riscv_cbqri_bc_info = {
++    .name          = TYPE_RISCV_CBQRI_BC,
 +    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(RiscvCbqriCapacityState),
-+    .class_init    = riscv_cbqri_cc_class_init,
++    .instance_size = sizeof(RiscvCbqriBandwidthState),
++    .class_init    = riscv_cbqri_bc_class_init,
 +};
 +
-+static void riscv_cbqri_cc_register_types(void)
++static void riscv_cbqri_bc_register_types(void)
 +{
-+    type_register_static(&riscv_cbqri_cc_info);
++    type_register_static(&riscv_cbqri_bc_info);
 +}
 +
-+DeviceState *riscv_cbqri_cc_create(hwaddr addr,
-+                                   const RiscvCbqriCapacityCaps *caps,
++DeviceState *riscv_cbqri_bc_create(hwaddr addr,
++                                   const RiscvCbqriBandwidthCaps *caps,
 +                                   const char *instance_name)
 +{
-+    DeviceState *dev = qdev_new(TYPE_RISCV_CBQRI_CC);
-+    RiscvCbqriCapacityState *cc = RISCV_CBQRI_CC(dev);
++    DeviceState *dev = qdev_new(TYPE_RISCV_CBQRI_BC);
++    RiscvCbqriBandwidthState *bc = RISCV_CBQRI_BC(dev);
 +
-+    cc->caps = caps;
-+    cc->name = instance_name;
++    bc->caps = caps;
++    bc->name = instance_name;
 +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
 +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
 +
 +    return dev;
 +}
 +
-+type_init(riscv_cbqri_cc_register_types)
++type_init(riscv_cbqri_bc_register_types)
 -- 
 2.34.1
 
