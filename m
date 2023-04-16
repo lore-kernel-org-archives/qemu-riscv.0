@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1poBdu-0000BE-Bk
-	for mharc-qemu-riscv@gnu.org; Sun, 16 Apr 2023 19:18:46 -0400
+	id 1poBdv-0000CO-Qw
+	for mharc-qemu-riscv@gnu.org; Sun, 16 Apr 2023 19:18:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dfustini@baylibre.com>)
- id 1poBds-0000AH-L5
- for qemu-riscv@nongnu.org; Sun, 16 Apr 2023 19:18:44 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ id 1poBdu-0000B5-6V
+ for qemu-riscv@nongnu.org; Sun, 16 Apr 2023 19:18:46 -0400
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dfustini@baylibre.com>)
- id 1poBdp-0004Hb-AC
- for qemu-riscv@nongnu.org; Sun, 16 Apr 2023 19:18:44 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id
- mq14-20020a17090b380e00b002472a2d9d6aso9711204pjb.5
- for <qemu-riscv@nongnu.org>; Sun, 16 Apr 2023 16:18:40 -0700 (PDT)
+ id 1poBdq-0004I4-HQ
+ for qemu-riscv@nongnu.org; Sun, 16 Apr 2023 19:18:45 -0400
+Received: by mail-pj1-x1032.google.com with SMTP id
+ z11-20020a17090abd8b00b0024721c47ceaso10388194pjr.3
+ for <qemu-riscv@nongnu.org>; Sun, 16 Apr 2023 16:18:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1681687120; x=1684279120; 
+ d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1681687121; x=1684279121; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r77zs+wYrWdUnDiK/DqITyLcxyU7q4aifAZ6rFsQTsc=;
- b=nylKLmHMy8omRfmfCX2Tp3umLaurCFUhDBvfe92qEhLPfBJXZ7JKbrOhVzjTdL57uH
- ArJ1t4ENA3JOpE4BKBlDJurAZtU+CLqYX+Yn20rtrjxRomripvSHGIIV+CIE7cfpHZbQ
- /TYzvc7wwD99wRCaWg/qqLGie4GR5QT+eAq2wAaLZ5RZCKbJR1o0bWc/KyAn9E3l7M7h
- W+90LpsbcqmeT2VO4xRswytnSMcPlwhAH25ljjiP+eapqfwTceFXzqywonsgod/hzK8q
- nxqnLTElV5+5CXAoglNiskvNAOlMgYeYUn+uzamYAebb59o4JIcs3p+y1l7h4EB5DWrf
- DfPQ==
+ bh=JLzUjUqwh2cK/cV5w/VC27Tcuv4cHaxi4iP0m24nHbM=;
+ b=jiIvTxaj+YzupizrdBiVggK0Vla27hKnsD9Pe7e9mvq2SkFsRs+Y5MZKsdk62Cq1fv
+ DewJkdxYoJgZJuwblLwA8P7P6CrrdDy9DYO/nEXMXGQ/N0WYbPxfAz/Na9YPyqTUdw38
+ TTx7dOqwLeVAs9xzi3fXO1bWGsXiqYcyiT4PdiHUwMCqxKeuepF1z4j+zJdd+cs7PozR
+ I/0fWWxVSUreFH9nUQHgiekqRIFaxFsTWncFdNbQfo89RK7hHiHXky5dHYe77OakIjso
+ G1RpPvcNKqPDAgusR2OLx6naGyU6ORoBuPRoh4hRlLACBiXnFJ0c6udqjg9WlIOqvHSg
+ LOvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681687120; x=1684279120;
+ d=1e100.net; s=20221208; t=1681687121; x=1684279121;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=r77zs+wYrWdUnDiK/DqITyLcxyU7q4aifAZ6rFsQTsc=;
- b=XBcJ4nQGfU3N0d/v1Jv3hCEKtWqSFN+tbtXY8dsSodmH+q++Ar6B2iF3YAh/+5HV+1
- JpKozZi6zJxq5bXFmnlCx8pptFi8w7Lc9zSh1FVgOUr4YEFCnHHaySHSc0CuDN097LMC
- aabQoM32ED2WfwfFhij8rQgylENrBjfN7eySEBsxMETemzfkyerG1/7PABZefRq2v7Yx
- Reg/ioP98BD/Rtxih6kVuMk+0hgiekU4sEZHqf/dDRiG52B+8rEtNH9h6IhnaG0AJyRb
- JjDrfpov8yroELqom44OfLzVP3kC8nUkNivoLBzyaASE/Pi0Kspihb4nMrtfQ4CoHYWA
- 7FBg==
-X-Gm-Message-State: AAQBX9f+HzICy+xqXH+fyJsoCP636OM6uwl4GHKCO/6wm0JT1DOrR1pH
- BfVW+1fkCqDQsRLN1K9qnDlO0Q==
-X-Google-Smtp-Source: AKy350bbbyRgHc9gk4RXxJN2QPfW0RB3xCOyC0/1OpBMSUuqGLcT/0EI1+WrT+UoaL6cHSWd3c/XyQ==
-X-Received: by 2002:a17:902:db10:b0:19a:96ea:3850 with SMTP id
- m16-20020a170902db1000b0019a96ea3850mr11917606plx.17.1681687120061; 
- Sun, 16 Apr 2023 16:18:40 -0700 (PDT)
+ bh=JLzUjUqwh2cK/cV5w/VC27Tcuv4cHaxi4iP0m24nHbM=;
+ b=FY6vx8sa9Xk0nkNX9Q50xKO6/hf4x6dDC2/ySizyxqCPD/KU5DSRJmhBzToWHLlV5X
+ Rv/W1inGasgrAvjGE3YKWUqZnfP/bWi84yyI1qPhFavGYnoUlKGUyXgUGqf0w3k3nVDH
+ 6uEc6WFQwUCU+xTyr95mC0E+7S3pAhLf0SYC8f+Z51wjNQSemohg2nWnWvKN2l2YqHzZ
+ at0NwhZqiVGZ9A+oM3cAyxaJPXZdY5/5N3bL8afsIuHXIZ+HLbXwmqn3rMhwlMKlcEYp
+ m2u3Q7vcvSwqU0wCV/ww6q6pAZkO6raRSmSTI40COx/SBExYFXztgonHUgmDNHlB2pJL
+ b5QA==
+X-Gm-Message-State: AAQBX9d5nxkeeGE9mD10bmKM2I6XBScnr2HPI95WKHf/bXJdhZ/gkzjT
+ q+ix2ASzQK02pWQgoSejkwocpQ==
+X-Google-Smtp-Source: AKy350YHth252qyIm0iP2aK4H4VlwCudbFQW43tEfg1OGJTjpxxblyPzPb84KefAIx1qmHEj7Dh5nQ==
+X-Received: by 2002:a17:903:543:b0:1a3:cd4c:8d08 with SMTP id
+ jo3-20020a170903054300b001a3cd4c8d08mr8468716plb.38.1681687121127; 
+ Sun, 16 Apr 2023 16:18:41 -0700 (PDT)
 Received: from localhost.localdomain ([2601:1c2:1800:f680:20ea:ba1c:5673:16e6])
  by smtp.gmail.com with ESMTPSA id
- jl3-20020a170903134300b001a6b02659c0sm3087847plb.159.2023.04.16.16.18.39
+ jl3-20020a170903134300b001a6b02659c0sm3087847plb.159.2023.04.16.16.18.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Apr 2023 16:18:39 -0700 (PDT)
+ Sun, 16 Apr 2023 16:18:40 -0700 (PDT)
 From: Drew Fustini <dfustini@baylibre.com>
 To: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
@@ -59,16 +59,17 @@ To: Palmer Dabbelt <palmer@dabbelt.com>,
  Adrien Ricciardi <aricciardi@baylibre.com>,
  =?UTF-8?q?Kornel=20Dul=C4=99ba?= <mindal@semihalf.com>
 Cc: Drew Fustini <dfustini@baylibre.com>
-Subject: [RFC PATCH 4/8] hw/riscv: implement CBQRI memory controller
-Date: Sun, 16 Apr 2023 16:20:46 -0700
-Message-Id: <20230416232050.4094820-5-dfustini@baylibre.com>
+Subject: [RFC PATCH 5/8] hw/riscv: instantiate CBQRI controllers for an
+ example SoC
+Date: Sun, 16 Apr 2023 16:20:47 -0700
+Message-Id: <20230416232050.4094820-6-dfustini@baylibre.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230416232050.4094820-1-dfustini@baylibre.com>
 References: <20230416232050.4094820-1-dfustini@baylibre.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=dfustini@baylibre.com; helo=mail-pj1-x102a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=dfustini@baylibre.com; helo=mail-pj1-x1032.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -87,40 +88,75 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Apr 2023 23:18:44 -0000
+X-List-Received-Date: Sun, 16 Apr 2023 23:18:46 -0000
 
 From: Nicolas Pitre <npitre@baylibre.com>
 
-Implement a bandwidth controller according to the Capacity and Bandwidth
-QoS Register Interface (CBQRI) which supports these capabilities:
+Instantiate a hypothetical CBQRI configuration for testing purposes with
+these properties:
 
+  - L2 cache controllers
+    - Resource type: Capacity
+    - NCBLKS: 12
+    - Number of access types: 2 (code and data)
+    - Usage monitoring not supported
+    - Capacity allocation operations: CONFIG_LIMIT, READ_LIMIT
+
+  - Last-level cache (LLC) controller
+    - Resource type: Capacity
+    - NCBLKS: 16
+    - Number of access types: 2 (code and data)
+    - Usage monitoring operations: CONFIG_EVENT, READ_COUNTER
+    - Event IDs supported: None, Occupancy
+    - Capacity allocation ops: CONFIG_LIMIT, READ_LIMIT, FLUSH_RCID
+
+  - Memory controllers
+    - Resource type: Bandwidth
+    - NBWBLKS: 1024
+    - MRBWB: 819 (80% of NBWBLKS)
     - Number of access types: 1 (no code/data differentiation)
     - Usage monitoring operations: CONFIG_EVENT, READ_COUNTER
     - Event IDs supported: None, Total read/write byte count, Total
                            read byte count, Total write byte count
     - Bandwidth allocation operations: CONFIG_LIMIT, READ_LIMIT
 
-Link: https://github.com/riscv-non-isa/riscv-cmqri/blob/main/riscv-cbqri.pdf
+The memory map for the CBQRI controllers in this example SoC:
+
+  Base addr  Size
+  0x4820000  4KB  Cluster 0 L2 cache controller
+  0x4821000  4KB  Cluster 1 L2 cache controller
+  0x4828000  4KB  Memory controller 0
+  0x4829000  4KB  Memory controller 1
+  0x482A000  4KB  Memory controller 2
+  0x482B000  4KB  Shared LLC cache controller
+
 Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
 Signed-off-by: Drew Fustini <dfustini@baylibre.com>
 ---
- hw/riscv/cbqri_bandwidth.c | 511 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 511 insertions(+)
- create mode 100644 hw/riscv/cbqri_bandwidth.c
+Note: this solution is not flexible enough for upstream inclusion.
+Future work will allow CBQRI controllers to be configured by command
+line options, and the controller will only be instantiated if the user
+specifies a valid configuration.
 
-diff --git a/hw/riscv/cbqri_bandwidth.c b/hw/riscv/cbqri_bandwidth.c
+ hw/riscv/cbqri_example_soc.c | 124 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 124 insertions(+)
+ create mode 100644 hw/riscv/cbqri_example_soc.c
+
+diff --git a/hw/riscv/cbqri_example_soc.c b/hw/riscv/cbqri_example_soc.c
 new file mode 100644
-index 000000000000..da33c34fada4
+index 000000000000..91240cdd105e
 --- /dev/null
-+++ b/hw/riscv/cbqri_bandwidth.c
-@@ -0,0 +1,511 @@
++++ b/hw/riscv/cbqri_example_soc.c
+@@ -0,0 +1,124 @@
 +/*
 + * RISC-V Capacity and Bandwidth QoS Register Interface
 + * URL: https://github.com/riscv-non-isa/riscv-cbqri
 + *
 + * Copyright (c) 2023 BayLibre SAS
 + *
-+ * This file contains the Bandwidth-controller QoS Register Interface.
++ * This file contains an hypothetical CBQRI configuration instantiation
++ * for testing purposes. This ought to become configurable from the command
++ * line eventually.
 + *
 + * This program is free software; you can redistribute it and/or modify it
 + * under the terms and conditions of the GNU General Public License,
@@ -144,487 +180,98 @@ index 000000000000..da33c34fada4
 +#include "target/riscv/cpu.h"
 +#include "hw/riscv/cbqri.h"
 +
++/*
++ * Example hardware:
++ *
++ * - Global
++ *   - Number of RCIDs - 64
++ *   - Number of MCIDs - 256
++ * - L2 cache
++ *   - NCBLKS - 12
++ *   - Number of access types - 2 (code and data)
++ *   - Usage monitoring not supported
++ *   - Capacity allocation operations - CONFIG_LIMIT, READ_LIMIT
++ * - LLC
++ *   - NCBLKS - 16
++ *   - Number of access types - 2 (code and data)
++ *   - Usage monitoring operations - CONFIG_EVENT, READ_COUNTER
++ *   - Event IDs supported - None, Occupancy
++ *   - Capacity allocation operations - CONFIG_LIMIT, READ_LIMIT, FLUSH_RCID
++ * - Memory controllers
++ *   - NBWBLKS - 1024
++ *   - MRBWB - 80 (80%)
++ *   - Usage monitoring operations - CONFIG_EVENT, READ_COUNTER
++ *   - Event IDs supported - None, Total read/write byte count,
++ *   - total read byte count, total write byte count
++ *   - Bandwidth allocation operations - CONFIG_LIMIT, READ_LIMIT
++ *   - Number of access types - 1 (no code/data differentiation)
++ *
++ * 0x04820000  Cluster 0 L2 cache controller
++ * 0x04821000  Cluster 1 L2 cache controller
++ * 0x0482B000  Shared LLC controller
++ * 0x04828000  Memory controller 0
++ * 0x04829000  Memory controller 1
++ * 0x0482A000  Memory controller 2
++ */
 +
-+/* Encodings of `AT` field */
-+enum {
-+    BC_AT_DATA = 0,
-+    BC_AT_CODE = 1,
++#define CBQRI_NB_MCIDS  256
++#define CBQRI_NB_RCIDS  64
++
++static const RiscvCbqriCapacityCaps example_soc_L2_cluster = {
++    .nb_mcids = CBQRI_NB_MCIDS,
++    .nb_rcids = CBQRI_NB_RCIDS,
++    .ncblks = 12,
++    .supports_at_data = true,
++    .supports_at_code = true,
++    .supports_alloc_op_config_limit = true,
++    .supports_alloc_op_read_limit = true,
 +};
 +
-+/* Capabilities */
-+REG64(BC_CAPABILITIES, 0);
-+FIELD(BC_CAPABILITIES, VER, 0, 8);
-+FIELD(BC_CAPABILITIES, VER_MINOR, 0, 4);
-+FIELD(BC_CAPABILITIES, VER_MAJOR, 4, 4);
-+FIELD(BC_CAPABILITIES, NBWBLKS, 8, 16);
-+FIELD(BC_CAPABILITIES, MRBWB, 32, 16);
-+
-+/* Usage monitoring control */
-+REG64(BC_MON_CTL, 8);
-+FIELD(BC_MON_CTL, OP, 0, 5);
-+FIELD(BC_MON_CTL, AT, 5, 3);
-+FIELD(BC_MON_CTL, MCID, 8, 12);
-+FIELD(BC_MON_CTL, EVT_ID, 20, 8);
-+FIELD(BC_MON_CTL, ATV, 28, 1);
-+FIELD(BC_MON_CTL, STATUS, 32, 7);
-+FIELD(BC_MON_CTL, BUSY, 39, 1);
-+
-+/* Usage monitoring operations */
-+enum {
-+    BC_MON_OP_CONFIG_EVENT = 1,
-+    BC_MON_OP_READ_COUNTER = 2,
++static const RiscvCbqriCapacityCaps example_soc_LLC = {
++    .nb_mcids = CBQRI_NB_MCIDS,
++    .nb_rcids = CBQRI_NB_RCIDS,
++    .ncblks = 16,
++    .supports_at_data = true,
++    .supports_at_code = true,
++    .supports_alloc_op_config_limit = true,
++    .supports_alloc_op_read_limit = true,
++    .supports_alloc_op_flush_rcid = true,
++    .supports_mon_op_config_event = true,
++    .supports_mon_op_read_counter = true,
++    .supports_mon_evt_id_none = true,
++    .supports_mon_evt_id_occupancy = true,
 +};
 +
-+/* Bandwidth monitoring event ID */
-+enum {
-+    BC_EVT_ID_None = 0,
-+    BC_EVT_ID_RDWR_count = 1,
-+    BC_EVT_ID_RDONLY_count = 2,
-+    BC_EVT_ID_WRONLY_count = 3,
++static const RiscvCbqriBandwidthCaps example_soc_memory = {
++    .nb_mcids = CBQRI_NB_MCIDS,
++    .nb_rcids = CBQRI_NB_RCIDS,
++    .nbwblks = 1024,
++    .mrbwb = 1024 * 80 / 100,
++    .supports_alloc_op_config_limit = true,
++    .supports_alloc_op_read_limit = true,
++    .supports_mon_op_config_event = true,
++    .supports_mon_op_read_counter = true,
++    .supports_mon_evt_id_none = true,
++    .supports_mon_evt_id_rdwr_count = true,
++    .supports_mon_evt_id_rdonly_count = true,
++    .supports_mon_evt_id_wronly_count = true,
 +};
 +
-+/* BC_MON_CTL.STATUS field encodings */
-+enum {
-+    BC_MON_CTL_STATUS_SUCCESS = 1,
-+    BC_MON_CTL_STATUS_INVAL_OP = 2,
-+    BC_MON_CTL_STATUS_INVAL_MCID = 3,
-+    BC_MON_CTL_STATUS_INVAL_EVT_ID = 4,
-+    BC_MON_CTL_STATUS_INVAL_AT = 5,
-+};
-+
-+/* Monitoring counter value */
-+REG64(BC_MON_CTR_VAL, 16);
-+FIELD(BC_MON_CTR_VAL, CTR, 0, 62);
-+FIELD(BC_MON_CTR_VAL, INVALID, 62, 1);
-+FIELD(BC_MON_CTR_VAL, OVF, 63, 1);
-+
-+/* Bandwidth Allocation control */
-+REG64(BC_ALLOC_CTL, 24);
-+FIELD(BC_ALLOC_CTL, OP, 0, 5);
-+FIELD(BC_ALLOC_CTL, AT, 5, 3);
-+FIELD(BC_ALLOC_CTL, RCID, 8, 12);
-+FIELD(BC_ALLOC_CTL, STATUS, 32, 7);
-+FIELD(BC_ALLOC_CTL, BUSY, 39, 1);
-+
-+/* Bandwidth allocation operations */
-+enum {
-+    BC_ALLOC_OP_CONFIG_LIMIT = 1,
-+    BC_ALLOC_OP_READ_LIMIT = 2,
-+};
-+
-+/* BC_ALLOC_CTL.STATUS field encodings */
-+enum {
-+    BC_ALLOC_STATUS_SUCCESS = 1,
-+    BC_ALLOC_STATUS_INVAL_OP = 2,
-+    BC_ALLOC_STATUS_INVAL_RCID = 3,
-+    BC_ALLOC_STATUS_INVAL_AT = 4,
-+    BC_ALLOC_STATUS_INVAL_BLKS = 5,
-+};
-+
-+/* Bandwidth allocation */
-+REG64(BC_BW_ALLOC, 32);
-+FIELD(BC_BW_ALLOC, Rbwb, 0, 16);
-+FIELD(BC_BW_ALLOC, Mweight, 20, 8);
-+FIELD(BC_BW_ALLOC, sharedAT, 28, 3);
-+FIELD(BC_BW_ALLOC, useShared, 31, 1);
-+
-+
-+typedef struct MonitorCounter {
-+    uint64_t ctr_val;
-+    int at;
-+    int evt_id;
-+    bool active;
-+} MonitorCounter;
-+
-+typedef struct BandwidthAllocation {
-+    uint32_t Rbwb:16;
-+    uint32_t Mweight:8;
-+    uint32_t sharedAT:3;
-+    bool useShared:1;
-+} BandwidthAllocation;
-+
-+typedef struct RiscvCbqriBandwidthState {
-+    SysBusDevice parent_obj;
-+    MemoryRegion mmio;
-+    const char *name;
-+    const RiscvCbqriBandwidthCaps *caps;
-+
-+    /* cached value of some registers */
-+    uint64_t bc_mon_ctl;
-+    uint64_t bc_mon_ctr_val;
-+    uint64_t bc_alloc_ctl;
-+    uint64_t bc_bw_alloc;
-+
-+    MonitorCounter *mon_counters;
-+    BandwidthAllocation *bw_allocations;
-+} RiscvCbqriBandwidthState;
-+
-+#define TYPE_RISCV_CBQRI_BC "riscv.cbqri.bandwidth"
-+
-+#define RISCV_CBQRI_BC(obj) \
-+    OBJECT_CHECK(RiscvCbqriBandwidthState, (obj), TYPE_RISCV_CBQRI_BC)
-+
-+static BandwidthAllocation *get_bw_alloc(RiscvCbqriBandwidthState *bc,
-+                                      uint32_t rcid, uint32_t at)
++void example_soc_cbqri_init(void)
 +{
-+    /*
-+     * All bandwidth allocation records are contiguous to simplify
-+     * allocation. The first one is used to hold the BC_BW_ALLOC register
-+     * content, followed by respective records for each AT per RCID.
-+     */
-+
-+    unsigned int nb_ats = 0;
-+    nb_ats += !!bc->caps->supports_at_data;
-+    nb_ats += !!bc->caps->supports_at_code;
-+    nb_ats = MAX(nb_ats, 1);
-+    assert(at < nb_ats);
-+
-+    return &bc->bw_allocations[1 + rcid * nb_ats + at];
++    riscv_cbqri_cc_create(0x04820000, &example_soc_L2_cluster,
++                          "cluster 0 L2 cache controller");
++    riscv_cbqri_cc_create(0x04821000, &example_soc_L2_cluster,
++                          "cluster 1 L2 cache controller");
++    riscv_cbqri_cc_create(0x0482B000, &example_soc_LLC,
++                          "shared LLC controller");
++    riscv_cbqri_bc_create(0x04828000, &example_soc_memory,
++                          "memory controller 0");
++    riscv_cbqri_bc_create(0x04829000, &example_soc_memory,
++                          "memory controller 1");
++    riscv_cbqri_bc_create(0x0482a000, &example_soc_memory,
++                          "memory controller 2");
 +}
-+
-+static uint32_t bandwidth_config(RiscvCbqriBandwidthState *bc,
-+                                 uint32_t rcid, uint32_t at,
-+                                 bool *busy)
-+{
-+    BandwidthAllocation *bw_alloc = get_bw_alloc(bc, rcid, at);
-+
-+    /* for now we only preserve the current BC_BW_ALLOC register content */
-+    *bw_alloc = bc->bw_allocations[0];
-+    return BC_ALLOC_STATUS_SUCCESS;
-+}
-+
-+static uint32_t bandwidth_read(RiscvCbqriBandwidthState *bc,
-+                               uint32_t rcid, uint32_t at,
-+                               bool *busy)
-+{
-+    BandwidthAllocation *bw_alloc = get_bw_alloc(bc, rcid, at);
-+
-+    /* populate BC_BW_ALLOC register with selected content */
-+    bc->bw_allocations[0] = *bw_alloc;
-+    return BC_ALLOC_STATUS_SUCCESS;
-+}
-+
-+static bool is_valid_at(RiscvCbqriBandwidthState *bc, uint32_t at)
-+{
-+    switch (at) {
-+    case BC_AT_DATA:
-+        return bc->caps->supports_at_data;
-+    case BC_AT_CODE:
-+        return bc->caps->supports_at_code;
-+    default:
-+        return false;
-+    }
-+}
-+
-+static void riscv_cbqri_bc_write_mon_ctl(RiscvCbqriBandwidthState *bc,
-+                                         uint64_t value)
-+{
-+    if (!bc->caps->supports_mon_op_config_event &&
-+        !bc->caps->supports_mon_op_read_counter) {
-+        /* monitoring not supported: leave mon_ctl set to 0 */
-+        return;
-+    }
-+
-+    /* extract writable fields */
-+    uint32_t op = FIELD_EX64(value, BC_MON_CTL, OP);
-+    uint32_t at = FIELD_EX64(value, BC_MON_CTL, AT);
-+    uint32_t mcid = FIELD_EX64(value, BC_MON_CTL, MCID);
-+    uint32_t evt_id = FIELD_EX64(value, BC_MON_CTL, EVT_ID);
-+    bool atv = FIELD_EX64(value, BC_MON_CTL, ATV);
-+
-+    /* extract read-only fields */
-+    uint32_t status = FIELD_EX64(bc->bc_mon_ctl, BC_MON_CTL, STATUS);
-+    bool busy = FIELD_EX64(bc->bc_mon_ctl, BC_MON_CTL, BUSY);
-+
-+    if (busy) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: busy flag still set, ignored",
-+                      __func__);
-+        return;
-+    }
-+
-+    if (!bc->caps->supports_at_data &&
-+        !bc->caps->supports_at_code) {
-+        /* AT not supported: hardwire to 0 */
-+        at = 0;
-+        atv = false;
-+    }
-+
-+    if (mcid >= bc->caps->nb_mcids) {
-+        status = BC_MON_CTL_STATUS_INVAL_MCID;
-+    } else if (op == BC_MON_OP_CONFIG_EVENT &&
-+               bc->caps->supports_mon_op_config_event) {
-+        if (evt_id == BC_EVT_ID_None &&
-+            bc->caps->supports_mon_evt_id_none) {
-+            bc->mon_counters[mcid].active = false;
-+            status = BC_MON_CTL_STATUS_SUCCESS;
-+        } else if ((evt_id == BC_EVT_ID_RDWR_count &&
-+                    bc->caps->supports_mon_evt_id_rdwr_count) ||
-+                   (evt_id == BC_EVT_ID_RDONLY_count &&
-+                    bc->caps->supports_mon_evt_id_rdonly_count) ||
-+                   (evt_id == BC_EVT_ID_WRONLY_count &&
-+                    bc->caps->supports_mon_evt_id_wronly_count)) {
-+            if (atv && !is_valid_at(bc, at)) {
-+                status = BC_MON_CTL_STATUS_INVAL_AT;
-+            } else {
-+                bc->mon_counters[mcid].ctr_val =
-+                    FIELD_DP64(0, BC_MON_CTR_VAL, INVALID, 1);
-+                bc->mon_counters[mcid].evt_id = evt_id;
-+                bc->mon_counters[mcid].at = atv ? at : -1;
-+                bc->mon_counters[mcid].active = true;
-+                status = BC_MON_CTL_STATUS_SUCCESS;
-+            }
-+        } else {
-+            status = BC_MON_CTL_STATUS_INVAL_EVT_ID;
-+        }
-+    } else if (op == BC_MON_OP_READ_COUNTER &&
-+               bc->caps->supports_mon_op_read_counter) {
-+        bc->bc_mon_ctr_val = bc->mon_counters[mcid].ctr_val;
-+        status = BC_MON_CTL_STATUS_SUCCESS;
-+    } else {
-+        status = BC_MON_CTL_STATUS_INVAL_OP;
-+    }
-+
-+    /* reconstruct updated register value */
-+    value = 0;
-+    value = FIELD_DP64(value, BC_MON_CTL, OP, op);
-+    value = FIELD_DP64(value, BC_MON_CTL, AT, at);
-+    value = FIELD_DP64(value, BC_MON_CTL, MCID, mcid);
-+    value = FIELD_DP64(value, BC_MON_CTL, EVT_ID, evt_id);
-+    value = FIELD_DP64(value, BC_MON_CTL, ATV, atv);
-+    value = FIELD_DP64(value, BC_MON_CTL, STATUS, status);
-+    value = FIELD_DP64(value, BC_MON_CTL, BUSY, busy);
-+    bc->bc_mon_ctl = value;
-+}
-+
-+static void riscv_cbqri_bc_write_alloc_ctl(RiscvCbqriBandwidthState *bc,
-+                                           uint64_t value)
-+{
-+    if (bc->caps->nbwblks == 0 ||
-+        (!bc->caps->supports_alloc_op_config_limit &&
-+         !bc->caps->supports_alloc_op_read_limit)) {
-+        /* capacity allocation not supported: leave bc_alloc_ctl set to 0 */
-+        return;
-+    }
-+
-+    /* extract writable fields */
-+    uint32_t op = FIELD_EX64(value, BC_ALLOC_CTL, OP);
-+    uint32_t at = FIELD_EX64(value, BC_ALLOC_CTL, AT);
-+    uint32_t rcid = FIELD_EX64(value, BC_ALLOC_CTL, RCID);
-+
-+    /* extract read-only fields */
-+    uint32_t status = FIELD_EX64(bc->bc_alloc_ctl, BC_ALLOC_CTL, STATUS);
-+    bool busy = FIELD_EX64(bc->bc_alloc_ctl, BC_ALLOC_CTL, BUSY);
-+
-+    if (busy) {
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: busy flag still set, ignored",
-+                      __func__);
-+        return;
-+    }
-+
-+    bool atv = true;
-+    if (!bc->caps->supports_at_data &&
-+        !bc->caps->supports_at_code) {
-+        /* AT not supported: hardwire to 0 */
-+        at = 0;
-+        atv = false;
-+    }
-+
-+    if (rcid >= bc->caps->nb_rcids) {
-+        status = BC_ALLOC_STATUS_INVAL_RCID;
-+    } else if (atv && !is_valid_at(bc, at)) {
-+        status = BC_ALLOC_STATUS_INVAL_AT;
-+    } else if (op == BC_ALLOC_OP_CONFIG_LIMIT &&
-+               bc->caps->supports_alloc_op_config_limit) {
-+        status = bandwidth_config(bc, rcid, at, &busy);
-+    } else if (op == BC_ALLOC_OP_READ_LIMIT &&
-+               bc->caps->supports_alloc_op_read_limit) {
-+        status = bandwidth_read(bc, rcid, at, &busy);
-+    } else {
-+        status = BC_ALLOC_STATUS_INVAL_OP;
-+    }
-+
-+    /* reconstruct updated register value */
-+    value = 0;
-+    value = FIELD_DP64(value, BC_ALLOC_CTL, OP, op);
-+    value = FIELD_DP64(value, BC_ALLOC_CTL, AT, at);
-+    value = FIELD_DP64(value, BC_ALLOC_CTL, RCID, rcid);
-+    value = FIELD_DP64(value, BC_ALLOC_CTL, STATUS, status);
-+    value = FIELD_DP64(value, BC_ALLOC_CTL, BUSY, busy);
-+    bc->bc_alloc_ctl = value;
-+}
-+
-+static void riscv_cbqri_bc_write_bw_alloc(RiscvCbqriBandwidthState *bc,
-+                                          uint64_t value)
-+{
-+    if (bc->caps->nbwblks == 0) {
-+        /* capacity allocation not supported: leave bw_alloc set to 0 */
-+        return;
-+    }
-+
-+    BandwidthAllocation *bc_bw_alloc = &bc->bw_allocations[0];
-+
-+    /* extract writable fields */
-+    bc_bw_alloc->Rbwb = FIELD_EX64(value, BC_BW_ALLOC, Rbwb);
-+    bc_bw_alloc->Mweight = FIELD_EX64(value, BC_BW_ALLOC, Mweight);
-+    bc_bw_alloc->sharedAT = FIELD_EX64(value, BC_BW_ALLOC, sharedAT);
-+    bc_bw_alloc->useShared = FIELD_EX64(value, BC_BW_ALLOC, useShared);
-+
-+    if (!bc->caps->supports_at_data &&
-+        !bc->caps->supports_at_code) {
-+        /* AT not supported: hardwire to 0 */
-+        bc_bw_alloc->sharedAT = 0;
-+        bc_bw_alloc->useShared = false;
-+    }
-+}
-+
-+static void riscv_cbqri_bc_write(void *opaque, hwaddr addr,
-+                                 uint64_t value, unsigned size)
-+{
-+    RiscvCbqriBandwidthState *bc = opaque;
-+
-+    assert((addr % 8) == 0);
-+    assert(size == 8);
-+
-+    switch (addr) {
-+    case A_BC_CAPABILITIES:
-+        /* read-only register */
-+        break;
-+    case A_BC_MON_CTL:
-+        riscv_cbqri_bc_write_mon_ctl(bc, value);
-+        break;
-+    case A_BC_MON_CTR_VAL:
-+        /* read-only register */
-+        break;
-+    case A_BC_ALLOC_CTL:
-+        riscv_cbqri_bc_write_alloc_ctl(bc, value);
-+        break;
-+    case A_BC_BW_ALLOC:
-+        riscv_cbqri_bc_write_bw_alloc(bc, value);
-+        break;
-+    default:
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: out of bounds (addr=0x%x)",
-+                      __func__, (uint32_t)addr);
-+    }
-+}
-+
-+static uint64_t riscv_cbqri_bc_read(void *opaque, hwaddr addr, unsigned size)
-+{
-+    RiscvCbqriBandwidthState *bc = opaque;
-+    uint64_t value = 0;
-+
-+    assert((addr % 8) == 0);
-+    assert(size == 8);
-+
-+    switch (addr) {
-+    case A_BC_CAPABILITIES:
-+        value = FIELD_DP64(value, BC_CAPABILITIES, VER_MAJOR,
-+                           RISCV_CBQRI_VERSION_MAJOR);
-+        value = FIELD_DP64(value, BC_CAPABILITIES, VER_MINOR,
-+                           RISCV_CBQRI_VERSION_MINOR);
-+        value = FIELD_DP64(value, BC_CAPABILITIES, NBWBLKS,
-+                           bc->caps->nbwblks);
-+        value = FIELD_DP64(value, BC_CAPABILITIES, MRBWB,
-+                           bc->caps->mrbwb);
-+        break;
-+    case A_BC_MON_CTL:
-+        value = bc->bc_mon_ctl;
-+        break;
-+    case A_BC_MON_CTR_VAL:
-+        value = bc->bc_mon_ctr_val;
-+        break;
-+    case A_BC_ALLOC_CTL:
-+        value = bc->bc_alloc_ctl;
-+        break;
-+    case A_BC_BW_ALLOC:
-+        BandwidthAllocation *bc_bw_alloc = &bc->bw_allocations[0];
-+        value = FIELD_DP64(value, BC_BW_ALLOC, Rbwb, bc_bw_alloc->Rbwb);
-+        value = FIELD_DP64(value, BC_BW_ALLOC, Mweight, bc_bw_alloc->Mweight);
-+        value = FIELD_DP64(value, BC_BW_ALLOC, sharedAT, bc_bw_alloc->sharedAT);
-+        value = FIELD_DP64(value, BC_BW_ALLOC, useShared, bc_bw_alloc->useShared);
-+        break;
-+    default:
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: out of bounds (addr=0x%x)",
-+                      __func__, (uint32_t)addr);
-+    }
-+
-+    return value;
-+}
-+
-+static const MemoryRegionOps riscv_cbqri_bc_ops = {
-+    .read = riscv_cbqri_bc_read,
-+    .write = riscv_cbqri_bc_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid.min_access_size = 4,
-+    .valid.max_access_size = 8,
-+    .impl.min_access_size = 8,
-+    .impl.max_access_size = 8,
-+};
-+
-+static void riscv_cbqri_bc_realize(DeviceState *dev, Error **errp)
-+{
-+    RiscvCbqriBandwidthState *bc = RISCV_CBQRI_BC(dev);
-+
-+    assert(bc->mon_counters == NULL);
-+    bc->mon_counters = g_new0(MonitorCounter, bc->caps->nb_mcids);
-+
-+    assert(bc->bw_allocations == NULL);
-+    BandwidthAllocation *bw_alloc_end = get_bw_alloc(bc, bc->caps->nb_rcids, 0);
-+    unsigned int bw_alloc_size = bw_alloc_end - bc->bw_allocations;
-+    bc->bw_allocations = g_new0(BandwidthAllocation, bw_alloc_size);
-+
-+    memory_region_init_io(&bc->mmio, OBJECT(dev), &riscv_cbqri_bc_ops,
-+                          bc, TYPE_RISCV_CBQRI_BC, 4 * 1024);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &bc->mmio);
-+}
-+
-+static void riscv_cbqri_bc_reset_enter(Object *obj, ResetType type)
-+{
-+    RiscvCbqriBandwidthState *bc = RISCV_CBQRI_BC(obj);
-+
-+    bc->bc_mon_ctl = 0;
-+    bc->bc_alloc_ctl = 0;
-+}
-+
-+static void riscv_cbqri_bc_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    dc->realize = riscv_cbqri_bc_realize;
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+    rc->phases.enter = riscv_cbqri_bc_reset_enter;
-+}
-+
-+static const TypeInfo riscv_cbqri_bc_info = {
-+    .name          = TYPE_RISCV_CBQRI_BC,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(RiscvCbqriBandwidthState),
-+    .class_init    = riscv_cbqri_bc_class_init,
-+};
-+
-+static void riscv_cbqri_bc_register_types(void)
-+{
-+    type_register_static(&riscv_cbqri_bc_info);
-+}
-+
-+DeviceState *riscv_cbqri_bc_create(hwaddr addr,
-+                                   const RiscvCbqriBandwidthCaps *caps,
-+                                   const char *instance_name)
-+{
-+    DeviceState *dev = qdev_new(TYPE_RISCV_CBQRI_BC);
-+    RiscvCbqriBandwidthState *bc = RISCV_CBQRI_BC(dev);
-+
-+    bc->caps = caps;
-+    bc->name = instance_name;
-+    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-+
-+    return dev;
-+}
-+
-+type_init(riscv_cbqri_bc_register_types)
 -- 
 2.34.1
 
