@@ -1,62 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pnUyr-0007qg-4W
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Apr 2023 21:45:33 -0400
+	id 1poBdr-00009H-Pg
+	for mharc-qemu-riscv@gnu.org; Sun, 16 Apr 2023 19:18:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pnUyj-0007ot-Hq; Fri, 14 Apr 2023 21:45:25 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pnUyf-0002ez-S3; Fri, 14 Apr 2023 21:45:24 -0400
-Received: from [192.168.0.120] (unknown [180.165.241.15])
- by APP-05 (Coremail) with SMTP id zQCowACnrWWmATpkHMDCEg--.11396S2;
- Sat, 15 Apr 2023 09:45:11 +0800 (CST)
-Message-ID: <130dce28-e116-bfca-cd94-e63c48073818@iscas.ac.cn>
-Date: Sat, 15 Apr 2023 09:45:09 +0800
+ (Exim 4.90_1) (envelope-from <dfustini@baylibre.com>)
+ id 1poBdp-00008Z-SK
+ for qemu-riscv@nongnu.org; Sun, 16 Apr 2023 19:18:41 -0400
+Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dfustini@baylibre.com>)
+ id 1poBdn-0004Gx-5D
+ for qemu-riscv@nongnu.org; Sun, 16 Apr 2023 19:18:41 -0400
+Received: by mail-pj1-x102b.google.com with SMTP id
+ h24-20020a17090a9c1800b002404be7920aso24220749pjp.5
+ for <qemu-riscv@nongnu.org>; Sun, 16 Apr 2023 16:18:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1681687118; x=1684279118; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=a+HtEU0/Wc6vKHqd8Q8lwulnseoHN5QX+DPdOc5pQJE=;
+ b=nS/LIdbcmTv33n4ufUT2OANSYU5H4PBgtK+8k1XrBHD0HeM7aSJvRIi+urR1coTMQb
+ g5trxTB3eAAc4pkjP1hoIa8zf9ibbCLxei45cN7q935Dn1cqrZUt7n7BfT7rWqkOwzDV
+ 1dqnKNrfL/Vtp4RR4cl7lE4AFqswjed9fgCIpRGHZNFQTsQb6pDEx934BXKMAWvQslcA
+ egSsJOcxZIEScc+Rp8TSqVHrj6qRb1Dqp9Ngx/4VLPsEBQigN+pVosd6jPOrk3245+Eq
+ +ZkTCOuJx9zKOiuHA9+x224jZzQ2r5uc94Rdo86TCirZ4NlMi5IbcQCwtv6FaXHhjeTC
+ /Gag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1681687118; x=1684279118;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=a+HtEU0/Wc6vKHqd8Q8lwulnseoHN5QX+DPdOc5pQJE=;
+ b=d3aHndweEpT4e/xXafQNM4qlAAwfFHnKFQR7ePx3RUpHIFN4xZadkhJSncAP7v4091
+ CUruoC//iG3GKxWlL47LOeWy2uxR/fe06uz9UW/m7elTJjeYpoPLtE40iCsByetVHZmu
+ tYgxcu9bGh2SZCp+MRjAm2JBT4buc98/40Y2cUJEJKKg1Cpo+WHl+/xlmWJcQ/hquCxK
+ xRj5MNd0SRvdtP3uIRS3C9Dx5LgnxI//gRraQjTkqMFZLmbLXA0HDbSY6J6K2n+ixYhi
+ ErUUzVUK8dlusy3rAYixVZwee4kwCzwbTEmmvBSXzLCGPU1xrYyrMC58lVY4owhByLZX
+ kkvQ==
+X-Gm-Message-State: AAQBX9fyw4OZeGw8i/0vbigFGZrKH098dnTUnwkT7SwIV71T36X1O3GE
+ JN1Ky/yxn5CWACzpwJUf3nRUuA==
+X-Google-Smtp-Source: AKy350b3tqZmErPXrU8QtqHYKZDmvW/MZwlZtnDVrQ3Q29jBi46NGOp0uAoeXgjYv78TK4QrfmlA2Q==
+X-Received: by 2002:a17:902:7409:b0:1a1:bede:5e54 with SMTP id
+ g9-20020a170902740900b001a1bede5e54mr9936352pll.59.1681687117777; 
+ Sun, 16 Apr 2023 16:18:37 -0700 (PDT)
+Received: from localhost.localdomain ([2601:1c2:1800:f680:20ea:ba1c:5673:16e6])
+ by smtp.gmail.com with ESMTPSA id
+ jl3-20020a170903134300b001a6b02659c0sm3087847plb.159.2023.04.16.16.18.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 16 Apr 2023 16:18:37 -0700 (PDT)
+From: Drew Fustini <dfustini@baylibre.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Nicolas Pitre <npitre@baylibre.com>,
+ Adrien Ricciardi <aricciardi@baylibre.com>,
+ =?UTF-8?q?Kornel=20Dul=C4=99ba?= <mindal@semihalf.com>
+Cc: Drew Fustini <dfustini@baylibre.com>
+Subject: [RFC PATCH 2/8] hw/riscv: define capabilities of CBQRI controllers
+Date: Sun, 16 Apr 2023 16:20:44 -0700
+Message-Id: <20230416232050.4094820-3-dfustini@baylibre.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230416232050.4094820-1-dfustini@baylibre.com>
+References: <20230416232050.4094820-1-dfustini@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [RFC PATCH v2 2/4] target/riscv: Reuse TB_FLAGS.MSTATUS_HFS_FS
-Content-Language: en-US
-To: Mayuresh Chitale <mchitale@ventanamicro.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, alistair.francis@wdc.com
-Cc: Alistair Francis <alistair23@gmail.com>,
- Daniel Barboza <dbarboza@ventanamicro.com>, liweiwei@iscas.ac.cn,
- Richard Henderson <richard.henderson@linaro.org>
-References: <20230414160202.1298242-1-mchitale@ventanamicro.com>
- <20230414160202.1298242-3-mchitale@ventanamicro.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <20230414160202.1298242-3-mchitale@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: zQCowACnrWWmATpkHMDCEg--.11396S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxAw1xZFWfGr4rAF48KFWUCFg_yoW5Xw47pF
- Z7Gw4SkFZrGFZ7Ja1fKF4YqF48Xr4kCr4Yv3WkCw10qr45XrZ8CF95KFWfGF4DJFy8Wryj
- 9Fs0yryDAr4UZFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkl14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j
- 6r4UM28EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4j6r
- 4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
- Y487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
- 0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
- 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
- WUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
- IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbXdbUUUUU
- U==
-X-Originating-IP: [180.165.241.15]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -64
-X-Spam_score: -6.5
-X-Spam_bar: ------
-X-Spam_report: (-6.5 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-2.282,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
+ envelope-from=dfustini@baylibre.com; helo=mail-pj1-x102b.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -69,85 +87,110 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Apr 2023 01:45:25 -0000
+X-List-Received-Date: Sun, 16 Apr 2023 23:18:42 -0000
 
+From: Nicolas Pitre <npitre@baylibre.com>
 
-On 2023/4/15 00:02, Mayuresh Chitale wrote:
-> When misa.F is clear, TB_FLAGS.MSTATUS_HS_FS field is unused and can
-> be used to save the current state of smstateen0.FCSR check which is
-> needed by the floating point translation routines.
->
-> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> ---
->   target/riscv/cpu_helper.c | 12 ++++++++++++
->   target/riscv/translate.c  |  7 +++++++
->   2 files changed, 19 insertions(+)
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 433ea529b0..fd1731cc39 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -105,6 +105,18 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->           flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_VS,
->                              get_field(env->mstatus_hs, MSTATUS_VS));
->       }
-> +    /*
-> +     * If misa.F is 0 then the MSTATUS_HS_FS field of the tb->flags
-> +     * can be used to pass the current state of the smstateen.FCSR bit
-> +     * which must be checked for in the floating point translation routines
-> +     */
-> +    if (!riscv_has_ext(env, RVF)) {
-> +        if (smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR) == RISCV_EXCP_NONE) {
-> +            flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS, 1);
-> +        } else {
-> +            flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS, 0);
-> +        }
-> +    }
->       if (cpu->cfg.debug && !icount_enabled()) {
->           flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
->       }
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index d0094922b6..e29bbb8b70 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -79,6 +79,7 @@ typedef struct DisasContext {
->       int frm;
->       RISCVMXL ol;
->       bool virt_inst_excp;
-> +    bool smstateen_fcsr_ok;
->       bool virt_enabled;
->       const RISCVCPUConfig *cfg_ptr;
->       bool hlsx;
-> @@ -1202,6 +1203,12 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->       ctx->itrigger = FIELD_EX32(tb_flags, TB_FLAGS, ITRIGGER);
->       ctx->zero = tcg_constant_tl(0);
->       ctx->virt_inst_excp = false;
-> +    if (has_ext(ctx, RVF)) {
-> +        ctx->smstateen_fcsr_ok = 1;
-> +    } else {
-> +        ctx->smstateen_fcsr_ok = FIELD_EX32(tb_flags, TB_FLAGS,
-> +                                             MSTATUS_HS_FS);
+Define structs to represent the hardware capabilities of capacity and
+bandwidth controllers according to the RISC-V Capacity and Bandwidth QoS
+Register Interface (CBQRI).
 
-By the way, it may introduce new question when MSTATUS_FS and 
-MSTATUS_HS_FS is merged to save bits in tb_flag
+Link: https://github.com/riscv-non-isa/riscv-cmqri/blob/main/riscv-cbqri.pdf
+Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
+Signed-off-by: Drew Fustini <dfustini@baylibre.com>
+---
+ include/hw/riscv/cbqri.h | 81 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 81 insertions(+)
+ create mode 100644 include/hw/riscv/cbqri.h
 
-by Richerd's patchset: 20230412114333.118895-5-richard.henderson@linaro.org
-
-such as: the check "s->mstatus_fs == 0" in require_rvf() will be false 
-if smstateen_fcsr_ok is true.
-
-However, this should be true in this case to indicate F is diabled.
-
-So we may need to set ctx->mstatus_fs = 0 here once merged with 
-Richerd's patchset.
-
-Regards,
-
-Weiwei Li
-
-> +    }
->   }
->   
->   static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
+diff --git a/include/hw/riscv/cbqri.h b/include/hw/riscv/cbqri.h
+new file mode 100644
+index 000000000000..b43a3572dd7e
+--- /dev/null
++++ b/include/hw/riscv/cbqri.h
+@@ -0,0 +1,81 @@
++/*
++ * RISC-V Capacity and Bandwidth QoS Register Interface
++ * URL: https://github.com/riscv-non-isa/riscv-cbqri
++ *
++ * Copyright (c) 2023 BayLibre SAS
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef HW_RISCV_CBQRI_H
++#define HW_RISCV_CBQRI_H
++
++#include "qemu/typedefs.h"
++
++#define RISCV_CBQRI_VERSION_MAJOR   0
++#define RISCV_CBQRI_VERSION_MINOR   1
++
++/* Capacity Controller hardware capabilities */
++typedef struct RiscvCbqriCapacityCaps {
++    uint16_t nb_mcids;
++    uint16_t nb_rcids;
++
++    uint16_t ncblks;
++
++    bool supports_at_data:1;
++    bool supports_at_code:1;
++
++    bool supports_alloc_op_config_limit:1;
++    bool supports_alloc_op_read_limit:1;
++    bool supports_alloc_op_flush_rcid:1;
++
++    bool supports_mon_op_config_event:1;
++    bool supports_mon_op_read_counter:1;
++
++    bool supports_mon_evt_id_none:1;
++    bool supports_mon_evt_id_occupancy:1;
++} RiscvCbqriCapacityCaps;
++
++/* Bandwidth Controller hardware capabilities */
++typedef struct RiscvCbqriBandwidthCaps {
++    uint16_t nb_mcids;
++    uint16_t nb_rcids;
++
++    uint16_t nbwblks;
++    uint16_t mrbwb;
++
++    bool supports_at_data:1;
++    bool supports_at_code:1;
++
++    bool supports_alloc_op_config_limit:1;
++    bool supports_alloc_op_read_limit:1;
++
++    bool supports_mon_op_config_event:1;
++    bool supports_mon_op_read_counter:1;
++
++    bool supports_mon_evt_id_none:1;
++    bool supports_mon_evt_id_rdwr_count:1;
++    bool supports_mon_evt_id_rdonly_count:1;
++    bool supports_mon_evt_id_wronly_count:1;
++} RiscvCbqriBandwidthCaps;
++
++DeviceState *riscv_cbqri_cc_create(hwaddr addr,
++                                   const RiscvCbqriCapacityCaps *caps,
++                                   const char *instance_name);
++DeviceState *riscv_cbqri_bc_create(hwaddr addr,
++                                   const RiscvCbqriBandwidthCaps *caps,
++                                   const char *instance_name);
++
++void example_soc_cbqri_init(void);
++
++#endif
+-- 
+2.34.1
 
 
