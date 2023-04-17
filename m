@@ -1,39 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1poPNx-000211-OW
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Apr 2023 09:59:13 -0400
+	id 1poPPK-00045a-JN
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Apr 2023 10:00:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1poPNr-0001vg-4G; Mon, 17 Apr 2023 09:59:07 -0400
-Received: from imap5.colo.codethink.co.uk ([78.40.148.171])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1poPNn-0002gj-Q9; Mon, 17 Apr 2023 09:59:06 -0400
-Received: from [167.98.27.226] (helo=lawrence-thinkpad.guest.codethink.co.uk)
- by imap5.colo.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1poPNP-0034ER-J7; Mon, 17 Apr 2023 14:58:39 +0100
-From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1poPPA-0003iG-E8
+ for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 10:00:30 -0400
+Received: from mail-oa1-x33.google.com ([2001:4860:4864:20::33])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1poPP7-00035g-8A
+ for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 10:00:26 -0400
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-1879edfeff5so13349932fac.4
+ for <qemu-riscv@nongnu.org>; Mon, 17 Apr 2023 07:00:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1681740023; x=1684332023;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nB7R8ngHJB13nLECFi0woNZhXZm+dTNI2xzF31bklNw=;
+ b=oQGvzYiI+yAGR73dwMGk6t3vAcGguvaY0SRMFpvnFmI/GUsUqQ72AijmpzLv7GyPPx
+ 6RP8Hy1BCjPv6cpnr9+YwbCc9a1atufub56zu6wkjcOyK2HnoCfe8FoY+QQmQuiSu6DP
+ cpnFZrO6fSxHz6UpmvkiaQCnSZg0UaQh9HG1aZFYoqY0VE1go6G+iHfPuqsKqCsPeUC/
+ UergXKnCcB1e1BRAcKkdiI2noO5eDJXJBHF0LwqXgqAmpYu9YmI7w0bTLzgNIUcztmZ9
+ H3X3UOjzsrFQxTXCguqrhwtUEVMoMB7zWiqE5slHIi6TrBnxnz9oi4qioqlmkB2XAsL4
+ bpaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1681740023; x=1684332023;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nB7R8ngHJB13nLECFi0woNZhXZm+dTNI2xzF31bklNw=;
+ b=EYolSDQl9h3OJtvVUhVYfaIKgc9lFqQEDGLP9KT8m8NH7CNhAW3gnakUhPGoTaptV2
+ wH4FX6rBl9aQOxwLqGJDhHXTxS9LfjtBxeYLCf3LCVU4Jc67hIhERKPjqGQFB2mcn54d
+ 4X7Q2RLnyQLUn6YaYi300IVhKMwUCoTrWdTP/gYjWJCZnaY54GJZAUb1ksJIOzDob51f
+ U4nuEHychnNnyArOUDJiDktxvxrVGw6sj6JNjRzmprDhkW6C5/h2RVvdmxFtZ0l682cI
+ +gSSZ1G02xl7R1dRfxv04BWUrwnJR78R159UNKxEj3D0cAEJKVUWgKSiBYIUuYirTj5q
+ 6zig==
+X-Gm-Message-State: AAQBX9epZ2Sc2rXJeJC7EqQwlbZkOmwVzCu2E7F6X/YgKK/u7ALhOqVR
+ cCME1AmYO31ECIFzaVyvcmhONQ==
+X-Google-Smtp-Source: AKy350YoKRZse0PsVOFWNx4GLaNEHa65nZ+6UCVjx4iweDvwmWWkVh5Hve4saGL4+0K4DSDGQWJkPg==
+X-Received: by 2002:a05:6870:c1d5:b0:176:263e:9965 with SMTP id
+ i21-20020a056870c1d500b00176263e9965mr9406623oad.44.1681740023141; 
+ Mon, 17 Apr 2023 07:00:23 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com ([191.255.108.232])
+ by smtp.gmail.com with ESMTPSA id
+ x16-20020a05687031d000b001726cfeea97sm4531868oac.29.2023.04.17.07.00.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Apr 2023 07:00:22 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
-Cc: dickon.hood@codethink.co.uk, nazar.kazakov@codethink.co.uk,
- kiran.ostrolenk@codethink.co.uk, frank.chang@sifive.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- pbonzini@redhat.com, philipp.tomsich@vrull.eu, kvm@vger.kernel.org,
- qemu-riscv@nongnu.org, Lawrence Hunter <lawrence.hunter@codethink.co.uk>
-Subject: [PATCH v2 11/17] target/riscv: Add Zvknh ISA extension support
-Date: Mon, 17 Apr 2023 14:58:15 +0100
-Message-Id: <20230417135821.609964-12-lawrence.hunter@codethink.co.uk>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230417135821.609964-1-lawrence.hunter@codethink.co.uk>
-References: <20230417135821.609964-1-lawrence.hunter@codethink.co.uk>
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v7 00/12] target/riscv: rework CPU extensions validation
+Date: Mon, 17 Apr 2023 11:00:01 -0300
+Message-Id: <20230417140013.58893-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=78.40.148.171;
- envelope-from=lawrence.hunter@codethink.co.uk; helo=imap5.colo.codethink.co.uk
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2001:4860:4864:20::33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x33.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -46,409 +80,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Apr 2023 13:59:07 -0000
+X-List-Received-Date: Mon, 17 Apr 2023 14:00:32 -0000
 
-From: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+Hi,
 
-This commit adds support for the Zvknh vector-crypto extension, which
-consists of the following instructions:
+In this v7 we have three extra patches: 
 
-* vsha2ms.vv
-* vsha2c[hl].vv
+- patch 4 [1] and 5 [2], both from Weiwei Li, addresses an issue that
+we're going to have with Zca and RVC if we push the priv spec
+disabling code to the end of validation. More details can be seen on
+[3]. Patch 5 commit message also has some context on it;
 
-Translation functions are defined in
-`target/riscv/insn_trans/trans_rvvk.c.inc` and helpers are defined in
-`target/riscv/vcrypto_helper.c`.
+- patch 12 is something that was able to do with the recent changes from
+Alistair's riscv-to-apply.next branch. We're using the bits from the
+query-cpu-definitions work to filter out static CPUs from write_misa();
 
-Co-authored-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
-Co-authored-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
-Signed-off-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
-Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
-Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
----
- target/riscv/cpu.c                       |  10 +-
- target/riscv/cpu.h                       |   2 +
- target/riscv/helper.h                    |   4 +
- target/riscv/insn32.decode               |   5 +
- target/riscv/insn_trans/trans_rvvk.c.inc |  70 ++++++++
- target/riscv/vcrypto_helper.c            | 214 +++++++++++++++++++++++
- 6 files changed, 302 insertions(+), 3 deletions(-)
+Patches missing acks: patch 12.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 54d27301bce..dd8573bb02f 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -112,6 +112,8 @@ static const struct isa_ext_data isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zvbb, true, PRIV_VERSION_1_12_0, ext_zvbb),
-     ISA_EXT_DATA_ENTRY(zvbc, true, PRIV_VERSION_1_12_0, ext_zvbc),
-     ISA_EXT_DATA_ENTRY(zvkned, true, PRIV_VERSION_1_12_0, ext_zvkned),
-+    ISA_EXT_DATA_ENTRY(zvknha, true, PRIV_VERSION_1_12_0, ext_zvknha),
-+    ISA_EXT_DATA_ENTRY(zvknhb, true, PRIV_VERSION_1_12_0, ext_zvknhb),
-     ISA_EXT_DATA_ENTRY(zhinx, true, PRIV_VERSION_1_12_0, ext_zhinx),
-     ISA_EXT_DATA_ENTRY(zhinxmin, true, PRIV_VERSION_1_12_0, ext_zhinxmin),
-     ISA_EXT_DATA_ENTRY(smaia, true, PRIV_VERSION_1_12_0, ext_smaia),
-@@ -1218,7 +1220,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-      * In principle Zve*x would also suffice here, were they supported
-      * in qemu
-      */
--    if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkned) &&
-+    if ((cpu->cfg.ext_zvbb || cpu->cfg.ext_zvkned || cpu->cfg.ext_zvknha) &&
-         !(cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f || cpu->cfg.ext_zve64d ||
-           cpu->cfg.ext_v)) {
-         error_setg(errp,
-@@ -1226,9 +1228,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         return;
-     }
- 
--    if (cpu->cfg.ext_zvbc &&
-+    if ((cpu->cfg.ext_zvbc || cpu->cfg.ext_zvknhb) &&
-         !(cpu->cfg.ext_zve64f || cpu->cfg.ext_zve64d || cpu->cfg.ext_v)) {
--        error_setg(errp, "Zvbc extension requires V or Zve64{f,d} extensions");
-+        error_setg(
-+            errp,
-+            "Zvbc and Zvknhb extensions require V or Zve64{f,d} extensions");
-         return;
-     }
- 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 0d6c216572e..4c44088c28b 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -473,6 +473,8 @@ struct RISCVCPUConfig {
-     bool ext_zvbb;
-     bool ext_zvbc;
-     bool ext_zvkned;
-+    bool ext_zvknha;
-+    bool ext_zvknhb;
-     bool ext_zmmul;
-     bool ext_zvfh;
-     bool ext_zvfhmin;
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index db629cf6a89..a60129983be 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1223,3 +1223,7 @@ DEF_HELPER_4(vaesdm_vs, void, ptr, ptr, env, i32)
- DEF_HELPER_4(vaesz_vs, void, ptr, ptr, env, i32)
- DEF_HELPER_5(vaeskf1_vi, void, ptr, ptr, i32, env, i32)
- DEF_HELPER_5(vaeskf2_vi, void, ptr, ptr, i32, env, i32)
-+
-+DEF_HELPER_5(vsha2ms_vv, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vsha2ch_vv, void, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_5(vsha2cl_vv, void, ptr, ptr, ptr, env, i32)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 7e0295d4935..d2cfb2729c2 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -948,3 +948,8 @@ vaesdm_vs   101001 1 ..... 00000 010 ..... 1110111 @r2_vm_1
- vaesz_vs    101001 1 ..... 00111 010 ..... 1110111 @r2_vm_1
- vaeskf1_vi  100010 1 ..... ..... 010 ..... 1110111 @r_vm_1
- vaeskf2_vi  101010 1 ..... ..... 010 ..... 1110111 @r_vm_1
-+
-+# *** Zvknh vector crypto extension ***
-+vsha2ms_vv  101101 1 ..... ..... 010 ..... 1110111 @r_vm_1
-+vsha2ch_vv  101110 1 ..... ..... 010 ..... 1110111 @r_vm_1
-+vsha2cl_vv  101111 1 ..... ..... 010 ..... 1110111 @r_vm_1
-diff --git a/target/riscv/insn_trans/trans_rvvk.c.inc b/target/riscv/insn_trans/trans_rvvk.c.inc
-index 9a36a731e5e..fd4e498b838 100644
---- a/target/riscv/insn_trans/trans_rvvk.c.inc
-+++ b/target/riscv/insn_trans/trans_rvvk.c.inc
-@@ -437,3 +437,73 @@ static bool vaeskf2_check(DisasContext *s, arg_vaeskf2_vi *a)
- 
- GEN_VI_UNMASKED_TRANS(vaeskf1_vi, vaeskf1_check, ZVKNED_EGS)
- GEN_VI_UNMASKED_TRANS(vaeskf2_vi, vaeskf2_check, ZVKNED_EGS)
-+
-+/*
-+ * Zvknh
-+ */
-+
-+#define ZVKNH_EGS 4
-+
-+#define GEN_VV_UNMASKED_TRANS(NAME, CHECK, VL_MULTIPLE)                    \
-+    static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                 \
-+    {                                                                      \
-+        if (CHECK(s, a)) {                                                 \
-+            uint32_t data = 0;                                             \
-+            TCGLabel *over = gen_new_label();                              \
-+            TCGLabel *vl_ok = gen_new_label();                             \
-+            TCGv_i32 tmp = tcg_temp_new_i32();                             \
-+                                                                           \
-+            /* save opcode for unwinding in case we throw an exception */  \
-+            decode_save_opc(s);                                            \
-+                                                                           \
-+            /* check (vl % VL_MULTIPLE == 0) assuming it's power of 2 */   \
-+            tcg_gen_trunc_tl_i32(tmp, cpu_vl);                             \
-+            tcg_gen_andi_i32(tmp, tmp, VL_MULTIPLE - 1);                   \
-+            tcg_gen_brcondi_i32(TCG_COND_EQ, tmp, 0, vl_ok);               \
-+            gen_helper_restore_cpu_and_raise_exception(                    \
-+                cpu_env, tcg_constant_i32(RISCV_EXCP_ILLEGAL_INST));       \
-+            gen_set_label(vl_ok);                                          \
-+                                                                           \
-+            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);     \
-+                                                                           \
-+            data = FIELD_DP32(data, VDATA, VM, a->vm);                     \
-+            data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                 \
-+            data = FIELD_DP32(data, VDATA, VTA, s->vta);                   \
-+            data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s); \
-+            data = FIELD_DP32(data, VDATA, VMA, s->vma);                   \
-+                                                                           \
-+            tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs1),    \
-+                               vreg_ofs(s, a->rs2), cpu_env,               \
-+                               s->cfg_ptr->vlen / 8, s->cfg_ptr->vlen / 8, \
-+                               data, gen_helper_##NAME);                   \
-+                                                                           \
-+            mark_vs_dirty(s);                                              \
-+            gen_set_label(over);                                           \
-+            return true;                                                   \
-+        }                                                                  \
-+        return false;                                                      \
-+    }
-+
-+static bool vsha_check_sew(DisasContext *s)
-+{
-+    return (s->cfg_ptr->ext_zvknha == true && s->sew == MO_32) ||
-+           (s->cfg_ptr->ext_zvknhb == true &&
-+            (s->sew == MO_32 || s->sew == MO_64));
-+}
-+
-+static bool vsha_check(DisasContext *s, arg_rmrr *a)
-+{
-+    int egw_bytes = ZVKNH_EGS << s->sew;
-+    int mult = 1 << MAX(s->lmul, 0);
-+    return opivv_check(s, a) &&
-+           vsha_check_sew(s) &&
-+           MAXSZ(s) >= egw_bytes &&
-+           !is_overlapped(a->rd, mult, a->rs1, mult) &&
-+           !is_overlapped(a->rd, mult, a->rs2, mult) &&
-+           s->vstart % ZVKNH_EGS == 0 &&
-+           s->lmul >= 0;
-+}
-+
-+GEN_VV_UNMASKED_TRANS(vsha2ms_vv, vsha_check, ZVKNH_EGS)
-+GEN_VV_UNMASKED_TRANS(vsha2cl_vv, vsha_check, ZVKNH_EGS)
-+GEN_VV_UNMASKED_TRANS(vsha2ch_vv, vsha_check, ZVKNH_EGS)
-diff --git a/target/riscv/vcrypto_helper.c b/target/riscv/vcrypto_helper.c
-index 0988eb74c81..ca09062c6c1 100644
---- a/target/riscv/vcrypto_helper.c
-+++ b/target/riscv/vcrypto_helper.c
-@@ -503,3 +503,217 @@ void HELPER(vaeskf2_vi)(void *vd_vptr, void *vs2_vptr, uint32_t uimm,
-     /* set tail elements to 1s */
-     vext_set_elems_1s(vd, vta, vl * 4, total_elems * 4);
- }
-+
-+static inline uint32_t sig0_sha256(uint32_t x)
-+{
-+    return ror32(x, 7) ^ ror32(x, 18) ^ (x >> 3);
-+}
-+
-+static inline uint32_t sig1_sha256(uint32_t x)
-+{
-+    return ror32(x, 17) ^ ror32(x, 19) ^ (x >> 10);
-+}
-+
-+static inline uint64_t sig0_sha512(uint64_t x)
-+{
-+    return ror64(x, 1) ^ ror64(x, 8) ^ (x >> 7);
-+}
-+
-+static inline uint64_t sig1_sha512(uint64_t x)
-+{
-+    return ror64(x, 19) ^ ror64(x, 61) ^ (x >> 6);
-+}
-+
-+static inline void vsha2ms_e32(uint32_t *vd, uint32_t *vs1, uint32_t *vs2)
-+{
-+    uint32_t res[4];
-+    res[0] = sig1_sha256(vs1[H4(2)]) + vs2[H4(1)] + sig0_sha256(vd[H4(1)]) +
-+             vd[H4(0)];
-+    res[1] = sig1_sha256(vs1[H4(3)]) + vs2[H4(2)] + sig0_sha256(vd[H4(2)]) +
-+             vd[H4(1)];
-+    res[2] =
-+        sig1_sha256(res[0]) + vs2[H4(3)] + sig0_sha256(vd[H4(3)]) + vd[H4(2)];
-+    res[3] =
-+        sig1_sha256(res[1]) + vs1[H4(0)] + sig0_sha256(vs2[H4(0)]) + vd[H4(3)];
-+    vd[H4(3)] = res[3];
-+    vd[H4(2)] = res[2];
-+    vd[H4(1)] = res[1];
-+    vd[H4(0)] = res[0];
-+}
-+
-+static inline void vsha2ms_e64(uint64_t *vd, uint64_t *vs1, uint64_t *vs2)
-+{
-+    uint64_t res[4];
-+    res[0] = sig1_sha512(vs1[2]) + vs2[1] + sig0_sha512(vd[1]) + vd[0];
-+    res[1] = sig1_sha512(vs1[3]) + vs2[2] + sig0_sha512(vd[2]) + vd[1];
-+    res[2] = sig1_sha512(res[0]) + vs2[3] + sig0_sha512(vd[3]) + vd[2];
-+    res[3] = sig1_sha512(res[1]) + vs1[0] + sig0_sha512(vs2[0]) + vd[3];
-+    vd[3] = res[3];
-+    vd[2] = res[2];
-+    vd[1] = res[1];
-+    vd[0] = res[0];
-+}
-+
-+void HELPER(vsha2ms_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
-+                        uint32_t desc)
-+{
-+    uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
-+    uint32_t esz = sew == MO_32 ? 4 : 8;
-+    uint32_t total_elems;
-+    uint32_t vta = vext_vta(desc);
-+
-+    for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) {
-+        if (sew == MO_32) {
-+            vsha2ms_e32(((uint32_t *)vd) + i * 4, ((uint32_t *)vs1) + i * 4,
-+                        ((uint32_t *)vs2) + i * 4);
-+        } else {
-+            /* If not 32 then SEW should be 64 */
-+            vsha2ms_e64(((uint64_t *)vd) + i * 4, ((uint64_t *)vs1) + i * 4,
-+                        ((uint64_t *)vs2) + i * 4);
-+        }
-+    }
-+    /* set tail elements to 1s */
-+    total_elems = vext_get_total_elems(env, desc, esz);
-+    vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
-+    env->vstart = 0;
-+}
-+
-+static inline uint64_t sum0_64(uint64_t x)
-+{
-+    return ror64(x, 28) ^ ror64(x, 34) ^ ror64(x, 39);
-+}
-+
-+static inline uint32_t sum0_32(uint32_t x)
-+{
-+    return ror32(x, 2) ^ ror32(x, 13) ^ ror32(x, 22);
-+}
-+
-+static inline uint64_t sum1_64(uint64_t x)
-+{
-+    return ror64(x, 14) ^ ror64(x, 18) ^ ror64(x, 41);
-+}
-+
-+static inline uint32_t sum1_32(uint32_t x)
-+{
-+    return ror32(x, 6) ^ ror32(x, 11) ^ ror32(x, 25);
-+}
-+
-+#define ch(x, y, z) ((x & y) ^ ((~x) & z))
-+
-+#define maj(x, y, z) ((x & y) ^ (x & z) ^ (y & z))
-+
-+static void vsha2c_64(uint64_t *vs2, uint64_t *vd, uint64_t *vs1)
-+{
-+    uint64_t a = vs2[3], b = vs2[2], e = vs2[1], f = vs2[0];
-+    uint64_t c = vd[3], d = vd[2], g = vd[1], h = vd[0];
-+    uint64_t W0 = vs1[0], W1 = vs1[1];
-+    uint64_t T1 = h + sum1_64(e) + ch(e, f, g) + W0;
-+    uint64_t T2 = sum0_64(a) + maj(a, b, c);
-+
-+    h = g;
-+    g = f;
-+    f = e;
-+    e = d + T1;
-+    d = c;
-+    c = b;
-+    b = a;
-+    a = T1 + T2;
-+
-+    T1 = h + sum1_64(e) + ch(e, f, g) + W1;
-+    T2 = sum0_64(a) + maj(a, b, c);
-+    h = g;
-+    g = f;
-+    f = e;
-+    e = d + T1;
-+    d = c;
-+    c = b;
-+    b = a;
-+    a = T1 + T2;
-+
-+    vd[0] = f;
-+    vd[1] = e;
-+    vd[2] = b;
-+    vd[3] = a;
-+}
-+
-+static void vsha2c_32(uint32_t *vs2, uint32_t *vd, uint32_t *vs1)
-+{
-+    uint32_t a = vs2[H4(3)], b = vs2[H4(2)], e = vs2[H4(1)], f = vs2[H4(0)];
-+    uint32_t c = vd[H4(3)], d = vd[H4(2)], g = vd[H4(1)], h = vd[H4(0)];
-+    uint32_t W0 = vs1[H4(0)], W1 = vs1[H4(1)];
-+    uint32_t T1 = h + sum1_32(e) + ch(e, f, g) + W0;
-+    uint32_t T2 = sum0_32(a) + maj(a, b, c);
-+
-+    h = g;
-+    g = f;
-+    f = e;
-+    e = d + T1;
-+    d = c;
-+    c = b;
-+    b = a;
-+    a = T1 + T2;
-+
-+    T1 = h + sum1_32(e) + ch(e, f, g) + W1;
-+    T2 = sum0_32(a) + maj(a, b, c);
-+    h = g;
-+    g = f;
-+    f = e;
-+    e = d + T1;
-+    d = c;
-+    c = b;
-+    b = a;
-+    a = T1 + T2;
-+
-+    vd[H4(0)] = f;
-+    vd[H4(1)] = e;
-+    vd[H4(2)] = b;
-+    vd[H4(3)] = a;
-+}
-+
-+void HELPER(vsha2ch_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
-+                        uint32_t desc)
-+{
-+    uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
-+    uint32_t esz = sew == MO_64 ? 8 : 4;
-+    uint32_t total_elems;
-+    uint32_t vta = vext_vta(desc);
-+
-+    for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) {
-+        if (sew == MO_64) {
-+            vsha2c_64(((uint64_t *)vs2) + 4 * i, ((uint64_t *)vd) + 4 * i,
-+                      ((uint64_t *)vs1) + 4 * i + 2);
-+        } else {
-+            vsha2c_32(((uint32_t *)vs2) + 4 * i, ((uint32_t *)vd) + 4 * i,
-+                      ((uint32_t *)vs1) + 4 * i + 2);
-+        }
-+    }
-+
-+    /* set tail elements to 1s */
-+    total_elems = vext_get_total_elems(env, desc, esz);
-+    vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
-+    env->vstart = 0;
-+}
-+
-+void HELPER(vsha2cl_vv)(void *vd, void *vs1, void *vs2, CPURISCVState *env,
-+                        uint32_t desc)
-+{
-+    uint32_t sew = FIELD_EX64(env->vtype, VTYPE, VSEW);
-+    uint32_t esz = sew == MO_64 ? 8 : 4;
-+    uint32_t total_elems;
-+    uint32_t vta = vext_vta(desc);
-+
-+    for (uint32_t i = env->vstart / 4; i < env->vl / 4; i++) {
-+        if (sew == MO_64) {
-+            vsha2c_64(((uint64_t *)vs2) + 4 * i, ((uint64_t *)vd) + 4 * i,
-+                      (((uint64_t *)vs1) + 4 * i));
-+        } else {
-+            vsha2c_32(((uint32_t *)vs2) + 4 * i, ((uint32_t *)vd) + 4 * i,
-+                      (((uint32_t *)vs1) + 4 * i));
-+        }
-+    }
-+
-+    /* set tail elements to 1s */
-+    total_elems = vext_get_total_elems(env, desc, esz);
-+    vext_set_elems_1s(vd, vta, env->vl * esz, total_elems * esz);
-+    env->vstart = 0;
-+}
+Patches based on top of current Alistair's riscv-to-apply.next.
+
+Changes from v6:
+- patches 4 and 5 from Weiwei Li were added
+- patch 12 (new):
+  - make write_misa a no-op when we're running a static CPU
+- v6 link: https://lists.gnu.org/archive/html/qemu-devel/2023-03/msg06934.html
+
+
+[1] https://lists.gnu.org/archive/html/qemu-devel/2023-04/msg01010.html
+[2] https://lists.gnu.org/archive/html/qemu-devel/2023-04/msg01950.html
+[3] https://lists.gnu.org/archive/html/qemu-devel/2023-04/msg00994.html
+
+Daniel Henrique Barboza (10):
+  target/riscv/cpu.c: add riscv_cpu_validate_v()
+  target/riscv/cpu.c: remove set_vext_version()
+  target/riscv/cpu.c: remove set_priv_version()
+  target/riscv: add PRIV_VERSION_LATEST
+  target/riscv/cpu.c: add priv_spec validate/disable_exts helpers
+  target/riscv/cpu.c: add riscv_cpu_validate_misa_mxl()
+  target/riscv/cpu.c: validate extensions before riscv_timer_init()
+  target/riscv/cpu.c: remove cfg setup from riscv_cpu_init()
+  target/riscv: rework write_misa()
+  target/riscv: forbid write_misa() for static CPUs
+
+Weiwei Li (2):
+  target/riscv: Mask the implicitly enabled extensions in isa_string
+    based on priv version
+  target/riscv: Update check for Zca/Zcf/Zcd
+
+ target/riscv/cpu.c                      | 338 ++++++++++++++----------
+ target/riscv/cpu.h                      |   5 +
+ target/riscv/csr.c                      |  48 ++--
+ target/riscv/insn_trans/trans_rvd.c.inc |  12 +-
+ target/riscv/insn_trans/trans_rvf.c.inc |  14 +-
+ target/riscv/insn_trans/trans_rvi.c.inc |   5 +-
+ target/riscv/translate.c                |   5 +-
+ 7 files changed, 254 insertions(+), 173 deletions(-)
+
 -- 
-2.40.0
+2.39.2
 
 
