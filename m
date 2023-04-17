@@ -1,70 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1poPQ7-0006ax-S4
+	id 1poPQ8-0006jt-Ky
 	for mharc-qemu-riscv@gnu.org; Mon, 17 Apr 2023 10:01:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1poPPo-0005P7-7O
- for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 10:01:08 -0400
-Received: from mail-oa1-x36.google.com ([2001:4860:4864:20::36])
+ id 1poPPs-0005h2-I9
+ for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 10:01:14 -0400
+Received: from mail-oa1-x33.google.com ([2001:4860:4864:20::33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1poPPY-0003HL-Jd
- for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 10:01:07 -0400
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-187dc84637aso4886451fac.2
- for <qemu-riscv@nongnu.org>; Mon, 17 Apr 2023 07:00:52 -0700 (PDT)
+ id 1poPPi-0003Ib-Vl
+ for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 10:01:12 -0400
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-1878504c22aso17053371fac.8
+ for <qemu-riscv@nongnu.org>; Mon, 17 Apr 2023 07:01:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1681740051; x=1684332051;
+ d=ventanamicro.com; s=google; t=1681740061; x=1684332061;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mA9TaJor3VOov64Jl6vxePW5HOjf4tVu/fsDcc2X43Y=;
- b=U40/VaMv/8KJ8YuCSZCiVMpgOk8/WnEGxPPnD5RAAVYCem2Yu76MG+1w1/HM3CPsu7
- uBjxB+iabNRqbLNGzngmx9zi/XlJFU71eusdxIdlmDiYjTpqa97oCRQzr/4uCyYEaYS3
- SwCxKV10Iqtfuz+ss7HL0igNdm21JGw3aLtJSkZZyHkcY2AmmuUJzc/dNRIpLQ0obdoE
- BO8T93nID+mSMc5A15g+dT5gDGGyB2M3+KfNPAmmkBdhD6IxA2niKePtuMZrqgjG+9dP
- UXLlFtIm2HImmc7H4jOzLyWE/lnjxsDrxrB8tpJMWJaQtxZ4OOBn7XqdTnXkFSqHKy0S
- s8BQ==
+ bh=uyptJ4c227hjyJcT2iaCzQnVJjxff8HhOsI7SdfqkhU=;
+ b=hOg2bLQbdrz9NH90BQEAyfXly1NTfd9xXxLId8qfPYNjs1jMZhinhZRyL2DZtE4IKc
+ WNrzQI2MagzK5j5IzSiK5GoJ6tsBi7aeo5gDHpuSQ0ZP8dEGdJja+9gKJQMtdHthwMF3
+ wS4xswzqGLlDVhDy79ook2sVeZ+ClBjH6VHFneOyGan2f2QNe7JIG6Rd8Nw/QwvQ0tWY
+ vSqJVzbW2Yw/XmbbAtbIYeKiehje3pf3RSqCEGKHvunNKQUD9R4hnU3ondxJhj/t3R8B
+ 8ogX8wgEuYxJV6cLHP1675SlprPMuyNoq17oi2F2xg+s2eVzsAi3upBY1ol1MXQGjpkn
+ Cm4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681740051; x=1684332051;
+ d=1e100.net; s=20221208; t=1681740061; x=1684332061;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mA9TaJor3VOov64Jl6vxePW5HOjf4tVu/fsDcc2X43Y=;
- b=GjtKOIYz0LbgHjHG1Jzepccq4l32sxedKii+zGhlI38TQF2+mdg9K35lzG5O46JmZM
- WiNzXMXafwP3EQ9PooG5dwbJSsrUzOYbWhPyX5kYVPYbeZ/srEvGl+JjCnrxK2JfXbJM
- GaTJaMm7BM+bdNmFQkkVZHqw9ZryyueS5kNnncc+aXSO6xKJT5rj3l4lN7YA5/amfaXS
- 6l2WR4LG6H/FbdT06cHXRWJzgdm0lpcfp4bJ0z+crHsujXzYiQEGrrV7wLDX4gbhmtqw
- 1LklHCCGMsAgoWAO4B1pSTHHBFOihyXqEq/yMLXQuEiFrV+bc1/soNNb/mwHueLGmrdF
- KZYQ==
-X-Gm-Message-State: AAQBX9fQ4w2Uj9yGVkWqTu5Kn3FkjfqLbmbTRCCDFcfXbBS5LGUggoi7
- sOheSGYth3zIfS4BbbBzdHKPe5Vt5gryvsYMUMM=
-X-Google-Smtp-Source: AKy350ZrLo/Zg/BsDLiVrpjG3+CJ+aLAMQvzYKS19lBRho+4Qn0/ttcGqFijH8ehZ9uNflL5PZswnQ==
-X-Received: by 2002:a05:6870:4694:b0:184:266a:1700 with SMTP id
- a20-20020a056870469400b00184266a1700mr9423605oap.47.1681740051469; 
- Mon, 17 Apr 2023 07:00:51 -0700 (PDT)
+ bh=uyptJ4c227hjyJcT2iaCzQnVJjxff8HhOsI7SdfqkhU=;
+ b=kcrzqVJQxjrYIY5PRTME5QXDRl6n4nTJd0tmDSZU8J7rajKy5RdBZRiGW5OayWvd8G
+ ZBmnBRvOBCe21yMIwZVuggfTKQxwW65OAd4bsR9JJik0Dk2JXWXBiM8F7urpVU+gZnMe
+ oTxDkcF3KvYTdZ2TETGTKONVvZpkooTth+cRXBH1zVHJewCyLHNhQEiIiTE2X32bE8Rx
+ cgxFcCkgnkEvGPRThx3ZIzy9bXWbjkJ+Q0XmIv51/nbpBcDQsC5jWsHVm3xIIGzC0x3b
+ U9IKsjGQfVev0Vxn9YfNIluHhHLMyoryq/SPiaEUDBDaFftX7jqpM8af6GqrbSnIUXx4
+ TQXw==
+X-Gm-Message-State: AAQBX9e+Bpzb9hPuDgDPg7RBxmu5LiWUO1T11CLy1kVJ/glCW4+B3gF0
+ bKlSskPZZ+KlJ6CtaM5WN/Q+uA==
+X-Google-Smtp-Source: AKy350ZWeLv9CYD/ZYc3J1NDjayRYlCaOLSMLlKQhBwFLiDmBXFQqOL3EJx1hLe4cNfUGfaW1R5f8A==
+X-Received: by 2002:a05:6870:17aa:b0:177:be5e:4532 with SMTP id
+ r42-20020a05687017aa00b00177be5e4532mr10407379oae.10.1681740061271; 
+ Mon, 17 Apr 2023 07:01:01 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com ([191.255.108.232])
  by smtp.gmail.com with ESMTPSA id
- x16-20020a05687031d000b001726cfeea97sm4531868oac.29.2023.04.17.07.00.48
+ x16-20020a05687031d000b001726cfeea97sm4531868oac.29.2023.04.17.07.00.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Apr 2023 07:00:51 -0700 (PDT)
+ Mon, 17 Apr 2023 07:01:00 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v7 09/12] target/riscv/cpu.c: validate extensions before
- riscv_timer_init()
-Date: Mon, 17 Apr 2023 11:00:10 -0300
-Message-Id: <20230417140013.58893-10-dbarboza@ventanamicro.com>
+Subject: [PATCH v7 12/12] target/riscv: forbid write_misa() for static CPUs
+Date: Mon, 17 Apr 2023 11:00:13 -0300
+Message-Id: <20230417140013.58893-13-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230417140013.58893-1-dbarboza@ventanamicro.com>
 References: <20230417140013.58893-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::36;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x36.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -84,48 +83,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Apr 2023 14:01:10 -0000
+X-List-Received-Date: Mon, 17 Apr 2023 14:01:17 -0000
 
-There is no need to init timers if we're not even sure that our
-extensions are valid. Execute riscv_cpu_validate_set_extensions() before
-riscv_timer_init().
+Static CPUs don't want their extensions changed by user interaction. We
+can prevent it during init by not exposing user facing properties, but
+write_misa() is also capable of disabling/enabling extension during
+runtime.
+
+We have a way of telling whether a CPU is static or not by checking for
+TYPE_RISCV_DYNAMIC_CPU. Use it to make write_misa() a no-op for these
+CPUs.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 ---
- target/riscv/cpu.c | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
+ target/riscv/cpu.c | 5 +++++
+ target/riscv/cpu.h | 2 ++
+ target/riscv/csr.c | 5 +++++
+ 3 files changed, 12 insertions(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 43635144bd..2d7f0ac785 100644
+index 4fa720a39d..3cbcf6d320 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1257,13 +1257,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         return;
-     }
+@@ -1452,6 +1452,11 @@ static void riscv_cpu_init(Object *obj)
+ #endif /* CONFIG_USER_ONLY */
+ }
  
--
--#ifndef CONFIG_USER_ONLY
--    if (cpu->cfg.ext_sstc) {
--        riscv_timer_init(cpu);
--    }
--#endif /* CONFIG_USER_ONLY */
--
-     riscv_cpu_validate_set_extensions(cpu, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-@@ -1271,6 +1264,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     }
++bool riscv_cpu_is_static(RISCVCPU *cpu)
++{
++    return object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_DYNAMIC_CPU) == NULL;
++}
++
+ typedef struct RISCVCPUMisaExtConfig {
+     const char *name;
+     const char *description;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 1f39edc687..1913ab9d8d 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -587,6 +587,8 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *env,
+ target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
+ void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
  
- #ifndef CONFIG_USER_ONLY
-+    if (cpu->cfg.ext_sstc) {
-+        riscv_timer_init(cpu);
++bool riscv_cpu_is_static(RISCVCPU *cpu);
++
+ #include "exec/cpu-all.h"
+ 
+ FIELD(TB_FLAGS, MEM_IDX, 0, 3)
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index d449da2657..929c5477dd 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1391,6 +1391,11 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
+     uint32_t orig_misa_ext = env->misa_ext;
+     Error *local_err = NULL;
+ 
++    if (riscv_cpu_is_static(cpu)) {
++        /* never write MISA for static CPUs */
++        return RISCV_EXCP_NONE;
 +    }
 +
-     if (cpu->cfg.pmu_num) {
-         if (!riscv_pmu_init(cpu, cpu->cfg.pmu_num) && cpu->cfg.ext_sscofpmf) {
-             cpu->pmu_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
+     if (!riscv_cpu_cfg(env)->misa_w) {
+         /* drop write to misa */
+         return RISCV_EXCP_NONE;
 -- 
 2.39.2
 
