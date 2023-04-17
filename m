@@ -1,61 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1poF5R-0002uo-H1
-	for mharc-qemu-riscv@gnu.org; Sun, 16 Apr 2023 22:59:25 -0400
+	id 1poFUD-00089C-CR
+	for mharc-qemu-riscv@gnu.org; Sun, 16 Apr 2023 23:25:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1poF5P-0002uL-N2; Sun, 16 Apr 2023 22:59:23 -0400
-Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
+ id 1poFUB-00088t-UG; Sun, 16 Apr 2023 23:24:59 -0400
+Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1poF5O-0005YI-4V; Sun, 16 Apr 2023 22:59:23 -0400
-Received: by mail-vs1-xe34.google.com with SMTP id b26so21893053vsa.11;
- Sun, 16 Apr 2023 19:59:21 -0700 (PDT)
+ id 1poFU9-0002hP-IW; Sun, 16 Apr 2023 23:24:59 -0400
+Received: by mail-vs1-xe33.google.com with SMTP id g41so9818774vsv.8;
+ Sun, 16 Apr 2023 20:24:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1681700360; x=1684292360;
+ d=gmail.com; s=20221208; t=1681701896; x=1684293896;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Xk2dt18vvurekovHf1/0W3rYHrcI5o/GJokgI7GUq/s=;
- b=D+4NKJraHtP3fNS0+2xE2yiIYVuDOwMWuKUL9kyh4ixCzVf9Mq3IE6QXSsbszMgaK1
- LxDJEvTVYh13/7Lt5cToT673pmakOZ0/m6GorROaE/7lbxfgQFWa0n9B0e3oDuq5CVf8
- xZ4UstuCbmMLpO60F+Ioqpt27/zMI7xtZS25q5QpJa7zZBTVboXM43brGBcnLI2q8y5k
- yyBIpq3xPj2p1pw6ZObZ23G4kwnZlPr9dYaUOdAYpYo+HDwdXXw97ose60wYWxpQFW5z
- omrZtzEgQSNdjzbyNFCiQNBdxMibGWMygQv9cW2kLLcjYGe2+3kdTMHefLl/plRrw21F
- tcMQ==
+ bh=fslmJyUIP6hV6YS6lcpQxu/Yzh5E6G7ubp3rO6XA1PA=;
+ b=KhvJL9CVVcl182WvdN82FGxuaFKH8Ao9EXXeq1KI1WzXpW/lDVGOJ2781FQ83bYCmp
+ KI05oMhZDyB9BWvqeHW8hl/oa6Cx24yTKgm0nvAoRv2th7t0XfYnZGvOw9wZNyY8mmci
+ vsxC+0Eq5n2TtBFdnbWzz0PID2A1wxX6SctAYDe3n29sFcXFOrXSCprNLea6Yo9fRWx1
+ oolU//tqOiigrHbXyk74TZUPDx0nLtuQUmvpKupQ8HEs/lIfkHAnU4XpILM0sgBG6fv5
+ rteXAKw8OlZxOdDGGth3NrEDUds8b2hdDVPCsjqSqrHKuQDheVLmC6F40/Z3NEPm4Qwm
+ CeVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681700360; x=1684292360;
+ d=1e100.net; s=20221208; t=1681701896; x=1684293896;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Xk2dt18vvurekovHf1/0W3rYHrcI5o/GJokgI7GUq/s=;
- b=T4v8EN8ztiBAYDewJs7j9SHl6jI7t7nY+fZ59I1QAQud87kyEVWdRVfY+jjbMuifad
- 5a9bhYCOPk9LtLQlbek48fCsTmFmVczLo4SscYyLc47kpBeelLtqM4XUOlH5lxCmQLCq
- xBtCvnsB67ocI4ZJYythkZHPXFuJHfVmI0+uJskAVno1nhOziM4OUgn4WjVm4cXR6MoV
- WJbiuEUk8Djha6fiG8Aq2GIwLIukBa7ZI9oTvzdWUmN+64M2rhdY0mng82rJ6LhnUKpg
- H56FqFFCXp54GCVOdxGEIIYLSzhQOMS/9gZNamfk26hqYgNf9xnODyxMLxg3T5whrjig
- M2CA==
-X-Gm-Message-State: AAQBX9cudiLHpjOakjyvhHyPMsgAzK9X4L/Cy1l5ES844TNrqliulYB+
- bWfcsX39Pw/6yrYpibBfrYZ/neHJMm4hNRvOoOA=
-X-Google-Smtp-Source: AKy350ZZrAiiT6MI4So7E7rj3nMRkjo8SWO7XtBUxK+wG3bQwWwpGX6nblb2HSkXv6ljnDb7F+8Bru5MV8JGMFsGwts=
-X-Received: by 2002:a67:d71c:0:b0:422:1654:7737 with SMTP id
- p28-20020a67d71c000000b0042216547737mr7092263vsj.3.1681700360614; Sun, 16 Apr
- 2023 19:59:20 -0700 (PDT)
+ bh=fslmJyUIP6hV6YS6lcpQxu/Yzh5E6G7ubp3rO6XA1PA=;
+ b=LQTscNWFJ3hdQOP9s6RO0eNErJR+Hzfy2bAFD2axKMiMw522e4gekyIBVjJXT+aAyM
+ oUr3+UccmS+9kVWR0s3Tko4R7mhvX0h4XoFrsT3+hJMtwnnhlO06u51+2TJtG/f/pIeK
+ OcknjUunulK87+UaqjHKd1YLzSDrrQJgjU6px2OamKYGTKa2Gw86wlCzDkAV+spFUMcJ
+ c7Zx7TPfWN77afkg9IipvJqjnH01Cuf1VCZrXLL655PZBIqBwNYwYUggX4/feY4CVWPY
+ QBij5EN4XYO8e/oUPyjxYVJf3EY9De0MpSAe6evmzR/svvynWkM5rx/9NqN7HqBg5eaA
+ aHnA==
+X-Gm-Message-State: AAQBX9eWAlTY8aMIyfKHfye1LTyiv3bLQSZ8WsY/z0dc/mOIX9kbtTys
+ VU8kXR0r+nSK0eZu8TFb13He4A5JfsitUCb6BGg=
+X-Google-Smtp-Source: AKy350bEm4Om8iTZtfElE3O3CVZFj8KjewohPZ5xAs8R5tDd/lp2wqgATsrcCnWmVN7XcsqvbN/6p2kYcgG1SUAJL04=
+X-Received: by 2002:a67:e004:0:b0:425:8e57:7bfd with SMTP id
+ c4-20020a67e004000000b004258e577bfdmr7841207vsl.3.1681701895944; Sun, 16 Apr
+ 2023 20:24:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230411183511.189632-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20230411183511.189632-1-dbarboza@ventanamicro.com>
+References: <20230412091716.126601-1-alexghiti@rivosinc.com>
+In-Reply-To: <20230412091716.126601-1-alexghiti@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 17 Apr 2023 12:58:54 +1000
-Message-ID: <CAKmqyKMhA5=f99rzxp63-vqiUCZwEuWmAZK76=ZKUrni-CTauQ@mail.gmail.com>
-Subject: Re: [PATCH v3 0/3] target/riscv: implement query-cpu-definitions
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, richard.henderson@linaro.org
+Date: Mon, 17 Apr 2023 13:24:29 +1000
+Message-ID: <CAKmqyKNkyakGCFG0DqX02GpqhAPEq=tkt-EVctas5m2XjRuXJg@mail.gmail.com>
+Subject: Re: [PATCH] riscv: Raise an exception if pte reserved bits are not
+ cleared
+To: Alexandre Ghiti <alexghiti@rivosinc.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Andrea Parri <andrea@rivosinc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -76,55 +78,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Apr 2023 02:59:24 -0000
+X-List-Received-Date: Mon, 17 Apr 2023 03:25:00 -0000
 
-On Wed, Apr 12, 2023 at 4:36=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Wed, Apr 12, 2023 at 7:18=E2=80=AFPM Alexandre Ghiti <alexghiti@rivosinc=
+.com> wrote:
 >
-> Hi,
+> As per the specification, in 64-bit, if any of the pte reserved bits 60-5=
+4
+> is set, an exception should be triggered (see 4.4.1, "Addressing and Memo=
+ry
+> Protection"), so implement this behaviour in the address translation proc=
+ess.
 >
-> In this v3 I removed patches 3 and 4 of v2.
+> Reported-by: Andrea Parri <andrea@rivosinc.com>
+> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> ---
+>  target/riscv/cpu_bits.h   | 1 +
+>  target/riscv/cpu_helper.c | 5 +++++
+>  2 files changed, 6 insertions(+)
 >
-> Patch 3 now implements a new type that the generic CPUs (any, rv32,
-> rv64, x-rv128) were converted to. This type will be used by
-> query-cpu-definitions to determine if a given cpu is static or not based
-> on its type. This approach was suggested by Richard Henderson in the v2
-> review.
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index fca7ef0cef..8d9ba2ce11 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -640,6 +640,7 @@ typedef enum {
+>  #define PTE_SOFT            0x300 /* Reserved for Software */
+>  #define PTE_PBMT            0x6000000000000000ULL /* Page-based memory t=
+ypes */
+>  #define PTE_N               0x8000000000000000ULL /* NAPOT translation *=
+/
+> +#define PTE_RESERVED        0x1FC0000000000000ULL /* Reserved bits */
+>  #define PTE_ATTR            (PTE_N | PTE_PBMT) /* All attributes bits */
 >
-> Patches are based on top of Alistair's riscv-to-apply.next.
+>  /* Page table PPN shift amount */
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index f88c503cf4..39c323a865 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -936,6 +936,11 @@ restart:
+>              return TRANSLATE_FAIL;
+>          }
 >
-> Changes from v2:
-> - old patches 3 and 4: removed
-> - patch 3:
->   - add TYPE_RISCV_DYNAMIC_CPU
->   - use this type to set 'q_static' in riscv_cpu_add_definition()
-> - v2 link: https://lists.gnu.org/archive/html/qemu-devel/2023-04/msg01310=
-.html
->
-> Daniel Henrique Barboza (3):
->   target/riscv: add CPU QOM header
->   target/riscv: add query-cpy-definitions support
->   target/riscv: add TYPE_RISCV_DYNAMIC_CPU
+> +        /* PTE reserved bits must be cleared otherwise an exception is r=
+aised */
+> +        if (riscv_cpu_mxl(env) =3D=3D MXL_RV64 && (pte & PTE_RESERVED)) =
+{
+> +            return TRANSLATE_FAIL;
+> +        }
 
-Thanks!
+Isn't this caught by our existing check?
 
-Applied to riscv-to-apply.next
+            if ((pte & ~(target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT) {
+                return TRANSLATE_FAIL;
+            }
 
 Alistair
 
->
->  qapi/machine-target.json      |  6 ++-
->  target/riscv/cpu-qom.h        | 70 +++++++++++++++++++++++++++++++++++
->  target/riscv/cpu.c            | 20 ++++++++--
->  target/riscv/cpu.h            | 46 +----------------------
->  target/riscv/meson.build      |  3 +-
->  target/riscv/riscv-qmp-cmds.c | 57 ++++++++++++++++++++++++++++
->  6 files changed, 150 insertions(+), 52 deletions(-)
->  create mode 100644 target/riscv/cpu-qom.h
->  create mode 100644 target/riscv/riscv-qmp-cmds.c
+> +
+>          bool pbmte =3D env->menvcfg & MENVCFG_PBMTE;
+>          bool hade =3D env->menvcfg & MENVCFG_HADE;
 >
 > --
-> 2.39.2
+> 2.37.2
 >
 >
 
