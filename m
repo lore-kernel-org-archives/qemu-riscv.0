@@ -1,63 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1poFUD-00089C-CR
-	for mharc-qemu-riscv@gnu.org; Sun, 16 Apr 2023 23:25:01 -0400
+	id 1poFsk-0005H9-8M
+	for mharc-qemu-riscv@gnu.org; Sun, 16 Apr 2023 23:50:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1poFUB-00088t-UG; Sun, 16 Apr 2023 23:24:59 -0400
-Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
+ id 1poFsh-0005Gn-3b; Sun, 16 Apr 2023 23:50:19 -0400
+Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1poFU9-0002hP-IW; Sun, 16 Apr 2023 23:24:59 -0400
-Received: by mail-vs1-xe33.google.com with SMTP id g41so9818774vsv.8;
- Sun, 16 Apr 2023 20:24:56 -0700 (PDT)
+ id 1poFsf-0007Vt-GP; Sun, 16 Apr 2023 23:50:18 -0400
+Received: by mail-vs1-xe34.google.com with SMTP id g187so6721042vsc.10;
+ Sun, 16 Apr 2023 20:50:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1681701896; x=1684293896;
+ d=gmail.com; s=20221208; t=1681703416; x=1684295416;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fslmJyUIP6hV6YS6lcpQxu/Yzh5E6G7ubp3rO6XA1PA=;
- b=KhvJL9CVVcl182WvdN82FGxuaFKH8Ao9EXXeq1KI1WzXpW/lDVGOJ2781FQ83bYCmp
- KI05oMhZDyB9BWvqeHW8hl/oa6Cx24yTKgm0nvAoRv2th7t0XfYnZGvOw9wZNyY8mmci
- vsxC+0Eq5n2TtBFdnbWzz0PID2A1wxX6SctAYDe3n29sFcXFOrXSCprNLea6Yo9fRWx1
- oolU//tqOiigrHbXyk74TZUPDx0nLtuQUmvpKupQ8HEs/lIfkHAnU4XpILM0sgBG6fv5
- rteXAKw8OlZxOdDGGth3NrEDUds8b2hdDVPCsjqSqrHKuQDheVLmC6F40/Z3NEPm4Qwm
- CeVw==
+ bh=fqiB1oBCwfQGhPpw7u5Cz2W3WDW5FRgMB4i+SRN761k=;
+ b=XwXofIzFV+fEdow9igXGvAe5haWYWVSY/MUsVoHsevCHwNOyf/yNs8L/nW5lbIOk8r
+ CHiJ0vSMWqm70IpNASs1nElPDwp1wXtpYZY/+WbBg1UDVQfUpjjWHM2wRgdFuGniNKtJ
+ Thzin1H+x8Qz8YToVeRKM3m4F8ESyY0uWYMiAfjPzKo7TRAT1I+4exkaZgO2qZQ6H5oE
+ +PwBVygCVnGUTr+d0oafeSyx6NM3QSnu1wHfdVgE1gHfAiI7RxhYttTTvmF/JmeVzMmQ
+ FEmuHBFn05ra2edGeicewL3jDFpHJPzpMSbQeIpd67mKuxZuIyq4CohJnLoKTexh7h1o
+ nJ0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681701896; x=1684293896;
+ d=1e100.net; s=20221208; t=1681703416; x=1684295416;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fslmJyUIP6hV6YS6lcpQxu/Yzh5E6G7ubp3rO6XA1PA=;
- b=LQTscNWFJ3hdQOP9s6RO0eNErJR+Hzfy2bAFD2axKMiMw522e4gekyIBVjJXT+aAyM
- oUr3+UccmS+9kVWR0s3Tko4R7mhvX0h4XoFrsT3+hJMtwnnhlO06u51+2TJtG/f/pIeK
- OcknjUunulK87+UaqjHKd1YLzSDrrQJgjU6px2OamKYGTKa2Gw86wlCzDkAV+spFUMcJ
- c7Zx7TPfWN77afkg9IipvJqjnH01Cuf1VCZrXLL655PZBIqBwNYwYUggX4/feY4CVWPY
- QBij5EN4XYO8e/oUPyjxYVJf3EY9De0MpSAe6evmzR/svvynWkM5rx/9NqN7HqBg5eaA
- aHnA==
-X-Gm-Message-State: AAQBX9eWAlTY8aMIyfKHfye1LTyiv3bLQSZ8WsY/z0dc/mOIX9kbtTys
- VU8kXR0r+nSK0eZu8TFb13He4A5JfsitUCb6BGg=
-X-Google-Smtp-Source: AKy350bEm4Om8iTZtfElE3O3CVZFj8KjewohPZ5xAs8R5tDd/lp2wqgATsrcCnWmVN7XcsqvbN/6p2kYcgG1SUAJL04=
-X-Received: by 2002:a67:e004:0:b0:425:8e57:7bfd with SMTP id
- c4-20020a67e004000000b004258e577bfdmr7841207vsl.3.1681701895944; Sun, 16 Apr
- 2023 20:24:55 -0700 (PDT)
+ bh=fqiB1oBCwfQGhPpw7u5Cz2W3WDW5FRgMB4i+SRN761k=;
+ b=CXTbIIbuSrpJz0Qb9YWReDMgA5dbF6ZYsXXCuheGJmO1EPm3xWsVc9BhIKLuZ+KKPg
+ 36eVgIUdtMvMpdzcxbpKkewKyqCCT25W2Tw6fm7ajQAbU46dvaPYmvWqHTy60tdcDIex
+ hDPwYPC1kCXw1szYUmWQWJSF5SWmrUqAZfGViHgRf2UXWqHbSFNWF0mZX9gF3BY87nsR
+ ZYIO1La/chUTy+peBD69kgtdRrxKJ0oTQQV+oikqQ9JNKhCfa49p/+OewywbGasB4FTN
+ sUPLOGwIwwZoTEIGerAoQYzFXBAUKWTHa8NnutPtMy+soV4jbVxCrEIK2VL/PzPczTgW
+ 0jIg==
+X-Gm-Message-State: AAQBX9flHNqdA6XEmY5neb35wKLbx9kTLR3ZstJzdbKhc4xJyslfIoyI
+ 4epsuVIFhfDKtJvjys05l85YsXilSyH8jGyGK7I=
+X-Google-Smtp-Source: AKy350ZHUbitBjf6sZkE8BiJKFYuLhNzBga7faTv50eqkxjmoAy8d+2EPYUODoE0PNOTdAgMyQdFggMyr8LtNr32d60=
+X-Received: by 2002:a67:c217:0:b0:42e:47e8:ec18 with SMTP id
+ i23-20020a67c217000000b0042e47e8ec18mr5333296vsj.3.1681703416043; Sun, 16 Apr
+ 2023 20:50:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230412091716.126601-1-alexghiti@rivosinc.com>
-In-Reply-To: <20230412091716.126601-1-alexghiti@rivosinc.com>
+References: <20230407153225.156395-1-irina.ryapolova@syntacore.com>
+In-Reply-To: <20230407153225.156395-1-irina.ryapolova@syntacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 17 Apr 2023 13:24:29 +1000
-Message-ID: <CAKmqyKNkyakGCFG0DqX02GpqhAPEq=tkt-EVctas5m2XjRuXJg@mail.gmail.com>
-Subject: Re: [PATCH] riscv: Raise an exception if pte reserved bits are not
- cleared
-To: Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Andrea Parri <andrea@rivosinc.com>
+Date: Mon, 17 Apr 2023 13:49:49 +1000
+Message-ID: <CAKmqyKMcJYi92LwPFUonKrZcN4rxhqkhWkR+yjhju6sDUSRZAw@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Fix Guest Physical Address Translation
+To: Irina Ryapolova <irina.ryapolova@syntacore.com>
+Cc: qemu-devel@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -78,68 +76,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Apr 2023 03:25:00 -0000
+X-List-Received-Date: Mon, 17 Apr 2023 03:50:19 -0000
 
-On Wed, Apr 12, 2023 at 7:18=E2=80=AFPM Alexandre Ghiti <alexghiti@rivosinc=
-.com> wrote:
+On Sat, Apr 8, 2023 at 1:34=E2=80=AFAM Irina Ryapolova
+<irina.ryapolova@syntacore.com> wrote:
 >
-> As per the specification, in 64-bit, if any of the pte reserved bits 60-5=
-4
-> is set, an exception should be triggered (see 4.4.1, "Addressing and Memo=
-ry
-> Protection"), so implement this behaviour in the address translation proc=
-ess.
+> Before changing the flow check for sv39/48/57.
 >
-> Reported-by: Andrea Parri <andrea@rivosinc.com>
-> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> ---
->  target/riscv/cpu_bits.h   | 1 +
->  target/riscv/cpu_helper.c | 5 +++++
->  2 files changed, 6 insertions(+)
+> According to specification (for Supervisor mode):
+> Sv39 implementations support a 39-bit virtual address space, divided into=
+ 4 KiB pages.
+> Instruction fetch addresses and load and store effective addresses, which=
+ are 64 bits,
+> must have bits 63=E2=80=9339 all equal to bit 38, or else a page-fault ex=
+ception will occur.
+> Likewise for Sv48 and Sv57.
 >
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index fca7ef0cef..8d9ba2ce11 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -640,6 +640,7 @@ typedef enum {
->  #define PTE_SOFT            0x300 /* Reserved for Software */
->  #define PTE_PBMT            0x6000000000000000ULL /* Page-based memory t=
-ypes */
->  #define PTE_N               0x8000000000000000ULL /* NAPOT translation *=
-/
-> +#define PTE_RESERVED        0x1FC0000000000000ULL /* Reserved bits */
->  #define PTE_ATTR            (PTE_N | PTE_PBMT) /* All attributes bits */
+> So the high bits are equal to bit 38 for sv39.
 >
->  /* Page table PPN shift amount */
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index f88c503cf4..39c323a865 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -936,6 +936,11 @@ restart:
->              return TRANSLATE_FAIL;
->          }
+> According to specification (for Hypervisor mode):
+> For Sv39x4, address bits of the guest physical address 63:41 must all be =
+zeros, or else a
+> guest-page-fault exception occurs.
 >
-> +        /* PTE reserved bits must be cleared otherwise an exception is r=
-aised */
-> +        if (riscv_cpu_mxl(env) =3D=3D MXL_RV64 && (pte & PTE_RESERVED)) =
-{
-> +            return TRANSLATE_FAIL;
-> +        }
+> Likewise for Sv48x4 and Sv57x4.
+> For Sv48x4 address bits 63:50 must all be zeros, or else a guest-page-fau=
+lt exception occurs.
+> For Sv57x4 address bits 63:59 must all be zeros, or else a guest-page-fau=
+lt exception occurs.
+>
+> For example we are trying to access address 0xffff_ffff_ff01_0000 with on=
+ly G-translation enabled.
+> So expected behavior is to generate exception. But qemu doesn't generate =
+such exception.
+>
+> For the old check, we get
+> va_bits =3D=3D 41, mask =3D=3D (1 << 24) - 1, masked_msbs =3D=3D (0xffff_=
+ffff_ff01_0000 >> 40) & mask =3D=3D mask.
+> Accordingly, the condition masked_msbs !=3D 0 && masked_msbs !=3D mask is=
+ not fulfilled
+> and the check passes.
+>
+> Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
 
-Isn't this caught by our existing check?
-
-            if ((pte & ~(target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT) {
-                return TRANSLATE_FAIL;
-            }
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> +
->          bool pbmte =3D env->menvcfg & MENVCFG_PBMTE;
->          bool hade =3D env->menvcfg & MENVCFG_HADE;
+> ---
+> Changes for v2:
+>   -Add more detailed commit message
+> ---
+>  target/riscv/cpu_helper.c | 25 ++++++++++++++++---------
+>  1 file changed, 16 insertions(+), 9 deletions(-)
 >
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index f88c503cf4..27289f2305 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -863,17 +863,24 @@ static int get_physical_address(CPURISCVState *env,=
+ hwaddr *physical,
+>
+>      CPUState *cs =3D env_cpu(env);
+>      int va_bits =3D PGSHIFT + levels * ptidxbits + widened;
+> -    target_ulong mask, masked_msbs;
+>
+> -    if (TARGET_LONG_BITS > (va_bits - 1)) {
+> -        mask =3D (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
+> -    } else {
+> -        mask =3D 0;
+> -    }
+> -    masked_msbs =3D (addr >> (va_bits - 1)) & mask;
+> +    if (first_stage =3D=3D true) {
+> +        target_ulong mask, masked_msbs;
+> +
+> +        if (TARGET_LONG_BITS > (va_bits - 1)) {
+> +            mask =3D (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
+> +        } else {
+> +            mask =3D 0;
+> +        }
+> +        masked_msbs =3D (addr >> (va_bits - 1)) & mask;
+>
+> -    if (masked_msbs !=3D 0 && masked_msbs !=3D mask) {
+> -        return TRANSLATE_FAIL;
+> +        if (masked_msbs !=3D 0 && masked_msbs !=3D mask) {
+> +            return TRANSLATE_FAIL;
+> +        }
+> +    } else {
+> +        if (vm !=3D VM_1_10_SV32 && addr >> va_bits !=3D 0) {
+> +            return TRANSLATE_FAIL;
+> +        }
+>      }
+>
+>      int ptshift =3D (levels - 1) * ptidxbits;
 > --
-> 2.37.2
+> 2.25.1
 >
 >
 
