@@ -1,76 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1poPQA-00072B-N3
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Apr 2023 10:01:30 -0400
+	id 1poRfv-0004ge-Oy
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Apr 2023 12:25:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1poPPr-0005eo-82
- for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 10:01:13 -0400
-Received: from mail-oa1-x2f.google.com ([2001:4860:4864:20::2f])
+ id 1poRfq-0004eP-TM
+ for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 12:25:52 -0400
+Received: from mail-oi1-x232.google.com ([2607:f8b0:4864:20::232])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1poPPf-0003IA-SN
- for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 10:01:10 -0400
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-18782426c4bso17429851fac.9
- for <qemu-riscv@nongnu.org>; Mon, 17 Apr 2023 07:00:59 -0700 (PDT)
+ id 1poRfl-0006nn-6D
+ for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 12:25:46 -0400
+Received: by mail-oi1-x232.google.com with SMTP id f4so3015470oiw.0
+ for <qemu-riscv@nongnu.org>; Mon, 17 Apr 2023 09:25:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1681740058; x=1684332058;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JcqNCNsVQ3paimwEis+Vo60YMD0mDVoMWhtluBDpeeU=;
- b=NlgfOwNpFB/U2P2hb5QiwrPZ354HaEeZH8weNdHQ5JCea1WFiMFjtauZt9b8zNZnN9
- xL1kOgjABM2ebjTMa3K2QOv2oqJSTvPZuLbXhuYMVLq7Rf3x9L4qA4HZBJJ435GKgSSh
- 6AebgKpDdftNInbL9tgz5d+DjuuadZcKg3lUjEapFKa5SZ8WuLqGxiYPNX37POI5XqKm
- y45HeQpsnMpbJ7Nt3sdSRWbX4IRpaHxPHMKUDMgg/Wqpj3jgrSt2Fls0E9tXsZgKejQB
- hQlJ/czTCSy1zFdKkbS1ZSScuVWruRjtDfYXnKFGfHkw8+baHcc7qkgbyvfwyJRq78gY
- 4Eow==
+ d=ventanamicro.com; s=google; t=1681748744; x=1684340744;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=tbrk/rcmXHDC2DCUwpMDvvq/0IVos/imWukQX+WgPzs=;
+ b=RtnjtNIIVrqT1NxcBx1Irnd7ajJ/2zWmlYHTyE6jM7BZSGbvOtNoidiSPLNauZTnqL
+ K49ktM/eCMorX7uF21VTtDEBG+kIVnpQO29nYVrLD5GG+BI3uFncVXYvLmdBXt5grnt6
+ XzailczfDqd41+CoZlLDWv4zOUlMBHfcwnDHaEJ5KQP1IAdc1p7HTf4h3i9mq0TK4Kch
+ AVMnnKookZcsQlzWxO4PTPfaRiS5D1Xu6aZN61//3aIp1vl/OZIo6lbfJRMUXq+XqF9q
+ qiax9cdwnAD6KIjsKrRSKgcyVq0LRjYs6cBOkWPqSYFjQszCMNInuXISWmHqwLGzLewG
+ MEZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681740058; x=1684332058;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JcqNCNsVQ3paimwEis+Vo60YMD0mDVoMWhtluBDpeeU=;
- b=autuFvY6ukhClYitfMMbfx3qYwAWi16NteULCZJonjgCFs46PxWI7e6E6nBNCmLsZ+
- Xw2b81SCzadY4C1eUIDb+NJ1SCd6AvaVQoYRlbUMf9rtZNyX+5rFUSwtyBstJjXVgQ15
- +BAtg3iQKkNfAOEUR24QCNr9kqRwe9YVOVufkpJxqEs9BxamXAK7b11b4E2BE+tPLT0u
- W55zTx/XTQMxSnG91B3DGsrWHtjLDc44aMrmtbZu9O23Ns0l8gCwHgLqM9iwT/iMERNZ
- Q2uNW+lt7R4CFATQzfKDu5GNckNmbeWM6BPxf2dlBoN9JOnERr3tlFQ8hjYX6xqaO57H
- cI3w==
-X-Gm-Message-State: AAQBX9eESxwicQJGS3b4Xgvd19iSdsfWycfYI6tDn5C4TqgMnm4rjv2D
- XJ8/ycrKa0AwtacEZHaClYLTyg==
-X-Google-Smtp-Source: AKy350bxmP9fRO5wtPkZo446i+FQNQu2dixZ88svKyf8jUvGLkWaFcUkCBRYiD34NwMAZSAfGzVDPg==
-X-Received: by 2002:a05:6870:d38c:b0:185:cf91:188b with SMTP id
- k12-20020a056870d38c00b00185cf91188bmr6449659oag.42.1681740057835; 
- Mon, 17 Apr 2023 07:00:57 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com ([191.255.108.232])
+ d=1e100.net; s=20221208; t=1681748744; x=1684340744;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=tbrk/rcmXHDC2DCUwpMDvvq/0IVos/imWukQX+WgPzs=;
+ b=Ouiz3L3TyDX+usgKvhIyPA0AmTKrnRqbtrTNJXEcd2zBWeXaH+ZwtoqMIaaOLiOX4E
+ L7vBVBJV35Pz9prJeLVZyvrt+26IOQ6nlKqCwvEhcymp9qsYFYkL+H3awGPN6jRit7nr
+ 8DvnHsYz/PWrr7jM0Rjg8mFgX+FX5/tegrxju30z0kzs3RYCfQym0hk+wd8uMRGW+Hr4
+ IpeyqnrVagzsQ0cwkLY9GaOuRPErNoTeGQpm9Z/tYgWav2m7Ho9hED4cgDjSAXGbNcEp
+ Cs5yHqvn8Aih7LIUoiFgs4jQJOPuNr+ib28QLa5cl0TOzWQl85DPkdE11nh5Qk2l95YA
+ UcUQ==
+X-Gm-Message-State: AAQBX9epZb4eRuLJ3xprtqUCIA1D8bOSZA9+9bxHFAwvc/mI06HP7x+O
+ wv6y37I8ROLOZ2HaFk4eVTXO7Q==
+X-Google-Smtp-Source: AKy350YJl0BEobHA945/cbrQWRwCgCuDYoLDRNy4IxWSC8Q1dXD9ROjkomtzTPuzOxv78LsjOzOb3w==
+X-Received: by 2002:a05:6808:1797:b0:38c:66d3:67bf with SMTP id
+ bg23-20020a056808179700b0038c66d367bfmr4014107oib.4.1681748744032; 
+ Mon, 17 Apr 2023 09:25:44 -0700 (PDT)
+Received: from [192.168.68.107] ([191.255.108.232])
  by smtp.gmail.com with ESMTPSA id
- x16-20020a05687031d000b001726cfeea97sm4531868oac.29.2023.04.17.07.00.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Apr 2023 07:00:57 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v7 11/12] target/riscv: rework write_misa()
-Date: Mon, 17 Apr 2023 11:00:12 -0300
-Message-Id: <20230417140013.58893-12-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230417140013.58893-1-dbarboza@ventanamicro.com>
-References: <20230417140013.58893-1-dbarboza@ventanamicro.com>
+ i205-20020acaead6000000b00383ce81c186sm520896oih.32.2023.04.17.09.25.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Apr 2023 09:25:43 -0700 (PDT)
+Message-ID: <a256a5fd-e408-74a3-5476-694d216e08d8@ventanamicro.com>
+Date: Mon, 17 Apr 2023 13:25:38 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [PATCH 6/6] accel/tcg: Remain TLB_INVALID_MASK in the address
+ when TLB is re-filled
+Content-Language: en-US
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ zhiwei_liu@linux.alibaba.com, richard.henderson@linaro.org,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20230413090122.65228-1-liweiwei@iscas.ac.cn>
+ <20230413090122.65228-7-liweiwei@iscas.ac.cn>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230413090122.65228-7-liweiwei@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::232;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x232.google.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.284,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,171 +88,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Apr 2023 14:01:15 -0000
+X-List-Received-Date: Mon, 17 Apr 2023 16:25:52 -0000
 
-write_misa() must use as much common logic as possible. We want to open
-code just the bits that are exclusive to the CSR write operation and TCG
-internals.
 
-Our validation is done with riscv_cpu_validate_set_extensions(), but we
-need a small tweak first. When enabling RVG we're doing:
 
-        env->misa_ext |= RVI | RVM | RVA | RVF | RVD;
-        env->misa_ext_mask = env->misa_ext;
+On 4/13/23 06:01, Weiwei Li wrote:
+> When PMP entry overlap part of the page, we'll set the tlb_size to 1, and
+> this will make the address set with TLB_INVALID_MASK to make the page
+> un-cached. However, if we clear TLB_INVALID_MASK when TLB is re-filled, then
+> the TLB host address will be cached, and the following instructions can use
+> this host address directly which may lead to the bypass of PMP related check.
+> 
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> ---
 
-This works fine for realize() time but this can potentially overwrite
-env->misa_ext_mask if we reutilize the function for write_misa().
-Instead of doing misa_ext_mask = misa_ext, sum up the RVG extensions in
-misa_ext_mask as well. This won't change realize() time behavior
-(misa_ext_mask is still == misa_ext)  and will ensure that write_misa()
-won't change misa_ext_mask by accident.
+For this commit I believe it's worth mentioning that it's partially reverting
+commit c3c8bf579b431b6b ("accel/tcg: Suppress auto-invalidate in
+probe_access_internal") that was made to handle a particularity/quirk that was
+present in s390x code.
 
-After that, rewrite write_misa() to work as follows:
+At first glance this patch seems benign but we must make sure that no other
+assumptions were made with this particular change in probe_access_internal().
 
-- mask the write using misa_ext_mask to avoid enabling unsupported
-  extensions;
 
-- suppress RVC if the next insn isn't aligned;
+Thanks,
 
-- disable RVG if any of RVG dependencies are being disabled by the user;
+Daniel
 
-- assign env->misa_ext and run riscv_cpu_validate_set_extensions(). On
-  error, rollback to the previous values of misa_ext and misa_ext_mask;
-
-- on success, check if there's a chance that misa_ext_mask was
-  overwritten during the process and restore it;
-
-- handle RVF and MSTATUS_FS and continue as usual.
-
-Let's keep write_misa() as experimental for now until this logic gains
-enough mileage.
-
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
----
- target/riscv/cpu.c |  4 ++--
- target/riscv/cpu.h |  1 +
- target/riscv/csr.c | 47 ++++++++++++++++++++--------------------------
- 3 files changed, 23 insertions(+), 29 deletions(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 7d407321aa..4fa720a39d 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -944,7 +944,7 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
-  * Check consistency between chosen extensions while setting
-  * cpu->cfg accordingly.
-  */
--static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-+void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
- {
-     CPURISCVState *env = &cpu->env;
-     Error *local_err = NULL;
-@@ -960,7 +960,7 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         cpu->cfg.ext_ifencei = true;
- 
-         env->misa_ext |= RVI | RVM | RVA | RVF | RVD;
--        env->misa_ext_mask = env->misa_ext;
-+        env->misa_ext_mask |= RVI | RVM | RVA | RVF | RVD;
-     }
- 
-     if (riscv_has_ext(env, RVI) && riscv_has_ext(env, RVE)) {
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 15423585d0..1f39edc687 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -548,6 +548,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                         bool probe, uintptr_t retaddr);
- char *riscv_isa_string(RISCVCPU *cpu);
- void riscv_cpu_list(void);
-+void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp);
- 
- #define cpu_list riscv_cpu_list
- #define cpu_mmu_index riscv_cpu_mmu_index
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 865ee9efda..d449da2657 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1387,39 +1387,18 @@ static RISCVException read_misa(CPURISCVState *env, int csrno,
- static RISCVException write_misa(CPURISCVState *env, int csrno,
-                                  target_ulong val)
- {
-+    RISCVCPU *cpu = env_archcpu(env);
-+    uint32_t orig_misa_ext = env->misa_ext;
-+    Error *local_err = NULL;
-+
-     if (!riscv_cpu_cfg(env)->misa_w) {
-         /* drop write to misa */
-         return RISCV_EXCP_NONE;
-     }
- 
--    /* 'I' or 'E' must be present */
--    if (!(val & (RVI | RVE))) {
--        /* It is not, drop write to misa */
--        return RISCV_EXCP_NONE;
--    }
--
--    /* 'E' excludes all other extensions */
--    if (val & RVE) {
--        /*
--         * when we support 'E' we can do "val = RVE;" however
--         * for now we just drop writes if 'E' is present.
--         */
--        return RISCV_EXCP_NONE;
--    }
--
--    /*
--     * misa.MXL writes are not supported by QEMU.
--     * Drop writes to those bits.
--     */
--
-     /* Mask extensions that are not supported by this hart */
-     val &= env->misa_ext_mask;
- 
--    /* 'D' depends on 'F', so clear 'D' if 'F' is not present */
--    if ((val & RVD) && !(val & RVF)) {
--        val &= ~RVD;
--    }
--
-     /*
-      * Suppress 'C' if next instruction is not aligned
-      * TODO: this should check next_pc
-@@ -1428,18 +1407,32 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
-         val &= ~RVC;
-     }
- 
-+    /* Disable RVG if any of its dependencies are disabled */
-+    if (!(val & RVI && val & RVM && val & RVA &&
-+          val & RVF && val & RVD)) {
-+        val &= ~RVG;
-+    }
-+
-     /* If nothing changed, do nothing. */
-     if (val == env->misa_ext) {
-         return RISCV_EXCP_NONE;
-     }
- 
--    if (!(val & RVF)) {
-+    env->misa_ext = val;
-+    riscv_cpu_validate_set_extensions(cpu, &local_err);
-+    if (local_err != NULL) {
-+        /* Rollback on validation error */
-+        env->misa_ext = orig_misa_ext;
-+
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    if (!(env->misa_ext & RVF)) {
-         env->mstatus &= ~MSTATUS_FS;
-     }
- 
-     /* flush translation cache */
-     tb_flush(env_cpu(env));
--    env->misa_ext = val;
-     env->xl = riscv_cpu_mxl(env);
-     return RISCV_EXCP_NONE;
- }
--- 
-2.39.2
-
+>   accel/tcg/cputlb.c | 7 -------
+>   1 file changed, 7 deletions(-)
+> 
+> diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+> index e984a98dc4..d0bf996405 100644
+> --- a/accel/tcg/cputlb.c
+> +++ b/accel/tcg/cputlb.c
+> @@ -1563,13 +1563,6 @@ static int probe_access_internal(CPUArchState *env, target_ulong addr,
+>               /* TLB resize via tlb_fill may have moved the entry.  */
+>               index = tlb_index(env, mmu_idx, addr);
+>               entry = tlb_entry(env, mmu_idx, addr);
+> -
+> -            /*
+> -             * With PAGE_WRITE_INV, we set TLB_INVALID_MASK immediately,
+> -             * to force the next access through tlb_fill.  We've just
+> -             * called tlb_fill, so we know that this entry *is* valid.
+> -             */
+> -            flags &= ~TLB_INVALID_MASK;
+>           }
+>           tlb_addr = tlb_read_ofs(entry, elt_ofs);
+>       }
 
