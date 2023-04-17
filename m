@@ -1,79 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1poPCP-0006MJ-R9
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Apr 2023 09:47:17 -0400
+	id 1poPCW-0006OV-Q8
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Apr 2023 09:47:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <andrea@rivosinc.com>)
- id 1poMO5-0001PK-C0
- for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 06:47:09 -0400
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1poJrb-0003Fm-Iv
+ for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 04:05:36 -0400
+Received: from mail-oi1-x232.google.com ([2607:f8b0:4864:20::232])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <andrea@rivosinc.com>)
- id 1poMO3-0003Wy-ES
- for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 06:47:09 -0400
-Received: by mail-ej1-x62a.google.com with SMTP id dx24so18858006ejb.11
- for <qemu-riscv@nongnu.org>; Mon, 17 Apr 2023 03:47:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1poJrZ-0006I4-Th
+ for qemu-riscv@nongnu.org; Mon, 17 Apr 2023 04:05:27 -0400
+Received: by mail-oi1-x232.google.com with SMTP id bb20so11191169oib.12
+ for <qemu-riscv@nongnu.org>; Mon, 17 Apr 2023 01:05:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1681728424; x=1684320424; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VfqtPPbHfVBdrdAhnqREqnTDdPl97W9flXB+tn1lhDo=;
- b=QzbzQfBntgLGdksT1bTh55j4U8qkGUybkuAu/UrWCVUbSk88iMery/MNG74MDzFoL/
- egNjj+O8SlUy3Fp402x68kCwDNR5X9b1oTrrRKWuB+965Ilb0truvteg/ndsClQ+Rqh5
- mUtCJj+yUbaIDjSbccSD6Bz6C8+hPYNrBSVgL78v+Tcufs7vv013UQV3gNMq0ilmFHru
- gUNLMCDYFm/dUT9HxRBJ37XmFG0ralEq3tG9/FuvvJ0e39hfUhQggznd/aMiRLygZ1gm
- kUtDKTkaVtmYM8urj+EVOj4/rWeWo+Gw8OUystH8oeX5DXg5NDVDe0a8hU2JGrAPJoeD
- hDdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681728424; x=1684320424;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=sifive.com; s=google; t=1681718723; x=1684310723;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VfqtPPbHfVBdrdAhnqREqnTDdPl97W9flXB+tn1lhDo=;
- b=YTwpH0AhkNQCjTMIK7/6NE1E8j4nXjay+L1a6jncpbJKjyVNpgh75eLs1fPzF2HoqI
- 61F/jLqYSv35VAMJ1G4XhU21NQac2t/jlOspGjQp76s5iJTpIVdk/BqlHG9gwIQT6APp
- oS6HZ6KQ8c2bz2z+wxLWYKE25oXrSI1lJTOJNSxeo4TmgUVg5qDMLSPVnvZIO1vHM2xX
- 9oXvcLXjkfpb/etT5/LWF7Of/FckVOoMcWKy91eMziwgBAHvKetohz2D8EH5F3n3d98N
- PmiCvA2TO1xdM/Gicf7x97kMpb3rOcffQypmPLG24FKdHnWwiASNeclYCMZGKlg9XZoG
- oysg==
-X-Gm-Message-State: AAQBX9eUirDztECMnCUwOPXjinzfZNYSuUn3xySUC31xMG/zQoXF52bi
- PwlS+rFa4O6RthMdO2dc15qMvg==
-X-Google-Smtp-Source: AKy350bfObOkDdzWueZ9G0nIzcjeCl3Hr8sM6sWK8gtcTyq5rXv9mYtMjI6oIWNtp8WxMkcep4BRmg==
-X-Received: by 2002:a17:907:8e88:b0:94a:9ae2:1642 with SMTP id
- tx8-20020a1709078e8800b0094a9ae21642mr8580312ejc.46.1681728424200; 
- Mon, 17 Apr 2023 03:47:04 -0700 (PDT)
-Received: from andrea (host-87-20-69-111.retail.telecomitalia.it.
- [87.20.69.111]) by smtp.gmail.com with ESMTPSA id
- w18-20020a1709064a1200b0094e92b50076sm6405533eju.133.2023.04.17.03.47.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Apr 2023 03:47:03 -0700 (PDT)
-Date: Mon, 17 Apr 2023 12:46:58 +0200
-From: Andrea Parri <andrea@rivosinc.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alexandre Ghiti <alexghiti@rivosinc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Subject: Re: [PATCH] riscv: Raise an exception if pte reserved bits are not
- cleared
-Message-ID: <ZD0jos2r4uZocw/5@andrea>
-References: <20230412091716.126601-1-alexghiti@rivosinc.com>
- <CAKmqyKNkyakGCFG0DqX02GpqhAPEq=tkt-EVctas5m2XjRuXJg@mail.gmail.com>
+ bh=ShldPFSOK9NKfpXFrdqpQgZ7EzJOUFmNxqmjPySIe2I=;
+ b=lgbkv/C4ll82TG3eArCbNRg5V63bbwy1VVj4CocEALtXS4pyBIBOhiWZD/JvcbYFfi
+ o5gWlp8rai74f6LndyxymWnAvBo8pkyB5oVw9trB0TPSbgrfcQNZHa1JuIGxo/s7CMyq
+ azT9VYZIO82mK96jAbdgpDrRBdjP0G2zjMYpeoperyQtAHXo3MfPwMNdOlLxrEVGWhld
+ 6hd3ziwQX2SVAVzmanNsDkRwAlk1sO7+BUfgYbyKbJBsflBRmE8j3A4m+Wu1I1apGzgI
+ P7+sp7xQM6PvEHA03fHCwXRRpjUkJ0h8id6iZZKCdpSq7BRXeaFWElmcEgvW/KR+yma2
+ 9JCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1681718723; x=1684310723;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ShldPFSOK9NKfpXFrdqpQgZ7EzJOUFmNxqmjPySIe2I=;
+ b=UKPdD5s5gwa12nhyKl0vIWJ8V9GjCgspQghNl8VRR1Jfg3gcJy2YSyzOTn73wckE2R
+ 5mMwhXVRE2PMZjN4Pavw5EAwp5MUcHqRgUgR0IXclSnYXZjGNY1KcQE/kBsExPyT+sVV
+ StHFNbGfm+nGU+Ux6O7KwybK9ZdBnQEVYe0ON54Slk5DDLU0ONRKzFTXNyqzvN+Uiqbr
+ tbHF7jaqFTTaKnY9yv+qY6VtYx43MLXPQGKtmpgsW5LMWaDCSbkFhCwJ5/94QaXanhkO
+ cxyJ9vbh1NnX6Q+XxsfbasSp3Ft69Md9QqPnD/yMaPvsUHo74E1+hdHpfVlFieTcieDV
+ tyxQ==
+X-Gm-Message-State: AAQBX9fsCeFPymWHsfmysgP3A3I8Rn+QpAj+JZwyoUMtIll+25ql3vtV
+ vo5v+OX0f95K+zad9151VX6mKTMUsc36Spw7UOD+1A==
+X-Google-Smtp-Source: AKy350bCJ7fS/w83c6a6g/PjQdgtDvOA5hPGdcCz7wHPU/zfDsS3lJxVjPADYpY5FGTMGIAy8HP4rFw/whq8BTLtYfE=
+X-Received: by 2002:aca:be08:0:b0:38d:e632:82f6 with SMTP id
+ o8-20020acabe08000000b0038de63282f6mr1171139oif.5.1681718723094; Mon, 17 Apr
+ 2023 01:05:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAKmqyKNkyakGCFG0DqX02GpqhAPEq=tkt-EVctas5m2XjRuXJg@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=andrea@rivosinc.com; helo=mail-ej1-x62a.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <CAECbVCt_+SCiUzv9cOR4KYC7BE_4TjRGqOndzDthUvara8OxMA@mail.gmail.com>
+ <c021529c-67ce-fe7c-1acc-7753715c466f@ventanamicro.com>
+ <CALw707rSkT=yUWxrEnNJR8-sDTQWJiiZCz2CxFpwh2TBf7Okfw@mail.gmail.com>
+In-Reply-To: <CALw707rSkT=yUWxrEnNJR8-sDTQWJiiZCz2CxFpwh2TBf7Okfw@mail.gmail.com>
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Date: Mon, 17 Apr 2023 16:05:12 +0800
+Message-ID: <CAMWQL2iEQ=KQ5daeh=P=RJ_96=pFuw8Ss53KLaWs--bQrpStgw@mail.gmail.com>
+Subject: Re: KVM QEMU AIA support for RISCV guests
+To: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
+ anup@brainfault.org, 
+ alistair.francis@wdc.com, Atish Kumar Patra <atishp@rivosinc.com>, 
+ Palmer Dabbelt <palmer@rivosinc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::232;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-oi1-x232.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 17 Apr 2023 09:47:17 -0400
+X-Mailman-Approved-At: Mon, 17 Apr 2023 09:47:14 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,29 +81,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Apr 2023 10:47:09 -0000
+X-List-Received-Date: Mon, 17 Apr 2023 08:05:38 -0000
 
-Hi Alistair,
-
-> > @@ -936,6 +936,11 @@ restart:
-> >              return TRANSLATE_FAIL;
-> >          }
+> From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Date: Fri, Apr 14, 2023 at 8:40=E2=80=AFPM
+> Subject: Re: KVM QEMU AIA support for RISCV guests
+> To: Rajnesh Kanwal <rkanwal@rivosinc.com>, <qemu-riscv@nongnu.org>, <anup=
+@brainfault.org>, <alistair.francis@wdc.com>, Atish Kumar Patra <atishp@riv=
+osinc.com>, Palmer Dabbelt <palmer@rivosinc.com>
+>
+>
+>
+>
+> On 4/14/23 08:35, Rajnesh Kanwal wrote:
+> > Hi All,
 > >
-> > +        /* PTE reserved bits must be cleared otherwise an exception is raised */
-> > +        if (riscv_cpu_mxl(env) == MXL_RV64 && (pte & PTE_RESERVED)) {
-> > +            return TRANSLATE_FAIL;
-> > +        }
-> 
-> Isn't this caught by our existing check?
-> 
->             if ((pte & ~(target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT) {
->                 return TRANSLATE_FAIL;
->             }
+> > I am starting to work on KVM-QEMU AIA support for RISCV guests to exten=
+d
+> > kvm accel support added in [0]. This is just to confirm if anyone else
+> > is actively
+> > working on it to avoid duplicate effort.
+>
+> I was going to look into it eventually, but now that you've started I'll =
+sit
+> back and help with reviews and testing and so on.
+>
+>
+> Thanks,
+>
+> Daniel
+>
+> >
+> > [0]: https://lists.nongnu.org/archive/html/qemu-riscv/2021-08/msg00117.=
+html
+> >
+> > Thanks,
+> > Rajnesh
+> >
+>
 
-Thanks for checking this out.  AFAICS, the existing check/code doesn't
-work if either svnapot or svpbmt are active.
+Hi Rajnesh and Daniel,
 
-Please let me know if you need other information.
+Recently, I implemented a series of QEMU v7.2-based patches for
+KVM-AIA and tested them on the QEMU riscv-virt machine. I plan to
+refine the patches and upstream them soon.
 
-  Andrea
+Thanks,
+Yong-Xuan
 
