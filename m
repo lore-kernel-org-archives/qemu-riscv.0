@@ -1,67 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1poELv-0007Wa-Tm
-	for mharc-qemu-riscv@gnu.org; Sun, 16 Apr 2023 22:12:23 -0400
+	id 1poEbn-0002Zp-KA
+	for mharc-qemu-riscv@gnu.org; Sun, 16 Apr 2023 22:28:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1poELu-0007WM-4G; Sun, 16 Apr 2023 22:12:22 -0400
-Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
+ id 1poEbm-0002ZV-3V; Sun, 16 Apr 2023 22:28:46 -0400
+Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1poELs-0003bs-FF; Sun, 16 Apr 2023 22:12:21 -0400
-Received: by mail-ua1-x92c.google.com with SMTP id r10so7402698uat.6;
- Sun, 16 Apr 2023 19:12:19 -0700 (PDT)
+ id 1poEbh-0006y1-A4; Sun, 16 Apr 2023 22:28:45 -0400
+Received: by mail-vs1-xe35.google.com with SMTP id v10so21839862vsf.6;
+ Sun, 16 Apr 2023 19:28:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1681697538; x=1684289538;
+ d=gmail.com; s=20221208; t=1681698520; x=1684290520;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=l5X3Xs2+c8vDLuYJQj0x/0n8FiZzbPngVtMoCgqYYhw=;
- b=fr5zubLJ03HCAOp4Y/bh/CEE/HDSKgHPsxyynD+n8Tl8zvbuir0VxHw6m8x+rV+ZJw
- 0QBLA/jEaBtdSpcTf8FnSSGkSEaIMU5RFobamEc2IN99G5UL7b6LGUxXNRedSgmsd8FR
- RqmSSU38G9h1ES84RNcIOUARjEGbcv4dHR6cLRoE8M4xvSn+RzdS7phYbtbKWFNfCE/T
- V/Oem9hxIILTXRjxcWB9MP87Br7khiKaI7PnWMD0dPNaKgQV2NmSrAp77z1YD7KSzc88
- 473z27JlnZbvJfQyEL7+OfcgYC7YgqUapSLxO1d6nz1jI/cUoxndXPuVmD4j9mRN5aYD
- ZYYQ==
+ bh=O1pJGQ02wK/fn9Sf5fpdcZhYocjWN03jsL4FK8a+g4Q=;
+ b=gEoOpCAu3ND9fCh5Y1UJ87boMFp+sgxl6uEeFiXtNi1rXyf2Dw3+6sVseue5MyRz7M
+ WqEqSrMm+VLLgmHJLaljcLaY4BxX4jB0Dm+13VSaWQbO9agBASUDOOqx5uAjM+amQS1n
+ jaT2uWpFR8gdeKAoSGbHpaRpK+nK6KtyPbF7FZFqC3fT15m9IUWs5ngcj07b7ufRpAYN
+ aKGCHW66BQ8X15Xuf8Mwup/a6IGpskQkmrq6rD3krElaUHXqh1SnpvgFWP7Sr/mfxtYU
+ HRafbn4e7vgykBzi6/w4lnkmzy6zquvWPRaTfxqJLJ7IO/TgGfa5q/aNFZ4NEXI/IHCM
+ JgsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681697538; x=1684289538;
+ d=1e100.net; s=20221208; t=1681698520; x=1684290520;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=l5X3Xs2+c8vDLuYJQj0x/0n8FiZzbPngVtMoCgqYYhw=;
- b=H6YJjYmQGITuMF652ouDkBkmcWekGShy4InrgWZJ/+jPjFY/I1z2s50ClZRHMybvzV
- AypnE/C7GFXzuA4IrsKQ8WDg9VG+4i4AQ2RdNpnHW9VAIrV8iH3Qs7l8hp01KuiuwYv7
- rsEkFKF73YBJUQqrVXF4zH6oTumVM4H7J9Ces6Rj/kt1w3TOIk036wv358BE0CRRh+rj
- O4Pe9Rc7dKh6NThppFy2ttibokLyWSpegPtEmS/pDbCP5aEA05dbiA2mKESBTE5ZfOQ9
- cCarNsAkt1YaD7rQnCGBbUJMs2w47GxxnjDIXARxcZdJTNu5ZU4CPZ1LCfl6QB7vohCV
- NRqA==
-X-Gm-Message-State: AAQBX9dJlxV0zfho58Hy3fOZsW3FI6feEqxSgId/fN32gXKORA81pVTX
- ULYDJjdIQcAWP7GhEVl+SyWYkeJVvBD7jo+A9OI=
-X-Google-Smtp-Source: AKy350YuapnEU3UtmePcJkvbEYltoa76WVUE+dM4gAeLRxXZdft+O3LlyWTrxJJQ4fBmPOYWZkg1EwQqEAU5w/1vk4Y=
-X-Received: by 2002:a1f:30c1:0:b0:43b:e059:987f with SMTP id
- w184-20020a1f30c1000000b0043be059987fmr6317968vkw.0.1681697538099; Sun, 16
- Apr 2023 19:12:18 -0700 (PDT)
+ bh=O1pJGQ02wK/fn9Sf5fpdcZhYocjWN03jsL4FK8a+g4Q=;
+ b=J1VPFjS+yd9hHLSRR9YxP9k1bLLgXnZxM+IEAsqluSfMgdubqQ5Hrlcyr4zJwB2147
+ o2/khE+GmrNaEHo7ZHC/TYvrgUOf1s1V4GyluippnFQDI0tMlvvbDEfChtyM5J7eJcqN
+ PrybKMDyp1iuPVuTQ85sIE6mEIeYC0H5oon184EeqvOUDh2TwEmvc0vl1kiCzL+e9iMJ
+ 0LWC2CBY5Wt3oETj4fhJ6Go41dDl2bMxw1Abr8UbN22YlklfJ0VE8HbcwOT8eOVP/kQa
+ OFuOz3UlKbP2JzPFu7TExSHZEtt1aoLS7smWRaRN3POd82ImgDGI4ce0P4mOT/2KEPkB
+ uPZQ==
+X-Gm-Message-State: AAQBX9ebnl1+BjAz0wfLp0nU2nlGygtOqxISH0TmrXsudARnbDkTa/GD
+ urvoQQoqDh1dkFwqz4IYwm89mNZFZJUYw1dKnvQ=
+X-Google-Smtp-Source: AKy350Y98dG5o7rskkMQu6+dAeEIVkQQzg1LUtoAeTA40PGhhHYU0XtNakjl5yzzFJsFgcYuvw6xXdYciqR/xdP4HIw=
+X-Received: by 2002:a67:e004:0:b0:425:8e57:7bfd with SMTP id
+ c4-20020a67e004000000b004258e577bfdmr7768560vsl.3.1681698519672; Sun, 16 Apr
+ 2023 19:28:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230412114333.118895-1-richard.henderson@linaro.org>
-In-Reply-To: <20230412114333.118895-1-richard.henderson@linaro.org>
+References: <20230413133432.53771-1-ivan.klokov@syntacore.com>
+In-Reply-To: <20230413133432.53771-1-ivan.klokov@syntacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 17 Apr 2023 12:11:52 +1000
-Message-ID: <CAKmqyKOCnhveGeEZ-T35_mVaJaaGs2d-VnY9QGV7uab1ThpkYw@mail.gmail.com>
-Subject: Re: [PATCH v7 00/25] target/riscv: MSTATUS_SUM + cleanups
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Date: Mon, 17 Apr 2023 12:28:13 +1000
+Message-ID: <CAKmqyKO76-D68kk7jys4LPBBVxbEfrtL-066DEh+N6Uw0vdWAA@mail.gmail.com>
+Subject: Re: [PATCH] hw/intc/riscv_aplic: Zero init APLIC internal state
+To: Ivan Klokov <ivan.klokov@syntacore.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, richard.henderson@linaro.org,
+ anup@brainfault.org, anup.patel@wdc.com, palmer@dabbelt.com, 
+ alistair.francis@wdc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,79 +75,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Apr 2023 02:12:22 -0000
+X-List-Received-Date: Mon, 17 Apr 2023 02:28:46 -0000
 
-On Wed, Apr 12, 2023 at 9:43=E2=80=AFPM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Thu, Apr 13, 2023 at 11:35=E2=80=AFPM Ivan Klokov <ivan.klokov@syntacore=
+.com> wrote:
 >
-> v6: 20230325105429.1142530-1-richard.henderson@linaro.org
+> Since g_new is used to initialize the RISCVAPLICState->state structure,
+> in some case we get behavior that is not as expected. This patch
+> changes this to g_new0, which allows to initialize the APLIC in the corre=
+ct state.
 >
-> Changes for v7:
->   * Rebase on Alistair's riscv-to-apply.next.
->   * Replace priv_level() with ctx->priv in trans_xthead.c.inc (Zhiwei).
->
->
-> r~
->
->
-> Fei Wu (2):
->   target/riscv: Separate priv from mmu_idx
->   target/riscv: Reduce overhead of MSTATUS_SUM change
->
-> LIU Zhiwei (4):
->   target/riscv: Extract virt enabled state from tb flags
->   target/riscv: Add a general status enum for extensions
->   target/riscv: Encode the FS and VS on a normal way for tb flags
->   target/riscv: Add a tb flags field for vstart
->
-> Richard Henderson (19):
->   target/riscv: Remove mstatus_hs_{fs, vs} from tb_flags
->   accel/tcg: Add cpu_ld*_code_mmu
->   target/riscv: Use cpu_ld*_code_mmu for HLVX
->   target/riscv: Handle HLV, HSV via helpers
->   target/riscv: Rename MMU_HYP_ACCESS_BIT to MMU_2STAGE_BIT
->   target/riscv: Introduce mmuidx_sum
->   target/riscv: Introduce mmuidx_priv
->   target/riscv: Introduce mmuidx_2stage
->   target/riscv: Move hstatus.spvp check to check_access_hlsv
->   target/riscv: Set MMU_2STAGE_BIT in riscv_cpu_mmu_index
->   target/riscv: Check SUM in the correct register
->   target/riscv: Hoist second stage mode change to callers
->   target/riscv: Hoist pbmte and hade out of the level loop
->   target/riscv: Move leaf pte processing out of level loop
->   target/riscv: Suppress pte update with is_debug
->   target/riscv: Don't modify SUM with is_debug
->   target/riscv: Merge checks for reserved pte flags
->   target/riscv: Reorg access check in get_physical_address
->   target/riscv: Reorg sum check in get_physical_address
+> Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  hw/intc/riscv_aplic.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
->  include/exec/cpu_ldst.h                       |   9 +
->  target/riscv/cpu.h                            |  47 +-
->  target/riscv/cpu_bits.h                       |  12 +-
->  target/riscv/helper.h                         |  12 +-
->  target/riscv/internals.h                      |  35 ++
->  accel/tcg/cputlb.c                            |  48 +++
->  accel/tcg/user-exec.c                         |  58 +++
->  target/riscv/cpu.c                            |   2 +-
->  target/riscv/cpu_helper.c                     | 403 +++++++++---------
->  target/riscv/csr.c                            |  21 +-
->  target/riscv/op_helper.c                      | 113 ++++-
->  target/riscv/translate.c                      |  70 +--
->  .../riscv/insn_trans/trans_privileged.c.inc   |   2 +-
->  target/riscv/insn_trans/trans_rvf.c.inc       |   2 +-
->  target/riscv/insn_trans/trans_rvh.c.inc       | 137 +++---
->  target/riscv/insn_trans/trans_rvv.c.inc       |  22 +-
->  target/riscv/insn_trans/trans_xthead.c.inc    |  14 +-
->  17 files changed, 591 insertions(+), 416 deletions(-)
+> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> index cfd007e629..71591d44bf 100644
+> --- a/hw/intc/riscv_aplic.c
+> +++ b/hw/intc/riscv_aplic.c
+> @@ -803,7 +803,7 @@ static void riscv_aplic_realize(DeviceState *dev, Err=
+or **errp)
 >
+>      aplic->bitfield_words =3D (aplic->num_irqs + 31) >> 5;
+>      aplic->sourcecfg =3D g_new0(uint32_t, aplic->num_irqs);
+> -    aplic->state =3D g_new(uint32_t, aplic->num_irqs);
+> +    aplic->state =3D g_new0(uint32_t, aplic->num_irqs);
+>      aplic->target =3D g_new0(uint32_t, aplic->num_irqs);
+>      if (!aplic->msimode) {
+>          for (i =3D 0; i < aplic->num_irqs; i++) {
 > --
 > 2.34.1
+>
 >
 
