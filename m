@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1polzI-0008Rz-IM
+	id 1polzK-0008TT-JN
 	for mharc-qemu-riscv@gnu.org; Tue, 18 Apr 2023 10:07:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1polyt-0008Eu-C0; Tue, 18 Apr 2023 10:06:51 -0400
+ id 1polyt-0008Et-Ax; Tue, 18 Apr 2023 10:06:51 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1polyp-0008Ur-6s; Tue, 18 Apr 2023 10:06:51 -0400
+ id 1polyp-0008Us-85; Tue, 18 Apr 2023 10:06:51 -0400
 Received: from localhost.localdomain (unknown [180.165.241.15])
- by APP-05 (Coremail) with SMTP id zQCowADX32froz5kHH+IFA--.38119S7;
- Tue, 18 Apr 2023 22:06:40 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowADX32froz5kHH+IFA--.38119S8;
+ Tue, 18 Apr 2023 22:06:41 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,18 +19,19 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn,
  lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v2 5/8] target/riscv: flush tb when PMP entry changes
-Date: Tue, 18 Apr 2023 22:06:29 +0800
-Message-Id: <20230418140632.53166-6-liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 6/8] accel/tcg: Uncache the host address for instruction
+ fetch when tlb size < 1
+Date: Tue, 18 Apr 2023 22:06:30 +0800
+Message-Id: <20230418140632.53166-7-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230418140632.53166-1-liweiwei@iscas.ac.cn>
 References: <20230418140632.53166-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowADX32froz5kHH+IFA--.38119S7
-X-Coremail-Antispam: 1UD129KBjvdXoWrtF1fGryxXw48ZF4Uur1rWFg_yoWkArb_Gr
- 4xZF4kW34qq3ZYvFWUAF1rCF10k34kArsYgrZayrZrCa4Ygw4xAwnYq3WkAr4Y9F9xWF92
- vr17J345ArnxWjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+X-CM-TRANSID: zQCowADX32froz5kHH+IFA--.38119S8
+X-Coremail-Antispam: 1UD129KBjvdXoWrZr1xGw4UXw1xKr4ruryUWrg_yoWDXwc_Wa
+ 97JrWkuw4rGasF9Fy3t3W3tF1fu347CF4YgrWfK3ySya45AwsrK3WxKFnxGr1UWFZ3Wr9r
+ Ca4DXw1rZr129jkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
  9fnUUIcSsGvfJTRUUUbq8FF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
  6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
  IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
@@ -69,42 +70,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 18 Apr 2023 14:06:52 -0000
 
-The translation block may also be affected when PMP entry changes.
+When PMP entry overlap part of the page, we'll set the tlb_size to 1, which
+will make the address in tlb entry set with TLB_INVALID_MASK, and the next
+access will again go through tlb_fill.However, this way will not work in
+tb_gen_code() => get_page_addr_code_hostp(): the TLB host address will be
+cached, and the following instructions can use this host address directly
+which may lead to the bypass of PMP related check.
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 ---
- target/riscv/pmp.c | 3 +++
- 1 file changed, 3 insertions(+)
+ accel/tcg/cputlb.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index ec86fccd2e..37bc76c474 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -25,6 +25,7 @@
- #include "cpu.h"
- #include "trace.h"
- #include "exec/exec-all.h"
-+#include "exec/tb-flush.h"
- 
- static bool pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
-                           uint8_t val);
-@@ -492,6 +493,7 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
-     /* If PMP permission of any addr has been changed, flush TLB pages. */
-     if (modified) {
-         tlb_flush(env_cpu(env));
-+        tb_flush(env_cpu(env));
+diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+index e984a98dc4..efa0cb67c9 100644
+--- a/accel/tcg/cputlb.c
++++ b/accel/tcg/cputlb.c
+@@ -1696,6 +1696,11 @@ tb_page_addr_t get_page_addr_code_hostp(CPUArchState *env, target_ulong addr,
+     if (p == NULL) {
+         return -1;
      }
- }
- 
-@@ -545,6 +547,7 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
-                 env->pmp_state.pmp[addr_index].addr_reg = val;
-                 pmp_update_rule(env, addr_index);
-                 tlb_flush(env_cpu(env));
-+                tb_flush(env_cpu(env));
-             }
-         } else {
-             qemu_log_mask(LOG_GUEST_ERROR,
++
++    if (full->lg_page_size < TARGET_PAGE_BITS) {
++        return -1;
++    }
++
+     if (hostp) {
+         *hostp = p;
+     }
 -- 
 2.25.1
 
