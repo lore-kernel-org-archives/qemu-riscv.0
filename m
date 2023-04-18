@@ -1,54 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pobDj-0001wy-NL
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Apr 2023 22:37:27 -0400
+	id 1pobFx-0002uj-27
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Apr 2023 22:39:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pobDh-0001wK-2u; Mon, 17 Apr 2023 22:37:25 -0400
-Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
+ id 1pobFw-0002uW-Aw; Mon, 17 Apr 2023 22:39:44 -0400
+Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pobDf-0000GF-LR; Mon, 17 Apr 2023 22:37:24 -0400
-Received: by mail-ua1-x932.google.com with SMTP id r10so9960191uat.6;
- Mon, 17 Apr 2023 19:37:22 -0700 (PDT)
+ id 1pobFt-0000m7-NC; Mon, 17 Apr 2023 22:39:43 -0400
+Received: by mail-ua1-x92d.google.com with SMTP id v18so7664445uak.8;
+ Mon, 17 Apr 2023 19:39:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1681785442; x=1684377442;
+ d=gmail.com; s=20221208; t=1681785580; x=1684377580;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HFCmbcFt/AuWzvlbiCEAlqSP30V0jEBRV51cRTrXZI8=;
- b=Kxpg8Mxt9hz7lD9PT0h1y+d6tN16jBjkIVk8vxJXNrbj4xq0n2+MBI/MysoXSI2URA
- trbgBheMaIoxKcSIiDiANWBabp8e8cS8fIUgXawUNd357L18KsRrrFoVxIr/+Sz3nfN1
- pIj6Tau8DiYoObBoWrITHZfWj91VfYC2p7He3eYM7zgzF7347XEZcxsMEwCpYPtwdMgb
- DtoXnZ3XYFLQl3w3JjZbW9UAlVJe9ofTWODveKUuzJDtXaHW/x3UDjDpqNA7mix964x6
- xycKhGX9dWBb+VrhbGwJNnIBIkelwV1fB/9Sz324bKroiuPHNyFqjyZcTiuH83kzqzp9
- e4Rw==
+ bh=gwK6xbQjLQgV7IpoDBiFDQ+TGl+CyzJgVnO6FZe8mKQ=;
+ b=axokx8Ut7+qcBjC8mwjdfZg63OByO2qpBFFDngKXcrVS57RzeSzOI7q97VSe7Pc2ov
+ D5PUOEPIhoO9FckxJ8qYbv54mdGHESiPfrQn9ZMYgqnW/ibv35Vv9yupBikMybLsSurc
+ a2ebWxgEoI0C01qSfpLFm8AFq1apHpa2mvDEDQ/Kb+nLfuPvC2XBCDA0P2b6re9ss4bL
+ OgqTDB4PL6B/Uql5CM6BX1xk6wM657AooqOmIM4lDkFRDmoBhPdmQKbo5AdutH87tw0a
+ 6aS2ttYPGzka+2EceNlp6RAe4ZRwKhj6m4xck6HdbtN043ioAU2pJCFHaQuPqRF2Ciwh
+ Oxtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681785442; x=1684377442;
+ d=1e100.net; s=20221208; t=1681785580; x=1684377580;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HFCmbcFt/AuWzvlbiCEAlqSP30V0jEBRV51cRTrXZI8=;
- b=NwVRtQ8YrCHyTLlghq2Qn/g4LnkvV1PJBUKBShh+ATd27taKoqJak+ZlyaExHgVqC0
- RYVrkofmNhBqfSwkWXKcQ002qLlEHYvBDx/SWaw4VjAmSU+X4KAbjvRbCb3tEp+X/Ro6
- XJhKrL4PnH26HyAbHEjLAfNrfl7BpOs+xNnCIymsLqelh4jCdDvmGKezC/Rdn/oyKCvO
- BGPgVtbi28s+b9Cmi6+/wG2B8NIliRnPToZWpBGgBnhbG4TM1Fr9B3hr547GGlHHfpPy
- 8brEwZt5v7vZAJR/Rz+8koJqxaK3pe4L9EzqbMQNeFbc9jKN57Xqe+p0puENwbiLd3a7
- XO1g==
-X-Gm-Message-State: AAQBX9dL13nw+hbyZwuipd0UOqkKP48RtdhM9HCNp4r9grwuJDuRchom
- 4+mvbG2RCaYRZGHKVpHQ82elc2OQSl0tHZJlYLE=
-X-Google-Smtp-Source: AKy350Y7GyTmZF4oT4943w2zJnrqV37+HWPNA3/ANUN7l8/eoph8HyyA6APFKZtJgW8wkWtdtxfzTkh4CzqVF4ttTTU=
-X-Received: by 2002:a1f:c197:0:b0:440:4946:fa5 with SMTP id
- r145-20020a1fc197000000b0044049460fa5mr4223581vkf.0.1681785441991; Mon, 17
- Apr 2023 19:37:21 -0700 (PDT)
+ bh=gwK6xbQjLQgV7IpoDBiFDQ+TGl+CyzJgVnO6FZe8mKQ=;
+ b=i9OaUSvmwMewh2WVK+ucC9fRcFhZ8v+tw7GUNMqhxPlAlP61J2rByTTf8JhfXfh5JM
+ JBbf6T4zaDgHN9Hqh3nbsCZV0vGrnDHY6/t8alnQUmNQ3GHUavvg5cApxucx33jpR8j4
+ UD8EUk+fcO5wTdWELHj7Fst0vS8KOtlufROgGhfABdI6jScMTf+jHxcoxGmhhJUMXI+Z
+ f+HcWjZlOLSNmQg+geGY1lTtO7YhbCmyWU6QyTEZOxogRKrCqJLfQUOP8aPirTVw3/Xh
+ zN3NIOct48+TjWQ0AEi7eAla0pmK6M1llKKUUzSaLJSAvJPi/yy5IcGL2GaOk45YuucC
+ 1R0Q==
+X-Gm-Message-State: AAQBX9dATDCnWLIekw0NwR2vi/w/fYcv/sPO6K3+afsOAA5mg1h4i9QF
+ DeyEBfAWzJ04ygJcLFtcSx1BHUOwSQdFPLaUApQ=
+X-Google-Smtp-Source: AKy350afLNRTlOjlbCW3nYZemsrYlk/E0q5m68xhLdwIhu8KWVyEDt4vRZ4fP5XcBx/Stl0tmvETshFU+Tc4HqTnjIA=
+X-Received: by 2002:a1f:eac2:0:b0:440:8c1f:4328 with SMTP id
+ i185-20020a1feac2000000b004408c1f4328mr3248719vkh.7.1681785580153; Mon, 17
+ Apr 2023 19:39:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230413090122.65228-1-liweiwei@iscas.ac.cn>
- <20230413090122.65228-4-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230413090122.65228-4-liweiwei@iscas.ac.cn>
+ <20230413090122.65228-5-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230413090122.65228-5-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 18 Apr 2023 12:36:55 +1000
-Message-ID: <CAKmqyKPoxCsB0bTpi2SOxsaB9Ok+ik00UZ43CPRNdCUU5L8nuA@mail.gmail.com>
-Subject: Re: [PATCH 3/6] target/riscv: flush tlb when pmpaddr is updated
+Date: Tue, 18 Apr 2023 12:39:14 +1000
+Message-ID: <CAKmqyKM7qjtWOoNmL4hFQ6=LnOeo9RZ2NKNH_=tVKJfKB5AVEQ@mail.gmail.com>
+Subject: Re: [PATCH 4/6] target/riscv: Flush TLB only when pmpcfg/pmpaddr
+ really changes
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
@@ -56,8 +57,8 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -78,13 +79,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Apr 2023 02:37:25 -0000
+X-List-Received-Date: Tue, 18 Apr 2023 02:39:44 -0000
 
-On Thu, Apr 13, 2023 at 7:03=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
+On Thu, Apr 13, 2023 at 7:04=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
 ote:
 >
-> TLB should be flushed not only for pmpcfg csr changes, but also for
-> pmpaddr csr changes.
+> TLB needn't be flushed when pmpcfg/pmpaddr don't changes.
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
@@ -94,19 +94,92 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/pmp.c | 1 +
->  1 file changed, 1 insertion(+)
+>  target/riscv/pmp.c | 24 ++++++++++++++++--------
+>  1 file changed, 16 insertions(+), 8 deletions(-)
 >
 > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 4f9389e73c..6d4813806b 100644
+> index 6d4813806b..aced23c4d5 100644
 > --- a/target/riscv/pmp.c
 > +++ b/target/riscv/pmp.c
-> @@ -537,6 +537,7 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t a=
-ddr_index,
+> @@ -26,7 +26,7 @@
+>  #include "trace.h"
+>  #include "exec/exec-all.h"
+>
+> -static void pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
+> +static bool pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
+>                            uint8_t val);
+>  static uint8_t pmp_read_cfg(CPURISCVState *env, uint32_t addr_index);
+>  static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index);
+> @@ -83,7 +83,7 @@ static inline uint8_t pmp_read_cfg(CPURISCVState *env, =
+uint32_t pmp_index)
+>   * Accessor to set the cfg reg for a specific PMP/HART
+>   * Bounds checks and relevant lock bit.
+>   */
+> -static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_=
+t val)
+> +static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_=
+t val)
+>  {
+>      if (pmp_index < MAX_RISCV_PMPS) {
+>          bool locked =3D true;
+> @@ -119,14 +119,17 @@ static void pmp_write_cfg(CPURISCVState *env, uint3=
+2_t pmp_index, uint8_t val)
+>
+>          if (locked) {
+>              qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - lock=
+ed\n");
+> -        } else {
+> +        } else if (env->pmp_state.pmp[pmp_index].cfg_reg !=3D val) {
+>              env->pmp_state.pmp[pmp_index].cfg_reg =3D val;
+>              pmp_update_rule(env, pmp_index);
+> +            return true;
+>          }
+>      } else {
+>          qemu_log_mask(LOG_GUEST_ERROR,
+>                        "ignoring pmpcfg write - out of bounds\n");
+>      }
+> +
+> +    return false;
+>  }
+>
+>  static void pmp_decode_napot(target_ulong a, target_ulong *sa,
+> @@ -477,16 +480,19 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t =
+reg_index,
+>      int i;
+>      uint8_t cfg_val;
+>      int pmpcfg_nums =3D 2 << riscv_cpu_mxl(env);
+> +    bool modified =3D false;
+>
+>      trace_pmpcfg_csr_write(env->mhartid, reg_index, val);
+>
+>      for (i =3D 0; i < pmpcfg_nums; i++) {
+>          cfg_val =3D (val >> 8 * i)  & 0xff;
+> -        pmp_write_cfg(env, (reg_index * 4) + i, cfg_val);
+> +        modified |=3D pmp_write_cfg(env, (reg_index * 4) + i, cfg_val);
+>      }
+>
+>      /* If PMP permission of any addr has been changed, flush TLB pages. =
+*/
+> -    tlb_flush(env_cpu(env));
+> +    if (modified) {
+> +        tlb_flush(env_cpu(env));
+> +    }
+>  }
+>
+>
+> @@ -535,9 +541,11 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t =
+addr_index,
+>          }
+>
 >          if (!pmp_is_locked(env, addr_index)) {
->              env->pmp_state.pmp[addr_index].addr_reg =3D val;
->              pmp_update_rule(env, addr_index);
-> +            tlb_flush(env_cpu(env));
+> -            env->pmp_state.pmp[addr_index].addr_reg =3D val;
+> -            pmp_update_rule(env, addr_index);
+> -            tlb_flush(env_cpu(env));
+> +            if (env->pmp_state.pmp[addr_index].addr_reg !=3D val) {
+> +                env->pmp_state.pmp[addr_index].addr_reg =3D val;
+> +                pmp_update_rule(env, addr_index);
+> +                tlb_flush(env_cpu(env));
+> +            }
 >          } else {
 >              qemu_log_mask(LOG_GUEST_ERROR,
 >                            "ignoring pmpaddr write - locked\n");
