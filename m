@@ -1,83 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1poftJ-0002Np-5p
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Apr 2023 03:36:41 -0400
+	id 1pofyx-0004by-8D
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Apr 2023 03:42:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1poftI-0002Ng-G5
- for qemu-riscv@nongnu.org; Tue, 18 Apr 2023 03:36:40 -0400
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1poftF-0005Ri-Ga
- for qemu-riscv@nongnu.org; Tue, 18 Apr 2023 03:36:40 -0400
-Received: by mail-ej1-x62b.google.com with SMTP id vc20so15814709ejc.10
- for <qemu-riscv@nongnu.org>; Tue, 18 Apr 2023 00:36:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1681803395; x=1684395395;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=6yxyqwjPqfgzOj8BEoy/R9Kl5mJhfXmO92/e6f1UPrU=;
- b=sVuUJ+9V+YQnPyIcswoKVLCj8mIFg/1VIuL5xSbnSd2NFJYlcJsWO9wSFwxmc6h4vO
- J0gi2bz1fXZKbLzmhCDejxq1yfmAiSvu+Xnfo5mQPsCbgPNoT5IrHaZIgqrZ1xJAhIOr
- jax9HDMex8CNmJmIokpzKmITSEoGgdXuQlLfyv4OIeVXzYTC0kRUuFwfnuXKUe6dFQCo
- brctBRznTwcY/JPoumLJMcBVUEZu4ZB91X4yN+/j7BOdpDhJR0iWsdsgmw+zRdr6ms3W
- 99/sJgaEgFA2xu9AcQH7jr76ZS8dDBK1grqvpARuDq/T9J7tqpT/+wJKN9IrViNVAnJh
- Zg6w==
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pofyv-0004bc-My
+ for qemu-riscv@nongnu.org; Tue, 18 Apr 2023 03:42:29 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1pofyu-0006f8-2n
+ for qemu-riscv@nongnu.org; Tue, 18 Apr 2023 03:42:29 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1681803746;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=cuf0qr0j1Ibb+rzsHEXe0ggA9qprGn2UiYOR7P2RdWM=;
+ b=FmFKV0tP5gg29Xr44QER8uxHuFxfOXAvu6fzUNrOR8PBpmqgfVXry8PWyzIQ+ERrqTdmfS
+ +hjVruAzyin0ZcmL3jJUUuabbSlR1RfuAmA6SaPQBknK2QMXx8UDjrJ30LoKF1OYxDLpJb
+ thEga+hQHnsjy0ZhIeceO2V91KnhA9w=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-564-_J6Wz_fDM2--mzng7zS8fQ-1; Tue, 18 Apr 2023 03:42:25 -0400
+X-MC-Unique: _J6Wz_fDM2--mzng7zS8fQ-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-3f1763fac8bso5921195e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 18 Apr 2023 00:42:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681803395; x=1684395395;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ d=1e100.net; s=20221208; t=1681803744; x=1684395744;
+ h=content-transfer-encoding:in-reply-to:from:cc:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6yxyqwjPqfgzOj8BEoy/R9Kl5mJhfXmO92/e6f1UPrU=;
- b=YAodzVizZYfbXMymgGoxBaJ9fBl8fsa7McJmVeTyuGNilGXxhYfnK9KGpAEIPMn3He
- r95g762awyxPzMjKgUkN+nBnfS7UcDN69jw9EE93WwF1qSiXy/zN3RvNYOZPqNlz9KjY
- QcAcQ4PznM5U/B/U+EYEVHBJt2OWIFIMVRrUu5xtUKWDYkI4G6Xi6aROwALygTWjQb0x
- DMAI+jwMFRNigmEQOofqjVM2kATWGDLvkL+wKqtjEILwbLC0UFO/zmE7Usg05vWX6rnS
- GuMH3lJat/0RVqTJWJlfIMst2dAcvA+bRibgB+OpmbpkJPffb7mVYMmxN9YHI2wjEKsg
- bx0Q==
-X-Gm-Message-State: AAQBX9e7AlsHYCZphlRj4pDQTw15743vr1kJAcjv1T5MsZ04KhoR3V5Z
- 3Sx6TUL1GQsvXpu8rvCazsRdqQ==
-X-Google-Smtp-Source: AKy350b+TXz0EuvD8aeZbpysOT+cje+AR4Q98DVTLe22b3zOMIaLyQoiNPWVUaYernjZJoGgqXRBnQ==
-X-Received: by 2002:a17:906:64ca:b0:94f:4d4d:23 with SMTP id
- p10-20020a17090664ca00b0094f4d4d0023mr7460102ejn.68.1681803395636; 
- Tue, 18 Apr 2023 00:36:35 -0700 (PDT)
-Received: from [192.168.58.227] ([91.223.100.53])
- by smtp.gmail.com with ESMTPSA id
- p3-20020a17090635c300b0094ed14a5b75sm6625273ejb.51.2023.04.18.00.36.32
+ bh=cuf0qr0j1Ibb+rzsHEXe0ggA9qprGn2UiYOR7P2RdWM=;
+ b=fIHIs0b/8LFXDd3Ayzu0XZY2s3jcmsqqo83Gzc2nFBaAJW6WfW1CGLT4X1CQfDdg0w
+ sdR9v/IKgjP0D5zrR1EYvGQ/D2iYTQbyLHub4qQK6k6InD6xOxCKhQLRgKzAHuQCfuBy
+ KNKWVKkG61fbslqTDQqUwybDnyfY7XzTVs+5Hfynb+8GMLQJvqUKC7nvkrFqll1F1E6o
+ LHMlsIrrjRQnVvMJ9yVr9Ac5226CCvHyHdNTtIJKnbGzo5AkfaLBUh8jmBFXaLzcEOO9
+ wn1UBaOqmwPr/fwai0356VBr3WFzOz7LyGDhn5XZn31Gy+iJZ6WYc46uL4H4tK1Lp2aX
+ 25Ig==
+X-Gm-Message-State: AAQBX9eBu96ME7vEh6cLUMNc7aP4IjsMvZbt/nQJ98kC9z7lReq1A1OR
+ vlA4o6cNthpQ4WjJHws4baKowzkBXG6ycJ7bDoP7G4hhD91Ruxw6+WoWZKMYbT7PtSgyBK1tBae
+ GL11Z0uE3NfhBQxk=
+X-Received: by 2002:a5d:4fc6:0:b0:2fb:4121:285a with SMTP id
+ h6-20020a5d4fc6000000b002fb4121285amr1000131wrw.57.1681803744285; 
+ Tue, 18 Apr 2023 00:42:24 -0700 (PDT)
+X-Google-Smtp-Source: AKy350bk6BxLLGcYf6rfZgFGY9KqFWrQEvs3L0KKLPbQ+Tbn6xQASd4SsrFM4KkCbx32E5FLlb3guw==
+X-Received: by 2002:a5d:4fc6:0:b0:2fb:4121:285a with SMTP id
+ h6-20020a5d4fc6000000b002fb4121285amr1000117wrw.57.1681803744027; 
+ Tue, 18 Apr 2023 00:42:24 -0700 (PDT)
+Received: from [192.168.0.3] (ip-109-43-176-59.web.vodafone.de.
+ [109.43.176.59]) by smtp.gmail.com with ESMTPSA id
+ l6-20020adfe586000000b002fe065da369sm271424wrm.69.2023.04.18.00.42.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Apr 2023 00:36:35 -0700 (PDT)
-Message-ID: <e6fea4f5-4750-30df-4ce4-e2d36f5e4664@linaro.org>
-Date: Tue, 18 Apr 2023 09:36:29 +0200
+ Tue, 18 Apr 2023 00:42:23 -0700 (PDT)
+Message-ID: <3aab7cc1-c068-da71-13bc-58f7dd164bfb@redhat.com>
+Date: Tue, 18 Apr 2023 09:42:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [PATCH 6/6] accel/tcg: Remain TLB_INVALID_MASK in the address
- when TLB is re-filled
+ Thunderbird/102.9.0
+Subject: Re: How to increase memory in a RISCV32 image? Stuck with 988MB
+To: "Mikhail R. Gadelha" <mikhail.ramalho@gmail.com>, qemu-discuss@nongnu.org
+References: <CAORA-9bu70APxEC4w+Ona9dzTN9Wy9kmPzEQAgxOQ6u6eK71ug@mail.gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>
+From: Thomas Huth <thuth@redhat.com>
+In-Reply-To: <CAORA-9bu70APxEC4w+Ona9dzTN9Wy9kmPzEQAgxOQ6u6eK71ug@mail.gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230413090122.65228-1-liweiwei@iscas.ac.cn>
- <20230413090122.65228-7-liweiwei@iscas.ac.cn>
- <a256a5fd-e408-74a3-5476-694d216e08d8@ventanamicro.com>
- <e2288c5f-b4a1-9105-6c2e-60e51decd91d@linaro.org>
-In-Reply-To: <e2288c5f-b4a1-9105-6c2e-60e51decd91d@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62b;
- envelope-from=richard.henderson@linaro.org; helo=mail-ej1-x62b.google.com
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.284,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-2.284, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,49 +92,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Apr 2023 07:36:40 -0000
+X-List-Received-Date: Tue, 18 Apr 2023 07:42:29 -0000
 
-On 4/18/23 09:18, Richard Henderson wrote:
->>> -            /*
->>> -             * With PAGE_WRITE_INV, we set TLB_INVALID_MASK immediately,
->>> -             * to force the next access through tlb_fill.  We've just
->>> -             * called tlb_fill, so we know that this entry *is* valid.
->>> -             */
->>> -            flags &= ~TLB_INVALID_MASK;
+On 17/04/2023 19.21, Mikhail R. Gadelha wrote:
+> Hi qemu folks,
 > 
+> I'm using yocto to generate a riscv32 image but qemu seems to be ignoring 
+> the -m argument from the command line and forcing the image to run with 
+> 988MB of RAM.
 > 
-> I missed the original patch, but this is definitely wrong.
+> Is there any way I can increase it to 4G?
 > 
-> Clearing this bit locally (!) is correct because we want to inform the caller of 
-> probe_access_* that the access is valid.  We know that it is valid because we have just 
-> queried tlb_fill (and thus for riscv, PMP).
+> I'm using the following cmdline to start qemu:
 > 
-> Clearing the bit locally does *not* cause the tlb entry to be cached -- the INVALID bit is 
-> still set within the tlb entry.  The next access will again go through tlb_fill.
+> qemu-system-riscv32 -nographic -machine virt -m 4G -smp 8 -bios 
+> /home/mgadelha/tools/poky/build/tmp/deploy/images/qemuriscv32/fw_jump.elf 
+> -kernel /home/mgadelha/tools/poky/build/tmp/deploy/images/qemuriscv32/Image 
+> -append "root=/dev/vda rw mem=4G" -drive 
+
+That "mem=4G" part of the -append option looks suspicious ... have you 
+already tried to boot without that, or to decrease it to a number that fits 
+into 32-bit, e.g. "mem=3G" ?
+
+  HTH,
+   Thomas
+
+> id=disk0,file=/home/mgadelha/tools/poky/build/tmp/deploy/images/qemuriscv32/core-image-full-cmdline-qemuriscv32-20230415202008.rootfs.ext4,if=none,format=raw -device virtio-net-device,netdev=usernet -netdev user,id=usernet,hostfwd=tcp::22222-:22 -device virtio-blk-device,drive=disk0 -object rng-random,filename=/dev/urandom,id=rng0 -device virtio-rng-pci,rng=rng0 -device virtio-tablet-pci -device virtio-keyboard-pci
 > 
-> What is the original problem you are seeing?  The commit message does not say.
+> Well, it actually doesn't start if I use -m 4G, but any value lower than 
+> that is fine.
+> 
+> Here's also the boot log: https://pastebin.com/b7ZEP659 
+> <https://pastebin.com/b7ZEP659>
+> 
+> I see that the kernel prints:
+> 
+> [    0.000000] Memory limited to 1024MB
+> 
+> so maybe it's a kernel limitation rather than qemu?
+> 
+> -- 
+> 
+> Mikhail Ramalho.
 
- From https://lore.kernel.org/qemu-devel/3ace9e9e-91cf-36e6-a18f-494fd44dffab@iscas.ac.cn/
-I see that it is a problem with execution.
-
-By eye, it appears that get_page_addr_code_hostp needs adjustment, e.g.
-
-     (void)probe_access_internal(env, addr, 1, MMU_INST_FETCH,
-                                 cpu_mmu_index(env, true), false, &p, &full, 0);
-     if (p == NULL) {
-         return -1;
-     }
-+   if (full->lg_page_size < TARGET_PAGE_BITS) {
-+       return -1;
-+   }
-     if (hostp) {
-         *hostp = p;
-     }
-
-It seems like we could do slightly better than this, perhaps by single-stepping through 
-such a page, but surely this edge case is so uncommon as to not make it worthwhile to 
-consider.
-
-
-r~
 
