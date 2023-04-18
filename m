@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1polzL-0008Uk-QJ
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Apr 2023 10:07:19 -0400
+	id 1polzF-0008P6-IM
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Apr 2023 10:07:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1polyv-0008GI-HX; Tue, 18 Apr 2023 10:06:53 -0400
+ id 1polyu-0008GO-TZ; Tue, 18 Apr 2023 10:06:53 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1polyp-0008VR-GD; Tue, 18 Apr 2023 10:06:52 -0400
+ id 1polyp-0008VT-Dk; Tue, 18 Apr 2023 10:06:52 -0400
 Received: from localhost.localdomain (unknown [180.165.241.15])
- by APP-05 (Coremail) with SMTP id zQCowADX32froz5kHH+IFA--.38119S10;
- Tue, 18 Apr 2023 22:06:42 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowADX32froz5kHH+IFA--.38119S9;
+ Tue, 18 Apr 2023 22:06:41 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,35 +19,33 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn,
  lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v2 8/8] target/riscv: Separate pmp_update_rule() in
- pmpcfg_csr_write Use pmp_update_rule_addr() and pmp_update_rule_nums()
- separately to update rule nums only once for each pmpcfg_csr_write. Then we
- can also move tlb_flush and tb_flush into pmp_update_rule_nums().
-Date: Tue, 18 Apr 2023 22:06:32 +0800
-Message-Id: <20230418140632.53166-9-liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 7/8] target/riscv: Make the short cut really work in
+ pmp_hart_has_privs
+Date: Tue, 18 Apr 2023 22:06:31 +0800
+Message-Id: <20230418140632.53166-8-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230418140632.53166-1-liweiwei@iscas.ac.cn>
 References: <20230418140632.53166-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowADX32froz5kHH+IFA--.38119S10
-X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF43Xw1kCrW8Cr17ZFb_yoW8Xw1xpr
- WxCrWIgrW5t34qg34fJF1UWrs8Ca15KFn7ta1vvF1FkFWfua1rCF1qq3sF9F4UXayxZrWY
- 9a4UZr1UZF4jvFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPI14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: zQCowADX32froz5kHH+IFA--.38119S9
+X-Coremail-Antispam: 1UD129KBjvJXoW3WF4ktF4ktw13Cw15CryDJrb_yoWxJw1Upr
+ WakFWxKr1kXrZrG3W3Ga1kCFyjkrnYk3y5tF9I934xuw43uw1rurn5tr4a9Fy3Gryq93yr
+ urW3urWDGF4qqF7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUP214x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
- 3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
- x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8
- JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2
- ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG
- 67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MI
- IYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E
- 14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr
- 0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JU6
- OJrUUUUU=
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
+ 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
+ 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
+ IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4U
+ M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
+ kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
+ 14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIx
+ kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAF
+ wI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JV
+ WxJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7VUj_H
+ UJUUUUU==
 X-Originating-IP: [180.165.241.15]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -70,56 +68,293 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Apr 2023 14:06:54 -0000
+X-List-Received-Date: Tue, 18 Apr 2023 14:06:53 -0000
+
+We needn't check the PMP entries if there is no PMP rules.
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 ---
- target/riscv/pmp.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ target/riscv/pmp.c | 251 ++++++++++++++++++++++-----------------------
+ 1 file changed, 123 insertions(+), 128 deletions(-)
 
 diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 67347c5887..1cce3f0ce4 100644
+index 37bc76c474..67347c5887 100644
 --- a/target/riscv/pmp.c
 +++ b/target/riscv/pmp.c
-@@ -122,7 +122,7 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
-             qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - locked\n");
-         } else if (env->pmp_state.pmp[pmp_index].cfg_reg != val) {
-             env->pmp_state.pmp[pmp_index].cfg_reg = val;
--            pmp_update_rule(env, pmp_index);
-+            pmp_update_rule_addr(env, pmp_index);
-             return true;
-         }
-     } else {
-@@ -208,6 +208,9 @@ void pmp_update_rule_nums(CPURISCVState *env)
-             env->pmp_state.num_rules++;
-         }
-     }
-+
-+    tlb_flush(env_cpu(env));
-+    tb_flush(env_cpu(env));
- }
+@@ -315,149 +315,144 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+     target_ulong e = 0;
  
- /*
-@@ -487,8 +490,7 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
- 
-     /* If PMP permission of any addr has been changed, flush TLB pages. */
-     if (modified) {
--        tlb_flush(env_cpu(env));
--        tb_flush(env_cpu(env));
-+        pmp_update_rule_nums(env);
-     }
- }
- 
-@@ -541,8 +543,6 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
-             if (env->pmp_state.pmp[addr_index].addr_reg != val) {
-                 env->pmp_state.pmp[addr_index].addr_reg = val;
-                 pmp_update_rule(env, addr_index);
--                tlb_flush(env_cpu(env));
--                tb_flush(env_cpu(env));
-             }
+     /* Short cut if no rules */
+-    if (0 == pmp_get_num_rules(env)) {
+-        if (pmp_hart_has_privs_default(env, addr, size, privs,
+-                                       allowed_privs, mode)) {
+-            ret = MAX_RISCV_PMPS;
+-        }
+-    }
+-
+-    if (size == 0) {
+-        if (riscv_cpu_cfg(env)->mmu) {
+-            /*
+-             * If size is unknown (0), assume that all bytes
+-             * from addr to the end of the page will be accessed.
+-             */
+-            pmp_size = -(addr | TARGET_PAGE_MASK);
++    if (pmp_get_num_rules(env) != 0) {
++        if (size == 0) {
++            if (riscv_cpu_cfg(env)->mmu) {
++                /*
++                 * If size is unknown (0), assume that all bytes
++                 * from addr to the end of the page will be accessed.
++                 */
++                pmp_size = -(addr | TARGET_PAGE_MASK);
++            } else {
++                pmp_size = sizeof(target_ulong);
++            }
          } else {
-             qemu_log_mask(LOG_GUEST_ERROR,
+-            pmp_size = sizeof(target_ulong);
+-        }
+-    } else {
+-        pmp_size = size;
+-    }
+-
+-    /*
+-     * 1.10 draft priv spec states there is an implicit order
+-     * from low to high
+-     */
+-    for (i = 0; i < MAX_RISCV_PMPS; i++) {
+-        s = pmp_is_in_range(env, i, addr);
+-        e = pmp_is_in_range(env, i, addr + pmp_size - 1);
+-
+-        /* partially inside */
+-        if ((s + e) == 1) {
+-            qemu_log_mask(LOG_GUEST_ERROR,
+-                          "pmp violation - access is partially inside\n");
+-            ret = -1;
+-            break;
++            pmp_size = size;
+         }
+ 
+-        /* fully inside */
+-        const uint8_t a_field =
+-            pmp_get_a_field(env->pmp_state.pmp[i].cfg_reg);
+-
+         /*
+-         * Convert the PMP permissions to match the truth table in the
+-         * ePMP spec.
++         * 1.10 draft priv spec states there is an implicit order
++         * from low to high
+          */
+-        const uint8_t epmp_operation =
+-            ((env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) >> 4) |
+-            ((env->pmp_state.pmp[i].cfg_reg & PMP_READ) << 2) |
+-            (env->pmp_state.pmp[i].cfg_reg & PMP_WRITE) |
+-            ((env->pmp_state.pmp[i].cfg_reg & PMP_EXEC) >> 2);
++        for (i = 0; i < MAX_RISCV_PMPS; i++) {
++            s = pmp_is_in_range(env, i, addr);
++            e = pmp_is_in_range(env, i, addr + pmp_size - 1);
++
++            /* partially inside */
++            if ((s + e) == 1) {
++                qemu_log_mask(LOG_GUEST_ERROR,
++                              "pmp violation - access is partially inside\n");
++                ret = -1;
++                break;
++            }
++
++            /* fully inside */
++            const uint8_t a_field =
++                pmp_get_a_field(env->pmp_state.pmp[i].cfg_reg);
+ 
+-        if (((s + e) == 2) && (PMP_AMATCH_OFF != a_field)) {
+             /*
+-             * If the PMP entry is not off and the address is in range,
+-             * do the priv check
++             * Convert the PMP permissions to match the truth table in the
++             * ePMP spec.
+              */
+-            if (!MSECCFG_MML_ISSET(env)) {
+-                /*
+-                 * If mseccfg.MML Bit is not set, do pmp priv check
+-                 * This will always apply to regular PMP.
+-                 */
+-                *allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
+-                if ((mode != PRV_M) || pmp_is_locked(env, i)) {
+-                    *allowed_privs &= env->pmp_state.pmp[i].cfg_reg;
+-                }
+-            } else {
++            const uint8_t epmp_operation =
++                ((env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) >> 4) |
++                ((env->pmp_state.pmp[i].cfg_reg & PMP_READ) << 2) |
++                (env->pmp_state.pmp[i].cfg_reg & PMP_WRITE) |
++                ((env->pmp_state.pmp[i].cfg_reg & PMP_EXEC) >> 2);
++
++            if (((s + e) == 2) && (PMP_AMATCH_OFF != a_field)) {
+                 /*
+-                 * If mseccfg.MML Bit set, do the enhanced pmp priv check
++                 * If the PMP entry is not off and the address is in range,
++                 * do the priv check
+                  */
+-                if (mode == PRV_M) {
+-                    switch (epmp_operation) {
+-                    case 0:
+-                    case 1:
+-                    case 4:
+-                    case 5:
+-                    case 6:
+-                    case 7:
+-                    case 8:
+-                        *allowed_privs = 0;
+-                        break;
+-                    case 2:
+-                    case 3:
+-                    case 14:
+-                        *allowed_privs = PMP_READ | PMP_WRITE;
+-                        break;
+-                    case 9:
+-                    case 10:
+-                        *allowed_privs = PMP_EXEC;
+-                        break;
+-                    case 11:
+-                    case 13:
+-                        *allowed_privs = PMP_READ | PMP_EXEC;
+-                        break;
+-                    case 12:
+-                    case 15:
+-                        *allowed_privs = PMP_READ;
+-                        break;
+-                    default:
+-                        g_assert_not_reached();
++                if (!MSECCFG_MML_ISSET(env)) {
++                    /*
++                     * If mseccfg.MML Bit is not set, do pmp priv check
++                     * This will always apply to regular PMP.
++                     */
++                    *allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
++                    if ((mode != PRV_M) || pmp_is_locked(env, i)) {
++                        *allowed_privs &= env->pmp_state.pmp[i].cfg_reg;
+                     }
+                 } else {
+-                    switch (epmp_operation) {
+-                    case 0:
+-                    case 8:
+-                    case 9:
+-                    case 12:
+-                    case 13:
+-                    case 14:
+-                        *allowed_privs = 0;
+-                        break;
+-                    case 1:
+-                    case 10:
+-                    case 11:
+-                        *allowed_privs = PMP_EXEC;
+-                        break;
+-                    case 2:
+-                    case 4:
+-                    case 15:
+-                        *allowed_privs = PMP_READ;
+-                        break;
+-                    case 3:
+-                    case 6:
+-                        *allowed_privs = PMP_READ | PMP_WRITE;
+-                        break;
+-                    case 5:
+-                        *allowed_privs = PMP_READ | PMP_EXEC;
+-                        break;
+-                    case 7:
+-                        *allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
+-                        break;
+-                    default:
+-                        g_assert_not_reached();
++                    /*
++                     * If mseccfg.MML Bit set, do the enhanced pmp priv check
++                     */
++                    if (mode == PRV_M) {
++                        switch (epmp_operation) {
++                        case 0:
++                        case 1:
++                        case 4:
++                        case 5:
++                        case 6:
++                        case 7:
++                        case 8:
++                            *allowed_privs = 0;
++                            break;
++                        case 2:
++                        case 3:
++                        case 14:
++                            *allowed_privs = PMP_READ | PMP_WRITE;
++                            break;
++                        case 9:
++                        case 10:
++                            *allowed_privs = PMP_EXEC;
++                            break;
++                        case 11:
++                        case 13:
++                            *allowed_privs = PMP_READ | PMP_EXEC;
++                            break;
++                        case 12:
++                        case 15:
++                            *allowed_privs = PMP_READ;
++                            break;
++                        default:
++                            g_assert_not_reached();
++                        }
++                    } else {
++                        switch (epmp_operation) {
++                        case 0:
++                        case 8:
++                        case 9:
++                        case 12:
++                        case 13:
++                        case 14:
++                            *allowed_privs = 0;
++                            break;
++                        case 1:
++                        case 10:
++                        case 11:
++                            *allowed_privs = PMP_EXEC;
++                            break;
++                        case 2:
++                        case 4:
++                        case 15:
++                            *allowed_privs = PMP_READ;
++                            break;
++                        case 3:
++                        case 6:
++                            *allowed_privs = PMP_READ | PMP_WRITE;
++                            break;
++                        case 5:
++                            *allowed_privs = PMP_READ | PMP_EXEC;
++                            break;
++                        case 7:
++                            *allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
++                            break;
++                        default:
++                            g_assert_not_reached();
++                        }
+                     }
+                 }
+-            }
+ 
+-            /*
+-             * If matching address range was found, the protection bits
+-             * defined with PMP must be used. We shouldn't fallback on
+-             * finding default privileges.
+-             */
+-            ret = i;
+-            break;
++                /*
++                 * If matching address range was found, the protection bits
++                 * defined with PMP must be used. We shouldn't fallback on
++                 * finding default privileges.
++                 */
++                ret = i;
++                break;
++            }
+         }
+     }
+ 
 -- 
 2.25.1
 
