@@ -1,65 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pob2c-0008GK-AU
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Apr 2023 22:25:58 -0400
+	id 1pobDj-0001wy-NL
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Apr 2023 22:37:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pob2a-0008Ea-Gh; Mon, 17 Apr 2023 22:25:56 -0400
-Received: from mail-ua1-x931.google.com ([2607:f8b0:4864:20::931])
+ id 1pobDh-0001wK-2u; Mon, 17 Apr 2023 22:37:25 -0400
+Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pob2X-0006Vk-Uu; Mon, 17 Apr 2023 22:25:56 -0400
-Received: by mail-ua1-x931.google.com with SMTP id a26so3590193uak.5;
- Mon, 17 Apr 2023 19:25:52 -0700 (PDT)
+ id 1pobDf-0000GF-LR; Mon, 17 Apr 2023 22:37:24 -0400
+Received: by mail-ua1-x932.google.com with SMTP id r10so9960191uat.6;
+ Mon, 17 Apr 2023 19:37:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1681784752; x=1684376752;
+ d=gmail.com; s=20221208; t=1681785442; x=1684377442;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xRz2vYMowRDgjT6RimOcd4wh2p5yRkq7Sh0siGa5SBw=;
- b=TsrHj3BdWTCQ7C+lkNBsHPg8hd+oAw00LeJHzNTJV4PDZRl6XSLT3Uifp6RQPKc388
- B5t3qZvqjUXgHiFLtc1//DxJ5U9108V9KF5x6sC04rEEKadO10WU89kYBep47wN9JoIk
- fM1T7+sRiWdCfrGn1dqgs/VYa/TBdzD3TXFE7mati39It7rdFS8pSG4AJlQqijohXeqk
- lJNm1MFi8NSCEdGk+YwLw7G1VQvivsctQw97IDD8hso8XGdf/2fZEkuy0QegiUYEfvXJ
- yX1gcuPN1GMKYVfgkUHr1QlYhQ6tmtgwWPUL7tx7XvDqdkCRy6Tl93jFl//FFICnjqao
- lVZQ==
+ bh=HFCmbcFt/AuWzvlbiCEAlqSP30V0jEBRV51cRTrXZI8=;
+ b=Kxpg8Mxt9hz7lD9PT0h1y+d6tN16jBjkIVk8vxJXNrbj4xq0n2+MBI/MysoXSI2URA
+ trbgBheMaIoxKcSIiDiANWBabp8e8cS8fIUgXawUNd357L18KsRrrFoVxIr/+Sz3nfN1
+ pIj6Tau8DiYoObBoWrITHZfWj91VfYC2p7He3eYM7zgzF7347XEZcxsMEwCpYPtwdMgb
+ DtoXnZ3XYFLQl3w3JjZbW9UAlVJe9ofTWODveKUuzJDtXaHW/x3UDjDpqNA7mix964x6
+ xycKhGX9dWBb+VrhbGwJNnIBIkelwV1fB/9Sz324bKroiuPHNyFqjyZcTiuH83kzqzp9
+ e4Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681784752; x=1684376752;
+ d=1e100.net; s=20221208; t=1681785442; x=1684377442;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xRz2vYMowRDgjT6RimOcd4wh2p5yRkq7Sh0siGa5SBw=;
- b=Ki68jgJzeCy6xGSpZ1CCS/+hZeReDsVz/w89fb/9ZbEhFipF06CSmMVncg22B41yZH
- WejI1oa82ucopJzX4C7AwJgU3dnNFyl0JwH/u2r2jvnq1Du5VXdBL4nBoG/M9XNdF0qS
- iMcbCEw89nDMFk3DBndC7KW4zC+ci+ISIiJAnLgCYHH0n1VxSDBJoTcVVRz9pCU/cFcT
- azfT+6yH8Ckbl8TR/96z8BdzL/cDg6FCE34QTsQSp/vYj8vheTz0JGM0CtbWdNTMn+qG
- t2nDF3iGrI2bwJqZf0Opse63qkcgATBORc8GjDNsxtpjliMMms4/xWNFXn57HBxhzenR
- k2zg==
-X-Gm-Message-State: AAQBX9d1b+3G382YsyGjV12TZZGgZUkYEgRnCDCm5oLkeajUJTadYqyg
- TGjJuuVaxddL6Gl7TRGcUdCMvNdbDYCxuUul5ZQ=
-X-Google-Smtp-Source: AKy350YhJ77w0AdtI7jhG1i02j6dfJC/k6EAlQMi+EyRM/vGouudL3KpymygWAdE1Cmog9TBSDD8T4f9HRj30EiXpBM=
-X-Received: by 2002:a1f:4387:0:b0:440:50c4:3e13 with SMTP id
- q129-20020a1f4387000000b0044050c43e13mr4660205vka.5.1681784752133; Mon, 17
- Apr 2023 19:25:52 -0700 (PDT)
+ bh=HFCmbcFt/AuWzvlbiCEAlqSP30V0jEBRV51cRTrXZI8=;
+ b=NwVRtQ8YrCHyTLlghq2Qn/g4LnkvV1PJBUKBShh+ATd27taKoqJak+ZlyaExHgVqC0
+ RYVrkofmNhBqfSwkWXKcQ002qLlEHYvBDx/SWaw4VjAmSU+X4KAbjvRbCb3tEp+X/Ro6
+ XJhKrL4PnH26HyAbHEjLAfNrfl7BpOs+xNnCIymsLqelh4jCdDvmGKezC/Rdn/oyKCvO
+ BGPgVtbi28s+b9Cmi6+/wG2B8NIliRnPToZWpBGgBnhbG4TM1Fr9B3hr547GGlHHfpPy
+ 8brEwZt5v7vZAJR/Rz+8koJqxaK3pe4L9EzqbMQNeFbc9jKN57Xqe+p0puENwbiLd3a7
+ XO1g==
+X-Gm-Message-State: AAQBX9dL13nw+hbyZwuipd0UOqkKP48RtdhM9HCNp4r9grwuJDuRchom
+ 4+mvbG2RCaYRZGHKVpHQ82elc2OQSl0tHZJlYLE=
+X-Google-Smtp-Source: AKy350Y7GyTmZF4oT4943w2zJnrqV37+HWPNA3/ANUN7l8/eoph8HyyA6APFKZtJgW8wkWtdtxfzTkh4CzqVF4ttTTU=
+X-Received: by 2002:a1f:c197:0:b0:440:4946:fa5 with SMTP id
+ r145-20020a1fc197000000b0044049460fa5mr4223581vkf.0.1681785441991; Mon, 17
+ Apr 2023 19:37:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230417135821.609964-1-lawrence.hunter@codethink.co.uk>
- <20230417135821.609964-3-lawrence.hunter@codethink.co.uk>
-In-Reply-To: <20230417135821.609964-3-lawrence.hunter@codethink.co.uk>
+References: <20230413090122.65228-1-liweiwei@iscas.ac.cn>
+ <20230413090122.65228-4-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230413090122.65228-4-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 18 Apr 2023 12:25:26 +1000
-Message-ID: <CAKmqyKP1akoCLyp-O3wt=Y8sZaiROzxRY2Aq9ierK+nnnzsrYg@mail.gmail.com>
-Subject: Re: [PATCH v2 02/17] target/riscv: Refactor vector-vector translation
- macro
-To: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
-Cc: qemu-devel@nongnu.org, dickon.hood@codethink.co.uk, 
- nazar.kazakov@codethink.co.uk, kiran.ostrolenk@codethink.co.uk, 
- frank.chang@sifive.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
- bin.meng@windriver.com, pbonzini@redhat.com, philipp.tomsich@vrull.eu, 
- kvm@vger.kernel.org, qemu-riscv@nongnu.org
+Date: Tue, 18 Apr 2023 12:36:55 +1000
+Message-ID: <CAKmqyKPoxCsB0bTpi2SOxsaB9Ok+ik00UZ43CPRNdCUU5L8nuA@mail.gmail.com>
+Subject: Re: [PATCH 3/6] target/riscv: flush tlb when pmpaddr is updated
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, richard.henderson@linaro.org, 
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::931;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x931.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -80,118 +78,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Apr 2023 02:25:56 -0000
+X-List-Received-Date: Tue, 18 Apr 2023 02:37:25 -0000
 
-On Tue, Apr 18, 2023 at 12:01=E2=80=AFAM Lawrence Hunter
-<lawrence.hunter@codethink.co.uk> wrote:
+On Thu, Apr 13, 2023 at 7:03=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
+ote:
 >
-> From: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+> TLB should be flushed not only for pmpcfg csr changes, but also for
+> pmpaddr csr changes.
 >
-> Factor the non SEW-specific stuff out of `GEN_OPIVV_TRANS` into
-> function `opivv_trans` (similar to `opivi_trans`). `opivv_trans` will be
-> used in proceeding vector-crypto commits.
->
-> Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/insn_trans/trans_rvv.c.inc | 62 +++++++++++++------------
->  1 file changed, 32 insertions(+), 30 deletions(-)
+>  target/riscv/pmp.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
-trans/trans_rvv.c.inc
-> index f2e3d385152..4106bd69949 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -1643,38 +1643,40 @@ GEN_OPIWX_WIDEN_TRANS(vwadd_wx)
->  GEN_OPIWX_WIDEN_TRANS(vwsubu_wx)
->  GEN_OPIWX_WIDEN_TRANS(vwsub_wx)
->
-> +static bool opivv_trans(uint32_t vd, uint32_t vs1, uint32_t vs2, uint32_=
-t vm,
-> +                        gen_helper_gvec_4_ptr *fn, DisasContext *s)
-> +{
-> +    uint32_t data =3D 0;
-> +    TCGLabel *over =3D gen_new_label();
-> +    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
-> +
-> +    data =3D FIELD_DP32(data, VDATA, VM, vm);
-> +    data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-> +    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-> +    data =3D FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
-> +    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
-> +    tcg_gen_gvec_4_ptr(vreg_ofs(s, vd), vreg_ofs(s, 0), vreg_ofs(s, vs1)=
-,
-> +                       vreg_ofs(s, vs2), cpu_env, s->cfg_ptr->vlen / 8,
-> +                       s->cfg_ptr->vlen / 8, data, fn);
-> +    mark_vs_dirty(s);
-> +    gen_set_label(over);
-> +    return true;
-> +}
-> +
->  /* Vector Integer Add-with-Carry / Subtract-with-Borrow Instructions */
->  /* OPIVV without GVEC IR */
-> -#define GEN_OPIVV_TRANS(NAME, CHECK)                               \
-> -static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
-> -{                                                                  \
-> -    if (CHECK(s, a)) {                                             \
-> -        uint32_t data =3D 0;                                         \
-> -        static gen_helper_gvec_4_ptr * const fns[4] =3D {            \
-> -            gen_helper_##NAME##_b, gen_helper_##NAME##_h,          \
-> -            gen_helper_##NAME##_w, gen_helper_##NAME##_d,          \
-> -        };                                                         \
-> -        TCGLabel *over =3D gen_new_label();                          \
-> -        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
-> -        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
-> -                                                                   \
-> -        data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
-> -        data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-> -        data =3D FIELD_DP32(data, VDATA, VTA, s->vta);               \
-> -        data =3D                                                     \
-> -            FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);\
-> -        data =3D FIELD_DP32(data, VDATA, VMA, s->vma);               \
-> -        tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-> -                           vreg_ofs(s, a->rs1),                    \
-> -                           vreg_ofs(s, a->rs2), cpu_env,           \
-> -                           s->cfg_ptr->vlen / 8,                   \
-> -                           s->cfg_ptr->vlen / 8, data,             \
-> -                           fns[s->sew]);                           \
-> -        mark_vs_dirty(s);                                          \
-> -        gen_set_label(over);                                       \
-> -        return true;                                               \
-> -    }                                                              \
-> -    return false;                                                  \
-> +#define GEN_OPIVV_TRANS(NAME, CHECK)                                    =
- \
-> +static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                  =
- \
-> +{                                                                       =
- \
-> +    if (CHECK(s, a)) {                                                  =
- \
-> +        static gen_helper_gvec_4_ptr * const fns[4] =3D {               =
-   \
-> +            gen_helper_##NAME##_b, gen_helper_##NAME##_h,               =
- \
-> +            gen_helper_##NAME##_w, gen_helper_##NAME##_d,               =
- \
-> +        };                                                              =
- \
-> +        return opivv_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s)=
-;\
-> +    }                                                                   =
- \
-> +    return false;                                                       =
- \
->  }
->
->  /*
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 4f9389e73c..6d4813806b 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -537,6 +537,7 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t a=
+ddr_index,
+>          if (!pmp_is_locked(env, addr_index)) {
+>              env->pmp_state.pmp[addr_index].addr_reg =3D val;
+>              pmp_update_rule(env, addr_index);
+> +            tlb_flush(env_cpu(env));
+>          } else {
+>              qemu_log_mask(LOG_GUEST_ERROR,
+>                            "ignoring pmpaddr write - locked\n");
 > --
-> 2.40.0
+> 2.25.1
 >
 >
 
