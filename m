@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1polzG-0008QU-KL
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Apr 2023 10:07:14 -0400
+	id 1polzG-0008R8-TD
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Apr 2023 10:07:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1polys-0008ED-2F; Tue, 18 Apr 2023 10:06:50 -0400
+ id 1polyt-0008Ew-I7; Tue, 18 Apr 2023 10:06:51 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1polyp-0008Ue-58; Tue, 18 Apr 2023 10:06:49 -0400
+ id 1polyp-0008Uw-8X; Tue, 18 Apr 2023 10:06:51 -0400
 Received: from localhost.localdomain (unknown [180.165.241.15])
- by APP-05 (Coremail) with SMTP id zQCowADX32froz5kHH+IFA--.38119S3;
- Tue, 18 Apr 2023 22:06:38 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowADX32froz5kHH+IFA--.38119S6;
+ Tue, 18 Apr 2023 22:06:40 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,32 +19,33 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn,
  lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v2 1/8] target/riscv: Update pmp_get_tlb_size()
-Date: Tue, 18 Apr 2023 22:06:25 +0800
-Message-Id: <20230418140632.53166-2-liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 4/8] target/riscv: Flush TLB only when pmpcfg/pmpaddr
+ really changes
+Date: Tue, 18 Apr 2023 22:06:28 +0800
+Message-Id: <20230418140632.53166-5-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230418140632.53166-1-liweiwei@iscas.ac.cn>
 References: <20230418140632.53166-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowADX32froz5kHH+IFA--.38119S3
-X-Coremail-Antispam: 1UD129KBjvJXoWxGw1UJFy5JryxKr4fCFWxZwb_yoWrWr18pr
- W7CrWxGrWkK39xJ3WftFWDJF15Cw4SkF4UCa1xGFZY9a15G3yrAr1qkw43ur18Ga98urWj
- kFWDAF1UCr4UXaUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBE14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
- x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
- ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2AI
- xVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20x
- vE14v26r1j6r18McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xv
- r2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04
- v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_
- Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x
- 0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8
- JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIx
- AIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUnmi_UUUUU
- =
+X-CM-TRANSID: zQCowADX32froz5kHH+IFA--.38119S6
+X-Coremail-Antispam: 1UD129KBjvJXoWxGFWUCF1DAr47uF4xXFWkWFg_yoW5AFyrpr
+ WfKF92grW5tasFga93JF1UXF15Cw1rKrWxKrZrCF1F9FsxuF48CF1qg3sFkr1DWayxZrWY
+ vayDZryUXF42vFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUP214x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
+ 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
+ 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
+ IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4U
+ M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
+ kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
+ 14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIx
+ kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAF
+ wI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JV
+ WxJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7VUj_H
+ UJUUUUU==
 X-Originating-IP: [180.165.241.15]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -67,113 +68,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Apr 2023 14:06:50 -0000
-X-List-Received-Date: Tue, 18 Apr 2023 14:06:50 -0000
+X-List-Received-Date: Tue, 18 Apr 2023 14:06:52 -0000
+X-List-Received-Date: Tue, 18 Apr 2023 14:06:52 -0000
 
-PMP entries before the matched PMP entry(including the matched PMP entry)
-may overlap partial of the tlb page, which may make different regions in
-that page have different permission rights, such as for
-PMP0(0x80000008~0x8000000F, R) and PMP1(0x80001000~0x80001FFF, RWX))
-write access to 0x80000000 will match PMP1. However we cannot cache the tlb
-for it since this will make the write access to 0x80000008 bypass the check
-of PMP0. So we should check all of them and set the tlb size to 1 in this
-case.
+TLB needn't be flushed when pmpcfg/pmpaddr don't changes.
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_helper.c |  7 ++-----
- target/riscv/pmp.c        | 35 ++++++++++++++++++++++-------------
- target/riscv/pmp.h        |  3 +--
- 3 files changed, 25 insertions(+), 20 deletions(-)
+ target/riscv/pmp.c | 24 ++++++++++++++++--------
+ 1 file changed, 16 insertions(+), 8 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 433ea529b0..075fc0538a 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -703,11 +703,8 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
-     }
- 
-     *prot = pmp_priv_to_page_prot(pmp_priv);
--    if ((tlb_size != NULL) && pmp_index != MAX_RISCV_PMPS) {
--        target_ulong tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
--        target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
--
--        *tlb_size = pmp_get_tlb_size(env, pmp_index, tlb_sa, tlb_ea);
-+    if (tlb_size != NULL) {
-+        *tlb_size = pmp_get_tlb_size(env, addr);
-     }
- 
-     return TRANSLATE_SUCCESS;
 diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 1f5aca42e8..78bcd969ec 100644
+index 8645b1e1c1..ec86fccd2e 100644
 --- a/target/riscv/pmp.c
 +++ b/target/riscv/pmp.c
-@@ -601,28 +601,37 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
- }
+@@ -26,7 +26,7 @@
+ #include "trace.h"
+ #include "exec/exec-all.h"
  
- /*
-- * Calculate the TLB size if the start address or the end address of
-+ * Calculate the TLB size if any start address or the end address of
-  * PMP entry is presented in the TLB page.
+-static void pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
++static bool pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
+                           uint8_t val);
+ static uint8_t pmp_read_cfg(CPURISCVState *env, uint32_t addr_index);
+ static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index);
+@@ -83,7 +83,7 @@ static inline uint8_t pmp_read_cfg(CPURISCVState *env, uint32_t pmp_index)
+  * Accessor to set the cfg reg for a specific PMP/HART
+  * Bounds checks and relevant lock bit.
   */
--target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
--                              target_ulong tlb_sa, target_ulong tlb_ea)
-+target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr)
+-static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
++static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
  {
--    target_ulong pmp_sa = env->pmp_state.addr[pmp_index].sa;
--    target_ulong pmp_ea = env->pmp_state.addr[pmp_index].ea;
-+    target_ulong pmp_sa;
-+    target_ulong pmp_ea;
-+    target_ulong tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
-+    target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
-+    int i;
-+
-+    for (i = 0; i < MAX_RISCV_PMPS; i++) {
-+        pmp_sa = env->pmp_state.addr[i].sa;
-+        pmp_ea = env->pmp_state.addr[i].ea;
+     if (pmp_index < MAX_RISCV_PMPS) {
+         bool locked = true;
+@@ -119,14 +119,17 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
  
--    if (pmp_sa <= tlb_sa && pmp_ea >= tlb_ea) {
--        return TARGET_PAGE_SIZE;
--    } else {
-         /*
--         * At this point we have a tlb_size that is the smallest possible size
--         * That fits within a TARGET_PAGE_SIZE and the PMP region.
--         *
--         * If the size is less then TARGET_PAGE_SIZE we drop the size to 1.
-+         * If any start address or the end address of PMP entry is presented
-+         * in the TLB page and cannot override the whole TLB page we drop the
-+         * size to 1.
-          * This means the result isn't cached in the TLB and is only used for
-          * a single translation.
-          */
--        return 1;
-+        if (pmp_sa <= tlb_sa && pmp_ea >= tlb_ea) {
-+            return TARGET_PAGE_SIZE;
-+        } else if ((pmp_sa >= tlb_sa && pmp_sa <= tlb_ea) ||
-+                   (pmp_ea >= tlb_sa && pmp_ea <= tlb_ea)) {
-+            return 1;
-+        }
+         if (locked) {
+             qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - locked\n");
+-        } else {
++        } else if (env->pmp_state.pmp[pmp_index].cfg_reg != val) {
+             env->pmp_state.pmp[pmp_index].cfg_reg = val;
+             pmp_update_rule(env, pmp_index);
++            return true;
+         }
+     } else {
+         qemu_log_mask(LOG_GUEST_ERROR,
+                       "ignoring pmpcfg write - out of bounds\n");
      }
 +
-+    return TARGET_PAGE_SIZE;
++    return false;
  }
  
- /*
-diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-index b296ea1fc6..0a7e24750b 100644
---- a/target/riscv/pmp.h
-+++ b/target/riscv/pmp.h
-@@ -76,8 +76,7 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-                        target_ulong size, pmp_priv_t privs,
-                        pmp_priv_t *allowed_privs,
-                        target_ulong mode);
--target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
--                              target_ulong tlb_sa, target_ulong tlb_ea);
-+target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr);
- void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
- void pmp_update_rule_nums(CPURISCVState *env);
- uint32_t pmp_get_num_rules(CPURISCVState *env);
+ static void pmp_decode_napot(target_ulong a, target_ulong *sa,
+@@ -477,16 +480,19 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
+     int i;
+     uint8_t cfg_val;
+     int pmpcfg_nums = 2 << riscv_cpu_mxl(env);
++    bool modified = false;
+ 
+     trace_pmpcfg_csr_write(env->mhartid, reg_index, val);
+ 
+     for (i = 0; i < pmpcfg_nums; i++) {
+         cfg_val = (val >> 8 * i)  & 0xff;
+-        pmp_write_cfg(env, (reg_index * 4) + i, cfg_val);
++        modified |= pmp_write_cfg(env, (reg_index * 4) + i, cfg_val);
+     }
+ 
+     /* If PMP permission of any addr has been changed, flush TLB pages. */
+-    tlb_flush(env_cpu(env));
++    if (modified) {
++        tlb_flush(env_cpu(env));
++    }
+ }
+ 
+ 
+@@ -535,9 +541,11 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
+         }
+ 
+         if (!pmp_is_locked(env, addr_index)) {
+-            env->pmp_state.pmp[addr_index].addr_reg = val;
+-            pmp_update_rule(env, addr_index);
+-            tlb_flush(env_cpu(env));
++            if (env->pmp_state.pmp[addr_index].addr_reg != val) {
++                env->pmp_state.pmp[addr_index].addr_reg = val;
++                pmp_update_rule(env, addr_index);
++                tlb_flush(env_cpu(env));
++            }
+         } else {
+             qemu_log_mask(LOG_GUEST_ERROR,
+                           "ignoring pmpaddr write - locked\n");
 -- 
 2.25.1
 
