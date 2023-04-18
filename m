@@ -1,82 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1poglG-000510-Te
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Apr 2023 04:32:26 -0400
+	id 1poh9F-0003RB-1L
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Apr 2023 04:57:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1poglB-000501-LH
- for qemu-riscv@nongnu.org; Tue, 18 Apr 2023 04:32:22 -0400
-Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f])
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1poh9D-0003Qc-K2
+ for qemu-riscv@nongnu.org; Tue, 18 Apr 2023 04:57:11 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pogko-00083f-Q7
- for qemu-riscv@nongnu.org; Tue, 18 Apr 2023 04:32:15 -0400
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2a8dd1489b0so2525761fa.3
- for <qemu-riscv@nongnu.org>; Tue, 18 Apr 2023 01:31:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1poh9A-0004E1-C3
+ for qemu-riscv@nongnu.org; Tue, 18 Apr 2023 04:57:11 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-3f0a0c4e505so14061475e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 18 Apr 2023 01:57:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1681806711; x=1684398711;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=osj8/GPz/P9GU1ONg/ztykGOl9NLJe8v5vmhnnZb1nk=;
- b=oTmaI/mQYXoAlp3y7f/sWO/7SWWAzv9Wz/F03Qmqt4TWZOT9Le2PJcDZmhXpjgN9yE
- zfTbPkZOR5gySiBELs/mzoGhuGC2IVcnKMs1vi7qEiWTKAykXH1e05vbqAB8ZvifqUsg
- Ue6NasczaNDhVfSQsMjCw9y3gB6QmwgY1+dOZdyYHYcFANQJIyf/pd4JkJzR1jCuqaKf
- EVlOzU/ZFXtcTVJi3h2v3zdiNTD04Fy01D1dHAQZ/FhEGUzRUVYDs3qQUnSk7lkUbA2L
- MU9xW7In4IFcnvxI87uMg/OsaDdfB+6BJjGmYDe8GJ98qSuY3WVvNrx0GYB5SSCxOHyt
- NySQ==
+ d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1681808226; x=1684400226; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2c12FoyLzFklFoPkfNrKN98f5kjg5kMD21GviAn+x+A=;
+ b=saKl3YcE+6iKUEOiGacW9EPU2NBLnflnbUkMDBbO8AYRkgTmCYZh7Tc1L/mPHYDhUO
+ FhfZoXfKf7MZ0KX1IBfQq8LMcBJZQank61oMAVVNy2bq+rSZysYJhTXY8kplo9kUStNC
+ xpUvQUH1Q6LYoXpUs+/SysxLCxG4z7XjMFIPLRpr25xSeXcIG50Sn2uh97cGvt4k4DjK
+ 8dRd2Zcs6LPTJeQJQ0C797GGTHYzriO3zBrMoty0XDCPzlXdCekAswxqFIjUzE/kC5T8
+ hZpb4nThTbPL84n1puM9IT8tsP3drkEwMbs+i8NoQdb6+4n9pvwGbW7S4CzvKF+dzUw/
+ V9gA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681806711; x=1684398711;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=osj8/GPz/P9GU1ONg/ztykGOl9NLJe8v5vmhnnZb1nk=;
- b=PYKTtV/Jg4lbzDGBHnibPuFcMe5mD70kPQN37qu3D1iJfnjRGjYHIr8pM6g8oeSEDC
- G3zJbNSPCop6Q84jEmUg0kWmB96spq1jjKteFaZUtOHTZ/pyhmzQmoiYp2M3uNo0U8Zo
- hqRygevKz6+OKE1xUEyqZfAFJpID3X6K2wJYPquA3OiEuiXCJkKPRX4wRl447ZuwryoA
- ndZlRamEosAaiWkPyt/s17G/c4cRVl6BzqBMhUL6dKRfiKkAhihGJrRKpIcoF28wQ8Mj
- KbmF0juACoe/lOwbkv/D8A35TXh91OxDmKN7YoCybRg2U4+i1iSlXdUYvjyCL/+NzsyK
- 34iQ==
-X-Gm-Message-State: AAQBX9dCtR/AzS6uka3ni5wNdCJw2cGL/EP8qS3fLPvh516pEVNZccRe
- ZvQHvTnx33XfN8v1FrAQHkC3Sw==
-X-Google-Smtp-Source: AKy350bMzuY/up46E82EOf26CcpHsmw5xMPslGXecWSv6Ds2+dxK10LIDkAVAZmgOgLbSohMtROYfA==
-X-Received: by 2002:ac2:4908:0:b0:4eb:e7f:945 with SMTP id
- n8-20020ac24908000000b004eb0e7f0945mr2367311lfi.41.1681806711278; 
- Tue, 18 Apr 2023 01:31:51 -0700 (PDT)
-Received: from [192.168.58.227] ([91.209.212.60])
- by smtp.gmail.com with ESMTPSA id
- q9-20020ac25109000000b004edb8fac1cesm1498986lfb.215.2023.04.18.01.31.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Apr 2023 01:31:50 -0700 (PDT)
-Message-ID: <c9e06460-19ad-812c-cce0-b2a7a20e423c@linaro.org>
-Date: Tue, 18 Apr 2023 10:31:43 +0200
+ d=1e100.net; s=20221208; t=1681808226; x=1684400226;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2c12FoyLzFklFoPkfNrKN98f5kjg5kMD21GviAn+x+A=;
+ b=cMcNrN1/zsoOKgfJ3aLPITOT2Rllalrnyzt3n89qRt35z7CeHJjh55EvvGqs6Dc74Z
+ xblGUYNNgeiuyurA4qtp+QnFQRHc2KRKBZXEj6LFagi7C7WIpl1RQbUbACJ7nOiP73qg
+ lGS7Y6/1RrIbnjEC3GK05GnogG66LMr+XvhVArQPP6r79zndwItCNr2TOuiOIHNqH6/e
+ gILHFZ5aDg37uWXGGdH1bARRp+xq0rOnqhwVEqAIC8+U42nMbetfIyFtKX1dviZL34N5
+ 7pRG9XUHsuV33FxqtPw3fzxuAEeWkRbvN007aM0AdoT6uEtv4QBI+24UxQV8/atyHMys
+ 98hw==
+X-Gm-Message-State: AAQBX9esoXIgZDk/ZReYEXNQmOQBX/Gf9Kmh/EdCPifRyBdyri8911Ap
+ PosgtGj3XyhJ+PRLAHtL+Y1b+znV4owIY5zs9vIFUw==
+X-Google-Smtp-Source: AKy350b6wYNb67rSQ0/Ogq9OXwGOvtQfjMw/1jL+054Hf4pjOkxQrcAXerBh9MxkJMlwATeEaZuAnu154zocDFI1pUE=
+X-Received: by 2002:a5d:4742:0:b0:2f4:55c3:8452 with SMTP id
+ o2-20020a5d4742000000b002f455c38452mr1301331wrs.22.1681808226075; Tue, 18 Apr
+ 2023 01:57:06 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [PATCH v2 14/17] crypto: Create sm4_subword
-Content-Language: en-US
-To: Lawrence Hunter <lawrence.hunter@codethink.co.uk>, qemu-devel@nongnu.org
-Cc: dickon.hood@codethink.co.uk, nazar.kazakov@codethink.co.uk,
- kiran.ostrolenk@codethink.co.uk, frank.chang@sifive.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, pbonzini@redhat.com,
- philipp.tomsich@vrull.eu, kvm@vger.kernel.org, qemu-riscv@nongnu.org,
- Max Chou <max.chou@sifive.com>
-References: <20230417135821.609964-1-lawrence.hunter@codethink.co.uk>
- <20230417135821.609964-15-lawrence.hunter@codethink.co.uk>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230417135821.609964-15-lawrence.hunter@codethink.co.uk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
- envelope-from=richard.henderson@linaro.org; helo=mail-lj1-x22f.google.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.284,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+References: <20230412091716.126601-1-alexghiti@rivosinc.com>
+ <CAKmqyKNkyakGCFG0DqX02GpqhAPEq=tkt-EVctas5m2XjRuXJg@mail.gmail.com>
+ <ZD0jos2r4uZocw/5@andrea>
+ <CAKmqyKNVf4tba=mpqZrwtaFC5Pn6-787cQy9Hnf3u=Xodcx09g@mail.gmail.com>
+In-Reply-To: <CAKmqyKNVf4tba=mpqZrwtaFC5Pn6-787cQy9Hnf3u=Xodcx09g@mail.gmail.com>
+From: Alexandre Ghiti <alexghiti@rivosinc.com>
+Date: Tue, 18 Apr 2023 10:56:55 +0200
+Message-ID: <CAHVXubiUW3aMpr5VmSm2LYb0UByOND-kNVw6-BDTCjgQk_EPzg@mail.gmail.com>
+Subject: Re: [PATCH] riscv: Raise an exception if pte reserved bits are not
+ cleared
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Andrea Parri <andrea@rivosinc.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, 
+ qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alexghiti@rivosinc.com; helo=mail-wm1-x32e.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,22 +83,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Apr 2023 08:32:22 -0000
+X-List-Received-Date: Tue, 18 Apr 2023 08:57:11 -0000
 
-On 4/17/23 15:58, Lawrence Hunter wrote:
-> From: Max Chou<max.chou@sifive.com>
-> 
->      - Share sm4_subword between different targets.
-> 
-> Signed-off-by: Max Chou<max.chou@sifive.com>
-> Reviewed-by: Frank Chang<frank.chang@sifive.com>
-> ---
->   include/crypto/sm4.h           |  8 ++++++++
->   target/arm/tcg/crypto_helper.c | 10 ++--------
->   2 files changed, 10 insertions(+), 8 deletions(-)
+Hi Alistair,
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Sorry for the late reply, I was on PTO.
 
+On Tue, Apr 18, 2023 at 4:22=E2=80=AFAM Alistair Francis <alistair23@gmail.=
+com> wrote:
+>
+> On Mon, Apr 17, 2023 at 8:47=E2=80=AFPM Andrea Parri <andrea@rivosinc.com=
+> wrote:
+> >
+> > Hi Alistair,
+> >
+> > > > @@ -936,6 +936,11 @@ restart:
+> > > >              return TRANSLATE_FAIL;
+> > > >          }
+> > > >
+> > > > +        /* PTE reserved bits must be cleared otherwise an exceptio=
+n is raised */
+> > > > +        if (riscv_cpu_mxl(env) =3D=3D MXL_RV64 && (pte & PTE_RESER=
+VED)) {
+> > > > +            return TRANSLATE_FAIL;
+> > > > +        }
+> > >
+> > > Isn't this caught by our existing check?
+> > >
+> > >             if ((pte & ~(target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT)=
+ {
+> > >                 return TRANSLATE_FAIL;
+> > >             }
+> >
+> > Thanks for checking this out.  AFAICS, the existing check/code doesn't
+> > work if either svnapot or svpbmt are active.
+>
+> svpbmt uses some of the reserved fields right?
 
-r~
+No, pbmt uses bits 61-62 and napot uses bit 63, this patchset deals
+with bits 54-60.
+
+>
+> I'm not sure why svnapot excludes the check. The correct fix should be
+> to change this check as required (instead of adding a new check).
+
+napot and pbmt exclude the check because PTE_PPN_MASK only deals with
+PPN bits, and then ~PTE_PPN_MASK is too large as it tests the
+PBMT/NAPOT bits AND the reserved bits.
+But you made me notice that the pbmt/napot check isn't right either,
+as the napot bit could be set if !napot and then an exception would
+not be triggered (the same for pbmt).
+
+Let me check this completely and come back with a proper fix for that too.
+
+Thanks!
+
+Alex
+
+>
+> Alistair
+>
+> >
+> > Please let me know if you need other information.
+> >
+> >   Andrea
 
