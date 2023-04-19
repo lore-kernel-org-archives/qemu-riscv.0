@@ -1,82 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pp0d9-00047b-Po
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Apr 2023 01:45:24 -0400
+	id 1pp5M9-0002wI-23
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Apr 2023 06:48:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pp0d3-00046r-Gl
- for qemu-riscv@nongnu.org; Wed, 19 Apr 2023 01:45:19 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1pp5M5-0002v4-J5
+ for qemu-riscv@nongnu.org; Wed, 19 Apr 2023 06:48:06 -0400
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pp0cx-0007OF-6p
- for qemu-riscv@nongnu.org; Wed, 19 Apr 2023 01:45:16 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- n43-20020a05600c502b00b003f17466a9c1so838908wmr.2
- for <qemu-riscv@nongnu.org>; Tue, 18 Apr 2023 22:45:10 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1pp5M3-0003Om-30
+ for qemu-riscv@nongnu.org; Wed, 19 Apr 2023 06:48:05 -0400
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-3f0a80b686eso20401045e9.1
+ for <qemu-riscv@nongnu.org>; Wed, 19 Apr 2023 03:48:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1681883109; x=1684475109;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=V2NNHo9WyQj9h/OoXJnEhLeRoCAc+gvCBIaTb3x7QC8=;
- b=OSGzf2ypCFzubmSZMIxAhj6frdyMFwUttw0E9UGM/CvoNbzHtyaFT4OAetDIV5uIUY
- 3wkSgbFKi6Q6PvF6WMgAvWaKHIxI1IB0mfsnol2uvRB7MdVioV85y0T003jSjxmwdhGw
- mv/w7wJP9y8SeXDcs6UaqMeQuVIn29lQThiWvS05v3nXRhA5q2ZqlEkxzq8pTpPge0XF
- 13LYC4UUf8jmukN07t8jUc1be9qklU7zrtVou69yKbLIH18BppLfJRdtj/AnZm3ipcs9
- f37TD1yZn6oiNcEJEK0lwnWLq8SOSnoq7xq8enYQ9m/oaSu7l1Leu/Coa7enJlFP3r5J
- ffgg==
+ d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1681901280; x=1684493280; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QmnI1qpcmOsHukdKm6+8l9XbPtBsO5L2TyiwKT4Ffwc=;
+ b=18Y0b4KqdiVF+q6Fx37+TMHWsS/u3vgCgB7M/UHv0kXrRI+z5PimxHj/X9FXilPgLd
+ avCM+WmrAV+aPai9KQ7mFx7k+SiqKOIkmZ70H9w4VQGGO0W0YRywj4eI7Puf1x2Dovzn
+ gEPfDxF4gbC9HPEjcac0yskpubPDXF2PUkoy/83iuJlSjMKfY1f5cePHn8Mqj/TlnL8s
+ Qn+y9lmM62wVLEy3p2UlMBr5VQFWo9rr0wYcro1TR9IiUcxw0Nlg4dVJYjqstpj4qj3p
+ jjZj8sC2oknkN8DyL3YxcYtdghHV+FJj8klVrKYUJDuJ6cL6YvCu1UrIyoUA1UMAyDEy
+ 6/6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681883109; x=1684475109;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=V2NNHo9WyQj9h/OoXJnEhLeRoCAc+gvCBIaTb3x7QC8=;
- b=TmlK7nLv7rnxpIdJMvU7fFpRS6B8GIqAZvjk10PAJyVbsS7heZN7G1hHUno8C1pfzf
- 56Vl7iKLYj/r1J3ZtplfCXUzUxZeQYjMqGdzkNkym06lYKtRcvYdFKC03JurAXC48atE
- /DPYtzTV3Ukf4hnn/mAEsLFKV9YO0ZHQItTW1/oRauneXHsl8RrAk97Ya+mC3dSM/V80
- e9Fylx/BKtN2Ut+U21OO50RNxYzdNq1wIdSPEwUjFjph86tLr+PcbfV7er2fAoM9kd5o
- P2W8iFFpjqtMW+Asr8KGbJtuPqOHZHczIMGmdD4niOMxqfkDZAbmRKBftCzHTmejATS+
- ztAA==
-X-Gm-Message-State: AAQBX9fnOYwzgR+Ru7W/TdzH09rlSIW6tYGe6D7grIzv29pdoC6flc59
- C8uc5d2wZTgsnte4gzZRjya/DbYldMWIaJDT4cfokuRl
-X-Google-Smtp-Source: AKy350bWvEhF5khk4kdS+6aKM9UgbZxMnIjbPxeGsFkgcBwto0eqJMxTWK37I9iNgkAseFLGwmNt8A==
-X-Received: by 2002:a05:600c:3644:b0:3f1:738f:d3d1 with SMTP id
- y4-20020a05600c364400b003f1738fd3d1mr6774777wmq.4.1681883109587; 
- Tue, 18 Apr 2023 22:45:09 -0700 (PDT)
-Received: from [192.168.58.227] (103.red-83-56-31.staticip.rima-tde.net.
- [83.56.31.103]) by smtp.gmail.com with ESMTPSA id
- p5-20020a05600c468500b003f18141a016sm436369wmo.18.2023.04.18.22.45.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 18 Apr 2023 22:45:09 -0700 (PDT)
-Message-ID: <34a0e33a-a7b4-dd5a-f968-5d4666abf4e3@linaro.org>
-Date: Wed, 19 Apr 2023 07:45:07 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [PATCH v3 5/7] accel/tcg: Uncache the host address for
- instruction fetch when tlb size < 1
-Content-Language: en-US
-To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ d=1e100.net; s=20221208; t=1681901281; x=1684493281;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QmnI1qpcmOsHukdKm6+8l9XbPtBsO5L2TyiwKT4Ffwc=;
+ b=gkol5IlFF33bc8V7BV0wfImqr7sD6MuL3zgBp0dXBgeMxOA7YANh7RwJf1wqAYU7Yu
+ SxEW9g7gy55eERFLDd0jCQQEnx2f62ANhWryPNbY0VBs5X2RbqO/508IQ19hGFQ1fSOE
+ Ik8d/IgT3hvMLchoFVBjnqETkEJTeh44T/F6pSVtvUW8VzEpGU+46mOtkQa1rBpCKZcf
+ pX9hT+qVMtUA67FB1beFDPQ5yCUyp/PkO6eE6KkJCGFXmsOM3S4M30OMsHGVH3Bcuveh
+ zl6InIgEluKcGIpe3ouwpVHXMf1h6YhqsQgyIH2i2+iclpSEQ0MlXjI+WYyShuE9KX0j
+ w/jA==
+X-Gm-Message-State: AAQBX9cGd9qOJgDQxiTYEXQ6651hb7UFoWliUQ5wm7cphhx+KJqCtRzR
+ 128v2z8wnmZ+ybmDClwsUtQ1XQ==
+X-Google-Smtp-Source: AKy350abQgyGkeH7tO4yqZGiADw0M3aelpmwahccZESTjjERJE68zaCdj0B0FjBMR3b3dS3cobch9Q==
+X-Received: by 2002:adf:e645:0:b0:2ef:b8d1:9560 with SMTP id
+ b5-20020adfe645000000b002efb8d19560mr4179852wrn.30.1681901280716; 
+ Wed, 19 Apr 2023 03:48:00 -0700 (PDT)
+Received: from alex-rivos.home
+ (amontpellier-656-1-456-62.w92-145.abo.wanadoo.fr. [92.145.124.62])
+ by smtp.gmail.com with ESMTPSA id
+ l6-20020adfe586000000b002fe065da369sm3401636wrm.69.2023.04.19.03.47.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Apr 2023 03:47:58 -0700 (PDT)
+From: Alexandre Ghiti <alexghiti@rivosinc.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230419032725.29721-1-liweiwei@iscas.ac.cn>
- <20230419032725.29721-6-liweiwei@iscas.ac.cn>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230419032725.29721-6-liweiwei@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x32b.google.com
-X-Spam_score_int: -46
-X-Spam_score: -4.7
-X-Spam_bar: ----
-X-Spam_report: (-4.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.597,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+Cc: Alexandre Ghiti <alexghiti@rivosinc.com>,
+ Andrea Parri <andrea@rivosinc.com>
+Subject: [PATCH v2] riscv: Make sure an exception is raised if a pte is
+ malformed
+Date: Wed, 19 Apr 2023 12:47:56 +0200
+Message-Id: <20230419104756.71455-1-alexghiti@rivosinc.com>
+X-Mailer: git-send-email 2.37.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=alexghiti@rivosinc.com; helo=mail-wm1-x331.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,41 +84,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Apr 2023 05:45:19 -0000
+X-List-Received-Date: Wed, 19 Apr 2023 10:48:07 -0000
 
-On 4/19/23 05:27, Weiwei Li wrote:
-> Fix https://gitlab.com/qemu-project/qemu/-/issues/1542.
+As per the privileged specification, in 64-bit, if any of the pte reserved
+bits 60-54 is set an exception should be triggered, and the same applies to
+napot/pbmt bits if those extensions are not enabled
+(see 4.4.1, "Addressing and Memory Protection").
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1542
+Reported-by: Andrea Parri <andrea@rivosinc.com>
+Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+---
+ target/riscv/cpu_bits.h   |  1 +
+ target/riscv/cpu_helper.c | 15 +++++++++++----
+ 2 files changed, 12 insertions(+), 4 deletions(-)
 
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-
-r~
-
-> ---
->   accel/tcg/cputlb.c | 5 +++++
->   1 file changed, 5 insertions(+)
-> 
-> diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-> index e984a98dc4..efa0cb67c9 100644
-> --- a/accel/tcg/cputlb.c
-> +++ b/accel/tcg/cputlb.c
-> @@ -1696,6 +1696,11 @@ tb_page_addr_t get_page_addr_code_hostp(CPUArchState *env, target_ulong addr,
->       if (p == NULL) {
->           return -1;
->       }
-> +
-> +    if (full->lg_page_size < TARGET_PAGE_BITS) {
-> +        return -1;
-> +    }
-> +
->       if (hostp) {
->           *hostp = p;
->       }
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index fca7ef0cef..8d9ba2ce11 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -640,6 +640,7 @@ typedef enum {
+ #define PTE_SOFT            0x300 /* Reserved for Software */
+ #define PTE_PBMT            0x6000000000000000ULL /* Page-based memory types */
+ #define PTE_N               0x8000000000000000ULL /* NAPOT translation */
++#define PTE_RESERVED        0x1FC0000000000000ULL /* Reserved bits */
+ #define PTE_ATTR            (PTE_N | PTE_PBMT) /* All attributes bits */
+ 
+ /* Page table PPN shift amount */
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index f88c503cf4..8dc832d1bb 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -946,13 +946,20 @@ restart:
+ 
+         if (riscv_cpu_sxl(env) == MXL_RV32) {
+             ppn = pte >> PTE_PPN_SHIFT;
+-        } else if (pbmte || cpu->cfg.ext_svnapot) {
+-            ppn = (pte & (target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT;
+         } else {
+-            ppn = pte >> PTE_PPN_SHIFT;
+-            if ((pte & ~(target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT) {
++            if (pte & PTE_RESERVED) {
++                return TRANSLATE_FAIL;
++            }
++
++            if (!pbmte && (pte & PTE_PBMT)) {
+                 return TRANSLATE_FAIL;
+             }
++
++            if (!cpu->cfg.ext_svnapot && (pte & PTE_N)) {
++                return TRANSLATE_FAIL;
++            }
++
++            ppn = (pte & (target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT;
+         }
+ 
+         if (!(pte & PTE_V)) {
+-- 
+2.37.2
 
 
