@@ -1,63 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ppHHN-0004E8-OF
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Apr 2023 19:32:01 -0400
+	id 1ppHJl-000582-8N
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Apr 2023 19:34:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ppHHL-0004Dk-H5; Wed, 19 Apr 2023 19:31:59 -0400
-Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
+ id 1ppHJj-00057n-HQ; Wed, 19 Apr 2023 19:34:27 -0400
+Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ppHHJ-00067x-JL; Wed, 19 Apr 2023 19:31:59 -0400
-Received: by mail-ua1-x933.google.com with SMTP id ch24so1060939uab.3;
- Wed, 19 Apr 2023 16:31:56 -0700 (PDT)
+ id 1ppHJh-0007Lt-IH; Wed, 19 Apr 2023 19:34:27 -0400
+Received: by mail-ua1-x92b.google.com with SMTP id r10so1035240uat.6;
+ Wed, 19 Apr 2023 16:34:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1681947116; x=1684539116;
+ d=gmail.com; s=20221208; t=1681947264; x=1684539264;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=W3OvTHIQIz683Dc/0Zp2h7vQdvmrvGrRSlF76p6Q7L8=;
- b=mzhz884UFcFraut2/xS1qVKFyoPey3aiJNYTJ9G0Xge3XhA76J4doy6LCNB7tJ5Mh3
- fh4JiOJg6HDzzQfWiWKsWKztV9wuewYce1Vy22sShpL2wr4lP5G4XIJPa6anEkmSxn9R
- RQ5JJKz+foaPsPVv70cRCRvjT9ko8JMaq+AmWH2gvwSlRNbuB7WfcZ4aVOiZoz1Hvylt
- L8YG3VMHoPxX7SnglAH6ltpDJCjjdzEobaHBc70mHVaKp5I5vb++IArF9sfK1UEEohV2
- ENtc+VrnaysTLEEfwMXDkxB8VjPdA7iC7j0hwRaCYLqgmTSIdJ+ztunzdZSRLZvJOqhR
- SStA==
+ bh=X1UjiDhztfDM4xau/b1dK+PxWshz2MwGL6jVl5YnA5w=;
+ b=WDoOCbgT4EjLf4jACgo+lJvylkSgZ0tSVOzio5zEA8nG+uoYQLF2TmVGyEL4U9YEri
+ qCHpK15fhWvbWHWeGjTSmT/lNR5OutezsxkXnw+QLc2UiMH8sMxM5oIXf64XirqjEsgF
+ UsQGwdnREGAIgduIKANfDM4XZV+gQLphl+uWEppLAr6ZSKjWr7BzHktARkRebP4S3t/B
+ qIQLiJ3nqhhg+ZAXeCkzh7lZfq8W/yF4LhyusP9bGRgrafkG0HX3eVstCGvUa7TfKAJa
+ Q93JM8mFvCe2LERxAw6tyDWmpFq+ir+s80IkvhPLBlYyJSodtL7cWuZ+zHqD5/UvwRrs
+ hPog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681947116; x=1684539116;
+ d=1e100.net; s=20221208; t=1681947264; x=1684539264;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=W3OvTHIQIz683Dc/0Zp2h7vQdvmrvGrRSlF76p6Q7L8=;
- b=ekR38/bq4jCqW7Bp2zDaPh4MMPhKWjN1+qAmwuSo/u181OpI9Izfe5NU0Sq+clw2AU
- VOU36WCtaQJlDhTr0XdjjNR4glRojqMtrkgcpQVxz4JvDAtWWuA+jnBkW7lbZgaq870S
- 6pWlsRBa6nkZCFLuMIpNALrSR07acGo+T1qdk4TizIw4DUmSEjIfi2lxjYZWLRdCtoml
- AnuYHpAnIpUZzISP3ExODQiVc92HH+LrPwrRlqLyJBigz3C6yodUDyASC4dZVg9dhKML
- qzO21TV7663HRejhoNJpAPPaQTyaQsKF5QBaVCwNzrTx9Cn2fTpBh9iyCHffNCw4ZOzF
- XwZg==
-X-Gm-Message-State: AAQBX9fQxB1TGeas9K3dx9cMZzqEeLia+LvtAsgEx9ha8pJx4BWDY1yN
- qzKDJDa4TAwA/U9ujPRzFnjclA7YJKtNz1+49ns=
-X-Google-Smtp-Source: AKy350ZEw9dLonWe88lnQN4piIIgc1MpsgAzZjI/pz+PC+1H5vAXG4WGnZ4S1ZzyvDkuXvmJDXnIaRhViW/nOZGnEUM=
-X-Received: by 2002:a1f:ea47:0:b0:443:675e:3096 with SMTP id
- i68-20020a1fea47000000b00443675e3096mr622039vkh.16.1681947116019; Wed, 19 Apr
- 2023 16:31:56 -0700 (PDT)
+ bh=X1UjiDhztfDM4xau/b1dK+PxWshz2MwGL6jVl5YnA5w=;
+ b=Z3xj/TOzFnelBdHVwT88vG7Rb2pUa75AMIEyxqvCx6PamiEuTIuxISX95q5It2GDNP
+ p6EVCGwCGWbe6cHUssplCi92zsmnqH7ao8sTfFtSu8thkYQg2qsiyZbiRztfuwHgzB8T
+ B8+2wwqIyb3GCG94kODegw2b8aKcQI25RwRcY/AuGtmAvH0YSPDyaNMVaBHuaQ/rc0Ij
+ bTDNcLTFlnyYimOpEAvecOMIBi7xKgQr72rjBDgEwwlr7pybvpTOpBf8sHwjSYDlevEP
+ XyOwmLOx/02mxGWlGo03VveexhfTgKFaQlMPN3VWQixl8pewaPB+8A0BT29Z74+uuNBo
+ imAw==
+X-Gm-Message-State: AAQBX9efc+uB/THo768X65UE79TOAv+qjTv9EZiknlhUgLopsaXoT2ZI
+ RBUw31bPQLYc3AesloO6WozJSDTlL1bbmnNY46M=
+X-Google-Smtp-Source: AKy350aYkWTCMJ65A19y7vk234YlJbg3p5QfV/ipkZcnUepIumYzaXjrQpYP4tc9jyjhopn9oASoPMjw4uvxHVHw8Ow=
+X-Received: by 2002:a1f:d281:0:b0:43f:c24f:a55b with SMTP id
+ j123-20020a1fd281000000b0043fc24fa55bmr595040vkg.16.1681947263851; Wed, 19
+ Apr 2023 16:34:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230419104756.71455-1-alexghiti@rivosinc.com>
-In-Reply-To: <20230419104756.71455-1-alexghiti@rivosinc.com>
+References: <20230418075423.26217-1-irina.ryapolova@syntacore.com>
+In-Reply-To: <20230418075423.26217-1-irina.ryapolova@syntacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 20 Apr 2023 09:31:29 +1000
-Message-ID: <CAKmqyKOXpbnBwwBa54U2XXhzYQTxJxYqFJgsDhH1LnV-MsUoTw@mail.gmail.com>
-Subject: Re: [PATCH v2] riscv: Make sure an exception is raised if a pte is
- malformed
-To: Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Andrea Parri <andrea@rivosinc.com>
+Date: Thu, 20 Apr 2023 09:33:57 +1000
+Message-ID: <CAKmqyKMm+J8NJg8SpCy6sjWpY4wTFUZbatR1-1PdGKKWk-y44g@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: Fix Guest Physical Address Translation
+To: Irina Ryapolova <irina.ryapolova@syntacore.com>
+Cc: qemu-devel@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -78,78 +76,118 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Apr 2023 23:31:59 -0000
+X-List-Received-Date: Wed, 19 Apr 2023 23:34:27 -0000
 
-On Wed, Apr 19, 2023 at 8:48=E2=80=AFPM Alexandre Ghiti <alexghiti@rivosinc=
-.com> wrote:
+On Tue, Apr 18, 2023 at 5:56=E2=80=AFPM Irina Ryapolova
+<irina.ryapolova@syntacore.com> wrote:
 >
-> As per the privileged specification, in 64-bit, if any of the pte reserve=
-d
-> bits 60-54 is set an exception should be triggered, and the same applies =
-to
-> napot/pbmt bits if those extensions are not enabled
-> (see 4.4.1, "Addressing and Memory Protection").
+> Before changing the flow check for sv39/48/57.
 >
-> Reported-by: Andrea Parri <andrea@rivosinc.com>
-> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> According to specification (for Supervisor mode):
+> Sv39 implementations support a 39-bit virtual address space, divided into=
+ 4 KiB
+> pages.
+> Instruction fetch addresses and load and store effective addresses, which=
+ are
+> 64 bits,
+> must have bits 63=E2=80=9339 all equal to bit 38, or else a page-fault ex=
+ception will
+> occur.
+> Likewise for Sv48 and Sv57.
+>
+> So the high bits are equal to bit 38 for sv39.
+>
+> According to specification (for Hypervisor mode):
+> For Sv39x4, address bits of the guest physical address 63:41 must all be =
+zeros,
+> or else a
+> guest-page-fault exception occurs.
+>
+> Likewise for Sv48x4 and Sv57x4.
+> For Sv48x4 address bits 63:50 must all be zeros, or else a guest-page-fau=
+lt
+> exception occurs.
+> For Sv57x4 address bits 63:59 must all be zeros, or else a guest-page-fau=
+lt
+> exception occurs.
+>
+> For example we are trying to access address 0xffff_ffff_ff01_0000 with on=
+ly
+> G-translation enabled.
+> So expected behavior is to generate exception. But qemu doesn't generate =
+such
+> exception.
+>
+> For the old check, we get
+> va_bits =3D=3D 41, mask =3D=3D (1 << 24) - 1, masked_msbs =3D=3D (0xffff_=
+ffff_ff01_0000 >>
+> 40) & mask =3D=3D mask.
+> Accordingly, the condition masked_msbs !=3D 0 && masked_msbs !=3D mask is=
+ not
+> fulfilled
+> and the check passes.
+>
+> Signed-off-by: Irina Ryapolova <irina.ryapolova@syntacore.com>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Thanks for the patch
+Thanks!
 
-Do you mind sending a v3 rebased on
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next ?
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
->  target/riscv/cpu_bits.h   |  1 +
->  target/riscv/cpu_helper.c | 15 +++++++++++----
->  2 files changed, 12 insertions(+), 4 deletions(-)
+> Changes for v2:
+>   -Add more detailed commit message
+> Changes for v3:
+>   -rebase the patch on
+> https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+> ---
+>  target/riscv/cpu_helper.c | 25 ++++++++++++++++---------
+>  1 file changed, 16 insertions(+), 9 deletions(-)
 >
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index fca7ef0cef..8d9ba2ce11 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -640,6 +640,7 @@ typedef enum {
->  #define PTE_SOFT            0x300 /* Reserved for Software */
->  #define PTE_PBMT            0x6000000000000000ULL /* Page-based memory t=
-ypes */
->  #define PTE_N               0x8000000000000000ULL /* NAPOT translation *=
-/
-> +#define PTE_RESERVED        0x1FC0000000000000ULL /* Reserved bits */
->  #define PTE_ATTR            (PTE_N | PTE_PBMT) /* All attributes bits */
->
->  /* Page table PPN shift amount */
 > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index f88c503cf4..8dc832d1bb 100644
+> index 32a65f8007..b68dcfe7b6 100644
 > --- a/target/riscv/cpu_helper.c
 > +++ b/target/riscv/cpu_helper.c
-> @@ -946,13 +946,20 @@ restart:
+> @@ -837,17 +837,24 @@ static int get_physical_address(CPURISCVState *env,=
+ hwaddr *physical,
 >
->          if (riscv_cpu_sxl(env) =3D=3D MXL_RV32) {
->              ppn =3D pte >> PTE_PPN_SHIFT;
-> -        } else if (pbmte || cpu->cfg.ext_svnapot) {
-> -            ppn =3D (pte & (target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT;
->          } else {
-> -            ppn =3D pte >> PTE_PPN_SHIFT;
-> -            if ((pte & ~(target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT) {
-> +            if (pte & PTE_RESERVED) {
-> +                return TRANSLATE_FAIL;
-> +            }
-> +
-> +            if (!pbmte && (pte & PTE_PBMT)) {
->                  return TRANSLATE_FAIL;
->              }
-> +
-> +            if (!cpu->cfg.ext_svnapot && (pte & PTE_N)) {
-> +                return TRANSLATE_FAIL;
-> +            }
-> +
-> +            ppn =3D (pte & (target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT;
->          }
+>      CPUState *cs =3D env_cpu(env);
+>      int va_bits =3D PGSHIFT + levels * ptidxbits + widened;
+> -    target_ulong mask, masked_msbs;
 >
->          if (!(pte & PTE_V)) {
+> -    if (TARGET_LONG_BITS > (va_bits - 1)) {
+> -        mask =3D (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
+> -    } else {
+> -        mask =3D 0;
+> -    }
+> -    masked_msbs =3D (addr >> (va_bits - 1)) & mask;
+> +    if (first_stage =3D=3D true) {
+> +        target_ulong mask, masked_msbs;
+>
+> -    if (masked_msbs !=3D 0 && masked_msbs !=3D mask) {
+> -        return TRANSLATE_FAIL;
+> +        if (TARGET_LONG_BITS > (va_bits - 1)) {
+> +            mask =3D (1L << (TARGET_LONG_BITS - (va_bits - 1))) - 1;
+> +        } else {
+> +            mask =3D 0;
+> +        }
+> +        masked_msbs =3D (addr >> (va_bits - 1)) & mask;
+> +
+> +        if (masked_msbs !=3D 0 && masked_msbs !=3D mask) {
+> +            return TRANSLATE_FAIL;
+> +        }
+> +    } else {
+> +        if (vm !=3D VM_1_10_SV32 && addr >> va_bits !=3D 0) {
+> +            return TRANSLATE_FAIL;
+> +        }
+>      }
+>
+>      bool pbmte =3D env->menvcfg & MENVCFG_PBMTE;
 > --
-> 2.37.2
+> 2.25.1
 >
 >
 
