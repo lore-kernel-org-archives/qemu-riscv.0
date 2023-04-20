@@ -1,77 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ppQU6-0000cY-7s
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Apr 2023 05:21:46 -0400
+	id 1ppSwA-0005We-NF
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Apr 2023 07:58:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ppQU4-0000UN-B6
- for qemu-riscv@nongnu.org; Thu, 20 Apr 2023 05:21:44 -0400
-Received: from mail-oa1-x36.google.com ([2001:4860:4864:20::36])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ppQU2-00074u-Mj
- for qemu-riscv@nongnu.org; Thu, 20 Apr 2023 05:21:44 -0400
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-18777914805so3735514fac.1
- for <qemu-riscv@nongnu.org>; Thu, 20 Apr 2023 02:21:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1681982502; x=1684574502;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=r4Ti55fZmsYhQLe4LOvl6hR0lkFX2jcmI6dQjQEhJyU=;
- b=JUO8pvU8bWNkDBgCtZBSfbuZEnMeeHNWxlLkPa+1bx9R4HTj78PQ4WuFH+2cP4Imsr
- WPgczmG/kyjmt8VzOQuybfNnRD3yGG6IiNd4E3NIfka2H8lIoSIeTgvMhO2ojZIWidRL
- rAatdzu+HiIljayMfjU3IyvNHY3BEk42eULSqJgbNpsYgdUxWR8AZ59rqMhOxruxUnbk
- hwozWAUiUR8mukg2p8sunIyC2y4uKniIblrTNPcDh+KiHkSHJC1zSVtejQCXPzwWNuqF
- DbzVBZzUi1TEeUecidnKIXUEh+h5ZHPPD7qMHwNQ9O57fNBupmy9kQkJT3c8kF2Y++OJ
- 05aQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681982502; x=1684574502;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=r4Ti55fZmsYhQLe4LOvl6hR0lkFX2jcmI6dQjQEhJyU=;
- b=EYWkaJWBVOO446XPS9T8mNZ2QreudcKi61Vb4VDGl6Fyf9B+RxyAhsCwQ317yQg5uY
- sUsMczXZ+SjCo+PBUxPBf454Ti/NwZrWSNE/nRws2nFz1WCvYrfYrtpcFsm1VcV4SYq0
- N0hhoXAv6t0zBBiDzefKnLqdwxCfB2XhPOcAC6bh6YOWyV5DfaowRmU6JW6jxvNNOZ0O
- /aioqsQ+6/GcycWYdTYKvZ6iRy4uZ0m/19aoMSq9xuwfMDXgy3RJYS5wWgtwwmJCtZum
- oiNu7l5sXh+HlyJsyDUm41TQ0ittHdkK+solMgy6EDFc8VOLLrp7Dj1WbIn86gjUavvc
- T0Cg==
-X-Gm-Message-State: AAQBX9eHeQjnJvUKCrzOOiwkMsCpC6+v0TwP69GAvP1Q0N915+Zp8uI+
- gcPjgei37X6VXhYQ8mf4zcjT7g==
-X-Google-Smtp-Source: AKy350ZtgQ9NUAe/tU0Tj1MRbLgkEm20NcjYOp6+HDzJ7c2eDPgt0mglEx3TJYLSYvVoSh36cZqWsw==
-X-Received: by 2002:aca:ba0b:0:b0:38e:295b:2e18 with SMTP id
- k11-20020acaba0b000000b0038e295b2e18mr2887084oif.4.1681982502009; 
- Thu, 20 Apr 2023 02:21:42 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com ([191.255.108.232])
- by smtp.gmail.com with ESMTPSA id
- t1-20020a056870e74100b0017280f7d653sm529668oak.35.2023.04.20.02.21.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Apr 2023 02:21:41 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH RESEND v7 12/12] target/riscv: forbid write_misa() for static
- CPUs
-Date: Thu, 20 Apr 2023 06:21:00 -0300
-Message-Id: <20230420092100.177464-13-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230420092100.177464-1-dbarboza@ventanamicro.com>
-References: <20230420092100.177464-1-dbarboza@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1ppSw8-0005WN-UL; Thu, 20 Apr 2023 07:58:52 -0400
+Received: from out30-101.freemail.mail.aliyun.com ([115.124.30.101])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1ppSw6-000074-7e; Thu, 20 Apr 2023 07:58:52 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
+ TI=SMTPD_---0VgYtGa7_1681991915; 
+Received: from 30.221.100.213(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VgYtGa7_1681991915) by smtp.aliyun-inc.com;
+ Thu, 20 Apr 2023 19:58:36 +0800
+Message-ID: <eb169df2-84c5-30fe-4638-b01e736463a7@linux.alibaba.com>
+Date: Thu, 20 Apr 2023 19:58:30 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [PATCH v3 1/7] target/riscv: Update pmp_get_tlb_size()
+Content-Language: en-US
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, richard.henderson@linaro.org,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20230419032725.29721-1-liweiwei@iscas.ac.cn>
+ <20230419032725.29721-2-liweiwei@iscas.ac.cn>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230419032725.29721-2-liweiwei@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::36;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x36.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.101;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-101.freemail.mail.aliyun.com
+X-Spam_score_int: -115
+X-Spam_score: -11.6
+X-Spam_bar: -----------
+X-Spam_report: (-11.6 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-1.669, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,70 +57,129 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Apr 2023 09:21:44 -0000
+X-List-Received-Date: Thu, 20 Apr 2023 11:58:53 -0000
 
-Static CPUs don't want their extensions changed by user interaction. We
-can prevent it during init by not exposing user facing properties, but
-write_misa() is also capable of disabling/enabling extension during
-runtime.
 
-We have a way of telling whether a CPU is static or not by checking for
-TYPE_RISCV_DYNAMIC_CPU. Use it to make write_misa() a no-op for these
-CPUs.
+On 2023/4/19 11:27, Weiwei Li wrote:
+> PMP entries before the matched PMP entry(including the matched PMP entry)
+> may overlap partial of the tlb page, which may make different regions in
+> that page have different permission rights, such as for
+> PMP0(0x80000008~0x8000000F, R) and PMP1(0x80001000~0x80001FFF, RWX))
+> write access to 0x80000000 will match PMP1. However we cannot cache the tlb
+> for it since this will make the write access to 0x80000008 bypass the check
+> of PMP0. So we should check all of them and set the tlb size to 1 in this
+> case.
+>
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> ---
+>   target/riscv/cpu_helper.c |  7 ++-----
+>   target/riscv/pmp.c        | 39 ++++++++++++++++++++++++++-------------
+>   target/riscv/pmp.h        |  3 +--
+>   3 files changed, 29 insertions(+), 20 deletions(-)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 433ea529b0..075fc0538a 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -703,11 +703,8 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
+>       }
+>   
+>       *prot = pmp_priv_to_page_prot(pmp_priv);
+> -    if ((tlb_size != NULL) && pmp_index != MAX_RISCV_PMPS) {
+> -        target_ulong tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
+> -        target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
+> -
+> -        *tlb_size = pmp_get_tlb_size(env, pmp_index, tlb_sa, tlb_ea);
+> +    if (tlb_size != NULL) {
+> +        *tlb_size = pmp_get_tlb_size(env, addr);
+>       }
+>   
+>       return TRANSLATE_SUCCESS;
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 1f5aca42e8..22f3b3f217 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -601,28 +601,41 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
+>   }
+>   
+>   /*
+> - * Calculate the TLB size if the start address or the end address of
+> + * Calculate the TLB size if any start address or the end address of
+>    * PMP entry is presented in the TLB page.
+>    */
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/cpu.c | 5 +++++
- target/riscv/cpu.h | 2 ++
- target/riscv/csr.c | 5 +++++
- 3 files changed, 12 insertions(+)
+  If we don't pass the start address or the end address parameter, we 
+can comment this function:
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 4fa720a39d..3cbcf6d320 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1452,6 +1452,11 @@ static void riscv_cpu_init(Object *obj)
- #endif /* CONFIG_USER_ONLY */
- }
- 
-+bool riscv_cpu_is_static(RISCVCPU *cpu)
-+{
-+    return object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_DYNAMIC_CPU) == NULL;
-+}
-+
- typedef struct RISCVCPUMisaExtConfig {
-     const char *name;
-     const char *description;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 1f39edc687..1913ab9d8d 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -587,6 +587,8 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *env,
- target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
- void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
- 
-+bool riscv_cpu_is_static(RISCVCPU *cpu);
-+
- #include "exec/cpu-all.h"
- 
- FIELD(TB_FLAGS, MEM_IDX, 0, 3)
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index d449da2657..929c5477dd 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1391,6 +1391,11 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
-     uint32_t orig_misa_ext = env->misa_ext;
-     Error *local_err = NULL;
- 
-+    if (riscv_cpu_is_static(cpu)) {
-+        /* never write MISA for static CPUs */
-+        return RISCV_EXCP_NONE;
-+    }
-+
-     if (!riscv_cpu_cfg(env)->misa_w) {
-         /* drop write to misa */
-         return RISCV_EXCP_NONE;
--- 
-2.40.0
+Calculate the TLB size according to the PMP rule with the highest priority.
 
+> -target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
+> -                              target_ulong tlb_sa, target_ulong tlb_ea)
+> +target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr)
+>   {
+> -    target_ulong pmp_sa = env->pmp_state.addr[pmp_index].sa;
+> -    target_ulong pmp_ea = env->pmp_state.addr[pmp_index].ea;
+> +    target_ulong pmp_sa;
+> +    target_ulong pmp_ea;
+> +    target_ulong tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
+> +    target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
+> +    int i;
+> +
+> +    for (i = 0; i < MAX_RISCV_PMPS; i++) {
+> +        if (pmp_get_a_field(env->pmp_state.pmp[i].cfg_reg) == PMP_AMATCH_OFF) {
+> +            continue;
+> +        }
+> +
+> +        pmp_sa = env->pmp_state.addr[i].sa;
+> +        pmp_ea = env->pmp_state.addr[i].ea;
+>   
+> -    if (pmp_sa <= tlb_sa && pmp_ea >= tlb_ea) {
+> -        return TARGET_PAGE_SIZE;
+> -    } else {
+>           /*
+> -         * At this point we have a tlb_size that is the smallest possible size
+> -         * That fits within a TARGET_PAGE_SIZE and the PMP region.
+> -         *
+> -         * If the size is less then TARGET_PAGE_SIZE we drop the size to 1.
+> +         * If any start address or the end address of PMP entry is presented
+> +         * in the TLB page and cannot override the whole TLB page we drop the
+> +         * size to 1.
+>            * This means the result isn't cached in the TLB and is only used for
+>            * a single translation.
+>            */
+> -        return 1;
+> +        if (pmp_sa <= tlb_sa && pmp_ea >= tlb_ea) {
+> +            return TARGET_PAGE_SIZE;
+> +        } else if ((pmp_sa >= tlb_sa && pmp_sa <= tlb_ea) ||
+> +                   (pmp_ea >= tlb_sa && pmp_ea <= tlb_ea)) {
+> +            return 1;
+> +        }
+>       }
+> +
+> +    return TARGET_PAGE_SIZE;
+
+This implicitly require a success return from the 
+get_physical_address_pmp call. If we want this function to be a 
+independent one, we should return 0 to indicate no tlb size can return.
+
+Zhiwei
+
+>   }
+>   
+>   /*
+> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+> index b296ea1fc6..0a7e24750b 100644
+> --- a/target/riscv/pmp.h
+> +++ b/target/riscv/pmp.h
+> @@ -76,8 +76,7 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>                          target_ulong size, pmp_priv_t privs,
+>                          pmp_priv_t *allowed_privs,
+>                          target_ulong mode);
+> -target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
+> -                              target_ulong tlb_sa, target_ulong tlb_ea);
+> +target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr);
+>   void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
+>   void pmp_update_rule_nums(CPURISCVState *env);
+>   uint32_t pmp_get_num_rules(CPURISCVState *env);
 
