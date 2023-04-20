@@ -1,63 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ppTOK-0004cL-T6
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Apr 2023 08:28:00 -0400
+	id 1ppUCI-00045W-33
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Apr 2023 09:19:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ppTOG-0004aY-MU; Thu, 20 Apr 2023 08:27:56 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ppTO7-0001cr-9j; Thu, 20 Apr 2023 08:27:56 -0400
-Received: from [192.168.0.120] (unknown [180.165.241.15])
- by APP-01 (Coremail) with SMTP id qwCowACnrnq0L0FkYOpxBw--.3846S2;
- Thu, 20 Apr 2023 20:27:33 +0800 (CST)
-Message-ID: <9eb5c95d-6cdc-f3f7-ba27-c271be39afe6@iscas.ac.cn>
-Date: Thu, 20 Apr 2023 20:27:31 +0800
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1ppUCD-0003mh-Fg; Thu, 20 Apr 2023 09:19:33 -0400
+Received: from out30-133.freemail.mail.aliyun.com ([115.124.30.133])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1ppUC4-00061w-Ml; Thu, 20 Apr 2023 09:19:33 -0400
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R721e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+ MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
+ TI=SMTPD_---0VgZ4jyS_1681996753; 
+Received: from 30.221.100.213(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0VgZ4jyS_1681996753) by smtp.aliyun-inc.com;
+ Thu, 20 Apr 2023 21:19:14 +0800
+Message-ID: <c1f22f14-f7ee-3355-152e-eefff10915ee@linux.alibaba.com>
+Date: Thu, 20 Apr 2023 21:19:08 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
-Cc: liweiwei@iscas.ac.cn, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, dbarboza@ventanamicro.com,
- richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-Subject: Re: [PATCH v3 1/7] target/riscv: Update pmp_get_tlb_size()
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-References: <20230419032725.29721-1-liweiwei@iscas.ac.cn>
- <20230419032725.29721-2-liweiwei@iscas.ac.cn>
- <eb169df2-84c5-30fe-4638-b01e736463a7@linux.alibaba.com>
+Subject: Re: [PATCH v3 2/7] target/riscv: Move pmp_get_tlb_size apart from
+ get_physical_address_pmp
 Content-Language: en-US
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <eb169df2-84c5-30fe-4638-b01e736463a7@linux.alibaba.com>
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, richard.henderson@linaro.org,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20230419032725.29721-1-liweiwei@iscas.ac.cn>
+ <20230419032725.29721-3-liweiwei@iscas.ac.cn>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20230419032725.29721-3-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACnrnq0L0FkYOpxBw--.3846S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxtrW5uF4ftFyUKr48Gr18AFb_yoWxAr4Dpr
- 48JrWUGrWUGrykJw13JryUJFy5Ar17K3WUJr1xWFW5Aw43J34Y9r1DWrnFgr1UJrW8Wr1j
- yr1UArsruF1UXF7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9j14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kI
- c2xKxwCYjI0SjxkI62AI1cAE67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4
- AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE
- 17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMI
- IF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4l
- IxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvf
- C2KfnxnUUI43ZEXa7VUbXdbUUUUUU==
-X-Originating-IP: [180.165.241.15]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -35
-X-Spam_score: -3.6
-X-Spam_bar: ---
-X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-1.669,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.133;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-133.freemail.mail.aliyun.com
+X-Spam_score_int: -115
+X-Spam_score: -11.6
+X-Spam_bar: -----------
+X-Spam_report: (-11.6 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
+ NICE_REPLY_A=-1.669, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01,
+ UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -70,161 +58,121 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Apr 2023 12:27:57 -0000
+X-List-Received-Date: Thu, 20 Apr 2023 13:19:34 -0000
 
 
-On 2023/4/20 19:58, LIU Zhiwei wrote:
+On 2023/4/19 11:27, Weiwei Li wrote:
+> pmp_get_tlb_size can be separated from get_physical_address_pmp and is only
+> needed when ret == TRANSLATE_SUCCESS.
 >
-> On 2023/4/19 11:27, Weiwei Li wrote:
->> PMP entries before the matched PMP entry(including the matched PMP 
->> entry)
->> may overlap partial of the tlb page, which may make different regions in
->> that page have different permission rights, such as for
->> PMP0(0x80000008~0x8000000F, R) and PMP1(0x80001000~0x80001FFF, RWX))
->> write access to 0x80000000 will match PMP1. However we cannot cache 
->> the tlb
->> for it since this will make the write access to 0x80000008 bypass the 
->> check
->> of PMP0. So we should check all of them and set the tlb size to 1 in 
->> this
->> case.
->>
->> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->> ---
->>   target/riscv/cpu_helper.c |  7 ++-----
->>   target/riscv/pmp.c        | 39 ++++++++++++++++++++++++++-------------
->>   target/riscv/pmp.h        |  3 +--
->>   3 files changed, 29 insertions(+), 20 deletions(-)
->>
->> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> index 433ea529b0..075fc0538a 100644
->> --- a/target/riscv/cpu_helper.c
->> +++ b/target/riscv/cpu_helper.c
->> @@ -703,11 +703,8 @@ static int 
->> get_physical_address_pmp(CPURISCVState *env, int *prot,
->>       }
->>         *prot = pmp_priv_to_page_prot(pmp_priv);
->> -    if ((tlb_size != NULL) && pmp_index != MAX_RISCV_PMPS) {
->> -        target_ulong tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
->> -        target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
->> -
->> -        *tlb_size = pmp_get_tlb_size(env, pmp_index, tlb_sa, tlb_ea);
->> +    if (tlb_size != NULL) {
->> +        *tlb_size = pmp_get_tlb_size(env, addr);
->>       }
->>         return TRANSLATE_SUCCESS;
->> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
->> index 1f5aca42e8..22f3b3f217 100644
->> --- a/target/riscv/pmp.c
->> +++ b/target/riscv/pmp.c
->> @@ -601,28 +601,41 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
->>   }
->>     /*
->> - * Calculate the TLB size if the start address or the end address of
->> + * Calculate the TLB size if any start address or the end address of
->>    * PMP entry is presented in the TLB page.
->>    */
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> ---
+>   target/riscv/cpu_helper.c | 21 +++++++--------------
+>   target/riscv/pmp.c        |  4 ++++
+>   2 files changed, 11 insertions(+), 14 deletions(-)
 >
->  If we don't pass the start address or the end address parameter, we 
-> can comment this function:
->
-> Calculate the TLB size according to the PMP rule with the highest 
-> priority.
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 075fc0538a..ea08ca9fbb 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -676,14 +676,11 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+>    *
+>    * @env: CPURISCVState
+>    * @prot: The returned protection attributes
+> - * @tlb_size: TLB page size containing addr. It could be modified after PMP
+> - *            permission checking. NULL if not set TLB page for addr.
+>    * @addr: The physical address to be checked permission
+>    * @access_type: The type of MMU access
+>    * @mode: Indicates current privilege level.
+>    */
+> -static int get_physical_address_pmp(CPURISCVState *env, int *prot,
+> -                                    target_ulong *tlb_size, hwaddr addr,
+> +static int get_physical_address_pmp(CPURISCVState *env, int *prot, hwaddr addr,
+>                                       int size, MMUAccessType access_type,
+>                                       int mode)
+>   {
+> @@ -703,9 +700,6 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
+>       }
+>   
+>       *prot = pmp_priv_to_page_prot(pmp_priv);
+> -    if (tlb_size != NULL) {
+> -        *tlb_size = pmp_get_tlb_size(env, addr);
+> -    }
+>   
+>       return TRANSLATE_SUCCESS;
+>   }
+> @@ -905,7 +899,7 @@ restart:
+>           }
+>   
+>           int pmp_prot;
+> -        int pmp_ret = get_physical_address_pmp(env, &pmp_prot, NULL, pte_addr,
+> +        int pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
+>                                                  sizeof(target_ulong),
+>                                                  MMU_DATA_LOAD, PRV_S);
+>           if (pmp_ret != TRANSLATE_SUCCESS) {
+> @@ -1300,13 +1294,12 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>               prot &= prot2;
+>   
+>               if (ret == TRANSLATE_SUCCESS) {
+> -                ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
+> +                ret = get_physical_address_pmp(env, &prot_pmp, pa,
+>                                                  size, access_type, mode);
+>   
+>                   qemu_log_mask(CPU_LOG_MMU,
+>                                 "%s PMP address=" HWADDR_FMT_plx " ret %d prot"
+> -                              " %d tlb_size " TARGET_FMT_lu "\n",
+> -                              __func__, pa, ret, prot_pmp, tlb_size);
+We discard the tlb_size message here，which is not good.
+If we really want to discard it, we should give a reason and remove it 
+in a separated patch.
+> +                              " %d\n", __func__, pa, ret, prot_pmp);
+>   
+>                   prot &= prot_pmp;
+>               }
+> @@ -1333,13 +1326,12 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>                         __func__, address, ret, pa, prot);
+>   
+>           if (ret == TRANSLATE_SUCCESS) {
+> -            ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
+> +            ret = get_physical_address_pmp(env, &prot_pmp, pa,
+>                                              size, access_type, mode);
+>   
+>               qemu_log_mask(CPU_LOG_MMU,
+>                             "%s PMP address=" HWADDR_FMT_plx " ret %d prot"
+> -                          " %d tlb_size " TARGET_FMT_lu "\n",
+> -                          __func__, pa, ret, prot_pmp, tlb_size);
+> +                          " %d\n", __func__, pa, ret, prot_pmp);
+>   
+>               prot &= prot_pmp;
+>           }
+> @@ -1350,6 +1342,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>       }
+>   
+>       if (ret == TRANSLATE_SUCCESS) {
+> +        tlb_size = pmp_get_tlb_size(env, pa);
+>           tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
+>                        prot, mmu_idx, tlb_size);
+>           return true;
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 22f3b3f217..d1ef9457ea 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -612,6 +612,10 @@ target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr)
+>       target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
+>       int i;
+>   
+> +    if (!riscv_cpu_cfg(env)->pmp || !pmp_get_num_rules(env)) {
+> +        return TARGET_PAGE_SIZE;
+> +    }
 
-This seems  also not accurate. It's the first(highest priority) PMP 
-entry that overlap with the tlb page really matters.
+Can we move this to the first patch? So that we have a right 
+implementation when  change of the prototype of  this function。
 
-Maybe we can modify it to:
+Zhiwei
 
-"Calculate the TLB size. Return 1 if the first PMP entry that overlaps 
-with the TLB page doesn't cover the whole page . Return TARGET_PAGE_SIZE 
-otherwise."
-
->
->> -target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
->> -                              target_ulong tlb_sa, target_ulong tlb_ea)
->> +target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr)
->>   {
->> -    target_ulong pmp_sa = env->pmp_state.addr[pmp_index].sa;
->> -    target_ulong pmp_ea = env->pmp_state.addr[pmp_index].ea;
->> +    target_ulong pmp_sa;
->> +    target_ulong pmp_ea;
->> +    target_ulong tlb_sa = addr & ~(TARGET_PAGE_SIZE - 1);
->> +    target_ulong tlb_ea = tlb_sa + TARGET_PAGE_SIZE - 1;
->> +    int i;
->> +
->> +    for (i = 0; i < MAX_RISCV_PMPS; i++) {
->> +        if (pmp_get_a_field(env->pmp_state.pmp[i].cfg_reg) == 
->> PMP_AMATCH_OFF) {
->> +            continue;
->> +        }
->> +
->> +        pmp_sa = env->pmp_state.addr[i].sa;
->> +        pmp_ea = env->pmp_state.addr[i].ea;
->>   -    if (pmp_sa <= tlb_sa && pmp_ea >= tlb_ea) {
->> -        return TARGET_PAGE_SIZE;
->> -    } else {
->>           /*
->> -         * At this point we have a tlb_size that is the smallest 
->> possible size
->> -         * That fits within a TARGET_PAGE_SIZE and the PMP region.
->> -         *
->> -         * If the size is less then TARGET_PAGE_SIZE we drop the 
->> size to 1.
->> +         * If any start address or the end address of PMP entry is 
->> presented
->> +         * in the TLB page and cannot override the whole TLB page we 
->> drop the
->> +         * size to 1.
->>            * This means the result isn't cached in the TLB and is 
->> only used for
->>            * a single translation.
->>            */
->> -        return 1;
->> +        if (pmp_sa <= tlb_sa && pmp_ea >= tlb_ea) {
->> +            return TARGET_PAGE_SIZE;
->> +        } else if ((pmp_sa >= tlb_sa && pmp_sa <= tlb_ea) ||
->> +                   (pmp_ea >= tlb_sa && pmp_ea <= tlb_ea)) {
->> +            return 1;
->> +        }
->>       }
->> +
->> +    return TARGET_PAGE_SIZE;
->
-> This implicitly require a success return from the 
-> get_physical_address_pmp call. If we want this function to be a 
-> independent one, we should return 0 to indicate no tlb size can return.
-
-Yeah. I think the default should be TARGET_PAGE_SIZE if no PMP entry 
-overlap with the tlb page, since in this case, tlb_size should be 
-TARGET_PAGE_SIZE if the translation(inlcuding PMP check) successes while 
-tlb_size will be ignored if the translation fails.
-
-Regards,
-
-Weiwei Li
-
->
-> Zhiwei
->
->>   }
->>     /*
->> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
->> index b296ea1fc6..0a7e24750b 100644
->> --- a/target/riscv/pmp.h
->> +++ b/target/riscv/pmp.h
->> @@ -76,8 +76,7 @@ int pmp_hart_has_privs(CPURISCVState *env, 
->> target_ulong addr,
->>                          target_ulong size, pmp_priv_t privs,
->>                          pmp_priv_t *allowed_privs,
->>                          target_ulong mode);
->> -target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
->> -                              target_ulong tlb_sa, target_ulong 
->> tlb_ea);
->> +target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr);
->>   void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
->>   void pmp_update_rule_nums(CPURISCVState *env);
->>   uint32_t pmp_get_num_rules(CPURISCVState *env);
-
+> +
+>       for (i = 0; i < MAX_RISCV_PMPS; i++) {
+>           if (pmp_get_a_field(env->pmp_state.pmp[i].cfg_reg) == PMP_AMATCH_OFF) {
+>               continue;
 
