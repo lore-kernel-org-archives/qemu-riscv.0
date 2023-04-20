@@ -1,74 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ppVpN-0003WU-Oo
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Apr 2023 11:04:05 -0400
+	id 1ppdEc-0000hK-FX
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Apr 2023 18:58:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1ppVp7-00036G-2d
- for qemu-riscv@nongnu.org; Thu, 20 Apr 2023 11:03:54 -0400
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ppdEa-0000gq-FQ; Thu, 20 Apr 2023 18:58:36 -0400
+Received: from mail-ua1-x92a.google.com ([2607:f8b0:4864:20::92a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1ppVp5-0004wE-DD
- for qemu-riscv@nongnu.org; Thu, 20 Apr 2023 11:03:48 -0400
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-2efbaad9d76so652686f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 20 Apr 2023 08:03:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ppdEY-0003h1-1Q; Thu, 20 Apr 2023 18:58:35 -0400
+Received: by mail-ua1-x92a.google.com with SMTP id
+ a1e0cc1a2514c-779701b7265so286090241.2; 
+ Thu, 20 Apr 2023 15:58:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1682003025; x=1684595025; 
+ d=gmail.com; s=20221208; t=1682031512; x=1684623512;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rHD9yU2TDrQYwvqwCc3qRe/B5CL4utebJOWgZ88mIeM=;
- b=dqQYeKUphTG8VtpVCT706vCpYJswhGVqWnqBGsy72PCJhszxE4xE/bHaLCvKa848O0
- WmEU5P9fNRKX91Q2JxWatK6k7yXj4XLANANPdqoyEKKtov/eZ5FyVRjiDpHIe7tS/StT
- 6CSMzIFWgVkHhXo/6D+HdMXw6mlJ3ihc4PYOX+oT7XL3sUuKdeytG/qZcIFDCKlOVXZt
- 2h/oEf9AEhaPgn6bEaidRQMilR3G0X5HDN0Kl8TlX06MbVFaFqKlK2QTxGXSXjnCORQA
- f56MptmHmw9bNRs2TW6s1wUuBdkj01t8/HVseGGsPi0HFD3eFthEdOxQGZmb8TNlOJRs
- y3Gg==
+ bh=islVdEdTUHtl0qJ3+cvAElwJgvP4WtfgPMXj6Z81SbI=;
+ b=R6vj7EHJkADvyI1+oFrKqwjpB1TojdhMd5quFCyJzCaAMXw4rzC1DEKh91vvMjbmY4
+ axAo2+U62hFZsPWs5Ini3Wg3hycNUw0MRaT2Ls7c+nHNMlEbchw3EBj1nUawnUMkmOzX
+ bjapcxuwYiUGd5hwBgDSl+9CvHDFkoEqRgIY9YYKpwz8w93WEJvWh84zrXAxCSiUZugD
+ yOZKDURvtV11i3Bjj0eV0yB1Ritusw8ZKGgte2bobtUgCZDW9dwgahvD7ubjj/zkrEPF
+ 7OSk5hdzQDQ8vtUJwbC70aljgXxZfWZ+dGE7Y7qSEUXla86sAIA2BUNHaw9xYwwLxJjK
+ x+1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682003025; x=1684595025;
+ d=1e100.net; s=20221208; t=1682031512; x=1684623512;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rHD9yU2TDrQYwvqwCc3qRe/B5CL4utebJOWgZ88mIeM=;
- b=ZQetQmQYSPrTDEnnaMPFu642XbQrc3mRGQ2KFiFti52pO+5CK/u9pC20+neeils9k3
- iB2Ljr1g7PS3V8cUn8CfLa1jWJqoiyqLFjPMOVuqgEJyN+TfljchRWSq7d5Wk1i7jWZg
- lW0oTqQdMEjWvK0ejx/TIMC72NxkPVJlY3kXYaHM5mcBaeaRvu7qYtoqL3AbBSLhCC+t
- soQVWK1b/ewGpe5aePx/D4VU4Zpe7ks/1qKhSx0AloQrRR4xxA0ZggcFNHczI08v8fGT
- dQaAH0IhTKLfo3dYNiaPdXINXrBCRqcdMF3hw2QTfj4ty/aTNTaWcYUrbkzQT0jK67Zq
- xLhA==
-X-Gm-Message-State: AAQBX9c9+zqlPkpuUnYrlUq+WZUiI6A5zk1L06NBea/2ZD2Obu64616Q
- 3YUr/84VOpiMDkiMZhnUMMEAr7UQHsMh3xQdANEOmD6NoWW5dfNv
-X-Google-Smtp-Source: AKy350Y1Jda4D4n4YzIFnJX2Jxj7/R75oFS9F2yiHc8H/6DOG7/b+mHvG4+L2XLFGMJrqRewGvR50hB5f8p6Seyx9OE=
-X-Received: by 2002:adf:e2c6:0:b0:2f3:f696:ea0e with SMTP id
- d6-20020adfe2c6000000b002f3f696ea0emr1483846wrj.69.1682003024901; Thu, 20 Apr
- 2023 08:03:44 -0700 (PDT)
+ bh=islVdEdTUHtl0qJ3+cvAElwJgvP4WtfgPMXj6Z81SbI=;
+ b=bPhsGURqfsPlVfy9LUMhVO+y+DcJJ+3fqjcYCE6yGw79ASY10rkTn/0mqPRUQ6r5+3
+ AJK+HIPONharJW3Izpa9GmgfKVSsuq7gkyjtT3e4ON/kpmmWm/sgwGVxyRAR7f9aNVPo
+ jwRJwl2o/Fk1V5ir7kc5OXeQKHC4eMnMfD/zx53EcBMPgi41PqR8BRBj63V2Upg3CL7B
+ GHisqnMl8n4/D71PvK3lqUAGYjIZwwvS2/1eYHRlXIo6h+6Q2dYRlz8fupP77sq37FTJ
+ z+t1xR7iXk2vxTiNfehaM2a/Gk5NkHCEvRpPpYMBCJCGLz6HvdG0e2FihBezigTtXLem
+ 9VKw==
+X-Gm-Message-State: AAQBX9dHyjgKDD4VOpxsOHTNqI7oa4+g6PYKF8TK2mL7L45Vl7d43ay3
+ bewAJtoufDANLZ4jgRCkOAccgp/QUKXRriPopqWtvUAai0g=
+X-Google-Smtp-Source: AKy350b0+UCRffZvUscJoJw4tpeiiPyPZEbl9oJzAKfuiI0zxB0m6UqNXavJ0kQDNBWkUr8u0ttzf0JhU7uHAClJuNY=
+X-Received: by 2002:a1f:bf52:0:b0:436:1ead:e50e with SMTP id
+ p79-20020a1fbf52000000b004361eade50emr178893vkf.1.1682031511501; Thu, 20 Apr
+ 2023 15:58:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230419104756.71455-1-alexghiti@rivosinc.com>
- <CAKmqyKOXpbnBwwBa54U2XXhzYQTxJxYqFJgsDhH1LnV-MsUoTw@mail.gmail.com>
-In-Reply-To: <CAKmqyKOXpbnBwwBa54U2XXhzYQTxJxYqFJgsDhH1LnV-MsUoTw@mail.gmail.com>
-From: Alexandre Ghiti <alexghiti@rivosinc.com>
-Date: Thu, 20 Apr 2023 17:03:33 +0200
-Message-ID: <CAHVXubg-67oMwOd3GM6YDrLRJ_KcGPdP8e_587CJdm8WXvdC-A@mail.gmail.com>
-Subject: Re: [PATCH v2] riscv: Make sure an exception is raised if a pte is
+References: <20230420150220.60919-1-alexghiti@rivosinc.com>
+In-Reply-To: <20230420150220.60919-1-alexghiti@rivosinc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 21 Apr 2023 08:58:05 +1000
+Message-ID: <CAKmqyKOWy2ffcB72bJrF1U7ksa+eCsbencX1v-w96CN8+Hb-Yw@mail.gmail.com>
+Subject: Re: [PATCH v3] riscv: Make sure an exception is raised if a pte is
  malformed
-To: Alistair Francis <alistair23@gmail.com>
+To: Alexandre Ghiti <alexghiti@rivosinc.com>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Andrea Parri <andrea@rivosinc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=alexghiti@rivosinc.com; helo=mail-wr1-x42d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92a;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,92 +79,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Apr 2023 15:03:56 -0000
+X-List-Received-Date: Thu, 20 Apr 2023 22:58:36 -0000
 
-On Thu, Apr 20, 2023 at 1:31=E2=80=AFAM Alistair Francis <alistair23@gmail.=
-com> wrote:
+On Fri, Apr 21, 2023 at 1:07=E2=80=AFAM Alexandre Ghiti <alexghiti@rivosinc=
+.com> wrote:
 >
-> On Wed, Apr 19, 2023 at 8:48=E2=80=AFPM Alexandre Ghiti <alexghiti@rivosi=
-nc.com> wrote:
-> >
-> > As per the privileged specification, in 64-bit, if any of the pte reser=
-ved
-> > bits 60-54 is set an exception should be triggered, and the same applie=
-s to
-> > napot/pbmt bits if those extensions are not enabled
-> > (see 4.4.1, "Addressing and Memory Protection").
-> >
-> > Reported-by: Andrea Parri <andrea@rivosinc.com>
-> > Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> As per the specification, in 64-bit, if any of the pte reserved bits
+> 60-54 is set an exception should be triggered (see 4.4.1, "Addressing and
+> Memory Protection"). In addition, we must check the napot/pbmt bits are
+> not set if those extensions are not active.
 >
-> Thanks for the patch
->
-> Do you mind sending a v3 rebased on
-> https://github.com/alistair23/qemu/tree/riscv-to-apply.next ?
+> Reported-by: Andrea Parri <andrea@rivosinc.com>
+> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Sure, I have just sent the v3.
+Thanks!
 
-Thanks for your quick review!
+Applied to riscv-to-apply.next
 
-Alex
+Alistair
 
+> ---
+> Changes in v3:
+> - Rebase on top of https://github.com/alistair23/qemu/tree/riscv-to-apply=
+.next
 >
-> Alistair
+> Changes in v2:
+> - Handle napot and pbmt exception
 >
-> > ---
-> >  target/riscv/cpu_bits.h   |  1 +
-> >  target/riscv/cpu_helper.c | 15 +++++++++++----
-> >  2 files changed, 12 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> > index fca7ef0cef..8d9ba2ce11 100644
-> > --- a/target/riscv/cpu_bits.h
-> > +++ b/target/riscv/cpu_bits.h
-> > @@ -640,6 +640,7 @@ typedef enum {
-> >  #define PTE_SOFT            0x300 /* Reserved for Software */
-> >  #define PTE_PBMT            0x6000000000000000ULL /* Page-based memory=
- types */
-> >  #define PTE_N               0x8000000000000000ULL /* NAPOT translation=
- */
-> > +#define PTE_RESERVED        0x1FC0000000000000ULL /* Reserved bits */
-> >  #define PTE_ATTR            (PTE_N | PTE_PBMT) /* All attributes bits =
-*/
-> >
-> >  /* Page table PPN shift amount */
-> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > index f88c503cf4..8dc832d1bb 100644
-> > --- a/target/riscv/cpu_helper.c
-> > +++ b/target/riscv/cpu_helper.c
-> > @@ -946,13 +946,20 @@ restart:
-> >
-> >          if (riscv_cpu_sxl(env) =3D=3D MXL_RV32) {
-> >              ppn =3D pte >> PTE_PPN_SHIFT;
-> > -        } else if (pbmte || cpu->cfg.ext_svnapot) {
-> > -            ppn =3D (pte & (target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIF=
-T;
-> >          } else {
-> > -            ppn =3D pte >> PTE_PPN_SHIFT;
-> > -            if ((pte & ~(target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT) =
-{
-> > +            if (pte & PTE_RESERVED) {
-> > +                return TRANSLATE_FAIL;
-> > +            }
-> > +
-> > +            if (!pbmte && (pte & PTE_PBMT)) {
-> >                  return TRANSLATE_FAIL;
-> >              }
-> > +
-> > +            if (!cpu->cfg.ext_svnapot && (pte & PTE_N)) {
-> > +                return TRANSLATE_FAIL;
-> > +            }
-> > +
-> > +            ppn =3D (pte & (target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIF=
-T;
-> >          }
-> >
-> >          if (!(pte & PTE_V)) {
-> > --
-> > 2.37.2
-> >
-> >
+>  target/riscv/cpu_bits.h   |  1 +
+>  target/riscv/cpu_helper.c | 15 +++++++++++----
+>  2 files changed, 12 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index fb63b8e125..59f0ffd9e1 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -644,6 +644,7 @@ typedef enum {
+>  #define PTE_SOFT            0x300 /* Reserved for Software */
+>  #define PTE_PBMT            0x6000000000000000ULL /* Page-based memory t=
+ypes */
+>  #define PTE_N               0x8000000000000000ULL /* NAPOT translation *=
+/
+> +#define PTE_RESERVED        0x1FC0000000000000ULL /* Reserved bits */
+>  #define PTE_ATTR            (PTE_N | PTE_PBMT) /* All attributes bits */
+>
+>  /* Page table PPN shift amount */
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index b68dcfe7b6..57d04385f1 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -927,13 +927,20 @@ restart:
+>
+>          if (riscv_cpu_sxl(env) =3D=3D MXL_RV32) {
+>              ppn =3D pte >> PTE_PPN_SHIFT;
+> -        } else if (pbmte || riscv_cpu_cfg(env)->ext_svnapot) {
+> -            ppn =3D (pte & (target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT;
+>          } else {
+> -            ppn =3D pte >> PTE_PPN_SHIFT;
+> -            if ((pte & ~(target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT) {
+> +            if (pte & PTE_RESERVED) {
+> +                return TRANSLATE_FAIL;
+> +            }
+> +
+> +            if (!pbmte && (pte & PTE_PBMT)) {
+>                  return TRANSLATE_FAIL;
+>              }
+> +
+> +            if (!riscv_cpu_cfg(env)->ext_svnapot && (pte & PTE_N)) {
+> +                return TRANSLATE_FAIL;
+> +            }
+> +
+> +            ppn =3D (pte & (target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT;
+>          }
+>
+>          if (!(pte & PTE_V)) {
+> --
+> 2.37.2
+>
+>
 
