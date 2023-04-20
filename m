@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ppdHJ-0002uO-Qg
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Apr 2023 19:01:25 -0400
+	id 1ppdyO-0008Qz-DF
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Apr 2023 19:45:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ppdHI-0002oI-72; Thu, 20 Apr 2023 19:01:24 -0400
-Received: from mail-vk1-xa33.google.com ([2607:f8b0:4864:20::a33])
+ id 1ppdyM-0008Qd-OV; Thu, 20 Apr 2023 19:45:54 -0400
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ppdHG-0004CM-Le; Thu, 20 Apr 2023 19:01:23 -0400
-Received: by mail-vk1-xa33.google.com with SMTP id
- 71dfb90a1353d-44066390652so324812e0c.1; 
- Thu, 20 Apr 2023 16:01:19 -0700 (PDT)
+ id 1ppdyK-0005Sy-Tn; Thu, 20 Apr 2023 19:45:54 -0400
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-76e8811b7caso283546241.0; 
+ Thu, 20 Apr 2023 16:45:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1682031679; x=1684623679;
+ d=gmail.com; s=20221208; t=1682034351; x=1684626351;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Rhk1YC1qUZfsi1ec8+Aj0S5fbwOkgvmWaduabBepsRU=;
- b=b/roN69pbAeco24GbYmppTuqEak2+ZoRkOfufMnJumYs8BVOsSMmnTN744LPQwqtAF
- /yA91lyOksevQI6byeVlE+kSgsrdyzKhoJFBw8mVNcWZZRkT9OXe7F/1TLwBPU/V7iAS
- lPH6yaHpZq7JwMFx+Bf8d3s/5kAHGdsnb7eutlA7s1cVOnjznYXlFyGTgbWBLj8fP9GA
- fKs4Xgoim/ls4eOrUX/3KtOx/ZQih8F01UD5NiL3fMvQu7017XvAjEMYpvg8c6DSlIfW
- zMgaGZZLg9C8v3ENPoJLu7n4dyC6W7UM1Um9GTVcTTSIHWQl4yayCqnPsWUmcP/TPN+l
- Cddg==
+ bh=2JrU5+BPT1PxoY3u04W85LxKmfbuF22cIhcL0/WAjgw=;
+ b=rkm2BiQl/ENIugAtjeQc0IZ8K1FSE1HuKWvoQNYONcVmpMw8ERIpAomzKv6dPm3nn6
+ OVH7/9GieIlc9zej0HEl46uPrrPir6L5+BJY/J4tHAhld5dJd5CJT5/ayVL35F4rb3Dj
+ 67nwxdofzZx7oq13U572uCucEFHcUACMXPGJQXklCPotcvaOeu9qMpkRF8+6AtkxVEPX
+ Ilx/777ScgkhrGE4iRIYugLIm6iQzpe//rjUz35KTz4lGc/jPCBfL4QphMqFLPtMRtoX
+ Rv8soVEx5xakIdyZYptiCEH7ExP8/gYlahtc8mk/7uPhme+Usni8DILhCzZLMt6ZTl8p
+ YWuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682031679; x=1684623679;
+ d=1e100.net; s=20221208; t=1682034351; x=1684626351;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Rhk1YC1qUZfsi1ec8+Aj0S5fbwOkgvmWaduabBepsRU=;
- b=FddCMLg5FknMLknP1dGlnUmXdQ7q9Ggvp0TVQMr+3pU7LBU2GE4J7h+8zOZvQJnqzr
- OKt7p9HGw41kmfwUnUXp8Bn+y9V4r20p7TNCPlzF5fGg/xusOYADgk6V99zwlDwDrhF/
- MqLqBfLU/5Uzw2yCyEjSfdVT0cboKYA1Z0+a4oahrwxDS4WT8fJpomsxSuUtT9VtfBEG
- sNe4qeJuAB1PbtbSwK50QsVxDDOo/IZd8y7FbGc/9jO+soJw9fsGvRCcKDSjTS5is1sF
- AUZ6na6cknF9+eVMZqRe2FxH1OKdVD5h4DjNlhkVv4IFB/4loQVuR/c9zpC4zBJDY1jA
- WMrw==
-X-Gm-Message-State: AAQBX9dE+Aqlkb89/gc7yfFxjmbIlgdxt2dOENakFtX9yj8J77VYchkD
- 9pZz93XG+7u3QDM6WWkRDZbRpn30Lkctl87EU30=
-X-Google-Smtp-Source: AKy350awR3OnAwJqZqWosmO/ufwDmfmi5tJmnrRUw9IyHqT6wnSnag6aFpt1z91tphn77wZPAapHTqi1dJZngaE1Q4E=
-X-Received: by 2002:a1f:4f83:0:b0:43f:bcdf:b60e with SMTP id
- d125-20020a1f4f83000000b0043fbcdfb60emr165668vkb.0.1682031678759; Thu, 20 Apr
- 2023 16:01:18 -0700 (PDT)
+ bh=2JrU5+BPT1PxoY3u04W85LxKmfbuF22cIhcL0/WAjgw=;
+ b=biUrx++Mwjlx+NN6iKuAQgIgrQHiz4Rgq72B5GtQHxT0Do9P5Gwksj7SlVMKKo9XQv
+ /iwm7uQLA4awKzHMDJLui5+HupF9cy4KHMFDfcSPX+AN3uCoKLMhLhK10ETuBVrN9to5
+ X8jyCBd7NG0nY1OO1awHOIbo2JJYGmoDdOq+kaW5Ti/icXyD6qaLhf2mlq9Dz0Hr3S6l
+ SnDBK7LLCAo6RZIQCVooLOnGdvi1FhrxrsSJCfSNiHTGEFZQsp7g+FPVVD1gjsfFcx0c
+ MSt9ms0wxk9jZuXzmJllAJ1OmTpmM6ysE2p4fkepiTJav87ZilTX/s2CM6oYRQ8xAQXI
+ p3Eg==
+X-Gm-Message-State: AAQBX9dfd6MUiMhLznX33UPz19irfPQIeLFwZU2KFYa3KoJ45f4nG5uS
+ VNdk9rNehCIWEFNGWChtXThQ9ILHyqHIG7BCiMU=
+X-Google-Smtp-Source: AKy350YtT3wRXO+luTUGBQvy0bmza+++VmjE3tPUBv8CIMqr2TtTV42fgWRBVxAy0fnXDE6qYvzrFlZQF8qQQycBmgw=
+X-Received: by 2002:a1f:41c1:0:b0:40f:f3e1:53c with SMTP id
+ o184-20020a1f41c1000000b0040ff3e1053cmr248264vka.1.1682034350933; Thu, 20 Apr
+ 2023 16:45:50 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230420092100.177464-1-dbarboza@ventanamicro.com>
- <20230420092100.177464-6-dbarboza@ventanamicro.com>
-In-Reply-To: <20230420092100.177464-6-dbarboza@ventanamicro.com>
+ <20230420092100.177464-12-dbarboza@ventanamicro.com>
+In-Reply-To: <20230420092100.177464-12-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 21 Apr 2023 09:00:52 +1000
-Message-ID: <CAKmqyKORdoVtSP72qbOcCAge_YGQFx31gqDL84UZL44Fdw7yvQ@mail.gmail.com>
-Subject: Re: [PATCH RESEND v7 05/12] target/riscv: Mask the implicitly enabled
- extensions in isa_string based on priv version
+Date: Fri, 21 Apr 2023 09:45:24 +1000
+Message-ID: <CAKmqyKPd_5nVUvcd20AxrrH9UKT88pU-KLqQMbCh_nUCyh9LvA@mail.gmail.com>
+Subject: Re: [PATCH RESEND v7 11/12] target/riscv: rework write_misa()
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a33;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -79,48 +78,186 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Apr 2023 23:01:24 -0000
+X-List-Received-Date: Thu, 20 Apr 2023 23:45:55 -0000
 
-On Thu, Apr 20, 2023 at 7:23=E2=80=AFPM Daniel Henrique Barboza
+On Thu, Apr 20, 2023 at 7:22=E2=80=AFPM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> From: Weiwei Li <liweiwei@iscas.ac.cn>
+> write_misa() must use as much common logic as possible. We want to open
+> code just the bits that are exclusive to the CSR write operation and TCG
+> internals.
 >
-> Using implicitly enabled extensions such as Zca/Zcf/Zcd instead of their
-> super extensions can simplify the extension related check. However, they
-> may have higher priv version than their super extensions. So we should ma=
-sk
-> them in the isa_string based on priv version to make them invisible to us=
-er
-> if the specified priv version is lower than their minimal priv version.
+> Our validation is done with riscv_cpu_validate_set_extensions(), but we
+> need a small tweak first. When enabling RVG we're doing:
 >
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>         env->misa_ext |=3D RVI | RVM | RVA | RVF | RVD;
+>         env->misa_ext_mask =3D env->misa_ext;
+>
+> This works fine for realize() time but this can potentially overwrite
+> env->misa_ext_mask if we reutilize the function for write_misa().
+> Instead of doing misa_ext_mask =3D misa_ext, sum up the RVG extensions in
+> misa_ext_mask as well. This won't change realize() time behavior
+> (misa_ext_mask is still =3D=3D misa_ext)  and will ensure that write_misa=
+()
+> won't change misa_ext_mask by accident.
+>
+> After that, rewrite write_misa() to work as follows:
+>
+> - mask the write using misa_ext_mask to avoid enabling unsupported
+>   extensions;
+>
+> - suppress RVC if the next insn isn't aligned;
+>
+> - disable RVG if any of RVG dependencies are being disabled by the user;
+>
+> - assign env->misa_ext and run riscv_cpu_validate_set_extensions(). On
+>   error, rollback to the previous values of misa_ext and misa_ext_mask;
+>
+> - on success, check if there's a chance that misa_ext_mask was
+>   overwritten during the process and restore it;
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Is this right? If the guest does a combined valid/invalid modification
+shouldn't the valid modifications stick?
 
 Alistair
 
+>
+> - handle RVF and MSTATUS_FS and continue as usual.
+>
+> Let's keep write_misa() as experimental for now until this logic gains
+> enough mileage.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > ---
->  target/riscv/cpu.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  target/riscv/cpu.c |  4 ++--
+>  target/riscv/cpu.h |  1 +
+>  target/riscv/csr.c | 47 ++++++++++++++++++++--------------------------
+>  3 files changed, 23 insertions(+), 29 deletions(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index dd35cf378f..9bb0e6b180 100644
+> index 7d407321aa..4fa720a39d 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -1721,7 +1721,8 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, cha=
-r **isa_str,
->      int i;
+> @@ -944,7 +944,7 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu=
+, Error **errp)
+>   * Check consistency between chosen extensions while setting
+>   * cpu->cfg accordingly.
+>   */
+> -static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **err=
+p)
+> +void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>  {
+>      CPURISCVState *env =3D &cpu->env;
+>      Error *local_err =3D NULL;
+> @@ -960,7 +960,7 @@ static void riscv_cpu_validate_set_extensions(RISCVCP=
+U *cpu, Error **errp)
+>          cpu->cfg.ext_ifencei =3D true;
 >
->      for (i =3D 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
-> -        if (isa_ext_is_enabled(cpu, &isa_edata_arr[i])) {
-> +        if (cpu->env.priv_ver >=3D isa_edata_arr[i].min_version &&
-> +            isa_ext_is_enabled(cpu, &isa_edata_arr[i])) {
->              new =3D g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
->              g_free(old);
->              old =3D new;
+>          env->misa_ext |=3D RVI | RVM | RVA | RVF | RVD;
+> -        env->misa_ext_mask =3D env->misa_ext;
+> +        env->misa_ext_mask |=3D RVI | RVM | RVA | RVF | RVD;
+>      }
+>
+>      if (riscv_has_ext(env, RVI) && riscv_has_ext(env, RVE)) {
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 15423585d0..1f39edc687 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -548,6 +548,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, =
+int size,
+>                          bool probe, uintptr_t retaddr);
+>  char *riscv_isa_string(RISCVCPU *cpu);
+>  void riscv_cpu_list(void);
+> +void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp);
+>
+>  #define cpu_list riscv_cpu_list
+>  #define cpu_mmu_index riscv_cpu_mmu_index
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 865ee9efda..d449da2657 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1387,39 +1387,18 @@ static RISCVException read_misa(CPURISCVState *en=
+v, int csrno,
+>  static RISCVException write_misa(CPURISCVState *env, int csrno,
+>                                   target_ulong val)
+>  {
+> +    RISCVCPU *cpu =3D env_archcpu(env);
+> +    uint32_t orig_misa_ext =3D env->misa_ext;
+> +    Error *local_err =3D NULL;
+> +
+>      if (!riscv_cpu_cfg(env)->misa_w) {
+>          /* drop write to misa */
+>          return RISCV_EXCP_NONE;
+>      }
+>
+> -    /* 'I' or 'E' must be present */
+> -    if (!(val & (RVI | RVE))) {
+> -        /* It is not, drop write to misa */
+> -        return RISCV_EXCP_NONE;
+> -    }
+> -
+> -    /* 'E' excludes all other extensions */
+> -    if (val & RVE) {
+> -        /*
+> -         * when we support 'E' we can do "val =3D RVE;" however
+> -         * for now we just drop writes if 'E' is present.
+> -         */
+> -        return RISCV_EXCP_NONE;
+> -    }
+> -
+> -    /*
+> -     * misa.MXL writes are not supported by QEMU.
+> -     * Drop writes to those bits.
+> -     */
+> -
+>      /* Mask extensions that are not supported by this hart */
+>      val &=3D env->misa_ext_mask;
+>
+> -    /* 'D' depends on 'F', so clear 'D' if 'F' is not present */
+> -    if ((val & RVD) && !(val & RVF)) {
+> -        val &=3D ~RVD;
+> -    }
+> -
+>      /*
+>       * Suppress 'C' if next instruction is not aligned
+>       * TODO: this should check next_pc
+> @@ -1428,18 +1407,32 @@ static RISCVException write_misa(CPURISCVState *e=
+nv, int csrno,
+>          val &=3D ~RVC;
+>      }
+>
+> +    /* Disable RVG if any of its dependencies are disabled */
+> +    if (!(val & RVI && val & RVM && val & RVA &&
+> +          val & RVF && val & RVD)) {
+> +        val &=3D ~RVG;
+> +    }
+> +
+>      /* If nothing changed, do nothing. */
+>      if (val =3D=3D env->misa_ext) {
+>          return RISCV_EXCP_NONE;
+>      }
+>
+> -    if (!(val & RVF)) {
+> +    env->misa_ext =3D val;
+> +    riscv_cpu_validate_set_extensions(cpu, &local_err);
+> +    if (local_err !=3D NULL) {
+> +        /* Rollback on validation error */
+> +        env->misa_ext =3D orig_misa_ext;
+> +
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +
+> +    if (!(env->misa_ext & RVF)) {
+>          env->mstatus &=3D ~MSTATUS_FS;
+>      }
+>
+>      /* flush translation cache */
+>      tb_flush(env_cpu(env));
+> -    env->misa_ext =3D val;
+>      env->xl =3D riscv_cpu_mxl(env);
+>      return RISCV_EXCP_NONE;
+>  }
 > --
 > 2.40.0
 >
