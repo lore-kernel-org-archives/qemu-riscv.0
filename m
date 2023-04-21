@@ -1,70 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ppyyO-0007NB-LH
-	for mharc-qemu-riscv@gnu.org; Fri, 21 Apr 2023 18:11:20 -0400
+	id 1ppz2A-0002mN-ED
+	for mharc-qemu-riscv@gnu.org; Fri, 21 Apr 2023 18:15:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ppyyO-0007Ml-03
- for qemu-riscv@nongnu.org; Fri, 21 Apr 2023 18:11:20 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ppz29-0002ly-C9
+ for qemu-riscv@nongnu.org; Fri, 21 Apr 2023 18:15:13 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ppyyL-0001qB-7k
- for qemu-riscv@nongnu.org; Fri, 21 Apr 2023 18:11:19 -0400
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-2febac9cacdso1381674f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 21 Apr 2023 15:11:16 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1ppz27-0002mM-Mc
+ for qemu-riscv@nongnu.org; Fri, 21 Apr 2023 18:15:13 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-3f173af665fso15052015e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 21 Apr 2023 15:15:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1682115075; x=1684707075;
+ d=linaro.org; s=google; t=1682115310; x=1684707310;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=+54Bo7jCCAHW4aZ3qLnEV1hE6b/zaJjg8XM25Mmt6ko=;
- b=hHWlTyvQ1TVtktYCEtpreo8O0z8m+GFndI8VXI3yuJOI5IEjpUpfi+HPSY6d89rG5r
- riH6tl/XCvDsrMgtXyWTm/8maO/CW7O9b37bMENLmGivleXnsEQ/8QQ2Xja7JNPopqve
- aJ8qDW5sAKeKE6qqNf5qwPg0da1A5FgOH8xR8iyLEeUPSxbjcjOY9oDsX1v/BEz1PEFO
- CTYCi+cgvsBVg8LcfRdTqFjmlDEHDUF2N9qOVgUOOxzlG+MCrN6Qy7CvY+NXqzWpgOmf
- dTjbeTNpZ4/1y+QNbXPeMFh/7oHR/dwRZN8hqEJP42wZTj31P0wyNHskZp3DU47n3B0b
- eh1Q==
+ bh=xq3F9Yl1mWqXHaoBsdwT39XxG/T+7w5RJ/3RWYE3Aik=;
+ b=zKcgdObYL73f/3tiBqshgX230CdyyFG56uQtsfDUro/waopYOPSXNQXqAO+6SCSTqO
+ DqsAB1OYN5v4j08YOpplPEMy8fajk9FEztGlCQN+spTfhQN6KPI7IdrsMY0AAcBAGfUy
+ nO19i2b5esIJJZj4RCEgtE15TEwQVEunM7cLfJwI+MuqKxbAMGRDN+Sg0qtbygElXCEJ
+ hg3F5WTUB7EIdecDK25pnDM5AeoPVqEZ4a7/1PqohPlI4dTHrfewqJWQGHCMn2dqIakD
+ r3KtgYxJteLNLXxsjvhyimz15ouKB1KVMY92cMjzc1OeTKj4wJ6wNA9Pn1xpRIEOMTMC
+ q9JQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682115075; x=1684707075;
+ d=1e100.net; s=20221208; t=1682115310; x=1684707310;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+54Bo7jCCAHW4aZ3qLnEV1hE6b/zaJjg8XM25Mmt6ko=;
- b=ER+uPyh1dWeF68SnhZ+fhYpaROAD2izRVvOknL7rsZ/Q3+lHcdt15qv6h3YrAktTcb
- wbOsc+iv5ZJsJVOgMJr571Df0bIQCQ7oKq1S7b3g8Cx2b4PSebkIYinxv4frpcacUYt5
- xhUGHFMg8sMHc/OEAFdwRQBPTf+dN6L0Ff3AX2yUGNrLOsXfs+WKRC8CbVzoN8HAMMmy
- 8ty72ETPysAc4OfeH6P0dsEFiwpfq2Uw93f2vjs38xogkRN3vf9j4vLzpwYIuhIW4TmS
- TL/9n0Q+YWACgZv9kw21DU31dNy1KDuyBFS+cKFPa8eAgHuBiOhI9m1YzSepf2HJH3y5
- q9dg==
-X-Gm-Message-State: AAQBX9fg16gJmW39nAkFzCYe//1r7W8wn7rY9BOVgRrlxzBc9lZ6qEq6
- 5GoCBYIALqAzA7Ak9w6LcQlvxQ==
-X-Google-Smtp-Source: AKy350YsseborVKL7EkHcw6T8WoI3tk5aq1yVweVGWW/DRiwnk5zWR0/ycYMASyMIhVgsrf1e1jnOg==
-X-Received: by 2002:adf:fe49:0:b0:2fa:631a:9f38 with SMTP id
- m9-20020adffe49000000b002fa631a9f38mr5063058wrs.2.1682115075267; 
- Fri, 21 Apr 2023 15:11:15 -0700 (PDT)
+ bh=xq3F9Yl1mWqXHaoBsdwT39XxG/T+7w5RJ/3RWYE3Aik=;
+ b=eZQIzEE/YxKVtpKuqfwu9vOcZFOXmUnqLpAUOAxkAZOXq2gSvgWyI+kvY6biZ8p28z
+ zth7d6AfoX8H9V+iVWe06OGG294byuLltOfQJA+Hln8jVx5xWlvY8YlhT554EhZiJYyA
+ IWBjbYWkV6PogpvL3735pIoP8s2/vZME/oBGckSD91N8MjOYPy1h23WUN4QpNhs93W4E
+ AD8ZPZpw1qMYCvmd8YI/awDAyg9W2PiI4eFpLjqGOPOjhG+sPcXRfYsL+K2QMUpKDiad
+ axid5Q03zdGVgfUxd7wugRb58RhIiKJDZWbAplURpnqFDK4+C5oP4VwGPH50yfbX7EVS
+ 3mFw==
+X-Gm-Message-State: AAQBX9ekFflSdsWww+41qQrO5rFgXgk27agE/0D4fsJ9dThxXJ/VW/E+
+ MmXXNErpUyD/SoSnUO0T6DAK4Q==
+X-Google-Smtp-Source: AKy350aAOjbJ7mr8udrNiDFyrNuG/VJDBcIlijscniOS0fLoBZQ4g+O1k0yjTAFunLw0Isod1ayQhA==
+X-Received: by 2002:a05:600c:2145:b0:3f1:9879:5015 with SMTP id
+ v5-20020a05600c214500b003f198795015mr360753wml.36.1682115310195; 
+ Fri, 21 Apr 2023 15:15:10 -0700 (PDT)
 Received: from [192.168.69.115] (uni14-h01-176-184-39-152.dsl.sta.abo.bbox.fr.
  [176.184.39.152]) by smtp.gmail.com with ESMTPSA id
- z14-20020a5d4d0e000000b002efb4f2d240sm5250076wrt.87.2023.04.21.15.11.14
+ p13-20020a7bcc8d000000b003ee63fe5203sm5881584wma.36.2023.04.21.15.15.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 21 Apr 2023 15:11:14 -0700 (PDT)
-Message-ID: <a92d2457-34eb-cec0-ac4c-4d0f2e633e7c@linaro.org>
-Date: Sat, 22 Apr 2023 00:11:13 +0200
+ Fri, 21 Apr 2023 15:15:09 -0700 (PDT)
+Message-ID: <7ee63566-e6fa-6d2c-a943-22c2b288b590@linaro.org>
+Date: Sat, 22 Apr 2023 00:15:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.10.0
-Subject: Re: [PATCH v2 01/54] tcg: Replace if + tcg_abort with tcg_debug_assert
+Subject: Re: [PATCH v2 26/54] tcg/s390x: Pass TCGType to tcg_out_qemu_{ld,st}
 Content-Language: en-US
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org
 References: <20230411010512.5375-1-richard.henderson@linaro.org>
- <20230411010512.5375-2-richard.henderson@linaro.org>
+ <20230411010512.5375-27-richard.henderson@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230411010512.5375-2-richard.henderson@linaro.org>
+In-Reply-To: <20230411010512.5375-27-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
 X-Spam_bar: --
@@ -72,7 +72,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.297,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  SUSPICIOUS_RECIPS=2.51,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,14 +85,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Apr 2023 22:11:20 -0000
+X-List-Received-Date: Fri, 21 Apr 2023 22:15:13 -0000
 
 On 11/4/23 03:04, Richard Henderson wrote:
+> We need to set this in TCGLabelQemuLdst, so plumb this
+> all the way through from tcg_out_op.
+> 
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   tcg/tcg.c                 | 4 +---
->   tcg/i386/tcg-target.c.inc | 8 +++-----
->   2 files changed, 4 insertions(+), 8 deletions(-)
+>   tcg/s390x/tcg-target.c.inc | 22 ++++++++++++++--------
+>   1 file changed, 14 insertions(+), 8 deletions(-)
+
+
+> @@ -1916,7 +1917,8 @@ static void tcg_out_qemu_ld(TCGContext* s, TCGReg data_reg, TCGReg addr_reg,
+>   
+>       tcg_out_qemu_ld_direct(s, opc, data_reg, base_reg, TCG_REG_R2, 0);
+>   
+> -    add_qemu_ldst_label(s, 1, oi, data_reg, addr_reg, s->code_ptr, label_ptr);
+> +    add_qemu_ldst_label(s, 1, oi, data_type, data_reg, addr_reg,
+
+s/1/true/
+
+> +                        s->code_ptr, label_ptr);
+>   #else
+>       TCGReg index_reg;
+>       tcg_target_long disp;
+> @@ -1931,7 +1933,7 @@ static void tcg_out_qemu_ld(TCGContext* s, TCGReg data_reg, TCGReg addr_reg,
+>   }
+>   
+>   static void tcg_out_qemu_st(TCGContext* s, TCGReg data_reg, TCGReg addr_reg,
+> -                            MemOpIdx oi)
+> +                            MemOpIdx oi, TCGType data_type)
+>   {
+>       MemOp opc = get_memop(oi);
+>   #ifdef CONFIG_SOFTMMU
+> @@ -1947,7 +1949,8 @@ static void tcg_out_qemu_st(TCGContext* s, TCGReg data_reg, TCGReg addr_reg,
+>   
+>       tcg_out_qemu_st_direct(s, opc, data_reg, base_reg, TCG_REG_R2, 0);
+>   
+> -    add_qemu_ldst_label(s, 0, oi, data_reg, addr_reg, s->code_ptr, label_ptr);
+> +    add_qemu_ldst_label(s, 0, oi, data_type, data_reg, addr_reg,
+
+s/0/false/
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
