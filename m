@@ -1,70 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pqexE-0000Iz-H8
-	for mharc-qemu-riscv@gnu.org; Sun, 23 Apr 2023 15:00:56 -0400
+	id 1pqexF-0000Kt-EI
+	for mharc-qemu-riscv@gnu.org; Sun, 23 Apr 2023 15:00:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pqex4-00007o-0L
- for qemu-riscv@nongnu.org; Sun, 23 Apr 2023 15:00:46 -0400
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pqexB-0000EM-H0
+ for qemu-riscv@nongnu.org; Sun, 23 Apr 2023 15:00:53 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pqex0-0004SD-PY
- for qemu-riscv@nongnu.org; Sun, 23 Apr 2023 15:00:45 -0400
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-2f7c281a015so2115121f8f.1
- for <qemu-riscv@nongnu.org>; Sun, 23 Apr 2023 12:00:42 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pqex7-0004VL-6b
+ for qemu-riscv@nongnu.org; Sun, 23 Apr 2023 15:00:51 -0400
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-2f55ffdbaedso2216112f8f.2
+ for <qemu-riscv@nongnu.org>; Sun, 23 Apr 2023 12:00:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1682276441; x=1684868441;
+ d=linaro.org; s=google; t=1682276448; x=1684868448;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=LJILDGNLjVRjQd1j+SBea1d2py7wMKcHW5Ya8Mh6Ox8=;
- b=rLZgaxGykztrHKtDb7lxDfcuWftTA+vlJ1wwyEOcY8snoLWGiBVaGuu+XvOpJEKT7p
- mWBjmF7Vla75VMoQ2Fmir5TCzqx15iL5aYaIXyVY7QPTwBtsJ1wYRNPvmFWPBfm36OHP
- SI5Vj3TVysg/QFjhHcexyj1ppnJnAw9POiZqtqTzDp2Vh5512NdSJNf7Fiijx+kl8huV
- OhfNf8zP0zPnb7a1g2iSuCTL04BtrXn+BrzLB0i2EdllnHXx2UB9rWdJXwTlnDaEmbHZ
- QDpbYyqEpEt+vQfYttuvgVkmRYPRvzSoTiav3Wy4CnDtEAN9S2ikH06P0dG78bNVN526
- gn4g==
+ bh=uPT5IquUj9tb4+7LJOV+d1U0Pln7SxXlXrcpMKrPgHk=;
+ b=UVtRUyQevj4Ridz78/lh47/44VmynhJ/hApAUTmtdKarVQ3vih5OcCEg8tmjsDvECz
+ zsN0Lk/fwNV3m8mzICWo5GyBOyOLGrneiPUBxwejiM6A3yqw7vV6zordSsrUWFiBhtQ5
+ OvA/a6wncQAR6YKCp0ZWZC0U6FMuR8QV//6NBhdaYbG9+vuylxkdi/MajR2phMaVeVtr
+ DLzPRTLUnZrvTYCm66joUGr52wmGg4oo425fVS4tmjdMqR01WBMNACxMzSZv/0PWDFh7
+ Z37iZqNHMLkx0b/aTF11iS28ATBIsozFxHfyWMbudgPl6lzddk78q4bEUHmSXaDjtKXz
+ JZWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682276441; x=1684868441;
+ d=1e100.net; s=20221208; t=1682276448; x=1684868448;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=LJILDGNLjVRjQd1j+SBea1d2py7wMKcHW5Ya8Mh6Ox8=;
- b=YY9Vhmh6/vYBn6OvJu43rwSrCmlVvneBTxeMMB8UPdAQ3DDwTLcaaG+iw7MT3reIY9
- 6z7eH8+EK+o08+hPpbUeGA3RcVK4E8cq+EbjP02LcVs1hSoAWkgm9YhEDzyvAW3VWO0E
- QdPot/3N80Nl2NAQssZHKeOtdzVNt0mhyC0Vc0JrJ78IKL6fxJMa5a5HGccssohM1lC6
- Pgbldd1FGryBEYGApMSERH4VZxXKjLBxorhYfd6dK/ZBB2Qwak0Dlws0oGzMd/RxeILy
- Hqk8F65LvkbzOS3lGPSx/IHSsaipN4jv0c+2QSA2xMO8BIIvVtzNY/FFy6478mthLvSm
- 0AOg==
-X-Gm-Message-State: AAQBX9fXIkAb9iXCgHLadWZhfRlFC8mOnX1DSPhbrtLmN6FZjQS+TRYr
- LgiB4rTPypeRNrPvM0k8Z0X19g==
-X-Google-Smtp-Source: AKy350Y+pgC+MoUzx5t36Cl9CQbHbTcRTY/YKJPH+6dEkwEAf/dg53rP1qV5+9A3+b9iyECoxcUlAw==
-X-Received: by 2002:adf:ec8b:0:b0:2fb:a3e:7cba with SMTP id
- z11-20020adfec8b000000b002fb0a3e7cbamr7338549wrn.53.1682276441288; 
- Sun, 23 Apr 2023 12:00:41 -0700 (PDT)
+ bh=uPT5IquUj9tb4+7LJOV+d1U0Pln7SxXlXrcpMKrPgHk=;
+ b=Ed9KYqhsqS6Qhluklhq6bj937G6Gr5YLvp0DqncXvGHXHAIDnw8qzz51UR9BlvQo3g
+ UckprrChyPBfa2ge7CZivpztA283rqaqMlr3LANXXPVmM8HaNcP6g0/37wTogf9cTnoM
+ Ea/4SLwqiSacxfuuLqwVkR9/fZGXMljsLlKXk0WGDkK7legYvUH8CyNc5953IwJPOgSO
+ 13cX1udE3kbnprxm9LfOqLOg+agIzjETr6lBCeTypO7OKdfA3zwW+Y7IkX+oNSzzoqUs
+ K9sfL58yMx+qVlXT4s9RWkM35Kfjjbu0frjQH3tG2eVw+eZnCMU+YfubmbB42n/OrPod
+ pYdw==
+X-Gm-Message-State: AAQBX9erh20YAyuSUh5QX8TxLX1QAAV+FJ76EuKg6jUnmLt77SzeDSut
+ MXSOcG9SDE6ONlVBKxjCLiGpKA==
+X-Google-Smtp-Source: AKy350Yeq3c9B2r9pkbZeVMqTz7H4+rISROxT/CGtojf65uqoVqYHqUyvN/uciYGeBdjpsOAIyPy7w==
+X-Received: by 2002:a5d:490a:0:b0:2fa:631a:9f23 with SMTP id
+ x10-20020a5d490a000000b002fa631a9f23mr8365465wrq.2.1682276447863; 
+ Sun, 23 Apr 2023 12:00:47 -0700 (PDT)
 Received: from [192.168.109.175] (119.red-88-28-13.dynamicip.rima-tde.net.
  [88.28.13.119]) by smtp.gmail.com with ESMTPSA id
- j22-20020a5d6e56000000b002fbb285b01fsm9198543wrz.25.2023.04.23.12.00.39
+ x24-20020a1c7c18000000b003f183127434sm10299253wmc.30.2023.04.23.12.00.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 23 Apr 2023 12:00:40 -0700 (PDT)
-Message-ID: <18186e8b-2a7a-950b-8358-94063263210c@linaro.org>
-Date: Sun, 23 Apr 2023 20:50:45 +0200
+ Sun, 23 Apr 2023 12:00:47 -0700 (PDT)
+Message-ID: <b99df8e5-6b3b-ca74-7733-433cd5643fd4@linaro.org>
+Date: Sun, 23 Apr 2023 20:57:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.10.0
-Subject: Re: [PATCH v2 32/54] tcg: Replace REG_P with arg_loc_reg_p
+Subject: Re: [PATCH v2 34/54] tcg: Widen helper_*_st[bw]_mmu val arguments
 Content-Language: en-US
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org
 References: <20230411010512.5375-1-richard.henderson@linaro.org>
- <20230411010512.5375-33-richard.henderson@linaro.org>
+ <20230411010512.5375-35-richard.henderson@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230411010512.5375-33-richard.henderson@linaro.org>
+In-Reply-To: <20230411010512.5375-35-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
@@ -85,18 +85,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Apr 2023 19:00:46 -0000
+X-List-Received-Date: Sun, 23 Apr 2023 19:00:53 -0000
 
 On 11/4/23 03:04, Richard Henderson wrote:
-> An inline function is safer than a macro, and REG_P
-> was rather too generic.
+> While the old type was correct in the ideal sense,
+> some ABIs require the argument to be zero-extended.
+> Using uint32_t for all such values is a decent compromise.
 > 
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   tcg/tcg-internal.h |  4 ----
->   tcg/tcg.c          | 16 +++++++++++++---
->   2 files changed, 13 insertions(+), 7 deletions(-)
+>   include/tcg/tcg-ldst.h | 10 +++++++---
+>   accel/tcg/cputlb.c     |  6 +++---
+>   2 files changed, 10 insertions(+), 6 deletions(-)
+
+
+> -void helper_ret_stb_mmu(CPUArchState *env, target_ulong addr, uint8_t val,
+> +/*
+> + * Value extended to at least uint32_t, so that some abis do not require
+
+s/abis/ABIs/
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
+> + * zero-extension from uint8_t or uint16_t.
+> + */
 
