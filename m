@@ -1,67 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pqex7-0000CH-0u
-	for mharc-qemu-riscv@gnu.org; Sun, 23 Apr 2023 15:00:49 -0400
+	id 1pqexC-0000Fw-IA
+	for mharc-qemu-riscv@gnu.org; Sun, 23 Apr 2023 15:00:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pqews-0008Ub-Qf
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pqex0-0008VC-B1
  for qemu-riscv@nongnu.org; Sun, 23 Apr 2023 15:00:44 -0400
 Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pqewo-0004Lw-30
- for qemu-riscv@nongnu.org; Sun, 23 Apr 2023 15:00:32 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pqewv-0004Lw-Pu
+ for qemu-riscv@nongnu.org; Sun, 23 Apr 2023 15:00:40 -0400
 Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-3f09b4a1527so37804865e9.0
- for <qemu-riscv@nongnu.org>; Sun, 23 Apr 2023 12:00:28 -0700 (PDT)
+ 5b1f17b1804b1-3f09b4a1527so37805885e9.0
+ for <qemu-riscv@nongnu.org>; Sun, 23 Apr 2023 12:00:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1682276427; x=1684868427;
+ d=linaro.org; s=google; t=1682276437; x=1684868437;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=hmvK9R9E09Fx6OSvVbAGm4GEl0DxBx1emhyImrOKsZI=;
- b=KTDR+JhrpvxrK8r0lzdey+EheYvaA4v69+tzGboeLsxwPfqWwMKh16EkM8Q9kSnJA4
- 0Al57bx2cgiSDxfxxdBKRooMATTWatnHoZsE3axZ/wI+4TM3+Ra3K2b5UCBf3M4ixwJ6
- wAmBPxLki4koNi7LF4uC+Oh2h41TTJUqjutSTH3AruEpNlGU/bZvOJu4IWiJYFFtvmrE
- IWV7m/w+IuA+6AwO6ljy1wZXlN+zFxvM3dPOavAg0RA+2D62vB/rffv90VI6Li62jk+f
- uKHW6Bojo3Y2nXN9hynlAFIuP2kF3FHM0R+/H4S+qUJhn5qW6+bDY0HpnlNA6dsZkGAu
- /vCw==
+ bh=YhuxIZ5v5vQjaZrSWGTo/f9QQ4mFP5ML307cPL2FIEk=;
+ b=Ntx4jM99/Q9ONKMBmHdhFE5ygF+oAKqV3517Oca+osndxlYFDD5O5sTbO86P9BZ+9U
+ PwW2fexBGdy8Upataf0wb2FDaQK9L5hhyjU64HDsxKFnqai7+sdsawNZwzfxYpnDrY0C
+ CZpW7QfnG2VE0DHR350HmmFSbVRrVXwYq2yDwKT0NOPTCPVJzYHPesLryNwRQ6ML7p4H
+ fxBflApFTYaTDLx6bRb/YqhVLt3aiiyu6tg0//eSPs0vyxasbhnN9YHONL9V/za6AYYu
+ Jab0d9gG9moheQbZ2+HU96cn0kO/vU4rKiLCwvx0vxWLUMoj9Zq/Wmxm1uyRlTfB3Cf/
+ t8UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682276427; x=1684868427;
+ d=1e100.net; s=20221208; t=1682276437; x=1684868437;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hmvK9R9E09Fx6OSvVbAGm4GEl0DxBx1emhyImrOKsZI=;
- b=aoxPZf+TWzEJ8GchZFbcd1jJ8jI1tM+NUGkkAwmpl+fnH+RM+wnas3KQsaDKdGBNTQ
- 957Z3X8o5fPI00xqX/F8T3dLQsXkeBW5G8twviS/7Vt2h6E/TR0EJvUJNLVqr27z9A5k
- aExLMEf3XRnnRAJhpeeOVszTJQr/YN+EK2aY+9FYFY1L8nzMjF5M4ew0IGpQzG5T3Uwy
- GMzZDFgns0Bga+NCf+SIgvFiKzilrlrxeeFVVxTZybKBiUkrDAxAFwa9RzFsJlol4zDw
- rm8sXWKqc0x32y1PyBRyy8tpWkAkPL/9tPcel3DqIFuATIkaY723Rrj9uAXPQi8CX9jA
- CSgQ==
-X-Gm-Message-State: AAQBX9cLQxtdQqQAlbKQtkuPwFr7TxbujF/glSv+++tuznZJQ706WOGa
- GsPSNZxLWMTb+csKq/NlFHvqGw==
-X-Google-Smtp-Source: AKy350agFiv2tlYf3LvghBBNoWVIfxzEW9S/wV+wQoSaWvxZlHZ5rygXPsT54chUGT7e0Z+PO0t1qQ==
-X-Received: by 2002:a7b:c3d2:0:b0:3f0:8034:f77e with SMTP id
- t18-20020a7bc3d2000000b003f08034f77emr6137048wmj.20.1682276426998; 
- Sun, 23 Apr 2023 12:00:26 -0700 (PDT)
+ bh=YhuxIZ5v5vQjaZrSWGTo/f9QQ4mFP5ML307cPL2FIEk=;
+ b=FoZj5vjE3yx7l7FEh+5EHnRTORNfytDdggYa1DbD93D0tIEx0ZL50XuHoIX0rLI6Rd
+ sJ5HU0DsRnhnRxOZw1wuuNBQBhoFlEHUevimm24Crdrvw8NW5JSglKXVlXb/wMIrl+la
+ GGq12PeuEbiLsftXGVipQhn6kuBPgZ+Lfv+uRpVfcaG4f1PbMR9tuA+AYT1KEN806Zkz
+ v5zQJt0m3xNvhrsN+l7dE4tJEpEajbT405R8kh/byYk09j318lGkH40JIyiuyyhWfmxW
+ nWcQNJ6iXTKkW9GWPHA+p3JER52JY6dYtzwSZmL8XAkhTWUyqsuP48WlpP5540xYziRq
+ 3ZIA==
+X-Gm-Message-State: AAQBX9cnyyqydJu9JOQYxd40SoZ7g0YUaWI8u4MtDqBqzHE5pzsQxFa2
+ r+MnJjUmgQbp/S+lcl9THxCnWw==
+X-Google-Smtp-Source: AKy350ayMjqV5/OBjzCho3zLEsIYb5RwJu/U/xECxnU6KX1JmwfHNxr6JZG3PHBTcBoj+YuBKfdwlw==
+X-Received: by 2002:adf:fe02:0:b0:2f4:de63:a0b4 with SMTP id
+ n2-20020adffe02000000b002f4de63a0b4mr7956320wrr.64.1682276436949; 
+ Sun, 23 Apr 2023 12:00:36 -0700 (PDT)
 Received: from [192.168.109.175] (119.red-88-28-13.dynamicip.rima-tde.net.
  [88.28.13.119]) by smtp.gmail.com with ESMTPSA id
- i40-20020a05600c4b2800b003ee6aa4e6a9sm13572503wmp.5.2023.04.23.12.00.25
+ s3-20020a5d6a83000000b002fe13ec49fasm9113641wru.98.2023.04.23.12.00.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 23 Apr 2023 12:00:26 -0700 (PDT)
-Message-ID: <16091804-4074-698a-3ee1-9c3ba09b6729@linaro.org>
-Date: Sun, 23 Apr 2023 20:35:54 +0200
+ Sun, 23 Apr 2023 12:00:36 -0700 (PDT)
+Message-ID: <0538aac6-8510-6ed5-c5f0-627b90a09bd7@linaro.org>
+Date: Sun, 23 Apr 2023 20:48:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.10.0
-Subject: Re: [PATCH v2 28/54] tcg/riscv: Rationalize args to
- tcg_out_qemu_{ld,st}
+Subject: Re: [PATCH v2 25/54] tcg/ppc: Rationalize args to tcg_out_qemu_{ld,st}
 Content-Language: en-US
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org
 References: <20230411010512.5375-1-richard.henderson@linaro.org>
- <20230411010512.5375-29-richard.henderson@linaro.org>
+ <20230411010512.5375-26-richard.henderson@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230411010512.5375-29-richard.henderson@linaro.org>
+In-Reply-To: <20230411010512.5375-26-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
@@ -90,8 +89,9 @@ X-List-Received-Date: Sun, 23 Apr 2023 19:00:45 -0000
 
 On 11/4/23 03:04, Richard Henderson wrote:
 > Interpret the variable argument placement in the caller.
-> Mark the argument registers const, because they must be passed to
-> add_qemu_ldst_label unmodified.
+> Mark the argument register const, because they must be passed to
+> add_qemu_ldst_label unmodified.  This requires a bit of local
+> variable renaming, because addrlo was being modified.
 > 
 > Pass data_type instead of is64 -- there are several places where
 > we already convert back from bool to type.  Clean things up by
@@ -99,8 +99,8 @@ On 11/4/23 03:04, Richard Henderson wrote:
 > 
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   tcg/riscv/tcg-target.c.inc | 68 +++++++++++++++-----------------------
->   1 file changed, 26 insertions(+), 42 deletions(-)
+>   tcg/ppc/tcg-target.c.inc | 164 +++++++++++++++++++++------------------
+>   1 file changed, 89 insertions(+), 75 deletions(-)
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
