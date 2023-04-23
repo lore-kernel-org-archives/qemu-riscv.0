@@ -1,57 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pqCul-0007pr-TM
-	for mharc-qemu-riscv@gnu.org; Sat, 22 Apr 2023 09:04:31 -0400
+	id 1pqUBX-0004NW-1o
+	for mharc-qemu-riscv@gnu.org; Sun, 23 Apr 2023 03:30:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pqCuh-0007ms-LE; Sat, 22 Apr 2023 09:04:27 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pqCud-0004Uo-CM; Sat, 22 Apr 2023 09:04:27 -0400
-Received: from localhost.localdomain (unknown [180.165.241.15])
- by APP-01 (Coremail) with SMTP id qwCowAAHTJxI20NkLKGxCA--.21573S2;
- Sat, 22 Apr 2023 21:04:09 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn,
- lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v4 0/7] target/riscv: Fix PMP related problem
-Date: Sat, 22 Apr 2023 21:03:22 +0800
-Message-Id: <20230422130329.23555-1-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pqUBW-0004NA-0D
+ for qemu-riscv@nongnu.org; Sun, 23 Apr 2023 03:30:58 -0400
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pqUBU-0001r5-FB
+ for qemu-riscv@nongnu.org; Sun, 23 Apr 2023 03:30:57 -0400
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-2febac9cacdso1914779f8f.1
+ for <qemu-riscv@nongnu.org>; Sun, 23 Apr 2023 00:30:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1682235055; x=1684827055;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=N24O491mJEhNcIKEytZSGussY2E41uyw6/N9ehBdK4Q=;
+ b=l2DfMTJpr+oNZoik/8D6RORvbvrQw4ZFJvFpzuhX4SXM8huNXM5KcKiTOymGVFCIPi
+ rg01xNMz4yfc0rRXE6Jhsa2epLnZhTZZQeVr/VijVZG7ZHX8O5Qh2DTC/C/i6zqCMU+5
+ U22cGEi7087UhMvJJ+1biPser2E+OVJ9oKW9q365z/alzM2RENZLYzNGd3udqJfYGkbX
+ ueaTi3ciQJzX2EitrIiWEFOS3Zvm2qq9b8x13i39eaNIgTFClcXiq4vnqQHTuwLxe8vg
+ VF1djDqZ6Y1o1MtFjW6/vCDLfV3cFdF8766ldrdCdP1mtfNRJLWrO7EMO+QcEw0rryzS
+ 0bFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1682235055; x=1684827055;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=N24O491mJEhNcIKEytZSGussY2E41uyw6/N9ehBdK4Q=;
+ b=EflTnBaIEHsCwOTkwwmZqzBTWREVrY9elcgeSxWjBdOEULNRCCwPUSc7m5iSagZJ8j
+ 72oc9W/+P3cngAN2/XYLfrucycG7cZf05fJbpYrAsD3X+cesTXqqHeGOHg1+vlXidmcX
+ Y182cnOdtfUyLR9kqoiIbqLKidUnm8oyW+p2eGphhhA6a0pYLLQdLiXo1lcOGmvUH6+U
+ WUGm4h+t0AduLSIvXMN9VSmF3kdpJMZT7YLYgb/wfztNuzYlYs0qVFBJOvOV4DpDEwPP
+ Fsgn2Vz+6Ezdg9WIssuYkF0/cXjQzSo8emBbe66EudXe1BxOT/yV4OQUboNu0TQe46Xb
+ ZRzg==
+X-Gm-Message-State: AAQBX9fMOkuHeAFc0PKzXlFVP5cq8Vcegb6mtE4zrKvpgV7sqZroViP7
+ BDFb3i7G+Coc6kTEAVP55Vchbw==
+X-Google-Smtp-Source: AKy350Z6oBqvUqrf5glxd9wdB8xsV8KfNrqCkGkwyN4G9kYsw/ghde+lOKWoPrOg7UEQyMPkOYOuWA==
+X-Received: by 2002:adf:f209:0:b0:2f5:ace2:8737 with SMTP id
+ p9-20020adff209000000b002f5ace28737mr7817660wro.32.1682235054927; 
+ Sun, 23 Apr 2023 00:30:54 -0700 (PDT)
+Received: from [10.43.4.99] (cust-west-loneq8-46-193-226-34.wb.wifirst.net.
+ [46.193.226.34]) by smtp.gmail.com with ESMTPSA id
+ z2-20020a5d4c82000000b003021288a56dsm7198959wrs.115.2023.04.23.00.30.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 23 Apr 2023 00:30:54 -0700 (PDT)
+Message-ID: <db8c5197-74b4-497a-587f-994b100d4344@linaro.org>
+Date: Sun, 23 Apr 2023 08:30:53 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [PATCH v2 31/54] tcg: Move TCGLabelQemuLdst to tcg.c
+Content-Language: en-US
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-ppc@nongnu.org
+References: <20230411010512.5375-1-richard.henderson@linaro.org>
+ <20230411010512.5375-32-richard.henderson@linaro.org>
+ <87d1ac98-17b9-7321-05d9-fbcb158f978b@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <87d1ac98-17b9-7321-05d9-fbcb158f978b@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAAHTJxI20NkLKGxCA--.21573S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7WrWxKFWktw4kGr1UuF4kJFb_yoW5JF48pF
- Z3C345tr4DtrW3Xr43tr17Zr1rArs5WF4Ut3W2kw1rZ3WagFyrCrWvk3yFkFWUJF95WrZx
- KF4jyrWv9F4UZaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkE14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
- n2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
- 0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFyl
- IxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxV
- AFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j
- 6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUdHU
- DUUUUU=
-X-Originating-IP: [180.165.241.15]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x435.google.com
+X-Spam_score_int: -15
+X-Spam_score: -1.6
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.047,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ SUSPICIOUS_RECIPS=2.51,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -64,68 +89,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Apr 2023 13:04:27 -0000
+X-List-Received-Date: Sun, 23 Apr 2023 07:30:58 -0000
 
-This patchset tries to fix the PMP bypass problem issue https://gitlab.com/qemu-project/qemu/-/issues/1542:
+On 4/21/23 23:29, Philippe Mathieu-Daudé wrote:
+> On 11/4/23 03:04, Richard Henderson wrote:
+>> This will shortly be used by sparc64 without also using
+>> TCG_TARGET_NEED_LDST_LABELS.
+> 
+> Is that in this series?
 
-TLB will be cached if the matched PMP entry cover the whole page.  However PMP entries with higher priority may cover part of the page (but not match the access address), which means different regions in this page may have different permission rights. So it also cannot be cached (patch 1).
-
-Writing to pmpaddr didn't trigger tlb flush (patch 3).
-
-We set the tlb_size to 1 to make the TLB_INVALID_MASK set, and and the next access will again go through tlb_fill. However, this way will not work in tb_gen_code() => get_page_addr_code_hostp(): the TLB host address will be cached, and the following instructions can use this host address directly which may lead to the bypass of PMP related check (patch 5).
-
-The port is available here:
-https://github.com/plctlab/plct-qemu/tree/plct-pmp-fix-v4
-
-v4:
-
-Update comments for Patch 1, and move partial check code from Patch 2 to Patch 1
-
-Restore log message change in Patch 2
-
-Update commit message and the way to improve the problem in Patch 6
+No.  I've been cherry-picking patches here.
 
 
-v3:
-
-Ignore disabled PMP entry in pmp_get_tlb_size() in Patch 1
-
-Drop Patch 5, since tb jmp cache have been flushed in tlb_flush, so flush tb seems unnecessary.
-
-Fix commit message problems in Patch 8 (Patch 7 in new patchset)
-
-
-v2:
-
-Update commit message for patch 1
-
-Add default tlb_size when pmp is diabled or there is no rules and only get the tlb size when translation success in patch 2
-
-Update get_page_addr_code_hostp instead of probe_access_internal to fix the cached host address for instruction fetch in patch 6
-
-Add patch 7 to make the short up really work in pmp_hart_has_privs
-
-Add patch 8 to use pmp_update_rule_addr() and pmp_update_rule_nums() separately
-
-
-Weiwei Li (7):
-  target/riscv: Update pmp_get_tlb_size()
-  target/riscv: Move pmp_get_tlb_size apart from
-    get_physical_address_pmp
-  target/riscv: Flush TLB when pmpaddr is updated
-  target/riscv: Flush TLB only when pmpcfg/pmpaddr really changes
-  accel/tcg: Uncache the host address for instruction fetch when tlb
-    size < 1
-  target/riscv: Make the short cut really work in pmp_hart_has_privs
-  target/riscv: Separate pmp_update_rule() in pmpcfg_csr_write
-
- accel/tcg/cputlb.c        |  5 +++
- target/riscv/cpu_helper.c | 19 +++-----
- target/riscv/pmp.c        | 91 +++++++++++++++++++++++++++++----------
- target/riscv/pmp.h        |  3 +-
- 4 files changed, 80 insertions(+), 38 deletions(-)
-
--- 
-2.25.1
-
+r~
 
