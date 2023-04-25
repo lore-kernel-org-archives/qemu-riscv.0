@@ -1,74 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1prOS2-0005uR-I1
+	id 1prOS3-0005y2-T3
 	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 15:35:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1prORp-0005f7-HS
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:35:35 -0400
-Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132])
+ id 1prORz-0005ne-Oy
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:35:43 -0400
+Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1prORO-0005Lm-JZ
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:35:31 -0400
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-4eed6ddcae1so26825483e87.0
- for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 12:35:06 -0700 (PDT)
+ id 1prORf-0005VF-8m
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:35:41 -0400
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2a8ba23a2abso59679671fa.2
+ for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 12:35:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1682451304; x=1685043304;
+ d=linaro.org; s=google; t=1682451321; x=1685043321;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eK0NEMONjmg/1ucpaSNt26amgB3shibpw1tARmPQjiE=;
- b=JAGwvaafapQwmMsl+A0SFwjFn3gsSFSfYOWnUb3D7UsviPVpuhCvdkNJ6UTlTfHX/8
- /AQMXamibfOmKon7evVEWelZMa7kzv7WRavTmhs2nzKbLTtsbQNoxt+4TAtUrCPE3WUH
- Rb95VAhzQ83X+JFR6kQaBcIeTNSNPQ71hXj616XLUqs9oyUjwlelwMFC/QDEpM5C2DUr
- YwyjeVf4zVUbecdM7ski4KztZXetMOC+9QUKoKSuVEXqo+IEjOhF4i7bSrjkjLufPss3
- m8vxBsmh+oxF3e7omK5GOXUuEnu5x+Gb+9lU/pNF5tMzFlKVNqJANLcm5lKxGud+38UX
- PWsQ==
+ bh=mdwZGwX/L+PZehj7YraClACaYMkMZgAjwbJK6U9Rhns=;
+ b=ttrBwWoaPI5iuuM/4Bxv+9q5lAClSmWqAlX12Il2Aazlodl+VDAYzaRDDJZp31BMT1
+ JZQ/8W+odMa50KxaFcO0+BAvEXJQHxCwet5XRl7W0iBIg/pLuYMIYsJP9MGpejN4fOcI
+ RHKrZr3pw++oQO7JtM4gxW3PLDTJkxBVV7/cGWi/iMjeccGlkvJJdIWFhVDs9Gycpx8g
+ gUblM+ZMk/SMod/jq/0a6FQwkrwn6y8m/DBPBC9B8/y66SV+jG5Mwxqylk4QYcsiocG6
+ 89ueb0uYZcYPY/ELQAMxvYndPgApFpxUACPDIYw3oFHMwJtsa+zaIGh7T1G/qRbVtv5k
+ Yb1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682451304; x=1685043304;
+ d=1e100.net; s=20221208; t=1682451321; x=1685043321;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eK0NEMONjmg/1ucpaSNt26amgB3shibpw1tARmPQjiE=;
- b=ab95IB2GWtoMSYZn3ccV25RIOy1pEqk+FTv/tIGloKpM2J1bSHN9XxnCOjBMx0X8Nn
- /ZMP7b5wUUlodVjxIar3SWq1N9erCuodElwRy47/2f2RWiu7bXzIUPAgeyTl3Mlqd7uz
- nbo8oNpe1FbW4NBtxSJqk/JKaJ9+NkAaQvMDgEtQW3FObi3luAFao4Het9usC210HsfG
- GrSuWnyJlGhvSu0mKYUwDLMMKvZI0wikHyJlIvyp9PnAqAE0SGNhsefnoiBwPM3KKomX
- 0b0Bngp6fgMF/1IVvc/MzndEWhOf7YFckdTHHEtUNCvkZdKZzjhi2fOW2YCj/0oG+bCU
- /Jyw==
-X-Gm-Message-State: AAQBX9ejWtQvh7CTMqohGEY0YFB1n6+F6qQ5f1p8U5XeNF315VPMbfRo
- MamMuMu5mDvyWYhWKVgXX30DRhCCC1PzOT+COAzmVA==
-X-Google-Smtp-Source: AKy350YbaeHKjfb5Y4U8/Hdu6CEVshiFTJrHjJBJ25nQUPqma0TZk3muie7Wv2MacL9JfR9GvLsWbQ==
-X-Received: by 2002:a2e:aaa3:0:b0:2a8:ea1f:428c with SMTP id
- bj35-20020a2eaaa3000000b002a8ea1f428cmr4079149ljb.23.1682451303827; 
- Tue, 25 Apr 2023 12:35:03 -0700 (PDT)
+ bh=mdwZGwX/L+PZehj7YraClACaYMkMZgAjwbJK6U9Rhns=;
+ b=AcRjjlc9OhiJrMStkKzKHNFbr6x/BrAfzh8mOnGEm5u3KxrLaoheR4S+NYvP4s9Q65
+ NHAQ3hLQ8/7+FcfBw4AbMgQPiHWrhfMx2ridxpNqQFIHQ5faO+yV3gXbuLvGFM0OmlkQ
+ 4rYCHXQGRshdellj+pXy9Fkitwuj30Sch+xLp+jwR7Ye6ltBlY92KvpK3nKRi5lik8Um
+ hs9JJE2UvRT0kF7+fPqjItTPW3F4iHihA8mVWygx+zZw3Um/qrl0L9hEPk2OKm0sVdGW
+ 3tQ4hgvCwO/tI665cEADNLbfG/dMIygzE9+ZsVlylDQ78YiXj3bux5u21nunLgIwnA8c
+ b3bg==
+X-Gm-Message-State: AAQBX9dQlBRss5NAGcpjYMgaQIwF73wjpvGy3dyBVmY3NJgLwL4h4D/2
+ GDxJAA4WaaEJ3fNg3sZtg+9FHg==
+X-Google-Smtp-Source: AKy350ZJoxrysuo50EMXsaB727yy7D2101SA2/COo7IC7c02JZlG0egaJUrZEr6lFL5MsvTA0bHIAA==
+X-Received: by 2002:a2e:9cc9:0:b0:2a7:b052:f59 with SMTP id
+ g9-20020a2e9cc9000000b002a7b0520f59mr3847537ljj.5.1682451321578; 
+ Tue, 25 Apr 2023 12:35:21 -0700 (PDT)
 Received: from stoup.. ([91.209.212.61]) by smtp.gmail.com with ESMTPSA id
- z23-20020a2e8857000000b002a8c271de33sm2160484ljj.67.2023.04.25.12.35.01
+ z23-20020a2e8857000000b002a8c271de33sm2160484ljj.67.2023.04.25.12.35.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Apr 2023 12:35:03 -0700 (PDT)
+ Tue, 25 Apr 2023 12:35:21 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, git@xen0n.name, jiaxun.yang@flygoat.com,
  philmd@linaro.org
-Subject: [PATCH v3 35/57] accel/tcg: Remove helper_unaligned_{ld,st}
-Date: Tue, 25 Apr 2023 20:31:24 +0100
-Message-Id: <20230425193146.2106111-36-richard.henderson@linaro.org>
+Subject: [PATCH v3 39/57] tcg: Introduce tcg_target_has_memory_bswap
+Date: Tue, 25 Apr 2023 20:31:28 +0100
+Message-Id: <20230425193146.2106111-40-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230425193146.2106111-1-richard.henderson@linaro.org>
 References: <20230425193146.2106111-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::132;
- envelope-from=richard.henderson@linaro.org; helo=mail-lf1-x132.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::230;
+ envelope-from=richard.henderson@linaro.org; helo=mail-lj1-x230.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -82,52 +82,392 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Apr 2023 19:35:35 -0000
+X-List-Received-Date: Tue, 25 Apr 2023 19:35:44 -0000
 
-These functions are now unused.
+Replace the unparameterized TCG_TARGET_HAS_MEMORY_BSWAP macro
+with a function with a memop argument.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- include/tcg/tcg-ldst.h |  6 ------
- accel/tcg/user-exec.c  | 10 ----------
- 2 files changed, 16 deletions(-)
+ tcg/aarch64/tcg-target.h         |  1 -
+ tcg/arm/tcg-target.h             |  1 -
+ tcg/i386/tcg-target.h            |  3 ---
+ tcg/loongarch64/tcg-target.h     |  2 --
+ tcg/mips/tcg-target.h            |  2 --
+ tcg/ppc/tcg-target.h             |  1 -
+ tcg/riscv/tcg-target.h           |  2 --
+ tcg/s390x/tcg-target.h           |  2 --
+ tcg/sparc64/tcg-target.h         |  1 -
+ tcg/tcg-internal.h               |  2 ++
+ tcg/tci/tcg-target.h             |  2 --
+ tcg/tcg-op.c                     | 20 +++++++++++---------
+ tcg/aarch64/tcg-target.c.inc     |  5 +++++
+ tcg/arm/tcg-target.c.inc         |  5 +++++
+ tcg/i386/tcg-target.c.inc        |  5 +++++
+ tcg/loongarch64/tcg-target.c.inc |  5 +++++
+ tcg/mips/tcg-target.c.inc        |  5 +++++
+ tcg/ppc/tcg-target.c.inc         |  5 +++++
+ tcg/riscv/tcg-target.c.inc       |  5 +++++
+ tcg/s390x/tcg-target.c.inc       |  5 +++++
+ tcg/sparc64/tcg-target.c.inc     |  5 +++++
+ tcg/tci/tcg-target.c.inc         |  5 +++++
+ 22 files changed, 63 insertions(+), 26 deletions(-)
 
-diff --git a/include/tcg/tcg-ldst.h b/include/tcg/tcg-ldst.h
-index 64f48e6990..7dd57013e9 100644
---- a/include/tcg/tcg-ldst.h
-+++ b/include/tcg/tcg-ldst.h
-@@ -60,10 +60,4 @@ void helper_stq_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
- void helper_st16_mmu(CPUArchState *env, target_ulong addr, Int128 val,
-                      MemOpIdx oi, uintptr_t retaddr);
+diff --git a/tcg/aarch64/tcg-target.h b/tcg/aarch64/tcg-target.h
+index 3c0b0d312d..378e01d9d8 100644
+--- a/tcg/aarch64/tcg-target.h
++++ b/tcg/aarch64/tcg-target.h
+@@ -154,7 +154,6 @@ extern bool have_lse2;
+ #define TCG_TARGET_HAS_cmpsel_vec       0
  
--#ifdef CONFIG_USER_ONLY
--
--G_NORETURN void helper_unaligned_ld(CPUArchState *env, target_ulong addr);
--G_NORETURN void helper_unaligned_st(CPUArchState *env, target_ulong addr);
--
--#endif /* CONFIG_USER_ONLY */
- #endif /* TCG_LDST_H */
-diff --git a/accel/tcg/user-exec.c b/accel/tcg/user-exec.c
-index 98a24fc308..b6b9112118 100644
---- a/accel/tcg/user-exec.c
-+++ b/accel/tcg/user-exec.c
-@@ -889,16 +889,6 @@ void page_reset_target_data(target_ulong start, target_ulong last) { }
+ #define TCG_TARGET_DEFAULT_MO (0)
+-#define TCG_TARGET_HAS_MEMORY_BSWAP     0
+ #define TCG_TARGET_NEED_LDST_LABELS
+ #define TCG_TARGET_NEED_POOL_LABELS
  
- /* The softmmu versions of these helpers are in cputlb.c.  */
+diff --git a/tcg/arm/tcg-target.h b/tcg/arm/tcg-target.h
+index def2a189e6..4c2d3332d5 100644
+--- a/tcg/arm/tcg-target.h
++++ b/tcg/arm/tcg-target.h
+@@ -150,7 +150,6 @@ extern bool use_neon_instructions;
+ #define TCG_TARGET_HAS_cmpsel_vec       0
  
--void helper_unaligned_ld(CPUArchState *env, target_ulong addr)
--{
--    cpu_loop_exit_sigbus(env_cpu(env), addr, MMU_DATA_LOAD, GETPC());
--}
+ #define TCG_TARGET_DEFAULT_MO (0)
+-#define TCG_TARGET_HAS_MEMORY_BSWAP     0
+ #define TCG_TARGET_NEED_LDST_LABELS
+ #define TCG_TARGET_NEED_POOL_LABELS
+ 
+diff --git a/tcg/i386/tcg-target.h b/tcg/i386/tcg-target.h
+index 0421776cb8..8fe6958abd 100644
+--- a/tcg/i386/tcg-target.h
++++ b/tcg/i386/tcg-target.h
+@@ -240,9 +240,6 @@ extern bool have_atomic16;
+ #include "tcg/tcg-mo.h"
+ 
+ #define TCG_TARGET_DEFAULT_MO (TCG_MO_ALL & ~TCG_MO_ST_LD)
 -
--void helper_unaligned_st(CPUArchState *env, target_ulong addr)
--{
--    cpu_loop_exit_sigbus(env_cpu(env), addr, MMU_DATA_STORE, GETPC());
--}
+-#define TCG_TARGET_HAS_MEMORY_BSWAP  have_movbe
 -
- static void *cpu_mmu_lookup(CPUArchState *env, abi_ptr addr,
-                             MemOp mop, uintptr_t ra, MMUAccessType type)
+ #define TCG_TARGET_NEED_LDST_LABELS
+ #define TCG_TARGET_NEED_POOL_LABELS
+ 
+diff --git a/tcg/loongarch64/tcg-target.h b/tcg/loongarch64/tcg-target.h
+index 17b8193aa5..75c3d80ed2 100644
+--- a/tcg/loongarch64/tcg-target.h
++++ b/tcg/loongarch64/tcg-target.h
+@@ -173,6 +173,4 @@ typedef enum {
+ 
+ #define TCG_TARGET_NEED_LDST_LABELS
+ 
+-#define TCG_TARGET_HAS_MEMORY_BSWAP 0
+-
+ #endif /* LOONGARCH_TCG_TARGET_H */
+diff --git a/tcg/mips/tcg-target.h b/tcg/mips/tcg-target.h
+index 42bd7fff01..47088af9cb 100644
+--- a/tcg/mips/tcg-target.h
++++ b/tcg/mips/tcg-target.h
+@@ -205,8 +205,6 @@ extern bool use_mips32r2_instructions;
+ #endif
+ 
+ #define TCG_TARGET_DEFAULT_MO           0
+-#define TCG_TARGET_HAS_MEMORY_BSWAP     0
+-
+ #define TCG_TARGET_NEED_LDST_LABELS
+ 
+ #endif
+diff --git a/tcg/ppc/tcg-target.h b/tcg/ppc/tcg-target.h
+index af81c5a57f..d55f0266bb 100644
+--- a/tcg/ppc/tcg-target.h
++++ b/tcg/ppc/tcg-target.h
+@@ -179,7 +179,6 @@ extern bool have_vsx;
+ #define TCG_TARGET_HAS_cmpsel_vec       0
+ 
+ #define TCG_TARGET_DEFAULT_MO (0)
+-#define TCG_TARGET_HAS_MEMORY_BSWAP     1
+ #define TCG_TARGET_NEED_LDST_LABELS
+ #define TCG_TARGET_NEED_POOL_LABELS
+ 
+diff --git a/tcg/riscv/tcg-target.h b/tcg/riscv/tcg-target.h
+index dddf2486c1..dece3b3c27 100644
+--- a/tcg/riscv/tcg-target.h
++++ b/tcg/riscv/tcg-target.h
+@@ -168,6 +168,4 @@ typedef enum {
+ #define TCG_TARGET_NEED_LDST_LABELS
+ #define TCG_TARGET_NEED_POOL_LABELS
+ 
+-#define TCG_TARGET_HAS_MEMORY_BSWAP 0
+-
+ #endif
+diff --git a/tcg/s390x/tcg-target.h b/tcg/s390x/tcg-target.h
+index a05b473117..fe05680124 100644
+--- a/tcg/s390x/tcg-target.h
++++ b/tcg/s390x/tcg-target.h
+@@ -172,8 +172,6 @@ extern uint64_t s390_facilities[3];
+ #define TCG_TARGET_CALL_ARG_I128        TCG_CALL_ARG_BY_REF
+ #define TCG_TARGET_CALL_RET_I128        TCG_CALL_RET_BY_REF
+ 
+-#define TCG_TARGET_HAS_MEMORY_BSWAP   1
+-
+ #define TCG_TARGET_DEFAULT_MO (TCG_MO_ALL & ~TCG_MO_ST_LD)
+ #define TCG_TARGET_NEED_LDST_LABELS
+ #define TCG_TARGET_NEED_POOL_LABELS
+diff --git a/tcg/sparc64/tcg-target.h b/tcg/sparc64/tcg-target.h
+index 7434cc99d4..f6cd86975a 100644
+--- a/tcg/sparc64/tcg-target.h
++++ b/tcg/sparc64/tcg-target.h
+@@ -154,7 +154,6 @@ extern bool use_vis3_instructions;
+ #define TCG_AREG0 TCG_REG_I0
+ 
+ #define TCG_TARGET_DEFAULT_MO (0)
+-#define TCG_TARGET_HAS_MEMORY_BSWAP     1
+ #define TCG_TARGET_NEED_LDST_LABELS
+ #define TCG_TARGET_NEED_POOL_LABELS
+ 
+diff --git a/tcg/tcg-internal.h b/tcg/tcg-internal.h
+index 0f1ba01a9a..67b698bd5c 100644
+--- a/tcg/tcg-internal.h
++++ b/tcg/tcg-internal.h
+@@ -126,4 +126,6 @@ static inline TCGv_i64 TCGV128_HIGH(TCGv_i128 t)
+     return temp_tcgv_i64(tcgv_i128_temp(t) + o);
+ }
+ 
++bool tcg_target_has_memory_bswap(MemOp memop);
++
+ #endif /* TCG_INTERNAL_H */
+diff --git a/tcg/tci/tcg-target.h b/tcg/tci/tcg-target.h
+index 7140a76a73..364012e4d2 100644
+--- a/tcg/tci/tcg-target.h
++++ b/tcg/tci/tcg-target.h
+@@ -176,6 +176,4 @@ typedef enum {
+    We prefer consistency across hosts on this.  */
+ #define TCG_TARGET_DEFAULT_MO  (0)
+ 
+-#define TCG_TARGET_HAS_MEMORY_BSWAP     1
+-
+ #endif /* TCG_TARGET_H */
+diff --git a/tcg/tcg-op.c b/tcg/tcg-op.c
+index 9101d334b6..85f22458c9 100644
+--- a/tcg/tcg-op.c
++++ b/tcg/tcg-op.c
+@@ -2959,7 +2959,7 @@ void tcg_gen_qemu_ld_i32(TCGv_i32 val, TCGv addr, TCGArg idx, MemOp memop)
+     oi = make_memop_idx(memop, idx);
+ 
+     orig_memop = memop;
+-    if (!TCG_TARGET_HAS_MEMORY_BSWAP && (memop & MO_BSWAP)) {
++    if ((memop & MO_BSWAP) && !tcg_target_has_memory_bswap(memop)) {
+         memop &= ~MO_BSWAP;
+         /* The bswap primitive benefits from zero-extended input.  */
+         if ((memop & MO_SSIZE) == MO_SW) {
+@@ -2996,7 +2996,7 @@ void tcg_gen_qemu_st_i32(TCGv_i32 val, TCGv addr, TCGArg idx, MemOp memop)
+     memop = tcg_canonicalize_memop(memop, 0, 1);
+     oi = make_memop_idx(memop, idx);
+ 
+-    if (!TCG_TARGET_HAS_MEMORY_BSWAP && (memop & MO_BSWAP)) {
++    if ((memop & MO_BSWAP) && !tcg_target_has_memory_bswap(memop)) {
+         swap = tcg_temp_ebb_new_i32();
+         switch (memop & MO_SIZE) {
+         case MO_16:
+@@ -3045,7 +3045,7 @@ void tcg_gen_qemu_ld_i64(TCGv_i64 val, TCGv addr, TCGArg idx, MemOp memop)
+     oi = make_memop_idx(memop, idx);
+ 
+     orig_memop = memop;
+-    if (!TCG_TARGET_HAS_MEMORY_BSWAP && (memop & MO_BSWAP)) {
++    if ((memop & MO_BSWAP) && !tcg_target_has_memory_bswap(memop)) {
+         memop &= ~MO_BSWAP;
+         /* The bswap primitive benefits from zero-extended input.  */
+         if ((memop & MO_SIGN) && (memop & MO_SIZE) < MO_64) {
+@@ -3091,7 +3091,7 @@ void tcg_gen_qemu_st_i64(TCGv_i64 val, TCGv addr, TCGArg idx, MemOp memop)
+     memop = tcg_canonicalize_memop(memop, 1, 1);
+     oi = make_memop_idx(memop, idx);
+ 
+-    if (!TCG_TARGET_HAS_MEMORY_BSWAP && (memop & MO_BSWAP)) {
++    if ((memop & MO_BSWAP) && !tcg_target_has_memory_bswap(memop)) {
+         swap = tcg_temp_ebb_new_i64();
+         switch (memop & MO_SIZE) {
+         case MO_16:
+@@ -3168,11 +3168,6 @@ static void canonicalize_memop_i128_as_i64(MemOp ret[2], MemOp orig)
+     tcg_debug_assert((orig & MO_SIZE) == MO_128);
+     tcg_debug_assert((orig & MO_SIGN) == 0);
+ 
+-    /* Use a memory ordering implemented by the host. */
+-    if (!TCG_TARGET_HAS_MEMORY_BSWAP && (orig & MO_BSWAP)) {
+-        mop_1 &= ~MO_BSWAP;
+-    }
+-
+     /* Reduce the size to 64-bit. */
+     mop_1 = (mop_1 & ~MO_SIZE) | MO_64;
+ 
+@@ -3202,6 +3197,13 @@ static void canonicalize_memop_i128_as_i64(MemOp ret[2], MemOp orig)
+     default:
+         g_assert_not_reached();
+     }
++
++    /* Use a memory ordering implemented by the host. */
++    if ((orig & MO_BSWAP) && !tcg_target_has_memory_bswap(mop_1)) {
++        mop_1 &= ~MO_BSWAP;
++        mop_2 &= ~MO_BSWAP;
++    }
++
+     ret[0] = mop_1;
+     ret[1] = mop_2;
+ }
+diff --git a/tcg/aarch64/tcg-target.c.inc b/tcg/aarch64/tcg-target.c.inc
+index 09c9ecad0f..8e5f3d3688 100644
+--- a/tcg/aarch64/tcg-target.c.inc
++++ b/tcg/aarch64/tcg-target.c.inc
+@@ -1595,6 +1595,11 @@ typedef struct {
+     TCGType index_ext;
+ } HostAddress;
+ 
++bool tcg_target_has_memory_bswap(MemOp memop)
++{
++    return false;
++}
++
+ static const TCGLdstHelperParam ldst_helper_param = {
+     .ntmp = 1, .tmp = { TCG_REG_TMP }
+ };
+diff --git a/tcg/arm/tcg-target.c.inc b/tcg/arm/tcg-target.c.inc
+index eb0542f32e..e5aed03247 100644
+--- a/tcg/arm/tcg-target.c.inc
++++ b/tcg/arm/tcg-target.c.inc
+@@ -1325,6 +1325,11 @@ typedef struct {
+     bool index_scratch;
+ } HostAddress;
+ 
++bool tcg_target_has_memory_bswap(MemOp memop)
++{
++    return false;
++}
++
+ static TCGReg ldst_ra_gen(TCGContext *s, const TCGLabelQemuLdst *l, int arg)
  {
+     /* We arrive at the slow path via "BLNE", so R14 contains l->raddr. */
+diff --git a/tcg/i386/tcg-target.c.inc b/tcg/i386/tcg-target.c.inc
+index 32ef9ad4e4..8c0902844a 100644
+--- a/tcg/i386/tcg-target.c.inc
++++ b/tcg/i386/tcg-target.c.inc
+@@ -1778,6 +1778,11 @@ typedef struct {
+     int seg;
+ } HostAddress;
+ 
++bool tcg_target_has_memory_bswap(MemOp memop)
++{
++    return have_movbe;
++}
++
+ /*
+  * Because i686 has no register parameters and because x86_64 has xchg
+  * to handle addr/data register overlap, we have placed all input arguments
+diff --git a/tcg/loongarch64/tcg-target.c.inc b/tcg/loongarch64/tcg-target.c.inc
+index 20cb21b264..62bf823084 100644
+--- a/tcg/loongarch64/tcg-target.c.inc
++++ b/tcg/loongarch64/tcg-target.c.inc
+@@ -828,6 +828,11 @@ typedef struct {
+     TCGReg index;
+ } HostAddress;
+ 
++bool tcg_target_has_memory_bswap(MemOp memop)
++{
++    return false;
++}
++
+ /*
+  * For softmmu, perform the TLB load and compare.
+  * For useronly, perform any required alignment tests.
+diff --git a/tcg/mips/tcg-target.c.inc b/tcg/mips/tcg-target.c.inc
+index fa0f334e8d..cd0254a0d7 100644
+--- a/tcg/mips/tcg-target.c.inc
++++ b/tcg/mips/tcg-target.c.inc
+@@ -1141,6 +1141,11 @@ typedef struct {
+     MemOp align;
+ } HostAddress;
+ 
++bool tcg_target_has_memory_bswap(MemOp memop)
++{
++    return false;
++}
++
+ /*
+  * For softmmu, perform the TLB load and compare.
+  * For useronly, perform any required alignment tests.
+diff --git a/tcg/ppc/tcg-target.c.inc b/tcg/ppc/tcg-target.c.inc
+index 94a9f70e17..c799d7c52a 100644
+--- a/tcg/ppc/tcg-target.c.inc
++++ b/tcg/ppc/tcg-target.c.inc
+@@ -2020,6 +2020,11 @@ typedef struct {
+     TCGReg index;
+ } HostAddress;
+ 
++bool tcg_target_has_memory_bswap(MemOp memop)
++{
++    return true;
++}
++
+ /*
+  * For softmmu, perform the TLB load and compare.
+  * For useronly, perform any required alignment tests.
+diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+index 3e4c91cce7..5193998865 100644
+--- a/tcg/riscv/tcg-target.c.inc
++++ b/tcg/riscv/tcg-target.c.inc
+@@ -867,6 +867,11 @@ static void tcg_out_goto(TCGContext *s, const tcg_insn_unit *target)
+     tcg_debug_assert(ok);
+ }
+ 
++bool tcg_target_has_memory_bswap(MemOp memop)
++{
++    return false;
++}
++
+ /* We have three temps, we might as well expose them. */
+ static const TCGLdstHelperParam ldst_helper_param = {
+     .ntmp = 3, .tmp = { TCG_REG_TMP0, TCG_REG_TMP1, TCG_REG_TMP2 }
+diff --git a/tcg/s390x/tcg-target.c.inc b/tcg/s390x/tcg-target.c.inc
+index de8aed5f77..22f0206b5a 100644
+--- a/tcg/s390x/tcg-target.c.inc
++++ b/tcg/s390x/tcg-target.c.inc
+@@ -1574,6 +1574,11 @@ typedef struct {
+     int disp;
+ } HostAddress;
+ 
++bool tcg_target_has_memory_bswap(MemOp memop)
++{
++    return true;
++}
++
+ static void tcg_out_qemu_ld_direct(TCGContext *s, MemOp opc, TCGReg data,
+                                    HostAddress h)
+ {
+diff --git a/tcg/sparc64/tcg-target.c.inc b/tcg/sparc64/tcg-target.c.inc
+index 0237188d65..bb23038529 100644
+--- a/tcg/sparc64/tcg-target.c.inc
++++ b/tcg/sparc64/tcg-target.c.inc
+@@ -1011,6 +1011,11 @@ typedef struct {
+     TCGReg index;
+ } HostAddress;
+ 
++bool tcg_target_has_memory_bswap(MemOp memop)
++{
++    return true;
++}
++
+ /*
+  * For softmmu, perform the TLB load and compare.
+  * For useronly, perform any required alignment tests.
+diff --git a/tcg/tci/tcg-target.c.inc b/tcg/tci/tcg-target.c.inc
+index e31640d109..89f693050c 100644
+--- a/tcg/tci/tcg-target.c.inc
++++ b/tcg/tci/tcg-target.c.inc
+@@ -964,3 +964,8 @@ static void tcg_target_init(TCGContext *s)
+ static inline void tcg_target_qemu_prologue(TCGContext *s)
+ {
+ }
++
++bool tcg_target_has_memory_bswap(MemOp memop)
++{
++    return true;
++}
 -- 
 2.34.1
 
