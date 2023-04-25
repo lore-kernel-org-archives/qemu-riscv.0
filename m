@@ -1,75 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1prOXS-0002CF-Lh
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 15:41:22 -0400
+	id 1prOXd-0002Rl-5y
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 15:41:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1prOXQ-00029c-OQ
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:41:20 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1prOXb-0002EE-GZ
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:41:31 -0400
+Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1prOXO-0007F4-5u
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:41:19 -0400
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-2f6401ce8f8so3811453f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 12:41:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1prOXZ-0007H0-5N
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:41:31 -0400
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-4ec94eb6dcaso6751806e87.3
+ for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 12:41:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1682451677; x=1685043677;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=L1oX0IUmN6a1E/gKUL7LjPtwnHIjzCfveBQHzkwnpoM=;
- b=Ea+Uisb4N/yRnaCRJ6SdIK39PwKo5kqHJxWoz8NR8J5hT1cr/KqUdFyWd1F9dAwo4F
- EuBmM3gWU1FMFDeXy0Aal1v6AkyXom9wAr6MrxYOzVX/rSFQp9NxKbWKc0fS602p54PO
- msQ4lYXIL+mJ6/P09nnPzS185L9R3HDasKOMLIO6jB4M7EgPdhU81q33II6DL+dgKGsG
- 6QmreFgiE4lup9YZIqy2TEMC5LY4VamzyKTejqGl11qxF7onlKbqH2qVJftrD9EkAjyh
- e+z5Xhs/npcpLGnWdCaYF4X0TkqOrQoELI9lVCitQVi1SvNEjTW0tLRiVhPOOmRQ5+UZ
- bm0A==
+ d=linaro.org; s=google; t=1682451686; x=1685043686;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VhQ4va+L9W76HQPa92crHAm/u67MMsKKHsaZ1OacYxI=;
+ b=tcgRlDw6ECIOkgdNni+h2heGVFiX9cdS6dn2eQ75VTg7UFOR0S2Jv0RNtS3C0Sgg2g
+ 343A006kqSjq/4NrAs8sbl90RQPN2O2yHOYfkcdMTpVBrJOvSB1NOFkqe827Pvaxq4Ot
+ /Qpvz6TqZBss7eH9JeHgOoHTasNA8gLJaHw9rx/afpWOKMpsUtApdlogPE8SGxN1euN7
+ 8yYPJeR7ccOFuKRWCR4Fcv4j7OE/1QCO+W2e0hCFErdlXOAM9Z9WoEk7WAR1/s90CPs/
+ 3mPFqnX/i1dhPI2+SlNanUC99J1xe7tc8lx1DI/3crRiiDcqVpTD2ihCNIaqFOSD1NZd
+ L4jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682451677; x=1685043677;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=L1oX0IUmN6a1E/gKUL7LjPtwnHIjzCfveBQHzkwnpoM=;
- b=l2wZJSekhjMAJPE57bqeONVmCOseRUO9zxmH9o8w/4EnSj/jWOVv5OaTcpM5j8uhIt
- H1/2Py9gSwxETdXWEpKzQ6jQCgZUZunXdDn28djKsIYcIuwKgkhLwgB5HXD41m49d1EU
- w/KQklMAmKMTmG2IhaUXpbFR0iYDAv+mOUwZK1e8Ppq2ZZPlG9dA93ZABvumHlmihho9
- TSBmC4pPASJ3y4AdiAUyX3eWU6pUj112X65JRh0il6vhVwhqB0rOP0OpmN3hyzRt7e8n
- sXjL2Bne9RtwUo3y/lAs0o5xPtSz6CsLEcVxGRW9hjRfGLFayNNonTYrI2x4cwjT64OZ
- LapA==
-X-Gm-Message-State: AAQBX9fx1m8UCGKbL4KN6YWcF7dRCC/PS5iqWwpmwPMXN+YydQw5qAPA
- KdIuijM7NqZHTw0t9jqB2HFbUw==
-X-Google-Smtp-Source: AKy350YGDrsNLTbqTzUegfWKws00heSPIeftkaf92KK+Ywrlb3FmLlZMN2JSlyilpWoz6jOrWhbyMg==
-X-Received: by 2002:a5d:5252:0:b0:2dd:a3:c2e8 with SMTP id
- k18-20020a5d5252000000b002dd00a3c2e8mr12468234wrc.44.1682451676733; 
- Tue, 25 Apr 2023 12:41:16 -0700 (PDT)
-Received: from [192.168.180.175] (153.red-88-29-176.dynamicip.rima-tde.net.
- [88.29.176.153]) by smtp.gmail.com with ESMTPSA id
- g2-20020a5d5402000000b002da75c5e143sm13803219wrv.29.2023.04.25.12.41.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Apr 2023 12:41:16 -0700 (PDT)
-Message-ID: <ff19c274-0252-cc5d-ef56-0643fcebe2ee@linaro.org>
-Date: Tue, 25 Apr 2023 20:41:14 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.10.0
-Subject: Re: [PATCH v3 03/57] tcg/i386: Conditionalize tcg_out_extu_i32_i64
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+ d=1e100.net; s=20221208; t=1682451686; x=1685043686;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VhQ4va+L9W76HQPa92crHAm/u67MMsKKHsaZ1OacYxI=;
+ b=IgxQLwqh3SeLJs/Eh17oPICCvWvb1BDhk6Kv7kaWtYtaiL7gpD3d9fq8tTeolxb0s5
+ wo6H+HIXmtKmzn4Ftn8bxEjZ2ZNAQ6+uJDnSeC7676HWtDt/7EIg/x13PGCuNJCCHwZW
+ UBSbiLbPMbRMAslK6aYlf3vudVqGzuN5Tg3Q3W/cgJdHfDRjhx+tfa9U0FbEtOmdgNHe
+ OUR5ihIvapFzCyp6Wac0ZlRupUgvSNUF/jLe0NuHsdy+oiyPlSqAYWSUiwR8p+YwTt42
+ j+rCtrylMtLHkM6RauNMmhEiH13Cdb/SEIfY9AliYQ1dvCzyCvrqa5X9aK4BQL2K2vx9
+ bXPw==
+X-Gm-Message-State: AAQBX9ejno8rTP/7XIVfx+pFNIbEK2HgP+YYCT1peBU1bZzgtMoMej+R
+ uE1mep/yDU95j79BtG8ctizE8U+rIUymmmTNpA6y+w==
+X-Google-Smtp-Source: AKy350YMYpCNeiK7zqKFInkZqC6bZRtNwu4O8wsNFs7RsXy5CjyodYUX+3PiTYmvpy5c/2eQK2uclQ==
+X-Received: by 2002:ac2:4563:0:b0:4ec:8b57:b018 with SMTP id
+ k3-20020ac24563000000b004ec8b57b018mr4377425lfm.33.1682451686253; 
+ Tue, 25 Apr 2023 12:41:26 -0700 (PDT)
+Received: from stoup.. ([91.209.212.61]) by smtp.gmail.com with ESMTPSA id
+ d8-20020ac25448000000b004ec55ac6cd1sm2175662lfn.136.2023.04.25.12.41.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Apr 2023 12:41:25 -0700 (PDT)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
- qemu-ppc@nongnu.org, git@xen0n.name, jiaxun.yang@flygoat.com
-References: <20230424054105.1579315-1-richard.henderson@linaro.org>
- <20230424054105.1579315-4-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230424054105.1579315-4-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ qemu-ppc@nongnu.org, git@xen0n.name, jiaxun.yang@flygoat.com,
+ philmd@linaro.org
+Subject: [PATCH v3 46/57] tcg/loongarch64: Use atom_and_align_for_opc
+Date: Tue, 25 Apr 2023 20:31:35 +0100
+Message-Id: <20230425193146.2106111-47-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230425193146.2106111-1-richard.henderson@linaro.org>
+References: <20230425193146.2106111-1-richard.henderson@linaro.org>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
-X-Spam_score_int: -34
-X-Spam_score: -3.5
-X-Spam_bar: ---
-X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.422,
+Received-SPF: pass client-ip=2a00:1450:4864:20::131;
+ envelope-from=richard.henderson@linaro.org; helo=mail-lf1-x131.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -84,18 +82,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Apr 2023 19:41:21 -0000
+X-List-Received-Date: Tue, 25 Apr 2023 19:41:31 -0000
 
-On 24/4/23 07:40, Richard Henderson wrote:
-> Since TCG_TYPE_I32 values are kept zero-extended in registers, via
-> omission of the REXW bit, we need not extend if the register matches.
-> This is already relied upon by qemu_{ld,st}.
-> 
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   tcg/i386/tcg-target.c.inc | 4 +++-
->   1 file changed, 3 insertions(+), 1 deletion(-)
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ tcg/loongarch64/tcg-target.c.inc | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+diff --git a/tcg/loongarch64/tcg-target.c.inc b/tcg/loongarch64/tcg-target.c.inc
+index 62bf823084..43341524f2 100644
+--- a/tcg/loongarch64/tcg-target.c.inc
++++ b/tcg/loongarch64/tcg-target.c.inc
+@@ -826,6 +826,8 @@ static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+ typedef struct {
+     TCGReg base;
+     TCGReg index;
++    MemOp align;
++    MemOp atom;
+ } HostAddress;
+ 
+ bool tcg_target_has_memory_bswap(MemOp memop)
+@@ -845,7 +847,11 @@ static TCGLabelQemuLdst *prepare_host_addr(TCGContext *s, HostAddress *h,
+ {
+     TCGLabelQemuLdst *ldst = NULL;
+     MemOp opc = get_memop(oi);
+-    unsigned a_bits = get_alignment_bits(opc);
++    MemOp a_bits, atom_u;
++
++    a_bits = atom_and_align_for_opc(s, &h->atom, &atom_u, opc,
++                                    MO_ATOM_IFALIGN, false);
++    h->align = a_bits;
+ 
+ #ifdef CONFIG_SOFTMMU
+     unsigned s_bits = opc & MO_SIZE;
+-- 
+2.34.1
 
 
