@@ -1,75 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1prJqk-0004Q3-8l
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 10:40:58 -0400
+	id 1prOOX-00081b-Az
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 15:32:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1prJqj-0004PW-1a
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 10:40:57 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1prOOV-00080r-SQ
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:32:07 -0400
+Received: from mail-lj1-x22b.google.com ([2a00:1450:4864:20::22b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1prJqg-00007T-7f
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 10:40:56 -0400
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-3f1950f569eso30224005e9.2
- for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 07:40:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1prOOQ-00041X-Ed
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:32:07 -0400
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2a8c51ba511so58050331fa.1
+ for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 12:32:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1682433652; x=1685025652;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=EhxqKnVC9K2XzjU+N8GzrUzeVSMhs3WmZYLQaANdl/w=;
- b=drsgBbOCUDEb3EpC43r1JqOADOsKrmlQYh/rj4hVPnSqwRUT+l3A7AjqntvfgJj75Y
- mSHSFCllfD4RAC5wbGQXCJb1+6ODY16Y9BLFPL4/novNcqDo6DtlMCwVtAYzlPlq/VZ4
- 1j7bC6L7KsbcmuSK1K0f8+QF4hCS1dzJjYqgKK7nKXmECtPPDxuoV8FIvdFpYRqeY0jt
- 53vQB9Fr6mvbVNDCGgxtDA1cFfLAyaCymTb2dHhp6q2Fxst9lxY0W7ktfOXZ5MBjbIoZ
- ykSwHyvfzIi3Detmnalz3WllwEJxtD9F2zjaexxlYwdrgvLDOZwaBZirb4hqDf0PaqPG
- /cuA==
+ d=linaro.org; s=google; t=1682451119; x=1685043119;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7D2iZlDGjRJcSAIY2jzMpo+WKkxn2LxSAn8ae9L7X1U=;
+ b=oM4J+5sNI+mmybtSAibdOJ9+WjpnVLHfHLyEsBGMRElgC4PC1vqzUjQl6CDeRhOAxl
+ zBYFnFsLFJRTqg83HcqC8bGNsZ/piENCwOQDCasZhvbO0PMU4xvlOaW2vdNi1sdfoAUq
+ cFt1P32VX5IfbpmPJOq6NstEqwQRADCpkT4uytvzGkGBJ9SkS37t5cadP4UxhBZlZDmc
+ 4B4c2ygZZp0UfZNm7/Uq11gQCyfNuglaZnvZ0WB46H2ijPgSg+22QVN2+nODTSgA2Yg3
+ gfedLGNY/TGOLOS8ceRKu7DhyZJfaMhBTIsGWHqKVjz6abAxo52v+s/9ikb5KM15LK3F
+ SPcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682433652; x=1685025652;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=EhxqKnVC9K2XzjU+N8GzrUzeVSMhs3WmZYLQaANdl/w=;
- b=Wr9w9zhR6e2ZnDYYfzcAic+d9eUjGIa3Gngv7BBGjehomV1smjvpsT3RzdVmiZMO/a
- Ov3ljx/+KX7Bvcxdj9ydrivo9lP+aZIVQ2PzHFxAKFg9Qns4rl7JCAgxrQLZMucCc9Sd
- vef+tUt3eH//b36CXDMnTU+BUJ/Hb8TrIMgYilzZ8OWDeQRo4tkHbC9CRl5oOCEwcdu+
- Kp+sjlvC+gFv7WCZlcjfRR4EeAzGdr9LkW9eQO7vdJqdMYuoIAo5vPM5mtJALCqrM8Yd
- 1rfH7ueyrcp6Z/ioX1qVzmraGVSJPlo3BzRdYC0f0IAz8x55Q5XAvqoLRO3lX+NuXc8n
- Bgqw==
-X-Gm-Message-State: AAQBX9d684b2oxNTDipkPfixAYksXogSFnfGX5etpM024wLA5zeGOEPi
- pk6D0Bb+z+kcPowTp0R377cWuw==
-X-Google-Smtp-Source: AKy350ZmZzh61rduK/2J9Lw5TicjUPPhk2Y5ZePRLGcqMBNv74zgsh6Nw2nVFUSzahy0OtUAc0yITQ==
-X-Received: by 2002:a05:600c:24cd:b0:3f1:6ef6:c9d0 with SMTP id
- 13-20020a05600c24cd00b003f16ef6c9d0mr9514711wmu.17.1682433652545; 
- Tue, 25 Apr 2023 07:40:52 -0700 (PDT)
-Received: from [172.27.248.56] ([212.187.182.164])
- by smtp.gmail.com with ESMTPSA id
- o10-20020a1c750a000000b003f191c9c4b0sm12051997wmc.11.2023.04.25.07.40.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Apr 2023 07:40:52 -0700 (PDT)
-Message-ID: <4986ffc9-a350-f828-78ef-b2f54f9e01f9@linaro.org>
-Date: Tue, 25 Apr 2023 15:40:51 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.10.0
-Subject: Re: [PATCH v3 30/57] tcg/s390x: Introduce HostAddress
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+ d=1e100.net; s=20221208; t=1682451119; x=1685043119;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7D2iZlDGjRJcSAIY2jzMpo+WKkxn2LxSAn8ae9L7X1U=;
+ b=KQ3QLNGwL1G/oHp0Lyd7R42GekQBjFkwkAcYMdFqic7Bny+5GqmVgFVGRiV2j9aoAo
+ YU2Sw90KBcELzydcaVuECYCmJXcROYHLTjK7J58aq2x3fQSM1KRHC4gD4XOoxptxo7Vl
+ 3eVXAchBklkr0AbeUoWGXxZxJPZl7T9eNdgQAD6wAovsL0Z0eN5Ul5DqH+uy0Vr5igZG
+ hK15IKhRPqmQwCjKDjSmV8nK4snYCtagsmsnaexIZLMtBEgYuYMD0CW80qyO/tJ+AHeA
+ kNcEjOFwrdNZv9DV1XoASLKYMuNXHfibNQP+vA8dW21ETt2O1+O/JAX1WaepYJq6qmjL
+ azlg==
+X-Gm-Message-State: AAQBX9d/ORFcowGlxMxg7h3w2/SuDFgsFGBHK68kf6AwUtqTecY2BsZy
+ OgXOYR48ahyEAPf54cyzO3uf8g==
+X-Google-Smtp-Source: AKy350boBldy/fuvLCkYX75PSGNIYy266CDZBBfiMCF1qWMLJXMXMTAHAxsJh1IpPj9vhel7UhHhEA==
+X-Received: by 2002:a2e:9c44:0:b0:2aa:44ae:45c with SMTP id
+ t4-20020a2e9c44000000b002aa44ae045cmr3233747ljj.48.1682451119581; 
+ Tue, 25 Apr 2023 12:31:59 -0700 (PDT)
+Received: from stoup.. ([91.209.212.61]) by smtp.gmail.com with ESMTPSA id
+ z23-20020a2e8857000000b002a8c271de33sm2160484ljj.67.2023.04.25.12.31.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Apr 2023 12:31:59 -0700 (PDT)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
- qemu-ppc@nongnu.org, git@xen0n.name, jiaxun.yang@flygoat.com
-References: <20230424054105.1579315-1-richard.henderson@linaro.org>
- <20230424054105.1579315-31-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230424054105.1579315-31-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ qemu-ppc@nongnu.org, git@xen0n.name, jiaxun.yang@flygoat.com,
+ philmd@linaro.org
+Subject: [PATCH v3 00/57] tcg: Improve atomicity support
+Date: Tue, 25 Apr 2023 20:30:49 +0100
+Message-Id: <20230425193146.2106111-1-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
-X-Spam_score_int: -34
-X-Spam_score: -3.5
-X-Spam_bar: ---
-X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.422,
+Received-SPF: pass client-ip=2a00:1450:4864:20::22b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-lj1-x22b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -84,17 +80,160 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Apr 2023 14:40:57 -0000
+X-List-Received-Date: Tue, 25 Apr 2023 19:32:08 -0000
 
-On 24/4/23 07:40, Richard Henderson wrote:
-> Collect the 3 potential parts of the host address into a struct.
-> Reorg tcg_out_qemu_{ld,st}_direct to use it.
-> 
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   tcg/s390x/tcg-target.c.inc | 109 ++++++++++++++++++++-----------------
->   1 file changed, 60 insertions(+), 49 deletions(-)
+v1: https://lore.kernel.org/qemu-devel/20221118094754.242910-1-richard.henderson@linaro.org/
+v2: https://lore.kernel.org/qemu-devel/20230216025739.1211680-1-richard.henderson@linaro.org/
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Based-on: 20230424054105.1579315-1-richard.henderson@linaro.org
+("[PATCH v3 00/57] tcg: Simplify calls to load/store helpers")
+
+The main objective here is to support Arm FEAT_LSE2, which says that any
+single memory access that does not cross a 16-byte boundary is atomic.
+This is the MO_ATOM_WITHIN16 control.
+
+While I'm touching all of this, a secondary objective is to handle the
+atomicity of the IBM machines.  Both Power and s390x treat misaligned
+accesses as atomic on the lsb of the pointer.  For instance, an 8-byte
+access at ptr % 8 == 4 will appear as two atomic 4-byte accesses, and
+ptr % 4 == 2 will appear as four 3-byte accesses.
+This is the MO_ATOM_SUBALIGN control.
+
+By default, acceses are atomic only if aligned, which is the current
+behaviour of the tcg code generator (mostly, anyway, there were bugs).
+This is the MO_ATOM_IFALIGN control.
+
+Further, one can say that a large memory access is really a set of
+contiguous smaller accesses, and we need not provide more atomicity
+than that (modulo MO_ATOM_WITHIN16).  This is the MO_ATMAX_* control.
+
+Changes for v3:
+  - More simplifications to load/store helper generation.
+  - All tcg backends now query atom_and_align_for_opc to
+    increase alignment when required for atomicity.
+  - 128-bit atomic load/store for aarch64, ppc64, s390x.
+  - Sparc64 updates.
+  - Unaligned load/store for loongarch64, riscv.
+
+
+r~
+
+
+Richard Henderson (57):
+  include/exec/memop: Add bits describing atomicity
+  accel/tcg: Add cpu_in_serial_context
+  accel/tcg: Introduce tlb_read_idx
+  accel/tcg: Reorg system mode load helpers
+  accel/tcg: Reorg system mode store helpers
+  accel/tcg: Honor atomicity of loads
+  accel/tcg: Honor atomicity of stores
+  target/loongarch: Do not include tcg-ldst.h
+  tcg: Unify helper_{be,le}_{ld,st}*
+  accel/tcg: Implement helper_{ld,st}*_mmu for user-only
+  tcg/tci: Use helper_{ld,st}*_mmu for user-only
+  tcg: Add 128-bit guest memory primitives
+  meson: Detect atomic128 support with optimization
+  tcg/i386: Add have_atomic16
+  accel/tcg: Use have_atomic16 in ldst_atomicity.c.inc
+  accel/tcg: Add aarch64 specific support in ldst_atomicity
+  tcg/aarch64: Detect have_lse, have_lse2 for linux
+  tcg/aarch64: Detect have_lse, have_lse2 for darwin
+  accel/tcg: Add have_lse2 support in ldst_atomicity
+  tcg: Introduce TCG_OPF_TYPE_MASK
+  tcg/i386: Use full load/store helpers in user-only mode
+  tcg/aarch64: Use full load/store helpers in user-only mode
+  tcg/ppc: Use full load/store helpers in user-only mode
+  tcg/loongarch64: Use full load/store helpers in user-only mode
+  tcg/riscv: Use full load/store helpers in user-only mode
+  tcg/arm: Adjust constraints on qemu_ld/st
+  tcg/arm: Use full load/store helpers in user-only mode
+  tcg/mips: Use full load/store helpers in user-only mode
+  tcg/s390x: Use full load/store helpers in user-only mode
+  tcg/sparc64: Allocate %g2 as a third temporary
+  tcg/sparc64: Rename tcg_out_movi_imm13 to tcg_out_movi_s13
+  tcg/sparc64: Rename tcg_out_movi_imm32 to tcg_out_movi_u32
+  tcg/sparc64: Split out tcg_out_movi_s32
+  tcg/sparc64: Use standard slow path for softmmu
+  accel/tcg: Remove helper_unaligned_{ld,st}
+  tcg/loongarch64: Assert the host supports unaligned accesses
+  tcg/loongarch64: Support softmmu unaligned accesses
+  tcg/riscv: Support softmmu unaligned accesses
+  tcg: Introduce tcg_target_has_memory_bswap
+  tcg: Add INDEX_op_qemu_{ld,st}_i128
+  tcg: Support TCG_TYPE_I128 in tcg_out_{ld,st}_helper_{args,ret}
+  tcg: Introduce atom_and_align_for_opc
+  tcg/i386: Use atom_and_align_for_opc
+  tcg/aarch64: Use atom_and_align_for_opc
+  tcg/arm: Use atom_and_align_for_opc
+  tcg/loongarch64: Use atom_and_align_for_opc
+  tcg/mips: Use atom_and_align_for_opc
+  tcg/ppc: Use atom_and_align_for_opc
+  tcg/riscv: Use atom_and_align_for_opc
+  tcg/s390x: Use atom_and_align_for_opc
+  tcg/sparc64: Use atom_and_align_for_opc
+  tcg/i386: Honor 64-bit atomicity in 32-bit mode
+  tcg/i386: Support 128-bit load/store with have_atomic16
+  tcg/aarch64: Rename temporaries
+  tcg/aarch64: Support 128-bit load/store
+  tcg/ppc: Support 128-bit load/store
+  tcg/s390x: Support 128-bit load/store
+
+ accel/tcg/internal.h             |    5 +
+ accel/tcg/tcg-runtime.h          |    3 +
+ include/exec/cpu-defs.h          |    7 +-
+ include/exec/cpu_ldst.h          |   26 +-
+ include/exec/memop.h             |   36 +
+ include/qemu/cpuid.h             |   18 +
+ include/tcg/tcg-ldst.h           |   72 +-
+ include/tcg/tcg-opc.h            |    8 +
+ include/tcg/tcg.h                |   22 +-
+ tcg/aarch64/tcg-target-con-set.h |    2 +
+ tcg/aarch64/tcg-target.h         |    6 +-
+ tcg/arm/tcg-target-con-set.h     |   16 +-
+ tcg/arm/tcg-target-con-str.h     |    5 +-
+ tcg/arm/tcg-target.h             |    3 +-
+ tcg/i386/tcg-target.h            |    7 +-
+ tcg/loongarch64/tcg-target.h     |    3 +-
+ tcg/mips/tcg-target.h            |    4 +-
+ tcg/ppc/tcg-target-con-set.h     |    2 +
+ tcg/ppc/tcg-target-con-str.h     |    1 +
+ tcg/ppc/tcg-target.h             |    4 +-
+ tcg/riscv/tcg-target.h           |    4 +-
+ tcg/s390x/tcg-target-con-set.h   |    2 +
+ tcg/s390x/tcg-target.h           |    4 +-
+ tcg/sparc64/tcg-target-con-set.h |    2 -
+ tcg/sparc64/tcg-target-con-str.h |    1 -
+ tcg/sparc64/tcg-target.h         |    4 +-
+ tcg/tcg-internal.h               |    2 +
+ tcg/tci/tcg-target.h             |    4 +-
+ accel/tcg/cpu-exec-common.c      |    3 +
+ accel/tcg/cputlb.c               | 1767 ++++++++++++++++++------------
+ accel/tcg/tb-maint.c             |    2 +-
+ accel/tcg/user-exec.c            |  488 ++++++---
+ target/loongarch/csr_helper.c    |    1 -
+ target/loongarch/iocsr_helper.c  |    1 -
+ tcg/optimize.c                   |   15 +-
+ tcg/tcg-op.c                     |  265 +++--
+ tcg/tcg.c                        |  270 ++++-
+ tcg/tci.c                        |  150 +--
+ accel/tcg/ldst_atomicity.c.inc   | 1373 +++++++++++++++++++++++
+ docs/devel/loads-stores.rst      |   36 +-
+ docs/devel/tcg-ops.rst           |   11 +-
+ meson.build                      |   52 +-
+ tcg/aarch64/tcg-target.c.inc     |  384 +++++--
+ tcg/arm/tcg-target.c.inc         |  121 +-
+ tcg/i386/tcg-target.c.inc        |  362 ++++--
+ tcg/loongarch64/tcg-target.c.inc |   91 +-
+ tcg/mips/tcg-target.c.inc        |  104 +-
+ tcg/ppc/tcg-target.c.inc         |  261 +++--
+ tcg/riscv/tcg-target.c.inc       |  132 +--
+ tcg/s390x/tcg-target.c.inc       |  177 +--
+ tcg/sparc64/tcg-target.c.inc     |  714 ++++--------
+ tcg/tci/tcg-target.c.inc         |    8 +-
+ 52 files changed, 4657 insertions(+), 2404 deletions(-)
+ create mode 100644 accel/tcg/ldst_atomicity.c.inc
+
+-- 
+2.34.1
 
 
