@@ -1,69 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pqyix-0004UA-LA
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Apr 2023 12:07:31 -0400
+	id 1prDCv-0006QU-Dh
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 03:35:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1pqyiw-0004To-P3
- for qemu-riscv@nongnu.org; Mon, 24 Apr 2023 12:07:30 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <yong.li@intel.com>)
+ id 1prDCu-0006QB-2Y; Tue, 25 Apr 2023 03:35:24 -0400
+Received: from mga05.intel.com ([192.55.52.43])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cohuck@redhat.com>) id 1pqyiu-0000a5-R2
- for qemu-riscv@nongnu.org; Mon, 24 Apr 2023 12:07:30 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1682352448;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=wNwreOSwlYhvCShYoTkByj025paHY17QQ0wsTtVjClE=;
- b=F6hYvCFpZYc0Qwv9ClnMAVCgMU0EtHRVmzcgtFXuhkGVFPVwmcsQALpIE/FMLo0GinKES9
- tDIbZ48qdpGb6cnKirAHT/6c6zsCwQIDem/Vywu6GLuIE3A6ig2cMlVoT0s4lqgl5yE5Xu
- vq1nIQ2jRzWRqhZXT2ah7MGmvFxUOrs=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-671-byC_9jHaMTOE2fXpUySfBg-1; Mon, 24 Apr 2023 12:07:23 -0400
-X-MC-Unique: byC_9jHaMTOE2fXpUySfBg-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B452788B7A1;
- Mon, 24 Apr 2023 16:07:22 +0000 (UTC)
-Received: from localhost (dhcp-192-239.str.redhat.com [10.33.192.239])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 268D0C15BA0;
- Mon, 24 Apr 2023 16:07:22 +0000 (UTC)
-From: Cornelia Huck <cohuck@redhat.com>
-To: Thomas Huth <thuth@redhat.com>, Yong-Xuan Wang
- <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: rkanwal@rivosinc.com, anup@brainfault.org, dbarboza@ventanamicro.com,
- atishp@atishpatra.org, vincent.chen@sifive.com, greentime.hu@sifive.com,
- frank.chang@sifive.com, "Michael S. Tsirkin" <mst@redhat.com>, Paolo
- Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng
- <bin.meng@windriver.com>, Chenyi Qiang <chenyi.qiang@intel.com>, Alex
- Williamson <alex.williamson@redhat.com>, kvm@vger.kernel.org
-Subject: Re: [PATCH 1/6] update-linux-headers: sync-up header with Linux for
- KVM AIA support
-In-Reply-To: <fa91e8cf-2240-ac81-740b-b9d8597f4f59@redhat.com>
-Organization: Red Hat GmbH
-References: <20230424090716.15674-1-yongxuan.wang@sifive.com>
- <20230424090716.15674-2-yongxuan.wang@sifive.com>
- <fa91e8cf-2240-ac81-740b-b9d8597f4f59@redhat.com>
-User-Agent: Notmuch/0.37 (https://notmuchmail.org)
-Date: Mon, 24 Apr 2023 18:07:20 +0200
-Message-ID: <87edo9uuvb.fsf@redhat.com>
+ (Exim 4.90_1) (envelope-from <yong.li@intel.com>)
+ id 1prDCs-00056i-6s; Tue, 25 Apr 2023 03:35:23 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1682408122; x=1713944122;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=TLMnYXqTat9IxUMTv1EyqeKrgwTAGMREdUpmfoNpMnI=;
+ b=Icj208gS3A/fvL+4ojj4ttR/48QSQ6MBiDjHrOaP8XiqZsumBzU/zYWi
+ 1IpwSp6t+jtOQFHu7EPRomsNP0+KmX5pTcaoQzonrNSEAC2ZNZkjoUdHe
+ ve4QL1ENTh7Cr5GSQrIsgwS0gMAAQZeVhHGFwx57YZ7CzQnY8//3MEFEk
+ wOm+o0bC4gYU55uDEEcWDIN7POilyFTQFKTdib6iKJhgG34XM4UJl+nwW
+ DxWNoy1ZPQzBe/BiGgsUURXfD4agu24x824XAVX7kWNOmSJqWBcyYbd96
+ TfH2LijMfJjyGpx3gv8s5So6oAtM8HZ+4bYIHrfJxvn2cJA/absS2A5ZL w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10690"; a="432952425"
+X-IronPort-AV: E=Sophos;i="5.99,224,1677571200"; d="scan'208";a="432952425"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 25 Apr 2023 00:35:16 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10690"; a="670785668"
+X-IronPort-AV: E=Sophos;i="5.99,224,1677571200"; d="scan'208";a="670785668"
+Received: from intel-optiplex-7090.sh.intel.com ([10.67.104.162])
+ by orsmga006.jf.intel.com with ESMTP; 25 Apr 2023 00:35:14 -0700
+From: Yong Li <yong.li@intel.com>
+To: qemu-devel@nongnu.org
+Cc: Yong Li <yong.li@intel.com>, LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH v3] hw/riscv/virt: Add a second UART for secure world
+Date: Tue, 25 Apr 2023 15:35:09 +0800
+Message-Id: <20230425073509.3618388-1-yong.li@intel.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.8
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=cohuck@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -22
-X-Spam_score: -2.3
-X-Spam_bar: --
-X-Spam_report: (-2.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.171,
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=192.55.52.43; envelope-from=yong.li@intel.com;
+ helo=mga05.intel.com
+X-Spam_score_int: -45
+X-Spam_score: -4.6
+X-Spam_bar: ----
+X-Spam_report: (-4.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.171,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,31 +68,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2023 16:07:31 -0000
+X-List-Received-Date: Tue, 25 Apr 2023 07:35:24 -0000
 
-On Mon, Apr 24 2023, Thomas Huth <thuth@redhat.com> wrote:
+The virt machine can have two UARTs and the second UART
+can be used by the secure payload, firmware or OS residing
+in secure world. Will include the UART device to FDT in a
+seperated patch.
 
-> On 24/04/2023 11.07, Yong-Xuan Wang wrote:
->> Sync-up Linux header to get latest KVM RISC-V headers having AIA support.
->> 
->> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
->> Reviewed-by: Jim Shu <jim.shu@sifive.com>
->> ---
->>   linux-headers/linux/kvm.h |  2 ++
->>   target/riscv/kvm_riscv.h  | 33 +++++++++++++++++++++++++++++++++
->
->   Hi!
->
-> Please don't mix updates to linux-headers/ with updates to other files. 
-> linux-headers/ should only by updated via the 
-> scripts/update-linux-headers.sh script, and then the whole update should be 
-> included in the patch, not only selected files.
+Signed-off-by: Yong Li <yong.li@intel.com>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ hw/riscv/virt.c         | 4 ++++
+ include/hw/riscv/virt.h | 2 ++
+ 2 files changed, 6 insertions(+)
 
-...and in the cases where you cannot run a normal headers update because
-the code has not been accepted into Linux yet, just create a placeholder
-patch containing only the linux-headers changes, which can be replaced
-with a proper update later.
-
-[I didn't check whether the code is already included in Linux.]
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 4e3efbee16..8e11c4b9b3 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -88,6 +88,7 @@ static const MemMapEntry virt_memmap[] = {
+     [VIRT_APLIC_S] =      {  0xd000000, APLIC_SIZE(VIRT_CPUS_MAX) },
+     [VIRT_UART0] =        { 0x10000000,         0x100 },
+     [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
++    [VIRT_UART1] =        { 0x10002000,         0x100 },
+     [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
+     [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
+     [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
+@@ -1506,6 +1507,9 @@ static void virt_machine_init(MachineState *machine)
+     serial_mm_init(system_memory, memmap[VIRT_UART0].base,
+         0, qdev_get_gpio_in(DEVICE(mmio_irqchip), UART0_IRQ), 399193,
+         serial_hd(0), DEVICE_LITTLE_ENDIAN);
++    serial_mm_init(system_memory, memmap[VIRT_UART1].base,
++        0, qdev_get_gpio_in(DEVICE(mmio_irqchip), UART1_IRQ), 399193,
++        serial_hd(1), DEVICE_LITTLE_ENDIAN);
+ 
+     sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
+         qdev_get_gpio_in(DEVICE(mmio_irqchip), RTC_IRQ));
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index e5c474b26e..8d2f8f225d 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -74,6 +74,7 @@ enum {
+     VIRT_APLIC_S,
+     VIRT_UART0,
+     VIRT_VIRTIO,
++    VIRT_UART1,
+     VIRT_FW_CFG,
+     VIRT_IMSIC_M,
+     VIRT_IMSIC_S,
+@@ -88,6 +89,7 @@ enum {
+ enum {
+     UART0_IRQ = 10,
+     RTC_IRQ = 11,
++    UART1_IRQ = 12,
+     VIRTIO_IRQ = 1, /* 1 to 8 */
+     VIRTIO_COUNT = 8,
+     PCIE_IRQ = 0x20, /* 32 to 35 */
+-- 
+2.25.1
 
 
