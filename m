@@ -1,68 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1prOPK-0000da-EA
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 15:32:58 -0400
+	id 1prOPW-000135-OZ
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 15:33:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1prOPI-0000ZQ-W4
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:32:57 -0400
-Received: from mail-lf1-x12f.google.com ([2a00:1450:4864:20::12f])
+ id 1prOPV-00012h-8B
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:33:09 -0400
+Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1prOPE-0004GW-5e
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:32:56 -0400
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-4effb818c37so1341926e87.3
- for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 12:32:50 -0700 (PDT)
+ id 1prOPP-0004JU-5J
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:33:09 -0400
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2a8ba23a2abso59655281fa.2
+ for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 12:33:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1682451168; x=1685043168;
+ d=linaro.org; s=google; t=1682451181; x=1685043181;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BwVtyUq7a1s7I4TvJ+6Zq/Ivbms1tXxuN75W2bqdp+Y=;
- b=Ow1tYpVzWGUrnDl/yHdLiNwUHhVfHVE69/GCa6oL05XwnPR9K1mIVW9yfdxzz47J5x
- 4CfvtdBwy9xu159SEiV9s2WpwnIVQOraeab45b43/lLOCb1I54/1CCS0y4tIVOjBw+4S
- cdmxUjxR6iq40zsrtmoCoH40dw83CFf4KLdICK6sQCIWdE5hC0JJH00fhlp7JfG+MkI1
- lFXHCgbjjxrczzc4QmqIkfzE5ehmMbhubdkOOjl4ZUIkHZSb4rFNOd9Z5eOdNKM2tvS9
- Iex63p2YXzdDkO3hQYyUn4MaifHXgk/FCHVy3JCAvQaDjvzY0gBUZNliSjXeeTwwY4Sl
- Wrgg==
+ bh=85iJGq2CjdCU/N8O/K+MInhKNWQboniNTJgJzrqVBYI=;
+ b=Y/N/8idtysiIyzwCoBI/IZqdMnmd+AyXZU63L1SdeX+rTeQNzdjFlM3r89OBNVw1nF
+ EMSr8JjU1ehO3YPDwU8wY+Ydi6uNw5tfMyy6KPU7j2+yQBXh4+1WYKMoSwaFZncua75u
+ tTkerWq+f4lhRbellbPswPDENgomUT51w/bC/pTiEo0iTNRV2xv4kBOuQZRXtB5hmr7Q
+ jK+e43i20RXSL3yB0bnFn/iyzV5wPG/6NFuY5WkZNYfw1huxvdtmZlUj27RS6yYawfct
+ 8XwnvZ/ePK9OUx9sHEFSbkNlSSVukVjvA1Zl/LXI2NwImszUTEHShojhUZ/e6zIxC7wB
+ rNWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682451168; x=1685043168;
+ d=1e100.net; s=20221208; t=1682451181; x=1685043181;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BwVtyUq7a1s7I4TvJ+6Zq/Ivbms1tXxuN75W2bqdp+Y=;
- b=DVM0xxRhgMj3TEmQ3Xslrkm+jRHu/9Pwbofs4csW2GriWgQ9R26T1uc7WkNWz5BGxQ
- hH7iFTYbEkRNBG5vzB3iaJjGdeLzfSVfzdlvWA31Kpk1XsapyaC+sOShOe67s3OsCO01
- vytkH3OAim4oz2pMWNAh1wCL97dUp54D0GHBC0nVRRMnz8GCH+z68v4DHmOTlT/L+krI
- NHHn+7fW0CSxHGyEBO7hcyuAOnHk5iNiPkwlgq+HW/57bYiqa4NiE53P18VLFZyTthfy
- /6la9RC3PfkQrqlFSmvvtI+qy9Y57Mu/w94E5Y5d+sqo2wtbX5o/PEWDdEmZ5KSXGZVJ
- ZnWA==
-X-Gm-Message-State: AAQBX9fQWy2BLeWM6PE1pFSHJ+7nFnWwsIv48W3EOQ99wAsaZhSjdI/9
- bF6NOutShhLkF0N2bOuyJU+csw==
-X-Google-Smtp-Source: AKy350alfG5OOweFKIAJzPH8qRWhJCl2xw8xnA4sFUx+phEkuaRzAz7/XYjLg2LoIZndj4SumI/9Rw==
-X-Received: by 2002:a2e:9245:0:b0:2a8:c75c:96cb with SMTP id
- v5-20020a2e9245000000b002a8c75c96cbmr3917872ljg.1.1682451168330; 
- Tue, 25 Apr 2023 12:32:48 -0700 (PDT)
+ bh=85iJGq2CjdCU/N8O/K+MInhKNWQboniNTJgJzrqVBYI=;
+ b=UMFm8rF4fw7Z9YhyrlYlr6/2TMAoPr1D04oGx+aKfcrZzfM/c3oD/LVnx3IM2TdGKp
+ rWz4PplPIN4EmG8rgUJcTpOJASVZ8f+sTIqcjkUjp8qGnFRAQqYLeiIpHCeazYJda63X
+ rj2Jn3R8KDn4yGrCMNP+D92E2Cd/NvXRfL7f8ED5GwcC2hCz/i6INaVPsY1Oom7y7I03
+ WXZiCThQEzVITFFFAM2zgs8NkDUKzUFy/QF/GGNfBLjIxs6ThE9q6zNDRaHD1CihnqV+
+ 46yuM9wiN23dDt15K8gG+6D7s4+A0U6+2FP6BAVO+ozfYjQ7ZS2o4zERw/bU3CzKbS2Z
+ KMmw==
+X-Gm-Message-State: AAQBX9emTk66ZARMPMk0oI5NTV1wu5tquFK5pgUmOzFdJplpduhAsPFo
+ ZBQrTwytUfoyJzlGbxZ3QX5B0w==
+X-Google-Smtp-Source: AKy350bCb1svWIRH824RzE8XT7aX2vF8YDBDaMyEaLqRZ7WWwb9+uNuyjUrji04pMCDuNUEx1j3DBg==
+X-Received: by 2002:a2e:9143:0:b0:2a8:c8c5:c769 with SMTP id
+ q3-20020a2e9143000000b002a8c8c5c769mr3901080ljg.36.1682451181292; 
+ Tue, 25 Apr 2023 12:33:01 -0700 (PDT)
 Received: from stoup.. ([91.209.212.61]) by smtp.gmail.com with ESMTPSA id
- z23-20020a2e8857000000b002a8c271de33sm2160484ljj.67.2023.04.25.12.32.29
+ z23-20020a2e8857000000b002a8c271de33sm2160484ljj.67.2023.04.25.12.32.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Apr 2023 12:32:48 -0700 (PDT)
+ Tue, 25 Apr 2023 12:33:00 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, git@xen0n.name, jiaxun.yang@flygoat.com,
- philmd@linaro.org
-Subject: [PATCH v3 05/57] accel/tcg: Reorg system mode store helpers
-Date: Tue, 25 Apr 2023 20:30:54 +0100
-Message-Id: <20230425193146.2106111-6-richard.henderson@linaro.org>
+ philmd@linaro.org, =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+Subject: [PATCH v3 06/57] accel/tcg: Honor atomicity of loads
+Date: Tue, 25 Apr 2023 20:30:55 +0100
+Message-Id: <20230425193146.2106111-7-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230425193146.2106111-1-richard.henderson@linaro.org>
 References: <20230425193146.2106111-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12f;
- envelope-from=richard.henderson@linaro.org; helo=mail-lf1-x12f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::229;
+ envelope-from=richard.henderson@linaro.org; helo=mail-lj1-x229.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -82,537 +83,907 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Apr 2023 19:32:57 -0000
+X-List-Received-Date: Tue, 25 Apr 2023 19:33:09 -0000
 
-Instead of trying to unify all operations on uint64_t, use
-mmu_lookup() to perform the basic tlb hit and resolution.
-Create individual functions to handle access by size.
+Create ldst_atomicity.c.inc.
 
+Not required for user-only code loads, because we've ensured that
+the page is read-only before beginning to translate code.
+
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- accel/tcg/cputlb.c | 408 +++++++++++++++++++++------------------------
- 1 file changed, 193 insertions(+), 215 deletions(-)
+ accel/tcg/cputlb.c             | 170 +++++++---
+ accel/tcg/user-exec.c          |  26 +-
+ accel/tcg/ldst_atomicity.c.inc | 550 +++++++++++++++++++++++++++++++++
+ 3 files changed, 695 insertions(+), 51 deletions(-)
+ create mode 100644 accel/tcg/ldst_atomicity.c.inc
 
 diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-index 1b699ad786..99eb527278 100644
+index 99eb527278..00e5a8f879 100644
 --- a/accel/tcg/cputlb.c
 +++ b/accel/tcg/cputlb.c
-@@ -2526,322 +2526,300 @@ store_memop(void *haddr, uint64_t val, MemOp op)
-     }
+@@ -1663,6 +1663,9 @@ tb_page_addr_t get_page_addr_code_hostp(CPUArchState *env, target_ulong addr,
+     return qemu_ram_addr_from_host_nofail(p);
  }
  
--static void full_stb_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
--                         MemOpIdx oi, uintptr_t retaddr);
--
--static void __attribute__((noinline))
--store_helper_unaligned(CPUArchState *env, target_ulong addr, uint64_t val,
--                       uintptr_t retaddr, size_t size, uintptr_t mmu_idx,
--                       bool big_endian)
-+/**
-+ * do_st_mmio_leN:
-+ * @env: cpu context
-+ * @p: translation parameters
-+ * @val_le: data to store
-+ * @mmu_idx: virtual address context
-+ * @ra: return address into tcg generated code, or 0
-+ *
-+ * Store @p->size bytes at @p->addr, which is memory-mapped i/o.
-+ * The bytes to store are extracted in little-endian order from @val_le;
-+ * return the bytes of @val_le beyond @p->size that have not been stored.
-+ */
-+static uint64_t do_st_mmio_leN(CPUArchState *env, MMULookupPageData *p,
-+                               uint64_t val_le, int mmu_idx, uintptr_t ra)
- {
--    uintptr_t index, index2;
--    CPUTLBEntry *entry, *entry2;
--    target_ulong page1, page2, tlb_addr, tlb_addr2;
--    MemOpIdx oi;
--    size_t size2;
--    int i;
-+    CPUTLBEntryFull *full = p->full;
-+    target_ulong addr = p->addr;
-+    int i, size = p->size;
- 
--    /*
--     * Ensure the second page is in the TLB.  Note that the first page
--     * is already guaranteed to be filled, and that the second page
--     * cannot evict the first.  An exception to this rule is PAGE_WRITE_INV
--     * handling: the first page could have evicted itself.
--     */
--    page1 = addr & TARGET_PAGE_MASK;
--    page2 = (addr + size) & TARGET_PAGE_MASK;
--    size2 = (addr + size) & ~TARGET_PAGE_MASK;
--    index2 = tlb_index(env, mmu_idx, page2);
--    entry2 = tlb_entry(env, mmu_idx, page2);
--
--    tlb_addr2 = tlb_addr_write(entry2);
--    if (page1 != page2 && !tlb_hit_page(tlb_addr2, page2)) {
--        if (!victim_tlb_hit(env, mmu_idx, index2, MMU_DATA_STORE, page2)) {
--            tlb_fill(env_cpu(env), page2, size2, MMU_DATA_STORE,
--                     mmu_idx, retaddr);
--            index2 = tlb_index(env, mmu_idx, page2);
--            entry2 = tlb_entry(env, mmu_idx, page2);
--        }
--        tlb_addr2 = tlb_addr_write(entry2);
-+    QEMU_IOTHREAD_LOCK_GUARD();
-+    for (i = 0; i < size; i++, val_le >>= 8) {
-+        io_writex(env, full, mmu_idx, val_le, addr + i, ra, MO_UB);
-     }
-+    return val_le;
-+}
- 
--    index = tlb_index(env, mmu_idx, addr);
--    entry = tlb_entry(env, mmu_idx, addr);
--    tlb_addr = tlb_addr_write(entry);
-+/**
-+ * do_st_bytes_leN:
-+ * @p: translation parameters
-+ * @val_le: data to store
-+ *
-+ * Store @p->size bytes at @p->haddr, which is RAM.
-+ * The bytes to store are extracted in little-endian order from @val_le;
-+ * return the bytes of @val_le beyond @p->size that have not been stored.
-+ */
-+static uint64_t do_st_bytes_leN(MMULookupPageData *p, uint64_t val_le)
-+{
-+    uint8_t *haddr = p->haddr;
-+    int i, size = p->size;
- 
--    /*
--     * Handle watchpoints.  Since this may trap, all checks
--     * must happen before any store.
--     */
--    if (unlikely(tlb_addr & TLB_WATCHPOINT)) {
--        cpu_check_watchpoint(env_cpu(env), addr, size - size2,
--                             env_tlb(env)->d[mmu_idx].fulltlb[index].attrs,
--                             BP_MEM_WRITE, retaddr);
--    }
--    if (unlikely(tlb_addr2 & TLB_WATCHPOINT)) {
--        cpu_check_watchpoint(env_cpu(env), page2, size2,
--                             env_tlb(env)->d[mmu_idx].fulltlb[index2].attrs,
--                             BP_MEM_WRITE, retaddr);
-+    for (i = 0; i < size; i++, val_le >>= 8) {
-+        haddr[i] = val_le;
-     }
-+    return val_le;
-+}
- 
--    /*
--     * XXX: not efficient, but simple.
--     * This loop must go in the forward direction to avoid issues
--     * with self-modifying code in Windows 64-bit.
--     */
--    oi = make_memop_idx(MO_UB, mmu_idx);
--    if (big_endian) {
--        for (i = 0; i < size; ++i) {
--            /* Big-endian extract.  */
--            uint8_t val8 = val >> (((size - 1) * 8) - (i * 8));
--            full_stb_mmu(env, addr + i, val8, oi, retaddr);
--        }
-+/*
-+ * Wrapper for the above.
-+ */
-+static uint64_t do_st_leN(CPUArchState *env, MMULookupPageData *p,
-+                          uint64_t val_le, int mmu_idx, uintptr_t ra)
-+{
-+    if (unlikely(p->flags & TLB_MMIO)) {
-+        return do_st_mmio_leN(env, p, val_le, mmu_idx, ra);
-+    } else if (unlikely(p->flags & TLB_DISCARD_WRITE)) {
-+        return val_le >> (p->size * 8);
-     } else {
--        for (i = 0; i < size; ++i) {
--            /* Little-endian extract.  */
--            uint8_t val8 = val >> (i * 8);
--            full_stb_mmu(env, addr + i, val8, oi, retaddr);
--        }
-+        return do_st_bytes_leN(p, val_le);
-     }
- }
- 
--static inline void QEMU_ALWAYS_INLINE
--store_helper(CPUArchState *env, target_ulong addr, uint64_t val,
--             MemOpIdx oi, uintptr_t retaddr, MemOp op)
-+static void do_st_1(CPUArchState *env, MMULookupPageData *p, uint8_t val,
-+                    int mmu_idx, uintptr_t ra)
- {
--    const unsigned a_bits = get_alignment_bits(get_memop(oi));
--    const size_t size = memop_size(op);
--    uintptr_t mmu_idx = get_mmuidx(oi);
--    uintptr_t index;
--    CPUTLBEntry *entry;
--    target_ulong tlb_addr;
--    void *haddr;
--
--    tcg_debug_assert(mmu_idx < NB_MMU_MODES);
--
--    /* Handle CPU specific unaligned behaviour */
--    if (addr & ((1 << a_bits) - 1)) {
--        cpu_unaligned_access(env_cpu(env), addr, MMU_DATA_STORE,
--                             mmu_idx, retaddr);
-+    if (unlikely(p->flags & TLB_MMIO)) {
-+        io_writex(env, p->full, mmu_idx, val, p->addr, ra, MO_UB);
-+    } else if (unlikely(p->flags & TLB_DISCARD_WRITE)) {
-+        /* nothing */
-+    } else {
-+        *(uint8_t *)p->haddr = val;
-     }
--
--    index = tlb_index(env, mmu_idx, addr);
--    entry = tlb_entry(env, mmu_idx, addr);
--    tlb_addr = tlb_addr_write(entry);
--
--    /* If the TLB entry is for a different page, reload and try again.  */
--    if (!tlb_hit(tlb_addr, addr)) {
--        if (!victim_tlb_hit(env, mmu_idx, index, MMU_DATA_STORE,
--            addr & TARGET_PAGE_MASK)) {
--            tlb_fill(env_cpu(env), addr, size, MMU_DATA_STORE,
--                     mmu_idx, retaddr);
--            index = tlb_index(env, mmu_idx, addr);
--            entry = tlb_entry(env, mmu_idx, addr);
--        }
--        tlb_addr = tlb_addr_write(entry) & ~TLB_INVALID_MASK;
--    }
--
--    /* Handle anything that isn't just a straight memory access.  */
--    if (unlikely(tlb_addr & ~TARGET_PAGE_MASK)) {
--        CPUTLBEntryFull *full;
--        bool need_swap;
--
--        /* For anything that is unaligned, recurse through byte stores.  */
--        if ((addr & (size - 1)) != 0) {
--            goto do_unaligned_access;
--        }
--
--        full = &env_tlb(env)->d[mmu_idx].fulltlb[index];
--
--        /* Handle watchpoints.  */
--        if (unlikely(tlb_addr & TLB_WATCHPOINT)) {
--            /* On watchpoint hit, this will longjmp out.  */
--            cpu_check_watchpoint(env_cpu(env), addr, size,
--                                 full->attrs, BP_MEM_WRITE, retaddr);
--        }
--
--        need_swap = size > 1 && (tlb_addr & TLB_BSWAP);
--
--        /* Handle I/O access.  */
--        if (tlb_addr & TLB_MMIO) {
--            io_writex(env, full, mmu_idx, val, addr, retaddr,
--                      op ^ (need_swap * MO_BSWAP));
--            return;
--        }
--
--        /* Ignore writes to ROM.  */
--        if (unlikely(tlb_addr & TLB_DISCARD_WRITE)) {
--            return;
--        }
--
--        /* Handle clean RAM pages.  */
--        if (tlb_addr & TLB_NOTDIRTY) {
--            notdirty_write(env_cpu(env), addr, size, full, retaddr);
--        }
--
--        haddr = (void *)((uintptr_t)addr + entry->addend);
--
--        /*
--         * Keep these two store_memop separate to ensure that the compiler
--         * is able to fold the entire function to a single instruction.
--         * There is a build-time assert inside to remind you of this.  ;-)
--         */
--        if (unlikely(need_swap)) {
--            store_memop(haddr, val, op ^ MO_BSWAP);
--        } else {
--            store_memop(haddr, val, op);
--        }
--        return;
--    }
--
--    /* Handle slow unaligned access (it spans two pages or IO).  */
--    if (size > 1
--        && unlikely((addr & ~TARGET_PAGE_MASK) + size - 1
--                     >= TARGET_PAGE_SIZE)) {
--    do_unaligned_access:
--        store_helper_unaligned(env, addr, val, retaddr, size,
--                               mmu_idx, memop_big_endian(op));
--        return;
--    }
--
--    haddr = (void *)((uintptr_t)addr + entry->addend);
--    store_memop(haddr, val, op);
- }
- 
--static void __attribute__((noinline))
--full_stb_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
--             MemOpIdx oi, uintptr_t retaddr)
-+static void do_st_2(CPUArchState *env, MMULookupPageData *p, uint16_t val,
-+                    int mmu_idx, MemOp memop, uintptr_t ra)
- {
--    validate_memop(oi, MO_UB);
--    store_helper(env, addr, val, oi, retaddr, MO_UB);
-+    if (unlikely(p->flags & TLB_MMIO)) {
-+        io_writex(env, p->full, mmu_idx, val, p->addr, ra, memop);
-+    } else if (unlikely(p->flags & TLB_DISCARD_WRITE)) {
-+        /* nothing */
-+    } else {
-+        /* Swap to host endian if necessary, then store. */
-+        if (memop & MO_BSWAP) {
-+            val = bswap16(val);
-+        }
-+        store_memop(p->haddr, val, MO_UW);
-+    }
-+}
++/* Load/store with atomicity primitives. */
++#include "ldst_atomicity.c.inc"
 +
-+static void do_st_4(CPUArchState *env, MMULookupPageData *p, uint32_t val,
-+                    int mmu_idx, MemOp memop, uintptr_t ra)
-+{
-+    if (unlikely(p->flags & TLB_MMIO)) {
-+        io_writex(env, p->full, mmu_idx, val, p->addr, ra, memop);
-+    } else if (unlikely(p->flags & TLB_DISCARD_WRITE)) {
-+        /* nothing */
-+    } else {
-+        /* Swap to host endian if necessary, then store. */
-+        if (memop & MO_BSWAP) {
-+            val = bswap32(val);
-+        }
-+        store_memop(p->haddr, val, MO_UL);
-+    }
-+}
-+
-+static void do_st_8(CPUArchState *env, MMULookupPageData *p, uint64_t val,
-+                    int mmu_idx, MemOp memop, uintptr_t ra)
-+{
-+    if (unlikely(p->flags & TLB_MMIO)) {
-+        io_writex(env, p->full, mmu_idx, val, p->addr, ra, memop);
-+    } else if (unlikely(p->flags & TLB_DISCARD_WRITE)) {
-+        /* nothing */
-+    } else {
-+        /* Swap to host endian if necessary, then store. */
-+        if (memop & MO_BSWAP) {
-+            val = bswap64(val);
-+        }
-+        store_memop(p->haddr, val, MO_UQ);
-+    }
- }
- 
- void helper_ret_stb_mmu(CPUArchState *env, target_ulong addr, uint32_t val,
--                        MemOpIdx oi, uintptr_t retaddr)
-+                        MemOpIdx oi, uintptr_t ra)
- {
--    full_stb_mmu(env, addr, val, oi, retaddr);
-+    MMULookupLocals l;
-+    bool crosspage;
-+
-+    validate_memop(oi, MO_UB);
-+    crosspage = mmu_lookup(env, addr, oi, ra, MMU_DATA_STORE, &l);
-+    tcg_debug_assert(!crosspage);
-+
-+    do_st_1(env, &l.page[0], val, l.mmu_idx, ra);
- }
- 
--static void full_le_stw_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
--                            MemOpIdx oi, uintptr_t retaddr)
-+static void do_st2_mmu(CPUArchState *env, target_ulong addr, uint16_t val,
-+                       MemOpIdx oi, uintptr_t ra)
- {
--    validate_memop(oi, MO_LEUW);
--    store_helper(env, addr, val, oi, retaddr, MO_LEUW);
-+    MMULookupLocals l;
-+    bool crosspage;
-+    uint8_t a, b;
-+
-+    crosspage = mmu_lookup(env, addr, oi, ra, MMU_DATA_STORE, &l);
-+    if (likely(!crosspage)) {
-+        do_st_2(env, &l.page[0], val, l.mmu_idx, l.memop, ra);
-+        return;
-+    }
-+
-+    if ((l.memop & MO_BSWAP) == MO_LE) {
-+        a = val, b = val >> 8;
-+    } else {
-+        b = val, a = val >> 8;
-+    }
-+    do_st_1(env, &l.page[0], a, l.mmu_idx, ra);
-+    do_st_1(env, &l.page[1], b, l.mmu_idx, ra);
- }
- 
- void helper_le_stw_mmu(CPUArchState *env, target_ulong addr, uint32_t val,
-                        MemOpIdx oi, uintptr_t retaddr)
- {
--    full_le_stw_mmu(env, addr, val, oi, retaddr);
--}
--
--static void full_be_stw_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
--                            MemOpIdx oi, uintptr_t retaddr)
--{
--    validate_memop(oi, MO_BEUW);
--    store_helper(env, addr, val, oi, retaddr, MO_BEUW);
-+    validate_memop(oi, MO_LEUW);
-+    do_st2_mmu(env, addr, val, oi, retaddr);
- }
- 
- void helper_be_stw_mmu(CPUArchState *env, target_ulong addr, uint32_t val,
-                        MemOpIdx oi, uintptr_t retaddr)
- {
--    full_be_stw_mmu(env, addr, val, oi, retaddr);
-+    validate_memop(oi, MO_BEUW);
-+    do_st2_mmu(env, addr, val, oi, retaddr);
- }
- 
--static void full_le_stl_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
--                            MemOpIdx oi, uintptr_t retaddr)
-+static void do_st4_mmu(CPUArchState *env, target_ulong addr, uint32_t val,
-+                       MemOpIdx oi, uintptr_t ra)
- {
--    validate_memop(oi, MO_LEUL);
--    store_helper(env, addr, val, oi, retaddr, MO_LEUL);
-+    MMULookupLocals l;
-+    bool crosspage;
-+
-+    crosspage = mmu_lookup(env, addr, oi, ra, MMU_DATA_STORE, &l);
-+    if (likely(!crosspage)) {
-+        do_st_4(env, &l.page[0], val, l.mmu_idx, l.memop, ra);
-+        return;
-+    }
-+
-+    /* Swap to little endian for simplicity, then store by bytes. */
-+    if ((l.memop & MO_BSWAP) != MO_LE) {
-+        val = bswap32(val);
-+    }
-+    val = do_st_leN(env, &l.page[0], val, l.mmu_idx, ra);
-+    (void) do_st_leN(env, &l.page[1], val, l.mmu_idx, ra);
- }
- 
- void helper_le_stl_mmu(CPUArchState *env, target_ulong addr, uint32_t val,
-                        MemOpIdx oi, uintptr_t retaddr)
- {
--    full_le_stl_mmu(env, addr, val, oi, retaddr);
--}
--
--static void full_be_stl_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
--                            MemOpIdx oi, uintptr_t retaddr)
--{
--    validate_memop(oi, MO_BEUL);
--    store_helper(env, addr, val, oi, retaddr, MO_BEUL);
-+    validate_memop(oi, MO_LEUL);
-+    do_st4_mmu(env, addr, val, oi, retaddr);
- }
- 
- void helper_be_stl_mmu(CPUArchState *env, target_ulong addr, uint32_t val,
-                        MemOpIdx oi, uintptr_t retaddr)
- {
--    full_be_stl_mmu(env, addr, val, oi, retaddr);
-+    validate_memop(oi, MO_BEUL);
-+    do_st4_mmu(env, addr, val, oi, retaddr);
-+}
-+
-+static void do_st8_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
-+                       MemOpIdx oi, uintptr_t ra)
-+{
-+    MMULookupLocals l;
-+    bool crosspage;
-+
-+    crosspage = mmu_lookup(env, addr, oi, ra, MMU_DATA_STORE, &l);
-+    if (likely(!crosspage)) {
-+        do_st_8(env, &l.page[0], val, l.mmu_idx, l.memop, ra);
-+        return;
-+    }
-+
-+    /* Swap to little endian for simplicity, then store by bytes. */
-+    if ((l.memop & MO_BSWAP) != MO_LE) {
-+        val = bswap64(val);
-+    }
-+    val = do_st_leN(env, &l.page[0], val, l.mmu_idx, ra);
-+    (void) do_st_leN(env, &l.page[1], val, l.mmu_idx, ra);
- }
- 
- void helper_le_stq_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
-                        MemOpIdx oi, uintptr_t retaddr)
- {
-     validate_memop(oi, MO_LEUQ);
--    store_helper(env, addr, val, oi, retaddr, MO_LEUQ);
-+    do_st8_mmu(env, addr, val, oi, retaddr);
- }
- 
- void helper_be_stq_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
-                        MemOpIdx oi, uintptr_t retaddr)
- {
-     validate_memop(oi, MO_BEUQ);
--    store_helper(env, addr, val, oi, retaddr, MO_BEUQ);
-+    do_st8_mmu(env, addr, val, oi, retaddr);
- }
- 
+ #ifdef CONFIG_PLUGIN
  /*
-  * Store Helpers for cpu_ldst.h
-  */
- 
--typedef void FullStoreHelper(CPUArchState *env, target_ulong addr,
--                             uint64_t val, MemOpIdx oi, uintptr_t retaddr);
+  * Perform a TLB lookup and populate the qemu_plugin_hwaddr structure.
+@@ -2029,35 +2032,7 @@ static void validate_memop(MemOpIdx oi, MemOp expected)
+  * specifically for reading instructions from system memory. It is
+  * called by the translation loop and in some helpers where the code
+  * is disassembled. It shouldn't be called directly by guest code.
+- */
 -
--static inline void cpu_store_helper(CPUArchState *env, target_ulong addr,
--                                    uint64_t val, MemOpIdx oi, uintptr_t ra,
--                                    FullStoreHelper *full_store)
-+static void plugin_store_cb(CPUArchState *env, abi_ptr addr, MemOpIdx oi)
- {
--    full_store(env, addr, val, oi, ra);
-     qemu_plugin_vcpu_mem_cb(env_cpu(env), addr, oi, QEMU_PLUGIN_MEM_W);
+-typedef uint64_t FullLoadHelper(CPUArchState *env, target_ulong addr,
+-                                MemOpIdx oi, uintptr_t retaddr);
+-
+-static inline uint64_t QEMU_ALWAYS_INLINE
+-load_memop(const void *haddr, MemOp op)
+-{
+-    switch (op) {
+-    case MO_UB:
+-        return ldub_p(haddr);
+-    case MO_BEUW:
+-        return lduw_be_p(haddr);
+-    case MO_LEUW:
+-        return lduw_le_p(haddr);
+-    case MO_BEUL:
+-        return (uint32_t)ldl_be_p(haddr);
+-    case MO_LEUL:
+-        return (uint32_t)ldl_le_p(haddr);
+-    case MO_BEUQ:
+-        return ldq_be_p(haddr);
+-    case MO_LEUQ:
+-        return ldq_le_p(haddr);
+-    default:
+-        qemu_build_not_reached();
+-    }
+-}
+-
+-/*
++ *
+  * For the benefit of TCG generated code, we want to avoid the
+  * complication of ABI-specific return type promotion and always
+  * return a value extended to the register size of the host. This is
+@@ -2113,17 +2088,134 @@ static uint64_t do_ld_bytes_beN(MMULookupPageData *p, uint64_t ret_be)
+     return ret_be;
  }
  
- void cpu_stb_mmu(CPUArchState *env, target_ulong addr, uint8_t val,
-                  MemOpIdx oi, uintptr_t retaddr)
++/**
++ * do_ld_parts_beN
++ * @p: translation parameters
++ * @ret_be: accumulated data
++ *
++ * As do_ld_bytes_beN, but atomically on each aligned part.
++ */
++static uint64_t do_ld_parts_beN(MMULookupPageData *p, uint64_t ret_be)
++{
++    void *haddr = p->haddr;
++    int size = p->size;
++
++    do {
++        uint64_t x;
++        int n;
++
++        /*
++         * Find minimum of alignment and size.
++         * This is slightly stronger than required by MO_ATOM_SUBALIGN, which
++         * would have only checked the low bits of addr|size once at the start,
++         * but is just as easy.
++         */
++        switch (((uintptr_t)haddr | size) & 7) {
++        case 4:
++            x = cpu_to_be32(load_atomic4(haddr));
++            ret_be = (ret_be << 32) | x;
++            n = 4;
++            break;
++        case 2:
++        case 6:
++            x = cpu_to_be16(load_atomic2(haddr));
++            ret_be = (ret_be << 16) | x;
++            n = 2;
++            break;
++        default:
++            x = *(uint8_t *)haddr;
++            ret_be = (ret_be << 8) | x;
++            n = 1;
++            break;
++        case 0:
++            g_assert_not_reached();
++        }
++        haddr += n;
++        size -= n;
++    } while (size != 0);
++    return ret_be;
++}
++
++/**
++ * do_ld_parts_be4
++ * @p: translation parameters
++ * @ret_be: accumulated data
++ *
++ * As do_ld_bytes_beN, but with one atomic load.
++ * Four aligned bytes are guaranteed to cover the load.
++ */
++static uint64_t do_ld_whole_be4(MMULookupPageData *p, uint64_t ret_be)
++{
++    int o = p->addr & 3;
++    uint32_t x = load_atomic4(p->haddr - o);
++
++    x = cpu_to_be32(x);
++    x <<= o * 8;
++    x >>= (4 - p->size) * 8;
++    return (ret_be << (p->size * 8)) | x;
++}
++
++/**
++ * do_ld_parts_be8
++ * @p: translation parameters
++ * @ret_be: accumulated data
++ *
++ * As do_ld_bytes_beN, but with one atomic load.
++ * Eight aligned bytes are guaranteed to cover the load.
++ */
++static uint64_t do_ld_whole_be8(CPUArchState *env, uintptr_t ra,
++                                MMULookupPageData *p, uint64_t ret_be)
++{
++    int o = p->addr & 7;
++    uint64_t x = load_atomic8_or_exit(env, ra, p->haddr - o);
++
++    x = cpu_to_be64(x);
++    x <<= o * 8;
++    x >>= (8 - p->size) * 8;
++    return (ret_be << (p->size * 8)) | x;
++}
++
+ /*
+  * Wrapper for the above.
+  */
+ static uint64_t do_ld_beN(CPUArchState *env, MMULookupPageData *p,
+-                          uint64_t ret_be, int mmu_idx,
+-                          MMUAccessType type, uintptr_t ra)
++                          uint64_t ret_be, int mmu_idx, MMUAccessType type,
++                          MemOp mop, uintptr_t ra)
  {
--    cpu_store_helper(env, addr, val, oi, retaddr, full_stb_mmu);
-+    helper_ret_stb_mmu(env, addr, val, oi, retaddr);
-+    plugin_store_cb(env, addr, oi);
++    MemOp atmax;
++
+     if (unlikely(p->flags & TLB_MMIO)) {
+         return do_ld_mmio_beN(env, p, ret_be, mmu_idx, type, ra);
+-    } else {
++    }
++
++    switch (mop & MO_ATOM_MASK) {
++    case MO_ATOM_WITHIN16:
++        /*
++         * It is a given that we cross a page and therefore there is no
++         * atomicity for the load as a whole, but there may be a subobject
++         * as defined by ATMAX which does not cross a 16-byte boundary.
++         */
++        atmax = mop & MO_ATMAX_MASK;
++        if (atmax == MO_ATMAX_SIZE) {
++            atmax = mop & MO_SIZE;
++        } else {
++            atmax >>= MO_ATMAX_SHIFT;
++        }
++        if (unlikely(p->size >= (1 << atmax))) {
++            if (!HAVE_al8_fast && p->size < 4) {
++                return do_ld_whole_be4(p, ret_be);
++            } else {
++                return do_ld_whole_be8(env, ra, p, ret_be);
++            }
++        }
++        /* fall through */
++    case MO_ATOM_IFALIGN:
++    case MO_ATOM_NONE:
+         return do_ld_bytes_beN(p, ret_be);
++    case MO_ATOM_SUBALIGN:
++        return do_ld_parts_beN(p, ret_be);
++    default:
++        g_assert_not_reached();
+     }
  }
  
- void cpu_stw_be_mmu(CPUArchState *env, target_ulong addr, uint16_t val,
-                     MemOpIdx oi, uintptr_t retaddr)
- {
--    cpu_store_helper(env, addr, val, oi, retaddr, full_be_stw_mmu);
-+    helper_be_stw_mmu(env, addr, val, oi, retaddr);
-+    plugin_store_cb(env, addr, oi);
+@@ -2147,7 +2239,7 @@ static uint16_t do_ld_2(CPUArchState *env, MMULookupPageData *p, int mmu_idx,
+     }
+ 
+     /* Perform the load host endian, then swap if necessary. */
+-    ret = load_memop(p->haddr, MO_UW);
++    ret = load_atom_2(env, ra, p->haddr, memop);
+     if (memop & MO_BSWAP) {
+         ret = bswap16(ret);
+     }
+@@ -2164,7 +2256,7 @@ static uint32_t do_ld_4(CPUArchState *env, MMULookupPageData *p, int mmu_idx,
+     }
+ 
+     /* Perform the load host endian. */
+-    ret = load_memop(p->haddr, MO_UL);
++    ret = load_atom_4(env, ra, p->haddr, memop);
+     if (memop & MO_BSWAP) {
+         ret = bswap32(ret);
+     }
+@@ -2181,7 +2273,7 @@ static uint64_t do_ld_8(CPUArchState *env, MMULookupPageData *p, int mmu_idx,
+     }
+ 
+     /* Perform the load host endian. */
+-    ret = load_memop(p->haddr, MO_UQ);
++    ret = load_atom_8(env, ra, p->haddr, memop);
+     if (memop & MO_BSWAP) {
+         ret = bswap64(ret);
+     }
+@@ -2257,8 +2349,8 @@ static uint32_t do_ld4_mmu(CPUArchState *env, target_ulong addr, MemOpIdx oi,
+         return do_ld_4(env, &l.page[0], l.mmu_idx, access_type, l.memop, ra);
+     }
+ 
+-    ret = do_ld_beN(env, &l.page[0], 0, l.mmu_idx, access_type, ra);
+-    ret = do_ld_beN(env, &l.page[1], ret, l.mmu_idx, access_type, ra);
++    ret = do_ld_beN(env, &l.page[0], 0, l.mmu_idx, access_type, l.memop, ra);
++    ret = do_ld_beN(env, &l.page[1], ret, l.mmu_idx, access_type, l.memop, ra);
+     if ((l.memop & MO_BSWAP) == MO_LE) {
+         ret = bswap32(ret);
+     }
+@@ -2291,8 +2383,8 @@ static uint64_t do_ld8_mmu(CPUArchState *env, target_ulong addr, MemOpIdx oi,
+         return do_ld_8(env, &l.page[0], l.mmu_idx, access_type, l.memop, ra);
+     }
+ 
+-    ret = do_ld_beN(env, &l.page[0], 0, l.mmu_idx, access_type, ra);
+-    ret = do_ld_beN(env, &l.page[1], ret, l.mmu_idx, access_type, ra);
++    ret = do_ld_beN(env, &l.page[0], 0, l.mmu_idx, access_type, l.memop, ra);
++    ret = do_ld_beN(env, &l.page[1], ret, l.mmu_idx, access_type, l.memop, ra);
+     if ((l.memop & MO_BSWAP) == MO_LE) {
+         ret = bswap64(ret);
+     }
+diff --git a/accel/tcg/user-exec.c b/accel/tcg/user-exec.c
+index a7e0c3e2f4..522bafe44e 100644
+--- a/accel/tcg/user-exec.c
++++ b/accel/tcg/user-exec.c
+@@ -931,6 +931,8 @@ static void *cpu_mmu_lookup(CPUArchState *env, target_ulong addr,
+     return ret;
  }
  
- void cpu_stl_be_mmu(CPUArchState *env, target_ulong addr, uint32_t val,
-                     MemOpIdx oi, uintptr_t retaddr)
++#include "ldst_atomicity.c.inc"
++
+ uint8_t cpu_ldb_mmu(CPUArchState *env, abi_ptr addr,
+                     MemOpIdx oi, uintptr_t ra)
  {
--    cpu_store_helper(env, addr, val, oi, retaddr, full_be_stl_mmu);
-+    helper_be_stl_mmu(env, addr, val, oi, retaddr);
-+    plugin_store_cb(env, addr, oi);
+@@ -953,10 +955,10 @@ uint16_t cpu_ldw_be_mmu(CPUArchState *env, abi_ptr addr,
+ 
+     validate_memop(oi, MO_BEUW);
+     haddr = cpu_mmu_lookup(env, addr, oi, ra, MMU_DATA_LOAD);
+-    ret = lduw_be_p(haddr);
++    ret = load_atom_2(env, ra, haddr, get_memop(oi));
+     clear_helper_retaddr();
+     qemu_plugin_vcpu_mem_cb(env_cpu(env), addr, oi, QEMU_PLUGIN_MEM_R);
+-    return ret;
++    return cpu_to_be16(ret);
  }
  
- void cpu_stq_be_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
-                     MemOpIdx oi, uintptr_t retaddr)
- {
--    cpu_store_helper(env, addr, val, oi, retaddr, helper_be_stq_mmu);
-+    helper_be_stq_mmu(env, addr, val, oi, retaddr);
-+    plugin_store_cb(env, addr, oi);
+ uint32_t cpu_ldl_be_mmu(CPUArchState *env, abi_ptr addr,
+@@ -967,10 +969,10 @@ uint32_t cpu_ldl_be_mmu(CPUArchState *env, abi_ptr addr,
+ 
+     validate_memop(oi, MO_BEUL);
+     haddr = cpu_mmu_lookup(env, addr, oi, ra, MMU_DATA_LOAD);
+-    ret = ldl_be_p(haddr);
++    ret = load_atom_4(env, ra, haddr, get_memop(oi));
+     clear_helper_retaddr();
+     qemu_plugin_vcpu_mem_cb(env_cpu(env), addr, oi, QEMU_PLUGIN_MEM_R);
+-    return ret;
++    return cpu_to_be32(ret);
  }
  
- void cpu_stw_le_mmu(CPUArchState *env, target_ulong addr, uint16_t val,
-                     MemOpIdx oi, uintptr_t retaddr)
- {
--    cpu_store_helper(env, addr, val, oi, retaddr, full_le_stw_mmu);
-+    helper_le_stw_mmu(env, addr, val, oi, retaddr);
-+    plugin_store_cb(env, addr, oi);
+ uint64_t cpu_ldq_be_mmu(CPUArchState *env, abi_ptr addr,
+@@ -981,10 +983,10 @@ uint64_t cpu_ldq_be_mmu(CPUArchState *env, abi_ptr addr,
+ 
+     validate_memop(oi, MO_BEUQ);
+     haddr = cpu_mmu_lookup(env, addr, oi, ra, MMU_DATA_LOAD);
+-    ret = ldq_be_p(haddr);
++    ret = load_atom_8(env, ra, haddr, get_memop(oi));
+     clear_helper_retaddr();
+     qemu_plugin_vcpu_mem_cb(env_cpu(env), addr, oi, QEMU_PLUGIN_MEM_R);
+-    return ret;
++    return cpu_to_be64(ret);
  }
  
- void cpu_stl_le_mmu(CPUArchState *env, target_ulong addr, uint32_t val,
-                     MemOpIdx oi, uintptr_t retaddr)
- {
--    cpu_store_helper(env, addr, val, oi, retaddr, full_le_stl_mmu);
-+    helper_le_stl_mmu(env, addr, val, oi, retaddr);
-+    plugin_store_cb(env, addr, oi);
+ uint16_t cpu_ldw_le_mmu(CPUArchState *env, abi_ptr addr,
+@@ -995,10 +997,10 @@ uint16_t cpu_ldw_le_mmu(CPUArchState *env, abi_ptr addr,
+ 
+     validate_memop(oi, MO_LEUW);
+     haddr = cpu_mmu_lookup(env, addr, oi, ra, MMU_DATA_LOAD);
+-    ret = lduw_le_p(haddr);
++    ret = load_atom_2(env, ra, haddr, get_memop(oi));
+     clear_helper_retaddr();
+     qemu_plugin_vcpu_mem_cb(env_cpu(env), addr, oi, QEMU_PLUGIN_MEM_R);
+-    return ret;
++    return cpu_to_le16(ret);
  }
  
- void cpu_stq_le_mmu(CPUArchState *env, target_ulong addr, uint64_t val,
-                     MemOpIdx oi, uintptr_t retaddr)
- {
--    cpu_store_helper(env, addr, val, oi, retaddr, helper_le_stq_mmu);
-+    helper_le_stq_mmu(env, addr, val, oi, retaddr);
-+    plugin_store_cb(env, addr, oi);
+ uint32_t cpu_ldl_le_mmu(CPUArchState *env, abi_ptr addr,
+@@ -1009,10 +1011,10 @@ uint32_t cpu_ldl_le_mmu(CPUArchState *env, abi_ptr addr,
+ 
+     validate_memop(oi, MO_LEUL);
+     haddr = cpu_mmu_lookup(env, addr, oi, ra, MMU_DATA_LOAD);
+-    ret = ldl_le_p(haddr);
++    ret = load_atom_4(env, ra, haddr, get_memop(oi));
+     clear_helper_retaddr();
+     qemu_plugin_vcpu_mem_cb(env_cpu(env), addr, oi, QEMU_PLUGIN_MEM_R);
+-    return ret;
++    return cpu_to_le32(ret);
  }
  
- void cpu_st16_be_mmu(CPUArchState *env, abi_ptr addr, Int128 val,
+ uint64_t cpu_ldq_le_mmu(CPUArchState *env, abi_ptr addr,
+@@ -1023,10 +1025,10 @@ uint64_t cpu_ldq_le_mmu(CPUArchState *env, abi_ptr addr,
+ 
+     validate_memop(oi, MO_LEUQ);
+     haddr = cpu_mmu_lookup(env, addr, oi, ra, MMU_DATA_LOAD);
+-    ret = ldq_le_p(haddr);
++    ret = load_atom_8(env, ra, haddr, get_memop(oi));
+     clear_helper_retaddr();
+     qemu_plugin_vcpu_mem_cb(env_cpu(env), addr, oi, QEMU_PLUGIN_MEM_R);
+-    return ret;
++    return cpu_to_le64(ret);
+ }
+ 
+ Int128 cpu_ld16_be_mmu(CPUArchState *env, abi_ptr addr,
+diff --git a/accel/tcg/ldst_atomicity.c.inc b/accel/tcg/ldst_atomicity.c.inc
+new file mode 100644
+index 0000000000..5169073431
+--- /dev/null
++++ b/accel/tcg/ldst_atomicity.c.inc
+@@ -0,0 +1,550 @@
++/*
++ * Routines common to user and system emulation of load/store.
++ *
++ *  Copyright (c) 2022 Linaro, Ltd.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ */
++
++#ifdef CONFIG_ATOMIC64
++# define HAVE_al8          true
++#else
++# define HAVE_al8          false
++#endif
++#define HAVE_al8_fast      (ATOMIC_REG_SIZE >= 8)
++
++#if defined(CONFIG_ATOMIC128)
++# define HAVE_al16_fast    true
++#else
++# define HAVE_al16_fast    false
++#endif
++
++/**
++ * required_atomicity:
++ *
++ * Return the lg2 bytes of atomicity required by @memop for @p.
++ * If the operation must be split into two operations to be
++ * examined separately for atomicity, return -lg2.
++ */
++static int required_atomicity(CPUArchState *env, uintptr_t p, MemOp memop)
++{
++    int atmax = memop & MO_ATMAX_MASK;
++    int size = memop & MO_SIZE;
++    unsigned tmp;
++
++    if (atmax == MO_ATMAX_SIZE) {
++        atmax = size;
++    } else {
++        atmax >>= MO_ATMAX_SHIFT;
++    }
++
++    switch (memop & MO_ATOM_MASK) {
++    case MO_ATOM_IFALIGN:
++        tmp = (1 << atmax) - 1;
++        if (p & tmp) {
++            return MO_8;
++        }
++        break;
++    case MO_ATOM_NONE:
++        return MO_8;
++    case MO_ATOM_SUBALIGN:
++        tmp = p & -p;
++        if (tmp != 0 && tmp < atmax) {
++            atmax = tmp;
++        }
++        break;
++    case MO_ATOM_WITHIN16:
++        tmp = p & 15;
++        if (tmp + (1 << size) <= 16) {
++            atmax = size;
++        } else if (atmax == size) {
++            return MO_8;
++        } else if (tmp + (1 << atmax) != 16) {
++            /*
++             * Paired load/store, where the pairs aren't aligned.
++             * One of the two must still be handled atomically.
++             */
++            atmax = -atmax;
++        }
++        break;
++    default:
++        g_assert_not_reached();
++    }
++
++    /*
++     * Here we have the architectural atomicity of the operation.
++     * However, when executing in a serial context, we need no extra
++     * host atomicity in order to avoid racing.  This reduction
++     * avoids looping with cpu_loop_exit_atomic.
++     */
++    if (cpu_in_serial_context(env_cpu(env))) {
++        return MO_8;
++    }
++    return atmax;
++}
++
++/**
++ * load_atomic2:
++ * @pv: host address
++ *
++ * Atomically load 2 aligned bytes from @pv.
++ */
++static inline uint16_t load_atomic2(void *pv)
++{
++    uint16_t *p = __builtin_assume_aligned(pv, 2);
++    return qatomic_read(p);
++}
++
++/**
++ * load_atomic4:
++ * @pv: host address
++ *
++ * Atomically load 4 aligned bytes from @pv.
++ */
++static inline uint32_t load_atomic4(void *pv)
++{
++    uint32_t *p = __builtin_assume_aligned(pv, 4);
++    return qatomic_read(p);
++}
++
++/**
++ * load_atomic8:
++ * @pv: host address
++ *
++ * Atomically load 8 aligned bytes from @pv.
++ */
++static inline uint64_t load_atomic8(void *pv)
++{
++    uint64_t *p = __builtin_assume_aligned(pv, 8);
++
++    qemu_build_assert(HAVE_al8);
++    return qatomic_read__nocheck(p);
++}
++
++/**
++ * load_atomic16:
++ * @pv: host address
++ *
++ * Atomically load 16 aligned bytes from @pv.
++ */
++static inline Int128 load_atomic16(void *pv)
++{
++#ifdef CONFIG_ATOMIC128
++    __uint128_t *p = __builtin_assume_aligned(pv, 16);
++    Int128Alias r;
++
++    r.u = qatomic_read__nocheck(p);
++    return r.s;
++#else
++    qemu_build_not_reached();
++#endif
++}
++
++/**
++ * load_atomic8_or_exit:
++ * @env: cpu context
++ * @ra: host unwind address
++ * @pv: host address
++ *
++ * Atomically load 8 aligned bytes from @pv.
++ * If this is not possible, longjmp out to restart serially.
++ */
++static uint64_t load_atomic8_or_exit(CPUArchState *env, uintptr_t ra, void *pv)
++{
++    if (HAVE_al8) {
++        return load_atomic8(pv);
++    }
++
++#ifdef CONFIG_USER_ONLY
++    /*
++     * If the page is not writable, then assume the value is immutable
++     * and requires no locking.  This ignores the case of MAP_SHARED with
++     * another process, because the fallback start_exclusive solution
++     * provides no protection across processes.
++     */
++    if (!page_check_range(h2g(pv), 8, PAGE_WRITE)) {
++        uint64_t *p = __builtin_assume_aligned(pv, 8);
++        return *p;
++    }
++#endif
++
++    /* Ultimate fallback: re-execute in serial context. */
++    cpu_loop_exit_atomic(env_cpu(env), ra);
++}
++
++/**
++ * load_atomic16_or_exit:
++ * @env: cpu context
++ * @ra: host unwind address
++ * @pv: host address
++ *
++ * Atomically load 16 aligned bytes from @pv.
++ * If this is not possible, longjmp out to restart serially.
++ */
++static Int128 load_atomic16_or_exit(CPUArchState *env, uintptr_t ra, void *pv)
++{
++    Int128 *p = __builtin_assume_aligned(pv, 16);
++
++    if (HAVE_al16_fast) {
++        return load_atomic16(p);
++    }
++
++#ifdef CONFIG_USER_ONLY
++    /*
++     * We can only use cmpxchg to emulate a load if the page is writable.
++     * If the page is not writable, then assume the value is immutable
++     * and requires no locking.  This ignores the case of MAP_SHARED with
++     * another process, because the fallback start_exclusive solution
++     * provides no protection across processes.
++     */
++    if (!page_check_range(h2g(p), 16, PAGE_WRITE)) {
++        return *p;
++    }
++#endif
++
++    /*
++     * In system mode all guest pages are writable, and for user-only
++     * we have just checked writability.  Try cmpxchg.
++     */
++#if defined(CONFIG_CMPXCHG128)
++    /* Swap 0 with 0, with the side-effect of returning the old value. */
++    {
++        Int128Alias r;
++        r.u = __sync_val_compare_and_swap_16((__uint128_t *)p, 0, 0);
++        return r.s;
++    }
++#endif
++
++    /* Ultimate fallback: re-execute in serial context. */
++    cpu_loop_exit_atomic(env_cpu(env), ra);
++}
++
++/**
++ * load_atom_extract_al4x2:
++ * @pv: host address
++ *
++ * Load 4 bytes from @p, from two sequential atomic 4-byte loads.
++ */
++static uint32_t load_atom_extract_al4x2(void *pv)
++{
++    uintptr_t pi = (uintptr_t)pv;
++    int sh = (pi & 3) * 8;
++    uint32_t a, b;
++
++    pv = (void *)(pi & ~3);
++    a = load_atomic4(pv);
++    b = load_atomic4(pv + 4);
++
++    if (HOST_BIG_ENDIAN) {
++        return (a << sh) | (b >> (-sh & 31));
++    } else {
++        return (a >> sh) | (b << (-sh & 31));
++    }
++}
++
++/**
++ * load_atom_extract_al8x2:
++ * @pv: host address
++ *
++ * Load 8 bytes from @p, from two sequential atomic 8-byte loads.
++ */
++static uint64_t load_atom_extract_al8x2(void *pv)
++{
++    uintptr_t pi = (uintptr_t)pv;
++    int sh = (pi & 7) * 8;
++    uint64_t a, b;
++
++    pv = (void *)(pi & ~7);
++    a = load_atomic8(pv);
++    b = load_atomic8(pv + 8);
++
++    if (HOST_BIG_ENDIAN) {
++        return (a << sh) | (b >> (-sh & 63));
++    } else {
++        return (a >> sh) | (b << (-sh & 63));
++    }
++}
++
++/**
++ * load_atom_extract_al8_or_exit:
++ * @env: cpu context
++ * @ra: host unwind address
++ * @pv: host address
++ * @s: object size in bytes, @s <= 4.
++ *
++ * Atomically load @s bytes from @p, when p % s != 0, and [p, p+s-1] does
++ * not cross an 8-byte boundary.  This means that we can perform an atomic
++ * 8-byte load and extract.
++ * The value is returned in the low bits of a uint32_t.
++ */
++static uint32_t load_atom_extract_al8_or_exit(CPUArchState *env, uintptr_t ra,
++                                              void *pv, int s)
++{
++    uintptr_t pi = (uintptr_t)pv;
++    int o = pi & 7;
++    int shr = (HOST_BIG_ENDIAN ? 8 - s - o : o) * 8;
++
++    pv = (void *)(pi & ~7);
++    return load_atomic8_or_exit(env, ra, pv) >> shr;
++}
++
++/**
++ * load_atom_extract_al16_or_exit:
++ * @env: cpu context
++ * @ra: host unwind address
++ * @p: host address
++ * @s: object size in bytes, @s <= 8.
++ *
++ * Atomically load @s bytes from @p, when p % 16 < 8
++ * and p % 16 + s > 8.  I.e. does not cross a 16-byte
++ * boundary, but *does* cross an 8-byte boundary.
++ * This is the slow version, so we must have eliminated
++ * any faster load_atom_extract_al8_or_exit case.
++ *
++ * If this is not possible, longjmp out to restart serially.
++ */
++static uint64_t load_atom_extract_al16_or_exit(CPUArchState *env, uintptr_t ra,
++                                               void *pv, int s)
++{
++    uintptr_t pi = (uintptr_t)pv;
++    int o = pi & 7;
++    int shr = (HOST_BIG_ENDIAN ? 16 - s - o : o) * 8;
++    Int128 r;
++
++    /*
++     * Note constraints above: p & 8 must be clear.
++     * Provoke SIGBUS if possible otherwise.
++     */
++    pv = (void *)(pi & ~7);
++    r = load_atomic16_or_exit(env, ra, pv);
++
++    r = int128_urshift(r, shr);
++    return int128_getlo(r);
++}
++
++/**
++ * load_atom_extract_al16_or_al8:
++ * @p: host address
++ * @s: object size in bytes, @s <= 8.
++ *
++ * Load @s bytes from @p, when p % s != 0.  If [p, p+s-1] does not
++ * cross an 16-byte boundary then the access must be 16-byte atomic,
++ * otherwise the access must be 8-byte atomic.
++ */
++static inline uint64_t load_atom_extract_al16_or_al8(void *pv, int s)
++{
++#if defined(CONFIG_ATOMIC128)
++    uintptr_t pi = (uintptr_t)pv;
++    int o = pi & 7;
++    int shr = (HOST_BIG_ENDIAN ? 16 - s - o : o) * 8;
++    __uint128_t r;
++
++    pv = (void *)(pi & ~7);
++    if (pi & 8) {
++        uint64_t *p8 = __builtin_assume_aligned(pv, 16, 8);
++        uint64_t a = qatomic_read__nocheck(p8);
++        uint64_t b = qatomic_read__nocheck(p8 + 1);
++
++        if (HOST_BIG_ENDIAN) {
++            r = ((__uint128_t)a << 64) | b;
++        } else {
++            r = ((__uint128_t)b << 64) | a;
++        }
++    } else {
++        __uint128_t *p16 = __builtin_assume_aligned(pv, 16, 0);
++        r = qatomic_read__nocheck(p16);
++    }
++    return r >> shr;
++#else
++    qemu_build_not_reached();
++#endif
++}
++
++/**
++ * load_atom_4_by_2:
++ * @pv: host address
++ *
++ * Load 4 bytes from @pv, with two 2-byte atomic loads.
++ */
++static inline uint32_t load_atom_4_by_2(void *pv)
++{
++    uint32_t a = load_atomic2(pv);
++    uint32_t b = load_atomic2(pv + 2);
++
++    if (HOST_BIG_ENDIAN) {
++        return (a << 16) | b;
++    } else {
++        return (b << 16) | a;
++    }
++}
++
++/**
++ * load_atom_8_by_2:
++ * @pv: host address
++ *
++ * Load 8 bytes from @pv, with four 2-byte atomic loads.
++ */
++static inline uint64_t load_atom_8_by_2(void *pv)
++{
++    uint32_t a = load_atom_4_by_2(pv);
++    uint32_t b = load_atom_4_by_2(pv + 4);
++
++    if (HOST_BIG_ENDIAN) {
++        return ((uint64_t)a << 32) | b;
++    } else {
++        return ((uint64_t)b << 32) | a;
++    }
++}
++
++/**
++ * load_atom_8_by_4:
++ * @pv: host address
++ *
++ * Load 8 bytes from @pv, with two 4-byte atomic loads.
++ */
++static inline uint64_t load_atom_8_by_4(void *pv)
++{
++    uint32_t a = load_atomic4(pv);
++    uint32_t b = load_atomic4(pv + 4);
++
++    if (HOST_BIG_ENDIAN) {
++        return ((uint64_t)a << 32) | b;
++    } else {
++        return ((uint64_t)b << 32) | a;
++    }
++}
++
++/**
++ * load_atom_2:
++ * @p: host address
++ * @memop: the full memory op
++ *
++ * Load 2 bytes from @p, honoring the atomicity of @memop.
++ */
++static uint16_t load_atom_2(CPUArchState *env, uintptr_t ra,
++                            void *pv, MemOp memop)
++{
++    uintptr_t pi = (uintptr_t)pv;
++    int atmax;
++
++    if (likely((pi & 1) == 0)) {
++        return load_atomic2(pv);
++    }
++    if (HAVE_al16_fast) {
++        return load_atom_extract_al16_or_al8(pv, 2);
++    }
++
++    atmax = required_atomicity(env, pi, memop);
++    switch (atmax) {
++    case MO_8:
++        return lduw_he_p(pv);
++    case MO_16:
++        /* The only case remaining is MO_ATOM_WITHIN16. */
++        if (!HAVE_al8_fast && (pi & 3) == 1) {
++            /* Big or little endian, we want the middle two bytes. */
++            return load_atomic4(pv - 1) >> 8;
++        }
++        if (unlikely((pi & 15) != 7)) {
++            return load_atom_extract_al8_or_exit(env, ra, pv, 2);
++        }
++        return load_atom_extract_al16_or_exit(env, ra, pv, 2);
++    default:
++        g_assert_not_reached();
++    }
++}
++
++/**
++ * load_atom_4:
++ * @p: host address
++ * @memop: the full memory op
++ *
++ * Load 4 bytes from @p, honoring the atomicity of @memop.
++ */
++static uint32_t load_atom_4(CPUArchState *env, uintptr_t ra,
++                            void *pv, MemOp memop)
++{
++    uintptr_t pi = (uintptr_t)pv;
++    int atmax;
++
++    if (likely((pi & 3) == 0)) {
++        return load_atomic4(pv);
++    }
++    if (HAVE_al16_fast) {
++        return load_atom_extract_al16_or_al8(pv, 4);
++    }
++
++    atmax = required_atomicity(env, pi, memop);
++    switch (atmax) {
++    case MO_8:
++    case MO_16:
++    case -MO_16:
++        /*
++         * For MO_ATOM_IFALIGN, this is more atomicity than required,
++         * but it's trivially supported on all hosts, better than 4
++         * individual byte loads (when the host requires alignment),
++         * and overlaps with the MO_ATOM_SUBALIGN case of p % 2 == 0.
++         */
++        return load_atom_extract_al4x2(pv);
++    case MO_32:
++        if (!(pi & 4)) {
++            return load_atom_extract_al8_or_exit(env, ra, pv, 4);
++        }
++        return load_atom_extract_al16_or_exit(env, ra, pv, 4);
++    default:
++        g_assert_not_reached();
++    }
++}
++
++/**
++ * load_atom_8:
++ * @p: host address
++ * @memop: the full memory op
++ *
++ * Load 8 bytes from @p, honoring the atomicity of @memop.
++ */
++static uint64_t load_atom_8(CPUArchState *env, uintptr_t ra,
++                            void *pv, MemOp memop)
++{
++    uintptr_t pi = (uintptr_t)pv;
++    int atmax;
++
++    /*
++     * If the host does not support 8-byte atomics, wait until we have
++     * examined the atomicity parameters below.
++     */
++    if (HAVE_al8 && likely((pi & 7) == 0)) {
++        return load_atomic8(pv);
++    }
++    if (HAVE_al16_fast) {
++        return load_atom_extract_al16_or_al8(pv, 8);
++    }
++
++    atmax = required_atomicity(env, pi, memop);
++    if (atmax == MO_64) {
++        if (!HAVE_al8 && (pi & 7) == 0) {
++            load_atomic8_or_exit(env, ra, pv);
++        }
++        return load_atom_extract_al16_or_exit(env, ra, pv, 8);
++    }
++    if (HAVE_al8_fast) {
++        return load_atom_extract_al8x2(pv);
++    }
++    switch (atmax) {
++    case MO_8:
++        return ldq_he_p(pv);
++    case MO_16:
++        return load_atom_8_by_2(pv);
++    case MO_32:
++        return load_atom_8_by_4(pv);
++    case -MO_32:
++        if (HAVE_al8) {
++            return load_atom_extract_al8x2(pv);
++        }
++        cpu_loop_exit_atomic(env_cpu(env), ra);
++    default:
++        g_assert_not_reached();
++    }
++}
 -- 
 2.34.1
 
