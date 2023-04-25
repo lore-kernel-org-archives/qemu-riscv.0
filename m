@@ -1,69 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1prOOd-000867-Hx
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 15:32:15 -0400
+	id 1prOOh-00089X-RD
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 15:32:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1prOOb-00084J-F4
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:32:13 -0400
-Received: from mail-lj1-x22a.google.com ([2a00:1450:4864:20::22a])
+ id 1prOOg-00089C-Fi
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:32:18 -0400
+Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1prOOV-00043C-QE
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:32:13 -0400
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2a8bcfbf276so56914541fa.3
- for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 12:32:07 -0700 (PDT)
+ id 1prOOd-00045m-Mm
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:32:18 -0400
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2a8bb726210so59383991fa.1
+ for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 12:32:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1682451126; x=1685043126;
+ d=linaro.org; s=google; t=1682451133; x=1685043133;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3lrJF/qXESqdgqxzYXiwMDd8bhgg68V4bNiRRkSEKr0=;
- b=I+zZ5u3gA753DpP5BO5TOyihJ1P8U7gPF3Av7Zt3UhPqfHy5DV8WTGBdk4lS08QBVz
- 0oQAaoTj/XlWRHaQWg/JlDXWjm8S70zX7bwyoMlnLeHCXOhZdTypUWko+gf934qrEU+6
- Z24SCEbDwjcGpVI89poNefs9nh9BN5rOSa4q3gZ3LyYPVH4s+N+nzUw4rgvgMOqiOSTF
- fCvKswuvgLjRuHYGR+QnK1a1CVQnFY4ykS4JTpmfyastT692aoP+Hf28nDl7yr+zgGLN
- 7JS7Y+iVmIKtqgj4O4QfM1jhrcWRjwRcBHexbV17BLmm9Ko1oRBRbex/nzQUMa3ou/T6
- 0DTA==
+ bh=R+fxTxTqIhiI86kN5IY9M/+obOs0ta97k4WM4ZR41R8=;
+ b=X+97rYn7nYhePOgZIOufdVTChNLCg1ILAZNK6JF98HvkPuvQ6h4ZOmVWwXCYKLFXAb
+ zT9ZI2rCNNxKwLYS7397Dt+CYNqhlxrmyEqZaqDZ2C2h7xb0xw6bme8oW90JX3z6EDql
+ RbUbhwkeQEm8FnWA8rmLSEuffeamgPyLTbBWuAb18Z6L2kTCJUBiz4ZS6+tbe0YVtnjJ
+ A/F5RIdnbr4fkD7KL/hkTnwuycLIvz4h+XM1uJnnFN1ZcoiEjVlJJiMj3ecUBq13dgMu
+ ii9tXAvn92OjS4pLUTDldQf8VHidA/mSrRRsCnweHmF39FpdIAyljaveHOcu0pWqgIMp
+ PpJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682451126; x=1685043126;
+ d=1e100.net; s=20221208; t=1682451133; x=1685043133;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3lrJF/qXESqdgqxzYXiwMDd8bhgg68V4bNiRRkSEKr0=;
- b=MWrAQ35ohESATdLIYHQMCdq2heJlN2PtcOcZv5MdRvFw30iKmEBvqK+tnWzDj8x+sS
- sdSd4/E0FOWB/4wDJtsd+2y+rlJP7u71bZQCGIAIpCNzBaiUhiRhpZZ1ty48AsLtOd+P
- fOCMW6DhjCUc29maMBT9x3AT2vcFC5TYgW+0+rI5I9Hv5xaRxhZRzl3GkF+J3G4FCQCg
- igobc2cb5+B67opwQ25I6j8idKleBMn/QfoUEka32Zhc1q2r6BXjWs98CodSddVpeiUW
- C0Tq4+KKQPbUzrsNZMl8CvnB4WlANsugG7mc+dMxU52Mzy5SZPgNfomHkrYjeRRsaHkI
- dk3g==
-X-Gm-Message-State: AC+VfDyrz+KYBqIhZs0epEHCgUF8xQo2+dcixT6oiKWON2XV8Y0xp6N/
- HAxYsf6F5cxVBXsWFNAt3ZVCnw==
-X-Google-Smtp-Source: ACHHUZ40V/gCBTfrOiARQdHi8KdyrUtqTSkEyQswfqvNRpw0+DoDqvVws44cCyTiS25zaQg6GUM4SQ==
-X-Received: by 2002:a2e:8302:0:b0:2ab:19a0:667b with SMTP id
- a2-20020a2e8302000000b002ab19a0667bmr1315313ljh.0.1682451125790; 
- Tue, 25 Apr 2023 12:32:05 -0700 (PDT)
+ bh=R+fxTxTqIhiI86kN5IY9M/+obOs0ta97k4WM4ZR41R8=;
+ b=f9I4GGbqvxXKlIPXWmtcPPCad9jU5wqvaG0T8IQhx1LNqOq5szlJZPcs08yQFzcjGU
+ oW1flkvutvuMgb70GcviZZC0PHSa0z4yjt441NdZgRc8N0ZfJVcSA+di51DtuT/8JBf/
+ A1JgwqhudhViK3mPgRF5n2qmKyTXYkXmuo1VgUcX8Ze1rIv5ASuf0xBvRo60weHWZbXi
+ AbE5ctjTDcioPv6AJpiWvzMNicsz3IdXgJRePNfGvLqSJitV/UfPBtxBE9qTS2DVDRFI
+ Ba+UCjtDRzjq49afKejtVty3AupEZkftBWh3JVIhgosE52qCBfqB5v8vgAOufBOexTsz
+ V2VA==
+X-Gm-Message-State: AAQBX9cHIRN2KDrEo+lysQQOJUQiWUzupShXnZkC/Wnhk/M3QTw9cacu
+ kUhPIHkn/MMdh1AZvO3ay7ZUPw==
+X-Google-Smtp-Source: AKy350ZEhMVq2MhtpL8/LPCYy0S8TrfSY41eE9e1biZYO5Tq8sjSdOsKUyp8IAy7TbYhsUf8WbQc7A==
+X-Received: by 2002:a2e:7010:0:b0:2a9:f114:f166 with SMTP id
+ l16-20020a2e7010000000b002a9f114f166mr3637834ljc.2.1682451133777; 
+ Tue, 25 Apr 2023 12:32:13 -0700 (PDT)
 Received: from stoup.. ([91.209.212.61]) by smtp.gmail.com with ESMTPSA id
- z23-20020a2e8857000000b002a8c271de33sm2160484ljj.67.2023.04.25.12.32.01
+ z23-20020a2e8857000000b002a8c271de33sm2160484ljj.67.2023.04.25.12.32.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Apr 2023 12:32:05 -0700 (PDT)
+ Tue, 25 Apr 2023 12:32:13 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, git@xen0n.name, jiaxun.yang@flygoat.com,
  philmd@linaro.org, =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH v3 01/57] include/exec/memop: Add bits describing atomicity
-Date: Tue, 25 Apr 2023 20:30:50 +0100
-Message-Id: <20230425193146.2106111-2-richard.henderson@linaro.org>
+Subject: [PATCH v3 02/57] accel/tcg: Add cpu_in_serial_context
+Date: Tue, 25 Apr 2023 20:30:51 +0100
+Message-Id: <20230425193146.2106111-3-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230425193146.2106111-1-richard.henderson@linaro.org>
 References: <20230425193146.2106111-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::22a;
- envelope-from=richard.henderson@linaro.org; helo=mail-lj1-x22a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::232;
+ envelope-from=richard.henderson@linaro.org; helo=mail-lj1-x232.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,83 +83,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Apr 2023 19:32:13 -0000
+X-List-Received-Date: Tue, 25 Apr 2023 19:32:18 -0000
 
-These bits may be used to describe the precise atomicity
-requirements of the guest, which may then be used to
-constrain the methods by which it may be emulated by the host.
+Like cpu_in_exclusive_context, but also true if
+there is no other cpu against which we could race.
 
-For instance, the AArch64 LDP (32-bit) instruction changes
-semantics with ARMv8.4 LSE2, from
-
-  MO_64 | MO_ATMAX_4 | MO_ATOM_IFALIGN
-  (64-bits, single-copy atomic only on 4 byte units,
-   nonatomic if not aligned by 4),
-
-to
-
-  MO_64 | MO_ATMAX_SIZE | MO_ATOM_WITHIN16
-  (64-bits, single-copy atomic within a 16 byte block)
-
-The former may be implemented with two 4 byte loads, or
-a single 8 byte load if that happens to be efficient on
-the host.  The latter may not, and may also require a
-helper when misaligned.
+Use it in tb_flush as a direct replacement.
+Use it in cpu_loop_exit_atomic to ensure that there
+is no loop against cpu_exec_step_atomic.
 
 Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- include/exec/memop.h | 36 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
+ accel/tcg/internal.h        | 5 +++++
+ accel/tcg/cpu-exec-common.c | 3 +++
+ accel/tcg/tb-maint.c        | 2 +-
+ 3 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/include/exec/memop.h b/include/exec/memop.h
-index 25d027434a..04e4048f0b 100644
---- a/include/exec/memop.h
-+++ b/include/exec/memop.h
-@@ -81,6 +81,42 @@ typedef enum MemOp {
-     MO_ALIGN_32 = 5 << MO_ASHIFT,
-     MO_ALIGN_64 = 6 << MO_ASHIFT,
+diff --git a/accel/tcg/internal.h b/accel/tcg/internal.h
+index 96f198b28b..8250ecbf74 100644
+--- a/accel/tcg/internal.h
++++ b/accel/tcg/internal.h
+@@ -64,6 +64,11 @@ static inline target_ulong log_pc(CPUState *cpu, const TranslationBlock *tb)
+     }
+ }
  
-+    /*
-+     * MO_ATOM_* describes that atomicity requirements of the operation:
-+     * MO_ATOM_IFALIGN: the operation must be single-copy atomic if and
-+     *    only if it is aligned; if unaligned there is no atomicity.
-+     * MO_ATOM_NONE: the operation has no atomicity requirements.
-+     * MO_ATOM_SUBALIGN: the operation is single-copy atomic by parts
-+     *    by the alignment.  E.g. if the address is 0 mod 4, then each
-+     *    4-byte subobject is single-copy atomic.
-+     *    This is the atomicity of IBM Power and S390X processors.
-+     * MO_ATOM_WITHIN16: the operation is single-copy atomic, even if it
-+     *    is unaligned, so long as it does not cross a 16-byte boundary;
-+     *    if it crosses a 16-byte boundary there is no atomicity.
-+     *    This is the atomicity of Arm FEAT_LSE2.
-+     *
-+     * MO_ATMAX_* describes the maximum atomicity unit required:
-+     * MO_ATMAX_SIZE: the entire operation, i.e. MO_SIZE.
-+     * MO_ATMAX_[248]: units of N bytes.
-+     *
-+     * Note the default (i.e. 0) values are single-copy atomic to the
-+     * size of the operation, if aligned.  This retains the behaviour
-+     * from before these were introduced.
-+     */
-+    MO_ATOM_SHIFT    = 8,
-+    MO_ATOM_MASK     = 0x3 << MO_ATOM_SHIFT,
-+    MO_ATOM_IFALIGN  = 0 << MO_ATOM_SHIFT,
-+    MO_ATOM_NONE     = 1 << MO_ATOM_SHIFT,
-+    MO_ATOM_SUBALIGN = 2 << MO_ATOM_SHIFT,
-+    MO_ATOM_WITHIN16 = 3 << MO_ATOM_SHIFT,
++static inline bool cpu_in_serial_context(CPUState *cs)
++{
++    return !(cs->tcg_cflags & CF_PARALLEL) || cpu_in_exclusive_context(cs);
++}
 +
-+    MO_ATMAX_SHIFT = 10,
-+    MO_ATMAX_MASK  = 0x3 << MO_ATMAX_SHIFT,
-+    MO_ATMAX_SIZE  = 0 << MO_ATMAX_SHIFT,
-+    MO_ATMAX_2     = 1 << MO_ATMAX_SHIFT,
-+    MO_ATMAX_4     = 2 << MO_ATMAX_SHIFT,
-+    MO_ATMAX_8     = 3 << MO_ATMAX_SHIFT,
-+
-     /* Combinations of the above, for ease of use.  */
-     MO_UB    = MO_8,
-     MO_UW    = MO_16,
+ extern int64_t max_delay;
+ extern int64_t max_advance;
+ 
+diff --git a/accel/tcg/cpu-exec-common.c b/accel/tcg/cpu-exec-common.c
+index e7962c9348..9a5fabf625 100644
+--- a/accel/tcg/cpu-exec-common.c
++++ b/accel/tcg/cpu-exec-common.c
+@@ -22,6 +22,7 @@
+ #include "sysemu/tcg.h"
+ #include "exec/exec-all.h"
+ #include "qemu/plugin.h"
++#include "internal.h"
+ 
+ bool tcg_allowed;
+ 
+@@ -81,6 +82,8 @@ void cpu_loop_exit_restore(CPUState *cpu, uintptr_t pc)
+ 
+ void cpu_loop_exit_atomic(CPUState *cpu, uintptr_t pc)
+ {
++    /* Prevent looping if already executing in a serial context. */
++    g_assert(!cpu_in_serial_context(cpu));
+     cpu->exception_index = EXCP_ATOMIC;
+     cpu_loop_exit_restore(cpu, pc);
+ }
+diff --git a/accel/tcg/tb-maint.c b/accel/tcg/tb-maint.c
+index cb1f806f00..7d613d36d2 100644
+--- a/accel/tcg/tb-maint.c
++++ b/accel/tcg/tb-maint.c
+@@ -760,7 +760,7 @@ void tb_flush(CPUState *cpu)
+     if (tcg_enabled()) {
+         unsigned tb_flush_count = qatomic_mb_read(&tb_ctx.tb_flush_count);
+ 
+-        if (cpu_in_exclusive_context(cpu)) {
++        if (cpu_in_serial_context(cpu)) {
+             do_tb_flush(cpu, RUN_ON_CPU_HOST_INT(tb_flush_count));
+         } else {
+             async_safe_run_on_cpu(cpu, do_tb_flush,
 -- 
 2.34.1
 
