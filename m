@@ -1,74 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1prOWh-0001ZL-Uo
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 15:40:35 -0400
+	id 1prOX0-0001cy-ES
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 15:40:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1prOWg-0001Yy-LW
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:40:34 -0400
-Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133])
+ id 1prOWy-0001bH-Cm
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:40:52 -0400
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1prOWZ-00070j-PJ
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:40:33 -0400
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-4ec9c7c6986so6515300e87.0
- for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 12:40:27 -0700 (PDT)
+ id 1prOWw-000783-4O
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 15:40:52 -0400
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-4ec8133c59eso6399202e87.0
+ for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 12:40:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1682451626; x=1685043626;
+ d=linaro.org; s=google; t=1682451648; x=1685043648;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XMwAK8+LCKklM46g5obMNkVRLVOSMtjwgv/TpGWw4pA=;
- b=tquWj1KNSzdJtzVyD+tXUp087E/gXkeNrl7YMB8IFduqjUiaJ5UevvSNJ6Wkio0Lp5
- DAp4CtE78V+J4VGO6x7+U0Mqo7WwwjOeHUz4ZBj3ToRugXRYMz/iYEq8FiB6Yt8UNKuf
- 16FptZlCLpWaoSM25UUsbNkhwfBvmZbw06i92vPpjWX6xLAmE95Fc54sidss/21+xOnh
- 2fw68Y317o6muUqaNIcsnip9gqfA4vlaADSmDQ0Zsti02kZv866WKcJEH5T6wHwe/3rM
- 0v2MFEiaznJ25m97oL0i7nSeFS2bkRr0SX8xAU1YJ+P8UY2THwXGhrhhGFEcRD/IxuYd
- 5v6g==
+ bh=voYrBLtybOoDO/WS2tn3zAHmuD0tWE6cjSLyscFlUk8=;
+ b=hbpbm7l8FBjy1K758QuNNVHEKXsL1nabgLzYA57tRM0q3g1vsGSuvHRiH7LAcxiGw2
+ vh9WTJP+4hNm73hvM0GjcLj74JBSAifGP4jH9M3jtlmoZVh0naXf0D1Gltu1YqlyJGiQ
+ 1sRua6T5IJkn/11Za7+wGdFnOTQHvqUH5QhJ17Jlsur1CjvVc4SuUFK2ShJB5kqcv+fH
+ WNycysEA3Pw1rLoOLYSe+0Jwa+sMUfejH8kKIOkYhCGrkETAGN7C94VU1TKmxfaiTS48
+ WWp4K/By84q5krWYzk3NhgH92CdZLRcuAFTmQ5J9q27hNMOqdmTpXODCCibcHPL4en8M
+ y4eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682451626; x=1685043626;
+ d=1e100.net; s=20221208; t=1682451648; x=1685043648;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XMwAK8+LCKklM46g5obMNkVRLVOSMtjwgv/TpGWw4pA=;
- b=XbpjdHNavxCODPg/I5/JBXnV2bjQd8vB86uIZs4m9AsvbNoe4KmgCZRZ15bUR4xPrM
- 5+RaTq9SgAePVAM1adeJEFhv4EX4vO4iyZ53QzftoIUkmdvzUO0zKetX2xJQiKqwo1pY
- OfBFu5LRNu6VEDIovpgNOoNuIZsXdmVQCnj8pieeejTlj5GSQq+t3qAQY8k7Hneon7zn
- lwS+yIeh6qGSKJVx76tg7Un7SoxdLCw3S2ncDDg93LkwBoPWJgdLt1vNeIPR+7LupoZO
- HDvm/LDoxu8pwEJP7Z6zheSa4UmDKLix+FUX/Zlab2LUP+iprxekIApieJp2esDgH4n5
- ApVg==
-X-Gm-Message-State: AAQBX9eUjyL7FU7ZGMRRzKRhOEPsdoAEOJKq/EnKWOUKLuQgRLWBnYL6
- j2SyUUyi/7ZI7UFPc4j+D3p33g==
-X-Google-Smtp-Source: AKy350aMtoFcF2EkS9h/RL63jwtS+Lti6FYTc9kGFbFoWCrGRWjMaD7If1o2Tf3iSPR0JpiwFSrNuQ==
-X-Received: by 2002:ac2:596b:0:b0:4dd:91a6:fe50 with SMTP id
- h11-20020ac2596b000000b004dd91a6fe50mr5435823lfp.28.1682451626091; 
- Tue, 25 Apr 2023 12:40:26 -0700 (PDT)
+ bh=voYrBLtybOoDO/WS2tn3zAHmuD0tWE6cjSLyscFlUk8=;
+ b=b0BbMKOw1UOi5ocwWw+eQi3whYWCYuqYyccJj8MyUWbz94WhctA6GqZvLgAx/aujIX
+ gvjw9DhdCmft0zyBdWY3vEEJ0uhUonei5ZdfBxfIMdIMTwj4P5DtcSaHjhPcc7hyQ6Md
+ 3O4SPSMWaii/snTkCTdiHwS4uiq/vE9MO1/Xo+7UQ9T4AwlI1INN1sn/iZNvM/j31G+u
+ Lz302gm33x3Jg0UFnRP1wGkrKezQv6/KKfo8c3qdTF+6/IYiJOI53s1tdE8pJfY7QhcW
+ B6navHbOM7Tmgt0d/kCgFlrqRNj4/bbRQvwrTxLdI+71BdiYeZVyhcNEdFUy9iC+Azdf
+ xQ1Q==
+X-Gm-Message-State: AAQBX9exaekkZ+31qkIs0k3cgqV+rIfuN7g95I0MlJhZUK7HiokWOXIi
+ ywZiuGgR25fW1WQxk1WkJ14YRA==
+X-Google-Smtp-Source: AKy350a/1VcrT5JprDcIPTCVehj7eAF7+zCrcFhUOAXk5OcrLIEzReoArz8BrBqnF7PCAPPCZfP8Tg==
+X-Received: by 2002:ac2:43d3:0:b0:4ec:883a:6664 with SMTP id
+ u19-20020ac243d3000000b004ec883a6664mr5390838lfl.16.1682451648443; 
+ Tue, 25 Apr 2023 12:40:48 -0700 (PDT)
 Received: from stoup.. ([91.209.212.61]) by smtp.gmail.com with ESMTPSA id
- d8-20020ac25448000000b004ec55ac6cd1sm2175662lfn.136.2023.04.25.12.39.11
+ d8-20020ac25448000000b004ec55ac6cd1sm2175662lfn.136.2023.04.25.12.40.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Apr 2023 12:40:25 -0700 (PDT)
+ Tue, 25 Apr 2023 12:40:48 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, git@xen0n.name, jiaxun.yang@flygoat.com,
  philmd@linaro.org
-Subject: [PATCH v3 42/57] tcg: Introduce atom_and_align_for_opc
-Date: Tue, 25 Apr 2023 20:31:31 +0100
-Message-Id: <20230425193146.2106111-43-richard.henderson@linaro.org>
+Subject: [PATCH v3 43/57] tcg/i386: Use atom_and_align_for_opc
+Date: Tue, 25 Apr 2023 20:31:32 +0100
+Message-Id: <20230425193146.2106111-44-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230425193146.2106111-1-richard.henderson@linaro.org>
 References: <20230425193146.2106111-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::133;
- envelope-from=richard.henderson@linaro.org; helo=mail-lf1-x133.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::12b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-lf1-x12b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,103 +82,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Apr 2023 19:40:34 -0000
+X-List-Received-Date: Tue, 25 Apr 2023 19:40:52 -0000
 
-Examine MemOp for atomicity and alignment, adjusting alignment
-as required to implement atomicity on the host.
+No change to the ultimate load/store routines yet, so some atomicity
+conditions not yet honored, but plumbs the change to alignment through
+the relevant functions.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- tcg/tcg.c | 69 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 69 insertions(+)
+ tcg/i386/tcg-target.c.inc | 34 ++++++++++++++++++++++------------
+ 1 file changed, 22 insertions(+), 12 deletions(-)
 
-diff --git a/tcg/tcg.c b/tcg/tcg.c
-index c5a0cfd846..d7ff96fd1d 100644
---- a/tcg/tcg.c
-+++ b/tcg/tcg.c
-@@ -220,6 +220,11 @@ static void * const qemu_st_helpers[MO_SIZE + 1] __attribute__((unused)) = {
- #endif
- };
+diff --git a/tcg/i386/tcg-target.c.inc b/tcg/i386/tcg-target.c.inc
+index 8c0902844a..6a492bb9e7 100644
+--- a/tcg/i386/tcg-target.c.inc
++++ b/tcg/i386/tcg-target.c.inc
+@@ -1776,6 +1776,8 @@ typedef struct {
+     int index;
+     int ofs;
+     int seg;
++    MemOp align;
++    MemOp atom;
+ } HostAddress;
  
-+static MemOp atom_and_align_for_opc(TCGContext *s, MemOp *p_atom_a,
-+                                    MemOp *p_atom_u, MemOp opc,
-+                                    MemOp host_atom, bool allow_two_ops)
-+    __attribute__((unused));
+ bool tcg_target_has_memory_bswap(MemOp memop)
+@@ -1897,8 +1899,12 @@ static TCGLabelQemuLdst *prepare_host_addr(TCGContext *s, HostAddress *h,
+ {
+     TCGLabelQemuLdst *ldst = NULL;
+     MemOp opc = get_memop(oi);
+-    unsigned a_bits = get_alignment_bits(opc);
+-    unsigned a_mask = (1 << a_bits) - 1;
++    MemOp atom_u;
++    unsigned a_mask;
 +
- TCGContext tcg_init_ctx;
- __thread TCGContext *tcg_ctx;
++    h->align = atom_and_align_for_opc(s, &h->atom, &atom_u, opc,
++                                      MO_ATOM_IFALIGN, false);
++    a_mask = (1 << h->align) - 1;
  
-@@ -5123,6 +5128,70 @@ static void tcg_reg_alloc_call(TCGContext *s, TCGOp *op)
-     }
- }
+ #ifdef CONFIG_SOFTMMU
+     int cmp_ofs = is_ld ? offsetof(CPUTLBEntry, addr_read)
+@@ -1943,10 +1949,12 @@ static TCGLabelQemuLdst *prepare_host_addr(TCGContext *s, HostAddress *h,
+                          TLB_MASK_TABLE_OFS(mem_index) +
+                          offsetof(CPUTLBDescFast, table));
  
-+/*
-+ * Return the alignment and atomicity to use for the inline fast path
-+ * for the given memory operation.  The alignment may be larger than
-+ * that specified in @opc, and the correct alignment will be diagnosed
-+ * by the slow path helper.
-+ */
-+static MemOp atom_and_align_for_opc(TCGContext *s, MemOp *p_atom_a,
-+                                    MemOp *p_atom_u, MemOp opc,
-+                                    MemOp host_atom, bool allow_two_ops)
-+{
-+    MemOp align = get_alignment_bits(opc);
-+    MemOp atom, atmax, atmin, size = opc & MO_SIZE;
-+
-+    /* When serialized, no further atomicity required.  */
-+    if (s->gen_tb->cflags & CF_PARALLEL) {
-+        atom = opc & MO_ATOM_MASK;
-+    } else {
-+        atom = MO_ATOM_NONE;
-+    }
-+
-+    atmax = opc & MO_ATMAX_MASK;
-+    if (atmax == MO_ATMAX_SIZE) {
-+        atmax = size;
-+    } else {
-+        atmax = atmax >> MO_ATMAX_SHIFT;
-+    }
-+
-+    switch (atom) {
-+    case MO_ATOM_NONE:
-+        /* The operation requires no specific atomicity. */
-+        atmax = atmin = MO_8;
-+        break;
-+    case MO_ATOM_IFALIGN:
-+        /* If unaligned, the subobjects are bytes. */
-+        atmin = MO_8;
-+        break;
-+    case MO_ATOM_WITHIN16:
-+        /* If unaligned, there are subobjects if atmax < size. */
-+        atmin = (atmax < size ? atmax : MO_8);
-+        atmax = size;
-+        break;
-+    case MO_ATOM_SUBALIGN:
-+        /* If unaligned but not odd, there are subobjects up to atmax - 1. */
-+        atmin = (atmax == MO_8 ? MO_8 : atmax - 1);
-+        break;
-+    default:
-+        g_assert_not_reached();
-+    }
-+
+-    /* If the required alignment is at least as large as the access, simply
+-       copy the address and mask.  For lesser alignments, check that we don't
+-       cross pages for the complete access.  */
+-    if (a_bits >= s_bits) {
 +    /*
-+     * If there are subobjects, and the host model does not match, then we
-+     * need to raise the initial alignment check.  If the backend is prepared
-+     * to double-check alignment and issue two half size ops, we need not
-+     * raise initial alignment beyond half.
++     * If the required alignment is at least as large as the access, simply
++     * copy the address and mask.  For lesser alignments, check that we don't
++     * cross pages for the complete access.
 +     */
-+    if (atmin > MO_8 && host_atom != atom) {
-+        align = MAX(align, size - allow_two_ops);
-+    }
-+
-+    *p_atom_a = atmax;
-+    *p_atom_u = atmin;
-+    return align;
-+}
-+
- /*
-  * Similarly for qemu_ld/st slow path helpers.
-  * We must re-implement tcg_gen_callN and tcg_reg_alloc_call simultaneously,
++    if (a_mask >= s_mask) {
+         tcg_out_mov(s, ttype, TCG_REG_L1, addrlo);
+     } else {
+         tcg_out_modrm_offset(s, OPC_LEA + trexw, TCG_REG_L1,
+@@ -1978,12 +1986,12 @@ static TCGLabelQemuLdst *prepare_host_addr(TCGContext *s, HostAddress *h,
+     tcg_out_ld(s, TCG_TYPE_PTR, TCG_REG_L0, TCG_REG_L0,
+                offsetof(CPUTLBEntry, addend));
+ 
+-    *h = (HostAddress) {
+-        .base = addrlo,
+-        .index = TCG_REG_L0,
+-    };
++    h->base = addrlo;
++    h->index = TCG_REG_L0;
++    h->ofs = 0;
++    h->seg = 0;
+ #else
+-    if (a_bits) {
++    if (a_mask) {
+         ldst = new_ldst_label(s);
+ 
+         ldst->is_ld = is_ld;
+@@ -1998,8 +2006,10 @@ static TCGLabelQemuLdst *prepare_host_addr(TCGContext *s, HostAddress *h,
+         s->code_ptr += 4;
+     }
+ 
+-    *h = x86_guest_base;
+     h->base = addrlo;
++    h->index = x86_guest_base.index;
++    h->ofs = x86_guest_base.ofs;
++    h->seg = x86_guest_base.seg;
+ #endif
+ 
+     return ldst;
 -- 
 2.34.1
 
