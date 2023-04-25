@@ -1,79 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1prFs7-0002h0-Un
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 06:26:08 -0400
+	id 1prJZs-0003ax-Sm
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Apr 2023 10:23:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1prFs1-0002g7-Qu
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 06:26:02 -0400
-Received: from mail-oi1-x22e.google.com ([2607:f8b0:4864:20::22e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1prJZU-0003V9-5v
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 10:23:10 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1prFrz-0008Vm-UE
- for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 06:26:01 -0400
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-38e5eeba43cso1809531b6e.3
- for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 03:25:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1prJZR-0004TU-7A
+ for qemu-riscv@nongnu.org; Tue, 25 Apr 2023 10:23:07 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-3f09b4a1527so60883655e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 25 Apr 2023 07:23:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1682418358; x=1685010358;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jaMha8KMuusMoaFz3efdY0jc86c4PJOQMzqKQheE2YQ=;
- b=UDEHCF4UBkHAw5nIo3OkdqxcPZF7YaEuttJbNp6lIYOXRoXtIEkmqxckcdUoFCkKyR
- Zz1hs+2fpq5lU8++QDJqbIxQLilMVyxq+nYRQWd08pXFOn5RgZds2t4e0OSVPalH9GbP
- 0HFRoDXABiVlY4v4+Cbpmis1x/sJalbT9Gc5LbsgAp3LUT5UIhsdtt852QlV4Vcw/5w+
- uKs9izDyCdf0bI1GWbojZ3M0RasMqVof6KxERWWuXdkrC1xM4sjT8uN9JlorUt7hSLDD
- 5JlLQLuEWnVL+qiFb0PX5gi+Efq0atUeBDSYhJUDj432aPTO6oW4+RDPaEs8tG80zP5J
- qCSQ==
+ d=linaro.org; s=google; t=1682432578; x=1685024578;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=0xPpJstq4gxueLzwpnuqz+z/PsoC6LFXV3Er/3MKPf8=;
+ b=CR4XLKrSvlXTEFFnTJE3HePn+QdOgTOB0JzaykcEwHB/jMn+iVIwes0yeDy/PxRlru
+ lQzTHdytEcjNDRMwnseXio7ZZrI0JGZN/ayvisiJ0/4BgZd+w7MYVQCPR8+hPeZSytkb
+ hspeYHsRvbPXsDl+rzdPeUV+xdn+JDPnfUfn/YD02kMlU839rvWSs9PCvQxWzLI7uEYe
+ WK7hRt8Mq2gAHBk1WTFJVjNF4O1uPTe0CzqlbEHU0qlN6KmFoSpF9YYpa88fUz6+kQCq
+ ZTIrKxdG+K9XtaWXn7SWGaqXOufq1+XC0HDRk82W437B7wv7tDH9IQnDIUz6tJK/s7RV
+ OeOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682418358; x=1685010358;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jaMha8KMuusMoaFz3efdY0jc86c4PJOQMzqKQheE2YQ=;
- b=Pd8DVmYVb/ka0R1uPkbOvylSK0kcsm+Lz1oJ2pwHCCPxjE7oq+Ka+F0JDrErj6s+Sh
- 9PXpngT2qF/Ow88hQwgPYiPBOweEOJDRC2N1Tr796SC9xThabEExR8qKtPwM9Of7dGJM
- t67fyvUBo1HifX+hE5xFOsiFLCXB944XNd3E213eIl4MnCmGRIXqUyWVLCm6n2IseJas
- EGiptNjCnymTgWB7n9bCDzwwKCibcX1nmglU6iIXo13hjFGQGmcRsylBgibxDmFio3cQ
- p+o+6o/tpxODfwD8B3TKTZioBeShzAwVNXO5FsYZJddHOgpYICfeIXj1ftD7SYWPRmHo
- B2wA==
-X-Gm-Message-State: AAQBX9dgH2ylIlNOYPe9fXo0gk7GM3l9eKZ4e4gJOe718zrn6UtbV5z+
- AykuigidsZ7xEW+estN/sjZ/k12e4aRthhaZvxU=
-X-Google-Smtp-Source: AKy350Y5iU/N1zH//Ehkg622x3dBTDKd0PqypyvBtjI7jiU26SOVkXvQEtVct5Zn9tAR7zrwamBleg==
-X-Received: by 2002:aca:1c15:0:b0:38c:647b:e2a5 with SMTP id
- c21-20020aca1c15000000b0038c647be2a5mr8212408oic.2.1682418357939; 
- Tue, 25 Apr 2023 03:25:57 -0700 (PDT)
-Received: from sunil-laptop.dc1.ventanamicro.com
- ([2409:4071:6e90:4e5:dd88:3e29:de46:4739])
+ d=1e100.net; s=20221208; t=1682432578; x=1685024578;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=0xPpJstq4gxueLzwpnuqz+z/PsoC6LFXV3Er/3MKPf8=;
+ b=fgsne38iIx1Gb/q2xzd6tDQl+zPOM1dM2fl3feo3yxqZb39R7aN/3dzMNjlTucJsCz
+ HGBSxNXLZo/zZ8eGDfoBK78ItJ81rOHG+u+hvUeSaKvdQ1KB4hHCwqkr/YGQzpQib2ls
+ JKgsK0reJ3NAA1P/mNSjsDGP7QE/KJu4vHJstyU2DpPd73vWhgbR0ctCcCcu6SLE1s/0
+ XCciX9yWhRTS0FdcUwrCs+asJoZ2XzE06sYuRwAw1imTqEBfITUoaEYoKT1YBQtVymUF
+ RazLo994JBLznB6VPPjc2+R5anHlhpp3Q8JjJhFQLVc8HIlSoBgt93lC6BLu3zm0R0yN
+ QZUg==
+X-Gm-Message-State: AAQBX9fBHfALE6ekNUtFN+ejWTqYNDbq1biLZr0lWKbGS7U7MtlXqKFd
+ Vd76gPXZLfpwQO9ZUVrS1oDgvA==
+X-Google-Smtp-Source: AKy350biscki8LBGWsgdcZ0nFQsHsTi7hxQ2bDGBqbB5bxZYE9hUCVZrj65tF5cjisOQagTUBqHrHA==
+X-Received: by 2002:a1c:7404:0:b0:3f1:8b0f:96ea with SMTP id
+ p4-20020a1c7404000000b003f18b0f96eamr10602634wmc.37.1682432578129; 
+ Tue, 25 Apr 2023 07:22:58 -0700 (PDT)
+Received: from [172.27.248.56] ([212.187.182.164])
  by smtp.gmail.com with ESMTPSA id
- v132-20020acade8a000000b00383eaf88e75sm5458285oig.39.2023.04.25.03.25.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Apr 2023 03:25:57 -0700 (PDT)
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v2] hw/riscv: virt: Assume M-mode FW in pflash0 only when
- "-bios none"
-Date: Tue, 25 Apr 2023 15:55:45 +0530
-Message-Id: <20230425102545.162888-1-sunilvl@ventanamicro.com>
-X-Mailer: git-send-email 2.34.1
+ h16-20020a05600c315000b003f173a2b2f6sm18593760wmo.12.2023.04.25.07.22.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Apr 2023 07:22:57 -0700 (PDT)
+Message-ID: <b446927b-ba56-d8f8-d806-d016b84d19d7@linaro.org>
+Date: Tue, 25 Apr 2023 15:22:56 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.10.0
+Subject: Re: [PATCH v3 13/57] tcg/aarch64: Introduce HostAddress
+Content-Language: en-US
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-ppc@nongnu.org, git@xen0n.name, jiaxun.yang@flygoat.com
+References: <20230424054105.1579315-1-richard.henderson@linaro.org>
+ <20230424054105.1579315-14-richard.henderson@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <20230424054105.1579315-14-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-oi1-x22e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
+X-Spam_score_int: -34
+X-Spam_score: -3.5
+X-Spam_bar: ---
+X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.422,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,79 +84,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Apr 2023 10:26:05 -0000
+X-List-Received-Date: Tue, 25 Apr 2023 14:23:10 -0000
 
-Currently, virt machine supports two pflash instances each with
-32MB size. However, the first pflash is always assumed to
-contain M-mode firmware and reset vector is set to this if
-enabled. Hence, for S-mode payloads like EDK2, only one pflash
-instance is available for use. This means both code and NV variables
-of EDK2 will need to use the same pflash.
+On 24/4/23 07:40, Richard Henderson wrote:
+> Collect the 3 potential parts of the host address into a struct.
+> Reorg tcg_out_qemu_{ld,st}_direct to use it.
+> 
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   tcg/aarch64/tcg-target.c.inc | 86 +++++++++++++++++++++++++-----------
+>   1 file changed, 59 insertions(+), 27 deletions(-)
 
-The OS distros keep the EDK2 FW code as readonly. When non-volatile
-variables also need to share the same pflash, it is not possible
-to keep it as readonly since variables need write access.
-
-To resolve this issue, the code and NV variables need to be separated.
-But in that case we need an extra flash. Hence, modify the convention
-such that pflash0 will contain the M-mode FW only when "-bios none"
-option is used. Otherwise, pflash0 will contain the S-mode payload FW.
-This enables both pflash instances available for EDK2 use.
-
-Example usage:
-1) pflash0 containing M-mode FW
-qemu-system-riscv64 -bios none -pflash <mmode_fw> -machine virt
-or
-qemu-system-riscv64 -bios none \
--drive file=<mmode_fw>,if=pflash,format=raw,unit=0 -machine virt
-
-2) pflash0 containing S-mode payload like EDK2
-qemu-system-riscv64 -pflash <smode_fw_vars> -pflash <smode_fw_code> -machine  virt
-or
-qemu-system-riscv64 -bios <opensbi_fw> \
--pflash <smode_fw_vars> \
--pflash <smode_fw_code> \
--machine  virt
-or
-qemu-system-riscv64 -bios <opensbi_fw> \
--drive file=<smode_fw_vars>,if=pflash,format=raw,unit=0 \
--drive file=<smode_fw_code>,if=pflash,format=raw,unit=1,readonly=on  \
--machine virt
-
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
----
-The issue is reported at
-https://salsa.debian.org/qemu-team/edk2/-/commit/c345655a0149f64c5020bfc1e53c619ce60587f6
-
-The patch is based on Alistair's riscv-to-apply.next branch.
-
-Changes since v1:
-	1) Simplified the fix such that it doesn't break current EDK2.
-
- hw/riscv/virt.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
-
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 4e3efbee16..ca445d3d02 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1296,10 +1296,11 @@ static void virt_machine_done(Notifier *notifier, void *data)
-         kernel_entry = 0;
-     }
- 
--    if (drive_get(IF_PFLASH, 0, 0)) {
-+    if (drive_get(IF_PFLASH, 0, 0) &&
-+                 machine->firmware && !strcmp(machine->firmware, "none")) {
-         /*
--         * Pflash was supplied, let's overwrite the address we jump to after
--         * reset to the base of the flash.
-+         * Pflash0 was supplied with "-bios none", let's overwrite the address
-+         * we jump to after reset to the base of the flash.
-          */
-         start_addr = virt_memmap[VIRT_FLASH].base;
-     }
--- 
-2.34.1
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
