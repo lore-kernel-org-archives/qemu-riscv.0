@@ -1,77 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ps896-0001Dj-Ra
-	for mharc-qemu-riscv@gnu.org; Thu, 27 Apr 2023 16:23:16 -0400
+	id 1ps8g5-0002Sp-9l
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Apr 2023 16:57:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ps895-0001DN-Du
- for qemu-riscv@nongnu.org; Thu, 27 Apr 2023 16:23:15 -0400
-Received: from mail-oa1-x2b.google.com ([2001:4860:4864:20::2b])
+ id 1ps8g3-0002S7-5f
+ for qemu-riscv@nongnu.org; Thu, 27 Apr 2023 16:57:19 -0400
+Received: from mail-oo1-xc2e.google.com ([2607:f8b0:4864:20::c2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1ps893-0003kS-MR
- for qemu-riscv@nongnu.org; Thu, 27 Apr 2023 16:23:15 -0400
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-1879fc89f5eso3714851fac.0
- for <qemu-riscv@nongnu.org>; Thu, 27 Apr 2023 13:23:12 -0700 (PDT)
+ id 1ps8g1-0002LE-8o
+ for qemu-riscv@nongnu.org; Thu, 27 Apr 2023 16:57:18 -0400
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-541eee15ef5so5089922eaf.1
+ for <qemu-riscv@nongnu.org>; Thu, 27 Apr 2023 13:57:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1682626991; x=1685218991;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=N/gVmMos9PhHYqfSmywV2l7sf2PPrXS6nCHEqb0Kx6o=;
- b=nGaEA56e7UmPryJDiOrNAEG7o+vy2fxNIyQmE6waPdBQ7qRhja3Ttl/zpNnsFRqyUQ
- DmVwr2ySsI2V1ZLiNiSIns/DWGkiVIN2z/+lDNOdo9tO4QnW1u+2lzOTYVi8MpQlAShw
- H/jBfaEOEB3W5a0y3wMW6SURlNEp35wRFI7yQHjv8R2p1o4YRIg4+OX4KxDWIGStHb6Z
- mGnCPP2ZbGF7HHoHCRCroZqdEJMgmYNmoQc3sSoIsBKxczl7gGRPcNu37mPAWTJ/zSig
- X3jbCVy7HSlySGv+MkXSEoCHlvlAqKYULtIwpg7uKiiMheN9AHKmF9vQBzWlSgmzIeIT
- h68g==
+ d=ventanamicro.com; s=google; t=1682629036; x=1685221036;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kO0k5LSdWoZPT+FqERWzWtJIo942if97mBEDYjIGUyQ=;
+ b=MU4ELkK/YUVb2ppNezxUG4jEfby5FyaOs4q+mRB8EvIol1PpYdEjeJRVNLWNjvVSak
+ zn/ERJ6Y4FThA1FvvrndDr1MF7I11KF/Ag9yP5mRf3e5j2lr/Ol3+oaMTEZ5FOz/csXG
+ GdJP/Zkfg9hKcFxhVfjZE01tLYqhh7S1vs0RpjLwm3B2tTiuBxK8uffIW2KDR1q39OJb
+ CRq1SyUdnXT0ovnz053FXaW2sPrEUsXOD5dGp3WrmIJDzonkSBBRqNgKhzO3+p2i5Gh8
+ qDI89WrUqwCGPrCGmv+FK30B1fTy9ioq1eo9K+0F6UCwis+FZIy8n5hIqarfASYdZaJZ
+ vCLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682626991; x=1685218991;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=N/gVmMos9PhHYqfSmywV2l7sf2PPrXS6nCHEqb0Kx6o=;
- b=KaN4BJZ7avysY3/Nt0z7ezVZ8iPAXDrJVgA03bJL4CPczd0o7k8buj+bPWOZ/Bxcji
- 7pruG8B4ESX+kSWkd4ACxnO4FXh/tr1Ikr/DoNNHAlFSYdve/G1bggBwz9Sw/4PWt34Z
- 7iSp10yHOUok9GhJRToIWQfXT7cNaJHzbgVFIzTGiICeWSkmgKRg4r9XrzUVOVK7zvv8
- A1cINYUQrZ7+f2IMTYYiseCaN4DyUqZvlmpNJyUNvN4ThcSTJbPhgZjbJfh21/tPno34
- TO71o+jZoGA1hUeP9dHpYg/N6uMDtm0Vth8sICj5PzdmeQ52YQqzYJZXlrcLWGzhBCOZ
- oU2A==
-X-Gm-Message-State: AC+VfDyX6pZ2pb93IJQqbiUzEfwdapInhWJVTuGFybwZFOG0owiazLg2
- YyGoB9rSO5MwkjiSpLz+BGS5zQ==
-X-Google-Smtp-Source: ACHHUZ40Bij2GTBfrBKHMhEcp2YT5SvzVJB9bAi+CuhuK8w7g73znz4PjKFavNACQHigGm4o8m+gOQ==
-X-Received: by 2002:a05:6870:9443:b0:177:81bb:1b23 with SMTP id
- e3-20020a056870944300b0017781bb1b23mr1353152oal.38.1682626991738; 
- Thu, 27 Apr 2023 13:23:11 -0700 (PDT)
-Received: from [192.168.68.107] ([179.111.98.125])
+ d=1e100.net; s=20221208; t=1682629036; x=1685221036;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kO0k5LSdWoZPT+FqERWzWtJIo942if97mBEDYjIGUyQ=;
+ b=BlvbmpzVyc8BKbHwT5SXGecvBOwcQDvPVBsitukCGmVkDznAnZiBs1Wjats+5N+7uX
+ fkQQfhTB+yOI6VgUyVKjkwgjljq0CdzcfrcwKZMw6tb2aYFfZSkKTizQSAX7c1lqU7BY
+ Otht3tT3OdEjMVyHuzLmWG34erZlFihdxHG3d44NHzRGHxES3p8kOo9/P9EcgY3jwaDS
+ Y2F3fzbYtkwgUwExwhZUW2/oGHyIPnty9IpsUWZlesdslqRcziy+T8HKaDVFDgoSdjEV
+ MUWMdLKLoXlih/ZDDRGt7vvLvziJ1xQ7hk0AFfuQ7dHBQk+dreg+/pkM4F9lXqJzO1xt
+ HYjQ==
+X-Gm-Message-State: AC+VfDyzb4WxvCEOiD94GeNIcVwHnA6QvFQ5DDIHbxeNlo9a5fnCvdcL
+ TYSr80EqCJe3SdlIvTZIzYe7tg==
+X-Google-Smtp-Source: ACHHUZ4HCvU0lcZz+1kIB5ou1J/lclUlrHMbaKtDy2Nb7Krq7/A9RS/5xTEBJKJmy01CBLngHbx8AA==
+X-Received: by 2002:a54:4199:0:b0:38d:f213:f97b with SMTP id
+ 25-20020a544199000000b0038df213f97bmr1453111oiy.2.1682629036173; 
+ Thu, 27 Apr 2023 13:57:16 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com ([179.111.98.125])
  by smtp.gmail.com with ESMTPSA id
- dx46-20020a05687076ae00b00183ff6b45a2sm8058830oab.10.2023.04.27.13.23.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Apr 2023 13:23:11 -0700 (PDT)
-Message-ID: <006e575d-3625-509d-5d90-1c10118a730a@ventanamicro.com>
-Date: Thu, 27 Apr 2023 17:23:07 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [PATCH 0/6] Add RISC-V KVM AIA Support
-To: Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: rkanwal@rivosinc.com, anup@brainfault.org, atishp@atishpatra.org,
- vincent.chen@sifive.com, greentime.hu@sifive.com, frank.chang@sifive.com
-References: <20230424090716.15674-1-yongxuan.wang@sifive.com>
-Content-Language: en-US
+ k205-20020acabad6000000b0038934c5b400sm4804225oif.25.2023.04.27.13.57.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Apr 2023 13:57:15 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230424090716.15674-1-yongxuan.wang@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2b.google.com
-X-Spam_score_int: -34
-X-Spam_score: -3.5
-X-Spam_bar: ---
-X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.422,
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH 0/2] target/riscv: RVV 1-fill tail element changes
+Date: Thu, 27 Apr 2023 17:57:06 -0300
+Message-Id: <20230427205708.246679-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.40.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -86,49 +80,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Apr 2023 20:23:15 -0000
+X-List-Received-Date: Thu, 27 Apr 2023 20:57:19 -0000
 
 Hi,
 
-The patches seems to be based on an old QEMU code base. E.g. patch 2 does not
-have the changes made by 568e0614d097 that was merged in January this year.
+This series makes changes in vext_set_tail_elements_1s() to be a little
+nicer to the emulation.
 
-Can you please re-send the series based on top of Alistair's riscv-to-apply.next
-(https://github.com/alistair23/qemu/tree/riscv-to-apply.next)?
+First patch makes the function a no-op when vta == 0. Aside from the
+logic simplification we also have a little performance boost.
 
+Second patch makes the function debug only. The logic is explained in
+the commit message, but long story short: we don't have to implement any
+tail-agnostic policy at all to be spec compliant, but this function has
+its uses for debug purposes, so keeping it as a debug option allow users
+to disable it on demand.
 
-Thanks,
+Patches are based on top of Alistair's riscv-to-apply.next.
+ 
+Daniel Henrique Barboza (2):
+  target/riscv/vector_helper.c: skip set tail when vta is zero
+  target/riscv/vector_helper.c: make vext_set_tail_elems_1s() debug only
 
+ target/riscv/vector_helper.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-Daniel
+-- 
+2.40.0
 
-
-
-
-On 4/24/23 06:07, Yong-Xuan Wang wrote:
-> This series introduces support for KVM AIA in the RISC-V architecture. The
-> implementation is refered to Anup's KVM AIA implementation in kvmtool
-> (https://github.com/avpatel/kvmtool.git). To test these patches, a Linux kernel
-> with KVM AIA support is required, which can be found in the qemu_kvm_aia branch
-> at https://github.com/yong-xuan/linux.git. This kernel branch is based on the
-> riscv_aia_v1 branch from https://github.com/avpatel/linux.git and includes two
-> additional patches.
-> 
-> 
-> Yong-Xuan Wang (6):
->    update-linux-headers: sync-up header with Linux for KVM AIA support
->    target/riscv: support the AIA device emulateion with KVM enabled
->    target/riscv: check the in-kernel irqchip support
->    target/riscv: Create an KVM AIA irqchip
->    target/riscv: update APLIC and IMSIC to support KVM AIA
->    target/riscv: select KVM AIA in riscv virt machine
-> 
->   hw/intc/riscv_aplic.c     |  19 +++-
->   hw/intc/riscv_imsic.c     |  16 ++-
->   hw/riscv/virt.c           | 214 +++++++++++++++++++++-----------------
->   linux-headers/linux/kvm.h |   2 +
->   target/riscv/kvm.c        |  96 ++++++++++++++++-
->   target/riscv/kvm_riscv.h  |  36 +++++++
->   6 files changed, 277 insertions(+), 106 deletions(-)
-> 
 
