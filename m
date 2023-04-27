@@ -1,63 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1prq4I-0006hI-TW
-	for mharc-qemu-riscv@gnu.org; Wed, 26 Apr 2023 21:05:06 -0400
+	id 1ps896-0001Dj-Ra
+	for mharc-qemu-riscv@gnu.org; Thu, 27 Apr 2023 16:23:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1prq4H-0006gw-0P; Wed, 26 Apr 2023 21:05:05 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1prq4D-0007M3-QZ; Wed, 26 Apr 2023 21:05:04 -0400
-Received: from [192.168.0.120] (unknown [180.165.241.15])
- by APP-01 (Coremail) with SMTP id qwCowACXnp4zyklk+AV+Cw--.45761S2;
- Thu, 27 Apr 2023 09:04:52 +0800 (CST)
-Message-ID: <3e14b76b-7aa7-4a98-ac97-11725f4664bf@iscas.ac.cn>
-Date: Thu, 27 Apr 2023 09:04:51 +0800
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1ps895-0001DN-Du
+ for qemu-riscv@nongnu.org; Thu, 27 Apr 2023 16:23:15 -0400
+Received: from mail-oa1-x2b.google.com ([2001:4860:4864:20::2b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1ps893-0003kS-MR
+ for qemu-riscv@nongnu.org; Thu, 27 Apr 2023 16:23:15 -0400
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-1879fc89f5eso3714851fac.0
+ for <qemu-riscv@nongnu.org>; Thu, 27 Apr 2023 13:23:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1682626991; x=1685218991;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=N/gVmMos9PhHYqfSmywV2l7sf2PPrXS6nCHEqb0Kx6o=;
+ b=nGaEA56e7UmPryJDiOrNAEG7o+vy2fxNIyQmE6waPdBQ7qRhja3Ttl/zpNnsFRqyUQ
+ DmVwr2ySsI2V1ZLiNiSIns/DWGkiVIN2z/+lDNOdo9tO4QnW1u+2lzOTYVi8MpQlAShw
+ H/jBfaEOEB3W5a0y3wMW6SURlNEp35wRFI7yQHjv8R2p1o4YRIg4+OX4KxDWIGStHb6Z
+ mGnCPP2ZbGF7HHoHCRCroZqdEJMgmYNmoQc3sSoIsBKxczl7gGRPcNu37mPAWTJ/zSig
+ X3jbCVy7HSlySGv+MkXSEoCHlvlAqKYULtIwpg7uKiiMheN9AHKmF9vQBzWlSgmzIeIT
+ h68g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1682626991; x=1685218991;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=N/gVmMos9PhHYqfSmywV2l7sf2PPrXS6nCHEqb0Kx6o=;
+ b=KaN4BJZ7avysY3/Nt0z7ezVZ8iPAXDrJVgA03bJL4CPczd0o7k8buj+bPWOZ/Bxcji
+ 7pruG8B4ESX+kSWkd4ACxnO4FXh/tr1Ikr/DoNNHAlFSYdve/G1bggBwz9Sw/4PWt34Z
+ 7iSp10yHOUok9GhJRToIWQfXT7cNaJHzbgVFIzTGiICeWSkmgKRg4r9XrzUVOVK7zvv8
+ A1cINYUQrZ7+f2IMTYYiseCaN4DyUqZvlmpNJyUNvN4ThcSTJbPhgZjbJfh21/tPno34
+ TO71o+jZoGA1hUeP9dHpYg/N6uMDtm0Vth8sICj5PzdmeQ52YQqzYJZXlrcLWGzhBCOZ
+ oU2A==
+X-Gm-Message-State: AC+VfDyX6pZ2pb93IJQqbiUzEfwdapInhWJVTuGFybwZFOG0owiazLg2
+ YyGoB9rSO5MwkjiSpLz+BGS5zQ==
+X-Google-Smtp-Source: ACHHUZ40Bij2GTBfrBKHMhEcp2YT5SvzVJB9bAi+CuhuK8w7g73znz4PjKFavNACQHigGm4o8m+gOQ==
+X-Received: by 2002:a05:6870:9443:b0:177:81bb:1b23 with SMTP id
+ e3-20020a056870944300b0017781bb1b23mr1353152oal.38.1682626991738; 
+ Thu, 27 Apr 2023 13:23:11 -0700 (PDT)
+Received: from [192.168.68.107] ([179.111.98.125])
+ by smtp.gmail.com with ESMTPSA id
+ dx46-20020a05687076ae00b00183ff6b45a2sm8058830oab.10.2023.04.27.13.23.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 27 Apr 2023 13:23:11 -0700 (PDT)
+Message-ID: <006e575d-3625-509d-5d90-1c10118a730a@ventanamicro.com>
+Date: Thu, 27 Apr 2023 17:23:07 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
-Cc: liweiwei@iscas.ac.cn, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- alistair.francis@wdc.com, Alistair Francis <alistair23@gmail.com>,
- Daniel Barboza <dbarboza@ventanamicro.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: Re: [RFC PATCH v2 3/4] target/riscv: check smstateen fcsr flag
-To: Mayuresh Chitale <mchitale@ventanamicro.com>
-References: <20230414160202.1298242-1-mchitale@ventanamicro.com>
- <20230414160202.1298242-4-mchitale@ventanamicro.com>
- <615227a7-0406-8c52-d08c-e5d225909d6f@iscas.ac.cn>
- <CAN37VV5yCOx6P2No33_pyhuKEma9RoE95gV07kQ2g98mQf14JQ@mail.gmail.com>
+Subject: Re: [PATCH 0/6] Add RISC-V KVM AIA Support
+To: Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: rkanwal@rivosinc.com, anup@brainfault.org, atishp@atishpatra.org,
+ vincent.chen@sifive.com, greentime.hu@sifive.com, frank.chang@sifive.com
+References: <20230424090716.15674-1-yongxuan.wang@sifive.com>
 Content-Language: en-US
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <CAN37VV5yCOx6P2No33_pyhuKEma9RoE95gV07kQ2g98mQf14JQ@mail.gmail.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230424090716.15674-1-yongxuan.wang@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACXnp4zyklk+AV+Cw--.45761S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxAFW3CF47Aryruw4DXF4kXrb_yoWrKry5pr
- WrGayYyrWrZryIya1SqFn8Ar9Iqws7Kw4kGwnxtw1DXa98Kr43Xrs5Kr17KryxJFn7WFy8
- AayjyFW3ur4fXa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkG14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr
- 0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
- 6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
- 0_Gr1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7Mxk0xIA0c2IEe2xFo4CE
- bIxvr21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67
- AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIY
- rxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14
- v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8
- JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0JUdHUDUUU
- UU=
-X-Originating-IP: [180.165.241.15]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -32
-X-Spam_score: -3.3
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2001:4860:4864:20::2b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2b.google.com
+X-Spam_score_int: -34
+X-Spam_score: -3.5
 X-Spam_bar: ---
-X-Spam_report: (-3.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-1.422,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.422,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -71,168 +86,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Apr 2023 01:05:05 -0000
+X-List-Received-Date: Thu, 27 Apr 2023 20:23:15 -0000
+
+Hi,
+
+The patches seems to be based on an old QEMU code base. E.g. patch 2 does not
+have the changes made by 568e0614d097 that was merged in January this year.
+
+Can you please re-send the series based on top of Alistair's riscv-to-apply.next
+(https://github.com/alistair23/qemu/tree/riscv-to-apply.next)?
 
 
-On 2023/4/27 01:18, Mayuresh Chitale wrote:
-> On Sat, Apr 15, 2023 at 6:55 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->>
->> On 2023/4/15 00:02, Mayuresh Chitale wrote:
->>> If misa.F and smstateen_fcsr_ok flag are clear then all the floating
->>> point instructions must generate an appropriate exception.
->>>
->>> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
->>> ---
->>>    target/riscv/insn_trans/trans_rvd.c.inc   | 13 ++++++++----
->>>    target/riscv/insn_trans/trans_rvf.c.inc   | 24 +++++++++++++++++++----
->>>    target/riscv/insn_trans/trans_rvzfh.c.inc | 18 ++++++++++++++---
->>>    3 files changed, 44 insertions(+), 11 deletions(-)
->>>
->>> diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
->>> index 2c51e01c40..d9e0cf116f 100644
->>> --- a/target/riscv/insn_trans/trans_rvd.c.inc
->>> +++ b/target/riscv/insn_trans/trans_rvd.c.inc
->>> @@ -18,10 +18,15 @@
->>>     * this program.  If not, see <http://www.gnu.org/licenses/>.
->>>     */
->>>
->>> -#define REQUIRE_ZDINX_OR_D(ctx) do { \
->>> -    if (!ctx->cfg_ptr->ext_zdinx) { \
->>> -        REQUIRE_EXT(ctx, RVD); \
->>> -    } \
->>> +#define REQUIRE_ZDINX_OR_D(ctx) do {           \
->>> +    if (!has_ext(ctx, RVD)) {                  \
->>> +        if (!ctx->cfg_ptr->ext_zdinx) {        \
->>> +            return false;                      \
->>> +        }                                      \
->>> +        if (!smstateen_fcsr_check(ctx)) {      \
->>> +            return false;                      \
->>> +        }                                      \
->>> +    }                                          \
->>>    } while (0)
->>>
->>>    #define REQUIRE_EVEN(ctx, reg) do { \
->>> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
->>> index 9e9fa2087a..6bf6fe16be 100644
->>> --- a/target/riscv/insn_trans/trans_rvf.c.inc
->>> +++ b/target/riscv/insn_trans/trans_rvf.c.inc
->>> @@ -24,10 +24,26 @@
->>>                return false; \
->>>    } while (0)
->>>
->>> -#define REQUIRE_ZFINX_OR_F(ctx) do {\
->>> -    if (!ctx->cfg_ptr->ext_zfinx) { \
->>> -        REQUIRE_EXT(ctx, RVF); \
->>> -    } \
->>> +static inline bool smstateen_fcsr_check(DisasContext *ctx)
->>> +{
->>> +#ifndef CONFIG_USER_ONLY
->>> +    if (!has_ext(ctx, RVF) && !ctx->smstateen_fcsr_ok) {
->> We needn't check RVF here. Two reasons:
->>
->> 1. This check only be done when RVF is diabled.
->>
->> 2. ctx->smstateen_fcsr_ok is always be true (set in last patch) when RVF
->> is enabled
-> Ok.
->>> +        ctx->virt_inst_excp = ctx->virt_enabled;
->>> +        return false;
->>> +    }
->>> +#endif
->>> +    return true;
->>> +}
->>> +
->>> +#define REQUIRE_ZFINX_OR_F(ctx) do {           \
->>> +    if (!has_ext(ctx, RVF)) {                  \
->>> +        if (!ctx->cfg_ptr->ext_zfinx) {        \
->>> +            return false;                      \
->>> +        }                                      \
->>> +        if (!smstateen_fcsr_check(ctx)) {      \
->>> +            return false;                      \
->>> +        }                                      \
->>> +    }                                          \
->>>    } while (0)
->>>
->>>    #define REQUIRE_ZCF(ctx) do {                  \
->>> diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
->>> index 74dde37ff7..74a125e4c0 100644
->>> --- a/target/riscv/insn_trans/trans_rvzfh.c.inc
->>> +++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
->>> @@ -16,28 +16,40 @@
->>>     * this program.  If not, see <http://www.gnu.org/licenses/>.
->>>     */
->>>
->>> -#define REQUIRE_ZFH(ctx) do { \
->>> +#define REQUIRE_ZFH(ctx) do {          \
->>>        if (!ctx->cfg_ptr->ext_zfh) {      \
->>> -        return false;         \
->>> -    }                         \
->>> +        return false;                  \
->>> +    }                                  \
->>> +    if (!smstateen_fcsr_check(ctx)) {  \
->>> +        return false;                  \
->>> +    }                                  \
->> This is unnecessary here. This check is only for Zhinx.
->>
->> Similar to REQUIRE_ZFHMIN.
->>
->>>    } while (0)
->>>
->>>    #define REQUIRE_ZHINX_OR_ZFH(ctx) do { \
->>>        if (!ctx->cfg_ptr->ext_zhinx && !ctx->cfg_ptr->ext_zfh) { \
->>>            return false;                  \
->>>        }                                  \
->>> +    if (!smstateen_fcsr_check(ctx)) {  \
->>> +        return false;                  \
->>> +    }                                  \
->> This check is only for Zhinx here. So it's better to take the similar
->> way as REQUIRE_ZFINX_OR_F.
->>
->> Similar to REQUIRE_ZFHMIN_OR_ZHINXMIN.
-> I am not sure I follow the comments above.
-> The FCSR check is applicable to all the extensions ie zfinx, zdinx,
-> zhinx and zhinxmin.
+Thanks,
 
-Yeah. FCSR check is applicable to all Z*inx extensions, but unnecessary 
-for Zfh.  So I think it's better to be:
 
-       if (!ctx->cfg_ptr->ext_zfh) {                                \
-           if (!ctx->cfg_ptr->ext_zhinx)) {                         \
-               return false;                                        \
-           }                                                        \
-           if (!smstateen_fcsr_check(ctx)) {                        \
-               return false;                                        \
-           }                                                        \
-       }
+Daniel
 
-Regards,
 
-Weiwei Li
 
->> Regards,
->>
->> Weiwei Li
->>
->>>    } while (0)
->>>
->>>    #define REQUIRE_ZFHMIN(ctx) do {              \
->>>        if (!ctx->cfg_ptr->ext_zfhmin) {          \
->>>            return false;                         \
->>>        }                                         \
->>> +    if (!smstateen_fcsr_check(ctx)) {         \
->>> +        return false;                         \
->>> +    }                                         \
->>>    } while (0)
->>>
->>>    #define REQUIRE_ZFHMIN_OR_ZHINXMIN(ctx) do {                 \
->>>        if (!(ctx->cfg_ptr->ext_zfhmin || ctx->cfg_ptr->ext_zhinxmin)) { \
->>>            return false;                                        \
->>>        }                                                        \
->>> +    if (!smstateen_fcsr_check(ctx)) {                        \
->>> +        return false;                                        \
->>> +    }                                                        \
->>>    } while (0)
->>>
->>>    static bool trans_flh(DisasContext *ctx, arg_flh *a)
 
+On 4/24/23 06:07, Yong-Xuan Wang wrote:
+> This series introduces support for KVM AIA in the RISC-V architecture. The
+> implementation is refered to Anup's KVM AIA implementation in kvmtool
+> (https://github.com/avpatel/kvmtool.git). To test these patches, a Linux kernel
+> with KVM AIA support is required, which can be found in the qemu_kvm_aia branch
+> at https://github.com/yong-xuan/linux.git. This kernel branch is based on the
+> riscv_aia_v1 branch from https://github.com/avpatel/linux.git and includes two
+> additional patches.
+> 
+> 
+> Yong-Xuan Wang (6):
+>    update-linux-headers: sync-up header with Linux for KVM AIA support
+>    target/riscv: support the AIA device emulateion with KVM enabled
+>    target/riscv: check the in-kernel irqchip support
+>    target/riscv: Create an KVM AIA irqchip
+>    target/riscv: update APLIC and IMSIC to support KVM AIA
+>    target/riscv: select KVM AIA in riscv virt machine
+> 
+>   hw/intc/riscv_aplic.c     |  19 +++-
+>   hw/intc/riscv_imsic.c     |  16 ++-
+>   hw/riscv/virt.c           | 214 +++++++++++++++++++++-----------------
+>   linux-headers/linux/kvm.h |   2 +
+>   target/riscv/kvm.c        |  96 ++++++++++++++++-
+>   target/riscv/kvm_riscv.h  |  36 +++++++
+>   6 files changed, 277 insertions(+), 106 deletions(-)
+> 
 
