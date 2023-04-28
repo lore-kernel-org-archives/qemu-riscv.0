@@ -1,53 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1psRKo-0004JQ-V6
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 12:52:38 -0400
+	id 1psRKw-0004Kk-95
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 12:52:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1psRKn-0004JG-GZ
- for qemu-riscv@nongnu.org; Fri, 28 Apr 2023 12:52:37 -0400
-Received: from mail-oi1-x230.google.com ([2607:f8b0:4864:20::230])
+ id 1psRKu-0004KD-Gg
+ for qemu-riscv@nongnu.org; Fri, 28 Apr 2023 12:52:44 -0400
+Received: from mail-oi1-x233.google.com ([2607:f8b0:4864:20::233])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1psRKl-0005pf-H5
- for qemu-riscv@nongnu.org; Fri, 28 Apr 2023 12:52:37 -0400
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-38e692c0918so138577b6e.1
- for <qemu-riscv@nongnu.org>; Fri, 28 Apr 2023 09:52:33 -0700 (PDT)
+ id 1psRKs-0005tG-D4
+ for qemu-riscv@nongnu.org; Fri, 28 Apr 2023 12:52:44 -0400
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-38e04d1b2b4so124525b6e.3
+ for <qemu-riscv@nongnu.org>; Fri, 28 Apr 2023 09:52:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1682700752; x=1685292752;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=oXstUCrChMK1U3IIw5RAhakVys7/ay86/Z2D+gejX0Y=;
- b=IGymusdXqabSPRIzFMGP08MXL0GHOXifPZdqICzPU/i2HwfhY5icjj9GoeK7XATJgB
- 6MbCQQTolJ7kD5bGqC6SoenmNTpMYF8utb25B00Wd8Oy4Kj7ZYOgzvGhzfR5g1VF2nDZ
- i/uKi8RvD63+iiv3e7BebQ8KoQqb0jyKwTEnyVFbkAGfneTtXBAwateTiFA/AW+jpCAc
- KGk8nhkTaXtk6WgUsfc5sKHsO9oZYlNpvV+gy2cFM7N+MxpFCh0UBL+4qynHJO14FPjA
- r9rfvaCDQfM49SA+4JKHg/Syw08cuJ03z9Mi5Eyj66o3FJyk4PQs/rksDc3XEpY5N/m7
- 0JGA==
+ d=ventanamicro.com; s=google; t=1682700759; x=1685292759;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FJg9Z757wkoktYD9WwpmRyspyW4Py5K0/MXLwUgCBlw=;
+ b=TKBy0uYQj0FW5tqHBPhs0Tj8KeGxwDHHD6P0S5x3c6HyId32CM+qaLOaRWjl4MEc+M
+ nzEJH3SdJw/PXHSINgfSm0rXaJiNUzKhm7QJ9DITLwsRkoZZc1110dZ0oIMyV95ABwX/
+ tflBSFQGPi1+lUcnpkmesZGxBYFsF5kAeKKW17PYSHKVuEOG2EOga5POfkj1t7iWHlhl
+ 6jXBA3dpfFVVHu8Bm8SPW4VW/hvb2BwmCQco3wJJNnd+73xVVO9vgxNc+U9kxHvUJFjL
+ FtockBCTahDZb1DNnbrrfSw1GjZzYqk6C/5baW3S7rxhkcocZybQ40rrW2Qae6u7JTQa
+ NhxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682700752; x=1685292752;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oXstUCrChMK1U3IIw5RAhakVys7/ay86/Z2D+gejX0Y=;
- b=DtO3wWktXmGVbK/VfLm2rYEZdXj008/RLcOICnzx/Ok2BlUla15qYpULWVroDlWz9I
- 0qqi4Xd4nwiUttqpjguMWWqAtCrMPk5A/zf9Wc71O3MAf3rKo3hHLUp2nBOQCOirkK2l
- 3waeIBfDOkVBR5BMNDQ3X7qjXZEgaS+1x0diXYnEbdHmSQiAke59SjkvswiNkeQaNjqf
- DYmLJfWqLtH+1F2McSIynqMKD1TdNVt2/WAymHf1UgDVsOzsmvldYk02LvhH70CWPqZs
- PiSJ6zo6Lj5PjXVfLe0ZkNlTvAg1dvmrbEWa6Hv+0ffjT26O1cOPvnTFchyG8ISnHFJw
- 8gpA==
-X-Gm-Message-State: AC+VfDyXahBj4yNMXTXXkNAwP0SwSFpPEb3X15Do300Z2wNczux7QVhW
- LPTfaH/xqAzktyQ5zYzRRywxYg==
-X-Google-Smtp-Source: ACHHUZ71mvL0ZvtKER/bscbZ+SwFDTv8Dstrx7mdohHBOc9VK7Oxk+fpJDdeHC3tbJZHIJptMFrfVg==
-X-Received: by 2002:a05:6808:2017:b0:390:98eb:7602 with SMTP id
- q23-20020a056808201700b0039098eb7602mr2882508oiw.43.1682700752173; 
- Fri, 28 Apr 2023 09:52:32 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1682700759; x=1685292759;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FJg9Z757wkoktYD9WwpmRyspyW4Py5K0/MXLwUgCBlw=;
+ b=XzFMo+YDEVK4faomvE638xDg0E6AeXdLDQs7KocSIGlln/4ioqQ3YgvXI4yqF4NhW0
+ mLpslft40wBz2lGpwjxVzOkgkFRj5F8rYe5pFm7SFN3HflWvG7KGSZjohuNtVk9bEuSn
+ rhbYgIo9IEraTEI4bKtxS/Fu0Qz5dJ2z1Y5x6+xbFPCZXFACIr+bHK6LvSMc7pYHfkIY
+ cI1nBkH3pPV9JL/L9MjIXi/hGybuXv+gIHFnkly+DfxnibZIuMcJ4aTCjl5SQ/Rgc4U9
+ ppmAE28TN55dCQrQMbaIaH34Sn+Uj1M2BfrzOZJddyCy/jlRtEhRJRtOhf0a19O/Vct8
+ SojA==
+X-Gm-Message-State: AC+VfDxg6eq2a2Yg4vNpJqHhz2PMgNmmKPozpU0C2WtpJ2GQeyH2ocsh
+ eE+IHknzq+dsDpti0vqDi08P9Q==
+X-Google-Smtp-Source: ACHHUZ6nl3mJ3PtbmdY7Ypc9R0cIjqjdJZCOG8x3I4UI2scjGfNswL3Uxesx+mU+3fS6AhR/45naDw==
+X-Received: by 2002:aca:f01:0:b0:38c:398e:6afd with SMTP id
+ 1-20020aca0f01000000b0038c398e6afdmr2585752oip.53.1682700757871; 
+ Fri, 28 Apr 2023 09:52:37 -0700 (PDT)
 Received: from mchitale-vm.. ([103.97.165.210])
  by smtp.googlemail.com with ESMTPSA id
- c10-20020a4a4f0a000000b005462a25c4f9sm9665764oob.9.2023.04.28.09.52.27
+ c10-20020a4a4f0a000000b005462a25c4f9sm9665764oob.9.2023.04.28.09.52.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Apr 2023 09:52:31 -0700 (PDT)
+ Fri, 28 Apr 2023 09:52:37 -0700 (PDT)
 From: Mayuresh Chitale <mchitale@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org,
@@ -56,14 +57,16 @@ Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
  Alistair Francis <alistair23@gmail.com>,
  Daniel Barboza <dbarboza@ventanamicro.com>, liweiwei@iscas.ac.cn,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v3 0/4] Smstateen FCSR
-Date: Fri, 28 Apr 2023 22:22:07 +0530
-Message-Id: <20230428165212.2800669-1-mchitale@ventanamicro.com>
+Subject: [PATCH v3 1/4] target/riscv: smstateen check for fcsr
+Date: Fri, 28 Apr 2023 22:22:08 +0530
+Message-Id: <20230428165212.2800669-2-mchitale@ventanamicro.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230428165212.2800669-1-mchitale@ventanamicro.com>
+References: <20230428165212.2800669-1-mchitale@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::230;
- envelope-from=mchitale@ventanamicro.com; helo=mail-oi1-x230.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::233;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-oi1-x233.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,39 +86,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2023 16:52:37 -0000
+X-List-Received-Date: Fri, 28 Apr 2023 16:52:44 -0000
 
-Patch 4 and 5 of the smstateen series need to be re-submitted with
-changes described in the email below.
-https://lists.nongnu.org/archive/html/qemu-riscv/2022-11/msg00155.html
-Hence splitting the patch 4 of the original series into three and
-re-submitting along with the original patch 5.
+If smstateen is implemented and smtateen0.fcsr is clear and misa.F
+is off then the floating point operations must return illegal
+instruction exception or virtual instruction trap, if relevant.
 
-Changes in v3:
-- Reuse TB_FLAGS.FS (instead of TB_FLAGS.HS_FS) for smstateen as HS_FS bits been removed.
-- Remove fcsr check for zfh and zfhmin
+Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+---
+ target/riscv/csr.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-Changes in v2:
- - Improve patch 1 description
- - Reuse TB_FLAGS.HS_FS for smstateen
- - Convert smstateen_fcsr_check to function
- - Add fcsr check for zdinx
-
-Mayuresh Chitale (4):
-  target/riscv: smstateen check for fcsr
-  target/riscv: Reuse tb->flags.FS
-  target/riscv: check smstateen fcsr flag
-  target/riscv: smstateen knobs
-
- target/riscv/cpu.c                        |  3 ++-
- target/riscv/cpu_helper.c                 |  9 +++++++
- target/riscv/csr.c                        | 15 +++++++++++
- target/riscv/insn_trans/trans_rvd.c.inc   | 13 ++++++---
- target/riscv/insn_trans/trans_rvf.c.inc   | 24 ++++++++++++++---
- target/riscv/insn_trans/trans_rvzfh.c.inc | 32 +++++++++++++++--------
- target/riscv/translate.c                  | 12 ++++++++-
- 7 files changed, 87 insertions(+), 21 deletions(-)
-
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 4451bd1263..3f6b824bd2 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -82,6 +82,10 @@ static RISCVException fs(CPURISCVState *env, int csrno)
+         !riscv_cpu_cfg(env)->ext_zfinx) {
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
++
++    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
++        return smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR);
++    }
+ #endif
+     return RISCV_EXCP_NONE;
+ }
+@@ -2100,6 +2104,9 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
+                                       target_ulong new_val)
+ {
+     uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
++    if (!riscv_has_ext(env, RVF)) {
++        wr_mask |= SMSTATEEN0_FCSR;
++    }
+ 
+     return write_mstateen(env, csrno, wr_mask, new_val);
+ }
+@@ -2173,6 +2180,10 @@ static RISCVException write_hstateen0(CPURISCVState *env, int csrno,
+ {
+     uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+ 
++    if (!riscv_has_ext(env, RVF)) {
++        wr_mask |= SMSTATEEN0_FCSR;
++    }
++
+     return write_hstateen(env, csrno, wr_mask, new_val);
+ }
+ 
+@@ -2259,6 +2270,10 @@ static RISCVException write_sstateen0(CPURISCVState *env, int csrno,
+ {
+     uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+ 
++    if (!riscv_has_ext(env, RVF)) {
++        wr_mask |= SMSTATEEN0_FCSR;
++    }
++
+     return write_sstateen(env, csrno, wr_mask, new_val);
+ }
+ 
 -- 
 2.34.1
 
