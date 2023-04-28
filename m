@@ -1,32 +1,32 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1psPOc-0006Bm-Pn
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:48:26 -0400
+	id 1psPOe-0006Cs-PG
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:48:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1psPOU-0005zy-Iw; Fri, 28 Apr 2023 10:48:19 -0400
+ id 1psPOa-000658-7a; Fri, 28 Apr 2023 10:48:24 -0400
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1psPOR-0002BP-RS; Fri, 28 Apr 2023 10:48:18 -0400
+ id 1psPOR-00027P-VZ; Fri, 28 Apr 2023 10:48:23 -0400
 Received: from [167.98.27.226] (helo=lawrence-thinkpad.guest.codethink.co.uk)
  by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1psPOM-005zz5-03; Fri, 28 Apr 2023 15:48:10 +0100
+ id 1psPOH-005zz5-IM; Fri, 28 Apr 2023 15:48:05 +0100
 From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 To: qemu-devel@nongnu.org
 Cc: dickon.hood@codethink.co.uk, nazar.kazakov@codethink.co.uk,
  kiran.ostrolenk@codethink.co.uk, frank.chang@sifive.com,
  palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  pbonzini@redhat.com, philipp.tomsich@vrull.eu, kvm@vger.kernel.org,
- qemu-riscv@nongnu.org, richard.henderson@linaro.org
-Subject: [PATCH v3 07/19] target/riscv: Refactor some of the generic vector
- functionality
-Date: Fri, 28 Apr 2023 15:47:45 +0100
-Message-Id: <20230428144757.57530-8-lawrence.hunter@codethink.co.uk>
+ qemu-riscv@nongnu.org, richard.henderson@linaro.org,
+ Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+Subject: [PATCH v3 00/19] Add RISC-V vector cryptographic instruction set
+ support
+Date: Fri, 28 Apr 2023 15:47:38 +0100
+Message-Id: <20230428144757.57530-1-lawrence.hunter@codethink.co.uk>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230428144757.57530-1-lawrence.hunter@codethink.co.uk>
-References: <20230428144757.57530-1-lawrence.hunter@codethink.co.uk>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=188.40.203.114;
  envelope-from=lawrence.hunter@codethink.co.uk; helo=imap4.hz.codethink.co.uk
@@ -47,155 +47,111 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2023 14:48:19 -0000
+X-List-Received-Date: Fri, 28 Apr 2023 14:48:24 -0000
 
-From: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+This patchset provides an implementation for Zvbb, Zvbc, Zvkned, Zvknh, Zvksh, Zvkg, and Zvksed of the draft RISC-V vector cryptography extensions as per the v20230425 version of the specification(1) (6a7ae7f2). This is an update to the patchset submitted to qemu-devel on Monday, 17 Apr 2023 14:58:36 +0100.
 
-Move some macros out of `vector_helper` and into `vector_internals`.
-This ensures they can be used by both vector and vector-crypto helpers
-(latter implemented in proceeding commits).
+v2:
 
-Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
----
- target/riscv/vector_helper.c    | 42 ------------------------------
- target/riscv/vector_internals.h | 46 +++++++++++++++++++++++++++++++++
- 2 files changed, 46 insertions(+), 42 deletions(-)
+    squashed commits into one commit per extension with separate commits for
+    each refactoring
+    unified trans_rvzvk*.c.inc files into one trans_rvvk.c.inc
+    style fixes in insn32.decode and other files
+    added macros for EGS values in translation functions.
+    updated from v20230303 to v20230407 of the spec:
+        Zvkb has been split into Zvbb and Zvbc
+        vbrev, vclz, vctz, vcpop and vwsll have been added to Zvbb.
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 27fefef10ec..a438f5d95e1 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -646,9 +646,6 @@ GEN_VEXT_ST_WHOLE(vs8r_v, int8_t, ste_b)
- #define OP_SUS_H int16_t, uint16_t, int16_t, uint16_t, int16_t
- #define OP_SUS_W int32_t, uint32_t, int32_t, uint32_t, int32_t
- #define OP_SUS_D int64_t, uint64_t, int64_t, uint64_t, int64_t
--#define WOP_UUU_B uint16_t, uint8_t, uint8_t, uint16_t, uint16_t
--#define WOP_UUU_H uint32_t, uint16_t, uint16_t, uint32_t, uint32_t
--#define WOP_UUU_W uint64_t, uint32_t, uint32_t, uint64_t, uint64_t
- #define WOP_SSS_B int16_t, int8_t, int8_t, int16_t, int16_t
- #define WOP_SSS_H int32_t, int16_t, int16_t, int32_t, int32_t
- #define WOP_SSS_W int64_t, int32_t, int32_t, int64_t, int64_t
-@@ -3412,11 +3409,6 @@ GEN_VEXT_VF(vfwnmsac_vf_h, 4)
- GEN_VEXT_VF(vfwnmsac_vf_w, 8)
- 
- /* Vector Floating-Point Square-Root Instruction */
--/* (TD, T2, TX2) */
--#define OP_UU_H uint16_t, uint16_t, uint16_t
--#define OP_UU_W uint32_t, uint32_t, uint32_t
--#define OP_UU_D uint64_t, uint64_t, uint64_t
--
- #define OPFVV1(NAME, TD, T2, TX2, HD, HS2, OP)        \
- static void do_##NAME(void *vd, void *vs2, int i,      \
-         CPURISCVState *env)                            \
-@@ -4109,40 +4101,6 @@ GEN_VEXT_CMP_VF(vmfge_vf_w, uint32_t, H4, vmfge32)
- GEN_VEXT_CMP_VF(vmfge_vf_d, uint64_t, H8, vmfge64)
- 
- /* Vector Floating-Point Classify Instruction */
--#define OPIVV1(NAME, TD, T2, TX2, HD, HS2, OP)         \
--static void do_##NAME(void *vd, void *vs2, int i)      \
--{                                                      \
--    TX2 s2 = *((T2 *)vs2 + HS2(i));                    \
--    *((TD *)vd + HD(i)) = OP(s2);                      \
--}
--
--#define GEN_VEXT_V(NAME, ESZ)                          \
--void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
--                  CPURISCVState *env, uint32_t desc)   \
--{                                                      \
--    uint32_t vm = vext_vm(desc);                       \
--    uint32_t vl = env->vl;                             \
--    uint32_t total_elems =                             \
--        vext_get_total_elems(env, desc, ESZ);          \
--    uint32_t vta = vext_vta(desc);                     \
--    uint32_t vma = vext_vma(desc);                     \
--    uint32_t i;                                        \
--                                                       \
--    for (i = env->vstart; i < vl; i++) {               \
--        if (!vm && !vext_elem_mask(v0, i)) {           \
--            /* set masked-off elements to 1s */        \
--            vext_set_elems_1s(vd, vma, i * ESZ,        \
--                              (i + 1) * ESZ);          \
--            continue;                                  \
--        }                                              \
--        do_##NAME(vd, vs2, i);                         \
--    }                                                  \
--    env->vstart = 0;                                   \
--    /* set tail elements to 1s */                      \
--    vext_set_elems_1s(vd, vta, vl * ESZ,               \
--                      total_elems * ESZ);              \
--}
--
- target_ulong fclass_h(uint64_t frs1)
- {
-     float16 f = frs1;
-diff --git a/target/riscv/vector_internals.h b/target/riscv/vector_internals.h
-index 749d138bebe..8133111e5f6 100644
---- a/target/riscv/vector_internals.h
-+++ b/target/riscv/vector_internals.h
-@@ -121,12 +121,52 @@ void vext_set_elems_1s(void *base, uint32_t is_agnostic, uint32_t cnt,
- /* expand macro args before macro */
- #define RVVCALL(macro, ...)  macro(__VA_ARGS__)
- 
-+/* (TD, T2, TX2) */
-+#define OP_UU_B uint8_t, uint8_t, uint8_t
-+#define OP_UU_H uint16_t, uint16_t, uint16_t
-+#define OP_UU_W uint32_t, uint32_t, uint32_t
-+#define OP_UU_D uint64_t, uint64_t, uint64_t
-+
- /* (TD, T1, T2, TX1, TX2) */
- #define OP_UUU_B uint8_t, uint8_t, uint8_t, uint8_t, uint8_t
- #define OP_UUU_H uint16_t, uint16_t, uint16_t, uint16_t, uint16_t
- #define OP_UUU_W uint32_t, uint32_t, uint32_t, uint32_t, uint32_t
- #define OP_UUU_D uint64_t, uint64_t, uint64_t, uint64_t, uint64_t
- 
-+#define OPIVV1(NAME, TD, T2, TX2, HD, HS2, OP)         \
-+static void do_##NAME(void *vd, void *vs2, int i)      \
-+{                                                      \
-+    TX2 s2 = *((T2 *)vs2 + HS2(i));                    \
-+    *((TD *)vd + HD(i)) = OP(s2);                      \
-+}
-+
-+#define GEN_VEXT_V(NAME, ESZ)                          \
-+void HELPER(NAME)(void *vd, void *v0, void *vs2,       \
-+                  CPURISCVState *env, uint32_t desc)   \
-+{                                                      \
-+    uint32_t vm = vext_vm(desc);                       \
-+    uint32_t vl = env->vl;                             \
-+    uint32_t total_elems =                             \
-+        vext_get_total_elems(env, desc, ESZ);          \
-+    uint32_t vta = vext_vta(desc);                     \
-+    uint32_t vma = vext_vma(desc);                     \
-+    uint32_t i;                                        \
-+                                                       \
-+    for (i = env->vstart; i < vl; i++) {               \
-+        if (!vm && !vext_elem_mask(v0, i)) {           \
-+            /* set masked-off elements to 1s */        \
-+            vext_set_elems_1s(vd, vma, i * ESZ,        \
-+                              (i + 1) * ESZ);          \
-+            continue;                                  \
-+        }                                              \
-+        do_##NAME(vd, vs2, i);                         \
-+    }                                                  \
-+    env->vstart = 0;                                   \
-+    /* set tail elements to 1s */                      \
-+    vext_set_elems_1s(vd, vta, vl * ESZ,               \
-+                      total_elems * ESZ);              \
-+}
-+
- /* operation of two vector elements */
- typedef void opivv2_fn(void *vd, void *vs1, void *vs2, int i);
- 
-@@ -179,4 +219,10 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
-                do_##NAME, ESZ);                           \
- }
- 
-+/* Three of the widening shortening macros: */
-+/* (TD, T1, T2, TX1, TX2) */
-+#define WOP_UUU_B uint16_t, uint8_t, uint8_t, uint16_t, uint16_t
-+#define WOP_UUU_H uint32_t, uint16_t, uint16_t, uint32_t, uint32_t
-+#define WOP_UUU_W uint64_t, uint32_t, uint32_t, uint64_t, uint64_t
-+
- #endif /* TARGET_RISCV_VECTOR_INTERNALS_H */
+v3:
+
+    New patch 03/19 removes redundant “cpu_vl == 0” checks from trans_rvv.c.inc
+    Introduction of new tcg ops has been factored out of patch 11/19 and into 09/19
+        These ops are now added to non riscv-specific files
+
+As v20230425 is a freeze candidate, we are not expecting any significant changes to the specification or this patch series.
+
+Please note that the Zvkt data-independent execution latency extension (and all extensions including it) has not been implemented, and we would recommend not using these patches in an environment where timing attacks are an issue.
+
+Work performed by Dickon, Lawrence, Nazar, Kiran, and William from Codethink sponsored by SiFive, as well as Max Chou and Frank Chang from SiFive.
+
+For convenience we have created a git repo with our patches on top of a recent master. https://github.com/CodethinkLabs/qemu-ct
+
+    https://github.com/riscv/riscv-crypto/releases
+
+Thanks to those who have already reviewed:
+
+    Richard Henderson richard.henderson@linaro.org
+        [PATCH v2 02/17] target/riscv: Refactor vector-vector translation macro
+        [PATCH v2 04/17] target/riscv: Move vector translation checks
+        [PATCH v2 05/17] target/riscv: Refactor translation of vector-widening instruction
+        [PATCH v2 07/17] qemu/bitops.h: Limit rotate amounts
+        [PATCH v2 08/17] qemu/host-utils.h: Add clz and ctz functions for lower-bit integers
+        [PATCH v2 14/17] crypto: Create sm4_subword
+    Alistair Francis alistair.francis@wdc.com
+        [PATCH v2 02/17] target/riscv: Refactor vector-vector translation macro
+    Philipp Tomsich philipp.tomsich@vrull.eu
+        Various v1 reviews
+    Christoph Müllner christoph.muellner@vrull.eu
+        Various v1 reviews
+
+
+Dickon Hood (3):
+  target/riscv: Refactor translation of vector-widening instruction
+  qemu/bitops.h: Limit rotate amounts
+  target/riscv: Add Zvbb ISA extension support
+
+Kiran Ostrolenk (5):
+  target/riscv: Refactor some of the generic vector functionality
+  target/riscv: Refactor vector-vector translation macro
+  target/riscv: Refactor some of the generic vector functionality
+  qemu/host-utils.h: Add clz and ctz functions for lower-bit integers
+  target/riscv: Add Zvknh ISA extension support
+
+Lawrence Hunter (2):
+  target/riscv: Add Zvbc ISA extension support
+  target/riscv: Add Zvksh ISA extension support
+
+Max Chou (3):
+  crypto: Create sm4_subword
+  crypto: Add SM4 constant parameter CK
+  target/riscv: Add Zvksed ISA extension support
+
+Nazar Kazakov (6):
+  target/riscv: Remove redundant "cpu_vl == 0" checks
+  target/riscv: Move vector translation checks
+  tcg: Add andcs and rotrs tcg gvec ops
+  target/riscv: Add Zvkned ISA extension support
+  target/riscv: Add Zvkg ISA extension support
+  target/riscv: Expose Zvk* and Zvb[b,c] cpu properties
+
+ accel/tcg/tcg-runtime-gvec.c             |   11 +
+ accel/tcg/tcg-runtime.h                  |    1 +
+ crypto/sm4.c                             |   10 +
+ include/crypto/sm4.h                     |    9 +
+ include/qemu/bitops.h                    |   24 +-
+ include/qemu/host-utils.h                |   54 ++
+ include/tcg/tcg-op-gvec.h                |    4 +
+ target/arm/tcg/crypto_helper.c           |   10 +-
+ target/riscv/cpu.c                       |   39 +
+ target/riscv/cpu.h                       |    8 +
+ target/riscv/helper.h                    |   95 ++
+ target/riscv/insn32.decode               |   58 ++
+ target/riscv/insn_trans/trans_rvv.c.inc  |  174 ++--
+ target/riscv/insn_trans/trans_rvvk.c.inc |  593 ++++++++++++
+ target/riscv/meson.build                 |    4 +-
+ target/riscv/op_helper.c                 |    6 +
+ target/riscv/translate.c                 |    1 +
+ target/riscv/vcrypto_helper.c            | 1052 ++++++++++++++++++++++
+ target/riscv/vector_helper.c             |  243 +----
+ target/riscv/vector_internals.c          |   81 ++
+ target/riscv/vector_internals.h          |  228 +++++
+ tcg/tcg-op-gvec.c                        |   23 +
+ 22 files changed, 2365 insertions(+), 363 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvvk.c.inc
+ create mode 100644 target/riscv/vcrypto_helper.c
+ create mode 100644 target/riscv/vector_internals.c
+ create mode 100644 target/riscv/vector_internals.h
+
 -- 
 2.40.1
 
