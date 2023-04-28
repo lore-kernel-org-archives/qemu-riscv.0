@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1psPDN-00027N-4Y
+	id 1psPDN-00027s-G5
 	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:36:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1psPDJ-00023V-Fq; Fri, 28 Apr 2023 10:36:45 -0400
+ id 1psPDJ-000248-Oc; Fri, 28 Apr 2023 10:36:45 -0400
 Received: from [159.226.251.80] (helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1psPDG-0008Az-VI; Fri, 28 Apr 2023 10:36:45 -0400
+ id 1psPDF-0008AS-CV; Fri, 28 Apr 2023 10:36:45 -0400
 Received: from localhost.localdomain (unknown [61.165.33.195])
- by APP-01 (Coremail) with SMTP id qwCowACHj3vq2UtkrB5ZDA--.57839S8;
- Fri, 28 Apr 2023 22:36:31 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowACHj3vq2UtkrB5ZDA--.57839S2;
+ Fri, 28 Apr 2023 22:36:27 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,33 +19,29 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn,
  lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v5 06/13] target/riscv: Remove unused paramters in
- pmp_hart_has_privs_default()
-Date: Fri, 28 Apr 2023 22:36:14 +0800
-Message-Id: <20230428143621.142390-7-liweiwei@iscas.ac.cn>
+Subject: [PATCH v5 00/13] target/riscv: Fix PMP related problem
+Date: Fri, 28 Apr 2023 22:36:08 +0800
+Message-Id: <20230428143621.142390-1-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230428143621.142390-1-liweiwei@iscas.ac.cn>
-References: <20230428143621.142390-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACHj3vq2UtkrB5ZDA--.57839S8
-X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF4UKrW8tryrur4rXwb_yoW8XF48pr
- WrCryxKFZrtrWDX3Z3Ar4qkFWUAFn3KrW29a97t3y0ya13uayIkFWkKwsIyF17JasxZrZ0
- 9FWqkFn8Zr42v3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUmj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
- 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
- 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
- IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
- M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
- kIc2xKxwCY02Avz4vE14v_Xryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_
- Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17
- CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0
- I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcV
- C2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2Kfnx
- nUUI43ZEXa7VUbfOz3UUUUU==
+X-CM-TRANSID: qwCowACHj3vq2UtkrB5ZDA--.57839S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxAr48GF4DWw47Zr48Gr45KFg_yoW5uFW5pF
+ WfC345Jrs7trZFqrs3tr17Cr15Ars5WrW7t3WIyw1rA3Wa9F1rCr97Kw109FWUJF95W390
+ kF4jyryv9F4jvaUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUvG14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
+ n2kIc2xKxwCY02Avz4vE14v_Xryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr
+ 0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY
+ 17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcV
+ C0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY
+ 6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa
+ 73UjIFyTuYvjfUO4E_DUUUU
 X-Originating-IP: [61.165.33.195]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 X-Host-Lookup-Failed: Reverse DNS lookup failed for 159.226.251.80 (deferred)
@@ -69,50 +65,87 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2023 14:36:45 -0000
+X-List-Received-Date: Fri, 28 Apr 2023 14:36:46 -0000
 
-The addr and size parameters in pmp_hart_has_privs_default() are unused.
+This patchset tries to fix the PMP bypass problem issue https://gitlab.com/qemu-project/qemu/-/issues/1542:
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
----
- target/riscv/pmp.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+TLB will be cached if the matched PMP entry cover the whole page.  However PMP entries with higher priority may cover part of the page (but not match the access address), which means different regions in this page may have different permission rights. So it also cannot be cached (patch 1).
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index e745842973..d2d8429277 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -236,8 +236,7 @@ static int pmp_is_in_range(CPURISCVState *env, int pmp_index,
- /*
-  * Check if the address has required RWX privs when no PMP entry is matched.
-  */
--static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
--                                       target_ulong size, pmp_priv_t privs,
-+static bool pmp_hart_has_privs_default(CPURISCVState *env, pmp_priv_t privs,
-                                        pmp_priv_t *allowed_privs,
-                                        target_ulong mode)
- {
-@@ -309,8 +308,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
- 
-     /* Short cut if no rules */
-     if (0 == pmp_get_num_rules(env)) {
--        return pmp_hart_has_privs_default(env, addr, size, privs,
--                                          allowed_privs, mode);
-+        return pmp_hart_has_privs_default(env, privs, allowed_privs, mode);
-     }
- 
-     if (size == 0) {
-@@ -454,8 +452,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
- 
-     /* No rule matched */
-     if (!ret) {
--        ret = pmp_hart_has_privs_default(env, addr, size, privs,
--                                         allowed_privs, mode);
-+        ret = pmp_hart_has_privs_default(env, privs, allowed_privs, mode);
-     }
- 
-     return ret;
+Writing to pmpaddr didn't trigger tlb flush (patch 3). 
+
+We set the tlb_size to 1 to make the TLB_INVALID_MASK set, and and the next access will again go through tlb_fill. However, this way will not work in tb_gen_code() => get_page_addr_code_hostp(): the TLB host address will be cached, and the following instructions can use this host address directly which may lead to the bypass of PMP related check (patch 5).
+
+The port is available here:
+https://github.com/plctlab/plct-qemu/tree/plct-pmp-fix-v5
+
+v5:
+
+Mov the original Patch 6 to Patch 3
+
+add Patch 4 to change the return type of pmp_hart_has_privs() to bool 
+
+add Patch 5 to make RLB/MML/MMWP bits writable only when Smepmp is enabled
+
+add Patch 6 to remove unused paramters in pmp_hart_has_privs_default()
+
+add Patch 7 to flush tlb when MMWP or MML bits are changed
+
+add Patch 8 to update the next rule addr in pmpaddr_csr_write()
+
+add Patch 13 to deny access if access is partially inside the PMP entry
+
+v4:
+
+Update comments for Patch 1, and move partial check code from Patch 2 to Patch 1
+
+Restore log message change in Patch 2
+
+Update commit message and the way to improve the problem in Patch 6
+
+v3:
+
+Ignore disabled PMP entry in pmp_get_tlb_size() in Patch 1
+
+Drop Patch 5, since tb jmp cache have been flushed in tlb_flush, so flush tb seems unnecessary.
+
+Fix commit message problems in Patch 8 (Patch 7 in new patchset)
+
+v2:
+
+Update commit message for patch 1
+
+Add default tlb_size when pmp is diabled or there is no rules and only get the tlb size when translation success in patch 2
+
+Update get_page_addr_code_hostp instead of probe_access_internal to fix the cached host address for instruction fetch in patch 6
+
+Add patch 7 to make the short up really work in pmp_hart_has_privs
+
+Add patch 8 to use pmp_update_rule_addr() and pmp_update_rule_nums() separately
+
+Weiwei Li (13):
+  target/riscv: Update pmp_get_tlb_size()
+  target/riscv: Move pmp_get_tlb_size apart from
+    get_physical_address_pmp
+  target/riscv: Make the short cut really work in pmp_hart_has_privs
+  target/riscv: Change the return type of pmp_hart_has_privs() to bool
+  target/riscv: Make RLB/MML/MMWP bits writable only when Smepmp is
+    enabled
+  target/riscv: Remove unused paramters in pmp_hart_has_privs_default()
+  target/riscv: Flush TLB when MMWP or MML bits are changed
+  target/riscv: Update the next rule addr in pmpaddr_csr_write()
+  target/riscv: Flush TLB when pmpaddr is updated
+  target/riscv: Flush TLB only when pmpcfg/pmpaddr really changes
+  accel/tcg: Uncache the host address for instruction fetch when tlb
+    size < 1
+  target/riscv: Separate pmp_update_rule() in pmpcfg_csr_write
+  target/riscv: Deny access if access is partially inside the PMP entry
+
+ accel/tcg/cputlb.c        |   5 +
+ target/riscv/cpu_helper.c |  27 ++----
+ target/riscv/pmp.c        | 198 ++++++++++++++++++++++----------------
+ target/riscv/pmp.h        |  11 +--
+ 4 files changed, 135 insertions(+), 106 deletions(-)
+
 -- 
 2.25.1
 
