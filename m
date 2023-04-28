@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1psPDi-0002KX-0P
+	id 1psPDi-0002LB-AH
 	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:37:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1psPDg-0002F2-1c; Fri, 28 Apr 2023 10:37:08 -0400
+ id 1psPDf-0002Eh-VN; Fri, 28 Apr 2023 10:37:07 -0400
 Received: from [159.226.251.80] (helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1psPDd-0008Bh-Vn; Fri, 28 Apr 2023 10:37:07 -0400
+ id 1psPDd-0008Bg-W9; Fri, 28 Apr 2023 10:37:07 -0400
 Received: from localhost.localdomain (unknown [61.165.33.195])
- by APP-01 (Coremail) with SMTP id qwCowACHj3vq2UtkrB5ZDA--.57839S14;
- Fri, 28 Apr 2023 22:36:35 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowACHj3vq2UtkrB5ZDA--.57839S15;
+ Fri, 28 Apr 2023 22:36:36 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,33 +19,33 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn,
  lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v5 12/13] target/riscv: Separate pmp_update_rule() in
- pmpcfg_csr_write
-Date: Fri, 28 Apr 2023 22:36:20 +0800
-Message-Id: <20230428143621.142390-13-liweiwei@iscas.ac.cn>
+Subject: [PATCH v5 13/13] target/riscv: Deny access if access is partially
+ inside the PMP entry
+Date: Fri, 28 Apr 2023 22:36:21 +0800
+Message-Id: <20230428143621.142390-14-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230428143621.142390-1-liweiwei@iscas.ac.cn>
 References: <20230428143621.142390-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACHj3vq2UtkrB5ZDA--.57839S14
-X-Coremail-Antispam: 1UD129KBjvJXoW7Kw18uw43ZF15KryDGry5twb_yoW8uF4rpr
- WfCFZ2gF43t3Wqqan3tF4UZF1UCa1rKr42vws7GanYya15uw1rCF1qga4v9r15GayfZrWY
- 9ayUAr4UAF47ZFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUmF14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
- 3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
- x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
- JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2
- ka0xkIwI1lc2xSY4AK67AK6ry5MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j
- 6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7
- AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r4j6ryUMIIF0xvE
- 2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42
- IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2
- KfnxnUUI43ZEXa7VUbfOz3UUUUU==
+X-CM-TRANSID: qwCowACHj3vq2UtkrB5ZDA--.57839S15
+X-Coremail-Antispam: 1UD129KBjvdXoWruryrurWUGr43KryrJFWkZwb_yoWfJFg_Gr
+ WIqF48G3sFg3Wvy3WkAF43Ary0934kGws29FZ7KF4aka42krZ3Xw1ktFn7A34j9a93W3s3
+ Cwn7Zry7Cr1agjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbkAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
+ IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
+ F7xvwVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
+ 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
+ 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
+ IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
+ M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
+ kIc2xKxwCY02Avz4vE14v_Xryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_
+ Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17
+ CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Gr0_Xr1lIxAIcVC0
+ I7IYx2IY6xkF7I0E14v26r4UJVWxJr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0x
+ vEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIev
+ Ja73UjIFyTuYvjfUYJPEDUUUU
 X-Originating-IP: [61.165.33.195]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 X-Host-Lookup-Failed: Reverse DNS lookup failed for 159.226.251.80 (deferred)
@@ -71,64 +71,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 28 Apr 2023 14:37:08 -0000
 
-Use pmp_update_rule_addr() and pmp_update_rule_nums() separately to
-update rule nums only once for each pmpcfg_csr_write. Then remove
-pmp_update_rule() since it become unused.
+Access will fails if access is partially inside the PMP entry.
+However,only set ret = false doesn't really mean pmp violation
+since pmp_hart_has_privs_default() may return true at the end of
+pmp_hart_has_privs().
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 ---
- target/riscv/pmp.c | 16 ++--------------
- 1 file changed, 2 insertions(+), 14 deletions(-)
+ target/riscv/pmp.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 330f61b0f1..317c28ba73 100644
+index 317c28ba73..1ee8899d04 100644
 --- a/target/riscv/pmp.c
 +++ b/target/riscv/pmp.c
-@@ -29,7 +29,6 @@
- static bool pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
-                           uint8_t val);
- static uint8_t pmp_read_cfg(CPURISCVState *env, uint32_t addr_index);
--static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index);
- 
- /*
-  * Accessor method to extract address matching type 'a field' from cfg reg
-@@ -121,7 +120,7 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
-             qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - locked\n");
-         } else if (env->pmp_state.pmp[pmp_index].cfg_reg != val) {
-             env->pmp_state.pmp[pmp_index].cfg_reg = val;
--            pmp_update_rule(env, pmp_index);
-+            pmp_update_rule_addr(env, pmp_index);
-             return true;
+@@ -327,8 +327,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+         if ((s + e) == 1) {
+             qemu_log_mask(LOG_GUEST_ERROR,
+                           "pmp violation - access is partially inside\n");
+-            ret = false;
+-            break;
++            *allowed_privs = 0;
++            return false;
          }
-     } else {
-@@ -209,18 +208,6 @@ void pmp_update_rule_nums(CPURISCVState *env)
-     }
- }
  
--/*
-- * Convert cfg/addr reg values here into simple 'sa' --> start address and 'ea'
-- *   end address values.
-- *   This function is called relatively infrequently whereas the check that
-- *   an address is within a pmp rule is called often, so optimise that one
-- */
--static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index)
--{
--    pmp_update_rule_addr(env, pmp_index);
--    pmp_update_rule_nums(env);
--}
--
- static int pmp_is_in_range(CPURISCVState *env, int pmp_index,
-                            target_ulong addr)
- {
-@@ -481,6 +468,7 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
- 
-     /* If PMP permission of any addr has been changed, flush TLB pages. */
-     if (modified) {
-+        pmp_update_rule_nums(env);
-         tlb_flush(env_cpu(env));
-     }
- }
+         /* fully inside */
 -- 
 2.25.1
 
