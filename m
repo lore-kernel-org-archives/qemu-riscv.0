@@ -1,61 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1psPML-0004Y7-Vi
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:46:05 -0400
+	id 1psPOa-00065A-A7
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:48:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1psPMK-0004Xl-FT; Fri, 28 Apr 2023 10:46:04 -0400
-Received: from [159.226.251.80] (helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1psPMH-0008Tn-IR; Fri, 28 Apr 2023 10:46:04 -0400
-Received: from localhost.localdomain (unknown [61.165.33.195])
- by APP-01 (Coremail) with SMTP id qwCowACHj3vq2UtkrB5ZDA--.57839S11;
- Fri, 28 Apr 2023 22:36:33 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn,
- lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v5 09/13] target/riscv: Flush TLB when pmpaddr is updated
-Date: Fri, 28 Apr 2023 22:36:17 +0800
-Message-Id: <20230428143621.142390-10-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230428143621.142390-1-liweiwei@iscas.ac.cn>
-References: <20230428143621.142390-1-liweiwei@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
+ id 1psPOU-0005zx-Bn; Fri, 28 Apr 2023 10:48:19 -0400
+Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
+ id 1psPOR-0002BJ-Sz; Fri, 28 Apr 2023 10:48:18 -0400
+Received: from [167.98.27.226] (helo=lawrence-thinkpad.guest.codethink.co.uk)
+ by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
+ id 1psPOL-005zz5-Bq; Fri, 28 Apr 2023 15:48:09 +0100
+From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+To: qemu-devel@nongnu.org
+Cc: dickon.hood@codethink.co.uk, nazar.kazakov@codethink.co.uk,
+ kiran.ostrolenk@codethink.co.uk, frank.chang@sifive.com,
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ pbonzini@redhat.com, philipp.tomsich@vrull.eu, kvm@vger.kernel.org,
+ qemu-riscv@nongnu.org, richard.henderson@linaro.org
+Subject: [PATCH v3 06/19] target/riscv: Refactor translation of
+ vector-widening instruction
+Date: Fri, 28 Apr 2023 15:47:44 +0100
+Message-Id: <20230428144757.57530-7-lawrence.hunter@codethink.co.uk>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230428144757.57530-1-lawrence.hunter@codethink.co.uk>
+References: <20230428144757.57530-1-lawrence.hunter@codethink.co.uk>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACHj3vq2UtkrB5ZDA--.57839S11
-X-Coremail-Antispam: 1UD129KBjvdXoW7WryUKFy7XF4UtFy3ZFWUJwb_yoW3twb_Wr
- WIqF48W3yUW3WF9FW8AFs8Jr18CrykJFs0gasrtrs3Ca45Kr4fX3WqqaykJr1YkFZxWr93
- ZwnrJr47CrsagjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbkAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
- IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
- F7xvwVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
- 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
- 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
- IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
- M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
- kIc2xKxwCY02Avz4vE14v_Xryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_
- Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17
- CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0
- I7IYx2IY6xkF7I0E14v26r4UJVWxJr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0x
- vEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIev
- Ja73UjIFyTuYvjfUYJPEDUUUU
-X-Originating-IP: [61.165.33.195]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 159.226.251.80 (deferred)
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+Received-SPF: pass client-ip=188.40.203.114;
+ envelope-from=lawrence.hunter@codethink.co.uk; helo=imap4.hz.codethink.co.uk
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
- RDNS_NONE=0.793, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -68,32 +47,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2023 14:46:04 -0000
+X-List-Received-Date: Fri, 28 Apr 2023 14:48:19 -0000
 
-TLB should be flushed not only for pmpcfg csr changes, but also for
-pmpaddr csr changes.
+From: Dickon Hood <dickon.hood@codethink.co.uk>
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Zvbb (implemented in later commit) has a widening instruction, which
+requires an extra check on the enabled extensions.  Refactor
+GEN_OPIVX_WIDEN_TRANS() to take a check function to avoid reimplementing
+it.
+
+Signed-off-by: Dickon Hood <dickon.hood@codethink.co.uk>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/pmp.c | 1 +
- 1 file changed, 1 insertion(+)
+ target/riscv/insn_trans/trans_rvv.c.inc | 52 +++++++++++--------------
+ 1 file changed, 23 insertions(+), 29 deletions(-)
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 3af2caff31..5627e9fe70 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -531,6 +531,7 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
-             if (is_next_cfg_tor) {
-                 pmp_update_rule_addr(env, addr_index + 1);
-             }
-+            tlb_flush(env_cpu(env));
-         } else {
-             qemu_log_mask(LOG_GUEST_ERROR,
-                           "ignoring pmpaddr write - locked\n");
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 21731b784ec..2c2a097b76d 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -1526,30 +1526,24 @@ static bool opivx_widen_check(DisasContext *s, arg_rmrr *a)
+            vext_check_ds(s, a->rd, a->rs2, a->vm);
+ }
+ 
+-static bool do_opivx_widen(DisasContext *s, arg_rmrr *a,
+-                           gen_helper_opivx *fn)
+-{
+-    if (opivx_widen_check(s, a)) {
+-        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
+-    }
+-    return false;
++#define GEN_OPIVX_WIDEN_TRANS(NAME, CHECK) \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                    \
++{                                                                         \
++    if (CHECK(s, a)) {                                                    \
++        static gen_helper_opivx * const fns[3] = {                        \
++            gen_helper_##NAME##_b,                                        \
++            gen_helper_##NAME##_h,                                        \
++            gen_helper_##NAME##_w                                         \
++        };                                                                \
++        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s); \
++    }                                                                     \
++    return false;                                                         \
+ }
+ 
+-#define GEN_OPIVX_WIDEN_TRANS(NAME) \
+-static bool trans_##NAME(DisasContext *s, arg_rmrr *a)       \
+-{                                                            \
+-    static gen_helper_opivx * const fns[3] = {               \
+-        gen_helper_##NAME##_b,                               \
+-        gen_helper_##NAME##_h,                               \
+-        gen_helper_##NAME##_w                                \
+-    };                                                       \
+-    return do_opivx_widen(s, a, fns[s->sew]);                \
+-}
+-
+-GEN_OPIVX_WIDEN_TRANS(vwaddu_vx)
+-GEN_OPIVX_WIDEN_TRANS(vwadd_vx)
+-GEN_OPIVX_WIDEN_TRANS(vwsubu_vx)
+-GEN_OPIVX_WIDEN_TRANS(vwsub_vx)
++GEN_OPIVX_WIDEN_TRANS(vwaddu_vx, opivx_widen_check)
++GEN_OPIVX_WIDEN_TRANS(vwadd_vx, opivx_widen_check)
++GEN_OPIVX_WIDEN_TRANS(vwsubu_vx, opivx_widen_check)
++GEN_OPIVX_WIDEN_TRANS(vwsub_vx, opivx_widen_check)
+ 
+ /* WIDEN OPIVV with WIDEN */
+ static bool opiwv_widen_check(DisasContext *s, arg_rmrr *a)
+@@ -1997,9 +1991,9 @@ GEN_OPIVX_TRANS(vrem_vx, opivx_check)
+ GEN_OPIVV_WIDEN_TRANS(vwmul_vv, opivv_widen_check)
+ GEN_OPIVV_WIDEN_TRANS(vwmulu_vv, opivv_widen_check)
+ GEN_OPIVV_WIDEN_TRANS(vwmulsu_vv, opivv_widen_check)
+-GEN_OPIVX_WIDEN_TRANS(vwmul_vx)
+-GEN_OPIVX_WIDEN_TRANS(vwmulu_vx)
+-GEN_OPIVX_WIDEN_TRANS(vwmulsu_vx)
++GEN_OPIVX_WIDEN_TRANS(vwmul_vx, opivx_widen_check)
++GEN_OPIVX_WIDEN_TRANS(vwmulu_vx, opivx_widen_check)
++GEN_OPIVX_WIDEN_TRANS(vwmulsu_vx, opivx_widen_check)
+ 
+ /* Vector Single-Width Integer Multiply-Add Instructions */
+ GEN_OPIVV_TRANS(vmacc_vv, opivv_check)
+@@ -2015,10 +2009,10 @@ GEN_OPIVX_TRANS(vnmsub_vx, opivx_check)
+ GEN_OPIVV_WIDEN_TRANS(vwmaccu_vv, opivv_widen_check)
+ GEN_OPIVV_WIDEN_TRANS(vwmacc_vv, opivv_widen_check)
+ GEN_OPIVV_WIDEN_TRANS(vwmaccsu_vv, opivv_widen_check)
+-GEN_OPIVX_WIDEN_TRANS(vwmaccu_vx)
+-GEN_OPIVX_WIDEN_TRANS(vwmacc_vx)
+-GEN_OPIVX_WIDEN_TRANS(vwmaccsu_vx)
+-GEN_OPIVX_WIDEN_TRANS(vwmaccus_vx)
++GEN_OPIVX_WIDEN_TRANS(vwmaccu_vx, opivx_widen_check)
++GEN_OPIVX_WIDEN_TRANS(vwmacc_vx, opivx_widen_check)
++GEN_OPIVX_WIDEN_TRANS(vwmaccsu_vx, opivx_widen_check)
++GEN_OPIVX_WIDEN_TRANS(vwmaccus_vx, opivx_widen_check)
+ 
+ /* Vector Integer Merge and Move Instructions */
+ static bool trans_vmv_v_v(DisasContext *s, arg_vmv_v_v *a)
 -- 
-2.25.1
+2.40.1
 
 
