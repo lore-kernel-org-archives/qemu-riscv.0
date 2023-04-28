@@ -1,28 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1psPOu-0006M8-UH
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:48:46 -0400
+	id 1psPOx-0006QT-BC
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:48:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1psPOp-0006Gd-EA; Fri, 28 Apr 2023 10:48:40 -0400
+ id 1psPOt-0006KZ-K1; Fri, 28 Apr 2023 10:48:44 -0400
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1psPOl-0002Co-V7; Fri, 28 Apr 2023 10:48:38 -0400
+ id 1psPOr-0002Ic-0V; Fri, 28 Apr 2023 10:48:43 -0400
 Received: from [167.98.27.226] (helo=lawrence-thinkpad.guest.codethink.co.uk)
  by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1psPON-005zz5-PZ; Fri, 28 Apr 2023 15:48:11 +0100
+ id 1psPOS-005zz5-B5; Fri, 28 Apr 2023 15:48:16 +0100
 From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 To: qemu-devel@nongnu.org
 Cc: dickon.hood@codethink.co.uk, nazar.kazakov@codethink.co.uk,
  kiran.ostrolenk@codethink.co.uk, frank.chang@sifive.com,
  palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  pbonzini@redhat.com, philipp.tomsich@vrull.eu, kvm@vger.kernel.org,
- qemu-riscv@nongnu.org, richard.henderson@linaro.org
-Subject: [PATCH v3 10/19] qemu/host-utils.h: Add clz and ctz functions for
- lower-bit integers
-Date: Fri, 28 Apr 2023 15:47:48 +0100
-Message-Id: <20230428144757.57530-11-lawrence.hunter@codethink.co.uk>
+ qemu-riscv@nongnu.org, richard.henderson@linaro.org,
+ Max Chou <max.chou@sifive.com>
+Subject: [PATCH v3 16/19] crypto: Create sm4_subword
+Date: Fri, 28 Apr 2023 15:47:54 +0100
+Message-Id: <20230428144757.57530-17-lawrence.hunter@codethink.co.uk>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230428144757.57530-1-lawrence.hunter@codethink.co.uk>
 References: <20230428144757.57530-1-lawrence.hunter@codethink.co.uk>
@@ -47,91 +47,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2023 14:48:43 -0000
+X-List-Received-Date: Fri, 28 Apr 2023 14:48:46 -0000
 
-From: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+From: Max Chou <max.chou@sifive.com>
 
-This is for use in the RISC-V vclz and vctz instructions (implemented in
-proceeding commit).
+Allows sharing of sm4_subword between different targets.
 
-Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+Signed-off-by: Max Chou <max.chou@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- include/qemu/host-utils.h | 54 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 54 insertions(+)
+ include/crypto/sm4.h           |  8 ++++++++
+ target/arm/tcg/crypto_helper.c | 10 ++--------
+ 2 files changed, 10 insertions(+), 8 deletions(-)
 
-diff --git a/include/qemu/host-utils.h b/include/qemu/host-utils.h
-index 3ce62bf4a56..d3b4dce6a93 100644
---- a/include/qemu/host-utils.h
-+++ b/include/qemu/host-utils.h
-@@ -107,6 +107,36 @@ static inline uint64_t muldiv64(uint64_t a, uint32_t b, uint32_t c)
- }
+diff --git a/include/crypto/sm4.h b/include/crypto/sm4.h
+index 9bd3ebc62e8..de8245d8a71 100644
+--- a/include/crypto/sm4.h
++++ b/include/crypto/sm4.h
+@@ -3,4 +3,12 @@
+ 
+ extern const uint8_t sm4_sbox[256];
+ 
++static inline uint32_t sm4_subword(uint32_t word)
++{
++    return sm4_sbox[word & 0xff] |
++           sm4_sbox[(word >> 8) & 0xff] << 8 |
++           sm4_sbox[(word >> 16) & 0xff] << 16 |
++           sm4_sbox[(word >> 24) & 0xff] << 24;
++}
++
  #endif
+diff --git a/target/arm/tcg/crypto_helper.c b/target/arm/tcg/crypto_helper.c
+index d28690321f0..58e6c4f779c 100644
+--- a/target/arm/tcg/crypto_helper.c
++++ b/target/arm/tcg/crypto_helper.c
+@@ -707,10 +707,7 @@ static void do_crypto_sm4e(uint64_t *rd, uint64_t *rn, uint64_t *rm)
+             CR_ST_WORD(d, (i + 3) % 4) ^
+             CR_ST_WORD(n, i);
  
-+/**
-+ * clz8 - count leading zeros in a 8-bit value.
-+ * @val: The value to search
-+ *
-+ * Returns 8 if the value is zero.  Note that the GCC builtin is
-+ * undefined if the value is zero.
-+ *
-+ * Note that the GCC builtin will upcast its argument to an `unsigned int`
-+ * so this function subtracts off the number of prepended zeroes.
-+ */
-+static inline int clz8(uint8_t val)
-+{
-+    return val ? __builtin_clz(val) - 24 : 8;
-+}
-+
-+/**
-+ * clz16 - count leading zeros in a 16-bit value.
-+ * @val: The value to search
-+ *
-+ * Returns 16 if the value is zero.  Note that the GCC builtin is
-+ * undefined if the value is zero.
-+ *
-+ * Note that the GCC builtin will upcast its argument to an `unsigned int`
-+ * so this function subtracts off the number of prepended zeroes.
-+ */
-+static inline int clz16(uint16_t val)
-+{
-+    return val ? __builtin_clz(val) - 16 : 16;
-+}
-+
- /**
-  * clz32 - count leading zeros in a 32-bit value.
-  * @val: The value to search
-@@ -153,6 +183,30 @@ static inline int clo64(uint64_t val)
-     return clz64(~val);
- }
+-        t = sm4_sbox[t & 0xff] |
+-            sm4_sbox[(t >> 8) & 0xff] << 8 |
+-            sm4_sbox[(t >> 16) & 0xff] << 16 |
+-            sm4_sbox[(t >> 24) & 0xff] << 24;
++        t = sm4_subword(t);
  
-+/**
-+ * ctz8 - count trailing zeros in a 8-bit value.
-+ * @val: The value to search
-+ *
-+ * Returns 8 if the value is zero.  Note that the GCC builtin is
-+ * undefined if the value is zero.
-+ */
-+static inline int ctz8(uint8_t val)
-+{
-+    return val ? __builtin_ctz(val) : 8;
-+}
-+
-+/**
-+ * ctz16 - count trailing zeros in a 16-bit value.
-+ * @val: The value to search
-+ *
-+ * Returns 16 if the value is zero.  Note that the GCC builtin is
-+ * undefined if the value is zero.
-+ */
-+static inline int ctz16(uint16_t val)
-+{
-+    return val ? __builtin_ctz(val) : 16;
-+}
-+
- /**
-  * ctz32 - count trailing zeros in a 32-bit value.
-  * @val: The value to search
+         CR_ST_WORD(d, i) ^= t ^ rol32(t, 2) ^ rol32(t, 10) ^ rol32(t, 18) ^
+                             rol32(t, 24);
+@@ -744,10 +741,7 @@ static void do_crypto_sm4ekey(uint64_t *rd, uint64_t *rn, uint64_t *rm)
+             CR_ST_WORD(d, (i + 3) % 4) ^
+             CR_ST_WORD(m, i);
+ 
+-        t = sm4_sbox[t & 0xff] |
+-            sm4_sbox[(t >> 8) & 0xff] << 8 |
+-            sm4_sbox[(t >> 16) & 0xff] << 16 |
+-            sm4_sbox[(t >> 24) & 0xff] << 24;
++        t = sm4_subword(t);
+ 
+         CR_ST_WORD(d, i) ^= t ^ rol32(t, 13) ^ rol32(t, 23);
+     }
 -- 
 2.40.1
 
