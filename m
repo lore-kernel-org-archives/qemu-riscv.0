@@ -1,40 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1psPP8-0006so-Q9
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:48:58 -0400
+	id 1psRKo-0004JQ-V6
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 12:52:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1psPOv-0006ML-Vz; Fri, 28 Apr 2023 10:48:46 -0400
-Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1psPOt-0002LQ-EH; Fri, 28 Apr 2023 10:48:44 -0400
-Received: from [167.98.27.226] (helo=lawrence-thinkpad.guest.codethink.co.uk)
- by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1psPOU-005zz5-MW; Fri, 28 Apr 2023 15:48:18 +0100
-From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
-To: qemu-devel@nongnu.org
-Cc: dickon.hood@codethink.co.uk, nazar.kazakov@codethink.co.uk,
- kiran.ostrolenk@codethink.co.uk, frank.chang@sifive.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- pbonzini@redhat.com, philipp.tomsich@vrull.eu, kvm@vger.kernel.org,
- qemu-riscv@nongnu.org, richard.henderson@linaro.org
-Subject: [PATCH v3 19/19] target/riscv: Expose Zvk* and Zvb[b,
- c] cpu properties
-Date: Fri, 28 Apr 2023 15:47:57 +0100
-Message-Id: <20230428144757.57530-20-lawrence.hunter@codethink.co.uk>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230428144757.57530-1-lawrence.hunter@codethink.co.uk>
-References: <20230428144757.57530-1-lawrence.hunter@codethink.co.uk>
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1psRKn-0004JG-GZ
+ for qemu-riscv@nongnu.org; Fri, 28 Apr 2023 12:52:37 -0400
+Received: from mail-oi1-x230.google.com ([2607:f8b0:4864:20::230])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1psRKl-0005pf-H5
+ for qemu-riscv@nongnu.org; Fri, 28 Apr 2023 12:52:37 -0400
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-38e692c0918so138577b6e.1
+ for <qemu-riscv@nongnu.org>; Fri, 28 Apr 2023 09:52:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1682700752; x=1685292752;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=oXstUCrChMK1U3IIw5RAhakVys7/ay86/Z2D+gejX0Y=;
+ b=IGymusdXqabSPRIzFMGP08MXL0GHOXifPZdqICzPU/i2HwfhY5icjj9GoeK7XATJgB
+ 6MbCQQTolJ7kD5bGqC6SoenmNTpMYF8utb25B00Wd8Oy4Kj7ZYOgzvGhzfR5g1VF2nDZ
+ i/uKi8RvD63+iiv3e7BebQ8KoQqb0jyKwTEnyVFbkAGfneTtXBAwateTiFA/AW+jpCAc
+ KGk8nhkTaXtk6WgUsfc5sKHsO9oZYlNpvV+gy2cFM7N+MxpFCh0UBL+4qynHJO14FPjA
+ r9rfvaCDQfM49SA+4JKHg/Syw08cuJ03z9Mi5Eyj66o3FJyk4PQs/rksDc3XEpY5N/m7
+ 0JGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1682700752; x=1685292752;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oXstUCrChMK1U3IIw5RAhakVys7/ay86/Z2D+gejX0Y=;
+ b=DtO3wWktXmGVbK/VfLm2rYEZdXj008/RLcOICnzx/Ok2BlUla15qYpULWVroDlWz9I
+ 0qqi4Xd4nwiUttqpjguMWWqAtCrMPk5A/zf9Wc71O3MAf3rKo3hHLUp2nBOQCOirkK2l
+ 3waeIBfDOkVBR5BMNDQ3X7qjXZEgaS+1x0diXYnEbdHmSQiAke59SjkvswiNkeQaNjqf
+ DYmLJfWqLtH+1F2McSIynqMKD1TdNVt2/WAymHf1UgDVsOzsmvldYk02LvhH70CWPqZs
+ PiSJ6zo6Lj5PjXVfLe0ZkNlTvAg1dvmrbEWa6Hv+0ffjT26O1cOPvnTFchyG8ISnHFJw
+ 8gpA==
+X-Gm-Message-State: AC+VfDyXahBj4yNMXTXXkNAwP0SwSFpPEb3X15Do300Z2wNczux7QVhW
+ LPTfaH/xqAzktyQ5zYzRRywxYg==
+X-Google-Smtp-Source: ACHHUZ71mvL0ZvtKER/bscbZ+SwFDTv8Dstrx7mdohHBOc9VK7Oxk+fpJDdeHC3tbJZHIJptMFrfVg==
+X-Received: by 2002:a05:6808:2017:b0:390:98eb:7602 with SMTP id
+ q23-20020a056808201700b0039098eb7602mr2882508oiw.43.1682700752173; 
+ Fri, 28 Apr 2023 09:52:32 -0700 (PDT)
+Received: from mchitale-vm.. ([103.97.165.210])
+ by smtp.googlemail.com with ESMTPSA id
+ c10-20020a4a4f0a000000b005462a25c4f9sm9665764oob.9.2023.04.28.09.52.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Apr 2023 09:52:31 -0700 (PDT)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org,
+	alistair.francis@wdc.com
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Alistair Francis <alistair23@gmail.com>,
+ Daniel Barboza <dbarboza@ventanamicro.com>, liweiwei@iscas.ac.cn,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH v3 0/4] Smstateen FCSR
+Date: Fri, 28 Apr 2023 22:22:07 +0530
+Message-Id: <20230428165212.2800669-1-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=188.40.203.114;
- envelope-from=lawrence.hunter@codethink.co.uk; helo=imap4.hz.codethink.co.uk
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::230;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-oi1-x230.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -47,39 +83,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2023 14:48:48 -0000
+X-List-Received-Date: Fri, 28 Apr 2023 16:52:37 -0000
 
-From: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
+Patch 4 and 5 of the smstateen series need to be re-submitted with
+changes described in the email below.
+https://lists.nongnu.org/archive/html/qemu-riscv/2022-11/msg00155.html
+Hence splitting the patch 4 of the original series into three and
+re-submitting along with the original patch 5.
 
-Exposes earlier CPU flags allowing the use of the vector cryptography extensions.
+Changes in v3:
+- Reuse TB_FLAGS.FS (instead of TB_FLAGS.HS_FS) for smstateen as HS_FS bits been removed.
+- Remove fcsr check for zfh and zfhmin
 
-Signed-off-by: Nazar Kazakov <nazar.kazakov@codethink.co.uk>
----
- target/riscv/cpu.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Changes in v2:
+ - Improve patch 1 description
+ - Reuse TB_FLAGS.HS_FS for smstateen
+ - Convert smstateen_fcsr_check to function
+ - Add fcsr check for zdinx
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 3b754d7e13b..2f71d612725 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1485,6 +1485,16 @@ static Property riscv_cpu_extensions[] = {
-     DEFINE_PROP_BOOL("x-zvfh", RISCVCPU, cfg.ext_zvfh, false),
-     DEFINE_PROP_BOOL("x-zvfhmin", RISCVCPU, cfg.ext_zvfhmin, false),
- 
-+    /* Vector cryptography extensions */
-+    DEFINE_PROP_BOOL("x-zvbb", RISCVCPU, cfg.ext_zvbb, false),
-+    DEFINE_PROP_BOOL("x-zvbc", RISCVCPU, cfg.ext_zvbc, false),
-+    DEFINE_PROP_BOOL("x-zvkg", RISCVCPU, cfg.ext_zvkg, false),
-+    DEFINE_PROP_BOOL("x-zvkned", RISCVCPU, cfg.ext_zvkned, false),
-+    DEFINE_PROP_BOOL("x-zvknha", RISCVCPU, cfg.ext_zvknha, false),
-+    DEFINE_PROP_BOOL("x-zvknhb", RISCVCPU, cfg.ext_zvknhb, false),
-+    DEFINE_PROP_BOOL("x-zvksed", RISCVCPU, cfg.ext_zvksed, false),
-+    DEFINE_PROP_BOOL("x-zvksh", RISCVCPU, cfg.ext_zvksh, false),
-+
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
+Mayuresh Chitale (4):
+  target/riscv: smstateen check for fcsr
+  target/riscv: Reuse tb->flags.FS
+  target/riscv: check smstateen fcsr flag
+  target/riscv: smstateen knobs
+
+ target/riscv/cpu.c                        |  3 ++-
+ target/riscv/cpu_helper.c                 |  9 +++++++
+ target/riscv/csr.c                        | 15 +++++++++++
+ target/riscv/insn_trans/trans_rvd.c.inc   | 13 ++++++---
+ target/riscv/insn_trans/trans_rvf.c.inc   | 24 ++++++++++++++---
+ target/riscv/insn_trans/trans_rvzfh.c.inc | 32 +++++++++++++++--------
+ target/riscv/translate.c                  | 12 ++++++++-
+ 7 files changed, 87 insertions(+), 21 deletions(-)
+
 -- 
-2.40.1
+2.34.1
 
 
