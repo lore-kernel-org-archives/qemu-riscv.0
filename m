@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1psRL8-0004Se-V1
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 12:52:58 -0400
+	id 1psRLE-0004Ue-7M
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 12:53:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1psRL6-0004SD-CH
- for qemu-riscv@nongnu.org; Fri, 28 Apr 2023 12:52:56 -0400
-Received: from mail-oi1-x234.google.com ([2607:f8b0:4864:20::234])
+ id 1psRLC-0004UD-TT
+ for qemu-riscv@nongnu.org; Fri, 28 Apr 2023 12:53:02 -0400
+Received: from mail-oa1-x2d.google.com ([2001:4860:4864:20::2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1psRL4-0005uQ-7I
- for qemu-riscv@nongnu.org; Fri, 28 Apr 2023 12:52:56 -0400
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-38c35975545so159674b6e.1
- for <qemu-riscv@nongnu.org>; Fri, 28 Apr 2023 09:52:53 -0700 (PDT)
+ id 1psRLB-0005vh-7F
+ for qemu-riscv@nongnu.org; Fri, 28 Apr 2023 12:53:02 -0400
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-187c78c6657so151014fac.2
+ for <qemu-riscv@nongnu.org>; Fri, 28 Apr 2023 09:53:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1682700771; x=1685292771;
+ d=ventanamicro.com; s=google; t=1682700777; x=1685292777;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=W8xSQqNZwWMr4Yif3IiQuGJNixlUe2bQ/ExkAYT0s5g=;
- b=n+KCQ7Z1Ks+4927ICY48gWNPUYE56GEtwtGetZf1jVvO2eHQfrm/AnlWujBSZ8aMGV
- d4rwlFzrzxukBvt4IiXXAVURPm8hxvCLNj6g3gPtGqMPup8+1BjQ9oovLlsG9bcVCKqN
- oMtKDlaZ8+eSROvRMVH596VVwmsPcSX2Skmmfyur78JH7GmLECn2kzoq+6Ectqpb400U
- h4Cmw9tJAY2M3itL+ABhYQe2S/SfvvcFt4KsKPlWETbJ/l1dU7666UFWtOfNXbjE6if5
- csNoeWMr00GsH9hm34pDkAkC4sYcv2+QLRRvw0UKpnJno4XyWVPw8OmVu79wl/EZFS99
- ym/Q==
+ bh=Ry93EuiL339cXmTcSwW+O/TAemEHyYi1HmGB8rjIeQg=;
+ b=bsyrp98+yhTnfMaIDEAlExYnTQSo2RL4D0dvGwrn+2En3F+e6Ce7fnDrRNXdaQomT9
+ YSiXMPd0ERzRhzRzwlWuL/Yu8NO6D3krQTB3hg11+hPidGNpAfmIGLtmVoZyFBDu0U+J
+ xBgRE2e/WDTZ5QA7jOc+kqJazrdROxaNmAq43JdUP0AMfPrCWELCi5hqrjHhHjhjNiZA
+ tEW/XmPLxHLGHMlorY9ro9S6/l4CthoWlBQX3KjXrELU8Y+otfmVGR2QYKF5QVd/a7QY
+ AhyxKX6eylrnu6t1GRYcL+tDSKBCA4S2m+P2BoL49WrN19DdaMcsj5wYVxy6W4w1eDCD
+ r/KQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682700771; x=1685292771;
+ d=1e100.net; s=20221208; t=1682700777; x=1685292777;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=W8xSQqNZwWMr4Yif3IiQuGJNixlUe2bQ/ExkAYT0s5g=;
- b=TVNFfzCw4hfulSUuWk+Na7sJbClNbJF9/CApQaaEsQPcYeE1BbhpX7dCuHIyJEFbxx
- V+ILwYwLs4rSz05xv8JgM4htMjejvt0k0MesPgb6ASdoyMZo/x15soU0CuDDUu+9TXHX
- cVy64b2OIyVXd0CotsL1SCLXOLxrUtM2M3D3VSTfXX/HyY20/eclsWcN5N8Lqpe99kN9
- iMetwnX2abiE5a+n3zTzH9bTA/BncdlAbe7a0n46sGjxKQNUgBc/9e897ZHdn9/EvI9Q
- Oi7JHJmYiVspUYhZA4N+VIVcS21oUIBR1U4IpH+LcRqity1oZjwLlhOjsGWE4Ci2aHi9
- d4oA==
-X-Gm-Message-State: AC+VfDw+twLZn9TNSeRKl8jJIQMAavJB7PcfDt3PzcjLIeXIOF/cB+N2
- iyKleUqAYUK1lcZaAFjv9QP/EQ==
-X-Google-Smtp-Source: ACHHUZ4JikU1Ef368MlsO3lAF5uPDfeufWor5dQoiLi4KNxjUXvyERJbZC3GE16EsL+6iM3iKx1jpw==
-X-Received: by 2002:aca:170c:0:b0:38e:285e:99ec with SMTP id
- j12-20020aca170c000000b0038e285e99ecmr2676710oii.4.1682700771223; 
- Fri, 28 Apr 2023 09:52:51 -0700 (PDT)
+ bh=Ry93EuiL339cXmTcSwW+O/TAemEHyYi1HmGB8rjIeQg=;
+ b=g6eL3qr2Cpz0agaAKWXHigPdE+rRr3BN+7KBxRz80fyPGJfy9c/qKO10Nb3ktrGEE3
+ Brwd1vgMQvVUTsZnUQqmk7DHX9ipBq9rkWADkkQfzmbJnEdBFlOIlOtHF49CwHxRm5vV
+ Z9JaxexS6CpDehMy0oFobqYa191yj2b9KUtiiSHyvCgV2vvBaLaPf5e7Neu8/uaFpRrO
+ tRJs5Ro1mi7S8UpgPDHW6NmKz12AIxXFvxY2cEylqkLWlAOo4J7HF1NGh+sxCQGkG9KA
+ 5lF8LKtrD1HJU2qL+a4a3duJuCslBPxxlOWOiOQ7nteavJG1jEokBQdZTXIE/PxXqUAA
+ lliw==
+X-Gm-Message-State: AC+VfDwWogUzDAJamhFv3cmkHBWbpppkKF/+eaX2yV7rqsBRKRSQ+SnB
+ VPbuD39Tz5KJVHGpA8BC8KjvXw==
+X-Google-Smtp-Source: ACHHUZ6DOCEJfRde9M0If+servyTmkcjRv0W6sTcCaXxTAj9yTKo32wf5sIm2jUPlRkAZSw4J4s3Nw==
+X-Received: by 2002:a05:6870:52c5:b0:184:1c47:853d with SMTP id
+ p5-20020a05687052c500b001841c47853dmr3014755oak.35.1682700776977; 
+ Fri, 28 Apr 2023 09:52:56 -0700 (PDT)
 Received: from mchitale-vm.. ([103.97.165.210])
  by smtp.googlemail.com with ESMTPSA id
- c10-20020a4a4f0a000000b005462a25c4f9sm9665764oob.9.2023.04.28.09.52.44
+ c10-20020a4a4f0a000000b005462a25c4f9sm9665764oob.9.2023.04.28.09.52.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Apr 2023 09:52:50 -0700 (PDT)
+ Fri, 28 Apr 2023 09:52:56 -0700 (PDT)
 From: Mayuresh Chitale <mchitale@ventanamicro.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org,
@@ -57,16 +57,16 @@ Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
  Alistair Francis <alistair23@gmail.com>,
  Daniel Barboza <dbarboza@ventanamicro.com>, liweiwei@iscas.ac.cn,
  Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v3 3/4] target/riscv: check smstateen fcsr flag
-Date: Fri, 28 Apr 2023 22:22:10 +0530
-Message-Id: <20230428165212.2800669-4-mchitale@ventanamicro.com>
+Subject: [PATCH v3 4/4] target/riscv: smstateen knobs
+Date: Fri, 28 Apr 2023 22:22:11 +0530
+Message-Id: <20230428165212.2800669-5-mchitale@ventanamicro.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230428165212.2800669-1-mchitale@ventanamicro.com>
 References: <20230428165212.2800669-1-mchitale@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::234;
- envelope-from=mchitale@ventanamicro.com; helo=mail-oi1-x234.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2d;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-oa1-x2d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -86,131 +86,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2023 16:52:56 -0000
+X-List-Received-Date: Fri, 28 Apr 2023 16:53:03 -0000
 
-If misa.F and smstateen_fcsr_ok flag are clear then all the floating
-point instructions must generate an appropriate exception.
+Add knobs to allow users to enable smstateen and also export it via the
+ISA extension string.
 
 Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+Reviewed-by: Weiwei Li<liweiwei@iscas.ac.cn>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvd.c.inc   | 13 ++++++---
- target/riscv/insn_trans/trans_rvf.c.inc   | 24 ++++++++++++++---
- target/riscv/insn_trans/trans_rvzfh.c.inc | 32 +++++++++++++++--------
- 3 files changed, 50 insertions(+), 19 deletions(-)
+ target/riscv/cpu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
-index 2c51e01c40..d9e0cf116f 100644
---- a/target/riscv/insn_trans/trans_rvd.c.inc
-+++ b/target/riscv/insn_trans/trans_rvd.c.inc
-@@ -18,10 +18,15 @@
-  * this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index befa64528f..9420cd670e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -119,6 +119,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+     ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+     ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
++    ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
+     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+@@ -1498,8 +1499,8 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
  
--#define REQUIRE_ZDINX_OR_D(ctx) do { \
--    if (!ctx->cfg_ptr->ext_zdinx) { \
--        REQUIRE_EXT(ctx, RVD); \
--    } \
-+#define REQUIRE_ZDINX_OR_D(ctx) do {           \
-+    if (!has_ext(ctx, RVD)) {                  \
-+        if (!ctx->cfg_ptr->ext_zdinx) {        \
-+            return false;                      \
-+        }                                      \
-+        if (!smstateen_fcsr_check(ctx)) {      \
-+            return false;                      \
-+        }                                      \
-+    }                                          \
- } while (0)
- 
- #define REQUIRE_EVEN(ctx, reg) do { \
-diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-index b2de4fcf3f..e4d9834237 100644
---- a/target/riscv/insn_trans/trans_rvf.c.inc
-+++ b/target/riscv/insn_trans/trans_rvf.c.inc
-@@ -24,10 +24,26 @@
-             return false; \
- } while (0)
- 
--#define REQUIRE_ZFINX_OR_F(ctx) do {\
--    if (!ctx->cfg_ptr->ext_zfinx) { \
--        REQUIRE_EXT(ctx, RVF); \
--    } \
-+static inline bool smstateen_fcsr_check(DisasContext *ctx)
-+{
-+#ifndef CONFIG_USER_ONLY
-+    if (!ctx->smstateen_fcsr_ok) {
-+        ctx->virt_inst_excp = ctx->virt_enabled;
-+        return false;
-+    }
-+#endif
-+    return true;
-+}
-+
-+#define REQUIRE_ZFINX_OR_F(ctx) do {           \
-+    if (!has_ext(ctx, RVF)) {                  \
-+        if (!ctx->cfg_ptr->ext_zfinx) {        \
-+            return false;                      \
-+        }                                      \
-+        if (!smstateen_fcsr_check(ctx)) {      \
-+            return false;                      \
-+        }                                      \
-+    }                                          \
- } while (0)
- 
- #define REQUIRE_ZCF(ctx) do {                  \
-diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
-index 74dde37ff7..e228ae28a5 100644
---- a/target/riscv/insn_trans/trans_rvzfh.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
-@@ -16,28 +16,38 @@
-  * this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
- 
--#define REQUIRE_ZFH(ctx) do { \
-+#define REQUIRE_ZFH(ctx) do {          \
-     if (!ctx->cfg_ptr->ext_zfh) {      \
--        return false;         \
--    }                         \
--} while (0)
++    DEFINE_PROP_BOOL("smstateen", RISCVCPU, cfg.ext_smstateen, false),
+     DEFINE_PROP_BOOL("svadu", RISCVCPU, cfg.ext_svadu, true),
 -
--#define REQUIRE_ZHINX_OR_ZFH(ctx) do { \
--    if (!ctx->cfg_ptr->ext_zhinx && !ctx->cfg_ptr->ext_zfh) { \
-         return false;                  \
-     }                                  \
- } while (0)
- 
-+#define REQUIRE_ZHINX_OR_ZFH(ctx) do {                \
-+    if (!ctx->cfg_ptr->ext_zfh) {                     \
-+        if (!ctx->cfg_ptr->ext_zhinx) {               \
-+            return false;                             \
-+        }                                             \
-+        if (!smstateen_fcsr_check(ctx)) {             \
-+            return false;                             \
-+        }                                             \
-+    }                                                 \
-+} while (0)
-+
- #define REQUIRE_ZFHMIN(ctx) do {              \
-     if (!ctx->cfg_ptr->ext_zfhmin) {          \
-         return false;                         \
-     }                                         \
- } while (0)
- 
--#define REQUIRE_ZFHMIN_OR_ZHINXMIN(ctx) do {                 \
--    if (!(ctx->cfg_ptr->ext_zfhmin || ctx->cfg_ptr->ext_zhinxmin)) { \
--        return false;                                        \
--    }                                                        \
-+#define REQUIRE_ZFHMIN_OR_ZHINXMIN(ctx) do {             \
-+    if (!ctx->cfg_ptr->ext_zfhmin) {                     \
-+        if (ctx->cfg_ptr->ext_zhinxmin) {                \
-+            return false;                                \
-+        }                                                \
-+        if (!smstateen_fcsr_check(ctx)) {                \
-+            return false;                                \
-+        }                                                \
-+    }                                                    \
- } while (0)
- 
- static bool trans_flh(DisasContext *ctx, arg_flh *a)
+     DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
+     DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+     DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
 -- 
 2.34.1
 
