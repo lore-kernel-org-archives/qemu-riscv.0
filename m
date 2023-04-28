@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1psPDO-00028u-DJ
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:36:50 -0400
+	id 1psPDP-00029X-VQ
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:36:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1psPDK-00025C-T0; Fri, 28 Apr 2023 10:36:46 -0400
+ id 1psPDK-00024p-Dm; Fri, 28 Apr 2023 10:36:46 -0400
 Received: from [159.226.251.80] (helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1psPDH-0008BO-Q3; Fri, 28 Apr 2023 10:36:46 -0400
+ id 1psPDH-0008B1-1z; Fri, 28 Apr 2023 10:36:46 -0400
 Received: from localhost.localdomain (unknown [61.165.33.195])
- by APP-01 (Coremail) with SMTP id qwCowACHj3vq2UtkrB5ZDA--.57839S12;
- Fri, 28 Apr 2023 22:36:34 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowACHj3vq2UtkrB5ZDA--.57839S7;
+ Fri, 28 Apr 2023 22:36:31 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -19,33 +19,33 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn,
  lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v5 10/13] target/riscv: Flush TLB only when pmpcfg/pmpaddr
- really changes
-Date: Fri, 28 Apr 2023 22:36:18 +0800
-Message-Id: <20230428143621.142390-11-liweiwei@iscas.ac.cn>
+Subject: [PATCH v5 05/13] target/riscv: Make RLB/MML/MMWP bits writable only
+ when Smepmp is enabled
+Date: Fri, 28 Apr 2023 22:36:13 +0800
+Message-Id: <20230428143621.142390-6-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230428143621.142390-1-liweiwei@iscas.ac.cn>
 References: <20230428143621.142390-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACHj3vq2UtkrB5ZDA--.57839S12
-X-Coremail-Antispam: 1UD129KBjvJXoWxGFyDJFWfKr13Zr43KF1fXrb_yoW5ZF4rpr
- WSkF92gFW5t3ZrWayfJF17XF15Cw1rKryIg39rC3WF9Fs3ur18CF1qg3sFkr1DWayfZrWY
- vayDZ34UXFsFvFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUmF14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: qwCowACHj3vq2UtkrB5ZDA--.57839S7
+X-Coremail-Antispam: 1UD129KBjvJXoW7AF1UGF15Gw18KFWxtryxKrg_yoW8tFy5pr
+ 43Ga4fGFW5Z3yxta4fWr17JFy5Cw4vg3s0qayfu3y8Aw43CrWkuas8Jw4S9FyUJFy7Jw1a
+ vFW5CFyrCrsFqa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUmj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
- 3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
- x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
- JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2
- ka0xkIwI1lc2xSY4AK67AK6ry5MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j
- 6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7
- AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r4j6ryUMIIF0xvE
- 2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42
- IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2
- KfnxnUUI43ZEXa7VUbfOz3UUUUU==
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
+ 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
+ 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
+ IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
+ M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
+ kIc2xKxwCY02Avz4vE14v_Xryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_
+ Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17
+ CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0
+ I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcV
+ C2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2Kfnx
+ nUUI43ZEXa7VUbfOz3UUUUU==
 X-Originating-IP: [61.165.33.195]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 X-Host-Lookup-Failed: Reverse DNS lookup failed for 159.226.251.80 (deferred)
@@ -69,101 +69,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2023 14:36:47 -0000
+X-List-Received-Date: Fri, 28 Apr 2023 14:36:46 -0000
 
-TLB needn't be flushed when pmpcfg/pmpaddr don't changes.
+RLB/MML/MMWP bits in mseccfg CSR are introduced by Smepmp extension.
+So they can only be writable and set to 1s when cfg.epmp is true.
+Then we also need't check on epmp in pmp_hart_has_privs_default().
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 ---
- target/riscv/pmp.c | 28 ++++++++++++++++++----------
- 1 file changed, 18 insertions(+), 10 deletions(-)
+ target/riscv/pmp.c | 50 ++++++++++++++++++++++++----------------------
+ 1 file changed, 26 insertions(+), 24 deletions(-)
 
 diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 5627e9fe70..330f61b0f1 100644
+index b5808538aa..e745842973 100644
 --- a/target/riscv/pmp.c
 +++ b/target/riscv/pmp.c
-@@ -26,7 +26,7 @@
- #include "trace.h"
- #include "exec/exec-all.h"
- 
--static void pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
-+static bool pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
-                           uint8_t val);
- static uint8_t pmp_read_cfg(CPURISCVState *env, uint32_t addr_index);
- static void pmp_update_rule(CPURISCVState *env, uint32_t pmp_index);
-@@ -83,7 +83,7 @@ static inline uint8_t pmp_read_cfg(CPURISCVState *env, uint32_t pmp_index)
-  * Accessor to set the cfg reg for a specific PMP/HART
-  * Bounds checks and relevant lock bit.
-  */
--static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
-+static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
+@@ -243,30 +243,28 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
  {
-     if (pmp_index < MAX_RISCV_PMPS) {
-         bool locked = true;
-@@ -119,14 +119,17 @@ static void pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
+     bool ret;
  
-         if (locked) {
-             qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - locked\n");
--        } else {
-+        } else if (env->pmp_state.pmp[pmp_index].cfg_reg != val) {
-             env->pmp_state.pmp[pmp_index].cfg_reg = val;
-             pmp_update_rule(env, pmp_index);
-+            return true;
+-    if (riscv_cpu_cfg(env)->epmp) {
+-        if (MSECCFG_MMWP_ISSET(env)) {
+-            /*
+-             * The Machine Mode Whitelist Policy (mseccfg.MMWP) is set
+-             * so we default to deny all, even for M-mode.
+-             */
++    if (MSECCFG_MMWP_ISSET(env)) {
++        /*
++         * The Machine Mode Whitelist Policy (mseccfg.MMWP) is set
++         * so we default to deny all, even for M-mode.
++         */
++        *allowed_privs = 0;
++        return false;
++    } else if (MSECCFG_MML_ISSET(env)) {
++        /*
++         * The Machine Mode Lockdown (mseccfg.MML) bit is set
++         * so we can only execute code in M-mode with an applicable
++         * rule. Other modes are disabled.
++         */
++        if (mode == PRV_M && !(privs & PMP_EXEC)) {
++            ret = true;
++            *allowed_privs = PMP_READ | PMP_WRITE;
++        } else {
++            ret = false;
+             *allowed_privs = 0;
+-            return false;
+-        } else if (MSECCFG_MML_ISSET(env)) {
+-            /*
+-             * The Machine Mode Lockdown (mseccfg.MML) bit is set
+-             * so we can only execute code in M-mode with an applicable
+-             * rule. Other modes are disabled.
+-             */
+-            if (mode == PRV_M && !(privs & PMP_EXEC)) {
+-                ret = true;
+-                *allowed_privs = PMP_READ | PMP_WRITE;
+-            } else {
+-                ret = false;
+-                *allowed_privs = 0;
+-            }
+-
+-            return ret;
          }
-     } else {
-         qemu_log_mask(LOG_GUEST_ERROR,
-                       "ignoring pmpcfg write - out of bounds\n");
-     }
 +
-+    return false;
- }
- 
- static void pmp_decode_napot(target_ulong a, target_ulong *sa,
-@@ -467,16 +470,19 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
-     int i;
-     uint8_t cfg_val;
-     int pmpcfg_nums = 2 << riscv_cpu_mxl(env);
-+    bool modified = false;
- 
-     trace_pmpcfg_csr_write(env->mhartid, reg_index, val);
- 
-     for (i = 0; i < pmpcfg_nums; i++) {
-         cfg_val = (val >> 8 * i)  & 0xff;
--        pmp_write_cfg(env, (reg_index * 4) + i, cfg_val);
-+        modified |= pmp_write_cfg(env, (reg_index * 4) + i, cfg_val);
++        return ret;
      }
  
-     /* If PMP permission of any addr has been changed, flush TLB pages. */
--    tlb_flush(env_cpu(env));
-+    if (modified) {
-+        tlb_flush(env_cpu(env));
-+    }
- }
- 
- 
-@@ -526,12 +532,14 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
+     if (!riscv_cpu_cfg(env)->pmp || (mode == PRV_M)) {
+@@ -580,8 +578,12 @@ void mseccfg_csr_write(CPURISCVState *env, target_ulong val)
          }
+     }
  
-         if (!pmp_is_locked(env, addr_index)) {
--            env->pmp_state.pmp[addr_index].addr_reg = val;
--            pmp_update_rule_addr(env, addr_index);
--            if (is_next_cfg_tor) {
--                pmp_update_rule_addr(env, addr_index + 1);
-+            if (env->pmp_state.pmp[addr_index].addr_reg != val) {
-+                env->pmp_state.pmp[addr_index].addr_reg = val;
-+                pmp_update_rule_addr(env, addr_index);
-+                if (is_next_cfg_tor) {
-+                    pmp_update_rule_addr(env, addr_index + 1);
-+                }
-+                tlb_flush(env_cpu(env));
-             }
--            tlb_flush(env_cpu(env));
-         } else {
-             qemu_log_mask(LOG_GUEST_ERROR,
-                           "ignoring pmpaddr write - locked\n");
+-    /* Sticky bits */
+-    val |= (env->mseccfg & (MSECCFG_MMWP | MSECCFG_MML));
++    if (riscv_cpu_cfg(env)->epmp) {
++        /* Sticky bits */
++        val |= (env->mseccfg & (MSECCFG_MMWP | MSECCFG_MML));
++    } else {
++        val &= ~(MSECCFG_MMWP | MSECCFG_MML | MSECCFG_RLB);
++    }
+ 
+     env->mseccfg = val;
+ }
 -- 
 2.25.1
 
