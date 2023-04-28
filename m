@@ -1,38 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1psKRE-0006cd-SI
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 05:30:48 -0400
+	id 1psPDJ-00023M-Da
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:36:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dickon.hood@codethink.co.uk>)
- id 1psKRC-0006aj-MX; Fri, 28 Apr 2023 05:30:46 -0400
-Received: from imap5.colo.codethink.co.uk ([78.40.148.171])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dickon.hood@codethink.co.uk>)
- id 1psKRB-0005gY-07; Fri, 28 Apr 2023 05:30:46 -0400
-Received: from static44-108.adsl.bogons.net ([85.158.44.108]
- helo=ct-lt-2205.boot.codethink.co.uk)
- by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1psKR1-009zss-Vi; Fri, 28 Apr 2023 10:30:36 +0100
-Date: Fri, 28 Apr 2023 10:30:30 +0100
-From: Dickon Hood <dickon.hood@codethink.co.uk>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liweiwei@iscas.ac.cn,
- zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-Subject: Re: [PATCH 0/2] target/riscv: RVV 1-fill tail element changes
-Message-ID: <ZEuSNvwMOxo1K0J/@ct-lt-2205.boot.codethink.co.uk>
-References: <20230427205708.246679-1-dbarboza@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1psPDH-00022m-W1; Fri, 28 Apr 2023 10:36:44 -0400
+Received: from [159.226.251.80] (helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1psPDF-0008Ah-9e; Fri, 28 Apr 2023 10:36:43 -0400
+Received: from localhost.localdomain (unknown [61.165.33.195])
+ by APP-01 (Coremail) with SMTP id qwCowACHj3vq2UtkrB5ZDA--.57839S4;
+ Fri, 28 Apr 2023 22:36:28 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn,
+ lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v5 02/13] target/riscv: Move pmp_get_tlb_size apart from
+ get_physical_address_pmp
+Date: Fri, 28 Apr 2023 22:36:10 +0800
+Message-Id: <20230428143621.142390-3-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230428143621.142390-1-liweiwei@iscas.ac.cn>
+References: <20230428143621.142390-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230427205708.246679-1-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=78.40.148.171;
- envelope-from=dickon.hood@codethink.co.uk; helo=imap5.colo.codethink.co.uk
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: qwCowACHj3vq2UtkrB5ZDA--.57839S4
+X-Coremail-Antispam: 1UD129KBjvJXoWxXr1rWFW8AFWDXFW5KFW5trb_yoW5Xr4rpr
+ Z3Cr4xWa1kKFZa9a1xZr1UAFW5CFnrtrWUWa4kGwsY9Fs0q345C3Wq934agrs7GrWkZws0
+ kw4qyFy0kF15XFUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPl14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
+ x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
+ ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2AI
+ xVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20x
+ vE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xv
+ r2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04
+ v7MxkIecxEwVAFwVW5XwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC2
+ 0s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI
+ 0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv2
+ 0xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2js
+ IE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZF
+ pf9x0JUBBTnUUUUU=
+X-Originating-IP: [61.165.33.195]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 159.226.251.80 (deferred)
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -10
+X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
+ RDNS_NONE=0.793, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -45,23 +69,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2023 09:30:47 -0000
+X-List-Received-Date: Fri, 28 Apr 2023 14:36:44 -0000
 
-On Thu, Apr 27, 2023 at 17:57:06 -0300, Daniel Henrique Barboza wrote:
+pmp_get_tlb_size can be separated from get_physical_address_pmp and is only
+needed when ret == TRANSLATE_SUCCESS.
 
-: Second patch makes the function debug only. The logic is explained in
-: the commit message, but long story short: we don't have to implement any
-: tail-agnostic policy at all to be spec compliant, but this function has
-: its uses for debug purposes, so keeping it as a debug option allow users
-: to disable it on demand.
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+---
+ target/riscv/cpu_helper.c | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
 
-Yes, please don't remove this functionality completely -- our internal
-stress test tool for the vector crypto patches relies on it.
-
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 075fc0538a..83c9699a6d 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -676,14 +676,11 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+  *
+  * @env: CPURISCVState
+  * @prot: The returned protection attributes
+- * @tlb_size: TLB page size containing addr. It could be modified after PMP
+- *            permission checking. NULL if not set TLB page for addr.
+  * @addr: The physical address to be checked permission
+  * @access_type: The type of MMU access
+  * @mode: Indicates current privilege level.
+  */
+-static int get_physical_address_pmp(CPURISCVState *env, int *prot,
+-                                    target_ulong *tlb_size, hwaddr addr,
++static int get_physical_address_pmp(CPURISCVState *env, int *prot, hwaddr addr,
+                                     int size, MMUAccessType access_type,
+                                     int mode)
+ {
+@@ -703,9 +700,6 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
+     }
+ 
+     *prot = pmp_priv_to_page_prot(pmp_priv);
+-    if (tlb_size != NULL) {
+-        *tlb_size = pmp_get_tlb_size(env, addr);
+-    }
+ 
+     return TRANSLATE_SUCCESS;
+ }
+@@ -905,7 +899,7 @@ restart:
+         }
+ 
+         int pmp_prot;
+-        int pmp_ret = get_physical_address_pmp(env, &pmp_prot, NULL, pte_addr,
++        int pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
+                                                sizeof(target_ulong),
+                                                MMU_DATA_LOAD, PRV_S);
+         if (pmp_ret != TRANSLATE_SUCCESS) {
+@@ -1300,8 +1294,9 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+             prot &= prot2;
+ 
+             if (ret == TRANSLATE_SUCCESS) {
+-                ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
++                ret = get_physical_address_pmp(env, &prot_pmp, pa,
+                                                size, access_type, mode);
++                tlb_size = pmp_get_tlb_size(env, pa);
+ 
+                 qemu_log_mask(CPU_LOG_MMU,
+                               "%s PMP address=" HWADDR_FMT_plx " ret %d prot"
+@@ -1333,8 +1328,9 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                       __func__, address, ret, pa, prot);
+ 
+         if (ret == TRANSLATE_SUCCESS) {
+-            ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
++            ret = get_physical_address_pmp(env, &prot_pmp, pa,
+                                            size, access_type, mode);
++            tlb_size = pmp_get_tlb_size(env, pa);
+ 
+             qemu_log_mask(CPU_LOG_MMU,
+                           "%s PMP address=" HWADDR_FMT_plx " ret %d prot"
 -- 
-Dickon Hood                                    Senior Software Engineer
-                                                         Codethink Ltd.
-                                 3rd Floor, Dale House, 35 Dale Street,
-https://www.codethink.co.uk/        Manchester, M1 2HF, United Kingdom.
+2.25.1
 
 
