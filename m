@@ -1,17 +1,17 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1psPOf-0006DP-5P
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:48:29 -0400
+	id 1psPOb-00067L-9Y
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Apr 2023 10:48:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1psPOW-00062Q-0Z; Fri, 28 Apr 2023 10:48:20 -0400
+ id 1psPOV-00062F-Tt; Fri, 28 Apr 2023 10:48:20 -0400
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lawrence.hunter@codethink.co.uk>)
- id 1psPOR-00027K-VO; Fri, 28 Apr 2023 10:48:19 -0400
+ id 1psPOR-0002C4-Vc; Fri, 28 Apr 2023 10:48:19 -0400
 Received: from [167.98.27.226] (helo=lawrence-thinkpad.guest.codethink.co.uk)
  by imap4.hz.codethink.co.uk with esmtpsa (Exim 4.94.2 #2 (Debian))
- id 1psPOI-005zz5-KQ; Fri, 28 Apr 2023 15:48:06 +0100
+ id 1psPOM-005zz5-Je; Fri, 28 Apr 2023 15:48:10 +0100
 From: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
 To: qemu-devel@nongnu.org
 Cc: dickon.hood@codethink.co.uk, nazar.kazakov@codethink.co.uk,
@@ -19,10 +19,9 @@ Cc: dickon.hood@codethink.co.uk, nazar.kazakov@codethink.co.uk,
  palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  pbonzini@redhat.com, philipp.tomsich@vrull.eu, kvm@vger.kernel.org,
  qemu-riscv@nongnu.org, richard.henderson@linaro.org
-Subject: [PATCH v3 02/19] target/riscv: Refactor vector-vector translation
- macro
-Date: Fri, 28 Apr 2023 15:47:40 +0100
-Message-Id: <20230428144757.57530-3-lawrence.hunter@codethink.co.uk>
+Subject: [PATCH v3 08/19] qemu/bitops.h: Limit rotate amounts
+Date: Fri, 28 Apr 2023 15:47:46 +0100
+Message-Id: <20230428144757.57530-9-lawrence.hunter@codethink.co.uk>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230428144757.57530-1-lawrence.hunter@codethink.co.uk>
 References: <20230428144757.57530-1-lawrence.hunter@codethink.co.uk>
@@ -49,94 +48,102 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 28 Apr 2023 14:48:22 -0000
 
-From: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+From: Dickon Hood <dickon.hood@codethink.co.uk>
 
-Refactor the non SEW-specific stuff out of `GEN_OPIVV_TRANS` into
-function `opivv_trans` (similar to `opivi_trans`). `opivv_trans` will be
-used in proceeding vector-crypto commits.
+Rotates have been fixed up to only allow for reasonable rotate amounts
+(ie, no rotates >7 on an 8b value etc.)  This fixes a problem with riscv
+vector rotate instructions.
 
-Signed-off-by: Kiran Ostrolenk <kiran.ostrolenk@codethink.co.uk>
+Signed-off-by: Dickon Hood <dickon.hood@codethink.co.uk>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 62 +++++++++++++------------
- 1 file changed, 32 insertions(+), 30 deletions(-)
+ include/qemu/bitops.h | 24 ++++++++++++++++--------
+ 1 file changed, 16 insertions(+), 8 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index f2e3d385152..4106bd69949 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1643,38 +1643,40 @@ GEN_OPIWX_WIDEN_TRANS(vwadd_wx)
- GEN_OPIWX_WIDEN_TRANS(vwsubu_wx)
- GEN_OPIWX_WIDEN_TRANS(vwsub_wx)
- 
-+static bool opivv_trans(uint32_t vd, uint32_t vs1, uint32_t vs2, uint32_t vm,
-+                        gen_helper_gvec_4_ptr *fn, DisasContext *s)
-+{
-+    uint32_t data = 0;
-+    TCGLabel *over = gen_new_label();
-+    tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-+    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
-+
-+    data = FIELD_DP32(data, VDATA, VM, vm);
-+    data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data = FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
-+    data = FIELD_DP32(data, VDATA, VMA, s->vma);
-+    tcg_gen_gvec_4_ptr(vreg_ofs(s, vd), vreg_ofs(s, 0), vreg_ofs(s, vs1),
-+                       vreg_ofs(s, vs2), cpu_env, s->cfg_ptr->vlen / 8,
-+                       s->cfg_ptr->vlen / 8, data, fn);
-+    mark_vs_dirty(s);
-+    gen_set_label(over);
-+    return true;
-+}
-+
- /* Vector Integer Add-with-Carry / Subtract-with-Borrow Instructions */
- /* OPIVV without GVEC IR */
--#define GEN_OPIVV_TRANS(NAME, CHECK)                               \
--static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
--{                                                                  \
--    if (CHECK(s, a)) {                                             \
--        uint32_t data = 0;                                         \
--        static gen_helper_gvec_4_ptr * const fns[4] = {            \
--            gen_helper_##NAME##_b, gen_helper_##NAME##_h,          \
--            gen_helper_##NAME##_w, gen_helper_##NAME##_d,          \
--        };                                                         \
--        TCGLabel *over = gen_new_label();                          \
--        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
--        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
--                                                                   \
--        data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
--        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
--        data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
--        data =                                                     \
--            FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);\
--        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
--        tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
--                           vreg_ofs(s, a->rs1),                    \
--                           vreg_ofs(s, a->rs2), cpu_env,           \
--                           s->cfg_ptr->vlen / 8,                   \
--                           s->cfg_ptr->vlen / 8, data,             \
--                           fns[s->sew]);                           \
--        mark_vs_dirty(s);                                          \
--        gen_set_label(over);                                       \
--        return true;                                               \
--    }                                                              \
--    return false;                                                  \
-+#define GEN_OPIVV_TRANS(NAME, CHECK)                                     \
-+static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
-+{                                                                        \
-+    if (CHECK(s, a)) {                                                   \
-+        static gen_helper_gvec_4_ptr * const fns[4] = {                  \
-+            gen_helper_##NAME##_b, gen_helper_##NAME##_h,                \
-+            gen_helper_##NAME##_w, gen_helper_##NAME##_d,                \
-+        };                                                               \
-+        return opivv_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s);\
-+    }                                                                    \
-+    return false;                                                        \
+diff --git a/include/qemu/bitops.h b/include/qemu/bitops.h
+index 03213ce952c..c443995b3ba 100644
+--- a/include/qemu/bitops.h
++++ b/include/qemu/bitops.h
+@@ -218,7 +218,8 @@ static inline unsigned long find_first_zero_bit(const unsigned long *addr,
+  */
+ static inline uint8_t rol8(uint8_t word, unsigned int shift)
+ {
+-    return (word << shift) | (word >> ((8 - shift) & 7));
++    shift &= 7;
++    return (word << shift) | (word >> (8 - shift));
  }
  
- /*
+ /**
+@@ -228,7 +229,8 @@ static inline uint8_t rol8(uint8_t word, unsigned int shift)
+  */
+ static inline uint8_t ror8(uint8_t word, unsigned int shift)
+ {
+-    return (word >> shift) | (word << ((8 - shift) & 7));
++    shift &= 7;
++    return (word >> shift) | (word << (8 - shift));
+ }
+ 
+ /**
+@@ -238,7 +240,8 @@ static inline uint8_t ror8(uint8_t word, unsigned int shift)
+  */
+ static inline uint16_t rol16(uint16_t word, unsigned int shift)
+ {
+-    return (word << shift) | (word >> ((16 - shift) & 15));
++    shift &= 15;
++    return (word << shift) | (word >> (16 - shift));
+ }
+ 
+ /**
+@@ -248,7 +251,8 @@ static inline uint16_t rol16(uint16_t word, unsigned int shift)
+  */
+ static inline uint16_t ror16(uint16_t word, unsigned int shift)
+ {
+-    return (word >> shift) | (word << ((16 - shift) & 15));
++    shift &= 15;
++    return (word >> shift) | (word << (16 - shift));
+ }
+ 
+ /**
+@@ -258,7 +262,8 @@ static inline uint16_t ror16(uint16_t word, unsigned int shift)
+  */
+ static inline uint32_t rol32(uint32_t word, unsigned int shift)
+ {
+-    return (word << shift) | (word >> ((32 - shift) & 31));
++    shift &= 31;
++    return (word << shift) | (word >> (32 - shift));
+ }
+ 
+ /**
+@@ -268,7 +273,8 @@ static inline uint32_t rol32(uint32_t word, unsigned int shift)
+  */
+ static inline uint32_t ror32(uint32_t word, unsigned int shift)
+ {
+-    return (word >> shift) | (word << ((32 - shift) & 31));
++    shift &= 31;
++    return (word >> shift) | (word << (32 - shift));
+ }
+ 
+ /**
+@@ -278,7 +284,8 @@ static inline uint32_t ror32(uint32_t word, unsigned int shift)
+  */
+ static inline uint64_t rol64(uint64_t word, unsigned int shift)
+ {
+-    return (word << shift) | (word >> ((64 - shift) & 63));
++    shift &= 63;
++    return (word << shift) | (word >> (64 - shift));
+ }
+ 
+ /**
+@@ -288,7 +295,8 @@ static inline uint64_t rol64(uint64_t word, unsigned int shift)
+  */
+ static inline uint64_t ror64(uint64_t word, unsigned int shift)
+ {
+-    return (word >> shift) | (word << ((64 - shift) & 63));
++    shift &= 63;
++    return (word >> shift) | (word << (64 - shift));
+ }
+ 
+ /**
 -- 
 2.40.1
 
