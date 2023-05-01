@@ -1,81 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ptOB0-0000oj-05
-	for mharc-qemu-riscv@gnu.org; Mon, 01 May 2023 03:42:26 -0400
+	id 1ptU5P-0003JZ-Ty
+	for mharc-qemu-riscv@gnu.org; Mon, 01 May 2023 10:01:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ptOAv-0000mu-BL
- for qemu-riscv@nongnu.org; Mon, 01 May 2023 03:42:23 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1ptU5E-0003Gs-TX
+ for qemu-riscv@nongnu.org; Mon, 01 May 2023 10:00:59 -0400
+Received: from mail-oa1-x30.google.com ([2001:4860:4864:20::30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ptOAt-0005Hm-9H
- for qemu-riscv@nongnu.org; Mon, 01 May 2023 03:42:21 -0400
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-2f3fe12de15so1211264f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 01 May 2023 00:42:18 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1ptU5B-0006KS-GK
+ for qemu-riscv@nongnu.org; Mon, 01 May 2023 10:00:51 -0400
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-1924a23ddb7so8553134fac.0
+ for <qemu-riscv@nongnu.org>; Mon, 01 May 2023 07:00:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1682926937; x=1685518937;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=sEK/UyQxvH/3fSw2l1tQqWXyFiev0uVxiXsEMYLzmXI=;
- b=qPlZRWhh3TJ7GVSdzorgbV9W1kPXJiH+IPVOiQ9DMjaKbrM6x90DuNntKLgsHekPb9
- LFvrWPVAQM+JlVoZq0KbtQut4u371/Iq4GZkXAOodw2MsXKgGtWfFNYLECBoddnODU0Q
- 03t9H07/NVDb0Y6bZ6/dyz/V7RbokEwZvU5pezC0cajp+yDHodwUgDsE4Dqpa6mxFM2N
- hzSfKDisNjQxPlpD0nnvA9MDx7HcuteVtlhiP7tncYy1xckmAr3XXLOi/jQVTZHz3dxQ
- 4kNfzFTjPubzIosb3fBVOHgcNuf06DGJ+5JD8bdXEoSWfQNA8gY1t9Tsu1m2vQOrXRLE
- +lsA==
+ d=ventanamicro.com; s=google; t=1682949648; x=1685541648;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ry93EuiL339cXmTcSwW+O/TAemEHyYi1HmGB8rjIeQg=;
+ b=Zj4jtWwgEX6mjVCbvPYoyJtgrQaQwqcaPohyiqGS89kchaZ7s6PGomzmRqIrH5ceUJ
+ MjLRH6Ers+OrQYkMRMQWUD0VwawQ7n0nOFpOd7j9lshf7wGNkt9wxOdSKhD4Edg7Fsxh
+ 7+XX8kV2CeN3UiS1XeVNjE88eAAjAAVWasziS73FcK0YuaXJ2K3NgEJ32jttonGzJurt
+ pItt/bDusymTKTKeuEUaHm6beK1x9NfbA2O/Uq3FdkgMuayH8KwSN6UtA2H0tFvsd1zs
+ K9zhRZqjTGtUOYSr8DxErUNZ3A+WDEyVY3j5V45jipst2LrjsTH3N/ziYptaMnC3+9JQ
+ QzIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682926937; x=1685518937;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sEK/UyQxvH/3fSw2l1tQqWXyFiev0uVxiXsEMYLzmXI=;
- b=IuGFDknufXa2ZSHU/5SacRISjR+FHOhGRmsywxS+VbBly5PVb3rZdznU9lTKsKe9a7
- nav2vkqSIeDfhf3P0FTKihTJ/W3jijoT1U1uj1jMDlxh1GqnZvGRUu9H7qKAuhbVB2HV
- l80KAk7Z6Dn8M3Lg/T/TRWjs7VoaX6J2ELGPmzY8JSY4R5cU25H3+58bBN4FsaMPRqG/
- 7QmZx71CH4w9cZtRrcrD1q9O0S+OEbi3avbmeNX9I8McS8G1tiaWOUfkL0TYRDW1IRD8
- cBfciGqce0QPC0G4wAdcZwFg2ob03JB1KTXj+vhHVOwY+Gu2VGKEyNo1I8UAp+PNkjp8
- cJHw==
-X-Gm-Message-State: AC+VfDzBl62tcBvsZQa7X/zGs3cHl5ILpYoBSXu8UdM1+NPqM+Zz2Ko0
- f+ewkxE3+AxWPwlVwrrrqgZVQw==
-X-Google-Smtp-Source: ACHHUZ7nvUjXZzbFQrECnczduxwd63XgGwahfXMasF8r4zmItucNJ0E85TM/Cu3Mk9mpcMg8GmREpQ==
-X-Received: by 2002:a5d:65c2:0:b0:2fe:c0ea:18b5 with SMTP id
- e2-20020a5d65c2000000b002fec0ea18b5mr8086651wrw.35.1682926937531; 
- Mon, 01 May 2023 00:42:17 -0700 (PDT)
-Received: from [10.175.90.180] ([86.111.162.250])
- by smtp.gmail.com with ESMTPSA id
- d18-20020a5d4f92000000b002c7163660a9sm27476781wru.105.2023.05.01.00.42.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 01 May 2023 00:42:17 -0700 (PDT)
-Message-ID: <8ae3e772-c5c2-42ad-ffeb-f594f81b6a48@linaro.org>
-Date: Mon, 1 May 2023 08:42:15 +0100
+ d=1e100.net; s=20221208; t=1682949648; x=1685541648;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ry93EuiL339cXmTcSwW+O/TAemEHyYi1HmGB8rjIeQg=;
+ b=lxP2qj+JcaIqy30CnB499jKj5GF5JRtofCWMvSju64J+ATfalG+vFElTgeWq0fFeWn
+ 6vc6GSWCpToxVJ9ETCwAAbfnjnFvSyF49VTJDaU4XVfyyrk4CyClcbbijYvhIt2Znom8
+ ILZ2Ou6AQzDRd77HpLiTqbC7ECFJQJ/pCLrKXSczKNep2uRmgnPY79Q4uBaXl7XfDFBx
+ 8wspbLtL2O+QnamV+tJkXNbLRW9jKO8R9NKGG5918jXs3psILla7JnL1DuImJEokqrGT
+ kS19Aay9aLKNqK3lI9n89XallRDaGgNTKtYEB9UERhOvacyoECHRX4OSVqUHymYODMo+
+ KiPA==
+X-Gm-Message-State: AC+VfDzaD7zJwGTW+LbAQ9Th9gRBEeF0hBOJ8BgtvplWZZ35hu9RqJW0
+ fXkLtx3HOFoJFwRnophrdRxSAQ==
+X-Google-Smtp-Source: ACHHUZ7ffdaAbYd1NiyvihdcR7+nEc9PLhTkiUokwgdxwyp4miEwMpBg8Re5URwWm29+VDV1jcgHHQ==
+X-Received: by 2002:a05:6870:8990:b0:184:283f:e3c8 with SMTP id
+ f16-20020a056870899000b00184283fe3c8mr8132985oaq.1.1682949647850; 
+ Mon, 01 May 2023 07:00:47 -0700 (PDT)
+Received: from mchitale-vm.. ([103.97.165.210])
+ by smtp.googlemail.com with ESMTPSA id
+ f12-20020a9d6c0c000000b006a44338c8efsm10744342otq.44.2023.05.01.07.00.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 May 2023 07:00:47 -0700 (PDT)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org,
+	alistair.francis@wdc.com
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Alistair Francis <alistair23@gmail.com>,
+ Daniel Barboza <dbarboza@ventanamicro.com>, liweiwei@iscas.ac.cn,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH v4 3/3] target/riscv: smstateen knobs
+Date: Mon,  1 May 2023 19:30:20 +0530
+Message-Id: <20230501140020.3667219-4-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230501140020.3667219-1-mchitale@ventanamicro.com>
+References: <20230501140020.3667219-1-mchitale@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [PATCH v3 06/57] tcg/i386: Generalize multi-part load overlap test
-Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>
-Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
- qemu-ppc@nongnu.org, git@xen0n.name, jiaxun.yang@flygoat.com
-References: <20230424054105.1579315-1-richard.henderson@linaro.org>
- <20230424054105.1579315-7-richard.henderson@linaro.org>
- <92b3252a-fd8a-91c6-c90a-3a858fd126fe@linaro.org>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <92b3252a-fd8a-91c6-c90a-3a858fd126fe@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x432.google.com
-X-Spam_score_int: -34
-X-Spam_score: -3.5
-X-Spam_bar: ---
-X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.422,
+Received-SPF: pass client-ip=2001:4860:4864:20::30;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-oa1-x30.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,50 +86,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 May 2023 07:42:24 -0000
+X-List-Received-Date: Mon, 01 May 2023 14:01:00 -0000
 
-On 4/29/23 14:01, Philippe Mathieu-Daudé wrote:
-> On 24/4/23 07:40, Richard Henderson wrote:
->> Test for both base and index; use datahi as a temporary, overwritten
->> by the final load.  Always perform the loads in ascending order, so
->> that any (user-only) fault sees the correct address.
->>
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->>   tcg/i386/tcg-target.c.inc | 31 +++++++++++++++----------------
->>   1 file changed, 15 insertions(+), 16 deletions(-)
->>
->> diff --git a/tcg/i386/tcg-target.c.inc b/tcg/i386/tcg-target.c.inc
->> index b986109d77..794d440a9e 100644
->> --- a/tcg/i386/tcg-target.c.inc
->> +++ b/tcg/i386/tcg-target.c.inc
->> @@ -2223,23 +2223,22 @@ static void tcg_out_qemu_ld_direct(TCGContext *s, TCGReg datalo, 
->> TCGReg datahi,
->>           if (TCG_TARGET_REG_BITS == 64) {
->>               tcg_out_modrm_sib_offset(s, movop + P_REXW + seg, datalo,
->>                                        base, index, 0, ofs);
->> +            break;
->> +        }
->> +        if (use_movbe) {
->> +            TCGReg t = datalo;
->> +            datalo = datahi;
->> +            datahi = t;
->> +        }
->> +        if (base == datalo || index == datalo) {
->> +            tcg_out_modrm_sib_offset(s, OPC_LEA, datahi, base, index, 0, ofs);
->> +            tcg_out_modrm_offset(s, movop + seg, datalo, datahi, 0);
->> +            tcg_out_modrm_offset(s, movop + seg, datahi, datahi, 4);
-> 
-> LGTM but I'd rather have someone fluent with x86 review this one...
+Add knobs to allow users to enable smstateen and also export it via the
+ISA extension string.
 
-The original address is (base + (index << 0) + ofs).
+Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+Reviewed-by: Weiwei Li<liweiwei@iscas.ac.cn>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-If datalo overlaps either base or index, then we can't use the same form of address for 
-the second load for datahi.  So we "Load Effective Address" to perform the computation of 
-the original address once, storing into datahi as temporary (we are guaranteed that datalo 
-!= datahi because they're both outputs).  After that, the two addresses that we want are 
-(datahi + 0) and (datahi + 4).
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index befa64528f..9420cd670e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -119,6 +119,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+     ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+     ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
++    ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
+     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+@@ -1498,8 +1499,8 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+ 
++    DEFINE_PROP_BOOL("smstateen", RISCVCPU, cfg.ext_smstateen, false),
+     DEFINE_PROP_BOOL("svadu", RISCVCPU, cfg.ext_svadu, true),
+-
+     DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
+     DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+     DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
+-- 
+2.34.1
 
-
-r~
 
