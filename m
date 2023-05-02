@@ -1,74 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ptvXN-0004aX-LH
-	for mharc-qemu-riscv@gnu.org; Tue, 02 May 2023 15:19:45 -0400
+	id 1ptwLQ-0007xT-10
+	for mharc-qemu-riscv@gnu.org; Tue, 02 May 2023 16:11:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ptvXM-0004Ze-1h
- for qemu-riscv@nongnu.org; Tue, 02 May 2023 15:19:44 -0400
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1ptwLN-0007pg-9O
+ for qemu-riscv@nongnu.org; Tue, 02 May 2023 16:11:25 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ptvXK-0005cw-CJ
- for qemu-riscv@nongnu.org; Tue, 02 May 2023 15:19:43 -0400
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-3f1950f5676so43680235e9.3
- for <qemu-riscv@nongnu.org>; Tue, 02 May 2023 12:19:41 -0700 (PDT)
+ id 1ptwLL-0002V4-Kr
+ for qemu-riscv@nongnu.org; Tue, 02 May 2023 16:11:24 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-3f195b164c4so27279035e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 02 May 2023 13:11:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683055180; x=1685647180;
+ d=linaro.org; s=google; t=1683058279; x=1685650279;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=7usn756S/TuIOQBrdWdBXYCsofXslEW4cXCpMHZzuEo=;
- b=tyXk5/g+MnwQCMyQ377Dxl0aON80yhPVAb+alOCmQLcxAycEeSCSGy7tf1rEi2tMKE
- 22ZjBeF+gUWnrgLSK/vcBrRaHELLDMmckthRwWEblDhHtbrkd4FQWfLUGC5URBphGctw
- OZaHqqdRX2K8DVerneaT8mNja+PV0deGmbX40nJQ0vfMwBO43A+s5FGyKun5fFG1NKn2
- IBHY9Ezq7qM7KPDkaCqWwbEZDPrTDuIkMdcZGTFbyaaybusQAsaC9zeJKhML8E4MtRVh
- Pt/FzuMO9l4dh5zX761KE4Tt6tkyN73zjccAfzS5Bq/oW7Ry39gja0vkCzOzhUbQwA3N
- EM4g==
+ bh=G8W8uovREul2fjSz4ctWSs8on3qfCZtGwx3akPGfCho=;
+ b=GhDde+IzRT/Iz2MyV4B6i/1fNEtgBuT+ASzKpunfyXCUY7EOpb1e7BqeFpzr1l1qbi
+ tXt/SDokiQImuBpzan2H/qu8dLRELqmX3S9e+2Q83BikF4khnx2bAP84+mXYIwDBxHki
+ MGhBaRWybXoSrd72i+4630ypP0itjKAc+XW0qLLQicybv2y08ZfHmXi7z1cS6+dmrAbj
+ 4kuidZOkYQjhrouK/wyNMFPUDbM9xpvLz/JtdTI8/1gU3JlABj6ALqepr2xCasPyYtmi
+ pgJdP8fWRyuh03NF0AGxgkkaDap6nenu2eFV8rFgc7Omz9HExw+6O4IdqMlBUFolzshH
+ sPTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683055180; x=1685647180;
+ d=1e100.net; s=20221208; t=1683058279; x=1685650279;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7usn756S/TuIOQBrdWdBXYCsofXslEW4cXCpMHZzuEo=;
- b=UjZXpnqPBMDwviW+darecrvlnq47iHWVRqSqpLsh7E0toE7xX/vV3bk7vNJ9tCdX+I
- 1tzXKRj0k/mI4b3lso23pjpVfVBQlKS+aNw6Yj6g9SC7EVn3+0ZCfdVptu2naC6krzRx
- alzu7FQcQZtMIYrzXG2aoP06iOYmkNiim79tHpE+Xdk2PdfEM3lhg7uMoOcMmin7smDU
- Efy6X0sEB3AzXtK5pS5l48gJzUqRNcbS9lazs+beopyLmE2FMsVQVK1HjyCX9GgAnfUx
- Sys9P2jfeccVennEHDkhzDw5Kn7ebk1zF8dS2Ax0jC0j5sdcaJGgcYruCrpdTecnuPiU
- b7nQ==
-X-Gm-Message-State: AC+VfDw9ilINWoE+k5los4nTV+wpOin29QSliaT+UaUG9Arsqz8XTIKP
- UMPy3bfKB8xQCuJcks7ZLQzLFg==
-X-Google-Smtp-Source: ACHHUZ4YDT8nSReAWxIC01gs0IFYG9vvNCyXed1HSJRNNmUdGuGdKFApTw0xYyNr3LE/5auzecLw2A==
-X-Received: by 2002:a7b:c8cb:0:b0:3f1:6ec5:bc6e with SMTP id
- f11-20020a7bc8cb000000b003f16ec5bc6emr14407890wml.3.1683055180420; 
- Tue, 02 May 2023 12:19:40 -0700 (PDT)
-Received: from ?IPV6:2a02:c7c:74db:8d00:ad29:f02c:48a2:269c?
- ([2a02:c7c:74db:8d00:ad29:f02c:48a2:269c])
+ bh=G8W8uovREul2fjSz4ctWSs8on3qfCZtGwx3akPGfCho=;
+ b=Nr+NePmNNYE7GIz3hOWL37fc90+CirfMBfaq8jWgNQXJKJu5lLxv1KjIiPEKgTpx/h
+ rQDBYokmqhekNlfhsrrRL39NcmQQqFzJ47l8ePYPK2YbjuN2I//CTNMRiaq/Ifz8uvdi
+ kCZVjMFQchH6ZCv64rcHiQvc+GgyEPEtnSRnbVhFMSwBLuLuLZV5REOHfEVab9Qn5zoJ
+ fsmmOAANosFWWF4QBybaGOTj84coV6t1V2lkONHDWa4OCuU97XJPcsxRS4jmeL/4Yzx9
+ fsI60O7o75vlv1tPaEYRaGBZ0+1n2UmLBxAq4E+IT1k73XnCWUZJ41bjfsJSi1/YZFBO
+ py9w==
+X-Gm-Message-State: AC+VfDwgbMjxzdZjBdL3epS2KMdJDHE+yuuInAD7b0EJHEq8IJw1RP/m
+ PToucFDfdPavu1bBKrmz16V3Rg==
+X-Google-Smtp-Source: ACHHUZ44PCy7E/XtvFkW3m5C1otW6y1vCSFg3OHlv31ZzM1H4SpQLbtJM5WZats+tadljGs04jmZvA==
+X-Received: by 2002:a05:600c:2219:b0:3f3:1fa6:d2a8 with SMTP id
+ z25-20020a05600c221900b003f31fa6d2a8mr11326218wml.25.1683058278803; 
+ Tue, 02 May 2023 13:11:18 -0700 (PDT)
+Received: from ?IPV6:2a02:c7c:74db:8d00:5063:9fcd:f6cc:e52d?
+ ([2a02:c7c:74db:8d00:5063:9fcd:f6cc:e52d])
  by smtp.gmail.com with ESMTPSA id
- x24-20020a1c7c18000000b003f183127434sm36428174wmc.30.2023.05.02.12.19.39
+ o17-20020a5d4751000000b003063a92bbf5sm1769813wrs.70.2023.05.02.13.11.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 02 May 2023 12:19:39 -0700 (PDT)
-Message-ID: <abc64290-89f3-bde3-de68-3b620e6a3c6f@linaro.org>
-Date: Tue, 2 May 2023 20:19:38 +0100
+ Tue, 02 May 2023 13:11:18 -0700 (PDT)
+Message-ID: <80f6b30f-5d3f-5e43-5472-2108b89758aa@linaro.org>
+Date: Tue, 2 May 2023 21:11:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
-Subject: Re: [PATCH v3 00/57] tcg: Improve atomicity support
+Subject: Re: [PATCH v3 08/19] qemu/bitops.h: Limit rotate amounts
 Content-Language: en-US
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
- qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, git@xen0n.name,
- jiaxun.yang@flygoat.com, philmd@linaro.org
-References: <20230425193146.2106111-1-richard.henderson@linaro.org>
- <CAFEAcA-R5uNg19c7VfvJ5bzZWLhkcUUwmucHwe8ZeJYMQ-vCeg@mail.gmail.com>
+To: Lawrence Hunter <lawrence.hunter@codethink.co.uk>, qemu-devel@nongnu.org
+Cc: dickon.hood@codethink.co.uk, nazar.kazakov@codethink.co.uk,
+ kiran.ostrolenk@codethink.co.uk, frank.chang@sifive.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, pbonzini@redhat.com,
+ philipp.tomsich@vrull.eu, kvm@vger.kernel.org, qemu-riscv@nongnu.org
+References: <20230428144757.57530-1-lawrence.hunter@codethink.co.uk>
+ <20230428144757.57530-9-lawrence.hunter@codethink.co.uk>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <CAFEAcA-R5uNg19c7VfvJ5bzZWLhkcUUwmucHwe8ZeJYMQ-vCeg@mail.gmail.com>
+In-Reply-To: <20230428144757.57530-9-lawrence.hunter@codethink.co.uk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -34
 X-Spam_score: -3.5
 X-Spam_bar: ---
@@ -88,34 +89,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 May 2023 19:19:44 -0000
+X-List-Received-Date: Tue, 02 May 2023 20:11:26 -0000
 
-On 5/2/23 17:11, Peter Maydell wrote:
-> On Tue, 25 Apr 2023 at 20:32, Richard Henderson
-> <richard.henderson@linaro.org> wrote:
->>
->> v1: https://lore.kernel.org/qemu-devel/20221118094754.242910-1-richard.henderson@linaro.org/
->> v2: https://lore.kernel.org/qemu-devel/20230216025739.1211680-1-richard.henderson@linaro.org/
->>
->> Based-on: 20230424054105.1579315-1-richard.henderson@linaro.org
->> ("[PATCH v3 00/57] tcg: Simplify calls to load/store helpers")
->>
->> The main objective here is to support Arm FEAT_LSE2, which says that any
->> single memory access that does not cross a 16-byte boundary is atomic.
->> This is the MO_ATOM_WITHIN16 control.
->>
->> While I'm touching all of this, a secondary objective is to handle the
->> atomicity of the IBM machines.  Both Power and s390x treat misaligned
->> accesses as atomic on the lsb of the pointer.  For instance, an 8-byte
->> access at ptr % 8 == 4 will appear as two atomic 4-byte accesses, and
->> ptr % 4 == 2 will appear as four 3-byte accesses.
-> 
-> I hope you mean "four 2-byte accesses", although I'm never
-> quite sure how odd s390x can get :-)
+On 4/28/23 15:47, Lawrence Hunter wrote:
+>   static inline uint32_t ror32(uint32_t word, unsigned int shift)
+>   {
+> -    return (word >> shift) | (word << ((32 - shift) & 31));
+> +    shift &= 31;
+> +    return (word >> shift) | (word << (32 - shift));
 
-Heh.  Yes, of course.
+This is incorrect, because if shift == 0, you are now performing (word << 32).
+
+I agree with your original intent though, to mask and accept any rotation.
+I've changed these like so:
+
+-    return (word >> shift) | (word << ((32 - shift) & 31));
++    return (word >> (shift & 31)) | (word << (-shift & 31));
+
+which also eliminates the useless subtract from word-size-before-mask.
 
 
 r~
-
 
