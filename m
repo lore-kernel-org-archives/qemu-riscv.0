@@ -1,67 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ptsbk-0004lj-2V
-	for mharc-qemu-riscv@gnu.org; Tue, 02 May 2023 12:12:04 -0400
+	id 1ptvXN-0004aX-LH
+	for mharc-qemu-riscv@gnu.org; Tue, 02 May 2023 15:19:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1ptsbe-0004kF-T5
- for qemu-riscv@nongnu.org; Tue, 02 May 2023 12:11:59 -0400
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1ptvXM-0004Ze-1h
+ for qemu-riscv@nongnu.org; Tue, 02 May 2023 15:19:44 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1ptsba-0002B1-RL
- for qemu-riscv@nongnu.org; Tue, 02 May 2023 12:11:58 -0400
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-94f3cd32799so809071066b.0
- for <qemu-riscv@nongnu.org>; Tue, 02 May 2023 09:11:52 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1ptvXK-0005cw-CJ
+ for qemu-riscv@nongnu.org; Tue, 02 May 2023 15:19:43 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-3f1950f5676so43680235e9.3
+ for <qemu-riscv@nongnu.org>; Tue, 02 May 2023 12:19:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683043909; x=1685635909;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LprwXtVwFSGcGun4/bwMCVjX1R9MCpd/Hpmv+3jmq18=;
- b=FVw/amibW0/saDpimMef0Q7d35/PTHrtm/UrrDV6K4bnaSXMiJxAWuDCr0/X+ZJo0B
- ufrGebO6GmKP2iueAnJb/yEYdhSoRw7r0GPxa8fXBD0dz6tNxnql3H0666wrp1K/PRWl
- tnaaPhR66fYstYhoTzn/BHeTgIwAHAHYXmukF6wDABB5WcaneQQ00EPWh/BbVS/j8WJ4
- 8/F5ncrgZizp40t2bgzbL9qIE0dxG3DTHQdsErm58ls9ahPPQi/zfxQMNDOi9nce7Gs/
- uT1z6Fsxbd7KAbmbnd4kmKVJOhJtqArwdKvJTU8EZcNsD7hqt3boe4ZCBXT0jl2n3zcC
- O9uA==
+ d=linaro.org; s=google; t=1683055180; x=1685647180;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7usn756S/TuIOQBrdWdBXYCsofXslEW4cXCpMHZzuEo=;
+ b=tyXk5/g+MnwQCMyQ377Dxl0aON80yhPVAb+alOCmQLcxAycEeSCSGy7tf1rEi2tMKE
+ 22ZjBeF+gUWnrgLSK/vcBrRaHELLDMmckthRwWEblDhHtbrkd4FQWfLUGC5URBphGctw
+ OZaHqqdRX2K8DVerneaT8mNja+PV0deGmbX40nJQ0vfMwBO43A+s5FGyKun5fFG1NKn2
+ IBHY9Ezq7qM7KPDkaCqWwbEZDPrTDuIkMdcZGTFbyaaybusQAsaC9zeJKhML8E4MtRVh
+ Pt/FzuMO9l4dh5zX761KE4Tt6tkyN73zjccAfzS5Bq/oW7Ry39gja0vkCzOzhUbQwA3N
+ EM4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683043909; x=1685635909;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LprwXtVwFSGcGun4/bwMCVjX1R9MCpd/Hpmv+3jmq18=;
- b=hP9Xcx2jxIJGYBewe4XdeJEBQ6Of7oqiZucvHhDyf9imlJFcM/aKFxjTD/rxAno4Tx
- tdJXwnHdqC6px+Jy/+eFE1x99yJXRjxu72WPmmEOxPrEAal7P5cPtSSisgOm0//2T7qb
- o+xIx5MBcLEC/RENG+62KC0e1ZoCV/DndCIoJMGEIgOGbLNJcFpgejF9VLpM0ymBDydF
- rgkQLLeHeMnkhU7uIIWJCFMPRxy9VE27EJDBj7A+oj33x/J9ZhsAZp1bpfvSLRTrR8Dr
- BoOm92kUuylrP0Xd9Dnk6gEx+mnMfjMtkSXNTZ+3ApYyldBxLJNxbLEEtGVxnfOjs7gT
- 1rKg==
-X-Gm-Message-State: AC+VfDyAyxrN+t+4dpapsYm+5as1jc2TzPMz+SfP01Nsl6Ed/MGUUPiN
- FScDIty0sp9dF0ly7v6xg507ZifcQ640E4nn0M/j7A==
-X-Google-Smtp-Source: ACHHUZ5q2cN66Fr/se//EIEoqDC5MN7XZzzJljdR1Oc2WApWv1M7HGxt8y6WHpto5dDk3HNRzsmwNan5NrhQ0xwYgOg=
-X-Received: by 2002:a17:906:dacd:b0:94f:1c90:cb70 with SMTP id
- xi13-20020a170906dacd00b0094f1c90cb70mr385681ejb.66.1683043909377; Tue, 02
- May 2023 09:11:49 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1683055180; x=1685647180;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7usn756S/TuIOQBrdWdBXYCsofXslEW4cXCpMHZzuEo=;
+ b=UjZXpnqPBMDwviW+darecrvlnq47iHWVRqSqpLsh7E0toE7xX/vV3bk7vNJ9tCdX+I
+ 1tzXKRj0k/mI4b3lso23pjpVfVBQlKS+aNw6Yj6g9SC7EVn3+0ZCfdVptu2naC6krzRx
+ alzu7FQcQZtMIYrzXG2aoP06iOYmkNiim79tHpE+Xdk2PdfEM3lhg7uMoOcMmin7smDU
+ Efy6X0sEB3AzXtK5pS5l48gJzUqRNcbS9lazs+beopyLmE2FMsVQVK1HjyCX9GgAnfUx
+ Sys9P2jfeccVennEHDkhzDw5Kn7ebk1zF8dS2Ax0jC0j5sdcaJGgcYruCrpdTecnuPiU
+ b7nQ==
+X-Gm-Message-State: AC+VfDw9ilINWoE+k5los4nTV+wpOin29QSliaT+UaUG9Arsqz8XTIKP
+ UMPy3bfKB8xQCuJcks7ZLQzLFg==
+X-Google-Smtp-Source: ACHHUZ4YDT8nSReAWxIC01gs0IFYG9vvNCyXed1HSJRNNmUdGuGdKFApTw0xYyNr3LE/5auzecLw2A==
+X-Received: by 2002:a7b:c8cb:0:b0:3f1:6ec5:bc6e with SMTP id
+ f11-20020a7bc8cb000000b003f16ec5bc6emr14407890wml.3.1683055180420; 
+ Tue, 02 May 2023 12:19:40 -0700 (PDT)
+Received: from ?IPV6:2a02:c7c:74db:8d00:ad29:f02c:48a2:269c?
+ ([2a02:c7c:74db:8d00:ad29:f02c:48a2:269c])
+ by smtp.gmail.com with ESMTPSA id
+ x24-20020a1c7c18000000b003f183127434sm36428174wmc.30.2023.05.02.12.19.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 02 May 2023 12:19:39 -0700 (PDT)
+Message-ID: <abc64290-89f3-bde3-de68-3b620e6a3c6f@linaro.org>
+Date: Tue, 2 May 2023 20:19:38 +0100
 MIME-Version: 1.0
-References: <20230425193146.2106111-1-richard.henderson@linaro.org>
-In-Reply-To: <20230425193146.2106111-1-richard.henderson@linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 2 May 2023 17:11:38 +0100
-Message-ID: <CAFEAcA-R5uNg19c7VfvJ5bzZWLhkcUUwmucHwe8ZeJYMQ-vCeg@mail.gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
 Subject: Re: [PATCH v3 00/57] tcg: Improve atomicity support
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-s390x@nongnu.org, 
- qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, git@xen0n.name, 
+Content-Language: en-US
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, git@xen0n.name,
  jiaxun.yang@flygoat.com, philmd@linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=peter.maydell@linaro.org; helo=mail-ej1-x62a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+References: <20230425193146.2106111-1-richard.henderson@linaro.org>
+ <CAFEAcA-R5uNg19c7VfvJ5bzZWLhkcUUwmucHwe8ZeJYMQ-vCeg@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <CAFEAcA-R5uNg19c7VfvJ5bzZWLhkcUUwmucHwe8ZeJYMQ-vCeg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x330.google.com
+X-Spam_score_int: -34
+X-Spam_score: -3.5
+X-Spam_bar: ---
+X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.422,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -76,29 +88,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 May 2023 16:11:59 -0000
+X-List-Received-Date: Tue, 02 May 2023 19:19:44 -0000
 
-On Tue, 25 Apr 2023 at 20:32, Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> v1: https://lore.kernel.org/qemu-devel/20221118094754.242910-1-richard.henderson@linaro.org/
-> v2: https://lore.kernel.org/qemu-devel/20230216025739.1211680-1-richard.henderson@linaro.org/
->
-> Based-on: 20230424054105.1579315-1-richard.henderson@linaro.org
-> ("[PATCH v3 00/57] tcg: Simplify calls to load/store helpers")
->
-> The main objective here is to support Arm FEAT_LSE2, which says that any
-> single memory access that does not cross a 16-byte boundary is atomic.
-> This is the MO_ATOM_WITHIN16 control.
->
-> While I'm touching all of this, a secondary objective is to handle the
-> atomicity of the IBM machines.  Both Power and s390x treat misaligned
-> accesses as atomic on the lsb of the pointer.  For instance, an 8-byte
-> access at ptr % 8 == 4 will appear as two atomic 4-byte accesses, and
-> ptr % 4 == 2 will appear as four 3-byte accesses.
+On 5/2/23 17:11, Peter Maydell wrote:
+> On Tue, 25 Apr 2023 at 20:32, Richard Henderson
+> <richard.henderson@linaro.org> wrote:
+>>
+>> v1: https://lore.kernel.org/qemu-devel/20221118094754.242910-1-richard.henderson@linaro.org/
+>> v2: https://lore.kernel.org/qemu-devel/20230216025739.1211680-1-richard.henderson@linaro.org/
+>>
+>> Based-on: 20230424054105.1579315-1-richard.henderson@linaro.org
+>> ("[PATCH v3 00/57] tcg: Simplify calls to load/store helpers")
+>>
+>> The main objective here is to support Arm FEAT_LSE2, which says that any
+>> single memory access that does not cross a 16-byte boundary is atomic.
+>> This is the MO_ATOM_WITHIN16 control.
+>>
+>> While I'm touching all of this, a secondary objective is to handle the
+>> atomicity of the IBM machines.  Both Power and s390x treat misaligned
+>> accesses as atomic on the lsb of the pointer.  For instance, an 8-byte
+>> access at ptr % 8 == 4 will appear as two atomic 4-byte accesses, and
+>> ptr % 4 == 2 will appear as four 3-byte accesses.
+> 
+> I hope you mean "four 2-byte accesses", although I'm never
+> quite sure how odd s390x can get :-)
 
-I hope you mean "four 2-byte accesses", although I'm never
-quite sure how odd s390x can get :-)
+Heh.  Yes, of course.
 
--- PMM
+
+r~
+
 
