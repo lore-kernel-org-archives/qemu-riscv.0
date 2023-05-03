@@ -1,69 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pu6b2-0000Po-UC
-	for mharc-qemu-riscv@gnu.org; Wed, 03 May 2023 03:08:17 -0400
+	id 1pu6b7-0000om-75
+	for mharc-qemu-riscv@gnu.org; Wed, 03 May 2023 03:08:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pu6aQ-0006We-BE
- for qemu-riscv@nongnu.org; Wed, 03 May 2023 03:07:38 -0400
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ id 1pu6aS-0006hM-9E
+ for qemu-riscv@nongnu.org; Wed, 03 May 2023 03:07:40 -0400
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pu6a1-0005ht-1Z
- for qemu-riscv@nongnu.org; Wed, 03 May 2023 03:07:37 -0400
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-3f19ab994ccso49095185e9.2
- for <qemu-riscv@nongnu.org>; Wed, 03 May 2023 00:07:11 -0700 (PDT)
+ id 1pu6a2-0005if-N9
+ for qemu-riscv@nongnu.org; Wed, 03 May 2023 03:07:39 -0400
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3063b5f32aaso859474f8f.2
+ for <qemu-riscv@nongnu.org>; Wed, 03 May 2023 00:07:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683097630; x=1685689630;
+ d=linaro.org; s=google; t=1683097632; x=1685689632;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fOANmGOo5iyv6fa4+ddDWc+mmS1WoR4SXYoPSJOnShA=;
- b=k3d17Kvueqex9aG45mnR1zw6wt4u+8PpKuHTBDvqvE5W5rOFlfW3s0+gj55SySzoK8
- VLsaXUqX4X+GrAFsRZMgBLCePNTqUt/vOI09X4k8bEiCq5UjxB/+Ae3lQU/3o1GDLmxx
- 7ERyNpk9OgtKJNgc2dwjRQbgTrfkeZrRfYJ/5yDQSHiebnO+yVivTOd+vqWPkS3MyeQD
- IBHiAxbQ31lHoyLIoyL5qe556AQeSBF9myL+/UhyQhM6lAmbgxRllkn0OvBWzBQkaJxF
- GuJe0GA4yXXvIpOpF/TXEovAfDlMWNghZXXMn0YcnpBhb2Iqlae6S59XP3TSrW6fpsPy
- Badg==
+ bh=sA2aOIeGNBWRjeeou5Y4ut1mvsbxM8pXHUcMzyX3UOg=;
+ b=FukclqHgBMT9J/gxByhlAW2U8thk+ABrtRkcfnxFr9R/QrINexGHP7u2veZidVDaYC
+ U9ucU0LxbW/v1JjS58bUGmMN8IOgphTKlmCT9lfQ6zGCJqjfkFvFICB6I6golAny07kW
+ 0qMwNy8sJGenc5qG7FNhiVDEN64XQNx6/q5fnMZiJCrF2tERMSPxo8EQx91m2S3QO5+U
+ pCZfCUTmEzZ9m8eanYAHFaHiq6hl9Di1RUBWlY9p3i+3LUv4cQShawg7p2rRBSZ6ToEq
+ sIYQKIL8NUZEA4nn5e25h3pZ0LsH6btSash9rwni0DafQ1x9rQPmnsbee3Ydaj1ee0qh
+ x5dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683097630; x=1685689630;
+ d=1e100.net; s=20221208; t=1683097632; x=1685689632;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fOANmGOo5iyv6fa4+ddDWc+mmS1WoR4SXYoPSJOnShA=;
- b=RAttPV/icxs2JEW8e7OyjXdHWUt73JRT7zshVi6ObjrK75He+AEqMzkUw6oVjbSgTQ
- j1WJHrl8iWsRD8PIg5U/1Fo63ytbKpyOGhZp3KWwiVwxTaHCPputyi5OoPZat+eHTUCk
- NriRiAvI1ZBJ+IibYfNPJtTg6enEjZ7WOcZYbxLj+cY4RduTZqzRlql6ZHqB8e7fahFN
- D7iZmMvz8NyvEKaYsJxEQwnM+1RycSFz11fp4oe4Pf45b9X1VDkM9/6k0K5bc+cZHAUB
- 8iSw1bJgdanL1xsMjflVZmTLqpKeqXFzobQ+V7xbelHRq8yGDLQwEsDxsAu2h2ZblSNO
- YzDw==
-X-Gm-Message-State: AC+VfDzNfIFvNcaXj7iGFhJBvuBhMrO0rl/cpnm2D9ppj5Cb3f6xBbCx
- 0HVu4AWPtCF5gyQutwwaqbKM8Q==
-X-Google-Smtp-Source: ACHHUZ6Re3kzmWA2FZnKN4aHYgRB9LO81LuFSGwn5ZBz7nW937bcyS5o+yvvgeIfb2qOrWeU/qKyIA==
-X-Received: by 2002:a05:600c:2195:b0:3f3:295c:58fc with SMTP id
- e21-20020a05600c219500b003f3295c58fcmr11410141wme.39.1683097630679; 
- Wed, 03 May 2023 00:07:10 -0700 (PDT)
+ bh=sA2aOIeGNBWRjeeou5Y4ut1mvsbxM8pXHUcMzyX3UOg=;
+ b=GIT2KbDA0Ya3rjlV+wb8sR8ZEu6fY80rPsdMJL9sO/J4lI81NqTc8VK646bM9yqfmm
+ mWHA/qGf7ODzjDnUf2y1XoESOwqBHygl/2gH+xlJF+HSDjSEKS3IZM/BPPhrfcQgLqEI
+ /G+lqfu0+K/w/jAv4OJb0RGKGgV/al9y2J8Tx2uDy9mN/DpSIOCxjvwEa5uANsahkxd9
+ Zr3CMHLQCwh++C44quvty/rPEGPqXTtRrY9forDP95/kLUrVtclAmXu/A6pq5ObawH8I
+ 1zyXpnp9+A5QM1iRxhVUX18qbIRR2TbryCk9EBvwkteObiYTPawt3Fg1BEbg1ZT3fqZt
+ EyFw==
+X-Gm-Message-State: AC+VfDzFCf1KseRAsP+RNOYm/daRH56KNJ0GnHRXDG3OLhWkpKs3t+vI
+ nYt9lDuBoEBMno73x/Cof8IUsg==
+X-Google-Smtp-Source: ACHHUZ5mU2N2U1mNOpjeO1SuazmNn5zxEPtCBe9g5jDfQCosU6tDrK+6JN9+F7NMyEoGUiZb17LnPQ==
+X-Received: by 2002:adf:e484:0:b0:306:320b:5dbd with SMTP id
+ i4-20020adfe484000000b00306320b5dbdmr5508212wrm.71.1683097632016; 
+ Wed, 03 May 2023 00:07:12 -0700 (PDT)
 Received: from stoup.Home ([2a02:c7c:74db:8d00:c01d:9d74:b630:9087])
  by smtp.gmail.com with ESMTPSA id
- q3-20020a1cf303000000b003f3157988f8sm921184wmq.26.2023.05.03.00.07.10
+ q3-20020a1cf303000000b003f3157988f8sm921184wmq.26.2023.05.03.00.07.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 May 2023 00:07:10 -0700 (PDT)
+ Wed, 03 May 2023 00:07:11 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: git@xen0n.name, gaosong@loongson.cn, philmd@linaro.org,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: [PATCH v4 17/57] tcg/aarch64: Detect have_lse, have_lse2 for linux
-Date: Wed,  3 May 2023 08:06:16 +0100
-Message-Id: <20230503070656.1746170-18-richard.henderson@linaro.org>
+Subject: [PATCH v4 19/57] accel/tcg: Add have_lse2 support in ldst_atomicity
+Date: Wed,  3 May 2023 08:06:18 +0100
+Message-Id: <20230503070656.1746170-20-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230503070656.1746170-1-richard.henderson@linaro.org>
 References: <20230503070656.1746170-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,69 +82,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 May 2023 07:07:38 -0000
+X-List-Received-Date: Wed, 03 May 2023 07:07:40 -0000
 
-Notice when the host has additional atomic instructions.
-The new variables will also be used in generated code.
+Add fast paths for FEAT_LSE2, using the detection in tcg.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- tcg/aarch64/tcg-target.h     |  3 +++
- tcg/aarch64/tcg-target.c.inc | 12 ++++++++++++
- 2 files changed, 15 insertions(+)
+ accel/tcg/ldst_atomicity.c.inc | 37 ++++++++++++++++++++++++++++++----
+ 1 file changed, 33 insertions(+), 4 deletions(-)
 
-diff --git a/tcg/aarch64/tcg-target.h b/tcg/aarch64/tcg-target.h
-index c0b0f614ba..3c0b0d312d 100644
---- a/tcg/aarch64/tcg-target.h
-+++ b/tcg/aarch64/tcg-target.h
-@@ -57,6 +57,9 @@ typedef enum {
- #define TCG_TARGET_CALL_ARG_I128        TCG_CALL_ARG_EVEN
- #define TCG_TARGET_CALL_RET_I128        TCG_CALL_RET_NORMAL
+diff --git a/accel/tcg/ldst_atomicity.c.inc b/accel/tcg/ldst_atomicity.c.inc
+index 2426b09aef..7ed5d4282d 100644
+--- a/accel/tcg/ldst_atomicity.c.inc
++++ b/accel/tcg/ldst_atomicity.c.inc
+@@ -41,6 +41,8 @@
+  * but we're using tcg/tci/ instead.
+  */
+ # define HAVE_al16_fast    false
++#elif defined(__aarch64__)
++# define HAVE_al16_fast    likely(have_lse2)
+ #elif defined(__x86_64__) && defined(CONFIG_INT128)
+ # define HAVE_al16_fast    likely(have_atomic16)
+ #else
+@@ -48,6 +50,8 @@
+ #endif
+ #if defined(CONFIG_ATOMIC128) || defined(CONFIG_CMPXCHG128)
+ # define HAVE_al16         true
++#elif defined(__aarch64__)
++# define HAVE_al16         true
+ #else
+ # define HAVE_al16         false
+ #endif
+@@ -170,6 +174,14 @@ load_atomic16(void *pv)
  
-+extern bool have_lse;
-+extern bool have_lse2;
+     r.u = qatomic_read__nocheck(p);
+     return r.s;
++#elif defined(__aarch64__)
++    uint64_t l, h;
 +
- /* optional instructions */
- #define TCG_TARGET_HAS_div_i32          1
- #define TCG_TARGET_HAS_rem_i32          1
-diff --git a/tcg/aarch64/tcg-target.c.inc b/tcg/aarch64/tcg-target.c.inc
-index e6636c1f8b..fc551a3d10 100644
---- a/tcg/aarch64/tcg-target.c.inc
-+++ b/tcg/aarch64/tcg-target.c.inc
-@@ -13,6 +13,9 @@
- #include "../tcg-ldst.c.inc"
- #include "../tcg-pool.c.inc"
- #include "qemu/bitops.h"
-+#ifdef __linux__
-+#include <asm/hwcap.h>
-+#endif
- 
- /* We're going to re-use TCGType in setting of the SF bit, which controls
-    the size of the operation performed.  If we know the values match, it
-@@ -71,6 +74,9 @@ static TCGReg tcg_target_call_oarg_reg(TCGCallReturnKind kind, int slot)
-     return TCG_REG_X0 + slot;
- }
- 
-+bool have_lse;
-+bool have_lse2;
++    /* Via HAVE_al16_fast, FEAT_LSE2 is present: LDP becomes atomic. */
++    asm("ldp %0, %1, %2" : "=r"(l), "=r"(h) : "m"(*(__uint128_t *)pv));
 +
- #define TCG_REG_TMP TCG_REG_X30
- #define TCG_VEC_TMP TCG_REG_V31
++    qemu_build_assert(!HOST_BIG_ENDIAN);
++    return int128_make128(l, h);
+ #elif defined(__x86_64__) && defined(CONFIG_INT128)
+     Int128Alias r;
  
-@@ -2899,6 +2905,12 @@ static TCGConstraintSetIndex tcg_target_op_def(TCGOpcode op)
- 
- static void tcg_target_init(TCGContext *s)
- {
-+#ifdef __linux__
-+    unsigned long hwcap = qemu_getauxval(AT_HWCAP);
-+    have_lse = hwcap & HWCAP_ATOMICS;
-+    have_lse2 = hwcap & HWCAP_USCAT;
-+#endif
+@@ -412,6 +424,18 @@ load_atom_extract_al16_or_al8(void *pv, int s)
+         r = qatomic_read__nocheck(p16);
+     }
+     return r >> shr;
++#elif defined(__aarch64__)
++    /*
++     * Via HAVE_al16_fast, FEAT_LSE2 is present.
++     * LDP becomes single-copy atomic if 16-byte aligned, and
++     * single-copy atomic on the parts if 8-byte aligned.
++     */
++    uintptr_t pi = (uintptr_t)pv;
++    int shr = (pi & 7) * 8;
++    uint64_t l, h;
 +
-     tcg_target_available_regs[TCG_TYPE_I32] = 0xffffffffu;
-     tcg_target_available_regs[TCG_TYPE_I64] = 0xffffffffu;
-     tcg_target_available_regs[TCG_TYPE_V64] = 0xffffffff00000000ull;
++    asm("ldp %0, %1, %2" : "=r"(l), "=r"(h) : "m"(*(__uint128_t *)(pi & ~7)));
++    return (l >> shr) | (h << (-shr & 63));
+ #elif defined(__x86_64__) && defined(CONFIG_INT128)
+     uintptr_t pi = (uintptr_t)pv;
+     int shr = (pi & 7) * 8;
+@@ -767,10 +791,15 @@ store_atomic16(void *pv, Int128Alias val)
+         l = int128_getlo(val.s);
+         h = int128_gethi(val.s);
+ 
+-        asm("0: ldxp %0, xzr, %1\n\t"
+-            "stxp %w0, %2, %3, %1\n\t"
+-            "cbnz %w0, 0b"
+-            : "=&r"(t), "=Q"(*(__uint128_t *)pv) : "r"(l), "r"(h));
++        if (HAVE_al16_fast) {
++            /* Via HAVE_al16_fast, FEAT_LSE2 is present: STP becomes atomic. */
++            asm("stp %1, %2, %0" : "=Q"(*(__uint128_t *)pv) : "r"(l), "r"(h));
++        } else {
++            asm("0: ldxp %0, xzr, %1\n\t"
++                "stxp %w0, %2, %3, %1\n\t"
++                "cbnz %w0, 0b"
++                : "=&r"(t), "=Q"(*(__uint128_t *)pv) : "r"(l), "r"(h));
++        }
+         return;
+     }
+ #elif defined(CONFIG_CMPXCHG128)
 -- 
 2.34.1
 
