@@ -1,69 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pu6b9-000107-Bh
-	for mharc-qemu-riscv@gnu.org; Wed, 03 May 2023 03:08:23 -0400
+	id 1pu6bA-00016P-4o
+	for mharc-qemu-riscv@gnu.org; Wed, 03 May 2023 03:08:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pu6aT-0006nX-Eb
+ id 1pu6aT-0006lR-1k
  for qemu-riscv@nongnu.org; Wed, 03 May 2023 03:07:41 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pu6a2-0005Zw-Nw
- for qemu-riscv@nongnu.org; Wed, 03 May 2023 03:07:41 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-3f192c23fffso29495275e9.3
+ id 1pu6a2-0005iS-OC
+ for qemu-riscv@nongnu.org; Wed, 03 May 2023 03:07:40 -0400
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-3f19ab99540so46254755e9.2
  for <qemu-riscv@nongnu.org>; Wed, 03 May 2023 00:07:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683097633; x=1685689633;
+ d=linaro.org; s=google; t=1683097631; x=1685689631;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+GIQLXvELUmUJjDCvdIMzpNNEl1FqkUOfANtu8VRqCQ=;
- b=kW7RyYzhnra0RB3ORlNCLnWOiXv+sqggN9jEeSbp82XEhxiEgh/DeEEKjxK5fHgJpd
- oG47xNlek1jTTCbsqJJ7/vazBaUzBErBR9YkPRmRWtyeovwDhAzpOz9LmIufNFLZ9Nn6
- Xuq8JrebNdBTZBlOdrVr1XEj41DBd+Krl3usSnGPJIKdNU9d46cXx8nEwH6sTr5Wp7YT
- e7EkcBrL52EeWrKdZLdRqU0Xg+65aU372EE1BwM3nA8FjQQEi6WJf/R/+sZaxiGJ5yhA
- li53sbsdJGb7wwFQGCJtd8p5obCigOuzysh+Gvu6BX2EYFKbfR6p3RLJClR/SqSoudLv
- Oadw==
+ bh=SlwZz/TkkaqpzfKRH/vz8Q4X3wFSx4Ts4VLXAbAY/Hk=;
+ b=d5w3fu43/7Y/xej5/yLGS9lqNFyES0yCbEZrxvHIvzXTvmZ2QDreN6B8/U7YQvyPfT
+ D2xRNs5/JJjWUgA7IukBGjv2tyFUHX2gyTqNm5HtbxEFm0k4WDrMSMA3pO+fZZ+6DMzb
+ GMDNFlOLfTJ+UrazNaKA+Uw4FcJK9GJa1tJnPa4MAzXV//tfxyXUvDqxzmOGKIL3hpv5
+ qf4xt9GzqluXra+3KD2Kr752xoafJFVcZFl9dmi/kIMVI/vx/cpV8UAXXdCGacWf6CqJ
+ j0Dcts6kz9npVtk3Xx3FnFNryel4T9Fqcn+42/5AB/1OKLSeUZ7Q9Nraaa+hm8Xg000u
+ ky4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683097633; x=1685689633;
+ d=1e100.net; s=20221208; t=1683097631; x=1685689631;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+GIQLXvELUmUJjDCvdIMzpNNEl1FqkUOfANtu8VRqCQ=;
- b=af05a2M9xBK6YiarM5gtn+wX06/KrREvU/0ZJcyQ+fy/PbwO5Cpq6/9YSigaSaOvBO
- LozxbD3L4WQdaO2VqnaRJm7zhd6LQMFKSl3//RicP7/Za+FhMbBZfKa3uEToiJtb0Zcn
- Jiszjf7VBecVVo8gv2bFKSkjZCLIy1Dg/yDSaHpCTs3CWgwd7NzV5FYo3Y+1LEO84Niv
- dHE4JggSs5YXi1gYIJRyzMmKSsneTOjcPd0Y+lfcOMVN95+5NS/EHecdXHV8OfSclTaq
- /w237Spxq/zSTU7uPnGAc9wUYtJd4eQ3XX4Qs3PbJOpDTOeZU5TCqlrNQpSOauIXWyZS
- kBNw==
-X-Gm-Message-State: AC+VfDxxPSuzDeiEZUT/a2CKE5Rod8ONb5iFZAjz48bhuySHCOpQsDgx
- ufPc8oNz3Re/S++QG8Brjz6Ikw==
-X-Google-Smtp-Source: ACHHUZ5XlO9o3LDOKy8pVpT7yY0z9QlJSoxW4xmWI555a63u7/keuY5VssCvDAoVcISfNnu/q5BFOg==
-X-Received: by 2002:a5d:544c:0:b0:306:264d:5667 with SMTP id
- w12-20020a5d544c000000b00306264d5667mr8210349wrv.41.1683097632722; 
- Wed, 03 May 2023 00:07:12 -0700 (PDT)
+ bh=SlwZz/TkkaqpzfKRH/vz8Q4X3wFSx4Ts4VLXAbAY/Hk=;
+ b=JJZMGpYCabEknboX5eyCNgCj2AbJhkceu5UqP5mgKssqnzmN+Ai3P/Vtj8i/OLU+NC
+ dlwvQEGj4rwnT3twyZDxFFHmrL45u264kuWVlvqi+OHBaxvwkj6xfb38RGnLa6UER6Pg
+ Sse72k5PCx0RU/Oysgdy9CgyLNwEnL2r/jRdM1a8xDDso/404etaw09ra7mLbKq288Lh
+ nmfqVV9SBFB2Rhy1YZeJVZUm2wGqbj8uGbkzdQ57JlE0xMutmnLRsVC9gFLi9cv83kmf
+ /HwrOyEdYkUs7pTielDcw0PfMBlhwpco2pN05ww5zHzpC5KC2dY3cRAnSBR5mN4NDLsX
+ EdJA==
+X-Gm-Message-State: AC+VfDzuJ4D6qT/wPSjW9pTR435H/kmRHKmyu4M0ZT+c7YrXBfnk0UX1
+ niOQtHpT6+QgqsuGT0r9sFe9SQ==
+X-Google-Smtp-Source: ACHHUZ6BOfKdQn+9WNvyzifZRPjrRruJ/ZT6RyKALgb3mKCazm+IkVXiFDHKn037QkntkEpmmfXg6Q==
+X-Received: by 2002:a7b:ce07:0:b0:3f3:fed1:5a45 with SMTP id
+ m7-20020a7bce07000000b003f3fed15a45mr193544wmc.38.1683097631393; 
+ Wed, 03 May 2023 00:07:11 -0700 (PDT)
 Received: from stoup.Home ([2a02:c7c:74db:8d00:c01d:9d74:b630:9087])
  by smtp.gmail.com with ESMTPSA id
- q3-20020a1cf303000000b003f3157988f8sm921184wmq.26.2023.05.03.00.07.12
+ q3-20020a1cf303000000b003f3157988f8sm921184wmq.26.2023.05.03.00.07.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 May 2023 00:07:12 -0700 (PDT)
+ Wed, 03 May 2023 00:07:11 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: git@xen0n.name, gaosong@loongson.cn, philmd@linaro.org,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: [PATCH v4 20/57] tcg: Introduce TCG_OPF_TYPE_MASK
-Date: Wed,  3 May 2023 08:06:19 +0100
-Message-Id: <20230503070656.1746170-21-richard.henderson@linaro.org>
+Subject: [PATCH v4 18/57] tcg/aarch64: Detect have_lse, have_lse2 for darwin
+Date: Wed,  3 May 2023 08:06:17 +0100
+Message-Id: <20230503070656.1746170-19-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230503070656.1746170-1-richard.henderson@linaro.org>
 References: <20230503070656.1746170-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x32e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -85,144 +85,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 03 May 2023 07:07:41 -0000
 
-Reorg TCG_OPF_64BIT and TCG_OPF_VECTOR into a two-bit field so
-that we can add TCG_OPF_128BIT without requiring another bit.
+These features are present for Apple M1.
 
+Tested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- include/tcg/tcg.h            | 22 ++++++++++++----------
- tcg/optimize.c               | 15 ++++++++++++---
- tcg/tcg.c                    |  4 ++--
- tcg/aarch64/tcg-target.c.inc |  8 +++++---
- tcg/tci/tcg-target.c.inc     |  3 ++-
- 5 files changed, 33 insertions(+), 19 deletions(-)
+ tcg/aarch64/tcg-target.c.inc | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
 
-diff --git a/include/tcg/tcg.h b/include/tcg/tcg.h
-index b19e167e1d..efbd891f87 100644
---- a/include/tcg/tcg.h
-+++ b/include/tcg/tcg.h
-@@ -932,24 +932,26 @@ typedef struct TCGArgConstraint {
- 
- /* Bits for TCGOpDef->flags, 8 bits available, all used.  */
- enum {
-+    /* Two bits describing the output type. */
-+    TCG_OPF_TYPE_MASK    = 0x03,
-+    TCG_OPF_32BIT        = 0x00,
-+    TCG_OPF_64BIT        = 0x01,
-+    TCG_OPF_VECTOR       = 0x02,
-+    TCG_OPF_128BIT       = 0x03,
-     /* Instruction exits the translation block.  */
--    TCG_OPF_BB_EXIT      = 0x01,
-+    TCG_OPF_BB_EXIT      = 0x04,
-     /* Instruction defines the end of a basic block.  */
--    TCG_OPF_BB_END       = 0x02,
-+    TCG_OPF_BB_END       = 0x08,
-     /* Instruction clobbers call registers and potentially update globals.  */
--    TCG_OPF_CALL_CLOBBER = 0x04,
-+    TCG_OPF_CALL_CLOBBER = 0x10,
-     /* Instruction has side effects: it cannot be removed if its outputs
-        are not used, and might trigger exceptions.  */
--    TCG_OPF_SIDE_EFFECTS = 0x08,
--    /* Instruction operands are 64-bits (otherwise 32-bits).  */
--    TCG_OPF_64BIT        = 0x10,
-+    TCG_OPF_SIDE_EFFECTS = 0x20,
-     /* Instruction is optional and not implemented by the host, or insn
-        is generic and should not be implemened by the host.  */
--    TCG_OPF_NOT_PRESENT  = 0x20,
--    /* Instruction operands are vectors.  */
--    TCG_OPF_VECTOR       = 0x40,
-+    TCG_OPF_NOT_PRESENT  = 0x40,
-     /* Instruction is a conditional branch. */
--    TCG_OPF_COND_BRANCH  = 0x80
-+    TCG_OPF_COND_BRANCH  = 0x80,
- };
- 
- typedef struct TCGOpDef {
-diff --git a/tcg/optimize.c b/tcg/optimize.c
-index 9614fa3638..37d46f2a1f 100644
---- a/tcg/optimize.c
-+++ b/tcg/optimize.c
-@@ -2051,12 +2051,21 @@ void tcg_optimize(TCGContext *s)
-         copy_propagate(&ctx, op, def->nb_oargs, def->nb_iargs);
- 
-         /* Pre-compute the type of the operation. */
--        if (def->flags & TCG_OPF_VECTOR) {
-+        switch (def->flags & TCG_OPF_TYPE_MASK) {
-+        case TCG_OPF_VECTOR:
-             ctx.type = TCG_TYPE_V64 + TCGOP_VECL(op);
--        } else if (def->flags & TCG_OPF_64BIT) {
-+            break;
-+        case TCG_OPF_128BIT:
-+            ctx.type = TCG_TYPE_I128;
-+            break;
-+        case TCG_OPF_64BIT:
-             ctx.type = TCG_TYPE_I64;
--        } else {
-+            break;
-+        case TCG_OPF_32BIT:
-             ctx.type = TCG_TYPE_I32;
-+            break;
-+        default:
-+            qemu_build_not_reached();
-         }
- 
-         /* Assume all bits affected, no bits known zero, no sign reps. */
-diff --git a/tcg/tcg.c b/tcg/tcg.c
-index d0afabf194..cb5ca9b612 100644
---- a/tcg/tcg.c
-+++ b/tcg/tcg.c
-@@ -2294,7 +2294,7 @@ static void tcg_dump_ops(TCGContext *s, FILE *f, bool have_prefs)
-             nb_iargs = def->nb_iargs;
-             nb_cargs = def->nb_cargs;
- 
--            if (def->flags & TCG_OPF_VECTOR) {
-+            if ((def->flags & TCG_OPF_TYPE_MASK) == TCG_OPF_VECTOR) {
-                 col += ne_fprintf(f, "v%d,e%d,", 64 << TCGOP_VECL(op),
-                                   8 << TCGOP_VECE(op));
-             }
-@@ -4782,7 +4782,7 @@ static void tcg_reg_alloc_op(TCGContext *s, const TCGOp *op)
-         tcg_out_extrl_i64_i32(s, new_args[0], new_args[1]);
-         break;
-     default:
--        if (def->flags & TCG_OPF_VECTOR) {
-+        if ((def->flags & TCG_OPF_TYPE_MASK) == TCG_OPF_VECTOR) {
-             tcg_out_vec_op(s, op->opc, TCGOP_VECL(op), TCGOP_VECE(op),
-                            new_args, const_args);
-         } else {
 diff --git a/tcg/aarch64/tcg-target.c.inc b/tcg/aarch64/tcg-target.c.inc
-index 3adc5fd3a3..43acb4fbcb 100644
+index fc551a3d10..3adc5fd3a3 100644
 --- a/tcg/aarch64/tcg-target.c.inc
 +++ b/tcg/aarch64/tcg-target.c.inc
-@@ -1921,9 +1921,11 @@ static void tcg_out_op(TCGContext *s, TCGOpcode opc,
-                        const TCGArg args[TCG_MAX_OP_ARGS],
-                        const int const_args[TCG_MAX_OP_ARGS])
- {
--    /* 99% of the time, we can signal the use of extension registers
--       by looking to see if the opcode handles 64-bit data.  */
--    TCGType ext = (tcg_op_defs[opc].flags & TCG_OPF_64BIT) != 0;
+@@ -16,6 +16,9 @@
+ #ifdef __linux__
+ #include <asm/hwcap.h>
+ #endif
++#ifdef CONFIG_DARWIN
++#include <sys/sysctl.h>
++#endif
+ 
+ /* We're going to re-use TCGType in setting of the SF bit, which controls
+    the size of the operation performed.  If we know the values match, it
+@@ -2903,6 +2906,27 @@ static TCGConstraintSetIndex tcg_target_op_def(TCGOpcode op)
+     }
+ }
+ 
++#ifdef CONFIG_DARWIN
++static bool sysctl_for_bool(const char *name)
++{
++    int val = 0;
++    size_t len = sizeof(val);
++
++    if (sysctlbyname(name, &val, &len, NULL, 0) == 0) {
++        return val != 0;
++    }
++
 +    /*
-+     * 99% of the time, we can signal the use of extension registers
-+     * by looking to see if the opcode handles 32-bit data or not.
++     * We might in ask for properties not present in older kernels,
++     * but we're only asking about static properties, all of which
++     * should be 'int'.  So we shouln't see ENOMEM (val too small),
++     * or any of the other more exotic errors.
 +     */
-+    TCGType ext = (tcg_op_defs[opc].flags & TCG_OPF_TYPE_MASK) != TCG_OPF_32BIT;
++    assert(errno == ENOENT);
++    return false;
++}
++#endif
++
+ static void tcg_target_init(TCGContext *s)
+ {
+ #ifdef __linux__
+@@ -2910,6 +2934,10 @@ static void tcg_target_init(TCGContext *s)
+     have_lse = hwcap & HWCAP_ATOMICS;
+     have_lse2 = hwcap & HWCAP_USCAT;
+ #endif
++#ifdef CONFIG_DARWIN
++    have_lse = sysctl_for_bool("hw.optional.arm.FEAT_LSE");
++    have_lse2 = sysctl_for_bool("hw.optional.arm.FEAT_LSE2");
++#endif
  
-     /* Hoist the loads of the most common arguments.  */
-     TCGArg a0 = args[0];
-diff --git a/tcg/tci/tcg-target.c.inc b/tcg/tci/tcg-target.c.inc
-index 4cf03a579c..e31640d109 100644
---- a/tcg/tci/tcg-target.c.inc
-+++ b/tcg/tci/tcg-target.c.inc
-@@ -790,7 +790,8 @@ static void tcg_out_op(TCGContext *s, TCGOpcode opc,
-     CASE_32_64(sextract) /* Optional (TCG_TARGET_HAS_sextract_*). */
-         {
-             TCGArg pos = args[2], len = args[3];
--            TCGArg max = tcg_op_defs[opc].flags & TCG_OPF_64BIT ? 64 : 32;
-+            TCGArg max = ((tcg_op_defs[opc].flags & TCG_OPF_TYPE_MASK)
-+                          == TCG_OPF_32BIT ? 32 : 64);
- 
-             tcg_debug_assert(pos < max);
-             tcg_debug_assert(pos + len <= max);
+     tcg_target_available_regs[TCG_TYPE_I32] = 0xffffffffu;
+     tcg_target_available_regs[TCG_TYPE_I64] = 0xffffffffu;
 -- 
 2.34.1
 
