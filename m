@@ -1,69 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pu6SI-0001CI-Om
-	for mharc-qemu-riscv@gnu.org; Wed, 03 May 2023 02:59:14 -0400
+	id 1pu6SJ-0001JM-K1
+	for mharc-qemu-riscv@gnu.org; Wed, 03 May 2023 02:59:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pu6Rk-00009z-Ij
- for qemu-riscv@nongnu.org; Wed, 03 May 2023 02:58:49 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ id 1pu6Rk-00009m-D9
+ for qemu-riscv@nongnu.org; Wed, 03 May 2023 02:58:46 -0400
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pu6R3-0001tz-4M
- for qemu-riscv@nongnu.org; Wed, 03 May 2023 02:58:38 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-3f18335a870so29132725e9.0
- for <qemu-riscv@nongnu.org>; Tue, 02 May 2023 23:57:55 -0700 (PDT)
+ id 1pu6Qz-0001iD-TX
+ for qemu-riscv@nongnu.org; Wed, 03 May 2023 02:58:34 -0400
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-3f18335a870so29132515e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 02 May 2023 23:57:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683097074; x=1685689074;
+ d=linaro.org; s=google; t=1683097073; x=1685689073;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rivgwXGbdDw6Y7e7EyPZeewGUUT+LzpYCC2kVwog6co=;
- b=JtYdNU9sN5zax56+w/nOFwtjzYm9235USCd/ASxff05LCQz460gWS1GRAVI2/flN31
- m/TNJkfaxEnFeQYjDgLn6xHTIte+B+AsUCY5S4iEw/gYgYsaes3DwiOuis4UR+j797QF
- lE3ySWMRgnzADQUqpMBguWhJdMB0UjNlZgt8TeSFjN9YZwn6ZNqW5uYZBowmdWqtR9wm
- bjQVT7lbI6KZc0hvgHCUo4GXM33UoGTCY8WAFSb1plVD+TKTfcgCZFSPDJ+j8/5qtWSe
- Y2J4qAUmMiyScoOwehyBvl01EppLXS9u7tzLfkXgiaeGC8h/rWVJ2tQmgSDSCo1C02Ai
- /vSQ==
+ bh=Bq2h9X5UNDb637fCQb6pFT3eLaF1A8JaUegXUakX2qE=;
+ b=hR7LDUWjjoAZKm3sWKBp9w+OBdrqFzC0817vWjPQUfUKDWFeReoJZTrExxPnY3UIte
+ 2m8PKr+XxW8gMawUgGd21WObgIJrliGx/t0VCxwDfPFXy9/yzpaPX/63csKJAe+Du1mq
+ Is3Z1Eus37L13/1/CVuzmVmQesh0hTAkU5zM0pXcMqo/Jj7cAPwG8WYzG7CILdhdWGpC
+ DaHxHkN7A/xehb3wuDWVYwhE9krmKnqgmrQxX/fYiC1nOHCJneyqvut2ywTpGSriR+19
+ gRlJKTGlqOxoXBLzoqbGhQ356tE7pAUkIqMx3Bg51xGhZ6S436BXcK1rT7dxz19R+y+b
+ wy+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683097074; x=1685689074;
+ d=1e100.net; s=20221208; t=1683097073; x=1685689073;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rivgwXGbdDw6Y7e7EyPZeewGUUT+LzpYCC2kVwog6co=;
- b=MHMwTEP/EtpoRhdjo+qhU6n8s4JtRnTfk+azms0TjP6/VK7URlxXQAukHNYLIwjXX2
- jO51XBzf1/trADnBPo05MO5jyz0+IMX6pzOeAJNnqAZhkmMAtru4GvCRmT1moWZHmFp4
- SWJ9Ix3OlnkX6/Zz21sxxlLQXndYL3SAmVmw/Mu1acZ8cIj1KLx/kUrppyDzryHQvyLw
- MjXXcdkWLy6IxzeG9e3DWoxdBCmRShPL9fT6Ea+DgZ5HynS5klLVwN3BmCyCg4LnHZAa
- 8U7fxXSO+tvu8rComTapLmVAdyynIEH1skE1lBsMy0kaRZ6jSz9qoE8kGbJy0g+8QCEY
- JsCA==
-X-Gm-Message-State: AC+VfDwVDvMqUny0362+x1eBuyp9kTGYHEm8kSH0ZrRDMJoSDAO6khM6
- 0uZ7xI9yHJx5gD9+l2BZa/5QLw==
-X-Google-Smtp-Source: ACHHUZ49y6DIdspuO541lu0dOm6burJcv5ka40fJ12ViAJuPKPYoWPGrzwNxa4gzfY4vjKud/KFFHg==
-X-Received: by 2002:adf:f4c9:0:b0:306:27bc:f906 with SMTP id
- h9-20020adff4c9000000b0030627bcf906mr7861196wrp.67.1683097074610; 
- Tue, 02 May 2023 23:57:54 -0700 (PDT)
+ bh=Bq2h9X5UNDb637fCQb6pFT3eLaF1A8JaUegXUakX2qE=;
+ b=RmLc7qdHaMjoNlYLycI9VhXU/1rsv3jV5/bOyGN3YW0GYjrNUfkNRknFGdWyTl9u4P
+ 0k3ZJBPSkHbTPMDqt3c7vnOXXcbyWlcrybj5hYCODtpgInPida0K3FC+8cukV0b95QHO
+ LaODK+JiosXFlLtkNyxvUPxIGfR/8qO9ofgs4VBa5TsEnPAzr7zyjnsq5yWrk8w7ImwD
+ l4a/L0HSVNf+GIoxkUq6mRUiEjDTBkw4KQ3EfkUnLHOHclavhrEq9VvQrxAIIF7u9wGc
+ tl6J/82+htq1tZ4IgB2Yq52x3X4ov2DAGnjZRMI3BHgQOBOQtx64Z31UeNXw9h/aoI7x
+ dsEg==
+X-Gm-Message-State: AC+VfDzuXrnEVQBeIyR2YDWDPcumI+XdclmXnRIi6I48DYgMdiQ5qLRF
+ jZEcdfO0NKfLa3oOTWPyLRxi2A==
+X-Google-Smtp-Source: ACHHUZ7tzwdkXh08fuCCnPaPIe5AlYllLbQ7zqHUwgFuXgbJ5y4tzvhQHmb25wSKl53d92C382vYtg==
+X-Received: by 2002:a5d:474f:0:b0:306:2aa0:ce81 with SMTP id
+ o15-20020a5d474f000000b003062aa0ce81mr6509556wrs.30.1683097073091; 
+ Tue, 02 May 2023 23:57:53 -0700 (PDT)
 Received: from stoup.Home ([2a02:c7c:74db:8d00:c01d:9d74:b630:9087])
  by smtp.gmail.com with ESMTPSA id
- f6-20020a5d6646000000b002f6dafef040sm32796617wrw.12.2023.05.02.23.57.54
+ f6-20020a5d6646000000b002f6dafef040sm32796617wrw.12.2023.05.02.23.57.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 May 2023 23:57:54 -0700 (PDT)
+ Tue, 02 May 2023 23:57:52 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: git@xen0n.name, philmd@linaro.org, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: [PATCH v4 31/54] tcg: Replace REG_P with arg_loc_reg_p
-Date: Wed,  3 May 2023 07:57:06 +0100
-Message-Id: <20230503065729.1745843-32-richard.henderson@linaro.org>
+Subject: [PATCH v4 29/54] tcg/sparc64: Pass TCGType to tcg_out_qemu_{ld,st}
+Date: Wed,  3 May 2023 07:57:04 +0100
+Message-Id: <20230503065729.1745843-30-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230503065729.1745843-1-richard.henderson@linaro.org>
 References: <20230503065729.1745843-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,81 +83,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 May 2023 06:59:02 -0000
+X-List-Received-Date: Wed, 03 May 2023 06:58:54 -0000
 
-An inline function is safer than a macro, and REG_P
-was rather too generic.
+We need to set this in TCGLabelQemuLdst, so plumb this
+all the way through from tcg_out_op.
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- tcg/tcg-internal.h |  4 ----
- tcg/tcg.c          | 16 +++++++++++++---
- 2 files changed, 13 insertions(+), 7 deletions(-)
+ tcg/sparc64/tcg-target.c.inc | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/tcg/tcg-internal.h b/tcg/tcg-internal.h
-index e542a4e9b7..0f1ba01a9a 100644
---- a/tcg/tcg-internal.h
-+++ b/tcg/tcg-internal.h
-@@ -58,10 +58,6 @@ typedef struct TCGCallArgumentLoc {
-     unsigned tmp_subindex       : 2;
- } TCGCallArgumentLoc;
+diff --git a/tcg/sparc64/tcg-target.c.inc b/tcg/sparc64/tcg-target.c.inc
+index dbe4bf96b9..7e6466d3b6 100644
+--- a/tcg/sparc64/tcg-target.c.inc
++++ b/tcg/sparc64/tcg-target.c.inc
+@@ -1178,7 +1178,7 @@ static const int qemu_st_opc[(MO_SIZE | MO_BSWAP) + 1] = {
+ };
  
--/* Avoid "unsigned < 0 is always false" Werror, when iarg_regs is empty. */
--#define REG_P(L) \
--    ((int)(L)->arg_slot < (int)ARRAY_SIZE(tcg_target_call_iarg_regs))
--
- typedef struct TCGHelperInfo {
-     void *func;
-     const char *name;
-diff --git a/tcg/tcg.c b/tcg/tcg.c
-index 6f5daaee5f..fa28db0188 100644
---- a/tcg/tcg.c
-+++ b/tcg/tcg.c
-@@ -806,6 +806,16 @@ static void init_ffi_layouts(void)
- }
- #endif /* CONFIG_TCG_INTERPRETER */
- 
-+static inline bool arg_slot_reg_p(unsigned arg_slot)
-+{
-+    /*
-+     * Split the sizeof away from the comparison to avoid Werror from
-+     * "unsigned < 0 is always false", when iarg_regs is empty.
-+     */
-+    unsigned nreg = ARRAY_SIZE(tcg_target_call_iarg_regs);
-+    return arg_slot < nreg;
-+}
-+
- typedef struct TCGCumulativeArgs {
-     int arg_idx;                /* tcg_gen_callN args[] */
-     int info_in_idx;            /* TCGHelperInfo in[] */
-@@ -3231,7 +3241,7 @@ liveness_pass_1(TCGContext *s)
-                         case TCG_CALL_ARG_NORMAL:
-                         case TCG_CALL_ARG_EXTEND_U:
-                         case TCG_CALL_ARG_EXTEND_S:
--                            if (REG_P(loc)) {
-+                            if (arg_slot_reg_p(loc->arg_slot)) {
-                                 *la_temp_pref(ts) = 0;
-                                 break;
-                             }
-@@ -3258,7 +3268,7 @@ liveness_pass_1(TCGContext *s)
-                     case TCG_CALL_ARG_NORMAL:
-                     case TCG_CALL_ARG_EXTEND_U:
-                     case TCG_CALL_ARG_EXTEND_S:
--                        if (REG_P(loc)) {
-+                        if (arg_slot_reg_p(loc->arg_slot)) {
-                             tcg_regset_set_reg(*la_temp_pref(ts),
-                                 tcg_target_call_iarg_regs[loc->arg_slot]);
-                         }
-@@ -4833,7 +4843,7 @@ static void load_arg_stk(TCGContext *s, int stk_slot, TCGTemp *ts,
- static void load_arg_normal(TCGContext *s, const TCGCallArgumentLoc *l,
-                             TCGTemp *ts, TCGRegSet *allocated_regs)
+ static void tcg_out_qemu_ld(TCGContext *s, TCGReg data, TCGReg addr,
+-                            MemOpIdx oi, bool is_64)
++                            MemOpIdx oi, TCGType data_type)
  {
--    if (REG_P(l)) {
-+    if (arg_slot_reg_p(l->arg_slot)) {
-         TCGReg reg = tcg_target_call_iarg_regs[l->arg_slot];
-         load_arg_reg(s, reg, ts, *allocated_regs);
-         tcg_regset_set_reg(*allocated_regs, reg);
+     MemOp memop = get_memop(oi);
+     tcg_insn_unit *label_ptr;
+@@ -1636,10 +1636,10 @@ static void tcg_out_op(TCGContext *s, TCGOpcode opc,
+         break;
+ 
+     case INDEX_op_qemu_ld_i32:
+-        tcg_out_qemu_ld(s, a0, a1, a2, false);
++        tcg_out_qemu_ld(s, a0, a1, a2, TCG_TYPE_I32);
+         break;
+     case INDEX_op_qemu_ld_i64:
+-        tcg_out_qemu_ld(s, a0, a1, a2, true);
++        tcg_out_qemu_ld(s, a0, a1, a2, TCG_TYPE_I64);
+         break;
+     case INDEX_op_qemu_st_i32:
+         tcg_out_qemu_st(s, a0, a1, a2, TCG_TYPE_I32);
 -- 
 2.34.1
 
