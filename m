@@ -1,69 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pu6Uv-00076K-25
+	id 1pu6Uv-0007Bc-N3
 	for mharc-qemu-riscv@gnu.org; Wed, 03 May 2023 03:01:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pu6UE-00064i-5O
- for qemu-riscv@nongnu.org; Wed, 03 May 2023 03:01:15 -0400
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ id 1pu6UH-000699-Ao
+ for qemu-riscv@nongnu.org; Wed, 03 May 2023 03:01:21 -0400
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pu6U6-00038U-J5
- for qemu-riscv@nongnu.org; Wed, 03 May 2023 03:01:13 -0400
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-3f18dacd392so29550475e9.0
- for <qemu-riscv@nongnu.org>; Wed, 03 May 2023 00:01:04 -0700 (PDT)
+ id 1pu6U6-00039C-KI
+ for qemu-riscv@nongnu.org; Wed, 03 May 2023 03:01:17 -0400
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-3f1728c2a57so47565025e9.0
+ for <qemu-riscv@nongnu.org>; Wed, 03 May 2023 00:01:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683097263; x=1685689263;
+ d=linaro.org; s=google; t=1683097264; x=1685689264;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Mj3a+zcWVqs2C3w0reTnX7wZZ61td92YW4iK8rO87Zg=;
- b=b0Ez72VVo5hAUQZeXMwXjlELdflMX6uvKMg9B+W28E1aJHg6ywgSVu7WeaW7wA/lM5
- v/mEmJ/ilUl6hr4Y6MAkx+59t+ME+LD3ujdnSPHwY31C/ASQ8Qw5VHL9M97b8nncA6GX
- ACpittC0cowBdmhLPP2ZfdPsxqke6C8D8a1GF6REcon9V19kKz1M9YwX7bMwN2ZqUq3G
- nuZVcEWt7g1wdykiLhAWnOCIANoKjBeW2UptQ5mhYDX1ADq3zTsbEVoAoE3K+9NA3Il3
- pafNkvambBY7gz7l9OpAWlLXVm6eW4lwcx4kE/hshWoAu23OrEo90aG+fThQaWrKu7xZ
- SepA==
+ bh=I/zSZo4J7v0p5c8aMIcv0bwGQ0NvaaNKP+yN/zUi81E=;
+ b=n25NmJDyb9X7KuCxytueShxDeF/Q5E2vJEI5Roj5QIfBBTbuWZOB7D968T0EkIVZb0
+ xABw6qXFV24T++EWq25H6eGbjTd+b1MlAcdy55qA1kRFOdinr9oYiW5Kkzt4NfmU42MZ
+ gYvOffm97mCx01xkhXEEx32AMPtBkjG+wtPg4ZfcQruB0XoVPh2h0+deFdnIkY/BH+TK
+ nRdPlqf7xGJd/yq2JnQmnFw/MXXi0Cdzra9+LWcVbT1XQcqYR7gMHwt1P6O7KJ/v3Rp7
+ 7+Zy20dyxB/xXRKgqC9c0eJuXA8isrjpbO7BjJuZpukHxt+b7dvBCi3AL1Bwq3/Eznth
+ 1Y2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683097263; x=1685689263;
+ d=1e100.net; s=20221208; t=1683097264; x=1685689264;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Mj3a+zcWVqs2C3w0reTnX7wZZ61td92YW4iK8rO87Zg=;
- b=QNi1I8thvmE135dOG9bAdkD7G3bj2RXh6befo0WaCwVJiEohxpcypEXXgMRZtQFJfd
- 4gUnMVGafr+RodKcfKjo0DDIP2IZapfJK12ABfotnv4nzAFB8fGv3sGJAwIPTG260Pmc
- cx2Ijc8hoeT2ubAPLlF3i+z4/vYJYgEN4dkeoEgHP1s5fe2d0SBC4XEKIx5li6llJL1f
- qz4M96XQrpojQ5ZyqMe5sL3PaO8xN7n36v2GQbQ0NECgC2wJ+f96BhANivmnqGPmo94c
- Gz1A+e2wlwt7imPmBWbPAXkv+wMlJHJ2eFgmvC6PSKdM9t04EJ6XMFZTaBBdFt+QOh3b
- HScA==
-X-Gm-Message-State: AC+VfDyl7oz3JN/8a3LuQJhjMz6Ndl77OL6AS7QEA7jsuL4qLt5VcP9B
- cIC9irP9h2zM9vCLm8DIkSJDhA==
-X-Google-Smtp-Source: ACHHUZ6tQPosyjiG1P218rGD611TcWytB/PDNUwFgpD0jUjxj2NUPCr3QwgsPwJC0XN11T+D64M+dQ==
-X-Received: by 2002:a05:600c:22d2:b0:3f1:6458:99a7 with SMTP id
- 18-20020a05600c22d200b003f1645899a7mr14101171wmg.38.1683097263182; 
- Wed, 03 May 2023 00:01:03 -0700 (PDT)
+ bh=I/zSZo4J7v0p5c8aMIcv0bwGQ0NvaaNKP+yN/zUi81E=;
+ b=lFfoVy3wLBYJML4YY+xhXl6VabfrFymklNAA72a8RSEeG8ZoUuIdJSc6jf8bnPWEEX
+ +R22EQeZptuQPuiK+bApe6HEsqBcD20/vHRpXTQbU4ZfVfHpKqBt4DRfxuSXeUCwaAyP
+ 1KUv6Si9drTxcAspeteBCmb9pKILFQj3ae9hYmuVlA4UQduUh0CASW28QDoLhkIAEJ0Z
+ RTQfmDS63VB5O+W+KAqMkP204c68tD1scUw/eGCU3dQ5zWQsHDbtUf9M8hfCsA2VrxPn
+ H8uc2+Q2Z4MMNklngWvWcpmENkTHIkWUt/C5ggg3atFkjMY1ZpG3L4RkxDQbJgiaVdIa
+ CLng==
+X-Gm-Message-State: AC+VfDwWqvRYZGuhARlk5jn2cmuQjz48/GRO4se4sY7vExZ4a2r0JYvi
+ CNKwSgzX4xntRkRDNbKxGScD3v/R6Ld90gdzjGbAdQ==
+X-Google-Smtp-Source: ACHHUZ4OC7lBGs/qbLRfNoS/bCBu3ksDBzUNDuQi0oi3e15BdPkQNHHdwGBUN/pz5gWjpvnik6qXoQ==
+X-Received: by 2002:a1c:4c0b:0:b0:3f1:82ba:b03f with SMTP id
+ z11-20020a1c4c0b000000b003f182bab03fmr13101628wmf.18.1683097264562; 
+ Wed, 03 May 2023 00:01:04 -0700 (PDT)
 Received: from stoup.Home ([2a02:c7c:74db:8d00:c01d:9d74:b630:9087])
  by smtp.gmail.com with ESMTPSA id
- l2-20020a1ced02000000b003f19b3d89e9sm905035wmh.33.2023.05.03.00.01.02
+ l2-20020a1ced02000000b003f19b3d89e9sm905035wmh.33.2023.05.03.00.01.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 May 2023 00:01:02 -0700 (PDT)
+ Wed, 03 May 2023 00:01:04 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: git@xen0n.name, philmd@linaro.org, qemu-arm@nongnu.org,
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v4 42/54] tcg/riscv: Convert tcg_out_qemu_{ld,st}_slow_path
-Date: Wed,  3 May 2023 07:57:17 +0100
-Message-Id: <20230503065729.1745843-43-richard.henderson@linaro.org>
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
+Subject: [PATCH v4 44/54] tcg/loongarch64: Simplify constraints on qemu_ld/st
+Date: Wed,  3 May 2023 07:57:19 +0100
+Message-Id: <20230503065729.1745843-45-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230503065729.1745843-1-richard.henderson@linaro.org>
 References: <20230503065729.1745843-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,89 +82,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 May 2023 07:01:22 -0000
+X-List-Received-Date: Wed, 03 May 2023 07:01:23 -0000
 
-Use tcg_out_ld_helper_args, tcg_out_ld_helper_ret,
-and tcg_out_st_helper_args.
+The softmmu tlb uses TCG_REG_TMP[0-2], not any of the normally available
+registers.  Now that we handle overlap betwen inputs and helper arguments,
+we can allow any allocatable reg.
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- tcg/riscv/tcg-target.c.inc | 37 ++++++++++---------------------------
- 1 file changed, 10 insertions(+), 27 deletions(-)
+ tcg/loongarch64/tcg-target-con-set.h |  2 --
+ tcg/loongarch64/tcg-target-con-str.h |  1 -
+ tcg/loongarch64/tcg-target.c.inc     | 23 ++++-------------------
+ 3 files changed, 4 insertions(+), 22 deletions(-)
 
-diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
-index 2b2d313fe2..c22d1e35ac 100644
---- a/tcg/riscv/tcg-target.c.inc
-+++ b/tcg/riscv/tcg-target.c.inc
-@@ -906,14 +906,14 @@ static void tcg_out_goto(TCGContext *s, const tcg_insn_unit *target)
-     tcg_debug_assert(ok);
- }
+diff --git a/tcg/loongarch64/tcg-target-con-set.h b/tcg/loongarch64/tcg-target-con-set.h
+index 172c107289..c2bde44613 100644
+--- a/tcg/loongarch64/tcg-target-con-set.h
++++ b/tcg/loongarch64/tcg-target-con-set.h
+@@ -17,9 +17,7 @@
+ C_O0_I1(r)
+ C_O0_I2(rZ, r)
+ C_O0_I2(rZ, rZ)
+-C_O0_I2(LZ, L)
+ C_O1_I1(r, r)
+-C_O1_I1(r, L)
+ C_O1_I2(r, r, rC)
+ C_O1_I2(r, r, ri)
+ C_O1_I2(r, r, rI)
+diff --git a/tcg/loongarch64/tcg-target-con-str.h b/tcg/loongarch64/tcg-target-con-str.h
+index 541ff47fa9..6e9ccca3ad 100644
+--- a/tcg/loongarch64/tcg-target-con-str.h
++++ b/tcg/loongarch64/tcg-target-con-str.h
+@@ -14,7 +14,6 @@
+  * REGS(letter, register_mask)
+  */
+ REGS('r', ALL_GENERAL_REGS)
+-REGS('L', ALL_GENERAL_REGS & ~SOFTMMU_RESERVE_REGS)
  
-+/* We have three temps, we might as well expose them. */
-+static const TCGLdstHelperParam ldst_helper_param = {
-+    .ntmp = 3, .tmp = { TCG_REG_TMP0, TCG_REG_TMP1, TCG_REG_TMP2 }
-+};
-+
- static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
- {
--    MemOpIdx oi = l->oi;
--    MemOp opc = get_memop(oi);
--    TCGReg a0 = tcg_target_call_iarg_regs[0];
--    TCGReg a1 = tcg_target_call_iarg_regs[1];
--    TCGReg a2 = tcg_target_call_iarg_regs[2];
--    TCGReg a3 = tcg_target_call_iarg_regs[3];
-+    MemOp opc = get_memop(l->oi);
+ /*
+  * Define constraint letters for constants:
+diff --git a/tcg/loongarch64/tcg-target.c.inc b/tcg/loongarch64/tcg-target.c.inc
+index 60d2c904dd..83fa45c802 100644
+--- a/tcg/loongarch64/tcg-target.c.inc
++++ b/tcg/loongarch64/tcg-target.c.inc
+@@ -133,18 +133,7 @@ static TCGReg tcg_target_call_oarg_reg(TCGCallReturnKind kind, int slot)
+ #define TCG_CT_CONST_C12   0x1000
+ #define TCG_CT_CONST_WSZ   0x2000
  
-     /* resolve label address */
-     if (!reloc_sbimm12(l->label_ptr[0], tcg_splitwx_to_rx(s->code_ptr))) {
-@@ -921,13 +921,9 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
-     }
- 
-     /* call load helper */
--    tcg_out_mov(s, TCG_TYPE_PTR, a0, TCG_AREG0);
--    tcg_out_mov(s, TCG_TYPE_PTR, a1, l->addrlo_reg);
--    tcg_out_movi(s, TCG_TYPE_PTR, a2, oi);
--    tcg_out_movi(s, TCG_TYPE_PTR, a3, (tcg_target_long)l->raddr);
+-#define ALL_GENERAL_REGS      MAKE_64BIT_MASK(0, 32)
+-/*
+- * For softmmu, we need to avoid conflicts with the first 5
+- * argument registers to call the helper.  Some of these are
+- * also used for the tlb lookup.
+- */
+-#ifdef CONFIG_SOFTMMU
+-#define SOFTMMU_RESERVE_REGS  MAKE_64BIT_MASK(TCG_REG_A0, 5)
+-#else
+-#define SOFTMMU_RESERVE_REGS  0
+-#endif
 -
-+    tcg_out_ld_helper_args(s, l, &ldst_helper_param);
-     tcg_out_call_int(s, qemu_ld_helpers[opc & MO_SSIZE], false);
--    tcg_out_mov(s, (opc & MO_SIZE) == MO_64, l->datalo_reg, a0);
-+    tcg_out_ld_helper_ret(s, l, true, &ldst_helper_param);
++#define ALL_GENERAL_REGS   MAKE_64BIT_MASK(0, 32)
  
-     tcg_out_goto(s, l->raddr);
-     return true;
-@@ -935,14 +931,7 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
- 
- static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+ static inline tcg_target_long sextreg(tcg_target_long val, int pos, int len)
  {
--    MemOpIdx oi = l->oi;
--    MemOp opc = get_memop(oi);
--    MemOp s_bits = opc & MO_SIZE;
--    TCGReg a0 = tcg_target_call_iarg_regs[0];
--    TCGReg a1 = tcg_target_call_iarg_regs[1];
--    TCGReg a2 = tcg_target_call_iarg_regs[2];
--    TCGReg a3 = tcg_target_call_iarg_regs[3];
--    TCGReg a4 = tcg_target_call_iarg_regs[4];
-+    MemOp opc = get_memop(l->oi);
+@@ -1541,16 +1530,14 @@ static TCGConstraintSetIndex tcg_target_op_def(TCGOpcode op)
+     case INDEX_op_st32_i64:
+     case INDEX_op_st_i32:
+     case INDEX_op_st_i64:
++    case INDEX_op_qemu_st_i32:
++    case INDEX_op_qemu_st_i64:
+         return C_O0_I2(rZ, r);
  
-     /* resolve label address */
-     if (!reloc_sbimm12(l->label_ptr[0], tcg_splitwx_to_rx(s->code_ptr))) {
-@@ -950,13 +939,7 @@ static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
-     }
+     case INDEX_op_brcond_i32:
+     case INDEX_op_brcond_i64:
+         return C_O0_I2(rZ, rZ);
  
-     /* call store helper */
--    tcg_out_mov(s, TCG_TYPE_PTR, a0, TCG_AREG0);
--    tcg_out_mov(s, TCG_TYPE_PTR, a1, l->addrlo_reg);
--    tcg_out_movext(s, s_bits == MO_64 ? TCG_TYPE_I64 : TCG_TYPE_I32, a2,
--                   l->type, s_bits, l->datalo_reg);
--    tcg_out_movi(s, TCG_TYPE_PTR, a3, oi);
--    tcg_out_movi(s, TCG_TYPE_PTR, a4, (tcg_target_long)l->raddr);
+-    case INDEX_op_qemu_st_i32:
+-    case INDEX_op_qemu_st_i64:
+-        return C_O0_I2(LZ, L);
 -
-+    tcg_out_st_helper_args(s, l, &ldst_helper_param);
-     tcg_out_call_int(s, qemu_st_helpers[opc & MO_SIZE], false);
+     case INDEX_op_ext8s_i32:
+     case INDEX_op_ext8s_i64:
+     case INDEX_op_ext8u_i32:
+@@ -1586,11 +1573,9 @@ static TCGConstraintSetIndex tcg_target_op_def(TCGOpcode op)
+     case INDEX_op_ld32u_i64:
+     case INDEX_op_ld_i32:
+     case INDEX_op_ld_i64:
+-        return C_O1_I1(r, r);
+-
+     case INDEX_op_qemu_ld_i32:
+     case INDEX_op_qemu_ld_i64:
+-        return C_O1_I1(r, L);
++        return C_O1_I1(r, r);
  
-     tcg_out_goto(s, l->raddr);
+     case INDEX_op_andc_i32:
+     case INDEX_op_andc_i64:
 -- 
 2.34.1
 
