@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1puaJe-0001LV-Sz
-	for mharc-qemu-riscv@gnu.org; Thu, 04 May 2023 10:52:18 -0400
+	id 1puaNZ-0002J7-S3
+	for mharc-qemu-riscv@gnu.org; Thu, 04 May 2023 10:56:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1puaH3-00011f-Ee
- for qemu-riscv@nongnu.org; Thu, 04 May 2023 10:49:37 -0400
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
+ id 1puaJq-0001MO-Rh
+ for qemu-riscv@nongnu.org; Thu, 04 May 2023 10:52:30 -0400
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1puaH1-0005PX-0u
- for qemu-riscv@nongnu.org; Thu, 04 May 2023 10:49:37 -0400
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-50b9ef67f35so1058514a12.2
- for <qemu-riscv@nongnu.org>; Thu, 04 May 2023 07:49:33 -0700 (PDT)
+ id 1puaJo-0007Z3-37
+ for qemu-riscv@nongnu.org; Thu, 04 May 2023 10:52:30 -0400
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-50bc4ba28cbso1087849a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 04 May 2023 07:52:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683211772; x=1685803772;
+ d=linaro.org; s=google; t=1683211946; x=1685803946;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GstM3uCHYYNhP7vLiPGJkNr4X7whCpAksFGwpTC8qGk=;
- b=L2l7e6kwZ1zye5vBA5JdgavpVPQ7GTz44lHYC6AEIk7v0AEJrm8IPT7kjZw8AqEuha
- Oeq743CGnnivzMnMGw/pjN3kQG3GSGepO2aLIduH91A3a4nQIMD2zYF3SySSykXhaKPm
- GWRMdCZmB4sNTmFIB069ufP85Q24wiNjo0fKaH1vMW6D7kniTS1r3OGUvSCKX9nmgDEN
- cv4NF+vI04OzZH+/t8FZBzrKuIfVfOO44Z+yT/ibj6SFd/xTtBHcibj0wC6xVJRQxev+
- tzGkG+cAqyEl9513J5JVBXHYIC1Stbzm9TKnaLRra4xU72y4ouH2AYbs/pRz01xh6tgq
- VQ3A==
+ bh=1B2FvgWAY8kZexn4DUNfwK8A+zUkKYUqoSQ25ES1gXQ=;
+ b=EeyyITikCWVvyGsXCeHqpo6ZKAwjha76TE5ohfZGJT1wv8BmibvlhZUednv1B/Fb4s
+ g2Y3830rB1c7b9xqAs3WKh/jfxhRXvsGPW1yWKlos7oeK8+u7w/JiiAO0NQVn5bDOktu
+ XxNrnFbQr8j0wHWrTM4QbqtgR1bdak7xUhiY2LmVdd8l+rMMkbvXrrmz92N+ulvgr5oO
+ TSNBnh93EEfQB5y8nkmRakD7Se5HgI5Bsp69Fx7dVANutlSHHNK+cRwhF02gC7GxKvBX
+ Iv5aFXyuGYOt6unM5O7AhbxJmaiH5eKXMiF8Lo1VLjT0sRKsgieURqNNVCbtWXKhzJRH
+ 3y0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683211772; x=1685803772;
+ d=1e100.net; s=20221208; t=1683211946; x=1685803946;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GstM3uCHYYNhP7vLiPGJkNr4X7whCpAksFGwpTC8qGk=;
- b=TMBruw9w3oeSAwiYIQu3EZNFg6bm7IM0uRzuw41PG3RzdhMAWm2JVXTlDXnkvlQpk+
- 4d5+aj8Kx+fDGchselUpdAdt7wQmyPgzHvqukkhb5feiEtgBnR4mTnNyOpIHUGpQJE4n
- 1tgWDMu0zDtfFpuIpdlw9Dbuak4SxleFl4WQBEZxJZ3RAe3RVVJEQ0otjyedq0z45V01
- 10eOEAXVaRIZLv8OYhoJzILRtL5j+NHakFCqklELIEREUBxIkDXew+40V8rcQzqMd3ya
- FosJ/OBg9SmMzbZzzEqJ3D8rUSmbcIklrkHJBNzgbTZ99D1CiZkya1f2170fvHTssjYj
- pXJQ==
-X-Gm-Message-State: AC+VfDzNbAp4tr4Vh9OQPFGHbR5MKNF8WNVGB98nsOsjG+eT1QTwMm66
- 2KtUOptCA54U2F1mJntdOmypu6XX1abUd8/xxhLu/Q==
-X-Google-Smtp-Source: ACHHUZ7BNquxS80Ct2PDV2DD4UP2fAat2wEb/hwwhGO/o0Jjj7xWdEBC6yBmBLMujI/zpMysprCXfKe6IscCnjLz56I=
-X-Received: by 2002:aa7:cc11:0:b0:50b:dcf6:8e6d with SMTP id
- q17-20020aa7cc11000000b0050bdcf68e6dmr1429493edt.18.1683211772386; Thu, 04
- May 2023 07:49:32 -0700 (PDT)
+ bh=1B2FvgWAY8kZexn4DUNfwK8A+zUkKYUqoSQ25ES1gXQ=;
+ b=ervmpD0tugggaRAwDEhK4swL124tE5eyFOrr2kzhulV+5ZzQMjWiuGzpDddkj05+vA
+ Zid2Y1XL9XmRI4zxnIbNY00NF48nbTJJLkSCScVEMysOkXcdtFnCV5Rp+B5THPqjyLg4
+ zVyp3xE+NXhHI0b67hAgqhWPpdGCu0aduEg1CUCACQfgFJC21uivVByp7AmkXNz5+t1E
+ Pm7pv7Yf2ePMTIYO03BAFNP3bm8paF6cXW73o3ZxtHdJ9mFJj0l1M9EyNJjp8R7IGtRa
+ lQXB0u4KGmsxptFqQCeYY9+S2QkeqlOh8FF61F4sd3ri71e+d/cXYrRMSxnKbakgDPx5
+ Aksw==
+X-Gm-Message-State: AC+VfDwF7DYwLXtL1EutsvvFaYLJo7QkoLpPOOYfollFicMkOO1VB5kb
+ RioMrc51Pq6hMvEvhudCKNRVXTz7uc81W0SSBckaDg==
+X-Google-Smtp-Source: ACHHUZ4ctO8tcI2bcUG03yRTCTfOpKiGeoxdPptrjnNleozGXeclD/XYlWu4X2kNshXZAvMkh6fNhSZkQed89QTtdsw=
+X-Received: by 2002:a50:ec82:0:b0:50c:1e2:4a42 with SMTP id
+ e2-20020a50ec82000000b0050c01e24a42mr1720198edr.15.1683211946558; Thu, 04 May
+ 2023 07:52:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230503070656.1746170-1-richard.henderson@linaro.org>
- <20230503070656.1746170-2-richard.henderson@linaro.org>
-In-Reply-To: <20230503070656.1746170-2-richard.henderson@linaro.org>
+References: <20230425193146.2106111-1-richard.henderson@linaro.org>
+ <20230425193146.2106111-3-richard.henderson@linaro.org>
+In-Reply-To: <20230425193146.2106111-3-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 4 May 2023 15:49:21 +0100
-Message-ID: <CAFEAcA8k-4Obf9njjX9zcBTLhS3vdUNyeYYLSb3wTiy5nJyS7w@mail.gmail.com>
-Subject: Re: [PATCH v4 01/57] include/exec/memop: Add bits describing atomicity
+Date: Thu, 4 May 2023 15:52:15 +0100
+Message-ID: <CAFEAcA8YaS1HRypydW25tTtB5D0XdO-m9y1OHxVCDOcpWtWgQg@mail.gmail.com>
+Subject: Re: [PATCH v3 02/57] accel/tcg: Add cpu_in_serial_context
 To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn, 
- philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
- qemu-s390x@nongnu.org, =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-s390x@nongnu.org, 
+ qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, git@xen0n.name, 
+ jiaxun.yang@flygoat.com, philmd@linaro.org, 
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x52f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -79,91 +80,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 May 2023 14:49:37 -0000
+X-List-Received-Date: Thu, 04 May 2023 14:52:31 -0000
 
-On Wed, 3 May 2023 at 08:11, Richard Henderson
+On Tue, 25 Apr 2023 at 20:33, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> These bits may be used to describe the precise atomicity
-> requirements of the guest, which may then be used to
-> constrain the methods by which it may be emulated by the host.
+> Like cpu_in_exclusive_context, but also true if
+> there is no other cpu against which we could race.
 >
-> For instance, the AArch64 LDP (32-bit) instruction changes
-> semantics with ARMv8.4 LSE2, from
->
->   MO_64 | MO_ATMAX_4 | MO_ATOM_IFALIGN
->   (64-bits, single-copy atomic only on 4 byte units,
->    nonatomic if not aligned by 4),
->
-> to
->
->   MO_64 | MO_ATMAX_SIZE | MO_ATOM_WITHIN16
->   (64-bits, single-copy atomic within a 16 byte block)
->
-> The former may be implemented with two 4 byte loads, or
-> a single 8 byte load if that happens to be efficient on
-> the host.  The latter may not, and may also require a
-> helper when misaligned.
+> Use it in tb_flush as a direct replacement.
+> Use it in cpu_loop_exit_atomic to ensure that there
+> is no loop against cpu_exec_step_atomic.
 >
 > Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 > Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  include/exec/memop.h | 36 ++++++++++++++++++++++++++++++++++++
->  1 file changed, 36 insertions(+)
+>  accel/tcg/internal.h        | 5 +++++
+>  accel/tcg/cpu-exec-common.c | 3 +++
+>  accel/tcg/tb-maint.c        | 2 +-
+>  3 files changed, 9 insertions(+), 1 deletion(-)
 >
-> diff --git a/include/exec/memop.h b/include/exec/memop.h
-> index 25d027434a..04e4048f0b 100644
-> --- a/include/exec/memop.h
-> +++ b/include/exec/memop.h
-> @@ -81,6 +81,42 @@ typedef enum MemOp {
->      MO_ALIGN_32 =3D 5 << MO_ASHIFT,
->      MO_ALIGN_64 =3D 6 << MO_ASHIFT,
+> diff --git a/accel/tcg/internal.h b/accel/tcg/internal.h
+> index 96f198b28b..8250ecbf74 100644
+> --- a/accel/tcg/internal.h
+> +++ b/accel/tcg/internal.h
+> @@ -64,6 +64,11 @@ static inline target_ulong log_pc(CPUState *cpu, const=
+ TranslationBlock *tb)
+>      }
+>  }
 >
-> +    /*
-> +     * MO_ATOM_* describes that atomicity requirements of the operation:
+> +static inline bool cpu_in_serial_context(CPUState *cs)
+> +{
+> +    return !(cs->tcg_cflags & CF_PARALLEL) || cpu_in_exclusive_context(c=
+s);
+> +}
 
-"the atomicity requirements"
-
-> +     * MO_ATOM_IFALIGN: the operation must be single-copy atomic if and
-> +     *    only if it is aligned; if unaligned there is no atomicity.
-
-Is this really "and only if", ie "must *not* be single-copy-atomic if
-non aligned"? Plain old "if" seems more likely...
-
-> +     * MO_ATOM_NONE: the operation has no atomicity requirements.
-> +     * MO_ATOM_SUBALIGN: the operation is single-copy atomic by parts
-> +     *    by the alignment.  E.g. if the address is 0 mod 4, then each
-> +     *    4-byte subobject is single-copy atomic.
-> +     *    This is the atomicity of IBM Power and S390X processors.
-> +     * MO_ATOM_WITHIN16: the operation is single-copy atomic, even if it
-> +     *    is unaligned, so long as it does not cross a 16-byte boundary;
-> +     *    if it crosses a 16-byte boundary there is no atomicity.
-> +     *    This is the atomicity of Arm FEAT_LSE2.
-> +     *
-> +     * MO_ATMAX_* describes the maximum atomicity unit required:
-> +     * MO_ATMAX_SIZE: the entire operation, i.e. MO_SIZE.
-> +     * MO_ATMAX_[248]: units of N bytes.
-> +     *
-> +     * Note the default (i.e. 0) values are single-copy atomic to the
-> +     * size of the operation, if aligned.  This retains the behaviour
-> +     * from before these were introduced.
-> +     */
-> +    MO_ATOM_SHIFT    =3D 8,
-> +    MO_ATOM_MASK     =3D 0x3 << MO_ATOM_SHIFT,
-> +    MO_ATOM_IFALIGN  =3D 0 << MO_ATOM_SHIFT,
-> +    MO_ATOM_NONE     =3D 1 << MO_ATOM_SHIFT,
-> +    MO_ATOM_SUBALIGN =3D 2 << MO_ATOM_SHIFT,
-> +    MO_ATOM_WITHIN16 =3D 3 << MO_ATOM_SHIFT,
-> +
-> +    MO_ATMAX_SHIFT =3D 10,
-> +    MO_ATMAX_MASK  =3D 0x3 << MO_ATMAX_SHIFT,
-> +    MO_ATMAX_SIZE  =3D 0 << MO_ATMAX_SHIFT,
-> +    MO_ATMAX_2     =3D 1 << MO_ATMAX_SHIFT,
-> +    MO_ATMAX_4     =3D 2 << MO_ATMAX_SHIFT,
-> +    MO_ATMAX_8     =3D 3 << MO_ATMAX_SHIFT,
-> +
-
+Can we have a doc comment that defines the semantics, please?
 Otherwise
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
