@@ -1,79 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1putpX-0006GN-5O
-	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 07:42:31 -0400
+	id 1puu82-0006Ta-4p
+	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 08:01:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1putp6-0005rb-4t
- for qemu-riscv@nongnu.org; Fri, 05 May 2023 07:42:09 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1puu7z-0006RC-PE
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 08:01:35 -0400
+Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1putp4-00024K-Do
- for qemu-riscv@nongnu.org; Fri, 05 May 2023 07:42:03 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6439bbc93b6so745913b3a.1
- for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 04:42:01 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1puu7x-00022h-R9
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 08:01:35 -0400
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-965cc5170bdso176998766b.2
+ for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 05:01:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1683286921; x=1685878921;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to;
- bh=HxsCvQwxLEcQi94CUGp/cWnGbPEwoOLvSmcwHfkynGY=;
- b=IeDtkLLoRQXFErlkQbokYeV57nHVz7f4/ceq6ACz3V0i6PZaC4Ly0FVElhA1eevjc/
- Pnl8d/hNaozMdNN99EfbyU37fEApZVCV2/Z2Snvr18hvJUzjtV9c8E7PyDpNZWb22isF
- vrIkh1eAJxtTej8l1V5VepliyN6/amU7UTSQBQaROk5UaDVkx/cKpz2wOo2oLGQ0Xl9n
- Yr7YIwl23AqnYcP5jBj8NkbpuzpdVoMGiUzvlusrsQZXVQmmBmUxFmcP+cjJapXHGqC+
- cKfMjdMcejWX6fiZCvd/5FTBkBMj/t1mYyP4q8yND5L875jL5kAqBdDwdXa351PhpvxL
- ZggQ==
+ d=linaro.org; s=google; t=1683288090; x=1685880090;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GPizfIbc69JR9QYgpsznlNOg6hZVy8+wQh+66XVuhTg=;
+ b=V0lalG9XXtCujSphE2jmcN7CLGLfvn0ySJiaRM3ot9Pozj01nX0C6Z70vzHr0uFV+F
+ Fbqxm8wXkpBxsllSId1BPlxw4OlePFCF5oBzdj7paqlFL2itqxrU8aSvn+UHts3BaXys
+ h4w/SAKTurLhJDLFVoM0IOg2CNlq2AP1bNDf6WmQWKb8sHUD6aFN1TPj/gI78Cm1Lmaw
+ BxaNcazMnodF8SPBCXmtDutjwZ76NsbZ9pxgb05m2aODHOuj7Q/Dn13Z5MXPKyAHMwgl
+ xc3DpxT4HYv9BhDd6UZJtV/RPn93hj/4FZfxIQ5jJ1Kp5yEamEKqq5du1dLue6IsDzhO
+ Zg8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683286921; x=1685878921;
- h=references:in-reply-to:message-id:date:subject:cc:to:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HxsCvQwxLEcQi94CUGp/cWnGbPEwoOLvSmcwHfkynGY=;
- b=ls27oeBEcxD0bqWbMVEU5uXWr2kC+VhZx4BMpKEka93fkp2xWzWncz1cbd9mlhk9Sc
- zjpE/hc+J9elzztKp86PHNhr3cof7jGAyxtZg+YhBWPxHMTcfqn3VHg3/d+rhS6wTpCS
- 93pTWx752qe1l1Bt/iWPFst8HakIsK0TKvrWBUlsN2AE50MKXu4m/1O5Rl4YaH87i0DN
- lOPNr6X7GzBQKyonOH7k8H7Qp8KuKzr5v3nENGsY4RvlM5Qgr86Uuq/+oWYnP5b9znZB
- ceLZBUeGS5KvqulEwf+dk3FmjWI88noNflFHO2KRZKws5HIjIEw7KI8njrTIzaVY9DSN
- NNiQ==
-X-Gm-Message-State: AC+VfDynUm8TvhaA8iykD9//QSgv13vkX/mkDEfr41Odjr66Bebw4abC
- cVRouXNTYw8XAQqZdiEQr9ROHw==
-X-Google-Smtp-Source: ACHHUZ6AD9Db6LzAuU089hNnkT8NC1XE46GFr3HOiRnRGq0Z/6Z2yVy04WBYT/TuKkVAUkqpsb/lZA==
-X-Received: by 2002:a05:6a00:2442:b0:63b:854e:8459 with SMTP id
- d2-20020a056a00244200b0063b854e8459mr1826888pfj.31.1683286921609; 
- Fri, 05 May 2023 04:42:01 -0700 (PDT)
-Received: from hsinchu25.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- y17-20020aa78051000000b0062d859a33d1sm1448171pfm.84.2023.05.05.04.41.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 May 2023 04:42:00 -0700 (PDT)
-From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: rkanwal@rivosinc.com, anup@brainfault.org, dbarboza@ventanamicro.com,
- atishp@atishpatra.org, vincent.chen@sifive.com, greentime.hu@sifive.com,
- frank.chang@sifive.com, jim.shu@sifive.com,
- Yong-Xuan Wang <yongxuan.wang@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PTACH v2 6/6] target/riscv: select KVM AIA in riscv virt machine
-Date: Fri,  5 May 2023 11:39:41 +0000
-Message-Id: <20230505113946.23433-7-yongxuan.wang@sifive.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230505113946.23433-1-yongxuan.wang@sifive.com>
-References: <20230505113946.23433-1-yongxuan.wang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=yongxuan.wang@sifive.com; helo=mail-pf1-x435.google.com
+ d=1e100.net; s=20221208; t=1683288090; x=1685880090;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GPizfIbc69JR9QYgpsznlNOg6hZVy8+wQh+66XVuhTg=;
+ b=AxStGqgdnPxMPMX+iBOKzmD/99q6GvSjkjsObEyYwnYVn7MF0NBwkGDDLApbFGti6i
+ YicaWaOA2HX7XnICRYp0mEJB1/0W2oSmUX0+4l2y6VC5bNGmua2EW/N/KC1OhjIHAUwx
+ menFsO98Kw0tlrrGPruE1HWMEYd/pqV6/SkAax650HjPgZHhxN8huJimdsgXRxrhn6WQ
+ 3LJzcxSwN13AEgFa8hPt29BYu6u7sA/+8lolDjYTP08lQ5vVTHwpVXQDAXkq028gMEpw
+ O+kWOKeFPsreBqflJTcY9A3S4DauMHj6JVNeh4IPKGsMx6UJK8ijCvxyxjLcATlf7s1v
+ HTGA==
+X-Gm-Message-State: AC+VfDxYVh5I6fo/KGHajDOnXNOTxSK2KiFXxIZZbG0l5jmoN21TDEwP
+ eWGe22Qn5WCtGo3bd6qWGXALYKQa2TVBgYvjh5QcSw==
+X-Google-Smtp-Source: ACHHUZ7pDm7LgnyRLkGask/K4Is9uLtQ3FPEDhcx7+lrIW1zes640dGEGD7JEmSHYCHkdmJrbtZfGwdLdURudUp3gCo=
+X-Received: by 2002:a17:906:ee8e:b0:95e:c549:9ace with SMTP id
+ wt14-20020a170906ee8e00b0095ec5499acemr813409ejb.62.1683288090174; Fri, 05
+ May 2023 05:01:30 -0700 (PDT)
+MIME-Version: 1.0
+References: <20230503070656.1746170-1-richard.henderson@linaro.org>
+ <20230503070656.1746170-22-richard.henderson@linaro.org>
+In-Reply-To: <20230503070656.1746170-22-richard.henderson@linaro.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 5 May 2023 13:01:19 +0100
+Message-ID: <CAFEAcA_eSG4c1CKgOgOphM2yUZ1pL3AM6muf8Bcyx8zwXX9sSg@mail.gmail.com>
+Subject: Re: [PATCH v4 21/57] tcg/i386: Use full load/store helpers in
+ user-only mode
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn, 
+ philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
+ qemu-s390x@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::636;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ej1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,45 +78,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 May 2023 11:42:15 -0000
+X-List-Received-Date: Fri, 05 May 2023 12:01:36 -0000
 
-Select KVM AIA when the host kernel has in-kernel AIA chip support.
+On Wed, 3 May 2023 at 08:09, Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> Instead of using helper_unaligned_{ld,st}, use the full load/store helpers.
+> This will allow the fast path to increase alignment to implement atomicity
+> while not immediately raising an alignment exception.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Reviewed-by: Jim Shu <jim.shu@sifive.com>
----
- hw/riscv/virt.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 396025b5a5..9fad01a5ab 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -35,6 +35,7 @@
- #include "hw/riscv/virt.h"
- #include "hw/riscv/boot.h"
- #include "hw/riscv/numa.h"
-+#include "kvm_riscv.h"
- #include "hw/intc/riscv_aclint.h"
- #include "hw/intc/riscv_aplic.h"
- #include "hw/intc/riscv_imsic.h"
-@@ -1216,6 +1217,15 @@ static DeviceState *virt_create_aia(RISCVVirtAIAType aia_type, int aia_guests,
-             msimode, false, aplic_m);
-     }
- 
-+    if (kvm_irqchip_in_kernel()) {
-+        kvm_riscv_aia_create(
-+            aplic_s, msimode, socket,
-+            VIRT_IRQCHIP_NUM_SOURCES,
-+            hart_count,
-+            memmap[VIRT_APLIC_S].base + socket * memmap[VIRT_APLIC_S].size,
-+            memmap[VIRT_IMSIC_S].base + socket * VIRT_IMSIC_GROUP_MAX_SIZE);
-+    }
-+
-     return kvm_enabled() ? aplic_s : aplic_m;
- }
- 
--- 
-2.17.1
-
+thanks
+-- PMM
 
