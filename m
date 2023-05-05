@@ -1,74 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pv0d9-00058H-D4
-	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 14:58:11 -0400
+	id 1pv1tk-0003Xj-2U
+	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 16:19:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pv0d8-000583-JQ
- for qemu-riscv@nongnu.org; Fri, 05 May 2023 14:58:10 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ id 1pv1ti-0003X0-BH
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 16:19:22 -0400
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pv0d4-00046N-Kj
- for qemu-riscv@nongnu.org; Fri, 05 May 2023 14:58:10 -0400
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-30644c18072so1477717f8f.2
- for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 11:57:46 -0700 (PDT)
+ id 1pv1tg-0001T0-L8
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 16:19:22 -0400
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-2f95231618aso1504550f8f.1
+ for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 13:19:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683313065; x=1685905065;
+ d=linaro.org; s=google; t=1683317959; x=1685909959;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=XwsOKCZcG8dxRC/FHTq259hilGllCAYBzaMsqg4bGAA=;
- b=Vwngw8ATlGqKotdkwpD9rjzqElmB0wHCJR7SLEWS3lxRPccIcWnv/E5usy5QkseALS
- Apt38GOv9VWnd3+lgjsSU10gPVHe4pcwrzvJKvRjqnaku+qA0QNufMUTfw8wHi3eL0X7
- 6NETeshi8VKsRdjR3fkvmHvpDwFJEHEE3/aN5IGTtj2ueweCqxZ11ZSD7IxpKMgmoJWM
- WVTghFFx5SWkOxAEIbhL1PMIgsPGXRs/EAEqzAJvVTGmwfaNjy2+r5j8tI1Hb/ukVEOE
- 43aLXHJM6YYG5e9OqvtURlLQV6UwHLy9cd1dSgfA8QI4BIZCee/HRyH9kqfH3HQhdTr7
- JeSg==
+ bh=oX2MH8rkUaZwViiqoVzaThFDghPJE//PWA0J+d7lxhE=;
+ b=GYYN5xRemSbBNnQKthpte1wMne6s9/zt9WkEUi1kjJsBaJL53D7+zfaTZZgxZGhmZ6
+ snV+A1FgjWZE0Ek+CcEzsQSWNhOQCWLsUbZTQKIhUzMwHxwufrKKVCnXXdc+u/xX90+6
+ asNmCCnLcQdJratCZF28pFpXkt7Fqhq10FxvYcSnJ5TbuKEB6lf/ggWaHv5+owPjmBzl
+ V7CJNlMn6u/0O8k69Ymw3yCOnT71xbw6YsHUtLZn1ywSYiVvOtHeYrGTMqspulgoDJVN
+ 6a6NVuVSUvmTcPzsyl4AsRQ8cfV1hheu+Dg45Ldrn1U+U7GTLYOhhUQHhZedYwpZ5j8H
+ I2Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683313065; x=1685905065;
+ d=1e100.net; s=20221208; t=1683317959; x=1685909959;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XwsOKCZcG8dxRC/FHTq259hilGllCAYBzaMsqg4bGAA=;
- b=N1IB+2A+W5mR5uXUf9PNaJ1B2GZ0Ltmq0SyCxWxRdqFLt+o1NGqEKtU2WvwKg/6g7H
- YN5WG6nt8t33V8txztanK32RZFlv5HiR74tix94hQlyOSFELt1g9vY48o1LiOdtOWFRq
- 7HgK+cdQBiMZoa0/iQyLYiQVX/C0EJGytF5jtL8LPF9ffoUFHqorcnCx/M1kVbQUnmzp
- 2j/L81XSl/BFW2ZSvInZQVmripJKbUpYfBUgJjfEe2m4luVpFsZNsc9Fh1zhzMJgTyZe
- RgLXrQu6C8ppQiAcnX0vekq+TzkS3btPSyoHieRLUKz8UjhSZOnQh8e5CcpfeH+PtG9F
- h3DQ==
-X-Gm-Message-State: AC+VfDwn8DvErztAxaSk+g3xB60wxAeMzNrtLIYn8kMuexMJixzWPsp2
- dC/qhWILUCuBquHZp+bIwY5D9g==
-X-Google-Smtp-Source: ACHHUZ4+Xt3Ag3A/uB07vr4ecLaqBVznZ17ztP6nDataDQjXU1HIjRqhU060CAi7MlebIsQ8fPpsZQ==
-X-Received: by 2002:adf:e909:0:b0:306:2c5c:980a with SMTP id
- f9-20020adfe909000000b003062c5c980amr1966953wrm.31.1683313065542; 
- Fri, 05 May 2023 11:57:45 -0700 (PDT)
+ bh=oX2MH8rkUaZwViiqoVzaThFDghPJE//PWA0J+d7lxhE=;
+ b=jpiFldmryG0FqMkGkUPRASMhh7Wo2BjwhEocjzo9F2kbMsV54axK05HJ4IYD/gihu7
+ 4ZLihTKyJ+0/eJop8+wkXhJL9hBhq/r/wlwqbVwxX0wLv26Sr8W2YS6/p/fLEQPojoAb
+ 7SDNAGhGQ7jHa1vkaSc8ItsXwKJfwIj9n9Vh3MO/S1RFcwygrQahvQ81qP+kYpi0QkDH
+ +QBZNigWgac7AqdHJ6bIT5V6Ny/+d7lLtrLPRTB80BZxxmapTZG7cgO81U9YWMqDfYO5
+ w1zK2VO7V+oeb1Ce9xS1FmBi/Zb6nbioR7eXeYFXeaSnSb1zhO9b/NNZOBN8ufuy+WZg
+ m5rQ==
+X-Gm-Message-State: AC+VfDxWDlEMBuf8aa19HhLy49YDdts58ls2Aoil+yhJ/Vhi56fKN158
+ 19pt0cSaWG6jt0vNSbnngHdxBQ==
+X-Google-Smtp-Source: ACHHUZ5sjyv64Yi7uzozk2+1swrmigzY7Ucoa+aKGhpFxaHqgrkqORUu64nrjA4TqGvky85dALfhNw==
+X-Received: by 2002:adf:e445:0:b0:306:283e:23a with SMTP id
+ t5-20020adfe445000000b00306283e023amr2185121wrm.52.1683317958800; 
+ Fri, 05 May 2023 13:19:18 -0700 (PDT)
 Received: from [192.168.20.44] ([212.241.182.8])
  by smtp.gmail.com with ESMTPSA id
- d6-20020a056000114600b00306344eaebfsm3173365wrx.28.2023.05.05.11.57.44
+ v1-20020a5d6101000000b003062b57ffd1sm3321919wrt.50.2023.05.05.13.19.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 May 2023 11:57:45 -0700 (PDT)
-Message-ID: <45cba357-ba20-399a-27e6-5e99741179d0@linaro.org>
-Date: Fri, 5 May 2023 19:57:43 +0100
+ Fri, 05 May 2023 13:19:18 -0700 (PDT)
+Message-ID: <8988fc6b-8f07-1ab7-663d-3392ca19f7f8@linaro.org>
+Date: Fri, 5 May 2023 21:19:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
-Subject: Re: [PATCH v4 03/57] accel/tcg: Introduce tlb_read_idx
+Subject: Re: [PATCH v4 06/57] accel/tcg: Honor atomicity of loads
 Content-Language: en-US
 To: Peter Maydell <peter.maydell@linaro.org>
 Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn,
  philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
 References: <20230503070656.1746170-1-richard.henderson@linaro.org>
- <20230503070656.1746170-4-richard.henderson@linaro.org>
- <CAFEAcA858-D37=MrvYnGxBVkL1V14wZ_JLEzFahbweRUDvPmwg@mail.gmail.com>
+ <20230503070656.1746170-7-richard.henderson@linaro.org>
+ <CAFEAcA8muJ84GMqSBuU0P2YhfERM-kftfq07N8BVO2yG9p6jBw@mail.gmail.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <CAFEAcA858-D37=MrvYnGxBVkL1V14wZ_JLEzFahbweRUDvPmwg@mail.gmail.com>
+In-Reply-To: <CAFEAcA8muJ84GMqSBuU0P2YhfERM-kftfq07N8BVO2yG9p6jBw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x429.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42d.google.com
 X-Spam_score_int: -63
 X-Spam_score: -6.4
 X-Spam_bar: ------
@@ -88,50 +88,97 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 May 2023 18:58:10 -0000
+X-List-Received-Date: Fri, 05 May 2023 20:19:22 -0000
 
-On 5/4/23 16:02, Peter Maydell wrote:
-> On Wed, 3 May 2023 at 08:15, Richard Henderson
-> <richard.henderson@linaro.org> wrote:
->>
->> Instead of playing with offsetof in various places, use
->> MMUAccessType to index an array.  This is easily defined
->> instead of the previous dummy padding array in the union.
->>
->> Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
->> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
+On 5/4/23 18:17, Peter Maydell wrote:
+>> +    case MO_ATOM_SUBALIGN:
+>> +        tmp = p & -p;
+>> +        if (tmp != 0 && tmp < atmax) {
+>> +            atmax = tmp;
+>> +        }
+>> +        break;
 > 
->> @@ -1802,7 +1763,8 @@ static void *atomic_mmu_lookup(CPUArchState *env, target_ulong addr,
->>       if (prot & PAGE_WRITE) {
->>           tlb_addr = tlb_addr_write(tlbe);
->>           if (!tlb_hit(tlb_addr, addr)) {
->> -            if (!VICTIM_TLB_HIT(addr_write, addr)) {
->> +            if (!victim_tlb_hit(env, mmu_idx, index, MMU_DATA_STORE,
->> +                                addr & TARGET_PAGE_MASK)) {
->>                   tlb_fill(env_cpu(env), addr, size,
->>                            MMU_DATA_STORE, mmu_idx, retaddr);
->>                   index = tlb_index(env, mmu_idx, addr);
->> @@ -1835,7 +1797,8 @@ static void *atomic_mmu_lookup(CPUArchState *env, target_ulong addr,
->>       } else /* if (prot & PAGE_READ) */ {
->>           tlb_addr = tlbe->addr_read;
+> I don't understand the bit manipulation going on here.
+> AIUI what we're trying to do is say "if e.g. p is only
+> 2-aligned then we only get 2-alignment". But, suppose
+> p == 0x1002. Then (p & -p) is 0x2. But that's MO_32,
+> not MO_16. Am I missing something ?
 
-read
+You're right, this is missing a ctz32().
 
->>           if (!tlb_hit(tlb_addr, addr)) {
->> -            if (!VICTIM_TLB_HIT(addr_write, addr)) {
-
-write
-
->> +            if (!victim_tlb_hit(env, mmu_idx, index, MMU_DATA_LOAD,
->> +                                addr & TARGET_PAGE_MASK)) {
 > 
-> This was previously looking at addr_write, but now we pass
-> MMU_DATA_LOAD ?
+> (Also, it would be nice to have a comment mentioning
+> what (p & -p) does, so readers don't have to try to
+> search for a not very-searchable expression to find out.)
+> 
+>> +    case MO_ATOM_WITHIN16:
+>> +        tmp = p & 15;
+>> +        if (tmp + (1 << size) <= 16) {
+>> +            atmax = size;
+> 
+> OK, so this is "whole operation is within 16 bytes,
+> whole operation must be atomic"...
+> 
+>> +        } else if (atmax == size) {
+>> +            return MO_8;
+> 
+> ...but I don't understand the interaction of WITHIN16
+> and also specifying an ATMAX value that's not ATMAX_SIZE.
 
-This is the read portion of the read+write check.  The write portion is above in the 
-previous hunk.  So this is an existing error, fixed here, and I hadn't noticed.
+I'm trying to describe e.g. LDP, which if not within16 has two 8-byte elements, one or 
+both of which must be atomic.  We will have set MO_ATOM_WITHIN16 | MO_ATMAX_8.
+
+If atmax == size, there is only one element, and since it is not within16, there is no 
+atomicity.
+
+>> +        } else if (tmp + (1 << atmax) != 16) {
+> 
+> Why is this doing an exact inequality check?
+> What if you're asking for a load of 8 bytes at
+> MO_ATMAX_2 from a pointer that's at an offset of
+> 10 bytes from a 16-byte boundary? Then tmp is 10,
+> tmp + (1 << atmax) is 12, but we could still do the
+> loads at atomicity 2. This doesn't seem to me to be
+> any different from the case it does catch where
+> the first ATMAX_2-sized unit happens to be the only
+> thing in this 16-byte block.
+
+If the LDP is aligned mod 8, but not aligned mod 16, then both 8-byte operations must be 
+(separately) atomic, and we return MO_64.
+
+>> +            /*
+>> +             * Paired load/store, where the pairs aren't aligned.
+>> +             * One of the two must still be handled atomically.
+>> +             */
+>> +            atmax = -atmax;
+
+... whereas returning -MO_64 tells the caller that we must handle an unaligned atomic 
+operations.
+
+>> +    /*
+>> +     * If the page is not writable, then assume the value is immutable
+>> +     * and requires no locking.  This ignores the case of MAP_SHARED with
+>> +     * another process, because the fallback start_exclusive solution
+>> +     * provides no protection across processes.
+>> +     */
+>> +    if (!page_check_range(h2g(pv), 8, PAGE_WRITE)) {
+>> +        uint64_t *p = __builtin_assume_aligned(pv, 8);
+>> +        return *p;
+>> +    }
+> 
+> This will also do a non-atomic read for the case where
+> the guest has mapped the same memory twice at different
+> addresses, once read-only and once writeable, I think.
+> In theory in that situation we could use start_exclusive.
+> But maybe that's a weird corner case we can ignore?
+
+We don't handle multiple mappings at all well.  There is an outstanding bug report about 
+read+write vs read+execute mappings for a jit -- our write-protect scheme for flushing TBs 
+does not work for that case.
+
+Since we can't detect the multiple mappings at this point, I'm tempted to ignore it.
+But you're correct that we could drop this check and let start_exclusive handle it.
+
 
 
 r~
