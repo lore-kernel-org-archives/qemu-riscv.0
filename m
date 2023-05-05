@@ -1,63 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1puuXO-0007JB-Hg
-	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 08:27:50 -0400
+	id 1puuaP-00018D-Bc
+	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 08:30:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1puuXN-0007Iq-0i
- for qemu-riscv@nongnu.org; Fri, 05 May 2023 08:27:49 -0400
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
+ id 1puuaI-00016d-7N
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 08:30:50 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1puuXL-0002tX-Ec
- for qemu-riscv@nongnu.org; Fri, 05 May 2023 08:27:48 -0400
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-50bcae898b2so2977454a12.0
- for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 05:27:47 -0700 (PDT)
+ id 1puuaG-0003ph-MV
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 08:30:49 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-50bc394919cso2550110a12.2
+ for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 05:30:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683289666; x=1685881666;
+ d=linaro.org; s=google; t=1683289846; x=1685881846;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2F1zis0eSGuvuvC1CHrwppmig0EsQfqxjrY7ags+n+c=;
- b=VWg0emqI7GA8hOcdlTJORLW7q7ml5AUoT8YzS+xp3odTs1/kk330qyHb6UXrNqLNaW
- Hia2NVcVIBi7F2cvkweDALF+LY0nbvHiRXRuJd41VLViA+FR5FP48R3AkD0T9Sw8vQcC
- HrQuj8WwsQPU4ep3vrumByWG+getnTFhodyY94iSTnAxppslQ7o3lg4AmRbyfuxOsuCU
- imp60jRWJxjk9RUqR65Qlcyw2RxHt+auhjDv9FhXnJuigykjQv61L5ql98pWsz/7iEtM
- eMddf9HMHVbpOwmDgqeZ8J4EcNdFG49rEga6I1wY7A1VI3/A2enyVwHuKGwiwj+Xraxu
- TtHA==
+ bh=cbvXxw6ZAQT9U9fcJMesQufLYpJLQd/f934mnhTig2Y=;
+ b=sIb10+7ulyE+SNEDGga5tPUkTrVbpuTzPMolcm1IUSs3tXRLDvDJMn+hfREKud13RN
+ GgcmgzUoERiTFYk6S21EoxrObzYUuGXNW+LjkR7mcEP29uNk2TNY2EDboRanmRkcv6P8
+ 1o8/9r56dceC/909mtievCchLftfXABQkC+zcffOExXSMJIhuzxLDPqALDYtUouYiEft
+ FVvjTDI5BErwKilOTrYuAgb8tUphUmWmhpJ8bmdW1n5xmq7p9yTjH36X7qGb60s8GVFV
+ puXJwu30pt24P5PLzz/LCLE2Z6/QL0Tfzx0knbnHI1AWb260WmSprfxE8o5eQoO5EV4l
+ vtmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683289666; x=1685881666;
+ d=1e100.net; s=20221208; t=1683289846; x=1685881846;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=2F1zis0eSGuvuvC1CHrwppmig0EsQfqxjrY7ags+n+c=;
- b=KlbfL8VzfFYAVs8HuDR19ifHhE4t2WiFroUVWV6QKvBDFBrm3iWdhQ290S9v+Fefiv
- f/4AuByBKW5QfXxeGyMRTpNpNW5/2SoeWISrwDgolsA3WW2J7GTsnGDWvimlSmqP6DPh
- 80iMnJUFi6IwjdAu898pXo1X079/TMgi16mZB+rbJX15DQxUC7Axry1XL9dNjfyauNQ8
- vg0t0A46PYaw0JP7hzZPCzuumq4yrAt4+a/c6wYyRn+Whvayoo9xTW8wohxfC44RDpyG
- vFKBKQbBv9iQJ8XsdmPVYTzGM7U9qPcX93mJJo8AYFsfHBwWbK+6eC4CqQ8vuuKd5kk/
- 9dSQ==
-X-Gm-Message-State: AC+VfDxHQCdjUWokXBCXFHfLF8jpDJtH1P9zbPc/G3XJWKDZcKIE0Kcz
- wSlzrlEhfJymMOrLdEFkUDmPy0YSGGg9q+z/c1lneEJMIf2By5sW
-X-Google-Smtp-Source: ACHHUZ4CPwXHGQHw1YQmV+egFfvAIeQOYJkgJwIPzr9Q4L19mFC/zrzUmYsdJPwEgMGiG9K+BXojCpwSUHabNt4DLfY=
-X-Received: by 2002:aa7:da55:0:b0:50b:c780:2581 with SMTP id
- w21-20020aa7da55000000b0050bc7802581mr1184503eds.5.1683289666062; Fri, 05 May
- 2023 05:27:46 -0700 (PDT)
+ bh=cbvXxw6ZAQT9U9fcJMesQufLYpJLQd/f934mnhTig2Y=;
+ b=GRDEmPgFdE9Oh5ZkwEPAlC0geD4QLPBQd6hAxR2LQVD11b+J8VzW8S5g5OJoHH4ZRJ
+ UmG5agWPkTYQ7L1uvDLbrR/p2GGMAugPcHLibuU6xvWRNq8jwWgLQlIyb0IEDUwKyZfz
+ O2YcXOD8D92yMwu7tSwYVrLzkJegQmv6k/iNSFqCrFjoKbpproZ1FjT1dQYs4fFw4rtw
+ S82qzUj/h0vv8chqbCGtkNv2qSPww0zwrfL/0yUsS2PTELkbIXPId9hbwGMC+fw/0wS6
+ QDSDKmknBM/utl7xe4jqul44UT8kZ8XfpLxPHXmrYJyOHFi0igPQydI14hEHtEueiy/l
+ +WQw==
+X-Gm-Message-State: AC+VfDx51/KolvfLzZdrE3kV0dHbXfKBfzHT4kTw94LB3Bj1PQBG3Mhf
+ zmBMCgothKETRrcEqrUn7NTPuutX5JLlTsUNTrEGfQ==
+X-Google-Smtp-Source: ACHHUZ6zRaOwrtY2BEqYAeLdEKjPlJ77JFLMwPMxC9wPy/A3R3Rml1z4tG4wJQeTM42AVLvKhws6HZeazO/EiYIlv0Y=
+X-Received: by 2002:a05:6402:1857:b0:50b:fb29:1d91 with SMTP id
+ v23-20020a056402185700b0050bfb291d91mr1268243edy.1.1683289846043; Fri, 05 May
+ 2023 05:30:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230503070656.1746170-1-richard.henderson@linaro.org>
- <20230503070656.1746170-36-richard.henderson@linaro.org>
-In-Reply-To: <20230503070656.1746170-36-richard.henderson@linaro.org>
+ <20230503070656.1746170-37-richard.henderson@linaro.org>
+In-Reply-To: <20230503070656.1746170-37-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 5 May 2023 13:27:35 +0100
-Message-ID: <CAFEAcA_Xw_EHn+dbm5-Uc9NnZwb3F_P5sPZz2uG4yVg5UTX+Hg@mail.gmail.com>
-Subject: Re: [PATCH v4 35/57] accel/tcg: Remove helper_unaligned_{ld,st}
+Date: Fri, 5 May 2023 13:30:35 +0100
+Message-ID: <CAFEAcA8YXLJwZEeLytwmtwFnhg4NAkVZJHC6D6PcdcqvmgSR4g@mail.gmail.com>
+Subject: Re: [PATCH v4 36/57] tcg/loongarch64: Assert the host supports
+ unaligned accesses
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn, 
  philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
  qemu-s390x@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x52c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,17 +78,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 May 2023 12:27:49 -0000
+X-List-Received-Date: Fri, 05 May 2023 12:30:50 -0000
 
-On Wed, 3 May 2023 at 08:19, Richard Henderson
+On Wed, 3 May 2023 at 08:15, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> These functions are now unused.
->
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
+> This should be true of all server class loongarch64.
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+By this do you mean "anything that runs Linux" ?
+
+If not, we should be a bit more user-friendly about bailing
+out than just assert()ing. For the "tried to run on an
+ARMv5" case we use error_report and exit:
+
+            error_report("TCG: ARMv%d is unsupported; exiting", arm_arch);
+            exit(EXIT_FAILURE);
 
 thanks
 -- PMM
