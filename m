@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1puryN-0005uB-AL
-	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 05:43:31 -0400
+	id 1purzy-00076Y-Ib
+	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 05:45:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1puryK-0005tW-5k
- for qemu-riscv@nongnu.org; Fri, 05 May 2023 05:43:28 -0400
-Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
+ id 1purzr-00075L-PK
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 05:45:03 -0400
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1puryI-0005cO-BY
- for qemu-riscv@nongnu.org; Fri, 05 May 2023 05:43:27 -0400
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-50bc4ba28cbso2784920a12.0
- for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 02:43:25 -0700 (PDT)
+ id 1purzq-0005qt-3i
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 05:45:03 -0400
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-50bc2feb320so2423053a12.3
+ for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 02:45:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683279804; x=1685871804;
+ d=linaro.org; s=google; t=1683279899; x=1685871899;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PuJ6ae1PfjSdTsIRD02OPAtk9Uf/WGazrcd7M5Rziwg=;
- b=ck7+UQclXU9s4MoKUOzA8cbA6Mcczv0ywJjq3Ok9Fay8muZiO34ZtpFFlinzzoZCWt
- zgaR/YdPbJO8YlbV7egVpYCDR5BhZOK/84htj/PEcTzspXvaIb/geIvtZRS+uXYWzeoF
- evno5+4iFQBZhMkeQeSLJgxNMwLgs0/9VEAg2lvionLS7KPMwG5D6UVuaufgbfAy0ZEq
- OcX/E93jOub3ve+jnKDlmDDv4zqJP4tTqncGEfI/Lma+4NghTapH5+1mB2Ozu+ADihsq
- WAZV3NSVwSp1IpOsiGqTsOfVsIEUF4rIIER0hWQQHkA9wcmxOINeimQW5qBEvIcqxGTa
- q9Yg==
+ bh=a1WD+C4dJ1IAEdT7Vk/hZTN1+IxIvCygCU4Mv4ZPKpI=;
+ b=DOcqxeSu/bMOczf66pZ+OHLAFH+Jr8gZCsoI4/VYVy26cgWL8Dr9oq4rP+V+kzUbjk
+ 4cxNXbe9shiWhZ/RNXObm3F/PDx5dnxSG/dntcqoqMu35n5smjFdbuyj+diqnOzUUQiX
+ E7soXGucW4NBPrSGd722qqTHtQBjpmUzEIoNwlz90Jof/sZbqL3MhwgFqlxAlkDcBbqL
+ Dn/O5LfeyGVcUIX0xaf0hvHzQMvDlb9GOR4BcsR3NMKXQSu+/PkIkgF+ulhG6JLGWZ8q
+ RpVwd0a0dE1xchV3CNih/YfKCToRAx1+1ivVDEwCMT4L8kP/BxUjAOehljCT0R/e/1u0
+ hNsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683279804; x=1685871804;
+ d=1e100.net; s=20221208; t=1683279899; x=1685871899;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PuJ6ae1PfjSdTsIRD02OPAtk9Uf/WGazrcd7M5Rziwg=;
- b=RSmL8GVgOZwI5oXPdvz88uBJYdHd6TWLXJcoQLrRQYqLvK4mmWLXI4YJlc0lRUct9n
- FF6uigr192booZAt3mR/HIyUBfcBdfpTirSGgiv7n2Hi+8TQfq3l5vrBgfWmoMKbr+TT
- rkf/R57wYmjdUZtp6Nnd6j5t5PY9/kp2fSTRe2KF7oNNqP7hrH8mDJZTfBudoK192Slh
- Vb9bBXQbq4beQgQrjIyt4Ok9ReJU2HfznhU7MXry+NtLOZ6kGy23id/Ae7GfwRFFLb5m
- Nr6c3MTfEP0FMtIiEVZNuQ6YyIzw59bE9f/lXTOdKQn+2LDsfHSSFDQY6CAiSU2I7+kI
- 4lzw==
-X-Gm-Message-State: AC+VfDzvvRpie8vey486znO/flL4X+tRf/JzIrrg24LVkMiQICeQ+Iui
- 9Lt1YhrpyJB0mD8w+6fnxZK1Gt6W7qiIw7Dm/Xcmag==
-X-Google-Smtp-Source: ACHHUZ7XQbKDEXatSFUElEJTSAXrvKmtI2g1m30By5lckjoPCNCTkShoRlIIZXmcCEnymMFrd0cmWj6AqCKNpwPb3uM=
-X-Received: by 2002:aa7:d355:0:b0:50b:d5d1:7409 with SMTP id
- m21-20020aa7d355000000b0050bd5d17409mr794305edr.23.1683279804312; Fri, 05 May
- 2023 02:43:24 -0700 (PDT)
+ bh=a1WD+C4dJ1IAEdT7Vk/hZTN1+IxIvCygCU4Mv4ZPKpI=;
+ b=li0MkgEh6WkLPFtvi+/zq91MmqcP/chznhWplJ4M5ozJTgOQLlZPP5+gHCeJgEAEoX
+ 6mAMKEycS1BHxliK0CGksdQvKV9EN+CoiTKSZNV7iKX93ylD0Jd9jG7M/dNZgduDlvGr
+ YY46P2jTL133LGHKdwsYDwV0c26eMmdX/XJT/JXrC98qhUXRee8J8TlCNmV1FmdW7pzx
+ kB7FJrahPIUELhuKeCZWBX8CYagn+XjqoJK6mneovHtWIlXLN/SeH8k5g4Ij/sJIvpLG
+ ayO8bcuUwS+qis+XXD2AiAp0MVIlyL/NpeWnH2JGw0YkNSyhD/REk74jChsHE0nsiggE
+ +KJw==
+X-Gm-Message-State: AC+VfDwV7Yw98T5Xjo3u3TlLgXDaFajmq69r0Wc+NOamq47WdjY3mEIb
+ ldIfjufa7/vehubqJafRWcIW96F7a+82jcR+/1kYJQ==
+X-Google-Smtp-Source: ACHHUZ5tbAQWCyDQJ4Oe/IHo0oWJ52M4qDlwSfUPnepNPkViLGJK0WPn5L3Hjin7OL5noyLAD/DZll5BCaNRvb+iNAI=
+X-Received: by 2002:aa7:ca57:0:b0:4fe:ddf:8d8c with SMTP id
+ j23-20020aa7ca57000000b004fe0ddf8d8cmr915781edt.13.1683279899509; Fri, 05 May
+ 2023 02:44:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230503070656.1746170-1-richard.henderson@linaro.org>
- <20230503070656.1746170-11-richard.henderson@linaro.org>
-In-Reply-To: <20230503070656.1746170-11-richard.henderson@linaro.org>
+ <20230503070656.1746170-12-richard.henderson@linaro.org>
+In-Reply-To: <20230503070656.1746170-12-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 5 May 2023 10:43:13 +0100
-Message-ID: <CAFEAcA976E5VFD53HE05v61QCKy3ZmiBNfP+PQYpZ8t+wZKvFA@mail.gmail.com>
-Subject: Re: [PATCH v4 10/57] accel/tcg: Implement helper_{ld,
- st}*_mmu for user-only
+Date: Fri, 5 May 2023 10:44:48 +0100
+Message-ID: <CAFEAcA8gc7xkrkATWkrb2=vktB6zpA2TS4s4bZvHQxvdArQB+A@mail.gmail.com>
+Subject: Re: [PATCH v4 11/57] tcg/tci: Use helper_{ld,st}*_mmu for user-only
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn, 
  philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
  qemu-s390x@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x52b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,22 +77,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 May 2023 09:43:28 -0000
+X-List-Received-Date: Fri, 05 May 2023 09:45:04 -0000
 
-On Wed, 3 May 2023 at 08:23, Richard Henderson
+On Wed, 3 May 2023 at 08:08, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> TCG backends may need to defer to a helper to implement
-> the atomicity required by a given operation.  Mirror the
-> interface used in system mode.
+> We can now fold these two pieces of code.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  include/tcg/tcg-ldst.h |   6 +-
->  accel/tcg/user-exec.c  | 393 ++++++++++++++++++++++++++++-------------
->  tcg/tcg.c              |   6 +-
->  3 files changed, 278 insertions(+), 127 deletions(-)
->
 
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
