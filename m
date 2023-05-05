@@ -1,63 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1puulJ-0000rf-Il
-	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 08:42:13 -0400
+	id 1puuoJ-0002lZ-RU
+	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 08:45:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1puulG-0000qM-DG
- for qemu-riscv@nongnu.org; Fri, 05 May 2023 08:42:10 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ id 1puuoH-0002jw-Qb
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 08:45:17 -0400
+Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1puulE-0008Jn-Dj
- for qemu-riscv@nongnu.org; Fri, 05 May 2023 08:42:10 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-50bc25f0c7dso3322859a12.3
- for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 05:42:07 -0700 (PDT)
+ id 1puuoG-0000jg-54
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 08:45:17 -0400
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-50bc37e1525so3283191a12.1
+ for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 05:45:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683290526; x=1685882526;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HRfaO2e+ySs0LwBkN0aMeaZi/Q32IBPUuRmQDFHFZbA=;
- b=tpGxdHJYspAs8aKp0rhjqoiGrPOvljvD8WFnHOyh8eWFbhHMFQK6yJ+7rgH4SiwMum
- kKl4jY188R6DJpW4AYM5V1ygEuJCMBAoNPu8Q+T+Vj7YfojW41LPHGyp+zzBcoaUnX2i
- qLU1jgFxuVbTRe9Z3KgYQLPtul0HirrJeVfW4iALw8nUb3QRkg64jum8xbridhY3pvqr
- NGEgFxquFaHWMe7e5yl0nA8+BA+r37XFoTxvHE9wnbHotMhsUl10CW8Tz/hGQDF7zSYX
- T8VsiGDvORPH/M91OO+/sYsan+0crEVgn+mDq9NMhQ0CCTfTqCVSbX6cmG1XC1DzVdBY
- w4nw==
+ d=linaro.org; s=google; t=1683290714; x=1685882714;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eNfk1QD5fFBnKIxIsXqmQGResbmawGI2lSHAgxBoI6Q=;
+ b=vpLytoj2TCNHz8id3LF61ZPuGXm/ymlzp0eBzjf1Irh3m5gm/mtxcpzsbj9PrrGY4l
+ iQnb8TW0U9NGPdV3PmKGJUD/R47K3JfT7OPbLjpkoBlkJrCoxwYxof9IU9QEZ5Oe0v9W
+ fSTWvKb2xlxPCzhuPAOggMjnVCvDUZJJO66Klyfopvz+WPGnq6hLnN9/jZGEcuMAkTKA
+ L/aOQtd/YtkmNdmjrsGGPoeRD5e2rvyqpW5Vep8JGm2nq8NA/nDncZAuZ9Rb4pvNlUxD
+ mxVEu+DS21WS0k83JIfnbuQVkR3W6E1A56z42htiZOv8MIfGUAftNhcgBelBarWGle7V
+ jfCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683290526; x=1685882526;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=HRfaO2e+ySs0LwBkN0aMeaZi/Q32IBPUuRmQDFHFZbA=;
- b=H5m+t4V6puD/WvzPgWDA/+g/+OG9hnytcyhjDbsVDbotjN2cq2wl+UD43ZppjyP3Rj
- xBMSSte2OipzRAQhIEmQLYMzV+Ur6boG9NnvtFlXmtKfAqYAkBuKIxEP1pP2COdWUYDI
- sEhbBjfmsqT4gu2PEBEIDTMM3frDhOjxbcV4+zZCzOPL62IjdygeeuKdfySJmlu3z27Q
- 6cHs53bS1LhDlY2nl7r82vJqS8/bk/6cpo9EbbZA5OqSLsbYDMuB6FzKKJOlsK4ufkEF
- DB7A62X2qz4YnVsgMSa++YPhurbHxUr7DPd6/vqIs1oVuAMYsyyFDL2aENjsZ5+FGoFo
- cU3Q==
-X-Gm-Message-State: AC+VfDzZTGUjvtDuvvqJHlnIVQTbr0qc8ZLiW+XghHkNCJxrisEnu2Fq
- Qt9ftWxszh+azsq3r88qkYKmXuiqIzEzHPDCjHKqkA==
-X-Google-Smtp-Source: ACHHUZ4U8rKK1vH+TvTYCQFhMDHfZTEFBEsi966xktLotWHECwPQwl0G+ye07+W6YV74+bA+WxYnOeRPqLFZsT1aOuU=
-X-Received: by 2002:a50:ff18:0:b0:506:bb0e:bc4e with SMTP id
- a24-20020a50ff18000000b00506bb0ebc4emr1152081edu.39.1683290525710; Fri, 05
- May 2023 05:42:05 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1683290714; x=1685882714;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eNfk1QD5fFBnKIxIsXqmQGResbmawGI2lSHAgxBoI6Q=;
+ b=WqmoOtoPgV7xesHe5MawR++Y+uc+7nqPpEPazKu5mwMgtu5ejBaTVnuYbZh+H/8OIX
+ OgZhbQ6IEV5bZLqHcPj3u6zUq+4jL9124yYGTVJKvA4o7EjWYWCt3iwUfInsq7gHxhm/
+ kn/POISSVInf6RuFNVAJ5+KCpfT2UemUzxZFFJym2YGzwu4kjvl2XVomZLmemEU+ec3r
+ EOKjNBQKyx20/b1FYx0C0hXwojBbCbnNXoaV8ctRj4khqNvxMsRNmUa+lzyqlkyGsH92
+ t/6avK8J6uxk6KjN1HuBlu2Xg+MaigYyGe6fBkMy8OHEX/l71utmGY/clDxagFhAkGW6
+ c2Ig==
+X-Gm-Message-State: AC+VfDzdY02gDxmMwHBzqcXijQIBhGAX1Wy7Mao6BNDZGyUMPG0ZDqLi
+ 0DSHKsPJ1hxqbT4qtJ2RWHAc1AQn3A0oUASffUAqymI20nCVe/jN
+X-Google-Smtp-Source: ACHHUZ6gkmigcgDPUc7dnh6HZzs9cO8b5iYhmiBh9G4ulHj5/qQC86q6D2GQZkNJW0OH/eKAdWRUVvgMoZyGrtwqWEk=
+X-Received: by 2002:aa7:d686:0:b0:50b:f9d8:ff72 with SMTP id
+ d6-20020aa7d686000000b0050bf9d8ff72mr1235617edr.31.1683290714506; Fri, 05 May
+ 2023 05:45:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230503070656.1746170-1-richard.henderson@linaro.org>
- <20230503070656.1746170-40-richard.henderson@linaro.org>
-In-Reply-To: <20230503070656.1746170-40-richard.henderson@linaro.org>
+ <20230503070656.1746170-41-richard.henderson@linaro.org>
+In-Reply-To: <20230503070656.1746170-41-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 5 May 2023 13:41:54 +0100
-Message-ID: <CAFEAcA-gxwTpU4=y7+-9Pu6kWFdiA08AOhmTbs5aSeUZ5+mq2g@mail.gmail.com>
-Subject: Re: [PATCH v4 39/57] tcg: Introduce tcg_target_has_memory_bswap
+Date: Fri, 5 May 2023 13:45:03 +0100
+Message-ID: <CAFEAcA9yr-7zDWJkbxEJVBO+FtRcK=TAOw+PMjsK_pYg06zRww@mail.gmail.com>
+Subject: Re: [PATCH v4 40/57] tcg: Add INDEX_op_qemu_{ld,st}_i128
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn, 
  philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
  qemu-s390x@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x533.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::529;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,14 +79,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 May 2023 12:42:10 -0000
+X-List-Received-Date: Fri, 05 May 2023 12:45:18 -0000
 
-On Wed, 3 May 2023 at 08:20, Richard Henderson
+On Wed, 3 May 2023 at 08:13, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> Replace the unparameterized TCG_TARGET_HAS_MEMORY_BSWAP macro
-> with a function with a memop argument.
+> Add opcodes for backend support for 128-bit memory operations.
 >
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
