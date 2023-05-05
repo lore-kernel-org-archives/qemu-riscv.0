@@ -1,47 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pusmt-0003V1-Ty
-	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 06:35:43 -0400
+	id 1pusok-0004og-Ea
+	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 06:37:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pusmi-0003MR-0B; Fri, 05 May 2023 06:35:32 -0400
-Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1pusme-0004Cm-Rq; Fri, 05 May 2023 06:35:31 -0400
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R891e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0Vhp084V_1683282914; 
-Received: from 30.221.98.0(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0Vhp084V_1683282914) by smtp.aliyun-inc.com;
- Fri, 05 May 2023 18:35:15 +0800
-Message-ID: <31fac540-105c-b2f7-c150-da1346339d05@linux.alibaba.com>
-Date: Fri, 5 May 2023 18:35:07 +0800
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1pusoj-0004np-0Z
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 06:37:37 -0400
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1pusoh-0004um-GT
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 06:37:36 -0400
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-50bc4bc2880so2499981a12.2
+ for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 03:37:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1683283054; x=1685875054;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lQFl/hfaokX6bWVDMMA0Liw7xdcfO7yVzbh3vEMN0ng=;
+ b=CnicNmACePipY/HbiiDXqJ8853Y5kSFJHKLX4nKx1qOAJOqFqg/lnT/seHgegVy1e5
+ K12LgtMNLz0TVxtvBKOzPhEMesZ4I+O7/2x0fshrVcBBgTKuW+7QsKsEEcHEohpbao/3
+ pA7a+2iBWNirE8rIhTDO6qJo6PgPjbKxbJCchEU4fyoxZh43pwXnJjjZ1dGfB6Z9ifHu
+ oetUgFhCtYBg5Zv4yfCfJPzA4AKxbIjg7uK45LuR9uHrJyJs6jCN6HLJXqSj3hG4o/VP
+ RTJE+xgeKjLPmdfUO4V8grddcg0fxGOYW7b3kstIwIO1TeJEbpyPXJRxNliAzjQaK64r
+ 5v8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1683283054; x=1685875054;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lQFl/hfaokX6bWVDMMA0Liw7xdcfO7yVzbh3vEMN0ng=;
+ b=ZxAUacfjz/YkrgdZrUrntx74S2Z30JLK32Furda0MOm5Yg5WatCZitrVc5bwo79kj8
+ VOJ5cHKe+Mtf2K/bZ+ItdIRqY9bKKA9Cb6XB1rNUzSIHoKdx3C9WP8xI0TQ2G0nPhgRB
+ VJjzZT9c76ttT8fX5hGp+N2RrVxS64WwmQZ5aUiqqmiHRAD+LNMx8qp+gNg+WjyWuGCR
+ fkljnpBkKZc8YuEkefpULeMFlscIESDUCyov/IS4YnrflqVsK3J7MIcfq2Onx82deYMD
+ Gb/nfnJvWMnR4LAJBegoXhEtODx4CFHRWLt61Bx8YQDKN8WiOv2QTpM/enyDFgWEGuzL
+ CGAQ==
+X-Gm-Message-State: AC+VfDzsYanFrL7KhoKM2eT03FTvSgzXx9TgmRVP3LHwHLj89ySWsy1U
+ wP38gfpHQBUKXTL87VlFkL9QVwxlNqnGlS+VnFJOQQ==
+X-Google-Smtp-Source: ACHHUZ6XeKuoAmKBc+GF31yiQuuv1+CjRQuFSk6tIw3yJsHjUJ7d6oxI9P/tNiKi3y4FGYfAcsaosqGmzwkXLBjvO3Y=
+X-Received: by 2002:aa7:dbc8:0:b0:50b:d305:3788 with SMTP id
+ v8-20020aa7dbc8000000b0050bd3053788mr798666edt.11.1683283053934; Fri, 05 May
+ 2023 03:37:33 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.1
-Subject: Re: [PATCH v4 38/57] tcg/riscv: Support softmmu unaligned accesses
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: git@xen0n.name, gaosong@loongson.cn, philmd@linaro.org,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
 References: <20230503070656.1746170-1-richard.henderson@linaro.org>
- <20230503070656.1746170-39-richard.henderson@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20230503070656.1746170-39-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.110;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-110.freemail.mail.aliyun.com
-X-Spam_score_int: -141
-X-Spam_score: -14.2
-X-Spam_bar: --------------
-X-Spam_report: (-14.2 / 5.0 requ) BAYES_00=-1.9, ENV_AND_HDR_SPF_MATCH=-0.5,
- NICE_REPLY_A=-4.28, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ <20230503070656.1746170-16-richard.henderson@linaro.org>
+In-Reply-To: <20230503070656.1746170-16-richard.henderson@linaro.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 5 May 2023 11:37:23 +0100
+Message-ID: <CAFEAcA-qe+5+eDdjFUxrOqE4URwsBYdN7Q1_BLbAusGDnaudGw@mail.gmail.com>
+Subject: Re: [PATCH v4 15/57] accel/tcg: Use have_atomic16 in
+ ldst_atomicity.c.inc
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn, 
+ philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
+ qemu-s390x@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::535;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x535.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -54,117 +78,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 May 2023 10:35:41 -0000
+X-List-Received-Date: Fri, 05 May 2023 10:37:37 -0000
 
-
-On 2023/5/3 15:06, Richard Henderson wrote:
-> The system is required to emulate unaligned accesses, even if the
-> hardware does not support it.  The resulting trap may or may not
-> be more efficient than the qemu slow path.  There are linux kernel
-> patches in flight to allow userspace to query hardware support;
-> we can re-evaluate whether to enable this by default after that.
+On Wed, 3 May 2023 at 08:08, Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> In the meantime, softmmu now matches useronly, where we already
-> assumed that unaligned accesses are supported.
+> Hosts using Intel and AMD AVX cpus are quite common.
+> Add fast paths through ldst_atomicity using this.
+>
+> Only enable with CONFIG_INT128; some older clang versions do not
+> support __int128_t, and the inline assembly won't work on structures.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   tcg/riscv/tcg-target.c.inc | 48 ++++++++++++++++++++++----------------
->   1 file changed, 28 insertions(+), 20 deletions(-)
->
-> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
-> index 19cd4507fb..415e6c6e15 100644
-> --- a/tcg/riscv/tcg-target.c.inc
-> +++ b/tcg/riscv/tcg-target.c.inc
-> @@ -910,12 +910,13 @@ static TCGLabelQemuLdst *prepare_host_addr(TCGContext *s, TCGReg *pbase,
->   
->   #ifdef CONFIG_SOFTMMU
->       unsigned s_bits = opc & MO_SIZE;
-> +    unsigned s_mask = (1u << s_bits) - 1;
->       int mem_index = get_mmuidx(oi);
->       int fast_ofs = TLB_MASK_TABLE_OFS(mem_index);
->       int mask_ofs = fast_ofs + offsetof(CPUTLBDescFast, mask);
->       int table_ofs = fast_ofs + offsetof(CPUTLBDescFast, table);
-> -    TCGReg mask_base = TCG_AREG0, table_base = TCG_AREG0;
-> -    tcg_target_long compare_mask;
-> +    int compare_mask;
-> +    TCGReg addr_adj;
->   
->       ldst = new_ldst_label(s);
->       ldst->is_ld = is_ld;
-> @@ -924,14 +925,33 @@ static TCGLabelQemuLdst *prepare_host_addr(TCGContext *s, TCGReg *pbase,
->   
->       QEMU_BUILD_BUG_ON(TLB_MASK_TABLE_OFS(0) > 0);
->       QEMU_BUILD_BUG_ON(TLB_MASK_TABLE_OFS(0) < -(1 << 11));
-> -    tcg_out_ld(s, TCG_TYPE_PTR, TCG_REG_TMP0, mask_base, mask_ofs);
-> -    tcg_out_ld(s, TCG_TYPE_PTR, TCG_REG_TMP1, table_base, table_ofs);
-> +    tcg_out_ld(s, TCG_TYPE_PTR, TCG_REG_TMP0, TCG_AREG0, mask_ofs);
-> +    tcg_out_ld(s, TCG_TYPE_PTR, TCG_REG_TMP1, TCG_AREG0, table_ofs);
->   
->       tcg_out_opc_imm(s, OPC_SRLI, TCG_REG_TMP2, addr_reg,
->                       TARGET_PAGE_BITS - CPU_TLB_ENTRY_BITS);
->       tcg_out_opc_reg(s, OPC_AND, TCG_REG_TMP2, TCG_REG_TMP2, TCG_REG_TMP0);
->       tcg_out_opc_reg(s, OPC_ADD, TCG_REG_TMP2, TCG_REG_TMP2, TCG_REG_TMP1);
->   
-> +    /*
-> +     * For aligned accesses, we check the first byte and include the alignment
-> +     * bits within the address.  For unaligned access, we check that we don't
-> +     * cross pages using the address of the last byte of the access.
-> +     */
-> +    addr_adj = addr_reg;
-> +    if (a_bits < s_bits) {
-> +        addr_adj = TCG_REG_TMP0;
-> +        tcg_out_opc_imm(s, TARGET_LONG_BITS == 32 ? OPC_ADDIW : OPC_ADDI,
-> +                        addr_adj, addr_reg, s_mask - a_mask);
-> +    }
-> +    compare_mask = TARGET_PAGE_MASK | a_mask;
-> +    if (compare_mask == sextreg(compare_mask, 0, 12)) {
-> +        tcg_out_opc_imm(s, OPC_ANDI, TCG_REG_TMP1, addr_adj, compare_mask);
-> +    } else {
-> +        tcg_out_movi(s, TCG_TYPE_TL, TCG_REG_TMP1, compare_mask);
-> +        tcg_out_opc_reg(s, OPC_AND, TCG_REG_TMP1, TCG_REG_TMP1, addr_adj);
-> +    }
-> +
->       /* Load the tlb comparator and the addend.  */
->       tcg_out_ld(s, TCG_TYPE_TL, TCG_REG_TMP0, TCG_REG_TMP2,
->                  is_ld ? offsetof(CPUTLBEntry, addr_read)
-> @@ -939,29 +959,17 @@ static TCGLabelQemuLdst *prepare_host_addr(TCGContext *s, TCGReg *pbase,
->       tcg_out_ld(s, TCG_TYPE_PTR, TCG_REG_TMP2, TCG_REG_TMP2,
->                  offsetof(CPUTLBEntry, addend));
->   
-> -    /* We don't support unaligned accesses. */
-> -    if (a_bits < s_bits) {
-> -        a_bits = s_bits;
-> -    }
-> -    /* Clear the non-page, non-alignment bits from the address.  */
-> -    compare_mask = (tcg_target_long)TARGET_PAGE_MASK | a_mask;
-> -    if (compare_mask == sextreg(compare_mask, 0, 12)) {
-> -        tcg_out_opc_imm(s, OPC_ANDI, TCG_REG_TMP1, addr_reg, compare_mask);
-> -    } else {
-> -        tcg_out_movi(s, TCG_TYPE_TL, TCG_REG_TMP1, compare_mask);
-> -        tcg_out_opc_reg(s, OPC_AND, TCG_REG_TMP1, TCG_REG_TMP1, addr_reg);
-> -    }
-> -
->       /* Compare masked address with the TLB entry. */
->       ldst->label_ptr[0] = s->code_ptr;
->       tcg_out_opc_branch(s, OPC_BNE, TCG_REG_TMP0, TCG_REG_TMP1, 0);
->   
->       /* TLB Hit - translate address using addend.  */
-> +    addr_adj = addr_reg;
->       if (TARGET_LONG_BITS == 32) {
-> -        tcg_out_ext32u(s, TCG_REG_TMP0, addr_reg);
-> -        addr_reg = TCG_REG_TMP0;
-> +        addr_adj = TCG_REG_TMP0;
-> +        tcg_out_ext32u(s, addr_adj, addr_reg);
->       }
-> -    tcg_out_opc_reg(s, OPC_ADD, TCG_REG_TMP0, TCG_REG_TMP2, addr_reg);
-> +    tcg_out_opc_reg(s, OPC_ADD, TCG_REG_TMP0, TCG_REG_TMP2, addr_adj);
+>  accel/tcg/ldst_atomicity.c.inc | 76 +++++++++++++++++++++++++++-------
+>  1 file changed, 60 insertions(+), 16 deletions(-)
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Inline x86 asm in a bit of generic code seems rather awkward.
+Ideally the compiler should be doing this for us; failing
+that can we at least abstract out the operations to a
+set of functions that we can provide (or not provide)
+implementations of?
 
-Zhiwei
-
->       *pbase = TCG_REG_TMP0;
->   #else
->       if (a_mask) {
+-- PMM
 
