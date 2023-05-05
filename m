@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pussO-0001RV-6z
-	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 06:41:24 -0400
+	id 1pusuW-00039K-Ce
+	for mharc-qemu-riscv@gnu.org; Fri, 05 May 2023 06:43:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1pussM-0001QJ-5M
- for qemu-riscv@nongnu.org; Fri, 05 May 2023 06:41:22 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ id 1pusuU-00038Q-Tm
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 06:43:35 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1pussJ-0006bn-K9
- for qemu-riscv@nongnu.org; Fri, 05 May 2023 06:41:21 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-50bd87539c2so2527656a12.0
- for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 03:41:19 -0700 (PDT)
+ id 1pusuS-0007Wp-8N
+ for qemu-riscv@nongnu.org; Fri, 05 May 2023 06:43:34 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-50bc4ba28cbso2886036a12.0
+ for <qemu-riscv@nongnu.org>; Fri, 05 May 2023 03:43:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683283278; x=1685875278;
+ d=linaro.org; s=google; t=1683283411; x=1685875411;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GGUYB/K0rHbygF7dcBo384KEw+1cPVilG6zEPPYTpr8=;
- b=QpUPdjyaGWJusiYMY0cklVM/t1EabdSRoPAcVGgdV5t9vWqHm0brbvxrxvMXaRuVma
- lvwi3IHbR8hEscm/GX5RqZGSxvl93wbv7lJ9QkaDasbS7vgerBzvULq+B6PX8UYYZW1p
- 5eFxpBM4R9YXQrewF56f0Bzuw1NcMdQhDDbIWupt3RvvxdmYMIr9EQOg8FgE71/9sKf9
- T5xUxUSFn8dwY+ryd31rS5zkMllICaEJoBGtJmpdqIDc6NalwGlc9ISL7JC6neR6XkB5
- yWVUK1fXygLYgweM32wQC5sA1tYr+EgVgIrm39LTJiLdmSUVhsDjJkbG2G5e8PYVNi4j
- W11w==
+ bh=qoFlwzXN5mH9Aj4KpFXV88viAD32yd1whvy9VzDa++8=;
+ b=mAKTKDoa/DsDFkSslH03pkeF4BZpp9EWMW24cX6a5/AKA9oSRTQwhwAhEEZWJnvWgl
+ S8u3sSX9AAyFoomqHZKELGb+/0IYo6fv0u/ErIUcURLigeFA42Ouz6iU58muKNGqbOpB
+ dDiMiVNimE8i/dCNC0qP/l/9gW+FyDql7tgN3KYpvonoq5VIJRE6GSsoTGkPRiKc7qvx
+ YQHLLIqRGTklsvGmSQa8EmL/U5x5xFm62aY8cvCO12jDE6aniHwFhcEii6JqOdCl7qNC
+ dNXi1bsUKdXMFmIZL3Df95jg+hFwOOLGSf9qNcYHg+f0aH9oPVcz3kRzn7pMy58e0RKi
+ 7QNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683283278; x=1685875278;
+ d=1e100.net; s=20221208; t=1683283411; x=1685875411;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GGUYB/K0rHbygF7dcBo384KEw+1cPVilG6zEPPYTpr8=;
- b=kCSSdXB9TrDumWcs1WTTdmqdkhvFNzXFstu2xUd8IbAmQlUvLkY29eFEmQBUWfka53
- wtSBe3+Z3mEnjhK8CkMEnaYM0n65w36uO4IX2lQV4b2dm5gbCJm2aDrrKBuBSC7fEF5m
- NJEcdler4CaVL8JLQwYk9N7aR1AFdRUjniuFy7ujmQW/hanmlB+EUnY2JheUUw8zmtoT
- LMoxI6gEDursvPAOTSXtLvGJcMKaYnWXstu89Ye64dAyAHvzWdgWwGPm5e9vhv8VickL
- aCT/pw4AiYC8IHKSHzO6mfiiVaGsLqAKPsKeMfL1uU7QVjt53IlBqC2Vl934+97k6roe
- 3kbw==
-X-Gm-Message-State: AC+VfDzSomjeeNwN3piuVsgkwjVVQWXOtsrj9DrBh/Q3XwYONEZ1Lje+
- nQtzK+b8Yk5twKxe1FUDNILcpfoxb8voH53uzr4SmQ==
-X-Google-Smtp-Source: ACHHUZ7+yiWlsG0fP3XBoYR3uhyG2OgdrnprfQvg3fW/tWuIDZ1vQOMC9WmrWfPy9f7KPE31Y14pusFnVtWT/WJFfaQ=
-X-Received: by 2002:aa7:c589:0:b0:50b:c9d4:8804 with SMTP id
- g9-20020aa7c589000000b0050bc9d48804mr1018611edq.4.1683283277804; Fri, 05 May
- 2023 03:41:17 -0700 (PDT)
+ bh=qoFlwzXN5mH9Aj4KpFXV88viAD32yd1whvy9VzDa++8=;
+ b=Kh/xpbpqKC4u2sBLbnpOk6xud2ivWzenirf5xY7bpQiXNvllPqSrT+5LYMV3ghJoeD
+ YpWrI8rsGxciQHRH3nbWBAL8RpmeKcS1VEgsjyeGI4B2BUGO4HzBHLcJUIn/aYdh+Lb+
+ N5hLM2TpZrgTglp2q/luribobdE+wXRmxW4K3vJIFatMl6Z1DqgVNEE8f+2t0R9+V7Fy
+ Ah1mIyKb9hQDLVqavpoyj9GApszC0EFo46ue0GT9OgklWRvVZtLUjSSaltDb/uYgv4DL
+ 6epnsLfU89kftP7KRXieTn9UG96NWUyuysvOBPExumG9Iw9ETV6x67RX+0r5W0YPB5gz
+ qlfg==
+X-Gm-Message-State: AC+VfDzosDqgvNdSkZIfG7yu8vB/EZBBevBGLTNMvu0JlGdof5M4tRM3
+ fUKt/WhJTqUfWyc5JyJcnoUDqaPQZcJdxlbr5sgX0g==
+X-Google-Smtp-Source: ACHHUZ7OlZqBCgw1LNirBvQkahUBqOz2NHXn5wyiCmSMCAM9ruLxw+vNlt6oseN2adqngkwJ/CiRey1xMbS/GnL2Bg0=
+X-Received: by 2002:aa7:d54c:0:b0:509:c6e6:c002 with SMTP id
+ u12-20020aa7d54c000000b00509c6e6c002mr971466edr.39.1683283410624; Fri, 05 May
+ 2023 03:43:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230503070656.1746170-1-richard.henderson@linaro.org>
- <20230503070656.1746170-18-richard.henderson@linaro.org>
-In-Reply-To: <20230503070656.1746170-18-richard.henderson@linaro.org>
+ <20230503070656.1746170-19-richard.henderson@linaro.org>
+In-Reply-To: <20230503070656.1746170-19-richard.henderson@linaro.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 5 May 2023 11:41:06 +0100
-Message-ID: <CAFEAcA9MZtk33geq=8-1vwM2W-fDHa8p1gcUf4h2ztPG7HGWfA@mail.gmail.com>
-Subject: Re: [PATCH v4 17/57] tcg/aarch64: Detect have_lse, have_lse2 for linux
+Date: Fri, 5 May 2023 11:43:19 +0100
+Message-ID: <CAFEAcA-sXLdmmoHTfsCrPEDQvxczh10tLwcFC1qB05UV2Y1ziQ@mail.gmail.com>
+Subject: Re: [PATCH v4 18/57] tcg/aarch64: Detect have_lse,
+ have_lse2 for darwin
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn, 
  philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
  qemu-s390x@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -79,17 +80,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 May 2023 10:41:22 -0000
+X-List-Received-Date: Fri, 05 May 2023 10:43:35 -0000
 
-On Wed, 3 May 2023 at 08:08, Richard Henderson
+On Wed, 3 May 2023 at 08:19, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> Notice when the host has additional atomic instructions.
-> The new variables will also be used in generated code.
+> These features are present for Apple M1.
 >
+> Tested-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> +#ifdef CONFIG_DARWIN
+> +static bool sysctl_for_bool(const char *name)
+> +{
+> +    int val =3D 0;
+> +    size_t len =3D sizeof(val);
+> +
+> +    if (sysctlbyname(name, &val, &len, NULL, 0) =3D=3D 0) {
+> +        return val !=3D 0;
+> +    }
+> +
+> +    /*
+> +     * We might in ask for properties not present in older kernels,
 
+"might in ask" is a typo for something, but I'm not sure what.
+
+> +     * but we're only asking about static properties, all of which
+> +     * should be 'int'.  So we shouln't see ENOMEM (val too small),
+> +     * or any of the other more exotic errors.
+> +     */
+> +    assert(errno =3D=3D ENOENT);
+> +    return false;
+> +}
+> +#endif
+
+Otherwise
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
 thanks
