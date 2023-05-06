@@ -1,67 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pvCG6-0004ZX-He
+	id 1pvCG6-0004ab-Oh
 	for mharc-qemu-riscv@gnu.org; Sat, 06 May 2023 03:23:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pvCG4-0004SG-7S
- for qemu-riscv@nongnu.org; Sat, 06 May 2023 03:23:08 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ id 1pvCG5-0004Vv-J8
+ for qemu-riscv@nongnu.org; Sat, 06 May 2023 03:23:09 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pvCFm-0004RK-4r
- for qemu-riscv@nongnu.org; Sat, 06 May 2023 03:23:07 -0400
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-30639daee76so1725632f8f.1
- for <qemu-riscv@nongnu.org>; Sat, 06 May 2023 00:22:49 -0700 (PDT)
+ id 1pvCFm-0004Re-Sr
+ for qemu-riscv@nongnu.org; Sat, 06 May 2023 03:23:09 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-30771c68a9eso2073989f8f.2
+ for <qemu-riscv@nongnu.org>; Sat, 06 May 2023 00:22:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683357768; x=1685949768;
+ d=linaro.org; s=google; t=1683357769; x=1685949769;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kF/KuD0+uQLXuYT2v2A5wco+ARF0bjd47P8BXDbif68=;
- b=Mv14RF7j6oK1HepClJ8lQVXqr4edH3XWDmFJfnvFINlbqy/uUeif83mU2McgdlwGBU
- pCigGeRLFA1Guy+Nh67Rgc5wh1rrA6IV4FnDwOXmHsV0YqIrc8O8MHiXg72ETz+qpe7h
- Ym+TyVE3TM3e21H/W1fMlp2IKndN09WzDhQbPBoaYeG+mjZjTMfzdoQ+ZVcf5vLSOKr/
- XlQ5qAdDyJiH4k2r58jBmtX0dXZlK/f/X59EFFGQD8Azed0kQ0AcTYZi6G9OfaPvArTU
- 50X7O6VybLX1wEjoy3wDCgwZoEA/Bwoay8ejSGMPzFiHjXmh/90FT5vkN9CY9r/UCwG5
- 2vpg==
+ bh=Bp+7jHuRwCoumX81kkmi2LLSK4XPzI38mrYIrW5iAjM=;
+ b=RuPpVsg69wZKOXhZJXZGvrel3vwJkeiLbWsRHRKNhkuAVbXkWi/RgCI01gLVQw/u1e
+ 2DjT0R/gJruizoYHzqLILaiebnpsRYb9DM1+O5oFA2z+RQOktgCKkyb2tEiVriTgdH2s
+ dN8OqSmdt+bBOJ+ipT5XYmgxihdGLyVOe9ghbHmPvJEmGFc1BVDXC3NAita07AifBvIH
+ Ym+aHnwVSp3eYKhyolzQIHbHGtG4Livy+E/XP/u8VCz/GrYrZVhr/b9dj9AGWvTAFisc
+ BLX2kDT0OYENsd5wcJynbznpZ9q4A4wfSojUCoUhG+52N0GVQ2Sok9CPXilexURwR3fJ
+ iC6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683357768; x=1685949768;
+ d=1e100.net; s=20221208; t=1683357769; x=1685949769;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kF/KuD0+uQLXuYT2v2A5wco+ARF0bjd47P8BXDbif68=;
- b=lA+JITIa0gQYQHdL/jCY+sygbcwxt8Li2r/JtB1WOP3XhnRloIo2yT+9nLa9W/Lg2T
- viN1r1SMvtbIut93TovhwIErG3q+vF2OrwZeKDv9QCICtaZ+2BAvPjVbZVqqdeuwV2GP
- eYTAJZ4IshbLcf2BXmpFoSoBbBvPo3Pcx+S6Xb0jqOhcxJGFqxvs4tqoPBlnnBNos4xU
- rXjqaLr2FzNsuVBm4RDZCqGOm1W27cQ+xLfBd99An3+NM2Po0SI5imAOX9Ssn6awU0Br
- Zy2I1dhSxZd/x6T9AonqOXSGpLbZEkBqFghJ7Je/nymZEtKw8d6INnu7MALDOhI0i1kx
- Mqog==
-X-Gm-Message-State: AC+VfDzxnyJc2OnnL3xMHjJCJ/8+sYGrW9zs9LAT0ezS8LeRXoapOp34
- w9OZKYqHkjqsykjzQPEYFCag9g==
-X-Google-Smtp-Source: ACHHUZ4HL/SjDSPNzLIZabYCuenmK2IT+7eD7jihyvHcF2R258YUxbAWRqFbnSjno7TEDA1xEml6Xg==
-X-Received: by 2002:adf:e80e:0:b0:2f9:85ee:e031 with SMTP id
- o14-20020adfe80e000000b002f985eee031mr2866134wrm.26.1683357768633; 
- Sat, 06 May 2023 00:22:48 -0700 (PDT)
+ bh=Bp+7jHuRwCoumX81kkmi2LLSK4XPzI38mrYIrW5iAjM=;
+ b=ceHpsCPAemQgNevCz4UvLziA47Qn3sfh6M8vPTEanWntaN6EquDwq3O4x/aGpNDMd9
+ 7my6kf6SaBHe+oxrNJlXTqNq2cbDAPrxQQojImNvqlFIADSU4/uc6mz8Qqjx9AC/VKve
+ LWMBIzT/0Jlgl5NeTpUzRx9fkAi2MnK3GXFZKpf8UeVX+vlzr9KI+/x2XOJjdFs5gedf
+ xn/FX5AGESWjCZv+9Tb+bXhN+TaChtWn7i2krUfsoSe0H4S1eaJafIMTKow83DtOkRKv
+ J+8h7mNGRE+BqjgnXMm+Rg6dqa4lo6r98+Fb3WNVfyFDfcDmJdQx7/TVowcnU4wElLab
+ elxQ==
+X-Gm-Message-State: AC+VfDxaWwcLOBbcCzoyXlBiJuLbIhuK3BUtJLYDzuA78JH4l3H3mbU1
+ hN2+SHXsn1f+9CK5+PoXBoo4IQ==
+X-Google-Smtp-Source: ACHHUZ6zmAb3COBB6G8a3/hJRcraPL06UVJKdAkWZOR9xTe8RPhtxW0RtwnHeSEo6BOtRvQDQCepXQ==
+X-Received: by 2002:a05:6000:12c9:b0:2d0:bba8:3901 with SMTP id
+ l9-20020a05600012c900b002d0bba83901mr2702707wrx.62.1683357769412; 
+ Sat, 06 May 2023 00:22:49 -0700 (PDT)
 Received: from stoup.. ([212.241.182.8]) by smtp.gmail.com with ESMTPSA id
  x9-20020adfec09000000b002faaa9a1721sm4481223wrn.58.2023.05.06.00.22.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 May 2023 00:22:48 -0700 (PDT)
+ Sat, 06 May 2023 00:22:49 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: git@xen0n.name, gaosong@loongson.cn, philmd@linaro.org,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: [PATCH v5 16/30] tcg/mips: Convert tcg_out_qemu_{ld,st}_slow_path
-Date: Sat,  6 May 2023 08:22:21 +0100
-Message-Id: <20230506072235.597467-17-richard.henderson@linaro.org>
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ Daniel Henrique Barboza <danielhb413@gmail.com>
+Subject: [PATCH v5 17/30] tcg/ppc: Convert tcg_out_qemu_{ld,st}_slow_path
+Date: Sat,  6 May 2023 08:22:22 +0100
+Message-Id: <20230506072235.597467-18-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230506072235.597467-1-richard.henderson@linaro.org>
 References: <20230506072235.597467-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,222 +82,136 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 May 2023 07:23:08 -0000
+X-List-Received-Date: Sat, 06 May 2023 07:23:09 -0000
 
 Use tcg_out_ld_helper_args, tcg_out_ld_helper_ret,
-and tcg_out_st_helper_args.  This allows our local
-tcg_out_arg_* infrastructure to be removed.
+and tcg_out_st_helper_args.
 
-We are no longer filling the call or return branch
-delay slots, nor are we tail-calling for the store,
-but this seems a small price to pay.
-
+Reviewed-by: Daniel Henrique Barboza <danielhb413@gmail.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- tcg/mips/tcg-target.c.inc | 154 ++++++--------------------------------
- 1 file changed, 22 insertions(+), 132 deletions(-)
+ tcg/ppc/tcg-target.c.inc | 88 ++++++++++++----------------------------
+ 1 file changed, 26 insertions(+), 62 deletions(-)
 
-diff --git a/tcg/mips/tcg-target.c.inc b/tcg/mips/tcg-target.c.inc
-index 94708e6ea7..022960d79a 100644
---- a/tcg/mips/tcg-target.c.inc
-+++ b/tcg/mips/tcg-target.c.inc
-@@ -1115,79 +1115,15 @@ static void * const qemu_st_helpers[(MO_SIZE | MO_BSWAP) + 1] = {
+diff --git a/tcg/ppc/tcg-target.c.inc b/tcg/ppc/tcg-target.c.inc
+index 7239335bdf..042136fee7 100644
+--- a/tcg/ppc/tcg-target.c.inc
++++ b/tcg/ppc/tcg-target.c.inc
+@@ -2003,44 +2003,38 @@ static void * const qemu_st_helpers[(MO_SIZE | MO_BSWAP) + 1] = {
      [MO_BEUQ] = helper_be_stq_mmu,
  };
  
--/* Helper routines for marshalling helper function arguments into
-- * the correct registers and stack.
-- * I is where we want to put this argument, and is updated and returned
-- * for the next call. ARG is the argument itself.
-- *
-- * We provide routines for arguments which are: immediate, 32 bit
-- * value in register, 16 and 8 bit values in register (which must be zero
-- * extended before use) and 64 bit value in a lo:hi register pair.
-- */
--
--static int tcg_out_call_iarg_reg(TCGContext *s, int i, TCGReg arg)
--{
--    if (i < ARRAY_SIZE(tcg_target_call_iarg_regs)) {
--        tcg_out_mov(s, TCG_TYPE_REG, tcg_target_call_iarg_regs[i], arg);
--    } else {
--        /* For N32 and N64, the initial offset is different.  But there
--           we also have 8 argument register so we don't run out here.  */
--        tcg_debug_assert(TCG_TARGET_REG_BITS == 32);
--        tcg_out_st(s, TCG_TYPE_REG, arg, TCG_REG_SP, 4 * i);
--    }
--    return i + 1;
--}
--
--static int tcg_out_call_iarg_reg8(TCGContext *s, int i, TCGReg arg)
--{
--    TCGReg tmp = TCG_TMP0;
--    if (i < ARRAY_SIZE(tcg_target_call_iarg_regs)) {
--        tmp = tcg_target_call_iarg_regs[i];
--    }
--    tcg_out_ext8u(s, tmp, arg);
--    return tcg_out_call_iarg_reg(s, i, tmp);
--}
--
--static int tcg_out_call_iarg_reg16(TCGContext *s, int i, TCGReg arg)
--{
--    TCGReg tmp = TCG_TMP0;
--    if (i < ARRAY_SIZE(tcg_target_call_iarg_regs)) {
--        tmp = tcg_target_call_iarg_regs[i];
--    }
--    tcg_out_opc_imm(s, OPC_ANDI, tmp, arg, 0xffff);
--    return tcg_out_call_iarg_reg(s, i, tmp);
--}
--
--static int tcg_out_call_iarg_imm(TCGContext *s, int i, TCGArg arg)
--{
--    TCGReg tmp = TCG_TMP0;
--    if (arg == 0) {
--        tmp = TCG_REG_ZERO;
--    } else {
--        if (i < ARRAY_SIZE(tcg_target_call_iarg_regs)) {
--            tmp = tcg_target_call_iarg_regs[i];
--        }
--        tcg_out_movi(s, TCG_TYPE_REG, tmp, arg);
--    }
--    return tcg_out_call_iarg_reg(s, i, tmp);
--}
--
--static int tcg_out_call_iarg_reg2(TCGContext *s, int i, TCGReg al, TCGReg ah)
--{
--    tcg_debug_assert(TCG_TARGET_REG_BITS == 32);
--    i = (i + 1) & ~1;
--    i = tcg_out_call_iarg_reg(s, i, (MIPS_BE ? ah : al));
--    i = tcg_out_call_iarg_reg(s, i, (MIPS_BE ? al : ah));
--    return i;
--}
-+/* We have four temps, we might as well expose three of them. */
++static TCGReg ldst_ra_gen(TCGContext *s, const TCGLabelQemuLdst *l, int arg)
++{
++    if (arg < 0) {
++        arg = TCG_REG_TMP1;
++    }
++    tcg_out32(s, MFSPR | RT(arg) | LR);
++    return arg;
++}
++
++/*
++ * For the purposes of ppc32 sorting 4 input registers into 4 argument
++ * registers, there is an outside chance we would require 3 temps.
++ * Because of constraints, no inputs are in r3, and env will not be
++ * placed into r3 until after the sorting is done, and is thus free.
++ */
 +static const TCGLdstHelperParam ldst_helper_param = {
-+    .ntmp = 3, .tmp = { TCG_TMP0, TCG_TMP1, TCG_TMP2 }
++    .ra_gen = ldst_ra_gen,
++    .ntmp = 3,
++    .tmp = { TCG_REG_TMP1, TCG_REG_R0, TCG_REG_R3 }
 +};
- 
- static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
++
+ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *lb)
  {
-     const tcg_insn_unit *tgt_rx = tcg_splitwx_to_rx(s->code_ptr);
--    MemOpIdx oi = l->oi;
+-    MemOpIdx oi = lb->oi;
 -    MemOp opc = get_memop(oi);
--    TCGReg v0;
--    int i;
-+    MemOp opc = get_memop(l->oi);
+-    TCGReg hi, lo, arg = TCG_REG_R3;
++    MemOp opc = get_memop(lb->oi);
  
-     /* resolve label address */
-     if (!reloc_pc16(l->label_ptr[0], tgt_rx)
-@@ -1196,29 +1132,13 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+     if (!reloc_pc14(lb->label_ptr[0], tcg_splitwx_to_rx(s->code_ptr))) {
          return false;
      }
  
--    i = 1;
+-    tcg_out_mov(s, TCG_TYPE_PTR, arg++, TCG_AREG0);
+-
+-    lo = lb->addrlo_reg;
+-    hi = lb->addrhi_reg;
 -    if (TCG_TARGET_REG_BITS < TARGET_LONG_BITS) {
--        i = tcg_out_call_iarg_reg2(s, i, l->addrlo_reg, l->addrhi_reg);
+-        arg |= (TCG_TARGET_CALL_ARG_I64 == TCG_CALL_ARG_EVEN);
+-        tcg_out_mov(s, TCG_TYPE_I32, arg++, hi);
+-        tcg_out_mov(s, TCG_TYPE_I32, arg++, lo);
 -    } else {
--        i = tcg_out_call_iarg_reg(s, i, l->addrlo_reg);
+-        /* If the address needed to be zero-extended, we'll have already
+-           placed it in R4.  The only remaining case is 64-bit guest.  */
+-        tcg_out_mov(s, TCG_TYPE_TL, arg++, lo);
 -    }
--    i = tcg_out_call_iarg_imm(s, i, oi);
--    i = tcg_out_call_iarg_imm(s, i, (intptr_t)l->raddr);
-+    tcg_out_ld_helper_args(s, l, &ldst_helper_param);
-+
-     tcg_out_call_int(s, qemu_ld_helpers[opc & (MO_BSWAP | MO_SSIZE)], false);
-     /* delay slot */
--    tcg_out_mov(s, TCG_TYPE_PTR, tcg_target_call_iarg_regs[0], TCG_AREG0);
-+    tcg_out_nop(s);
- 
--    v0 = l->datalo_reg;
+-
+-    tcg_out_movi(s, TCG_TYPE_I32, arg++, oi);
+-    tcg_out32(s, MFSPR | RT(arg) | LR);
+-
++    tcg_out_ld_helper_args(s, lb, &ldst_helper_param);
+     tcg_out_call_int(s, LK, qemu_ld_helpers[opc & (MO_BSWAP | MO_SIZE)]);
+-
+-    lo = lb->datalo_reg;
+-    hi = lb->datahi_reg;
 -    if (TCG_TARGET_REG_BITS == 32 && (opc & MO_SIZE) == MO_64) {
--        /* We eliminated V0 from the possible output registers, so it
--           cannot be clobbered here.  So we must move V1 first.  */
--        if (MIPS_BE) {
--            tcg_out_mov(s, TCG_TYPE_I32, v0, TCG_REG_V1);
--            v0 = l->datahi_reg;
--        } else {
--            tcg_out_mov(s, TCG_TYPE_I32, l->datahi_reg, TCG_REG_V1);
--        }
--    }
-+    tcg_out_ld_helper_ret(s, l, true, &ldst_helper_param);
- 
-     tcg_out_opc_br(s, OPC_BEQ, TCG_REG_ZERO, TCG_REG_ZERO);
-     if (!reloc_pc16(s->code_ptr - 1, l->raddr)) {
-@@ -1226,22 +1146,14 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
-     }
- 
-     /* delay slot */
--    if (TCG_TARGET_REG_BITS == 64 && l->type == TCG_TYPE_I32) {
--        /* we always sign-extend 32-bit loads */
--        tcg_out_ext32s(s, v0, TCG_REG_V0);
+-        tcg_out_mov(s, TCG_TYPE_I32, lo, TCG_REG_R4);
+-        tcg_out_mov(s, TCG_TYPE_I32, hi, TCG_REG_R3);
 -    } else {
--        tcg_out_opc_reg(s, OPC_OR, v0, TCG_REG_V0, TCG_REG_ZERO);
+-        tcg_out_movext(s, lb->type, lo,
+-                       TCG_TYPE_REG, opc & MO_SSIZE, TCG_REG_R3);
 -    }
-+    tcg_out_nop(s);
-     return true;
- }
++    tcg_out_ld_helper_ret(s, lb, false, &ldst_helper_param);
  
- static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+     tcg_out_b(s, 0, lb->raddr);
+     return true;
+@@ -2048,43 +2042,13 @@ static bool tcg_out_qemu_ld_slow_path(TCGContext *s, TCGLabelQemuLdst *lb)
+ 
+ static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *lb)
  {
-     const tcg_insn_unit *tgt_rx = tcg_splitwx_to_rx(s->code_ptr);
--    MemOpIdx oi = l->oi;
+-    MemOpIdx oi = lb->oi;
 -    MemOp opc = get_memop(oi);
 -    MemOp s_bits = opc & MO_SIZE;
--    int i;
-+    MemOp opc = get_memop(l->oi);
+-    TCGReg hi, lo, arg = TCG_REG_R3;
++    MemOp opc = get_memop(lb->oi);
  
-     /* resolve label address */
-     if (!reloc_pc16(l->label_ptr[0], tgt_rx)
-@@ -1250,41 +1162,19 @@ static bool tcg_out_qemu_st_slow_path(TCGContext *s, TCGLabelQemuLdst *l)
+     if (!reloc_pc14(lb->label_ptr[0], tcg_splitwx_to_rx(s->code_ptr))) {
          return false;
      }
  
--    i = 1;
+-    tcg_out_mov(s, TCG_TYPE_PTR, arg++, TCG_AREG0);
+-
+-    lo = lb->addrlo_reg;
+-    hi = lb->addrhi_reg;
 -    if (TCG_TARGET_REG_BITS < TARGET_LONG_BITS) {
--        i = tcg_out_call_iarg_reg2(s, i, l->addrlo_reg, l->addrhi_reg);
+-        arg |= (TCG_TARGET_CALL_ARG_I64 == TCG_CALL_ARG_EVEN);
+-        tcg_out_mov(s, TCG_TYPE_I32, arg++, hi);
+-        tcg_out_mov(s, TCG_TYPE_I32, arg++, lo);
 -    } else {
--        i = tcg_out_call_iarg_reg(s, i, l->addrlo_reg);
+-        /* If the address needed to be zero-extended, we'll have already
+-           placed it in R4.  The only remaining case is 64-bit guest.  */
+-        tcg_out_mov(s, TCG_TYPE_TL, arg++, lo);
 -    }
--    switch (s_bits) {
--    case MO_8:
--        i = tcg_out_call_iarg_reg8(s, i, l->datalo_reg);
--        break;
--    case MO_16:
--        i = tcg_out_call_iarg_reg16(s, i, l->datalo_reg);
--        break;
--    case MO_32:
--        i = tcg_out_call_iarg_reg(s, i, l->datalo_reg);
--        break;
--    case MO_64:
--        if (TCG_TARGET_REG_BITS == 32) {
--            i = tcg_out_call_iarg_reg2(s, i, l->datalo_reg, l->datahi_reg);
--        } else {
--            i = tcg_out_call_iarg_reg(s, i, l->datalo_reg);
--        }
--        break;
--    default:
--        g_assert_not_reached();
+-
+-    lo = lb->datalo_reg;
+-    hi = lb->datahi_reg;
+-    if (TCG_TARGET_REG_BITS == 32 && s_bits == MO_64) {
+-        arg |= (TCG_TARGET_CALL_ARG_I64 == TCG_CALL_ARG_EVEN);
+-        tcg_out_mov(s, TCG_TYPE_I32, arg++, hi);
+-        tcg_out_mov(s, TCG_TYPE_I32, arg++, lo);
+-    } else {
+-        tcg_out_movext(s, s_bits == MO_64 ? TCG_TYPE_I64 : TCG_TYPE_I32,
+-                       arg++, lb->type, s_bits, lo);
 -    }
--    i = tcg_out_call_iarg_imm(s, i, oi);
-+    tcg_out_st_helper_args(s, l, &ldst_helper_param);
+-
+-    tcg_out_movi(s, TCG_TYPE_I32, arg++, oi);
+-    tcg_out32(s, MFSPR | RT(arg) | LR);
+-
++    tcg_out_st_helper_args(s, lb, &ldst_helper_param);
+     tcg_out_call_int(s, LK, qemu_st_helpers[opc & (MO_BSWAP | MO_SIZE)]);
  
--    /* Tail call to the store helper.  Thus force the return address
--       computation to take place in the return address register.  */
--    tcg_out_movi(s, TCG_TYPE_PTR, TCG_REG_RA, (intptr_t)l->raddr);
--    i = tcg_out_call_iarg_reg(s, i, TCG_REG_RA);
--    tcg_out_call_int(s, qemu_st_helpers[opc & (MO_BSWAP | MO_SIZE)], true);
-+    tcg_out_call_int(s, qemu_st_helpers[opc & (MO_BSWAP | MO_SIZE)], false);
-     /* delay slot */
--    tcg_out_mov(s, TCG_TYPE_PTR, tcg_target_call_iarg_regs[0], TCG_AREG0);
-+    tcg_out_nop(s);
-+
-+    tcg_out_opc_br(s, OPC_BEQ, TCG_REG_ZERO, TCG_REG_ZERO);
-+    if (!reloc_pc16(s->code_ptr - 1, l->raddr)) {
-+        return false;
-+    }
-+
-+    /* delay slot */
-+    tcg_out_nop(s);
-     return true;
- }
- 
+     tcg_out_b(s, 0, lb->raddr);
 -- 
 2.34.1
 
