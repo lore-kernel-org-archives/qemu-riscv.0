@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pvnmQ-0003tA-0E
-	for mharc-qemu-riscv@gnu.org; Sun, 07 May 2023 19:27:02 -0400
+	id 1pvnq5-0004qX-Su
+	for mharc-qemu-riscv@gnu.org; Sun, 07 May 2023 19:30:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pvnmO-0003sx-Rt; Sun, 07 May 2023 19:27:00 -0400
-Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
+ id 1pvnq3-0004pw-VV; Sun, 07 May 2023 19:30:48 -0400
+Received: from mail-vk1-xa30.google.com ([2607:f8b0:4864:20::a30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pvnmM-0000Rr-Lx; Sun, 07 May 2023 19:27:00 -0400
-Received: by mail-ua1-x935.google.com with SMTP id
- a1e0cc1a2514c-77d05b9c4a6so1012978241.0; 
- Sun, 07 May 2023 16:26:56 -0700 (PDT)
+ id 1pvnq2-00011q-C6; Sun, 07 May 2023 19:30:47 -0400
+Received: by mail-vk1-xa30.google.com with SMTP id
+ 71dfb90a1353d-44fc1a7d5d0so1383880e0c.2; 
+ Sun, 07 May 2023 16:30:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1683502016; x=1686094016;
+ d=gmail.com; s=20221208; t=1683502245; x=1686094245;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=w4sBkL+BrNYknh8R4malxqeSujRLqBSODs1zP5jpmZ0=;
- b=rkWE1BwP48TYazcp5/n5Upv4GUrIQ4jcELE8eNrMa7f3TSKhhx7GX76ta2S3tDKCf3
- F7mSmx0/Mhy3rUI5mp2NCtwMUHh3aKfUJwH/PLp4CvRiVI0+R+w3IEeLSOKDP0ux/3Mv
- rT7V6nYLryrY02EMy92BzoZIj8IbhGV5a/9UlyhkRYxVriIMMvV4oszbcediINeMF93u
- dkuIO7vrasIKCmxXEUb3z2Ixr+SJyp4mqmCjvMBWNM+f2B9ZKvbQkywt9doz/QzHOS1L
- yR/HqwuikKSCt5CKfIeo423lleyoHfnGHiN0d4LwBXce49ch4s2CjB64H9LO4/4sQnDs
- U4kQ==
+ bh=9dZ+ShCHslo6aQuTL22+v6fkmYBce3NvehRTSvO/+hU=;
+ b=WE7neqQI7hx7EckGMd96v4SMgueec4MlPxiYKZ7gUOGVZ0J4zxHuWdud4LpPw7Td6a
+ yl6QnCodK/Xawpz87Ay6mdF3fym8S9AaOJg6+y3ZCwsdvdPSl1JTnTSJlBI4BKNT8394
+ nEXtX5ubRe505X0taJz0fKSNQ9AaYlTBEytVQtb4cH2akRmsatarRy1JM8zuAeir8h9Q
+ SlhVZsEeYXhBWrmhPcW8CTJIIiQNSnBx8oEtLxVw056HHSMkYQg9SSE7KOqM1f45LIqn
+ gn9yI0/6mY77qI2zXCHmVdGgQrDqglWQZuOLF0LopmGb2GyRcoSe3i8zTIIQsjPo3f0n
+ z9gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683502016; x=1686094016;
+ d=1e100.net; s=20221208; t=1683502245; x=1686094245;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=w4sBkL+BrNYknh8R4malxqeSujRLqBSODs1zP5jpmZ0=;
- b=PI+T3x8Iz7wWYHac40km9E5Rj9XH85r0OHC/zblbd1voDWrBGDX81kxEvoogV547tJ
- 5vkc9S+9+eWsGHl6l7uukMJNArykfgO1Pjb5SVpcNiKrtTXrZ6mag+eR+pXTzFK9XpBb
- CGxDatJhqy+PFePyc8fnOqd6Xrd4iIwoVxIIn7cmlvGojX4LRl4FS9pUDoKyBUCktxbO
- mxUOcLGAioTLRgXujRw5nueEkc1Hf1exNdx5kPCsXJ7agoqLMzLKPwlTjg0M9L0WwujV
- czYgvcwm+coRFS9gAiHuhl1aco4CTnsOUb52XMQvC38Gfw0Qu3iU95pPbjljzLnQhx2V
- SHzQ==
-X-Gm-Message-State: AC+VfDyPL4e7qL3EYzQhFsQOZ7x4vprwPlORn6mI7zSgZHeK/EHmx1SF
- NbLkT+d6nztRIRQjTYka667eybzT0HVWBZVSdXE=
-X-Google-Smtp-Source: ACHHUZ5Gx0wDiEjbAavImuoGJ8IoCvovfVC80zaWqLkbTnvRmyDOqwnn6Y3RCFn+2MKzl+cICN+cXaO1xU8a5hY9vns=
-X-Received: by 2002:a67:fc1a:0:b0:430:76df:b03b with SMTP id
- o26-20020a67fc1a000000b0043076dfb03bmr2598426vsq.30.1683502016224; Sun, 07
- May 2023 16:26:56 -0700 (PDT)
+ bh=9dZ+ShCHslo6aQuTL22+v6fkmYBce3NvehRTSvO/+hU=;
+ b=QMMDZgtExImuvFFjBTb+j0HW3CUke8zBY7F6GADwbC3juR1zC2gcSBdSnxxGffh2zm
+ L2uSlCnjNzNuz3/OX7NFEvpXYLktKKzYaaiQU1Kat+WE1Anq4wwqBusvoFolqwpL2Q1i
+ C0hQ47Yvtyyyh9PvKIJR8GMYdnpULq4VQwnh9nOUc/YwWo/aiODergZNfd2LQfyjcjp3
+ /hsjtvzzQuQ8HjN9KIz6bo/EjnHE1UIew9I6NquVIO4awOLnTZ7bwTVal1KV1YAM/NQf
+ pDfVxtfxW+NUAgq1vNTkHk3d+N9BAQ4BfOYb2Z3W8Zp+9Cj6UzJ4pUIhltVsEGDUu84l
+ reyw==
+X-Gm-Message-State: AC+VfDymBAJG8udL1NC371vG0Tbq/vRiEIRreVeH6C2ngrN6hGa0m0oO
+ dUUyJfq4iQW98jP+EqN4e856/hHmFuGXz4CgW+Q=
+X-Google-Smtp-Source: ACHHUZ6XcXVjw5W6oCuSRY4xolK6LI2Foo7333zDVRpd86VVZRyjrDLOKmgmpv+GrqETcQtdMZHgOLY4acB3Dhg3lvA=
+X-Received: by 2002:a05:6102:3a66:b0:42f:fef1:a2bb with SMTP id
+ bf6-20020a0561023a6600b0042ffef1a2bbmr2367077vsb.24.1683502244918; Sun, 07
+ May 2023 16:30:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230427205708.246679-1-dbarboza@ventanamicro.com>
  <20230427205708.246679-2-dbarboza@ventanamicro.com>
 In-Reply-To: <20230427205708.246679-2-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 8 May 2023 09:26:30 +1000
-Message-ID: <CAKmqyKOT7akucn8TC2pwVysnqzvdi3-akczDxrGuD4xs2sPL9w@mail.gmail.com>
+Date: Mon, 8 May 2023 09:30:19 +1000
+Message-ID: <CAKmqyKNH2M9vwOohNeurmdxvhuuz_5uDvvC13B=absDTiYQQUA@mail.gmail.com>
 Subject: Re: [PATCH 1/2] target/riscv/vector_helper.c: skip set tail when vta
  is zero
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
@@ -57,8 +57,8 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x935.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a30;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa30.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -79,7 +79,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 May 2023 23:27:01 -0000
+X-List-Received-Date: Sun, 07 May 2023 23:30:48 -0000
 
 On Fri, Apr 28, 2023 at 6:58=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
@@ -132,7 +132,9 @@ t
 >
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
