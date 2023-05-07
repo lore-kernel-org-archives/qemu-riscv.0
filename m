@@ -1,65 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pvCLa-0003ZE-WD
-	for mharc-qemu-riscv@gnu.org; Sat, 06 May 2023 03:28:51 -0400
+	id 1pvbKZ-0007E9-Oy
+	for mharc-qemu-riscv@gnu.org; Sun, 07 May 2023 06:09:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pvCLT-0002sk-Ja
- for qemu-riscv@nongnu.org; Sat, 06 May 2023 03:28:45 -0400
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1pvbKX-0007DU-W2
+ for qemu-riscv@nongnu.org; Sun, 07 May 2023 06:09:26 -0400
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pvCLR-0006Qx-8X
- for qemu-riscv@nongnu.org; Sat, 06 May 2023 03:28:43 -0400
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-50bcb229adaso5013410a12.2
- for <qemu-riscv@nongnu.org>; Sat, 06 May 2023 00:28:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1pvbKV-0000nL-BT
+ for qemu-riscv@nongnu.org; Sun, 07 May 2023 06:09:25 -0400
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-50bc5197d33so6582363a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 07 May 2023 03:09:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683358119; x=1685950119;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mjr+dUk/ZkwHWCLTUidpgZMvIzWIcBQNWf0MxO839Yc=;
- b=CLTZA9SX2FNmCyLslLtt2mxRB0pqE0b/kuYvN+vBAQo6KWWPfJ6cIbqiitEoa3NQdh
- 4a0YEfP491FWh1Iz73Q+qOIwUzbKG39MfIrZLYBxWWFsEbXkfn1j0BIQKDwDO11LKYBf
- Cxzp6G0zB3z1DH7IN6P2Cl77l1K0TZqCbvCeF6Fnb0jIyxPHDHY8F9GUs4xkvrUgQztt
- uReZVVgMft0O+GETeMfPnVBL7K200swo9vU1iOILSMQMFJQSPUmCzxO2rrCdWc1NUZT6
- OHKFGcqadFME3bFG/wseMoUmqa+ew+LGPYVWe4Zyc0wgLEzPC8zDbKxSIV4Obu807VgD
- btOw==
+ d=linaro.org; s=google; t=1683454161; x=1686046161;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CAvj99Lt1tAUVXyAbC39vjmWvRvxICJPbNVP+s00+bM=;
+ b=mU06WDhbhGcSqyEzzxdhuXNdPi2j3ln6w0ji7pEZPnfx0pc0bHCwCqHEyICGGqvbcM
+ HmY7hYR0X7jMtYM3OyR/2aAQfrRTl81MeOU+djoOuXI9C7o6WmBQ7z15hcg7MaYCwkfs
+ VO54N0oOzQyVMsOlhn497FMTIooIio5EMd7UlW9cRH3nIdxZ38hZ5ttlerhKn82ZE4Fl
+ fkBTYePzZ2Fl4pCdLybtShe5AO7Stpklw2QnxuKiC9upa1ncolCrn+NM8HS/T6NrEGrN
+ +N6ORqDqgxQnXU31pOlQwWlPPWhlJT9gw2TKxPxlGoLw4QoIVZdSxEwePTumZRZh7dS1
+ CBFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683358119; x=1685950119;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mjr+dUk/ZkwHWCLTUidpgZMvIzWIcBQNWf0MxO839Yc=;
- b=IuQGsO7Jit+oHIClM2sLgKFcRFcoGTsuyIU18WdD1M3Tdsdlidj9jsyegh21NJDVUN
- rzrcebibjHeiw3qaCHcss+M+BdZR4jRM34AImTWdvD1fd8JmrjUyiv7wTJibaiQBo0t7
- l9NPOW9dcoRgfaNfczGrv8hV+IgTAFugfCfGfzy7MuI93O610IjxJ6Fc3xh3LN728y5H
- MzNlTttiLWmOFY2AyD8VWCSG9XZW4EILbekJiLwaOx8Mphs57VMvDUFDK08c4M77rVWD
- kXqsnhRhuVwpGifgtbgGZghAs3dv/+d2a3xvZPS8kWCyd4W4IIS1uD+F6AWw0ZjkVWuo
- +tvQ==
-X-Gm-Message-State: AC+VfDzLDglvveXbCFmdVRGUU68Dk0K/viH3ul9j8CnK6E4s0H1UiomX
- QyQPvokMgmTH+vgbCW6fqEJvHUc0zdtTjjLaH4pT3A==
-X-Google-Smtp-Source: ACHHUZ53wxupCnuEvEklvsTTFOwo5FBYVmx7ATFl4Ccts44C2+fejk2k2gQCYzLjCbOYyW6CDxNBKw==
-X-Received: by 2002:a1c:ed03:0:b0:3ee:6d55:8b73 with SMTP id
- l3-20020a1ced03000000b003ee6d558b73mr2556302wmh.29.1683357757066; 
- Sat, 06 May 2023 00:22:37 -0700 (PDT)
-Received: from stoup.. ([212.241.182.8]) by smtp.gmail.com with ESMTPSA id
- x9-20020adfec09000000b002faaa9a1721sm4481223wrn.58.2023.05.06.00.22.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 May 2023 00:22:36 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: git@xen0n.name, gaosong@loongson.cn, philmd@linaro.org,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: [PATCH v5 00/30] tcg: Simplify calls to load/store helpers
-Date: Sat,  6 May 2023 08:22:05 +0100
-Message-Id: <20230506072235.597467-1-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20221208; t=1683454161; x=1686046161;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CAvj99Lt1tAUVXyAbC39vjmWvRvxICJPbNVP+s00+bM=;
+ b=GCiRt9W+2+Ht++0cmCvjyNZK7WWMVTYv49xb0wQFWwkE2jTfXf2TgH69M7qLrGf8gP
+ Plr1JPd6ADuTI4A40rVNKf0ynJMVP/GG88SnzaAZxvGdiG4wvXIPaRRmHYcz7Z6aWFSV
+ LyT1O8FMiEgrIxarEP/ugGBzujP9LxBcqjnIqWCe/AKMKJDFMUaMrVVS7qPp0MRJH6Ae
+ 2h8TjTrf8SXiQWJr632h7MTY7YlT7oWyLe+stZ+Nzrf9tKkNC2Dkv/R6+S0EeEhxCjgk
+ s6Q6nGgI44nrRk3+pGheKQ2lFzdaoWsqjkBDwKug+PDKRN/5lxj6X3oFtfYAhDRKwiNS
+ Kyfg==
+X-Gm-Message-State: AC+VfDx7UGWAapdcp3b38fjC1oV20N41fJqtzf3VsJmXSjdUzsGbJHnJ
+ AedOgqBXSjpf3Tzk8MQQ1hE2IfgzTIUNPMcRxkaIZA==
+X-Google-Smtp-Source: ACHHUZ4nHMDR4fDnDvudMyLLIsINhZrWnO4DTiE/k8PzNeIliAwEgt8O3VWc81UrXvwKPBNbeOR5HgqCVAgWao/1BQ8=
+X-Received: by 2002:a05:6402:788:b0:50b:c665:55ea with SMTP id
+ d8-20020a056402078800b0050bc66555eamr4753422edy.3.1683454161045; Sun, 07 May
+ 2023 03:09:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=richard.henderson@linaro.org; helo=mail-ed1-x536.google.com
+References: <20230503070656.1746170-1-richard.henderson@linaro.org>
+ <20230503070656.1746170-4-richard.henderson@linaro.org>
+ <CAFEAcA858-D37=MrvYnGxBVkL1V14wZ_JLEzFahbweRUDvPmwg@mail.gmail.com>
+ <45cba357-ba20-399a-27e6-5e99741179d0@linaro.org>
+In-Reply-To: <45cba357-ba20-399a-27e6-5e99741179d0@linaro.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Sun, 7 May 2023 11:09:03 +0100
+Message-ID: <CAFEAcA9h6myNpkgmamxLHp_8We97eyGQpDb4PKPnwqL8rRzSTQ@mail.gmail.com>
+Subject: Re: [PATCH v4 03/57] accel/tcg: Introduce tlb_read_idx
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn, 
+ philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
+ qemu-s390x@nongnu.org, =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::535;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -79,80 +81,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 May 2023 07:28:47 -0000
+X-List-Received-Date: Sun, 07 May 2023 10:09:27 -0000
 
-There are several changes to the load/store helpers coming, and making
-sure that those changes are properly reflected across all of the backends
-was harrowing.
+On Fri, 5 May 2023 at 19:57, Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 5/4/23 16:02, Peter Maydell wrote:
+> > On Wed, 3 May 2023 at 08:15, Richard Henderson
+> > <richard.henderson@linaro.org> wrote:
+> >>
+> >> Instead of playing with offsetof in various places, use
+> >> MMUAccessType to index an array.  This is easily defined
+> >> instead of the previous dummy padding array in the union.
+> >>
+> >> Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> >> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> >> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> >> ---
+> >
+> >> @@ -1802,7 +1763,8 @@ static void *atomic_mmu_lookup(CPUArchState *env=
+, target_ulong addr,
+> >>       if (prot & PAGE_WRITE) {
+> >>           tlb_addr =3D tlb_addr_write(tlbe);
+> >>           if (!tlb_hit(tlb_addr, addr)) {
+> >> -            if (!VICTIM_TLB_HIT(addr_write, addr)) {
+> >> +            if (!victim_tlb_hit(env, mmu_idx, index, MMU_DATA_STORE,
+> >> +                                addr & TARGET_PAGE_MASK)) {
+> >>                   tlb_fill(env_cpu(env), addr, size,
+> >>                            MMU_DATA_STORE, mmu_idx, retaddr);
+> >>                   index =3D tlb_index(env, mmu_idx, addr);
+> >> @@ -1835,7 +1797,8 @@ static void *atomic_mmu_lookup(CPUArchState *env=
+, target_ulong addr,
+> >>       } else /* if (prot & PAGE_READ) */ {
+> >>           tlb_addr =3D tlbe->addr_read;
+>
+> read
+>
+> >>           if (!tlb_hit(tlb_addr, addr)) {
+> >> -            if (!VICTIM_TLB_HIT(addr_write, addr)) {
+>
+> write
+>
+> >> +            if (!victim_tlb_hit(env, mmu_idx, index, MMU_DATA_LOAD,
+> >> +                                addr & TARGET_PAGE_MASK)) {
+> >
+> > This was previously looking at addr_write, but now we pass
+> > MMU_DATA_LOAD ?
+>
+> This is the read portion of the read+write check.  The write portion is a=
+bove in the
+> previous hunk.  So this is an existing error, fixed here, and I hadn't no=
+ticed.
 
-I have gone back and restarted by hoisting the code out of the backends
-and into tcg.c.  We already have all of the parameters for the host
-function call abi for "normal" helpers, we simply need to apply that to
-the load/store slow path.
+Yeah, I wondered if it was a pre-existing bug. We should split out
+the bug fix.
 
-Changes for v5:
-  * 24 patches upstreamed; 6 of the remaining 30 have reviews, but
-    could not be merged out of order.
-
-
-r~
-
-
-Richard Henderson (30):
-  tcg/i386: Introduce prepare_host_addr
-  tcg/i386: Use indexed addressing for softmmu fast path
-  tcg/aarch64: Introduce prepare_host_addr
-  tcg/arm: Introduce prepare_host_addr
-  tcg/loongarch64: Introduce prepare_host_addr
-  tcg/mips: Introduce prepare_host_addr
-  tcg/ppc: Introduce prepare_host_addr
-  tcg/riscv: Introduce prepare_host_addr
-  tcg/s390x: Introduce prepare_host_addr
-  tcg: Add routines for calling slow-path helpers
-  tcg/i386: Convert tcg_out_qemu_ld_slow_path
-  tcg/i386: Convert tcg_out_qemu_st_slow_path
-  tcg/aarch64: Convert tcg_out_qemu_{ld,st}_slow_path
-  tcg/arm: Convert tcg_out_qemu_{ld,st}_slow_path
-  tcg/loongarch64: Convert tcg_out_qemu_{ld,st}_slow_path
-  tcg/mips: Convert tcg_out_qemu_{ld,st}_slow_path
-  tcg/ppc: Convert tcg_out_qemu_{ld,st}_slow_path
-  tcg/riscv: Convert tcg_out_qemu_{ld,st}_slow_path
-  tcg/s390x: Convert tcg_out_qemu_{ld,st}_slow_path
-  tcg/loongarch64: Simplify constraints on qemu_ld/st
-  tcg/mips: Remove MO_BSWAP handling
-  tcg/mips: Reorg tlb load within prepare_host_addr
-  tcg/mips: Simplify constraints on qemu_ld/st
-  tcg/ppc: Reorg tcg_out_tlb_read
-  tcg/ppc: Adjust constraints on qemu_ld/st
-  tcg/ppc: Remove unused constraints A, B, C, D
-  tcg/ppc: Remove unused constraint J
-  tcg/riscv: Simplify constraints on qemu_ld/st
-  tcg/s390x: Use ALGFR in constructing softmmu host address
-  tcg/s390x: Simplify constraints on qemu_ld/st
-
- tcg/loongarch64/tcg-target-con-set.h |   2 -
- tcg/loongarch64/tcg-target-con-str.h |   1 -
- tcg/mips/tcg-target-con-set.h        |  13 +-
- tcg/mips/tcg-target-con-str.h        |   2 -
- tcg/mips/tcg-target.h                |   4 +-
- tcg/ppc/tcg-target-con-set.h         |  11 +-
- tcg/ppc/tcg-target-con-str.h         |   7 -
- tcg/riscv/tcg-target-con-set.h       |   2 -
- tcg/riscv/tcg-target-con-str.h       |   1 -
- tcg/s390x/tcg-target-con-set.h       |   2 -
- tcg/s390x/tcg-target-con-str.h       |   1 -
- tcg/tcg.c                            | 456 +++++++++++++-
- tcg/aarch64/tcg-target.c.inc         | 347 +++++------
- tcg/arm/tcg-target.c.inc             | 455 +++++---------
- tcg/i386/tcg-target.c.inc            | 451 +++++---------
- tcg/loongarch64/tcg-target.c.inc     | 313 ++++------
- tcg/mips/tcg-target.c.inc            | 870 ++++++++-------------------
- tcg/ppc/tcg-target.c.inc             | 510 +++++++---------
- tcg/riscv/tcg-target.c.inc           | 304 ++++------
- tcg/s390x/tcg-target.c.inc           | 314 ++++------
- 20 files changed, 1766 insertions(+), 2300 deletions(-)
-
--- 
-2.34.1
-
+-- PMM
 
