@@ -1,74 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pvbKZ-0007E9-Oy
-	for mharc-qemu-riscv@gnu.org; Sun, 07 May 2023 06:09:27 -0400
+	id 1pvnS1-0008EX-CP
+	for mharc-qemu-riscv@gnu.org; Sun, 07 May 2023 19:05:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1pvbKX-0007DU-W2
- for qemu-riscv@nongnu.org; Sun, 07 May 2023 06:09:26 -0400
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pvnRs-0008Dr-UE; Sun, 07 May 2023 19:05:53 -0400
+Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1pvbKV-0000nL-BT
- for qemu-riscv@nongnu.org; Sun, 07 May 2023 06:09:25 -0400
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-50bc5197d33so6582363a12.1
- for <qemu-riscv@nongnu.org>; Sun, 07 May 2023 03:09:22 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1pvnRq-0003sh-0Y; Sun, 07 May 2023 19:05:47 -0400
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-4304f4aea78so1255819137.3; 
+ Sun, 07 May 2023 16:05:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683454161; x=1686046161;
+ d=gmail.com; s=20221208; t=1683500743; x=1686092743;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CAvj99Lt1tAUVXyAbC39vjmWvRvxICJPbNVP+s00+bM=;
- b=mU06WDhbhGcSqyEzzxdhuXNdPi2j3ln6w0ji7pEZPnfx0pc0bHCwCqHEyICGGqvbcM
- HmY7hYR0X7jMtYM3OyR/2aAQfrRTl81MeOU+djoOuXI9C7o6WmBQ7z15hcg7MaYCwkfs
- VO54N0oOzQyVMsOlhn497FMTIooIio5EMd7UlW9cRH3nIdxZ38hZ5ttlerhKn82ZE4Fl
- fkBTYePzZ2Fl4pCdLybtShe5AO7Stpklw2QnxuKiC9upa1ncolCrn+NM8HS/T6NrEGrN
- +N6ORqDqgxQnXU31pOlQwWlPPWhlJT9gw2TKxPxlGoLw4QoIVZdSxEwePTumZRZh7dS1
- CBFQ==
+ bh=ybKjR5K87X8rKvfjrPVWLm4JL1K26Mnv7KUJ2DkA/34=;
+ b=DMoK2R5je8XVQIQ+76fX9It0EZDdK1U7X9OiMHNbnUJdpHN6zngmSrqqIF3LV4zats
+ TidOzgOO5Q10ILK+Or58CM6TNWWqTglS05SwLj/gnI0IhZPZBWBKAe80eHZaD/d0sYgZ
+ bd0klvv5tgwkGiPnfB833+6tpOrhYsz+YHOwKum04/Z6gwrcgpVSHFMbmJ7yHnK1Z5t6
+ Avdq1wqV88H7MbPdLLMWFYmWl70dIxirKBcjUUYURm3IyOf9K06joWfJOhbv6aLVkNo+
+ uSBPTf+HKwbVsUPh4upyPmRNudUzaGU3kvu+fimW2zxKP9B9+SIqp/GtCAVmwEN5uEFN
+ TdIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683454161; x=1686046161;
+ d=1e100.net; s=20221208; t=1683500743; x=1686092743;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CAvj99Lt1tAUVXyAbC39vjmWvRvxICJPbNVP+s00+bM=;
- b=GCiRt9W+2+Ht++0cmCvjyNZK7WWMVTYv49xb0wQFWwkE2jTfXf2TgH69M7qLrGf8gP
- Plr1JPd6ADuTI4A40rVNKf0ynJMVP/GG88SnzaAZxvGdiG4wvXIPaRRmHYcz7Z6aWFSV
- LyT1O8FMiEgrIxarEP/ugGBzujP9LxBcqjnIqWCe/AKMKJDFMUaMrVVS7qPp0MRJH6Ae
- 2h8TjTrf8SXiQWJr632h7MTY7YlT7oWyLe+stZ+Nzrf9tKkNC2Dkv/R6+S0EeEhxCjgk
- s6Q6nGgI44nrRk3+pGheKQ2lFzdaoWsqjkBDwKug+PDKRN/5lxj6X3oFtfYAhDRKwiNS
- Kyfg==
-X-Gm-Message-State: AC+VfDx7UGWAapdcp3b38fjC1oV20N41fJqtzf3VsJmXSjdUzsGbJHnJ
- AedOgqBXSjpf3Tzk8MQQ1hE2IfgzTIUNPMcRxkaIZA==
-X-Google-Smtp-Source: ACHHUZ4nHMDR4fDnDvudMyLLIsINhZrWnO4DTiE/k8PzNeIliAwEgt8O3VWc81UrXvwKPBNbeOR5HgqCVAgWao/1BQ8=
-X-Received: by 2002:a05:6402:788:b0:50b:c665:55ea with SMTP id
- d8-20020a056402078800b0050bc66555eamr4753422edy.3.1683454161045; Sun, 07 May
- 2023 03:09:21 -0700 (PDT)
+ bh=ybKjR5K87X8rKvfjrPVWLm4JL1K26Mnv7KUJ2DkA/34=;
+ b=NqjaMN+WnKu05DFksOir7OrxQZwfxs2YdoHZ/GuOfl6AVXRew9s2/KKKJmMZMnPdQM
+ WZJu8XIsPcmHIBglO0Wy8AVN1zTyA61bWcLurBSy8k1nzHhpMlhwiJpMXRhlyJrZuPFb
+ MaDbbdpneyRZ+jkUoGAWn6SsFt599bSDmlMQYyfp78yK6XR9D5tytDWtgj86DTxyhKGR
+ NmVV0quYdwrFOLu5hxRL1EKKzcP7kZBPSmCM5AtH5pPc9nYNlgQTyO7qGCoWdS7Cnx1A
+ yvMO/B0AbBNVBrP+W70RM9rZyfuJfBO2N4RQAkVvkAU2xxerY804ZmTyo9vNt5D8N0zS
+ axYA==
+X-Gm-Message-State: AC+VfDxcqOtTwdVuvwr2pIL7CmZmlNDFiYLn4yA4zPBwSaFEeuvmwtHj
+ t09fI2qxhLj9ZmfJCO4iSs2caXs9fly9+ar7NltO5wxf3KcClw==
+X-Google-Smtp-Source: ACHHUZ6ufPv+UjrFjyMUyBHHKryoFsyvUC6/m0Feuxva876GxmDuzRQy50dFqnzbUxy6UpzEokYsDaogWrLZS96v+QA=
+X-Received: by 2002:a67:f44b:0:b0:434:8401:beae with SMTP id
+ r11-20020a67f44b000000b004348401beaemr2257542vsn.34.1683500743488; Sun, 07
+ May 2023 16:05:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230503070656.1746170-1-richard.henderson@linaro.org>
- <20230503070656.1746170-4-richard.henderson@linaro.org>
- <CAFEAcA858-D37=MrvYnGxBVkL1V14wZ_JLEzFahbweRUDvPmwg@mail.gmail.com>
- <45cba357-ba20-399a-27e6-5e99741179d0@linaro.org>
-In-Reply-To: <45cba357-ba20-399a-27e6-5e99741179d0@linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Sun, 7 May 2023 11:09:03 +0100
-Message-ID: <CAFEAcA9h6myNpkgmamxLHp_8We97eyGQpDb4PKPnwqL8rRzSTQ@mail.gmail.com>
-Subject: Re: [PATCH v4 03/57] accel/tcg: Introduce tlb_read_idx
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn, 
- philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org, 
- qemu-s390x@nongnu.org, =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+References: <20230425073509.3618388-1-yong.li@intel.com>
+In-Reply-To: <20230425073509.3618388-1-yong.li@intel.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 8 May 2023 09:05:17 +1000
+Message-ID: <CAKmqyKPOuryjYD=c=aJ0n0hfSx29HebGsyKwwUUa9U0GpfwOxg@mail.gmail.com>
+Subject: Re: [PATCH v3] hw/riscv/virt: Add a second UART for secure world
+To: Yong Li <yong.li@intel.com>
+Cc: qemu-devel@nongnu.org, LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x535.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,60 +81,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 May 2023 10:09:27 -0000
+X-List-Received-Date: Sun, 07 May 2023 23:05:54 -0000
 
-On Fri, 5 May 2023 at 19:57, Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Tue, Apr 25, 2023 at 5:36=E2=80=AFPM Yong Li <yong.li@intel.com> wrote:
 >
-> On 5/4/23 16:02, Peter Maydell wrote:
-> > On Wed, 3 May 2023 at 08:15, Richard Henderson
-> > <richard.henderson@linaro.org> wrote:
-> >>
-> >> Instead of playing with offsetof in various places, use
-> >> MMUAccessType to index an array.  This is easily defined
-> >> instead of the previous dummy padding array in the union.
-> >>
-> >> Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> >> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> >> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> >> ---
-> >
-> >> @@ -1802,7 +1763,8 @@ static void *atomic_mmu_lookup(CPUArchState *env=
-, target_ulong addr,
-> >>       if (prot & PAGE_WRITE) {
-> >>           tlb_addr =3D tlb_addr_write(tlbe);
-> >>           if (!tlb_hit(tlb_addr, addr)) {
-> >> -            if (!VICTIM_TLB_HIT(addr_write, addr)) {
-> >> +            if (!victim_tlb_hit(env, mmu_idx, index, MMU_DATA_STORE,
-> >> +                                addr & TARGET_PAGE_MASK)) {
-> >>                   tlb_fill(env_cpu(env), addr, size,
-> >>                            MMU_DATA_STORE, mmu_idx, retaddr);
-> >>                   index =3D tlb_index(env, mmu_idx, addr);
-> >> @@ -1835,7 +1797,8 @@ static void *atomic_mmu_lookup(CPUArchState *env=
-, target_ulong addr,
-> >>       } else /* if (prot & PAGE_READ) */ {
-> >>           tlb_addr =3D tlbe->addr_read;
+> The virt machine can have two UARTs and the second UART
+> can be used by the secure payload, firmware or OS residing
+> in secure world. Will include the UART device to FDT in a
+> seperated patch.
 >
-> read
->
-> >>           if (!tlb_hit(tlb_addr, addr)) {
-> >> -            if (!VICTIM_TLB_HIT(addr_write, addr)) {
->
-> write
->
-> >> +            if (!victim_tlb_hit(env, mmu_idx, index, MMU_DATA_LOAD,
-> >> +                                addr & TARGET_PAGE_MASK)) {
-> >
-> > This was previously looking at addr_write, but now we pass
-> > MMU_DATA_LOAD ?
->
-> This is the read portion of the read+write check.  The write portion is a=
-bove in the
-> previous hunk.  So this is an existing error, fixed here, and I hadn't no=
-ticed.
+> Signed-off-by: Yong Li <yong.li@intel.com>
+> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
-Yeah, I wondered if it was a pre-existing bug. We should split out
-the bug fix.
+This has come up before (see
+https://gitlab.com/qemu-project/qemu/-/issues/955) and we decided that
+we don't want to add a second UART. If you would like a second one you
+can attach it via PCIe.
 
--- PMM
+I think we need a really compelling reason to add another UART. There
+was a push recently to move more towards a "PCIe board" where
+everything is attached via PCIe, and this is going in the opposite
+direction.
+
+Alistair
+
+> ---
+>  hw/riscv/virt.c         | 4 ++++
+>  include/hw/riscv/virt.h | 2 ++
+>  2 files changed, 6 insertions(+)
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 4e3efbee16..8e11c4b9b3 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -88,6 +88,7 @@ static const MemMapEntry virt_memmap[] =3D {
+>      [VIRT_APLIC_S] =3D      {  0xd000000, APLIC_SIZE(VIRT_CPUS_MAX) },
+>      [VIRT_UART0] =3D        { 0x10000000,         0x100 },
+>      [VIRT_VIRTIO] =3D       { 0x10001000,        0x1000 },
+> +    [VIRT_UART1] =3D        { 0x10002000,         0x100 },
+>      [VIRT_FW_CFG] =3D       { 0x10100000,          0x18 },
+>      [VIRT_FLASH] =3D        { 0x20000000,     0x4000000 },
+>      [VIRT_IMSIC_M] =3D      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
+> @@ -1506,6 +1507,9 @@ static void virt_machine_init(MachineState *machine=
+)
+>      serial_mm_init(system_memory, memmap[VIRT_UART0].base,
+>          0, qdev_get_gpio_in(DEVICE(mmio_irqchip), UART0_IRQ), 399193,
+>          serial_hd(0), DEVICE_LITTLE_ENDIAN);
+> +    serial_mm_init(system_memory, memmap[VIRT_UART1].base,
+> +        0, qdev_get_gpio_in(DEVICE(mmio_irqchip), UART1_IRQ), 399193,
+> +        serial_hd(1), DEVICE_LITTLE_ENDIAN);
+>
+>      sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
+>          qdev_get_gpio_in(DEVICE(mmio_irqchip), RTC_IRQ));
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index e5c474b26e..8d2f8f225d 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -74,6 +74,7 @@ enum {
+>      VIRT_APLIC_S,
+>      VIRT_UART0,
+>      VIRT_VIRTIO,
+> +    VIRT_UART1,
+>      VIRT_FW_CFG,
+>      VIRT_IMSIC_M,
+>      VIRT_IMSIC_S,
+> @@ -88,6 +89,7 @@ enum {
+>  enum {
+>      UART0_IRQ =3D 10,
+>      RTC_IRQ =3D 11,
+> +    UART1_IRQ =3D 12,
+>      VIRTIO_IRQ =3D 1, /* 1 to 8 */
+>      VIRTIO_COUNT =3D 8,
+>      PCIE_IRQ =3D 0x20, /* 32 to 35 */
+> --
+> 2.25.1
+>
+>
 
