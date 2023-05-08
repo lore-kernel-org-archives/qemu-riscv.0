@@ -1,81 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pw181-00014C-A1
-	for mharc-qemu-riscv@gnu.org; Mon, 08 May 2023 09:42:13 -0400
+	id 1pw1Eq-0004zO-67
+	for mharc-qemu-riscv@gnu.org; Mon, 08 May 2023 09:49:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pw17w-00013Q-AU
- for qemu-riscv@nongnu.org; Mon, 08 May 2023 09:42:09 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ id 1pw1Eo-0004yv-2R
+ for qemu-riscv@nongnu.org; Mon, 08 May 2023 09:49:14 -0400
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pw17u-00017L-Jd
- for qemu-riscv@nongnu.org; Mon, 08 May 2023 09:42:08 -0400
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-3f19a80a330so29745415e9.2
- for <qemu-riscv@nongnu.org>; Mon, 08 May 2023 06:42:06 -0700 (PDT)
+ id 1pw1Em-0003Gd-7O
+ for qemu-riscv@nongnu.org; Mon, 08 May 2023 09:49:13 -0400
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3063b5f32aaso2897515f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 08 May 2023 06:49:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683553325; x=1686145325;
+ d=linaro.org; s=google; t=1683553750; x=1686145750;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=UorbWTZIhuQX90C316Wni8w3Fb/Ts8kozFybUATuNkA=;
- b=mmxMC68a9oBYxfP+1RVjcrh+1+juDqGyvjGWDbifbAxak5MDd294oc4B+9KqDLGhoj
- l9/2Ke8msj8+RiWAmtY1jLxJoPE99oB4CrXA0PhLZPdSHxdVpr1G4zCVX5TqLTpSC65O
- QucUUtbkkJQ2B5LtqZMQ+1H4c26tloDhs3FogDKDWpgfy3zzgBYspnfANgJTN+X5evKr
- 7O/ticLeScuYnOsWD/SZUv/4jAh4cZ+Uvw2iWfDQvfuN+O1FLWxS1Fi/OOP98ACuXT2I
- DmFJXLeaJah9BRFeRxzxaB4Dsjv50QpRVKIES7LDiDfF98p8cpy72JVWjOh7/wcoKPur
- toJw==
+ bh=IGgQr3+pVtSwHz+pJNHOxqkBexjKhgxUvpEkUbe6oCI=;
+ b=Y0CtSxBmSBs9XFGh9hsyHgGSvYkjzWBn+R7+I1wbhlF/xlBYnoV9EkZxmvbCLl28j4
+ K/lj7x70GOzYuzl2//YMPxI9+MZs6y8scAYHz1GN9LktkPkhIy5msrPO6q9gpmtp9q2G
+ Ffk4lUlVLZoHvSye7JWnYGe5YXIXpEyx2ONi40ZO1tvrHJ6EGD/uJfUB70j6jFZ/UZxb
+ 7DtOdnq/7UbywVNlTmZxQu1Sdq863LmTM+5ZTp7hwPG+vYu9pucnR4mijL9R059gbZmu
+ LCUzLKpdytWmn44Oo1ddb3QqkJTXqI5yVZfDAvki2k7rYSpBBt03er8Xra9mYf2Pmyys
+ hzvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683553325; x=1686145325;
+ d=1e100.net; s=20221208; t=1683553750; x=1686145750;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UorbWTZIhuQX90C316Wni8w3Fb/Ts8kozFybUATuNkA=;
- b=Segw+cnv0x3v9EFyMc3N2dWFCYQ/5pQfTdq/XpgZZmMprFHC/Plp2uVL25FmXpVrNr
- tSfGet6lxU+YWDsk1siQPoDtDQq0S8PwRJnWw46975ekHr0KjdzIgmC+SBdG7EUJVRvA
- NVhLZ2PStM52FslVmlaaA/wHmTcGDtMAgYpuMiYG7sRTGUh+EagC1p8ZQjjFnzdjW/0Q
- 8sh/D9tcHHdH8Q8gTMqzbYWsm+op70FuHECkndLGJfmdMdJm/Bubg0PdXAXPcLA+yJcW
- +6Xo8yrpKayQtKaD/76+htWvSljM5mqtPueZACud2bE7W6mkwATUP4vkqv5DsX35mZ5O
- u2Lg==
-X-Gm-Message-State: AC+VfDyx2uTMCmcV/M9kjN93as0DUpff/EWFIOltC2C1VytLK8QwpM5b
- TeElHd9/F9AFaLAlhj5uaaH9dw==
-X-Google-Smtp-Source: ACHHUZ6Iq9tx2Z6PmEH9/nSBMqkq23GInbjND62IGOhCJuneaZeO3vEzPNPA3fdh+Bikq6yPYoAcbg==
-X-Received: by 2002:a1c:f20a:0:b0:3f1:819d:d050 with SMTP id
- s10-20020a1cf20a000000b003f1819dd050mr7265462wmc.37.1683553324766; 
- Mon, 08 May 2023 06:42:04 -0700 (PDT)
+ bh=IGgQr3+pVtSwHz+pJNHOxqkBexjKhgxUvpEkUbe6oCI=;
+ b=B6GBJDfWbF2ljX8jK+U8bZFGjeoly8sNJQReg0svRrpjv39EULeOn+ZzoxOV9uEF/d
+ yZ7CIBcZ3OfscMaj4L+dVlZa2Mm+sVyrmo7zKAHaVB4fSvqpq3iOG9XxaFPM2EQzlxsz
+ LfCaQQTH6IcbQ9Ino8N8+nCSlvikwLJVtlEyd8cNcLUKcyvOko8formZE5phMppV4Qg2
+ d0Tu0qrExJfb+NGGjPjIlzjHlcHKNQ6Cf9AW8YMhzgcLFyvnMVm9YB3PWyt34qY6bB34
+ hiHRM7HJbz8v72nNT8LLGgiDugsNTNlJuWY3nsjdnA99XZ1QxiI2BIyGn7iXK4yrJSCs
+ PHWg==
+X-Gm-Message-State: AC+VfDzQa0G/RZdgDpMc9QCu4mJMuKmZg7XUjRsRRlOPSJirZFM0M925
+ E7uu23ISTs4xYZ3+z2zDzx7ZKw==
+X-Google-Smtp-Source: ACHHUZ48VC1UjjzhT/XIek4hQkGk9toruhiQlxHIQmhRX6qvKehTVa21FoMV/uzG9ULwMRQEkj6nWw==
+X-Received: by 2002:a5d:46cc:0:b0:307:1bba:ea61 with SMTP id
+ g12-20020a5d46cc000000b003071bbaea61mr7511997wrs.44.1683553750427; 
+ Mon, 08 May 2023 06:49:10 -0700 (PDT)
 Received: from [10.248.102.233] (5d600b65.skybroadband.com. [93.96.11.101])
  by smtp.gmail.com with ESMTPSA id
- n19-20020a1c7213000000b003f4268f51f5sm2520982wmc.0.2023.05.08.06.41.59
+ l4-20020a5d4104000000b00304832cd960sm11279977wrp.10.2023.05.08.06.49.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 May 2023 06:42:04 -0700 (PDT)
-Message-ID: <d42d16ec-f223-9f4f-1150-10fdf9fe9b3c@linaro.org>
-Date: Mon, 8 May 2023 14:41:53 +0100
+ Mon, 08 May 2023 06:49:09 -0700 (PDT)
+Message-ID: <3c37f8de-7d16-01f8-345f-67ff81ae0089@linaro.org>
+Date: Mon, 8 May 2023 14:48:58 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
-Subject: Re: [PATCH v4 14/57] tcg/i386: Add have_atomic16
+Subject: Re: [PATCH v4 15/57] accel/tcg: Use have_atomic16 in
+ ldst_atomicity.c.inc
 Content-Language: en-US
 To: Peter Maydell <peter.maydell@linaro.org>
 Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn,
  philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org
 References: <20230503070656.1746170-1-richard.henderson@linaro.org>
- <20230503070656.1746170-15-richard.henderson@linaro.org>
- <CAFEAcA_BMbNPYEoHacYk5ETJp6N9b8NKQvnZvfgrsDhH6yDOdw@mail.gmail.com>
+ <20230503070656.1746170-16-richard.henderson@linaro.org>
+ <CAFEAcA-qe+5+eDdjFUxrOqE4URwsBYdN7Q1_BLbAusGDnaudGw@mail.gmail.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <CAFEAcA_BMbNPYEoHacYk5ETJp6N9b8NKQvnZvfgrsDhH6yDOdw@mail.gmail.com>
+In-Reply-To: <CAFEAcA-qe+5+eDdjFUxrOqE4URwsBYdN7Q1_BLbAusGDnaudGw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x332.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x433.google.com
 X-Spam_score_int: -38
 X-Spam_score: -3.9
 X-Spam_bar: ---
 X-Spam_report: (-3.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.802,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,83 +89,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 May 2023 13:42:11 -0000
+X-List-Received-Date: Mon, 08 May 2023 13:49:14 -0000
 
-On 5/5/23 11:34, Peter Maydell wrote:
-> On Wed, 3 May 2023 at 08:10, Richard Henderson
+On 5/5/23 11:37, Peter Maydell wrote:
+> On Wed, 3 May 2023 at 08:08, Richard Henderson
 > <richard.henderson@linaro.org> wrote:
 >>
->> Notice when Intel or AMD have guaranteed that vmovdqa is atomic.
->> The new variable will also be used in generated code.
+>> Hosts using Intel and AMD AVX cpus are quite common.
+>> Add fast paths through ldst_atomicity using this.
+>>
+>> Only enable with CONFIG_INT128; some older clang versions do not
+>> support __int128_t, and the inline assembly won't work on structures.
 >>
 >> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 >> ---
->>   include/qemu/cpuid.h      | 18 ++++++++++++++++++
->>   tcg/i386/tcg-target.h     |  1 +
->>   tcg/i386/tcg-target.c.inc | 27 +++++++++++++++++++++++++++
->>   3 files changed, 46 insertions(+)
->>
->> diff --git a/include/qemu/cpuid.h b/include/qemu/cpuid.h
->> index 1451e8ef2f..35325f1995 100644
->> --- a/include/qemu/cpuid.h
->> +++ b/include/qemu/cpuid.h
->> @@ -71,6 +71,24 @@
->>   #define bit_LZCNT       (1 << 5)
->>   #endif
->>
->> +/*
->> + * Signatures for different CPU implementations as returned from Leaf 0.
->> + */
->> +
->> +#ifndef signature_INTEL_ecx
->> +/* "Genu" "ineI" "ntel" */
->> +#define signature_INTEL_ebx     0x756e6547
->> +#define signature_INTEL_edx     0x49656e69
->> +#define signature_INTEL_ecx     0x6c65746e
->> +#endif
->> +
->> +#ifndef signature_AMD_ecx
->> +/* "Auth" "enti" "cAMD" */
->> +#define signature_AMD_ebx       0x68747541
->> +#define signature_AMD_edx       0x69746e65
->> +#define signature_AMD_ecx       0x444d4163
->> +#endif
+>>   accel/tcg/ldst_atomicity.c.inc | 76 +++++++++++++++++++++++++++-------
+>>   1 file changed, 60 insertions(+), 16 deletions(-)
 > 
->> @@ -4024,6 +4025,32 @@ static void tcg_target_init(TCGContext *s)
->>                       have_avx512dq = (b7 & bit_AVX512DQ) != 0;
->>                       have_avx512vbmi2 = (c7 & bit_AVX512VBMI2) != 0;
->>                   }
->> +
->> +                /*
->> +                 * The Intel SDM has added:
->> +                 *   Processors that enumerate support for Intel® AVX
->> +                 *   (by setting the feature flag CPUID.01H:ECX.AVX[bit 28])
->> +                 *   guarantee that the 16-byte memory operations performed
->> +                 *   by the following instructions will always be carried
->> +                 *   out atomically:
->> +                 *   - MOVAPD, MOVAPS, and MOVDQA.
->> +                 *   - VMOVAPD, VMOVAPS, and VMOVDQA when encoded with VEX.128.
->> +                 *   - VMOVAPD, VMOVAPS, VMOVDQA32, and VMOVDQA64 when encoded
->> +                 *     with EVEX.128 and k0 (masking disabled).
->> +                 * Note that these instructions require the linear addresses
->> +                 * of their memory operands to be 16-byte aligned.
->> +                 *
->> +                 * AMD has provided an even stronger guarantee that processors
->> +                 * with AVX provide 16-byte atomicity for all cachable,
->> +                 * naturally aligned single loads and stores, e.g. MOVDQU.
->> +                 *
->> +                 * See https://gcc.gnu.org/bugzilla/show_bug.cgi?id=104688
->> +                 */
->> +                if (have_avx1) {
->> +                    __cpuid(0, a, b, c, d);
->> +                    have_atomic16 = (c == signature_INTEL_ecx ||
->> +                                     c == signature_AMD_ecx);
->> +                }
-> 
-> If the signature is 3 words why are we only checking one here ?
+> Inline x86 asm in a bit of generic code seems rather awkward.
+> Ideally the compiler should be doing this for us; failing
+> that can we at least abstract out the operations to a
+> set of functions that we can provide (or not provide)
+> implementations of?
 
-Because one is sufficient.  I don't know why the signature is 3 words and not 1.
+This was the best I could come up with, because of the fall through into other generic 
+code.  Specific suggestions welcome.
 
 
 r~
+
 
