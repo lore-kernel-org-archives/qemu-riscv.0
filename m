@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13128C77B7F
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 May 2023 15:17:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99267C77B7F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  8 May 2023 16:15:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pw2by-0008HX-Ix; Mon, 08 May 2023 11:17:14 -0400
+	id 1pw3WG-0004a8-5K; Mon, 08 May 2023 12:15:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pw2bw-0008GO-Ck
- for qemu-riscv@nongnu.org; Mon, 08 May 2023 11:17:12 -0400
-Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c])
+ id 1pw3WE-0004Yx-Ru
+ for qemu-riscv@nongnu.org; Mon, 08 May 2023 12:15:22 -0400
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pw2bt-0002HL-Gv
- for qemu-riscv@nongnu.org; Mon, 08 May 2023 11:17:12 -0400
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2ac831bb762so45122491fa.3
- for <qemu-riscv@nongnu.org>; Mon, 08 May 2023 08:17:09 -0700 (PDT)
+ id 1pw3WD-0000UL-9w
+ for qemu-riscv@nongnu.org; Mon, 08 May 2023 12:15:22 -0400
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-4f13d8f74abso5333378e87.0
+ for <qemu-riscv@nongnu.org>; Mon, 08 May 2023 09:15:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683559027; x=1686151027;
+ d=linaro.org; s=google; t=1683562518; x=1686154518;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=UBbxJddLxcWqJBbg0WUFKGLzCWbsXg2xn1Tf7qITYxM=;
- b=pdRBLSwsXY+LQevvroYcXF0Cl3lYR5AvE7EwJTdg/9bQzIG62zuW01ctLyp2EmzWdk
- eXyxvKg2Of6sM1ikd80fUQOCcY8465dVe8Hm9ifMuTKfcu6IdhNDB0vGC4jrHhUUbhTm
- VVqq8p6fJWGJhUt+cJhM/eQ0hjOzAnSL3Y7XyHml+w1pU103L/FAhIJh8iUMIg4QB4hY
- vkQzZ8sjhv8LEeb6AxVOH4Uk9JpAwT5Wl1ioh3yxGBJrrSHL5OmQk7P5fN/oflaLp+eI
- OcgDLukewgvFtAdO26yRDBtZLcDRl8ChOZVdX83fQEoG2BJMPQn89dr3jpifKc7Cj2HV
- eRzQ==
+ bh=5mj0ILx9D2Fcoo7Cz4Jz74MroLxEbqcUU9mXmi8udK8=;
+ b=r6GTTCFOU+L/0d1zibWYQWWfdQx7LdScmJF7mhbhU+qap/Nn6N/Ka3BIZHBmyQYIdV
+ frAdpSlfrz63IMSu2/LLthVu0mFc/pDmBh708XwL1kWUZ3LxOWfxn17o3ojyGFdCV5Qm
+ Xnw0BbUumtQJXMcHams6YvKoTDbtFzfBQ64lDcn6oChFGVzkW/Yvo78AW39sGUTc0YV+
+ P3vW64pkKEF+fS8XYGcLHshcrONtRB9SCozQyo0l+z0ADaJL3VcwDMQRpU0U9uNxvq1/
+ O0VSHDlsqr2c4X3gBuqK91HEeKu1ilk+QWmG3ULDevvYTXpeCeqvo1kzBOVC1bycc4i6
+ OMCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683559027; x=1686151027;
+ d=1e100.net; s=20221208; t=1683562518; x=1686154518;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UBbxJddLxcWqJBbg0WUFKGLzCWbsXg2xn1Tf7qITYxM=;
- b=HvpBUYFinGIEYFlr4oZGrzoNmUiG/CaDIZgsfFpQ204MEOHJAuEDuBh7ywQERJImPT
- e17fUsp30sz950A0BRGRHQbOJAGkveMYJvlHCh1XaOFTGLfAX3tSbpa5j1oefZCQ73Pc
- GRUyfl5w0sv3cZXAwBg4+4+h42RHFKnipI8UaSI5mJ+b/McGtMEDkBwpeTs38QgP4FHB
- QIojjynioa9m6GDCnAAcaWrg3kAtq8yhpSJpTULL9/62cpjh7bSKBwgPWw8gZzFXVScj
- pJD5Nw7ao4SMCMWmdI7KutzOVJhmEQSPawzo3N1ZIpXZKdrqKlcS/PweGkTk1nxzAyzQ
- XURQ==
-X-Gm-Message-State: AC+VfDxvtvGEBzx44s5LftfBWtZqada57I62JUjF35gkmGtLfc7gJcKV
- /Mz00hfcW1jwFWyiw3NiQrf2QA==
-X-Google-Smtp-Source: ACHHUZ6Sdv6xQUEdMh6ABdMrHBpAs5inhD1+0crr+vovwn+WHXpptVJA/SVZCZkKIKncqPw8C71oOw==
-X-Received: by 2002:a05:651c:112:b0:2a8:c8d8:80fe with SMTP id
- a18-20020a05651c011200b002a8c8d880femr2823560ljb.23.1683559027549; 
- Mon, 08 May 2023 08:17:07 -0700 (PDT)
-Received: from [192.168.110.227] ([91.209.212.42])
+ bh=5mj0ILx9D2Fcoo7Cz4Jz74MroLxEbqcUU9mXmi8udK8=;
+ b=X8MJQpYfDr1vNs+ZiN6S97vCZtx3wOzlQx6vUAzrIDRSje5ODJAxsy3iATOR6UiOUt
+ 6P6A2IZS2rYeoU4Bz7ff6lVHZT8kW0yQFk5VSalBWhfMkkXXyuFvuUTIdfS37GAe/i0R
+ 4tVnupBOjsGYZykImhAy1ejvOSdmvn9bx64QNuL7bMJ+a5ijU/LlzbpJVAZwvpbaivjd
+ k3qrDG5fM3PWkzpZohuUweLDYrf7QHBbOywJFjU5GY8RxJYr2BCQsz+f9ELlo9xnqHZD
+ 2LqhKEcdNAtMI9jYbW9yflFxJD0I3jHcCRSpfyBXf3FgnFXe045/PbtrzM0ZPAl6DjPf
+ PCWw==
+X-Gm-Message-State: AC+VfDyl411eXgeru7VzQNKhlafyIhgzfynDVnAdE6ldcmBkFYroS8um
+ g1dv6mLw9YzmpT9ESAQN5IjmMQ==
+X-Google-Smtp-Source: ACHHUZ5RkpMitoTqxrMrDlzoDT6CsO4xz3iRu0BVxrJxCBbYdkj7VBhQjsY+5m/q1GNaSGMb+1jvDQ==
+X-Received: by 2002:a05:6512:38c4:b0:4ef:f583:ee16 with SMTP id
+ p4-20020a05651238c400b004eff583ee16mr2350546lft.57.1683562517953; 
+ Mon, 08 May 2023 09:15:17 -0700 (PDT)
+Received: from [192.168.110.227] ([91.209.212.34])
  by smtp.gmail.com with ESMTPSA id
- y22-20020a2e9d56000000b002ac71095b61sm1177014ljj.64.2023.05.08.08.17.03
+ q30-20020ac2511e000000b004cca1658a41sm30923lfb.300.2023.05.08.09.15.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 May 2023 08:17:07 -0700 (PDT)
-Message-ID: <58a0667e-7387-4231-85d4-548a39c8064f@linaro.org>
-Date: Mon, 8 May 2023 16:17:00 +0100
+ Mon, 08 May 2023 09:15:17 -0700 (PDT)
+Message-ID: <8def4794-3eb1-39df-56f3-a5d1b577ec93@linaro.org>
+Date: Mon, 8 May 2023 17:15:05 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
-Subject: Re: [PATCH v4 30/57] tcg/sparc64: Allocate %g2 as a third temporary
+Subject: Re: [PATCH v4 52/57] tcg/i386: Honor 64-bit atomicity in 32-bit mode
 Content-Language: en-US
 To: Peter Maydell <peter.maydell@linaro.org>
 Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn,
  philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org
 References: <20230503070656.1746170-1-richard.henderson@linaro.org>
- <20230503070656.1746170-31-richard.henderson@linaro.org>
- <CAFEAcA9dOpZUeCnkHxmSAPTs20ZuUW++kFEtp2icmmST=yGPvA@mail.gmail.com>
+ <20230503070656.1746170-53-richard.henderson@linaro.org>
+ <CAFEAcA8XQ2_GFyBCqW4N7p32dvkWe6B21bpHhOf48xHyc_petw@mail.gmail.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <CAFEAcA9dOpZUeCnkHxmSAPTs20ZuUW++kFEtp2icmmST=yGPvA@mail.gmail.com>
+In-Reply-To: <CAFEAcA8XQ2_GFyBCqW4N7p32dvkWe6B21bpHhOf48xHyc_petw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::22c;
- envelope-from=richard.henderson@linaro.org; helo=mail-lj1-x22c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::12b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-lf1-x12b.google.com
 X-Spam_score_int: -38
 X-Spam_score: -3.9
 X-Spam_bar: ---
@@ -100,54 +100,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 5/5/23 13:19, Peter Maydell wrote:
-> On Wed, 3 May 2023 at 08:17, Richard Henderson
+On 5/5/23 14:27, Peter Maydell wrote:
+> On Wed, 3 May 2023 at 08:18, Richard Henderson
 > <richard.henderson@linaro.org> wrote:
 >>
+>> Use the fpu to perform 64-bit loads and stores.
+>>
 >> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->>   tcg/sparc64/tcg-target.c.inc | 15 +++++++--------
->>   1 file changed, 7 insertions(+), 8 deletions(-)
->>
->> diff --git a/tcg/sparc64/tcg-target.c.inc b/tcg/sparc64/tcg-target.c.inc
->> index e997db2645..64464ab363 100644
->> --- a/tcg/sparc64/tcg-target.c.inc
->> +++ b/tcg/sparc64/tcg-target.c.inc
->> @@ -83,9 +83,10 @@ static const char * const tcg_target_reg_names[TCG_TARGET_NB_REGS] = {
->>   #define ALL_GENERAL_REGS     MAKE_64BIT_MASK(0, 32)
->>   #define ALL_QLDST_REGS       (ALL_GENERAL_REGS & ~SOFTMMU_RESERVE_REGS)
->>
->> -/* Define some temporary registers.  T2 is used for constant generation.  */
->> +/* Define some temporary registers.  T3 is used for constant generation.  */
->>   #define TCG_REG_T1  TCG_REG_G1
->> -#define TCG_REG_T2  TCG_REG_O7
->> +#define TCG_REG_T2  TCG_REG_G2
->> +#define TCG_REG_T3  TCG_REG_O7
->>
->>   #ifndef CONFIG_SOFTMMU
->>   # define TCG_GUEST_BASE_REG TCG_REG_I5
->> @@ -110,7 +111,6 @@ static const int tcg_target_reg_alloc_order[] = {
->>       TCG_REG_I4,
->>       TCG_REG_I5,
->>
->> -    TCG_REG_G2,
->>       TCG_REG_G3,
->>       TCG_REG_G4,
->>       TCG_REG_G5,
->> @@ -492,8 +492,8 @@ static void tcg_out_movi_int(TCGContext *s, TCGType type, TCGReg ret,
->>   static void tcg_out_movi(TCGContext *s, TCGType type,
->>                            TCGReg ret, tcg_target_long arg)
->>   {
->> -    tcg_debug_assert(ret != TCG_REG_T2);
->> -    tcg_out_movi_int(s, type, ret, arg, false, TCG_REG_T2);
->> +    tcg_debug_assert(ret != TCG_REG_T3);
->> +    tcg_out_movi_int(s, type, ret, arg, false, TCG_REG_T3);
->>   }
 > 
-> Why do we need to change this usage of TCG_REG_T2 but not
-> any of the others ?
+> 
+>> @@ -2091,7 +2095,20 @@ static void tcg_out_qemu_ld_direct(TCGContext *s, TCGReg datalo, TCGReg datahi,
+>>               datalo = datahi;
+>>               datahi = t;
+>>           }
+>> -        if (h.base == datalo || h.index == datalo) {
+>> +        if (h.atom == MO_64) {
+>> +            /*
+>> +             * Atomicity requires that we use use a single 8-byte load.
+>> +             * For simplicity and code size, always use the FPU for this.
+>> +             * Similar insns using SSE/AVX are merely larger.
+> 
+> I'm surprised there's no performance penalty for throwing old-school
+> FPU insns into what is presumably otherwise code that's only
+> using modern SSE.
 
-To match the comment above.
+I have no idea about performance.  We don't require SSE for TCG at the moment.
+
+> I assume the caller has arranged that the top of the stack
+> is trashable at this point?
+
+The entire fpu stack is call-clobbered.
 
 
 r~
