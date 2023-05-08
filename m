@@ -1,83 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1pvxfA-0000VM-DC
-	for mharc-qemu-riscv@gnu.org; Mon, 08 May 2023 06:00:12 -0400
+	id 1pvxiS-00026R-Su
+	for mharc-qemu-riscv@gnu.org; Mon, 08 May 2023 06:03:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1pvxf8-0000V2-UX
- for qemu-riscv@nongnu.org; Mon, 08 May 2023 06:00:11 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1pvxf6-0003O8-3F
- for qemu-riscv@nongnu.org; Mon, 08 May 2023 06:00:10 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1683540006;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=89hOd7nzbW5/1T2/ib/M8iZxUKL0VQI9fYKEdbulXQ0=;
- b=dFxENnleCPndb/ZkMg7tv8DiPs+z5ytGv3kOhpX1p2zSJnh8nq4JZM4Wc3TEdOZNBdV2Dm
- P7VsGkjQ4tTfRdZA/dJGHOqrUfG4vHG3VDZNdZcPf37A4U6XuyXzHSyq1uBF9nebEYEp5G
- gth1PcMUYgOmTLLUWoMOXDNbuRLlk70=
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-561-8A2NPHHsMmKGbIVGbcwW7A-1; Mon, 08 May 2023 06:00:04 -0400
-X-MC-Unique: 8A2NPHHsMmKGbIVGbcwW7A-1
-Received: by mail-pj1-f71.google.com with SMTP id
- 98e67ed59e1d1-24e5481a79fso2277716a91.2
- for <qemu-riscv@nongnu.org>; Mon, 08 May 2023 03:00:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pvxi2-0001e1-Jl
+ for qemu-riscv@nongnu.org; Mon, 08 May 2023 06:03:13 -0400
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1pvxhx-0003z8-E9
+ for qemu-riscv@nongnu.org; Mon, 08 May 2023 06:03:10 -0400
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-96598a7c5e0so683624666b.3
+ for <qemu-riscv@nongnu.org>; Mon, 08 May 2023 03:03:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1683540183; x=1686132183;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VvWCQjr5tSxYzn7N8yKObQDzC0YUASVVBrI08afApL8=;
+ b=mTYW+VT83B0sRHlwU6HxccgQipB5C5Wsb92yo6SxARgxTCFiIgQ1EMfg4kHggQL8Ey
+ PCrNiRC/GTuA/vp5aSehfbew2Fkg4+XZX43igjjaYPTzh2wghl0+efQV1jWmXfz8Ro7U
+ VCn4vlUccnxuhtlhkElBQdpuqEJ2zq6+qif3nZAtd6sYLdqCZbcXOm6xM/PdfkHReZPd
+ 6qeabiCMbK7iQuxCjq7DsRbIhRIiwtZLd+f6Pt+MtzARsrgTdbc1WKH5Xcy/MPXm1enP
+ WyRTvcuNfdjZkj+uw1LYtKzKnheMloSZHkSLvEgE4nZ7AO17cPy0smMeUTPIZrsX+B90
+ BqtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683540003; x=1686132003;
- h=cc:to:subject:message-id:date:in-reply-to:mime-version:references
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=89hOd7nzbW5/1T2/ib/M8iZxUKL0VQI9fYKEdbulXQ0=;
- b=GAxHcC1kaut6xHfwM8Y59J7yGEfKQ3l6Jsq4ejGs5jA2uy7siBJzoJCVOaMGMuuCKI
- tvrlgN0oc1wul8luu5Oo0mboLV3W1LJ7RiD8iBYlJwInIAjHtorc02oSq5kv1if0LiDu
- OJ+oYQSsQOiHT8nuNznny6IXCagNAk0hjEJ/WtIvH1QtrNGWKdSMCWUNmeUdKVmVrAk+
- jdz/6M/cLEw9/iLNHZcFdIfRupWOZ+8EXLsnv01FnHW4tIZhyRqburGh4ea0JNMppy0V
- W3jrH6trZMZ7omOvEH23oSWlS8n1WiuPfQYd+Sf1WjNl1Tpb6+BLDdoBbl14j9ENGdnM
- bthg==
-X-Gm-Message-State: AC+VfDyXM7su8+CvXBBoVfzQNlXsnn0Q3g8AKDngxrX4611werlVpJlp
- cqAn94+QHcordyXJbQ2D8a7qTkOanEPFL4alzHVkLuEGjaWQL135DNZvEBAbODFyipX4RxqVI9g
- y50cFx40mK0a4fvmK4p/anLTXFtMFK0M=
-X-Received: by 2002:a17:90a:2cc7:b0:24e:6a6:cd6 with SMTP id
- n65-20020a17090a2cc700b0024e06a60cd6mr10369381pjd.29.1683540003230; 
- Mon, 08 May 2023 03:00:03 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ7VEOMrYOBHe8hEp9dOvZbTiaZry58Rin8YzdHkk+Llwf5idmv0fTMyerIBk1b/0lAwBcyn/Vh/GcFAEYEXA8U=
-X-Received: by 2002:a17:90a:2cc7:b0:24e:6a6:cd6 with SMTP id
- n65-20020a17090a2cc700b0024e06a60cd6mr10369357pjd.29.1683540002918; Mon, 08
- May 2023 03:00:02 -0700 (PDT)
-Received: from 744723338238 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 8 May 2023 03:00:02 -0700
-From: Andrea Bolognani <abologna@redhat.com>
-References: <20230425102545.162888-1-sunilvl@ventanamicro.com>
- <b520d913-27a9-dea5-53c8-af1cdd967ab2@canonical.com>
- <ZFiRr8d2zyAJlZJv@sunil-laptop>
+ d=1e100.net; s=20221208; t=1683540183; x=1686132183;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=VvWCQjr5tSxYzn7N8yKObQDzC0YUASVVBrI08afApL8=;
+ b=KVbDzn0tik4jD85CDKrUy6206G5WO9easqkgGS9+l7/5g8C2cDOPSJzAhWRb02PXJW
+ R2n5+WhvbeSYAaehGosLRu58n2RjzM8QACFC6ENK/jzAfVOA7Teva3I9b7UafFgrSVkq
+ cSJ7wYNA4Q4gaj8iLp3tZ/YxuUxIrTUlCbdCF5Yt+fk4HyUCDyOUERW01IHxPIWv5ULU
+ SHFiINPzvi1NKWY/dUc4FYE8gCBDNR62+bvVKmPIef4/TltS7JSeF7cxmagaEMN0T0dR
+ 8IZqLz6wkow56DwEeZyw4MgxesYrBC0+ijfwRo+5bs+786BfusJum5KlUUCkm4A6AhZt
+ 8YJA==
+X-Gm-Message-State: AC+VfDw0CUSm7WKG1o5Yeb0/6qdkRBMItyKpawDELggwmG+OOP+yggGu
+ yhfAGwQz+ENijPH+AwndU/MoIA==
+X-Google-Smtp-Source: ACHHUZ4We/DO5dEz8nw7UDQY74z3Pat8axMfjC+GOgg27vVpCz9zmmI2us8UCQExqThBT246qEv3HA==
+X-Received: by 2002:a17:907:2684:b0:94e:75f8:668 with SMTP id
+ bn4-20020a170907268400b0094e75f80668mr7815275ejc.56.1683540183151; 
+ Mon, 08 May 2023 03:03:03 -0700 (PDT)
+Received: from [192.168.110.227] ([91.223.100.33])
+ by smtp.gmail.com with ESMTPSA id
+ p24-20020a1709065dd800b0094f44bdf7acsm4766398ejv.57.2023.05.08.03.02.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 08 May 2023 03:03:02 -0700 (PDT)
+Message-ID: <bde2c98e-f087-44aa-4164-9a24d5d8e9c7@linaro.org>
+Date: Mon, 8 May 2023 11:02:54 +0100
 MIME-Version: 1.0
-In-Reply-To: <ZFiRr8d2zyAJlZJv@sunil-laptop>
-Date: Mon, 8 May 2023 03:00:02 -0700
-Message-ID: <CABJz62OTBEOMzcXLYc=DqRwH8N4DP=o0-kCfALwoREZVyOxLPg@mail.gmail.com>
-Subject: Re: [PATCH v2] hw/riscv: virt: Assume M-mode FW in pflash0 only when
- "-bios none"
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=abologna@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [PATCH v4 03/57] accel/tcg: Introduce tlb_read_idx
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn,
+ philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-s390x@nongnu.org, =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>
+References: <20230503070656.1746170-1-richard.henderson@linaro.org>
+ <20230503070656.1746170-4-richard.henderson@linaro.org>
+ <CAFEAcA858-D37=MrvYnGxBVkL1V14wZ_JLEzFahbweRUDvPmwg@mail.gmail.com>
+ <45cba357-ba20-399a-27e6-5e99741179d0@linaro.org>
+ <CAFEAcA9h6myNpkgmamxLHp_8We97eyGQpDb4PKPnwqL8rRzSTQ@mail.gmail.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <CAFEAcA9h6myNpkgmamxLHp_8We97eyGQpDb4PKPnwqL8rRzSTQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ej1-x629.google.com
+X-Spam_score_int: -50
+X-Spam_score: -5.1
+X-Spam_bar: -----
+X-Spam_report: (-5.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.964,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -92,77 +90,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 May 2023 10:00:11 -0000
+X-List-Received-Date: Mon, 08 May 2023 10:03:21 -0000
 
-On Mon, May 08, 2023 at 11:37:43AM +0530, Sunil V L wrote:
-> On Mon, May 08, 2023 at 07:37:23AM +0200, Heinrich Schuchardt wrote:
-> > On 4/25/23 12:25, Sunil V L wrote:
-> > > Currently, virt machine supports two pflash instances each with
-> > > 32MB size. However, the first pflash is always assumed to
-> > > contain M-mode firmware and reset vector is set to this if
-> > > enabled. Hence, for S-mode payloads like EDK2, only one pflash
-> > > instance is available for use. This means both code and NV variables
-> > > of EDK2 will need to use the same pflash.
-> > >
-> > > The OS distros keep the EDK2 FW code as readonly. When non-volatile
-> > > variables also need to share the same pflash, it is not possible
-> > > to keep it as readonly since variables need write access.
-> > >
-> > > To resolve this issue, the code and NV variables need to be separated.
-> > > But in that case we need an extra flash. Hence, modify the convention
-> > > such that pflash0 will contain the M-mode FW only when "-bios none"
-> > > option is used. Otherwise, pflash0 will contain the S-mode payload FW.
-> > > This enables both pflash instances available for EDK2 use.
-> > >
-> > > Example usage:
-> > > 1) pflash0 containing M-mode FW
-> > > qemu-system-riscv64 -bios none -pflash <mmode_fw> -machine virt
-> > > or
-> > > qemu-system-riscv64 -bios none \
-> > > -drive file=<mmode_fw>,if=pflash,format=raw,unit=0 -machine virt
-> > >
-> > > 2) pflash0 containing S-mode payload like EDK2
-> > > qemu-system-riscv64 -pflash <smode_fw_vars> -pflash <smode_fw_code> -machine  virt
-> > > or
-> > > qemu-system-riscv64 -bios <opensbi_fw> \
-> > > -pflash <smode_fw_vars> \
-> > > -pflash <smode_fw_code> \
-> >
-> > On amd64 and arm64 unit=0 is used for code and unit=1 is used for variables.
-> > Shouldn't riscv64 do the same?
+On 5/7/23 11:09, Peter Maydell wrote:
+> On Fri, 5 May 2023 at 19:57, Richard Henderson
+> <richard.henderson@linaro.org> wrote:
+>>
+>> On 5/4/23 16:02, Peter Maydell wrote:
+>>> On Wed, 3 May 2023 at 08:15, Richard Henderson
+>>> <richard.henderson@linaro.org> wrote:
+>>>>
+>>>> Instead of playing with offsetof in various places, use
+>>>> MMUAccessType to index an array.  This is easily defined
+>>>> instead of the previous dummy padding array in the union.
+>>>>
+>>>> Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+>>>> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>>>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>>>> ---
+>>>
+>>>> @@ -1802,7 +1763,8 @@ static void *atomic_mmu_lookup(CPUArchState *env, target_ulong addr,
+>>>>        if (prot & PAGE_WRITE) {
+>>>>            tlb_addr = tlb_addr_write(tlbe);
+>>>>            if (!tlb_hit(tlb_addr, addr)) {
+>>>> -            if (!VICTIM_TLB_HIT(addr_write, addr)) {
+>>>> +            if (!victim_tlb_hit(env, mmu_idx, index, MMU_DATA_STORE,
+>>>> +                                addr & TARGET_PAGE_MASK)) {
+>>>>                    tlb_fill(env_cpu(env), addr, size,
+>>>>                             MMU_DATA_STORE, mmu_idx, retaddr);
+>>>>                    index = tlb_index(env, mmu_idx, addr);
+>>>> @@ -1835,7 +1797,8 @@ static void *atomic_mmu_lookup(CPUArchState *env, target_ulong addr,
+>>>>        } else /* if (prot & PAGE_READ) */ {
+>>>>            tlb_addr = tlbe->addr_read;
+>>
+>> read
+>>
+>>>>            if (!tlb_hit(tlb_addr, addr)) {
+>>>> -            if (!VICTIM_TLB_HIT(addr_write, addr)) {
+>>
+>> write
+>>
+>>>> +            if (!victim_tlb_hit(env, mmu_idx, index, MMU_DATA_LOAD,
+>>>> +                                addr & TARGET_PAGE_MASK)) {
+>>>
+>>> This was previously looking at addr_write, but now we pass
+>>> MMU_DATA_LOAD ?
+>>
+>> This is the read portion of the read+write check.  The write portion is above in the
+>> previous hunk.  So this is an existing error, fixed here, and I hadn't noticed.
+> 
+> Yeah, I wondered if it was a pre-existing bug. We should split out
+> the bug fix.
 
-Good catch, I had missed that!
+https://patchew.org/QEMU/20230505204049.352469-1-richard.henderson@linaro.org/
 
-> Is that a requirement from distros perspective? That was my original v1
-> design.
->
-> But the reason why I kept unit0 for variables, it helps in keeping current
-> EDK2 usage model work. Otherwise, current EDK2 will break if we change
-> the code to unit 0.
-
-I think that it's more important to align with other architectures.
-
-The number of people currently running edk2 on RISC-V is probably
-vanishingly small, and in my opinion requiring them to tweak their
-command lines a bit is a fair price to pay to avoid having to carry a
-subtle difference between architectures for years to come.
-
-With that in mind, my preference would be to go back to v1.
-
-> Second, since unit 0 for RISC-V is currently assumed to start in M-mode fw
-> which is secure, I think it makes sense to keep variables also in unit
-> 0.
-
-If you're storing variables rather than code in pflash0, does it even
-make sense to talk about M-mode and S-mode?
-
-
-Taking a step back, what is even the use case for having M-mode code
-in pflash0? If you want to use an M-mode firmware, can't you just use
--bios instead? In other words, can we change the behavior so that
-pflash being present always mean loading S-mode firmware off it?
-
--- 
-Andrea Bolognani / Red Hat / Virtualization
+r~
 
 
