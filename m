@@ -4,87 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DC07C7EE22
-	for <qemu-riscv@archiver.kernel.org>; Mon,  8 May 2023 17:34:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCD25C7EE22
+	for <qemu-riscv@archiver.kernel.org>; Tue,  9 May 2023 00:28:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pw4ky-0002KV-S9; Mon, 08 May 2023 13:34:40 -0400
+	id 1pwBDG-0004KP-JJ; Mon, 08 May 2023 20:28:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pw4kt-0002GU-Tn
- for qemu-riscv@nongnu.org; Mon, 08 May 2023 13:34:36 -0400
-Received: from mail-yb1-xb33.google.com ([2607:f8b0:4864:20::b33])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1pw4ks-0005iK-8W
- for qemu-riscv@nongnu.org; Mon, 08 May 2023 13:34:35 -0400
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-b983027d0faso6395363276.0
- for <qemu-riscv@nongnu.org>; Mon, 08 May 2023 10:34:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1683567273; x=1686159273;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2sAeg1EU6WtlPSw4uX/jkzQKtpZTY5VZi71T06y6p2g=;
- b=u28I6JZBbXL93RaAc5Yvlw/LcNZh7IcPxA+xFuU0rDC9ECDxGtrYUqial++fHYJXm2
- 7ZE27+cfqdUVy96bc5RhmtY1FXGkoLhfA9fdqQz4iy+hIlHflEXaOnSVSgmFrKl8aWmB
- XAqcplzyvGq7iuSIbaL1VtzxBHv0KafcU7uAly7pFTFI2/E84dzmIkezyjuInUOTaTo/
- jd01tTX5B19r/ma+tn2WwFMzCg+cP2DN9ACBNTI0KtUSqO/9F4SImubO/YoF9YoX9P2o
- QZ4j46eWsL8xuEHgRkOhV/iH1dsRgdR2BHfKW0EVLfPCN3g/UKTrtbTtSjzyMkh1cLAO
- rZ7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683567273; x=1686159273;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2sAeg1EU6WtlPSw4uX/jkzQKtpZTY5VZi71T06y6p2g=;
- b=QFZGvD8e/TVQmVjjhRUMUdWhlyFlnFVDjGei/LcJk9FCob8uvqHZmzZvV1G6FAcitO
- JIIV3kk/Rbnm7VFu0ZtuKMbH/KNG2nMy4FS5jXeMUF+6+TfbLWXcpgX0VdkEn49Sh9IY
- EMVA6lRqMT+D45KjMDxCrnb87kp7Kxq6iMfw7+bqu+MMyGrvsjXN2EiuwLKc4WSolw9a
- FQqxoDcIs+v39UobfVgzByECjcrZEWZs6VCG+UXGByMVnb/HPTsT9PesWyESazqB9IaQ
- yuiAuuwkQR3DCe9GeswcbTKPlUvBAC56P4a2BLgSw3OyngItOCt692O3K5V/ak+svBYi
- yDGg==
-X-Gm-Message-State: AC+VfDwRihHs/f9WmSbP5dUDePYNgoGJ+9hzEZ4CDUs4ya+GnDGRdjnq
- HPqY62ifjAp+Knph3R8MzlyThA==
-X-Google-Smtp-Source: ACHHUZ7PQx6sKOQnhBd2wz5chE0ffY+/4JRecuQPt/53he0P3GjLuedgONUGoU2J4drK9qnlRHGHNw==
-X-Received: by 2002:a25:41c8:0:b0:b9d:bba9:b1ec with SMTP id
- o191-20020a2541c8000000b00b9dbba9b1ecmr10087038yba.62.1683567273323; 
- Mon, 08 May 2023 10:34:33 -0700 (PDT)
-Received: from [192.168.110.227] ([172.58.139.115])
- by smtp.gmail.com with ESMTPSA id
- t9-20020a252d09000000b00b8f51af1364sm2468470ybt.53.2023.05.08.10.34.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 May 2023 10:34:32 -0700 (PDT)
-Message-ID: <1798f4f8-9cf2-aa16-3f2e-9b0ef333ce36@linaro.org>
-Date: Mon, 8 May 2023 18:34:26 +0100
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1pwBD7-0004I3-Oo
+ for qemu-riscv@nongnu.org; Mon, 08 May 2023 20:28:11 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1pwBCw-000438-4g
+ for qemu-riscv@nongnu.org; Mon, 08 May 2023 20:27:59 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1683592074;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:mime-version: content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=8nPHgiHUJuhTz+ncSpUKoXvnF8Ul1mnLAyHemdxC83Y=;
+ b=RLfZRNjStb2UWlCyb3b3VxALuc5nVwPZtwGwsb6dDAnJ0r2acptAtRrbuXZTdIyDwX3yMt
+ FxL2pdeJMIUPpQaNsEYkV5MwJOcgHhFo5FXXkKzCTOZt0nz9JdSd1ppBK4KaLSOJI80hj7
+ LJA66aYwVL3FTqxL6j6Ez4TnRGgx3w8=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-116-OY_G2P_tOFi5LFo68rhjnA-1; Mon, 08 May 2023 20:27:51 -0400
+X-MC-Unique: OY_G2P_tOFi5LFo68rhjnA-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.7])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 8D05A1C07579;
+ Tue,  9 May 2023 00:27:50 +0000 (UTC)
+Received: from gshan.redhat.com (vpn2-54-118.bne.redhat.com [10.64.54.118])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id D8FCB14171BC;
+ Tue,  9 May 2023 00:27:42 +0000 (UTC)
+From: Gavin Shan <gshan@redhat.com>
+To: qemu-arm@nongnu.org
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com,
+ imammedo@redhat.com, peter.maydell@linaro.org, rad@semihalf.com,
+ quic_llindhol@quicinc.com, eduardo@habkost.net, marcel.apfelbaum@gmail.com,
+ philmd@linaro.org, wangyanan55@huawei.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, thuth@redhat.com,
+ lvivier@redhat.com, ajones@ventanamicro.com, berrange@redhat.com,
+ dbarboza@ventanamicro.com, yihyu@redhat.com, shan.gavin@gmail.com
+Subject: [PATCH v5 0/3] NUMA: Apply cluster-NUMA-node boundary for aarch64 and
+ riscv machines
+Date: Tue,  9 May 2023 10:27:36 +1000
+Message-Id: <20230509002739.18388-1-gshan@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [PATCH v4 51/57] tcg/sparc64: Use atom_and_align_for_opc
-Content-Language: en-US
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, git@xen0n.name, gaosong@loongson.cn,
- philmd@linaro.org, qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org
-References: <20230503070656.1746170-1-richard.henderson@linaro.org>
- <20230503070656.1746170-52-richard.henderson@linaro.org>
- <CAFEAcA-HNQinkZvwCrqg9OQZcQvoL+LeBgfFhHqvWorjye0Xfg@mail.gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <CAFEAcA-HNQinkZvwCrqg9OQZcQvoL+LeBgfFhHqvWorjye0Xfg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
- envelope-from=richard.henderson@linaro.org; helo=mail-yb1-xb33.google.com
-X-Spam_score_int: -38
-X-Spam_score: -3.9
-X-Spam_bar: ---
-X-Spam_report: (-3.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.802,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=UTF-8
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.7
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,43 +83,89 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 5/5/23 14:20, Peter Maydell wrote:
-> On Wed, 3 May 2023 at 08:13, Richard Henderson
-> <richard.henderson@linaro.org> wrote:
->>
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->>   tcg/sparc64/tcg-target.c.inc | 6 ++++--
->>   1 file changed, 4 insertions(+), 2 deletions(-)
->>
->> diff --git a/tcg/sparc64/tcg-target.c.inc b/tcg/sparc64/tcg-target.c.inc
->> index bb23038529..4f9ec02b1f 100644
->> --- a/tcg/sparc64/tcg-target.c.inc
->> +++ b/tcg/sparc64/tcg-target.c.inc
->> @@ -1028,11 +1028,13 @@ static TCGLabelQemuLdst *prepare_host_addr(TCGContext *s, HostAddress *h,
->>   {
->>       TCGLabelQemuLdst *ldst = NULL;
->>       MemOp opc = get_memop(oi);
->> -    unsigned a_bits = get_alignment_bits(opc);
->> -    unsigned s_bits = opc & MO_SIZE;
->> +    MemOp s_bits = opc & MO_SIZE;
->> +    MemOp a_bits, atom_a, atom_u;
->>       unsigned a_mask;
->>
->>       /* We don't support unaligned accesses. */
->> +    a_bits = atom_and_align_for_opc(s, &atom_a, &atom_u, opc,
->> +                                    MO_ATOM_IFALIGN, false);
->>       a_bits = MAX(a_bits, s_bits);
->>       a_mask = (1u << a_bits) - 1;
->>
->> --
-> 
-> No changes to HostAddress struct again?
+For arm64 and riscv architecture, the driver (/base/arch_topology.c) is
+used to populate the CPU topology in the Linux guest. It's required that
+the CPUs in one cluster can't span mutiple NUMA nodes. Otherwise, the Linux
+scheduling domain can't be sorted out, as the following warning message
+indicates. To avoid the unexpected confusion, this series attempts to
+warn about such kind of irregular configurations.
 
-Again, no use of alignment outside of prepare_host_addr.
-No 128-bit operations, and all host operations aligned.
+   -smp 6,maxcpus=6,sockets=2,clusters=1,cores=3,threads=1 \
+   -numa node,nodeid=0,cpus=0-1,memdev=ram0                \
+   -numa node,nodeid=1,cpus=2-3,memdev=ram1                \
+   -numa node,nodeid=2,cpus=4-5,memdev=ram2                \
 
+   ------------[ cut here ]------------
+   WARNING: CPU: 0 PID: 1 at kernel/sched/topology.c:2271 build_sched_domains+0x284/0x910
+   Modules linked in:
+   CPU: 0 PID: 1 Comm: swapper/0 Not tainted 5.14.0-268.el9.aarch64 #1
+   pstate: 00400005 (nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+   pc : build_sched_domains+0x284/0x910
+   lr : build_sched_domains+0x184/0x910
+   sp : ffff80000804bd50
+   x29: ffff80000804bd50 x28: 0000000000000002 x27: 0000000000000000
+   x26: ffff800009cf9a80 x25: 0000000000000000 x24: ffff800009cbf840
+   x23: ffff000080325000 x22: ffff0000005df800 x21: ffff80000a4ce508
+   x20: 0000000000000000 x19: ffff000080324440 x18: 0000000000000014
+   x17: 00000000388925c0 x16: 000000005386a066 x15: 000000009c10cc2e
+   x14: 00000000000001c0 x13: 0000000000000001 x12: ffff00007fffb1a0
+   x11: ffff00007fffb180 x10: ffff80000a4ce508 x9 : 0000000000000041
+   x8 : ffff80000a4ce500 x7 : ffff80000a4cf920 x6 : 0000000000000001
+   x5 : 0000000000000001 x4 : 0000000000000007 x3 : 0000000000000002
+   x2 : 0000000000001000 x1 : ffff80000a4cf928 x0 : 0000000000000001
+   Call trace:
+    build_sched_domains+0x284/0x910
+    sched_init_domains+0xac/0xe0
+    sched_init_smp+0x48/0xc8
+    kernel_init_freeable+0x140/0x1ac
+    kernel_init+0x28/0x140
+    ret_from_fork+0x10/0x20
 
-r~
+PATCH[1] Warn about the irregular configuration if required
+PATCH[2] Enable the validation for aarch64 machines
+PATCH[3] Enable the validation for riscv machines
+
+v4: https://lists.nongnu.org/archive/html/qemu-arm/2023-04/msg00232.html
+v3: https://lists.nongnu.org/archive/html/qemu-arm/2023-02/msg01226.html
+v2: https://lists.nongnu.org/archive/html/qemu-arm/2023-02/msg01080.html
+v1: https://lists.nongnu.org/archive/html/qemu-arm/2023-02/msg00886.html
+
+Changelog
+=========
+v5:
+  * Rebase for QEMU v8.1.0                                    (Gavin)
+  * Pick ack-b's from Igor                                    (Gavin)
+v4:
+  * Pick r-b and ack-b from Daniel/Philippe                   (Gavin)
+  * Replace local variable @len with possible_cpus->len in
+    validate_cpu_cluster_to_numa_boundary()                   (Philippe)
+v3:
+  * Validate cluster-to-NUMA instead of socket-to-NUMA
+    boundary                                                  (Gavin)
+  * Move the switch from MachineState to MachineClass         (Philippe)
+  * Warning instead of rejecting the irregular configuration  (Daniel)
+  * Comments to mention cluster-to-NUMA is platform instead
+    of architectural choice                                   (Drew)
+  * Drop PATCH[v2 1/4] related to qtests/numa-test            (Gavin)
+v2:
+  * Fix socket-NUMA-node boundary issues in qtests/numa-test  (Gavin)
+  * Add helper set_numa_socket_boundary() and validate the
+    boundary in the generic path                              (Philippe)
+
+Gavin Shan (3):
+  numa: Validate cluster and NUMA node boundary if required
+  hw/arm: Validate cluster and NUMA node boundary
+  hw/riscv: Validate cluster and NUMA node boundary
+
+ hw/arm/sbsa-ref.c   |  2 ++
+ hw/arm/virt.c       |  2 ++
+ hw/core/machine.c   | 42 ++++++++++++++++++++++++++++++++++++++++++
+ hw/riscv/spike.c    |  2 ++
+ hw/riscv/virt.c     |  2 ++
+ include/hw/boards.h |  1 +
+ 6 files changed, 51 insertions(+)
+
+-- 
+2.23.0
 
 
