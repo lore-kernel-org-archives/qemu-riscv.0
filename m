@@ -4,63 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93F25C7EE22
-	for <qemu-riscv@archiver.kernel.org>; Wed, 10 May 2023 03:01:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D726BC77B7C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 10 May 2023 08:39:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pwa4k-00035v-PD; Tue, 09 May 2023 23:01:11 -0400
+	id 1pwfLs-0005Sd-NH; Wed, 10 May 2023 04:39:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pwa4i-000354-TE; Tue, 09 May 2023 23:01:08 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pwa4Z-0003uZ-1U; Tue, 09 May 2023 23:01:02 -0400
-Received: from localhost.localdomain (unknown [61.165.33.195])
- by APP-01 (Coremail) with SMTP id qwCowABnSIHcCFtk4anMEg--.27533S2;
- Wed, 10 May 2023 11:00:45 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH] target/riscv: Move zc* out of the experimental properties
-Date: Wed, 10 May 2023 11:00:40 +0800
-Message-Id: <20230510030040.20528-1-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1pwfLq-0005RU-Nl
+ for qemu-riscv@nongnu.org; Wed, 10 May 2023 04:39:10 -0400
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1pwfLo-0001rI-2R
+ for qemu-riscv@nongnu.org; Wed, 10 May 2023 04:39:10 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-3f41dceb9c9so29433165e9.3
+ for <qemu-riscv@nongnu.org>; Wed, 10 May 2023 01:39:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1683707946; x=1686299946;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4tbRbzYaaMUy2bPM1xbFldUCmgJzdNP6nGNj1mPtNhI=;
+ b=sJ27k/c93qgrX6E8AbDUI2aV2A7gMZC24SGgp31owkPCf/zY/x8EYPm1CwMefwhvkK
+ oWbjjyOD4xhlGWW0ZNkkGq9aklvkDLTERplkwVogV4QTQdsLvFP/82HskXc6AL7nqn6r
+ 21Nja/wjQcftv4F6lBOjvNijgPXavJoBgC63wZic8hJra3fIuA3UDhaO4fyTo5dfL//f
+ w2+naeMw0g9ysYLOT+DcT7MoAWQ8GMCxibcvnZvZfkJbhH6mWjPs8DRYObnjAbG2MrS0
+ 82/sMHhJtlHhl3MC948bNW4Hf/BylcKMjkbZxROi4cyl1MJx9prKOpRnMcKC31rbthOp
+ UeTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1683707946; x=1686299946;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=4tbRbzYaaMUy2bPM1xbFldUCmgJzdNP6nGNj1mPtNhI=;
+ b=LIJWzGJAzFFsAzlqY5r176w+3f/lw1XDVCpslJz9grgzrpcZojhm/jH/LW8ek7aQ0L
+ hcLeC3xp5fkderTNqZ5E8q0ZMvWd+fob4TvsXxCvrgoNJNc+1hZU1AoIfVRVuL89WrLp
+ j90lpHwiuq3x5Vdh+vlFpseFViJ/Hut48wPO7gvWEHU10HmK5cF7VOk5HgPk0d+DrBvk
+ Z5QVnR6+3J/DASUuiYw/3YGIGQAVJmsd/oOHKh520NXUeqWw22LZyNB9eVB+ZhqfdiEH
+ ISrpLXoCZiys51wRPxlHM14QB3nE6T3SBikda0BC5ywSl4k5DgHeWfppf3U8pcTKXIar
+ oNSw==
+X-Gm-Message-State: AC+VfDyLJZ8AVhd48Yw+99j2jS3Vl8o6ajeWO54gaHXUo/rjpruQ0m+c
+ rkcsJXcrvBRLoxjti6HwKPQKIA==
+X-Google-Smtp-Source: ACHHUZ61eEYbKeM6vZLVUuz+evz/WMNQZE+/yIel0xk3OoOFuZmYHtU+YsqlHB2QbR6loe3uglRDjw==
+X-Received: by 2002:a7b:c5d6:0:b0:3f0:b1c9:25d4 with SMTP id
+ n22-20020a7bc5d6000000b003f0b1c925d4mr11259292wmk.21.1683707946439; 
+ Wed, 10 May 2023 01:39:06 -0700 (PDT)
+Received: from zen.linaroharston ([85.9.250.243])
+ by smtp.gmail.com with ESMTPSA id
+ y10-20020a7bcd8a000000b003f16fc33fbesm21899725wmj.17.2023.05.10.01.39.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 May 2023 01:39:06 -0700 (PDT)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id A72A91FFBB;
+ Wed, 10 May 2023 09:39:05 +0100 (BST)
+References: <20230506072235.597467-1-richard.henderson@linaro.org>
+ <20230506072235.597467-2-richard.henderson@linaro.org>
+User-agent: mu4e 1.11.4; emacs 29.0.90
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: git@xen0n.name, gaosong@loongson.cn, philmd@linaro.org,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ qemu-devel@nongnu.org
+Subject: Re: [PATCH v5 01/30] tcg/i386: Introduce prepare_host_addr
+Date: Wed, 10 May 2023 09:38:55 +0100
+In-reply-to: <20230506072235.597467-2-richard.henderson@linaro.org>
+Message-ID: <87v8h0a8d2.fsf@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowABnSIHcCFtk4anMEg--.27533S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF1kXw1DAr48Aw18Zrb_yoW8ZF13pr
- n5JFW7Kws3JryfCay8tw1DJrW8Ga1fA392g3yfZa1xArWfKr47WF1DKFs5Cr4fJr4rZa1S
- 9F13ur10v39Yya7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvG14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26w1j6s0DM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
- JVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
- CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
- 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
- W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
- Y2ka0xkIwI1lc2xSY4AK67AK6r48MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r
- 1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CE
- b7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0x
- vE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAI
- cVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa
- 73UjIFyTuYvjfUnQ6pDUUUU
-X-Originating-IP: [61.165.33.195]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x335.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,49 +100,19 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Zc* extensions (version 1.0) are ratified.
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
----
- target/riscv/cpu.c | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+Richard Henderson <richard.henderson@linaro.org> writes:
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index db0875fb43..99ed9cb80e 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1571,6 +1571,14 @@ static Property riscv_cpu_extensions[] = {
- 
-     DEFINE_PROP_BOOL("zmmul", RISCVCPU, cfg.ext_zmmul, false),
- 
-+    DEFINE_PROP_BOOL("zca", RISCVCPU, cfg.ext_zca, false),
-+    DEFINE_PROP_BOOL("zcb", RISCVCPU, cfg.ext_zcb, false),
-+    DEFINE_PROP_BOOL("zcd", RISCVCPU, cfg.ext_zcd, false),
-+    DEFINE_PROP_BOOL("zce", RISCVCPU, cfg.ext_zce, false),
-+    DEFINE_PROP_BOOL("zcf", RISCVCPU, cfg.ext_zcf, false),
-+    DEFINE_PROP_BOOL("zcmp", RISCVCPU, cfg.ext_zcmp, false),
-+    DEFINE_PROP_BOOL("zcmt", RISCVCPU, cfg.ext_zcmt, false),
-+
-     /* Vendor-specific custom extensions */
-     DEFINE_PROP_BOOL("xtheadba", RISCVCPU, cfg.ext_xtheadba, false),
-     DEFINE_PROP_BOOL("xtheadbb", RISCVCPU, cfg.ext_xtheadbb, false),
-@@ -1588,14 +1596,6 @@ static Property riscv_cpu_extensions[] = {
-     /* These are experimental so mark with 'x-' */
-     DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
- 
--    DEFINE_PROP_BOOL("x-zca", RISCVCPU, cfg.ext_zca, false),
--    DEFINE_PROP_BOOL("x-zcb", RISCVCPU, cfg.ext_zcb, false),
--    DEFINE_PROP_BOOL("x-zcd", RISCVCPU, cfg.ext_zcd, false),
--    DEFINE_PROP_BOOL("x-zce", RISCVCPU, cfg.ext_zce, false),
--    DEFINE_PROP_BOOL("x-zcf", RISCVCPU, cfg.ext_zcf, false),
--    DEFINE_PROP_BOOL("x-zcmp", RISCVCPU, cfg.ext_zcmp, false),
--    DEFINE_PROP_BOOL("x-zcmt", RISCVCPU, cfg.ext_zcmt, false),
--
-     /* ePMP 0.9.3 */
-     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-     DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
--- 
-2.25.1
+> Merge tcg_out_tlb_load, add_qemu_ldst_label,
+> tcg_out_test_alignment, and some code that lived in both
+> tcg_out_qemu_ld and tcg_out_qemu_st into one function
+> that returns HostAddress and TCGLabelQemuLdst structures.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
+Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
