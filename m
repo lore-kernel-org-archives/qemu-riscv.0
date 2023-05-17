@@ -4,98 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D7AAC77B7F
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 May 2023 08:45:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A844CC7EE23
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 May 2023 09:16:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pzCmo-00028o-Eh; Wed, 17 May 2023 04:45:31 -0400
+	id 1pzDGm-0005MG-Us; Wed, 17 May 2023 05:16:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1pzCmk-00026m-4i
- for qemu-riscv@nongnu.org; Wed, 17 May 2023 04:45:27 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1pzCmi-0000fw-Co
- for qemu-riscv@nongnu.org; Wed, 17 May 2023 04:45:25 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1684313123;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=btDd3o+y3726jjGUMJp43kgY4eDrvkrYaeBHBAg9GAA=;
- b=BoD+NtvI2sT0vZbw2VmQnXGEArU6KmYkySIZpxNPkvWpp0AkF8whe1NhB3wjFtuMng6P5B
- R0l1NnZluhBCC3hpzpbL+6h8FeTuBXykkHvp48huk71QHjA2NJ6mTjBxleaOSdBC+/gSiS
- T5uMMKNUD8Ocj0L/QREnha493+YJo7g=
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com
- [209.85.210.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-271-3c6nMLZuNAaJnSSNMx__1w-1; Wed, 17 May 2023 04:45:22 -0400
-X-MC-Unique: 3c6nMLZuNAaJnSSNMx__1w-1
-Received: by mail-pf1-f199.google.com with SMTP id
- d2e1a72fcca58-6438e9e9f91so352399b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 17 May 2023 01:45:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684313121; x=1686905121;
- h=content-transfer-encoding:cc:to:subject:message-id:date:in-reply-to
- :mime-version:references:from:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=btDd3o+y3726jjGUMJp43kgY4eDrvkrYaeBHBAg9GAA=;
- b=Lhq6W66MNx6xHGfr5nCW3UlRM+535WO8f8C0gAcEmmDe5Uk363ZS/9GaAB0vxWnV3L
- t5msExRRdQ5dIvEN+ttMVcXSa2FwXDpnAqFMQ/S0clufrHy2bBp7ljVL+bmC9ZNPH4iC
- CrZaFmOn0l+kmNE8r5GdVycDXBWHAZCuDe0Ustlcg1G78g5KL57FFZkv8T+6BnmFaalr
- /crU8b9x+MVZmkgWeFZWMrQ9wbdwwA8GbUHcb0Z1vsrqBr/GmL+VGPlDKsQwJNddgtZX
- uszbz0Fcla5c43JhXOv+fOheXEarPh6wHsPPjnPeFill6rYEXNqphfllVOBo6Sh6r0g/
- GTQA==
-X-Gm-Message-State: AC+VfDwsT0o46LHi8L/A5aMohKV8hzNQN1yC1huZRjqk+mMBxuFWmRC5
- mELc6hCzyo2RYARCEGBzI+6RKoy4FQ+A+ktEMclbC0+vS6YagjZ/MKC8pO+mnxw2uPLibaVhC5i
- re1JiZancW2sidAHTLIERSP9Y1b7R1ec=
-X-Received: by 2002:a05:6a00:2d14:b0:62d:cfd4:e440 with SMTP id
- fa20-20020a056a002d1400b0062dcfd4e440mr54512pfb.8.1684313121340; 
- Wed, 17 May 2023 01:45:21 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ5YM17pdhDmehi5sxmuC2BTZH3i2DYkZtX5i2agfEUEU3De6VGmL4xav42N6Qa7f4NgU4KTc3ghaSqCfkhUuJ0=
-X-Received: by 2002:a05:6a00:2d14:b0:62d:cfd4:e440 with SMTP id
- fa20-20020a056a002d1400b0062dcfd4e440mr54492pfb.8.1684313121040; Wed, 17 May
- 2023 01:45:21 -0700 (PDT)
-Received: from 744723338238 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 17 May 2023 01:45:20 -0700
-From: Andrea Bolognani <abologna@redhat.com>
-References: <20230425102545.162888-1-sunilvl@ventanamicro.com>
- <b520d913-27a9-dea5-53c8-af1cdd967ab2@canonical.com>
- <ZFiRr8d2zyAJlZJv@sunil-laptop>
- <CABJz62OTBEOMzcXLYc=DqRwH8N4DP=o0-kCfALwoREZVyOxLPg@mail.gmail.com>
- <ZFjbwh3CdljaHEZZ@sunil-laptop>
- <CABJz62P3u0d-ggQw-B_6AYTNu8Z9-TOs+UOn2vM8NNV0mQKR+Q@mail.gmail.com>
- <CAKmqyKMDf3F67=_Dq8oFOGG3Ft9hszfB6J2-U9DmSSvK0YKkMg@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pzDGk-0004lG-3f; Wed, 17 May 2023 05:16:26 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1pzDGh-0007l1-7h; Wed, 17 May 2023 05:16:25 -0400
+Received: from localhost.localdomain (unknown [61.165.33.195])
+ by APP-05 (Coremail) with SMTP id zQCowABnVxRam2Rks_XqJQ--.29147S8;
+ Wed, 17 May 2023 17:16:15 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn,
+ lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v6 06/12] target/riscv: Remove unused paramters in
+ pmp_hart_has_privs_default()
+Date: Wed, 17 May 2023 17:15:13 +0800
+Message-Id: <20230517091519.34439-7-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230517091519.34439-1-liweiwei@iscas.ac.cn>
+References: <20230517091519.34439-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKMDf3F67=_Dq8oFOGG3Ft9hszfB6J2-U9DmSSvK0YKkMg@mail.gmail.com>
-Date: Wed, 17 May 2023 01:45:20 -0700
-Message-ID: <CABJz62OyYei7DtukTGsKA8oaRBewUR4nwZxx_8ONc0fKkZDuPQ@mail.gmail.com>
-Subject: Re: [PATCH v2] hw/riscv: virt: Assume M-mode FW in pflash0 only when
- "-bios none"
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Sunil V L <sunilvl@ventanamicro.com>, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, qemu-devel@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=abologna@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: zQCowABnVxRam2Rks_XqJQ--.29147S8
+X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF4UKrW8KFy8ZF4ruFg_yoW8Wr17pr
+ WrCryxKFZrtryqq3Z3Jr1qkFWUAFnxKry29a97K3y0ka13u3yIkF1DKwsIyFnrJasrZrZ0
+ kFWqkF15Zr4UZ3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUm014x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
+ 3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
+ x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
+ JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2
+ ka0xkIwI1lc2xSY4AK67AK6r4fMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j
+ 6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7
+ AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE
+ 2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0x
+ vEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVj
+ vjDU0xZFpf9x0JUfl19UUUUU=
+X-Originating-IP: [61.165.33.195]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -25
+X-Spam_score: -2.6
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_LOW=-0.7,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -112,38 +80,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, May 17, 2023 at 02:57:12PM +1000, Alistair Francis wrote:
-> On Mon, May 8, 2023 at 9:45=E2=80=AFPM Andrea Bolognani <abologna@redhat.=
-com> wrote:
-> > > > Taking a step back, what is even the use case for having M-mode cod=
-e
-> > > > in pflash0? If you want to use an M-mode firmware, can't you just u=
-se
-> > > > -bios instead? In other words, can we change the behavior so that
-> > > > pflash being present always mean loading S-mode firmware off it?
->
-> It was originally added to support Oreboot (the Rust version of
-> Coreboot). The idea was that Oreboot (ROM) would be in flash and then
-> go from there.
->
-> It also applies to other ROM code that a user might want to test that
-> runs before OpenSBI.
+The addr and size parameters in pmp_hart_has_privs_default() are unused.
 
-Is there a reason why these would have to be loaded into pflash
-instead of being passed to -bios? From a quick look at the
-documentation for oreboot[1], it looks like they're doing the latter.
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/pmp.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-Either way, assuming that there's a genuine reason why pflash must be
-used, I think the behavior implemented in v1 (pflash0 is M-mode when
--bios none is used, S-mode otherwise) maps very well conceptually,
-and results in behavior matching that of other architectures out of
-the box. That's good enough for me :) I was just wondering whether we
-could keep things even simpler.
-
-
-[1] https://github.com/oreboot/oreboot/blob/main/src/mainboard/emulation/qe=
-mu-riscv/QEMU.md
---=20
-Andrea Bolognani / Red Hat / Virtualization
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 10a4c7c8f4..666fbb74b9 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -236,8 +236,7 @@ static int pmp_is_in_range(CPURISCVState *env, int pmp_index,
+ /*
+  * Check if the address has required RWX privs when no PMP entry is matched.
+  */
+-static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
+-                                       target_ulong size, pmp_priv_t privs,
++static bool pmp_hart_has_privs_default(CPURISCVState *env, pmp_priv_t privs,
+                                        pmp_priv_t *allowed_privs,
+                                        target_ulong mode)
+ {
+@@ -309,8 +308,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+ 
+     /* Short cut if no rules */
+     if (0 == pmp_get_num_rules(env)) {
+-        return pmp_hart_has_privs_default(env, addr, size, privs,
+-                                          allowed_privs, mode);
++        return pmp_hart_has_privs_default(env, privs, allowed_privs, mode);
+     }
+ 
+     if (size == 0) {
+@@ -454,8 +452,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+ 
+     /* No rule matched */
+     if (!ret) {
+-        ret = pmp_hart_has_privs_default(env, addr, size, privs,
+-                                         allowed_privs, mode);
++        ret = pmp_hart_has_privs_default(env, privs, allowed_privs, mode);
+     }
+ 
+     return ret;
+-- 
+2.25.1
 
 
