@@ -4,89 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F076AC7EE23
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 May 2023 09:43:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DDA0C77B75
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 May 2023 12:47:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pzDgm-0007qo-BY; Wed, 17 May 2023 05:43:20 -0400
+	id 1pzGZK-0004Pf-J5; Wed, 17 May 2023 08:47:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pzDgi-0007oK-MY
- for qemu-riscv@nongnu.org; Wed, 17 May 2023 05:43:18 -0400
-Received: from mail-oi1-x22d.google.com ([2607:f8b0:4864:20::22d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pzGZI-0004Oe-20
+ for qemu-riscv@nongnu.org; Wed, 17 May 2023 08:47:48 -0400
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pzDgc-0006Ia-Pa
- for qemu-riscv@nongnu.org; Wed, 17 May 2023 05:43:12 -0400
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-38eda4ef362so393554b6e.2
- for <qemu-riscv@nongnu.org>; Wed, 17 May 2023 02:43:09 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1pzGZG-0003I1-4B
+ for qemu-riscv@nongnu.org; Wed, 17 May 2023 08:47:47 -0400
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-3f4c6c4b51eso7362615e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 17 May 2023 05:47:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1684316588; x=1686908588;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=linaro.org; s=google; t=1684327664; x=1686919664;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=330bbfPwJfkdLBg7u8w9eH5VgxXkkoF5RD84Qv8xHWI=;
- b=e6g7U6BoYGCkRdA3Npcgz9M+/6LekmVmJuXjVHjS4jcTy58rlBTrOQiFbayGZgo124
- YHF6wVC5xgZBxxmIrTDsOjxkl7upyKmxLxuvod7/JJ13cqRB4cLcCRPSdkM+zJmTBROh
- ve7WJzW77HMGGtpl5tZc6+c/9M8qLlNJ1JfUhW6ic2bCkSFhcs45EkBw0WrL80IRA0A/
- R8tSfbpUIOoW1mql4iW8HxkMwuI0lXNRNpH1ToZAMAqN+6fEL/a2fEyglfy3U9ys8qhd
- TVQkWKOhjJ2FWCtQ4YNKuJYY2J087hx3kzWhCO3hXULYcBbpHQqZ71LJSqJchSQFePzu
- 9yaA==
+ bh=syRimRkFdbFwDCuNEU0gcPIXKrdLJIAEHljByigQVnQ=;
+ b=OvtsigARVvZS7A2jLmTvYS5OAD6O7SHT9FjYb6DS0lhexn8BuqH1ITrO8jIJ6Wmugr
+ AgsTG0dq0hMU6w6/eevuuEHA/bgswk+8+BY9dCkJISKp4zxDZwWjIn7lBs4jAD2Y1cMr
+ +Zlz7+oDVJ6wDVix2fFwIJq09dS3FpjC+/MLIfX4l0+diaTJvx1GEJ0xD2Zv+zTN7Czv
+ gFlU14I5tIdXXl0oVvNVlmaqBkzZwX/DeNVM9CreNjt6l8o6tMURcDgYNTMZr7iPN2RE
+ xTj5gpU3g/0pqYz04Sm6lkarSoP4Wc69TVQ9ArvR/czkOtl+4RlANne8wH2Qq5fE+bx+
+ pTaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684316588; x=1686908588;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20221208; t=1684327664; x=1686919664;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=330bbfPwJfkdLBg7u8w9eH5VgxXkkoF5RD84Qv8xHWI=;
- b=gsI5yHfPvFOTMWQj8XR/WPqTLDJzlWRsQvL+MWL3vyeLljX891nwyPstPwyjlF6l9T
- 57YC6o+u57/1LKpmuuVBDA4mfceCudnf/nc6TG9h0QQSdNXAvZiqzSr3J2fi9fydDWZs
- RsDqT2N6MRh4QvzIaadr6mUsGjsGYQpXF54u8aabBqErAV7M3IJDRUNWNKlu0keF5md+
- 5kSYPdXTnNTbh09GEqy+uO/ZLZXH8heOUW1kUtJGu5WXLkSnujHVc3zbnUZOsnuoOpaM
- K5DQTpQ2tZ8L9tS7tMhXZVRX9ZWnVi38jQH9Mns4n+kkN2GzulOjKN9EsDwfrGrBAEAk
- TnqQ==
-X-Gm-Message-State: AC+VfDy97Fx0yjxZfy01ZmCXv4v05J8nITnGiCjR6ratQjAEE91NbEcM
- 2RVV2gYRPQyXaVxJuZOpeXtkYQ==
-X-Google-Smtp-Source: ACHHUZ562e2J9ZEBLRH8+4V/Zt8e6eK9F1iRuoF07jwB02ykcCadWTTVHYC+n1lLMXau6vXzoAvd9g==
-X-Received: by 2002:a05:6808:6295:b0:392:5882:69d6 with SMTP id
- du21-20020a056808629500b00392588269d6mr12995753oib.16.1684316588379; 
- Wed, 17 May 2023 02:43:08 -0700 (PDT)
-Received: from [192.168.68.107] (189-46-207-53.dsl.telesp.net.br.
- [189.46.207.53]) by smtp.gmail.com with ESMTPSA id
- c15-20020a056808138f00b003874e6dfeefsm9221237oiw.37.2023.05.17.02.43.05
+ bh=syRimRkFdbFwDCuNEU0gcPIXKrdLJIAEHljByigQVnQ=;
+ b=I951vZ+QS3iiHW7/8F4sBZobjiR5nJ0xH37G5HH8jaFkldaGqXZcg5/4DLFrKbnHLj
+ LgowR51xHH7k2bU61004LgvqOS8HgqWdbN2JYeVJ5k0Q5TwQpqSwKFjzqMTr8x0WHvL4
+ bibQ8oRiM/0OzXf/Hy6wNUzlmqAm+kHf+tiaIPk29Ihu/vCLJzUsgpKa044DXG2K+LZt
+ rXcXelVfub2U+TuTD84cZyVupwzatJNeh4HDLPJjl/l4iyZ8Z5P380YiQF+S+KRrWR19
+ ODet8X0pAJZlm91otJuXdFU5PmwBOh4y7dArop5JpiDfgug6RZtkv7k3oxg06t+64M32
+ aRrw==
+X-Gm-Message-State: AC+VfDxy0/h5sqaknfrKyCI+PMxgPajPSXKDBP+n8PID+FtDTCSeGY03
+ XIc4K4FRHStFQ35Y+jV9BCRxJA==
+X-Google-Smtp-Source: ACHHUZ7df+waqDy87AgKn3itXG5GNwm6urlPpOGcyAqXMV6k8BFxapxvoGYByfdtRBkOgUUPsIGl8w==
+X-Received: by 2002:a7b:c303:0:b0:3f1:72e2:5d13 with SMTP id
+ k3-20020a7bc303000000b003f172e25d13mr28128182wmj.16.1684327664179; 
+ Wed, 17 May 2023 05:47:44 -0700 (PDT)
+Received: from [192.168.69.115] ([176.187.202.229])
+ by smtp.gmail.com with ESMTPSA id
+ p7-20020a7bcc87000000b003f3e50eb606sm2173089wma.13.2023.05.17.05.47.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 17 May 2023 02:43:08 -0700 (PDT)
-Message-ID: <527b0d33-58f4-73c7-1c0e-10960defb67d@ventanamicro.com>
-Date: Wed, 17 May 2023 06:43:04 -0300
+ Wed, 17 May 2023 05:47:43 -0700 (PDT)
+Message-ID: <a8dd5f20-30ab-903a-6bd0-15c6a91fdf52@linaro.org>
+Date: Wed, 17 May 2023 14:47:42 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [PATCH v8 11/11] target/riscv: rework write_misa()
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- palmer@rivosinc.com
-References: <20230421132727.121462-1-dbarboza@ventanamicro.com>
- <20230421132727.121462-12-dbarboza@ventanamicro.com>
- <CAKmqyKPcEvWXb7m4uRxBJoVzNmjoX-Oo=H+GNO_c4PY0HOJNpQ@mail.gmail.com>
- <0fb9fc04-49a4-fa32-3bf4-3a2cb7a96c4b@ventanamicro.com>
- <CAKmqyKOaz8dUt5+LBgr_ewO+s3x2XrtVGvGMM5WwyLVzMMzBQA@mail.gmail.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.11.0
+Subject: Re: [PATCH v2] hw/riscv: virt: Assume M-mode FW in pflash0 only when
+ "-bios none"
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAKmqyKOaz8dUt5+LBgr_ewO+s3x2XrtVGvGMM5WwyLVzMMzBQA@mail.gmail.com>
+To: Andrea Bolognani <abologna@redhat.com>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+References: <20230425102545.162888-1-sunilvl@ventanamicro.com>
+ <b520d913-27a9-dea5-53c8-af1cdd967ab2@canonical.com>
+ <ZFiRr8d2zyAJlZJv@sunil-laptop>
+ <CABJz62OTBEOMzcXLYc=DqRwH8N4DP=o0-kCfALwoREZVyOxLPg@mail.gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
+In-Reply-To: <CABJz62OTBEOMzcXLYc=DqRwH8N4DP=o0-kCfALwoREZVyOxLPg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22d.google.com
-X-Spam_score_int: -47
-X-Spam_score: -4.8
-X-Spam_bar: ----
-X-Spam_report: (-4.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.666,
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32c.google.com
+X-Spam_score_int: -34
+X-Spam_score: -3.5
+X-Spam_bar: ---
+X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.412,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,270 +104,104 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 5/17/23 01:48, Alistair Francis wrote:
-> On Mon, May 8, 2023 at 8:29 PM Daniel Henrique Barboza
-> <dbarboza@ventanamicro.com> wrote:
->>
->>
->>
->> On 5/7/23 20:25, Alistair Francis wrote:
->>> On Fri, Apr 21, 2023 at 11:29 PM Daniel Henrique Barboza
->>> <dbarboza@ventanamicro.com> wrote:
+On 8/5/23 12:00, Andrea Bolognani wrote:
+> On Mon, May 08, 2023 at 11:37:43AM +0530, Sunil V L wrote:
+>> On Mon, May 08, 2023 at 07:37:23AM +0200, Heinrich Schuchardt wrote:
+>>> On 4/25/23 12:25, Sunil V L wrote:
+>>>> Currently, virt machine supports two pflash instances each with
+>>>> 32MB size. However, the first pflash is always assumed to
+>>>> contain M-mode firmware and reset vector is set to this if
+>>>> enabled. Hence, for S-mode payloads like EDK2, only one pflash
+>>>> instance is available for use. This means both code and NV variables
+>>>> of EDK2 will need to use the same pflash.
 >>>>
->>>> write_misa() must use as much common logic as possible. We want to open
->>>> code just the bits that are exclusive to the CSR write operation and TCG
->>>> internals.
+>>>> The OS distros keep the EDK2 FW code as readonly. When non-volatile
+>>>> variables also need to share the same pflash, it is not possible
+>>>> to keep it as readonly since variables need write access.
 >>>>
->>>> Our validation is done with riscv_cpu_validate_set_extensions(), but we
->>>> need a small tweak first. When enabling RVG we're doing:
+>>>> To resolve this issue, the code and NV variables need to be separated.
+>>>> But in that case we need an extra flash. Hence, modify the convention
+>>>> such that pflash0 will contain the M-mode FW only when "-bios none"
+>>>> option is used. Otherwise, pflash0 will contain the S-mode payload FW.
+>>>> This enables both pflash instances available for EDK2 use.
 >>>>
->>>>           env->misa_ext |= RVI | RVM | RVA | RVF | RVD;
->>>>           env->misa_ext_mask = env->misa_ext;
+>>>> Example usage:
+>>>> 1) pflash0 containing M-mode FW
+>>>> qemu-system-riscv64 -bios none -pflash <mmode_fw> -machine virt
+>>>> or
+>>>> qemu-system-riscv64 -bios none \
+>>>> -drive file=<mmode_fw>,if=pflash,format=raw,unit=0 -machine virt
 >>>>
->>>> This works fine for realize() time but this can potentially overwrite
->>>> env->misa_ext_mask if we reutilize the function for write_misa().
->>>>
->>>> Instead of doing misa_ext_mask = misa_ext, sum up the RVG extensions in
->>>> misa_ext_mask as well. This won't change realize() time behavior
->>>> (misa_ext_mask will be == misa_ext) and will ensure that write_misa()
->>>> won't change misa_ext_mask by accident.
->>>>
->>>> After that, rewrite write_misa() to work as follows:
->>>>
->>>> - mask the write using misa_ext_mask to avoid enabling unsupported
->>>>     extensions;
->>>>
->>>> - suppress RVC if the next insn isn't aligned;
->>>>
->>>> - disable RVG if any of RVG dependencies are being disabled by the user;
->>>>
->>>> - assign env->misa_ext and run riscv_cpu_validate_set_extensions(). On
->>>>     error, rollback env->misa_ext to its original value;
->>>>
->>>> - handle RVF and MSTATUS_FS and continue as usual.
->>>>
->>>> Let's keep write_misa() as experimental for now until this logic gains
->>>> enough mileage.
->>>>
->>>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>>> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
->>>> ---
->>>>    target/riscv/cpu.c |  4 ++--
->>>>    target/riscv/cpu.h |  1 +
->>>>    target/riscv/csr.c | 47 ++++++++++++++++++++--------------------------
->>>>    3 files changed, 23 insertions(+), 29 deletions(-)
->>>>
->>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->>>> index 7d407321aa..4fa720a39d 100644
->>>> --- a/target/riscv/cpu.c
->>>> +++ b/target/riscv/cpu.c
->>>> @@ -944,7 +944,7 @@ static void riscv_cpu_validate_misa_mxl(RISCVCPU *cpu, Error **errp)
->>>>     * Check consistency between chosen extensions while setting
->>>>     * cpu->cfg accordingly.
->>>>     */
->>>> -static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
->>>> +void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
->>>>    {
->>>>        CPURISCVState *env = &cpu->env;
->>>>        Error *local_err = NULL;
->>>> @@ -960,7 +960,7 @@ static void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
->>>>            cpu->cfg.ext_ifencei = true;
->>>>
->>>>            env->misa_ext |= RVI | RVM | RVA | RVF | RVD;
->>>> -        env->misa_ext_mask = env->misa_ext;
->>>> +        env->misa_ext_mask |= RVI | RVM | RVA | RVF | RVD;
->>>>        }
->>>>
->>>>        if (riscv_has_ext(env, RVI) && riscv_has_ext(env, RVE)) {
->>>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->>>> index 15423585d0..1f39edc687 100644
->>>> --- a/target/riscv/cpu.h
->>>> +++ b/target/riscv/cpu.h
->>>> @@ -548,6 +548,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->>>>                            bool probe, uintptr_t retaddr);
->>>>    char *riscv_isa_string(RISCVCPU *cpu);
->>>>    void riscv_cpu_list(void);
->>>> +void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp);
->>>>
->>>>    #define cpu_list riscv_cpu_list
->>>>    #define cpu_mmu_index riscv_cpu_mmu_index
->>>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->>>> index 4451bd1263..4a3c57ea6f 100644
->>>> --- a/target/riscv/csr.c
->>>> +++ b/target/riscv/csr.c
->>>> @@ -1387,39 +1387,18 @@ static RISCVException read_misa(CPURISCVState *env, int csrno,
->>>>    static RISCVException write_misa(CPURISCVState *env, int csrno,
->>>>                                     target_ulong val)
->>>>    {
->>>> +    RISCVCPU *cpu = env_archcpu(env);
->>>> +    uint32_t orig_misa_ext = env->misa_ext;
->>>> +    Error *local_err = NULL;
->>>> +
->>>>        if (!riscv_cpu_cfg(env)->misa_w) {
->>>>            /* drop write to misa */
->>>>            return RISCV_EXCP_NONE;
->>>>        }
->>>>
->>>> -    /* 'I' or 'E' must be present */
->>>> -    if (!(val & (RVI | RVE))) {
->>>> -        /* It is not, drop write to misa */
->>>> -        return RISCV_EXCP_NONE;
->>>> -    }
->>>> -
->>>> -    /* 'E' excludes all other extensions */
->>>> -    if (val & RVE) {
->>>> -        /*
->>>> -         * when we support 'E' we can do "val = RVE;" however
->>>> -         * for now we just drop writes if 'E' is present.
->>>> -         */
->>>> -        return RISCV_EXCP_NONE;
->>>> -    }
->>>> -
->>>> -    /*
->>>> -     * misa.MXL writes are not supported by QEMU.
->>>> -     * Drop writes to those bits.
->>>> -     */
->>>> -
->>>>        /* Mask extensions that are not supported by this hart */
->>>>        val &= env->misa_ext_mask;
->>>>
->>>> -    /* 'D' depends on 'F', so clear 'D' if 'F' is not present */
->>>> -    if ((val & RVD) && !(val & RVF)) {
->>>> -        val &= ~RVD;
->>>> -    }
->>>> -
->>>>        /*
->>>>         * Suppress 'C' if next instruction is not aligned
->>>>         * TODO: this should check next_pc
->>>> @@ -1428,18 +1407,32 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
->>>>            val &= ~RVC;
->>>>        }
->>>>
->>>> +    /* Disable RVG if any of its dependencies are disabled */
->>>> +    if (!(val & RVI && val & RVM && val & RVA &&
->>>> +          val & RVF && val & RVD)) {
->>>> +        val &= ~RVG;
->>>> +    }
->>>> +
->>>>        /* If nothing changed, do nothing. */
->>>>        if (val == env->misa_ext) {
->>>>            return RISCV_EXCP_NONE;
->>>>        }
->>>>
->>>> -    if (!(val & RVF)) {
->>>> +    env->misa_ext = val;
->>>> +    riscv_cpu_validate_set_extensions(cpu, &local_err);
->>>> +    if (local_err != NULL) {
->>>> +        /* Rollback on validation error */
->>>> +        env->misa_ext = orig_misa_ext;
+>>>> 2) pflash0 containing S-mode payload like EDK2
+>>>> qemu-system-riscv64 -pflash <smode_fw_vars> -pflash <smode_fw_code> -machine  virt
+>>>> or
+>>>> qemu-system-riscv64 -bios <opensbi_fw> \
+>>>> -pflash <smode_fw_vars> \
+>>>> -pflash <smode_fw_code> \
 >>>
->>> I don't think this is right though. The spec even states:
->>>
->>> " An attempt to write an unsupported combination causes those bits to
->>> be set to some supported combination."
->>
->> Rolling back to the previous state (which means do nothing) is a supported
->> combination. I don't think the spec forbids what we're doing here.
+>>> On amd64 and arm64 unit=0 is used for code and unit=1 is used for variables.
+>>> Shouldn't riscv64 do the same?
 > 
-> It doesn't forbid it, but it also doesn't really encourage it.
-> 
->>
->>
->>>
->>> So we should try to follow what the guest requested as closely as we
->>> can, instead of just rolling back.
->>
->> Let's say we have this:
->>
->> RVI | RVM | RVA | RVF | RVD | RVC | RVU | RVV
->>
->> And the userspace wants to write this (clear RVF):
->>
->> RVI | RVM | RVA | RVD | RVC | RVU | RVV
->>
->>
->> What should we do in this case? Removing RVF would imply removing RVD and RVV, so
->> that's one alternative. Another alternative is consider that the user should
->> clear all bits of RVV explicitly, so we ignore the RVF clear and keep it as it
->> is (which we're already doing in this patch).
-> 
-> In this case we should keep RVF enabled, I agree.
-> 
-> What I'm thinking of, is what happens if we have:
-> 
-> RVI | RVM | RVA | RVF | RVD | RVC | RVU | RVV
-> 
-> and the user writes (clears RVF and RVV)
-> 
-> RVI | RVM | RVA | RVD | RVC | RVU
-> 
-> We can't disable RVF, because RVD requires it, but we can disable RVV.
-> So we should end up with just RVV disabled
-> 
-> RVI | RVM | RVA | RVF | RVD | RVC | RVU
-> 
->  From my interpretation of the spec, that's what we should be supporting.
-> 
->>
->> Note that both are right depending on the user intention. And this is why I don't
->> believe that follow what the user attempted to do, or "follow what the guest as
->> closely as we can" is viable.
->>
->> An alternative, instead of keeping the original misa_ext value, is to do
->> misa_ext = misa_ext_mask. This would mean "in case of a failed validation,
->> since we don't know what the user tried to do, re-enable everything".
-> 
-> I think that's even worse :)
-> 
->>
->> Anything other than keeping the existing misa_ext, like this patch is already
->> doing, or setting misa_ext to misa_ext_mask, will demand more code and assumptions
->> based on what we can't control (user intentions).
-> 
-> Hmm... That's fair. It does make the process more complex, although we
-> are already checking if the combination is valid.
-> 
-> Ok, how about we at least report a guest error if the combination is
-> invalid and we roll back. Then we can go ahead with the patch.
+> Good catch, I had missed that!
 
-Sure! I'll make the change and re-send.
+This is a design mistake spreading.
+
+What EDK2 maintainers want is one Read-Only + Exec region for CODE and
+one Read-Write + NoExec region for VARS.
+
+QEMU never implemented correctly pflash bank (multiple sectors) write
+protected.
+
+When EDK2 (x86, OVMF) was tried on QEMU, QEMU was using a single pflash.
+To separate CODE/VARS, a second pflash was added, the first one being
+"locked" into Read-Only mode. Using a pflash allowed the firmware to
+identify device size using pflash CFI commands.
+
+Then this design was copied to the ARM virt board for EDK2 needs.
+
+In retrospective, this design was declared a mistake, since a simple
+ROM region for the CODE is sufficient, and much simpler [*].
+
+Thankfully the Loongarch64 virt machine started cleanly avoiding the
+previous design flaw. It provides a ROM for CODE and pflash for VARS.
+
+Unfortunately the riscv virt machine copied the x86/arm virt machines.
 
 
-Daniel
+[*] Having 2 distinct pflash is useful for non-virt machines where the
+     firmware might want to (re)program the CODE region, in the "capsule
+     update" scenario. This scenario is irrelevant for virt machines,
+     since a guest will never update its CODE. CODE is updated by the
+     host.
 
+>> Is that a requirement from distros perspective? That was my original v1
+>> design.
+>>
+>> But the reason why I kept unit0 for variables, it helps in keeping current
+>> EDK2 usage model work. Otherwise, current EDK2 will break if we change
+>> the code to unit 0.
+> 
+> I think that it's more important to align with other architectures.
+> 
+> The number of people currently running edk2 on RISC-V is probably
+> vanishingly small, and in my opinion requiring them to tweak their
+> command lines a bit is a fair price to pay to avoid having to carry a
+> subtle difference between architectures for years to come.
+> 
+> With that in mind, my preference would be to go back to v1.
+> 
+>> Second, since unit 0 for RISC-V is currently assumed to start in M-mode fw
+>> which is secure, I think it makes sense to keep variables also in unit
+>> 0.
+> 
+> If you're storing variables rather than code in pflash0, does it even
+> make sense to talk about M-mode and S-mode?
+> 
+> 
+> Taking a step back, what is even the use case for having M-mode code
+> in pflash0? If you want to use an M-mode firmware, can't you just use
+> -bios instead? In other words, can we change the behavior so that
+> pflash being present always mean loading S-mode firmware off it?
+> 
 
-> 
-> Alistair
-> 
->>
->>
->> Thanks,
->>
->>
->> Daniel
->>
->>
->>>
->>> Alistair
->>>
->>>> +
->>>> +        return RISCV_EXCP_NONE;
->>>> +    }
->>>> +
->>>> +    if (!(env->misa_ext & RVF)) {
->>>>            env->mstatus &= ~MSTATUS_FS;
->>>>        }
->>>>
->>>>        /* flush translation cache */
->>>>        tb_flush(env_cpu(env));
->>>> -    env->misa_ext = val;
->>>>        env->xl = riscv_cpu_mxl(env);
->>>>        return RISCV_EXCP_NONE;
->>>>    }
->>>> --
->>>> 2.40.0
->>>>
->>>>
 
