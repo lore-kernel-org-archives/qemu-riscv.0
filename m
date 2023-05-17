@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A844CC7EE23
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 May 2023 09:16:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73597C77B75
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 May 2023 09:16:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pzDGm-0005MG-Us; Wed, 17 May 2023 05:16:29 -0400
+	id 1pzDGs-00065L-O0; Wed, 17 May 2023 05:16:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pzDGk-0004lG-3f; Wed, 17 May 2023 05:16:26 -0400
+ id 1pzDGm-0005L7-Sh; Wed, 17 May 2023 05:16:28 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pzDGh-0007l1-7h; Wed, 17 May 2023 05:16:25 -0400
+ id 1pzDGi-0007kk-EQ; Wed, 17 May 2023 05:16:28 -0400
 Received: from localhost.localdomain (unknown [61.165.33.195])
- by APP-05 (Coremail) with SMTP id zQCowABnVxRam2Rks_XqJQ--.29147S8;
- Wed, 17 May 2023 17:16:15 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowABnVxRam2Rks_XqJQ--.29147S4;
+ Wed, 17 May 2023 17:16:13 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -28,33 +28,33 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  richard.henderson@linaro.org, wangjunqiang@iscas.ac.cn,
  lazyparser@gmail.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v6 06/12] target/riscv: Remove unused paramters in
- pmp_hart_has_privs_default()
-Date: Wed, 17 May 2023 17:15:13 +0800
-Message-Id: <20230517091519.34439-7-liweiwei@iscas.ac.cn>
+Subject: [PATCH v6 02/12] target/riscv: Move pmp_get_tlb_size apart from
+ get_physical_address_pmp
+Date: Wed, 17 May 2023 17:15:09 +0800
+Message-Id: <20230517091519.34439-3-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230517091519.34439-1-liweiwei@iscas.ac.cn>
 References: <20230517091519.34439-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABnVxRam2Rks_XqJQ--.29147S8
-X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF4UKrW8KFy8ZF4ruFg_yoW8Wr17pr
- WrCryxKFZrtryqq3Z3Jr1qkFWUAFnxKry29a97K3y0ka13u3yIkF1DKwsIyFnrJasrZrZ0
- kFWqkF15Zr4UZ3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUm014x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
- 3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
- x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
- JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2
- ka0xkIwI1lc2xSY4AK67AK6r4fMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j
- 6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7
- AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE
- 2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0x
- vEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVj
- vjDU0xZFpf9x0JUfl19UUUUU=
+X-CM-TRANSID: zQCowABnVxRam2Rks_XqJQ--.29147S4
+X-Coremail-Antispam: 1UD129KBjvJXoWxXr1rWFW8AFWDXFW5KFW5trb_yoW5XFy3pr
+ ZxCr4xWa1kGFZa9a1xZr1UAFWUCFnrKrWjgay8GwsY9Fs0q345C3Wq934agFs7GrWkZws0
+ kw4qyFy0kF15XFUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPG14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
+ x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
+ 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
+ 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+ IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+ Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
+ xKxwCY02Avz4vE14v_GFWl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l
+ x2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14
+ v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IY
+ x2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87
+ Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIF
+ yTuYvjfUexhlDUUUU
 X-Originating-IP: [61.165.33.195]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -80,49 +80,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The addr and size parameters in pmp_hart_has_privs_default() are unused.
+pmp_get_tlb_size can be separated from get_physical_address_pmp and is only
+needed when ret == TRANSLATE_SUCCESS.
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/pmp.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ target/riscv/cpu_helper.c | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 10a4c7c8f4..666fbb74b9 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -236,8 +236,7 @@ static int pmp_is_in_range(CPURISCVState *env, int pmp_index,
- /*
-  * Check if the address has required RWX privs when no PMP entry is matched.
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index de585b14cc..15eafb342d 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -687,14 +687,11 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+  *
+  * @env: CPURISCVState
+  * @prot: The returned protection attributes
+- * @tlb_size: TLB page size containing addr. It could be modified after PMP
+- *            permission checking. NULL if not set TLB page for addr.
+  * @addr: The physical address to be checked permission
+  * @access_type: The type of MMU access
+  * @mode: Indicates current privilege level.
   */
--static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
--                                       target_ulong size, pmp_priv_t privs,
-+static bool pmp_hart_has_privs_default(CPURISCVState *env, pmp_priv_t privs,
-                                        pmp_priv_t *allowed_privs,
-                                        target_ulong mode)
+-static int get_physical_address_pmp(CPURISCVState *env, int *prot,
+-                                    target_ulong *tlb_size, hwaddr addr,
++static int get_physical_address_pmp(CPURISCVState *env, int *prot, hwaddr addr,
+                                     int size, MMUAccessType access_type,
+                                     int mode)
  {
-@@ -309,8 +308,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
- 
-     /* Short cut if no rules */
-     if (0 == pmp_get_num_rules(env)) {
--        return pmp_hart_has_privs_default(env, addr, size, privs,
--                                          allowed_privs, mode);
-+        return pmp_hart_has_privs_default(env, privs, allowed_privs, mode);
+@@ -714,9 +711,6 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
      }
  
-     if (size == 0) {
-@@ -454,8 +452,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+     *prot = pmp_priv_to_page_prot(pmp_priv);
+-    if (tlb_size != NULL) {
+-        *tlb_size = pmp_get_tlb_size(env, addr);
+-    }
  
-     /* No rule matched */
-     if (!ret) {
--        ret = pmp_hart_has_privs_default(env, addr, size, privs,
--                                         allowed_privs, mode);
-+        ret = pmp_hart_has_privs_default(env, privs, allowed_privs, mode);
-     }
+     return TRANSLATE_SUCCESS;
+ }
+@@ -905,7 +899,7 @@ restart:
+         }
  
-     return ret;
+         int pmp_prot;
+-        int pmp_ret = get_physical_address_pmp(env, &pmp_prot, NULL, pte_addr,
++        int pmp_ret = get_physical_address_pmp(env, &pmp_prot, pte_addr,
+                                                sizeof(target_ulong),
+                                                MMU_DATA_LOAD, PRV_S);
+         if (pmp_ret != TRANSLATE_SUCCESS) {
+@@ -1301,8 +1295,9 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+             prot &= prot2;
+ 
+             if (ret == TRANSLATE_SUCCESS) {
+-                ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
++                ret = get_physical_address_pmp(env, &prot_pmp, pa,
+                                                size, access_type, mode);
++                tlb_size = pmp_get_tlb_size(env, pa);
+ 
+                 qemu_log_mask(CPU_LOG_MMU,
+                               "%s PMP address=" HWADDR_FMT_plx " ret %d prot"
+@@ -1334,8 +1329,9 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                       __func__, address, ret, pa, prot);
+ 
+         if (ret == TRANSLATE_SUCCESS) {
+-            ret = get_physical_address_pmp(env, &prot_pmp, &tlb_size, pa,
++            ret = get_physical_address_pmp(env, &prot_pmp, pa,
+                                            size, access_type, mode);
++            tlb_size = pmp_get_tlb_size(env, pa);
+ 
+             qemu_log_mask(CPU_LOG_MMU,
+                           "%s PMP address=" HWADDR_FMT_plx " ret %d prot"
 -- 
 2.25.1
 
