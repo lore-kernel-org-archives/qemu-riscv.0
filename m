@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA35BC77B7A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 May 2023 02:09:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E711C7EE24
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 May 2023 02:10:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pz6bT-0005aj-Oe; Tue, 16 May 2023 22:09:23 -0400
+	id 1pz6c9-0006Pv-Kd; Tue, 16 May 2023 22:10:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pz6bT-0005aQ-0l; Tue, 16 May 2023 22:09:23 -0400
-Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
+ id 1pz6c8-0006PA-2R; Tue, 16 May 2023 22:10:04 -0400
+Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pz6bR-0005fr-AY; Tue, 16 May 2023 22:09:22 -0400
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-435f36ad948so42170137.3; 
- Tue, 16 May 2023 19:09:20 -0700 (PDT)
+ id 1pz6c6-0005kC-GR; Tue, 16 May 2023 22:10:03 -0400
+Received: by mail-ua1-x935.google.com with SMTP id
+ a1e0cc1a2514c-783f88ce548so41004241.1; 
+ Tue, 16 May 2023 19:10:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1684289360; x=1686881360;
+ d=gmail.com; s=20221208; t=1684289401; x=1686881401;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AniFj+UYnvb1Uv7xpgUW5zP3JI+w0nHjQEqh+9hUcvc=;
- b=UvKTBr4NhvfH+J+e7q82/zTvCwE4dp2KrJH/olRq0/7MDDoArPEvFG4kagLBmrZvhf
- bdlqEgy7vExSJ3wkZuT7isMQsmN00J9qH56yf/K938zuwBetqSTfEKGg0RHl1C3EFdUo
- dntjNfrSm4j/mWDqVAAhHlG9A31bj7zV67QC5WOPssm9ndAx5Dyc9sGSu44/HQ6+YuIg
- KarUbQQfoSHgqtRdbXmVOoG8bkjr26rbzs5ka0vhuhiJ675tljh6Q8N3szb4lF0xqTAy
- Go/+/wi8tvxZ9iqi9FqNQL1VI6J4SVX9htUkGZabDvNGRANZNrb5oOC5U6T8XswnEsii
- 20Xg==
+ bh=0No0m2mRFxSAqTu2ZK0g/Uj5QQcLw0du2yARPBYqmJs=;
+ b=JGDZEPYm6atmHsW63kTpXpAVOfnMVzgX+/f9V4ySjJUdQKLhQ6LqeAvEuhS67XNEtT
+ sNzGlP/Dejb7duTxYcTt/bZg/bAYX0S5rUxt7WP80mRkmUE1juTWWWbRNjF8ziXJa3+w
+ g0Z8mxGUlS7eELcpKZ0xqh/50RZzacCQTjxOdz/C36dzzDEpG9FcrIuSDvz+H69TLsf5
+ dqbRgytKnPxvyzTnudQM/wSiRYMkN4tYh+pB83vVXKAC9Cqs3FWgVyKy0RJvBOIps/g/
+ Lmw4bnKz7YT7+q7644DdOjwWUfTQbG8x12ryQTOG6P/Fo3MqAjcDUAKdfC2YOlZdwpjG
+ hrbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684289360; x=1686881360;
+ d=1e100.net; s=20221208; t=1684289401; x=1686881401;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AniFj+UYnvb1Uv7xpgUW5zP3JI+w0nHjQEqh+9hUcvc=;
- b=UIp80+dg6oYd1Dpf1qfuqZL1TjqG5/2fNo3T6kdl9wkfdh42ZKvmmdgRaDp9+GwA7b
- jPaY1kBSV6a8fRwMWpZ6IjHvgPsuf4aGn5ed1qnrpVt9cPyJnxSB+1sGctVtTu3rBFj5
- RI6Urh+25dec/hL90Gi09AnPza8ihs9uZ7plx5BB4LfnPUWB/dGI1KiWuqiFxXVU9Jpb
- wQy6Azi9gkpGW9o6qRpt4kgeccAkPWEftwOpgKErjm4koXcOK6ILhcrQXtL73cvzxhM0
- U2HwwFc6RqX4WwKAeHWUWjBkjniWKCaUeC0Vbww5nh2wMU/8Wi4JrpvKTyA2NqneQ4gV
- 6czw==
-X-Gm-Message-State: AC+VfDxIZl/7mLDjgupb7bUemXqpylhqBr8+bKDPXN/qpKgYablS9oSC
- M5pwr+6wY0HYZhVWjo2+hA7XRbCFBa3xQYfxLPI=
-X-Google-Smtp-Source: ACHHUZ7z48rWoLcZ4XAd8e1hQSU86zv5TULXkr/4UMHBTtXjEjr5zT3prurMxdX4OzDewHQiv5qCaGUqPRJA4BN7zlU=
-X-Received: by 2002:a67:b308:0:b0:436:3607:957d with SMTP id
- a8-20020a67b308000000b004363607957dmr8452171vsm.20.1684289359896; Tue, 16 May
- 2023 19:09:19 -0700 (PDT)
+ bh=0No0m2mRFxSAqTu2ZK0g/Uj5QQcLw0du2yARPBYqmJs=;
+ b=aRtG+aBvewpk7omy3KS+n7WCQCHFCC8quKqco6FXoi8ySYpsWw4I0bxbKUKrP4iJxK
+ RAh5jhulUZCzPZUaFZ1SdnWqflst5XfP9DwJt+WdiMD2IgWcA7Wr/cdtl/Jco/WaOz6h
+ Awq21DyQjX/JJFhYJXg6y2nqWS+9uu6xnwObIxOTqls9xjG2moXYRAqhBWAqlqiXnxlj
+ 5oLZeBI1r0gBddPTeTLxhJLu+lYXMwmRkfD+8S/YkvioE2FH5h5fA4f3LLezxNuQYxKt
+ /p9fOeDwssrtaQLARYO15vtQdiPBTILb/4UkTI7bp04L9cSEoXrOuN9/MI8vhPW6LA7O
+ WT6w==
+X-Gm-Message-State: AC+VfDxIlSLHPdbW0HnGaJsj8fol6wtad1BIIQJFWIUodNvb4TdndNQP
+ DMSkY2uhnj22q9q+FuKdBRu5ewHNJf79GI9hRiQ=
+X-Google-Smtp-Source: ACHHUZ42y5jqKmJlZDmDA2QpLM4d8p08zozOukr4XOzMTB985UajKXCoAvivoYltDrjk8kxo9Q3UAKd81N/VmB0DX4k=
+X-Received: by 2002:a67:be18:0:b0:42f:fc44:be5d with SMTP id
+ x24-20020a67be18000000b0042ffc44be5dmr16822214vsq.27.1684289401039; Tue, 16
+ May 2023 19:10:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230428143621.142390-1-liweiwei@iscas.ac.cn>
- <20230428143621.142390-5-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230428143621.142390-5-liweiwei@iscas.ac.cn>
+ <20230428143621.142390-7-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230428143621.142390-7-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 17 May 2023 12:08:53 +1000
-Message-ID: <CAKmqyKOMD3mDpPPZN1+sDW8iyzt0uLU5QOLVhhU8zjEnMkTGfA@mail.gmail.com>
-Subject: Re: [PATCH v5 04/13] target/riscv: Change the return type of
- pmp_hart_has_privs() to bool
+Date: Wed, 17 May 2023 12:09:35 +1000
+Message-ID: <CAKmqyKPc=mDqXta_hgVgt86GRzCmsdD6wb05upqPpeRLsw5XZg@mail.gmail.com>
+Subject: Re: [PATCH v5 06/13] target/riscv: Remove unused paramters in
+ pmp_hart_has_privs_default()
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
@@ -67,8 +67,8 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x935.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -95,7 +95,7 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Sat, Apr 29, 2023 at 12:38=E2=80=AFAM Weiwei Li <liweiwei@iscas.ac.cn> w=
 rote:
 >
-> We no longer need the pmp_index for matched PMP entry now.
+> The addr and size parameters in pmp_hart_has_privs_default() are unused.
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
@@ -105,133 +105,52 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu_helper.c |  8 ++++----
->  target/riscv/pmp.c        | 32 +++++++++++++-------------------
->  target/riscv/pmp.h        |  8 ++++----
->  3 files changed, 21 insertions(+), 27 deletions(-)
+>  target/riscv/pmp.c | 9 +++------
+>  1 file changed, 3 insertions(+), 6 deletions(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 83c9699a6d..1868766082 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -685,16 +685,16 @@ static int get_physical_address_pmp(CPURISCVState *=
-env, int *prot, hwaddr addr,
->                                      int mode)
->  {
->      pmp_priv_t pmp_priv;
-> -    int pmp_index =3D -1;
-> +    bool pmp_has_privs;
->
->      if (!riscv_cpu_cfg(env)->pmp) {
->          *prot =3D PAGE_READ | PAGE_WRITE | PAGE_EXEC;
->          return TRANSLATE_SUCCESS;
->      }
->
-> -    pmp_index =3D pmp_hart_has_privs(env, addr, size, 1 << access_type,
-> -                                   &pmp_priv, mode);
-> -    if (pmp_index < 0) {
-> +    pmp_has_privs =3D pmp_hart_has_privs(env, addr, size, 1 << access_ty=
-pe,
-> +                                       &pmp_priv, mode);
-> +    if (!pmp_has_privs) {
->          *prot =3D 0;
->          return TRANSLATE_PMP_FAIL;
->      }
 > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 86abe1e7cd..b5808538aa 100644
+> index e745842973..d2d8429277 100644
 > --- a/target/riscv/pmp.c
 > +++ b/target/riscv/pmp.c
-> @@ -296,27 +296,23 @@ static bool pmp_hart_has_privs_default(CPURISCVStat=
-e *env, target_ulong addr,
->
+> @@ -236,8 +236,7 @@ static int pmp_is_in_range(CPURISCVState *env, int pm=
+p_index,
 >  /*
->   * Check if the address has required RWX privs to complete desired opera=
-tion
-> - * Return PMP rule index if a pmp rule match
-> - * Return MAX_RISCV_PMPS if default match
-> - * Return negtive value if no match
-> + * Return true if a pmp rule match or default match
-> + * Return false if no match
+>   * Check if the address has required RWX privs when no PMP entry is matc=
+hed.
 >   */
-> -int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-> -                       target_ulong size, pmp_priv_t privs,
-> -                       pmp_priv_t *allowed_privs, target_ulong mode)
-> +bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-> +                        target_ulong size, pmp_priv_t privs,
-> +                        pmp_priv_t *allowed_privs, target_ulong mode)
+> -static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong =
+addr,
+> -                                       target_ulong size, pmp_priv_t pri=
+vs,
+> +static bool pmp_hart_has_privs_default(CPURISCVState *env, pmp_priv_t pr=
+ivs,
+>                                         pmp_priv_t *allowed_privs,
+>                                         target_ulong mode)
 >  {
->      int i =3D 0;
-> -    int ret =3D -1;
-> +    bool ret =3D false;
->      int pmp_size =3D 0;
->      target_ulong s =3D 0;
->      target_ulong e =3D 0;
+> @@ -309,8 +308,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ul=
+ong addr,
 >
 >      /* Short cut if no rules */
 >      if (0 =3D=3D pmp_get_num_rules(env)) {
-> -        if (pmp_hart_has_privs_default(env, addr, size, privs,
-> -                                       allowed_privs, mode)) {
-> -            ret =3D MAX_RISCV_PMPS;
-> -        }
-> -        return ret;
-> +        return pmp_hart_has_privs_default(env, addr, size, privs,
-> +                                          allowed_privs, mode);
+> -        return pmp_hart_has_privs_default(env, addr, size, privs,
+> -                                          allowed_privs, mode);
+> +        return pmp_hart_has_privs_default(env, privs, allowed_privs, mod=
+e);
 >      }
 >
 >      if (size =3D=3D 0) {
-> @@ -345,7 +341,7 @@ int pmp_hart_has_privs(CPURISCVState *env, target_ulo=
-ng addr,
->          if ((s + e) =3D=3D 1) {
->              qemu_log_mask(LOG_GUEST_ERROR,
->                            "pmp violation - access is partially inside\n"=
-);
-> -            ret =3D -1;
-> +            ret =3D false;
->              break;
->          }
->
-> @@ -453,17 +449,15 @@ int pmp_hart_has_privs(CPURISCVState *env, target_u=
-long addr,
->               * defined with PMP must be used. We shouldn't fallback on
->               * finding default privileges.
->               */
-> -            ret =3D i;
-> +            ret =3D true;
->              break;
->          }
->      }
+> @@ -454,8 +452,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ul=
+ong addr,
 >
 >      /* No rule matched */
-> -    if (ret =3D=3D -1) {
-> -        if (pmp_hart_has_privs_default(env, addr, size, privs,
-> -                                       allowed_privs, mode)) {
-> -            ret =3D MAX_RISCV_PMPS;
-> -        }
-> +    if (!ret) {
-> +        ret =3D pmp_hart_has_privs_default(env, addr, size, privs,
-> +                                         allowed_privs, mode);
+>      if (!ret) {
+> -        ret =3D pmp_hart_has_privs_default(env, addr, size, privs,
+> -                                         allowed_privs, mode);
+> +        ret =3D pmp_hart_has_privs_default(env, privs, allowed_privs, mo=
+de);
 >      }
 >
 >      return ret;
-> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-> index 0a7e24750b..cf5c99f8e6 100644
-> --- a/target/riscv/pmp.h
-> +++ b/target/riscv/pmp.h
-> @@ -72,10 +72,10 @@ target_ulong mseccfg_csr_read(CPURISCVState *env);
->  void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
->                         target_ulong val);
->  target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
-> -int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-> -                       target_ulong size, pmp_priv_t privs,
-> -                       pmp_priv_t *allowed_privs,
-> -                       target_ulong mode);
-> +bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-> +                        target_ulong size, pmp_priv_t privs,
-> +                        pmp_priv_t *allowed_privs,
-> +                        target_ulong mode);
->  target_ulong pmp_get_tlb_size(CPURISCVState *env, target_ulong addr);
->  void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
->  void pmp_update_rule_nums(CPURISCVState *env);
 > --
 > 2.25.1
 >
