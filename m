@@ -4,69 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 811CBC77B7A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 May 2023 03:12:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29E3FC77B7D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 17 May 2023 03:41:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pz7aK-0004eB-OY; Tue, 16 May 2023 23:12:16 -0400
+	id 1pz81s-00014x-4t; Tue, 16 May 2023 23:40:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pz7aI-0004dw-Lr; Tue, 16 May 2023 23:12:14 -0400
-Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
+ id 1pz81o-00013h-7H; Tue, 16 May 2023 23:40:40 -0400
+Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1pz7aG-0000lY-Pm; Tue, 16 May 2023 23:12:14 -0400
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-783f7e82f28so40693241.1; 
- Tue, 16 May 2023 20:12:12 -0700 (PDT)
+ id 1pz81l-00069o-04; Tue, 16 May 2023 23:40:39 -0400
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-435ff65df88so56990137.1; 
+ Tue, 16 May 2023 20:40:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1684293131; x=1686885131;
+ d=gmail.com; s=20221208; t=1684294833; x=1686886833;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g/+cA0N3j+biczB4GD+AkRw/shxfKAFFALMlbU1C0FE=;
- b=b1PrJc3pV49eWSPQ/EMSssyRuuxEmnK8inlEXPmbbPjrM2l6O2pSIE4KnzOG3eR8Vg
- X7SgFd7PFP5sgkexjc01o8Kh9q8Loank/PIAWsOCss1tYVeMPB9AZucJyMAJ/p1FfSPW
- S4HL/SEigbCs1mYJECJDmc/mt07hzxwjDjcGOrk3vaiRmAwSA+D9LK9hcbjbodIisOZJ
- sgYHhvyvoEH2YCCoSor1oImVFEhFTk6vfTI8jzSjAFleDVeOzKmUXti0DRYANUc37A1h
- WekRuC6EDEsrV99esZTp6zXicNh/CvhtGh3tFxtJZY/bxdEavagWUSwrM/iI5mW4VAuW
- uDvw==
+ bh=pPcFQo21eXW1Pge7vlk+v+e+pxWr/D8D6By0VIVq7aY=;
+ b=EfwHWNtomS0Tv+odsBZHXHJD2nvuSDeRJrZnxZvzNZJDUuCwrvc6h9jJUpXcmEQNcV
+ Vv11MoTZPrZKl28gkyGWpwqjI0HjX9ZiKds0u0f8W0Nvts3k2IPJFhxrrpbiTVXRroXR
+ 1Nw+YgdESqHLmACAl0TMg8W1vykYFRHbrkEz/4LCFG/SAyDkgSopPuYxJLhnVH1BuKop
+ /atnyMb0XougP85P3nmW6ELfvcs3JqhDKoYYxDmE1IvNMe2u0TuXdHN0MP9cuc9K9Pfb
+ hc/Dhk4o9ljYTGFE/Un7owtOndftc0WizCnabCVMchvyRmgXBIB4aZv0ubrkWoB80Bq1
+ 28cQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684293131; x=1686885131;
+ d=1e100.net; s=20221208; t=1684294833; x=1686886833;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g/+cA0N3j+biczB4GD+AkRw/shxfKAFFALMlbU1C0FE=;
- b=arSdyiUJk6sbctqCQo1EHL6OIcZGd5ZoTd0wS1EyRmJl7xdtdviI7nQo1bORm1imuj
- uTxkiazXGTfPib/9SBqAF3sVd4y0UqeLKL0l0qg0UhBUzr2WKZp6rxeUM9LF2nr3oZFp
- +XFT+rceFh3Hn4Qn3pTS6eXmoBRtpBinvElg3lOfetMTfXif30mbvsG2+F1Vxupp11pi
- tQvO6mc+9G7rTHJe0dVp1hXyhL/3036jDNBurCnZ31/lso574KjpbX0F2Nsx4uynUKOF
- W1HRy0LpD3VaVFjeit2PzSpu/qIvqcX8tPWfNxjR7hHcpxzjHA9Bnf0NXwTG762Wbjxw
- HUgg==
-X-Gm-Message-State: AC+VfDwmJeaYxAVs0XLRmH+0Jc3eESwDROp70bIFSpOBRAkhXRNJ7SCE
- eV27j7+DJxl8emLZdd+t1qdDsakeeTwWU0KqFo8=
-X-Google-Smtp-Source: ACHHUZ4o8Kot5pzYw3C0ftTdZt7EvTMwFoZ5XtcbsaKGCj+xlBTdcurXYEjNyjoNI2ehZ4e7ziCWdg/K9LICEbCpuAU=
-X-Received: by 2002:a05:6102:3672:b0:434:8632:e8ec with SMTP id
- bg18-20020a056102367200b004348632e8ecmr14313977vsb.5.1684293131320; Tue, 16
- May 2023 20:12:11 -0700 (PDT)
+ bh=pPcFQo21eXW1Pge7vlk+v+e+pxWr/D8D6By0VIVq7aY=;
+ b=gcFOB5qXaW1eoahbghiCE2nM+FNJF/R9OQp/MAzE6CXxEVQ5Lj9kUgbAGQcoFJOnz9
+ VbTYiRYlyn3T0jjxuDRNftah8uTt/fYrqX7ucq80zHRHpngzt5KidBC0v7NUsUIuhyWP
+ UOXy2QWJJQtJgTfE+D31IztATGnmCzWZuQc2RS/Xdyeue5xzVYqkmFkAUXv2i2hMo33I
+ 07QLmDphBwPrqWelDP7Ca6bUnCorvePgLs3RpyfeC1m94d28Wsa7vz28tdUkwhdFdRSl
+ OQT/AgVAQuZ6uYRxeQuIUFc5PV3FP4nvdNnVY5t6U2o0qHNQw3XHFpL2J8dLj+2pDCGi
+ EeUg==
+X-Gm-Message-State: AC+VfDySjw5eMhbqSLydrwefEu9X2+DcAb3SR1W3eh/bRlFOyDZSLT+g
+ vRDA8QMqXymZ6tDUnCdTIZAsM6jpcnYwyitQe5Q=
+X-Google-Smtp-Source: ACHHUZ67942ijkp7mKH17aVGzoqGMd+jEK1cNXtZF9LbfUPPgdJw/yij8iFXcs/E7ZKllLF7gM39m2Mmomhhhj3HWJc=
+X-Received: by 2002:a05:6102:3a66:b0:425:8613:da7d with SMTP id
+ bf6-20020a0561023a6600b004258613da7dmr15497351vsb.22.1684294833687; Tue, 16
+ May 2023 20:40:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230501140020.3667219-1-mchitale@ventanamicro.com>
- <20230501140020.3667219-2-mchitale@ventanamicro.com>
-In-Reply-To: <20230501140020.3667219-2-mchitale@ventanamicro.com>
+References: <20230509002739.18388-1-gshan@redhat.com>
+ <20230509002739.18388-4-gshan@redhat.com>
+In-Reply-To: <20230509002739.18388-4-gshan@redhat.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 17 May 2023 13:11:45 +1000
-Message-ID: <CAKmqyKN9vAAtXtRaUN3_im5k8kO+GoJ-V1mFbJPniSEdeswLnw@mail.gmail.com>
-Subject: Re: [PATCH v4 1/3] target/riscv: smstateen check for fcsr
-To: Mayuresh Chitale <mchitale@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- Daniel Barboza <dbarboza@ventanamicro.com>, liweiwei@iscas.ac.cn, 
- Richard Henderson <richard.henderson@linaro.org>
+Date: Wed, 17 May 2023 13:40:07 +1000
+Message-ID: <CAKmqyKNeKTvKpkCO6z-+3Eh46fmEG6ytRB52LJY7WKyZDmCy+g@mail.gmail.com>
+Subject: Re: [PATCH v5 3/3] hw/riscv: Validate cluster and NUMA node boundary
+To: Gavin Shan <gshan@redhat.com>
+Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ pbonzini@redhat.com, imammedo@redhat.com, peter.maydell@linaro.org, 
+ rad@semihalf.com, quic_llindhol@quicinc.com, eduardo@habkost.net, 
+ marcel.apfelbaum@gmail.com, philmd@linaro.org, wangyanan55@huawei.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ thuth@redhat.com, lvivier@redhat.com, ajones@ventanamicro.com, 
+ berrange@redhat.com, dbarboza@ventanamicro.com, yihyu@redhat.com, 
+ shan.gavin@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -90,98 +95,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, May 2, 2023 at 12:00=E2=80=AFAM Mayuresh Chitale
-<mchitale@ventanamicro.com> wrote:
+On Tue, May 9, 2023 at 10:29=E2=80=AFAM Gavin Shan <gshan@redhat.com> wrote=
+:
 >
-> If smstateen is implemented and smtateen0.fcsr is clear and misa.F
-> is off then the floating point operations must return illegal
-> instruction exception or virtual instruction trap, if relevant.
+> There are two RISCV machines where NUMA is aware: 'virt' and 'spike'.
+> Both of them are required to follow cluster-NUMA-node boundary. To
+> enable the validation to warn about the irregular configuration where
+> multiple CPUs in one cluster has been associated with multiple NUMA
+> nodes.
+>
+> Signed-off-by: Gavin Shan <gshan@redhat.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Acked-by: Igor Mammedov <imammedo@redhat.com>
 
-Do you mind re-wording this commit message? I can't get my head around
-it. You talk about returning an illegal instruction exception, but
-most of this patch is just adding SMSTATEEN0_FCSR to the write mask if
-floating point is disabled.
-
-It looks to me like you are returning an exception trying to access a
-floating pointer register if FP is off and SMSTATEEN0_FCSR is not set
-(which you describe) but also then only allow changing SMSTATEEN0_FCSR
-if the RVF is not enabled, which is where I'm confused.
-
-Your patch seems to be correct, I think the commit message and title
-just needs a small tweak. Maybe something like this:
-
-```
-target/riscv: smstateen add support for fcsr bit
-
-If smstateen is implemented and SMSTATEEN0.FCSR is zero floating point
-CSR access should raise an illegal instruction exception or virtual
-equivalent as required.
-
-We also allow the guest to set/unset the FCSR bit, but only if misa.F
-=3D=3D 0, as defined in the spec.
-```
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->
-> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > ---
->  target/riscv/csr.c | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
+>  hw/riscv/spike.c | 2 ++
+>  hw/riscv/virt.c  | 2 ++
+>  2 files changed, 4 insertions(+)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 4451bd1263..3f6b824bd2 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -82,6 +82,10 @@ static RISCVException fs(CPURISCVState *env, int csrno=
-)
->          !riscv_cpu_cfg(env)->ext_zfinx) {
->          return RISCV_EXCP_ILLEGAL_INST;
->      }
-> +
-> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-> +        return smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR);
-> +    }
->  #endif
->      return RISCV_EXCP_NONE;
->  }
-> @@ -2100,6 +2104,9 @@ static RISCVException write_mstateen0(CPURISCVState=
- *env, int csrno,
->                                        target_ulong new_val)
->  {
->      uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
-> +    if (!riscv_has_ext(env, RVF)) {
-> +        wr_mask |=3D SMSTATEEN0_FCSR;
-> +    }
->
->      return write_mstateen(env, csrno, wr_mask, new_val);
->  }
-> @@ -2173,6 +2180,10 @@ static RISCVException write_hstateen0(CPURISCVStat=
-e *env, int csrno,
->  {
->      uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
->
-> +    if (!riscv_has_ext(env, RVF)) {
-> +        wr_mask |=3D SMSTATEEN0_FCSR;
-> +    }
-> +
->      return write_hstateen(env, csrno, wr_mask, new_val);
->  }
->
-> @@ -2259,6 +2270,10 @@ static RISCVException write_sstateen0(CPURISCVStat=
-e *env, int csrno,
->  {
->      uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
->
-> +    if (!riscv_has_ext(env, RVF)) {
-> +        wr_mask |=3D SMSTATEEN0_FCSR;
-> +    }
-> +
->      return write_sstateen(env, csrno, wr_mask, new_val);
->  }
->
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index 2c5546560a..81f7e53aed 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -354,6 +354,8 @@ static void spike_machine_class_init(ObjectClass *oc,=
+ void *data)
+>      mc->cpu_index_to_instance_props =3D riscv_numa_cpu_index_to_props;
+>      mc->get_default_cpu_node_id =3D riscv_numa_get_default_cpu_node_id;
+>      mc->numa_mem_supported =3D true;
+> +    /* platform instead of architectural choice */
+> +    mc->cpu_cluster_has_numa_boundary =3D true;
+>      mc->default_ram_id =3D "riscv.spike.ram";
+>      object_class_property_add_str(oc, "signature", NULL, spike_set_signa=
+ture);
+>      object_class_property_set_description(oc, "signature",
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 4e3efbee16..84a2bca460 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1678,6 +1678,8 @@ static void virt_machine_class_init(ObjectClass *oc=
+, void *data)
+>      mc->cpu_index_to_instance_props =3D riscv_numa_cpu_index_to_props;
+>      mc->get_default_cpu_node_id =3D riscv_numa_get_default_cpu_node_id;
+>      mc->numa_mem_supported =3D true;
+> +    /* platform instead of architectural choice */
+> +    mc->cpu_cluster_has_numa_boundary =3D true;
+>      mc->default_ram_id =3D "riscv_virt_board.ram";
+>      assert(!mc->get_hotplug_handler);
+>      mc->get_hotplug_handler =3D virt_machine_get_hotplug_handler;
 > --
-> 2.34.1
+> 2.23.0
+>
 >
 
