@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13F8FC77B7A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 17 May 2023 13:59:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFF5EC77B7A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 May 2023 02:49:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pzHf1-00011y-2H; Wed, 17 May 2023 09:57:47 -0400
+	id 1pzThs-0001TK-DV; Wed, 17 May 2023 22:49:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pzHes-0000z6-O7
- for qemu-riscv@nongnu.org; Wed, 17 May 2023 09:57:38 -0400
-Received: from mail-oa1-x29.google.com ([2001:4860:4864:20::29])
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1pzThq-0001T1-Uy
+ for qemu-riscv@nongnu.org; Wed, 17 May 2023 22:49:31 -0400
+Received: from mail-qv1-xf30.google.com ([2607:f8b0:4864:20::f30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1pzHer-0000VQ-6Y
- for qemu-riscv@nongnu.org; Wed, 17 May 2023 09:57:38 -0400
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-192b1a4dd2eso354414fac.1
- for <qemu-riscv@nongnu.org>; Wed, 17 May 2023 06:57:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1pzThp-0000Vr-DP
+ for qemu-riscv@nongnu.org; Wed, 17 May 2023 22:49:30 -0400
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-623839d5c19so11245206d6.1
+ for <qemu-riscv@nongnu.org>; Wed, 17 May 2023 19:49:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1684331855; x=1686923855;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=ventanamicro.com; s=google; t=1684378168; x=1686970168;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+AzVR8nq7ycPyzgqq+Qc5hSUqVlyii/kLSoYn9cWTds=;
- b=EgWqCL4Lfz2L0xemboHv33FDhXox7Fo4l7TM2wNLBQBXRqqcwDo2RhDfXBW1ZBSfEy
- WURm6bL+njYEsl1AWCtjmk1oftHZsY7LxR6LJcDv5x6vOg/tFK5XyR+Jx357dzp5d9ME
- R0XQzZdAkVhExVenTORFn5KAfJcCknQxMdHYVdlw0oNmDb8p9Y4NbJpyMf+OPNryxOwc
- F3zyRtdXeQ2HefIEai+snKABRqNSJFnp7Da2Xnmdhw/6PNc3thZgeNMj3vCeMErqGlNl
- LVspRQOq78rYqCcUgJ1FX/MLahPdBGV4Cd3hKC44xl10P1eHve1pOzZdvH6VwzO8TPzf
- xAyQ==
+ bh=HBiYU3X0LxCc5gBu85kfHUp7ZMB7Axiw4k2XXatVVQY=;
+ b=hcveBapPBvRI3aeYrgzC9A0qehPog5szRH0cIZ6hyDGvZWlJe6z9u9ufnvkEqZQqWI
+ qRdilruTFtWn3rlYUEy57zXsGcqL35EcgjQn0WXysISY57bfW3D0VFLTFnXH4KTq75rQ
+ l2ijq4Bljtzmj/fD/2KEq7zAk9eq72h4++Ew5/iXzKPPY8EBG+/S3J5svTDS/medxBR2
+ GBQMGwvTaVJWIv0ibxJT3bfeTRRnzysvirH8Bu9RpNnITiF0KKCf+yyd6X8ZZZ2i87PU
+ cbjQb1Skz6ASneyBW0XDg+ItvokOPLHiCtWqwjQOxRvNpi6CuRiAgIMqLcYtYt84knr9
+ cixw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684331855; x=1686923855;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20221208; t=1684378168; x=1686970168;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+AzVR8nq7ycPyzgqq+Qc5hSUqVlyii/kLSoYn9cWTds=;
- b=VletcLacdwbmW7TbVvLi/zIllP34CFupMagirK/o6P0Sh/xjjAyDpdFRnVoD/LJhFW
- AMjDRYngaGOsKEzr5dAtiO0xEOrak/LVIAa0YAu4P749R94e2TOd9LzV2JbxVtGcixq8
- ZIu3lDNC+uUhBsIGaFnE5wsFctyi4ErymbPIy/MsuSl7PRi/l3IzMMGWnBKl+KSS7IG3
- nPsZXq273yTbOjLo8yLvBpPs1PCLqOCoMtvBxuAK/mQM36bdLYTvfZ58YWgoG/fjaFtX
- gf28NNYrX6IA8Z1wq/3P6hWCVj2J3ZK8Hj1wKzj7jwxEPF28hHC5rDY91LnGSCy68CQt
- igcw==
-X-Gm-Message-State: AC+VfDxXPdnHngqwV/dxe1GaxX7flagG1PS+DsYiB7t3O5urgje87cCy
- TWyrVBuGKa2W+5hxS6xPnmT/8kIE3ZkUB2nbrSY=
-X-Google-Smtp-Source: ACHHUZ4tCaHFD48fbUulD1Hqj74bXE2DkUclmKn5t77AwcpwUQ/VhwX4hOCqFrEEVSNo6txv5WzSdQ==
-X-Received: by 2002:a05:6808:4cf:b0:38d:ec3f:3118 with SMTP id
- a15-20020a05680804cf00b0038dec3f3118mr12894072oie.28.1684331855661; 
- Wed, 17 May 2023 06:57:35 -0700 (PDT)
-Received: from grind.. (189-46-207-53.dsl.telesp.net.br. [189.46.207.53])
- by smtp.gmail.com with ESMTPSA id
- j21-20020a544815000000b00383d9700294sm9409562oij.40.2023.05.17.06.57.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 May 2023 06:57:35 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v9 04/11] target/riscv: add PRIV_VERSION_LATEST
-Date: Wed, 17 May 2023 10:57:07 -0300
-Message-Id: <20230517135714.211809-5-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230517135714.211809-1-dbarboza@ventanamicro.com>
-References: <20230517135714.211809-1-dbarboza@ventanamicro.com>
+ bh=HBiYU3X0LxCc5gBu85kfHUp7ZMB7Axiw4k2XXatVVQY=;
+ b=VJXjdwIVWDs+GTdBeOFjTyrPW5RaFeXeW7WrJtX4Mnk7qBRkvF0w7YKtaM3DY7S8pE
+ V+U1fa9ELo5Wh95NitAK+8Z01hqZRks64JAifnAd3qAusjxBJYxK4LaVCZgmDXy8HJwo
+ R7GUIbh2Wh/SuizGae7/Vuly6t3UDo5kj+prOL0fjf1ZU/wNOVI9pdZyQILDmyyXNH4z
+ TEfewxdjec0uVMZFNmpKMhPkmFHSUDRpi1J5eOtwUk+2J+3CMT3jJOYKorUpjArgbrPz
+ 011nCdbTTHf99AFka/KEyOKu/xophxUoaSPymbOWntbmA+JMhDzQpoW31BFxSjZ8oNAn
+ u7GQ==
+X-Gm-Message-State: AC+VfDxqO7hy5E39N69sXQh5xAlWRQ7uRY/F3N5HY+sTlPPnZJHsEJIG
+ dxT+B6+M7SMvmqK9BUybDZ/6Sgko6ixR4RWgAzFEeQ==
+X-Google-Smtp-Source: ACHHUZ7nC9xmUrcj3JbxM1W947C1x95JlpdnJDwlCqstb7WK43Ss5oXWv4FOHwis00JvlTGMBbJDbQCU23bIDDODcfw=
+X-Received: by 2002:a05:6214:20ec:b0:621:331b:f55d with SMTP id
+ 12-20020a05621420ec00b00621331bf55dmr2516253qvk.19.1684378168049; Wed, 17 May
+ 2023 19:49:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::29;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x29.google.com
+References: <20230501140020.3667219-1-mchitale@ventanamicro.com>
+ <20230501140020.3667219-2-mchitale@ventanamicro.com>
+ <CAKmqyKN9vAAtXtRaUN3_im5k8kO+GoJ-V1mFbJPniSEdeswLnw@mail.gmail.com>
+In-Reply-To: <CAKmqyKN9vAAtXtRaUN3_im5k8kO+GoJ-V1mFbJPniSEdeswLnw@mail.gmail.com>
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+Date: Thu, 18 May 2023 08:18:51 +0530
+Message-ID: <CAN37VV6Ms0hs_vAAr0n-P8chb-77jhQTQrv0qjBLKXiuBiDA_Q@mail.gmail.com>
+Subject: Re: [PATCH v4 1/3] target/riscv: smstateen check for fcsr
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ Daniel Barboza <dbarboza@ventanamicro.com>, liweiwei@iscas.ac.cn, 
+ Richard Henderson <richard.henderson@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f30;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-qv1-xf30.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,82 +92,112 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All these generic CPUs are using the latest priv available, at this
-moment PRIV_VERSION_1_12_0:
+On Wed, May 17, 2023 at 8:42=E2=80=AFAM Alistair Francis <alistair23@gmail.=
+com> wrote:
+>
+> On Tue, May 2, 2023 at 12:00=E2=80=AFAM Mayuresh Chitale
+> <mchitale@ventanamicro.com> wrote:
+> >
+> > If smstateen is implemented and smtateen0.fcsr is clear and misa.F
+> > is off then the floating point operations must return illegal
+> > instruction exception or virtual instruction trap, if relevant.
+>
+> Do you mind re-wording this commit message? I can't get my head around
+> it. You talk about returning an illegal instruction exception, but
+> most of this patch is just adding SMSTATEEN0_FCSR to the write mask if
+> floating point is disabled.
+>
+Sure. The generic code for access check was added in a previous patch.
+> It looks to me like you are returning an exception trying to access a
+> floating pointer register if FP is off and SMSTATEEN0_FCSR is not set
+> (which you describe) but also then only allow changing SMSTATEEN0_FCSR
+> if the RVF is not enabled, which is where I'm confused.
+The smstateen0.fcsr bit is writable only when misa.F =3D=3D 0.
 
-- riscv_any_cpu_init()
-- rv32_base_cpu_init()
-- rv64_base_cpu_init()
-- rv128_base_cpu_init()
+>
+> Your patch seems to be correct, I think the commit message and title
+> just needs a small tweak. Maybe something like this:
+>
+> ```
+> target/riscv: smstateen add support for fcsr bit
+>
+> If smstateen is implemented and SMSTATEEN0.FCSR is zero floating point
+> CSR access should raise an illegal instruction exception or virtual
+> equivalent as required.
+>
+> We also allow the guest to set/unset the FCSR bit, but only if misa.F
+> =3D=3D 0, as defined in the spec.
 
-Create a new PRIV_VERSION_LATEST enum and use it in those cases. I'll
-make it easier to update everything at once when a new priv version is
-available.
+How about:
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c | 8 ++++----
- target/riscv/cpu.h | 2 ++
- 2 files changed, 6 insertions(+), 4 deletions(-)
+target/riscv: smstateen check for fcsr
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 8ba86d54b2..b1a6675d1e 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -345,7 +345,7 @@ static void riscv_any_cpu_init(Object *obj)
-         VM_1_10_SV32 : VM_1_10_SV57);
- #endif
- 
--    env->priv_ver = PRIV_VERSION_1_12_0;
-+    env->priv_ver = PRIV_VERSION_LATEST;
- }
- 
- #if defined(TARGET_RISCV64)
-@@ -356,7 +356,7 @@ static void rv64_base_cpu_init(Object *obj)
-     set_misa(env, MXL_RV64, 0);
-     riscv_cpu_add_user_properties(obj);
-     /* Set latest version of privileged specification */
--    env->priv_ver = PRIV_VERSION_1_12_0;
-+    env->priv_ver = PRIV_VERSION_LATEST;
- #ifndef CONFIG_USER_ONLY
-     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
- #endif
-@@ -462,7 +462,7 @@ static void rv128_base_cpu_init(Object *obj)
-     set_misa(env, MXL_RV128, 0);
-     riscv_cpu_add_user_properties(obj);
-     /* Set latest version of privileged specification */
--    env->priv_ver = PRIV_VERSION_1_12_0;
-+    env->priv_ver = PRIV_VERSION_LATEST;
- #ifndef CONFIG_USER_ONLY
-     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
- #endif
-@@ -475,7 +475,7 @@ static void rv32_base_cpu_init(Object *obj)
-     set_misa(env, MXL_RV32, 0);
-     riscv_cpu_add_user_properties(obj);
-     /* Set latest version of privileged specification */
--    env->priv_ver = PRIV_VERSION_1_12_0;
-+    env->priv_ver = PRIV_VERSION_LATEST;
- #ifndef CONFIG_USER_ONLY
-     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV32);
- #endif
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index de7e43126a..15423585d0 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -61,6 +61,8 @@ enum {
-     PRIV_VERSION_1_10_0 = 0,
-     PRIV_VERSION_1_11_0,
-     PRIV_VERSION_1_12_0,
-+
-+    PRIV_VERSION_LATEST = PRIV_VERSION_1_12_0,
- };
- 
- #define VEXT_VERSION_1_00_0 0x00010000
--- 
-2.40.1
+Implement the s/h/mstateen.fcsr bit as as defined in the smstateen spec
+and check for it when accessing the fcsr register and its fields.
 
+> ```
+>
+> Alistair
+>
+> >
+> > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> > Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> > ---
+> >  target/riscv/csr.c | 15 +++++++++++++++
+> >  1 file changed, 15 insertions(+)
+> >
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index 4451bd1263..3f6b824bd2 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -82,6 +82,10 @@ static RISCVException fs(CPURISCVState *env, int csr=
+no)
+> >          !riscv_cpu_cfg(env)->ext_zfinx) {
+> >          return RISCV_EXCP_ILLEGAL_INST;
+> >      }
+> > +
+> > +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> > +        return smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR);
+> > +    }
+> >  #endif
+> >      return RISCV_EXCP_NONE;
+> >  }
+> > @@ -2100,6 +2104,9 @@ static RISCVException write_mstateen0(CPURISCVSta=
+te *env, int csrno,
+> >                                        target_ulong new_val)
+> >  {
+> >      uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> > +    if (!riscv_has_ext(env, RVF)) {
+> > +        wr_mask |=3D SMSTATEEN0_FCSR;
+> > +    }
+> >
+> >      return write_mstateen(env, csrno, wr_mask, new_val);
+> >  }
+> > @@ -2173,6 +2180,10 @@ static RISCVException write_hstateen0(CPURISCVSt=
+ate *env, int csrno,
+> >  {
+> >      uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> >
+> > +    if (!riscv_has_ext(env, RVF)) {
+> > +        wr_mask |=3D SMSTATEEN0_FCSR;
+> > +    }
+> > +
+> >      return write_hstateen(env, csrno, wr_mask, new_val);
+> >  }
+> >
+> > @@ -2259,6 +2270,10 @@ static RISCVException write_sstateen0(CPURISCVSt=
+ate *env, int csrno,
+> >  {
+> >      uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> >
+> > +    if (!riscv_has_ext(env, RVF)) {
+> > +        wr_mask |=3D SMSTATEEN0_FCSR;
+> > +    }
+> > +
+> >      return write_sstateen(env, csrno, wr_mask, new_val);
+> >  }
+> >
+> > --
+> > 2.34.1
+> >
 
