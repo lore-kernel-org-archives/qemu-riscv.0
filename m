@@ -4,79 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5158EC77B7D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 May 2023 11:26:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2E35C7EE22
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 May 2023 11:39:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pzblX-0003KB-CA; Thu, 18 May 2023 07:25:51 -0400
+	id 1pzbyo-0000EP-0Z; Thu, 18 May 2023 07:39:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
- id 1pzblV-0003Jn-KF
- for qemu-riscv@nongnu.org; Thu, 18 May 2023 07:25:49 -0400
-Received: from esa.microchip.iphmx.com ([68.232.154.123])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
- id 1pzblT-0000KI-8N
- for qemu-riscv@nongnu.org; Thu, 18 May 2023 07:25:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1684409147; x=1715945147;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=KPipI87LRIbP/OpMGuyK3E2LESwrrGgto5bVP90IVRI=;
- b=g6jG8oMsCSVjOtBsi+zsSx/cTS9M9IG6UXG6sMxtiVtXhKSUh4qKRCMN
- x4zZ0X3JsCqxHcDQOf+9XS26U9GThxdCCzZfoP30pFAN8UUz5/4cwRlRS
- DgQBeWYFYUUYl676Kgk+fYPw6NGXFqtGv1pQ7xps0gKFPgu3ese/qXV91
- HJYV80GPjf8A8QQNRj4qoz1kn1oz658RdlMFyiuTDWl6xK1e0JnDmV7be
- 3J/YiE7Ty/bko/q19ZJR5WntlUBCwbSycTYxIkCvDeed0LUCnuow/Vz1T
- rxBQDka5JUEp7rahhBk3L38EaXYjO7JTlk1mw4bv7tJT6LS+pJhR2+Pvu g==;
-X-IronPort-AV: E=Sophos;i="5.99,285,1677567600"; 
- d="asc'?scan'208";a="216085961"
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256;
- 18 May 2023 04:25:38 -0700
-Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
- chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.21; Thu, 18 May 2023 04:25:35 -0700
-Received: from wendy (10.10.115.15) by chn-vm-ex01.mchp-main.com
- (10.10.85.143) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21 via Frontend
- Transport; Thu, 18 May 2023 04:25:32 -0700
-Date: Thu, 18 May 2023 12:25:11 +0100
-From: Conor Dooley <conor.dooley@microchip.com>
-To: Andrew Jones <ajones@ventanamicro.com>
-CC: <palmer@dabbelt.com>, <conor@kernel.org>, Paul Walmsley
- <paul.walmsley@sifive.com>, Rob Herring <robh+dt@kernel.org>, Krzysztof
- Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Alistair Francis
- <alistair.francis@wdc.com>, Anup Patel <apatel@ventanamicro.com>, Atish Patra
- <atishp@atishpatra.org>, Jessica Clarke <jrtc27@jrtc27.com>, Rick Chen
- <rick@andestech.com>, Leo <ycliang@andestech.com>,
- <linux-riscv@lists.infradead.org>, <qemu-riscv@nongnu.org>,
- <u-boot@lists.denx.de>, <devicetree@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v1] dt-bindings: riscv: deprecate riscv,isa
-Message-ID: <20230518-resurrect-copy-0ecd9eaaca1e@wendy>
-References: <20230518-thermos-sanitary-cf3fbc777ea1@wendy>
- <20230518-4050231ca8dbe93c08cf9c9a@orel>
+ (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
+ id 1pzbyl-0000CE-GF
+ for qemu-riscv@nongnu.org; Thu, 18 May 2023 07:39:32 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
+ id 1pzbyi-0002W0-6R
+ for qemu-riscv@nongnu.org; Thu, 18 May 2023 07:39:30 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-3f50020e0f8so71933735e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 18 May 2023 04:39:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1684409966; x=1687001966; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6hpOmi46xQ4MApQ9wmEcpNEs40K4g7mIrpG+eIQXr1g=;
+ b=Rwg+E2ykP7uQWb/9mJPWOcSnAYMgi1gsk4b2TIYaWJ/NheB3iMvSh5YCyLEKY8UBJQ
+ W8AEjI/vml6Xra0CA5zbOgbpAF1roXPqLT5MjcK92LRfRXF+q8S+LWDEacHISPSirzZZ
+ 3Kj/iNzrez55coWskp9nb2AEpLmlH03sGPVhVbvGl+1rAX+SrWsKOVN9bAEw6mqMd4nr
+ IIIt8lAk3rhL4ATAUB5hpx7XYpHDUtXnQkfPs7I2WTeypZmv7tHS6HNEJoOZvkkaRzpZ
+ g2d06W+iHW9gqE9/M386yASzdmbN+spoc4kK90gdMrhwHEOreSBcdRN/QzAdXPzlIsbj
+ ZOsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1684409966; x=1687001966;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6hpOmi46xQ4MApQ9wmEcpNEs40K4g7mIrpG+eIQXr1g=;
+ b=l6dM67v4qW0og37d1sjXVBICCV4zGw6TONkECqmwYJuGesj+Do8RD93r27NqRvDDQX
+ XusB4vA5r1JkJoqHPScqUn5hYihbgt7nqyHM50ftpDg+d7CeC+L7VI9540TUgXrtxFL9
+ rdsGLJSJojf/too/6mGZZlWcxiOB2101kKI9nMzJSfb7BjPub2NCgRTD9Xrf/kUHDrZw
+ SrYdVbPGBbHOATMmQ3NaXRnQnwwJoQNJbBQgaU/dD1Rsr65QZkUR/ydd6rZobDvQfwhf
+ 671KG3AFKwIAiVaxhit4tnOxySjzrVb8/Yan+Z3Ff0dWN2BMxcLqUDawp1V4YBOIlJMi
+ ToFA==
+X-Gm-Message-State: AC+VfDyddZH372SPKfD3OWfqxAE2si1KR56NKDOtchoPyrM76SEAwfdw
+ +pX+B9svL3nc0q1MKu2yOgSdPhv1qRWJiwAD4HY=
+X-Google-Smtp-Source: ACHHUZ5TkVQDU4xp/HZ2GzRywz/ATw8maVSaQ42HdPmih5pHFXHR0DH3eQbyJKP/bpE0E7WNKlxiKQ==
+X-Received: by 2002:a05:600c:35d1:b0:3f4:255e:e375 with SMTP id
+ r17-20020a05600c35d100b003f4255ee375mr1288480wmq.9.1684409965879; 
+ Thu, 18 May 2023 04:39:25 -0700 (PDT)
+Received: from localhost.localdomain
+ (cpc98982-watf12-2-0-cust57.15-2.cable.virginm.net. [82.26.13.58])
+ by smtp.gmail.com with ESMTPSA id
+ p6-20020a1c7406000000b003f4272c2d10sm5083982wmc.1.2023.05.18.04.39.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 18 May 2023 04:39:25 -0700 (PDT)
+From: Rajnesh Kanwal <rkanwal@rivosinc.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, apatel@ventanamicro.com,
+ Rajnesh Kanwal <rkanwal@rivosinc.com>
+Subject: [PATCH 1/6] target/riscv: Without H-mode mask all HS mode inturrupts
+ in mie.
+Date: Thu, 18 May 2023 12:38:33 +0100
+Message-Id: <20230518113838.130084-2-rkanwal@rivosinc.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230518113838.130084-1-rkanwal@rivosinc.com>
+References: <20230518113838.130084-1-rkanwal@rivosinc.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="kb7QvTX+biQwTglT"
-Content-Disposition: inline
-In-Reply-To: <20230518-4050231ca8dbe93c08cf9c9a@orel>
-Received-SPF: pass client-ip=68.232.154.123;
- envelope-from=Conor.Dooley@microchip.com; helo=esa.microchip.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=rkanwal@rivosinc.com; helo=mail-wm1-x330.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,37 +99,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---kb7QvTX+biQwTglT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
+---
+ target/riscv/csr.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Thu, May 18, 2023 at 12:31:51PM +0200, Andrew Jones wrote:
-> > +  # Additional Standard Extensions, sorted by category then alphabetic=
-ally
->=20
-> Can we just do pure alphabetically? And the single-letter extensions above
-> don't have a "sorted by" comment above them. I guess they need one, or
-> maybe they can also be alphabetical?
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 4451bd1263..041f0b3e2e 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1522,7 +1522,7 @@ static RISCVException rmw_mie64(CPURISCVState *env, int csrno,
+     env->mie = (env->mie & ~mask) | (new_val & mask);
+ 
+     if (!riscv_has_ext(env, RVH)) {
+-        env->mie &= ~((uint64_t)MIP_SGEIP);
++        env->mie &= ~((uint64_t)HS_MODE_INTERRUPTS);
+     }
+ 
+     return RISCV_EXCP_NONE;
+-- 
+2.25.1
 
-Maybe it is just me, but my brain is too used to seeing those ones in
-something approaching canonical order. I'd rather keep them that way &
-then alphanumerical for everything else?
-
-I also noticed that the CMO stuff wasn't actually in the comment's order
-anyway, so needs a re-sort to begin with. A vote in favour of
-alphanumerical.
-
---kb7QvTX+biQwTglT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZGYLFwAKCRB4tDGHoIJi
-0grUAQCAc20dh6ItbijltjfIQVgSoT3hDJT0l6RFsHHzB6r/XgEA+HoYzGYleux9
-54r2MbYTuE0fuZ9acteU6CIgBsX0Fg0=
-=8leH
------END PGP SIGNATURE-----
-
---kb7QvTX+biQwTglT--
 
