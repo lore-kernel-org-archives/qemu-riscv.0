@@ -4,93 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E07CAC77B7A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 May 2023 06:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B970AC7EE22
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 May 2023 08:59:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pzWjz-0005Zx-6K; Thu, 18 May 2023 02:03:59 -0400
+	id 1pzZTa-0006nN-JK; Thu, 18 May 2023 04:59:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pzWjx-0005Z8-1D
- for qemu-riscv@nongnu.org; Thu, 18 May 2023 02:03:53 -0400
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1pzWjv-0003hT-9h
- for qemu-riscv@nongnu.org; Thu, 18 May 2023 02:03:52 -0400
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-64d2467d63fso14756b3a.0
- for <qemu-riscv@nongnu.org>; Wed, 17 May 2023 23:03:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1684389828; x=1686981828;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=GhnStdoyaTicSH43+3DwKgegTRO3RNSgDAvHs/DdLxM=;
- b=N7qH8s0xLmyRe1359FX1T+5IQh6j4wP6JjCKtO1ygeVN1d8Xuu9BSxWV5cZIctbs+n
- wk4JFZOh0C5yzRSeri/zaP4Y9uAIjBqpyWYJMSuvxfTeWz+Xe1NFfM511d/jViTI66FQ
- DYszafZe4uHACAEEvzZlhRRGaWa8Oyy9qdhfPybRIb7sxEl5bCxcLzXMuoXBIxq3oCVn
- /1Fcrk/XKdI/UVv3BU4EEWMW0FKGchkrKFiry602WWfIG3yAOuXx0i/tSl0IouX7aciE
- WwojpB8n6aRhyPCHR/mMXzymKOJf5goVCGdmgCB7SRXQvmdKEMRc857MUVNrranvxvqS
- zW/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684389828; x=1686981828;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GhnStdoyaTicSH43+3DwKgegTRO3RNSgDAvHs/DdLxM=;
- b=GlFVoXRoegsrdakc9fB04zR3plr0hxEqL3GF/ZLLKqdnsZYBIs0YMBf9pGGCgE4yW6
- zEejEh1WX2aR1JwU+gmZvWZHGmoiaJfO7tMUscGJN1EX+rI+50bnyz/PDV8WJIqlJNGS
- dwqlZmQudN4VMzZk31McTyqz+uXZU+5XOzTvz/YS9IXic9JZXdQ6e63yDFMWwDPUY2fA
- uhBLwvV75U03oEQPc8QpebtoMneTaAKbcyIsjIrhEXOruWoelHhbdH1b6bd9q0Q9BTR/
- ymPp7mrmwTNkyF+1nySF+17w+m6GX4moEJlsyeMUjxfk3jc/oIPGO1ZYBKouiOHoUbzJ
- C4WQ==
-X-Gm-Message-State: AC+VfDwB88TblsIFYnk0jgR9bTWPeRcjAoHHLLDh8YR8mF19/Piafhbf
- BX95k7/o07XWB8WxiTcrrgnlQw==
-X-Google-Smtp-Source: ACHHUZ5/RGrnSuui3njS/Mqk1O36DkdqEQOpp8g4plICjo+Hpz6Qp7TlG2LLhXox0H1VTBu80sGfIA==
-X-Received: by 2002:a05:6a20:430e:b0:100:ac13:9a57 with SMTP id
- h14-20020a056a20430e00b00100ac139a57mr1151884pzk.55.1684389828335; 
- Wed, 17 May 2023 23:03:48 -0700 (PDT)
-Received: from sunil-laptop ([106.51.83.242]) by smtp.gmail.com with ESMTPSA id
- u37-20020a632365000000b0050bd4bb900csm424190pgm.71.2023.05.17.23.03.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 May 2023 23:03:47 -0700 (PDT)
-Date: Thu, 18 May 2023 11:33:42 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Andrea Bolognani <abologna@redhat.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
-Subject: Re: [PATCH v2] hw/riscv: virt: Assume M-mode FW in pflash0 only when
- "-bios none"
-Message-ID: <ZGW/vqOD6E263wDD@sunil-laptop>
-References: <20230425102545.162888-1-sunilvl@ventanamicro.com>
- <b520d913-27a9-dea5-53c8-af1cdd967ab2@canonical.com>
- <ZFiRr8d2zyAJlZJv@sunil-laptop>
- <CABJz62OTBEOMzcXLYc=DqRwH8N4DP=o0-kCfALwoREZVyOxLPg@mail.gmail.com>
- <a8dd5f20-30ab-903a-6bd0-15c6a91fdf52@linaro.org>
- <CAKmqyKPHsjtT03MdSoy4i0TgdLBF=88aS6S32hj8hzpz60d6Dg@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
+ id 1pzZTZ-0006mv-6f
+ for qemu-riscv@nongnu.org; Thu, 18 May 2023 04:59:09 -0400
+Received: from esa.microchip.iphmx.com ([68.232.154.123])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
+ id 1pzZTW-0008PW-7Z
+ for qemu-riscv@nongnu.org; Thu, 18 May 2023 04:59:08 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1684400346; x=1715936346;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=OJ2mVKQ9f4KyeSK1ddmgnLirN/TPyanwSJydgPw7d6k=;
+ b=ItAgA03qEAmtvjDEofBoFhYwbOPFXFgKAGigrm+OtSNfOUXMEXo0Me7B
+ pgIsPRKTxL+0PCRyHsO3/BmSBOcoVreuh3QDG4avT/dzvyzldy8043BB2
+ V1sW+sMY/0R1bhDtfia/+XoWMr63s3sos42Eea5GS4BW7AF2F4w4yR0Bv
+ uGzjTh7NqcYBi2777HxFrQtdBnF89PAeAdVtBQYM+jn569chgLM9FlwPu
+ D0RYJuCkPV0Z/xi19QYJBCJgSfO+j0zU2VICnZhtGcqH/FtuuMDNJpnzR
+ FmEYJ8AzvhyV5korYQkhU4bUi6tckz6zhvjaiPcwlINcGzKKkzWTmkZJR w==;
+X-IronPort-AV: E=Sophos;i="5.99,284,1677567600"; d="scan'208";a="216063725"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa2.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256;
+ 18 May 2023 01:58:57 -0700
+Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
+ chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21; Thu, 18 May 2023 01:58:57 -0700
+Received: from wendy.microchip.com (10.10.115.15) by chn-vm-ex01.mchp-main.com
+ (10.10.85.143) with Microsoft SMTP Server id 15.1.2507.21 via
+ Frontend Transport; Thu, 18 May 2023 01:58:54 -0700
+From: Conor Dooley <conor.dooley@microchip.com>
+To: <palmer@dabbelt.com>
+CC: <conor@kernel.org>, <conor.dooley@microchip.com>, Paul Walmsley
+ <paul.walmsley@sifive.com>, Rob Herring <robh+dt@kernel.org>, "Krzysztof
+ Kozlowski" <krzysztof.kozlowski+dt@linaro.org>, Alistair Francis
+ <alistair.francis@wdc.com>, Andrew Jones <ajones@ventanamicro.com>, "Anup
+ Patel" <apatel@ventanamicro.com>, Atish Patra <atishp@atishpatra.org>,
+ "Jessica Clarke" <jrtc27@jrtc27.com>, Rick Chen <rick@andestech.com>, Leo
+ <ycliang@andestech.com>, <linux-riscv@lists.infradead.org>,
+ <qemu-riscv@nongnu.org>, <u-boot@lists.denx.de>,
+ <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>
+Subject: [PATCH v1] dt-bindings: riscv: deprecate riscv,isa
+Date: Thu, 18 May 2023 09:58:30 +0100
+Message-ID: <20230518-thermos-sanitary-cf3fbc777ea1@wendy>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-Developer-Signature: v=1; a=openpgp-sha256; l=19633;
+ i=conor.dooley@microchip.com; h=from:subject:message-id;
+ bh=OJ2mVKQ9f4KyeSK1ddmgnLirN/TPyanwSJydgPw7d6k=;
+ b=owGbwMvMwCFWscWwfUFT0iXG02pJDCmpL7YK3vl9ftHtDyoLDt59dO6ONa9g5LxoY1bxi2rhfo3p
+ Zk42HaUsDGIcDLJiiiyJt/tapNb/cdnh3PMWZg4rE8gQBi5OAZjIfCZGhv3ZbrXTew37jwv/bmc3V+
+ 1icbifmhzw2i+EPf6BkLaqN8P/WovLisVZWa7pz7ZOVP7Xu8x4Z87B1xrTjq7WmORtvrCeDQA=
+X-Developer-Key: i=conor.dooley@microchip.com; a=openpgp;
+ fpr=F9ECA03CF54F12CD01F1655722E2C55B37CF380C
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAKmqyKPHsjtT03MdSoy4i0TgdLBF=88aS6S32hj8hzpz60d6Dg@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x42e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain
+Received-SPF: pass client-ip=68.232.154.123;
+ envelope-from=Conor.Dooley@microchip.com; helo=esa.microchip.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,88 +94,504 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, May 18, 2023 at 02:55:16PM +1000, Alistair Francis wrote:
-> On Wed, May 17, 2023 at 10:48 PM Philippe Mathieu-Daudé
-> <philmd@linaro.org> wrote:
-> >
-> > On 8/5/23 12:00, Andrea Bolognani wrote:
-> > > On Mon, May 08, 2023 at 11:37:43AM +0530, Sunil V L wrote:
-> > >> On Mon, May 08, 2023 at 07:37:23AM +0200, Heinrich Schuchardt wrote:
-> > >>> On 4/25/23 12:25, Sunil V L wrote:
-> > >>>> Currently, virt machine supports two pflash instances each with
-> > >>>> 32MB size. However, the first pflash is always assumed to
-> > >>>> contain M-mode firmware and reset vector is set to this if
-> > >>>> enabled. Hence, for S-mode payloads like EDK2, only one pflash
-> > >>>> instance is available for use. This means both code and NV variables
-> > >>>> of EDK2 will need to use the same pflash.
-> > >>>>
-> > >>>> The OS distros keep the EDK2 FW code as readonly. When non-volatile
-> > >>>> variables also need to share the same pflash, it is not possible
-> > >>>> to keep it as readonly since variables need write access.
-> > >>>>
-> > >>>> To resolve this issue, the code and NV variables need to be separated.
-> > >>>> But in that case we need an extra flash. Hence, modify the convention
-> > >>>> such that pflash0 will contain the M-mode FW only when "-bios none"
-> > >>>> option is used. Otherwise, pflash0 will contain the S-mode payload FW.
-> > >>>> This enables both pflash instances available for EDK2 use.
-> > >>>>
-> > >>>> Example usage:
-> > >>>> 1) pflash0 containing M-mode FW
-> > >>>> qemu-system-riscv64 -bios none -pflash <mmode_fw> -machine virt
-> > >>>> or
-> > >>>> qemu-system-riscv64 -bios none \
-> > >>>> -drive file=<mmode_fw>,if=pflash,format=raw,unit=0 -machine virt
-> > >>>>
-> > >>>> 2) pflash0 containing S-mode payload like EDK2
-> > >>>> qemu-system-riscv64 -pflash <smode_fw_vars> -pflash <smode_fw_code> -machine  virt
-> > >>>> or
-> > >>>> qemu-system-riscv64 -bios <opensbi_fw> \
-> > >>>> -pflash <smode_fw_vars> \
-> > >>>> -pflash <smode_fw_code> \
-> > >>>
-> > >>> On amd64 and arm64 unit=0 is used for code and unit=1 is used for variables.
-> > >>> Shouldn't riscv64 do the same?
-> > >
-> > > Good catch, I had missed that!
-> >
-> > This is a design mistake spreading.
-> >
-> > What EDK2 maintainers want is one Read-Only + Exec region for CODE and
-> > one Read-Write + NoExec region for VARS.
-> >
-> > QEMU never implemented correctly pflash bank (multiple sectors) write
-> > protected.
-> >
-> > When EDK2 (x86, OVMF) was tried on QEMU, QEMU was using a single pflash.
-> > To separate CODE/VARS, a second pflash was added, the first one being
-> > "locked" into Read-Only mode. Using a pflash allowed the firmware to
-> > identify device size using pflash CFI commands.
-> >
-> > Then this design was copied to the ARM virt board for EDK2 needs.
-> >
-> > In retrospective, this design was declared a mistake, since a simple
-> > ROM region for the CODE is sufficient, and much simpler [*].
-> 
-> It seems like we are making changes to the whole flash setup. Is it
-> worth adding the ROM region now as well, so we can migrate to the
-> simpler approach.
-> 
+intro
+=====
 
-ROM is used for FW image used for -bios option in RISC-V. It appears
-that loongarch uses -bios to boot EDK2 also as per
-docs/system/loongarch/virt.rst. But in RISC-V, EDK2 is S-mode payload
-and hence -bios can not be used. If we have to create ROM for S-mode
-payload, do we need to add a new qemu option? Also, I don't see
-enough space in the memmap of RISC-V virt machine for PAYLOAD_ROM
-region. So, I am not sure how to keep 2 flashes and add ROM region for
-S-mode payload. Let me know if I am missing some thing.
+When the RISC-V dt-bindings were accepted upstream in Linux, the base
+ISA etc had yet to be ratified. By the ratification of the base ISA,
+incompatible changes had snuck into the specifications - for example the
+Zicsr and Zifencei extensions were spun out of the base ISA.
 
-> We would keep two pflash regions, hopefully in a way that doesn't
-> break any existing users.
-> 
-Agree. While I agree with Philippe, I think we better solve the current
-problem by going back to v1 of the patch.
+Fast forward to today, and the reason for this patch.
+Currently the riscv,isa dt property permits only a specific subset of
+the ISA string - in particular it excludes version numbering.
+With the current constraints, it is not possible to discern whether
+"rv64i" means that the hart supports the fence.i instruction, for
+example.
+Future systems may choose to implement their own instruction fencing,
+perhaps using a vendor extension, or they may not implement the optional
+counter extensions. Software needs a way to determine this.
 
-Thanks,
-Sunil
+versioning schemes
+==================
+
+"Use the extension versions that are described in the ISA manual" you
+may say, and it's not like this has not been considered.
+Firstly, software that parses the riscv,isa property at runtime will
+need to contain a lookup table of some sort that maps arbitrary versions
+to versions it understands. There is not a consistent application of
+version number applied to extensions, with a higgledy-piggledy
+collection of tags, "bare" and version documents awaiting the reader on
+the "recently ratified extensions" page:
+https://wiki.riscv.org/display/HOME/Recently+Ratified+Extensions
+
+	As an aside, this is reflected in the patch too, since many
+	extensions have yet to appear in a release of the ISA specs,
+	and are defined by commits in their respective "working draft"
+	repositories.
+
+Secondly, there is an issue of backwards compatibility, whereby allowing
+numbers in the ISA string, some parsers may be broken. This would
+require an additional property to be created to even use the versions in
+this manner.
+
+boolean properties
+==================
+
+If a new property is needed, the whole approach may as well be looked at
+from the bottom up. A string with limited character choices etc is
+hardly the best approach for communicating extension information to
+software.
+
+Switching to using boolean properties, one per extension, allows us to
+define explicit meanings for the DT representation of each extension -
+rather than the current situation where different operating systems or
+other bits of software may impart different meanings to characters in
+the string. Clearly the best source of meanings is the specifications
+themselves, this just provides us the ability to choose at what point
+in time the meaning is set. If an extension changes incompatibility in
+the future, a new property will be required.
+
+Off-list, some of the RVI folks have committed to shoring up the wording
+in either the ISA specifications, the riscv-isa-manual or
+so that in the future, modifications to and additions or removals of
+features will require a new extension. Codifying that assertion
+somewhere would make it quite unlikely that compatibility would be
+broken, but we have the tools required to deal with it, if & when it
+crops up.
+It is in our collective interest, as consumers of extension meanings, to
+define a scheme that enforces compatibility.
+
+The use of boolean properties, rather than elements in a string, will
+also permit validation that the strings have a meaning, as well as
+potentially reject mutually exclusive combinations, or enforce
+dependencies between instructions. That would not be possible with the
+current dt-schema infrastructure for arbitrary strings, as we would need
+to add a riscv,isa parser to dt-validate!
+	That's not implemented in this patch, but rather left as
+	future work!
+
+acpi
+====
+
+The current ACPI ECR is based on having a string unfortunately, but
+ideally ACPI will move to another method, perhaps GUIDs, that give
+explicit meaning to extensions.
+
+parser simplicity
+=================
+
+Many systems that parse DT at runtime already implement an function that
+can check for the presence of boolean properties, rather than having to
+implement - although unfortunately for backwards compatibility with old
+dtbs, existing parsers may not be removable - which may greatly simplify
+dt parsing code. For example, in Linux, checking for an extension
+becomes as simple as:
+	of_property_present(node, "riscv,isa-extension-zicbom")
+
+vendor extensions
+=================
+
+Compared to riscv,isa, this proposed scheme promotes vendor extensions,
+oft touted as the strength of RISC-V, to first-class citizens.
+At present, extensions are defined as meaning what the RISC-V ISA
+specifications say they do. There is no realistic way of using that
+interface to provide cross-platform definitions for what vendor
+extensions mean. Vendor extensions may also have even less consistency
+than RVI do in terms of versioning, or no care about backwards
+compatibility.
+A boolean property allows us to assign explicit meanings on a per vendor
+extension basis, backed up by a description of their meanings.
+
+fin
+===
+
+Create a new file to store the extension meanings, each in the form
+riscv,isa-extension-<foo> and a new riscv,isa-base property to replace
+the missing aspect of riscv,isa - the base ISA implemented by a hart.
+As a starting point, properties were added for extensions currently used
+in Linux.
+
+Finally, mark riscv,isa as deprecated. o7.
+
+CC: Palmer Dabbelt <palmer@dabbelt.com>
+CC: Paul Walmsley <paul.walmsley@sifive.com>
+CC: Rob Herring <robh+dt@kernel.org>
+CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
+CC: Alistair Francis <alistair.francis@wdc.com>
+CC: Andrew Jones <ajones@ventanamicro.com>
+CC: Anup Patel <apatel@ventanamicro.com>
+CC: Atish Patra <atishp@atishpatra.org>
+CC: Jessica Clarke <jrtc27@jrtc27.com>
+CC: Rick Chen <rick@andestech.com>
+CC: Leo <ycliang@andestech.com>
+CC: linux-riscv@lists.infradead.org
+CC: qemu-riscv@nongnu.org
+CC: u-boot@lists.denx.de
+CC: devicetree@vger.kernel.org
+CC: linux-kernel@vger.kernel.org
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+I've tried to CC a few folks here that would care about this, but I am
+sure there are more. I'll go cross-post it to sw-dev, if it allows me to
+post there...
+---
+ .../devicetree/bindings/riscv/cpus.yaml       |  45 +--
+ .../devicetree/bindings/riscv/extensions.yaml | 259 ++++++++++++++++++
+ 2 files changed, 282 insertions(+), 22 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/riscv/extensions.yaml
+
+diff --git a/Documentation/devicetree/bindings/riscv/cpus.yaml b/Documentation/devicetree/bindings/riscv/cpus.yaml
+index 3d2934b15e80..446801fb7495 100644
+--- a/Documentation/devicetree/bindings/riscv/cpus.yaml
++++ b/Documentation/devicetree/bindings/riscv/cpus.yaml
+@@ -23,6 +23,9 @@ description: |
+   two cores, each of which has two hyperthreads, could be described as
+   having four harts.
+ 
++allOf:
++  - $ref: extensions.yaml
++
+ properties:
+   compatible:
+     oneOf:
+@@ -79,25 +82,6 @@ properties:
+     description:
+       The blocksize in bytes for the Zicboz cache operations.
+ 
+-  riscv,isa:
+-    description:
+-      Identifies the specific RISC-V instruction set architecture
+-      supported by the hart.  These are documented in the RISC-V
+-      User-Level ISA document, available from
+-      https://riscv.org/specifications/
+-
+-      Due to revisions of the ISA specification, some deviations
+-      have arisen over time.
+-      Notably, riscv,isa was defined prior to the creation of the
+-      Zicsr and Zifencei extensions and thus "i" implies
+-      "zicsr_zifencei".
+-
+-      While the isa strings in ISA specification are case
+-      insensitive, letters in the riscv,isa string must be all
+-      lowercase to simplify parsing.
+-    $ref: "/schemas/types.yaml#/definitions/string"
+-    pattern: ^rv(?:64|32)imaf?d?q?c?b?k?j?p?v?h?(?:[hsxz](?:[a-z])+)?(?:_[hsxz](?:[a-z])+)*$
+-
+   # RISC-V requires 'timebase-frequency' in /cpus, so disallow it here
+   timebase-frequency: false
+ 
+@@ -133,8 +117,13 @@ properties:
+       DMIPS/MHz, relative to highest capacity-dmips-mhz
+       in the system.
+ 
++oneOf:
++  - required:
++      - riscv,isa
++  - required:
++      - riscv,isa-base
++
+ required:
+-  - riscv,isa
+   - interrupt-controller
+ 
+ additionalProperties: true
+@@ -177,7 +166,13 @@ examples:
+                 i-tlb-size = <32>;
+                 mmu-type = "riscv,sv39";
+                 reg = <1>;
+-                riscv,isa = "rv64imafdc";
++                riscv,isa-base = "rv64i";
++                riscv,isa-extension-i;
++                riscv,isa-extension-m;
++                riscv,isa-extension-a;
++                riscv,isa-extension-f;
++                riscv,isa-extension-d;
++                riscv,isa-extension-c;
+                 tlb-split;
+                 cpu_intc1: interrupt-controller {
+                         #interrupt-cells = <1>;
+@@ -196,7 +191,13 @@ examples:
+                 device_type = "cpu";
+                 reg = <0>;
+                 compatible = "riscv";
+-                riscv,isa = "rv64imafdc";
++                riscv,isa-base = "rv64i";
++                riscv,isa-extension-i;
++                riscv,isa-extension-m;
++                riscv,isa-extension-a;
++                riscv,isa-extension-f;
++                riscv,isa-extension-d;
++                riscv,isa-extension-c;
+                 mmu-type = "riscv,sv48";
+                 interrupt-controller {
+                         #interrupt-cells = <1>;
+diff --git a/Documentation/devicetree/bindings/riscv/extensions.yaml b/Documentation/devicetree/bindings/riscv/extensions.yaml
+new file mode 100644
+index 000000000000..1b4d726f7174
+--- /dev/null
++++ b/Documentation/devicetree/bindings/riscv/extensions.yaml
+@@ -0,0 +1,259 @@
++# SPDX-License-Identifier: (GPL-2.0 OR MIT)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/riscv/extensions.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: RISC-V ISA extensions
++
++maintainers:
++  - Paul Walmsley <paul.walmsley@sifive.com>
++  - Palmer Dabbelt <palmer@sifive.com>
++  - Conor Dooley <conor@kernel.org>
++
++description: |
++  RISC-V has large number of extensions, some of which "standard" extensions,
++  meaning they are ratified by RISC-V International, and others are "vendor"
++  extensions.  This document defines properties that indicate whether a hart
++  supports a given extensions.
++
++  Once a standard extension has been ratified, no features can be added or
++  removed without the creation of a new extension for that sub- or super-set.
++  The properties for standard extensions therefore map to their originally
++  ratified states, with the exception of the I, Zicntr & Zihpm extensions.
++
++select:
++  properties:
++    compatible:
++      contains:
++        const: riscv
++
++properties:
++  riscv,isa:
++    description:
++      Identifies the specific RISC-V instruction set architecture
++      supported by the hart.  These are documented in the RISC-V
++      User-Level ISA document, available from
++      https://riscv.org/specifications/
++
++      Due to revisions of the ISA specification, some deviations
++      have arisen over time.
++      Notably, riscv,isa was defined prior to the creation of the
++      Zicsr and Zifencei extensions and thus "i" implies
++      "zicsr_zifencei".
++
++      While the isa strings in ISA specification are case
++      insensitive, letters in the riscv,isa string must be all
++      lowercase to simplify parsing.
++
++      This property has been deprecated due to disparity between the
++      extension at the time of its creation and ratification of the
++      base ISA.
++
++    $ref: /schemas/types.yaml#/definitions/string
++    pattern: ^rv(?:64|32)imaf?d?q?c?b?k?j?p?v?h?(?:[hsxz](?:[a-z])+)?(?:_[hsxz](?:[a-z])+)*$
++    deprecated: true
++
++  riscv,isa-base:
++    description:
++      The base ISA implemented by this hart, as described by the 20191213
++      version of the unprivileged ISA specification.
++    enum:
++      - rv32i
++      - rv64i
++
++  riscv,isa-extension-i:
++    type: boolean
++    description:
++      The base integer instruction set, as ratified in the 20191213 version of the
++      unprivileged ISA specification.
++
++  riscv,isa-extension-m:
++    type: boolean
++    description:
++      The standard M extension for integer multiplication and division, as
++      ratified in the 20191213 version of the unprivileged ISA specification.
++
++  riscv,isa-extension-a:
++    type: boolean
++    description:
++      The standard A extension for atomic instructions, as ratified in the
++      20191213 version of the unprivileged ISA specification.
++
++  riscv,isa-extension-f:
++    type: boolean
++    description:
++      The standard M extension for single-precision floating point, as
++      ratified in the 20191213 version of the unprivileged ISA specification.
++
++  riscv,isa-extension-d:
++    type: boolean
++    description:
++      The standard M extension for double-precision floating-point, as
++      ratified in the 20191213 version of the unprivileged ISA specification.
++
++  riscv,isa-extension-q:
++    type: boolean
++    description:
++      The standard M extension for quad-precision floating-point, as ratified in
++      the 20191213 version of the unprivileged ISA specification.
++
++  riscv,isa-extension-c:
++    type: boolean
++    description:
++      The standard M extension for compressed instructions, as ratified in the
++      20191213 version of the unprivileged ISA specification.
++
++  riscv,isa-extension-v:
++    type: boolean
++    description:
++      The standard V extension for vector operations, as ratified in-and-around
++      commit 7a6c8ae ("Fix text that describes vfmv.v.f encoding") of the
++      riscv-v-spec.
++
++  riscv,isa-extension-h:
++    type: boolean
++    description:
++      The standard h extension for hypervisors as ratified in the 20191213
++      version of the privileged ISA specification.
++
++  # Additional Standard Extensions, sorted by category then alphabetically
++
++  riscv,isa-extension-zicntr:
++    type: boolean
++    description:
++      The standard Zicntr extension for base counters and timers, as ratified
++      in the 20191213 version of the unprivileged ISA specification.
++
++  riscv,isa-extension-zicsr:
++    type: boolean
++    description:
++      The standard Zicsr extension for control and status register instructions,
++      as ratified in the 20191213 version of the unprivileged ISA specification.
++
++  riscv,isa-extension-zifencei:
++    type: boolean
++    description:
++      The standard Zifencei extension for instruction-fetch fence, as ratified
++      in the 20191213 version of the unprivileged ISA specification.
++
++  riscv,isa-extension-zihpm:
++    type: boolean
++    description:
++      The standard Zihpm extension for hardware performance counters, as
++      ratified in the 20191213 version of the unprivileged ISA specification.
++
++  riscv,isa-extension-zicbom:
++    type: boolean
++    description:
++      The standard Zicbom extension for base cache management operations as
++      ratified in commit 3dd606f ("Create cmobase-v1.0.pdf") of riscv-CMOs.
++
++  riscv,isa-extension-zicbop:
++    type: boolean
++    description:
++      The standard Zicbop extension for cache-block prefetch instructions as
++      ratified in commit 3dd606f ("Create cmobase-v1.0.pdf") of riscv-CMOs.
++
++  riscv,isa-extension-zicboz:
++    type: boolean
++    description:
++      The standard  Zicbomz extension for cache-block zeroing as ratified in
++      commit 3dd606f ("Create cmobase-v1.0.pdf") of riscv-CMOs.
++
++  riscv,isa-extension-zihintpause:
++    type: boolean
++    description: |
++      The standard Zihintpause extension for pause hints, as ratified in
++      commit d8ab5c7 ("Zihintpause is ratified") of the riscv-isa-manual.
++
++  riscv,isa-extension-zba:
++    type: boolean
++    description: |
++      The standard Zba bit-manipulation extension for address generation
++      acceleration instructions as ratified at commit 6d33919 ("Merge pull
++      request #158 from hirooih/clmul-fix-loop-end-condition") of
++      riscv-bitmanip.
++
++  riscv,isa-extension-zbb:
++    type: boolean
++    description: |
++      The standard Zbb bit-manipulation extension for basic bit-manipulation as
++      atified at commit 6d33919 ("Merge pull request #158 from
++      hirooih/clmul-fix-loop-end-condition") of riscv-bitmanip.
++
++  riscv,isa-extension-zbc:
++    type: boolean
++    description: |
++      The standard Zbc bit-manipulation extension for carry-less multiplication
++      as ratified at commit 6d33919 ("Merge pull request #158 from
++      hirooih/clmul-fix-loop-end-condition") of riscv-bitmanip.
++
++  riscv,isa-extension-zbs:
++    type: boolean
++    description: |
++      The standard Zbs bit-manipulation extension for single-bit instructions
++      as ratified at commit 6d33919 ("Merge pull request #158 from
++      hirooih/clmul-fix-loop-end-condition") of riscv-bitmanip.
++
++  riscv,isa-extension-ztso:
++    type: boolean
++    description:
++      The standard Ztso extension for total store ordering, as ratified in
++      commit 2e5236 ("Ztso is now ratified.") of the riscv-isa-manual.
++
++ # Standard Supervisor-level Extensions, sorted by category then alphabetically
++
++  'riscv,isa-extension-smaia':
++    type: boolean
++    description: |
++      The standard Smaia supervisor-level extension for the advanced interrupt
++      architecture for machine-mode-visible csr and behavioural changes to
++      interrupts as frozen at commit ccbddab ("Merge pull request #42 from
++      riscv/jhauser-2023-RC4") of riscv-aia.
++
++  riscv,isa-extension-ssaia:
++    type: boolean
++    description: |
++      The standard Ssaia supervisor-level extension for the advanced interrupt
++      architecture for supervisor-mode-visible csr and behavioural changes to
++      interrupts as frozen at commit ccbddab ("Merge pull request #42 from
++      riscv/jhauser-2023-RC4") of riscv-aia.
++
++  riscv,isa-extension-sscofpmf:
++    type: boolean
++    description: |
++      The standard supervisor-level extension for count overflow and mode-based
++      filtering as ratified at commit 01d1df0 ("Add ability to manually trigger
++      workflow. (#2)") of riscv-count-overflow.
++
++  riscv,isa-extension-sstc:
++    type: boolean
++    description:
++      The standard supervisor-level extension for time compare
++      as ratified at commit 3f9ed34 ("Add ability to manually trigger
++      workflow. (#2)") of riscv-time-compare.
++
++  riscv,isa-extension-svinval:
++    type: boolean
++    description:
++      The standard Svinval supervisor-level extension for fine-grained
++      address-translation cache invalidation as ratified in the 20191213 version
++      of the privileged ISA specification.
++
++  riscv,isa-extension-svnapot:
++    type: boolean
++    description:
++      The standard Svnapot supervisor-level extensions for napot translation
++      contiguity as ratified in the 20191213 version of the privileged ISA
++      specification.
++
++  riscv,isa-extension-svpbmt:
++    type: boolean
++    description:
++      The standard Svpbmt supervisor-level extensions for page-based memory
++      types as ratified in the 20191213 version of the privileged ISA
++      specification.
++
++additionalProperties: true
++...
+-- 
+2.39.2
+
 
