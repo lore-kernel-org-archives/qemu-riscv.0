@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7BCCC77B7A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 May 2023 11:40:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BA3CC7EE23
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 May 2023 13:43:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pzbyt-0000LI-Jg; Thu, 18 May 2023 07:39:39 -0400
+	id 1pzdux-0007ER-N5; Thu, 18 May 2023 09:43:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1pzbyq-0000Fv-0g
- for qemu-riscv@nongnu.org; Thu, 18 May 2023 07:39:36 -0400
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1pzdur-000723-B1
+ for qemu-riscv@nongnu.org; Thu, 18 May 2023 09:43:38 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1pzbym-0002XQ-C6
- for qemu-riscv@nongnu.org; Thu, 18 May 2023 07:39:35 -0400
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-3f475366514so13437825e9.2
- for <qemu-riscv@nongnu.org>; Thu, 18 May 2023 04:39:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1pzduk-0000D8-E8
+ for qemu-riscv@nongnu.org; Thu, 18 May 2023 09:43:37 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-510b6a249a8so3621652a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 18 May 2023 06:43:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1684409970; x=1687001970; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=brainfault-org.20221208.gappssmtp.com; s=20221208; t=1684417408; x=1687009408;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XrCVqwX7mW/VC1Gp5Sh7JCu+ALDhVLo30mip54py/BQ=;
- b=QboZXNYj1U05ge95+ZbSwWyrhcjLdL0QLCD4q46L2PocKXUvvkiySqGgrTPCodEzMU
- vq6Mb5OSK906Mt/8yagtZjAwowbBJyhPMWx4dWnUIQxyWyDL/3ox1iWNJ8McdYGQ/+7b
- 9yRPtgu3tnnQa7Cdvl+RGLqo/XgzgGa5cRf9yAEqqrHD4mdEfYp3zVdncWE1ypb6BAnb
- 95ZUdgPYo0RGLHj1ykT4eYNFUjcZjacNhkX4HOFU6+fLtno62Dgny81CjiIEECxU1zEQ
- 7+30IMAo0o+4V8q4XrHqvy0GQOL51gMYi/1BGXgY/HkSCvPBY86ytBVYYhWvujP675x+
- NhsA==
+ bh=syWYO51VRp94yF3opKnKmtPw35D4EIKzu5G0RvTFocs=;
+ b=KIkh+jl9bH64JH+lGhgRW+aN4MOnz7mlraSBy9II30ruBmycRDDg7ODankgfGNnv0D
+ KiydShM4L8gyE683YcQZOzekxwQjntX0yUvBTKfyUN6WqVBl7e6jUVeITILQ7QPJM3vz
+ eg0dyW4I0J00wYc85uo3rhiIAbW51EEV584H5CSCHbJjlAYrZCjaAFwHGWESscK9Bs80
+ GlfXFJ78KPTV3OyVEJCViTK6IpvzxOReO9oHoKAmLWg7q7HVrxj+1ujuDjpF+wjqq+Bm
+ 2d2ENEGd7Rt0ftR1nfgTRmfa39ETzaC8VAGBXHhgTjPspD9e+TT05ixfrT3Jc+DK0Bgj
+ ACcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684409970; x=1687001970;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20221208; t=1684417408; x=1687009408;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XrCVqwX7mW/VC1Gp5Sh7JCu+ALDhVLo30mip54py/BQ=;
- b=KjINNk/aQf32d9GI5DnPeI/3iOF2YXtt6e1QPIqSks+fRXpzP628DWYKVBKeFcmM/N
- 4ys73i0udEdY9JdK0dYBk3c7M22Oyl8J9WN3AWq1e5Dh4Jcsw1s7BgusIph9LtL7fCtY
- 6VfuEXn9NsrP1BueE5+heKSY/DsAXpxgon0kxc7zKxX6y59NxBINslKo+qRIGCci3DKm
- mxpXlokbxulZbjXEGDruJbdbkLLQWvyH+WfGaTb/ipIrYoitbs0J2ktgSbi4+1wfSSJ6
- izc9JPBZRmR2vxJ+h4CQUKJEflZ1OQ58tIXVddu4cpfD4tZgi0Ms520BlxrchCc2/Gzm
- 9sjg==
-X-Gm-Message-State: AC+VfDxZCeMR8uWX35b15+7QbKi9KIuuTqAb9aQYpsKtiCY+cmnyh9tV
- +hU/mP8H3SFL501jiUMcJpZX+Df630jAZtLpReo=
-X-Google-Smtp-Source: ACHHUZ49bRFv42npaLS3pU22/YvhRLgk7Tia/+LJUmBrsDSOh34XyhQ3u49qINYW1gRJgukhBL2yYg==
-X-Received: by 2002:a7b:c847:0:b0:3f5:42e:7229 with SMTP id
- c7-20020a7bc847000000b003f5042e7229mr1018556wml.41.1684409970403; 
- Thu, 18 May 2023 04:39:30 -0700 (PDT)
-Received: from localhost.localdomain
- (cpc98982-watf12-2-0-cust57.15-2.cable.virginm.net. [82.26.13.58])
- by smtp.gmail.com with ESMTPSA id
- p6-20020a1c7406000000b003f4272c2d10sm5083982wmc.1.2023.05.18.04.39.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 May 2023 04:39:30 -0700 (PDT)
-From: Rajnesh Kanwal <rkanwal@rivosinc.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, apatel@ventanamicro.com,
- Rajnesh Kanwal <rkanwal@rivosinc.com>
-Subject: [PATCH 5/6] target/riscv: Add M-mode virtual interrupt and IRQ
- filtering support.
-Date: Thu, 18 May 2023 12:38:37 +0100
-Message-Id: <20230518113838.130084-6-rkanwal@rivosinc.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230518113838.130084-1-rkanwal@rivosinc.com>
-References: <20230518113838.130084-1-rkanwal@rivosinc.com>
+ bh=syWYO51VRp94yF3opKnKmtPw35D4EIKzu5G0RvTFocs=;
+ b=MuUrXgAsHmBvCFYdSjIdrqv25jmz6EPoy7TnGaZLcRrf2uhOydOLFh41g3TMkVrDHQ
+ 0+l69e7NyHKrRPb/g4c0uHDuhhoOS+3YjYyBUTHkDfpK2NRKci6RaWlENUQKh5tz16nV
+ n0dZLUxa+KJCAubsJtWLOqb8RJSXmXKEvDEfTIbJz5+blOCjRsi4ZFa1Vj+wWeyl9OAi
+ lR25kw1uM8yCEVzxeGxop20fySn/84/ZleTwbCU1E4ybJ1WtgXB2zcVabZKnyJMfhhOG
+ GhTL4q9b8RghcE2ZvJKwBXBIw9OxxTz/pHvNPNi8Iy7rXvwZTYsQwWgLn1Qlu8O+kUb3
+ 3V0A==
+X-Gm-Message-State: AC+VfDyxhDa/SezEO8ZYUFTvLuRZzsVaIEbFhTRn6D4C+x6PtLlfVPfg
+ bqsIX01UR3Ncney+Wt4Zd7p1o/uEB0HBRYHoZ/FUxYeuZhrX5YEH1i4=
+X-Google-Smtp-Source: ACHHUZ4A4qtceoPHALKTZ04L44/TMQgiKjEqtoY0Gb45OdNwSBS6pGfJ6rdsC12vS6vgqVXUOyqh3OY+LpIDd0XGUdo=
+X-Received: by 2002:aa7:c25a:0:b0:50b:fb49:39c9 with SMTP id
+ y26-20020aa7c25a000000b0050bfb4939c9mr4549494edo.34.1684417408194; Thu, 18
+ May 2023 06:43:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=rkanwal@rivosinc.com; helo=mail-wm1-x329.google.com
+References: <20230518-thermos-sanitary-cf3fbc777ea1@wendy>
+ <20230518-4050231ca8dbe93c08cf9c9a@orel>
+In-Reply-To: <20230518-4050231ca8dbe93c08cf9c9a@orel>
+From: Anup Patel <anup@brainfault.org>
+Date: Thu, 18 May 2023 19:13:15 +0530
+Message-ID: <CAAhSdy07Mg_JBF+4ucGFiWdBKh-Ass5G_aUWqBqTnDSFp7S=0A@mail.gmail.com>
+Subject: Re: [PATCH v1] dt-bindings: riscv: deprecate riscv,isa
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Conor Dooley <conor.dooley@microchip.com>, palmer@dabbelt.com,
+ conor@kernel.org, 
+ Paul Walmsley <paul.walmsley@sifive.com>, Rob Herring <robh+dt@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Anup Patel <apatel@ventanamicro.com>, 
+ Atish Patra <atishp@atishpatra.org>, Jessica Clarke <jrtc27@jrtc27.com>, 
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
+ linux-riscv@lists.infradead.org, qemu-riscv@nongnu.org, u-boot@lists.denx.de, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: none client-ip=2a00:1450:4864:20::52e;
+ envelope-from=anup@brainfault.org; helo=mail-ed1-x52e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01,
+ T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,578 +98,694 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This change adds support for inserting virtual interrupts from M-mode
-into S-mode using mvien and mvip csrs. IRQ filtering is a use case of
-this change, i-e M-mode can stop delegating an interrupt to S-mode and
-instead enable it in MIE and receive those interrupts in M-mode and then
-selectively inject the interrupt using mvien and mvip.
+On Thu, May 18, 2023 at 4:02=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
+om> wrote:
+>
+> On Thu, May 18, 2023 at 09:58:30AM +0100, Conor Dooley wrote:
+> > intro
+> > =3D=3D=3D=3D=3D
+> >
+> > When the RISC-V dt-bindings were accepted upstream in Linux, the base
+> > ISA etc had yet to be ratified. By the ratification of the base ISA,
+> > incompatible changes had snuck into the specifications - for example th=
+e
+> > Zicsr and Zifencei extensions were spun out of the base ISA.
+> >
+> > Fast forward to today, and the reason for this patch.
+> > Currently the riscv,isa dt property permits only a specific subset of
+> > the ISA string - in particular it excludes version numbering.
+> > With the current constraints, it is not possible to discern whether
+> > "rv64i" means that the hart supports the fence.i instruction, for
+> > example.
+> > Future systems may choose to implement their own instruction fencing,
+> > perhaps using a vendor extension, or they may not implement the optiona=
+l
+> > counter extensions. Software needs a way to determine this.
+> >
+> > versioning schemes
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > "Use the extension versions that are described in the ISA manual" you
+> > may say, and it's not like this has not been considered.
+> > Firstly, software that parses the riscv,isa property at runtime will
+> > need to contain a lookup table of some sort that maps arbitrary version=
+s
+> > to versions it understands. There is not a consistent application of
+> > version number applied to extensions, with a higgledy-piggledy
+> > collection of tags, "bare" and version documents awaiting the reader on
+> > the "recently ratified extensions" page:
+> > https://wiki.riscv.org/display/HOME/Recently+Ratified+Extensions
+> >
+> >       As an aside, this is reflected in the patch too, since many
+> >       extensions have yet to appear in a release of the ISA specs,
+> >       and are defined by commits in their respective "working draft"
+> >       repositories.
+> >
+> > Secondly, there is an issue of backwards compatibility, whereby allowin=
+g
+> > numbers in the ISA string, some parsers may be broken. This would
+> > require an additional property to be created to even use the versions i=
+n
+> > this manner.
+> >
+> > boolean properties
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > If a new property is needed, the whole approach may as well be looked a=
+t
+> > from the bottom up. A string with limited character choices etc is
+> > hardly the best approach for communicating extension information to
+> > software.
+> >
+> > Switching to using boolean properties, one per extension, allows us to
+> > define explicit meanings for the DT representation of each extension -
+> > rather than the current situation where different operating systems or
+> > other bits of software may impart different meanings to characters in
+> > the string. Clearly the best source of meanings is the specifications
+> > themselves, this just provides us the ability to choose at what point
+> > in time the meaning is set. If an extension changes incompatibility in
+> > the future, a new property will be required.
+> >
+> > Off-list, some of the RVI folks have committed to shoring up the wordin=
+g
+> > in either the ISA specifications, the riscv-isa-manual or
+> > so that in the future, modifications to and additions or removals of
+> > features will require a new extension. Codifying that assertion
+> > somewhere would make it quite unlikely that compatibility would be
+> > broken, but we have the tools required to deal with it, if & when it
+> > crops up.
+> > It is in our collective interest, as consumers of extension meanings, t=
+o
+> > define a scheme that enforces compatibility.
+> >
+> > The use of boolean properties, rather than elements in a string, will
+> > also permit validation that the strings have a meaning, as well as
+> > potentially reject mutually exclusive combinations, or enforce
+> > dependencies between instructions. That would not be possible with the
+> > current dt-schema infrastructure for arbitrary strings, as we would nee=
+d
+> > to add a riscv,isa parser to dt-validate!
+> >       That's not implemented in this patch, but rather left as
+> >       future work!
+> >
+> > acpi
+> > =3D=3D=3D=3D
+> >
+> > The current ACPI ECR is based on having a string unfortunately, but
+> > ideally ACPI will move to another method, perhaps GUIDs, that give
+> > explicit meaning to extensions.
+> >
+> > parser simplicity
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > Many systems that parse DT at runtime already implement an function tha=
+t
+> > can check for the presence of boolean properties, rather than having to
+> > implement - although unfortunately for backwards compatibility with old
+> > dtbs, existing parsers may not be removable - which may greatly simplif=
+y
+> > dt parsing code. For example, in Linux, checking for an extension
+> > becomes as simple as:
+> >       of_property_present(node, "riscv,isa-extension-zicbom")
+> >
+> > vendor extensions
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > Compared to riscv,isa, this proposed scheme promotes vendor extensions,
+> > oft touted as the strength of RISC-V, to first-class citizens.
+> > At present, extensions are defined as meaning what the RISC-V ISA
+> > specifications say they do. There is no realistic way of using that
+> > interface to provide cross-platform definitions for what vendor
+> > extensions mean. Vendor extensions may also have even less consistency
+> > than RVI do in terms of versioning, or no care about backwards
+> > compatibility.
+> > A boolean property allows us to assign explicit meanings on a per vendo=
+r
+> > extension basis, backed up by a description of their meanings.
+> >
+> > fin
+> > =3D=3D=3D
+> >
+> > Create a new file to store the extension meanings, each in the form
+> > riscv,isa-extension-<foo> and a new riscv,isa-base property to replace
+> > the missing aspect of riscv,isa - the base ISA implemented by a hart.
+> > As a starting point, properties were added for extensions currently use=
+d
+> > in Linux.
+> >
+> > Finally, mark riscv,isa as deprecated. o7.
+> >
+> > CC: Palmer Dabbelt <palmer@dabbelt.com>
+> > CC: Paul Walmsley <paul.walmsley@sifive.com>
+> > CC: Rob Herring <robh+dt@kernel.org>
+> > CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>
+> > CC: Alistair Francis <alistair.francis@wdc.com>
+> > CC: Andrew Jones <ajones@ventanamicro.com>
+> > CC: Anup Patel <apatel@ventanamicro.com>
+> > CC: Atish Patra <atishp@atishpatra.org>
+> > CC: Jessica Clarke <jrtc27@jrtc27.com>
+> > CC: Rick Chen <rick@andestech.com>
+> > CC: Leo <ycliang@andestech.com>
+> > CC: linux-riscv@lists.infradead.org
+> > CC: qemu-riscv@nongnu.org
+> > CC: u-boot@lists.denx.de
+> > CC: devicetree@vger.kernel.org
+> > CC: linux-kernel@vger.kernel.org
+> > Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+> > ---
+> > I've tried to CC a few folks here that would care about this, but I am
+> > sure there are more. I'll go cross-post it to sw-dev, if it allows me t=
+o
+> > post there...
+> > ---
+> >  .../devicetree/bindings/riscv/cpus.yaml       |  45 +--
+> >  .../devicetree/bindings/riscv/extensions.yaml | 259 ++++++++++++++++++
+> >  2 files changed, 282 insertions(+), 22 deletions(-)
+> >  create mode 100644 Documentation/devicetree/bindings/riscv/extensions.=
+yaml
+> >
+> > diff --git a/Documentation/devicetree/bindings/riscv/cpus.yaml b/Docume=
+ntation/devicetree/bindings/riscv/cpus.yaml
+> > index 3d2934b15e80..446801fb7495 100644
+> > --- a/Documentation/devicetree/bindings/riscv/cpus.yaml
+> > +++ b/Documentation/devicetree/bindings/riscv/cpus.yaml
+> > @@ -23,6 +23,9 @@ description: |
+> >    two cores, each of which has two hyperthreads, could be described as
+> >    having four harts.
+> >
+> > +allOf:
+> > +  - $ref: extensions.yaml
+> > +
+> >  properties:
+> >    compatible:
+> >      oneOf:
+> > @@ -79,25 +82,6 @@ properties:
+> >      description:
+> >        The blocksize in bytes for the Zicboz cache operations.
+> >
+> > -  riscv,isa:
+> > -    description:
+> > -      Identifies the specific RISC-V instruction set architecture
+> > -      supported by the hart.  These are documented in the RISC-V
+> > -      User-Level ISA document, available from
+> > -      https://riscv.org/specifications/
+> > -
+> > -      Due to revisions of the ISA specification, some deviations
+> > -      have arisen over time.
+> > -      Notably, riscv,isa was defined prior to the creation of the
+> > -      Zicsr and Zifencei extensions and thus "i" implies
+> > -      "zicsr_zifencei".
+> > -
+> > -      While the isa strings in ISA specification are case
+> > -      insensitive, letters in the riscv,isa string must be all
+> > -      lowercase to simplify parsing.
+> > -    $ref: "/schemas/types.yaml#/definitions/string"
+> > -    pattern: ^rv(?:64|32)imaf?d?q?c?b?k?j?p?v?h?(?:[hsxz](?:[a-z])+)?(=
+?:_[hsxz](?:[a-z])+)*$
+> > -
+> >    # RISC-V requires 'timebase-frequency' in /cpus, so disallow it here
+> >    timebase-frequency: false
+> >
+> > @@ -133,8 +117,13 @@ properties:
+> >        DMIPS/MHz, relative to highest capacity-dmips-mhz
+> >        in the system.
+> >
+> > +oneOf:
+> > +  - required:
+> > +      - riscv,isa
+>
+> This is the part Anup keeps reminding me about. We can create better ways
+> to handle extensions in DT and ACPI, but we'll still need to parse ISA
+> strings to handle legacy DTs and holdouts that keep creating ISA strings,
+> at least during the deprecation period, since ISA strings are still "the
+> way to do it" according to the spec.
 
-Also, the spec doesn't mandate the interrupt to be actually supported
-in hardware. Which allows M-mode to assert virtual interrupts to S-mode
-that have no connection to any real interrupt events.
+Coming up with an alternate way in DT is fine but we can't deprecate
+ISA strings since ISA strings are widely used:
+1) Various bootloaders
+2) It is part of /proc/cpuinfo
+3) Hypervisors use it to communicate HW features to Guest/VM.
+Hypervisors can't get away from generating ISA strings because
+Hypervisors don't know what is running inside Guest/VM.
 
-This is defined as part of the AIA specification [0], "5.3 Interrupt
-filtering and virtual interrupts for supervisor level".
+In the case of ACPI, it is a very different situation. Like Sunil mentioned=
+,
+ACPI will always follow mechanisms defined by RVI (such as ISA string).
+Other ACPI approaches such as GUID for ISA extension are simply not
+scalable and will take a lot more memory for ACPI tables compared to
+ISA strings.
 
-[0]: https://github.com/riscv/riscv-aia/releases/download/1.0-RC4/riscv-interrupts-1.0-RC4.pdf
+>
+> Also, if we assume the wording in the spec does get shored up, then,
+> unless I'm missing something, the list of advantages for this boolean
+> proposal from your commit message would be
 
-Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
----
- target/riscv/cpu.c        |   3 +-
- target/riscv/cpu.h        |   8 ++
- target/riscv/cpu_bits.h   |   6 +
- target/riscv/cpu_helper.c |  26 +++-
- target/riscv/csr.c        | 279 ++++++++++++++++++++++++++++++++++----
- target/riscv/machine.c    |   3 +
- 6 files changed, 289 insertions(+), 36 deletions(-)
+IMO, we should try our best to have the wordings changed in RVI spec.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 90460cfe64..9557194a21 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -712,7 +712,8 @@ static bool riscv_cpu_has_work(CPUState *cs)
-      * Definition of the WFI instruction requires it to ignore the privilege
-      * mode and delegation registers, but respect individual enables
-      */
--    return riscv_cpu_all_pending(env) != 0;
-+    return riscv_cpu_all_pending(env) != 0 ||
-+        riscv_cpu_sirq_pending(env) != RISCV_EXCP_NONE;
- #else
-     return true;
- #endif
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index de55bfb775..07cf656471 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -190,6 +190,12 @@ struct CPUArchState {
-     uint64_t mie;
-     uint64_t mideleg;
- 
-+    /*
-+     * When mideleg[i]=0 and mvien[i]=1, sie[i] is no more
-+     * alias of mie[i] and needs to be maintained separatly.
-+     */
-+    uint64_t sie;
-+
-     target_ulong satp;   /* since: priv-1.10.0 */
-     target_ulong stval;
-     target_ulong medeleg;
-@@ -210,6 +216,8 @@ struct CPUArchState {
-     /* AIA CSRs */
-     target_ulong miselect;
-     target_ulong siselect;
-+    uint64_t mvien;
-+    uint64_t mvip;
- 
-     /* Hypervisor CSRs */
-     target_ulong hstatus;
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 59f0ffd9e1..0d32d2a5a7 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -735,6 +735,12 @@ typedef enum RISCVException {
- #define MIE_SSIE                           (1 << IRQ_S_SOFT)
- #define MIE_USIE                           (1 << IRQ_U_SOFT)
- 
-+/* Machine constants */
-+#define M_MODE_INTERRUPTS  ((uint64_t)(MIP_MSIP | MIP_MTIP | MIP_MEIP))
-+#define S_MODE_INTERRUPTS  ((uint64_t)(MIP_SSIP | MIP_STIP | MIP_SEIP))
-+#define VS_MODE_INTERRUPTS ((uint64_t)(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP))
-+#define HS_MODE_INTERRUPTS ((uint64_t)(MIP_SGEIP | VS_MODE_INTERRUPTS))
-+
- /* General PointerMasking CSR bits */
- #define PM_ENABLE       0x00000001ULL
- #define PM_CURRENT      0x00000002ULL
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 035437e0fb..681b4ae811 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -365,6 +365,10 @@ static int riscv_cpu_pending_to_irq(CPURISCVState *env,
-     return best_irq;
- }
- 
-+/*
-+ * Doesn't report interrupts inserted using mvip from M-mode firmware. Those
-+ * are returned in riscv_cpu_sirq_pending().
-+ */
- uint64_t riscv_cpu_all_pending(CPURISCVState *env)
- {
-     uint32_t gein = get_field(env->hstatus, HSTATUS_VGEIN);
-@@ -387,9 +391,10 @@ int riscv_cpu_sirq_pending(CPURISCVState *env)
- {
-     uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg &
-                     ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-+    uint64_t irqs_f = env->mvip & env->mvien & ~env->mideleg & env->sie;
- 
-     return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
--                                    irqs, env->siprio);
-+                                    irqs | irqs_f, env->siprio);
- }
- 
- int riscv_cpu_vsirq_pending(CPURISCVState *env)
-@@ -403,8 +408,8 @@ int riscv_cpu_vsirq_pending(CPURISCVState *env)
- 
- static int riscv_cpu_local_irq_pending(CPURISCVState *env)
- {
-+    uint64_t irqs, pending, mie, hsie, vsie, irqs_f;
-     int virq;
--    uint64_t irqs, pending, mie, hsie, vsie;
- 
-     /* Determine interrupt enable state of all privilege modes */
-     if (env->virt_enabled) {
-@@ -430,8 +435,11 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
-                                         irqs, env->miprio);
-     }
- 
-+    /* Check for virtual S-mode interrupts. */
-+    irqs_f = env->mvip & (env->mvien & ~env->mideleg) & env->sie;
-+
-     /* Check HS-mode interrupts */
--    irqs = pending & env->mideleg & ~env->hideleg & -hsie;
-+    irqs =  ((pending & env->mideleg & ~env->hideleg) | irqs_f) & -hsie;
-     if (irqs) {
-         return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
-                                         irqs, env->siprio);
-@@ -611,19 +619,21 @@ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts)
- 
- void riscv_cpu_interrupt(CPURISCVState *env)
- {
--    uint64_t gein, vsgein = 0, vstip = 0;
-+    uint64_t gein, vsgein = 0, vstip = 0, irqf = 0;
-     CPUState *cs = env_cpu(env);
- 
-     if (env->virt_enabled) {
-         gein = get_field(env->hstatus, HSTATUS_VGEIN);
-         vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
-+    } else {
-+        irqf = env->mvien & env->mvip & env->sie;
-     }
- 
-     vstip = env->vstime_irq ? MIP_VSTIP : 0;
- 
-     QEMU_IOTHREAD_LOCK_GUARD();
- 
--    if (env->mip | vsgein | vstip) {
-+    if (env->mip | vsgein | vstip | irqf) {
-         cpu_interrupt(cs, CPU_INTERRUPT_HARD);
-     } else {
-         cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
-@@ -1608,6 +1618,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-     bool async = !!(cs->exception_index & RISCV_EXCP_INT_FLAG);
-     target_ulong cause = cs->exception_index & RISCV_EXCP_INT_MASK;
-     uint64_t deleg = async ? env->mideleg : env->medeleg;
-+    bool s_injected = env->mvip & (1 << cause) & env->mvien &&
-+        !(env->mip & (1 << cause));
-     target_ulong tval = 0;
-     target_ulong tinst = 0;
-     target_ulong htval = 0;
-@@ -1698,8 +1710,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-                   __func__, env->mhartid, async, cause, env->pc, tval,
-                   riscv_cpu_get_trap_name(cause, async));
- 
--    if (env->priv <= PRV_S &&
--            cause < TARGET_LONG_BITS && ((deleg >> cause) & 1)) {
-+    if (env->priv <= PRV_S && cause < 64 &&
-+        (((deleg >> cause) & 1) || s_injected)) {
-         /* handle the trap in S-mode */
-         if (riscv_has_ext(env, RVH)) {
-             uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 041f0b3e2e..c1ca065a81 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1113,21 +1113,16 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
--/* Machine constants */
--
--#define M_MODE_INTERRUPTS  ((uint64_t)(MIP_MSIP | MIP_MTIP | MIP_MEIP))
--#define S_MODE_INTERRUPTS  ((uint64_t)(MIP_SSIP | MIP_STIP | MIP_SEIP | \
--                                      MIP_LCOFIP))
--#define VS_MODE_INTERRUPTS ((uint64_t)(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP))
--#define HS_MODE_INTERRUPTS ((uint64_t)(MIP_SGEIP | VS_MODE_INTERRUPTS))
--
- #define VSTOPI_NUM_SRCS 5
- 
--static const uint64_t delegable_ints = S_MODE_INTERRUPTS |
--                                           VS_MODE_INTERRUPTS;
--static const uint64_t vs_delegable_ints = VS_MODE_INTERRUPTS;
-+#define LOCAL_INTERRUPTS (~0x1FFF)
-+
-+static const uint64_t delegable_ints =
-+    S_MODE_INTERRUPTS | VS_MODE_INTERRUPTS | MIP_LCOFIP;
-+static const uint64_t vs_delegable_ints =
-+    (VS_MODE_INTERRUPTS | LOCAL_INTERRUPTS) & ~MIP_LCOFIP;
- static const uint64_t all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
--                                     HS_MODE_INTERRUPTS;
-+                                     HS_MODE_INTERRUPTS | LOCAL_INTERRUPTS;
- #define DELEGABLE_EXCPS ((1ULL << (RISCV_EXCP_INST_ADDR_MIS)) | \
-                          (1ULL << (RISCV_EXCP_INST_ACCESS_FAULT)) | \
-                          (1ULL << (RISCV_EXCP_ILLEGAL_INST)) | \
-@@ -1158,12 +1153,30 @@ static const target_ulong vs_delegable_excps = DELEGABLE_EXCPS &
- static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
-     SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
-     SSTATUS_SUM | SSTATUS_MXR | SSTATUS_VS;
--static const target_ulong sip_writable_mask = SIP_SSIP | MIP_USIP | MIP_UEIP |
--                                              SIP_LCOFIP;
-+
-+/*
-+ * Spec allows for bits 13:63 to be either read-only or writable.
-+ * So far we have interrupt LCOFIP in that region which is writable.
-+ *
-+ * Also, spec allows to inject virtual interrupts in this region even
-+ * without any hardware interrupts for that interrupt number.
-+ *
-+ * For now interrupt in 13:63 region are all kept writable. 13 being
-+ * LCOFIP and 14:63 being virtual only. Change this in future if we
-+ * introduce more interrupts that are not writable.
-+ */
-+
-+/* Bit STIP can be an alias of mip.STIP that's why it's writable in mvip. */
-+static const target_ulong mvip_writable_mask = MIP_SSIP | MIP_STIP | MIP_SEIP |
-+                                    LOCAL_INTERRUPTS;
-+static const target_ulong mvien_writable_mask = MIP_SSIP | MIP_SEIP |
-+                                    LOCAL_INTERRUPTS;
-+
-+static const target_ulong sip_writable_mask = SIP_SSIP | LOCAL_INTERRUPTS;
- static const target_ulong hip_writable_mask = MIP_VSSIP;
- static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP |
--                                               MIP_VSEIP;
--static const target_ulong vsip_writable_mask = MIP_VSSIP;
-+                                    MIP_VSEIP | LOCAL_INTERRUPTS;
-+static const target_ulong vsip_writable_mask = MIP_VSSIP | LOCAL_INTERRUPTS;
- 
- const bool valid_vm_1_10_32[16] = {
-     [VM_1_10_MBARE] = true,
-@@ -1559,6 +1572,52 @@ static RISCVException rmw_mieh(CPURISCVState *env, int csrno,
-     return ret;
- }
- 
-+static RISCVException rmw_mvien64(CPURISCVState *env, int csrno,
-+                                uint64_t *ret_val,
-+                                uint64_t new_val, uint64_t wr_mask)
-+{
-+    uint64_t mask = wr_mask & mvien_writable_mask;
-+
-+    if (ret_val) {
-+        *ret_val = env->mvien;
-+    }
-+
-+    env->mvien = (env->mvien & ~mask) | (new_val & mask);
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException rmw_mvien(CPURISCVState *env, int csrno,
-+                              target_ulong *ret_val,
-+                              target_ulong new_val, target_ulong wr_mask)
-+{
-+    uint64_t rval;
-+    RISCVException ret;
-+
-+    ret = rmw_mvien64(env, csrno, &rval, new_val, wr_mask);
-+    if (ret_val) {
-+        *ret_val = rval;
-+    }
-+
-+    return ret;
-+}
-+
-+static RISCVException rmw_mvienh(CPURISCVState *env, int csrno,
-+                                target_ulong *ret_val,
-+                                target_ulong new_val, target_ulong wr_mask)
-+{
-+    uint64_t rval;
-+    RISCVException ret;
-+
-+    ret = rmw_mvien64(env, csrno, &rval,
-+        ((uint64_t)new_val) << 32, ((uint64_t)wr_mask) << 32);
-+    if (ret_val) {
-+        *ret_val = rval >> 32;
-+    }
-+
-+    return ret;
-+}
-+
- static int read_mtopi(CPURISCVState *env, int csrno, target_ulong *val)
- {
-     int irq;
-@@ -1699,6 +1758,11 @@ static int rmw_xireg(CPURISCVState *env, int csrno, target_ulong *val,
-         priv = PRV_M;
-         break;
-     case CSR_SIREG:
-+        if (env->priv == PRV_S && env->mvien & MIP_SEIP &&
-+            env->siselect >= ISELECT_IMSIC_EIDELIVERY &&
-+            env->siselect <= ISELECT_IMSIC_EIE63) {
-+            goto done;
-+        }
-         iprio = env->siprio;
-         isel = env->siselect;
-         priv = PRV_S;
-@@ -1763,6 +1827,9 @@ static int rmw_xtopei(CPURISCVState *env, int csrno, target_ulong *val,
-         priv = PRV_M;
-         break;
-     case CSR_STOPEI:
-+        if (env->mvien & MIP_SEIP && env->priv == PRV_S) {
-+            goto done;
-+        }
-         priv = PRV_S;
-         break;
-     case CSR_VSTOPEI:
-@@ -2336,6 +2403,143 @@ static RISCVException rmw_miph(CPURISCVState *env, int csrno,
-     return ret;
- }
- 
-+/*
-+ * The function is written for two use-cases:
-+ * 1- To access mvip csr as is for m-mode access.
-+ * 2- To access sip as a combination of mip and mvip for s-mode.
-+ *
-+ * Both report bits 1, 5, 9 and 13:63 but with the exception of
-+ * STIP being read-only zero in case of mvip when sstc extension
-+ * is present.
-+ * Also, sip needs to be read-only zero when both mideleg[i] and
-+ * mvien[i] are zero but mvip needs to be an alias of mip.
-+ */
-+static RISCVException rmw_mvip64(CPURISCVState *env, int csrno,
-+                                uint64_t *ret_val,
-+                                uint64_t new_val, uint64_t wr_mask)
-+{
-+    RISCVCPU *cpu = env_archcpu(env);
-+    target_ulong ret_mip = 0;
-+    RISCVException ret;
-+    uint64_t old_mvip;
-+
-+    /*
-+     * mideleg[i]  mvien[i]
-+     *   0           0      No delegation. mvip[i] is alias of mip[i].
-+     *   0           1      mvip[i] becomes source of interrupt, mip bypassed.
-+     *   1           X      mip[i] is source of interrupt and mvip[i] aliases
-+     *                      mip[i].
-+     *
-+     *   So alias condition would be for bits:
-+     *      ((S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) & (mideleg | ~mvien)) |
-+     *          (!sstc & MIP_STIP)
-+     *
-+     *   Non-alias condition will be for bits:
-+     *      (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) & (~mideleg & mvien)
-+     *
-+     *  alias_mask denotes the bits that come from mip nalias_mask denotes bits
-+     *  that come from hvip.
-+     */
-+    uint64_t alias_mask = ((S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
-+        (env->mideleg | ~env->mvien)) | MIP_STIP;
-+    uint64_t nalias_mask = (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
-+        (~env->mideleg & env->mvien);
-+    uint64_t wr_mask_mvip;
-+    uint64_t wr_mask_mip;
-+
-+    /*
-+     * mideleg[i]  mvien[i]
-+     *   0           0      sip[i] read-only zero.
-+     *   0           1      sip[i] alias of mvip[i].
-+     *   1           X      sip[i] alias of mip[i].
-+     *
-+     *  Both alias and non-alias mask remain same for sip except for bits
-+     *  which are zero in both mideleg and mvien.
-+     */
-+    if (csrno == CSR_SIP) {
-+        /* Remove bits that are zero in both mideleg and mvien. */
-+        alias_mask &= (env->mideleg | env->mvien);
-+        nalias_mask &= (env->mideleg | env->mvien);
-+    }
-+
-+    /*
-+     * If sstc is present, mvip.STIP is not an alias of mip.STIP so clear
-+     * that our in mip returned value.
-+     */
-+    if (cpu->cfg.ext_sstc && (env->priv == PRV_M) &&
-+        get_field(env->menvcfg, MENVCFG_STCE)) {
-+        alias_mask &= ~MIP_STIP;
-+    }
-+
-+    wr_mask_mip = wr_mask & alias_mask & mvip_writable_mask;
-+    wr_mask_mvip = wr_mask & nalias_mask & mvip_writable_mask;
-+
-+    /*
-+     * For bits set in alias_mask, mvip needs to be alias of mip, so forward
-+     * this to rmw_mip.
-+     */
-+    ret = rmw_mip(env, CSR_MIP, &ret_mip, new_val, wr_mask_mip);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
-+
-+    old_mvip = env->mvip;
-+
-+    /*
-+     * Write to mvip. Update only non-alias bits. Alias bits were updated
-+     * in mip in rmw_mip above.
-+     */
-+    if (wr_mask_mvip) {
-+        env->mvip = (env->mvip & ~wr_mask_mvip) | (new_val & wr_mask_mvip);
-+
-+        /*
-+         * Given mvip is separate source from mip, we need to trigger interrupt
-+         * from here separately. Normally this happen from riscv_cpu_update_mip.
-+         */
-+        riscv_cpu_interrupt(env);
-+    }
-+
-+    if (ret_val) {
-+        ret_mip &= alias_mask;
-+        old_mvip &= nalias_mask;
-+
-+        *ret_val = old_mvip | ret_mip;
-+    }
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException rmw_mvip(CPURISCVState *env, int csrno,
-+                              target_ulong *ret_val,
-+                              target_ulong new_val, target_ulong wr_mask)
-+{
-+    uint64_t rval;
-+    RISCVException ret;
-+
-+    ret = rmw_mvip64(env, csrno, &rval, new_val, wr_mask);
-+    if (ret_val) {
-+        *ret_val = rval;
-+    }
-+
-+    return ret;
-+}
-+
-+static RISCVException rmw_mviph(CPURISCVState *env, int csrno,
-+                               target_ulong *ret_val,
-+                               target_ulong new_val, target_ulong wr_mask)
-+{
-+    uint64_t rval;
-+    RISCVException ret;
-+
-+    ret = rmw_mvip64(env, csrno, &rval,
-+        ((uint64_t)new_val) << 32, ((uint64_t)wr_mask) << 32);
-+    if (ret_val) {
-+        *ret_val = rval >> 32;
-+    }
-+
-+    return ret;
-+}
-+
- /* Supervisor Trap Setup */
- static RISCVException read_sstatus_i128(CPURISCVState *env, int csrno,
-                                         Int128 *val)
-@@ -2430,20 +2634,37 @@ static RISCVException rmw_sie64(CPURISCVState *env, int csrno,
-                                 uint64_t *ret_val,
-                                 uint64_t new_val, uint64_t wr_mask)
- {
-+    uint64_t nalias_mask = (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) &
-+        (~env->mideleg & env->mvien);
-+    uint64_t alias_mask = (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS) & env->mideleg;
-+    uint64_t sie_mask = wr_mask & nalias_mask;
-     RISCVException ret;
--    uint64_t mask = env->mideleg & S_MODE_INTERRUPTS;
- 
-+    /*
-+     * mideleg[i]  mvien[i]
-+     *   0           0      sie[i] read-only zero.
-+     *   0           1      sie[i] is a separate writable bit.
-+     *   1           X      sie[i] alias of mie[i].
-+     *
-+     *  Both alias and non-alias mask remain same for sip except for bits
-+     *  which are zero in both mideleg and mvien.
-+     */
-     if (env->virt_enabled) {
-         if (env->hvictl & HVICTL_VTI) {
-             return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-         }
-         ret = rmw_vsie64(env, CSR_VSIE, ret_val, new_val, wr_mask);
-+        if (ret_val) {
-+            *ret_val &= alias_mask;
-+        }
-     } else {
--        ret = rmw_mie64(env, csrno, ret_val, new_val, wr_mask & mask);
--    }
-+        ret = rmw_mie64(env, csrno, ret_val, new_val, wr_mask & alias_mask);
-+        if (ret_val) {
-+            *ret_val &= alias_mask;
-+            *ret_val |= env->sie & nalias_mask;
-+        }
- 
--    if (ret_val) {
--        *ret_val &= mask;
-+        env->sie = (env->sie & ~sie_mask) | (new_val & sie_mask);
-     }
- 
-     return ret;
-@@ -2641,7 +2862,7 @@ static RISCVException rmw_sip64(CPURISCVState *env, int csrno,
-                                 uint64_t new_val, uint64_t wr_mask)
- {
-     RISCVException ret;
--    uint64_t mask = env->mideleg & sip_writable_mask;
-+    uint64_t mask = (env->mideleg | env->mvien) & sip_writable_mask;
- 
-     if (env->virt_enabled) {
-         if (env->hvictl & HVICTL_VTI) {
-@@ -2649,11 +2870,12 @@ static RISCVException rmw_sip64(CPURISCVState *env, int csrno,
-         }
-         ret = rmw_vsip64(env, CSR_VSIP, ret_val, new_val, wr_mask);
-     } else {
--        ret = rmw_mip64(env, csrno, ret_val, new_val, wr_mask & mask);
-+        ret = rmw_mvip64(env, csrno, ret_val, new_val, wr_mask & mask);
-     }
- 
-     if (ret_val) {
--        *ret_val &= env->mideleg & S_MODE_INTERRUPTS;
-+        *ret_val &= (env->mideleg | env->mvien) &
-+            (S_MODE_INTERRUPTS | LOCAL_INTERRUPTS);
-     }
- 
-     return ret;
-@@ -2818,6 +3040,7 @@ static int read_vstopi(CPURISCVState *env, int csrno, target_ulong *val)
- 
-     *val = (iid & TOPI_IID_MASK) << TOPI_IID_SHIFT;
-     *val |= iprio;
-+
-     return RISCV_EXCP_NONE;
- }
- 
-@@ -4123,14 +4346,14 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_MTOPI]    = { "mtopi",    aia_any, read_mtopi },
- 
-     /* Virtual Interrupts for Supervisor Level (AIA) */
--    [CSR_MVIEN]    = { "mvien",    aia_any, read_zero, write_ignore },
--    [CSR_MVIP]     = { "mvip",     aia_any, read_zero, write_ignore },
-+    [CSR_MVIEN]    = { "mvien",    aia_any, NULL, NULL, rmw_mvien   },
-+    [CSR_MVIP]     = { "mvip",     aia_any, NULL, NULL, rmw_mvip    },
- 
-     /* Machine-Level High-Half CSRs (AIA) */
-     [CSR_MIDELEGH] = { "midelegh", aia_any32, NULL, NULL, rmw_midelegh },
-     [CSR_MIEH]     = { "mieh",     aia_any32, NULL, NULL, rmw_mieh     },
--    [CSR_MVIENH]   = { "mvienh",   aia_any32, read_zero,  write_ignore },
--    [CSR_MVIPH]    = { "mviph",    aia_any32, read_zero,  write_ignore },
-+    [CSR_MVIENH]   = { "mvienh",   aia_any32, NULL, NULL, rmw_mvienh   },
-+    [CSR_MVIPH]    = { "mviph",    aia_any32, NULL, NULL, rmw_mviph    },
-     [CSR_MIPH]     = { "miph",     aia_any32, NULL, NULL, rmw_miph     },
- 
-     /* Execution environment configuration */
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 3ce2970785..dd7bdbb691 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -377,6 +377,9 @@ const VMStateDescription vmstate_riscv_cpu = {
-         VMSTATE_UINT64(env.mip, RISCVCPU),
-         VMSTATE_UINT64(env.miclaim, RISCVCPU),
-         VMSTATE_UINT64(env.mie, RISCVCPU),
-+        VMSTATE_UINT64(env.mvien, RISCVCPU),
-+        VMSTATE_UINT64(env.mvip, RISCVCPU),
-+        VMSTATE_UINT64(env.sie, RISCVCPU),
-         VMSTATE_UINT64(env.mideleg, RISCVCPU),
-         VMSTATE_UINTTL(env.satp, RISCVCPU),
-         VMSTATE_UINTTL(env.stval, RISCVCPU),
--- 
-2.25.1
+>
+> * More character choices for name -- probably not a huge gain for ratifie=
+d
+>   extensions, since the boolean properties will likely still use the same
+>   name as the ISA string (riscv,isa-extension-<name>). But, for vendor
+>   extensions, this is indeed a major improvement, since vendor extension
+>   boolean property names may need to be extended in unambiguous ways to
+>   handle changes in the extension.
+>
+> * Simpler, more complete DT validation (but we still need a best effort
+>   for legacy ISA strings)
+>
+> * Simpler DT parsing (but we still need the current parser for legacy ISA
+>   strings)
+>
+> > +  - required:
+> > +      - riscv,isa-base
+> > +
+> >  required:
+> > -  - riscv,isa
+> >    - interrupt-controller
+> >
+> >  additionalProperties: true
+> > @@ -177,7 +166,13 @@ examples:
+> >                  i-tlb-size =3D <32>;
+> >                  mmu-type =3D "riscv,sv39";
+> >                  reg =3D <1>;
+> > -                riscv,isa =3D "rv64imafdc";
+> > +                riscv,isa-base =3D "rv64i";
+> > +                riscv,isa-extension-i;
+> > +                riscv,isa-extension-m;
+> > +                riscv,isa-extension-a;
+> > +                riscv,isa-extension-f;
+> > +                riscv,isa-extension-d;
+> > +                riscv,isa-extension-c;
 
+One downside of this new approach is it will increase the size of DTB.
+Imaging 50 such DT properties in 46 CPU DT nodes.
+
+Regards,
+Anup
+
+> >                  tlb-split;
+> >                  cpu_intc1: interrupt-controller {
+> >                          #interrupt-cells =3D <1>;
+> > @@ -196,7 +191,13 @@ examples:
+> >                  device_type =3D "cpu";
+> >                  reg =3D <0>;
+> >                  compatible =3D "riscv";
+> > -                riscv,isa =3D "rv64imafdc";
+> > +                riscv,isa-base =3D "rv64i";
+> > +                riscv,isa-extension-i;
+> > +                riscv,isa-extension-m;
+> > +                riscv,isa-extension-a;
+> > +                riscv,isa-extension-f;
+> > +                riscv,isa-extension-d;
+> > +                riscv,isa-extension-c;
+> >                  mmu-type =3D "riscv,sv48";
+> >                  interrupt-controller {
+> >                          #interrupt-cells =3D <1>;
+> > diff --git a/Documentation/devicetree/bindings/riscv/extensions.yaml b/=
+Documentation/devicetree/bindings/riscv/extensions.yaml
+> > new file mode 100644
+> > index 000000000000..1b4d726f7174
+> > --- /dev/null
+> > +++ b/Documentation/devicetree/bindings/riscv/extensions.yaml
+> > @@ -0,0 +1,259 @@
+> > +# SPDX-License-Identifier: (GPL-2.0 OR MIT)
+> > +%YAML 1.2
+> > +---
+> > +$id: http://devicetree.org/schemas/riscv/extensions.yaml#
+> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > +
+> > +title: RISC-V ISA extensions
+> > +
+> > +maintainers:
+> > +  - Paul Walmsley <paul.walmsley@sifive.com>
+> > +  - Palmer Dabbelt <palmer@sifive.com>
+> > +  - Conor Dooley <conor@kernel.org>
+> > +
+> > +description: |
+> > +  RISC-V has large number of extensions, some of which "standard" exte=
+nsions,
+>                ^ a                                       ^ are
+>
+> > +  meaning they are ratified by RISC-V International, and others are "v=
+endor"
+> > +  extensions.  This document defines properties that indicate whether =
+a hart
+> > +  supports a given extensions.
+>
+> drop 'a' or depluralize 'extensions'
+>
+> > +
+> > +  Once a standard extension has been ratified, no features can be adde=
+d or
+>
+> I'd change 'features' to 'changes in behavior', and then...
+>
+> > +  removed without the creation of a new extension for that sub- or sup=
+er-set.
+>
+> ...drop 'for that sub- or super-set'
+>
+> > +  The properties for standard extensions therefore map to their origin=
+ally
+> > +  ratified states, with the exception of the I, Zicntr & Zihpm extensi=
+ons.
+>
+> Can you elaborate on the exceptions? Or, if the exceptions are described
+> below, maybe a '(see below)' here would help ease the reader's
+> insecurities about their lack of knowledge about these exceptions, as
+> they'll see that the education is coming :-)
+>
+> > +
+> > +select:
+> > +  properties:
+> > +    compatible:
+> > +      contains:
+> > +        const: riscv
+> > +
+> > +properties:
+> > +  riscv,isa:
+> > +    description:
+> > +      Identifies the specific RISC-V instruction set architecture
+> > +      supported by the hart.  These are documented in the RISC-V
+> > +      User-Level ISA document, available from
+> > +      https://riscv.org/specifications/
+> > +
+> > +      Due to revisions of the ISA specification, some deviations
+> > +      have arisen over time.
+> > +      Notably, riscv,isa was defined prior to the creation of the
+> > +      Zicsr and Zifencei extensions and thus "i" implies
+> > +      "zicsr_zifencei".
+> > +
+> > +      While the isa strings in ISA specification are case
+>                                  ^ the
+>
+>                                  (but I see this was a faithful move
+>                                  of the current text, so maybe better
+>                                  to fix it up separately)
+>
+> > +      insensitive, letters in the riscv,isa string must be all
+> > +      lowercase to simplify parsing.
+> > +
+> > +      This property has been deprecated due to disparity between the
+> > +      extension at the time of its creation and ratification of the
+> > +      base ISA.
+> > +
+> > +    $ref: /schemas/types.yaml#/definitions/string
+> > +    pattern: ^rv(?:64|32)imaf?d?q?c?b?k?j?p?v?h?(?:[hsxz](?:[a-z])+)?(=
+?:_[hsxz](?:[a-z])+)*$
+> > +    deprecated: true
+> > +
+> > +  riscv,isa-base:
+> > +    description:
+> > +      The base ISA implemented by this hart, as described by the 20191=
+213
+> > +      version of the unprivileged ISA specification.
+> > +    enum:
+> > +      - rv32i
+> > +      - rv64i
+> > +
+> > +  riscv,isa-extension-i:
+> > +    type: boolean
+> > +    description:
+> > +      The base integer instruction set, as ratified in the 20191213 ve=
+rsion of the
+> > +      unprivileged ISA specification.
+> > +
+> > +  riscv,isa-extension-m:
+> > +    type: boolean
+> > +    description:
+> > +      The standard M extension for integer multiplication and division=
+, as
+> > +      ratified in the 20191213 version of the unprivileged ISA specifi=
+cation.
+> > +
+> > +  riscv,isa-extension-a:
+> > +    type: boolean
+> > +    description:
+> > +      The standard A extension for atomic instructions, as ratified in=
+ the
+> > +      20191213 version of the unprivileged ISA specification.
+> > +
+> > +  riscv,isa-extension-f:
+> > +    type: boolean
+> > +    description:
+> > +      The standard M extension for single-precision floating point, as
+>                       ^ F
+>
+> > +      ratified in the 20191213 version of the unprivileged ISA specifi=
+cation.
+> > +
+> > +  riscv,isa-extension-d:
+> > +    type: boolean
+> > +    description:
+> > +      The standard M extension for double-precision floating-point, as
+>                       ^ D
+>
+> > +      ratified in the 20191213 version of the unprivileged ISA specifi=
+cation.
+> > +
+> > +  riscv,isa-extension-q:
+> > +    type: boolean
+> > +    description:
+> > +      The standard M extension for quad-precision floating-point, as r=
+atified in
+>                       ^ Q
+>
+> > +      the 20191213 version of the unprivileged ISA specification.
+> > +
+> > +  riscv,isa-extension-c:
+> > +    type: boolean
+> > +    description:
+> > +      The standard M extension for compressed instructions, as ratifie=
+d in the
+>                       ^ C
+>
+> > +      20191213 version of the unprivileged ISA specification.
+> > +
+> > +  riscv,isa-extension-v:
+> > +    type: boolean
+> > +    description:
+> > +      The standard V extension for vector operations, as ratified in-a=
+nd-around
+> > +      commit 7a6c8ae ("Fix text that describes vfmv.v.f encoding") of =
+the
+> > +      riscv-v-spec.
+> > +
+> > +  riscv,isa-extension-h:
+> > +    type: boolean
+> > +    description:
+> > +      The standard h extension for hypervisors as ratified in the 2019=
+1213
+>                       ^ H (might as well keep the case consistent)
+>
+> > +      version of the privileged ISA specification.
+> > +
+> > +  # Additional Standard Extensions, sorted by category then alphabetic=
+ally
+>
+> Can we just do pure alphabetically? And the single-letter extensions abov=
+e
+> don't have a "sorted by" comment above them. I guess they need one, or
+> maybe they can also be alphabetical?
+>
+> > +
+> > +  riscv,isa-extension-zicntr:
+> > +    type: boolean
+> > +    description:
+> > +      The standard Zicntr extension for base counters and timers, as r=
+atified
+> > +      in the 20191213 version of the unprivileged ISA specification.
+> > +
+> > +  riscv,isa-extension-zicsr:
+> > +    type: boolean
+> > +    description:
+> > +      The standard Zicsr extension for control and status register ins=
+tructions,
+> > +      as ratified in the 20191213 version of the unprivileged ISA spec=
+ification.
+> > +
+> > +  riscv,isa-extension-zifencei:
+> > +    type: boolean
+> > +    description:
+> > +      The standard Zifencei extension for instruction-fetch fence, as =
+ratified
+> > +      in the 20191213 version of the unprivileged ISA specification.
+> > +
+> > +  riscv,isa-extension-zihpm:
+> > +    type: boolean
+> > +    description:
+> > +      The standard Zihpm extension for hardware performance counters, =
+as
+> > +      ratified in the 20191213 version of the unprivileged ISA specifi=
+cation.
+> > +
+> > +  riscv,isa-extension-zicbom:
+> > +    type: boolean
+> > +    description:
+> > +      The standard Zicbom extension for base cache management operatio=
+ns as
+> > +      ratified in commit 3dd606f ("Create cmobase-v1.0.pdf") of riscv-=
+CMOs.
+> > +
+> > +  riscv,isa-extension-zicbop:
+> > +    type: boolean
+> > +    description:
+> > +      The standard Zicbop extension for cache-block prefetch instructi=
+ons as
+> > +      ratified in commit 3dd606f ("Create cmobase-v1.0.pdf") of riscv-=
+CMOs.
+> > +
+> > +  riscv,isa-extension-zicboz:
+> > +    type: boolean
+> > +    description:
+> > +      The standard  Zicbomz extension for cache-block zeroing as ratif=
+ied in
+>                      ^ ^Zicboz
+>                      ^ extra space
+>
+> (The repetition is making my vision blur, so I'm feeling like I should
+> write a script to compare $a and $b, where $a is riscv,isa-extension-$a
+> and $b is 'The standard $b' to make sure they match :-) But I probably
+> won't...
+>
+> > +      commit 3dd606f ("Create cmobase-v1.0.pdf") of riscv-CMOs.
+> > +
+> > +  riscv,isa-extension-zihintpause:
+> > +    type: boolean
+> > +    description: |
+> > +      The standard Zihintpause extension for pause hints, as ratified =
+in
+> > +      commit d8ab5c7 ("Zihintpause is ratified") of the riscv-isa-manu=
+al.
+> > +
+> > +  riscv,isa-extension-zba:
+> > +    type: boolean
+> > +    description: |
+> > +      The standard Zba bit-manipulation extension for address generati=
+on
+> > +      acceleration instructions as ratified at commit 6d33919 ("Merge =
+pull
+> > +      request #158 from hirooih/clmul-fix-loop-end-condition") of
+> > +      riscv-bitmanip.
+> > +
+> > +  riscv,isa-extension-zbb:
+> > +    type: boolean
+> > +    description: |
+> > +      The standard Zbb bit-manipulation extension for basic bit-manipu=
+lation as
+> > +      atified at commit 6d33919 ("Merge pull request #158 from
+>          ^ ratified
+>
+> > +      hirooih/clmul-fix-loop-end-condition") of riscv-bitmanip.
+> > +
+> > +  riscv,isa-extension-zbc:
+> > +    type: boolean
+> > +    description: |
+> > +      The standard Zbc bit-manipulation extension for carry-less multi=
+plication
+> > +      as ratified at commit 6d33919 ("Merge pull request #158 from
+> > +      hirooih/clmul-fix-loop-end-condition") of riscv-bitmanip.
+> > +
+> > +  riscv,isa-extension-zbs:
+> > +    type: boolean
+> > +    description: |
+> > +      The standard Zbs bit-manipulation extension for single-bit instr=
+uctions
+> > +      as ratified at commit 6d33919 ("Merge pull request #158 from
+> > +      hirooih/clmul-fix-loop-end-condition") of riscv-bitmanip.
+> > +
+> > +  riscv,isa-extension-ztso:
+> > +    type: boolean
+> > +    description:
+> > +      The standard Ztso extension for total store ordering, as ratifie=
+d in
+> > +      commit 2e5236 ("Ztso is now ratified.") of the riscv-isa-manual.
+> > +
+> > + # Standard Supervisor-level Extensions, sorted by category then alpha=
+betically
+>
+> The spec only says alphabetical sorting for supervisor-level extensions,
+> no category.
+>
+> > +
+> > +  'riscv,isa-extension-smaia':
+> > +    type: boolean
+> > +    description: |
+> > +      The standard Smaia supervisor-level extension for the advanced i=
+nterrupt
+> > +      architecture for machine-mode-visible csr and behavioural change=
+s to
+> > +      interrupts as frozen at commit ccbddab ("Merge pull request #42 =
+from
+> > +      riscv/jhauser-2023-RC4") of riscv-aia.
+> > +
+> > +  riscv,isa-extension-ssaia:
+> > +    type: boolean
+> > +    description: |
+> > +      The standard Ssaia supervisor-level extension for the advanced i=
+nterrupt
+> > +      architecture for supervisor-mode-visible csr and behavioural cha=
+nges to
+> > +      interrupts as frozen at commit ccbddab ("Merge pull request #42 =
+from
+> > +      riscv/jhauser-2023-RC4") of riscv-aia.
+> > +
+> > +  riscv,isa-extension-sscofpmf:
+> > +    type: boolean
+> > +    description: |
+> > +      The standard supervisor-level extension for count overflow and m=
+ode-based
+>                      ^ Sscofpmf
+>
+> > +      filtering as ratified at commit 01d1df0 ("Add ability to manuall=
+y trigger
+> > +      workflow. (#2)") of riscv-count-overflow.
+> > +
+> > +  riscv,isa-extension-sstc:
+> > +    type: boolean
+> > +    description:
+> > +      The standard supervisor-level extension for time compare
+>                      ^ Sstc
+>
+> > +      as ratified at commit 3f9ed34 ("Add ability to manually trigger
+> > +      workflow. (#2)") of riscv-time-compare.
+> > +
+> > +  riscv,isa-extension-svinval:
+> > +    type: boolean
+> > +    description:
+> > +      The standard Svinval supervisor-level extension for fine-grained
+> > +      address-translation cache invalidation as ratified in the 201912=
+13 version
+> > +      of the privileged ISA specification.
+> > +
+> > +  riscv,isa-extension-svnapot:
+> > +    type: boolean
+> > +    description:
+> > +      The standard Svnapot supervisor-level extensions for napot trans=
+lation
+> > +      contiguity as ratified in the 20191213 version of the privileged=
+ ISA
+> > +      specification.
+> > +
+> > +  riscv,isa-extension-svpbmt:
+> > +    type: boolean
+> > +    description:
+> > +      The standard Svpbmt supervisor-level extensions for page-based m=
+emory
+> > +      types as ratified in the 20191213 version of the privileged ISA
+> > +      specification.
+> > +
+> > +additionalProperties: true
+> > +...
+> > --
+> > 2.39.2
+> >
+>
+> I'll take your word for it on the versions/dates/commit hashes referenced=
+,
+> at least until we get closer to actually merging this.
+>
+> Thanks,
+> drew
 
