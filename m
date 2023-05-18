@@ -4,76 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92E4CC7EE23
-	for <qemu-riscv@archiver.kernel.org>; Thu, 18 May 2023 15:21:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28724C77B7A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 18 May 2023 15:35:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pzfRC-00070T-Hm; Thu, 18 May 2023 11:21:07 -0400
+	id 1pzfea-0005ol-Lb; Thu, 18 May 2023 11:34:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <loic@rivosinc.com>) id 1pzfR9-0006zr-LS
- for qemu-riscv@nongnu.org; Thu, 18 May 2023 11:21:03 -0400
-Received: from mail-yw1-x1132.google.com ([2607:f8b0:4864:20::1132])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <loic@rivosinc.com>) id 1pzfR7-0002na-7w
- for qemu-riscv@nongnu.org; Thu, 18 May 2023 11:21:03 -0400
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-561a33b6d63so26880787b3.1
- for <qemu-riscv@nongnu.org>; Thu, 18 May 2023 08:21:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20221208.gappssmtp.com; s=20221208; t=1684423259; x=1687015259; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sTwXrNh0Ep9xOR8C05db2uNg4hHrqrdrXo6qYkVmN0c=;
- b=YKIGDrkX5aWztG25z8SJyu5AhcjNJcsZCTDWj4+tqKARDtPp/iXzNMr2svVKqDk1yW
- lXVxVAy/F0nb523AqzBHu+Z9FRWC4UTc0DT9xTRWco3Yu9Uyl+oV9XPkxMiodl+9GHaN
- Jp8RAQpvT3zeLns/S0H38euSydmzCTEjjIxsuw0yVzuW1JDWC0nNhYdOQ8Zl0mX51fUe
- +VcBQZuPDB70bzU34B7NtQvK7O4/BPRWklH465PpBDW1hHyzJBatpAlM1AsTJW+gLdcX
- 84A1PudQxZFW4wgSZCdCrx4Ci9e0vuQBya9sDzS+78bWrBiQsyyhv5QTyla2oXlHKbeD
- qe1w==
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1pzfeY-0005ng-M2
+ for qemu-riscv@nongnu.org; Thu, 18 May 2023 11:34:54 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1pzfeW-00054h-V8
+ for qemu-riscv@nongnu.org; Thu, 18 May 2023 11:34:54 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1684424092;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=92T2/1p7R9xALop+yhb4HOiwXwISYJn1Hfp3n7oPYmM=;
+ b=DrjfrXAtHd+5/vzjYw2lwOyiWyMEFlIQyW8EpPCbyUoouh8LkcQ4CDO3+VG8E2lHhGpUQw
+ KAx9nJ/TTGZclI2WdfZU5fLI1d1DOgv3TcaRlCgCoZayMqk8PC1OV9Vm7zanGEQdFox5ZQ
+ FAK5r2BXRU8tIuayBcy+tLBVL2yDNr8=
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
+ [209.85.215.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-209-OzXdm5toNNmWjElnk6SQvQ-1; Thu, 18 May 2023 11:34:50 -0400
+X-MC-Unique: OzXdm5toNNmWjElnk6SQvQ-1
+Received: by mail-pg1-f200.google.com with SMTP id
+ 41be03b00d2f7-53425d37f33so1259306a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 18 May 2023 08:34:50 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684423259; x=1687015259;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sTwXrNh0Ep9xOR8C05db2uNg4hHrqrdrXo6qYkVmN0c=;
- b=lmDd97FDwakxIS1cKj4UonN75D76S5Bs+9pEmrOdEVt2kGhAjgWfDsfDlftAbFPBsW
- pswAW95Xpbv2sQ1/BaeDg6FZCToTrm69B+s/ydWK/Rgl/5bbYP1TnzVss18hxVxJAaij
- JW2ABI5JeDcrBqwVuWhz3hhnWW/gon7Rra6+esUREOxGys6eBKj31DxiSIfyA4Mgc4Xx
- PwLcwE5qXKhiKThyf94hLaH89OzucEulKsx2Jul1YodPX1CeGmpB/6INt6CMHL0HvuBB
- RM+lczujcM8O6hjxiZSUrQ6GOl+znHOh5u8E8ohaBzMdqH6sfWJTjgTXN6uP1C6udWt8
- VC/Q==
-X-Gm-Message-State: AC+VfDzPMto5pArTtXfexvDa6tr69HVd1t5l9LhXOG8RMD0H30QmpcDn
- mFG16/Lph3BarUNTpGpGFC0rMJrTwJ1twrpteaM+EQ==
-X-Google-Smtp-Source: ACHHUZ5fOqVdI29uGSfPBrXkJ3RUJ9YhUxXJuyv8Bz5x7p4HkAbkTnOpkILgmgZUFRw42V5ViHu0SmzhBbhThdY2kK8=
-X-Received: by 2002:a0d:cc02:0:b0:561:e7bb:1b20 with SMTP id
- o2-20020a0dcc02000000b00561e7bb1b20mr1438850ywd.34.1684423259425; Thu, 18 May
- 2023 08:20:59 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1684424089; x=1687016089;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:in-reply-to
+ :mime-version:references:from:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=92T2/1p7R9xALop+yhb4HOiwXwISYJn1Hfp3n7oPYmM=;
+ b=ivnDikHBU/F1oH9iiCq/KWh5MY27XLHuRw8QP096OdngO0hw7tGC6RjOIJimRcVlyQ
+ yaXXf75LdkHj19g+f6MtwgLHZlhFpOn/hZczO2l8C8UNcYjyKC/tp7POPGYFkQ/mOJxK
+ ze4GxT6ve0L4JMSpRJ5WQfhBYALthBvhO4GwN1V2d1B51D5+i29xRVfgiLfQjDUrCmL+
+ 50l7Pozq0o2kre8HqF0bQn4wDJjDE2LNrviuYTw93syH9JUJC/e0dsnHd6d3uwLq3GfY
+ r1NjIkBJ1i2Ap3zQnCwO7GIy+Dy+pvIoBZwcQbljuC0dc/H8v9ht+hxKSjCm3YjdO33s
+ 8lLA==
+X-Gm-Message-State: AC+VfDyq0EdMW5CwK4R8jqLW7ElHIBCvufFIBdRj7ZvrvOfuiVOpwBpf
+ kQZvUbVwrDlFUdi14RuniEu69r5TyyWJer7tqSpxLqFIidvZIxngmp07VaD9fSx3ohhnjZO83tJ
+ kelfsp4ESU0E82Ep89YZc6BUIAU+m8EE=
+X-Received: by 2002:a17:90a:fe93:b0:250:d293:5da0 with SMTP id
+ co19-20020a17090afe9300b00250d2935da0mr3018583pjb.17.1684424088975; 
+ Thu, 18 May 2023 08:34:48 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ62jLH/n4jmxcgDPZevsf5KlD8tkpxkugwqPskxlOwI9RhjWF5azsKIySkU1XPbaqRjKW1hhu9ftXdf/JRPe/o=
+X-Received: by 2002:a17:90a:fe93:b0:250:d293:5da0 with SMTP id
+ co19-20020a17090afe9300b00250d2935da0mr3018553pjb.17.1684424088604; Thu, 18
+ May 2023 08:34:48 -0700 (PDT)
+Received: from 744723338238 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 18 May 2023 08:34:47 -0700
+From: Andrea Bolognani <abologna@redhat.com>
+References: <20230425102545.162888-1-sunilvl@ventanamicro.com>
+ <b520d913-27a9-dea5-53c8-af1cdd967ab2@canonical.com>
+ <ZFiRr8d2zyAJlZJv@sunil-laptop>
+ <CABJz62OTBEOMzcXLYc=DqRwH8N4DP=o0-kCfALwoREZVyOxLPg@mail.gmail.com>
+ <a8dd5f20-30ab-903a-6bd0-15c6a91fdf52@linaro.org>
 MIME-Version: 1.0
-References: <20230518113838.130084-1-rkanwal@rivosinc.com>
- <20230518113838.130084-3-rkanwal@rivosinc.com>
-In-Reply-To: <20230518113838.130084-3-rkanwal@rivosinc.com>
-From: =?UTF-8?B?TG/Dr2MgTGVmb3J0?= <loic@rivosinc.com>
-Date: Thu, 18 May 2023 17:20:48 +0200
-Message-ID: <CAGKm2NK3+46Te9bFwmyAXkRy3RVXXe61Zz1BYdPaZqxMoJ7HHA@mail.gmail.com>
-Subject: Re: [PATCH 2/6] target/riscv: Check for async flag in case of
- RISCV_EXCP_SEMIHOST.
-To: Rajnesh Kanwal <rkanwal@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, 
- apatel@ventanamicro.com
-Content-Type: multipart/alternative; boundary="00000000000007a7cd05fbf95a74"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1132;
- envelope-from=loic@rivosinc.com; helo=mail-yw1-x1132.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+In-Reply-To: <a8dd5f20-30ab-903a-6bd0-15c6a91fdf52@linaro.org>
+Date: Thu, 18 May 2023 08:34:47 -0700
+Message-ID: <CABJz62NKZMoEkHZxXa3t11Um9LedJ8jw47-gDm+8_+vgxKZ4Mg@mail.gmail.com>
+Subject: Re: [PATCH v2] hw/riscv: virt: Assume M-mode FW in pflash0 only when
+ "-bios none"
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: Sunil V L <sunilvl@ventanamicro.com>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, qemu-devel@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=abologna@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,86 +110,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---00000000000007a7cd05fbf95a74
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Is there a reason to keep RISCV_EXCP_SEMIHOST handling separate from
-other exceptions?
-Otherwise it could be moved in the switch block just a few lines below.
-
-On Thu, May 18, 2023 at 1:39=E2=80=AFPM Rajnesh Kanwal <rkanwal@rivosinc.co=
-m> wrote:
-
-> RISCV_EXCP_SEMIHOST is set to 0x10, which can also be a local
-> interrupt as well. This change adds a check for async flag
-> before invoking semihosting logic.
+On Wed, May 17, 2023 at 02:47:42PM +0200, Philippe Mathieu-Daud=C3=A9 wrote=
+:
+> > > On Mon, May 08, 2023 at 07:37:23AM +0200, Heinrich Schuchardt wrote:
+> > > > On amd64 and arm64 unit=3D0 is used for code and unit=3D1 is used f=
+or variables.
+> > > > Shouldn't riscv64 do the same?
+> >
+> > Good catch, I had missed that!
 >
-> Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
-> ---
->  target/riscv/cpu_helper.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> This is a design mistake spreading.
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 57d04385f1..c78a2a9514 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1602,7 +1602,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->      target_ulong htval =3D 0;
->      target_ulong mtval2 =3D 0;
+> What EDK2 maintainers want is one Read-Only + Exec region for CODE and
+> one Read-Write + NoExec region for VARS.
 >
-> -    if  (cause =3D=3D RISCV_EXCP_SEMIHOST) {
-> +    if  (!async && cause =3D=3D RISCV_EXCP_SEMIHOST) {
->          do_common_semihosting(cs);
->          env->pc +=3D 4;
->          return;
-> --
-> 2.25.1
->
->
->
+> QEMU never implemented correctly pflash bank (multiple sectors) write
+> protected.
 
---00000000000007a7cd05fbf95a74
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Does setting -drive if=3Dpflash,unit=3D0,readonly=3Don not do the trick?
 
-<div dir=3D"ltr">Is there a reason=C2=A0to keep RISCV_EXCP_SEMIHOST handlin=
-g=C2=A0separate from other=C2=A0exceptions?<div>Otherwise it could be moved=
- in the switch=C2=A0block just a few lines below.</div></div><br><div class=
-=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, May 18, 2023=
- at 1:39=E2=80=AFPM Rajnesh Kanwal &lt;<a href=3D"mailto:rkanwal@rivosinc.c=
-om">rkanwal@rivosinc.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail=
-_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
-,204);padding-left:1ex">RISCV_EXCP_SEMIHOST is set to 0x10, which can also =
-be a local<br>
-interrupt as well. This change adds a check for async flag<br>
-before invoking semihosting logic.<br>
-<br>
-Signed-off-by: Rajnesh Kanwal &lt;<a href=3D"mailto:rkanwal@rivosinc.com" t=
-arget=3D"_blank">rkanwal@rivosinc.com</a>&gt;<br>
----<br>
-=C2=A0target/riscv/cpu_helper.c | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
-index 57d04385f1..c78a2a9514 100644<br>
---- a/target/riscv/cpu_helper.c<br>
-+++ b/target/riscv/cpu_helper.c<br>
-@@ -1602,7 +1602,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)<br>
-=C2=A0 =C2=A0 =C2=A0target_ulong htval =3D 0;<br>
-=C2=A0 =C2=A0 =C2=A0target_ulong mtval2 =3D 0;<br>
-<br>
--=C2=A0 =C2=A0 if=C2=A0 (cause =3D=3D RISCV_EXCP_SEMIHOST) {<br>
-+=C2=A0 =C2=A0 if=C2=A0 (!async &amp;&amp; cause =3D=3D RISCV_EXCP_SEMIHOST=
-) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0do_common_semihosting(cs);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0env-&gt;pc +=3D 4;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
--- <br>
-2.25.1<br>
-<br>
-<br>
-</blockquote></div>
+> When EDK2 (x86, OVMF) was tried on QEMU, QEMU was using a single pflash.
+> To separate CODE/VARS, a second pflash was added, the first one being
+> "locked" into Read-Only mode. Using a pflash allowed the firmware to
+> identify device size using pflash CFI commands.
+>
+> Then this design was copied to the ARM virt board for EDK2 needs.
+>
+> In retrospective, this design was declared a mistake, since a simple
+> ROM region for the CODE is sufficient, and much simpler [*].
+>
+> Thankfully the Loongarch64 virt machine started cleanly avoiding the
+> previous design flaw. It provides a ROM for CODE and pflash for VARS.
 
---00000000000007a7cd05fbf95a74--
+Based on the documentation both in QEMU and edk2, it looks like a
+single file is used? I haven't seen an example where the pflash is
+used to provide a R/W area for VARS.
+
+Note that the current version of the firmware.json standard doesn't
+include a way to describe builds that have to be consumed by loading
+the CODE via -bios and the VARS via pflash.
+
+This is likely an artifact of codifying existing usage (x86/arm) and
+could probably be fixed, but the point remains that there is
+currently no way to represent such a build in a way that makes it
+possible for consumers such as libvirt to automatically pick it up.
+
+> [*] Having 2 distinct pflash is useful for non-virt machines where the
+>     firmware might want to (re)program the CODE region, in the "capsule
+>     update" scenario. This scenario is irrelevant for virt machines,
+>     since a guest will never update its CODE. CODE is updated by the
+>     host.
+
+Yeah, this makes sense.
+
+But I don't understand what's wrong with using a R/O pflash for CODE
+as opposed to -bios? What makes that approach so problematic? You're
+still going to need to use pflash for VARS anyway...
+
+--=20
+Andrea Bolognani / Red Hat / Virtualization
+
 
