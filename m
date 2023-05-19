@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EF5BC77B7A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 19 May 2023 02:26:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D040C77B7A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 May 2023 02:38:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pzpms-0004UG-W2; Thu, 18 May 2023 22:24:11 -0400
+	id 1pzq0T-0003pa-EW; Thu, 18 May 2023 22:38:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pzpml-0004Rk-H0; Thu, 18 May 2023 22:24:05 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pzpmh-0002AI-NH; Thu, 18 May 2023 22:24:02 -0400
-Received: from localhost.localdomain (unknown [61.165.33.195])
- by APP-01 (Coremail) with SMTP id qwCowACHjw+x3WZkAeNjAQ--.12622S5;
- Fri, 19 May 2023 10:23:49 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH 3/7] disas/riscv.c: Support disas for Zcm* extensions
-Date: Fri, 19 May 2023 10:19:22 +0800
-Message-Id: <20230519021926.15362-4-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230519021926.15362-1-liweiwei@iscas.ac.cn>
-References: <20230519021926.15362-1-liweiwei@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <yin.wang@intel.com>)
+ id 1pzq0S-0003pE-1J; Thu, 18 May 2023 22:38:12 -0400
+Received: from mga02.intel.com ([134.134.136.20])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <yin.wang@intel.com>)
+ id 1pzq0Q-0004rB-2c; Thu, 18 May 2023 22:38:11 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1684463890; x=1715999890;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=TxyQsqyqnOhTBL2/T7k+HrhRFRAcxy9Mkce5NYYJ2w4=;
+ b=UmnaJH8ifEeshVimL/rq+5s7pgo4ab6rMbTCNynjNbyBeUCU/3t0fg08
+ 2Szah5b1GmfQ1JOS0/OM1+3K20FmTwyJwg66ru5hmugJ21ibhlHLyAwKo
+ zmuZAVUbxkzqbdAxcml8zjTq1VLa6TF/7ENn+UGMc65ZTUmP2Et1x3F/E
+ 65d87XFjGBOzi1Ey2HJhC3hgjLtf6EQpTuJK+cyqktdVLY8IW8v1hAXB9
+ 24syZ4+JVl7EsxqoK+ZDweo2qUWYinoVz4okfmNhr5OnLZBrLahr82dCs
+ hjnGgmaKQvKxSL+AtqFNlv/QduWTDxySEWfqAt6qHWwd1sDNyonDLT8bz g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10714"; a="341696108"
+X-IronPort-AV: E=Sophos;i="6.00,175,1681196400"; d="scan'208";a="341696108"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+ by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 May 2023 19:38:03 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10714"; a="792185886"
+X-IronPort-AV: E=Sophos;i="6.00,175,1681196400"; d="scan'208";a="792185886"
+Received: from yin-optiplex-7090.sh.intel.com ([10.239.160.32])
+ by FMSMGA003.fm.intel.com with ESMTP; 18 May 2023 19:38:00 -0700
+From: Yin Wang <yin.wang@intel.com>
+To: qemu-devel@nongnu.org
+Cc: Yin Wang <yin.wang@intel.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH v5] hw/riscv: qemu crash when NUMA nodes exceed available CPUs
+Date: Fri, 19 May 2023 10:37:58 +0800
+Message-Id: <20230519023758.1759434-1-yin.wang@intel.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACHjw+x3WZkAeNjAQ--.12622S5
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZF17Jry3ZFyxAF45Xry7Jrb_yoW8Jw4rpr
- yrur45JrZ8Cay7Ww1fXryUCan8J395KrWIqFyFyw1fWr9xAFW5ur1DJa4aqrykGrWxJF4x
- uw15Grn8AFs7Aa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPE14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
- x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j6F4U
- JwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
- IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
- M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
- kIc2xKxwCY02Avz4vE14v_Gr1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_
- Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17
- CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0
- I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I
- 8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73
- UjIFyTuYvjfUOWrWUUUUU
-X-Originating-IP: [61.165.33.195]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+Received-SPF: pass client-ip=134.134.136.20; envelope-from=yin.wang@intel.com;
+ helo=mga02.intel.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -79,57 +79,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Support disas for Zcmt* instructions only when related extensions
-are supported.
+Command "qemu-system-riscv64 -machine virt
+-m 2G -smp 1 -numa node,mem=1G -numa node,mem=1G"
+would trigger this problem.Backtrace with:
+ #0  0x0000555555b5b1a4 in riscv_numa_get_default_cpu_node_id  at ../hw/riscv/numa.c:211
+ #1  0x00005555558ce510 in machine_numa_finish_cpu_init  at ../hw/core/machine.c:1230
+ #2  0x00005555558ce9d3 in machine_run_board_init  at ../hw/core/machine.c:1346
+ #3  0x0000555555aaedc3 in qemu_init_board  at ../softmmu/vl.c:2513
+ #4  0x0000555555aaf064 in qmp_x_exit_preconfig  at ../softmmu/vl.c:2609
+ #5  0x0000555555ab1916 in qemu_init  at ../softmmu/vl.c:3617
+ #6  0x000055555585463b in main  at ../softmmu/main.c:47
+This commit fixes the issue by adding parameter checks.
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Yin Wang <yin.wang@intel.com>
 ---
- disas/riscv.c | 20 ++++++++++++--------
- 1 file changed, 12 insertions(+), 8 deletions(-)
+ hw/riscv/numa.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 729ab684da..9e01810eef 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -2501,7 +2501,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                 op = rv_op_c_sqsp;
-             } else {
-                 op = rv_op_c_fsdsp;
--                if (((inst >> 12) & 0b01)) {
-+                if (dec->cfg->ext_zcmp && ((inst >> 12) & 0b01)) {
-                     switch ((inst >> 8) & 0b01111) {
-                     case 8:
-                         if (((inst >> 4) & 0b01111) >= 4) {
-@@ -2527,16 +2527,20 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                 } else {
-                     switch ((inst >> 10) & 0b011) {
-                     case 0:
--                        if (((inst >> 2) & 0xFF) >= 32) {
--                            op = rv_op_cm_jalt;
--                        } else {
--                            op = rv_op_cm_jt;
-+                        if (dec->cfg->ext_zcmt) {
-+                            if (((inst >> 2) & 0xFF) >= 32) {
-+                                op = rv_op_cm_jalt;
-+                            } else {
-+                                op = rv_op_cm_jt;
-+                            }
-                         }
-                         break;
-                     case 3:
--                        switch ((inst >> 5) & 0b011) {
--                        case 1: op = rv_op_cm_mvsa01; break;
--                        case 3: op = rv_op_cm_mva01s; break;
-+                        if (dec->cfg->ext_zcmp) {
-+                            switch ((inst >> 5) & 0b011) {
-+                            case 1: op = rv_op_cm_mvsa01; break;
-+                            case 3: op = rv_op_cm_mva01s; break;
-+                            }
-                         }
-                         break;
-                     }
+diff --git a/hw/riscv/numa.c b/hw/riscv/numa.c
+index 4720102561..e0414d5b1b 100644
+--- a/hw/riscv/numa.c
++++ b/hw/riscv/numa.c
+@@ -207,6 +207,12 @@ int64_t riscv_numa_get_default_cpu_node_id(const MachineState *ms, int idx)
+ {
+     int64_t nidx = 0;
+ 
++    if (ms->numa_state->num_nodes > ms->smp.cpus) {
++        error_report("Number of NUMA nodes (%d)"
++                     " cannot exceed the number of available CPUs (%d).",
++                     ms->numa_state->num_nodes, ms->smp.max_cpus);
++        exit(EXIT_FAILURE);
++    }
+     if (ms->numa_state->num_nodes) {
+         nidx = idx / (ms->smp.cpus / ms->numa_state->num_nodes);
+         if (ms->numa_state->num_nodes <= nidx) {
 -- 
-2.25.1
+2.34.1
 
 
