@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4089CC77B73
-	for <qemu-riscv@archiver.kernel.org>; Fri, 19 May 2023 02:24:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE42AC77B7A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 19 May 2023 02:24:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1pzpmp-0004TB-SG; Thu, 18 May 2023 22:24:08 -0400
+	id 1pzpmq-0004TH-1x; Thu, 18 May 2023 22:24:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pzpml-0004Rj-GN; Thu, 18 May 2023 22:24:05 -0400
+ id 1pzpml-0004Ri-F9; Thu, 18 May 2023 22:24:05 -0400
 Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1pzpmi-0002A8-9t; Thu, 18 May 2023 22:24:02 -0400
+ id 1pzpmh-00028u-NT; Thu, 18 May 2023 22:24:02 -0400
 Received: from localhost.localdomain (unknown [61.165.33.195])
- by APP-01 (Coremail) with SMTP id qwCowACHjw+x3WZkAeNjAQ--.12622S6;
- Fri, 19 May 2023 10:23:49 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowACHjw+x3WZkAeNjAQ--.12622S2;
+ Fri, 19 May 2023 10:23:46 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -28,32 +28,29 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH 4/7] disas/riscv.c: Support disas for Z*inx extensions
-Date: Fri, 19 May 2023 10:19:23 +0800
-Message-Id: <20230519021926.15362-5-liweiwei@iscas.ac.cn>
+Subject: [PATCH 0/7] Add support for extension specific disas
+Date: Fri, 19 May 2023 10:19:19 +0800
+Message-Id: <20230519021926.15362-1-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230519021926.15362-1-liweiwei@iscas.ac.cn>
-References: <20230519021926.15362-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACHjw+x3WZkAeNjAQ--.12622S6
-X-Coremail-Antispam: 1UD129KBjvJXoWxJr4DWw1DWw17AFy8Cw1rWFg_yoW8GFyDpa
- 4rKF93Ar12yFnFg343JF47JrW5A348Kw1UG3yxJay8CrnrJr4vkas3CFWqqFZ5Cas7Ars8
- uF4vgF4rAFs5AwUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUmY14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
- 1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j
- 6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7V
- C0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j
- 6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x0262
- 8vn2kIc2xKxwCY02Avz4vE14v_Gr1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_
- Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1V
- AY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAI
- cVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42
- IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIev
- Ja73UjIFyTuYvjfUOa9-UUUUU
+X-CM-TRANSID: qwCowACHjw+x3WZkAeNjAQ--.12622S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7uF1fWF1rtF4kKr15tF1DJrb_yoW8GF43pr
+ 4fGry3Kr4kA3yxXr4fW3WUWr4Yyw40gF43Kwn7Aw48A39xAry5Xrn7Jr18A34xJFyfWFyq
+ 9a15Cryruws5JF7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUvE14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
+ 4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
+ Yx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbV
+ WUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7Cj
+ xVA2Y2ka0xkIwI1lc2xSY4AK67AK6r4UMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4
+ AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE
+ 17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMI
+ IF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4l
+ IxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWI
+ evJa73UjIFyTuYvjfUO_MaUUUUU
 X-Originating-IP: [61.165.33.195]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
@@ -79,47 +76,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Support disas for Z*inx instructions only when Zfinx extension is supported.
+Some extensions have conflict encodings, such as
+ * Z*inx reuse the same encodings as normal float point extensions.
+ * Zcm* reuse the some encodings of Zcd.
+ * Custom extensions from different vendors may share the same encodings.
+To resolve this problem, this patchset tries to pass RISCVCPUConfig as disasemble_info.target_info to support extension specific disas, which means that the disas for this extensions is supported only when the related extension is supported.
+This patchset also fixes some style problems in disas/riscv.c.
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
----
- disas/riscv.c | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
+The port is available here:
+https://github.com/plctlab/plct-qemu/tree/plct-disas-upstream
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 9e01810eef..a370bac6ef 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -4590,16 +4590,24 @@ static void format_inst(char *buf, size_t buflen, size_t tab, rv_decode *dec)
-             append(buf, rv_ireg_name_sym[dec->rs2], buflen);
-             break;
-         case '3':
--            append(buf, rv_freg_name_sym[dec->rd], buflen);
-+            append(buf, dec->cfg->ext_zfinx ? rv_ireg_name_sym[dec->rd] :
-+                                              rv_freg_name_sym[dec->rd],
-+                   buflen);
-             break;
-         case '4':
--            append(buf, rv_freg_name_sym[dec->rs1], buflen);
-+            append(buf, dec->cfg->ext_zfinx ? rv_ireg_name_sym[dec->rs1] :
-+                                              rv_freg_name_sym[dec->rs1],
-+                   buflen);
-             break;
-         case '5':
--            append(buf, rv_freg_name_sym[dec->rs2], buflen);
-+            append(buf, dec->cfg->ext_zfinx ? rv_ireg_name_sym[dec->rs2] :
-+                                              rv_freg_name_sym[dec->rs2],
-+                   buflen);
-             break;
-         case '6':
--            append(buf, rv_freg_name_sym[dec->rs3], buflen);
-+            append(buf, dec->cfg->ext_zfinx ? rv_ireg_name_sym[dec->rs3] :
-+                                              rv_freg_name_sym[dec->rs3],
-+                   buflen);
-             break;
-         case '7':
-             snprintf(tmp, sizeof(tmp), "%d", dec->rs1);
+Weiwei Li (7):
+  disas: Change type of disassemble_info.target_info to pointer
+  target/riscv: Pass RISCVCPUConfig as target_info to disassemble_info
+  disas/riscv.c: Support disas for Zcm* extensions
+  disas/riscv.c: Support disas for Z*inx extensions
+  disas/riscv.c: Remove unused decomp_rv32/64 value for vector
+    instructions
+  disas/riscv.c: Fix lines with over 80 characters
+  disas/riscv.c: Remove redundant parentheses
+
+ disas/riscv.c           | 1206 +++++++++++++++++++++------------------
+ include/disas/dis-asm.h |    2 +-
+ target/riscv/cpu.c      |    1 +
+ target/riscv/cpu.h      |  114 +---
+ target/riscv/cpu_cfg.h  |  135 +++++
+ 5 files changed, 789 insertions(+), 669 deletions(-)
+ create mode 100644 target/riscv/cpu_cfg.h
+
 -- 
 2.25.1
 
