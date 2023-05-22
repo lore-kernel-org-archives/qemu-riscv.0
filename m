@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE15FC77B75
-	for <qemu-riscv@archiver.kernel.org>; Mon, 22 May 2023 14:24:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9770EC7EE23
+	for <qemu-riscv@archiver.kernel.org>; Mon, 22 May 2023 14:27:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q16Sf-0003qk-W5; Mon, 22 May 2023 10:24:34 -0400
+	id 1q16VU-0005A2-Be; Mon, 22 May 2023 10:27:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q16Sc-0003qB-94; Mon, 22 May 2023 10:24:31 -0400
+ id 1q16VS-00059K-8E; Mon, 22 May 2023 10:27:26 -0400
 Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q16SZ-0003TV-FL; Mon, 22 May 2023 10:24:30 -0400
+ id 1q16VP-0004DS-Ol; Mon, 22 May 2023 10:27:26 -0400
 Received: from [192.168.0.120] (unknown [61.165.33.195])
- by APP-01 (Coremail) with SMTP id qwCowACnrpoPe2tk7FZ1Aw--.18817S2;
- Mon, 22 May 2023 22:24:16 +0800 (CST)
-Message-ID: <427643e4-7115-675b-c8ed-deb683611d79@iscas.ac.cn>
-Date: Mon, 22 May 2023 22:24:14 +0800
+ by APP-01 (Coremail) with SMTP id qwCowACnrJjEe2tkGYt1Aw--.2777S2;
+ Mon, 22 May 2023 22:27:17 +0800 (CST)
+Message-ID: <5d70173d-75d0-a072-2e36-777d91496df5@iscas.ac.cn>
+Date: Mon, 22 May 2023 22:27:16 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
@@ -35,28 +35,28 @@ To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 References: <20230519021926.15362-1-liweiwei@iscas.ac.cn>
  <20230519021926.15362-4-liweiwei@iscas.ac.cn>
- <ed91c669-a2b1-116a-669e-78f469f7c9fc@ventanamicro.com>
+ <0ca6bb76-ba1c-4185-6faf-e70f979849da@ventanamicro.com>
 From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <ed91c669-a2b1-116a-669e-78f469f7c9fc@ventanamicro.com>
+In-Reply-To: <0ca6bb76-ba1c-4185-6faf-e70f979849da@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACnrpoPe2tk7FZ1Aw--.18817S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxXF1UArW5tr1rAw4xJFyxZrb_yoWruFWUpr
- 18Jr1UJryUJr18Jr1UJr1UJryUJr1UJw1UJr1UJF1UJr1UJr1jqr1UXr1jgr1UJr48Jr1U
+X-CM-TRANSID: qwCowACnrJjEe2tkGYt1Aw--.2777S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxCry8Kr1fuw1UXr1xury8Zrb_yoWruF1kpr
+ 1kJr1UJryUJr18Jr1UJr1UJryUJr1UJw1UJr1UJF1UJr1UJr1jqr1UXr1jgr1UJr48Jr1U
  Jr1UJr1UZr1UJrUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUU9C14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
  1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
  6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
  Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ I7IYx2IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
  4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kI
  c2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkIecxEwVAFwVW5XwCF04k20xvY0x0EwIxGrw
  CFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE
  14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2
  IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxK
  x2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI
- 0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUXiSdUUUUU=
+ 0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd8n5UUUUU=
 X-Originating-IP: [61.165.33.195]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
@@ -83,8 +83,8 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-On 2023/5/22 21:00, Daniel Henrique Barboza wrote:
->
+On 2023/5/22 21:10, Daniel Henrique Barboza wrote:
+> In fact, apparently checkpatch.pl is not too happy about this patch:
 >
 > On 5/18/23 23:19, Weiwei Li wrote:
 >> Support disas for Zcmt* instructions only when related extensions
@@ -125,30 +125,7 @@ On 2023/5/22 21:00, Daniel Henrique Barboza wrote:
 >> +                            } else {
 >> +                                op = rv_op_cm_jt;
 >> +                            }
->
-> In this code, since you're not doing anything if dec->cfg->ext_zcmt is 
-> not set,
-> you could also break earlier and avoid changing the other lines:
->
->
->>                       case 0:
->> +                     if (!dec->cfg->ext_zcmt) {
->> +                         break;
->> +                     }
->>                       if (((inst >> 2) & 0xFF) >= 32) {
->>                           op = rv_op_cm_jalt;
->>                       } else {
->>                           op = rv_op_cm_jt;
->>                       }
->>                       break;
->
-OK. It's acceptable to me. I'll update this in next version.
-
-Regards,
-
-Weiwei Li
-
-> >                           }
+>>                           }
 >>                           break;
 >>                       case 3:
 >> -                        switch ((inst >> 5) & 0b011) {
@@ -160,14 +137,42 @@ Weiwei Li
 >> +                            case 3: op = rv_op_cm_mva01s; break;
 >> +                            }
 >
+> At this point:
 >
-> Same thing here.
+> ================
+> 3/7 Checking commit 989059d476f9 (disas/riscv.c: Support disas for 
+> Zcm* extensions)
+> ERROR: trailing statements should be on next line
+> #51: FILE: disas/riscv.c:2541:
+> +                            case 1: op = rv_op_cm_mvsa01; break;
+>
+> ERROR: trailing statements should be on next line
+> #52: FILE: disas/riscv.c:2542:
+> +                            case 3: op = rv_op_cm_mva01s; break;
+>
+> total: 2 errors, 0 warnings, 35 lines checked
+>
+> Patch 3/7 has style problems, please review.  If any of these errors
+> are false positives report them to the maintainer, see
+> ================
+>
+Yeah. I also found this errors when I ran the checkpatch.pl.
+
+However, this is the usual code style in this file. So I didn't fix it.
+
+Regards,
+
+Weiwei Li
+
+>
+> The issue predates your patch. It would be very nice of you if you can 
+> fix it
+> though :D
 >
 >
-> These are minor stylistic comments.
 >
+> Daniel
 >
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 >
 >>                           }
 >>                           break;
