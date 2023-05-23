@@ -4,66 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4A72C7EE23
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 May 2023 09:38:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21E9AC7EE23
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 May 2023 09:39:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q1ORD-0006u5-VO; Tue, 23 May 2023 05:36:16 -0400
+	id 1q1OTn-0005CM-I9; Tue, 23 May 2023 05:38:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q1OR9-0006qU-62; Tue, 23 May 2023 05:36:11 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q1OR5-0007Uu-Vl; Tue, 23 May 2023 05:36:10 -0400
-Received: from localhost.localdomain (unknown [61.165.37.98])
- by APP-05 (Coremail) with SMTP id zQCowABXXYn8iGxkwiCaAw--.15216S6;
- Tue, 23 May 2023 17:36:01 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v2 4/8] disas/riscv.c: Support disas for Zcm* extensions
-Date: Tue, 23 May 2023 17:35:35 +0800
-Message-Id: <20230523093539.203909-5-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230523093539.203909-1-liweiwei@iscas.ac.cn>
-References: <20230523093539.203909-1-liweiwei@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1q1OTl-0005BM-GN
+ for qemu-riscv@nongnu.org; Tue, 23 May 2023 05:38:53 -0400
+Received: from mail-oo1-xc34.google.com ([2607:f8b0:4864:20::c34])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1q1OTj-0007yU-OJ
+ for qemu-riscv@nongnu.org; Tue, 23 May 2023 05:38:53 -0400
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-55554c33bf3so1163328eaf.2
+ for <qemu-riscv@nongnu.org>; Tue, 23 May 2023 02:38:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1684834730; x=1687426730;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=N6z3lMGxH6Mz7+Fn/T4LYytMshUBzmp0MZ7SoDpV31I=;
+ b=AMeKxWPLAfExFxJB/0pFuUFEiXN+50+SPDOH4XHy6mpSblEnrvX5T4wWHVkOgl2LP5
+ wKCrtEhSYOeRjQVsEEAMbGheO6riK1oW2/ZbezvQrNFINT7x4ETrELaqjV6VRddeLoES
+ 7NKC8FBFPgJ5OTX8YbW5GFwVWTl0Uq7HiaIwakPUp1YU2svnE+zLhg/XSveCCReEKAVC
+ hxo8s1qdeX09joUdCGs8jWtIrYgj5ppyUVS5wlS4gl2Iqda5R6VlUW7iSV/gIDGqVQZU
+ 2oJtnoMoEVZBeVDe9sF5nzsToRIjCrsINtx7ylnAYEmtAQf4jn+yxY9A6Jg66DOGtrHf
+ 8Y5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1684834730; x=1687426730;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=N6z3lMGxH6Mz7+Fn/T4LYytMshUBzmp0MZ7SoDpV31I=;
+ b=BVJpVF/swVwVBsWwIHYDIkSOXifT0MsiaotFrtzpcE6nBFjfvgNFfeAkkNJMzfzrWu
+ WNoMcTsUQDf+3GN7JVB6mKNem/kLzdwhgQlbiSlycfom22LcwBFdUx5pYRvUd/QMq2wT
+ 8vTF/2Few4jNF8g9k63kEewbdQozOHKEK+1uabRtNOJKQsS8AFdYK3hC6KNMkcfDTkhu
+ qyfkokVUT+PF3FJxXcah50loJHdE8MXA7d91G4az0Hvdr6cKbAZgUzpqPCC+0FTirCCJ
+ MnOO31+VSCOmflERZcbSaviFOqoHLP4qb/yK/IBD5GifPA44v4/A79D3Q9vn45LSFsR5
+ yKPA==
+X-Gm-Message-State: AC+VfDw81Qcb8agOmKwNQ1n/IQq4T0ulGcNLEz0eoF3accoTWwup3Csc
+ ffVGM+G2EYrYM05Zgb3JgeVeHDZYWPnhbxFhbh8KgQ==
+X-Google-Smtp-Source: ACHHUZ590ivdXOBK8DVn/lntOQYNQicJN9rrix/NpCdyreZpkdnN9TcSNijcVkPKccvqAJg6nDXarvxDZKkcTuOZh9I=
+X-Received: by 2002:a4a:92dd:0:b0:555:39b5:c7fc with SMTP id
+ j29-20020a4a92dd000000b0055539b5c7fcmr3187082ooh.6.1684834730118; Tue, 23 May
+ 2023 02:38:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABXXYn8iGxkwiCaAw--.15216S6
-X-Coremail-Antispam: 1UD129KBjvJXoW7XF1UCFykKFWkXFWDWr4DJwb_yoW8JrWfpr
- 1rCr45trs8Cay7Wa93XrWUuFZ8J395Kr4IqFZ0yw1fW3s7AF93uF4kXa4aqryxCFWrtF47
- Cw15Kr95Ja18A3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPY14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
- 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
- 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
- IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
- M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
- kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
- 14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIx
- kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAF
- wI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r
- 4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQSdkU
- UUUU=
-X-Originating-IP: [61.165.37.98]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <20230505113946.23433-1-yongxuan.wang@sifive.com>
+ <20230505113946.23433-2-yongxuan.wang@sifive.com>
+ <20230505101707.495251a2.alex.williamson@redhat.com>
+ <878rdze0fx.fsf@redhat.com>
+In-Reply-To: <878rdze0fx.fsf@redhat.com>
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Date: Tue, 23 May 2023 17:38:40 +0800
+Message-ID: <CAMWQL2gDRcawsLLVUpL5dV1nXGKBqWiE_6SSgOw8+ZgLjgO8rw@mail.gmail.com>
+Subject: Re: [PTACH v2 1/6] update-linux-headers: sync-up header with Linux
+ for KVM AIA support
+To: Cornelia Huck <cohuck@redhat.com>
+Cc: Alex Williamson <alex.williamson@redhat.com>, qemu-devel@nongnu.org, 
+ qemu-riscv@nongnu.org, rkanwal@rivosinc.com, anup@brainfault.org, 
+ dbarboza@ventanamicro.com, atishp@atishpatra.org, vincent.chen@sifive.com, 
+ greentime.hu@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Juan Quintela <quintela@redhat.com>, Avihai Horon <avihaih@nvidia.com>,
+ Thomas Huth <thuth@redhat.com>, kvm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c34;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-oo1-xc34.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -79,50 +98,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Support disas for Zcmt* instructions only when related extensions
-are supported.
+On Mon, May 8, 2023 at 3:39=E2=80=AFPM Cornelia Huck <cohuck@redhat.com> wr=
+ote:
+>
+> On Fri, May 05 2023, Alex Williamson <alex.williamson@redhat.com> wrote:
+>
+> > On Fri,  5 May 2023 11:39:36 +0000
+> > Yong-Xuan Wang <yongxuan.wang@sifive.com> wrote:
+> >
+> >> Update the linux headers to get the latest KVM RISC-V headers with AIA=
+ support
+> >> by the scripts/update-linux-headers.sh.
+> >> The linux headers is comes from the riscv_aia_v1 branch available at
+> >> https://github.com/avpatel/linux.git. It hasn't merged into the mainli=
+ne kernel.
+> >
+> > Updating linux-headers outside of code accepted to mainline gets a down
+> > vote from me.  This sets a poor precedent and can potentially lead to
+> > complicated compatibility issues.  Thanks,
+> >
+> > Alex
+>
+> Indeed, this needs to be clearly marked as a placeholder patch, and
+> replaced with a proper header sync after the changes hit the mainline
+> kernel.
+>
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- disas/riscv.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+Hi Alex and Cornelia,
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 729ab684da..49a3eb6ac4 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -2501,7 +2501,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                 op = rv_op_c_sqsp;
-             } else {
-                 op = rv_op_c_fsdsp;
--                if (((inst >> 12) & 0b01)) {
-+                if (dec->cfg->ext_zcmp && ((inst >> 12) & 0b01)) {
-                     switch ((inst >> 8) & 0b01111) {
-                     case 8:
-                         if (((inst >> 4) & 0b01111) >= 4) {
-@@ -2527,6 +2527,9 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                 } else {
-                     switch ((inst >> 10) & 0b011) {
-                     case 0:
-+                        if (!dec->cfg->ext_zcmt) {
-+                            break;
-+                        }
-                         if (((inst >> 2) & 0xFF) >= 32) {
-                             op = rv_op_cm_jalt;
-                         } else {
-@@ -2534,6 +2537,9 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
-                         }
-                         break;
-                     case 3:
-+                        if (!dec->cfg->ext_zcmp) {
-+                            break;
-+                        }
-                         switch ((inst >> 5) & 0b011) {
-                         case 1: op = rv_op_cm_mvsa01; break;
-                         case 3: op = rv_op_cm_mva01s; break;
--- 
-2.25.1
+We found that the changes are from 2 different patchsets.
 
+[1] https://lore.kernel.org/lkml/20230404153452.2405681-1-apatel@ventanamic=
+ro.com/
+[2] https://www.spinics.net/lists/kernel/msg4791872.html
+
+Patchset 1 is already merged into mainline kernel in v6.4-rc1 and
+patchset 2 is not.
+Maybe we can split them into two placeholder patches?
+
+Regards,
+Yong-Xuan
 
