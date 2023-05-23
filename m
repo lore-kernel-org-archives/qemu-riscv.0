@@ -4,86 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B65B6C7EE23
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 May 2023 12:15:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7C1CC7EE23
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 May 2023 14:12:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q1QvQ-0002yg-HA; Tue, 23 May 2023 08:15:37 -0400
+	id 1q1SaC-0000Tw-0C; Tue, 23 May 2023 10:01:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1q1QvJ-0002sO-AU
- for qemu-riscv@nongnu.org; Tue, 23 May 2023 08:15:31 -0400
-Received: from mail-ot1-x32c.google.com ([2607:f8b0:4864:20::32c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1q1QvG-0004JK-8f
- for qemu-riscv@nongnu.org; Tue, 23 May 2023 08:15:29 -0400
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-6af6de9fb74so1974037a34.2
- for <qemu-riscv@nongnu.org>; Tue, 23 May 2023 05:15:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1684844123; x=1687436123;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=C08OibMexkSAbPRQ6igdl6rDK1SBWXg8P93MkwjVikc=;
- b=TWhwRqwYaSgd2DB6j9iM+AsaxlPi5V3vsBF0a1jZCRkjpkGpeaSjprf7c6KltnlOra
- 3neJi8+J1nrFm+qtZlSPD8whdjAhyNH+RjvumN3BOL+JHmW3JxF2+Ilg0itBJft6kuNd
- 94EK+Pt4NGNtF4T4fhs6L/F5/7cDf6Um7d4JqBci5Mpb4+Ox1JtR2O+5u+oIiszTSUly
- wknPYGU6JuElwqlxqHlgwVNBPTrvMmnel6EFOqQrdqOOlWOywjNsWEFkK4I15ZZqeUIa
- FMPEd8BkCEcdlaegBL0mELQIPVkghrig7gkplIXB8tg0LXejuxD/k+u7rYRSAYTKJe1j
- eW7g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684844123; x=1687436123;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=C08OibMexkSAbPRQ6igdl6rDK1SBWXg8P93MkwjVikc=;
- b=YWKYkh/vK+8T8SV59+kzhMqJkqjXkCpVyN3/CMSumBB4wNgHgQ2BtI4ZFa3huUag3m
- 3ZsR5wd7lw2NMXoLNVAs+bxJj4s6nE5Bg6QOhoJ5KhnHvsPQ0DY4QBwh8gtzGQSVzVXy
- ooJtsdZIA8yO8Z7L0ENIOycd6bddO66qnLay62sUKniXvf4c7+4YjRRN5ZxIBonFZCMe
- JmkEXYOwN7biuIIrymulvGjQSDpPz/TYpb4F+sU7pWyavc+Bn/ZfDFrFXU05wSCyy3aN
- rRPqixuN3e/N1ovUaGjZNi47JXuaPsZRsrYYqsp/LLZ9a/DLajNLmzHy+7zIIzXQ/8Wa
- 261g==
-X-Gm-Message-State: AC+VfDyikpYiUKoBzr6zj/ujIj49+UXfEpKOGjz3kJJiQfkIuXCuIgVQ
- wYcwAuy2DiVcM9dSoLO4O0IQug==
-X-Google-Smtp-Source: ACHHUZ6DvvhglU1GdfdCjzJYSA5S7ckuQJri6dNK3HyyVuP9QRUCaRboP2NVDHBwBo/nsS3m4x8bqA==
-X-Received: by 2002:a9d:7ad0:0:b0:6a5:f719:c2f2 with SMTP id
- m16-20020a9d7ad0000000b006a5f719c2f2mr7672383otn.30.1684844122850; 
- Tue, 23 May 2023 05:15:22 -0700 (PDT)
-Received: from [192.168.68.107] (200-162-225-121.static-corp.ajato.com.br.
- [200.162.225.121]) by smtp.gmail.com with ESMTPSA id
- g7-20020a9d6c47000000b006ae7c3eaf4esm1495931otq.26.2023.05.23.05.15.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 23 May 2023 05:15:22 -0700 (PDT)
-Message-ID: <e90416b3-ec16-2455-8369-a0320bf25b51@ventanamicro.com>
-Date: Tue, 23 May 2023 09:15:18 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [PATCH v2 2/8] target/riscv: Split RISCVCPUConfig declarations
- from cpu.h into cpu_cfg.h
-Content-Language: en-US
-To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1q1SZP-0007kA-KO; Tue, 23 May 2023 10:01:04 -0400
+Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1q1SYi-0004my-GJ; Tue, 23 May 2023 10:00:25 -0400
+Received: from localhost.localdomain (unknown [61.165.37.98])
+ by APP-05 (Coremail) with SMTP id zQCowACHj4vixmxk5Uy2Aw--.17075S8;
+ Tue, 23 May 2023 22:00:06 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230523093539.203909-1-liweiwei@iscas.ac.cn>
- <20230523093539.203909-3-liweiwei@iscas.ac.cn>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230523093539.203909-3-liweiwei@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32c.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.089,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 6/7] target/riscv: Enable PC-relative translation
+Date: Tue, 23 May 2023 21:59:38 +0800
+Message-Id: <20230523135939.299246-7-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230523135939.299246-1-liweiwei@iscas.ac.cn>
+References: <20230523135939.299246-1-liweiwei@iscas.ac.cn>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: zQCowACHj4vixmxk5Uy2Aw--.17075S8
+X-Coremail-Antispam: 1UD129KBjvJXoWxtw4fAFW8Xw43Xw45Ww1UGFg_yoW3Kw48pF
+ 4FkF42vFZ8JFWfZayfKF4UAF43Xw4SkrW0kwnakw4kGa15XrWUGF4DKa1akFWUZFZ5ur1Y
+ kFWDAF1UZw4UXFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUm014x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
+ 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
+ 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
+ IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
+ M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
+ kIc2xKxwCY02Avz4vE14v_Xryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_
+ Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17
+ CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0
+ I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcV
+ C2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVj
+ vjDU0xZFpf9x0JUBbyZUUUUU=
+X-Originating-IP: [61.165.37.98]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -100,294 +79,262 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Add a base pc_save for PC-relative translation(CF_PCREL).
+Diable the directly sync pc from tb by riscv_cpu_synchronize_from_tb.
+Use gen_pc_plus_diff to get the pc-relative address.
+Enable CF_PCREL in System mode.
 
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+---
+ target/riscv/cpu.c                        | 31 ++++++++++-----
+ target/riscv/insn_trans/trans_rvi.c.inc   | 12 +++++-
+ target/riscv/insn_trans/trans_rvzce.c.inc |  4 +-
+ target/riscv/translate.c                  | 47 +++++++++++++++++++----
+ 4 files changed, 74 insertions(+), 20 deletions(-)
 
-On 5/23/23 06:35, Weiwei Li wrote:
-> Split RISCVCPUConfig declarations to prepare for passing it to disas.
-> 
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> ---
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index db0875fb43..e4606c0b2e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -690,16 +690,18 @@ static vaddr riscv_cpu_get_pc(CPUState *cs)
+ static void riscv_cpu_synchronize_from_tb(CPUState *cs,
+                                           const TranslationBlock *tb)
+ {
+-    RISCVCPU *cpu = RISCV_CPU(cs);
+-    CPURISCVState *env = &cpu->env;
+-    RISCVMXL xl = FIELD_EX32(tb->flags, TB_FLAGS, XL);
++    if (!(tb_cflags(tb) & CF_PCREL)) {
++        RISCVCPU *cpu = RISCV_CPU(cs);
++        CPURISCVState *env = &cpu->env;
++        RISCVMXL xl = FIELD_EX32(tb->flags, TB_FLAGS, XL);
+ 
+-    tcg_debug_assert(!(cs->tcg_cflags & CF_PCREL));
++        tcg_debug_assert(!(cs->tcg_cflags & CF_PCREL));
+ 
+-    if (xl == MXL_RV32) {
+-        env->pc = (int32_t) tb->pc;
+-    } else {
+-        env->pc = tb->pc;
++        if (xl == MXL_RV32) {
++            env->pc = (int32_t) tb->pc;
++        } else {
++            env->pc = tb->pc;
++        }
+     }
+ }
+ 
+@@ -725,11 +727,18 @@ static void riscv_restore_state_to_opc(CPUState *cs,
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     RISCVMXL xl = FIELD_EX32(tb->flags, TB_FLAGS, XL);
++    target_ulong pc;
++
++    if (tb_cflags(tb) & CF_PCREL) {
++        pc = (env->pc & TARGET_PAGE_MASK) | data[0];
++    } else {
++        pc = data[0];
++    }
+ 
+     if (xl == MXL_RV32) {
+-        env->pc = (int32_t)data[0];
++        env->pc = (int32_t)pc;
+     } else {
+-        env->pc = data[0];
++        env->pc = pc;
+     }
+     env->bins = data[1];
+ }
+@@ -1246,6 +1255,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+ 
+ 
+ #ifndef CONFIG_USER_ONLY
++    cs->tcg_cflags |= CF_PCREL;
++
+     if (cpu->cfg.ext_sstc) {
+         riscv_timer_init(cpu);
+     }
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index d6eef67b45..28fe69c34b 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -38,7 +38,9 @@ static bool trans_lui(DisasContext *ctx, arg_lui *a)
+ 
+ static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
+ {
+-    gen_set_gpri(ctx, a->rd, a->imm + ctx->base.pc_next);
++    TCGv target_pc = dest_gpr(ctx, a->rd);
++    gen_pc_plus_diff(target_pc, ctx, a->imm);
++    gen_set_gpr(ctx, a->rd, target_pc);
+     return true;
+ }
+ 
+@@ -52,6 +54,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+ {
+     TCGLabel *misaligned = NULL;
+     TCGv target_pc = tcg_temp_new();
++    TCGv succ_pc = dest_gpr(ctx, a->rd);
+ 
+     tcg_gen_addi_tl(target_pc, get_gpr(ctx, a->rs1, EXT_NONE), a->imm);
+     tcg_gen_andi_tl(target_pc, target_pc, (target_ulong)-2);
+@@ -68,7 +71,9 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+         tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
+     }
+ 
+-    gen_set_gpri(ctx, a->rd, ctx->pc_succ_insn);
++    gen_pc_plus_diff(succ_pc, ctx, ctx->cur_insn_len);
++    gen_set_gpr(ctx, a->rd, succ_pc);
++
+     tcg_gen_mov_tl(cpu_pc, target_pc);
+     lookup_and_goto_ptr(ctx);
+ 
+@@ -158,6 +163,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+     TCGLabel *l = gen_new_label();
+     TCGv src1 = get_gpr(ctx, a->rs1, EXT_SIGN);
+     TCGv src2 = get_gpr(ctx, a->rs2, EXT_SIGN);
++    target_ulong orig_pc_save = ctx->pc_save;
+ 
+     if (get_xl(ctx) == MXL_RV128) {
+         TCGv src1h = get_gprh(ctx, a->rs1);
+@@ -171,6 +177,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+         tcg_gen_brcond_tl(cond, src1, src2, l);
+     }
+     gen_goto_tb(ctx, 1, ctx->cur_insn_len);
++    ctx->pc_save = orig_pc_save;
+ 
+     gen_set_label(l); /* branch taken */
+ 
+@@ -182,6 +189,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+     } else {
+         gen_goto_tb(ctx, 0, a->imm);
+     }
++    ctx->pc_save = -1;
+     ctx->base.is_jmp = DISAS_NORETURN;
+ 
+     return true;
+diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
+index 450b79dcbc..8d8a64f493 100644
+--- a/target/riscv/insn_trans/trans_rvzce.c.inc
++++ b/target/riscv/insn_trans/trans_rvzce.c.inc
+@@ -302,7 +302,9 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
+ 
+     /* c.jt vs c.jalt depends on the index. */
+     if (a->index >= 32) {
+-        gen_set_gpri(ctx, xRA, ctx->pc_succ_insn);
++        TCGv succ_pc = dest_gpr(ctx, xRA);
++        gen_pc_plus_diff(succ_pc, ctx, ctx->cur_insn_len);
++        gen_set_gpr(ctx, xRA, succ_pc);
+     }
+ 
+     tcg_gen_lookup_and_goto_ptr();
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index c6ae489788..538187f93b 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -60,6 +60,7 @@ typedef struct DisasContext {
+     /* pc_succ_insn points to the instruction following base.pc_next */
+     target_ulong pc_succ_insn;
+     target_ulong cur_insn_len;
++    target_ulong pc_save;
+     target_ulong priv_ver;
+     RISCVMXL misa_mxl_max;
+     RISCVMXL xl;
+@@ -228,15 +229,24 @@ static void gen_pc_plus_diff(TCGv target, DisasContext *ctx,
+ {
+     target_ulong dest = ctx->base.pc_next + diff;
+ 
+-    if (get_xl(ctx) == MXL_RV32) {
+-        dest = (int32_t)dest;
++    assert(ctx->pc_save != -1);
++    if (tb_cflags(ctx->base.tb) & CF_PCREL) {
++        tcg_gen_addi_tl(target, cpu_pc, dest - ctx->pc_save);
++        if (get_xl(ctx) == MXL_RV32) {
++            tcg_gen_ext32s_tl(target, target);
++        }
++    } else {
++        if (get_xl(ctx) == MXL_RV32) {
++            dest = (int32_t)dest;
++        }
++        tcg_gen_movi_tl(target, dest);
+     }
+-    tcg_gen_movi_tl(target, dest);
+ }
+ 
+ static void gen_update_pc(DisasContext *ctx, target_long diff)
+ {
+     gen_pc_plus_diff(cpu_pc, ctx, diff);
++    ctx->pc_save = ctx->base.pc_next + diff;
+ }
+ 
+ static void generate_exception(DisasContext *ctx, int excp)
+@@ -292,8 +302,21 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_long diff)
+       * direct block chain benefits will be small.
+       */
+     if (translator_use_goto_tb(&ctx->base, dest) && !ctx->itrigger) {
+-        tcg_gen_goto_tb(n);
+-        gen_update_pc(ctx, diff);
++        /*
++         * For pcrel, the pc must always be up-to-date on entry to
++         * the linked TB, so that it can use simple additions for all
++         * further adjustments.  For !pcrel, the linked TB is compiled
++         * to know its full virtual address, so we can delay the
++         * update to pc to the unlinked path.  A long chain of links
++         * can thus avoid many updates to the PC.
++         */
++        if (tb_cflags(ctx->base.tb) & CF_PCREL) {
++            gen_update_pc(ctx, diff);
++            tcg_gen_goto_tb(n);
++        } else {
++            tcg_gen_goto_tb(n);
++            gen_update_pc(ctx, diff);
++        }
+         tcg_gen_exit_tb(ctx->base.tb, n);
+     } else {
+         gen_update_pc(ctx, diff);
+@@ -547,6 +570,8 @@ static void gen_set_fpr_d(DisasContext *ctx, int reg_num, TCGv_i64 t)
+ 
+ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+ {
++    TCGv succ_pc = dest_gpr(ctx, rd);
++
+     /* check misaligned: */
+     if (!ctx->cfg_ptr->ext_zca) {
+         if ((imm & 0x3) != 0) {
+@@ -557,7 +582,9 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+         }
+     }
+ 
+-    gen_set_gpri(ctx, rd, ctx->pc_succ_insn);
++    gen_pc_plus_diff(succ_pc, ctx, ctx->cur_insn_len);
++    gen_set_gpr(ctx, rd, succ_pc);
++
+     gen_goto_tb(ctx, 0, imm); /* must use this for safety */
+     ctx->base.is_jmp = DISAS_NORETURN;
+ }
+@@ -1154,6 +1181,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     uint32_t tb_flags = ctx->base.tb->flags;
+ 
++    ctx->pc_save = ctx->base.pc_first;
+     ctx->pc_succ_insn = ctx->base.pc_first;
+     ctx->priv = FIELD_EX32(tb_flags, TB_FLAGS, PRIV);
+     ctx->mem_idx = FIELD_EX32(tb_flags, TB_FLAGS, MEM_IDX);
+@@ -1189,8 +1217,13 @@ static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
+ static void riscv_tr_insn_start(DisasContextBase *dcbase, CPUState *cpu)
+ {
+     DisasContext *ctx = container_of(dcbase, DisasContext, base);
++    target_ulong pc_next = ctx->base.pc_next;
++
++    if (tb_cflags(dcbase->tb) & CF_PCREL) {
++        pc_next &= ~TARGET_PAGE_MASK;
++    }
+ 
+-    tcg_gen_insn_start(ctx->base.pc_next, 0);
++    tcg_gen_insn_start(pc_next, 0);
+     ctx->insn_start = tcg_last_op();
+ }
+ 
+-- 
+2.25.1
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/cpu.h     | 114 +---------------------------------
->   target/riscv/cpu_cfg.h | 136 +++++++++++++++++++++++++++++++++++++++++
->   2 files changed, 137 insertions(+), 113 deletions(-)
->   create mode 100644 target/riscv/cpu_cfg.h
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index de7e43126a..dc1229b69c 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -27,6 +27,7 @@
->   #include "qom/object.h"
->   #include "qemu/int128.h"
->   #include "cpu_bits.h"
-> +#include "cpu_cfg.h"
->   #include "qapi/qapi-types-common.h"
->   #include "cpu-qom.h"
->   
-> @@ -368,119 +369,6 @@ struct CPUArchState {
->       uint64_t kvm_timer_frequency;
->   };
->   
-> -/*
-> - * map is a 16-bit bitmap: the most significant set bit in map is the maximum
-> - * satp mode that is supported. It may be chosen by the user and must respect
-> - * what qemu implements (valid_1_10_32/64) and what the hw is capable of
-> - * (supported bitmap below).
-> - *
-> - * init is a 16-bit bitmap used to make sure the user selected a correct
-> - * configuration as per the specification.
-> - *
-> - * supported is a 16-bit bitmap used to reflect the hw capabilities.
-> - */
-> -typedef struct {
-> -    uint16_t map, init, supported;
-> -} RISCVSATPMap;
-> -
-> -struct RISCVCPUConfig {
-> -    bool ext_zba;
-> -    bool ext_zbb;
-> -    bool ext_zbc;
-> -    bool ext_zbkb;
-> -    bool ext_zbkc;
-> -    bool ext_zbkx;
-> -    bool ext_zbs;
-> -    bool ext_zca;
-> -    bool ext_zcb;
-> -    bool ext_zcd;
-> -    bool ext_zce;
-> -    bool ext_zcf;
-> -    bool ext_zcmp;
-> -    bool ext_zcmt;
-> -    bool ext_zk;
-> -    bool ext_zkn;
-> -    bool ext_zknd;
-> -    bool ext_zkne;
-> -    bool ext_zknh;
-> -    bool ext_zkr;
-> -    bool ext_zks;
-> -    bool ext_zksed;
-> -    bool ext_zksh;
-> -    bool ext_zkt;
-> -    bool ext_ifencei;
-> -    bool ext_icsr;
-> -    bool ext_icbom;
-> -    bool ext_icboz;
-> -    bool ext_zicond;
-> -    bool ext_zihintpause;
-> -    bool ext_smstateen;
-> -    bool ext_sstc;
-> -    bool ext_svadu;
-> -    bool ext_svinval;
-> -    bool ext_svnapot;
-> -    bool ext_svpbmt;
-> -    bool ext_zdinx;
-> -    bool ext_zawrs;
-> -    bool ext_zfh;
-> -    bool ext_zfhmin;
-> -    bool ext_zfinx;
-> -    bool ext_zhinx;
-> -    bool ext_zhinxmin;
-> -    bool ext_zve32f;
-> -    bool ext_zve64f;
-> -    bool ext_zve64d;
-> -    bool ext_zmmul;
-> -    bool ext_zvfh;
-> -    bool ext_zvfhmin;
-> -    bool ext_smaia;
-> -    bool ext_ssaia;
-> -    bool ext_sscofpmf;
-> -    bool rvv_ta_all_1s;
-> -    bool rvv_ma_all_1s;
-> -
-> -    uint32_t mvendorid;
-> -    uint64_t marchid;
-> -    uint64_t mimpid;
-> -
-> -    /* Vendor-specific custom extensions */
-> -    bool ext_xtheadba;
-> -    bool ext_xtheadbb;
-> -    bool ext_xtheadbs;
-> -    bool ext_xtheadcmo;
-> -    bool ext_xtheadcondmov;
-> -    bool ext_xtheadfmemidx;
-> -    bool ext_xtheadfmv;
-> -    bool ext_xtheadmac;
-> -    bool ext_xtheadmemidx;
-> -    bool ext_xtheadmempair;
-> -    bool ext_xtheadsync;
-> -    bool ext_XVentanaCondOps;
-> -
-> -    uint8_t pmu_num;
-> -    char *priv_spec;
-> -    char *user_spec;
-> -    char *bext_spec;
-> -    char *vext_spec;
-> -    uint16_t vlen;
-> -    uint16_t elen;
-> -    uint16_t cbom_blocksize;
-> -    uint16_t cboz_blocksize;
-> -    bool mmu;
-> -    bool pmp;
-> -    bool epmp;
-> -    bool debug;
-> -    bool misa_w;
-> -
-> -    bool short_isa_string;
-> -
-> -#ifndef CONFIG_USER_ONLY
-> -    RISCVSATPMap satp_mode;
-> -#endif
-> -};
-> -
-> -typedef struct RISCVCPUConfig RISCVCPUConfig;
-> -
->   /*
->    * RISCVCPU:
->    * @env: #CPURISCVState
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> new file mode 100644
-> index 0000000000..c4a627d335
-> --- /dev/null
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -0,0 +1,136 @@
-> +/*
-> + * QEMU RISC-V CPU CFG
-> + *
-> + * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
-> + * Copyright (c) 2017-2018 SiFive, Inc.
-> + * Copyright (c) 2021-2023 PLCT Lab
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#ifndef RISCV_CPU_CFG_H
-> +#define RISCV_CPU_CFG_H
-> +
-> +/*
-> + * map is a 16-bit bitmap: the most significant set bit in map is the maximum
-> + * satp mode that is supported. It may be chosen by the user and must respect
-> + * what qemu implements (valid_1_10_32/64) and what the hw is capable of
-> + * (supported bitmap below).
-> + *
-> + * init is a 16-bit bitmap used to make sure the user selected a correct
-> + * configuration as per the specification.
-> + *
-> + * supported is a 16-bit bitmap used to reflect the hw capabilities.
-> + */
-> +typedef struct {
-> +    uint16_t map, init, supported;
-> +} RISCVSATPMap;
-> +
-> +struct RISCVCPUConfig {
-> +    bool ext_zba;
-> +    bool ext_zbb;
-> +    bool ext_zbc;
-> +    bool ext_zbkb;
-> +    bool ext_zbkc;
-> +    bool ext_zbkx;
-> +    bool ext_zbs;
-> +    bool ext_zca;
-> +    bool ext_zcb;
-> +    bool ext_zcd;
-> +    bool ext_zce;
-> +    bool ext_zcf;
-> +    bool ext_zcmp;
-> +    bool ext_zcmt;
-> +    bool ext_zk;
-> +    bool ext_zkn;
-> +    bool ext_zknd;
-> +    bool ext_zkne;
-> +    bool ext_zknh;
-> +    bool ext_zkr;
-> +    bool ext_zks;
-> +    bool ext_zksed;
-> +    bool ext_zksh;
-> +    bool ext_zkt;
-> +    bool ext_ifencei;
-> +    bool ext_icsr;
-> +    bool ext_icbom;
-> +    bool ext_icboz;
-> +    bool ext_zicond;
-> +    bool ext_zihintpause;
-> +    bool ext_smstateen;
-> +    bool ext_sstc;
-> +    bool ext_svadu;
-> +    bool ext_svinval;
-> +    bool ext_svnapot;
-> +    bool ext_svpbmt;
-> +    bool ext_zdinx;
-> +    bool ext_zawrs;
-> +    bool ext_zfh;
-> +    bool ext_zfhmin;
-> +    bool ext_zfinx;
-> +    bool ext_zhinx;
-> +    bool ext_zhinxmin;
-> +    bool ext_zve32f;
-> +    bool ext_zve64f;
-> +    bool ext_zve64d;
-> +    bool ext_zmmul;
-> +    bool ext_zvfh;
-> +    bool ext_zvfhmin;
-> +    bool ext_smaia;
-> +    bool ext_ssaia;
-> +    bool ext_sscofpmf;
-> +    bool rvv_ta_all_1s;
-> +    bool rvv_ma_all_1s;
-> +
-> +    uint32_t mvendorid;
-> +    uint64_t marchid;
-> +    uint64_t mimpid;
-> +
-> +    /* Vendor-specific custom extensions */
-> +    bool ext_xtheadba;
-> +    bool ext_xtheadbb;
-> +    bool ext_xtheadbs;
-> +    bool ext_xtheadcmo;
-> +    bool ext_xtheadcondmov;
-> +    bool ext_xtheadfmemidx;
-> +    bool ext_xtheadfmv;
-> +    bool ext_xtheadmac;
-> +    bool ext_xtheadmemidx;
-> +    bool ext_xtheadmempair;
-> +    bool ext_xtheadsync;
-> +    bool ext_XVentanaCondOps;
-> +
-> +    uint8_t pmu_num;
-> +    char *priv_spec;
-> +    char *user_spec;
-> +    char *bext_spec;
-> +    char *vext_spec;
-> +    uint16_t vlen;
-> +    uint16_t elen;
-> +    uint16_t cbom_blocksize;
-> +    uint16_t cboz_blocksize;
-> +    bool mmu;
-> +    bool pmp;
-> +    bool epmp;
-> +    bool debug;
-> +    bool misa_w;
-> +
-> +    bool short_isa_string;
-> +
-> +#ifndef CONFIG_USER_ONLY
-> +    RISCVSATPMap satp_mode;
-> +#endif
-> +};
-> +
-> +typedef struct RISCVCPUConfig RISCVCPUConfig;
-> +#endif
 
