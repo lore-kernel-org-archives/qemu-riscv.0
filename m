@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40198C7EE2A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 May 2023 20:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D30CDC77B75
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 May 2023 20:34:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q1Yfd-00059D-7l; Tue, 23 May 2023 16:31:53 -0400
+	id 1q1Yi5-0006ah-OP; Tue, 23 May 2023 16:34:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q1YfZ-00050s-6d
- for qemu-riscv@nongnu.org; Tue, 23 May 2023 16:31:45 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ id 1q1Yi3-0006Zx-1y
+ for qemu-riscv@nongnu.org; Tue, 23 May 2023 16:34:20 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q1YfN-0004Zo-1d
- for qemu-riscv@nongnu.org; Tue, 23 May 2023 16:31:34 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2536e522e47so143721a91.1
- for <qemu-riscv@nongnu.org>; Tue, 23 May 2023 13:31:32 -0700 (PDT)
+ id 1q1Yi1-0004v6-Ky
+ for qemu-riscv@nongnu.org; Tue, 23 May 2023 16:34:18 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1ae763f9c0bso871835ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 23 May 2023 13:34:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1684873891; x=1687465891;
+ d=linaro.org; s=google; t=1684874056; x=1687466056;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=MaLiREynf3GjguZchcZJ7k9uz1ZuPF/xk6IMqfU8wVo=;
- b=fdG+1xQMA5U5MKB23jg2FuDGfeQndxcsne9rK6hDW2nnlASpxoeqwg8UGKIxucX+sg
- UU7a38S8vSAsBBShd6iERYsQMxJvQXgf95TgKhJgi48gurYd0vrmcAwEb2tDwxnMjhHO
- ZPGVZW7fquQCXySj2+a8tpMkqzUQHFN+sIY+4aDuwfuzRQyynO+zVNWF9J4CjusTJi/e
- dv2SztXsWDVsmzPS+m/9m9U7ud+egSE9tfs0vzV7SdMDjQ9vbhRtCanv9G0aTG+iow2H
- 20Sd/H3tfS1gsMnOwsVSwOorHbJkH2ZqMYO2+QvF788xnbmGqToFGI9tc5jSwX8HF+7d
- 5QLQ==
+ bh=7gEJI7oDuvv7tbPXfhhHdYUHgNd16ndnIz40ch9e1So=;
+ b=Hoq+Kc500oYdDFTZ6Nltx0bbGlpbgy9hRB17VAq6dXIaF16ImiJKcyuaDDFmCkdxxo
+ WXn0ib0PB4GiU0kt2PaMMKOOv4ZK77E02BOHz86E1UDYqOPktqHpnDGEwAZURtb9eS8z
+ p+biDHPNPFkl/5Ulh2iP8AX/y1O0d3L2q814IunGsgK7DqTDaZXPAhuspLmcYBNZ1MWP
+ iIaBf5LpBiNyvqUI6vSunBNDHJT3PgEPKdLOI5rKVPhYkGjoE/bFupYWw6Im0L2JSODz
+ XtlxoJRNiFdM6uqrm1dmnDoAmBsOYElo7gNTga4A+XOgs8De3IUfL/PuajPGIt/QY6KI
+ sNdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684873891; x=1687465891;
+ d=1e100.net; s=20221208; t=1684874056; x=1687466056;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MaLiREynf3GjguZchcZJ7k9uz1ZuPF/xk6IMqfU8wVo=;
- b=JBk3onAuX3INi8c1F5s0k3GBEyEnLPVrgsBW3zTLsC7xNWHF/NNcDm8FObC4yUfpN5
- 32q2+imKGoRQgJj06PcnXEnwctiSm4z1YKp0az1xx5BOUSrT5uhhI3VBNk7GRLIMgNNk
- Bjm1txu28JN+GVnV4OilVWZHs5MWPgun0aTF9C6JWApkhGIaw1wnofjCYLqcBwtqmrwV
- +StLi5Aa+AUyK6/WqAhac+/HsmTAND4Mfon8j4icCsyDORN/CQxUSZxTUVtKR14fy4QJ
- wT0kDSdtkw6TfK1yomPSYSI1xZt0kAA10pX7rA8aiPocb/IyfW8O2S3L7GNYVVBXho26
- VyEw==
-X-Gm-Message-State: AC+VfDy+ELhW4CKf6J/QjdQHACTXepTYPmlyuYVE969VHEaR7b0rTCLW
- fIghFCJ/E9bEeiO9bcwprtUgWQ==
-X-Google-Smtp-Source: ACHHUZ5tqzeJi0Kujg7intj2i7+ijbT+dqBDcQm7tI63+G+pv4oWS55+V6hR0HGXWfmDx8f36K+zWw==
-X-Received: by 2002:a17:90b:374c:b0:255:9038:fe0d with SMTP id
- ne12-20020a17090b374c00b002559038fe0dmr4728082pjb.38.1684873891510; 
- Tue, 23 May 2023 13:31:31 -0700 (PDT)
+ bh=7gEJI7oDuvv7tbPXfhhHdYUHgNd16ndnIz40ch9e1So=;
+ b=I66MCoHdzW2rzjkZJEUKVxiyzZlxT3GCes2GOhS6YO5pmCZbPKsJ2YCfCg2Mmwk07e
+ u4O3mjcU7k39u37oJWlJ42jHdr6j4qnuehssN8uhCEAOKxXfBG5grhjgtSVJVo5zSLQx
+ tKjUkkuSARYLGzMIqSQL2Pwdz6W/9JKEKSmLQL8uDJMKH/uS6+gSzUCfo25yr3+p3ytR
+ 17NoRqGfDq68UDtaNpjwmP1OjU8CU5x4GlM47unPDVht53R7GY+X2fYejokgWLOWawDq
+ P5AzZ/xpxR9yGpzZPIE2FfxCj7rnSglXEbhjXhjn1NQEVgAxmxEgVAEZS1ySFL0O9svq
+ rCBw==
+X-Gm-Message-State: AC+VfDwcZYQZvgjVhTT+LCKjkhQupz7T5vJlfypRXaxBJTKLPm7edjGU
+ 6QZDwBRq6vliw8tqbZ5kG2vmRw==
+X-Google-Smtp-Source: ACHHUZ5zHv4+zIa+lxesQsAQQrrJ9UT6zJATPTDi/6U3WVOIoBPdbvhYGZnEQX9Fmb3AqIay7WkdAA==
+X-Received: by 2002:a17:902:c402:b0:1ac:b259:87ea with SMTP id
+ k2-20020a170902c40200b001acb25987eamr22116023plk.0.1684874056191; 
+ Tue, 23 May 2023 13:34:16 -0700 (PDT)
 Received: from ?IPV6:2602:ae:1598:4c01:c13a:d73:4f88:3654?
  ([2602:ae:1598:4c01:c13a:d73:4f88:3654])
  by smtp.gmail.com with ESMTPSA id
- t7-20020a17090a3b4700b0025374fedab4sm8605678pjf.22.2023.05.23.13.31.30
+ b8-20020a170902d88800b001ab28f620d0sm7164495plz.290.2023.05.23.13.34.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 23 May 2023 13:31:31 -0700 (PDT)
-Message-ID: <5d0dacba-fe52-ee12-7f9a-5350f58a4a0a@linaro.org>
-Date: Tue, 23 May 2023 13:31:29 -0700
+ Tue, 23 May 2023 13:34:15 -0700 (PDT)
+Message-ID: <22b1cd80-27ce-9821-c434-ebc31bf6760a@linaro.org>
+Date: Tue, 23 May 2023 13:34:13 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-Subject: Re: [PATCH v2 4/7] target/riscv: Change gen_set_pc_imm to
- gen_update_pc
+Subject: Re: [PATCH v2 5/7] target/riscv: Use true diff for gen_pc_plus_diff
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
@@ -73,13 +72,13 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 References: <20230523135939.299246-1-liweiwei@iscas.ac.cn>
- <20230523135939.299246-5-liweiwei@iscas.ac.cn>
+ <20230523135939.299246-6-liweiwei@iscas.ac.cn>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230523135939.299246-5-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230523135939.299246-6-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1033.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -103,19 +102,16 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 5/23/23 06:59, Weiwei Li wrote:
-> Reduce reliance on absolute values(by passing pc difference) to
-> prepare for PC-relative translation.
+> Reduce reliance on absolute values by using true pc difference for
+> gen_pc_plus_diff() to prepare for PC-relative translation.
 > 
 > Signed-off-by: Weiwei Li<liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang<wangjunqiang@iscas.ac.cn>
 > ---
->   target/riscv/insn_trans/trans_privileged.c.inc |  2 +-
->   target/riscv/insn_trans/trans_rvi.c.inc        |  6 +++---
->   target/riscv/insn_trans/trans_rvv.c.inc        |  4 ++--
->   target/riscv/insn_trans/trans_rvzawrs.c.inc    |  2 +-
->   target/riscv/insn_trans/trans_xthead.c.inc     |  2 +-
->   target/riscv/translate.c                       | 10 +++++-----
->   6 files changed, 13 insertions(+), 13 deletions(-)
+>   target/riscv/insn_trans/trans_rvi.c.inc   |  6 ++----
+>   target/riscv/insn_trans/trans_rvzce.c.inc |  2 +-
+>   target/riscv/translate.c                  | 13 ++++++-------
+>   3 files changed, 9 insertions(+), 12 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
