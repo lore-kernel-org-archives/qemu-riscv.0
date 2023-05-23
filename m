@@ -4,64 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD484C7EE29
-	for <qemu-riscv@archiver.kernel.org>; Tue, 23 May 2023 14:14:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F54AC7EE23
+	for <qemu-riscv@archiver.kernel.org>; Tue, 23 May 2023 14:38:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q1SaN-00013V-0Y; Tue, 23 May 2023 10:01:59 -0400
+	id 1q1T9B-0000LG-Pl; Tue, 23 May 2023 10:37:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q1SZe-0007zy-KR; Tue, 23 May 2023 10:01:20 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
+ id 1q1T9A-0000KN-Ca; Tue, 23 May 2023 10:37:56 -0400
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q1SZP-0004mx-Km; Tue, 23 May 2023 10:01:01 -0400
-Received: from localhost.localdomain (unknown [61.165.37.98])
- by APP-05 (Coremail) with SMTP id zQCowACHj4vixmxk5Uy2Aw--.17075S6;
- Tue, 23 May 2023 22:00:05 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v2 4/7] target/riscv: Change gen_set_pc_imm to gen_update_pc
-Date: Tue, 23 May 2023 21:59:36 +0800
-Message-Id: <20230523135939.299246-5-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230523135939.299246-1-liweiwei@iscas.ac.cn>
-References: <20230523135939.299246-1-liweiwei@iscas.ac.cn>
+ id 1q1T97-0006aI-1C; Tue, 23 May 2023 10:37:55 -0400
+Received: from [192.168.0.120] (unknown [61.165.37.98])
+ by APP-01 (Coremail) with SMTP id qwCowAA3PZmxz2xkf8gCBA--.53625S2;
+ Tue, 23 May 2023 22:37:38 +0800 (CST)
+Message-ID: <5d3558a0-8b7f-8b84-a4e0-a6f4404a56b6@iscas.ac.cn>
+Date: Tue, 23 May 2023 22:37:37 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Cc: liweiwei@iscas.ac.cn, frank.chang@sifive.com, alistair.francis@wdc.com,
+ apatel@ventanamicro.com, palmer@rivosinc.com, dbarboza@ventanamicro.com,
+ bin.meng@windriver.com, zhiwei_liu@linux.alibaba.com
+Subject: Re: [PATCH 1/2] target/riscv: Add a function to refresh the dynamic
+ CSRs xml.
+To: Tommy Wu <tommy.wu@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+References: <20230523114454.717708-1-tommy.wu@sifive.com>
+ <20230523114454.717708-2-tommy.wu@sifive.com>
+Content-Language: en-US
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+In-Reply-To: <20230523114454.717708-2-tommy.wu@sifive.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowACHj4vixmxk5Uy2Aw--.17075S6
-X-Coremail-Antispam: 1UD129KBjvJXoW3AFyDZF17tr13AF47Cw4kZwb_yoW7ur1Dpr
- 4Fkr4xKryrJFyrA3WSqFsrAF13Ja15KrW0kwn2ywn3Ja1av3yrCr4DK3Wa9F1UXF48Zrn0
- kF4qyas8urW0gFUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUm014x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
- 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
- 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
- IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
- M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
- kIc2xKxwCY02Avz4vE14v_Xryl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_
- Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17
- CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0
- I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcV
- C2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVj
- vjDU0xZFpf9x0JUBbyZUUUUU=
+X-CM-TRANSID: qwCowAA3PZmxz2xkf8gCBA--.53625S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7Zr1UAF43JrWUXFy8Gr1fXrb_yoW8Kw47pw
+ s5C398Cr1DJr97Ja4fJF4DXF15Aw47GF4Y9397ZwnrJr45X3y5tr1qk3W3Arn8Ga429r1j
+ 9F1Y9r429r48Ar7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9K14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kI
+ c2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkIecxEwVAFwVW5XwCF04k20xvY0x0EwIxGrw
+ CFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE
+ 14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2
+ IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxK
+ x2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI
+ 0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuYvjfUO4E_DUUUU
 X-Originating-IP: [61.165.37.98]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
  helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.089,
  RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -79,148 +82,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reduce reliance on absolute values(by passing pc difference) to
-prepare for PC-relative translation.
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
----
- target/riscv/insn_trans/trans_privileged.c.inc |  2 +-
- target/riscv/insn_trans/trans_rvi.c.inc        |  6 +++---
- target/riscv/insn_trans/trans_rvv.c.inc        |  4 ++--
- target/riscv/insn_trans/trans_rvzawrs.c.inc    |  2 +-
- target/riscv/insn_trans/trans_xthead.c.inc     |  2 +-
- target/riscv/translate.c                       | 10 +++++-----
- 6 files changed, 13 insertions(+), 13 deletions(-)
+On 2023/5/23 19:44, Tommy Wu wrote:
+> When we change the cpu extension state after the cpu is
+> realized, we cannot print the value of some CSRs in the remote
+> gdb debugger. The root cause is that the dynamic CSR xml is
+> generated when the cpu is realized.
+>
+> This patch add a function to refresh the dynamic CSR xml after
+> the cpu is realized.
+>
+> Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>   target/riscv/cpu.h     |  2 ++
+>   target/riscv/gdbstub.c | 12 ++++++++++++
+>   2 files changed, 14 insertions(+)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index de7e43126a..dc8e592275 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -494,6 +494,7 @@ struct ArchCPU {
+>       CPUNegativeOffsetState neg;
+>       CPURISCVState env;
+>   
+> +    int dyn_csr_base_reg;
 
-diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
-index 7c2837194c..3760fb4393 100644
---- a/target/riscv/insn_trans/trans_privileged.c.inc
-+++ b/target/riscv/insn_trans/trans_privileged.c.inc
-@@ -112,7 +112,7 @@ static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
- {
- #ifndef CONFIG_USER_ONLY
-     decode_save_opc(ctx);
--    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-+    gen_update_pc(ctx, ctx->cur_insn_len);
-     gen_helper_wfi(cpu_env);
-     return true;
- #else
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 81ed0d200a..f9f4d25cda 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -776,7 +776,7 @@ static bool trans_pause(DisasContext *ctx, arg_pause *a)
-      * PAUSE is a no-op in QEMU,
-      * end the TB and return to main loop
-      */
--    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-+    gen_update_pc(ctx, ctx->cur_insn_len);
-     exit_tb(ctx);
-     ctx->base.is_jmp = DISAS_NORETURN;
- 
-@@ -800,7 +800,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
-      * FENCE_I is a no-op in QEMU,
-      * however we need to end the translation block
-      */
--    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-+    gen_update_pc(ctx, ctx->cur_insn_len);
-     exit_tb(ctx);
-     ctx->base.is_jmp = DISAS_NORETURN;
-     return true;
-@@ -811,7 +811,7 @@ static bool do_csr_post(DisasContext *ctx)
-     /* The helper may raise ILLEGAL_INSN -- record binv for unwind. */
-     decode_save_opc(ctx);
-     /* We may have changed important cpu state -- exit to main loop. */
--    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-+    gen_update_pc(ctx, ctx->cur_insn_len);
-     exit_tb(ctx);
-     ctx->base.is_jmp = DISAS_NORETURN;
-     return true;
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 6c07eebc52..c2f7527f53 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -169,7 +169,7 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
-     gen_set_gpr(s, rd, dst);
-     mark_vs_dirty(s);
- 
--    gen_set_pc_imm(s, s->pc_succ_insn);
-+    gen_update_pc(s, s->cur_insn_len);
-     lookup_and_goto_ptr(s);
-     s->base.is_jmp = DISAS_NORETURN;
-     return true;
-@@ -188,7 +188,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
-     gen_helper_vsetvl(dst, cpu_env, s1, s2);
-     gen_set_gpr(s, rd, dst);
-     mark_vs_dirty(s);
--    gen_set_pc_imm(s, s->pc_succ_insn);
-+    gen_update_pc(s, s->cur_insn_len);
-     lookup_and_goto_ptr(s);
-     s->base.is_jmp = DISAS_NORETURN;
- 
-diff --git a/target/riscv/insn_trans/trans_rvzawrs.c.inc b/target/riscv/insn_trans/trans_rvzawrs.c.inc
-index 8254e7dfe2..32efbff4d5 100644
---- a/target/riscv/insn_trans/trans_rvzawrs.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzawrs.c.inc
-@@ -33,7 +33,7 @@ static bool trans_wrs(DisasContext *ctx)
-     /* Clear the load reservation  (if any).  */
-     tcg_gen_movi_tl(load_res, -1);
- 
--    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-+    gen_update_pc(ctx, ctx->cur_insn_len);
-     tcg_gen_exit_tb(NULL, 0);
-     ctx->base.is_jmp = DISAS_NORETURN;
- 
-diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/insn_trans/trans_xthead.c.inc
-index 3e13b1d74d..da093a4cec 100644
---- a/target/riscv/insn_trans/trans_xthead.c.inc
-+++ b/target/riscv/insn_trans/trans_xthead.c.inc
-@@ -999,7 +999,7 @@ static void gen_th_sync_local(DisasContext *ctx)
-      * Emulate out-of-order barriers with pipeline flush
-      * by exiting the translation block.
-      */
--    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-+    gen_update_pc(ctx, ctx->cur_insn_len);
-     tcg_gen_exit_tb(NULL, 0);
-     ctx->base.is_jmp = DISAS_NORETURN;
- }
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 8a371c0d75..b01aa48f04 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -232,14 +232,14 @@ static void gen_pc_plus_diff(TCGv target, DisasContext *ctx,
-     tcg_gen_movi_tl(target, dest);
- }
- 
--static void gen_set_pc_imm(DisasContext *ctx, target_ulong dest)
-+static void gen_update_pc(DisasContext *ctx, target_long diff)
- {
--    gen_pc_plus_diff(cpu_pc, ctx, dest);
-+    gen_pc_plus_diff(cpu_pc, ctx, ctx->base.pc_next + diff);
- }
- 
- static void generate_exception(DisasContext *ctx, int excp)
- {
--    gen_set_pc_imm(ctx, ctx->base.pc_next);
-+    gen_update_pc(ctx, 0);
-     gen_helper_raise_exception(cpu_env, tcg_constant_i32(excp));
-     ctx->base.is_jmp = DISAS_NORETURN;
- }
-@@ -291,10 +291,10 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_long diff)
-       */
-     if (translator_use_goto_tb(&ctx->base, dest) && !ctx->itrigger) {
-         tcg_gen_goto_tb(n);
--        gen_set_pc_imm(ctx, dest);
-+        gen_update_pc(ctx, diff);
-         tcg_gen_exit_tb(ctx->base.tb, n);
-     } else {
--        gen_set_pc_imm(ctx, dest);
-+        gen_update_pc(ctx, diff);
-         lookup_and_goto_ptr(ctx);
-     }
- }
--- 
-2.25.1
+dyn_csr_base_reg  seems have no additional effect on the function.
+
+And It remains unmodified in following riscv_refresh_dynamic_csr_xml().
+
+Regards,
+
+Weiwei Li
+
+>       char *dyn_csr_xml;
+>       char *dyn_vreg_xml;
+>   
+> @@ -781,6 +782,7 @@ void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
+>   void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+>   
+>   void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+> +void riscv_refresh_dynamic_csr_xml(CPUState *cs);
+>   
+>   uint8_t satp_mode_max_from_map(uint32_t map);
+>   const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 524bede865..9e97ee2c35 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -230,6 +230,8 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+>           bitsize = 64;
+>       }
+>   
+> +    cpu->dyn_csr_base_reg = base_reg;
+> +
+>       g_string_printf(s, "<?xml version=\"1.0\"?>");
+>       g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd\">");
+>       g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
+> @@ -349,3 +351,13 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+>                                    "riscv-csr.xml", 0);
+>       }
+>   }
+> +
+> +void riscv_refresh_dynamic_csr_xml(CPUState *cs)
+> +{
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    if (!cpu->dyn_csr_xml) {
+> +        g_assert_not_reached();
+> +    }
+> +    g_free(cpu->dyn_csr_xml);
+> +    riscv_gen_dynamic_csr_xml(cs, cpu->dyn_csr_base_reg);
+> +}
 
 
