@@ -4,64 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1DBEC7EE23
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 May 2023 02:02:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92E2FC7EE23
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 May 2023 02:10:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q1doJ-0008IW-57; Tue, 23 May 2023 22:01:07 -0400
+	id 1q1dxK-0008T1-4m; Tue, 23 May 2023 22:10:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q1doH-0008DW-0c; Tue, 23 May 2023 22:01:05 -0400
+ id 1q1dxH-0008Sh-Gg; Tue, 23 May 2023 22:10:23 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q1doB-0004M8-6c; Tue, 23 May 2023 22:01:03 -0400
-Received: from localhost.localdomain (unknown [61.165.37.98])
- by APP-05 (Coremail) with SMTP id zQCowADn7o7Rb21kM1P9Aw--.22464S2;
- Wed, 24 May 2023 10:00:50 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v7 0/2] target/riscv: Fix pointer mask related support
-Date: Wed, 24 May 2023 09:59:31 +0800
-Message-Id: <20230524015933.17349-1-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
+ id 1q1dxD-0006H4-K8; Tue, 23 May 2023 22:10:23 -0400
+Received: from [192.168.0.120] (unknown [61.165.37.98])
+ by APP-05 (Coremail) with SMTP id zQCowABnbZEAcm1kwjT+Aw--.23144S2;
+ Wed, 24 May 2023 10:10:09 +0800 (CST)
+Message-ID: <cae11418-a33c-f35f-1604-a9b241f452a5@iscas.ac.cn>
+Date: Wed, 24 May 2023 10:10:08 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Cc: liweiwei@iscas.ac.cn, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ frank.chang@sifive.com, alistair.francis@wdc.com, apatel@ventanamicro.com,
+ palmer@rivosinc.com, dbarboza@ventanamicro.com, bin.meng@windriver.com,
+ zhiwei_liu@linux.alibaba.com
+Subject: Re: [PATCH 1/2] target/riscv: Add a function to refresh the dynamic
+ CSRs xml.
+To: Tommy Wu <tommy.wu@sifive.com>
+References: <20230523114454.717708-1-tommy.wu@sifive.com>
+ <20230523114454.717708-2-tommy.wu@sifive.com>
+ <5d3558a0-8b7f-8b84-a4e0-a6f4404a56b6@iscas.ac.cn>
+ <CANj3q_=E_TfaHLn4rHQp4jy5U0LXoXCFDjYVwh7c85h_oB_F7Q@mail.gmail.com>
+Content-Language: en-US
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+In-Reply-To: <CANj3q_=E_TfaHLn4rHQp4jy5U0LXoXCFDjYVwh7c85h_oB_F7Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowADn7o7Rb21kM1P9Aw--.22464S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Cw13JF15Ar48Kw1DArWkJFb_yoW8XrWDpF
- WSkw4rKa1UJFWvqrWfXa1xZr18Gan3CFyDCr97JwnYkrWYqr9Yvrs7Kw4UAFW8CF93W343
- KF4jyw1fZa4UArJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvK14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: zQCowABnbZEAcm1kwjT+Aw--.23144S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxZFyktF48trWrKFWUCr13XFb_yoW5Kr4rpr
+ 4kCa98CryUXr97Jw1ftr4DXF15Aw4UGanF934kXasrJw4UW3yYvr4q93Z09rn8Ga1I9r1j
+ vF1Y9rsxZr47ArJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUB014x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
- 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
- 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
- 1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02
- 628vn2kIc2xKxwCY02Avz4vE14v_Gr1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7
- v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF
- 1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIx
- AIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI
- 42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxh
- VjvjDU0xZFpf9x0JUHWlkUUUUU=
+ 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
+ 4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
+ Yx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbV
+ WUJVW8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
+ Y2ka0xkIwI1lc7I2V7IY0VAS07AlzVAYIcxG8wCY02Avz4vE14v_Gr1l42xK82IYc2Ij64
+ vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8G
+ jcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2I
+ x0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK
+ 8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I
+ 0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUF3kuDUUUU
 X-Originating-IP: [61.165.37.98]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
  helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
+X-Spam_score_int: -42
+X-Spam_score: -4.3
 X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.089,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,47 +84,114 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patchset tries to fix some problem in current implementation for pointer mask, and add support for pointer mask of instruction fetch.
 
-The port is available here:
-https://github.com/plctlab/plct-qemu/tree/plct-pm-fix-v7
+On 2023/5/24 09:59, Tommy Wu wrote:
+> Hi Weiwei Li,
+>
+> `dyn_csr_base_reg` will be used in `riscv_refresh_dynamic_csr_xml`
+> We can initialize this variable when the cpu is realized.
+I didn't find this initialization in following code.
+> And used this variable in `riscv_refresh_dynamic_csr_xml`.
 
-v2:
-* drop some error patchs
-* Add patch 2 and 3 to fix the new problems
-* Add patch 4 and 5 to use PC-relative translation for pointer mask for instruction fetch
+That's my question. In riscv_refresh_dynamic_csr_xml() , 
+cpu->dyn_csr_base_reg is passed to riscv_gen_dynamic_csr_xml() as base_reg.
 
-v3:
-* use target_pc temp instead of cpu_pc to store into badaddr in patch 3
-* use dest_gpr instead of tcg_temp_new() for succ_pc in patch 4
-* enable CF_PCREL for system mode in seperate patch 5
+And then base_reg is assigned to cpu->dyn_csr_base_reg again in it. So 
+it's unchanged in this progress.
 
-v4：
-* Fix wrong pc_save value for conditional jump in patch 4
-* Fix tcg_cflags overwrite problem to make CF_PCREL really work in new patch 5
-* Fix tb mis-matched problem in new patch 6
+Another question is  dyn_csr_base_reg seems have no additional function 
+currently.
 
-v5:
-* use gen_get_target_pc to compute target address of auipc and successor address of jalr in patch 4.
-* separate tcg related fix patches(5, 6) from this patchset
+Regards,
 
-v6:
-* rename gen_get_target_pc as g in patch 3 and patch 4
-* use gen_pc_plus_diff to compute successor address of jal in patch 4
-* mov comments for patch 5 to patch 4
+Weiwei Li
 
-v7:
-* separate support for PC-relative translation and pointer mask for instruction fetch (patch 3~6) out of this patchset
-
-Weiwei Li (2):
-  target/riscv: Fix pointer mask transformation for vector address
-  target/riscv: Update cur_pmmask/base when xl changes
-
- target/riscv/csr.c           | 9 ++++++++-
- target/riscv/vector_helper.c | 2 +-
- 2 files changed, 9 insertions(+), 2 deletions(-)
-
--- 
-2.25.1
+>
+> Best regards,
+> Tommy
+>
+>
+> On Tue, May 23, 2023 at 10:38 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+>
+>
+>     On 2023/5/23 19:44, Tommy Wu wrote:
+>     > When we change the cpu extension state after the cpu is
+>     > realized, we cannot print the value of some CSRs in the remote
+>     > gdb debugger. The root cause is that the dynamic CSR xml is
+>     > generated when the cpu is realized.
+>     >
+>     > This patch add a function to refresh the dynamic CSR xml after
+>     > the cpu is realized.
+>     >
+>     > Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
+>     > Reviewed-by: Frank Chang <frank.chang@sifive.com>
+>     > ---
+>     >   target/riscv/cpu.h     |  2 ++
+>     >   target/riscv/gdbstub.c | 12 ++++++++++++
+>     >   2 files changed, 14 insertions(+)
+>     >
+>     > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>     > index de7e43126a..dc8e592275 100644
+>     > --- a/target/riscv/cpu.h
+>     > +++ b/target/riscv/cpu.h
+>     > @@ -494,6 +494,7 @@ struct ArchCPU {
+>     >       CPUNegativeOffsetState neg;
+>     >       CPURISCVState env;
+>     >
+>     > +    int dyn_csr_base_reg;
+>
+>     dyn_csr_base_reg  seems have no additional effect on the function.
+>
+>     And It remains unmodified in following
+>     riscv_refresh_dynamic_csr_xml().
+>
+>     Regards,
+>
+>     Weiwei Li
+>
+>     >       char *dyn_csr_xml;
+>     >       char *dyn_vreg_xml;
+>     >
+>     > @@ -781,6 +782,7 @@ void riscv_get_csr_ops(int csrno,
+>     riscv_csr_operations *ops);
+>     >   void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+>     >
+>     >   void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+>     > +void riscv_refresh_dynamic_csr_xml(CPUState *cs);
+>     >
+>     >   uint8_t satp_mode_max_from_map(uint32_t map);
+>     >   const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
+>     > diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+>     > index 524bede865..9e97ee2c35 100644
+>     > --- a/target/riscv/gdbstub.c
+>     > +++ b/target/riscv/gdbstub.c
+>     > @@ -230,6 +230,8 @@ static int
+>     riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+>     >           bitsize = 64;
+>     >       }
+>     >
+>     > +    cpu->dyn_csr_base_reg = base_reg;
+>     > +
+>     >       g_string_printf(s, "<?xml version=\"1.0\"?>");
+>     >       g_string_append_printf(s, "<!DOCTYPE feature SYSTEM
+>     \"gdb-target.dtd\">");
+>     >       g_string_append_printf(s, "<feature
+>     name=\"org.gnu.gdb.riscv.csr\">");
+>     > @@ -349,3 +351,13 @@ void
+>     riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+>     >                                    "riscv-csr.xml", 0);
+>     >       }
+>     >   }
+>     > +
+>     > +void riscv_refresh_dynamic_csr_xml(CPUState *cs)
+>     > +{
+>     > +    RISCVCPU *cpu = RISCV_CPU(cs);
+>     > +    if (!cpu->dyn_csr_xml) {
+>     > +        g_assert_not_reached();
+>     > +    }
+>     > +    g_free(cpu->dyn_csr_xml);
+>     > +    riscv_gen_dynamic_csr_xml(cs, cpu->dyn_csr_base_reg);
+>     > +}
+>
 
 
