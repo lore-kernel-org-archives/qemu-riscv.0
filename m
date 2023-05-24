@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92E2FC7EE23
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 May 2023 02:10:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 011F4C7EE23
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 May 2023 02:35:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q1dxK-0008T1-4m; Tue, 23 May 2023 22:10:26 -0400
+	id 1q1eKp-0003SH-1Y; Tue, 23 May 2023 22:34:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q1dxH-0008Sh-Gg; Tue, 23 May 2023 22:10:23 -0400
+ id 1q1eKn-0003RG-Ry; Tue, 23 May 2023 22:34:41 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q1dxD-0006H4-K8; Tue, 23 May 2023 22:10:23 -0400
+ id 1q1eKl-0001bL-2i; Tue, 23 May 2023 22:34:41 -0400
 Received: from [192.168.0.120] (unknown [61.165.37.98])
- by APP-05 (Coremail) with SMTP id zQCowABnbZEAcm1kwjT+Aw--.23144S2;
- Wed, 24 May 2023 10:10:09 +0800 (CST)
-Message-ID: <cae11418-a33c-f35f-1604-a9b241f452a5@iscas.ac.cn>
-Date: Wed, 24 May 2023 10:10:08 +0800
+ by APP-05 (Coremail) with SMTP id zQCowACHjpK0d21k2mkABA--.23069S2;
+ Wed, 24 May 2023 10:34:29 +0800 (CST)
+Message-ID: <858ea86b-0bd7-5101-2948-6d3f5aa55aec@iscas.ac.cn>
+Date: Wed, 24 May 2023 10:34:28 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
@@ -30,35 +30,35 @@ Cc: liweiwei@iscas.ac.cn, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  frank.chang@sifive.com, alistair.francis@wdc.com, apatel@ventanamicro.com,
  palmer@rivosinc.com, dbarboza@ventanamicro.com, bin.meng@windriver.com,
  zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH 1/2] target/riscv: Add a function to refresh the dynamic
- CSRs xml.
+Subject: Re: [PATCH 2/2] hw/intc: riscv_imsic: Refresh the CSRs xml after
+ updating the state of the cpu.
+Content-Language: en-US
 To: Tommy Wu <tommy.wu@sifive.com>
 References: <20230523114454.717708-1-tommy.wu@sifive.com>
- <20230523114454.717708-2-tommy.wu@sifive.com>
- <5d3558a0-8b7f-8b84-a4e0-a6f4404a56b6@iscas.ac.cn>
- <CANj3q_=E_TfaHLn4rHQp4jy5U0LXoXCFDjYVwh7c85h_oB_F7Q@mail.gmail.com>
-Content-Language: en-US
+ <20230523114454.717708-3-tommy.wu@sifive.com>
+ <a1c36ae3-7875-0178-fcca-33abed1816f2@iscas.ac.cn>
+ <CANj3q_nn5puBEdfzCgwUtT9bkhUUzopf-2qa0xC7LcRs_i_uhw@mail.gmail.com>
 From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <CANj3q_=E_TfaHLn4rHQp4jy5U0LXoXCFDjYVwh7c85h_oB_F7Q@mail.gmail.com>
+In-Reply-To: <CANj3q_nn5puBEdfzCgwUtT9bkhUUzopf-2qa0xC7LcRs_i_uhw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABnbZEAcm1kwjT+Aw--.23144S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxZFyktF48trWrKFWUCr13XFb_yoW5Kr4rpr
- 4kCa98CryUXr97Jw1ftr4DXF15Aw4UGanF934kXasrJw4UW3yYvr4q93Z09rn8Ga1I9r1j
- vF1Y9rsxZr47ArJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUB014x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: zQCowACHjpK0d21k2mkABA--.23069S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7Ar1rZrWkJF1UXr4xGw1DAwb_yoW8uryfpr
+ s3CFWakFykGF1fZwsayF1rXFW5Zr1UG3W5Wr98Ga4UJrWDXw4FqrWDWw1vgF1DWFWxKr1a
+ vr1jgFW2vF17AaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBj14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
- 4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
- Yx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbV
- WUJVW8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
- Y2ka0xkIwI1lc7I2V7IY0VAS07AlzVAYIcxG8wCY02Avz4vE14v_Gr1l42xK82IYc2Ij64
- vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8G
- jcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2I
- x0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK
- 8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I
- 0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUF3kuDUUUU
+ 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
+ 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+ 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
+ 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
+ n2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkIecxEwVAFwVW8JwCF04k20xvY0x0EwI
+ xGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480
+ Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7
+ IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k2
+ 6cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxV
+ AFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUHWlkUUUUU=
 X-Originating-IP: [61.165.37.98]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -85,113 +85,79 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
-On 2023/5/24 09:59, Tommy Wu wrote:
-> Hi Weiwei Li,
+On 2023/5/24 09:51, Tommy Wu wrote:
+> Hi Weiwei Li,
+> Yes, you're right,  `riscv_refresh_dynamic_csr_xml()`  can only be 
+> called when
+> cpu->dyn_csr_xml isn't a NULL pointer here.
 >
-> `dyn_csr_base_reg` will be used in `riscv_refresh_dynamic_csr_xml`
-> We can initialize this variable when the cpu is realized.
-I didn't find this initialization in following code.
-> And used this variable in `riscv_refresh_dynamic_csr_xml`.
+> The cpu->dyn_csr_xml will be set when the cpu is realized.
 
-That's my question. In riscv_refresh_dynamic_csr_xml() , 
-cpu->dyn_csr_base_reg is passed to riscv_gen_dynamic_csr_xml() as base_reg.
+Yeah, It will  be set only when Zicsr is supported.  And I think aia 
+requires Zicsr.
 
-And then base_reg is assigned to cpu->dyn_csr_base_reg again in it. So 
-it's unchanged in this progress.
-
-Another question is  dyn_csr_base_reg seems have no additional function 
-currently.
+However, another question:  whether we should add a check in 
+riscv_imsic.c that it requires Zicsr?
 
 Regards,
 
 Weiwei Li
 
 >
-> Best regards,
+> Best Regards,
 > Tommy
 >
 >
-> On Tue, May 23, 2023 at 10:38 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+> On Tue, May 23, 2023 at 10:44 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
 >
 >     On 2023/5/23 19:44, Tommy Wu wrote:
->     > When we change the cpu extension state after the cpu is
->     > realized, we cannot print the value of some CSRs in the remote
->     > gdb debugger. The root cause is that the dynamic CSR xml is
+>     > Originally, when we set the ext_smaia to true, we still cannot
+>     print the
+>     > AIA CSRs in the remote gdb debugger, because the dynamic CSR xml is
 >     > generated when the cpu is realized.
 >     >
->     > This patch add a function to refresh the dynamic CSR xml after
->     > the cpu is realized.
+>     > This patch refreshes the dynamic CSR xml after we update the
+>     ext_smaia,
+>     > so that we can print the AIA CSRs in the remote gdb debugger.
 >     >
 >     > Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
 >     > Reviewed-by: Frank Chang <frank.chang@sifive.com>
 >     > ---
->     >   target/riscv/cpu.h     |  2 ++
->     >   target/riscv/gdbstub.c | 12 ++++++++++++
->     >   2 files changed, 14 insertions(+)
+>     >   hw/intc/riscv_imsic.c | 4 ++++
+>     >   1 file changed, 4 insertions(+)
 >     >
->     > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->     > index de7e43126a..dc8e592275 100644
->     > --- a/target/riscv/cpu.h
->     > +++ b/target/riscv/cpu.h
->     > @@ -494,6 +494,7 @@ struct ArchCPU {
->     >       CPUNegativeOffsetState neg;
->     >       CPURISCVState env;
->     >
->     > +    int dyn_csr_base_reg;
+>     > diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+>     > index fea3385b51..97a51d535b 100644
+>     > --- a/hw/intc/riscv_imsic.c
+>     > +++ b/hw/intc/riscv_imsic.c
+>     > @@ -350,6 +350,10 @@ static void riscv_imsic_realize(DeviceState
+>     *dev, Error **errp)
+>     >           } else {
+>     >               rcpu->cfg.ext_smaia = true;
+>     >           }
+>     > +
+>     > +        /* Refresh the dynamic csr xml for the gdbstub. */
+>     > +        riscv_refresh_dynamic_csr_xml(cpu);
+>     > +
 >
->     dyn_csr_base_reg  seems have no additional effect on the function.
+>     There is an assert in riscv_refresh_dynamic_csr_xml():
 >
->     And It remains unmodified in following
->     riscv_refresh_dynamic_csr_xml().
+>     +    if (!cpu->dyn_csr_xml) {
+>     +        g_assert_not_reached();
+>     +    }
+>
+>     So I think riscv_refresh_dynamic_csr_xml() can only be called when
+>     cpu->dyn_csr_xml is true here.
 >
 >     Regards,
 >
 >     Weiwei Li
 >
->     >       char *dyn_csr_xml;
->     >       char *dyn_vreg_xml;
->     >
->     > @@ -781,6 +782,7 @@ void riscv_get_csr_ops(int csrno,
->     riscv_csr_operations *ops);
->     >   void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
->     >
->     >   void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
->     > +void riscv_refresh_dynamic_csr_xml(CPUState *cs);
->     >
->     >   uint8_t satp_mode_max_from_map(uint32_t map);
->     >   const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
->     > diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
->     > index 524bede865..9e97ee2c35 100644
->     > --- a/target/riscv/gdbstub.c
->     > +++ b/target/riscv/gdbstub.c
->     > @@ -230,6 +230,8 @@ static int
->     riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
->     >           bitsize = 64;
+>     >           riscv_cpu_set_aia_ireg_rmw_fn(env, (imsic->mmode) ?
+>     PRV_M : PRV_S,
+>     >                                         riscv_imsic_rmw, imsic);
 >     >       }
->     >
->     > +    cpu->dyn_csr_base_reg = base_reg;
->     > +
->     >       g_string_printf(s, "<?xml version=\"1.0\"?>");
->     >       g_string_append_printf(s, "<!DOCTYPE feature SYSTEM
->     \"gdb-target.dtd\">");
->     >       g_string_append_printf(s, "<feature
->     name=\"org.gnu.gdb.riscv.csr\">");
->     > @@ -349,3 +351,13 @@ void
->     riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
->     >                                    "riscv-csr.xml", 0);
->     >       }
->     >   }
->     > +
->     > +void riscv_refresh_dynamic_csr_xml(CPUState *cs)
->     > +{
->     > +    RISCVCPU *cpu = RISCV_CPU(cs);
->     > +    if (!cpu->dyn_csr_xml) {
->     > +        g_assert_not_reached();
->     > +    }
->     > +    g_free(cpu->dyn_csr_xml);
->     > +    riscv_gen_dynamic_csr_xml(cs, cpu->dyn_csr_base_reg);
->     > +}
 >
 
 
