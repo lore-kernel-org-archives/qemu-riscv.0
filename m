@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB30DC7EE23
-	for <qemu-riscv@archiver.kernel.org>; Wed, 24 May 2023 02:01:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7307FC77B7E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 24 May 2023 02:01:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q1doH-0008FT-Mc; Tue, 23 May 2023 22:01:06 -0400
+	id 1q1doI-0008FX-7t; Tue, 23 May 2023 22:01:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q1doG-0008DP-W2; Tue, 23 May 2023 22:01:05 -0400
+ id 1q1doH-0008DT-0J; Tue, 23 May 2023 22:01:05 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q1doB-0004MT-6j; Tue, 23 May 2023 22:01:03 -0400
+ id 1q1doB-0004Mc-6X; Tue, 23 May 2023 22:01:03 -0400
 Received: from localhost.localdomain (unknown [61.165.37.98])
- by APP-05 (Coremail) with SMTP id zQCowADn7o7Rb21kM1P9Aw--.22464S4;
- Wed, 24 May 2023 10:00:51 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowADn7o7Rb21kM1P9Aw--.22464S3;
+ Wed, 24 May 2023 10:00:50 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -28,21 +28,22 @@ Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v7 2/2] target/riscv: Update cur_pmmask/base when xl changes
-Date: Wed, 24 May 2023 09:59:33 +0800
-Message-Id: <20230524015933.17349-3-liweiwei@iscas.ac.cn>
+Subject: [PATCH v7 1/2] target/riscv: Fix pointer mask transformation for
+ vector address
+Date: Wed, 24 May 2023 09:59:32 +0800
+Message-Id: <20230524015933.17349-2-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230524015933.17349-1-liweiwei@iscas.ac.cn>
 References: <20230524015933.17349-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowADn7o7Rb21kM1P9Aw--.22464S4
-X-Coremail-Antispam: 1UD129KBjvdXoW7GFW8XrW3uFy8uF1xGFWfZrb_yoWDWFgE9F
- 4I9F95X3y0g3ZayFyDAa4F9ry0vry0gr1jv3W3Kr45Gryj9rZrJ3Wvqwn7Jr15Zr4DJrnx
- AwnrX3W7Cr12vjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbyAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUXwA2048vs2IY02
- 0Ec7CjxVAFwI0_Gr0_Xr1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
+X-CM-TRANSID: zQCowADn7o7Rb21kM1P9Aw--.22464S3
+X-Coremail-Antispam: 1UD129KBjvdXoW7Wry8uw18tw4rtryUXFyfCrg_yoWfZFc_WF
+ 48WFsxW3yUZa1FvFZ5Crn0yr1IvFykurs0vw4xJrs7GFyj9ay7C3sFkan5A3WFvrZxJrnI
+ kwnrJrW7ur15CjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbyAFF20E14v26ryj6rWUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUGwA2048vs2IY02
+ 0Ec7CjxVAFwI0_JFI_Gr1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
  wVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1l84
  ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1U
  M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
@@ -53,7 +54,7 @@ X-Coremail-Antispam: 1UD129KBjvdXoW7GFW8XrW3uFy8uF1xGFWfZrb_yoWDWFgE9F
  AFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xII
  jxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4
  A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU
- 0xZFpf9x0JU2PfdUUUUU=
+ 0xZFpf9x0JUDEfrUUUUU=
 X-Originating-IP: [61.165.37.98]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -79,37 +80,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-write_mstatus() can only change current xl when in debug mode.
-And we need update cur_pmmask/base in this case.
+actual_address = (requested_address & ~mpmmask) | mpmbase.
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 ---
- target/riscv/csr.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ target/riscv/vector_helper.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index cf7da4f87f..ad73691878 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1324,8 +1324,15 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-         mstatus = set_field(mstatus, MSTATUS64_SXL, xl);
-     }
-     env->mstatus = mstatus;
--    env->xl = cpu_recompute_xl(env);
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 8e6c99e573..7505f9470a 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -169,7 +169,7 @@ static inline uint32_t vext_get_total_elems(CPURISCVState *env, uint32_t desc,
  
-+    /*
-+     * Except in debug mode, UXL/SXL can only be modified by higher
-+     * privilege mode. So xl will not be changed in normal mode.
-+     */
-+    if (env->debugger) {
-+        env->xl = cpu_recompute_xl(env);
-+        riscv_cpu_update_mask(env);
-+    }
-     return RISCV_EXCP_NONE;
+ static inline target_ulong adjust_addr(CPURISCVState *env, target_ulong addr)
+ {
+-    return (addr & env->cur_pmmask) | env->cur_pmbase;
++    return (addr & ~env->cur_pmmask) | env->cur_pmbase;
  }
  
+ /*
 -- 
 2.25.1
 
