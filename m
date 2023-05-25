@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6510C77B7C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 02:21:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72533C77B7A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 02:22:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q20am-0003J1-Hx; Wed, 24 May 2023 22:20:40 -0400
+	id 1q20c0-00045Q-QI; Wed, 24 May 2023 22:21:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q20ak-0003Hc-Pq; Wed, 24 May 2023 22:20:38 -0400
-Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
+ id 1q20bz-00044w-NB; Wed, 24 May 2023 22:21:55 -0400
+Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q20aj-000142-5k; Wed, 24 May 2023 22:20:38 -0400
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-456e4f4ea83so9044e0c.3; 
- Wed, 24 May 2023 19:20:35 -0700 (PDT)
+ id 1q20bw-0001JX-Fi; Wed, 24 May 2023 22:21:55 -0400
+Received: by mail-vs1-xe31.google.com with SMTP id
+ ada2fe7eead31-439554d9a69so303147137.1; 
+ Wed, 24 May 2023 19:21:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1684981234; x=1687573234;
+ d=gmail.com; s=20221208; t=1684981311; x=1687573311;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ffeMTynjXA7u9+bljpUT1IpC2UK15C9IOUz2SqnPQlU=;
- b=Z7COVXEeqzpS99g17WmaKd8JQptieAFDxo3aZtVj5YsOQYrEKFPfjpSdSgZarwb3gP
- k9MM4VRbqcJvkzBCJ29y6eXDRBH+k8ZJOVvLiHghlXYARp2qCDenhgqG2HKuYLboTS/E
- 27thGs4fchoCCBuf1N7QrByxNPTeW9k6e7GVhQ5udW6XTbduompjL9W+Qb4JzU9kFZ5Q
- SuD5cRXZkduIGaUdvx9LPl5phqa+cCJ3QinAyDl6hXBEdcVSAkjXSxWKIIl6LYA9/2Oe
- n/NVVMx7lU3NF20ugL9SuO2jtPySywPPPPzXWhouzakxTUDUSF5r0dwK9PYyeEgLslzR
- KxeA==
+ bh=Pos1YCI+aHnHCSixIYTh/TXSSOpx4F9LwRj8Hg8bjvk=;
+ b=FjfCvFMtdzgn8o7Dd+LvJA07dQKK/69O79Bn880kDe5PIt2W+yK2McBDnZlfkGjiOD
+ nxeBm6VPVttVFnV3NhQfR1hsuYQIwCikH+7pQe2w6sutROFcC9LHP2gbeNkeHuLv+f+4
+ aryyNyBrImSk8DHy9PFppUwZCsWRhDAmBQq9oZTaBSsSAE7W+MQaCSBOI+e74SaZhTbN
+ JYQpQ6lI7U/u7Ze8B/vHBzB2FoNH0hh9TcPrg3hIK7vYGBdLRglfXaZI3XOCi/copORv
+ JjwKNNvoP8Rfbfcz3r4Jxb7ApSzBYGZTKzommYbMjsVLznpmcCj8itv2ZUKcs8dj0G1T
+ m0ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684981234; x=1687573234;
+ d=1e100.net; s=20221208; t=1684981311; x=1687573311;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ffeMTynjXA7u9+bljpUT1IpC2UK15C9IOUz2SqnPQlU=;
- b=Z4cB5aS2MeESEDUSgkHDU6ZqclyHI2pA3EJWbERxEoFzPXaAq9mLu/k9ws51ERbOME
- TblgvdgkJ2e3jZwYaUzMGCNfdbQsD+1/C2Bi8uxJ6vEeC4JSSMehODZmQLveKtWgCwxa
- JKea6LBgrXlr/hOrW1lP4OO9PRLKRQwWs23nNymhybfLLHXbgzV/I+f9qDcd7sHwBfLQ
- BM4soFY4Tf4+4Ro52Tqvjv/Xs+o4SuJnu5H6NeNanb0iaFrKZuWGowYNWuGzj/4KsAZR
- /TeznOPyDtrZqxL2938KZUguGw7gIgApJIhT2QlZ0h0iXTStgzqCRoyFbZM1rsIv3Udz
- Hg0Q==
-X-Gm-Message-State: AC+VfDxrl4mENGISoUca875wwftQGm2qyu65bom7L26LWsd1S8rlPUlH
- PxTgQ//gmQhOpdR9w8yfupVV5DZK7fVO8DwnNYU=
-X-Google-Smtp-Source: ACHHUZ6OIdOsGEiIOuXJKH8bek/y/Hd/3AHZjxQUZvoCWRsPaebiBQy9L8nmUL9GaxMZvRwrZhj2Fy2+BHXwT2VpXHo=
-X-Received: by 2002:a67:f7cd:0:b0:439:72ae:f5e7 with SMTP id
- a13-20020a67f7cd000000b0043972aef5e7mr490560vsp.25.1684981234574; Wed, 24 May
- 2023 19:20:34 -0700 (PDT)
+ bh=Pos1YCI+aHnHCSixIYTh/TXSSOpx4F9LwRj8Hg8bjvk=;
+ b=e4lhYsK6GD5vJiripk9ozyC+N6GRRjYYD5w0fAZcWTLAx3et+h/4EbmdkUQ22zeQL8
+ WGAiqfLGMYCW9vf8w8K2koQ2GR0Hx7dZmgEbbAvStZJZHp5D4+wBgYzLLkzlyKK5SAAg
+ Zg4zx+E9jj3ehuKB8jFuXFocdIJ1qWN11thcY6vd+bB7BHtWOaCs5kTpB53Hw467eS+0
+ fP9ji0Z5JTuTvIEfXSME9xj2KfSjtxnLEQY/T+cn1CMl7aLDB1VXadXAJnSswEWTcMfl
+ 5ol1gVbWV0TuhHPQ6kgk3YiBakhNaX/lRxtEBtehuzJ/1ubDH0aDuH/UOG9Skw+v3pad
+ se0g==
+X-Gm-Message-State: AC+VfDwV1ZcQEUmBQvwTxjmUjnJfUOrTOz5a26zvbelH+khvVHFD1qG8
+ WfAxdQdWSFwEUU1LaAFXGLSnMQzVF6+tZ2muUog=
+X-Google-Smtp-Source: ACHHUZ4sbDASX+6+gmdwLsGqpNAanUhomgfGSPd8JReDnnvEcS8Wcp4NxuHvVwaXg1gTtiLkShPRhoi7JernLPlEB7M=
+X-Received: by 2002:a67:8cc2:0:b0:434:8430:299c with SMTP id
+ o185-20020a678cc2000000b004348430299cmr491361vsd.7.1684981311000; Wed, 24 May
+ 2023 19:21:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230520054510.68822-1-philmd@linaro.org>
- <20230520054510.68822-6-philmd@linaro.org>
-In-Reply-To: <20230520054510.68822-6-philmd@linaro.org>
+In-Reply-To: <20230520054510.68822-1-philmd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 25 May 2023 12:20:08 +1000
-Message-ID: <CAKmqyKOSXWZm394M16CFEqFiQFo=+D5xEmwhorP=sCuohfoDMg@mail.gmail.com>
-Subject: Re: [PATCH 5/5] hw/riscv/opentitan: Correct OpenTitanState parent
- type/size
+Date: Thu, 25 May 2023 12:21:25 +1000
+Message-ID: <CAKmqyKPyZJgZTd+mdRHAE_fvh+PE3sboT9aj=dBLwktfAQeKUQ@mail.gmail.com>
+Subject: Re: [PATCH 0/5] hw/riscv/opentitan: Correct QOM type/size of
+ OpenTitanState
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
@@ -67,8 +66,8 @@ Cc: qemu-devel@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  qemu-riscv@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -95,63 +94,35 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Sat, May 20, 2023 at 3:47=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
 <philmd@linaro.org> wrote:
 >
-> OpenTitanState is the 'machine' (or 'board') state: it isn't
-> a SysBus device, but inherits from the MachineState type.
-> Correct the instance size.
-> Doing so we  avoid leaking an OpenTitanState pointer in
-> opentitan_machine_init().
+> Hi,
 >
-> Fixes: fe0fe4735e ("riscv: Initial commit of OpenTitan machine")
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> This series fix a QOM issue with the OpenTitanState
+> structure, noticed while auditing QOM relations globally.
+>
+> All patches are trivial to review.
+>
+> Regards,
+>
+> Phil.
+>
+> Philippe Mathieu-Daud=C3=A9 (5):
+>   hw/riscv/opentitan: Rename machine_[class]_init() functions
+>   hw/riscv/opentitan: Declare QOM types using DEFINE_TYPES() macro
+>   hw/riscv/opentitan: Add TYPE_OPENTITAN_MACHINE definition
+>   hw/riscv/opentitan: Explicit machine type definition
+>   hw/riscv/opentitan: Correct OpenTitanState parent type/size
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  include/hw/riscv/opentitan.h | 3 ++-
->  hw/riscv/opentitan.c         | 3 ++-
->  2 files changed, 4 insertions(+), 2 deletions(-)
 >
-> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-> index 806ff73528..609473d07b 100644
-> --- a/include/hw/riscv/opentitan.h
-> +++ b/include/hw/riscv/opentitan.h
-> @@ -55,10 +55,11 @@ struct LowRISCIbexSoCState {
->  };
+>  include/hw/riscv/opentitan.h |  6 +++++-
+>  hw/riscv/opentitan.c         | 38 +++++++++++++++++++-----------------
+>  2 files changed, 25 insertions(+), 19 deletions(-)
 >
->  #define TYPE_OPENTITAN_MACHINE MACHINE_TYPE_NAME("opentitan")
-> +OBJECT_DECLARE_SIMPLE_TYPE(OpenTitanState, OPENTITAN_MACHINE)
->
->  typedef struct OpenTitanState {
->      /*< private >*/
-> -    SysBusDevice parent_obj;
-> +    MachineState parent_obj;
->
->      /*< public >*/
->      LowRISCIbexSoCState soc;
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 9535308197..6a2fcc4ade 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -78,8 +78,8 @@ static const MemMapEntry ibex_memmap[] =3D {
->  static void opentitan_machine_init(MachineState *machine)
->  {
->      MachineClass *mc =3D MACHINE_GET_CLASS(machine);
-> +    OpenTitanState *s =3D OPENTITAN_MACHINE(machine);
->      const MemMapEntry *memmap =3D ibex_memmap;
-> -    OpenTitanState *s =3D g_new0(OpenTitanState, 1);
->      MemoryRegion *sys_mem =3D get_system_memory();
->
->      if (machine->ram_size !=3D mc->default_ram_size) {
-> @@ -330,6 +330,7 @@ static const TypeInfo open_titan_types[] =3D {
->      }, {
->          .name           =3D TYPE_OPENTITAN_MACHINE,
->          .parent         =3D TYPE_MACHINE,
-> +        .instance_size  =3D sizeof(OpenTitanState),
->          .class_init     =3D opentitan_machine_class_init,
->      }
->  };
 > --
 > 2.38.1
 >
