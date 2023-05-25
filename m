@@ -4,85 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E84E7C77B7E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 12:50:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA4C8C7EE29
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 13:43:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q2AQM-0008AJ-4C; Thu, 25 May 2023 08:50:34 -0400
+	id 1q2BFh-0001Q1-19; Thu, 25 May 2023 09:43:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1q2AQK-00089J-M4
- for qemu-riscv@nongnu.org; Thu, 25 May 2023 08:50:32 -0400
-Received: from mail-ot1-x32d.google.com ([2607:f8b0:4864:20::32d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1q2AQH-0002zP-7z
- for qemu-riscv@nongnu.org; Thu, 25 May 2023 08:50:32 -0400
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-6af6b6837acso1096532a34.1
- for <qemu-riscv@nongnu.org>; Thu, 25 May 2023 05:50:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1685019027; x=1687611027;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=IwdOgWlcsRKOGUe6kYsdBCRu82E3MTbgsMGIobPIl8E=;
- b=P8fcIdAzVEX7/n1a8x3562gjLyBERF3Ery/ymBelW0Wkq+xt7SXevbDOFRB0f6QJL2
- 7QguMFOo54aeKEOo9OsggBuFOXboagHp2KmRiSsWmKNtSULuVZ2t8DCLDZuWRf2QEMCK
- 4QOSFxmbenJNDiHFdRzIkHbW5uyoSK5eoBd1lIYNl24p4jRXvsRpW2ks2odG/gsNkowQ
- oBROnKfY4nNsvtHwo4oUMJpwbbpr2DnfFlJl0+qWjf7HZME7p/DN6cbNki/TNgCF+vzU
- jnAnBtcKfJODgycwN6gPoAwwmxMMLjngh4Mu5YU6y9FMc7DFqaFMoAGsi/uxnUt2z/5F
- T2eQ==
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1q2BFf-0001NJ-G8
+ for qemu-riscv@nongnu.org; Thu, 25 May 2023 09:43:35 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1q2BFc-0000pH-Be
+ for qemu-riscv@nongnu.org; Thu, 25 May 2023 09:43:35 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1685022211;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=g1xlDOtW55fsHDEqZYD02dvREbm6bxmXVm1xX4Q9G4U=;
+ b=EkI2T0wMYnxHQfVQse2K8xTTtkJJWoWEHL5XImiwrYYFjEhrjUyRPBv1EGRQ+KGIuzdxTc
+ KFrwIZQgJ3nUgRUbNn2WzBdXTSxUu4UauARJtf1empz/mxiaWeVrh7aJ0hA/GAMSpyiFv3
+ GrL3ypNEGfaJrMWW+8tYlANuKc9svWw=
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-185-5U7kS1Z5MgyD29J5w_283Q-1; Thu, 25 May 2023 09:43:30 -0400
+X-MC-Unique: 5U7kS1Z5MgyD29J5w_283Q-1
+Received: by mail-pj1-f70.google.com with SMTP id
+ 98e67ed59e1d1-25380c8e30aso760444a91.1
+ for <qemu-riscv@nongnu.org>; Thu, 25 May 2023 06:43:30 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685019027; x=1687611027;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IwdOgWlcsRKOGUe6kYsdBCRu82E3MTbgsMGIobPIl8E=;
- b=BcP/h0aqRMIW7Y5xoIrMKYN2ylE4BfQoVkzx4vmDqdMfXd0vOr2BGe+4MfiudSmHo+
- rUYdTmf6zWqDZ6dnNR2ASm9BUiE4VA9fNjS8VG1fzbqHQRRnGajrLeMgtRUTD7SEsM7x
- ER3LZbFN9oJUPJ9Ide26PB2EaveGLkZ3HYRhefc6AGgVXVdF5rcpaAmROD8plJPPST1C
- stzGi4Z4OjosDVV7MEmTe/nfx7/ig4NRR+lamSzboIIAivz35YhFYVPIURfeFra63GHO
- Uu3bPg+SyDta2daJmF/9JSJVtK5Qe4iRZP3ybzDGPIjDmUBgQw8F/5vZ2lY8p7PJY9IN
- CuSA==
-X-Gm-Message-State: AC+VfDxFEvK6btFS+X38kq+vvGN9hloam6SOzOQ8ZMwfabT/QOdegC3g
- DeBYAE3IGB2AJB14L7oGCS8iow==
-X-Google-Smtp-Source: ACHHUZ6F8kQx/esXMjwvWAEJpc+GDqqkFfDdQqL+YWXSREVhnDZ7c3IPDBMzxvMSbApAEfHiB7NdiA==
-X-Received: by 2002:a05:6830:1bc9:b0:6af:987a:162d with SMTP id
- v9-20020a0568301bc900b006af987a162dmr3349392ota.31.1685019027124; 
- Thu, 25 May 2023 05:50:27 -0700 (PDT)
-Received: from [192.168.68.107] (200-162-225-121.static-corp.ajato.com.br.
- [200.162.225.121]) by smtp.gmail.com with ESMTPSA id
- l13-20020a0568301d6d00b006a647f65d03sm589573oti.41.2023.05.25.05.50.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 25 May 2023 05:50:26 -0700 (PDT)
-Message-ID: <dba73ae8-4253-d1ce-81ea-70dedd324f07@ventanamicro.com>
-Date: Thu, 25 May 2023 09:50:22 -0300
+ d=1e100.net; s=20221208; t=1685022209; x=1687614209;
+ h=cc:to:subject:message-id:date:in-reply-to:mime-version:references
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=g1xlDOtW55fsHDEqZYD02dvREbm6bxmXVm1xX4Q9G4U=;
+ b=SY37jG/36PUbn2gAJzKgTZZEO8xiNajfVv2IEfCvjvuOkQZurA+qZeKAkbJI/JLL6b
+ 9XGNLVXwuOZVsIShTL7P/LcN0sJWtIu0lmE49AsuBZimUM52WHXNBxvTJlNoJsmDKIJh
+ rPYLn469Qde8NmezXflqhvb+jwACHo9yFwd3dgryoSpBiWAbPBS/Xe527ggIYTFG5ZPb
+ 1wH3nieAIxKWlDfCLl8rMCyx8X2dZGGN/OBFuAZx+xCRkiGql/krz5gb56kO0wlk07Uj
+ 40qBSme0eN2sTDWIZv0/IeDobLQ4mQ2ek+d+kk7ZAfG1teUuARCWpXe1Zu5Y0aHrxyDn
+ UHkg==
+X-Gm-Message-State: AC+VfDz5vhjJ8mVSb6Xrnaq6Z8TGVPP2qMDQtm8SFRawUToYJXdWGn4k
+ VeKEXKCfWtPc7VMXQ3b8SnLzFBW+QRwiEqKkuTJPNosO2pt90/GOAI5CrBdMc0mZaEdXKaLa5e6
+ j+/TAnVNbjLhLBtWL+rKA1n2SiL7N5qw=
+X-Received: by 2002:a17:90a:4e83:b0:244:d441:8f68 with SMTP id
+ o3-20020a17090a4e8300b00244d4418f68mr1871116pjh.16.1685022209440; 
+ Thu, 25 May 2023 06:43:29 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ59M1DA9WZiMqyj0BAjZMPFcA/KfWigEDwq2/KA0Jci5J54iUz9eNGBLAdPTo85u4YllJXzFWz0VGIZEBlatsc=
+X-Received: by 2002:a17:90a:4e83:b0:244:d441:8f68 with SMTP id
+ o3-20020a17090a4e8300b00244d4418f68mr1871087pjh.16.1685022209051; Thu, 25 May
+ 2023 06:43:29 -0700 (PDT)
+Received: from 744723338238 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 25 May 2023 13:43:28 +0000
+From: Andrea Bolognani <abologna@redhat.com>
+References: <20230523102805.100160-1-sunilvl@ventanamicro.com>
+ <CABJz62MQ5uRHUP4LLKt=AxTf-Sz0aTEOLWDz=9ftK=H3tZ9JUg@mail.gmail.com>
+ <ZG5KgLQ4H/leWKJi@sunil-laptop>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [PATCH v3 4/4] target/riscv: Add Smrnmi mnret instruction.
-Content-Language: en-US
-To: Tommy Wu <tommy.wu@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: frank.chang@sifive.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
- richard.henderson@linaro.org
-References: <20230522131123.3498539-1-tommy.wu@sifive.com>
- <20230522131123.3498539-5-tommy.wu@sifive.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230522131123.3498539-5-tommy.wu@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32d.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+In-Reply-To: <ZG5KgLQ4H/leWKJi@sunil-laptop>
+Date: Thu, 25 May 2023 13:43:28 +0000
+Message-ID: <CABJz62NHXrBKkc3Gux0TXOjUCO4up-OunwJ6UO94ts+rTgVsAg@mail.gmail.com>
+Subject: Re: [PATCH v3] hw/riscv: virt: Assume M-mode FW in pflash0 only when
+ "-bios none"
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=abologna@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.091,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -100,151 +105,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Wed, May 24, 2023 at 11:03:52PM +0530, Sunil V L wrote:
+> On Wed, May 24, 2023 at 03:50:34PM +0000, Andrea Bolognani wrote:
+> > First off, the only RISC-V edk2 build readily accessible to me (from
+> > the edk2-riscv64 Fedora package) is configured to work off a R/W
+> > pflash1. You said that you have edk2 patches making R/O CODE pflash0
+> > and R/W VARS pflash1 ready. Any chance you could make either the
+> > build output, or the patches and some hints on how to build edk2
+> > after applying them, somewhere?
+>
+> Please build EDK2 using the branch
+> https://github.com/vlsunil/edk2/tree/separate_code_vars.
+>
+> The instructions to build is in
+> https://github.com/vlsunil/riscv-uefi-edk2-docs/wiki/RISC-V-Qemu-Virt-support#build-edk2
+>
+> However, now it will create two images for code and vars.
 
+Following your pointers, I was able to build suitable edk2 images and
+verify that they work with a patched QEMU, so
 
-On 5/22/23 10:11, Tommy Wu wrote:
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
-> ---
->   target/riscv/helper.h                         |  1 +
->   target/riscv/insn32.decode                    |  3 ++
->   .../riscv/insn_trans/trans_privileged.c.inc   | 12 +++++
->   target/riscv/op_helper.c                      | 51 +++++++++++++++++++
->   4 files changed, 67 insertions(+)
-> 
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 98e97810fd..00f1032086 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -112,6 +112,7 @@ DEF_HELPER_6(csrrw_i128, tl, env, int, tl, tl, tl, tl)
->   #ifndef CONFIG_USER_ONLY
->   DEF_HELPER_1(sret, tl, env)
->   DEF_HELPER_1(mret, tl, env)
-> +DEF_HELPER_1(mnret, tl, env)
->   DEF_HELPER_1(wfi, void, env)
->   DEF_HELPER_1(tlb_flush, void, env)
->   DEF_HELPER_1(tlb_flush_all, void, env)
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 73d5d1b045..e0698f9dfb 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -111,6 +111,9 @@ wfi         0001000    00101 00000 000 00000 1110011
->   sfence_vma  0001001    ..... ..... 000 00000 1110011 @sfence_vma
->   sfence_vm   0001000    00100 ..... 000 00000 1110011 @sfence_vm
->   
-> +# *** NMI ***
-> +mnret       0111000    00010 00000 000 00000 1110011
-> +
->   # *** RV32I Base Instruction Set ***
->   lui      ....................       ..... 0110111 @u
->   auipc    ....................       ..... 0010111 @u
-> diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
-> index 7c2837194c..0c1c2db5c6 100644
-> --- a/target/riscv/insn_trans/trans_privileged.c.inc
-> +++ b/target/riscv/insn_trans/trans_privileged.c.inc
-> @@ -108,6 +108,18 @@ static bool trans_mret(DisasContext *ctx, arg_mret *a)
->   #endif
->   }
->   
-> +static bool trans_mnret(DisasContext *ctx, arg_mnret *a)
-> +{
-> +#ifndef CONFIG_USER_ONLY
-> +    gen_helper_mnret(cpu_pc, cpu_env);
-> +    tcg_gen_exit_tb(NULL, 0); /* no chaining */
-> +    ctx->base.is_jmp = DISAS_NORETURN;
-> +    return true;
-> +#else
-> +    return false;
-> +#endif
-> +}
-> +
->   static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
->   {
->   #ifndef CONFIG_USER_ONLY
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index f563dc3981..2de3f102b5 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -359,6 +359,57 @@ target_ulong helper_mret(CPURISCVState *env)
->       return retpc;
->   }
->   
-> +target_ulong helper_mnret(CPURISCVState *env)
-> +{
-> +    RISCVCPU *cpu = env_archcpu(env);
+  Tested-by: Andrea Bolognani <abologna@redhat.com>
 
-You're not using 'cpu' for anything other than reading cfg flags, so you can use the
-riscv_cpu_cfg(env) inline nd avoid an env_archcpu() to get the 'cpu' pointer:
+Note, however, that said testing was limited to verifying that edk2
+would come up.
 
-> +
-> +    if (!cpu->cfg.ext_smrnmi) {
+I have also tried booting an openSUSE Tumbleweed "JeOS" image, since
+that's the only distro I'm aware of that uses UEFI boot on RISC-V at
+this point - though they use U-Boot's UEFI support rather than edk2.
 
-Here:
+During that attempt, I ended up in the edk2 shell. Running
 
-       if (!riscv_cpu_cfg(env)->ext_smrnmi) {
+  fs0:\efi\boot\bootriscv64.efi
 
+brings up GRUB just fine, but selecting the default boot entry
+results in
 
+  Loading Linux 6.3.2-1-default ...
+  Loading initial ramdisk ...
+  EFI stub: Booting Linux Kernel...
+  EFI stub: Loaded initrd from LINUX_EFI_INITRD_MEDIA_GUID device path
+  EFI stub: Generating empty DTB
+  EFI stub: Exiting boot services...
 
-> +        /* RNMI feature is not presented. */
-> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> +    }
-> +
-> +    if (!(env->priv >= PRV_M)) {
-> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> +    }
-> +
-> +    /* Get return PC from mnepc CSR. */
-> +    target_ulong retpc = env->mnepc;
-> +    if (!riscv_has_ext(env, RVC) && (retpc & 0x3)) {
-> +        riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
-> +    }
-> +
-> +    /* Get previous privilege level from mnstatus CSR. */
-> +    target_ulong prev_priv = get_field(env->mnstatus, MNSTATUS_MNPP);
-> +
-> +    if (cpu->cfg.pmp &&
+being printed, after which it's back to OpenSBI and from there to
+edk2 again.
 
-And here:
+I feel that this has probably more to do with the way the openSUSE
+image has been built than edk2, but I thought I'd report my
+experience nonetheless in case there's any useful information that
+can be gathered from it :)
 
-     if (riscv_cpu_cfg(env)->pmp &&
+> > Going further and testing libvirt integration. After hacking around
+> > other issues, I finally stumbled upon this error:
+> >
+> >   qemu-system-riscv64: Property 'virt-machine.pflash0' not found
+>
+> Thanks!. This needs some investigation. Let me look into supporting
+> this.
 
+Yes please! It's critical to libvirt integration. Feel free to CC me
+when you post patches and I'll gladly test them.
 
+-- 
+Andrea Bolognani / Red Hat / Virtualization
 
-Everything else LGTM.
-
-
-
-Daniel
-
-> +        !pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
-> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-> +    }
-> +
-> +    riscv_cpu_set_mode(env, prev_priv);
-> +    env->mnstatus = set_field(env->mnstatus, MNSTATUS_NMIE, true);
-> +
-> +    target_ulong prev_virt = get_field(env->mnstatus, MNSTATUS_MNPV);
-> +
-> +    /*
-> +     * If MNRET changes the privilege mode to a mode
-> +     * less privileged than M, it also sets mstatus.MPRV to 0.
-> +     */
-> +    if (prev_priv < PRV_M) {
-> +        env->mstatus = set_field(env->mstatus, MSTATUS_MPRV, false);
-> +    }
-> +
-> +    if (riscv_has_ext(env, RVH)) {
-> +        if (prev_virt) {
-> +            riscv_cpu_swap_hypervisor_regs(env);
-> +        }
-> +
-> +        riscv_cpu_set_virt_enabled(env, prev_virt);
-> +    }
-> +
-> +    return retpc;
-> +}
-> +
->   void helper_wfi(CPURISCVState *env)
->   {
->       CPUState *cs = env_cpu(env);
 
