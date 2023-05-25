@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88E6BC77B7C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 02:33:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DAE4C77B7C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 02:43:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q20nH-0008PG-Fa; Wed, 24 May 2023 22:33:35 -0400
+	id 1q20wc-0003Wf-CT; Wed, 24 May 2023 22:43:14 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q20nE-0008LQ-SB; Wed, 24 May 2023 22:33:32 -0400
-Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929])
+ id 1q20wb-0003WN-Fp; Wed, 24 May 2023 22:43:13 -0400
+Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q20nB-0003pz-8X; Wed, 24 May 2023 22:33:31 -0400
-Received: by mail-ua1-x929.google.com with SMTP id
- a1e0cc1a2514c-78412128326so331287241.1; 
- Wed, 24 May 2023 19:33:28 -0700 (PDT)
+ id 1q20wZ-0005iU-VT; Wed, 24 May 2023 22:43:13 -0400
+Received: by mail-ua1-x92f.google.com with SMTP id
+ a1e0cc1a2514c-783f17f0a00so144137241.2; 
+ Wed, 24 May 2023 19:43:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1684982007; x=1687574007;
+ d=gmail.com; s=20221208; t=1684982590; x=1687574590;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3mzAknRKRQiPjt4CRzylfJ5l4RSCzNByVtF6PZOovdg=;
- b=jJOBHIoaUytGG4aIpRM6XZCgVGb4jX1roel9ff76GznEf4FwoQWIZ7zCwu55P39qLm
- +g6WKLCFMB/et3l7x+wuwtxANYCzrEZDsjBwgc6zP5f2elYYgMI3HRP11OtL4gQU8v31
- JtNZHCT21x46rOt1ITmjhs93ppAlUkSk67ZKPttDHawiiPXbnLoGE7J8SminXnX8yM9C
- YBQ3I43oMFFIdQW6ZdS9JKQPm8iWeK01+pu/2tyw5SPu3183ggxLOgMUyoDnQ9hGD9lw
- vWI7S77hp/DnzIiUXfIEQMUoO0i1R3pHf0XRXc9kPFSzGiYxYekjdu9Xdy8M6HLCO+ZE
- k0Ug==
+ bh=XiX9qNYAZ1VZimJn7pCIEiClnSKWEiYTvEv6OTXFAHE=;
+ b=l/bgNfBtueOQ/loIkXutT+CMlUHClzT/XGd8W31kicz6WpaOdmoUNSGIyha8qo0uok
+ TClihd4N1UxaFgXtUczzi3bny0Vl+A/z0I544WU2doupIBXiisYhjM+QHI4/bqO38ehk
+ 2kxOpb2XvPIhWfKnWLcqSah/+AzSSrMVRvAPUsX/boMI1fTCUaD6EHW9VZTrvtVXhwBp
+ L/LU+Kw1dIwGCZu6Mm0GTteK6SD9PGnwocAEHCOKOUcd1WgY/S/IY62+Ff2/DH0IJrmw
+ pbmOZIhONLUcqTCE7AO8yMfShkoINqtICVMofPd7vRG75nz9PZwkKRXYfdj8joR6+GlS
+ wFwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684982007; x=1687574007;
+ d=1e100.net; s=20221208; t=1684982590; x=1687574590;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3mzAknRKRQiPjt4CRzylfJ5l4RSCzNByVtF6PZOovdg=;
- b=KiOCbTVFq7zmCAy8xcrbUNlR+/hOM69W5MPJvUQxfzHheSM+caPioE3BDJEirfkgpZ
- +a4V7E5N3A0pTElszQCAkAdAtHJhJ+CMzT3oc2FJE9lAjRYlgX5Ixlgc+/I1mjuQPHtQ
- AVGstzAEkpxgDkqH4yZAEpS+huaKg8VDG72g2M+rJpTgfpAMLojnhnTlxTLs9kUWI0Ub
- Qo2OipvKgorKtsi3WZJlQ6qg254rIo8Hgs4G2kQ6kZ76U5p4bvo7KMew4H2kGQjbJy/S
- nd3Tp2kIvo9mUwZFBdTLn7hkbhzfx54+TqkllKDYTN5tNnJ/ecsviX2e6Ua3MCmXSHbV
- MxFw==
-X-Gm-Message-State: AC+VfDxIM4T1XnIgYf3PO/H6TReJ1W3ZrN+5uZldHAyn+NsxW/isHd5k
- vhgkhHIMh7cr0wSLwWyRw17xjNTxEl99Hhe8gb0=
-X-Google-Smtp-Source: ACHHUZ7wEP685yRk0itnbn/MipmWWpdzF71SWSyLwtVyTtw0i7n7iD+Eh+XoCIVG2vglrSm3AA3QBurjYVLb6jxQ2t8=
-X-Received: by 2002:a05:6102:3179:b0:439:49f1:bb4d with SMTP id
- l25-20020a056102317900b0043949f1bb4dmr4233794vsm.7.1684982007403; Wed, 24 May
- 2023 19:33:27 -0700 (PDT)
+ bh=XiX9qNYAZ1VZimJn7pCIEiClnSKWEiYTvEv6OTXFAHE=;
+ b=I3PfvjU0eZRywM5HzKaEsfXVV0Oq9AggdylZRHHBb+oTaYFXOEYzFnuCB1MyvWXAZ0
+ GABgmfCrDt30Qk7qt7MSI9v+TsDZGRRC2eSBbTqqMTlbIMAydHpEiIPmsMQXcNYUiO/7
+ +o12qOGUMF7pWI5p7yNRiSornp3wX6l4KZ+qKbjvwaAWFvHEB9qq+OXunE2He8kabCDl
+ QFPUF6TOIDUENeYCWBuLrH+YXjc6P/ypszDFR7qHzSmWmshUT3lX5BWeteQ0uVGhhHbL
+ 5g7BpjCzSp8QWPjfomh1RVMstFN5yovr6PC5S0PxlfZHIuWUEgiJ8JNGTjrTCio3WH/W
+ TWmw==
+X-Gm-Message-State: AC+VfDwBF3lFgDFlBelV7XQYGWf98+6mt4/Z43VvF5vZLgCYZ+kgtMVV
+ mk4O0rr10rRB87xjYGfQ+IvlJ/GEJu93Ugk/4FUKwdNjfKwUERV6
+X-Google-Smtp-Source: ACHHUZ4ZL+qoXl5x9+UofDEs9OhXJvQMTw5vj2A7hp3tmIRl4P3hKSe8nGQkS5yRCSJ5MS0WMZ44FnzowV8fv2YNk/A=
+X-Received: by 2002:a67:f84d:0:b0:439:75fc:6489 with SMTP id
+ b13-20020a67f84d000000b0043975fc6489mr108820vsp.3.1684982590215; Wed, 24 May
+ 2023 19:43:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230523114454.717708-1-tommy.wu@sifive.com>
- <20230523114454.717708-2-tommy.wu@sifive.com>
-In-Reply-To: <20230523114454.717708-2-tommy.wu@sifive.com>
+References: <20230523084910.304679-1-tommy.wu@sifive.com>
+ <20230523084910.304679-3-tommy.wu@sifive.com>
+In-Reply-To: <20230523084910.304679-3-tommy.wu@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 25 May 2023 12:33:01 +1000
-Message-ID: <CAKmqyKOfkhN=3+asF-u3r7y83GiZjv34mv42Yp0Ye0NzUEnezQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/riscv: Add a function to refresh the dynamic
- CSRs xml.
+Date: Thu, 25 May 2023 12:42:44 +1000
+Message-ID: <CAKmqyKNMA51KPJktUKr+1iTreA1d=bczi_1sckbWsw7NVzSu9w@mail.gmail.com>
+Subject: Re: [PATCH v4 2/3] hw/riscv: sifive_e: Support the watchdog timer of
+ HiFive 1 rev b.
 To: Tommy Wu <tommy.wu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, frank.chang@sifive.com, 
- alistair.francis@wdc.com, apatel@ventanamicro.com, palmer@rivosinc.com, 
- dbarboza@ventanamicro.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
- zhiwei_liu@linux.alibaba.com
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ palmer@dabbelt.com, bin.meng@windriver.com, jim.shu@sifive.com, 
+ frank.chang@sifive.com, thuth@redhat.com, liweiwei@iscas.ac.cn
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::929;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x929.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -92,84 +91,108 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, May 23, 2023 at 9:46=E2=80=AFPM Tommy Wu <tommy.wu@sifive.com> wrot=
+On Tue, May 23, 2023 at 6:50=E2=80=AFPM Tommy Wu <tommy.wu@sifive.com> wrot=
 e:
 >
-> When we change the cpu extension state after the cpu is
-> realized, we cannot print the value of some CSRs in the remote
-> gdb debugger. The root cause is that the dynamic CSR xml is
-> generated when the cpu is realized.
->
-> This patch add a function to refresh the dynamic CSR xml after
-> the cpu is realized.
+> Create the AON device when we realize the sifive_e machine.
+> This patch only implemented the functionality of the watchdog timer,
+> not all the functionality of the AON device.
 >
 > Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
 > Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> ---
->  target/riscv/cpu.h     |  2 ++
->  target/riscv/gdbstub.c | 12 ++++++++++++
->  2 files changed, 14 insertions(+)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index de7e43126a..dc8e592275 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -494,6 +494,7 @@ struct ArchCPU {
->      CPUNegativeOffsetState neg;
->      CPURISCVState env;
->
-> +    int dyn_csr_base_reg;
->      char *dyn_csr_xml;
->      char *dyn_vreg_xml;
->
-> @@ -781,6 +782,7 @@ void riscv_get_csr_ops(int csrno, riscv_csr_operation=
-s *ops);
->  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
->
->  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
-> +void riscv_refresh_dynamic_csr_xml(CPUState *cs);
->
->  uint8_t satp_mode_max_from_map(uint32_t map);
->  const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index 524bede865..9e97ee2c35 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -230,6 +230,8 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, in=
-t base_reg)
->          bitsize =3D 64;
->      }
->
-> +    cpu->dyn_csr_base_reg =3D base_reg;
-> +
->      g_string_printf(s, "<?xml version=3D\"1.0\"?>");
->      g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd=
-\">");
->      g_string_append_printf(s, "<feature name=3D\"org.gnu.gdb.riscv.csr\"=
->");
-> @@ -349,3 +351,13 @@ void riscv_cpu_register_gdb_regs_for_features(CPUSta=
-te *cs)
->                                   "riscv-csr.xml", 0);
->      }
->  }
-> +
-> +void riscv_refresh_dynamic_csr_xml(CPUState *cs)
-> +{
-> +    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> +    if (!cpu->dyn_csr_xml) {
-> +        g_assert_not_reached();
-> +    }
-> +    g_free(cpu->dyn_csr_xml);
-> +    riscv_gen_dynamic_csr_xml(cs, cpu->dyn_csr_base_reg);
 
-I don't really understand why we need dyn_csr_base_reg, could we just
-use cs->gdb_num_regs directly here?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> +}
+> ---
+>  hw/riscv/Kconfig            |  1 +
+>  hw/riscv/sifive_e.c         | 13 +++++++++++--
+>  include/hw/riscv/sifive_e.h |  8 +++++---
+>  3 files changed, 17 insertions(+), 5 deletions(-)
+>
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index 6528ebfa3a..b6a5eb4452 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -60,6 +60,7 @@ config SIFIVE_E
+>      select SIFIVE_PLIC
+>      select SIFIVE_UART
+>      select SIFIVE_E_PRCI
+> +    select SIFIVE_E_AON
+>      select UNIMP
+>
+>  config SIFIVE_U
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index 04939b60c3..731ed0e11d 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -45,6 +45,7 @@
+>  #include "hw/intc/riscv_aclint.h"
+>  #include "hw/intc/sifive_plic.h"
+>  #include "hw/misc/sifive_e_prci.h"
+> +#include "hw/misc/sifive_e_aon.h"
+>  #include "chardev/char.h"
+>  #include "sysemu/sysemu.h"
+>
+> @@ -223,8 +224,13 @@ static void sifive_e_soc_realize(DeviceState *dev, E=
+rror **errp)
+>          RISCV_ACLINT_DEFAULT_MTIMER_SIZE, 0, ms->smp.cpus,
+>          RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
+>          RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, false);
+> -    create_unimplemented_device("riscv.sifive.e.aon",
+> -        memmap[SIFIVE_E_DEV_AON].base, memmap[SIFIVE_E_DEV_AON].size);
+> +
+> +    s->aon =3D qdev_new(TYPE_SIFIVE_E_AON);
+> +    if (!sysbus_realize(SYS_BUS_DEVICE(s->aon), errp)) {
+> +        return;
+> +    }
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(s->aon), 0, memmap[SIFIVE_E_DEV_AON].=
+base);
+> +
+>      sifive_e_prci_create(memmap[SIFIVE_E_DEV_PRCI].base);
+>
+>      /* GPIO */
+> @@ -245,6 +251,9 @@ static void sifive_e_soc_realize(DeviceState *dev, Er=
+ror **errp)
+>                             qdev_get_gpio_in(DEVICE(s->plic),
+>                                              SIFIVE_E_GPIO0_IRQ0 + i));
+>      }
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(s->aon), 0,
+> +                       qdev_get_gpio_in(DEVICE(s->plic),
+> +                                        SIFIVE_E_AON_WDT_IRQ));
+>
+>      sifive_uart_create(sys_mem, memmap[SIFIVE_E_DEV_UART0].base,
+>          serial_hd(0), qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_E_UART0_I=
+RQ));
+> diff --git a/include/hw/riscv/sifive_e.h b/include/hw/riscv/sifive_e.h
+> index b824a79e2d..a094b47e0b 100644
+> --- a/include/hw/riscv/sifive_e.h
+> +++ b/include/hw/riscv/sifive_e.h
+> @@ -35,6 +35,7 @@ typedef struct SiFiveESoCState {
+>      /*< public >*/
+>      RISCVHartArrayState cpus;
+>      DeviceState *plic;
+> +    DeviceState *aon;
+>      SIFIVEGPIOState gpio;
+>      MemoryRegion xip_mem;
+>      MemoryRegion mask_rom;
+> @@ -76,9 +77,10 @@ enum {
+>  };
+>
+>  enum {
+> -    SIFIVE_E_UART0_IRQ  =3D 3,
+> -    SIFIVE_E_UART1_IRQ  =3D 4,
+> -    SIFIVE_E_GPIO0_IRQ0 =3D 8
+> +    SIFIVE_E_AON_WDT_IRQ  =3D 1,
+> +    SIFIVE_E_UART0_IRQ    =3D 3,
+> +    SIFIVE_E_UART1_IRQ    =3D 4,
+> +    SIFIVE_E_GPIO0_IRQ0   =3D 8
+>  };
+>
+>  #define SIFIVE_E_PLIC_HART_CONFIG "M"
 > --
-> 2.38.1
+> 2.27.0
 >
 >
 
