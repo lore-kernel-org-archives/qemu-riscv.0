@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93E75C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 02:25:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88E6BC77B7C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 02:33:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q20eu-0004vQ-CR; Wed, 24 May 2023 22:24:56 -0400
+	id 1q20nH-0008PG-Fa; Wed, 24 May 2023 22:33:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q20et-0004vD-6e; Wed, 24 May 2023 22:24:55 -0400
-Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
+ id 1q20nE-0008LQ-SB; Wed, 24 May 2023 22:33:32 -0400
+Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q20er-0001jZ-MW; Wed, 24 May 2023 22:24:54 -0400
-Received: by mail-ua1-x930.google.com with SMTP id
- a1e0cc1a2514c-78412128326so327477241.1; 
- Wed, 24 May 2023 19:24:53 -0700 (PDT)
+ id 1q20nB-0003pz-8X; Wed, 24 May 2023 22:33:31 -0400
+Received: by mail-ua1-x929.google.com with SMTP id
+ a1e0cc1a2514c-78412128326so331287241.1; 
+ Wed, 24 May 2023 19:33:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1684981492; x=1687573492;
+ d=gmail.com; s=20221208; t=1684982007; x=1687574007;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jCtFZnvx1qWlxTGkVgOWwspZc2m1HIv/OKvz8Slc7cM=;
- b=WRTabr6PtVwxG7yZ95XkhNSObMlFRZgV/gHohNTelUMoIyqRZ9qLajfAkcWbzgPL2L
- B1B242emfYEgiesv0yysBpiJCsFsKIyL3vie80k1MHPxQjdKAjDRXXkf2Stfd65XB35F
- BRg2Shx91LHjPmUY5gpor4H6/EwEKbt/46p/IeU/Jx23wnZeVPo2DuYeVksUomM2TPyH
- oMoxKCkPzALL7UJwJ0yEcNwns/n/RxXkJgg634ikOdv0Z8iNYG2ZW6Y0d0huhVmsZB0r
- temm53C/01GAGFwTRo8qFb8W3J0musll5J397OaDkEZaSBzp6aHFfl+nt6LPNzO/NyRr
- Z0vw==
+ bh=3mzAknRKRQiPjt4CRzylfJ5l4RSCzNByVtF6PZOovdg=;
+ b=jJOBHIoaUytGG4aIpRM6XZCgVGb4jX1roel9ff76GznEf4FwoQWIZ7zCwu55P39qLm
+ +g6WKLCFMB/et3l7x+wuwtxANYCzrEZDsjBwgc6zP5f2elYYgMI3HRP11OtL4gQU8v31
+ JtNZHCT21x46rOt1ITmjhs93ppAlUkSk67ZKPttDHawiiPXbnLoGE7J8SminXnX8yM9C
+ YBQ3I43oMFFIdQW6ZdS9JKQPm8iWeK01+pu/2tyw5SPu3183ggxLOgMUyoDnQ9hGD9lw
+ vWI7S77hp/DnzIiUXfIEQMUoO0i1R3pHf0XRXc9kPFSzGiYxYekjdu9Xdy8M6HLCO+ZE
+ k0Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684981492; x=1687573492;
+ d=1e100.net; s=20221208; t=1684982007; x=1687574007;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jCtFZnvx1qWlxTGkVgOWwspZc2m1HIv/OKvz8Slc7cM=;
- b=J5I11GEQtynGi82RjQJifJ8/B9QclezTdLTGswcP/iBFym+kigTcI4MLXcB5/hvkBQ
- utisWdaH2dSJwgIi6TMWuSillXGIDHWxfLNPGnexp17tgk+C6QSile4mSuaq22RGS/Ga
- suXLw9B4dF/GQ3U90gCBusvA2MhbKA/FAtpeJEzYLOHxZ6rePuc7H68wjJvQo99zVdGq
- omtpzh1np8vb81M2pZhTOAP3aqU5GLxRb5c7yB7UIDJA6OmpbgLScTPrKAPtWO8g7HTV
- IM/vUAnWISEq8G1QP3kUvRfY5ShWRg4n8D1EFuWeVsqcfGQdH57iaJK23W0CNkt4yRD2
- qkpA==
-X-Gm-Message-State: AC+VfDz6eT7usjB4SvjZhBVzA6uWVbgLl+cqggoFZ6Jdupa31SO1+h+a
- 1fag7+QlVyZQqrhpreUovnZAfto15P0fsd1db+A=
-X-Google-Smtp-Source: ACHHUZ6EKWYrv0PyC2gibzp0pb/uIDqfCI6bmRmJHX9gll/F3UXp7sSEr0qTJIvAFuKglOzJDAt02p6yORn+HHhsQSo=
-X-Received: by 2002:a67:f502:0:b0:434:5839:bdc4 with SMTP id
- u2-20020a67f502000000b004345839bdc4mr6659868vsn.25.1684981492373; Wed, 24 May
- 2023 19:24:52 -0700 (PDT)
+ bh=3mzAknRKRQiPjt4CRzylfJ5l4RSCzNByVtF6PZOovdg=;
+ b=KiOCbTVFq7zmCAy8xcrbUNlR+/hOM69W5MPJvUQxfzHheSM+caPioE3BDJEirfkgpZ
+ +a4V7E5N3A0pTElszQCAkAdAtHJhJ+CMzT3oc2FJE9lAjRYlgX5Ixlgc+/I1mjuQPHtQ
+ AVGstzAEkpxgDkqH4yZAEpS+huaKg8VDG72g2M+rJpTgfpAMLojnhnTlxTLs9kUWI0Ub
+ Qo2OipvKgorKtsi3WZJlQ6qg254rIo8Hgs4G2kQ6kZ76U5p4bvo7KMew4H2kGQjbJy/S
+ nd3Tp2kIvo9mUwZFBdTLn7hkbhzfx54+TqkllKDYTN5tNnJ/ecsviX2e6Ua3MCmXSHbV
+ MxFw==
+X-Gm-Message-State: AC+VfDxIM4T1XnIgYf3PO/H6TReJ1W3ZrN+5uZldHAyn+NsxW/isHd5k
+ vhgkhHIMh7cr0wSLwWyRw17xjNTxEl99Hhe8gb0=
+X-Google-Smtp-Source: ACHHUZ7wEP685yRk0itnbn/MipmWWpdzF71SWSyLwtVyTtw0i7n7iD+Eh+XoCIVG2vglrSm3AA3QBurjYVLb6jxQ2t8=
+X-Received: by 2002:a05:6102:3179:b0:439:49f1:bb4d with SMTP id
+ l25-20020a056102317900b0043949f1bb4dmr4233794vsm.7.1684982007403; Wed, 24 May
+ 2023 19:33:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230519023758.1759434-1-yin.wang@intel.com>
-In-Reply-To: <20230519023758.1759434-1-yin.wang@intel.com>
+References: <20230523114454.717708-1-tommy.wu@sifive.com>
+ <20230523114454.717708-2-tommy.wu@sifive.com>
+In-Reply-To: <20230523114454.717708-2-tommy.wu@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 25 May 2023 12:24:26 +1000
-Message-ID: <CAKmqyKO1fkvSKLP6Ji2aE_jB3x65P=pqA22EsNSXy0aAFwuZJQ@mail.gmail.com>
-Subject: Re: [PATCH v5] hw/riscv: qemu crash when NUMA nodes exceed available
- CPUs
-To: Yin Wang <yin.wang@intel.com>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Weiwei Li <liweiwei@iscas.ac.cn>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Bin Meng <bin.meng@windriver.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Date: Thu, 25 May 2023 12:33:01 +1000
+Message-ID: <CAKmqyKOfkhN=3+asF-u3r7y83GiZjv34mv42Yp0Ye0NzUEnezQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Add a function to refresh the dynamic
+ CSRs xml.
+To: Tommy Wu <tommy.wu@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, frank.chang@sifive.com, 
+ alistair.francis@wdc.com, apatel@ventanamicro.com, palmer@rivosinc.com, 
+ dbarboza@ventanamicro.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
+ zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::929;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x929.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -93,61 +92,84 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, May 19, 2023 at 12:38=E2=80=AFPM Yin Wang <yin.wang@intel.com> wrot=
+On Tue, May 23, 2023 at 9:46=E2=80=AFPM Tommy Wu <tommy.wu@sifive.com> wrot=
 e:
 >
-> Command "qemu-system-riscv64 -machine virt
-> -m 2G -smp 1 -numa node,mem=3D1G -numa node,mem=3D1G"
-> would trigger this problem.Backtrace with:
->  #0  0x0000555555b5b1a4 in riscv_numa_get_default_cpu_node_id  at ../hw/r=
-iscv/numa.c:211
->  #1  0x00005555558ce510 in machine_numa_finish_cpu_init  at ../hw/core/ma=
-chine.c:1230
->  #2  0x00005555558ce9d3 in machine_run_board_init  at ../hw/core/machine.=
-c:1346
->  #3  0x0000555555aaedc3 in qemu_init_board  at ../softmmu/vl.c:2513
->  #4  0x0000555555aaf064 in qmp_x_exit_preconfig  at ../softmmu/vl.c:2609
->  #5  0x0000555555ab1916 in qemu_init  at ../softmmu/vl.c:3617
->  #6  0x000055555585463b in main  at ../softmmu/main.c:47
-> This commit fixes the issue by adding parameter checks.
+> When we change the cpu extension state after the cpu is
+> realized, we cannot print the value of some CSRs in the remote
+> gdb debugger. The root cause is that the dynamic CSR xml is
+> generated when the cpu is realized.
 >
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Yin Wang <yin.wang@intel.com>
+> This patch add a function to refresh the dynamic CSR xml after
+> the cpu is realized.
+>
+> Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>  target/riscv/cpu.h     |  2 ++
+>  target/riscv/gdbstub.c | 12 ++++++++++++
+>  2 files changed, 14 insertions(+)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index de7e43126a..dc8e592275 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -494,6 +494,7 @@ struct ArchCPU {
+>      CPUNegativeOffsetState neg;
+>      CPURISCVState env;
+>
+> +    int dyn_csr_base_reg;
+>      char *dyn_csr_xml;
+>      char *dyn_vreg_xml;
+>
+> @@ -781,6 +782,7 @@ void riscv_get_csr_ops(int csrno, riscv_csr_operation=
+s *ops);
+>  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+>
+>  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+> +void riscv_refresh_dynamic_csr_xml(CPUState *cs);
+>
+>  uint8_t satp_mode_max_from_map(uint32_t map);
+>  const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index 524bede865..9e97ee2c35 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -230,6 +230,8 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, in=
+t base_reg)
+>          bitsize =3D 64;
+>      }
+>
+> +    cpu->dyn_csr_base_reg =3D base_reg;
+> +
+>      g_string_printf(s, "<?xml version=3D\"1.0\"?>");
+>      g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd=
+\">");
+>      g_string_append_printf(s, "<feature name=3D\"org.gnu.gdb.riscv.csr\"=
+>");
+> @@ -349,3 +351,13 @@ void riscv_cpu_register_gdb_regs_for_features(CPUSta=
+te *cs)
+>                                   "riscv-csr.xml", 0);
+>      }
+>  }
+> +
+> +void riscv_refresh_dynamic_csr_xml(CPUState *cs)
+> +{
+> +    RISCVCPU *cpu =3D RISCV_CPU(cs);
+> +    if (!cpu->dyn_csr_xml) {
+> +        g_assert_not_reached();
+> +    }
+> +    g_free(cpu->dyn_csr_xml);
+> +    riscv_gen_dynamic_csr_xml(cs, cpu->dyn_csr_base_reg);
 
-Thanks!
-
-Applied to riscv-to-apply.next
+I don't really understand why we need dyn_csr_base_reg, could we just
+use cs->gdb_num_regs directly here?
 
 Alistair
 
-> ---
->  hw/riscv/numa.c | 6 ++++++
->  1 file changed, 6 insertions(+)
->
-> diff --git a/hw/riscv/numa.c b/hw/riscv/numa.c
-> index 4720102561..e0414d5b1b 100644
-> --- a/hw/riscv/numa.c
-> +++ b/hw/riscv/numa.c
-> @@ -207,6 +207,12 @@ int64_t riscv_numa_get_default_cpu_node_id(const Mac=
-hineState *ms, int idx)
->  {
->      int64_t nidx =3D 0;
->
-> +    if (ms->numa_state->num_nodes > ms->smp.cpus) {
-> +        error_report("Number of NUMA nodes (%d)"
-> +                     " cannot exceed the number of available CPUs (%d)."=
-,
-> +                     ms->numa_state->num_nodes, ms->smp.max_cpus);
-> +        exit(EXIT_FAILURE);
-> +    }
->      if (ms->numa_state->num_nodes) {
->          nidx =3D idx / (ms->smp.cpus / ms->numa_state->num_nodes);
->          if (ms->numa_state->num_nodes <=3D nidx) {
+> +}
 > --
-> 2.34.1
+> 2.38.1
 >
 >
 
