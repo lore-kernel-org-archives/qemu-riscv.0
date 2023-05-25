@@ -4,94 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D110C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 16:19:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DF4AC7EE2E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 16:48:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q2DgO-0007dD-Qg; Thu, 25 May 2023 12:19:20 -0400
+	id 1q2E8T-0007V8-WE; Thu, 25 May 2023 12:48:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1q2DgN-0007cm-JE
- for qemu-riscv@nongnu.org; Thu, 25 May 2023 12:19:19 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1q2DgL-0006kQ-OJ
- for qemu-riscv@nongnu.org; Thu, 25 May 2023 12:19:19 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1685031556;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=JNYP9SOltQneIi9s/jsPF2x3y5hZPkfpFVxAZ9GC424=;
- b=KHQwBBRZxTmcQ9MM8EtRDWzx5Hvg0VJRjVxbNUe0uB3a0XrVDYd/p5kDcKE+2tQbsSWRQ7
- V3kENykrD0SbHdGnh1SgLyfZXJ/D/0hbaJv/gm1XnyHJouK55FDXx2cCQGeP7uhYZcNGVj
- bKk0dnp7Thyb9/X2ZmpWDsCuNTwhEBI=
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-65-Bjr2CWFUNju4Ac6Ofli80w-1; Thu, 25 May 2023 12:19:15 -0400
-X-MC-Unique: Bjr2CWFUNju4Ac6Ofli80w-1
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-255dfed764dso1794233a91.1
- for <qemu-riscv@nongnu.org>; Thu, 25 May 2023 09:19:15 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1q2E8R-0007T4-Cj
+ for qemu-riscv@nongnu.org; Thu, 25 May 2023 12:48:19 -0400
+Received: from mail-ot1-x333.google.com ([2607:f8b0:4864:20::333])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1q2E8N-00053S-II
+ for qemu-riscv@nongnu.org; Thu, 25 May 2023 12:48:18 -0400
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-6af7593ed5fso719923a34.0
+ for <qemu-riscv@nongnu.org>; Thu, 25 May 2023 09:48:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1685033291; x=1687625291;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=36pBS8epg/rKH3TCUTxMtZBD1xjYWXG1/mN3kGuuONY=;
+ b=jshDDFNUhG10Ks3gAz7nGwcVRS3g3VUnJsIu5r9Y4UQjMQptCfbDQxj+AFOTh3pkmI
+ Ys0vzgyVAYcKNLRyFDJW22bScmY4N3gQ5RAlkdkPuo5/Eek7/kJ2o1NnM3doA1RaPFMT
+ pJ5cILnojSaXvj8Na+dDw2l75u/AOGT/26JiYb4gqjAfXSxzZ0wrLe4rWIV2bmzygPhP
+ 7dx/egcGFdVWDbMwWv12JgzOCwOShDAKNPbTovHBYUkbSnsQcaWBK9kXyuVNtlnA2MTA
+ pLxwkTorRYj5Lav5t39xDIXeK7l7pG/KUOq0pJ5tQl0C5vvCywEw6DncgRDHDGAGK9FP
+ ZykA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685031554; x=1687623554;
- h=cc:to:subject:message-id:date:in-reply-to:mime-version:references
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JNYP9SOltQneIi9s/jsPF2x3y5hZPkfpFVxAZ9GC424=;
- b=lk/wifWGn4t3+CLQL9Ha9U9iFXtqt990yvaSBu1jMk9KbR/AYK3BlAtjrSxHY7ypov
- qpg0OdxAF7SI07CFnISw8NR6X7rG2bIGNIp+Nt2/O4hv+efL5pCLIe9xGoUgH8bAfwAD
- ePyWzs+4V5OsmEDNLPkIMQ8+iPmg8iOnbMh2xFlKO/iZ/usJRB1ujEupEc8YqyRF/9yp
- E8p1wVGf3aUoq6pWcHFdBlTgGWliwrT53iV3zPFw4+7A7YgDYliU9rjYKRV931T1FbCv
- l+XmlRv4ygPeYJYklouHxMbGFc+xdt1Y9lkhXd9inITg+NM0ipV7wy8/IDTOiyel0U9b
- WKGg==
-X-Gm-Message-State: AC+VfDyycvoQVlLpXzNzBApRpp9P2ki9Lha31DoVljZh7usxUzEJzB9U
- MWym4basn8ryfja4AuMLe1fBVdhx7ZH7VWXJyMCEIHqhCMePv7zUePQBnBT6yBfsAL1ZpbtR7ZB
- wok8lkWiU9E7CQShwn1Dm5z6aCCf6z/U=
-X-Received: by 2002:a17:902:db07:b0:1ab:797:afbe with SMTP id
- m7-20020a170902db0700b001ab0797afbemr2941943plx.8.1685031554167; 
- Thu, 25 May 2023 09:19:14 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ53fIciQR1uP3iCNNZLBoAVcJZ6PcmNKONco4QqSkkcVJv2QLO5fcW7bYzAid2xkHcwTjiDI2cUbhhHQ5d5G/o=
-X-Received: by 2002:a17:902:db07:b0:1ab:797:afbe with SMTP id
- m7-20020a170902db0700b001ab0797afbemr2941918plx.8.1685031553850; Thu, 25 May
- 2023 09:19:13 -0700 (PDT)
-Received: from 744723338238 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 25 May 2023 16:19:12 +0000
-From: Andrea Bolognani <abologna@redhat.com>
-References: <20230523102805.100160-1-sunilvl@ventanamicro.com>
- <CABJz62MQ5uRHUP4LLKt=AxTf-Sz0aTEOLWDz=9ftK=H3tZ9JUg@mail.gmail.com>
- <ZG5KgLQ4H/leWKJi@sunil-laptop>
- <CABJz62NHXrBKkc3Gux0TXOjUCO4up-OunwJ6UO94ts+rTgVsAg@mail.gmail.com>
- <ZG94lvAYggnRBfLQ@sunil-laptop>
-MIME-Version: 1.0
-In-Reply-To: <ZG94lvAYggnRBfLQ@sunil-laptop>
-Date: Thu, 25 May 2023 16:19:12 +0000
-Message-ID: <CABJz62NUpY35u2ykPXVHp8a_RUyjCnC1_DpWsYNuSBftHe4qBQ@mail.gmail.com>
-Subject: Re: [PATCH v3] hw/riscv: virt: Assume M-mode FW in pflash0 only when
- "-bios none"
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ d=1e100.net; s=20221208; t=1685033291; x=1687625291;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=36pBS8epg/rKH3TCUTxMtZBD1xjYWXG1/mN3kGuuONY=;
+ b=UtfmRp8FtGObeRp1uXB74C1EMkzzdEZ5Nu57WTuAJXeo0mTSPaE8amRrWzOpMe1hia
+ +Ylz//DpGN0Sq1lM8BlQrdtsjHNLVaxGGlfB5sM9+Zl9Q1kEefqZ4i5ZQSE0GkM/DwQ1
+ OzzOLbyDmIDDaRpuInGI0jXXGuDtOBY13XDjNVAbfxH/eJx27XUeKmkMVzV+h1PBuPv4
+ FHDeh+81BOVpgL0kVTadthuZ+hlhJ4DbqZy4LidnVTrwjKTiVGQtII3etnHWJGmMFQyq
+ lgmZWXeDINgiBD31Si9zZEK+Q8M9IP1B55CeAs9ufjqeT6J+7Yv758THsBUvr5Ske7cX
+ jDzA==
+X-Gm-Message-State: AC+VfDxNvn7J/13x5eGvJz5KnuGhdp6s0qASln4VFmkV+NG22jjhlfdx
+ QcIOgSYl2lhzKmNMHUlHgmEAHfeyP9BAop/wDYk=
+X-Google-Smtp-Source: ACHHUZ458UTPtgX/EleiDKMB/8mRMA2QipB53C0iwWNLs/SujsAmVs/LsPKPyCr0xHCa9vnnSJtUWQ==
+X-Received: by 2002:a9d:5c15:0:b0:6ab:280b:252a with SMTP id
+ o21-20020a9d5c15000000b006ab280b252amr87944otk.17.1685033291031; 
+ Thu, 25 May 2023 09:48:11 -0700 (PDT)
+Received: from sunil-laptop.dc1.ventanamicro.com ([106.51.186.3])
+ by smtp.gmail.com with ESMTPSA id
+ l18-20020a9d7a92000000b006af886703f2sm803905otn.37.2023.05.25.09.48.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 May 2023 09:48:10 -0700 (PDT)
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=abologna@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrea Bolognani <abologna@redhat.com>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH v4 0/3] hw/riscv/virt: pflash improvements
+Date: Thu, 25 May 2023 22:18:00 +0530
+Message-Id: <20230525164803.17992-1-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::333;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-ot1-x333.google.com
+X-Spam_score_int: -5
+X-Spam_score: -0.6
+X-Spam_bar: /
+X-Spam_report: (-0.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SORBS_WEB=1.5, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,54 +96,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, May 25, 2023 at 08:32:46PM +0530, Sunil V L wrote:
-> On Thu, May 25, 2023 at 01:43:28PM +0000, Andrea Bolognani wrote:
-> > I have also tried booting an openSUSE Tumbleweed "JeOS" image, since
-> > that's the only distro I'm aware of that uses UEFI boot on RISC-V at
-> > this point - though they use U-Boot's UEFI support rather than edk2.
-> >
-> > During that attempt, I ended up in the edk2 shell. Running
-> >
-> >   fs0:\efi\boot\bootriscv64.efi
-> >
-> > brings up GRUB just fine, but selecting the default boot entry
-> > results in
-> >
-> >   Loading Linux 6.3.2-1-default ...
-> >   Loading initial ramdisk ...
-> >   EFI stub: Booting Linux Kernel...
-> >   EFI stub: Loaded initrd from LINUX_EFI_INITRD_MEDIA_GUID device path
-> >   EFI stub: Generating empty DTB
-> >   EFI stub: Exiting boot services...
-> >
-> > being printed, after which it's back to OpenSBI and from there to
-> > edk2 again.
->
-> Thanks!. Please add -machine acpi=off in qemu command to boot the
-> kernel.
+This series improves the pflash usage in RISC-V virt machine with solutions to
+below issues.
 
-Yup, that worked! It booted all the way to the login prompt :)
+1) Currently the first pflash is reserved for ROM/M-mode firmware code. But S-mode
+payload firmware like EDK2 need both pflash devices to have separate code and variable
+store so that OS distros can keep the FW code as read-only. 
 
-Note that libvirt automatically adds acpi=off, so that won't be a
-concern for libvirt users.
+The issue is reported at
+https://salsa.debian.org/qemu-team/edk2/-/commit/c345655a0149f64c5020bfc1e53c619ce60587f6
 
-> > > > Going further and testing libvirt integration. After hacking around
-> > > > other issues, I finally stumbled upon this error:
-> > > >
-> > > >   qemu-system-riscv64: Property 'virt-machine.pflash0' not found
-> > >
-> > > Thanks!. This needs some investigation. Let me look into supporting
-> > > this.
-> >
-> > Yes please! It's critical to libvirt integration. Feel free to CC me
-> > when you post patches and I'll gladly test them.
->
-> Sure, I have the fix ready. I need to convert this into a patch series
-> now. Will send it soon and thanks in advance for helping with testing.
+2) The latest way of using pflash devices in other architectures and libvirt
+is by using -blockdev and machine options. However, currently this method is
+not working in RISC-V.
 
-Excellent! Looking forward to it :)
+With above issues fixed, added documentation on how to use pflash devices
+in RISC-V virt machine.
+
+This patch series is based on Alistair's riscv-to-apply.next branch.
+
+Changes since v3:
+	1) Converted single patch to a series with a cover letter since there are
+	   multiple patches now.
+	2) Added a new patch to enable pflash usage via -blockdev option.
+	3) Separated the documentation change into new patch and updated the
+	   documentation to mention only -blockdev option which seems to be the
+	   recommended way of using pflash.
+
+Changes since v2:
+	1) Reverted v2 changes and used v1 approach so that pflash0 can be used
+	   for code and pflash1 for variable store.
+	2) Rebased to latest riscv-to-apply.next branch.
+	3) Added documentation for pflash usage.
+
+Changes since v1:
+	1) Simplified the fix such that it doesn't break current EDK2.
+
+Sunil V L (3):
+  hw/riscv: virt: Assume M-mode FW in pflash0 only when "-bios none"
+  riscv/virt: Support using pflash via -blockdev option
+  docs/system: riscv: Add pflash usage details
+
+ docs/system/riscv/virt.rst | 29 +++++++++++++++++++
+ hw/riscv/virt.c            | 58 ++++++++++++++++----------------------
+ 2 files changed, 53 insertions(+), 34 deletions(-)
 
 -- 
-Andrea Bolognani / Red Hat / Virtualization
+2.34.1
 
 
