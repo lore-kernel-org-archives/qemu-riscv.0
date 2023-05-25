@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72533C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 02:22:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93E75C77B7A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 02:25:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q20c0-00045Q-QI; Wed, 24 May 2023 22:21:56 -0400
+	id 1q20eu-0004vQ-CR; Wed, 24 May 2023 22:24:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q20bz-00044w-NB; Wed, 24 May 2023 22:21:55 -0400
-Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
+ id 1q20et-0004vD-6e; Wed, 24 May 2023 22:24:55 -0400
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q20bw-0001JX-Fi; Wed, 24 May 2023 22:21:55 -0400
-Received: by mail-vs1-xe31.google.com with SMTP id
- ada2fe7eead31-439554d9a69so303147137.1; 
- Wed, 24 May 2023 19:21:51 -0700 (PDT)
+ id 1q20er-0001jZ-MW; Wed, 24 May 2023 22:24:54 -0400
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-78412128326so327477241.1; 
+ Wed, 24 May 2023 19:24:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1684981311; x=1687573311;
+ d=gmail.com; s=20221208; t=1684981492; x=1687573492;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pos1YCI+aHnHCSixIYTh/TXSSOpx4F9LwRj8Hg8bjvk=;
- b=FjfCvFMtdzgn8o7Dd+LvJA07dQKK/69O79Bn880kDe5PIt2W+yK2McBDnZlfkGjiOD
- nxeBm6VPVttVFnV3NhQfR1hsuYQIwCikH+7pQe2w6sutROFcC9LHP2gbeNkeHuLv+f+4
- aryyNyBrImSk8DHy9PFppUwZCsWRhDAmBQq9oZTaBSsSAE7W+MQaCSBOI+e74SaZhTbN
- JYQpQ6lI7U/u7Ze8B/vHBzB2FoNH0hh9TcPrg3hIK7vYGBdLRglfXaZI3XOCi/copORv
- JjwKNNvoP8Rfbfcz3r4Jxb7ApSzBYGZTKzommYbMjsVLznpmcCj8itv2ZUKcs8dj0G1T
- m0ow==
+ bh=jCtFZnvx1qWlxTGkVgOWwspZc2m1HIv/OKvz8Slc7cM=;
+ b=WRTabr6PtVwxG7yZ95XkhNSObMlFRZgV/gHohNTelUMoIyqRZ9qLajfAkcWbzgPL2L
+ B1B242emfYEgiesv0yysBpiJCsFsKIyL3vie80k1MHPxQjdKAjDRXXkf2Stfd65XB35F
+ BRg2Shx91LHjPmUY5gpor4H6/EwEKbt/46p/IeU/Jx23wnZeVPo2DuYeVksUomM2TPyH
+ oMoxKCkPzALL7UJwJ0yEcNwns/n/RxXkJgg634ikOdv0Z8iNYG2ZW6Y0d0huhVmsZB0r
+ temm53C/01GAGFwTRo8qFb8W3J0musll5J397OaDkEZaSBzp6aHFfl+nt6LPNzO/NyRr
+ Z0vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684981311; x=1687573311;
+ d=1e100.net; s=20221208; t=1684981492; x=1687573492;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Pos1YCI+aHnHCSixIYTh/TXSSOpx4F9LwRj8Hg8bjvk=;
- b=e4lhYsK6GD5vJiripk9ozyC+N6GRRjYYD5w0fAZcWTLAx3et+h/4EbmdkUQ22zeQL8
- WGAiqfLGMYCW9vf8w8K2koQ2GR0Hx7dZmgEbbAvStZJZHp5D4+wBgYzLLkzlyKK5SAAg
- Zg4zx+E9jj3ehuKB8jFuXFocdIJ1qWN11thcY6vd+bB7BHtWOaCs5kTpB53Hw467eS+0
- fP9ji0Z5JTuTvIEfXSME9xj2KfSjtxnLEQY/T+cn1CMl7aLDB1VXadXAJnSswEWTcMfl
- 5ol1gVbWV0TuhHPQ6kgk3YiBakhNaX/lRxtEBtehuzJ/1ubDH0aDuH/UOG9Skw+v3pad
- se0g==
-X-Gm-Message-State: AC+VfDwV1ZcQEUmBQvwTxjmUjnJfUOrTOz5a26zvbelH+khvVHFD1qG8
- WfAxdQdWSFwEUU1LaAFXGLSnMQzVF6+tZ2muUog=
-X-Google-Smtp-Source: ACHHUZ4sbDASX+6+gmdwLsGqpNAanUhomgfGSPd8JReDnnvEcS8Wcp4NxuHvVwaXg1gTtiLkShPRhoi7JernLPlEB7M=
-X-Received: by 2002:a67:8cc2:0:b0:434:8430:299c with SMTP id
- o185-20020a678cc2000000b004348430299cmr491361vsd.7.1684981311000; Wed, 24 May
- 2023 19:21:51 -0700 (PDT)
+ bh=jCtFZnvx1qWlxTGkVgOWwspZc2m1HIv/OKvz8Slc7cM=;
+ b=J5I11GEQtynGi82RjQJifJ8/B9QclezTdLTGswcP/iBFym+kigTcI4MLXcB5/hvkBQ
+ utisWdaH2dSJwgIi6TMWuSillXGIDHWxfLNPGnexp17tgk+C6QSile4mSuaq22RGS/Ga
+ suXLw9B4dF/GQ3U90gCBusvA2MhbKA/FAtpeJEzYLOHxZ6rePuc7H68wjJvQo99zVdGq
+ omtpzh1np8vb81M2pZhTOAP3aqU5GLxRb5c7yB7UIDJA6OmpbgLScTPrKAPtWO8g7HTV
+ IM/vUAnWISEq8G1QP3kUvRfY5ShWRg4n8D1EFuWeVsqcfGQdH57iaJK23W0CNkt4yRD2
+ qkpA==
+X-Gm-Message-State: AC+VfDz6eT7usjB4SvjZhBVzA6uWVbgLl+cqggoFZ6Jdupa31SO1+h+a
+ 1fag7+QlVyZQqrhpreUovnZAfto15P0fsd1db+A=
+X-Google-Smtp-Source: ACHHUZ6EKWYrv0PyC2gibzp0pb/uIDqfCI6bmRmJHX9gll/F3UXp7sSEr0qTJIvAFuKglOzJDAt02p6yORn+HHhsQSo=
+X-Received: by 2002:a67:f502:0:b0:434:5839:bdc4 with SMTP id
+ u2-20020a67f502000000b004345839bdc4mr6659868vsn.25.1684981492373; Wed, 24 May
+ 2023 19:24:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230520054510.68822-1-philmd@linaro.org>
-In-Reply-To: <20230520054510.68822-1-philmd@linaro.org>
+References: <20230519023758.1759434-1-yin.wang@intel.com>
+In-Reply-To: <20230519023758.1759434-1-yin.wang@intel.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 25 May 2023 12:21:25 +1000
-Message-ID: <CAKmqyKPyZJgZTd+mdRHAE_fvh+PE3sboT9aj=dBLwktfAQeKUQ@mail.gmail.com>
-Subject: Re: [PATCH 0/5] hw/riscv/opentitan: Correct QOM type/size of
- OpenTitanState
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
- Bin Meng <bin.meng@windriver.com>, Alistair Francis <Alistair.Francis@wdc.com>,
- qemu-riscv@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Date: Thu, 25 May 2023 12:24:26 +1000
+Message-ID: <CAKmqyKO1fkvSKLP6Ji2aE_jB3x65P=pqA22EsNSXy0aAFwuZJQ@mail.gmail.com>
+Subject: Re: [PATCH v5] hw/riscv: qemu crash when NUMA nodes exceed available
+ CPUs
+To: Yin Wang <yin.wang@intel.com>
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Weiwei Li <liweiwei@iscas.ac.cn>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Bin Meng <bin.meng@windriver.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -91,26 +93,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, May 20, 2023 at 3:47=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
-<philmd@linaro.org> wrote:
+On Fri, May 19, 2023 at 12:38=E2=80=AFPM Yin Wang <yin.wang@intel.com> wrot=
+e:
 >
-> Hi,
+> Command "qemu-system-riscv64 -machine virt
+> -m 2G -smp 1 -numa node,mem=3D1G -numa node,mem=3D1G"
+> would trigger this problem.Backtrace with:
+>  #0  0x0000555555b5b1a4 in riscv_numa_get_default_cpu_node_id  at ../hw/r=
+iscv/numa.c:211
+>  #1  0x00005555558ce510 in machine_numa_finish_cpu_init  at ../hw/core/ma=
+chine.c:1230
+>  #2  0x00005555558ce9d3 in machine_run_board_init  at ../hw/core/machine.=
+c:1346
+>  #3  0x0000555555aaedc3 in qemu_init_board  at ../softmmu/vl.c:2513
+>  #4  0x0000555555aaf064 in qmp_x_exit_preconfig  at ../softmmu/vl.c:2609
+>  #5  0x0000555555ab1916 in qemu_init  at ../softmmu/vl.c:3617
+>  #6  0x000055555585463b in main  at ../softmmu/main.c:47
+> This commit fixes the issue by adding parameter checks.
 >
-> This series fix a QOM issue with the OpenTitanState
-> structure, noticed while auditing QOM relations globally.
->
-> All patches are trivial to review.
->
-> Regards,
->
-> Phil.
->
-> Philippe Mathieu-Daud=C3=A9 (5):
->   hw/riscv/opentitan: Rename machine_[class]_init() functions
->   hw/riscv/opentitan: Declare QOM types using DEFINE_TYPES() macro
->   hw/riscv/opentitan: Add TYPE_OPENTITAN_MACHINE definition
->   hw/riscv/opentitan: Explicit machine type definition
->   hw/riscv/opentitan: Correct OpenTitanState parent type/size
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Yin Wang <yin.wang@intel.com>
 
 Thanks!
 
@@ -118,13 +123,31 @@ Applied to riscv-to-apply.next
 
 Alistair
 
+> ---
+>  hw/riscv/numa.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 >
->  include/hw/riscv/opentitan.h |  6 +++++-
->  hw/riscv/opentitan.c         | 38 +++++++++++++++++++-----------------
->  2 files changed, 25 insertions(+), 19 deletions(-)
+> diff --git a/hw/riscv/numa.c b/hw/riscv/numa.c
+> index 4720102561..e0414d5b1b 100644
+> --- a/hw/riscv/numa.c
+> +++ b/hw/riscv/numa.c
+> @@ -207,6 +207,12 @@ int64_t riscv_numa_get_default_cpu_node_id(const Mac=
+hineState *ms, int idx)
+>  {
+>      int64_t nidx =3D 0;
 >
+> +    if (ms->numa_state->num_nodes > ms->smp.cpus) {
+> +        error_report("Number of NUMA nodes (%d)"
+> +                     " cannot exceed the number of available CPUs (%d)."=
+,
+> +                     ms->numa_state->num_nodes, ms->smp.max_cpus);
+> +        exit(EXIT_FAILURE);
+> +    }
+>      if (ms->numa_state->num_nodes) {
+>          nidx =3D idx / (ms->smp.cpus / ms->numa_state->num_nodes);
+>          if (ms->numa_state->num_nodes <=3D nidx) {
 > --
-> 2.38.1
+> 2.34.1
 >
 >
 
