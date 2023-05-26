@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE59DC77B7A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 01:27:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 214BCC7EE29
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 01:36:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q2MEf-0001Eo-Qf; Thu, 25 May 2023 21:27:19 -0400
+	id 1q2MN0-0004aT-WC; Thu, 25 May 2023 21:35:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q2MEN-00016J-Nv; Thu, 25 May 2023 21:27:02 -0400
-Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
+ id 1q2MMz-0004ZO-Fx; Thu, 25 May 2023 21:35:53 -0400
+Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q2MEE-0004uD-JX; Thu, 25 May 2023 21:26:59 -0400
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-783ec566cb9so68992241.3; 
- Thu, 25 May 2023 18:26:49 -0700 (PDT)
+ id 1q2MMy-0006Qd-0Y; Thu, 25 May 2023 21:35:53 -0400
+Received: by mail-vk1-xa2c.google.com with SMTP id
+ 71dfb90a1353d-456ea0974bcso277105e0c.1; 
+ Thu, 25 May 2023 18:35:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1685064407; x=1687656407;
+ d=gmail.com; s=20221208; t=1685064950; x=1687656950;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=F8yHyP6eykFIHGBWu5MkrjJpFUO4IZroNq5IOTcA000=;
- b=Vsel8r2+OPgVbqFxhhOjwv4kWOze0BcUFfKRxl0KJhrhNlOu2fL6Uj2gjhc/lHf9f+
- HVZB9KcgHdFGA7BvC4FCMSGMB6BkBKEPhWmCoYr6PHUjwI9VV7yd7O2lmQitSGLFrD+z
- PsgBD69yHlH8WDkkOUInGs2i0aBeQDXor6uLxVzRGrA8hBgwKt7r9E1IlMn3YxXwrr/o
- DoWmdTdbAfmd4G90ocBovptJAzRJHqGce9hhiohI10gBrUGU8C5qTInBddTOadabTjm1
- qSPk0VdwHzy/ZSqw/fJkNb7re5b5Sn2IsZCpzqLpJ9Ahpbjarro70eIKVWrEFstUEUk4
- rHmw==
+ bh=rA1uOLCgwkYcky3uFAD/xjQaM0KOVsofpv3atvKMB+w=;
+ b=L0y4zKLAb0qbFJOrXwFJAwtaMVWs0Wpsklq1r9Lk/LO76eICipMIWVqTtJLpHXlZLP
+ ut4UGwSw+bg55YYxXIfz4C+kdzuAeSHjBTjOyMyT0oXtqxiz/DaKs/OkrUlIFp9EgzFm
+ FCErrSz2BI0dnFYgA7MW3yvx3qku6jz7/VEGdgeQ1J6mEKsF6e0yZidxGxVnmJ2AFs6X
+ gwFk6TzKu8UPIFd7dnOw1ubRoca6ukdQF2fEtYiaaweiEd3wQq3NxxuMrACqGGehWzyC
+ qtT27H7GEnmBofvh0mkDIagGifgfW4wwfRXkH+DBUZj92brpqUByE0icsV3zbsXdzOXd
+ pf5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685064407; x=1687656407;
+ d=1e100.net; s=20221208; t=1685064950; x=1687656950;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=F8yHyP6eykFIHGBWu5MkrjJpFUO4IZroNq5IOTcA000=;
- b=Ld7NQcefJFzoLMLod/lCxPfx4BEF6iKK9rRnajtruXBKcRVCE4kO4k96vjVWzeMGK8
- Rv7NFr1nVAJSlmiFTMMIL7vt/Cx+VlvtFbjdP4JUPP99t0ad1Dg29H1+TSsB9gtpWICU
- wtK3E6aeMkFCRLyhjDmnM2vMAgjifr2tCjG1K7xK9MxgSDwPQnn6SR88PcY5D9Ve40wB
- obLixmCqeUGcUn/uZf0yRV8pva6asu0REBvOYPa8+utMvDJFYE8OWchIZUtUwZvwZf0N
- tiTQ0YHMJc/S7OpBX4Sh5167jiWKLKIq8NOspDjZWWefPNJ6W3KBJa1ADGknc7icpgi4
- vKVw==
-X-Gm-Message-State: AC+VfDyVxJHIWxZExRKaS02V+sg2bjefeXyWjw01gzUdRLE/H4Otjiom
- 6sven56MQ0VGb0I0QhnaU+Jxx3XF0+dXzs+7sa8=
-X-Google-Smtp-Source: ACHHUZ6PdSmUzTMeBy59xHF4tE9NNWxrWmP2CZhpSm/QzqHsxDYkGF0/oySebw8Jc7vpV33QmLPGEGL7sg/uW2rU6vQ=
-X-Received: by 2002:a67:e8d5:0:b0:434:8873:f8a6 with SMTP id
- y21-20020a67e8d5000000b004348873f8a6mr39563vsn.13.1685064406780; Thu, 25 May
- 2023 18:26:46 -0700 (PDT)
+ bh=rA1uOLCgwkYcky3uFAD/xjQaM0KOVsofpv3atvKMB+w=;
+ b=I1+bnHUz3KibzHLoXANJyb4JqQDM7q4Pitct9TJd/3jwrrw7bT4zPMfz99zKs/pXfa
+ /a7xTQCJLqFAYGZSBGM0EZb0m8x2++EFzzjyZYjbF/uTPRDj9dDuiRaJEiyUX0dHbQFy
+ B0OTXAe7mEfyrGeqNkm63W63sprpdRw6hkxhk2+7jURm09UBoryzArx+HCDwZFvZDWQw
+ b+DwO7UxdBD9wtuEQXlo+TXHNLY1fNF23xHwpKePpcCvR+SuE9WdAZD09XSF843YjJzx
+ gmk7UIZAKtjjWcdC46tHalj99EhtFV+nC3UzKJHfqfPoiLfHeUM/+hFboz39rNkkfbXK
+ KNgQ==
+X-Gm-Message-State: AC+VfDxuIw3wBVEbw26YHlkZstkXvKOhA0XL7tdR+8jnMdenHGiz2lEo
+ icfM4YQmg74OLGMJD45BXKIEHlUE1kGHhfQMv0k=
+X-Google-Smtp-Source: ACHHUZ53ac34gZA1T7eFF9nX4x/R8RrNSQxJzYKyHUOq99V4PtO5xGOa+ZZWX1/7tyTLz31bOwVu9Lcyy2FuCgEjBqo=
+X-Received: by 2002:a1f:4390:0:b0:43f:e623:952 with SMTP id
+ q138-20020a1f4390000000b0043fe6230952mr57455vka.2.1685064950508; Thu, 25 May
+ 2023 18:35:50 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230523093539.203909-1-liweiwei@iscas.ac.cn>
- <20230523093539.203909-9-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230523093539.203909-9-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230523093539.203909-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 26 May 2023 11:26:20 +1000
-Message-ID: <CAKmqyKOZw0gvbU7-dnFVrv_d+O5Lj=Fw8EqvdjPNvycY6HqSQg@mail.gmail.com>
-Subject: Re: [PATCH v2 8/8] disas/riscv.c: Remove redundant parentheses
+Date: Fri, 26 May 2023 11:35:24 +1000
+Message-ID: <CAKmqyKNzDdjgHO+ytzpZ6S+nsLZue7OFvfucQzpburevTthB_A@mail.gmail.com>
+Subject: Re: [PATCH v2 0/8] Add support for extension specific disas
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
  zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -93,854 +92,54 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Tue, May 23, 2023 at 7:38=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
 ote:
 >
-> Remove redundant parenthese and fix multi-line comments.
+> Some extensions have conflict encodings, such as
+>  * Z*inx reuse the same encodings as normal float point extensions.
+>  * Zcm* reuse the some encodings of Zcd.
+>  * Custom extensions from different vendors may share the same encodings.
+> To resolve this problem, this patchset tries to pass RISCVCPUConfig as di=
+sasemble_info.target_info to support extension specific disas, which means =
+that the disas for this extensions is supported only when the related exten=
+sion is supported.
+> This patchset also fixes some style problems in disas/riscv.c.
 >
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> The port is available here:
+> https://github.com/plctlab/plct-qemu/tree/plct-disas-upstream-v2
+>
+> v2:
+>  * Split the RISCVCPUCfg declarations from cpu.h into the new cpu_cfg.h h=
+eader
+> in a separated patch 2 and add a 2023 copyright (Suggested-by: Daniel Hen=
+rique Barboza)
+>  * Check Zcm* and avoid changing the other lines in patch 4 (Suggested-by=
+: Daniel Henrique Barboza)
+>
+> Weiwei Li (8):
+>   disas: Change type of disassemble_info.target_info to pointer
+>   target/riscv: Split RISCVCPUConfig declarations from cpu.h into
+>     cpu_cfg.h
+>   target/riscv: Pass RISCVCPUConfig as target_info to disassemble_info
+>   disas/riscv.c: Support disas for Zcm* extensions
+>   disas/riscv.c: Support disas for Z*inx extensions
+>   disas/riscv.c: Remove unused decomp_rv32/64 value for vector
+>     instructions
+>   disas/riscv.c: Fix lines with over 80 characters
+>   disas/riscv.c: Remove redundant parentheses
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  disas/riscv.c | 219 +++++++++++++++++++++++++-------------------------
->  1 file changed, 110 insertions(+), 109 deletions(-)
 >
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index e5d3cefd17..5b9205ab9b 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -2386,9 +2386,9 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->  {
->      rv_inst inst =3D dec->inst;
->      rv_opcode op =3D rv_op_illegal;
-> -    switch (((inst >> 0) & 0b11)) {
-> +    switch ((inst >> 0) & 0b11) {
->      case 0:
-> -        switch (((inst >> 13) & 0b111)) {
-> +        switch ((inst >> 13) & 0b111) {
->          case 0: op =3D rv_op_c_addi4spn; break;
->          case 1:
->              if (isa =3D=3D rv128) {
-> @@ -2441,9 +2441,9 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->          }
->          break;
->      case 1:
-> -        switch (((inst >> 13) & 0b111)) {
-> +        switch ((inst >> 13) & 0b111) {
->          case 0:
-> -            switch (((inst >> 2) & 0b11111111111)) {
-> +            switch ((inst >> 2) & 0b11111111111) {
->              case 0: op =3D rv_op_c_nop; break;
->              default: op =3D rv_op_c_addi; break;
->              }
-> @@ -2457,13 +2457,13 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->              break;
->          case 2: op =3D rv_op_c_li; break;
->          case 3:
-> -            switch (((inst >> 7) & 0b11111)) {
-> +            switch ((inst >> 7) & 0b11111) {
->              case 2: op =3D rv_op_c_addi16sp; break;
->              default: op =3D rv_op_c_lui; break;
->              }
->              break;
->          case 4:
-> -            switch (((inst >> 10) & 0b11)) {
-> +            switch ((inst >> 10) & 0b11) {
->              case 0:
->                  op =3D rv_op_c_srli;
->                  break;
-> @@ -2500,7 +2500,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->          }
->          break;
->      case 2:
-> -        switch (((inst >> 13) & 0b111)) {
-> +        switch ((inst >> 13) & 0b111) {
->          case 0:
->              op =3D rv_op_c_slli;
->              break;
-> @@ -2520,17 +2520,17 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->              }
->              break;
->          case 4:
-> -            switch (((inst >> 12) & 0b1)) {
-> +            switch ((inst >> 12) & 0b1) {
->              case 0:
-> -                switch (((inst >> 2) & 0b11111)) {
-> +                switch ((inst >> 2) & 0b11111) {
->                  case 0: op =3D rv_op_c_jr; break;
->                  default: op =3D rv_op_c_mv; break;
->                  }
->                  break;
->              case 1:
-> -                switch (((inst >> 2) & 0b11111)) {
-> +                switch ((inst >> 2) & 0b11111) {
->                  case 0:
-> -                    switch (((inst >> 7) & 0b11111)) {
-> +                    switch ((inst >> 7) & 0b11111) {
->                      case 0: op =3D rv_op_c_ebreak; break;
->                      default: op =3D rv_op_c_jalr; break;
->                      }
-> @@ -2604,9 +2604,9 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->          }
->          break;
->      case 3:
-> -        switch (((inst >> 2) & 0b11111)) {
-> +        switch ((inst >> 2) & 0b11111) {
->          case 0:
-> -            switch (((inst >> 12) & 0b111)) {
-> +            switch ((inst >> 12) & 0b111) {
->              case 0: op =3D rv_op_lb; break;
->              case 1: op =3D rv_op_lh; break;
->              case 2: op =3D rv_op_lw; break;
-> @@ -2618,17 +2618,17 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->              }
->              break;
->          case 1:
-> -            switch (((inst >> 12) & 0b111)) {
-> +            switch ((inst >> 12) & 0b111) {
->              case 0:
-> -                switch (((inst >> 20) & 0b111111111111)) {
-> +                switch ((inst >> 20) & 0b111111111111) {
->                  case 40: op =3D rv_op_vl1re8_v; break;
->                  case 552: op =3D rv_op_vl2re8_v; break;
->                  case 1576: op =3D rv_op_vl4re8_v; break;
->                  case 3624: op =3D rv_op_vl8re8_v; break;
->                  }
-> -                switch (((inst >> 26) & 0b111)) {
-> +                switch ((inst >> 26) & 0b111) {
->                  case 0:
-> -                    switch (((inst >> 20) & 0b11111)) {
-> +                    switch ((inst >> 20) & 0b11111) {
->                      case 0: op =3D rv_op_vle8_v; break;
->                      case 11: op =3D rv_op_vlm_v; break;
->                      case 16: op =3D rv_op_vle8ff_v; break;
-> @@ -2643,15 +2643,15 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->              case 3: op =3D rv_op_fld; break;
->              case 4: op =3D rv_op_flq; break;
->              case 5:
-> -                switch (((inst >> 20) & 0b111111111111)) {
-> +                switch ((inst >> 20) & 0b111111111111) {
->                  case 40: op =3D rv_op_vl1re16_v; break;
->                  case 552: op =3D rv_op_vl2re16_v; break;
->                  case 1576: op =3D rv_op_vl4re16_v; break;
->                  case 3624: op =3D rv_op_vl8re16_v; break;
->                  }
-> -                switch (((inst >> 26) & 0b111)) {
-> +                switch ((inst >> 26) & 0b111) {
->                  case 0:
-> -                    switch (((inst >> 20) & 0b11111)) {
-> +                    switch ((inst >> 20) & 0b11111) {
->                      case 0: op =3D rv_op_vle16_v; break;
->                      case 16: op =3D rv_op_vle16ff_v; break;
->                      }
-> @@ -2662,15 +2662,15 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->                  }
->                  break;
->              case 6:
-> -                switch (((inst >> 20) & 0b111111111111)) {
-> +                switch ((inst >> 20) & 0b111111111111) {
->                  case 40: op =3D rv_op_vl1re32_v; break;
->                  case 552: op =3D rv_op_vl2re32_v; break;
->                  case 1576: op =3D rv_op_vl4re32_v; break;
->                  case 3624: op =3D rv_op_vl8re32_v; break;
->                  }
-> -                switch (((inst >> 26) & 0b111)) {
-> +                switch ((inst >> 26) & 0b111) {
->                  case 0:
-> -                    switch (((inst >> 20) & 0b11111)) {
-> +                    switch ((inst >> 20) & 0b11111) {
->                      case 0: op =3D rv_op_vle32_v; break;
->                      case 16: op =3D rv_op_vle32ff_v; break;
->                      }
-> @@ -2681,15 +2681,15 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->                  }
->                  break;
->              case 7:
-> -                switch (((inst >> 20) & 0b111111111111)) {
-> +                switch ((inst >> 20) & 0b111111111111) {
->                  case 40: op =3D rv_op_vl1re64_v; break;
->                  case 552: op =3D rv_op_vl2re64_v; break;
->                  case 1576: op =3D rv_op_vl4re64_v; break;
->                  case 3624: op =3D rv_op_vl8re64_v; break;
->                  }
-> -                switch (((inst >> 26) & 0b111)) {
-> +                switch ((inst >> 26) & 0b111) {
->                  case 0:
-> -                    switch (((inst >> 20) & 0b11111)) {
-> +                    switch ((inst >> 20) & 0b11111) {
->                      case 0: op =3D rv_op_vle64_v; break;
->                      case 16: op =3D rv_op_vle64ff_v; break;
->                      }
-> @@ -2702,25 +2702,25 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->              }
->              break;
->          case 3:
-> -            switch (((inst >> 12) & 0b111)) {
-> +            switch ((inst >> 12) & 0b111) {
->              case 0: op =3D rv_op_fence; break;
->              case 1: op =3D rv_op_fence_i; break;
->              case 2: op =3D rv_op_lq; break;
->              }
->              break;
->          case 4:
-> -            switch (((inst >> 12) & 0b111)) {
-> +            switch ((inst >> 12) & 0b111) {
->              case 0: op =3D rv_op_addi; break;
->              case 1:
-> -                switch (((inst >> 27) & 0b11111)) {
-> +                switch ((inst >> 27) & 0b11111) {
->                  case 0b00000: op =3D rv_op_slli; break;
->                  case 0b00001:
-> -                    switch (((inst >> 20) & 0b1111111)) {
-> +                    switch ((inst >> 20) & 0b1111111) {
->                      case 0b0001111: op =3D rv_op_zip; break;
->                      }
->                      break;
->                  case 0b00010:
-> -                    switch (((inst >> 20) & 0b1111111)) {
-> +                    switch ((inst >> 20) & 0b1111111) {
->                      case 0b0000000: op =3D rv_op_sha256sum0; break;
->                      case 0b0000001: op =3D rv_op_sha256sum1; break;
->                      case 0b0000010: op =3D rv_op_sha256sig0; break;
-> @@ -2735,7 +2735,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                      break;
->                  case 0b00101: op =3D rv_op_bseti; break;
->                  case 0b00110:
-> -                    switch (((inst >> 20) & 0b1111111)) {
-> +                    switch ((inst >> 20) & 0b1111111) {
->                      case 0b0000000: op =3D rv_op_aes64im; break;
->                      default:
->                          if (((inst >> 24) & 0b0111) =3D=3D 0b001) {
-> @@ -2747,7 +2747,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  case 0b01001: op =3D rv_op_bclri; break;
->                  case 0b01101: op =3D rv_op_binvi; break;
->                  case 0b01100:
-> -                    switch (((inst >> 20) & 0b1111111)) {
-> +                    switch ((inst >> 20) & 0b1111111) {
->                      case 0b0000000: op =3D rv_op_clz; break;
->                      case 0b0000001: op =3D rv_op_ctz; break;
->                      case 0b0000010: op =3D rv_op_cpop; break;
-> @@ -2762,10 +2762,10 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->              case 3: op =3D rv_op_sltiu; break;
->              case 4: op =3D rv_op_xori; break;
->              case 5:
-> -                switch (((inst >> 27) & 0b11111)) {
-> +                switch ((inst >> 27) & 0b11111) {
->                  case 0b00000: op =3D rv_op_srli; break;
->                  case 0b00001:
-> -                    switch (((inst >> 20) & 0b1111111)) {
-> +                    switch ((inst >> 20) & 0b1111111) {
->                      case 0b0001111: op =3D rv_op_unzip; break;
->                      }
->                      break;
-> @@ -2788,10 +2788,10 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->              break;
->          case 5: op =3D rv_op_auipc; break;
->          case 6:
-> -            switch (((inst >> 12) & 0b111)) {
-> +            switch ((inst >> 12) & 0b111) {
->              case 0: op =3D rv_op_addiw; break;
->              case 1:
-> -                switch (((inst >> 26) & 0b111111)) {
-> +                switch ((inst >> 26) & 0b111111) {
->                  case 0: op =3D rv_op_slliw; break;
->                  case 2: op =3D rv_op_slli_uw; break;
->                  case 24:
-> @@ -2804,7 +2804,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 5:
-> -                switch (((inst >> 25) & 0b1111111)) {
-> +                switch ((inst >> 25) & 0b1111111) {
->                  case 0: op =3D rv_op_srliw; break;
->                  case 32: op =3D rv_op_sraiw; break;
->                  case 48: op =3D rv_op_roriw; break;
-> @@ -2813,7 +2813,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->              }
->              break;
->          case 8:
-> -            switch (((inst >> 12) & 0b111)) {
-> +            switch ((inst >> 12) & 0b111) {
->              case 0: op =3D rv_op_sb; break;
->              case 1: op =3D rv_op_sh; break;
->              case 2: op =3D rv_op_sw; break;
-> @@ -2822,17 +2822,17 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->              }
->              break;
->          case 9:
-> -            switch (((inst >> 12) & 0b111)) {
-> +            switch ((inst >> 12) & 0b111) {
->              case 0:
-> -                switch (((inst >> 20) & 0b111111111111)) {
-> +                switch ((inst >> 20) & 0b111111111111) {
->                  case 40: op =3D rv_op_vs1r_v; break;
->                  case 552: op =3D rv_op_vs2r_v; break;
->                  case 1576: op =3D rv_op_vs4r_v; break;
->                  case 3624: op =3D rv_op_vs8r_v; break;
->                  }
-> -                switch (((inst >> 26) & 0b111)) {
-> +                switch ((inst >> 26) & 0b111) {
->                  case 0:
-> -                    switch (((inst >> 20) & 0b11111)) {
-> +                    switch ((inst >> 20) & 0b11111) {
->                      case 0: op =3D rv_op_vse8_v; break;
->                      case 11: op =3D rv_op_vsm_v; break;
->                      }
-> @@ -2846,9 +2846,9 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->              case 3: op =3D rv_op_fsd; break;
->              case 4: op =3D rv_op_fsq; break;
->              case 5:
-> -                switch (((inst >> 26) & 0b111)) {
-> +                switch ((inst >> 26) & 0b111) {
->                  case 0:
-> -                    switch (((inst >> 20) & 0b11111)) {
-> +                    switch ((inst >> 20) & 0b11111) {
->                      case 0: op =3D rv_op_vse16_v; break;
->                      }
->                      break;
-> @@ -2858,9 +2858,9 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 6:
-> -                switch (((inst >> 26) & 0b111)) {
-> +                switch ((inst >> 26) & 0b111) {
->                  case 0:
-> -                    switch (((inst >> 20) & 0b11111)) {
-> +                    switch ((inst >> 20) & 0b11111) {
->                      case 0: op =3D rv_op_vse32_v; break;
->                      }
->                      break;
-> @@ -2870,9 +2870,9 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 7:
-> -                switch (((inst >> 26) & 0b111)) {
-> +                switch ((inst >> 26) & 0b111) {
->                  case 0:
-> -                    switch (((inst >> 20) & 0b11111)) {
-> +                    switch ((inst >> 20) & 0b11111) {
->                      case 0: op =3D rv_op_vse64_v; break;
->                      }
->                      break;
-> @@ -2893,17 +2893,17 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->              case 11: op =3D rv_op_amoswap_d; break;
->              case 12: op =3D rv_op_amoswap_q; break;
->              case 18:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_lr_w; break;
->                  }
->                  break;
->              case 19:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_lr_d; break;
->                  }
->                  break;
->              case 20:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_lr_q; break;
->                  }
->                  break;
-> @@ -3033,35 +3033,35 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->              }
->              break;
->          case 16:
-> -            switch (((inst >> 25) & 0b11)) {
-> +            switch ((inst >> 25) & 0b11) {
->              case 0: op =3D rv_op_fmadd_s; break;
->              case 1: op =3D rv_op_fmadd_d; break;
->              case 3: op =3D rv_op_fmadd_q; break;
->              }
->              break;
->          case 17:
-> -            switch (((inst >> 25) & 0b11)) {
-> +            switch ((inst >> 25) & 0b11) {
->              case 0: op =3D rv_op_fmsub_s; break;
->              case 1: op =3D rv_op_fmsub_d; break;
->              case 3: op =3D rv_op_fmsub_q; break;
->              }
->              break;
->          case 18:
-> -            switch (((inst >> 25) & 0b11)) {
-> +            switch ((inst >> 25) & 0b11) {
->              case 0: op =3D rv_op_fnmsub_s; break;
->              case 1: op =3D rv_op_fnmsub_d; break;
->              case 3: op =3D rv_op_fnmsub_q; break;
->              }
->              break;
->          case 19:
-> -            switch (((inst >> 25) & 0b11)) {
-> +            switch ((inst >> 25) & 0b11) {
->              case 0: op =3D rv_op_fnmadd_s; break;
->              case 1: op =3D rv_op_fnmadd_d; break;
->              case 3: op =3D rv_op_fnmadd_q; break;
->              }
->              break;
->          case 20:
-> -            switch (((inst >> 25) & 0b1111111)) {
-> +            switch ((inst >> 25) & 0b1111111) {
->              case 0: op =3D rv_op_fadd_s; break;
->              case 1: op =3D rv_op_fadd_d; break;
->              case 3: op =3D rv_op_fadd_q; break;
-> @@ -3075,100 +3075,100 @@ static void decode_inst_opcode(rv_decode *dec, =
-rv_isa isa)
->              case 13: op =3D rv_op_fdiv_d; break;
->              case 15: op =3D rv_op_fdiv_q; break;
->              case 16:
-> -                switch (((inst >> 12) & 0b111)) {
-> +                switch ((inst >> 12) & 0b111) {
->                  case 0: op =3D rv_op_fsgnj_s; break;
->                  case 1: op =3D rv_op_fsgnjn_s; break;
->                  case 2: op =3D rv_op_fsgnjx_s; break;
->                  }
->                  break;
->              case 17:
-> -                switch (((inst >> 12) & 0b111)) {
-> +                switch ((inst >> 12) & 0b111) {
->                  case 0: op =3D rv_op_fsgnj_d; break;
->                  case 1: op =3D rv_op_fsgnjn_d; break;
->                  case 2: op =3D rv_op_fsgnjx_d; break;
->                  }
->                  break;
->              case 19:
-> -                switch (((inst >> 12) & 0b111)) {
-> +                switch ((inst >> 12) & 0b111) {
->                  case 0: op =3D rv_op_fsgnj_q; break;
->                  case 1: op =3D rv_op_fsgnjn_q; break;
->                  case 2: op =3D rv_op_fsgnjx_q; break;
->                  }
->                  break;
->              case 20:
-> -                switch (((inst >> 12) & 0b111)) {
-> +                switch ((inst >> 12) & 0b111) {
->                  case 0: op =3D rv_op_fmin_s; break;
->                  case 1: op =3D rv_op_fmax_s; break;
->                  }
->                  break;
->              case 21:
-> -                switch (((inst >> 12) & 0b111)) {
-> +                switch ((inst >> 12) & 0b111) {
->                  case 0: op =3D rv_op_fmin_d; break;
->                  case 1: op =3D rv_op_fmax_d; break;
->                  }
->                  break;
->              case 23:
-> -                switch (((inst >> 12) & 0b111)) {
-> +                switch ((inst >> 12) & 0b111) {
->                  case 0: op =3D rv_op_fmin_q; break;
->                  case 1: op =3D rv_op_fmax_q; break;
->                  }
->                  break;
->              case 32:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 1: op =3D rv_op_fcvt_s_d; break;
->                  case 3: op =3D rv_op_fcvt_s_q; break;
->                  }
->                  break;
->              case 33:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_fcvt_d_s; break;
->                  case 3: op =3D rv_op_fcvt_d_q; break;
->                  }
->                  break;
->              case 35:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_fcvt_q_s; break;
->                  case 1: op =3D rv_op_fcvt_q_d; break;
->                  }
->                  break;
->              case 44:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_fsqrt_s; break;
->                  }
->                  break;
->              case 45:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_fsqrt_d; break;
->                  }
->                  break;
->              case 47:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_fsqrt_q; break;
->                  }
->                  break;
->              case 80:
-> -                switch (((inst >> 12) & 0b111)) {
-> +                switch ((inst >> 12) & 0b111) {
->                  case 0: op =3D rv_op_fle_s; break;
->                  case 1: op =3D rv_op_flt_s; break;
->                  case 2: op =3D rv_op_feq_s; break;
->                  }
->                  break;
->              case 81:
-> -                switch (((inst >> 12) & 0b111)) {
-> +                switch ((inst >> 12) & 0b111) {
->                  case 0: op =3D rv_op_fle_d; break;
->                  case 1: op =3D rv_op_flt_d; break;
->                  case 2: op =3D rv_op_feq_d; break;
->                  }
->                  break;
->              case 83:
-> -                switch (((inst >> 12) & 0b111)) {
-> +                switch ((inst >> 12) & 0b111) {
->                  case 0: op =3D rv_op_fle_q; break;
->                  case 1: op =3D rv_op_flt_q; break;
->                  case 2: op =3D rv_op_feq_q; break;
->                  }
->                  break;
->              case 96:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_fcvt_w_s; break;
->                  case 1: op =3D rv_op_fcvt_wu_s; break;
->                  case 2: op =3D rv_op_fcvt_l_s; break;
-> @@ -3176,7 +3176,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 97:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_fcvt_w_d; break;
->                  case 1: op =3D rv_op_fcvt_wu_d; break;
->                  case 2: op =3D rv_op_fcvt_l_d; break;
-> @@ -3184,7 +3184,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 99:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_fcvt_w_q; break;
->                  case 1: op =3D rv_op_fcvt_wu_q; break;
->                  case 2: op =3D rv_op_fcvt_l_q; break;
-> @@ -3192,7 +3192,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 104:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_fcvt_s_w; break;
->                  case 1: op =3D rv_op_fcvt_s_wu; break;
->                  case 2: op =3D rv_op_fcvt_s_l; break;
-> @@ -3200,7 +3200,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 105:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_fcvt_d_w; break;
->                  case 1: op =3D rv_op_fcvt_d_wu; break;
->                  case 2: op =3D rv_op_fcvt_d_l; break;
-> @@ -3208,7 +3208,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 107:
-> -                switch (((inst >> 20) & 0b11111)) {
-> +                switch ((inst >> 20) & 0b11111) {
->                  case 0: op =3D rv_op_fcvt_q_w; break;
->                  case 1: op =3D rv_op_fcvt_q_wu; break;
->                  case 2: op =3D rv_op_fcvt_q_l; break;
-> @@ -3257,9 +3257,9 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->              }
->              break;
->          case 21:
-> -            switch (((inst >> 12) & 0b111)) {
-> +            switch ((inst >> 12) & 0b111) {
->              case 0:
-> -                switch (((inst >> 26) & 0b111111)) {
-> +                switch ((inst >> 26) & 0b111111) {
->                  case 0: op =3D rv_op_vadd_vv; break;
->                  case 2: op =3D rv_op_vsub_vv; break;
->                  case 4: op =3D rv_op_vminu_vv; break;
-> @@ -3314,7 +3314,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 1:
-> -                switch (((inst >> 26) & 0b111111)) {
-> +                switch ((inst >> 26) & 0b111111) {
->                  case 0: op =3D rv_op_vfadd_vv; break;
->                  case 1: op =3D rv_op_vfredusum_vs; break;
->                  case 2: op =3D rv_op_vfsub_vv; break;
-> @@ -3327,12 +3327,12 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->                  case 9: op =3D rv_op_vfsgnjn_vv; break;
->                  case 10: op =3D rv_op_vfsgnjx_vv; break;
->                  case 16:
-> -                    switch (((inst >> 15) & 0b11111)) {
-> +                    switch ((inst >> 15) & 0b11111) {
->                      case 0: if ((inst >> 25) & 1) op =3D rv_op_vfmv_f_s;=
- break;
->                      }
->                      break;
->                  case 18:
-> -                    switch (((inst >> 15) & 0b11111)) {
-> +                    switch ((inst >> 15) & 0b11111) {
->                      case 0: op =3D rv_op_vfcvt_xu_f_v; break;
->                      case 1: op =3D rv_op_vfcvt_x_f_v; break;
->                      case 2: op =3D rv_op_vfcvt_f_xu_v; break;
-> @@ -3357,7 +3357,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                      }
->                      break;
->                  case 19:
-> -                    switch (((inst >> 15) & 0b11111)) {
-> +                    switch ((inst >> 15) & 0b11111) {
->                      case 0: op =3D rv_op_vfsqrt_v; break;
->                      case 4: op =3D rv_op_vfrsqrt7_v; break;
->                      case 5: op =3D rv_op_vfrec7_v; break;
-> @@ -3392,7 +3392,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 2:
-> -                switch (((inst >> 26) & 0b111111)) {
-> +                switch ((inst >> 26) & 0b111111) {
->                  case 0: op =3D rv_op_vredsum_vs; break;
->                  case 1: op =3D rv_op_vredand_vs; break;
->                  case 2: op =3D rv_op_vredor_vs; break;
-> @@ -3406,14 +3406,14 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->                  case 10: op =3D rv_op_vasubu_vv; break;
->                  case 11: op =3D rv_op_vasub_vv; break;
->                  case 16:
-> -                    switch (((inst >> 15) & 0b11111)) {
-> +                    switch ((inst >> 15) & 0b11111) {
->                      case 0: if ((inst >> 25) & 1) op =3D rv_op_vmv_x_s; =
-break;
->                      case 16: op =3D rv_op_vcpop_m; break;
->                      case 17: op =3D rv_op_vfirst_m; break;
->                      }
->                      break;
->                  case 18:
-> -                    switch (((inst >> 15) & 0b11111)) {
-> +                    switch ((inst >> 15) & 0b11111) {
->                      case 2: op =3D rv_op_vzext_vf8; break;
->                      case 3: op =3D rv_op_vsext_vf8; break;
->                      case 4: op =3D rv_op_vzext_vf4; break;
-> @@ -3423,7 +3423,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                      }
->                      break;
->                  case 20:
-> -                    switch (((inst >> 15) & 0b11111)) {
-> +                    switch ((inst >> 15) & 0b11111) {
->                      case 1: op =3D rv_op_vmsbf_m;  break;
->                      case 2: op =3D rv_op_vmsof_m; break;
->                      case 3: op =3D rv_op_vmsif_m; break;
-> @@ -3473,7 +3473,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 3:
-> -                switch (((inst >> 26) & 0b111111)) {
-> +                switch ((inst >> 26) & 0b111111) {
->                  case 0: op =3D rv_op_vadd_vi; break;
->                  case 3: op =3D rv_op_vrsub_vi; break;
->                  case 9: op =3D rv_op_vand_vi; break;
-> @@ -3504,7 +3504,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  case 33: op =3D rv_op_vsadd_vi; break;
->                  case 37: op =3D rv_op_vsll_vi; break;
->                  case 39:
-> -                    switch (((inst >> 15) & 0b11111)) {
-> +                    switch ((inst >> 15) & 0b11111) {
->                      case 0: op =3D rv_op_vmv1r_v; break;
->                      case 1: op =3D rv_op_vmv2r_v; break;
->                      case 3: op =3D rv_op_vmv4r_v; break;
-> @@ -3522,7 +3522,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 4:
-> -                switch (((inst >> 26) & 0b111111)) {
-> +                switch ((inst >> 26) & 0b111111) {
->                  case 0: op =3D rv_op_vadd_vx; break;
->                  case 2: op =3D rv_op_vsub_vx; break;
->                  case 3: op =3D rv_op_vrsub_vx; break;
-> @@ -3579,7 +3579,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 5:
-> -                switch (((inst >> 26) & 0b111111)) {
-> +                switch ((inst >> 26) & 0b111111) {
->                  case 0: op =3D rv_op_vfadd_vf; break;
->                  case 2: op =3D rv_op_vfsub_vf; break;
->                  case 4: op =3D rv_op_vfmin_vf; break;
-> @@ -3590,7 +3590,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  case 14: op =3D rv_op_vfslide1up_vf; break;
->                  case 15: op =3D rv_op_vfslide1down_vf; break;
->                  case 16:
-> -                    switch (((inst >> 20) & 0b11111)) {
-> +                    switch ((inst >> 20) & 0b11111) {
->                      case 0: if ((inst >> 25) & 1) op =3D rv_op_vfmv_s_f;=
- break;
->                      }
->                      break;
-> @@ -3630,7 +3630,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  }
->                  break;
->              case 6:
-> -                switch (((inst >> 26) & 0b111111)) {
-> +                switch ((inst >> 26) & 0b111111) {
->                  case 8: op =3D rv_op_vaaddu_vx; break;
->                  case 9: op =3D rv_op_vaadd_vx; break;
->                  case 10: op =3D rv_op_vasubu_vx; break;
-> @@ -3638,7 +3638,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  case 14: op =3D rv_op_vslide1up_vx; break;
->                  case 15: op =3D rv_op_vslide1down_vx; break;
->                  case 16:
-> -                    switch (((inst >> 20) & 0b11111)) {
-> +                    switch ((inst >> 20) & 0b11111) {
->                      case 0: if ((inst >> 25) & 1) op =3D rv_op_vmv_s_x; =
-break;
->                      }
->                      break;
-> @@ -3683,15 +3683,15 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->              }
->              break;
->          case 22:
-> -            switch (((inst >> 12) & 0b111)) {
-> +            switch ((inst >> 12) & 0b111) {
->              case 0: op =3D rv_op_addid; break;
->              case 1:
-> -                switch (((inst >> 26) & 0b111111)) {
-> +                switch ((inst >> 26) & 0b111111) {
->                  case 0: op =3D rv_op_sllid; break;
->                  }
->                  break;
->              case 5:
-> -                switch (((inst >> 26) & 0b111111)) {
-> +                switch ((inst >> 26) & 0b111111) {
->                  case 0: op =3D rv_op_srlid; break;
->                  case 16: op =3D rv_op_sraid; break;
->                  }
-> @@ -3699,7 +3699,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->              }
->              break;
->          case 24:
-> -            switch (((inst >> 12) & 0b111)) {
-> +            switch ((inst >> 12) & 0b111) {
->              case 0: op =3D rv_op_beq; break;
->              case 1: op =3D rv_op_bne; break;
->              case 4: op =3D rv_op_blt; break;
-> @@ -3709,33 +3709,33 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->              }
->              break;
->          case 25:
-> -            switch (((inst >> 12) & 0b111)) {
-> +            switch ((inst >> 12) & 0b111) {
->              case 0: op =3D rv_op_jalr; break;
->              }
->              break;
->          case 27: op =3D rv_op_jal; break;
->          case 28:
-> -            switch (((inst >> 12) & 0b111)) {
-> +            switch ((inst >> 12) & 0b111) {
->              case 0:
->                  switch (((inst >> 20) & 0b111111100000) |
->                          ((inst >> 7) & 0b000000011111)) {
->                  case 0:
-> -                    switch (((inst >> 15) & 0b1111111111)) {
-> +                    switch ((inst >> 15) & 0b1111111111) {
->                      case 0: op =3D rv_op_ecall; break;
->                      case 32: op =3D rv_op_ebreak; break;
->                      case 64: op =3D rv_op_uret; break;
->                      }
->                      break;
->                  case 256:
-> -                    switch (((inst >> 20) & 0b11111)) {
-> +                    switch ((inst >> 20) & 0b11111) {
->                      case 2:
-> -                        switch (((inst >> 15) & 0b11111)) {
-> +                        switch ((inst >> 15) & 0b11111) {
->                          case 0: op =3D rv_op_sret; break;
->                          }
->                          break;
->                      case 4: op =3D rv_op_sfence_vm; break;
->                      case 5:
-> -                        switch (((inst >> 15) & 0b11111)) {
-> +                        switch ((inst >> 15) & 0b11111) {
->                          case 0: op =3D rv_op_wfi; break;
->                          }
->                          break;
-> @@ -3743,17 +3743,17 @@ static void decode_inst_opcode(rv_decode *dec, rv=
-_isa isa)
->                      break;
->                  case 288: op =3D rv_op_sfence_vma; break;
->                  case 512:
-> -                    switch (((inst >> 15) & 0b1111111111)) {
-> +                    switch ((inst >> 15) & 0b1111111111) {
->                      case 64: op =3D rv_op_hret; break;
->                      }
->                      break;
->                  case 768:
-> -                    switch (((inst >> 15) & 0b1111111111)) {
-> +                    switch ((inst >> 15) & 0b1111111111) {
->                      case 64: op =3D rv_op_mret; break;
->                      }
->                      break;
->                  case 1952:
-> -                    switch (((inst >> 15) & 0b1111111111)) {
-> +                    switch ((inst >> 15) & 0b1111111111) {
->                      case 576: op =3D rv_op_dret; break;
->                      }
->                      break;
-> @@ -4605,7 +4605,8 @@ static size_t inst_length(rv_inst inst)
->  {
->      /* NOTE: supports maximum instruction size of 64-bits */
+>  disas/riscv.c           | 1194 +++++++++++++++++++++------------------
+>  include/disas/dis-asm.h |    2 +-
+>  target/riscv/cpu.c      |    1 +
+>  target/riscv/cpu.h      |  114 +---
+>  target/riscv/cpu_cfg.h  |  136 +++++
+>  5 files changed, 785 insertions(+), 662 deletions(-)
+>  create mode 100644 target/riscv/cpu_cfg.h
 >
-> -    /* instruction length coding
-> +    /*
-> +     * instruction length coding
->       *
->       *      aa - 16 bit aa !=3D 11
->       *   bbb11 - 32 bit bbb !=3D 111
 > --
 > 2.25.1
 >
