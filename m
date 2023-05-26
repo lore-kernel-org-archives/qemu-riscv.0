@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8650C7EE2D
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 08:19:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C583C77B7A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 08:35:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q2Sfo-0008Ej-DE; Fri, 26 May 2023 04:19:44 -0400
+	id 1q2SuH-0006px-Nb; Fri, 26 May 2023 04:34:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1q2Sfb-0007be-LU
- for qemu-riscv@nongnu.org; Fri, 26 May 2023 04:19:32 -0400
-Received: from mail-oi1-x229.google.com ([2607:f8b0:4864:20::229])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1q2SuG-0006ph-QK
+ for qemu-riscv@nongnu.org; Fri, 26 May 2023 04:34:40 -0400
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1q2SfP-0006bq-SE
- for qemu-riscv@nongnu.org; Fri, 26 May 2023 04:19:31 -0400
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3942c6584f0so172604b6e.3
- for <qemu-riscv@nongnu.org>; Fri, 26 May 2023 01:19:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1q2SuF-0001fR-3z
+ for qemu-riscv@nongnu.org; Fri, 26 May 2023 04:34:40 -0400
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-3f6da07ff00so5195135e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 26 May 2023 01:34:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1685089158; x=1687681158;
+ d=ventanamicro.com; s=google; t=1685090077; x=1687682077;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gLCwfQjI9CEpyNqNrK7IbY60JHN2vYALCzfox2aXPhc=;
- b=F1rIrTyzuHXSefEj+iKrPU9XKfQLYkgCKY5rUKqRHOMxFhiirglclR3F97oq0YS2IY
- pwEUMLkxwF2tFVRUkbsi0P+nYShy9d5tWnQfr1YNCmdR+MSS9AEQ7sVL3nqkjNYtDmbw
- JrkZRt39eDYJX0PSxXDpSc2d0ciHFhXZ+OZPo8VzBu4v2g3BeXC8grJGCNO/61bSt01p
- k/zrk4YO+xz44En0jiNPnjaMHviZ1S3XGAqZemkqWHEWL7wP9tvEv8IeQedEsXNCl+de
- n9ia22E1Sd3YsHuhWx3LAsw1dIDYL7fupryirUwhzwxZCVlH5vcmUxOW9Qg+/Of1e+XM
- 9XgQ==
+ bh=Y+QeROxGL8S3u9qXGyWHke6FHNpvHe1nmLqm9H5BaL4=;
+ b=UOzRoLC2hSrBx8152XbwaEYQXkhrtFvvUrBQDkfm+qU7hYZReBOoWAh6qTCIFKqsXL
+ tIA3tx8SFYFTIqyLO8jSFwPfs0wb9wiy29NmSHrZm/ly1f1sAXaRyQJ/aNMkmv6USw16
+ WUtoKhxl03OMIae3sBS/cyVmexbBaNaYW+shiFhi0FSdDtpFMxGWZSSLQWMEPpzyDyQ4
+ /oMNEb+1uVyNSvD+tk057fl7gzs2F75dnEAKnzJ7LTblITATjDUqnxWjKWmpbcnRz+nM
+ DT+CbgxYAXvPl++EKn3x7iPO9+5FG4qfQ925m54WGS96fseTwFWSAhs1SqMWdU6zZ9y1
+ pGPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685089158; x=1687681158;
+ d=1e100.net; s=20221208; t=1685090077; x=1687682077;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gLCwfQjI9CEpyNqNrK7IbY60JHN2vYALCzfox2aXPhc=;
- b=Ya9CQaKTADTET13BKcMn855bVj0uyeRJ4P7vizAK4MR7ELFeWOcyMiU7037e78TPl5
- cIXEJc/R1vx4u0W1lUqamMVDEegenPZqV04P7eaE+OPFYZeOcilus82uXLLv9HPO1oNP
- o0yZY9rEP1LOD4b0kyv91Kzga/cT8MRv6IC8aIEFXhR2zQs1moL5NoRyJON3XVigXAbN
- SPv7GNar0mwclxPEECBD1iZ43lPFxGEsI8wtaMpYLTEH0WNIKB5uIAti2kGNf5jyBOIm
- LfvdqBjepd278ibJ3UFvQ3qnWZFg89AT7BHKTBgMEkZuqRTpGhV5Winp/0wHUZUsbXLX
- GEWg==
-X-Gm-Message-State: AC+VfDyYvNZ6ZXLk5hqFQFXiJcG5WWIAeEXzvqVvc+bCx3nI5jBFk6GJ
- j+XbJmtAcM0STWmg9j51z3yYOQ==
-X-Google-Smtp-Source: ACHHUZ5qI6lO0Sptn95hcyFRwLeaxA/NNvLcwRRY/fkenJrIc7ZxIUChHPTKJldm5Xy6hlZDRuMWvg==
-X-Received: by 2002:a05:6808:144b:b0:398:4a82:76e1 with SMTP id
- x11-20020a056808144b00b003984a8276e1mr619473oiv.36.1685089158059; 
- Fri, 26 May 2023 01:19:18 -0700 (PDT)
-Received: from sunil-laptop ([106.51.186.3]) by smtp.gmail.com with ESMTPSA id
- d3-20020a0568301b6300b006af99ac5832sm1518604ote.47.2023.05.26.01.19.14
+ bh=Y+QeROxGL8S3u9qXGyWHke6FHNpvHe1nmLqm9H5BaL4=;
+ b=lVA9nEAO0R8Gsp46FjLbeOPpOqrlEupUJdxJFhOYl9NdudzNL0+gD5F3hogED4vi48
+ 4pWJ3QfeEILntlLB9ABO1MAlN1scDLjAgtNDTppAV2TmzVj5Fl4FlqDRPg8HWuUjVKmZ
+ SpLD+bLVeBbygpOFFJMf/yzLKOUyAM7eKn/ZsZ0X+DbKsm12Cg5duy4t4rUYyBaXNalQ
+ cMxAnDKXJcKVxZ1HoKkjCANgGmBtODZxoMNtAmlMmQWAdcQaz6dDurvVuHzWLoOYb88v
+ /rxaykZh8u6/x1QmYqQtf6w3AZQMXoX0AXoKKq3miXthiN8il+4Nc5xHlZSiGRd2g3+h
+ aoRQ==
+X-Gm-Message-State: AC+VfDy4STLCZA8XBX+1pg+07Z2wbivhYFBxAiTudbHnAUPHBIqfk+za
+ 4j+X2Bc9rwypTN7Cg7HWngT9ww==
+X-Google-Smtp-Source: ACHHUZ763k2ZtYyCPgt97PYO8LbkOWsJvI+jyfYGvy+x+9yaEnmLmhht3PN7cArVRrquJwPvXB4tBg==
+X-Received: by 2002:a05:600c:21d9:b0:3f5:d0b8:4a53 with SMTP id
+ x25-20020a05600c21d900b003f5d0b84a53mr1030253wmj.34.1685090077661; 
+ Fri, 26 May 2023 01:34:37 -0700 (PDT)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ by smtp.gmail.com with ESMTPSA id
+ e15-20020a5d4e8f000000b00307bbbecd29sm4316940wru.62.2023.05.26.01.34.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 May 2023 01:19:17 -0700 (PDT)
-Date: Fri, 26 May 2023 13:49:09 +0530
-From: Sunil V L <sunilvl@ventanamicro.com>
+ Fri, 26 May 2023 01:34:37 -0700 (PDT)
+Date: Fri, 26 May 2023 10:34:36 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
 To: Andrea Bolognani <abologna@redhat.com>
-Cc: Andrew Jones <ajones@ventanamicro.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+Cc: Sunil V L <sunilvl@ventanamicro.com>, qemu-riscv@nongnu.org, 
+ qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Subject: Re: [PATCH v4 0/3] hw/riscv/virt: pflash improvements
-Message-ID: <ZHBrfV3U1+iDw2J6@sunil-laptop>
+Message-ID: <20230526-e398cfda73f326653323ea68@orel>
 References: <20230525164803.17992-1-sunilvl@ventanamicro.com>
  <CABJz62MFZzx3jBgW6TtGFD9emY+DAbbftSybD8ZouC65n3-auA@mail.gmail.com>
  <20230526-b0d8b56e9688dea7ae9d00d5@orel>
@@ -75,15 +76,15 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 In-Reply-To: <CABJz62Nk-U+qHQjn6G2-bN8i9RcMEZWdYTyi7wqC=7BVjDSBWQ@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::229;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-oi1-x229.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -136,16 +137,19 @@ On Fri, May 26, 2023 at 03:49:11AM -0400, Andrea Bolognani wrote:
 > So, are edk2 users the only ones who would (temporarily) need to
 > manually turn ACPI off if virt-manager started enabling it by
 > default?
-> 
 
-Right. Currently only EDK2 supports passing ACPI information to the
-kernel in RISC-V. I think it is true even in aarch64. Hence, we need
-this temporary solution to turn acpi off only for EDK2 users.
+I assume so, but I'm not tracking firmware status. If the firmware
+doesn't extract the ACPI tables from QEMU and present them to the
+guest (afaik only edk2 does that), then the guest kernel falls back
+to DT, which is why it's working for you.
 
-Is there an issue with delaying the fix in virt-manager to add RISC-V
-to ACPI supported list? I think there is no point enabling it until
-kernel also supports it.
+I suppose we should wait until Linux merges the ACPI patches, before
+adding RISC-V to the libvirt capabilities ACPI list. Then, is it
+possible to use something like libosinfo to inform virt-manager
+when it should enable ACPI and when not? Later distro images, with
+later kernels, will want to use ACPI by default, but older images
+will still need to use DT.
 
 Thanks,
-Sunil
+drew
 
