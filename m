@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96FF7C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 09:48:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A854C7EE2F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 09:53:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q2U3g-00039r-Ow; Fri, 26 May 2023 05:48:28 -0400
+	id 1q2U8T-0005n9-C4; Fri, 26 May 2023 05:53:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q2U3f-00039F-9D
- for qemu-riscv@nongnu.org; Fri, 26 May 2023 05:48:27 -0400
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q2U8S-0005mz-NI
+ for qemu-riscv@nongnu.org; Fri, 26 May 2023 05:53:24 -0400
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q2U3d-0000Vb-NH
- for qemu-riscv@nongnu.org; Fri, 26 May 2023 05:48:27 -0400
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-30a4ebbda56so461082f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 26 May 2023 02:48:25 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q2U8R-0001fn-5e
+ for qemu-riscv@nongnu.org; Fri, 26 May 2023 05:53:24 -0400
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-3f6e68cc738so3808545e9.1
+ for <qemu-riscv@nongnu.org>; Fri, 26 May 2023 02:53:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1685094503; x=1687686503;
+ d=linaro.org; s=google; t=1685094800; x=1687686800;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=jvnPyrUogBm/JtIQwNTHgNsIbdQ2uVO1jSkuke5wens=;
- b=ZTHs+ksVkiibSwEkR5ypytM+Xo7MKBuPfAqfVS+jEifcZtW7X1drS+P2LNEJPgFksu
- ATtADQOzLYBjQeUFeoC0ehY722o7m7X9wzcr/UvsWAMIk3ySjFEQUFU8xZ8/s03HcAsk
- 1u3wTFGNc+8uKCbxRJfDJ2AYKa2JAuk6p2DZ/WCgmPpIQIPNEcVnzc23VGKSB0O+YCEm
- SX5FKuPQof7+ZET1q41RhCLaDRTu1tgzK1aukVVlOt/O5AQrQ28fkAHpHxQch7h6svFK
- rxEtlx07vT1Ra+AVzFniWUt1WI0pts4QZIwtQPsCVf9VoqmDPoayAsf/ATxME6Ins4DB
- qbOQ==
+ bh=cB3zr0suaBZGp6c80XgkJtn+TYwnAZf0InhhW2LNjXU=;
+ b=beD0aup2vJspxnsLhLo55zd7ZJi3RwgVaaMxF6OcUlT5hVx2Vk7mCMc1nTXT8c7iz2
+ Xkr8h8uZpG8bxUwjdDLX6RMWwKmlbLfmctj0oG50cuPt4X90peYbhTOgR+veYeB1hua8
+ ScObKPjD89no4kF7tWHSVyyj+qUmMmi2Yuebs6cgWYC5hHtIQ6LagWHQ2qGMj71c1oBC
+ 4q7YqUSveJ06HvHvtSrud5hC5tBL6pnvm4HXmFTDnLRY0kqTJyw/ZsAAzYni822wm9uv
+ BjaDftqxSOiVJK4F3te+hKYjw+ETor8y5BI69A6ZywolaOf6PTBYApDrevRqWCe/CHjh
+ xYWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685094503; x=1687686503;
+ d=1e100.net; s=20221208; t=1685094800; x=1687686800;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jvnPyrUogBm/JtIQwNTHgNsIbdQ2uVO1jSkuke5wens=;
- b=DFw9LUwMTH3jrZLwCcGYp1r0/dsXV8h1IHL+wIAfrvvavCN/DXjpcxYOjCCZqJxjy3
- 570UVGcWW81iH1QQUN4IRXCTGTl+cGgMb07F8uKsBqnLqX9NGMbYyFT+TFoUX93dB9P/
- 6ofq0X1nn53x1ObohiebzPEYbw2rmg3+RVVlXkvN5jbk4Ddtb+ohCPJGA1gsChsbYhsh
- MKBfHDKOMvvGRBRbqZQCXqG1LB0ONtpWpWXaYhkJBHX+7z/tNSchoZMseu0GNzvJjI6i
- Xf5WojUSfS5il2EuyOspWREHSC1G16Y1tPsKjivrIhEYRy+DKuM1fjNLIM7i55yqFzN8
- GqJA==
-X-Gm-Message-State: AC+VfDw59TunZs47z/OKY0ZB9zOmGg2BirEWzdnElN7KcM0KylN+d62O
- Mt6DPg797b6Gq1XPTo+YnH65NQ==
-X-Google-Smtp-Source: ACHHUZ5KmGolLCIqpYmxm4q3q+YzHc4wMb2HCTBXlcFtRtULvTJuUTDDmXuhL5d1CdkKEGSpWIm+pQ==
-X-Received: by 2002:a5d:4531:0:b0:309:3da5:be89 with SMTP id
- j17-20020a5d4531000000b003093da5be89mr821580wra.71.1685094503471; 
- Fri, 26 May 2023 02:48:23 -0700 (PDT)
+ bh=cB3zr0suaBZGp6c80XgkJtn+TYwnAZf0InhhW2LNjXU=;
+ b=JdK9WqwSvTtXNh+6rZJcq3lVl+gkyWrvvisMu/igDGt9FV2u4SpdogHUF4d78Hm2AM
+ BKaWZxFTa9VfU7nKBq2xGPOe8C/moL5NZpGDeagG+9jzwWga5EambMm9snDO+23BNHKB
+ eITMMe7j0Rc8noc2d3Ev/4H/cboosM3q4/YO8WdZ+C7b3tUT5TKmZX8cy3h5oq6VblFL
+ 88II6GumzMuRFb2p9PvhUVoytfqPO08y7XSscmKvj15kHhc5ArCWHGqqAPfVEKTTzmnP
+ IsdI9JvAD0YFEiflr/qPOCnXhPkWzWEJmJFVYDSFUdlhLkEIcS1U6/ysQRxEJGbbSIMZ
+ GnnA==
+X-Gm-Message-State: AC+VfDxcZG++zN1GiWR/KpUqUEKlDMcAT0RGTUgNLKdh3YGDrHXO/yjz
+ 0I4PxEuoaz2kEfJFaOjeDh/c1Q==
+X-Google-Smtp-Source: ACHHUZ5QJBhpqwCWIdkLcfXUY7dNBYySpg4wLI5uwV7p+GpmR9T8x+9idlzHKJawVUZVwdxU1gfEwA==
+X-Received: by 2002:a7b:c38a:0:b0:3f6:ffe:9ef1 with SMTP id
+ s10-20020a7bc38a000000b003f60ffe9ef1mr1056375wmj.36.1685094800504; 
+ Fri, 26 May 2023 02:53:20 -0700 (PDT)
 Received: from [192.168.69.115] (vit94-h02-176-184-29-207.dsl.sta.abo.bbox.fr.
  [176.184.29.207]) by smtp.gmail.com with ESMTPSA id
- o3-20020a5d6843000000b003095a329e90sm4502463wrw.97.2023.05.26.02.48.22
+ p26-20020a05600c205a00b003f4f1b884cdsm8141601wmg.36.2023.05.26.02.53.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 May 2023 02:48:23 -0700 (PDT)
-Message-ID: <6817fb90-fda2-6769-c993-a8307dd841b1@linaro.org>
-Date: Fri, 26 May 2023 11:48:21 +0200
+ Fri, 26 May 2023 02:53:20 -0700 (PDT)
+Message-ID: <dbfd6f2a-1ff4-7baf-8ff4-0d47a97f5ff4@linaro.org>
+Date: Fri, 26 May 2023 11:53:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.11.0
-Subject: Re: [PATCH v4 3/3] docs/system: riscv: Add pflash usage details
+Subject: Re: [PATCH v4 2/3] riscv/virt: Support using pflash via -blockdev
+ option
 Content-Language: en-US
 To: Sunil V L <sunilvl@ventanamicro.com>, qemu-riscv@nongnu.org
 Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
@@ -71,13 +72,13 @@ Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Andrea Bolognani <abologna@redhat.com>
 References: <20230525164803.17992-1-sunilvl@ventanamicro.com>
- <20230525164803.17992-4-sunilvl@ventanamicro.com>
+ <20230525164803.17992-3-sunilvl@ventanamicro.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230525164803.17992-4-sunilvl@ventanamicro.com>
+In-Reply-To: <20230525164803.17992-3-sunilvl@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -101,64 +102,52 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 25/5/23 18:48, Sunil V L wrote:
-> pflash devices can be used in virt machine for different
-> purposes like for ROM code or S-mode FW payload. Add a
-> section in the documentation on how to use pflash devices
-> for different purposes.
+> Currently, pflash devices can be configured only via -pflash
+> or if=pflash options. This is the legacy way and the
+> better way is to use -blockdev as in other architectures.
+> libvirt also has moved to -blockdev method.
+> 
+> To support -blockdev option, pflash devices need to be
+> created in instance_init itself. So, update the code to
+> move the virt_flash_create() to instance_init. Also, use
+> standard interfaces to detect whether pflash0 is
+> configured or not.
 > 
 > Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+> Reported-by: Andrea Bolognani <abologna@redhat.com>
 > ---
->   docs/system/riscv/virt.rst | 29 +++++++++++++++++++++++++++++
->   1 file changed, 29 insertions(+)
-> 
-> diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> index 4b16e41d7f..c3e0b7a9c3 100644
-> --- a/docs/system/riscv/virt.rst
-> +++ b/docs/system/riscv/virt.rst
-> @@ -53,6 +53,35 @@ with the default OpenSBI firmware image as the -bios. It also supports
->   the recommended RISC-V bootflow: U-Boot SPL (M-mode) loads OpenSBI fw_dynamic
->   firmware and U-Boot proper (S-mode), using the standard -bios functionality.
+>   hw/riscv/virt.c | 15 +++++++++------
+>   1 file changed, 9 insertions(+), 6 deletions(-)
+
+
+> @@ -1265,21 +1267,22 @@ static void virt_machine_done(Notifier *notifier, void *data)
 >   
-> +Using flash devices
-> +-------------------
-> +
-> +The first flash device (pflash0) can contain either ROM code
-> +or S-mode payload firmware code. If the pflash0 contains the
-> +ROM code, -bios should be set to none. If -bios is not set to
-> +none, pflash0 is assumed to contain S-mode payload code.
-> +
-> +Firmware images used for pflash should be of size 32 MiB.
-> +
-> +To boot as ROM code:
+>       firmware_end_addr = riscv_find_and_load_firmware(machine, firmware_name,
+>                                                        start_addr, NULL);
+> -
+> -    if (drive_get(IF_PFLASH, 0, 0)) {
+> +    pflash_blk0 = pflash_cfi01_get_blk(s->flash[0]);
+> +    if (pflash_blk0) {
+> +        flash_mem = pflash_cfi01_get_memory(s->flash[0]);
+>           if (machine->firmware && !strcmp(machine->firmware, "none")) {
+>               /*
+>                * Pflash was supplied but bios is none, let's overwrite the
+>                * address we jump to after reset to the base of the flash.
+>                */
+> -            start_addr = virt_memmap[VIRT_FLASH].base;
+> +            start_addr = flash_mem->addr;
 
-If "ROM" ...
+I don't understand this change. Besides you access MemoryRegion::addr
+which is an internal API field.
 
-> +
-> +.. code-block:: bash
-> +
-> +  $ qemu-system-riscv64 -bios none \
-> +     -blockdev node-name=pflash0,driver=file,filename=<rom_code> \
-
-... shouldn't we also enforce 'read-only=on,' ...
-
-> +     -M virt,pflash0=pflash0 \
-> +     ... other args ....
-> +
-> +To boot as read-only S-mode payload:
-> +
-> +.. code-block:: bash
-> +
-> +  $ qemu-system-riscv64 \
-> +     -blockdev node-name=pflash0,driver=file,read-only=on,filename=<s-mode_fw_code> \
-
-... like in S-mode?
-
-> +     -blockdev node-name=pflash1,driver=file,filename=<s-mode_fw_vars> \
-> +     -M virt,pflash0=pflash0,pflash1=pflash1 \
-> +     ... other args ....
-> +
->   Machine-specific options
->   ------------------------
->   
-
+>           } else {
+>               /*
+>                * Pflash was supplied but bios is not none. In this case,
+>                * base of the flash would contain S-mode payload.
+>                */
+>               riscv_setup_firmware_boot(machine);
+> -            kernel_entry = virt_memmap[VIRT_FLASH].base;
+> +            kernel_entry = flash_mem->addr;
+>           }
+>       }
 
