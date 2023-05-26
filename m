@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE443C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 02:22:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EA15C77B7E
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 02:24:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q2N5O-0006LZ-SY; Thu, 25 May 2023 22:21:46 -0400
+	id 1q2N7D-0007CN-Np; Thu, 25 May 2023 22:23:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q2N5N-0006LL-Os; Thu, 25 May 2023 22:21:45 -0400
-Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
+ id 1q2N7C-0007C1-K1; Thu, 25 May 2023 22:23:38 -0400
+Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q2N5L-0006HQ-Vo; Thu, 25 May 2023 22:21:45 -0400
-Received: by mail-vs1-xe31.google.com with SMTP id
- ada2fe7eead31-4395361b74dso42971137.1; 
- Thu, 25 May 2023 19:21:43 -0700 (PDT)
+ id 1q2N7A-0006hL-UB; Thu, 25 May 2023 22:23:38 -0400
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-783f17f0a00so80334241.2; 
+ Thu, 25 May 2023 19:23:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1685067702; x=1687659702;
+ d=gmail.com; s=20221208; t=1685067815; x=1687659815;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Bt4uUdIUVJbRpYlPA8bg3pUKGKebRE5iX4xZEBUVDoM=;
- b=MbxlaxwJwArQqHxe3dsn61uBRUV+JpkVfIEc350IXtdl1QfmvQilffa8Rcm7bwi8ue
- jUCZkFBh6a240XigOAeGmlmFPPDNjPIECZST5AndPKiJCbtd5NFESNdSCAFbr9lqi8R2
- 9Me+A/St2GFTXjYBNyEIeX+zE/Fd/YvFGp/Ajwb44pwn+QWEyuc6nbMn8iS6BBm2oV3J
- HK3eMVvDHRXx2H/nGJAn0o0PskBLf4MDNrbx5BhsMQavg0nt5W6O6MahFHVnPKYlMdzd
- g8PzcdlURk35YJPaQzpL7IAIOajMsUwBklggNQ1ccA9+1rbyHR9JDMMBnm/NZ+ZvEKhg
- NZTg==
+ bh=nqVBZKSkwgyWMG2w6N37MzLg/Cj8P84B9PQ8NX42QUk=;
+ b=a53UT1hZgA14Vhk8SjMYMYC84A4Z0rHIwWQQADsRPJDEpmTHKAmHnY6ATAS89fpaIw
+ OTKRlUOs4TYUR9MI1pNS+bQ6eDuN/tI8kmDlVnCbJwrFtPhriXSE6rT9oh+y6m+ghlZH
+ ZoeZj8WnZYXlONfhdrsP/Kp9w5M8emC819Ynt20PJ6bq2U1mOFFw3+Y28fRab3rD/pxh
+ d0Wd1/34SXdCuKEHG1rQqfxmfWoe3bLktfHHDD7Fy1RoOxQJXBVivx0e9rLgmZQfDP1b
+ dqQM1TsREWCG1h4UQKIhxBEXayeiFObK25mpYYDhgYubBsGQwaMIiG6SlyCtd76PuaZr
+ aPpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685067702; x=1687659702;
+ d=1e100.net; s=20221208; t=1685067815; x=1687659815;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Bt4uUdIUVJbRpYlPA8bg3pUKGKebRE5iX4xZEBUVDoM=;
- b=GFniLLV2IFXBflr5zS6oGFBi52uaPGgBkK1yxGp+Zm3J6znpF+LqllPZGE5M/+cVNW
- YQuPveRHYzIl3Olyg7NadQ0sj3wGU4kmpnuw0vk9aaY8BxtM+pSWEaI3vPK68HRMBQ7/
- QAmekP4wa98Yq/h9ptp/DYS/EUgjvztcN/8SWlXFwBZEUa93t5b39WKHXTAOqanpKEWW
- JMKgv5TauWVdbvTmR/NeiqagRlLhq3jk6KxdFemTwcTEZ8gJagYEUHKtkjICF6oF+cdT
- YPKnz8Pq1srWFMhWavHi+xksYSWXlgBRpEpnNEXpLrgakCtuDhn8xTB3p3lHielkuZi0
- HkKA==
-X-Gm-Message-State: AC+VfDwZjeSPaMmYa0az7U/Y0h8rKJy06CM5IMg9AHu+xYi/js83obcs
- Ztj16Z+O1ewjd9vWZDKRp3q3UXKZlIoQqh9BrbEe34Gv4Q+RscR8
-X-Google-Smtp-Source: ACHHUZ6iDejvAgZ/Fhm3WKav2+s5abl6sDOnxfamhvkvaA6iVZzScGvEP6sd7vpBg4B09nK+vPJY9v/+D5InkBfc+ys=
-X-Received: by 2002:a05:6102:419:b0:437:dc96:5e5b with SMTP id
- d25-20020a056102041900b00437dc965e5bmr103290vsq.27.1685067702220; Thu, 25 May
- 2023 19:21:42 -0700 (PDT)
+ bh=nqVBZKSkwgyWMG2w6N37MzLg/Cj8P84B9PQ8NX42QUk=;
+ b=UMIvXgjy/QyAOatVAagjqkDe5R4aGtbYPnG7H885eX2jcfcFAmYUrweF7BVQWkR0sL
+ lGHNM7ipTyGNjX465EJY3DkNwAJUQdHvsmY/LJC39QJ1NLkq3MqQu9ZrEvzCQQ/Rz+Fi
+ anRiWE/43sorKSDNulen2U3Gqcme4iuCTur7j0wKWUBNctYdpk+e/yB0muDkYmTqNPsu
+ LpKBzpu1zzJ2cgN7j851MMdNe8ZHYYd0WfvKArRghBTwkMyIZ5nH6m4lC6kvHvRHqrQj
+ pPZ/AiytAlDP/FUkdnlQXfylm9NTStjdbJ9tD0keCziPDCggTcZQe4LBYNmZpNso3tJR
+ jrHA==
+X-Gm-Message-State: AC+VfDyliGxdPOa/nvxt1UskabvgSfC6Vg3Q0KNxnXFFBEqhVI0jBEGg
+ 218JKW3HdjvP517L5+YlhEAcRd6vXgFoqaLNwUs=
+X-Google-Smtp-Source: ACHHUZ59fwh1Hx9scR5oq7UpaSTdZ+KKHHDL3NMDHkWcCNrMxJv9NE0Hc0SF8nV28gt8/gqkYrpn6iAcXzfSqNKiNi4=
+X-Received: by 2002:a67:fbda:0:b0:435:84bc:805a with SMTP id
+ o26-20020a67fbda000000b0043584bc805amr76613vsr.25.1685067815360; Thu, 25 May
+ 2023 19:23:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230523135939.299246-1-liweiwei@iscas.ac.cn>
- <20230523135939.299246-5-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230523135939.299246-5-liweiwei@iscas.ac.cn>
+ <20230523135939.299246-6-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230523135939.299246-6-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 26 May 2023 12:21:16 +1000
-Message-ID: <CAKmqyKPfJVa=+ER=6wEAD_M4-LY6=xGgtwxzi-0TZzaH0JKOxg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/7] target/riscv: Change gen_set_pc_imm to
- gen_update_pc
+Date: Fri, 26 May 2023 12:23:09 +1000
+Message-ID: <CAKmqyKOAo=NW+r0cHtt=Pr=766wZg1NGUFRCFBW4qQ0LaTfYVw@mail.gmail.com>
+Subject: Re: [PATCH v2 5/7] target/riscv: Use true diff for gen_pc_plus_diff
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
  zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -91,11 +90,11 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, May 24, 2023 at 12:08=E2=80=AFAM Weiwei Li <liweiwei@iscas.ac.cn> w=
+On Wed, May 24, 2023 at 12:14=E2=80=AFAM Weiwei Li <liweiwei@iscas.ac.cn> w=
 rote:
 >
-> Reduce reliance on absolute values(by passing pc difference) to
-> prepare for PC-relative translation.
+> Reduce reliance on absolute values by using true pc difference for
+> gen_pc_plus_diff() to prepare for PC-relative translation.
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
@@ -105,152 +104,99 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/insn_trans/trans_privileged.c.inc |  2 +-
->  target/riscv/insn_trans/trans_rvi.c.inc        |  6 +++---
->  target/riscv/insn_trans/trans_rvv.c.inc        |  4 ++--
->  target/riscv/insn_trans/trans_rvzawrs.c.inc    |  2 +-
->  target/riscv/insn_trans/trans_xthead.c.inc     |  2 +-
->  target/riscv/translate.c                       | 10 +++++-----
->  6 files changed, 13 insertions(+), 13 deletions(-)
+>  target/riscv/insn_trans/trans_rvi.c.inc   |  6 ++----
+>  target/riscv/insn_trans/trans_rvzce.c.inc |  2 +-
+>  target/riscv/translate.c                  | 13 ++++++-------
+>  3 files changed, 9 insertions(+), 12 deletions(-)
 >
-> diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/risc=
-v/insn_trans/trans_privileged.c.inc
-> index 7c2837194c..3760fb4393 100644
-> --- a/target/riscv/insn_trans/trans_privileged.c.inc
-> +++ b/target/riscv/insn_trans/trans_privileged.c.inc
-> @@ -112,7 +112,7 @@ static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
->  {
->  #ifndef CONFIG_USER_ONLY
->      decode_save_opc(ctx);
-> -    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-> +    gen_update_pc(ctx, ctx->cur_insn_len);
->      gen_helper_wfi(cpu_env);
->      return true;
->  #else
 > diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_=
 trans/trans_rvi.c.inc
-> index 81ed0d200a..f9f4d25cda 100644
+> index f9f4d25cda..d6eef67b45 100644
 > --- a/target/riscv/insn_trans/trans_rvi.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -776,7 +776,7 @@ static bool trans_pause(DisasContext *ctx, arg_pause =
-*a)
->       * PAUSE is a no-op in QEMU,
->       * end the TB and return to main loop
+> @@ -158,7 +158,6 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, T=
+CGCond cond)
+>      TCGLabel *l =3D gen_new_label();
+>      TCGv src1 =3D get_gpr(ctx, a->rs1, EXT_SIGN);
+>      TCGv src2 =3D get_gpr(ctx, a->rs2, EXT_SIGN);
+> -    target_ulong next_pc;
+>
+>      if (get_xl(ctx) =3D=3D MXL_RV128) {
+>          TCGv src1h =3D get_gprh(ctx, a->rs1);
+> @@ -175,11 +174,10 @@ static bool gen_branch(DisasContext *ctx, arg_b *a,=
+ TCGCond cond)
+>
+>      gen_set_label(l); /* branch taken */
+>
+> -    next_pc =3D ctx->base.pc_next + a->imm;
+> -    if (!ctx->cfg_ptr->ext_zca && (next_pc & 0x3)) {
+> +    if (!ctx->cfg_ptr->ext_zca && (a->imm & 0x3)) {
+>          /* misaligned */
+>          TCGv target_pc =3D tcg_temp_new();
+> -        gen_pc_plus_diff(target_pc, ctx, next_pc);
+> +        gen_pc_plus_diff(target_pc, ctx, a->imm);
+>          gen_exception_inst_addr_mis(ctx, target_pc);
+>      } else {
+>          gen_goto_tb(ctx, 0, a->imm);
+> diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/ins=
+n_trans/trans_rvzce.c.inc
+> index 5732d782f7..450b79dcbc 100644
+> --- a/target/riscv/insn_trans/trans_rvzce.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvzce.c.inc
+> @@ -297,7 +297,7 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_cm_j=
+alt *a)
+>       * Update pc to current for the non-unwinding exception
+>       * that might come from cpu_ld*_code() in the helper.
 >       */
-> -    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-> +    gen_update_pc(ctx, ctx->cur_insn_len);
->      exit_tb(ctx);
->      ctx->base.is_jmp =3D DISAS_NORETURN;
+> -    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+> +    gen_update_pc(ctx, 0);
+>      gen_helper_cm_jalt(cpu_pc, cpu_env, tcg_constant_i32(a->index));
 >
-> @@ -800,7 +800,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fenc=
-e_i *a)
->       * FENCE_I is a no-op in QEMU,
->       * however we need to end the translation block
->       */
-> -    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-> +    gen_update_pc(ctx, ctx->cur_insn_len);
->      exit_tb(ctx);
->      ctx->base.is_jmp =3D DISAS_NORETURN;
->      return true;
-> @@ -811,7 +811,7 @@ static bool do_csr_post(DisasContext *ctx)
->      /* The helper may raise ILLEGAL_INSN -- record binv for unwind. */
->      decode_save_opc(ctx);
->      /* We may have changed important cpu state -- exit to main loop. */
-> -    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-> +    gen_update_pc(ctx, ctx->cur_insn_len);
->      exit_tb(ctx);
->      ctx->base.is_jmp =3D DISAS_NORETURN;
->      return true;
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
-trans/trans_rvv.c.inc
-> index 6c07eebc52..c2f7527f53 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -169,7 +169,7 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs=
-1, TCGv s2)
->      gen_set_gpr(s, rd, dst);
->      mark_vs_dirty(s);
->
-> -    gen_set_pc_imm(s, s->pc_succ_insn);
-> +    gen_update_pc(s, s->cur_insn_len);
->      lookup_and_goto_ptr(s);
->      s->base.is_jmp =3D DISAS_NORETURN;
->      return true;
-> @@ -188,7 +188,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv=
- s1, TCGv s2)
->      gen_helper_vsetvl(dst, cpu_env, s1, s2);
->      gen_set_gpr(s, rd, dst);
->      mark_vs_dirty(s);
-> -    gen_set_pc_imm(s, s->pc_succ_insn);
-> +    gen_update_pc(s, s->cur_insn_len);
->      lookup_and_goto_ptr(s);
->      s->base.is_jmp =3D DISAS_NORETURN;
->
-> diff --git a/target/riscv/insn_trans/trans_rvzawrs.c.inc b/target/riscv/i=
-nsn_trans/trans_rvzawrs.c.inc
-> index 8254e7dfe2..32efbff4d5 100644
-> --- a/target/riscv/insn_trans/trans_rvzawrs.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvzawrs.c.inc
-> @@ -33,7 +33,7 @@ static bool trans_wrs(DisasContext *ctx)
->      /* Clear the load reservation  (if any).  */
->      tcg_gen_movi_tl(load_res, -1);
->
-> -    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-> +    gen_update_pc(ctx, ctx->cur_insn_len);
->      tcg_gen_exit_tb(NULL, 0);
->      ctx->base.is_jmp =3D DISAS_NORETURN;
->
-> diff --git a/target/riscv/insn_trans/trans_xthead.c.inc b/target/riscv/in=
-sn_trans/trans_xthead.c.inc
-> index 3e13b1d74d..da093a4cec 100644
-> --- a/target/riscv/insn_trans/trans_xthead.c.inc
-> +++ b/target/riscv/insn_trans/trans_xthead.c.inc
-> @@ -999,7 +999,7 @@ static void gen_th_sync_local(DisasContext *ctx)
->       * Emulate out-of-order barriers with pipeline flush
->       * by exiting the translation block.
->       */
-> -    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-> +    gen_update_pc(ctx, ctx->cur_insn_len);
->      tcg_gen_exit_tb(NULL, 0);
->      ctx->base.is_jmp =3D DISAS_NORETURN;
->  }
+>      /* c.jt vs c.jalt depends on the index. */
 > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 8a371c0d75..b01aa48f04 100644
+> index b01aa48f04..c6ae489788 100644
 > --- a/target/riscv/translate.c
 > +++ b/target/riscv/translate.c
-> @@ -232,14 +232,14 @@ static void gen_pc_plus_diff(TCGv target, DisasCont=
-ext *ctx,
->      tcg_gen_movi_tl(target, dest);
+> @@ -224,8 +224,10 @@ static void decode_save_opc(DisasContext *ctx)
 >  }
 >
-> -static void gen_set_pc_imm(DisasContext *ctx, target_ulong dest)
-> +static void gen_update_pc(DisasContext *ctx, target_long diff)
+>  static void gen_pc_plus_diff(TCGv target, DisasContext *ctx,
+> -                             target_ulong dest)
+> +                             target_long diff)
 >  {
-> -    gen_pc_plus_diff(cpu_pc, ctx, dest);
-> +    gen_pc_plus_diff(cpu_pc, ctx, ctx->base.pc_next + diff);
+> +    target_ulong dest =3D ctx->base.pc_next + diff;
+> +
+>      if (get_xl(ctx) =3D=3D MXL_RV32) {
+>          dest =3D (int32_t)dest;
+>      }
+> @@ -234,7 +236,7 @@ static void gen_pc_plus_diff(TCGv target, DisasContex=
+t *ctx,
+>
+>  static void gen_update_pc(DisasContext *ctx, target_long diff)
+>  {
+> -    gen_pc_plus_diff(cpu_pc, ctx, ctx->base.pc_next + diff);
+> +    gen_pc_plus_diff(cpu_pc, ctx, diff);
 >  }
 >
 >  static void generate_exception(DisasContext *ctx, int excp)
+> @@ -545,14 +547,11 @@ static void gen_set_fpr_d(DisasContext *ctx, int re=
+g_num, TCGv_i64 t)
+>
+>  static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
 >  {
-> -    gen_set_pc_imm(ctx, ctx->base.pc_next);
-> +    gen_update_pc(ctx, 0);
->      gen_helper_raise_exception(cpu_env, tcg_constant_i32(excp));
->      ctx->base.is_jmp =3D DISAS_NORETURN;
->  }
-> @@ -291,10 +291,10 @@ static void gen_goto_tb(DisasContext *ctx, int n, t=
-arget_long diff)
->        */
->      if (translator_use_goto_tb(&ctx->base, dest) && !ctx->itrigger) {
->          tcg_gen_goto_tb(n);
-> -        gen_set_pc_imm(ctx, dest);
-> +        gen_update_pc(ctx, diff);
->          tcg_gen_exit_tb(ctx->base.tb, n);
->      } else {
-> -        gen_set_pc_imm(ctx, dest);
-> +        gen_update_pc(ctx, diff);
->          lookup_and_goto_ptr(ctx);
->      }
->  }
+> -    target_ulong next_pc;
+> -
+>      /* check misaligned: */
+> -    next_pc =3D ctx->base.pc_next + imm;
+>      if (!ctx->cfg_ptr->ext_zca) {
+> -        if ((next_pc & 0x3) !=3D 0) {
+> +        if ((imm & 0x3) !=3D 0) {
+>              TCGv target_pc =3D tcg_temp_new();
+> -            gen_pc_plus_diff(target_pc, ctx, next_pc);
+> +            gen_pc_plus_diff(target_pc, ctx, imm);
+>              gen_exception_inst_addr_mis(ctx, target_pc);
+>              return;
+>          }
 > --
 > 2.25.1
 >
