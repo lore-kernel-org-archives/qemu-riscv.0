@@ -4,86 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B3BC7EE29
-	for <qemu-riscv@archiver.kernel.org>; Thu, 25 May 2023 18:04:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CA7AC7EE29
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 01:11:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q2FJi-0006JZ-IO; Thu, 25 May 2023 14:04:02 -0400
+	id 1q2Lyb-0000jI-R5; Thu, 25 May 2023 21:10:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1q2FJg-0006Im-UZ
- for qemu-riscv@nongnu.org; Thu, 25 May 2023 14:04:01 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1q2FJe-0003hN-7H
- for qemu-riscv@nongnu.org; Thu, 25 May 2023 14:04:00 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1685037837;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=0MrQ7Ly8ydRcEmG5HGhzf9RmkfzNpCsLWiPiyF06IP4=;
- b=WnvvDs0mdbM7b1IrxQ4MnrfPIEBtfyTKzbNXJ2CAMXd7xgEdVCZjRPZDRNwUDxrPNmvVgR
- cTvZjhq/ka+Gbb8Qzg6/3aIpvWIm+PpJhnmFNVZD8Dh+hHqL36f06bqhnNuFXaZqnQnExg
- tj6gTjRjVR2KphuZGJ/r9g42oR7kJbE=
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
- [209.85.215.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-365-N0LQU-SaMGq7MwmmbEyZmg-1; Thu, 25 May 2023 14:03:55 -0400
-X-MC-Unique: N0LQU-SaMGq7MwmmbEyZmg-1
-Received: by mail-pg1-f200.google.com with SMTP id
- 41be03b00d2f7-530277cf88bso1751067a12.3
- for <qemu-riscv@nongnu.org>; Thu, 25 May 2023 11:03:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1q2LyW-0000ge-8U; Thu, 25 May 2023 21:10:36 -0400
+Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1q2LyT-0002FU-LL; Thu, 25 May 2023 21:10:35 -0400
+Received: by mail-ua1-x933.google.com with SMTP id
+ a1e0cc1a2514c-783e5c64d29so262495241.1; 
+ Thu, 25 May 2023 18:10:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1685063432; x=1687655432;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=umRYhW7bvIWuWqlKLrvunYyCF9mG5TW90kKyc7vM1d4=;
+ b=XnjqkD/l0gwQwHGR5b/aSsBypj3gySAu3wzT8QdQdHEI6G8NbmDtL5TEPO0eaIMXiB
+ wITavClLZTTu+ozN56iSEgVMuODTd2rN6ctX9bwDRQv5+BzGQD1bbWws8iS/XkVf8AX/
+ 7LKYp9x5OBnMkiMgi8fNxAdvET0a3y3adw86lfAZTTRdSalo8tOf2zlrzlzievO8aEcY
+ J1LgSfjYWX8+Hdkr58e/eXBnqUrbP9KgBfeCkAN6FM1hDUlNtHohFIA6zmvquC9LkeEA
+ j57kS6AKZzE/XJd9tYmFkdqZzfTj7VTa1M2+w8faROaOnnfhHUQJQPMW8Uwt7qbOZ29f
+ 7iWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685037835; x=1687629835;
- h=cc:to:subject:message-id:date:in-reply-to:mime-version:references
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0MrQ7Ly8ydRcEmG5HGhzf9RmkfzNpCsLWiPiyF06IP4=;
- b=OxPzqxqVZqSrPWmGVxgPBFRAAbSW1fMdvwRKC3+Azd9kADnSrGrFg7NOu1ejc4cOat
- pasfNuq0M2POUNJYJ+8sLXJHqq92Il7YHaVle/q+OKGnJdU4oD6ORYzriZlBvNrabfyj
- pHIMGKwoFT6v0I50qRXzYMeTYTO9WENbhb7YGXd+i6FhW15nZzrAdOEPZip3Dv3Bn2HO
- aiJOzoOnoJMpQXpfs2WVKAk10sOwkCCumKqZGd/SW5dnMenIUtYunyFvmUuHxyf+xVkT
- n8J+htMrSMcpwsRTLJkK7P344zK1L1f7LdbNGFYCjBe5XuJHI/Ff/meATlSGSKQ2AbZO
- ISqw==
-X-Gm-Message-State: AC+VfDwK0ZEyZ4oK9vp1N7xBcCWjkzEk8E3fPphW1vI/0gLQLpvZIbQO
- sS/wQc5ui0iFpw90ArTSRJFIYscgLoIq7heIHgGXQPtbGvU/Vqmprc5a3n4I0EU9SVGq4c/M/aU
- Dxopq2fwg8mH/MmKvbhF3RmZyoiPUWqY=
-X-Received: by 2002:a17:902:e744:b0:1af:a349:3f0d with SMTP id
- p4-20020a170902e74400b001afa3493f0dmr3693592plf.23.1685037834731; 
- Thu, 25 May 2023 11:03:54 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ6N5qYptIWtLuic3WKt0OpVe4rvrx2Dce/IEDGXXCVnZU/Fvh4ZwAe7Tw7KLiBZ7JG+CfyIzoy2YX3FLOKAWXM=
-X-Received: by 2002:a17:902:e744:b0:1af:a349:3f0d with SMTP id
- p4-20020a170902e74400b001afa3493f0dmr3693545plf.23.1685037834196; Thu, 25 May
- 2023 11:03:54 -0700 (PDT)
-Received: from 744723338238 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 25 May 2023 11:03:52 -0700
-From: Andrea Bolognani <abologna@redhat.com>
-References: <20230525164803.17992-1-sunilvl@ventanamicro.com>
+ d=1e100.net; s=20221208; t=1685063432; x=1687655432;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=umRYhW7bvIWuWqlKLrvunYyCF9mG5TW90kKyc7vM1d4=;
+ b=NHaT2iaAQnmdCkUGXQ3nrIOWHrDiiet+bYh2CBTgu/aeK0givZVkBq24c+pKbnwYEs
+ eJSRXD62K4bCvD8yUDE+qcZ5vlSTjSP06AkB+TT8soNCnvv0uzZPX+O8Ybae+mK+6GYW
+ 6q5OArqz2MCOBC+end+4Tpq3brKWZPvWOmEoEdjNiGvOhVtQNZJyVVkzCB2vk2fVyLDw
+ Wbe1ZwIRjDNtr/lYN8oXbml7v7Dvn5GNaIwDEWGTuMSMzy6OfkA/TMSK742TfDwpUp6s
+ xeEmvtKPJz8sw34ZCPN+q9mvnTc/WfOQ2xzoSoNpBEKx0/EzIn2RK0ZQitikt5qgQuuB
+ ZT1w==
+X-Gm-Message-State: AC+VfDz++8ACxXS+nBfpDGvf36RUhOZAMMR9vm00ppu4yV4Sn5ZE/grY
+ X5kjao7Qs2+NWVvtOlg06ZGH5D1fUKW20wKrGS8=
+X-Google-Smtp-Source: ACHHUZ5uVy80h5Q3WYwvEj7QU/RT7xCb7JZ8aYju7XnYAGwebLKnJ/unxNi/Bjti757Q3aSlFWiIip6tSKcyVF4hW2Y=
+X-Received: by 2002:a05:6102:3391:b0:439:3e26:990e with SMTP id
+ i17-20020a056102339100b004393e26990emr1794560vsh.6.1685063431762; Thu, 25 May
+ 2023 18:10:31 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20230525164803.17992-1-sunilvl@ventanamicro.com>
-Date: Thu, 25 May 2023 11:03:52 -0700
-Message-ID: <CABJz62MFZzx3jBgW6TtGFD9emY+DAbbftSybD8ZouC65n3-auA@mail.gmail.com>
-Subject: Re: [PATCH v4 0/3] hw/riscv/virt: pflash improvements
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/mixed; boundary="0000000000008a82f205fc8871ee"
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=abologna@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+References: <20230518175058.2772506-1-mchitale@ventanamicro.com>
+ <20230518175058.2772506-2-mchitale@ventanamicro.com>
+In-Reply-To: <20230518175058.2772506-2-mchitale@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 26 May 2023 11:10:05 +1000
+Message-ID: <CAKmqyKOGuVo5iDPZ-PyJ0z7EVTo5yhFnqR=E4+qOT0Dsiz58ig@mail.gmail.com>
+Subject: Re: [PATCH v5 1/3] target/riscv: smstateen check for fcsr
+To: Mayuresh Chitale <mchitale@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ Daniel Barboza <dbarboza@ventanamicro.com>, liweiwei@iscas.ac.cn, 
+ Richard Henderson <richard.henderson@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -101,77 +90,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000008a82f205fc8871ee
-Content-Type: text/plain; charset="UTF-8"
-
-On Thu, May 25, 2023 at 10:18:00PM +0530, Sunil V L wrote:
-> This series improves the pflash usage in RISC-V virt machine with solutions to
-> below issues.
+On Fri, May 19, 2023 at 3:51=E2=80=AFAM Mayuresh Chitale
+<mchitale@ventanamicro.com> wrote:
 >
-> 1) Currently the first pflash is reserved for ROM/M-mode firmware code. But S-mode
-> payload firmware like EDK2 need both pflash devices to have separate code and variable
-> store so that OS distros can keep the FW code as read-only.
+> Implement the s/h/mstateen.fcsr bit as defined in the smstateen spec
+> and check for it when accessing the fcsr register and its fields.
 >
-> The issue is reported at
-> https://salsa.debian.org/qemu-team/edk2/-/commit/c345655a0149f64c5020bfc1e53c619ce60587f6
+> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
+>  target/riscv/csr.c | 15 +++++++++++++++
+>  1 file changed, 15 insertions(+)
 >
-> 2) The latest way of using pflash devices in other architectures and libvirt
-> is by using -blockdev and machine options. However, currently this method is
-> not working in RISC-V.
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 4451bd1263..3f6b824bd2 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -82,6 +82,10 @@ static RISCVException fs(CPURISCVState *env, int csrno=
+)
+>          !riscv_cpu_cfg(env)->ext_zfinx) {
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+> +
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> +        return smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR);
+> +    }
+>  #endif
+>      return RISCV_EXCP_NONE;
+>  }
+> @@ -2100,6 +2104,9 @@ static RISCVException write_mstateen0(CPURISCVState=
+ *env, int csrno,
+>                                        target_ulong new_val)
+>  {
+>      uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |=3D SMSTATEEN0_FCSR;
+> +    }
 >
-> With above issues fixed, added documentation on how to use pflash devices
-> in RISC-V virt machine.
+>      return write_mstateen(env, csrno, wr_mask, new_val);
+>  }
+> @@ -2173,6 +2180,10 @@ static RISCVException write_hstateen0(CPURISCVStat=
+e *env, int csrno,
+>  {
+>      uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
 >
-> This patch series is based on Alistair's riscv-to-apply.next branch.
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |=3D SMSTATEEN0_FCSR;
+> +    }
+> +
+>      return write_hstateen(env, csrno, wr_mask, new_val);
+>  }
 >
-> Changes since v3:
-> 	1) Converted single patch to a series with a cover letter since there are
-> 	   multiple patches now.
-> 	2) Added a new patch to enable pflash usage via -blockdev option.
-> 	3) Separated the documentation change into new patch and updated the
-> 	   documentation to mention only -blockdev option which seems to be the
-> 	   recommended way of using pflash.
-
-Success! \o/
-
-With these patches applied, libvirt built from the master branch,
-edk2 built from your branch and a JSON firmware descriptor for it
-installed (attached), it's finally possible to boot an unmodified
-openSUSE Tumbleweed RISC-V disk image by simply including
-
-  <os firmware='efi'>
-
-in the domain XML, which is the same experience you'd have with
-x86_64 or aarch64. That's a *massive* leap forward when it comes
-to giving developers convenient access to a reasonable RISC-V
-environment they can play around with!
-
-Thanks a lot for your work on this, and I can't wait to see it
-all merged :)
-
-
-Tested-by: Andrea Bolognani <abologna@redhat.com>
-
--- 
-Andrea Bolognani / Red Hat / Virtualization
-
---0000000000008a82f205fc8871ee
-Content-Type: application/json; name="50-edk2-riscv64-raw.json"
-Content-Disposition: attachment; filename="50-edk2-riscv64-raw.json"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: c666e742d99dd9da_0.1
-
-IyAvdXNyL3NoYXJlL3FlbXUvZmlybXdhcmUvNTAtZWRrMi1yaXNjdjY0LXJhdy5qc29uIAp7CiAg
-ICAiaW50ZXJmYWNlLXR5cGVzIjogWwogICAgICAgICJ1ZWZpIgogICAgXSwKICAgICJtYXBwaW5n
-IjogewogICAgICAgICJkZXZpY2UiOiAiZmxhc2giLAogICAgICAgICJleGVjdXRhYmxlIjogewog
-ICAgICAgICAgICAiZmlsZW5hbWUiOiAiL3Vzci9zaGFyZS9lZGsyL3Jpc2N2L1JJU0NWX1ZJUlRf
-Q09ERS5yYXciLAogICAgICAgICAgICAiZm9ybWF0IjogInJhdyIKICAgICAgICB9LAogICAgICAg
-ICJudnJhbS10ZW1wbGF0ZSI6IHsKICAgICAgICAgICAgImZpbGVuYW1lIjogIi91c3Ivc2hhcmUv
-ZWRrMi9yaXNjdi9SSVNDVl9WSVJUX1ZBUlMucmF3IiwKICAgICAgICAgICAgImZvcm1hdCI6ICJy
-YXciCiAgICAgICAgfQogICAgfSwKICAgICJ0YXJnZXRzIjogWwogICAgICAgIHsKICAgICAgICAg
-ICAgImFyY2hpdGVjdHVyZSI6ICJyaXNjdjY0IiwKICAgICAgICAgICAgIm1hY2hpbmVzIjogWwog
-ICAgICAgICAgICAgICAgInZpcnQiCiAgICAgICAgICAgIF0KICAgICAgICB9CiAgICBdLAogICAg
-ImZlYXR1cmVzIjogWwogICAgXQp9Cg==
---0000000000008a82f205fc8871ee--
-
+> @@ -2259,6 +2270,10 @@ static RISCVException write_sstateen0(CPURISCVStat=
+e *env, int csrno,
+>  {
+>      uint64_t wr_mask =3D SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+>
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |=3D SMSTATEEN0_FCSR;
+> +    }
+> +
+>      return write_sstateen(env, csrno, wr_mask, new_val);
+>  }
+>
+> --
+> 2.34.1
+>
 
