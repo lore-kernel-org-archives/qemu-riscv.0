@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34F20C7EE29
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 01:24:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8F0BC77B7A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 01:25:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q2MBN-0006p9-1P; Thu, 25 May 2023 21:23:53 -0400
+	id 1q2MCD-0007VQ-3n; Thu, 25 May 2023 21:24:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q2MBJ-0006oN-Le; Thu, 25 May 2023 21:23:50 -0400
-Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
+ id 1q2MCB-0007VC-JK; Thu, 25 May 2023 21:24:43 -0400
+Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q2MBI-0004Qw-8z; Thu, 25 May 2023 21:23:49 -0400
-Received: by mail-vs1-xe31.google.com with SMTP id
- ada2fe7eead31-4393c1b8d1cso37288137.0; 
- Thu, 25 May 2023 18:23:47 -0700 (PDT)
+ id 1q2MCA-0004Se-04; Thu, 25 May 2023 21:24:43 -0400
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-4301281573aso33444137.3; 
+ Thu, 25 May 2023 18:24:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1685064226; x=1687656226;
+ d=gmail.com; s=20221208; t=1685064280; x=1687656280;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/NjdzPyGx0xqcyX3tCuwoT2wEedysuBMR6A1HiLexCE=;
- b=LahEMLlTu1Rnm1XHk4jAhH+pb22W2Z7w6DABj+To7rPkOTFAOB/A3/VaYq5WcyK+gk
- lIbs3iAJ3Uq41JvutIC31IFCMF9WtHHBIgt/JKoJCJSh4Qcw0qKedXRqblc/aS91Mklj
- 1ilPtiOVePjJAhxcMzJCQl7ntwcdJKRuh1HUDrMWHPFP+2VQjgkQDI2F/xrDIyMpwQc8
- n3OVnQzwjIxNwvoGLjbW27ReZQD20KgJTpiUYiTL33F11ejlQBfQDHQq/4ykG9FIXpTg
- Yf8t1HW9rKrHFJsX951aRjve4PS9PXnkdb+GfYSKn/XUY8WX86dRU0UI0V2+4EYh7KoH
- 2UCw==
+ bh=WLMCRBae52azsZwkFzBM+Sl3sfc7NokrwkNtYj0omo0=;
+ b=MEJEJnXuxFHGhUadQx0nnTK7SNM4lQePeRZMSMCOlNUTb7u8ubOvXqTuRuRxtVbzEc
+ 8cIKuMy3GAGg7W39NiFsVml2vVphN8Whf+1QgmYWwcllrVLR6Ipcyh2tyqRtJ5PP3zfl
+ sRItEtIg1MP9RZCqe2yW9sw8K/Mx9ZxYDrPy/DMzZczRH05Itr18Dx0uOuoiKHhRk2fs
+ YDXTLKqo2D4sTPqfs4Ttn4Dn0eYDgluV0neAj0XCXtAOZQoJFgVA1+ROUFpKmeavpI2W
+ AaEJUMR/OtVyYtUHp9x7lyHT8pGQqU85bS+3MhwPeXIobCfAZBt+GOPLPyuXxDEKA0dR
+ 4J4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685064226; x=1687656226;
+ d=1e100.net; s=20221208; t=1685064280; x=1687656280;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/NjdzPyGx0xqcyX3tCuwoT2wEedysuBMR6A1HiLexCE=;
- b=aGEE938D0v4RJfLmhyEFQuugjXg06Ph/yHjC4mUbLE/y6Jjlh+AUMKuADsMx2xcgwP
- +om8Ldgih/+6WWWBj0uC883VwCXbm84L53R4LbNXE9zo8+RnDBjmqTi5R3to/gb8lO2r
- ffanl1TolfbKidritO/IgwBrqKDLtKIFhWWRc1k7hZDnmnJ5e6aqtMWAxTSv+j1W3vSl
- J4bVmrW1jA1sFPm9UtiJTh1eCErLiHAcSKomxGV8r1B5cKQ3oMrK8G/tybFvdyVjmLQW
- +BDJpRnqyK7J8/YyBBIUycRV/1r0klSaEolrjleGg++kjO55FF7/Xs6Ld20pZFT8AfeT
- y/yA==
-X-Gm-Message-State: AC+VfDx6Fk44WFFY3nUtRhJxkQLp5OOel9rb2FHKUAyjopofIawUjXvA
- BcnZx/KtYgxkojk77TBKPKo1I8OdJlhNsvBc6Ao=
-X-Google-Smtp-Source: ACHHUZ7Msg8In2pJgVjOgzdFEQHOx6w3AMe0/hAc50z7apAdu/gY9xljDGjKKFxU7bn6HrjSfkvvNaXZGmt0EURcyVM=
-X-Received: by 2002:a05:6102:11e4:b0:436:2c6f:205f with SMTP id
- e4-20020a05610211e400b004362c6f205fmr63899vsg.5.1685064226218; Thu, 25 May
- 2023 18:23:46 -0700 (PDT)
+ bh=WLMCRBae52azsZwkFzBM+Sl3sfc7NokrwkNtYj0omo0=;
+ b=UzY1hKdilDYlWwSPFBJA7RAtz4O72OnGSczO/KnwR1wsrB+3W1mlNV2g9NuAMqNiV2
+ VrtzgjKvul0QakMG066CvZpciva6zREF7sjiDUj5QyVq89+l8r/GEmZ1oki4EfZr5DoP
+ rEwkUvIImEgliHFzMLI1gYz2tE281iBnaQuist9SoYYHjuxH5ygVOjmVuwInnbKSngDj
+ bQWVB+ih2KL4jkiXdSfa/rEx/IEAbtgYQxv41xpzuxK9oPB/UHSb6hQ3mI1nt09dVgpL
+ cBlzoUoMtf+e6l1DN/4WRu23tts5vEaraZa3zG8AYJg0lNHZmkjQZb3QZIERa7LFaeZj
+ 332Q==
+X-Gm-Message-State: AC+VfDx4Ttch9H7rGCUAUKVkR3TzgtRE9gk4Ob6LNRdoh5eM9dNniudU
+ d6h4cASD0AaJIYXb0NfZKKd2uqWEcm9AOm9y+Tg=
+X-Google-Smtp-Source: ACHHUZ54cm6IcwAjgi9zx+G7Efdoq+invOMR6BSOvsDqkCkMrjs4jy6VSZWLUs1rC7rLaxowvn0/LZZ0UKfMgkcu9pc=
+X-Received: by 2002:a67:ff0d:0:b0:437:db92:2134 with SMTP id
+ v13-20020a67ff0d000000b00437db922134mr61625vsp.8.1685064280231; Thu, 25 May
+ 2023 18:24:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230523093539.203909-1-liweiwei@iscas.ac.cn>
- <20230523093539.203909-5-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230523093539.203909-5-liweiwei@iscas.ac.cn>
+ <20230523093539.203909-6-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230523093539.203909-6-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 26 May 2023 11:23:20 +1000
-Message-ID: <CAKmqyKPF_H2_ydoA608BTARH_aRJoZUenqyc5-ZfCYknU-geAw@mail.gmail.com>
-Subject: Re: [PATCH v2 4/8] disas/riscv.c: Support disas for Zcm* extensions
+Date: Fri, 26 May 2023 11:24:14 +1000
+Message-ID: <CAKmqyKNzeJ2Q1BhnEmYVEjio8xQx2Szr5wzgKRRD=8gkBe=RMA@mail.gmail.com>
+Subject: Re: [PATCH v2 5/8] disas/riscv.c: Support disas for Z*inx extensions
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
  zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -93,8 +93,8 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Tue, May 23, 2023 at 7:37=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
 ote:
 >
-> Support disas for Zcmt* instructions only when related extensions
-> are supported.
+> Support disas for Z*inx instructions only when Zfinx extension is support=
+ed.
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
@@ -105,45 +105,50 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  disas/riscv.c | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
+>  disas/riscv.c | 16 ++++++++++++----
+>  1 file changed, 12 insertions(+), 4 deletions(-)
 >
 > diff --git a/disas/riscv.c b/disas/riscv.c
-> index 729ab684da..49a3eb6ac4 100644
+> index 49a3eb6ac4..108bc2127d 100644
 > --- a/disas/riscv.c
 > +++ b/disas/riscv.c
-> @@ -2501,7 +2501,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  op =3D rv_op_c_sqsp;
->              } else {
->                  op =3D rv_op_c_fsdsp;
-> -                if (((inst >> 12) & 0b01)) {
-> +                if (dec->cfg->ext_zcmp && ((inst >> 12) & 0b01)) {
->                      switch ((inst >> 8) & 0b01111) {
->                      case 8:
->                          if (((inst >> 4) & 0b01111) >=3D 4) {
-> @@ -2527,6 +2527,9 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                  } else {
->                      switch ((inst >> 10) & 0b011) {
->                      case 0:
-> +                        if (!dec->cfg->ext_zcmt) {
-> +                            break;
-> +                        }
->                          if (((inst >> 2) & 0xFF) >=3D 32) {
->                              op =3D rv_op_cm_jalt;
->                          } else {
-> @@ -2534,6 +2537,9 @@ static void decode_inst_opcode(rv_decode *dec, rv_i=
-sa isa)
->                          }
->                          break;
->                      case 3:
-> +                        if (!dec->cfg->ext_zcmp) {
-> +                            break;
-> +                        }
->                          switch ((inst >> 5) & 0b011) {
->                          case 1: op =3D rv_op_cm_mvsa01; break;
->                          case 3: op =3D rv_op_cm_mva01s; break;
+> @@ -4592,16 +4592,24 @@ static void format_inst(char *buf, size_t buflen,=
+ size_t tab, rv_decode *dec)
+>              append(buf, rv_ireg_name_sym[dec->rs2], buflen);
+>              break;
+>          case '3':
+> -            append(buf, rv_freg_name_sym[dec->rd], buflen);
+> +            append(buf, dec->cfg->ext_zfinx ? rv_ireg_name_sym[dec->rd] =
+:
+> +                                              rv_freg_name_sym[dec->rd],
+> +                   buflen);
+>              break;
+>          case '4':
+> -            append(buf, rv_freg_name_sym[dec->rs1], buflen);
+> +            append(buf, dec->cfg->ext_zfinx ? rv_ireg_name_sym[dec->rs1]=
+ :
+> +                                              rv_freg_name_sym[dec->rs1]=
+,
+> +                   buflen);
+>              break;
+>          case '5':
+> -            append(buf, rv_freg_name_sym[dec->rs2], buflen);
+> +            append(buf, dec->cfg->ext_zfinx ? rv_ireg_name_sym[dec->rs2]=
+ :
+> +                                              rv_freg_name_sym[dec->rs2]=
+,
+> +                   buflen);
+>              break;
+>          case '6':
+> -            append(buf, rv_freg_name_sym[dec->rs3], buflen);
+> +            append(buf, dec->cfg->ext_zfinx ? rv_ireg_name_sym[dec->rs3]=
+ :
+> +                                              rv_freg_name_sym[dec->rs3]=
+,
+> +                   buflen);
+>              break;
+>          case '7':
+>              snprintf(tmp, sizeof(tmp), "%d", dec->rs1);
 > --
 > 2.25.1
 >
