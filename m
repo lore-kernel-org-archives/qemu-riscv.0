@@ -4,58 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0635DC7EE2D
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 07:22:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A433C7EE2F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 07:22:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q2Rls-00069I-7Y; Fri, 26 May 2023 03:21:56 -0400
+	id 1q2Rlq-000671-VI; Fri, 26 May 2023 03:21:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q2Rlm-00062o-0E; Fri, 26 May 2023 03:21:53 -0400
+ id 1q2Rlk-00062Y-JV; Fri, 26 May 2023 03:21:48 -0400
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q2Rlg-0002Hh-TD; Fri, 26 May 2023 03:21:49 -0400
+ id 1q2Rlg-0002Hd-Ni; Fri, 26 May 2023 03:21:48 -0400
 Received: from localhost.localdomain (unknown [61.165.37.98])
- by APP-05 (Coremail) with SMTP id zQCowACnrYn3XXBkJSddBQ--.47689S5;
- Fri, 26 May 2023 15:21:30 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowACnrYn3XXBkJSddBQ--.47689S2;
+ Fri, 26 May 2023 15:21:28 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v3 3/7] target/riscv: Change gen_goto_tb to work on
- displacements
-Date: Fri, 26 May 2023 15:21:20 +0800
-Message-Id: <20230526072124.298466-4-liweiwei@iscas.ac.cn>
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v3 0/7] target/riscv: Add support for PC-relative translation
+Date: Fri, 26 May 2023 15:21:17 +0800
+Message-Id: <20230526072124.298466-1-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230526072124.298466-1-liweiwei@iscas.ac.cn>
-References: <20230526072124.298466-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowACnrYn3XXBkJSddBQ--.47689S5
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZFyruw1UtF4fArWrKw43trb_yoW5JFW3pF
- 4Ikr47GFWrXFWrGa40gF4UJF13JF4agrWxK3sakwnYgF43J3yrJF4DKayfKF4UZFW8Xr1j
- kFs0yF95Zr40qFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPK14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
- x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr1j6rxd
- M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
- v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
- F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
- IY04v7MxkIecxEwVAFwVW8CwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8
- JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1V
- AFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xII
- jxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4
- A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU
- 0xZFpf9x0JUB5lbUUUUU=
+X-CM-TRANSID: zQCowACnrYn3XXBkJSddBQ--.47689S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7urykWF4ftw4fGr4UZFyrZwb_yoW8XF4fpr
+ WrK3yxArZ8trWfZw4fXF4DAry5JF4rWrW5A3Z2ywn3Aa1YyrW5JrsrK347KrsrJFy8Xr1q
+ k3Wjkw13ur45ArJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUvC14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr
+ 1j6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
+ 6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
+ 0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E
+ 8cxan2IY04v7MxkIecxEwVAFwVW8CwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbV
+ WUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF
+ 67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42
+ IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF
+ 0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2Kf
+ nxnUUI43ZEXa7VUbhiSPUUUUU==
 X-Originating-IP: [61.165.37.98]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -81,73 +76,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reduce reliance on absolute value to prepare for PC-relative translation.
+This patchset tries to add support for PC-relative translation.
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/insn_trans/trans_rvi.c.inc | 4 ++--
- target/riscv/translate.c                | 8 +++++---
- 2 files changed, 7 insertions(+), 5 deletions(-)
+The existence of CF_PCREL can improve performance with the guest
+kernel's address space randomization.  Each guest process maps libc.so
+(et al) at a different virtual address, and this allows those
+translations to be shared.
 
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index b092b8c536..42c4fc2e52 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -171,7 +171,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
-     } else {
-         tcg_gen_brcond_tl(cond, src1, src2, l);
-     }
--    gen_goto_tb(ctx, 1, ctx->pc_succ_insn);
-+    gen_goto_tb(ctx, 1, ctx->cur_insn_len);
- 
-     gen_set_label(l); /* branch taken */
- 
-@@ -183,7 +183,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
-         gen_pc_plus_diff(target_pc, ctx, next_pc);
-         gen_exception_inst_addr_mis(ctx, target_pc);
-     } else {
--        gen_goto_tb(ctx, 0, ctx->base.pc_next + a->imm);
-+        gen_goto_tb(ctx, 0, a->imm);
-     }
-     ctx->base.is_jmp = DISAS_NORETURN;
- 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 9feb0a4890..9716114414 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -281,8 +281,10 @@ static void exit_tb(DisasContext *ctx)
-     tcg_gen_exit_tb(NULL, 0);
- }
- 
--static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
-+static void gen_goto_tb(DisasContext *ctx, int n, target_long diff)
- {
-+    target_ulong dest = ctx->base.pc_next + diff;
-+
-      /*
-       * Under itrigger, instruction executes one by one like singlestep,
-       * direct block chain benefits will be small.
-@@ -557,7 +559,7 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
-     }
- 
-     gen_set_gpri(ctx, rd, ctx->pc_succ_insn);
--    gen_goto_tb(ctx, 0, ctx->base.pc_next + imm); /* must use this for safety */
-+    gen_goto_tb(ctx, 0, imm); /* must use this for safety */
-     ctx->base.is_jmp = DISAS_NORETURN;
- }
- 
-@@ -1229,7 +1231,7 @@ static void riscv_tr_tb_stop(DisasContextBase *dcbase, CPUState *cpu)
- 
-     switch (ctx->base.is_jmp) {
-     case DISAS_TOO_MANY:
--        gen_goto_tb(ctx, 0, ctx->base.pc_next);
-+        gen_goto_tb(ctx, 0, 0);
-         break;
-     case DISAS_NORETURN:
-         break;
+And support of PC-relative translation is the precondition to support
+pointer mask for instruction.
+
+The port is available here:
+https://github.com/plctlab/plct-qemu/tree/plct-pcrel-upstream-v3
+
+v3:
+ * rebase on riscv-to-apply.next
+
+v2:
+ * rebase on upstream and add pc-relative translation for Zc* instructions
+
+Weiwei Li (7):
+  target/riscv: Fix target address to update badaddr
+  target/riscv: Introduce cur_insn_len into DisasContext
+  target/riscv: Change gen_goto_tb to work on displacements
+  target/riscv: Change gen_set_pc_imm to gen_update_pc
+  target/riscv: Use true diff for gen_pc_plus_diff
+  target/riscv: Enable PC-relative translation
+  target/riscv: Remove pc_succ_insn from DisasContext
+
+ target/riscv/cpu.c                            | 31 ++++--
+ .../riscv/insn_trans/trans_privileged.c.inc   |  2 +-
+ target/riscv/insn_trans/trans_rvi.c.inc       | 43 ++++++---
+ target/riscv/insn_trans/trans_rvv.c.inc       |  4 +-
+ target/riscv/insn_trans/trans_rvzawrs.c.inc   |  2 +-
+ target/riscv/insn_trans/trans_rvzce.c.inc     | 10 +-
+ target/riscv/insn_trans/trans_xthead.c.inc    |  2 +-
+ target/riscv/translate.c                      | 94 ++++++++++++-------
+ 8 files changed, 123 insertions(+), 65 deletions(-)
+
 -- 
 2.25.1
 
