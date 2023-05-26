@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B69BC77B7A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 12:11:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F26CC77B7C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 12:11:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q2WHJ-0004ps-0R; Fri, 26 May 2023 08:10:46 -0400
+	id 1q2WHO-0004rP-W5; Fri, 26 May 2023 08:10:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1q2WH1-0004mn-Pp
- for qemu-riscv@nongnu.org; Fri, 26 May 2023 08:10:27 -0400
-Received: from mail-ot1-x336.google.com ([2607:f8b0:4864:20::336])
+ id 1q2WHF-0004pW-Sj
+ for qemu-riscv@nongnu.org; Fri, 26 May 2023 08:10:40 -0400
+Received: from mail-oa1-x31.google.com ([2001:4860:4864:20::31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1q2WGx-0005Bh-7M
- for qemu-riscv@nongnu.org; Fri, 26 May 2023 08:10:22 -0400
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-6af6ec6d73bso270674a34.3
- for <qemu-riscv@nongnu.org>; Fri, 26 May 2023 05:10:17 -0700 (PDT)
+ id 1q2WHA-0005IT-8e
+ for qemu-riscv@nongnu.org; Fri, 26 May 2023 08:10:34 -0400
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-19a427d7b57so397460fac.2
+ for <qemu-riscv@nongnu.org>; Fri, 26 May 2023 05:10:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1685103016; x=1687695016;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Bu163vDW15BYcXwzSN2VynBqJZFpYCeNs3cnaMyQ/3s=;
- b=VHH/n1h9iNcw/SEvxGqZOvzyqbFRNjXXPjEUrNDcvRcg09FNckmm8ijP+q45GNaN/d
- rUJVV4lFZiy+OWMaivzAEV8k1JNvTZyN7nBvvrbEgPFeDS/gwN6m3sVODXofuzgOLZw+
- XQek04Tk1Idw/1Ki0AwVH/5WhQvCw6YoUhioNDniHOi0evleYFBtaC6mBWsW++NNtToX
- TKJPnWmITzTAIrNqOJDg2/q8ziMXliZrn7LVXWUZdXYTaOLEPVmrR+3uFAJf75eEzWNy
- tX2/qmTrSlrVidj46/3llz4340y3pc9fjQtWAIjS1jllsfXRaN8DxEpC9UXH2RT6kf3M
- 4OHw==
+ d=ventanamicro.com; s=google; t=1685103025; x=1687695025;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=oIbZJJsOcm3S8IEVd1te65HPg1fVUwZXpCiyeQi07lA=;
+ b=mQkYLwqxmn/+up7zWPEW78xfkz7JUifMhUmMmQDJsU+5bpfL8htIQOlfJXkdLE2sCE
+ 6KYP+MJPs5Wb94/Eup5qNld43/xgmVQGkNFq4EPaBEgLSLeyEhfYjKVDcdPYADuWHacK
+ S57de4IoQtRJTfm3JMyRIz9R1cMIqFM6kCWeFvXQDTxsEyhaCIV/BU0VfOTzsIqUzJjv
+ CHZXgvb3p++pjuh+tkws+loxJFgEe0pJD2VMKYRUI4ZFz++UkRl/4fmF48+Bx228H3u1
+ kYVNMc1Opo8e1Hi+Igm6sdqrKgCteCW9bcoSUi9SFQho+7hr3cfZfGCbAY0P9OpCkfdh
+ GiOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685103016; x=1687695016;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Bu163vDW15BYcXwzSN2VynBqJZFpYCeNs3cnaMyQ/3s=;
- b=Oyr0DF4RiKk8y53iVJbrUhH+xQRaPE0pP6GnMcOctiaZf/UTvyV9rJsbFczQAshNH2
- VTYicEZ+BNaiclTMmOpNfRyU46GQIlwIV3yo6rb0odhZF320fy4gKVSp4fNmN0QanZHs
- RnVaRTbsvsQ9NnDDRhdlEWuCjoQF+vOtHFs4g+UfgfAhjOYS5wVkOGh9qzLMxjwE+hzZ
- Bmq5b0MCNeWbyYbp8Uf4kbtgWX8o3ZbdhDRsB5e66M2zb+EnNl1lvDL9+fPoxpfdxjmG
- g8Xaz3FK7UfozRqNdOb3Td7UObrIWd5fi6KsKKRvagtHiyolRRvRkb57kq77WZmx9mKf
- gFjQ==
-X-Gm-Message-State: AC+VfDy5J3M6G5TWSJEIWdMMZx5O2FdV3LZ23/3JJ8u3GYNlw1cwaNUX
- cRVOgKtzAKCNCmbyV5kdg83umS3nyiScXPpVauM=
-X-Google-Smtp-Source: ACHHUZ4SFyeNiGS9pFG28lAWgg/X2SP1QyB86FQU5hfbB2gl3LJx2X/VAIEX6QslaS4h+ply7J9TJQ==
-X-Received: by 2002:a9d:6191:0:b0:6aa:fdcc:47b with SMTP id
- g17-20020a9d6191000000b006aafdcc047bmr636738otk.33.1685103016611; 
- Fri, 26 May 2023 05:10:16 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1685103025; x=1687695025;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=oIbZJJsOcm3S8IEVd1te65HPg1fVUwZXpCiyeQi07lA=;
+ b=RC+7rDaiWD+tNR1uZoGjHh+UdbUlJ3/e8iKumEleP07VTS5Zz4QZFINJQQ9T1XdNzc
+ G7USFLOLHkeErmoGvBxp1KYLu11fT9E7EWOzH4mqr1NHHUNfop2n+wL7an7hRzRsuSMj
+ nVnA2K0Ej+Vyqx2zQwUIJfneP7pw7RhOP6C3TmeZon/oGuYkaqIdmJxsCReIlXRih+x+
+ KTQR7E4ol0exmNohA/neHw8e6ZDPo5nhqyhF9zFpgI4RfOKT7ZzEE6hHCEayageqpuuO
+ NjMDvxG3R4IygKhRoYB8TsVTH01bxev34Pj8DgCdYSLIuxMNYZnWKeewIJo1+/kGiLsK
+ x/NA==
+X-Gm-Message-State: AC+VfDxB1JBaXxWw2ge2W8/UlWP98IKBHLs2jlfIxhm+8PX++3kAFSy4
+ gkXV8Bf+efrAoGBJDv+oFKrE16nFo5ADhHCbZMU=
+X-Google-Smtp-Source: ACHHUZ5D5YNR4vtXDWgJU5o4l0xKuwWuAPxtr5i9kRX76op/nc8XOe0mw8FCWwekvKWCoSx9NdfJ1Q==
+X-Received: by 2002:a05:6870:1728:b0:192:8632:aca9 with SMTP id
+ h40-20020a056870172800b001928632aca9mr817720oae.23.1685103025499; 
+ Fri, 26 May 2023 05:10:25 -0700 (PDT)
 Received: from sunil-laptop.dc1.ventanamicro.com ([106.51.186.3])
  by smtp.gmail.com with ESMTPSA id
- g10-20020a9d618a000000b006abb3b660a9sm1611602otk.54.2023.05.26.05.10.12
+ g10-20020a9d618a000000b006abb3b660a9sm1611602otk.54.2023.05.26.05.10.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 May 2023 05:10:16 -0700 (PDT)
+ Fri, 26 May 2023 05:10:25 -0700 (PDT)
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: qemu-riscv@nongnu.org
 Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
@@ -66,14 +67,16 @@ Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Andrea Bolognani <abologna@redhat.com>,
  Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH v5 0/3] hw/riscv/virt: pflash improvements
-Date: Fri, 26 May 2023 17:40:03 +0530
-Message-Id: <20230526121006.76388-1-sunilvl@ventanamicro.com>
+Subject: [PATCH v5 2/3] riscv/virt: Support using pflash via -blockdev option
+Date: Fri, 26 May 2023 17:40:05 +0530
+Message-Id: <20230526121006.76388-3-sunilvl@ventanamicro.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230526121006.76388-1-sunilvl@ventanamicro.com>
+References: <20230526121006.76388-1-sunilvl@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::336;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-ot1-x336.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::31;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-oa1-x31.google.com
 X-Spam_score_int: -5
 X-Spam_score: -0.6
 X-Spam_bar: /
@@ -96,56 +99,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series improves the pflash usage in RISC-V virt machine with solutions to
-below issues.
+Currently, pflash devices can be configured only via -pflash
+or -drive options. This is the legacy way and the
+better way is to use -blockdev as in other architectures.
+libvirt also has moved to use -blockdev method.
 
-1) Currently the first pflash is reserved for ROM/M-mode firmware code. But S-mode
-payload firmware like EDK2 need both pflash devices to have separate code and variable
-store so that OS distros can keep the FW code as read-only. 
+To support -blockdev option, pflash devices need to be
+created in instance_init itself. So, update the code to
+move the virt_flash_create() to instance_init. Also, use
+standard interfaces to detect whether pflash0 is
+configured or not.
 
-The issue is reported at
-https://salsa.debian.org/qemu-team/edk2/-/commit/c345655a0149f64c5020bfc1e53c619ce60587f6
+Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+Reported-by: Andrea Bolognani <abologna@redhat.com>
+Tested-by: Andrea Bolognani <abologna@redhat.com>
+---
+ hw/riscv/virt.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-2) The latest way of using pflash devices in other architectures and libvirt
-is by using -blockdev and machine options. However, currently this method is
-not working in RISC-V.
-
-With above issues fixed, added documentation on how to use pflash devices
-in RISC-V virt machine.
-
-This patch series is based on Alistair's riscv-to-apply.next branch.
-
-Changes since v4:
-	1) Updated patch 2 to avoid accessing private field as per feedback from Philippe.
-	2) Updated documentation patch to add read-only for ROM usage.
-	3) Rebased to latest riscv-to-apply.next branch and updated tags.
-
-Changes since v3:
-	1) Converted single patch to a series with a cover letter since there are
-	   multiple patches now.
-	2) Added a new patch to enable pflash usage via -blockdev option.
-	3) Separated the documentation change into new patch and updated the
-	   documentation to mention only -blockdev option which seems to be the
-	   recommended way of using pflash.
-
-Changes since v2:
-	1) Reverted v2 changes and used v1 approach so that pflash0 can be used
-	   for code and pflash1 for variable store.
-	2) Rebased to latest riscv-to-apply.next branch.
-	3) Added documentation for pflash usage.
-
-Changes since v1:
-	1) Simplified the fix such that it doesn't break current EDK2.
-
-Sunil V L (3):
-  hw/riscv: virt: Assume M-mode FW in pflash0 only when "-bios none"
-  riscv/virt: Support using pflash via -blockdev option
-  docs/system: riscv: Add pflash usage details
-
- docs/system/riscv/virt.rst | 29 ++++++++++++++++++++
- hw/riscv/virt.c            | 56 +++++++++++++++-----------------------
- 2 files changed, 51 insertions(+), 34 deletions(-)
-
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 1187a60d6e..b450248a21 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1246,6 +1246,7 @@ static void virt_machine_done(Notifier *notifier, void *data)
+     const char *firmware_name = riscv_default_firmware_name(&s->soc[0]);
+     uint32_t fdt_load_addr;
+     uint64_t kernel_entry = 0;
++    BlockBackend *pflash_blk0;
+ 
+     /*
+      * Only direct boot kernel is currently supported for KVM VM,
+@@ -1265,8 +1266,8 @@ static void virt_machine_done(Notifier *notifier, void *data)
+ 
+     firmware_end_addr = riscv_find_and_load_firmware(machine, firmware_name,
+                                                      start_addr, NULL);
+-
+-    if (drive_get(IF_PFLASH, 0, 0)) {
++    pflash_blk0 = pflash_cfi01_get_blk(s->flash[0]);
++    if (pflash_blk0) {
+         if (machine->firmware && !strcmp(machine->firmware, "none")) {
+             /*
+              * Pflash was supplied but bios is none, let's overwrite the
+@@ -1497,8 +1498,6 @@ static void virt_machine_init(MachineState *machine)
+     sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
+         qdev_get_gpio_in(DEVICE(mmio_irqchip), RTC_IRQ));
+ 
+-    virt_flash_create(s);
+-
+     for (i = 0; i < ARRAY_SIZE(s->flash); i++) {
+         /* Map legacy -drive if=pflash to machine properties */
+         pflash_cfi01_legacy_drive(s->flash[i],
+@@ -1525,6 +1524,8 @@ static void virt_machine_instance_init(Object *obj)
+ {
+     RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
+ 
++    virt_flash_create(s);
++
+     s->oem_id = g_strndup(ACPI_BUILD_APPNAME6, 6);
+     s->oem_table_id = g_strndup(ACPI_BUILD_APPNAME8, 8);
+     s->acpi = ON_OFF_AUTO_AUTO;
 -- 
 2.34.1
 
