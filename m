@@ -4,73 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C91C7EE23
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 03:38:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 502EAC7EE23
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 03:39:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q2OHc-0004L8-72; Thu, 25 May 2023 23:38:28 -0400
+	id 1q2OIU-0004fq-Dz; Thu, 25 May 2023 23:39:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q2OHb-0004Kn-Jv; Thu, 25 May 2023 23:38:27 -0400
-Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
+ id 1q2OIR-0004dR-Us; Thu, 25 May 2023 23:39:21 -0400
+Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q2OHZ-0002aZ-HX; Thu, 25 May 2023 23:38:27 -0400
-Received: by mail-vs1-xe31.google.com with SMTP id
- ada2fe7eead31-439367c12ceso164873137.0; 
- Thu, 25 May 2023 20:38:24 -0700 (PDT)
+ id 1q2OIO-0002fR-Kn; Thu, 25 May 2023 23:39:18 -0400
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-4393c074161so52717137.2; 
+ Thu, 25 May 2023 20:39:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1685072304; x=1687664304;
+ d=gmail.com; s=20221208; t=1685072353; x=1687664353;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gebbvLecwxmC4j6HVqVaGnssKKu6mrz7ssMgpBbb4qU=;
- b=T8iXa5m/NlHEfMZdyMn7/uImE9TvrWH0cDy5P6trX7pqoJY5e66vyzb1bi0Dvn83lI
- 8EOmDKUv60FvLKhbedUuRrBqsS1PSnkQ77AMviBEsJtCMbE51/m1sC5IN3coiJJh+vmH
- xQBy4dfdlFN3N5Xr1Z9nKv/IDptrFG7FvmmcLzatIV8KOF/+VzL8Lb2/uGUuIlVyzYfL
- EqI78y4GQMgXbI2mhKzDmFt2fH8LDo8GvLyiwxlmPd9acdRRGsycHNBg68txQCoESR+f
- 1BY8QAeNR8CjhO4xBQOjZ5u3ChnmadeSsseI1MxntYyCTbp9HOV4ONnD+dVXIrYx5HBI
- se6w==
+ bh=W4ElARsdP9e2ua0HpYVlWI/UYyjsG2/u1B9dl5j8YGE=;
+ b=cRPx9kvyB/ebgtV6Usn5Gd34e5hX0Rn8PWs0eZxp87k5jUYwCtjq/segmCi7QNLKeK
+ UaooFsJffHJElttD/DFooBS3I/vFcShAJgo2olWcLmbB9Z+bPT2kfm5yA3lDVXGSvF3b
+ MwRMCoPufFHyKULzt24zH8XqLAd7sHxqlveFd4RGU810IzrN/bLd3AUP8LVTjGTVa0O8
+ U7hCkpqbnNCr898FSd/RBCEM0mrcR6WYBLdlkFsgSgaQhgpe5obBSTudkwlKKQcZmBT+
+ mn62wqKsKcU03S9wRLFa7vH1USaCoUrzVWhqEXDTVWNMUW9r9pZwHQbBfvpGnK3zpYk9
+ ihZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685072304; x=1687664304;
+ d=1e100.net; s=20221208; t=1685072353; x=1687664353;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gebbvLecwxmC4j6HVqVaGnssKKu6mrz7ssMgpBbb4qU=;
- b=cLFVedgroHPHLRnuaLlEvmgSEv6uYPFqgWKuU9yu5AjNdFDW6Wg0NOxx6L9baFw5GV
- Q4Jn0l52LChnMKBoICmNh5g0iJ1xZRFwYE+jNAMnPQ39JSxWFuFoy3TFzHbLjBn3ImJh
- 47tdr9vH+kF1KLANxBBtXpCxlOZOdeGER2jXpFk3S10DIDtrsJrU/rp2rA5K4jnGPhix
- S4MmTbkOqtVmTals/vdlg6Vg6WP4+MyNDab8y4dzXtW81k3im4fT56/IsIfydkuXSv6Q
- dt1QvOrkklo0HiRhOOk+OVhVmOefbUXrVxWt0jfvAnhLuMFmr4yPVD6Pdxq0vvBY2f+D
- wSxA==
-X-Gm-Message-State: AC+VfDzfxX8da6sLrKvDDe8AVqUphCtu60qgCYPXH0Tg0k6MT1PvZph4
- xdIC2PH6T3oNipJteUtm8cRxG+BHvta4yc5gK7Y=
-X-Google-Smtp-Source: ACHHUZ6XCYGMbxfSt5lrq692v6f1bHsRH5/fTTJcmX4u0P6CJhqpHeMnEuQ7/NZ3nQ8QbJEWgKvspHV8HYPa8zlPPX4=
-X-Received: by 2002:a05:6102:34e7:b0:434:6978:fdc6 with SMTP id
- bi7-20020a05610234e700b004346978fdc6mr147486vsb.11.1685072303973; Thu, 25 May
- 2023 20:38:23 -0700 (PDT)
+ bh=W4ElARsdP9e2ua0HpYVlWI/UYyjsG2/u1B9dl5j8YGE=;
+ b=bc2zBRh2oczi4ZabJfxcyUZYXBhC/w5jYQ4McYA80gFnxxSJ9gqCuolzolN/UIINf8
+ mYXnv1ud1P169+2hsYRQOuZ8fEKW9r7iCJU3gUxLCvi7fFcLo6nJ/b2feAxc0yKX5HRP
+ ILgdrYVfVBJKLrFFsT6++SlQz8+KvNVl5t/D7FkwxmNFGa+gp0mCQ9gLRiooB00uQXtc
+ 0v0pj/c8bDAukV/w3dmNGkO/yN0y5oKup5/g3dCrOjKN0vd8WrYGvdnHdLuGjBYhAYp/
+ rdf+W5LpYOW50vG+goMISj9htIRw1tThsCjhXZOQ2ucZbI0JpOT3JbWlPd+qidqTmuCT
+ 2Egg==
+X-Gm-Message-State: AC+VfDwJjriuw3olX+8RXIL8F2JD3FBD35OkViWre6fmCi+BEBbfNp6c
+ Ah7d41a/Y8LaOcCVxx+VMGhJ+P27ak7ZmmgZ0FU=
+X-Google-Smtp-Source: ACHHUZ4r4ZAID44qKlw8rE8kNwiCPIz5KfoVYqrnqc5W3VIouGeQl16Es0rb7fJ+OEI6NxPs38XQu4+f6giNnH+aIK4=
+X-Received: by 2002:a67:f750:0:b0:41f:5a31:8b17 with SMTP id
+ w16-20020a67f750000000b0041f5a318b17mr132328vso.2.1685072353298; Thu, 25 May
+ 2023 20:39:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230523102805.100160-1-sunilvl@ventanamicro.com>
-In-Reply-To: <20230523102805.100160-1-sunilvl@ventanamicro.com>
+References: <20230523135939.299246-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230523135939.299246-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 26 May 2023 13:37:57 +1000
-Message-ID: <CAKmqyKNOU65R3Yc=K=xHZKb00_e88HkGG8jwO=qfng1fg78aAw@mail.gmail.com>
-Subject: Re: [PATCH v3] hw/riscv: virt: Assume M-mode FW in pflash0 only when
- "-bios none"
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+Date: Fri, 26 May 2023 13:38:47 +1000
+Message-ID: <CAKmqyKMOzVPxJ8N+xZzJbchUoXZ-DSe62XijthbXors1py2e6A@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] target/riscv: Add support for PC-relative
+ translation
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,215 +90,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, May 23, 2023 at 8:29=E2=80=AFPM Sunil V L <sunilvl@ventanamicro.com=
-> wrote:
+On Wed, May 24, 2023 at 12:15=E2=80=AFAM Weiwei Li <liweiwei@iscas.ac.cn> w=
+rote:
 >
-> Currently, virt machine supports two pflash instances each with
-> 32MB size. However, the first pflash is always assumed to
-> contain M-mode firmware and reset vector is set to this if
-> enabled. Hence, for S-mode payloads like EDK2, only one pflash
-> instance is available for use. This means both code and NV variables
-> of EDK2 will need to use the same pflash.
+> This patchset tries to add support for PC-relative translation.
 >
-> The OS distros keep the EDK2 FW code as readonly. When non-volatile
-> variables also need to share the same pflash, it is not possible
-> to keep it as readonly since variables need write access.
+> The existence of CF_PCREL can improve performance with the guest
+> kernel's address space randomization.  Each guest process maps libc.so
+> (et al) at a different virtual address, and this allows those
+> translations to be shared.
 >
-> To resolve this issue, the code and NV variables need to be separated.
-> But in that case we need an extra flash. Hence, modify the convention
-> such that pflash0 will contain the M-mode FW only when "-bios none"
-> option is used. Otherwise, pflash0 will contain the S-mode payload FW.
-> This enables both pflash instances available for EDK2 use.
+> And support of PC-relative translation is the precondition to support
+> pointer mask for instruction.
 >
-> Example usage:
-> 1) pflash0 containing M-mode FW
-> qemu-system-riscv64 -bios none -pflash <mmode_fw> -machine virt
-> or
-> qemu-system-riscv64 -bios none \
-> -drive file=3D<mmode_fw>,if=3Dpflash,format=3Draw,unit=3D0 -machine virt
+> The port is available here:
+> https://github.com/plctlab/plct-qemu/tree/plct-pcrel-upstream-v2
 >
-> 2) pflash0 containing S-mode payload like EDK2
-> qemu-system-riscv64 -pflash <smode_fw_code> -pflash <smode_vars> -machine=
-  virt
-> or
-> qemu-system-riscv64 -bios <opensbi_fw> \
-> -pflash <smode_fw_code> \
-> -pflash <smode_vars> \
-> -machine  virt
-> or
-> qemu-system-riscv64 -bios <opensbi_fw> \
-> -drive file=3D<smode_fw_code>,if=3Dpflash,format=3Draw,unit=3D0,readonly=
-=3Don \
-> -drive file=3D<smode_fw_vars>,if=3Dpflash,format=3Draw,unit=3D1 \
-> -machine virt
+> v2:
+>  * rebase on upstream and add pc-relative translation for Zc* instruction=
+s
 >
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Weiwei Li (7):
+>   target/riscv: Fix target address to update badaddr
+>   target/riscv: Introduce cur_insn_len into DisasContext
+>   target/riscv: Change gen_goto_tb to work on displacements
+>   target/riscv: Change gen_set_pc_imm to gen_update_pc
+>   target/riscv: Use true diff for gen_pc_plus_diff
+>   target/riscv: Enable PC-relative translation
+>   target/riscv: Remove pc_succ_insn from DisasContext
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks for the patches.
+
+Do you mind rebasing on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next ?
 
 Alistair
 
-> ---
 >
-> The issue is reported at
-> https://salsa.debian.org/qemu-team/edk2/-/commit/c345655a0149f64c5020bfc1=
-e53c619ce60587f6
+>  target/riscv/cpu.c                            | 31 ++++--
+>  .../riscv/insn_trans/trans_privileged.c.inc   |  2 +-
+>  target/riscv/insn_trans/trans_rvi.c.inc       | 43 ++++++---
+>  target/riscv/insn_trans/trans_rvv.c.inc       |  4 +-
+>  target/riscv/insn_trans/trans_rvzawrs.c.inc   |  2 +-
+>  target/riscv/insn_trans/trans_rvzce.c.inc     | 10 +-
+>  target/riscv/insn_trans/trans_xthead.c.inc    |  2 +-
+>  target/riscv/translate.c                      | 94 ++++++++++++-------
+>  8 files changed, 123 insertions(+), 65 deletions(-)
 >
-> The patch is based on Alistair's riscv-to-apply.next branch.
->
-> Changes since v2:
->         1) Reverted v2 changes and used v1 approach so that pflash0 can b=
-e used
->            for code and pflash1 for variable store.
->         2) Rebased to latest riscv-to-apply.next branch.
->         3) Added documentation for pflash usage.
->
-> Changes since v1:
->         1) Simplified the fix such that it doesn't break current EDK2.
->
->  docs/system/riscv/virt.rst | 33 ++++++++++++++++++++++++
->  hw/riscv/virt.c            | 51 ++++++++++++++------------------------
->  2 files changed, 52 insertions(+), 32 deletions(-)
->
-> diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> index 4b16e41d7f..4ac0d38fdf 100644
-> --- a/docs/system/riscv/virt.rst
-> +++ b/docs/system/riscv/virt.rst
-> @@ -53,6 +53,39 @@ with the default OpenSBI firmware image as the -bios. =
-It also supports
->  the recommended RISC-V bootflow: U-Boot SPL (M-mode) loads OpenSBI fw_dy=
-namic
->  firmware and U-Boot proper (S-mode), using the standard -bios functional=
-ity.
->
-> +Using flash devices
-> +-------------------
-> +
-> +The first flash device (pflash0) can contain either ROM code like Oreboo=
-t
-> +or S-mode payload firmware code like EDK2. If the pflash0 contains the
-> +ROM code, -bios should be set to none. Otherwise, pflash0 is assumed to
-> +contain S-mode payload code.
-> +
-> +Firmware images used for pflash should be of size 32M.
-> +
-> +To boot as ROM code like Oreboot:
-> +
-> +.. code-block:: bash
-> +
-> +  $ qemu-system-riscv64 -bios none -pflash <rom_code_image> \
-> +       ... other args ....
-> +
-> +To boot as S-mode payload like EDK2:
-> +
-> +.. code-block:: bash
-> +
-> +  $ qemu-system-riscv64 -pflash <s-mode_fw_code> -pflash <smode_fw_vars>=
- \
-> +       ... other args ....
-> +
-> +To boot as read-only S-mode payload like EDK2:
-> +
-> +.. code-block:: bash
-> +
-> +  $ qemu-system-riscv64 -bios <opensbi_fw> \
-> +       -drive file=3D<smode_fw_code>,if=3Dpflash,format=3Draw,unit=3D0,r=
-eadonly=3Don \
-> +       -drive file=3D<smode_fw_vars>,if=3Dpflash,format=3Draw,unit=3D1 \
-> +       ... other args ....
-> +
->  Machine-specific options
->  ------------------------
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 4e3efbee16..1187a60d6e 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1245,7 +1245,7 @@ static void virt_machine_done(Notifier *notifier, v=
-oid *data)
->      target_ulong firmware_end_addr, kernel_start_addr;
->      const char *firmware_name =3D riscv_default_firmware_name(&s->soc[0]=
-);
->      uint32_t fdt_load_addr;
-> -    uint64_t kernel_entry;
-> +    uint64_t kernel_entry =3D 0;
->
->      /*
->       * Only direct boot kernel is currently supported for KVM VM,
-> @@ -1266,42 +1266,29 @@ static void virt_machine_done(Notifier *notifier,=
- void *data)
->      firmware_end_addr =3D riscv_find_and_load_firmware(machine, firmware=
-_name,
->                                                       start_addr, NULL);
->
-> -    if (drive_get(IF_PFLASH, 0, 1)) {
-> -        /*
-> -         * S-mode FW like EDK2 will be kept in second plash (unit 1).
-> -         * When both kernel, initrd and pflash options are provided in t=
-he
-> -         * command line, the kernel and initrd will be copied to the fw_=
-cfg
-> -         * table and opensbi will jump to the flash address which is the
-> -         * entry point of S-mode FW. It is the job of the S-mode FW to l=
-oad
-> -         * the kernel and initrd using fw_cfg table.
-> -         *
-> -         * If only pflash is given but not -kernel, then it is the job o=
-f
-> -         * of the S-mode firmware to locate and load the kernel.
-> -         * In either case, the next_addr for opensbi will be the flash a=
-ddress.
-> -         */
-> -        riscv_setup_firmware_boot(machine);
-> -        kernel_entry =3D virt_memmap[VIRT_FLASH].base +
-> -                       virt_memmap[VIRT_FLASH].size / 2;
-> -    } else if (machine->kernel_filename) {
-> +    if (drive_get(IF_PFLASH, 0, 0)) {
-> +        if (machine->firmware && !strcmp(machine->firmware, "none")) {
-> +            /*
-> +             * Pflash was supplied but bios is none, let's overwrite the
-> +             * address we jump to after reset to the base of the flash.
-> +             */
-> +            start_addr =3D virt_memmap[VIRT_FLASH].base;
-> +        } else {
-> +            /*
-> +             * Pflash was supplied but bios is not none. In this case,
-> +             * base of the flash would contain S-mode payload.
-> +             */
-> +            riscv_setup_firmware_boot(machine);
-> +            kernel_entry =3D virt_memmap[VIRT_FLASH].base;
-> +        }
-> +    }
-> +
-> +    if (machine->kernel_filename && !kernel_entry) {
->          kernel_start_addr =3D riscv_calc_kernel_start_addr(&s->soc[0],
->                                                           firmware_end_ad=
-dr);
->
->          kernel_entry =3D riscv_load_kernel(machine, &s->soc[0],
->                                           kernel_start_addr, true, NULL);
-> -    } else {
-> -       /*
-> -        * If dynamic firmware is used, it doesn't know where is the next=
- mode
-> -        * if kernel argument is not set.
-> -        */
-> -        kernel_entry =3D 0;
-> -    }
-> -
-> -    if (drive_get(IF_PFLASH, 0, 0)) {
-> -        /*
-> -         * Pflash was supplied, let's overwrite the address we jump to a=
-fter
-> -         * reset to the base of the flash.
-> -         */
-> -        start_addr =3D virt_memmap[VIRT_FLASH].base;
->      }
->
->      fdt_load_addr =3D riscv_compute_fdt_addr(memmap[VIRT_DRAM].base,
 > --
-> 2.34.1
+> 2.25.1
 >
 >
 
