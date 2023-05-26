@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6909EC77B7A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 01:20:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8314C77B7A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 26 May 2023 01:21:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q2M7j-0004U6-Bg; Thu, 25 May 2023 21:20:07 -0400
+	id 1q2M8e-0004zW-02; Thu, 25 May 2023 21:21:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q2M7h-0004QF-Oz; Thu, 25 May 2023 21:20:05 -0400
-Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
+ id 1q2M8c-0004yz-B8; Thu, 25 May 2023 21:21:03 -0400
+Received: from mail-vk1-xa35.google.com ([2607:f8b0:4864:20::a35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q2M7f-0003ha-KV; Thu, 25 May 2023 21:20:05 -0400
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-7868d32ace2so169343241.3; 
- Thu, 25 May 2023 18:20:02 -0700 (PDT)
+ id 1q2M8X-0003ww-E6; Thu, 25 May 2023 21:20:59 -0400
+Received: by mail-vk1-xa35.google.com with SMTP id
+ 71dfb90a1353d-456fa6f1f79so57252e0c.0; 
+ Thu, 25 May 2023 18:20:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1685064002; x=1687656002;
+ d=gmail.com; s=20221208; t=1685064053; x=1687656053;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/IV3UwqeGXxjzzeMQaAI3Phdy3+TKvyRl/BiiMT72lM=;
- b=Mknzvb6lXH2kto9yuHcXFt48Qkt4rczXukaxZE7JzrBVoBPZYu9shNvjvz3kZorJqE
- 0U3SNgVDlEXnwkRDREp4uFTvc6zjo2tXjwwa29Var8+9ku6Y4liGssZFtdou8mgobPLp
- ttGoVjgnCckcM/twWAhZ2UhLoG3JlyTsk9B9PD1aIcUxfL95kV6SX8kGmriQ+jDbuvqb
- cyJ6LL9FMmcf5DWOHZqJ34SvJJGbSxfGh/uVj5QD/QWkUCctejUzxTromJTCMkIfpwB/
- G3dp9c9VALkws/WaVHqmzEIQKcKU9y43hwFY2pNBuxQNvACqimYKDpBwzsLaE88MbnFu
- x3rg==
+ bh=H+3Q9kSvvka7n607xHa5w6hcltpu8sRdQZL2IaSKzTw=;
+ b=a4d1tI+l0yLm47Z4zCF792A4dBDy0rYgljw3RTTqcuop6o05/Pfl+FrDupxzlTZkJd
+ i2KfQk6Kdv81vqeu1iE/6pTn/zOcEklz25h0wo4z+TvI1oD+FQZSAfTB2srXfEnA6FIt
+ KDfSenVzpNM9+NmgotzeLiT4o3jNfn8tIeg1DRfeoGqadcj2Noua269xJWjrv6yP3cpF
+ Qg/UTr7E+LvEsq8LjXDdQHMwzUaN+5Nt2ImcYunj9zicVEFzHd//hCKRIiIJE+ne5Slq
+ Qrd87xXeUsmwWEn1VtR8aHTm8Vpq/H+L7oE35R4rT8cK+F67la1OYhkn+IBvGJdITFPV
+ 3/dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685064002; x=1687656002;
+ d=1e100.net; s=20221208; t=1685064053; x=1687656053;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/IV3UwqeGXxjzzeMQaAI3Phdy3+TKvyRl/BiiMT72lM=;
- b=RvX1MJonnvWplJ/OeZb/jTOpNduLU7aWGXCiFuL40nISZJvsPKMPGQD4z/MOwaJ+cF
- EkkG9J/Ym2JaU6R4tcXQVSEafUT+oFcmA3preGJ2H74sxzTPwv8boP2wzoH0QKg56KVM
- gMxcENX0lYsZtAWfUIebAq7BaVHu5oK62RyzUbt8fauwzz0oC1aor6dyMvkSFR22Z7sB
- ZVk+xbW1YO70sqOf/xFlO9ZeuLvFRmcSaJyF7PIyxeXiNa7zugPeG+2VqQFv+vkDMykJ
- RkDI4pEjpElbuwXLjquQoCKKusdU4wzpoKB+ETev0r6g22KJLmNuOhZhWHUMcuCpkYFA
- BcYA==
-X-Gm-Message-State: AC+VfDyK839ILTjOGDNyw/Wk91qYIM9hFqZ4cqvTAs6uAZpghzhJG8zn
- 4K+fDY8YjI7zz15HdrZdrj8+fkc+pw1FmTK6+u4=
-X-Google-Smtp-Source: ACHHUZ7gCLva0IsmUsYFyvhOB/kIUnMZbvbGcmaRr0Paa2mBNMm3gjNh+C9PF+m++iH3QJV1QgmjKKqajjfl0ZQPYJg=
-X-Received: by 2002:a67:fb0c:0:b0:436:c4a:bcc4 with SMTP id
- d12-20020a67fb0c000000b004360c4abcc4mr56580vsr.21.1685064001860; Thu, 25 May
- 2023 18:20:01 -0700 (PDT)
+ bh=H+3Q9kSvvka7n607xHa5w6hcltpu8sRdQZL2IaSKzTw=;
+ b=VDrfbUfWDgP08QkhjN4qaEmZHAM7ybf2E6zVb12W1fLMk+pZfQdUt/fSue+5xopaN7
+ STDhxaOuL4Kwn5akvKM7ZFfRfUs9nfPhAz6lfrZLN9q6z0clPxyu355qvDto6XczrLvJ
+ ILZu83Ic1zZwYVjJgZw2+3b3tFT3zrDkYbNv95DiRNVoRgzS8sqIxhX5DVWwORYkOtwN
+ l3DRxrxQIv9i0xCUvmBukVuo6OY92lAQMOCvpvilGhE8lPqko/qcjyzN4KHvbLNyC0r2
+ FBJg/1GmX25INk9YFeLCKvsvwoEYW9Xg0VIPARQh6qHDPV97CjbX5UC8mBv7lOeGoyJu
+ mFWA==
+X-Gm-Message-State: AC+VfDw5+I0Gb3tK8QbI/FJFpN2NNmqdnkdnKA8va4rWwGnEbj8O60mN
+ E2R7T2fa9dDtCGPM+sPQVYL/BUJ4SXk42+kZuKE=
+X-Google-Smtp-Source: ACHHUZ5wByIp5qr4SDXG8195gkWHvujjORmWTHIJYITY63IR3Yn5cBkeJvbBLZeTCZNlQdj+PbTc4L1RuBxpDKXh9YM=
+X-Received: by 2002:a1f:dfc5:0:b0:457:28:b2f3 with SMTP id
+ w188-20020a1fdfc5000000b004570028b2f3mr68339vkg.2.1685064052886; 
+ Thu, 25 May 2023 18:20:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230523093539.203909-1-liweiwei@iscas.ac.cn>
- <20230523093539.203909-3-liweiwei@iscas.ac.cn>
-In-Reply-To: <20230523093539.203909-3-liweiwei@iscas.ac.cn>
+ <20230523093539.203909-2-liweiwei@iscas.ac.cn>
+In-Reply-To: <20230523093539.203909-2-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 26 May 2023 11:19:35 +1000
-Message-ID: <CAKmqyKPeaA7=QryAP120yCe_xGdgRD_-CzodU1Zq=sgC3OEXYA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/8] target/riscv: Split RISCVCPUConfig declarations
- from cpu.h into cpu_cfg.h
+Date: Fri, 26 May 2023 11:20:26 +1000
+Message-ID: <CAKmqyKN8pdAMtUvYBbOuavNxgjQJtDBrtzgRHr_mjQWYtgRNdQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/8] disas: Change type of disassemble_info.target_info
+ to pointer
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com, 
  zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a35;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa35.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -94,303 +94,35 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Tue, May 23, 2023 at 7:38=E2=80=AFPM Weiwei Li <liweiwei@iscas.ac.cn> wr=
 ote:
 >
-> Split RISCVCPUConfig declarations to prepare for passing it to disas.
+> Use pointer to pass more information of target to disasembler,
+> such as pass cpu.cfg related information in following commits.
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.h     | 114 +---------------------------------
->  target/riscv/cpu_cfg.h | 136 +++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 137 insertions(+), 113 deletions(-)
->  create mode 100644 target/riscv/cpu_cfg.h
+>  include/disas/dis-asm.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index de7e43126a..dc1229b69c 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -27,6 +27,7 @@
->  #include "qom/object.h"
->  #include "qemu/int128.h"
->  #include "cpu_bits.h"
-> +#include "cpu_cfg.h"
->  #include "qapi/qapi-types-common.h"
->  #include "cpu-qom.h"
+> diff --git a/include/disas/dis-asm.h b/include/disas/dis-asm.h
+> index 2f6f91c2ee..2324f6b1a4 100644
+> --- a/include/disas/dis-asm.h
+> +++ b/include/disas/dis-asm.h
+> @@ -397,7 +397,7 @@ typedef struct disassemble_info {
+>    char * disassembler_options;
 >
-> @@ -368,119 +369,6 @@ struct CPUArchState {
->      uint64_t kvm_timer_frequency;
->  };
+>    /* Field intended to be used by targets in any way they deem suitable.=
+  */
+> -  int64_t target_info;
+> +  void *target_info;
 >
-> -/*
-> - * map is a 16-bit bitmap: the most significant set bit in map is the ma=
-ximum
-> - * satp mode that is supported. It may be chosen by the user and must re=
-spect
-> - * what qemu implements (valid_1_10_32/64) and what the hw is capable of
-> - * (supported bitmap below).
-> - *
-> - * init is a 16-bit bitmap used to make sure the user selected a correct
-> - * configuration as per the specification.
-> - *
-> - * supported is a 16-bit bitmap used to reflect the hw capabilities.
-> - */
-> -typedef struct {
-> -    uint16_t map, init, supported;
-> -} RISCVSATPMap;
-> -
-> -struct RISCVCPUConfig {
-> -    bool ext_zba;
-> -    bool ext_zbb;
-> -    bool ext_zbc;
-> -    bool ext_zbkb;
-> -    bool ext_zbkc;
-> -    bool ext_zbkx;
-> -    bool ext_zbs;
-> -    bool ext_zca;
-> -    bool ext_zcb;
-> -    bool ext_zcd;
-> -    bool ext_zce;
-> -    bool ext_zcf;
-> -    bool ext_zcmp;
-> -    bool ext_zcmt;
-> -    bool ext_zk;
-> -    bool ext_zkn;
-> -    bool ext_zknd;
-> -    bool ext_zkne;
-> -    bool ext_zknh;
-> -    bool ext_zkr;
-> -    bool ext_zks;
-> -    bool ext_zksed;
-> -    bool ext_zksh;
-> -    bool ext_zkt;
-> -    bool ext_ifencei;
-> -    bool ext_icsr;
-> -    bool ext_icbom;
-> -    bool ext_icboz;
-> -    bool ext_zicond;
-> -    bool ext_zihintpause;
-> -    bool ext_smstateen;
-> -    bool ext_sstc;
-> -    bool ext_svadu;
-> -    bool ext_svinval;
-> -    bool ext_svnapot;
-> -    bool ext_svpbmt;
-> -    bool ext_zdinx;
-> -    bool ext_zawrs;
-> -    bool ext_zfh;
-> -    bool ext_zfhmin;
-> -    bool ext_zfinx;
-> -    bool ext_zhinx;
-> -    bool ext_zhinxmin;
-> -    bool ext_zve32f;
-> -    bool ext_zve64f;
-> -    bool ext_zve64d;
-> -    bool ext_zmmul;
-> -    bool ext_zvfh;
-> -    bool ext_zvfhmin;
-> -    bool ext_smaia;
-> -    bool ext_ssaia;
-> -    bool ext_sscofpmf;
-> -    bool rvv_ta_all_1s;
-> -    bool rvv_ma_all_1s;
-> -
-> -    uint32_t mvendorid;
-> -    uint64_t marchid;
-> -    uint64_t mimpid;
-> -
-> -    /* Vendor-specific custom extensions */
-> -    bool ext_xtheadba;
-> -    bool ext_xtheadbb;
-> -    bool ext_xtheadbs;
-> -    bool ext_xtheadcmo;
-> -    bool ext_xtheadcondmov;
-> -    bool ext_xtheadfmemidx;
-> -    bool ext_xtheadfmv;
-> -    bool ext_xtheadmac;
-> -    bool ext_xtheadmemidx;
-> -    bool ext_xtheadmempair;
-> -    bool ext_xtheadsync;
-> -    bool ext_XVentanaCondOps;
-> -
-> -    uint8_t pmu_num;
-> -    char *priv_spec;
-> -    char *user_spec;
-> -    char *bext_spec;
-> -    char *vext_spec;
-> -    uint16_t vlen;
-> -    uint16_t elen;
-> -    uint16_t cbom_blocksize;
-> -    uint16_t cboz_blocksize;
-> -    bool mmu;
-> -    bool pmp;
-> -    bool epmp;
-> -    bool debug;
-> -    bool misa_w;
-> -
-> -    bool short_isa_string;
-> -
-> -#ifndef CONFIG_USER_ONLY
-> -    RISCVSATPMap satp_mode;
-> -#endif
-> -};
-> -
-> -typedef struct RISCVCPUConfig RISCVCPUConfig;
-> -
->  /*
->   * RISCVCPU:
->   * @env: #CPURISCVState
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> new file mode 100644
-> index 0000000000..c4a627d335
-> --- /dev/null
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -0,0 +1,136 @@
-> +/*
-> + * QEMU RISC-V CPU CFG
-> + *
-> + * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
-> + * Copyright (c) 2017-2018 SiFive, Inc.
-> + * Copyright (c) 2021-2023 PLCT Lab
-> + *
-> + * This program is free software; you can redistribute it and/or modify =
-it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOU=
-T
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
- for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License alo=
-ng with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#ifndef RISCV_CPU_CFG_H
-> +#define RISCV_CPU_CFG_H
-> +
-> +/*
-> + * map is a 16-bit bitmap: the most significant set bit in map is the ma=
-ximum
-> + * satp mode that is supported. It may be chosen by the user and must re=
-spect
-> + * what qemu implements (valid_1_10_32/64) and what the hw is capable of
-> + * (supported bitmap below).
-> + *
-> + * init is a 16-bit bitmap used to make sure the user selected a correct
-> + * configuration as per the specification.
-> + *
-> + * supported is a 16-bit bitmap used to reflect the hw capabilities.
-> + */
-> +typedef struct {
-> +    uint16_t map, init, supported;
-> +} RISCVSATPMap;
-> +
-> +struct RISCVCPUConfig {
-> +    bool ext_zba;
-> +    bool ext_zbb;
-> +    bool ext_zbc;
-> +    bool ext_zbkb;
-> +    bool ext_zbkc;
-> +    bool ext_zbkx;
-> +    bool ext_zbs;
-> +    bool ext_zca;
-> +    bool ext_zcb;
-> +    bool ext_zcd;
-> +    bool ext_zce;
-> +    bool ext_zcf;
-> +    bool ext_zcmp;
-> +    bool ext_zcmt;
-> +    bool ext_zk;
-> +    bool ext_zkn;
-> +    bool ext_zknd;
-> +    bool ext_zkne;
-> +    bool ext_zknh;
-> +    bool ext_zkr;
-> +    bool ext_zks;
-> +    bool ext_zksed;
-> +    bool ext_zksh;
-> +    bool ext_zkt;
-> +    bool ext_ifencei;
-> +    bool ext_icsr;
-> +    bool ext_icbom;
-> +    bool ext_icboz;
-> +    bool ext_zicond;
-> +    bool ext_zihintpause;
-> +    bool ext_smstateen;
-> +    bool ext_sstc;
-> +    bool ext_svadu;
-> +    bool ext_svinval;
-> +    bool ext_svnapot;
-> +    bool ext_svpbmt;
-> +    bool ext_zdinx;
-> +    bool ext_zawrs;
-> +    bool ext_zfh;
-> +    bool ext_zfhmin;
-> +    bool ext_zfinx;
-> +    bool ext_zhinx;
-> +    bool ext_zhinxmin;
-> +    bool ext_zve32f;
-> +    bool ext_zve64f;
-> +    bool ext_zve64d;
-> +    bool ext_zmmul;
-> +    bool ext_zvfh;
-> +    bool ext_zvfhmin;
-> +    bool ext_smaia;
-> +    bool ext_ssaia;
-> +    bool ext_sscofpmf;
-> +    bool rvv_ta_all_1s;
-> +    bool rvv_ma_all_1s;
-> +
-> +    uint32_t mvendorid;
-> +    uint64_t marchid;
-> +    uint64_t mimpid;
-> +
-> +    /* Vendor-specific custom extensions */
-> +    bool ext_xtheadba;
-> +    bool ext_xtheadbb;
-> +    bool ext_xtheadbs;
-> +    bool ext_xtheadcmo;
-> +    bool ext_xtheadcondmov;
-> +    bool ext_xtheadfmemidx;
-> +    bool ext_xtheadfmv;
-> +    bool ext_xtheadmac;
-> +    bool ext_xtheadmemidx;
-> +    bool ext_xtheadmempair;
-> +    bool ext_xtheadsync;
-> +    bool ext_XVentanaCondOps;
-> +
-> +    uint8_t pmu_num;
-> +    char *priv_spec;
-> +    char *user_spec;
-> +    char *bext_spec;
-> +    char *vext_spec;
-> +    uint16_t vlen;
-> +    uint16_t elen;
-> +    uint16_t cbom_blocksize;
-> +    uint16_t cboz_blocksize;
-> +    bool mmu;
-> +    bool pmp;
-> +    bool epmp;
-> +    bool debug;
-> +    bool misa_w;
-> +
-> +    bool short_isa_string;
-> +
-> +#ifndef CONFIG_USER_ONLY
-> +    RISCVSATPMap satp_mode;
-> +#endif
-> +};
-> +
-> +typedef struct RISCVCPUConfig RISCVCPUConfig;
-> +#endif
+>    /* Options for Capstone disassembly.  */
+>    int cap_arch;
 > --
 > 2.25.1
 >
