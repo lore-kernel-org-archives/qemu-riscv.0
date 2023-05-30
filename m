@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5802DC7EE2F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 May 2023 13:20:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF198C77B7A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 May 2023 13:23:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q3zGG-0002Im-2V; Tue, 30 May 2023 09:19:40 -0400
+	id 1q3zG6-00028E-1B; Tue, 30 May 2023 09:19:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1q3zFk-00022O-Bd
- for qemu-riscv@nongnu.org; Tue, 30 May 2023 09:19:14 -0400
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ id 1q3zFc-0001zO-AR
+ for qemu-riscv@nongnu.org; Tue, 30 May 2023 09:19:02 -0400
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1q3zFd-0006uS-1u
- for qemu-riscv@nongnu.org; Tue, 30 May 2023 09:19:05 -0400
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-96f588bc322so652976766b.1
- for <qemu-riscv@nongnu.org>; Tue, 30 May 2023 06:19:00 -0700 (PDT)
+ id 1q3zFS-0006pk-MM
+ for qemu-riscv@nongnu.org; Tue, 30 May 2023 09:18:56 -0400
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-96fab30d1e1so922868766b.0
+ for <qemu-riscv@nongnu.org>; Tue, 30 May 2023 06:18:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1685452739; x=1688044739;
+ d=vrull.eu; s=google; t=1685452728; x=1688044728;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a4xJTgvhHO7Sx1vWnjAqcAnL/oe/Kxj4MwIDibLisKQ=;
- b=JDwJdDH+dxJbNhCrQn48G/38ftdK+Aqec5R7gjHNjrxc8z2HnPZMIru4xHdzRVnzkY
- aLU/umaMP1IjQA6KZPuQ4oJKG95SOZF7nlbJTigJZYQ4DUNvQAw+rahQBSiQkswSRoqQ
- TjFDAm+MsH1fuuJbpQ2VZlHfS5DbQ1IQxuGMSXF0ojSplcSkHt4zvpmpmyTjtoPfsF7p
- /U1dMKcfAimTZI7hg+h8dXVXNHjeuahYnqh+GivQWT1zFHntjkQhFEjYIt/tYGLs/Uqt
- ZIOrFmSQnwM32fOe2huFBj0qnnO6m88g35weOeF6gf9KCV0/Kr2NCCFM9XrD0u/dPYac
- tFNA==
+ bh=6lN5eouJcfjPPZk9JC9Sc0CdKdmmbFl74Xe8HWwm7eI=;
+ b=UbV+kmvIzmjGtJspyF0GeX75mHy8X19hO9LnBtl1RsrJubk5B6DXJSdwWeQnztIsOP
+ FVjNOa+zzw8GWLQ4+m+FlVMBnCQ3D6Oh9jx6lDsv5hFYZ5p7DpkPy0b57Znn0ZA4P2cY
+ hvwzuBdkQmW9Z4ioLeZssDpG7ydAZrpLzeAh8uJ0YtY0n4D106Ouv8NNBQdC3Db/x0S8
+ CJkpJ9OU27ZpNFAJIav1fus0C9t5z45W83JHhhBTpDiivv87VDJuMD2KaY9PvXMVZSfR
+ r+9674JvoTWZOTnD6UgEyMbJC8B0lC4biVUiV+NsR00Moz3dsPblQUEyKNzGAb0Tx6dX
+ 2Odw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685452739; x=1688044739;
+ d=1e100.net; s=20221208; t=1685452728; x=1688044728;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a4xJTgvhHO7Sx1vWnjAqcAnL/oe/Kxj4MwIDibLisKQ=;
- b=jZAsmB/K62Wc/OhXLF1uJc+r6gaJC6v3NprSMEDR0FChkpj9e3RZsji+YVHABh5LYM
- gR40mqktJdX0LNT6xn93ReTqWWtECZWS+6nPzV/fRt85RFqYT9PdSm+bJTKeJzMQ6atO
- Cmt8boncWcxPt0KKippHGsH6hvnlU4ukiCfxd4B3bNpQWj3npJvswMNPQS8EzxvAsMcn
- tt/ZUvKtFwLmrFvtPOkLg6cswVJT6IebtIsVghreD4RqJtBsRs21eWz1W8aGZSAQQTGx
- 3/+1xEEOnIxv/y09NYdJB0xm6/cVs4sEgbI9ZikUpBWJ2CzyxB3dsGsh+cxECIJ6DAVr
- 5rPw==
-X-Gm-Message-State: AC+VfDyYxj0bxpXP58nzAnCql5iL/4aj7ulWqkbuCzyZci6Cy7hvxpjT
- 0vVnF4QedXHhiCLKy7ppyPmUeWC7AoXHA8QcAjE=
-X-Google-Smtp-Source: ACHHUZ7eVgiyjuS7QMiHiLnHGLY/nGFROL5kxTemYNTY3nnLllnZG0wfNd6sEoZyefKGkCMPIkI8yQ==
-X-Received: by 2002:a17:907:62a1:b0:974:1839:11f2 with SMTP id
- nd33-20020a17090762a100b00974183911f2mr2389776ejc.0.1685452738530; 
- Tue, 30 May 2023 06:18:58 -0700 (PDT)
+ bh=6lN5eouJcfjPPZk9JC9Sc0CdKdmmbFl74Xe8HWwm7eI=;
+ b=FxFkbvn6n39jBR471ff5y39NVMwm+7bVGM8EjsvzMcsLjHG98BhPmvf84N7iTlLkLW
+ psLj9P/4eCjTfF5LrawaFLlEQTI+8omr/Iag3Y7WFCQtbkGVh8Q5jTDAGikQYRQKDf6Q
+ nYBPVY9Jvs+GRtKQZMj2jDuPOn2jroy7UiYXREmMKInl9JaifYiovRMWeDsjHqp7DfyP
+ LfbRYi84IPFuo/kfuMqscdBFxyKr/RfyYkGmBbQF0hmt30Yk3kbJrhnITCeLgKlMqbPl
+ db7Yx+zqlDNdo776kLQLyRQDJArGSUb9mGWLGQs44aJy4Df+Ocg59M+w8p1iNNsGc3Nt
+ yqnA==
+X-Gm-Message-State: AC+VfDz73HoonHvUR1zuqH9ifdUSlaYQkr9x3WAtUVZJav73sPDXT1/y
+ 4uKlD6wddl0CY+AjYQD6zxsoEEkQbRCT6hW3Qcc=
+X-Google-Smtp-Source: ACHHUZ7fCzVIUsAbBT518LlZVMbp7shwSapV80KMelWOKp8/6zku0vJFFHshskSI1Rvic/EZiKhvXQ==
+X-Received: by 2002:a17:906:ee88:b0:96f:aed9:2520 with SMTP id
+ wt8-20020a170906ee8800b0096faed92520mr1997597ejb.21.1685452728440; 
+ Tue, 30 May 2023 06:18:48 -0700 (PDT)
 Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
  [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- le8-20020a170907170800b0096f803afbe3sm7376156ejc.66.2023.05.30.06.18.57
+ le8-20020a170907170800b0096f803afbe3sm7376156ejc.66.2023.05.30.06.18.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 May 2023 06:18:58 -0700 (PDT)
+ Tue, 30 May 2023 06:18:47 -0700 (PDT)
 From: Christoph Muellner <christoph.muellner@vrull.eu>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -67,20 +67,19 @@ To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
- Alistair Francis <Alistair.Francis@wdc.com>,
  Weiwei Li <liweiwei@iscas.ac.cn>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 9/9] disas/riscv: Add support for XThead* instructions
-Date: Tue, 30 May 2023 15:18:43 +0200
-Message-Id: <20230530131843.1186637-10-christoph.muellner@vrull.eu>
+Subject: [PATCH 1/9] target/riscv: Use xl instead of mxl for disassemble
+Date: Tue, 30 May 2023 15:18:35 +0200
+Message-Id: <20230530131843.1186637-2-christoph.muellner@vrull.eu>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
 References: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x62a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::631;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,954 +102,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Christoph Müllner <christoph.muellner@vrull.eu>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
-Support for emulating XThead* instruction has been added recently.
-This patch adds support for these instructions to the RISC-V disassembler.
+Disassemble function(plugin_disas, target_disas, monitor_disas) will
+always call set_disas_info before disassembling instructions.
 
-Co-developed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+plugin_disas  and target_disas will always be called under a TB, which
+has the same XLEN.
+
+We can't ensure that monitor_disas will always be called under a TB,
+but current XLEN will still be a better choice, thus we can ensure at
+least the disassemble of the nearest one TB is right.
+
+Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 ---
- disas/meson.build         |   1 +
- disas/riscv-xthead.c      | 707 ++++++++++++++++++++++++++++++++++++++
- disas/riscv-xthead.h      |  28 ++
- disas/riscv.c             |  69 ++++
- disas/riscv.h             |  12 +
- target/riscv/cpu-config.h |  11 +
- 6 files changed, 828 insertions(+)
- create mode 100644 disas/riscv-xthead.c
- create mode 100644 disas/riscv-xthead.h
+ target/riscv/cpu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/disas/meson.build b/disas/meson.build
-index e0ee326411..8f64e378f9 100644
---- a/disas/meson.build
-+++ b/disas/meson.build
-@@ -8,6 +8,7 @@ common_ss.add(when: 'CONFIG_MIPS_DIS', if_true: files('mips.c', 'nanomips.c'))
- common_ss.add(when: 'CONFIG_NIOS2_DIS', if_true: files('nios2.c'))
- common_ss.add(when: 'CONFIG_RISCV_DIS', if_true: files(
-     'riscv.c',
-+    'riscv-xthead.c',
-     'riscv-xventana.c'
- ))
- common_ss.add(when: 'CONFIG_SH4_DIS', if_true: files('sh4.c'))
-diff --git a/disas/riscv-xthead.c b/disas/riscv-xthead.c
-new file mode 100644
-index 0000000000..99da679d16
---- /dev/null
-+++ b/disas/riscv-xthead.c
-@@ -0,0 +1,707 @@
-+/*
-+ * QEMU RISC-V Disassembler for xthead.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "disas/riscv.h"
-+#include "disas/riscv-xthead.h"
-+
-+typedef enum {
-+    /* 0 is reserved for rv_op_illegal. */
-+    /* XTheadBa */
-+    rv_op_th_addsl = 1,
-+    /* XTheadBb */
-+    rv_op_th_srri,
-+    rv_op_th_srriw,
-+    rv_op_th_ext,
-+    rv_op_th_extu,
-+    rv_op_th_ff0,
-+    rv_op_th_ff1,
-+    rv_op_th_rev,
-+    rv_op_th_revw,
-+    rv_op_th_tstnbz,
-+    /* XTheadBs */
-+    rv_op_th_tst,
-+    /* XTheadCmo */
-+    rv_op_th_dcache_call,
-+    rv_op_th_dcache_ciall,
-+    rv_op_th_dcache_iall,
-+    rv_op_th_dcache_cpa,
-+    rv_op_th_dcache_cipa,
-+    rv_op_th_dcache_ipa,
-+    rv_op_th_dcache_cva,
-+    rv_op_th_dcache_civa,
-+    rv_op_th_dcache_iva,
-+    rv_op_th_dcache_csw,
-+    rv_op_th_dcache_cisw,
-+    rv_op_th_dcache_isw,
-+    rv_op_th_dcache_cpal1,
-+    rv_op_th_dcache_cval1,
-+    rv_op_th_icache_iall,
-+    rv_op_th_icache_ialls,
-+    rv_op_th_icache_ipa,
-+    rv_op_th_icache_iva,
-+    rv_op_th_l2cache_call,
-+    rv_op_th_l2cache_ciall,
-+    rv_op_th_l2cache_iall,
-+    /* XTheadCondMov */
-+    rv_op_th_mveqz,
-+    rv_op_th_mvnez,
-+    /* XTheadFMemIdx */
-+    rv_op_th_flrd,
-+    rv_op_th_flrw,
-+    rv_op_th_flurd,
-+    rv_op_th_flurw,
-+    rv_op_th_fsrd,
-+    rv_op_th_fsrw,
-+    rv_op_th_fsurd,
-+    rv_op_th_fsurw,
-+    /* XTheadFmv */
-+    rv_op_th_fmv_hw_x,
-+    rv_op_th_fmv_x_hw,
-+    /* XTheadMac */
-+    rv_op_th_mula,
-+    rv_op_th_mulah,
-+    rv_op_th_mulaw,
-+    rv_op_th_muls,
-+    rv_op_th_mulsw,
-+    rv_op_th_mulsh,
-+    /* XTheadMemIdx */
-+    rv_op_th_lbia,
-+    rv_op_th_lbib,
-+    rv_op_th_lbuia,
-+    rv_op_th_lbuib,
-+    rv_op_th_lhia,
-+    rv_op_th_lhib,
-+    rv_op_th_lhuia,
-+    rv_op_th_lhuib,
-+    rv_op_th_lwia,
-+    rv_op_th_lwib,
-+    rv_op_th_lwuia,
-+    rv_op_th_lwuib,
-+    rv_op_th_ldia,
-+    rv_op_th_ldib,
-+    rv_op_th_sbia,
-+    rv_op_th_sbib,
-+    rv_op_th_shia,
-+    rv_op_th_shib,
-+    rv_op_th_swia,
-+    rv_op_th_swib,
-+    rv_op_th_sdia,
-+    rv_op_th_sdib,
-+    rv_op_th_lrb,
-+    rv_op_th_lrbu,
-+    rv_op_th_lrh,
-+    rv_op_th_lrhu,
-+    rv_op_th_lrw,
-+    rv_op_th_lrwu,
-+    rv_op_th_lrd,
-+    rv_op_th_srb,
-+    rv_op_th_srh,
-+    rv_op_th_srw,
-+    rv_op_th_srd,
-+    rv_op_th_lurb,
-+    rv_op_th_lurbu,
-+    rv_op_th_lurh,
-+    rv_op_th_lurhu,
-+    rv_op_th_lurw,
-+    rv_op_th_lurwu,
-+    rv_op_th_lurd,
-+    rv_op_th_surb,
-+    rv_op_th_surh,
-+    rv_op_th_surw,
-+    rv_op_th_surd,
-+    /* XTheadMemPair */
-+    rv_op_th_ldd,
-+    rv_op_th_lwd,
-+    rv_op_th_lwud,
-+    rv_op_th_sdd,
-+    rv_op_th_swd,
-+    /* XTheadSync */
-+    rv_op_th_sfence_vmas,
-+    rv_op_th_sync,
-+    rv_op_th_sync_i,
-+    rv_op_th_sync_is,
-+    rv_op_th_sync_s,
-+} rv_xthead_op;
-+
-+const rv_opcode_data xthead_opcode_data[] = {
-+    { "th.illegal", rv_codec_illegal, rv_fmt_none, NULL, 0, 0, 0 },
-+    /* XTheadBa */
-+    { "th.addsl", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    /* XTheadBb */
-+    { "th.srri", rv_codec_r2_imm6, rv_fmt_rd_rs1_imm, NULL, 0, 0, 0 },
-+    { "th.srriw", rv_codec_r2_imm5, rv_fmt_rd_rs1_imm, NULL, 0, 0, 0 },
-+    { "th.ext", rv_codec_r2_immhl, rv_fmt_rd_rs1_immh_imml, NULL, 0, 0, 0 },
-+    { "th.extu", rv_codec_r2_immhl, rv_fmt_rd_rs1_immh_imml, NULL, 0, 0, 0 },
-+    { "th.ff0", rv_codec_r2, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
-+    { "th.ff1", rv_codec_r2, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
-+    { "th.rev", rv_codec_r2, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
-+    { "th.revw", rv_codec_r2, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
-+    { "th.tstnbz", rv_codec_r2, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
-+    /* XTheadBs */
-+    { "th.tst", rv_codec_r2_imm6, rv_fmt_rd_rs1_imm, NULL, 0, 0, 0 },
-+    /* XTheadCmo */
-+    { "th.dcache.call", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "th.dcache.ciall", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "th.dcache.iall", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "th.dcache.cpa", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.dcache.cipa", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.dcache.ipa", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.dcache.cva", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.dcache.civa", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.dcache.iva", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.dcache.csw", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.dcache.cisw", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.dcache.isw", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.dcache.cpal1", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.dcache.cval1", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.icache.iall", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "th.icache.ialls", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "th.icache.ipa", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.icache.iva", rv_codec_r, rv_fmt_rs1, NULL, 0, 0, 0 },
-+    { "th.l2cache.call", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "th.l2cache.ciall", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "th.l2cache.iall", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    /* XTheadCondMov */
-+    { "th.mveqz", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
-+    { "th.mvnez", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
-+    /* XTheadFMemIdx */
-+    { "th.flrd", rv_codec_r_imm2, rv_fmt_frd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.flrw", rv_codec_r_imm2, rv_fmt_frd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.flurd", rv_codec_r_imm2, rv_fmt_frd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.flurw", rv_codec_r_imm2, rv_fmt_frd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.fsrd", rv_codec_r_imm2, rv_fmt_frd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.fsrw", rv_codec_r_imm2, rv_fmt_frd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.fsurd", rv_codec_r_imm2, rv_fmt_frd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.fsurw", rv_codec_r_imm2, rv_fmt_frd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    /* XTheadFmv */
-+    { "th.fmv.hw.x", rv_codec_r, rv_fmt_rd_frs1, NULL, 0, 0, 0 },
-+    { "th.fmv.x.hw", rv_codec_r, rv_fmt_rd_frs1, NULL, 0, 0, 0 },
-+    /* XTheadMac */
-+    { "th.mula", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
-+    { "th.mulaw", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
-+    { "th.mulah", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
-+    { "th.muls", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
-+    { "th.mulsw", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
-+    { "th.mulsh", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
-+    /* XTheadMemIdx */
-+    { "th.lbia", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.lbib", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml, NULL, 0, 0, 0 },
-+    { "th.lbuia", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.lbuib", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.lhia", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.lhib", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.lhuia", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.lhuib", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.lwia", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.lwib", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.lwuia", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.lwuib", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.ldia", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.ldib", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.sbia", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.sbib", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.shia", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.shib", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.swia", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.swib", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.sdia", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.sdib", rv_codec_r2_imm2_imm5, rv_fmt_rd_rs1_immh_imml_addr, NULL, 0, 0, 0 },
-+    { "th.lrb", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lrbu", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lrh", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lrhu", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lrw", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lrwu", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lrd", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.srb", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.srh", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.srw", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.srd", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lurb", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lurbu", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lurh", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lurhu", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lurw", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lurwu", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.lurd", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.surb", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.surh", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.surw", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    { "th.surd", rv_codec_r_imm2, rv_fmt_rd_rs1_rs2_imm, NULL, 0, 0, 0 },
-+    /* XTheadMemPair */
-+    { "th.ldd", rv_codec_r_imm2, rv_fmt_rd2_imm, NULL, 0, 0, 0 },
-+    { "th.lwd", rv_codec_r_imm2, rv_fmt_rd2_imm, NULL, 0, 0, 0 },
-+    { "th.lwud", rv_codec_r_imm2, rv_fmt_rd2_imm, NULL, 0, 0, 0 },
-+    { "th.sdd", rv_codec_r_imm2, rv_fmt_rd2_imm, NULL, 0, 0, 0 },
-+    { "th.swd", rv_codec_r_imm2, rv_fmt_rd2_imm, NULL, 0, 0, 0 },
-+    /* XTheadSync */
-+    { "th.sfence.vmas", rv_codec_r, rv_fmt_rs1_rs2, NULL, 0, 0, 0 },
-+    { "th.sync", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "th.sync.i", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "th.sync.is", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+    { "th.sync.s", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
-+};
-+
-+void decode_xtheadba(rv_decode *dec, rv_isa isa)
-+{
-+    rv_inst inst = dec->inst;
-+    rv_opcode op = rv_op_illegal;
-+
-+    switch (((inst >> 0) & 0b11)) {
-+    case 3:
-+        switch (((inst >> 2) & 0b11111)) {
-+        case 2:
-+            /* custom-0 */
-+            switch ((inst >> 12) & 0b111) {
-+            case 1:
-+                switch ((inst >> 25) & 0b1111111) {
-+                case 0b0000000:
-+                case 0b0000001:
-+                case 0b0000010:
-+                case 0b0000011: op = rv_op_th_addsl; break;
-+                }
-+                break;
-+            }
-+            break;
-+            /* custom-0 */
-+        }
-+        break;
-+    }
-+
-+    dec->op = op;
-+}
-+
-+void decode_xtheadbb(rv_decode *dec, rv_isa isa)
-+{
-+    rv_inst inst = dec->inst;
-+    rv_opcode op = rv_op_illegal;
-+
-+    switch (((inst >> 0) & 0b11)) {
-+    case 3:
-+        switch (((inst >> 2) & 0b11111)) {
-+        case 2:
-+            /* custom-0 */
-+            switch ((inst >> 12) & 0b111) {
-+            case 1:
-+                switch ((inst >> 25) & 0b1111111) {
-+                case 0b0001010: op = rv_op_th_srriw; break;
-+                case 0b1000000:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_tstnbz;
-+                    }
-+                    break;
-+                case 0b1000001:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_rev;
-+                    }
-+                    break;
-+                case 0b1000010:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_ff0;
-+                    }
-+                    break;
-+                case 0b1000011:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_ff1;
-+                    }
-+                    break;
-+                case 0b1000100:
-+                case 0b1001000:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_revw;
-+                    }
-+                    break;
-+                case 0b0000100:
-+                case 0b0000101: op = rv_op_th_srri; break;
-+                }
-+                break;
-+            case 2: op = rv_op_th_ext; break;
-+            case 3: op = rv_op_th_extu; break;
-+            }
-+            break;
-+            /* custom-0 */
-+        }
-+        break;
-+    }
-+
-+    dec->op = op;
-+}
-+
-+void decode_xtheadbs(rv_decode *dec, rv_isa isa)
-+{
-+    rv_inst inst = dec->inst;
-+    rv_opcode op = rv_op_illegal;
-+
-+    switch (((inst >> 0) & 0b11)) {
-+    case 3:
-+        switch (((inst >> 2) & 0b11111)) {
-+        case 2:
-+            /* custom-0 */
-+            switch ((inst >> 12) & 0b111) {
-+            case 1:
-+                switch ((inst >> 26) & 0b111111) {
-+                case 0b100010: op = rv_op_th_tst; break;
-+                }
-+                break;
-+            }
-+            break;
-+            /* custom-0 */
-+        }
-+        break;
-+    }
-+
-+    dec->op = op;
-+}
-+
-+void decode_xtheadcmo(rv_decode *dec, rv_isa isa)
-+{
-+    rv_inst inst = dec->inst;
-+    rv_opcode op = rv_op_illegal;
-+
-+    switch (((inst >> 0) & 0b11)) {
-+    case 3:
-+        switch (((inst >> 2) & 0b11111)) {
-+        case 2:
-+            /* custom-0 */
-+            switch ((inst >> 12) & 0b111) {
-+            case 0:
-+                switch ((inst >> 20 & 0b111111111111)) {
-+                case 0b000000000001:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_dcache_call;
-+                    }
-+                    break;
-+                case 0b000000000011:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_dcache_ciall;
-+                    }
-+                    break;
-+                case 0b000000000010:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_dcache_iall;
-+                    }
-+                    break;
-+                case 0b000000101001: op = rv_op_th_dcache_cpa; break;
-+                case 0b000000101011: op = rv_op_th_dcache_cipa; break;
-+                case 0b000000101010: op = rv_op_th_dcache_ipa; break;
-+                case 0b000000100101: op = rv_op_th_dcache_cva; break;
-+                case 0b000000100111: op = rv_op_th_dcache_civa; break;
-+                case 0b000000100110: op = rv_op_th_dcache_iva; break;
-+                case 0b000000100001: op = rv_op_th_dcache_csw; break;
-+                case 0b000000100011: op = rv_op_th_dcache_cisw; break;
-+                case 0b000000100010: op = rv_op_th_dcache_isw; break;
-+                case 0b000000101000: op = rv_op_th_dcache_cpal1; break;
-+                case 0b000000100100: op = rv_op_th_dcache_cval1; break;
-+                case 0b000000010000:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_icache_iall;
-+                    }
-+                    break;
-+                case 0b000000010001:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_icache_ialls;
-+                    }
-+                    break;
-+                case 0b000000111000: op = rv_op_th_icache_ipa; break;
-+                case 0b000000110000: op = rv_op_th_icache_iva; break;
-+                case 0b000000010101:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_l2cache_call;
-+                    }
-+                    break;
-+                case 0b000000010111:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_l2cache_ciall;
-+                    }
-+                    break;
-+                case 0b000000010110:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_l2cache_iall;
-+                    }
-+                    break;
-+                }
-+                break;
-+            }
-+            break;
-+            /* custom-0 */
-+        }
-+        break;
-+    }
-+
-+    dec->op = op;
-+}
-+
-+void decode_xtheadcondmov(rv_decode *dec, rv_isa isa)
-+{
-+    rv_inst inst = dec->inst;
-+    rv_opcode op = rv_op_illegal;
-+
-+    switch (((inst >> 0) & 0b11)) {
-+    case 3:
-+        switch (((inst >> 2) & 0b11111)) {
-+        case 2:
-+            /* custom-0 */
-+            switch ((inst >> 12) & 0b111) {
-+            case 1:
-+                switch ((inst >> 25) & 0b1111111) {
-+                case 0b0100000: op = rv_op_th_mveqz; break;
-+                case 0b0100001: op = rv_op_th_mvnez; break;
-+                }
-+                break;
-+            }
-+            break;
-+            /* custom-0 */
-+        }
-+        break;
-+    }
-+
-+    dec->op = op;
-+}
-+
-+void decode_xtheadfmemidx(rv_decode *dec, rv_isa isa)
-+{
-+    rv_inst inst = dec->inst;
-+    rv_opcode op = rv_op_illegal;
-+
-+    switch (((inst >> 0) & 0b11)) {
-+    case 3:
-+        switch (((inst >> 2) & 0b11111)) {
-+        case 2:
-+            /* custom-0 */
-+            switch ((inst >> 12) & 0b111) {
-+            case 6:
-+                switch ((inst >> 27) & 0b11111) {
-+                case 8: op = rv_op_th_flrw; break;
-+                case 10: op = rv_op_th_flurw; break;
-+                case 12: op = rv_op_th_flrd; break;
-+                case 14: op = rv_op_th_flurd; break;
-+                }
-+                break;
-+            case 7:
-+                switch ((inst >> 27) & 0b11111) {
-+                case 8: op = rv_op_th_fsrw; break;
-+                case 10: op = rv_op_th_fsurw; break;
-+                case 12: op = rv_op_th_fsrd; break;
-+                case 14: op = rv_op_th_fsurd; break;
-+                }
-+                break;
-+            }
-+            break;
-+            /* custom-0 */
-+        }
-+        break;
-+    }
-+
-+    dec->op = op;
-+}
-+
-+void decode_xtheadfmv(rv_decode *dec, rv_isa isa)
-+{
-+    rv_inst inst = dec->inst;
-+    rv_opcode op = rv_op_illegal;
-+
-+    switch (((inst >> 0) & 0b11)) {
-+    case 3:
-+        switch (((inst >> 2) & 0b11111)) {
-+        case 2:
-+            /* custom-0 */
-+            switch ((inst >> 12) & 0b111) {
-+            case 1:
-+                switch ((inst >> 25) & 0b1111111) {
-+                case 0b1010000:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_fmv_hw_x;
-+                    }
-+                    break;
-+                case 0b1100000:
-+                    if (((inst >> 20) & 0b11111) == 0) {
-+                        op = rv_op_th_fmv_x_hw;
-+                    }
-+                    break;
-+                }
-+                break;
-+            }
-+            break;
-+            /* custom-0 */
-+        }
-+        break;
-+    }
-+
-+    dec->op = op;
-+}
-+
-+void decode_xtheadmac(rv_decode *dec, rv_isa isa)
-+{
-+    rv_inst inst = dec->inst;
-+    rv_opcode op = rv_op_illegal;
-+
-+    switch (((inst >> 0) & 0b11)) {
-+    case 3:
-+        switch (((inst >> 2) & 0b11111)) {
-+        case 2:
-+            /* custom-0 */
-+            switch ((inst >> 12) & 0b111) {
-+            case 1:
-+                switch ((inst >> 25) & 0b1111111) {
-+                case 0b0010000: op = rv_op_th_mula; break;
-+                case 0b0010001: op = rv_op_th_muls; break;
-+                case 0b0010010: op = rv_op_th_mulaw; break;
-+                case 0b0010011: op = rv_op_th_mulsw; break;
-+                case 0b0010100: op = rv_op_th_mulah; break;
-+                case 0b0010101: op = rv_op_th_mulsh; break;
-+                }
-+                break;
-+            }
-+            break;
-+            /* custom-0 */
-+        }
-+        break;
-+    }
-+
-+    dec->op = op;
-+}
-+
-+void decode_xtheadmemidx(rv_decode *dec, rv_isa isa)
-+{
-+    rv_inst inst = dec->inst;
-+    rv_opcode op = rv_op_illegal;
-+
-+    switch (((inst >> 0) & 0b11)) {
-+    case 3:
-+        switch (((inst >> 2) & 0b11111)) {
-+        case 2:
-+            /* custom-0 */
-+            switch ((inst >> 12) & 0b111) {
-+            case 4:
-+                switch ((inst >> 27) & 0b11111) {
-+                case 0: op = rv_op_th_lrb; break;
-+                case 1: op = rv_op_th_lbib; break;
-+                case 2: op = rv_op_th_lurb; break;
-+                case 3: op = rv_op_th_lbia; break;
-+                case 4: op = rv_op_th_lrh; break;
-+                case 5: op = rv_op_th_lhib; break;
-+                case 6: op = rv_op_th_lurh; break;
-+                case 7: op = rv_op_th_lhia; break;
-+                case 8: op = rv_op_th_lrw; break;
-+                case 9: op = rv_op_th_lwib; break;
-+                case 10: op = rv_op_th_lurw; break;
-+                case 11: op = rv_op_th_lwia; break;
-+                case 12: op = rv_op_th_lrd; break;
-+                case 13: op = rv_op_th_ldib; break;
-+                case 14: op = rv_op_th_lurd; break;
-+                case 15: op = rv_op_th_ldia; break;
-+                case 16: op = rv_op_th_lrbu; break;
-+                case 17: op = rv_op_th_lbuib; break;
-+                case 18: op = rv_op_th_lurbu; break;
-+                case 19: op = rv_op_th_lbuia; break;
-+                case 20: op = rv_op_th_lrhu; break;
-+                case 21: op = rv_op_th_lhuib; break;
-+                case 22: op = rv_op_th_lurhu; break;
-+                case 23: op = rv_op_th_lhuia; break;
-+                case 24: op = rv_op_th_lrwu; break;
-+                case 25: op = rv_op_th_lwuib; break;
-+                case 26: op = rv_op_th_lurwu; break;
-+                case 27: op = rv_op_th_lwuia; break;
-+                }
-+                break;
-+            case 5:
-+                switch ((inst >> 27) & 0b11111) {
-+                case 0: op = rv_op_th_srb; break;
-+                case 1: op = rv_op_th_sbib; break;
-+                case 2: op = rv_op_th_surb; break;
-+                case 3: op = rv_op_th_sbia; break;
-+                case 4: op = rv_op_th_srh; break;
-+                case 5: op = rv_op_th_shib; break;
-+                case 6: op = rv_op_th_surh; break;
-+                case 7: op = rv_op_th_shia; break;
-+                case 8: op = rv_op_th_srw; break;
-+                case 9: op = rv_op_th_swib; break;
-+                case 10: op = rv_op_th_surw; break;
-+                case 11: op = rv_op_th_swia; break;
-+                case 12: op = rv_op_th_srd; break;
-+                case 13: op = rv_op_th_sdib; break;
-+                case 14: op = rv_op_th_surd; break;
-+                case 15: op = rv_op_th_sdia; break;
-+                }
-+                break;
-+                break;
-+            }
-+            break;
-+            /* custom-0 */
-+        }
-+        break;
-+    }
-+
-+    dec->op = op;
-+}
-+
-+void decode_xtheadmempair(rv_decode *dec, rv_isa isa)
-+{
-+    rv_inst inst = dec->inst;
-+    rv_opcode op = rv_op_illegal;
-+
-+    switch (((inst >> 0) & 0b11)) {
-+    case 3:
-+        switch (((inst >> 2) & 0b11111)) {
-+        case 2:
-+            /* custom-0 */
-+            switch ((inst >> 12) & 0b111) {
-+            case 4:
-+                switch ((inst >> 27) & 0b11111) {
-+                case 28: op = rv_op_th_lwd; break;
-+                case 30: op = rv_op_th_lwud; break;
-+                case 31: op = rv_op_th_ldd; break;
-+                }
-+                break;
-+            case 5:
-+                switch ((inst >> 27) & 0b11111) {
-+                case 28: op = rv_op_th_swd; break;
-+                case 31: op = rv_op_th_sdd; break;
-+                }
-+                break;
-+            }
-+            break;
-+            /* custom-0 */
-+        }
-+        break;
-+    }
-+
-+    dec->op = op;
-+}
-+
-+void decode_xtheadsync(rv_decode *dec, rv_isa isa)
-+{
-+    rv_inst inst = dec->inst;
-+    rv_opcode op = rv_op_illegal;
-+
-+    switch (((inst >> 0) & 0b11)) {
-+    case 3:
-+        switch (((inst >> 2) & 0b11111)) {
-+        case 2:
-+            /* custom-0 */
-+            switch ((inst >> 12) & 0b111) {
-+            case 0:
-+                switch ((inst >> 25) & 0b1111111) {
-+                case 0b0000010: op = rv_op_th_sfence_vmas; break;
-+                case 0b0000000:
-+                    switch ((inst >> 20) & 0b11111) {
-+                    case 0b11000: op = rv_op_th_sync; break;
-+                    case 0b11010: op = rv_op_th_sync_i; break;
-+                    case 0b11011: op = rv_op_th_sync_is; break;
-+                    case 0b11001: op = rv_op_th_sync_s; break;
-+                    }
-+                    break;
-+                }
-+                break;
-+            }
-+            break;
-+            /* custom-0 */
-+        }
-+        break;
-+    }
-+
-+    dec->op = op;
-+}
-diff --git a/disas/riscv-xthead.h b/disas/riscv-xthead.h
-new file mode 100644
-index 0000000000..fcd42746e7
---- /dev/null
-+++ b/disas/riscv-xthead.h
-@@ -0,0 +1,28 @@
-+/*
-+ * QEMU disassembler -- RISC-V specific header (xthead*).
-+ *
-+ * Copyright (c) 2023 VRULL GmbH
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef DISAS_RISCV_XTHEAD_H
-+#define DISAS_RISCV_XTHEAD_H
-+
-+#include "disas/riscv.h"
-+
-+extern const rv_opcode_data xthead_opcode_data[];
-+
-+void decode_xtheadba(rv_decode *, rv_isa);
-+void decode_xtheadbb(rv_decode *, rv_isa);
-+void decode_xtheadbs(rv_decode *, rv_isa);
-+void decode_xtheadcmo(rv_decode *, rv_isa);
-+void decode_xtheadcondmov(rv_decode *, rv_isa);
-+void decode_xtheadfmemidx(rv_decode *, rv_isa);
-+void decode_xtheadfmv(rv_decode *, rv_isa);
-+void decode_xtheadmac(rv_decode *, rv_isa);
-+void decode_xtheadmemidx(rv_decode *, rv_isa);
-+void decode_xtheadmempair(rv_decode *, rv_isa);
-+void decode_xtheadsync(rv_decode *, rv_isa);
-+
-+#endif /* DISAS_RISCV_XTHEAD_H */
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 4f71333c45..b1a30928df 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -18,11 +18,13 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qemu/bitops.h"
- #include "disas/dis-asm.h"
- #include "disas/riscv.h"
- #include "target/riscv/cpu-config.h"
- 
- /* Vendor extensions */
-+#include "disas/riscv-xthead.h"
- #include "disas/riscv-xventana.h"
- 
- typedef enum {
-@@ -3784,6 +3786,26 @@ static uint32_t operand_zcmp_rlist(rv_inst inst)
-     return ((inst << 56) >> 60);
- }
- 
-+static uint32_t operand_imm6(rv_inst inst)
-+{
-+    return (inst << 38) >> 60;
-+}
-+
-+static uint32_t operand_imm2(rv_inst inst)
-+{
-+    return (inst << 37) >> 62;
-+}
-+
-+static uint32_t operand_immh(rv_inst inst)
-+{
-+    return (inst << 32) >> 58;
-+}
-+
-+static uint32_t operand_imml(rv_inst inst)
-+{
-+    return (inst << 38) >> 58;
-+}
-+
- static uint32_t calculate_stack_adj(rv_isa isa, uint32_t rlist, uint32_t spimm)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index db0875fb43..5b7818dbd1 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -818,8 +818,9 @@ static void riscv_cpu_reset_hold(Object *obj)
+ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
  {
-     int xlen_bytes_log2 = isa == rv64 ? 3 : 2;
-@@ -4148,6 +4170,38 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
-     case rv_codec_zcmt_jt:
-         dec->imm = operand_tbl_index(inst);
+     RISCVCPU *cpu = RISCV_CPU(s);
++    CPURISCVState *env = &cpu->env;
+ 
+-    switch (riscv_cpu_mxl(&cpu->env)) {
++    switch (env->xl) {
+     case MXL_RV32:
+         info->print_insn = print_insn_riscv32;
          break;
-+    case rv_codec_r2_imm5:
-+        dec->rd = operand_rd(inst);
-+        dec->rs1 = operand_rs1(inst);
-+        dec->imm = operand_rs2(inst);
-+        break;
-+    case rv_codec_r2:
-+        dec->rd = operand_rd(inst);
-+        dec->rs1 = operand_rs1(inst);
-+        break;
-+    case rv_codec_r2_imm6:
-+        dec->rd = operand_rd(inst);
-+        dec->rs1 = operand_rs1(inst);
-+        dec->imm = operand_imm6(inst);
-+        break;
-+    case rv_codec_r_imm2:
-+        dec->rd = operand_rd(inst);
-+        dec->rs1 = operand_rs1(inst);
-+        dec->rs2 = operand_rs2(inst);
-+        dec->imm = operand_imm2(inst);
-+        break;
-+    case rv_codec_r2_immhl:
-+        dec->rd = operand_rd(inst);
-+        dec->rs1 = operand_rs1(inst);
-+        dec->imm = operand_immh(inst);
-+        dec->imm1 = operand_imml(inst);
-+        break;
-+    case rv_codec_r2_imm2_imm5:
-+        dec->rd = operand_rd(inst);
-+        dec->rs1 = operand_rs1(inst);
-+        dec->imm = sextract32(operand_rs2(inst), 0, 5);
-+        dec->imm1 = operand_imm2(inst);
-+        break;
-     };
- }
- 
-@@ -4352,6 +4406,10 @@ static void format_inst(char *buf, size_t buflen, size_t tab, rv_decode *dec)
-             snprintf(tmp, sizeof(tmp), "%u", ((uint32_t)dec->imm & 0b11111));
-             append(buf, tmp, buflen);
-             break;
-+        case 'j':
-+            snprintf(tmp, sizeof(tmp), "%d", dec->imm1);
-+            append(buf, tmp, buflen);
-+            break;
-         case 'o':
-             snprintf(tmp, sizeof(tmp), "%d", dec->imm);
-             append(buf, tmp, buflen);
-@@ -4617,6 +4675,17 @@ disasm_inst(char *buf, size_t buflen, rv_isa isa, uint64_t pc, rv_inst inst,
-         void (*decode_func)(rv_decode *, rv_isa);
-     } decoders[] = {
-         { always_true_p, rvi_opcode_data, decode_inst_opcode },
-+        { has_xtheadba_p, xthead_opcode_data, decode_xtheadba },
-+        { has_xtheadbb_p, xthead_opcode_data, decode_xtheadbb },
-+        { has_xtheadbs_p, xthead_opcode_data, decode_xtheadbs },
-+        { has_xtheadcmo_p, xthead_opcode_data, decode_xtheadcmo },
-+        { has_xtheadcondmov_p, xthead_opcode_data, decode_xtheadcondmov },
-+        { has_xtheadfmemidx_p, xthead_opcode_data, decode_xtheadfmemidx },
-+        { has_xtheadfmv_p, xthead_opcode_data, decode_xtheadfmv },
-+        { has_xtheadmac_p, xthead_opcode_data, decode_xtheadmac },
-+        { has_xtheadmemidx_p, xthead_opcode_data, decode_xtheadmemidx },
-+        { has_xtheadmempair_p, xthead_opcode_data, decode_xtheadmempair },
-+        { has_xtheadsync_p, xthead_opcode_data, decode_xtheadsync },
-         { has_XVentanaCondOps_p, ventana_opcode_data, decode_xventanacondops },
-     };
- 
-diff --git a/disas/riscv.h b/disas/riscv.h
-index 188f03feeb..f7ece1bb53 100644
---- a/disas/riscv.h
-+++ b/disas/riscv.h
-@@ -158,6 +158,12 @@ typedef enum {
-     rv_codec_zcmp_cm_pushpop,
-     rv_codec_zcmp_cm_mv,
-     rv_codec_zcmt_jt,
-+    rv_codec_r2_imm5,
-+    rv_codec_r2,
-+    rv_codec_r2_imm6,
-+    rv_codec_r_imm2,
-+    rv_codec_r2_immhl,
-+    rv_codec_r2_imm2_imm5,
- } rv_codec;
- 
- /* structures */
-@@ -183,6 +189,7 @@ typedef struct {
-     uint64_t  inst;
-     const rv_opcode_data *opcode_data;
-     int32_t   imm;
-+    int32_t   imm1;
-     uint16_t  op;
-     uint8_t   codec;
-     uint8_t   rd;
-@@ -281,5 +288,10 @@ enum {
- #define rv_fmt_push_rlist             "O\tx,-i"
- #define rv_fmt_pop_rlist              "O\tx,i"
- #define rv_fmt_zcmt_index             "O\ti"
-+#define rv_fmt_rd_rs1_rs2_imm         "O\t0,1,2,i"
-+#define rv_fmt_frd_rs1_rs2_imm        "O\t3,1,2,i"
-+#define rv_fmt_rd_rs1_immh_imml       "O\t0,1,i,j"
-+#define rv_fmt_rd_rs1_immh_imml_addr  "O\t0,(1),i,j"
-+#define rv_fmt_rd2_imm                "O\t0,2,(1),i"
- 
- #endif /* DISAS_RISCV_H */
-diff --git a/target/riscv/cpu-config.h b/target/riscv/cpu-config.h
-index ca368af0b2..ae7c1a44ff 100644
---- a/target/riscv/cpu-config.h
-+++ b/target/riscv/cpu-config.h
-@@ -143,6 +143,17 @@ static inline bool has_xthead_p(const RISCVCPUConfig *cfg)
-         return cfg->ext_ ## ext ; \
-     }
- 
-+MATERIALISE_EXT_PREDICATE(xtheadba)
-+MATERIALISE_EXT_PREDICATE(xtheadbb)
-+MATERIALISE_EXT_PREDICATE(xtheadbs)
-+MATERIALISE_EXT_PREDICATE(xtheadcmo)
-+MATERIALISE_EXT_PREDICATE(xtheadcondmov)
-+MATERIALISE_EXT_PREDICATE(xtheadfmemidx)
-+MATERIALISE_EXT_PREDICATE(xtheadfmv)
-+MATERIALISE_EXT_PREDICATE(xtheadmac)
-+MATERIALISE_EXT_PREDICATE(xtheadmemidx)
-+MATERIALISE_EXT_PREDICATE(xtheadmempair)
-+MATERIALISE_EXT_PREDICATE(xtheadsync)
- MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
- 
- #endif /* RISCV_CPU_CONFIG_H */
 -- 
 2.40.1
 
