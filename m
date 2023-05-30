@@ -4,60 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC139C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 29 May 2023 12:18:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD685C77B7A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 May 2023 13:19:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q3bok-0000zl-3x; Mon, 29 May 2023 08:17:42 -0400
+	id 1q3zFe-00020w-S5; Tue, 30 May 2023 09:19:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q3boi-0000yC-CU; Mon, 29 May 2023 08:17:40 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q3bof-00052x-6k; Mon, 29 May 2023 08:17:40 -0400
-Received: from localhost.localdomain (unknown [61.165.37.98])
- by APP-05 (Coremail) with SMTP id zQCowADHzorRl3Rk4iJ2Bw--.20494S2;
- Mon, 29 May 2023 20:17:23 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH 0/4] target/riscv: Fix mstatus related problems
-Date: Mon, 29 May 2023 20:17:15 +0800
-Message-Id: <20230529121719.179507-1-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1q3zFV-0001xh-5E
+ for qemu-riscv@nongnu.org; Tue, 30 May 2023 09:18:54 -0400
+Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
+ id 1q3zFS-0006pF-LD
+ for qemu-riscv@nongnu.org; Tue, 30 May 2023 09:18:52 -0400
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-4f505aace48so1983066e87.0
+ for <qemu-riscv@nongnu.org>; Tue, 30 May 2023 06:18:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=vrull.eu; s=google; t=1685452727; x=1688044727;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=AdB1R3GwSXKwMts3lsX24zW2X1lAeBTH8CNKugZAd50=;
+ b=aMPw3xk9e/1Og9dHePHuMVNU9JOVdA+tKj65Z1WG6i1PhpnQRm0tngLcXdNCD9Kh56
+ izY3VZRez8Xn4VqbRc047qlTPwkdFkurHkUVJSZ5fE+0HhexQCl7IbCoOyS9MXgZDlxF
+ nyK6jIfpVW+ckKRAh0r8uVcbln6ItFR5QL2E0zE0+I/9lAcRuECDPWwYffonh8euiGEz
+ uDeut6KcF7rtaoflNBN9aXT7TAImnInGXAnQape46z+UUaqYAL9wSZJA2ViBNdAjamnL
+ 1orUAXVyXrzr1qXrPyZs9QjbHYgGQUTMfZ/uRLqRaINj0OcrWNwV01YBU/L3AMpCYLk0
+ 7l+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1685452727; x=1688044727;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AdB1R3GwSXKwMts3lsX24zW2X1lAeBTH8CNKugZAd50=;
+ b=URtqVb0yU+mtOkYrnalrY7dfJSNyxGw0BSg9x+/qfhnJ+v4Iq3ZT8hsThKrsXxEy48
+ AJ8M/fJeUi+jDit6+3H2J/8a0Mz6Sys+uoObj7FVQu68/PMrWQ8EcglRPJ/Y48tj5nsh
+ OELkErlx/E1qQMUdEayNUqxPLgcVPzjmtIZQWmNqBoHr8DT1FpQda5MtzRzjSgBG8Q09
+ B+97z1Mj6mmuyJhHVfv8pvZWOtplEMyP5VcB6x6+oTIk+n6oUV+XEJ0Q4qoJ1h7B0djo
+ Z+nz6nq9y1ryGcEjO/5H15e33lxtpt1o1vb5mlSWlplc6++axVLR+25sePsGjoYZqR+u
+ urIA==
+X-Gm-Message-State: AC+VfDwQZf4AoPqtSDipoUxmyuJ1+9mJbMATXA9K2cFLZ3a8560F1Vj8
+ SjvPvE++TpYHa5NwGJ30VEDglXH9UVMsH5Faz84=
+X-Google-Smtp-Source: ACHHUZ5kd0Jia3ed5Cy+bYfEihtlIPhXWW32nNpsbPfWHyyvSl4ro/Pv8X1ltnMSvF0E6AmWGLbUIA==
+X-Received: by 2002:a2e:9c18:0:b0:2a7:a719:5943 with SMTP id
+ s24-20020a2e9c18000000b002a7a7195943mr699169lji.40.1685452726832; 
+ Tue, 30 May 2023 06:18:46 -0700 (PDT)
+Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
+ [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
+ le8-20020a170907170800b0096f803afbe3sm7376156ejc.66.2023.05.30.06.18.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 May 2023 06:18:45 -0700 (PDT)
+From: Christoph Muellner <christoph.muellner@vrull.eu>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
+Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>
+Subject: [PATCH 0/9] disas/riscv: Add vendor extension support
+Date: Tue, 30 May 2023 15:18:34 +0200
+Message-Id: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowADHzorRl3Rk4iJ2Bw--.20494S2
-X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
- VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUYz7AC8VAFwI0_Gr0_Xr1l1xkIjI8I6I8E
- 6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28Cjx
- kF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0cI8I
- cVCY1x0267AKxVWUJVW8JwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2js
- IEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE
- 5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeV
- CFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l
- FIxGxcIEc7CjxVA2Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr
- 0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY
- 17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcV
- C0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY
- 6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa
- 73UjIFyTuYvjfUoOJ5UUUUU
-X-Originating-IP: [61.165.37.98]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::131;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-lf1-x131.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -74,23 +97,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patchset tries to fix some problems in the fields of mstatus, such as make MPV only work when MPP != PRM.
+From: Christoph Müllner <christoph.muellner@vrull.eu>
 
-The port is available here:
-https://github.com/plctlab/plct-qemu/tree/plct-mpv-upstream
+This series adds vendor extension support to the QEMU disassembler
+for RISC-V. The following vendor extensions are covered:
+* XThead{Ba,Bb,Bs,Cmo,CondMov,FMemIdx,Fmv,Mac,MemIdx,MemPair,Sync}
+* XVentanaCondOps
 
-Weiwei Li (4):
-  target/riscv: Make MPV only work when MPP != PRV_M
-  target/riscv: Remove check on mode for MPRV
-  target/riscv: Support MSTATUS.MPV/GVA only when RVH is enabled
-  target/riscv: Remove redundant assignment to SXL
+So far, there have been two attempts to add vendor extension support
+to the QEMU disassembler. The first one [1] was posted in August 2022
+by LIU Zhiwei and attempts to separate vendor extension specifics
+from standard extension code in combination with a patch that introduced
+support for XVentanaCondOps. The second one [2] was posted in March 2023
+by me and added XThead* support without separating the vendor extensions
+from the standard code.
 
- target/riscv/cpu_helper.c |  5 +++--
- target/riscv/csr.c        | 14 ++++----------
- target/riscv/op_helper.c  |  3 ++-
- 3 files changed, 9 insertions(+), 13 deletions(-)
+This patchset represents the third attempt to add vendor extension
+support to the QEMU disassembler. It adds all features of the previous
+attempts and integrates them into a patchset that uses the same
+mechanism for testing the extension availability like translate.c
+(using the booleans RISCVCPUConfig::ext_*).
+To achieve that, a couple of patches were needed to restructure
+the existing code.
+
+Note, that this patchset allows an instruction encoder function for each
+vendor extension, but operand decoding and instruction printing remains
+common code. This is irrelevant for XVentanaCondOps, but the patch for
+the XThead* extensions includes changes in riscv.c and riscv.h.
+This could be changed to force more separation with the cost of
+duplication.
+
+The first patch of this series is cherry-picked from LIU Zhiwei's series.
+It was reviewed by Alistair Francis and Richard Henderson, but never
+made it on master. I've added "Reviewed-by" tags to the commit.
+
+I've added "Co-developed-by" tags to those commits that are derived
+from the series of LIU Zhiwei.
+
+[1] https://lists.nongnu.org/archive/html/qemu-devel/2022-08/msg03662.html
+[2] https://lists.nongnu.org/archive/html/qemu-devel/2023-03/msg04566.html
+
+Christoph Müllner (8):
+  target/riscv: Factor out RISCVCPUConfig from cpu.h
+  disas/riscv: Move types/constants to new header file
+  disas/riscv: Make rv_op_illegal a shared enum value
+  disas/riscv: Encapsulate opcode_data into decode
+  target/riscv/cpu: Share RISCVCPUConfig with disassembler
+  disas/riscv: Provide infrastructure for vendor extensions
+  disas/riscv: Add support for XVentanaCondOps
+  disas/riscv: Add support for XThead* instructions
+
+LIU Zhiwei (1):
+  target/riscv: Use xl instead of mxl for disassemble
+
+ disas/meson.build         |   6 +-
+ disas/riscv-xthead.c      | 707 ++++++++++++++++++++++++++++++++++++++
+ disas/riscv-xthead.h      |  28 ++
+ disas/riscv-xventana.c    |  41 +++
+ disas/riscv-xventana.h    |  18 +
+ disas/riscv.c             | 384 ++++++---------------
+ disas/riscv.h             | 297 ++++++++++++++++
+ target/riscv/cpu-config.h | 159 +++++++++
+ target/riscv/cpu.c        |   6 +-
+ target/riscv/cpu.h        | 114 +-----
+ target/riscv/translate.c  |  27 +-
+ 11 files changed, 1374 insertions(+), 413 deletions(-)
+ create mode 100644 disas/riscv-xthead.c
+ create mode 100644 disas/riscv-xthead.h
+ create mode 100644 disas/riscv-xventana.c
+ create mode 100644 disas/riscv-xventana.h
+ create mode 100644 disas/riscv.h
+ create mode 100644 target/riscv/cpu-config.h
 
 -- 
-2.25.1
+2.40.1
 
 
