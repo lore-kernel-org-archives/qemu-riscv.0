@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3172C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 May 2023 13:19:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCAEFC77B73
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 May 2023 13:19:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q3zFf-000218-CR; Tue, 30 May 2023 09:19:03 -0400
+	id 1q3zG3-000261-OD; Tue, 30 May 2023 09:19:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1q3zFY-0001yf-HQ
- for qemu-riscv@nongnu.org; Tue, 30 May 2023 09:18:58 -0400
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ id 1q3zFc-0001zV-Eu
+ for qemu-riscv@nongnu.org; Tue, 30 May 2023 09:19:02 -0400
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1q3zFU-0006qC-QQ
- for qemu-riscv@nongnu.org; Tue, 30 May 2023 09:18:56 -0400
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5147dce372eso6540851a12.0
- for <qemu-riscv@nongnu.org>; Tue, 30 May 2023 06:18:51 -0700 (PDT)
+ id 1q3zFX-0006s5-F5
+ for qemu-riscv@nongnu.org; Tue, 30 May 2023 09:18:58 -0400
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-96f9cfa7eddso789797366b.2
+ for <qemu-riscv@nongnu.org>; Tue, 30 May 2023 06:18:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1685452730; x=1688044730;
+ d=vrull.eu; s=google; t=1685452733; x=1688044733;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HftqDWGmJlifsZRB0n8+hRGxCixGvedpfat79sGni7o=;
- b=ArwZpZWyvXuOsqS4dM9iluu1IzAEua6DkCGhdFuzk+qnWsIkRUB2i8T1EwtF/T/s87
- JCugeo/SAcMhjtoLvGF20ReWVoKmBJbnau1UhkkBqbemSk1ItPnweKdzEdBjP58uiccp
- K99CvG4vn0u4PWpkInu5DD4zTbSXJ0d0bWoCH+QgKgzm9VSelof2JDGqU9Hihe3jUfD6
- kF4tYjJfqmMmwuolRSpqb3cbu4bMWgKhIOzIh8qahLPuLYxsZbbGNPCJBScmsVKmDSWy
- LxYm7HiA1yZIUjTWhcQsoa3K+utBmgY6H0LJ1Iybs67QhLGSHnvu4/EbF4VYHLBEXMqC
- nb9g==
+ bh=C4JG+UvG+41BIzc1S6ISddiKMWiG+0KNIMC/YVrL7n8=;
+ b=XOiCGRpLEFRb29F1MR/0cBHKw3nO/uA8ovE4QuhGTr7uPkyzTiYK0QvabhL54Y8lr6
+ UaSvxVatkbv6ptK8ojtNlBL2TSHq7zqGHQ6ZsSNCpa108htnQZtjICf71wNl5VsMLywc
+ 8ukJGnik61Ofe05u8xaYKN5ZSuzm1WAk8zdSNFgHq+9jw/gmO+7yHGb09YPacGG6oWl7
+ BOPlt47/RPGsV6czIxvb6WbulZE9g75QafMGrYge9rxgqnEH0J9ZAV29pFX70MdhPBz0
+ DtXlPSmELwiUi0QX3AAhbE5EpZ9P7J8nlSz7wcfwHUKiFodKWWZUdYfm07U1W0CxruMg
+ kjkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685452730; x=1688044730;
+ d=1e100.net; s=20221208; t=1685452733; x=1688044733;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HftqDWGmJlifsZRB0n8+hRGxCixGvedpfat79sGni7o=;
- b=U7Gml2ZOybgoay/EWR/IRjYAAl3YBj5MgLnxUVXlG9psuob8HbNfSwmHYNVlkYEcm6
- CwYXVWK265BSvCwPtKbR2HexMSQF54exEozX6XE0RGI7d2y2PqMmbDhNZely/xE5UGL/
- EryWEzvl25Y/BS7o4mYw4hzXz/nu7cqzQzguYui9LlGB1orOYlcBm0KbrjVZv25ltvuo
- dqCytcFipG0MpAQOSFm3y6BlyX5DpovY6GR3Ftk9mw06UKGTrM9m/c7Y6bWiiiFG2L9K
- iFbO/pzBq9wYhgnmQiesgBa3M9w4MeymhRJEsO+3/kxX+9vD45j+sJd6KUq2ZImcDbZy
- Eosg==
-X-Gm-Message-State: AC+VfDyNGHK1yVEdViS7kqzPGAQIFX0+8LRN+ZqRVNSI2jZqz7qunrHy
- RmtIh44SmhQbnXaM8aC6M1qZY9azRMSzEo3Z1Tc=
-X-Google-Smtp-Source: ACHHUZ5/4z60gZL/5itfSYD/8yylHcCvv2cmB6IDL3d3Sbyw5RjRi4mHMwVa+7UzmTCz97E/OOneIw==
-X-Received: by 2002:a17:906:fd82:b0:96a:6f35:d1a5 with SMTP id
- xa2-20020a170906fd8200b0096a6f35d1a5mr2305484ejb.67.1685452729797; 
- Tue, 30 May 2023 06:18:49 -0700 (PDT)
+ bh=C4JG+UvG+41BIzc1S6ISddiKMWiG+0KNIMC/YVrL7n8=;
+ b=VVZSplJFEspRK4SS8X/mi7pe1Qdf/FOkbz6/efvQcVSonEHg2i/tQZaa9d+E+BTibM
+ gB94QuZ+lUN2CVtXFoKL0evxMatRMT0H+CxC6g3A+AWiW7Xx6BwWWZxxgrUXVsag8DrT
+ N7K9NMc+rPdRqfNH+iNBHVbw3HtUR84BLqQn/O01Sf2PoYHBbXIeZYqG2kXTxHfvdm9A
+ SxzRStDfuEyuvuQ53bpdMy/H8YpC/XaTNtEIgTrFmZPqTKHFMijY0IOTZkZ9hyS1/wle
+ iSP6l6mE886EJwPPVcnoyXRtgwOd67caBOYBSn/yiZxDEqbv4K4nhfVOcNC8EVxZD5FT
+ fciw==
+X-Gm-Message-State: AC+VfDxuIQKhCS1xSmVoTpz8EI5pNjHK9IjIbfDliShEpZNPa1xcZKkQ
+ fGLCR9EapHEuaEjdl72AYQRIjfGUScpo8OxgOSA=
+X-Google-Smtp-Source: ACHHUZ5gStfWYN0ozHhoy2El7RZ02mvJU6GIPrypyP2bwtrQt2064QhFyjJKf9mMEKkKSu5CIzajtw==
+X-Received: by 2002:a17:907:3e05:b0:967:dff4:e0f9 with SMTP id
+ hp5-20020a1709073e0500b00967dff4e0f9mr2675354ejc.71.1685452733526; 
+ Tue, 30 May 2023 06:18:53 -0700 (PDT)
 Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
  [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- le8-20020a170907170800b0096f803afbe3sm7376156ejc.66.2023.05.30.06.18.48
+ le8-20020a170907170800b0096f803afbe3sm7376156ejc.66.2023.05.30.06.18.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 May 2023 06:18:49 -0700 (PDT)
+ Tue, 30 May 2023 06:18:53 -0700 (PDT)
 From: Christoph Muellner <christoph.muellner@vrull.eu>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -67,19 +67,18 @@ To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
 Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
- Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 2/9] target/riscv: Factor out RISCVCPUConfig from cpu.h
-Date: Tue, 30 May 2023 15:18:36 +0200
-Message-Id: <20230530131843.1186637-3-christoph.muellner@vrull.eu>
+ Alistair Francis <Alistair.Francis@wdc.com>
+Subject: [PATCH 5/9] disas/riscv: Encapsulate opcode_data into decode
+Date: Tue, 30 May 2023 15:18:39 +0200
+Message-Id: <20230530131843.1186637-6-christoph.muellner@vrull.eu>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
 References: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ed1-x536.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,368 +103,153 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Christoph Müllner <christoph.muellner@vrull.eu>
 
-The file target/riscv/cpu.h cannot be included by files outside
-of target/riscv/. To share data with other parts of QEMU (e.g.
-the disassembler) we need to factor out the relevant code.
-Therefore, this patch moves the definition of RISCVCPUConfig
-(and tightly coupled dependencies and functions) into its
-own target/riscv/cpu-config.h file.
-The goal is to be able to share the enablement-status of
-the RISC-V ISA extensions (RISCVCPUConfig::ext_*) with
-other parts of QEMU.
+This patch adds a reference to a struct rv_opcode_data object
+into struct rv_decode. This further allows to remove all references
+to the global variable opcode_data (which is renamed to rvi_opcode_data).
 
-This patch does not introduce new functionality.
-However, the patch includes a small change:
-The parameter for the extension test functions has been changed
-from 'DisasContext*' to 'const RISCVCPUConfig*'.
-This allows to keep these functions in cpu-config.h.
+This patch does not introduce any functional change, but prepares
+the code for more struct rv_opcode_data objects in the future.
 
+This patch is based on previous work from Liu Zhiwei:
+  https://lists.nongnu.org/archive/html/qemu-devel/2022-08/msg03662.html
+
+Co-developed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
 ---
- target/riscv/cpu-config.h | 148 ++++++++++++++++++++++++++++++++++++++
- target/riscv/cpu.h        | 114 +----------------------------
- target/riscv/translate.c  |  27 +------
- 3 files changed, 151 insertions(+), 138 deletions(-)
- create mode 100644 target/riscv/cpu-config.h
+ disas/riscv.c |  9 ++++++++-
+ disas/riscv.h | 33 +++++++++++++++++----------------
+ 2 files changed, 25 insertions(+), 17 deletions(-)
 
-diff --git a/target/riscv/cpu-config.h b/target/riscv/cpu-config.h
-new file mode 100644
-index 0000000000..ca368af0b2
---- /dev/null
-+++ b/target/riscv/cpu-config.h
-@@ -0,0 +1,148 @@
-+/*
-+ * QEMU RISC-V CPU Config
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef RISCV_CPU_CONFIG_H
-+#define RISCV_CPU_CONFIG_H
-+
-+/*
-+ * map is a 16-bit bitmap: the most significant set bit in map is the maximum
-+ * satp mode that is supported. It may be chosen by the user and must respect
-+ * what qemu implements (valid_1_10_32/64) and what the hw is capable of
-+ * (supported bitmap below).
-+ *
-+ * init is a 16-bit bitmap used to make sure the user selected a correct
-+ * configuration as per the specification.
-+ *
-+ * supported is a 16-bit bitmap used to reflect the hw capabilities.
-+ */
-+typedef struct {
-+    uint16_t map, init, supported;
-+} RISCVSATPMap;
-+
-+struct RISCVCPUConfig {
-+    bool ext_zba;
-+    bool ext_zbb;
-+    bool ext_zbc;
-+    bool ext_zbkb;
-+    bool ext_zbkc;
-+    bool ext_zbkx;
-+    bool ext_zbs;
-+    bool ext_zca;
-+    bool ext_zcb;
-+    bool ext_zcd;
-+    bool ext_zce;
-+    bool ext_zcf;
-+    bool ext_zcmp;
-+    bool ext_zcmt;
-+    bool ext_zk;
-+    bool ext_zkn;
-+    bool ext_zknd;
-+    bool ext_zkne;
-+    bool ext_zknh;
-+    bool ext_zkr;
-+    bool ext_zks;
-+    bool ext_zksed;
-+    bool ext_zksh;
-+    bool ext_zkt;
-+    bool ext_ifencei;
-+    bool ext_icsr;
-+    bool ext_icbom;
-+    bool ext_icboz;
-+    bool ext_zicond;
-+    bool ext_zihintpause;
-+    bool ext_smstateen;
-+    bool ext_sstc;
-+    bool ext_svadu;
-+    bool ext_svinval;
-+    bool ext_svnapot;
-+    bool ext_svpbmt;
-+    bool ext_zdinx;
-+    bool ext_zawrs;
-+    bool ext_zfh;
-+    bool ext_zfhmin;
-+    bool ext_zfinx;
-+    bool ext_zhinx;
-+    bool ext_zhinxmin;
-+    bool ext_zve32f;
-+    bool ext_zve64f;
-+    bool ext_zve64d;
-+    bool ext_zmmul;
-+    bool ext_zvfh;
-+    bool ext_zvfhmin;
-+    bool ext_smaia;
-+    bool ext_ssaia;
-+    bool ext_sscofpmf;
-+    bool rvv_ta_all_1s;
-+    bool rvv_ma_all_1s;
-+
-+    uint32_t mvendorid;
-+    uint64_t marchid;
-+    uint64_t mimpid;
-+
-+    /* Vendor-specific custom extensions */
-+    bool ext_xtheadba;
-+    bool ext_xtheadbb;
-+    bool ext_xtheadbs;
-+    bool ext_xtheadcmo;
-+    bool ext_xtheadcondmov;
-+    bool ext_xtheadfmemidx;
-+    bool ext_xtheadfmv;
-+    bool ext_xtheadmac;
-+    bool ext_xtheadmemidx;
-+    bool ext_xtheadmempair;
-+    bool ext_xtheadsync;
-+    bool ext_XVentanaCondOps;
-+
-+    uint8_t pmu_num;
-+    char *priv_spec;
-+    char *user_spec;
-+    char *bext_spec;
-+    char *vext_spec;
-+    uint16_t vlen;
-+    uint16_t elen;
-+    uint16_t cbom_blocksize;
-+    uint16_t cboz_blocksize;
-+    bool mmu;
-+    bool pmp;
-+    bool epmp;
-+    bool debug;
-+    bool misa_w;
-+
-+    bool short_isa_string;
-+
-+#ifndef CONFIG_USER_ONLY
-+    RISCVSATPMap satp_mode;
-+#endif
-+};
-+
-+typedef struct RISCVCPUConfig RISCVCPUConfig;
-+
-+/* Helper functions to test for extensions.  */
-+
-+static inline bool always_true_p(const RISCVCPUConfig *cfg __attribute__((__unused__)))
-+{
-+    return true;
-+}
-+
-+static inline bool has_xthead_p(const RISCVCPUConfig *cfg)
-+{
-+    return cfg->ext_xtheadba || cfg->ext_xtheadbb ||
-+           cfg->ext_xtheadbs || cfg->ext_xtheadcmo ||
-+           cfg->ext_xtheadcondmov ||
-+           cfg->ext_xtheadfmemidx || cfg->ext_xtheadfmv ||
-+           cfg->ext_xtheadmac || cfg->ext_xtheadmemidx ||
-+           cfg->ext_xtheadmempair || cfg->ext_xtheadsync;
-+}
-+
-+#define MATERIALISE_EXT_PREDICATE(ext) \
-+    static inline bool has_ ## ext ## _p(const RISCVCPUConfig *cfg) \
-+    { \
-+        return cfg->ext_ ## ext ; \
-+    }
-+
-+MATERIALISE_EXT_PREDICATE(XVentanaCondOps)
-+
-+#endif /* RISCV_CPU_CONFIG_H */
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index de7e43126a..895a307bad 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -28,6 +28,7 @@
- #include "qemu/int128.h"
- #include "cpu_bits.h"
- #include "qapi/qapi-types-common.h"
-+#include "cpu-config.h"
- #include "cpu-qom.h"
+diff --git a/disas/riscv.c b/disas/riscv.c
+index 4cf477bc02..086edee6a2 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -1055,7 +1055,7 @@ static const rv_comp_data rvcp_fsgnjx_q[] = {
  
- #define TCG_GUEST_DEFAULT_MO 0
-@@ -368,119 +369,6 @@ struct CPUArchState {
-     uint64_t kvm_timer_frequency;
+ /* instruction metadata */
+ 
+-const rv_opcode_data opcode_data[] = {
++const rv_opcode_data rvi_opcode_data[] = {
+     { "illegal", rv_codec_illegal, rv_fmt_none, NULL, 0, 0, 0 },
+     { "lui", rv_codec_u, rv_fmt_rd_imm, NULL, 0, 0, 0 },
+     { "auipc", rv_codec_u, rv_fmt_rd_offset, NULL, 0, 0, 0 },
+@@ -3803,6 +3803,7 @@ static uint32_t operand_tbl_index(rv_inst inst)
+ 
+ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+ {
++    const rv_opcode_data *opcode_data = dec->opcode_data;
+     rv_inst inst = dec->inst;
+     dec->codec = opcode_data[dec->op].codec;
+     switch (dec->codec) {
+@@ -4284,6 +4285,7 @@ static void append(char *s1, const char *s2, size_t n)
+ 
+ static void format_inst(char *buf, size_t buflen, size_t tab, rv_decode *dec)
+ {
++    const rv_opcode_data *opcode_data = dec->opcode_data;
+     char tmp[64];
+     const char *fmt;
+ 
+@@ -4517,6 +4519,7 @@ static void format_inst(char *buf, size_t buflen, size_t tab, rv_decode *dec)
+ 
+ static void decode_inst_lift_pseudo(rv_decode *dec)
+ {
++    const rv_opcode_data *opcode_data = dec->opcode_data;
+     const rv_comp_data *comp_data = opcode_data[dec->op].pseudo;
+     if (!comp_data) {
+         return;
+@@ -4535,6 +4538,7 @@ static void decode_inst_lift_pseudo(rv_decode *dec)
+ 
+ static void decode_inst_decompress_rv32(rv_decode *dec)
+ {
++    const rv_opcode_data *opcode_data = dec->opcode_data;
+     int decomp_op = opcode_data[dec->op].decomp_rv32;
+     if (decomp_op != rv_op_illegal) {
+         if ((opcode_data[dec->op].decomp_data & rvcd_imm_nz)
+@@ -4549,6 +4553,7 @@ static void decode_inst_decompress_rv32(rv_decode *dec)
+ 
+ static void decode_inst_decompress_rv64(rv_decode *dec)
+ {
++    const rv_opcode_data *opcode_data = dec->opcode_data;
+     int decomp_op = opcode_data[dec->op].decomp_rv64;
+     if (decomp_op != rv_op_illegal) {
+         if ((opcode_data[dec->op].decomp_data & rvcd_imm_nz)
+@@ -4563,6 +4568,7 @@ static void decode_inst_decompress_rv64(rv_decode *dec)
+ 
+ static void decode_inst_decompress_rv128(rv_decode *dec)
+ {
++    const rv_opcode_data *opcode_data = dec->opcode_data;
+     int decomp_op = opcode_data[dec->op].decomp_rv128;
+     if (decomp_op != rv_op_illegal) {
+         if ((opcode_data[dec->op].decomp_data & rvcd_imm_nz)
+@@ -4598,6 +4604,7 @@ disasm_inst(char *buf, size_t buflen, rv_isa isa, uint64_t pc, rv_inst inst)
+     rv_decode dec = { 0 };
+     dec.pc = pc;
+     dec.inst = inst;
++    dec.opcode_data = rvi_opcode_data;
+     decode_inst_opcode(&dec, isa);
+     decode_inst_operands(&dec, isa);
+     decode_inst_decompress(&dec, isa);
+diff --git a/disas/riscv.h b/disas/riscv.h
+index de2623e3cc..188f03feeb 100644
+--- a/disas/riscv.h
++++ b/disas/riscv.h
+@@ -162,9 +162,26 @@ typedef enum {
+ 
+ /* structures */
+ 
++typedef struct {
++    const int op;
++    const rvc_constraint *constraints;
++} rv_comp_data;
++
++typedef struct {
++    const char * const name;
++    const rv_codec codec;
++    const char * const format;
++    const rv_comp_data *pseudo;
++    const short decomp_rv32;
++    const short decomp_rv64;
++    const short decomp_rv128;
++    const short decomp_data;
++} rv_opcode_data;
++
+ typedef struct {
+     uint64_t  pc;
+     uint64_t  inst;
++    const rv_opcode_data *opcode_data;
+     int32_t   imm;
+     uint16_t  op;
+     uint8_t   codec;
+@@ -184,11 +201,6 @@ typedef struct {
+     uint8_t   rlist;
+ } rv_decode;
+ 
+-typedef struct {
+-    const int op;
+-    const rvc_constraint *constraints;
+-} rv_comp_data;
+-
+ enum {
+     rv_op_illegal = 0
+ };
+@@ -197,17 +209,6 @@ enum {
+     rvcd_imm_nz = 0x1
  };
  
--/*
-- * map is a 16-bit bitmap: the most significant set bit in map is the maximum
-- * satp mode that is supported. It may be chosen by the user and must respect
-- * what qemu implements (valid_1_10_32/64) and what the hw is capable of
-- * (supported bitmap below).
-- *
-- * init is a 16-bit bitmap used to make sure the user selected a correct
-- * configuration as per the specification.
-- *
-- * supported is a 16-bit bitmap used to reflect the hw capabilities.
-- */
 -typedef struct {
--    uint16_t map, init, supported;
--} RISCVSATPMap;
+-    const char * const name;
+-    const rv_codec codec;
+-    const char * const format;
+-    const rv_comp_data *pseudo;
+-    const short decomp_rv32;
+-    const short decomp_rv64;
+-    const short decomp_rv128;
+-    const short decomp_data;
+-} rv_opcode_data;
 -
--struct RISCVCPUConfig {
--    bool ext_zba;
--    bool ext_zbb;
--    bool ext_zbc;
--    bool ext_zbkb;
--    bool ext_zbkc;
--    bool ext_zbkx;
--    bool ext_zbs;
--    bool ext_zca;
--    bool ext_zcb;
--    bool ext_zcd;
--    bool ext_zce;
--    bool ext_zcf;
--    bool ext_zcmp;
--    bool ext_zcmt;
--    bool ext_zk;
--    bool ext_zkn;
--    bool ext_zknd;
--    bool ext_zkne;
--    bool ext_zknh;
--    bool ext_zkr;
--    bool ext_zks;
--    bool ext_zksed;
--    bool ext_zksh;
--    bool ext_zkt;
--    bool ext_ifencei;
--    bool ext_icsr;
--    bool ext_icbom;
--    bool ext_icboz;
--    bool ext_zicond;
--    bool ext_zihintpause;
--    bool ext_smstateen;
--    bool ext_sstc;
--    bool ext_svadu;
--    bool ext_svinval;
--    bool ext_svnapot;
--    bool ext_svpbmt;
--    bool ext_zdinx;
--    bool ext_zawrs;
--    bool ext_zfh;
--    bool ext_zfhmin;
--    bool ext_zfinx;
--    bool ext_zhinx;
--    bool ext_zhinxmin;
--    bool ext_zve32f;
--    bool ext_zve64f;
--    bool ext_zve64d;
--    bool ext_zmmul;
--    bool ext_zvfh;
--    bool ext_zvfhmin;
--    bool ext_smaia;
--    bool ext_ssaia;
--    bool ext_sscofpmf;
--    bool rvv_ta_all_1s;
--    bool rvv_ma_all_1s;
--
--    uint32_t mvendorid;
--    uint64_t marchid;
--    uint64_t mimpid;
--
--    /* Vendor-specific custom extensions */
--    bool ext_xtheadba;
--    bool ext_xtheadbb;
--    bool ext_xtheadbs;
--    bool ext_xtheadcmo;
--    bool ext_xtheadcondmov;
--    bool ext_xtheadfmemidx;
--    bool ext_xtheadfmv;
--    bool ext_xtheadmac;
--    bool ext_xtheadmemidx;
--    bool ext_xtheadmempair;
--    bool ext_xtheadsync;
--    bool ext_XVentanaCondOps;
--
--    uint8_t pmu_num;
--    char *priv_spec;
--    char *user_spec;
--    char *bext_spec;
--    char *vext_spec;
--    uint16_t vlen;
--    uint16_t elen;
--    uint16_t cbom_blocksize;
--    uint16_t cboz_blocksize;
--    bool mmu;
--    bool pmp;
--    bool epmp;
--    bool debug;
--    bool misa_w;
--
--    bool short_isa_string;
--
--#ifndef CONFIG_USER_ONLY
--    RISCVSATPMap satp_mode;
--#endif
--};
--
--typedef struct RISCVCPUConfig RISCVCPUConfig;
--
- /*
-  * RISCVCPU:
-  * @env: #CPURISCVState
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 928da0d3f0..2697cc26d0 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -119,29 +119,6 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-     return ctx->misa_ext & ext;
- }
+ /* instruction formats */
  
--static bool always_true_p(DisasContext *ctx  __attribute__((__unused__)))
--{
--    return true;
--}
--
--static bool has_xthead_p(DisasContext *ctx  __attribute__((__unused__)))
--{
--    return ctx->cfg_ptr->ext_xtheadba || ctx->cfg_ptr->ext_xtheadbb ||
--           ctx->cfg_ptr->ext_xtheadbs || ctx->cfg_ptr->ext_xtheadcmo ||
--           ctx->cfg_ptr->ext_xtheadcondmov ||
--           ctx->cfg_ptr->ext_xtheadfmemidx || ctx->cfg_ptr->ext_xtheadfmv ||
--           ctx->cfg_ptr->ext_xtheadmac || ctx->cfg_ptr->ext_xtheadmemidx ||
--           ctx->cfg_ptr->ext_xtheadmempair || ctx->cfg_ptr->ext_xtheadsync;
--}
--
--#define MATERIALISE_EXT_PREDICATE(ext)  \
--    static bool has_ ## ext ## _p(DisasContext *ctx)    \
--    { \
--        return ctx->cfg_ptr->ext_ ## ext ; \
--    }
--
--MATERIALISE_EXT_PREDICATE(XVentanaCondOps);
--
- #ifdef TARGET_RISCV32
- #define get_xl(ctx)    MXL_RV32
- #elif defined(CONFIG_USER_ONLY)
-@@ -1106,7 +1083,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-      * that are tested in-order until a decoder matches onto the opcode.
-      */
-     static const struct {
--        bool (*guard_func)(DisasContext *);
-+        bool (*guard_func)(const RISCVCPUConfig *);
-         bool (*decode_func)(DisasContext *, uint32_t);
-     } decoders[] = {
-         { always_true_p,  decode_insn32 },
-@@ -1135,7 +1112,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-         ctx->pc_succ_insn = ctx->base.pc_next + 4;
- 
-         for (size_t i = 0; i < ARRAY_SIZE(decoders); ++i) {
--            if (decoders[i].guard_func(ctx) &&
-+            if (decoders[i].guard_func(ctx->cfg_ptr) &&
-                 decoders[i].decode_func(ctx, opcode32)) {
-                 return;
-             }
+ #define rv_fmt_none                   "O\t"
 -- 
 2.40.1
 
