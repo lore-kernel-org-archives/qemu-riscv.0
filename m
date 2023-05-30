@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28E14C77B73
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 May 2023 19:48:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC441C77B7A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 May 2023 19:48:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q45JT-0006pO-TO; Tue, 30 May 2023 15:47:23 -0400
+	id 1q45Il-0006RS-SP; Tue, 30 May 2023 15:46:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1q45JT-0006oW-0T
- for qemu-riscv@nongnu.org; Tue, 30 May 2023 15:47:23 -0400
-Received: from mail-oa1-x2f.google.com ([2001:4860:4864:20::2f])
+ id 1q45Il-0006R1-2L
+ for qemu-riscv@nongnu.org; Tue, 30 May 2023 15:46:39 -0400
+Received: from mail-oa1-x33.google.com ([2001:4860:4864:20::33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1q45JQ-0004MO-ED
- for qemu-riscv@nongnu.org; Tue, 30 May 2023 15:47:22 -0400
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-19f68a583a7so129045fac.1
- for <qemu-riscv@nongnu.org>; Tue, 30 May 2023 12:47:20 -0700 (PDT)
+ id 1q45Ij-0004F2-Bo
+ for qemu-riscv@nongnu.org; Tue, 30 May 2023 15:46:38 -0400
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-19f09321191so3408448fac.2
+ for <qemu-riscv@nongnu.org>; Tue, 30 May 2023 12:46:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1685476039; x=1688068039;
+ d=ventanamicro.com; s=google; t=1685475996; x=1688067996;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Jj5q0gQim03Dfqbjx8y7Y2DfBrJ6GzehbS4t//l5qDk=;
- b=RBaHcB00oSSrGMF73jKqjuY3+u93pcqrkaxzPh9tgO5Ic6Vge2dRrckVoJRAvKm8c9
- 2z0EXMBhUoQekjjYV870pos5+ACd2KwKIkZ9MzttHlLRbfQTSChJtLu63UdFwNF2pmhs
- Ovr+qfMzvB4HepLvpS6/SraNDcxZif96YekGZ+QQ4bKm67dfWqCO8bkuYeXlOszRub0E
- ak5xafRoxRt4t2wE0ciAWvhefi49rUHsaKJj4d5KAKjcg5gqSCt6dTM3WAzf8Rd/eLDR
- sZ97jOyTTXCgG6/+mFeZxTRDSEI9vKJ2rAoA9ScrmWHA1oi+bDzxnR+v0P7rNqW09zCJ
- a8zA==
+ bh=QS1DGxToErlST7DIPVOrtAe0U4ury3VVrsLqKkjgUmA=;
+ b=nbbOZJSq0xLiNLRIK/EEnwTLSUJ+rz+ZkjI8g5numGuCnlCHsp+SNeYttB2OMf1ZWY
+ x5/CuRNkz5gfieGqRnqV9g5YFCTN3HhOVXEsG1Bp4kBT7q/IfvdzvHZJKtJko6HUB2Dd
+ xG8xYYv82yOu99mXCNHXj1qUeiNKtyWgdjynLIXEgIKg/TOetXdPnr4Sx4MkDI102QHU
+ 84++znJOndBv5Yh1XcmhZoeVNc/j4YScZiCN+QZQq1I4/UzZHbBtlU4atNjytcNGJtE5
+ UDFhehEKZdURoDxIMuyE3vk0Igg+d3w0EhvMn36yVZNWtPttQFEFzi9vKNwY53FndERc
+ ftkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685476039; x=1688068039;
+ d=1e100.net; s=20221208; t=1685475996; x=1688067996;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Jj5q0gQim03Dfqbjx8y7Y2DfBrJ6GzehbS4t//l5qDk=;
- b=Qo8hj7rsziE9H0pWa5zduo1UxF88QfxGPD0bkKdvcPxOSZ04qe4jJ7UUUyotwmguYs
- 8tNSjUpp3/vnykPZPDOi5OT2ciXC1Xhd3Quwziq97OnGJqgvCkZy9iOg2COrALb2qxgF
- kOJ5Q2d+4iz9o7QCpUAnGNRO2ybNkABvYL8urAwmSjUKbtogDKCTsvi6bU1NwPghHoJw
- 1CGCjcgQqyTMVsKfzz1wl5NbQajlhGE9RXVlMYrs4Tk6VbJ7CBa13Rf2/nviVCFiGQqe
- BMZzhZvvgHS+bigvH88uz1duSYaRjRZ2DUXoKLBbDPkhzfCz713S7XFztYqdy188lE4J
- E9eA==
-X-Gm-Message-State: AC+VfDx7ZqKWqEo1/T0ff0XJrHa9G5L0U7VnAU2Yv48iEF3WGNXcb55J
- BeEcJ4oK3jzwtgPHmBR/xypmbg==
-X-Google-Smtp-Source: ACHHUZ5/HpF2/L0F++kDsE3DvqKTw9PUCyLwDn9cl/Uxi3/Jyh9qi1z6i08ZscOpVwmISIJheffWbA==
-X-Received: by 2002:a05:6870:219c:b0:192:b704:cf2a with SMTP id
- l28-20020a056870219c00b00192b704cf2amr1959880oae.25.1685476039223; 
- Tue, 30 May 2023 12:47:19 -0700 (PDT)
+ bh=QS1DGxToErlST7DIPVOrtAe0U4ury3VVrsLqKkjgUmA=;
+ b=BI4sSLGv1ju8XFr+7eh9nXkWtX/5BmwDbEDI6sRfofiZaGIMUKkIUWGxWHlxwOR0nB
+ M6NCvAmapdL398PJaymrNREzYl1k7UyIArKg2A5InYabhObVa3OVLDvxwVkbo6xglaVr
+ wV3VzgYJC4xkNNH0DLO+RiRgsnY5GKl7J/b+ZehKSar08S/H8u8tWmmaPlIuyP/qN4Cl
+ 01xNrNJ11BrkHmw9sMCB7sHnVjklMzcqji5aMhxVLZng8Sz8L5hxCRyFP3EUMQTxi3y6
+ uuA5gVz3fGmYkKNbK8+voYy6e7tRcGvQSl37l82XCuXiPFdElGwIomwzyToA3spi2zL8
+ wctQ==
+X-Gm-Message-State: AC+VfDwglCSq9sTLKmMWWXe2IhTSb0IzUUiDEt2oj93Tbif1pj9YAbqD
+ gi4RkqCZimK8BHYZHIaIYX/cNQ==
+X-Google-Smtp-Source: ACHHUZ4r0WWYtsm5Bl52e9SbsZ/Vt+3ACC3A8dNkTmlqcZBTdpTMv4iJ4V2Jjabi7//3qQnjHBF8nQ==
+X-Received: by 2002:a05:6870:a2d5:b0:19e:ae04:95ae with SMTP id
+ w21-20020a056870a2d500b0019eae0495aemr1870683oak.40.1685475996014; 
+ Tue, 30 May 2023 12:46:36 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com
  (200-162-225-121.static-corp.ajato.com.br. [200.162.225.121])
  by smtp.gmail.com with ESMTPSA id
- j3-20020a056870a48300b0019fa8728b05sm342214oal.39.2023.05.30.12.47.16
+ j3-20020a056870a48300b0019fa8728b05sm342214oal.39.2023.05.30.12.46.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 May 2023 12:47:18 -0700 (PDT)
+ Tue, 30 May 2023 12:46:35 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 15/16] target/riscv: update multi-letter extension KVM
- properties
-Date: Tue, 30 May 2023 16:46:22 -0300
-Message-Id: <20230530194623.272652-16-dbarboza@ventanamicro.com>
+Subject: [PATCH 01/16] target/riscv: skip features setup for KVM CPUs
+Date: Tue, 30 May 2023 16:46:08 -0300
+Message-Id: <20230530194623.272652-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230530194623.272652-1-dbarboza@ventanamicro.com>
 References: <20230530194623.272652-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2f.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,67 +96,116 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We're now ready to update the multi-letter extensions status for KVM.
+As it is today it's not possible to use '-cpu host' if the RISC-V host
+has RVH enabled. This is the resulting error:
 
-kvm_riscv_update_cpu_cfg_isa_ext() is called called during vcpu creation
-time to verify which user options changes host defaults (via the 'user_set'
-flag) and tries to write them back to KVM.
+$ sudo ./qemu/build/qemu-system-riscv64 \
+    -machine virt,accel=kvm -m 2G -smp 1 \
+    -nographic -snapshot -kernel ./guest_imgs/Image  \
+    -initrd ./guest_imgs/rootfs_kvm_riscv64.img \
+    -append "earlycon=sbi root=/dev/ram rw" \
+    -cpu host
+qemu-system-riscv64: H extension requires priv spec 1.12.0
 
-Failure to commit a change to KVM is only ignored in case KVM doesn't
-know about the extension (-EINVAL error code) and the user wanted to
-disable the given extension. Otherwise we're going to abort the boot
-process.
+This happens because we're checking for priv spec for all CPUs, and
+since we're not setting  env->priv_ver for the 'host' CPU, it's being
+default to zero (i.e. PRIV_SPEC_1_10_0).
+
+In reality env->priv_ver does not make sense when running with the KVM
+'host' CPU. It's used to gate certain CSRs/extensions during translation
+to make them unavailable if the hart declares an older spec version. It
+doesn't have any other use. E.g. OpenSBI version 1.2 retrieves the spec
+checking if the CSR_MCOUNTEREN, CSR_MCOUNTINHIBIT and CSR_MENVCFG CSRs
+are available [1].
+
+'priv_ver' is just one example. We're doing a lot of feature validation
+and setup during riscv_cpu_realize() that it doesn't apply KVM CPUs.
+Validating the feature set for those CPUs is a KVM problem that should
+be handled in KVM specific code.
+
+The new riscv_cpu_realize_features() helper contains all validation
+logic that are not applicable to KVM CPUs. riscv_cpu_realize() verifies
+if we're dealing with a KVM CPU and, if not, execute the new helper to
+proceed with the usual realize() logic for all other CPUs.
+
+[1] lib/sbi/sbi_hart.c, hart_detect_features()
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/kvm.c | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ target/riscv/cpu.c | 41 ++++++++++++++++++++++++++++++++---------
+ 1 file changed, 32 insertions(+), 9 deletions(-)
 
-diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-index 675e18df3b..92b99fe261 100644
---- a/target/riscv/kvm.c
-+++ b/target/riscv/kvm.c
-@@ -295,6 +295,32 @@ static void kvm_cpu_set_multi_ext_cfg(Object *obj, Visitor *v,
-     kvm_cpu_cfg_set(cpu, multi_ext_cfg, value);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 938c7bd87b..72f5433776 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -331,6 +331,15 @@ static void set_satp_mode_default_map(RISCVCPU *cpu)
  }
+ #endif
  
-+static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
++static bool riscv_running_KVM(void)
 +{
-+    CPURISCVState *env = &cpu->env;
-+    uint64_t id, reg;
-+    int i, ret;
-+
-+    for (i = 0; i < ARRAY_SIZE(kvm_multi_ext_cfgs); i++) {
-+        RISCVCPUMultiExtConfig *multi_ext_cfg = &kvm_multi_ext_cfgs[i];
-+
-+        if (!multi_ext_cfg->user_set) {
-+            continue;
-+        }
-+
-+        id = kvm_riscv_reg_id(env, KVM_REG_RISCV_ISA_EXT,
-+                              multi_ext_cfg->kvm_reg_id);
-+        reg = kvm_cpu_cfg_get(cpu, multi_ext_cfg);
-+        ret = kvm_set_one_reg(cs, id, &reg);
-+        if (ret != 0) {
-+            error_report("Unable to %s extension %s in KVM, error %d",
-+                         reg ? "enable" : "disable",
-+                         multi_ext_cfg->name, ret);
-+            exit(EXIT_FAILURE);
-+        }
-+    }
++#ifndef CONFIG_USER_ONLY
++    return kvm_enabled();
++#else
++    return false;
++#endif
 +}
 +
- static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
+ static void riscv_any_cpu_init(Object *obj)
  {
-     int i;
-@@ -829,6 +855,7 @@ int kvm_arch_init_vcpu(CPUState *cs)
+     RISCVCPU *cpu = RISCV_CPU(obj);
+@@ -1295,20 +1304,12 @@ static void riscv_cpu_validate_misa_priv(CPURISCVState *env, Error **errp)
      }
- 
-     kvm_riscv_update_cpu_misa_ext(cpu, cs);
-+    kvm_riscv_update_cpu_cfg_isa_ext(cpu, cs);
- 
-     return ret;
  }
+ 
+-static void riscv_cpu_realize(DeviceState *dev, Error **errp)
++static void riscv_cpu_realize_features(DeviceState *dev, Error **errp)
+ {
+-    CPUState *cs = CPU(dev);
+     RISCVCPU *cpu = RISCV_CPU(dev);
+     CPURISCVState *env = &cpu->env;
+-    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+     Error *local_err = NULL;
+ 
+-    cpu_exec_realizefn(cs, &local_err);
+-    if (local_err != NULL) {
+-        error_propagate(errp, local_err);
+-        return;
+-    }
+-
+     riscv_cpu_validate_misa_mxl(cpu, &local_err);
+     if (local_err != NULL) {
+         error_propagate(errp, local_err);
+@@ -1354,6 +1355,28 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         }
+      }
+ #endif
++}
++
++static void riscv_cpu_realize(DeviceState *dev, Error **errp)
++{
++    CPUState *cs = CPU(dev);
++    RISCVCPU *cpu = RISCV_CPU(dev);
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
++    Error *local_err = NULL;
++
++    cpu_exec_realizefn(cs, &local_err);
++    if (local_err != NULL) {
++        error_propagate(errp, local_err);
++        return;
++    }
++
++    if (!riscv_running_KVM()) {
++        riscv_cpu_realize_features(dev, &local_err);
++        if (local_err != NULL) {
++            error_propagate(errp, local_err);
++            return;
++        }
++    }
+ 
+     riscv_cpu_finalize_features(cpu, &local_err);
+     if (local_err != NULL) {
 -- 
 2.40.1
 
