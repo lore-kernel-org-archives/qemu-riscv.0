@@ -4,89 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB165C7EE23
-	for <qemu-riscv@archiver.kernel.org>; Tue, 30 May 2023 13:23:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8949C7EE23
+	for <qemu-riscv@archiver.kernel.org>; Tue, 30 May 2023 14:13:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q3zGI-0002ND-AC; Tue, 30 May 2023 09:19:42 -0400
+	id 1q4062-0005yJ-AH; Tue, 30 May 2023 10:13:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1q3zFd-0001zX-HH
- for qemu-riscv@nongnu.org; Tue, 30 May 2023 09:19:02 -0400
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christoph.muellner@vrull.eu>)
- id 1q3zFa-0006sU-BH
- for qemu-riscv@nongnu.org; Tue, 30 May 2023 09:19:01 -0400
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-96fe88cd2fcso791243966b.1
- for <qemu-riscv@nongnu.org>; Tue, 30 May 2023 06:18:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=vrull.eu; s=google; t=1685452735; x=1688044735;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uMqno0siykPsS3ZNDkSpUapOggK2PTxFDdGkbme8bUM=;
- b=c8+HMQP5Bj2WCCnmRERnLHO5xuREls8b3MiJCmy9ib4dc18XyGlxvOmhxwr9phDytO
- QFWYc8j7PkiGuYnXE/6y4PA3rpZeWWB76hs2Zwa3Wg7u7H1UR3S/Ue+pLCd7jMY7nu1U
- 9ZSaEDB7crfzQY+hjaBWhC28Fl4kWhP9kFnWkOOnIjONSTQ0oG1oH5RqfR+tLjvdJY9Q
- e7qjNNGgLTkDROUMHPEN1K3aTfUTziUVfkYVQH+Qv/JwKzDIGfEytMW0al9wKYKcx8I2
- tSEVqgGReChwa16aiTrcQFi5j/o6yTO4gFLIc7iw28MKGHvbBNuyQX45t5xJkB2cAazy
- covA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685452735; x=1688044735;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uMqno0siykPsS3ZNDkSpUapOggK2PTxFDdGkbme8bUM=;
- b=jtUvVecAH1RM0u7h37gcdPGmanxMNG9m+ADB/8m8i4EvKFkqGm4328xyU8B/r9QcTH
- t2Vip2w0v0Hckqr0tb+otFDOxSXOzDmP4ZRJMqPctVUdhHsVvSuVkrQcFJVT9VM6ePI/
- nfjATL/7SyPBE3H8DFPZSL13U4dXWh5XCURLew+h3fAdGp2GwQsoCx7AZFpb1VJzfIhc
- lVXfzrCGesDTG2yKF4/it8PDsyPdb656GB6nxYQGi3RKGe3/vWVX6Cop4xhh9/aOUdFo
- p52u1BABmkAitrwcJfmypMrXFTR+5wmhyQgEKGqTjkpWjCurrxTkYNoqwUi1fP6RD93J
- Eb/A==
-X-Gm-Message-State: AC+VfDzMLY5gZk5tqQDbl90sbQk12985q88fbZHhr90GFoTAlLWuoNEj
- jSPU5WmF40oiQb0007hquLw1ZBjaNooSqtqiGis=
-X-Google-Smtp-Source: ACHHUZ58Ss1TseMMLkwOhpyNwWOTOvoX5Tn8nMQ/cLwTSMuqBJL8F3HVg7EhhpgvTY6lz6DSE4f4qw==
-X-Received: by 2002:a17:907:7da4:b0:969:9fd0:7cee with SMTP id
- oz36-20020a1709077da400b009699fd07ceemr2108860ejc.10.1685452734790; 
- Tue, 30 May 2023 06:18:54 -0700 (PDT)
-Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
- [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- le8-20020a170907170800b0096f803afbe3sm7376156ejc.66.2023.05.30.06.18.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 May 2023 06:18:54 -0700 (PDT)
-From: Christoph Muellner <christoph.muellner@vrull.eu>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Zhiwei Liu <zhiwei_liu@linux.alibaba.com>
-Cc: =?UTF-8?q?Christoph=20M=C3=BCllner?= <christoph.muellner@vrull.eu>,
- Weiwei Li <liweiwei@iscas.ac.cn>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 6/9] target/riscv/cpu: Share RISCVCPUConfig with disassembler
-Date: Tue, 30 May 2023 15:18:40 +0200
-Message-Id: <20230530131843.1186637-7-christoph.muellner@vrull.eu>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
-References: <20230530131843.1186637-1-christoph.muellner@vrull.eu>
+ (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
+ id 1q405p-0005tP-5v
+ for qemu-riscv@nongnu.org; Tue, 30 May 2023 10:12:57 -0400
+Received: from esa.microchip.iphmx.com ([68.232.154.123])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
+ id 1q405k-0006ko-I5
+ for qemu-riscv@nongnu.org; Tue, 30 May 2023 10:12:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1685455973; x=1716991973;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=WEVu+mlvG0A1jNh0gMO3FS1zwOln0/CKg69F1Wt0HZ4=;
+ b=Vufodk7xB+i0J647HNgyc31NWXmZ9f2DJy4H0bRO62qr18c4ngEY62uN
+ qR5r18Bspr3PA/LkGf5W29v4dHJDphpp/EWbBzoXwky37P3OrBe1dlUH6
+ HUWRgjGAj+a6eyaORzQ8hprIIOLDPHj0HNK+7Z5C0U8QXDoeZrrrRhueu
+ gowQSvZZ8Nle5lkmNechRN6In9wJExI3wv9kqQhOifhorqTKKHIJN7rb4
+ k0a704wqQbcjFVkpj0qTtsI754u66suL+iD7nRBZk+2xYMvXuISQxsg4q
+ VFxjAVpn/dO4uSQZeWNFOdpJtgZbefifCbvBsqtBXMFPYCeiJp37AM1oS Q==;
+X-IronPort-AV: E=Sophos;i="6.00,204,1681196400"; 
+ d="asc'?scan'208";a="213732970"
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa4.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256;
+ 30 May 2023 07:12:41 -0700
+Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21; Tue, 30 May 2023 07:12:38 -0700
+Received: from wendy (10.10.115.15) by chn-vm-ex03.mchp-main.com
+ (10.10.85.151) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21 via Frontend
+ Transport; Tue, 30 May 2023 07:12:35 -0700
+Date: Tue, 30 May 2023 15:12:12 +0100
+From: Conor Dooley <conor.dooley@microchip.com>
+To: Conor Dooley <conor@kernel.org>
+CC: Sean Anderson <sean.anderson@seco.com>, Anup Patel <anup@brainfault.org>, 
+ Andrew Jones <ajones@ventanamicro.com>, <palmer@dabbelt.com>, Paul Walmsley
+ <paul.walmsley@sifive.com>, Rob Herring <robh+dt@kernel.org>, Krzysztof
+ Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Alistair Francis
+ <alistair.francis@wdc.com>, Anup Patel <apatel@ventanamicro.com>, Atish Patra
+ <atishp@atishpatra.org>, Jessica Clarke <jrtc27@jrtc27.com>, Rick Chen
+ <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ <linux-riscv@lists.infradead.org>, <qemu-riscv@nongnu.org>,
+ <u-boot@lists.denx.de>, <devicetree@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v1] dt-bindings: riscv: deprecate riscv,isa
+Message-ID: <20230530-duller-reset-a34ae111f207@wendy>
+References: <20230518-thermos-sanitary-cf3fbc777ea1@wendy>
+ <20230518-4050231ca8dbe93c08cf9c9a@orel>
+ <CAAhSdy07Mg_JBF+4ucGFiWdBKh-Ass5G_aUWqBqTnDSFp7S=0A@mail.gmail.com>
+ <20230518-hammock-doornail-478e8ea8e6a7@wendy>
+ <f7c20090-220c-2805-86ba-b174a89f65b3@seco.com>
+ <20230518-monkhood-dispersal-6749b1228b0d@spud>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
- envelope-from=christoph.muellner@vrull.eu; helo=mail-ej1-x62d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="ljjWyKcHLn9dJQRC"
+Content-Disposition: inline
+In-Reply-To: <20230518-monkhood-dispersal-6749b1228b0d@spud>
+Received-SPF: pass client-ip=68.232.154.123;
+ envelope-from=Conor.Dooley@microchip.com; helo=esa.microchip.iphmx.com
+X-Spam_score_int: -45
+X-Spam_score: -4.6
+X-Spam_bar: ----
+X-Spam_report: (-4.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.167,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,35 +97,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Christoph Müllner <christoph.muellner@vrull.eu>
+--ljjWyKcHLn9dJQRC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The disassembler needs the available extensions in order
-to properly decode instructions in case of overlapping
-encodings (e.g. for vendor extensions).
+On Thu, May 18, 2023 at 10:42:34PM +0100, Conor Dooley wrote:
+> On Thu, May 18, 2023 at 02:30:53PM -0400, Sean Anderson wrote:
 
-Let's use the field 'disassemble_info::private_data' to store
-our RISCVCPUConfig pointer.
+> >=20
+> > Why not just have something like
+> >=20
+> > mycpu {
+> > 	...
+> > 	riscv,isa {
+> > 		i;
+> > 		m;
+> > 		a;
+> > 		zicsr;
+> > 		...
+> > 	};
+> > };
+>
+> Naming of the node aside (perhaps that could be riscv,isa-extensions)
+> there's not something hitting me immediately as to why that is a no-no.
+> If the size is a concern, this would certainly be more efficient & not
+> like the probing would be anything other than trivial more difficult
+> what I have in my proposal.
 
-Signed-off-by: Christoph Müllner <christoph.muellner@vrull.eu>
----
- target/riscv/cpu.c | 3 +++
- 1 file changed, 3 insertions(+)
+Having started messing around with this, one of the main advantages, to
+me, of this approach is proper validation.
+cpus.yaml has additionalProperties: true in it, which would have had to
+be sorted out, or worked around, but creating a child-node with the
+properties in it allows setting additionalProperties: false.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 5b7818dbd1..6f0cd9a0bb 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -819,6 +819,9 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
- {
-     RISCVCPU *cpu = RISCV_CPU(s);
-     CPURISCVState *env = &cpu->env;
-+    RISCVCPUConfig *cfg = &cpu->cfg;
-+
-+    info->private_data = cfg;
- 
-     switch (env->xl) {
-     case MXL_RV32:
--- 
-2.40.1
+> Rob's AFK at the moment, and I was hoping that he would take a look at
+> the idea, so I won't respin til he is back, but I'll give this a go in
+> the interim.
 
+Mechanically, the conversion of the patch isn't difficult, but I'll still
+wait for Rob to come back before sending a v2. But that v2 will more
+than likely implement your suggestion.
+
+Cheers,
+Conor.
+
+--ljjWyKcHLn9dJQRC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZHYEPAAKCRB4tDGHoIJi
+0gU0AQC4+rB11CsvWYlWy1TRnq5jU9IikN+9XHIPda7SYYnZMQEAo6jPRTwwWFo7
+hJxgKpYYRrcYOdotg5wYkneWq4yBCQs=
+=BG8u
+-----END PGP SIGNATURE-----
+
+--ljjWyKcHLn9dJQRC--
 
