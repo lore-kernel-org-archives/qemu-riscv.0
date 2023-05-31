@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 713ACC77B73
-	for <qemu-riscv@archiver.kernel.org>; Wed, 31 May 2023 05:17:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF32C77B73
+	for <qemu-riscv@archiver.kernel.org>; Wed, 31 May 2023 09:29:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q4ECI-0004J1-Vo; Wed, 31 May 2023 01:16:35 -0400
+	id 1q4I8T-0005ax-Sd; Wed, 31 May 2023 05:28:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1q4ECH-0004I7-Tm
- for qemu-riscv@nongnu.org; Wed, 31 May 2023 01:16:33 -0400
-Received: from mail-yw1-x112e.google.com ([2607:f8b0:4864:20::112e])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1q4I8S-0005ag-UH
+ for qemu-riscv@nongnu.org; Wed, 31 May 2023 05:28:53 -0400
+Received: from mail-ot1-x32e.google.com ([2607:f8b0:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1q4ECE-0003WH-JP
- for qemu-riscv@nongnu.org; Wed, 31 May 2023 01:16:33 -0400
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-568f9caff33so737517b3.2
- for <qemu-riscv@nongnu.org>; Tue, 30 May 2023 22:16:29 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1q4I8R-0006xw-Gf
+ for qemu-riscv@nongnu.org; Wed, 31 May 2023 05:28:52 -0400
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-6af7a84b2bdso4251691a34.2
+ for <qemu-riscv@nongnu.org>; Wed, 31 May 2023 02:28:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1685510188; x=1688102188;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=o0IO/94N8fuHa6EKiwYSveUosqi4K0437B2Tji3EmiE=;
- b=QJFuGPZhdBDjvaeaD7B/CpkbGbGRV+hNCXGBIpLmWJxMdKGjMXX2/S27bEPCpkbtvB
- Tq4F3kRf2eWeLaUVBWjogXMwZhLVNxWbFAD3BtaAuirfBLMfYneSH2cgP933GFUEDs5b
- ZHaEaAVVEePz/jh2m2ch7rlAE9qYfp3/OmA4gBaEta2N04yEb9MSL/qUTu9OjmuigbKX
- pOi7T9FSQFdUQIArs5xwoftW9cEpllWTfGfjJjgeBMMdbabndtHw4WnMp6rXfQCIzHgr
- FHNVhhbY9wdOujjGJ+GpcULDkZanZ9Fqz7iKF+MIx0uGXXUV4KaKLobEeqzn/U/kQ+4c
- BePw==
+ d=ventanamicro.com; s=google; t=1685525330; x=1688117330;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=s/wVkhhWmgIwL0CTiJLUiS5Rb0pQvITbFvbdgCVWLFI=;
+ b=YRrkKr/ODZP+QevDT2LJao05s88oSRn+DsUeQpyr5ogy/yVzSIUluplK/KYT3tM1v9
+ GD55VX7FUHeSuniJgCRvHhmzLnrImuzxZif8xyXedoMBZ0aHCW+3XXyb5rQyHsxbiOoj
+ rpOTSj9GzkLylPsw3gdaxCjEO3mjgFqU7RP4vENQeNERwGYS4RWslhByYPdbnGLGmP6l
+ HHz1a1NCwn8+yf7P90K5HojNtqQzCUUO54jqXk9BGewD7PparQqKX7CEf7ESQzhcXKCb
+ sYgcCHBhoGyyMNbOoBSWtxKznHZugh98Fk+BC8T7k1WBeSI33jHsPlYUoKXH7Y8g1HXF
+ /Pwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685510188; x=1688102188;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=o0IO/94N8fuHa6EKiwYSveUosqi4K0437B2Tji3EmiE=;
- b=b2aZ9s3+tZq9IomzfQXnLGmJPXU76a8KADXyEvzRenvD1nmGvMKQyOLjh1bVC0SiVR
- fMwYtSGNxashQsKy6XlKmEm5JRpKQ2xFBlkeGt7Do4hznLdSZjj/YyzmScCjF16Gjo8x
- i6Pt2Pm6Qcy2/kvjFxXgK6ixiTFlpXwCcrdi0zXukbJh2YIgDuWmEa5IxFfkIHKIryrp
- vFVZWlXSA/fQKc+xF1yflsp/+mxg6jICkk2Tw1uFsgGGR0KoD2RRzW9lYP0CJ7fPYtFQ
- sjtlzFdHN/Ko59BohJ5hosNm7lHBBbKNX1C79aQQJzfAl9+PNWl1rNMuJ0e7tx8A3k0j
- tNEg==
-X-Gm-Message-State: AC+VfDwDwBvR4v8QqF04DLapo7lvGFZVpPFEJqXmdR6GYcOfzzhRe5rC
- MhGkxbu4prjh+05BLGcjpD5LjUy3oYNCfs53Y5XPKQ==
-X-Google-Smtp-Source: ACHHUZ6eS3VoTmO1ME6bPOnQiWyw6OB+v+N4qYJOeln5HgHdircLxN5ASp4faT0mYohU9hPCHM4wcSqkgVlcITQy6hc=
-X-Received: by 2002:a0d:d752:0:b0:565:6634:d106 with SMTP id
- z79-20020a0dd752000000b005656634d106mr5280699ywd.2.1685510188231; Tue, 30 May
- 2023 22:16:28 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1685525330; x=1688117330;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=s/wVkhhWmgIwL0CTiJLUiS5Rb0pQvITbFvbdgCVWLFI=;
+ b=Pr0DdhJgC7gZBMUmR9ajYE5NG+pNq7TnqJa3RO08D4lIwOj0Q4a8WIC7Ruh+bXMbgp
+ KWbGm3vb3ocolFk/VCjUxWYkVvjrXmSyirMNObfmL+8k2CCKSkJBPvJKlwHSUHEax934
+ vV2bADoTa/V6QUqa5qgMpdMlOiORiRQc4aw+Eo2RNurTONHdEL0VmF0etebdTry0GvbE
+ xpV2K4IZ1W+tQkK6hruLTqAj9z4ecOa/WDoVRWDXT96UCuc47x6xeepTDvo4NGZ4exRC
+ fZj9neWi3lzhIjfoDi7vpS6MpbN3PxFrs/N1Mk72NqASsnTNDVPK3xUw8N+IC0XFKzEU
+ bowQ==
+X-Gm-Message-State: AC+VfDwWWvBo3dYJvec7AsUfysuhmmKrowNWQcBmYPSk53aBubSaTK2n
+ QP8OnhxkwKyfrh3mKIeKl8Dw7A==
+X-Google-Smtp-Source: ACHHUZ6aEpRKHzwmigAB+/3SOt2f1gW64oMsDa3cGveGgU7TAucuhNpWJiue232mKupo7tsHrXE0wA==
+X-Received: by 2002:a05:6830:e8a:b0:6b0:9fd7:de3a with SMTP id
+ dp10-20020a0568300e8a00b006b09fd7de3amr979366otb.0.1685525330503; 
+ Wed, 31 May 2023 02:28:50 -0700 (PDT)
+Received: from [192.168.68.107] ([177.198.100.141])
+ by smtp.gmail.com with ESMTPSA id
+ e187-20020a4a55c4000000b00555718c0c5dsm6576899oob.37.2023.05.31.02.28.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 31 May 2023 02:28:49 -0700 (PDT)
+Message-ID: <7ddff340-6312-7bcd-46de-269dac1a1bd3@ventanamicro.com>
+Date: Wed, 31 May 2023 06:28:45 -0300
 MIME-Version: 1.0
-References: <20230526121006.76388-1-sunilvl@ventanamicro.com>
-In-Reply-To: <20230526121006.76388-1-sunilvl@ventanamicro.com>
-From: Anup Patel <apatel@ventanamicro.com>
-Date: Wed, 31 May 2023 10:46:17 +0530
-Message-ID: <CAK9=C2VRF-QobT_-qObOAnjqk8haxOUkmnsPCtCKuRk3pL+jPw@mail.gmail.com>
-Subject: Re: [PATCH v5 0/3] hw/riscv/virt: pflash improvements
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Andrea Bolognani <abologna@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112e;
- envelope-from=apatel@ventanamicro.com; helo=mail-yw1-x112e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [PATCH 2/4] target/riscv: Remove check on mode for MPRV
+Content-Language: en-US
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
+References: <20230529121719.179507-1-liweiwei@iscas.ac.cn>
+ <20230529121719.179507-3-liweiwei@iscas.ac.cn>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230529121719.179507-3-liweiwei@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x32e.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.09,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,82 +99,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, May 26, 2023 at 5:41=E2=80=AFPM Sunil V L <sunilvl@ventanamicro.com=
-> wrote:
->
-> This series improves the pflash usage in RISC-V virt machine with solutio=
-ns to
-> below issues.
->
-> 1) Currently the first pflash is reserved for ROM/M-mode firmware code. B=
-ut S-mode
-> payload firmware like EDK2 need both pflash devices to have separate code=
- and variable
-> store so that OS distros can keep the FW code as read-only.
->
-> The issue is reported at
-> https://salsa.debian.org/qemu-team/edk2/-/commit/c345655a0149f64c5020bfc1=
-e53c619ce60587f6
->
-> 2) The latest way of using pflash devices in other architectures and libv=
-irt
-> is by using -blockdev and machine options. However, currently this method=
- is
-> not working in RISC-V.
->
-> With above issues fixed, added documentation on how to use pflash devices
-> in RISC-V virt machine.
->
-> This patch series is based on Alistair's riscv-to-apply.next branch.
->
-> Changes since v4:
->         1) Updated patch 2 to avoid accessing private field as per feedba=
-ck from Philippe.
->         2) Updated documentation patch to add read-only for ROM usage.
->         3) Rebased to latest riscv-to-apply.next branch and updated tags.
->
-> Changes since v3:
->         1) Converted single patch to a series with a cover letter since t=
-here are
->            multiple patches now.
->         2) Added a new patch to enable pflash usage via -blockdev option.
->         3) Separated the documentation change into new patch and updated =
-the
->            documentation to mention only -blockdev option which seems to =
-be the
->            recommended way of using pflash.
->
-> Changes since v2:
->         1) Reverted v2 changes and used v1 approach so that pflash0 can b=
-e used
->            for code and pflash1 for variable store.
->         2) Rebased to latest riscv-to-apply.next branch.
->         3) Added documentation for pflash usage.
->
-> Changes since v1:
->         1) Simplified the fix such that it doesn't break current EDK2.
->
-> Sunil V L (3):
->   hw/riscv: virt: Assume M-mode FW in pflash0 only when "-bios none"
->   riscv/virt: Support using pflash via -blockdev option
->   docs/system: riscv: Add pflash usage details
 
-In case of KVM guests, there is no M-mode so pflash0 will always
-contain S-mode FW.
 
-I suggest improving this series to consider KVM guests as well
-such that the same EDK2 S-mode works for KVM and TCG guests.
+On 5/29/23 09:17, Weiwei Li wrote:
+> Normally, MPRV can be set to 1 only in M mode (It will be cleared
+> when returning to lower-privilege mode by MRET/SRET).
+> 
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> ---
 
-Regards,
-Anup
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->
->  docs/system/riscv/virt.rst | 29 ++++++++++++++++++++
->  hw/riscv/virt.c            | 56 +++++++++++++++-----------------------
->  2 files changed, 51 insertions(+), 34 deletions(-)
->
-> --
-> 2.34.1
->
->
+>   target/riscv/cpu_helper.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index bd892c05d4..45baf95c77 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -44,7 +44,7 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+>       if (!ifetch) {
+>           uint64_t status = env->mstatus;
+>   
+> -        if (mode == PRV_M && get_field(status, MSTATUS_MPRV)) {
+> +        if (get_field(status, MSTATUS_MPRV)) {
+>               mode = get_field(env->mstatus, MSTATUS_MPP);
+>               virt = get_field(env->mstatus, MSTATUS_MPV) &&
+>                      (mode != PRV_M);
 
