@@ -4,68 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B0C4C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Jun 2023 06:43:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8420EC77B7E
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 Jun 2023 09:35:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q4c1z-0002np-OX; Thu, 01 Jun 2023 02:43:32 -0400
+	id 1q4eiE-0007gg-38; Thu, 01 Jun 2023 05:35:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q4c1w-0002nV-9y; Thu, 01 Jun 2023 02:43:30 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q4c1t-00060C-HU; Thu, 01 Jun 2023 02:43:28 -0400
-Received: from [192.168.81.181] (unknown [61.242.129.184])
- by APP-05 (Coremail) with SMTP id zQCowADn7Ij9PXhklSwlCQ--.43340S2;
- Thu, 01 Jun 2023 14:43:09 +0800 (CST)
-Message-ID: <18e4da39-cbd4-aa60-7628-7105a788b6e8@iscas.ac.cn>
-Date: Thu, 1 Jun 2023 14:43:07 +0800
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q4ei1-0007f2-K5
+ for qemu-riscv@nongnu.org; Thu, 01 Jun 2023 05:35:05 -0400
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q4ehw-0008RV-Tw
+ for qemu-riscv@nongnu.org; Thu, 01 Jun 2023 05:35:04 -0400
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-4f3bb395e69so686178e87.2
+ for <qemu-riscv@nongnu.org>; Thu, 01 Jun 2023 02:34:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1685612095; x=1688204095;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3Zwvv7hRmZE3KagMMUek3a8BemDtxYZcXS3YbhElKH8=;
+ b=UZP6BAwmLY10EpomH4dV6egqcE0OD95bP3Jw4lNbeZNHcjkwzZG0637F26+P19yfgP
+ xDrT7rRt4PVV2dCqA1v7bpSZVsYA74yWDoKCtrobgIT2jxLRjUTQO++8nReoiiQRtYL5
+ 3lzBm8J8vPrf4FvUYrRx9KTk1odNA7tiCHbYevFUpN4bFzmqwYiHA4x+FpllWJagdXpO
+ pNjUwfelXpi+0qw8x3kvY2hN1Y5IZ/4Uy9Lqi1fFF+57ElvOSuyKyOBp/OEr5NUVA+yJ
+ DS7uJVKe+CHhha7Uvg2hD3NPp53OfPZG+otVAi2P2z98XAbIbR7J/RQFC6FL9mjQNld9
+ LmFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1685612095; x=1688204095;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3Zwvv7hRmZE3KagMMUek3a8BemDtxYZcXS3YbhElKH8=;
+ b=Me8Cx8t+PHb41KappG2XtKVgYGN3OyHmSX/rq6ylZSnenTfX4Wf0VKJmpM/rQKXKDa
+ Jbv6BvYpSY0iBuUqaULNVFjXkYNtsPPtWhent8281y7eaWCs40ZASzxuc0JkjMX9Kxpy
+ FNTXimnqBsiXqUkLw6vXjZ9o2YyVzYWjbBVj8mf9VWAAq2tDLFgbAagRydEOXUVvQFyL
+ j+TmnX7XL8FWhVSTH4mwww6RFw+pF2Qua3Zhe4uVHsmuFAwNEbnE2NWlewrX39qi2pFw
+ ozxg+g7ONepwGgpG0fgBlSQ8zawq5piaJLNAhD2SuYoO5a39U1AjuMxm2Nfnj5c7lVTw
+ Cf0g==
+X-Gm-Message-State: AC+VfDyn++nkboKWqox24DsIWBN62z3ic2ANVF1U8q6wjWYeqVLXPPDE
+ 1CblTJ84Ry1rrbwbvkxNRwGydA==
+X-Google-Smtp-Source: ACHHUZ5kxHSdw51damig2A4JyOXkjpWHjUbfb6Bl3e7q3uN7h37Rdizqb8FmhjeBb8oMrdlpV/il7A==
+X-Received: by 2002:ac2:5223:0:b0:4f3:b9b1:5683 with SMTP id
+ i3-20020ac25223000000b004f3b9b15683mr897808lfl.62.1685612094720; 
+ Thu, 01 Jun 2023 02:34:54 -0700 (PDT)
+Received: from localhost.localdomain ([176.176.141.224])
+ by smtp.gmail.com with ESMTPSA id
+ q25-20020a7bce99000000b003eddc6aa5fasm1637449wmj.39.2023.06.01.02.34.53
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 01 Jun 2023 02:34:54 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org, Markus Armbruster <armbru@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>
+Cc: qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
+ Thomas Huth <thuth@redhat.com>, qemu-block@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 0/2] bulk: Remove pointless QOM casts
+Date: Thu,  1 Jun 2023 11:34:50 +0200
+Message-Id: <20230601093452.38972-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH 2/4] target/riscv: Remove check on mode for MPRV
-To: Alistair Francis <alistair23@gmail.com>, Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230529121719.179507-1-liweiwei@iscas.ac.cn>
- <20230529121719.179507-3-liweiwei@iscas.ac.cn>
- <CAKmqyKPmXXoVdSndTF+aF7A-3PqVrnw-NFG26sQQicxybwWpQA@mail.gmail.com>
-Content-Language: en-US
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <CAKmqyKPmXXoVdSndTF+aF7A-3PqVrnw-NFG26sQQicxybwWpQA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowADn7Ij9PXhklSwlCQ--.43340S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Kw48Zr4Dtr1rCr4fKrWkXrb_yoW8Jw13pr
- WrGayxCa98WrZrGa4Igr4Yg3W5trZ8GryDGw4v9rn3ZrsxJrZxuFZxGw15Wr9rJFy0krWY
- va1UZF95AF47ZFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBj14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F
- 4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
- 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
- 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
- n2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkIecxEwVAFwVW8AwCF04k20xvY0x0EwI
- xGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480
- Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7
- IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k2
- 6cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxV
- AFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JU-J5rUUUUU=
-X-Originating-IP: [61.242.129.184]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.091,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::134;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x134.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,49 +92,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+As per Markus suggestion in [*], use Coccinelle to remove
+pointless QOM cast macro uses. Since we have more than 1000
+QOM types, add a script to generate the semantic patch.
 
-On 2023/6/1 13:27, Alistair Francis wrote:
-> On Mon, May 29, 2023 at 10:19 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->> Normally, MPRV can be set to 1 only in M mode (It will be cleared
->> when returning to lower-privilege mode by MRET/SRET).
->>
->> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->> ---
->>   target/riscv/cpu_helper.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> index bd892c05d4..45baf95c77 100644
->> --- a/target/riscv/cpu_helper.c
->> +++ b/target/riscv/cpu_helper.c
->> @@ -44,7 +44,7 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
->>       if (!ifetch) {
->>           uint64_t status = env->mstatus;
->>
->> -        if (mode == PRV_M && get_field(status, MSTATUS_MPRV)) {
->> +        if (get_field(status, MSTATUS_MPRV)) {
-> The original check is correct though, why remove it?
+[*] https://lore.kernel.org/qemu-devel/87mt1jafjt.fsf@pond.sub.org/
 
-Yeah. As described in the commit message, I think MPRV can only be set 
-to 1 in M mode normally
+Philippe Mathieu-Daudé (2):
+  scripts: Add qom-cast-macro-clean-cocci-gen.py
+  bulk: Remove pointless QOM casts
 
-which means check on MPRV is enough in this case. So I remove the check 
-on mode here.
+ MAINTAINERS                               |  1 +
+ block/nbd.c                               |  4 +-
+ chardev/char-pty.c                        |  2 +-
+ hw/arm/musicpal.c                         |  2 +-
+ hw/arm/xlnx-versal.c                      |  2 +-
+ hw/display/vhost-user-gpu.c               |  4 +-
+ hw/intc/loongarch_extioi.c                |  6 +--
+ hw/m68k/q800.c                            |  2 +-
+ hw/pci-host/bonito.c                      |  2 +-
+ hw/ppc/pnv_lpc.c                          |  2 +-
+ hw/ppc/pnv_occ.c                          |  2 +-
+ hw/ppc/pnv_sbe.c                          |  2 +-
+ hw/riscv/virt.c                           | 10 ++---
+ hw/rx/rx62n.c                             |  2 +-
+ hw/scsi/esp-pci.c                         | 18 ++++-----
+ hw/sparc/sun4m.c                          |  4 +-
+ hw/virtio/virtio-mem-pci.c                |  6 +--
+ hw/virtio/virtio-pmem-pci.c               |  6 +--
+ migration/fd.c                            |  4 +-
+ migration/multifd.c                       |  2 +-
+ migration/yank_functions.c                |  4 +-
+ nbd/client-connection.c                   |  2 +-
+ nbd/server.c                              |  2 +-
+ softmmu/qdev-monitor.c                    |  2 +-
+ ui/vnc-ws.c                               |  6 +--
+ scripts/qom-cast-macro-clean-cocci-gen.py | 49 +++++++++++++++++++++++
+ 26 files changed, 99 insertions(+), 49 deletions(-)
+ create mode 100644 scripts/qom-cast-macro-clean-cocci-gen.py
 
-Regards,
-
-Weiwei Li
-
->
-> Alistair
->
->>               mode = get_field(env->mstatus, MSTATUS_MPP);
->>               virt = get_field(env->mstatus, MSTATUS_MPV) &&
->>                      (mode != PRV_M);
->> --
->> 2.25.1
->>
->>
+-- 
+2.38.1
 
 
