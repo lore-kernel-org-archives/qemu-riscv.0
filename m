@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D340FC77B7A
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Jun 2023 03:27:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F028C7EE24
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Jun 2023 03:41:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q4vRV-0000Zm-HB; Thu, 01 Jun 2023 23:27:09 -0400
+	id 1q4vf3-0004sr-6g; Thu, 01 Jun 2023 23:41:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q4vRU-0000Za-TE; Thu, 01 Jun 2023 23:27:08 -0400
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ id 1q4vf1-0004sC-Nm; Thu, 01 Jun 2023 23:41:07 -0400
+Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q4vRT-0006nd-BD; Thu, 01 Jun 2023 23:27:08 -0400
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-45702d3d92cso569759e0c.1; 
- Thu, 01 Jun 2023 20:27:06 -0700 (PDT)
+ id 1q4vf0-0007g9-6v; Thu, 01 Jun 2023 23:41:07 -0400
+Received: by mail-ua1-x92f.google.com with SMTP id
+ a1e0cc1a2514c-7841f18f9f7so374379241.0; 
+ Thu, 01 Jun 2023 20:41:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1685676426; x=1688268426;
+ d=gmail.com; s=20221208; t=1685677264; x=1688269264;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Vyf31h4qMQ/kRAVd60eucSupJKhCue28412MTcJsuAo=;
- b=YANp9DnSsCtOaJ2WaHsrmr41MgH823BuahW8h9OhysnbYEb/qiUm704DQPDUEJTIp7
- uxVTER0bRRECVh67oW227TDJP/7fbeqff7eDubg3IB+gLH1uJ257Sjh94H/IzmpZpYWN
- j+DGTtlQKwe7XADb+bWbfz9Gst4DlthKWkticZs89Sl1Us29fhJH1WD756qbfML9zZ9A
- pRVIseqy2ViH2+t76BDTACN4l4ZUITw0EyiwZWFCSfMX2Jl0xtRhUgMaVH/7xhVHGjZ6
- aFaWFwoNyLjeqVjzdAqJiW9gTb6Efw+flWhxoe9zPb+jL9nVM0oMVekKiTr2/muLXNja
- 52dQ==
+ bh=XSMgfEdjApGGUQRWCxyKiafg0+pTJCIgESMaKnofCN8=;
+ b=FudU/HHun32Y1EHts39Yy3xid6qgIHh6GEltpyT0BUE7BvXtvaKk0S6RGElriIAJ1D
+ zJTs52UDz4QSFBKt6imxsDRbeFrShG+jhCRanCHDYfAJjGfg+Nr4tXzgJo4DX28OqJsn
+ RcizbQ4/L5iflYlLA4brMiXWSGfX6VXO+cS3F1RgjcHqwgVVabtNfiksyZQpToFund54
+ 0qajhfLxSfml+W6bq8OGTgdpY0Ew244RfghqPmqFqRwv1uJDQVOwt/2bYxQj7KDMORvp
+ dGpnB79tMsn58AajoT5MX/tkOOWYLBb21b73k8gJ7NluWp6+aALi8BubId/H82L1iz+x
+ JORw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685676426; x=1688268426;
+ d=1e100.net; s=20221208; t=1685677264; x=1688269264;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Vyf31h4qMQ/kRAVd60eucSupJKhCue28412MTcJsuAo=;
- b=U4sB5lYo4Q0i/oWs6SeOskVTi8oo5rx/tzeXp/O4mXTzHGNsIzB6fblFABule1DKkU
- iljF4kyl15rimK8EC4QjnUVSHWM5FRn5+8OuH+QUCY+43LfN6u3lKe43Y4XeDxO6lypb
- kMvpoxmAF8lPX8xn3gZRQK1lTLp/8Y3TcYuQUWa1ZdmEYQmQnN3z8IvIN8vx5+7gsggb
- nTr0CShwlgvGnhvI3M54X57H4lABGJ936Wc3nvU3moY1n+GlF5/j4SwcQb/hB50jWy61
- BfXJawXvnFAJ1lI5QqckUdeVoKkD4ATCYr4vveEl6736U+U1W6XMt1XvkA29IfEwpgaC
- i6EQ==
-X-Gm-Message-State: AC+VfDzsb7ZoOK1dBEU9JYX19W6QMZWCbGyyzOtK+iDHUlz3ojFrr0vy
- I9thpU6luhUOlBhYRMoPWS9B9ulXkbjUeha3RWE=
-X-Google-Smtp-Source: ACHHUZ4q3eZFoyqjo398fx26vSNuFDolDXthVpKRX2MnE+D86++aIoBHdJ1RnmhaDVdt/9ZjhkE0W9issmOMXR2zsaQ=
-X-Received: by 2002:a1f:cb44:0:b0:457:d0f:37bf with SMTP id
- b65-20020a1fcb44000000b004570d0f37bfmr2047412vkg.16.1685676425947; Thu, 01
- Jun 2023 20:27:05 -0700 (PDT)
+ bh=XSMgfEdjApGGUQRWCxyKiafg0+pTJCIgESMaKnofCN8=;
+ b=jOgORj6oePjVupK6fAy1Vw3g/VDoWCKiyTyyYizd9EHHb5xGEzfiqpytjQurmXdwv7
+ wRHba5WWjTsqBXRkCaZv9Hw+Zz8YzZ7YozrE8Y1M+1fZYQaoLVDT4BBnjMkzQ24d67nM
+ 5irwLc3H2GliWJRuYAlwJnTpcLFXd/Zgh+mJCrNqPh6MQUfwUB7Kb5naRVlsVxbO4NdP
+ HwqzP4Wgr6PHuE6E2RG3I3Dzxs43pa2LrrjVannL5VOFVQ/2yaQDshDcQzUNN4EBVPMZ
+ 14bCT0cN0GXk5u/skGyosoSSl3Bh6AytrLyGpYK2l79rqiXWxZiCnzbHbpWyEEU1mrjv
+ 0wyg==
+X-Gm-Message-State: AC+VfDzoFiFOXmnX/goYdjH/Y6T++5tkIsbVjx1tgqdGTtseyz10Uker
+ JOB9Pdu0F/sQqEGq8cleP97deuqYk4dLznkW8UUXvPAbI6ImPg==
+X-Google-Smtp-Source: ACHHUZ7fi+/61BxXMF1cxY7acWcUdvBEKYHi4TdB8s1qe7b6gdGzKIirsyWUBRXx4Ok5gaOE/uEPn8xidto/mkqj3OQ=
+X-Received: by 2002:a1f:3f44:0:b0:457:fb6:589b with SMTP id
+ m65-20020a1f3f44000000b004570fb6589bmr1473083vka.2.1685677263921; Thu, 01 Jun
+ 2023 20:41:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230526162308.22892-1-rkanwal@rivosinc.com>
- <20230526162308.22892-5-rkanwal@rivosinc.com>
-In-Reply-To: <20230526162308.22892-5-rkanwal@rivosinc.com>
+References: <20230410124451.15929-1-ivan.klokov@syntacore.com>
+In-Reply-To: <20230410124451.15929-1-ivan.klokov@syntacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 2 Jun 2023 13:26:39 +1000
-Message-ID: <CAKmqyKNmDqjUfhHuxx5-Y-VotC+-PRo+imYy1FJzVVr7KUPaYw@mail.gmail.com>
-Subject: Re: [PATCH v2 4/6] target/riscv: Split interrupt logic from
- riscv_cpu_update_mip.
-To: Rajnesh Kanwal <rkanwal@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+Date: Fri, 2 Jun 2023 13:40:37 +1000
+Message-ID: <CAKmqyKNcmf=EaZ_kG1THoRV0turN09cUfKHXWUNCf6bKxNGsSw@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] Support for print to log vector extension registers
+To: Ivan Klokov <ivan.klokov@syntacore.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, richard.henderson@linaro.org,
+ pbonzini@redhat.com, eduardo@habkost.net, marcel.apfelbaum@gmail.com, 
+ philmd@linaro.org, wangyanan55@huawei.com, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, 
- apatel@ventanamicro.com
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -92,95 +91,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, May 27, 2023 at 2:24=E2=80=AFAM Rajnesh Kanwal <rkanwal@rivosinc.co=
-m> wrote:
+On Mon, Apr 10, 2023 at 10:46=E2=80=AFPM Ivan Klokov <ivan.klokov@syntacore=
+.com> wrote:
 >
-> This is to allow virtual interrupts to be inserted into S and VS
-> modes. Given virtual interrupts will be maintained in separate
-> mvip and hvip CSRs, riscv_cpu_update_mip will no longer be in the
-> path and interrupts need to be triggered for these cases from
-> rmw_hvip64 and rmw_mvip64 functions.
+> The patch added an ability to include VPU registers in the 'cpu' logging.
+> ---
+> v3:
+>    - split of the patch into two parts: general and RISC-V specific
+> ---
 >
-> Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
+> Ivan Klokov (2):
+>   util/log: Add vector registers to log
+>   target/riscv: Add RVV registers to log
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I'm going to go ahead and merge this
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/cpu.h        |  1 +
->  target/riscv/cpu_helper.c | 25 ++++++++++++++++++-------
->  2 files changed, 19 insertions(+), 7 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index de7e43126a..de55bfb775 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -562,6 +562,7 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *en=
-v);
->  int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts);
->  uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask,
->                                uint64_t value);
-> +void riscv_cpu_interrupt(CPURISCVState *env);
->  #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip valu=
-e */
->  void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(void *),
->                               void *arg);
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index b25ee179e9..c79ec4db76 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -609,11 +609,12 @@ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint6=
-4_t interrupts)
->      }
->  }
+>  accel/tcg/cpu-exec.c  |  3 +++
+>  include/hw/core/cpu.h |  2 ++
+>  include/qemu/log.h    |  1 +
+>  target/riscv/cpu.c    | 56 ++++++++++++++++++++++++++++++++++++++++++-
+>  util/log.c            |  2 ++
+>  5 files changed, 63 insertions(+), 1 deletion(-)
 >
-> -uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask,
-> -                              uint64_t value)
-> +void riscv_cpu_interrupt(CPURISCVState *env)
->  {
-> +    uint64_t gein, vsgein =3D 0, vstip =3D 0;
->      CPUState *cs =3D env_cpu(env);
-> -    uint64_t gein, vsgein =3D 0, vstip =3D 0, old =3D env->mip;
-> +
-> +    QEMU_IOTHREAD_LOCK_GUARD();
->
->      if (env->virt_enabled) {
->          gein =3D get_field(env->hstatus, HSTATUS_VGEIN);
-> @@ -622,15 +623,25 @@ uint64_t riscv_cpu_update_mip(CPURISCVState *env, u=
-int64_t mask,
->
->      vstip =3D env->vstime_irq ? MIP_VSTIP : 0;
->
-> -    QEMU_IOTHREAD_LOCK_GUARD();
-> -
-> -    env->mip =3D (env->mip & ~mask) | (value & mask);
-> -
->      if (env->mip | vsgein | vstip) {
->          cpu_interrupt(cs, CPU_INTERRUPT_HARD);
->      } else {
->          cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
->      }
-> +}
-> +
-> +uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask, uint64_=
-t value)
-> +{
-> +    uint64_t old =3D env->mip;
-> +
-> +    /* No need to update mip for VSTIP */
-> +    mask =3D ((mask =3D=3D MIP_VSTIP) && env->vstime_irq) ? 0 : mask;
-> +
-> +    QEMU_IOTHREAD_LOCK_GUARD();
-> +
-> +    env->mip =3D (env->mip & ~mask) | (value & mask);
-> +
-> +    riscv_cpu_interrupt(env);
->
->      return old;
->  }
 > --
-> 2.25.1
+> 2.34.1
 >
 >
 
