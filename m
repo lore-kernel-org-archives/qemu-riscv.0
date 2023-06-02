@@ -4,70 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19CC6C77B7E
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Jun 2023 01:31:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36C06C77B7A
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Jun 2023 02:12:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q4tdd-000323-FG; Thu, 01 Jun 2023 21:31:34 -0400
+	id 1q4uGc-0004pq-BM; Thu, 01 Jun 2023 22:11:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q4tdb-00031m-4V; Thu, 01 Jun 2023 21:31:32 -0400
-Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q4tdX-00035i-IK; Thu, 01 Jun 2023 21:31:30 -0400
-Received: from [192.168.194.181] (unknown [61.242.130.78])
- by APP-01 (Coremail) with SMTP id qwCowABXXPBjRnlk+HDBCQ--.19064S2;
- Fri, 02 Jun 2023 09:31:16 +0800 (CST)
-Message-ID: <be90143f-1c8b-eb31-3c75-ae9846f00a22@iscas.ac.cn>
-Date: Fri, 2 Jun 2023 09:31:15 +0800
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1q4uGb-0004pW-7Y; Thu, 01 Jun 2023 22:11:49 -0400
+Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1q4uGZ-0004A1-IW; Thu, 01 Jun 2023 22:11:48 -0400
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-45d96e87b3dso409199e0c.2; 
+ Thu, 01 Jun 2023 19:11:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1685671899; x=1688263899;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YEL47QvFhZ0ETtVl8QeV+8RTY621ulBnFsV+sYHSTCs=;
+ b=AgF8MEGgW5LChAIYnBr7f9ZFIiM9wv9DNC4vx1PDbSGVqjb70Y0vQBCJ0UmvfFsIC0
+ XDk6seA0nbZXoGSLsDW759hw09lHwHvc0UN2OYyH6T67LbY4YH+50L4Ve/rOulRR9js9
+ ASaiEmmsAZELfcuDs3HUOKdDWz6ixcByuanl3ljIqU/rFtgIG5Pjf6KoRECk7AEf3tlY
+ rwyJ8bdAFGKbQaY0i0fKprZPBTfQ8GjmKSuP2r/N+5kipBni5V9HVIfkd14yGi66Jz6N
+ Rds+emOW2rbZWOWRWLro+q51YpQvK1cPtxNjsAGByzxVpnGZVA8+gcqZILZcqffo4i7F
+ OqVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1685671899; x=1688263899;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YEL47QvFhZ0ETtVl8QeV+8RTY621ulBnFsV+sYHSTCs=;
+ b=NgW+/mGgDuA//2hx+PT0UOYk6abAKVr+gw4JOsKd0vZdfapjSTN3cWk/NJl3S8Twce
+ JZ9ktDc1099yBVxBKkWxjnMM/WnyZG3Smu0gwcO8ZLomCZo++i3eF5jeq9s6XOSMKQK4
+ ITnkO0ON1384cJU6eMnNNXv5+/bqdsiVXHhWn8XgrNUMJxnFZP2wuRXuZodjKsUSK8Ot
+ i7MQXPv6DYm8L0F5Eze+C2d1vPgeu1rA/L9eRxVzZOvwNricbvgdBLbsDrJk45HKovw7
+ UACzi0N7ggsrtq53RXkuVtYu5O8izwa1060LUnplnsPYPfxRXQKnfVeDxnxh3Gi4qT4V
+ YM1Q==
+X-Gm-Message-State: AC+VfDw6q0WSAarIdLaj/S3wteoT7uUSwljNzEnDlgC5G5C9nJepECeS
+ CzRDCT/TloBpRQdpgj5Izq7nKvbR9nEUmaW7uXnFvuUwe+D9SQ==
+X-Google-Smtp-Source: ACHHUZ73OKJIMmjeJfeWeniaDzFQA2P8y1qVn0p9xpO3soyKQNPMhQs7jVsiGE8YZOZzfiUJzmp9OAGX5hStE3cwo20=
+X-Received: by 2002:a1f:bf85:0:b0:456:d63e:c4ea with SMTP id
+ p127-20020a1fbf85000000b00456d63ec4eamr2191757vkf.16.1685671898672; Thu, 01
+ Jun 2023 19:11:38 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Cc: liweiwei@iscas.ac.cn, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-Subject: Re: [PATCH 2/4] target/riscv: Remove check on mode for MPRV
-Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>
-References: <20230529121719.179507-1-liweiwei@iscas.ac.cn>
- <20230529121719.179507-3-liweiwei@iscas.ac.cn>
- <CAKmqyKPmXXoVdSndTF+aF7A-3PqVrnw-NFG26sQQicxybwWpQA@mail.gmail.com>
- <18e4da39-cbd4-aa60-7628-7105a788b6e8@iscas.ac.cn>
- <CAKmqyKMP0aX=_3ffQXSNQ0pWCjeXEF+h=QgPbL80=0J8v_gOrA@mail.gmail.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <CAKmqyKMP0aX=_3ffQXSNQ0pWCjeXEF+h=QgPbL80=0J8v_gOrA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowABXXPBjRnlk+HDBCQ--.19064S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7urWkurykCr4UJF4fGFW5Awb_yoW8KFW5pF
- WrGayxKrZ8GrZ7Ga4Igr4Yga17trZ8KF1DWw1kWr17Xrs8trZ3uFsxAw45Wr9rCF1xKrWj
- vF1jyF93ZF1UZFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9G14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4j6r
- 4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kI
- c2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkIecxEwVAFwVWkMxAIw28IcxkI7VAKI48JMx
- C20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAF
- wI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20x
- vE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v2
- 0xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxV
- W8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbLiSPUUUUU==
-X-Originating-IP: [61.242.130.78]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -19
-X-Spam_score: -2.0
-X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.1,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+References: <20230601045910.18646-1-sunilvl@ventanamicro.com>
+In-Reply-To: <20230601045910.18646-1-sunilvl@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 2 Jun 2023 12:11:12 +1000
+Message-ID: <CAKmqyKOBDcUazrk=MeFjumzc=tWTOYvPPy7wQ=Nyn+ngOQdG+A@mail.gmail.com>
+Subject: Re: [PATCH v7 0/3] hw/riscv/virt: pflash improvements
+To: Sunil V L <sunilvl@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Andrea Bolognani <abologna@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -84,77 +93,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-On 2023/6/2 07:03, Alistair Francis wrote:
-> On Thu, Jun 1, 2023 at 4:43 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->>
->> On 2023/6/1 13:27, Alistair Francis wrote:
->>> On Mon, May 29, 2023 at 10:19 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->>>> Normally, MPRV can be set to 1 only in M mode (It will be cleared
->>>> when returning to lower-privilege mode by MRET/SRET).
->>>>
->>>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->>>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->>>> ---
->>>>    target/riscv/cpu_helper.c | 2 +-
->>>>    1 file changed, 1 insertion(+), 1 deletion(-)
->>>>
->>>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->>>> index bd892c05d4..45baf95c77 100644
->>>> --- a/target/riscv/cpu_helper.c
->>>> +++ b/target/riscv/cpu_helper.c
->>>> @@ -44,7 +44,7 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
->>>>        if (!ifetch) {
->>>>            uint64_t status = env->mstatus;
->>>>
->>>> -        if (mode == PRV_M && get_field(status, MSTATUS_MPRV)) {
->>>> +        if (get_field(status, MSTATUS_MPRV)) {
->>> The original check is correct though, why remove it?
->> Yeah. As described in the commit message, I think MPRV can only be set
->> to 1 in M mode normally
-> That's true. I do feel that keeping the check makes the code easier to
-> follow. Otherwise future developers need to check to see how MPRV can
-> be set. The current code is explicit and obviously follows the spec.
+On Thu, Jun 1, 2023 at 3:00=E2=80=AFPM Sunil V L <sunilvl@ventanamicro.com>=
+ wrote:
 >
-> For a performance gain I think it's worth making the trade off, but it
-> doesn't sound like we really get any gain here.
-
-Yeah. It's acceptable to me.
-
-Just another question: whether MPRV is truly limited to work on M mode?
-
-I can only find following description in the note:
-
-"The MPRV and MXR mechanisms *were* conceived to improve the efficiency 
-of M-mode routines
-that emulate missing hardware features, e.g., misaligned loads and stores."
-
-To some degree, It seems not limit them to work on other mode.
-
-Even though MPRV normally can be set to 1 in M mode, it seems possible 
-to set it to 1 in other mode by gdbstub.
-
-Regards,
-
-Weiwei Li
-
-> Alistair
+> This series improves the pflash usage in RISC-V virt machine with solutio=
+ns to
+> below issues.
 >
->> which means check on MPRV is enough in this case. So I remove the check
->> on mode here.
->>
->> Regards,
->>
->> Weiwei Li
->>
->>> Alistair
->>>
->>>>                mode = get_field(env->mstatus, MSTATUS_MPP);
->>>>                virt = get_field(env->mstatus, MSTATUS_MPV) &&
->>>>                       (mode != PRV_M);
->>>> --
->>>> 2.25.1
->>>>
->>>>
+> 1) Currently the first pflash is reserved for ROM/M-mode firmware code. B=
+ut S-mode
+> payload firmware like EDK2 need both pflash devices to have separate code=
+ and variable
+> store so that OS distros can keep the FW code as read-only.
+>
+> The issue is reported at
+> https://salsa.debian.org/qemu-team/edk2/-/commit/c345655a0149f64c5020bfc1=
+e53c619ce60587f6
+>
+> 2) The latest way of using pflash devices in other architectures and libv=
+irt
+> is by using -blockdev and machine options. However, currently this method=
+ is
+> not working in RISC-V.
+>
+> With above issues fixed, added documentation on how to use pflash devices
+> in RISC-V virt machine.
+>
+> This patch series is based on Alistair's riscv-to-apply.next branch.
+>
+> Changes since v6:
+>         1) Updated the documentation patch as per text provided by Andrea=
+.
+>
+> Changes since v5:
+>         1) Added KVM use case as per feedback from Anup. Updated the docu=
+mentation
+>            patch that only S-mode payload is supported for KVM guests. Te=
+sted with
+>            KVM enabled.
+>         2) Updated tags.
+>
+> Changes since v4:
+>         1) Updated patch 2 to avoid accessing private field as per feedba=
+ck from Philippe.
+>         2) Updated documentation patch to add read-only for ROM usage.
+>         3) Rebased to latest riscv-to-apply.next branch and updated tags.
+>
+> Changes since v3:
+>         1) Converted single patch to a series with a cover letter since t=
+here are
+>            multiple patches now.
+>         2) Added a new patch to enable pflash usage via -blockdev option.
+>         3) Separated the documentation change into new patch and updated =
+the
+>            documentation to mention only -blockdev option which seems to =
+be the
+>            recommended way of using pflash.
+>
+> Changes since v2:
+>         1) Reverted v2 changes and used v1 approach so that pflash0 can b=
+e used
+>            for code and pflash1 for variable store.
+>         2) Rebased to latest riscv-to-apply.next branch.
+>         3) Added documentation for pflash usage.
+>
+> Changes since v1:
+>         1) Simplified the fix such that it doesn't break current EDK2.
+>
+> Sunil V L (3):
+>   hw/riscv: virt: Assume M-mode FW in pflash0 only when "-bios none"
+>   riscv/virt: Support using pflash via -blockdev option
+>   docs/system: riscv: Add pflash usage details
 
+Thanks!
+
+Applied to riscv-to-apply.next
+
+Alistair
+
+>
+>  docs/system/riscv/virt.rst | 31 ++++++++++++++++++++
+>  hw/riscv/virt.c            | 59 ++++++++++++++++----------------------
+>  2 files changed, 56 insertions(+), 34 deletions(-)
+>
+> --
+> 2.34.1
+>
+>
 
