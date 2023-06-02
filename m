@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10076C7EE23
-	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Jun 2023 03:11:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98111C77B7A
+	for <qemu-riscv@archiver.kernel.org>; Fri,  2 Jun 2023 03:14:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q4vC3-0001oo-GP; Thu, 01 Jun 2023 23:11:11 -0400
+	id 1q4vEn-0003Ov-TK; Thu, 01 Jun 2023 23:14:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q4vC1-0001oU-8F; Thu, 01 Jun 2023 23:11:10 -0400
-Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
+ id 1q4vEn-0003OV-3U; Thu, 01 Jun 2023 23:14:01 -0400
+Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1q4vBy-0007cn-VS; Thu, 01 Jun 2023 23:11:09 -0400
-Received: by mail-vs1-xe2b.google.com with SMTP id
- ada2fe7eead31-437daacde18so438555137.1; 
- Thu, 01 Jun 2023 20:11:06 -0700 (PDT)
+ id 1q4vEl-0008IY-Mo; Thu, 01 Jun 2023 23:14:00 -0400
+Received: by mail-ua1-x935.google.com with SMTP id
+ a1e0cc1a2514c-7865ce76c6dso515240241.2; 
+ Thu, 01 Jun 2023 20:13:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1685675465; x=1688267465;
+ d=gmail.com; s=20221208; t=1685675638; x=1688267638;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=b/8R4PyRwTgAonXNwkjhqKdhCP1yaztTNtLxCPnmzZE=;
- b=GRbGZfO5jqK4rEPsaGyG35Ybw6JSY7dLJnwkXWkI4jeAz90SA/gk8uZl0WnQJSANmG
- mpPAb4QIPNp5IGtrU4EiUI63ZxAy006RhskuTbls8lHv88C4caHHkfuxUKLIH5H2322m
- 1wKshnKH/1jl9bhbhGJR3+bxRmRpD6a37vL3HPt/CLWrkqLOj9goeCz8Apt+OWXFuSsr
- e8J9dytNOAcTLxcW1PK/iMas+UdfIVqrhC5YQM9MHtcOhSGY80zywCjx7faSCoZRI/Xv
- KXvAdnWlA2onLKwcZiTvrp3gMWBTGRA751YiPu88drFNVW7n+oT/ejGc7krfbO1AXElO
- /ugw==
+ bh=6UG9mfdenaqd4PErnkgg+4NsYNQvfxxZX9AVq5d1gwk=;
+ b=I1hPVHguPvu0WekKhVnJFZ1T7nRvOlhw3WhEMywYAWfNtncAVYoalup/hWCCH/Ni0+
+ zS9VhXAMN2xQ6Z65kpYS3jD2Gql6kOzsZ4LIvceKfrhr6sQYJw/4xg8/QRfF2e3rAMoS
+ ioDCl0BIvfnyBXT1gpXRkFpcGPRcC95P4/0561ntzwynRG9PHk1PpaKU9d1N/53whOtg
+ WylnCzol0NS7OPE5doepWA2pZuqzs8JGAl4W2wke6uBPv8HUV90liEoEwiqCFHQBMJtC
+ V3Wzpi2k+S1t5AYCOdc4xWYuZPWhkzRML0T/H1hki4exGo1c2UykSw5vjWORW6Ljp7Xg
+ yg9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685675465; x=1688267465;
+ d=1e100.net; s=20221208; t=1685675638; x=1688267638;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=b/8R4PyRwTgAonXNwkjhqKdhCP1yaztTNtLxCPnmzZE=;
- b=PQ9aDNP1I1p1INetjg6Kgh5tZ4A4zg4DqYljejmlBC8qjd/0ov6AUif0YwVlbBxYXx
- 6/O/zgK3tHKiPDByK7zzRX40D8mhaZja+SI+YjvZMAL9aIDMf3VcbGE/TZCXaQKk8/1U
- nws+RKyOU53e258RNKrY9D9iZqi8LRohAoe18a4b9Vssee24KPZAnEvKxDdc2uFPTq3d
- 4IKQhuAjhAEH1Sm/SUvJjNAhNqqPaFTRicSPcZuhl/kY6BnsYtbpDPDCFq6B9j+Bu1Ut
- +w7OV4RkLT88hp9vlqTlvPAaP3TID3vxDMJ8M3t7WKlqGuPgb7kNxlVHCqJA2Ysc6ZYV
- FQ/w==
-X-Gm-Message-State: AC+VfDwI3B9A3yhIEaUmyGu0u5nO6rJMXYwMGKQGopIpCl/x/nkqA6NC
- AvQG129MJzTwS6CUd6ct3moGA1nW8HGJ4JX6hntO9eeYLDkmZg==
-X-Google-Smtp-Source: ACHHUZ4iQsJJ3LHCc+4qkv3l2TyGyySFjet9/5sPxmdLsJ6a1yj2x2gzx4NX0Kf5SyQNrHNLTQpKIO2WFpVhrUz1VnI=
-X-Received: by 2002:a67:bd05:0:b0:436:2210:9499 with SMTP id
- y5-20020a67bd05000000b0043622109499mr5478659vsq.19.1685675465428; Thu, 01 Jun
- 2023 20:11:05 -0700 (PDT)
+ bh=6UG9mfdenaqd4PErnkgg+4NsYNQvfxxZX9AVq5d1gwk=;
+ b=chphH5e/ChFWonDtCDUfZrMcWj4np/7h/Nf6AnozmfDFrJ/W7gkGucORMor/tcjsuJ
+ vr+Cu/RoJawZAoHxtFc50/bUQRFSlDpPaN9VyXBbjqfyzTk14EmgkT6+K288mFLMvzsh
+ PjRqzl6KlIYrbGWj/S24rdfXejdMOID70rPHvXtI6xHP42/rDwdmnE+YTDq6MP2vzXk/
+ bhcx9W19VevRmxCSy68gVzaLJvO2dX0vjah5dMg6Cw/dWNXJpDEdtDRFmZNDq+mMHCvW
+ /hQCFCiQF8/zGFHdTI4mK0Mv/4HMLA1qX/j4asIhm62YWAdU3oB50vHZOI0V+zBrFCC6
+ N1qQ==
+X-Gm-Message-State: AC+VfDxgSJUr4rKb5qLkpIpvdC6XgV1uudydu5MxfDacJlE0yQFAC8hY
+ BxFIFYnyXONzLuzQPp+MImu3MKrJkgPNu/WwQNo=
+X-Google-Smtp-Source: ACHHUZ40odnQGSpS4/mNr+wzk2FbVVroBnl7jU8p8o40etOvGBP5xBYeCW6bopUjxhtOIFOK9kXZKtDE6DGminJXjxM=
+X-Received: by 2002:a1f:41d5:0:b0:457:5285:2fff with SMTP id
+ o204-20020a1f41d5000000b0045752852fffmr2212107vka.7.1685675638223; Thu, 01
+ Jun 2023 20:13:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230526162308.22892-1-rkanwal@rivosinc.com>
- <20230526162308.22892-2-rkanwal@rivosinc.com>
-In-Reply-To: <20230526162308.22892-2-rkanwal@rivosinc.com>
+ <20230526162308.22892-3-rkanwal@rivosinc.com>
+In-Reply-To: <20230526162308.22892-3-rkanwal@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 2 Jun 2023 13:10:39 +1000
-Message-ID: <CAKmqyKPD9B-dPFGaJX6vd7=pPwkeEN=OiKn3y0j+fbfB7DGcpw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/6] target/riscv: Without H-mode mask all HS mode
- inturrupts in mie.
+Date: Fri, 2 Jun 2023 13:13:32 +1000
+Message-ID: <CAKmqyKN1z3H4-wpY1SZLEDAu5EoMAg3zuvz9rydm-XNMujaJ6g@mail.gmail.com>
+Subject: Re: [PATCH v2 2/6] target/riscv: Check for async flag in case of
+ RISCV_EXCP_SEMIHOST.
 To: Rajnesh Kanwal <rkanwal@rivosinc.com>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn, 
@@ -67,8 +67,8 @@ Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
  apatel@ventanamicro.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x935.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -92,8 +92,12 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, May 27, 2023 at 2:25=E2=80=AFAM Rajnesh Kanwal <rkanwal@rivosinc.co=
+On Sat, May 27, 2023 at 2:24=E2=80=AFAM Rajnesh Kanwal <rkanwal@rivosinc.co=
 m> wrote:
+>
+> RISCV_EXCP_SEMIHOST is set to 0x10, which can be a local interrupt id
+> as well. This change moves RISCV_EXCP_SEMIHOST to switch case so that
+> async flag check is performed before invoking semihosting logic.
 >
 > Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
 
@@ -102,23 +106,33 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/csr.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  target/riscv/cpu_helper.c | 10 ++++------
+>  1 file changed, 4 insertions(+), 6 deletions(-)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 4451bd1263..041f0b3e2e 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1522,7 +1522,7 @@ static RISCVException rmw_mie64(CPURISCVState *env,=
- int csrno,
->      env->mie =3D (env->mie & ~mask) | (new_val & mask);
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 57d04385f1..b25ee179e9 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1602,15 +1602,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>      target_ulong htval =3D 0;
+>      target_ulong mtval2 =3D 0;
 >
->      if (!riscv_has_ext(env, RVH)) {
-> -        env->mie &=3D ~((uint64_t)MIP_SGEIP);
-> +        env->mie &=3D ~((uint64_t)HS_MODE_INTERRUPTS);
->      }
->
->      return RISCV_EXCP_NONE;
+> -    if  (cause =3D=3D RISCV_EXCP_SEMIHOST) {
+> -        do_common_semihosting(cs);
+> -        env->pc +=3D 4;
+> -        return;
+> -    }
+> -
+>      if (!async) {
+>          /* set tval to badaddr for traps with address information */
+>          switch (cause) {
+> +        case RISCV_EXCP_SEMIHOST:
+> +            do_common_semihosting(cs);
+> +            env->pc +=3D 4;
+> +            return;
+>          case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
+>          case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
+>          case RISCV_EXCP_LOAD_ADDR_MIS:
 > --
 > 2.25.1
 >
