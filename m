@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73BB4C77B73
-	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Jun 2023 12:56:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CAAFC77B73
+	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Jun 2023 12:56:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q5Qnq-0000h8-FO; Sat, 03 Jun 2023 08:56:18 -0400
+	id 1q5Qnr-0000hs-0Z; Sat, 03 Jun 2023 08:56:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ardb@kernel.org>)
- id 1q5QdY-0006GH-5r; Sat, 03 Jun 2023 08:45:45 -0400
-Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
+ id 1q5Qis-0007mq-7m; Sat, 03 Jun 2023 08:51:10 -0400
+Received: from dfw.source.kernel.org ([139.178.84.217])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ardb@kernel.org>)
- id 1q5QdV-0004JV-CL; Sat, 03 Jun 2023 08:45:39 -0400
+ id 1q5Qiq-0005ZV-7j; Sat, 03 Jun 2023 08:51:09 -0400
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 75B6360A54;
- Sat,  3 Jun 2023 12:45:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97F9BC433EF;
- Sat,  3 Jun 2023 12:45:25 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id AEBBC61219;
+ Sat,  3 Jun 2023 12:51:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15F0AC4339C;
+ Sat,  3 Jun 2023 12:51:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1685796325;
- bh=CXah5lJghySjVGUE6ygYNr1xbLPnzwxfJFr+bjlcdO0=;
+ s=k20201202; t=1685796665;
+ bh=GSzEzDMmuKLzXqH9BVq8DnkG1I1tmgD1F05rPfJcObc=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=cmna3GBbPuV75SeFfUircXZyEGu9/Qj+8Veh5ErHCDXIHcr9JXUTPlOXzz7eV+o7r
- Ou/JWe09dRCluiXB/LnavrehumQB11FZzxtk7S1ElDRnk9K8CUj2Q9rGtV9sr2ZjRA
- M9ZsETZKUkmPQSsKM+LlH7/y+XocS974OvGHztz7CXPBPG6otwM66A4UynIdSCZHoU
- M2vMu3ZU7Ht7N0CHFIMNmaVn6j2JaCYZMvegjqIoDNqUJZ+XGoAftnNyjFqs1bd6YW
- iMDR3fG6lEjf1ekvoLFmGosGDX6+FFeyiPhGgO+wc7w+moy6eTpqEIbK1nqoM+2wLm
- cY8xAPrvGDNig==
-Received: by mail-lf1-f47.google.com with SMTP id
- 2adb3069b0e04-4f4c264f6c6so4067032e87.3; 
- Sat, 03 Jun 2023 05:45:25 -0700 (PDT)
-X-Gm-Message-State: AC+VfDwOayuS19HcDU7i8xioJQ2uLlnu14S3oJzst6RULAeWyF+XHy6e
- oUDZDxv/sxvsjKSaV9lmmMzwPkCbLBrzjxp2X5s=
-X-Google-Smtp-Source: ACHHUZ5jfao4kJOm16KFk1mY3VLr6sTKjrnNMSIj9x2EilHihqH1cPssvUV7LB6e4iYfLSAU0hpgUtIvTkFXobkllhE=
-X-Received: by 2002:a05:6512:38c4:b0:4f1:1d32:6d67 with SMTP id
- p4-20020a05651238c400b004f11d326d67mr2814694lft.39.1685796323543; Sat, 03 Jun
- 2023 05:45:23 -0700 (PDT)
+ b=TxymzFLdsnsHyU3Jp/n6dXIuY57w1Evkc1NMM/U4t3NFArHIjNV4w9pnA28eIgMaD
+ /FTEXHwsKBPcUDFKvVolvGeqlgL5Ku00yjUG5br9AizHTbX0McP+r0hT1QkpsAzs6/
+ qYhTkFeZR1X+Rwbnowfz5wSAmOM5CZSpJAcSqlBzGafC6pFJ5jFA7KqRcvNeMJ13UW
+ NnQ/J4bG5cjd9aAlyxMCTpY+DHUOb7sGHCcg7DEl6BZ6RvR30rapAJyuU8pLVIgDQC
+ asAbntoCs71asi4jDWHt/llWBF2s3oNDTpPppgss4/ZpLwcOSjCgjfzrnjy4FmJptl
+ h+drinxImbsRQ==
+Received: by mail-lj1-f173.google.com with SMTP id
+ 38308e7fff4ca-2b1a86cdec6so30599321fa.3; 
+ Sat, 03 Jun 2023 05:51:04 -0700 (PDT)
+X-Gm-Message-State: AC+VfDyVWdEp4KpregzOiip5YAfq0PRGcCM2LTfdZCWSF4UiGXVN2CML
+ W5xSYdCkdY33OvfFO0Xgavnf923j6Wvv6ZWRor8=
+X-Google-Smtp-Source: ACHHUZ406bhc1WxVLrrMioOrxwoPv5UufDXie9HnGBwzWxEUWsHlS7bIi38DgGPZIy2WHHDHhKG3+eDvl4wD+ngY1Uw=
+X-Received: by 2002:a2e:a170:0:b0:2ad:af50:6ecb with SMTP id
+ u16-20020a2ea170000000b002adaf506ecbmr1656786ljl.14.1685796663042; Sat, 03
+ Jun 2023 05:51:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230603023426.1064431-1-richard.henderson@linaro.org>
- <20230603023426.1064431-3-richard.henderson@linaro.org>
-In-Reply-To: <20230603023426.1064431-3-richard.henderson@linaro.org>
+ <20230603023426.1064431-32-richard.henderson@linaro.org>
+In-Reply-To: <20230603023426.1064431-32-richard.henderson@linaro.org>
 From: Ard Biesheuvel <ardb@kernel.org>
-Date: Sat, 3 Jun 2023 14:45:12 +0200
-X-Gmail-Original-Message-ID: <CAMj1kXHzTbE2icKpPdA2=-yw-DPGhmy5nLigUn_tjJrZHH+s-A@mail.gmail.com>
-Message-ID: <CAMj1kXHzTbE2icKpPdA2=-yw-DPGhmy5nLigUn_tjJrZHH+s-A@mail.gmail.com>
-Subject: Re: [PATCH 02/35] target/arm: Move aesmc and aesimc tables to
- crypto/aes.c
+Date: Sat, 3 Jun 2023 14:50:52 +0200
+X-Gmail-Original-Message-ID: <CAMj1kXE5SKJS9YRuV6H3z84JvSMHDBkFWVuue8yMyYVK7TVkSw@mail.gmail.com>
+Message-ID: <CAMj1kXE5SKJS9YRuV6H3z84JvSMHDBkFWVuue8yMyYVK7TVkSw@mail.gmail.com>
+Subject: Re: [PATCH 31/35] host/include/aarch64: Implement aes-round.h
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: qemu-devel@nongnu.org, berrange@redhat.com, qemu-arm@nongnu.org, 
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2604:1380:4641:c500::1;
- envelope-from=ardb@kernel.org; helo=dfw.source.kernel.org
-X-Spam_score_int: -45
-X-Spam_score: -4.6
-X-Spam_bar: ----
-X-Spam_report: (-4.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.157,
+Received-SPF: pass client-ip=139.178.84.217; envelope-from=ardb@kernel.org;
+ helo=dfw.source.kernel.org
+X-Spam_score_int: -72
+X-Spam_score: -7.3
+X-Spam_bar: -------
+X-Spam_report: (-7.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.157,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Sat, 03 Jun 2023 08:56:17 -0400
@@ -86,350 +85,276 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Sat, 3 Jun 2023 at 04:34, Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> We do not currently have a table in crypto/ for
-> just MixColumns.  Move both tables for consistency.
+> Detect AES in cpuinfo; implement the accel hooks.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  include/crypto/aes.h           |   6 ++
->  crypto/aes.c                   | 142 ++++++++++++++++++++++++++++++++
->  target/arm/tcg/crypto_helper.c | 143 ++-------------------------------
->  3 files changed, 153 insertions(+), 138 deletions(-)
+>  host/include/aarch64/host/aes-round.h | 204 ++++++++++++++++++++++++++
+>  host/include/aarch64/host/cpuinfo.h   |   1 +
+>  util/cpuinfo-aarch64.c                |   2 +
+>  3 files changed, 207 insertions(+)
+>  create mode 100644 host/include/aarch64/host/aes-round.h
 >
-> diff --git a/include/crypto/aes.h b/include/crypto/aes.h
-> index 822d64588c..24b073d569 100644
-> --- a/include/crypto/aes.h
-> +++ b/include/crypto/aes.h
-> @@ -34,6 +34,12 @@ extern const uint8_t AES_isbox[256];
->  extern const uint8_t AES_shifts[16];
->  extern const uint8_t AES_ishifts[16];
->
-> +/* AES MixColumns, for use with rot32. */
-> +extern const uint32_t AES_mc_rot[256];
-> +
-> +/* AES InvMixColumns, for use with rot32. */
-> +extern const uint32_t AES_imc_rot[256];
-> +
->  /* AES InvMixColumns */
->  /* AES_imc[x][0] = [x].[0e, 09, 0d, 0b]; */
->  /* AES_imc[x][1] = [x].[0b, 0e, 09, 0d]; */
-> diff --git a/crypto/aes.c b/crypto/aes.c
-> index af72ff7779..72c95c38fb 100644
-> --- a/crypto/aes.c
-> +++ b/crypto/aes.c
-> @@ -116,6 +116,148 @@ const uint8_t AES_ishifts[16] = {
->      0, 13, 10, 7, 4, 1, 14, 11, 8, 5, 2, 15, 12, 9, 6, 3
->  };
->
+> diff --git a/host/include/aarch64/host/aes-round.h b/host/include/aarch64/host/aes-round.h
+> new file mode 100644
+> index 0000000000..27ca823db6
+> --- /dev/null
+> +++ b/host/include/aarch64/host/aes-round.h
+> @@ -0,0 +1,204 @@
 > +/*
-> + * MixColumns lookup table, for use with rot32.
-> + * From Arm ARM pseudocode.
-
-I remember writing the code to generate these tables, and my copy of
-the ARM ARM doesn't appear to have them, so this comment seems
-inaccurate to me.
-
+> + * AArch64 specific aes acceleration.
+> + * SPDX-License-Identifier: GPL-2.0-or-later
 > + */
-> +const uint32_t AES_mc_rot[256] = {
-> +    0x00000000, 0x03010102, 0x06020204, 0x05030306,
-> +    0x0c040408, 0x0f05050a, 0x0a06060c, 0x0907070e,
-> +    0x18080810, 0x1b090912, 0x1e0a0a14, 0x1d0b0b16,
-> +    0x140c0c18, 0x170d0d1a, 0x120e0e1c, 0x110f0f1e,
-> +    0x30101020, 0x33111122, 0x36121224, 0x35131326,
-> +    0x3c141428, 0x3f15152a, 0x3a16162c, 0x3917172e,
-> +    0x28181830, 0x2b191932, 0x2e1a1a34, 0x2d1b1b36,
-> +    0x241c1c38, 0x271d1d3a, 0x221e1e3c, 0x211f1f3e,
-> +    0x60202040, 0x63212142, 0x66222244, 0x65232346,
-> +    0x6c242448, 0x6f25254a, 0x6a26264c, 0x6927274e,
-> +    0x78282850, 0x7b292952, 0x7e2a2a54, 0x7d2b2b56,
-> +    0x742c2c58, 0x772d2d5a, 0x722e2e5c, 0x712f2f5e,
-> +    0x50303060, 0x53313162, 0x56323264, 0x55333366,
-> +    0x5c343468, 0x5f35356a, 0x5a36366c, 0x5937376e,
-> +    0x48383870, 0x4b393972, 0x4e3a3a74, 0x4d3b3b76,
-> +    0x443c3c78, 0x473d3d7a, 0x423e3e7c, 0x413f3f7e,
-> +    0xc0404080, 0xc3414182, 0xc6424284, 0xc5434386,
-> +    0xcc444488, 0xcf45458a, 0xca46468c, 0xc947478e,
-> +    0xd8484890, 0xdb494992, 0xde4a4a94, 0xdd4b4b96,
-> +    0xd44c4c98, 0xd74d4d9a, 0xd24e4e9c, 0xd14f4f9e,
-> +    0xf05050a0, 0xf35151a2, 0xf65252a4, 0xf55353a6,
-> +    0xfc5454a8, 0xff5555aa, 0xfa5656ac, 0xf95757ae,
-> +    0xe85858b0, 0xeb5959b2, 0xee5a5ab4, 0xed5b5bb6,
-> +    0xe45c5cb8, 0xe75d5dba, 0xe25e5ebc, 0xe15f5fbe,
-> +    0xa06060c0, 0xa36161c2, 0xa66262c4, 0xa56363c6,
-> +    0xac6464c8, 0xaf6565ca, 0xaa6666cc, 0xa96767ce,
-> +    0xb86868d0, 0xbb6969d2, 0xbe6a6ad4, 0xbd6b6bd6,
-> +    0xb46c6cd8, 0xb76d6dda, 0xb26e6edc, 0xb16f6fde,
-> +    0x907070e0, 0x937171e2, 0x967272e4, 0x957373e6,
-> +    0x9c7474e8, 0x9f7575ea, 0x9a7676ec, 0x997777ee,
-> +    0x887878f0, 0x8b7979f2, 0x8e7a7af4, 0x8d7b7bf6,
-> +    0x847c7cf8, 0x877d7dfa, 0x827e7efc, 0x817f7ffe,
-> +    0x9b80801b, 0x98818119, 0x9d82821f, 0x9e83831d,
-> +    0x97848413, 0x94858511, 0x91868617, 0x92878715,
-> +    0x8388880b, 0x80898909, 0x858a8a0f, 0x868b8b0d,
-> +    0x8f8c8c03, 0x8c8d8d01, 0x898e8e07, 0x8a8f8f05,
-> +    0xab90903b, 0xa8919139, 0xad92923f, 0xae93933d,
-> +    0xa7949433, 0xa4959531, 0xa1969637, 0xa2979735,
-> +    0xb398982b, 0xb0999929, 0xb59a9a2f, 0xb69b9b2d,
-> +    0xbf9c9c23, 0xbc9d9d21, 0xb99e9e27, 0xba9f9f25,
-> +    0xfba0a05b, 0xf8a1a159, 0xfda2a25f, 0xfea3a35d,
-> +    0xf7a4a453, 0xf4a5a551, 0xf1a6a657, 0xf2a7a755,
-> +    0xe3a8a84b, 0xe0a9a949, 0xe5aaaa4f, 0xe6abab4d,
-> +    0xefacac43, 0xecadad41, 0xe9aeae47, 0xeaafaf45,
-> +    0xcbb0b07b, 0xc8b1b179, 0xcdb2b27f, 0xceb3b37d,
-> +    0xc7b4b473, 0xc4b5b571, 0xc1b6b677, 0xc2b7b775,
-> +    0xd3b8b86b, 0xd0b9b969, 0xd5baba6f, 0xd6bbbb6d,
-> +    0xdfbcbc63, 0xdcbdbd61, 0xd9bebe67, 0xdabfbf65,
-> +    0x5bc0c09b, 0x58c1c199, 0x5dc2c29f, 0x5ec3c39d,
-> +    0x57c4c493, 0x54c5c591, 0x51c6c697, 0x52c7c795,
-> +    0x43c8c88b, 0x40c9c989, 0x45caca8f, 0x46cbcb8d,
-> +    0x4fcccc83, 0x4ccdcd81, 0x49cece87, 0x4acfcf85,
-> +    0x6bd0d0bb, 0x68d1d1b9, 0x6dd2d2bf, 0x6ed3d3bd,
-> +    0x67d4d4b3, 0x64d5d5b1, 0x61d6d6b7, 0x62d7d7b5,
-> +    0x73d8d8ab, 0x70d9d9a9, 0x75dadaaf, 0x76dbdbad,
-> +    0x7fdcdca3, 0x7cdddda1, 0x79dedea7, 0x7adfdfa5,
-> +    0x3be0e0db, 0x38e1e1d9, 0x3de2e2df, 0x3ee3e3dd,
-> +    0x37e4e4d3, 0x34e5e5d1, 0x31e6e6d7, 0x32e7e7d5,
-> +    0x23e8e8cb, 0x20e9e9c9, 0x25eaeacf, 0x26ebebcd,
-> +    0x2fececc3, 0x2cededc1, 0x29eeeec7, 0x2aefefc5,
-> +    0x0bf0f0fb, 0x08f1f1f9, 0x0df2f2ff, 0x0ef3f3fd,
-> +    0x07f4f4f3, 0x04f5f5f1, 0x01f6f6f7, 0x02f7f7f5,
-> +    0x13f8f8eb, 0x10f9f9e9, 0x15fafaef, 0x16fbfbed,
-> +    0x1ffcfce3, 0x1cfdfde1, 0x19fefee7, 0x1affffe5,
-> +};
+> +
+> +#ifndef HOST_AES_ROUND_H
+> +#define HOST_AES_ROUND_H
+> +
+> +#include "host/cpuinfo.h"
+> +#include <arm_neon.h>
+> +
+> +#ifdef __ARM_FEATURE_AES
+> +# define HAVE_AES_ACCEL  true
+> +# define ATTR_AES_ACCEL
+> +#else
+> +# define HAVE_AES_ACCEL  likely(cpuinfo & CPUINFO_AES)
+> +# define ATTR_AES_ACCEL  __attribute__((target("+crypto")))
+> +#endif
+> +
+> +static inline uint8x16_t aes_accel_bswap(uint8x16_t x)
+> +{
+> +    /* No arm_neon.h primitive, and the compilers don't share builtins. */
+
+vqtbl1q_u8() perhaps?
+
+> +#ifdef __clang__
+> +    return __builtin_shufflevector(x, x, 15, 14, 13, 12, 11, 10, 9, 8,
+> +                                   7, 6, 5, 4, 3, 2, 1, 0);
+> +#else
+> +    return __builtin_shuffle(x, (uint8x16_t)
+> +                             { 15, 14, 13, 12, 11, 10, 9, 8,
+> +                               7,  6,  5,  4,  3,   2, 1, 0, });
+> +#endif
+> +}
 > +
 > +/*
-> + * Inverse MixColumns lookup table, for use with rot32.
-> + * From Arm ARM pseudocode.
+> + * Through clang 15, the aes inlines are only defined if __ARM_FEATURE_AES;
+> + * one cannot use __attribute__((target)) to make them appear after the fact.
+> + * Therefore we must fallback to inline asm.
 > + */
-> +const uint32_t AES_imc_rot[256] = {
-> +    0x00000000, 0x0b0d090e, 0x161a121c, 0x1d171b12,
-> +    0x2c342438, 0x27392d36, 0x3a2e3624, 0x31233f2a,
-> +    0x58684870, 0x5365417e, 0x4e725a6c, 0x457f5362,
-> +    0x745c6c48, 0x7f516546, 0x62467e54, 0x694b775a,
-> +    0xb0d090e0, 0xbbdd99ee, 0xa6ca82fc, 0xadc78bf2,
-> +    0x9ce4b4d8, 0x97e9bdd6, 0x8afea6c4, 0x81f3afca,
-> +    0xe8b8d890, 0xe3b5d19e, 0xfea2ca8c, 0xf5afc382,
-> +    0xc48cfca8, 0xcf81f5a6, 0xd296eeb4, 0xd99be7ba,
-> +    0x7bbb3bdb, 0x70b632d5, 0x6da129c7, 0x66ac20c9,
-> +    0x578f1fe3, 0x5c8216ed, 0x41950dff, 0x4a9804f1,
-> +    0x23d373ab, 0x28de7aa5, 0x35c961b7, 0x3ec468b9,
-> +    0x0fe75793, 0x04ea5e9d, 0x19fd458f, 0x12f04c81,
-> +    0xcb6bab3b, 0xc066a235, 0xdd71b927, 0xd67cb029,
-> +    0xe75f8f03, 0xec52860d, 0xf1459d1f, 0xfa489411,
-> +    0x9303e34b, 0x980eea45, 0x8519f157, 0x8e14f859,
-> +    0xbf37c773, 0xb43ace7d, 0xa92dd56f, 0xa220dc61,
-> +    0xf66d76ad, 0xfd607fa3, 0xe07764b1, 0xeb7a6dbf,
-> +    0xda595295, 0xd1545b9b, 0xcc434089, 0xc74e4987,
-> +    0xae053edd, 0xa50837d3, 0xb81f2cc1, 0xb31225cf,
-> +    0x82311ae5, 0x893c13eb, 0x942b08f9, 0x9f2601f7,
-> +    0x46bde64d, 0x4db0ef43, 0x50a7f451, 0x5baafd5f,
-> +    0x6a89c275, 0x6184cb7b, 0x7c93d069, 0x779ed967,
-> +    0x1ed5ae3d, 0x15d8a733, 0x08cfbc21, 0x03c2b52f,
-> +    0x32e18a05, 0x39ec830b, 0x24fb9819, 0x2ff69117,
-> +    0x8dd64d76, 0x86db4478, 0x9bcc5f6a, 0x90c15664,
-> +    0xa1e2694e, 0xaaef6040, 0xb7f87b52, 0xbcf5725c,
-> +    0xd5be0506, 0xdeb30c08, 0xc3a4171a, 0xc8a91e14,
-> +    0xf98a213e, 0xf2872830, 0xef903322, 0xe49d3a2c,
-> +    0x3d06dd96, 0x360bd498, 0x2b1ccf8a, 0x2011c684,
-> +    0x1132f9ae, 0x1a3ff0a0, 0x0728ebb2, 0x0c25e2bc,
-> +    0x656e95e6, 0x6e639ce8, 0x737487fa, 0x78798ef4,
-> +    0x495ab1de, 0x4257b8d0, 0x5f40a3c2, 0x544daacc,
-> +    0xf7daec41, 0xfcd7e54f, 0xe1c0fe5d, 0xeacdf753,
-> +    0xdbeec879, 0xd0e3c177, 0xcdf4da65, 0xc6f9d36b,
-> +    0xafb2a431, 0xa4bfad3f, 0xb9a8b62d, 0xb2a5bf23,
-> +    0x83868009, 0x888b8907, 0x959c9215, 0x9e919b1b,
-> +    0x470a7ca1, 0x4c0775af, 0x51106ebd, 0x5a1d67b3,
-> +    0x6b3e5899, 0x60335197, 0x7d244a85, 0x7629438b,
-> +    0x1f6234d1, 0x146f3ddf, 0x097826cd, 0x02752fc3,
-> +    0x335610e9, 0x385b19e7, 0x254c02f5, 0x2e410bfb,
-> +    0x8c61d79a, 0x876cde94, 0x9a7bc586, 0x9176cc88,
-> +    0xa055f3a2, 0xab58faac, 0xb64fe1be, 0xbd42e8b0,
-> +    0xd4099fea, 0xdf0496e4, 0xc2138df6, 0xc91e84f8,
-> +    0xf83dbbd2, 0xf330b2dc, 0xee27a9ce, 0xe52aa0c0,
-> +    0x3cb1477a, 0x37bc4e74, 0x2aab5566, 0x21a65c68,
-> +    0x10856342, 0x1b886a4c, 0x069f715e, 0x0d927850,
-> +    0x64d90f0a, 0x6fd40604, 0x72c31d16, 0x79ce1418,
-> +    0x48ed2b32, 0x43e0223c, 0x5ef7392e, 0x55fa3020,
-> +    0x01b79aec, 0x0aba93e2, 0x17ad88f0, 0x1ca081fe,
-> +    0x2d83bed4, 0x268eb7da, 0x3b99acc8, 0x3094a5c6,
-> +    0x59dfd29c, 0x52d2db92, 0x4fc5c080, 0x44c8c98e,
-> +    0x75ebf6a4, 0x7ee6ffaa, 0x63f1e4b8, 0x68fcedb6,
-> +    0xb1670a0c, 0xba6a0302, 0xa77d1810, 0xac70111e,
-> +    0x9d532e34, 0x965e273a, 0x8b493c28, 0x80443526,
-> +    0xe90f427c, 0xe2024b72, 0xff155060, 0xf418596e,
-> +    0xc53b6644, 0xce366f4a, 0xd3217458, 0xd82c7d56,
-> +    0x7a0ca137, 0x7101a839, 0x6c16b32b, 0x671bba25,
-> +    0x5638850f, 0x5d358c01, 0x40229713, 0x4b2f9e1d,
-> +    0x2264e947, 0x2969e049, 0x347efb5b, 0x3f73f255,
-> +    0x0e50cd7f, 0x055dc471, 0x184adf63, 0x1347d66d,
-> +    0xcadc31d7, 0xc1d138d9, 0xdcc623cb, 0xd7cb2ac5,
-> +    0xe6e815ef, 0xede51ce1, 0xf0f207f3, 0xfbff0efd,
-> +    0x92b479a7, 0x99b970a9, 0x84ae6bbb, 0x8fa362b5,
-> +    0xbe805d9f, 0xb58d5491, 0xa89a4f83, 0xa397468d,
-> +};
+> +#ifdef __ARM_FEATURE_AES
+> +# define aes_accel_aesd   vaesdq_u8
+> +# define aes_accel_aese   vaeseq_u8
+> +# define aes_accel_aesmc  vaesmcq_u8
+> +# define aes_accel_aesimc vaesimcq_u8
+> +#else
+> +static inline uint8x16_t aes_accel_aesd(uint8x16_t d, uint8x16_t k)
+> +{
+> +    asm(".arch_extension aes\n\t"
+> +        "aesd %0.16b, %1.16b" : "+w"(d) : "w"(k));
+> +    return d;
+> +}
 > +
->  /* AES_imc[x][0] = [x].[0e, 09, 0d, 0b]; */
->  /* AES_imc[x][1] = [x].[0b, 0e, 09, 0d]; */
->  /* AES_imc[x][2] = [x].[0d, 0b, 0e, 09]; */
-> diff --git a/target/arm/tcg/crypto_helper.c b/target/arm/tcg/crypto_helper.c
-> index d28690321f..06254939d2 100644
-> --- a/target/arm/tcg/crypto_helper.c
-> +++ b/target/arm/tcg/crypto_helper.c
-> @@ -80,149 +80,16 @@ void HELPER(crypto_aese)(void *vd, void *vn, void *vm, uint32_t desc)
+> +static inline uint8x16_t aes_accel_aese(uint8x16_t d, uint8x16_t k)
+> +{
+> +    asm(".arch_extension aes\n\t"
+> +        "aese %0.16b, %1.16b" : "+w"(d) : "w"(k));
+> +    return d;
+> +}
+> +
+> +static inline uint8x16_t aes_accel_aesmc(uint8x16_t d)
+> +{
+> +    asm(".arch_extension aes\n\t"
+> +        "aesmc %0.16b, %1.16b" : "=w"(d) : "w"(d));
+
+
+Most ARM cores fuse aese/aesmc into a single uop (with the associated
+performance boost) if the pattern is
+
+aese x, y
+aesmc x,x
+
+aesd x, y
+aesimc x,x
+
+So it might make sense to use +w here at least, and use only a single
+register (which the compiler will likely do in any case, but still)
+
+I would assume that the compiler cannot issue these separately based
+on the sequences below, but if it might, it may be worth it to emit
+the aese/aesmc together in a single asm() block
+
+> +    return d;
+> +}
+> +
+> +static inline uint8x16_t aes_accel_aesimc(uint8x16_t d)
+> +{
+> +    asm(".arch_extension aes\n\t"
+> +        "aesimc %0.16b, %1.16b" : "=w"(d) : "w"(d));
+> +    return d;
+> +}
+> +#endif /* __ARM_FEATURE_AES */
+> +
+> +static inline void ATTR_AES_ACCEL
+> +aesenc_MC_accel(AESState *ret, const AESState *st, bool be)
+> +{
+> +    uint8x16_t t = (uint8x16_t)st->v;
+> +
+> +    if (be) {
+> +        t = aes_accel_bswap(t);
+> +        t = aes_accel_aesmc(t);
+> +        t = aes_accel_bswap(t);
+> +    } else {
+> +        t = aes_accel_aesmc(t);
+> +    }
+> +    ret->v = (AESStateVec)t;
+> +}
+> +
+> +static inline void ATTR_AES_ACCEL
+> +aesenc_SB_SR_accel(AESState *ret, const AESState *st, bool be)
+> +{
+> +    uint8x16_t t = (uint8x16_t)st->v;
+> +    uint8x16_t z = { };
+> +
+> +    if (be) {
+> +        t = aes_accel_bswap(t);
+> +        t = aes_accel_aese(t, z);
+> +        t = aes_accel_bswap(t);
+> +    } else {
+> +        t = aes_accel_aese(t, z);
+> +    }
+> +    ret->v = (AESStateVec)t;
+> +}
+> +
+> +static inline void ATTR_AES_ACCEL
+> +aesenc_SB_SR_MC_AK_accel(AESState *ret, const AESState *st,
+> +                         const AESState *rk, bool be)
+> +{
+> +    uint8x16_t t = (uint8x16_t)st->v;
+> +    uint8x16_t k = (uint8x16_t)rk->v;
+> +    uint8x16_t z = { };
+> +
+> +    if (be) {
+> +        t = aes_accel_bswap(t);
+> +        k = aes_accel_bswap(k);
+> +        t = aes_accel_aese(t, z);
+> +        t = aes_accel_aesmc(t);
+> +        t = veorq_u8(t, k);
+> +        t = aes_accel_bswap(t);
+> +    } else {
+> +        t = aes_accel_aese(t, z);
+> +        t = aes_accel_aesmc(t);
+> +        t = veorq_u8(t, k);
+> +    }
+> +    ret->v = (AESStateVec)t;
+> +}
+> +
+> +static inline void ATTR_AES_ACCEL
+> +aesdec_IMC_accel(AESState *ret, const AESState *st, bool be)
+> +{
+> +    uint8x16_t t = (uint8x16_t)st->v;
+> +
+> +    if (be) {
+> +        t = aes_accel_bswap(t);
+> +        t = aes_accel_aesimc(t);
+> +        t = aes_accel_bswap(t);
+> +    } else {
+> +        t = aes_accel_aesimc(t);
+> +    }
+> +    ret->v = (AESStateVec)t;
+> +}
+> +
+> +static inline void ATTR_AES_ACCEL
+> +aesdec_ISB_ISR_accel(AESState *ret, const AESState *st, bool be)
+> +{
+> +    uint8x16_t t = (uint8x16_t)st->v;
+> +    uint8x16_t z = { };
+> +
+> +    if (be) {
+> +        t = aes_accel_bswap(t);
+> +        t = aes_accel_aesd(t, z);
+> +        t = aes_accel_bswap(t);
+> +    } else {
+> +        t = aes_accel_aesd(t, z);
+> +    }
+> +    ret->v = (AESStateVec)t;
+> +}
+> +
+> +static inline void ATTR_AES_ACCEL
+> +aesdec_ISB_ISR_AK_IMC_accel(AESState *ret, const AESState *st,
+> +                            const AESState *rk, bool be)
+> +{
+> +    uint8x16_t t = (uint8x16_t)st->v;
+> +    uint8x16_t k = (uint8x16_t)rk->v;
+> +    uint8x16_t z = { };
+> +
+> +    if (be) {
+> +        t = aes_accel_bswap(t);
+> +        k = aes_accel_bswap(k);
+> +        t = aes_accel_aesd(t, z);
+> +        t = veorq_u8(t, k);
+> +        t = aes_accel_aesimc(t);
+> +        t = aes_accel_bswap(t);
+> +    } else {
+> +        t = aes_accel_aesd(t, z);
+> +        t = veorq_u8(t, k);
+> +        t = aes_accel_aesimc(t);
+> +    }
+> +    ret->v = (AESStateVec)t;
+> +}
+> +
+> +static inline void ATTR_AES_ACCEL
+> +aesdec_ISB_ISR_IMC_AK_accel(AESState *ret, const AESState *st,
+> +                            const AESState *rk, bool be)
+> +{
+> +    uint8x16_t t = (uint8x16_t)st->v;
+> +    uint8x16_t k = (uint8x16_t)rk->v;
+> +    uint8x16_t z = { };
+> +
+> +    if (be) {
+> +        t = aes_accel_bswap(t);
+> +        k = aes_accel_bswap(k);
+> +        t = aes_accel_aesd(t, z);
+> +        t = aes_accel_aesimc(t);
+> +        t = veorq_u8(t, k);
+> +        t = aes_accel_bswap(t);
+> +    } else {
+> +        t = aes_accel_aesd(t, z);
+> +        t = aes_accel_aesimc(t);
+> +        t = veorq_u8(t, k);
+> +    }
+> +    ret->v = (AESStateVec)t;
+> +}
+> +
+> +#endif
+> diff --git a/host/include/aarch64/host/cpuinfo.h b/host/include/aarch64/host/cpuinfo.h
+> index 82227890b4..05feeb4f43 100644
+> --- a/host/include/aarch64/host/cpuinfo.h
+> +++ b/host/include/aarch64/host/cpuinfo.h
+> @@ -9,6 +9,7 @@
+>  #define CPUINFO_ALWAYS          (1u << 0)  /* so cpuinfo is nonzero */
+>  #define CPUINFO_LSE             (1u << 1)
+>  #define CPUINFO_LSE2            (1u << 2)
+> +#define CPUINFO_AES             (1u << 3)
 >
->  static void do_crypto_aesmc(uint64_t *rd, uint64_t *rm, bool decrypt)
->  {
-> -    static uint32_t const mc[][256] = { {
-> -        /* MixColumns lookup table */
-> -        0x00000000, 0x03010102, 0x06020204, 0x05030306,
-> -        0x0c040408, 0x0f05050a, 0x0a06060c, 0x0907070e,
-> -        0x18080810, 0x1b090912, 0x1e0a0a14, 0x1d0b0b16,
-> -        0x140c0c18, 0x170d0d1a, 0x120e0e1c, 0x110f0f1e,
-> -        0x30101020, 0x33111122, 0x36121224, 0x35131326,
-> -        0x3c141428, 0x3f15152a, 0x3a16162c, 0x3917172e,
-> -        0x28181830, 0x2b191932, 0x2e1a1a34, 0x2d1b1b36,
-> -        0x241c1c38, 0x271d1d3a, 0x221e1e3c, 0x211f1f3e,
-> -        0x60202040, 0x63212142, 0x66222244, 0x65232346,
-> -        0x6c242448, 0x6f25254a, 0x6a26264c, 0x6927274e,
-> -        0x78282850, 0x7b292952, 0x7e2a2a54, 0x7d2b2b56,
-> -        0x742c2c58, 0x772d2d5a, 0x722e2e5c, 0x712f2f5e,
-> -        0x50303060, 0x53313162, 0x56323264, 0x55333366,
-> -        0x5c343468, 0x5f35356a, 0x5a36366c, 0x5937376e,
-> -        0x48383870, 0x4b393972, 0x4e3a3a74, 0x4d3b3b76,
-> -        0x443c3c78, 0x473d3d7a, 0x423e3e7c, 0x413f3f7e,
-> -        0xc0404080, 0xc3414182, 0xc6424284, 0xc5434386,
-> -        0xcc444488, 0xcf45458a, 0xca46468c, 0xc947478e,
-> -        0xd8484890, 0xdb494992, 0xde4a4a94, 0xdd4b4b96,
-> -        0xd44c4c98, 0xd74d4d9a, 0xd24e4e9c, 0xd14f4f9e,
-> -        0xf05050a0, 0xf35151a2, 0xf65252a4, 0xf55353a6,
-> -        0xfc5454a8, 0xff5555aa, 0xfa5656ac, 0xf95757ae,
-> -        0xe85858b0, 0xeb5959b2, 0xee5a5ab4, 0xed5b5bb6,
-> -        0xe45c5cb8, 0xe75d5dba, 0xe25e5ebc, 0xe15f5fbe,
-> -        0xa06060c0, 0xa36161c2, 0xa66262c4, 0xa56363c6,
-> -        0xac6464c8, 0xaf6565ca, 0xaa6666cc, 0xa96767ce,
-> -        0xb86868d0, 0xbb6969d2, 0xbe6a6ad4, 0xbd6b6bd6,
-> -        0xb46c6cd8, 0xb76d6dda, 0xb26e6edc, 0xb16f6fde,
-> -        0x907070e0, 0x937171e2, 0x967272e4, 0x957373e6,
-> -        0x9c7474e8, 0x9f7575ea, 0x9a7676ec, 0x997777ee,
-> -        0x887878f0, 0x8b7979f2, 0x8e7a7af4, 0x8d7b7bf6,
-> -        0x847c7cf8, 0x877d7dfa, 0x827e7efc, 0x817f7ffe,
-> -        0x9b80801b, 0x98818119, 0x9d82821f, 0x9e83831d,
-> -        0x97848413, 0x94858511, 0x91868617, 0x92878715,
-> -        0x8388880b, 0x80898909, 0x858a8a0f, 0x868b8b0d,
-> -        0x8f8c8c03, 0x8c8d8d01, 0x898e8e07, 0x8a8f8f05,
-> -        0xab90903b, 0xa8919139, 0xad92923f, 0xae93933d,
-> -        0xa7949433, 0xa4959531, 0xa1969637, 0xa2979735,
-> -        0xb398982b, 0xb0999929, 0xb59a9a2f, 0xb69b9b2d,
-> -        0xbf9c9c23, 0xbc9d9d21, 0xb99e9e27, 0xba9f9f25,
-> -        0xfba0a05b, 0xf8a1a159, 0xfda2a25f, 0xfea3a35d,
-> -        0xf7a4a453, 0xf4a5a551, 0xf1a6a657, 0xf2a7a755,
-> -        0xe3a8a84b, 0xe0a9a949, 0xe5aaaa4f, 0xe6abab4d,
-> -        0xefacac43, 0xecadad41, 0xe9aeae47, 0xeaafaf45,
-> -        0xcbb0b07b, 0xc8b1b179, 0xcdb2b27f, 0xceb3b37d,
-> -        0xc7b4b473, 0xc4b5b571, 0xc1b6b677, 0xc2b7b775,
-> -        0xd3b8b86b, 0xd0b9b969, 0xd5baba6f, 0xd6bbbb6d,
-> -        0xdfbcbc63, 0xdcbdbd61, 0xd9bebe67, 0xdabfbf65,
-> -        0x5bc0c09b, 0x58c1c199, 0x5dc2c29f, 0x5ec3c39d,
-> -        0x57c4c493, 0x54c5c591, 0x51c6c697, 0x52c7c795,
-> -        0x43c8c88b, 0x40c9c989, 0x45caca8f, 0x46cbcb8d,
-> -        0x4fcccc83, 0x4ccdcd81, 0x49cece87, 0x4acfcf85,
-> -        0x6bd0d0bb, 0x68d1d1b9, 0x6dd2d2bf, 0x6ed3d3bd,
-> -        0x67d4d4b3, 0x64d5d5b1, 0x61d6d6b7, 0x62d7d7b5,
-> -        0x73d8d8ab, 0x70d9d9a9, 0x75dadaaf, 0x76dbdbad,
-> -        0x7fdcdca3, 0x7cdddda1, 0x79dedea7, 0x7adfdfa5,
-> -        0x3be0e0db, 0x38e1e1d9, 0x3de2e2df, 0x3ee3e3dd,
-> -        0x37e4e4d3, 0x34e5e5d1, 0x31e6e6d7, 0x32e7e7d5,
-> -        0x23e8e8cb, 0x20e9e9c9, 0x25eaeacf, 0x26ebebcd,
-> -        0x2fececc3, 0x2cededc1, 0x29eeeec7, 0x2aefefc5,
-> -        0x0bf0f0fb, 0x08f1f1f9, 0x0df2f2ff, 0x0ef3f3fd,
-> -        0x07f4f4f3, 0x04f5f5f1, 0x01f6f6f7, 0x02f7f7f5,
-> -        0x13f8f8eb, 0x10f9f9e9, 0x15fafaef, 0x16fbfbed,
-> -        0x1ffcfce3, 0x1cfdfde1, 0x19fefee7, 0x1affffe5,
-> -    }, {
-> -        /* Inverse MixColumns lookup table */
-> -        0x00000000, 0x0b0d090e, 0x161a121c, 0x1d171b12,
-> -        0x2c342438, 0x27392d36, 0x3a2e3624, 0x31233f2a,
-> -        0x58684870, 0x5365417e, 0x4e725a6c, 0x457f5362,
-> -        0x745c6c48, 0x7f516546, 0x62467e54, 0x694b775a,
-> -        0xb0d090e0, 0xbbdd99ee, 0xa6ca82fc, 0xadc78bf2,
-> -        0x9ce4b4d8, 0x97e9bdd6, 0x8afea6c4, 0x81f3afca,
-> -        0xe8b8d890, 0xe3b5d19e, 0xfea2ca8c, 0xf5afc382,
-> -        0xc48cfca8, 0xcf81f5a6, 0xd296eeb4, 0xd99be7ba,
-> -        0x7bbb3bdb, 0x70b632d5, 0x6da129c7, 0x66ac20c9,
-> -        0x578f1fe3, 0x5c8216ed, 0x41950dff, 0x4a9804f1,
-> -        0x23d373ab, 0x28de7aa5, 0x35c961b7, 0x3ec468b9,
-> -        0x0fe75793, 0x04ea5e9d, 0x19fd458f, 0x12f04c81,
-> -        0xcb6bab3b, 0xc066a235, 0xdd71b927, 0xd67cb029,
-> -        0xe75f8f03, 0xec52860d, 0xf1459d1f, 0xfa489411,
-> -        0x9303e34b, 0x980eea45, 0x8519f157, 0x8e14f859,
-> -        0xbf37c773, 0xb43ace7d, 0xa92dd56f, 0xa220dc61,
-> -        0xf66d76ad, 0xfd607fa3, 0xe07764b1, 0xeb7a6dbf,
-> -        0xda595295, 0xd1545b9b, 0xcc434089, 0xc74e4987,
-> -        0xae053edd, 0xa50837d3, 0xb81f2cc1, 0xb31225cf,
-> -        0x82311ae5, 0x893c13eb, 0x942b08f9, 0x9f2601f7,
-> -        0x46bde64d, 0x4db0ef43, 0x50a7f451, 0x5baafd5f,
-> -        0x6a89c275, 0x6184cb7b, 0x7c93d069, 0x779ed967,
-> -        0x1ed5ae3d, 0x15d8a733, 0x08cfbc21, 0x03c2b52f,
-> -        0x32e18a05, 0x39ec830b, 0x24fb9819, 0x2ff69117,
-> -        0x8dd64d76, 0x86db4478, 0x9bcc5f6a, 0x90c15664,
-> -        0xa1e2694e, 0xaaef6040, 0xb7f87b52, 0xbcf5725c,
-> -        0xd5be0506, 0xdeb30c08, 0xc3a4171a, 0xc8a91e14,
-> -        0xf98a213e, 0xf2872830, 0xef903322, 0xe49d3a2c,
-> -        0x3d06dd96, 0x360bd498, 0x2b1ccf8a, 0x2011c684,
-> -        0x1132f9ae, 0x1a3ff0a0, 0x0728ebb2, 0x0c25e2bc,
-> -        0x656e95e6, 0x6e639ce8, 0x737487fa, 0x78798ef4,
-> -        0x495ab1de, 0x4257b8d0, 0x5f40a3c2, 0x544daacc,
-> -        0xf7daec41, 0xfcd7e54f, 0xe1c0fe5d, 0xeacdf753,
-> -        0xdbeec879, 0xd0e3c177, 0xcdf4da65, 0xc6f9d36b,
-> -        0xafb2a431, 0xa4bfad3f, 0xb9a8b62d, 0xb2a5bf23,
-> -        0x83868009, 0x888b8907, 0x959c9215, 0x9e919b1b,
-> -        0x470a7ca1, 0x4c0775af, 0x51106ebd, 0x5a1d67b3,
-> -        0x6b3e5899, 0x60335197, 0x7d244a85, 0x7629438b,
-> -        0x1f6234d1, 0x146f3ddf, 0x097826cd, 0x02752fc3,
-> -        0x335610e9, 0x385b19e7, 0x254c02f5, 0x2e410bfb,
-> -        0x8c61d79a, 0x876cde94, 0x9a7bc586, 0x9176cc88,
-> -        0xa055f3a2, 0xab58faac, 0xb64fe1be, 0xbd42e8b0,
-> -        0xd4099fea, 0xdf0496e4, 0xc2138df6, 0xc91e84f8,
-> -        0xf83dbbd2, 0xf330b2dc, 0xee27a9ce, 0xe52aa0c0,
-> -        0x3cb1477a, 0x37bc4e74, 0x2aab5566, 0x21a65c68,
-> -        0x10856342, 0x1b886a4c, 0x069f715e, 0x0d927850,
-> -        0x64d90f0a, 0x6fd40604, 0x72c31d16, 0x79ce1418,
-> -        0x48ed2b32, 0x43e0223c, 0x5ef7392e, 0x55fa3020,
-> -        0x01b79aec, 0x0aba93e2, 0x17ad88f0, 0x1ca081fe,
-> -        0x2d83bed4, 0x268eb7da, 0x3b99acc8, 0x3094a5c6,
-> -        0x59dfd29c, 0x52d2db92, 0x4fc5c080, 0x44c8c98e,
-> -        0x75ebf6a4, 0x7ee6ffaa, 0x63f1e4b8, 0x68fcedb6,
-> -        0xb1670a0c, 0xba6a0302, 0xa77d1810, 0xac70111e,
-> -        0x9d532e34, 0x965e273a, 0x8b493c28, 0x80443526,
-> -        0xe90f427c, 0xe2024b72, 0xff155060, 0xf418596e,
-> -        0xc53b6644, 0xce366f4a, 0xd3217458, 0xd82c7d56,
-> -        0x7a0ca137, 0x7101a839, 0x6c16b32b, 0x671bba25,
-> -        0x5638850f, 0x5d358c01, 0x40229713, 0x4b2f9e1d,
-> -        0x2264e947, 0x2969e049, 0x347efb5b, 0x3f73f255,
-> -        0x0e50cd7f, 0x055dc471, 0x184adf63, 0x1347d66d,
-> -        0xcadc31d7, 0xc1d138d9, 0xdcc623cb, 0xd7cb2ac5,
-> -        0xe6e815ef, 0xede51ce1, 0xf0f207f3, 0xfbff0efd,
-> -        0x92b479a7, 0x99b970a9, 0x84ae6bbb, 0x8fa362b5,
-> -        0xbe805d9f, 0xb58d5491, 0xa89a4f83, 0xa397468d,
-> -    } };
-> -
->      union CRYPTO_STATE st = { .l = { rm[0], rm[1] } };
-> +    const uint32_t *mc = decrypt ? AES_imc_rot : AES_mc_rot;
->      int i;
+>  /* Initialized with a constructor. */
+>  extern unsigned cpuinfo;
+> diff --git a/util/cpuinfo-aarch64.c b/util/cpuinfo-aarch64.c
+> index f99acb7884..ababc39550 100644
+> --- a/util/cpuinfo-aarch64.c
+> +++ b/util/cpuinfo-aarch64.c
+> @@ -56,10 +56,12 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
+>      unsigned long hwcap = qemu_getauxval(AT_HWCAP);
+>      info |= (hwcap & HWCAP_ATOMICS ? CPUINFO_LSE : 0);
+>      info |= (hwcap & HWCAP_USCAT ? CPUINFO_LSE2 : 0);
+> +    info |= (hwcap & HWCAP_AES ? CPUINFO_AES: 0);
+>  #endif
+>  #ifdef CONFIG_DARWIN
+>      info |= sysctl_for_bool("hw.optional.arm.FEAT_LSE") * CPUINFO_LSE;
+>      info |= sysctl_for_bool("hw.optional.arm.FEAT_LSE2") * CPUINFO_LSE2;
+> +    info |= sysctl_for_bool("hw.optional.arm.FEAT_AES") * CPUINFO_AES;
+>  #endif
 >
->      for (i = 0; i < 16; i += 4) {
->          CR_ST_WORD(st, i >> 2) =
-> -            mc[decrypt][CR_ST_BYTE(st, i)] ^
-> -            rol32(mc[decrypt][CR_ST_BYTE(st, i + 1)], 8) ^
-> -            rol32(mc[decrypt][CR_ST_BYTE(st, i + 2)], 16) ^
-> -            rol32(mc[decrypt][CR_ST_BYTE(st, i + 3)], 24);
-> +            mc[CR_ST_BYTE(st, i)] ^
-> +            rol32(mc[CR_ST_BYTE(st, i + 1)], 8) ^
-> +            rol32(mc[CR_ST_BYTE(st, i + 2)], 16) ^
-> +            rol32(mc[CR_ST_BYTE(st, i + 3)], 24);
->      }
->
->      rd[0] = st.l[0];
+>      cpuinfo = info;
 > --
 > 2.34.1
 >
