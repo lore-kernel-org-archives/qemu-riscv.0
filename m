@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E8D0C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Jun 2023 15:24:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2882CC77B73
+	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Jun 2023 15:50:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q5T7D-0003df-UW; Sat, 03 Jun 2023 11:24:27 -0400
+	id 1q5TW8-00070e-M2; Sat, 03 Jun 2023 11:50:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q5T7C-0003bE-IM
- for qemu-riscv@nongnu.org; Sat, 03 Jun 2023 11:24:26 -0400
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1q5TW8-00070W-3M
+ for qemu-riscv@nongnu.org; Sat, 03 Jun 2023 11:50:12 -0400
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q5T7A-000692-MJ
- for qemu-riscv@nongnu.org; Sat, 03 Jun 2023 11:24:26 -0400
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-256712d65ceso1447758a91.1
- for <qemu-riscv@nongnu.org>; Sat, 03 Jun 2023 08:24:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1q5TW5-0007cP-Ot
+ for qemu-riscv@nongnu.org; Sat, 03 Jun 2023 11:50:11 -0400
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-3f6dfc4e01fso32575725e9.0
+ for <qemu-riscv@nongnu.org>; Sat, 03 Jun 2023 08:50:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1685805863; x=1688397863;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hM+FaAlSvgblKVizBVmEQLYIygbxPzGUUV2ppzqGV4o=;
- b=OuO78YjgBgAFC/xdyg12DOlNnChxOrXygogW2eDgn+f/Djh8ZZu2OnvzJ/qxSj57GR
- I+Ba9wwydiWGK526yRnUI1IEuOmGLFef77Jeiku/t6PgZIk8yr9qcJw4VZuOLa00rmvt
- X+5a7gC9kRkCB1gobSb5uiJ+/Lf7Qvcj1Oc/YjzN/UvSM8yeHg79zPzVIwL/XPbQWh0o
- YevURH8KsxEHKsf5i2zW8TbGtMeXhWDhbQcn4MDmeALVrkZkLWImp7tljBuMA9KSf+1B
- ccNipqkm4MNXODgvo/zZAGSutMRjuQY2M2Vvfr9KgjjEap0ypYtk3fs2rn6jAa+ReYX2
- 1hsQ==
+ d=ventanamicro.com; s=google; t=1685807407; x=1688399407;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ka6KezNkh0IdDr8GdklycmNSH8VvQQOu1kKR8MbrIgk=;
+ b=Uwt3HiF+3HPIWaSH2cQ/KLHo6ZustwTeJCM1Z5IL31/OKpHSOrk2inylvypiGqLlVi
+ aVnODMjEO+ImpOl/KuHK0viL0c5pSpUa6h/wvzRV5f6DOBkrSM8LDqMJI5tR03lapvQu
+ 0EwN4uGPFQwnsZelPU+QowcasTs8obwbDu0gmXxdWPvR0eourJicY8r6w4RTbEGg5qgz
+ uc2hvKL+9EHINYZzoBV3LXfzcflj01s7sntDy58t5EP4+HULZ138ZIlpjLIfmkmDMEvv
+ poyOm2bWG8KP+NV+U9RmshAu5FZrXKHi1FhAVPvP8Nja4vxrZMEnV/iOyPon2cSgDRQU
+ rN3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685805863; x=1688397863;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hM+FaAlSvgblKVizBVmEQLYIygbxPzGUUV2ppzqGV4o=;
- b=asgsnUQtAWrlgM0/uH6cGD6fnkIIslmTAOmuYhQT5w+uiMc2A64XFlY1nV4DXRr0rl
- 4YOBW7+aWvPttJsPTR9GQwkIxVEp+Xkw1AzDFew85c9oZATPEOPzC1cAPxhfpqdoRB3Y
- HnYfKyB0V2cGOVEz2L5lkmOSf6/R+xSeOoRwOv2JnBhoA4TCe1FXlwVk0fIh/D/dCRsw
- 5SuW8uLNJ9Lz0lrvl+7mXJwkwKXJsEm233uUmW/J2mI7zInfEBwPVeY90T7ckTYfZyYS
- lxa62UFRMQ36llus7rsHf/1GyfTAmkC75whFyv/DJZyGpOTY3QmbrIoGfOjgmxYBx5Ui
- FTeA==
-X-Gm-Message-State: AC+VfDyTlXwdJv4WFp3z4MmLfcQ4cL8qiYBTEYTseaXgV/GP9iV/AVRD
- 5FlctDy2yFVoL/9Ceo4lzUfqiw==
-X-Google-Smtp-Source: ACHHUZ51HrScMseULoSlXBHH7fkeNcrCa9J50i2dhzwQZZFgd62/FYJHzz3y6cLgDeC7ZRRYZsuXsw==
-X-Received: by 2002:a17:90b:1013:b0:258:7b3d:c2c7 with SMTP id
- gm19-20020a17090b101300b002587b3dc2c7mr1433708pjb.7.1685805863121; 
- Sat, 03 Jun 2023 08:24:23 -0700 (PDT)
-Received: from ?IPV6:2602:ae:1598:4c01:9a37:84b6:b3f0:f301?
- ([2602:ae:1598:4c01:9a37:84b6:b3f0:f301])
+ d=1e100.net; s=20221208; t=1685807407; x=1688399407;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ka6KezNkh0IdDr8GdklycmNSH8VvQQOu1kKR8MbrIgk=;
+ b=lN6chVu7Jqx8epba1tjlmlAA4WyeC9kyGU6U5Q3+80P9773r9+yK4qZ5ACdV35SSyC
+ XnC5Xjk4UuMoMG+uFkxMcZ4aeeXvtjgxoVWmPJ3Ms0sVHN9oQE66jPKwJIIWYUeg5DKD
+ /b/UXGDMlv6gmLP9OXAAxftMIxbfPG9y5AvvaBsYx0ouZARmEYGMFiJtu/C4E6d5wlj0
+ tSkdmw6qwfWbgw5+NSpWykBPZGMD11nXQRx4STncGYAuEdsGSVdTCFHDs15bISNkX7zK
+ yL0pPuwJjZxURC+72Hasuqnn3mPUPTFE7QedvN5zqSStJpX9+tRn820S5qf1g0788b6G
+ HsiQ==
+X-Gm-Message-State: AC+VfDz/mU6MCEK1ljAYVPxOzNhomGEkOcjic1m1Q26UkiSjJqZgZUHS
+ kepYoIZIhQVNdIvUwXc98I5/A+8eZPx3yB2AflQ=
+X-Google-Smtp-Source: ACHHUZ5ZZxZynHiUkkF44G7o4ojMtZiRO2rbVY9BgfQxCX/xeEg0pak96APhCE3H3v1S1DVAwStm6Q==
+X-Received: by 2002:a05:600c:2259:b0:3f6:923:9ec with SMTP id
+ a25-20020a05600c225900b003f6092309ecmr4326805wmm.25.1685807406966; 
+ Sat, 03 Jun 2023 08:50:06 -0700 (PDT)
+Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
  by smtp.gmail.com with ESMTPSA id
- 10-20020a17090a194a00b00250cf4e7d25sm5089389pjh.41.2023.06.03.08.24.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 03 Jun 2023 08:24:22 -0700 (PDT)
-Message-ID: <d7268399-c424-fd84-9323-df0d2c15db3d@linaro.org>
-Date: Sat, 3 Jun 2023 08:24:20 -0700
+ m16-20020a7bcb90000000b003f6028a4c85sm8935807wmi.16.2023.06.03.08.50.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 03 Jun 2023 08:50:06 -0700 (PDT)
+Date: Sat, 3 Jun 2023 17:50:05 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Robbin Ehn <rehn@rivosinc.com>, qemu-devel@nongnu.org, 
+ laurent@vivier.eu, qemu-riscv@nongnu.org
+Subject: Re: [RFC v2] linux-user/riscv: Add syscall riscv_hwprobe
+Message-ID: <20230603-c4d94ebf5c1a129e5cf3ebb4@orel>
+References: <f59f948fc42fdf0b250afd6dcd6f232013480d9c.camel@rivosinc.com>
+ <20230602-86a3d8d9fad1fb3464d28702@orel>
+ <995af08d-239a-f563-5da1-c2c245639d86@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH 04/35] crypto: Add aesenc_SB_SR
-Content-Language: en-US
-To: Ard Biesheuvel <ardb@kernel.org>
-Cc: qemu-devel@nongnu.org, berrange@redhat.com, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com
-References: <20230603023426.1064431-1-richard.henderson@linaro.org>
- <20230603023426.1064431-5-richard.henderson@linaro.org>
- <CAMj1kXFuESELf9gjsBBKOtZKLxM2cyuzBecQm4+KHT4XtiRLhA@mail.gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <CAMj1kXFuESELf9gjsBBKOtZKLxM2cyuzBecQm4+KHT4XtiRLhA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1030.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <995af08d-239a-f563-5da1-c2c245639d86@linaro.org>
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.095,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -100,84 +95,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/3/23 06:15, Ard Biesheuvel wrote:
->> diff --git a/crypto/aes.c b/crypto/aes.c
->> index 1309a13e91..708838315a 100644
->> --- a/crypto/aes.c
->> +++ b/crypto/aes.c
->> @@ -29,6 +29,7 @@
->>    */
->>   #include "qemu/osdep.h"
->>   #include "crypto/aes.h"
->> +#include "crypto/aes-round.h"
->>
->>   typedef uint32_t u32;
->>   typedef uint8_t u8;
->> @@ -1251,6 +1252,52 @@ static const u32 rcon[] = {
->>           0x1B000000, 0x36000000, /* for 128-bit blocks, Rijndael never uses more than 10 rcon values */
->>   };
->>
->> +/* Perform SubBytes + ShiftRows. */
->> +static inline void
->> +aesenc_SB_SR_swap(AESState *r, const AESState *st, bool swap)
->> +{
->> +    const int swap_b = swap ? 15 : 0;
->> +    uint8_t t;
->> +
->> +    /* These four indexes are not swizzled. */
->> +    r->b[swap_b ^ 0x0] = AES_sbox[st->b[swap_b ^ AES_SH_0]];
->> +    r->b[swap_b ^ 0x4] = AES_sbox[st->b[swap_b ^ AES_SH_4]];
->> +    r->b[swap_b ^ 0x8] = AES_sbox[st->b[swap_b ^ AES_SH_8]];
->> +    r->b[swap_b ^ 0xc] = AES_sbox[st->b[swap_b ^ AES_SH_C]];
->> +
->> +    /* Otherwise, break cycles. */
->> +
+On Fri, Jun 02, 2023 at 07:58:30PM -0700, Richard Henderson wrote:
+> On 6/2/23 07:02, Andrew Jones wrote:
+> > > +struct riscv_hwprobe {
+> > > +    int64_t  key;
+> > > +    uint64_t value;
+> > > +};
+> > 
+> > The above is all uapi so Linux's arch/riscv/include/uapi/asm/hwprobe.h
+> > should be picked up on Linux header update. You'll need to modify the
+> > script, scripts/update-linux-headers.sh, to do that by adding a new
+> > riscv-specific block. Hacking this by importing the header file manually
+> > is fine for an RFC, but that should be a separate patch or part of the
+> > syscall define hack patch. And hack patches should be clearly tagged as
+> > "NOT FOR MERGE".
 > 
-> This is only needed it r == st, right?
-
-Yes.  This is, perhaps, where using symbolic AES_SH_X while assuming knowledge of the 
-value does not aid understanding.
-
-
-r~
-
 > 
->> +    t = AES_sbox[st->b[swap_b ^ AES_SH_D]];
->> +    r->b[swap_b ^ 0x1] = AES_sbox[st->b[swap_b ^ AES_SH_1]];
->> +    r->b[swap_b ^ 0x5] = AES_sbox[st->b[swap_b ^ AES_SH_5]];
->> +    r->b[swap_b ^ 0x9] = AES_sbox[st->b[swap_b ^ AES_SH_9]];
->> +    r->b[swap_b ^ 0xd] = t;
->> +
->> +    t = AES_sbox[st->b[swap_b ^ AES_SH_A]];
->> +    r->b[swap_b ^ 0x2] = AES_sbox[st->b[swap_b ^ AES_SH_2]];
->> +    r->b[swap_b ^ 0xa] = t;
->> +
->> +    t = AES_sbox[st->b[swap_b ^ AES_SH_E]];
->> +    r->b[swap_b ^ 0x6] = AES_sbox[st->b[swap_b ^ AES_SH_6]];
->> +    r->b[swap_b ^ 0xe] = t;
->> +
->> +    t = AES_sbox[st->b[swap_b ^ AES_SH_7]];
->> +    r->b[swap_b ^ 0x3] = AES_sbox[st->b[swap_b ^ AES_SH_3]];
->> +    r->b[swap_b ^ 0xf] = AES_sbox[st->b[swap_b ^ AES_SH_F]];
->> +    r->b[swap_b ^ 0xb] = AES_sbox[st->b[swap_b ^ AES_SH_B]];
->> +    r->b[swap_b ^ 0x7] = t;
->> +}
->> +
->> +void aesenc_SB_SR_gen(AESState *r, const AESState *st)
->> +{
->> +    aesenc_SB_SR_swap(r, st, false);
->> +}
->> +
->> +void aesenc_SB_SR_genrev(AESState *r, const AESState *st)
->> +{
->> +    aesenc_SB_SR_swap(r, st, true);
->> +}
->> +
->>   /**
->>    * Expand the cipher key into the encryption key schedule.
->>    */
->> --
->> 2.34.1
->>
+> Not true.  linux-user/ never looks at linux-headers/.
 
+Ah, thanks. I should have known better than to try and review a linux-user
+patch, since I know almost nothing about it! Is uapi like this usually
+duplicated, as was done in this patch?
+
+Thanks,
+drew
 
