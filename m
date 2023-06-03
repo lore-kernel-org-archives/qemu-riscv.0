@@ -4,72 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0302C7EE24
-	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Jun 2023 13:46:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E921EC77B7A
+	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Jun 2023 15:22:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q5Rac-00071h-TN; Sat, 03 Jun 2023 09:46:42 -0400
+	id 1q5T4e-0001W5-67; Sat, 03 Jun 2023 11:21:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q5Rab-00071U-KS; Sat, 03 Jun 2023 09:46:41 -0400
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1q5RaZ-0007qY-8q; Sat, 03 Jun 2023 09:46:41 -0400
-Received: from [192.168.202.181] (unknown [61.242.129.66])
- by APP-05 (Coremail) with SMTP id zQCowADHz1s5RHtkzN+GCg--.51870S2;
- Sat, 03 Jun 2023 21:46:34 +0800 (CST)
-Message-ID: <6fb425f0-8097-9527-9abe-a7279005c766@iscas.ac.cn>
-Date: Sat, 3 Jun 2023 21:46:33 +0800
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1q5T4c-0001VQ-B2
+ for qemu-riscv@nongnu.org; Sat, 03 Jun 2023 11:21:46 -0400
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1q5T4Z-0004sn-IL
+ for qemu-riscv@nongnu.org; Sat, 03 Jun 2023 11:21:46 -0400
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-25632c99eecso1416216a91.2
+ for <qemu-riscv@nongnu.org>; Sat, 03 Jun 2023 08:21:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1685805702; x=1688397702;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=bDeY8/V1MFofMcjCxegXtjED3/yVabloEbI1+uzhwhA=;
+ b=xCqDG6DXZkCaB4mMUfw1MBRmAH2qj05oRFd4Iskgjn6EKlnCEEzNe2r7m9m07LNXFT
+ mG95TYk7clCMuvn1iZeQd4rjHxPcLx8M6CRryiO5aTYu4IIFsiIQPmAmP+qBqHfoqpR/
+ lTDWua1LdIXVfthCWgodhmAatoMa425Rfd87k6UhJ33AHAkIVTBmqtV0TNSFUhTEtdp1
+ LIRK3EXJWEZHzxbmSW7orjJZkdsPz4NuOVRVZgNhjd+ozqM6tPQQgQNTiqErjDnw5TUU
+ uwHXJUWuG+p/42oZiiA4H1F7mFtjYqKjKjsRxeRkflvFP+0151Ho2rOaPbnCfTgqsX9x
+ uUPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1685805702; x=1688397702;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=bDeY8/V1MFofMcjCxegXtjED3/yVabloEbI1+uzhwhA=;
+ b=AyJKMd+ItkFfL3eRvsnOx9ZpOcSvisbRd3I4Ac/x/XfdDcnr4IpxNPbyof15txJHZv
+ ndaBvtleIXKNVAsJ/ljVdl3j2717a0W1KCaF73kxZ/0yIvCGQ8MKA8THZm0ErDughNFy
+ Gz/v/hLwjYEfVKnsMgCIVWJkQhhTzu5pkmtuaxl7QleZfZELnawekkq2K2k/XURkCSU2
+ mv4WMSXV6Axlrwgj8adtJhrJL27WyogWSquaj3R+pToAgtBXstELDDHyN0ZOHVx7d2aN
+ 90nm5mt5VM+NoBrw75URsQT+s7NDVS4Sd/SQL/3m7DPJqDDabmn+sWQS1AFFzzyPtVcQ
+ Rj2Q==
+X-Gm-Message-State: AC+VfDywxA3SydTjp59yA7bqEsmVagUy9FE6+9uHD5FoBcFP+cd2FC6P
+ EtrgtLQnB5uyXk15xK2FFEsjwg==
+X-Google-Smtp-Source: ACHHUZ7nw+2IMufFvonYFQQSSMPXUcn0lPNCGxLYy9zGuQru0q5Bd370fW96wTjy0eKzvzipuFlehA==
+X-Received: by 2002:a17:90a:1d6:b0:256:5634:9cab with SMTP id
+ 22-20020a17090a01d600b0025656349cabmr1561555pjd.4.1685805701709; 
+ Sat, 03 Jun 2023 08:21:41 -0700 (PDT)
+Received: from ?IPV6:2602:ae:1598:4c01:9a37:84b6:b3f0:f301?
+ ([2602:ae:1598:4c01:9a37:84b6:b3f0:f301])
+ by smtp.gmail.com with ESMTPSA id
+ w9-20020a17090a15c900b00256395cb599sm5093684pjd.38.2023.06.03.08.21.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 03 Jun 2023 08:21:41 -0700 (PDT)
+Message-ID: <038845c7-4b73-677e-3302-4d74658c5a1e@linaro.org>
+Date: Sat, 3 Jun 2023 08:21:38 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-Subject: Re: [PATCH 2/4] target/riscv: Remove check on mode for MPRV
-To: Richard Henderson <richard.henderson@linaro.org>,
- Weiwei Li <liweiwei@iscas.ac.cn>, Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-References: <20230529121719.179507-1-liweiwei@iscas.ac.cn>
- <20230529121719.179507-3-liweiwei@iscas.ac.cn>
- <CAKmqyKPmXXoVdSndTF+aF7A-3PqVrnw-NFG26sQQicxybwWpQA@mail.gmail.com>
- <18e4da39-cbd4-aa60-7628-7105a788b6e8@iscas.ac.cn>
- <CAKmqyKMP0aX=_3ffQXSNQ0pWCjeXEF+h=QgPbL80=0J8v_gOrA@mail.gmail.com>
- <be90143f-1c8b-eb31-3c75-ae9846f00a22@iscas.ac.cn>
- <01547b15-1a1a-f1e4-627d-3bf2477a69b9@linaro.org>
+Subject: Re: [PATCH 02/35] target/arm: Move aesmc and aesimc tables to
+ crypto/aes.c
 Content-Language: en-US
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-In-Reply-To: <01547b15-1a1a-f1e4-627d-3bf2477a69b9@linaro.org>
+To: Ard Biesheuvel <ardb@kernel.org>
+Cc: qemu-devel@nongnu.org, berrange@redhat.com, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com
+References: <20230603023426.1064431-1-richard.henderson@linaro.org>
+ <20230603023426.1064431-3-richard.henderson@linaro.org>
+ <CAMj1kXHzTbE2icKpPdA2=-yw-DPGhmy5nLigUn_tjJrZHH+s-A@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <CAMj1kXHzTbE2icKpPdA2=-yw-DPGhmy5nLigUn_tjJrZHH+s-A@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-CM-TRANSID: zQCowADHz1s5RHtkzN+GCg--.51870S2
-X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
- VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUYX7AC8VAFwI0_Gr0_Xr1l1xkIjI8I6I8E
- 6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28Cjx
- kF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUCVW8JwA2z4x0Y4vE2Ix0cI8I
- cVCY1x0267AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z2
- 80aVCY1x0267AKxVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
- 64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8Jw
- Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7
- M4IIrI8v6xkF7I0E8cxan2IY04v7Mxk0xIA0c2IEe2xFo4CEbIxvr21lc2xSY4AK67AK6r
- y8MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_
- Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x
- 0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWx
- JVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMI
- IF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUkHUDUUUUU
- =
-X-Originating-IP: [61.242.129.66]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.095,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1036.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.095,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,24 +101,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 6/3/23 05:45, Ard Biesheuvel wrote:
+> On Sat, 3 Jun 2023 at 04:34, Richard Henderson
+> <richard.henderson@linaro.org> wrote:
+>>
+>> We do not currently have a table in crypto/ for
+>> just MixColumns.  Move both tables for consistency.
+>>
+>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>> ---
+>>   include/crypto/aes.h           |   6 ++
+>>   crypto/aes.c                   | 142 ++++++++++++++++++++++++++++++++
+>>   target/arm/tcg/crypto_helper.c | 143 ++-------------------------------
+>>   3 files changed, 153 insertions(+), 138 deletions(-)
+>>
+>> diff --git a/include/crypto/aes.h b/include/crypto/aes.h
+>> index 822d64588c..24b073d569 100644
+>> --- a/include/crypto/aes.h
+>> +++ b/include/crypto/aes.h
+>> @@ -34,6 +34,12 @@ extern const uint8_t AES_isbox[256];
+>>   extern const uint8_t AES_shifts[16];
+>>   extern const uint8_t AES_ishifts[16];
+>>
+>> +/* AES MixColumns, for use with rot32. */
+>> +extern const uint32_t AES_mc_rot[256];
+>> +
+>> +/* AES InvMixColumns, for use with rot32. */
+>> +extern const uint32_t AES_imc_rot[256];
+>> +
+>>   /* AES InvMixColumns */
+>>   /* AES_imc[x][0] = [x].[0e, 09, 0d, 0b]; */
+>>   /* AES_imc[x][1] = [x].[0b, 0e, 09, 0d]; */
+>> diff --git a/crypto/aes.c b/crypto/aes.c
+>> index af72ff7779..72c95c38fb 100644
+>> --- a/crypto/aes.c
+>> +++ b/crypto/aes.c
+>> @@ -116,6 +116,148 @@ const uint8_t AES_ishifts[16] = {
+>>       0, 13, 10, 7, 4, 1, 14, 11, 8, 5, 2, 15, 12, 9, 6, 3
+>>   };
+>>
+>> +/*
+>> + * MixColumns lookup table, for use with rot32.
+>> + * From Arm ARM pseudocode.
+> 
+> I remember writing the code to generate these tables, and my copy of
+> the ARM ARM doesn't appear to have them, so this comment seems
+> inaccurate to me.
 
-On 2023/6/3 05:01, Richard Henderson wrote:
-> On 6/1/23 18:31, Weiwei Li wrote:
->> Even though MPRV normally can be set to 1 in M mode, it seems 
->> possible to set it to 1 in other mode by gdbstub.
->
-> That would seem to be a gdbstub bug, since it is cleared on exit from 
-> M-mode, and cannot be set again until we re-enter M-mode.
+Quite right.  I remember having copied *some* table from the ARM, but it wasn't this one. 
+I went back to A.a to double-check that it simply wasn't removed from a recent edition.
 
-Yeah, MPRV normally can be set only in M mode. However, gdbstub can 
-bypass the check on privilege mode for CSRs access inriscv_csrrw_check.
 
-Regards,
-
-Weiwei Li
-
->
->
-> r~
-
+r~
 
