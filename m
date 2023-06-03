@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2882CC77B73
-	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Jun 2023 15:50:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A249C77B73
+	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Jun 2023 16:02:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q5TW8-00070e-M2; Sat, 03 Jun 2023 11:50:12 -0400
+	id 1q5ThK-0001BP-EI; Sat, 03 Jun 2023 12:01:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1q5TW8-00070W-3M
- for qemu-riscv@nongnu.org; Sat, 03 Jun 2023 11:50:12 -0400
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1q5ThI-00018L-Dk
+ for qemu-riscv@nongnu.org; Sat, 03 Jun 2023 12:01:44 -0400
+Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1q5TW5-0007cP-Ot
- for qemu-riscv@nongnu.org; Sat, 03 Jun 2023 11:50:11 -0400
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-3f6dfc4e01fso32575725e9.0
- for <qemu-riscv@nongnu.org>; Sat, 03 Jun 2023 08:50:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1q5ThG-0003Vi-6p
+ for qemu-riscv@nongnu.org; Sat, 03 Jun 2023 12:01:44 -0400
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-52cb8e5e9f5so2279598a12.0
+ for <qemu-riscv@nongnu.org>; Sat, 03 Jun 2023 09:01:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1685807407; x=1688399407;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ka6KezNkh0IdDr8GdklycmNSH8VvQQOu1kKR8MbrIgk=;
- b=Uwt3HiF+3HPIWaSH2cQ/KLHo6ZustwTeJCM1Z5IL31/OKpHSOrk2inylvypiGqLlVi
- aVnODMjEO+ImpOl/KuHK0viL0c5pSpUa6h/wvzRV5f6DOBkrSM8LDqMJI5tR03lapvQu
- 0EwN4uGPFQwnsZelPU+QowcasTs8obwbDu0gmXxdWPvR0eourJicY8r6w4RTbEGg5qgz
- uc2hvKL+9EHINYZzoBV3LXfzcflj01s7sntDy58t5EP4+HULZ138ZIlpjLIfmkmDMEvv
- poyOm2bWG8KP+NV+U9RmshAu5FZrXKHi1FhAVPvP8Nja4vxrZMEnV/iOyPon2cSgDRQU
- rN3g==
+ d=linaro.org; s=google; t=1685808100; x=1688400100;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=oN1W3QZzguABfsk/9SDL/zGs9EOs0rrgU2900uxVlYE=;
+ b=Rk8+9COpLeoRBW7kUH/ooOcjv76VGRl9BausOlE9Js7U9WA19IigLwVBtQJlt7uI4N
+ 36MnERZKK5hBhqK4Bkvkpst18zPOC/a2l5xyROmAaUrUbIbIGXoZ/U2DVDy2R1peS3Dd
+ uoGh5atO/3o+0DKcmRfu8VGlLq8g71tZ1lRRQ2+SwB2xselp+x+NKagHuCZiWmHwIXKQ
+ eDsu1h/9lGEHhPxlXYb3eZSppFdzKB/D7b26+MZiZfeZ9fXN/V+Bl/vYAC+voK89nSw1
+ 5WGorFqFhqHHR+xe0IuSQj4uJw66lmaxmINzRIHAQjZe2z3EL5KGbeSf0QNa73p6XYuL
+ rl1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685807407; x=1688399407;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ka6KezNkh0IdDr8GdklycmNSH8VvQQOu1kKR8MbrIgk=;
- b=lN6chVu7Jqx8epba1tjlmlAA4WyeC9kyGU6U5Q3+80P9773r9+yK4qZ5ACdV35SSyC
- XnC5Xjk4UuMoMG+uFkxMcZ4aeeXvtjgxoVWmPJ3Ms0sVHN9oQE66jPKwJIIWYUeg5DKD
- /b/UXGDMlv6gmLP9OXAAxftMIxbfPG9y5AvvaBsYx0ouZARmEYGMFiJtu/C4E6d5wlj0
- tSkdmw6qwfWbgw5+NSpWykBPZGMD11nXQRx4STncGYAuEdsGSVdTCFHDs15bISNkX7zK
- yL0pPuwJjZxURC+72Hasuqnn3mPUPTFE7QedvN5zqSStJpX9+tRn820S5qf1g0788b6G
- HsiQ==
-X-Gm-Message-State: AC+VfDz/mU6MCEK1ljAYVPxOzNhomGEkOcjic1m1Q26UkiSjJqZgZUHS
- kepYoIZIhQVNdIvUwXc98I5/A+8eZPx3yB2AflQ=
-X-Google-Smtp-Source: ACHHUZ5ZZxZynHiUkkF44G7o4ojMtZiRO2rbVY9BgfQxCX/xeEg0pak96APhCE3H3v1S1DVAwStm6Q==
-X-Received: by 2002:a05:600c:2259:b0:3f6:923:9ec with SMTP id
- a25-20020a05600c225900b003f6092309ecmr4326805wmm.25.1685807406966; 
- Sat, 03 Jun 2023 08:50:06 -0700 (PDT)
-Received: from localhost (cst2-173-16.cust.vodafone.cz. [31.30.173.16])
+ d=1e100.net; s=20221208; t=1685808100; x=1688400100;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=oN1W3QZzguABfsk/9SDL/zGs9EOs0rrgU2900uxVlYE=;
+ b=SIh13gTYoFCnmimjdESxfATMbTzhRoxsVv63POKvyqtLYQXyt54TZikLiPC5DGiea9
+ tOOfqWV8bBwBhr6CF4xpw/UyxA19Sz1FjkuhT2/31ULhYawYkM7gbEz1Zigp8tqf88oy
+ VqDjYZ0l3reeYlQban3h+4HntA4f0MEVv4dfJq8ho80+Q4lLwWRDAsVCQbM7V02KEOe/
+ YboyqUQjqflZzBNDu4fIFdbN7xYX4mqj/hC7WH1SMBLsxvnmg2t6UH1c93REogQEaKd0
+ L1rbAw8KC2BSNakCOq96K3VCxxtzMc9WRF+ZrVsvZgB9ORM6pUK5VvL3Of+LvCgvhm4C
+ pIHg==
+X-Gm-Message-State: AC+VfDxCxbQXkjceITXpCksWE2268cOpnxJvuEoGPRcVEGPy5tnEP4Sw
+ meCphUWNvbmubuJ3kSJrDMFPrA==
+X-Google-Smtp-Source: ACHHUZ4FwrTU3z/TteXgciOt8hMb+hULOoCivNiLXN0yH70c6y89mGLXWvUEGykQasvCp2HpXTniZA==
+X-Received: by 2002:a17:903:452:b0:1ae:89a:a4 with SMTP id
+ iw18-20020a170903045200b001ae089a00a4mr2671718plb.8.1685808099647; 
+ Sat, 03 Jun 2023 09:01:39 -0700 (PDT)
+Received: from ?IPV6:2602:ae:1598:4c01:9a37:84b6:b3f0:f301?
+ ([2602:ae:1598:4c01:9a37:84b6:b3f0:f301])
  by smtp.gmail.com with ESMTPSA id
- m16-20020a7bcb90000000b003f6028a4c85sm8935807wmi.16.2023.06.03.08.50.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 03 Jun 2023 08:50:06 -0700 (PDT)
-Date: Sat, 3 Jun 2023 17:50:05 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Robbin Ehn <rehn@rivosinc.com>, qemu-devel@nongnu.org, 
- laurent@vivier.eu, qemu-riscv@nongnu.org
-Subject: Re: [RFC v2] linux-user/riscv: Add syscall riscv_hwprobe
-Message-ID: <20230603-c4d94ebf5c1a129e5cf3ebb4@orel>
-References: <f59f948fc42fdf0b250afd6dcd6f232013480d9c.camel@rivosinc.com>
- <20230602-86a3d8d9fad1fb3464d28702@orel>
- <995af08d-239a-f563-5da1-c2c245639d86@linaro.org>
+ x10-20020a170902ec8a00b001ac8e0ea157sm3369387plg.144.2023.06.03.09.01.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 03 Jun 2023 09:01:39 -0700 (PDT)
+Message-ID: <c9e2980e-54bd-1b25-60b9-3351417aaecd@linaro.org>
+Date: Sat, 3 Jun 2023 09:01:37 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <995af08d-239a-f563-5da1-c2c245639d86@linaro.org>
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH 31/35] host/include/aarch64: Implement aes-round.h
+Content-Language: en-US
+To: Ard Biesheuvel <ardb@kernel.org>
+Cc: qemu-devel@nongnu.org, berrange@redhat.com, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com
+References: <20230603023426.1064431-1-richard.henderson@linaro.org>
+ <20230603023426.1064431-32-richard.henderson@linaro.org>
+ <CAMj1kXE5SKJS9YRuV6H3z84JvSMHDBkFWVuue8yMyYVK7TVkSw@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <CAMj1kXE5SKJS9YRuV6H3z84JvSMHDBkFWVuue8yMyYVK7TVkSw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52f.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.095,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,28 +100,86 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jun 02, 2023 at 07:58:30PM -0700, Richard Henderson wrote:
-> On 6/2/23 07:02, Andrew Jones wrote:
-> > > +struct riscv_hwprobe {
-> > > +    int64_t  key;
-> > > +    uint64_t value;
-> > > +};
-> > 
-> > The above is all uapi so Linux's arch/riscv/include/uapi/asm/hwprobe.h
-> > should be picked up on Linux header update. You'll need to modify the
-> > script, scripts/update-linux-headers.sh, to do that by adding a new
-> > riscv-specific block. Hacking this by importing the header file manually
-> > is fine for an RFC, but that should be a separate patch or part of the
-> > syscall define hack patch. And hack patches should be clearly tagged as
-> > "NOT FOR MERGE".
+On 6/3/23 05:50, Ard Biesheuvel wrote:
+> On Sat, 3 Jun 2023 at 04:34, Richard Henderson
+> <richard.henderson@linaro.org> wrote:
+>>
+>> Detect AES in cpuinfo; implement the accel hooks.
+>>
+>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>> ---
+>>   host/include/aarch64/host/aes-round.h | 204 ++++++++++++++++++++++++++
+>>   host/include/aarch64/host/cpuinfo.h   |   1 +
+>>   util/cpuinfo-aarch64.c                |   2 +
+>>   3 files changed, 207 insertions(+)
+>>   create mode 100644 host/include/aarch64/host/aes-round.h
+>>
+>> diff --git a/host/include/aarch64/host/aes-round.h b/host/include/aarch64/host/aes-round.h
+>> new file mode 100644
+>> index 0000000000..27ca823db6
+>> --- /dev/null
+>> +++ b/host/include/aarch64/host/aes-round.h
+>> @@ -0,0 +1,204 @@
+>> +/*
+>> + * AArch64 specific aes acceleration.
+>> + * SPDX-License-Identifier: GPL-2.0-or-later
+>> + */
+>> +
+>> +#ifndef HOST_AES_ROUND_H
+>> +#define HOST_AES_ROUND_H
+>> +
+>> +#include "host/cpuinfo.h"
+>> +#include <arm_neon.h>
+>> +
+>> +#ifdef __ARM_FEATURE_AES
+>> +# define HAVE_AES_ACCEL  true
+>> +# define ATTR_AES_ACCEL
+>> +#else
+>> +# define HAVE_AES_ACCEL  likely(cpuinfo & CPUINFO_AES)
+>> +# define ATTR_AES_ACCEL  __attribute__((target("+crypto")))
+>> +#endif
+>> +
+>> +static inline uint8x16_t aes_accel_bswap(uint8x16_t x)
+>> +{
+>> +    /* No arm_neon.h primitive, and the compilers don't share builtins. */
+> 
+> vqtbl1q_u8() perhaps?
+
+Ah, yes, thanks.
+
+
+>> +static inline uint8x16_t aes_accel_aesmc(uint8x16_t d)
+>> +{
+>> +    asm(".arch_extension aes\n\t"
+>> +        "aesmc %0.16b, %1.16b" : "=w"(d) : "w"(d));
 > 
 > 
-> Not true.  linux-user/ never looks at linux-headers/.
+> Most ARM cores fuse aese/aesmc into a single uop (with the associated
+> performance boost) if the pattern is
+> 
+> aese x, y
+> aesmc x,x
+> 
+> aesd x, y
+> aesimc x,x
+> 
+> So it might make sense to use +w here at least, and use only a single
+> register (which the compiler will likely do in any case, but still)
+> 
+> I would assume that the compiler cannot issue these separately based
+> on the sequences below, but if it might, it may be worth it to emit
+> the aese/aesmc together in a single asm() block
 
-Ah, thanks. I should have known better than to try and review a linux-user
-patch, since I know almost nothing about it! Is uapi like this usually
-duplicated, as was done in this patch?
+There could be shuffling.  It's low probability, but possible.
 
-Thanks,
-drew
+I really should move the builtin test to meson, as clang-16 fixes the builtin visibility 
+issue.  I can see that gcc knows fusion of these pairs; I assume clang does as well, but I 
+don't know the code base well enough to check.
+
+I suppose it's going to be years until clang-16 can be assumed, as Debian bookworm is to 
+be released this month with clang-14.  So it's probably worth spending a few more minutes 
+on this now.
+
+
+r~
 
