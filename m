@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2201C7EE2A
-	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Jun 2023 02:38:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDFA3C7EE2A
+	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Jun 2023 02:38:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q5H7c-0002Jk-TE; Fri, 02 Jun 2023 22:36:04 -0400
+	id 1q5H7d-0002Lq-66; Fri, 02 Jun 2023 22:36:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q5H6d-0000bz-1x
- for qemu-riscv@nongnu.org; Fri, 02 Jun 2023 22:35:03 -0400
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
+ id 1q5H6z-0000vL-Sm
+ for qemu-riscv@nongnu.org; Fri, 02 Jun 2023 22:35:27 -0400
+Received: from mail-oo1-xc2b.google.com ([2607:f8b0:4864:20::c2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q5H6Q-0004s8-2v
- for qemu-riscv@nongnu.org; Fri, 02 Jun 2023 22:35:02 -0400
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2566f66190dso2373450a91.1
- for <qemu-riscv@nongnu.org>; Fri, 02 Jun 2023 19:34:49 -0700 (PDT)
+ id 1q5H6Z-0004y7-Dp
+ for qemu-riscv@nongnu.org; Fri, 02 Jun 2023 22:35:25 -0400
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-5555a3266cbso1976576eaf.1
+ for <qemu-riscv@nongnu.org>; Fri, 02 Jun 2023 19:34:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1685759688; x=1688351688;
+ d=linaro.org; s=google; t=1685759698; x=1688351698;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jW/LkFvDYs7wuWSeKP7O4G0IgkgaVuXTO9qaWXdUTaM=;
- b=hnPFh4f+AWxBJf5sbiE7g8pqu1YrrALaXeTJJCgO4St7e6bMBIWNOHxZUk97tx2Qj9
- /dwDaOxRJdEKwwVA8MUBdz0TNFlFMP4b9wsZJpraNGTqO44pczDLLXawC3LlGP73+Hst
- mcJipySYYmPK9m2GQ/OUMeGJKtrmuMJIewlUg5YrSCS1s+HninI5yMAyjW+3WldrwIaZ
- iH+Ww38QCpGOGlxwnVVeQnwzuLSLXMamJyuSGkYjOhZuNYsFtNhXOEsoAqdsNMy89CDb
- HXDyDgDVglMZlJatc+hC1LgVaJaOtbf6xwix+7ARTsyrYX+ZXyU1MCapzXBy6GWiAJpW
- t/Sw==
+ bh=1mv65yNQBKfmXk/1RwKfHXFoTLsAO9uOSejtwcDxftk=;
+ b=xFjVBowNsUokOTOx0vKDL21/yd7TvEYnuulS2RLvbeWbtteiUgQDR3Gvwlbb+LgiKE
+ 7QK+3Q2eHM0/o9/Vpb06aexLd6GzW93iOPnjIgnCaWNy92mCZ0AFqOoztavJlztTTO32
+ 2jyXUSwgSPIpaUJLfSnChosuoRnkS6HBMQpLi4F6DQLRoH4JRGWx7xYjR6QQIu6+rrLd
+ 1iL9GMAx1MxzWKb/nmsxksP928Rk/5J8kynkv8punKQzX3OGlBHOqPvhplnzsjRpj1Wx
+ uz9LQNPGC6XfNy7Ndsj8tyI/uKd2WPbB31O2ydwquAgOPmNhiG6OXwN3lHL+g4jUhEX4
+ TIRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685759688; x=1688351688;
+ d=1e100.net; s=20221208; t=1685759698; x=1688351698;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jW/LkFvDYs7wuWSeKP7O4G0IgkgaVuXTO9qaWXdUTaM=;
- b=MRtGedhHuwzZZpNsM5N2zDTViYbe1Z2tlI+2I3vOJAUb3tD9VIK1HN/BVGn6mDa6F8
- DIiA8SdRKIdDh1brnWs/SZMy0hGY80lO7sbbNNe7X9WX2bJ1ltXoEd0pXYG1GsTlo1Vw
- wnQJBR4Ufzspvafwxyow5rwgczf5zeAfn6bXzP8vDOwWGSuSCgs0h5JXu/2IJaW/QIR6
- IwrfioTf/mGPycj6yK3IQKP5YUxlNrUI7lIsqTwAvVx/tN+OWjta55Mw88duaURN1KTD
- /h5P0OirJnnjtNhCYkX/8ha4UFV4p/+LUtyR8+MJMYgXMtA5BH1GqSdT09GbHENXGLC6
- AnkQ==
-X-Gm-Message-State: AC+VfDzHVR/UKI1CM191i+MounphxCiMGVrhCA4w2ZSvQgx48Ac5C2W+
- gbjAmNcA9byMLgG9LB3YO/AHRw==
-X-Google-Smtp-Source: ACHHUZ68DEKYRLeblRCSawuJDl/wKRCbCuA3o4wxiR1CDCeIeidKUdR7MICjqBdvdJehFB5FMJi6cQ==
-X-Received: by 2002:a17:90b:4c51:b0:258:6e0d:26e3 with SMTP id
- np17-20020a17090b4c5100b002586e0d26e3mr1337673pjb.48.1685759688708; 
- Fri, 02 Jun 2023 19:34:48 -0700 (PDT)
+ bh=1mv65yNQBKfmXk/1RwKfHXFoTLsAO9uOSejtwcDxftk=;
+ b=aU3qUKCOCHak8lWrXI6VZvi4idBPaaMgVDYKIWzepcX1jscjy9ZwxdIjSg6VBaYzbj
+ zhdyJ3DiBqJN+s0O0bblgo90lZUmQAAsJ2GgZ04bmtKlBQvXs23/8gTr+Xfcr6vLI8Lh
+ l1GaHadjGnfv6GYE/etP8GcMQ+O7fRCqJqsqfgXrU2jGqo/9YjStXBlD+qJbZrNupEWc
+ LA3+qUvaxhlx/tAOqfLq3iwOHO9K3Xvau/MYspoFRvBdHb+mnQTLVYb6BsylpoVlLwpq
+ 7VsAQO+ULcQU6RwS90RgpKc5hGTJeRtqhhNeOWXSB/txWlE0AKASvMQ9HJvU5681eMMq
+ XiGQ==
+X-Gm-Message-State: AC+VfDxdlRTNqu9m+Q2so6RIhn6KoVh+lI6QXx8v0dAKTZKUif4QZ17R
+ h7XIE+SMxjsjK2nrnn7y0f3rhnJ5yRLGP+XuYH8=
+X-Google-Smtp-Source: ACHHUZ6b7rPsIc0Xsuz9ezjJe35Jlwoys51qYU7deD6jVYX6rmFU285siak+YOvgmmxMaMzor1Eq0w==
+X-Received: by 2002:a05:6358:e497:b0:123:1637:45d1 with SMTP id
+ by23-20020a056358e49700b00123163745d1mr13082108rwb.14.1685759698318; 
+ Fri, 02 Jun 2023 19:34:58 -0700 (PDT)
 Received: from stoup.. ([2602:ae:1598:4c01:66a6:82c2:d794:68f6])
  by smtp.gmail.com with ESMTPSA id
- e91-20020a17090a6fe400b002508d73f4e8sm3914289pjk.57.2023.06.02.19.34.47
+ e91-20020a17090a6fe400b002508d73f4e8sm3914289pjk.57.2023.06.02.19.34.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Jun 2023 19:34:48 -0700 (PDT)
+ Fri, 02 Jun 2023 19:34:57 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: ardb@kernel.org, berrange@redhat.com, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com
-Subject: [PATCH 23/35] target/ppc: Use aesenc_SB_SR_MC_AK
-Date: Fri,  2 Jun 2023 19:34:14 -0700
-Message-Id: <20230603023426.1064431-24-richard.henderson@linaro.org>
+Subject: [PATCH 33/35] crypto: Implement aesdec_IMC with AES_imc_rot
+Date: Fri,  2 Jun 2023 19:34:24 -0700
+Message-Id: <20230603023426.1064431-34-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230603023426.1064431-1-richard.henderson@linaro.org>
 References: <20230603023426.1064431-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1032.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oo1-xc2b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -94,39 +94,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This implements the VCIPHER instruction.
+This method uses one uint32_t * 256 table instead of 4,
+which means its data cache overhead is less.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/ppc/int_helper.c | 14 ++++----------
- 1 file changed, 4 insertions(+), 10 deletions(-)
+ crypto/aes.c | 41 ++++++++++++++++++++---------------------
+ 1 file changed, 20 insertions(+), 21 deletions(-)
 
-diff --git a/target/ppc/int_helper.c b/target/ppc/int_helper.c
-index 444beb1779..c7f8b39e9a 100644
---- a/target/ppc/int_helper.c
-+++ b/target/ppc/int_helper.c
-@@ -2933,17 +2933,11 @@ void helper_vsbox(ppc_avr_t *r, ppc_avr_t *a)
+diff --git a/crypto/aes.c b/crypto/aes.c
+index 4438d4dcdc..914ccf38ef 100644
+--- a/crypto/aes.c
++++ b/crypto/aes.c
+@@ -1453,39 +1453,38 @@ aesdec_IMC_swap(AESState *r, const AESState *st, bool swap)
+     bool be = HOST_BIG_ENDIAN ^ swap;
+     uint32_t t;
  
- void helper_vcipher(ppc_avr_t *r, ppc_avr_t *a, ppc_avr_t *b)
- {
--    ppc_avr_t result;
--    int i;
-+    AESState *ad = (AESState *)r;
-+    AESState *st = (AESState *)a;
-+    AESState *rk = (AESState *)b;
+-    /* Note that AES_imc is encoded for big-endian. */
+-    t = (AES_imc[st->b[swap_b ^ 0x0]][0] ^
+-         AES_imc[st->b[swap_b ^ 0x1]][1] ^
+-         AES_imc[st->b[swap_b ^ 0x2]][2] ^
+-         AES_imc[st->b[swap_b ^ 0x3]][3]);
+-    if (!be) {
++    t = (      AES_imc_rot[st->b[swap_b ^ 0x0]] ^
++         rol32(AES_imc_rot[st->b[swap_b ^ 0x1]], 8) ^
++         rol32(AES_imc_rot[st->b[swap_b ^ 0x2]], 16) ^
++         rol32(AES_imc_rot[st->b[swap_b ^ 0x3]], 24));
++    if (be) {
+         t = bswap32(t);
+     }
+     r->w[swap_w ^ 0] = t;
  
--    VECTOR_FOR_INORDER_I(i, u32) {
--        result.VsrW(i) = b->VsrW(i) ^
--            (AES_Te0[a->VsrB(AES_shifts[4 * i + 0])] ^
--             AES_Te1[a->VsrB(AES_shifts[4 * i + 1])] ^
--             AES_Te2[a->VsrB(AES_shifts[4 * i + 2])] ^
--             AES_Te3[a->VsrB(AES_shifts[4 * i + 3])]);
--    }
--    *r = result;
-+    aesenc_SB_SR_MC_AK(ad, st, rk, true);
- }
+-    t = (AES_imc[st->b[swap_b ^ 0x4]][0] ^
+-         AES_imc[st->b[swap_b ^ 0x5]][1] ^
+-         AES_imc[st->b[swap_b ^ 0x6]][2] ^
+-         AES_imc[st->b[swap_b ^ 0x7]][3]);
+-    if (!be) {
++    t = (      AES_imc_rot[st->b[swap_b ^ 0x4]] ^
++         rol32(AES_imc_rot[st->b[swap_b ^ 0x5]], 8) ^
++         rol32(AES_imc_rot[st->b[swap_b ^ 0x6]], 16) ^
++         rol32(AES_imc_rot[st->b[swap_b ^ 0x7]], 24));
++    if (be) {
+         t = bswap32(t);
+     }
+     r->w[swap_w ^ 1] = t;
  
- void helper_vcipherlast(ppc_avr_t *r, ppc_avr_t *a, ppc_avr_t *b)
+-    t = (AES_imc[st->b[swap_b ^ 0x8]][0] ^
+-         AES_imc[st->b[swap_b ^ 0x9]][1] ^
+-         AES_imc[st->b[swap_b ^ 0xA]][2] ^
+-         AES_imc[st->b[swap_b ^ 0xB]][3]);
+-    if (!be) {
++    t = (      AES_imc_rot[st->b[swap_b ^ 0x8]] ^
++         rol32(AES_imc_rot[st->b[swap_b ^ 0x9]], 8) ^
++         rol32(AES_imc_rot[st->b[swap_b ^ 0xA]], 16) ^
++         rol32(AES_imc_rot[st->b[swap_b ^ 0xB]], 24));
++    if (be) {
+         t = bswap32(t);
+     }
+     r->w[swap_w ^ 2] = t;
+ 
+-    t = (AES_imc[st->b[swap_b ^ 0xC]][0] ^
+-         AES_imc[st->b[swap_b ^ 0xD]][1] ^
+-         AES_imc[st->b[swap_b ^ 0xE]][2] ^
+-         AES_imc[st->b[swap_b ^ 0xF]][3]);
+-    if (!be) {
++    t = (      AES_imc_rot[st->b[swap_b ^ 0xC]] ^
++         rol32(AES_imc_rot[st->b[swap_b ^ 0xD]], 8) ^
++         rol32(AES_imc_rot[st->b[swap_b ^ 0xE]], 16) ^
++         rol32(AES_imc_rot[st->b[swap_b ^ 0xF]], 24));
++    if (be) {
+         t = bswap32(t);
+     }
+     r->w[swap_w ^ 3] = t;
 -- 
 2.34.1
 
