@@ -4,87 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0013FC7EE2D
-	for <qemu-riscv@archiver.kernel.org>; Sat,  3 Jun 2023 17:48:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A4D1C77B73
+	for <qemu-riscv@archiver.kernel.org>; Sun,  4 Jun 2023 10:49:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q5VMM-0003tD-EL; Sat, 03 Jun 2023 13:48:14 -0400
+	id 1q5lHy-00074u-H0; Sun, 04 Jun 2023 06:48:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q5VMK-0003sy-EM
- for qemu-riscv@nongnu.org; Sat, 03 Jun 2023 13:48:12 -0400
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q5VMI-0007vT-N1
- for qemu-riscv@nongnu.org; Sat, 03 Jun 2023 13:48:12 -0400
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-53fbf2c42bfso2990924a12.3
- for <qemu-riscv@nongnu.org>; Sat, 03 Jun 2023 10:48:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1685814489; x=1688406489;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=uPIU40JyBiMLhs/F+377fsQhyAV/joiOfzqUwyaS1i4=;
- b=i4xEurmfu5EQBRc7/uJb7+npaSpauf1y+QilBEOKUJWbVtrVUKCnb3paA3k9lMN2fK
- 3ImBExnXpBq5FLpnKbEDxF02T1s2gY9fwsLwQjoJiVAazu2haD2G1KNZp6EVZ+thwB6r
- Yb+O+yPxY1qjKESU0X7x6A+1LPc6jBhZ099RDeGZUnYopdhwiHuJtg7uW0hbAZMMQa5C
- IcwWO+KQ+nnchdezxt+6HGkkzsT+9vB4OlixtnM2VpdLWryd6wBhqoXk1Afx7mnuX8g4
- Vafx95cZfHNBdnmT44uQokTpaufakdyBag1udjrU5dk+h/R469RF54JNZ0lhJP2XCyxE
- Bc0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685814489; x=1688406489;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uPIU40JyBiMLhs/F+377fsQhyAV/joiOfzqUwyaS1i4=;
- b=P/QyOKHwoDHpdA2xei8zbPlMYjzWdhhb91zQD0oVyv+u+tyzZvmzVAWCBYQnQJOcgG
- RSamorXvI7l4ZbaYmdsqkBBUDoXvDsBLxSVG3VtcJppGmea+uwZ5p+Yz1P/SZ/gpc7ex
- 6Z/rXILY79pzqhMm6Z3Ejezfl3AAxSXU69dH/6ztO6YaVFrSVROj9OruXsa7WUq1CJB2
- hVuJ9kLd7db52IUBloBWt2zp/YShLhOdfMQPG2ocU3Hi+JvFxhU/5Vx/tpHbr7kmisaD
- jk1GB1iUCcJqbENcLrJCL7mByajV8My9jqqgmasV5pDRxBqI8zuSQlX4g/qrdVoEF3ks
- j6gA==
-X-Gm-Message-State: AC+VfDw+to1IlF1TEm0JcZ6sQMzhp+qOm2aqxAmgHD9vB31tjYJ1ejxJ
- QFWb6+kNRBYROhbxIZ/4ara9GA==
-X-Google-Smtp-Source: ACHHUZ435/jocAoBIf26tqpr7ndqYk9gsj6+AzeZOFDhbS3J4Oy83SQU5VJejMmzHdO2J8zQ2Ytofw==
-X-Received: by 2002:a17:902:f68a:b0:1a6:71b1:a0b9 with SMTP id
- l10-20020a170902f68a00b001a671b1a0b9mr4599788plg.47.1685814489022; 
- Sat, 03 Jun 2023 10:48:09 -0700 (PDT)
-Received: from ?IPV6:2602:ae:1598:4c01:9a37:84b6:b3f0:f301?
- ([2602:ae:1598:4c01:9a37:84b6:b3f0:f301])
- by smtp.gmail.com with ESMTPSA id
- jh1-20020a170903328100b001a6cd1e4205sm3445280plb.279.2023.06.03.10.48.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 03 Jun 2023 10:48:08 -0700 (PDT)
-Message-ID: <9e7e7b8e-38c7-3dee-d881-05bcd306c309@linaro.org>
-Date: Sat, 3 Jun 2023 10:48:06 -0700
+ (Exim 4.90_1) (envelope-from <ardb@kernel.org>)
+ id 1q5lHn-000738-Ff; Sun, 04 Jun 2023 06:48:35 -0400
+Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ardb@kernel.org>)
+ id 1q5lHk-0001AF-7A; Sun, 04 Jun 2023 06:48:35 -0400
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 3C05360FE7;
+ Sun,  4 Jun 2023 10:48:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FB0DC433EF;
+ Sun,  4 Jun 2023 10:48:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1685875701;
+ bh=a1e6BEUxyE1uoEC9a5NX1ZcyZMNXNjVMojKljRrdW6o=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=BX/2+5JmUycGVLsyJEf4SFILNMwrZqP2vqlayyf4byPj8wUU9/DlTyJz9BX4OU/0E
+ zLUrkJ8lxWqh+/ThK22HVepJN/mlsFQj7YRhNLzTdqZkSERdR12JrhdNW1IZQBgsHb
+ XSh0dlvmoMS0kLt7OnTOMfMy/HxOuzLxg8ZcJOSeVhOApiCiARaD3WRNMG2w8Tz+Si
+ OPYRus4q1hIc+f00ZodqjPIaUk3nyzbOI4YNez0/nT1dHVdH1KbOupV3WFNeuuzDar
+ NZzkB9zKen8j6+MKeWeijo0X3RjF/IeLyu1V2I/GeNoIZh38LtZVs0KYXS5LMLlYHr
+ SMazVMFEdklEQ==
+Received: by mail-lf1-f42.google.com with SMTP id
+ 2adb3069b0e04-4f4b2bc1565so4706971e87.2; 
+ Sun, 04 Jun 2023 03:48:21 -0700 (PDT)
+X-Gm-Message-State: AC+VfDyKcWvAl8nBFI6ASdoDnxuIINxsaUb3NcD1YOXVBpYXZPpvu5rO
+ RvdW6q/EMOF5FNAIPGjmZ/VthM0GIvLgQAvDxnE=
+X-Google-Smtp-Source: ACHHUZ4m5b+yxYNWPqTr9a57tKNf4IH9oZrglX/Y1X3y1QHGEh3QlBMAcnc+mosPhftE7/u7YsOhRbIaLvCq4T0gKtg=
+X-Received: by 2002:a2e:9b0a:0:b0:2af:160d:888a with SMTP id
+ u10-20020a2e9b0a000000b002af160d888amr2893423lji.1.1685875699639; Sun, 04 Jun
+ 2023 03:48:19 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [RFC v2] linux-user/riscv: Add syscall riscv_hwprobe
-Content-Language: en-US
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: Robbin Ehn <rehn@rivosinc.com>, qemu-devel@nongnu.org, laurent@vivier.eu, 
- qemu-riscv@nongnu.org
-References: <f59f948fc42fdf0b250afd6dcd6f232013480d9c.camel@rivosinc.com>
- <20230602-86a3d8d9fad1fb3464d28702@orel>
- <995af08d-239a-f563-5da1-c2c245639d86@linaro.org>
- <20230603-c4d94ebf5c1a129e5cf3ebb4@orel>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230603-c4d94ebf5c1a129e5cf3ebb4@orel>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52d.google.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.095,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+References: <20230603023426.1064431-1-richard.henderson@linaro.org>
+ <CAMj1kXHp7QHftNw6t3ww8wgL9rAUHEauS0S04d=Rfey7EO3bcg@mail.gmail.com>
+In-Reply-To: <CAMj1kXHp7QHftNw6t3ww8wgL9rAUHEauS0S04d=Rfey7EO3bcg@mail.gmail.com>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Sun, 4 Jun 2023 12:47:26 +0200
+X-Gmail-Original-Message-ID: <CAMj1kXEP97e57XBEuLZFQ4Ra31AQYcKWU+cfve0FeVPPX+zg=Q@mail.gmail.com>
+Message-ID: <CAMj1kXEP97e57XBEuLZFQ4Ra31AQYcKWU+cfve0FeVPPX+zg=Q@mail.gmail.com>
+Subject: Re: [PATCH 00/35] crypto: Provide aes-round.h and host accel
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, berrange@redhat.com, qemu-arm@nongnu.org, 
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2604:1380:4641:c500::1;
+ envelope-from=ardb@kernel.org; helo=dfw.source.kernel.org
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -101,34 +81,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/3/23 08:50, Andrew Jones wrote:
-> On Fri, Jun 02, 2023 at 07:58:30PM -0700, Richard Henderson wrote:
->> On 6/2/23 07:02, Andrew Jones wrote:
->>>> +struct riscv_hwprobe {
->>>> +    int64_t  key;
->>>> +    uint64_t value;
->>>> +};
->>>
->>> The above is all uapi so Linux's arch/riscv/include/uapi/asm/hwprobe.h
->>> should be picked up on Linux header update. You'll need to modify the
->>> script, scripts/update-linux-headers.sh, to do that by adding a new
->>> riscv-specific block. Hacking this by importing the header file manually
->>> is fine for an RFC, but that should be a separate patch or part of the
->>> syscall define hack patch. And hack patches should be clearly tagged as
->>> "NOT FOR MERGE".
->>
->>
->> Not true.  linux-user/ never looks at linux-headers/.
-> 
-> Ah, thanks. I should have known better than to try and review a linux-user
-> patch, since I know almost nothing about it! Is uapi like this usually
-> duplicated, as was done in this patch?
+On Sat, 3 Jun 2023 at 15:23, Ard Biesheuvel <ardb@kernel.org> wrote:
+>
+> On Sat, 3 Jun 2023 at 04:34, Richard Henderson
+> <richard.henderson@linaro.org> wrote:
+> >
+> > Inspired by Ard Biesheuvel's RFC patches for accelerating AES
+> > under emulation, provide a set of primitives that maps between
+> > the guest and host fragments.
+> >
+> > There is a small guest correctness test case.
+> >
+> > I think the end result is quite a bit cleaner, since the logic
+> > is now centralized, rather than spread across 4 different guests.
+> >
+> > Further work could clean up crypto/aes.c itself to use these
+> > instead of the tables directly.  I'm sure that's just an ultimate
+> > fallback when an appropriate system library is not available, and
+> > so not terribly important, but it could still significantly reduce
+> > the amount of code we carry.
+> >
+> > I would imagine structuring a polynomial multiplication header
+> > in a similar way.  There are 4 or 5 versions of those spread across
+> > the different guests.
+> >
+> > Anyway, please review.
+> >
+> >
+> > r~
+> >
+> >
+> > Richard Henderson (35):
+> >   tests/multiarch: Add test-aes
+> >   target/arm: Move aesmc and aesimc tables to crypto/aes.c
+> >   crypto/aes: Add constants for ShiftRows, InvShiftRows
+> >   crypto: Add aesenc_SB_SR
+> >   target/i386: Use aesenc_SB_SR
+> >   target/arm: Demultiplex AESE and AESMC
+> >   target/arm: Use aesenc_SB_SR
+> >   target/ppc: Use aesenc_SB_SR
+> >   target/riscv: Use aesenc_SB_SR
+> >   crypto: Add aesdec_ISB_ISR
+> >   target/i386: Use aesdec_ISB_ISR
+> >   target/arm: Use aesdec_ISB_ISR
+> >   target/ppc: Use aesdec_ISB_ISR
+> >   target/riscv: Use aesdec_ISB_ISR
+> >   crypto: Add aesenc_MC
+> >   target/arm: Use aesenc_MC
+> >   crypto: Add aesdec_IMC
+> >   target/i386: Use aesdec_IMC
+> >   target/arm: Use aesdec_IMC
+> >   target/riscv: Use aesdec_IMC
+> >   crypto: Add aesenc_SB_SR_MC_AK
+> >   target/i386: Use aesenc_SB_SR_MC_AK
+> >   target/ppc: Use aesenc_SB_SR_MC_AK
+> >   target/riscv: Use aesenc_SB_SR_MC_AK
+> >   crypto: Add aesdec_ISB_ISR_IMC_AK
+> >   target/i386: Use aesdec_ISB_ISR_IMC_AK
+> >   target/riscv: Use aesdec_ISB_ISR_IMC_AK
+> >   crypto: Add aesdec_ISB_ISR_AK_IMC
+> >   target/ppc: Use aesdec_ISB_ISR_AK_IMC
+> >   host/include/i386: Implement aes-round.h
+> >   host/include/aarch64: Implement aes-round.h
+> >   crypto: Remove AES_shifts, AES_ishifts
+> >   crypto: Implement aesdec_IMC with AES_imc_rot
+> >   crypto: Remove AES_imc
+> >   crypto: Unexport AES_*_rot, AES_TeN, AES_TdN
+> >
+>
+> This is looking very good - it is clearly a much better abstraction
+> than what I proposed, and I'd expect the performance boost to be the
+> same.
 
-Yes, because linux-headers is only for the "native" compiler, whereas linux-user requires 
-the ABI of the guest.
+Benchmark results for OpenSSL running in emulation on TX2:
 
-If we were doing this all from scratch, we would mechanically parse and rewrite linux-headers.
+Without acceleration:
+
+$ ../qemu/build/qemu-x86_64 apps/openssl speed -evp aes-128-ctr
+version: 3.2.0-dev
+built on: Thu Jun  1 17:06:09 2023 UTC
+options: bn(64,64)
+compiler: x86_64-linux-gnu-gcc -pthread -m64 -Wa,--noexecstack -Wall
+-O3 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_BUILDING_OPENSSL
+-DNDEBUG
+CPUINFO: OPENSSL_ia32cap=0xfed8320b0fcbfffd:0x8001020c01d843a9
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes
+8192 bytes  16384 bytes
+AES-128-CTR      25146.07k    50482.19k    69373.44k    76236.80k
+78391.98k    78381.06k
 
 
-r~
+With acceleration:
+
+$ ../qemu/build/qemu-x86_64 apps/openssl speed -evp aes-128-ctr
+version: 3.2.0-dev
+built on: Thu Jun  1 17:06:09 2023 UTC
+options: bn(64,64)
+compiler: x86_64-linux-gnu-gcc -pthread -m64 -Wa,--noexecstack -Wall
+-O3 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_BUILDING_OPENSSL
+-DNDEBUG
+CPUINFO: OPENSSL_ia32cap=0xfed8320b0fcbfffd:0x8001020c01d843a9
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes
+8192 bytes  16384 bytes
+AES-128-CTR      28774.46k    81173.59k   162346.24k   206301.53k
+224214.22k   225600.56k
 
