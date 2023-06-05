@@ -4,78 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD1DC7EE23
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Jun 2023 07:52:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2FD0C77B73
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Jun 2023 09:17:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q650j-0002c1-Vg; Mon, 05 Jun 2023 03:52:18 -0400
+	id 1q66KS-0001ug-IT; Mon, 05 Jun 2023 05:16:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1q650Y-0002b9-U1
- for qemu-riscv@nongnu.org; Mon, 05 Jun 2023 03:52:14 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
- id 1q650R-0007VB-Tv
- for qemu-riscv@nongnu.org; Mon, 05 Jun 2023 03:52:02 -0400
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-659f50bc9e7so264975b3a.0
- for <qemu-riscv@nongnu.org>; Mon, 05 Jun 2023 00:51:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1685951516; x=1688543516;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=qVDTZNdm9TYOhpUiRc7Gqz7STus9Q3p9Jgo6THKuDig=;
- b=U+v0ocTwgOLITQX/bRSBSxpEPQwXAq3ZqrcLRZfeopyS7OfJeehxYcnxbz/KldeXUS
- GCxzoQmRl2yyoqMsFa/bzkYrwYtt3y27OYFhNNqo9xCkxFxcs/0+mBsHEc1d/c8wGJD2
- 4s8MdTILIH7Uv1Hmw4m6TRtbuqwLbu/oZz8d+ShYa3p1qyQr//H1Q0MUtMQTCPdZ+phY
- KbxPhnFyxYftxfveYUo5UzMPLwLAkazKqk9rIJRHexKqVQBW2QDSA/vJVxoYrNyaAI69
- Ohq3pKZjunTrCf6YXFlGLEmtwzsMQnbrUv/7P6xvU2/61GZPwvUOf5+rxWd4yE7wNsln
- k3IQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685951516; x=1688543516;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qVDTZNdm9TYOhpUiRc7Gqz7STus9Q3p9Jgo6THKuDig=;
- b=FGUeV8XBeJdJQl9UJBXCAwJhR8De3cHqLdYmkknrQNMeNfU6i8mddbuabmOXxcmQkE
- RFFk4adipZA+EHNfQG9AFondONmyrhx9plWi7tcEe5/CIPM8byM0BQCxt7L5BqIAVXzO
- cS4O6juVaK6gxX/jrcIjsDuRNOQVw6j1wEKd6w6w68VBOLpEkEARiMWE9ZzTQOuyfLpb
- n1hWHTEG2OcJ8dFNWlC4D93dPUOSvspMB8Rrp8nB5esv1Al4VLjDoAFMaGEBbTh9citc
- 6MJmJY/Gk1wt4hWxlQ0hSvPi1u62sxCUe63GeSp9R8qg/+GVHRRr5wmMREwZ5CBWfY4f
- 40Kg==
-X-Gm-Message-State: AC+VfDydfsrhhobrDtVcU3UcFqt+BQHoI2cnb4eNiXJh8DwWH54mTkLj
- rAJ5oidhgkOgbngD6M8Iql+NhrjobvjDi28UK3mlbw==
-X-Google-Smtp-Source: ACHHUZ6hdoRY0HcYU3GqRU8yxLEi3ZGzJGXihoSIN2Nx3Kx9LLLmceyKpobgwBkcNxs1BFzByvqBCA==
-X-Received: by 2002:a05:6a20:440d:b0:105:66d3:854d with SMTP id
- ce13-20020a056a20440d00b0010566d3854dmr21115476pzb.6.1685951516425; 
- Mon, 05 Jun 2023 00:51:56 -0700 (PDT)
-Received: from saptrishi.. ([2405:201:d019:c279:7394:6066:fed1:a1d])
- by smtp.gmail.com with ESMTPSA id
- b10-20020a63cf4a000000b0050a0227a4bcsm5239366pgj.57.2023.06.05.00.51.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Jun 2023 00:51:56 -0700 (PDT)
-From: Himanshu Chauhan <hchauhan@ventanamicro.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: Himanshu Chauhan <hchauhan@ventanamicro.com>
-Subject: [PATCH] target/riscv: Smepmp: Return error when access permission not
- allowed in PMP
-Date: Mon,  5 Jun 2023 13:21:50 +0530
-Message-Id: <20230605075150.367555-1-hchauhan@ventanamicro.com>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1q66KP-0001u2-In; Mon, 05 Jun 2023 05:16:41 -0400
+Received: from smtp80.cstnet.cn ([159.226.251.80] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1q66KM-0000Og-H7; Mon, 05 Jun 2023 05:16:41 -0400
+Received: from [192.168.100.156] (unknown [117.61.117.136])
+ by APP-01 (Coremail) with SMTP id qwCowAD3_fHnp31k3wWyCw--.18998S2;
+ Mon, 05 Jun 2023 17:16:24 +0800 (CST)
+Message-ID: <74719362-f97b-a32e-45bc-ef9eddfd721b@iscas.ac.cn>
+Date: Mon, 5 Jun 2023 17:16:23 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=hchauhan@ventanamicro.com; helo=mail-pf1-x431.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH] target/riscv: Smepmp: Return error when access permission
+ not allowed in PMP
+To: Himanshu Chauhan <hchauhan@ventanamicro.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+References: <20230605075150.367555-1-hchauhan@ventanamicro.com>
+Content-Language: en-US
+Cc: liweiwei@iscas.ac.cn
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+In-Reply-To: <20230605075150.367555-1-hchauhan@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID: qwCowAD3_fHnp31k3wWyCw--.18998S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7AFyktF4xCw4kKw17AryfCrg_yoW8Jw4fpr
+ 4rCryIkrZrtrZrXwn3tw1UWF13Ars3GFW7Wan7tryjka13ArWvkr1DKw429F1UJa4a9wn0
+ 9F4akF45AFWjqFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkm14x267AKxVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
+ Y487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
+ 0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y
+ 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
+ WUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
+ IxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfU5WlkUUUUU
+X-Originating-IP: [117.61.117.136]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.80; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.091,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -92,39 +78,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On an address match, skip checking for default permissions and return error
-based on access defined in PMP configuration.
 
-Fixes: 90b1fafce06 ("target/riscv: Smepmp: Skip applying default rules when address matches")
-Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
----
- target/riscv/pmp.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+On 2023/6/5 15:51, Himanshu Chauhan wrote:
+> On an address match, skip checking for default permissions and return error
+> based on access defined in PMP configuration.
+>
+> Fixes: 90b1fafce06 ("target/riscv: Smepmp: Skip applying default rules when address matches")
+> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+> ---
+>   target/riscv/pmp.c | 5 +++--
+>   1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 418738afd8..6238528282 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -435,8 +435,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>                * defined with PMP must be used. We shouldn't fallback on
+>                * finding default privileges.
+>                */
+> -            ret = true;
+> -            break;
+> +            ret = ((privs & *allowed_privs) == privs ? true : false);
+> +            goto _address_matched;
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 418738afd8..6238528282 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -435,8 +435,8 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-              * defined with PMP must be used. We shouldn't fallback on
-              * finding default privileges.
-              */
--            ret = true;
--            break;
-+            ret = ((privs & *allowed_privs) == privs ? true : false);
-+            goto _address_matched;
-         }
-     }
- 
-@@ -445,6 +445,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-         ret = pmp_hart_has_privs_default(env, privs, allowed_privs, mode);
-     }
- 
-+ _address_matched:
-     return ret;
- }
- 
--- 
-2.34.1
+goto seems unnecessary. We can directly return (privs & *allowed_privs) 
+== privs here.
+
+And then we can directly return pmp_hart_has_privs_default(env, privs, 
+allowed_privs, mode) after this loop.
+
+Regards,
+
+Weiwei Li
+
+>           }
+>       }
+>   
+> @@ -445,6 +445,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>           ret = pmp_hart_has_privs_default(env, privs, allowed_privs, mode);
+
+>       }
+>   
+> + _address_matched:
+>       return ret;
+>   }
+>   
 
 
