@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 259E4C77B73
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Jun 2023 10:57:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BABD2C7EE23
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 Jun 2023 11:01:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q67tb-0002ar-Nk; Mon, 05 Jun 2023 06:57:08 -0400
+	id 1q67xz-0005e3-Cf; Mon, 05 Jun 2023 07:01:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q67tO-0002OZ-30
- for qemu-riscv@nongnu.org; Mon, 05 Jun 2023 06:56:58 -0400
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q67xl-0005Zq-1D
+ for qemu-riscv@nongnu.org; Mon, 05 Jun 2023 07:01:25 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q67tH-0000mM-7s
- for qemu-riscv@nongnu.org; Mon, 05 Jun 2023 06:56:48 -0400
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-3f730c1253fso14303315e9.1
- for <qemu-riscv@nongnu.org>; Mon, 05 Jun 2023 03:56:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q67xc-0001a1-Ja
+ for qemu-riscv@nongnu.org; Mon, 05 Jun 2023 07:01:24 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-3f730c1253fso14342205e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 05 Jun 2023 04:01:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1685962606; x=1688554606;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=linaro.org; s=google; t=1685962874; x=1688554874;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=sfSRa+WNT/kJAeeJJ5oEfzQAWbL/IrLu0RyAJXDy1sI=;
- b=CGosapgDXIzh9JfIlEkr/1ZtRhnVTCGEqkQmZVyxEnA7CZdxKGQQ/o63Xzu58Tqc1R
- TLz+8ycV6yjB/gUXYRS7S+YF9bryzhnM4DrOTRFOKkmIrM6elqE8qn+BI4qp1FjZfUf0
- B9KE0TIjKkgX11dnUJK7Yn4l42TCJHOpmftYTEF/r3+Tcf3zgFg+XscZezMtVQZl62pM
- lKbh5KEB/wYgZ9rujt+LcGLJC/jWOdW1MNgK/VvE/bEegrW0l7WryhYICuBRYRpMUHUr
- AJHsN0lqDHXMCL3yA+oP13NaUJnormMJ2zYFkMasFrGtyxPEE62ADSqOMOEKQ4ecO4+u
- lPAw==
+ bh=9iyTJv6hv5TVgHzcIxSZtEyIDrtGWZ6PsvH+kn0mbTI=;
+ b=MoQwLqUSeF8pXuBCK+gE+YArWpiJ9o0h0PBE/4+88H74BIDzfEqHKZ7fFBCiByJq8w
+ z+pkuO1QQl9t2cJJJKW3FL9xWYydF+uhzXVsFHIw6WNcqiXGgXESS9hvYuKNXOPGMCXN
+ k/5UvJQBc1gKhtWqF/AxM1K3htQleAkCxfwhSmmZa/lpu1okN1WIiax0/M8obFIM4i0V
+ BRWlYcd8ScqCt/xDmUxgjDWTucK3cco22kKNZZfSDADqv/ZsoU188FXyvu36NboyDx/c
+ PCW9YTR0MUnvKHpWfEIEtQ5UdtVtaY6/WKDk3z4cudAtkI1x8go5BDSxqZ9QIzVhaa3x
+ h3vQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685962606; x=1688554606;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=1e100.net; s=20221208; t=1685962874; x=1688554874;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sfSRa+WNT/kJAeeJJ5oEfzQAWbL/IrLu0RyAJXDy1sI=;
- b=D9SrHSS5mSPD7U3Bqpdv8KJmsSxwgBklZsvQ4trxSmIRgv0+wt+xDaOleTAUXHHRI1
- ebHTcgMFFg+C/1fqVtPoMt4+kcSKxYgxOdVObd6MqaFK2yduSRGV6VFI/aDeAA5JxJmD
- q+CCg/iZ6bxtgVN2TRkwyzKYMFmF3RbeUIkK+F0esDwsQL5TJtpvqTm5EufMWjjQbv+p
- 3ZRSDXJ6IMI6eQZ//Y3DZWvQ5qrJpnVw4JBHQF9tyceL6yv8IOXcGbdK5nObKzf5wwFo
- YHXHyTmZviwKEV4YSNxl90XHbdTMf1UEw9rnvicEGYFL6ZNwyTsqlSWu6TleJHZfE2h7
- CZkg==
-X-Gm-Message-State: AC+VfDz1whobnIz/HV50CUaOIA+PTXWwFvQq2Xs/nafmvEJpyduvAgLQ
- gxPtLlpXZKUiUbiuXXjsoOYxGA==
-X-Google-Smtp-Source: ACHHUZ5irskyLPOXKNKtLsnT1bTigctYgqZ97Mpsg4opANij5CiR1Bw4UxpGSyTeoEZqMnuj5fc/RQ==
-X-Received: by 2002:a05:600c:ad5:b0:3f4:23d4:e48 with SMTP id
- c21-20020a05600c0ad500b003f423d40e48mr5748978wmr.23.1685962605789; 
- Mon, 05 Jun 2023 03:56:45 -0700 (PDT)
+ bh=9iyTJv6hv5TVgHzcIxSZtEyIDrtGWZ6PsvH+kn0mbTI=;
+ b=O63gFEMuznCKQpeCy3jGdw8URYiGGkB+P7JlcJXNm3k9mq5sPyYC9zuSrBFPVSvgl/
+ GhACmRk9jfCuyEqqz2GYbvBhwyyqG6ms5IAOZ+uiS+uDSUWB7VEwoN0OA4rijux2fpJ1
+ Czv4kc1ksrezYLQfeuwzvikiSd2xOcI1nDtceMcbuCpDnHw25mlbglemAB6ITcs7f95j
+ TGtJ+Y1TSpUNLesVKqiu4Z4XUe45cyoLOHMHcO036XSC1c8HqIfLLtNAQJV0ImGMe+XZ
+ WHV/tagaYL4Vr+o0/VmOyxMjXgtmNWlEIOFHd9RSEyTxTGiX9wXrnbc855wipegyUkEh
+ X+/Q==
+X-Gm-Message-State: AC+VfDzPZUUiAx+23yzeFqgNC9Kv54xf9TFlauf/sOoE3wkQ4MtpOrfs
+ 4RpO++0ioHg/Ss0mbwk1fEcCww==
+X-Google-Smtp-Source: ACHHUZ6Ysx5wvn0LxR1FHPKQZ7bm8+N4N0qwb0qb6iLO9jX47MRiE1+7rvnmC3mUG76vs1RcOmmE1w==
+X-Received: by 2002:a7b:ce98:0:b0:3f6:2ee:6993 with SMTP id
+ q24-20020a7bce98000000b003f602ee6993mr6473263wmj.4.1685962873732; 
+ Mon, 05 Jun 2023 04:01:13 -0700 (PDT)
 Received: from [192.168.69.115] ([176.187.217.157])
  by smtp.gmail.com with ESMTPSA id
- y20-20020a05600c365400b003f60fb2addbsm14008141wmq.44.2023.06.05.03.56.44
+ o10-20020a1c750a000000b003f60482024fsm10478823wmc.30.2023.06.05.04.01.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 05 Jun 2023 03:56:45 -0700 (PDT)
-Message-ID: <1f1f8b26-c0c9-f33d-507c-4399e3be13a8@linaro.org>
-Date: Mon, 5 Jun 2023 12:56:43 +0200
+ Mon, 05 Jun 2023 04:01:13 -0700 (PDT)
+Message-ID: <59e63ef3-830c-fab2-3186-8eea84bd7122@linaro.org>
+Date: Mon, 5 Jun 2023 13:01:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
  Gecko/20100101 Thunderbird/102.11.2
-Subject: Re: [PATCH 06/35] target/arm: Demultiplex AESE and AESMC
+Subject: Re: [PATCH 02/35] target/arm: Move aesmc and aesimc tables to
+ crypto/aes.c
 Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: ardb@kernel.org, berrange@redhat.com, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, pbonzini@redhat.com
 References: <20230603023426.1064431-1-richard.henderson@linaro.org>
- <20230603023426.1064431-7-richard.henderson@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <20230603023426.1064431-7-richard.henderson@linaro.org>
+ <20230603023426.1064431-3-richard.henderson@linaro.org>
+ <bc89ede2-747f-c56e-5cca-e09289fb72f2@linaro.org>
+In-Reply-To: <bc89ede2-747f-c56e-5cca-e09289fb72f2@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::335;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -96,20 +98,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 3/6/23 04:33, Richard Henderson wrote:
-> Split these helpers so that we are not passing 'decrypt'
-> within the simd descriptor.
+On 5/6/23 12:45, Philippe Mathieu-Daudé wrote:
+> On 3/6/23 04:33, Richard Henderson wrote:
+>> We do not currently have a table in crypto/ for
+>> just MixColumns.  Move both tables for consistency.
+>>
+>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>> ---
+>>   include/crypto/aes.h           |   6 ++
+>>   crypto/aes.c                   | 142 ++++++++++++++++++++++++++++++++
+>>   target/arm/tcg/crypto_helper.c | 143 ++-------------------------------
+>>   3 files changed, 153 insertions(+), 138 deletions(-)
 > 
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   target/arm/helper.h             |  2 ++
->   target/arm/tcg/sve.decode       |  4 ++--
->   target/arm/tcg/crypto_helper.c  | 37 +++++++++++++++++++++++----------
->   target/arm/tcg/translate-a64.c  | 13 ++++--------
->   target/arm/tcg/translate-neon.c |  4 ++--
->   target/arm/tcg/translate-sve.c  |  8 ++++---
->   6 files changed, 41 insertions(+), 27 deletions(-)
+> 
+>>       union CRYPTO_STATE st = { .l = { rm[0], rm[1] } };
+>> +    const uint32_t *mc = decrypt ? AES_imc_rot : AES_mc_rot;
+>>       int i;
+>>       for (i = 0; i < 16; i += 4) {
+>>           CR_ST_WORD(st, i >> 2) =
+>> -            mc[decrypt][CR_ST_BYTE(st, i)] ^
+>> -            rol32(mc[decrypt][CR_ST_BYTE(st, i + 1)], 8) ^
+>> -            rol32(mc[decrypt][CR_ST_BYTE(st, i + 2)], 16) ^
+>> -            rol32(mc[decrypt][CR_ST_BYTE(st, i + 3)], 24);
+>> +            mc[CR_ST_BYTE(st, i)] ^
+>> +            rol32(mc[CR_ST_BYTE(st, i + 1)], 8) ^
+>> +            rol32(mc[CR_ST_BYTE(st, i + 2)], 16) ^
+>> +            rol32(mc[CR_ST_BYTE(st, i + 3)], 24);
+> 
+> Matter of style, (since you are changing these lines), I find starting
+> the lines with the ^ operator clearer to review:
+> 
+>              mc[CR_ST_BYTE(st, i)]
+>              ^ rol32(mc[CR_ST_BYTE(st, i + 1)], 8)
+>              ^ rol32(mc[CR_ST_BYTE(st, i + 2)], 16)
+>              ^ rol32(mc[CR_ST_BYTE(st, i + 3)], 24);
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Aesthetically nicer:
+
+                        mc[CR_ST_BYTE(st, i)]
+                ^ rol32(mc[CR_ST_BYTE(st, i + 1)], 8)
+                ^ rol32(mc[CR_ST_BYTE(st, i + 2)], 16)
+                ^ rol32(mc[CR_ST_BYTE(st, i + 3)], 24);
+
+:)
+
+> Anyhow,
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> 
+>>       }
+>>       rd[0] = st.l[0];
+> 
 
 
