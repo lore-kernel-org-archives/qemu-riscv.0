@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A8E9C7EE24
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 15:50:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63C38C7EE24
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 15:52:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q6Ywf-0006yv-5X; Tue, 06 Jun 2023 11:50:05 -0400
+	id 1q6YyT-0008R0-Jh; Tue, 06 Jun 2023 11:51:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q6Ywd-0006yA-Ti
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 11:50:03 -0400
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1q6YyR-0008Qg-Pz
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 11:51:55 -0400
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q6YwM-00035O-Tt
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 11:50:02 -0400
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-3f6e1393f13so52790005e9.0
- for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 08:49:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1q6YyQ-0003Zp-43
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 11:51:55 -0400
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-3f6e13940daso64140685e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 08:51:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686066585; x=1688658585;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=flAQExrazbF5PEZnAPgAMS+V9HHW2JDhhuwpMF4zquM=;
- b=IW9UK1JIIv+hZFOMjiNXRiLcBJn6OxgyWUbBEekzbc2/cps6LZdh+uhlz4mx720WHR
- BTkyVR3FqGE2SQ1gZy1qlpenhf0Jb+eTx4sHzT9sBXDFldeXBRNk3nkiJM405oAgLkn0
- F6RlXeGuQtfOeBq81iLfEba7Bwr/kgQlrqz08PU0ZdJqi2maN6ZtrQGoM0lEhqrAe7GE
- kSfuora4EejtgTJvz7sSmzG//bxRhb/SKnU/nqnWXM4waKDTcraPziEGOlUq33CCeyvo
- YIDCipBpknQA0wHfQM4BuW3WmRaJ2/aATwPSzWAb8jReM7SQxvAiOsur2E7BP6tcyMNp
- ZPDA==
+ d=ventanamicro.com; s=google; t=1686066712; x=1688658712;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TbTdaWu1m9avIjIGTy7j45NwK9boTghc8cd4i5AVLqs=;
+ b=IoGFhfYmIxCUrMfhIBcly2yDjHo3qeIAEHvE6/0yLX99ROcYv+PMdO20UxdhIwUEEe
+ oJ/Zw3bAPGuE787G8esFPGrGQ2uBfPWVxxfcthAnEWhIsiUGtujfN3oa3tiAsrZuPxjw
+ 2cwthAp1ZOlNtub1ciyX+fH+X2FSJym0ycftZCJFEKwm1YZozUKU1qXT8ySka9tmW6hy
+ RHt8OsIMcuNGqvHXPkiBgtbBNyP9i+0bEf5WY/sV2hJ5jRMkF3S4+1NFFBaXF2kQvEj/
+ EJWXDgJDvkMr5bsYEPrA/tJ6s4QcB8xKQ8jv1PZuq4TmXxB+NhCV07LnSeBCr25wFpFC
+ s0DA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686066585; x=1688658585;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=flAQExrazbF5PEZnAPgAMS+V9HHW2JDhhuwpMF4zquM=;
- b=hqS/ELO7cgvrSIepwV5xkTuilBA5KkhZDc03qvQavKwuQtP6hMQrwZqQx5tZ41NBI/
- iaE6JDe1kCz1gmsedNgg/X5Swloc7cEaSy0tJAmbwTPAFXiOyC9GgsPdDOrA0muJI3az
- Obfpk6c57QAOoMnzPcdIXhOOB18Fh/Ux/rcSB+dAaOXSCAGM6hJv8PndrWrq10QcOukW
- 0VnypMd+pu2DjDWOGWMLwOs4CM2gpL14/aaoMLekVwaVEm3RuxTVZnrTplw0dDyJm3Hn
- +JEwpwA2YGfTchLC7iMmu4vC1ijmE7ZuRboFDP7qz9Ry6gieN4DU28r7d0i0jAafqFBn
- uL+A==
-X-Gm-Message-State: AC+VfDz+agK0wqzfyNrVPtE1WNHZMv7JQWOIeukh/m3uRyO6OQW1j51b
- XTzp1oMh5nh8fp8lNaROvpKFdA==
-X-Google-Smtp-Source: ACHHUZ7uc/3f6d21X1Kqf3spsC7tomJwHL/I3S4sGllEb1F374ab+1qltLYZ/HoWpTJWnn3Ioj95+A==
-X-Received: by 2002:a05:600c:22d9:b0:3f4:23b9:eed2 with SMTP id
- 25-20020a05600c22d900b003f423b9eed2mr2335574wmg.38.1686066585456; 
- Tue, 06 Jun 2023 08:49:45 -0700 (PDT)
-Received: from [192.168.69.115] (vbo91-h01-176-184-50-104.dsl.sta.abo.bbox.fr.
- [176.184.50.104]) by smtp.gmail.com with ESMTPSA id
- y20-20020a05600c365400b003f60a446fe5sm14532041wmq.29.2023.06.06.08.49.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Jun 2023 08:49:44 -0700 (PDT)
-Message-ID: <f991008b-015b-dcce-fe00-838a6ddefde5@linaro.org>
-Date: Tue, 6 Jun 2023 17:49:43 +0200
+ d=1e100.net; s=20221208; t=1686066712; x=1688658712;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TbTdaWu1m9avIjIGTy7j45NwK9boTghc8cd4i5AVLqs=;
+ b=hoHdPrm8LF4btkNuSjg2z3JZp5Aau0c6wyN1LKQt+f5SUZaAzRnTqIVHcBzrIyWsrM
+ 3/jr/c77ocs4TDeCaetWufB8HXEVbzCpWk18HctS9LYYcJOaY3N6tD86mJ3yyPYu7ObW
+ 1u1ERRRCWHbCB2MtvAHUALmmbZYvc/liA/gT0tEN5VmQ2mpfOar/OUntYcLMo+JDH1RI
+ NmGzsto8zwm4CTqBgwYnjq0KXA696K9k34cGjPkKJ+r7B6jcl39NNB3VXfcm3vB/Y8qL
+ 7L5AunOksQXttLRrcdTB7pLhneg+dAdurfFPAOSWNvv24TwIuK3eIGn9SSIQFF7tvmKk
+ XVcg==
+X-Gm-Message-State: AC+VfDxIKj8UMnU1JXSBj6X8XRdu0QVdZBPAI/5W+UmzyKHDRk2DKXiS
+ 0+ERLdvU7uVNCyzNRtzHXwndEA==
+X-Google-Smtp-Source: ACHHUZ5jf2bSLm4BNtwjU/nSvnZJmMBG43fcC54+HcgCbKk0nlE3JggG5mJ31fGU35docSUEnpAypw==
+X-Received: by 2002:a7b:ce11:0:b0:3f7:3991:61e5 with SMTP id
+ m17-20020a7bce11000000b003f7399161e5mr2964300wmc.4.1686066712475; 
+ Tue, 06 Jun 2023 08:51:52 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ c3-20020a056000104300b003062ad45243sm12956198wrx.14.2023.06.06.08.51.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Jun 2023 08:51:52 -0700 (PDT)
+Date: Tue, 6 Jun 2023 17:51:51 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Subject: Re: [PATCH 08/16] target/riscv: handle mvendorid/marchid/mimpid for
+ KVM CPUs
+Message-ID: <20230606-233d35581a6a5b7be768cfc0@orel>
+References: <20230530194623.272652-1-dbarboza@ventanamicro.com>
+ <20230530194623.272652-9-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.11.2
-Subject: Re: [PATCH 2/5] target/arm: Rename helper template headers as '.h.inc'
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org
-References: <20230606141252.95032-1-philmd@linaro.org>
- <20230606141252.95032-3-philmd@linaro.org>
- <9ff0f082-1b04-8bf2-6a97-1e9220aa4509@linaro.org>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>
-In-Reply-To: <9ff0f082-1b04-8bf2-6a97-1e9220aa4509@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32c.google.com
-X-Spam_score_int: 3
-X-Spam_score: 0.3
-X-Spam_bar: /
-X-Spam_report: (0.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.094,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, SUSPICIOUS_RECIPS=2.51,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230530194623.272652-9-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,43 +97,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/6/23 16:37, Richard Henderson wrote:
-> On 6/6/23 07:12, Philippe Mathieu-Daudé wrote:
->> Since commit 139c1837db ("meson: rename included C source files
->> to .c.inc"), QEMU standard procedure for included C files is to
->> use *.c.inc.
->>
->> Besides, since commit 6a0057aa22 ("docs/devel: make a statement
->> about includes") this is documented as the Coding Style:
->>
->>    If you do use template header files they should be named with
->>    the ``.c.inc`` or ``.h.inc`` suffix to make it clear they are
->>    being included for expansion.
->>
->> Therefore rename the included templates as '.h.inc'.
->>
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+On Tue, May 30, 2023 at 04:46:15PM -0300, Daniel Henrique Barboza wrote:
+> After changing user validation for mvendorid/marchid/mimpid to guarantee
+> that the value is validated on user input time, coupled with the work in
+> fetching KVM default values for them by using a scratch CPU, we're
+> certain that the values in cpu->cfg.(mvendorid|marchid|mimpid) are
+> already good to be written back to KVM.
 > 
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> There's no need to write the values back for 'host' type CPUs since the
+> values can't be changed, so let's do that just for generic CPUs.
 > 
-> FYI, after yesterday's tcg pr, we can do more than this.  These 
-> fragments no longer have to be all included into one common helper.h. 
-> Each translate-foo.c can include only the helper-foo.h.inc bits that 
-> they need, and the bits need not be visible to the rest of the front end.
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/kvm.c | 31 +++++++++++++++++++++++++++++++
+>  1 file changed, 31 insertions(+)
+> 
+> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+> index cd2974c663..602727cdfd 100644
+> --- a/target/riscv/kvm.c
+> +++ b/target/riscv/kvm.c
+> @@ -495,6 +495,33 @@ void kvm_arch_init_irq_routing(KVMState *s)
+>  {
+>  }
+>  
+> +static int kvm_vcpu_set_machine_ids(RISCVCPU *cpu, CPUState *cs)
+> +{
+> +    CPURISCVState *env = &cpu->env;
+> +    uint64_t id;
+> +    int ret;
+> +
+> +    id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
+> +                          KVM_REG_RISCV_CONFIG_REG(mvendorid));
+> +    ret = kvm_set_one_reg(cs, id, &cpu->cfg.mvendorid);
+> +    if (ret != 0) {
+> +        return ret;
+> +    }
+> +
+> +    id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
+> +                          KVM_REG_RISCV_CONFIG_REG(marchid));
+> +    ret = kvm_set_one_reg(cs, id, &cpu->cfg.marchid);
+> +    if (ret != 0) {
+> +        return ret;
+> +    }
+> +
+> +    id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
+> +                          KVM_REG_RISCV_CONFIG_REG(mimpid));
+> +    ret = kvm_set_one_reg(cs, id, &cpu->cfg.mimpid);
+> +
+> +    return ret;
+> +}
+> +
+>  int kvm_arch_init_vcpu(CPUState *cs)
+>  {
+>      int ret = 0;
+> @@ -513,6 +540,10 @@ int kvm_arch_init_vcpu(CPUState *cs)
+>      }
+>      env->misa_ext = isa;
+>  
+> +    if (!object_dynamic_cast(OBJECT(cpu), TYPE_RISCV_CPU_HOST)) {
+> +        ret = kvm_vcpu_set_machine_ids(cpu, cs);
+> +    }
+> +
+>      return ret;
+>  }
+>  
+> -- 
+> 2.40.1
+> 
+>
 
-Don't we need foo fully converted to decodetree first? Otherwise
-generic translate code can call foo helpers, so needs their prototype
-declaration.
-
-For example in translate-a64.c handle_msr_i(SVCR) calls
-gen_helper_set_svcr() which is declared in helper-sme.h.
-
-> It was something that I had in mind when splitting 
-> include/exec/helper-gen.h, but the patch set was already large enough.
-> 
-> The renaming to .h.inc would have been the first step, anyway.
-> 
-> 
-> r~
-
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
