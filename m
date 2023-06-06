@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B044FC77B7A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 14:39:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9839FC77B7A
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 14:44:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q6Xpe-0002hp-3u; Tue, 06 Jun 2023 10:38:46 -0400
+	id 1q6Xuh-0005oF-7M; Tue, 06 Jun 2023 10:43:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q6Xpa-0002cd-17
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:38:43 -0400
-Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d])
+ id 1q6Xuf-0005md-SL
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:43:57 -0400
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q6XpV-0002hs-UH
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:38:40 -0400
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-7747df5b674so246626039f.3
- for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 07:38:37 -0700 (PDT)
+ id 1q6Xud-0003hR-2x
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:43:57 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-64d24136685so4493998b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 07:43:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686062316; x=1688654316;
+ d=linaro.org; s=google; t=1686062633; x=1688654633;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=YcVeRheuB7gq+ezkQ3FqST0s5x7EHoi8tTahXk0iVkc=;
- b=epebHp+O4sx2km81wwjHOwBNUErXSEntL0wGHl20sIFjOoS5QTt+t4HFfm5wg6+sF2
- J8gyVp61rshxZtmVkkxWka37Tk7V01qolg0Ua4QdeNz4pbwhuy97NBBdznlq/EXl+Y4P
- 1v5TAzmF0gFfA0sMLR+bB4brF0POi5X9mI/4DRRaEvrAYp609i0IIK6vO0voebyFWubP
- +XQYXqi7JcP8+GyjEBbIPb5sJM9cEf4TBJsiME0qAkUUO6SN+mx0OJ84k1FtRFmvm7Zj
- mYgTkpZnp+CAA5AsWqjo9bOCt7/Up3ZM4GAijORQAOXALbgDhRQiclLAwV8+plBT2+1Y
- bSaw==
+ bh=+DmIAMbunq1pomrbFObBYHR3zPVk1GkroIuzxg71Tvs=;
+ b=co+ciTo9d//afNbYvWaad3TbOUv/eF6ZQhg/wRDZRO9Kebl110sLG09CiTrrdDB/cN
+ U5fzCSKpytAv3rCvr+FDAkb4t1OoK8vR9MZpIK0kWjlvoM8T9X43qrU59uVi5nMIaI+9
+ 8CM6HsDwlJbruhO/s0C94YwFcpOEDm9Ulp8N7ZUGYfDa2Rv6ZXZWuh6FAeK7Wi6aOmGr
+ PkgrAbTwhNu1xpIANL35iEsrfQWj99Kwvy25R8d2waxvhv5Jh7Kmb4JmI89Qwpa1pfJG
+ aqoltUIHegFZljemfPu8YLDbtVcVZ+FViwtfj6PHNSaQLqXAvfrRyOj7Q9y9lQo4E2YD
+ E0WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686062316; x=1688654316;
+ d=1e100.net; s=20221208; t=1686062633; x=1688654633;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YcVeRheuB7gq+ezkQ3FqST0s5x7EHoi8tTahXk0iVkc=;
- b=K+H5D/cu4Tv1U5nDVmsR4fK3vRuw8r7ZktuPzyTNVCSYOz6PbnYs8nhrYV7IUXfrV8
- bXUF9Wm341fxhfVQO9dU9bH+6ccDwlRXUmB/TaU2WqgAyuFvVJTujJcwIgWVJmB7Z/VJ
- rsMHxD6Wxf3lMmh+oiT1ODtytiar1JgEBfSv2L/vDIIV3jdSg0C4D+pr738SKSPggHjL
- AQua8Bccaq9fAJDBDsPFZhRU3s+t8DL/1r2OKERDN7mEKyEv5xNfc/qxxo1gzkFsLfzJ
- nWwexLPYxaPvxxBvaeycZSknovTTZ/eprlKotEFiF6X4I/NUVz3ddAIUhjkLVYvfEysA
- 1WhA==
-X-Gm-Message-State: AC+VfDzU8uUJKZV09jGb10NMYseU8uT+fIii4VWVp2DX8hZxvYXg2AmZ
- mOS9LRHGTRZD9yaQqHPWMbzu2g==
-X-Google-Smtp-Source: ACHHUZ4EhMFsgZaW+K6ZoEtr9srq8hfMt91Kag4BRJnLgCjVmhO9h8JhPZ8ol9/vM9A6q1wRFNOuOQ==
-X-Received: by 2002:a5e:dd09:0:b0:774:9c66:cbd6 with SMTP id
- t9-20020a5edd09000000b007749c66cbd6mr3922978iop.17.1686062316667; 
- Tue, 06 Jun 2023 07:38:36 -0700 (PDT)
+ bh=+DmIAMbunq1pomrbFObBYHR3zPVk1GkroIuzxg71Tvs=;
+ b=MfgAz5ry/kqfsOV8odL0Pcl2F06+o5tYnVqUzvbQ0FzTP8tq2eVCKoDWaRNN7QiqRM
+ i546VXE2vWNYqxHjmJ0k1LfRUC/QTIrVTPZiWfrv5jspBUVs6UK8WUN31cio2zlpEDya
+ uONVT0e1m4xVdC++wG0AkT8woBwYdwVBINnUJqw9RKd8CqttYRt4Xu0L/OsDFd+7tW+L
+ 9L9rqVkACWjwvYteUtqp7MyeDvhfx0bmq2fimDSjPzbHAfjS959fSrvXQrR3JLB8lJiX
+ wHiuTl30W2NjCHN4z61MnpAvDnLbBn1vtdIg5sstl+zHI9C/hofTyEDwQl3wiPJf0Pux
+ pQOg==
+X-Gm-Message-State: AC+VfDzh0Muk2ZtDFAo2WrAbBDs8on3zl5XEEzJHqWLg/5vtYYUAuIzM
+ B1xi7WnqtHjTF2uyZgfWjPfDokZjx6RytkSFMOg=
+X-Google-Smtp-Source: ACHHUZ5/edwD5N1k9eYY4vV4SH6o6Tk8JI59AfpX4DyCRn6uIwWDSEM0zwCMrxDzYF5nU+3gHkjABA==
+X-Received: by 2002:a05:6a00:4403:b0:659:14c8:1f0b with SMTP id
+ br3-20020a056a00440300b0065914c81f0bmr3276276pfb.4.1686062633323; 
+ Tue, 06 Jun 2023 07:43:53 -0700 (PDT)
 Received: from ?IPV6:2602:ae:1598:4c01:b7fa:ce59:1445:805a?
  ([2602:ae:1598:4c01:b7fa:ce59:1445:805a])
  by smtp.gmail.com with ESMTPSA id
- h1-20020a656381000000b004ff6b744248sm6940210pgv.48.2023.06.06.07.38.35
+ y23-20020a62b517000000b0064d2ad04cbesm6840668pfe.209.2023.06.06.07.43.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Jun 2023 07:38:36 -0700 (PDT)
-Message-ID: <86378349-e78c-3bbf-8960-a9f2399f0bdc@linaro.org>
-Date: Tue, 6 Jun 2023 07:38:34 -0700
+ Tue, 06 Jun 2023 07:43:52 -0700 (PDT)
+Message-ID: <cad000d7-f408-9337-9328-ccb262c5fcc7@linaro.org>
+Date: Tue, 6 Jun 2023 07:43:51 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-Subject: Re: [PATCH 3/5] target/i386: Rename helper template headers as
- '.h.inc'
+Subject: Re: [PATCH 4/5] target: Rename per-target 'helper.h' -> 'helper.h.inc'
 Content-Language: en-US
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-arm@nongnu.org
 References: <20230606141252.95032-1-philmd@linaro.org>
- <20230606141252.95032-4-philmd@linaro.org>
+ <20230606141252.95032-5-philmd@linaro.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230606141252.95032-4-philmd@linaro.org>
+In-Reply-To: <20230606141252.95032-5-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
- envelope-from=richard.henderson@linaro.org; helo=mail-io1-xd2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42a.google.com
 X-Spam_score_int: 3
 X-Spam_score: 0.3
 X-Spam_bar: /
@@ -114,25 +113,16 @@ On 6/6/23 07:12, Philippe Mathieu-Daudé wrote:
 >    the ``.c.inc`` or ``.h.inc`` suffix to make it clear they are
 >    being included for expansion.
 > 
-> Therefore rename the included templates as '.h.inc'.
+> Therefore rename the included 'helper.h' as 'helper.h.inc' for
+> all targets (updating the documentation).
 > 
+> Suggested-by: Richard Henderson<richard.henderson@linaro.org>
 > Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
 > ---
->   target/i386/helper.h                                      | 6 +++---
->   target/i386/{ops_sse_header.h => ops_sse_header.h.inc}    | 0
->   ...hift_helper_template.h => shift_helper_template.h.inc} | 0
->   .../{cc_helper_template.h => cc_helper_template.h.inc}    | 0
->   target/i386/tcg/cc_helper.c                               | 8 ++++----
->   target/i386/tcg/int_helper.c                              | 8 ++++----
->   6 files changed, 11 insertions(+), 11 deletions(-)
->   rename target/i386/{ops_sse_header.h => ops_sse_header.h.inc} (100%)
->   rename target/i386/{shift_helper_template.h => shift_helper_template.h.inc} (100%)
->   rename target/i386/tcg/{cc_helper_template.h => cc_helper_template.h.inc} (100%)
 
-Move to tcg/ at the same time?
-
-Otherwise,
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+A bulk patch like this isn't ideal.  Targets that have a tcg/ subdir should have 
+helper.h.inc moved into there.  At the end, include/exec/helper-gen.h and 
+include/exec/helper-proto.h become unused and go away.
 
 
 r~
