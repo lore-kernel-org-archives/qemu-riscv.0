@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D09AAC7EE24
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 14:45:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4330C77B7A
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 14:47:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q6XwA-00079v-DY; Tue, 06 Jun 2023 10:45:30 -0400
+	id 1q6Xy3-0002Q6-0D; Tue, 06 Jun 2023 10:47:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q6Xw6-00073M-VF
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:45:27 -0400
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
+ id 1q6Xxr-0002Lg-D1
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:47:18 -0400
+Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q6Xvv-00044x-Ci
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:45:26 -0400
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2564dc37c3eso5450504a91.0
- for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 07:45:14 -0700 (PDT)
+ id 1q6Xxo-0004Zj-S7
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:47:15 -0400
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-33b22221da6so24723115ab.1
+ for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 07:47:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686062714; x=1688654714;
+ d=linaro.org; s=google; t=1686062831; x=1688654831;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=n1tJ2+L5cHCKhwAu73ijDxV4qbX5hmhJ/fdum4OqMek=;
- b=cXkLIF4OrlCwwa5akW6dvgabsRFZ6lFTOVDKjmpfxXz4lTY3KTJmfW5F7hoesuRxmU
- 2+FO+0Dr4z3uMWdcPwpHCykvYjfhFkLqZgGv0U2P6g+usS+IiZP1q2wy5MsofCpv2ue5
- cRhmEiZGubPuEMjPKvxDm+31ru25I2Q9RC6mts3eg+XqpExoX5+zl4gl6ca6tjjHHY5q
- UJsahjQmlhhmRPtCLZpni+X5JKIYupiLAloVfDJSedCk/+Lrhu2i9U8+HCp8KGfAd000
- B5sNQ+do7XxKsE3lH9POmvlm1T23llc6krvgsbICYE6ZwrY2Y7wopLcSGjzNt+vIA4Zi
- 3Iag==
+ bh=L37G/UpRFPDvK/5tOtKP8t2IzAdWmUCIXxNGGLU2uko=;
+ b=T8vfjlV7OfKpPU2lmzALcSf3LInmDZEaYNKC3Brd2nwa/JH+0VJ+0wKrmgk2k/ZScN
+ dW0o0oYsJxS3jOrunIG6I2JxSg3OE50zvYCM8NY/mBnxaQb/7Z1j24//G1ugfDDybuU/
+ d5u39peMcgOniEzyreSxd+9hbtZB8SV7WDQD/CUSUPQHTWYePdUo4C64r0NRexTIEm0p
+ ck0hdZD3wXVKXxTYfVug5/9fgcjFPM35pUoS+24C8YrkA5gFAEs1kkO9zcyJEfiTNTm5
+ rMkY07AlDgza+gtYuXDVGmRUVxf0CkC4m49DrZ9E/rwwVNTTNyo2cxpHyg3yepw/ptvK
+ ylYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686062714; x=1688654714;
+ d=1e100.net; s=20221208; t=1686062831; x=1688654831;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=n1tJ2+L5cHCKhwAu73ijDxV4qbX5hmhJ/fdum4OqMek=;
- b=THkptkahl3DzAFTGDvGhhuEf+G2C48IqyquJLsNlUSxvtA5W1xM5dj5CdT5WVjLaBY
- 9FCBxJHWDe0hTJLeGUz1A3re1O7mjzJE/1MdbWr3p0cQZ0srPejQjerpDXkkmy0fg6I1
- KQ+Y70YhsjpKYlIBAlfd6L7M81oWeSd//9dk43z/L+gyZG3PbwkBRZ9B3B4L8uw8IFmw
- G52456MjVIwmaJeoV9rdfOJ2lVNGffYpYD5YC1ulXT2QDiticanlFE9kg3nMwnvC2Kwx
- swcNMEtZP9rVw24fxVjXvCfL+XPkXUA3zuej4skiNoq2xS2DDCtBx98Q5aLcUdYiyqnp
- 2LKA==
-X-Gm-Message-State: AC+VfDzsGlMZw42vxv7LdpcZ2ohbRZAdrNLZH4BAIMzSssvNl7uYC6w5
- Spi0VywEs6LZ0SzaXPK89g+Ouw==
-X-Google-Smtp-Source: ACHHUZ63LrsaKH1r0pjj2mSEFvB4/oLo+8z9Hh7fu5FMxItxedlN6MUk1BmxdtjbWyyVAmkRUz7aFg==
-X-Received: by 2002:a17:90b:2397:b0:250:50c5:cabc with SMTP id
- mr23-20020a17090b239700b0025050c5cabcmr12509845pjb.3.1686062713761; 
- Tue, 06 Jun 2023 07:45:13 -0700 (PDT)
+ bh=L37G/UpRFPDvK/5tOtKP8t2IzAdWmUCIXxNGGLU2uko=;
+ b=OeZBJsIwac0gBnDmDoj2MnFNI+/RdojSAO5z3Hku4PC8Wsuj933wMiN7rJ59+20WUt
+ hu9wx1HIE8nBOu2UbYMfcYAavWRpEVVhs0rMgwo7QEtkaDDPPEgdiWO/Lj10AWVgxazq
+ vndIrTBh+TeAksDqkWcfV3JVwt27FLN+25wWtc04PsfoEWFUuiAehi3dqhQdtHHmp+uW
+ RAeqGn2dXllEcmc34vcMCLOc3dcZNDbPeNFGLE1Q2hXpJwEDw0cd/k004AkJYEi8ZPhD
+ s7NK9HCURRDEjYKQP2KCXFxGkPGAMoZYBU+Nw2uYBBgyWIAa/x+BS9KJV6OAdGuE+07b
+ 6oMw==
+X-Gm-Message-State: AC+VfDyvTgHX9VYiJaL1bGYIB/trL4ALcbsIfAtBPD6w3Xq3PN9YDQFp
+ yLAMI2aV5YI4+fbHZyQXa92BSQ==
+X-Google-Smtp-Source: ACHHUZ4lNSJSUCYJ8ppoQ/aJqEUIQ+oGP7a8zilrzVNCr6UieZ2NoOjhr0hQhuDskc7m4vNKhynXIA==
+X-Received: by 2002:a05:6e02:810:b0:33b:1da8:a7d0 with SMTP id
+ u16-20020a056e02081000b0033b1da8a7d0mr3252043ilm.29.1686062831137; 
+ Tue, 06 Jun 2023 07:47:11 -0700 (PDT)
 Received: from ?IPV6:2602:ae:1598:4c01:b7fa:ce59:1445:805a?
  ([2602:ae:1598:4c01:b7fa:ce59:1445:805a])
  by smtp.gmail.com with ESMTPSA id
- d7-20020a17090ad3c700b002529f2e570esm7742448pjw.28.2023.06.06.07.45.13
+ f2-20020a635102000000b0053efc8ac7e9sm1880657pgb.29.2023.06.06.07.47.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Jun 2023 07:45:13 -0700 (PDT)
-Message-ID: <599d706c-070a-c2d3-990e-f6a1720f3485@linaro.org>
-Date: Tue, 6 Jun 2023 07:45:11 -0700
+ Tue, 06 Jun 2023 07:47:10 -0700 (PDT)
+Message-ID: <690f0d7a-20e3-100e-e8b2-3228583c9bdc@linaro.org>
+Date: Tue, 6 Jun 2023 07:47:08 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-Subject: Re: [RFC PATCH v2 1/9] target/tricore: Remove pointless
- CONFIG_SOFTMMU guard
+Subject: Re: [RFC PATCH v2 2/9] target/i386: Check for USER_ONLY definition
+ instead of SOFTMMU one
 Content-Language: en-US
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
@@ -73,13 +73,13 @@ Cc: Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
  qemu-s390x@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
  qemu-riscv@nongnu.org
 References: <20230605222420.14776-1-philmd@linaro.org>
- <20230605222420.14776-2-philmd@linaro.org>
+ <20230605222420.14776-3-philmd@linaro.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230605222420.14776-2-philmd@linaro.org>
+In-Reply-To: <20230605222420.14776-3-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1029.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
+ envelope-from=richard.henderson@linaro.org; helo=mail-il1-x136.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -103,16 +103,30 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 6/5/23 15:24, Philippe Mathieu-Daudé wrote:
-> We don't build any user emulation target for Tricore,
-> only the system emulation. No need to check for it as
-> it is always defined.
+> Since we *might* have user emulation with softmmu,
+> replace the system emulation check by !user emulation one.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   target/tricore/helper.c | 2 --
->   1 file changed, 2 deletions(-)
+>   target/i386/tcg/translate.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/target/i386/tcg/translate.c b/target/i386/tcg/translate.c
+> index 5cf14311a6..750253e679 100644
+> --- a/target/i386/tcg/translate.c
+> +++ b/target/i386/tcg/translate.c
+> @@ -6915,7 +6915,7 @@ static void i386_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cpu)
+>       dc->popl_esp_hack = 0;
+>       /* select memory access functions */
+>       dc->mem_index = 0;
+> -#ifdef CONFIG_SOFTMMU
+> +#ifndef CONFIG_USER_ONLY
+>       dc->mem_index = cpu_mmu_index(env, false);
+>   #endif
+>       dc->cpuid_features = env->features[FEAT_1_EDX];
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Alternately, remove the ifdef entirely.  The code is well-defined for user-only.
+
 
 r~
 
