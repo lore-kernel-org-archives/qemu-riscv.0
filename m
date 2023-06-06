@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEFF2C7EE24
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 14:13:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C550C7EE24
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 14:13:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q6XQq-0003qr-HY; Tue, 06 Jun 2023 10:13:08 -0400
+	id 1q6XQu-0003u2-8T; Tue, 06 Jun 2023 10:13:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q6XQp-0003of-1H
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:13:07 -0400
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q6XQs-0003rc-O8
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:13:10 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q6XQm-0005VS-2r
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:13:06 -0400
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-3f6e4554453so53813285e9.3
- for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 07:13:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q6XQr-0005XY-0J
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:13:10 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-3f73617a292so31371515e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 07:13:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686060781; x=1688652781;
+ d=linaro.org; s=google; t=1686060787; x=1688652787;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MdSAUEH/HsOMWhs4VgQvGHZZxYfe28F2myfB/wfOD10=;
- b=UT6fGinVWQRGYWdTINjYUvoicF4kkRg5Mbyk2hQTmTiKqz84EhF4z/chYgdKc2FJA+
- PJiaIcB28xqgMogMEgNz0IJYuCnV9bGetVRGXPcg1b/AIHpLrmqfKX7D2F2m9QbIFYcj
- ed1H3OPF4bT/uQE0jdxGrbGvpooo+6leFCEAlQK1Q955r0lidVVwHLJhGSz2fFN9OH1b
- wDTdfdiYwZwqYNPgo5uK5lo++9F2HmAGL4cJE4kdDrwifwLlJSh5wUfYgK247VrCHwIY
- gk5RQkE8Wk5ybxyK292TwjynyarzlWmZI5accoKp3CLWio4qxcR9AUizYCmBa3Unprb2
- T8Ig==
+ bh=8nAhi/2SNnfVAGDO4jkwWlSD81rGbl1OFEARKV9v1gg=;
+ b=ZFePHRIrrHCo5PHUbKJxOssBQTMb4ejob3tZ9F+15+4bt+xksiwzxKQZ0va02vC7Tk
+ 5862DobTK6pTJnMZ0e94D01Xf+QlzF3r4a3q8Vepc79h68jyXSOmqw3uPspX/iQEAdtF
+ ic9jsUlRclmKH2bSIcLWPqphV7cpnbLelnznLbUGR1bOFxGdw5BIuxx5Z9H9AiWZAoPm
+ /JjRRnUfpDqtOY58GUC02FK3w3Px76eCvcsAcjEjvLUfG8JZmgUyg/s201LpddtRwvzV
+ C7FvK8+eOKs6nSI1M1rQt7XXHF9rz75S69/J7SnrLs20iQWbJeOqzG+n9gzcrYLDguO7
+ JY/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686060781; x=1688652781;
+ d=1e100.net; s=20221208; t=1686060787; x=1688652787;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MdSAUEH/HsOMWhs4VgQvGHZZxYfe28F2myfB/wfOD10=;
- b=af03MPruvgvobNqgvEUCt87TdpCsS9s2zqkF3f9ROkxABrHsqB1oWZs3GEdgOI3qG3
- ccBO5d4ZWDLcuubCgwWT/DukhGmZpOAbyYN2nSJoD1YIXsd8swkYjG3NtgRzLtR15X6L
- wKMit8A5Cu80UEJe2mwJVuXunPUvPkRswpNTGrAc4YeU8tHsOAruiWwGmuekHGfO8m2n
- pI0nwwx84XjEuP6XqOtbiQ0Yk4KIzAUVsCkGEWzvF/wfi7ZLhcRMbsYAFim0JIz4Tlfl
- iRgKY3C7zSF2velmN6xp6Mq4DvgSwbNbH3eE3/rgsOfiye7WeLNFkSXRjB1EYL2JweyA
- xvCw==
-X-Gm-Message-State: AC+VfDzM6vmAWfVfofUh7bumAE15a+pVkGcyKn2+g7zLm/ZCrfiA2jsm
- z1WawFfvqBqPCj2lG6CJLOQZng==
-X-Google-Smtp-Source: ACHHUZ5XO5rYYD4C8Hzo6WSqx2s3w/80XoncXcaGeH/PC4itIyXNhuf7JnFBmw6Yb2U4x6hF5i3htg==
-X-Received: by 2002:a05:600c:290c:b0:3f7:35de:856f with SMTP id
- i12-20020a05600c290c00b003f735de856fmr1984628wmd.24.1686060781410; 
- Tue, 06 Jun 2023 07:13:01 -0700 (PDT)
+ bh=8nAhi/2SNnfVAGDO4jkwWlSD81rGbl1OFEARKV9v1gg=;
+ b=UL8l23TVw5SDzfrkCg4VamSFw+ky3P7qv+XMnAccUZSFi0Ip0XtnDSqII4jgj37iyf
+ 9J1mdwhcF69yURKK2IEeCO4SF4RkZIiOOY6tdbKuvAKJJMirInjPJeLKHPonrx98D+Nd
+ 17Yn9RFq98YSGd7nCib+J5ZLm3GrAUsIaEqHDisbyBgR5t0QLPQp/2SW0Ge+HNkU6wxe
+ qpK35gEXPZd3U0pyGOaT3j1dXJm9fhJodnLnEvF25FfQpgG7daRiNTExJQpjOAjCFMdq
+ YMTjhMT8dP+bBjhsu15VlVEz1p3oeCiUjvo7kIOIlH3/T88V+qDa7cz1sazwhP8c09eL
+ wPqg==
+X-Gm-Message-State: AC+VfDyDV55zUzVo+OJ1Sr4RyYlldbWFlRAW+/hMz1m5/CKMH7X8OrIA
+ IH+Xp96053QxkWlj8OqnsHfs0A==
+X-Google-Smtp-Source: ACHHUZ7sjyyvnfEQXKtFae8FfA5WbqSpk2b7ZHJUQqqw3sKa1ZVkkbXasE9Ft/AWRnDZM3/G4LP+BA==
+X-Received: by 2002:a05:600c:2056:b0:3f2:549b:3ef2 with SMTP id
+ p22-20020a05600c205600b003f2549b3ef2mr2147438wmg.17.1686060787430; 
+ Tue, 06 Jun 2023 07:13:07 -0700 (PDT)
 Received: from localhost.localdomain
  (vbo91-h01-176-184-50-104.dsl.sta.abo.bbox.fr. [176.184.50.104])
  by smtp.gmail.com with ESMTPSA id
- l22-20020a1c7916000000b003f6f6a6e760sm17767263wme.32.2023.06.06.07.13.00
+ y20-20020a05600c365400b003f60fb2addbsm17816209wmq.44.2023.06.06.07.13.05
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 06 Jun 2023 07:13:01 -0700 (PDT)
+ Tue, 06 Jun 2023 07:13:07 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-arm@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 1/5] bsd-user: Rename elfcore.c -> elfcore.c.inc
-Date: Tue,  6 Jun 2023 16:12:48 +0200
-Message-Id: <20230606141252.95032-2-philmd@linaro.org>
+Subject: [PATCH 2/5] target/arm: Rename helper template headers as '.h.inc'
+Date: Tue,  6 Jun 2023 16:12:49 +0200
+Message-Id: <20230606141252.95032-3-philmd@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230606141252.95032-1-philmd@linaro.org>
 References: <20230606141252.95032-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: 4
 X-Spam_score: 0.4
 X-Spam_bar: /
@@ -106,32 +106,55 @@ about includes") this is documented as the Coding Style:
   the ``.c.inc`` or ``.h.inc`` suffix to make it clear they are
   being included for expansion.
 
-Therefore rename the included 'elfcore.c' as 'elfcore.c.inc'.
+Therefore rename the included templates as '.h.inc'.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- bsd-user/elfload.c                    | 2 +-
- bsd-user/{elfcore.c => elfcore.c.inc} | 0
- 2 files changed, 1 insertion(+), 1 deletion(-)
- rename bsd-user/{elfcore.c => elfcore.c.inc} (100%)
+ target/arm/helper.h                               | 8 ++++----
+ target/arm/tcg/{helper-a64.h => helper-a64.h.inc} | 0
+ target/arm/tcg/{helper-mve.h => helper-mve.h.inc} | 0
+ target/arm/tcg/{helper-sme.h => helper-sme.h.inc} | 0
+ target/arm/tcg/{helper-sve.h => helper-sve.h.inc} | 0
+ 5 files changed, 4 insertions(+), 4 deletions(-)
+ rename target/arm/tcg/{helper-a64.h => helper-a64.h.inc} (100%)
+ rename target/arm/tcg/{helper-mve.h => helper-mve.h.inc} (100%)
+ rename target/arm/tcg/{helper-sme.h => helper-sme.h.inc} (100%)
+ rename target/arm/tcg/{helper-sve.h => helper-sve.h.inc} (100%)
 
-diff --git a/bsd-user/elfload.c b/bsd-user/elfload.c
-index 1f650bdde8..d2dced3d7e 100644
---- a/bsd-user/elfload.c
-+++ b/bsd-user/elfload.c
-@@ -121,7 +121,7 @@ static void bswap_note(struct elf_note *en) { }
+diff --git a/target/arm/helper.h b/target/arm/helper.h
+index 3335c2b10b..4218d98b51 100644
+--- a/target/arm/helper.h
++++ b/target/arm/helper.h
+@@ -1039,9 +1039,9 @@ DEF_HELPER_FLAGS_5(gvec_uclamp_d, TCG_CALL_NO_RWG,
+                    void, ptr, ptr, ptr, ptr, i32)
  
- #endif /* ! BSWAP_NEEDED */
+ #ifdef TARGET_AARCH64
+-#include "tcg/helper-a64.h"
+-#include "tcg/helper-sve.h"
+-#include "tcg/helper-sme.h"
++#include "tcg/helper-a64.h.inc"
++#include "tcg/helper-sve.h.inc"
++#include "tcg/helper-sme.h.inc"
+ #endif
  
--#include "elfcore.c"
-+#include "elfcore.c.inc"
- 
- /*
-  * 'copy_elf_strings()' copies argument/envelope strings from user
-diff --git a/bsd-user/elfcore.c b/bsd-user/elfcore.c.inc
+-#include "tcg/helper-mve.h"
++#include "tcg/helper-mve.h.inc"
+diff --git a/target/arm/tcg/helper-a64.h b/target/arm/tcg/helper-a64.h.inc
 similarity index 100%
-rename from bsd-user/elfcore.c
-rename to bsd-user/elfcore.c.inc
+rename from target/arm/tcg/helper-a64.h
+rename to target/arm/tcg/helper-a64.h.inc
+diff --git a/target/arm/tcg/helper-mve.h b/target/arm/tcg/helper-mve.h.inc
+similarity index 100%
+rename from target/arm/tcg/helper-mve.h
+rename to target/arm/tcg/helper-mve.h.inc
+diff --git a/target/arm/tcg/helper-sme.h b/target/arm/tcg/helper-sme.h.inc
+similarity index 100%
+rename from target/arm/tcg/helper-sme.h
+rename to target/arm/tcg/helper-sme.h.inc
+diff --git a/target/arm/tcg/helper-sve.h b/target/arm/tcg/helper-sve.h.inc
+similarity index 100%
+rename from target/arm/tcg/helper-sve.h
+rename to target/arm/tcg/helper-sve.h.inc
 -- 
 2.38.1
 
