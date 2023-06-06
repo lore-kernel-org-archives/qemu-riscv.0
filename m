@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77228C7EE24
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 14:30:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2238C7EE29
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 14:38:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q6XhH-0003FI-Dl; Tue, 06 Jun 2023 10:30:07 -0400
+	id 1q6Xos-00024R-97; Tue, 06 Jun 2023 10:37:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q6Xh4-00032l-LD
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:29:55 -0400
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
+ id 1q6Xon-00023E-5o
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:37:53 -0400
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1q6Xh3-0000Zy-3k
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:29:54 -0400
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-256531ad335so5079389a91.0
- for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 07:29:52 -0700 (PDT)
+ id 1q6Xok-0002Qs-D1
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:37:52 -0400
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-256797b5664so2750000a91.2
+ for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 07:37:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686061792; x=1688653792;
+ d=linaro.org; s=google; t=1686062269; x=1688654269;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=o0XnDz4BJ5M9khAi12lzjtgCuFHU98s/PWfB01AaiPU=;
- b=J2CyBKcYRJxR4uZyg3TRESo9+RxXyDoeFAQacTzIW5A5tvIdxfYs+lq1wlrQOEieVg
- u1pvyOdeXnq4zuo75bgOBQ5eG+hPhltMuvYJ7F4rWAsWT9WKEcfPBd0/FCjNJTgpONGK
- n3VWtCIktuXh6rDEXaLKRdaLMOpNmnHn1jaFGdbzxo3ZFoXisAaI+oVDiDZOzy9JukRq
- Gy66MkNy+JHk/clJqoQCg53FQ4c0eskWrJfgrr6bx30n/l0D2JRRYTOkB8rjvSKiOgRM
- 88tMfQkDM5DFeqjMtCjkkAvC448PkFuSalQ8UFMbjOjCH/CdL7CjxubWd+p3LNF6JmXc
- fG5w==
+ bh=n8R5f+wVeYyyOX5s3SzQiZsALWUytR5XYy8E0V2grN4=;
+ b=CsWGqro9y9lTrrbe306ID4ST9FD2F020//U8+ba/dHouLkA/uWHkul4OQqQ2wF87k9
+ 5Z6/5XEyLq30pq7wy2XXitoZExPplNiHMao2eZauKFrBcVRzBjgeEQv5eYOLr2A3Pdvx
+ ltPNiUubbohL1cS436rOr2u5oFfdUpDWSyWrGBCL62H0y2odiQqRNEkYx6uJ4/lFLS+p
+ m1DD7Mm9haPkKsKck01nh15KgM44wY7XYTqdCZHYvuni097/9uWoXNyqM9YpXZVfaGTy
+ 7Wjmmm51QxFpkEV7gTtRXaCnlwwHrJEzSjXcU3FGY3Ju22uuwrLUwFbevhOo/2OVWNMq
+ 7YaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686061792; x=1688653792;
+ d=1e100.net; s=20221208; t=1686062269; x=1688654269;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=o0XnDz4BJ5M9khAi12lzjtgCuFHU98s/PWfB01AaiPU=;
- b=Mo7lRkwkXfD9QdemIXVWet/+9qFdsGzIZvFD7cRLZGB4zo4E/jAvgj59g7UA7XstjQ
- LAIjJPOj0l0ocvRLr1NnW09T533Q8ilsTdO/cKGPO36oK88+zJFXaeSI4+XH4iwbPZhS
- LaZOycCcV+xm43gh3Pumw6l9Tp9jTl36JLONwspeuoBVMmiLlkPL7D9M+dHLhqUlZQI9
- tAd1MbsmoD5en2JNPOQe+7jB2KhEsqVUFzgggmZRt8NV2J/zbT1gmZcbEorV9oj/Qc01
- SF1usa4dkzbMKpfgbPrYdnMcys+PyftI9zKKSkFO4EHMwSoT4R9+n5mTmvMyX4GMawnd
- vrXw==
-X-Gm-Message-State: AC+VfDxINCDpPa47seZsFXIi1HuF0dYi3V6fPAcPcLbbSuY1SBeMK80e
- 0FPZYwJhErwkv2jmpIbabl6Jtg==
-X-Google-Smtp-Source: ACHHUZ4/DPotijfhKEJixkSCHDSuaAoGq1ix4wE5ca9AE4f0MZOInRV6xvOZk+5YZptSXG+eUY40MQ==
-X-Received: by 2002:a17:90a:194e:b0:259:224a:9d05 with SMTP id
- 14-20020a17090a194e00b00259224a9d05mr2090396pjh.3.1686061791808; 
- Tue, 06 Jun 2023 07:29:51 -0700 (PDT)
+ bh=n8R5f+wVeYyyOX5s3SzQiZsALWUytR5XYy8E0V2grN4=;
+ b=WwiQXEUAAw+U891nVfDdALSp8Nj/vo+GAUBcJjlsr8f7t+CtCrLOzExmH1pGh/VoZs
+ DpU0yRta/bvv6c7Tk3YgeUsbRihWWDo+fiOcSxbbkvIcCyHEpe6gw9RBxWJlkQaqwbWp
+ nylyeY5iXTfbb2mwZJIH7IoeDey2IeHvX+zXJ6FiT1IO+mGUzPLE+ySu3PCyIB4rOd4V
+ LtUM4nLBKloNsm+d1h7RcsYogBOPmTmjSJrpUyhTqllkk/jTiUMYsQrV7BJls8yfNbsR
+ a0KA0KuAScgpKcEXq+lqmOh3MjNw4n3bzIIrZv6SMsYemA+RfodDW9sTUtNpHyVUIm2B
+ cKyA==
+X-Gm-Message-State: AC+VfDzLKB7d60E/o+JAZy+TTGXbPsj0uOuFcLI0+JrILZ475a4NOywG
+ BxwaeyTev2EsZP+2jrwZBqsFGw==
+X-Google-Smtp-Source: ACHHUZ5/y/+jnHKCYboD4dSy5/IRfLkgptwr6AR4ghOJGC1rSDmCtIYcbXoqGUeI+ZT++4n7sv0L+g==
+X-Received: by 2002:a17:90a:51:b0:259:3e26:b5d9 with SMTP id
+ 17-20020a17090a005100b002593e26b5d9mr756955pjb.2.1686062268718; 
+ Tue, 06 Jun 2023 07:37:48 -0700 (PDT)
 Received: from ?IPV6:2602:ae:1598:4c01:b7fa:ce59:1445:805a?
  ([2602:ae:1598:4c01:b7fa:ce59:1445:805a])
  by smtp.gmail.com with ESMTPSA id
- em20-20020a17090b015400b002535a0f2028sm9551098pjb.51.2023.06.06.07.29.51
+ ch7-20020a17090af40700b00259b2a50a41sm238105pjb.36.2023.06.06.07.37.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Jun 2023 07:29:51 -0700 (PDT)
-Message-ID: <324917f6-62fd-9930-8d33-725ec934ee75@linaro.org>
-Date: Tue, 6 Jun 2023 07:29:49 -0700
+ Tue, 06 Jun 2023 07:37:48 -0700 (PDT)
+Message-ID: <9ff0f082-1b04-8bf2-6a97-1e9220aa4509@linaro.org>
+Date: Tue, 6 Jun 2023 07:37:46 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
-Subject: Re: [PATCH 5/5] tests/tcg/aarch64: Rename bti-crt.inc.c ->
- bti-crt.c.inc
+Subject: Re: [PATCH 2/5] target/arm: Rename helper template headers as '.h.inc'
 Content-Language: en-US
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-arm@nongnu.org
 References: <20230606141252.95032-1-philmd@linaro.org>
- <20230606141252.95032-6-philmd@linaro.org>
+ <20230606141252.95032-3-philmd@linaro.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20230606141252.95032-6-philmd@linaro.org>
+In-Reply-To: <20230606141252.95032-3-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102d.google.com
 X-Spam_score_int: 3
 X-Spam_score: 0.3
 X-Spam_bar: /
@@ -114,17 +113,21 @@ On 6/6/23 07:12, Philippe Mathieu-Daudé wrote:
 >    the ``.c.inc`` or ``.h.inc`` suffix to make it clear they are
 >    being included for expansion.
 > 
-> Therefore rename 'bti-crt.inc.c' as 'bti-crt.c.inc'.
+> Therefore rename the included templates as '.h.inc'.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
-> ---
->   tests/tcg/aarch64/bti-1.c                          | 2 +-
->   tests/tcg/aarch64/bti-3.c                          | 2 +-
->   tests/tcg/aarch64/{bti-crt.inc.c => bti-crt.c.inc} | 0
->   3 files changed, 2 insertions(+), 2 deletions(-)
->   rename tests/tcg/aarch64/{bti-crt.inc.c => bti-crt.c.inc} (100%)
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+FYI, after yesterday's tcg pr, we can do more than this.  These fragments no longer have 
+to be all included into one common helper.h. Each translate-foo.c can include only the 
+helper-foo.h.inc bits that they need, and the bits need not be visible to the rest of the 
+front end.
+
+It was something that I had in mind when splitting include/exec/helper-gen.h, but the 
+patch set was already large enough.
+
+The renaming to .h.inc would have been the first step, anyway.
 
 
 r~
