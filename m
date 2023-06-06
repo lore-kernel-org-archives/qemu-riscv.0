@@ -4,84 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B8C2C77B73
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 13:19:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44AABC77B73
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 13:24:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q6Wag-0005X3-N9; Tue, 06 Jun 2023 09:19:14 -0400
+	id 1q6Wff-0006pe-B2; Tue, 06 Jun 2023 09:24:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1q6Waf-0005Wj-3k
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 09:19:13 -0400
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1q6Wad-0002Jp-5U
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 09:19:12 -0400
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5147a478c38so8662631a12.0
- for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 06:19:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1686057548; x=1688649548;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Bw6U5pOKqIIbmyM+DU2+Rfc2Mkz7uG5/8SQaxO2MCQI=;
- b=k4LSUb4zvb+ApBPDZe/RKgK3GdTrR3iTJA+KuhWW1RDzHGd+Ea//KNbXvJJijl/JLn
- SHBjK01doZ5K2qGzft//E03WfJgyTwN74u/tN2ckrxk2uxG0HARkscur2vBDQfkGqSs8
- k+YeTu20hAOu5Fhs8ZyoBOm30xa1VjlTU9BpenLSQag3Gf7Dam2vi4+RXn9nmaiMyLnH
- 1tPkSwv/1Gs1MpEdiTYYGNCjziUVSSNKFP7u+pdxSVBrVbLhBmTz1pWUP4aPldcOJAGL
- jMI6BsCS4T/KfMVpsu429nDiJ51NYzBCNwZ8qnknT2pTHhmjnUWVK5vWY5xeu/XM2Fo+
- Z8MA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686057548; x=1688649548;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Bw6U5pOKqIIbmyM+DU2+Rfc2Mkz7uG5/8SQaxO2MCQI=;
- b=iX91tAyjpEN+CTeqR4xC2DujbbKXNOeeA4NAblaoDvFxvUg3WULIhv4VEIvSdSK1Mz
- p7NzTzFAOgeZkObIRqREST4cuMvz/50kSr7fsLqlW24wTcVokmODffiFlcODoW09keYs
- AepN4a645V7nVQzOQY+bv5LyPNwPHnwvhXgUXah4Jf95Le3fYdwHTRyIjzufnKaFT5oB
- qWpfH4XpRVLZ7GXqMSYUQqbL/pVHI8gwEkJz53A188BmRIrFuiYNvKdrEB6DTZ1iRoGR
- LMkLGQy3F515Kn7EQT3uLMTwfzq5+lzv3MgckmIZfzdP+U/jm3JZ96d49acyLBT+Tn5M
- A5EA==
-X-Gm-Message-State: AC+VfDwRi/03h9psrEpiI3N2sIKr9r1rXUfETewEr0FWH06dAso9om9m
- Ez5jCIYYYIXVAWdg+KRW8kG6Rw==
-X-Google-Smtp-Source: ACHHUZ7cED7yuv6x67IHre2aynBSUuhJesDY+vGS8zukMgNK+rWe9At32stGTm5B6vwbuQil0iU7uw==
-X-Received: by 2002:a17:907:608e:b0:977:d424:a358 with SMTP id
- ht14-20020a170907608e00b00977d424a358mr2369160ejc.26.1686057548123; 
- Tue, 06 Jun 2023 06:19:08 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
- by smtp.gmail.com with ESMTPSA id
- n12-20020a1709061d0c00b009787209732esm602644ejh.143.2023.06.06.06.19.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jun 2023 06:19:07 -0700 (PDT)
-Date: Tue, 6 Jun 2023 15:19:06 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH 03/16] target/riscv/cpu.c: restrict 'mvendorid' value
-Message-ID: <20230606-aadc97a378f5d52fd233dcaa@orel>
-References: <20230530194623.272652-1-dbarboza@ventanamicro.com>
- <20230530194623.272652-4-dbarboza@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <xiao.w.wang@intel.com>)
+ id 1q6S4u-0002sK-6v; Tue, 06 Jun 2023 04:30:11 -0400
+Received: from mga12.intel.com ([192.55.52.136])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <xiao.w.wang@intel.com>)
+ id 1q6S4s-0004bT-4Z; Tue, 06 Jun 2023 04:30:07 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1686040206; x=1717576206;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=vfaNM3WPPpfwWaktnttUfBaKD1yrXfp/225p2wQUanY=;
+ b=QwAee7G7IAVbTbqDVf1+PX6OUWiBab4H8p1Gy2VU+jybxGtMqsz1ogKS
+ iGULv3/b7UNGBhJhyx8y19nk0qC+yL3Da3sDRdnqEA4h6I7dcWbKKB4zj
+ pdd5GUtjdyynj+3a/O0qXagju+fawkpoMANpjcS3iqsCopR6nbMEGIWLG
+ jZqAzYd0kyE7xTYy5jZaMpbLvcbTn39fiIit77o47PXJjODnmJW2RQh5X
+ LcNqZqQJXfwFXYVpJi8eUmaGO2HX+FTj9yJaGS9ZWkHgxmWzHbK9+vTsF
+ nJkzBtxkv1d9i7lQ5uugOEL41LDzo0AoAnLcS9zDK1rHPM8ah9MVGEYS9 A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10732"; a="336230476"
+X-IronPort-AV: E=Sophos;i="6.00,219,1681196400"; d="scan'208";a="336230476"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+ by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 06 Jun 2023 01:30:00 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10732"; a="955667564"
+X-IronPort-AV: E=Sophos;i="6.00,219,1681196400"; d="scan'208";a="955667564"
+Received: from xiao-desktop.sh.intel.com ([10.239.46.158])
+ by fmsmga006.fm.intel.com with ESMTP; 06 Jun 2023 01:29:57 -0700
+From: Xiao Wang <xiao.w.wang@intel.com>
+To: qemu-devel@nongnu.org
+Cc: Xiao Wang <xiao.w.wang@intel.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH] target/riscv/vector_helper.c: Remove the check for extra tail
+ elements
+Date: Tue,  6 Jun 2023 16:34:08 +0800
+Message-Id: <20230606083408.3972300-1-xiao.w.wang@intel.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230530194623.272652-4-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x52c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=192.55.52.136; envelope-from=xiao.w.wang@intel.com;
+ helo=mga12.intel.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 06 Jun 2023 09:24:22 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -96,96 +80,99 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, May 30, 2023 at 04:46:10PM -0300, Daniel Henrique Barboza wrote:
-> We're going to change the handling of mvendorid/marchid/mimpid by the
-> KVM driver. Since these are always present in all CPUs let's put the
-> same validation for everyone.
-> 
-> It doesn't make sense to allow 'mvendorid' to be different than it
-> is already set in named (vendor) CPUs. Generic (dynamic) CPUs can have
-> any 'mvendorid' they want.
-> 
-> Change 'mvendorid' to be a class property created via
-> 'object_class_property_add', instead of using the DEFINE_PROP_UINT32()
-> macro. This allow us to define a custom setter for it that will verify,
-> for named CPUs, if mvendorid is different than it is already set by the
-> CPU. This is the error thrown for the 'veyron-v1' CPU if 'mvendorid' is
-> set to an invalid value:
-> 
-> $ qemu-system-riscv64 -M virt -nographic -cpu veyron-v1,mvendorid=2
-> qemu-system-riscv64: can't apply global veyron-v1-riscv-cpu.mvendorid=2:
->     Unable to change veyron-v1-riscv-cpu mvendorid (0x61f)
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/cpu.c | 31 ++++++++++++++++++++++++++++++-
->  1 file changed, 30 insertions(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 72f5433776..bcd69bb032 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1723,7 +1723,6 @@ static void riscv_cpu_add_user_properties(Object *obj)
->  static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
->  
-> -    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
->      DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
->      DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
->  
-> @@ -1810,6 +1809,32 @@ static const struct TCGCPUOps riscv_tcg_ops = {
->  #endif /* !CONFIG_USER_ONLY */
->  };
->  
-> +static bool riscv_cpu_is_dynamic(Object *cpu_obj)
-> +{
-> +    return object_dynamic_cast(cpu_obj, TYPE_RISCV_DYNAMIC_CPU) != NULL;
-> +}
-> +
-> +static void cpu_set_mvendorid(Object *obj, Visitor *v, const char *name,
-> +                              void *opaque, Error **errp)
-> +{
-> +    bool dynamic_cpu = riscv_cpu_is_dynamic(obj);
-> +    RISCVCPU *cpu = RISCV_CPU(obj);
-> +    uint32_t prev_val = cpu->cfg.mvendorid;
-> +    uint32_t value;
-> +
-> +    if (!visit_type_uint32(v, name, &value, errp)) {
-> +        return;
-> +    }
-> +
-> +    if (!dynamic_cpu && prev_val != value) {
-> +        error_setg(errp, "Unable to change %s mvendorid (0x%x)",
-> +                   object_get_typename(obj), prev_val);
-> +        return;
-> +    }
-> +
-> +    cpu->cfg.mvendorid = value;
-> +}
-> +
->  static void riscv_cpu_class_init(ObjectClass *c, void *data)
->  {
->      RISCVCPUClass *mcc = RISCV_CPU_CLASS(c);
-> @@ -1841,6 +1866,10 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
->      cc->gdb_get_dynamic_xml = riscv_gdb_get_dynamic_xml;
->      cc->tcg_ops = &riscv_tcg_ops;
->  
-> +    object_class_property_add(c, "mvendorid", "uint32", NULL,
-> +                              cpu_set_mvendorid,
-> +                              NULL, NULL);
-> +
+Commit 752614cab8e6 ("target/riscv: rvv: Add tail agnostic for vector
+load / store instructions") added an extra check for LMUL fragmentation,
+intended for setting the "rest tail elements" in the last register for a
+segment load insn.
 
-Shouldn't we provide a get function as well?
+Actually, the max_elements derived in vext_ld*() won't be a fraction of
+vector register size, since the lmul encoded in desc is emul, which has
+already been adjusted to 1 for LMUL fragmentation case by vext_get_emul()
+in trans_rvv.c.inc, for ld_stride(), ld_us(), ld_index() and ldff().
 
->      device_class_set_props(dc, riscv_cpu_properties);
->  }
->  
-> -- 
-> 2.40.1
-> 
-> 
+Besides, vext_get_emul() has also taken EEW/SEW into consideration, so no
+need to call vext_get_total_elems() which would base on the emul to derive
+another emul, the second emul would be incorrect when esz differs from sew.
 
-Otherwise,
+Thus this patch removes the check for extra tail elements.
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Fixes: 752614cab8e6 ("target/riscv: rvv: Add tail agnostic for vector load / store instructions")
+
+Signed-off-by: Xiao Wang <xiao.w.wang@intel.com>
+---
+ target/riscv/vector_helper.c | 21 ++++++---------------
+ 1 file changed, 6 insertions(+), 15 deletions(-)
+
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index f4d0438988..56a79bb5fa 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -264,26 +264,17 @@ GEN_VEXT_ST_ELEM(ste_h, int16_t, H2, stw)
+ GEN_VEXT_ST_ELEM(ste_w, int32_t, H4, stl)
+ GEN_VEXT_ST_ELEM(ste_d, int64_t, H8, stq)
+ 
+-static void vext_set_tail_elems_1s(CPURISCVState *env, target_ulong vl,
+-                                   void *vd, uint32_t desc, uint32_t nf,
++static void vext_set_tail_elems_1s(target_ulong vl, void *vd,
++                                   uint32_t desc, uint32_t nf,
+                                    uint32_t esz, uint32_t max_elems)
+ {
+-    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
+-    uint32_t vlenb = riscv_cpu_cfg(env)->vlen >> 3;
+     uint32_t vta = vext_vta(desc);
+-    uint32_t registers_used;
+     int k;
+ 
+     for (k = 0; k < nf; ++k) {
+         vext_set_elems_1s(vd, vta, (k * max_elems + vl) * esz,
+                           (k * max_elems + max_elems) * esz);
+     }
+-
+-    if (nf * max_elems % total_elems != 0) {
+-        registers_used = ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
+-        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
+-                          registers_used * vlenb);
+-    }
+ }
+ 
+ /*
+@@ -319,7 +310,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+     }
+     env->vstart = 0;
+ 
+-    vext_set_tail_elems_1s(env, env->vl, vd, desc, nf, esz, max_elems);
++    vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
+ }
+ 
+ #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)                        \
+@@ -378,7 +369,7 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+     }
+     env->vstart = 0;
+ 
+-    vext_set_tail_elems_1s(env, evl, vd, desc, nf, esz, max_elems);
++    vext_set_tail_elems_1s(evl, vd, desc, nf, esz, max_elems);
+ }
+ 
+ /*
+@@ -499,7 +490,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+     }
+     env->vstart = 0;
+ 
+-    vext_set_tail_elems_1s(env, env->vl, vd, desc, nf, esz, max_elems);
++    vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
+ }
+ 
+ #define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN, LOAD_FN)                  \
+@@ -629,7 +620,7 @@ ProbeSuccess:
+     }
+     env->vstart = 0;
+ 
+-    vext_set_tail_elems_1s(env, env->vl, vd, desc, nf, esz, max_elems);
++    vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
+ }
+ 
+ #define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN)               \
+-- 
+2.25.1
+
 
