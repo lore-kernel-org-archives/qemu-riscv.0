@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FEADC77B73
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 14:14:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BBF1C7EE24
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 14:16:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q6XR9-00042N-9J; Tue, 06 Jun 2023 10:13:27 -0400
+	id 1q6XTx-0003Jd-ND; Tue, 06 Jun 2023 10:16:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q6XR7-00041f-Iy
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:13:25 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1q6XTt-0003Gz-4I
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:16:17 -0400
+Received: from mail-oa1-x2c.google.com ([2001:4860:4864:20::2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1q6XR2-0005Va-24
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:13:25 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-3f7378a74faso23866695e9.0
- for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 07:13:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1q6XTr-0006TZ-6H
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 10:16:16 -0400
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-19f22575d89so3387742fac.0
+ for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 07:16:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686060799; x=1688652799;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8UQAuFP30266AN4qnHJPcBraOFHFZpQqvUy0mONI7XQ=;
- b=aQhtZ/VW0S9+eY6cAy1aj8hGuZ+UDrJsPnpKCfEuEH9G9qe1sHiFEnaZ3d8O/cwqS5
- XyLasJA4JTUp1JDJyIaGF8lWI9Dv+GM5w/ufEGA1Ctkzg9gg8tVl4/aOqu3wzIfJnVOQ
- fZvk3r0JMAwwPv7PtdyfVbiBBoGRzdYsYoJ1QP/IQzV57Rweg1domcbJMdHH8Q6OX/6Y
- HTpcNEAK4H1cBQlmo19FmCcVJSLAiUsCpfByqlRpSK5QKnkgLZNeNRsBHagh5HgFAWgM
- 3jCQ4ezFPw36XnamwrQHBJl/RqevfBJRpiG14AhTWjHysrj/hPxiGtc8MkmKiZZXFHnE
- 67bQ==
+ d=ventanamicro.com; s=google; t=1686060974; x=1688652974;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vLtExC+Ko+jKEwW3AfIDuf2P237VUvIOZLryabTIJuc=;
+ b=PmUCdShmpAlCGcqig3AwkaD8aDwqVSjhbf27TLRluzD43nnhIZMSw6heIoZU1XzOCN
+ RPYb1FAtWmJYUsQ9S0UeJs51QNjZdMAc65xQdI2k2Uw38YuWElWV1uDcyH5f/8VhbSCP
+ Z4cMQZejI93xB694EsCzvq621l9Ns8tIKFaqMo58vBIynZt7jMtQv8jzxk4KFGxaD1/S
+ 0856Q/NXoWbhEROfs6lLVSkdZfqmpC4AMP/NfRJkvi/M0iV47S2PDDd4CC5Mro3arSxM
+ IMjlPLMS+wZk7Jtxxb1Nn+6Bp8ME4CBE4oBupDK3J1DtefB/XxZZm58tfoQN8B9tE0Ne
+ Efmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686060799; x=1688652799;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8UQAuFP30266AN4qnHJPcBraOFHFZpQqvUy0mONI7XQ=;
- b=WRlP8r3zFXE06z1zBH7vNawt93j4sBXc48fMSAHZQOTuwAmKJwnN0s30QzOknUzRc0
- K7XFM2/XxJZt+1AsYrzQdBOi9K+Ll7cnTvfqwD7zA2QOl+Knz8yzorl9Krun9yrplK8w
- wphNgUvqxvPM8V0ySVoylbjM9//gddlQNk8Gvo9sv3XhLS6wbJi28LfShcms8PvS1sHL
- /uvaTE6q07fL1h+VBNAwMxL4g7i6fPuGBmFrqMvbEdTpuGlr8Gneu5K3jl6u9PZlo33v
- 50PlJ12atOgepAHW6agnxdRtb1Axubm9mMVk33vx/rNRLTh2qzzn7WdH8itNXY2aAlHI
- uAgA==
-X-Gm-Message-State: AC+VfDyC0l1W/G7yjayyk3JRSAw9glFvi+sEs8rabxVU8bRG26+8igsG
- Ae9wc8bm15ZXmZGJIexGCzmOcw==
-X-Google-Smtp-Source: ACHHUZ7EyV1jXzA+PrCW2tOt/YlWsTavmgbtSJzkyybu/hSTnva6LlLDLIDutr4W3I3JWz4H8qRdVA==
-X-Received: by 2002:a7b:cd08:0:b0:3f7:e4d7:4469 with SMTP id
- f8-20020a7bcd08000000b003f7e4d74469mr2220729wmj.41.1686060799304; 
- Tue, 06 Jun 2023 07:13:19 -0700 (PDT)
-Received: from localhost.localdomain
- (vbo91-h01-176-184-50-104.dsl.sta.abo.bbox.fr. [176.184.50.104])
+ d=1e100.net; s=20221208; t=1686060974; x=1688652974;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vLtExC+Ko+jKEwW3AfIDuf2P237VUvIOZLryabTIJuc=;
+ b=Gz2wDUo62cQLAZrWNO+vD8tNrzjiTb7BgQmR6wctNMmRwW10C0Ea8qUtXi7QGLMwFA
+ BRiJrVgeyxql7EaSIhOi2u0M6roHCoPUPw5tuv+Do2fKIKdWCkrefgz4NskQJR8v7+px
+ MU3zG3IHzSAqDY/hdgkeDqarTxvi1mhLyUysGkZREAF/ug2/Q0VtW+HkOK4z0xTRNp6t
+ i+u61GhSEJQXXrePRgaQ9OaKJw87USlOgzSbuK2M2V6sCaDjmEjl6QcM66pJw/9li+SE
+ 1Ro1bsaiWS+/46mP+Mqw1d9u0dA5D1zwcojLtswij+4Mo7ttBGOEESLqZpCRXX0ZbhrX
+ fSQw==
+X-Gm-Message-State: AC+VfDynuyH93M1wb2HhCnUFWxnMY2h+0FcrgnKDbY52WIqvBwmfkV6N
+ 4PufVOuok+blkOKxxwdZgWvBSSniVFFR3jcO6/M=
+X-Google-Smtp-Source: ACHHUZ7IqDxVkcFf1kLVc0JxY8RJFXd9qJybyGB+O3RV1TpTehk+ZmM4ETpnZSeWjFn9iFrgeS6zCw==
+X-Received: by 2002:a05:6870:4ec:b0:18e:a4b9:8388 with SMTP id
+ u44-20020a05687004ec00b0018ea4b98388mr1167636oam.48.1686060973779; 
+ Tue, 06 Jun 2023 07:16:13 -0700 (PDT)
+Received: from [192.168.68.107] ([177.170.117.52])
  by smtp.gmail.com with ESMTPSA id
- p5-20020a1c7405000000b003f6f6a6e769sm14204324wmc.17.2023.06.06.07.13.17
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 06 Jun 2023 07:13:18 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH 4/5] target: Rename per-target 'helper.h' -> 'helper.h.inc'
-Date: Tue,  6 Jun 2023 16:12:51 +0200
-Message-Id: <20230606141252.95032-5-philmd@linaro.org>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20230606141252.95032-1-philmd@linaro.org>
-References: <20230606141252.95032-1-philmd@linaro.org>
+ t1-20020a056871054100b0019e4fe93d72sm4775525oal.42.2023.06.06.07.16.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 Jun 2023 07:16:13 -0700 (PDT)
+Message-ID: <b3013d96-f27d-5019-6e3f-98ce55ab9adf@ventanamicro.com>
+Date: Tue, 6 Jun 2023 11:16:10 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [PATCH] Add epmp to extensions list and rename it to smepmp
+Content-Language: en-US
+To: Himanshu Chauhan <hchauhan@ventanamicro.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+References: <20230606113812.519723-1-hchauhan@ventanamicro.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230606113812.519723-1-hchauhan@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2001:4860:4864:20::2c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x2c.google.com
+X-Spam_score_int: 11
+X-Spam_score: 1.1
+X-Spam_bar: +
+X-Spam_report: (1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.094,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,502 +96,164 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Since commit 139c1837db ("meson: rename included C source files
-to .c.inc"), QEMU standard procedure for included C files is to
-use *.c.inc.
 
-Besides, since commit 6a0057aa22 ("docs/devel: make a statement
-about includes") this is documented as the Coding Style:
 
-  If you do use template header files they should be named with
-  the ``.c.inc`` or ``.h.inc`` suffix to make it clear they are
-  being included for expansion.
+On 6/6/23 08:38, Himanshu Chauhan wrote:
+> Smepmp is a ratified extension which qemu refers to as epmp.
+> Rename epmp to smepmp and add it to extension list so that
+> it is added to the isa string.
+> 
+> Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+> ---
 
-Therefore rename the included 'helper.h' as 'helper.h.inc' for
-all targets (updating the documentation).
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- docs/devel/tcg-ops.rst                       | 2 +-
- include/exec/helper-gen.h                    | 2 +-
- include/exec/helper-proto.h                  | 2 +-
- target/alpha/{helper.h => helper.h.inc}      | 0
- target/arm/{helper.h => helper.h.inc}        | 0
- target/avr/{helper.h => helper.h.inc}        | 0
- target/cris/{helper.h => helper.h.inc}       | 0
- target/hexagon/{helper.h => helper.h.inc}    | 0
- target/hppa/{helper.h => helper.h.inc}       | 0
- target/i386/{helper.h => helper.h.inc}       | 0
- target/loongarch/{helper.h => helper.h.inc}  | 0
- target/m68k/{helper.h => helper.h.inc}       | 0
- target/microblaze/{helper.h => helper.h.inc} | 0
- target/mips/{helper.h => helper.h.inc}       | 0
- target/nios2/{helper.h => helper.h.inc}      | 0
- target/openrisc/{helper.h => helper.h.inc}   | 0
- target/ppc/{helper.h => helper.h.inc}        | 0
- target/riscv/{helper.h => helper.h.inc}      | 0
- target/rx/{helper.h => helper.h.inc}         | 0
- target/s390x/{helper.h => helper.h.inc}      | 0
- target/sh4/{helper.h => helper.h.inc}        | 0
- target/sparc/{helper.h => helper.h.inc}      | 0
- target/tricore/{helper.h => helper.h.inc}    | 0
- target/xtensa/{helper.h => helper.h.inc}     | 0
- target/alpha/translate.c                     | 2 +-
- target/arm/machine.c                         | 2 +-
- target/arm/tcg/translate.c                   | 2 +-
- target/avr/translate.c                       | 2 +-
- target/cris/translate.c                      | 2 +-
- target/hexagon/translate.c                   | 2 +-
- target/hppa/translate.c                      | 2 +-
- target/i386/tcg/translate.c                  | 2 +-
- target/loongarch/translate.c                 | 2 +-
- target/m68k/translate.c                      | 2 +-
- target/microblaze/translate.c                | 2 +-
- target/mips/tcg/translate.c                  | 2 +-
- target/nios2/translate.c                     | 2 +-
- target/openrisc/translate.c                  | 2 +-
- target/ppc/translate.c                       | 2 +-
- target/riscv/translate.c                     | 2 +-
- target/rx/translate.c                        | 2 +-
- target/s390x/tcg/translate.c                 | 2 +-
- target/sh4/translate.c                       | 2 +-
- target/sparc/translate.c                     | 2 +-
- target/tricore/translate.c                   | 2 +-
- target/xtensa/translate.c                    | 2 +-
- 46 files changed, 25 insertions(+), 25 deletions(-)
- rename target/alpha/{helper.h => helper.h.inc} (100%)
- rename target/arm/{helper.h => helper.h.inc} (100%)
- rename target/avr/{helper.h => helper.h.inc} (100%)
- rename target/cris/{helper.h => helper.h.inc} (100%)
- rename target/hexagon/{helper.h => helper.h.inc} (100%)
- rename target/hppa/{helper.h => helper.h.inc} (100%)
- rename target/i386/{helper.h => helper.h.inc} (100%)
- rename target/loongarch/{helper.h => helper.h.inc} (100%)
- rename target/m68k/{helper.h => helper.h.inc} (100%)
- rename target/microblaze/{helper.h => helper.h.inc} (100%)
- rename target/mips/{helper.h => helper.h.inc} (100%)
- rename target/nios2/{helper.h => helper.h.inc} (100%)
- rename target/openrisc/{helper.h => helper.h.inc} (100%)
- rename target/ppc/{helper.h => helper.h.inc} (100%)
- rename target/riscv/{helper.h => helper.h.inc} (100%)
- rename target/rx/{helper.h => helper.h.inc} (100%)
- rename target/s390x/{helper.h => helper.h.inc} (100%)
- rename target/sh4/{helper.h => helper.h.inc} (100%)
- rename target/sparc/{helper.h => helper.h.inc} (100%)
- rename target/tricore/{helper.h => helper.h.inc} (100%)
- rename target/xtensa/{helper.h => helper.h.inc} (100%)
-
-diff --git a/docs/devel/tcg-ops.rst b/docs/devel/tcg-ops.rst
-index 6a166c5665..c74849a231 100644
---- a/docs/devel/tcg-ops.rst
-+++ b/docs/devel/tcg-ops.rst
-@@ -151,7 +151,7 @@ Types
- Helpers
- =======
- 
--Helpers are registered in a guest-specific ``helper.h``,
-+Helpers are registered in a guest-specific ``helper.h.inc``,
- which is processed to generate ``tcg_gen_helper_*`` functions.
- With these functions it is possible to call a function taking
- i32, i64, i128 or pointer types.
-diff --git a/include/exec/helper-gen.h b/include/exec/helper-gen.h
-index f7ec155699..fdb3ec39f5 100644
---- a/include/exec/helper-gen.h
-+++ b/include/exec/helper-gen.h
-@@ -9,7 +9,7 @@
- 
- #include "exec/helper-gen-common.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-gen.h.inc"
- #undef  HELPER_H
- 
-diff --git a/include/exec/helper-proto.h b/include/exec/helper-proto.h
-index 6935cb4f16..fd061749be 100644
---- a/include/exec/helper-proto.h
-+++ b/include/exec/helper-proto.h
-@@ -9,7 +9,7 @@
- 
- #include "exec/helper-proto-common.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-proto.h.inc"
- #undef  HELPER_H
- 
-diff --git a/target/alpha/helper.h b/target/alpha/helper.h.inc
-similarity index 100%
-rename from target/alpha/helper.h
-rename to target/alpha/helper.h.inc
-diff --git a/target/arm/helper.h b/target/arm/helper.h.inc
-similarity index 100%
-rename from target/arm/helper.h
-rename to target/arm/helper.h.inc
-diff --git a/target/avr/helper.h b/target/avr/helper.h.inc
-similarity index 100%
-rename from target/avr/helper.h
-rename to target/avr/helper.h.inc
-diff --git a/target/cris/helper.h b/target/cris/helper.h.inc
-similarity index 100%
-rename from target/cris/helper.h
-rename to target/cris/helper.h.inc
-diff --git a/target/hexagon/helper.h b/target/hexagon/helper.h.inc
-similarity index 100%
-rename from target/hexagon/helper.h
-rename to target/hexagon/helper.h.inc
-diff --git a/target/hppa/helper.h b/target/hppa/helper.h.inc
-similarity index 100%
-rename from target/hppa/helper.h
-rename to target/hppa/helper.h.inc
-diff --git a/target/i386/helper.h b/target/i386/helper.h.inc
-similarity index 100%
-rename from target/i386/helper.h
-rename to target/i386/helper.h.inc
-diff --git a/target/loongarch/helper.h b/target/loongarch/helper.h.inc
-similarity index 100%
-rename from target/loongarch/helper.h
-rename to target/loongarch/helper.h.inc
-diff --git a/target/m68k/helper.h b/target/m68k/helper.h.inc
-similarity index 100%
-rename from target/m68k/helper.h
-rename to target/m68k/helper.h.inc
-diff --git a/target/microblaze/helper.h b/target/microblaze/helper.h.inc
-similarity index 100%
-rename from target/microblaze/helper.h
-rename to target/microblaze/helper.h.inc
-diff --git a/target/mips/helper.h b/target/mips/helper.h.inc
-similarity index 100%
-rename from target/mips/helper.h
-rename to target/mips/helper.h.inc
-diff --git a/target/nios2/helper.h b/target/nios2/helper.h.inc
-similarity index 100%
-rename from target/nios2/helper.h
-rename to target/nios2/helper.h.inc
-diff --git a/target/openrisc/helper.h b/target/openrisc/helper.h.inc
-similarity index 100%
-rename from target/openrisc/helper.h
-rename to target/openrisc/helper.h.inc
-diff --git a/target/ppc/helper.h b/target/ppc/helper.h.inc
-similarity index 100%
-rename from target/ppc/helper.h
-rename to target/ppc/helper.h.inc
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h.inc
-similarity index 100%
-rename from target/riscv/helper.h
-rename to target/riscv/helper.h.inc
-diff --git a/target/rx/helper.h b/target/rx/helper.h.inc
-similarity index 100%
-rename from target/rx/helper.h
-rename to target/rx/helper.h.inc
-diff --git a/target/s390x/helper.h b/target/s390x/helper.h.inc
-similarity index 100%
-rename from target/s390x/helper.h
-rename to target/s390x/helper.h.inc
-diff --git a/target/sh4/helper.h b/target/sh4/helper.h.inc
-similarity index 100%
-rename from target/sh4/helper.h
-rename to target/sh4/helper.h.inc
-diff --git a/target/sparc/helper.h b/target/sparc/helper.h.inc
-similarity index 100%
-rename from target/sparc/helper.h
-rename to target/sparc/helper.h.inc
-diff --git a/target/tricore/helper.h b/target/tricore/helper.h.inc
-similarity index 100%
-rename from target/tricore/helper.h
-rename to target/tricore/helper.h.inc
-diff --git a/target/xtensa/helper.h b/target/xtensa/helper.h.inc
-similarity index 100%
-rename from target/xtensa/helper.h
-rename to target/xtensa/helper.h.inc
-diff --git a/target/alpha/translate.c b/target/alpha/translate.c
-index 1f7dd078d8..1fd9c18262 100644
---- a/target/alpha/translate.c
-+++ b/target/alpha/translate.c
-@@ -30,7 +30,7 @@
- #include "exec/translator.h"
- #include "exec/log.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/arm/machine.c b/target/arm/machine.c
-index fc4a4a4064..6d9afc5f00 100644
---- a/target/arm/machine.c
-+++ b/target/arm/machine.c
-@@ -462,7 +462,7 @@ static bool pmsav7_rnr_needed(void *opaque)
-     CPUARMState *env = &cpu->env;
- 
-     /* For R profile cores pmsav7.rnr is migrated via the cpreg
--     * "RGNR" definition in helper.h. For M profile we have to
-+     * "RGNR" definition in helper.h.inc. For M profile we have to
-      * migrate it separately.
-      */
-     return arm_feature(env, ARM_FEATURE_M);
-diff --git a/target/arm/tcg/translate.c b/target/arm/tcg/translate.c
-index a68d3c7f6d..308f6a8513 100644
---- a/target/arm/tcg/translate.c
-+++ b/target/arm/tcg/translate.c
-@@ -29,7 +29,7 @@
- #include "cpregs.h"
- #include "exec/helper-proto.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/avr/translate.c b/target/avr/translate.c
-index ef2edd7415..4205bf94b3 100644
---- a/target/avr/translate.c
-+++ b/target/avr/translate.c
-@@ -30,7 +30,7 @@
- #include "exec/log.h"
- #include "exec/translator.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/cris/translate.c b/target/cris/translate.c
-index 1445cd8bb5..3b5686cbb0 100644
---- a/target/cris/translate.c
-+++ b/target/cris/translate.c
-@@ -37,7 +37,7 @@
- #include "exec/helper-gen.h"
- #include "exec/log.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/hexagon/translate.c b/target/hexagon/translate.c
-index 708339198e..3d5c628885 100644
---- a/target/hexagon/translate.c
-+++ b/target/hexagon/translate.c
-@@ -33,7 +33,7 @@
- #include "genptr.h"
- #include "printinsn.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/hppa/translate.c b/target/hppa/translate.c
-index d33813d173..f2e5ace845 100644
---- a/target/hppa/translate.c
-+++ b/target/hppa/translate.c
-@@ -29,7 +29,7 @@
- #include "exec/translator.h"
- #include "exec/log.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/i386/tcg/translate.c b/target/i386/tcg/translate.c
-index 5cf14311a6..61fa64efa7 100644
---- a/target/i386/tcg/translate.c
-+++ b/target/i386/tcg/translate.c
-@@ -34,7 +34,7 @@
- 
- #include "exec/log.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/loongarch/translate.c b/target/loongarch/translate.c
-index 3146a2d4ac..fdbb9d25ea 100644
---- a/target/loongarch/translate.c
-+++ b/target/loongarch/translate.c
-@@ -23,7 +23,7 @@
- TCGv cpu_gpr[32], cpu_pc;
- static TCGv cpu_lladdr, cpu_llval;
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/m68k/translate.c b/target/m68k/translate.c
-index 551ef9e52a..8594313e8f 100644
---- a/target/m68k/translate.c
-+++ b/target/m68k/translate.c
-@@ -34,7 +34,7 @@
- #include "exec/log.h"
- #include "fpu/softfloat.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/microblaze/translate.c b/target/microblaze/translate.c
-index 7e7f837c63..ffb40421a0 100644
---- a/target/microblaze/translate.c
-+++ b/target/microblaze/translate.c
-@@ -31,7 +31,7 @@
- 
- #include "exec/log.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/mips/tcg/translate.c b/target/mips/tcg/translate.c
-index 74af91e4f5..1dfffe1c6f 100644
---- a/target/mips/tcg/translate.c
-+++ b/target/mips/tcg/translate.c
-@@ -32,7 +32,7 @@
- #include "disas/disas.h"
- #include "fpu_helper.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/nios2/translate.c b/target/nios2/translate.c
-index a365ad8293..6f81efe90b 100644
---- a/target/nios2/translate.c
-+++ b/target/nios2/translate.c
-@@ -34,7 +34,7 @@
- #include "qemu/qemu-print.h"
- #include "semihosting/semihost.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/openrisc/translate.c b/target/openrisc/translate.c
-index 7760329e75..f5e8a25977 100644
---- a/target/openrisc/translate.c
-+++ b/target/openrisc/translate.c
-@@ -34,7 +34,7 @@
- 
- #include "exec/log.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/ppc/translate.c b/target/ppc/translate.c
-index 37fd431870..598759f813 100644
---- a/target/ppc/translate.c
-+++ b/target/ppc/translate.c
-@@ -41,7 +41,7 @@
- #include "qemu/qemu-print.h"
- #include "qapi/error.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 933b11c50d..e27df3c9af 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -33,7 +33,7 @@
- #include "instmap.h"
- #include "internals.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/rx/translate.c b/target/rx/translate.c
-index 08cabbde61..5b60082749 100644
---- a/target/rx/translate.c
-+++ b/target/rx/translate.c
-@@ -28,7 +28,7 @@
- #include "exec/translator.h"
- #include "exec/log.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/s390x/tcg/translate.c b/target/s390x/tcg/translate.c
-index 7c549cd8d0..7db663c915 100644
---- a/target/s390x/tcg/translate.c
-+++ b/target/s390x/tcg/translate.c
-@@ -45,7 +45,7 @@
- #include "exec/log.h"
- #include "qemu/atomic128.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/sh4/translate.c b/target/sh4/translate.c
-index 49c87d7a01..df4c721cee 100644
---- a/target/sh4/translate.c
-+++ b/target/sh4/translate.c
-@@ -29,7 +29,7 @@
- #include "exec/log.h"
- #include "qemu/qemu-print.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/sparc/translate.c b/target/sparc/translate.c
-index bad2ec90a0..99efd3ae87 100644
---- a/target/sparc/translate.c
-+++ b/target/sparc/translate.c
-@@ -33,7 +33,7 @@
- #include "exec/log.h"
- #include "asi.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/tricore/translate.c b/target/tricore/translate.c
-index 8e4f99478c..ed40a2c8ef 100644
---- a/target/tricore/translate.c
-+++ b/target/tricore/translate.c
-@@ -33,7 +33,7 @@
- #include "exec/translator.h"
- #include "exec/log.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
-diff --git a/target/xtensa/translate.c b/target/xtensa/translate.c
-index b7386ff0f0..68495fc983 100644
---- a/target/xtensa/translate.c
-+++ b/target/xtensa/translate.c
-@@ -45,7 +45,7 @@
- 
- #include "exec/log.h"
- 
--#define HELPER_H "helper.h"
-+#define HELPER_H "helper.h.inc"
- #include "exec/helper-info.c.inc"
- #undef  HELPER_H
- 
--- 
-2.38.1
-
+>   target/riscv/cpu.c     |  9 +++++----
+>   target/riscv/cpu_cfg.h |  2 +-
+>   target/riscv/csr.c     |  6 +++---
+>   target/riscv/pmp.c     | 12 ++++++------
+>   4 files changed, 15 insertions(+), 14 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 881bddf393..cf3d1c3207 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -127,6 +127,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+>       ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
+>       ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
+> +    ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+>       ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
+>       ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
+>       ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
+> @@ -547,7 +548,7 @@ static void rv32_ibex_cpu_init(Object *obj)
+>   #ifndef CONFIG_USER_ONLY
+>       set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
+>   #endif
+> -    cpu->cfg.epmp = true;
+> +    cpu->cfg.ext_smepmp = true;
+>   
+>       /* inherited from parent obj via riscv_cpu_init() */
+>       cpu->cfg.ext_ifencei = true;
+> @@ -1336,12 +1337,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>           return;
+>       }
+>   
+> -    if (cpu->cfg.epmp && !cpu->cfg.pmp) {
+> +    if (cpu->cfg.ext_smepmp && !cpu->cfg.pmp) {
+>           /*
+>            * Enhanced PMP should only be available
+>            * on harts with PMP support
+>            */
+> -        error_setg(errp, "Invalid configuration: EPMP requires PMP support");
+> +        error_setg(errp, "Invalid configuration: SMEPMP requires PMP support");
+>           return;
+>       }
+>   
+> @@ -1676,7 +1677,7 @@ static Property riscv_cpu_extensions[] = {
+>       DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
+>   
+>       /* ePMP 0.9.3 */
+> -    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+> +    DEFINE_PROP_BOOL("smepmp", RISCVCPU, cfg.ext_smepmp, false),
+>       DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
+>       DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
+>   
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index c4a627d335..d79b022e35 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -87,6 +87,7 @@ struct RISCVCPUConfig {
+>       bool ext_zvfh;
+>       bool ext_zvfhmin;
+>       bool ext_smaia;
+> +    bool ext_smepmp;
+>       bool ext_ssaia;
+>       bool ext_sscofpmf;
+>       bool rvv_ta_all_1s;
+> @@ -121,7 +122,6 @@ struct RISCVCPUConfig {
+>       uint16_t cboz_blocksize;
+>       bool mmu;
+>       bool pmp;
+> -    bool epmp;
+>       bool debug;
+>       bool misa_w;
+>   
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 58499b5afc..d9bc591348 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -523,9 +523,9 @@ static RISCVException pmp(CPURISCVState *env, int csrno)
+>       return RISCV_EXCP_ILLEGAL_INST;
+>   }
+>   
+> -static RISCVException epmp(CPURISCVState *env, int csrno)
+> +static RISCVException smepmp(CPURISCVState *env, int csrno)
+>   {
+> -    if (riscv_cpu_cfg(env)->epmp) {
+> +    if (riscv_cpu_cfg(env)->ext_smepmp) {
+>           return RISCV_EXCP_NONE;
+>       }
+>   
+> @@ -4356,7 +4356,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>       [CSR_VSIPH]       = { "vsiph",       aia_hmode32, NULL, NULL, rmw_vsiph },
+>   
+>       /* Physical Memory Protection */
+> -    [CSR_MSECCFG]    = { "mseccfg",  epmp, read_mseccfg, write_mseccfg,
+> +    [CSR_MSECCFG]    = { "mseccfg", smepmp, read_mseccfg, write_mseccfg,
+>                            .min_priv_ver = PRIV_VERSION_1_11_0           },
+>       [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
+>       [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 418738afd8..18246e1737 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -87,7 +87,7 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
+>       if (pmp_index < MAX_RISCV_PMPS) {
+>           bool locked = true;
+>   
+> -        if (riscv_cpu_cfg(env)->epmp) {
+> +        if (riscv_cpu_cfg(env)->ext_smepmp) {
+>               /* mseccfg.RLB is set */
+>               if (MSECCFG_RLB_ISSET(env)) {
+>                   locked = false;
+> @@ -337,9 +337,9 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>   
+>           /*
+>            * Convert the PMP permissions to match the truth table in the
+> -         * ePMP spec.
+> +         * SMEPMP spec.
+>            */
+> -        const uint8_t epmp_operation =
+> +        const uint8_t smepmp_operation =
+>               ((env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) >> 4) |
+>               ((env->pmp_state.pmp[i].cfg_reg & PMP_READ) << 2) |
+>               (env->pmp_state.pmp[i].cfg_reg & PMP_WRITE) |
+> @@ -364,7 +364,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>                    * If mseccfg.MML Bit set, do the enhanced pmp priv check
+>                    */
+>                   if (mode == PRV_M) {
+> -                    switch (epmp_operation) {
+> +                    switch (smepmp_operation) {
+>                       case 0:
+>                       case 1:
+>                       case 4:
+> @@ -395,7 +395,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+>                           g_assert_not_reached();
+>                       }
+>                   } else {
+> -                    switch (epmp_operation) {
+> +                    switch (smepmp_operation) {
+>                       case 0:
+>                       case 8:
+>                       case 9:
+> @@ -576,7 +576,7 @@ void mseccfg_csr_write(CPURISCVState *env, target_ulong val)
+>           }
+>       }
+>   
+> -    if (riscv_cpu_cfg(env)->epmp) {
+> +    if (riscv_cpu_cfg(env)->ext_smepmp) {
+>           /* Sticky bits */
+>           val |= (env->mseccfg & (MSECCFG_MMWP | MSECCFG_MML));
+>           if ((val ^ env->mseccfg) & (MSECCFG_MMWP | MSECCFG_MML)) {
 
