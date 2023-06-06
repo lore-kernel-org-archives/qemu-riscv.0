@@ -4,88 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0501AC77B73
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 10:31:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 821C1C7EE24
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 11:39:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q6Txv-0004Qm-9y; Tue, 06 Jun 2023 06:31:03 -0400
+	id 1q6V1D-0002hx-6E; Tue, 06 Jun 2023 07:38:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1q6Txu-0004QT-8Z
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 06:31:02 -0400
-Received: from mail-oa1-x32.google.com ([2001:4860:4864:20::32])
+ (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
+ id 1q6V1A-0002g4-UW
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 07:38:29 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1q6Txs-0003Oo-4M
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 06:31:02 -0400
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-1a28817f70bso5781757fac.2
- for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 03:30:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <hchauhan@ventanamicro.com>)
+ id 1q6V14-0008AH-JQ
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 07:38:25 -0400
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-659f50bc9e7so565241b3a.0
+ for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 04:38:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1686047458; x=1688639458;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Pm48V2/goW6UgERl6Bf+K4AgSKDH0C6KkwTD+CGZX34=;
- b=lC82a1ctL6YfvMk2KMMjCQUQ1XKkxyp1HWQ1o+nk62V6VjO0tes5U3/xPqk/bqjddD
- d//q6q7XuxVeiRc5RMmnmshRns6odO2XCTImSp6Ha5/nexyXNB4T+zYYQKfpb/p27ktJ
- ZWdk5ZUQQ7exd3c6jPKnFpPP410WyGe0+aRdnuJpb+iSuGi1FuZpLWqSirpWSBFlpKnq
- VhRZFBDd2i0AwOGYjmgulHWF6/gThl0NBLngoVXnJUL9xX78Z+mox4RrJDvq5b0HQRZR
- lnfC9sJTyB8vQlIKxGOMU/9ORKlJVQr1mnx5k0r1wCOmIPnWHNjVmb9QRT/VxLSVSyC/
- P+QQ==
+ d=ventanamicro.com; s=google; t=1686051499; x=1688643499;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5XyhAMoDpcD2PvKAHbfJxoR+Hl1/S3rQpLL4TguLsrw=;
+ b=WygHCKizb+31xW8hgoS/pdlUB7unymdWJ5tmHj1zUz6yFPUa4K0I9dmdsCF44OjSfG
+ utT07KqVhMrqK/SeLVtGJUSXin8wvAhxeHMJWq0bCsf0sJKJpBlH7WEsT9q3EetWe/Hs
+ jte9f90P5AUQAXGKAn0uflhNPIHso5Xzvz9A9JwrgSpN286b5/g9Fc7QBO2lfHj7KdOB
+ zY1gakG2ou3TejYCnUBZfbrzPQ+i6TTot9RrJTxZTqG6NpUB5sngUnBSMDHQuLtpG0zn
+ EedKNb7OTy3pPsKw+qyTpUnHI3hADiCnjKLwhDmWDn8uhMZqIJxBhupvWmwHWPkraUmP
+ EcMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686047458; x=1688639458;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Pm48V2/goW6UgERl6Bf+K4AgSKDH0C6KkwTD+CGZX34=;
- b=C0U32rPeruDKIfpG9tvi3WcCMu0hQ+PFGUiV5AZ55hGBKSeq4d39I0zbtEaYSDwxsG
- YSHt4/Il28MorSxjOhTzh0v/YbG2wzfUAv8F3kMJt98sigrneeAv6OMJzaqNZldjiTaV
- 4w4pZzOjf1cBp6VFE5ilPP73S00mgDBUINFjHUPgxO5RiKEpGdq+rVQEwGx9raCLwI6r
- P7wreK3pbItjxn0eS3Nk0GO4foKMKyyGDo5vyFWoQV/VTOFQZ4x4jm1SXVMF2980ARy6
- pofKhSrJXF+FwRZZ6svRC8gLDsoFJ2Cru3+x/zcJc9lyiOL05n6FPtArKir7a7V7ZRqw
- n4Gg==
-X-Gm-Message-State: AC+VfDwSxBjZxEr2WuSK8009Uip8K1LixIizJ/u3D8mkQEmaOiZZdUCL
- 3oo6uBMjJ2TyCMqJfpC++B0BiQ==
-X-Google-Smtp-Source: ACHHUZ46H7+eEdq9bee1UZfmFwfaPeqviwMNxChGbiNucB+zydu2oxv4TKWZAl6ppr7dPbhL5jfwRQ==
-X-Received: by 2002:a05:6870:6287:b0:196:cd24:14e6 with SMTP id
- s7-20020a056870628700b00196cd2414e6mr2077770oan.11.1686047458461; 
- Tue, 06 Jun 2023 03:30:58 -0700 (PDT)
-Received: from [192.168.68.107] ([177.170.117.52])
+ d=1e100.net; s=20221208; t=1686051499; x=1688643499;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5XyhAMoDpcD2PvKAHbfJxoR+Hl1/S3rQpLL4TguLsrw=;
+ b=JuUXZh7nxR2SA/WjBJ2NDfl1rx6how4PFwewBDHiUiatKEzlPCyfRImI+hmeJFbUWk
+ g4/LAsGcK8qPvziv6BABHNEa4TAHCw84bUVytud6dzBExExYCnb1RjpwegaNZ6CWqpJX
+ 2TNtWyd8Q9QtqIEPaIfObXh/ruCqfSmH4QhoOykusMHGDV/rKOrxoxyveHQR1uNPFnZZ
+ 8w4+TrGdkULbK+BP15bWqsNlZFMvdwufJrqa1MFDWypu3RMZCuuPFQrtkKCNzIYKt2iJ
+ Xnnk3ghiq5K4tRFVhOQcHg0e+5VpU9f6Ug/erwio137UHRsNpn9xDjLPtA0yAjFoF+jy
+ 68Yw==
+X-Gm-Message-State: AC+VfDwZovLM+Q1pBIjobjWrSZpLYpAk5lBi0/Wiu8J+wXcjhfXaAh7A
+ 4rANvHZpMqF3B4XbvutTpbu1o3YzSSP7kYDGbdSLqw==
+X-Google-Smtp-Source: ACHHUZ5LKWe0AnYdVrUxAuNYnV2/wzxutp9uSC2SQmcL+MB0nM4Tq7F3yYLbS8hJopjEGokfsqLOzQ==
+X-Received: by 2002:a05:6a20:4292:b0:111:a0e5:d29d with SMTP id
+ o18-20020a056a20429200b00111a0e5d29dmr2706391pzj.4.1686051499538; 
+ Tue, 06 Jun 2023 04:38:19 -0700 (PDT)
+Received: from saptrishi.. ([2405:201:d019:c279:cac6:c564:908b:19a9])
  by smtp.gmail.com with ESMTPSA id
- v10-20020a056870954a00b00195e943f958sm4648563oal.1.2023.06.06.03.30.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Jun 2023 03:30:58 -0700 (PDT)
-Message-ID: <8ee427d8-3272-c9ba-23e8-78de86ad5cd0@ventanamicro.com>
-Date: Tue, 6 Jun 2023 07:30:54 -0300
+ t24-20020aa79398000000b0063799398eaesm4470360pfe.51.2023.06.06.04.38.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Jun 2023 04:38:19 -0700 (PDT)
+From: Himanshu Chauhan <hchauhan@ventanamicro.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: Himanshu Chauhan <hchauhan@ventanamicro.com>
+Subject: [PATCH] Add epmp to extensions list and rename it to smepmp
+Date: Tue,  6 Jun 2023 17:08:12 +0530
+Message-Id: <20230606113812.519723-1-hchauhan@ventanamicro.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Subject: Re: [PATCH] target/riscv/vector_helper.c: Remove the check for extra
- tail elements
-Content-Language: en-US
-To: Xiao Wang <xiao.w.wang@intel.com>, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20230606083408.3972300-1-xiao.w.wang@intel.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230606083408.3972300-1-xiao.w.wang@intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2001:4860:4864:20::32;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x32.google.com
-X-Spam_score_int: 11
-X-Spam_score: 1.1
-X-Spam_bar: +
-X-Spam_report: (1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.09,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=hchauhan@ventanamicro.com; helo=mail-pf1-x429.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,111 +91,161 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+Smepmp is a ratified extension which qemu refers to as epmp.
+Rename epmp to smepmp and add it to extension list so that
+it is added to the isa string.
 
+Signed-off-by: Himanshu Chauhan <hchauhan@ventanamicro.com>
+---
+ target/riscv/cpu.c     |  9 +++++----
+ target/riscv/cpu_cfg.h |  2 +-
+ target/riscv/csr.c     |  6 +++---
+ target/riscv/pmp.c     | 12 ++++++------
+ 4 files changed, 15 insertions(+), 14 deletions(-)
 
-On 6/6/23 05:34, Xiao Wang wrote:
-> Commit 752614cab8e6 ("target/riscv: rvv: Add tail agnostic for vector
-> load / store instructions") added an extra check for LMUL fragmentation,
-> intended for setting the "rest tail elements" in the last register for a
-> segment load insn.
-> 
-> Actually, the max_elements derived in vext_ld*() won't be a fraction of
-> vector register size, since the lmul encoded in desc is emul, which has
-> already been adjusted to 1 for LMUL fragmentation case by vext_get_emul()
-> in trans_rvv.c.inc, for ld_stride(), ld_us(), ld_index() and ldff().
-> 
-> Besides, vext_get_emul() has also taken EEW/SEW into consideration, so no
-> need to call vext_get_total_elems() which would base on the emul to derive
-> another emul, the second emul would be incorrect when esz differs from sew.
-> 
-> Thus this patch removes the check for extra tail elements.
-> 
-> Fixes: 752614cab8e6 ("target/riscv: rvv: Add tail agnostic for vector load / store instructions")
-> 
-> Signed-off-by: Xiao Wang <xiao.w.wang@intel.com>
-> ---
->   target/riscv/vector_helper.c | 21 ++++++---------------
->   1 file changed, 6 insertions(+), 15 deletions(-)
-> 
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index f4d0438988..56a79bb5fa 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -264,26 +264,17 @@ GEN_VEXT_ST_ELEM(ste_h, int16_t, H2, stw)
->   GEN_VEXT_ST_ELEM(ste_w, int32_t, H4, stl)
->   GEN_VEXT_ST_ELEM(ste_d, int64_t, H8, stq)
->   
-> -static void vext_set_tail_elems_1s(CPURISCVState *env, target_ulong vl,
-> -                                   void *vd, uint32_t desc, uint32_t nf,
-> +static void vext_set_tail_elems_1s(target_ulong vl, void *vd,
-> +                                   uint32_t desc, uint32_t nf,
->                                      uint32_t esz, uint32_t max_elems)
->   {
-> -    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-> -    uint32_t vlenb = riscv_cpu_cfg(env)->vlen >> 3;
->       uint32_t vta = vext_vta(desc);
-> -    uint32_t registers_used;
->       int k;
->   
->       for (k = 0; k < nf; ++k) {
->           vext_set_elems_1s(vd, vta, (k * max_elems + vl) * esz,
->                             (k * max_elems + max_elems) * esz);
->       }
-> -
-> -    if (nf * max_elems % total_elems != 0) {
-> -        registers_used = ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-> -        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-> -                          registers_used * vlenb);
-> -    }
->   }
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 881bddf393..cf3d1c3207 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -127,6 +127,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+     ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
+     ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
++    ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
+     ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
+     ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
+@@ -547,7 +548,7 @@ static void rv32_ibex_cpu_init(Object *obj)
+ #ifndef CONFIG_USER_ONLY
+     set_satp_mode_max_supported(cpu, VM_1_10_MBARE);
+ #endif
+-    cpu->cfg.epmp = true;
++    cpu->cfg.ext_smepmp = true;
+ 
+     /* inherited from parent obj via riscv_cpu_init() */
+     cpu->cfg.ext_ifencei = true;
+@@ -1336,12 +1337,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         return;
+     }
+ 
+-    if (cpu->cfg.epmp && !cpu->cfg.pmp) {
++    if (cpu->cfg.ext_smepmp && !cpu->cfg.pmp) {
+         /*
+          * Enhanced PMP should only be available
+          * on harts with PMP support
+          */
+-        error_setg(errp, "Invalid configuration: EPMP requires PMP support");
++        error_setg(errp, "Invalid configuration: SMEPMP requires PMP support");
+         return;
+     }
+ 
+@@ -1676,7 +1677,7 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("x-zicond", RISCVCPU, cfg.ext_zicond, false),
+ 
+     /* ePMP 0.9.3 */
+-    DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
++    DEFINE_PROP_BOOL("smepmp", RISCVCPU, cfg.ext_smepmp, false),
+     DEFINE_PROP_BOOL("x-smaia", RISCVCPU, cfg.ext_smaia, false),
+     DEFINE_PROP_BOOL("x-ssaia", RISCVCPU, cfg.ext_ssaia, false),
+ 
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index c4a627d335..d79b022e35 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -87,6 +87,7 @@ struct RISCVCPUConfig {
+     bool ext_zvfh;
+     bool ext_zvfhmin;
+     bool ext_smaia;
++    bool ext_smepmp;
+     bool ext_ssaia;
+     bool ext_sscofpmf;
+     bool rvv_ta_all_1s;
+@@ -121,7 +122,6 @@ struct RISCVCPUConfig {
+     uint16_t cboz_blocksize;
+     bool mmu;
+     bool pmp;
+-    bool epmp;
+     bool debug;
+     bool misa_w;
+ 
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 58499b5afc..d9bc591348 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -523,9 +523,9 @@ static RISCVException pmp(CPURISCVState *env, int csrno)
+     return RISCV_EXCP_ILLEGAL_INST;
+ }
+ 
+-static RISCVException epmp(CPURISCVState *env, int csrno)
++static RISCVException smepmp(CPURISCVState *env, int csrno)
+ {
+-    if (riscv_cpu_cfg(env)->epmp) {
++    if (riscv_cpu_cfg(env)->ext_smepmp) {
+         return RISCV_EXCP_NONE;
+     }
+ 
+@@ -4356,7 +4356,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_VSIPH]       = { "vsiph",       aia_hmode32, NULL, NULL, rmw_vsiph },
+ 
+     /* Physical Memory Protection */
+-    [CSR_MSECCFG]    = { "mseccfg",  epmp, read_mseccfg, write_mseccfg,
++    [CSR_MSECCFG]    = { "mseccfg", smepmp, read_mseccfg, write_mseccfg,
+                          .min_priv_ver = PRIV_VERSION_1_11_0           },
+     [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
+     [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 418738afd8..18246e1737 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -87,7 +87,7 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
+     if (pmp_index < MAX_RISCV_PMPS) {
+         bool locked = true;
+ 
+-        if (riscv_cpu_cfg(env)->epmp) {
++        if (riscv_cpu_cfg(env)->ext_smepmp) {
+             /* mseccfg.RLB is set */
+             if (MSECCFG_RLB_ISSET(env)) {
+                 locked = false;
+@@ -337,9 +337,9 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+ 
+         /*
+          * Convert the PMP permissions to match the truth table in the
+-         * ePMP spec.
++         * SMEPMP spec.
+          */
+-        const uint8_t epmp_operation =
++        const uint8_t smepmp_operation =
+             ((env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) >> 4) |
+             ((env->pmp_state.pmp[i].cfg_reg & PMP_READ) << 2) |
+             (env->pmp_state.pmp[i].cfg_reg & PMP_WRITE) |
+@@ -364,7 +364,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+                  * If mseccfg.MML Bit set, do the enhanced pmp priv check
+                  */
+                 if (mode == PRV_M) {
+-                    switch (epmp_operation) {
++                    switch (smepmp_operation) {
+                     case 0:
+                     case 1:
+                     case 4:
+@@ -395,7 +395,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+                         g_assert_not_reached();
+                     }
+                 } else {
+-                    switch (epmp_operation) {
++                    switch (smepmp_operation) {
+                     case 0:
+                     case 8:
+                     case 9:
+@@ -576,7 +576,7 @@ void mseccfg_csr_write(CPURISCVState *env, target_ulong val)
+         }
+     }
+ 
+-    if (riscv_cpu_cfg(env)->epmp) {
++    if (riscv_cpu_cfg(env)->ext_smepmp) {
+         /* Sticky bits */
+         val |= (env->mseccfg & (MSECCFG_MMWP | MSECCFG_MML));
+         if ((val ^ env->mseccfg) & (MSECCFG_MMWP | MSECCFG_MML)) {
+-- 
+2.34.1
 
-
-Can you please rebase it on top of master? This function has at least one
-change (a vta check right at the start) that isn't accounted for in this
-patch.
-
-Code LGTM otherwise. Thanks,
-
-
-Daniel
-
->   
->   /*
-> @@ -319,7 +310,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
->       }
->       env->vstart = 0;
->   
-> -    vext_set_tail_elems_1s(env, env->vl, vd, desc, nf, esz, max_elems);
-> +    vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
->   }
->   
->   #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)                        \
-> @@ -378,7 +369,7 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->       }
->       env->vstart = 0;
->   
-> -    vext_set_tail_elems_1s(env, evl, vd, desc, nf, esz, max_elems);
-> +    vext_set_tail_elems_1s(evl, vd, desc, nf, esz, max_elems);
->   }
->   
->   /*
-> @@ -499,7 +490,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
->       }
->       env->vstart = 0;
->   
-> -    vext_set_tail_elems_1s(env, env->vl, vd, desc, nf, esz, max_elems);
-> +    vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
->   }
->   
->   #define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN, LOAD_FN)                  \
-> @@ -629,7 +620,7 @@ ProbeSuccess:
->       }
->       env->vstart = 0;
->   
-> -    vext_set_tail_elems_1s(env, env->vl, vd, desc, nf, esz, max_elems);
-> +    vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
->   }
->   
->   #define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN)               \
 
