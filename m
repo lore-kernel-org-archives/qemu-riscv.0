@@ -4,80 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A12A4C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 15:56:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FCF0C77B73
+	for <qemu-riscv@archiver.kernel.org>; Tue,  6 Jun 2023 16:32:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q6Z2L-0001tj-NP; Tue, 06 Jun 2023 11:55:57 -0400
+	id 1q6Zb2-0005AP-U2; Tue, 06 Jun 2023 12:31:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1q6Z2L-0001tX-4R
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 11:55:57 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1q6Zb0-00058q-TA
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 12:31:47 -0400
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1q6Z2J-0004Gi-7w
- for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 11:55:56 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-514859f3ffbso8925913a12.1
- for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 08:55:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1q6Zaz-0003A7-2n
+ for qemu-riscv@nongnu.org; Tue, 06 Jun 2023 12:31:46 -0400
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1b0478487c3so28244595ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 06 Jun 2023 09:31:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686066953; x=1688658953;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wnVLBSJrJkvKjIoaRlPQx57i/kQrByoAelFL0S3N/cY=;
- b=k30HaP4JXPvU/eRC1ECNiaPxM1Bm+1LcHRVwTB/IFrUhkJdo17OaN/81hid26PuGd0
- JczfFnWeXsqdIpgh+jULOs6ZsHoL0CXciGM82L3f+9FfNCAQw6a/5UYzvup72VSGW7ER
- s9rDwNCcZK7LEO1MznYiK3V9IzvuGreX6pXRuhWbZ7AEQiew3Tf6mWfshVFBP88eGmUY
- XzNBVrwHK155n7e5OQgbMAo8x4MPxtWdvFE+ZUZMFfBxOTNmVZcyrOntXJvNKTRnRejU
- CzoCJtRSOfTMWPXasgT8K585rtIFaeqzqCxWTRLS82JwS7W4qdizUDHBkrZRrvp1nYVV
- IEvQ==
+ d=linaro.org; s=google; t=1686069103; x=1688661103;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=CCSZOC3ace9mgIPiCLtuSJqT1KrCOoXa+Sft6OEDda0=;
+ b=wcLupTDwB2WAZsscImkXoR6/nE2UCz6/svrkcLEob5Oa9SCKK+zDA0W3LMFIMcXBhO
+ hHUVMxUDnQ9EwWiFkiDX3Cldo7R1h9bFctvsiadHmd99TIdJF3lkMvEbWi4vB/BrN9d8
+ 9lykGd1OxqctDPgOfL5zao1zOcMFUetIsc1R5l3AmAsz/Ma5R3L9CiFaDnq9+KNaLVU4
+ Gawv8/brAtNSNT0v22LNsQesjtCuyNxg52qnGTEohGnGiESInH4alGdH3mvsHj4XGn7C
+ s3sxFsd6V3NdwxKVD2rKXOSTwRIK7simShiZ8WWcJ1fj3hMzSPSad1tpNyWR2YCcymeV
+ fziQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686066953; x=1688658953;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wnVLBSJrJkvKjIoaRlPQx57i/kQrByoAelFL0S3N/cY=;
- b=WSIv5EywYE+W8n8bAMYWrREESOJvl4aoh1JWjvoYNa11wJH4kwnvJ5T43jOY/SMnSU
- NBOnA1lPRs1/Vs+LN6Ypvl7lUltaNFxe207H4FAYsfDwAIOY+Uz1R3vm7HeWVlAeJQRW
- Tf/ZXag04N61dDN3yXHPmjtQgxYz7JILb524sHjhtT/fEflwMU9XRkPL1U5fAOLtcZ3z
- mrYfnBQxphSJhhPcitjzehTKSNExWrgXcOTCoPm8SHqSG/Pcb3DCmQLWFoWvYK8T1Ei1
- hunwB+qj/dhCBVQKnlzbkQ5zWdKGA/Sy6v9lvY8wQ4R4/bUM6elfBEF5AII94ONXOd1O
- ZWyg==
-X-Gm-Message-State: AC+VfDygo9E/eDOiYUxvYil5Xezu5zJH69m1+dk3ag4Mw469Alkhd+TE
- JYHT8x6bV99JPs3Bz3H9cNpTNlFGDgOO7AE5UVe9dA==
-X-Google-Smtp-Source: ACHHUZ4R3cC9mrbWs7pTCm1g1yhZ0xmDKHWDO7ayRZ9UpBeqixj75gbrIEtOK+fSUdxb+QpFlVA83ULTN3SF+ikxeXM=
-X-Received: by 2002:aa7:dcd7:0:b0:50d:b16d:d21 with SMTP id
- w23-20020aa7dcd7000000b0050db16d0d21mr2089415edu.3.1686066953660; Tue, 06 Jun
- 2023 08:55:53 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1686069103; x=1688661103;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=CCSZOC3ace9mgIPiCLtuSJqT1KrCOoXa+Sft6OEDda0=;
+ b=TKbpXYBqUe1yATpvNAPn2ox7evq5GQKCFWbx1CkFU+7mAxq5OSD7yGnEUM6Ts4+wZT
+ 7W12kehM/FbuAwVHjPIp3ANHW0Mmq21eOCTyTNIonaGyGMRTgU7iEgFcpb1N2V01T6JG
+ oc0sC4N8FUkEqAIML8dCShkOjBO21x8auJs6jGyCL2y6Scu0CK+9YdumrI1+uUaRsLkb
+ Slr9jZNHFBQqNBK3lcLfvCuXHHmolryald+cl4TBqxUZb1pXogKJc53gsCByNx2WOXkc
+ lXIQ1k0vWVQGJ/nOfozuQnUBrQsTYxyLU5jEj2AoDSyccTG8A28Wks1gZf9Auxz9BTVl
+ /+Hg==
+X-Gm-Message-State: AC+VfDz1i0c3NCFXK3cIjz0s30hZ5UAaQgaxvIeeNvCuKJdkI/MyIUF5
+ S9UW7V3OyJKNDt5wwK1tgdsvLw==
+X-Google-Smtp-Source: ACHHUZ4aJf+qqsz6XcGRR2polUHRTRIviQyHSI9K6uDIB44fWTtJBvQyfF/pRMTuv3xQ9d5FQRMr9A==
+X-Received: by 2002:a17:902:7c92:b0:1ac:8be5:8787 with SMTP id
+ y18-20020a1709027c9200b001ac8be58787mr1060626pll.21.1686069103125; 
+ Tue, 06 Jun 2023 09:31:43 -0700 (PDT)
+Received: from ?IPV6:2602:ae:1598:4c01:b7fa:ce59:1445:805a?
+ ([2602:ae:1598:4c01:b7fa:ce59:1445:805a])
+ by smtp.gmail.com with ESMTPSA id
+ a17-20020a170902ee9100b001ab1b7bae5asm8777394pld.184.2023.06.06.09.31.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 Jun 2023 09:31:42 -0700 (PDT)
+Message-ID: <5642acfc-46b3-c471-f8e9-1dbcc512e61a@linaro.org>
+Date: Tue, 6 Jun 2023 09:31:40 -0700
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH 2/5] target/arm: Rename helper template headers as '.h.inc'
+Content-Language: en-US
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-arm@nongnu.org
 References: <20230606141252.95032-1-philmd@linaro.org>
  <20230606141252.95032-3-philmd@linaro.org>
  <9ff0f082-1b04-8bf2-6a97-1e9220aa4509@linaro.org>
  <f991008b-015b-dcce-fe00-838a6ddefde5@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
 In-Reply-To: <f991008b-015b-dcce-fe00-838a6ddefde5@linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 6 Jun 2023 16:55:42 +0100
-Message-ID: <CAFEAcA-Cy=fG0PZs2_O0cUrFHw65Tw3EzDEWPAKFg3ffs0a_FQ@mail.gmail.com>
-Subject: Re: [PATCH 2/5] target/arm: Rename helper template headers as '.h.inc'
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org, 
- qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, 
- qemu-arm@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x533.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x635.google.com
+X-Spam_score_int: 3
+X-Spam_score: 0.3
+X-Spam_bar: /
+X-Spam_report: (0.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.094,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ SUSPICIOUS_RECIPS=2.51,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,48 +103,13 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 6 Jun 2023 at 16:50, Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org=
-> wrote:
->
-> On 6/6/23 16:37, Richard Henderson wrote:
-> > On 6/6/23 07:12, Philippe Mathieu-Daud=C3=A9 wrote:
-> >> Since commit 139c1837db ("meson: rename included C source files
-> >> to .c.inc"), QEMU standard procedure for included C files is to
-> >> use *.c.inc.
-> >>
-> >> Besides, since commit 6a0057aa22 ("docs/devel: make a statement
-> >> about includes") this is documented as the Coding Style:
-> >>
-> >>    If you do use template header files they should be named with
-> >>    the ``.c.inc`` or ``.h.inc`` suffix to make it clear they are
-> >>    being included for expansion.
-> >>
-> >> Therefore rename the included templates as '.h.inc'.
-> >>
-> >> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> >
-> > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> >
-> > FYI, after yesterday's tcg pr, we can do more than this.  These
-> > fragments no longer have to be all included into one common helper.h.
-> > Each translate-foo.c can include only the helper-foo.h.inc bits that
-> > they need, and the bits need not be visible to the rest of the front en=
-d.
->
-> Don't we need foo fully converted to decodetree first? Otherwise
-> generic translate code can call foo helpers, so needs their prototype
-> declaration.
->
+On 6/6/23 08:49, Philippe Mathieu-Daudé wrote:
 > For example in translate-a64.c handle_msr_i(SVCR) calls
 > gen_helper_set_svcr() which is declared in helper-sme.h.
 
-That's unrelated to decodetree -- the decodetree conversion for
-that instruction still has code in translate-a64.c which
-calls gen_helper_set_svcr(), it's just in a different function.
+The placement in helper-sme.h was not done with consideration as to which compilation 
+units might need to use it, since that wasn't a thing at the time.
 
-https://patchew.org/QEMU/20230602155223.2040685-1-peter.maydell@linaro.org/=
-20230602155223.2040685-6-peter.maydell@linaro.org/
 
-thanks
--- PMM
+r~
 
