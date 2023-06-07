@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D1A1C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Jun 2023 19:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D7DAC7EE23
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Jun 2023 20:38:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q6zJK-00045A-5G; Wed, 07 Jun 2023 15:59:14 -0400
+	id 1q6zuI-0001sW-L8; Wed, 07 Jun 2023 16:37:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1q6zJJ-00044a-44
- for qemu-riscv@nongnu.org; Wed, 07 Jun 2023 15:59:13 -0400
-Received: from mail-oi1-x22a.google.com ([2607:f8b0:4864:20::22a])
+ id 1q6zuG-0001rY-NG
+ for qemu-riscv@nongnu.org; Wed, 07 Jun 2023 16:37:25 -0400
+Received: from mail-oo1-xc29.google.com ([2607:f8b0:4864:20::c29])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1q6zJF-0006lw-0W
- for qemu-riscv@nongnu.org; Wed, 07 Jun 2023 15:59:12 -0400
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-38ede2e0e69so5006987b6e.2
- for <qemu-riscv@nongnu.org>; Wed, 07 Jun 2023 12:59:08 -0700 (PDT)
+ id 1q6zuE-0006mc-Ig
+ for qemu-riscv@nongnu.org; Wed, 07 Jun 2023 16:37:24 -0400
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-55b069a7cf4so1844521eaf.3
+ for <qemu-riscv@nongnu.org>; Wed, 07 Jun 2023 13:37:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1686167947; x=1688759947;
+ d=ventanamicro.com; s=google; t=1686170239; x=1688762239;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=mhgmzQt8w0PITpRWMgDJ2rxugHkfaO7sJTwKaiss8GI=;
- b=XvSTqCQm8ReknOxbr/6xYrxXbsTZDD52JXYVouiIml0HG0QJMSN4nm1DHrZ6hwgOFM
- /fQrPcBPri4kiihagB+qeEbyS6ue56WN8QGH0Z3op1t4X0AulXQ/mfDt78iSbT1fn2x6
- W+hUPXuO79c+RiEuoktI3LsVjSKw+RXKz1PfQ329CZ70rcJjp9ZM1NYWSYxcD6K+E3rN
- xcWU0HKJtiw4tpXbEpCATiCvnSDXN4YKJkweZPCHraPiwFXmDNNrtI9QEsZuFSxeuZFL
- xG8kAqVNNMPCQR6MJJ361NZnPhvP3tad7INQpUDelgbeGOIXLdDkvNCRouoH+lAWI6Om
- cNeA==
+ bh=jV1JIUQvQQ1YUjEO0x2SgDRsOmFkbrDHJ18fm8TtVqo=;
+ b=D1VN4t+o35uaHYrK0LMl0XehtiVsg0bnl8PJXHLEEvyCdd68i2JiV9qN99l89hCwFX
+ uIVS6thlq+F4PahdJSJk3q7wYoruPAOfmTWetr547eZxsMdZIGLseNi+REshK5Krk/+D
+ 77AMRApx2RogMKsRdxdRrt3ZdNKoRbLvOjTQe/+g4iCu4wYohDNav5/3IT/XiAhW3BKS
+ HyY5hEn70hy8DUig3hLFKW2bY+cmo9BrFhVCpBukm+iyuoa/ivYfm8Arm7NaugrFf9is
+ jWr4jzN1UCXwA9tBJDGCxLhij3rrtsdIhJt8PZ8WzQmWh+hHIBTv0L8jUDSNMeqLYE21
+ aLqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686167947; x=1688759947;
+ d=1e100.net; s=20221208; t=1686170239; x=1688762239;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mhgmzQt8w0PITpRWMgDJ2rxugHkfaO7sJTwKaiss8GI=;
- b=HyR03Lz+5JdXFFt04vy0IiMs5jkBB6ppNWDi3LlcMh1DHb5ylv/PDkixBLyLp2PiQ2
- wMeEEV8I5q4oFu+XLxWC0cMLnlEKEyKX0JndTchCwfc1MSne2uvatlvws2VPIzbb6gDR
- Ms74sk00i/DlUmDgH25npyxmn4OGuT90EM0DtgnBpTg4Kn7hfEa59xRYzTTIOD6H/6eN
- o/ahqfUIIsibPmp/JL4EzEhtCAMb+2AQYlvpGn1B75ajM7EwvpiX/9WNiJj02UxNsice
- XLzNWTOK6a4wAst/+Iy2OecLxs7zU5NVmjOTJOCHClH7PAGUL5FmNI4MHkZRB3xLR2jL
- Nqgg==
-X-Gm-Message-State: AC+VfDx3p8rbL880AsTeJlqCeS3Rpyau3ZZH1mlC5F+DIe0cpamIuIIS
- UhPF78vF3da2nOsZCvgVruNoRg==
-X-Google-Smtp-Source: ACHHUZ4aA5LGk2DB4phbPYPJ/dZRVMhnnmpIz7Cic1fJ6c1ZrCNhgXUg3FKKUJdQ5s5ek61gCpfQfQ==
-X-Received: by 2002:aca:2219:0:b0:397:fa01:cd4 with SMTP id
- b25-20020aca2219000000b00397fa010cd4mr3976460oic.34.1686167947457; 
- Wed, 07 Jun 2023 12:59:07 -0700 (PDT)
+ bh=jV1JIUQvQQ1YUjEO0x2SgDRsOmFkbrDHJ18fm8TtVqo=;
+ b=MnFVQ3Tq6AN1vVPDvx6xmTl4EBJt3Og0l1ZLVoeBu0rQPUZup92o7ZyNcvR8XwwfSQ
+ 5/kk1wnChfXhe/JzIP9I4E7EujN8FQT4jLuzl4BkchHTq3FkoGGf5Wcb/4Ig/uzGMCSA
+ T3JveOzlDQ4K71BNS9UVLkO5hn5oSpNMVpUNz4p5lHQdtz+cbQK+6g6p/rAI9YE2juiO
+ HEw1JdmBog32Ee7OAQrfMd6nk5ngNf2zSfI4KAyOsh9gFhsprCRQvM1fYkWCHB8sVzi6
+ kFgBW4H0xGrPTxAn27YU01N7/HN4QwxtUbhkwe0aEbFOUjWtYEqe4pmrUYnQfNJq2y5V
+ FRhg==
+X-Gm-Message-State: AC+VfDxyn6s/t7NCUxlSJ5bA7QGg9ZIJ8mf/oO8DXo2wYyQGFwuJJToO
+ gvx6LWK9pFv3fyRsw2flGDXzrw==
+X-Google-Smtp-Source: ACHHUZ43O3nIGIg1tbAanVjO2gV7hjG00dpHU8FkWXl8hG6VpQMl8hnEaGUnLRYdhSb8TULlEq0+NQ==
+X-Received: by 2002:a4a:ca05:0:b0:558:cb7e:c52e with SMTP id
+ w5-20020a4aca05000000b00558cb7ec52emr4955480ooq.8.1686170239571; 
+ Wed, 07 Jun 2023 13:37:19 -0700 (PDT)
 Received: from [192.168.68.107] ([177.170.117.52])
  by smtp.gmail.com with ESMTPSA id
- v205-20020aca61d6000000b0039aa9c89fe8sm4354235oib.43.2023.06.07.12.59.05
+ fa21-20020a0568082a5500b003896e31867esm1121620oib.49.2023.06.07.13.37.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 07 Jun 2023 12:59:07 -0700 (PDT)
-Message-ID: <fb74c3a0-9762-92c2-4a1c-9544af822c5a@ventanamicro.com>
-Date: Wed, 7 Jun 2023 16:59:02 -0300
+ Wed, 07 Jun 2023 13:37:19 -0700 (PDT)
+Message-ID: <34f72e57-3b3f-7da4-1fc9-8af464ee6c99@ventanamicro.com>
+Date: Wed, 7 Jun 2023 17:37:16 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
-Subject: Re: [PATCH 13/16] target/riscv/kvm.c: add multi-letter extension KVM
- properties
+Subject: Re: [PATCH 16/16] target/riscv/kvm.c: read/write
+ (cbom|cboz)_blocksize in KVM
 Content-Language: en-US
 To: Andrew Jones <ajones@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com,
  palmer@rivosinc.com
 References: <20230530194623.272652-1-dbarboza@ventanamicro.com>
- <20230530194623.272652-14-dbarboza@ventanamicro.com>
- <20230607-9a499522ac7de9ebcf0c8699@orel>
+ <20230530194623.272652-17-dbarboza@ventanamicro.com>
+ <20230607-95d85b924e7d8696ba1eac6e@orel>
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20230607-9a499522ac7de9ebcf0c8699@orel>
+In-Reply-To: <20230607-95d85b924e7d8696ba1eac6e@orel>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c29;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc29.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -103,244 +103,202 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 6/7/23 08:48, Andrew Jones wrote:
-> On Tue, May 30, 2023 at 04:46:20PM -0300, Daniel Henrique Barboza wrote:
->> Let's add KVM user properties for the multi-letter extensions that KVM
->> currently supports: zicbom, zicboz, zihintpause, zbb, ssaia, sstc,
->> svinval and svpbmt.
+On 6/7/23 10:01, Andrew Jones wrote:
+> On Tue, May 30, 2023 at 04:46:23PM -0300, Daniel Henrique Barboza wrote:
+>> If we don't set a proper cbom_blocksize|cboz_blocksize in the FDT the
+>> Linux Kernel will fail to detect the availability of the CBOM/CBOZ
+>> extensions, regardless of the contents of the 'riscv,isa' DT prop.
 >>
->> As with the recently added MISA properties we're also going to add a
->> 'user_set' flag in each of them. The flag will be set only if the user
->> chose an option that's different from the host and will require extra
->> handling from the KVM driver.
+>> The FDT is being written using the cpu->cfg.cbom|z_blocksize attributes,
+>> so let's use them. We'll also expose them as user flags like it is
+>> already done with TCG.
 >>
->> However, multi-letter CPUs have more cases to cover than MISA
->> extensions, so we're adding an extra 'supported' flag as well. This flag
->> will reflect if a given extension is supported by KVM, i.e. KVM knows
->> how to handle it. This is determined during KVM extension discovery in
->> kvm_riscv_init_multiext_cfg(), where we test for EINVAL errors. Any
->> other error different from EINVAL will cause an abort.
-> 
-> I wish that was ENOENT, but I suppose that ship sailed.
-> 
+>> However, in contrast with what happens with TCG, the user is not able to
+>> set any value that is different from the 'host' value. And KVM can be
+>> harsh dealing with it: a ENOTSUPP can be thrown for the mere attempt of
+>> executing kvm_set_one_reg() for these 2 regs.
 >>
->> The 'supported' flag will then be used later on to give an exception for
->> users that are disabling multi-letter extensions that are unknown to
->> KVM.
+>> We'll read the 'host' value and use it to set these values, regardless of
+>> user choice. If the user happened to chose a different value, error out.
+>> We'll also error out if we failed to read the block sizes.
 >>
 >> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 >> ---
->>   target/riscv/kvm.c | 136 +++++++++++++++++++++++++++++++++++++++++++++
->>   1 file changed, 136 insertions(+)
+>>   target/riscv/kvm.c | 94 +++++++++++++++++++++++++++++++++++++++++++++-
+>>   1 file changed, 92 insertions(+), 2 deletions(-)
 >>
 >> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
->> index bb1dafe263..b4193a10d8 100644
+>> index 92b99fe261..7789d835e5 100644
 >> --- a/target/riscv/kvm.c
 >> +++ b/target/riscv/kvm.c
->> @@ -202,6 +202,99 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *cpu, CPUState *cs)
->>       }
->>   }
->>   
->> +typedef struct RISCVCPUMultiExtConfig {
->> +    const char *name;
-> 
-> No description? I'd prefer we use the same cfg struct for single-letter
-> and multi-letter extensions. We can use a union to overlap cpu_cfg_offset
-> and misa_bit.
-
-multi-letter extensions don't have a 'description' field in TCG. Nothing
-prevents us from adding for KVM though.
-
-And yes, I'll create a single struct to handle both MISA and multi-letter
-extensions. We just need to have different getters/setters for each
-category.
-
-> 
->> +    int kvm_reg_id;
->> +    int cpu_cfg_offset;
->> +    bool supported;
->> +    bool user_set;
->> +} RISCVCPUMultiExtConfig;
->> +
->> +#define CPUCFG(_prop) offsetof(struct RISCVCPUConfig, _prop)
->> +
->> +/*
->> + * KVM ISA Multi-letter extensions. We care about the order
->> + * since it'll be used to create the ISA string later on.
->> + * We follow the same ordering rules of isa_edata_arr[]
->> + * from target/riscv/cpu.c.
->> + */
->> +static RISCVCPUMultiExtConfig kvm_multi_ext_cfgs[] = {
->> +    {.name = "zicbom", .kvm_reg_id = KVM_RISCV_ISA_EXT_ZICBOM,
->> +     .cpu_cfg_offset = CPUCFG(ext_icbom)},
->> +    {.name = "zicboz", .kvm_reg_id = KVM_RISCV_ISA_EXT_ZICBOZ,
->> +     .cpu_cfg_offset = CPUCFG(ext_icboz)},
->> +    {.name = "zihintpause", .kvm_reg_id = KVM_RISCV_ISA_EXT_ZIHINTPAUSE,
->> +     .cpu_cfg_offset = CPUCFG(ext_zihintpause)},
->> +    {.name = "zbb", .kvm_reg_id = KVM_RISCV_ISA_EXT_ZBB,
->> +     .cpu_cfg_offset = CPUCFG(ext_zbb)},
->> +    {.name = "ssaia", .kvm_reg_id = KVM_RISCV_ISA_EXT_SSAIA,
->> +     .cpu_cfg_offset = CPUCFG(ext_ssaia)},
->> +    {.name = "sstc", .kvm_reg_id = KVM_RISCV_ISA_EXT_SSTC,
->> +     .cpu_cfg_offset = CPUCFG(ext_sstc)},
->> +    {.name = "svinval", .kvm_reg_id = KVM_RISCV_ISA_EXT_SVINVAL,
->> +     .cpu_cfg_offset = CPUCFG(ext_svinval)},
->> +    {.name = "svpbmt", .kvm_reg_id = KVM_RISCV_ISA_EXT_SVPBMT,
->> +     .cpu_cfg_offset = CPUCFG(ext_svpbmt)},
-> 
-> As pointed out in the last patch, it'd be nice to share names (and
-> descriptions) with TCG.
-
-I believe it's ok to do that for the MISA bits since it's a handful of entries.
-
-But I'd rather deal with a little code duplication for multi-letter extensions
-for now. We have 73 multi-letters extensions in TCG. Adding a description for
-each one, change how the properties are being created and so on seems too
-much for this series.
-
-> 
->> +};
->> +
->> +static void kvm_cpu_cfg_set(RISCVCPU *cpu, RISCVCPUMultiExtConfig *multi_ext,
->> +                            uint32_t val)
->> +{
->> +    int cpu_cfg_offset = multi_ext->cpu_cfg_offset;
->> +    bool *ext_enabled = (void *)&cpu->cfg + cpu_cfg_offset;
->> +
->> +    *ext_enabled = val;
->> +}
->> +
->> +static uint32_t kvm_cpu_cfg_get(RISCVCPU *cpu,
->> +                                RISCVCPUMultiExtConfig *multi_ext)
->> +{
->> +    int cpu_cfg_offset = multi_ext->cpu_cfg_offset;
->> +    bool *ext_enabled = (void *)&cpu->cfg + cpu_cfg_offset;
->> +
->> +    return *ext_enabled;
->> +}
->> +
->> +static void kvm_cpu_set_multi_ext_cfg(Object *obj, Visitor *v,
->> +                                      const char *name,
->> +                                      void *opaque, Error **errp)
->> +{
->> +    RISCVCPUMultiExtConfig *multi_ext_cfg = opaque;
->> +    RISCVCPU *cpu = RISCV_CPU(obj);
->> +    bool value, host_val;
->> +
->> +    if (!visit_type_bool(v, name, &value, errp)) {
->> +        return;
->> +    }
->> +
->> +    host_val = kvm_cpu_cfg_get(cpu, multi_ext_cfg);
->> +
->> +    /*
->> +     * Ignore if the user is setting the same value
->> +     * as the host.
->> +     */
->> +    if (value == host_val) {
->> +        return;
->> +    }
->> +
->> +    if (!multi_ext_cfg->supported) {
->> +        /*
->> +         * Error out if the user is trying to enable an
->> +         * extension that KVM doesn't support. Ignore
->> +         * option otherwise.
->> +         */
->> +        if (value) {
->> +            error_setg(errp, "KVM does not support disabling extension %s",
->> +                       multi_ext_cfg->name);
->> +        }
->> +
->> +        return;
->> +    }
->> +
->> +    multi_ext_cfg->user_set = true;
->> +    kvm_cpu_cfg_set(cpu, multi_ext_cfg, value);
->> +}
->> +
->>   static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
+>> @@ -241,8 +241,16 @@ static void kvm_cpu_cfg_set(RISCVCPU *cpu, RISCVCPUMultiExtConfig *multi_ext,
+>>                               uint32_t val)
 >>   {
->>       int i;
->> @@ -216,6 +309,15 @@ static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
->>           object_property_set_description(cpu_obj, misa_cfg->name,
->>                                           misa_cfg->description);
->>       }
->> +
->> +    for (i = 0; i < ARRAY_SIZE(kvm_multi_ext_cfgs); i++) {
->> +        RISCVCPUMultiExtConfig *multi_cfg = &kvm_multi_ext_cfgs[i];
->> +
->> +        object_property_add(cpu_obj, multi_cfg->name, "bool",
->> +                            NULL,
+>>       int cpu_cfg_offset = multi_ext->cpu_cfg_offset;
+>> -    bool *ext_enabled = (void *)&cpu->cfg + cpu_cfg_offset;
+>> +    uint16_t *blocksize;
+>> +    bool *ext_enabled;
+>>   
+>> +    if (strstr(multi_ext->name, "blocksize")) {
+>> +        blocksize = (void *)&cpu->cfg + cpu_cfg_offset;
+>> +        *blocksize = val;
+>> +        return;
+>> +    }
 > 
-> You have a getter function, so we might as well set it here, no?
+> We should add 'get' accessors to each property and then always use those
+> accessors to get the values. Trying to share a single accessor across
+> properties, using the names to determine their sizes, is basically trying
+> to reinvent 'get' without the function pointer.
 
-Yep, might as well set the get() callback in the property.
+To be honest we don't need all this machinery for the blocksize attributes.
+We check them only in a few cases and could access them directly via cpu->cfg.
 
-
-Thanks,
+I'll change this up in v2.
 
 
 Daniel
 
 > 
->> +                            kvm_cpu_set_multi_ext_cfg,
->> +                            NULL, multi_cfg);
+>> +
+>> +    ext_enabled = (void *)&cpu->cfg + cpu_cfg_offset;
+>>       *ext_enabled = val;
+>>   }
+>>   
+>> @@ -250,8 +258,15 @@ static uint32_t kvm_cpu_cfg_get(RISCVCPU *cpu,
+>>                                   RISCVCPUMultiExtConfig *multi_ext)
+>>   {
+>>       int cpu_cfg_offset = multi_ext->cpu_cfg_offset;
+>> -    bool *ext_enabled = (void *)&cpu->cfg + cpu_cfg_offset;
+>> +    uint16_t *blocksize;
+>> +    bool *ext_enabled;
+>>   
+>> +    if (strstr(multi_ext->name, "blocksize")) {
+>> +        blocksize = (void *)&cpu->cfg + cpu_cfg_offset;
+>> +        return *blocksize;
 >> +    }
+>> +
+>> +    ext_enabled = (void *)&cpu->cfg + cpu_cfg_offset;
+>>       return *ext_enabled;
 >>   }
 >>   
->>   static int kvm_riscv_get_regs_core(CPUState *cs)
->> @@ -531,6 +633,39 @@ static void kvm_riscv_init_misa_ext_mask(RISCVCPU *cpu,
->>       env->misa_ext = env->misa_ext_mask;
+>> @@ -295,6 +310,33 @@ static void kvm_cpu_set_multi_ext_cfg(Object *obj, Visitor *v,
+>>       kvm_cpu_cfg_set(cpu, multi_ext_cfg, value);
 >>   }
 >>   
->> +static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
+>> +/*
+>> + * We'll avoid extra complexity by always assuming this
+>> + * array order with cbom first.
+>> + */
+>> +static RISCVCPUMultiExtConfig kvm_cbomz_blksize_cfgs[] = {
+> 
+> Hmm, yet another cfg struct type, and this one is specific to block sizes.
+> I'd rather we find a way to keep cfg definitions more general and then use
+> the same struct for all.
+> 
+>> +    {.name = "cbom_blocksize", .cpu_cfg_offset = CPUCFG(cbom_blocksize),
+>> +     .kvm_reg_id = KVM_REG_RISCV_CONFIG_REG(zicbom_block_size)},
+>> +    {.name = "cboz_blocksize", .cpu_cfg_offset = CPUCFG(cboz_blocksize),
+>> +     .kvm_reg_id = KVM_REG_RISCV_CONFIG_REG(zicboz_block_size)},
+>> +};
+>> +
+>> +static void kvm_cpu_set_cbomz_blksize(Object *obj, Visitor *v,
+>> +                                      const char *name,
+>> +                                      void *opaque, Error **errp)
+>> +{
+>> +    RISCVCPUMultiExtConfig *cbomz_size_cfg = opaque;
+>> +    RISCVCPU *cpu = RISCV_CPU(obj);
+>> +    uint16_t value;
+>> +
+>> +    if (!visit_type_uint16(v, name, &value, errp)) {
+>> +        return;
+>> +    }
+>> +
+>> +    cbomz_size_cfg->user_set = true;
+>> +    kvm_cpu_cfg_set(cpu, cbomz_size_cfg, value);
+>> +}
+>> +
+>>   static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
+>>   {
+>>       CPURISCVState *env = &cpu->env;
+>> @@ -321,6 +363,45 @@ static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
+>>       }
+>>   }
+>>   
+>> +static void kvm_riscv_finalize_features(RISCVCPU *cpu, CPUState *cs)
 >> +{
 >> +    CPURISCVState *env = &cpu->env;
->> +    uint64_t val;
+>> +    uint64_t id, reg;
 >> +    int i, ret;
 >> +
->> +    for (i = 0; i < ARRAY_SIZE(kvm_multi_ext_cfgs); i++) {
->> +        RISCVCPUMultiExtConfig *multi_ext_cfg = &kvm_multi_ext_cfgs[i];
->> +        struct kvm_one_reg reg;
+>> +    for (i = 0; i < ARRAY_SIZE(kvm_cbomz_blksize_cfgs); i++) {
+>> +        RISCVCPUMultiExtConfig *cbomz_cfg = &kvm_cbomz_blksize_cfgs[i];
+>> +        uint64_t host_val;
 >> +
->> +        reg.id = kvm_riscv_reg_id(env, KVM_REG_RISCV_ISA_EXT,
->> +                                  multi_ext_cfg->kvm_reg_id);
->> +        reg.addr = (uint64_t)&val;
->> +        ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
->> +        if (ret != 0) {
->> +            if (ret == -EINVAL) {
->> +                /* Silently default to 'false' if KVM does not support it. */
->> +                multi_ext_cfg->supported = false;
->> +                val = false;
->> +            } else {
->> +                error_report("Unable to read ISA_EXT KVM register %s, "
->> +                             "error %d", multi_ext_cfg->name, ret);
->> +                kvm_riscv_destroy_scratch_vcpu(kvmcpu);
+>> +        if ((i == 0 && !cpu->cfg.ext_icbom) ||
+>> +            (i == 1 && !cpu->cfg.ext_icboz)) {
 > 
-> I don't think we usually bother cleaning up when exiting, we just let exit
-> do it, but OK.
+> Rather than the required array order and this magic index stuff, we can
+> just save the offset of the ext_* boolean in the cfg structure, like we
+> already do for the *_blocksize, and then check it here.
 > 
->> +                exit(EXIT_FAILURE);
->> +            }
->> +        } else {
->> +            multi_ext_cfg->supported = true;
+> Also, I think we want to warn here if cbomz_cfg->user_set is set. If the
+> user set some block size, but disabled the extension, then they should be
+> told that the block size will be ignored. Letting them know it's ignored
+> is particularly good to do since we're not validating it. I.e. the user
+> shouldn't assume the block size they put there is worth anything at all.
+> 
+>> +            continue;
 >> +        }
 >> +
->> +        kvm_cpu_cfg_set(cpu, multi_ext_cfg, val);
+>> +        id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
+>> +                              cbomz_cfg->kvm_reg_id);
+>> +
+>> +        ret = kvm_get_one_reg(cs, id, &host_val);
+>> +        if (ret != 0) {
+>> +            error_report("Unable to read KVM reg val %s, error %d",
+>> +                         cbomz_cfg->name, ret);
+>> +            exit(EXIT_FAILURE);
+>> +        }
+>> +
+>> +        if (cbomz_cfg->user_set) {
+>> +            reg = kvm_cpu_cfg_get(cpu, cbomz_cfg);
+>> +            if (reg != host_val) {
+>> +                error_report("Unable to set %s to a different value than "
+>> +                             "the host (%lu)",
+>> +                             cbomz_cfg->name, host_val);
+>> +                exit(EXIT_FAILURE);
+>> +            }
+>> +        }
+>> +
+>> +        kvm_cpu_cfg_set(cpu, cbomz_cfg, host_val);
 >> +    }
 >> +}
 >> +
->>   void kvm_riscv_init_user_properties(Object *cpu_obj)
+>>   static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
 >>   {
->>       RISCVCPU *cpu = RISCV_CPU(cpu_obj);
->> @@ -543,6 +678,7 @@ void kvm_riscv_init_user_properties(Object *cpu_obj)
->>       kvm_riscv_add_cpu_user_properties(cpu_obj);
->>       kvm_riscv_init_machine_ids(cpu, &kvmcpu);
->>       kvm_riscv_init_misa_ext_mask(cpu, &kvmcpu);
->> +    kvm_riscv_init_multiext_cfg(cpu, &kvmcpu);
+>>       int i;
+>> @@ -344,6 +425,14 @@ static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
+>>                               kvm_cpu_set_multi_ext_cfg,
+>>                               NULL, multi_cfg);
+>>       }
+>> +
+>> +    for (i = 0; i < ARRAY_SIZE(kvm_cbomz_blksize_cfgs); i++) {
+>> +        RISCVCPUMultiExtConfig *cbomz_size_cfg = &kvm_cbomz_blksize_cfgs[i];
+>> +
+>> +        object_property_add(cpu_obj, cbomz_size_cfg->name, "uint16",
+>> +                            NULL, kvm_cpu_set_cbomz_blksize,
+>> +                            NULL, cbomz_size_cfg);
+>> +    }
+>>   }
 >>   
->>       kvm_riscv_destroy_scratch_vcpu(&kvmcpu);
+>>   void kvm_riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str,
+>> @@ -856,6 +945,7 @@ int kvm_arch_init_vcpu(CPUState *cs)
+>>   
+>>       kvm_riscv_update_cpu_misa_ext(cpu, cs);
+>>       kvm_riscv_update_cpu_cfg_isa_ext(cpu, cs);
+>> +    kvm_riscv_finalize_features(cpu, cs);
+>>   
+>>       return ret;
 >>   }
 >> -- 
 >> 2.40.1
