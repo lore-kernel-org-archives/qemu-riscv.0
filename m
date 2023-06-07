@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88CF3C77B7A
-	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Jun 2023 13:01:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E05EC7EE29
+	for <qemu-riscv@archiver.kernel.org>; Wed,  7 Jun 2023 13:33:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1q6snJ-0007M0-KW; Wed, 07 Jun 2023 09:01:45 -0400
+	id 1q6tHk-0006mV-Rs; Wed, 07 Jun 2023 09:33:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1q6snB-0007Kg-6o
- for qemu-riscv@nongnu.org; Wed, 07 Jun 2023 09:01:43 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1q6tHi-0006lm-2w
+ for qemu-riscv@nongnu.org; Wed, 07 Jun 2023 09:33:10 -0400
+Received: from mail-oa1-x32.google.com ([2001:4860:4864:20::32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1q6sn7-00060N-Tl
- for qemu-riscv@nongnu.org; Wed, 07 Jun 2023 09:01:35 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-3f7368126a6so33021795e9.0
- for <qemu-riscv@nongnu.org>; Wed, 07 Jun 2023 06:01:32 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1q6tHc-0003L1-Mj
+ for qemu-riscv@nongnu.org; Wed, 07 Jun 2023 09:33:09 -0400
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-19f454bd2c8so8143109fac.3
+ for <qemu-riscv@nongnu.org>; Wed, 07 Jun 2023 06:33:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1686142891; x=1688734891;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TeJK4NnWaOBltG8XftMyzfx5GPBD+HryeyIHH7RXrqg=;
- b=WI+KzVRt/EvAd8O1pf4OFozPTgR5xYcRaG0OejAytgJHZ5A7DAmHOdKRCIu3ta5auO
- O2tfA4l1XYSumBscMBZNMFLnfbjVu0JSuFohBG7W+iK3TKL2VShKEF88y+axRRNL6pAd
- wBrIqgzkQcSaKifOWM/KQ8EGSRhHz8v42PBrr7r/Pq77PSvpJ1IvkTOHksqrsNDzGXD3
- 6fR29+HvZbyCyNK0qJX+sKu32Oc5ndsJuqU9Gc+0zj3iTP5neio5hTWADpoofqCNENDQ
- 0nePZAntv02H08duvt2caBpdRnn9ufIPY3xmBJgaRrIh15v9Nc8RojZ7Wf/75sElj4le
- 0L6Q==
+ d=ventanamicro.com; s=google; t=1686144782; x=1688736782;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=fsKPdzX1DJqk5vQ7b+c3MWiFCu10Kts7rO4tKGv1WnE=;
+ b=RIFtH7+f/hVawEAjhboT/tjtqk4FlUbYS1xmoT+V/y035CRlGm4dNq9v8G+uCgmaiV
+ Bw8bf+i+w2hlZ+e68HoomtSNJofoUl3vUHbSmbLvxm3dZlEKiowf69xPEljoGllMgU2u
+ lI/a8ZdHWyPu+1V5Ugn0q9Fbd2h+Au//IqCug1CzHO2IPG+u2xaPQ5VFcwJItc5v1yhh
+ 9JJXbdBQmuFLFHH71d2UuV4qfHomKiuLz+60uiIzDYXKKO4PVGptEVc4iJg/gTdp0ls6
+ GOqhtAx7+1x+V7xvwT+X+HS7qdYhRfpH9ga7nFAWoqxOexXWlHD//psTEM+6huq7P3Ko
+ 3EAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686142891; x=1688734891;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TeJK4NnWaOBltG8XftMyzfx5GPBD+HryeyIHH7RXrqg=;
- b=iWE4ojsRrLYS7VIPfMtyyBjOaq4d/3H+4f/5oRchQ/tUNX5HV4YauKsjruTXUL/pm9
- WrMwIydgdex2Zh7yWlYBNveCN6JecgICWZ94rCnjvt4KmUke6GigJTdpj3UQvUT2QRHR
- HUXTuKGurzEL28vEOmAsVKaRj+rTJKPnvEFfPTKUTqoM9vEuSepc9iIsgF0me45QWBIx
- uk/ztiEQLxot/d0012xooQznhswIyBlJtPnRSzDIii8qUNCXu38+TwbBBv3Ohq4WOLwJ
- qLACzc5usQZawBox4GB+cTaaRdV99cpn7UrgcF7vO/6gbi7/loHcBScBQHh32NgA4qdo
- JIqA==
-X-Gm-Message-State: AC+VfDzLfLmm3RxhmncBui4i++aTT4fqbmESwrWIpk8gb+Y/hVeBDYiP
- HuReSurGm8ILvO0h8/RrHIikQg==
-X-Google-Smtp-Source: ACHHUZ7eTXCorBUCdFbzhy5byziJax2BtKJAjMSpwt3n+RLOp9LPxO/UiPjgNXqT9SauWutKEy4PmQ==
-X-Received: by 2002:a7b:c3c9:0:b0:3f7:3526:d96f with SMTP id
- t9-20020a7bc3c9000000b003f73526d96fmr4794994wmj.27.1686142891607; 
- Wed, 07 Jun 2023 06:01:31 -0700 (PDT)
-Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
- [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ d=1e100.net; s=20221208; t=1686144782; x=1688736782;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fsKPdzX1DJqk5vQ7b+c3MWiFCu10Kts7rO4tKGv1WnE=;
+ b=M6TRB481seuLcYTVimgdvCnG5oUp/PmeG4OOV+gZvTG9jN93+/yZmlSRgcqs2azp+S
+ iOzXhgXM+Q3QpZhTMNWzOq5tdTLuG3xmG9pcsavVPozuNhBkIQrEJsWBKVDSnFR4aGyy
+ 6VETELUzUmF/rjlvJlMKXUt5NxEE2HTk324FK1CjooL7qUH0Mv1y4hOA9sz4PuN6MH3Q
+ 6rau9jcXi7WeblWnir6BTsXqXL551mMQpw9YQs3krbu5P1McO6F+h/nMn6yYiJ4dZ+AI
+ QwJruWj6bfOyKbNHa2F8K+8QYNkyr51yCrMh+qzN8cZfE/yvhefcj4sNLP+X1e7UFkYl
+ b2Jg==
+X-Gm-Message-State: AC+VfDw2RStOF7IA3HTMoDN75RZ8YpTgfD6lMcFjHoXdSIQLkH+EzFSU
+ bJg/qjrLanbbLQOyi3VccfPm0A==
+X-Google-Smtp-Source: ACHHUZ703xUFAl1ZA5V7gu2qYfMsh8UAVVsnuJwoEnoyiX34vOOVYsSIz9iasmXCD20NIUcvgmObIA==
+X-Received: by 2002:a05:6871:22ca:b0:19f:62ac:117f with SMTP id
+ se10-20020a05687122ca00b0019f62ac117fmr8538626oab.52.1686144782436; 
+ Wed, 07 Jun 2023 06:33:02 -0700 (PDT)
+Received: from [192.168.68.107] ([177.170.117.52])
  by smtp.gmail.com with ESMTPSA id
- y12-20020adff14c000000b0030ae7bd1737sm15650670wro.45.2023.06.07.06.01.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Jun 2023 06:01:31 -0700 (PDT)
-Date: Wed, 7 Jun 2023 15:01:30 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liweiwei@iscas.ac.cn, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH 16/16] target/riscv/kvm.c: read/write
- (cbom|cboz)_blocksize in KVM
-Message-ID: <20230607-95d85b924e7d8696ba1eac6e@orel>
-References: <20230530194623.272652-1-dbarboza@ventanamicro.com>
- <20230530194623.272652-17-dbarboza@ventanamicro.com>
+ s17-20020a4aa551000000b00529cc3986c8sm5178182oom.40.2023.06.07.06.32.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 07 Jun 2023 06:33:02 -0700 (PDT)
+Message-ID: <7cea6808-5c2b-74e9-51cc-95d999606472@ventanamicro.com>
+Date: Wed, 7 Jun 2023 10:32:57 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230530194623.272652-17-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Subject: Re: [PATCH v2] target/riscv/vector_helper.c: Remove the check for
+ extra tail elements
+Content-Language: en-US
+To: Xiao Wang <xiao.w.wang@intel.com>, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+References: <20230607091646.4049428-1-xiao.w.wang@intel.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20230607091646.4049428-1-xiao.w.wang@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2001:4860:4864:20::32;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oa1-x32.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.091,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,198 +101,111 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, May 30, 2023 at 04:46:23PM -0300, Daniel Henrique Barboza wrote:
-> If we don't set a proper cbom_blocksize|cboz_blocksize in the FDT the
-> Linux Kernel will fail to detect the availability of the CBOM/CBOZ
-> extensions, regardless of the contents of the 'riscv,isa' DT prop.
+
+
+On 6/7/23 06:16, Xiao Wang wrote:
+> Commit 752614cab8e6 ("target/riscv: rvv: Add tail agnostic for vector
+> load / store instructions") added an extra check for LMUL fragmentation,
+> intended for setting the "rest tail elements" in the last register for a
+> segment load insn.
 > 
-> The FDT is being written using the cpu->cfg.cbom|z_blocksize attributes,
-> so let's use them. We'll also expose them as user flags like it is
-> already done with TCG.
+> Actually, the max_elements derived in vext_ld*() won't be a fraction of
+> vector register size, since the lmul encoded in desc is emul, which has
+> already been adjusted to 1 for LMUL fragmentation case by vext_get_emul()
+> in trans_rvv.c.inc, for ld_stride(), ld_us(), ld_index() and ldff().
 > 
-> However, in contrast with what happens with TCG, the user is not able to
-> set any value that is different from the 'host' value. And KVM can be
-> harsh dealing with it: a ENOTSUPP can be thrown for the mere attempt of
-> executing kvm_set_one_reg() for these 2 regs.
+> Besides, vext_get_emul() has also taken EEW/SEW into consideration, so no
+> need to call vext_get_total_elems() which would base on the emul to derive
+> another emul, the second emul would be incorrect when esz differs from sew.
 > 
-> We'll read the 'host' value and use it to set these values, regardless of
-> user choice. If the user happened to chose a different value, error out.
-> We'll also error out if we failed to read the block sizes.
+> Thus this patch removes the check for extra tail elements.
 > 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Fixes: 752614cab8e6 ("target/riscv: rvv: Add tail agnostic for vector load / store instructions")
+> 
+> Signed-off-by: Xiao Wang <xiao.w.wang@intel.com>
 > ---
->  target/riscv/kvm.c | 94 +++++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 92 insertions(+), 2 deletions(-)
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+
+> v2:
+> * Rebased on top of Alistair's riscv-to-apply.next branch.
+> ---
+>   target/riscv/vector_helper.c | 22 ++++++----------------
+>   1 file changed, 6 insertions(+), 16 deletions(-)
 > 
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 92b99fe261..7789d835e5 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -241,8 +241,16 @@ static void kvm_cpu_cfg_set(RISCVCPU *cpu, RISCVCPUMultiExtConfig *multi_ext,
->                              uint32_t val)
->  {
->      int cpu_cfg_offset = multi_ext->cpu_cfg_offset;
-> -    bool *ext_enabled = (void *)&cpu->cfg + cpu_cfg_offset;
-> +    uint16_t *blocksize;
-> +    bool *ext_enabled;
->  
-> +    if (strstr(multi_ext->name, "blocksize")) {
-> +        blocksize = (void *)&cpu->cfg + cpu_cfg_offset;
-> +        *blocksize = val;
-> +        return;
-> +    }
-
-We should add 'get' accessors to each property and then always use those
-accessors to get the values. Trying to share a single accessor across
-properties, using the names to determine their sizes, is basically trying
-to reinvent 'get' without the function pointer.
-
-> +
-> +    ext_enabled = (void *)&cpu->cfg + cpu_cfg_offset;
->      *ext_enabled = val;
->  }
->  
-> @@ -250,8 +258,15 @@ static uint32_t kvm_cpu_cfg_get(RISCVCPU *cpu,
->                                  RISCVCPUMultiExtConfig *multi_ext)
->  {
->      int cpu_cfg_offset = multi_ext->cpu_cfg_offset;
-> -    bool *ext_enabled = (void *)&cpu->cfg + cpu_cfg_offset;
-> +    uint16_t *blocksize;
-> +    bool *ext_enabled;
->  
-> +    if (strstr(multi_ext->name, "blocksize")) {
-> +        blocksize = (void *)&cpu->cfg + cpu_cfg_offset;
-> +        return *blocksize;
-> +    }
-> +
-> +    ext_enabled = (void *)&cpu->cfg + cpu_cfg_offset;
->      return *ext_enabled;
->  }
->  
-> @@ -295,6 +310,33 @@ static void kvm_cpu_set_multi_ext_cfg(Object *obj, Visitor *v,
->      kvm_cpu_cfg_set(cpu, multi_ext_cfg, value);
->  }
->  
-> +/*
-> + * We'll avoid extra complexity by always assuming this
-> + * array order with cbom first.
-> + */
-> +static RISCVCPUMultiExtConfig kvm_cbomz_blksize_cfgs[] = {
-
-Hmm, yet another cfg struct type, and this one is specific to block sizes.
-I'd rather we find a way to keep cfg definitions more general and then use
-the same struct for all.
-
-> +    {.name = "cbom_blocksize", .cpu_cfg_offset = CPUCFG(cbom_blocksize),
-> +     .kvm_reg_id = KVM_REG_RISCV_CONFIG_REG(zicbom_block_size)},
-> +    {.name = "cboz_blocksize", .cpu_cfg_offset = CPUCFG(cboz_blocksize),
-> +     .kvm_reg_id = KVM_REG_RISCV_CONFIG_REG(zicboz_block_size)},
-> +};
-> +
-> +static void kvm_cpu_set_cbomz_blksize(Object *obj, Visitor *v,
-> +                                      const char *name,
-> +                                      void *opaque, Error **errp)
-> +{
-> +    RISCVCPUMultiExtConfig *cbomz_size_cfg = opaque;
-> +    RISCVCPU *cpu = RISCV_CPU(obj);
-> +    uint16_t value;
-> +
-> +    if (!visit_type_uint16(v, name, &value, errp)) {
-> +        return;
-> +    }
-> +
-> +    cbomz_size_cfg->user_set = true;
-> +    kvm_cpu_cfg_set(cpu, cbomz_size_cfg, value);
-> +}
-> +
->  static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
->  {
->      CPURISCVState *env = &cpu->env;
-> @@ -321,6 +363,45 @@ static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
->      }
->  }
->  
-> +static void kvm_riscv_finalize_features(RISCVCPU *cpu, CPUState *cs)
-> +{
-> +    CPURISCVState *env = &cpu->env;
-> +    uint64_t id, reg;
-> +    int i, ret;
-> +
-> +    for (i = 0; i < ARRAY_SIZE(kvm_cbomz_blksize_cfgs); i++) {
-> +        RISCVCPUMultiExtConfig *cbomz_cfg = &kvm_cbomz_blksize_cfgs[i];
-> +        uint64_t host_val;
-> +
-> +        if ((i == 0 && !cpu->cfg.ext_icbom) ||
-> +            (i == 1 && !cpu->cfg.ext_icboz)) {
-
-Rather than the required array order and this magic index stuff, we can
-just save the offset of the ext_* boolean in the cfg structure, like we
-already do for the *_blocksize, and then check it here.
-
-Also, I think we want to warn here if cbomz_cfg->user_set is set. If the
-user set some block size, but disabled the extension, then they should be
-told that the block size will be ignored. Letting them know it's ignored
-is particularly good to do since we're not validating it. I.e. the user
-shouldn't assume the block size they put there is worth anything at all.
-
-> +            continue;
-> +        }
-> +
-> +        id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG,
-> +                              cbomz_cfg->kvm_reg_id);
-> +
-> +        ret = kvm_get_one_reg(cs, id, &host_val);
-> +        if (ret != 0) {
-> +            error_report("Unable to read KVM reg val %s, error %d",
-> +                         cbomz_cfg->name, ret);
-> +            exit(EXIT_FAILURE);
-> +        }
-> +
-> +        if (cbomz_cfg->user_set) {
-> +            reg = kvm_cpu_cfg_get(cpu, cbomz_cfg);
-> +            if (reg != host_val) {
-> +                error_report("Unable to set %s to a different value than "
-> +                             "the host (%lu)",
-> +                             cbomz_cfg->name, host_val);
-> +                exit(EXIT_FAILURE);
-> +            }
-> +        }
-> +
-> +        kvm_cpu_cfg_set(cpu, cbomz_cfg, host_val);
-> +    }
-> +}
-> +
->  static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
->  {
->      int i;
-> @@ -344,6 +425,14 @@ static void kvm_riscv_add_cpu_user_properties(Object *cpu_obj)
->                              kvm_cpu_set_multi_ext_cfg,
->                              NULL, multi_cfg);
->      }
-> +
-> +    for (i = 0; i < ARRAY_SIZE(kvm_cbomz_blksize_cfgs); i++) {
-> +        RISCVCPUMultiExtConfig *cbomz_size_cfg = &kvm_cbomz_blksize_cfgs[i];
-> +
-> +        object_property_add(cpu_obj, cbomz_size_cfg->name, "uint16",
-> +                            NULL, kvm_cpu_set_cbomz_blksize,
-> +                            NULL, cbomz_size_cfg);
-> +    }
->  }
->  
->  void kvm_riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str,
-> @@ -856,6 +945,7 @@ int kvm_arch_init_vcpu(CPUState *cs)
->  
->      kvm_riscv_update_cpu_misa_ext(cpu, cs);
->      kvm_riscv_update_cpu_cfg_isa_ext(cpu, cs);
-> +    kvm_riscv_finalize_features(cpu, cs);
->  
->      return ret;
->  }
-> -- 
-> 2.40.1
-> 
->
-
-Thanks,
-drew
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 7505f9470a..f261e726c2 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -264,11 +264,10 @@ GEN_VEXT_ST_ELEM(ste_h, int16_t, H2, stw)
+>   GEN_VEXT_ST_ELEM(ste_w, int32_t, H4, stl)
+>   GEN_VEXT_ST_ELEM(ste_d, int64_t, H8, stq)
+>   
+> -static void vext_set_tail_elems_1s(CPURISCVState *env, target_ulong vl,
+> -                                   void *vd, uint32_t desc, uint32_t nf,
+> +static void vext_set_tail_elems_1s(target_ulong vl, void *vd,
+> +                                   uint32_t desc, uint32_t nf,
+>                                      uint32_t esz, uint32_t max_elems)
+>   {
+> -    uint32_t total_elems, vlenb, registers_used;
+>       uint32_t vta = vext_vta(desc);
+>       int k;
+>   
+> @@ -276,19 +275,10 @@ static void vext_set_tail_elems_1s(CPURISCVState *env, target_ulong vl,
+>           return;
+>       }
+>   
+> -    total_elems = vext_get_total_elems(env, desc, esz);
+> -    vlenb = riscv_cpu_cfg(env)->vlen >> 3;
+> -
+>       for (k = 0; k < nf; ++k) {
+>           vext_set_elems_1s(vd, vta, (k * max_elems + vl) * esz,
+>                             (k * max_elems + max_elems) * esz);
+>       }
+> -
+> -    if (nf * max_elems % total_elems != 0) {
+> -        registers_used = ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
+> -        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
+> -                          registers_used * vlenb);
+> -    }
+>   }
+>   
+>   /*
+> @@ -324,7 +314,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+>       }
+>       env->vstart = 0;
+>   
+> -    vext_set_tail_elems_1s(env, env->vl, vd, desc, nf, esz, max_elems);
+> +    vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
+>   }
+>   
+>   #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)                        \
+> @@ -383,7 +373,7 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+>       }
+>       env->vstart = 0;
+>   
+> -    vext_set_tail_elems_1s(env, evl, vd, desc, nf, esz, max_elems);
+> +    vext_set_tail_elems_1s(evl, vd, desc, nf, esz, max_elems);
+>   }
+>   
+>   /*
+> @@ -504,7 +494,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+>       }
+>       env->vstart = 0;
+>   
+> -    vext_set_tail_elems_1s(env, env->vl, vd, desc, nf, esz, max_elems);
+> +    vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
+>   }
+>   
+>   #define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN, LOAD_FN)                  \
+> @@ -634,7 +624,7 @@ ProbeSuccess:
+>       }
+>       env->vstart = 0;
+>   
+> -    vext_set_tail_elems_1s(env, env->vl, vd, desc, nf, esz, max_elems);
+> +    vext_set_tail_elems_1s(env->vl, vd, desc, nf, esz, max_elems);
+>   }
+>   
+>   #define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN)               \
 
